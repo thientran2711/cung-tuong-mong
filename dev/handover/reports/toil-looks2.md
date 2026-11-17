@@ -97,3 +97,10 @@ PRIORITY #1 CHECK: OD tail ~17:00Z (blobs not all blush-sized, more opaque) | ma
 - BAL.toil.vungPuff = {big .75, small .5, al .7, alv .2}: blob radius = blush disc rx x .75 or .5 (x .92-1.08), a mix on every cheek (first blob big on the "big" cheek, small on the other, swapped for the 2nd blob), centred within +-.25 rx of the blush centre so the blush stays visible around them; blush blur profile (BLP.wide); alpha .7-.9 (peak ~.55-.72). Same rng draw order. Other levels untouched.
 - Gates at b9efd241: mk-layer-scan 12960 0 bad, toil-tease 25/25, toil-overlay 0 bad, quickcheck PASS 157 s.
 - Sheet: https://ctm-img.victoria-tntt.workers.dev/img/_review/toil-looks/toil-looks-v11.png (+ small-size 190x210 row Mat moc | Vung A s7,8,9 on 2 faces). Small makeup sheet (all levels): .../toil-looks-small.png. Delete all after verdict.
+
+### toil-looks5 r6 - review/toil-looks5 88d238ea (size-aware makeup, owner OD ~17:45Z)
+PRIORITY #1 CHECK: OD ~17:45Z size-aware makeup | main jtoil.js reused | claims toil-looks5.
+- BAL.toil.lod = {fullAt 95, maxAt 25, boost 1.9, steps 3, cue {lip 1, eye 1, wing 1.3, low 1.3, bl 1.3, vung 1}}. Face px = layer width / 1.6 (box = face + 30 % each side). >= fullAt -> approved strength (the 200 px close-up mirror measures ~89 px -> step 0 = unchanged). Below it, macro cues x (1 + (boost-1) x t x cue), t = (fullAt-px)/(fullAt-maxAt), quantised to 3 steps (cache key base|L<step>).
+- ONE path: toilMkDraw(..., lod) via toilLodT; toilLodPass (MutationObserver + resize, rAF-throttled) measures every img.kmkc on screen and swaps its src to the right step, so stage figure, avatar frame, close-up, hall faces all follow one curve. Measured in game: stage figure face 33-41 px -> step 2-3; header avatar face 6-7 px -> step 3; close-up 89 px -> step 0.
+- Gates at 88d238ea: toil-tease 25/25, toil-overlay 0 bad, mk-layer-scan 12960 0 bad, quickcheck PASS 156 s.
+- Samples (rendered by the game itself, her portrait, seed 7): lod-stage-fold.png (755x1000), lod-stage-ipad.png (1180x820), lod-avatar.png (header avatar frame, x3), lod-closeup.png under .../img/_review/toil-looks/ . Delete after verdict.
