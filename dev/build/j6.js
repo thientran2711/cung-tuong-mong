@@ -43,7 +43,6 @@ function renderPanel0(){const el=$("panel");let h="";faceInit();const gm=documen
  if(tab==="art")h=artTabHTML();
  if(tab==="story"){const s=STORY[S.origin.k];if(s.calc)S.st.step=s.calc();
    h=`<div class="story"><h3>${s.t}</h3><p style="margin:0 0 4px">${s.goal}</p><p style="margin:0"><b>${typeof lab67==="function"&&lab67()||`Bước ${S.st.step}/${s.n}`}</b> · ${S.st.done===1?`<span class="g">Thành: ${S.st.tag}</span>`:S.st.done===-1?`<span class="r">Bại: ${S.st.tag}</span>`:s.hint()}</p></div>`;
-   const c=(ok,t)=>`<span class="${ok?"y":"n"}">${ok?"✓":"✗"} ${t}</span>`;
    h+=S.rank>=7?`<div class="req"><h3>Ngươi là Hoàng hậu</h3>Đưa con mình lên ngôi để thành Hoàng thái hậu.</div>`:S.out?`<div class="req"><h3>Lãnh cung</h3>Không bàn chuyện sắc phong. Được minh oan thì phục vị ${RANKS[Math.max(0,Math.min(6,S.coldRank||0))].n} (hoặc thấp hơn một bậc).</div>`:`<div class="req"><h3>Điều kiện sắc phong ${RANKS[S.rank+1].n}</h3>${kitReqRows(promoReq())}<span class="past">Ngôi Hoàng hậu về sau cần: ngôi bỏ trống, có hoàng tử và Thái hậu ${BAL.hhTh} (không con trai: Thái hậu ${has("hieuthao")?BAL.hhThNoSonHieu:BAL.hhThNoSon}), và <b class="${S.duc>=hhNeed(S).duc?"g":"r"}">Đức ${S.duc} (cần ${hhNeed(S).duc})</b> (mẹ Thái tử chỉ cần ${BAL.hhDucHeir}). Khi ngôi trống, Hoàng thượng chọn trong những người đủ điều kiện (nặng ở hoàng tử, Thái hậu, Danh).</span><br><span class="past">Đủ điều kiện thì được dự khảo hạch tấn phong; đỗ thì có thánh chỉ. ${typeof promoRuleTxt==="function"?promoRuleTxt():""}</span></div>`}
  if(tab==="inv")h=invHTML();
  if(tab==="rel")h=relHTML();
@@ -61,7 +60,7 @@ function ser(){const rs=new Set(rivals),ks=new Set(allKids().map(x=>x[0]));
   if(Array.isArray(o))return o.map(x=>walk(x,false));const r={};
   for(const k in o){const v=o[k];if(typeof v==="function"||k==="origin")continue;r[k]=(k==="kids"&&Array.isArray(v))?v.map(x=>walk(x,true)):walk(v,false)}return r};
  return{v:6,b4:1,buoi:S.buoi||0,ok:S.origin.k,S:walk(S,true),R:rivals.map(x=>walk(x,true)),rid,tab,used,P:serQ(),at:Date.now()}}
-function deser(d){rivals=d.R;rid=d.rid;S=d.S;S.origin=ORIGINS.find(o=>o.k===d.ok);
+function deser(d){trMigrate(d);rivals=d.R;rid=d.rid;S=d.S;S.origin=ORIGINS.find(o=>o.k===d.ok);
  const kid=n=>allKids().map(x=>x[0]).find(k=>k.name===n)||null;
  const fix=o=>{if(!o||typeof o!=="object")return o;if(o.$r!=null&&Object.keys(o).length===1)return rivals.find(v=>v.id===o.$r)||null;if(o.$k!=null&&Object.keys(o).length===1)return kid(o.$k);
   for(const k in o)o[k]=fix(o[k]);return o};

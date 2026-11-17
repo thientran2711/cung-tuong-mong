@@ -1,11 +1,12 @@
 /* ================= BALANCE KNOBS (measured with the sensible / random bots; see the report) ================= */
 const BAL={wkFinCap:1,/* Đức from handmade works (kinh, vật cầu phúc): at most this many per month (j83 wkFinLeft) */ oanLv:[5,20,45,75],/* oán word ladder (VANPHONG): <5 Không oán · <20 Chút oán · <45 Oán · <75 Oán sâu · else Oán hận */
- /* outQ = % an empty Hoàng hậu seat goes to an outsider girl (one-core: was 85 here and 60 in jbal2; 60 is the measured v12 value) */outQ:60,hz:3.2,conc:.5,/* conception per night × (D57 owner 16/11: doubled from .25 for everyone; the cycle peak/low is BAL.cyc.fert in jcycle.js) */trystC:[5,60],/* a tryst / affair conception = trystCh(p) = conceiveCh(p) kept within [lo,hi] (her Hẹn gặp riêng j22, Tư thông jroute, an NPC consort's affair month j22) */later:6,hhTh:55,birthAdd:2,
+ /* outQ = % an empty Hoàng hậu seat goes to an outsider girl (one-core: was 85 here and 60 in jbal2; 60 is the measured v12 value) */outQ:60,hz:3.2,conc:.5,/* conception per night × (D57 owner 16/11: doubled from .25 for everyone; the cycle peak/low is BAL.cyc.fert in jcycle.js) */trystC:[5,60],/* a tryst / affair conception = trystCh(p) = conceiveCh(p) kept within [lo,hi] (her Hẹn gặp riêng j22, Tư thông jroute, an NPC consort's affair month j22) */later:6,hhTh:60,/* diff-remeasure 16/11: 55 → 60 (Vừa HH 45 % → ~32 % with the fixed bot; 65 measured 26 %) */birthAdd:2,
  /* ONE SOURCE for every promotion threshold the player sees (checks in promoReqP/candOK and every text read these) */
  hhThNoSon:80,hhThNoSonHieu:70,hhDuc:50,hhDucHeir:40,qBlockHh:-40,qBlockTh:50,hiOppHh:-30,hiOppTh:30,hiOppFac:180,
  /* handmade works (j83), by material 0 thường / 1 tốt / 2 quý: matQ = phần added to the score; cap = highest tier it can reach (only quý makes a
     Tuyệt phẩm); val = gift value added (Sủng / Thái hậu / thiện cảm); sell = share of the material's silver paid back when sold (1: a sale never loses the material's price); tinh = extra
     chân tình for a quý work given to a sincere person. Value check: dev/test/paid-tiers.js */
+ tsGift:{bac:12,ghen:8,oan:5,aff:3,eq:4,khac:2},/* Biếu quà làm lành (jts): bạc per person, effect, least worth of a work/item given instead (D19) */
  wk:{matQ:[0,2,4],cap:[2,2,3],val:[0,1,2],sell:[0,1,1],tinh:[0,0,1]},
  /* paid lessons (owner 14:50Z: paying must be worth it): a teacher always gives at least self-study + tchMin */
  tchMin:1,
@@ -247,7 +248,7 @@ BAL.staff={retire:[63,68],gift:20,giftAf:10,talk:2,succAge:[46,54],
    gt Giáo tập ma ma for a new consort, kn Quản sự ma ma for a new palace maid). */
 Object.assign(BAL,{st14:{max:14,parts:[[1,3],[4,11],[12,14]],lim:{nhap:6,nhapCnv:8,sung:10,tap:8},
  goal:{sung:25,rel:30,art:2,tin:60,nt:25},danh:{nhap:3,sung:2,tap:2,len:4},rw:{nhap:0,sung:1,tap:1,len:2},
- hate:{min:25,base:15,friend:20},tr:{"Hiểm độc":-5,"Tham vọng":-3,"Kiêu ngạo":-2,"Nhu mì":2,"Hiền lành":4,"Trung hậu":3},
+ hate:{min:25,base:15,friend:20},tr:{"Xảo quyệt":-5,"Tham vọng":-3,"Kiêu ngạo":-2,"Khiêm nhường":2,"Ân cần":4,"Trung hậu":3},
  ctx:{aff:6,affCap:6,oan:10,oanCap:5,tam:[40,15],duc:[50,20],foeOan:30,foeCap:4,cap:15},odds:[5,95],
  shift:{base:15,slope:2,sc:2,min:5,max:40},
  q:{bac:{c:15,s:3},need:{ban:1},narr:{c:"gt",s:"kn"}}},

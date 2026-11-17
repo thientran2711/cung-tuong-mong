@@ -21,13 +21,15 @@ function modalStep(sens){
   if(Q.length){
     const m=Q[0];
     if(m.opts&&m.opts.length){
-      const okIdx=m.opts.map((c,i)=>[c,i]).filter(([c])=>!(c.fx&&c.fx.bac&&S.bac+c.fx.bac<0));
+      const okIdx=m.opts.map((c,i)=>[c,i]).filter(([c])=>!c.off&&!(c.fx&&c.fx.bac&&S.bac+c.fx.bac<0));
       if(!okIdx.length){closeModal();return true}
       let pickI;
       if(!sens)pickI=rpick(okIdx)[1];
       else{let best=-1e9;pickI=okIdx[0][1];okIdx.forEach(([o,i])=>{const f=o.fx||{};let v=(f.sung||0)*1.5+(f.danh||0)*1.2+(f.hh||0)*.4+(f.th||0)*.4+(f.maid||0)*.1+(f.suc||0)*.2+(f.tamco||0)*.3+(f.bac||0)*.04;
-        if((f.duc||0)<0)v+=(f.duc||0)*6;else v+=(f.duc||0)*1.5;if(o.x&&/chứng cứ/.test(o.x))v+=2;if(o.x&&/nhân chứng|rửa oan|lật án|phong tước|giữ được/.test(o.x))v+=4;if(/tú nữ/.test(o.n))v-=.5;if(o.x&&/được phong/.test(o.x))v+=20;if(o.x&&/kết thúc kiếp này/.test(o.x))v-=20;if(o.x&&/Hoàng thượng để ý \+/.test(o.x))v+=3;if(o.x&&/bị giết|đánh chết|dìm|mất mạng/.test(o.x))v-=12;v+=(f.tin||0)*.15+(f.nt||0)*.5;v+=Math.random()*.01;if(v>best){best=v;pickI=i}})}
+        if((f.duc||0)<0)v+=(f.duc||0)*6;else v+=(f.duc||0)*1.5;if(o.x&&/chứng cứ/.test(o.x))v+=2;if(o.x&&/nhân chứng|rửa oan|lật án|phong tước|giữ được/.test(o.x))v+=4;if(/tú nữ/.test(o.n))v-=.5;if(o.x&&/được phong/.test(o.x))v+=20;if(o.x&&/kết thúc kiếp này/.test(o.x))v-=20;if(o.x&&/Hoàng thượng để ý \+/.test(o.x))v+=3;if(o.x&&/bị giết|đánh chết|dìm|mất mạng/.test(o.x))v-=12;v+=(f.tin||0)*.15+(f.nt||0)*.5;/* diff-remeasure (16/11): a sensible player reads what the card shows: the side costs after "kèm:" / "hỏng:" count at half weight, and the risk label (OD:L477) */{const km=String(o.x||"").split(/kèm:|hỏng:/).slice(1).join(" ");const W={"Sủng":1.5,"Danh":1.2,"Đức":1.5};km.replace(/(Sủng|Danh|Đức) -(\d+)/g,(m,k,n)=>{v-=W[k]*(+n)*.5;return m});if(o.risk==="liều")v-=1;else if(o.risk==="có rủi ro")v-=.3}v+=Math.random()*.01;if(v>best){best=v;pickI=i}})}
       note("dilemma");chooseM(pickI);return true}
+    /* diff-remeasure: kit pick dialogs (tuduc-sub "Học X: làm gì?" / "… dùng vật liệu gì?", KIT shop grid): a player taps the first item she can make */
+    if(m.kit&&m.kit.pick&&!window.__noPick){try{showModal()}catch(e){}const b=[...document.querySelectorAll('#ov [data-kwrgo],[data-kwrgo]')].find(x=>!x.disabled&&x.offsetParent!==null);if(b){note("pick");b.click();return true}}
     try{if(window.__xModal&&window.__xModal(m))return true}catch(e){}/* danh-p1 intn.js: work picker (no opts) */
     closeModal();return true}
   return false}
@@ -94,10 +96,16 @@ function sensibleStep(){
     if(accs.length&&accs[0].o>=60){note("accuse");doAct(accs[0].i,"accuse");return}}
   const opts=[];
   if(!HS&&qOn()&&S.rank>=5&&can(2)&&S.bac>=20&&rvBtns(0).includes("spy")){const o=ACT.spy.o?ACT.spy.o(S,rivals[0]):50;if(o>=40)opts.push({s:3.6,f:()=>{note("spyQueen");doAct(0,"spy")}})}
+  /* diff-remeasure: the one charity act (act-dedupe moved it to Tài nghệ Tứ đức, once a month) — a sensible player uses it */
+  try{const C=BAL.charity;if(!HS&&C&&typeof charity==="function"&&!S.srv&&!S.out&&S.charM!==S.turn&&can(C.khac||1)&&S.bac>=C.bac+20)opts.push({L:"charity",s:3.2,f:()=>{note("charity");charity()}})}catch(e){}
   deck.forEach((a,i)=>{if(!cardOK(a))return;const c=cardCost(a);opts.push({L:"c"+a.n,s:scoreAct(a,N,c),f:()=>{note("card",a.n);act(i)}})});
   if(!HS)talkCands().forEach(t=>{const s=talkScore(t,N);opts.push({L:"t"+t.pi+t.a.n,s,f:()=>{note("talk",t.a.n);popIdx=t.pi;talk(t.oi)}})});
   const L=lessonCands().filter(a=>S.suc>=45&&S.bac>=(typeof tchFee==="function"?tchFee(a.k):5+S.arts[a.k]*5)+20).sort((a,b)=>S.arts[a.k]-S.arts[b.k]);
   if(!HS&&L.length){const x=L[0];opts.push({s:2.0+(S.sung>=40?.5:0)-(S.suc<55?1.5:0),f:()=>{note("lesson");if(S.bac>=150&&!S.master)hireMaster();lesson(x.k)}})}
+  /* diff-remeasure: free self-study in the Tài nghệ tab (act-dedupe w1 moved the Hành sự "Tự học X" card there); off with window.__noSelf */
+  if(!HS&&!window.__noSelf&&typeof lessonMode==="function"&&!S.mg&&can(2)&&S.suc>=60){const A=ARTS.filter(a=>S.arts[a.k]<5).sort((a,b)=>S.arts[a.k]-S.arts[b.k]);if(A.length)opts.push({L:"self",s:1.3-(S.suc<70?.5:0),f:()=>{note("selfStudy");lessonMode(A[0].k,"self")}})}
+  /* diff-remeasure: free Tứ đức self-study (Tài nghệ tab, j85 lessonVir "self"; exam rows read two virtues, BAL.ex.wVir); off with window.__noSelf */
+  if(!HS&&!window.__noSelf&&typeof lessonVir==="function"&&typeof VIR!=="undefined"&&S.vir&&!S.mg&&can(2)&&S.suc>=60){const V=VIR.filter(v=>(S.vir[v.k]||0)<5).sort((a,b)=>(S.vir[a.k]||0)-(S.vir[b.k]||0));if(V.length)opts.push({L:"vself",s:1.1-(S.suc<70?.5:0),f:()=>{note("virStudy");lessonVir(V[0].k,"self")}})}
   const sea=SEASON[S.month-1];const W=S.where||{};
   const pls=[];
   const place=(k,s)=>{const p=places().find(x=>x.k===k);if(p&&placeOK(p))pls.push({k,s:s/Math.sqrt(travel(S.place,k)||1)})};

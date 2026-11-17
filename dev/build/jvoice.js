@@ -10,7 +10,7 @@
    kSay(sp, ls, s, o): fills {goi} {Goi} {xung} {Xung} {ten} (listener's title) {Ten} in s.
    kLine(key, pool, o): picks a line from a pool without repeating any line used for that key in the last BAL.voice.noRepeat tuần
      (least-recently-used when the pool is exhausted). pool = array of strings, or an object {warm:[…], cool:[…], cold:[…], any:[…]}
-     picked by o.m (falls back to any). Lines may carry the {goi}… tokens: pass o.sp / o.ls to fill them. Memory S.vl (personal, old saves
+     picked by o.m (falls back to any). Lines may carry the {goi}… tokens: pass o.sp / o.ls to fill them. Memory S.vmem (was S.vl until review/it-key-guard: S.vl is the worn veil of jveil, the clash put this memory in the chest; j8 itClean moves an old one) (personal, old saves
      start empty, co-op safe). kLines(key) = the pool registry for the repetition audit (dev/test/voice-rep.js). */
 (function(){
 const V=()=>BAL.voice;
@@ -95,7 +95,7 @@ function kLine(key,pool,o){o=o||{};let L=pool;if(!Array.isArray(L)){const m=o.m|
      it rotates with the week + buổi, so both seats show the same line, and no line comes back within L.length buổi */
   if(o.shared!=null){let h=0;const sd=key+"|"+o.shared;for(let i=0;i<sd.length;i++)h=(h*31+sd.charCodeAt(i))|0;let t3=0;try{t3=now()*3+(S.buoi|0)}catch(e){}
     const line=untag(L[((Math.abs(h)+t3)%L.length+L.length)%L.length]);return o.sp!=null||o.ls!=null?kSay(o.sp,o.ls,line,o):line}
-  let mem={};try{S.vl=S.vl||{};mem=S.vl[key]=S.vl[key]||{}}catch(e){}
+  let mem={};try{S.vmem=S.vmem||{};mem=S.vmem[key]=S.vmem[key]||{}}catch(e){}
   const t=now(),gap=V().noRepeat;
   /* a dialog rebuilt several times for ONE occurrence (PEND builders run on queue, show and reload) keeps its line: same key in the same buổi
      → the same line, so a rebuild does not use up the pool */
@@ -142,14 +142,14 @@ function kLitLog(seq0,lit){try{if(!lit||!S||!S.logs||!S.logs.length||(S.logSeq||
 /* ---- SIGNATURE HABIT of a consort (palace-voice phase D): each consort has one small habit by her trait (TRAITS j1), fixed for her life
    (picked from her id, so both co-op seats see the same one, nothing stored); shown in the long form only (event panels), every other
    occurrence (week parity) so it marks her without wearing out. kHabit(v) → sentence or "" */
-const HABIT={"Hiểm độc":["Nàng ta khẽ vuốt chiếc hộ giáp bạc trên ngón út","Nàng ta lần chuỗi ngọc trên cổ tay, mắt không rời ta","Nàng ta mỉm cười, tay mân mê túi hương bên hông","Nàng ta khẽ thổi chén trà, mà chẳng uống"],
+const HABIT={"Xảo quyệt":["Nàng ta khẽ vuốt chiếc hộ giáp bạc trên ngón út","Nàng ta lần chuỗi ngọc trên cổ tay, mắt không rời ta","Nàng ta mỉm cười, tay mân mê túi hương bên hông","Nàng ta khẽ thổi chén trà, mà chẳng uống"],
  "Kiêu ngạo":["Nàng ta phe phẩy chiếc quạt lông công, cằm hơi ngẩng","Nàng ta đưa tay chỉnh lại cây trâm phượng trên tóc","Nàng ta liếc ta một cái rồi nhìn đi chỗ khác","Nàng ta gõ nhẹ hộ giáp vàng lên tay ghế"],
- "Hiền lành":["Nàng ta khẽ cười, hai má ửng hồng","Nàng ta vén lọn tóc mai, giọng nhỏ nhẹ","Nàng ta nắm chiếc khăn tay thêu hoa lan","Nàng ta cúi đầu, tay đặt ngay ngắn trước người"],
- "Đa nghi":["Nàng ta liếc nhanh về phía người hầu của ta","Nàng ta khẽ nhíu mày, ngón tay gõ lên mép bàn","Nàng ta nhìn quanh một lượt rồi mới nói","Nàng ta nheo mắt, như cân từng chữ"],
+ "Ân cần":["Nàng ta khẽ cười, hai má ửng hồng","Nàng ta vén lọn tóc mai, giọng nhỏ nhẹ","Nàng ta nắm chiếc khăn tay thêu hoa lan","Nàng ta cúi đầu, tay đặt ngay ngắn trước người"],
+ "Kín đáo":["Nàng ta liếc nhanh về phía người hầu của ta","Nàng ta khẽ nhíu mày, ngón tay gõ lên mép bàn","Nàng ta nhìn quanh một lượt rồi mới nói","Nàng ta nheo mắt, như cân từng chữ"],
  "Tham vọng":["Nàng ta đưa mắt về phía Càn Thanh cung","Nàng ta mỉm cười, ánh mắt tính toán","Nàng ta vuốt thẳng tà áo, dáng đứng thẳng tắp","Nàng ta khẽ gật đầu, như đã ghi nhớ điều gì"],
- "Nhu mì":["Nàng ta cúi đầu, giọng nhỏ như muỗi kêu","Nàng ta mân mê vạt áo, chẳng dám ngẩng lên","Nàng ta đỏ mặt, nép sau người hầu","Nàng ta nói xong vội lấy khăn che miệng"]};
+ "Khiêm nhường":["Nàng ta cúi đầu, giọng nhỏ như muỗi kêu","Nàng ta mân mê vạt áo, chẳng dám ngẩng lên","Nàng ta đỏ mặt, nép sau người hầu","Nàng ta nói xong vội lấy khăn che miệng"]};
 function hsh(x){let h=0;x=String(x);for(let i=0;i<x.length;i++)h=(h*31+x.charCodeAt(i))|0;return Math.abs(h)}
-function kHabit(v,always){try{if(!v||v===S||!HABIT[v.trait])return"";if(!always&&now()%2)return"";const L=HABIT[v.trait];return L[hsh(v.id!=null?v.id:v.name)%L.length]}catch(e){return""}}
+function kHabit(v,always){try{if(!v||v===S||!tv(HABIT,v))return"";if(!always&&now()%2)return"";const L=tv(HABIT,v);return L[hsh(v.id!=null?v.id:v.name)%L.length]}catch(e){return""}}
 window.kHabit=kHabit;window.kHabits=()=>HABIT;
 window.kGL=kGL;window.kShort=kShort;window.kLong=h=>String(h==null?"":h);window.kLitLog=kLitLog;window.kBand=kBand;
 window.kAddr=kAddr;window.kSay=kSay;window.kLine=kLine;window.kLines=()=>REG;window.kVoiceWho=who;window.kSpk=kSpk;

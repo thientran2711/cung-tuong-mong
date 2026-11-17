@@ -90,48 +90,25 @@ window.KIT_LIGHT=KIT_LIGHT;
  window.kitLifePlace=lifePlace;
  if(typeof render==="function"){const f0=render;render=function(){lifePlace();return f0.apply(this,arguments)}}
  if(typeof renderStage==="function"){const f1=renderStage;renderStage=function(){lifePlace();return f1.apply(this,arguments)}}})();
-/* ---- TUẦN LỤC: WIDE FIGURES (owner 13:45Z Thái hậu cut by the column; 03:55Z ONE figure scale: full body ≈85–90 % of picture
-   height, NEVER shrink to fit) — KIT §56.3 ----
-   The person page (.kbk-person.kbk-full) gives the figure a fixed column --porf sized for a normal standing figure. A wider figure
-   (Thái hậu, t7/t8 trains, wide sleeves) keeps its kit height and is never scaled:
-   · wide pages: the figure column widens only as far as the face + torso need (figure centre + 14 % of its height, ≤ 74 % of the
-     page), so the text keeps its room;
-   · whatever is still wider (train / outer sleeve) runs BEHIND the text, which then sits on the kit's soft paper panel
-     (.kbk-figover = the same panel phones use); the figure's left edge is moved inside the page so nothing is cut on the left;
-   · phones (.kbk.narrow): same — figure moved inside the page, never scaled; the text already sits on the paper panel. */
+/* ---- TUẦN LỤC: FIGURE COLUMN (owner 17/11 03:12Z + 03:14Z, KIT 56.3; overwrites the old "wide figures widen the column" rule) ----
+   The figure column of a book page is NARROW (--porf = KBK_FIG_COL of the page's inner width, set by j87 layout) and sits against the page's LEFT
+   edge; the figure keeps its true proportions and is fitted INTO the column (bottom on the column floor, feet visible, nothing cut, never
+   under the text); the freed width goes to the RIGHT text frame (text size unchanged). Wide figures (Thái hậu, trains, wide sleeves) are
+   scaled to the column width like everyone else. */
 /* KIT 32.2b: the painted page border (book-right/left.webp 768x1024): inner edge of the bottom double line at y 999 → 2.44 % above the page bottom */
 var KBK_ART_LINE=window.KBK_ART_LINE={b:.0244};
-(function(){let q=0;const TEXT_MIN=220,FIG_MIN=.85,TORSO=.12;   /* TORSO: half shoulder width ≈ 12 % of figure height (sleeves/train may go behind the text) */
- const AR=window.__figAR=window.__figAR||{},HX=window.__figHX=window.__figHX||{},R=window.__kbkRatio=window.__kbkRatio||{h:.86,w:.9};
- const st=document.createElement("style");st.textContent=`.kbk-person.kbk-figover>.kbk-phead,.kbk-person.kbk-figover>.kbk-flow{position:relative;z-index:1;background:color-mix(in srgb,var(--paper,#f3e3c0) 86%,transparent);border-radius:6px;box-shadow:0 0 0 .35em color-mix(in srgb,var(--paper,#f3e3c0) 86%,transparent)}.kbk-person.kbk-figover>.kbk-por{overflow:visible;z-index:0}html body .kbk-person.kbk-full>.kbk-por{overflow:clip!important}`;document.head.appendChild(st);
- /* where the BODY stands in the picture (0..1 of its width): centre of the head = alpha mass of the top 16 % rows. Trains/outpainted hems
-    make many figures asymmetric, so the body is not the picture centre. CDN images are CORS-open; on failure 0.5. */
- function headX(I){try{const w=96,h=Math.max(8,Math.round(96*I.naturalHeight/I.naturalWidth)),c=document.createElement("canvas");c.width=w;c.height=h;const g=c.getContext("2d",{willReadFrequently:true});g.drawImage(I,0,0,w,h);
-   const d=g.getImageData(0,0,w,Math.max(2,Math.round(h*.16))).data;let sx=0,sa=0;for(let i=3;i<d.length;i+=4){const a=d[i];if(a>40){sx+=((i>>2)%w)*a;sa+=a}}return sa?sx/sa/w:.5}catch(e){return .5}}
- function learn(src,then){if(AR[src]!=null)return;AR[src]=0;const I=new Image();I.crossOrigin="anonymous";
-   I.onload=()=>{AR[src]=I.naturalWidth/Math.max(1,I.naturalHeight);HX[src]=headX(I);then&&then()};I.onerror=()=>{delete AR[src]};I.src=src}
- /* column width + figure height for j87 personBody — called WHILE PAGINATING, so the text is measured in its final column */
- window.kitBookFigCol=function(fig,PW,PH){try{const m=/src="([^"]+)"/.exec(fig||"");if(!m||!PW||!PH||PW<440)return "";const src=m[1];
-   if(!AR[src]){learn(src,()=>kitBookRelayoutSoon());return ""}   /* the book's own re-layout, same reading position */
-   const kfr0=+((/--kfr:([\d.]+)/.exec(fig)||[])[1]||1),pic=PH*R.h,ar=AR[src],hx=HX[src]!=null?HX[src]:.5,base=Math.min(PW*.45,PH*.8*.42);
-   const bb=kitFigBody(src,()=>kitBookRelayoutSoon());if(!bb)return "";   /* KIT 34.6: sized by its BODY (kitBookFig), same as the stage and the dialogs */
-   const g=kitBookFig(bb,kfr0*KIT_FIG.man,pic);
-   const fs=Math.max(13,Math.min(17,PW/34)),boxW=PW*R.w,colMax=boxW-fs-Math.min(TEXT_MIN,boxW-base-fs);   /* text ≥ 220 px, or never narrower than a normal figure's page */
-   const per=hx*ar+TORSO,need=k=>per*g.ih*k+4;                                                  /* body right edge when the figure starts at the column's left */
-   const k=1;if(g.iw<=base+1)return "";   /* KIT 34.6: never scaled (the old ≥ 85 % shrink made Thái hậu smaller than the silhouette beside her); wider than the column = cut at its edge (32.2a) */
-   const col=Math.max(base,Math.min(need(k),colMax));
-   return `${k<1?`;--kfk:${k.toFixed(3)}`:""};grid-template-columns:${Math.round(col)}px minmax(0,1fr)`}catch(e){return ""}};
- /* live pages: place the figure (layout px, so page-turn transforms do not matter). Figure wider than its column: left edge at the page's
-    left; if the body would then reach under the text, slide it left so face + torso end at the column edge — only the outer train/sleeve may
-    pass the page edge, never the body. */
+(function(){let q=0;
+  window.kitBookFigCol=function(){return ""};   /* kept for j87 personBody: the column is the same narrow --porf for every figure */
+ /* live pages: place the figure (layout px, so page-turn transforms do not matter): true size by its body (kitBookFig), then scaled down
+    (aspect kept) when wider than the narrow column, so the whole figure, feet included, stays inside the column against the page's left edge. */
  function clamp(){q=0;try{document.querySelectorAll(".kbk-person.kbk-full .kesfi").forEach(f=>{const box=f.closest(".kbk-person");if(!box)return;
    const por=box.querySelector(":scope>.kbk-por"),pg=box.closest(".kbk-pg");if(!por)return;
    f.style.transform="";{const i0=f.querySelector("img");if(i0&&i0.style.maskImage){i0.style.maskImage="";i0.style.webkitMaskImage=""}}
    /* KIT 34.6 (owner 16/11 "Nhân vật sao chưa theo tỉ lệ chuẩn"): the figure (real or silhouette) is sized by its BODY — kitBookFig, the stage / dialog rule:
       body = min(KIT_FIG.h × column, maxPx) × fac, feet on the column floor, true aspect. Not measured yet → hidden (never shown at its raw box size). */
-   let dyF=0;{const i1=f.querySelector("img"),s1=i1&&i1.getAttribute("src"),b1=s1?kitFigBody(s1,soon):null,Hc=por.clientHeight;
-    if(!b1||!Hc){f.style.visibility="hidden"}else{const kf=parseFloat(getComputedStyle(box).getPropertyValue("--kfr"))||1,kk=parseFloat(getComputedStyle(box).getPropertyValue("--kfk"))||1;
-     const ar1=i1.naturalWidth&&i1.naturalHeight?i1.naturalWidth/i1.naturalHeight:b1.ar,g=kitBookFig(Object.assign({},b1,{ar:ar1}),kf*KIT_FIG.man,Hc);dyF=g.dy*kk;
+   let dyF=0,dxF=0;{const i1=f.querySelector("img"),s1=i1&&i1.getAttribute("src"),b1=s1?kitFigBody(s1,soon):null,Hc=por.clientHeight;
+    if(!b1||!Hc){f.style.visibility="hidden"}else{const kf=parseFloat(getComputedStyle(box).getPropertyValue("--kfr"))||1;let kk=1;
+     const ar1=i1.naturalWidth&&i1.naturalHeight?i1.naturalWidth/i1.naturalHeight:b1.ar,g=kitBookFig(Object.assign({},b1,{ar:ar1}),kf*KIT_FIG.man,Hc);const pwc=por.clientWidth,pw1=Math.max(.2,(b1.r||1)-(b1.l||0))*g.iw;if(pwc&&pw1>pwc)kk=pwc/pw1;dyF=g.dy*kk;dxF=-(b1.l||0)*g.iw*kk;   /* fitted INTO the narrow column by its PAINTED width (sleeves / train included): feet visible, nothing cut, painted left edge on the column's left edge */
      f.style.height=(g.ih*kk).toFixed(1)+"px";f.style.width=(g.iw*kk).toFixed(1)+"px";f.style.visibility="";f.dataset.kbody=(g.body*kk).toFixed(1);
      /* KIT 32.2b EQUAL GAPS (owner 16/11 s21/s22, whole group): the two frame lines round the figure are the running-head rule (.kbk-rh)
         and the page frame's bottom line: the painted border's inner edge on art pages (KBK_ART_LINE.b of the page height, measured on
@@ -141,17 +118,8 @@ var KBK_ART_LINE=window.KBK_ART_LINE={b:.0244};
       const pgE=box.closest(".kbk-pg"),art=!!(pgE&&(pgE.classList.contains("r")&&box.closest(".kbk.art-right")||pgE.classList.contains("l")&&box.closest(".kbk.art-left")));
       if(pt!=null){const lt=rh&&rh.offsetParent?rh.offsetTop+rh.offsetHeight:0,lb=art?pgE.offsetHeight*(1-KBK_ART_LINE.b)-inEl.offsetTop:inEl.clientHeight,figH=g.ih*kk*Math.max(.2,b1.b-b1.t),feet=pt+Hc;
        const s=Math.max(-(Hc-figH),Math.min(0,((lb-feet)-(feet-figH-lt))/2));dyF+=s;f.dataset.kgap=Math.round(feet+s-figH-lt)+"/"+Math.round(lb-feet-s)}}catch(e){}}}
-   const w0=f.offsetWidth,H=f.offsetHeight,bw=box.offsetWidth,pw=por.offsetWidth;if(!w0||!bw){box.classList.remove("kbk-figover");return}
-   if(pg&&pg.offsetHeight&&pg.offsetWidth&&!box.closest(".kbk.narrow")){R.h=+(por.offsetHeight/pg.offsetHeight).toFixed(3);R.w=+(bw/pg.offsetWidth).toFixed(3)}
-   const im=f.querySelector("img"),src=im&&im.getAttribute("src");if(src&&AR[src]==null)learn(src,soon);const hx=src&&HX[src]!=null?HX[src]:.5;
-   /* KIT 32.2a (owner 15/11, "Tuần lục p.6 Thái hậu": the robe spread under the text): the figure stays INSIDE its own column on every
-      screen (phones too) and is never scaled: the body (head centre) is centred in the column and whatever is wider (train, hem, outer
-      sleeve) is CUT at the column edge (the column clips), with a 24 px soft fade at a cut edge; the text never sits on the figure. */
-   box.classList.remove("kbk-figover");const over=w0>pw+1;
-   let L=(pw-w0)/2;if(over){L=pw/2-hx*w0;L=Math.min(0,Math.max(pw-w0,L))}
-   const dx=L-(pw-w0)/2,t=(Math.abs(dx)>0.5||Math.abs(dyF)>0.5)?`translate(${dx.toFixed(1)}px,${dyF.toFixed(1)}px)`:"";f.style.transformOrigin="50% 100%";if(f.style.transform!==t)f.style.transform=t;
-   if(im){const g=[];if(over&&L<-0.5)g.push(`transparent ${(-L).toFixed(0)}px,#000 ${(-L+24).toFixed(0)}px`);if(over&&L+w0>pw+0.5)g.push(`#000 ${(pw-L-24).toFixed(0)}px,transparent ${(pw-L).toFixed(0)}px`);
-    const mk=g.length?`linear-gradient(to right,${g.length===2?g.join(","):g[0].startsWith("transparent")?g[0]:"#000 0,"+g[0]})`:"";if(im.style.maskImage!==mk){im.style.maskImage=mk;im.style.webkitMaskImage=mk}}})}catch(e){}}
+   const w0=f.offsetWidth;if(!w0||!box.offsetWidth)return;
+   f.style.transformOrigin="50% 100%";const t=Math.abs(dyF)>0.5||Math.abs(dxF)>0.5?`translate(${dxF.toFixed(1)}px,${dyF.toFixed(1)}px)`:"";if(f.style.transform!==t)f.style.transform=t})}catch(e){}}
  function soon(){if(!q){q=requestAnimationFrame(clamp);setTimeout(clamp,450);setTimeout(clamp,1300)}}
  window.kitBookFigClamp=clamp;
  try{new MutationObserver(ms=>{if(ms.some(m=>[...m.addedNodes].some(n=>n.nodeType===1&&(n.matches(".kbk-person,.kesfi,.kbk")||n.querySelector&&n.querySelector(".kbk-person.kbk-full")))))soon()}).observe(document.body,{childList:true,subtree:true})}catch(e){}

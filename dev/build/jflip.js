@@ -208,20 +208,22 @@ function kitCardFlip(o){o=o||{};const deck=o.deck||[];if(!deck.length)return;
 /* ---------- the result line (VANPHONG: thẻ bài, thị tẩm; names by HER knowledge) ---------- */
 function resHTML(o,d){const tp=o.turned?byId(o.turned):null,fp=o.pick?byId(o.pick):null;let txt="";try{const w=typeof nightWhy==="function"?nightWhy():null;txt=w&&w.text||""}catch(e){}
  const chip=(p,b,s)=>`<div class="kmres">${p?face(p):""}<div><b>${b}</b>${s?`<small>${s}</small>`:""}</div></div>`;
- if(!tp)return chip(null,"Đêm nay Hoàng thượng không lật thẻ bài nào.","");
+ /* r1 (review/npc-agent-ag2-r1): HIS reason (AG2 jagemp empWhyTxt: he rests / remembers her deed / breaks the lệ) in the same result line */
+ let ew="";try{ew=typeof empWhyTxt==="function"?esc(empWhyTxt(S.nightWhy)||""):""}catch(e){}const sp=x=>ew?`${x} ${ew}`:x;
+ if(!tp)return chip(null,"Đêm nay Hoàng thượng không lật thẻ bài nào.",ew);
  const tn=`${esc(rankName(tp))} ${esc(nameOf(tp))}`;
- if(o.pick==="me"&&o.turned==="me")return `${chip(S,"Đêm nay ngươi được thị tẩm.","Thẻ bài của ngươi được lật.")}`;
- if(o.turned===o.pick)return chip(tp,`Tối nay: ${tn}`,"được chọn hầu đêm nay.");
+ if(o.pick==="me"&&o.turned==="me")return `${chip(S,"Đêm nay ngươi được thị tẩm.",sp("Thẻ bài của ngươi được lật."))}`;
+ if(o.turned===o.pick)return chip(tp,`Tối nay: ${tn}`,sp("được chọn hầu đêm nay."));
  /* he turned one card, the night went elsewhere (custom: the Empress on mùng một / rằm; stolen on the way) */
  const why=d.cause==="custom"?esc(txt):"Giữa đường, Hoàng thượng bị mời sang cung khác.";
  const fin=fp?(fp===S?"Đêm nay ngươi được thị tẩm.":`Đêm nay: ${esc(rankName(fp))} ${esc(nameOf(fp))}`):"";
  return chip(tp,o.turned==="me"?"Thẻ bài của ngươi được lật":`Hoàng thượng lật thẻ ${tn}`,`${why}${fin?" "+fin:""}`)}
 
 /* ---------- wiring: the week's flip (outermost wrapper; j93 piece 1 is retired while this runs) ---------- */
-let inFlip=false,stoleFrom=null;
+let inFlip=false,stoleFrom=null;(window.THIN_REG=window.THIN_REG||[]).push(["inFlip",()=>inFlip,v=>{inFlip=v}],["stoleFrom",()=>stoleFrom,v=>{stoleFrom=v}]);/* per-player state for the co-op host (jcoopthin TH.reg) */
 /* life token + the scene on screen: a new life / loaded slot / title (j93 kmReset) voids every waiting go() and closes the scene (review/flip-newlife) */
 let life=0,cur=null;
-try{if(typeof kmOnReset==="function")kmOnReset(()=>{life++;try{cur&&cur.close&&cur.close()}catch(e){}cur=null})}catch(e){}
+try{if(typeof lifeStore==="function")lifeStore("flip scene",()=>{life++;try{cur&&cur.close&&cur.close()}catch(e){}cur=null})}catch(e){}
 if(typeof stealNight==="function"){const s0=stealNight;stealNight=function(v,t){if(inFlip&&stoleFrom==null&&t)stoleFrom=t===S?"me":t.id;return s0.apply(this,arguments)}}
 if(typeof kitFlipTablet==="function"){const a0=kitFlipTablet;kitFlipTablet=function(){if(inFlip)return;return a0.apply(this,arguments)}}
 if(typeof kitFlipNote==="function"){const b0=kitFlipNote;kitFlipNote=function(){if(inFlip)return;return b0.apply(this,arguments)};window.kitFlipNote=kitFlipNote}

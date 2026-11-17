@@ -28,8 +28,8 @@ function deedSync(p){if(!p||!S)return;try{
  if(p===S){const n=Math.min(3,(S.men||[]).reduce((a,m)=>a+(m.trysts||0),0));for(let i=1;i<=n;i++)deedOnce(p,"tr:"+i,"tryst",2,"tư thông với nam nhân")}
  else{if(p.scandal)deedOnce(p,"sc","tryst",2,"tư thông");if(p.affair){let m=null;try{m=manById(p.affair)}catch(e){}deedOnce(p,"af:"+p.affair,"tryst",2,`tư thông${m?" với "+m.name:""}`)}}
  if(p.pregMismatch)deedOnce(p,"pm:"+((p.kids||[]).length),"pm",2,"có thai không khớp đêm thị tẩm nào trong sổ Kính sự phòng");
- for(const e of (p.inv||[])){if(!e||!IT[e.k])continue;const planted=(e.by&&e.by!==key(p))||e.gh;if(planted)continue;if(IT[e.k].il)deedOnce(p,"il:"+e.k,"il",1,`giấu đồ cấm (${(IT[e.k]||{}).n}) trong rương`)}
- if(typeof vpItems==="function")for(const e of vpItems(p))deedOnce(p,"vp:"+e.k,"vp",1,`dùng đồ vượt phẩm (${IT[e.k]?IT[e.k].n:e.k})`);
+ for(const e of (p.inv||[])){if(!e||!IT[e.k])continue;const planted=(e.by&&e.by!==key(p))||e.gh;if(planted)continue;if(itm(e.k).il)deedOnce(p,"il:"+e.k,"il",1,`giấu đồ cấm (${(IT[e.k]||{}).n}) trong rương`)}
+ if(typeof vpItems==="function")for(const e of vpItems(p))deedOnce(p,"vp:"+e.k,"vp",1,`dùng đồ vượt phẩm (${itm(e.k).n})`);
  if(p!==S&&p.plan&&p.plan.k){const t=byKey(p.plan.t);deedOnce(p,p.plan.j70?"pl:j70:"+p.plan.j70:"pl:"+p.plan.k+":"+p.plan.t+":"+p.plan.due,"plot",1,`bày mưu ${deedTxt(p.plan.k,t)}`)}
 }catch(e){}}
 /* how much true evidence can exist against p (each holder separately) */
@@ -59,7 +59,7 @@ function evTruthSweep(){if(!S||!rivals)return 0;let moved=0;const P=[S].concat(r
  const p=n0.apply(this,arguments);if(!p&&d)deedUndo(a,d);return p}})();
 (function(){for(const [fn,k] of [["bribeServ","sbribe"],["plantServ","sbribe"],["threatServ","sthreat"]]){const f0=window[fn];if(typeof f0!=="function")continue;
  window[fn]=function(a,x){const t=fn==="plantServ"?x:(typeof ownerOf==="function"?ownerOf(x):null);const d=deedAdd(a,k,null,1,t?`${DEEDX[k].replace(/ của người khác$/,"")} của ${j78who(t)}`:DEEDX[k]);const r=f0.apply(this,arguments);if(!r)deedUndo(a,d);return r}}})();
-(function(){if(typeof illBuy!=="function")return;const i0=illBuy;illBuy=function(p,r,k){const d=deedAdd(p,"illbuy",null,1,`lén mua ${IT[k]?IT[k].n:"đồ cấm"}`);const x=i0.apply(this,arguments);if(!x)deedUndo(p,d);return x}})();
+(function(){if(typeof illBuy!=="function")return;const i0=illBuy;illBuy=function(p,r,k){const d=deedAdd(p,"illbuy",null,1,`lén mua ${IT[k]?itm(k).n:"đồ cấm"}`);const x=i0.apply(this,arguments);if(!x)deedUndo(p,d);return x}})();
 
 /* ---------- 2. picking whom a piece of evidence is about: only someone with an unproven wrong ---------- */
 function evRoom(h,t){return t&&h!==t?Math.max(0,deedCap(t)-evG(h,t)):0}
@@ -91,7 +91,7 @@ function frameDef(p,a){const T=BAL.truth;const base=T.clearBase+(p.mat||0)*T.cle
 function frameExpose(a,p,how){const T=BAL.truth;ap(a,{danh:-T.fDanh});if(typeof ducAdd==="function")ducAdd(a,-T.fDuc,"vu khống người khác");else ap(a,{duc:-T.fDuc});
  relAdd(a,p,-20);evA(p,a,2);punish(a,`vu khống ${p===S?"ngươi":p.name}`,2);
  const A=a===S?"Ngươi":a.name,P=p===S?"Ngươi":p.name;return `${P} minh oan được: ${how}. ${A} bị lộ là kẻ vu khống: Danh -${T.fDanh}, Đức -${T.fDuc}, bị phạt. `}
-let FRAME_LAST="";
+let FRAME_LAST="";try{lifeStore("FRAME_LAST",()=>{FRAME_LAST=""})}catch(e){}/* per life (review/newlife-reset-r1): the last framing sentence names people of that life */
 (function(){const f0=framed;framed=function(p,why){FRAME_LAST="";const a=ACTX.a&&ACTX.a!==p?ACTX.a:null;if(!a||!p||window.__truthAuto)return f0.apply(this,arguments);
  if(p===S&&!window.__truthAuto){pushDil(mkP("vuoan",{a:key(a),why}),"Bị vu oan");return -1}
  const D=frameDef(p,a);try{window.__frames=(window.__frames||0)+1;if(p===S)window.__framesMe=(window.__framesMe||0)+1}catch(e){}

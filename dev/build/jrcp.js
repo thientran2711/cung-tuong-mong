@@ -86,7 +86,7 @@ function rcpLvTxt(g){const s=rcpStOf(g.kind,g.r.id);return `<span class="g">Họ
 function rcpPK(r){return r==="emp"||r==="th"?r:r&&typeof r==="object"?(r===S?"me":"v"+r.id+(r.name||"")):""}
 function rcpWho(r){return r==="emp"?"Hoàng thượng":r==="th"?"Thái hậu":r&&r.name?`${rkName(r)} ${r.name}`:""}
 function rcpThey(r){return r==="emp"?"bệ hạ":r==="th"?"Thái hậu":"nàng ta"}
-const RCP_PC={};
+const RCP_PC={};lifeStore("RCP_PC",()=>{for(const k in RCP_PC)delete RCP_PC[k]});
 function rcpProf(r){const pk=rcpPK(r);if(!pk)return null;const seed=rcpSeed();const ck=seed+pk;if(RCP_PC[ck])return RCP_PC[ck];const f={},h={};
  for(const kind in RCP_ST){const L=RCP_ST[kind],x=rcpH(seed+":"+pk+":"+kind);f[kind]=L[x%L.length][0];
   if((x>>>8)%100<BAL.rcp.hateP){const O=L.filter(s=>s[0]!==f[kind]);h[kind]=O[(x>>>16)%O.length][0]}}
@@ -185,13 +185,13 @@ function rcpBk(k){const it=IT[k];return it&&it.bk?it.bk:null}
 function rcpShopBooks(){const L=[];for(const kind in RCP_ST){const K=rcpKnown()[kind];RCP_ST[kind].forEach((s,i)=>{if(i&&!K.includes(s[0]))L.push(rcpBookK(kind,s[0],0))})}return shuf(L).slice(0,BAL.rcp.shopN)}
 (function(){const r0=restock;restock=function(){const x=r0.apply(this,arguments);try{S.shop=(S.shop||[]).concat(rcpShopBooks())}catch(e){}return x}})();
 function rcpRead(ix){const e=S.inv[ix],b=e&&rcpBk(e.k);if(!b||S.dead||Q.length||!can(1))return;if(rcpKnows(S,b.kind,b.sid)){log(`Ta đã học ${rcpStN(b.kind,b.sid)} rồi.`);return}
- spend(1);log(rcpGrant(b.kind,b.sid,`đọc ${IT[e.k].n}`));save();render()}
+ spend(1);log(rcpGrant(b.kind,b.sid,`đọc ${itm(e.k).n}`));save();render()}
 function rcpBookRows(k){const b=rcpBk(k),a=itemArt(k),gr=KIT_GRADE[a?a.grade|0:0];const s=rcpSt(b.kind,b.sid),kn=rcpKnows(S,b.kind,b.sid);
  const R=s[2].map(r=>wkrOf(b.kind,r)).filter(Boolean).map(r=>`${r.n} (${r.lv?`${ARTS.find(x=>x.k===WK[b.kind].a).n} bậc ${r.lv}`:"mọi bậc"})`);
  return kitRows([["Phẩm",`<span class="ef n" style="color:${gr.c};font-weight:700">${gr.n}</span>`],["Được",[`đọc: học ${rcpStN(b.kind,b.sid)}`].concat(R),"g"],["Ghi chú",[kn?"ta đã học lối này":"ta chưa học lối này","đem tặng được, bán được"],"n"]])}
 (function(){const r0=kitItemRows;kitItemRows=function(k){if(rcpBk(k))return rcpBookRows(k);return r0.apply(this,arguments)}})();
 (function(){if(typeof kitShopEff!=="function")return;const e0=kitShopEff;kitShopEff=function(k){const b=rcpBk(k);if(b)return `đọc: học lối này${rcpKnows(S,b.kind,b.sid)?" (đã học)":""}`;return e0.apply(this,arguments)}})();
-(function(){if(typeof kinvOpen!=="function")return;const o0=kinvOpen;kinvOpen=function(x){const g=x&&x.g;const b=g&&!g.wk&&rcpBk(g.k);if(!b)return o0.apply(this,arguments);const it=IT[g.k],i=g.i;
+(function(){if(typeof kinvOpen!=="function")return;const o0=kinvOpen;kinvOpen=function(x){const g=x&&x.g;const b=g&&!g.wk&&rcpBk(g.k);if(!b)return o0.apply(this,arguments);const it=itm(g.k),i=g.i;
  const kn=rcpKnows(S,b.kind,b.sid);const B=[pbtn(`data-rcpread="${i}"`,"Đọc, học lối này",`tốn: 1 khắc · thành: học ${rcpStN(b.kind,b.sid)}`,kn?"đã học lối này":whyTime(1)),
   pbtn(`data-kinvact="gift" data-ix="${i}"`,"Tặng","tốn: 2 khắc · thành: chọn người nhận",whyTime(2)),pbtn(`data-kinvact="sell" data-ix="${i}"`,"Bán",`thành: Bạc +${Math.floor((it.pr||0)/2)}`,"")];
  const F=[];if(g.n>1)F.push(`Trong rương: ${g.n} món.`);const fr=kinvFrom(g.from);if(fr)F.push(fr+".");
@@ -281,13 +281,13 @@ function rcpSpyO(){return cl(Math.round(BAL.rcp.spyO+((S.maid&&S.maid.loyal)||0)
    for(const kind in RCP_ST)if(WK[kind].a===wkBestArt(v)||roll(30))RCP_ST[kind].forEach((s,i)=>{if(i&&rcpNpcKnows(v,kind,s[0])&&!rcpKnows(S,kind,s[0]))L.push(rcpBookK(kind,s[0],1))});
    if(L.length){pushDil(mkP("giftin",{f:key(v),e:{k:pick(L),from:key(v)}}),"Quà tặng");break}}
   if(!S.thDead&&(S.th||0)>=60&&roll(BAL.rcp.thGiftP)){const L=[];for(const kind of ["kinh","theu"])RCP_ST[kind].forEach((s,i)=>{if(i&&!rcpKnows(S,kind,s[0]))L.push(rcpBookK(kind,s[0],1))});
-   if(L.length){const k=pick(L);S.inv.push({k,from:"th"});log(`<span class="g">Thái hậu ban ta ${IT[k].n}.</span> Cất vào rương.`)}}}}catch(e){console.error("rcp month",e)}return ev}})();
+   if(L.length){const k=pick(L);S.inv.push({k,from:"th"});log(`<span class="g">Thái hậu ban ta ${itm(k).n}.</span> Cất vào rương.`)}}}}catch(e){console.error("rcp month",e)}return ev}})();
 /* a ma ma of the imperial kitchen / workshops offers to copy out a sub-style (a small story reward with two roads: bạc or Sức) */
 if(typeof ev==="function")ev("rcpMama",()=>S.rank>=0&&!S.out&&["mon","huong","theu","ao"].some(k=>RCP_ST[k].some(s=>!rcpKnows(S,k,s[0]))),
  ()=>{const k=pick(["mon","huong","theu","ao"].filter(k=>RCP_ST[k].some(s=>!rcpKnows(S,k,s[0]))));const s=pick(RCP_ST[k].filter(s=>!rcpKnows(S,k,s[0])));return{k,s:s[0]}},
  p=>{const s=rcpSt(p.k,p.s);if(!s)return null;const fee=Math.max(BAL.rcp.mamaMin,Math.round((BAL.pay?BAL.pay[Math.min(7,S.rank|0)]:40)*BAL.rcp.mamaK)),nm=p.k==="mon"?"Thượng thực cục":"Thượng công cục";return{
  t:`Một ma ma già ở ${nm} sang thỉnh an, kể rằng thuở trẻ từng hầu một vị nương nương rất giỏi ${rcpStN(p.k,p.s)}, còn nhớ cả phổ.<br>“Nếu ${kSay({srv:"f"},S,"{goi}")} muốn, nô tỳ chép lại cho.”`,o:[
- {n:"Biếu ma ma ít bạc, xin chép phổ",fx:{bac:-fee},x:`thành: có ${IT[rcpBookK(p.k,p.s,1)].n}`,go:()=>{S.inv.push({k:rcpBookK(p.k,p.s,1),from:"me"});log(`Ma ma chép lại ${IT[rcpBookK(p.k,p.s,1)].n}, ta cất vào rương.`)}},
+ {n:"Biếu ma ma ít bạc, xin chép phổ",fx:{bac:-fee},x:`thành: có ${itm(rcpBookK(p.k,p.s,1)).n}`,go:()=>{S.inv.push({k:rcpBookK(p.k,p.s,1),from:"me"});log(`Ma ma chép lại ${itm(rcpBookK(p.k,p.s,1)).n}, ta cất vào rương.`)}},
  {n:"Phụ ma ma một buổi bếp núc, học tận tay",fx:{suc:-15},x:`thành: học ngay ${rcpStN(p.k,p.s)}`,go:()=>{const t=rcpGrant(p.k,p.s,"ma ma dạy tận tay");if(t)log(t)}},
  {n:"Cảm tạ, không cần",fx:{}}]}});
 /* Hoàng thượng's performances: playing / dancing in the sub-style he loves (when she knows it and has learnt it) pleases more */

@@ -97,11 +97,11 @@ const WD_ITEMS={};
   const d=`${sl==="tram"?"Cài tóc":"Mặc"}: ${Object.keys(w).length?plainFx(w):"giản dị"} · ${WD_GRADE[g]}${it.nt?" · chỉ có khi được ban, không bán, không tặng":""}${note?" · "+note:""}`;
   /* register in the chest's IT table; keep old fields of the three old hair items (tramngoc, boodieu, tramphuong) but hide their rank hint */
   IT[k]=Object.assign(IT[k]||{tg:sl==="tram"?["hh","rv"]:["rv"]},{n,kd:sl==="tram"?"Trâm cài":"Y phục",d,pr:it.pr,wsl:sl,wd:1});if(it.nt){IT[k].keep=1;IT[k].tg=[]}
-  if(IT[k].sl==="hair")delete IT[k].sl}})();
+  if(itm(k).sl==="hair")delete IT[k].sl}})();
 function plainFx(o){return Object.entries(o||{}).filter(([k,v])=>v&&NAMES[k]).map(([k,v])=>`${NAMES[k]} ${v>0?"+":""}${v}`).join(", ")}
 /* old ngự-ban things are ngự tứ too */
 ["ngocboi","bienngu"].forEach(k=>{if(IT[k]){IT[k].nt=1}});
-function wdIsNt(e){return !!(e&&((WD_ITEMS[e.k]&&WD_ITEMS[e.k].nt)||e.nt||(IT[e.k]&&IT[e.k].nt)))}
+function wdIsNt(e){return !!(e&&((WD_ITEMS[e.k]&&WD_ITEMS[e.k].nt)||e.nt||(IT[e.k]&&itm(e.k).nt)))}
 
 /* ---------- who is what ---------- */
 function wdPOf(p){try{if(!p)return 1;const rr=typeof personRoleRank==="function"?personRoleRank(p):null;
@@ -113,9 +113,9 @@ function wdPool(sl,P,noNt){return WD_LIST.filter(r=>r[1]===sl&&r[3]===P&&(!noNt|
 function wdDefault(p,sl){const P=Math.min(8,wdPOf(p));const L=wdPool(sl,P,true);return L.length?L[wdHash(wdKey(p)+sl)%L.length]:null}
 /* lazily give everybody (old saves too) a default outfit at their own P: nobody starts wrong */
 function wdOf(p){if(!p)return null;if(!p.wd||typeof p.wd!=="object"){p.wd={tram:null,y:null};
-  if(p===S&&S.inv){const i=S.inv.findIndex(e=>e&&e.w&&IT[e.k]&&IT[e.k].wsl==="tram"&&!e.h);if(i>=0){const e=S.inv.splice(i,1)[0];delete e.w;p.wd.tram=e}}
+  if(p===S&&S.inv){const i=S.inv.findIndex(e=>e&&e.w&&IT[e.k]&&itm(e.k).wsl==="tram"&&!e.h);if(i>=0){const e=S.inv.splice(i,1)[0];delete e.w;p.wd.tram=e}}
   for(const sl of ["tram","y"])if(!p.wd[sl]){const k=wdDefault(p,sl);if(k)p.wd[sl]={k,from:"base"}}}
- if(p.inv)p.inv.forEach(e=>{if(e&&e.w&&IT[e.k]&&IT[e.k].wsl)delete e.w});return p.wd}
+ if(p.inv)p.inv.forEach(e=>{if(e&&e.w&&IT[e.k]&&itm(e.k).wsl)delete e.w});return p.wd}
 function wdItem(e){return e&&WD_ITEMS[e.k]||null}
 function wdP(e,p){const it=wdItem(e);if(!it)return 0;if(it.nt&&e.own&&e.own===wdKey(p))return Math.min(it.P,wdPOf(p));return it.P}
 function wdLevel(p){const w=wdOf(p);return WD.wT*wdP(w.tram,p)+WD.wY*wdP(w.y,p)}
@@ -175,11 +175,11 @@ function wdBelPE(obs,e,owner){const it=wdItem(e);if(!it)return 0;if(it.nt&&e.own
 function wdBelStatus(obs,t){return wdStatusBy(t,e=>wdBelPE(obs,e,t))}
 function wdAutoFor(p,bias){const tgt=Math.min(8,wdPOf(p))+(bias||0);wdApply(p,wdBest(p,tgt,e=>wdBelPE(p,e,p)))}
 /* NPC choice: by belief + trait (Kiêu ngạo / Tham vọng dress up, Hiền lành / Nhu mì keep modest) */
-function wdNpcBias(v){const t=(typeof traitsOf==="function"?traitsOf(v):[v.trait]).join(" ");return /Kiêu ngạo|Tham vọng/.test(t)?1:/Hiền lành|Nhu mì/.test(t)?-.5:0}
+function wdNpcBias(v){const t=(typeof traitsOf==="function"?traitsOf(v):[v.trait]).join(" ");return /Kiêu ngạo|Tham vọng/.test(t)?1:/Ân cần|Khiêm nhường/.test(t)?-.5:0}
 
 /* bonus to Sắc / Danh while worn: the ONE wearBonus is in jwdinv (WD slots count their own effect, never ×1.5: the Vượt phẩm status stays hidden) */
 /* the old hair 'wear' button now puts the item into the TRÂM slot */
-(function(){const w0=wear;wear=function(p,ix){const e=p&&p.inv&&p.inv[ix];if(e&&IT[e.k]&&IT[e.k].wsl){wdWear(p,ix);return}return w0.apply(this,arguments)}})();
+(function(){const w0=wear;wear=function(p,ix){const e=p&&p.inv&&p.inv[ix];if(e&&IT[e.k]&&itm(e.k).wsl){wdWear(p,ix);return}return w0.apply(this,arguments)}})();
 /* old 'vượt phẩm' list (used by j8 night / j25 text) = the over-rank worn items */
 vpItems=function(p){try{return wdStatus(p)==="over"?["tram","y"].map(sl=>wdOf(p)[sl]).filter(e=>e&&wdItem(e)&&wdItem(e).P>wdPOf(p)).map(e=>({k:e.k})):[]}catch(e){return[]}};
 
@@ -205,7 +205,7 @@ function wdCause(obs,t){if(!obs||!t||obs===t)return null;if(obs===S){const k=wdK
 window.wdCause=wdCause;
 const WD_ST_WORD={over:"vượt phẩm",under:"quá giản dị",tang:"mặc đồ đỏ vàng giữa quốc tang",ok:"đúng phẩm"};
 /* her ma ma (or a maid old enough to be one) who is sharp-eyed: lanh lợi and loyal */
-function wdMama(p){const L=[p.maid].concat(p.staff||[]).filter(Boolean);return L.find(s=>{let m=false;try{m=personRoleRank(s,"maid").role==="mama"||(s.age||0)>=36}catch(e){}return m&&(s.tr==="lanh"||(s.loyal||0)>=80)&&(s.loyal||0)>=60&&!s.spyFor})||null}
+function wdMama(p){const L=[p.maid].concat(p.staff||[]).filter(Boolean);return L.find(s=>{let m=false;try{m=personRoleRank(s,"maid").role==="mama"||(s.age||0)>=36}catch(e){}return m&&(netIs(s,"sharp")||(s.loyal||0)>=80)&&(s.loyal||0)>=60&&!s.spyFor})||null}
 /* someone to sell or pawn things quietly outside the palace: a ma ma or a eunuch of her own staff (loyal 40+) */
 function wdAgent(p){const L=[p.maid].concat(p.staff||[]).filter(s=>s&&!s.spyFor&&(s.loyal||0)>=40);
  return L.find(s=>s.role==="eunuch")||L.find(s=>{try{return personRoleRank(s,"maid").role==="mama"||(s.age||0)>=36}catch(e){return false}})||null}
@@ -230,7 +230,7 @@ const WD_GMIN={night:0,contest:1,son:2,promo:2,birthday:1,accuse:0,story:1,sinht
   if(knob&&free.length&&roll(WD[knob])){const P=wdPOf(p);k=free.slice().sort((a,b)=>Math.abs(WD_ITEMS[a].P-P)-Math.abs(WD_ITEMS[b].P-P))[0];nt=true}
   else if(roll(WD.rewardGarment))k=wdPickAt(wdPOf(p),roll(50)?"tram":"y",WD_GMIN[why]||0);
   if(!k)return r;const g=wdGain(p,k,{from:"emp",giver:"Hoàng thượng"});if(!g)return r;const it=WD_ITEMS[k];
-  if(p===S){Q.push({t:nt?"Ngự tứ":"Thánh thượng ban thưởng",who:pEmp(),h:`<p style="text-align:center"><img class="ic" src="${it.icon}" width="56" height="56" alt="" onerror="this.remove()"></p><p>Hoàng thượng ban thêm cho ngươi <b>${it.n}</b> (${WD_GRADE[it.g]}).</p><p class="past">${IT[k]?IT[k].d:""}${nt?" · ghi: Hoàng thượng ngự tứ, "+g.e.d:""}</p>${g.txt?`<p>${g.txt}</p>`:""}`});
+  if(p===S){Q.push({t:nt?"Ngự tứ":"Thánh thượng ban thưởng",who:pEmp(),h:`<p style="text-align:center"><img class="ic" src="${it.icon}" width="56" height="56" alt="" onerror="this.remove()"></p><p>Hoàng thượng ban thêm cho ngươi <b>${it.n}</b> (${WD_GRADE[it.g]}).</p><p class="past">${IT[k]?itm(k).d:""}${nt?" · ghi: Hoàng thượng ngự tứ, "+g.e.d:""}</p>${g.txt?`<p>${g.txt}</p>`:""}`});
    log(`Được Hoàng thượng ban ${it.n}${nt?" (ngự tứ)":""}.`)}
   else if(nt)log(`${wdNmC(p)} được Hoàng thượng ngự tứ ${it.n}.`)}catch(e){console.error(e)}return r}})();
 /* Mệnh truyện rewards of the court theme come from the wardrobe store: tier 0..2 = a garment of her phẩm (Thường..Trân phẩm), tier 3 = a ngự tứ */
@@ -238,7 +238,7 @@ const WD_GMIN={night:0,contest:1,son:2,promo:2,birthday:1,accuse:0,story:1,sinht
    if(t>=3){const free=wdNtFree();const P=wdPOf(S);if(free.length)k=free.slice().sort((a,b)=>Math.abs(WD_ITEMS[a].P-P)-Math.abs(WD_ITEMS[b].P-P))[0]}
    if(!k)k=wdPickAt(wdPOf(S),roll(50)?"tram":"y",Math.min(3,t));
    if(k){const it=WD_ITEMS[k];const g=wdGain(S,k,{from:"story",giver:it.nt?"Hoàng thượng":""});
-    return {k,row:["Phần thưởng",`${it.n} · <b>${WD_GRADE[it.g]}</b> · ${IT[k].d}${it.nt?` · Hoàng thượng ngự tứ, ${g.e.d}`:""} (đã vào Rương)${g.txt}`,"g"]}}}}catch(e){console.error(e)}
+    return {k,row:["Phần thưởng",`${it.n} · <b>${WD_GRADE[it.g]}</b> · ${itm(k).d}${it.nt?` · Hoàng thượng ngự tứ, ${g.e.d}`:""} (đã vào Rương)${g.txt}`,"g"]}}}}catch(e){console.error(e)}
   return r0.apply(this,arguments)}})();
 /* the peddler also carries a few garments and hairpins (their phẩm unknown to the buyer) */
 (function(){if(typeof restock!=="function")return;const r0=restock;restock=function(){const r=r0.apply(this,arguments);try{const n=1+R(2);for(let i=0;i<n;i++){const k=wdPickAt(R(7),roll(50)?"tram":"y",0);if(k&&!S.shop.includes(k))S.shop.push(k)}}catch(e){}return r}})();
@@ -300,10 +300,10 @@ try{LACK.vp=t=>{if(wdCause(S,t))return"";const r=S.wdSeen&&S.wdSeen[wdKey(t)];re
 try{J78VERB.vp="hặc {t} ăn mặc sai phẩm";HARMK["Hặc ăn mặc sai phẩm"]="vp"}catch(e){}
 
 /* ---------- GIÁ HỌA: plant a valuable thing in someone's room, then cry theft (act giahoa, two-way) ---------- */
-function wdFrameItem(a){const own=(a.inv||[]).filter(e=>e&&!e.h&&!e.t&&!wdIsNt(e)&&IT[e.k]&&IT[e.k].pr>=30);if(own.length)return{take:own[0],k:own[0].k};
+function wdFrameItem(a){const own=(a.inv||[]).filter(e=>e&&!e.h&&!e.t&&!wdIsNt(e)&&IT[e.k]&&itm(e.k).pr>=30);if(own.length)return{take:own[0],k:own[0].k};
  const k=wdPickAt(Math.min(8,wdPOf(a)+1),"tram",1);return{take:null,k}}
 function wdFrame(a,t){ap(a,{bac:-40});a.schemes=(a.schemes||0)+1;if(typeof ducAdd==="function")ducAdd(a,-4,"giá họa người khác");else ap(a,{duc:-4});
- const F=wdFrameItem(a);if(!F.k)return"";const nm=IT[F.k]?IT[F.k].n:F.k;
+ const F=wdFrameItem(a);if(!F.k)return"";const nm=itm(F.k).n;
  if(!roll(oPlant(a,t))){/*evok: giahoa act (runAct deed)*/evA(t,a,2);relAdd(a,t,-20);return `<span class="r">Người lén mang ${nm} vào phòng ${wdNm(t)} bị bắt, khai ra ${wdNm(a)}.</span> ${wdNmC(t)} nắm 2 chứng cứ. `}
  if(F.take){const i=a.inv.indexOf(F.take);if(i>=0)a.inv.splice(i,1)}
  t.inv=t.inv||[];t.inv.push({k:F.k,h:1,by:key(a),gh:key(a)});
@@ -359,9 +359,9 @@ try{ACTDOM.giahoa="Mưu kế";J78VERB.giahoa="giá họa {t} tội ăn trộm";D
   if(allow.includes("giahoa")&&ACT.giahoa.ok(v,t))O.push(["giahoa",2*persW(v,"giahoa")])}}catch(e){}return O}})();
 
 /* ---------- selling quietly, pawning, redeeming ---------- */
-function wdPrice(e){const it=wdItem(e);return it?it.pr:((IT[e.k]&&IT[e.k].pr)||0)}
+function wdPrice(e){const it=wdItem(e);return it?it.pr:((IT[e.k]&&itm(e.k).pr)||0)}
 function wdSellPct(p,ag){return cl(WD.sellLo+Math.round(((ag?ag.loyal:50)-40)/3),WD.sellLo,WD.sellHi)}
-function wdLeak(p,ag,half){return cl(Math.round((WD.sellRisk+(ag&&ag.tr==="chuyen"?15:0)-(ag&&(ag.loyal||0)>=75?5:0))*(half?.5:1)),2,60)}
+function wdLeak(p,ag,half){return cl(Math.round((WD.sellRisk+(nv(ag,"agentLeak"))-(ag&&(ag.loyal||0)>=75?5:0))*(half?.5:1)),2,60)}
 function wdSell(p,ix){const e=p.inv[ix];if(!e||e.h||!wdItem(e))return"";if(wdIsNt(e))return"";const ag=wdAgent(p);if(!ag)return"";
  p.inv.splice(ix,1);const g=Math.max(1,Math.round(wdPrice(e)*wdSellPct(p,ag)/100));ap(p,{bac:g});let r=`${wdNmC(p)} sai ${ag.name} lén bán ${wdItem(e).n} ra ngoài cung: Bạc +${g}. `;
  if(roll(wdLeak(p,ag))){ap(p,{danh:-WD.sellDanh});r+=`<span class="r">Chuyện lộ ra: cả cung xì xào ${wdNm(p)} túng thiếu phải bán đồ.</span> Danh -${WD.sellDanh}. `;if(p!==S)try{newsAdd(p,"wd",`${wdNmC(p)} túng thiếu, lén bán đồ ra ngoài cung.`)}catch(x){}}
@@ -376,9 +376,9 @@ function wdPawnMonth(p){if(!p.wdPawn||!p.wdPawn.length)return"";let r="";p.wdPaw
 /* ---------- ngự tứ lost or broken = bất kính (the same risk for everyone holding one) ---------- */
 function wdNtHeld(p){const L=[];const w=wdOf(p);for(const sl of ["tram","y"])if(w[sl]&&wdIsNt(w[sl]))L.push({sl,e:w[sl]});(p.inv||[]).forEach(e=>{if(e&&!e.h&&WD_ITEMS[e.k]&&WD_ITEMS[e.k].nt)L.push({e})});return L}
 function wdNtRemove(p,e){const w=wdOf(p);for(const sl of ["tram","y"])if(w[sl]===e){w[sl]=null;const k=wdDefault(p,sl);if(k)w[sl]={k,from:"base"};return}const i=(p.inv||[]).indexOf(e);if(i>=0)p.inv.splice(i,1)}
-function wdNtMonth(p){const H=wdNtHeld(p);if(!H.length)return"";const clumsy=[p.maid].concat(p.staff||[]).find(s=>s&&(s.tr==="nhat"||s.tr==="tham"));
+function wdNtMonth(p){const H=wdNtHeld(p);if(!H.length)return"";const clumsy=[p.maid].concat(p.staff||[]).find(s=>s&&(netIs(s,"timid")||netIs(s,"greed")));
  if(p===S&&S.wdNtHide&&wk()>=S.wdNtHide.due){const h=S.wdNtHide;S.wdNtHide=null;if(roll(45)){apply({sung:-10});punish(S,"làm mất đồ ngự tứ mà giấu, tội bất kính",2);Q.push({t:"Tội bất kính",who:pEmp(),h:`<p class="r">Chuyện ${h.n} ngự tứ ${h.how} bị lộ. Hoàng thượng giận ngươi giấu giếm. Sủng -10, bị phạt.</p>`})}}
- if(!roll(clumsy?2.5:.8))return"";const x=pick(H);const it=wdItem(x.e);const how=clumsy&&clumsy.tr==="tham"?"bị mất":"bị làm vỡ";
+ if(!roll(clumsy?2.5:.8))return"";const x=pick(H);const it=wdItem(x.e);const how=clumsy&&netIs(clumsy,"greed")?"bị mất":"bị làm vỡ";
  if(p===S){pushDil(mkP("wdnt",{k:x.e.k,how,by:clumsy?clumsy.name:""}),"Đồ ngự tứ");return""}
  wdNtRemove(p,x.e);if(roll(55)){ap(p,{sung:-6});punish(p,"làm mất đồ ngự tứ, tội bất kính",1);try{newsAdd(p,"wd",`${wdNmC(p)} để ${it.n} ngự tứ ${how}, mang tội bất kính.`)}catch(e){}}return""}
 PEND.wdnt=pp=>{const it=WD_ITEMS[pp.k];if(!it)return null;const find=()=>wdNtHeld(S).find(x=>x.e.k===pp.k);
