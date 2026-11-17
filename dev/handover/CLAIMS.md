@@ -846,4 +846,4 @@
 | morechip-sil PASS 88955b8a (review/morechip-sil-r2: icon gaps + count fix + plaques) → builder batch s32a; worker + reviewer archived (35a849ff superseded) | review/morechip-sil-r2 | MAIN s33 | session_01UV1SzhfMi68Cmn88G2Yqze | PASS → BATCH | 17/11 15:44Z |
 | REVIEW loading-words r1 (sonnet) | review/loading-words-r1 | MAIN s33 | session_01UV1SziiprUA2hoyzGRK2SM | RUNNING | 17/11 15:45Z |
 | staff-root LIVE 7e0250ec (r1 + fix-1; main bbb3b4ca → 7e0250ec; rollback bbb3b4ca); worker + reviewer archived | review/staff-root-fix-1-r1 | B | session_01N1tNP6QsncpxxS2jeBjMi5 | LIVE | 17/11 15:52Z |
-| REVIEW pcard-facts-2 r1 of 7ec2aa9b (sonnet) | review/pcard-facts-2-r1 | MAIN s33 | (opening) | RUNNING | 17/11 15:55Z |
+| REVIEW pcard-facts-2 r1 of 7ec2aa9b (sonnet) | review/pcard-facts-2-r1 | MAIN s33 | session_01UV1SzhQ2iUk4UXLNwCnsgN | RUNNING | 17/11 15:51Z |
