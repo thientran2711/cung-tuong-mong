@@ -93,7 +93,7 @@ moodMonth=function(){const E=S.emp,T=trS();if(!T)return"";
  if(m<2&&Math.min(T.bien,T.kho)<25){m=2;t+=" Quốc khố, biên phòng đều nguy, ngài không vui nổi."}
  E.mood=m;if(t&&k!=="yen"&&k!=="hoi")tdNews(t.replace(/<[^>]+>/g,""));return t?`Tháng này: ${t} `:""};
 /* hard times: he comes to the harem less (the night simply passes for everyone) */
-(function(){const f0=flip;flip=function(){try{const T=S&&S.trieu;if(T&&tdOn()&&Math.min(T.bien,T.kho)<30&&roll(30)){S.tonight=null;return}}catch(e){}return f0.apply(this,arguments)}})();
+(function(){const f0=flip;flip=function(){try{const T=S&&S.trieu;if(T&&tdOn()&&!(typeof empOn==="function"&&empOn())/* AG2: the crisis makes him busy (empBusy → BAL.ag.emp.summon) */&&Math.min(T.bien,T.kho)<30&&roll(30)){S.tonight=null;return}}catch(e){}return f0.apply(this,arguments)}})();
 function tdCrisis(){const T=trS();return T&&Math.min(T.bien,T.kho)<30}
 
 /* ---------- seats: a minister who backs a consort adds weight; her own house through her father ---------- */
@@ -145,7 +145,7 @@ function tdMonth(){if(!tdOn())return"";const T=trS();let ev="";
  for(const p of consorts())if(p.cc&&S.turn-(p.ccT||0)>=4){p.cc--;p.ccT=S.turn}
  if(TD.npc)for(const v of liveRivals(true)){if(v.confined||S.dead)continue;const w=TD.npc*traitsOf(v).reduce((m,t)=>m*(TDAMB[t]||1),1);let r="";
   const tg=consorts().filter(t=>t!==v&&tdHouse(t)&&!sameHouse(v,t));
-  const leakT=tg.find(t=>deG(v,t)>=1);
+  const leakT=mindPickBy(tg.filter(t=>deG(v,t)>=1),t=>deG(v,t)+Math.max(0,hostility(v,t))/BAL.mind.pick.j55.host,v);/* npc-mind: was FIRST */
   if(leakT&&v.bac>=20&&roll(22*w))r=tdLeak(v,leakT);
   else if(v.bac>=60&&roll(3*w)){const H=CLANS.map(c=>T.H[c]).filter(h=>!tdBacks(h,v)&&h.c!==tdHouse(v));const h=H.sort((a,b)=>b.pow-a.pow)[R(Math.min(3,H.length))];if(h)r=tdGift(v,h)}
   else if(tg.length&&v.bac>=50&&roll(2*w)){const t=pickTarget(v);if(t&&tg.includes(t))r=tdProbe(v,t)}

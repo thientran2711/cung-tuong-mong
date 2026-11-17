@@ -1,7 +1,7 @@
 /* ================= jcycle: KỲ NGUYỆT SỰ · the monthly cycle + the Kính sự phòng cycle book (owner 15/11 ~20:25Z, review/cycle) =================
    1. EVERY WOMAN has her own cycle (her, every consort, the co-op friend entry): a pure function of her name (cyBase) + the month index
       (small monthly jitter), so old saves need nothing, and host / guest of a co-op room compute the same days for everyone.
-      TIME MODEL (as jmcal): a month = 3 tuần (1–10 thượng, 11–20 trung, 21–30 hạ); her cycle = 5–7 days inside ONE tuần (cyBase.t).
+      TIME MODEL (as jmcal): a month = 3 tuần (1–10 thượng, 11–20 trung, 21–30 hạ); her cycle = BAL.cyc.len days (rolled EACH MONTH per woman, cyLen) inside ONE tuần (cyBase.t).
       No cycle while truly pregnant (preg && !fake) or from age 50 (đã dứt kỳ).
    2. THE NIGHT FLIP: during her cycle tuần her card is out of the flip (nightCh → 0), however favoured; she cannot steal a night
       (Tranh sủng / Chặn ngự giá, NPC stealNight), the "Thắp đèn hầu rượu" option of the late visit and the ksp tablet card are locked
@@ -48,14 +48,22 @@ if(typeof BAL==="object")BAL.cyc={
  /* FERTILE WINDOW (owner 16/11 s9, D57 review/preg-rate, option 4 = 1+3): conception per night × by where the night falls in HER TRUE cycle
     (not what she reported): peak = the tuần after her cycle tuần (≈ 10–17 days after it starts), low = the tuần before it, cyc = her cycle
     tuần itself (a tryst / stolen night). No cycle (age ≥ 50, pregnant) → × 1. The base itself was doubled in BAL.conc (jbal.js). */
- fert:{peak:1.6,low:.5,cyc:.1}};
+ fert:{peak:1.6,low:.5,cyc:.1},
+ /* CYCLE LENGTH (owner 16/11 19:05Z OD:L1397, review/cycle-roll): EACH MONTH each woman rolls one of these day counts (player, NPCs,
+    co-op friend entry alike); seed = her name + the month index (S.turn: one value per year+month), so both co-op seats roll the same. */
+ len:[5,6,7]};
 const B=()=>(typeof BAL==="object"&&BAL.cyc)||{};
 const cl_=(x,a,b)=>Math.max(a,Math.min(b,x));
 function cyH(s){s=String(s==null?"":s);let h=2166136261>>>0;for(let i=0;i<s.length;i++){h^=s.charCodeAt(i);h=Math.imul(h,16777619)>>>0}return h>>>0}
 function cyName(p){return p===S?(S.name||"ta"):(p&&p.name)||""}
-function cyBase(p){const h=cyH("cyc|"+cyName(p));return{t:h%3,o:1+((h>>>3)%4),l:5+((h>>>7)%3)}}
-/* days (1..30) of month index mi (S.turn based) */
-function cyDaysM(p,mi){const b=cyBase(p);const j=(cyH("cyj|"+cyName(p)+"|"+mi)%3)-1;const o=cl_(b.o+j,1,11-b.l);const d0=b.t*10+o;const L=[];for(let i=0;i<b.l;i++)L.push(d0+i);return L}
+/* her fixed traits: t = her cycle tuần (0..2), o = her usual first day inside it. The LENGTH is NOT fixed per person: cyLen(p,mi). */
+function cyBase(p){const h=cyH("cyc|"+cyName(p));return{t:h%3,o:1+((h>>>3)%4)}}
+/* this month's length (review/cycle-roll, OD:L1397): rolled per (person, month index) from BAL.cyc.len — the ONE length function */
+function cyLen(p,mi){const L=Array.isArray(B().len)&&B().len.length?B().len:[5,6,7];return +L[cyH("cyl|"+cyName(p)+"|"+(mi|0))%L.length]||L[0]}
+/* days (1..30) of month index mi (S.turn based). The whole cycle sits inside ONE tuần of ONE month (first day clamped so the last day
+   stays in the tuần), so a cycle never crosses into the next month and never changes length mid-cycle. */
+const CY_TD=10; /* days per tuần (jmcal time model: 3 tuần × 10 days) */
+function cyDaysM(p,mi){const b=cyBase(p),l=cyLen(p,mi);const j=(cyH("cyj|"+cyName(p)+"|"+mi)%3)-1;const o=cl_(b.o+j,1,CY_TD+1-l);const d0=b.t*CY_TD+o;const L=[];for(let i=0;i<l;i++)L.push(d0+i);return L}
 function cyAge(p){return p===S?(S.age||18):(p&&p.age)||20}
 function cyPreg(p){return !!(p&&p.preg&&!p.fake)}
 function cyCur(){return S&&S.turn!=null?S.turn:0}
@@ -67,8 +75,15 @@ function cycleLate(p){try{p=p||S;if(!cyPreg(p)||cyAge(p)>=50||p.pregWk==null)ret
  for(let k=0;k<12;k++){const w=m0-3*k+t;if(w<=p.pregWk)break;if(w<=W)n++}return n}catch(e){return 0}}
 /* calendar: month m (1..12) → days in its next occurrence (or `ahead` months ahead) */
 function cycleDaysOf(p,m,ahead){try{p=p||S;if(!S)return[];let o=ahead!=null?+ahead:((+m-(S.month||1))%12+12)%12;if(!(o>=0))o=0;const mi=cyCur()+o;return cyHas(p,mi)?cyDaysM(p,mi):[]}catch(e){return[]}}
-/* the TRAY (Kính sự phòng's view): her card is off while in her cycle tuần, unless she reported falsely this tuần (báo sớm / giấu) */
-function cyTray(p){if(!cycOn(p))return false;const c=cybOf(p);if(c&&c.lie===wk())return false;return true}
+/* BY DAY with the 10-night ledger (owner OD 16/11 19:00Z "only the actual cycle days block"; review/night-ledger-r1): while jledger runs
+   (ldOn) the tuần's ONE played tối is a real day of the month (ldNow().days[p].d). Her cycle blocks that scene only when her cycle covers
+   THAT day; before the ledger is rolled (the day itself, the roll) nothing blocks the whole tuần — the ledger keeps every woman off her own
+   cycle days night by night (jledger cyDayOf). Without the ledger (co-op parked, BAL.nt.on false): the whole cycle tuần, as before. */
+function cyLdDay(){try{if(!(typeof ldOn==="function"&&ldOn()))return undefined;const L=typeof ldNow==="function"?ldNow():null;const e=L&&L.days&&L.days[L.p];return e?e.d:null}catch(e){return undefined}}
+function cyNow(p){if(!cycOn(p))return false;const d=cyLdDay();if(d===undefined)return true;return d!=null&&cyDaysM(p,cyCur()).includes(d)}
+/* the TRAY (Kính sự phòng's view): her card is off while in her cycle (the played day with the ledger, else her cycle tuần), unless she
+   reported falsely this tuần (báo sớm / giấu) */
+function cyTray(p){if(!cyNow(p))return false;const c=cybOf(p);if(c&&c.lie===wk())return false;return true}
 /* co-op (review/coop-b1b5-fix): the OTHER player's entry carries her own report too — her S.cyb, relayed at once by jcoopworld (ctm-p2
    "cyb", COOPW.fcyb) and in her blob after every merge — so the host's flip, nightCh, the book and the rivals read ONE fact (OD:L96):
    her "báo sớm / giấu" keeps her card on the host's tray, her "báo lùi" halves her next flip and makes the book read late, her
@@ -81,7 +96,7 @@ function cyRec(){const c=S&&S.cyb||{},o={};for(const k of CYK)if(c[k]!==undefine
 window.cyRec=cyRec;window.cyWk=()=>wk();
 /* lateness as the BOOK shows it: a pregnancy begun within luiCover tuần after a "báo lùi" reads one cycle later (foes, thái y) */
 function cyLateSeen(p){p=p||S;const n=cycleLate(p);return n&&cyCover(p)?Math.max(0,n-1):n}
-window.cyNoFriend=(f)=>cyNoFriend(f);window.cycleDaysOf=cycleDaysOf;window.cycleLate=cyLateSeen;window.cycleLateTrue=cycleLate;window.cyTray=cyTray;window.cycOn=cycOn;window.cyBase=cyBase;window.cyAge=cyAge;
+window.cyNoFriend=(f)=>cyNoFriend(f);window.cycleDaysOf=cycleDaysOf;window.cycleLate=cyLateSeen;window.cycleLateTrue=cycleLate;window.cyTray=cyTray;window.cycOn=cycOn;window.cyNow=cyNow;window.cyBase=cyBase;window.cyLen=cyLen;window.cyDaysM=cyDaysM;window.cyAge=cyAge;
 function cyb(){S.cyb=S.cyb||{};return S.cyb}
 const TU=["thượng tuần","trung tuần","hạ tuần"];
 function dName(L){if(!L.length)return"";const a=L[0],b=L[L.length-1];return `${a<=10?"mồng ":"ngày "}${a}\u2060–\u2060${b}`}
@@ -94,7 +109,7 @@ for(const k of ["steal","road"]){const A0=typeof ACT==="object"&&ACT[k];if(!A0)c
 if(typeof LACK==="object")for(const k of ["steal","road"]){const l0=LACK[k];LACK[k]=function(){if(cyTray(S))return RSN;return l0?l0.apply(this,arguments):""}}
 const ns0=nightScene;nightScene=function(){if(cyTray(S)){log(`${RSN}.`);if(S.tonight==="me")S.tonight=null;return}
  /* she lied to the book (báo sớm / giấu) and is called during her cycle: the Kính sự phòng mama checks before the sedan comes */
- try{if(cycOn(S)){const c=cyb(),R=B().rep||{};if(c.lie===wk()&&c.lck!==wk()){c.lck=wk();const po=cyLieO();
+ try{if(cyNow(S)){const c=cyb(),R=B().rep||{};if(c.lie===wk()&&c.lck!==wk()){c.lck=wk();const po=cyLieO();
    if(!roll(po)){const b=S.sung,d=S.danh;apply({sung:-R.lieSung,danh:-R.lieDanh});S.ksKnows=1;if(S.tonight==="me")S.tonight=null;
     const t=`Ma ma Kính sự phòng soát người trước khi lên kiệu, thấy ngươi đang kỳ nguyệt sự mà sổ ghi khác: tội khai man. Đêm nay mất, Sủng ${b} → ${S.sung}, Danh ${d} → ${S.danh}; Tổng quản biết chuyện của ngươi.`;
     log(t);try{Q.push({t:"Kính sự phòng",who:typeof pEunCourt==="function"?pEunCourt("ksp"):null,h:`<p>${t}</p>`})}catch(e){}return}
@@ -106,7 +121,8 @@ lockCyc("ksp",/^Tắm gội chờ giá/);lockCyc("empnight",/^Thắp đèn hầu
 const fl0=flip;flip=function(){const r=fl0.apply(this,arguments);try{if(!S||S.dead)return r;
   const d=S.nightWhy;if(d&&d.wk===wk()&&Array.isArray(d.rows))for(const row of d.rows){const p=row.id==="me"?S:(rivals||[]).find(v=>v.id===row.id);if(p&&cyTray(p)&&!(row.reasons||[]).some(x=>x.k==="cyc"))(row.reasons=row.reasons||[]).push({k:"cyc",t:"đang kỳ nguyệt sự",pub:p===S})}
   if(typeof isSrv==="function"&&isSrv())return r;const c=cyb();
-  if(cycOn(S)&&c.nt!==wk()){c.nt=wk();const k=c.rk===wk()?c.rv:"";log(k==="som"||k==="giau"?"Kỳ nguyệt sự đã đến, mà sổ Kính sự phòng ghi khác: thẻ bài của ngươi vẫn nằm trên khay.":"Kỳ nguyệt sự đã đến: tuần này Kính sự phòng tạm cất thẻ bài của ngươi.")}
+  if(cycOn(S)&&c.nt!==wk()){c.nt=wk();const k=c.rk===wk()?c.rv:"";const ld=cyLdDay()!==undefined;
+   log(k==="som"||k==="giau"?"Kỳ nguyệt sự đã đến, mà sổ Kính sự phòng ghi khác: thẻ bài của ngươi vẫn nằm trên khay.":ld?`Kỳ nguyệt sự đã đến (${dName(cyDaysM(S,cyCur()))}): những đêm ấy Kính sự phòng tạm cất thẻ bài của ngươi.`:"Kỳ nguyệt sự đã đến: tuần này Kính sự phòng tạm cất thẻ bài của ngươi.")}
   else if(cyPreg(S)&&S.pregUnk&&(S.tuan||0)===cyBase(S).t&&cycleLate(S)>=1&&c.lt!==wk()){c.lt=wk();log("Tuần này đáng lẽ tới kỳ nguyệt sự, mà chưa thấy.")}
  }catch(e){console.error(e)}return r};
 /* ---------- 7. FERTILE WINDOW (D57): conceiveCh × BAL.cyc.fert by her cycle phase this tuần; one notice when her peak tuần starts ---------- */
@@ -142,14 +158,16 @@ PEND.cyrep=()=>{if(!S||!S.maid||!cycOn(S))return null;const R=B().rep,c=cyb(),lo
  /* the option card is a palace-event card (kit hidden-outcome mode, KIT 28.6): Tốn row + one truthful HINT + risk chip; the hint names the
     odds word of the one rolled road and every risk in words; the full numbers come on the result card. (Full Được/Mất/Kèm rows overflow
     the kit option card in a scrolling dialog: KIT REQUEST in PROGRESS_cycle.md.) */
- const H=[["sổ ghi đúng, không ai bắt bẻ được; nhưng thẻ bài tạm cất tuần này","an toàn"], /* review r3: hints shortened to fit the kit option card at 755 (KIT REQUEST K11 aside); giấu now names the evidence risk too */
+ /* with the 10-night ledger the card is off only on her cycle days (review/night-ledger-r1, OD 19:00Z): the words say so (LUẬT SỬA CẢ NHÓM) */
+ const TN=cyLdDay()!==undefined?"những đêm kỳ nguyệt sự":"tuần này";
+ const H=[[`sổ ghi đúng, không ai bắt bẻ được; nhưng thẻ bài tạm cất ${TN}`,"an toàn"], /* review r3: hints shortened to fit the kit option card at 755 (KIT REQUEST K11 aside); giấu now names the evidence risk too */
   [`${word(lo).toLowerCase()}; có thai thì người ngoài muộn đoán ra; tổn Đức, tuần sau khó được lật thẻ; hỏng thì Tổng quản biết`,"có rủi ro"],
   [`thẻ bài vẫn trên khay; tổn Đức; bị ma ma soát ra (${chanceW(100-po)}) thì mất sủng; kẻ thù có thể nắm chứng cứ`,"có rủi ro"],
   [`thẻ bài vẫn trên khay; cả cung đồn có tin vui, không có thai thì mừng hụt; bị soát ra thì mất sủng; kẻ thù có thể nắm chứng cứ`,"liều"]];
  const O=[
-  mk("Báo đúng ngày",{wt:[G6("sổ ghi đúng")],k:["thẻ bài tạm cất tuần này"],wl:"Ma ma báo đúng ngày; Kính sự phòng tạm cất thẻ bài của ngươi tuần này."},"dung"),
+  mk("Báo đúng ngày",{wt:[G6("sổ ghi đúng")],k:[`thẻ bài tạm cất ${TN}`],wl:`Ma ma báo đúng ngày; Kính sự phòng tạm cất thẻ bài của ngươi ${TN}.`},"dung"),
   mk("Báo lùi vài hôm",{c:{duc:-R.luiDuc},p:lo,wt:[G6("nếu sắp có thai: ngày khớp đêm thị tẩm"),G6("người ngoài muộn một tháng mới đoán ra")],l:{danh:-B().backDanh},lt:[R6("Tổng quản biết chuyện của ngươi")],
-    k:["thẻ bài tạm cất tuần này và khó được lật tuần sau","thái y cũng muộn nhận ra tin vui"],ok:()=>{c.back=wk();return "Ma ma báo lùi vài hôm; sổ ghi kỳ của ngươi muộn hơn thật."},no:()=>{S.ksKnows=1;return "Tổng quản thấy ngày ma ma báo lệch với tháng trước; hắn biết chuyện của ngươi."}},"lui"),
+    k:[`thẻ bài tạm cất ${TN} và khó được lật tuần sau`,"thái y cũng muộn nhận ra tin vui"],ok:()=>{c.back=wk();return "Ma ma báo lùi vài hôm; sổ ghi kỳ của ngươi muộn hơn thật."},no:()=>{S.ksKnows=1;return "Tổng quản thấy ngày ma ma báo lệch với tháng trước; hắn biết chuyện của ngươi."}},"lui"),
   mk("Báo sớm, nói đã sạch kỳ",{c:{duc:-R.somDuc},wt:[G6("thẻ bài vẫn nằm trên khay")],k:[risk,evi],wl:"Ma ma báo kỳ của ngươi đã qua; thẻ bài vẫn nằm trên khay."},"som",lie("som")),
   mk("Giấu, không báo",{wt:[G6("thẻ bài vẫn nằm trên khay")],k:[`cả cung đồn có tin vui: phi tần ghen +${ghenN(R.giauGhen)}`,`cuối tháng chưa có thai thì mừng hụt: Sủng -${B().rumSung} Danh -${B().rumDanh}`,risk,evi],
     wl:"Ma ma không lên Kính sự phòng báo kỳ; trong cung bắt đầu xì xào ngươi có tin vui."},"giau",lie("giau"))];

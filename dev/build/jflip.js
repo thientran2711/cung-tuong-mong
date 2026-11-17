@@ -84,7 +84,7 @@ function kitEmpHand(hand,tel,opt){opt=opt||{};const H=CF.hand,SH=H.shadow,hi=han
 window.kitEmpHand=kitEmpHand;
 function byId(id){if(id==="me")return S;return (typeof rivals!=="undefined"?rivals:[]).find(v=>v&&v.id===id)||null}
 function rk(p){try{return p===S?S.rank:rkOf(p)}catch(e){return p&&p.rank||0}}
-function cycleOf(p){try{if(typeof inCycle==="function")return !!inCycle(p);if(typeof cycleDaysOf==="function"){const d=cycleDaysOf(p,S.month);return Array.isArray(d)&&d.includes(S.tuan)}}catch(e){}return false}
+function cycleOf(p){try{if(typeof cyTray==="function")return !!cyTray(p);if(typeof inCycle==="function")return !!inCycle(p);if(typeof cycleDaysOf==="function"){const d=cycleDaysOf(p,S.month);return Array.isArray(d)&&d.includes(S.tuan)}}catch(e){}return false}
 function known(p){try{return typeof kitKnownName==="function"?kitKnownName(p):true}catch(e){return true}}
 function rankName(p){const r=rk(p);return r>=7?"Hoàng hậu":(RANKS[Math.max(0,r)]||{}).n||""}
 function nameOf(p){return p===S?S.name:known(p)?p.name||"":"???"}
@@ -209,10 +209,12 @@ function kitCardFlip(o){o=o||{};const deck=o.deck||[];if(!deck.length)return;
 /* ---------- the result line (VANPHONG: thẻ bài, thị tẩm; names by HER knowledge) ---------- */
 function resHTML(o,d){const tp=o.turned?byId(o.turned):null,fp=o.pick?byId(o.pick):null;let txt="";try{const w=typeof nightWhy==="function"?nightWhy():null;txt=w&&w.text||""}catch(e){}
  const chip=(p,b,s)=>`<div class="kmres">${p?face(p):""}<div><b>${b}</b>${s?`<small>${s}</small>`:""}</div></div>`;
- if(!tp)return chip(null,"Đêm nay Hoàng thượng không lật thẻ bài nào.","");
+ /* r1 (review/npc-agent-ag2-r1): HIS reason (AG2 jagemp empWhyTxt: he rests / remembers her deed / breaks the lệ) in the same result line */
+ let ew="";try{ew=typeof empWhyTxt==="function"?esc(empWhyTxt(S.nightWhy)||""):""}catch(e){}const sp=x=>ew?`${x} ${ew}`:x;
+ if(!tp)return chip(null,"Đêm nay Hoàng thượng không lật thẻ bài nào.",ew);
  const tn=`${esc(rankName(tp))} ${esc(nameOf(tp))}`;
- if(o.pick==="me"&&o.turned==="me")return o.pending?chip(S,"Thẻ bài của ngươi được lật.","Hoàng thượng chọn ngươi hầu đêm nay."):chip(S,"Đêm nay ngươi được thị tẩm.","Thẻ bài của ngươi được lật.");   /* pending: the flip choice comes next (jnf), nothing is sealed yet */
- if(o.turned===o.pick)return chip(tp,`Tối nay: ${tn}`,"được chọn hầu đêm nay.");
+ if(o.pick==="me"&&o.turned==="me")return o.pending?chip(S,"Thẻ bài của ngươi được lật.",sp("Hoàng thượng chọn ngươi hầu đêm nay.")):chip(S,"Đêm nay ngươi được thị tẩm.",sp("Thẻ bài của ngươi được lật."));   /* pending: the flip choice comes next (jnf), nothing is sealed yet */
+ if(o.turned===o.pick)return chip(tp,`Tối nay: ${tn}`,sp("được chọn hầu đêm nay."));
  /* he turned one card, the night went elsewhere (custom: the Empress on mùng một / rằm; stolen on the way) */
  const why=d.cause==="custom"?esc(txt):"Giữa đường, Hoàng thượng bị mời sang cung khác.";
  const fin=fp?(fp===S?"Đêm nay ngươi được thị tẩm.":`Đêm nay: ${esc(rankName(fp))} ${esc(nameOf(fp))}`):"";

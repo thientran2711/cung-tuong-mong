@@ -5,13 +5,14 @@
    1. THE ROLL (ldRoll) at the commit, inside jnf realFlip → j8 flip (ldPin), host / single player only. Per day d = tuần×10 + 1..10:
       - BAL.nt.customDays (mùng một, rằm) → the Emperor goes to the Hoàng hậu (queenP) by custom; barred that day (her cycle day, pregnant,
         ill, confined: no night) → he only visits ("visit", no night). Her card is NEVER on the tray while the custom runs (OD 19:00Z).
-      - other days → the existing summons odds per night: BAL.nt.summon, BAL.nt.summonBusy when Chăm chính or the Emperor is ill (OD 18:10Z);
-        missed → "blank" (he sleeps alone). Who: a weighted draw over consorts() minus the Hoàng hậu, minus every woman whose cycle covers THAT
-        day (jcycle cycleDaysOf, by day; her own false report "báo sớm / giấu" keeps her card on the tray), weights = nightCh (the Emperor as an
-        agent, OD:L1386) — the same function as the tray. Each day is its own draw; the same woman may come up on several days.
-      - jcycle still takes a woman's card off the tray for her WHOLE cycle tuần (nightCh 0, the summons locked) — jcycle.js is not this
-        branch's file (review/cycle-roll owns it). So her weight for a NOT-cycle day of that tuần is nightCh read outside the cycle tuần
-        (wOf), and such a woman is never the PLAYED holder (jcycle would lock her scene): her nights of that tuần are all ledger notices.
+      - other days → the Emperor's own choice per night (AG2 jagemp, OD:L1386; review r1): empSummon() (BAL.ag.emp.summon [90, 65]; busy =
+        ill, Chăm chính sự or the court in crisis, OD 18:10Z) then empPick(C) (mindPick over nightCh × his memory). With the agent loop off
+        (BAL.ag.on 0): roll(BAL.ag.emp.summon[busy]) and a plain nightCh draw. Missed → "blank" (he sleeps alone). C = consorts() minus the
+        Hoàng hậu, minus every woman whose cycle covers THAT day (jcycle cycleDaysOf, by day; her own false report "báo sớm / giấu" keeps
+        her card on the tray). Each day is its own choice; the same woman may come up on several days.
+      - the cycle is BY DAY for the played tối too (review r1, OD 19:00Z / 19:05Z): while the ledger runs, jcycle's cyTray is "her cycle covers
+        the PLAYED day" (cyLdDay), so a woman in her cycle tuần plays her night on any other day of it. (wOf below stays as a guard for a
+        roll made while an older ledger of this tuần is still kept.)
    2. THE PLAYED TỐI (OD 18:40Z): her FIRST day if she has one (S.tonight = "me", the jflip scene shows HER card); else the first NPC day; else the
       Hoàng hậu's custom night; else nobody. The flip choice (jnf: Tranh sủng / Chặn ngự giá / Giữ chân) runs on that night only.
       Already decided before the roll (his own visit, her night already played, a skipped flip): that holder takes the played tối.
@@ -34,8 +35,8 @@ const W=()=>wk();
 const idOf=p=>p===S?"me":p&&p.id;
 const ent=w=>w==="me"?S:w==null?null:(typeof rivals!=="undefined"?rivals:[]).find(v=>v&&v.id===w)||null;
 const alive=p=>!!p&&(p===S?!S.dead:(p.alive&&!p.out));
-/* the custom (mùng một / rằm) is on while j75's custom is (FAIRN.custom; a test may switch it off) and there is a Hoàng hậu */
-function ldCustomOn(){try{return !!(queenP()&&(!window.FAIRN||!FAIRN.custom||FAIRN.custom.some(x=>x>0)))}catch(e){return false}}
+/* the custom (mùng một / rằm) is on while the Emperor's custom is (BAL.ag.emp.custom, jagemp; a test may switch it off) and there is a Hoàng hậu */
+function ldCustomOn(){try{const C=BAL.ag&&BAL.ag.emp&&BAL.ag.emp.custom;return !!(queenP()&&(!C||C.some(x=>x>0)))}catch(e){return false}}
 window.ldCustomOn=ldCustomOn;
 /* her cycle covers that day (jcycle, by day). Her false report hides those days from the book (her card stays on the tray). */
 function cyDayOf(p,day){try{if(typeof cycleDaysOf!=="function")return false;const L=cycleDaysOf(p,null,0)||[];if(!L.includes(day))return false;
@@ -47,20 +48,24 @@ function wOf(p){try{if(typeof cyTray==="function"&&cyTray(p)){const t=S.tuan,u=S
 function draw(C,w){const tot=w.reduce((a,b)=>a+b,0);if(!(tot>0))return null;let r=Math.random()*tot,i=0;while(r>w[i]&&i<w.length-1){r-=w[i];i++}return C[i]}
 /* ---------- 1. the roll ---------- */
 function ldRoll(fixed){const n=N(),w0=W(),base=(S.tuan||0)*10;const q=queenP(),cus=ldCustomOn();
+ const E=typeof empOn==="function"&&empOn(),SU=BAL.ag.emp.summon;
  const busy=(typeof has==="function"&&has("chamchinh"))||(typeof illOf==="function"&&S.emp&&!!illOf(S.emp));
  const C0=consorts().filter(p=>alive(p)&&!p.coop&&!(cus&&p===q));const W0=C0.map(wOf);
- const days=[];
+ const days=[],zs=[];const z=()=>zs.push(E&&S.empWhy?JSON.parse(JSON.stringify(S.empWhy)):null);
  for(let k=1;k<=(n.days||10);k++){const d=base+k;
-  if(cus&&(n.customDays||[]).includes(d)){const bar=cyDayOf(q,d)||!(wOf(q)>0)||(typeof illOf==="function"&&!!illOf(q));days.push({d,w:bar?null:idOf(q),y:bar?"visit":"custom"});continue}
-  if(!roll(busy?n.summonBusy:n.summon)){days.push({d,w:null,y:"blank"});continue}
+  if(cus&&(n.customDays||[]).includes(d)){const bar=cyDayOf(q,d)||!(wOf(q)>0)||(typeof illOf==="function"&&!!illOf(q));days.push({d,w:bar?null:idOf(q),y:bar?"visit":"custom"});zs.push(null);continue}
+  if(E&&S.empWhy)S.empWhy={wk:w0};
+  if(!(E?empSummon():roll(SU[busy?1:0]))){days.push({d,w:null,y:"blank"});z();continue}
   const C=[],w=[];C0.forEach((p,i)=>{if(W0[i]>0&&!cyDayOf(p,d)){C.push(p);w.push(W0[i])}});
-  const t=draw(C,w);days.push({d,w:t?idOf(t):null,y:t?"pick":"none"})}
+  const t=!C.length?null:E?empPick(C):draw(C,w);days.push({d,w:t?idOf(t):null,y:t?"pick":"none"});z()}
  let pi=-1;
  if(fixed!==undefined){const fk=fixed?idOf(fixed):null;
   pi=fk!=null?days.findIndex(e=>e.w===fk&&e.y!=="custom"):-1;if(pi<0)pi=days.findIndex(e=>e.y!=="custom"&&e.y!=="visit");if(pi<0)pi=0;
   days[pi]={d:days[pi].d,w:fk,y:"played"}}
- else{const ok=e=>{const p=ent(e.w);return p&&!(typeof cyTray==="function"&&cyTray(p))};
+ else{const ok=e=>{const p=ent(e.w);return !!p&&!cyDayOf(p,e.d)};
   pi=days.findIndex(e=>e.w==="me"&&ok(e));if(pi<0)pi=days.findIndex(e=>e.y==="pick"&&e.w!=="me"&&ok(e));if(pi<0)pi=days.findIndex(e=>e.y==="custom"&&ok(e))}
+ /* his reason for the PLAYED night (AG2 nightWhy: rests / remembers her deed) is that day's, not the last day's */
+ if(E){S.empWhy=(pi>=0&&zs[pi])||{wk:w0}}
  S.ledger={wk:w0,days,p:pi,st:0};return S.ledger}
 function cur(){const L=S&&S.ledger;return L&&L.wk===W()?L:null}
 /* j8 flip asks for the played tối's holder: undefined = no ledger here (live flip), null = nobody, else the person */
