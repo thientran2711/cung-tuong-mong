@@ -546,6 +546,7 @@ function kitEvArt(m){try{if(!m||typeof evArtOf!=="function")return null;let src=
   if(id&&(typeof evArtCat!=="function"||evArtCat(id))){src=evArtOf(id,salt);lab=typeof evArtTitle==="function"?evArtTitle(id):""}}
  if(!src&&(kitIsEventChoice(m)||m.kind==="news"||/Tin trong cung/.test(m.t||""))){try{src=typeof evArt==="function"?evArt():""}catch(e){src=""}}  /* no j89 default (Triều chính) as a stand-in: no room picture → no picture */return src?{src,lab:lab||""}:null}catch(e){return null}}
 (function(){const s0=showModal;showModal=function(){const m=Q[0];const r=s0.apply(this,arguments);try{const M=$("modal"),dlg=M&&M.querySelector(".dlg.kpanel");const body=M&&M.querySelector("#mb > .kpb");if(!m||!dlg||!body)return r;
+  if(m.placeK)return r;/* kit-size #8 (place:tgk/ttp/night MIXED): a place card already carries its ONE place picture (headArt → kitOnePic); an inherited evId (cat:hinh-phat…) must never add a 2nd event picture */
   const kind=dlg.dataset.kind||"";const want=kitIsEventChoice(m)||kind==="news"||m.art||m.stArt||m.evId||kitEvFitWant(m,kind);if(!want||body.querySelector(":scope > .kpsubj"))return r;
   const a=kitEvArt(Object.assign({kind},m));if(!a)return r;window.__kitLastEvArt=a;body.classList.add("kphas","kpinfo");body.insertAdjacentHTML("afterbegin",`<div class="kpsubj kpiart kpev">${kitSceneArt(a.src,a.lab,{shape:"tall"})}</div>`)}catch(e){console.error("kitEvArt",e)}return r}})();
 /* the result card right after an event choice shows the same picture, small, left of the rows */
@@ -767,8 +768,10 @@ window.kitItemBigSrc=kitItemBigSrc;
 function kitItem(o){o=o||{};const g=KIT_GRADE[Math.max(0,Math.min(4,o.grade|0))]||KIT_GRADE[0];const sz=o.size||"md";const slot=sz==="slot";const bigSz=(sz==="lg"||sz==="xl")&&!o.frame;
  const lab=o.label&&!slot?`<span class="kitl kitl-${o.label[1]||"n"}">${o.label[0]}</span>`:"";const tip=(o.tip||o.name||"").replace(/"/g,"&quot;");
  return `<span class="kitem kitem-${sz}${o.empty?" kitem-empty":" kig"+Math.max(0,Math.min(4,o.grade|0))}${o.on?" kitem-on":""}${o.sel?" kitem-sel":""}${(sz==="lg"||sz==="xl")&&o.frame?" kitem-fr":""}${(o.grade|0)===4&&!o.empty?" kitem-nt":""}" style="--ig:${g.g};--ic:${g.c}${g.r?";--ir:"+g.r:""}" ${o.data||""} title="${tip}"${slot&&!o.empty?` aria-label="${tip}"`:""}>`+
-  `<span class="kitb">${o.src&&!o.empty?(bigSz&&kitItemBigSrc(o.src)!==o.src?`<img src="${kitItemBigSrc(o.src)}" data-fb="${o.src}" alt="" onerror="if(this.dataset.fb&&this.src.indexOf('/item512/')>0){this.src=this.dataset.fb;this.removeAttribute('data-fb')}else this.remove()">`:`<img src="${o.src}" alt="" onerror="this.remove()">`):""}${o.empty&&o.ghost?`<img class="kigh" src="${o.ghost}" alt="" aria-hidden="true" onerror="this.remove()">`:""}${o.qty>1?`<b class="kitq">×${o.qty}</b>`:""}${(o.grade|0)===4&&!o.empty?`<i class="kits" aria-hidden="true">Ngự</i>`:""}${o.on?`<i class="kiton">${o.onText||"Đang mặc"}</i>`:""}${o.mark?`<i class="kitm kitm-${o.mark[1]||"n"}">${o.mark[0]}</i>`:""}${o.lux&&!o.empty?`<i class="kitx" title="Xa xỉ ${o.lux}">Xa xỉ ${o.lux}</i>`:""}</span>`+
-  (slot?"":`<span class="kitn">${o.name||""}</span>${o.empty?"":`<span class="kitg">${g.n}</span>`}${lab}`)+`</span>`}
+  `<span class="kitb">${o.src&&!o.empty?(bigSz&&kitItemBigSrc(o.src)!==o.src?`<img src="${kitItemBigSrc(o.src)}" data-fb="${o.src}" alt="" onerror="if(this.dataset.fb&&this.src.indexOf('/item512/')>0){this.src=this.dataset.fb;this.removeAttribute('data-fb')}else this.remove()">`:`<img src="${o.src}" alt="" onerror="this.remove()">`):""}${o.empty&&o.ghost?`<img class="kigh" src="${o.ghost}" alt="" aria-hidden="true" onerror="this.remove()">`:""}${o.qty>1?`<b class="kitq">×${o.qty}</b>`:""}${(o.grade|0)===4&&!o.empty?`<i class="kits" aria-hidden="true">Ngự</i>`:""}${o.on?`<i class="kiton">${o.onText||"Đang mặc"}</i>`:""}${o.mark?`<i class="kitm kitm-${o.mark[1]||"n"}">${o.mark[0]}</i>`:""}${o.lux&&!o.empty?`<i class="kitx" title="Xa xỉ ${o.lux}"><span class="kxw">Xa xỉ</span><b>${o.lux}</b></i>`:""}${o.empty||o.grade==null?"":kitItemGrade(g,o)}</span>`+
+  (slot?"":`<span class="kitn">${o.name||""}</span>${lab}`)+`</span>`}
+/* KIT §54.1b GRADE CHIP ON THE FRAME (owner 16/11 ~23:18Z s26, choice "1"): the grade (Phẩm) of EVERY kitItem — bag slot, wear slot, tile, lg, xl, pet, gift, shop, reveal — is the kitGradeChip(size "fr") centred ON the bottom edge of the picture frame; there is NO grade line under the picture any more. A picture that is not a graded item (a recipe, a plain picture) passes NO grade (grade null / undefined) = no chip; a real item of grade 0 keeps its "Thường" chip. o.gname = grade word override (pets: PET_TIER, works: WTIER). One place, no caller variant. */
+function kitItemGrade(g,o){const gi=Math.max(0,Math.min(4,o.grade|0));return typeof kitGradeChip==="function"?kitGradeChip(gi,{size:"fr",name:o.gname}):`<span class="kgchip kgchip-fr kgc${gi}" style="--gc:${g.c}">${o.gname||g.n}</span>`}
 (function(){const st=document.createElement("style");st.id="k2b-item-big";st.textContent=`
 /* the picture column of an item pop-up / notice (kitLose, gift, econ, veil, mark: .kpb.kphas > .kpsubj.kpitem) is the big-item width, not the 72-104 px portrait column; the compact bag slot card (.kitslot, 28.13f) keeps its 64 px header icon */
 html body #modal .dlg:not(.kitslot) .kpb.kphas:has(>.kpsubj.kpitem){grid-template-columns:min(150px,38%) minmax(0,1fr)}
@@ -804,7 +807,7 @@ document.addEventListener("click",ev=>{const t=ev.target.closest&&ev.target.clos
 .kitem.kitem-slot.kitem-empty>.kitb{background:linear-gradient(#efe5d2,#e9dcc5);border:1px solid #d6c29c;box-shadow:inset 0 2px 5px #5a3a2030,inset 0 -1px 0 #fff8}
 .kitem .kitm{position:absolute;right:2px;top:2px;font-style:normal;font-size:.58rem;line-height:1.3;border-radius:5px;padding:0 4px;background:#fffaf0e6;border:1px solid}
 .kitem .kitm-r{color:#c23b22;border-color:#c23b2266}.kitem .kitm-g{color:#2d7a52;border-color:#2d7a5266}.kitem .kitm-n{color:#8a7350;border-color:#d2b07188}
-.kitem>.kitb{position:relative;width:var(--isz);aspect-ratio:1;border-radius:8px;background:radial-gradient(circle at 50% 40%,#fff 0,var(--ig) 70%);border:2px solid var(--ic);box-shadow:inset 0 0 0 2px #fff8,0 1px 3px #5a3a2033;display:grid;place-items:center;overflow:hidden}
+.kitem>.kitb{position:relative;width:var(--isz);aspect-ratio:1;border-radius:8px;background:radial-gradient(circle at 50% 40%,#fff 0,var(--ig) 70%);border:2px solid var(--ic);box-shadow:inset 0 0 0 2px #fff8,0 1px 3px #5a3a2033;display:grid;place-items:center;overflow:visible}
 .kitem.kitem-nt>.kitb{border-color:var(--ic);box-shadow:inset 0 0 0 2px var(--ir),inset 0 0 0 4px #fff6,0 0 8px #f0d070aa}
 .kitem>.kitb>img{width:86%;height:86%;object-fit:contain;filter:drop-shadow(0 1px 2px #0003)}
 .kitem.kitem-empty>.kitb{background:repeating-linear-gradient(45deg,#f6efe4 0 6px,#efe6d7 6px 12px);border-style:dashed;border-color:#c8b89c}
@@ -816,7 +819,6 @@ document.addEventListener("click",ev=>{const t=ev.target.closest&&ev.target.clos
 .kitem.kitem-sel>.kitb,.kitem.kitem-slot.kitem-sel>.kitb{box-shadow:0 0 0 3px var(--gold,#c9a46a),0 4px 10px #5a3a2040;transform:translateY(-2px)}
 .kitem>.kitn{font-size:.7rem;line-height:1.15;color:var(--ink);font-weight:600;overflow-wrap:anywhere}
 .kitem-lg>.kitn{font-size:.78rem}.kitem-sm>.kitn{font-size:.62rem}
-.kitem>.kitg{font-size:.6rem;color:var(--ic);font-weight:700;text-transform:uppercase;letter-spacing:.02em}
 .kitl{font-size:.62rem;border-radius:6px;padding:0 5px;border:1px solid}.kitl-ok{color:#2d7a52;border-color:#2d7a5266;background:#eaf5ee}.kitl-no{color:#c23b22;border-color:#c23b2266;background:#fbecea}.kitl-n{color:#8a7350;border-color:#d2b07188;background:#fbf4e6}
 .kwear{display:flex;gap:6px;justify-content:center;align-items:flex-start;flex-wrap:wrap;margin:2px 0 4px}
 .pc .pcl>.kwear{float:left;clear:left;width:var(--kpcw);margin:0 12px 6px 0}
@@ -841,17 +843,22 @@ document.addEventListener("click",ev=>{const t=ev.target.closest&&ev.target.clos
 .kitem[class*=" kig"]>.kitb>img{width:76%;height:76%;position:relative;z-index:0}
 .kitem[class*=" kig"]>.kitb>.kitq,.kitem[class*=" kig"]>.kitb>.kits,.kitem[class*=" kig"]>.kitb>.kiton,.kitem[class*=" kig"]>.kitb>.kitm{z-index:2}
 .kitem[class*=" kig"].kitem-nt>.kitb{box-shadow:0 0 8px #f0d070aa}
-.kitem[class*=" kig"]>.kitb .kitq{right:9%;bottom:8%}.kitem[class*=" kig"]>.kitb .kits{left:9%;top:8%}.kitem[class*=" kig"]>.kitb .kitm{right:8%;top:7%}
-.kitem[class*=" kig"]>.kitb .kiton{left:7%;right:7%;bottom:6%;border-radius:3px}
+/* corner plan (KIT §54.1b): grade chip = bottom edge centre (straddles it) · Xa xỉ box = top-right · Ngự seal = top-left · "đã tẩm" tag = top-right, or left under the seal row when the Xa xỉ box is there · qty = bottom-right, lifted above the chip · worn band = above the chip */
+.kitem[class*=" kig"]>.kitb .kitq{right:9%;bottom:calc(max(6cqw,5px) + 3%)}.kitem[class*=" kig"]>.kitb .kits{left:9%;top:8%}.kitem[class*=" kig"]>.kitb .kitm{right:8%;top:7%}
+.kitem[class*=" kig"]>.kitb .kiton{left:7%;right:7%;bottom:calc(max(6cqw,5px) + 2%);border-radius:3px}
 .kitem.kitem-on[class*=" kig"]>.kitb{outline:2px solid #2d7a52;outline-offset:1px}
-.kitem .kitx{position:absolute;right:7%;top:7%;z-index:2;font-style:normal;font-size:.56rem;line-height:1.3;white-space:nowrap;padding:0 4px;border-radius:0 6px 0 6px;background:#4a2c1ee0;color:#ffe9b0;font-weight:700;letter-spacing:.01em}
-.kitem-lg .kitx,.kpsubj .kitx{font-size:.72rem;padding:1px 6px}
+/* XA XỈ BOX = ONE MASTER (owner 16/11 17:20Z, KIT §84 (5)): the box is the XL master (frame 150 px: box 34x34 at 4 px from top/right, word 10 px, number 13 px) written in CONTAINER UNITS of the frame (.kitb is the container), so at EVERY size and in EVERY place (bag slot, tile, lg, xl, tap panel, kszItem3) it keeps exactly the same place and size relative to the frame; only its content changes: word + number from a 100 px frame, number only below (min 14 px box / 8 px digits so a 54 px bag slot stays legible) */
+.kitem>.kitb{container-type:inline-size}
+.kitem .kitx{position:absolute;top:2.667cqw;right:2.667cqw;left:auto;bottom:auto;z-index:2;box-sizing:border-box;width:max(22.667cqw,14px);height:max(22.667cqw,14px);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.667cqw;padding:.667cqw;
+ white-space:nowrap;text-align:center;line-height:1;font-style:normal;font-weight:700;font-size:max(6.667cqw,5px);border-radius:2.667cqw;background:#4a2c1ee0;color:#ffe9b0}
+.kitem .kitx>b{font-size:max(8.667cqw,8px)}
+@container (max-width:99px){.kitem .kitx>.kxw{display:none}.kitem .kitx>b{font-size:max(12.667cqw,8px)}}
 /* page-scale-r1: the wear column (kitEquipSlots col:true, 40-72 px slots: Tư trang, Chọn y phục, pet box) never shows the Xa xỉ tag: wider than a 40 px slot it was cut ("a xỉ 33") and hid the picture; the same items show it in the bag and the tap panel, the total stays on the sum line */
 .keq.keqv .kitem .kitx{display:none}
-/* corner plan when the luxury tab sits top-right: seal "Ngự" and the "đã tẩm" tag go bottom-left (above the worn band) */
-.kitem[class*=" kig"]:has(.kitx)>.kitb .kits{top:auto;bottom:8%;left:7%}.kitem[class*=" kig"]:has(.kitx)>.kitb .kitm{top:auto;right:auto;bottom:8%;left:7%}
-.kitem[class*=" kig"]:has(.kitx)>.kitb .kits~.kitm{bottom:30%}
-.kitem.kitem-on[class*=" kig"]:has(.kitx)>.kitb .kits,.kitem.kitem-on[class*=" kig"]:has(.kitx)>.kitb .kitm{bottom:26%}
+/* the Xa xỉ box sits top-right, so the "đã tẩm" tag moves to the top-left (under the seal "Ngự" when both are there) */
+.kitem[class*=" kig"]:has(.kitx)>.kitb .kitm{right:auto;left:9%;top:max(31cqw,19px)}
+/* room for the half of the grade chip that hangs below the frame (named tiles; a bag slot has no name line and relies on its grid gap) */
+.kitem:not(.kitem-slot)>.kitb:has(>.kgchip-fr){margin-bottom:calc(max(var(--isz)*.06,5px) + 3px)}
 `;const st=document.createElement("style");st.id="k2b-itemgrade";st.textContent=c;document.head.appendChild(st)})();
 
 /* ---------- 16. STAGE LAYOUT OWNER = j59 (main): after merging main, j59 lays out the stage (one height for every adult by the visible body,

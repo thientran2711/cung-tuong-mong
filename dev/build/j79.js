@@ -48,7 +48,7 @@ function kitChips(list){return `<span class="kchips">${(list||[]).map(x=>Array.i
 /* ---------- rows: the act-card label grid (same .kb as j63) ---------- */
 /* kitRows([[label, value(html|array of chips/values), cls]]) cls: g|r|n|t (value colour), "need" for a Cần row of chips */
 function kitRows(rows){return `<span class="kb kpkb">`+(rows||[]).filter(r=>r&&r[1]!=null&&r[1]!==""&&!(Array.isArray(r[1])&&!r[1].length)).map(([l,v,c])=>{const vals=Array.isArray(v)?v:[v];
- return `<span class="kr"><span class="krl">${l}</span><span class="krv">${vals.map(x=>/^\s*<span class="(kchip|ef|kname)/.test(x)||/^\s*<b class="kname/.test(x)?x:`<span class="ef ${c||"n"}">${x}</span>`).join('<span class="ksep">·</span>')}</span></span>`}).join("")+`</span>`}
+ return `<span class="kr"><span class="krl">${l}</span><span class="krv">${vals.map(x=>/^\s*<span class="(kchip|ef|kname)/.test(x)||/^\s*<b class="kname/.test(x)?x:`<span class="ef ${c||"n"}">${x}</span>`).join(vals.every(x=>/^\s*<span class="kchip/.test(x))?'':'<span class="ksep">·</span>')/* chips carry their own border: no "·" between them (a wrapped line never starts with a stray "·", owner kit review 15:00Z) */}</span></span>`}).join("")+`</span>`}
 /* KIT §51 kitRowsJoin(kitRows(a), kitRows(b), …) -> ONE table: kit tables written one after another (price rows + the item's rows)
    are merged into a single grid, so their values line up too. Pass only kitRows / kitItemRows output (or ""). */
 function kitRowsJoin(){return [...arguments].filter(Boolean).join("").replace(/(<\/span><\/span>)<\/span>\s*<span class="kb kpkb">/g,"$1")}
@@ -495,11 +495,21 @@ KP_SEAL.week="TUẦN";
 KP_SEAL.game="TÀI NGHỆ";
 /* kitGameFrame({art:"Cầm", title:"Tấu khúc", how:"Chạm đúng dây khi nốt chạm vạch đỏ.", hud:[["score","Điểm",0],["time","Thời gian","30 giây"]], id:"kgbox"})
    -> HTML of the frame; the game draws into #<id> (.kgbox). Update a HUD cell with kitGameSet("score", 12). */
-function kitGameFrame(g){g=g||{};return `<div class="kgame">${kpHeader("game",`${g.art?g.art+": ":""}${g.title||""}`,"")}`+
- `<div class="kgbody${g.pic?" kgpic-on":""}">`+(g.pic?`<div class="kgpic"><img src="${g.pic}" alt="" draggable="false" onerror="this.parentNode.parentNode.classList.remove('kgpic-on');this.parentNode.remove()"></div>`:"")+`<div class="kginfo">`+
+function kitGameFrame(g){g=g||{};const fg=g.fig?kitGameFig(g):"";return `<div class="kgame">${kpHeader("game",`${g.art?g.art+": ":""}${g.title||""}`,"")}`+
+ `<div class="kgbody${fg?" kgfig-on":g.pic?" kgpic-on":""}">`+(fg||(g.pic?`<div class="kgpic"><img src="${g.pic}" alt="" draggable="false" onerror="this.parentNode.parentNode.classList.remove('kgpic-on');this.parentNode.remove()"></div>`:""))+`<div class="kginfo">`+
  (g.how?`<div class="kghow"><span class="krl">Cách chơi</span><span>${g.how}</span></div>`:"")+
  (g.hud&&g.hud.length?`<div class="kghud">${g.hud.map(([k,l,v])=>`<span class="kgc"><small>${l}</small><b data-kg="${k}">${v==null?"":v}</b></span>`).join("")}</div>`:"")+
  `<div class="kgbox" id="${g.id||"kgbox"}"></div><div class="kgres" id="${(g.id||"kgbox")}-res" hidden></div></div></div></div>`}
+/* KIT §N.1 kitGameFig (owner 16/11 ~21:30Z, mini-game layout): the LEFT column of every tài nghệ frame on a wide screen (html.kv2) = HER full figure in the
+   outfit she wears NOW (kitStageFig: kit figure at the KIT_FIG ratio + the face layers, so makeup / scar / veil show live), the game's prop picture small in the
+   corner (never a second big picture), a play animation while the game runs (.kg-idle off). html.kv1 (Fold portrait / one page): NO column, the game alone at full width.
+   g.fig = true (her) | a person; g.pic = the prop picture. kitGameFigRefresh(p) redraws the figure in place after an outfit / makeup change. */
+function kitGameFig(g){g=g||{};try{const p=g.fig&&g.fig!==true?g.fig:(typeof S!=="undefined"?S:null);if(!p||typeof kitStageFig!=="function")return"";const f=kitStageFig(p,{cap:false});if(!f)return"";
+ const an=typeof OPT!=="undefined"&&OPT.fxon&&!(typeof RM!=="undefined"&&RM);
+ return `<div class="kgfig${an?" kgf-anim":""}" data-kgf="${p===S?"me":"other"}">${f}${g.prop&&g.pic?`<img class="kgprop" src="${g.pic}" alt="" draggable="false" onerror="this.remove()">`:""}</div>`}catch(e){return""}}
+function kitGameFigRefresh(p){try{const c=document.querySelector(".kgame .kgfig");if(!c||typeof kitStageFig!=="function")return;p=p||(c.dataset.kgf==="me"?S:null)||S;const f=kitStageFig(p,{cap:false});if(!f)return;
+ const t=document.createElement("div");t.innerHTML=f;const n=t.firstElementChild,o=c.querySelector(".kesf");if(!n)return;if(o)o.replaceWith(n);else c.prepend(n)}catch(e){}}
+window.kitGameFig=kitGameFig;window.kitGameFigRefresh=kitGameFigRefresh;
 function kitGameSet(k,v){document.querySelectorAll(`[data-kg="${k}"]`).forEach(e=>e.innerHTML=v)}
 /* kitGameResult({raw, talent, prep, total, place:"Nhất", of:4, rivals:[{who:person, score}], gains:[["Sủng",3]], losses:[["Sức",-10]], note})
    -> result block: score rows (true numbers), standings with face + rank title, Được / Mất chips. */
@@ -511,6 +521,21 @@ function kitGameResult(r){r=r||{};const rows=[];
  return `<div class="kgr">${kitRows(rows)}`+(st.length?`<h4 class="kpst">Bảng định thứ</h4><div class="kfacts kgrv">${st.map((x,i)=>`<div class="kfact${x.who===S?" kfme":""}">${kitFaceH(x.who,"sm")}<span class="kft kgrow"><span><b class="kgpl">${i+1}.</b> ${kitName(x.who,{cap:true})}${x.sub?`<small class="kfwhy">${x.sub}</small>`:""}</span><b>${x.score}</b></span></div>`).join("")}</div>`:"")+
  ((r.gains||[]).length||(r.losses||[]).length?`<h4 class="kpst">Kết quả</h4>`+kitRows([["Được",(r.gains||[]).map(x=>kitChip(x[0],x[1],"g"))],["Mất",(r.losses||[]).map(x=>kitChip(x[0],x[1],"r"))]]):"")+
  (r.extra||"")+(r.note?`<div class="kpnote">${r.note}</div>`:"")+`</div>`}
+(function(){const st=document.createElement("style");st.id="kgfig-css";st.textContent=`
+.kgame .kgbody.kgfig-on{display:grid;grid-template-columns:minmax(150px,30%) minmax(0,1fr);grid-template-rows:minmax(0,1fr);gap:0;overflow:hidden}
+.kgfig{position:relative;margin:10px 0 10px 14px;min-height:240px;border:1px solid var(--line);border-radius:var(--k-rad);overflow:hidden;background:linear-gradient(#f8efdc,#ecdcbc);box-shadow:0 0 0 2px #fffaf0 inset}
+.kgfig>.kesf{position:absolute;inset:8px 6px 0;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;min-width:0;flex:none}
+.kgfig .kesfi{position:relative;display:flex;height:calc(100%*var(--kfr,1));max-width:100%;justify-content:center}
+.kgfig .kesfi>.kesimg{display:block;height:100%;width:auto;max-width:100%;max-height:none;object-fit:contain;object-position:50% 100%}
+.kgfig .kesfi>.kesfx{position:absolute;inset:0;pointer-events:none}
+.kgprop{position:absolute;right:6px;bottom:6px;width:32%;max-width:92px;aspect-ratio:1;object-fit:cover;border-radius:8px;border:1px solid var(--line);box-shadow:0 0 0 2px #fffaf0 inset,0 2px 6px #3a20104d;background:#f1e6d2}
+.kgf-anim .kesfi{transform-origin:50% 100%}
+.kgame:not(.kg-idle) .kgf-anim .kesfi{animation:kgfBreath 3.2s ease-in-out infinite}
+.kgame:not(.kg-idle) .kgf-anim .kgprop{animation:kgfProp 1.6s ease-in-out infinite}
+@keyframes kgfBreath{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-1.2%) rotate(.5deg)}}
+@keyframes kgfProp{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}
+/* kv3:.kv1 */:where(.kv1) .kgame .kgbody.kgfig-on{display:block;overflow:visible}:where(.kv1) .kgfig{display:none}
+`;document.head.appendChild(st)})();
 /* the lesson overlay (#ov .mg) wears the same frame */
 (function(){if(typeof openMG!=="function")return;const o0=openMG;openMG=function(k,lv,cb){const r=o0.apply(this,arguments);try{const mg=document.querySelector("#ov .mg");mg.classList.add("kpanel","kgame");
   let h=mg.querySelector(":scope > .kph");if(h)h.remove();const t=$("mgt").textContent;const [art,ti]=t.split(":");mg.insertAdjacentHTML("afterbegin",kpHeader("game",t,""));$("mgt").hidden=true;
@@ -1069,7 +1094,7 @@ function kitPickerLayout(root,keepPage){try{const g=root.querySelector(".kpkgrid
    decoded in idle time, so a page turn is one class toggle on already-decoded thumbnails (small WebP, kitTn). */
 function kitPickerShow(root,pg){const c=root.__kpc;if(!c)return;const {per,pages,B}=c;pg=Math.min(Math.max(0,pg),pages-1);root.dataset.pg=pg;
  B.forEach((b,i)=>{const on=i>=pg*per&&i<(pg+1)*per;if(b.hidden===on)b.hidden=!on});
- const [pv,nx]=root.querySelectorAll(".kpkpg");pv.disabled=pg<=0;nx.disabled=pg>=pages-1;pv.hidden=nx.hidden=pages<2;root.querySelector(".kpkpn").textContent=pages>1?`trang ${pg+1}/${pages} · ${B.length} dung mạo`:"";
+ const [pv,nx]=root.querySelectorAll(".kpkpg");pv.disabled=pg<=0;nx.disabled=pg>=pages-1;pv.hidden=nx.hidden=pages<2;root.querySelector(".kpkpn").textContent=pages>1?`trang ${pg+1}/${pages}`:"";
  const idle=window.requestIdleCallback||(f=>setTimeout(f,60));idle(()=>{[pg+1,pg-1].forEach(q=>kitPickerDecode(root,q))});try{const o=KIT_PICK[root.dataset.pick];o&&o.onPage&&o.onPage(kitPickerPage(root,pg))}catch(e){}}
 function kitPickerPage(root,pg){const c=root.__kpc;if(!c||pg<0||pg>=c.pages)return[];return c.B.slice(pg*c.per,(pg+1)*c.per)}
 function kitPickerDecode(root,pg){return Promise.all(kitPickerPage(root,pg).flatMap(b=>[...b.querySelectorAll("img")]).map(im=>im.decode?im.decode().catch(()=>0):0))}
