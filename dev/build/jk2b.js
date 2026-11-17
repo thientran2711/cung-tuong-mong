@@ -206,7 +206,7 @@ const KIT_COSTRE=/khắc|\bSức\b|\bBạc\b|\bbạc\b/i;
      2 sharp — names (the rival by name) and the reading of the moment the data carries ("ngài trọng tài, rất hợp").
    Risk: none / sure → "an toàn"; Khó / Liều or a deadly failure / side risk → "liều"; any other odds, "Khó lường" or a side risk → "có rủi ro".
    An option may carry its own `hint` (string or fn(lv)) and `risk`; hints may never lie (an override must match the data). */
-const KIT_HINT_LADDER=/(Liều|Khó lường|Khó|Năm ăn năm thua|Khá chắc|Rất chắc|Nắm chắc|Chắc chắn|Chắc)/;
+const KIT_HINT_LADDER=/(Liều|Khó lường|Khó|Năm ăn năm thua|Khá chắc|Rất chắc|Nắm chắc|Chắc)/;
 function kitHintLevel(){try{const t=S.tamco||0,m=S.mat||0;const B=typeof BAL==="object"?BAL:{};if(t>=(B.hintSharp)||m>=(B.hintMat))return 2;if(t>=(B.hintMid))return 1}catch(e){}return 0}
 /* a count inside a story phrase in words (1..999): "20 trượng" → "hai mươi trượng" */
 function kitNumVi(n){const D=["không","một","hai","ba","bốn","năm","sáu","bảy","tám","chín"];n=Math.round(+n);if(!(n>=0&&n<1000))return String(n);
@@ -217,7 +217,7 @@ function kitOptModel(o){let raw="";try{raw=o&&o.j67?String(o.j67):typeof dilLine
  raw=raw.replace(/(nàng |hắn )?thù -(\d+)/g,(m,p,n)=>`${p||""}oán ta +${n}`);
  const M={odds:"",items:[],notes:[]};let lab="";
  for(const s0 of raw.split(/ · (?![^<]*>)/)){const s=kaPlain(s0);if(!s)continue;
-  const od=s.match(/^(Chắc chắn|Nắm chắc|Rất chắc|Khá chắc|Năm ăn năm thua|Chắc|Khó lường|Khó|Liều)$/);if(od&&!M.odds){M.odds=od[1];continue}
+  const od=s.match(/^(Nắm chắc|Rất chắc|Khá chắc|Năm ăn năm thua|Chắc|Khó lường|Khó|Liều)$/);if(od&&!M.odds){M.odds=od[1];continue}
   if(/^Quẻ: /.test(s))continue;
   const ml=s.match(/^(được ngay|ngay|tốn|thành|thắng|được|hỏng|mất|kèm)\s*:\s*/i);let body=s,cont=true;
   if(ml){lab=ml[1].toLowerCase();if(lab==="thắng"||lab==="được")lab="thành";if(lab==="mất")lab="hỏng";if(lab==="được ngay")lab="ngay";body=s.slice(ml[0].length);cont=false}
@@ -276,12 +276,12 @@ const KIT_HINT_MAG=[[/Thái hậu|Hoàng hậu|thiện cảm|thân\b|quý|tình 
 function kitHintMag(p){const n=(String(p).match(/[+−-]\s?(\d+)/)||[])[1];if(!n)return"";const v=+n;for(const [re,big] of KIT_HINT_MAG)if(re.test(p))return v>=big*1.5?" (nhiều)":v<=Math.max(1,Math.floor(big/4))?" (chút ít)":"";return""}
 function kitHint(o,m,lv){if(lv==null)lv=kitHintLevel();if(!o)return{hint:"",risk:"an toàn"};
  if(o.hint){const h=typeof o.hint==="function"?o.hint(lv):String(o.hint);return{hint:h,risk:o.risk||"có rủi ro"}}
- const M=kitOptModel(o);const od=M.odds&&M.odds!=="Chắc chắn"?M.odds:"";const uniq=a=>[...new Set(a.filter(Boolean))];
+ const M=kitOptModel(o);const od=M.odds||"";const uniq=a=>[...new Set(a.filter(Boolean))];
  const sure=[],win=[],fail=[],side=[];let deadly=false,sideRisk=false;
  for(const it of M.items){const sg=kitHintSign(it.p,it.l);if(!sg)continue;const ph=kitHintPhrase(it.p,sg,lv===2?kitHintWho(it.p,m):"",lv);if(!ph)continue;const w=ph[lv]+(lv>=1&&!KIT_DEADLY.test(it.p)?kitHintMag(it.p):"");
   const isFail=it.l==="hỏng";if(KIT_DEADLY.test(it.p)&&(isFail||it.l==="kèm"||sg<0))deadly=true;
   if(it.l==="kèm"){side.push([w,sg]);if(sg<0&&/(khả năng|có thể|nếu|dễ |có khi|bị lộ|phát giác)/i.test(it.p))sideRisk=true;continue}
-  if(isFail&&M.odds==="Chắc chắn"){if(sg<0)sure.push([w,sg]);continue}/* a CERTAIN option cannot fail: its "Mất:" is a sure price ("nhưng …"), never "hỏng thì …" (review pets-fix r6) */
+  if(isFail&&!M.odds){if(sg<0)sure.push([w,sg]);continue}/* a CERTAIN option cannot fail: its "Mất:" is a sure price ("nhưng …"), never "hỏng thì …" (review pets-fix r6) */
   if(isFail){if(sg<0)fail.push(w);continue}
   if(/(nếu bị|bị lục|tang vật|lộ là|có thể bị|phát giác)/i.test(it.p))sideRisk=true;
   (od?win:sure).push([w,sg])}

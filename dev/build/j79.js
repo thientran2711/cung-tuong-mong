@@ -177,7 +177,7 @@ function kitEvidence(e){return `<div class="kcardp kev"><div class="kcph">${e.ag
 function kitThreat(t){return `<div class="kcardp kth"><div class="kcph">${t.who?kitFaceH(t.who,"sm"):`<span class="kfdot"></span>`}<span class="kcpt"><b>${t.who?kitName(t.who,{cap:true}):"Kẻ chưa rõ mặt"}</b><small>${t.how}</small></span>${t.sure?kitOdds(t.sure,{label:"Tin này"}):""}</div>`+
  kitRows([["Khi nào",t.when,"t"]])+(t.defs&&t.defs.length?`<h4 class="kpst">Cách đỡ</h4><div class="kpacts">${t.defs.map(kitActMini).join("")}</div>`:"")+`</div>`}
 /* a priced option through the ONE act-card frame (j63 kitParse + kaNorm) */
-function kitActMini(a){const line=[a.odds||"Chắc chắn",a.ton&&`tốn: ${a.ton}`,a.duoc&&`thành: ${a.duoc}`,a.mat&&`hỏng: ${a.mat}`,a.kem&&`kèm: ${a.kem}`].filter(Boolean).join(" · ");
+function kitActMini(a){const line=[a.odds||"",a.ton&&`tốn: ${a.ton}`,a.duoc&&`thành: ${a.duoc}`,a.mat&&`hỏng: ${a.mat}`,a.kem&&`kèm: ${a.kem}`].filter(Boolean).join(" · ");
  return `<button class="opt kmini"${a.attrs?" "+a.attrs:""}${a.dis?" disabled":""}>${a.n}<small>${kitParse(line)}</small></button>`}
 
 /* ---------- odds meter: 7 steps, red → amber → green, word beside, tap = whole ladder ---------- */
@@ -189,7 +189,7 @@ function kitOdds(w,o){o=o||{};const lv=kitOddsLv(w);const word=lv<0?(o.none||"Kh
  return `<span class="kodm" data-kodds="${lv}" role="button" tabindex="0" title="${o.label?o.label+": ":""}${word}${lv>=0?` — bậc ${lv+1}/7`:""}" style="--oc:${lv<0?"#9a8f80":KIT_ODDS_COL[lv]}"><span class="kseg">${KIT_ODDS.map((x,i)=>`<i${i<=lv?` style="background:${KIT_ODDS_COL[i]}"`:""}></i>`).join("")}</span><b>${word}</b></span>`}
 function kitOddsLadder(lv){return `<div class="kpopt">Thang cơ hội · 7 bậc</div>`+KIT_ODDS.map((x,i)=>`<div class="kpopr${i===lv?" on":""}"><span class="kseg">${KIT_ODDS.map((y,j)=>`<i${j<=i?` style="background:${KIT_ODDS_COL[j]}"`:""}></i>`).join("")}</span><b style="color:${KIT_ODDS_COL[i]}">${x}</b><small>${KIT_ODDS_TXT[i]}</small></div>`).reverse().join("")}
 /* the existing odds chip (j19 oddsChip) now draws the meter, keeping .oc for old selectors */
-(function(){if(typeof oddsChip!=="function")return;const o0=oddsChip;oddsChip=function(w){const s=String(w==null?"":w);if(/^Chắc chắn\b/.test(s))return"";const k=KIT_ODDS.find(x=>s===x||s.startsWith(x+" "))||KIT_ODDS.slice().sort((a,b)=>b.length-a.length).find(x=>s.includes(x));
+(function(){if(typeof oddsChip!=="function")return;const o0=oddsChip;oddsChip=function(w){const s=String(w==null?"":w);if(!s)return"";const k=KIT_ODDS.find(x=>s===x||s.startsWith(x+" "))||KIT_ODDS.slice().sort((a,b)=>b.length-a.length).find(x=>s.includes(x));
  if(!k)return o0.apply(this,arguments);const rest=s.replace(k,"").replace(/^\s*·\s*/,"").trim();return kitOdds(k).replace('class="kodm"','class="kodm oc"')+(rest?` <span class="ef n">${rest}</span>`:"")}})();
 
 /* ---------- glossary: plain-word meaning of every game term, tap to read ---------- */
@@ -1192,8 +1192,8 @@ function kitBranchFx(src){const out={sure:[],gain:[],risk:[]};const fxOf=t=>{con
  const flat=src.replace(re,"");String(flat).replace(/(?:^|[;{}]\s*)apply\(\{([^}]*)\}\)/g,(x,b)=>{const t=fxOf(b);if(t)out.sure.push(t);return x});return out}
 (function(){const d0=dilLine;dilLine=function(c){try{const x=c.x||"";const src=String(c.go||"")+String(c.fail||"");if(!ODDW.test(x)&&!CHW.test(x)&&/roll\(/.test(src)){const B=kitBranchFx(src);
   if(!B.gain.length&&!B.risk.length&&!B.sure.length){const m=src.match(/roll\(((?:[^()]|\((?:[^()]|\([^()]*\))*\))*)\)/);if(m){let n=null;try{n=Function("return ("+m[1]+")")()}catch(e){n=null}
-   if(typeof n==="number"&&isFinite(n))return d0.call(this,Object.assign({},c,{x:`${word(cl(Math.round(n),0,100))}${x?" · thành: "+x:""}`}))}}
-  if(B.gain.length||B.risk.length||B.sure.length){const fx=fmt(c.fx||{});return kitParse(["Chắc chắn",fx?"tốn: "+fx:"",[x,...B.sure,...B.gain].filter(Boolean).length?"thành: "+[x,...B.sure,...B.gain].filter(Boolean).join(", "):"",B.risk.length?"kèm: "+B.risk.join(", "):""].filter(Boolean).join(" · "))}}}catch(e){}return d0.apply(this,arguments)}})();
+   if(typeof n==="number"&&isFinite(n))return d0.call(this,Object.assign({},c,{x:`${word(oddsCl(Math.round(n)))}${x?" · thành: "+x:""}`}))}}
+  if(B.gain.length||B.risk.length||B.sure.length){const fx=fmt(c.fx||{});return kitParse(["",fx?"tốn: "+fx:"",[x,...B.sure,...B.gain].filter(Boolean).length?"thành: "+[x,...B.sure,...B.gain].filter(Boolean).join(", "):"",B.risk.length?"kèm: "+B.risk.join(", "):""].filter(Boolean).join(" · "))}}}catch(e){}return d0.apply(this,arguments)}})();
 /* ---- VEIL (j70 scars): a person whose scarOf(p).veil is set wears the veil over the face in EVERY portrait (tall frame, small frame) and on
    the stage figure. Assets KIT_VEIL.por (covers the portrait image box) and KIT_VEIL.fig
    (placed at the head of the figure's opaque box from j59: top 4–15 % of the visible body height). Missing asset -> nothing drawn. ---- */

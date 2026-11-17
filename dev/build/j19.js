@@ -23,23 +23,23 @@ function kcls(t){const s=t.replace(/<[^>]+>/g,"").trim();if(!s)return"n";if(/b�
 function eff(t){t=String(t).trim();if(!t)return"";if(/^<span class="(g|r)">/.test(t)&&/<\/span>$/.test(t)&&(t.match(/<span/g)||[]).length===1)return t.replace(/^<span class="(g|r)">/,'<span class="ef $1">');
  if(/^<b class="r">/.test(t))return `<span class="ef r">${t.replace(/<[^>]+>/g,"")}</span>`;return `<span class="ef ${kcls(t)}">${t}</span>`}
 function effList(x,def){const parts=[].concat(x).filter(Boolean).join(" · ");if(!parts)return eff("không");return kSplitTop(parts,/ · |, /y).filter(s=>s.trim()).map(s=>{let h=eff(s);if(def&&/class="ef n"/.test(h)&&!KNEU.test(s.replace(/<[^>]+>/g,"").trim()))h=h.replace('class="ef n"',`class="ef ${def}"`);return h}).join('<span class="ksep">·</span>')}
-function oddsChip(w){if(/^Chắc chắn\b/.test(String(w))||String(w)==="Chắc chắn")return"";const m=String(w).match(ODDW);const k=m?m[1]:w;const lv=k==="Chắc chắn"?7:KIT_ODDS.indexOf(k)<0?undefined:KIT_ODDS.indexOf(k);const rest=String(w).replace(k,"").replace(/^\s*·\s*/,"");
+function oddsChip(w){if(!w)return"";/* no odds word = no roll (ODDS CAP: the ladder has no "sure" word) */const m=String(w).match(ODDW);const k=m?m[1]:w;const lv=KIT_ODDS.indexOf(k)<0?undefined:KIT_ODDS.indexOf(k);const rest=String(w).replace(k,"").replace(/^\s*·\s*/,"");
  return `<span class="oc oc${lv==null?2:lv}">${k}</span>${rest?`<span class="ef ${/khó hơn/.test(rest)?"r":/dễ hơn/.test(rest)?"g":"n"}">${rest}</span>`:""}`}
 /* parse a 'word · tốn: … · thành: … · hỏng: … · note' line into kit HTML */
-function kitParse(str){str=String(str||"").trim();if(!str)return oddsChip("Chắc chắn");const segs=str.split(/ · (?![^<]*>)/);let odds="",out=[];let cur=null;
- for(let s of segs){const plain=s.replace(/<[^>]+>/g,"").trim();const mo=plain.match(/^(Chắc chắn|Nắm chắc|Rất chắc|Khá chắc|Năm ăn năm thua|Chắc|Khó|Liều)(?=$|\s|·)/);
+function kitParse(str){str=String(str||"").trim();if(!str)return"";const segs=str.split(/ · (?![^<]*>)/);let odds="",out=[];let cur=null;
+ for(let s of segs){const plain=s.replace(/<[^>]+>/g,"").trim();const mo=plain.match(/^(Nắm chắc|Rất chắc|Khá chắc|Năm ăn năm thua|Chắc|Khó|Liều)(?=$|\s|·)/);
   if(!odds&&mo&&plain.length<=mo[1].length+2){odds=mo[1];continue}
   if(/^Quẻ: /.test(plain)&&odds){odds+=" · "+plain;continue}
   const ml=s.match(/^\s*(?:<[^>]+>)*\s*(tốn|thành|hỏng|ngay|kèm|Tốn|Thành|Hỏng|Kèm)\s*:\s*/);if(ml){cur={l:ml[1].toLowerCase(),v:[s.slice(ml[0].length)]};out.push(cur);continue}
   if(cur&&cur.l!=="tốn"&&!/^(<b|<br)/.test(s)){cur.v.push(s);continue}out.push({l:"",v:[s]})}
- return (odds?oddsChip(odds):oddsChip("Chắc chắn"))+out.map(o=>(o.l?`<span class="kl">${o.l}</span>`:"")+(o.l==="kèm"?kemCol(effList(o.v,"r")):effList(o.v,o.l==="thành"?"g":o.l==="hỏng"||o.l==="tốn"?"r":""))).join(" ")}
+ return (odds?oddsChip(odds):"")+out.map(o=>(o.l?`<span class="kl">${o.l}</span>`:"")+(o.l==="kèm"?kemCol(effList(o.v,"r")):effList(o.v,o.l==="thành"?"g":o.l==="hỏng"||o.l==="tốn"?"r":""))).join(" ")}
 /* KÈM side effects read red by default, but a value is coloured by its MEANING (owner 15/11 "Tại sao + mà màu đỏ"): an explicit gain ("tiến bộ Thêu thùa +1..2", "Danh +2") stays green, never red because of the row */
 function kemCol(h){return String(h).replace(/<span class="ef ([gn])">([\s\S]*?)<\/span>/g,(m,c,x)=>{const p=x.replace(/<[^>]+>/g,"");return /\+\s?\d/.test(p)&&kcls(p)==="g"?`<span class="ef g">${x}</span>`:`<span class="ef r">${x}</span>`})}
 /* the act card */
-function cardH(a,i){const poor=a.c&&a.c.bac&&S.bac+a.c.bac<0,o=a.o==null?100:a.o;const dis=!can(cardCost(a))||a.done||poor||a.lock||S.dead||(a.b!=null&&(S.buoi||0)!==a.b);const rolled=o<100&&!a.lock;
- const ow=rolled?word(cl(o+lotB(S,a.dom),5,95))+lotTag(a.dom,o):"Chắc chắn";
+function cardH(a,i){const poor=a.c&&a.c.bac&&S.bac+a.c.bac<0,o=oddsOf(a),capd=oddsCapped(a);const dis=!can(cardCost(a))||a.done||poor||a.lock||S.dead||(a.b!=null&&(S.buoi||0)!==a.b);const rolled=o<100&&!a.lock;
+ const ow=rolled?(capd?capW():word(oddsCl(o+lotB(S,a.dom)))+lotTag(a.dom,o)):"";
  return `<button class="card kcard" data-i="${i}" ${dis?"disabled":""}><h4>${a.n}</h4><span class="ktime">${pips(cardCost(a))} ${cardCost(a)} khắc${a.b!=null?` · Chỉ ${BUOI[a.b].toLowerCase()}`:""}</span><p>${a.t||""}</p><span class="krow">${oddsChip(ow)}</span>
- <span class="kgrid"><span class="kl">Tốn</span><span>${effList([fmt(a.c)||"không",ducWarnTxt(a.c)])}</span><span class="kl">Thành</span><span>${effList([fmt(a.w||{}),String(a.x||"").split(/ · kèm: /)[0]],"g")}</span>${/ · kèm: /.test(a.x||"")?`<span class="kl">Kèm</span><span>${kemCol(effList(String(a.x).split(/ · kèm: /)[1],"r"))}</span>`:""}${rolled?`<span class="kl">Hỏng</span><span>${effList(fmt(a.l||{})||"không mất gì","r")}</span>`:""}</span></button>`}
+ <span class="kgrid"><span class="kl">Tốn</span><span>${effList([fmt(a.c)||"không",ducWarnTxt(a.c)])}</span><span class="kl">Thành</span><span>${effList([fmt(a.w||{}),String(a.x||"").split(/ · kèm: /)[0]],"g")}</span>${/ · kèm: /.test(a.x||"")?`<span class="kl">Kèm</span><span>${kemCol(effList(String(a.x).split(/ · kèm: /)[1],"r"))}</span>`:""}${rolled?`<span class="kl">Hỏng</span><span>${effList(capd?kitSoftW(a.c):fmt(a.l||{})||"không mất gì","r")}</span>`:""}</span></button>`}
 /* route the older line builders through the kit */
 function ducWarnTxt(c){const d=c&&c.duc;if(!d||d>=0||!S||S.rank>=7)return"";const after=S.duc+d,nd=hhNeed(S).duc;return after<nd?`Đức ${S.duc} → ${after}`:""}/* owner 07:05Z: the card shows only "Đức a → b"; the threshold lives in the top-bar Đức chip (jk3), read from BAL */
 let actLineRaw;(function(){const o1=optLine,o2=dilLine,o3=actLine;actLineRaw=o3;optLine=a=>kitParse(o1(a));dilLine=c=>kitParse(o2(c));actLine=(k,w,c)=>kitParse(o3(k,w,c))})();

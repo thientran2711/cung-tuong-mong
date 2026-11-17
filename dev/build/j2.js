@@ -87,7 +87,8 @@ function directActs(){const A=[],mk=(p,i,n,t)=>{const a=talkOpts(p)[i];if(a)A.pu
 function canPay(a){return !(a.c&&a.c.bac&&S.bac+a.c.bac<0)&&!a.lock}
 function logReal(b){try{const K=typeof RKEYS!=="undefined"?RKEYS:Object.keys(NAMES).map(k=>[k,NAMES[k]]);const out=[];for(const [k,n] of K){if(!(k in b))continue;/* a key the snapshot did not take never shows as "0→N" */const x=b[k]||0,y=S[k]||0;if(x!==y)out.push(`<span class="${(y>x)!==(k==="ghen")?"g":"r"}">${n} ${x}→${y}</span>`)}return out.join(", ")}catch(e){return""}}
 function snapReal(){const b={};/* RKEYS too: logReal lists Ân tình, which NAMES lacks ("Ân tình 0→N" on every act, log-sync) */for(const k of new Set(Object.keys(NAMES).concat(typeof RKEYS!=="undefined"?RKEYS.map(x=>x[0]):[])))b[k]=S[k]||0;return b}
-function runOpt(a){if(!canPay(a))return null;const b0=snapReal(),s0=S.logSeq||0;if(a.c)apply(a.c);const o0=a.o==null?100:a.o,o=o0>=100?100:cl(o0+lotB(S,a.dom),5,95);const ok=o>=100||roll(o);
+function runOpt(a){if(!canPay(a))return null;window.__oddsSoft="";const capd=oddsCapped(a);if(capd&&!roll(BAL.odds.hi)){oddsSoft(a.n,a.c);return false}/* ODDS CAP: a formerly-sure act fails softly (j63 oddsSoft) */
+  const b0=snapReal(),s0=S.logSeq||0;if(a.c)apply(a.c);const o0=a.o==null?100:a.o,o=o0>=100?(capd?BAL.odds.hi:100):oddsCl(o0+lotB(S,a.dom));const ok=o0>=100||roll(o);
   apply(ok?(a.w||{}):(a.l||{}));
   {const d=typeof lsRest==="function"?lsRest(b0,lsLines((S.logSeq||0)-s0)):logReal(b0);log(`${a.n}${o<100?(ok?': <span class="g">thành</span>.':': <span class="r">hỏng</span>.'):"."}${d?" "+d+".":""}`)}
   if(ok){if(a.go)a.go()}else if(a.fail)a.fail();
@@ -176,12 +177,12 @@ function talkOpts(p){const E=S.emp,K=E.known,L=E.likes,b=bestArt(),v=p.ref;
  return []}
 function talk(oi){if(popIdx==null||!S.visit||S.visit.talked===true||S.dead||Q.length)return;S.visit.tk=S.visit.tk||{};if(S.visit.tk[popIdx])return;const p=curPeople()[popIdx];if(!p)return;const a=talkOpts(p)[oi];if(!a||!canPay(a))return;
  const tcost=a.act?2:1;if(!can(tcost))return;spend(tcost);
- if(a.run){if(a.c)apply(a.c);S.visit.tk[popIdx]=1;popMsg=a.run()||"";if(popMsg)log(`${a.n}: ${popMsg}`);render();return}
+ if(a.run){S.visit.tk[popIdx]=1;if(oddsCapped(a)&&!roll(BAL.odds.hi)){popMsg=`${a.n}: ${oddsSoft(a.n,a.c)}`;render();return}/* ODDS CAP soft fail */if(a.c)apply(a.c);popMsg=a.run()||"";if(popMsg)log(`${a.n}: ${popMsg}`);render();return}
  if(a.open){a.open();render();return}
  S.visit.tk[popIdx]=1;const s0=S.logSeq||0;const ok=runOpt(a);
  /* two forms from one line (jvoice kGL / kLitLog): the Sổ ghi line and this card note carry the literary sentence, the result card only the facts */
  let lit="";try{lit=kLitLog(s0,kOutcome(p.kind,ok,p))}catch(e){}
- popMsg=`${a.n}: ${ok?'<span class="g">thành</span>':'<span class="r">hỏng</span>'}. ${lit?kGL("",lit):""}${fmt(ok?a.w:a.l)}`;render()}
+ popMsg=ok===false&&window.__oddsSoft?`${a.n}: ${window.__oddsSoft}`:`${a.n}: ${ok?'<span class="g">thành</span>':'<span class="r">hỏng</span>'}. ${lit?kGL("",lit):""}${fmt(ok?a.w:a.l)}`;render()}
 
 /* arts */
 function addArt(k,g){const a=ARTS.find(x=>x.k===k);S.artp[k]+=g;

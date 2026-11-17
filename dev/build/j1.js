@@ -89,7 +89,17 @@ function chanceLo(n){return chanceLvl(n).toLowerCase()}
 function chanceW(n){return n<=0?"không có khả năng":"khả năng "+chanceLo(n)}
 const CHW=/khả năng (rất thấp|thấp|vừa|cao|rất cao)|không có khả năng/;
 function cl(v,a,b){return Math.max(a,Math.min(b,v))}
-function roll(o){return Math.random()*100<o}
+/* ODDS CAP (owner 17/11 ~17:00Z + 17:35Z "Trần 95%, việc chắc ăn mà hỏng thì chỉ hỏng nhẹ"): nothing rolled is ever sure. ONE cap in BAL:
+   BAL.odds.lo / hi (5 / 95). roll(o) = THE roll every chance in the game uses (hers and NPCs'): it never passes above hi. oddsCl(o) = an act's
+   odds clamped to [lo, hi] (odA and every act odds). An act that used to be sure (o 100 or no o) now rolls at the cap (oddsOf) and fails
+   SOFTLY through ONE path (j63 oddsSoft: khắc and effort spent, bạc kept, nothing gained); pure bookkeeping (oddsSure: a.fix, a shop list,
+   opening a panel, an exam / minigame whose own play decides) is never rolled. */
+function roll(o){return Math.random()*100<Math.min(o,BAL.odds.hi)}
+function oddsCl(o){return cl(o,BAL.odds.lo,BAL.odds.hi)}
+function oddsSure(a){return !!(a&&(a.fix||a.open||a.adShop||a.exam||a.aaMG))}
+function oddsCapped(a){return !!a&&(a.o==null||a.o>=100)&&!oddsSure(a)}
+function oddsOf(a){const o=a.o==null?100:a.o;return o>=100?(oddsSure(a)?100:BAL.odds.hi):o}
+function capW(){return word(BAL.odds.hi)}
 function has(t){return S.emp.traits.includes(t)}
 function mm(){return [10,0,-8,-15][S.emp.mood]}
 function sg(n){if(!n)return 0;let f=has("nongnay")?1.3:1;if(n>0&&has("lanhlung"))f*=.7;const r=Math.round(n*f);return n>0?Math.max(1,r):r}

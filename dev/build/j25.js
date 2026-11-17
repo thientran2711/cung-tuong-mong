@@ -12,10 +12,10 @@ const RISKRE=/(lộ:|mách lại|nắm thóp|có thể (mách|nắm|bị|lật)|
   if(a.n==="Khiêu khích"){a.risk=a.x;a.x=""}
   return a})}})();
 /* the talk line: cost in khắc, gains green, risks and failure red, needs as disabled reasons */
-optLine=function(a){const o=a.o==null?100:a.o;const rolled=o<100&&!a.lock;const tc=a.act?2:1;
- if(a.k&&AOUT[a.k]){return actLineRaw(a.k,rolled?word(o):"Chắc chắn",[`${tc} khắc`,fmt(a.c||{})].filter(Boolean).join(", "))}
+optLine=function(a){const o=oddsOf(a),capd=oddsCapped(a);const rolled=o<100&&!a.lock;const tc=a.act?2:1;
+ if(a.k&&AOUT[a.k]){return actLineRaw(a.k,rolled?word(o):"",[`${tc} khắc`,fmt(a.c||{})].filter(Boolean).join(", "))}
  const xs=String(a.x||"").split(" · ").filter(Boolean);const gain=xs.filter(s=>!RISKRE.test(s)),risk=xs.filter(s=>RISKRE.test(s)).concat(a.risk?[a.risk]:[]);
- return kitParse([rolled?word(o):"Chắc chắn",`tốn: ${tc} khắc${a.c&&fmt(a.c)?", "+fmt(a.c):""}`,[fmt(a.w||{}),...gain].filter(Boolean).length?"thành: "+[fmt(a.w||{}),...gain].filter(Boolean).join(", "):"",rolled?"hỏng: "+(fmt(a.l||{})||(a.fail?"có hậu quả, xem kết quả":"không được gì")):"",risk.length?"hỏng: "+risk.join(", "):""].filter(Boolean).join(" · "))};
+ return kitParse([rolled?word(o):"",`tốn: ${tc} khắc${a.c&&fmt(a.c)?", "+fmt(a.c):""}`,[fmt(a.w||{}),...gain].filter(Boolean).length?"thành: "+[fmt(a.w||{}),...gain].filter(Boolean).join(", "):"",rolled?"hỏng: "+(capd?kitSoftW(a.c):fmt(a.l||{})||(a.fail?"có hậu quả, xem kết quả":"không được gì")):"",risk.length?"hỏng: "+risk.join(", "):""].filter(Boolean).join(" · "))};
 /* R-E: a gift or a planted item spends the time only when an item is chosen */
 (function(){const t1=talk;talk=function(oi){const p=S&&curPeople()[popIdx];const a=p&&talkOpts(p)[oi];if(a&&a.open){if(a.lock||S.dead||Q.length)return;const tc=a.act?2:1;if(!can(tc))return;S.payOnPick=tc;S.visit.tk=S.visit.tk||{};a.open();render();return}return t1.apply(this,arguments)}})();
 ["giftpick","plantpick"].forEach(id=>{const b0=PEND[id];if(!b0)return;PEND[id]=function(){const d=b0.apply(this,arguments);if(d&&d.o)d.o=d.o.map(o=>/^Thôi/.test(o.n)?Object.assign({},o,{go:()=>{S.payOnPick=0;if(o.go)o.go()}}):Object.assign({},o,{go:()=>{if(S.payOnPick){spend(S.payOnPick);S.payOnPick=0;if(popIdx!=null&&S.visit){S.visit.tk=S.visit.tk||{};S.visit.tk[popIdx]=1}}if(o.go)o.go()}}));return d};});
@@ -33,7 +33,7 @@ resultShow=function(title,before,okHint){if(!S||!before||S.dead)return;const d=R
  t.className="rtoast "+(seal==="HỎNG"?"bad":seal==="XONG"?"sure":"ok");t.innerHTML=`<b class="seal">${seal}</b><div class="rt"><b>${title}</b><div class="rd">${d.map(([k,v,now,inv])=>`<span class="ef ${(inv?-v:v)>0?(inv?"r":"g"):(inv?"g":"r")}">${k} ${now-(inv?-v:v)} → ${now}</span>`).join('<span class="ksep">·</span>')||'<span class="ef n">không đổi chỉ số</span>'}</div>${why?`<small>${why}</small>`:""}<small class="past">Chạm để đóng · đầy đủ ở Nhật ký</small></div>`;
  void t.offsetWidth;t.classList.add("on");clearTimeout(window.__rtT);window.__rtT=setTimeout(()=>t.classList.remove("on"),7000)};
 /* verdicts: deck cards by their roll, sure acts 'XONG', scheme acts by their own outcome words */
-(function(){const ro=runOpt;runOpt=function(a){const r=ro.apply(this,arguments);window.__lastOk=(a&&(a.o==null||a.o>=100))?"sure":r;return r}})();
+(function(){const ro=runOpt;runOpt=function(a){const r=ro.apply(this,arguments);window.__lastOk=(a&&(a.o==null||a.o>=100)&&oddsSure(a))?"sure":r;return r}})();
 (function(){const f=window.doAct;window.doAct=function(i,k){window.__actK=k;return f.apply(this,arguments)}})();
 /* stop the buổi from turning over under the result: wait a little longer */
 (function(){const r0=render;render=function(){const L=advLock;if(!S||S.dead||Q.length||S.mg||used<BAL.time.khac||L)return r0.apply(this,arguments);advLock=true;const ret=(function(){const a=advLock;advLock=true;return r0.apply(this,arguments)}).apply(this,arguments);setTimeout(()=>{advLock=false;if(used>=BAL.time.khac&&!Q.length&&S&&!S.dead&&!S.mg)nextBuoi()},2600);return ret}})();

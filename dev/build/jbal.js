@@ -270,7 +270,11 @@ function ntRiseOdds(){return Math.max(0,(S.nt||0)/BAL.ntRise.div-BAL.ntRise.sub)
 /* ONE CORE odds ladder (review/one-core-dup; VANPHONG odds words Liều … Nắm chắc, words in KIT_ODDS j79): an odds value o reaches word
    step i when o ≥ cut[i-1]; lo / hi = the lowest / highest odds a chancy option shows. Read by j1 word(), j79 kitOddsLv, jsgame sgLv /
    SG_LO / SG_HI (before: the cuts were typed in all four). */
-Object.assign(BAL,{odds:{cut:[31,46,56,66,81,91],lo:5,hi:95}});
+/* ODDS CAP (owner 17/11 ~17:35Z "Trần 95%"): lo / hi are ALSO the one cap of every roll in the game (j1 roll / oddsCl): nothing is ever above hi
+   nor (for an act's odds) below lo. softFail = what a formerly-sure act spends when it fails at the cap (owner "chỉ hỏng nhẹ" + 17:10Z (1)
+   "không thành công thì sao tốn bạc"): its khắc are spent, and of its cost only the keys in spend (the effort: Sức); the bạc and every other
+   cost (Danh, Đức…) are NOT taken; nothing is gained, nothing else lost. */
+Object.assign(BAL,{odds:{cut:[31,46,56,66,81,91],lo:5,hi:95,softFail:{spend:["suc"]}}});
 function oddsLv(o){let i=0;for(const c of BAL.odds.cut)if(o>=c)i++;return i}
 /* ONE CORE number formatters for player texts (review/one-core-dup r2, OD:L1267 "text prints the constant"): balSg(n) = the signed amount as the
    texts show it ("+4" / "-4"), balAb(n) = the amount without sign ("4"). A text that shows a BAL.eff / BAL.road / BAL.arc amount prints it with these
