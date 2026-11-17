@@ -36,7 +36,7 @@ Finding behind it: a36 ty2 = one pale sage hanfu, ty3 = one pale grey-blue hanfu
 | m19 | peach | clear cornflower blue (a step deeper than m18 sky blue) | peach blossom | braided crown with tiny blossoms | teacup |
 | m20 | coral | brick rose | cherry blossom | beaded hair ribbon | scroll |
 | m21 | peach | azure leaning turquoise-cyan (apart from m18/m19) | willow | side coil with a fresh flower | flower branch |
-| m22 | peach | periwinkle | swallow | bun with a long tassel hairpin | silk handkerchief |
+| m22 | peach | PERIWINKLE = clearly BLUE-violet (blue first, a hint of violet, like a periwinkle flower / hydrangea blue). PINNED HEX: ty1 pale #B9C1F0, ty2 mid #7C88DC, ty3 deep #4C58B8 (NOT lavender, NOT lilac m11) | swallow | bun with a long tassel hairpin | silk handkerchief |
 | m23 | gold | bamboo green | mandarin duck | feather pin | jade pendant |
 | m24 | peach | ivory white (pale tints at ty1) | koi | low chignon with a carved comb | book |
 | m25 | peach | silver grey | ruyi cloud | flower cluster at the temple | folded fan |
@@ -76,3 +76,5 @@ Open question for lead/C: huadian on promoted maid-consorts (ty1-ty3)? Default h
 Rows above already carry these signature colours: m04 orange-apricot, m09 copper-bronze, m13 strong coral, m14 bright pea-green (yellow-green), m15 indigo (pale indigo-blue at ty1 -> deep indigo-navy at ty3), m16 deep rose-red, m19 cornflower blue, m21 azure-turquoise, m24 ivory white, m25 silver grey, m26 dove grey, m39 peacock teal (silver thread).
 COLOUR FIX 08:20Z: m49 = misty rose-beige (not celadon); if any m49 file already exists in celadon, redo it.
 RENDER RULES (from W4d notes): the signature colour must read CLEARLY even at the pale ty1 tint (never washed out to cream/white), neighbours m+-2 of the same tier stay clearly different in hue, the same maid keeps the same colour across ty1/ty2/ty3 and across a18/a26/a36/a51.
+
+COLOUR FIX 08:50Z (ROOT-4): m22 = pinned periwinkle blue-violet hexes above for EVERY age; redo a26 m22 x3 (W6d) and a18 m22-ty2 (W4e) that came out lavender.
