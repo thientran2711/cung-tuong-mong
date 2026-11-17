@@ -703,7 +703,7 @@
 | GREET-MEET greeting name rule + AG-MEET (opus; s30 orders 05:26Z/05:29Z; brief briefs/greet-meet.md) | review/greet-meet | C ROOT-5 | session_011xDdVPQEBukEXYnUVs5fDo | LIVE main 65dcf52f 11:36Z (archived) | 17/11 10:40Z |
 | WHOLE FIGURE REPAINT lead #7 (sonnet art; successor of lead #6; LEAD HANDOVER #6->#7 in BATCH_PLAN.md) | review/fig-cutout-clean | C | session_011xDdVNkgEgTqsZJxUh9Xd8 | RUNNING | 17/11 10:30Z |
 | MAMA a36/a51 t1-t5 maid repaint (sonnet art W8; ROOT-5 GO 17/11 10:29Z; opened by lead #7) | review/fig-cutout-clean | C | session_011xDdVRWZVWQYAYYva3YuqJ | RUNNING | 17/11 10:30Z |
-| BATCH-D8 re-merge #3 (opus) on main 7e264081 | review/batch-d8 | D | session_01964izDXBECKNTXdyNVmcBc | RUNNING | 17/11 10:46Z |
+| BATCH-D8 re-merge #3 (opus) on main 7e264081 | review/batch-d8 | D | session_01964izDXBECKNTXdyNVmcBc | BATCH READY 6ca04148 FOR MAIN — archived | 17/11 10:46Z |
 | REVIEW greet-meet-r1 (opus BIG; brief briefs/review-greet-meet-r1.md) | review/greet-meet-r1 | C ROOT-5 | session_011xDdVR96B2JxbaT3UMSFAk | PASS 65dcf52f → main 11:36Z (archived) | 17/11 11:02Z |
 | one-core-dup3 r1 FAIL b9f8d5cf (text family: ~76 typed evidence counts + one-core-text gate gap) → fix worker (opus; brief briefs/one-core-dup3-fix.md; base review/one-core-dup3-r1 607887ae) | review/one-core-dup3 | B | session_01N1tNP5gDUwBGqmKgc5zqMJ | RUNNING | 17/11 11:00Z |
 | VOICE BY TÍNH TÌNH (sonnet; s30 order 06:06Z; brief briefs/voice-trait.md) | review/voice-trait | C ROOT-5 | session_011xDdVRM5yu7W5UoCp4jMmC | HANDED OVER d5793c7ba → W-A2 (archived) | 17/11 11:38Z |
