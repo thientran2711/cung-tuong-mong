@@ -99,7 +99,7 @@ function act(i){const a=deck[i];if(!a||(a.b!=null&&(S.buoi||0)!==a.b)||!can(card
 function places(){const L=[
   {k:"vuon",n:"Ngự hoa viên",d:"Hoa nở bốn mùa. Xuân thu Hoàng thượng hay dạo bước.",sc:"vuon"},
   {k:"thu",n:"Cần Chính điện",d:"Nơi ngài phê tấu chương. Đến không được gọi dễ làm ngài phật ý.",sc:"thu"},
-  {k:"dtd",n:"Dưỡng Hòa điện",d:"Tẩm điện của Hoàng thượng. Sủng dưới 50 thì thái giám không cho vào.",sc:"dtd"},
+  {k:"dtd",n:"Dưỡng Hòa điện",d:`Tẩm điện của Hoàng thượng. Sủng dưới ${BAL.m95.dtdSung} thì thái giám không cho vào.`,sc:"dtd"},
   {k:"tn",n:"Đức Thọ cung",d:"Cung của Thái hậu, khói trầm quanh năm.",sc:"tn"}];
  if(qOn())L.push({k:"kn",n:"Càn Ninh cung",d:`Cung của Hoàng hậu ${rivals[0].name}.`,sc:"kn"});
  for(const v of rivals)if(v.alive&&!v.out&&!v.queen)L.push({k:"r"+v.id,n:`Cung ${v.name}`,d:`${RANKS[v.rank].n} ${v.name} ở đây.`,sc:"rv",v});
@@ -115,7 +115,7 @@ function goTo(k){if(S.dead||Q.length||S.out)return;popIdx=null;popMsg="";
  if(k==="vuon"){if(empHere){ppl.push(emp);apply({sung:S.emp.mood<=1?3:1});msg="Ngươi tình cờ gặp Hoàng thượng đang dạo bước. Ngài dừng lại nhìn ngươi."}else msg="Hoa nở rộ. Hoàng thượng không ra vườn hôm nay."}
  if(k==="thu"){if(empHere){if(S.sung<40&&!roll(od(40+S.sung+mm()))){apply({sung:-3});S.visit={k,people:[emp],talked:true,tk:{},msg:"Hoàng thượng cau mày: “Trẫm đang bận việc nước.” Ngươi phải lui ra."};log("Đến Cần Chính điện, bị đuổi về.");render();return}
    ppl.push(emp);msg="Hoàng thượng đang phê tấu chương, ngẩng lên nhìn ngươi."}else msg="Ngài không có ở thư phòng."}
- if(k==="dtd"){if(S.sung<50)msg=kSay({srv:"m"},S,"Thái giám chặn cửa: “Không có khẩu dụ, {goi} xin hồi cung.”")+(empHere?" Hoàng thượng ở bên trong, ngươi không được gặp.":"");else if(empHere){ppl.push(emp);msg="Hoàng thượng đang nghỉ, cho ngươi vào hầu."}else msg="Hoàng thượng không có ở điện."}
+ if(k==="dtd"){if(S.sung<BAL.m95.dtdSung)msg=kSay({srv:"m"},S,"Thái giám chặn cửa: “Không có khẩu dụ, {goi} xin hồi cung.”")+(empHere?" Hoàng thượng ở bên trong, ngươi không được gặp.":"");else if(empHere){ppl.push(emp);msg="Hoàng thượng đang nghỉ, cho ngươi vào hầu."}else msg="Hoàng thượng không có ở điện."}
  if(k==="tn"){if(S.thDead)msg="Đức Thọ cung vắng lặng từ ngày Thái hậu băng hà.";else ppl.push({kind:"th",name:"Thái hậu",ini:"Từ",col:"#c9a0e0",info:`Thái hậu · lòng ${S.th}`})}
  for(const v of here){if(v.ill)v.ill.known=true;if(v.queen&&qOn())ppl.push({...rp(v),kind:"hh",name:`Hoàng hậu ${v.name}`,ini:"Phượng"});else ppl.push(rp(v))}
  if(P.v&&!here.includes(P.v)&&P.v.alive&&!P.v.out){ppl.push({kind:"chest",ref:P.v,name:`Rương của ${P.v.name}`,ini:"Rương",col:"#8a6a4a",info:"Chủ nhân đi vắng"});msg=`${P.v.name} không có ở cung.`}

@@ -30,12 +30,12 @@ const ktTotal=h=>(String(h).match(/<button[^>]*data-(learn|vlearn|charity|wkprac
 /* ---------- TÀI NGHỆ ---------- */
 function ktArtSkills(){const t2=whyTime(2);const out=[];
  for(const V of (typeof VIR!=="undefined"?VIR:[])){const l=S.vir[V.k],cost=virCost(l);const B=l>=5?[]:[
-   pbtn(`data-vlearn="${V.k}" data-mode="self"`,"Tự học",`Chắc chắn · tốn: 2 khắc, Sức -15 · chơi một trò nhỏ · thành: tiến bộ một hai phần`,t2||(S.suc<25?"Sức dưới 25":"")),
+   pbtn(`data-vlearn="${V.k}" data-mode="self"`,"Tự học",`Chắc chắn · tốn: 2 khắc, Sức -15 · chơi một trò nhỏ · thành: tiến bộ một hai phần`,t2||(S.suc<BAL.sucNeed.self?"Sức dưới "+BAL.sucNeed.self:"")),
    pbtn(`data-vlearn="${V.k}" data-mode="master"`,"Học với ma ma",`Chắc chắn · tốn: 2 khắc, Bạc -${cost}, Sức -10 · chơi một trò nhỏ · thành: tiến bộ hai ba phần`,t2||(S.bac<cost?`thiếu bạc (cần ${cost})`:""))];
   if(V.k==="hanh")B.push(pbtn(`data-charity="1"`,"Phát bạc cứu giúp cung nhân nghèo",`Chắc chắn · tốn: ${BAL.charity.khac} khắc, Bạc -${BAL.charity.bac} · thành: Đức +${BAL.charity.duc}, Danh +${BAL.charity.danh} (mỗi tháng một lần)`,whyTime(BAL.charity.khac)||(S.bac<BAL.charity.bac?`thiếu bạc (cần ${BAL.charity.bac})`:S.charM===S.turn?"tháng này đã làm":"")));
   const fx=(typeof VIRFX==="object"&&VIRFX[V.k])||[];out.push({g:"duc",kind:"vir",k:V.k,name:`${V.n} · ${V.full}`,level:l,prog:S.virp[V.k],need:l+2,desc:V.d,next:fx[l]?fxItems(fx[l],"n").join(" "):"",acts:B,img:kitSkillArt("vir",V.k,V.n),stepsAttr:`data-v85tab="${V.k}"`})}
  for(const a of ARTS){const l=S.arts[a.k],cost=5+l*5;const img=kitSkillArt("art",a.k,a.n)||(typeof AIMG==="object"&&AIMG[a.k]?AIMG[a.k]:"");
-  const B=l>=5?[]:[pbtn(`data-learn="${a.k}" data-mode="self"`,"Tự học",`Chắc chắn · tốn: 2 khắc, Sức -15 · thành: tiến bộ một hai phần`,t2||(S.suc<25?"Sức dưới 25":"")),
+  const B=l>=5?[]:[pbtn(`data-learn="${a.k}" data-mode="self"`,"Tự học",`Chắc chắn · tốn: 2 khắc, Sức -15 · thành: tiến bộ một hai phần`,t2||(S.suc<BAL.sucNeed.self?"Sức dưới "+BAL.sucNeed.self:"")),
    pbtn(`data-learn="${a.k}" data-mode="teacher"`,"Học với thầy",`Chắc chắn · tốn: 2 khắc, Bạc -${cost}, Sức -10 · thành: tiến bộ hai ba phần, luôn hơn tự học 1, có khi nghe chuyện`,t2||(S.bac<cost?`thiếu bạc (cần ${cost})`:"")),
    S.thDead?"":pbtn(`data-learn="${a.k}" data-mode="th"`,"Học với Thái hậu",`Chắc chắn · tốn: 2 khắc, Sức -10 · thành: tiến bộ một đến ba phần, Thái hậu +3`,t2||(S.th<40?"cần Thái hậu thương 40":(S.buoi||0)!==0?"chỉ buổi sáng":""))].filter(Boolean);
   const extra=(a.k==="theu"||a.k==="nau")&&typeof artBonus==="function"?` · phẩm đồ tự làm ${artBonus(S,a.k).q}/100`:"";const fx=(typeof ARTFX==="object"&&ARTFX[a.k])||[];
@@ -52,7 +52,7 @@ function ktArtHTML(){try{vNormAll()}catch(e){}const SK=ktArtSkills();const G=[["
  return h+`<div class="kskills">${L.map(kitSkillCard).join("")}</div>`}
 /* Tác phẩm (j83 works): one skill head per art that makes works = picture, bậc, what it makes as chips, the quality ladder;
    "Tự học, làm tác phẩm" (mastered only) as a compact act. Rules behind the ⓘ "Tác phẩm" gloss (was a paragraph + bare divs). */
-function ktWorksHTML(){if(typeof wkKindsOf!=="function"||typeof WK!=="object")return"";const why=whyTime(2)||(S.suc<15?"Sức dưới 15":"");
+function ktWorksHTML(){if(typeof wkKindsOf!=="function"||typeof WK!=="object")return"";const why=whyTime(2)||(S.suc<BAL.sucNeed.wk?"Sức dưới "+BAL.sucNeed.wk:"");
  const L=ARTS.map(a=>{const l=S.arts[a.k],ks=wkKindsOf(a.k);if(!ks.length)return null;const img=kitSkillArt("art",a.k,a.n)||(typeof AIMG==="object"&&AIMG[a.k]?AIMG[a.k]:"");
   const acts=l>=5?[pbtn(`data-wk="prac" data-art="${a.k}"`,"Tự học, làm tác phẩm",`Chắc chắn · tốn: Sức -10, 2 khắc · thành: một tác phẩm, ${wkOddsTxt(S,ks[0],0)}`,why)]:[];
   const kinds=ks.map(k=>`<span class="kchip n">${WK[k].w}${WK[k].per?" · để 1 tuần":""}</span>`).join(" ");

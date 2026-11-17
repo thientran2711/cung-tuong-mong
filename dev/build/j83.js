@@ -140,8 +140,8 @@ function wkFinishLesson(k,pick,raw,how){const kind=WK[pick.kind]&&WK[pick.kind].
   sk.onclick=()=>{skip=true;os()};const h=$("mgh");if(h)h.textContent+=` Tự tay làm (chơi): ra thành phẩm, ${WK[kind].w.toLowerCase()}: phẩm = phần chơi (từ 0 đến 10) + ${ARTS.find(x=>x.k===k).n} bậc ${wkLv(S,k)}: +${wkLv(S,k)}${WMAT[pick.mat||0]?` + vật liệu: +${WMAT[pick.mat||0]}`:""}.`}catch(x){}
  return r}})();
 /* product dialog in front of every lesson button (and the practice button once an art is mastered) */
-function wkLessonOK(k,mode){const l=S.arts[k],cost=tchFee(k);if(!S||S.dead||Q.length||S.mg)return false;if(mode==="prac")return l>=5&&can(2)&&S.suc>=15;if(l>=5)return false;
- if(mode==="self")return can(2)&&S.suc>=25;if(mode==="th")return can(2)&&S.th>=40&&(S.buoi||0)===0&&!S.thDead;return can(2)&&S.bac>=cost}
+function wkLessonOK(k,mode){const l=S.arts[k],cost=tchFee(k);if(!S||S.dead||Q.length||S.mg)return false;if(mode==="prac")return l>=5&&can(2)&&S.suc>=BAL.sucNeed.wk;if(l>=5)return false;
+ if(mode==="self")return can(2)&&S.suc>=BAL.sucNeed.self;if(mode==="th")return can(2)&&S.th>=40&&(S.buoi||0)===0&&!S.thDead;return can(2)&&S.bac>=cost}
 function wkAsk(k,mode,run){const a=ARTS.find(x=>x.k===k),l=S.arts[k],fee=mode==="teacher"?tchFee(k):0;const O=[];
  for(const kind of wkKindsOf(k)){const K=WK[kind];for(let m=0;m<3;m++)O.push({n:`${K.w} · ${K.mn[m]}`,fx:K.mat[m]?{bac:-K.mat[m]}:{},x:`${wkOddsTxt(S,kind,m)}${K.per?" · phải dâng trong tuần":""}${K.fin?" · "+wkFinTxt(K):""}`,go:()=>{wkPend={kind,mat:m};run();if(!S.mg){wkPend=null;if(K.mat[m])apply({bac:K.mat[m]})}}})}
  O.push({n:"Thôi",fx:{}});
@@ -161,7 +161,7 @@ const WFOLD=/^(Dâng canh ở ngự thư phòng|Cắm hoa dâng Hoàng thượng
 function wkDeckCard(){const k=pick(["mon","bhoa","tho","theu"]),K=WK[k],a=K.a,m=k==="mon"?1:0;const s=wkSubj(k),l=S.arts[a],prac=l>=5;
  const t=k==="mon"?(S.emp.known.dish?`Tự tay nấu ${s}, món ngài thích.`:`Tự tay nấu ${s}; chưa biết ngài thích món gì.`):k==="bhoa"?(S.emp.known.flower?`Cắm một bình ${s}, loài hoa ngài yêu.`:`Cắm một bình ${s}; chưa biết ngài thích hoa gì.`):k==="tho"?"Mài mực, viết một bài thơ.":"Thêu một chiếc khăn lụa.";
  const an=ARTS.find(x=>x.k===a).n;
- return{n:`${prac?"Tự học":"Tự học"} ${an}: ${K.n.toLowerCase()}`,t,c:Object.assign({suc:prac?-10:-15},K.mat[m]?{bac:-K.mat[m]}:{}),o:100,k:2,w:{},dom:"Tài nghệ",lock:!prac&&S.suc<25,
+ return{n:`${prac?"Tự học":"Tự học"} ${an}: ${K.n.toLowerCase()}`,t,c:Object.assign({suc:prac?-10:-15},K.mat[m]?{bac:-K.mat[m]}:{}),o:100,k:2,w:{},dom:"Tài nghệ",lock:!prac&&S.suc<BAL.sucNeed.self,
   x:`${prac?"":`tiến bộ ${an} ${kStepW(1,2)} · `}tự tay chơi thì ra thành phẩm · ${wkOddsTxt(S,k,m)}`,go:()=>{S.mg={k:a,l,mode:prac?"prac":"self",wk:{kind:k,mat:m,subj:s}};save();resumeMG()}}}
 (function(){const d0=deal;deal=function(){d0.apply(this,arguments);try{if(!S||S.out||S.srv||(typeof isSrv==="function"&&isSrv())||!Array.isArray(deck))return;deck.push(wkDeckCard())}catch(e){}}})();
 /* ---- the chest: works listed with every use and its true gain and cost ---- */
@@ -191,7 +191,7 @@ function wkCardsHTML(){const L=S.inv.map((e,i)=>[e,i]).filter(([e])=>e.wk&&!e.h)
 document.addEventListener("click",ev=>{const b=ev.target.closest("[data-wk]");if(!b||b.disabled)return;ev.stopPropagation();const k=b.dataset.wk;
  if(k==="give"||k==="sell"||k==="show")wkAct(k,+b.dataset.ix);else if(k==="prac")wkPractice(b.dataset.art)},true);
 /* ---- the Tài nghệ tab: what each art's sessions produce; practice once mastered ---- */
-function wkTabHTML(){const why=whyTime(2)||(S.suc<15?"Sức dưới 15":"");
+function wkTabHTML(){const why=whyTime(2)||(S.suc<BAL.sucNeed.wk?"Sức dưới "+BAL.sucNeed.wk:"");
  let h=`<div class="ph"><span>Mỗi buổi học hay tự học mà tự tay chơi trò tài nghệ thì ra một tác phẩm (Học nhanh: không ra thành phẩm), cất vào rương để dâng, tặng, bán, bày ở yến tiệc. Phẩm = phần chơi trò tài nghệ (từ 0 đến 10) + chút bậc tài nghệ + vật liệu.</span><span>Đồ mua bằng bạc vẫn quý hơn</span></div><div class="arts">`;
  h+=ARTS.map(a=>{const l=S.arts[a.k],ks=wkKindsOf(a.k);if(!ks.length)return"";const B=l>=5?[pbtn(`data-wk="prac" data-art="${a.k}"`,"Tự học, làm tác phẩm",`Chắc chắn · tốn: Sức -10, 2 khắc · thành: một tác phẩm, ${wkOddsTxt(S,ks[0],0)}`,why)]:[];
   return `<div class="art"><b>${ic(AIMG[a.k],20)}${a.n} · bậc ${l}: +${wkLvQ(S,a.k)}</b><span class="u">${ks.map(k=>`${WK[k].w}${WK[k].per?" (để 1 tuần)":""}${WK[k].fin?" ("+wkFinTxt(WK[k])+")":""}`).join(" · ")}</span><span class="u">${wkTierTxt(S,ks[0],0)}</span>${B.length?`<div class="pcb">${B.join("")}</div>`:""}</div>`}).join("")+`</div>`;
