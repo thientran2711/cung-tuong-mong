@@ -145,13 +145,14 @@ TH.withSeat=function(seat,fn){
  sb.origin=(typeof ORIGINS!=="undefined"&&ORIGINS.find(o=>o.k===B.ok))||A.S.origin;
  CW.ctx=seat;TH.ctxN++;TH.outerS=A.S/* part B: the host's own person, READ-ONLY inside (her names must not repeat the host's own servants: the stand-in has no staff) */;quiet=true;S=sb;for(const r of REG)if(r[0] in B.g)try{r[2](B.g[r[0]])}catch(e){}
  let v=null,p0=null;const dOn=TH.dOn();
- try{if(B.fresh){fixRefs(S);B.fresh=false}if(dOn&&D.hold)D.hold(S);v=standIn(PA,S);if(v)v.__inv0=(v.inv||[]).slice();if(dOn&&!D.noPatch)try{p0=pSnap()}catch(e){console.error("thin p0",e)}D.cur={p0};return fn()}
+ try{if(B.fresh){fixRefs(S);B.fresh=false}if(dOn&&D.hold)D.hold(S);v=standIn(PA,S);if(v)v.__inv0=(v.inv||[]).slice();if(dOn&&!D.noPatch)try{p0=pSnap()}catch(e){console.error("thin p0",e)}D.cur={p0,rv:dOn&&!D.noPatch&&TH.curDo!=="life"/* part B's life intents carry her rows themselves (rows) */?D.rvIn(seat):null};return fn()}
  finally{const sN=S;
   if(dOn)try{D.takeQ()}catch(e){console.error("thin takeQ",e)}
+  let rvOps=[];if(dOn&&D.cur&&D.cur.rv)try{rvOps=D.rvOut(seat,D.cur.rv)}catch(e){console.error("thin rows",e)}
   try{for(const r of REG)B.g[r[0]]=r[1]()}catch(e){}
   for(const k of X.W_KEYS){if(k in sN)A.S[k]=sN[k];else delete A.S[k]}
   try{B.ok=sN.origin&&sN.origin.k||B.ok;const ss=ser().S;for(const k of X.W_KEYS)delete ss[k];B.S=ss;B.fresh=true;
-   if(dOn){p0=D.cur&&D.cur.p0||p0;D.cur=null;if(p0){const pt=pDiff(p0,ss);if(pt.length)D.patchOut(seat,pt)}D.save()}}catch(e){console.error("thin ser",e);B.S=sN}
+   if(dOn){p0=D.cur&&D.cur.p0||p0;D.cur=null;if(p0){const pt=pDiff(p0,ss).concat(rvOps);if(pt.length)D.patchOut(seat,pt)}D.save()}}catch(e){console.error("thin ser",e);B.S=sN}
   const Lb=X.pullFriend();TH.bridge=[];TH.bridgeItems=[];
   for(const [,e] of Lb){if(e!==v||!e.__b)continue;const b=e.__b;
    /* part D: things her turn put into the host's entry (a gift she gave, accepted by the host) go to the host as her gift (Quà tặng) */
@@ -221,7 +222,7 @@ TH.onDo=(op,fn)=>{DO[op]=fn};
 TH.doSend=function(op,args){if(host()||!TH.on(1))return false;const id="d"+Date.now().toString(36)+"-"+(doN++);COOP.send({t:"do",op,args:args===undefined?null:args,base:TH.view?TH.view.v:0,id});return id};
 COOP.on("do",m=>{if(!host()||!m||!TH.on(1))return;const fn=DO[m.op];let r=null;TH.curDo=m.op;
  try{if(fn)r=TH.withSeat(m.from||"b",()=>fn(m.args,m))}catch(e){console.error("thin do",m.op,e);r={err:String(e&&e.message||e)}}
- TH.dn=m.n|0;TH.dr={id:m.id,op:m.op,r:r===undefined?null:J(r)};deltaSoon(0)});
+ TH.curDo=null;/* D r1: call-scoped (a later D.later must not see a stale op) */TH.dn=m.n|0;TH.dr={id:m.id,op:m.op,r:r===undefined?null:J(r)};deltaSoon(0)});
 /* part A test intent: read her person in context b (no change) */
 TH.onDo("probe",()=>({name:S.name,used,ctx:CW.ctx,host:(rivals.find(v=>v.coop)||{}).id||null}));
 
@@ -264,7 +265,7 @@ TH.pDiff=(a,b)=>pDiff(a,b);
 /* a step inside her context changed her stored S on purpose before the real change (e.g. put her item in): the patch starts from here */
 D.rebase=()=>{if(D.cur&&CW.ctx)D.cur.p0=pSnap()};
 /* guest: one patch onto her live S */
-function pApply(root,L){let n=0;for(const [op,path,val,fr] of L||[]){try{let o=root;
+function pApply(root,L){let n=0;for(const [op,path,val,fr] of L||[]){try{if(op==="nv"){if(nvApply(path,val))n++;continue}let o=root;
   for(let i=0;i<path.length-1;i++){const k=path[i];if(plain(k)&&Array.isArray(o)){o=o.find(e=>eid(e)===k.id)||(k.i<o.length&&eid(o[k.i])==null?o[k.i]:undefined)}else{if(typeof k!=="string"||BADK.test(k))o=undefined;else{if(!plain(o[k])&&(op==="+"||op==="="||op==="a")&&typeof path[i+1]==="string")o[k]={};o=o[k]}}if(!plain(o))break}
   const k=path[path.length-1];if(!plain(o)||typeof k!=="string"||BADK.test(k))continue;
   if(op==="+"){o[k]=(typeof o[k]==="number"?o[k]:0)+val}else if(op==="="){o[k]=J(val)}else if(op==="-"){delete o[k]}
@@ -272,25 +273,59 @@ function pApply(root,L){let n=0;for(const [op,path,val,fr] of L||[]){try{let o=r
   else if(op==="r"&&Array.isArray(o[k])){for(const e of val){const t=JSON.stringify(e);let j=o[k].findIndex(z=>JSON.stringify(z)===t);if(j<0&&eid(e)!=null)j=o[k].findIndex(z=>eid(z)===eid(e));if(j>=0)o[k].splice(j,1)}}
   n++}catch(e){console.error("thin patch",e)}}return n}
 TH.pApply=pApply;
+/* D r1 (item 3, the whole family): HER viewer rows on the NPCs (rel / oan / ghen / ev = what that NPC feels / holds toward HER, and every
+   "<map>.me" number such as evm.me = that NPC's proof against her) changed by anything the host runs in her context (tai mắt proof, Mua chuộc
+   answers, res effects, card choices). They reach her phone at once in the patch as ["nv",[npcId,…path],delta]. Merge3 adds numeric deltas,
+   so the host's own world keeps the room's OLD numbers for those rows until the week merges (same rule as part B's life rows): her week
+   carries the change exactly once. Inside her context on the host the pending deltas of this week (D.RV) are put back on top, so a later
+   card sees the true value (e.g. deedCap of a second proof). D.RV is cleared when the week merges; kept in localStorage (host reload). */
+D.RV={};
+const RVF=["rel","oan","ghen","ev"];
+function rvRead(r){const o={};for(const f of RVF)if(typeof r[f]==="number")o[f]=r[f];
+ for(const k of Object.keys(r)){const m=r[k];if(plain(m)&&!Array.isArray(m)&&typeof m.me==="number")o[k+".me"]=m.me}return o}
+function rvSet(r,p,v){const k=p.split(".");if(k.length===1){if(v===undefined)delete r[p];else r[p]=v;return}
+ if(v===undefined){if(plain(r[k[0]]))delete r[k[0]][k[1]];return}if(!plain(r[k[0]]))r[k[0]]={};r[k[0]][k[1]]=v}
+const rvClamp=(p,v)=>p==="rel"?Math.max(-100,Math.min(100,v)):p==="oan"||p==="ghen"?Math.max(0,Math.min(100,v)):Math.max(0,v);
+D.rvIn=function(seat){const P=D.RV[seat]||{},m=new Map();
+ for(const r of npcs()){if(r.id==null)continue;const s0=rvRead(r),pd=P[r.id];if(pd)for(const p in pd)rvSet(r,p,rvClamp(p,(s0[p]||0)+pd[p]));m.set(r,[s0,rvRead(r)])}return m};
+D.rvOut=function(seat,m){const out=[];const P=D.RV[seat]=D.RV[seat]||{};
+ for(const [r,[s0,s1]] of m){const s2=rvRead(r);const d={};for(const p of new Set([...Object.keys(s1),...Object.keys(s2)])){const x=(s2[p]||0)-(s1[p]||0);if(x)d[p]=x}
+  for(const p of new Set([...Object.keys(s0),...Object.keys(s2)]))rvSet(r,p,s0[p]);  /* the host's world: the room's old numbers */
+  for(const p in d){out.push(["nv",[r.id].concat(p.split(".")),d[p]]);const q=P[r.id]=P[r.id]||{};q[p]=(q[p]||0)+d[p]}}
+ if(out.length)D.log.push(["rows",seat,out.length]);return out};
+/* guest: one row delta onto her own world (her viewer rows of that NPC) */
+function nvApply(path,d){if(!Array.isArray(path)||typeof d!=="number")return false;const id=path[0];const r=(rivals||[]).find(x=>x&&x.id===id&&!x.coop);if(!r)return false;
+ const p=path.slice(1).join(".");if(!/^(rel|oan|ghen|ev|[A-Za-z0-9_]+\.me)$/.test(p)||BADK.test(path[1]))return false;const s=rvRead(r);rvSet(r,p,rvClamp(p,(s[p]||0)+d));return true}
+TH.nvApply=nvApply;
 
 /* host: card store = her stored S.thq; pending patches D.PQ[seat] = [{n,p,rid}]; both kept in localStorage per room (a host reload) */
 D.PQ={};D.N={};
 const LSK=()=>"ctm-thin-d:"+room();
-D.save=function(){try{const o={q:{},pq:D.PQ,n:D.N};for(const k in ST)o.q[k]=(ST[k].S&&ST[k].S.thq)||[];localStorage.setItem(LSK(),JSON.stringify(o))}catch(e){}};
+D.save=function(){try{const o={q:{},pq:D.PQ,n:D.N,rv:D.RV,rw:COOP.state.week||0};for(const k in ST)o.q[k]=(ST[k].S&&ST[k].S.thq)||[];localStorage.setItem(LSK(),JSON.stringify(o))}catch(e){}};
 function loadLS(){try{return JSON.parse(localStorage.getItem(LSK())||"null")}catch(e){return null}}
 {const so=TH.seatOf;TH.seatOf=function(seat){const had=!!ST[seat];const B=so.apply(this,arguments);if(B&&!had&&TH.dOn()){const o=loadLS();
-  if(o){if(o.q&&Array.isArray(o.q[seat])&&!Array.isArray(B.S.thq))B.S.thq=o.q[seat];if(o.pq&&o.pq[seat]&&!D.PQ[seat])D.PQ[seat]=o.pq[seat];if(o.n&&o.n[seat]&&!D.N[seat])D.N[seat]=o.n[seat]}}return B}}
+  /* D r1: her cards come ONLY from the host's own store; a thq inside the room's person blob is ignored (stale: a host reload showed an old card) */
+  B.S.thq=o&&o.q&&Array.isArray(o.q[seat])?o.q[seat]:[];
+  if(o){if(o.pq&&o.pq[seat]&&!D.PQ[seat])D.PQ[seat]=o.pq[seat];if(o.n&&o.n[seat]&&!D.N[seat])D.N[seat]=o.n[seat];
+   if(o.rv&&o.rv[seat]&&!D.RV[seat]&&o.rw===(COOP.state.week||0))D.RV[seat]=o.rv[seat]}}return B}}
 D.hold=s=>{if(!Array.isArray(s.thq))s.thq=[]};
 const safe=o=>{try{return JSON.parse(JSON.stringify(o,(k,v)=>typeof v==="function"?undefined:v))}catch(e){return null}};
 function optV(o){const r=safe(o)||{n:o&&o.n,x:o&&o.x,fx:o&&o.fx};if(r)delete r.go;return r}
 let cN=0;
+/* D r1 (KIT FIRST, one place): the card as she reads it = EVERY data field of the queued entry (pid, pp, hideOut, kit, art, stage …:
+   the renderer and its kit wrappers key on them, e.g. kitIsEventChoice = "pid" in m), minus handlers and this device's own `__` markers.
+   The guest's stand-in (gSync) is this object + {thin:id}, so her copy renders exactly like the native card on the host. */
+D.vOf=function(m){const v={};for(const k of Object.keys(m||{})){if(/^__/.test(k)||k==="opts"||k==="onClose"||typeof m[k]==="function")continue;const x=safe(m[k]);if(x!==null||m[k]===null)v[k]=x}
+ v.who=safe(m.who);v.opts=m.opts?m.opts.map(optV):null;v.mustChoose=!!m.mustChoose;return v};
+D.standIn=function(c){const v=c.v||{};return Object.assign({},v,{thin:c.id,t:v.t||c.t,h:v.h||c.h||"",who:v.who||null,opts:v.opts||null,
+ must:1/* the host already let this card through; her phone's event pacing (j68 evGate: optional cards held / dropped) must not drop it */})};
 /* inside her context: every dialog her turn queued (her Q) becomes a serialized card in S.thq */
 D.takeQ=function(){if(!CW.ctx||!Array.isArray(Q)||!Q.length)return 0;D.hold(S);let n=0;
  for(const m of Q.splice(0,Q.length)){if(!m||(typeof isMenuCard==="function"&&isMenuCard(m)))continue;
   const base=m.pid?{pid:m.pid,pp:safe(m.pp)||{},t:m.t}:!m.opts?{t:m.t,h:m.h,cls:m.cls,btn:m.btn,w:m.who&&m.who.w}:null;
   if(!base){D.bad.push(String(m.t||"?"));console.warn("thin D: a card with handlers and no pid cannot be kept",m.t);continue}
   const id="c"+Date.now().toString(36)+(cN++);
-  S.thq.push(Object.assign({id},base,{v:{t:m.t,h:m.h,cls:m.cls,btn:m.btn,who:safe(m.who),opts:m.opts?m.opts.map(optV):null,mustChoose:!!m.mustChoose}}));n++}
+  S.thq.push(Object.assign({id},base,{v:D.vOf(m)}));n++}
  if(n){D.log.push(["card",CW.ctx,n]);setTimeout(()=>TH.flush(),0)}return n};
 /* things for the host to do after her context closes (his own cards, his costs, his note) */
 const AFTER=[];
@@ -323,7 +358,7 @@ TH.onDo("pack",a=>{const n=+(a&&a.n)||0;const seat=CW.ctx;const L=D.PQ[seat]||[]
  for(const x of L)if(x.n<=n&&CW.rpend){delete CW.rpend["pq"+seat+x.n];if(x.rid)delete CW.rpend[x.rid]}D.PQ[seat]=L.filter(x=>x.n>n);
  setTimeout(()=>{try{if(CW.soonEnd)CW.soonEnd()}catch(e){}},0);return {n}});
 /* the stored person of the other seat is rebuilt from the merged week while part B is not on (her cards / patches are kept) */
-COOP.on("week",()=>{if(host()&&TH.dOn()&&!TH.on(2)){D.save();for(const k in ST)if(k!==CW.seat)TH.seatDrop(k)}});
+COOP.on("week",()=>{if(host())D.RV={};if(host()&&TH.dOn()&&!TH.on(2)){D.save();for(const k in ST)if(k!==CW.seat)TH.seatDrop(k)}});
 
 /* guest: her cards and patches from the view */
 const SENT=new Map();
@@ -335,8 +370,8 @@ function gSync(V){if(host()||!TH.dOn()||!V||!V.o||!S)return;const me=V.o.P&&V.o.
  const cards=(me&&Array.isArray(me.thq)?me.thq:[]);const ids=new Set(cards.map(c=>c.id));let ch=false;
  for(let i=Q.length-1;i>=0;i--)if(Q[i]&&Q[i].thin&&!ids.has(Q[i].thin)){Q.splice(i,1);ch=true}
  const now=Date.now();for(const [id,t] of SENT)if(!ids.has(id)||now-t>15000)SENT.delete(id);
- for(const c of cards){if(SENT.has(c.id)||Q.some(q=>q&&q.thin===c.id))continue;const v=c.v||{};
-  Q.push({thin:c.id,t:v.t||c.t,h:v.h||c.h||"",cls:v.cls,btn:v.btn,who:v.who||null,opts:v.opts||null,mustChoose:v.mustChoose});ch=true}
+ for(const c of cards){if(SENT.has(c.id)||Q.some(q=>q&&q.thin===c.id))continue;
+  Q.push(D.standIn(c));ch=true}
  if(ch||got){try{showModal();render()}catch(e){console.error(e)}}}
 COOP.on("thinview",gSync);
 COOP.on("room",()=>SENT.clear());

@@ -101,7 +101,8 @@ function joinP(sS,Pm){const c=Pm.cmP;if(sS.cm&&c)Object.assign(sS.cm,J(c));
  delete sS.cmP;delete sS.menP}
 function myBlob(sS){const P={pid:me(),ok:S.origin&&S.origin.k,name:S.name,rank:S.rank,dead:!!S.dead,srv:!!(S.srv&&!S.srv.risen),life:CW.life,S:{}};
  for(const k in sS)if(!W_KEYS.includes(k))P.S[k]=sS[k];splitP(sS,P.S);
- if(sS.emp)P.S.empKnown=sS.emp.known||{};delete P.S.heir;/* p2 B2: the heir is the world key hr, resolved again on every rebuild */return P}
+ if(sS.emp)P.S.empKnown=sS.emp.known||{};delete P.S.heir;/* p2 B2: the heir is the world key hr, resolved again on every rebuild */
+ delete P.S.thq;/* part D r1: her open cards live only in the host's store (localStorage per room); a copy in a blob came back stale after a host reload */return P}
 function toCanon(){try{CW.hrSync&&CW.hrSync()}catch(e){console.error(e)}const L=(CW.pulled||[]).concat(pullFriend());let d;try{S.cev=S.cev||{};const f=L.find(x=>x[0]>=0);if(f)S.cev[fp()]=f[1].ev||0;d=ser()}finally{pushFriend(L.filter(x=>!(CW.pulled||[]).includes(x)))}
  const mp=me(),sS=d.S;const WS={};for(const k of W_KEYS)if(k in sS)WS[k]=worldPart(k,sS[k]);if(WS.emp)delete WS.emp.known;
  if(!host()){const bS=(CW.base&&CW.base.W&&CW.base.W.S)||{};for(const k of HOST_ONLY){if(k in bS)WS[k]=J(bS[k]);else delete WS[k]}}
@@ -339,7 +340,13 @@ function sendRes(v,k,b0,txt,id,pet,items,fam){if(CW.ctx)return;/* part D: her ac
  if(flags.dead)v.alive=true;if(flags.cold)v.out=false;   /* her death / lãnh cung happen on her side; her entry follows from her `me` / week */
  const rid=id||newId();CW.rpend[rid]=Date.now();  /* her week's end waits for her ack, so a res that lands after she ended is re-sent in her end */
  const msg=Object.assign({t:"res",id:rid,k,n:(ACT[k]||{}).n||k,who:S.name,fx,flags,seen,txt:t.slice(0,400)},pet&&pet.length?{pet}:{},items&&items.length?{items}:{},fam&&fam.length?{fam}:{});
- if(dOn()&&host()&&CW.thin.D.resTo(fs(),msg,rid))return;COOP.send(msg)}
+ if(dOn()&&host()){const m2=Object.assign({},msg,{txt:herView(msg.txt,v.name,S.name)});if(CW.thin.D.resTo(fs(),m2,rid))return}COOP.send(msg)}
+/* part D r1: the act's text is the host's ("Ngươi" = the host, her name / "nàng ta" = her); she reads it in her own perspective */
+function herView(t,her,me0){t=String(t||"");if(!t)return t;const H="\u0001";const L="(^|[^\\p{L}])",R="(?=$|[^\\p{L}])";
+ t=t.replace(new RegExp(L+"([Nn])gươi"+R,"gu"),(x,p)=>p+H);
+ if(her)t=t.split(her).join("ngươi");t=t.replace(new RegExp(L+"([Nn])àng ta"+R,"gu"),(x,p)=>p+"ngươi");
+ t=t.split(H).join(me0||"hảo hữu");return t.replace(/(^|[.!?]\s+)ngươi/g,(x,p)=>p+"Ngươi")}
+CW.herView=herView;
 /* ---------- co-op pets (owner 15/11 20:05Z): help / harm / steal the friend's pet (petcare / thaopet / petsteal, jpet + jpetcare) ----------
    The act runs on her entry (which carries her live pets, petLive/pos); what happened to each of her pets goes out as `res.pet` ops
    ({op:"d",t,at,d:{full,clean,joy,aff}} | {op:"lose",t,at}); her client applies them to her OWN pets (petLose there gives her the
@@ -368,7 +375,8 @@ function petApply(ops,k){const out=[];if(!Array.isArray(ops))return out;
 (function(){const f=runAct;runAct=function(a,t,k,extra){if(!CW.on||a!==S||!isF(t))return f.apply(this,arguments);
  if(ASK.includes(k)&&!CW.inv){if(sameHouse(a,t))return f.apply(this,arguments);const id=newId();CW.acts[id]={k,extra,v:t.id};
   const item=extra!=null&&S.inv&&S.inv[extra]?iname(S.inv[extra]):"";
-  if(dOn()){if(host()){const who=S.name;CW.thin.D.cardFor(fs(),()=>pushDil(mkP("thInv",{id,k,item,who}),"Hảo hữu tìm đến"))}
+  if(dOn()){if(host()){const who=S.name,v=t.id,he=extra!=null&&S.inv&&S.inv[extra]?J(S.inv[extra]):null;/* D r1: k/v/item ride in pp, so a host reload keeps the answer (CW.acts is memory only) */
+    CW.thin.D.cardFor(fs(),()=>pushDil(mkP("thInv",{id,k,item,who,v,he}),"Hảo hữu tìm đến"))}
    else CW.thin.doSend("inv",{id,k,item,e:extra!=null&&S.inv&&S.inv[extra]?J(S.inv[extra]):null});return `Ngươi ngỏ ý ${((ACT[k]||{}).n||k).toLowerCase()} với ${t.name}, đợi nàng trả lời. `}
   COOP.send({t:"act",id,k,mode:"invite",n:(ACT[k]||{}).n||k,who:S.name,item});return `Ngươi ngỏ ý ${((ACT[k]||{}).n||k).toLowerCase()} với ${t.name}, đợi nàng trả lời. `}
  const pa=PETACT.includes(k);let L0=null;if(pa){petLoseHook();L0=tsbPets(t).map(P=>[P,Object.assign({},P)]);CW.petV=t;CW.petAdj={}}
@@ -460,7 +468,11 @@ function resApply(m){if(S.dead)return;
  if(note){pushModal({t:m.tt?String(m.tt):m.k==="petcare"?"Hảo hữu sang giúp":m.seen==="named"?"Hảo hữu ra tay":"Biến cố",h:note});showModal()}render()}
 function onActr(m){if(!CW.on||m.from===CW.seat)return;if(m.ack){delete CW.rpend[m.id];soonEnd();return}invRun(m.id,m.ok)}
 /* her answer to my invite (old relay: actr; part D: her card's choice, run by the host after her context closes) */
-function invRun(id,ok){const a=CW.acts[id];delete CW.acts[id];if(!a)return;const v=RV(a.v);const m={id};
+function invRun(id,ok,pp){let a=CW.acts[id];delete CW.acts[id];
+ /* part D r1: after a host reload CW.acts is empty: rebuild from the card's pp (target id, the item itself found by value, like invHer) */
+ if(!a&&pp&&pp.v!=null&&pp.k){let extra;if(pp.he){const t=JSON.stringify(pp.he);extra=(S.inv||[]).findIndex(x=>JSON.stringify(x)===t);if(extra<0)extra=-1}
+  if(extra===-1){pushModal({t:"Hảo hữu nhận lời",h:`<p>Món quà ấy nay không còn trong rương của ngươi.</p>`});showModal();render();return}a={k:pp.k,v:pp.v,extra}}
+ if(!a)return;const v=RV(a.v);const m={id};
  if(!ok||!v||!v.alive){pushModal({t:"Hảo hữu từ chối",h:`<p><b>${esc(friendName())}</b> không nhận.</p>`});showModal();render();return}
  CW.inv=m.id;let r="";try{r=runAct(S,v,a.k,a.extra)}finally{CW.inv=false}if(r)log(r);
  pushModal({t:"Hảo hữu nhận lời",h:`<p>${r||"Hảo hữu đã nhận."}</p>`});showModal();render()}
@@ -954,8 +966,8 @@ const otherSide=fn=>{const T=CW.thin;if(CW.ctx)T.D.after(fn);else T.D.later(fs()
 /* Kết giao / Tặng quà: pp {id, k, item, who, e (the guest's item, when she gives it)} */
 PEND.thInv=pp=>{if(!pp||!pp.id)return null;const what=pp.k==="gift"?`muốn tặng ngươi ${esc(pp.item||"một món quà")}`:`muốn kết giao với ngươi`;
  return {t:`<p><b>${esc(pp.who||friendName())}</b> ${what}.</p>`,o:[
-  {n:"Nhận",fx:{},x:"hảo hữu tiếp tục việc ấy",go:()=>otherSide(()=>CW.ctx?invHer(pp,true):invRun(pp.id,true))},
-  {n:"Từ chối",fx:{},x:"không nhận",go:()=>otherSide(()=>CW.ctx?invHer(pp,false):invRun(pp.id,false))}]}};
+  {n:"Nhận",fx:{},x:"hảo hữu tiếp tục việc ấy",go:()=>otherSide(()=>CW.ctx?invHer(pp,true):invRun(pp.id,true,pp))},
+  {n:"Từ chối",fx:{},x:"không nhận",go:()=>otherSide(()=>CW.ctx?invHer(pp,false):invRun(pp.id,false,pp))}]}};
 /* her invite accepted / refused by the host: run in HER context (she is the actor, the host's entry the target) */
 function invHer(pp,ok){if(!S||S.dead)return;const v=friendEntry();
  if(!ok||!v||v.alive===false){pushModal({t:"Hảo hữu từ chối",h:`<p><b>${esc(friendName())}</b> không nhận.</p>`});return}

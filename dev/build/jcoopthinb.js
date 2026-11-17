@@ -101,7 +101,7 @@ function roll(a){const seat=CW.ctx;const oP=CW.base&&CW.base.P&&CW.base.P[seat];
  const key=K.seed+"#"+(a.re|0)+"#"+life;TB.last={key,life,rows,P:null};TB.hold=true;TB.stat.roll++;
  const P=blob(life);TB.last.P=P;
  return {st:"roll",key,P,q:qSer(Q),rows,ok:mistressOk(),renamed:TB.renamed}}
-function accept(a){if(TB.cache[a.key])return TB.cache[a.key];const L=TB.last;if(!L||L.key!==a.key)return {st:"accept",key:a.key,err:"stale"};
+function accept(a){if(TB.cache[a.key])return TB.cache[a.key];try{if(TH.D&&TH.D.RV)delete TH.D.RV[CW.ctx]}catch(e){}/* D r1: a new face: this week's row deltas of the old face are gone with it */const L=TB.last;if(!L||L.key!==a.key)return {st:"accept",key:a.key,err:"stale"};
  NLP=null;S.pdw=pdBase();S.pdLife=0;if(S.nlRe)log(`Đã đổi thân phận ${S.nlRe} lần (−${S.nlRe*PD_COST} Phúc duyên).`);
  const tab0=tab;
  try{if(a.kc)S.kcPick=String(a.kc);if(a.kc==="nha"&&!S.kc&&typeof kcInit==="function"&&kcOk(S.origin.k)&&!S.srv)kcInit()}finally{tab=tab0}
