@@ -674,3 +674,4 @@
 | mg-snap SẴN SÀNG KIỂM 2a00405f → review r1 (opus BIG; brief briefs/review-mg-snap-r1.md) | review/mg-snap-r1 | B | session_01N1tNP3VpMVoikpTW1oDAch | RUNNING | 17/11 07:27Z |
 | BATCH-D8 builder (opus): D's 7 PASSes (suc-khoe-r2, cloud-del-r1, item-ledger-solo-r1, npc-death-wire-r1, story-frame-r1, batch-0032-oi-r1, npc-roads-fx-r2) merged on live main + gates + shots → BATCH READY for main to FF | review/batch-d8 | D | session_01964izGMZ8GAccJj2diJHaA | RUNNING | 17/11 07:37Z |
 | ART scene-thanhtai-<k> per subject (10: cam ky thi hoa vu y cong dung ngon hanh; owner 07:45Z via main) | CDN img/scene-thanhtai-<k>.webp + reports/event-art-style.md | C ROOT-3 | session_011xDdVRL7CsVy8Z2iZPR3Hs (event-art #4) | RUNNING | 17/11 07:50Z |
+| SHOW WHY A NUMBER (opus; main s30 order item 2; + reviewer follow-ups: 44 inline nết numbers → BAL.net, touch tooltip) | review/show-why | C ROOT-3 | session_011xDdVQM2jyGVY8RsCxbtvX | RUNNING | 17/11 07:52Z |
