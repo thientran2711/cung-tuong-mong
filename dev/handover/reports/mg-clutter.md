@@ -1,4 +1,4 @@
-# mg-clutter report (worker mg-clutter) — branch review/mg-clutter @ 9a2bf6e8
+# mg-clutter report (worker mg-clutter) — branch review/mg-clutter @ cbbbc7d9 (2 commits: 9a2bf6e8 + cbbbc7d9)
 
 PRIORITY #1 CHECK: OD 6 | ledger 1 | claims 3 | main j79.js kitGameFrame (hud row), j82.js kg82Frame, jtoil.js toilDressUI (Hôm nay) | review/* 0 (diemtrang-* branches are score/fx/coop-look, none touch the frame)
 
@@ -92,7 +92,7 @@ Contest kinds (15: dan hat co dauho ban tho doi doden ve hoa theu kim mua banh h
 
 ## Info check (do not lose needed info)
 - Round count: Cách chơi / how text of each game states its rounds (MINIGAMES.md: '5 hồi', '3 hồi', '6 lần ném'); the Điểm trang how line says Hồi 1..4. No new display invented.
-- OPEN POINT for the coordinator/owner: the live countdown ('Còn 30 giây') and running Phần x/10 were only in the removed chip row. Games with a time limit now show no visible countdown (the limit is in the how line only for some). Owner asked to remove the row; if she wants the countdown back it must be a kit request (one small timer in the game box), not this row.
+- Time limit (main s29 decision): games with a real time limit show the EXISTING kit clock chip (kitCoopClock, KIT §69.4, 'Còn N giây') at the right of the frame's title line, via kitGameClock called from kitGameSet('time'). Only the HUD value '<n> giây' makes it visible; 'nhìn kỹ', '–', 'N tên', 'đã hết', 'không hạn' hide it. No new part, no chip row. Looked at the Fold shot (Đàn): chip 'Còn 19 giây' in the title line, panel scroll 0. KIT.md §13 updated.
 - The Điểm trang occasion list (Thỉnh an Thái hậu / Hoàng hậu, gặp bề trên) is gone as ordered; the occasion still reaches the player through the mama hint line (when she has a mama) and the 'Cách chơi' line.
 
 ## Tests
@@ -100,7 +100,7 @@ Contest kinds (15: dan hat co dauho ban tho doi doden ve hoa theu kim mua banh h
 - node dev/test/toilette.js (Fold): ok, no errors, no overflow.
 - node dev/test/small-bugs-2.js (Fold): exit 0, errs [] (HUD labels Hồi/Câu/Môn/Hạng still update).
 - node dev/test/minigames91.js (Fold; dan co mua ban theu huong): all done, no overflow, no truncation, errors []. hudOver counter (715 on dan) is the same pre-existing sample counter as the baseline build (793), hudMax empty = no HUD value above its ceiling.
-- node dev/test/contest-ui.js: FAILS at line 17 (.kgpic missing: the board painting is not on the CDN in this sandbox, kg82Pic returns ''); not caused by this change (it only reads .kghud display, which was already 'none' in the intro). Not verified against baseline; please re-run where the CDN is reachable.
-- bash dev/tools/quickcheck.sh: QUICKCHECK PASS · 145 s · old save ok · core gates PASS.
+- node dev/test/contest-ui.js: FAILS identically BEFORE (origin/main build, same sandbox, port 8766) and AFTER at line 17 (page.evaluate TypeError reading 'right' of null = .kgpic missing: the board painting is not on the CDN in this sandbox); not caused by this change. It was previously: FAILS at line 17 (.kgpic missing: the board painting is not on the CDN in this sandbox, kg82Pic returns ''); not caused by this change (it only reads .kghud display, which was already 'none' in the intro). Verified against baseline: same failure. Re-run where the CDN is reachable.
+- bash dev/tools/quickcheck.sh: QUICKCHECK PASS on cbbbc7d9 (145 s, old save ok, core gates PASS). Rescan after the clock chip (after.json): chip rows 0, Hôm nay 0, scroll 0 at Fold/iPad/iPad-Pro; phone Điểm trang 106 px. minigames91 (6 kinds) and small-bugs-2 rerun on cbbbc7d9: ok.
 - Scan: dev/handover/reports/mg-clutter/scan.js (before.json/after.json hold the raw rows).
 - Not scanned (no cheap entry): exams, Nghiệm thân, tài nghệ học, mưu/dò la, tát/né, Phối đồ frames — they all go through kg82Frame, so the row removal applies; their scroll was not measured.
