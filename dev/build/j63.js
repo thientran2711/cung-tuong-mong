@@ -225,12 +225,26 @@ resultShow=function(title,before,okHint){if(!S||!before||S.dead)return;
  let t=$("rtoast");if(!t){t=document.createElement("div");t.id="rtoast";document.body.appendChild(t)}
  t.onclick=e=>{const kk=e.target.closest(".kkem");if(kk){e.stopPropagation();const on=!kk.classList.contains("on");kk.classList.toggle("on",on);kk.setAttribute("aria-expanded",String(on));clearTimeout(window.__rtT);return}
   if(e.target.closest(".kalog")){const tb=document.querySelector('[data-tab="log"]');if(tb)tb.click();else{try{tab="log";renderPanel()}catch(x){}}}t.classList.remove("on")};
- const rows=[];if(G.length)rows.push({k:"duoc",label:"Được",items:G});if(B.length)rows.push({k:"mat",label:"Mất",items:B});if(!rows.length&&!(K&&K.length))rows.push({k:"note",label:"Ghi chú",items:['<span class="ef n">không đổi chỉ số</span>']});
+ /* tuanluc-sync item 8 (owner 17/11 03:36Z: "mắc gì cái việc này là của một cái quý phi khác … Sức lại được cộng 9, mà Sủng thì bị trừ 1 là
+    sao không hiểu"): the overnight card names the cause of every Được / Mất row ("Ngủ một đêm: Sức 91→100 (+9)", "ân sủng nhạt dần: Sủng 8→7 (−1)");
+    other people's news is never its headline — it goes in its own row "Tin trong cung" */
+ let tin=[];if(title==="Trong cung vừa qua"){try{const L=S.logs.slice(0,Math.min(n,S.logs.length)).map(h=>String(h));
+   const segs=[];for(const h of L)for(const s of plain(h.replace(/<span class="ld">[^<]*<\/span>/,"").replace(/<i class="kw"[^>]*><\/i>/g,"")).split(/\s+·\s+/))segs.push(s);
+   const why=nm=>{const W=[];for(const s of segs){const i=s.search(new RegExp(`(^|[:,;.]\\s)${nm.replace(/[.*+?^${}()|[\]\\]/g,"\\$&")}\\s*(?:[+\\-−]\\d|\\d+\\s*→)`));if(i<0)continue;
+     /* the cause = the start of that line ("Ngủ một đêm", "ân sủng nhạt dần", "Có người đến · Để thái y kê thuốc bổ"), never the generic time step */
+     const pre=s.slice(0,i).split(/\s+—\s+/)[0].replace(/[:,;.\s]+$/,"").replace(/^(Sang (?:buổi|tuần) mới|Trong cung)(?::\s*|$)/,"");const w=pre.split(/:\s*/).filter(Boolean).slice(0,2).join(" · ").trim();if(w&&w.length<=60&&!W.includes(w))W.push(w)}return W.join("; ")};
+   const cause=x=>{const m=/<span class="ef [gr]">([^<]+?) -?\d+→/.exec(x)||/<span class="ef [gr]">Lòng ([^<]+?) -?\d+→/.exec(x);if(!m)return x;const w=why(m[1].trim());return w?`<span class="ef t">${w}:</span> ${x}`:x};
+   for(let i=0;i<G.length;i++)G[i]=cause(G[i]);for(let i=0;i<B.length;i++)B[i]=cause(B[i]);
+   /* news about others: a line with no marker of bookkeeping that is not about her */
+   tin=L.filter(h=>!/class="kls"/.test(h)&&/<i class="kw"/.test(h)/* about another person (jlogbao who-stamp) */&&!/\b(ngươi|ta)\b/i.test(plain(h))&&!/^[^:]{1,40}: [^(:]{1,50} \(/.test(plain(h.replace(/<span class="ld">[^<]*<\/span>/,"")))/* her own choice line */).map(h=>plain(h.replace(/<span class="ld">[^<]*<\/span>/,""))).filter(x=>x&&!/^(Ngươi|Ta|Ngủ|Nghỉ|Sang |Đến )/.test(x)&&!/\b(ngươi|ta)\b/.test(x.slice(0,40))&&!/(?<!của [^\s]+(?: [^\s]+){0,3} )(?:^|[\s:,;.(])(Sủng|Danh|Sức|Bạc|Đức|Tai mắt|Ân tình|Sắc|Tài|Tâm cơ) (?:-?\d+ → |[+\-−]\d)/.test(x))/* a line with her own numbers is hers, not news */.map(x=>x.length>150?x.slice(0,148).replace(/\s\S*$/,"")+"…":x).slice(0,3);
+   if(tin.length)sen=""}catch(e){console.error("ka night",e)}}
+ const rows=[];if(G.length)rows.push({k:"duoc",label:"Được",items:G});if(B.length)rows.push({k:"mat",label:"Mất",items:B});if(tin.length)rows.push({k:"tin",label:"Tin trong cung",items:tin.map(x=>`<span class="ef n">${x}</span>`)});if(!rows.length&&!(K&&K.length))rows.push({k:"note",label:"Ghi chú",items:['<span class="ef n">không đổi chỉ số</span>']});
  window.kaLastResult={title,ok,seal,sentence:sen,rows:rows.map(r=>({k:r.k,label:r.label,items:r.items.map(kaPlain)}))};
  const row=r=>`<span class="kr kr-${r.k}"><span class="krl">${r.label}</span><span class="krv">${r.items.map(x=>`<span class="kitem">${x}</span>`).join("")}</span></span>`;
  t.className="rtoast karesult "+SL.cls;
  t.innerHTML=`<div class="rt"><span class="kat"><b class="seal">${seal}</b><span class="kan">${title||""}</span></span>${sen?`<span class="ksen">${sen}</span>`:""}<span class="kb">${rows.map(row).join("")}${kitKemRow(K)}</span><span class="kalog" role="button" tabindex="0">Xem đầy đủ ở Nhật ký</span></div>`;
- void t.offsetWidth;t.classList.add("on");clearTimeout(window.__rtT);window.__rtT=setTimeout(()=>t.classList.remove("on"),9000)};
+ void t.offsetWidth;t.classList.add("on");clearTimeout(window.__rtT);window.__rtT=setTimeout(()=>t.classList.remove("on"),9000);
+ /* tuanluc-sync item 7: the Sổ ghi keeps this card in full (jlogbao), as shown after every wrapper */setTimeout(()=>{try{if(typeof lbCardRes==="function")lbCardRes(title)}catch(e){}},0)};
 (function(){const st=document.createElement("style");st.id="ka-res-css";st.textContent=`
 .rtoast.karesult{display:block;max-width:min(94vw,520px);width:max-content;min-width:min(94vw,300px);padding:9px 12px 8px}
 .rtoast.karesult .rt{display:flex;flex-direction:column;gap:4px;font-size:.84rem}

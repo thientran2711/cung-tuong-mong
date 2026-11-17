@@ -72,3 +72,34 @@ function lbLater(){if(!LB.t)LB.t=setTimeout(lbFlush,700)}/* a moment after the b
 (function(){if(typeof closeModal!=="function")return;const c0=closeModal;closeModal=function(){const r=c0.apply(this,arguments);try{if(S&&S.lbQ&&S.lbQ.length&&!Q.length)lbLater()}catch(e){}return r}})();
 (function(){if(typeof render!=="function")return;const r0=render;render=function(){const r=r0.apply(this,arguments);try{if(S&&S.lbQ&&S.lbQ.length&&!Q.length&&!LB.t)lbLater()}catch(e){}return r}})();
 window.LOGBAO=LOGBAO;window.lbTidy=lbTidy;window.lbClass=lbClass;window.logOnce=logOnce;
+
+/* ================= SỔ GHI KEEPS EVERY CARD (tuanluc-sync item 7, owner 17/11 03:34Z verbatim: "Đúng ra cái sổ ghi là phải lưu lại tất cả mọi
+   thứ xảy ra từ nhỏ tới lớn.") =================
+   Every KẾT QUẢ card (#rtoast result card, KIT §7) and every dialog card (VIỆC / BÁO / TIN / event, the modal queue) she is shown is kept IN FULL
+   — title, text, Được / Mất / Kèm rows, who — in S.cards (kept in the save, newest BAL-free cap LBCARDS) and shown in the Sổ ghi at the moment it
+   happened, between the log lines. Kept OUT of S.logs on purpose: the cards restate numbers ("Sức 91→100") that the Sổ ghi replay (jlogsync) and
+   the Tuần lục (j87) already count once. Markup = the card's own kit parts (seal + title, .kb kit rows, kitKemRow) — no new frame or CSS. */
+const LBCARDS=60;
+function lbCardKeep(h,key){try{if(!S||!h)return;S.cards=S.cards||[];const k=lbKey()+"|"+key;if(S.cards.some(c=>c.k===k))return;
+  let d="";try{d=`T${S.month}/${S.year} ${TUAN[S.tuan]}`}catch(e){}
+  S.cards.unshift({q:S.logSeq||0,k,d,h:String(h).slice(0,4000)});if(S.cards.length>LBCARDS)S.cards.length=LBCARDS}catch(e){}}
+const lbStrip=h=>String(h||"").replace(/<(img|video|audio|canvas|svg|button|figure|picture)\b[\s\S]*?(<\/\1>|\/?>)/gi,"").replace(/<(script|style)\b[\s\S]*?<\/\1>/gi,"")
+  .replace(/\s(on\w+|id|data-a|data-k|tabindex|role)="[^"]*"/g,"").replace(/<span class="kalog"[\s\S]*?<\/span>/,"");
+/* the KẾT QUẢ card: what the toast really showed, after every wrapper (j63 resultShow calls lbCardRes a tick after it fills #rtoast) */
+function lbCardRes(title,any){try{const t2=document.getElementById("rtoast");const rt=t2&&(any||t2.classList.contains("on"))&&t2.querySelector(".rt");if(rt)lbCardKeep(`<span class="klk">${lbStrip(rt.innerHTML)}</span>`,"kq|"+lbPlain(String(title||"")).slice(0,60)+"|"+(S.logSeq||0))}catch(e){}}
+window.lbCardRes=lbCardRes;
+/* … and any other path that fills the result card (outermost wrapper: a card some wrapper builds itself) */
+(function(){if(typeof resultShow!=="function")return;const r0=resultShow;resultShow=function(title){const tt=document.getElementById("rtoast");const h0=tt?tt.innerHTML:"";const r=r0.apply(this,arguments);
+  setTimeout(()=>{try{const t2=document.getElementById("rtoast");if(t2&&t2.innerHTML!==h0)lbCardRes(title,1)}catch(e){}},20);return r}})();
+/* a dialog card: title + its text and rows (not menus without a title) */
+(function(){if(typeof showModal!=="function")return;const s0=showModal;showModal=function(){const r=s0.apply(this,arguments);try{const q=typeof Q!=="undefined"&&Q[0];const m=document.getElementById("modal");
+  if(q&&q.t&&m&&!m.hidden&&!S.mg){let body=lbStrip(typeof q.h==="string"?q.h:"");if(!lbPlain(body)){const mb=m.querySelector("#mb");if(mb)body=lbStrip(mb.innerHTML)}const who=q.who?lbPlain(String(q.who)).slice(0,40):"";
+   const opts=Array.isArray(q.opts)&&q.opts.length?`<span class="kb"><span class="kr"><span class="krl">Lựa chọn</span><span class="krv">${q.opts.map(o=>`<span class="ef n">${lbPlain(o.n||"")}</span>`).join('<span class="ksep">·</span>')}</span></span></span>`:"";
+   lbCardKeep(`<b>${lbPlain(String(q.t))}</b>${who&&!lbPlain(body).includes(who)?` · ${who}`:""} ${body}${opts}`,"dl|"+lbPlain(String(q.t)).slice(0,40)+"|"+lbPlain(body).slice(0,60))}}catch(e){}return r}})();
+/* shown in the Sổ ghi: each kept card sits above the first log line written before it */
+(function(){if(typeof renderPanel0!=="function")return;const p0=renderPanel0;renderPanel0=function(){const r=p0.apply(this,arguments);try{
+  if(typeof tab==="undefined"||tab!=="log"||!S||!S.cards||!S.cards.length)return r;const box=document.querySelector("#panel .logs");if(!box)return r;
+  const rows=[...box.children];const top=S.logSeq||0;let ri=0;
+  for(const c of S.cards){while(ri<rows.length&&top-ri>c.q)ri++;const el=document.createElement("div");el.dataset.card="1";el.innerHTML=`<span class="ld">${c.d||""}</span>${c.h}`;
+   if(ri<rows.length)rows[ri].before(el);else box.appendChild(el)}}catch(e){console.error("lbCards",e)}return r}})();
+window.lbCardKeep=lbCardKeep;

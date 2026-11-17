@@ -9,9 +9,13 @@ const LIVES=+(process.argv[2]||6),WEEKS=+(process.argv[3]||12),HTML=path.resolve
   p.on('pageerror',e=>tot.errs.push(e.message.slice(0,160)));
   await p.route(/^https?:\/\//,r=>r.abort());
   await p.goto('file://'+HTML);await p.waitForTimeout(1500);
-  const R=await p.evaluate(async([weeks,L])=>{const out={lines:[],bao:[],tuan:0,resid:[],filler:0,mom:0,miss:0,missS:[]};const sl=t=>new Promise(r=>setTimeout(r,t));
+  const R=await p.evaluate(async([weeks,L])=>{const out={lines:[],bao:[],tuan:0,resid:[],filler:0,mom:0,miss:0,missS:[],cards:0,cardMiss:0,cardMissS:[]};const sl=t=>new Promise(r=>setTimeout(r,t));
    try{SLOT=3;const ti=document.getElementById('title');if(ti)ti.hidden=true;const OR=[...new Set(ORIGINS.map(o=>o.k))];window.__forceOrigin=OR[L%OR.length];start();Q.length=0;render();
     const l0=log;log=function(h){const q=S.logSeq||0;const r=l0.apply(this,arguments);/* the STORED line (after every wrapper) */if((S.logSeq||0)!==q&&S.logs[0])out.lines.push({t:S.turn,tu:S.tuan,b:S.buoi||0,h:String(S.logs[0]).replace(/<span class="ld">[^<]*<\/span>/,"")});return r};
+    /* item 7: every card shown (KẾT QUẢ toast, dialog with a title) has its full record in the Sổ ghi (S.cards) */
+    const has=(pre,t)=>(S.cards||[]).some(c=>c.k.includes(pre+String(t).replace(/<[^>]+>/g," ").replace(/\s+/g," ").trim().slice(0,30)));
+    {const r0=resultShow;resultShow=function(title){const tt=document.getElementById("rtoast");const h0=tt?tt.innerHTML:"";const r=r0.apply(this,arguments);setTimeout(()=>{try{const t2=document.getElementById("rtoast");if(t2&&t2.classList.contains("on")&&t2.innerHTML!==h0){out.cards++;if(!has("kq|",title||"")){out.cardMiss++;if(out.cardMissS.length<8)out.cardMissS.push("kq "+title)}}}catch(e){}},30);return r}}
+    {const s0=showModal;showModal=function(){const r=s0.apply(this,arguments);try{const q=Q[0],m=document.getElementById("modal");if(q&&q.t&&m&&!m.hidden&&!S.mg){out.cards++;if(!has("dl|",q.t)){out.cardMiss++;if(out.cardMissS.length<8)out.cardMissS.push("dl "+String(q.t).slice(0,60))}}}catch(e){}return r}}
     /* item 6, moment level: after every player action / time step, each person whose feeling for her changed is NAMED in a line of that moment */
     const PN=()=>{const M={};for(const v of rivals)if(v&&v!==S&&v.id!=null&&!v.dead)M["v"+v.id]=v;[S.maid].concat(S.staff||[]).forEach(x=>{if(x&&typeof x.loyal==="number")M["s"+(x.sid!=null?x.sid:x.name)]=x});return M};
     let dep=0;for(const f of ["act","chooseM","closeModal","nextBuoi","goTo"]){const g=window[f];window[f]=function(){if(dep++)try{return g.apply(this,arguments)}finally{dep--}
@@ -27,7 +31,7 @@ const LIVES=+(process.argv[2]||6),WEEKS=+(process.argv[3]||12),HTML=path.resolve
      try{const Lp=places().filter(p=>p.k&&p.k!==S.place);const pl=Lp[Math.floor(Math.random()*Lp.length)];if(pl){goTo(pl.k);await drain()}}catch(e){}
      await drain();try{nextBuoi()}catch(e){try{Q.length=0;endTurn()}catch(e){}}await sl(20)}
    }catch(e){out.err=String(e&&e.stack||e).slice(0,300)}return out},[WEEKS,L]);
-  if(R.err)tot.errs.push(R.err);tot.resid.push(...R.resid);tot.filler+=R.filler;tot.mom=(tot.mom||0)+R.mom;tot.miss=(tot.miss||0)+R.miss;(tot.missS=tot.missS||[]).push(...R.missS);if(process.env.DUMP)require("fs").appendFileSync(process.env.DUMP,R.lines.map(x=>x.t+"|"+x.b+"|"+x.h.replace(/<[^>]+>/g,"").replace(/\s+/g," ").trim()).join("\n")+"\n");tot.lives++;tot.lines+=R.lines.length;
+  if(R.err)tot.errs.push(R.err);tot.resid.push(...R.resid);tot.filler+=R.filler;tot.mom=(tot.mom||0)+R.mom;tot.miss=(tot.miss||0)+R.miss;(tot.missS=tot.missS||[]).push(...R.missS);tot.cards=(tot.cards||0)+R.cards;tot.cardMiss=(tot.cardMiss||0)+R.cardMiss;(tot.cardMissS=tot.cardMissS||[]).push(...R.cardMissS);if(process.env.DUMP)require("fs").appendFileSync(process.env.DUMP,R.lines.map(x=>x.t+"|"+x.b+"|"+x.h.replace(/<[^>]+>/g,"").replace(/\s+/g," ").trim()).join("\n")+"\n");tot.lives++;tot.lines+=R.lines.length;
   const plain=h=>h.replace(/<[^>]+>/g,'').replace(/\s+/g,' ').trim();
   /* one-time lines: the announcement family (unlock / first time / met someone / opens) — same text twice in one life = a repeat */
   const ONCE=/bắt đầu nghĩ đến những lối khác|ngoài con đường tranh sủng|có thêm nhóm|lần đầu|Lần đầu|nay đã biết tên|đã lành, ngươi tháo|từ nay (đi theo|theo hầu|lo chạy việc)/;
@@ -40,4 +44,4 @@ const LIVES=+(process.argv[2]||6),WEEKS=+(process.argv[3]||12),HTML=path.resolve
   await ctx.close()}
  await b.close();const nOnce=Object.values(tot.once).reduce((a,b)=>a+b,0);
  console.log(JSON.stringify(tot,null,1).slice(0,6000));
- console.log(`TUANLUC-SYNC lives ${tot.lives} lines ${tot.lines} · one-time repeats ${nOnce} · clumsy masked ${tot.masked.length} · tip repeats/tuần ${tot.tips.length} · BÁO ${tot.bao} (max/buổi ${tot.baoMaxPerBuoi}) · relation changes ${tot.mom} (no cause line ${tot.miss}) · week-book residue ${tot.resid.length} · filler lines ${tot.filler} · errors ${tot.errs.length}`)})();
+ console.log(`TUANLUC-SYNC lives ${tot.lives} lines ${tot.lines} · one-time repeats ${nOnce} · clumsy masked ${tot.masked.length} · tip repeats/tuần ${tot.tips.length} · BÁO ${tot.bao} (max/buổi ${tot.baoMaxPerBuoi}) · relation changes ${tot.mom} (no cause line ${tot.miss}) · cards shown ${tot.cards} (missing from Sổ ghi ${tot.cardMiss}) · week-book residue ${tot.resid.length} · filler lines ${tot.filler} · errors ${tot.errs.length}`)})();
