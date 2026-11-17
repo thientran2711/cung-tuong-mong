@@ -275,12 +275,13 @@ function knSoldK(s){return !!(S&&S.tmSold&&S.tmSold[knSoldKey(s)]!=null)}
 function knIsSold(s){return !!(s&&s.spyFor!=null&&s.spyFor!=="me")}
 function informerInfo(it){if(!it||!S)return null;const by=String(it.by||"");const k=it.inf||(/^[sv]\d/.test(by)?by:null);if(!k)return null;
  if(k[0]==="v"){const v=RV(+k.slice(1));return knInfUi({id:k,name:v?v.name:it.infName||"",isTaiMat:false,kind:"friend",soldOutKnown:false})}
+ if(by==="buy"){const s=servById(+k.slice(1));return knInfUi({id:k,name:s?s.name:it.infName||"",isTaiMat:false,kind:"seller",soldOutKnown:false})}/* AG-ALL-2g: news she paid an info seller for */
  const s=k==="maid"?S.maid:servById(+k.slice(1));if(!s)return knInfUi({id:k,name:it.infName||"",isTaiMat:false,kind:"passerby",soldOutKnown:false});
  const o=s===S.maid?S:ownerOf(s);const kind=o===S?"ownMaid":s.spyFor==="me"?"taiMat":"passerby";
  return knInfUi({id:k,name:s.name,isTaiMat:kind==="taiMat",kind,soldOutKnown:kind==="ownMaid"&&knIsSold(s)&&knSoldK(s)})}
 /* the tinbao-ui adapter codes: code mat (her Tai mắt) / hau (her servant) / ban (friend) / qua (passer-by) / sold (a discovered sell-out); label = who, as she knows it */
-const KN_INFL={mat:"Tai mắt",hau:"Người hầu",ban:"Bằng hữu",qua:"Người đi ngang",sold:"Kẻ hai lòng"};
-function knInfUi(f){const c=f.soldOutKnown?"sold":{taiMat:"mat",ownMaid:"hau",friend:"ban",passerby:"qua"}[f.kind];f.code=c;f.label=KN_INFL[c]+(f.name?" "+f.name:"");return f}
+const KN_INFL={mat:"Tai mắt",hau:"Người hầu",ban:"Bằng hữu",qua:"Người đi ngang",sold:"Kẻ hai lòng",tin:"Kẻ bán tin"};
+function knInfUi(f){const c=f.soldOutKnown?"sold":{taiMat:"mat",ownMaid:"hau",friend:"ban",passerby:"qua",seller:"tin"}[f.kind];f.code=c;f.label=KN_INFL[c]+(f.name?" "+f.name:"");return f}
 /* her Tai mắt's count of reports (set by the producers knScan / knBao) */
 function knTmN(e){if(!e||e.sid==null||!S)return;S.tmN=S.tmN||{};S.tmN[e.sid]=(S.tmN[e.sid]||0)+1}
 /* ================= AG-ALL-2f r2 — TAI MẮT MUST BE EARNED (owner OD 17/11 ~16:50Z verbatim on the handover branch: "một người trung thành mà tôi có
@@ -323,3 +324,80 @@ function tmGain(p,n){if(n>0){for(let i=0;i<n;i++)tmTry(p,"gain")}else if(n<0)tmL
 /* every khắc: her and every consort's number follows the real list (spyFor changes in other modules: cut loose, dismissed, found out …) */
 function tmSyncAll(){if(!tmOn()||!S||(typeof isSrv==="function"&&isSrv()))return;tmSync(S);for(const v of liveRivals(true))if(v&&v.alive&&!v.out)tmSync(v)}
 (function(){const m0=knMemo;knMemo=function(){const k=agKey();const fresh=!KN.m||KN.m.key!==k;const M=m0.apply(this,arguments);if(fresh&&!KN.tmIn){KN.tmIn=1;try{tmSyncAll()}catch(e){agErr("tmSync",e)}finally{KN.tmIn=0}}return M}})();
+/* ================= AG-ALL-2g — INFO SELLERS (owner OD 17/11 ~16:50Z (2), verbatim in dev/OWNER_DECISIONS.md: "Có những người bán tin ... nô tài có một
+   tin rất là đắt giá, tiểu chủ có muốn biết không, nếu mà bấm muốn là phải trả bao nhiêu lượng bạc ... cái tin đó phải thực sự là một tin đắt giá đáng
+   tiền ... chứ không phải là mang một cái tin tào lao") — generalises the j67 story complication 'spy' ("Một kẻ gạ bán tin" / "Mua tin": "Tin hắn bán là
+   thật"): ONE seller engine for that story beat, the free-standing offer, her and every consort (two-way).
+   - WHO sells: a REAL servant of another palace, chosen by nết (BAL.ag.sell.q: Ham lợi most, read by qv) × how little she cares for her own master
+     (lòng under BAL.ag.sell.loy; a loyal one never sells), never the buyer's own staff, never the buyer's own Tai mắt (she simply reports).
+   - WHAT: only what she can really know (her master's secrets = j78facts of her master: a scheme in preparation, evidence held, an affair, a hidden
+     pregnancy, illicit things in the chest, a past deed; a change of favour; a scheme deed of this buổi her master does or she stood at) and only news
+     worth at least BAL.ag.sell.min (BAL.ag.sell.val per kind) that the buyer does not know yet → never trivial, ALWAYS TRUE (2c2 no-lies).
+   - PRICE: BAL.ag.sell.price × value / 100 (× 1 + BAL.ag.sell.ask for a greedy seller), bạc; hearing her out takes BAL.ag.sell.kh khắc (dayFit gate).
+   - REFUSE: she does not learn it; and no other path brings that same news this khắc (knFor / j78facts filtered by S.tb.no).
+   - NPC buyers: the same offer odds, the same price, a mindPick choice (worth vs price); a bought happening is known by knFor (Nghe lén …), a bought
+     proof-kind fact gives evidence (evA BAL.ag.ev.one). Personal state S.tb.sl / S.tb.no (lazy; old saves load). */
+function knSB(){return BAL.ag.sell}
+function knSellVal(k){return knSB().val[String(k).split(":")[0]]||0}
+function knSellPrice(val,s){const P=knSB();return Math.max(1,Math.round(P.price*val/100*(1+qv(P.ask,s,0))))}
+function knSellW(s){const P=knSB();const lo=cl(s.loyal||0,0,100);if(lo>=P.loy)return 0;try{if(traitsOf(s).some(t=>P.never.includes(t)))return 0}catch(e){}/* Thanh liêm: "không bán tin" (BAL.net.T) */return Math.max(0,qv(P.q,s,0))*(1-lo/100)}
+/* the khắc stamp: a refusal holds for this khắc only */
+function knKhK(){let b="";try{b=agKey()}catch(e){}return b+":"+agKh()}
+function knNo(){const T=knTb();if(!T.no||T.no.k!==knKhK())T.no={k:knKhK(),ids:{}};return T.no.ids}
+/* a change of favour since she last knew it (S.kf, j78 "sung" fact) */
+function knFavFact(o){try{const K=S.kf&&S.kf[o.id];if(!K)return null;const d=(o.sung||0)-(K.s||0);if(Math.abs(d)<knSB().fav.d)return null;
+ return {k:"fav:"+(o.sung||0),kind:"fav",txt:`Sủng của ${j78Who(o)} vừa ${d>0?"lên":"xuống"} mạnh: ${K.s} → ${o.sung}.`,go:()=>{S.kf[o.id]={s:o.sung,n:K.n||0,w:wk()};return""}}}catch(e){return null}}
+/* the news seller s can sell to buyer x (true, worth ≥ min, not known to x yet); best first */
+function knSellNews(x,s){const o=ownerOf(s);if(!o||o===x||o===S&&x===S)return[];const P=knSB();const L=[];const no=x===S?knNo():{};
+ if(o!==S){let F=[];try{F=j78facts(o)}catch(e){}if(x===S){const f=knFavFact(o);if(f)F.push(f)}
+  const kn=x===S?(S.intel&&S.intel[o.id]||[]):[];const xb=x!==S&&x.knB||{};
+  for(const f of F){const v=knSellVal(f.k);if(v<P.min)continue;if(x!==S&&(f.k==="evme"||f.kind==="fav"))continue;/* evme is "evidence on HER" (j78 reads S) */
+   if(x===S){const z=kn.find(q=>q.k===f.k);if(z&&z.txt===f.txt)continue}else if(xb[f.k]&&xb[f.k].t===f.txt)continue;if(no["v"+o.id+"|"+f.k])continue;
+   L.push({kind:"fact",about:o,f,k:f.k,val:v,txt:f.txt,id:"v"+o.id+"|"+f.k})}}
+ for(const h of knDeedHaps()){const p=knPend(h);if(!p||h.done)continue;const mine=p.vid===(o.id);if(!mine&&!knThere("s"+s.sid,h,knWin(h)))continue;if(!knHarmK(p.k))continue;
+  if(p.vid===x.id)continue;const hid=knHid(h);if(no[hid])continue;let k=null;try{k=knFor(x,h)}catch(e){}if(k)continue;
+  const t=agPerson(p.t);L.push({kind:"hap",h,hid,val:P.val[t===x?"schemeMe":"scheme"]||0,txt:knWhat(h)+" ở "+agPlaceTxt(h.k),id:hid,about:RV(p.vid)})}
+ return L.filter(n=>n.val>=P.min).sort((a,b)=>b.val-a.val)}
+/* a seller for buyer x: weighted by nết × little loyalty, among servants with news worth selling (BAL.ag.sell.try candidates looked at) */
+function knSellPick(x){const own=knStaff(x);const kx=key(x);const C=[];for(const s of knAllSrv()){if(own.includes(s)||s.spyFor===kx)continue;const o=ownerOf(s);if(!o||o===x||(o!==S&&(!o.alive||o.out)))continue;const w=knSellW(s);if(w>0)C.push([s,w])}
+ for(let i=0;i<knSB().try&&C.length;i++){let r=Math.random()*C.reduce((a,c)=>a+c[1],0),j=0;while(j<C.length-1&&r>C[j][1]){r-=C[j][1];j++}const [s]=C.splice(j,1)[0];const N=knSellNews(x,s);if(N.length)return {s,n:N[0]}}
+ return null}
+/* x hears it (paid or not): the gain is the same for her and for an NPC */
+function knSellGive(x,s,n){KN.stat.bought=(KN.stat.bought||0)+1;const o=n.about;
+ if(n.kind==="hap"){KN.bk=KN.bk&&KN.bk.k===agKey()?KN.bk:{k:agKey(),m:{}};KN.bk.m[knId(x)+"|"+n.hid]={by:"buy",how:"buy",e:s};try{KN.m&&(KN.m.x={})}catch(e){}
+  if(x===S)try{adHapNow()}catch(e){}return n.txt}
+ if(x===S){let extra="";try{if(n.f.go)extra=n.f.go()||""}catch(e){}try{intelAdd(o,n.f,{by:s.name,how:"Mua tin"});noteAdd(o.id,`${s.name} bán tin: ${n.txt}`)}catch(e){}knSellItem(s,n.txt,palaceOf(o));return n.txt+extra}
+ x.knB=x.knB||{};x.knB[n.k]={t:n.txt,w:wk()};if(/^(plan|affair|items|deed)/.test(n.k))evA(x,o,BAL.ag.ev.one);return""}
+/* her TIN BÁO row for a bought fact: the seller named (inf = the seller; informerInfo kind "seller") */
+function knSellItem(s,what,place){const T=knTb();const it={id:"buy:"+wk()+":"+(S.buoi||0)+":s"+s.sid+":"+T.R.length,k:"bao",place:place||palaceOf(S),b:S.buoi||0,k0:agKh(),k1:agKh(),who:["s"+s.sid],
+ line:knSellLine(s,"tinbao:buyT",KN_POOL.buyT).replace(/\{what\}/g,what),by:"buy",inf:knSrvKey(s),infName:s.name||"",seen:1};T.R.push(it);if(T.R.length>knB().keep)T.R.shift();for(const f of KN.cb)try{f(Object.assign({},it))}catch(e){console.error("tinBao cb",e)}}
+function knSellLine(s,k,pool){const o=ownerOf(s);let t="";try{t=kSay(knSpk(s),S,kLine(k,pool,{m:"any"}),{m:"cool"})}catch(e){t=pool.any[0]}return t.replace(/\{N\}/g,s.name).replace(/\{P\}/g,o?(o===S?"ta":NM(o)):"khác")}
+KN_POOL.sell={any:["{Xung} có một tin rất đắt giá, {goi} có muốn biết không?","Bẩm {goi}, {xung} có một tin rất đắt giá. {Goi} có muốn nghe không?"]};
+KN_POOL.buy={any:["{N}, người hầu cung {P}, bán tin: ở {W} {what}.","{N}, người hầu cung {P}, nhận bạc rồi bẩm: {what}, ngay ở {W}."]};
+KN_POOL.buyT={any:["{N}, người hầu cung {P}, nhận bạc rồi bẩm: {what}"]};
+/* the offer to HER: a kit event card (Q, j3 modal: speaker portrait + options, bạc cost shown and checked by the kit) */
+function knSellCard(s,n){const P=knSB();const price=knSellPrice(n.val,s);const o=ownerOf(s);
+ const buy={n:"Mua tin",fx:{bac:-price},x:`nghe một tin thật, đáng giá · ${P.kh} khắc`,go:()=>{spend(P.kh);const t=knSellGive(S,s,n);log(`${s.name} (người hầu cung ${NM(o)}) bán tin: ${t}`);Q.push({t:"Tin mua được",who:pServ(s),h:`<p>${t}</p>`})}};
+ if(!dayFit(P.kh))kitOff(buy,dayWhy(P.kh));
+ const no={n:"Không mua",fx:{},x:"không biết tin ấy",go:()=>{knNo()[n.id]=1;KN.stat.refused=(KN.stat.refused||0)+1;try{KN.m&&(KN.m.x={})}catch(e){}knSellNpc(s,n,S)}};
+ return {t:"Có người bán tin",who:pServ(s),h:`<p>${s.name}, người hầu cung ${NM(o)}, lén tìm đến: “${knSellLine(s,"tinbao:sell",KN_POOL.sell)}”</p>`,opts:[buy,no],sell:{sid:s.sid,id:n.id,price}}}
+/* an NPC buyer weighs it (worth vs price; her bạc), pays, hears it */
+function knSellNpcBuy(x,s,n){const P=knSB();const price=knSellPrice(n.val,s);if((x.bac||0)<price)return false;
+ let c=null;try{c=mindPick([["buy",P.npc.buy*n.val/100],["no",P.npc.no*price/Math.max(price,x.bac||0)]],x)}catch(e){}
+ if(c!=="buy"){KN.stat.npcNo=(KN.stat.npcNo||0)+1;return false}x.bac=(x.bac||0)-price;KN.stat.npcBuy=(KN.stat.npcBuy||0)+1;knSellGive(x,s,n);return true}
+/* refused: the seller tries another buyer with the same news (not the one who refused) */
+function knSellNpc(s,n,skip){for(const x of liveRivals(true)){if(x===skip||x===ownerOf(s)||!x.alive||x.out)continue;const N=knSellNews(x,s).filter(q=>q.id===n.id);if(N.length&&knSellNpcBuy(x,s,N[0]))return x}return null}
+/* once per buổi per buyer: BAL.ag.sell.o % that a seller comes (her: only when the day still has the khắc; not as a maid) */
+function knSellTick(){if(!knOn()||!S||S.dead||S.out)return;const T=knTb();const key=agKey();if(T.sl===key)return;T.sl=key;const P=knSB();
+ try{if(!(typeof isSrv==="function"&&isSrv())&&dayFit(P.kh)&&roll(P.o)){const r=knSellPick(S);if(r){KN.stat.offer=(KN.stat.offer||0)+1;Q.push(knSellCard(r.s,r.n))}}}catch(e){agErr("knSell",e)}
+ for(const x of liveRivals(true)){if(!x.alive||x.out||x.confined)continue;try{if(!roll(P.o))continue;const r=knSellPick(x);if(r)knSellNpcBuy(x,r.s,r.n)}catch(e){agErr("knSellNpc",e)}}}
+/* the j67 story beat "Một kẻ gạ bán tin" (GB67.spy) runs through the same engine: "Mua tin" / "Ép hắn khai" bring the best true news a real seller has */
+function knSellArc(A,ok){if(!ok||!knOn())return"";const r=knSellPick(S);if(!r)return"";const o=ownerOf(r.s);const t=knSellGive(S,r.s,r.n);return t?`(${r.s.name}, người hầu cung ${NM(o)}: ${t})`:""}
+(function(){
+ /* bought news is known; refused news is not, this khắc, by any path */
+ const f0=knFor;knFor=function(x,h){if(x&&h){try{const hid=knHid(h);if(x===S&&knNo()[hid])return null;const B=KN.bk;if(B&&B.k===agKey()){const r=B.m[knId(x)+"|"+hid];if(r)return r}}catch(e){}}return f0.apply(this,arguments)};
+ if(typeof j78facts==="function"){const j0=j78facts;j78facts=function(v){const F=j0.apply(this,arguments);try{if(S&&v&&S.tb&&S.tb.no&&S.tb.no.k===knKhK()){const N=S.tb.no.ids;return F.filter(f=>!N["v"+v.id+"|"+f.k])}}catch(e){}return F}}
+ if(typeof j95sync==="function"){const s0=j95sync;j95sync=function(){const r=s0.apply(this,arguments);try{knSellTick()}catch(e){agErr("knSellTick",e)}return r}}
+ try{if(typeof GB67==="object"&&GB67.spy&&GB67.spy.o){for(const i of [0,1]){const op=GB67.spy.o[i];if(!op)continue;const g0=op.go;op.go=function(A,ok){let a="";try{a=g0?g0.apply(this,arguments)||"":""}catch(e){}return [a,knSellArc(A,ok)].filter(Boolean).join(" ")}}}}catch(e){}
+})();
+Object.assign(window,{knSellNews,knSellPick,knSellGive,knSellCard,knSellNpcBuy,knSellTick,knSellPrice,knSellArc});

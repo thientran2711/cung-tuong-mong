@@ -939,6 +939,13 @@ Object.assign(BAL.ag,{kh2:{on:1,rest:1,max:3,maxX:1,see:{on:1,w:{ignore:3,hear:1
    scout.oan = the target's regard lost when the spy is caught (the player's "Sai đi dò la": oán +5); keep = news kept per day */
 BAL.ag.know={eye:100,friend:30,close:70,tell:{tell:1,late:.5,keep:1,sell:1.5,q:{trung:.4,chuyen:.2,lanh:.1,tham:-.3,nhat:-.2}},voice:{warm:70,cool:40},serve:.25,
  hear:{safe:4,spite:2,ally:1},base:.01,listen:{k:1,o:50,tc:3,tin:2,mp:.25},scout:{k:2,tin:3,lose:5,mp:.5,oan:5,caught:50},watch:{k:1,tin:2,mp:.25},keep:20,share:[5,20]};
+/* AG-ALL-2g INFO SELLERS (jagknow tail; owner OD 17/11 ~16:50Z (2)): o = % per buổi that a seller comes to a buyer (her and each consort);
+   kh = khắc to hear him out (dayFit); min = least worth of news that may be sold (never trivial); val = worth per kind of news (j78 fact key prefix;
+   scheme / schemeMe = a scheme deed of this buổi against another / against the buyer; fav = a change of favour ≥ fav.d Sủng); price = bạc at worth 100
+   (price × worth / 100, × 1 + ask for the nết in ask); q = who sells, by nết (qv codes; none of them = never sells); never = nết that never sell (Thanh liêm: "không bán tin"); loy = lòng to her own master at
+   or above which she never sells; try = sellers looked at per offer; npc.buy / npc.no = an NPC buyer's weights (worth / 100 vs price / her bạc) */
+BAL.ag.sell={o:15,kh:1,min:70,val:{plan:100,scheme:85,schemeMe:95,evme:90,affair:85,preg:80,items:75,fav:72,deed:70},price:40,ask:{tham:.25},
+ q:{tham:1,lanh:.4,chuyen:.3},never:["Thanh liêm"],loy:70,try:6,fav:{d:15},npc:{buy:1,no:1}};
 /* AG-ALL-2 G11 (jagtoil): an NPC's face of the day is HER CHOICE among the player's own ways at the mirror (owner 17/11 ~14:50Z: NPCs pay the same
    costs and suffer the same consequences, and choose by their own nết, not always the best). Host only (agOn); the result is the player's toilNpcPlay.
    opt     the ways: moc = no sitting (mặt mộc), nha = Kiểu thanh nhã, cauky = Kiểu cầu kỳ, dam = cầu kỳ with thick powder (BAL.toil.play.cakeOver)
