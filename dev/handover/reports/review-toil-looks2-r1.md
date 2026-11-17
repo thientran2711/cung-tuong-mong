@@ -35,3 +35,10 @@ LANDING ORDER: makeup-theme-r1 471de81f is NOT on main and is an ancestor of b9a
 - mk-reveal.js still forces look:null for tuyet/vua (old test); this review used a probe that sets the record's look.
 
 Shots: scratch only (looked at, deleted); none in git or CDN.
+
+# r2 — looks3 v5 delta (review/toil-looks2 8acee5db) — VERDICT: PASS ebacfb15
+Branch review/toil-looks2-r2 = r1 b9a46096 + merge 8acee5db (only generated files conflicted, rebuilt) + merge main 25bfd7cf. origin/main is an ancestor -> FF ready; contains makeup-theme-r1 + r1 fix (harshGhen/replyGhen kept). Live still waits for the owner's OK on the ?v=5 look (main).
+Delta read (jtoil.js +73, mk-layer-scan +3): blush/skin light now painted in the canvas colour layer (toilFaceLayer drops the SVG when a mesh layer exists; SVG stays only for mesh-less faces); clip = face-outline oval from the mesh x skin colour (median of the cheek windows) x no eyes; blush size from the fit row (never shrunk, owner 13:48Z); layer box margin .14 -> .3; cache key now includes the blush colour (col.ma). Render constants stay in TOIL_MKS (same place as before; one-core-guard PASS). Same functions for her, her co-op friend; NPCs unchanged.
+Gates on ebacfb15: quickcheck PASS (open 1470 ms, old save ok, perf ≈ live: render 140/150, buổi 814/941), CORE GATES PASS incl. mk-layer-scan 12960 pictures 0 bad (new geometry check: cheek centres inside the outline, below the eyes); toil-tease 25/25; toil-overlay 0 bad; toil-allday 0 missing layers; mk-reveal 0 errors at 755x1000 and 1180x820.
+LOOKED (real reveal close-up, branch mesh data, Fold, 5 levels x c07-t3, c31-ty2, c22-t5, c05-t1; iPad c31-ty2): blush stays inside the cheek/face, no hard edge at the clip, eyes clear, lips on the mouth; the far-cheek pink halo of r1 is gone. Vụng về blotchy but soft; Diêm dúa clearly heavier, still pretty.
+Nits (not blocking): toilMkGeom keeps an unused `fits` helper; `mO/200+.0` in the eyelid clip reads like a leftover. CDN upload list unchanged (see r1 section).
