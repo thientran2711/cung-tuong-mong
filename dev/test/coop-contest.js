@@ -167,7 +167,12 @@ const head=o=>o.p.evaluate(()=>Q[0]?{t:Q[0].t,pid:Q[0].pid||null,sd:Q[0].pp&&Q[0
   const gx=await B.p.evaluate(f=>({suc:S.suc,done:(j7s().fx||{})[f.f]&&j7s().fx[f.f].done,q:Q.filter(m=>/: kết quả$/.test(m.t||'')&&m.t.startsWith(f.n)).length}),iA);
   ok(sb-gx.suc===await B.p.evaluate(()=>J71.cost)&&gx.done===1&&gx.q===1,'5 guest: Sức paid once, registration closed, one result card',{sb,gx});
   ok(await A.p.evaluate(f=>Q.filter(m=>/: kết quả$/.test(m.t||'')&&m.t.startsWith(f.n)).length===1,iA),'5 host: one result card');
-  for(const o of [A,B]){await o.p.evaluate(()=>{const i=Q.findIndex(m=>/: kết quả$/.test(m.t||''));if(i>0)Q.unshift(Q.splice(i,1)[0]);if(Q.length)showModal()});await shot(o,'5-fx-result')}}
+  for(const o of [A,B]){await o.p.evaluate(()=>{const i=Q.findIndex(m=>/: kết quả$/.test(m.t||''));if(i>0)Q.unshift(Q.splice(i,1)[0]);if(Q.length)showModal()});await shot(o,'5-fx-result');
+   /* r1: the OTHER player's played row reads the same true text on this seat (no formula split) and carries a kit portrait */
+   const rw=await o.p.evaluate(()=>{const m=document.getElementById('modal');const F=COOPW.fEntry();const nm=F&&F.name;const R=[...m.querySelectorAll('.kfact')].filter(x=>x.textContent.includes('phần tự chơi'));
+     const other=R.find(x=>!x.classList.contains('kfme'));/* her own row is kfme (it reads Ngươi / Ta) */return{n:R.length,txt:other?other.textContent.replace(/\s+/g,' ').slice(0,160):null,por:!!(other&&other.querySelector('img.kpor')),formula:[...m.querySelectorAll('.kfact')].some(x=>/= \d+ tài nghệ.*\+ 0 may rủi/.test(x.textContent)),nm}});
+   ok(rw.n===2&&rw.txt&&!rw.formula,'5 '+o.name+': both played rows say "tự chơi" (the other player too, no formula split)',rw);
+   ok(rw.por,'5 '+o.name+': the other player\'s row has its kit portrait',rw)}}
  /* ---- 4 Tranh ghế ---- */
  await B.p.evaluate(()=>{S.rank=6});await weekAll(A,B,'4 prep');
  const tg=await A.p.evaluate(()=>{for(const v of rivals)if(v.queen&&!v.coop){v.queen=false;v.rank=Math.min(v.rank,5)}const v=liveRivals(false).find(x=>!x.coop&&present7(x));v.rank=6;S.rank=6;const f=COOPW.fEntry();

@@ -170,6 +170,10 @@ CW.sendMe=()=>sendMe();CW.friendHome=friendHome;
 /* coop-contest helpers: who pays a shared prize — her own client pays her; NPCs are paid by the host only; the friend entry never (her client pays her) */
 CW.isHost=()=>host();CW.pidMe=()=>me();CW.pidF=()=>fp();CW.isF=isF;CW.fEntry=()=>friendEntry();CW.wk=()=>wk();
 CW.pay=p=>!CW.on||p===S||(host()&&!isF(p));
+/* coop-contest-fix r1 (whole family): the kit's people list (kpPeople: portraits + names in every fact row / result card) also holds the
+   friend's entry while the host's week end has her pulled out of the harem — her row never loses its portrait */
+(function(){if(typeof kpPeople!=="function")return;const f=kpPeople;kpPeople=function(){const L=f.apply(this,arguments);try{if(CW.on&&CW.pulled)for(const x of CW.pulled){const v=x&&x[1];
+ if(v&&v.name&&v.name.length>=4&&!L.some(y=>y[1]===v))L.push([v.name,v])}L.sort((a,b)=>b[0].length-a[0].length)}catch(e){}return L}})();
 /* run f with the friend entry back in rivals while endTurn has her pulled out (the host's Tranh ghế: she is a real candidate) */
 CW.withFriend=f=>{const L=CW.pulled;if(!CW.on||!L||!L.length)return f();const back=L.filter(x=>x[0]>=0);pushFriend(back.slice());try{return f()}finally{for(const x of back){const i=rivals.indexOf(x[1]);if(i>=0)rivals.splice(i,1)}}};
 

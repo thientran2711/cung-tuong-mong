@@ -26,9 +26,9 @@ const esc=s=>String(s==null?"":s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",
 let seq=0;const seen=new Set();
 function say(o){try{COOP.send(Object.assign({t:"act",k:CK,id:CW.pidMe()+":"+Date.now().toString(36)+":"+(seq++),week:CW.wk()},o))}catch(e){}}
 function sw(m){if(typeof $==="function"&&$("modal")&&$("modal").hidden)try{showModal()}catch(e){}if(m)try{render()}catch(e){}}
-function fName(){const f=CW.fEntry();return (f&&f.name)||"Hảo hữu"}
+function fName(){const f=fEnt();return (f&&f.name)||"Hảo hữu"}
 /* a row's person on this client: me, the friend entry, an NPC, or a stand-in when that NPC is gone */
-function who(r){const id=+r.id;if(id===CW.pidMe())return S;if(id===CW.pidF())return CW.fEntry()||{id,name:r.nm||"Hảo hữu",alive:true,coop:true};return RV(id)||{id,name:r.nm||"",alive:false}}
+function who(r){const id=+r.id;if(id===CW.pidMe())return S;if(id===CW.pidF())return fEnt()||{id,name:r.nm||"Hảo hữu",alive:true,coop:true};return RV(id)||{id,name:r.nm||"",alive:false}}
 /* the friend's entry, also while the host's endTurn has her pulled out of the harem */
 function fEnt(){return CW.withFriend?CW.withFriend(()=>CW.fEntry()):CW.fEntry()}
 function fPresent(){const f=fEnt();return !!(f&&present7(f))}
@@ -125,7 +125,7 @@ PEND.ccplay=pp=>{if(!S)return null;const B=boards()[pp.b];if(!B||B.res)return nu
  const h=`<p>${txt}</p><p>Ngươi đã ghi tên${B.ty==="x"?` dâng ${SC7[kind].n}`:""}. Phần của ngươi = phần tự chơi, cộng thêm theo tài nghệ (${det7(kind,S)}) và chuẩn bị +${me.meB}.</p><p class="past">${other?"Hảo hữu của ngươi cũng dự thi; ":""}cả bảng chấm một lần, xong thì báo kết quả.</p>`;
  const win=B.ty==="x"?`đứng đầu, ${pz7(BAL.fest.fxWin)}`:`đoạt giải, ${pz7(prize7(B.k))}`;
  const play=()=>{const jj=j7s();jj.cpay=jj.cpay||{};jj.cpay[B.id]=1;/* "Vào thi" took her Sức (option fx) */if(mgOn7()){const R0=B.rows.map(x=>{const p=RV(x.id);return{id:x.id,name:x.nm,face:p?pv(p):null,score:x.s,talent:x.t,prep:x.pr,luck:x.lk}});
-   const fr=B.sc&&B.sc[CW.pidF()];if(fr)R0.push({id:fr.id,name:fName(),face:CW.fEntry()?pv(CW.fEntry()):null,score:fr.s,talent:fr.t,prep:fr.pr,luck:fr.lk});
+   const fr=B.sc&&B.sc[CW.pidF()];if(fr){const fe=fEnt();R0.push({id:fr.id,name:fName(),face:fe?pv(fe):null,score:fr.s,talent:fr.t,prep:fr.pr,luck:fr.lk,mg:fr.mg?1:0})}
    const wait=other&&!fr;
    try{startContest({art:kind,artName:SC7[kind].n,title:B.title,rivals:R0,prep:me.meB,talent:Math.round(SC7[kind].f(S)),talentBy:det7(kind,S),luck:J71.luck,big:B.big,fk:B.k,hold:true,
     holdNote:wait?"Hảo hữu chưa thi xong; bảng định thứ chung và thưởng phạt sẽ báo khi mọi người dự thi xong.":"Bảng định thứ chung và thưởng phạt báo ở bảng kế tiếp.",
@@ -140,7 +140,7 @@ function submit(B,row){if(!B)return;const j=j7s();const r=row?Object.assign({id:
 
 /* ---------- results (both clients, once each) ---------- */
 function applyRes(B){if(!on()||!B||!B.res)return;const j=j7s();j.cdone=j.cdone||{};if(j.cdone[B.id])return;j.cdone[B.id]=1;
- const L=B.res.map(r=>({p:who(r),kind:r.kind||B.kind,t:r.t,pr:r.pr||0,lk:r.lk||0,s:r.s,mg:r.mg&&+r.id===CW.pidMe()?1:0,gi:r.gi}));if(!L.length)return;
+ const L=B.res.map(r=>({p:who(r),kind:r.kind||B.kind,t:r.t,pr:r.pr||0,lk:r.lk||0,s:r.s,mg:r.mg?1:0,gi:r.gi}));if(!L.length)return;
  const w=L[0].p,mi=L.findIndex(x=>x.p===S),pay=p=>CW.pay(p);
  /* plan b — ONE rule, same as solo: her feast registration closes once the board is ranked; an entrant on the list pays the contest Sức
     exactly once (on "Vào thi", or here when she was scored by formula because she never played — solo's no-minigame road) */
