@@ -43,7 +43,7 @@ const FAV={};
 function faceUrl(fc){if(!fc)return"";if(fc[0]==="@"){const n=+fc.slice(2);return (AV.women||[])[n]||""}return "img/"+fc+".webp"}
 /* ONE picture index (img/_index.json = every file on the CDN, keys may come back as full CDN urls: jcdn): fetched once, shared (jevban KIT_CDNHAVE). A face file is asked of the index, never probed with a request (a pool entry whose art is not drawn yet, e.g. face-man-1..8, was a 404 per session) */
 const CDN_INDEX=(()=>{try{return fetch("img/_index.json",{cache:"no-cache"}).then(r=>r.ok?r.json():null).then(j=>j&&j.files&&j.files.length?new Set(j.files.map(f=>String(f[0]).replace(/^.*?(?=img\/)/,""))):null).catch(()=>null)}catch(e){return Promise.resolve(null)}})();
-regEach(FPOOL,(k,L)=>{for(const f of (L||[])){try{const u=faceUrl(f);if(!u){FAV[f]=0;continue}if(u.slice(0,5)==="data:"){FAV[f]=1;continue}
+regEach(FPOOL,(k,L)=>{for(const f of (L||[])){try{const u=faceUrl(f);if(!u){FAV[f]=0;continue}if(u.slice(0,5)==="data:"){FAV[f]=0;continue}/* inline "@W<n>" portraits: kept OUT of new draws exactly as on live (their failed img/@W<n>.webp probe set FAV=0); a saved "@W<n>" still shows its face via fsrc. Letting them in is an owner/D decision (changes who new people get + render cost), not part of the 404 fix */
  CDN_INDEX.then(ix=>{if(ix){FAV[f]=ix.has(u)?1:0;return}const im=new Image();im.onload=()=>{FAV[f]=1};im.onerror=()=>{FAV[f]=0};im.src=u})}catch(e){}}},"FPOOL probe");
 function fsrc(fc,fb){if(fc&&fc[0]==="@")return faceUrl(fc)||fb||"";if(!fc||FAV[fc]===0)return fb||"";return faceUrl(fc)}
 function poolOf(role){const pre={eunuch:"eun",emperor:"emp",thaihau:"th",official:"off"}[role];return pre?Object.keys(FPOOL).filter(k=>k.startsWith(pre)&&/\d$/.test(k)).flatMap(k=>FPOOL[k]):FPOOL[role]||[]}
