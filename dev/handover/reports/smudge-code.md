@@ -19,12 +19,15 @@ PRIORITY #1 CHECK: OD 17/11 ~23:30Z (smudge = CODE on the makeup layer, not Magn
 3 https://ctm-img.victoria-tntt.workers.dev/img/_review/smudge/smudge-3.png
 (wipe with `cdn_sync.py --wipe-review smudge` after the verdict)
 
-## Known gaps / honest notes
-- NOT done: "no makeup + crying = lash-run only". `lkGive`/`lkItem` still require makeup for `smu` (LK_MK, looks-2 test noMakeupNoSmu). Needs a decision: a separate "tears" state without makeup.
-- NPC women path (sampled colours) is coded but I could not exercise it: the test NPC's figure was `unknown-fig-f.webp` (no face points). Not shot.
-- Some pictures' img/mk-fit points sit off the painted face (seen on one random face: makeup lip itself landed on the chin). The smudge follows the same points, so it is off there exactly like the makeup; samples use a good face (por/fig-consort-c17-tcold-a18).
-- Small figure faces are only ~40 px: nhẹ is barely visible there, vừa/nặng read as a tear stain.
-- Shots outside git; built root files (index.html, sw.js, assets.json) not committed.
+## r2 (verdict s39)
+- nhẹ now = short faint lash-run under each eye + blush drag/blur (BAL.looks.smuFx.tear/blush level 1); 1 < 2 < 3 read clearly.
+- Lip off the mouth in r1 samples = the FROZEN face-fit (the §60 colour layer's own lip is already off at level 0 on that picture; the smudge follows the same img/mk-fit points). A contact sheet of 24 consorts showed ~half have the pasted-lip fit. Samples re-shot on por/fig-consort-c19-kc-a18 whose lips fit. No re-fit done (OD 04:05Z).
+- NPC path checked: dev/test/smudge-code.js lifts the 'seen' rule for one NPC woman (rival, own portrait with face points) and confirms the klk-smu layer is drawn (sampled colours). In play an unscouted woman shows no marks (fxSeen).
+
+## Open items / follow-ups
+- NOT done: "no makeup + crying = lash-run only" (lkGive/lkItem keep requiring makeup for smu; chip wording + Sắc would need a separate tears state). Needs owner/main decision.
+- Small figure faces (~40 px): nhẹ barely visible, vừa/nặng read as a tear stain.
+- Shots outside git; built root files not committed.
 
 ## State
-branch review/smudge-code b074f4e (pushed). Waiting for MAIN's verdict.
+branch review/smudge-code 73c87f7 (pushed). Waiting for verdict.
