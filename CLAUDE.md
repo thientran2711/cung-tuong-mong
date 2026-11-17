@@ -1,4 +1,5 @@
 # CLAUDE.md — Cung Tường Mộng (rules for every Claude session and agent)
+⛔ GATE ZERO (owner 17/11, angry): PRIORITY RULE #1 FIRST — before opening any worker, writing any brief/order, answering or proposing anything: grep OWNER_DECISIONS + OWNER_LEDGER + HANDOVER + PROGRESS, git grep origin/main + origin/review/*, read CLAIMS + foreman STATUS; every brief/order/report starts with 'PRIORITY #1 CHECK: …' evidence; reuse what exists. Full text: top of dev/rules/START_CORE.md (handover branch).
 This file wins over AGENTS.md wherever they differ. Owner = "sếp" (Victoria); Claude = "em"; to the owner: Vietnamese only, short; every report ends "~X% xong / ~Y% chơi được".
 
 ## Rule sources (all binding; read before work)
