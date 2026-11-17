@@ -193,15 +193,15 @@ const KF_WX={
  snowp3:{k:[KF_SPR.snow,KF_SPR.snow,"petal-plum","petal-plum"],cap:130,vx:[-.5,.7],vy:[1,1.8],sway:.9,spin:.04,sc:[1.1,2],a0:1,gust:.9,fall:1,snow:1},
  storm1:{k:["streak"],cap:34,vx:[-1.4,-.8],vy:[11,14],a0:.78,rain:1,tint:0xc4d6e6,sc:[.85,1.15]},  /* giông tố nhẹ: far rumble, a downpour that has not broken yet (bolt rare, BAL.wx.day.bolt) */
  storm2:{k:["streak"],cap:56,vx:[-2.4,-1.4],vy:[12,16],a0:.8,rain:1,tint:0xbccde0,sc:[.9,1.2]},
- heat1:{k:["glowburst"],cap:2,vx:[-.05,.05],vy:[-.12,-.04],a0:.1,float:1,tint:0xffd9a0,sc:[3,4.4],life:[420,640]},  /* nắng gắt: heat haze patches, thicker and warmer with the level */
+ heat1:{k:["glowburst"],cap:2,vx:[-.05,.05],vy:[-.12,-.04],a0:.1,float:1,tint:0xffd9a0,sc:[3,4.4],life:[420,640]},  /* nắng gắt: heat glare patches, brighter and more of them with the level */
  heat:{k:["glowburst"],cap:4,vx:[-.05,.05],vy:[-.14,-.05],a0:.17,float:1,tint:0xffd29a,sc:[3.2,4.8],life:[420,640]},
- heat3:{k:["glowburst","ember"],cap:8,vx:[-.06,.06],vy:[-.2,-.06],a0:.26,float:1,tint:0xffc680,sc:[3.4,5.2],life:[380,600]},
- cloud1:{k:["smoke"],cap:2,vx:[.1,.3],vy:[-.05,.05],a0:.12,float:1,tint:0x8c96a8,sc:[3.4,5],life:[520,760]},  /* trời âm u: slow grey cloud banks drifting over the picture */
- cloud:{k:["smoke"],cap:4,vx:[.12,.36],vy:[-.05,.05],a0:.2,float:1,tint:0x7c869a,sc:[3.6,5.4],life:[520,760]},
- cloud3:{k:["smoke"],cap:8,vx:[.15,.45],vy:[-.06,.06],a0:.32,float:1,tint:0x6a7488,sc:[3.8,5.8],life:[500,740]},
- mist1:{k:["smoke"],cap:2,vx:[.15,.45],vy:[-.12,.12],a0:.12,float:1,tint:0xf0ece4,sc:[3,4.6],life:[480,700]},
- mist3:{k:["smoke"],cap:7,vx:[.1,.35],vy:[-.1,.1],a0:.32,float:1,tint:0xf0ece4,sc:[3.6,5.4],life:[520,760]},
- mist:{k:["smoke"],cap:5,vx:[.15,.45],vy:[-.12,.12],a0:.24,float:1,tint:0xf0ece4,sc:[3,4.6],life:[480,700]},
+ heat3:{k:["glowburst","ember"],cap:4,vx:[-.06,.06],vy:[-.2,-.06],a0:.3,float:1,tint:0xffc680,sc:[3.4,5.2],life:[380,600]},
+ cloud1:{k:["smoke"],cap:3,vx:[.1,.3],vy:[-.05,.05],a0:.7,float:1,tint:0x7f8aa0,sc:[3.4,5],life:[520,760]},  /* trời âm u: slow grey cloud banks drifting over the picture (smoke atlas is faint: see KIT_REQUESTS ART REQUEST fogbank) */
+ cloud:{k:["smoke"],cap:8,vx:[.12,.36],vy:[-.05,.05],a0:.9,float:1,tint:0x6c768a,sc:[3.8,5.8],life:[520,760]},
+ cloud3:{k:["smoke"],cap:11,vx:[.15,.45],vy:[-.06,.06],a0:1,float:1,tint:0x4a5468,sc:[4,6.5],life:[500,740]},
+ mist1:{k:["smoke"],cap:3,vx:[.15,.45],vy:[-.12,.12],a0:.3,float:1,tint:0xf0ece4,sc:[3,4.6],life:[480,700]},
+ mist3:{k:["smoke"],cap:12,vx:[.1,.35],vy:[-.1,.1],a0:.85,float:1,tint:0xf0ece4,sc:[3.6,5.4],life:[520,760]},
+ mist:{k:["smoke"],cap:6,vx:[.15,.45],vy:[-.12,.12],a0:.5,float:1,tint:0xf0ece4,sc:[3,4.6],life:[480,700]},
  fly:{k:[KF_SPR.fly],cap:90,vx:[-.3,.3],vy:[-.25,.25],sway:.8,a0:1,float:1,sc:[.5,.8],life:[300,560],glow:1},  /* each firefly = tiny warm core + soft green-gold halo (2 sprites), slow wander, deep slow blink, depth (near = bigger, far = tiny) */
  gold:{k:["petal-peach"],cap:12,vx:[-.3,.3],vy:[.5,1],sway:.8,spin:.04,sc:[.5,.8],a0:.85,gust:.4}
 };
