@@ -55,5 +55,12 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
  ok(Object.keys(r4.H).length>=2,'NPC picks vary (mindPick over the options, never one answer)',r4.H);
  ok(!r4.maid||r4.maid.away&&r4.maid.cut,'maid: Theo hầu chủ (master out) / Cắt đứt are offered',r4.maid);
  ok(r4.off===0,'BAL.ag.par3.on = 0 → no cx3 option',r4.off);
+ /* lãnh cung: her cards = coldActsOf(S); an NPC inside picks among the SAME cards (coldMonth), never one answer */
+ const r5=await p.evaluate(()=>{const me=coldActs().map(a=>a.n);let n=0;const f=coldActsOf;coldActsOf=function(x){if(x!==S)n++;return f.apply(this,arguments)};
+  const v=liveRivals(true).find(x=>!x.queen&&x.alive);const H={};const b0=Object.assign({},AG3.stat.by);
+  try{for(let i=0;i<120;i++){v.out=true;v.alive=true;v.suc=20+(i%4)*20;v.bac=(i%3)*40;v.coldBy=null;v.an=(i%5)*20;v.duc=(i%2)*60;p3Cold(v)}}finally{coldActsOf=f;v.out=false;v.alive=true}
+  for(const k in AG3.stat.by)if(/^cold:/.test(k))H[k.slice(5)]=AG3.stat.by[k]-(b0[k]||0);return{me,n,H}});
+ ok(r5.me.includes("Cầu xin")&&r5.me.includes("Chép kinh, giữ đức")&&r5.me.includes("Xuất gia"),'her lãnh cung cards come from coldActsOf(S)',r5.me);
+ ok(r5.n>=100&&Object.keys(r5.H).length>=3,'NPC in lãnh cung chooses among the same cards (histogram, never one answer)',r5.H);
  ok(errs.length===0,'no page errors',errs.slice(0,3));
  await b.close();const f=res.filter(x=>!x).length;console.log(f?`${f} FAIL`:'ALL PASS');process.exit(f?1:0)})();

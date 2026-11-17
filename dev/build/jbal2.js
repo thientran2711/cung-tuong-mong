@@ -1038,4 +1038,5 @@ BAL.ag.par3={on:1,
  treat:{c:{"bac":-30},g:{"rest":4}},
  staff:{thuong:{bac:10,below:55},phat:{below:30},doi:{below:15},che:{danh:2},hoi:{af:20,dt:30},g:{"safe":2},gHoi:{"spite":2,"safe":1}},
  use:{sucBelow:60,g:{"rest":2}},sell:{bacBelow:40,g:{"bac":2}},
- cutRisk:30,charity:{g:{"duc":3,"danh":2}},restLat:{sucBelow:50,g:{"rest":2}},tyGift:{g:{"spite":1,"safe":1}},work:{g:{"danh":2,"ally":1}}};
+ cutRisk:30,cold:{friend:40,sonAge:8,beg:{bac:20,o:10,anD:2,sungD:4},out:{bac:10,o:15,dad:50,affD:3,facD:10,dadD:5},ev:{need:2,o:35,mat:6,tcD:5},poem:{an:30,o:10,anD:2,thi:8},son:{o:15,fondD:2},
+  sutra:{c:{"suc":-3},w:{"duc":3}},veg:{w:{"suc":6}},embro:{c:{"suc":-5},o:70,w:{"bac":10}},nunSuc:10,nunO:10,oanFree:20,gFree:{"sung":30},gStay:{"duc":1,"rest":1,"bac":1}},charity:{g:{"duc":3,"danh":2}},restLat:{sucBelow:50,g:{"rest":2}},tyGift:{g:{"spite":1,"safe":1}},work:{g:{"danh":2,"ally":1}}};

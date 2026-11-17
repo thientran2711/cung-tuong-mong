@@ -5,14 +5,17 @@ function cold(why){if(S.dead)return;if(S.out)return;S.out=1;S.coldWhy=why;S.cold
 function coldVisit(){S.place="lc";const f=rivals.filter(v=>v.alive&&v.out);S.visit={k:"lc",people:lcPeople("Phế phi · cùng cảnh ngộ"),talked:false,tk:{},msg:"Gió lùa qua song cửa mục. Ở đây chỉ có những người bị quên lãng."}}
 function restore(full,why){S.out=0;S.rank=full&&S.coldRank>=7&&seatHas(S,7)?7:seatDown(S,full?S.coldRank:S.coldRank-1);S.place="home";S.visit={k:"home",people:homePeople(),talked:false,tk:{}};S.lastPromo=S.turn;fillStaff(S,true);
  log(`<b class="g">${why}. Ngươi được rời lãnh cung, phục vị ${RANKS[S.rank].n}.</b>`);Q.push({t:"Rời lãnh cung",cls:"end",who:pMe(),h:`<p>${why}.</p><p>Ngươi được phục vị <b>${RANKS[S.rank].n}</b>.</p>`,btn:"Tạ ơn"});deal();if(typeof feedback==="function")feedback("decree")}
-function coldActs(){const A=[],fr=liveRivals(true).filter(v=>aff(v,S)>=40),f=facOf(S),son=mySons().find(k=>k.age>=8);
- A.push({n:"Cầu xin",t:"Đút bạc cho lính gác, gửi thư lên Dưỡng Hòa điện.",c:{bac:-20},o:od(10+S.an/2+S.sung/4),k:2,w:{},l:{},x:"được tha",go:()=>restore(false,"Hoàng thượng đọc thư, động lòng")});
- if(fr.length||f||(S.dad||0)>=50)A.push({n:"Nhờ người bên ngoài",t:fr.length?`Nhờ ${fr[0].name} nói giúp.`:f?`Nhờ ${f.name} vận động.`:"Nhờ cha ở triều đình dâng sớ.",c:{bac:-10},o:od(15+(fr.length?aff(fr[0],S)/3:0)+(f?facStr(f)/10:0)+(S.dad||0)/5),k:2,w:{},l:{},x:"được tha",go:()=>restore(false,"Có người bên ngoài nói giúp")});
- if(S.framedBy!=null){const b=byKey(S.framedBy);A.push({n:"Tìm chứng cứ minh oan",t:`Tra lại vụ án. Chứng cứ: ${S.coldEv||0}/2.`,c:twCost("cold"),o:od(35+S.mat*6+S.tamco/5),k:2,w:{},l:{},x:"chứng cứ +1; đủ 2 thì phục vị trọn vẹn",go:()=>{S.coldEv=(S.coldEv||0)+1;if(S.coldEv>=2){restore(true,"Án được lật, ngươi được minh oan");if(b&&(b===S||b.alive))fall(b,"bị lật tẩy vu oan người khác")}}})}
- if(S.an>=30)A.push({n:"Gửi bài thơ cũ",t:"Chép lại bài thơ đêm nào ngài khen, nhờ người lén dâng.",c:{},o:od(10+S.an/2+S.arts.thi*8),k:2,w:{},l:{},x:"ngài nhớ chuyện cũ",go:()=>restore(false,"Hoàng thượng đọc bài thơ cũ, nhớ chuyện xưa")});
- if(son)A.push({n:`Nhờ ${son.name} cầu xin`,t:"Con quỳ trước Dưỡng Hòa điện xin cho mẹ.",c:{},o:od(15+son.fond/2),k:1,w:{},l:{},x:"được tha",go:()=>restore(false,`${son.name} quỳ khóc xin cho mẹ`)});
- A.push({n:"Chép kinh, giữ đức",t:"Ngày ngày chép kinh Kim Cương.",c:{suc:-3},o:100,k:2,w:{duc:3}},{n:"Trồng rau",t:"Cuốc đất sau sân, trồng rau mà ăn.",c:{},o:100,k:2,w:{suc:6}},{n:"Thêu khăn bán",t:"Nhờ lính gác đem ra ngoài bán.",c:{suc:-5},o:od(70),k:2,w:{bac:10},l:{}},
-  {n:"Xuất gia",t:"Cắt tóc đi tu, rời bỏ hồng trần.",c:{},o:100,k:4,w:{},x:"kết thúc kiếp này, yên ổn (sẽ hỏi lại)",go:()=>xgConfirm(()=>over("Xuất gia",`${S.name} cạo tóc, vào chùa Bảo Hoa tu hành, sống nốt quãng đời thanh tịnh.`,"Xuất gia"))});
+/* ONE list for her lãnh cung cards and an NPC in the cold palace (AG-ALL-2e, jagacts3 p3Cold): p = the one inside; free / end = what "được tha" / Xuất gia do for her or an NPC */
+function coldActs(){return coldActsOf(S)}
+function coldActsOf(p){const me=p===S,A=[],X=BAL.ag.par3.cold,odP=b=>odA(p,b),fr=others(p).filter(v=>v&&v!==p&&(v===S||v.alive)&&!v.out&&aff(v,p)>=X.friend),f=facOf(p),
+ son=(me?mySons():sonsOf(p)).find(k=>k.age>=X.sonAge),free=(full,why)=>me?restore(full,why):p3Free(p,why),fb=me?S.framedBy:p.coldBy;
+ A.push({n:"Cầu xin",t:"Đút bạc cho lính gác, gửi thư lên Dưỡng Hòa điện.",c:{bac:-X.beg.bac},o:odP(X.beg.o+(p.an||0)/X.beg.anD+(p.sung||0)/X.beg.sungD),k:2,w:{},l:{},x:"được tha",go:()=>free(false,"Hoàng thượng đọc thư, động lòng")});
+ if(fr.length||f||(p.dad||0)>=X.out.dad)A.push({n:"Nhờ người bên ngoài",t:fr.length?`Nhờ ${fr[0].name} nói giúp.`:f?`Nhờ ${f.name} vận động.`:"Nhờ cha ở triều đình dâng sớ.",c:{bac:-X.out.bac},o:odP(X.out.o+(fr.length?aff(fr[0],p)/X.out.affD:0)+(f?facStr(f)/X.out.facD:0)+(p.dad||0)/X.out.dadD),k:2,w:{},l:{},x:"được tha",go:()=>free(false,"Có người bên ngoài nói giúp")});
+ if(fb!=null){const b=byKey(fb);const ce=me?S.coldEv||0:p.coldEv||0;A.push({n:"Tìm chứng cứ minh oan",t:`Tra lại vụ án. Chứng cứ: ${ce}/${X.ev.need}.`,c:twCost("cold"),o:odP(X.ev.o+(p.mat||0)*X.ev.mat+(p.tamco||0)/X.ev.tcD),k:2,w:{},l:{},x:`chứng cứ +1; đủ ${X.ev.need} thì phục vị trọn vẹn`,go:()=>{const n=ce+1;if(me)S.coldEv=n;else p.coldEv=n;if(n>=X.ev.need){free(true,"Án được lật, ngươi được minh oan");if(b&&b!==p&&(b===S||b.alive))fall(b,"bị lật tẩy vu oan người khác")}}})}
+ if((p.an||0)>=X.poem.an)A.push({n:"Gửi bài thơ cũ",t:"Chép lại bài thơ đêm nào ngài khen, nhờ người lén dâng.",c:{},o:odP(X.poem.o+(p.an||0)/X.poem.anD+((p.arts&&p.arts.thi)||0)*X.poem.thi),k:2,w:{},l:{},x:"ngài nhớ chuyện cũ",go:()=>free(false,"Hoàng thượng đọc bài thơ cũ, nhớ chuyện xưa")});
+ if(son)A.push({n:`Nhờ ${son.name} cầu xin`,t:"Con quỳ trước Dưỡng Hòa điện xin cho mẹ.",c:{},o:odP(X.son.o+(son.fond||0)/X.son.fondD),k:1,w:{},l:{},x:"được tha",go:()=>free(false,`${son.name} quỳ khóc xin cho mẹ`)});
+ A.push({n:"Chép kinh, giữ đức",t:"Ngày ngày chép kinh Kim Cương.",c:{...X.sutra.c},o:100,k:2,w:{...X.sutra.w}},{n:"Trồng rau",t:"Cuốc đất sau sân, trồng rau mà ăn.",c:{},o:100,k:2,w:{...X.veg.w}},{n:"Thêu khăn bán",t:"Nhờ lính gác đem ra ngoài bán.",c:{...X.embro.c},o:odP(X.embro.o),k:2,w:{...X.embro.w},l:{}},
+  {n:"Xuất gia",t:"Cắt tóc đi tu, rời bỏ hồng trần.",c:{},o:100,k:4,w:{},x:"kết thúc kiếp này, yên ổn (sẽ hỏi lại)",go:()=>me?xgConfirm(()=>over("Xuất gia",`${S.name} cạo tóc, vào chùa Bảo Hoa tu hành, sống nốt quãng đời thanh tịnh.`,"Xuất gia")):p3Nun(p)});
  return A}
 function coldMonth(){let ev="";
  if(S.out){apply({bac:2});const w=SEASON[S.month-1]==="Đông";apply({suc:w?-12:-6});if(w&&roll(8)){apply({suc:-20});ev+=`<span class="r">Đêm đông giá buốt, lãnh cung không than sưởi.</span> Sức -20. `}
@@ -21,6 +24,7 @@ function coldMonth(){let ev="";
   if((S.month===1||S.month===8)&&roll(25)){restore(false,S.month===1?"Đại xá đầu năm":"Đại xá nhân tiết Vạn thọ");return ev}
   if(S.suc<=0){die("Chết rét, chết đói trong lãnh cung");return ev}}
  for(const v of rivals){if(!v.alive||!v.out)continue;ap(v,{suc:-4});if(v.suc<=0){v.alive=false;continue}
+  if(typeof p3On==="function"&&p3On()){ev+=p3Cold(v);continue}/* AG-ALL-2e: she chooses among her own lãnh cung cards (coldActsOf), not a flat roll */
   if((roll(3)||(v.th>=50&&roll(5)))&&twCanPay(v,"cold")&&(twPay(v,"cold"),roll(odA(v,35+(v.mat||0)*6+(v.tamco||0)/5)))){/* two-way law: her release petition costs Sức (BAL.tw.cold) and rolls her odds; the NPC pays and rolls the same */v.out=false;v.rank=0;v.lastPromo=S.turn;v.oan=cl((v.oan||0)+20,0,100);ev+=`${v.name} được tha khỏi lãnh cung, phục vị ${RANKS[0].n}. `;if(v.coldBy!=null){const b=byKey(v.coldBy);if(b)oanAdd(v,b,BAL.eff.j14.coldMonth)}}}
  return ev}
 
