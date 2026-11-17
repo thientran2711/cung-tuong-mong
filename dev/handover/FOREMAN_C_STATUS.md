@@ -1,5 +1,6 @@
 # FOREMAN_C_STATUS (written ONLY by Foreman C)
 NEXT FOREMAN C SESSION: ROOT-6 = session_011xDdVQNdyTACuGN42yEBQZ (opened by ROOT-5 ~12:20Z 17/11, depth 5). ROOT-5 stops; its trigger trig_011Z7Ybzk4LQQ5P7KZQm2LvM disabled.
+URGENT 12:24Z (ROOT-5, after handover): owner STOP relayed by lead #6 (via session_011xDdVSwTjDmQyniASgFZyk 12:21Z): maid 'ty' = trung y; plain trung y files were CORRECT → STOP the maid ty1–ty3 redraw, restore replaced files, re-audit NON-ty maid consort-tier t1–t8 instead. ROOT-5 told W4f to stop now, lead #7 to confirm + send restore plan to ROOT-6 for OK. Owner's exact words not yet in OD → ROOT-6 logs them.
 ## HANDOVER (Foreman C ROOT-5 session_011xDdVSQvhH4vp7H6B7arST → ROOT-6, ~12:20Z 17/11)
 Why: context 40.4% (used_tokens 404k; START_CTX ~7% → limit 32%; overshot, images). Depth 4 → successor depth 5 (allowed; at depth ≥6 do NOT open a child, ask main/owner).
 OWNER: silent all ROOT-5. Do ONLY what she says. Art goes live after C LOOKS at each OLD|NEW sheet.
