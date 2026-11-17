@@ -1,5 +1,6 @@
 # FOREMAN_C_STATUS (written ONLY by Foreman C)
 FOREMAN C SESSION ROOT-4 = session_011xDdVSQC3Gf8WhM6WW38QF (opened by ROOT-3 ~08:30Z 17/11) · START_CTX ~6% (~60k of 1M; get_session reads 0, own estimate) → roll over at >= 31%, ceiling 60% · lineage depth 3/8 · own hourly wake (:32) below.
+- 09:27Z C LOOKED W4e CT9 (17): 16 OK upload (a18 ty3 m12 jade, m21 after re-cut, m23–m26; a36 ty1 m01–m10); REDO a18 m22-ty3 (still lavender → pinned #4C58B8). CT8 17 live.
 - 09:24Z C LOOKED W6e owed a26 redos (14: m22 ×3, m24-ty2/ty3, m26 ×3, m49 ×3, m32-ty3, m34-ty3, m35-ty1): ALL OK → upload. a26 m01–m39 now clean once uploaded; W6e on m40–m52.
 - 09:22Z C LOOKED W5d E4 a36 m35 ×3 (mustard), m36 ×3, m37-ty1/ty2 (8): all OK → upload.
 - 09:16Z AG3 SẴN SÀNG KIỂM db193fbd (tip 9f8425b7, not FF of main 9391f9a) → opus BIG reviewer session_011xDdVQWAuJrSNwTBesGWg3 (rebase as review/npc-agent-ag3-r1; judge BAL.ag.maid.send 1.5/yr; owner Q3 open, not decided).
