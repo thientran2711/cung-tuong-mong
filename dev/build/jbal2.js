@@ -853,7 +853,8 @@ Object.assign(BAL.ag.cx,{portrait:{hoa:3,c:{suc:-10,bac:-10},o:50,k:8,w:{th:10},
    needs   the needs a scheme can serve (her pick of WHAT she wants this buổi comes first, jagent agDecide)
    g       per act key (ACT, j8 + modules): g = need points it closes when it works (BAL.ag.unit points = one whole need), l = points lost when it fails,
            f = her fear of being caught (× the target's watch oSee, × her road's safe weight): a sure cost in her choice; "_" = an act not listed
-   tw      target pick for need sung (× Sủng of the rival) / kid (per child of the target)
+   tw      target pick for need sung (× Sủng of the rival) / kid (per child of the target); seat = × on the holder of the seat she wants next (was j30 roll(45))
+   guard   × on a scheme against a target who keeps her doors shut (jts guard, was roll(50)); pen = × on any scheme while she is punished (jface, was roll(50))
    fail    what she learnt: a failed act again × (1 + fool × fails) for Tâm cơ < 35, × wise^fails otherwise (j40 mindMenu rule)
    pat/due a big scheme (j40 BIG) is prepared first; it falls due due + (1 at Tâm cơ ≥ pat[0], 2 at ≥ pat[1]) buổi later (was 1 + R(2) + pat)
    steal   no = the weight of letting tonight be against her wish to try (stealWant u), mindPick; 1/no ≈ the old k (BAL.steal.k .25)
@@ -864,5 +865,5 @@ BAL.ag.harm={needs:["spite","sung","kid","safe","danh","ally"],
   plant:{g:{spite:7},f:4},block:{g:{sung:4,spite:3},f:2},bribe:{g:{spite:3,safe:2},f:1},accuse:{g:{spite:10,safe:5,danh:2},l:{danh:3}},vp:{g:{spite:5,danh:1},l:{danh:2}},
   xx:{g:{spite:5,danh:1},l:{danh:2}},ksab:{g:{spite:5},f:4},takeaway:{g:{kid:10}},poison:{g:{spite:12,safe:3},f:12},kpoison:{g:{spite:10},f:12},pond:{g:{spite:10},f:8},
   musk:{g:{spite:10,sung:2},f:6},catswap:{g:{spite:8,sung:2},f:6},kframe:{g:{spite:10},f:12},pgift:{g:{spite:10},f:8},petsteal:{g:{spite:4},f:2},laydo:{g:{spite:4},f:2},tieuhuy:{g:{safe:5,ally:2}}},
- tw:{sung:.3,kid:10},fail:{fool:.6,wise:.5},pat:[35,60],due:1,steal:{no:4},prep:{taint:3,cook:3},
+ tw:{sung:.3,kid:10,seat:2},guard:.5,pen:.5,fail:{fool:.6,wise:.5},pat:[35,60],due:1,steal:{no:4},prep:{taint:3,cook:3},
  hap:{wit:["provoke","humil","gossip","flaunt","effort","mediate","ksp","pray","harm:trip","harm:pushp","harm:rumor","harm:pond","harm:accuse","harm:vp","harm:xx","harm:takeaway"],pub:{effort:["vuon"],flaunt:["vuon"]}}};

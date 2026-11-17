@@ -55,7 +55,13 @@ function haCost(k){const c=ACT[k]&&ACT[k].c;return c&&typeof c==="object"?c:{}}
 function haFail(v,k){const f=(v.fails||{})[k]||0;if(!f)return 1;return witOf(v)<35?1+haB().fail.fool*f:Math.pow(haB().fail.wise,f)}
 /* ---------- the options (agent provider "consort"/"harm") ---------- */
 function haTargets(v){return others(v).filter(x=>x&&x!==v&&(x===S?!S.dead&&!S.out:x.alive!==false&&!x.out)&&!sameHouse(v,x))}
-function haScoreT(v,x,need){const B=haB().tw;if(need==="sung")return BAL.mind.pick.ag.base+(x.sung||0)*B.sung+agSpite(v,x);if(need==="kid")return BAL.mind.pick.ag.base+kidsOf(x).length*B.kid;
+/* the old npcAct wrappers' leanings, now weights of her choice (no roll): the holder of the seat she wants next (j30, was roll(45)); a target who
+   keeps her doors shut (jts guard, was roll(50)); her own punishment (jface pen, was roll(50)) */
+function haSeatW(v,x){try{const nx=rkOf(v)+1;return rkOf(x)===nx&&SEATCAP[nx]!=null&&!seatFree(nx)?haB().tw.seat:1}catch(e){return 1}}
+function haGuardW(x){try{const g=x===S?tsS().guard:x&&x.tsGuard;return g>wk()?haB().guard:1}catch(e){return 1}}
+function haPenW(v){return v&&v.pen&&v.pen.until>wk()?haB().pen:1}
+function haScoreT(v,x,need){return haScoreT0(v,x,need)*haSeatW(v,x)*haGuardW(x)}
+function haScoreT0(v,x,need){const B=haB().tw;if(need==="sung")return BAL.mind.pick.ag.base+(x.sung||0)*B.sung+agSpite(v,x);if(need==="kid")return BAL.mind.pick.ag.base+kidsOf(x).length*B.kid;
  if(need==="safe")return BAL.mind.pick.ag.base+danger(x,v);return BAL.mind.pick.ag.base+agSpite(v,x)}
 function haOpts(v,N,need){const O=[];if(!haOn()||v===S||v.coop||v.confined)return O;const H=haB();if(need&&!H.needs.includes(need))return O;
  const road=BAL.ag.road[agOrg(v)]||BAL.ag.road._;
@@ -69,7 +75,7 @@ function haOpts(v,N,need){const O=[];if(!haOn()||v===S||v.coop||v.confined)retur
    if(k==="plant"&&haPlantIx(v)<0)continue;
    const prep=BIG.includes(k);const {o,pc}=haOdds(v,t,k);
    const gl={g:gn.g,l:gn.l||{},f:(gn.f||0)*pc};const u0=agU(v,N2,o,gl,haCost(k),"harm");if(u0<=0)continue;
-   const u=u0*persW(v,k)*haFail(v,k);if(!(u>0))continue;HA.stat.opt++;
+   const u=u0*persW(v,k)*haFail(v,k)*haGuardW(t)*haPenW(v);if(!(u>0))continue;HA.stat.opt++;
    O.push({k:"harm:"+k,ak:k,t,u,tag:"harm",prep,mot:g.why,act:prep?((typeof TELLS==="object"&&TELLS[k])||("chuẩn bị "+haVerb(k,t))):haVerb(k,t),
     at:(kh,vv,tt)=>haPlace(k,vv||v,tt||t,kh,prep)})}
   /* §2 preparation of a poisoner / framer (the player's own Tẩm đồ and workshop): it serves the spite the next deed will vent */
