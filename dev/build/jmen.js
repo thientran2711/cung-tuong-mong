@@ -172,7 +172,7 @@ function menOpts(m,v,y,heard){/* items split by " · " so the kit (j63 kaRows) p
   A.push({k:"ccti",n:"Báo Cung Chính ti",x:`Chắc chắn · tốn: 2 khắc · thành: Danh +3 · Thái hậu quý ngươi +1 · (hắn bị cấm vào cung một năm) · kèm: hắn và đồng liêu thị vệ có thể trả thù · Danh -3 mỗi lần bị trả thù`})}
  const risk=cl(Math.round(10+menEyes(y.k,v)*5-tc/10),4,60);
  A.push({k:"giau",n:"Giấu giúp",x:`${word(100-risk)} · tốn: 1 khắc · thành: hắn mang ơn, người ấy quý ngươi ${balSg(BAL.eff.jmen.hideMan)} · giữ bí mật của hắn để uy hiếp về sau${v?` · chứng cứ về nàng +${ev} · nàng quý ngươi ${balSg(BAL.eff.jmen.menHide)}`:""} · hỏng: bị thấy, mắc tội che giấu, Danh -6, cấm túc · kèm: lộ ra về sau thì bị liên lụy`});
- if(!heard){const oh=od(35+(S.mat||0)*6+tc/4);A.push({k:"nghe",n:"Núp nghe lén",x:`${word(oh)} · tốn: 1 khắc · thành: biết tên ${v?"hai người":"hắn"} · biết vì sao hắn ở đây${v?` · chứng cứ về nàng +${ev}`:""} · (rồi chọn tiếp báo hay giấu) · (thành hay bại tùy Tai mắt và Tâm cơ của ngươi) · hỏng: bị phát hiện, họ tản đi, hắn quý ngươi ${balSg(BAL.eff.jmen.hearMan)}${v?` · kèm: nàng oán ngươi ${balSg(BAL.eff.jmen.menChoose)}`:""}`})}
+ if(!heard){const oh=od(BAL.odb.jmen.odOh+(S.mat||0)*6+tc/4);A.push({k:"nghe",n:"Núp nghe lén",x:`${word(oh)} · tốn: 1 khắc · thành: biết tên ${v?"hai người":"hắn"} · biết vì sao hắn ở đây${v?` · chứng cứ về nàng +${ev}`:""} · (rồi chọn tiếp báo hay giấu) · (thành hay bại tùy Tai mắt và Tâm cơ của ngươi) · hỏng: bị phát hiện, họ tản đi, hắn quý ngươi ${balSg(BAL.eff.jmen.hearMan)}${v?` · kèm: nàng oán ngươi ${balSg(BAL.eff.jmen.menChoose)}`:""}`})}
  A.push({k:"lo",n:"Làm như không thấy",x:`Chắc chắn · thành: không dính vào chuyện · kèm: nếu về sau lộ ra ngươi thấy mà không báo, dễ bị liên lụy`});
  return A}
 function menArt(k){try{const P=placeOf(k);const f=SCIMG[P.sc];return f?{src:`img/${f}.webp`,label:P.n}:undefined}catch(e){return undefined}}
@@ -213,7 +213,7 @@ function menChoose(m,v,y,a){const at=placeName(y.k);menStat("ch_"+a);if(a==="ngh
  if(a==="giau"){menKh(1);try{k61Know(m,"Hắn quỳ tạ, khai tên mình.",true,3)}catch(e){}const ok=menHide(S,m,v,y,menEyes(y.k,v));
   if(ok)log(`<span class="g">Ngươi sai người dẫn ${m.name} ra cửa ngách${v?`, che cho ${rkName(v)} ${v.name}`:""}. Hắn mang ơn ngươi; chuyện này thành bí mật trong tay ngươi.</span>`);
   else log(`<span class="r">Ngươi giấu ${m.name}, nhưng bị người thấy: tội che giấu nam nhân lẻn vào hậu cung.</span>`);delete (S.menWhy||{})[m.id];return}
- if(a==="nghe"){menKh(1);const o=od(35+(S.mat||0)*6+(S.tamco||0)/4);
+ if(a==="nghe"){menKh(1);const o=od(BAL.odb.jmen.odO+(S.mat||0)*6+(S.tamco||0)/4);
   if(roll(o)){menStat("hearOk");try{k61Know(m,"Ngươi nghe được tên hắn.",true,2);if(v)k61Know(v,"",true,2)}catch(e){}
    log(`Núp sau hòn giả sơn, ngươi nghe rõ: ${menTrue(m,v,y)}`);
    S.menSec=S.menSec||{};S.menSec[m.id]=Object.assign({},S.menSec[m.id]||{},{r:y.r,v:y.v||null,k:y.k,w:wk(),heard:1});
@@ -244,7 +244,7 @@ function menNpcSee(m,y){if(!m||!y)return;const c=y.v!=null?RV(y.v):null;for(cons
 
 /* ---------- 6. the secret is leverage: "Uy hiếp hắn" on his card; grudges come back as rumours ---------- */
 (function(){const t0=talkOpts;talkOpts=function(p){const A=t0.apply(this,arguments);try{if(p&&p.kind==="man"&&p.ref&&menRoad()){const m=p.ref;const s=(S.menSec||{})[m.id];
-  if(s&&!s.used){const o=od(45+(S.tamco||0)/3+(s.hid?10:0)-(nv(m,"menHide")));
+  if(s&&!s.used){const o=od(BAL.odb.jmen.odO_2+(S.tamco||0)/3+(s.hid?10:0)-(nv(m,"menHide")));
    A.push({n:"Uy hiếp hắn",o,x:`hắn nộp bạc hay khai tin để giữ kín chuyện ${MEN_RT[s.r]||"cũ"} · hỏng: hắn ôm hận`,run:()=>{s.used=1;menStat("threat");
     if(roll(o)){const T=liveRivals(true).filter(v=>v.affair||(v.preg&&v.hidden)||(v.plan));if(T.length){const v=T.slice().sort((a,b)=>menH(a.id)-menH(b.id))[0];const F=j78facts(v).filter(f=>f.kind==="secret"||f.kind==="plan");const f=F[0];
       if(f){intelAdd(v,f,{by:m.name,how:"uy hiếp "+m.name});return `Hắn run sợ, khai: ${f.txt}`}}

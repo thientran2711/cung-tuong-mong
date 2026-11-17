@@ -223,7 +223,7 @@ function q72Npc(){const q=q72();if(!q72On())return"";const L=liveRivals(true).fi
  if(roll(35)){const v=pick(L.filter(x=>!x.queen));if(v){const byTh=!S.thDead&&roll(60);const p=cl(45+(v.tai||40)/4,5,95);const ok=roll(p);
   if(byTh){ap(v,{th:ok?3:-2})}else{const qn=queenP();if(qn&&qn!==S&&qn!==v)relAdd(qn,v,ok?BAL.eff.j72.q72Npc_2[0]:BAL.eff.j72.q72Npc_2[1])}
   const txt=`${byTh?"Thái hậu":"Hoàng hậu"} nhờ ${v.name} ${pick(["chép kinh","thêu bình phong","lo việc yến","thăm người ốm"])}; ${ok?"nàng làm chu đáo, được khen":"nàng làm hỏng, bị chê"}.`;q.np.unshift({w:q72Date(),t:txt,a:v.id});if(q.np.length>8)q.np.length=8;
-  if(roll(30+S.mat*5))ev+=txt+" "}}
+  if(roll(BAL.odb.j72.rbQ72Npc+S.mat*5))ev+=txt+" "}}
  return ev}
 /* monthly: those she owes may come to collect (two-way) */
 function q72Collect(){const q=q72();for(const k in q.d){if(q.d[k]>=0)continue;if(!roll(25))continue;const [kind,...r]=k.split(":");const id=r.join(":");const a=q72A(kind,kind==="rv"||kind==="hh"||kind==="fallen"||kind==="sv"||kind==="rsv"?+id:id||undefined);if(!a)continue;

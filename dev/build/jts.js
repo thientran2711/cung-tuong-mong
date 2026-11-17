@@ -299,7 +299,7 @@ function tsDressTotal(p,raw){return raw*4+Math.round(effSac(p)/5)+Math.round((p.
 /* the best set from the pieces at hand (smart pick: NPC by Tâm cơ, a loyal maid) — small search, top pieces per slot by theme */
 function tsDressBest(p,keys,th){const T=TS_THEME[th]||TS_THEME.thanh;const C=TS_SLOT.map(([sl,,fit])=>[sl,[...new Set(keys.filter(fit))].sort((a,b)=>(T.tags.includes(b)?1:0)-(T.tags.includes(a)?1:0)).slice(0,5)]);
  let best={},bv=-1;const go=(i,P)=>{if(i===C.length){const v=tsDressPts(p,P,th).raw;if(v>bv){bv=v;best=Object.assign({},P)}return}const [sl,L]=C[i];go(i+1,P);for(const k of L){P[sl]=k;go(i+1,P);delete P[sl]}};go(0,{});return best}
-function tsNpcDress(p,th){const P={};const inv=(p.inv||[]).map(e=>e.k);const smart=roll(40+(p.tamco||0)/2);if(smart)return tsDressBest(p,inv,th);
+function tsNpcDress(p,th){const P={};const inv=(p.inv||[]).map(e=>e.k);const smart=roll(BAL.odb.jts.rbSmart+(p.tamco||0)/2);if(smart)return tsDressBest(p,inv,th);
  for(const [sl,,fit] of TS_SLOT){const c=inv.filter(fit);if(c.length)P[sl]=pick(c)}return P}
 function tsDressAnnounce(){tsTagsFresh();const s=tsS();const th=pick(Object.keys(TS_THEME));s.dress={th,m:S.month%12+1,y:S.month===12?S.year+1:S.year};const T=TS_THEME[th];const H=tsDressHost();
  /* the Hoàng hậu announces it at the morning greeting: she sees her face (no named grey figure) */try{if(H&&typeof k61Meet==="function")k61Meet(H,"Buổi thỉnh an, ngươi được thấy người.")}catch(e){}

@@ -131,7 +131,7 @@ function h54Envoy(){let ev="";const E=h54Elig();
  return ev}
 EVI.foreignwed&&(EVI.foreignwed.ok=()=>false);
 PEND.foreignwed=pp=>PEND.h54hoa({k:pp.k});
-PEND.h54hoa=pp=>{const k=S.kids.find(x=>x.name===pp.k&&h54Home(x));if(!k)return null;h54Init(k);const o=od(30+S.sung/3+mm()+k.fond/4),o2=od(55+S.sung/4);
+PEND.h54hoa=pp=>{const k=S.kids.find(x=>x.name===pp.k&&h54Home(x));if(!k)return null;h54Init(k);const o=od(BAL.odb.j54.odO+S.sung/3+mm()+k.fond/4),o2=od(BAL.odb.j54.odO2+S.sung/4);
  const H=H54.hoa;return{who:pEmp(),t:`Sứ thần Bắc Địch dâng ngựa quý, xin cưới một vị công chúa. Hoàng thượng muốn thuận mối này và chọn ${h54Name(k)}, con ngươi, ${k.age} tuổi.<br>Ngài hỏi ý ngươi.`,o:[
  {n:"Thuận theo ý Hoàng thượng",fx:Object.assign({},H),x:`Hoàng thượng cảm kích, ban thưởng · kèm: con sang Bắc Địch, không về thăm và không nói giúp được nữa`,go:()=>log(h54Hoa(k,S,1))},
  {n:"Quỳ xin giữ con lại",fx:{},x:`${word(o)} · thành: ngài gả một tông nữ thay, con ở lại bên ngươi (Mẫu tử +10) · hỏng: Sủng ${balSg(BAL.eff.j54.sungGo)}, Danh ${balSg(BAL.eff.j54.danhGo)}, Sức ${balSg(BAL.eff.j54.sucGo)} và con vẫn phải đi, không được ban thưởng`,go:()=>{if(roll(o)){k.hM=cl(k.hM+10,0,100);S.hEnv=null;S.hEnvY=S.turn;log(`Hoàng thượng động lòng, gả một tông nữ sang Bắc Địch thay ${h54Name(k)}. Mẫu tử +10.`)}else{apply({sung:BAL.eff.j54.sungGo,danh:BAL.eff.j54.danhGo,suc:BAL.eff.j54.sucGo});k.hW={kind:"hoa",s:{name:"Thế tử Bắc Địch",house:"Bắc Địch",off:"Khả hãn Bắc Địch",tier:0,age:20,fid:""},y:S.year,joy:35,b:0};k.wed=1;k.hB=null;k.hP=null;S.hEnv=null;S.hEnvY=S.turn;log(`<span class="r">Hoàng thượng không nghe lời xin; ${h54Name(k)} vẫn phải sang Bắc Địch.</span>`)}}},
@@ -142,7 +142,7 @@ PEND.h54met=pp=>{const k=S.kids.find(x=>x.name===pp.k&&h54Home(x));const s=h54So
  {n:"Để con qua lại thư từ",fx:{danh:-1},x:`Mẫu tử +6 · con có người thương: khi bàn hôn sự được xin cho con lấy chàng · kèm: lời ra tiếng vào`,go:()=>{k.hMet=s.id;k.hM=cl(k.hM+6,0,100);log(`Ngươi để ${h54Name(k)} thư từ với ${s.name}. Mẫu tử +6.`)}},
  {n:"Cấm con gặp lại",fx:{danh:1},x:`kèm: Mẫu tử -10`,go:()=>{k.hM=cl(k.hM-10,0,100);log(`Ngươi cấm ${h54Name(k)} gặp lại ${s.name}. Mẫu tử -10.`)}}]}};
 /* ---- an unhappy political match ---- */
-PEND.h54sad=pp=>{const k=S.kids.find(x=>x.name===pp.k&&x.alive&&x.hW);if(!k)return null;const W=k.hW;const o=od(40+k.fond/2);
+PEND.h54sad=pp=>{const k=S.kids.find(x=>x.name===pp.k&&x.alive&&x.hW);if(!k)return null;const W=k.hW;const o=od(BAL.odb.j54.odO_2+k.fond/2);
  return{who:kidFace(k),t:`${h54Name(k)} về cung thăm ngươi, khóc kể phò mã ${W.s.name} lạnh nhạt, nhà chồng hà khắc.`,o:[
  {n:"Xin Hoàng thượng răn dạy phò mã",fx:{sung:-4},x:`${word(o)} · thành: phò mã biết sợ, con vui hơn, Mẫu tử +8 · hỏng: ngài cho là chuyện nhà, bỏ qua`,go:()=>{if(roll(o)){W.joy=cl(W.joy+30,0,100);k.hM=cl(k.hM+8,0,100);log(`Hoàng thượng răn dạy phò mã ${W.s.name}; ${h54Name(k)} vui hơn. Mẫu tử +8.`)}else log(`Hoàng thượng bỏ qua: “Chuyện nhà phò mã, để họ tự lo.” Xin không thành.`)}},
  {n:"Khuyên con nhẫn nhịn",fx:{danh:1},x:`kèm: Mẫu tử -8`,go:()=>{k.hM=cl(k.hM-8,0,100);log(`Ngươi khuyên ${h54Name(k)} nhẫn nhịn. Mẫu tử -8.`)}}]}};

@@ -47,7 +47,7 @@ function servAct(a,id){const s=servById(id);if(!s||S.dead||Q.length)return;const
  if(r)log(r);render()}
 function courtAct(a,k){const c=S.court[k];if(!c||S.dead||Q.length)return;let r="";
  if(a==="thuong"){if(S.bac<BAL.bacFee.court)return;apply({bac:-BAL.bacFee.court});c.af.me=(c.af.me||0)+BAL.eff.j10.meCourtAct;r=`Biếu ${c.name} 20 lượng: người ấy quý ngươi ${balSg(BAL.eff.j10.meCourtAct)}.`}
- if(a==="hoi"){if(!can(2))return;spend(2);c.af.me=(c.af.me||0)+BAL.eff.j10.meCourtAct_2;if(k==="tq"&&roll(40+(c.af.me||0)/2)){discover();r=`${c.name} hé lộ một sở thích của Hoàng thượng.`}else if(k==="ksp")r="Sổ thị tẩm: "+kitNameList(liveRivals(true),x=>`${x.name} ${x.nights}`)+`; ngươi ${S.nights}.`;else r=`${c.name} chỉ cười, không nói gì.`}
+ if(a==="hoi"){if(!can(2))return;spend(2);c.af.me=(c.af.me||0)+BAL.eff.j10.meCourtAct_2;if(k==="tq"&&roll(BAL.odb.j10.rbCourtAct+(c.af.me||0)/2)){discover();r=`${c.name} hé lộ một sở thích của Hoàng thượng.`}else if(k==="ksp")r="Sổ thị tẩm: "+kitNameList(liveRivals(true),x=>`${x.name} ${x.nights}`)+`; ngươi ${S.nights}.`;else r=`${c.name} chỉ cười, không nói gì.`}
  if(r)log(r);render()}
 function tqAf(p){return S.court&&S.court.tq?(S.court.tq.af[key(p)]||0):0}
 function npcCourt(v){if(roll(10)&&v.bac>=40&&S.court){ap(v,{bac:-BAL.bacFee.court});S.court.tq.af[v.id]=(S.court.tq.af[v.id]||0)+10}}

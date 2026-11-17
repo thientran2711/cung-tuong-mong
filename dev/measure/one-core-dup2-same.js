@@ -14,7 +14,7 @@ const NS=['quyLv','loy','wit','ducLv','sungLv','nightEnd','tinhLv','tinLv','rare
  /* review/one-core-jkc PART 2: the cuts a help / gloss / lock text also typed (jbal.js block, jweather wx, jpoison pg) */
  'm95','accNeedEv','coldEvNeed','ngocboiSung','sinhThanSung','m30','srvx','virx','tsx','facJoinAff','sucNeed','loy','time','wx','pg',
  /* review/one-core-jkc-2: the «thiếu bạc (cần N)» price-lock family (BAL.house servant prices, BAL.bacFee, BAL.actBac scheme bases, BAL.tw.reward) */
- 'house','bacFee','actBac','tw'];
+ 'house','bacFee','actBac','tw','odb'];
 /* owner-ruled word changes (VANPHONG:69 / OD:L247 thiện cảm words everywhere): */
 const INTENDED={'jhc.js':['window.quyW'],'jts.js':['tsQuy'],'j55.js':['ccWord'],
  /* review/one-core-dup3: jlost A("laydol") x + AOUT.laydo/laydol: the text said «cung nữ thân tín lòng -10» while the rule (jlost loSteal self / jecon bribel)

@@ -13,11 +13,11 @@ EV6("fortuneNun","day",{a:[],pp:()=>({}),w:C=>.9,
  v:["Một ni cô xem tướng được Thái hậu cho vào cung, đi qua cửa cung ngươi thì dừng lại nhìn lâu.","Bà đồng ngoài cung được một phi tần mời vào xem số; cả hậu cung đổ xô đi hỏi.","Thầy bói mù được triệu vào xem ngày cho lễ tế, cung nữ rủ ngươi đi hỏi chuyện con cái.","Đạo sĩ dâng bùa trừ tà cho lục cung, nói cung nào không treo sẽ gặp hạn."],
  o:X=>[c6("Bỏ bạc xin xem một quẻ",{c:{bac:-15},w:{suc:3},wt:[G6("yên lòng")],k:[R6("lời bói chỉ là lời bói, không đổi được gì")]}),
   c6("Treo bùa cho cung nhân yên tâm",{c:{bac:-10},w:{maid:5}}),
-  c6("Can Thái hậu chớ tin",{p:od(30+S.th/3+S.duc/4),w:{duc:2,danh:1},l:{th:-4},lt:[R6("Thái hậu phật ý")]})]});
+  c6("Can Thái hậu chớ tin",{p:od(BAL.odb.j68g.odP+S.th/3+S.duc/4),w:{duc:2,danh:1},l:{th:-4},lt:[R6("Thái hậu phật ý")]})]});
 EV6("hhSummons","visit",{a:["rv"],pp:()=>qOn()?{a0:rivals[0].id}:null,w:C=>qOn()?1.3:0,
  v:["Hoàng hậu {A} cho gọi ngươi sang giúp đối chiếu sổ sách bổng lộc lục cung.","Hoàng hậu {A} giao ngươi trông coi việc chuẩn bị yến mừng thọ Thái hậu.","Hoàng hậu {A} hỏi ngươi có thấy cung nào chi tiêu quá lệ.","Hoàng hậu {A} muốn ngươi dạy lễ nghi cho tú nữ mới."],
  o:X=>[c6("Tận tâm giúp Hoàng hậu",{c:{suc:-8},w:{hh:8,danh:1}}),
-  c6("Giúp, nhân tiện xem sổ",{c:{suc:-6},p:od(40+S.tamco/3),w:{hh:4,mat:1},wt:[G6("biết đường đi của bạc lục cung")],l:{hh:-6},lt:[R6("Hoàng hậu thấy ngươi tò mò")]}),
+  c6("Giúp, nhân tiện xem sổ",{c:{suc:-6},p:od(BAL.odb.j68g.odP_2+S.tamco/3),w:{hh:4,mat:1},wt:[G6("biết đường đi của bạc lục cung")],l:{hh:-6},lt:[R6("Hoàng hậu thấy ngươi tò mò")]}),
   c6("Cáo bệnh từ chối",{w:{suc:3},k:[R6("Hoàng hậu với ngươi -5")],ok:()=>{apply({hh:-5});return "Hoàng hậu giao việc cho người khác."}})]});
 EV6("allyOffer","visit",{a:["rv","rv"],big:true,pp:()=>{const a=rv6(v=>T6(v,"Tham vọng")||fr6(v));if(a==null)return null;const b=rv6(v=>v.id!==a&&aff(RV(a),v)<0)??rv6(v=>v.id!==a);return b==null?null:{a0:a,a1:b}},w:C=>1,
  v:["{A} hẹn ngươi ở đình nghỉ vắng: '{B} ngày càng lấn lướt. Hai ta liên thủ, thế nào?'","{A} gửi mật thư: muốn cùng ngươi tố {B} chuyện chi tiêu xa xỉ.","{A} gợi ý: nếu ngươi giúp nàng tranh ghế trống, nàng sẽ không đụng đến ngươi khi {B} ra tay.","{A} kể {B} đã nói xấu ngươi trước mặt Hoàng thượng, rủ ngươi cùng trả đũa."],
@@ -31,8 +31,8 @@ EV6("borrowDress","visit",{a:["rv"],pp:()=>{const a=rv6(v=>v.rank<=S.rank+1);ret
   c6("Từ chối khéo",{w:{sac:1},r:[[X.A,-6]]})]});
 EV6("doubtVisit","visit",{a:["rv"],pp:()=>{const a=rv6(v=>T6(v,"Kín đáo")||oan(v,S)>=15);return a==null?null:{a0:a}},w:C=>1,
  v:["{A} sầm sập kéo đến, buộc tội ngươi cài người vào cung nàng.","{A} chặn ngươi giữa đường, hỏi sao cung nữ của ngươi lảng vảng gần cung nàng.","{A} sai người trả lại quà ngươi tặng, nhắn 'không dám nhận'.","{A} khóc với Hoàng hậu rằng ngươi xui Hoàng thượng lạnh nhạt với nàng."],
- o:X=>[c6("Thề thốt minh oan",{c:{suc:-3},p:od(40+S.duc/3+S.danh/4),r:[[X.A,8]],w:{danh:1},lr:[[X.A,-6]],lt:[R6("nàng càng nghi")]}),
-  c6("Mời nàng tự đến khám xét",{p:od(55+S.duc/4),r:[[X.A,12]],w:{duc:1},l:{danh:-2},lt:[R6("nàng bới ra chuyện khác để nói")]}),
+ o:X=>[c6("Thề thốt minh oan",{c:{suc:-3},p:od(BAL.odb.j68g.odP_3+S.duc/3+S.danh/4),r:[[X.A,8]],w:{danh:1},lr:[[X.A,-6]],lt:[R6("nàng càng nghi")]}),
+  c6("Mời nàng tự đến khám xét",{p:od(BAL.odb.j68g.odP_4+S.duc/4),r:[[X.A,12]],w:{duc:1},l:{danh:-2},lt:[R6("nàng bới ra chuyện khác để nói")]}),
   c6("Mặc kệ nàng",{w:{suc:1},r:[[X.A,-8]],k:[R6("nàng oán thêm")]})]});
 EV6("empWager","emp",{a:["emp"],pp:()=>S.sung>=25?{a0:0}:null,w:C=>(C.sea==="Thu"||C.sea==="Hạ")?1.4:.5,
  v:["Hoàng thượng bày trò chọi dế ở ngự hoa viên, rủ ngươi đặt cược.","Ngài cược với ngươi xem con diều của ai bay cao hơn.","Ngài đố ngươi đoán số hạt sen trong bát, đoán đúng thì ban thưởng.","Ngài mở cuộc thi câu cá, ai câu được con lớn nhất được ngài ban thưởng."],
@@ -41,13 +41,13 @@ EV6("empWager","emp",{a:["emp"],pp:()=>S.sung>=25?{a0:0}:null,w:C=>(C.sea==="Thu
   c6("Đứng xem, khen ngài",{w:{sung:1},k:[R6(`ngài chê ngươi nhát: Danh ${balSg(BAL.eff.j68g.danhOk)}`)],ok:()=>{apply({danh:BAL.eff.j68g.danhOk});return "Ngài cười ngươi nhát gan."}})]});
 EV6("empDream","emp",{a:["emp"],pp:()=>S.sung>=30?{a0:0}:null,w:C=>.8,
  v:["Hoàng thượng kể đêm qua mơ thấy rồng vàng quấn cột, hỏi ngươi điềm gì.","Ngài mơ thấy Tiên đế nhìn mình không nói, sáng ra buồn bã.","Ngài mơ thấy một đóa sen nở trong cung ngươi, cười hỏi có phải điềm hỷ.","Ngài mơ rụng răng, Khâm Thiên giám bảo điềm xấu, ngài hỏi ngươi nghĩ sao."],
- o:X=>[c6("Giải mộng theo hướng lành",{p:od(40+S.tai/3+S.tamco/4),w:{sung:3,an:1},l:{sung:-2},lt:[R6("lời giải gượng ép, ngài không tin")]}),
+ o:X=>[c6("Giải mộng theo hướng lành",{p:od(BAL.odb.j68g.odP_5+S.tai/3+S.tamco/4),w:{sung:3,an:1},l:{sung:-2},lt:[R6("lời giải gượng ép, ngài không tin")]}),
   c6("Khuyên ngài chớ tin mộng",{w:{duc:2},k:[R6(`ngài hơi cụt hứng: Sủng ${balSg(BAL.eff.j68g.sungOk)}`)],ok:()=>{apply({sung:BAL.eff.j68g.sungOk});return "Ngài gật gù, nghĩ ngợi."}}),
   c6("Xin lập đàn cầu an cho ngài",{c:{bac:-30},w:{sung:2,th:3}})]});
 EV6("empOldFlame","emp",{a:["emp"],pp:()=>S.sung>=30?{a0:0}:null,w:C=>.7,
  v:["Ngài ngồi trước bức họa một phi tần đã mất, hỏi ngươi có thấy nàng giống ai không.","Ngài nhắc đến người con gái thuở niên thiếu, rồi lặng im rất lâu.","Ngài bảo khúc đàn ngươi gảy giống hệt khúc của một người cũ.","Ngày giỗ một vị phi đã khuất, ngài không thiết thượng triều."],
  o:X=>[c6("Lắng nghe, an ủi",{c:{suc:-4},w:{sung:3,an:2}}),
-  c6("Cố giống người cũ",{p:od(35+S.sac/3+S.tai/4),w:{sung:5},l:{sung:-3},lt:[R6("ngài thấy ngươi bắt chước, chạnh lòng")],k:[R6(`Đức ${balSg(BAL.eff.j68g.ducOk_2)}`)],ok:()=>{apply({duc:BAL.eff.j68g.ducOk_2});return "Trong mắt ngài thoáng bóng người xưa."}}),
+  c6("Cố giống người cũ",{p:od(BAL.odb.j68g.odP_6+S.sac/3+S.tai/4),w:{sung:5},l:{sung:-3},lt:[R6("ngài thấy ngươi bắt chước, chạnh lòng")],k:[R6(`Đức ${balSg(BAL.eff.j68g.ducOk_2)}`)],ok:()=>{apply({duc:BAL.eff.j68g.ducOk_2});return "Trong mắt ngài thoáng bóng người xưa."}}),
   c6("Lảng sang chuyện khác",{w:{suc:1},k:[R6(`lỡ dịp gần ngài: Sủng ${balSg(BAL.eff.j68g.sungOk_2)}`)],ok:()=>{apply({sung:BAL.eff.j68g.sungOk_2});return "Ngài thở dài, không nói thêm."}})]});
 EV6("kidTutor","kid",{a:["kid"],pp:()=>{const a=kid6(k=>k.age>=6);return a==null?null:{a0:a}},w:C=>1.2,
  v:["Thầy dạy ở Thượng thư phòng tâu {A} lười học, hay ngủ gật.","Thầy khen {A} thông minh hơn các anh em, muốn cho học thêm binh pháp.","{A} cãi lại thầy dạy, bị phạt đứng ngoài hiên cả buổi.","{A} trốn học ra ngự hoa viên bắt dế, thầy dạy không dám báo lên."],
@@ -63,17 +63,17 @@ EV6("servHero","serv",{a:["sv"],pp:()=>{const a=sv6();return a==null?null:{a0:a}
  v:["Đêm qua bếp cung bén lửa; {A} xông vào dập, bỏng cả tay.","{A} phát hiện bậc thềm đá bị bôi dầu trơn, kịp lau trước khi ngươi đi qua.","{A} đuổi được một con rắn độc bò vào buồng các con.","{A} thức trắng chép lại sổ sách cung bị nước làm nhòe."],
  o:X=>[c6("Thưởng hậu",{c:{bac:-25},r:[[X.A,18]]}),
   c6("Thăng làm người thân cận",{r:[[X.A,12]],w:{tamco:1},k:[R6("người hầu khác ghen tị")]}),
-  c6("Tra xem có kẻ gây ra không",{c:{suc:-4},p:od(40+S.mat*5),w:{mat:1},wt:[G6("biết đó là tai nạn hay có người")],lt:[R6("không lần ra gì")],l:{suc:-2},r:[[X.A,4]],ok:()=>{const v=liveRivals(true).find(v=>v.plan&&v.plan.t===key(S));return v?`Dấu vết dẫn về người của ${v.name}.`:"Tra kỹ: chỉ là tai nạn, không ai bày ra."}})]});
+  c6("Tra xem có kẻ gây ra không",{c:{suc:-4},p:od(BAL.odb.j68g.odP_7+S.mat*5),w:{mat:1},wt:[G6("biết đó là tai nạn hay có người")],lt:[R6("không lần ra gì")],l:{suc:-2},r:[[X.A,4]],ok:()=>{const v=liveRivals(true).find(v=>v.plan&&v.plan.t===key(S));return v?`Dấu vết dẫn về người của ${v.name}.`:"Tra kỹ: chỉ là tai nạn, không ai bày ra."}})]});
 EV6("rumorTH","rumor",{a:["th"],pp:()=>S.thDead?null:{a0:0},w:C=>1,
  v:["Cung nhân đồn Thái hậu dạo này không ưa ngươi, chê ngươi lười thỉnh an.","Lời đồn: Thái hậu định chọn ngươi trông coi việc tế lễ năm nay.","Người ta bảo Thái hậu khen ngươi trước mặt Hoàng thượng.","Có tin Thái hậu nhắc tên ngươi khi bàn chuyện ghế trống."],
- o:X=>[c6("Hỏi ma ma thân tín của Thái hậu",{c:{bac:-15},p:od(50+S.mat*4),wt:[G6("biết sự thật")],w:{mat:1},lt:[R6("ma ma kín miệng")],l:{bac:-5},ok:()=>`Ma ma nói thật: Thái hậu ${S.th>=50?"rất quý":S.th>=20?"có cảm tình với":S.th>=-10?"không để ý nhiều đến":"không ưa"} ngươi.`}),
+ o:X=>[c6("Hỏi ma ma thân tín của Thái hậu",{c:{bac:-15},p:od(BAL.odb.j68g.odP_8+S.mat*4),wt:[G6("biết sự thật")],w:{mat:1},lt:[R6("ma ma kín miệng")],l:{bac:-5},ok:()=>`Ma ma nói thật: Thái hậu ${S.th>=50?"rất quý":S.th>=20?"có cảm tình với":S.th>=-10?"không để ý nhiều đến":"không ưa"} ngươi.`}),
   c6("Sang thỉnh an ngay",{c:{suc:-6},w:{th:3},k:[R6("vẫn chưa rõ thật hư")]}),
   c6("Bỏ ngoài tai",{w:{duc:1},k:[R6("không biết thật hư")]})]});
 EV6("rumorFavor","rumor",{a:["emp"],pp:()=>({a0:0}),w:C=>1,
  v:["Lời đồn khắp lục cung: Hoàng thượng đã chán ngươi.","Người ta xì xào: ngươi sắp được tấn phong.","Cung nữ các cung đồn ngài hay hỏi đến ngươi khi uống rượu.","Có kẻ bảo thẻ bài của ngươi bị Kính sự phòng giấu xuống dưới."],
- o:X=>[c6("Mua tin Kính sự phòng",{c:{bac:-20},p:od(55+S.mat*4),wt:[G6("biết sự thật")],w:{mat:1},lt:[R6("hắn ậm ừ")],l:{bac:-5},ok:()=>`Thái giám Kính sự phòng nói thật: Sủng của ngươi đang ${S.sung>=BAL.sungLv.kinh[2]?"rất cao":S.sung>=BAL.sungLv.kinh[1]?"khá":S.sung>=BAL.sungLv.kinh[0]?"thấp":"rất thấp"}${S.block?"; có người chặn thẻ của ngươi":""}.`}),
+ o:X=>[c6("Mua tin Kính sự phòng",{c:{bac:-20},p:od(BAL.odb.j68g.odP_9+S.mat*4),wt:[G6("biết sự thật")],w:{mat:1},lt:[R6("hắn ậm ừ")],l:{bac:-5},ok:()=>`Thái giám Kính sự phòng nói thật: Sủng của ngươi đang ${S.sung>=BAL.sungLv.kinh[2]?"rất cao":S.sung>=BAL.sungLv.kinh[1]?"khá":S.sung>=BAL.sungLv.kinh[0]?"thấp":"rất thấp"}${S.block?"; có người chặn thẻ của ngươi":""}.`}),
   c6("Làm như không nghe",{w:{duc:1},k:[R6("không biết thật hư")]}),
-  c6("Tìm kẻ tung tin",{c:{suc:-5},p:od(35+S.mat*6),w:{danh:1},wt:[G6("biết ai đứng sau")],l:{suc:-2},lt:[R6("không ra ai")],ok:()=>{const L=liveRivals(true).filter(v=>{try{return bandOf(danger(v,S))>=1}catch(e){return false}});const v=L.length?pick(L):null;if(v){evStory(v,BAL.eff.j68g.evOk,"tung tin đồn về ngươi");return `Lời đồn bắt nguồn từ người của ${v.name}. Chứng cứ ${balSg(BAL.eff.j68g.evOk)}.`}return "Chỉ là lời đồn vô hại của đám cung nhân rảnh việc."}})]});
+  c6("Tìm kẻ tung tin",{c:{suc:-5},p:od(BAL.odb.j68g.odP_10+S.mat*6),w:{danh:1},wt:[G6("biết ai đứng sau")],l:{suc:-2},lt:[R6("không ra ai")],ok:()=>{const L=liveRivals(true).filter(v=>{try{return bandOf(danger(v,S))>=1}catch(e){return false}});const v=L.length?pick(L):null;if(v){evStory(v,BAL.eff.j68g.evOk,"tung tin đồn về ngươi");return `Lời đồn bắt nguồn từ người của ${v.name}. Chứng cứ ${balSg(BAL.eff.j68g.evOk)}.`}return "Chỉ là lời đồn vô hại của đám cung nhân rảnh việc."}})]});
 EV6("lotusSeason","sea",{a:["rv"],pp:()=>{const a=rv6();return a==null?null:{a0:a}},w:C=>C.sea==="Hạ"&&C.wx.f!==3?1.6:0,
  v:["Sen Thái Dịch trì nở trắng hồ; {A} rủ ngươi chèo thuyền hái sen.","Sương sớm đọng trên lá sen, {A} bày trò hứng sương pha trà dâng Hoàng thượng.","{A} muốn cùng ngươi làm bánh hạt sen mời Thái hậu.","Đêm hè, {A} thả đèn hoa sen trên hồ, cầu duyên con cái."],
  o:X=>[c6("Đi cùng nàng",{c:{suc:-5},r:[[X.A,7]],w:{sac:1}}),
@@ -92,7 +92,7 @@ EV6("officialWife","court",{a:[],pp:()=>{const T=td6();return T?{c:pick(Object.k
 EV6("envoyGift","court",{a:["emp"],pp:()=>({a0:0}),w:C=>.8,
  v:["Sứ thần nước ngoài dâng ngọc quý; Hoàng thượng chia cho lục cung mỗi nơi một món.","Cống phẩm phương nam về: vải thiều, long nhãn; ngài sai mang sang cung ngươi trước.","Sứ thần tặng một cây đàn lạ, ngài muốn xem phi tần nào gảy được.","Nước chư hầu dâng hai con công trắng, ngài hỏi cung nào muốn nuôi."],
  o:X=>[c6("Tạ ơn, chia cho người hầu",{w:{maid:6,duc:1},k:[R6("không giữ được gì cho mình")]}),
-  c6("Thử tài trước sứ thần",{c:{suc:-5},p:od(30+S.tai/2),w:{danh:3,sung:2},l:{danh:-2},lt:[R6("mất mặt trước người ngoài")]}),
+  c6("Thử tài trước sứ thần",{c:{suc:-5},p:od(BAL.odb.j68g.odP_11+S.tai/2),w:{danh:3,sung:2},l:{danh:-2},lt:[R6("mất mặt trước người ngoài")]}),
   c6("Xin giữ làm của riêng",Object.assign({k:[R6(`phi tần ghen +${ghenN(BAL.ghen.keepGift)}`)],ok:()=>{ghenAll(BAL.ghen.keepGift);return "Ngài ban riêng cho ngươi."}},typeof stipEvItem==="function"&&stipEvItem("envoyGift",X)?{}:{w:{bac:30}}))]});
 /* extra variants for existing templates (more distinct situations per template) */
 [["giftArrive","{A} sai tiểu thái giám mang sang một lồng chim họa mi, nói để ngươi đỡ buồn."],

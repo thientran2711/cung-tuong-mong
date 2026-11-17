@@ -165,7 +165,7 @@ function loMonth(){if(!S||S.dead)return;for(const p of consorts()){if(!loAlive(p
 /* Soát rương (j8 inspect) finds a missing item hidden in the chest: it goes back to its owner; the trail may lead to whoever hid it (same odds) */
 (function(){const i0=inspect;inspect=function(p){const L=(p.inv||[]).filter(e=>e&&e.lo&&e.h);L.forEach(e=>p.inv.splice(p.inv.indexOf(e),1));let f;try{f=i0.apply(this,arguments)}finally{L.forEach(e=>p.inv.push(e))}
  const sees=oSee(p,true);for(const e of L){if(!roll(sees))continue;const c=loGet(e.lo);const i=p.inv.indexOf(e);if(i>=0)p.inv.splice(i,1);lostReturn(e,"soat");const o=c?loP(c.own):null;
-  let s=`${loNm(e.k)} của ${o?wdNm(o):"người khác"} lẫn trong rương (đồ thất lạc), đã sai người trả về`;const by=e.by?byKey(e.by):null;if(by&&by!==p&&roll(40+(p.mat||0)*6)){evA(p,by,BAL.eff.jlost.evTop);s+=`: dấu vết dẫn về ${NM(by)} (chứng cứ ${balSg(BAL.eff.jlost.evTop)})`}f.push(s)}
+  let s=`${loNm(e.k)} của ${o?wdNm(o):"người khác"} lẫn trong rương (đồ thất lạc), đã sai người trả về`;const by=e.by?byKey(e.by):null;if(by&&by!==p&&roll(BAL.odb.jlost.rbTop+(p.mat||0)*6)){evA(p,by,BAL.eff.jlost.evTop);s+=`: dấu vết dẫn về ${NM(by)} (chứng cứ ${balSg(BAL.eff.jlost.evTop)})`}f.push(s)}
  return f}})();
 /* the owner asks her quietly (event: costs only) */
 PEND.loask=pp=>{const c=loGet(pp.id);if(!c||c.st==="done")return null;const o=loP(c.own);if(!o)return null;const nm=loNm(c.k);

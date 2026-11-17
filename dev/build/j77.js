@@ -198,7 +198,7 @@ visitBtn=function(v){if(!v||!v.alive||v.out||sameHouse(S,v))return"";const k=pal
 seeBtn=function(v){if(!v||v===S||!v.alive||v.out||together(S,v)||!locKnown(v))return"";const k=whereOf(v),tc=travel(S.place,k);
  return accGuestNeed(pbtn(`data-see="${v.id}" class="seeb"`,`Đến gặp ${v.name.split(" ").pop()}`,accGuestLine(k,tc,"gặp mặt, mọi việc làm tại chỗ, dễ hơn sai người")+accLockTag(k),accGuestWhy(k,tc)),k,tc)};
 /* hard-lock extra way in: ask a eunuch to lead her in (bạc), for the Emperor's halls */
-function accLeadO(k){return od(35+(S.danh||0)/8+(typeof mm==="function"?mm():0))}
+function accLeadO(k){return od(BAL.odb.j77.odAccLeadO+(S.danh||0)/8+(typeof mm==="function"?mm():0))}
 function accLeadCost(){return 15}
 function accLead(k){if(!S||S.dead||Q.length||S.out||S.confined)return;const tc=travel(S.place,k);if(!dayFit(tc+1)||S.bac<accLeadCost())return;const nm=accName(k);
  spend(1);apply({bac:-accLeadCost()});if(roll(accLeadO(k))){accGrant(S,k);log(`Nhờ thái giám dẫn vào ${nm}: được dẫn vào (Bạc -${accLeadCost()}).`);j77In(k);if(S.place!==k)render();return}

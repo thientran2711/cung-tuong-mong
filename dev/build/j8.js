@@ -252,12 +252,12 @@ function itemMonth(p){let r="";for(const e of p.inv.slice())if(e.t)r+=taintHit(p
 function inspect(p){const found=[];const sees=oSee(p,true);
  for(const e of p.inv.slice()){if(!(e.t||e.h))continue;if(e.by===key(p)&&!e.h)continue;if(!roll(sees))continue;
   p.inv.splice(p.inv.indexOf(e),1);const by=byKey(e.by);let s=`${iname(e)}${e.t?" ("+TAINT[e.t].n+")":""}${e.h?" lạ, không rõ ai cài":""}`;
-  if(by&&by!==p&&roll(40+p.mat*6)){/*evok: tainted by (scheme)*/evA(p,by,BAL.eff.j8.evInspect);s+=`: dấu vết dẫn về ${NM(by)} (chứng cứ ${balSg(BAL.eff.j8.evInspect)})`}found.push(s)}
+  if(by&&by!==p&&roll(BAL.odb.j8.rbInspect+p.mat*6)){/*evok: tainted by (scheme)*/evA(p,by,BAL.eff.j8.evInspect);s+=`: dấu vết dẫn về ${NM(by)} (chứng cứ ${balSg(BAL.eff.j8.evInspect)})`}found.push(s)}
  return found}
 /* palace search: illegal things found are crimes, unless the trail leads to whoever planted them */
 function search(p){const bad=p.inv.filter(e=>(IT[e.k]&&itm(e.k).il)||(e.t&&TAINT[e.t].il));if(!bad.length)return"";const e=bad[0];p.inv.splice(p.inv.indexOf(e),1);
  const by=byKey(e.by),what=`${iname(e)}${e.t?" ("+TAINT[e.t].n+")":""}`;
- if(by&&by!==p&&roll(35+p.mat*5)){punish(by,"cài tang vật vu oan",2);evA(p,by,BAL.eff.j8.evSearch);return `Cung Chính ti khám cung ${NM(p)}, tìm thấy ${what}; tra ra do ${NM(by)} cài vào. `}
+ if(by&&by!==p&&roll(BAL.odb.j8.rbSearch+p.mat*5)){punish(by,"cài tang vật vu oan",2);evA(p,by,BAL.eff.j8.evSearch);return `Cung Chính ti khám cung ${NM(p)}, tìm thấy ${what}; tra ra do ${NM(by)} cài vào. `}
  if(e.t==="bua"){/* the planter is the framer (jtruth defence; reviewer r1: ACTX.a was empty in the month search) */const A0=ACTX.a;ACTX.a=by&&by!==p?by:A0;let d;try{d=framed(p,"tàng trữ bùa chú")}finally{ACTX.a=A0}if(d<0)return `<span class="r">Khám cung ngươi tìm thấy ${what}.</span> `;if(!d)return `Khám cung ${NM(p)} tìm thấy ${what}. ${FRAME_LAST}`;return `<span class="r">Khám cung ${NM(p)} tìm thấy ${what}.</span> Danh -${d}. `}
 if(e.by&&e.by!==key(p))p.framedBy=e.by;
  if(e.t==="trom"){fall(p,"bị khám ra giấu ngọc bội ngự dụng");return `Khám cung ${NM(p)} tìm thấy ${what}. `}
@@ -307,7 +307,7 @@ function nx(b,note,p){const m=BAL.night.mood[S.emp.mood];const v=b+m;const w=v>=
 function nightFx(s){const BN=BAL.night;S.tablet=0;S.nights++;S.nightLog.push(wk());const NG=nightGain(s),g=NG.sung;apply({sung:g});S.an=cl(S.an+NG.an,0,100);ghenAll(BN.ghen);
  if(giuBlocked(S))pushFront(mkP("giu"),"Giữ hay không giữ");else night(S);
  if(roll(BN.bestow+s*BN.bestowS))bestow(S,"night");log(`Thị tẩm. Sủng +${g} · Ân tình +${NG.an}.`)}
-PEND.night2=p=>{const s=p.s,v=liveRivals(false).slice().sort((a,b)=>a.rel-b.rel)[0],son=mySons()[0],o1=od(30+S.an/2+s*4),o2=od(pillowO(S,s)),o3=od(40+S.an/2+s*3);
+PEND.night2=p=>{const s=p.s,v=liveRivals(false).slice().sort((a,b)=>a.rel-b.rel)[0],son=mySons()[0],o1=od(BAL.odb.j8.odO1+S.an/2+s*4),o2=od(pillowO(S,s)),o3=od(BAL.odb.j8.odO3+S.an/2+s*3);
  const txt=s>=BAL.nightEnd.warm?"Ngài khẽ cười, kéo ngươi lại gần. Tấm rèm thêu uyên ương buông xuống; ngọn nến đỏ chập chờn rồi lụi, chỉ còn tiếng mưa xuân trên mái ngói.":s>=BAL.nightEnd.normal?"Hương trầm vấn vít. Ngài nắm tay ngươi rất lâu, rồi màn the khép lại.":"Ngài có vẻ xa cách. Đêm trôi qua lặng lẽ sau tấm màn vàng.";
  const go=f=>()=>{nightFx(s);f()};
  const O=[{n:"Xin ân cho gia đình",fx:{},x:`${word(o1)} · thành: Danh ${balSg(BAL.eff.j8.danhGo)}, Bạc ${balSg(BAL.eff.j8.bacGo)} · hỏng: Sủng ${balSg(BAL.eff.j8.sungGo)}`,go:go(()=>apply(roll(o1)?{danh:BAL.eff.j8.danhGo,bac:BAL.eff.j8.bacGo}:{sung:BAL.eff.j8.sungGo}))},
@@ -316,7 +316,7 @@ PEND.night2=p=>{const s=p.s,v=liveRivals(false).slice().sort((a,b)=>a.rel-b.rel)
  if(son)O.push({n:`Xin cho ${son.name}`,fx:{},x:`${word(o3)} · thành: ngài thương con ${balSg(BAL.eff.j8.fondGo)}`,go:go(()=>{if(roll(o3))son.fond=cl(son.fond+BAL.eff.j8.fondGo,0,100);else S.an=cl(S.an-2,0,100)})});
  O.push({n:"Im lặng, tựa vai ngài",fx:{},x:"Ân tình +2",go:go(()=>{S.an=cl(S.an+2,0,100)})});
  return{cls:"night",who:pEmp(),t:`${p.ex?`<p class="past">${p.ex}</p>`:""}<p>${txt}</p><p class="past">Gối đầu, nửa đêm. Ngươi muốn nói gì?</p>`,o:O}};
-PEND.giu=()=>{const o1=od(45+S.tamco/3),o2=od(30+S.an/2);return{who:pTH(),t:"<p>Sáng sớm, tổng quản Kính sự phòng quỳ ngoài điện hỏi theo lệ: “Giữ hay không giữ?”</p><p>Lời Thái hậu truyền xuống: phẩm vị thấp, không được giữ long thai.</p>",o:[
+PEND.giu=()=>{const o1=od(BAL.odb.j8.odO1_2+S.tamco/3),o2=od(BAL.odb.j8.odO2+S.an/2);return{who:pTH(),t:"<p>Sáng sớm, tổng quản Kính sự phòng quỳ ngoài điện hỏi theo lệ: “Giữ hay không giữ?”</p><p>Lời Thái hậu truyền xuống: phẩm vị thấp, không được giữ long thai.</p>",o:[
  {n:"Cúi đầu tuân lệnh",fx:{th:5},x:"lần này không thể có thai"},
  {n:"Đút bạc xin giữ",fx:{bac:-40},x:`${word(o1)} · thành: được giữ long thai (nếu có) · hỏng: Thái hậu ${balSg(BAL.eff.j8.thGo)}`,go:()=>{if(roll(o1))night(S);else apply({th:BAL.eff.j8.thGo})}},
  {n:"Cầu xin Hoàng thượng",fx:{},x:`${word(o2)} · thành: được giữ long thai (nếu có) · hỏng: Sủng ${balSg(BAL.eff.j8.sungGo_2)}`,go:()=>{if(roll(o2))night(S);else apply({sung:BAL.eff.j8.sungGo_2})}}]}};
@@ -398,7 +398,7 @@ function pickTarget(v){const L=others(v);if(!L.length)return null;const w=L.map(
    Evidence gets its own line from j78 with its source ("nguồn: tai mắt của ngươi thấy tận mắt"); nothing is glued to the next event. */
 const SEEN_BAD=kRx("(?<![\\p{L}])(độc|xạ hương|bùa|hình nhân|vu oan|vu cáo|vu khống|hối lộ|đút lót|cài|lén|tráo|ám hại|hãm hại|làm hại|hại|tung tin|tin đồn|đồn|xô ngã|đẩy|giấu|trộm|giả mạo|tư thông|âm mưu|mưu|kết bè|nói xấu|xúi|phá|cắt xén|bôi nhọ|ám toán|cướp|bán đứng|uy hiếp|tống tiền|bỏ thuốc|ngáng|gièm|chèn ép|bắt nạt|đe dọa|dọa|khai man|phao tin|làm nhục|tố giác|cáo giác|bị lộ|bị bắt|đồ có vấn đề)(?![\\p{L}])","iu");
 function seenBad(txt){return SEEN_BAD.test(String(txt||"").replace(/<[^>]+>/g,""))||(/tặng|dâng/.test(String(txt||""))&&!!window.__giftTaint)}
-function seenNPC(v,t,txt){const bad=seenBad(txt);window.__giftTaint=0;if(!txt)return"";if(t===S||v===S)return txt;if(roll(15+S.mat*6)){if(!bad)return `Tai mắt thấy: ${txt}`;evA(S,v,BAL.eff.j8.evSeenNPC);return""}return""}
+function seenNPC(v,t,txt){const bad=seenBad(txt);window.__giftTaint=0;if(!txt)return"";if(t===S||v===S)return txt;if(roll(BAL.odb.j8.rbSeenNPC+S.mat*6)){if(!bad)return `Tai mắt thấy: ${txt}`;evA(S,v,BAL.eff.j8.evSeenNPC);return""}return""}
 function npcMonthly(v){let ev="";const cost=k=>5+v.arts[k]*5;
  if(roll(30)){const k=pick(Object.keys(v.arts));if(v.arts[k]<5&&(v.bac>=cost(k)||v.suc>=40)){if(v.bac>=cost(k)){ap(v,{bac:-cost(k),suc:-10});v.artp[k]+=1+R(3)}else{ap(v,{suc:-15});v.artp[k]+=1};while(v.arts[k]<5&&v.artp[k]>=v.arts[k]+2){v.artp[k]-=v.arts[k]+2;v.arts[k]++}}}
  if(roll(25)&&S.shop.length){const k=pick(S.shop);if(IT[k]&&v.bac>=itm(k).pr+20&&(!itm(k).il||v.malice>60))buy(v,k)}

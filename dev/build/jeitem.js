@@ -84,7 +84,7 @@ function eitPilNpc(X){const p=X.p,s=X.s,P=BAL.eit.pil;if(!roll(cl(P.see+(p.tamco
    an untipped greedy eunuch, a disloyal maid) down. Weeks = 1 + two rolls against (100 − regard): good standing / a bribe → nearer 1, disliked → nearer 3. */
 function eitRegard(p){const G=BAL.eit.reG,B=BAL.stip;let g=G.base+rkOf(p)*G.rk+((p.sung||0)-30)*G.sung;
  try{const st=stipSt(p),f0=st.fault;if(st.tip!=null&&S.turn-st.tip<B.tipM)g+=G.tip;g-=stipCauses(p,false).C.length*G.cause;st.fault=f0}catch(e){}return cl(Math.round(g),0,100)}
-function eitReWk(p){const g=eitRegard(p);return 1+(roll(100-g)?1:0)+(roll(100-g)?1:0)}
+function eitReWk(p){const g=eitRegard(p);return 1+(roll(BAL.odb.jeitem.rbEitReWk-g)?1:0)+(roll(BAL.odb.jeitem.rbEitReWk-g)?1:0)}
 (function(){if(typeof tyLost!=="function")return;const l0=tyLost;tyLost=function(p,why){const r=l0.apply(this,arguments);try{if(p)p.tyNvp=wk()+eitReWk(p)}catch(e){}return r};window.tyLost=tyLost})();
 function eitReNeed(){try{return !!(S&&!S.dead&&!S.out&&typeof tyOn==="function"&&tyOn(S)&&!(typeof isSrv==="function"&&isSrv()))}catch(e){return false}}
 function eitReOdds(){const R=BAL.eit.re,r=Math.max(0,Math.min(7,rkOf(S)|0));const bribe=cl(R.base+r*R.rk+Math.round((S.sung||0)/R.sungDiv),5,95);

@@ -11,7 +11,7 @@ function trS(){if(!S)return null;if(S.trieu&&S.trieu.H)return S.trieu;
  const usedS=new Set([S].concat(rivals||[]).map(p=>tdSur(p.name)));const sur=shuf(SURN.filter(x=>!usedS.has(x)));const giv=shuf(MALEN.slice());
  CLANS.forEach((c,i)=>{const mine=(c==="Tể tướng"&&S.origin.k==="tt")||(c==="Đại tướng quân"&&S.origin.k==="dtq");
   const h={c,isMin:1,name:(mine?tdSur(S.name):(sur[i]||pick(SURN)))+" "+(giv[i]||pick(MALEN)),age:46+R(20),sex:"m",pow:mine?55+R(16):38+R(30),sk:35+R(35),af:{},dadOf:mine?"me":null};
-  h.corrupt=roll(25+(nv(h,"corrupt")));T.H[c]=h});
+  h.corrupt=roll(BAL.odb.j55.rbCorrupt+(nv(h,"corrupt")));T.H[c]=h});
  const k=(a,b)=>[a,b].sort().join("|");T.rel[k("Tể tướng","Đại tướng quân")]=-30;T.rel[k("Lễ bộ","Hàn lâm")]=30;
  for(let i=0;i<5;i++)for(let j=i+1;j<5;j++){const kk=k(CLANS[i],CLANS[j]);if(T.rel[kk]==null)T.rel[kk]=R(41)-20}
  return T}
@@ -27,7 +27,7 @@ function tdPow(c){const h=tdHead(c);return h?h.pow:40}
 function tdPowAdd(c,n){const h=tdHead(c);if(!h||!n)return;h.pow=cl(Math.round(h.pow+n),0,100);if(h.dadOf==="me")S.dad=h.pow}
 function tdName(p){return p===S?"ngươi":p.name}
 /* is the father truly corrupt? fixed per father; the head's own house shades it */
-function tdDadT(p){if(p===S){const h=tdHeadOf(S);if(h&&h.dadOf==="me")return !!h.corrupt}if(p.dadT==null){const h=tdHeadOf(p);p.dadT=roll(25+(h?nv(h,"dadT"):0))}return !!p.dadT}
+function tdDadT(p){if(p===S){const h=tdHeadOf(S);if(h&&h.dadOf==="me")return !!h.corrupt}if(p.dadT==null){const h=tdHeadOf(p);p.dadT=roll(BAL.odb.j55.rbDadT+(h?nv(h,"dadT"):0))}return !!p.dadT}
 function tdDadClear(p){if(p===S){const h=tdHeadOf(S);if(h&&h.dadOf==="me")h.corrupt=false;S.dadT=false}else p.dadT=false}
 function deG(a,t){const T=trS();return ((T.de[key(a)]||{})[key(t)])||0}
 function deA(a,t,n){const T=trS();const m=T.de[key(a)]=T.de[key(a)]||{};m[key(t)]=Math.max(0,(m[key(t)]||0)+n)}
@@ -160,7 +160,7 @@ function tdMonth(){if(!tdOn())return"";const T=trS();let ev="";
  else if(/Chiến tranh với Nam Chiếu|Nam Chiếu thắng trận|Nam Chiếu thua trận/.test(r)){T.bien=cl(T.bien-15,0,100);tdNews("Chiến tranh với Nam Chiếu.")}}}catch(e){}return r}})();
 /* lãnh cung: 'nhờ cha dâng sớ' leans on her house's real standing and spends it */
 (function(){if(typeof coldActs!=="function")return;const c0=coldActs;coldActs=function(){const A=c0.apply(this,arguments);try{const c=tdHouse(S);if(!c)return A;const a=A.find(x=>x.n==="Nhờ người bên ngoài"&&/cha/.test(x.t||""));if(!a)return A;
- a.o=od(15+tdPow(c)/4);a.t=`Nhờ cha (nhà ${c}, thế lực ${tdPow(c)}) dâng sớ xin tha.`;a.x=`được tha · kèm: nhà ${c} thế lực ${balSg(BAL.eff.j55.go)}`;const g=a.go;a.go=function(){tdPowAdd(c,BAL.eff.j55.go);return g.apply(this,arguments)};const f=a.fail;a.fail=function(){tdPowAdd(c,BAL.eff.j55.fail);if(f)return f.apply(this,arguments)}}catch(e){}return A}})();
+ a.o=od(BAL.odb.j55.odO+tdPow(c)/4);a.t=`Nhờ cha (nhà ${c}, thế lực ${tdPow(c)}) dâng sớ xin tha.`;a.x=`được tha · kèm: nhà ${c} thế lực ${balSg(BAL.eff.j55.go)}`;const g=a.go;a.go=function(){tdPowAdd(c,BAL.eff.j55.go);return g.apply(this,arguments)};const f=a.fail;a.fail=function(){tdPowAdd(c,BAL.eff.j55.fail);if(f)return f.apply(this,arguments)}}catch(e){}return A}})();
 
 /* ---------- the court view inside the Phe phái tab ---------- */
 window.__tdV=window.__tdV||"hc";

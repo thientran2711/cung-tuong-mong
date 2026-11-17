@@ -262,7 +262,7 @@ function wdRemark(p,st){const r=wdRemarker(p);if(!r)return"";const view=r.sure?s
   under:`${R0} cười khẽ: ${fill(kLine("wd:under",kTP("wd:under")||WD_SAY.under,VO))}`,
   tang:`${R0} thấy ${wdNm(p)} mặc ${nm} giữa quốc tang.`}[view];
  /* who hears it: p always; others by chance; the player also through her tai mắt */
- for(const o of consorts()){if(o===p)continue;if(o===S?(roll(30+(S.mat||0)*8)):roll(45))wdSee(o,p,view,r.name,r.sure)}
+ for(const o of consorts()){if(o===p)continue;if(o===S?(roll(BAL.odb.j92.rbWdRemark+(S.mat||0)*8)):roll(45))wdSee(o,p,view,r.name,r.sure)}
  if(r.v)wdSee(r.v,p,view,r.name,r.sure);
  let fx="";
  /* being looked down on only costs Danh when she really is too plain (a wrong sneer falls flat) */
