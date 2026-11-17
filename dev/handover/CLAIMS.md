@@ -894,3 +894,5 @@
 | REVIEW ag-moodknow r1 (opus BIG) of 8d20e004 | review/ag-moodknow-r1 | C-AG | session_01UV1SzhNSDpgww4CQQEWf47 | RUNNING | 17/11 17:56Z |
 | REVIEW kit-rank-name r1 of a4ccfc74 (sonnet SMALL; brief briefs/s35-review-kit-rank-name.md) | review/kit-rank-name-r1 | MAIN s35 | session_01UV1SzjAB6NhBbBqqpmBnJC | RUNNING | 17/11 17:55Z |
 | AG-ALL-2 2d4 assembler (opus; TIN BÁO walk timing OD L1668 (3) + bạc-on-success family + assemble → SẴN SÀNG KIỂM) | review/ag-all-2 | C-AG | session_01UV1SzjkUqtz6kFBa9EE59V | RUNNING | 17/11 18:02Z |
+| DISPLAY SHELF (Nơi trưng bày) + room xa xỉ + NPCs visit her room + info channels/tố xa xỉ + plant care (OD 18:30Z (A) + OD ~18:00Z s35) — whole job | review/display-shelf | C-AG | session_01UV1SzkyZBYRFoSWBF8fg27 | ORDERED | 17/11 18:00Z |
+| mirror-center: makeup mirror face off-centre left (owner bug OD ~18:00Z s35) — whole family of round/mirror face frames | review/mirror-center | MAIN s35 | (opening) | RUNNING | 17/11 18:00Z |
