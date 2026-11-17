@@ -780,3 +780,4 @@
 | REVIEW kit-ico-rank r2 of d0840f4e (opus BIG co-op + rank Worker) | review/kit-ico-rank-r2-r1 | MAIN s32 | session_01UV1SzhhPVmkyz4wFoqDuLv | RUNNING | 17/11 13:56Z |
 | map-portrait-r2 PASS 68979111 (+ map-me-mark-r1; '???' label fix) → builder s31b next batch s32a; worker + reviewer archived | review/map-portrait-r2 | MAIN s32 | session_01UV1SzhfMi68Cmn88G2Yqze | PASS → BATCH | 17/11 13:58Z |
 | REVIEW morechip-sil r1 of bd3bb284 (SMALL UI) | review/morechip-sil-r1 | MAIN s32 | session_01UV1Szid6ogM8TKZmLSzU7z | RUNNING | 17/11 14:00Z |
+| REVIEW narrow-t3 r1 of aa1a3387 (sonnet kit) | review/narrow-t3-r1 | MAIN s32 | session_01UV1SzjC1Tv9FpCm2Fb4BPj | RUNNING | 17/11 13:59Z |
