@@ -3,7 +3,7 @@
    2 quốc tang from a REAL death (S.thDead): window opens, j92 wdTang() true, nobody's nightCh > 0 the first weeks, festToday null
    3 Emperor away: S.where.emp null after placeWhere, only followers keep nightCh, visRoll gives nothing, mindW scheme ×BAL
    4 thiên tai: the stipend cut is the same rule for her and every NPC (BAL.world.dis.payCut)
-   5 Dư đồ "!": the first buổi of a window shows "!" at the window's real place; arriving fires its card once
+   5 CENTER pop-up at start (her options) and at end, one Tuần lục line, no Dư đồ "!"; worldPlanW force slots for AG-ALL
    6 the j7 comet left the weekly random pool; the j55 court text is read (S.wMM.k) for every roll kind
    7 old save (no S.wwin) plays a tuần; co-op: "wwin" is a world key
    usage: node dev/test/world_check.js <dev/index.html | URL>  → exit 1 on any FAIL or page error */
@@ -40,10 +40,16 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
   const sOn=run(S),vOn=run(v);z.L=[];const sOff=run(S),vOff=run(v);z.L=L;return{open:!!worldWin("dis"),me:sOff-sOn,meW:cut(S),npc:vOff-vOn,npcW:cut(v)}});
  ok(r4.open&&r4.me===r4.meW&&r4.npc===r4.npcW,'thiên tai: the same pay cut for her and an NPC (BAL.world.dis.payCut)',r4);
  /* 5 */
- await fresh();await p.evaluate(()=>{S.tuan=1;S.where=S.where||{};const T=trS();if(T)T.bien=90;worldQueue("su","thử")});await step();
- const r5=await p.evaluate(()=>{S.buoi=0;S.adHap=null;S.place="home";const L=adHapNow();const h=L.find(x=>x.id==="world");if(!h)return{none:1,L};Q.length=0;const k=h.k;S.place=k;adHapArrive(k);const n1=Q.length;const t=Q[0]&&Q[0].t;
-  Q.length=0;S.adHap=null;S.place="home";const L2=adHapNow();return{k,n1,t,again:L2.some(x=>x.id==="world")}});
- ok(r5.k==='thu'&&r5.n1>=1,'Dư đồ "!" at the window place (Cần Chính điện) fires its card',r5);ok(r5.again===false,'"!" fires once per window',r5);
+ await fresh();await p.evaluate(()=>{S.tuan=1;Q.length=0;const T=trS();if(T)T.bien=90;worldQueue("su","thử")});
+ const r5=await p.evaluate(()=>{Q.length=0;S.mg=0;const t=wk();endTurn();const c=Q.find(m=>m&&m.t==="Sứ đoàn vào triều");const opts=c&&c.opts?c.opts.map(o=>o.n):[];
+  S.buoi=0;S.adHap=null;S.place="home";const hap=adHapNow().some(x=>x.id==="world");const n0=(S.logs||[]).filter(l=>/Sứ đoàn vào triều/.test(l)).length;
+  Q.length=0;S.mg=0;endTurn();const e=Q.find(m=>m&&/Sứ đoàn/.test(m.h||"")&&m!==c);Q.length=0;S.mg=0;endTurn();const again=Q.some(m=>m&&/Sứ đoàn đã lên đường/.test(m.h||""));
+  return{start:!!c,opts,hap,log:n0,end:!!e,again}});
+ ok(r5.start&&r5.opts.length>=1,'center pop-up at the start, with her own options',r5);ok(r5.end&&!r5.again,'center pop-up at the end, once',r5);
+ ok(!r5.hap,'no world-event "!" on the Dư đồ (owner OD 17/11 ~14:30Z)',r5);ok(r5.log>=1,'a Tuần lục line',r5);
+ const r5b=await p.evaluate(()=>{const v=liveRivals(true).find(x=>rkOf(x)>=BAL.world.su.rank)||liveRivals(true)[0];v.rank=Math.max(v.rank,BAL.world.su.rank);
+  S.wwin.L=[];S.wwin.q=[{k:"su",cause:"thử",o:{}}];S.wwin.last={};const T=trS();if(T)T.bien=90;Q.length=0;S.mg=0;endTurn();Q.length=0;const P=worldPlanW(v);return{force:P.force||[],why:P.why||""}});
+ ok(r5b.force.some(f=>f.pl==="thu"&&f.b===1),'AG-ALL hook: worldPlanW(p).force duty slot (Dự yến tiếp sứ) + why',r5b);
  /* 6 */
  const r6=await p.evaluate(()=>{const L=freshEvents().map(e=>e.id);const ks=new Set();const T=trS();for(let i=0;i<300;i++){T.bien=50;T.kho=50;moodMonth();ks.add(S.wMM&&S.wMM.k)}
   return{comet:L.includes("comet"),ks:[...ks].sort()}});

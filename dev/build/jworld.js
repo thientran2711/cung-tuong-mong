@@ -14,7 +14,7 @@
    GATES that read it (existing code, never rebuilt): nightCh (thị tẩm, j8 flip, every consort the same) · visRoll (jvisit ngự giá) ·
                S.where.emp (stroll "!" jact, countAt) · festToday / festival (FEST days, j71 yến) · stipend (monthly pay) · wdTang (j92
                tang dress, jlux, jtoil, jpm) · mindW (every NPC choice site: jagent, j28 SOC, j40 menu, jsteal, …) · placeWhere (places) ·
-               AD_HAP_FIX / AD_HAP_FIRE (Dư đồ "!") · freshEvents (the j7 comet card leaves the weekly pool: it comes with the sky window).
+               the CENTER pop-up (modal card) at start + end, one Tuần lục line each (owner OD 17/11 ~14:30Z; NO Dư đồ "!") · freshEvents (the j7 comet card leaves the weekly pool: it comes with the sky window).
    TWO-WAY: NPCs cause (a careless maid / arsonist's fire, a minister's failed relief, a general's lost war, a consort's son, a death they
                caused) and always react (mindW / place weights, and the same option list she gets at the window's "!" place, chosen by
                mindPick). Her choice at the place changes her part of the window like theirs.
@@ -43,7 +43,11 @@ function byPid(id){if(id==="me")return S;return(typeof rivals!=="undefined"?riva
 function worldPlanW(p){const out={place:{},act:{}};try{const g=wGroup(p);if(g==="emp"||g==="other")return out;for(const w of worldWin()){const b=B()[w.k];if(!b)continue;
   const A=g==="srv"&&b.srvAct?b.srvAct:b.act;for(const t in A||{})out.act[t]=(out.act[t]==null?1:out.act[t])*A[t];
   const P=b.place||{};for(const k in P)out.place[k]=(out.place[k]==null?1:out.place[k])*P[k];
-  if(w.k==="tang"){const m=w.x&&w.x.why==="queen"?"kn":"tn";for(const k of ["tn","kn"])if(k!==m)delete out.place[k]}}}catch(e){wErr("planW",e)}return out}
+  if(w.k==="tang"){const m=w.x&&w.x.why==="queen"?"kn":"tn";for(const k of ["tn","kn"])if(k!==m)delete out.place[k]}
+  /* duty slots the window imposes (AG-ALL's planner puts them first): BAL.world[k].force [{b,pl,deed,why,g,first,rank}]; pl "$" = the window's place */
+  for(const f of b.force||[]){if(f.g&&!f.g.includes(g))continue;if(f.first&&now()!==w.t0)continue;if(f.rank!=null&&rkOf(p)<f.rank)continue;
+   let pl=f.pl;if(pl==="$"){try{pl=EVD[w.k].place(w)}catch(e){pl=null}}if(!pl)continue;(out.force=out.force||[]).push({b:f.b,pl,deed:f.deed,why:f.why})}
+  out.why=(out.why?out.why+"; ":"")+wName(w)}}catch(e){wErr("planW",e)}return out}
 if(typeof window.mindW==="function"){const m0=window.mindW;window.mindW=function(p,tag){const w=m0.apply(this,arguments);try{if(!S||!BAL.world||!B().on)return w;const a=worldPlanW(p).act[tag];if(a!=null)return Math.max(BAL.mind.wMin,w*a)}catch(e){}return w}}
 /* ---------- start / end ---------- */
 function wCd(k){const b=B()[k]||{};return b.cd||0}
@@ -60,7 +64,7 @@ function worldStart(k,cause,o){if(!host()||!S||S.dead||!B().on)return null;if(!W
  try{if(typeof tdNews==="function"&&T_())tdNews(`${wName(w)}: ${cause}.`)}catch(e){}
  log(`<b>${wName(w)}.</b> ${cause}. ${txt}`);return w}
 function worldEnd(w){const z=wZ();let txt="";try{const E=EVD[w.k];if(E&&E.end)txt=E.end(w)||""}catch(e){wErr("end "+w.k,e)}WW.stat.end++;w.done=1;
- z.L=z.L.filter(x=>x!==w);(z.H=z.H||[]).unshift({k:w.k,sub:w.x&&w.x.sub||"",t0:w.t0,t1:w.t1,cause:w.cause});if(z.H.length>12)z.H.length=12;
+ z.L=z.L.filter(x=>x!==w);(z.H=z.H||[]).unshift({id:w.id,k:w.k,n:wName(w),sub:w.x&&w.x.sub||"",t0:w.t0,t1:w.t1,cause:w.cause,end:String(txt||"").replace(/<[^>]+>/g,"")});if(z.H.length>12)z.H.length=12;
  if(txt)log(txt);return txt}
 /* ---------- helpers for effects ---------- */
 const liveR=()=>{try{return liveRivals(true)}catch(e){return[]}};
@@ -81,8 +85,8 @@ EVD.tang={place:w=>w.x.why==="queen"?"kn":"tn",
    try{if(roll(traitsOf(v).includes("Kiêu ngạo")?70:90)){wdAutoFor(v,0);n++}}catch(e){}}
   return `Cả cung để tang ${monthsWord(w.t1-w.t0)}: không yến tiệc, không ca nhạc; ${monthsWord(b.noNight[w.x.why]||1)} đầu không ai được thị tẩm.`},
  end(w){return `Mãn tang (${wName(w)}): cung cấm trở lại như thường.`},
- card(w){if(Q.some(m=>m&&m.t==="Quốc tang"))return null;/* j92's own card already says it */
-  return{t:"Quốc tang",who:pEmp(),h:`<p>${w.cause}. ${w.txt||""}</p><p class="past">Mặc đồ đỏ hay vàng lúc này là tội. Nên thay y phục, tháo trâm (Tư trang).</p>`}},
+ card(w){for(let i=Q.length-1;i>=0;i--)if(Q[i]&&Q[i].t==="Quốc tang"&&!Q[i].wwin)Q.splice(i,1);/* j92's announcement: ours carries the same words + her options */
+  return{wwin:1,t:"Quốc tang",who:pEmp(),h:`<p>${w.cause}. ${w.txt||""}</p><p class="past">Mặc đồ đỏ hay vàng lúc này là tội. Nên thay y phục, tháo trâm (Tư trang).</p>`}},
  scene(w){const b=B().tang.rite;const P=wPresent(EVD.tang.place(w));return{t:"Linh cữu",h:`<p>Quan tài đặt giữa chính điện, khói hương nghi ngút. ${P.length?nmList(P)+" đang quỳ túc trực.":"Cung nhân thay nhau túc trực."}</p>`,
   opts:[{n:"Quỳ túc trực, tụng kinh",fx:{suc:-8},x:`thành: Đức +${b.duc}, Thái hậu +${b.th}`,go:()=>{apply({duc:b.duc});if(!S.thDead&&w.x.why!=="th")apply({th:b.th})}},
    {n:"Thắp nén hương rồi lui",fx:{},x:"không được không mất"}]}},
@@ -121,7 +125,7 @@ EVD.tuyen={place:w=>typeof qOn==="function"&&qOn()?"kn":"tn",
   for(const v of old){if(v===S||!N.length)continue;const t=pick(N);const k=npcPick(v,[["welcome",mW(v,"help")],["ambush",mW(v,"harm")*(1+(v.ghen||0)/50)],["ignore",1]]);
    if(k==="welcome")affAdd(t,v,b.welcomeAff);else if(k==="ambush"){relAdd(v,t,b.ambushRel);if(typeof newsAdd==="function")newsAdd(v,"tuyen",`${v.name} ra oai với tú nữ mới ${t.name}.`)}}
   return N.length?`${N.length} tú nữ vào cung: ${N.map(v=>`${v.name} (${RANKS[v.rank].n})`).join(", ")}. Ân sủng cũ phải chia bớt.`:"Hậu cung đã đủ người, lần này không ai được giữ lại."},
- end(w){return""},
+ end(w){const N=(w.x.n||[]).map(byPid).filter(v=>v&&v.alive);return N.length?`Các tú nữ mới đã ổn định chỗ ở: ${nmList(N)}.`:""},
  card(w){return{t:"Đại tuyển tú nữ",who:pEmp(),h:`<p>${w.cause}.</p><p>${w.txt||""}</p>`}},
  scene(w){const b=B().tuyen;const N=(w.x.n||[]).map(byPid).filter(v=>v&&v.alive);if(!N.length)return null;const t=N[0];
   return{t:"Tú nữ mới vào cung",who:pv(t),h:`<p>Các tú nữ mới quỳ ra mắt. ${nmList(N)} cúi đầu, chưa dám ngẩng lên.</p>`,
@@ -136,6 +140,7 @@ EVD.hoa={place:w=>{const p=byPid(w.x.who);return p&&p!==S&&typeof palaceOf==="fu
    try{WW.inFire=1;const lost=typeof tsbBurn==="function"?tsbBurn(p,1,"lửa lan từ dãy cung bên"):[];if(lost.length)L.push(p)}catch(e){}finally{WW.inFire=0}}
   try{if(S.rt)S.rt.fire=S.turn}catch(e){}
   const p=byPid(w.x.who);return `Lửa từ ${p?(p===S?"cung ngươi":"cung "+p.name):"một dãy cung"} lan sang cả dãy, cung nhân xách nước cả đêm.${L.length?` Mất đồ vì lửa lan: ${nmList(L)}.`:""} Nội vụ phủ tra xét nguyên do.`},
+ end(w){return "Dãy cung cháy đã dọn xong; Nội vụ phủ cho dựng lại."},
  card(w){const p=byPid(w.x.who);try{if(p&&p!==S&&p.alive&&EVI&&EVI.fire){const pp=EVI.fire.pp()||{};pp.v=p.id;const d=mkP("fire",pp);if(d){log(`${w.cause}. ${w.txt||""}`);return{t:"Hỏa hoạn lớn",h:d.t,opts:d.o,who:d.who,pid:d.pid,pp:d.pp}}}}catch(e){wErr("fire card",e)}
   return{t:"Hỏa hoạn lớn",who:pEmp(),h:`<p>${w.cause}.</p><p>${w.txt||""}</p>`,headArt:typeof tsbArt==="function"?tsbArt("ev-hoa-hoan","Hỏa hoạn"):undefined}},
  scene(w){const b=B().hoa;const p=byPid(w.x.who);if(!p||p===S)return null;return{t:"Đám cháy đêm qua",who:pv(p),h:`<p>Cung ${p.name} còn khói. Nàng đứng giữa đống đồ cháy dở.</p>`,
@@ -171,6 +176,7 @@ EVD.su={place:w=>"thu",
  start(w){const b=B().su;moodSet(b.mood);const S1=[];for(const v of liveR()){if(rkOf(v)<b.rank)continue;const k=npcPick(v,[["show",mW(v,"art")],["quiet",1]]);
    if(k==="show"){if(roll(odA(v,b.show[0]+(v.tai||0)/b.show[1]))){ap(v,{sung:b.showSung,danh:b.showDanh});S1.push(v)}else ap(v,{danh:b.failDanh})}}
   return `Yến tiếp sứ ở Cần Chính điện; phi tần từ ${RANKS[b.rank].n} trở lên dự yến.${S1.length?` Được sứ thần khen tài: ${nmList(S1)}.`:""}`},
+ end(w){return "Sứ đoàn đã lên đường về nước, mang theo quốc thư đáp lễ."},
  card(w){return{t:"Sứ đoàn vào triều",who:pEmp(),h:`<p>${w.cause}.</p><p>${w.txt||""}</p>`}},
  scene(w){const b=B().su;const ok=meCons()&&rkOf(S)>=b.rank;const o=od(b.show[0]+(S.tai||0)/b.show[1]);
   return{t:"Yến tiếp sứ",who:pEmp(),h:`<p>Sứ thần dâng lễ vật lạ, bá quan ngồi kín hai bên.</p>${ok?"":`<p class="past">Phẩm của ngươi chưa được dự yến; chỉ đứng xa mà xem.</p>`}`,
@@ -183,6 +189,7 @@ EVD.tho={place:w=>w.x.who==="th"?"tn":"thu",
  start(w){const b=B().tho;moodSet(b.mood);const T=T_();if(T)T.kho=cl(T.kho-b.kho,0,100);let n=0;
   for(const v of liveR()){const g=Math.round((v.bac||0)*b.npcGift);if(g<=0)continue;ap(v,{bac:-g});const s=g>=b.big?b.npcSung[1]:b.npcSung[0];ap(v,{sung:s});if(w.x.who==="th")v.th=(v.th||0)+s;n++}
   return `Đại yến mừng thọ, cả triều dâng lễ; ${n} phi tần đã dâng lễ vật.${T?` Kho lúa -${b.kho}.`:""}`},
+ end(w){return "Đại yến mừng thọ đã tan; lễ vật các cung đã được ghi sổ."},
  card(w){const b=B().tho;const th=w.x.who==="th";const o=od(b.make[0]+(S.tai||0)/b.make[1]);
   return{t:wName(w),who:pEmp(),h:`<p>${w.cause}.</p><p>${w.txt||""}</p>`,opts:meCons()?[
    {n:"Dâng lễ vật quý",fx:{bac:-b.big},x:`thành: Sủng +${b.sungBig}${th?`, Thái hậu +${b.thBig}`:""}`,go:()=>apply(th?{sung:b.sungBig,th:b.thBig}:{sung:b.sungBig})},
@@ -192,6 +199,7 @@ EVD.tho={place:w=>w.x.who==="th"?"tn":"thu",
 /* 9 THIÊN TƯỢNG (row 7): eclipse / comet read by Khâm Thiên giám. Reuses the j7 comet card (it names her or a rival) — it leaves the weekly
    random pool and comes only with this window (LUẬT SỬA CẢ NHÓM); j3 mood; no feasts for the window. */
 EVD.sao={place:w=>"cnh",
+ end(w){return "Trời đã trong trở lại; Hoàng thượng thôi ăn chay, yến tiệc như cũ."},
  start(w){moodFloor(B().sao.mood);return "Khâm Thiên giám tâu điềm lạ; Hoàng thượng ăn chay, bãi yến, cả cung cầu đảo."},
  card(w){try{if(EVI&&EVI.comet&&EVI.comet.ok()){const d=mkEv("comet");if(d)return{t:"Thiên tượng",h:d.t,opts:d.o,who:d.who,pid:d.pid,pp:d.pp}}}catch(e){wErr("comet",e)}
   return{t:"Thiên tượng",who:pEmp(),h:`<p>${w.cause}.</p><p>${w.txt||""}</p>`}},
@@ -243,15 +251,8 @@ function wPull(){const W=S.where;for(const v of liveR()){if(v.confined||v.coop)c
   if(cur&&P[cur]===0){W[v.id]=palaceOf(v);continue}
   const L=Object.entries(P).filter(([k,m])=>m>1&&(k!=="kn"||(typeof qOn==="function"&&qOn()&&!v.queen)));if(!L.length)continue;
   const [k,m]=L.sort((a,b)=>b[1]-a[1])[0];if(roll(Math.min(80,B().pull*(m-1)))){try{if(typeof accessOf==="function"&&!accessOf(v,k).ok)continue}catch(e){}W[v.id]=k}}}
-/* ---------- the Dư đồ "!": the first buổi of a window show it at the real place (what the NPCs are doing there) ---------- */
-if(typeof AD_HAP_FIX!=="undefined"){AD_HAP_FIX.push(()=>{if(!S||!B().on||S.confined)return null;const t=now();S.wwHap=S.wwHap||{};
-  for(const w of worldWin()){if(w.t0!==t||(S.buoi||0)>=B().hapB||S.wwHap[w.id])continue;const E=EVD[w.k];if(!E||!E.scene)continue;let k=null;try{k=E.place(w)}catch(e){}if(k)return{k,id:"world",x:w.id}}return null});
- AD_HAP_T.world="Việc lớn trong cung";
- /* the window's place is open to her that first tuần until she has been (the court gathers there), as jact2 does for a festival place */
- if(typeof ACC_ROLE!=="undefined"&&Array.isArray(ACC_ROLE))ACC_ROLE.unshift((p,k)=>{try{if(p!==S||(typeof adSrv==="function"&&adSrv())||!B().on)return null;const t=now();S.wwHap=S.wwHap||{};
-   for(const w of worldWin()){if(w.t0!==t||S.wwHap[w.id])continue;const E=EVD[w.k];if(E&&E.scene&&E.place(w)===k)return{ok:true,world:1}}}catch(e){}return null});
- AD_HAP_FIRE.world=(h)=>{const w=worldWin().find(x=>x.id===h.x);if(!w)return false;S.wwHap=S.wwHap||{};if(S.wwHap[w.id])return false;S.wwHap[w.id]=1;
-  let m=null;try{m=EVD[w.k].scene(w)}catch(e){wErr("scene",e)}if(!m)return false;if(!m.who)m.who=pEmp();Q.push(m);return true}}
+/* NO Dư đồ "!" for world events (owner OD 17/11 ~14:30Z: "sự kiện chung chỉ dùng khung giữa màn hình, Dư đồ chỉ cho chuyện của người").
+   A scene at a place shows only as people being there (AG-ALL day plan reads worldPlanW place / force). */
 /* ---------- triggers (real causes) ---------- */
 function wSeen(){const z=wZ();const q=(typeof qOn==="function"&&qOn()&&rivals[0]&&rivals[0].queen)?rivals[0]:null;const h=S.heir&&S.heir.k;
  const sons=(()=>{try{return allKids().filter(([k])=>k.alive&&k.sex==="m").length}catch(e){return 0}})();
@@ -301,9 +302,15 @@ function worldTick(){if(!S||S.dead||!B().on)return;const z=wZ();if(host()){WW.in
   if(!z.seen)z.seen=wSeen();else wDeaths();if(worldWin("tang")&&S.wdTang)S.wdTang=0;
   if((S.tuan||0)===0)wCourt();wCalendar()}finally{WW.inTick=0}}
  worldShow()}
-function worldShow(){if(!S||S.dead)return;S.wwSeen=S.wwSeen||{};const A=worldWin();
- for(const w of A){if(S.wwSeen[w.id])continue;S.wwSeen[w.id]=1;let m=null;try{m=EVD[w.k].card(w)}catch(e){wErr("card "+w.k,e)}if(m){if(!m.who)m.who=pEmp();if(!m.opts)delete m.opts;Q.push(m)}}
- const ids=new Set(A.map(w=>w.id));for(const k in S.wwSeen)if(!ids.has(+k)&&+k<(wZ().seq-20))delete S.wwSeen[k]}
+/* the CENTER pop-up (existing modal card, Q → showModal): at the start (what happens + her own options, the same list the NPCs choose
+   from) and at the end (what came of it). One per player per window (S.wwSeen / S.wwEnd), guest included (render hook). */
+function startCard(w){const E=EVD[w.k];let m=null;try{m=E.card(w)}catch(e){wErr("card "+w.k,e)}
+ if(m&&E.scene&&!(m.opts&&m.opts.length)&&!(typeof isSrv==="function"&&isSrv())){let sc=null;try{sc=E.scene(w)}catch(e){wErr("scene "+w.k,e)}
+  if(sc&&sc.opts&&sc.opts.length){m.h=(m.h||"")+(sc.h||"");m.opts=sc.opts;if(!m.who&&sc.who)m.who=sc.who}}return m}
+function worldShow(){if(!S||S.dead)return;S.wwSeen=S.wwSeen||{};S.wwEnd=S.wwEnd||{};const A=worldWin(),z=wZ();
+ for(const h of (z.H||[])){if(h.id==null||!h.end||S.wwEnd[h.id]||!S.wwSeen[h.id])continue;S.wwEnd[h.id]=1;Q.push({t:h.n||"Tin trong cung",who:pEmp(),h:`<p>${h.end}</p>`})}
+ for(const w of A){if(S.wwSeen[w.id])continue;S.wwSeen[w.id]=1;const m=startCard(w);if(m){if(!m.who)m.who=pEmp();if(!m.opts)delete m.opts;Q.push(m)}}
+ const lo=z.seq-20;for(const k in S.wwSeen)if(+k<lo)delete S.wwSeen[k];for(const k in S.wwEnd)if(+k<lo)delete S.wwEnd[k]}
 {const e0=endTurn;endTurn=function(){const t0=S?now():0;const r=e0.apply(this,arguments);try{if(S&&!S.dead&&now()!==t0){worldTick();if(Q.length&&$("modal").hidden)showModal()}}catch(e){wErr("tick",e)}return r}}
 /* co-op guest: cards of windows the host opened */
 {const r0=render;render=function(){const r=r0.apply(this,arguments);try{if(S&&!S.dead&&!host()&&!Q.length&&!S.mg){const n=Q.length;worldShow();if(Q.length>n&&$("modal").hidden)showModal()}}catch(e){}return r}}
