@@ -85,3 +85,29 @@ c. **j71 / j8:** take the branch's BAL.fest prize/bestow/gift reads and main's g
 d. Then rebuild, and re-run quickcheck (main now has CORE GATES: one-core-guard frozen list, rules-one-source, kit-conform; the new
    jcoopcontest typed `Danh ±1` copies may trip the guard), coop-contest ×2, dc, core, solo, p2 (B1 skipped), e2e, and
    coop-one-world.
+
+---
+## r3 (11/17/2026) — CANCELLED by main s28 (owner stopped option-1 co-op patching; co-op goes to thin guest). Findings for coop-thin part E.
+Checked review/coop-contest-fix-r1 @ 1ce276b7 (worker r3), plus my merge of main f5220eaa = **a7f4ab13** (pushed). That merge only
+conflicted in assemble.py (added jcoopcontest before jlag2) and the built files (rebuilt).
+- Code: r2 items a–d done. ONE jealousy core: no `BAL.fest.*Ghen` key is left; j71/j8/j34/jcoopcontest read `BAL.ghen.*` and print
+  them with `ghenN()`. j34 contestEnd keeps main's seatHas/seatComp. The guest crown mirror also requires `seatHas(S,7)`. Danh ±1
+  place rewards now read `BAL.fest.place/last`.
+- Tests on a7f4ab13:
+
+| test | result |
+|---|---|
+| quickcheck | PASS (core gates PASS, open 1003 ms, old save ok, perf ≈ live) |
+| dc | 26/26 |
+| p2 (B1 skipped) | 35/35 |
+| e2e | 60/60 |
+| core | 11/11 |
+| solo | 6/6 |
+| one-world | PASS |
+| coop-contest ×4 | 71/72 (known Sủng drift) · 72/72 · **stall** (`5: week advanced for both` → `5 guest: plays her own part` / `result arrived and applied` fail) · 71/71 |
+
+- Open bug for thin guest: the section-5 buổi/week stall is real. Rate: 1/4 here; the worker saw 3/6, and 2 on r2. Guest has
+  queued dialogs (Q:2, #next "Sẵn sàng" disabled); host says "Chờ hảo hữu…" with bend=true. It looks like the guest's ready
+  signal never fires while the feast play card (ccplay, must:1) sits in her queue at buổi end. Thin guest should make sure that
+  host-sent cards never block the guest's ready signal.
+- Verdict: none (cancelled). Without the cancel it would have been FAIL, on the stall alone.

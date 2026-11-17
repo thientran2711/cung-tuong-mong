@@ -530,3 +530,4 @@
 | WHOLE FIGURE REPAINT lead #6 (sonnet art; replaces lead #5 session_011xDdVRBW26agruDT2Bm65K archived; LEAD HANDOVER #5->#6 in BATCH_PLAN.md) | review/fig-cutout-clean | C | session_011xDdVS87fDNLJMJGzeiVWL | RUNNING | 17/11 01:58Z |
 | WHOLE FIGURE REPAINT batch W5b maid-rest-A (successor of W5, 2K) | review/fig-cutout-clean | C | session_011xDdVRUq5KAtiVYtgqEjkS | RUNNING | 17/11 01:58Z |
 | old-people proportion ROLLOUT #2 (sonnet art, 2K): ~85 p/f-series by age/sex base + mk-fit thaihau check (successor of session_011xDdVRzEtFchdNQKaMfih7) | reports/fig-proportion-redo on handover | C | session_011xDdVSy3ERmyVnLWqMYT6p | RUNNING | 17/11 01:59Z |
+| coop-contest-fix review r3 (opus) of 1ce276b7 | review/coop-contest-fix-r1 a7f4ab13 | main s28 | session_01UV1SziJoyYJ3o5iLXG8BuP | CANCELLED by s28 (thin guest); findings in report §r3 | 17/11 02:01Z |
