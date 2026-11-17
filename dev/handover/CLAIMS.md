@@ -886,4 +886,4 @@
 | REVIEW coop-b1-regress 24d8eb38 (sonnet SMALL, tests only; brief briefs/review-coop-b1-regress.md) | review/coop-b1-regress-r1 | B | session_01N1tNP2QjFM4j8yePrC6qwU | RUNNING | 17/11 17:30Z |
 | emo-seal ANIM: every mood seal animates everywhere (one kit part) + khóc/hờn seals (OD 18:00Z) — folded into kit-figure-mood; art = Foreman C | review/kit-figure-mood | MAIN s35 | session_01UV1SzjLSjT2E1w24wsPwS5 | RUNNING | 17/11 17:32Z |
 | HOA ĐIỀN item + placing minigame (ORDER main s34 17:45Z; opus BIG; brief briefs/hoa-dien.md; stacked on makeup-lux) | review/hoa-dien | B | session_01N1tNP6SdCcvsQaB11nruyu | RUNNING | 17/11 17:40Z |
-| REVIEW kit-figure-mood r1 of c7d4b72a (sonnet SMALL; brief briefs/s35-review-kit-figure-mood.md) | review/kit-figure-mood-r1 | MAIN s35 | (opening) | RUNNING | 17/11 17:47Z |
+| REVIEW kit-figure-mood r1 of c7d4b72a (sonnet SMALL; brief briefs/s35-review-kit-figure-mood.md) | review/kit-figure-mood-r1 | MAIN s35 | session_01UV1Szkv9nsgVqSwQC5r8a8 | RUNNING | 17/11 17:47Z |
