@@ -27,3 +27,10 @@ Thợ báo "KIT REQUEST" trong báo cáo → điều phối ghi vào đây → g
   VIRT_GL[v] (data only, added in jwhyn.js like jdiff/jexam add theirs) — replaces native `title` tooltips (touch).
 - Ask: kit keeper registers the row in KIT.md §7 + the kit sample page (or tells show-why to change it); work did not stop because
   no new display part was made.
+
+## 17/11 coop-thin-b r2 fix — KIT REQUEST (seen, not built): two option tiles with art on a "Việc" card squeeze to one syllable per line on Fold 755x1000
+- Seen on the part-D invite card "Hảo hữu tìm đến" (thInv, options Nhận / Từ chối, each with its option art + "an toàn" chip + GỢI Ý line):
+  at 755x1000@2 the two tiles sit side by side, the art takes most of each tile, the name is cut under the chip ("N an toàn") and the GỢI Ý
+  text wraps one syllable per line. At 1180x820@2 the same card is fine. Shot: CDN img/_review/coop-thin-b-r2fix/r7-guest-755x1000.png.
+- Not from the r2 fix (the card is the native kit dilemma, rendered by D's stand-in = same fields); likely every 2-option card with option
+  art at Fold width. Ask: kit keeper checks the option-tile grid at 755 (stack the tiles or shrink the art) in the kit part, whole family.
