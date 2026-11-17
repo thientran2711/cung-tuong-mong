@@ -891,9 +891,9 @@
 | kit-fx-register: face-layer host .kfx box misregistered vs photo in avatar frames (lips on chin; live for makeup/scars/rash) — whole family of frame kinds (toil-looks5 as kit keeper's worker) | review/kit-fx-register | MAIN s35 | session_01UV1SzjoLym3Q8XoYNGrcgt | SẴN SÀNG KIỂM b45850d3 | 17/11 17:50Z |
 | one-core-jkc-2 LIVE d5ea786d1 (main b5d109fe → d5ea786d; rollback b5d109fe) | review/one-core-jkc-2-r1 | B | session_01N1tNP2MBRBHV2KnMWfTMRx | LIVE | 17/11 17:52Z |
 | ODDS CAP (opus BIG; BAL.odds 95/5 in the one roll fn, soft fail, drop "Chắc chắn"; MAIN s34 17:00Z + 17:35Z) | review/odds-cap | D | session_01964izGRJM7BJPNcVuaqdcU | RUNNING | 17/11 17:58Z |
-| REVIEW ag-moodknow r1 (opus BIG) of 8d20e004 | review/ag-moodknow-r1 | C-AG | session_01UV1SzhNSDpgww4CQQEWf47 | RUNNING | 17/11 17:56Z |
+| REVIEW ag-moodknow r1 (opus BIG) of 8d20e004 | review/ag-moodknow-r1 | C-AG | session_01UV1SzhNSDpgww4CQQEWf47 | FAIL 1 a2a1f6b5 → ghenUp by MOOD-MEM (archived) | 17/11 17:56Z |
 | REVIEW kit-rank-name r1 of a4ccfc74 (sonnet SMALL; brief briefs/s35-review-kit-rank-name.md) | review/kit-rank-name-r1 | MAIN s35 | session_01UV1SzjAB6NhBbBqqpmBnJC | RUNNING | 17/11 17:55Z |
-| AG-ALL-2 2d4 assembler (opus; TIN BÁO walk timing OD L1668 (3) + bạc-on-success family + assemble → SẴN SÀNG KIỂM) | review/ag-all-2 | C-AG | session_01UV1SzjkUqtz6kFBa9EE59V | RUNNING | 17/11 18:02Z |
+| AG-ALL-2 2d4 assembler (opus; TIN BÁO walk timing OD L1668 (3) + bạc-on-success family + assemble → SẴN SÀNG KIỂM) | review/ag-all-2 | C-AG | session_01UV1SzjkUqtz6kFBa9EE59V | DONE 6badc4d4 (archived) | 17/11 18:02Z |
 | DISPLAY SHELF (Nơi trưng bày) + room xa xỉ + NPCs visit her room + info channels/tố xa xỉ + plant care (OD 18:30Z (A) + OD ~18:00Z s35) — whole job | review/display-shelf | C-AG | expert session_01UV1SzkTnXQm9bJonRJHkXs (sonnet) + builder session_01UV1SzjhM5kL1Mi3jpBfjY6 (opus) | RUNNING | 17/11 18:06Z |
 | mirror-center: makeup mirror face off-centre left (owner bug OD ~18:00Z s35) — whole family of round/mirror face frames | review/mirror-center | MAIN s35 | session_01UV1SzkWgty5ackK6juMHCE | SẴN SÀNG KIỂM ad226ed0 | 17/11 18:50Z |
 | toil-looks6 successor: v13 sample fix + AVATAR ID-CARD bake (kit-fx-register) | review/kit-fx-register | MAIN s35 | session_01UV1SzkpQ27MXeaU77haA2o | RUNNING | 17/11 18:12Z |
@@ -905,3 +905,4 @@
 | day-khac review ROUND 2 (opus BIG, successor reviewer) of 9e7ddc14 | review/day-khac-audit-r1 | D | session_01964izEHVzU6h14EnvhUm8C | RUNNING | 17/11 18:30Z |
 | DISPLAY ROOM kit UI (owner option 1, OD ~18:33Z (3)): full-screen room, shelves 2×6 / 1×12, per-shelf tư trang drawer filtered by group — kit part for C-AG display-shelf builder | review/kit-display-room | MAIN s35 | session_01UV1SzisVVpBnxyKZsxjCfY | RUNNING | 17/11 18:34Z |
 | REVIEW hoa-dien fa483a8ed delta on makeup-lux (opus BIG; brief briefs/review-hoa-dien.md) | review/hoa-dien-r1 | B | session_01N1tNP4LhhQaE7j3FQW5NGV | RUNNING | 17/11 18:40Z |
+| REVIEW ag-all-2 r2 (opus BIG) of 6badc4d4 | review/ag-all-2-r2 | C-AG | session_01UV1SzibgyTxRDxLdJ5yW6t | RUNNING | 17/11 18:36Z |
