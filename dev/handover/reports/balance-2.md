@@ -39,3 +39,9 @@ START_CTX ≈ 4 % of the 1M window (estimate). Rollover at 29 %, ceiling 60 %.
 - (17/11 ~09:50Z) MERGED live main 9391f9a into review/balance-2 → **5434696b** (pushed). 8 source conflicts, resolved keeping both sides: j2/j75 deck acts keep main's BAL.deck table but its odds use balance-core's art curve (deckOdds → artOE, her and NPCs alike); main's trait renames (netRx/netIs, Xảo quyệt, Ân cần|Khiêm nhường) applied onto balance-core's npcStudy, stealFit, tyEnemies; H54.sad + BAL.rk.vpTake kept; jbalcore.js kept in assemble.py; site rebuilt. Scan: no line added by balance-core/balance-2 still tests an old trait name. Smoke: 2 bot lives, 0 page errors. one-core-guard PASS (fails 0, inline 6588 < 6691).
 - Main turned the NPC agent loop on (jagent, BAL.agent on:1) → pre-merge numbers (incl. #1's queue) are relative only; headline HH numbers are re-measured on the merged build.
 - RUNNING (this container): merged build, Vừa, 8-y cap, 152 lives each: mB = merged branch as is; mH = HH-gate lever (BAL.hhThNoSon 80→70, hhThNoSonHieu 70→62, BAL.outQ 60→30, RANKS Hoàng hậu Danh 78→70). ETA ~15:00Z.
+- (17/11 13:30Z) MERGED-build HH gate, Vừa, 8-y cap, sens bot (0 page errors):
+| run | lives | Hoàng hậu | life ended before HH / cap | end < 3 y | avg max rank | Sủng m12/24/36 | Danh m12/24/36 |
+|---|---|---|---|---|---|---|---|
+| mB merged as is | 152 | 23 (15 %) | 57 (38 %) | 25 (16 %) | 5.0 | 99/99/98 | 57/58/68 |
+| mH Th no-son 70 / hiếu 62, outQ 30, HH Danh 70 | 133 (time cap) | 35 (26 %) | 51 (38 %) | 25 (19 %) | 4.9 | 96/99/98 | 56/54/56 |
+mH HQP → HH months blocked: promo gap 91 % (owner pace OD:L353, kept), seat not vacant 35 %, Thái hậu no son 24 %, seat contest 20 %; Danh no longer a wall. Early death unchanged (38 %, OD:L20 band). RUNNING mH2 (Th no-son 62 / hiếu 55, outQ 15, HH Danh 70), 152 lives, ETA ~16:30Z.
