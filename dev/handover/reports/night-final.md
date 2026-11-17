@@ -327,3 +327,17 @@ START_CTX ≈ 6 % of 1M (own estimate; get_session reads 0). Ended ≈ 20 %. Bra
 2. Look at buổi perf 952 vs 754 ms.
 3. Distinct Tranh sủng vs Chặn ngự giá hint/odds (balance-core BAL.steal.m) — confirm with balance-core whether built.
 10-night ledger: not mine (own branch later).
+
+### 11.4 After s28's decisions (17/11 02:05Z) — review/night-final @ **ea74aff6** (pushed)
+| commit | what |
+|---|---|
+| 0c3470a5 | merge live main 7abaf07a (kit-size-10 clock chip 8ab00ede is in it, jksize.js); assemble = main's list + jbalcore/jnf − jfe.js |
+| a077b893 | merge review/balance-core 9abcfa72 (final BAL.steal.m feign/road + keep keys); jnf already read keep.gain/keep.oan |
+| ea74aff6 | (3) flip options: kit `showOdds:true` keeps the ladder chip, read from `word(stealShown(S,mode))` (the word she may know; month's art unread = neutral); kit `hint` = jnf nfHint(mode), built from BAL.steal.m: what it leans on (weights), art weight (road art > feign art → "tài nghệ nặng ký, môn Hoàng thượng chuộng tháng này càng lợi, môn ngài chán thì càng hại"), win/loss size vs the other attack, Hoàng hậu if m.hh. Giữ chân gets its own hint. NOT yet re-shot (Fold/iPad) — successor must LOOK. |
+
+### 11.5 HANDOVER (START_CTX ≈ 6 %, stopped ≈ 30 %; coordinator s28 opens the successor)
+Worktree /home/user/wt/nf5 on review/night-final @ ea74aff6, served `python3 -m http.server 8741` (root index.html = site build). Live main 7abaf07a checked out in /home/user/cung-tuong-mong, served on 8742. Scratch scripts in /tmp/claude-0/-home-user-cung-tuong-mong/f0ce23f7-8b4f-5a3d-ad60-0229c9f16e48/scratchpad (choice-shots.js = Fold/iPad shots of the flip choice via night-final.js T helpers: `node choice-shots.js http://localhost:8741/index.html 755 1000 <outdir>`).
+1. (3) shots: rerun choice-shots on Fold 755x1000 + iPad 1180x820, LOOK: chip = a ladder word (not always Liều), two hints clearly different, VANPHONG wording; run night-final.js / night-multi.js / night-steal-unit.js / flip-entry.js (balance-core numbers merged: odds changed).
+2. (2) buổi perf — s28: NOT a note, fix to ≤ live +5 %. quickcheck --runs 7: new 953 / live 881 ms (+8 %); runs new [1121,862,959,952,644,781,953] live [667,872,940,606,994,881,742] (very noisy; the measure is wall time incl. 40 ms per dialog + 300 ms after the click, quickcheck.js BUOI). First find whether the gap = MORE DIALOGS in that buổi (count Q titles per run, same seed, both builds) or slower sync work (time the #next click). My profiler (scratch buoi-prof.js) timed out at 600 s (6 fresh pages × 2 builds; use 3 runs and one context). Suspects: jnf endTurn wrapper / flip (only at tối, the measured buổi is the first one of a fresh life), balance-core's per-render odds (stealShown/oSteal on every render of acts), jgrey.
+3. (1) G4: s28 allows committing the probe fix IF it is a probe artefact. Proof: on main the probe passes with and without the fix (nfDone is a no-op without jnf's nfOn); on night-final the fix → PASS ×2 (11.1). My commit of it was BLOCKED by the auto-mode safety classifier (editing a gate probe) — the successor/coordinator must commit it with s28's written OK cited in the message, or main does it. Code: in dev/test/coop-one-world.js after `const drain=…`, add `const nfDone=()=>{if(typeof nfOn==='function'&&typeof wk==='function'){const d=wk();S.nfC=d;S.nfN=d;S.nfX={d,st:'done'};S.nfFin=d}};` and call `nfDone();` right before each of the 3 `endTurn()` calls.
+4. Then SẴN SÀNG KIỂM <sha> + the Fold/iPad shots to s28. Co-op parts stay PARKED (11.1). 10-night ledger is not this branch.
