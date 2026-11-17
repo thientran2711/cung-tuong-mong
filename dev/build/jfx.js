@@ -94,15 +94,15 @@ function kfTex(){}
 const KF_ALIAS={glow:"orb",star:"spark",blob:"smoke",petal:"petal-plum"};
 /* wx-fx-size (owner 17/11 "hoa đào … hình hoa to quá"): EVERY jfx particle (weather, season, bursts) is sized from the STAGE picture, not the device pixel count:
    kfUnit() = 1 on a ~640 px stage (side of the stage's equal-area square), clamped .5-1.15; a petal is then ~14 px = a fingernail beside a figure's hand. */
-function kfUnit(){const t=Date.now();if(kfUnit.c&&t-kfUnit.t<400)return kfUnit.c;let r=null;try{r=typeof kfStageRect==="function"?kfStageRect():null}catch(e){}const a=r?Math.sqrt(r.w*r.h):Math.min(innerWidth,innerHeight)*.8;kfUnit.t=t;return kfUnit.c=Math.max(.5,Math.min(1.15,a/640))}
+function kfUnit(){const t=Date.now();if(kfUnit.c&&t-kfUnit.t<1500)return kfUnit.c;let r=null;try{r=typeof kfStageRect==="function"?kfStageRect():null}catch(e){}const a=r?Math.sqrt(r.w*r.h):Math.min(innerWidth,innerHeight)*.8;kfUnit.t=t;return kfUnit.c=Math.max(.5,Math.min(1.15,a/640))}
 /* kfkSp (jfxkit) applies kfUnit() to these falling-thing kinds, so weather, season AND every kitFxBurst of them share ONE stage-relative size */
 const KFK_U=/^(petal-|osmanthus$|leaf$|snow$|ash$|paper$)/;
 /* the layers that live INSIDE the painted stage rectangle (Pixi mask): weather, season, light shafts */
 /* falling celebration petals: born at the TOP of the painted stage and clipped to it (never over the top bar / stat numbers / chips); no stage on screen = whole screen as before */
 function kfFall(tex,v,sc){const sr=KFX.sr||kfStageRect(),W=sr?sr.w:innerWidth,x=(sr?sr.x:0)+RS(0,W),y=(sr?sr.y:0)+RS(-70,-8),o=kfSp(tex,x,y,v,null,sc);if(o&&o.v&&sr&&KFX.wroot){o.v.clip=1;KFX.wroot.addChild(o)}return o}
-/* rectangles of the info chips drawn ON the stage (side cards .k3c/.k3p, rail buttons, place name); refreshed every 400 ms, cheap point test per particle */
+/* rectangles of the info chips drawn ON the stage (side cards .k3c/.k3p, rail buttons, place name); refreshed every 1.5 s, cheap point test per particle */
 const KF_INFO="#stage .k3c,#stage .k3p,#stage .krailb,#stage #sc-t";
-function kfOverInfo(x,y){const t=performance.now();if(!kfOverInfo.r||t-kfOverInfo.t>400){kfOverInfo.t=t;try{kfOverInfo.r=[...document.querySelectorAll(KF_INFO)].map(e=>e.getBoundingClientRect()).filter(r=>r.width>4)}catch(e){kfOverInfo.r=[]}}
+function kfOverInfo(x,y){const t=performance.now();if(!kfOverInfo.r||t-kfOverInfo.t>1500){kfOverInfo.t=t;try{kfOverInfo.r=[...document.querySelectorAll(KF_INFO)].map(e=>e.getBoundingClientRect()).filter(r=>r.width>4)}catch(e){kfOverInfo.r=[]}}
  for(const r of kfOverInfo.r)if(x>r.left-4&&x<r.right+4&&y>r.top-4&&y<r.bottom+4)return true;return false}
 const kfClipLay=l=>l==="wx"||l==="se"||l==="se2";
 function kfSp(tex,x,y,v,tint,sc,blend){const k=KF_ALIAS[tex]||tex;const s=kfkSp(k,x,y,v,tint,sc,blend);if(s)return s;if(!KFK.loaded.has(k))kfkLoad([k]).catch(()=>{});return{v:{},scale:{set(){},x:1},rotation:0}}
