@@ -25,7 +25,7 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
   const U=["useItem","sellItem","treat","courtGive","charityFx","servDo","restLatEmo","wkMake"].map(spy);
   const h0=hostility;hostility=(a,b)=>a===v&&b===t?90:h0(a,b);
   const sk=Object.keys(IT).find(k=>{const it=IT[k];return it.pr>0&&!it.use&&!it.sl&&!it.evi&&!it.keep&&!it.dr&&!it.ant&&!it.fert&&!it.anti&&!it.mat&&!it.gv&&!it.il});
-  const setup=()=>{v.preg=3;v.fake=0;v.anthai=0;v.suc=40;v.bac=38;v.charM=-1;v.mat=0;v.ill={k:Object.keys(ILL)[0],st:1};v.evm=v.evm||{};v.evm[key(t)]=3;
+  const setup=()=>{v.preg=3;v.fake=0;v.anthai=0;v.suc=40;v.bac=38;v.charM=-1;tmPlace(v,0);v.ill={k:Object.keys(ILL)[0],st:1};v.evm=v.evm||{};v.evm[key(t)]=3;
    v.inv=[{k:"nhansam",d:S.turn},{k:sk,d:S.turn}];v.arts=v.arts||{};v.arts.cam=Math.max(3,v.arts.cam||0);
    if(!(v.staff||[]).length)v.staff=[{sid:9e6,name:"Thử",role:"maid",loyal:10,af:{}}];for(const s of v.staff){s.loyal=10;s.trouble=wk()}v.staff[0].loyal=40;v.staff[0].af={}};
   try{setup();

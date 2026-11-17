@@ -14,19 +14,19 @@ function queenP(){return S.rank>=7?S:(qOn()?rivals[0]:null)}
 function malOf(p){return p===S?Math.max(0,70-S.duc):p.malice}
 function wk(){return S.turn*3+S.tuan}
 function ap(p,o){if(p===S)return apply(o);for(const k in o){const v=o[k];if(!v)continue;if(k==="maid"){p.maid.loyal=cl(p.maid.loyal+v,0,100);continue}p[k]=(p[k]||0)+v}
- for(const k of ["sung","danh","suc","sac","tai","tamco","duc","ghen","an"])if(p[k]!=null)p[k]=cl(p[k],0,100);if(p.suc!=null)p.suc=Math.min(p.suc,sucCap(p));p.th=cl(p.th||0,-100,100);p.hh=cl(p.hh||0,-100,100);p.bac=Math.max(0,p.bac||0);p.mat=cl(p.mat||0,0,10)}
+ for(const k of ["sung","danh","suc","sac","tai","tamco","duc","ghen","an"])if(p[k]!=null)p[k]=cl(p[k],0,100);if(p.suc!=null)p.suc=Math.min(p.suc,sucCap(p));p.th=cl(p.th||0,-100,100);p.hh=cl(p.hh||0,-100,100);p.bac=Math.max(0,p.bac||0)}
 function dieIf(p,why){if(p!==S&&p.alive&&p.suc<=0){p.alive=false;if(p.queen)p.queen=false;return `<span class="r">${p.name} ${why}.</span> `}return""}
 /* a rival's full stat block: the same fields the player's formulas read */
 function rstats(v,rank){rank=rank==null?(v.queen?7:v.rank):rank;
  const d=(k,x)=>{if(v[k]==null)v[k]=x};
  d("age",18+R(8));d("sac",40+R(55));d("tai",30+R(50));d("tamco",Math.round((v.malice||40)/3)+R(20));d("duc",Math.max(5,65-Math.round((v.malice||40)/2))+R(15));
- d("mat",R(3));d("danh",8+rank*8);d("bac",40+rank*20);d("suc",80);d("arts",{cam:R(3),ky:R(2),thi:R(3),hoa:R(2),vu:R(3),y:R(2)});d("artp",{cam:0,ky:0,thi:0,hoa:0,vu:0,y:0});
+ if(typeof tmInstall==="function")tmInstall(v);/* 2f2: Tai mắt = her real placed spies, none at birth */d("danh",8+rank*8);d("bac",40+rank*20);d("suc",80);d("arts",{cam:R(3),ky:R(2),thi:R(3),hoa:R(2),vu:R(3),y:R(2)});d("artp",{cam:0,ky:0,thi:0,hoa:0,vu:0,y:0});
  d("maid",{name:pick(MAIDS),loyal:50+R(31)});d("preg",0);d("hidden",false);d("fake",0);d("anthai",0);d("doctor",0);d("confined",0);d("shield",0);d("tablet",0);d("block",0);
  d("lastPromo",0);d("inv",[]);d("evm",{});d("rl",{});d("ro",{});d("oan",0);d("an",0);d("nightLog",[]);d("th",R(20)-5);d("hh",R(20)-5);d("schemes",0);d("hieu","");d("dress",null);d("asthma",R(7)===0);d("pray",0);d("fert",0);d("thu",0);
  return v}
 function normAll(){const d=(k,x)=>{if(S[k]==null)S[k]=x};
  d("inv",[]);d("evm",{});d("rl",{});d("ro",{});d("chat",{});d("an",0);d("nightLog",[]);d("hieu","");d("block",0);d("dress",null);d("asthma",false);d("shop",[]);d("seen",{});d("ghen",0);
- itClean();rivals.forEach(v=>rstats(v));if(!S.shop.length)restock();if(typeof staffInit==="function")staffInit();if(typeof ageInit==="function")ageInit();if(!S.where)placeWhere()}
+ itClean();rivals.forEach(v=>rstats(v));if(!S.shop.length)restock();if(typeof staffInit==="function")staffInit();if(typeof ageInit==="function")ageInit();if(!S.where)placeWhere();if(typeof tmInstall==="function")tmInstall(S)}
 /* relations (symmetric), evidence (who holds proof against whom) */
 function evG(h,t){if(!h||!t)return 0;return h===S?(t.ev||0):((h.evm||{})[key(t)]||0)}
 /* TRUE EVIDENCE (owner 15/11, jtruth.js): a gain is capped by the real wrongs the target did (deedCap); returns the change actually made */

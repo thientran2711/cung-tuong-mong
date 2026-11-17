@@ -24,7 +24,7 @@ fs.mkdirSync(DIR,{recursive:true});
  ck('notice',/Son phấn/.test(A.h)&&A.opts.some(o=>/tai mắt/.test(o)),A);
  await p.evaluate(()=>{try{showModal()}catch(e){}});await p.waitForTimeout(700);await p.screenshot({path:`${DIR}/mkt-${tag}-1-notice.jpg`,quality:70});
  /* a scouting road taken (forced win) teaches the want */
- const L1=await p.evaluate(()=>{Q.length=0;try{closeModal()}catch(e){}const th=tsS().dress.th,m=tsS().dress.m;const r0=roll;roll=()=>true;try{const o=tsMkScoutOpts(th,m).find(o=>/tai mắt/.test(o.n));S.mat=Math.max(S.mat||0,2);o.go()}finally{roll=r0}return{k:S.mkKnow,row:tsMkRow(th,m)}});
+ const L1=await p.evaluate(()=>{Q.length=0;try{closeModal()}catch(e){}const th=tsS().dress.th,m=tsS().dress.m;const r0=roll;roll=()=>true;try{const o=tsMkScoutOpts(th,m).find(o=>/tai mắt/.test(o.n));tmPlace(S,Math.max(S.mat||0,2));o.go()}finally{roll=r0}return{k:S.mkKnow,row:tsMkRow(th,m)}});
  ck('scoutLearn',/đề chuộng/.test(L1.row[1]),L1);
  /* 3. the contest sitting: the ONE mirror in the kit frame, the đề note under the swatches; leaving it hands the contest back */
  const th=A.th;await p.evaluate(()=>{S.toilette=null;window.__mkDone=0});

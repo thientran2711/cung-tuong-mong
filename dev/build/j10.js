@@ -21,7 +21,10 @@ function pServ0(s){const n=s.role==="maid"?6:4,i=(s.face>=0?s.face:0);if(s.role!
 function bestSent(p){const L=(p.staff||[]).filter(s=>!s.spyFor);if(!L.length)return null;return L.slice().sort((a,b)=>(b.loyal+nq(b,"sharp",BAL.net.k.spySharp))-(a.loyal+nq(a,"sharp",BAL.net.k.spySharp)))[0]}
 function servCaught(p,s){if(!s)return"";if(roll(30)){p.staff.splice(p.staff.indexOf(s),1);return `${s.name} bị đánh chết trong ngục Thận Hình ti. `}s.loyal=cl(s.loyal-BAL.eff.j10.loyalServCaught,0,100);s.trouble=wk();return""}
 /* acts on servants (same functions for NPC mistresses) */
-function threatServ(a,s){const o=ownerOf(s);if(!o||!s.lover)return"";s.spyFor=key(a);return `${NMc(a)} dọa tố chuyện đối thực của ${s.name}; hắn/nàng sợ hãi, thành tai mắt. `}
+function threatServ(a,s){const o=ownerOf(s);if(!o||!s.lover)return"";/* 2f2: still the person's choice; fear weighs in (BAL.ag.know.tm.threat) */
+ if(typeof tmOdds!=="function"){s.spyFor=key(a);return `${NMc(a)} dọa tố chuyện đối thực của ${s.name}; hắn/nàng sợ hãi, thành tai mắt. `}
+ if(roll(cl(tmOdds(a,s)+BAL.ag.know.tm.threat,5,95))){s.spyFor=key(a);return `${NMc(a)} dọa tố chuyện đối thực của ${s.name}; hắn/nàng sợ hãi, thành tai mắt. `}const t=tmRefuse(a,s);
+ return `${NMc(a)} dọa tố chuyện đối thực của ${s.name}; hắn/nàng không chịu làm tai mắt${t?", còn bẩm lại với chủ":""}. `}
 function plantServ(a,t){if(!a.staff)a.staff=[];const s=bestSent(a);if(!s||a.bac<40)return"";ap(a,{bac:-40});if(roll(odA(a,40+a.tamco/4+nq(s,"sharp",BAL.net.k.poachSharp)))){a.staff.splice(a.staff.indexOf(s),1);s.spyFor=key(a);(t.staff=t.staff||[]).push(s);return `${NMc(a)} cài ${s.name} vào cung ${NM(t)} làm tai mắt. `}evA(t,a,BAL.eff.j10.evPlantServ);return `Nội vụ phủ thấy lạ, ${NM(t)} không nhận ${s.name}. `}
 function servMonth(){let ev="";for(const p of consorts()){if(!p.staff)p.staff=[];
   /* co-op guest (review/servant-mline-r2): an NPC household's own month (loyalty, NPC-vs-NPC spies, refilling) rolls on the host;

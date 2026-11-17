@@ -40,11 +40,13 @@ ev("pact",()=>qOn()&&liveRivals(false).length,()=>({v:rvTop((a,b)=>b.rel-a.rel).
  {n:"Kết minh",fx:{hh:-5},x:`${v.name} thiện cảm +25 · nàng kể chuyện sai trái của Hoàng hậu, nếu có: chứng cứ ${balSg(BAL.eff.j7.evGo)}`,go:()=>{v.rel+=25;/*evok: capped; preview says "nếu có"*/evA(S,q,BAL.eff.j7.evGo)}},
  {n:"Mật báo Hoàng hậu",fx:{hh:12},x:`${v.name} thù -30`,go:()=>{v.rel-=30;v.ghen=cl(v.ghen+10,0,100)}},
  {n:"Từ chối khéo",fx:{duc:1}}]}});
-ev("eunuch",()=>S.mat<10,()=>({o:od(50+S.tamco/3)}),p=>({
- t:"Tiểu thái giám Tiểu Đức Tử quỳ ngoài thềm: “Nô tài nguyện làm chó săn cho "+kSay({srv:"m"},S,"{goi}")+".”<br>Hắn từng hầu ở Kính sự phòng.",o:[
- {n:"Nhận làm tai mắt",fx:{bac:-30,mat:1}},
- {n:"Thử lòng hắn trước",fx:{},x:`${word(p.o)} · thành: Tai mắt +1 · hỏng: hắn là gián điệp`,go:()=>{if(roll(p.o))apply({mat:1});else{apply({danh:-3});log('<span class="r">Tiểu Đức Tử mang chuyện cung ngươi đi bán.</span>')}}},
- {n:"Đuổi đi",fx:{duc:1}}]}));
+/* 2f2 (owner OD 17/11 ~16:50Z): the volunteer is a REAL servant of another palace who wants something from her (tmVol: her tmOdds for that person
+   reach BAL.ag.know.tm.vol.min) — he chose to come; she decides. No nameless "Tai mắt +1". */
+ev("eunuch",()=>typeof tmVol==="function"&&!!tmVol(),()=>{const s=tmVol();return{sid:s.sid,o:od(50+S.tamco/3)}},p=>{const s=servById(p.sid),o=s&&ownerOf(s);if(!s||!o||o===S||s.spyFor!=null)return null;const B=BAL.ag.know.tm.vol.bac;return{
+ t:`${s.name}, ${s.role==="eunuch"?"thái giám":"cung nữ"} hầu cung ${o.name}, quỳ ngoài thềm: “${s.role==="eunuch"?"Nô tài":"Nô tỳ"} nguyện làm tai mắt cho `+kSay({srv:s.role==="eunuch"?"m":"f"},S,"{goi}")+".”",o:[
+ {n:"Nhận làm tai mắt",fx:{bac:-B},x:`thành: ${s.name} làm tai mắt cho ngươi trong cung ${o.name}`,go:()=>{tmTake(S,s)}},
+ {n:"Thử lòng trước",fx:{},x:`${word(p.o)} · thành: ${s.name} làm tai mắt cho ngươi · hỏng: kẻ hai lòng, mang chuyện cung ngươi đi bán`,go:()=>{if(roll(p.o))tmTake(S,s);else{apply({danh:-3});log(`<span class="r">${s.name} mang chuyện cung ngươi đi bán.</span>`)}}},
+ {n:"Đuổi đi",fx:{duc:1}}]}});
 /* the Emperor */
 ev("empnight",()=>!S.preg&&S.sung>=BAL.visit.minSung,()=>({o:od(BAL.visit.show.o+bestArt().w*BAL.visit.show.w+mm())}),p=>({who:pEmp(),
  t:"Đêm khuya, không đèn lồng, không thái giám báo trước. Hoàng thượng đứng ngoài rèm cửa cung ngươi.<br>“Trẫm không ngủ được.”",o:[

@@ -16,7 +16,7 @@ const sleep=t=>new Promise(r=>setTimeout(r,t));
   const unmet=await p.evaluate(()=>{const kl=document.getElementById('kload');if(kl)kl.remove();try{localStorage.clear()}catch(e){}SLOT=3;document.getElementById('title').hidden=true;
    for(let i=0;i<400;i++){start();if(!isSrv())break}Q.length=0;const md=document.getElementById("modal");if(md)md.hidden=true;try{NLP=null}catch(e){}
    /* every consort listed (face level 3), all met except the last one (the owner's case: listed, "chưa gặp") */
-   const L=liveRivals(true);S.met=S.met||{};S.mat=0;L.forEach((v,i)=>{S.met[v.id]=1;try{S.known[kOf61(v)]=3}catch(e){}v.rel=[-5,40,-60,12][i%4];v.oan=[4,0,35,72][i%4];S.rl[v.id]=[10,-20,0,55][i%4];S.ro[v.id]=[0,12,50,3][i%4]});
+   const L=liveRivals(true);S.met=S.met||{};tmPlace(S,0);L.forEach((v,i)=>{S.met[v.id]=1;try{S.known[kOf61(v)]=3}catch(e){}v.rel=[-5,40,-60,12][i%4];v.oan=[4,0,35,72][i%4];S.rl[v.id]=[10,-20,0,55][i%4];S.ro[v.id]=[0,12,50,3][i%4]});
    const u=L.filter(v=>!v.queen&&!sameHouse(S,v)).pop();if(u){delete S.met[u.id];u.ev=0}
    tab="rel";relSel="me";PG.rel=null;PG.relY=null;render();return u?u.name:''});
   await sleep(1500);

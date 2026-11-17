@@ -38,7 +38,7 @@ const dlgCheck=p=>p.evaluate(()=>{const M=document.getElementById('modal');const
    out.rankTxt=stipRankTxt(3);return out});
   if(r2.ice!==BAL_ICE3(r2))F(sz,`ice ${r2.ice}`);if(r2.afterMelt!==0)F(sz,`ice did not melt ${r2.afterMelt}`);if(!r2.winter.some(x=>x[0]==="thanbac"))F(sz,'no winter coal');
   /* 3. a servant pockets a piece → she notices → dialog */
-  const r3=await p.evaluate(()=>{S.rank=2;S.sung=40;S.month=6;S.mat=10;if(!S.staff.length)S.staff.push(mkServ("eunuch"));const s=S.staff[0];s.loyal=0;s.spyFor=null;delete s.pilDet;
+  const r3=await p.evaluate(()=>{S.rank=2;S.sung=40;S.month=6;tmPlace(S,10);if(!S.staff.length)S.staff.push(mkServ("eunuch"));const s=S.staff[0];s.loyal=0;s.spyFor=null;delete s.pilDet;
    BAL.eit.pil.base=100;BAL.eit.pil.cap=100;BAL.eit.pil.see=100;BAL.stip.cap=0;Q.length=0;const n0=S.inv.length;stipend(S);const ev=Q.find(q=>q.t==="Kẻ hầu ăn bớt");
    const issued=S.inv.length-n0;if(ev){while(Q.length&&Q[0]!==ev)Q.shift()}showModal();return{ev:!!ev,issued,who:s.name,Q:Q.map(q=>q.t)}});
   await clean(p);await sleep(900);const d3=await dlgCheck(p);await p.screenshot({path:`${OUT}/pilfer-${wh}.jpg`,type:'jpeg',quality:55});

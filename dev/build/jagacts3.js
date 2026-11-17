@@ -17,7 +17,12 @@ function p3GhenAll(p,n){if(p===S)return ghenAll(n);const d=ghenN(n);liveRivals(t
 const P3C={
  dance:p=>{const X=BAL.ag.par3.dance;return{n:"Múa trong yến tiệc",t:"Cả hậu cung nhìn vào.",c:{...X.c},o:odA(p,X.o+(p.sac||0)/X.sacD*(p===S&&has("mesac")?X.mesac:1)+((p.arts&&p.arts.vu)||0)*X.vu),
   w:{...X.w},l:{...X.l},x:`phi tần ghen +${ghenN(BAL.ghen.dance)}`,go:()=>p3GhenAll(p,BAL.ghen.dance)}},
- eyes:p=>{const X=BAL.ag.par3.eyes;return{n:"Cài tai mắt",t:"Mua chuộc cung nữ các cung khác.",c:{...X.c},o:odA(p,X.o),w:{...X.w},l:{...X.l}}},
+ /* 2f2: a REAL person (the most willing servant of another palace, tmBest); the roll IS her choice (tmOdds: traits, lòng, what she wants);
+    a refusal may be told to her master (r2 tmRefuse); cost = that person's bribe price (nv bribeCost, as Mua chuộc) */
+ eyes:p=>{const X=BAL.ag.par3.eyes;const s=typeof tmBest==="function"?tmBest(p):null;
+  if(!s)return{n:"Cài tai mắt",t:"Các cung khác chưa có ai để ngỏ lời.",c:{},o:0,w:{},l:{},lock:1};
+  return{n:"Cài tai mắt",t:`Ngỏ lời với ${tmWho(s)}; nhận hay không là ở người ấy.`,c:{bac:-nv(s,"bribeCost")},o:tmOdds(p,s),w:{},l:{...X.l},
+   x:`thành: ${s.name} làm tai mắt cho ${p===S?"ngươi":p.name} · hỏng: người ấy có thể mách chủ`,go:()=>tmTake(p,s),fail:()=>tmNo(p,s)}},
  anthai:p=>{const X=BAL.ag.par3.anthai;const x="tháng này nguy cơ sảy thai giảm một nửa";
   return ((p.arts&&p.arts.y)||0)>=X.self.y?{n:"Tự bào chế thuốc an thai",t:p===S?"Ngươi tự sắc thuốc, không ai nhúng tay được.":"Tự sắc thuốc an thai.",c:{...X.self.c},o:100,w:{},x,go:()=>{p.anthai=1}}
    :{n:"An thai",t:"Nằm nghỉ, uống thuốc an thai.",c:{...X.buy.c},o:100,w:{...X.buy.w},x,go:()=>{p.anthai=1}}},
@@ -29,7 +34,7 @@ const P3C={
  treat:p=>({n:"Xin chữa bệnh",c:{...BAL.ag.par3.treat.c},o:100,x:illName(p),run:()=>treat(p,"ty")})};
 /* run one card for an NPC: the player's runOpt order (cost, odds, gain or loss, then go / run) */
 function p3Run(v,C,why){if(!C||C.lock)return"";if(!agcCan(v,C.c))return"";agcPay(v,C.c);const o=C.o==null?100:C.o;const ok=o>=100||roll(agOdd(o));p3Ap(v,ok?C.w:C.l);let r="";
- try{if(ok&&C.go)r=C.go()||"";if(C.run)r=C.run()||r}catch(e){agdErr("par3:"+why,e)}AG3.stat.land++;AG3.stat.by[why]=(AG3.stat.by[why]||0)+1;
+ try{if(ok&&C.go)r=C.go()||"";if(!ok&&C.fail)r=C.fail()||"";if(C.run)r=C.run()||r}catch(e){agdErr("par3:"+why,e)}AG3.stat.land++;AG3.stat.by[why]=(AG3.stat.by[why]||0)+1;
  return r?String(r).replace(/<[^>]+>/g,"").replace(/\.\s*$/,""):`${v.name} ${C.n.charAt(0).toLowerCase()+C.n.slice(1)}${ok?"":" nhưng không thành"}`}
 function p3Kc(C){try{return Math.max(1,cardCost(C))}catch(e){return 1}}
 /* the player's button each cx3 deed is (dev/test/ag-all.test.js okK, dev/test/ag-par3.js) */

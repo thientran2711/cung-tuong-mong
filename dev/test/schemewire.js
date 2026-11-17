@@ -7,7 +7,7 @@ const {chromium}=require('playwright');const [,,BASE,SZ]=process.argv;const [WH,
  await p.goto(BASE,{waitUntil:'domcontentloaded'});await p.waitForFunction(()=>typeof start==='function'&&typeof deser==='function',null,{timeout:120000});await p.waitForTimeout(1200);
  await p.evaluate(()=>{const kl=document.getElementById('kload');if(kl)kl.remove();try{localStorage.clear()}catch(e){}SLOT=3;window.__forceOrigin='td';document.getElementById('title').hidden=true;start()});
  await p.waitForFunction(()=>typeof S!=='undefined'&&S&&S.name,null,{timeout:90000});await p.waitForTimeout(1800);await p.addStyleTag({content:'#kroul,#kroulw,.kroul{display:none!important}'});
- const clean=()=>p.evaluate(()=>{NLP=null;Q.length=0;const m=document.getElementById('modal');m.hidden=true;m.className='modal';S.bac=400;S.suc=100;S.kpWarn=1;S.dead=false;S.confined=0;used=0;S.mat=3;S.mgSeen={};KG82.noDemo=false;try{kg82Close(true)}catch(e){}});
+ const clean=()=>p.evaluate(()=>{NLP=null;Q.length=0;const m=document.getElementById('modal');m.hidden=true;m.className='modal';S.bac=400;S.suc=100;S.kpWarn=1;S.dead=false;S.confined=0;used=0;tmPlace(S,3);S.mgSeen={};KG82.noDemo=false;try{kg82Close(true)}catch(e){}});
  await clean();
  /* 1. talkOpts: rival at a place -> Nghe lén + scheme acts carry open (no run) */
  res.place=await p.evaluate(()=>{const v=rivals.find(x=>x.alive&&!x.out&&!x.queen&&!sameHouse(S,x));const r=[];

@@ -262,7 +262,7 @@ function knSrvKey(s){return s&&s.sid!=null?"s"+s.sid:"maid"}
 function knInf(r){return r&&r.e?knSrvKey(r.e):r&&r.s?knSrvKey(r.s):r&&r.v?"v"+r.v.id:null}
 function knInfName(r){const p=r&&(r.e||r.s||r.v);return p&&p.name||""}
 function knAllSrv(){const M=knMemo();if(!M.as){let L=[];try{L=allServ().filter(s=>s&&!s.out&&s.name&&s.sid!=null)}catch(e){}M.as=L}return M.as}
-function taiMatRaw(x){if(!x)return[];const k=key(x);return knAllSrv().filter(s=>{if(s.spyFor!==k)return false;const o=ownerOf(s);return !!o&&o!==x&&(o===S||(o.alive&&!o.out))})}
+function taiMatRaw(x){if(!x)return[];const k=key(x);return tmSrv().filter(/* 2f2: the live list (the khắc memo can be stale after a load / a new hire) */s=>{if(s.spyFor!==k)return false;const o=ownerOf(s);return !!o&&o!==x&&(o===S||(o.alive&&!o.out))})}
 function knPickH(L,tag){return L.length?L[Math.min(L.length-1,Math.floor(knH(knSeed()+"|"+tag)*L.length/100))]:null}
 function knEye(x,h,hid){const doer=knWho(h)[0],pl=h.k,nw=agKh();const at=s=>{const o=ownerOf(s);if(!o)return false;let pp=null;try{pp=palaceOf(o)}catch(e){}return pp===pl||knId(o)===doer||knAt("s"+s.sid,nw)===pl};
  const L=taiMatRaw(x);if(L.length){const N=L.filter(at);return {by:"mat",how:"mat",e:knPickH(N.length?N:L,"ew"+knId(x)+"|"+hid)}}
@@ -313,7 +313,7 @@ const tmOdds0=typeof bribeOdds==="function"?bribeOdds:null;
 function tmOdds(a,s){const b=tmOdds0?tmOdds0(a,s):odA(a,35);if(!tmOn())return b;const w=tmWant(a,s)[1];return cl(Math.round((b+w)*((s.loyal||0)>=BAL.loy.top?tmB().loyalMul:1)),tmB().lo,tmB().hi)}
 if(tmOdds0)bribeOdds=tmOdds;
 /* who could be asked: a servant of another living palace, nobody's spy yet */
-function tmCands(p){return knAllSrv().filter(s=>{if(s.spyFor!=null)return false;const o=ownerOf(s);return !!o&&o!==p&&(o===S||(o.alive&&!o.out))})}
+function tmCands(p){return tmSrv().filter(/* 2f2: live list */s=>{if(s.spyFor!=null)return false;const o=ownerOf(s);return !!o&&o!==p&&(o===S||(o.alive&&!o.out))})}
 function tmRefuse(p,s){const o=ownerOf(s);if(!o||(s.loyal||0)<BAL.loy.mid||!roll(agCap(tmB().tell)))return"";affAdd(o,p,-tmB().oan);
  if(o===S&&p!==S)knBao(s,S,`${p.name} vừa sai người tới mua chuộc {xung} làm tai mắt, {xung} không nhận`,knPal(p));return"tell"}
 /* one try: the recruiter turns to the most promising person (by the same odds); that person decides */
@@ -331,6 +331,32 @@ function tmGain(p,n){if(n>0){for(let i=0;i<n;i++)tmTry(p,"gain")}else if(n<0)tmL
 /* every khắc: her and every consort's number follows the real list (spyFor changes in other modules: cut loose, dismissed, found out …) */
 function tmSyncAll(){if(!tmOn()||!S||(typeof isSrv==="function"&&isSrv()))return;tmSync(S);for(const v of liveRivals(true))if(v&&v.alive&&!v.out)tmSync(v)}
 (function(){const m0=knMemo;knMemo=function(){const k=agKey();const fresh=!KN.m||KN.m.key!==k;const M=m0.apply(this,arguments);if(fresh&&!KN.tmIn){KN.tmIn=1;try{tmSyncAll()}catch(e){agErr("tmSync",e)}finally{KN.tmIn=0}}return M}})();
+/* ===== AG-ALL-2f2 (on 2f r2): the number IS the list, exactly — and the last automatic paths removed (C-AG #3 brief; main s34 ONE CORE) =====
+   - "mat" on every consort is a READ-ONLY accessor = taiMatRaw(p).length (no cap, no stored copy, never a khắc late): tmInstall on S (start / normAll)
+     and every rival (rstats). r2's tmSync writes are swallowed; window.__tmOff (r2's test knob) turns it back into a plain stored number for a test.
+   - Old saves: a stored S.mat N = N PLACED real spies where real people exist (those had accepted in that save; most willing first, tmPlace), else the
+     real count. An NPC's stored mat (random at birth, never earned) is dropped; NPC birth gives none (rstats).
+   - Real person, real choice, everywhere a Tai mắt was still made without one: "Cài tai mắt" (P3C.eyes: the most willing real servant, her own price and
+     tmOdds, refusal → r2 tmRefuse), Dọa tố (threatServ: tmOdds + fear BAL.ag.know.tm.threat), a j70 accomplice (tmOdds), the j7 volunteer (a real
+     servant whose odds reach BAL.ag.know.tm.vol.min comes himself). sgServOdds (Mặc cả) = bribeOdds (one odds). */
+function tmSrv(){let L=[];try{L=allServ().filter(s=>s&&!s.out&&s.name&&s.sid!=null)}catch(e){}return L}
+function matN(p){return p?taiMatRaw(p).length:0}
+function tmWho(s){const o=ownerOf(s);return `${s.name} (${s.role==="eunuch"?"thái giám":"cung nữ"} cung ${o?NM(o):"khác"})`}
+function tmInstall(p){if(!p||typeof p!=="object")return p;const d=Object.getOwnPropertyDescriptor(p,"mat");if(d&&d.get)return p;const n=p===S&&d?Math.round(+d.value||0):0;if(d)delete p.mat;
+ Object.defineProperty(p,"mat",{get(){return window.__tmOff?(this.__matT||0):matN(this)},set(v){if(window.__tmOff)Object.defineProperty(this,"__matT",{value:v,writable:true,configurable:true,enumerable:false});else KN.stat.tmDrop=(KN.stat.tmDrop||0)+1},enumerable:false,configurable:true});
+ if(n>0){const h=matN(S);const got=tmPlace(S,n);KN.stat.tmMig={want:n,had:h,got}}return p}
+/* set p's real Tai mắt to n where real people exist (most willing first; extra ones let go, r2 tmLose) → the real count. Used by the old-save
+   migration (people who had already accepted in that save) and by tests to stage a count; never by an act (acts go through tmOdds) */
+function tmPlace(p,n){n=Math.max(0,Math.round(+n||0));let have=matN(p);if(have>n){tmLose(p,have-n);return matN(p)}
+ const L=tmCands(p).sort((x,y)=>tmOdds(p,y)-tmOdds(p,x)||x.sid-y.sid);const k=key(p);for(const s of L){if(have>=n)break;s.spyFor=k;have++}return have}
+/* the most willing real person for an approach (deterministic: a card re-picks the same one at run time) */
+function tmBest(p){let b=null,bo=-1;for(const s of tmCands(p)){const o=tmOdds(p,s);if(o>bo||(o===bo&&s.sid<b.sid)){b=s;bo=o}}return b}
+function tmTake(p,s){if(!p||!s)return"";s.spyFor=key(p);KN.stat.tmOk=(KN.stat.tmOk||0)+1;const r=`${tmWho(s)} nhận làm tai mắt cho ${p===S?"ngươi":p.name}.`;if(p===S&&!quiet)try{log(r)}catch(e){}return r}
+function tmNo(p,s,t){t=t==null?tmRefuse(p,s):t;const r=`${tmWho(s)} không nhận làm tai mắt cho ${p===S?"ngươi":p.name}${t?", còn bẩm lại với chủ":""}.`;if(p===S&&!quiet)try{log(r)}catch(e){}return r}
+/* one approach to a given person (her odds = tmOdds, + bonus for a threat) → the person decides */
+function tmAsk(p,s,bonus){KN.stat.tmTry=(KN.stat.tmTry||0)+1;return roll(cl(tmOdds(p,s)+(bonus||0),tmB().lo,tmB().hi))?tmTake(p,s):(tmNo(p,s),"")}
+/* the j7 volunteer: a real servant of another palace whose own odds for her reach vol.min */
+function tmVol(){const s=tmBest(S);return s&&tmOdds(S,s)>=tmB().vol.min?s:null}
 /* ================= AG-ALL-2g — INFO SELLERS (owner OD 17/11 ~16:50Z (2), verbatim in dev/OWNER_DECISIONS.md: "Có những người bán tin ... nô tài có một
    tin rất là đắt giá, tiểu chủ có muốn biết không, nếu mà bấm muốn là phải trả bao nhiêu lượng bạc ... cái tin đó phải thực sự là một tin đắt giá đáng
    tiền ... chứ không phải là mang một cái tin tào lao") — generalises the j67 story complication 'spy' ("Một kẻ gạ bán tin" / "Mua tin": "Tin hắn bán là

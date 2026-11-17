@@ -14,7 +14,7 @@ const VPS=(process.env.VPS||'755x1000x2,820x1180x2,1180x820x2,1366x1024x2,412x10
   const p=await ctx.newPage();const errs=[];p.on('pageerror',e=>errs.push(e.message));const r=R[W+'x'+H]={};
   await p.goto(BASE+PAGE,{waitUntil:'domcontentloaded'});await skipLoader(p);await sleep(1200);
   await p.evaluate(()=>{window.__forceOrigin='thd';SLOT=3;document.getElementById('title').hidden=true;window.__nlInner=1;start();window.__nlInner=0;quiet=false;
-   Q.length=0;const m=document.getElementById('modal');if(m)m.hidden=true;S.mat=2;S.an=12;S.aw=1;render()});await sleep(2500);
+   Q.length=0;const m=document.getElementById('modal');if(m)m.hidden=true;tmPlace(S,2);S.an=12;S.aw=1;render()});await sleep(2500);
   /* CROWD=1: the busiest place on the map (most people on the stage) instead of her own room */
   if(process.env.CROWD){r.place=await p.evaluate(()=>{let best=null,n=-1;for(const pl of places()){try{goTo(pl.k);const c=curPeople().length;if(c>n){n=c;best=pl.k}}catch(e){}}
    try{goTo(best)}catch(e){}render();return best+':'+n});await sleep(2500)}

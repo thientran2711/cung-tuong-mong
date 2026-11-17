@@ -10,7 +10,7 @@ const LIVE='https://thientran2711.github.io/cung-tuong-mong/';const HTML=fs.read
 const VPS=[[755,1000,2],[1180,820,2],[1366,1024,2],[412,1058,2],[390,844,3]];
 const SETUP=()=>{for(const id of ['kload','kroul']){const x=document.getElementById(id);if(x)x.remove()}try{localStorage.clear()}catch(e){}SLOT=3;window.__nlInner=1;document.getElementById('title').hidden=true;
  Math.random=(()=>{let s=777;return()=>{s=(s*16807)%2147483647;return s/2147483647}})();window.__forceOrigin='cn';
- for(let i=0;i<60;i++){start();if(!isSrv()&&S.emp)break}Q.length=0;const m=document.getElementById('modal');if(m)m.hidden=true;render();window.__bot=true;S.mat=12;
+ for(let i=0;i<60;i++){start();if(!isSrv()&&S.emp)break}Q.length=0;const m=document.getElementById('modal');if(m)m.hidden=true;render();window.__bot=true;tmPlace(S,12);
  S.logs.length=0;S.logSeq=0;S.wkSnap=wkSnap();S.wkSnap.seq=0;
  const L=liveRivals(false);const hh=L.find(v=>v.queen)||L[0],a=L.find(v=>!v.queen&&v!==hh)||L[1];kn();for(const v of L)S.met[v.id]=wk();
  const t0=S.th;S.th+=8;S.danh+=2;log(`Thỉnh an Thái hậu: thành. Danh ${S.danh-2}→${S.danh}, Thái hậu quý ngươi ${t0}→${S.th}.`);

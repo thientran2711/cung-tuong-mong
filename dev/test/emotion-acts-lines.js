@@ -7,7 +7,7 @@ const {chromium}=require('playwright');const [,,URL]=process.argv;
  const p=await ctx.newPage();p.setDefaultTimeout(240000);const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,200)));await p.route('**/assets.json',r=>r.fulfill({status:404,body:''}));
  await p.goto(URL,{waitUntil:'domcontentloaded'});await p.waitForFunction(()=>typeof start==='function'&&typeof eaDo==='function'&&typeof wkBookData==='function',null,{timeout:120000});await p.waitForTimeout(2000);
  await p.evaluate(`window.__SEEN=${process.env.SEEN?1:0}`);const R=await p.evaluate(()=>{SLOT=3;document.getElementById('title').hidden=true;start();Q.length=0;for(let i=0;i<3;i++){try{nextBuoi()}catch(e){}Q.length=0}try{trS()}catch(e){}
-  if(window.__SEEN){KIT_FACEFX.seen=()=>true;S.mat=20;try{k61Know(k61All(),"",true,2)}catch(e){}}const one={};for(const x of eaPeople()){const k=eaKind(x);if(!one[k])one[k]=x}
+  if(window.__SEEN){KIT_FACEFX.seen=()=>true;tmPlace(S,20);try{k61Know(k61All(),"",true,2)}catch(e){}}const one={};for(const x of eaPeople()){const k=eaKind(x);if(!one[k])one[k]=x}
   const out=[];const txt=f=>String((f&&(f.text||f.t||f.h))||"").replace(/<[^>]+>/g,"");
   /* emotion-acts-3: every line goes the game's own way (eaSay: fog = the book's name rule, ministers → court news); a line not written is reported, not filed */
   const where=(x,line,toMe)=>{S.wkSnap=Object.assign(wkSnap(),{seq:S.logSeq||0});const n0=S.logSeq||0;eaSay(x,line,toMe);if((S.logSeq||0)===n0)return null;const d=wkBookData();

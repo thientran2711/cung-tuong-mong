@@ -132,7 +132,7 @@ function newPlot70(a,t,m,rid,mo,opt){const z=j70();const M=M70[m];if(!M)return n
  z.pl.push(p);z.types[m+":"+r.id]=(z.types[m+":"+r.id]||0)+1;try{if(typeof evHistMark==="function")evHistMark("j70:"+m+":"+r.id)}catch(e){}
  /* the accomplice: a servant of the target is approached; the loyal refuse and tell their mistress, the rest betray */
  if(r.acc==="tsv"){const L=(t.staff||[]).filter(s=>s.spyFor!==p.a);const s=L.sort((x,y)=>(x.loyal+nq(x,"loyal",BAL.net.k.firmLoyal))-(y.loyal+nq(y,"loyal",BAL.net.k.firmLoyal)))[0];
-  if(s){p.acc=s.sid;const firm=s.loyal+nq(s,"loyal",BAL.net.k.firmLoyal)+nq(s,"greed",BAL.net.k.firmGreed);if(firm>=60&&roll(75)){p.end="refused";p.sv=s.sid;evA(t,a,BAL.eff.j70.evNewPlot70);s.loyal=cl(s.loyal+BAL.eff.j70.loyalNewPlot70,0,100);try{mindLog(a,"_abandon")}catch(e){}
+  if(s){p.acc=s.sid;/* 2f2: the approached servant CHOOSES by tmOdds (traits, lòng, what she wants); a refusal is told as before */if(!roll(typeof tmOdds==="function"?tmOdds(a,s):(s.loyal+nq(s,"loyal",BAL.net.k.firmLoyal)+nq(s,"greed",BAL.net.k.firmGreed)>=60?25:100))){p.end="refused";p.sv=s.sid;evA(t,a,BAL.eff.j70.evNewPlot70);s.loyal=cl(s.loyal+BAL.eff.j70.loyalNewPlot70,0,100);try{mindLog(a,"_abandon")}catch(e){}
     if(t===S){p.kn=1;p.kt.push(tellOf70(p,0));p.pend="serv"}else if(a===S){p.pend="ownfail"}
     if(a!==S&&a.plan&&a.plan.j70===p.id)a.plan=null;return p}
    s.spyFor=s.spyFor||p.a;p.bonus=(p.bonus||0)+8}}

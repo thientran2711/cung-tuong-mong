@@ -56,7 +56,7 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
  const src=fs.readFileSync(path.join(__dirname,'..','build','j68f.js'),'utf8').split('knSoldFound(').length-1+['j10.js','j14.js','jeitem.js','j72.js'].reduce((n,f)=>n+(fs.readFileSync(path.join(__dirname,'..','build',f),'utf8').split('knSoldFound(').length-1),0);
  ok(src>=7,'every discovery site records the discovery (j68f ×3, j10 Tra khảo, j14 tra xét, jeitem Tra khảo, j72 Giữ lại)',src);
  /* bot run: every non-public item resolves to a real person */
- const r4=await p.evaluate((DAYS)=>{const out={items:0,bad:[],kinds:{}};const seen=new Set();S.mat=6;
+ const r4=await p.evaluate((DAYS)=>{const out={items:0,bad:[],kinds:{}};const seen=new Set();tmPlace(S,6);
   const R=liveRivals(true).filter(v=>v.alive&&!v.out&&(v.staff||[]).length);if(R[1])R[1].staff[0].spyFor="me";
   for(let d=0;d<DAYS;d++){for(let bb=0;bb<4;bb++){Q.length=0;S.mg=0;try{placeWhere();agFlush()}catch(e){}
     try{for(const it of tinBaoList()){if(seen.has(it.id))continue;seen.add(it.id);if(it.by==="here"||it.by==="le")continue;out.items++;const f=informerInfo(it);

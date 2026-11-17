@@ -1056,7 +1056,7 @@ Object.assign(BAL.ag,{ev:{one:1,two:2,all:-99,rel:5}});
    use / sell (inventory Dùng / Bán), charity (j85 charityFx), restLat (Nghỉ ngơi một lát), tyGift (Biếu Thái y, courtGive), work (Tự học nghề: tác phẩm, wkMake) */
 BAL.ag.par3={on:1,
  dance:{c:{"suc":-20,"bac":-10},o:30,sacD:2,mesac:1.3,vu:4,w:{"sung":12,"danh":4},l:{"danh":-6},g:{"sung":12,"danh":4}},
- eyes:{c:{"bac":-25},o:80,w:{"mat":2},l:{"danh":-3},g:{"safe":2,"spite":1},max:6},
+ eyes:{l:{"danh":-3},g:{"safe":2,"spite":1},max:6},/* 2f2: a real person (tmBest) at her own price (nv bribeCost) and tmOdds; no flat roll, no +2 */
  anthai:{self:{c:{"suc":-5},y:4},buy:{c:{"bac":-20},w:{"suc":10}},g:{"kid":3}},
  tell:{o:40,ev:10,thD:5,w:{"th":2,"duc":-2},l:{"th":-4},rel:15,sung:10,g:{"spite":4,"th":1}},
  treat:{c:{"bac":-30},g:{"rest":4}},
@@ -1091,4 +1091,6 @@ BAL.talk.secretMal=50;BAL.talk.secretGrab=50;
    recruiter can pay her price), protect (badly treated: lòng < BAL.loy.low, recruiter outranks her master), post (low post srk < post, recruiter outranks),
    revenge (holds a grudge and the recruiter is at odds with her master). loyalMul = the odds × this for a servant at lòng ≥ BAL.loy.top. tell = % a refusing
    servant at lòng ≥ BAL.loy.mid reports the attempt to her master (oan = the master's regard lost toward the recruiter). cap = most Tai mắt one can hold. */
-BAL.ag.know.tm={cap:10,lo:3,hi:95,want:{bac:15,protect:15,post:10,revenge:20},post:3,loyalMul:.35,tell:50,oan:6};
+BAL.ag.know.tm={cap:10,lo:3,hi:95,want:{bac:15,protect:15,post:10,revenge:20},post:3,loyalMul:.35,tell:50,oan:6,
+ /* 2f2: threat = fear bonus on tmOdds for Dọa tố (threatServ); vol = the j7 volunteer comes only when her odds for him reach min, she pays bac */
+ threat:20,vol:{min:55,bac:30}};

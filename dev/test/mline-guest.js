@@ -11,7 +11,7 @@ const {chromium}=require('playwright');const [,,URL,MON='36']=process.argv;const
  await sleep(800);
  const out=await p.evaluate((MON)=>{const res={};
   for(const mode of ["host","guest"]){window.__forceOrigin='thd';SLOT=3;quiet=true;window.__nlInner=1;start();window.__nlInner=0;quiet=true;const r0=render;render=()=>{};
-   for(let i=0;i<3;i++){const s=mkServ('maid');s.age=17+i*2;S.staff.push(s)}S.mat=3;
+   for(let i=0;i<3;i++){const s=mkServ('maid');s.age=17+i*2;S.staff.push(s)}tmPlace(S,3);
    const C=window.COOPW;const save={on:C&&C.on,seat:C&&C.seat};if(mode==="guest"&&C){C.on=true;C.seat="b"}
    const R={npcMerit:0,npcRise:0,npcRefill:0,npcWage:0,npcLoyDecay:0,npcSold:0,npcStaffChanged:0,herMaidsHit:0,herLines:0,errs:[]};
    const fs0=fillStaff;fillStaff=function(q){if(q!==S)R.npcRefill++;return fs0.apply(this,arguments)};
