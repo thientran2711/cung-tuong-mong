@@ -7,7 +7,7 @@
      odds o  = [base, term, term, …] added LEFT TO RIGHT by rdOdds (jroad.js), the same order as the old inline arrow, so every value is
                bit-identical (dev/measure/road-onecore-same.js). Terms:
                ["d",stat,k] +S[stat]/k · ["m",stat,k] +S[stat]*k · ["f","a|b",y,n] +(A.f.a||A.f.b ? y : n) · ["e",ch|[ch…],end,y,n] +(rdEnd(ch)===end ? y : n)
-               ["b",key,y,n] +(road flag S.st.f14.fb[key] ? y : n) · ["k",name,k] +RDQ[name](A)*k · ["q",name,y,n] +(RDQ[name](A) ? y : n)
+               ["b",key,y,n] +(road flag S.st.f14.fb[key] ? y : n) · ["k",name,k] +RDQ[name](A)*k · ["kd",name,k] +RDQ[name](A)/k · ["q",name,y,n] +(RDQ[name](A) ? y : n)
                a leading "-" on f / e / b subtracts the term (["-f","greed",15,0] = −(A.f.greed ? 15 : 0)).
      RDQ = the named road predicates / counts (jroad.js registry, set by the data file; their own bars are the BAL.road keys above).
    Moved here from inline literals by dev/measure/road-onecore-move.js (+ road-onecore-emit.js); new chapters write their numbers here. */
