@@ -884,3 +884,4 @@
 | kit-rank-name r1 successor (continues 9f54a9a1; report HANDOVER) | review/kit-rank-name | MAIN s35 | session_01UV1SzgiSj7gRNYszv9YgxE | RUNNING | 17/11 17:26Z |
 | AG-MOODKNOW moodCauseKnown(pid): secret vs public palace info (opus; owner OD ~L1668 17:55Z (1); main s35) | review/ag-moodknow | C-AG | session_01UV1Szkwcqu7s9tTHPUXBrh | RUNNING | 17/11 17:28Z |
 | REVIEW coop-b1-regress 24d8eb38 (sonnet SMALL, tests only; brief briefs/review-coop-b1-regress.md) | review/coop-b1-regress-r1 | B | session_01N1tNP2QjFM4j8yePrC6qwU | RUNNING | 17/11 17:30Z |
+| emo-seal ANIM: every mood seal animates everywhere (one kit part) + khóc/hờn seals (OD 18:00Z) — folded into kit-figure-mood; art = Foreman C | review/kit-figure-mood | MAIN s35 | session_01UV1SzjLSjT2E1w24wsPwS5 | RUNNING | 17/11 17:32Z |
