@@ -7,3 +7,10 @@ Shots: CDN img/_review/kit-display-room/ (disp-fold, disp-fold-drawer, disp-ipad
 Not done / for main: BAL.shelf.ui flip + removing interim shelfOpen is the display-shelf builder's step after review; NPC entry point (person card / visit) not wired; painted backdrop/plank/icon = ART REQUESTS (KIT_REQUESTS). Never shows sc vs allowance. 1366x1024 = ipadPro PASS; 412x1058 / 390x844 skipped (narrow portrait = rotate prompt, OD:L339).
 START_CTX est. ~10% -> ended ~40%; no rollover needed.
 ~85% xong / ~70% chơi được (waits on display-shelf API landing + art).
+
+## r2 result + r3 HANDOVER (written by the r2 worker, 17/11 ~23:40Z)
+r2 f4abade8 = reviewer PASS, LIVE in batch s38b b048e495 (dark behind BAL.shelf.ui). Name = "Đa Bảo Các" everywhere; 5 pieces per group; grey silhouettes; set glow (shelfView items[i].set); real-jshelf put/take test PASS. KIT §89 in KIT.md.
+r3 must do when Foreman C's cabinet art lands (img/display/cabinet-land.webp 2x6, cabinet-port*.webp 1x12 + reports/display-bg.md):
+1. In dev/build/jdisp.js paste the measured numbers into KDR_PIC (land.segs[0] / port.segs[]): per segment {src, ar = width/height of the picture, slots:[{cx, fy, w, h, spots:[x0..x4]}]} as fractions of THAT picture, 12 slots in group order (BAL.shelf.groups) row by row; drop the even-grid gridSlots stub (the CSS plank stub .kdr-seg:not(:has(.kdr-bgi)) can stay as the missing-picture fallback).
+2. Rebuild (python3 dev/build/assemble.py; bash dev/site/build_site.sh), run node dev/test/display-room.js <url> - fold,ipadAir,ipadPro,foldLand (python3 -m http.server in the worktree; Chromium behind the proxy needs --no-proxy-server for the local server), LOOK at shots 755x1000 / 1180x820 / 412x1058 (pieces + silhouettes stand on the painted shelves, labels at slot top-left, nothing clipped), upload to CDN img/_review/kit-display-room-r3/, report here, SẴN SÀNG KIỂM to MAIN.
+3. Update KIT.md §89.2 (picture + measured slots, stub removed) and close the cabinet ART REQUEST in KIT_REQUESTS. Start r3 from latest origin/main (r2 worktree was /home/user/wt/kdr2).
