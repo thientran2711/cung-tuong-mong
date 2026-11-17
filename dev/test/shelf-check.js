@@ -76,6 +76,14 @@ const sl=t=>new Promise(r=>setTimeout(r,t));
   {const t0=performance.now();for(let i=0;i<10;i++)shelfWeek();out.T.weekMs=+((performance.now()-t0)/10).toFixed(2);for(let i=0;i<3;i++){SHELF_PW.k='';placeWhere()}SHELF_PW.k='';const t1=performance.now();placeWhere();out.T.placeWhereMs=+(performance.now()-t1).toFixed(2);const t2=performance.now();placeWhere();out.T.placeWhereNoShelfMs=+(performance.now()-t2).toFixed(2);out.T.people=liveRivals(true).length}
   /* 8 OLD SAVE: people without p.shelf (old save) run the week */
   for(const x of [S].concat(rivals))delete x.shelf;let ok8=true;try{shelfWeek();shelfView(S);shelfView(v)}catch(e){ok8=false;out.fail.push("old save week: "+e.message)}out.T.oldSave=ok8;
+  /* 11 REVIEW r1: shop rank gate (owner (d)), imperial never priced, one grade (kit info = BAL gr), her own Ghé chơi (two-way), co-op guest runs only her room */
+  {const B=BAL.shelf.it,rk=rkOf(S)|0,bad=new Set();for(let i=0;i<40;i++){restock();for(const k of S.shop)if(B[k]&&!SHOP_ALL.includes(k)&&(B[k].rk|0)>rk)bad.add(k)}F(!bad.size,"shop offers décor above her rank: "+[...bad].join(","));
+   const ip=Object.keys(B).filter(k=>B[k].imp&&IT[k]&&IT[k].pr>0);F(!ip.length,"imperial piece has a price: "+ip.join(","));
+   const gm=Object.keys(B).filter(k=>B[k].gr!=null&&kitItemInfo(k).grade!==Math.min(4,B[k].gr|0));F(!gm.length,"kit grade differs from BAL gr: "+gm.join(","));
+   const vv=liveRivals(true).find(x=>x.alive&&!x.out&&!sameHouse(S,x));const to=vv?topicOpts(vv).map(a=>a.n):[];F(to.includes(TW.call.n),"her talk list lacks Ghé chơi");
+   let rum=0,acc=0;const r0=window.shelfRumour,a0=window.shelfNpcAccuse,w0=window.worldOn;window.shelfRumour=()=>{rum++};window.shelfNpcAccuse=()=>{acc++};
+   try{window.worldOn=()=>false;S.shM=-1;shelfWeek();F(!rum&&!acc,"co-op guest ran NPC world parts");window.worldOn=w0;S.shM=-1;shelfWeek();F(rum&&acc,"host did not run NPC world parts")}finally{window.shelfRumour=r0;window.shelfNpcAccuse=a0;window.worldOn=w0}
+   out.T.r1={shopRk:rk,impPriced:ip.length,gradeMismatch:gm.length,talkCall:to.includes(TW.call.n),guest:{rum,acc}}}
   /* 9 LEDGER census with displayed pieces */
   try{ilCensus();out.T.ledger="ok"}catch(e){out.fail.push("ilCensus: "+e.message)}
   return out});
