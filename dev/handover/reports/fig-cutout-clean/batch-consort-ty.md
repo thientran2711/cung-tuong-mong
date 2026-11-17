@@ -23,3 +23,8 @@ TODO order: (1) older_ty4-8_index.txt lines 46..480 (a26 c9.. then a36, a51); (2
 Lead = session_011xDdVS87fDNLJMJGzeiVWL (Foreman C = ...VSeKM6qi8YXjVTPqrd). Tell lead to open the successor with BOTH queues.
 Credits so far: ~(4x80)+~290x65 = ~19.5k. START_CTX ~5%.
 NOTE for W2b: do NOT start generating until W2 reports g6 finished (slot limit); then start at older_ty4-8_index.txt LINE 46 (lines 1-45 = g6). W1b queue goes to W4c, not to W2b.
+## W2b NOTES (17/11 ~03:50Z)
+- a26 ty4-8 index lines 1-65 DONE (h1, 65 OK 0 HARD; uploaded as b6). h2 running lines 66-125.
+- Lead decision (Foreman C s12): t2/t3 level = OWN gown + one embroidered outer robe/shawl + 2-3 pins + modest headdress, no brocade/crown. Variety: redo c31,c32 ty2+ty3 a18 in each identity's own distinct colour family (4 files) AFTER the current ty4-8 batch.
+- PLAIN early ty2/ty3 (look-sheet 17/11: all 48 c01-c24 are plain sage (ty2) / pale-blue (ty3), same cut, read as maid-level): list = progress/plain_early_ty2ty3.txt (48). Repaint to each person's own outfit + rank richness AFTER the c31/c32 redo, before older-age ty4-8 if the queue allows. ty1 held until Foreman C GO.
+- DRIFT: none recorded yet for a26 ty4-8 (each uses old file of that age + own a18).
