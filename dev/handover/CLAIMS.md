@@ -935,3 +935,4 @@
 | ART fig-style-audit (sonnet; owner 21:15Z audit every figure vs ONE ref img/hd/fig-maid-m09-a18.webp; audit only) | handover reports/fig-style-audit.md | C ROOT-10 | session_011xDdVRTtGbCTfvUtqh2Ekf | RUNNING | 17/11 20:45Z |
 | ART restore maid trung y (W12 sonnet; owner 17/11 ~21:25Z 'vẽ sai rồi, bỏ hết ... cứ để trong kho'; 681 keys, keep-copy img/_keep/maid-ty-redraw) | handover reports/fig-cutout-clean/RESTORE_TY_REPORT.md | C ROOT-10 | session_011xDdVNfbdbZPTtegkYCYtp | RUNNING | 17/11 20:42Z |
 | SHELF SET BONUS table expert (sonnet; OD 20:42Z, s37 order 20:43Z) | dev/research/display-set-bonus.md | C-AG | session_01UV1SzjAuVz8TUhDrk8vhpx | RUNNING | 17/11 20:51Z |
+| FOLD DƯ ĐỒ BLANK MAP (sonnet; MAIN s37 order 20:24Z; whole map/canvas family + title under −/+) | review/dudo-blank | D | session_01964izE1CDG7cgHhhYhzVKC | RUNNING | 17/11 20:55Z |
