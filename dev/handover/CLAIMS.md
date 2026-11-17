@@ -843,3 +843,5 @@
 | B lander #2 (coop-thin-b-r3 S.wwin root cause + land; then origin-bd-r1; opus; brief briefs/land-b-2.md) | review/land-* | B | session_01N1tNP34QePRanPQevmttcs | RUNNING | 17/11 16:10Z |
 | REVIEW loading-words-2 r1 of 8816f08ee (sonnet) | review/loading-words-2-r1 | MAIN s33 | session_01UV1Szi9DmFFUQLdYo4pocU | RUNNING | 17/11 16:13Z |
 | pcard-facts-2-r1 PASS ab50f1c5 → builder batch s32a (replaces d5f1abb2); worker + reviewer archived | review/pcard-facts-2-r1 | MAIN s34 | session_01UV1SzgWoEmnjTTEv7UgBNP | PASS → BATCH | 17/11 16:20Z |
+| KIT-OPTION-ROWS: iPad 2-option modal narrow columns + 'không được không mất' family + sure option 'thành:' rows (sonnet; brief briefs/s34-kit-option-rows.md) | review/kit-option-rows | MAIN s34 | (opening) | RUNNING | 17/11 16:22Z |
+| world-events-2 LIVE e8b1906f (C-AG; main 7e0250ec → e8b1906f) | review/world-events-2-r1 | C-AG | - | LIVE | 17/11 16:18Z |
