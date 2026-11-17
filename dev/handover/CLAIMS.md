@@ -953,3 +953,4 @@
 | dudo-blank review r1 (sonnet SMALL) of f59c965a | review/dudo-blank-r1 | D | session_01964izF1pwkGy4nxwo8Q4iK | RUNNING | 17/11 21:20Z |
 | batch s37a LIVE 99f3978d (main 4c8568f5 → 99f3978d; ROLLBACK 4c8568f5): display-shelf-r3rv 41418cd8 (5 per group, ui=0) | review/batch-s37a | MAIN s37 | session_01UV1SzjA6P5mZskv3JKn3BV | LIVE | 17/11 21:27Z |
 | NPC-CHAIN LANDER (opus; one head ag-all-2+MOODKNOW+mood-mem+feelings-18+kit-figure-mood r6 on main; s37 21:17Z) | review/npc-chain-land | C-AG | session_01UV1Szi7UbTAbk3W9QSD6h7 | RUNNING | 17/11 21:26Z |
+| FOREMAN C-AG #7 (opus; successor of #6, opened by MAIN s38) | handover FOREMAN_C_STATUS | MAIN s38 | session_01UV1SzgaEMtM9LvcYPr6tdR | RUNNING | 17/11 21:36Z |
