@@ -114,8 +114,8 @@ function wkSell(p,ix){const e=p.inv[ix];if(!e||!e.wk)return"";const w=e.wk;p.inv
  if(roll(wkSellO(p))){ap(p,{bac:wkSellVal(w)});return `${nm} nhờ người mang ${w.n} ra cửa Thần Vũ bán. Bạc +${wkSellVal(w)}. `}
  ap(p,{danh:-3});if(p!==S)newsAdd(p,"sell",`${nm} lén bán đồ tự làm ra ngoài cung, bị bắt gặp.`,false);return `<span class="r">${nm} lén bán ${w.n} ra ngoài cung thì bị thị vệ cửa Thần Vũ bắt gặp, đồ bị tịch thu.</span> Danh -3. `}
 /* show at a banquet: Danh by tier, once per work, the work stays */
-function wkShow(ix){const e=S.inv[ix];if(!e||!e.wk||e.wk.show||!can(2))return;spend(2);e.wk.show=1;const w=e.wk;const f={danh:WSHOW[w.ti]};apply(f);if(w.ti===3)ghenAll(2);
- log(`Bày ${w.n} (${WTIER[w.ti]}) ở yến tiệc, cả điện truyền tay nhau xem. ${fmt(f)}${w.ti===3?" · phi tần ghen +2":""}`);render()}
+function wkShow(ix){const e=S.inv[ix];if(!e||!e.wk||e.wk.show||!can(2))return;spend(2);e.wk.show=1;const w=e.wk;const f={danh:WSHOW[w.ti]};apply(f);if(w.ti===3)ghenAll(BAL.ghen.showTreasure);
+ log(`Bày ${w.n} (${WTIER[w.ti]}) ở yến tiệc, cả điện truyền tay nhau xem. ${fmt(f)}${w.ti===3?` · phi tần ghen +${ghenN(BAL.ghen.showTreasure)}`:""}`);render()}
 /* contest (Tranh ghế, vòng Tài nghệ): a Tinh xảo / Tuyệt phẩm of that art in the chest adds to the score */
 function wkContestB(p,art){let b=0;for(const e of (p.inv||[]))if(e.wk&&e.wk.a===art&&e.wk.ti>=2)b=Math.max(b,e.wk.ti-1);return b}
 (function(){if(typeof tScore!=="function")return;const t0=tScore;tScore=function(p,art){const s=t0.apply(this,arguments);return cl(s+wkContestB(p,art),0,10)}})();
@@ -184,7 +184,7 @@ function wkCardsHTML(){const L=S.inv.map((e,i)=>[e,i]).filter(([e])=>e.wk&&!e.h)
  return `<div class="ph"><span>Tác phẩm tự tay (${L.length})</span><span>Thường · Khá · Tinh xảo · Tuyệt phẩm</span></div><div class="cards">`+L.map(([e,i])=>{const w=e.wk,a=ARTS.find(x=>x.k===w.a);const sv=wkSellVal(w),so=wkSellO(S);const cb=wkContestB(S,w.a);
   const B=[pbtn(`data-wk="give" data-ix="${i}"`,"Dâng, tặng",`Chắc chắn · tốn: 2 khắc · thành: chọn người, xem được bao nhiêu`,t2),
    pbtn(`data-wk="sell" data-ix="${i}"`,"Bán ra ngoài cung",`${word(so)} · tốn: 1 khắc · thành: Bạc +${sv} · hỏng: Danh -3, mất tác phẩm`,t1)];
-  if(!w.show&&!(w.p!=null))B.push(pbtn(`data-wk="show" data-ix="${i}"`,"Bày ở yến tiệc",`Chắc chắn · tốn: 2 khắc · thành: Danh +${WSHOW[w.ti]}${w.ti===3?" · kèm: phi tần ghen +2":""}`,t2));
+  if(!w.show&&!(w.p!=null))B.push(pbtn(`data-wk="show" data-ix="${i}"`,"Bày ở yến tiệc",`Chắc chắn · tốn: 2 khắc · thành: Danh +${WSHOW[w.ti]}${w.ti===3?` · kèm: phi tần ghen +${ghenN(BAL.ghen.showTreasure)}`:""}`,t2));
   return `<div class="card"><h4>${ic(AIMG[w.a],20)}${w.n}</h4><p><b>${WTIER[w.ti]}</b> (${w.q} phần) · ${a?a.n:""} · ${w.bn==="ngươi"?"tự tay ngươi làm":"của "+w.bn} · ${w.d}${w.p!=null?" · phải dâng trong tuần này":""}${w.show?" · đã bày ở yến tiệc":""}${cb?` · Tranh ghế vòng Tài nghệ +${cb}`:""}</p><div class="rbtn">${B.join("")}</div></div>`}).join("")+`</div>`}
 (function(){const i0=invHTML;invHTML=function(){const W=S.inv.filter(e=>e.wk&&!e.h);W.forEach(e=>e.h=1);let h;try{h=i0.apply(this,arguments)}finally{W.forEach(e=>delete e.h)}
  if(!W.length)return h;h=h.replace(/<p class="past">Rương trống\.[^<]*<\/p>/,"");return h+wkCardsHTML()}})();

@@ -71,7 +71,7 @@ EV6("flowerBloom","sea",{a:[],pp:()=>({}),w:C=>(C.sea==="Xuân"||C.sea==="Thu")?
  v:["Khóm mẫu đơn trước sân nở cùng lúc chín bông, cung nhân bảo điềm lành.","Hoa quỳnh trong chậu sắp nở đêm nay, chỉ nở một lần rồi tàn.","Rặng cúc vàng sau cung nở rộ, ong bướm kéo về.","Cây mai già tưởng chết bỗng trổ nụ giữa {S}."],
  o:X=>[c6("Mời Hoàng thượng thưởng hoa",{p:od(30+S.sung/2+mm()),w:{sung:4},l:{danh:-1},lt:[R6("ngài bận, cả cung biết ngươi bị từ chối")]}),
   c6("Ngắt hoa dâng Thái hậu",{c:{suc:-2},w:{th:4},k:[R6("vườn trơ trụi, cung nhân tiếc")]}),
-  c6("Mời các phi tần ngắm hoa",{c:{bac:-15},w:{danh:2},k:[R6("người ghen thêm: phi tần ghen +2")],ok:()=>{ghenAll(2);return "Buổi thưởng hoa vui vẻ, ai cũng khen cung ngươi."}})]});
+  c6("Mời các phi tần ngắm hoa",{c:{bac:-15},w:{danh:2},k:[R6(`người ghen thêm: phi tần ghen +${ghenN(BAL.ghen.flowerParty)}`)],ok:()=>{ghenAll(BAL.ghen.flowerParty);return "Buổi thưởng hoa vui vẻ, ai cũng khen cung ngươi."}})]});
 EV6("servGamble","serv",{a:["sv"],pp:()=>{const a=sv6(s=>s.tr==="tham"||R(3)===0);return a==null?null:{a0:a}},w:C=>1,
  v:["{A} bị bắt quả tang đánh bạc với đám thái giám gác cổng, thua sạch tiền tháng.","Người ta đồn {A} mang đồ cũ của cung ngươi ra ngoài bán lấy tiền tiêu.","{A} nợ tiền một thái giám bên Ngự thiện phòng, hắn đến tận cửa đòi.","{A} lén nhận bạc của người lạ để chuyển thư ra ngoài cung."],
  o:X=>[c6("Trả nợ, răn đe",{c:{bac:-15},r:[[X.A,10]],k:[R6("dễ quen thói")]}),
@@ -117,7 +117,7 @@ EV6("musician","visit",{a:["man"],pp:()=>{const a=man6("nhạc sư");return a==n
 EV6("newGirlAdvice","visit",{a:["rv"],pp:()=>{const a=rv6(v=>v.rank<S.rank&&v.rank<=2);return a==null?null:{a0:a}},w:C=>S.rank>=2?1.4:0,
  v:["{A} mới vào cung chưa lâu, rụt rè xin ngươi chỉ bảo lễ nghi hầu Thái hậu.","{A} khóc vì bị cung nhân bắt nạt, tìm đến ngươi vì nghe nói ngươi tốt bụng.","{A} xin theo ngươi sang thỉnh an Hoàng hậu cho đỡ sợ.","{A} hỏi ngươi nên mặc gì cho yến tiệc tháng tới."],
  o:X=>[c6("Tận tình chỉ bảo",{c:{suc:-4},r:[[X.A,12]],w:{duc:2}}),
-  c6("Nhận làm người dưới trướng",{c:{bac:-15},r:[[X.A,15]],w:{danh:1},k:[R6("người khác thấy ngươi kéo bè: phi tần ghen +2")],ok:()=>{ghenAll(2);return `${X.A.n} từ nay đi theo ngươi.`}}),
+  c6("Nhận làm người dưới trướng",{c:{bac:-15},r:[[X.A,15]],w:{danh:1},k:[R6(`người khác thấy ngươi kéo bè: phi tần ghen +${ghenN(BAL.ghen.follower)}`)],ok:()=>{ghenAll(BAL.ghen.follower);return `${X.A.n} từ nay đi theo ngươi.`}}),
   c6("Khuyên vài câu rồi thôi",{w:{suc:1},r:[[X.A,2]],k:[R6("lỡ một đồng minh")]})]});
 EV6("eunRequest","visit",{a:["sv"],pp:()=>{const a=sv6(s=>s.role!=="maid");return a==null?null:{a0:a}},w:C=>1,
  v:["{A} quỳ xin ngươi nói giúp để cháu hắn được vào làm tiểu thái giám ở Ngự dược phòng.","{A} xin nghỉ ba hôm về quê chịu tang mẹ nuôi.","{A} xin ngươi đứng ra cho hắn nhận một tiểu thái giám làm con nuôi.","{A} xin chút bạc sửa mộ cha mẹ ngoài kinh."],
@@ -153,7 +153,7 @@ EV6("empAsksAbout","emp",{a:["emp","rv"],pp:()=>{const b=rv6();return b==null||S
   c6("Khéo nói xấu một câu",{p:od(30+S.tamco/2+S.sung/5),w:{sung:2},wt:[G6(`ngài lạnh với ${X.B.n}`)],l:{sung:-3,duc:-2},lt:[R6("ngài ghét kẻ gièm pha")],ok:()=>{X.B.o.sung=cl((X.B.o.sung||30)-3,0,100);return `Ngài nhíu mày khi nhắc đến ${X.B.n}.`}})]});
 EV6("empGiftOdd","emp",{a:["emp"],pp:()=>S.sung>=30?{a0:0}:null,w:C=>.9,
  v:["Hoàng thượng ban cho ngươi một con vẹt biết nói 'vạn tuế', nhưng nó chỉ kêu suốt đêm.","Ngài ban một tấm áo lông chồn của nước ngoài cống, cả hậu cung nhìn ngươi khác hẳn.","Ngài ban một bộ cờ ngọc, kèm lời: 'Đánh với trẫm thì phải dùng bộ này.'","Ngài ban cho cung ngươi thêm một đầu bếp giỏi của Ngự thiện phòng."],
- o:X=>[c6("Tạ ơn, khoe khắp các cung",{w:{danh:3},k:[R6("phi tần ghen +4")],ok:()=>{ghenAll(4);return "Cả lục cung biết ngươi được ban thưởng."}}),
+ o:X=>[c6("Tạ ơn, khoe khắp các cung",{w:{danh:3},k:[R6(`phi tần ghen +${ghenN(BAL.ghen.boast)}`)],ok:()=>{ghenAll(BAL.ghen.boast);return "Cả lục cung biết ngươi được ban thưởng."}}),
   c6("Tạ ơn, cất giữ kín đáo",{w:{duc:1,sung:1},k:[R6("không được tiếng")]}),
   c6("Dâng lại Thái hậu",{w:{th:6},k:[R6("Sủng -1: ngài hơi phật lòng")],ok:()=>{apply({sung:-1});return "Thái hậu khen ngươi hiếu thuận."}})]});
 EV6("empIncognito","emp",{a:["emp"],pp:()=>S.sung>=45&&S.rank>=2?{a0:0}:null,w:C=>.7,big:true,

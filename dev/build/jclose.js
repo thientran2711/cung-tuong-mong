@@ -11,17 +11,18 @@
    a place that cannot be entered at night already says why (j77Card). One greeting per buổi per palace. */
 function cbGreetTodo(k){try{if(!S||S.dead||!k||S.place!==k||S.out||S.confined)return null;if(k!=="kn"&&k[0]!=="r")return null;const C=ACC_ETQ;if(C.mode==="optional")return null;
  const h=accHost(k);if(!h||h===S||!h.alive||h.out||whereOf(h)!==k)return null;if(rkOf(h)-rkOf(S)<C.rankGap)return null;
- if(k==="kn"&&C.knMorningFree&&(S.buoi||0)===0)return null;const bk=bkey();const G=S.acGreet||{};if(G[k]===bk)return null;
+ if(k==="kn"&&C.knMorningFree&&(S.buoi||0)===0)return null;const bk=bkey();const G=S.acGreet||{};if(G[k]===bk||(S.acGreetNx||{})[k]===bk)return null;
  /* came by invitation / an accepted request this buổi: no greeting is owed (the skip mark tells "walked in without greeting") */
  if(C.invite&&accHas(S,k)&&!((S.acSkip||{})[k]===bk))return null;return h}catch(e){return null}}
-function cbGreetMark(k){S.acGreet=S.acGreet||{};S.acGreet[k]=bkey()}
+/* a greeting that ran on into the next buổi (time-spill sweep 16/11: dayFit, j76 carry) also counts for that next buổi */
+function cbGreetMark(k){S.acGreet=S.acGreet||{};S.acGreet[k]=bkey();if(S.j76carry&&(S.buoi||0)<B4L){S.acGreetNx=S.acGreetNx||{};S.acGreetNx[k]=wk()+"-"+((S.buoi||0)+1)}}
 function cbGreetCard(k){const h=cbGreetTodo(k);if(!h)return false;const C=ACC_ETQ,nm=accName(k),hn=`${accRkName(h)} ${h.name}`,sh=h.name.split(" ").pop(),left=Math.max(0,BAL.time.khac-used);
  const L=[`<p>${hn} là chủ vị ${nm}, đang ở cung. Ngươi đang ở đây mà chưa bái kiến trong ${String(BUOI[S.buoi||0]).toLowerCase()}.</p>`];const opts=[];
- if(j77Kh(C.khac))opts.push({n:`Bái kiến ${accRkName(h)}`,fx:{},x:`Chắc chắn · tốn: ${C.khac} khắc · thành: ${sh}: ${typeof pvRel==="function"?pvRel(h,C.okAff):"quý ngươi +"+C.okAff}`,go:()=>setTimeout(()=>cbGreetGo(k),0)});
+ if(dayFit(C.khac))opts.push({n:`Bái kiến ${accRkName(h)}`,fx:{},x:`Chắc chắn · tốn: ${C.khac} khắc · thành: ${sh}: ${typeof pvRel==="function"?pvRel(h,C.okAff):"quý ngươi +"+C.okAff}`,go:()=>setTimeout(()=>cbGreetGo(k),0)});
  else L.push(`<p class="past">Bái kiến: ${j77Bound(C.khac)}.</p>`);
  opts.push({n:"Thôi",fx:{},x:"",go:()=>setTimeout(()=>{S.acSeen=S.acSeen||{};S.acSeen[k]=bkey();window.__fromMap=1;tab="act";render()},0)});
  Q.push({t:nm,h:L.join(""),opts});const m=Q[Q.length-1];try{if(typeof kitPlaceDress==="function")kitPlaceDress(m,k)}catch(e){}showModal();return true}
-function cbGreetGo(k){const h=cbGreetTodo(k);if(!h||Q.length||!j77Kh(ACC_ETQ.khac))return;const C=ACC_ETQ,sg=n=>(n>0?"+":"")+n;const bf=typeof rsnap==="function"?rsnap():null;
+function cbGreetGo(k){const h=cbGreetTodo(k);if(!h||Q.length||!dayFit(ACC_ETQ.khac))return;const C=ACC_ETQ,sg=n=>(n>0?"+":"")+n;const bf=typeof rsnap==="function"?rsnap():null;
  spend(C.khac);relAdd(S,h,C.okAff);cbGreetMark(k);log(`Ngươi cúi chào, bái kiến ${accRkName(h)} ${h.name} ở ${accName(k)}: chủ vị quý ngươi ${sg(C.okAff)}.`);try{if(typeof k61Meet==="function")k61Meet(h,"",1)}catch(e){}render();
  setTimeout(()=>{try{if(bf)resultShow(`Bái kiến ${accRkName(h)} ${h.name}`,bf,true)}catch(e){}},30)}
 /* the gate's own greeting / walk-in marks the buổi */
@@ -87,7 +88,7 @@ function kitLinePos(el){try{const nx=document.getElementById("next");let bot=inn
 function kitLineCss(){if(document.getElementById("kit-line"))return;const st=document.createElement("style");st.id="kit-line";st.textContent=`
 .kupdline{position:fixed;left:50%;transform:translateX(-50%);z-index:9750;max-width:calc(100vw - 24px);margin:0;padding:5px 14px;border-radius:14px;border:1px solid var(--gold,#b8892b);background:#fffaf0f4;color:var(--ink,#3a2418);font:600 .82rem/1.3 var(--body,inherit);box-shadow:0 4px 14px #0004;text-align:center;pointer-events:none;transition:opacity .5s}
 .kupdline.out{opacity:0}`;document.head.appendChild(st)}
-function kitLine(text,ms){kitLineCss();let el=document.getElementById("kupdline");if(!el){el=document.createElement("div");el.id="kupdline";el.className="kupdline";el.setAttribute("role","status");document.body.appendChild(el)}
+function kitLine(text,ms){kitLineCss();try{if(typeof kShort==="function")text=kShort(text)}catch(e){}let el=document.getElementById("kupdline");if(!el){el=document.createElement("div");el.id="kupdline";el.className="kupdline";el.setAttribute("role","status");document.body.appendChild(el)}
  el.textContent=text;el.classList.remove("out");kitLinePos(el);clearTimeout(kitLine.t);if(ms)kitLine.t=setTimeout(()=>{el.classList.add("out");setTimeout(()=>{if(el.classList.contains("out"))el.remove()},600)},ms);return el}
 window.kitLine=kitLine;
 

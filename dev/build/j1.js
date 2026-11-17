@@ -126,7 +126,9 @@ function momRank(v){return v?(v.alive&&!v.out?(v.queen?7:v.rank):0):S.rank}
 function setHeir(k,v){allKids().forEach(([x])=>x.heir=false);k.heir=true;S.heir={k,v};if(!v)apply({danh:10})}
 function kidDie(k,why,mine){k.alive=false;const wasH=k.heir;if(wasH){k.heir=false;S.heir=null}if(mine)apply({suc:-15});
   return `<span class="r">${k.name} ${why}.</span>${mine?" Ngươi đau đớn khôn nguôi.":""}${wasH?" Ngôi Đông cung bỏ trống.":""} `}
-function ghenAll(n){liveRivals(true).forEach(v=>v.ghen=cl(v.ghen+Math.round(n*(has("datinh")?1.5:1)),0,100))}
+/* ghenN(n) = the jealousy one "every consort ghen +n" really adds (Hoàng thượng đa tình ×BAL.ghen.datinh). ONE CORE (OD:L1267): ghenAll applies it and every text that shows that gain prints ghenN(n). */
+function ghenN(n){let k=1;try{if(has("datinh"))k=BAL.ghen.datinh}catch(e){}return Math.round(n*k)}
+function ghenAll(n){const d=ghenN(n);liveRivals(true).forEach(v=>v.ghen=cl(v.ghen+d,0,100))}
 function namesInUse(){const a=[];if(S){a.push(S.name);if(S.maid)a.push(S.maid.name);if(S.foe)a.push(S.foe);if(S.st){if(S.st.guard)a.push(S.st.guard);if(S.st.stu)a.push(S.st.stu)}}(rivals||[]).forEach(v=>a.push(v.name));allKids().forEach(([k])=>a.push(k.name));return a}
 function freshName(){const used=namesInUse();const sur=used.map(n=>SURN.find(x=>n.startsWith(x+" "))).filter(Boolean);
   let ss=SURN.filter(x=>!sur.includes(x));if(!ss.length)ss=SURN;

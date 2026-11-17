@@ -114,7 +114,11 @@ function lessonVir(k,mode){if(!S||S.dead||Q.length||S.mg)return;vNorm(S);const l
  else{if(!can(2)||S.bac<cost)return;apply({suc:-10,bac:-cost});spend(2);const g=2+R(2);addVir(S,k,g);log(`Học ${V.n} với ma ma giáo tập. Tiến bộ +${g}.`)}
  save();render()}
 window.lessonVir=lessonVir;
-function charity(){const C=BAL.charity;if(!S||S.dead||Q.length||!can(C.khac)||S.bac<C.bac||S.charM===S.turn)return;S.charM=S.turn;withDeed("phát bạc cứu giúp cung nhân nghèo",()=>apply({bac:-C.bac,duc:C.duc,danh:C.danh}));spend(C.khac);save();render()}
+/* ONE act, two doors (danh-p1, owner P1 16/11): Tài nghệ · Tứ đức button (here) and the Hành sự card (jact adCharityCard);
+   one lock S.charM (once a month), one effect body charityFx; numbers BAL.charity */
+function charityLocked(){return !S||S.charM===S.turn||S.bac<BAL.charity.bac}
+function charityFx(){const C=BAL.charity;S.charM=S.turn;withDeed("phát bạc cứu giúp cung nhân nghèo",()=>apply({bac:-C.bac,duc:C.duc,danh:C.danh}))}
+function charity(){const C=BAL.charity;if(!S||S.dead||Q.length||!can(C.khac)||charityLocked())return;charityFx();spend(C.khac);save();render()}
 window.charity=charity;
 try{wrapR("lessonVir",(k,m)=>`${m==="self"?"Tự học":"Học"} ${(VIR.find(x=>x.k===k)||{}).n||""}`);wrapR("charity",()=>"Phát bạc cứu giúp cung nhân")}catch(e){}
 document.addEventListener("click",e=>{const b=e.target.closest("[data-vlearn],[data-charity],[data-v85tab]");if(!b||b.disabled)return;e.stopPropagation();

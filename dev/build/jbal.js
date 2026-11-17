@@ -1,6 +1,6 @@
 /* ================= BALANCE KNOBS (measured with the sensible / random bots; see the report) ================= */
 const BAL={wkFinCap:1,/* Đức from handmade works (kinh, vật cầu phúc): at most this many per month (j83 wkFinLeft) */ oanLv:[5,20,45,75],/* oán word ladder (VANPHONG): <5 Không oán · <20 Chút oán · <45 Oán · <75 Oán sâu · else Oán hận */
- /* outQ = % an empty Hoàng hậu seat goes to an outsider girl (one-core: was 85 here and 60 in jbal2; 60 is the measured v12 value) */outQ:60,hz:3.2,conc:.25,later:6,hhTh:55,birthAdd:2,
+ /* outQ = % an empty Hoàng hậu seat goes to an outsider girl (one-core: was 85 here and 60 in jbal2; 60 is the measured v12 value) */outQ:60,hz:3.2,conc:.5,/* conception per night × (D57 owner 16/11: doubled from .25 for everyone; the cycle peak/low is BAL.cyc.fert in jcycle.js) */trystC:[5,60],/* a tryst / affair conception = trystCh(p) = conceiveCh(p) kept within [lo,hi] (her Hẹn gặp riêng j22, Tư thông jroute, an NPC consort's affair month j22) */later:6,hhTh:55,birthAdd:2,
  /* ONE SOURCE for every promotion threshold the player sees (checks in promoReqP/candOK and every text read these) */
  hhThNoSon:80,hhThNoSonHieu:70,hhDuc:50,hhDucHeir:40,qBlockHh:-40,qBlockTh:50,hiOppHh:-30,hiOppTh:30,hiOppFac:180,
  /* handmade works (j83), by material 0 thường / 1 tốt / 2 quý: matQ = phần added to the score; cap = highest tier it can reach (only quý makes a
@@ -48,7 +48,7 @@ const BAL={wkFinCap:1,/* Đức from handmade works (kinh, vật cầu phúc): a
    seat = seats per rank (7 Hoàng hậu, 6 Hoàng quý phi, 5 Quý phi, 4 Phi, 3 Tần); SEATCAP (j30) is this table.
    night = the least a night with the Emperor gives: Sủng +sung, Ân tình +an (the night's score adds more, j8 nightFx). */
 Object.assign(BAL,{time:{khac:4,sucMin:5},lot:{bac:10,k:1},walk:{near:1,far:2},sneak:{danh:8,heavy:15,seen:2},srvAge:{ask:25,out:30,mama:45},
- age:{sacFrom:25,sacLoss:2,sacMin:10,betroth:16,wed:18,matchShow:14,matchMax:21,reign:16},seat:{7:1,6:1,5:2,4:4,3:6},night:{sung:3,an:2}});
+ age:{sacFrom:25,sacLoss:2,sacMin:10,betroth:16,wed:18,matchShow:14,matchMax:21,reign:16},seat:{7:1,6:1,5:2,4:4,3:6}});
 /* ONE CORE r2 (review/one-core-land, 16/11): rule numbers of the modules that landed after review/one-core: story roads (jroute),
    origin arcs (jorigins), family house (jhouse), Tu duc lessons (jtds, jtd), small modules. One table per module; texts print the same key. */
 Object.assign(BAL,{route:{ /* jroute «Lối riêng» (tư tình / trốn cung / rời cung / ẩn dật / nghiệm thân): every rule number of that module */
@@ -172,7 +172,7 @@ Object.assign(BAL,{
       accWin:{danh:4}}, /* an accusation that holds: her Danh (a failed one: BAL.tw.g.accFail) */
  m95b:{k:1,             /* khắc to clear a rumour face to face, or to trace who spread it */
       trace:{bac:-10}}, /* silver to have the rumour traced */
- kitpage:{demo:{age:19,k:1,tomb:{suc:10,duc:3},gift:{bac:20,hh:4,danh:2,th:1}},/* kit sample page demo option texts (jopic §6.2b) and slot age (j74) */
+ kitpage:{demo:{age:19,k:1,grey:{need:40,have:3,k:2,suc:10},/* §84 greyed-option sample (jgrey) */mapK:2,/* §85 Dư đồ sample khắc (jmapc) */tomb:{suc:10,duc:3},gift:{bac:20,hh:4,danh:2,th:1}},/* kit sample page demo option texts (jopic §6.2b) and slot age (j74) */
       wk:2,         /* kit sample page: the demo "· 2 tuần trước" age of a mood cause */
       listen:{duc:1}},  /* kit sample page: the demo option "Nghe hết rồi mới định" gain */
  diff:{bac:{de:1.5,vua:1,kho:.7}},   /* starting bạc × by difficulty (Dễ / Vừa / Khó) */
@@ -194,6 +194,7 @@ function hhNeed(p){p=p||S;const sn=sonsOf(p).length>0,hieu=typeof has==="functio
   const t=`<b>Thánh chỉ: Thái hậu chọn ${n.name}, con gái danh môn, vào cung lập làm Hoàng hậu.</b> Ghế trống không mở tranh. `;log(t);return t}return c0.apply(this,arguments)}})();
 /* fewer births per life: conception (after the ×0.7) scaled; a woman who has borne before is a little safer in labour (everyone alike) */
 (function(){const c0=conceiveCh;conceiveCh=function(p){return Math.round(c0.apply(this,arguments)*BAL.conc)}})();
+function trystCh(p){return cl(conceiveCh(p),BAL.trystC[0],BAL.trystC[1])}
 /* palace-start: NPC conception slowed in the first game years of a NEW game (S.ps), BAL.ps.npcConc; the player is never scaled here */
 (function(){const c0=conceiveCh;conceiveCh=function(p){p=p||S;const r=c0.apply(this,[p].concat([].slice.call(arguments,1)));try{if(p===S||!S||!S.ps)return r;const y=Math.floor((S.turn||0)/12),m=BAL.ps.npcConc[y];return m==null?r:Math.round(r*m*10)/10}catch(e){return r}}})();
 (function(){const b0=birthRisk;birthRisk=function(p){const r=b0.apply(this,arguments);const n=p===S?(S.kids||[]).length:(p.kids||[]).length;if(n>0&&p===S&&S.birthWhy)S.birthWhy=S.birthWhy.concat([]);return cl(r-(n>0?BAL.later:0)+BAL.birthAdd,1.5,60)}})();
@@ -234,12 +235,16 @@ BAL.staff={retire:[63,68],gift:20,giftAf:10,talk:2,succAge:[46,54],
    (at most oanCap), her trait (tr), the player's Tâm cơ (tam: [neutral, per]) and Đức (duc: [neutral, per]), and how many consorts with oán ≥ foeOan
    watch her (at most foeCap). odds = [min, max] odds of a chancy story option after the context.
    shift: an ending no roll decides moves one step worse with base − c × slope and one step better with base + c × slope (each between min and max,
-   c = context + (Lợi thế − 1) × sc); base is the same both ways, so a neutral life leans neither way. */
+   c = context + (Lợi thế − 1) × sc); base is the same both ways, so a neutral life leans neither way.
+   q = tutorial quests of chapters 1–3 (jtq14.js, review/tut-quests): bac = Bạc paid the moment one quest is done (c consort, s cung nữ who still
+   serves); need = how many times a quest's deed must be done (default 1); narr = the BAL.staff post whose holder tells the tutorial (OD:L1432:
+   gt Giáo tập ma ma for a new consort, kn Quản sự ma ma for a new palace maid). */
 Object.assign(BAL,{st14:{max:14,parts:[[1,3],[4,11],[12,14]],lim:{nhap:6,nhapCnv:8,sung:10,tap:8},
  goal:{sung:25,rel:30,art:2,tin:60,nt:25},danh:{nhap:3,sung:2,tap:2,len:4},rw:{nhap:0,sung:1,tap:1,len:2},
  hate:{min:25,base:15,friend:20},tr:{"Hiểm độc":-5,"Tham vọng":-3,"Kiêu ngạo":-2,"Nhu mì":2,"Hiền lành":4,"Trung hậu":3},
  ctx:{aff:6,affCap:6,oan:10,oanCap:5,tam:[40,15],duc:[50,20],foeOan:30,foeCap:4,cap:15},odds:[5,95],
- shift:{base:15,slope:2,sc:2,min:5,max:40}},
+ shift:{base:15,slope:2,sc:2,min:5,max:40},
+ q:{bac:{c:15,s:3},need:{ban:1},narr:{c:"gt",s:"kn"}}},
 /* cung nữ được sủng hạnh (j42 cnvName): from Hoàng thượng để ý ≥ at, each time he notices her the odds he asks her name and raises her
    Đáp ứng = nt / div − sub (j42 roll, the Thân phận row, the j67 / jst14 «Từ kẻ hầu thành tiểu chủ» step all read this) */
  ntRise:{at:45,div:2,sub:10}});
