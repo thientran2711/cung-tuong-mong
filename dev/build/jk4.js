@@ -529,6 +529,11 @@ function kitDpNat(d,mb,col){try{const cs=e=>getComputedStyle(e);const items=[...
 html body #modal .dlg.kdper.kdpall>#mb{overflow-y:auto!important;overscroll-behavior:contain;grid-template-rows:max-content max-content!important;align-content:start}
 html body #modal .dlg.kdper.kdpall>#mb>.kpb>.kpsubj.kes{position:sticky!important;top:0;align-self:start;grid-row:1/-1;height:var(--kdpmbh,100%)!important}
 html body #modal .dlg.kdper.kdpall>#mb>.opts{grid-row:2!important;overflow:visible!important;min-height:max-content!important;align-self:start}
+/* KIT §32.5c (kit-size-10, night-final KIT REQUEST "clock chip off screen"): a dialog with a picture band (kdpbanner) has THREE rows in the right column —
+   band, text (+ any §69 countdown chip), options. kdpall used to force 2 rows and put the options in row 2, so the text fell into an implicit row 3
+   BELOW the options (chip at y 970–1300 on 412x1058 / 390x844). With the band: 3 rows, options in row 3, text stays above them. */
+html body #modal .dlg.kdper.kdpall.kdpbanner>#mb{grid-template-rows:max-content max-content max-content!important}
+html body #modal .dlg.kdper.kdpall.kdpbanner>#mb>.opts{grid-row:3!important}
 `;document.head.appendChild(st)})();
 (function(){const p0=kitStagePeople;kitStagePeople=function(m){let L=p0.apply(this,arguments);
  /* coordinator 15/11 ("Hoàng hậu triệu kiến" showed the PLAYER): the column shows the MAIN ACTOR — the first person who is not the player;
