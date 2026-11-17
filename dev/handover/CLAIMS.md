@@ -893,3 +893,4 @@
 | ODDS CAP (opus BIG; BAL.odds 95/5 in the one roll fn, soft fail, drop "Chắc chắn"; MAIN s34 17:00Z + 17:35Z) | review/odds-cap | D | session_01964izGRJM7BJPNcVuaqdcU | RUNNING | 17/11 17:58Z |
 | REVIEW ag-moodknow r1 (opus BIG) of 8d20e004 | review/ag-moodknow-r1 | C-AG | session_01UV1SzhNSDpgww4CQQEWf47 | RUNNING | 17/11 17:56Z |
 | REVIEW kit-rank-name r1 of a4ccfc74 (sonnet SMALL; brief briefs/s35-review-kit-rank-name.md) | review/kit-rank-name-r1 | MAIN s35 | session_01UV1SzjAB6NhBbBqqpmBnJC | RUNNING | 17/11 17:55Z |
+| AG-ALL-2 2d4 assembler (opus; TIN BÁO walk timing OD L1668 (3) + bạc-on-success family + assemble → SẴN SÀNG KIỂM) | review/ag-all-2 | C-AG | (opening) | RUNNING | 17/11 18:02Z |
