@@ -688,3 +688,4 @@
 | one-core-dup2-r2 SẴN SÀNG KIỂM 069188d7 (r3 fix: one-core-bind guard 29→0, j17 AOUT, derived links; on main 05ebe3da) → review r4 (opus BIG; brief briefs/review-one-core-dup2-r4.md) | review/one-core-dup2-r4 | B | session_01N1tNP3RUAMCUVaePSwSLjg | RUNNING | 17/11 08:27Z |
 | one-core-arcs r2 successor (opus; merge dup2-r2 069188d7, fold amt1 into dup2's single-arg kind, gates; brief briefs/one-core-arcs-r2b.md) | review/one-core-arcs | B | session_01N1tNP3SHnf4biK9aBwoNfv | RUNNING | 17/11 08:27Z |
 | coop-thin-b worker #3 (successor; #2 rolled over after D r1 fix a0342238) — B r1 FAIL 6 items on review/coop-thin-b (opus; brief briefs/coop-thin-b-3.md) | review/coop-thin-b | B | session_01N1tNP2SE2Wo1w8dS9oF3uZ | RUNNING | 17/11 08:39Z |
+| one-core-arcs SẴN SÀNG KIỂM 2831e112 (r2, contains dup2-r2 069188d7) → re-review r2 (opus BIG, same reviewer as r1) | review/one-core-arcs-r2v | B | session_01N1tNP4ZHFJ1oKb2cNK3zov | RUNNING | 17/11 08:49Z |
