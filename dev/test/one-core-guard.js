@@ -55,8 +55,9 @@ const NUMV='[+-]?\\d+(?:\\.\\d+)?';
 const NUMA='[+-]?(?:\\d+(?:\\.\\d+)?|\\.\\d+)'; /* an amount may be typed '.5' (srvMerit(.5), one-core-dup3) */
 const JOIN_PAT={
  /* amt also counts ONE-argument calls (dup2 c66ef16a: e67dad(4)); e67heir added by review/one-core-arcs r2 (reviewer r1 item 1) —
-    one kind, the former 'amt1' folded in here */
- amt:new RegExp('\\b(?:rdOan|rdRel|relAdd|oanAdd|affAdd|kcAf|tdPowAdd|e67(?:dad|bien|kho|heir|ally|pun|foe|drop|merit|srvUp)|srvMerit)\\((?:(?:[^()]|\\([^()]*\\))*?[(,])?\\s*(?:[\\w$.!]+\\s*\\?\\s*)?'+NUMA+'(?:\\s*:\\s*'+NUMA+')?\\s*\\)','g'),
+    one kind, the former 'amt1' folded in here; the number after the '(' of a roll( inside the call is an odds, not the amount
+    (evA(v,t,roll(40)?…): counted by the roll kind — review/one-core-dup3); a wrapper g(8) still counts */
+ amt:new RegExp('\\b(?:rdOan|rdRel|relAdd|oanAdd|affAdd|kcAf|tdPowAdd|e67(?:dad|bien|kho|heir|ally|pun|foe|drop|merit|srvUp)|srvMerit|evA|evStory)\\((?:(?:[^()]|\\([^()]*\\))*?(?:,|(?<!\\broll)\\())?\\s*(?:[\\w$.!]+\\s*\\?\\s*)?'+NUMA+'(?:\\s*:\\s*'+NUMA+')?\\s*\\)','g'),
  ladder:new RegExp('(?:[\\w$.\\])]+\\s*(?:>=|>|<=|<)\\s*'+NUMV+'\\s*\\?\\s*(?:\\[[^\\[\\]]*\\]|'+NUMV+'|""|``)\\s*:\\s*){2,}(?:\\[[^\\[\\]]*\\]|'+NUMV+'|""|``)','g'),
 };
 const TXT_PAT={

@@ -228,10 +228,10 @@ const IROUTE={
  ally:{n:"Xin đồng minh",k:2,ks:Object.keys(WILL),cost:()=>0,o:()=>100,need:p=>illAllies(p).length?"":"chưa có đồng minh thân (thiện cảm 40) đang giữ đồ cấm",when:"có ngay",fail:()=>""}};
 /* one attempt: same function for her and for every consort; returns the log line */
 function illBuy(p,r,k,from,paid){const R0=IROUTE[r],nm=p===S?"Ngươi":`${rkName(p)} ${p.name}`;
- if(r==="ally"){const v=from||illAllies(p)[0];if(!v)return"";const i=v.inv.findIndex(e=>e.k===k&&!e.h&&!e.t);if(i<0)return"";v.inv.splice(i,1);p.inv.push({k,from:key(v)});/*evok: illBuy deed*/evA(v,p,1);return `${nm} xin ${rkName(v)} ${v.name} ${itm(k).n}. Nàng nắm 1 chứng cứ của ${p===S?"ngươi":p.name}. `}
+ if(r==="ally"){const v=from||illAllies(p)[0];if(!v)return"";const i=v.inv.findIndex(e=>e.k===k&&!e.h&&!e.t);if(i<0)return"";v.inv.splice(i,1);p.inv.push({k,from:key(v)});/*evok: illBuy deed*/evA(v,p,BAL.eff.j83.evIllBuy);return `${nm} xin ${rkName(v)} ${v.name} ${itm(k).n}. Nàng nắm 1 chứng cứ của ${p===S?"ngươi":p.name}. `}
  const c=R0.cost(k);if(!paid){if(p.bac<c)return"";ap(p,{bac:-c})}if(typeof ducAdd==="function")ducAdd(p,-3,"mua đồ cấm");else ap(p,{duc:-3});
  if(roll(R0.o(p))){if(r==="maid"){p.illP=p.illP||[];p.illP.push({k,w:wk()+1});return `${nm} sai ${p.maid.name} lén mua ${itm(k).n} ngoài cung; tuần sau mang về. Bạc -${c}. `}p.inv.push({k});return `${nm} có được ${itm(k).n} (${R0.n.toLowerCase()}). Bạc -${c}. `}
- const w=illWitness(p);if(r==="maid"){evA(w,p,2);if(p.maid)p.maid.loyal=cl(p.maid.loyal-10,0,100)}else if(r==="thaiy"){ap(p,{danh:-6});evA(w,p,1)}else{ap(p,{danh:-8});evA(w,p,2)}
+ const w=illWitness(p);if(r==="maid"){evA(w,p,BAL.eff.j83.evIllBuy_2);if(p.maid)p.maid.loyal=cl(p.maid.loyal-10,0,100)}else if(r==="thaiy"){ap(p,{danh:-6});evA(w,p,BAL.eff.j83.evIllBuy_3)}else{ap(p,{danh:-8});evA(w,p,BAL.eff.j83.evIllBuy_4)}
  if(p!==S)newsAdd(p,"illicit",`Người của ${nm} bị bắt khi lén mua đồ cấm.`);
  return `<span class="r">${nm} mua lén ${itm(k).n} không thành: ${R0.fail(p)}${w?` (${w===S?"ngươi":rkName(w)+" "+w.name} giữ chứng cứ)`:""}.</span> `}
 (function(){const e0=endTurn;endTurn=function(){const r=e0.apply(this,arguments);try{if(S&&!S.dead)for(const p of consorts()){if(!p.illP||!p.illP.length)continue;const now=p.illP.filter(x=>x.w<=wk());p.illP=p.illP.filter(x=>x.w>wk());for(const x of now){p.inv.push({k:x.k});if(p===S)log(`${S.maid?S.maid.name:"Cung nữ"} lén mang ${itm(x.k).n} về, giấu trong rương.`)}}}catch(x){}return r}})();

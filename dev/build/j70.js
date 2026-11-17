@@ -132,7 +132,7 @@ function newPlot70(a,t,m,rid,mo,opt){const z=j70();const M=M70[m];if(!M)return n
  z.pl.push(p);z.types[m+":"+r.id]=(z.types[m+":"+r.id]||0)+1;try{if(typeof evHistMark==="function")evHistMark("j70:"+m+":"+r.id)}catch(e){}
  /* the accomplice: a servant of the target is approached; the loyal refuse and tell their mistress, the rest betray */
  if(r.acc==="tsv"){const L=(t.staff||[]).filter(s=>s.spyFor!==p.a);const s=L.sort((x,y)=>(x.loyal+nq(x,"loyal",BAL.net.k.firmLoyal))-(y.loyal+nq(y,"loyal",BAL.net.k.firmLoyal)))[0];
-  if(s){p.acc=s.sid;const firm=s.loyal+nq(s,"loyal",BAL.net.k.firmLoyal)+nq(s,"greed",BAL.net.k.firmGreed);if(firm>=60&&roll(75)){p.end="refused";p.sv=s.sid;evA(t,a,1);s.loyal=cl(s.loyal+5,0,100);try{mindLog(a,"_abandon")}catch(e){}
+  if(s){p.acc=s.sid;const firm=s.loyal+nq(s,"loyal",BAL.net.k.firmLoyal)+nq(s,"greed",BAL.net.k.firmGreed);if(firm>=60&&roll(75)){p.end="refused";p.sv=s.sid;evA(t,a,BAL.eff.j70.evNewPlot70);s.loyal=cl(s.loyal+5,0,100);try{mindLog(a,"_abandon")}catch(e){}
     if(t===S){p.kn=1;p.kt.push(tellOf70(p,0));p.pend="serv"}else if(a===S){p.pend="ownfail"}
     if(a!==S&&a.plan&&a.plan.j70===p.id)a.plan=null;return p}
    s.spyFor=s.spyFor||p.a;p.bonus=(p.bonus||0)+8}}
@@ -182,7 +182,7 @@ function step70(p){const a=pa70(p),t=pt70(p),M=pm70(p);if(!M||!a||!t){p.end="gon
   if(a!==S&&!p.kn&&roll(seeP70(p,i))){p.kn=1;p.kt.push(tellOf70(p,i));p.pend=t===S?"seen":"npc";noteAdd(a.id,`Tai mắt báo: ${tellOf70(p,i)}${where70(p)?` (ở ${where70(p)})`:""}${t===S?" — có lẽ nhắm vào ngươi":` — có lẽ nhắm vào ${t.name}`}`);try{newsAdd(a,M.k,`Người của ${a.name} ${tellOf70(p,i)}`,true)}catch(e){}}
   else if(a!==S&&p.kn&&roll(seeP70(p,i)))p.kt.push(tellOf70(p,i));
   /* the target's own people */
-  if(t!==S&&roll(npcSee70(p))){p.g+=20;if(roll(35))evA(t,a,1);if(a===S&&S.maid&&S.maid.loyal>=BAL.loy.close&&roll(50))p.warnOwn=1/* her maid saw their guard go up */}
+  if(t!==S&&roll(npcSee70(p))){p.g+=20;if(roll(35))evA(t,a,BAL.eff.j70.evStep70);if(a===S&&S.maid&&S.maid.loyal>=BAL.loy.close&&roll(50))p.warnOwn=1/* her maid saw their guard go up */}
   /* allies warn her of a plot she has not seen */
   if(t===S&&!p.kn){const al=liveRivals(true).filter(x=>x!==a&&aff(x,S)>=40&&!x.confined&&roll(cl(6+tc70(x)/5+(r70vis(p)),3,40)));if(al.length){const w=pick(al);/* an ally whose own people really saw the tell */p.kn=1;p.ally=w.id;p.kt.push(tellOf70(p,i));p.pend="warn";relAdd(S,w,BAL.eff.j70.step70)}}
   /* her first weeks: a murder plot never lands without one warning */
@@ -198,8 +198,8 @@ function exec70(p,opp){const a=pa70(p),t=pt70(p),M=pm70(p);const O=OPP70[opp]||O
  if(a!==S&&a.plan&&a.plan.j70===p.id)a.plan=null;
  if(!okAct70(a,t,M.k)&&M.k!=="joint"){p.end="miss";try{mindLog(a,"_abandon")}catch(e){}if(p.kn&&a!==S)log(`${a.name} bày mưu ${M.n.toLowerCase()} nhưng thời cơ đã qua, đành thôi.`);return ""}
  let r="";const bonus=J70CFG.prep+O.b+(p.bonus||0);const err=(p.err||0)+p.g-bonus;
- if(p.foil){/* cut at the root earlier *//*evok: plot deed (newPlot70)*/evA(t===S?S:t,a,1);r=`${a===S?"Ngươi":a.name} định ra tay (${M.n.toLowerCase()}) ${O.n}, nhưng đường dây đã bị cắt từ trước. ${t===S?`Ngươi nắm thêm 1 chứng cứ về ${a.name}.`:""}`;try{if(a!==S){a.fails=a.fails||{};a.fails[M.k]=(a.fails[M.k]||0)+1}}catch(e){}}
- else if(p.trap){/*evok: plot deed*/evA(S,a,2);try{punish(a,`bị bắt quả tang ${M.n.toLowerCase()} nhắm vào ${nm70(t)}`,2)}catch(e){}relAdd(a,S,BAL.eff.j70.exec70);r=`Bẫy của ngươi sập đúng lúc: người của ${a.name} bị bắt quả tang ${M.n.toLowerCase()} ${O.n}. Chứng cứ +2.`}
+ if(p.foil){/* cut at the root earlier *//*evok: plot deed (newPlot70)*/evA(t===S?S:t,a,BAL.eff.j70.evExec70);r=`${a===S?"Ngươi":a.name} định ra tay (${M.n.toLowerCase()}) ${O.n}, nhưng đường dây đã bị cắt từ trước. ${t===S?`Ngươi nắm thêm 1 chứng cứ về ${a.name}.`:""}`;try{if(a!==S){a.fails=a.fails||{};a.fails[M.k]=(a.fails[M.k]||0)+1}}catch(e){}}
+ else if(p.trap){/*evok: plot deed*/evA(S,a,BAL.eff.j70.evExec70_2);try{punish(a,`bị bắt quả tang ${M.n.toLowerCase()} nhắm vào ${nm70(t)}`,2)}catch(e){}relAdd(a,S,BAL.eff.j70.exec70);r=`Bẫy của ngươi sập đúng lúc: người của ${a.name} bị bắt quả tang ${M.n.toLowerCase()} ${O.n}. Chứng cứ ${balSg(BAL.eff.j70.evExec70_2)}.`}
  else{window.__j70exec=1;try{
    if(M.k==="joint"){const f=facOf(a);r=f&&jointScheme0?jointScheme0(f,t):""}
    else if(a===S){S.__err=err;try{r=runAct(S,t,M.k)}finally{S.__err=0}}
@@ -225,7 +225,7 @@ function know70(p){const M=pm70(p),r=pr70(p);const a=pa70(p);const ev=a?evG(S,a)
  return `<p class="past">Từ dấu vết ấy: mưu <b>${M.n.toLowerCase()}</b>${p.dig?` (cách: ${r.n.toLowerCase()}; nàng sẽ chờ ${M.opp.map(k=>OPP70[k].n).slice(0,2).join(" hoặc ")})`:""}, vì ${mot70(p)}. Đã chuẩn bị ${Math.min(p.pg,p.need)}/${p.need} bước. Chứng cứ về ${a?a.name:"nàng"}: ${ev}${ev>=2?"":" (cần 2 để tố giác)"}.</p>`}
 function optsSeen70(p){const a=pa70(p),M=pm70(p),r=pr70(p);const mat=S.mat||0,tc=S.tamco||0;const o=[];const A={o:a,n:a.name,k:"rv"};
  o.push(ch70(`Đề phòng: ${r.gd.toLowerCase()}`,{c:{bac:-10},wt:[G70("mưu của nàng khó thành hơn nhiều (giữ được mình)")],k:[R70("nàng vẫn còn ý hại")],ok:()=>{p.g+=25;p.pend=0;return `Ngươi ${r.gd.toLowerCase()}. Mưu của ${a.name} khó thành hơn.`}}));
- if(!p.dig)o.push(ch70("Cho người dò tiếp",{c:{bac:-15},p:40+mat*7+tc/6,wt:[G70(`chứng cứ về ${a.name} +1`),G70("biết rõ cách và thời cơ nàng chờ")],lt:[R70("nàng biết bị dò, ra tay sớm hơn")],ok:()=>{/*evok: plot deed*/evA(S,a,1);p.dig=1;p.pend=0;return `Người của ngươi lần ra: ${a.name} ${r.n.toLowerCase()}, chờ ${OPP70[M.opp[0]].n}. Chứng cứ +1.`},no:()=>{p.pg=Math.max(p.pg,p.need);p.pend=0;return `${a.name} biết mình bị dò, gấp rút ra tay.`}}));
+ if(!p.dig)o.push(ch70("Cho người dò tiếp",{c:{bac:-15},p:40+mat*7+tc/6,wt:[G70(`chứng cứ về ${a.name} ${balSg(BAL.eff.j70.evOk)}`),G70("biết rõ cách và thời cơ nàng chờ")],lt:[R70("nàng biết bị dò, ra tay sớm hơn")],ok:()=>{/*evok: plot deed*/evA(S,a,BAL.eff.j70.evOk);p.dig=1;p.pend=0;return `Người của ngươi lần ra: ${a.name} ${r.n.toLowerCase()}, chờ ${OPP70[M.opp[0]].n}. Chứng cứ ${balSg(BAL.eff.j70.evOk)}.`},no:()=>{p.pg=Math.max(p.pg,p.need);p.pend=0;return `${a.name} biết mình bị dò, gấp rút ra tay.`}}));
  o.push(ch70(`Chặn từ gốc: ${r.st.toLowerCase()}`,{c:{bac:-30},p:42+mat*5+tc/5+(p.dig?12:0),wt:[G70("mưu bị cắt đứt"),G70(`chứng cứ về ${a.name} +1`)],lt:[R70(`${a.name} oán ngươi ${balSg(BAL.eff.j70.no)}`),R70("mưu vẫn tiếp tục")],ok:()=>{p.foil=1;p.pend=0;return `Ngươi ${r.st.toLowerCase()}. Đường dây của ${a.name} đã đứt.`},no:()=>{oanAdd(a,S,BAL.eff.j70.no);p.pend=0;return `Việc chặn không thành, ${a.name} sinh nghi.`}}));
  if(ACT.accuse&&(rkOf(a)<7||rkOf(S)>=3)){const c=ch70(`Tố giác ${a.name} ngay`,{need:[{t:kitWhyEv(a,accNeed(a)),ok:accOK(S,a),w:kitWhenEv()}],p:oAccuse(S,a),wt:[G70("nàng bị xử theo chứng cứ, mưu tan")],lt:[R70("tố hụt: mất chứng cứ, Danh giảm")]});c.go=()=>{p.pend=0;const x=runAct(S,a,"accuse");if(!alive70(a)||a.confined)abandon70(p,"exposed");log(x||"Ngươi tố giác.")};o.push(c)}
  o.push(ch70("Lấy kế trả kế: để nàng ra tay rồi bắt quả tang",{c:{suc:-5},p:32+mat*6+tc/4+(p.dig?15:0),wt:[G70("nàng bị bắt quả tang, bị phạt"),G70(`chứng cứ về ${a.name} +2`)],lt:[R70("bẫy hở: nàng ra tay dễ hơn")],ok:()=>{p.trap=1;p.pend=0;return `Ngươi giăng sẵn người, chờ ${a.name} ra tay.`},no:()=>{p.g-=10;p.pend=0;return `Bẫy của ngươi bị lộ, lại khiến mình lơ là.`}}));
@@ -234,10 +234,10 @@ function optsSeen70(p){const a=pa70(p),M=pm70(p),r=pr70(p);const mat=S.mat||0,tc
  o.push(ch70("Mặc kệ, đợi xem",{wt:[G70("không tốn gì")],k:[R70("mưu vẫn tiến hành")],ok:()=>{p.pend=0;return "Ngươi lặng im chờ xem."}}));return o}
 function optsNpc70(p){const a=pa70(p),t=pt70(p),M=pm70(p),mat=S.mat||0;return[
  ch70(`Lén báo cho ${t.name}`,{c:{bac:-5},wt:[G70(`${t.name} thiện cảm ${balSg(BAL.eff.j70.ok)}`),G70("mưu khó thành")],k:[R70(`nếu lộ, ${a.name} oán ngươi`)],ok:()=>{p.g+=25;relAdd(S,t,BAL.eff.j70.ok);p.pend=0;duc70(S,2,"báo tin cứu người");if(roll(30)){oanAdd(a,S,BAL.eff.j70.ok_2);return `${t.name} cảm kích. Nhưng ${a.name} biết là ngươi mách.`}return `${t.name} cảm kích, đã đề phòng.`}}),
- ch70("Gom chứng cứ, để dành",{c:{bac:-15},p:45+mat*7,wt:[G70(`chứng cứ về ${a.name} +1`)],lt:[R70("mất bạc")],ok:()=>{/*evok: plot deed*/evA(S,a,1);p.pend=0;return `Ngươi nắm thêm 1 chứng cứ về ${a.name}.`},no:()=>{p.pend=0;return "Người của ngươi không lấy được gì."}}),
+ ch70("Gom chứng cứ, để dành",{c:{bac:-15},p:45+mat*7,wt:[G70(`chứng cứ về ${a.name} ${balSg(BAL.eff.j70.evOk_2)}`)],lt:[R70("mất bạc")],ok:()=>{/*evok: plot deed*/evA(S,a,BAL.eff.j70.evOk_2);p.pend=0;return `Ngươi nắm thêm 1 chứng cứ về ${a.name}.`},no:()=>{p.pend=0;return "Người của ngươi không lấy được gì."}}),
  ch70("Ngồi xem hai bên sứt mẻ",{wt:[G70("không dính líu")],k:[R70(`${t.name} có thể gặp nạn`)],ok:()=>{p.pend=0;return "Ngươi đứng ngoài."}})]}
 function optsAft70(p){const a=pa70(p),M=pm70(p),mat=S.mat||0;const o=[];const ev=evG(S,a);
- o.push(ch70("Tra xét đến cùng",{c:{bac:-20},p:30+mat*8+(p.trail||0)*12+(p.dig?10:0),wt:[G70("lần ra kẻ chủ mưu thật"),G70("chứng cứ +2")],lt:[R70("dấu vết đứt, không biết là ai")],ok:()=>{/*evok: plot deed*/evA(S,a,2);p.pend=0;const s=p.acc?servById(p.acc):null;noteAdd(a.id,`đứng sau vụ ${M.n.toLowerCase()} nhắm vào ngươi${s?` (đồng lõa: ${s.name})`:""}`);return `Tra ra rồi: chính ${a.name} đứng sau${s?`, ${s.name} trong cung ngươi là đồng lõa`:""}. Chứng cứ +2.`},no:()=>{p.pend=0;return "Dấu vết đứt giữa chừng; ngươi chưa biết là ai."}}));
+ o.push(ch70("Tra xét đến cùng",{c:{bac:-20},p:30+mat*8+(p.trail||0)*12+(p.dig?10:0),wt:[G70("lần ra kẻ chủ mưu thật"),G70(`chứng cứ ${balSg(BAL.eff.j70.evOk_3)}`)],lt:[R70("dấu vết đứt, không biết là ai")],ok:()=>{/*evok: plot deed*/evA(S,a,BAL.eff.j70.evOk_3);p.pend=0;const s=p.acc?servById(p.acc):null;noteAdd(a.id,`đứng sau vụ ${M.n.toLowerCase()} nhắm vào ngươi${s?` (đồng lõa: ${s.name})`:""}`);return `Tra ra rồi: chính ${a.name} đứng sau${s?`, ${s.name} trong cung ngươi là đồng lõa`:""}. Chứng cứ ${balSg(BAL.eff.j70.evOk_3)}.`},no:()=>{p.pend=0;return "Dấu vết đứt giữa chừng; ngươi chưa biết là ai."}}));
  const s=p.acc?servById(p.acc):null;if(s&&(S.staff||[]).includes(s)&&p.dig)o.push(ch70(`Giao ${s.name} cho Thận Hình ti`,{wt:[G70("bớt một kẻ phản trong cung")],k:[R70("kẻ hầu khác run sợ")],ok:()=>{S.staff.splice(S.staff.indexOf(s),1);(S.staff||[]).forEach(x=>x.loyal=cl(x.loyal-2,0,100));p.pend=0;return `${s.name} bị giải đi.`}}));
  if(rkOf(a)<7||rkOf(S)>=3){const c=ch70(`Tố giác ${a.name}`,{need:[{t:kitWhyEv(a,accNeed(a)),ok:accOK(S,a),w:kitWhenEv()}],p:oAccuse(S,a),wt:[G70("nàng bị xử theo chứng cứ")],lt:[R70("tố hụt: mất chứng cứ, Danh giảm")]});c.go=()=>{p.pend=0;log(runAct(S,a,"accuse")||"Ngươi tố giác.")};o.push(c)}
  o.push(ch70("Nuốt giận, đợi thời",{wt:[G70("Đức +1")],k:[R70(`${a.name} vẫn nhởn nhơ`)],ok:()=>{apply({duc:1});p.pend=0;return "Ngươi nén giận, chờ thời cơ."}}));return o}
@@ -252,7 +252,7 @@ PEND.j70=pp=>{const p=P70(pp.id);if(!p||!S)return null;const a=pa70(p),t=pt70(p)
  if(st==="npc"){if(p.end)return null;return{t:intro70(p,st),o:optsNpc70(p),who:who70(a)}}
  if(st==="aft"){const M=pm70(p);return{t:`<p>${p.resH||p.res||`Vụ ${M.n.toLowerCase()} vừa xảy ra.`}</p><p class="past">Sau vụ này cả cung xôn xao. ${p.kn?`Ngươi đã từng thấy dấu hiệu từ người của ${a.name}.`:"Ngươi chưa rõ ai đứng sau."}</p>`,o:optsAft70(p),who:p.kn?who70(a):null}}
  if(st==="when"){if(p.end)return null;const M=pm70(p);return{t:`<p>Mưu <b>${M.n.toLowerCase()}</b> nhắm vào ${t.name} đã chuẩn bị xong.${p.warnOwn&&S.maid?` ${S.maid.name} thì thầm: hình như bên ${t.name} đã sinh nghi.`:""}</p><p class="past">Chờ được thời cơ tốt thì càng dễ thành, nhưng mỗi tuần chờ thêm là thêm một lần dấu vết có thể lộ.</p>`,o:optsWhen70(p),who:who70(t)}}
- if(st==="ownres"){const M=pm70(p);return{t:`<p>${p.res||`Mưu ${M.n.toLowerCase()} đã xong.`}</p><p class="past">${p.g>0?`${t.name} đã có đề phòng từ trước; nàng có thể đang tra xét.`:"Chưa thấy ai lần ra dấu vết."}</p>`,o:[ch70("Xóa dấu vết",{c:{bac:-20},p:45+(S.tamco||0)/4+(S.mat||0)*4,wt:[G70(`${t.name} mất 1 chứng cứ về ngươi`)],lt:[R70("mất bạc, dấu vết còn đó")],ok:()=>{evA(t,S,-1);return "Ngươi cho người dọn sạch dấu vết."}}),ch70("Để yên",{wt:[G70("không tốn bạc")],k:[R70("dấu vết còn đó")],ok:()=>"Ngươi để mọi chuyện lắng xuống."})],who:who70(t)}}
+ if(st==="ownres"){const M=pm70(p);return{t:`<p>${p.res||`Mưu ${M.n.toLowerCase()} đã xong.`}</p><p class="past">${p.g>0?`${t.name} đã có đề phòng từ trước; nàng có thể đang tra xét.`:"Chưa thấy ai lần ra dấu vết."}</p>`,o:[ch70("Xóa dấu vết",{c:{bac:-20},p:45+(S.tamco||0)/4+(S.mat||0)*4,wt:[G70(`${t.name} mất ${balAb(BAL.eff.j70.evOk_4)} chứng cứ về ngươi`)],lt:[R70("mất bạc, dấu vết còn đó")],ok:()=>{evA(t,S,BAL.eff.j70.evOk_4);return "Ngươi cho người dọn sạch dấu vết."}}),ch70("Để yên",{wt:[G70("không tốn bạc")],k:[R70("dấu vết còn đó")],ok:()=>"Ngươi để mọi chuyện lắng xuống."})],who:who70(t)}}
  if(st==="ownfail"){const s=servById(p.acc);return{t:`<p>${s?s.name:"Kẻ hầu"} bên cung ${t.name} không nhận bạc của ngươi, lại đem chuyện kể với chủ.</p><p class="past">${t.name} nắm thêm 1 chứng cứ về ngươi; mưu này đành bỏ.</p>`,o:[ch70("Đành vậy",{wt:[G70("giữ được bạc")],k:[R70(`${t.name} đề phòng ngươi`)],ok:()=>"Ngươi đành bỏ mưu."})],who:who70(t)}}
  if(st==="start"){return null}
  return null};
@@ -291,7 +291,7 @@ PEND.j70start=pp=>{const v=RV(pp.v),A=ACT[pp.k];if(!v||!A||!S)return null;const 
  O.push(ch70("Thôi",{ok:()=>"Ngươi gác lại ý định."}));
  return{t:`<p>Ngươi định ${A.n.toLowerCase()} ${v.name}.</p><p class="past">Ra tay ngay thì nhanh mà dễ hỏng; bày mưu từ từ thì dễ thành hơn, nhưng mỗi tuần chuẩn bị là thêm một lần người của nàng có thể bắt gặp.${busyOwn?" Ngươi đang theo đuổi đủ mưu, chỉ có thể ra tay ngay.":""}</p>`,o:O,who:pv(v)}};
 /* her pending decision on a held plot comes back when the awaited moment arrives (or after a while) */
-(function(){const s0=step70;step70=function(p){if(p.a==="me"&&p.st==="wait"&&!p.end&&!p.pend){const t=pt70(p);if(!alive70(t)){abandon70(p,"gone");return}p.wt++;if(t!==S&&roll(npcSee70(p))){p.g+=10;if(roll(25))evA(t,S,1)}
+(function(){const s0=step70;step70=function(p){if(p.a==="me"&&p.st==="wait"&&!p.end&&!p.pend){const t=pt70(p);if(!alive70(t)){abandon70(p,"gone");return}p.wt++;if(t!==S&&roll(npcSee70(p))){p.g+=10;if(roll(25))evA(t,S,BAL.eff.j70.evTop)}
   if(!inQ70(p)&&(!p.hold||OPP70[p.hold].ok(p,t)||p.wt>=6)){p.hold=null;p.pend="when"}return}return s0.apply(this,arguments)}})();
 
 /* ---------- testing helpers (in page) ---------- */
@@ -338,7 +338,7 @@ function ordMonth70(){const L=ords70();for(const o of L.slice()){const O=ORD70[o
   if(o.k==="theodoi"){const v=RV(o.tgt);if(!v||!v.alive||v.out){L.splice(L.indexOf(o),1);continue}
    if(traitor70(s)){if(s.spyFor===key(v)&&roll(30))log(`${s.name} theo dõi ${title70(v)} nhưng chẳng mang về tin gì.`);continue}
    if(roll(12)){oanAdd(v,S,BAL.eff.j70.ordMonth70);s.loyal=cl((s.loyal||0)-5,0,100);log(`${R70("Bị lộ:")} ${s.name} bám theo ${title70(v)} bị người bên ấy bắt gặp. ${v.name} oán ngươi ${balSg(BAL.eff.j70.ordMonth70)}, lòng ${s.name} -5.`)}
-   else if(roll(30)){evA(S,v,1);noteAdd(v.id,`${s.name} theo dõi, lấy được 1 chứng cứ (nay ${evG(S,v)})`);log(`${s.name} theo dõi ${title70(v)}: thêm 1 chứng cứ (nay ${evG(S,v)}).`)}}}}
+   else if(roll(30)){evA(S,v,BAL.eff.j70.evOrdMonth70);noteAdd(v.id,`${s.name} theo dõi, lấy được 1 chứng cứ (nay ${evG(S,v)})`);log(`${s.name} theo dõi ${title70(v)}: thêm 1 chứng cứ (nay ${evG(S,v)}).`)}}}}
 /* (a) people close to her protect her unasked: chance from lòng / affection / nature; each one who acts is named in the notice */
 function selfP70maid(){return S.maid?cl(Math.round((S.maid.loyal-50)*4),0,95):0}
 function self70(a){const out=[];const busy=ords70().map(o=>o.sid);
@@ -353,7 +353,7 @@ function self70(a){const out=[];const busy=ords70().map(o=>o.sid);
   const snap={danh:S.danh,sung:S.sung,suc:S.suc,duc:S.duc,bac:S.bac,rank:S.rank,preg:S.preg||0,kids:(S.kids||[]).filter(x=>x.alive).length,cold:!!S.out,scar:!!S.scar};const e0=evG(S,a);const mo=motNow70(a);
   const used=[];let pre="";
   const tq=ordFor70(k,a).find(o=>o.k==="thudoc"&&!traitor70(sv70(o.sid)));
-  if(tq&&roll(30)){const s=sv70(tq.sid);evA(S,a,1);const died=k!=="huydung"&&roll(40);if(died&&tq.sid!=="maid"){S.staff.splice(S.staff.indexOf(s),1)}else s.loyal=cl((s.loyal||0)+5,0,100);try{if(k!=="huydung"&&!(died&&tq.sid!=="maid")&&typeof pzGive==="function"){pzGive(s,1,"nếm độc thay chủ",a,2);if(s.pz)s.pz.dx=1}}catch(e){}
+  if(tq&&roll(30)){const s=sv70(tq.sid);evA(S,a,BAL.eff.j70.evTop_2);const died=k!=="huydung"&&roll(40);if(died&&tq.sid!=="maid"){S.staff.splice(S.staff.indexOf(s),1)}else s.loyal=cl((s.loyal||0)+5,0,100);try{if(k!=="huydung"&&!(died&&tq.sid!=="maid")&&typeof pzGive==="function"){pzGive(s,1,"nếm độc thay chủ",a,2);if(s.pz)s.pz.dx=1}}catch(e){}
    const n=note70({a,k,ok:false,mo,by:[`lệnh ${ORD70.thudoc.n.toLowerCase()} (${s.name})`],gain:evG(S,a)-e0,snap,body:k==="huydung"?`${s.name} thử hộp phấn trên tay trước, tay sưng phồng; phấn độc không chạm mặt ngươi.`:`${s.name} nếm trước bát thuốc, ${died&&tq.sid!=="maid"?"ngã gục, không qua khỏi":"đau bụng mấy ngày nhưng qua được"}; độc không đến miệng ngươi.`,known:true});return n}
   const gc=ordFor70(k,a).filter(o=>o.k==="giuchung"&&!traitor70(sv70(o.sid)));const e1=a.__err||0;if(gc.length)a.__err=e1+15;
   const SP=["ally","gift","spy"].includes(k)?[]:self70(a);const w0=window.__j70self;window.__j70self=SP.reduce((x,y)=>x+y.b,0);
@@ -485,8 +485,8 @@ function scar70(t,sev,a,how){const L=SCAR70[sev];t.scar={sev,d:L.d,need:L.need,p
 A("huydung","Hủy dung",{c:{bac:-30,duc:-8},ok:(a,t)=>(a.bac||0)>=30&&!t.scar,o:a=>odA(a,38+(a.tamco||0)/5+(a.mat||0)*4),x:"Sắc nàng giảm mạnh, ân sủng giảm",f:(a,t)=>{
  ap(a,{bac:-30});if(typeof ducAdd==="function")ducAdd(a,-8,"hủy dung");else ap(a,{duc:-8});a.schemes=(a.schemes||0)+1;const how=window.__j70hd||"phan";
  const c=caught(a,t,how==="phan"||how==="son","hủy dung "+NM(t)+(how==="canh"?" bằng bát canh nóng":how==="meo"?" bằng cách dụ mèo dữ":" bằng phấn trộn độc"));if(c)return c;
- if(!roll(odA(a,38+(a.tamco||0)/5+(a.mat||0)*4))){if(how!=="canh"||roll(40))evA(t,a,1);return `${NMc(a)} định hủy dung ${NM(t)} nhưng không thành, ${how==="canh"?"bát canh chỉ đổ ra sàn":"bị lộ dấu vết"}. `}
- const W=HDR70[how]||HDR70.phan;let x=Math.random(),sev=1;if(x>W[0])sev=2;if(x>W[0]+W[1])sev=3;const L=scar70(t,sev,a,how);if(how==="phan"&&roll(35))evA(t,a,1);
+ if(!roll(odA(a,38+(a.tamco||0)/5+(a.mat||0)*4))){if(how!=="canh"||roll(40))evA(t,a,BAL.eff.j70.evF);return `${NMc(a)} định hủy dung ${NM(t)} nhưng không thành, ${how==="canh"?"bát canh chỉ đổ ra sàn":"bị lộ dấu vết"}. `}
+ const W=HDR70[how]||HDR70.phan;let x=Math.random(),sev=1;if(x>W[0])sev=2;if(x>W[0]+W[1])sev=3;const L=scar70(t,sev,a,how);if(how==="phan"&&roll(35))evA(t,a,BAL.eff.j70.evF_2);
  return `<span class="r">${NMc(t)} bị hủy dung (${L.n}): Sắc -${L.d} khi còn sẹo, Sủng -${L.sung}, Danh -${L.danh}.</span> ${how==="canh"?"Ai cũng bảo là lỡ tay.":how==="meo"?"Con mèo dữ không biết từ đâu ra.":"Phấn son có độc."} `}});
 try{if(!BANDS[2][2].includes("huydung"))BANDS[2][2].push("huydung")}catch(e){}
 /* two-way law (owner 16/11 s21): the player has the same act in her Sát hại group (was NPC-only) */

@@ -22,7 +22,7 @@ function affairExposed(m,how){/* full weight: the man dies; she faces death (fir
 /* talk options with a man: every step carries its odds word and its risk */
 (function(){const t0=talkOpts;talkOpts=function(p){if(!p||p.kind!=="man")return t0.apply(this,arguments);const m=p.ref;if(!m||!m.alive)return[];const k=S.place,risk=lộRisk(k);const A=[];
  A.push({n:"Chào hỏi đúng lễ",o:100,w:{danh:1},x:"hắn quý ngươi +5",go:()=>{m.af+=5}});
- A.push({n:"Liếc mắt đưa tình",o:od(55+S.sac/5),x:`tình ý của hắn +12 · có thể bị người thấy, một phi tần nắm 1 chứng cứ của ngươi: ${chanceW(Math.round(risk/3))}`,l:{},go:()=>{m.tinh+=12+(nv(m,"flirtTinh"));deedAdd(S,"flirt",null,1,`liếc mắt đưa tình với ${m.name}`);if(roll(risk/3)){const v=pick(liveRivals(true));if(v){/*evok: flirt deed written just before*/evA(v,S,1);log(`Có kẻ thấy ngươi liếc mắt với ${m.name}.`)}}}});
+ A.push({n:"Liếc mắt đưa tình",o:od(55+S.sac/5),x:`tình ý của hắn +12 · có thể bị người thấy, một phi tần nắm 1 chứng cứ của ngươi: ${chanceW(Math.round(risk/3))}`,l:{},go:()=>{m.tinh+=12+(nv(m,"flirtTinh"));deedAdd(S,"flirt",null,1,`liếc mắt đưa tình với ${m.name}`);if(roll(risk/3)){const v=pick(liveRivals(true));if(v){/*evok: flirt deed written just before*/evA(v,S,BAL.eff.j22.evGo);log(`Có kẻ thấy ngươi liếc mắt với ${m.name}.`)}}}});
  if(m.tinh>=BAL.tinhLv.warm)A.push({n:"Trao khăn tay",o:od(60+S.tamco/5),x:`hắn giữ khăn tay của ngươi (là tang vật nếu bị lục) · tình ý +15`,go:()=>{m.tinh+=15;m.letters++;S.aff=S.aff||{};S.aff[m.id]=(S.aff[m.id]||0)+1}});
  if(m.tinh>=BAL.tinhLv.close){const w=watcher();A.push({n:"Hẹn gặp riêng",o:w?cl(100-risk,5,95):0,lock:!w,t:`cần một người hầu trung thành (lòng ${balAb(BAL.loy.close)}+) canh cửa`,act:1,x:`đêm ấy kín đáo: Sức +12, hắn thành người che chở · có thai: ${chanceW(trystCh(S))} · hỏng: bị bắt gặp, tội chết`,run:()=>tryst(m,risk)})}
  if(m.tinh>=BAL.tinhLv.warm)A.push({n:"Cắt đứt",o:100,x:"hắn thôi tơ tưởng; giảm hẳn rủi ro",go:()=>{m.tinh=0}});
@@ -38,14 +38,14 @@ function tryst(m,risk){if(roll(risk)){affairExposed(m,`Đêm ${S.name} hẹn ${m
  deck.unshift({n:"Thú tội với Hoàng thượng",t:"Quỳ trước Dưỡng Hòa điện, nhận hết tội.",c:{},o:100,w:{},x:"giữ được mạng (vào lãnh cung), hắn bị xử trảm",dom:"Sủng",go:()=>{const m=manById(S.trueFather);if(m){m.alive=false;log(`${m.name} bị xử trảm.`)}S.pregMismatch=false;cold("Thú tội tư thông")}})}})();
 /* each month: the book may be checked; rivals carry on affairs too and can be found out */
 function affairMonth(){if(!S||!S.men)return"";let ev="";
- if(S.preg&&S.pregMismatch){const q=queenP();const foes=liveRivals(true).filter(v=>rel(v,S)<-20);if((q&&q!==S&&rel(q,S)<0||foes.length)&&roll(10+(S.ksKnows?15:0))){const who=q&&q!==S?q:pick(foes);evA(who,S,3);ev+=`<span class="r">${who.name} cho người tra sổ Kính sự phòng: ngày ngươi có thai không khớp đêm thị tẩm nào.</span> `}}
- if(S.lastTryst!=null&&wk()-S.lastTryst<=3&&roll(4)){const v=pick(liveRivals(true).filter(x=>rel(x,S)<0)||[]);if(v){evA(v,S,2);if((S.mat||0)>=3)ev+=`Tai mắt báo: ${v.name} có vẻ biết chuyện riêng của ngươi. `}}
+ if(S.preg&&S.pregMismatch){const q=queenP();const foes=liveRivals(true).filter(v=>rel(v,S)<-20);if((q&&q!==S&&rel(q,S)<0||foes.length)&&roll(10+(S.ksKnows?15:0))){const who=q&&q!==S?q:pick(foes);evA(who,S,BAL.eff.j22.evAffairMonth);ev+=`<span class="r">${who.name} cho người tra sổ Kính sự phòng: ngày ngươi có thai không khớp đêm thị tẩm nào.</span> `}}
+ if(S.lastTryst!=null&&wk()-S.lastTryst<=3&&roll(4)){const v=pick(liveRivals(true).filter(x=>rel(x,S)<0)||[]);if(v){evA(v,S,BAL.eff.j22.evAffairMonth_2);if((S.mat||0)>=3)ev+=`Tai mắt báo: ${v.name} có vẻ biết chuyện riêng của ngươi. `}}
  for(const v of liveRivals(false)){if(!v.affair&&v.sung<30&&roll(2)){const m=pick(S.men.filter(x=>x.alive));if(m)v.affair=m.id}
   if(v.affair){const m=manById(v.affair);if(!m){v.affair=null;continue}if(roll(3)){m.alive=false;v.affair=null;ev+=`<span class="r">${v.name} tư thông với ${m.name} bị lộ.</span> `;deathSentence(v,`tư thông với ${m.name}`)}}}
  return ev}
 (function(){const m0=monthTick;monthTick=function(){let ev=m0.apply(this,arguments);try{if(!S.dead)ev+=affairMonth()}catch(e){}return ev}})();
 /* spying on a rival may reveal her affair: true, kept as a note and as proof */
-(function(){const d0=doAct;doAct=function(i,k){const v=rivals[i];const r=d0.apply(this,arguments);try{if(k==="spy"&&v&&v.affair&&roll(40)){const m=manById(v.affair);if(m){/*evok: affair (deedSync)*/evA(S,v,2);noteAdd(v.id,`tư thông với ${m.name} (tai mắt tận mắt thấy)`);log(`Tai mắt bắt gặp ${v.name} lén gặp ${m.name}. Chứng cứ +2.`)}}}catch(e){}return r}})();
+(function(){const d0=doAct;doAct=function(i,k){const v=rivals[i];const r=d0.apply(this,arguments);try{if(k==="spy"&&v&&v.affair&&roll(40)){const m=manById(v.affair);if(m){/*evok: affair (deedSync)*/evA(S,v,BAL.eff.j22.evTop);noteAdd(v.id,`tư thông với ${m.name} (tai mắt tận mắt thấy)`);log(`Tai mắt bắt gặp ${v.name} lén gặp ${m.name}. Chứng cứ ${balSg(BAL.eff.j22.evTop)}.`)}}}catch(e){}return r}})();
 /* the man's dossier: only known facts */
 function manCard(m){const f=pMan(m);const known=m.seen===bkey();
  const lines=[tuoi(m.age),`Tính: <b>${netTxt(m)}</b>`,m.tinh>=BAL.tinhLv.known||m.letters?`Hắn quý ngươi: <span class="ef ${m.tinh>=BAL.tinhLv.close?"r":"g"}">${tinhW(m.tinh)}</span>`:`Hắn quý ngươi: <span class="ef n">chưa rõ</span>`,`Ngươi quý hắn: <span class="ef ${m.af>10?"g":"n"}">${typeof quyW==="function"?quyW(m.af):affW(m.af)} · ${m.af}</span>`,known?`Thấy ở ${placeName(S.menW[m.id]||"")} (buổi này)`:"Nơi ở: không rõ"];
@@ -59,8 +59,8 @@ function manCard(m){const f=pMan(m);const known=m.seen===bkey();
 (function(){const a0=affairMonth;affairMonth=function(){let ev=a0.apply(this,arguments);try{if(!S||S.dead)return ev;
  for(const v of liveRivals(false)){const m=v.affair&&manById(v.affair);
   if(m&&!v.preg&&!(v.lastBirth!=null&&S.turn-v.lastBirth<6)&&roll(trystCh(v))){v.preg=1;v.hidden=true;v.pregWk=wk();v.trueFather=m.id;v.pregMismatch=!(v.nightLog||[]).some(w=>Math.abs(w-wk())<=1)&&roll(70)}
-  if(v.preg&&v.pregMismatch){const foes=others(v).filter(x=>x!==S&&x.alive&&rel(x,v)<-20);if(foes.length&&roll(10)){const x=pick(foes);evA(x,v,3)}
-   if(roll(8+(S.mat||0)*5)){/*evok: pregMismatch (deedSync)*/evA(S,v,2);v.pregMismatch=false;noteAdd(v.id,`Tai mắt: ngày ${v.name} có thai không khớp đêm thị tẩm nào trong sổ Kính sự phòng (chứng cứ +2)`);ev+=`Tai mắt báo: ngày ${v.name} có thai không khớp sổ Kính sự phòng. `}}
+  if(v.preg&&v.pregMismatch){const foes=others(v).filter(x=>x!==S&&x.alive&&rel(x,v)<-20);if(foes.length&&roll(10)){const x=pick(foes);evA(x,v,BAL.eff.j22.evTop_2)}
+   if(roll(8+(S.mat||0)*5)){/*evok: pregMismatch (deedSync)*/evA(S,v,BAL.eff.j22.evTop_3);v.pregMismatch=false;noteAdd(v.id,`Tai mắt: ngày ${v.name} có thai không khớp đêm thị tẩm nào trong sổ Kính sự phòng (chứng cứ ${balSg(BAL.eff.j22.evTop_3)})`);ev+=`Tai mắt báo: ngày ${v.name} có thai không khớp sổ Kính sự phòng. `}}
   if(!v.preg){v.pregMismatch=false;v.trueFather=null}}}catch(e){}return ev}})();
 /* older lives get the men added later (the họa sư) */
 (function(){const m0=menInit;menInit=function(){const r=m0.apply(this,arguments);try{if(S&&S.men&&S.men.length<MROLES.length){for(let i=S.men.length;i<MROLES.length;i++){const r2=MROLES[i];S.men.push({id:"m"+i,role:r2[0],rw:r2[1],haunts:r2[2],age:r2[3]+R(r2[4]),name:`${r2[0]} ${pick(["Tiêu","Lục","Hàn","Bùi","Tống","Mạnh"])} ${pick(MALEN)}`,loyal:40+R(50),af:0,tinh:0,letters:0,trysts:0,alive:true,knowsMe:[]})}}}catch(e){}return r}})();

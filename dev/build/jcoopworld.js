@@ -804,7 +804,7 @@ P2H.briber=m=>{const a=(CW.brb||{})[m.rid];if(!a)return;delete CW.brb[m.rid];if(
  if(m.no)h=`<p><b>${nm}</b> nay không còn hầu ở cung ${on}.</p>`;
  else{try{deedAdd(S,"sbribe",null,1,`mua chuộc người hầu của ${o?o.name:"cung khác"}`)}catch(e){}
   if(m.ok){apply({bac:-B.pay});if(s)s.spyFor="me";h=`<p><b>${nm}</b> nhận bạc, thành tai mắt của ngươi trong cung ${on}.</p><p>${fmt({bac:-B.pay})}</p>`}
-  else if(m.told){let d=0;if(o&&o.alive){d=evA(o,S,1);relAdd(S,o,BAL.eff.jcoopworld.briber)}h=`<p><span class="r"><b>${nm}</b> từ chối bạc, bẩm với ${on}.</span></p>${d?`<p class="r">${on} nắm thêm ${d} chứng cứ của ngươi.</p>`:""}`}
+  else if(m.told){let d=0;if(o&&o.alive){d=evA(o,S,BAL.eff.jcoopworld.evBriber);relAdd(S,o,BAL.eff.jcoopworld.briber)}h=`<p><span class="r"><b>${nm}</b> từ chối bạc, bẩm với ${on}.</span></p>${d?`<p class="r">${on} nắm thêm ${d} chứng cứ của ngươi.</p>`:""}`}
   else h=`<p><b>${nm}</b> từ chối, trả lại bạc.</p>`}
  pushModal({t:"Mua chuộc",h});showModal();render()};
 P2H.nbribe=m=>{if(S.dead||!isSrvMe())return;const v=RV(m.r);if(!v||!v.alive)return;try{pushDil(mkP("cnvBribe",{r:v.id}),"Bạc lạ")}catch(e){console.error(e)}showModal();render()};

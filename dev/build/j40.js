@@ -27,7 +27,7 @@ function mindRun(v,t,k,err){v.__err=err||0;let r="";try{r=k==="plant"?runAct(v,t
  v.fails=v.fails||{};const failed=FAILRX.test(r);if(failed)v.fails[k]=(v.fails[k]||0)+1;else if(r)v.fails[k]=0;
  if(r&&!failed&&k!=="spy"&&k!=="accuse"&&k!=="vp"&&k!=="xx")mindBelief(t,v,k);
  /* Xảo quyệt over-plots: a success may leave a clue behind */
- if(r&&!failed&&traitsOf(v).includes("Xảo quyệt")&&BIG.includes(k)&&roll(20)){/*evok: after a BIG act (runAct deed)*/evA(t,v,1);mindLog(v,"_clue");if(t===S)r+=`(Để lại dấu vết: ngươi nắm thêm 1 chứng cứ về ${v.name}.) `}
+ if(r&&!failed&&traitsOf(v).includes("Xảo quyệt")&&BIG.includes(k)&&roll(20)){/*evok: after a BIG act (runAct deed)*/evA(t,v,BAL.eff.j40.evMindRun);mindLog(v,"_clue");if(t===S)r+=`(Để lại dấu vết: ngươi nắm thêm 1 chứng cứ về ${v.name}.) `}
  return r}
 /* knowledge: a victim of a hidden blow only guesses who did it; wit and evidence help; a wrong guess turns her hatred on someone else (the player too) */
 function mindBelief(t,v,k){if(!t||t===S||!t.alive)return;const ev=(t.evm&&t.evm[key(v)])||0;const p=cl(35+witOf(t)/2+(ev>0?25:0)-witOf(v)/4,10,90);mindLog(t,"_belief");
@@ -60,7 +60,7 @@ function mindTell(v,t,k){mindLog(v,"_tell");const tc=witOf(v);let c=12+(S.mat||0
 (function(){const r0=rivalsBuoi;rivalsBuoi=function(){S.bqN=(S.bqN||0)+1;let ev="";try{for(const v of liveRivals(true)){const P=v.plan;if(!P||!v.alive||v.out)continue;if(P.due>bq())continue;v.plan=null;const t=byKey(P.t);if(!t||(t!==S&&(!t.alive||t.out))||(t===S&&S.dead))continue;
    let err=P.err||0;const guard=t===S&&S.onGuard&&S.onGuard[v.id];if(guard){err+=25;delete S.onGuard[v.id]}
    let ok=false;try{ok=ACT[P.k].ok(v,t)}catch(e){}if(!ok){mindLog(v,"_abandon");continue}
-   const r=mindRun(v,t,P.k,err);if(guard&&FAILRX.test(r))evA(S,v,1);ev+=seenNPC(v,t,r);if(S.dead)return ev}}catch(e){}
+   const r=mindRun(v,t,P.k,err);if(guard&&FAILRX.test(r))evA(S,v,BAL.eff.j40.evTop);ev+=seenNPC(v,t,r);if(S.dead)return ev}}catch(e){}
   return ev+r0.apply(this,arguments)}})();
 /* someone with a plan in hand waits for it instead of starting another */
 (function(){const n0=npcAct;npcAct=function(v,t){if(v&&v.plan)return"";return n0.apply(this,arguments)}})();

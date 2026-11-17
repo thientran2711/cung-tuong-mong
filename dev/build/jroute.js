@@ -82,7 +82,7 @@ function rtTtCards(){const T=rtS(),A=[],tt=T.tt,ducK=S.duc>=BAL.route.guiltDuc?"
   A.push(rtCard({id:"tt1",n:`Trao tín vật cho ${rtMnm(m)}`,t:"Một chiếc khăn thêu, một nhành trâm: lời không dám nói, gửi vào vật.",art:RT_ART.tt,c:{...BAL.route.token},o,k:1,
    need:[[`người đưa tin: cung nữ thân cận (lòng ${balAb(BAL.loy.mid)}+) hoặc y đang ở đây`,maid||here]],x:"tình ý +15 · y giữ tín vật",lx:"tín vật lọt vào tay người khác · Lời ra tiếng vào +12",kem:`Lời ra tiếng vào +6 · tín vật là tang vật nếu bị lục${ducK?" · "+ducK:""}`,
    go:()=>{m.tinh=(m.tinh||0)+15;m.letters=(m.letters||0)+1;tt.tok=1;rtHeat(6);if((m.tinh||0)>=40)tt.st=2;log(`${rtMnm(m)} nhận tín vật, giấu vào ngực áo.`)},
-   fail:()=>{rtHeat(12);const v=pick(liveRivals(true).filter(x=>(x.mat||0)>=2))||null;if(v&&roll(BAL.route.tokenLost)){evA(v,S,1);log(`Tín vật bị ${rtVn(v)} nhặt được. Nàng giữ làm chứng cứ.`)}else log("Tín vật rơi dọc đường; có người nhặt được, chưa rõ là ai.")}}))}
+   fail:()=>{rtHeat(12);const v=pick(liveRivals(true).filter(x=>(x.mat||0)>=2))||null;if(v&&roll(BAL.route.tokenLost)){evA(v,S,BAL.eff.jroute.evFail);log(`Tín vật bị ${rtVn(v)} nhặt được. Nàng giữ làm chứng cứ.`)}else log("Tín vật rơi dọc đường; có người nhặt được, chưa rõ là ai.")}}))}
  if(tt.st>=2){const sp=rtSpot(m);const night=rtNight();
   if(tt.st===2||!night||!sp||sp.k==="tyv"||sp.k==="tn"){const o=sp?rtSeeO(sp.k):30;
    A.push(rtCard({id:"tt2",n:`Hẹn gặp lén ${rtMnm(m)}`,t:sp?`Buổi này ${sp.why}.`:`Buổi này không có chỗ nào gặp ${rtMnm(m)} được.`,art:RT_ART.hen,c:{...BAL.route.meet},o,k:2,
@@ -107,7 +107,7 @@ function rtNightOk(m,k){const T=rtS(),tt=T.tt;m.trysts=(m.trysts||0)+1;m.tinh=(m
 function rtSeen(m,k,what){const W=rtWit(k);rtHeat(what==="dem"?30:20);
  const v=W.length?pick(W):null;
  if(!v){log(`Có tiếng bước chân ngoài hiên; ngươi và ${rtMnm(m)} kịp tản đi. Người trong cung bắt đầu xì xào.`);return}
- evA(v,S,what==="dem"?3:2);try{noteAdd(v.id,`bắt gặp ngươi với ${m.name}`)}catch(e){}rtCaughtBy(v,m,what)}
+ evA(v,S,what==="dem"?BAL.eff.jroute.evRtSeen[0]:BAL.eff.jroute.evRtSeen[1]);try{noteAdd(v.id,`bắt gặp ngươi với ${m.name}`)}catch(e){}rtCaughtBy(v,m,what)}
 /* what the witness does goes through the shared motive gate + record (OD:L35): blackmail = uyhiep, report = tocao (schedules3-r4) */
 function rtGateT(v,t,k){try{if(typeof motiveOK!=="function")return{ok:true,why:""};const g=motiveOK(v,t,k);if(typeof j95actLog==="function")j95actLog(v,t,k,g);return g}catch(e){return{ok:true,why:""}}}
 function rtGate(v,k){return rtGateT(v,S,k)}
@@ -136,8 +136,8 @@ function rtTcCards(){const T=rtS(),A=[];const tc=T.tc;
  step("maid",{n:"Dặn cung nữ tâm phúc",t:S.maid?`${S.maid.name} sẽ đi cùng hay ở lại che mắt cho ngươi.`:"Cần một cung nữ thân cận.",art:RT_ART.tc,k:1,o:od(55+mL/3),need:[[`cung nữ thân cận một lòng (lòng ${balAb(BAL.loy.trust)}+, có ${mL})`,mL>=BAL.loy.trust]],
   x:"đêm trốn: cơ may +5 · may được y phục cung nữ",lx:"nàng sợ hãi từ chối · lòng -15",kem:"nàng biết chuyện của ngươi",go:()=>{P.maid=1},fail:()=>{if(S.maid)S.maid.loyal=Math.max(0,S.maid.loyal-15);if(roll(BAL.route.maidBlab)){rtHeat(20);log(`<span class="r">${S.maid?S.maid.name:"Cung nữ"} hoảng sợ, lỡ lời với người ngoài.</span>`)}}});
  step("home",{n:"Gửi thư về nhà",t:"Nhờ người mang mật thư ra cửa cung: người nhà sẵn xe đón và dời nhà đi trước.",art:RT_ART.thu,c:{...BAL.route.home},o:od(55+(S.mat||0)*3+rtDf().o),k:1,
-  x:"có người đón · nhà không bị liên lụy",lx:"thư bị chặn giữa đường · chứng cứ về ngươi +2 · Lời ra tiếng vào +15",kem:S.origin&&S.origin.k==="nc"?"nhà ở Nam Chiếu xa xôi, thư đi lâu":"",
-  go:()=>{P.home=1},fail:()=>{rtHeat(15);const v=pick(liveRivals(true).filter(x=>(x.mat||0)>=2))||null;if(v){evA(v,S,2);log(`<span class="r">Mật thư của ngươi rơi vào tay ${rtVn(v)}.</span>`)}else log("Mật thư bị chặn ở cửa cung; chưa rõ ai giữ.")}});
+  x:"có người đón · nhà không bị liên lụy",lx:`thư bị chặn giữa đường · chứng cứ về ngươi ${balSg(BAL.eff.jroute.evFail_2)} · Lời ra tiếng vào +15`,kem:S.origin&&S.origin.k==="nc"?"nhà ở Nam Chiếu xa xôi, thư đi lâu":"",
+  go:()=>{P.home=1},fail:()=>{rtHeat(15);const v=pick(liveRivals(true).filter(x=>(x.mat||0)>=2))||null;if(v){evA(v,S,BAL.eff.jroute.evFail_2);log(`<span class="r">Mật thư của ngươi rơi vào tay ${rtVn(v)}.</span>`)}else log("Mật thư bị chặn ở cửa cung; chưa rõ ai giữ.")}});
  step("route",{n:"Dò đường cổng Thần Vũ",t:"Đi một vòng giờ đổi phiên gác, nhớ từng ngã rẽ.",art:RT_ART.tc,c:{...BAL.route.scout},o:od(55+(S.mat||0)*4-rtDuc()+rtDf().o),k:2,x:"đêm trốn: cơ may +6",lx:"bị hỏi han giữa đường · Lời ra tiếng vào +10",go:()=>{P.route=1},fail:()=>{rtHeat(10)}});
  step("pass",{n:"Làm giả yêu bài xuất cung",t:"Một thái giám Nội vụ phủ nhận khắc yêu bài, giá không rẻ.",art:RT_ART.lo,c:{...BAL.route.pass},o:od(42+S.tamco/3+rtDf().o),k:1,x:"có yêu bài xuất cung",lx:"mất bạc · tên thái giám ôm bạc biến mất · Lời ra tiếng vào +12",go:()=>{P.pass=1},fail:()=>{rtHeat(12)}});
  if(P.maid)step("cloth",{n:"May y phục cung nữ",t:"Cung nữ tâm phúc lén may một bộ áo xanh như của nàng.",art:RT_ART.tc,c:{...BAL.route.cloth},k:1,x:"có y phục cung nữ",go:()=>{P.cloth=1}});
@@ -253,7 +253,7 @@ PEND.rtAn=pp=>{if(!S)return null;return{ti:"Một đời an nhiên",t:`<p>Đã $
 function rtMonth(){if(!rtRoad()||!S.rt)return"";const T=S.rt;let ev="";
  const w=watcher();T.heat=cl(T.heat-RTC.decay-(w&&w.loyal>=BAL.loy.top?2:0),0,100);if(S.out)T.wasCold=1;
  /* someone hostile pieces it together (two-way: same as NPCs seeing NPCs) */
- const m=rtMan();if(m&&T.heat>=40&&!T.bm&&roll(T.heat/4)){const foes=liveRivals(true).filter(v=>aff(v,S)<0||(v.ghen||0)>=50);if(foes.length){const v=pick(foes);evA(v,S,1);rtCaughtBy(v,m,"gap")}}
+ const m=rtMan();if(m&&T.heat>=40&&!T.bm&&roll(T.heat/4)){const foes=liveRivals(true).filter(v=>aff(v,S)<0||(v.ghen||0)>=50);if(foes.length){const v=pick(foes);evA(v,S,BAL.eff.jroute.evRtMonth);rtCaughtBy(v,m,"gap")}}
  if(T.bm&&T.bm.since<S.turn&&T.bm.paid!==S.turn&&RV(T.bm.v)&&RV(T.bm.v).alive){if((T.bm.k||0)>=8){log(`${RV(T.bm.v).name} đã vơ đủ; nàng thôi đòi bạc.`);T.bm=null}else if(!rtGate(RV(T.bm.v),"uyhiep").ok){log(`${RV(T.bm.v).name} thôi đòi bạc của ngươi.`);T.bm=null}else rtPush("rtBm",{v:T.bm.v})}
  /* her children by the lover */
  for(const k of rtKidsAlive())if(k.tf&&!k.tfOk&&(k.age||0)>=3&&(k.age||0)<=12&&roll(RTC.kidRoll)){rtPush("rtKid",{k:k.name});break}

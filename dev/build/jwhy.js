@@ -44,7 +44,7 @@ function spyRoll(a,t,ag){return cl(Math.round(spyRaw(a,t,ag)+lotB(a,"Mưu kế")
 (function(){const A0=ACT.spy;if(!A0)return;A0.o=(a,t)=>t?spyO(a,t):oSpy(a);A0.why=(a,t)=>spyFactors(a,t);
  A0.f=(a,t)=>{ap(a,{bac:-15});const o=spyRoll(a,t);if(roll(o)){ap(a,{tamco:2});return spyFind(a,t)}relAdd(a,t,BAL.eff.jwhy.f);return `${NMc(a)} dò la ${NM(t)}: <span class="r">bị phát hiện</span>. `};})();
 /* NPC small act "người của X dò hỏi" (j28): same formula instead of a flat 40 */
-(function(){try{if(typeof SOC==="object"&&SOC.spy){SOC.spy.run=(v,t)=>{evA(v,t,roll(spyRoll(v,t))?1:0);return `Người của ${v.name} dò hỏi giờ giấc của ${NM(t)}`}}}catch(e){}})();
+(function(){try{if(typeof SOC==="object"&&SOC.spy){SOC.spy.run=(v,t)=>{evA(v,t,roll(spyRoll(v,t))?BAL.eff.jwhy.evRun[0]:BAL.eff.jwhy.evRun[1]);return `Người của ${v.name} dò hỏi giờ giấc của ${NM(t)}`}}}catch(e){}})();
 /* her maid at home: "Sai đi dò la" — SHE chooses whom (owner 08:45Z: never a silent random target for a player act).
    The card names the current target ("nhắm: …", her last choice, else the one most hostile to her that she knows); tapping it
    opens a kit dialog with every consort she can send the maid to, each with its own odds word and "Vì sao…?" from the same
@@ -57,7 +57,7 @@ function spyTarget(){S.mspy=S.mspy||{};const L=spyList();if(!L.length)return nul
  if(!t){const K=L.filter(spyKnown);t=(K.length?K:L).slice().sort((x,y)=>(danger(y,S)-danger(x,S))||(y.sung-x.sung))[0];S.mspy={b:spyBk(),id:t.id}}
  S.mspy.b=spyBk();return t}
 function spyMaidRun(t,ag){const m=ag||whyMaidInit(S.maid);S.mspy={b:spyBk(),id:t.id};const o=spyRoll(S,t,m);const ok=roll(o);
- if(ok){if(typeof j78maidSpy==="function")j78maidSpy(ag);else{log(evA(S,t,1)?`${m.name} dò la ${spyWho(t)}: chứng cứ +1.`:`${m.name} dò la ${spyWho(t)}: không tìm ra điều gì sai trái.`)}}
+ if(ok){if(typeof j78maidSpy==="function")j78maidSpy(ag);else{log(evA(S,t,BAL.eff.jwhy.evSpyMaidRun)?`${m.name} dò la ${spyWho(t)}: chứng cứ ${balSg(BAL.eff.jwhy.evSpyMaidRun)}.`:`${m.name} dò la ${spyWho(t)}: không tìm ra điều gì sai trái.`)}}
  else{if(ag)ag.loyal=cl((ag.loyal||0)-5,0,100);else apply({maid:-5});if(typeof j78maidFail==="function")j78maidFail(ag);else log(`${m.name} bị bắt gặp khi dò la ${spyWho(t)}: lòng -5.`)}
  window.__lastOk=ok;return ok}
 /* review/pick-hint (owner 15/11 "Giải thích khó hiểu quá"): the picker's "what decides the odds" line is ONE short sentence — who raises it

@@ -13,7 +13,7 @@ const CN_FL=rdFb;/* the road flag book (jroad.js rdFb; one helper for every orig
 /* named predicates the odds terms in BAL.road.fx read (rdOdds "q"/"k"); their bars are BAL.road keys */
 RDQ.cnchuUp=A=>CNCHU_UP(A)>=0;RDQ.cnchuGap=A=>CNCHU_UP(A)>=BAL.road.cn_chu.gap;RDQ.cnTinhDanh=()=>S.danh>=BAL.road.cn_tinh.danh;RDQ.artY=()=>S.arts&&S.arts.y||0;
 /* cn_ban twist proven: the .4 win put a "vụ bỏ thuốc ở giếng" evidence point on the Hoàng hậu (j67 cn_ban E.win) — take it back */
-const CN_HHCLEAR=()=>{try{if(!qOn()||rdEnd(BAL.road.first-1)!=="win")return"";const q=rivals[0];const W=q.wrongs||[];const i=W.findIndex(d=>d.k==="story"&&/giếng/.test(d.x||""));if(i>=0){q.dw=Math.max(0,(q.dw||0)-W[i].w);W.splice(i,1)}evA(S,q,-1);return `Chứng cứ về Hoàng hậu ${q.name} −1: nàng được rửa tiếng.`}catch(e){return""}};
+const CN_HHCLEAR=()=>{try{if(!qOn()||rdEnd(BAL.road.first-1)!=="win")return"";const q=rivals[0];const W=q.wrongs||[];const i=W.findIndex(d=>d.k==="story"&&/giếng/.test(d.x||""));if(i>=0){q.dw=Math.max(0,(q.dw||0)-W[i].w);W.splice(i,1)}evA(S,q,BAL.eff.jrd_cn.evCN_HHCLEAR);return `Chứng cứ về Hoàng hậu ${q.name} −${balAb(BAL.eff.jrd_cn.evCN_HHCLEAR)}: nàng được rửa tiếng.`}catch(e){return""}};
 /* who stands in for the Hoàng hậu when there is none (rivals[0] dead/deposed, or she is the Hoàng hậu herself): the Thái hậu, else the
    Emperor (review road-b1-r1 item 6). Q = title, QP = palace, QI = how that person says "I", QY = how that person calls her. */
 const CN_QK=()=>{try{return qOn()?"hh":S.thDead?"emp":"th"}catch(e){return"hh"}};

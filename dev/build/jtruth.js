@@ -72,7 +72,7 @@ function harmTxt(t){const W=t===S?"ngươi":t.name;return pick([`giờ giấc đ
 function spyKnowB(a,t){try{const T=BAL.truth;const w=((a.know||{})[key(t)]);return w!=null&&wk()-w<=T.spyKnowW?T.spyKnowB:0}catch(e){return 0}}
 function spyKnow(a,t){a.know=a.know||{};a.know[key(t)]=wk();const ks=Object.keys(a.know);if(ks.length>12)delete a.know[ks[0]]}
 /* one spying attempt that succeeded: returns the act line (who · what · result); ev:true when real proof was found */
-function spyFind(a,t,verb){verb=verb||"dò la";const d0=deedFor(a,t);const n=evA(a,t,1);
+function spyFind(a,t,verb){verb=verb||"dò la";const d0=deedFor(a,t);const n=evA(a,t,BAL.eff.jtruth.evN);
  if(n>0){const d=d0;if(t===S)return `${NMc(a)} ${verb} ngươi: <span class="r">nắm được chuyện ngươi ${d?d.x:"từng làm điều sai trái"}</span>. `;
   if(a===S)return `Ngươi ${verb} ${t.name}: <span class="g">tìm ra chuyện nàng ${d?d.x:"từng làm điều sai trái"}, thêm một chứng cứ</span>. `;
   return `${a.name} ${verb} ${t.name}: nắm được một chuyện sai trái của nàng. `}
@@ -89,7 +89,7 @@ function frameDef(p,a){const T=BAL.truth;const base=T.clearBase+(p.mat||0)*T.cle
  const D=C.sort((x,y)=>y.o-x.o)[0];return {o:cl(Math.round(D.o),T.clearMin,T.clearMax),how:D.how}}
 /* the framer exposed: same for everyone */
 function frameExpose(a,p,how){const T=BAL.truth;ap(a,{danh:-T.fDanh});if(typeof ducAdd==="function")ducAdd(a,-T.fDuc,"vu khống người khác");else ap(a,{duc:-T.fDuc});
- relAdd(a,p,BAL.eff.jtruth.frameExpose);evA(p,a,2);punish(a,`vu khống ${p===S?"ngươi":p.name}`,2);
+ relAdd(a,p,BAL.eff.jtruth.frameExpose);evA(p,a,BAL.eff.jtruth.evFrameExpose);punish(a,`vu khống ${p===S?"ngươi":p.name}`,2);
  const A=a===S?"Ngươi":a.name,P=p===S?"Ngươi":p.name;return `${P} minh oan được: ${how}. ${A} bị lộ là kẻ vu khống: Danh -${T.fDanh}, Đức -${T.fDuc}, bị phạt. `}
 let FRAME_LAST="";try{lifeStore("FRAME_LAST",()=>{FRAME_LAST=""})}catch(e){}/* per life (review/newlife-reset-r1): the last framing sentence names people of that life */
 (function(){const f0=framed;framed=function(p,why){FRAME_LAST="";const a=ACTX.a&&ACTX.a!==p?ACTX.a:null;if(!a||!p||window.__truthAuto)return f0.apply(this,arguments);
@@ -114,7 +114,7 @@ PEND.vuoan=pp=>{const a=byKey(pp.a);if(!a||!S)return null;const T=BAL.truth;cons
  O.push({n:"Xin tra sổ Kính sự phòng",fx:{},hint:`${word(clamp(base+(ks?T.ksB:-10)))} · ${H}`,risk:RK,j67:"tốn: không tốn gì",go:go(base+(ks?T.ksB:-10),ks?"sổ Kính sự phòng ghi đêm ấy ngươi hầu Hoàng thượng":"sổ Kính sự phòng và người gác cửa xác nhận ngươi không rời cung")});
  O.push(kitOffIf({n:S.maid?`Gọi ${S.maid.name} làm chứng`:"Gọi cung nữ tâm phúc làm chứng",fx:{},hint:`${word(clamp(base+T.wB))} · ${H}`,risk:RK,j67:"tốn: không tốn gì",go:go(base+T.wB,`cung nữ ${S.maid.name} làm chứng ngươi không rời cung`)},!!wit,S.maid?`lòng ${S.maid.name} chưa tới ${T.witLoy} (có ${S.maid.loyal||0})`:"thiếu cung nữ thân cận",kitWhenWit()));
  O.push(kitOffIf({n:"Mời Thái y nghiệm hình nhân",fx:{bac:-10},hint:`${word(clamp(base+T.tyB))} · ${H}`,risk:RK,j67:"tốn: Bạc -10",go:go(base+T.tyB,"Thái y nghiệm ra hình nhân còn mới, kim chỉ không phải của cung ngươi")},!!ty,`thiếu thái y tâm phúc hoặc y thuật ${T.tyArts} trở lên`,kitWhenTy()));
- O.push(kitOffIf({n:`Trình chứng cứ về ${a.name}`,fx:{},hint:`${word(clamp(base+T.evB*2+10))} · ${H}`,risk:RK,j67:`tốn: 1 chứng cứ về ${a.name}`,go:()=>{evA(S,a,-1);if(roll(clamp(base+T.evB*2+10)))clear(`ngươi trình chứng cứ về ${a.name}`);else guilty(false)}},ev>=1,kitWhyEv(a,1),kitWhenEv()));
+ O.push(kitOffIf({n:`Trình chứng cứ về ${a.name}`,fx:{},hint:`${word(clamp(base+T.evB*2+10))} · ${H}`,risk:RK,j67:`tốn: 1 chứng cứ về ${a.name}`,go:()=>{evA(S,a,BAL.eff.jtruth.evGo);if(roll(clamp(base+T.evB*2+10)))clear(`ngươi trình chứng cứ về ${a.name}`);else guilty(false)}},ev>=1,kitWhyEv(a,1),kitWhenEv()));
  O.push({n:"Nhận tội, xin khoan hồng",fx:{},hint:"chịu tiếng nhẹ: Danh -6; kẻ vu oan không bị lộ",risk:"an toàn",j67:"tốn: không tốn gì",go:()=>guilty(true)});
  return{t:`<p>Cung Chính ti khám tẩm cung ngươi, tìm thấy hình nhân bùa ngải. Có kẻ tố ngươi ${why.replace(/^bị vu /,"")}.</p><p class="past">Ngươi không làm việc ấy. Chọn cách minh oan.</p>`,o:O,who:pv(a)}};
 

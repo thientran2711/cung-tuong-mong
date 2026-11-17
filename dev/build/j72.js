@@ -150,7 +150,7 @@ function q72End(x,res,X,late){const q=q72();const i=q.a.indexOf(x);if(i>=0)q.a.s
  q72Ap(o.fx);if(o.r)q72Rel(X.A,o.r);if(o.rb&&X.B)q72Rel(X.B,o.rb);const d=o.d==null?(res==="ok"?1:0):o.d;if(d)q72DebtAdd(X.A,d);
  if(o.fn){try{ev+=o.fn(X,x)||""}catch(e){console.error(e)}}
  if(o.pun){try{punish(S,q72Txt(o.pun,X),1)}catch(e){}}
- if(o.ev){const E=o.ev==="B"?X.B:X.A;if(E&&(E.k==="rv"||E.k==="hh"))evA(E.o,S,1)}
+ if(o.ev){const E=o.ev==="B"?X.B:X.A;if(E&&(E.k==="rv"||E.k==="hh"))evA(E.o,S,BAL.eff.j72.evQ72End)}
  if(o.cc&&typeof ccStep==="function"){try{ev+=ccStep(S)||""}catch(e){}}
  if(res==="ok"&&o.ch&&T72I[o.ch])q.ch.push({tid:o.ch,at:wk()+4+R(5),rk:x.rk,ri:x.ri,bk:x.bk,bi:x.bi,p:x.p});
  q.n[res]=(q.n[res]||0)+1;
@@ -392,7 +392,7 @@ window.q72Bot=function(){if(!S||S.dead||Q.length||!q72On())return false;const q=
  T7("doi_thuoc","inv",{r:"doc",b:"rsv",bf:s=>netIs(s,"greed"),p:X=>({cn:X.B.n,own:X.B.own.name}),t:"Tra ai lấy trộm nhân sâm ở Thái y viện",h:"“Nhân sâm trong kho hụt hẳn mấy cân. Thần không dám báo khi chưa rõ. {Nc} tra giúp thần.”",dl:4,
   s:[G("tyv","Đối chiếu sổ thuốc, hỏi người ra vào","mat",50,2),C(X=>`Ngươi biết sự thật: ${X.p.cn}, người hầu của ${X.p.own}, lấy trộm`,O("Báo thái y đúng như vậy",{fn:X=>{relAdd(S,X.B.own,BAL.eff.j72.fn_5);if(X.B.o)X.B.o.loyal=cl((X.B.o.loyal||0)-10,0,100);return `${X.p.own} mất mặt (${balSg(BAL.eff.j72.fn_5)}); ${X.p.cn} bị phạt.`}}),O(X=>`Bảo ${X.p.cn} lén trả lại`,{w:{duc:2},rb:10}))],ok:{r:10,fx:{mat:1}},no:{r:-4}});
  T7("dem_chung","risk",{r:"rsv",rf:s=>(s.loyal||50)<BAL.loy.low,b:"rv",bf:(o,z,A)=>o===A.own&&aff(o,S)<0,t:"Gặp {A} giờ Tý ở vườn ngự",h:X=>`“Nô tỳ hầu ${X.A.own.name} đã chán cảnh bị hành hạ. Nàng ấy làm nhiều chuyện sau lưng {N}. Giờ Tý, ở hòn non bộ vườn ngự, nô tỳ trao vật chứng.”`,dl:3,
-  tr:"Nàng ấy quả ghét ngươi, và người hầu này quả bất mãn với chủ.",s:[G("vuon","Ra vườn giờ Tý (chỉ buổi tối)","tamco",55,1,{},"b",{bu:B4L})],ok:{r:8,d:0,fn:X=>{evA(S,X.B.o,1);return `Chứng cứ về ${X.B.n} +1.`},x:"Chứng cứ về {B} +1"},no:{},bad:{fx:{danh:-4},ev:"B"},badT:"Người của {B} rình được ngươi đêm khuya ngoài vườn."});
+  tr:"Nàng ấy quả ghét ngươi, và người hầu này quả bất mãn với chủ.",s:[G("vuon","Ra vườn giờ Tý (chỉ buổi tối)","tamco",55,1,{},"b",{bu:B4L})],ok:{r:8,d:0,fn:X=>{evA(S,X.B.o,BAL.eff.j72.evFn);return `Chứng cứ về ${X.B.n} ${balSg(BAL.eff.j72.evFn)}.`},x:`Chứng cứ về {B} ${balSg(BAL.eff.j72.evFn)}`},no:{},bad:{fx:{danh:-4},ev:"B"},badT:"Người của {B} rình được ngươi đêm khuya ngoài vườn."});
  T7("rsv_tin","trade",{r:"rsv",rf:s=>(s.loyal||50)<BAL.loy.warn,acc:X=>{apply({mat:1});q72DebtAdd(X.A,-1)},accX:"Tai mắt +1; ngươi nợ nàng một ân.",t:"Đổi ơn: tin của {A}, lời xin cho nàng",
   h:X=>`“Nô tỳ hầu ${X.A.own.name} mà chẳng được đối đãi tử tế. Nô tỳ kể {N} nghe chuyện bên ấy; chỉ xin {N} nói với Tổng quản cho nô tỳ được thưởng Tết như người khác.”`,tr:"Nhận lời: ngay Tai mắt +1, ngươi nợ nàng một ân.",dl:4,
   s:[G("ksp","Nói với Tổng quản ở Kính sự phòng","danh",60,1)],ok:{r:10,d:1},no:{r:-10}});
@@ -466,7 +466,7 @@ window.q72Bot=function(){if(!S||S.dead||Q.length||!q72On())return false;const q=
   s:[G("home","Phối hương","y",50,2,{bac:-10}),G("A","Mang sang cung {A}","",100,1)],ok:{r:12,fn:X=>{ap(X.A.o,{suc:10});return `${X.A.n} Sức +10.`},x:"nàng Sức +10"},no:{r:-5}});
  T7("canh_thai","pro",{r:"rvp",t:"Canh chừng quanh cung {A} đang mang thai",h:"“{Xung} mang thai, đêm nào cũng nằm mơ thấy chuyện chẳng lành. {Goi} có người tin cẩn, để mắt giúp {xung}.”",dl:6,
   s:[G("home","Sai người canh chừng","mat",55,1,{bac:-15}),W("Canh chừng hai tuần",2),G("A","Báo lại cho {A}","",100,1)],
-  ok:{r:15,d:2,fn:X=>{const h=liveRivals(true).filter(v=>v!==X.A.o&&aff(v,X.A.o)<-20);if(h.length){evA(S,h[0],1);return `Người canh thấy ${h[0].name} cho người lảng vảng quanh cung ${X.A.n}: Chứng cứ về ${h[0].name} +1.`}return "Hai tuần yên ổn, không ai lảng vảng."}},no:{r:-6},tr:"Nếu có kẻ thù thật của nàng rình rập, người canh sẽ thấy."});
+  ok:{r:15,d:2,fn:X=>{const h=liveRivals(true).filter(v=>v!==X.A.o&&aff(v,X.A.o)<-20);if(h.length){evA(S,h[0],BAL.eff.j72.evFn_2);return `Người canh thấy ${h[0].name} cho người lảng vảng quanh cung ${X.A.n}: Chứng cứ về ${h[0].name} ${balSg(BAL.eff.j72.evFn_2)}.`}return "Hai tuần yên ổn, không ai lảng vảng."}},no:{r:-6},tr:"Nếu có kẻ thù thật của nàng rình rập, người canh sẽ thấy."});
  T7("giu_thu","pro",{r:"rv+",rf:v=>liveRivals(true).some(u=>u!==v&&(u.evm&&u.evm[key(v)]||0)>0),t:"Giữ hộ hộp thư riêng của {A}",h:"“Có người đang nắm sơ hở của {xung}, {xung} sợ bị lục soát. Trong hộp chỉ là thư nhà, nhưng người ta bới móc chữ nghĩa. {Goi} giữ hộ {xung} ít lâu.”",dl:4,tr:"Quả có người đang nắm Chứng cứ về nàng.",
   s:[W("Cất giữ hộp thư",2),C("Trả hộp thư",O("Trả lại nguyên vẹn",{p:85,lto:"bad"}))],ok:{r:14},no:{r:-6},bad:{fx:{danh:-4},r:-4},badT:"Người lục soát thấy hộp thư lạ trong cung ngươi."});
  T7("lc_ao","pro",{r:"fallen",w:c=>["Thu","Đông"].includes(c.sea)?2:0,t:"Mang áo ấm vào lãnh cung cho {A}",h:"“Gió lạnh lùa qua song cửa Trường Môn viện. Nếu còn chút tình xưa, xin gửi cho ta tấm áo bông.”",dl:4,

@@ -111,7 +111,7 @@ ARC67.tm96a=arcFx("tm96a",{o:"tm",ok:ok96,t:"Thanh mai trúc mã: Ngày từ bi�
   {n:"Viết một dòng: “Hãy lập công danh”",go:()=>{adj96({t:4,rise:1})},rt:"Ngươi gửi đi một dòng chữ, không ký tên."}]},
  a2:{h:"Gặp lại ở {lvp}",w:"lv",t:"Đi ngang {lvp}, ngươi khựng lại. {lv} đứng đó, y phục chỉnh tề. Chàng cúi đầu hành lễ như với mọi phi tần, chỉ có đôi mắt là không giấu được.",o:[
   {n:"Cúi đầu đi qua như người lạ",go:()=>{adj96({h:-4,t:-4});A96f("cold")},rt:"Ngươi bước qua, không ngoái lại."},
-  {n:"Dừng lại hỏi một câu xã giao",go:(A,ok)=>{adj96({h:6,t:8,sus:ok?0:6});if(!ok){const v=pick(liveRivals(true));if(v)evA(v,S,1)}},rt:"Hai câu hỏi thăm, chỉ hai người hiểu nghĩa thật.",rf:"Một cung nữ của phi tần khác thấy hai người đứng hơi lâu."},
+  {n:"Dừng lại hỏi một câu xã giao",go:(A,ok)=>{adj96({h:6,t:8,sus:ok?0:6});if(!ok){const v=pick(liveRivals(true));if(v)evA(v,S,BAL.eff.j96.evGo)}},rt:"Hai câu hỏi thăm, chỉ hai người hiểu nghĩa thật.",rf:"Một cung nữ của phi tần khác thấy hai người đứng hơi lâu."},
   {n:"Sai cung nữ chuyển lời: “Đừng tìm ta”",go:()=>{adj96({h:-6,t:-6});A96f("cut")},rt:"{maid} chuyển lời. Chàng lặng người, rồi gật đầu."}]},
  a3:{h:"Tín vật trở lại",w:"maid",t:"{maid} run run đặt lên bàn một gói nhỏ: {lvtok}, {lvroute}. Bên trong có một mảnh giấy: “Vật này vẫn là của nàng.”",o:[
   {n:"Giữ lại, giấu thật kỹ",go:()=>{adj96({h:8,t:4});T96().tok=1},rt:"Ngươi khâu tín vật vào lớp lót gối."},
@@ -140,7 +140,7 @@ ARC67.tm96b=arcFx("tm96b",{o:"tm",ok:ok96,t:"Thanh mai trúc mã: Lửa thử v�
  b1l:{h:"Kẻ nắm thóp đòi giá",w:"v",need:["v"],vf:v=>gate96(v,"blackmail"),if:()=>T96().endA==="a_lo"||(T96().ev||0)>0,t:"{v} hẹn gặp ngươi ở đình nghỉ, cười rất ngọt: “Chuyện của {goi} với {lv}, {xung} chưa nói với ai. Chỉ là dạo này {xung} thiếu một chỗ dựa.”",o:[
   {n:"Đưa bạc cho nàng ta im miệng",go:(A,_ok,G)=>{const v=rv67(A,"v");if(v)relAdd(S,v,G[0])},rt:"{v} nhận bạc, nhưng kẻ nắm thóp hiếm khi chỉ đòi một lần."},
   {n:"Giả vờ không hiểu nàng nói gì",o:()=>40+S.tamco/3-(T96().ev||0)*8,go:(A,ok)=>{if(!ok)adj96({sus:6})},rt:"{v} không moi được gì, đành bỏ đi.",rf:"{v} bỏ đi, ánh mắt như đã chắc chắn."},
-  {n:"Thu thập chứng cứ nàng ta, nắm lại thóp",go:(A,ok)=>{const v=rv67(A,"v");if(v&&ok){evA(S,v,2);A96f("leverage")}},rt:"Ngươi có được chuyện riêng của {v}. Hai bên cùng nắm thóp nhau.",rf:"{v} phát hiện ngươi cho người theo dõi."}]},
+  {n:"Thu thập chứng cứ nàng ta, nắm lại thóp",go:(A,ok)=>{const v=rv67(A,"v");if(v&&ok){evA(S,v,BAL.eff.j96.evGo_2);A96f("leverage")}},rt:"Ngươi có được chuyện riêng của {v}. Hai bên cùng nắm thóp nhau.",rf:"{v} phát hiện ngươi cho người theo dõi."}]},
  b1h:{h:"Tin chàng thăng chức",w:"lv",if:()=>T96().endA==="a_hen",t:"Tin từ Cần Chính điện: {lv} vừa được thăng chức. Đêm ấy, {lvroute}, có một cành hoa khô gửi đến cho ngươi.",o:[
   {n:"Ép cành hoa vào sách, giữ lại",go:()=>adj96({h:6,t:4,lt:1}),rt:"Cành hoa nằm giữa hai trang thơ."},
   {n:"Mừng thầm, nhưng đốt đi",go:()=>adj96({h:-2}),rt:"Ngươi đốt cành hoa, lòng vẫn mừng cho chàng."},

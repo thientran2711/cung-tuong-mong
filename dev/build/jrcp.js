@@ -153,8 +153,8 @@ function rcpAllergy(a,r,w,al){const who=rcpWho(r),by=a===S?"ta":`${rkName(a)} ${
   const p=(r==="emp"||r==="th"?BAL.rcp.accP:cl(25+Math.round(hostility(r,S)/2),5,90))+(knew?BAL.rcp.accKnew:0);
   if(roll(cl(p,5,95))){const acc=r&&typeof r==="object"?r:rcpAccuser(r,S);pushDil(mkP("rcpacc",{t:rcpPK(r)==="emp"||rcpPK(r)==="th"?r:"v"+r.id,acc:acc?key(acc):null,wn:w.n,al,knew:knew?1:0}),"Bị tố mưu hại")}
   return t}
- if(r&&typeof r==="object"){if(roll(cl(30+Math.round(hostility(r,a)/2),5,90))){evA(r,a,1);newsAdd(a,"illicit",`${r.name} tố ${a.name} tặng đồ làm nàng phát bệnh.`)}}
- else{const q=rcpAccuser(r,a);if(q&&roll(BAL.rcp.accP))evA(q,a,1);newsAdd(a,"illicit",`${who} phát bệnh sau khi dùng đồ ${a.name} dâng.`)}
+ if(r&&typeof r==="object"){if(roll(cl(30+Math.round(hostility(r,a)/2),5,90))){evA(r,a,BAL.eff.jrcp.evRcpAllergy);newsAdd(a,"illicit",`${r.name} tố ${a.name} tặng đồ làm nàng phát bệnh.`)}}
+ else{const q=rcpAccuser(r,a);if(q&&roll(BAL.rcp.accP))evA(q,a,BAL.eff.jrcp.evRcpAllergy_2);newsAdd(a,"illicit",`${who} phát bệnh sau khi dùng đồ ${a.name} dâng.`)}
  return""}
 function rcpTgt(t){return t==="emp"||t==="th"?t:RV(+String(t).replace(/^v/,""))}
 function rcpPayTy(){return Math.max(BAL.rcp.tFeeMin,Math.round((BAL.pay?BAL.pay[Math.min(7,S.rank|0)]:40)*BAL.rcp.tyFeeK))}
@@ -162,7 +162,7 @@ PEND.rcpacc=pp=>{const r=rcpTgt(pp.t);if(!r)return null;const acc=pp.acc!=null?b
  const big=r==="emp"||r==="th",sev=big?2:1;const base=BAL.rcp.defB+Math.round((S.duc||0)/3)+(S.mat||0)*4-(pp.knew?35:0);
  const o1=od(base),o2=od(base+BAL.rcp.defTy),fee=rcpPayTy();const accN=acc?(acc===S?"":`${rkName(acc)} ${acc.name}`):"";
  const fail=`bị phạt vì mưu hại ${who}, Danh -4${acc&&acc!==r?`, ${accN} nắm 1 chứng cứ của ta`:""}`;
- const lose=()=>{apply({danh:-4});if(acc&&acc!==S)evA(acc,S,1);punish(S,`dâng đồ làm ${who} phát bệnh`,sev)};
+ const lose=()=>{apply({danh:-4});if(acc&&acc!==S)evA(acc,S,BAL.eff.jrcp.evLose);punish(S,`dâng đồ làm ${who} phát bệnh`,sev)};
  const win=()=>{apply({danh:1});if(acc&&acc!==S&&acc!==r){relAdd(S,acc,BAL.eff.jrcp.win)}log(`Ta được minh oan: ${who} vốn kiêng ${A}, ta không cố ý.`)};
  const O=[{n:`Kêu oan: ta không biết ${rcpThey(r)} kiêng ${A}`,fx:{},x:`${word(o1)} · thành: được minh oan, Danh +1 · hỏng: ${fail}`,go:()=>{if(roll(o1))win();else lose()}},
   {n:"Mời thái y làm chứng: chỉ là kiêng kỵ",fx:{bac:-fee},x:`${word(o2)} · thành: được minh oan, Danh +1 · hỏng: ${fail}`,go:()=>{if(roll(o2))win();else lose()}}];

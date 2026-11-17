@@ -212,7 +212,7 @@ function rgRes(id,i,od){const b=rgBeatDef(id);if(!b)return;const o=rgOpts(b)[i];
  r.done[id]=(r.done[id]||0)+1;r.last=S.turn;
  if(ok){apply(o.w||{});if(o.pw)rgPush(side,o.pw);if(o.tr)rgTr(o.tr);if(o.lq)rgQAf(o.lq);if(o.lead)rgLead(side,o.lead)}
  else{apply(o.l||{});if(o.pl)rgPush(side,o.pl);if(o.lq)rgQAf(o.lq);
-  if(o.ev){const v=rgFoe(o.ev);if(v){evA(v,S,1);ex.push(`${(()=>{try{return typeof kitKnownName!=="function"||kitKnownName(v)}catch(e){return true}})()?v.name:"Một vị phi tần chưa quen biết"} nắm Chứng cứ về ngươi.`)}}
+  if(o.ev){const v=rgFoe(o.ev);if(v){evA(v,S,BAL.eff.jreign.evRgRes);ex.push(`${(()=>{try{return typeof kitKnownName!=="function"||kitKnownName(v)}catch(e){return true}})()?v.name:"Một vị phi tần chưa quen biết"} nắm Chứng cứ về ngươi.`)}}
   if(o.pun){try{punish(S,"can dự chuyện triều chính",o.pun)}catch(e){}}}
  if(o.lq0)rgQAf(o.lq0);
  if(o.join)ex.push(rgJoin(o.join,id==="c2a",o.swc));

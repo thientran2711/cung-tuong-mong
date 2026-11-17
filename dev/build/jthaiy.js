@@ -162,7 +162,7 @@ function npcMonth(){let ev="";const c=doc();if(!c)return ev;c.af=c.af||{};
    const ev2=nv(v,"thyEv");if(tg.length&&roll(T().npcBribe+ev2)){ap(v,{bac:-T().npcBribeBac});c.af[v.id]=(c.af[v.id]||0)+T().npcBribeAf;try{newsAdd(v,"ty",`Có người thấy ${v.name} cho mời thái y sang cung trò chuyện rất lâu`)}catch(e){}}}
   /* her monthly visit finds a hidden harm in her */
   const tl=tainted(v);const bad=bribedBy(v);if(tl.length&&!bad&&roll(T().npcFind+(v.doctor?T().npcFindDoc:0))){const e=pick(tl);v.inv.splice(v.inv.indexOf(e),1);const by=byKey(e.by);
-   if(by&&by!==v){evA(v,by,1);try{oanAdd(v,by,BAL.eff.jthaiy.npcMonth)}catch(x){}}try{newsAdd(v,"ty",`Thái y bắt mạch cho ${v.name}, thấy dấu ${TAINT[e.t].n}; món đồ ấy bị đem đi`,by===S)}catch(x){}
+   if(by&&by!==v){evA(v,by,BAL.eff.jthaiy.evNpcMonth);try{oanAdd(v,by,BAL.eff.jthaiy.npcMonth)}catch(x){}}try{newsAdd(v,"ty",`Thái y bắt mạch cho ${v.name}, thấy dấu ${TAINT[e.t].n}; món đồ ấy bị đem đi`,by===S)}catch(x){}
    if(by===S)ev+=`<span class="r">Thái y bắt mạch cho ${v.name}, lần ra món đồ ngươi đã tẩm: nàng ta nắm thêm 1 chứng cứ về ngươi.</span> `}
   const i=illOf(v);if(i&&!i.known&&!bad&&roll(T().npcFind+(v.doctor?T().npcFindDoc:0)))i.known=true}
  return ev}

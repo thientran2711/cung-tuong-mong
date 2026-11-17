@@ -243,7 +243,7 @@ ARC67.tt_co=arcFx("tt_co",{o:"tt",t:"Quân cờ trong tay cha",w:"dad",sj:"thư 
   {n:"Nhận, rồi mua chuộc nàng",f:"own",wx:"tai mắt của cha thành tai mắt của ngươi",lx:"cha biết ngươi giở trò",rt:"Nàng thề trung với ngươi.",rf:"Nàng báo hết với cha."},
   {n:"Gửi trả về phủ",wx:"cung ngươi kín kẽ",f:"cold",lx:"cha giận",rt:"Cung nữ bị gửi trả về phủ."}]},
  c1:{h:"Cha muốn ngươi hạ một nhà đối đầu",w:"dad",need:["v"],t:"Cha viết: nhà của {v} cản đường ông ở triều. Ông muốn ngươi tìm lỗi của {v} trong cung.",o:[
-  {n:"Tìm lỗi của {v}",f:"obey",wx:"cha hài lòng",lx:"{v} biết ngươi rình nàng",go:(A,ok,G)=>{const v=rv67(A,"v");if(v){if(ok)return evA(S,v,1)?`Nắm được một lỗi thật của ${v.name}: chứng cứ +1.`:`${v.name} không có lỗi gì; ngươi chỉ biết ${harmTxt(v)}.`;else oanAdd(v,S,G[0])}},rt:"Ngươi cho người rình {v}.",rf:"{v} bắt gặp người của ngươi rình rập."},
+  {n:"Tìm lỗi của {v}",f:"obey",wx:"cha hài lòng",lx:"{v} biết ngươi rình nàng",go:(A,ok,G)=>{const v=rv67(A,"v");if(v){if(ok)return evA(S,v,BAL.eff.j67.evGo)?`Nắm được một lỗi thật của ${v.name}: chứng cứ ${balSg(BAL.eff.j67.evGo)}.`:`${v.name} không có lỗi gì; ngươi chỉ biết ${harmTxt(v)}.`;else oanAdd(v,S,G[0])}},rt:"Ngươi cho người rình {v}.",rf:"{v} bắt gặp người của ngươi rình rập."},
   {n:"Báo cho {v} đề phòng",wx:"{v} mang ơn ngươi",lx:"cha mà biết sẽ giận",f:"own",go:(A,_ok,G)=>{const v=rv67(A,"v");if(v)relAdd(S,v,G[0])},rt:"{v} lặng người, rồi khẽ cảm ơn."},
   {n:"Làm ngơ",wx:"không dính vào",lx:"cha thấy ngươi vô dụng",f:"cold",rt:"Ngươi để thư cha trong hộp, không hồi âm."}]},
  c2:{h:"Hoàng hậu hặc phủ Tể tướng",w:"hh",need:["hh"],t:"Họ ngoại của Hoàng hậu {hh} dâng sớ hặc cha ngươi kết bè. Cha nhắn: lo lót cho ông.",o:[
@@ -1540,7 +1540,7 @@ ARC67.s_thay=arcFx("s_thay",{o:"*",ok:nsrv67,t:"Lão thái giám",w:"eun",sj:"l�
   {n:"Xin ông chỉ một bí mật lớn",e:["win2","lose"],rt:"Ông chỉ cho ngươi một bí mật đủ để nắm thóp một phi tần.",rf:"Ông giận vì ngươi tham, ra đi không lời từ biệt."},
   {n:"Chỉ xin ông giữ sức khỏe",e:"mid",lx:"không được gì thêm",rt:"Ông cười hiền."}]}},
  E:{win:{tag:"Có người trong Nội vụ phủ",w:"eun",t:"Tổng quản mới là người của ngươi. Mọi tin trong cung đến tai ngươi trước."},
-  win2:{tag:"Bí mật của ba đời vua",t:"Ngươi nắm được một bí mật quý. Không ai biết ngươi có nó.",go:()=>{const L=liveRivals(false).filter(v=>v.rank>S.rank);const v=evGuilty(S,L);const n=v?evA(S,v,2):0;if(n)return `Chứng cứ về ${v.name} +${n}.`;return""}},
+  win2:{tag:"Bí mật của ba đời vua",t:"Ngươi nắm được một bí mật quý. Không ai biết ngươi có nó.",go:()=>{const L=liveRivals(false).filter(v=>v.rank>S.rank);const v=evGuilty(S,L);const n=v?evA(S,v,BAL.eff.j67.evN):0;if(n)return `Chứng cứ về ${v.name} +${n}.`;return""}},
   mid:{tag:"Tiễn lão thái giám",t:"Lão thái giám về quê. Ngươi nhớ những lời ông dạy."},
   lose:{tag:"Mất lòng lão thái giám",t:"Ông ra đi giận dỗi, đám thái giám cũ coi ngươi là kẻ tham."}}});
 ARC67.s_ban=arcFx("s_ban",{o:"*",ok:nsrv67,t:"Kẻ thù hóa tri kỷ",w:"v",sj:"mối thù với {v}",g:"{v} vẫn là cái gai trong mắt ngươi. Nhưng khi cả hai cùng bị một kẻ mạnh hơn nhắm vào, có lẽ kẻ thù của kẻ thù là tri kỷ.",

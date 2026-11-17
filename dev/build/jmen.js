@@ -200,7 +200,7 @@ function menReport(by,m,c,y,formal){const at=placeName(y.k);const nm=m.name;cons
  log(`${menCap(byT)} báo ${formal?"Cung Chính ti":"thị vệ"}: ${nm} lảng vảng ở ${at} không có lệnh, bị ${formal?"giải ra ngoại triều, cấm vào cung một năm":"đánh trượng, đuổi ra ngoại triều"}.`);return true}
 /* by hides m (and c): a debt and evidence; found → by is punished */
 function menHide(by,m,c,y,eyes){menStat(by===S?"hideMe":"hideNpc");const risk=cl(Math.round(10+eyes*5-(by.tamco||0)/10),4,60);
- if(c&&c!==by){const prev=J78.ctx;if(by===S)J78.ctx={how:"Ngươi giấu giúp, nên biết rõ chuyện",proves:menTrue(m,c,y).replace(/\.$/,"")};try{evA(by,c,y.r==="tryst"?2:1)}finally{J78.ctx=prev}affAdd(c,by,BAL.eff.jmen.menHide);oanAdd(c,by,BAL.eff.jmen.menHide_2)}
+ if(c&&c!==by){const prev=J78.ctx;if(by===S)J78.ctx={how:"Ngươi giấu giúp, nên biết rõ chuyện",proves:menTrue(m,c,y).replace(/\.$/,"")};try{evA(by,c,y.r==="tryst"?BAL.eff.jmen.evMenHide[0]:BAL.eff.jmen.evMenHide[1])}finally{J78.ctx=prev}affAdd(c,by,BAL.eff.jmen.menHide);oanAdd(c,by,BAL.eff.jmen.menHide_2)}
  if(roll(risk)){ap(by,{danh:-6});punish(by,"che giấu nam nhân lẻn vào hậu cung",1);m.ban=wk()+MEN.banS;return false}
  if(by===S){m.af=(m.af||0)+BAL.eff.jmen.hideMan;m.debt=(m.debt||0)+1;S.menSec=S.menSec||{};S.menSec[m.id]={r:y.r,v:y.v||null,k:y.k,w:wk(),hid:1}}return true}
 
@@ -217,7 +217,7 @@ function menChoose(m,v,y,a){const at=placeName(y.k);menStat("ch_"+a);if(a==="ngh
   if(roll(o)){menStat("hearOk");try{k61Know(m,"Ngươi nghe được tên hắn.",true,2);if(v)k61Know(v,"",true,2)}catch(e){}
    log(`Núp sau hòn giả sơn, ngươi nghe rõ: ${menTrue(m,v,y)}`);
    S.menSec=S.menSec||{};S.menSec[m.id]=Object.assign({},S.menSec[m.id]||{},{r:y.r,v:y.v||null,k:y.k,w:wk(),heard:1});
-   if(v){const prev=J78.ctx;J78.ctx={how:"Ngươi núp nghe lén",proves:menTrue(m,v,y).replace(/\.$/,"")};try{evA(S,v,y.r==="tryst"?2:1)}finally{J78.ctx=prev}
+   if(v){const prev=J78.ctx;J78.ctx={how:"Ngươi núp nghe lén",proves:menTrue(m,v,y).replace(/\.$/,"")};try{evA(S,v,y.r==="tryst"?BAL.eff.jmen.evMenChoose[0]:BAL.eff.jmen.evMenChoose[1])}finally{J78.ctx=prev}
     try{intelAdd(v,{k:"man:"+m.id,kind:"secret",txt:menTrue(m,v,y)},{by:"me",how:"nghe lén"})}catch(e){}}
    setTimeout(()=>{try{if(S&&!S.dead&&manById(m.id))menCard(m,v,y,1)}catch(e){}},0);return}
   menStat("hearBad");m.knowsMe=m.knowsMe||[];if(!m.knowsMe.includes("me"))m.knowsMe.push("me");m.af=(m.af||0)+BAL.eff.jmen.hearMan;
@@ -231,7 +231,7 @@ function menDecide(w,c){const h=c?hostility(w,c):0;
 function menNpcAct(w,m,c,y){const d=menDecide(w,c);menStat("npc_"+d);
  if(d==="report"){menReport(w,m,c,y,(w.tamco||0)>=50?1:0);return d}
  if(d==="hide"){menHide(w,m,c,y,menEyes(y.k,c));if(c===S||menEye(S)>=(y.hide||0)+25){try{intelAdd(w,{k:"menhide:"+m.id,kind:"secret",txt:`${rkName(w)} ${w.name} đã che giấu ${m.name} lẻn vào ${placeName(y.k)}${c&&c!==S?` cùng ${rkName(c)} ${c.name}`:""}.`},{by:"tai mắt",how:"tai mắt"})}catch(e){}}return d}
- if(d==="listen"&&c&&c!==w){if(menEye(w)>=(y.hide||0)+10)evA(w,c,1);return d}
+ if(d==="listen"&&c&&c!==w){if(menEye(w)>=(y.hide||0)+10)evA(w,c,BAL.eff.jmen.evMenNpcAct);return d}
  return d}
 /* a consort standing at that place in that buổi sees it; she understands it iff her eyes reach how well it is hidden */
 function menNpcSee(m,y){if(!m||!y)return;const c=y.v!=null?RV(y.v):null;for(const w of liveRivals(true)){if(w===c||whereOf(w)!==y.k||menEye(w)<(y.hide||0))continue;menStat("npcSee");const d=menNpcAct(w,m,c,y);if(d==="report")break}}
@@ -240,7 +240,7 @@ function menNpcSee(m,y){if(!m||!y)return;const c=y.v!=null?RV(y.v):null;for(cons
  try{if(a&&menRoad()&&!S.dead&&S.logSeq!==before&&!/^Chào hỏi/.test(a.n)&&menZone(S.place)==="hc"){const m=p.ref;const y={k:S.place,r:m.tinh>=BAL.tinhLv.close||m.trysts?"meet":"talk"};
   for(const w of liveRivals(true)){if(whereOf(w)!==S.place||menEye(w)<20)continue;menStat("seenMe");const d=menDecide(w,S);
    if(d==="report"){if(y.r==="talk"){ap(w,{danh:2});apply({danh:-4});oanAdd(S,w,BAL.eff.jmen.top);log(`<span class="r">${rkName(w)} ${w.name} thấy ngươi nói chuyện riêng với ${m.name} ở ${placeName(S.place)} và đem chuyện đi rêu rao: Danh -4.</span>`)}else menReport(w,m,S,y,0);break}
-   if(d==="hide"||d==="listen"){evA(w,S,d==="hide"?2:1);break}}}}catch(e){console.error("men talk",e)}return r}})();
+   if(d==="hide"||d==="listen"){evA(w,S,d==="hide"?BAL.eff.jmen.evTop[0]:BAL.eff.jmen.evTop[1]);break}}}}catch(e){console.error("men talk",e)}return r}})();
 
 /* ---------- 6. the secret is leverage: "Uy hiếp hắn" on his card; grudges come back as rumours ---------- */
 (function(){const t0=talkOpts;talkOpts=function(p){const A=t0.apply(this,arguments);try{if(p&&p.kind==="man"&&p.ref&&menRoad()){const m=p.ref;const s=(S.menSec||{})[m.id];

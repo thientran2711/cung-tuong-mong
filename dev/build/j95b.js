@@ -233,8 +233,8 @@ function j95bClear(u,how,face){const z=j95bZ();const r=z.rum.find(x=>x.u===u);if
  else{oanAdd(y,S,BAL.eff.j95b.j95bClear_3);msg=r.truth?`${y.name} không nghe: chuyện ấy có thật.`:`${y.name} chưa tin lời ngươi.`}
  log(msg);if(!face)Q.push({t:"Giải bày",who:pv(y),h:`<p>${msg}</p>`});return msg}
 function j95bTrace(u){const z=j95bZ();const r=z.rum.find(x=>x.u===u);if(!r)return"";if(typeof can==="function"&&can(BAL.m95b.k))spend(BAL.m95b.k);J95B.stat.trace++;const x=r.x!=null?RV(r.x):null;const y=RV(r.y);
- let msg;if(x&&x.alive&&j95dice(cl(35+(S.mat||0)*8+(S.tamco||0)/4,5,90))){r.traced=1;evA(S,x,1);try{noteAdd(x.id,`tra ra: người của nàng đã rỉ tai ${y?y.name:"một phi tần"} để gây hiểu lầm với ngươi`)}catch(e){}
-  msg=`Tra ra: chính người bên cung ${x.name} đã rỉ tai ${y?y.name:"nàng ấy"}. Chứng cứ về ${x.name} +1.`}
+ let msg;if(x&&x.alive&&j95dice(cl(35+(S.mat||0)*8+(S.tamco||0)/4,5,90))){r.traced=1;evA(S,x,BAL.eff.j95b.evJ95bTrace);try{noteAdd(x.id,`tra ra: người của nàng đã rỉ tai ${y?y.name:"một phi tần"} để gây hiểu lầm với ngươi`)}catch(e){}
+  msg=`Tra ra: chính người bên cung ${x.name} đã rỉ tai ${y?y.name:"nàng ấy"}. Chứng cứ về ${x.name} ${balSg(BAL.eff.j95b.evJ95bTrace)}.`}
  else msg=x?"Lần theo mãi vẫn không ra kẻ tung tin.":"Lời đồn không rõ từ đâu ra, không lần được.";
  log(msg);Q.push({t:"Tra tin đồn",h:`<p>${msg}</p>`});return msg}
 /* who someone can whisper to: a consort the spreader is not on bad terms with and who does not already hate her */

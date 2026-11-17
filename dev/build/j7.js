@@ -37,7 +37,7 @@ ev("ghost",()=>SEASON[S.month-1]==="Thu"||SEASON[S.month-1]==="Đông",()=>({v:(
 /* alliances */
 ev("pact",()=>qOn()&&liveRivals(false).length,()=>({v:rvTop((a,b)=>b.rel-a.rel).id}),p=>{const v=RV(p.v),q=rivals[0];if(!v)return null;return{who:pv(v),
  t:`${v.name} hẹn ngươi ở đình Thiên Thu: “Hoàng hậu ${q.name} đè đầu cả hậu cung đã lâu.<br>Hai ta chung một thuyền, được chăng?”`,o:[
- {n:"Kết minh",fx:{hh:-5},x:`${v.name} thiện cảm +25 · nàng kể chuyện sai trái của Hoàng hậu, nếu có: chứng cứ +1`,go:()=>{v.rel+=25;/*evok: capped; preview says "nếu có"*/evA(S,q,1)}},
+ {n:"Kết minh",fx:{hh:-5},x:`${v.name} thiện cảm +25 · nàng kể chuyện sai trái của Hoàng hậu, nếu có: chứng cứ ${balSg(BAL.eff.j7.evGo)}`,go:()=>{v.rel+=25;/*evok: capped; preview says "nếu có"*/evA(S,q,BAL.eff.j7.evGo)}},
  {n:"Mật báo Hoàng hậu",fx:{hh:12},x:`${v.name} thù -30`,go:()=>{v.rel-=30;v.ghen=cl(v.ghen+10,0,100)}},
  {n:"Từ chối khéo",fx:{duc:1}}]}});
 ev("eunuch",()=>S.mat<10,()=>({o:od(50+S.tamco/3)}),p=>({
@@ -146,7 +146,7 @@ ev("condemnedmaid",()=>true,()=>({o:od(35+S.duc/2+(has("nhantu")?20:0))}),p=>({
  {n:"Không can dự",fx:{duc:-1}}]}));
 ev("coldvisit",()=>rivals.some(v=>v.alive&&v.out),()=>({f:pick(rivals.filter(v=>v.alive&&v.out)).id,o:od(30+S.sung/3+(has("nhantu")?15:0))}),p=>{const f=RV(p.f);if(!f)return null;return{who:pv(f),
  t:`Gió lùa qua song cửa lãnh cung. ${f.name} gầy rộc, níu tay áo ngươi: “Ta biết những chuyện họ muốn chôn.”`,o:[
- {n:"Mang chăn ấm, thuốc men",fx:{bac:-20,duc:4},x:"chứng cứ +1 về một phi tần từng làm điều sai",go:()=>{const x=evGuilty(S,liveRivals(true));if(x&&evA(S,x,1))log(`${f.name} kể chuyện xấu của ${x.name}: chứng cứ +1.`);else log(`${f.name} cảm tạ, kể chuyện cũ trong cung; không có gì làm chứng cứ.`)}},
+ {n:"Mang chăn ấm, thuốc men",fx:{bac:-20,duc:4},x:`chứng cứ ${balSg(BAL.eff.j7.evGo_2)} về một phi tần từng làm điều sai`,go:()=>{const x=evGuilty(S,liveRivals(true));if(x&&evA(S,x,BAL.eff.j7.evGo_2))log(`${f.name} kể chuyện xấu của ${x.name}: chứng cứ ${balSg(BAL.eff.j7.evGo_2)}.`);else log(`${f.name} cảm tạ, kể chuyện cũ trong cung; không có gì làm chứng cứ.`)}},
  {n:"Xin Hoàng thượng ân xá",fx:{},x:`${word(p.o)} · thành: nàng về cung, thiện cảm +40 · hỏng: Sủng -6`,go:()=>{if(roll(p.o)){f.out=false;f.rank=0;f.rel+=40;log(`${f.name} được ân xá, về cung làm ${RANKS[0].n}.`)}else apply({sung:-6})}},
  {n:"Quay lưng bỏ đi",fx:{duc:-2}}]}});
 /* dangers */
@@ -164,7 +164,7 @@ ev("fire",()=>liveRivals(false).length,()=>({v:rvAny().id,o:od(45+S.suc/4)}),p=>
  t:`Nửa đêm, Đông lục cung bốc cháy. Lửa liếm mái cung ${v.name}; tiếng trẻ khóc lẫn tiếng chiêng.`,o:[
  {n:"Lao vào cứu người",fx:{suc:-25},x:`${word(p.o)} · thành: ${v.name} thiện cảm +40, Danh +6 · hỏng: Sức -15`,go:()=>{if(roll(p.o)){v.rel+=40;apply({danh:6,sung:3})}else apply({suc:-15})}},
  {n:"Chỉ huy cung nhân dập lửa",fx:{danh:3,maid:5}},
- {n:"Ngầm tra kẻ phóng hỏa",fx:{},x:`${word(oSpy())} · thành: biết ai phóng hỏa, nếu là người trong cung: chứng cứ +2`,go:()=>{if(roll(oSpy())){const x=evGuilty(S,liveRivals(false).filter(x=>x!==v));const n=x?evA(S,x,2):0;log(n?`Dấu dầu hỏa dẫn về người của ${x.name}: chứng cứ +${n}.`:"Dấu dầu hỏa dẫn ra ngoài cung: chỉ là tai nạn, không ai trong hậu cung đứng sau.")}}}]}});
+ {n:"Ngầm tra kẻ phóng hỏa",fx:{},x:`${word(oSpy())} · thành: biết ai phóng hỏa, nếu là người trong cung: chứng cứ ${balSg(BAL.eff.j7.evN)}`,go:()=>{if(roll(oSpy())){const x=evGuilty(S,liveRivals(false).filter(x=>x!==v));const n=x?evA(S,x,BAL.eff.j7.evN):0;log(n?`Dấu dầu hỏa dẫn về người của ${x.name}: chứng cứ +${n}.`:"Dấu dầu hỏa dẫn ra ngoài cung: chỉ là tai nạn, không ai trong hậu cung đứng sau.")}}}]}});
 /* rivals against each other: the player witnesses */
 ev("rvframe",()=>liveRivals(false).length>=2,two,p=>{const a=RV(p.a),b=RV(p.b);if(!a||!b)return null;return{who:pv(a),
  t:`Ngươi nghe lén sau hòn non bộ: ${a.name} bàn với thái giám giấu đồ ngự dụng vào cung ${b.name} để vu tội trộm.`,o:[

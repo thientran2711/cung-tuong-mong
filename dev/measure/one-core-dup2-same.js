@@ -8,7 +8,7 @@ const acorn=(()=>{try{return require('acorn')}catch(e){return require('/opt/node
 const REF=process.argv[2],REF2=process.argv[3];/* optional REF2 = a branch merged in later (review/one-core-dup-r1/r2): a statement equal to the one there is its change, not ours */if(!REF){console.log('usage: node dev/measure/one-core-dup2-same.js <old-ref>');process.exit(2)}
 const NS=['quyLv','loy','wit','ducLv','sungLv','nightEnd','tinhLv','tinLv','rareLv','sucLv','oanFade','tsDanger','age','srvAge','pet','cut',
  /* review/one-core-dup3: amounts (BAL.eff / road / arc / route …) and the night table; values from every BAL file (one-core-text loadBAL) */
- 'eff','road','arc','route','night','net'];
+ 'eff','road','arc','route','night','net','evWipe'];
 /* owner-ruled word changes (VANPHONG:69 / OD:L247 thiện cảm words everywhere): */
 const INTENDED={'jhc.js':['window.quyW'],'j21.js':['affW'],'jts.js':['tsQuy'],'j55.js':['ccWord']};
 /* j55 ccWord = side-chance scale (owner OD:L221) */
@@ -18,7 +18,7 @@ const bal=()=>{const c={Math,BAL:{pace:1}};vm.createContext(c);
  const S=src.replace(/^const BAL=/m,'BAL=');for(const st of acorn.parse(S,{ecmaVersion:'latest'}).body){try{vm.runInContext(S.slice(st.start,st.end),c)}catch(e){}}
  const pl=fs.readFileSync('dev/build/jpetlife.js','utf8').match(/careOk:(\d+),careLow:(\d+)/);c.BAL.pet=c.BAL.pet||{};c.BAL.pet.life={careOk:+pl[1],careLow:+pl[2]};
  const m=fs.readFileSync('dev/build/jne.js','utf8').match(/warm:(\d+),normal:(\d+)/);c.BAL.nightEnd={warm:+m[1],normal:+m[2]};return c.BAL};
-const B=(()=>{const b=bal(),T=require('../test/one-core-text.js').loadBAL(require('path').join(__dirname,'..','build'));for(const k of Object.keys(T))if(!(k in b)||['eff','road','arc','route','night','net'].includes(k))b[k]=T[k];return b})();
+const B=(()=>{const b=bal(),T=require('../test/one-core-text.js').loadBAL(require('path').join(__dirname,'..','build'));for(const k of Object.keys(T))if(!(k in b)||['eff','road','arc','route','night','net','evWipe'].includes(k))b[k]=T[k];return b})();
 /* a text that prints a constant (${balSg(BAL…)} / ${balAb(BAL…)}) is turned back into the words it prints (one-core-text proof) before the compare */
 const PRINTED=require('../test/one-core-text.js').proof(require('path').join(__dirname,'..','build')).printed;
 const strip=n=>JSON.stringify(n,(k,v)=>{if(k==='start'||k==='end'||k==='raw')return undefined;/* "…" ≡ `…` without ${} */if(v&&v.type==='TemplateLiteral'&&v.expressions.length===0&&v.quasis.length===1)return{S:v.quasis[0].value.cooked};if(v&&v.type==='Literal'&&typeof v.value==='string')return{S:v.value};return v});

@@ -304,12 +304,12 @@ function wdFrameItem(a){const own=(a.inv||[]).filter(e=>e&&!e.h&&!e.t&&!wdIsNt(e
  const k=wdPickAt(Math.min(8,wdPOf(a)+1),"tram",1);return{take:null,k}}
 function wdFrame(a,t){ap(a,{bac:-40});a.schemes=(a.schemes||0)+1;if(typeof ducAdd==="function")ducAdd(a,-4,"giá họa người khác");else ap(a,{duc:-4});
  const F=wdFrameItem(a);if(!F.k)return"";const nm=itm(F.k).n;
- if(!roll(oPlant(a,t))){/*evok: giahoa act (runAct deed)*/evA(t,a,2);relAdd(a,t,BAL.eff.j92.wdFrame);return `<span class="r">Người lén mang ${nm} vào phòng ${wdNm(t)} bị bắt, khai ra ${wdNm(a)}.</span> ${wdNmC(t)} nắm 2 chứng cứ. `}
+ if(!roll(oPlant(a,t))){/*evok: giahoa act (runAct deed)*/evA(t,a,BAL.eff.j92.evWdFrame);relAdd(a,t,BAL.eff.j92.wdFrame);return `<span class="r">Người lén mang ${nm} vào phòng ${wdNm(t)} bị bắt, khai ra ${wdNm(a)}.</span> ${wdNmC(t)} nắm 2 chứng cứ. `}
  if(F.take){const i=a.inv.indexOf(F.take);if(i>=0)a.inv.splice(i,1)}
  t.inv=t.inv||[];t.inv.push({k:F.k,h:1,by:key(a),gh:key(a)});
  if(t===S){S.wdFrame={by:key(a),k:F.k,due:wk()+1+R(2)};
-  if(roll(WD.warnBase+(S.mat||0)*6+(watcher()?15:0))){const w=watcher();const named=roll(WD.traceBase+(S.mat||0)*WD.traceMat);if(named){S.wdFrame.traced=1;evA(S,a,1)}
-   Q.push({t:"Tai mắt báo tin",who:pMe(),h:`<p>${w?w.name:"Người hầu"} thấy ${named?"người của "+wdNm(a):"một kẻ lạ"} lén vào phòng ngươi lúc vắng người.</p><p class="past">Nên kiểm tra đồ trong rương.${named?` Đã ghi vào Sổ ghi (chứng cứ về ${a.name} +1).`:""}</p>`});
+  if(roll(WD.warnBase+(S.mat||0)*6+(watcher()?15:0))){const w=watcher();const named=roll(WD.traceBase+(S.mat||0)*WD.traceMat);if(named){S.wdFrame.traced=1;evA(S,a,BAL.eff.j92.evWdFrame_2)}
+   Q.push({t:"Tai mắt báo tin",who:pMe(),h:`<p>${w?w.name:"Người hầu"} thấy ${named?"người của "+wdNm(a):"một kẻ lạ"} lén vào phòng ngươi lúc vắng người.</p><p class="past">Nên kiểm tra đồ trong rương.${named?` Đã ghi vào Sổ ghi (chứng cứ về ${a.name} ${balSg(BAL.eff.j92.evWdFrame_2)}).`:""}</p>`});
    log(`${w?w.name:"Người hầu"} thấy ${named?"người của "+wdNm(a):"một kẻ lạ"} lén vào phòng ngươi.`)}
   return ""}
  return wdFrameResolve(a,t)}
@@ -329,7 +329,7 @@ function wdFrameResolve(a,t){if(typeof lostUnwear==="function")lostUnwear(t,a);c
  if(t===S){pushDil(mkP("wdframe",{a:key(a),k:e.k,lo:e.lo||0}),lo?"Đồ thất lạc":"Bị tố ăn cắp");return ""}
  const o=cl(WD.clearBase+(t.mat||0)*WD.clearMat+wdFrameEv(t,a,e)*10,5,95);
  if(roll(o)){wdFrameTake(t,i);
-  if(cu){evA(t,cu,1);ap(cu,{danh:-10});punish(cu,"giá họa vu oan",2);return `${wdNmC(a)} tố ${wdNm(t)} ${lo?"giữ":"ăn trộm"} ${nm}; ${wdNm(t)} minh oan được, tra ra ${wdNm(cu)} giá họa. ${wdNmC(cu)} Danh -10, bị phạt. `}
+  if(cu){evA(t,cu,BAL.eff.j92.evWdFrameResolve);ap(cu,{danh:-10});punish(cu,"giá họa vu oan",2);return `${wdNmC(a)} tố ${wdNm(t)} ${lo?"giữ":"ăn trộm"} ${nm}; ${wdNm(t)} minh oan được, tra ra ${wdNm(cu)} giá họa. ${wdNmC(cu)} Danh -10, bị phạt. `}
   return `${wdNmC(a)} báo ${nm} thất lạc ở chỗ ${wdNm(t)}; ${wdNm(t)} minh oan được: món đồ chỉ thất lạc, không ai lấy trộm. ${nm} về lại với ${wdNm(a)}. `}
  wdFrameTake(t,i);ap(t,{danh:-10,sung:-5});if(cu)t.framedBy=key(cu);punish(t,"lấy trộm đồ",1);return `<span class="r">Cung Chính ti tìm thấy ${nm} của ${wdNm(a)} trong phòng ${wdNm(t)}.</span> ${wdNmC(t)} mang tội ăn trộm: Danh -10, Sủng -5, bị phạt. `}
 /* her side of it: choices show only their cost; the result card tells the truth after */
@@ -343,7 +343,7 @@ PEND.wdframe=pp=>{const a=byKey(pp.a);if(!a)return null;const nm=wdFrameNm(pp.k)
  const guilty=(light)=>{const x=cur();if(x.i>=0)wdFrameTake(S,x.i);if(cu)S.framedBy=key(cu);
   if(light){apply({danh:-5});log("Ngươi nhận lỗi, xin khoan hồng: trả lại đồ, Danh -5.");Q.push({t:"Nhận lỗi",who:pMe(),h:`<p>${nm} được trả về cho ${wdNm(a)}. Ngươi bị quở, Danh -5.</p>`});return}
   apply({danh:-10,sung:-5});punish(S,"lấy trộm đồ",1);Q.push({t:"Mang tội ăn trộm",who:pMe(),h:`<p class="r">Không minh oan được: ngươi mang tội lấy trộm ${nm} của ${wdNm(a)}. Danh -10, Sủng -5, bị phạt.</p>`})};
- const spendEv=()=>{const x=cur();if(x.e&&x.e.lo&&typeof lostEvUse==="function"&&lostEvUse(x.e.lo))return true;if(cu&&evG(S,cu)>0){evA(S,cu,-1);return true}return false};
+ const spendEv=()=>{const x=cur();if(x.e&&x.e.lo&&typeof lostEvUse==="function"&&lostEvUse(x.e.lo))return true;if(cu&&evG(S,cu)>0){evA(S,cu,BAL.eff.j92.evSpendEv);return true}return false};
  const O=[];
  O.push({n:"Trình chứng cứ minh oan",fx:{},j67:lo?"tốn: 1 chứng cứ đã tra xét":`tốn: 1 chứng cứ về ${a.name}`,go:()=>{if(!spendEv()){guilty(false);return}if(roll(o1))clear(lo?"Ngươi trình chứng cứ đã tra xét.":`Ngươi trình chứng cứ về ${wdNm(a)}.`);else guilty(false)}});
  O.push({n:"Xin Cung Chính ti tra xét",fx:{},j67:"tốn: không tốn gì",go:()=>{if(roll(o2))clear("Cung Chính ti tra hỏi người ra vào.");else guilty(false)}});

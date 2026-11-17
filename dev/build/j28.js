@@ -56,7 +56,7 @@ const SOC={
  provoke:{w:0.6,ok:(v,t)=>danger(v,t)>=10,run:(v,t)=>{oanAdd(t,v,BAL.eff.j28.run_5);if(t===S)apply({duc:0});else t.ghen=cl(t.ghen+3,0,100);ap(v,{danh:-1});return `${v.name} buông lời khiêu khích ${NM(t)}`}},
  humiliate:{w:0.5,ok:(v,t)=>danger(v,t)>=18&&rkOf(v)>=rkOf(t),run:(v,t)=>{oanAdd(t,v,BAL.eff.j28.run_6);ap(t,{danh:-2});ap(v,{danh:-1});return `${v.name} hạ nhục ${NM(t)} trước mặt cung nhân`}},
  flaunt:{w:0.5,ok:(v,t)=>v.sung>=40,run:(v,t)=>{liveRivals(true).forEach(x=>{if(x!==v)x.ghen=cl(x.ghen+2,0,100)});return `${v.name} đi khắp cung khoe quà ngự ban`}},
- spy:{w:0.6,ok:()=>true,run:(v,t)=>{evA(v,t,roll(40)?1:0);return `Người của ${v.name} dò hỏi giờ giấc của ${NM(t)}`}},
+ spy:{w:0.6,ok:()=>true,run:(v,t)=>{evA(v,t,roll(40)?BAL.eff.j28.evRun[0]:BAL.eff.j28.evRun[1]);return `Người của ${v.name} dò hỏi giờ giấc của ${NM(t)}`}},
  test:{w:0.4,ok:(v,t)=>aff(v,t)>=0,run:(v,t)=>{const ok=t===S?roll(60):roll(50);affAdd(v,t,ok?BAL.eff.j28.run_7[0]:BAL.eff.j28.run_7[1]);return `${v.name} thử lòng ${NM(t)}: ${ok?"tin thêm một chút":"càng ngờ vực"}`}},
  check:{w:0.4,ok:v=>v.inv.some(e=>!e.h),run:v=>{const i=v.inv.findIndex(e=>e.t);if(i>=0){v.inv.splice(i,1);return `${v.name} cho soát quà, vứt bỏ một món có độc`}return `${v.name} cho thái y soát lại quà được tặng`}},
  ally:{w:0.6,ok:(v,t)=>t!==S?t.sung>=v.sung:S.sung>=v.sung,run:(v,t)=>{relAdd(v,t,BAL.eff.j28.run_8);return `${v.name} tìm đến kết thân với ${NM(t)} đang được sủng`}},

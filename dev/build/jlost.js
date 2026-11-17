@@ -100,7 +100,7 @@ function loAskOdds(h,o,c){return cl(Math.round(40+aff(h,o)/2+(loHonest(h)?20:-10
 function loKeepOdds(c,a,h){return cl(Math.round(40+lostEv(c.id)*10+evG(a,h)*10+((a.danh||0)-(h.danh||0))/10-(h.mat||0)*3),5,95)}
 function loKeepHear(c,a,h){const nm=loNm(c.k);const o=loKeepOdds(c,a,h);
  if(roll(o)){const x=loEntry(c);if(x){lostUnwear(x.h,a);const i=x.h.inv.indexOf(x.e);if(i>=0)x.h.inv.splice(i,1);lostReturn(x.e,"xet")}
-  if(evG(a,h)>0)evA(a,h,-1);ap(h,{danh:-10,sung:-5});punish(h,"lấy trộm đồ",1);relAdd(h,a,BAL.eff.jlost.loKeepHear);
+  if(evG(a,h)>0)evA(a,h,BAL.eff.jlost.evLoKeepHear);ap(h,{danh:-10,sung:-5});punish(h,"lấy trộm đồ",1);relAdd(h,a,BAL.eff.jlost.loKeepHear);
   return h===S?`<span class="r">Cung Chính ti soát cung ngươi, thấy ${nm} của ${wdNm(a)}.</span> Ngươi mang tội lấy trộm: Danh -10, Sủng -5, bị phạt. Món đồ về lại với chủ.`
    :`Cung Chính ti soát ${loPal(h)}, thấy ${nm} của ${wdNm(a)}. ${wdNmC(h)} mang tội lấy trộm: Danh -10, Sủng -5, bị phạt. Món đồ về lại với ${wdNm(a)}.`}
  c.asked=0;c.reT=wk()+LO.hearCd;relAdd(h,a,BAL.eff.jlost.loKeepHear_2);
@@ -114,7 +114,7 @@ function loQuietHear(c,a,h){const nm=loNm(c.k);const x=loEntry(c);if(x){lostUnwe
 function loWatch(p){return [p.maid].concat(p.staff||[]).some(s=>s&&(s.loyal||0)>=BAL.loy.close)}
 function loOdds(kind,p){if(kind==="ask")return cl(Math.round(35+(p.mat||0)*6+(p.tamco||0)/5+(loWatch(p)?10:0)),5,95);
  if(kind==="cct")return cl(Math.round(50+(p.danh||0)/8+rkOf(p)*3),5,95);if(kind==="book")return cl(Math.round(55+(p.tai||0)/5+(p.mat||0)*3),5,95);return oSee(p,true)}
-function loEvAdd(c,p,why){if(c.cause==="riv"&&c.by&&loP(c.by)&&p!==loP(c.by)){evA(p,loP(c.by),1);return `${why}, dấu vết dẫn về ${wdNm(loP(c.by))} (chứng cứ +1)`}c.cev=(c.cev||0)+1;return `${why} (chứng cứ tra xét +1)`}
+function loEvAdd(c,p,why){if(c.cause==="riv"&&c.by&&loP(c.by)&&p!==loP(c.by)){evA(p,loP(c.by),BAL.eff.jlost.evLoEvAdd);return `${why}, dấu vết dẫn về ${wdNm(loP(c.by))} (chứng cứ ${balSg(BAL.eff.jlost.evLoEvAdd)})`}c.cev=(c.cev||0)+1;return `${why} (chứng cứ tra xét ${balSg(BAL.eff.jlost.evLoEvAdd)})`}
 function loDo(kind,p,c){const C=LO.cost[kind]||{};if(C.bac)ap(p,{bac:-C.bac});const o=loOdds(kind,p);const nm=loNm(c.k);
  if(kind==="soat"){const f=inspect(p);return f.length?`Soát rương, tìm thấy: ${f.join("; ")}.`:"Soát rương: không thấy gì lạ."}
  if(!roll(o))return kind==="ask"?"Hỏi cung nhân: không ai biết gì.":kind==="cct"?"Cung Chính ti ghi lại, chưa tra ra gì.":"Đối chiếu sổ Nội vụ phủ: sổ sách lộn xộn, không rõ.";
@@ -156,7 +156,7 @@ function loMonth(){if(!S||S.dead)return;for(const p of consorts()){if(!loAlive(p
 /* Soát rương (j8 inspect) finds a missing item hidden in the chest: it goes back to its owner; the trail may lead to whoever hid it (same odds) */
 (function(){const i0=inspect;inspect=function(p){const L=(p.inv||[]).filter(e=>e&&e.lo&&e.h);L.forEach(e=>p.inv.splice(p.inv.indexOf(e),1));let f;try{f=i0.apply(this,arguments)}finally{L.forEach(e=>p.inv.push(e))}
  const sees=oSee(p,true);for(const e of L){if(!roll(sees))continue;const c=loGet(e.lo);const i=p.inv.indexOf(e);if(i>=0)p.inv.splice(i,1);lostReturn(e,"soat");const o=c?loP(c.own):null;
-  let s=`${loNm(e.k)} của ${o?wdNm(o):"người khác"} lẫn trong rương (đồ thất lạc), đã sai người trả về`;const by=e.by?byKey(e.by):null;if(by&&by!==p&&roll(40+(p.mat||0)*6)){evA(p,by,2);s+=`: dấu vết dẫn về ${NM(by)} (chứng cứ +2)`}f.push(s)}
+  let s=`${loNm(e.k)} của ${o?wdNm(o):"người khác"} lẫn trong rương (đồ thất lạc), đã sai người trả về`;const by=e.by?byKey(e.by):null;if(by&&by!==p&&roll(40+(p.mat||0)*6)){evA(p,by,BAL.eff.jlost.evTop);s+=`: dấu vết dẫn về ${NM(by)} (chứng cứ ${balSg(BAL.eff.jlost.evTop)})`}f.push(s)}
  return f}})();
 /* the owner asks her quietly (event: costs only) */
 PEND.loask=pp=>{const c=loGet(pp.id);if(!c||c.st==="done")return null;const o=loP(c.own);if(!o)return null;const nm=loNm(c.k);

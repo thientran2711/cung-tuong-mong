@@ -64,7 +64,7 @@ function eitPilEvent(X){const s=X.s,P=BAL.eit.pil,it=IT[X.k]||{n:X.k};const nm=i
  const O=[
   {n:"Phạt nặng",fx:{},x:`thành: lấy lại đồ, ${s.name} ${P.detM} tháng không dám tái phạm, kẻ hầu khác cũng sợ · kèm: thiện cảm của ${s.name} với ngươi -${P.punLoyal}${s.spyFor?" · tra khảo có thể khai ra kẻ đứng sau":""}`,
    go:()=>{eitPilBack(X);s.loyal=cl((s.loyal|0)-P.punLoyal,0,100);s.pilDet=S.turn+P.detM;s.pilOk=0;S.pilSoft=null;for(const o of (S.staff||[]))if(o&&o!==s&&(o.pilDet==null||o.pilDet<S.turn+Math.round(P.detM/2)))o.pilDet=S.turn+Math.round(P.detM/2);let r=`Ngươi phạt ${s.name}, lấy lại ${nm.toLowerCase()}. Thiện cảm của ${s.name} với ngươi -${P.punLoyal}.`;
-    if(s.spyFor&&!eitIsMaid(s)){const m=typeof byKey==="function"?byKey(s.spyFor):null;r+=` Bị tra khảo, ${s.name} khai là tai mắt của ${m&&m!==S?NM(m):"kẻ khác"}. Đuổi khỏi cung.`;const i=S.staff.indexOf(s);if(i>=0)S.staff.splice(i,1);if(m&&m!==S)try{evA(S,m,1)}catch(e){}}
+    if(s.spyFor&&!eitIsMaid(s)){const m=typeof byKey==="function"?byKey(s.spyFor):null;r+=` Bị tra khảo, ${s.name} khai là tai mắt của ${m&&m!==S?NM(m):"kẻ khác"}. Đuổi khỏi cung.`;const i=S.staff.indexOf(s);if(i>=0)S.staff.splice(i,1);if(m&&m!==S)try{evA(S,m,BAL.eff.jeitem.evGo)}catch(e){}}
     log(r)}},
   {n:"Răn dạy rồi tha",fx:{},x:`thành: lấy lại đồ, thiện cảm của ${s.name} với ngươi +${P.forgiveLoyal} · kèm: kẻ hầu khác thấy ngươi dễ tính, ${P.softM} tháng tới dễ ăn bớt hơn`,
    go:()=>{eitPilBack(X);s.loyal=cl((s.loyal|0)+P.forgiveLoyal,0,100);S.pilSoft=S.turn+P.softM;S.pilSoftBy=s.name;log(`Ngươi răn dạy ${s.name} rồi tha. ${s.name} dập đầu tạ ơn. Thiện cảm của ${s.name} với ngươi +${P.forgiveLoyal}.`)}}];
