@@ -1,0 +1,3 @@
+PRIORITY #1 CHECK ('person-leftcol'): see reports/person-leftcol.md (brief s31-leftcol.md) | review/person-leftcol d1c121b1 | claims person-leftcol #2 session_01UV1SzjHhXKnA5TKza26b1V ROLLED OVER.
+# s32 person-leftcol WORKER #3 (sonnet) — read dev/handover/briefs/s32-common.md, then dev/handover/briefs/s31-leftcol.md (the job) and the HANDOVER at the end of dev/handover/reports/person-leftcol.md (b656cfb1).
+Continue on review/person-leftcol @d1c121b1: fit the key block on iPad 1180x820 (shrink the figure in the kit part, not per screen), check 1366x1024 / 412x1058 / 390x844, decide the ksz3/kdper event dialogs the same family way (kit). Then SẴN SÀNG KIỂM to main s32.

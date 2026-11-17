@@ -1,0 +1,5 @@
+PRIORITY #1 CHECK ('tuanluc-sync|Tuần lục|TA TUẦN QUA'): OD L1458(3) (Tuần lục = literary only; Được/Mất numbers live in Sổ ghi) | main j87 | review/* tuanluc-sync c70fb3973 | claims tuanluc-sync #3 session_01UV1SziJFVGaiWpZGPF2Egd READY.
+# s32 REVIEW tuanluc-sync r1 (opus, BIG: UI + data sync) — read dev/handover/briefs/s32-common.md + START_REVIEWER.md
+Review review/tuanluc-sync c70fb3973; worker report reports/tuanluc-sync.md (SUCCESSOR #3 section) + earlier sections for the brief/owner lines.
+REQUIRED FIX (main ruling from canon OD L1458(3), not an owner question): Tuần lục page 1 "TA TUẦN QUA" number chips (Sủng −8, Danh −8…) are removed — Tuần lục is literary only; the relation table stays; the numbers stay in Sổ ghi. Apply it yourself on review/tuanluc-sync-r1 (one place in j87 Tổng lược) + whole-family scan (0 Được/Mất chips anywhere in Tuần lục).
+CHECK: tuanluc-sync.js, cards/causes/filler, two-way, co-op, old-save load, quickcheck, Fold+iPad shots (LOOK). Report reports/review-tuanluc-sync-r1.md; send "PASS/FAIL tuanluc-sync-r1 <sha>" to main s32.
