@@ -312,7 +312,7 @@ PEND.night2=p=>{const s=p.s,v=liveRivals(false).slice().sort((a,b)=>a.rel-b.rel)
  const go=f=>()=>{nightFx(s);f()};
  const O=[{n:"Xin ân cho gia đình",fx:{},x:`${word(o1)} · thành: Danh +5, Bạc +40 · hỏng: Sủng -3`,go:go(()=>apply(roll(o1)?{danh:5,bac:40}:{sung:-3}))},
   {n:"Xin tha cho cung nữ bị phạt",fx:{},x:"Đức +3, Ân tình +1",go:go(()=>{apply({duc:3});S.an=cl(S.an+1,0,100)})}];
- {const G=BAL.tw.g.pillow;if(v)O.push({n:`Thì thầm nói xấu ${v.name}`,fx:{},x:`${word(o2)} · thành: nàng Sủng -${G.hit}, thiện cảm -${G.rel} · hỏng: ${DG()?`ngài đa nghi, quay ra nghi ngươi: Sủng -${G.dg[0]}, Danh -${G.dg[1]}`:`Sủng -${G.fail}`}`,go:go(()=>pillowDo(S,v,o2))})}
+ {const G=BAL.tw.g.pillow;if(v)O.push({n:`Thì thầm nói xấu ${v.name}`,fx:{},x:`${word(o2)} · thành: nàng Sủng -${G.hit}, nàng quý ngươi -${G.rel} · hỏng: ${DG()?`ngài đa nghi, quay ra nghi ngươi: Sủng -${G.dg[0]}, Danh -${G.dg[1]}`:`Sủng -${G.fail}`}`,go:go(()=>pillowDo(S,v,o2))})}
  if(son)O.push({n:`Xin cho ${son.name}`,fx:{},x:`${word(o3)} · thành: ngài thương con +10`,go:go(()=>{if(roll(o3))son.fond=cl(son.fond+10,0,100);else S.an=cl(S.an-2,0,100)})});
  O.push({n:"Im lặng, tựa vai ngài",fx:{},x:"Ân tình +2",go:go(()=>{S.an=cl(S.an+2,0,100)})});
  return{cls:"night",who:pEmp(),t:`${p.ex?`<p class="past">${p.ex}</p>`:""}<p>${txt}</p><p class="past">Gối đầu, nửa đêm. Ngươi muốn nói gì?</p>`,o:O}};

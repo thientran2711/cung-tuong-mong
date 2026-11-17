@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"41309fd8","t":"2026-11-17T06:59Z","c":"AG2: PROGRESS file","b":"297f75a3d38b","h":[{"s":"fa42f8c4","t":"2026-11-17T04:50Z","c":"Bước sang kiếp mới nay sạch sẽ như trang giấy trắng: không còn vết thương, khăn che mặt hay đồ vật không tên sót lại từ kiếp trước; các trò…"},{"s":"ee492cfd","t":"2026-11-17T04:15Z","c":"Hộp Chọn sổ nay rộng rãi, chữ trên nút đọc trọn, không còn ô hình bị cắt; trang Tuần lục hiện trọn dáng người đến tận gót chân, bảng thân s…"},{"s":"bad6d59f+","t":"2026-11-17T03:41Z","c":"Chơi chung: chuẩn bị đường truyền gọn nhẹ hơn giữa hai máy; khi chơi chưa có gì thay đổi."},{"s":"babc9b4a","t":"2026-11-17T01:39Z","c":"Chơi chung không còn treo máy vì tên bạn lặp chữ; số bóng người trên dư đồ khớp đúng người đang ở đó; việc có hạn giờ hiện đồng hồ ngay dướ…"},{"s":"92685210+","t":"2026-11-17T00:53Z","c":"Khung việc và khung sự kiện bốn cỡ, tranh lấp đầy khung, việc nhắc tên ai hiện chân dung người ấy; phẩm của món đồ nằm ngay trên viền khung…"},{"s":"6f513340","t":"2026-11-16T23:24Z","c":"Vào game mới không còn bật ngay màn lật thẻ, lật thẻ chỉ khi vào buổi tối; dư đồ nhãn giấy mới; việc dài lấn sang buổi sau; lời trong cung …"},{"s":"7a18d957","t":"2026-11-16T22:44Z","c":"review-diemtrang-fx-r1 report"},{"s":"afe2bcbc","t":"2026-11-16T22:25Z","c":"review r1: KIT 84.1a note + report"},{"s":"dea1d445+","t":"2026-11-16T21:32Z","c":"golive lag-play-2: CHANGE line + site rebuilt"},{"s":"674f3af4","t":"2026-11-16T21:21Z","c":"Chơi cùng bạn: bạn chơi chung chưa gặp mặt nay hiện tên gọi chung “Hảo hữu của ta” ở mọi nơi, không còn ẩn thành dấu hỏi."}]};
+window.CTM_BI={"s":"c42a5224+","t":"2026-11-17T07:01Z","c":"r1: site rebuilt after the merge","b":"6e9982adf61b","h":[{"s":"fa42f8c4","t":"2026-11-17T04:50Z","c":"Bước sang kiếp mới nay sạch sẽ như trang giấy trắng: không còn vết thương, khăn che mặt hay đồ vật không tên sót lại từ kiếp trước; các trò…"},{"s":"ee492cfd","t":"2026-11-17T04:15Z","c":"Hộp Chọn sổ nay rộng rãi, chữ trên nút đọc trọn, không còn ô hình bị cắt; trang Tuần lục hiện trọn dáng người đến tận gót chân, bảng thân s…"},{"s":"bad6d59f+","t":"2026-11-17T03:41Z","c":"Chơi chung: chuẩn bị đường truyền gọn nhẹ hơn giữa hai máy; khi chơi chưa có gì thay đổi."},{"s":"babc9b4a","t":"2026-11-17T01:39Z","c":"Chơi chung không còn treo máy vì tên bạn lặp chữ; số bóng người trên dư đồ khớp đúng người đang ở đó; việc có hạn giờ hiện đồng hồ ngay dướ…"},{"s":"92685210+","t":"2026-11-17T00:53Z","c":"Khung việc và khung sự kiện bốn cỡ, tranh lấp đầy khung, việc nhắc tên ai hiện chân dung người ấy; phẩm của món đồ nằm ngay trên viền khung…"},{"s":"6f513340","t":"2026-11-16T23:24Z","c":"Vào game mới không còn bật ngay màn lật thẻ, lật thẻ chỉ khi vào buổi tối; dư đồ nhãn giấy mới; việc dài lấn sang buổi sau; lời trong cung …"},{"s":"7a18d957","t":"2026-11-16T22:44Z","c":"review-diemtrang-fx-r1 report"},{"s":"afe2bcbc","t":"2026-11-16T22:25Z","c":"review r1: KIT 84.1a note + report"},{"s":"dea1d445+","t":"2026-11-16T21:32Z","c":"golive lag-play-2: CHANGE line + site rebuilt"},{"s":"674f3af4","t":"2026-11-16T21:21Z","c":"Chơi cùng bạn: bạn chơi chung chưa gặp mặt nay hiện tên gọi chung “Hảo hữu của ta” ở mọi nơi, không còn ẩn thành dấu hỏi."}]};
 /* KBOOT — BOOT COVER (owner 15/11 "Khi vừa bấm vào game, có chừng ít hơn 1 giây hiện khung này"; KIT §14.1).
    Before: while the 4 MB page parsed, the browser painted the bare static markup of p1.html (HUD box, a vertical stat label list, empty
    panels, the old 11-tab bar) for ~1 s on a warm open and many seconds on a cold one, before any kit CSS/JS existed.
@@ -2003,7 +2003,7 @@ PEND.night2=p=>{const s=p.s,v=liveRivals(false).slice().sort((a,b)=>a.rel-b.rel)
  const go=f=>()=>{nightFx(s);f()};
  const O=[{n:"Xin ân cho gia đình",fx:{},x:`${word(o1)} · thành: Danh +5, Bạc +40 · hỏng: Sủng -3`,go:go(()=>apply(roll(o1)?{danh:5,bac:40}:{sung:-3}))},
   {n:"Xin tha cho cung nữ bị phạt",fx:{},x:"Đức +3, Ân tình +1",go:go(()=>{apply({duc:3});S.an=cl(S.an+1,0,100)})}];
- {const G=BAL.tw.g.pillow;if(v)O.push({n:`Thì thầm nói xấu ${v.name}`,fx:{},x:`${word(o2)} · thành: nàng Sủng -${G.hit}, thiện cảm -${G.rel} · hỏng: ${DG()?`ngài đa nghi, quay ra nghi ngươi: Sủng -${G.dg[0]}, Danh -${G.dg[1]}`:`Sủng -${G.fail}`}`,go:go(()=>pillowDo(S,v,o2))})}
+ {const G=BAL.tw.g.pillow;if(v)O.push({n:`Thì thầm nói xấu ${v.name}`,fx:{},x:`${word(o2)} · thành: nàng Sủng -${G.hit}, nàng quý ngươi -${G.rel} · hỏng: ${DG()?`ngài đa nghi, quay ra nghi ngươi: Sủng -${G.dg[0]}, Danh -${G.dg[1]}`:`Sủng -${G.fail}`}`,go:go(()=>pillowDo(S,v,o2))})}
  if(son)O.push({n:`Xin cho ${son.name}`,fx:{},x:`${word(o3)} · thành: ngài thương con +10`,go:go(()=>{if(roll(o3))son.fond=cl(son.fond+10,0,100);else S.an=cl(S.an-2,0,100)})});
  O.push({n:"Im lặng, tựa vai ngài",fx:{},x:"Ân tình +2",go:go(()=>{S.an=cl(S.an+2,0,100)})});
  return{cls:"night",who:pEmp(),t:`${p.ex?`<p class="past">${p.ex}</p>`:""}<p>${txt}</p><p class="past">Gối đầu, nửa đêm. Ngươi muốn nói gì?</p>`,o:O}};
@@ -38080,7 +38080,7 @@ function buildFriend(P,mine){if(!P||!P.S||P.dead||P.S.dead||friendHome(P))return
  /* jtruth (reviewer r1): her own wrongs ledger travels with her, so true evidence on her is capped by what SHE really did (an empty
     ledger here made every piece on the friend a rumour each week, and NPC spies could never find a guilty friend); read-only copy */
  for(const k of ["wrongs","dw","dws","dkeys","schemes"])if(s[k]!=null)v[k]=J(s[k]);
- try{const m=s.emp&&s.emp.met&&s.emp.met.me;if(m)v.emet=J(m)}catch(e){}/* AG2: what she did near the Emperor (her client's memory) weighs her card on the host's tray, as the host's own deeds weigh hers */
+ try{const m=s.empMe||(s.emp&&s.emp.met&&s.emp.met.me);if(m)v.emet=J(m)}catch(e){}/* r1: her personal S.empMe (P.S never holds the world key emp) *//* AG2: what she did near the Emperor (her client's memory) weighs her card on the host's tray, as the host's own deeds weigh hers */
  for(const k of PETK2)if(s[k]!=null)v[k]=J(s[k]);  /* her pets: shown on her entry, acts on them go through `res` (pet ops), never the week write-back */
  /* B1 (review/coop-b1b5): her bag and her children on her entry, so the item / child acts are offered on her exactly as on an NPC.
     Display copies only: what an act does to them goes to her through `res` (item / kid ops), never through the week write-back. */
@@ -57107,8 +57107,11 @@ function empBusy(){try{if(illOf(S.emp))return"ill"}catch(e){}if(has("chamchinh")
 function empSummon(){const b=empBusy();const o=empD().summon[b?1:0];const ok=roll(o);const z=empWhyZ();z.k=ok?"call":"rest";z.busy=b;return ok}
 /* 2 WHO: his memory of each person's deeds near him */
 function empMetL(p){if(!p||!S.emp)return null;if(p.coop&&p.emet)return p.emet;const M=S.emp.met;return M?M[key(p)]||null:null}
-function empMet(p,kd,ok){try{if(!p||!S||!S.emp||!empOn())return;const D=empD().met,w=wk();const M=S.emp.met=S.emp.met||{};const k=key(p);
-  const L=(M[k]||[]).filter(e=>w-e[0]>=0&&w-e[0]<D.keep);L.push([w,kd,ok?1:0]);while(L.length>D.n)L.shift();M[k]=L}catch(e){console.error("jagemp met",e)}}
+/* r1 (review/npc-agent-ag2-r1): a co-op GUEST's own deeds are kept in her personal key S.empMe (emp is a WORLD key: the host's copy
+   overwrites it and myBlob never sends it), so buildFriend on the host can weigh her card by them; the host / solo keep S.emp.met */
+function empGuestSelf(p){try{return p===S&&typeof agGuest==="function"&&agGuest()&&!!(BAL.ag&&BAL.ag.on&&BAL.ag.emp)&&!window.__agOff&&!S.dead}catch(e){return false}}
+function empMet(p,kd,ok){try{if(!p||!S||!S.emp)return;const gs=empGuestSelf(p);if(!gs&&!empOn())return;const D=empD().met,w=wk();const k=key(p);
+  const L=((gs?S.empMe:(S.emp.met||{})[k])||[]).filter(e=>w-e[0]>=0&&w-e[0]<D.keep);L.push([w,kd,ok?1:0]);while(L.length>D.n)L.shift();if(gs)S.empMe=L;else{const M=S.emp.met=S.emp.met||{};M[k]=L}}catch(e){console.error("jagemp met",e)}}
 function empMemN(p){const L=empMetL(p);if(!L)return 0;const D=empD().met,w=wk();let s=0;for(const e of L)if(w-e[0]>=0&&w-e[0]<D.keep)s+=e[2]?1:D.miss;return Math.min(D.cap,s)}
 function empMemF(p){return empOn()?1+empD().met.w*empMemN(p):1}
 function empMemK(p){const L=empMetL(p);if(!L||!empMemN(p))return null;const x=L.filter(e=>e[2]).pop()||L[L.length-1];return x?x[1]:null}
@@ -58797,7 +58800,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="297f75a3d38b";window.CTM_BUILD=BUILD;
+const BUILD="6e9982adf61b";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

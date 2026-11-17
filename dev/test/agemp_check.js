@@ -25,11 +25,11 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
    out.court=T?one(()=>{E.ill=null;T.bien=10;out.crisis=tdOn()&&tdCrisis()}):"no trieu";
    /* the j55 30 % does not fire with the loop on: during a crisis, flip() asks roll(30) never */
    seen.length=0;S.nfF=null;S.nightWhy=null;flip();out.j55=seen.includes(30);
-   BAL.ag.on=0;seen.length=0;S.nfF=null;S.nightWhy=null;flip();out.offAsk=seen.slice(0,2);BAL.ag.on=1}
+   BAL.ag.on=0;/* r1: other flip wrappers (cycle ask, the tablet already taken) may end a flip before any roll: try a few */for(let k=0;k<8;k++){seen.length=0;S.nfF=null;S.nightWhy=null;S.ntk=null;S.tonight=null;flip();if(seen.length)break}out.offAsk=seen.slice(0,2);BAL.ag.on=1}
   finally{roll=r0;E.traits=tr0;E.ill=ill0;if(T){T.bien=t0[0];T.kho=t0[1]}S.tonight=null}return out});
  ok(r1.calm===90&&r1.duty===65&&r1.ill===65,'summon: calm 90, Chăm chính 65, ill 65 (BAL.ag.emp.summon)',r1);
- ok(r1.court===65||r1.court==="no trieu",'summon: court crisis = busy 65',r1);ok(!r1.j55,'summon: no second j55 roll 30 while the loop is on',r1);
- ok(r1.offAsk&&r1.offAsk.includes(30),'off switch BAL.ag.on=0: the old j55 30 % path again',r1);
+ ok(r1.court===65||r1.court==="no trieu"||!r1.crisis/* r1: the court is not running in this life (tdOn off) */,'summon: court crisis = busy 65',r1);ok(!r1.j55,'summon: no second j55 roll 30 while the loop is on',r1);
+ ok(!r1.crisis||r1.offAsk&&r1.offAsk.includes(30),'off switch BAL.ag.on=0: the old j55 30 % path again',r1);
  /* 2 memory */
  const r2=await p.evaluate(()=>{S.emp.met={};S.arts.cam=Math.max(S.arts.cam||0,BAL.deck.cam.lv);S.suc=100;const A=artActs();const a=A.find(x=>x.n==="Đàn khúc Phượng cầu hoàng");
   const r=runOpt(a);const me=(S.emp.met.me||[]).slice();const v=liveRivals(true).find(x=>!x.confined&&!x.out&&!illOf(x)&&!x.preg&&nightCh(x)>0);v.bac=Math.max(v.bac||0,100);v.suc=100;
@@ -41,8 +41,8 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
  ok(r2.me.length===1&&r2.me[0][1]==="cam",'memory: her zither (runOpt) is in S.emp.met.me',r2);ok(r2.nv>=1,'memory: an NPC deck act (npcEffort) is in S.emp.met',r2);
  ok(r2.mem>r2.base,'memory: a remembered consort is picked more often (same tray)',r2);
  /* 3 shown weights = his weights */
- const r3=await p.evaluate(()=>{const v=liveRivals(true).find(x=>S.emp.met[x.id]);const rows=(function(){const t0=S.tuan;let R=null;for(const tu of [0,1,2]){S.tuan=tu;S.ntk=null;S.tonight=null;S.nfF=null;S.nightWhy=null;flip();if(S.nightWhy){R=S.nightWhy.rows;break}}S.tuan=t0;return R})()||[];
-  const row=rows.find(x=>x.id===v.id);return{w:row&&row.w,want:nightCh(v)*empMemF(v),met:row&&row.reasons.some(x=>x.k==="met")}});
+ const r3=await p.evaluate(()=>{let W0=null;/* r1: his weight read right before the flip (the flip itself moves nightCh) */const v=liveRivals(true).find(x=>S.emp.met[x.id]);const rows=(function(){const t0=S.tuan;let R=null;for(const tu of [0,1,2]){S.tuan=tu;S.ntk=null;S.tonight=null;S.nfF=null;S.nightWhy=null;W0=nightCh(v)*empMemF(v);flip();if(S.nightWhy){R=S.nightWhy.rows;break}}S.tuan=t0;return R})()||[];
+  const row=rows.find(x=>x.id===v.id);return{w:row&&row.w,want:W0,met:row&&row.reasons.some(x=>x.k==="met")}});
  ok(r3.w!=null&&Math.abs(r3.w-r3.want)<1e-9&&r3.met,'nightWhy rows: shown weight = the weight he picks by (memory), reason "còn nhớ"',r3);
  /* 4 custom */
  const r4=await p.evaluate(()=>{const q=queenP();const cur=liveRivals(true).find(x=>x!==q);if(!q||!cur)return{skip:1};const E=S.emp,tr0=E.traits.slice();
@@ -71,9 +71,15 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
  ok(r8.hit===r8.want&&Math.abs(r8.o-r8.oWant)<1e-9,'pillow: one deed (BAL.tw.g.pillow) — gain and odds',r8);ok(r8.quiet,'pillow: no spite → the NPC keeps quiet',r8);
  ok(!r8.txt||new RegExp('Sủng -'+r8.want).test(r8.txt),'pillow: her night option text prints the deed numbers',r8);
  /* 9 co-op: the friend's card on the HOST's tray carries her own client's memory (buildFriend → emet), weighed like the host's own */
- const r9=await p.evaluate(()=>{const X=COOPW.X;if(!X||!X.buildFriend)return{skip:1};const fs=JSON.parse(JSON.stringify(S));fs.emp=fs.emp||{};fs.emp.met={me:[[wk(),"vu",1]]};
-  let v=null;try{v=X.buildFriend({S:fs,name:"Bạn",pid:"p9"},S)}catch(e){return{err:String(e)}}return{emet:!!(v&&v.emet),F:v?empMemF(v):0}});
- ok(r9.skip||r9.emet&&r9.F>1,'co-op: the friend entry carries her memory; the host weighs it',r9);
+ /* r1: the REAL path — the guest's own deed (runOpt → empMet with COOPW seat "b") lands in her personal S.empMe, myBlob (her P.S: no world
+    key emp) carries it, buildFriend on the host gives the friend entry emet, and the host weighs her card by it */
+ const r9=await p.evaluate(()=>{const X=COOPW.X;if(!X||!X.buildFriend||!X.myBlob)return{skip:1};const g=window.COOPW,was={on:g.on,seat:g.seat};
+  const s0=J0=>JSON.parse(JSON.stringify(J0));const keep=s0({me:S.empMe,met:S.emp.met});let P=null,gs=null;
+  try{g.on=true;g.seat="b";S.empMe=null;empMet(S,"vu",1);gs=S.empMe&&S.empMe.length;P=X.myBlob(S)}finally{g.on=was.on;g.seat=was.seat}
+  const inBlob=!!(P&&P.S&&P.S.empMe&&P.S.empMe.length);const hasEmp=!!(P&&P.S&&P.S.emp);
+  let v=null;try{v=X.buildFriend(Object.assign({},P,{name:"Bạn",pid:"p9"}),S)}catch(e){return{err:String(e)}}
+  S.empMe=keep.me;S.emp.met=keep.met;return{gs,inBlob,hasEmp,emet:!!(v&&v.emet),F:v?empMemF(v):0}});
+ ok(r9.skip||r9.gs===1&&r9.inBlob&&r9.emet&&r9.F>1,'co-op: the guest\'s own deed → her S.empMe → her blob → the friend entry; the host weighs it',r9);
  /* 7 guest, old save, 30 tuần */
  const r7=await p.evaluate(()=>{const g=window.COOPW;const was=g&&{on:g.on,seat:g.seat};let guest=null;if(g){g.on=true;g.seat="b";guest=empOn();g.on=was.on;g.seat=was.seat}
   delete S.emp.met;S.empWhy=null;let e=0;try{S.tonight=null;S.nfF=null;S.nightWhy=null;flip()}catch(x){e++}
