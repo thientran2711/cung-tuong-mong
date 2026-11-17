@@ -1,0 +1,39 @@
+# review coop-thin-b r3 — PASS (review/coop-thin-b-r3 @ fee14ec5, with one reviewer fix)
+
+PRIORITY #1 CHECK ('coop-thin|withSeat|D.later|D.kind|TB.hold|allyRel|j2.start|invHer|briber'): OD 3 (17/11 ~01:40Z GO thin guest, ~02:05Z no option-1 patching, ~02:15Z waves) | ledger 5 | main 65dcf52f (part A only; no B/D) | review/* coop-thin-b 4609afa6 (worker #4), coop-thin-b-r2 e7c7f16b (r2 FAIL + R7/R7c), one-core-dup3 6f356fc9 (BAL.eff.j2.start) | claims: this review session_01N1tNP5hpVGVh45GCMzd9Ah.
+
+Reviewer session_01N1tNP5hpVGVh45GCMzd9Ah (fresh opus), coordinator Foreman B s5 session_01N1tNP5TgfuFGPjgoMfV7Tx. START_CTX ≈ 3 % (est.; used_tokens reads 0); ends ≈ 15 % (no rollover).
+Verdict branch **review/coop-thin-b-r3 @ fee14ec5** = 4609afa6 + merge of origin/main 65dcf52f (conflicts: generated assets.json/index.html/sw.js taken from main + site rebuilt; KIT_REQUESTS.md both entries kept) + reviewer fix 0bb6e271 + probes/site 5e35e377 + KIT_REQUESTS note fee14ec5. origin/main is an ancestor (fast-forward possible).
+
+## Verdict per check
+| # | Check | Result |
+|---|---|---|
+| 1 | r2 item (B‖D seam) at the root, whole family | **PASS after one reviewer fix.** Code read: every D path into her context now goes through ONE door (`D.later`; all call sites are data `D.kind`: inv, bribe, nbribe, res, ev, hr, invHer, briber; `D.cardFor` has no caller left); her intents are deferred in the `do` handler (`{held:1}`); belt in withSeat (`held-run`, never seen in any run). Hold kinds: TB.hold (R7/R10), host reload (R4 + my R8: deferred data in LS `df`, runs after reload, invite delivered once on the new life after the stale re-roll), host leave = same LS path, peer offline / week (release flushes, R3). B never overwrites D (roll carries thq, accept keeps D.ANS cards), D never takes B (no Nhập cung twice in any run). **Gap found and fixed (0bb6e271):** the life tag of the host's answer to HER offer (invHer, briber) was the life she had when HE answered, not the life that made the offer → her old-life Kết giao/gift offer answered after her new life is in ran on the NEW person (old item pushed into the new chest and given away, "Hảo hữu nhận lời" on the new life); briber (her bribe answered) was "always delivered" though it changes her person (bạc −pay, a deed, the mistress's proof + rel −5 on the new person). Fix: her intent stamps `lf` (her life) in the host's card pp (onDo inv/bribe), otherSide passes it to `D.kind(...,life)`, briber added to D.LIFEB. Proof: probe R9 — before (4609afa6) FAIL: `D.log [card:b:1, patch:b:7:16]`, her Q `["Hảo hữu nhận lời"]`; after: `drop-life:b:invHer`, her Q empty. |
+| 2 | 'Old-life news' policy | PASS. Dropped (each belongs to a person who no longer exists; showing them would land the old life's effects/news on the new one): res (host / NPC act effects + their notes), ev (her tai mắt's proof), hr (her son named heir), nbribe (an NPC buying her as cung nữ), invHer + briber (answers to her old-life offers; r3), and every non-answer card left in her store at accept (logged `life-cards`) + the old life's unacked patches (would hit the new person). Kept: D.ANS thInv / thBribe (the other PLAYER waits; thBribe that no longer fits answers him "no longer serves" via D.GONE). Nothing the owner would expect on the new life is lost: no card asks the new person to answer for the old one. Note only: when her old-life offer is dropped, the host gets no line saying so (his card just closes) — hiếm · nhỏ. |
+| 3 | Regression | PASS (table below). R5 socket-drop: 0 fails in 12 runs on this branch and 0/5 on base be599e1e (same r1 probe) → not reproducible here; the worker's 2/15 is a rare timing flake of the socket-drop scenario, not attributable to the fix (no D path in R5). thin-a L0 1 fail in 3 runs ("round trip after the merged week", `tn.who` 901 vs "me" = part A ref mapping, level 0 runs none of B/D) → reruns 19/19 ×2: flake, note. |
+| 4 | Both phones, kit, real touch | PASS. Native viewports (no resize), both seats, R10 scene: Fold 755x1000@2 host + iPad 1180x820@2 guest, and swapped (Fold guest, iPad host): her invite = native kit Việc card (2 kit option tiles), his side = kit BÁO "Hảo hữu vào cung"; no overflow; REAL touch (hasTouch, touchscreen.tap) on "Nhận" → host ran `pick:thInv:0` once (both orientations). Shots looked at, scratch only, none uploaded. KIT REQUEST (Fold 755 option tiles): **real kit issue, not this branch** — no kit file differs from main; a SOLO game at native 755 renders the same card with 174 px tiles (304 px just after open, squeezed when the option art lays out); same family as main's npc-agent-ag3 entry. Extra seen: tapping the ART of a squeezed tile did not choose (name tap does) — added to the KIT REQUEST. |
+| 5 | CAP 2 → 4 | **YES.** CAP is the thin LEVEL cap (part numbers; seats stay 2 — there is no 3–4 player harness). CAP=4 build at level 4 (D on by level, no flag): R7+R7c 5/5 (r1 48/48 ×5), my R8/R9/R10 25/25, thin-b 148/148, thin-d 52/52, d-probe 34/34. Nothing is gated on level 3 (only TH.on(1), on(2), on(4) exist), so level 4 without C is safe; an older build in the room negotiates the level down. Raise CAP in the merge commit (tests already accept CAP ≥ 2). |
+| 6 | ONE CORE merge with one-core-dup3 (6f356fc9) | Trial merge (scratch worktree): 8 conflicts; 7 already exist between main and dup3 (assets.json, index.html, sw.js, assemble.py — union of the module lists: dup3's jbaleff/jbalarc + main's jgreet + this branch's jcoopthinb line —, j24, j42, j9, the Khiêu khích hunk of j2). The ONLY one this branch adds: j2 start() `allyBond(...)` vs dup3 `relAdd(S,v,BAL.eff.j2.start)`. **ONE key wins: BAL.eff.j2.start** — keep `allyBond` (j2 start + part B rebase share it), make it read `BAL.eff.j2.start`, delete `allyRel` from jbal.js (+ the comment in jcoopthinb.js:83). With that resolution one-core-text PASS, one-core-bind PASS (734 prints, 0 mismatch); guard's one fail was the main↔dup3 Khiêu khích hunk I kept from main in the trial (relAdd −20), not this rule. `ghenNew`: dup3 still types R(15) in newRival; after the merge newRival reads ghenNew0() = BAL.ghenNew (one key, no conflict). No third key. |
+
+## Tests (LIVE Worker https://ctm-coop.victoria-tntt.workers.dev; logs /home/user/wt/rv3-out, deleted with this verdict)
+| test | result |
+|---|---|
+| NEW coop-thin-b-r3 (R8 host reload w/ 2 deferred kinds, R9 old-life offer, R10 two kinds at once) DFLAG=1 / CAP=4 L4 | 25/25, 25/25, 24/25→fixed test timing; native shots+touch 29/29 (Fold host) · 29/29 (Fold guest) |
+| same probe on worker sha 4609afa6 (before) | R9 FAIL ×2 (the gap above), R8/R10 pass |
+| coop-thin-b-r1 DFLAG=1 (R7+R7c) | 48/48 ×5 |
+| coop-thin-b-r1 CAP=4 level 4 | 48/48 ×5 |
+| coop-thin-b-r1 DFLAG=0 | 39/39 ×2 (base be599e1e 39/39 ×5) |
+| coop-thin-b L2 / swap / DFLAG=1 / CAP=4 L4 | 148/148 each |
+| coop-thin-d L2 / swap / L4 | 52/52 each |
+| coop-thin-d-probe L2 / swap / L4 | 34/34 each |
+| coop-thin-a L0 / L1 | 18/19 → 19/19 ×2 (flake above) / 24/24 |
+| coop-e2e / swapped · coop-p2 | 62/62 / 62/62 · 45/45 |
+| one-core-guard | PASS (inline 6638 ≤ 6691, no --allow-grow) |
+| quickcheck (5e35e377) | PASS 241 s · open 1221 ms · old save ok · render 217/210, tab 320/277, buổi 765/924 ms · core gates PASS (incl. coop-one-world) |
+Old saves: solo (quickcheck) ok; co-op host store from an older build (no `df`) loads (qsInit guards it; d-probe P2 host reload green).
+
+## Notes (not counted)
+- Her intent deferred while held then run after accept stamps the NEW life as `lf` (a race: she sends an offer right before her roll) — hiếm · nhỏ.
+- Host's own rebirth not deferred (worker's row f) — agreed, note.
+- thInv card speaker = default Quản sự ma ma, not the friend (worker note; D card, pre-existing).
+- A spy bought by her old life (srv.spyFor = her seat) keeps feeding her new life — seat-level rule, outside this part.
