@@ -62,3 +62,60 @@ dev/handover/reports/road-onecore.md — neither existed at 23:40Z). Steps for t
 unchanged (verify by evaluating every option's c/w/l/o before vs after on a neutral life = identical); (4) re-run road-option-scan, road-rare,
 road-saves (ROADS=nc,bd,td,ch), coop-e2e, one road-full per origin; (5) then SẴN SÀNG KIỂM. Worktree /home/user/wt/rb2fix kept for the
 successor (sparse); utf-8 server script /home/user/wt/rb2fix-tmp/srv.py (python3 srv.py <port> <root>).
+
+# SUCCESSOR (session_01N1tNP2boznW7SbhZfGfvpp, 11/17/2026) — ONE CORE gate + history doubts
+START_CTX ≈ 3 % of the 1M window (estimate; context_usage read 0).
+Head: **db5c49f4** on review/road-b2-fix. Commits: dbb7d526 (nc envoy meetings, rule 8) · d385cb48 (merge review/road-onecore ceb54d40) · 893e8166 (ONE CORE move) · 99df316e (merge origin/main 744b80e7 + chTh) · 03a12ce9 (site) · 6b308042 (merge review/road-onecore 6a1112d1: ch_co terms use "kd") · db5c49f4 (site rebuilt).
+
+## ONE CORE (OD:L1267) — the road-onecore pattern, no second scheme
+- Merged origin/review/road-onecore ceb54d40: `jbalroad.js` (assemble: right before jroad.js) holds ALL of BAL.road; the B2 keys that sat in jbal2.js
+  (td_an, ncConf, ch_co, ch_benh, ch_bi incl. ch_bi.conf) moved there unchanged. `RD_FL` is now an alias of road-onecore's `rdFb` (same book S.st.f14.fb).
+- `dev/measure/road-onecore-move.js` run on jrd_nc/td/ch (3 small tool fixes, same output for B1: skip `rdDef(b,…)` alias loops and `...SPREAD` members;
+  odds patterns for `RD_FL("k")` (= "b" term), `RDQ.x(A)?y:n` ("q"), `RDQ.x(A)*k` ("k"); "-" allowed on "q").
+  → BAL.road.fx: 84 chapters (nc 28 + its bd copies by the alias loop, td 28, ch 28), 961 odds as term lists, + `ch_hoD` (the four after-death ch_ho beats,
+  CHHO_D fills them with rdFx("ch_hoD")).
+- Hand pre-edits (exact same values): 6 plain-number odds in td → `()=>N`; nc_vuong .10/.11 and td_song .11 / td_tha .10 RD_FL terms → RDQ.ncvBL / RDQ.tdsProof;
+  ch_co .7/.9/.11 Thái-hậu terms → RDQ.chcoTh / RDQ.chco9 with "kd" terms (divisors 8 / 6 in BAL.road.fx); ch_benh .10 `+(…?-10:0)` → `-(…?10:0)`.
+- RD97L: the 12 B2 rare finales → `RD97L.push(rdRare({…}))`, numbers in BAL.road.rare (p, np, sc, c, fx, bar; ch_bi_11 also th); the condition texts print
+  `RR(a).bar` (no typed «Danh từ 50» left).
+- jrd_ch go amounts (Thái hậu / Hoàng hậu favour, ap67/fmt pairs, 31 keys) → BAL.road.chTh, read by `CHTH(key)`.
+- Proof: `dev/measure/road-b2-same.js` (copy of road-onecore-same for nc/td/ch; OLD side loads jbalroad at the ref; random lives also vary S.thDead,
+  origin nc/bd and the road flags): c/w/l/fx deep-equal, odds === on every trial.
+
+| origin | chapters | c | w | l | odds fn | odds trials | E fx | differences |
+|---|---|---|---|---|---|---|---|---|
+| nc | 28 | 568 | 462 | 242 | 322 | 128800 | 84 | 0 |
+| bd | 28 | 568 | 462 | 242 | 322 | 128800 | 84 | 0 |
+| td | 28 | 620 | 461 | 258 | 325 | 127600 | 86 | 0 |
+| ch | 28 | 718 | 583 | 240 | 334 | 133600 | 86 | 0 |
+RD97L compared: 16, 0 differences. chTh: replaced by a script that asserts each ap67/fmt pair carries one value.
+
+| gate (on top of origin/main 744b80e7) | before | after |
+|---|---|---|
+| one-core-guard.js, no --allow-grow: jrd_nc / jrd_td / jrd_ch typed rule numbers | 1349 / 1416 / 1510 | 0 / 0 / 0 → PASS, 0 fails (inlineNow 6674 ≤ baseline 6691) |
+Not counted by the gate and left as road-onecore left them for B1: relation amounts inside go: (rdOan / rdRel / e67bien …), sc / k tiers.
+
+## History doubts (road-history rules)
+1. FIXED by rule 8 («a woman meets foreign envoys only at an inner-palace gia lễ audience»): every envoy / envoy-kinsman meeting in nc now happens
+   «trong buổi gia lễ ở nội điện, cách một bức rèm, có thái giám đứng hầu» — nc_gian .8 c1 (option + note of the rule), .9 t1; nc_su .5 s2/s4/s5, .10 t1
+   (gia lễ tiễn sứ); nc_tuc .10 c1, .11 s1 (+ option «Tiếp sứ thần già cách rèm…»); nc_vuong .10 s1, .11 s1 (option «Tiếp cả hai đoàn cùng lúc, cách rèm»,
+   RD97L path prefix kept). bd copies follow (alias loop).
+## QUESTIONS (not decided by the rules)
+2. td TDVAO fallback when there is no Hoàng hậu and no Thái hậu: «theo lệ mệnh phụ vào cung ngày sóc vọng». Rule 11 assumes one of them; history
+   expert / owner: acceptable, or should the wives then greet the consort who runs the harem?
+3. td_song after a .4 r97 (surname already restored by edict): .9 «Đổi tên» still plays as a soldier seeking his name (only .5 s1 bridges it) —
+   design call: a .9 variant, or accept.
+Note: road-option-scan prints «td_tha_11 path names found nowhere on the road: Dâng tờ xin chỉ xét người có tội» (already so at bda971a2; the scan
+still counts the road reachable: ok).
+
+## Tests (build db5c49f4 unless noted; own utf-8 server, port by PID)
+| test | result |
+|---|---|
+| one-core-guard.js (no --allow-grow), on origin/main 744b80e7 + road-onecore 6a1112d1 | PASS, 0 fails |
+| road-b2-same.js vs 893e8166~ (pre-move) | SAME, 0 differences (table above) |
+| road-option-scan jrd_nc / jrd_td / jrd_ch | 0 on every list; 16 RD97L finales ok |
+| road-rare.js, 16 B2 roads | ALL PASS, 99 checks, 0 page errors (on 03a12ce9 and again on db5c49f4) |
+| road-full.js 1 life: nc_su, bd_tuc, td_tha, ch_benh (03a12ce9) | 17/17 PASS; finales «Cầu nối hai triều», «Mãi là người ngoài», «Kết nghĩa tỷ muội», «Cô mẫu khỏe lại, trọng thưởng ngươi». First run crashed at td_tha («Target crashed», 2 browsers on the box) → td_tha + ch_benh rerun alone PASS |
+| road-saves.js @1180x820, ROADS=nc,bd,td,ch, main = live site (03a12ce9) | 7/7 PASS (incl. main/old save loads + plays, mid-road nc_tuc/bd_tuc/td_tha/ch_benh) |
+| coop-e2e.js (Fold host + iPad guest, live Worker; incl. solo + old save) | 59/59 PASS, 0 page errors |
+Worktree /home/user/wt/rb2fix kept until the review verdict.
