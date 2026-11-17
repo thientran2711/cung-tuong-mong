@@ -158,7 +158,7 @@ function agSyncNow(){AG.syQ=0;const ts=performance.now();try{j95sync()}catch(e){
 function agFlush(){if(AG.q){AG.q.all=1;agSlice()}}
 function agPerf(){const L=AG.ms.slice().sort((a,b)=>a-b);if(!L.length)return{n:0};const q=f=>L[Math.min(L.length-1,Math.floor(f*L.length))];return{n:L.length,p50:+q(.5).toFixed(3),p95:+q(.95).toFixed(3),max:+L[L.length-1].toFixed(3),budget:BAL.ag.perf.p95,buoi:(()=>{const M=AG.bt.slice().sort((a,b)=>a-b);return M.length?{n:M.length,p50:+M[Math.floor(.5*M.length)].toFixed(2),p95:+M[Math.min(M.length-1,Math.floor(.95*M.length))].toFixed(2)}:null})(),sync:(()=>{const M=(AG.sms||[]).slice().sort((a,b)=>a-b);return M.length?{n:M.length,p95:+M[Math.min(M.length-1,Math.floor(.95*M.length))].toFixed(2),max:+M[M.length-1].toFixed(2)}:null})()}}
 window.agPerf=agPerf;
-function agWhy(v,c,N){let best=c.need||null,bv=c.need?1e9:0;const W=AGSELF[c.k]?AGSELF[c.k].g(v).g:c.k==="effort"?{sung:1}:(()=>{const s=Object.keys(AGSOC).find(x=>AGSOC[x][0]===c.k);return s?AGSOC[s][3](BAL.tw.g):{}})();
+function agWhy(v,c,N){let best=c.need||null,bv=c.need?1e9:0;const W=AGSELF[c.k]?AGSELF[c.k].g(v).g:c.k==="effort"?/* the deck act's own gain (BAL.deck via j75), ONE CORE */((window.npcEffortKind&&window.npcEffortKind(v))||{}).w||{}:(()=>{const s=Object.keys(AGSOC).find(x=>AGSOC[x][0]===c.k);return s?AGSOC[s][3](BAL.tw.g):{}})();
  for(const n in W){const x=(N[n]||0)*W[n];if(x>bv){bv=x;best=n}}let w=best?AGWHY[best]:"tiện tay";if(best==="spite"&&c.t)w+=` ${c.t===S?"ngươi":c.t.name}`;
  if(c.mot&&AGHOST.has(c.k))w+=` (${c.mot})`;const o=agOrgName(agOrg(v));return o?`${w} · ${o}`:w}
 function agPlan(v,c,N,kh,k){const z=agZ(),R=agRec(),id="v"+v.id;const why=agWhy(v,c,N);const tid=c.t?ledgerId(c.t):null;
