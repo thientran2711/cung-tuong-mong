@@ -423,3 +423,46 @@ Off-screen roads of REAL men (U3). Each chapter: title (player text) [cast key w
 SẴN SÀNG KIỂM 02405da5cc35a01450d2dccd1ee3f2f70c5585a2 (U2 maids + U3 men + U4 balance; U0+U1 reviewed separately at f699bbf4)
 - Reviewer please eyeball at 755x1000 / 1180x820: Kẻ hầu card road line (own maid), a Nam nhân card (known man), one maid nr_* offer.
 - Not done: screenshots (bot pages stay behind the boot cover); no viewport run of the cards (text lines in existing kit cards only).
+
+## FINISH (D8 worker session_01964izFdMcMY1NA9hQZVoJw, opus, 17/11; START_CTX ≈ 3 % of the 1M window, own estimate; rollover at 28 %)
+PRIORITY #1 CHECK ('npc-roads|nroad'): OD 0 | ledger 2 | claims 8 | main 15 (generic hits; jnroad*.js NOT on main) | review/* 3 → reuse review/npc-roads-fx @ 244ac5fe.
+Branch review/npc-roads-fx: 244ac5fe → 3cfeee07 (merge LIVE main 7abaf07a) → **e34393b1** (ch1–4 gate).
+- MERGE main 7abaf07a: assemble.py = union of lists (jroad/jrd_tt/jnroad/jnroadm kept after their predecessors; main's 26 new modules in);
+  jbal2.js = both sides; j57/jflip/jk3 = main (their branch side came only from the old road-map merge onto older main); index/sw/assets rebuilt.
+- NEW (owner OD:L1477, chapters 1–4 first): nrLearn() = the player is in Phần đầu (S.st.ch.n < BAL.st14.parts[1][0]). While true: no NPC road
+  asks her (nrAsk / nrMAsk / nrMenAsk), no consort road casts her as rival (nrRival meOk), no court man takes her as patron/foe. NPC roads go on
+  off-screen (news lines only). Old-frame saves (no f14) are not gated. No new popup in ch1–3.
+  Runtime proof (test build): ch1 → consort/maid/man ask = false/false/false, player as rival 0/40 (NPC cold to her); ch4 + bond → true/true/true;
+  ch4 + cold → rival 14/40.
+- r1 fault families on U2/U3: dev/test/npc-roads-fix-scan.js after the merge → F1 servants/men 140 + consorts 54 chapters in a kẻ-hầu life ·
+  F2 1274 tags, 0 «ngươi»/✦ · F3 88 cards, 0 «lần trước» · F4 11 asker kinds, 88 cards, 0 voice faults · F5 0 typed numbers · F6 10 checks, 0 → ALL 0.
+
+### Gates / tests (test build = this branch + review/road-b2-fix-r2 + review/road-b3-fix2-r1 merged LOCALLY, not pushed; B's chapters .5–.11)
+| gate / test | result |
+|---|---|
+| quickcheck.sh on e34393b1's parent 3cfeee07 (this branch alone) | open 1036 ms · old LIVE save loads + plays a buổi · perf new/live render 217/269, buổi 799/944 ms (≤ live) · time-spill PASS · **G1 one-core-guard FAIL 80 — all 80 in jrd_tt.js (Foreman B's road data carried from road-map-next); jnroad*.js 0** |
+| one-core-guard on the test build (B's review/road-onecore engine via road-b2-fix-r2) | **PASS, 0 fails** |
+| npc-roads-fix-scan F1–F6 | 0 / 0 / 0 / 0 / 0 / 0 |
+| npc-roads.js 4 lives × 180 months (consorts) | 37/38 |
+| npc-roads-maids.js | 21/22 |
+| npc-roads-men.js | 22/23 |
+| npc-roads-saves.js (+ LIVE main save) | 6/6 |
+The one fail in each long suite = "no page errors": console TypeError in PEND.j70scar (`IT[S.vl.k].n` undefined, veil item key) in
+jrash.js/jveil.js — files IDENTICAL to main (not in this branch's diff: assemble, j67, jbal2, jnroad, jnroadm, jpcf + B's jroad/jrd_tt).
+→ MAIN-SIDE FAULT for its owner (face-fx/veil), not fixed here.
+- Co-op: not touched (owner 17/11 02:05Z no co-op patching); coop-e2e not run (needs the live Worker); host-only rules unchanged.
+
+### Look (shots OUTSIDE git, /home/user/wt/npcfx-shots, looked at each; 755x1000@2 + 1180x820@2, 0 page errors)
+- Kẻ hầu (Cung nhân) card: «Mệnh truyện: «Chị em đồng hương» · qua chương 5: Được tin cậy» — one kit .pcinfo span, wraps, not cut.
+- Nam nhân card: «Mệnh truyện: «Án mất trộm ngự khố» · qua chương 4: …» — same row style. On iPad 1180x820 the row sits below «Ta quý hắn»
+  inside the card's left column, which scrolls (.pcl overflow:auto, 562/441 px) — kit behaviour for every person card, line not cut.
+- Maid offer (nr_che): «Phụ tuyến · Cung nữ thân tín Thanh Trúc: «Chị em đồng hương» · Chương 6 «Kẻ vu» · Lời nhờ (1 bước)», quote
+  «Nô tỳ … Tiểu chủ …», hạn 6 tuần, Nhận lời (có rủi ro) / Khéo từ chối (an toàn). On iPad the two answer buttons are in the dialog's scroll
+  area (y 723–1046 of 820) — the unchanged j72 offer dialog, same for every Việc nhờ; not an NPC-road part (KIT owner may look; no request filed).
+- Kit: no CSS, no new part. VANPHONG: no %, no digits in new text.
+
+### Ship order (unchanged)
+Needs Foreman B's road engine on main first (review/road-onecore → road-b1/b2/b3 PASS); then a main merge (mechanical: assemble union,
+jbal2 drop the old BAL.road block since it moved to jbalroad.js, index/sw rebuild). Resolver used: /home/user/wt/npcfx-tools/resolve.py (local).
+
+SẴN SÀNG KIỂM e34393b17ec786e95b9d4539e3786d0e833f92a6
