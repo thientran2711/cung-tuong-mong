@@ -194,10 +194,7 @@ window.kitSizeSheet=kitSizeSheet;
 const KSZ_ITEM={S:"sm",M:"md",L:"lg",XL:"xl"};
 (function(){const st=document.createElement("style");st.id="k-size-items";st.textContent=`
 .kszit{position:relative;display:inline-block;line-height:0}
-.kszit>.kszgc{position:absolute;left:50%;translate:-50% 50%;bottom:0;white-space:nowrap;z-index:3;font:700 .58rem/1 var(--body,sans-serif);color:#fff;background:var(--kgc);padding:2px 4px;border-radius:3px;box-shadow:0 0 0 1px #fffaf0;pointer-events:none;letter-spacing:.02em}
-.kszit[data-s="S"]>.kszgc{font-size:.5rem;padding:1px 3px}
-/* (owner 16:10Z) grade chip size follows the item size: S small · M · L · XL LARGE */
-.kszit[data-s="L"]>.kszgc{font-size:.7rem;padding:3px 6px}.kszit[data-s="XL"]>.kszgc{font-size:.86rem;padding:4px 8px;border-radius:4px}
+/* grade chip = kitItem's own chip ON the frame (KIT §54.1b), scaled with the frame; no sample-only chip */
 .kszit{margin-bottom:.6em}
 /* (owner 16:10Z / 16:15Z) Ngự: ONE mark only = the "Ngự tứ" grade chip; the red "Ngự" corner mark is dropped */
 .kszit .kits{display:none}
@@ -205,7 +202,7 @@ const KSZ_ITEM={S:"sm",M:"md",L:"lg",XL:"xl"};
 .kszit .kitx{position:absolute;top:3px;right:3px;left:auto;box-sizing:border-box;aspect-ratio:1;width:auto;min-width:2.5em;height:auto;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;padding:2px;white-space:nowrap;text-align:center;line-height:1;font-size:.5rem;border-radius:3px}
 .kszit .kitx>b{font-size:1.25em}.kszit[data-s="S"] .kitx{min-width:1.9em}.kszit[data-s="S"] .kitx>.kxw{display:none}
 .kszit[data-s="L"] .kitx{font-size:.62rem}.kszit[data-s="XL"] .kitx{font-size:.78rem}
-.kszit .kitn,.kszit .kitg{display:none}
+.kszit .kitn{display:none}
 .kszidc{box-sizing:border-box;border:1px solid var(--line,#d2b071);border-radius:8px;background:var(--panel,#fffaf0);padding:8px 10px;display:flex;flex-direction:column;gap:6px;font-size:.8rem}
 .kszidh{display:flex;gap:10px;align-items:flex-start}
 .kszidt{display:flex;flex-direction:column;gap:3px;min-width:0}
@@ -217,8 +214,8 @@ const KSZ_ITEM={S:"sm",M:"md",L:"lg",XL:"xl"};
 .kszpick>div>b{font:600 .74rem/1.2 var(--body)}.kszpick>div>small{font-size:.7rem;color:var(--good,#2d7a52)}
 .kszphg{display:grid;grid-template-columns:auto repeat(3,auto);gap:8px 14px;align-items:end;font-size:.7rem}`;document.head.appendChild(st)})();
 function kszItemTile(k,size){const I=kitItemInfo(k);const G=KIT_GRADE[Math.max(0,Math.min(4,I.grade|0))];
- let lux=0;try{lux=typeof luxVal==="function"?luxVal(k):0}catch(e){}const it=kitItem({src:I.src,name:"",grade:I.grade,size:KSZ_ITEM[size],frame:true,lux:lux||0});
- return `<span class="kszit" data-s="${size}">${it}<b class="kszgc" style="--kgc:${G.c}">${I.gname||G.n}</b></span>`}
+ let lux=0;try{lux=typeof luxVal==="function"?luxVal(k):0}catch(e){}const it=kitItem({src:I.src,name:"",grade:I.grade,gname:I.gname,size:KSZ_ITEM[size],frame:true,lux:lux||0});
+ return `<span class="kszit" data-s="${size}">${it}</span>`}
 function kszItemDetail(k){const I=kitItemInfo(k);const tmp=document.createElement("div");tmp.innerHTML=kitItemDetail(k,{cls:"kidet-strip"});
  const rows=[...tmp.querySelectorAll(".kidrows .kr")];const fx=[],loss=[],keep=[];let kind="";
  for(const r of rows){const l=(r.querySelector(".krl")||{}).textContent||"";const v=r.querySelector(".krv");
@@ -430,34 +427,27 @@ function kszLevels3(sp){const F=sp.facts||[],R=sp.rows||[],O=sp.opts||[],T=F.len
  if(O.length&&!no)continue;L.push(Object.assign({},sp,{facts:F.slice(0,nf),rows:R.slice(0,nr),opts:O.length?O.slice(0,no):undefined}))}return L}
 function kszFill3(pool,host){const out={},L=kszLevels3(pool);let xl0=null;for(const sp of L){const K=kitFramePick3(sp,host);let ok=true;if(K==="XL"){xl0=xl0||sp;host.innerHTML=kszFrame3(sp,"XL");const d=host.firstElementChild;kitFrameApply3(d);ok=kitFrameFits3(d,true)}if(ok)out[K]=sp}if(!out.XL&&xl0)out.XL=xl0;return out}
 Object.assign(window,{kszSheet3,kszPick3Report,kszFill3,kszLevels3});
-/* ---- v3 ITEMS (owner 16/11 17:20Z, OD, overrides the corner-badge idea): ONE MASTER = the XL item (frame + picture + Xa xỉ square box),
-   SCALED UNIFORMLY to L and M (and the bag slot): the Xa xỉ box scales WITH the frame, so it sits in exactly the same place at every size and
-   covers the picture exactly as little as on XL. Only its CONTENT changes: word + number (XL, L), number only (M, slot), same box geometry.
-   The grade CHIP is NOT scaled (fixed readable size per size), centred on the bottom edge. Sizes: XL 150 (master) · L 104 · M 72 · slot = its cell. */
+/* ---- v3 ITEMS (owner 16/11 17:20Z, OD, overrides the corner-badge idea; grade chip moved ON the frame by owner 16/11 ~23:18Z s26, KIT §54.1b): the item sizes are the real kitItem sizes (XL 150 · L 104 · M 72 · bag slot = its cell);
+   the Xa xỉ box and the grade chip are written in container units of the frame, so both keep the same place relative to the frame at every size. Only the Xa xỉ CONTENT changes: word + number (XL, L), number only (M, slot). */
 KIT_SIZE.item3={master:150,size:{XL:150,L:104,M:72,slot:72},word:{XL:true,L:true,M:false,slot:false}};
 (function(){const st=document.createElement("style");st.id="k-size3-items";st.textContent=`
-.kszit3{position:relative;display:inline-block;vertical-align:bottom;line-height:0;width:calc(${150}px * var(--f));height:calc(${150}px * var(--f));margin-bottom:.8em}
-.kszit3>.ksz3m{position:absolute;left:0;top:0;width:150px;height:150px;transform:scale(var(--f));transform-origin:0 0}
-.kszit3>.ksz3m>.kitem{--isz:150px}
-.kszit3>.kszgc{position:absolute;left:50%;translate:-50% 50%;bottom:0;white-space:nowrap;z-index:3;font:700 .58rem/1 var(--body,sans-serif);color:#fff;background:var(--kgc);padding:2px 4px;border-radius:3px;box-shadow:0 0 0 1px #fffaf0;pointer-events:none}
-.kszit3[data-s="L"]>.kszgc{font-size:.7rem;padding:3px 6px}.kszit3[data-s="XL"]>.kszgc{font-size:.86rem;padding:4px 8px;border-radius:4px}
-.kszit3 .kits,.kszit3 .kitn,.kszit3 .kitg{display:none}
-/* the XL master box (one geometry, scaled with the frame) */
-.kszit3[data-w="0"] .kitx>.kxw{display:none}.kszit3[data-w="0"] .kitx>b{font-size:19px}
+.kszit3{position:relative;display:inline-block;vertical-align:bottom;width:var(--w);margin-bottom:.8em}
+.kszit3 .kits,.kszit3 .kitn{display:none}
 .ksz3pick{display:grid;grid-template-columns:repeat(auto-fill,minmax(96px,1fr));gap:8px}
 .ksz3pick>div{display:flex;flex-direction:column;align-items:center;gap:3px;text-align:center;padding:6px 4px;border:1px solid var(--line,#d2b071);border-radius:6px;background:var(--panel2,#f6ead6)}
 .ksz3pick>div>b{font:600 .74rem/1.2 var(--body)}.ksz3pick>div>small{font-size:.7rem;color:var(--good,#2d7a52)}
 .ksz3wear{display:flex;gap:6px;align-items:flex-start}.ksz3wear>div{display:flex;flex-direction:column;align-items:center;gap:2px;font-size:.66rem;max-width:96px;text-align:center}`;document.head.appendChild(st)})();
-function kszItem3(o,size,gname,gcol){const I3=KIT_SIZE.item3,f=(I3.size[size]||72)/I3.master;
- const it=kitItem(Object.assign({},o,{name:"",size:"xl",frame:true}));
- return `<span class="kszit3" data-s="${size}" data-w="${I3.word[size]?1:0}" style="--f:${f.toFixed(4)}"><span class="ksz3m">${it}</span>${o.empty?"":`<b class="kszgc" style="--kgc:${gcol}">${gname}</b>`}</span>`}
+function kszItem3(o,size,gname,gcol){const I3=KIT_SIZE.item3;
+ /* the REAL kitItem at the real size (XL 150 / L 104 / M 72 / bag slot): frame, Xa xỉ box and the grade chip ON the frame (KIT §54.1b) are the kit's own, scaled in container units; no transform copy, no sample-only chip */
+ const it=kitItem(Object.assign({},o,{name:"",gname,size:{XL:"xl",L:"lg",M:"md",slot:"slot"}[size]||"md",frame:true}));
+ return `<span class="kszit3" data-s="${size}" data-w="${I3.word[size]?1:0}" style="--w:${I3.size[size]||72}px">${it}</span>`}
 function kszItemTile3(k,size){const I=kitItemInfo(k);const G=KIT_GRADE[Math.max(0,Math.min(4,I.grade|0))];let lux=0;try{lux=typeof luxVal==="function"?luxVal(k):0}catch(e){}
  return kszItem3({src:I.src,grade:I.grade,lux:lux||0},size,I.gname||G.n,G.c)}
 function kszItemDetail3(k){return kszItemDetail(k).replace(/^<div class="kszidc">/,'<div class="kszidc ksz3card">').replace(/<span class="kszit" data-s="M">[\s\S]*?<\/b><\/span>/,()=>kszItemTile3(k,"M"))}
 function kszWearRow3(p){try{return `<div class="ksz3wear">${wdSlots(p).map(x=>{const G=KIT_GRADE[Math.max(0,Math.min(4,x.grade|0))];return `<div>${kszItem3({src:x.empty?"":kitItemSrc(x.k,x.icon),grade:x.grade,empty:x.empty},"M",x.gradeName||G.n,G.c)}<span>${x.name}</span></div>`}).join("")}</div>`}catch(e){return""}}
 function kszItemsSheet3(){const ks=["tramngoc","vongngoc","luahang","nhansam","thu"].concat(typeof WD_ITEMS==="object"?["y_haiduong","nt_nhuy"]:[]).filter(k=>{try{return kitItemInfo(k)}catch(e){return false}});
- let h=`<h2>Items · ONE XL master scaled to L / M / slot (Xa xỉ box scales with the frame) · sizes XL / L / M + bag slot</h2>`;
- h+=`<h3>Item sizes · ONE master (XL) scaled down to L / M / slot: frame, picture and Xa xỉ box keep the same proportions (L / XL word + number, M / slot number only) · grade chip unscaled, centred on the bottom edge · S 52 dropped</h3><div class="kszrow" style="align-items:flex-end;gap:22px">${["XL","L","M","slot"].map(s=>`<div><div class="kszlab">${s==="slot"?"bag slot (72 here; fills its cell)":s}</div>${kszItemTile3(ks[1]||ks[0],s)}</div>`).join("")}</div>`;
+ let h=`<h2>Items · the real kitItem at XL / L / M / bag slot (Xa xỉ box + grade chip ON the frame, both scale with it)</h2>`;
+ h+=`<h3>Item sizes · frame, picture, Xa xỉ box (L / XL word + number, M / slot number only) and the grade chip ON the bottom edge keep the same proportions at every size · S 52 dropped</h3><div class="kszrow" style="align-items:flex-end;gap:22px">${["XL","L","M","slot"].map(s=>`<div><div class="kszlab">${s==="slot"?"bag slot (72 here; fills its cell)":s}</div>${kszItemTile3(ks[1]||ks[0],s)}</div>`).join("")}</div>`;
  const ng=Object.keys(IT).find(k=>{try{return kitItemInfo(k).grade===4}catch(e){return false}});if(ng)h+=`<div class="kszrow" style="align-items:flex-end;margin-top:8px;gap:22px">${["XL","L","M","slot"].map(s=>`<div><div class="kszlab">Ngự · ${s}</div>${kszItemTile3(ng,s)}</div>`).join("")}</div>`;
  h+=`<h3>6.2 detail card · the same items as sheet 8 (Áo gấm thêu hải đường: the robe is no longer covered)</h3><div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:10px;max-width:1120px">${ks.map(kszItemDetail3).join("")}</div>`;
  const pk=Object.keys(IT).filter(k=>!IT[k].story&&IT[k].sl).slice(0,6);
