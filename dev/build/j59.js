@@ -330,8 +330,8 @@ const J59EUN=["Phúc An","Bảo Thuận","Đức Hải","Kính Trung","Trường
 const J59DOC=["Tế An","Thế Khanh","Hoài Nhân","Bá Ngôn","Tử Hiên","Văn Chiêu","Minh Viễn","Thừa Ân"];
 const J59FAL=["Uyển Dung","Tố Tâm","Nhược Lan","Thục Hoa","Ngọc Dao","Tĩnh Nghi"];
 function j59taken(){const T=new Set();const add=n=>{if(n)T.add(String(n).trim())};try{add(S.name);(rivals||[]).forEach(v=>add(v.name));(S.men||[]).forEach(m=>add(m.name));if(S.maid)add(S.maid.name);
- (rivals||[]).forEach(v=>(v.staff||[]).forEach(s=>add(s.name)));const C=S.court||{};for(const k in C)if(C[k]&&C[k].pn)add(C[k].pn)}catch(e){}return T}
-function j59gen(sur,given){const T=j59taken();const L=[];for(const a of sur)for(const b of given)if(!T.has(a+" "+b))L.push(a+" "+b);return L.length?L[Math.floor(Math.random()*L.length)]:sur[0]+" "+given[0]}
+ (rivals||[]).forEach(v=>(v.staff||[]).forEach(s=>add(s.name)));const C=S.court||{};for(const k in C)if(C[k]&&C[k].pn)add(C[k].pn);(S.dnames||[]).forEach(add)/* D4: never a dead person's name */}catch(e){}return T}
+function j59gen(sur,given){const T=j59taken();const L=[];/* r1 npc-death: never the given name of a living 3-word name either (j61 masks "Nhược Lan" of an unknown "Mạnh Nhược Lan" inside "Lý Nhược Lan" → "Lý Đáp ứng ???") */const G=new Set([...T].map(n=>n.split(" ")).filter(w=>w.length>=3).map(w=>w.slice(-2).join(" ")));for(const a of sur)for(const b of given)if(!T.has(a+" "+b)&&!G.has(b))L.push(a+" "+b);if(!L.length)for(const a of sur)for(const b of given)if(!T.has(a+" "+b))L.push(a+" "+b);return L.length?L[Math.floor(Math.random()*L.length)]:sur[0]+" "+given[0]}
 function j59CourtNames(){/* was a second global kitNames (j65 owns that name for log lines and won, so court officers were never named; review/pick-hint-r1) */try{const C=S&&S.court;if(!C)return;
  if(C.tq&&!C.tq.pn){const n=String(C.tq.name||"").replace(/^Tổng quản\s+(thái giám\s+)?/i,"").trim();C.tq.pn=n&&n.split(" ").length>=2?n:j59gen(J59SUR,J59EUN)}
  if(C.ksp&&!C.ksp.pn)C.ksp.pn=j59gen(J59SUR,J59EUN);
@@ -342,7 +342,7 @@ function j59CourtNames(){/* was a second global kitNames (j65 owns that name for
  for(const k of ["tq","ksp","ped","ty"])if(C[k]&&C[k].pn&&C[k].name!==C[k].pn)C[k].name=C[k].pn;
  const V=S.visit;if(V&&V.people)for(const p of V.people){if(!p)continue;const k=p.kind==="srv"?p.sk:p.kind;
   if(k==="ksp"&&C.ksp&&!p.ref)p.name=C.ksp.pn;else if(k==="peddler"&&C.ped&&!p.ref)p.name=C.ped.pn;else if(k==="ty"&&C.ty)p.name=C.ty.pn;else if(k==="fallen"&&!p.ref)p.name=S.lcfPn}}catch(e){}}
-window.j59CourtNames=j59CourtNames;
+window.j59CourtNames=j59CourtNames;window.j59gen=j59gen;window.J59N={SUR:J59SUR,EUN:J59EUN,DOC:J59DOC,FAL:J59FAL};/* D4 npc-death: jmort names a replacement officer with the same rule */
 /* ---------- ONE HEAD COUNT (owner 11/15 06:55Z): kitHereCount() = the OTHER people (not her, not a chest or an errand) on the stage
    of the place she stands in. The stage title ("Ở đây còn N người"), the page chips and the Dư đồ label of that place all read it;
    Dư đồ counts other people only (her own place wears her own mark). ---------- */

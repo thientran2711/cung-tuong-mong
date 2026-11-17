@@ -142,7 +142,7 @@ PEND.tsgiftpick=p=>{const v=RV(p.v);if(!v)return null;const G=BAL.tsGift;const i
 /* the guard: same rule for everyone (a target who keeps to herself is harder to reach) */
 (function(){if(typeof npcAct!=="function")return;const n0=npcAct;npcAct=function(v,t){try{const g=t===S?tsS().guard:t&&t.tsGuard;if(g>wk()&&roll(50))return""}catch(e){}return n0.apply(this,arguments)}})();
 /* NPC side: a consort whom many want to harm closes her doors / sends gifts, by her own nature (same costs) */
-function tsNpcDanger(){for(const v of liveRivals(true)){if(!v.alive||v.out||v.tsGuard>wk())continue;const D=tsDangerOf(v,false);if(D.n<35)continue;const care=v.trait==="Đa nghi"?70:v.trait==="Kiêu ngạo"?15:40;if(!roll(care))continue;v.tsGuard=wk()+2;v.sung=cl((v.sung||0)-2,0,100)}}
+function tsNpcDanger(){for(const v of liveRivals(true)){if(!v.alive||v.out||v.tsGuard>wk())continue;const D=tsDangerOf(v,false);if(D.n<35)continue;const care=nv(v,"tsCare");if(!roll(care))continue;v.tsGuard=wk()+2;v.sung=cl((v.sung||0)-2,0,100)}}
 /* the HUD chip (Tình trạng row) + điềm báo when her own known bar climbs a step */
 /* review ts-a FAIL 2: the chip sits in the stage's right column (K3_RIGHT), never on the top bar's buổi line (it broke the date line on Fold) */
 if(window.K3_RIGHT)window.K3_RIGHT.push("tsnh");
@@ -308,8 +308,8 @@ function tsDressAnnounce(){tsTagsFresh();const s=tsS();const th=pick(Object.keys
   opts:tsBorrowOpts(th).concat([tsOpt({n:"Đã hiểu, sẽ chuẩn bị",duoc:["mua thêm đồ ở Nội vụ phủ hay mượn của người thân trước hội"]})])})}
 function tsBorrowOpts(th){const T=TS_THEME[th];const s=tsS();if(s.borrow)return[];const F=liveRivals(true).filter(v=>aff(v,S)>=25&&v.inv&&v.inv.some(e=>T.tags.includes(e.k)&&!S.inv.some(x=>x.k===e.k)));
  return F.slice(0,2).map(v=>{const e=v.inv.find(e=>T.tags.includes(e.k)&&!S.inv.some(x=>x.k===e.k));return tsOpt({n:`Mượn ${itm(e.k).n} của ${v.name}`,need:[{t:`nàng thân với ngươi (${aff(v,S)}/25)`,ok:aff(v,S)>=25}],duoc:[`${itm(e.k).n} dùng cho hội, xong thì trả`],mat:[],kem:["thiện cảm -2 (nợ ân tình)","làm mất hay hỏng thì phải đền"],
-  go:()=>{const i=v.inv.indexOf(e);if(i>=0)v.inv.splice(i,1);S.inv.push({k:e.k,from:v.id,tsB:v.id});s.borrow=1;tsAff(v,-2);log(`Ngươi mượn ${itm(e.k).n} của ${v.name} để dự hội phối đồ.`)}})})}
-function tsDressReturn(){const s=tsS();s.borrow=0;for(let i=S.inv.length-1;i>=0;i--){const e=S.inv[i];if(!e.tsB)continue;const v=RV(e.tsB);S.inv.splice(i,1);if(v&&v.alive){v.inv.push({k:e.k,from:"me"});log(`Ngươi trả ${itm(e.k).n} cho ${v.name}.`)}}}
+  go:()=>{const i=v.inv.indexOf(e);if(i>=0)v.inv.splice(i,1);e.tsB=v.id;S.inv.push(e);/* the same piece moves (item ledger jil) */s.borrow=1;tsAff(v,-2);log(`Ngươi mượn ${itm(e.k).n} của ${v.name} để dự hội phối đồ.`)}})})}
+function tsDressReturn(){const s=tsS();s.borrow=0;for(let i=S.inv.length-1;i>=0;i--){const e=S.inv[i];if(!e.tsB)continue;const v=RV(e.tsB),vk=e.tsB;S.inv.splice(i,1);delete e.tsB;if(v&&v.alive){v.inv.push(e);log(`Ngươi trả ${itm(e.k).n} cho ${v.name}.`)}else if(typeof ilGone==="function")ilGone(S,e,"dead",{own:vk})}}
 function tsDressHold(){tsTagsFresh();const s=tsS();const D=s.dress;if(!D||D.m!==S.month||D.y!==S.year)return;s.dress=null;const th=D.th,T=TS_THEME[th];
  const C=liveRivals(true).filter(v=>!v.confined&&!v.out);const R=C.map(v=>{const P=tsNpcDress(v,th);const d=tsDressPts(v,P,th);return{p:v,raw:d.raw,vp:d.vp,lux:d.lux,st:d.st,score:tsDressTotal(v,d.raw)}});
  const finish=(mine)=>{const all=R.concat(mine?[mine]:[]).sort((a,b)=>b.score-a.score);all.forEach((x,i)=>x.place=i+1);const b=tsPre();const L=[];

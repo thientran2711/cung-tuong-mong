@@ -13,9 +13,11 @@ function cardH(a,i){const poor=a.c&&a.c.bac&&S.bac+a.c.bac<0,o=a.o==null?100:a.o
 function render(){if(!S)return;renderHUD();renderStage();renderPanel();$("next").disabled=S.dead||Q.length>0||!!S.mg;$("next").textContent=(S.buoi||0)>=B4L?"Sang ngày mới":"Sang buổi";if(!S.dead&&!Q.length&&!S.mg&&used>=BAL.time.khac&&!advLock){advLock=true;setTimeout(()=>{advLock=false;if(used>=BAL.time.khac&&!Q.length&&!S.dead)nextBuoi()},350)}
  document.querySelectorAll("#tabs button").forEach(b=>b.setAttribute("aria-selected",b.dataset.tab===tab));
  if(Q.length&&$("modal").hidden)showModal();save()}
+/* the text a HUD cell shows for a value (one hook for every writer of the cell: renderHUD, hudTween j11, k3Hud jk3); jkh makes Sức read "N/M" */
+function hudFmt(k,v){return v}
 function renderHUD(){if(typeof renderHud2==="function")renderHud2();$("me-n").textContent=S.name;$("me-r").innerHTML=ic(RIMG[S.rank],14)+rkName(S);$("me-d").textContent=`T${S.month}/${S.year} · ${TUAN[S.tuan]} · ${BUOI[S.buoi||0]} · ${S.wx?S.wx.n:""} ${"●".repeat(Math.max(0,BAL.time.khac-used))}${"○".repeat(Math.min(BAL.time.khac,used))}`;
  $("me-p").innerHTML=mdH(pMe(),"sm");
- for(const k of ["bac","suc","sung","danh"]){const e=$("hud-"+k);e.querySelector("span").textContent=S[k];const u=e.querySelector("u");if(u)u.style.width=S[k]+"%"}
+ for(const k of ["bac","suc","sung","danh"]){const e=$("hud-"+k);e.querySelector("span").textContent=hudFmt(k,S[k]);const u=e.querySelector("u");if(u)u.style.width=S[k]+"%"}
  $("emp-p").innerHTML=mdH(pEmp(),"sm");$("emp-n").textContent=S.emp.era;const m=MOODS[S.emp.mood];$("emp-m").innerHTML=`<span class="${m[1]}">${m[0]}</span>`}
 function renderStage(){const P=placeOf(S.place);$("stage").className="stage sc-"+P.sc;$("scimg").style.backgroundImage=SCIMG[P.sc]?`url(img/${SCIMG[P.sc]}.webp)`:"none";const ppl=curPeople();
  {const raw=S.visit&&S.visit.msg?S.visit.msg:P.d;const btns=(raw.match(/<button[\s\S]*?<\/button>/g)||[]).join("");const txt=raw.replace(/<button[\s\S]*?<\/button>/g,"").replace(/<[^>]+>/g,"");$("sc-t").innerHTML=`<h2><span class="rt1">${P.n}</span><span class="rmsg" title="${txt.replace(/"/g,"")}"> · ${txt}</span></h2>${btns}`}
@@ -66,7 +68,7 @@ function ser(){const rs=new Set(rivals),ks=new Set(allKids().map(x=>x[0]));
   if(Array.isArray(o))return o.map(x=>walk(x,false));const r={};
   for(const k in o){const v=o[k];if(typeof v==="function"||k==="origin")continue;r[k]=(k==="kids"&&Array.isArray(v))?v.map(x=>walk(x,true)):walk(v,false)}return r};
  return{v:6,b4:1,buoi:S.buoi||0,ok:S.origin.k,S:walk(S,true),R:rivals.map(x=>walk(x,true)),rid,tab,used,P:serQ(),at:Date.now()}}
-function deser(d){rivals=d.R;rid=d.rid;S=d.S;S.origin=ORIGINS.find(o=>o.k===d.ok);
+function deser(d){trMigrate(d);rivals=d.R;rid=d.rid;S=d.S;S.origin=ORIGINS.find(o=>o.k===d.ok);
  const kid=n=>allKids().map(x=>x[0]).find(k=>k.name===n)||null;
  const fix=o=>{if(!o||typeof o!=="object")return o;if(o.$r!=null&&Object.keys(o).length===1)return rivals.find(v=>v.id===o.$r)||null;if(o.$k!=null&&Object.keys(o).length===1)return kid(o.$k);
   for(const k in o)o[k]=fix(o[k]);return o};

@@ -2,7 +2,7 @@
 /* manifest: an array (or {figures:[...]}) of {file, role, tier, trait, ageBand, look}; fig-* full body, por-* portrait */
 let FIGS=[];
 (function(){try{fetch("img/FIGURES.json",{cache:"no-cache"}).then(r=>r.ok?r.json():null).then(j=>{const L=Array.isArray(j)?j:j&&(j.figures||j.files||j.items)||[];FIGS=L.filter(x=>x&&(x.file||x.src));if(FIGS.length&&S)render()}).catch(()=>{})}catch(e){}})();
-const TRK={"Hiểm độc":"hiemdoc","Kiêu ngạo":"kieungao","Hiền lành":"hienlanh","Đa nghi":"danghi","Tham vọng":"thamvong","Nhu mì":"numi"};
+const TRK={"Xảo quyệt":"hiemdoc","Kiêu ngạo":"kieungao","Ân cần":"hienlanh","Kín đáo":"danghi","Tham vọng":"thamvong","Khiêm nhường":"numi"};
 function figRole(p){if(p===S)return"heroine";const k=p&&p.kind;if(k==="emp"||p===S.emp)return"emperor";if(k==="th")return"thaihau";if(k==="man"||(p&&p.ref&&p.ref.rw))return"man";if(k==="ty")return"physician";if(k==="maid"||k==="serv")return(p.ref&&p.ref.role==="eunuch")?"eunuch":"maid";return"consort"}
 function ageBandOf(a){return a>=36?"old":a>=26?"mid":"young"}
 function norm(x){return String(x==null?"":x).toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g,"").replace(/đ/g,"d").replace(/[^a-z0-9]/g,"")}
@@ -18,37 +18,16 @@ function figFor(p,kind){if(!FIGS.length||!p)return"";const role=figRole(p),who=p
 
 /* ================= PERSONALITY: one engine for every character ================= */
 /* each trait = weights over the act menu + reaction rules; a person's behaviour = product of both traits' weights */
+/* pool nết (consorts, servants, men, NPCs, the player) are merged in from THE trait table BAL.net by jnet.js; only the Emperor's own keys live here */
 const PERS={
- "Hiểm độc":{tend:"nhẫn nại giăng bẫy, ngoài mặt thân thiện",w:{poison:3,kpoison:3,frame:2.5,kframe:2.5,plant:2.5,musk:3,catswap:2.5,pushp:2,feign:3,warn:.2,help:.4,mediate:.2,provoke:.5},dang:10,slight:1,forgive:.6,trust:.8,gift:1},
- "Kiêu ngạo":{tend:"khiêu khích, hạ nhục trước mặt người, khoe ân sủng, không chịu xin lỗi",w:{steal:1.5,provoke:3,humiliate:3,flaunt:3,rumor:1.5,trip:1.5,help:.5,mediate:.3,apologise:.1},dang:0,slight:1.6,forgive:.6,trust:1,gift:.5,lavish:60},
- "Hiền lành":{tend:"giúp người, can ngăn, thăm người ốm, dễ bỏ qua",w:{steal:.5,help:3,warn:2.5,mediate:3,visit:3,apologise:2,poison:.15,kpoison:.15,frame:.2,plant:.2,musk:.15,pushp:.15,provoke:.2,humiliate:.1},dang:-15,slight:.6,forgive:2,trust:1.3,gift:1.2,harmGate:70},
- "Đa nghi":{tend:"dò xét, thử lòng, soát quà, chậm tin, nhanh ngờ",w:{spy:3,test:3,check:3,help:.6,ally:.6},dang:0,slight:1.2,forgive:.8,trust:.5,gift:.6,suspectWarn:1},
- "Tham vọng":{tend:"bám người mạnh, cướp đêm thị tẩm, bỏ đồng minh sa cơ, đút lót Kính sự phòng",w:{ally:2.5,steal:3,bribeksp:3,drop:3,block:2,accuse:1.5,bribe:1.5},dang:0,slight:1,forgive:1,trust:1,gift:1,riseGift:2},
- "Nhu mì":{tend:"tránh va chạm, theo người cầm đầu phe, dễ bị bạn mạnh xui làm",w:{steal:.5,follow:3,help:1.2,provoke:.2,humiliate:.1,poison:.3,frame:.4,pushed:3},dang:-10,slight:.8,forgive:1.4,trust:1.1,gift:1.1},
- /* second traits */
- "Hiếu thảo":{tend:"kính Thái hậu, giữ nề nếp",w:{serveTH:3,provoke:.7},dang:-3,slight:1,forgive:1.1,trust:1,gift:1},
- "Ghen tuông":{tend:"ghen ngay khi người khác được sủng",w:{steal:1.6,trip:1.5,rumor:1.4,block:1.5},dang:5,slight:1.2,forgive:.8,trust:1,gift:1,ghen:1.6},
- "Tham tiền":{tend:"mê bạc vàng, dễ mua chuộc",w:{bribe:1.5,flaunt:1.3},dang:0,slight:1,forgive:1,trust:1,gift:1.6},
- "Trọng nghĩa":{tend:"giữ lời, không bỏ bạn lúc hoạn nạn",w:{steal:.8,help:1.6,warn:1.6,drop:.1},dang:-5,slight:1,forgive:1.2,trust:1.2,gift:1},
- "Nhiều chuyện":{tend:"buôn chuyện, tin gì cũng lan",w:{rumor:2,gossip:3,spy:1.3},dang:0,slight:1,forgive:1,trust:1,gift:1},
- "Thù dai":{tend:"nhớ oán rất lâu",w:{provoke:1.2},dang:5,slight:1.4,forgive:.3,trust:.9,gift:.8},
- "Cả nể":{tend:"khó từ chối ai, dễ bị nhờ vả",w:{help:1.3,pushed:1.8,follow:1.5},dang:-3,slight:.8,forgive:1.3,trust:1.2,gift:1.1},
- "Thẳng thắn":{tend:"nói thẳng, ghét mưu ngầm",w:{steal:.7,feign:.2,plant:.5,frame:.6,warn:1.5,provoke:1.3},dang:0,slight:1.1,forgive:1.1,trust:1,gift:1},
- "Mê tín":{tend:"tin điềm báo, sợ bùa ngải",w:{check:1.5,pray:3},dang:0,slight:1,forgive:1,trust:1,gift:1},
- "Khéo léo":{tend:"khéo lấy lòng người trên",w:{steal:1.4,ally:1.5,serveTH:1.5,gift:1.5},dang:0,slight:.9,forgive:1.1,trust:1,gift:1},
- /* servants */
- trung:{tend:"che chắn cho chủ, báo trước nguy",w:{warn:3,blame:3,dirty:.4},dang:-10,slight:1,forgive:1.2,trust:1.3,gift:1},
- tham:{tend:"ăn cắp, bán tin, làm việc bẩn vì bạc",w:{steal:3,sell:3,dirty:2,black:3},dang:0,slight:1,forgive:1,trust:.9,gift:1.6},
- nhat:{tend:"bị ép thì khai, nhưng không dám phản chủ",w:{confess:3,flee:2,scheme:0,dirty:.6},dang:-10,slight:1,forgive:1,trust:1,gift:1},
- lanh:{tend:"dò tin, tìm manh mối giỏi, nhưng muốn trèo cao",w:{clue:3,spy:3,leave:2},dang:0,slight:1,forgive:1,trust:1,gift:1},
- chuyen:{tend:"buôn chuyện hai chiều, mỗi tuần mang nhiều tin nhất",w:{gossip:3,rumor:2},dang:0,slight:1,forgive:1,trust:1,gift:1},
  /* the Emperor's traits drive his visits, punishments and rewards; men too */
  nongnay:{tend:"phạt nặng, sủng thất thường",w:{punish:2,reward:.8},slight:1.5,forgive:.6},nhantu:{tend:"hay khoan thứ, trọng đức",w:{punish:.5,reward:1.4,pardon:2},slight:.7,forgive:1.6},
  datinh:{tend:"thị tẩm nhiều, rải khắp",w:{visit:1.6},slight:1,forgive:1},lanhlung:{tend:"sủng lên chậm, phai chậm",w:{visit:.7},slight:1,forgive:1},chamchinh:{tend:"ít thị tẩm, trọng người bàn việc",w:{visit:.7,reward:1.1},slight:1,forgive:1},
  danghi:{tend:"dễ nghi, lời vu cáo khó gỡ",w:{punish:1.3},slight:1.2,forgive:.8},mesac:{tend:"trọng sắc",w:{visit:1.2},slight:1,forgive:1},trongtai:{tend:"trọng tài nghệ",w:{reward:1.2},slight:1,forgive:1},hieuthao:{tend:"nghe lời Thái hậu",w:{},slight:1,forgive:1}
 };
-const TH_TRAITS=["Hiền lành","Đa nghi","Kiêu ngạo","Hiếu thảo"];
-function traitsOf(p){if(!p)return[];if(p===S)return[];if(p.kind==="emp"||p===S.emp)return S.emp.traits||[];if(p.kind==="th"||p==="th")return[S.thTrait||(S.thTrait=pick(["Hiền lành","Đa nghi","Kiêu ngạo"])),"Hiếu thảo"].slice(0,1);if(p.role==="maid"||p.role==="eun"||p.tr&&PERS[p.tr]&&!p.trait)return[p.tr,p.tr2].filter(Boolean);return[p.trait,p.trait2].filter(Boolean)}
+const TH_TRAITS=["Ân cần","Kín đáo","Kiêu ngạo","Vì gia tộc"];
+/* base answer for the two own sets only; every other person is answered by the ONE pool (jnet.js netOf wraps this) */
+function traitsOf(p){if(!p||p===S)return[];if(p.kind==="emp"||p===S.emp)return S.emp.traits||[];if(p.kind==="th"||p==="th")return[S.thTrait||(S.thTrait="Ân cần")];return[]}
 function persW(p,act){let w=1;for(const t of traitsOf(p)){const P=PERS[t];if(P&&P.w&&P.w[act]!=null)w*=P.w[act]}return w}
 function persF(p,f,def){let v=def;for(const t of traitsOf(p)){const P=PERS[t];if(P&&P[f]!=null)v=(f==="dang"?v+P[f]:v*P[f])}return v}
 function tends(p){return traitsOf(p).map(t=>PERS[t]&&PERS[t].tend).filter(Boolean).join("; ")}
@@ -67,35 +46,35 @@ function npcAct(v,t){const b=bandOf(danger(v,t));if(!b)return"";const allow=BAND
 (function(){const a0=affAdd;affAdd=function(x,y,n){if(n>0&&y===S&&x&&x!==S)n*=persF(x,"trust",1);return a0.call(this,x,y,Math.round(n))}})();
 function oanMonth(){for(const v of rivals){const f=Math.round(2*persF(v,"forgive",1));v.oan=Math.max(0,(v.oan||0)-f);for(const k in v.ro)v.ro[k]=Math.max(0,v.ro[k]-f)}for(const k in S.ro)S.ro[k]=Math.max(0,S.ro[k]-2)}
 /* gifts land by trait: Kiêu ngạo shrugs at small ones, Tham vọng warms to a rising giver, Tham tiền to anything */
-(function(){const g0=giftVal;giftVal=function(it,r){let v=g0.apply(this,arguments);if(r&&typeof r==="object"&&r!==S){let m=persF(r,"gift",1);const lav=persF(r,"lavish",0);if(lav&&(it.pr||0)>=lav)m=Math.max(m,1.5);if(traitsOf(r).includes("Tham vọng")&&(S.rank>=r.rank||S.sung>=r.sung))m*=2;v=Math.max(1,Math.round(v*m))}return v}})();
+(function(){const g0=giftVal;giftVal=function(it,r){let v=g0.apply(this,arguments);if(r&&typeof r==="object"&&r!==S){let m=persF(r,"gift",1);const lav=persF(r,"lavish",0);if(lav&&(it.pr||0)>=lav)m=Math.max(m,1.5);{const rg=Math.max(1,...traitsOf(r).map(t=>(PERS[t]&&PERS[t].riseGift)||1));if(rg>1&&(S.rank>=r.rank||S.sung>=r.sung))m*=rg}v=Math.max(1,Math.round(v*m))}return v}})();
 /* SOCIAL MENU: once a week each consort may do one non-harm deed, by her traits; the same menu toward her and toward anyone */
 const SOC={
  help:{w:1,ok:(v,t)=>aff(v,t)>=10,run:(v,t)=>{relAdd(v,t,6);return `${v.name} sang giúp ${NM(t)} việc trong cung`}},
  visit:{w:0.8,ok:(v,t)=>t!==S?(t.suc<50||t.preg):(S.suc<50||S.preg),run:(v,t)=>{relAdd(v,t,5);if(t===S)apply({suc:3});return `${v.name} sang thăm ${NM(t)} lúc ốm mệt`}},
- warn:{w:0.8,ok:(v,t)=>aff(v,t)>=20&&liveRivals(true).some(x=>x!==v&&x!==t&&bandOf(danger(x,t))>=2),run:(v,t)=>{const x=liveRivals(true).find(x=>x!==v&&x!==t&&bandOf(danger(x,t))>=2);if(t===S){if(traitsOf(S).length){}S.dKnown=S.dKnown||{};S.dKnown[x.id]=wk();noteAdd(x.id,`${v.name} báo: nàng có ý hại ngươi`)}else{t.shield=Math.max(t.shield||0,1)}relAdd(v,t,4);return `${v.name} lén báo ${NM(t)} đề phòng ${x.name}`}},
+ warn:{w:0.8,ok:(v,t)=>aff(v,t)>=20&&liveRivals(true).some(x=>x!==v&&x!==t&&bandOf(danger(x,t))>=2),run:(v,t)=>{const x=mindPickBy(liveRivals(true).filter(x=>x!==v&&x!==t&&bandOf(danger(x,t))>=2),x=>danger(x,t)+Math.max(0,oan(v,x)),v);/* npc-mind: was FIRST */if(t===S){if(traitsOf(S).length){}S.dKnown=S.dKnown||{};S.dKnown[x.id]=wk();noteAdd(x.id,`${v.name} báo: nàng có ý hại ngươi`)}else{t.shield=Math.max(t.shield||0,1)}relAdd(v,t,4);return `${v.name} lén báo ${NM(t)} đề phòng ${x.name}`}},
  mediate:{w:0.8,ok:(v,t)=>t!==S&&oan(t,S)>=20,run:(v,t)=>{oanAdd(t,S,-10);return `${v.name} đứng ra hòa giải giữa ${t.name} và ngươi`}},
  provoke:{w:0.6,ok:(v,t)=>danger(v,t)>=10,run:(v,t)=>{oanAdd(t,v,6);if(t===S)apply({duc:0});else t.ghen=cl(t.ghen+3,0,100);ap(v,{danh:-1});return `${v.name} buông lời khiêu khích ${NM(t)}`}},
  humiliate:{w:0.5,ok:(v,t)=>danger(v,t)>=18&&rkOf(v)>=rkOf(t),run:(v,t)=>{oanAdd(t,v,10);ap(t,{danh:-2});ap(v,{danh:-1});return `${v.name} hạ nhục ${NM(t)} trước mặt cung nhân`}},
  flaunt:{w:0.5,ok:(v,t)=>v.sung>=40,run:(v,t)=>{liveRivals(true).forEach(x=>{if(x!==v)x.ghen=cl(x.ghen+2,0,100)});return `${v.name} đi khắp cung khoe quà ngự ban`}},
  spy:{w:0.6,ok:()=>true,run:(v,t)=>{evA(v,t,roll(40)?1:0);return `Người của ${v.name} dò hỏi giờ giấc của ${NM(t)}`}},
  test:{w:0.4,ok:(v,t)=>aff(v,t)>=0,run:(v,t)=>{const ok=t===S?roll(60):roll(50);affAdd(v,t,ok?3:-6);return `${v.name} thử lòng ${NM(t)}: ${ok?"tin thêm một chút":"càng ngờ vực"}`}},
- check:{w:0.4,ok:v=>v.inv.some(e=>!e.h),run:v=>{const i=v.inv.findIndex(e=>e.t);if(i>=0){v.inv.splice(i,1);return `${v.name} cho soát quà, vứt bỏ một món có độc`}return `${v.name} cho thái y soát lại quà được tặng`}},
+ check:{w:0.4,ok:v=>v.inv.some(e=>!e.h),run:v=>{const i=v.inv.findIndex(e=>e.t);if(i>=0){const x=v.inv.splice(i,1)[0];if(typeof ilGone==="function")ilGone(v,x,"evid");return `${v.name} cho soát quà, vứt bỏ một món có độc`}return `${v.name} cho thái y soát lại quà được tặng`}},
  ally:{w:0.6,ok:(v,t)=>t!==S?t.sung>=v.sung:S.sung>=v.sung,run:(v,t)=>{relAdd(v,t,8);return `${v.name} tìm đến kết thân với ${NM(t)} đang được sủng`}},
  drop:{w:0.6,ok:(v,t)=>aff(v,t)>=30&&(t===S?S.sung<25||S.confined:t.sung<25||t.confined),run:(v,t)=>{affAdd(v,t,-20);return `${v.name} lạnh nhạt với ${NM(t)} lúc sa cơ`}},
  steal:{w:0.5,ok:(v,t)=>(t===S?S.tonight:true)&&v.sung>=20,run:(v,t)=>{ap(v,{sung:2});ap(t,{sung:-2});oanAdd(t,v,4);return `${v.name} khéo léo cướp đêm thị tẩm của ${NM(t)}`}},
  bribeksp:{w:0.4,ok:v=>v.bac>=30,run:v=>{ap(v,{bac:-30,sung:2});return `${v.name} đút lót Kính sự phòng để được lật thẻ`}},
- follow:{w:0.5,ok:v=>liveRivals(true).some(x=>x!==v&&rkOf(x)>rkOf(v)+1),run:v=>{const L=liveRivals(true).filter(x=>x!==v&&rkOf(x)>rkOf(v)+1);const x=L.sort((a,b)=>rkOf(b)-rkOf(a))[0];relAdd(v,x,6);return `${v.name} nép theo ${x.name}`}},
+ follow:{w:0.5,ok:v=>liveRivals(true).some(x=>x!==v&&rkOf(x)>rkOf(v)+1),run:v=>{const L=liveRivals(true).filter(x=>x!==v&&rkOf(x)>rkOf(v)+1);const x=mindPickBy(L,y=>BAL.mind.pick.j28up.base+rkOf(y)+Math.max(0,aff(v,y))/BAL.mind.pick.j28up.aff,v);relAdd(v,x,6)/* npc-mind: was ARGMAX rank */;return `${v.name} nép theo ${x.name}`}},
  feign:{w:0.5,ok:(v,t)=>danger(v,t)>=20,run:(v,t)=>{affAdd(t,v,6);return `${v.name} niềm nở với ${NM(t)}, chuyện trò thân mật`}},
  apologise:{w:0.4,ok:(v,t)=>oan(t,v)>=15,run:(v,t)=>{oanAdd(t,v,-8);return `${v.name} sang xin lỗi ${NM(t)}`}},
  serveTH:{w:0.5,ok:()=>!S.thDead,run:v=>{v.th=cl((v.th||0)+2,-100,100);return `${v.name} sớm hôm hầu hạ Thái hậu`}},
  gossip:{w:0.4,ok:()=>true,run:(v,t)=>{const x=pick(liveRivals(true).filter(y=>y!==v));if(x)ap(x,{danh:-1});return `${v.name} rỉ tai chuyện trong cung`}},
  pray:{w:0.3,ok:()=>true,run:v=>{v.pray=Math.max(v.pray||0,1);return `${v.name} lên chùa cầu khấn`}},
  idle:{w:3,ok:()=>true,run:()=>""}};
-function npcSocial(v){const T=others(v);if(!T.length)return"";const t=pick(T);const O=[];for(const k in SOC){const s=SOC[k];let w=s.w*persW(v,k);if(w>0&&s.ok(v,t))O.push([k,w])}if(!O.length)return"";
+function npcSocial(v){const T=others(v);if(!T.length)return"";const t=mindPickBy(T,x=>BAL.mind.pick.j28soc.base+Math.abs(aff(v,x))/BAL.mind.pick.j28soc.aff+oan(v,x)/BAL.mind.pick.j28soc.oan,v);/* npc-mind: was UNIFORM; people deal more with those they feel strongly about */const O=[];for(const k in SOC){const s=SOC[k];let w=s.w*persW(v,k)*mindW(v,(MIND_SOC[k]||"social"));if(w>0&&s.ok(v,t))O.push([k,w])}if(!O.length)return"";
  let r=Math.random()*O.reduce((a,b)=>a+b[1],0),i=0;while(r>O[i][1]&&i<O.length-1){r-=O[i][1];i++}const k=O[i][0];persCount(v,k);if(k==="idle")return"";const txt=SOC[k].run(v,t);
  if(txt)newsAdd(v,k,txt,t===S||v.id===undefined);return t===S&&txt?txt+". ":""}
 /* the weekly news feed: deeds that show character; seen deeds may reveal a trait */
-function newsAdd(v,k,txt,toMe){S.news=S.news||[];const seen=toMe||roll(25+(S.mat||0)*8)||(S.staff||[]).some(s=>s.tr==="chuyen"&&roll(30));if(!seen)return;S.news.unshift({w:wk(),id:v.id,k,t:txt});if(S.news.length>40)S.news.length=40;
+function newsAdd(v,k,txt,toMe){S.news=S.news||[];const seen=toMe||roll(25+(S.mat||0)*8)||(S.staff||[]).some(s=>netIs(s,"talk")&&roll(30));if(!seen)return;S.news.unshift({w:wk(),id:v.id,k,t:txt});if(S.news.length>40)S.news.length=40;
  S.trK=S.trK||{};const T=traitsOf(v);const which=T.find(t=>PERS[t]&&PERS[t].w&&PERS[t].w[k]>1.5);if(which){const K=S.trK[v.id]=S.trK[v.id]||[];if(!K.includes(which)&&roll(35)){K.push(which);noteAdd(v.id,`Qua việc ${txt.replace(v.name+" ","")}: lộ nết ${which}`)}}}
 function trKnown(v){S.trK=S.trK||{};if(typeof k61Kin==="function"&&k61Kin(v))return[v.tr,v.tr2].filter(Boolean).map(s=>s[0].toUpperCase()+s.slice(1));/* home family: she knows their nature */return S.trK[v.id]||[]}
 function learnTrait(v,why){const T=traitsOf(v).filter(t=>!trKnown(v).includes(t));if(!T.length)return"";const t=T[0];(S.trK[v.id]=S.trK[v.id]||[]).push(t);noteAdd(v.id,`${why}: biết nàng ${t}`);return t}
@@ -106,5 +85,5 @@ function learnTrait(v,why){const T=traitsOf(v).filter(t=>!trKnown(v).includes(t)
 function newsHTML(){const L=(S.news||[]).filter(n=>wk()-n.w<=3);if(!L.length)return"";return `<h3>Tin trong cung tuần qua</h3><div class="pcb rows">${L.slice(0,8).map(n=>{const v=RV(n.id);return `<div class="pcrow"><span>${v?mdH(pv(v),"xs"):""} ${n.t}</span></div>`}).join("")}</div>`}
 (function(){if(typeof wkSummary!=="function")return;const w0=wkSummary;wkSummary=function(){let h=w0.apply(this,arguments);try{const n=newsHTML();if(n&&typeof h==="string")h+=n}catch(e){}return h}})();
 /* the dossier: traits hidden until learned, then a one-line 'tends to' */
-function trLine(v){const K=trKnown(v);const T=traitsOf(v);const un=T.filter(t=>!K.includes(t)).length;return (K.length?K.map(t=>`<b>${t}</b>`).join(" · ")+(un?` <span class="past">(còn ${un} nết chưa rõ)</span>`:""):`<span class="past">chưa rõ</span>`)+(K.length?`<br><span class="past">Hay: ${K.map(t=>PERS[t]&&PERS[t].tend).filter(Boolean).join("; ")}</span>`:"")}
+function trLine(v){const K=trKnown(v);const T=traitsOf(v);const un=T.filter(t=>!K.includes(t)).length;return (K.length?K.map(t=>`<b>${kitGloss(t)}</b>`).join(" · ")+(un?` <span class="past">(còn ${un} nết chưa rõ)</span>`:""):`<span class="past">chưa rõ</span>`)+(K.length?`<br><span class="past">Hay: ${K.map(t=>PERS[t]&&PERS[t].tend).filter(Boolean).join("; ")}</span>`:"")}
 function trChip(v){const K=trKnown(v);return K.length?K.join(" · "):"Tính nết: chưa rõ"}

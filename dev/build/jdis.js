@@ -80,7 +80,7 @@ function likeLearn(p,k,why){const K=likeKnown(p);if(!k)k=likeUnk(p)[0];if(!k||K.
  try{if(typeof noteAdd==="function"&&p&&p.id!=null)noteAdd(p.id,`${why||"Dò được"}: nàng thích ${e.n}`)}catch(x){}return e}
 function likeRow(p){if(!p||typeof p!=="object"||isEmp(p)||isTh(p)||p===S)return null;const L=likeKeys(p);if(!L.length)return null;const K=likeKnown(p).filter(k=>L.includes(k));
  return ["Nàng thích",K.length?K.map(k=>entry(k).n).join(" · ")+(L.length>K.length?` (còn ${L.length-K.length} điều chưa rõ)`:""):"chưa rõ",K.length?"t":"n"]}
-window.disLikeRow=likeRow;window.disLikeLearn=likeLearn;
+window.disLikeRow=likeRow;window.disLikeLearn=likeLearn;window.disLikeKnown=likeKnown;
 (function(){const c0=chatMark;chatMark=function(v){const r=c0.apply(this,arguments);try{if(v&&v!==S&&S.chat[v.id]>=1&&likeUnk(v).length&&roll(BAL.dis.talk))likeLearn(v,null,"Chuyện trò")}catch(e){}return r}})();
 (function(){if(typeof j78facts!=="function")return;const f0=j78facts;j78facts=function(v){const F=f0.apply(this,arguments);try{const k=likeUnk(v)[0];if(k)F.push({k:"lk:"+k,kind:"lk",pri:BAL.dis.spyPri,txt:`${j78Who(v)} thích ${entry(k).n}.`,go:()=>{const K=likeKnown(v);if(!K.includes(k))K.push(k);return""}})}catch(e){}return F}})();
 /* the gift dialog tells her only what she already knows */

@@ -29,7 +29,7 @@ function k3Hud(){try{if(!S)return;const d=$$("me-d");if(d){const t=k3Date();if(d
  k3TopRow();try{window.kitHxRoad&&kitHxRoad()}catch(e){}if(typeof kitStatSet!=="function")return;/* the Đức "!" (lập Hoàng hậu) is a consort goal: never on the cung nữ road or in lãnh cung */const nd=hhNeed(S).duc,hq=S.rank<7&&S.duc<nd&&!(window.kitRoad&&kitRoad()),dw=`Cần Đức ${BAL.hhDuc} mới được lập Hoàng hậu (mẹ Thái tử: ${BAL.hhDucHeir})`;
  [["sac","Sắc"],["tai","Tài"],["tamco","Tâm cơ"],["duc","Đức"]].forEach(([k,l])=>{const c=$$("hud-"+k);if(c)kitStatSet(c,S[k],{title:`${l} ${S[k]}${k==="duc"&&hq?" · "+dw:""} · chạm để xem đủ`,warn:k==="duc"&&hq?dw:""})});
  /* Danh · Sủng · Bạc · Sức: tooltip = name + value + "chạm để xem đủ" (the label line's own text, so the servant road's "Chủ tin" reads right) */
- ["danh","sung","bac","suc"].forEach(k=>{const c=$$("hud-"+k);if(!c)return;const l=T((c.querySelector(".kstl")||c).textContent),v=k3CellKey(k)==="tin"?S.tin:S[k];kitStatSet(c,v,{title:`${l} ${v} · chạm để xem đủ`})})}catch(e){}}
+ ["danh","sung","bac","suc"].forEach(k=>{const c=$$("hud-"+k);if(!c)return;const l=T((c.querySelector(".kstl")||c).textContent),v=k3CellKey(k)==="tin"?S.tin:S[k];kitStatSet(c,hudFmt(k3CellKey(k),v),{title:`${l} ${hudFmt(k3CellKey(k),v)} · chạm để xem đủ`})})}catch(e){}}
 /* the top bar's second row (KIT 31.1): time (buổi, khắc dots, weather, Quẻ tuần) + status chips | her Tư chất. ONE component, every device */
 function k3TopRow(){const hd=document.querySelector("header.hud");let tc=$$("k3tc");if(!tc&&hd){tc=document.createElement("div");tc.id="k3tc";tc.className="k3tc";
  tc.innerHTML=`<span id="k3tt" class="k3tt"></span>`;hd.appendChild(tc);

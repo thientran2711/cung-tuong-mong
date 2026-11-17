@@ -60,8 +60,8 @@ petWeek=function(){for(const p of [S].concat(typeof petNpcs==="function"?petNpcs
    if(me&&P.maidW&&P.maidW>tsbWk()){const m=BAL.pet.maidEff;P.full=cl(P.full+D.full*2*m,0,100);P.clean=cl(P.clean+D.clean*2*m,0,100);P.joy=cl(P.joy+D.joy*2*m,0,100)}
    if(!me){const can=(p.bac||0)>=(T.up||0);const k=BAL.pet.npcCare*(can?1:.4);P.full=cl(P.full+D.full*1.2*k,0,100);P.clean=cl(P.clean+D.clean*1.2*k,0,100);P.joy=cl(P.joy+D.joy*1.2*k,0,100);P.aff=cl(P.aff+3*k,0,100)}
    petcSync(P);
-   if(petOk(P)&&T.suc){if(me)S.suc=cl(S.suc+T.suc,0,100);else p.suc=cl((p.suc||0)+T.suc,0,100)}
-   if(T.al&&p.asthma){if(me)S.suc=cl(S.suc-2,0,100);else p.suc=cl((p.suc||0)-2,0,100)}
+   if(petOk(P)&&T.suc){if(me)S.suc=cl(S.suc+T.suc,0,sucCap(S));else p.suc=cl((p.suc||0)+T.suc,0,sucCap(p))}
+   if(T.al&&p.asthma){if(me)S.suc=cl(S.suc-2,0,sucCap(S));else p.suc=cl((p.suc||0)-2,0,sucCap(p))}
    if(P.care<BAL.pet.sad){P.bad=(P.bad||0)+1;if(me&&P.bad===1&&tsbOn()&&!tsbBot())Q.push({t:"Thú nuôi biếng ăn",who:typeof pMe==="function"?pMe():null,h:`<p>${T.n} nằm lì một góc, lông xơ, không buồn ăn. Phải chăm ngay kẻo ốm.</p>`})}
    else P.bad=0;
    if(P.bad>=BAL.pet.neglectW||P.care<=0){const n=petLose(p,i,/hoami|sao|vet|uyenuong|phuong|camke|hac|thanhlong/.test(P.t)?"bay mất vì bỏ bê":"bỏ đi vì bỏ bê");
@@ -148,7 +148,7 @@ try{const add=(g,k)=>{const x=RVGRP.find(r=>r[0]===g);if(x&&!x[1].includes(k))x[
  LACK.petsteal=t=>!tsbPets(t).length?"nàng không nuôi thú":!petHasFree(S)?"hết ô thú nuôi":"";LACK.petcare=t=>!tsbPets(t).length?"nàng không nuôi thú":""}catch(e){console.error("petcare acts",e)}
 /* NPC minds: friendly ones help (with her too), greedy / hostile ones steal (higher stages less tempting: harder) */
 (function(){if(typeof mindMenu!=="function")return;const m0=mindMenu;mindMenu=function(v,t){const O=m0.apply(this,arguments);try{if(Array.isArray(O)&&v!==S&&tsbPets(t).length){
-  if(rel(v,t)>=20&&ACT.petcare.ok(v,t))O.push(["petcare",.4]);const tr=traitsOf(v);if((tr.includes("Tham vọng")||tr.includes("Hiểm độc"))&&hostility(v,t)>=40&&ACT.petsteal.ok(v,t))O.push(["petsteal",.25*(1+petT(tsbPets(t)[petTarget(t)]).tr*.3)])}}catch(e){}return O}})();
+  if(rel(v,t)>=20&&ACT.petcare.ok(v,t))O.push(["petcare",.4]);const tr=traitsOf(v);if((tr.includes("Tham vọng")||tr.includes("Xảo quyệt"))&&hostility(v,t)>=40&&ACT.petsteal.ok(v,t))O.push(["petsteal",.25*(1+petT(tsbPets(t)[petTarget(t)]).tr*.3)])}}catch(e){}return O}})();
 /* co-op (review/coop-pets): the friend's entry carries her live pets, so the act tabs offer petcare / thaopet / petsteal on her exactly as on an
    NPC; jcoopworld's runAct wrapper sends what happened to her pets (res.pet) and her client applies it to her own pets.
    coopPetAct(kind) = the same act from code/tests: kind "care"|"harm"|"steal" (or the act key) on the friend entry; returns the result text. */

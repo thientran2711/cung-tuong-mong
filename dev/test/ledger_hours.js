@@ -25,7 +25,7 @@ const {chromium}=require('playwright');const [,,URL,NM,ORIG]=process.argv;const 
     const k=e[kh][0];if(k===OUT)continue;menIn++;
     const sec=j95z().sec.some(s=>s.b===x.id&&s.wk===wk()&&s.c===R.c);/* a planned secret meeting (j95 sec: the record carries its reason) */
     if((!y||!y.w)&&!sec)bad.push("man inside without a reason:"+x.rw+"@"+k);if(sec)agg_sec++;
-    else if(y.w!=="stray"&&W2[x.id]!==k)bad.push("man not at his set place:"+x.rw+":"+y.w+" rec "+k+" sched "+W2[x.id]);
+    else if(y&&y.w!=="stray"&&W2[x.id]!==k)bad.push("man not at his set place:"+x.rw+":"+y.w+" rec "+k+" sched "+W2[x.id]);
     if(B===B4L&&y&&(y.w==="duty"||y.w==="order"||y.w==="visit"||y.w==="fest")&&x.rw!=="thị vệ")bad.push("man inside at night:"+x.rw+":"+y.w)}
    for(const id in W2){const x=manById(id);if(x&&x.alive&&(!MY[id]||MY[id].w!=="stray")&&W2[id]!==MW[id])bad.push("schedule not deterministic:"+x.rw+" rec "+MW[id]+"/"+(MY[id]&&MY[id].w)+" sched "+W2[id]+"/"+(Y2[id]&&Y2[id].w)+" b"+B+" key "+R.key)}
    /* officials */let offIn=0;for(const id in R.P){if(id.indexOf("q:")!==0)continue;const c=id.slice(2);if(!MI[c])bad.push("official in record, not on roster:"+c);else if(R.P[id][kh][0]!==MI[c])bad.push("official not at his set place:"+c);if(R.P[id][kh][0]!==OUT)offIn++}

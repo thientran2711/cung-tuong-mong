@@ -73,7 +73,7 @@ function rtSeeO(k,extra){const w=watcher();const W=rtWit(k).length;return od(80-
 function rtTtCards(){const T=rtS(),A=[],tt=T.tt,ducK=S.duc>=BAL.route.guiltDuc?"lương tâm cắn rứt (Đức cao)":"";
  if(!tt){const M=rtMenMet().sort((a,b)=>((b.tinh||0)+(b.af||0))-((a.tinh||0)+(a.af||0))).slice(0,2);const tm=rtTm();
   if(!M.length)A.push(rtCard({id:"tt0",n:"Để ý một nam nhân",t:"Một bóng áo xanh nơi cung cấm làm ngươi xao lòng.",need:[["đã gặp một nam nhân (Ngự hoa viên, Thái y viện, lễ tết…)",false]],x:"bắt đầu lối Tư tình"}));
-  for(const m of M)A.push(rtCard({id:"tt0"+m.id,n:`Để ý ${rtMnm(m)}`,t:m.id===tm?"Người thương thuở ở quê, nay gặp lại trong cung cấm.":`${m.role} ${m.trait}; ngươi đã gặp y.`,art:RT_ART.tt,c:S.duc>=BAL.route.guiltDuc?{...BAL.route.eyeGuilt}:{},k:1,
+  for(const m of M)A.push(rtCard({id:"tt0"+m.id,n:`Để ý ${rtMnm(m)}`,t:m.id===tm?"Người thương thuở ở quê, nay gặp lại trong cung cấm.":`${m.role} ${netTxt(m)}; ngươi đã gặp y.`,art:RT_ART.tt,c:S.duc>=BAL.route.guiltDuc?{...BAL.route.eyeGuilt}:{},k:1,
    x:`bắt đầu lối Tư tình · y để ý ngươi hơn (tình ý +8)`,kem:ducK,go:()=>{T.tt={mid:m.id,st:1,meet:0,since:S.turn};m.tinh=(m.tinh||0)+8;rtStat("tt_start");rtEmo("lo",25,`thầm nghĩ đến ${m.name}`);log(`Ngươi bắt đầu để ý ${rtMnm(m)}. Chuyện này chỉ mình ngươi biết.`)}}));
   return A}
  const m=rtMan();if(!m){T.tt=null;return A}
@@ -113,7 +113,7 @@ function rtGateT(v,t,k){try{if(typeof motiveOK!=="function")return{ok:true,why:"
 function rtGate(v,k){return rtGateT(v,S,k)}
 function rtCaughtBy(v,m,what){const T=rtS();rtStat("tt_caught");
  if(aff(v,S)>=45){relAdd(S,v,5);log(`${rtVn(v)} thấy ngươi với ${rtMnm(m)}. Nàng lặng lẽ quay đi, giữ kín cho ngươi.`);return}
- const greedy=/Tham|Hiểm/.test(v.trait||"");if((greedy||roll(BAL.route.bmRoll))&&rtGate(v,"uyhiep").ok){T.bm={v:v.id,mid:m.id,n:30+R(4)*10,since:S.turn,k:0};rtEmo("so",55,`${v.name} nắm thóp`);rtPush("rtBm",{v:v.id});return}
+ const greedy=netRx(v,/Tham|Xảo quyệt/);if((greedy||roll(BAL.route.bmRoll))&&rtGate(v,"uyhiep").ok){T.bm={v:v.id,mid:m.id,n:30+R(4)*10,since:S.turn,k:0};rtEmo("so",55,`${v.name} nắm thóp`);rtPush("rtBm",{v:v.id});return}
  if(!rtGate(v,"tocao").ok){log(`${rtVn(v)} thấy ngươi với ${rtMnm(m)}. Nàng không nói gì, nhưng đã ghi nhớ.`);return}
  rtReport(v,m)}
 function rtReport(v,m){const T=rtS();rtStat("tt_report");{const kk=rtKidsAlive().find(k=>k.tf&&!k.tfOk);if(kk&&!T.ng){log(`<span class="r">${rtVn(v)} tâu: ${kk.name} không phải cốt nhục hoàng gia, xin trích huyết nghiệm thân.</span>`);rtNgSet(kk,v.id,false);return}}const ev=(typeof evG==="function"?evG(v,S):2)||2;
@@ -310,7 +310,9 @@ function rtBookHTML(){const b=rtBook();const ids=Object.keys(RT_END);const met=i
    S.rt.ng = {k: tên con, acc: "emp"|"th"|id phi tần, at: tuần nghiệm, oil: kẻ tố đã bỏ dầu, P:{alum,swap,bribe,spy}} */
 function rtAccN(a){if(a==="emp")return"Hoàng thượng";if(a==="th")return"Thái hậu";const v=RV(a);return v?rtVn(v):"kẻ tố"}
 function rtNgKid(){const T=S.rt;return T&&T.ng?(S.kids||[]).find(k=>k.name===T.ng.k&&k.alive)||null:null}
-function rtNgSet(k,acc,oil){const T=rtS();if(T.ng||!k)return;const v=RV(acc);if(oil==null)oil=!!(v&&(/Hiểm|Tâm/.test(v.trait||"")||(v.tamco||0)>=60)&&roll(BAL.route.oil));
+/* does this accuser drop oil into the bowl? (her own child's test and every NPC accuser: one rule, BAL.ngh) */
+function rtNgOil(v){const N=BAL.ngh;return !!(v&&v!==S&&(netRx(v,/Xảo quyệt|Tâm/)||(v.tamco||0)>=N.oilTc)&&roll(BAL.route.oil))}
+function rtNgSet(k,acc,oil){const T=rtS();if(T.ng||!k)return;const v=RV(acc);if(oil==null)oil=rtNgOil(v);
  T.ng={k:k.name,acc,at:wk()+1,oil:!!oil,P:{}};try{if(!window.__bot)rtMgBowl()}catch(e){}rtStat("ng_set");rtEmo("so",60,"sắp trích huyết nghiệm thân");
  log(`<span class="r">${rtAccN(acc)} truyền: tuần sau trích huyết nghiệm thân cho ${k.name} trước mặt lục cung.</span>`);rtRefresh()}
 function rtNgDue(){const T=S.rt;if(!T||!T.ng||T.ng.held)return;if(!rtNgKid()){T.ng=null;return}if(wk()>=T.ng.at){T.ng.held=1;rtPush("rtNg",{})}}
@@ -343,7 +345,7 @@ function rtNgRun(fresh){const T=S.rt,N=T&&T.ng;if(!N)return;const P=N.P,k=rtNgKi
  if(!fresh){const caught=((P.alum||P.swap)&&N.mg===0)||(P.bribe&&roll(BAL.route.cheat));if(caught){rtStat("ng_cheat");log(`<span class="r">Có người tâu: bát nước của ngươi đã bị động tay.</span>`);rtNgLose(false,!k.tf,"gian lận khi nghiệm thân");return}}
  const ok=rtNgShown(fresh);
  rtNgScene(ok,k.name,()=>{if(ok){if(k.tf)rtEnd("tt_hoa");rtNgWin(false)}else{log(`<span class="r">Hai giọt máu tách rời trong bát nước.</span>`);if(!fresh&&!N.re){N.re=1;rtPush("rtNg2",{})}else rtNgLose(false,!k.tf)}rtAfter()})}
-PEND.rtNg2=pp=>{const T=S&&S.rt;const k=rtNgKid();if(!T||!T.ng||!k)return null;const oR=od(38+(S.th||0)/3+(S.doctor?15:0));
+PEND.rtNg2=pp=>{const T=S&&S.rt;const k=rtNgKid();if(!T||!T.ng||!k)return null;const oR=od(38+(S.th||0)/3+(S.doctor?15:0)+(k.dateOff&&!k.tf&&k.thyRec&&typeof BAL==="object"&&BAL.preT?BAL.preT.recDefend:0));/* a real early / late birth AND the thái y mạch án holds the month the pregnancy was found (review/suc-khoe-fix F9) */
  return{ti:"Máu không hòa",t:`<p>Cả điện lặng ngắt. Hai giọt máu nằm riêng hai góc bát. Hoàng thượng chưa nói gì; mọi ánh mắt đổ dồn vào ngươi.</p>`,stage:[k],headArt:{src:RT_ART.bat,label:"Nghiệm thân"},o:[
   rtOpt("Xin thái y nghiệm lại bằng bát nước mới",{},rtX(oR,"nghiệm lại bằng bát sạch: kết quả theo cha thật","Hoàng thượng không cho nghiệm lại · bị xử tội",k.tf?"bát sạch thì máu vẫn không hòa":""),()=>{if(roll(oR))rtNgRun(true);else rtNgLose(false,!k.tf)}),
   rtOpt("Nhận tội",{},rtX(100,"giữ được mạng (lãnh cung)","",`${k.name} bị đưa ra khỏi cung`),()=>rtNgLose(true,!k.tf)),
@@ -356,28 +358,33 @@ function rtNgLose(confess,innocent,why){const T=S.rt,N=T.ng,k=rtNgKid();const m=
  if(k){k.alive=false;k.gone=1;log(`<span class="r">${k.name} bị tước danh phận hoàng tự, đưa ra khỏi cung giao người nuôi.</span>`)}T.tt=null;T.bm=null;
  if(confess)cold(innocent?"Nhận tội tư thông (oan)":"Nhận tội tư thông");else if(roll(BAL.route.ngDeath))deathSentence(why?`Bị ban chết vì ${why}`:"Bị ban chết vì con không phải cốt nhục hoàng gia");else cold(why||"Con không phải cốt nhục hoàng gia")}
 /* NPC mothers: the same bowl (alum by the mother, oil by a framer) */
-function rtNgNpcAuto(v,k){const truth=!k.tf;const alum=!truth&&((v.tamco||0)>=55||roll(BAL.route.npcAlum));const foe0=liveRivals(false).find(x=>x!==v&&aff(x,v)<-30&&/Hiểm/.test(x.trait||""));const foe=foe0&&rtGateT(foe0,v,"frame").ok?foe0:null;
- if(truth&&!foe)return"";const oil=!!foe&&roll(BAL.route.npcOil);const shown=alum?true:oil?false:truth;k.tfOk=1;rtStat("npc_ng");const seen=(S.mat||0)>=2;
- if(shown){if(!truth)rtStat("npc_ng_hoa");return seen?`Nghe nói ${rtVn(v)} bị tâu xin nghiệm máu cho ${k.name}; máu hòa, nàng vô sự. `:""}
- k.alive=false;k.gone=1;rtStat(truth?"npc_ng_oan":"npc_ng_lo");const lov=k.tf&&manById(k.tf);if(lov)lov.alive=false;if(roll(BAL.route.ngDeath))deathSentence(v,"con không phải cốt nhục hoàng gia");else v.out=true;
- return `<span class="r">${rtVn(v)}: trích huyết nghiệm thân, máu ${k.name} không hòa. Nàng bị trị tội.</span>${truth&&(S.mat||0)>=4?` Tai mắt báo: bát nước đã bị ${foe.name} nhỏ dầu.`:""} `}
+/* ONE blood test for an NPC mother's child (review/suc-khoe-fix F4): the truth decides; a guilty mother may slip alum in; oil = an accuser's or
+   a framer's drops (the blood never mixes); acc = the NPC who demanded it (backlash when the blood mixes). Read by rtNgNpcAuto and jkh khNgNpc. */
+function rtNgNpcRes(v,k,acc,oil){const N=BAL.ngh,truth=!k.tf;const alum=!truth&&((v.tamco||0)>=N.alumTc||roll(BAL.route.npcAlum));const shown=alum?true:oil?false:truth;k.tfOk=1;
+ if(shown){if(acc){ap(acc,BAL.route.demandFail);oanAdd(v,acc,N.accOan);try{punish(acc,"vu cáo phi tần",N.accPun)}catch(e){}}return{shown,truth,alum}}
+ k.alive=false;k.gone=1;const lov=k.tf&&manById(k.tf);if(lov)lov.alive=false;if(roll(BAL.route.ngDeath))deathSentence(v,"con không phải cốt nhục hoàng gia");else v.out=true;return{shown,truth,alum}}
+function rtNgNpcAuto(v,k){const N=BAL.ngh,truth=!k.tf;const foe0=liveRivals(false).find(x=>x!==v&&aff(x,v)<N.frameAff&&netRx(x,/Xảo quyệt/));const foe=foe0&&rtGateT(foe0,v,"frame").ok?foe0:null;
+ if(truth&&!foe)return"";const oil=!!foe&&roll(BAL.route.npcOil);const r=rtNgNpcRes(v,k,null,oil);rtStat("npc_ng");const seen=(S.mat||0)>=N.seeMat;
+ if(r.shown){if(!truth)rtStat("npc_ng_hoa");return seen?`Nghe nói ${rtVn(v)} bị tâu xin nghiệm máu cho ${k.name}; máu hòa, nàng vô sự. `:""}
+ rtStat(truth?"npc_ng_oan":"npc_ng_lo");
+ return `<span class="r">${rtVn(v)}: trích huyết nghiệm thân, máu ${k.name} không hòa. Nàng bị trị tội.</span>${truth&&(S.mat||0)>=N.oilMat?` Tai mắt báo: bát nước đã bị ${foe.name} nhỏ dầu.`:""} `}
 /* she demands the test on another consort's child (honest, or with oil = a frame-up) */
-function rtNgNpcCards(){const A=[];if(S.out)return A;for(const v of liveRivals(true)){const k=(v.kids||[]).find(x=>x.alive&&!x.tfOk&&(x.age||0)>=1);if(!k)continue;const ev=typeof evG==="function"?evG(S,v):0;if(ev<2&&!v.kidRumor)continue;
-  A.push(rtCard({id:"ngn_"+v.id,n:`Tâu xin nghiệm thân ${k.name}`,t:`Ngươi nắm ${ev} chứng cứ về ${rtVn(v)}.`,art:RT_ART.con,k:1,need:[[`chứng cứ về ${v.name} (có ${ev}/2)`,ev>=2]],x:"mở buổi trích huyết nghiệm thân (chọn cách ở bước sau)",kem:"máu hòa thì ngươi mang tội vu cáo",go:()=>rtPush("rtNgNpc",{v:v.id,k:k.name})}));break}
+function rtNgNpcCards(){const A=[];if(S.out)return A;for(const v of liveRivals(true)){const k=(v.kids||[]).find(x=>x.alive&&!x.tfOk&&(x.age||0)>=1);if(!k)continue;const ev=typeof evG==="function"?evG(S,v):0,ne=BAL.ngh.needEv;if(ev<ne&&!v.kidRumor)continue;
+  A.push(rtCard({id:"ngn_"+v.id,n:`Tâu xin nghiệm thân ${k.name}`,t:`Ngươi nắm ${ev} chứng cứ về ${rtVn(v)}.`,art:RT_ART.con,k:1,need:[[`chứng cứ về ${v.name} (có ${ev}/${ne})`,ev>=ne]],x:"mở buổi trích huyết nghiệm thân (chọn cách ở bước sau)",kem:"máu hòa thì ngươi mang tội vu cáo",go:()=>rtPush("rtNgNpc",{v:v.id,k:k.name})}));break}
  return A}
 PEND.rtNgNpc=pp=>{const v=RV(pp.v);const k=v&&(v.kids||[]).find(x=>x.name===pp.k&&x.alive);if(!v||!k)return null;const oF=rtMgO(4);
- const fin=(shown)=>{k.tfOk=1;if(shown){apply(BAL.route.demandFail);oanAdd(v,S,40);punish(S,"vu cáo phi tần",1);log(`<span class="r">Máu hòa. ${v.name} quỳ khóc kêu oan; ngươi mang tội vu cáo.</span>`)}
+ const N=BAL.ngh;const fin=(shown)=>{k.tfOk=1;if(shown){apply(BAL.route.demandFail);oanAdd(v,S,N.accOan);punish(S,"vu cáo phi tần",N.accPun);log(`<span class="r">Máu hòa. ${v.name} quỳ khóc kêu oan; ngươi mang tội vu cáo.</span>`)}
   else{apply(BAL.route.demandWin);k.alive=false;k.gone=1;const lov=k.tf&&manById(k.tf);if(lov)lov.alive=false;log(`<span class="r">Máu ${k.name} không hòa. ${rtVn(v)} bị trị tội.</span>`);if(roll(BAL.route.ngDeath))deathSentence(v,"con không phải cốt nhục hoàng gia");else v.out=true}};
- const alum=!!k.tf&&((v.tamco||0)>=55||roll(BAL.route.npcAlum));
+ const alum=!!k.tf&&((v.tamco||0)>=N.alumTc||roll(BAL.route.npcAlum));
  return{ti:"Tâu xin nghiệm thân",t:`<p>Ngươi quỳ trước Hoàng thượng, tâu rằng ${k.name} không phải cốt nhục hoàng gia, xin trích huyết nghiệm thân.</p>`,stage:[v,k],headArt:{src:RT_ART.con,label:"Nghiệm thân"},o:[
-  rtOpt("Nghiệm ngay thẳng",{},`${word(cl(35+(typeof evG==="function"?evG(S,v):0)*8,10,80))} · thành: Danh +${BAL.route.demandWin.danh} · máu không hòa · ${v.name} rước họa vào thân · hỏng: máu hòa — ngươi mang tội vu cáo · kèm: nàng cũng có thể động tay vào bát`,()=>{rtStat("ng_demand");const sh=alum?true:!k.tf;rtNgScene(sh,k.name,()=>{fin(sh);rtAfter()})}),
+  rtOpt("Nghiệm ngay thẳng",{},`${word(cl(35+(typeof evG==="function"?evG(S,v):0)*8,10,80))} · thành: Danh +${BAL.route.demandWin.danh} · máu không hòa · ${v.name} rước họa vào thân · hỏng: máu hòa — ngươi mang tội vu cáo (Sủng ${BAL.route.demandFail.sung}, Danh ${BAL.route.demandFail.danh}) · kèm: nàng cũng có thể động tay vào bát`,()=>{rtStat("ng_demand");const sh=alum?true:!k.tf;rtNgScene(sh,k.name,()=>{fin(sh);rtAfter()})}),
   rtOpt("Sai người nhỏ dầu vào bát",{...BAL.route.frame},rtX(oF,`máu không hòa dù ${k.name} là con ai · ${v.name} rước họa vào thân`,"bị bắt quả tang gian lận · ngươi bị trị tội","vu oan người vô tội là ác nghiệp"),()=>{rtStat("ng_frame");rtNgSleight("oil",4,ok=>{if(ok){if(!k.tf)rtEnd("ng_vu");rtNgScene(false,k.name,()=>{fin(false);rtAfter()})}else{k.tfOk=1;oanAdd(v,S,50);fall(S,"gian lận khi trích huyết nghiệm thân");rtAfter()}})}),
   rtOpt("Thôi",{},rtX(100,"không tâu nữa","",""),()=>{})]}};
 RT_END.ng_vu=["tt","Vu oan người khác qua bát nước"];
 (function(){const r0=rtNgCards;rtNgCards=function(){let A=r0.apply(this,arguments);try{if(rtS().open)A=A.concat(rtNgNpcCards())}catch(e){}return A}})();
 /* rivals may frame her innocent child (rare; two-way) */
 (function(){const m0=rtMonth;rtMonth=function(){let ev=m0.apply(this,arguments);try{const T=S.rt;if(T&&!T.ng&&!S.out){const k=rtKidsAlive().find(x=>!x.tfOk&&(x.age||0)>=2);
- const f=k&&liveRivals(true).find(v=>/Hiểm/.test(v.trait||"")&&typeof danger==="function"&&danger(v,S)>=60);if(k&&f&&roll(k.tf?2:.6)&&rtGate(f,"accuse").ok){rtStat("ng_frameMe");rtNgSet(k,f.id,!k.tf?roll(BAL.route.frameOil):null)}}}catch(e){}return ev}})();
+ const f=k&&liveRivals(true).find(v=>netRx(v,/Xảo quyệt/)&&typeof danger==="function"&&danger(v,S)>=60);if(k&&f&&roll(k.tf?2:.6)&&rtGate(f,"accuse").ok){rtStat("ng_frameMe");rtNgSet(k,f.id,!k.tf?roll(BAL.route.frameOil):null)}}}catch(e){}return ev}})();
 /* ---------- NGHIỆM THÂN on the shared mini-game frame (j82 kg82Open / kitGameFrame / kitGameResult, KIT §13) ----------
    1) rtNgSleight(kind, n, cb(ok)): the tampering mini-game — the watchers' gaze cones sweep the hall; tap «Ra tay» while no gaze is on the
       bowl. 3 hồi, need 2. Speed and cone width from the number of watchers, her Tâm cơ and Tai mắt. «Để Tâm cơ quyết định» = one roll with
