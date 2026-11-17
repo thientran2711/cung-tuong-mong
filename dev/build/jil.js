@@ -174,7 +174,7 @@ ilGuard("giveTo",(e,a,r)=>r==="emp"?"emp":r==="th"?"th":"evid",(a,r)=>[a,r]);ilG
 ilGuard("eitPilfer","pil");ilGuard("rivalsMonth",e=>e.t?"evid":"conf",()=>ilPeople());ilGuard("empAct","conf",()=>ilPeople());
 (function(){if(typeof eitPilBack!=="function")return;const b0=eitPilBack;eitPilBack=function(X){try{const I=ilS();const i=I.box.findIndex(x=>x.at==="srv"&&x.own==="me"&&x.e.k===X.k);if(i>=0){const x=I.box[i];I.box.splice(i,1);ilLog(x.e,"srv","me","lấy lại")}}catch(e){}return b0.apply(this,arguments)}})();
 /* weekly hook (after every other weekly rule) + census at load (old saves: every piece gets its id, nothing to move) */
-(function(){const e0=endTurn;endTurn=function(){const w0=S&&wk();const r=e0.apply(this,arguments);try{if(S&&!S.dead&&wk()!==w0){const q=Q.length;ilWeek();if(Q.length>q){showModal();render()}}}catch(e){console.error("ilWeek",e)}return r}})();
+(function(){const e0=endTurn;endTurn=function(){const w0=S&&wk();const r=e0.apply(this,arguments);try{if(S&&!S.dead&&wk()!==w0){const q=Q.length;ilWeek();if(Q.length>q){render();showModal()}}}catch(e){console.error("ilWeek",e)}return r}})();
 setTimeout(()=>{try{if(typeof S!=="undefined"&&S&&!S.dead&&(!S.il||!S.il.at))ilCensus()}catch(e){}},0);
 /* a new life (start / co-op rebuild): census at once, so a piece that leaves her chest before the first week is known (co-op res log) */
 (function(){if(typeof start!=="function")return;const s0=start;start=function(){const r=s0.apply(this,arguments);try{if(S&&!S.dead&&(!S.il||!S.il.at))ilCensus()}catch(e){console.error("ilCensus start",e)}return r}})();
