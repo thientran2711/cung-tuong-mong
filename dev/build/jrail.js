@@ -29,9 +29,9 @@ function paint(){try{const st=document.getElementById("stage");let el=document.g
  let calm=false;try{calm=typeof reducedMotion==="function"&&reducedMotion()}catch(e){}
  const L=R.filter(x=>(live||x.onTitle)&&val(x.when,true));if(!L.length){if(el)el.remove();return}
  if(!el){el=document.createElement("nav");el.id="krail";el.className="krail";el.setAttribute("aria-label","Lối tắt")}
- const h=L.map(x=>{const b=val(x.badge,false),bz=val(x.busy,false)&&!calm,dn=val(x.done,false);return `<button type="button" class="krailb${b?" kbadge":""}${bz?" kbusy":""}${dn?" kdone":""}${x.glyph?" kglyph":""}" data-rail="${x.id}" aria-label="${x.title}${b?" (có mới)":""}" title="${x.title}">${x.glyph?`<span class="krailg" aria-hidden="true">${val(x.glyph,"")}</span>`:`<img src="${val(x.icon,"")}" alt="" decoding="async">`}</button>`}).join("");
+ const h=L.map(x=>{const b=val(x.badge,false),bz=val(x.busy,false)&&!calm,dn=val(x.done,false);return `<button type="button" data-g="${String(x.title||"").trim().charAt(0)}" class="krailb${x.glyph?"":" kld"}${b?" kbadge":""}${bz?" kbusy":""}${dn?" kdone":""}${x.glyph?" kglyph":""}" data-rail="${x.id}" aria-label="${x.title}${b?" (có mới)":""}" title="${x.title}">${x.glyph?`<span class="krailg" aria-hidden="true">${val(x.glyph,"")}</span>`:`<img src="${val(x.icon,"")}" alt="" decoding="async" onload="this.parentNode.classList.remove('kld')" onerror="this.parentNode.classList.remove('kld');this.parentNode.classList.add('kerr')">`}</button>`}).join("");
  const host=live?(onMap?mvh:st):document.body;el.classList.toggle("kstdock",!live);
- if(el.__h!==h){el.innerHTML=h;el.__h=h}if(el.parentNode!==host)host.appendChild(el);
+ if(el.__h!==h){el.innerHTML=h;el.__h=h;el.querySelectorAll(".krailb.kld").forEach(b=>{const i=b.querySelector("img");if(i&&i.complete&&i.naturalWidth)b.classList.remove("kld")})}if(el.parentNode!==host)host.appendChild(el);
  if(live){place(el,onMap?mvh:st);el.style.bottom=""}else{el.style.top="";const tb=document.getElementById("tabs");const q=!onTitle&&tb&&tb.getClientRects().length?tb.getBoundingClientRect():null;el.style.bottom=q?`${Math.round(innerHeight-q.top+6)}px`:""}
  /* the stage may collapse / grow a moment after a tab change: look once more when the layout has settled */
  if(!paint.__t){paint.__t=setTimeout(()=>{paint.__t=0;const s2=document.getElementById("stage"),on=!!s2&&s2.getBoundingClientRect().height>40;if(on!==stOn)paint()},450)}}catch(e){console.error("kitStageRail",e)}}
@@ -56,6 +56,12 @@ const css=document.createElement("style");css.id="kit-rail";css.textContent=`
  background:var(--k-card,#fffaf0);border:1px solid var(--gold,#b8892b);box-shadow:inset 0 0 0 2px var(--k-card,#fffaf0),inset 0 0 0 3px var(--k-hair,#e6d3ac),0 2px 6px #0003;display:flex;align-items:center;justify-content:center}
 .krailb img{width:100%;height:100%;object-fit:contain;display:block;pointer-events:none}
 .krailb:active{transform:scale(.94)}
+/* ui-fixes-1: while a slot's icon is still arriving (.kld) the button shows the kit shimmer + the first letter of its name (never an empty square); a failed icon (.kerr) keeps the letter */
+.krailb.kld,.krailb.kerr{background:linear-gradient(100deg,#efe4cf 30%,#fbf3e0 48%,#efe4cf 66%) 0 0/250% 100%,var(--k-card,#fffaf0)}
+.krailb.kld{animation:kitShim 1.6s linear infinite}
+.krailb.kld img,.krailb.kerr img{opacity:0}
+.krailb.kld:before,.krailb.kerr:before{content:attr(data-g);position:absolute;inset:0;display:grid;place-items:center;font:700 20px/1 var(--display,serif);color:#8f5f0c;pointer-events:none}
+@media (prefers-reduced-motion:reduce){.krailb.kld{animation:none}}
 .krailg{font:700 22px/1 var(--body,inherit);color:var(--ink,#3a2418);display:block;pointer-events:none}
 .krailb.kbusy .krailg,.krailb.kbusy img{animation:krailDl calc(1.8s*var(--pace,1)) ease-in-out infinite}
 @keyframes krailDl{0%,100%{transform:translateY(-3px);opacity:.55}50%{transform:translateY(3px);opacity:1}}
@@ -66,5 +72,5 @@ body:has(#modal:not([hidden])) .krail.kstdock,body:has(#ov:not([hidden])) .krail
 .krailb.kbadge:after{content:"";position:absolute;top:1px;right:1px;width:10px;height:10px;border-radius:50%;background:var(--k-seal,#9a2c1c);box-shadow:0 0 0 2px var(--k-card,#fffaf0)}
 `;document.head.appendChild(css);
 try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§77",title:"kitStageRail · cột nút vuông bên trái sân khấu (Lịch · Chat · Mục tiêu)",
- html:()=>`<div class="kitpg-row" style="position:relative;height:150px"><nav class="krail" style="position:static">${[["ico-cal","Lịch tháng",0],["ico-chat","Chat",0],["ico-goal","Mục tiêu chương",1]].map(([i,t,b])=>`<button type="button" class="krailb${b?" kbadge":""}" title="${t}"><img src="img/kit/${i}.webp" alt=""></button>`).join("")}</nav></div>`})}catch(e){}
+ html:()=>`<div class="kitpg-row" style="position:relative;height:150px"><nav class="krail" style="position:static">${[["ico-cal","Lịch tháng",0],["ico-chat","Chat",0],["ico-goal","Mục tiêu chương",1]].map(([i,t,b])=>`<button type="button" data-g="${String(x.title||"").trim().charAt(0)}" class="krailb${x.glyph?"":" kld"}${b?" kbadge":""}" title="${t}"><img src="img/kit/${i}.webp" alt=""></button>`).join("")}</nav></div>`})}catch(e){}
 }catch(e){console.error("jrail",e)}})();
