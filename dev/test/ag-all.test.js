@@ -1,7 +1,7 @@
 /* AG-ALL checks (review/ag-all; design dev/handover/reports/ag-all.md §10). One fresh life, N days of bot play.
    // PART A
    1 day plan: drawn ONCE per day for the Emperor, Thái hậu and every live consort (4 slots each); the record follows the plan
-   2 histogram per group (consort / hh / th) of the deeds the day plans chose over N days
+   2 histogram per group (consort / hh / th / maid / srv / emp) of the deeds the day plans chose over N days
    3 no NPC-only hidden act: every chosen deed key maps to a button the player of that group has (TW, Sủng deck, j2 cards, Empress buttons)
    4 old drips off while the day plan runs (npcStudy monthly dice studies nothing; BAL.ag.day.on=0 → it studies again)
    5 ONE function for the Empress: hhAct(S, v, "reward") moves the same numbers as the NPC Empress's hh:reward (BAL.tw)
@@ -11,14 +11,15 @@ const {chromium}=require('playwright');const URL0=process.argv[2]||'dev/index.ht
 const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+m+(x!==undefined?' '+JSON.stringify(x):''))};
 (async()=>{const b=await chromium.launch();const p=await b.newPage({viewport:{width:755,height:1000}});const errs=[];p.on('pageerror',e=>errs.push(e.message));
  await p.goto(URL,{waitUntil:'domcontentloaded'});await p.waitForTimeout(2500);
- await p.evaluate(()=>{localStorage.clear();SLOT=4;document.getElementById('title').hidden=true;window.__nlInner=1;start();window.__nlInner=0;window.__bot=1;window.__agAll=1;quiet=false;Q.length=0;try{deal()}catch(e){}render()});
+ await p.evaluate(()=>{localStorage.clear();SLOT=4;document.getElementById('title').hidden=true;window.__nlInner=1;start();for(let i=0;i<40&&isSrv();i++)start();/* F3: a consort start (a servant start hides the Dư đồ '!' by design) */window.__nlInner=0;window.__bot=1;window.__agAll=1;quiet=false;Q.length=0;try{deal()}catch(e){}render()});
  /* make one NPC the Empress so her acts can be chosen (the seat may be empty at the start) */
  await p.evaluate(()=>{if(!queenP()){const v=liveRivals(true).find(x=>!x.out);v.queen=true;v.rank=7}});
- const r=await p.evaluate(async(DAYS)=>{const out={draws:[],follow:0,diff:0,by:{},byG:{consort:{},hh:{},th:{}},days:0};const by0=Object.assign({},AG.stat.by);
-  const grpOf=id=>id==="th"?"th":id==="emp"?"emp":/^s/.test(id)?"staff":(()=>{const v=RV(+id.slice(1));return v&&v.queen?"hh":"consort"})();
+ const r=await p.evaluate(async(DAYS)=>{let D0={P:{}};const out={draws:[],follow:0,diff:0,by:{},byG:{consort:{},hh:{},th:{},maid:{},srv:{}},days:0};const by0=Object.assign({},AG.stat.by);
+  /* F3: the group of a plan row by agGrp on the real person (staff rows are "s<sid>" → maid / srv) */
+  const grpOf=id=>{if(id==="th")return"th";if(id==="emp")return"emp";if(id[0]==="s"){const s=asStaff().find(x=>"s"+x.sid===id);if(s)return agGrp(s);const k=(D0.P[id]||[]).find(x=>x&&x.k);return k&&/^(maid|srv):/.test(k.k)?k.k.split(":")[0]:"staff?"}/* a staff row whose person left this buổi (wed / out): her deed key names her group */const v=RV(+id.slice(1));return v&&v.queen?"hh":v?"consort":"?"};
   for(let d=0;d<DAYS;d++){const d0=AGD.stat.draw;
    for(let bb=0;bb<4;bb++){placeWhere();agFlush();const R=S.roster;const D=agDz();
-    for(const id in D.P){const s=D.P[id][S.buoi||0];if(!s)continue;if(s.k){const g=grpOf(id);out.byG[g]=out.byG[g]||{};out.byG[g][s.k]=(out.byG[g][s.k]||0)+1}
+    D0=D;for(const id in D.P){const s=D.P[id][S.buoi||0];if(!s)continue;if(s.k){const g=grpOf(id);out.byG[g]=out.byG[g]||{};out.byG[g][s.k]=(out.byG[g][s.k]||0)+1}
      if(/^v/.test(id)&&R&&R.P[id]){const v=RV(+id.slice(1));if(v&&!v.out&&!v.confined){if(R.P[id][0][0]===s.pl)out.follow++;else out.diff++}}}
     Q.length=0;S.mg=0;try{nextBuoi()}catch(e){out.nb=e.message}Q.length=0}
    out.draws.push(AGD.stat.draw-d0);out.days++}
@@ -31,9 +32,12 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
  console.log('LANDED deeds: '+JSON.stringify(r.by));
  const tot=Object.values(r.byG.consort||{}).reduce((a,b)=>a+b,0);ok(tot>0,'consorts choose deeds from their act list',tot);
  /* 3 every chosen key = a player button of that group */
- const r3=await p.evaluate((byG)=>{const P=new Set(Object.keys(TW).concat(["effort"]));for(const k in AGCX)P.add("cx:"+k);["cx:study","cx:thHelp","cx:hhShield","cx:buy","cx:gift","cx:ally","cx:portrait","cx:humble","cx:tqGift"].forEach(k=>P.add(k));/* AG-ALL-2: a cx2 deed counts only if its player button label is really in the game's code */const SRC=[...document.scripts].map(x=>x.textContent).join("\n");for(const k in AGC2BTN)if(SRC.includes('n:"'+AGC2BTN[k])||SRC.includes('n:`'+AGC2BTN[k])||SRC.includes('>'+AGC2BTN[k]+'<'))P.add("cx2:"+k);
-  for(const k in AGHH)P.add("hh:"+k);const TH=new Set(["th:gift","th:admon","th:release"]);const EMP=new Set(["emp:summon","emp:visit","emp:tea"]);/* AG-ALL-2: his visit mirrors her Ngự giá lâm cung night (the same visGo), his tea her "Hoàng thượng ghé cung uống chén trà" card (empTeaCard) *//* the Emperor is never the player: his summons mirrors her Xin hầu cờ / đánh đàn (jgift kmEmpAct) *//* Thái hậu is never the player: her acts mirror the Empress's Ban thưởng / Khuyên / Ân xá */
-  const bad=[];for(const g in byG)for(const k in byG[g]){if(g==="emp"?!EMP.has(k):g==="th"?!TH.has(k):!(P.has(k)||/^(c|harm|maid|srv):/.test(k)))bad.push(g+":"+k)}return bad},r.byG);
+ const r3=await p.evaluate((byG)=>{const P=new Set(Object.keys(TW).concat(["effort"]));for(const k in AGCX)P.add("cx:"+k);["cx:study","cx:thHelp","cx:hhShield","cx:buy","cx:gift","cx:ally","cx:portrait","cx:humble","cx:tqGift"].forEach(k=>P.add(k));
+  for(const k in AGHH)P.add("hh:"+k);const TH=new Set(["th:gift","th:admon","th:release"]);const EMP=new Set(["emp:summon","emp:visit","emp:tea"]);/* the Emperor is never the player: his summons mirrors her Xin hầu cờ / đánh đàn (jgift kmEmpAct) *//* Thái hậu is never the player: her acts mirror the Empress's Ban thưởng / Khuyên / Ân xá */
+  /* F3: every prefixed key mapped to its player button: harm:* → the rival card (j15 RVGRP, + Tẩm đồ / workshop); maid:* / srv:* → the player maid's SRVA rows */
+  const RVK=new Set(RVGRP.flatMap(g=>g[1]).concat(["taint","cook"]));const okK=(g,k)=>{const m=/^(harm|maid|srv):(.+)$/.exec(k);
+   if(m)return m[1]==="harm"?(g==="consort"||g==="hh")&&RVK.has(m[2]):(m[1]===g&&(!!SRVA[m[2]]||(g==="maid"&&m[2]==="empTea")));/* empTea = the player maid's "Quỳ dâng trà" (j42 card, jagmaid amDo: one rule) */return (g==="consort"||g==="hh")&&P.has(k)};
+  const bad=[];for(const g in byG)for(const k in byG[g]){if(g==="emp"?!EMP.has(k):g==="th"?!TH.has(k):!okK(g,k))bad.push(g+":"+k)}return bad},r.byG);
  ok(r3.length===0,'no NPC-only hidden act: every chosen deed is a button of the player of that group',r3);
  /* 4 */
  const r4=await p.evaluate(()=>{const v=liveRivals(true).find(x=>!x.out);vNorm(v);const sum=()=>Object.values(v.artp||{}).reduce((a,b)=>a+b,0)+Object.values(v.vir||{}).reduce((a,b)=>a+b,0);
@@ -48,6 +52,12 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
  const r5b=await p.evaluate(()=>{const q=queenP();const v=liveRivals(true).find(x=>x!==q&&!x.out);v.hh=60;q.bac=500;const O=AGREG.hh.acts(q,agNeedsC(q),null).map(o=>o.k);
   const f=liveRivals(true).find(x=>!x.out&&x!==q)||v;f.th=80;f.thGiftWk=null;const N=agNeedsG("th");const T=AGREG.th.acts("th",N,null).map(o=>o.k+">"+(o.t===S?"me":o.t&&o.t.name));return{O,T,N}});
  ok(r5b.O.includes('hh:reward'),'Empress: Ban thưởng is her option when the gate holds',r5b.O);ok(r5b.T.some(x=>/^th:gift/.test(x)),'Thái hậu: Ban thưởng is her option for a consort she favours',r5b);
+ /* 5c F5 weight pass: the Empress has a duty need (order) her buttons serve; the Thái hậu's favour gate is reachable (BAL.ag.th.fondTh) */
+ const r5c=await p.evaluate(()=>{const q=queenP();const v=liveRivals(true).find(x=>x!==q&&!x.out);v.hh=BAL.ag.hh.rewardHh;q.bac=500;const N=agNeedsG(q);
+  const O=agOptsG(q,N,"order").map(o=>o.k);v.th=BAL.ag.th.fondTh;v.thGiftWk=null;const T=agNeedsG("th");return{order:N.order,O:[...new Set(O)],fond:T.fond,fondTh:BAL.ag.th.fondTh}});
+ ok(r5c.order>0&&r5c.O.some(k=>/^hh:/.test(k)),'F5: the Empress\'s duty need (order) is served by her own buttons',r5c);ok(r5c.fond>0&&r5c.fondTh<60,'F5: the Thái hậu favours a consort at BAL.ag.th.fondTh',r5c);
+ const hhN=Object.values(r.byG.hh||{}).reduce((a,b)=>a+b,0),thN=Object.values(r.byG.th||{}).reduce((a,b)=>a+b,0);console.log('Empress / Thái hậu planned deeds over '+r.days+' days: hh '+JSON.stringify(r.byG.hh)+' th '+JSON.stringify(r.byG.th));
+ if(r.days>=40)ok(hhN+thN>0,'F5: over '+r.days+' days the Empress / Thái hậu act',{hhN,thN});
  /* 6 */
  const r6=await p.evaluate(()=>{delete S.ag.day;const e=AGD.errs.length;try{placeWhere();agFlush()}catch(x){return{err:x.message}}const D=agDz();
   const L=AGD.ms.slice().sort((a,b)=>a-b);return{planned:D.d===wk()&&Object.keys(D.P).length>2,errs:AGD.errs.length-e,p95:L[Math.min(L.length-1,Math.floor(.95*L.length))],budget:BAL.ag.perf.p95}});

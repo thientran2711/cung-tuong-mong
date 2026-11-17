@@ -94,8 +94,8 @@ function cmGuard(t,p){try{if(t!==S||cmOff()||!S.maid||S.maid.src!=="home"||!S.or
   if(p!==S)cmInitNpc(p);
   const noBuy=p===S&&CM_NOBUY.includes(m.src);const kin=m.tal==="kin"&&cmTalOn(m)&&roll(B.kinSave);
   if(m.src==="old"){return""}/* loyal to death: no decay, cannot be bought */
-  if(noBuy||kin){m.loyal=cl(m.loyal-1,0,100);if(p===S&&m.src==="pick"&&roll(B.pickKeep))m.loyal=cl(m.loyal+1,0,100);if(kin)cmC("kinSave");return""}
-  if(p===S&&m.src==="pick"&&roll(B.pickKeep))m.loyal=cl(m.loyal+1,0,100)}}catch(e){}
+  if(noBuy||kin){m.loyal=cl(m.loyal-BAL.eff.jcmaid.loyalTop,0,100);if(p===S&&m.src==="pick"&&roll(B.pickKeep))m.loyal=cl(m.loyal+BAL.eff.jcmaid.loyalTop_2,0,100);if(kin)cmC("kinSave");return""}
+  if(p===S&&m.src==="pick"&&roll(B.pickKeep))m.loyal=cl(m.loyal+BAL.eff.jcmaid.loyalTop_3,0,100)}}catch(e){}
  const r=m0.apply(this,arguments);try{if(p===S&&m&&S.maid!==m){cmC("bought");if(S.maid&&!S.maid.src)cmInit(S.maid,"noi",true);if(m.src==="room"){apply({danh:-cmB().cnTurn});cmC("cnTurn");return r+`${m.name} biết chuyện cũ của ngươi thuở làm cung nữ, đem kể ra ngoài. Danh −${cmB().cnTurn}. `}}}catch(e){}return r}})();
 
 /* AG-ALL-2 (jcmaid choices, owner OD 17/11 ~14:50Z): with the loop on (agOn) the close maid's "nghe" eavesdropping and the secrets SHE lets out
@@ -107,7 +107,7 @@ function cmCh(m,w){if(!(window.agOn&&agOn()&&typeof ag2Ch==="function"))return n
 function cmSpyCh(m){const B=cmB(),K=BAL.ag.stf2.cm;const c=cmCh(m,B.talSpy*K.spy*(m.loyal||0)/B.talLoy);return c==null?roll(B.talSpy):c}
 function cmLeakCh(m,s){const B=cmB(),K=BAL.ag.stf2.cm;if(!s||s.k==="lover")return roll(B.secOut);const c=cmCh(m,B.secOut*K.leak*(100-(m.loyal||0))/Math.max(1,100-B.secTrust));return c==null?roll(B.secOut):c}
 /* ---------- the month ---------- */
-function cmFact(m,who){const x=evGuilty(S,liveRivals(true).filter(v=>v!==S));if(!x)return"";const d=evA(S,x,1);if(!d)return"";cmC("fact");return `${m.name} ${who}: chứng cứ về ${x.name} +${d}. `}
+function cmFact(m,who){const x=evGuilty(S,liveRivals(true).filter(v=>v!==S));if(!x)return"";const d=evA(S,x,BAL.eff.jcmaid.evD);if(!d)return"";cmC("fact");return `${m.name} ${who}: chứng cứ về ${x.name} +${d}. `}
 function cmMonthMe(){const B=cmB(),m=S.maid;if(!m)return"";
  if(!m.src){const k0=S.origin&&S.origin.k;
   if(S.cmaid&&S.cmaid.v){/* a new life that reaches the palace now (tiểu thư road jkc, cung nữ road at her rise): pick, or the origin's maid
@@ -122,7 +122,7 @@ function cmMonthMe(){const B=cmB(),m=S.maid;if(!m)return"";
    else if(cmLeakCh(m,s)){cmC("secOut_"+s.k);if(s.k==="lover"){apply({danh:-B.secDanh});m.loyal=cl(m.loyal-B.secLoy,0,100);m.secKn=1;s.done=1;ev+=`Cung Chính ti bắt được ${m.name} đối thực với một thái giám; người ta cười chê cung ngươi. Danh −${B.secDanh}. `}
     else if(s.k==="debt"){const g=Math.min(B.secBac,S.bac||0);apply({bac:-g});ev+=`Hộp trang sức vơi đi ${g} lượng; không ai biết ai lấy. `}
     else if(s.k==="family"){m.loyal=cl(m.loyal-Math.round(B.secLoy/2),0,100)}
-    else if(s.k==="spy"){const v=RV(s.by);if(v&&v.alive){const d=evA(v,S,1);if(d)cmC("spyLeak",d)}}}}
+    else if(s.k==="spy"){const v=RV(s.by);if(v&&v.alive){const d=evA(v,S,BAL.eff.jcmaid.evD_2);if(d)cmC("spyLeak",d)}}}}
   else if(cdOk&&s.k!=="lover"&&roll(B.secTell)){dil("cmSec");return ev}}
  /* origin */
  if(m.src==="home"&&k==="tt"&&cdOk&&roll(B.ttPress)){dil("cmTt");return ev}

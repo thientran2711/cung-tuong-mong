@@ -86,7 +86,7 @@ function ktRates(k,noDil){const D=noDil?{v:1,d:1,w:1}:ktD(k),t=k.tut||0;
 function ktYear(k,f,rate){return Math.max(0,Math.round(12*rate*Math.max(0,1-k[f]/KT.cap)))}
 function ktFee(k){if(!k.alive||k.age<6)return 0;return (k.tut===3&&k.fav?KT.feeFav:KT.fee[k.tut||0])+(k.vt?KT.feeVo:0)}
 function ktGrow(k,p){if(!k.alive)return;ktSync(k);const live=ktLive(p);tcGrowCore(k,p,{h:ktHp(k),nf:live?1:.7,live});
- if(k.dil==="Ham chơi"&&k.age>=3&&S.turn%3===0)k.fond=cl(k.fond+1,0,100);ktTal(k)}
+ if(k.dil==="Ham chơi"&&k.age>=3&&S.turn%3===0)k.fond=cl(k.fond+BAL.eff.j53.fondKtGrow,0,100);ktTal(k)}
 /* mẹ tự dạy: dạy chữ theo Tài của mẹ, dạy lễ nghi theo Đức của mẹ; mỗi thứ một lần mỗi tháng */
 function ktSea(){return Math.floor((S.turn||0)/3)}/* mỗi mùa (3 tháng) mẹ dạy mỗi thứ một lần */
 function ktTeachG(k,p,f){const st=f==="tv"?(p.tai||0):(p.duc||0);return Math.round((.8+cl(st,0,100)/60)*Math.max(0,1-k[f]/KT.cap)*ktD(k).m*tcMul(k)*10)/10}

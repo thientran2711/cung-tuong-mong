@@ -21,7 +21,7 @@
       and letting it be (BAL.ag.harm.steal.no) — the 1 − e^(−k·want) try roll is gone while the loop is on.
    4. AG-HAP. agHap() replaces adHapRoll: the '!' of a place this buổi = a WITNESSABLE deed some agent planned there for a khắc still to come (a quarrel =
       provoke / humil whose target is a consort, gossip, a favour aimed at her (q72, the doer is the requester), a public scheme or show in a public place,
-      the Emperor's garden walk from HIS record) + the fixed / world entries (AD_HAP_FIX: festival, the cold palace at night, the world-events window).
+      the Emperor's garden walk from HIS record) + the fixed entries (AD_HAP_FIX: festival, the cold palace at night). No world-event '!' (owner OD 17/11 14:30Z): world events act through worldPlanW, not the map mark.
       No floor, no cap, no dice: a quiet buổi has none; a happening is still there next buổi only if the doer's plan keeps her there.
    Numbers: BAL.ag.harm (jbal2). No new UI: the '!' mark and the witness card are the existing kit (jact kitHapMark, jagent agScene / agReact).
    ============================================================================================================================================ */
@@ -50,7 +50,7 @@ function haPlace(k,v,t,kh,prep){let w=prep?(HA_PREP[k]||"own"):(HA_AT[k]||HA_AT.
 function haPlantIx(v){return (v.inv||[]).findIndex(e=>e&&!e.h&&(e.t||(IT[e.k]&&itm(e.k).il)))}
 /* her guess of the act's chance: its own odds (ACT.o, null = no roll) × not being caught (the target's watch oSee) */
 function haOdds(v,t,k){const A=ACT[k];let o=null;try{o=A.o?A.o(v,t):null}catch(e){o=null}if(o==null)o=100;let pc=0;
- if(HA_CAUGHT[k]!=null){try{pc=cl(oSee(t,!!HA_CAUGHT[k])-4*(facN(v)-1),5,95)/100}catch(e){pc=0}}return{o:o*(1-pc),pc}}
+ if(HA_CAUGHT[k]!=null){try{pc=caughtOdds(v,t,!!HA_CAUGHT[k])/100}catch(e){pc=0}}return{o:o*(1-pc),pc}}
 function haCost(k){const c=ACT[k]&&ACT[k].c;return c&&typeof c==="object"?c:{}}
 function haFail(v,k){const f=(v.fails||{})[k]||0;if(!f)return 1;return witOf(v)<35?1+haB().fail.fool*f:Math.pow(haB().fail.wise,f)}
 /* ---------- the options (agent provider "consort"/"harm") ---------- */
@@ -72,7 +72,7 @@ function haOpts0(v,N,need){const O=[];if(!haOn()||v===S||v.coop||v.confined)retu
  const road=BAL.ag.road[agOrg(v)]||BAL.ag.road._;
  /* her scheme on one person (she waits for a big scheme already in hand: v.plan) */
  const C=v.plan?[]:haTargets(v).filter(x=>bandOf(danger(v,x))>=1);const t=C.length?mindPickBy(C,x=>haScoreT(v,x,need),v):null;const g=t?motiveOK(v,t,"frame"):{ok:false};
- const N2=Object.assign({},N);if(t)N2.spite=cl(agSpite(v,t)/100,0,1)*road.spite;
+ const N2=Object.assign({},N);if(t)N2.spite=agSpN(agSpite(v,t),haB().spiteD)*road.spite;
  if(t&&g.ok){const allow=new Set(BANDS.slice(1,bandOf(danger(v,t))+1).flatMap(x=>x[2]));
   for(const vk in HA_VAR)if(allow.has(HA_VAR[vk]))allow.add(vk);
   for(const k of allow){if(HA_NO.has(k))continue;const A=ACT[k];if(!A)continue;const gn=haGain(k);if(need&&gn.g[need]==null)continue;
@@ -133,7 +133,7 @@ function haHapDeeds(){const z=agZ();const key=agKey();const kh0=agKh();const W=n
   const fav=t===S&&["help","visit","follow","warn"].includes(p.k);/* a kindness aimed at her: the doer comes with a request (q72) */
   if(!fav&&!W.has(p.k))continue;
   if(haB().hap.pub[p.k]&&!haB().hap.pub[p.k].includes(p.pl))continue;/* a show is seen only in its public place */
-  let id="deed";if(fav)id="favour";else if((p.k==="provoke"||p.k==="humil")&&t&&t!==S&&p.pl==="vuon")id="quarrel";else if(p.k==="gossip")id="gossip";
+  let id="deed";if(fav)id="favour";else if((p.k==="provoke"||p.k==="humil")&&t&&t!==S)id="quarrel";/* F5: two consorts quarrelling wherever the doer finds her (the garden card when in the garden, else the witness card) */else if(p.k==="gossip")id="gossip";
   out.push({p,id})}
  return out}
 function agHap(){const L=[],W=S.where||{};const used=new Set();const add=(k,id,x,share)=>{if(!k||(!share&&used.has(k+":"+id))||!adOpenOk(k))return false;used.add(k+":"+id);L.push({k,id,x:x||null,done:0});return true};
@@ -146,7 +146,7 @@ function agHap(){const L=[],W=S.where||{};const used=new Set();const add=(k,id,x
  return L}
 function haPend(x){if(!x)return null;const z=agZ();return z.pend.find(p=>p.vid===x.vid&&(p.vid+":"+p.k+":"+p.kh)===x.pid&&!p.gone&&!p.drop)||null}
 function haHapFire(h,k){const x=h.x;const p=haPend(x);if(!p)return false;const v=RV(p.vid);if(!v||!v.alive)return false;p.seen=1;HA.stat.hap.n++;HA.stat.hap.by[h.id]=(HA.stat.hap.by[h.id]||0)+1;
- if(h.id==="quarrel"){const b=agPerson(p.t);let d=null;try{d=b?mkP("rvquarrel",{a:v.id,b:b.id}):null}catch(e){d=null}
+ if(h.id==="quarrel"){const b=agPerson(p.t);let d=null;try{d=b&&p.pl==="vuon"?mkP("rvquarrel",{a:v.id,b:b.id}):null}catch(e){d=null}
   if(d){agLand(p,true);pushDil(d,AD_HAP_T.quarrel);return true}agScene(p,v);return true}/* the quarrel card is resting (seen lately): the witness card of the same deed */
  if(h.id==="gossip"){const r=agLand(p,true);let f="";try{f=typeof intelLearn==="function"?intelLearn(v,1,{by:"ngươi",how:"Nghe lỏm"}):""}catch(e){}if(!f){try{f=overhear(k)}catch(e){}}
   pushModal({t:AD_HAP_T.gossip,who:pv(v),h:`<p>Đi ngang hành lang, ngươi nghe ${v.name} to nhỏ với người bên cạnh.</p><p>${f||r||"Chỉ là chuyện vặt, không có gì đáng nhớ."}</p>`});return true}

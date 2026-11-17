@@ -54,7 +54,7 @@ function eitPilfer(p,G){if(p===S)EIT_PIL=null;try{if(!p||p.dead||p.out||!G||!G.l
  const i=p.inv.indexOf(best.e);if(i>=0)p.inv.splice(i,1);best.g.E.splice(best.g.E.indexOf(best.e),1);best.g.n=Math.max(0,best.g.n-1);if(!best.g.n)best.g.lost=true;best.g.pil=1;
  hit.pilN=(hit.pilN||0)+1;const X={p,s:hit,k:best.e.k,g:best.g};if(window.agOn&&agOn()&&hit!==p.maid){const v=best.v;X.sold=()=>eitPilSell(hit,v)}/* AG-ALL-2 G6: she sells it, as the maid player does (when unnoticed, or let off with it) */
  if(p!==S){eitPilNpc(X);return X}
- const P=BAL.eit.pil;const see=cl(P.see+(S.mat||0)*P.seeMat+(S.maid&&S.maid!==hit&&(S.maid.loyal||0)>=70?P.seeMaid:0),5,95);
+ const P=BAL.eit.pil;const see=cl(P.see+(S.mat||0)*P.seeMat+(S.maid&&S.maid!==hit&&(S.maid.loyal||0)>=BAL.loy.trust?P.seeMaid:0),5,95);
  if(roll(see))EIT_PIL=X;else if(X.sold)X.sold();return X}catch(e){console.error("eitPilfer",e);return null}}
 function eitPilBack(X){const p=X.p||S;const e={k:X.k,from:"noivu",d:S.turn};p.inv=p.inv||[];p.inv.push(e);if(X.g){X.g.E.push(e);X.g.n++;X.g.lost=false}}
 function eitIsMaid(s){return s===S.maid}

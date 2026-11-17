@@ -43,13 +43,13 @@ function pgNm(p,cap){return p===S?(cap?"Ngươi":"ngươi"):p.name}
 /* the target's guard: [label, points] lowering the odds (hidden facts stay without numbers) */
 function pgGuard(t){const L=[];const v=Math.round(oSee(t,true)/3);L.push([`${pgNm(t,1)} cảnh giác`,-v]);if(t.doctor)L.push([`Thái y tâm phúc của ${pgNm(t)}`,-BAL.pg.doctor]);
  if((t.inv||[]).some(e=>e&&e.k==="kimbac"&&!e.h))L.push([`${pgNm(t,1)} có kim bạc thử độc`,-BAL.pg.needle]);
- if(t.maid&&(t.maid.loyal||0)>=70)L.push([`Cung nữ trung thành của ${pgNm(t)} nếm trước`,-BAL.pg.maid]);return L}
+ if(t.maid&&(t.maid.loyal||0)>=BAL.loy.trust)L.push([`Cung nữ trung thành của ${pgNm(t)} nếm trước`,-BAL.pg.maid]);return L}
 /* the one formula (her card, the roll, every NPC): {o, F: kit "Vì sao" factors, cp: chance that a failed try is traced back (caught())} */
 function pgOdds(a,t,e){const G=pgGuard(t);const tr=Math.round((rel(t,a)||0)/4),tc=Math.round((a.tamco||0)/4),gr=pgGrade(e)*BAL.pg.grade;
  const raw=BAL.pg.base+tc+tr+gr+G.reduce((s,x)=>s+x[1],0);const o=cl(Math.round(odA(a,raw)),3,92);
  const F=[[`Tâm cơ ${pgNm(a)} ${a.tamco|0}`,tc],[`${pgNm(t,1)} ${tr>=0?"tin":"ngờ"} ${pgNm(a)}`,tr],
   [e&&e.wk?`Món ${WTIER[e.wk.ti|0]} che vị`:`${e&&IT[e.k]?itm(e.k).n:"Món"} che vị`,gr]].concat(G);if((a.suc||0)<30)F.push([`Sức ${pgNm(a)} dưới 30`,-15]);
- const cp=cl(oSee(t,true)-4*(facN(a)-1),5,95);return{o,F,cp}}
+ const cp=caughtOdds(a,t,true);return{o,F,cp}}
 function pgEffect(a,t,pk){const nm=t===S?"Ngươi":`${rkName(t)} ${t.name}`;
  if(pk==="hacdinh"){if(t===S){die("Trúng độc, không qua khỏi");return `<span class="r">Ngươi trúng độc.</span> `}ap(t,{suc:-120});try{dieIf(t,"Trúng độc, không qua khỏi")}catch(e){}return `<span class="r">${nm} trúng độc nặng.</span> `}
  if(pk==="docngam"){ap(t,{suc:-25});t.sick=Math.max(t.sick||0,3);return `${nm} ăn xong thì người mệt dần, thái y bảo trúng hàn khí (Sức -25, ốm ba tháng). `}
@@ -64,10 +64,10 @@ function pgGive(a,t,ix,pk){const e=a.inv[ix];if(!e||!pgFood(e)||!PGX[pk])return"
  if(roll(O.o)){const r=pgEffect(a,t,pk);if(a!==S)try{newsAdd(t,"poison",`${rkName(t)} ${t.name} lâm bệnh lạ sau khi dùng quà.`)}catch(x){}return `${by} sai người mang ${dn} sang tặng ${rkName(t)} ${t.name}. ${r}`}
  const c=caught(a,t,true,`bỏ ${PGX[pk].n.toLowerCase()} vào ${dn} tặng ${NM(t)}`);
  if(c){const q=queenP();const hq=q&&q!==a&&q!==t;if(hq)evA(q,a,BAL.pg.hhEv);return `${by} tặng ${NM(t)} ${dn} có độc. ${c}${hq?`Hoàng hậu nắm thêm ${BAL.pg.hhEv} chứng cứ. `:""}`}
- relAdd(t,a,-6);return `${NMc(t)} thấy ${dn} có vị lạ, sai đổ đi; từ đó dè chừng ${a===S?"ngươi":NM(a)} (quý ${a===S?"ngươi":NM(a)} -6). `}
+ relAdd(t,a,BAL.eff.jpoison.pgGive);return `${NMc(t)} thấy ${dn} có vị lạ, sai đổ đi; từ đó dè chừng ${a===S?"ngươi":NM(a)} (quý ${a===S?"ngươi":NM(a)} ${balSg(BAL.eff.jpoison.pgGive)}). `}
 /* her card: target × poison — kit options with the real odds word, full numbers, Vì sao (option.why) */
-function pgLine(t,pk,X){const P=PGX[pk];const q=queenP();const hh=q&&q!==t&&q!==S?` · Hoàng hậu nắm thêm ${BAL.pg.hhEv} chứng cứ của ngươi`:"";
- return `${word(X.o)} · tốn: 2 khắc, ${P.n} -1, Đức -${P.duc} · thành: ${P.won} · hỏng: ${t.name} với ngươi -6 vì nhận ra vị lạ · kèm: hỏng mà bị lần ra (khả năng ${chanceLo(X.cp)}): nàng nắm 2 chứng cứ của ngươi${hh}`}
+function pgLine(t,pk,X){/* previews: pgGive */const P=PGX[pk];const q=queenP();const hh=q&&q!==t&&q!==S?` · Hoàng hậu nắm thêm ${BAL.pg.hhEv} chứng cứ của ngươi`:"";
+ return `${word(X.o)} · tốn: 2 khắc, ${P.n} -1, Đức -${P.duc} · thành: ${P.won} · hỏng: ${t.name} với ngươi ${balSg(BAL.eff.jpoison.pgGive)} vì nhận ra vị lạ · kèm: hỏng mà bị lần ra (khả năng ${chanceLo(X.cp)}): nàng nắm ${balAb(BAL.eff.j8.evCaught)} chứng cứ của ngươi${hh}`}
 PEND.pgpick=p=>{const e=S.inv[p.ix];if(!e||!pgFood(e))return null;const dn=e.wk?e.wk.n:itm(e.k).n;const O=[];
  for(const t of liveRivals(true)){if(t.out)continue;for(const pk of pgHeld(S)){const P=PGX[pk];if(P.preg&&!(t.preg&&!t.hidden))continue;const X=pgOdds(S,t,e);
   O.push({n:`${P.n} vào ${dn} tặng ${rkName(t)} ${t.name}`,fx:{},x:pgLine(t,pk,X),o:X.o,base:BAL.pg.base,why:()=>pgOdds(S,t,e).F,
@@ -79,13 +79,13 @@ try{KIT_ACT_PIDS.add("pgpick")}catch(e){}
 PEND.pgin=p=>{const f=byKey(p.f);if(!f)return null;const P=p.pk?PGX[p.pk]:null;const nd=(S.inv||[]).findIndex(e=>e&&e.k==="kimbac"&&!e.h);const m=S.maid;
  const keep=()=>{if(p.e)S.inv.push(Object.assign({},p.e,{wk:p.e.wk?Object.assign({},p.e.wk,{from:p.f}):undefined}))};
  const hit=()=>{const r=pgEffect(f,S,p.pk);log(r);Q.push({t:"Trúng độc",who:pv(f),h:`<p class="r">${r}</p><p class="past">Món ${p.dn} của ${f.name}.</p>`})};
- const found=how=>{/*evok: poisoned gift act*/evA(S,f,2);relAdd(S,f,-15);Q.push({t:"Phát hiện có độc",who:pv(f),h:`<p>${how}: ${p.dn} của ${f.name} có độc. Ngươi nắm 2 chứng cứ của nàng · ${f.name} quý ngươi -15.</p>`});log(`${how}: ${p.dn} của ${f.name} có độc (chứng cứ +2).`)};
+ const found=how=>{/*evok: poisoned gift act*/evA(S,f,BAL.eff.jpoison.evFound);relAdd(S,f,BAL.eff.jpoison.found);Q.push({t:"Phát hiện có độc",who:pv(f),h:`<p>${how}: ${p.dn} của ${f.name} có độc. Ngươi nắm ${balAb(BAL.eff.jpoison.evFound)} chứng cứ của nàng · ${f.name} quý ngươi ${balSg(BAL.eff.jpoison.found)}.</p>`});log(`${how}: ${p.dn} của ${f.name} có độc (chứng cứ ${balSg(BAL.eff.jpoison.evFound)}).`)};
  const clean=how=>{log(`${how}: ${p.dn} không có gì lạ.`);keep()};
- const O=[{n:"Nhận ngay",fx:{},x:`Khó lường · thành: cất vào rương · kèm: món có độc thì ngươi dùng phải, độc nặng thì mất mạng`,hint:"cất món vào rương; món có độc thì ta dùng phải, độc nặng thì mất mạng",risk:"liều",go:()=>{if(!P)return keep();if(roll(p.o))hit();else{log(`Ngươi thấy ${p.dn} có vị lạ, bỏ đi.`);relAdd(S,f,-4)}}}];
- {const kb={n:"Thử bằng kim bạc",fx:{},x:`tốn: Kim bạc thử độc -1 · thành: biết món có độc hay không · có độc thì ngươi nắm 2 chứng cứ của nàng`,hint:"dùng hết một kim bạc; biết chắc món có độc hay không, có độc thì nắm chứng cứ",risk:"an toàn",go:()=>{S.inv.splice(nd,1);if(P)found("Kim bạc đen lại");else clean("Kim bạc không đổi màu")}};if(nd<0)kitOff(kb,kitWhyItem("kim bạc"),kitWhenItem());O.push(kb)}
- if(m){const om=cl(m.loyal||0,5,95);O.push({n:`Nhờ ${m.name} nếm trước`,fx:{},x:`${word(om)} · thành: biết món có độc hay không · có độc thì ngươi nắm 2 chứng cứ của nàng · hỏng: món có độc thì ${m.name} trúng độc · Lòng ${m.name} -10`,hint:lv=>`biết món có độc hay không; ${lv>=1?`${m.name} càng trung thành càng tinh ý; `:""}món có độc thì ${m.name} có thể trúng độc`,risk:"có rủi ro",
-  go:()=>{if(!P)return clean(`${m.name} nếm thử`);if(roll(om))found(`${m.name} nếm thấy lạ`);else{m.loyal=cl((m.loyal||0)-10,0,100);log(`${m.name} nếm phải độc, ngã bệnh.`);Q.push({t:"Cung nữ trúng độc",h:`<p class="r">${m.name} nếm ${p.dn} rồi ngã bệnh. Lòng -10.</p>`})}}})}
- O.push({n:"Trả lại quà",fx:{},x:`thành: không động đến món ăn · kèm: ${f.name} với ngươi -4`,hint:lv=>`không động đến món ăn; nhưng ${lv>=1?f.name:"người tặng"} phật ý`,risk:"an toàn",go:()=>relAdd(S,f,-4)});
+ const O=[{n:"Nhận ngay",fx:{},x:`Khó lường · thành: cất vào rương · kèm: món có độc thì ngươi dùng phải, độc nặng thì mất mạng`,hint:"cất món vào rương; món có độc thì ta dùng phải, độc nặng thì mất mạng",risk:"liều",go:()=>{if(!P)return keep();if(roll(p.o))hit();else{log(`Ngươi thấy ${p.dn} có vị lạ, bỏ đi.`);relAdd(S,f,BAL.eff.jpoison.go)}}}];
+ {const kb={n:"Thử bằng kim bạc",fx:{},x:`tốn: Kim bạc thử độc -1 · thành: biết món có độc hay không · có độc thì ngươi nắm ${balAb(BAL.eff.jpoison.evFound)} chứng cứ của nàng`,hint:"dùng hết một kim bạc; biết chắc món có độc hay không, có độc thì nắm chứng cứ",risk:"an toàn",go:()=>{S.inv.splice(nd,1);if(P)found("Kim bạc đen lại");else clean("Kim bạc không đổi màu")}};if(nd<0)kitOff(kb,kitWhyItem("kim bạc"),kitWhenItem());O.push(kb)}
+ if(m){const om=cl(m.loyal||0,5,95);O.push({n:`Nhờ ${m.name} nếm trước`,fx:{},x:`${word(om)} · thành: biết món có độc hay không · có độc thì ngươi nắm ${balAb(BAL.eff.jpoison.evFound)} chứng cứ của nàng · hỏng: món có độc thì ${m.name} trúng độc · Lòng ${m.name} -${balAb(BAL.eff.jpoison.loyalGo)}`,hint:lv=>`biết món có độc hay không; ${lv>=1?`${m.name} càng trung thành càng tinh ý; `:""}món có độc thì ${m.name} có thể trúng độc`,risk:"có rủi ro",
+  go:()=>{if(!P)return clean(`${m.name} nếm thử`);if(roll(om))found(`${m.name} nếm thấy lạ`);else{m.loyal=cl((m.loyal||0)-BAL.eff.jpoison.loyalGo,0,100);log(`${m.name} nếm phải độc, ngã bệnh.`);Q.push({t:"Cung nữ trúng độc",h:`<p class="r">${m.name} nếm ${p.dn} rồi ngã bệnh. Lòng -${balAb(BAL.eff.jpoison.loyalGo)}.</p>`})}}})}
+ O.push({n:"Trả lại quà",fx:{},x:`thành: không động đến món ăn · kèm: ${f.name} với ngươi ${balSg(BAL.eff.jpoison.go_2)}`,hint:lv=>`không động đến món ăn; nhưng ${lv>=1?f.name:"người tặng"} phật ý`,risk:"an toàn",go:()=>relAdd(S,f,BAL.eff.jpoison.go_2)});
  return{who:pv(f),t:`<p>${f.name} sai người mang <b>${p.dn}</b> sang tặng ngươi.</p><p class="past">Đồ ăn của người khác: có thể thử trước bằng kim bạc hay nhờ cung nữ nếm.</p>`,o:O}};
 /* every food gift that reaches her uses the same card, poisoned or not (no tell) */
 (function(){const g0=PEND.giftin;PEND.giftin=function(p){try{if(p&&p.e&&pgFood(p.e)&&!p.e.t)return PEND.pgin({f:p.f,dn:iname(p.e),pk:null,o:0,e:p.e})}catch(x){console.error("pg in",x)}return g0.apply(this,arguments)}})();

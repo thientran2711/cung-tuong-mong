@@ -57,7 +57,7 @@ function kg82Plain(h){return String(h||"").replace(/<[^>]+>/g,"")}
 function kg82Art(k){try{const a=ARTS.find(x=>x.k===k);if(a)return a.n}catch(e){}return {theu:"Thêu",nau:"Nấu nướng"}[k]||k}
 function kg82Lv(p,k){try{if(typeof artLv==="function"){const v=artLv(p,k);if(typeof v==="number")return v}}catch(e){}return (p.arts&&p.arts[k])||0}
 function kg82Aw(p,k){if(/^(theu|nau)$/.test(k))return kg82Lv(p,k);try{if(typeof artW2==="function")return artW2(p,k)}catch(e){}return kg82Lv(p,k)}
-function kg82Help(p){const m=p.maid?(p.maid.loyal||0)/10:0;const s=(p.staff||[]).filter(x=>(x.loyal||0)>=60).length*2;return Math.min(12,m+s)}
+function kg82Help(p){const m=p.maid?(p.maid.loyal||0)/10:0;const s=(p.staff||[]).filter(x=>(x.loyal||0)>=BAL.loy.close).length*2;return Math.min(12,m+s)}
 /* difficulty / fair NPC roll (j91): lv = the person's best art level in the kind's formula (0–5); a higher level makes the game easier
    (wider timing windows, longer looks); NPCs (person rivals) roll the mini-game by the SAME level: raw ≈ 4 + 0.4·lv ± 4 */
 function kg82LvFor(p,kind){let m=0;try{kg82FormulaOf(kind).forEach(([s])=>{if(s!=="help"&&!KG82_STAT[s])m=Math.max(m,kg82Lv(p,s)||0)})}catch(e){}return cl(Math.round(m),0,5)}
