@@ -874,3 +874,4 @@
 | tinbao-ui-r6r PASS 220359da (supersedes 47a462ca; lands after ag-all-2 by C-AG #3) | review/tinbao-ui-r6r | MAIN s34 | - | PASS → C-AG land | 17/11 17:08Z |
 | face-w404 review r1 (sonnet) of df8b57bc | review/face-w404-r1 | D | session_01964izEvirrwGUKDneEGtXa | RUNNING | 17/11 17:08Z |
 | REVIEW weather-khac r1 (opus BIG) of e1d540cf | review/weather-khac-r1 | C-AG | session_01UV1Szhk5EGru6rSkDekM6s | RUNNING | 17/11 17:10Z |
+| REVIEW learn-scene-fix-2 r1 of 8c30a85d (opus BIG; brief briefs/s34-review-learn-scene-fix-2.md) | review/learn-scene-fix-2-r1 | MAIN s34 | (opening) | RUNNING | 17/11 17:12Z |
