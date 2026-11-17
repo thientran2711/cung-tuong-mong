@@ -973,3 +973,4 @@ looks-2 overlay art (fx-stain-tra/uot, smudge, ink, pox, scars, messy hair) | im
 | ART look-decals: LOOK_DECALS section A (stains, ink, pox, hair strands, vương) Magnific gpt-2-6, opaque on transparent bg (owner exception ~00:05Z) (sonnet) | handover reports/look-decals.md | MAIN s38 | session_01UV1SzkPHQVHUikWN6sxffa | RUNNING | 17/11 22:59Z |
 | coop-thin part E — buổi + night on host (opus BIG, L; brief briefs/coop-thin-e.md; step 0 first) | review/coop-thin-e | B | session_01N1tNP5f2oakg2Jy1DdVpxy | RUNNING | 17/11 23:20Z |
 | cloth-xoc r3 (crease look redo + stain-decal layer; opus: hard rendering root cause after 2 FAILs) | review/cloth-xoc | MAIN s39 | session_01UV1SzkYmApqhLJ8fozxZi3 | ROLLED OVER @57afd8a (crease look improved, lv1/2 weak; stain not started; handover in reports/cloth-xoc.md r3) | 17/11 23:12Z |
+| cloth-xoc r4 (crease lv1/lv2 + stain-decal layer; sonnet) | review/cloth-xoc | MAIN s39 | PENDING-R4 | RUNNING | 17/11 23:23Z |
