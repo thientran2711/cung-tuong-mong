@@ -606,6 +606,20 @@ Object.assign(BAL,{ag:{on:1,
     decline the player maid begs off his summons: his regard lost */
  maid:{st:{sac:[20,60],tai:[0,30]},tea:{b:25,sac:2.5,tai:10,nt:5,g:8,gs:20,fail:1},jeal:{b:30,d:3},decay:2,ch:{sung:2,sac:8,cap:70},
   night:{b:2},rise:{b:15,d:5},send:.05,decline:10}}});
+/* BAL.ag.staff — AG-ALL part B (jagstaff.js): maids and eunuchs as agents on the player maid's act table (j42 SRVA)
+   st       a staff's Đức / Tâm cơ / Danh / Sức / Bạc drawn once (lazy; Sắc / Tài: BAL.ag.maid.st) [lo, hi]
+   goal     what she aims at: Chủ tin, Sức, Bạc, Sắc, Tài, Đức, friends (thiện cảm ≥ SRVA.ask.af)
+   nw       weight of each need (tin = master's trust, mp = công lao toward the next bậc, self = Sắc/Tài/Đức, sung = his regard, love, spite)
+   greed    × on her Bạc need while she spies for someone; mpS = value of 1 công lao in need units; sc = scale of af / tình ý / spite gains
+   riskD    a love act's chance to be seen counts / riskD in her valuation; caughtTin/caughtSuc = what she fears from a caught tryst (valuation)
+   vowTinh  value of a vow; dt = thiện cảm both ways for đối thực; expel / exile = a caught tryst: % expelled (else Tân Giả khố) / % the man exiled
+            (was maidLoveMonth's 30 / 35); vowW / outW = weight of a vow / of going home in the grant and age choices
+   uMul     × on every option of hers against keeping her routine (BAL.ag.routine): bot 40 tuần, 1 → ~10 % of buổi acted, 3 → most buổi
+   monthSuc Sức back each month (a night's sleep is in the buổi rest act); secSee = % per month she sees her master scheming at home (Biết chuyện)
+   hit      × on a consort's spite when she weighs hitting another palace's maid (jmline mlHit as a choice) */
+BAL.ag.staff={st:{duc:[10,40],tamco:[10,40],danh:[0,10],suc:[60,90],bac:[0,20]},goal:{tin:70,suc:60,bac:40,sac:60,tai:40,duc:40,friend:2},
+ nw:{tin:1.2,mp:1,suc:1.2,bac:.6,self:.4,ally:.5,sung:1,love:.3,spite:.4},greed:2,mpS:4,sc:{af:.3,tinh:.3,spite:.3,sung:.25},
+ riskD:3,caughtTin:20,caughtSuc:20,vowTinh:20,dt:40,expel:30,exile:35,vowW:.5,outW:.3,monthSuc:10,secSee:30,hit:1,uMul:3};
 
 /* BAL.mind — jmind (one mind for every person, review/npc-mind; moved here from jmind.js, r1 fault 3 ONE CORE)
    like      regard gained on top when a gift is one the receiver likes (jdis BAL.dis.aff is the one dislike penalty)
