@@ -78,7 +78,7 @@ function j59sel(st,tk,me){let pi=null;try{pi=typeof popIdx==="number"?popIdx:nul
      corners (the name row), so they never cover a figure or a name.
    - the head count is ONE number (kitHereCount): the stage title, the page chips and the Dư đồ label of the place she stands in. */
 function j59person(p){return !!p&&p.kind!=="chest"&&p.kind!=="task"&&!(p.kind==="srv"&&p.sk==="task")}
-function j59chips(st,R,P){/* KIT 33.9 swipe stage: P: {pg, pages, before, after, xl, xr}. NO arrow buttons — two "+N" chips in the top corners of the backdrop: LEFT = people already passed (left of the view), RIGHT = people still to come; hidden at 0. Pure kit chip, not tappable (the row is swiped) */
+function j59chips(st,R,P,again){/* morechip-fix: placed once now and once more on the next frame, after the side column (k3Stage) has its full height */if(!again)requestAnimationFrame(()=>{try{if(st.isConnected)j59chips(st,R,P,1)}catch(e){}});/* KIT 33.9 swipe stage: P: {pg, pages, before, after, xl, xr}. NO arrow buttons — two "+N" chips in the top corners of the backdrop: LEFT = people already passed (left of the view), RIGHT = people still to come; hidden at 0. Pure kit chip, not tappable (the row is swiped) */
  for(const side of ["l","r"]){let c=st.querySelector(".j59more.j59m"+side);const n=P&&P.pages>1?(side==="r"?P.after:P.before):0;
   if(!(n>0)){if(c)c.remove();continue}
   if(!c){c=document.createElement("div");c.className="kchip n j59more j59m"+side;st.appendChild(c)}
@@ -91,7 +91,13 @@ function j59chips(st,R,P){/* KIT 33.9 swipe stage: P: {pg, pages, before, after,
    const b=side==="l"?Math.max(bot("#sc-t"),bot(".krailb,#kshL")):Math.max(bot("#sc-t"),bot("#kshR,#tomap"));const ht=c.offsetHeight||26;const kR=document.getElementById("kshR");const underCol=side==="r"&&kR&&!kR.hidden&&kR.offsetHeight>0;if(b+6+ht<=(underCol&&P.floor?P.floor:R0.height*.45))top=b+6}catch(e){}
   c.style.top=top!=null?top.toFixed(0)+"px":"";
   /* under the reserved side column the right chip moves into that column's own (people-free) zone */
-  if(side==="r"&&top!=null){const kR=document.getElementById("kshR");if(kR&&!kR.hidden&&kR.offsetHeight)c.style.right="8px"}}}
+  if(side==="r"&&top!=null){const kR=document.getElementById("kshR");if(kR&&!kR.hidden&&kR.offsetHeight)c.style.right="8px"}
+  /* morechip-fix (17/11, since app-edge the Fold page is shorter): the chip is NEVER on a side column / rail. When there is no room under the
+     column and the 44 % fallback lands on it, the chip stands BESIDE that column at the column's top (above the heads), on every stage/place/size */
+  try{const R0=st.getBoundingClientRect(),cr=c.getBoundingClientRect();
+   for(const e of st.querySelectorAll(side==="r"?"#kshR":"#kshL,.krailb")){if(!e.offsetParent||e.hidden||!e.offsetHeight)continue;const q=e.getBoundingClientRect();
+    if(cr.left<q.right&&cr.right>q.left&&cr.top<q.bottom&&cr.bottom>q.top){c.style.top=(q.top-R0.top).toFixed(0)+"px";
+     if(side==="r"){c.style.left="";c.style.right=(R0.right-q.left+6).toFixed(0)+"px"}else{c.style.right="";c.style.left=(q.right-R0.left+6).toFixed(0)+"px"}break}}}catch(e){}}}
 /* KIT 33.9 SWIPE: drag the row of people left/right (touch or mouse); it follows the finger (translate var --j59dx on the figures, pets, name chips), and on release slides out and the next view slides in
    (transform only, 220 ms; reduced-motion = instant). A drag over 12 px never opens a person's pop-up (click swallowed). */
 const J59SW={ms:220,min:56,tap:12};
