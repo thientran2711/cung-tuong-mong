@@ -11,7 +11,10 @@ function hhHas(p){const L=(p&&p.staff)||[];return[L.filter(s=>s.role==="maid").l
 function mkServ(role){const n=role==="maid"?(AV.maids||[]).length:0;const used=allServ().map(x=>x.name);const pool=(role==="maid"?MAIDS:EUN).filter(x=>!used.includes(x));
  const sa=servAge(role);return{fc:drawF(role==="maid"?"maid":"eunuch",sa.age),fk:bandKeys(role==="maid"?"maid":"eunuch",sa.age)[0],sid:++sidN,name:pool.length?pick(pool):pick(role==="maid"?MAIDS:EUN)+" "+(R(8)+2),role,face:allServ().filter(x=>x.role===role).length,hue:0,...sa,loyal:BAL.srvLoyal.base+R(BAL.srvLoyal.r),spyFor:null,lover:null,af:{}}}
 function allServ(){const L=[];for(const p of [S].concat(rivals))if(p&&p.staff)L.push(...p.staff);return L}
-function ownerOf(s){for(const p of [S].concat(rivals))if(p&&p.staff&&p.staff.includes(s))return p;return null}
+/* perf (review ag-all-2 r2 B5): the last owner found is checked first (one includes on one list); a moved servant falls through to the full scan */
+const OWN_C=new WeakMap();
+function ownerOf(s){const o=s&&typeof s==="object";if(o){const c=OWN_C.get(s);if(c&&c.staff&&c.staff.includes(s)&&(c===S||rivals.includes(c)))return c}
+ for(const p of [S].concat(rivals))if(p&&p.staff&&p.staff.includes(s)){if(o)OWN_C.set(s,p);return p}return null}
 function servById(id){return allServ().find(s=>s.sid===id)||null}
 function staffInit(){sidN=Math.max(sidN,...allServ().map(s=>s.sid),0);capSweep();for(const p of consorts()){if(!p.staff)p.staff=[];fillStaff(p,true)}
  if(!S.court)S.court={tq:{name:"Tổng quản Lý Liên Anh",n:"Tổng quản thái giám Càn Thanh cung",af:{},age:56+R(6)},ksp:{name:"Thái giám Kính sự phòng Kính Sự",n:"Giữ thẻ bài",af:{},age:40+R(10)},ped:{name:"Tiểu Ngân Tử",n:"Thái giám Nội vụ phủ lo mua đồ",af:{},age:20+R(7)},ty:{name:"Thái y Trương",n:"Thái y viện",af:{},age:50+R(8)}};

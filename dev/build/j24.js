@@ -78,7 +78,7 @@ function hhBind(o){if(!o)return;const d=Object.getOwnPropertyDescriptor(o,"hh");
  Object.defineProperty(o,"hh",{get(){return hhGet(o)},set(v){hhSet(o,v)},enumerable:false,configurable:true});
  /* migrate once: blend the old separate number into the Empress's own regard */
  if(typeof old==="number"&&old!==0){const q=queenP();if(q&&q!==o){const cur=aff(q,o);affAdd(q,o,Math.round((old+cur)/2)-cur)}}}
-(function(){const c0=consorts;consorts=function(){const L=c0.apply(this,arguments);for(const p of L)hhBind(p);return L}})();
+(function(){const c0=consorts,B=new WeakSet();consorts=function(){const L=c0.apply(this,arguments);for(const p of L)if(p&&!B.has(p)){hhBind(p);B.add(p)}/* bind once per object (perf, review ag-all-2 r2 B5) */return L}})();
 (function(){const a0=ageInit;ageInit=function(){const r=a0.apply(this,arguments);try{consorts()}catch(e){}return r}})();
 /* result cards for the newer acts too */
 wrapR("scout",()=>"Sai tai mắt dò nơi ở");wrapR("invite",()=>"Mời đến cung ta");wrapR("visitPal",()=>"Đến cung nàng thăm");wrapR("goSee",()=>"Đến gặp");

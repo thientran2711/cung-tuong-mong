@@ -193,7 +193,7 @@ try{if(typeof agReg==="function"){agReg("maid","staff",(p,N)=>asOpts(p,N));agReg
   for(const k of Object.keys(SRVA).concat(["empTea"]))for(const g of ["maid","srv"])agRunReg(g+":"+k,(d,t,pd)=>{if(!d||d.sid==null||d.out)return"";const O=asOpts(d);const c=O.find(o=>o.k===pd.k&&(!t||o.t===t||o.man===t))||O.find(o=>o.k===pd.k);
    if(!c){ASN.miss=(ASN.miss||0)+1;return""}return c.run(d)||""});
   /* the record's row of a household staff ("s"+sid, kind "st") = her plan (the old errand dice j95 :244 give way to it) */
-  if(typeof j95planOther==="function"){const po=j95planOther;j95planOther=function(p,c,P){try{if(p&&p.kind==="st"&&asOn()&&agDOn()){agDayEnsure();const sl=agDaySlot(p.id);if(sl)return agRow(sl)}}catch(e){console.error("jagstaff row",e)}return po.apply(this,arguments)}}}
+  if(typeof j95planOther==="function"){const po=j95planOther;j95planOther=function(p,c,P){try{if(p&&p.kind==="st"&&asOn()&&agDOn()){agDayEnsure();const sl=agDaySlot(p.id);if(sl)return agRow(sl);if(typeof agLzHas==="function"&&agLzHas(p.id)){/* still in the staff slice queue (B5): her base row until drawn */const sv=servById(+String(p.id).slice(1));if(sv)return base(sv)}}}catch(e){console.error("jagstaff row",e)}return po.apply(this,arguments)}}}
  /* a household staff's group by her role (jagday reads .eunuch / .male; staff carry role "maid" / "eunuch") */
  if(typeof agGrp==="function"){const g0=agGrp;agGrp=function(p){if(p&&p.sid!=null&&p.role)return asGrp(p);return g0.apply(this,arguments)}}}catch(e){console.error("jagstaff reg",e)}
 (function(){

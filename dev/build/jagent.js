@@ -112,7 +112,7 @@ function agMW(v,tag){const C=AG.mwc=AG.mwc||{};const k=(v===S?"me":v.id)+":"+tag
 /* the khắc she can do it: from now to the end of the buổi, at a place she may enter, not while she keeps a secret meeting */
 /* a khắc the words of a card or a told deed already put her somewhere (j95b bind / turn-of-buổi act) is hers to keep: the loop never overwrites it */
 function agBound(id,kh,key){try{return typeof J95B!=="undefined"&&J95B.bind.some(b=>b.id===id&&b.kh===kh&&b.key===key)}catch(e){return false}}
-function agSlot(v,at,t){const R=agRec(),k0=agKh(),id="v"+v.id,L=[];for(let kh=k0;kh<J95.KH;kh++){const k=at(kh,v,t);if(!k||k==="thu"&&(S.buoi||0)===0)continue;
+function agSlot(v,at,t,c){const R=agRec(),k0=agKh(),id="v"+v.id,L=[];for(let kh=k0;kh<J95.KH;kh++){if(c&&typeof agFitDay==="function"&&typeof agKhC==="function"&&!agFitDay(kh,agKhC(c,v)))continue;/* the DAY must hold the whole deed (review ag-all-2 r2 B3) */const k=at(kh,v,t);if(!k||k==="thu"&&(S.buoi||0)===0)continue;
   if(v.confined&&k!==palaceOf(v))continue;if(!j95acc(v,k)&&k!=="home"&&k!==palaceOf(v))continue;if(R&&R.P[id]&&R.P[id][kh]&&(R.P[id][kh][1]==="tryst"||R.P[id][kh][1]==="meet"))continue;if(R&&agBound(id,kh,R.key))continue;L.push([kh,k])}
  return L.length?L[Math.floor(Math.random()*L.length)]:null}
 /* the people a SOC deed could aim at: kept per tuần and per what she did since (perf §4 "cache SOC target lists"); the living are re-checked */
@@ -151,7 +151,7 @@ function agDecide0(v){let N;const tn0=performance.now();try{N=agNeedsC(v)}catch(
  const need=agPw(NL);if(!need)return 0;/* her slip (jmind) is in the second step, once */
  const ta=performance.now();const O=agOpts(v,N,need);AG.tm.opts+=performance.now()-ta;if(!O.length)return 0;
  const c=mindPick(O.map(o=>[o,o.u]),v);if(!c)return 0;c.need=need;
- const sl=agSlot(v,c.at,c.t);if(!sl)return 0;agPlan(v,c,N,sl[0],sl[1]);return 1}
+ const sl=agSlot(v,c.at,c.t,c);if(!sl)return 0;agPlan(v,c,N,sl[0],sl[1]);return 1}
 function agSlice(first){const Q=AG.q;if(!Q||AG.inSlice)return;const key=agKey();if(Q.key!==key){if(Q.L.length)AG.stat.qdrop+=Q.L.length;AG.q=null;return}
  AG.inSlice=1;const t0=performance.now();const tm0=Object.assign({},AG.tm);const z=agZ();let acts=0;AG.now=0;AG.mwc={};
  const B=BAL.ag.perf.slice;

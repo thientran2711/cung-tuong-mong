@@ -189,7 +189,7 @@ function knHearRun(v,t,pd){const z=agZ();KN.stat.hear++;if(!t)return"";const tid
 function knReact(){const key=agKey();if(KN.rk===key)return;KN.rk=key;if(!knDeedHaps().length)return;const t0=performance.now();
  for(const v of liveRivals(true)){if(!v.alive||v.out||v.confined)continue;try{if(agUsed(v))continue;let any=false;for(const h of knDeedHaps())if(knFor(v,h)){any=true;break}if(!any)continue;
   const N=agNeedsC(v);const O=knOpts(v,N);if(!O.length)continue;const c=mindPick([[null,BAL.ag.routine]].concat(O.map(o=>[o,o.u])),v);if(!c)continue;
-  const sl=agSlot(v,c.at,c.t);if(!sl)continue;agPlan(v,c,N,sl[0],sl[1]);KN.stat.react=(KN.stat.react||0)+1}catch(e){agErr("knReact1",e)}}
+  const sl=agSlot(v,c.at,c.t,c);if(!sl)continue;agPlan(v,c,N,sl[0],sl[1]);KN.stat.react=(KN.stat.react||0)+1}catch(e){agErr("knReact1",e)}}
  if(AG.now){AG.now=0;setTimeout(()=>{try{agSyncNow()}catch(e){}},0)}KN.ms=(KN.ms||0)+performance.now()-t0}
 /* ---------- §4 servants' own errands ---------- */
 function knDanger(m){const M=knMemo();M.dg=M.dg||{};const k=knId(m);if(M.dg[k]!=null)return M.dg[k];let d=0;try{for(const v of liveRivals(true))if(v!==m&&v.alive)d=Math.max(d,danger(v,m))}catch(e){}return M.dg[k]=d}

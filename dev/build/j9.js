@@ -10,7 +10,7 @@ function relAdd(x,y,n){if(!x||!y||x===y)return;affAdd(x,y,n);affAdd(y,x,n);const
 function hostility(v,t){return oan(v,t)+Math.max(0,-aff(v,t))/2+(t===S?v.ghen/2:Math.max(0,(t.sung-v.sung)/3))+(rkOf(t)>=rkOf(v)?8:0)}
 
 /* houses: Phi and above head a palace; lower consorts live under a head. Same house: cannot harm or win over each other */
-function houseOf(p){return rkOf(p)>=PAL_HEAD?key(p):(p.resHead!=null&&byKey(p.resHead)&&(byKey(p.resHead)===S?S.rank>=PAL_HEAD:byKey(p.resHead).alive&&!byKey(p.resHead).out&&rkOf(byKey(p.resHead))>=PAL_HEAD)?p.resHead:key(p))}
+function houseOf(p){if(rkOf(p)>=PAL_HEAD)return key(p);const h=p.resHead!=null?byKey(p.resHead):null;/* one lookup (perf, review ag-all-2 r2 B5) */return h&&(h===S?S.rank>=PAL_HEAD:h.alive&&!h.out&&rkOf(h)>=PAL_HEAD)?p.resHead:key(p)}
 function sameHouse(a,b){return a!==b&&houseOf(a)===houseOf(b)}
 function assignHouses(){const heads=consorts().filter(p=>rkOf(p)>=PAL_HEAD);for(const p of consorts()){if(rkOf(p)>=PAL_HEAD){p.resHead=null;continue}if(houseOf(p)!==key(p))continue;p.resHead=heads.length&&roll(70)?key(pick(heads.filter(h=>h!==p))||p):null}}
 

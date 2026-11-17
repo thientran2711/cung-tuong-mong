@@ -45,7 +45,7 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
  ok(Object.values(r3.meds).every(m=>Math.abs(m.npc-m.her)<=.75),'summons: NPC median = her median per game (dan / co / duho)',r3.meds);ok(r3.gains.length>=2,'summons: the Sủng gain varies (no fixed best)',r3.gains);
  ok(r3.den>0&&r3.denOcc.every(o=>o==="trieu"),'lanterns: an NPC lantern = one draw of her lantern game',r3);
  /* 4 jexam: consorts and servants */
- const r4=await p.evaluate(()=>{const v=__twin(liveRivals(true)[0]);__mg.length=0;let pass=0;const N=300;for(let i=0;i<N;i++)if(exSim(v).pass)pass++;const ex=__mg.slice();
+ const r4=await p.evaluate(()=>{const v=__twin(liveRivals(true)[0]);__mg.length=0;let pass=0;const N=2500;/* r2 B6: a ~99 % pass rate needs N ≥ 2000 to show a failure */for(let i=0;i<N;i++)if(exSim(v).pass)pass++;const ex=__mg.slice();
   const P=exPlan(v);const meds=P.rounds.map(k=>({k,npc:__med(ex.filter(x=>x.kind===k).map(x=>x.raw)),her:+mgMedD(mgTier(k,{occ:"exam",rank:P.to,lv:exLv(S,k)}).d).toFixed(2)}));
   const s=(S.staff||[])[0]||{sid:9,rank:1,loyal:50};__mg.length=0;let sp=0;for(let i=0;i<60;i++){s.exCd=0;S.turn=(S.turn||0)+1;if(exSrvNpc(s))sp++}
   return{calls:ex.length,occ:[...new Set(ex.map(x=>x.occ))],pass:pass/N,meds,srvCalls:__mg.length,srvOcc:[...new Set(__mg.map(x=>x.occ))],srvPass:sp/60}});
