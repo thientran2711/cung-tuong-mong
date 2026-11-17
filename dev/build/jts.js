@@ -290,14 +290,16 @@ function tsDressHost(){return queenP()&&queenP()!==S?queenP():null}
 function tsLuxK(k){return typeof luxPiece==="function"?luxPiece(k):Math.round((IT[k]&&itm(k).pr||0)/5)}
 /* an empty Cài tóc / Áo slot = what she wears now (j92 wardrobe) */
 function tsDressFill(p,pickd){const P=Object.assign({},pickd);try{const w=wdOf(p);if(!P.hair&&w.tram&&IT[w.tram.k])P.hair=w.tram.k;if(!P.ao&&w.y&&IT[w.y.k]&&w.y.k!=="y_tang")P.ao=w.y.k}catch(e){}return P}
-function tsDressPts(p,pickd,th){const T=TS_THEME[th]||TS_THEME.thanh,B=BAL.lux||{};const P=tsDressFill(p,pickd);let s=0,L=0;const vp=[];
+/* makeup-lux (OD L1634/L1643): mk = the entrant's face of the day (a toilette record) — its look's xa xỉ and her pets' join the outfit total, judged the same way */
+function tsDressPts(p,pickd,th,mk){const T=TS_THEME[th]||TS_THEME.thanh,B=BAL.lux||{};const P=tsDressFill(p,pickd);let s=0,L=0;const vp=[];
  for(const [sl] of TS_SLOT){const k=P[sl];if(!k||!IT[k])continue;const it=itm(k);s+=T.tags.includes(k)?2:0;L+=tsLuxK(k);if(it.rk&&it.rk>rkOf(p)){s-=3;vp.push(it.n)}}
+ let ml=0,pl=0;try{if(mk&&mk.makeup)ml=toilLv(toilMk(mk)).lux}catch(e){}try{pl=typeof petLuxOf==="function"?petLuxOf(p):0}catch(e){}L+=ml+pl;/* + pet (OD L1643: the event total = clothes + jewels + makeup + pet) */
  const R=typeof luxThemeRange==="function"?luxThemeRange(p,T):{lo:T.r?T.r[0]:40,hi:T.r?T.r[1]:120,bud:999};let st="hop";
  if(L>R.bud){st="vuot";s+=B.ctOver!=null?B.ctOver:-2;vp.push(`bộ đồ Xa xỉ ${L}`)}
  else if(L>R.hi){st="photruong";s+=B.ctShow!=null?B.ctShow:1}
  else if(L<R.lo){st="giandi";s+=Math.max(B.ctPlainMin!=null?B.ctPlainMin:-1,(B.ctFit)-(B.ctPlainK)*(R.lo-L)/Math.max(1,R.lo))}
  else s+=B.ctFit;
- return{raw:cl(Math.round(10*s/11),0,10),vp,lux:L,st,lo:R.lo,hi:R.hi}}
+ return{raw:cl(Math.round(10*s/11),0,10),vp,lux:L,mkLux:ml,petLux:pl,st,lo:R.lo,hi:R.hi}}
 function tsDressTotal(p,raw){return raw*4+Math.round(effSac(p)/5)+Math.round((p.tamco||0)/12)}
 /* the best set from the pieces at hand (smart pick: NPC by Tâm cơ, a loyal maid) — small search, top pieces per slot by theme */
 function tsDressBest(p,keys,th){const T=TS_THEME[th]||TS_THEME.thanh;const C=TS_SLOT.map(([sl,,fit])=>[sl,[...new Set(keys.filter(fit))].sort((a,b)=>(T.tags.includes(b)?1:0)-(T.tags.includes(a)?1:0)).slice(0,5)]);
@@ -316,10 +318,10 @@ function tsDressReturn(){const s=tsS();s.borrow=0;for(let i=S.inv.length-1;i>=0;
 function tsDressHold(){tsTagsFresh();const s=tsS();const D=s.dress;if(!D||D.m!==S.month||D.y!==S.year)return;s.dress=null;const th=D.th,T=TS_THEME[th];
  /* makeup-theme (OD:L1514): every entrant's face is scored against the đề's hidden makeup want (jmkt tsMkPts; rivals by their own scouting) */
  const W=tsMkWant(th,D.m),cid=D.y+"-"+D.m;
- const C=liveRivals(true).filter(v=>!v.confined&&!v.out);const R=C.map(v=>{const P=tsNpcDress(v,th);const d=tsDressPts(v,P,th);const mk=tsMkPts(tsMkNpc(v,W,cid),W);return{p:v,raw:d.raw,vp:d.vp,lux:d.lux,st:d.st,mk,score:tsDressTotal(v,d.raw)+mk.add}});
+ const C=liveRivals(true).filter(v=>!v.confined&&!v.out);const R=C.map(v=>{const P=tsNpcDress(v,th);const mr=tsMkNpc(v,W,cid);const d=tsDressPts(v,P,th,mr);const mk=tsMkPts(mr,W);return{p:v,raw:d.raw,vp:d.vp,lux:d.lux,st:d.st,mk,score:tsDressTotal(v,d.raw)+mk.add}});
  const finish=(mine)=>{const all=R.concat(mine?[mine]:[]).sort((a,b)=>b.score-a.score);all.forEach((x,i)=>x.place=i+1);const b=tsPre();const L=[];
   for(const x of all){if(x.vp.length)ap(x.p,{danh:-3});if(x.st==="photruong")ap(x.p,{duc:(BAL.lux&&BAL.lux.ctDuc)||-1});if(x.place===1){ap(x.p,{sung:3,danh:3});bestow(x.p,"contest")}else if(x.place<=3)ap(x.p,{danh:2})}
-  if(mine){const x=mine;L.push(`Hội phối đồ (${T.n}): ngươi đứng thứ ${x.place}/${all.length}.`);if(x.lux!=null)L.push(`Bộ đồ Xa xỉ ${x.lux}: ${x.st==="hop"?`hợp đề ${T.n}`:x.st==="giandi"?"quá giản dị so với đề":x.st==="photruong"?`phô trương, người ta chê xa xỉ. Đức ${(BAL.lux&&BAL.lux.ctDuc)||-1}`:"quá phẩm vị của ngươi"}.`);
+  if(mine){const x=mine;L.push(`Hội phối đồ (${T.n}): ngươi đứng thứ ${x.place}/${all.length}.`);if(x.lux!=null)L.push(`Bộ đồ Xa xỉ ${x.lux}${x.mkLux?` (son phấn ${x.mkLux})`:""}: ${x.st==="hop"?`hợp đề ${T.n}`:x.st==="giandi"?"quá giản dị so với đề":x.st==="photruong"?`phô trương, người ta chê xa xỉ. Đức ${(BAL.lux&&BAL.lux.ctDuc)||-1}`:"quá phẩm vị của ngươi"}.`);
    if(x.vp.length)L.push(`${tsDressHost()?"Hoàng hậu":"Thái hậu"} nhắc: ${x.vp.join(", ")} vượt phẩm vị. Danh -3.`);L.push(tsMkLine(x,W,th))}
   else L.push(`Hội phối đồ (${T.n}): ${all[0].p.name} đứng đầu.`);log(L.join(" "));tsDressReturn();
   const show=()=>{tsRes(`Hội phối đồ · ${T.n}`,b,mine?mine.place<=3:null);render()};
