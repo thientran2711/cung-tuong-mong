@@ -872,4 +872,4 @@
 | REVIEW kit-option-rows r1 of 3dabd1f7 (sonnet; brief briefs/s34-review-kit-option-rows.md) | review/kit-option-rows-r1 | MAIN s34 | (opening) | RUNNING | 17/11 17:06Z |
 | kit-thanh-bai: THÀNH/BẠI two-block act cards + HỎNG→BẠI (OD 17:10Z (2)); successor of kit-option-rows (sonnet; brief briefs/s34-kit-thanh-bai.md) | review/kit-thanh-bai | MAIN s34 | (opening) | RUNNING | 17/11 17:08Z |
 | tinbao-ui-r6r PASS 220359da (supersedes 47a462ca; lands after ag-all-2 by C-AG #3) | review/tinbao-ui-r6r | MAIN s34 | - | PASS → C-AG land | 17/11 17:08Z |
-| face-w404 review r1 (sonnet) of df8b57bc | review/face-w404-r1 | D | (opening) | RUNNING | 17/11 17:08Z |
+| face-w404 review r1 (sonnet) of df8b57bc | review/face-w404-r1 | D | session_01964izEvirrwGUKDneEGtXa | RUNNING | 17/11 17:08Z |
