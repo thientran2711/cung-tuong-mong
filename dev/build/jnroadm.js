@@ -120,11 +120,11 @@ function nrMenPlay(e){const p=e.p,N=p.nr,A=nrCh(N.r,N.n);if(!A){N.n=nrNext(N.r,N
  else{/* court */const pk=N.pk,ck=N.c;p.af=p.af||{};if(pk!=null&&k!==0){p.af[pk]=cl((p.af[pk]||0)+(k>0?M.court.af:-M.court.af),-100,100);
    if(k>0&&ck!=null)p.af[ck]=cl((p.af[ck]||0)-M.court.af,-100,100);if(k<0){const pp=nrCWho(pk);if(pp)ap(pp,{danh:-M.court.danh})}}
   if(k!==0&&(pk==="me"||ck==="me")){hit=true;me=pk==="me"?(k>0?" Hắn nghiêng về phía ngươi thêm một phần.":" Hắn vấp ngã, ngươi mang tiếng lây."):(k>0?" Hắn càng xa ngươi.":"")}}
- const tag=nrEnd(A,k,"hắn");N.e=tag;N.k=k;N.l.push([N.n,k]);N.hb=0;const n0=N.n;N.n=nrNext(N.r,N.n+1);if(!N.n)N.x=1;
+ const tag=nrEnd(A,k,"hắn",p);N.e=tag;N.k=k;N.l.push([N.n,k]);N.hb=0;const n0=N.n;N.n=nrNext(N.r,N.n+1);if(!N.n)N.x=1;
  N.t=S.turn+nrR(B.gap);if(N.h&&N.h<=n0)N.hs=N.hs||-1;
  const rn=riv&&typeof riv==="object"?(riv===S?"ngươi":riv.name):typeof riv==="string"?(TDOFF[riv]||riv):"người khác";
  const rc=N.rc?` ${N.rc} nay không còn, kẻ đứng đối mặt hắn là ${rn}.`:"";N.rc="";
- return {n:n0,t:plain(A.t),tag,k,rc,me,hit}}
+ return {n:n0,t:nrFill(plain(nrS(A.t,A)),p),tag,k,rc,me,hit}}
 /* motive to ask the player (real reasons only): a man fond of her (tinh), a court man / house head who leans to her (af.me), a house
    allied with hers; princes and the Nội vụ phủ buyer never ask (their mother / their master does) */
 function nrMenAsk(e){try{if(isSrv()||S.out||nrLearn()||!e.a)return false;const M=nrB().men,p=e.p;

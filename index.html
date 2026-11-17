@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"e34393b1+","t":"2026-11-17T03:44Z","c":"npc-roads-fx: chapters 1–4 first (OD:L1477) — while the player is in her learning chapters no NPC road asks her for help or casts her as ri…","b":"5c01efdad730","h":[{"s":"ee492cfd","t":"2026-11-17T04:15Z","c":"Hộp Chọn sổ nay rộng rãi, chữ trên nút đọc trọn, không còn ô hình bị cắt; trang Tuần lục hiện trọn dáng người đến tận gót chân, bảng thân s…"},{"s":"bad6d59f+","t":"2026-11-17T03:41Z","c":"Chơi chung: chuẩn bị đường truyền gọn nhẹ hơn giữa hai máy; khi chơi chưa có gì thay đổi."},{"s":"babc9b4a","t":"2026-11-17T01:39Z","c":"Chơi chung không còn treo máy vì tên bạn lặp chữ; số bóng người trên dư đồ khớp đúng người đang ở đó; việc có hạn giờ hiện đồng hồ ngay dướ…"},{"s":"92685210+","t":"2026-11-17T00:53Z","c":"Khung việc và khung sự kiện bốn cỡ, tranh lấp đầy khung, việc nhắc tên ai hiện chân dung người ấy; phẩm của món đồ nằm ngay trên viền khung…"},{"s":"6f513340","t":"2026-11-16T23:24Z","c":"Vào game mới không còn bật ngay màn lật thẻ, lật thẻ chỉ khi vào buổi tối; dư đồ nhãn giấy mới; việc dài lấn sang buổi sau; lời trong cung …"},{"s":"7a18d957","t":"2026-11-16T22:44Z","c":"review-diemtrang-fx-r1 report"},{"s":"afe2bcbc","t":"2026-11-16T22:25Z","c":"review r1: KIT 84.1a note + report"},{"s":"dea1d445+","t":"2026-11-16T21:32Z","c":"golive lag-play-2: CHANGE line + site rebuilt"},{"s":"674f3af4","t":"2026-11-16T21:21Z","c":"Chơi cùng bạn: bạn chơi chung chưa gặp mặt nay hiện tên gọi chung “Hảo hữu của ta” ở mọi nơi, không còn ẩn thành dấu hỏi."},{"s":"923567d5+","t":"2026-11-16T21:03Z","c":"Hình nhân vật: hết vệt xám ở cổ và viền tối quanh người."}]};
+window.CTM_BI={"s":"19d33501+","t":"2026-11-17T04:30Z","c":"npc-roads-fx: chapters 1–4 first (OD:L1477) — while the player is in her learning chapters no NPC road asks her for help or casts her as ri…","b":"56f77bb8c2cb","h":[{"s":"ee492cfd","t":"2026-11-17T04:15Z","c":"Hộp Chọn sổ nay rộng rãi, chữ trên nút đọc trọn, không còn ô hình bị cắt; trang Tuần lục hiện trọn dáng người đến tận gót chân, bảng thân s…"},{"s":"bad6d59f+","t":"2026-11-17T03:41Z","c":"Chơi chung: chuẩn bị đường truyền gọn nhẹ hơn giữa hai máy; khi chơi chưa có gì thay đổi."},{"s":"babc9b4a","t":"2026-11-17T01:39Z","c":"Chơi chung không còn treo máy vì tên bạn lặp chữ; số bóng người trên dư đồ khớp đúng người đang ở đó; việc có hạn giờ hiện đồng hồ ngay dướ…"},{"s":"92685210+","t":"2026-11-17T00:53Z","c":"Khung việc và khung sự kiện bốn cỡ, tranh lấp đầy khung, việc nhắc tên ai hiện chân dung người ấy; phẩm của món đồ nằm ngay trên viền khung…"},{"s":"6f513340","t":"2026-11-16T23:24Z","c":"Vào game mới không còn bật ngay màn lật thẻ, lật thẻ chỉ khi vào buổi tối; dư đồ nhãn giấy mới; việc dài lấn sang buổi sau; lời trong cung …"},{"s":"7a18d957","t":"2026-11-16T22:44Z","c":"review-diemtrang-fx-r1 report"},{"s":"afe2bcbc","t":"2026-11-16T22:25Z","c":"review r1: KIT 84.1a note + report"},{"s":"dea1d445+","t":"2026-11-16T21:32Z","c":"golive lag-play-2: CHANGE line + site rebuilt"},{"s":"674f3af4","t":"2026-11-16T21:21Z","c":"Chơi cùng bạn: bạn chơi chung chưa gặp mặt nay hiện tên gọi chung “Hảo hữu của ta” ở mọi nơi, không còn ẩn thành dấu hỏi."},{"s":"923567d5+","t":"2026-11-16T21:03Z","c":"Hình nhân vật: hết vệt xám ở cổ và viền tối quanh người."}]};
 /* KBOOT — BOOT COVER (owner 15/11 "Khi vừa bấm vào game, có chừng ít hơn 1 giây hiện khung này"; KIT §14.1).
    Before: while the 4 MB page parsed, the browser painted the bare static markup of p1.html (HUD box, a vertical stat label list, empty
    panels, the old 11-tab bar) for ~1 s on a warm open and many seconds on a cold one, before any kit CSS/JS existed.
@@ -46584,9 +46584,20 @@ function nrStat(A){if(A&&A.sk)return A.sk;const cnt={};try{const P=A.p&&A.p[A.p.
 function nrTag(t,he){he=he||"nàng";const He=he[0].toUpperCase()+he.slice(1);return String(t||"").replace(/\bNgươi\b/g,He).replace(/\bngươi\b/g,he)}
 /* fix (voice, whole group): the narration's word for an NPC — a woman (consort, maid) «nàng», a man or eunuch «hắn» (the men news line) */
 function nrHe(p){try{if(!p)return"nàng";if(p.role==="eunuch"||p.sex==="m")return"hắn";if(typeof nrMenL==="function"&&nrMenL().some(e=>e.p===p))return"hắn"}catch(e){}return"nàng"}
-function nrEnd(A,k,he){const E=A&&A.E||{};const tg=x=>plain(E[x].tag||"");const ks=Object.keys(E).filter(x=>(E[x].k||0)===k&&tg(x)&&!/✦/.test(tg(x)));
- const x=ks.length?pick(ks):null;return x?nrTag(tg(x),he):""}
-function nrTitle(r){const A=NRM[r]||ARC67[r];return A?plain(A.t):""}
+/* r2 fix (F8): some chapter tags / titles of the roads are functions (()=>`… ${CN_Q()}`) — read their value, never their source text */
+function nrS(x,A){try{return typeof x==="function"?String(x(A)||""):String(x||"")}catch(e){return""}}
+function nrEnd(A,k,he,who){const E=A&&A.E||{};const tg=x=>plain(nrS(E[x].tag,A));const ks=Object.keys(E).filter(x=>(E[x].k||0)===k&&tg(x)&&!/✦/.test(tg(x)));
+ const x=ks.length?pick(ks):null;return x?nrFill(nrTag(tg(x),he),who):""}
+/* r2 fix (whole group F7: 51 ending tags + 1 chapter title of the roads NPCs read carry the player's cast tokens {v} {v2} {foe} {foed} {mis}):
+   an NPC's line names HER OWN cast — her rival (the player = «ngươi», j84 turns it to «ta») and, for a maid, her mistress — never a raw token */
+function nrWho(p){const o={v:"",mis:""};try{const N=p&&p.nr;if(!N)return o;
+  if(rivals.includes(p)){if(N.c==="me")o.v="ngươi";else if(N.c!=null){const r=RV(N.c);if(r)o.v=r.name}}
+  else if(p===S.maid||p.sid!=null){const ms=nrMis(p);if(ms)o.mis=ms===S?"ngươi":ms.name;
+   if(N.c!=null){const r=nrServL(nrRole(p)).find(x=>nrMid(x)===N.c);if(r)o.v=r.name}}}catch(e){}return o}
+function nrFill(s,p){if(/^\s*(\(\)|[a-zA-Z_]\w*)\s*=>/.test(String(s||"")))return"";const o=p&&p.v!==undefined&&p.mis!==undefined&&!p.nr?p:nrWho(p);
+ const W={v:o.v||"đối thủ",v2:o.v||"đối thủ",foe:o.v||"đối thủ",foed:o.v||"đối thủ",mis:o.mis||"chủ nhân"};
+ return String(s||"").replace(/\{(\w+)\}/g,(m,k,i)=>{const w=W[k.toLowerCase()]||"người kia";return i===0||/[.!?]\s*$/.test(s.slice(0,i))?w[0].toUpperCase()+w.slice(1):w})}
+function nrTitle(r){const A=NRM[r]||ARC67[r];return A?plain(nrS(A.t,A)):""}
 /* play one chapter off-screen (same odds shape as the player's climax: base + stat/div, Lợi thế only after a won chapter like hers — a lost chapter
    gives no malus, so no losing spiral — and her help) */
 function nrPlay(v){const N=v.nr,A=nrCh(N.r,N.n);if(!A){N.n=nrNext(N.r,N.n+1);return""}const B=nrB();const sk=nrStat(A);
@@ -46596,10 +46607,10 @@ function nrPlay(v){const N=v.nr,A=nrCh(N.r,N.n);if(!A){N.n=nrNext(N.r,N.n+1);ret
  try{if(fx.pow){const c=clanOf(v);if(c&&typeof tdPowAdd==="function")tdPowAdd(c,fx.pow)}}catch(e){}
  let me="";if(riv){if(k>0)oanAdd(riv,v,B.oan.win);else if(k<0)oanAdd(v,riv,B.oan.lose);
   if(riv===S&&k!==0){const o=k>0?B.onMe.win:B.onMe.lose;ap(S,o);me=k>0?` ${v.name} lấn được ngươi một bước.`:` ${v.name} vấp ngã, ngươi bớt một mối lo.`}}
- const tag=nrEnd(A,k);N.e=tag;N.k=k;N.l.push([N.n,k]);N.hb=0;const n0=N.n;N.n=nrNext(N.r,N.n+1);if(!N.n)N.x=1;
+ const tag=nrEnd(A,k,undefined,v);N.e=tag;N.k=k;N.l.push([N.n,k]);N.hb=0;const n0=N.n;N.n=nrNext(N.r,N.n+1);if(!N.n)N.x=1;
  N.t=S.turn+nrR(B.gap);if(N.h&&N.h<=n0)N.hs=N.hs||-1;
  const rc=N.rc?` ${N.rc} nay không còn, kẻ đứng đối mặt nàng là ${riv?NM(riv):"người khác"}.`:"";N.rc="";
- return {n:n0,t:plain(A.t),tag,k,me,rc,riv}}
+ return {n:n0,t:nrFill(plain(nrS(A.t,A)),v),tag,k,me,rc,riv}}
 /* motive to ask the player (real reasons only): bond, a shared side, or the player is her rival (never asks her rival) */
 function nrAsk(v){try{if(isSrv()||S.out||nrLearn())return false;const N=v.nr;if(N.c==="me")return false;
  if(aff(v,S)>=nrB().askRel)return true;const f=facOf(v);if(f&&f===facOf(S))return true;
@@ -46617,7 +46628,7 @@ function nrHelped(X,how){try{const v=X.A&&X.A.o;if(!v||!v.nr)return"";const N=v.
  if(how>0){N.hb=B.help;return ` ${v.name} ghi nhớ ơn này; chương «${nrChT(v)}» của ${he} thêm phần chắc.`}
  if(how<0){N.hb=-B.help;return ` ${v.name} biết ngươi bán đứng ${he}; chương «${nrChT(v)}» của ${he} thêm khó.`}
  return""}catch(e){console.error(e);return""}}
-function nrChT(v){const A=nrCh(v.nr.r,v.nr.n);return A?plain(A.t):""}
+function nrChT(v){const A=nrCh(v.nr.r,v.nr.n);return A?nrFill(plain(nrS(A.t,A)),v):""}
 /* fix (whole group: consorts, maids, eunuchs, men): the asker is matched by kind AND id (a consort id may equal a servant sid) */
 const nrIsV=(x,v)=>x.ri===v.id&&(x.rk==="rv"||x.rk==="hh");
 function nrHoldM(f){try{const q=q72();if(q.a.some(x=>/^nr_/.test(x.tid)&&f(x)))return true;
@@ -46637,7 +46648,7 @@ function nrMonth(){if(!nrOn()||nrGuest())return"";const B=nrB();let news=0,ev=""
   const r=nrPlay(v);if(!r)continue;
   const line=`<span class="past">Tin trong cung · ${v.name} · «${nrTitle(N.r)}» chương ${r.n}: «${r.t}»${r.tag?` — ${r.tag}`:""}.${r.rc}${r.me}</span>`;
   if(r.riv===S||news<B.newsMo){log(line);news++}
-  if(N.x)log(`<span class="past">${v.name} khép lại tuyến «${nrTitle(N.r)}»${N.e?`: ${N.e}`:""}.</span>`)}catch(e){console.error(e)}}
+  if(N.x)log(`<span class="past">${v.name} khép lại tuyến «${nrTitle(N.r)}»${N.e?`: ${nrFill(N.e,v)}`:""}.</span>`)}catch(e){console.error(e)}}
  try{news=nrMMonth(news)}catch(e){console.error(e)}
  try{if(typeof nrMenMonth==="function")nrMenMonth(news)}catch(e){console.error(e)}
  return ev}
@@ -46653,7 +46664,7 @@ window.nrRoads=nrRoads;window.nrCh=nrCh;window.nrInit=nrInit;window.nrMonth=nrMo
 (function(){if(typeof T7!=="function")return;const C=q72C,O=q72O,B=()=>BAL.nroad;
  const bac=()=>{const R0=B().bacRk;let i=0;for(const r of R0)if(S.rank>=r)i++;return -B().bac[Math.min(i,B().bac.length-1)]};
  const nr=X=>{const v=X.A&&X.A.o;return v&&v.nr?v.nr:null};
- const head=X=>{const N=nr(X);const n=X.p&&X.p.nn||N&&N.n;const A=N&&nrCh(N.r,n);return N?`${X.A.n}: «${nrTitle(N.r)}» · Chương ${n}${A&&A.t?` «${plain(A.t)}»`:""}`:X.A.n};
+ const head=X=>{const N=nr(X);const n=X.p&&X.p.nn||N&&N.n;const A=N&&nrCh(N.r,n);return N?`${X.A.n}: «${nrTitle(N.r)}» · Chương ${n}${A&&A.t?` «${nrFill(plain(nrS(A.t,A)),X.A&&X.A.o)}»`:""}`:X.A.n};
  head.toString=()=>"Tuyến truyện riêng của một người trong cung";/* j72 logs plain(T.t) when the asker is gone */
  /* VANPHONG §2: Hoàng hậu = bổn cung / muội muội; a peer consort = tỷ (higher rank) or muội (lower) and calls the player the other */
  const hi=X=>{const v=X.A&&X.A.o;return !!(v&&(v.queen||v.rank>S.rank))};
@@ -46700,8 +46711,8 @@ window.nrRoads=nrRoads;window.nrCh=nrCh;window.nrInit=nrInit;window.nrMonth=nrMo
 
 /* ---------- her road on her person card (Hậu cung): one more row of the kit person card (.pcinfo span, the j85/j24 pattern) ---------- */
 function nrLine(v){const N=v&&v.nr;if(!N||!N.r||!(ARC67[N.r]||NRM[N.r]))return"";const T=nrTitle(N.r);
- if(N.x)return `Tuyến truyện: «${T}» <span class="past">· đã khép${N.e?`: ${N.e}`:""}</span>`;
- const n=N.l.length?N.l[N.l.length-1][0]:0;return n?`Tuyến truyện: «${T}» <span class="past">· qua chương ${n}${N.e?`: ${N.e}`:""}</span>`:`Tuyến truyện: «${T}» <span class="past">· chưa mở</span>`}
+ if(N.x)return `Tuyến truyện: «${T}» <span class="past">· đã khép${N.e?`: ${nrFill(N.e,v)}`:""}</span>`;
+ const n=N.l.length?N.l[N.l.length-1][0]:0;return n?`Tuyến truyện: «${T}» <span class="past">· qua chương ${n}${N.e?`: ${nrFill(N.e,v)}`:""}</span>`:`Tuyến truyện: «${T}» <span class="past">· chưa mở</span>`}
 (function(){if(typeof rvCard!=="function")return;const c0=rvCard;/* same row pattern as j85 ducLine / j24 danger line: one <span> in the card's .pcinfo */
  rvCard=function(v){let h=c0.apply(this,arguments);try{if(v&&!window.__nroff){const l=nrLine(v);if(l)h=h.replace('<div class="pcinfo">',`<div class="pcinfo"><span>${l}</span>`)}}catch(e){console.error(e)}return h}})();
 window.nrLine=nrLine;
@@ -46734,10 +46745,10 @@ function nrMPlay(s){const N=s.nr,A=nrCh(N.r,N.n);if(!A){N.n=nrNext(N.r,N.n+1);if
  for(const z in fx){if(z==="mp"&&s.sid==null)continue;s[z]=cl((s[z]||0)+fx[z],0,100)}
  const ms=nrMis(s);const mf=k>0?M.mis.win:k<0?M.mis.lose:null;if(ms&&mf)ap(ms,mf);
  if(riv){if(k>0)nrAf(riv,s,-M.af);else if(k<0)nrAf(s,riv,-M.af)}
- const tag=nrEnd(A,k,nrHe(s));N.e=tag;N.k=k;N.l.push([N.n,k]);N.hb=0;const n0=N.n;N.n=nrNext(N.r,N.n+1);if(!N.n)N.x=1;
+ const tag=nrEnd(A,k,nrHe(s),s);N.e=tag;N.k=k;N.l.push([N.n,k]);N.hb=0;const n0=N.n;N.n=nrNext(N.r,N.n+1);if(!N.n)N.x=1;
  N.t=S.turn+nrR(B.gap);if(N.h&&N.h<=n0)N.hs=N.hs||-1;
  const rc=N.rc?` ${N.rc} nay không còn ở đây, kẻ đứng đối mặt ${nrHe(s)} là ${riv?riv.name:"người khác"}.`:"";N.rc="";
- return {n:n0,t:plain(A.t),tag,k,rc,riv,ms}}
+ return {n:n0,t:nrFill(plain(nrS(A.t,A)),s),tag,k,rc,riv,ms}}
 /* motive to ask the player: her own maid asks when her loyalty is high; another house's maid only when the player is close to her
    mistress (bond or a shared side) — never for a maid whose mistress is cold to the player */
 function nrMAsk(s){try{if(isSrv()||S.out||nrLearn())return false;const ms=nrMis(s);if(!ms)return false;if(ms===S)return (s.loyal||0)>=nrB().m.askLoy;
@@ -46892,11 +46903,11 @@ function nrMenPlay(e){const p=e.p,N=p.nr,A=nrCh(N.r,N.n);if(!A){N.n=nrNext(N.r,N
  else{/* court */const pk=N.pk,ck=N.c;p.af=p.af||{};if(pk!=null&&k!==0){p.af[pk]=cl((p.af[pk]||0)+(k>0?M.court.af:-M.court.af),-100,100);
    if(k>0&&ck!=null)p.af[ck]=cl((p.af[ck]||0)-M.court.af,-100,100);if(k<0){const pp=nrCWho(pk);if(pp)ap(pp,{danh:-M.court.danh})}}
   if(k!==0&&(pk==="me"||ck==="me")){hit=true;me=pk==="me"?(k>0?" Hắn nghiêng về phía ngươi thêm một phần.":" Hắn vấp ngã, ngươi mang tiếng lây."):(k>0?" Hắn càng xa ngươi.":"")}}
- const tag=nrEnd(A,k,"hắn");N.e=tag;N.k=k;N.l.push([N.n,k]);N.hb=0;const n0=N.n;N.n=nrNext(N.r,N.n+1);if(!N.n)N.x=1;
+ const tag=nrEnd(A,k,"hắn",p);N.e=tag;N.k=k;N.l.push([N.n,k]);N.hb=0;const n0=N.n;N.n=nrNext(N.r,N.n+1);if(!N.n)N.x=1;
  N.t=S.turn+nrR(B.gap);if(N.h&&N.h<=n0)N.hs=N.hs||-1;
  const rn=riv&&typeof riv==="object"?(riv===S?"ngươi":riv.name):typeof riv==="string"?(TDOFF[riv]||riv):"người khác";
  const rc=N.rc?` ${N.rc} nay không còn, kẻ đứng đối mặt hắn là ${rn}.`:"";N.rc="";
- return {n:n0,t:plain(A.t),tag,k,rc,me,hit}}
+ return {n:n0,t:nrFill(plain(nrS(A.t,A)),p),tag,k,rc,me,hit}}
 /* motive to ask the player (real reasons only): a man fond of her (tinh), a court man / house head who leans to her (af.me), a house
    allied with hers; princes and the Nội vụ phủ buyer never ask (their mother / their master does) */
 function nrMenAsk(e){try{if(isSrv()||S.out||nrLearn()||!e.a)return false;const M=nrB().men,p=e.p;
@@ -58581,7 +58592,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="5c01efdad730";window.CTM_BUILD=BUILD;
+const BUILD="56f77bb8c2cb";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
