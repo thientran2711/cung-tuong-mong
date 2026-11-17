@@ -1,4 +1,18 @@
 # FOREMAN_C_STATUS (written ONLY by Foreman C)
+NEXT FOREMAN C SESSION: ROOT-6 = (id in the line below once opened) (opened by ROOT-5 ~12:20Z 17/11, depth 5). ROOT-5 stops; its trigger trig_011Z7Ybzk4LQQ5P7KZQm2LvM disabled.
+## HANDOVER (Foreman C ROOT-5 session_011xDdVSQvhH4vp7H6B7arST → ROOT-6, ~12:20Z 17/11)
+Why: context 40.4% (used_tokens 404k; START_CTX ~7% → limit 32%; overshot, images). Depth 4 → successor depth 5 (allowed; at depth ≥6 do NOT open a child, ask main/owner).
+OWNER: silent all ROOT-5. Do ONLY what she says. Art goes live after C LOOKS at each OLD|NEW sheet.
+RUNNING (C's children):
+- Art lead #7 session_011xDdVNkgEgTqsZJxUh9Xd8 (sonnet; opens/archives art workers; hd manifest merges). Tell it you are its foreman.
+- W4f session_011xDdVSvgMHhWjrFtf6Qv8J (lead's; maid consort-tier m01–m26): PENDING its next sheet = a51 ty1 m01–m08 REDO (age ~50–55 like live CT15: dark hair + silver at temples; colours m02 deeper saffron-gold, m05 crimson-rose, m06 rosy salmon). Then a51 ty1 m25–m26, then a51 ty2/ty3 m01–m26. CT15 (a51 ty1 m09–m24) 15 OK; m09-ty1 colour check vs other ages (W4e/W4f).
+- W8 mama session_011xDdVRWZVWQYAYYva3YuqJ (lead's; a36/a51 t1–t5, 520): colour = the maid's OLD/a18 tK colour (NOT the consort table); no huadian; a36 mature ~40, a51 silver. Live: pilot 8 + m05–m07 29; m08–m10 29 OK'd 12:18Z (uploading); next m11–m13. OWED (classifier denied Magnific ref upload — never route around): m05-t1-a36, m08-t1-a51.
+- VOICE BY TÍNH TÌNH on ONE branch review/voice-trait (part 1 4ed80a06: engine kTone + jtone.js; brief briefs/voice-trait.md + briefs/voice-trait-writers.md): W-A session_011xDdVRM5yu7W5UoCp4jMmC is AT its rollover line → told 12:12Z to write a handover at the top of reports/voice-trait.md and say "HANDOVER DONE <sha>" → ROOT-6 OPENS W-A2 (sonnet, source_url, prompt = briefs/voice-trait-writers.md part W-A + that handover + the three rollover lines), then archive RM5y. W-B session_011xDdVNoZ7Yx3TZUQQfZipd (jtone_b.js), W-C session_011xDdVRjiWzLX321cWLkeV2 (jtone_c.js) running. When W-A2 says SẴN SÀNG KIỂM → open a sonnet SMALL? NO: voice touches all narration → BIG reviewer opus (reviewer must see real cards, headless shots failed); PASS → FF main (FF-only, head == PASS sha, flock).
+DONE by ROOT-5: GREET-MEET (greeting name rule + AG-MEET) LIVE main 65dcf52f 11:36Z (worker + reviewer archived). Maid consort-tier: a18/a26/a36 m27–m52 + a51 m27–m52 complete (W5d, W6f done+archived by lead); a36 ty3 all live except none owed; a36 m22 ty2/ty3 live.
+HELD (art): W3e consort-rest-A, W7b player set, W2c consort-ty ty4–8 + HELD lists → only after W4f finishes the maid redraw; lead #7 asks C then.
+Not blocking for main/owner: AG-MEET only consorts approach her (maids/eunuchs/men not yet) = owner's call. ROOT-4's REQUEST to main (AG3 follow-ups A/B/D) still unanswered.
+Push: commit in a sparse worktree of the handover branch (/home/user/wt/ho), pull --rebase + push retry.
+
 NEXT FOREMAN C SESSION: ROOT-5 = session_011xDdVSQvhH4vp7H6B7arST (opened by ROOT-4 ~10:25Z 17/11, depth 4). ROOT-4 stops; its trigger trig_01Tgrv9ofbb5dfhkqZNjzAdk disabled.
 ## HANDOVER (Foreman C ROOT-4 session_011xDdVSQC3Gf8WhM6WW38QF → ROOT-5, ~10:25Z 17/11)
 Why: context 31.6% (used_tokens 316k; START_CTX ~6% → limit 31%). Depth 3 → successor depth 4 (allowed). Read: this block + the ROOT-4 log lines below it (08:38Z–10:22Z); CLAIMS rows 'C ROOT-4' + W4e/W5d/W6f rows.
