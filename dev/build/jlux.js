@@ -41,7 +41,9 @@ Object.assign(BAL,{lux:{
  /* Hội phối đồ: theme range is absolute (4 pieces), capped by her allowance; a floor never above capLo × allowance */
  capLo:.45,ctFit:3,ctShow:1,ctOver:-2,ctPlainK:4,ctPlainMin:-1,ctDuc:-1,
  /* gifts (D19 Biếu quà làm lành): piece luxury vs the receiver's allowance — below lo = mọn, above hi = quá hậu (đút lót / vượt lễ) */
- gift:{lo:.08,fit:[.15,.45],hi:.6}}});
+ gift:{lo:.08,fit:[.15,.45],hi:.6},
+ /* makeup-lux (OD L1638): the total xa xỉ above diem × the occasion's ceiling (hi) reads "diêm dúa" (people's word; Thỉnh an: 1.3 × allowance) */
+ diem:1.3}});
 
 /* ---------- one luxury number per piece (wardrobe piece → wdLux; jewellery / fabric → luxVal; pet → petLux) ---------- */
 function luxPiece(k){try{if(typeof WD_ITEMS==="object"&&WD_ITEMS[k])return wdLux(k);if(typeof PET==="object"&&PET[k]&&typeof petLux==="function")return petLux(k);return IT[k]?luxVal(k):0}catch(e){return 0}}
@@ -67,14 +69,17 @@ function luxRange(p,occ,host){p=p||S;const B=BAL.lux;if(typeof occ==="number")oc
  let bud=1;try{bud=luxOf(p).bud||1}catch(e){}
  return{occ,ctx,hk,n:ctx?B.occ[ctx].n:base.n,F:base.F,lo:o.lo,fit:o.fit,hi:o.hi,bud,pts:{lo:Math.round(o.lo*bud),fit:[Math.round(o.fit[0]*bud),Math.round(o.fit[1]*bud)],hi:Math.round(o.hi*bud)},why}}
 window.luxRange=luxRange;
-/* the verdict (one place): v = hopdip | hoppham | giandi | photruong | vuot | tang  (jtoil TOIL_DV words) */
-function luxVerdict(p,occ,host){p=p||S;const R=luxRange(p,occ,host);let st="ok";try{st=wdStatus(p)}catch(e){}
- let x={lv:1,sc:0,bud:1};try{x=luxOf(p)}catch(e){}const r=x.bud?x.sc/x.bud:0;const out=(v,style)=>({v,style,sc:x.sc,r,R,word:(typeof TOIL_DV==="object"&&TOIL_DV[v])||v});
+/* the verdict (one place): v = hopdip | hoppham | giandi | photruong | diem | vuot | tang  (jtoil TOIL_DV words). makeup-lux (OD L1638):
+   x.sc is the ONE total (clothes + jewels + pet + today's makeup level); "diêm dúa" = that total FAR above the occasion's ceiling
+   (r > hi × BAL.lux.diem) — only a word people say, the same consequences as phô trương plus the host's diem reaction (BAL.toil.react) */
+function luxVerdict(p,occ,host){p=p||S;const B0=BAL.lux;const R=luxRange(p,occ,host);let st="ok";try{st=wdStatus(p)}catch(e){}
+ let x={lv:1,sc:0,bud:1};try{x=luxOf(p)}catch(e){}const r=x.bud?x.sc/x.bud:0;const out=(v,style)=>({v,style,sc:x.sc,mk:x.mk||0,r,R,word:(typeof TOIL_DV==="object"&&TOIL_DV[v])||v});
  if(st==="tang")return out("tang","showy");
  let vp=0;try{vp=(vpItems(p)||[]).length}catch(e){}if(st==="over"||vp)return out("vuot","showy");
- if(x.lv>=2)return out("photruong","showy");
+ const show=()=>out(r>R.hi*B0.diem?"diem":"photruong","showy");
+ if(x.lv>=2)return show();
  let d=0;try{d=wdLevel(p)-Math.min(8,wdPOf(p))}catch(e){}const B=BAL.toil&&BAL.toil.dress?BAL.toil.dress[Math.max(0,Math.min(2,R.F|0))]:{under:-9,fitD:-9};
- if(d<=B.under||r<R.lo)return out("giandi","plain");if(r>R.hi)return out("photruong","showy");
+ if(d<=B.under||r<R.lo)return out("giandi","plain");if(r>R.hi)return show();
  if(d>=B.fitD&&r>=R.fit[0]&&r<=R.fit[1])return out("hopdip","fit");return out("hoppham","fit")}
 window.luxVerdict=luxVerdict;
 
@@ -83,8 +88,8 @@ let LUX_HOST=null;
 if(typeof toilDress==="function"){toilDress=function(p,F,host){const V=luxVerdict(p,F,host!==undefined?host:LUX_HOST);return{v:V.v,style:V.style,sc:V.sc,R:V.R}}}
 /* extra consequences of the verdict at a formal moment (shown first: they join toilFx's delta → leAttire → card Kèm / Vì sao / applied) */
 function luxExtra(p,host,F,V){const B=BAL.lux,o={danh:0,duc:0,why:[]};if(!V||(F|0)<1)return o;const ctx=V.R&&V.R.ctx;
- if(V.v==="photruong"||V.v==="vuot"){if(ctx==="edict"){o.duc+=B.edictDuc;o.danh+=B.edictDanh;o.why.push("trái lệnh tiết kiệm")}
-  else if(ctx==="tang"&&V.v==="photruong"){o.duc+=B.tangDuc;o.why.push("xa hoa giữa quốc tang")}else{o.duc+=B.showDuc;o.why.push("xa xỉ quá dịp")}}
+ if(V.v==="photruong"||V.v==="diem"||V.v==="vuot"){if(ctx==="edict"){o.duc+=B.edictDuc;o.danh+=B.edictDanh;o.why.push("trái lệnh tiết kiệm")}
+  else if(ctx==="tang"&&(V.v==="photruong"||V.v==="diem")){o.duc+=B.tangDuc;o.why.push("xa hoa giữa quốc tang")}else{o.duc+=B.showDuc;o.why.push("xa xỉ quá dịp")}}
  else if(F>=2&&V.v==="hopdip"){o.danh+=B.fitDanh;o.why.push("hợp dịp lễ lớn")}
  else if(F>=2&&V.v==="giandi"){o.danh+=B.plainDanh;o.why.push("quá giản dị giữa lễ lớn")}
  return o}
@@ -95,14 +100,14 @@ if(typeof toilFx==="function"){const tf0=toilFx;toilFx=function(p,host,F,baseSta
   if(t&&t.hk==="strict"&&t.danh&&X.danh<0)X.danh=0;/* the strict host's plain Danh already counts */
   if(!X.danh&&!X.duc){if(t&&V)t.lux=V;return t}
   t=t||{aff:0,danh:0,duc:0,why:[],hk:toilHostKind(host),dress:V&&V.v,mk:""};t.danh=(t.danh||0)+X.danh;t.duc=(t.duc||0)+X.duc;t.lux=V;
-  const lab=`Xa xỉ ${V?V.sc:0} giữa dịp ${V&&V.R?V.R.n:""}: ${X.why.join(", ")}`;/* the numbers are in the rider's total */
-  const i=t.why.findIndex(w=>/^y phục /.test(w[0]));if(i>=0)t.why[i]=[`${t.why[i][0]} (${lab})`,t.why[i][1]];else t.why.push([`y phục ${V?V.word:""} (${lab})`,0]);
+  const lab=`Xa xỉ ${V?V.sc:0}${V&&V.mk?`, son phấn ${V.mk},`:""} giữa dịp ${V&&V.R?V.R.n:""}: ${X.why.join(", ")}`;/* the numbers are in the rider's total */
+  const i=t.why.findIndex(w=>/^(y phục|ăn vận) /.test(w[0]));if(i>=0)t.why[i]=[`${t.why[i][0]} (${lab})`,t.why[i][1]];else t.why.push([`y phục ${V?V.word:""} (${lab})`,0]);
   return t}catch(e){console.error("lux toilFx",e);return t}}}
 /* thiếu lễ (jaudit) does not fire in mourning white or under a frugal edict — plain is what is asked then */
 (function(){if(typeof aaThieuLe0!=="function")return;const a0=aaThieuLe0;aaThieuLe0=function(p){try{const c=luxCtx(p);if(c==="tang"||c==="edict")return false}catch(e){}return a0.apply(this,arguments)}})();
 /* her phô trương verdicts taken count toward the reputation */
 (function(){if(typeof aaThieuLeApply!=="function")return;const ap0=aaThieuLeApply;aaThieuLeApply=function(host,f0){let L=null;try{L=leAttire(S,"",host)}catch(e){}const r=ap0.apply(this,arguments);
- try{const V=L&&L.toil&&L.toil.lux;if(V&&(V.v==="photruong"||V.v==="vuot")&&(f0||L.delta)&&((f0||L.delta).duc||(f0||L.delta).aff))S.luxRepD=Math.min(2,(S.luxRepD|0)+1)}catch(e){}return r}})();
+ try{const V=L&&L.toil&&L.toil.lux;if(V&&(V.v==="photruong"||V.v==="diem"||V.v==="vuot")&&(f0||L.delta)&&((f0||L.delta).duc||(f0||L.delta).aff))S.luxRepD=Math.min(2,(S.luxRepD|0)+1)}catch(e){}return r}})();
 /* NPCs waiting on Thái hậu: the same extra (Đức), at most once a month (they wait on her far more often than she can) — jtoil applies regard and Danh */
 (function(){try{if(typeof SOC==="object"&&SOC.serveTH){const r0=SOC.serveTH.run;SOC.serveTH.run=function(v){const r=r0.apply(this,arguments);
  try{if(v&&v!==S&&toilOn(v)&&v.luxXM!==S.turn){const F=toilFOf("th");const X=luxExtra(v,"th",F,luxVerdict(v,F,"th"));if(X.duc){ap(v,{duc:X.duc});v.luxXM=S.turn}}}catch(e){}return r}}}catch(e){}})();
@@ -111,7 +116,7 @@ if(typeof toilFx==="function"){const tf0=toilFx;toilFx=function(p,host,F,baseSta
  if(x&&x.sc>0){const V=luxVerdict(v,toilFOf("th"),"th");o.dv=V.v==="tang"||V.v==="vuot"?"photruong":V.v;o.style=V.style}}catch(e){}return o}})();
 
 /* ---------- monthly: reputation (tiếng xa hoa), the frugal edict, lãnh cung ---------- */
-function luxRepTick(p){const B=BAL.lux;let x={lv:1};try{x=luxOf(p)}catch(e){}const add=(x.lv>=BAL.cut.luxRep[1]?2:x.lv>=BAL.cut.luxRep[0]?1:0)+(p===S?Math.min(2,S.luxRepD|0):0);if(p===S)S.luxRepD=0;
+function luxRepTick(p){const B=BAL.lux;let x={lv:1};try{x=luxOf(p,{noMk:1})}catch(e){}const add=(x.lv>=BAL.cut.luxRep[1]?2:x.lv>=BAL.cut.luxRep[0]?1:0)+(p===S?Math.min(2,S.luxRepD|0):0);if(p===S)S.luxRepD=0;
  p.luxRep=cl((p.luxRep|0)+(add||-1),0,B.repMax);return p.luxRep}
 function luxXaHoa(p){return (p.luxRep|0)>=BAL.lux.repOn}
 window.luxXaHoa=luxXaHoa;
@@ -130,7 +135,7 @@ function luxEdictTry(){const B=BAL.lux;if(!S||S.dead)return"";
  const q=typeof queenP==="function"?queenP():null;const by=!S.thDead?"th":q&&q!==S?"hh":"emp";
  S.luxEdict={until:S.turn+B.edictM,at:S.turn,by};return luxEdictCard(S.luxEdict)}
 function luxMonthX(p){const B=BAL.lux;let r="";const me=p===S;if(!p||p.alive===false)return"";
- let x={lv:0,sc:0,bud:1};try{x=luxOf(p)}catch(e){}const ratio=x.bud?x.sc/x.bud:0;
+ let x={lv:0,sc:0,bud:1};try{x=luxOf(p,{noMk:1})}catch(e){}const ratio=x.bud?x.sc/x.bud:0;/* month tick: clothes only (makeup-lux) */
  if(p.out){if(ratio>B.occ.lanh.hi){if(me){apply({duc:B.lanhDuc});r+=`Ở lãnh cung mà còn ăn vận xa xỉ, người ta chê ngươi không biết hối lỗi. Đức ${B.lanhDuc}. `}else ap(p,{duc:B.lanhDuc})}return r}
  const was=luxXaHoa(p);const rep=luxRepTick(p);
  if(rep>=B.repOn){if(me){apply({danh:B.repDanh});if(!S.thDead)apply({th:B.repTh});r+=`Hậu cung gọi ngươi là người xa hoa${!was?" (tiếng xa hoa mới nổi)":""}. Danh ${B.repDanh}${!S.thDead?`, Thái hậu ${B.repTh}`:""}. `}
