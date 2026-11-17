@@ -4,6 +4,7 @@
      every option's and ending's fields (canonical JSON, functions as "fn"), every odds o(A) on many seeded random lives (=== bit-identical),
      every go: closure run on seeded lives with the effect calls (relAdd, oanAdd, e67ally …) stubbed to RECORD their arguments (call logs ===),
      the rare-ending catalogue R97 (j97) and the route / story extras listed in EXTRA below.
+   r2 (reviewer): e67heir / e67merit / e67srvUp / r97srvRk are stubbed too (their moved amounts are compared, not only their empty return).
    r1 (reviewer): the seeded life now holds rivals / kids / S.tm96 (before, 81 go closures and 13 odds fns of j67/j96/roads threw on
    every run and were never compared); every go run also compares S and A after the call; the coverage line counts runs that threw.
    usage: node dev/measure/arc-onecore-same.js [old-ref]   (from the repo root; prints the before/after table, exit 1 on any difference) */
@@ -18,7 +19,7 @@ function DUMP(){const out={opt:{},end:{},odds:{},go:{},rare:{},err:[]};
  try{crypto.getRandomValues=a=>{for(let i=0;i<a.length;i++)a[i]=Math.floor(R()*4294967296);return a}}catch(e){}
  const canon=v=>typeof v==='function'?'fn':Array.isArray(v)?v.map(canon):v&&typeof v==='object'?Object.fromEntries(Object.keys(v).sort().map(k=>[k,canon(v[k])])):v;
  let LOG=[];const arg=a=>typeof a==='number'||typeof a==='string'||typeof a==='boolean'||a==null?a:a===S?'S':(a.id!=null?'#'+a.id:'obj');
- for(const n of ['relAdd','oanAdd','affAdd','kcAf','tdPowAdd','rdOan','rdRel','e67dad','e67bien','e67kho','e67ally','e67pun','e67foe','e67drop','log','evA','harmTxt','apply','ap67'])
+ for(const n of ['relAdd','oanAdd','affAdd','kcAf','tdPowAdd','rdOan','rdRel','e67dad','e67bien','e67kho','e67ally','e67pun','e67foe','e67drop','e67heir','e67merit','e67srvUp','r97srvRk','log','evA','harmTxt','apply','ap67'])
   try{const f=eval(n);if(typeof f==='function')eval(`${n}=function(){LOG.push(["${n}",...[...arguments].map(arg)]);return "${n}"}`)}catch(e){}
  const V=k=>({id:k.length,name:'V'+k,alive:true,rank:3,rel:10,oan:5,ro:{},kids:[],inv:[],loyal:40});
  try{rv67=(A,k)=>V(k||'v');RV=id=>V('x'+id)}catch(e){out.err.push('stub rv67 '+e.message)}

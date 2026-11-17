@@ -1250,8 +1250,8 @@ ARC67.cnv_chu=arcFx("cnv_chu",{o:"cnv",t:"Bí mật của chủ nhân",w:"mis",s
   {n:"Giữ trọn bí mật cho chủ",e:["win","mid"],rt:"{mis} thề sẽ nâng đỡ ngươi.",rf:"Bí mật giữ được, nhưng chủ vẫn dè chừng."},
   {n:"Trình lên Hoàng hậu",e:["win2","lose"],rt:"Hoàng hậu khen ngươi trung thực, đưa ngươi về hầu Càn Ninh cung.",rf:"Không đủ chứng cứ, ngươi bị chủ trả về Nội vụ phủ."},
   {n:"Xin chuyển sang hầu cung khác",e:"mid",lx:"bỏ lại tất cả",rt:"Nội vụ phủ chuyển ngươi đi."}]}},
- E:{win:{tag:"Tâm phúc của chủ",w:"mis",t:"{mis} coi ngươi là người tin cẩn nhất, tiến cử ngươi với Hoàng thượng mỗi khi có dịp.",go:()=>e67merit(6)},
-  win2:{tag:"Được Hoàng hậu trọng dụng",t:"Hoàng hậu khen ngươi trung thực, ban thưởng và để mắt đến ngươi.",go:()=>e67merit(5)},
+ E:{win:{tag:"Tâm phúc của chủ",w:"mis",t:"{mis} coi ngươi là người tin cẩn nhất, tiến cử ngươi với Hoàng thượng mỗi khi có dịp.",go:(_A,_ok,G)=>e67merit(G[0])},
+  win2:{tag:"Được Hoàng hậu trọng dụng",t:"Hoàng hậu khen ngươi trung thực, ban thưởng và để mắt đến ngươi.",go:(_A,_ok,G)=>e67merit(G[0])},
   mid:{tag:"Rời xa bí mật",t:"Ngươi rời xa chuyện ấy, giữ được mình. Mọi thứ bắt đầu lại."},
   lose:{tag:"Bị trả về Nội vụ phủ",t:"Ngươi bị chủ ghét, trả về Nội vụ phủ chờ phân việc khác. Vất vả hơn, nhưng đường vẫn còn."}}});
 ARC67.cnv_ban=arcFx("cnv_ban",{o:"cnv",t:"Chị em đồng hương",w:"maid",sj:"chuyện Xuân Đào bị vu",g:"Xuân Đào, cô gái cùng quê vào cung một đợt với ngươi, bị vu ăn cắp vòng ngọc của chủ. Cứu tri kỷ là đắc tội người khác; bỏ bạn thì lương tâm cắn rứt.",
@@ -1279,7 +1279,7 @@ ARC67.cnv_ban=arcFx("cnv_ban",{o:"cnv",t:"Chị em đồng hương",w:"maid",sj:
   {n:"Đứng ra tố Thu Cúc",e:["win","lose"],rt:"Vòng ngọc tìm thấy trong đồ của Thu Cúc. Xuân Đào được tha.",rf:"Không đủ chứng cứ, ngươi bị phạt vì vu cáo."},
   {n:"Xin chủ nhẹ tay với Xuân Đào",e:["mid","lose"],rt:"Chủ giảm phạt, Xuân Đào chỉ bị đổi đi.",rf:"Chủ không nghe."},
   {n:"Im lặng",e:"mid",lx:"mất một tri kỷ",rt:"Ngươi cúi đầu."}]}},
- E:{win:{tag:"Cứu được tri kỷ",t:"Xuân Đào được minh oan, chủ khen ngươi tinh ý, còn giao thêm việc. Cả đám cung nữ nể ngươi.",go:()=>e67merit(6)},
+ E:{win:{tag:"Cứu được tri kỷ",t:"Xuân Đào được minh oan, chủ khen ngươi tinh ý, còn giao thêm việc. Cả đám cung nữ nể ngươi.",go:(_A,_ok,G)=>e67merit(G[0])},
   mid:{tag:"Bạn đi xa",t:"Xuân Đào bị đổi đi cung khác. Hai chị em thỉnh thoảng gửi nhau chiếc bánh."},
   lose:{tag:"Bị phạt vì vu cáo",t:"Ngươi bị phạt quỳ, Chủ tin giảm. Thu Cúc đắc ý."}}});
 ARC67.cnv_mat=arcFx("cnv_mat",{o:"cnv",t:"Ánh mắt nơi hành lang",w:"emp",sj:"chuyện Hoàng thượng để ý ngươi",g:"Một chiều mưa, Hoàng thượng dừng lại dưới mái hiên nơi ngươi đứng hầu. Từ hôm ấy, ánh mắt ngài cứ tìm ngươi. Chủ nhân đã bắt đầu để ý.",
@@ -1308,7 +1308,7 @@ ARC67.cnv_mat=arcFx("cnv_mat",{o:"cnv",t:"Ánh mắt nơi hành lang",w:"emp",sj
   {n:"Rót rượu rồi lui, nhường chủ",e:["win2","mid"],rt:"Chủ cảm động, tự tay tiến cử ngươi.",rf:"Chủ vui, nhưng chưa nghĩ đến ngươi."},
   {n:"Cáo ốm không ra",e:"mid",lx:"lỡ dịp",rt:"Ngươi ở trong phòng."}]}},
  E:{win:{tag:"Được Hoàng thượng xin về",w:"emp",t:"Hoàng thượng nhớ tên ngươi, hỏi chủ xin người. Con đường lên phi tần đã mở."},
-  win2:{tag:"Chủ tiến cử",w:"mis",t:"Chủ thương ngươi, tự tay tiến cử. Hoàng thượng để ý ngươi, chủ cũng không ghen.",go:()=>e67merit(5)},
+  win2:{tag:"Chủ tiến cử",w:"mis",t:"Chủ thương ngươi, tự tay tiến cử. Hoàng thượng để ý ngươi, chủ cũng không ghen.",go:(_A,_ok,G)=>e67merit(G[0])},
   mid:{tag:"Chưa đến lúc",t:"Hoàng thượng vẫn nhớ ngươi, nhưng chưa phải lúc."},
   lose:{tag:"Chủ ghen",t:"Chủ ghen, đày ngươi làm việc nặng. Hoàng thượng ít thấy ngươi hơn."}}});
 ARC67.cnv_ma=arcFx("cnv_ma",{o:"cnv",t:"Ma ma dạy việc",w:"maid",sj:"chuyện Lưu ma ma",g:"Lưu ma ma nghiêm khắc nhất Nội vụ phủ chọn ngươi để dạy việc. Bà nói: ‘Qua được ta, ngươi sẽ thành chưởng sự. Không qua, ngươi về giặt áo.’",
@@ -1336,8 +1336,8 @@ ARC67.cnv_ma=arcFx("cnv_ma",{o:"cnv",t:"Ma ma dạy việc",w:"maid",sj:"chuyệ
   {n:"Làm hết sức, không cầu cạnh",e:["win","mid"],rt:"Ma ma chấm ngươi đứng đầu.",rf:"Ngươi làm tốt, nhưng chưa đứng đầu."},
   {n:"Nhờ ma ma nâng đỡ",e:["win2","lose"],rt:"Ma ma nâng ngươi lên.",rf:"Ma ma ghét kẻ cầu cạnh, đánh trượt ngươi."},
   {n:"Xin hoãn khảo",e:"mid",lx:"chờ thêm một năm",rt:"Ngươi xin hoãn."}]}},
- E:{win:{tag:"Học trò giỏi của Lưu ma ma",t:"Ngươi đứng đầu kỳ khảo, được ma ma tiến cử lên một bậc. Cả Nội vụ phủ biết tên ngươi.",go:()=>e67srvUp(10)},
-  win2:{tag:"Được ma ma nâng đỡ",t:"Ma ma nâng ngươi lên một bậc. Ngươi có một chỗ dựa trong Nội vụ phủ.",go:()=>e67srvUp(6)},
+ E:{win:{tag:"Học trò giỏi của Lưu ma ma",t:"Ngươi đứng đầu kỳ khảo, được ma ma tiến cử lên một bậc. Cả Nội vụ phủ biết tên ngươi.",go:(_A,_ok,G)=>e67srvUp(G[0])},
+  win2:{tag:"Được ma ma nâng đỡ",t:"Ma ma nâng ngươi lên một bậc. Ngươi có một chỗ dựa trong Nội vụ phủ.",go:(_A,_ok,G)=>e67srvUp(G[0])},
   mid:{tag:"Chờ dịp khác",t:"Ngươi chưa được thăng, nhưng tay nghề đã khác hẳn."},
   lose:{tag:"Bị ma ma đánh trượt",t:"Ma ma đánh trượt ngươi. Ngươi phải làm lại từ đầu."}}});
 /* ================= SHARED ARCS (any origin, drawn later in the life) ================= */

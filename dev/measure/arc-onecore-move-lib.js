@@ -24,7 +24,7 @@ function members(m,i,arr){const end=close(m,i);const out=[];let j=i+1;
   out.push({key,ks,vs,ve:j})}
  return out}
 const NUMV='[+-]?\\d+(?:\\.\\d+)?';
-const AMT=new RegExp('\\b(?:rdOan|rdRel|relAdd|oanAdd|affAdd|kcAf|tdPowAdd|e67(?:dad|bien|kho|heir|ally|pun|foe|drop))\\((?:(?:[^()]|\\([^()]*\\))*?[(,])?\\s*(?:[\\w$.!]+\\s*\\?\\s*)?'+NUMV+'(?:\\s*:\\s*'+NUMV+')?\\s*\\)','g');
+const AMT=new RegExp('\\b(?:rdOan|rdRel|relAdd|oanAdd|affAdd|kcAf|tdPowAdd|e67(?:dad|bien|kho|heir|ally|pun|foe|drop|merit|srvUp))\\((?:(?:[^()]|\\([^()]*\\))*?[(,])?\\s*(?:[\\w$.!]+\\s*\\?\\s*)?'+NUMV+'(?:\\s*:\\s*'+NUMV+')?\\s*\\)','g');
 const TAIL=new RegExp('((?:[\\w$.!]+\\s*\\?\\s*)?)('+NUMV+')(?:(\\s*:\\s*)('+NUMV+'))?\\s*\\)$');
 const LIT_STAT=/^\{(\s*[A-Za-z_$]+\s*:\s*-?\d+(\.\d+)?\s*,?)*\s*\}$/;
 /* cut "key:value" and one neighbouring comma */
