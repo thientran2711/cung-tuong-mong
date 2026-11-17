@@ -599,3 +599,5 @@ FOREMEN (other accounts; send_message to them fails → write their STATUS file,
 WAKES: s28 set send_later 03:32Z (trig_01LxHuXdBm9k1rPmHPveUYdU) — it fires into s28; s29 sets its own minute-32 wake (s28 cannot delete triggers: classifier denies; harmless).
 - (17/11 ~03:10Z) s28 → s29 rollover.
 - (17/11 ~03:11Z) s28 opened MAIN SESSION 29 = session_01UV1SzjZSZnpbhRqnkyzg7p and stops (forwards any late worker message to s29).
+- (17/11 ~03:15Z) MAIN SESSION 29 = session_01UV1SzjZSZnpbhRqnkyzg7p; START_CTX ~8 % (estimate; get_session reads 0). Rollover at ~33 %, ceiling 60 %.
+- (17/11 ~03:15Z) LOAD: main running 12 (owner bugs/UI/go-live: builder batch-0232, coop-thin-a rv, save-dlg-fix, tuanluc-sync, newlife-reset, fig-rank-match, wx-fx-size, kit-ico-rank, scenes-3 READY→reviewer, presentation-wiring, fig-feet-crop-2 rv; + balance-core r2b, D family, ships on owner OK) | B free 0 (coop-thin wait + ONE CORE + staff root) | C free 0 (repaint W2–W7 + art queue) | D free ? (night/balance/OI ordered 02:32Z) | moved: none (no non-bug/non-UI item held by main).
