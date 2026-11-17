@@ -24,10 +24,14 @@ PRIORITY #1 CHECK: OD 17/11 ~23:30Z (smudge = CODE on the makeup layer, not Magn
 - Lip off the mouth in r1 samples = the FROZEN face-fit (the §60 colour layer's own lip is already off at level 0 on that picture; the smudge follows the same img/mk-fit points). A contact sheet of 24 consorts showed ~half have the pasted-lip fit. Samples re-shot on por/fig-consort-c19-kc-a18 whose lips fit. No re-fit done (OD 04:05Z).
 - NPC path checked: dev/test/smudge-code.js lifts the 'seen' rule for one NPC woman (rival, own portrait with face points) and confirms the klk-smu layer is drawn (sampled colours). In play an unscouted woman shows no marks (fxSeen).
 
+## r3 (verdict s39 r2)
+- (a) every smudge layer (all levels, NPC path too — same function) is multiplied by a skin mask measured from the picture's own skin-coloured pixels (blurred so eyes/lips are bridged, soft edge inside the real face edge, cut at the chin): nothing on hair / background / neck.
+- (b) lip smear = soft halo along the lower lip + a feathered drag from one corner that fades out; no polygon, no hard edge, smaller.
+- Decision recorded (s39): lash-run only when there is eye makeup; no makeup + crying = red eyes/nose tint (LOOK_DECALS B), no grey streaks → not in this branch.
+
 ## Open items / follow-ups
-- NOT done: "no makeup + crying = lash-run only" (lkGive/lkItem keep requiring makeup for smu; chip wording + Sắc would need a separate tears state). Needs owner/main decision.
 - Small figure faces (~40 px): nhẹ barely visible, vừa/nặng read as a tear stain.
 - Shots outside git; built root files not committed.
 
 ## State
-branch review/smudge-code 73c87f7 (pushed). Waiting for verdict.
+branch review/smudge-code 245aeeb (pushed). Waiting for verdict.
