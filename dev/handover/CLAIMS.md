@@ -836,3 +836,5 @@
 | IMAGE SWEEP (sonnet; git images out of main + CDN _review leftovers of finished topics; MAIN s33 15:40Z) | review/image-sweep | D | session_01964izETC9aNsnh7fPiiwPp | RUNNING | 17/11 15:58Z |
 | REVIEW one-core-jkc r1 84129fa23 (opus BIG; brief briefs/review-one-core-jkc.md) | review/one-core-jkc-r1 | B | session_01N1tNP2T3QBr5EHz4r5RAmd | RUNNING | 17/11 16:00Z |
 | one-core-jkc #2 (locks + fx amounts + game-wide odb; opus; brief briefs/one-core-jkc-2.md) | review/one-core-jkc-2 | B | session_01N1tNP6ZrnHFQKY5RtJnzfE | RUNNING | 17/11 16:00Z |
+| loading-words-r1 PASS d4318833 → builder batch s32a; reviewer archived | review/loading-words-r1 | MAIN s33 | session_01UV1SzhfMi68Cmn88G2Yqze | PASS → BATCH | 17/11 16:03Z |
+| loading-words-2: hide English boot diag line + remove regex lookbehind (old Safari) whole family + fix update-notes test | review/loading-words-2 | MAIN s33 | session_01UV1SzkaNQaeHGcLrqFrzzQ | RUNNING | 17/11 16:03Z |
