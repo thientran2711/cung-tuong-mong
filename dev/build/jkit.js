@@ -36,15 +36,25 @@ window.kitPetClass=kitPetClass;window.kitPetOf=kitPetOf;window.kitPetArt=kitPetA
    week book): alpha bbox (t,b,l,r) + ht = head top = first rows of fair forehead skin minus a hair allowance, so crowns, hairpins and
    phoenix headdresses above the head are NOT counted as height. Returns the result when ready, else null and calls cb once measured.
    (Same code as review/men jk4; the cache lives on window so a second identical copy can never clash.) */
+/* review/fig-headtop (owner 17/11): people stand level by the HEAD TOP (skull top), never by hair bun / hairpins / crown / hat — those stick out above.
+   kitFigTop(b) = THE head-top line of a measured figure (fraction of the picture height; the painted top when the figure has no table row, e.g. a pet or silhouette);
+   every layout measures body = kitFigTop .. feet. The row comes from img/fig-ht.json { "<file>": head top in 1/4000 of the picture height } (dev/art/headtop/headtop.py, face mesh). */
+/* half width of a standard woman's visible art, in body heights x picture aspect: .43 aspect x .862 / 2 (measured on fig-consort-*, see dev/handover/reports/fig-headtop.md) */
+const KIT_FIG_HALF=.185;
+const KIT_HT=window.__KITHT||(window.__KITHT={m:null,s:0,w:[],bad:0});
+function kitHtLoad(cb){if(KIT_HT.m)return true;if(cb)KIT_HT.w.push(cb);if(!KIT_HT.s){KIT_HT.s=1;
+ const fin=(m,bad)=>{if(KIT_HT.m)return;KIT_HT.m=m;KIT_HT.bad=bad?1:0;const L=KIT_HT.w;KIT_HT.w=[];L.forEach(f=>{try{f()}catch(e){}});if(bad)setTimeout(()=>{KIT_HT.m=null;KIT_HT.s=0;KIT_HT.bad=0;try{kitHtLoad()}catch(e){}},20000)};/* a failed load is not final: the figures wait at most 8 s, then use the painted top and are measured again after the retry */
+ const to=setTimeout(()=>fin({},1),8000);
+ try{fetch("img/fig-ht.json").then(r=>r.ok?r.json():Promise.reject()).then(m=>{clearTimeout(to);fin(m||{},!m)}).catch(()=>{clearTimeout(to);fin({},1)})}catch(e){clearTimeout(to);fin({},1)}}return false}
+function kitHtOf(src){const m=KIT_HT.m;if(!m)return null;const n=String(src||"").split("?")[0].split("/").pop();const v=m[n];return typeof v==="number"?v/4000:null}
+function kitFigTop(b){return b&&b.ht!=null&&b.ht>b.t?b.ht:(b?b.t:0)}
+window.kitFigTop=kitFigTop;window.kitHtLoad=kitHtLoad;window.kitHtOf=kitHtOf;
 function kitFigBody(src,cb){const KIT_FB=window.__KITFB||(window.__KITFB={});const o=KIT_FB[src];if(o&&o.v)return o.v;if(o){o.w.push(cb);return null}const e={v:null,w:[cb]};KIT_FB[src]=e;
- const done=v=>{e.v=v;const L=e.w;e.w=[];L.forEach(f=>{try{f&&f()}catch(x){}})};const im=new Image();im.decoding="async";/* review/stage-side: pictures live on the CDN (cross-origin): without CORS the canvas is tainted, getImageData throws and every figure measured as its whole image box (cores far too wide → paging, crowding) */im.crossOrigin="anonymous";
+ const done=v=>{e.v=v;if(KIT_HT.bad&&/fig-/.test(src))setTimeout(()=>{if(KIT_FB[src]===e)delete KIT_FB[src]},21000);const L=e.w;e.w=[];L.forEach(f=>{try{f&&f()}catch(x){}})};const im=new Image();im.decoding="async";/* review/stage-side: pictures live on the CDN (cross-origin): without CORS the canvas is tainted, getImageData throws and every figure measured as its whole image box (cores far too wide → paging, crowding) */im.crossOrigin="anonymous";
  im.onload=()=>{let v={t:0,b:1,l:0,r:1,ht:0,ar:im.naturalWidth/Math.max(1,im.naturalHeight)};try{const nh=im.naturalHeight,nw=im.naturalWidth,h=Math.min(500,nh),w=Math.max(1,Math.round(nw*h/nh));
    const c=document.createElement("canvas");c.width=w;c.height=h;const x=c.getContext("2d",{willReadFrequently:true});x.drawImage(im,0,0,w,h);const d=x.getImageData(0,0,w,h).data;
    let t=h,b=-1,l=w,r=-1;for(let y=0;y<h;y++){const q=y*w*4;for(let i=0;i<w;i++){if(d[q+i*4+3]>40){if(y<t)t=y;if(y>b)b=y;if(i<l)l=i;if(i>r)r=i}}}
-   if(b>t){let sk=-1;const lim=t+Math.round((b-t)*.45),need=Math.max(3,Math.round(w*.012));
-    for(let y=t;y<=lim&&sk<0;y++){const q=y*w*4;let n=0;for(let i=l;i<=r;i++){const k=q+i*4;if(d[k+3]<200)continue;const R=d[k],G=d[k+1],B=d[k+2];
-      if(R>150&&G>105&&B>85&&R-G>=8&&R-G<=62&&G-B>=-4&&G-B<=48&&R-B<=95)n++}if(n>=need)sk=y}
-    const ht=sk>=0?Math.max(t,sk-Math.round((b-sk)*.045)):t;
+   if(b>t){const hq=kitHtOf(src);const ht=hq!=null?Math.max(t,Math.min(b-Math.round((b-t)*.2),Math.round(hq*h))):t;/* review/fig-headtop: ht from the HEAD-TOP table (img/fig-ht.json, face mesh, dev/art/headtop); the old gold-vs-skin colour test took a gold crown for skin, so ht = painted top for every crowned figure */
     /* CORE column (owner 11/15): the torso / skirt column — the narrowest opaque run (≥ .4 of the bbox, so a gap row between arm and body is skipped) through the body centre on the waist-to-skirt band
        (35–80 % of the body), ×1.2; sleeve flare beyond that is not counted (it may overlap a neighbour). cl/cr = its left/right. */
     const bh=b-ht,c0=Math.round((l+r)/2);let cl=l,cr=r+1;
@@ -56,8 +66,10 @@ function kitFigBody(src,cb){const KIT_FB=window.__KITFB||(window.__KITFB={});con
        down to k/20 of the painted height (fractions of the picture width), so a dialog can fit "head → knees" into a capped column */
     const wl=[],wr=[];let ml=w,mr=-1;for(let k=0,y=t;k<=20;k++){const ye=t+Math.round((b-t)*k/20);for(;y<=ye;y++){const q=y*w*4;for(let i=0;i<ml;i++)if(d[q+i*4+3]>40){ml=i;break}for(let i=w-1;i>mr;i--)if(d[q+i*4+3]>40){mr=i;break}}
      wl.push((mr<0?l:ml)/w);wr.push((mr<0?r+1:mr+1)/w)}
-    v={t:t/h,b:(b+1)/h,l:l/w,r:(r+1)/w,ht:ht/h,ar:nw/nh,cl:cl/w,cr:cr/w,wl,wr}}}catch(x){}done(v)};
- im.onerror=()=>{done({t:0,b:1,l:0,r:1,ht:0,ar:.45});setTimeout(()=>{if(KIT_FB[src]===e)delete KIT_FB[src]},1500)};/* review/stage-fig-size: a failed load is not cached for good (it fixed a wrong .45 aspect = squashed figure); measured again next time */im.src=src;return null}
+    v={t:t/h,b:(b+1)/h,l:l/w,r:(r+1)/w,ht:ht/h,ar:nw/nh,cl:cl/w,cr:cr/w,wl,wr}}}catch(x){}
+   /* review/fig-headtop (owner 17/11 "exactly location"): a grey silhouette fills its whole picture width (hem to hem) while a real woman's art is ~.86 of hers; its l..r (what the slot clamp kitSlotIn pushes inside the stage) are those of a standard figure of the same body, so the silhouette stands at the SAME x as the real person in that slot, never nudged inwards (the gap to the next person is the slot gap) */
+   try{if(/unknown-fig-/.test(src)&&v.cl!=null&&v.cr>v.cl){const mid=(v.cl+v.cr)/2,hw=KIT_FIG_HALF/Math.max(.2,v.ar);v.l=Math.max(0,mid-hw);v.r=Math.min(1,mid+hw);v.wl=v.wl.map(()=>v.l);v.wr=v.wr.map(()=>v.r)}}catch(x){}done(v)};
+ im.onerror=()=>{done({t:0,b:1,l:0,r:1,ht:0,ar:.45});setTimeout(()=>{if(KIT_FB[src]===e)delete KIT_FB[src]},1500)};/* review/stage-fig-size: a failed load is not cached for good (it fixed a wrong .45 aspect = squashed figure); measured again next time */if(kitHtLoad(()=>{im.src=src}))im.src=src;/* review/fig-headtop: the picture is measured only once the head-top table is in (a figure measured without it would take its crown for its head and stay cached) */return null}
 /* KIT 34.6 · kitBookFig(b, fac, H, o) — the ONE body size of a figure on a BOOK page (owner 16/11 "Nhân vật sao chưa theo tỉ lệ chuẩn": the Tuần lục
    silhouette stood far bigger than Thái hậu beside it: the book sized the whole PICTURE BOX, the silhouette box has no margin, and a wide real figure
    (Thái hậu) was additionally shrunk to ≥ 85 %). Same measurement as the stage (kitEsOvFit) and the dialog (kitDpFit): the body = head top (ht, else painted
@@ -97,7 +109,7 @@ function kitSlotFloor(sH){return Math.max(sH*.03,KIT_SLOTS.band)}
 function kitPetSpot(cx,sw){return cx+KIT_SLOTS.pet.sx*sw}
 window.KIT_SLOTS=KIT_SLOTS;window.kitSlotIn=kitSlotIn;window.kitSlotsN=kitSlotsN;window.kitSlotFloor=kitSlotFloor;window.kitPetSpot=kitPetSpot;
 window.kitSlotSwE=kitSlotSwE;window.kitSlotCxE=kitSlotCxE;window.kitSlotSw=kitSlotSw;window.kitSlotCx=kitSlotCx;window.kitSlotScale=kitSlotScale;window.kitSlotNeed=kitSlotNeed;
-function kitBookFig(b,fac,H,o){const bt=b.ht>b.t?b.ht:b.t,span=Math.max(.2,b.b-bt),rel=o&&o.stage?Math.min(KIT_FIG.h*H,KIT_FIG.maxPx):H/KIT_FIG.man,body=Math.min(rel*(fac||1),H*.98),ih=body/span;return{ih,iw:ih*(b.ar||.45),dy:ih*(1-b.b),body,span}}
+function kitBookFig(b,fac,H,o){const bt=kitFigTop(b),span=Math.max(.2,b.b-bt),rel=o&&o.stage?Math.min(KIT_FIG.h*H,KIT_FIG.maxPx):H/KIT_FIG.man,body=Math.min(rel*(fac||1),H*.98),ih=body/span;return{ih,iw:ih*(b.ar||.45),dy:ih*(1-b.b),body,span}}
 window.kitBookFig=kitBookFig;
 /* KIT 33.4 · kitImgErr — the ONE null-safe fallback for inline <img onerror>: a picture that fails after a re-render detached it
    does nothing (no "reading 'classList' of null" page errors). o.sel: ancestor to mark (default the parent); o.cls: class to add;
