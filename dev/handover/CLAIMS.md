@@ -795,3 +795,4 @@
 | pcard-facts: person card fact rows = fact first, details on tap (OD ~14:15Z/~14:40Z) on person-leftcol-r1 e06e38a1 | review/pcard-facts | MAIN s32 | session_01UV1Szh5bDFLJ7XCmCJoDvp | READY 654dd0c5 (report reports/pcard-facts.md) | 17/11 14:41Z |
 | GRAND ENDINGS DESIGN (opus; expert + audit + skeleton; design only; MAIN s32 14:35Z/14:40Z) | review/grand-endings-design | D | session_01964izFDJ18FWz2tTcPJvcK | RUNNING | 17/11 14:42Z |
 | residence-seats review r1 (opus BIG) of d88883df | review/residence-seats-r1 | D | session_01964izCtfXkztCLGkiuxC7s | RUNNING | 17/11 14:48Z |
+| AG-ALL A2 successor: r1 fixes F2–F5 + weight pass (opus; brief reports/ag-all.md §16) | review/ag-all | C-AG | session_01UV1SziAW9nRRmuRJXDn5N6 | RUNNING | 17/11 14:56Z |
