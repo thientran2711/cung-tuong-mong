@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"bad6d59f+","t":"2026-11-17T03:41Z","c":"Chơi chung: chuẩn bị đường truyền gọn nhẹ hơn giữa hai máy; khi chơi chưa có gì thay đổi.","b":"424aff341b45","h":[{"s":"babc9b4a","t":"2026-11-17T01:39Z","c":"Chơi chung không còn treo máy vì tên bạn lặp chữ; số bóng người trên dư đồ khớp đúng người đang ở đó; việc có hạn giờ hiện đồng hồ ngay dướ…"},{"s":"92685210+","t":"2026-11-17T00:53Z","c":"Khung việc và khung sự kiện bốn cỡ, tranh lấp đầy khung, việc nhắc tên ai hiện chân dung người ấy; phẩm của món đồ nằm ngay trên viền khung…"},{"s":"6f513340","t":"2026-11-16T23:24Z","c":"Vào game mới không còn bật ngay màn lật thẻ, lật thẻ chỉ khi vào buổi tối; dư đồ nhãn giấy mới; việc dài lấn sang buổi sau; lời trong cung …"},{"s":"7a18d957","t":"2026-11-16T22:44Z","c":"review-diemtrang-fx-r1 report"},{"s":"afe2bcbc","t":"2026-11-16T22:25Z","c":"review r1: KIT 84.1a note + report"},{"s":"dea1d445+","t":"2026-11-16T21:32Z","c":"golive lag-play-2: CHANGE line + site rebuilt"},{"s":"674f3af4","t":"2026-11-16T21:21Z","c":"Chơi cùng bạn: bạn chơi chung chưa gặp mặt nay hiện tên gọi chung “Hảo hữu của ta” ở mọi nơi, không còn ẩn thành dấu hỏi."},{"s":"923567d5+","t":"2026-11-16T21:03Z","c":"Hình nhân vật: hết vệt xám ở cổ và viền tối quanh người."},{"s":"59812a63+","t":"2026-11-16T20:41Z","c":"Khung chung: khoảng cách đều nhau ở sổ tuần và thẻ thân phận; hàng sổ gọn, thẻ lật không đè chữ."},{"s":"ab12d6fc","t":"2026-11-16T20:53Z","c":"Tuyết và đom đóm mới, mượt hơn; nền tranh không còn vẽ lại mỗi khung hình."}]};
+window.CTM_BI={"s":"64c39ca2+","t":"2026-11-17T03:57Z","c":"Thẻ tên dưới chân nhân vật không còn bị đẩy xuống khỏi khung hay cắt mất tên khi người đó đang đeo hiệu như «Trăng soi rèm ngọc».","b":"83d0245f6033","h":[{"s":"bad6d59f+","t":"2026-11-17T03:41Z","c":"Chơi chung: chuẩn bị đường truyền gọn nhẹ hơn giữa hai máy; khi chơi chưa có gì thay đổi."},{"s":"babc9b4a","t":"2026-11-17T01:39Z","c":"Chơi chung không còn treo máy vì tên bạn lặp chữ; số bóng người trên dư đồ khớp đúng người đang ở đó; việc có hạn giờ hiện đồng hồ ngay dướ…"},{"s":"92685210+","t":"2026-11-17T00:53Z","c":"Khung việc và khung sự kiện bốn cỡ, tranh lấp đầy khung, việc nhắc tên ai hiện chân dung người ấy; phẩm của món đồ nằm ngay trên viền khung…"},{"s":"6f513340","t":"2026-11-16T23:24Z","c":"Vào game mới không còn bật ngay màn lật thẻ, lật thẻ chỉ khi vào buổi tối; dư đồ nhãn giấy mới; việc dài lấn sang buổi sau; lời trong cung …"},{"s":"7a18d957","t":"2026-11-16T22:44Z","c":"review-diemtrang-fx-r1 report"},{"s":"afe2bcbc","t":"2026-11-16T22:25Z","c":"review r1: KIT 84.1a note + report"},{"s":"dea1d445+","t":"2026-11-16T21:32Z","c":"golive lag-play-2: CHANGE line + site rebuilt"},{"s":"674f3af4","t":"2026-11-16T21:21Z","c":"Chơi cùng bạn: bạn chơi chung chưa gặp mặt nay hiện tên gọi chung “Hảo hữu của ta” ở mọi nơi, không còn ẩn thành dấu hỏi."},{"s":"923567d5+","t":"2026-11-16T21:03Z","c":"Hình nhân vật: hết vệt xám ở cổ và viền tối quanh người."},{"s":"59812a63+","t":"2026-11-16T20:41Z","c":"Khung chung: khoảng cách đều nhau ở sổ tuần và thẻ thân phận; hàng sổ gọn, thẻ lật không đè chữ."}]};
 /* KBOOT — BOOT COVER (owner 15/11 "Khi vừa bấm vào game, có chừng ít hơn 1 giây hiện khung này"; KIT §14.1).
    Before: while the 4 MB page parsed, the browser painted the bare static markup of p1.html (HUD box, a vertical stat label list, empty
    panels, the old 11-tab bar) for ~1 s on a warm open and many seconds on a cold one, before any kit CSS/JS existed.
@@ -4811,12 +4811,12 @@ function kitSlotCxE(i,k,x0,avail){return x0+avail*(i+.5)/Math.max(1,k)}
    many people there are (1 person = slot 1, not the centre); nobody is shrunk or moved to make room — wide skirts / sleeves may overlap (clothing only).
    page = one page wide view (Fold room, Fold place, iPad room page — the Fold page IS the iPad page scaled, KIT §0) → 2 slots;
    spread = the iPad full-screen place painting over the whole spread → 4 slots (2 per page). Others are reached by swiping (33.9).
-   band = px under the feet reserved for the two-line name chip. pet = the following pet's fixed spot: its visible bottom-centre at slot centre + pet.sx × slot width. */
+   band = px under the feet reserved for the tallest name tag = title plate + rank + name (3 lines, fig-tag-chip), so a plate never pushes the name below the stage. pet = the following pet's fixed spot: its visible bottom-centre at slot centre + pet.sx × slot width. */
 /* stage-figsize (owner 16/11 ~21:20Z "người phải cao hơn và to hơn" + s24: Fold slots a little to the RIGHT, nobody clipped): rail = px kept free on the
    LEFT of every stage view for the left rail (#krail: 44 px buttons at 17 px + 5 px air), always, so the slots never move when the rail appears a moment later
    and no head stands under a rail button; edge = px the visible art (kitFigBody l..r, sleeves included) keeps from the stage edge / side column — a slot
    whose figure would be cut there is pulled in by just that much (kitSlotIn), its pet follows it. */
-const KIT_SLOTS={page:2,spread:4,band:50,rail:66,edge:4,pet:{sx:.3}};
+const KIT_SLOTS={page:2,spread:4,band:64,rail:66,edge:4,pet:{sx:.3}};
 function kitSlotIn(cx,l,r,lo,hi){/* l,r = visible art left/right edge relative to the body centre (l<0<r); returns the centre that keeps [cx+l,cx+r] inside [lo,hi] */
  if(r-l>=hi-lo)return (lo+hi)/2-(l+r)/2;if(cx+l<lo)return lo-l;if(cx+r>hi)return hi-r;return cx}
 function kitSlotsN(st){try{return st&&st.classList.contains("kplfs")&&kitView().pages===2?KIT_SLOTS.spread:KIT_SLOTS.page}catch(e){return KIT_SLOTS.page}}
@@ -6717,7 +6717,8 @@ function j59lay(){const st=document.getElementById("stage");if(!st||!S)return;co
  const F=E.filter(x=>!x.nf);const nfW=Math.max(0,...E.filter(x=>x.nf).map(x=>x.tok.offsetWidth));
  const KA=st.__kfa;/* KIT_FLOOR anchor (jk2b kitFloorFit): feet on the painted floor line while the figure keeps its kit height */
  let capOn=(()=>{try{return kitView().pages===2}catch(e){return true}})();/* KIT §33 (canon): the maxPx cap applies to iPad-wide layouts only; Fold / phones keep the full .79 of their taller stage *//* KIT §0: the left page in the spread and the one-page room are the same page */
- const size=()=>{const fo=kitSlotFloor(sH);/* KIT 33.12 fixed slot table: ONE floor line per stage height (no name-chip or painted-floor shift), so a person snaps to the same x AND y on every stage / place / room */CAP=sH-fo-topR;return{fo,H:Math.max(sH*.2,Math.min(KF.h*sH,CAP,(KF.maxPx&&capOn)?KF.maxPx:1e9))}};
+ let FOX=0;/* fig-tag-chip: floor band the wrapped name tags need (phones: a long rank/plate/name wraps to 4-5 lines) */
+ const size=()=>{const fo=Math.max(kitSlotFloor(sH),FOX);/* KIT 33.12 fixed slot table: ONE floor line per stage height (no name-chip or painted-floor shift), so a person snaps to the same x AND y on every stage / place / room */CAP=sH-fo-topR;return{fo,H:Math.max(sH*.2,Math.min(KF.h*sH,CAP,(KF.maxPx&&capOn)?KF.maxPx:1e9))}};
  const maxF=Math.max(1,...F.map(x=>x.f));
  const widthFor=(z)=>{let rr=rightR;try{const kR=document.getElementById("kshR");const head=sH-z.fo-Math.min(z.H*maxF,sH-z.fo-topR);/* the right plaque column (court chips, maid, Ân sủng) is reserved when it reaches down to the heads: no face or name is ever under it
     (coordinator 11/15, supersedes "may stand under it"); a column that ends above the heads leaves the full width. Compact stages
@@ -6748,6 +6749,7 @@ function j59lay(){const st=document.getElementById("stage");if(!st||!S)return;co
  /* the name chips are at most one slot wide (they wrap, never cut); measure them at that width, then size the floor band for them */
  st.style.setProperty("--j59sw",Math.max(60,G.sw-8).toFixed(0)+"px");
  G=geo(N,Z);
+ {const th=Math.max(0,mt&&mt.firstChild&&!mt.classList.contains("j59off")?mt.firstChild.offsetHeight:0,...E.map(x=>x.tag&&x.tok.style.display!=="none"?x.tag.offsetHeight:0));/* fig-tag-chip: tag top = floor+3, so band >= tag height + 3 + 2 air; only grows past the fixed band when a tag wraps */if(th+5>Z.fo){FOX=Math.ceil(th+5);Z=size();G=geo(N,Z)}}
  const {fo,H}=Z;CAP=sH-fo-topR;
  st.dataset.j59dbg=[N,H.toFixed(0),G.sw.toFixed(0),mxW(H).toFixed(0),mePet?pEx(mePet,H).toFixed(0):0,...F.map(x=>(coreW(x,H)).toFixed(0)+"+"+(x.pet?pEx(x.pet,H).toFixed(0):0))].join(" ");
  /* pages: page 1 = her (slot 1) + N−1 others, then N others per page */
@@ -58136,7 +58138,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="424aff341b45";window.CTM_BUILD=BUILD;
+const BUILD="83d0245f6033";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
