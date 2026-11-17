@@ -27,9 +27,9 @@ Object.assign(BAL,{toil:{khac:1,
   doan:{hopdip:3,hoppham:1,giandi:-1,photruong:-2,moc:-1,vung:-1,vua:0,dep:1,tuyet:2,diem:-2}},
  cap:[-4,3],strictPlainDanh:-1,
  /* other consorts who see her (a rival she meets, everyone at Thỉnh an Hoàng hậu): ghen / quý by nết */
- ghenShowy:2,ghenTuyet:1,ghenMul:{"Kiêu ngạo":1.5,"Tham vọng":1.5,"Hiểm độc":1.2,"Hiền lành":.5,"Nhu mì":.5},crowd:.5,praisePlain:1,frownShowy:-1,
+ ghenShowy:2,ghenTuyet:1,ghenMul:{"Kiêu ngạo":1.5,"Tham vọng":1.5,"Xảo quyệt":1.2,"Ân cần":.5,"Khiêm nhường":.5},crowd:.5,praisePlain:1,frownShowy:-1,
  /* NPC data: chance of a showy / plain day by nết, chance of no makeup, face score = base + Sắc × k ± spread */
- npc:{showy:{"Kiêu ngạo":.35,"Tham vọng":.3},plain:{"Hiền lành":.4,"Nhu mì":.35},showy0:.08,plain0:.1,moc:.1},
+ npc:{showy:{"Kiêu ngạo":.35,"Tham vọng":.3},plain:{"Ân cần":.4,"Khiêm nhường":.35},showy0:.08,plain0:.1,moc:.1},
  /* skill: Sắc / sacDiv + Họa / hoaDiv + ma ma tinh ý (0..1) — widens tolerance, adds up to `skillShare` of the final share */
  sacDiv:250,hoaDiv:8,mama:.1,skillShare:20,
  /* the look on HER face: TOIL_LOOKS / TOIL_MKS; how the look is earned: the diemtrang-score block below (freehand parts, heaviness) */
@@ -180,7 +180,7 @@ function toilNpc(v){const N=BAL.toil.npc,h=wdHash(wdKey(v)+":"+toilWk()),r1=(h%1
 
 /* ---------- the reaction of one host ---------- */
 function toilHostKind(host){if(host==="emp")return toilEmpTaste();let k="normal";try{k=leHostKind(host)}catch(e){}
- if(k==="normal"&&host&&host!=="th"){const T=traitsOf(host);if(T.some(t=>t==="Hiểm độc"||t==="Tham vọng"))k="jealous"}return k}
+ if(k==="normal"&&host&&host!=="th"){const T=traitsOf(host);if(T.some(t=>t==="Xảo quyệt"||t==="Tham vọng"))k="jealous"}return k}
 function toilHostKey(host){return host==="th"?"th":host==="emp"?"emp":host&&host.id!=null?"v"+host.id:"x"}
 function toilSeen(host){const s=S.toilSeen;return !!(s&&s.wk===toilWk()&&s.h&&s.h[toilHostKey(host)])}
 function toilMark(host){if(!S.toilSeen||S.toilSeen.wk!==toilWk())S.toilSeen={wk:toilWk(),h:{}};S.toilSeen.h[toilHostKey(host)]=1}
@@ -234,7 +234,7 @@ if(typeof leAttire==="function"){const la0=leAttire;
  }catch(e){console.error("toil talkOpts",e)}return A}})();
 function toilLook(){const rec=toilToday(S);const mk=toilMk(rec);const dr=toilDress(S,toilFOf(null));return{mk,dv:dr.v,showy:dr.style==="showy",plain:dr.style==="plain"}}
 function toilGhenOf(v,L){const B=BAL.toil;let g=(L.showy?B.ghenShowy:0)+(L.mk==="tuyet"?B.ghenTuyet:0);if(!g)return 0;for(const t of traitsOf(v))if(B.ghenMul[t])g*=B.ghenMul[t];return g}
-function toilRival(v,doIt){if(!v||!toilOn(S)||toilSeen(v))return null;const L=toilLook(),B=BAL.toil;const T=traitsOf(v);const frugal=T.some(t=>t==="Hiền lành"||t==="Nhu mì");
+function toilRival(v,doIt){if(!v||!toilOn(S)||toilSeen(v))return null;const L=toilLook(),B=BAL.toil;const T=traitsOf(v);const frugal=T.some(t=>t==="Ân cần"||t==="Khiêm nhường");
  const g=Math.round(toilGhenOf(v,L));let aff=0,txt="";
  if(frugal&&(L.plain||L.mk==="moc")){aff=B.praisePlain;txt=`nàng ta chuộng giản dị: quý ta +${aff}`}else if(frugal&&L.showy){aff=B.frownShowy;txt=`ta ăn vận phô trương: nàng ta quý ta ${aff}`}
  if((L.mk==="diem"||L.mk==="vung")&&!txt){const n=BAL.toil.teaseGhen;txt=`thấy ta điểm trang ${toilMkW(L.mk)}, nàng ta bớt ghen (Ghen -${n})`;if(doIt){v.ghen=cl((v.ghen||0)-n,0,100);toilMark(v)}return{txt,aff:0,g:0}}
@@ -534,21 +534,21 @@ const TOIL_BAND={
 /* PERSONALITY lines (phase D): a consort reacts in the voice of her trait (TRAITS j1); merged into her pool (key per trait) — the open
    jabs never go to the Empress herself ([lo,mid,hi]) */
 const TOIL_TRAIT={
- "rival-jealous":{"Hiểm độc":["[lo,mid,hi]“Đẹp thế này, giữ được bao lâu thì hay bấy lâu.”","“{Goi} cẩn thận, hoa đẹp hay bị người ta bẻ.”"],
+ "rival-jealous":{"Xảo quyệt":["[lo,mid,hi]“Đẹp thế này, giữ được bao lâu thì hay bấy lâu.”","“{Goi} cẩn thận, hoa đẹp hay bị người ta bẻ.”"],
   "Kiêu ngạo":["[lo,mid,hi]“Chút châu ngọc ấy, cung {xung} chất đầy rương.”","[lo,mid,hi]“Được ban thưởng một lần đã tưởng mình là ai.”"],
-  "Hiền lành":["“{Goi} đẹp quá, {xung} nhìn mà vui lây.”","“Ước gì {xung} cũng khéo ăn vận như {goi}.”"],
-  "Đa nghi":["“Trâm ấy ở đâu ra vậy? {Xung} chưa thấy Nội vụ phủ phát.”","[lo,mid,hi]“{Goi} diện thế này, hẳn có hẹn với ai?”"],
+  "Ân cần":["“{Goi} đẹp quá, {xung} nhìn mà vui lây.”","“Ước gì {xung} cũng khéo ăn vận như {goi}.”"],
+  "Kín đáo":["“Trâm ấy ở đâu ra vậy? {Xung} chưa thấy Nội vụ phủ phát.”","[lo,mid,hi]“{Goi} diện thế này, hẳn có hẹn với ai?”"],
   "Tham vọng":["“Hôm nay {goi} đi trước một bước, ngày mai chưa biết ai hơn ai.”","“Hoàng thượng thích kiểu này sao? {Xung} ghi nhớ.”"],
-  "Nhu mì":["“{Xung}… {xung} chẳng bao giờ dám diện như {goi}.”","“{Goi} đẹp quá, {xung} đứng cạnh mà ngượng.”"]},
- "rival-tease":{"Hiểm độc":["[lo,mid,hi]“Phấn son đậm thế, che được mặt chứ che sao được lòng.” Nàng ta cười rất dịu."],
+  "Khiêm nhường":["“{Xung}… {xung} chẳng bao giờ dám diện như {goi}.”","“{Goi} đẹp quá, {xung} đứng cạnh mà ngượng.”"]},
+ "rival-tease":{"Xảo quyệt":["[lo,mid,hi]“Phấn son đậm thế, che được mặt chứ che sao được lòng.” Nàng ta cười rất dịu."],
   "Kiêu ngạo":["[lo,mid,hi]“Trang điểm thế này, {xung} còn tưởng cung nữ nào đi lạc.” Nàng ta cười lớn."],
-  "Hiền lành":["[lo,mid,hi]“Phấn hơi đậm một chút thôi, {goi} đừng để bụng.” Nàng ta nói khẽ."],
-  "Đa nghi":["[lo,mid,hi]“Trang điểm kỹ thế, chắc biết trước có người đến?” Nàng ta nheo mắt."],
+  "Ân cần":["[lo,mid,hi]“Phấn hơi đậm một chút thôi, {goi} đừng để bụng.” Nàng ta nói khẽ."],
+  "Kín đáo":["[lo,mid,hi]“Trang điểm kỹ thế, chắc biết trước có người đến?” Nàng ta nheo mắt."],
   "Tham vọng":["[lo,mid,hi]“Đậm đà thế, chắc định giành chỗ đứng gần ngự giá?” Nàng ta cười nhạt."],
-  "Nhu mì":["[lo,mid,hi]“Son của {goi}… hơi thắm thì phải.” Nàng ta nói nhỏ rồi cúi đầu."]},
- "rival-praise":{"Hiểm độc":["“{Goi} giản dị thế, ai nhìn cũng tưởng hiền lành.”"],"Kiêu ngạo":["“Cũng tạm được. Giản dị hợp với {goi}.”"],
-  "Hiền lành":["“{Goi} ăn vận thế này, {xung} nhìn cũng thấy lòng nhẹ.”"],"Đa nghi":["“Giản dị quá… {goi} đang tính điều gì chăng?”"],
-  "Tham vọng":["“Giản dị mà vẫn được để mắt, {xung} phải học {goi} mới được.”"],"Nhu mì":["“{Goi} chọn màu khéo quá, {xung} muốn học mà chẳng dám hỏi.”"]}};
+  "Khiêm nhường":["[lo,mid,hi]“Son của {goi}… hơi thắm thì phải.” Nàng ta nói nhỏ rồi cúi đầu."]},
+ "rival-praise":{"Xảo quyệt":["“{Goi} giản dị thế, ai nhìn cũng tưởng hiền lành.”"],"Kiêu ngạo":["“Cũng tạm được. Giản dị hợp với {goi}.”"],
+  "Ân cần":["“{Goi} ăn vận thế này, {xung} nhìn cũng thấy lòng nhẹ.”"],"Kín đáo":["“Giản dị quá… {goi} đang tính điều gì chăng?”"],
+  "Tham vọng":["“Giản dị mà vẫn được để mắt, {xung} phải học {goi} mới được.”"],"Khiêm nhường":["“{Goi} chọn màu khéo quá, {xung} muốn học mà chẳng dám hỏi.”"]}};
 window.TOIL_TRAIT=TOIL_TRAIT;
 for(const [k,B] of Object.entries(TOIL_BAND)){const P=TOIL_SAY[k];if(!P)continue;const T=[];for(const [b,L] of Object.entries(B))for(const x of L)T.push(`[${b}]${x}`);for(const sub of Object.keys(P))P[sub]=P[sub].concat(T)}
 window.TOIL_SAY=TOIL_SAY;
@@ -572,7 +572,7 @@ function toilSay(k,ctx){const mk=ctx.mk,dv=ctx.dress;const plain=dv==="giandi",s
   default:sub="any"}
  /* a scolding never uses the warm words (no "con" / "ái phi" while she is being told off); praise follows the real relation */
  const bad=/scold|dislike|jealous|tease/.test(k);let m;try{m=sp?kAddr(sp,S).m:"cool"}catch(e){m="cool"}if(bad&&m==="warm")m="cool";if(!bad&&m==="cold")m="cool";
- let L=P[sub]||P.any,key="toil:"+k+":"+sub;const TT=TOIL_TRAIT[k]&&sp&&sp.trait&&TOIL_TRAIT[k][sp.trait];if(TT){L=L.concat(TT);key+=":"+sp.trait}
+ let L=P[sub]||P.any,key="toil:"+k+":"+sub;const tk=TOIL_TRAIT[k]&&sp&&traitsOf(sp).find(x=>TOIL_TRAIT[k][x]),TT=tk&&TOIL_TRAIT[k][tk];if(TT){L=L.concat(TT);key+=":"+tk}
  const said=kLine(key,L,{sp,ls:S,m});
  /* her signature habit (jvoice kHabit), long form only, when the line has no gesture of its own */
  const hb=sp&&typeof sp==="object"&&!/^crowd/.test(k)&&/”$/.test(said)?kHabit(sp):"";/* a crowd reaction is many voices: no one consort's habit (reviewer r1) */return hb?`${said} ${hb}.`:said}

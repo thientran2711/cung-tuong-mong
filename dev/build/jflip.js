@@ -208,10 +208,12 @@ function kitCardFlip(o){o=o||{};const deck=o.deck||[];if(!deck.length)return;
 /* ---------- the result line (VANPHONG: thẻ bài, thị tẩm; names by HER knowledge) ---------- */
 function resHTML(o,d){const tp=o.turned?byId(o.turned):null,fp=o.pick?byId(o.pick):null;let txt="";try{const w=typeof nightWhy==="function"?nightWhy():null;txt=w&&w.text||""}catch(e){}
  const chip=(p,b,s)=>`<div class="kmres">${p?face(p):""}<div><b>${b}</b>${s?`<small>${s}</small>`:""}</div></div>`;
- if(!tp)return chip(null,"Đêm nay Hoàng thượng không lật thẻ bài nào.","");
+ /* r1 (review/npc-agent-ag2-r1): HIS reason (AG2 jagemp empWhyTxt: he rests / remembers her deed / breaks the lệ) in the same result line */
+ let ew="";try{ew=typeof empWhyTxt==="function"?esc(empWhyTxt(S.nightWhy)||""):""}catch(e){}const sp=x=>ew?`${x} ${ew}`:x;
+ if(!tp)return chip(null,"Đêm nay Hoàng thượng không lật thẻ bài nào.",ew);
  const tn=`${esc(rankName(tp))} ${esc(nameOf(tp))}`;
- if(o.pick==="me"&&o.turned==="me")return `${chip(S,"Đêm nay ngươi được thị tẩm.","Thẻ bài của ngươi được lật.")}`;
- if(o.turned===o.pick)return chip(tp,`Tối nay: ${tn}`,"được chọn hầu đêm nay.");
+ if(o.pick==="me"&&o.turned==="me")return `${chip(S,"Đêm nay ngươi được thị tẩm.",sp("Thẻ bài của ngươi được lật."))}`;
+ if(o.turned===o.pick)return chip(tp,`Tối nay: ${tn}`,sp("được chọn hầu đêm nay."));
  /* he turned one card, the night went elsewhere (custom: the Empress on mùng một / rằm; stolen on the way) */
  const why=d.cause==="custom"?esc(txt):"Giữa đường, Hoàng thượng bị mời sang cung khác.";
  const fin=fp?(fp===S?"Đêm nay ngươi được thị tẩm.":`Đêm nay: ${esc(rankName(fp))} ${esc(nameOf(fp))}`):"";
