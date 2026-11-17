@@ -187,17 +187,17 @@ function menReport(by,m,c,y,formal){const at=placeName(y.k);const nm=m.name;cons
  const gain=(o)=>ap(by,o);
  if(c&&(y.r==="tryst"||y.r==="meet")&&(c!==S||m.trysts>0||y.r==="tryst")){const o=odA(by,(formal?42:58)+(by.danh||0)/5+(formal?(by.tamco||0)/4:0));
   oanAdd(c,by,BAL.eff.jmen.menReport);affAdd(c,by,BAL.eff.jmen.menReport_2);
-  if(roll(o)){m.alive=false;log(`<span class="r">${menCap(byT)} báo ${formal?"Cung Chính ti":"thị vệ"}: bắt được ${nm} cùng ${c===S?"ngươi":`${rkName(c)} ${c.name}`} ở ${at}. ${nm} bị xử trảm.</span>`);
+  if(roll(o)){m.alive=false;log(`<span class="r">${menCap(byT)} báo với ${formal?"Cung Chính ti":"thị vệ"}, bắt được ${nm} cùng ${c===S?"ngươi":`${rkName(c)} ${c.name}`} ở ${at}. ${nm} bị xử trảm.</span>`);
    gain({danh:4});if(c===S)deathSentence(`Bị ban chết vì tư thông với ${nm}`);else deathSentence(c,`tư thông với ${nm}`);return true}
-  m.ban=wk()+MEN.banS;log(`<span class="r">${menCap(byT)} báo ${formal?"Cung Chính ti":"thị vệ"} chuyện ở ${at}; ${c===S?"ngươi":`${rkName(c)} ${c.name}`} chối phăng, chỉ ${nm} bị đánh trượng, đuổi ra ngoại triều.</span>`);gain({danh:-2});return false}
+  m.ban=wk()+MEN.banS;log(`<span class="r">${menCap(byT)} báo với ${formal?"Cung Chính ti":"thị vệ"} chuyện ở ${at}; ${c===S?"ngươi":`${rkName(c)} ${c.name}`} chối phăng, chỉ ${nm} bị đánh trượng, đuổi ra ngoại triều.</span>`);gain({danh:-2});return false}
  if(c){const o=formal?odA(by,48+(by.danh||0)/5+(by.tamco||0)/4):100;oanAdd(c,by,BAL.eff.jmen.menReport_3);affAdd(c,by,BAL.eff.jmen.menReport_4);m.ban=wk()+(formal?MEN.banF:MEN.banS);
-  if(roll(o)){log(`<span class="r">${menCap(byT)} báo ${formal?"Cung Chính ti":"thị vệ"}: ${nm} và ${c===S?"ngươi":`${rkName(c)} ${c.name}`} gặp riêng ở ${at}${y.r==="letter"?", trao thư lén":""}.</span>`);
+  if(roll(o)){log(`<span class="r">${menCap(byT)} báo với ${formal?"Cung Chính ti":"thị vệ"} rằng ${nm} và ${c===S?"ngươi":`${rkName(c)} ${c.name}`} gặp riêng ở ${at}${y.r==="letter"?", trao thư lén":""}.</span>`);
    punish(c,y.r==="letter"?"trao thư lén cho nam nhân ra ngoài cung":"gặp riêng nam nhân nơi cấm địa",formal?2:1);gain({danh:3});
    if(by===S&&c!==S&&(c.sung||0)>=60){apply({sung:-2});log("Hoàng thượng không vui vì người ngài thương bị phạt.")}if(by===S)S.th=cl((S.th||0)+2,-100,100);return true}
   log(`<span class="r">${menCap(byT)} trình Cung Chính ti chuyện ở ${at}, nhưng không đủ chứng: ${c===S?"ngươi":`${rkName(c)} ${c.name}`} vô can; ${byT} mang tiếng vu khống.</span>`);gain({danh:-5});return false}
  m.ban=wk()+(formal?MEN.banF:MEN.banS);m.grudge=key(by);m.grudgeN=2;gain({danh:formal?3:2});if(by===S)S.th=cl((S.th||0)+1,-100,100);
  if(formal){const G=menGuards().filter(x=>x!==m&&x.alive);if(G.length){const g=G.slice().sort((a,b)=>(a.loyal||50)-(b.loyal||50))[0];if((g.loyal||50)<BAL.loy.close){g.grudge=key(by);g.grudgeN=1}}}
- log(`${menCap(byT)} báo ${formal?"Cung Chính ti":"thị vệ"}: ${nm} lảng vảng ở ${at} không có lệnh, bị ${formal?"giải ra ngoại triều, cấm vào cung một năm":"đánh trượng, đuổi ra ngoại triều"}.`);return true}
+ log(`${menCap(byT)} báo với ${formal?"Cung Chính ti":"thị vệ"} rằng ${nm} lảng vảng ở ${at} không có lệnh, bị ${formal?"giải ra ngoại triều, cấm vào cung một năm":"đánh trượng, đuổi ra ngoại triều"}.`);return true}
 /* by hides m (and c): a debt and evidence; found → by is punished */
 function menHide(by,m,c,y,eyes){menStat(by===S?"hideMe":"hideNpc");const risk=cl(Math.round(10+eyes*5-(by.tamco||0)/10),4,60);
  if(c&&c!==by){const prev=J78.ctx;if(by===S)J78.ctx={how:"Ngươi giấu giúp, nên biết rõ chuyện",proves:menTrue(m,c,y).replace(/\.$/,"")};try{evA(by,c,y.r==="tryst"?BAL.eff.jmen.evMenHide[0]:BAL.eff.jmen.evMenHide[1])}finally{J78.ctx=prev}affAdd(c,by,BAL.eff.jmen.menHide);oanAdd(c,by,BAL.eff.jmen.menHide_2)}

@@ -49,7 +49,7 @@ function vlFix(p){if(!p||p!==S)return;try{if((p.vl!=null&&!vlIs(p.vl))||(Array.i
 function vlScrubLog(){try{if(!Array.isArray(S.logs)||vlIs(S.vl)||(S.inv||[]).some(vlIs))return;S.logs=S.logs.filter(l=>!/Vết thương trên mặt đã lành, ngươi tháo mạng che/.test(String(l)))}catch(e){}}
 function vlMig(p){try{vlFix(p);if(!p||!p.scar)return;if(p.scar.veil&&!p.vl){const P=Math.min(8,wdPOf(p));p.vl={k:vlKey(P,0),src:"cu",d:typeof wdWhen==="function"?wdWhen():""};
   if(p===S){S.wdk=S.wdk||{};S.wdk[p.vl.k]=1}else{p.wdk=p.wdk||{};p.wdk[p.vl.k]=1}}p.scar.veil=p.vl?1:0}catch(e){}}
-function vlSync(p){if(!p)return;vlFix(p);if(p.scar)vlMig(p);if(!vlNeed(p)&&vlIs(p.vl)){/* only a real veil comes off (never a foreign object in the veil slot) */p.inv=p.inv||[];p.inv.push(p.vl);p.vl=null;
+function vlSync(p){if(!p)return;vlFix(p);if(p.scar)vlMig(p);if(!vlNeed(p)&&vlIs(p.vl)){/* only a real veil comes off (never a foreign object in the veil slot) */p.inv=p.inv||[];p.inv.push(p.vl);p.vl=null;if(p.scar)p.scar.veil=0;/* tuanluc-sync: else vlMig re-made the veil from scar.veil next call: the "healed" line + a new veil in the chest every time */
   if(p===S)try{log("Vết thương trên mặt đã lành, ngươi tháo mạng che, cất vào rương.")}catch(e){}}}
 function vlPeople(){const L=[S];try{for(const v of rivals)if(v&&v!==S)L.push(v)}catch(e){}return L}
 /* r1 (merge with main it-key-guard): j8 itClean (inside normAll / co-op) also moves an old voice memory out of S.vl; vlFix runs FIRST so it still sees
