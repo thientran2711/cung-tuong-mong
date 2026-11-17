@@ -797,3 +797,4 @@
 | residence-seats review r1 (opus BIG) of d88883df | review/residence-seats-r1 | D | session_01964izCtfXkztCLGkiuxC7s | RUNNING | 17/11 14:48Z |
 | AG-ALL A2 successor: r1 fixes F2–F5 + weight pass (opus; brief reports/ag-all.md §16) | review/ag-all | C-AG | session_01UV1SziAW9nRRmuRJXDn5N6 | RUNNING | 17/11 14:56Z |
 | origin-bd-branch r1 PASS 4e50e6ea → lander queue; reviewer + worker archived | review/origin-bd-branch-r1 | B | session_01N1tNP3r4Wz5SfLPnQXnXnJ | PASS (archived) | 17/11 14:56Z |
+| narrow-t3-r1 PASS 07747a9b (412/390 T3 narrow + showModal dup-list root fix; on opt-pic-same-r2) → builder batch s32a; worker + reviewer archived; follow-up: court tab rows + 10-option menu at phone width | review/narrow-t3-r1 | MAIN s32 | session_01UV1SzhfMi68Cmn88G2Yqze | PASS → BATCH | 17/11 14:57Z |
