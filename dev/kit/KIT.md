@@ -3579,6 +3579,9 @@ owner recognises "this one still lacks its picture" in play. They are deliberate
 Every effect is PAINTED (Magnific gpt-2-6, folder ba4aecfe…, Kling clips from painted stills); code only moves / fades / glows painted art.
 Files: CDN `img/fx/` (cdn_sync.py, never git), on demand only (assets.json group `fx`: jload never pre-downloads; sw.js caches each file by
 content the first time it plays). Sources + recipes: `dev/fxwork/` (gens.txt = every Magnific id, slice.py, light.sh, sheet.sh, atlas.json).
+### 68.0 PARTICLE SIZE + PLACE (owner 17/11 "hoa đào bay … hình hoa to quá", review/wx-fx-size)
+ONE size rule for every falling thing (petal-*, osmanthus, leaf, snow, ash, paper): `kfUnit()` (jfx.js) = stage size (sqrt of the stage rect area / 640, clamp .5–1.15), applied in `kfkSp`, so weather, season and every `kitFxBurst` of those kinds scale with the painted stage, never with the device pixel count. A petal is ~11–18 px (a fingernail next to a figure's hand); `kitFxBurst` petal kinds default to scale .65. Weather AND season layers (lay wx / se / se2) are clipped to the stage rectangle (the "petal = season" merged layer too); weather and falling celebration petals (`kfFall`: petals / peach / goldpetals) are hidden while over a stage chip or the place name (`KF_INFO`, `kfOverInfo`): never over text. Radial bursts (flowers, kitBloom) stay free but use the same small size. Test: `node dev/test/wx-fx-size.js <url> <out> <sizes> shots`.
+
 ### 68.1 API (target = element | {x,y} viewport px | null = screen centre; everything fire-and-forget, auto-cleans)
 | call | does |
 |---|---|
