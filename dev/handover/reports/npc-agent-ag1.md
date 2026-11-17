@@ -183,3 +183,37 @@ artW, vu used effSac). NPC Sức floor before spending = BAL.deck.<k>.sucMin.
 | coop-one-world.js | PASS |
 | coop-e2e.js (live Worker) | 61/61 |
 | agent_probe CPU x4 Fold | table in §1, 0 page errors |
+
+### Bot after faults 1–7 (40 lives, run_par sens + inag6, branch d06a8d3f-level, 17/11)
+| measure | main f1509d7c (reviewer) | branch 2298416f (reviewer) | branch r1-fix |
+|---|---|---|---|
+| early death (an7) | 65 % | 80 % | **85 %** |
+| illness / childbirth / poisoned / Xuất cung về quê / Tuổi xuân qua đi | 8 / 1 / ? / 0 / ? | 15 / 2 / ? / 5 / ? | 7 / 4 / 4 / 4 / 11 |
+| births / life | 0.25 | 0.17 | 0.15 (childbirth death 40 %/birth) |
+| years / life · her nights (median/life) | 13.0 | 12.0 | 10.6 · 32 |
+| NPC Sủng / TH at death (median) | 42 / 10 | 31 / -5 | 35 / -3.5 |
+| perf under the bot (CPU x1): slice p95 median / max · qdrop | – | 1.7 / 6.5 | 1.5 / 5 ms · 0 |
+**FAULT 8 is NOT fixed yet** — faults 1–7 did not move it (illness fell 15 → 7, but childbirth, poison, age-out endings rose).
+
+## HANDOVER (worker rollover, 17/11 00:25Z) — faults 1–7 DONE, fault 8 (bot regression) OPEN
+Reason: context 35 % ≥ START_CTX 3 % + 25 % (owner OD:L1217 / 16/11 08:22Z s14). Coordinator opens the successor.
+Successor: work ON review/npc-agent-r1 (tip = this commit). Faults 1–7: sections above (tests green: agent_check 16/16, likes-family,
+npcmind-check, two-way-oldsave, coop-one-world PASS, coop-e2e 61/61, perf table). Do NOT redo them.
+Fault 8 plan (per-cause trace tool is ready: `dev/measure/intrace.js`, evaluate after inpage6 + inag):
+  `cat dev/measure/inpage6.js dev/measure/inag.js dev/measure/intrace.js > dev/measure/inagtr.tmp.js` (do not commit the .tmp), copy main's
+  index.html into the worktree as `main_tmp.html` (untracked), then run BOTH with the same seeds:
+  `node dev/measure/run_par.js root/main_tmp.html sens 20 <out>/main_tr.json inagtr.tmp.js 2 1` and the same with `root/index.html` →
+  per life `x.tr` = AG1b scenes + reactions chosen + khắc/Sức spent on them, NPC TW deeds landed ON her by kind (`aimed`), j40/runAct harm
+  acts ON her by kind (`harm`), months with her Sức < 40, her illness onsets by kind, mean Sức / Sủng. Compare per cause.
+Suspects (not yet proven), in order:
+  1. review/npc-mind (merged into this branch, not on main): j40 `mindMenu` slip = 12 % of harm choices made UNIFORM over the band's acts
+     (poison / pushp / musk get the same weight as rumor) and Tham vọng's target now `mindPickBy` over everyone incl. her (was argmax rank);
+     j4 / j96 / j83 / jlost targets likewise weighted-random instead of argmax → more severe harm reaching the player (poisoned 4, childbirth 4).
+     Test: rerun with `BAL.mind.slip=0` and with the old argmax sites to see which moves early death back.
+  2. AG1b scenes: the bot ("sens") picks the first option with the best fx → "Nghe lén" (fx {}) every time → khắc spent instead of her own
+     deeds/rest; join "Thỉnh an" costs Sức -5. (trace: react / khR / sucR / lowSuc).
+  3. Muted NPC drips not replaced (npcMonthly Thái hậu / Sủng drips): NPC TH falls to < 0 → Thái hậu politics / HH changes around her.
+  4. NPC hostile SOC deeds aimed at her by the loop (provoke / humil / gossip / drop) more often than the old weekly dice (trace: aimed).
+After the fix: rerun 40 lives sens + inag6 (`run_par.js root/index.html sens 40 … inag6 4 1`, ~37 min alone) — early death and illness must be
+within noise of main; add the row to the table above; then SẴN SÀNG KIỂM <sha> here + CLAIMS, message Foreman C (session 10 =
+session_011xDdVSeKM6qi8YXjVTPqrd).
