@@ -53,3 +53,9 @@ STEP (b) memory 2 layers — DRAFT EXISTS, tested 16/16 on the OLD base: branch 
 4. Tap-list ORDER is kit work (kit-figure-mood r3) — MOOD-MEM only supplies cause rows (mkCauses: kind, strength, khắc left, known).
 5. Then: tests (mood-mem, moodknow-step0, ag-moodknow, ag-know, ag-truth, memories.js, mem-upgrade (3–5 random FAILs same as base), mem-coop, one-core-guard, coop-one-world 7+3, QUICKCHECK --cpu 4), site build, push, report, send_message C-AG #5 'SẴN SÀNG KIỂM <sha>'.
 ROLLOVER (verbatim): Workers roll over too (owner 16/11 08:22Z s14, option 1): at START_CTX % + 25 % of the window, ceiling 60 %; a worker may finish if only push + report remain; it writes its handover in its report file and tells its coordinator, and the COORDINATOR opens the successor (never the worker).
+
+### r2 (on step-0 PASS 654b205b, review/mood-mem-r2)
+Cherry-picked (b) 34624061 → ec995ef9 and ghen family 3718d030 → 08eeedd1 (clean). VANPHONG: the reviewer added the Ghen/Chạnh lòng name line (§Mood), so my line now holds only the memory-wake wording (no double rule). Site build fc3fd7d4.
+Tests on fc3fd7d4: mood-mem 16/16 · moodknow-step0 19/19 · ag-moodknow 33/33 · mem-coop ALL OK · ghen-raise-scan 0 direct (30 via ghenUp) · --pg 0 direct (2 via pgUp).
+QUICKCHECK --cpu 4: FAIL only G1 one-core-bind 6 mismatches — identical on 654b205b (the step-0 PASS base) and absent on origin/main → pre-existing, cleared by the main merge (FF after ag-all-2). Rest PASS: open 1334 ms, old save ok, perf new/live render 160/157, tab 277/332, buổi 800/863.
+FEELINGS-18 #2 (session_01UV1Szhqo1wUz89vE6kRkkU) rebased on 6cadd5c3 and changed BAL.memWake.kind.d musk/kidharm/takeaway dau→buon on its branch (dau left EMO) — expected; my branch keeps dau until theirs lands (mwFeel falls back safely).
