@@ -763,3 +763,4 @@ RUNNING (main children; all report to main by send_message — tell them "main =
 OWNER WAITING (one at a time, numbered options at the end): (1) Lượt 62 tin báo timing — (1) by real walk khắc [rec] / (2) always k+2 / (3) other; (2) Lượt 61 Vụng A ?v=11 OK?; then show her the 3-size LOD samples; harm-acts design; C-AG formula table (virtues worked example).
 CLEANUP: CDN img/_review/emo-samples/ (emo-A, emo-A2) — delete (worker archived); old wake trig_01BJEiTEJdEYSa42aSz2shMh fires 17:32Z into s34 (s34 can't delete triggers: permission denied) — s35 sets its own hourly wake at :32.
 LESSONS s34: route EVERY part of an owner idea (s34 sent only rain → she was angry); reviewers often lag one round behind the worker — always tell the reviewer the newest sha; workers must base on the reviewer's PASS sha.
+- (17/11 ~17:21Z) s34 opened MAIN SESSION 35 = session_01UV1Szh8YJw5p4xEr16jgYn (child of s34, depth 4) and stops; s34 forwards any late message to s35.
