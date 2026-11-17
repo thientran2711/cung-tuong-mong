@@ -61,3 +61,21 @@ If the container is gone: rerun clean3.py on por (≈1.5 h with 4 workers, OMP_N
 - QA all 3,927: same w×h, pixel diff outside the mask = 0 (lossless webp). Look: 30 random at 4× — brows/hair intact 30/30; ~1/3 still show a faint/partial mark (pale ornate ty/t at a26–a51); ~2/3 of sampled t 'nomark' are real misses → 2nd pass = hoa-điền #2 session_011xDdVNfSx9r7wqg7ooEXKn.
 - UPLOADED to img/ (same names): 3,927 (uploaded_por.txt on review/hoa-dien-art 65c0c2c5); final --check: 3,890 same, 37+ maid-ty differ = newer files written by W12 (maid trung-y restore) during my upload → left alone. RACE: my upload may have replaced W12 restores done before ~21:50Z on maid ty keys (uploaded_maid_ty.txt, 1,247 keys) — W12 told to re-push its restored keys; #2 cleans them after.
 - Sprites/icons: 320 live (see 21:15Z update). Logs: dev/art/hoa-dien-art/log_por.jsonl. Nothing else pending from this session.
+## UPDATE 17/11 ~23:45Z — hoa-dien #2 (session_011xDdVNfSx9r7wqg7ooEXKn) — fig/hd LIVE, consort-ty por LIVE, HANDOVER (context 26 %, START 5 %)
+PRIORITY #1 CHECK: OD 17/11 ~17:30Z/~17:45Z/~20:00Z | main none (art) | review/hoa-dien-art 8f7586ce | claims hoa-dien-art.
+Foreman now ROOT-12 session_011xDdVP8NwhY7F8EwPHbZsi (ROOT-13 when open). Code + logs: review/hoa-dien-art dev/art/hoa-dien-art/ (README v3).
+### LIVE on CDN (md5 verified; lists in the branch)
+- fig pass 1: 2,842 (uploaded_fig.txt, log_fig.jsonl). hd + hd2 pass 1: 1,238 (uploaded_hd.txt, log_hd*.jsonl). consort-ty por: 492 (uploaded_por_consort_ty.txt, log_cty.jsonl = 450 non-skip + 48 w2c54; 6 nomark).
+- QA every file: size same; fig/hd q98 out_mad ≤ base+0.2; por lossless out_diff 0. Looked at random sheets per family; ROOT-12 OK'd singles (fig, consort-ty).
+### NEW TOOLS
+- guided.py = 2nd pass for twin misses (twin 'nomark' is ~17 % of fig and is usually a REAL miss: re-painted pose, mark small). Pilot 10/12, brows intact.
+- por2.py = POR 2nd pass for faint leftovers (#1's ~30 %): guided mask at por scale on the pass-1 result; looked: removes the leftover outlines, does nothing harmful on already-clean ones.
+- resume.sh (resumable twin runner, PORLOG env), runclean.sh, stage.py (QA + copy to upload dir), look.py.
+### NOT DONE (successor; my container's data is NOT reachable — re-pull from CDN; ORIGINALS: live por of #1's 3,927 are now cleaned, the true originals are only in img/_keep? NO — re-pull is impossible for por originals; use the live pass-1 por as input for por2 (guided needs log_por.jsonl box/anchor only), and for twins PORSRC must be the ORIGINAL por → for twin work on por already live-cleaned, template match still works on the cleaned por (forehead+eyes patch, mark removed is tiny) — check score ≥ 0.93.)
+1. W12 680 maid-ty keys (restored, still marked; NOTHING uploaded): pass 1 done here: por 512 clean/169 nomark, fig 386/124 miss, hd 465/45 miss (logs log_w12_*.jsonl). Rerun: w12_run.sh then w12_run2.sh (por2 + guided) on a fresh pull of img/{por,fig,hd/fig}-<key> (list img/_review/restore-ty/KEYS_RESTORED.txt), look, 4 singles to foreman, upload.
+2. consort-ty twins: fig of the 498 (cty list = log_cty.jsonl names) and hd of the 450 non-w2c (hd of the 48 w2c54 keys HELD: ask lead #7 session_011xDdVNkgEgTqsZJxUh9Xd8 / W2f first).
+3. guided 2nd pass on twin misses: fig 571 (log_fig.jsonl status nomark/noface), hd 76 (log_hd.jsonl) → look → upload.
+4. POR 2nd pass: por2.py on the live 3,413 pass-1 por (uploaded_por.txt minus W12 keys) with log_por.jsonl → look → singles → upload. Then por 'nomark' misses (~1,000 + 169 W12 + 6 cty): no anchor → idea: guided with a per-person median anchor (relative to face) from the clean logs; NOT tried yet.
+5. tn: foreman OK'd: at the END regenerate all 840 img/tn/* with dev/art/tn_make.py from the cleaned live por/fig (same names; do NOT push TN.json); 4 singles first. (Live tn are older paintings, MAD 20–33 vs today's sources; detector can't work at 2–3 px marks.)
+6. HD_ANCHOR table (STEP 3) from the 'anchor' fields of all logs; leftovers by hand (m44-t3 a26/a36).
+Bytes: fig q98 +18 % vs originals (233→275 MB).
