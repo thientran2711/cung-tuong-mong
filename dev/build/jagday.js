@@ -78,7 +78,7 @@ function agBase(fn,args,b){const sur=J95.SUR;const bo=S.buoi;J95.SUR=0;try{S.buo
 const AGD0={};const AGDRAW=[];
 /* other groups join the day draw: agDrawReg(()=>[[person, ledgerId, grp], …]) (part B: maids "maid", servants "srv"); their base row = AGBASE[grp](p,c) */
 function agDrawReg(f){AGDRAW.push(f)}const AGBASE={};function agBaseReg(grp,fn){AGBASE[grp]=fn}/* the unwrapped schedule functions (set at wiring) */
-function agDrawPerson(p,id,from,kind){const D=agDz();const L=D.P[id]=D.P[id]||[];const nB=j95nB();const W=agWorld(p);
+function agDrawPerson(p,id,from,kind,to){const D=agDz();const L=D.P[id]=D.P[id]||[];const nB=to==null?j95nB():Math.min(j95nB(),to+1);const W=agWorld(p);
  const bo=S.buoi;for(let b=from;b<nB;b++){AG.cB=b;S.buoi=b;/* the access rules / weather of THAT buổi (accessOf reads S.buoi) */try{const c=j95c(b);
    let base;if(kind==="emp")base=agBase(AGD0.emp,[c],b)[0];else if(kind==="th")base=agBase(AGD0.th,[c],b)[0];else if(AGBASE[kind])base=agBase(AGBASE[kind],[p,c],b)[0];else base=agBase(AGD0.rv,[p,c],b)[0];
    L[b]=kind==="consort"||kind==="hh"?agDrawB(p,id,b,base,W):(()=>{const s={pl:base[0],a:base[1],t:base[2],why:base[3],k:null,need:null};
@@ -86,12 +86,19 @@ function agDrawPerson(p,id,from,kind){const D=agDz();const L=D.P[id]=D.P[id]||[]
     if(Object.keys(AGREG[kind]||{}).length)return agDrawB(p,id,b,base,W);return s})();
    AGD.stat.slots++}catch(e){agdErr("draw",e)}finally{AG.cB=null;S.buoi=bo}}
  if(kind==='consort')try{D.T[id]=agTop(agNeedsG(p))}catch(e){}}
-function agDayDraw(){const t0=performance.now();const D=agDz();D.d=wk();D.P={};D.T={};AGD.stat.draw++;
- try{if(S.emp)agDrawPerson(S.emp,"emp",0,"emp")}catch(e){agdErr("emp",e)}
- try{if(!S.thDead)agDrawPerson("th","th",0,"th")}catch(e){agdErr("th",e)}
- for(const v of liveRivals(true)){if(!v.alive||v.out)continue;try{agDrawPerson(v,"v"+v.id,0,"consort")}catch(e){agdErr("rv",e)}}
- for(const f of AGDRAW){try{for(const [p,id,kind] of (f()||[]))agDrawPerson(p,id,0,kind)}catch(e){agdErr("drawReg",e)}}
- const ms=performance.now()-t0;window.__agDayMs=ms;AGD.ms.push(ms);if(AGD.ms.length>60)AGD.ms.shift()}
+/* perf (budget BAL.ag.perf): at the start of the day everyone's FIRST buổi is drawn at once (the record needs it now); the later buổi of
+   the same day plan are drawn in slices of BAL.ag.perf.slice ms over the next frames (AGD.q); a buổi that comes before its slice is drawn then */
+function agDayList(){const L=[];if(S.emp)L.push([S.emp,"emp","emp"]);if(!S.thDead)L.push(["th","th","th"]);
+ for(const v of liveRivals(true)){if(!v.alive||v.out)continue;L.push([v,"v"+v.id,"consort"])}
+ for(const f of AGDRAW){try{for(const x of (f()||[]))L.push(x)}catch(e){agdErr("drawReg",e)}}return L}
+function agDayDraw(){const t0=performance.now();const D=agDz();D.d=wk();D.P={};D.T={};AGD.stat.draw++;const b0=agDayB();
+ const L=agDayList();for(const [p,id,kind] of L){try{agDrawPerson(p,id,b0,kind,b0)}catch(e){agdErr("draw0",e)}}
+ AGD.q={d:D.d,L:L.map(x=>x.concat([b0+1])),tm:0};
+ const ms=performance.now()-t0;window.__agDayMs=ms;AGD.ms.push(ms);if(AGD.ms.length>60)AGD.ms.shift();agDaySliceLater()}
+function agDaySliceLater(){const Q=AGD.q;if(!Q||Q.tm||!Q.L.length)return;Q.tm=1;setTimeout(()=>{Q.tm=0;agDaySlice()},0)}
+function agDaySlice(all){const Q=AGD.q;if(!Q)return;const D=agDz();if(Q.d!==D.d||D.d!==wk()){AGD.q=null;return}const t0=performance.now();
+ while(Q.L.length){if(!all&&performance.now()-t0>=BAL.ag.perf.slice)break;const [p,id,kind,from]=Q.L.shift();if(from<j95nB())try{agDrawPerson(p,id,from,kind)}catch(e){agdErr("drawS",e)}}
+ const ms=performance.now()-t0;AGD.ms.push(ms);if(AGD.ms.length>60)AGD.ms.shift();if(Q.L.length)agDaySliceLater();else AGD.q=null}
 /* re-plan at a new buổi (b > 0): her top need changed, or she was touched; chance BAL.ag.day.replan */
 function agTouch(p){try{const id=ledgerId(p);if(!id)return;const z=agZ();z.rp=z.rp||{};z.rp[id]=1;AGD.stat.touch++}catch(e){}}
 function agReplanB(){const D=agDz();if(D.d!==wk())return;const b=agDayB();if(!b||D.rb===wk()+"-"+b)return;D.rb=wk()+"-"+b;const z=agZ();const T=z.rp||{};const R=BAL.ag.day.replan;
@@ -102,7 +109,7 @@ function agReplanB(){const D=agDz();if(D.d!==wk())return;const b=agDayB();if(!b|
   let ch=0;try{ch=agTop(agNeedsG(v))!==D.T[id]?R.need:0}catch(e){}if(T[id])ch=Math.max(ch,R.touch);
   if(ch&&roll(ch)){agDrawPerson(v,id,b,"consort");AGD.stat.replan++}else AGD.stat.keep++}
  z.rp={}}
-function agDayEnsure(){if(!agDOn())return;const D=agDz();if(D.d!==wk())agDayDraw();else agReplanB()}
+function agDayEnsure(){if(!agDOn())return;const D=agDz();if(D.d!==wk())agDayDraw();else{if(AGD.q&&agDayB()>0)agDaySlice(1);agReplanB()}}
 /* the record's row for a person this buổi = her plan */
 function agRow(s){const r=[s.pl,s.a||"go",s.t||null,s.why||""];return [r,r.slice(),r.slice(),r.slice()]}
 /* ---------------- the planned deed lands (AG1 pend / ledger / witness path) ---------------- */
@@ -157,4 +164,4 @@ function agTickX(){if(!agDOn())return;const D=agDz();if(D.d!==wk())return;const 
 function agPlanned(){const z=agZ(),key=agKey(),L=[];for(const p of z.pend||[])if(p.key===key&&!p.gone&&!p.drop)L.push({who:p.id,k:p.k,t:p.t,pl:p.pl,kh:p.kh,why:p.why,wit:1});
  const D=agDz();if(D.d===wk())for(const id in D.P){const s=D.P[id][agDayB()];if(s&&s.k&&!L.some(x=>x.who===id))L.push({who:id,k:s.k,t:s.t,pl:s.pl,kh:null,why:s.why,wit:0})}return L}
 window.WORLD_PLAN_HOOKED=1;
-Object.assign(window,{agPlanned,agDrawReg,agBaseReg,agRunReg,agDoerReg,agPlanX,agTickX,AGRUN,agReg,agRegNeeds,agGrp,agNeedsG,agOptsG,agDayDraw,agDayEnsure,agDaySlot,agTouch,AGD,AGREG});
+Object.assign(window,{agDaySlice,agPlanned,agDrawReg,agBaseReg,agRunReg,agDoerReg,agPlanX,agTickX,AGRUN,agReg,agRegNeeds,agGrp,agNeedsG,agOptsG,agDayDraw,agDayEnsure,agDaySlot,agTouch,AGD,AGREG});
