@@ -34,3 +34,44 @@ Same range as trộm, lower on purpose: trộm is misconduct inside the househol
 - **QUICKCHECK PASS** · 152 s · open 1709 ms · old save ok · perf new/live: render 210/183 ms, tab 301/294, buổi 927/844, tasks>200ms 13/12 · core gates PASS.
 
 SẴN SÀNG KIỂM 54cb809f (review/world-ret-phong).
+
+---
+# r2 (after review r1 FAIL: the phóng cung family never fired in play)
+
+PRIORITY #1 CHECK ('srvAge.ask|phongN|phongOpen|phong.min'): OD 0 | ledger 0 | claims 1 (this job) | main 0 for phongN/phongOpen; srvAge.ask = the j42 player-maid rule (j42.js:222, jbal.js:51) — reused, no new age number | review/* 1 (review/world-ret-phong-r1 = reviewer base).
+Branch **review/world-ret-phong-r2** from review/world-ret-phong-r1 a15e6047 → aef46180 (fix) → **82a3b344** (merge origin/main b5d109fe; index.html/sw.js rebuilt; needed because main's one-core frozen list shrank to 4957). START_CTX ~5 %; now ~20 % (< 30 %), no successor needed.
+
+## Root cause (probe, 3 seeds × 25 yrs, live households at month 2)
+NPC maids enter at 18–26, stay a median of ~1 year (90th pct 3–6), and the long-stayers rise to rk ≥ 3 (excluded: they stay as ma ma). Maids aged ≥ 30 (srvAge.out) in a live household at month 2: 0 in almost every year → phong.min 3 never met. Aged ≥ 25 (srvAge.ask), rk < 3: 0–4 per spring (≥ 2 in ~45 % of springs, ≥ 3 in ~14 %).
+
+## Fix (fix-list items 1–4)
+1. ONE pool `phongN()` = aged maids in `[S].concat(liveR())` (liveRivals: alive, not lãnh cung); phong.start releases from the same households (`phongHH`). No phong code counts `allServ()` any more.
+2. Reachable by BAL: mãn hạn = **BAL.srvAge.ask** (25; the same rule a maid player meets in j42: asked to leave at 25, a chưởng sự rk ≥ 3 may stay as ma ma; history: Qing palace women were released around 25 after their years of service — research row 13). `BAL.world.phong.min` 3 → **2**; new `BAL.world.phong.p:70` = spring odds. ONE opener `phongOpen(p,cause,o)` for the spring calendar, trộm end and đại hàn end, odds clamped `BAL.odds.lo..hi`. `phongAfter` = phongOpen.
+   Never empty: an NPC household keeps one aged maid (npcKeep) only when it has ≥ 2, so someone always leaves; the start line drops the "0 người" clause when only her own maids are due.
+3. Bot below. 4. world_check2 row added.
+
+## Numbers — gain / risk
+| choice | gain | risk (likelihood · weight · how caught / fixed) |
+|---|---|---|
+| age = srvAge.ask (25), not a new phong.age | one core: the same mãn hạn age for her and NPCs; reachable | NPC maids leave at 25 instead of 30 · certain by design · small (fillStaff refills at the end) · change one BAL number |
+| min 2 (was 3) | spring release possible in ~45 % of springs | a release of only 2 maids feels small · likely · small · raise min in BAL |
+| p 70 spring odds | brings ~0.45 → ~0.2–0.3 /yr ("once every few years") | seed spread (0.12–0.32 /yr) · likely · small · worldbot phongSum |
+| keep only with ≥ 2 aged | never an empty window | NPCs keep slightly less often · likely · tiny |
+Kết luận: Được lớn hơn — a dead feature becomes a real, rare, never-empty event using the existing age rule.
+
+## Bot (dev/measure/worldbot.js now reports phongSum; final build 82a3b344; first option on every card; new life on death)
+| seed × yrs | calendar /yr | đại hàn /yr | trộm /yr | released per window (n + mine) | empty | smallest gap (phong.cd 24) | errors |
+|---|---|---|---|---|---|---|---|
+| 1 × 25 | 0.32 | 0 | 0.08 | 2,2,3,2,2,2,2,2,3,2 | 0 | 36 | 0 |
+| 2 × 25 | 0.16 | 0.04 | 0 | 3,2,2,2,2 | 0 | 68 | 0 |
+| 3 × 25 | 0.12 | 0.08 | 0 | 2,2,2,3,2 | 0 | 29 | 0 |
+| all 75 yrs | **0.20** | **0.04** | **0.027** | 2–3 | **0** | ≥ 29 | 0 (jworld err 0, page errors 0, stuck 0) |
+Total ≈ 0.27 /yr ≈ one release every ~3.7 years; ret ends 0.36–0.52 /yr, trộm ends 0.2 /yr (unchanged).
+
+## Tests (on 82a3b344)
+- world_check2 **PASS 43/43** (new row: aged maids only in a dead + a lãnh cung household, none in the pool → calendar, trộm end, đại hàn end open nothing; calendar row stubs the spring odds; ret/trom rate rows 23/25, 39/40).
+- world_check **PASS 25/25** (×4 runs, with the reviewer's fresh() fix).
+- one-core-guard **PASS** (after the main merge).
+- QUICKCHECK **PASS** · 123 s · old save ok · perf new/live render 148/147, tab 227/243, buổi 741/786 · core gates PASS.
+
+SẴN SÀNG KIỂM 82a3b344 (review/world-ret-phong-r2).
