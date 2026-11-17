@@ -564,6 +564,7 @@
 | save-dlg-fix #2 (sonnet kit keeper, opened by s28): Tuần lục figure column + kitRelTable on paper | review/save-dlg-fix | main s29 | session_01UV1SziJKTgua7Khmdj8zqg | RUNNING | 17/11 03:11Z |
 | mg-clutter (sonnet kit; OWNER BUG 03:22Z Điểm trang PHẦN/HỒI/CÒN + HÔM NAY clutter, whole mini-game frame family) | review/mg-clutter | main s29 | session_01UV1SzhuhfkdxN5hMZJhYDb | RUNNING | 17/11 03:16Z |
 | toil-reveal-fix (opened by s28; OWNER BUG 03:42Z makeup reveal: brows off the face brows, black band under 'Tiếp theo', close-up + card cut; brief briefs/toil-reveal-fix.md) | review/toil-reveal-fix | main s29 | session_01UV1SzhkR4i2bVXfUL54aTE | RUNNING | 17/11 03:21Z |
-| presentation-wiring #2 (sonnet; successor of session_01UV1SziPP4d9141LvjeJ4wM, archived; base b0b972b97) | review/presentation-wiring | main s29 | session_01UV1SzhUuQoQBESnUY6by5i | RUNNING | 17/11 03:23Z |
+| presentation-wiring #2 (sonnet; successor of session_01UV1SziPP4d9141LvjeJ4wM, archived; base b0b972b97) | review/presentation-wiring | main s29 | session_01UV1SzhUuQoQBESnUY6by5i | CANCELLED (duplicate; s28's session_01UV1SzhippoJhAJG9kpDYJP is the live #2) | 17/11 03:25Z |
 | kit-ico-rank (sonnet kit keeper) DONE → SẴN SÀNG KIỂM 0ef325f6f (worker archived) | review/kit-ico-rank | main s29 | session_01UV1Szgrzg6rs6qWkr3xzsH | READY | 17/11 03:23Z |
 | kit-ico-rank review r1 (opus; + ctm-rank Worker/D1 deploy verdict; renumber kitRank off KIT §86 = kitLearn of scenes-3) | review/kit-ico-rank-r1 | main s29 | session_01UV1Szh3wz6vc9DcUjfYN4f | RUNNING | 17/11 03:24Z |
+| presentation-wiring #2 (sonnet, opened by s28; base b0b972b97) | review/presentation-wiring | main s29 | session_01UV1SzhippoJhAJG9kpDYJP | RUNNING | 17/11 03:23Z |
