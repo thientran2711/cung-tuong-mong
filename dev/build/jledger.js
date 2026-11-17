@@ -25,7 +25,7 @@
       lần thị tẩm" shows the true per-night chance on the odds ladder.
    CO-OP: parked (jnf nfParked → nfOn false → ldOn false): the live one-night flip and the old conception roll stay. Servant / home routes too.
    Save: S.ledger = {wk, days:[{d, w ("me" | id | null), y ("custom"|"pick"|"blank"|"none"|"visit"|"played")}], p (played index | -1), st}.
-   Old saves: absent → rolled at the next commit. ================================================================================== */
+   S.ldPk = the tuần whose flip ran in a co-op room (no ledger that tuần). Old saves: absent → rolled at the next commit. ================================================================================== */
 (function(){
 const N=()=>BAL.nt||{};
 function ldOn(){try{return !!(N().on&&(N().days||0)>1&&S&&!S.dead&&typeof nfOn==="function"&&nfOn())}catch(e){return false}}
@@ -82,6 +82,8 @@ function contest(h){if(typeof window.stealPass!=="function")return{holder:h,line
  finally{S.tonight=sv.t;S.ntk=sv.k;S.ntTry=sv.y;S.nightWhy=sv.w}}
 const nm=p=>p===S?"ngươi":p.name;
 function ldSettle(){if(!ldOn())return;const d0=W();let L=cur();
+ /* the day's flip ran in a co-op room (parked: the live one-night flip) and she left the room before the day ended: that tuần keeps its one night */
+ if(!L&&S.ldPk===d0){S.ledger={wk:d0,days:[],p:-1,st:1};return}
  if(!L)L=ldRoll(S.nfN===d0?S:(typeof tonightOf==="function"?tonightOf():null));
  if(L.st)return;L.st=1;
  const pe=L.days[L.p];if(pe){const h=S.nfN===d0?S:(typeof tonightOf==="function"?tonightOf():null);pe.w=h?idOf(h):null}   /* the played tối as it ended (a won steal moved it) */
@@ -100,6 +102,8 @@ function ldSettle(){if(!ldOn())return;const d0=W();let L=cur();
  if(me&&!window.__bot)try{if(typeof kitLine==="function")kitLine(`Kính sự phòng: ngươi được lật thẻ thêm ${typeof kitNumVi==="function"?kitNumVi(me):me} đêm`,4000)}catch(e){}
  L.me=me}
 window.ldSettle=ldSettle;
+/* a flip made while co-op is on (jnf parked) is the live one-night flip: marked so the ledger does not add that tuần's other nights */
+const fl0=flip;flip=function(){try{if(S&&typeof nfParked==="function"&&nfParked())S.ldPk=W()}catch(e){}return fl0.apply(this,arguments)};
 /* the commit's live endTurn (jnf calls it after the choice and her night): the ledger's other nights are written first */
 const et0=endTurn;endTurn=function(){try{if(ldOn()&&!(typeof Q!=="undefined"&&Q.length)&&!S.mg)ldSettle()}catch(e){console.error(e)}return et0.apply(this,arguments)};
 /* ---------- 4. the float conception roll ---------- */
