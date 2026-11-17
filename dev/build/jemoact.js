@@ -90,13 +90,13 @@ const clp=(x,a,b)=>Math.max(a,Math.min(b,x));
 const cnt=(o,k,n)=>{o[k]=(o[k]||0)+(n||1)};
 function eaS(){if(!S.ea||typeof S.ea!=="object")S.ea={};const A=S.ea;A.used=A.used||{};A.hoi=A.hoi||[];return A}
 /* ---------- temper (one rule for everyone, from the person's own nết) ---------- */
-const T_HOT=["Kiêu ngạo","Thẳng thắn","Thù dai","Ghen tuông","nongnay","phong lưu","Cương trực","tham vọng"];
-const T_TIMID=["Nhu mì","Hiền lành","Cả nể","nhat","nhantu","cẩn trọng","trung hậu","Cẩn trọng","Trung hậu"];
-const T_GEN=["Hiền lành","Trọng nghĩa","Cả nể","Khéo léo","nhantu","datinh","trung","trung hậu","đa tình"];
-const T_STINGY=["Tham tiền","tham","Tham vọng","Xảo quyệt"];
-function eaTraits(p){try{if(p===S)return traitsOf(S)||[];if(S.emp&&p===S.emp)return S.emp.traits||[];if(p===S.thO)return traitsOf("th")||[];if(p&&p.tr&&!p.trait)return[p.tr,p.tr2].filter(Boolean);if(p&&p.trait&&!p.rank&&p.rank!==0&&!p.kids)return[p.trait];return traitsOf(p)||[]}catch(e){return[]}}
+const T_HOT=["Kiêu ngạo","Thật thà","Thù dai","Nóng nảy","nongnay","phong lưu","Cương trực","tham vọng"];
+const T_TIMID=["Khiêm nhường","Ân cần","Rộng lượng","nhat","nhantu","cẩn trọng","trung hậu","Cẩn trọng","Trung hậu"];
+const T_GEN=["Ân cần","Trọng nghĩa","Rộng lượng","Thực dụng","nhantu","datinh","trung","trung hậu","đa tình"];
+const T_STINGY=["Ham lợi","tham","Tham vọng","Xảo quyệt"];
+function eaTraits(p){try{if(p===S)return traitsOf(S)||[];if(S.emp&&p===S.emp)return S.emp.traits||[];if(p===S.thO)return traitsOf("th")||[];return traitsOf(p)||[]}catch(e){return[]}}
 function eaTemper(p){const T=eaTraits(p);const hot=T.some(t=>T_HOT.includes(t)),tim=T.some(t=>T_TIMID.includes(t));
- return {k:hot&&!tim?"hot":tim&&!hot?"timid":hot&&tim?"even":"even",gen:T.some(t=>T_GEN.includes(t))&&!T.some(t=>T_STINGY.includes(t)),stingy:T.some(t=>T_STINGY.includes(t)),sus:T.includes("Đa nghi")||T.includes("danghi"),pious:T.includes("Mê tín")||T.includes("Hiếu thảo"),tr:T}}
+ return {k:hot&&!tim?"hot":tim&&!hot?"timid":hot&&tim?"even":"even",gen:T.some(t=>T_GEN.includes(t))&&!T.some(t=>T_STINGY.includes(t)),stingy:T.some(t=>T_STINGY.includes(t)),sus:T.includes("Kín đáo")||T.includes("danghi"),pious:T.includes("Mê tín")||T.includes("Vì gia tộc"),tr:T}}
 window.eaTemper=eaTemper;
 /* the group of a feeling: vui · gian · buon · so (căng thẳng) · ghen (cards: buồn) */
 function eaGrpK(k){return k==="vui"?"vui":k==="gian"?"gian":k==="buon"||k==="dau"?"buon":k==="so"||k==="lo"?"so":k==="ghen"?"ghen":null}

@@ -119,7 +119,7 @@ const ACC_ETQ={mode:"expected",
  khac:1,            /* khắc the greeting takes */
  okAff:2,           /* chủ vị thiện cảm for the greeting (a sure act) */
  skipBase:1,skipGap:.5,skipMax:6, /* walking in without greeting: −(base + gap×rank gap), capped, × her nature */
- skipTrait:{"Kiêu ngạo":1.5,"Xảo quyệt":1.25,"Đa nghi":1.25,"Tham vọng":1,"Nhu mì":.75,"Hiền lành":.5},
+ skipTrait:{"Kiêu ngạo":1.5,"Xảo quyệt":1.25,"Kín đáo":1.25,"Tham vọng":1,"Khiêm nhường":.75,"Ân cần":.5},
  skipDanh:0,        /* no Danh loss: it is discourtesy, not an offence */
  npcGreet:70,       /* % an NPC guest greets the chủ vị (same costs and effects apply to her) */
  lead:false,        /* 'nhờ thái giám dẫn vào' for the Emperor's halls: off (summons only) */
@@ -145,7 +145,7 @@ function accEtq(p,k){p=p||S;const C=ACC_ETQ;if(C.mode==="optional")return null;i
  const h=accHost(k);if(!h||h===p||!h.alive||h.out)return null;if(C.hostHome&&whereOf(h)!==k)return null;if(rkOf(h)-rkOf(p)<C.rankGap)return null;
  if(k==="kn"&&C.knMorningFree&&(S.buoi||0)===0)return null; /* morning thỉnh an is the greeting */
  return h}
-function accSkipAff(h,g){const C=ACC_ETQ;const gap=Math.max(1,rkOf(h)-rkOf(g));const m=C.skipTrait[h.trait]||1;return -Math.max(1,Math.round(Math.min(C.skipMax,C.skipBase+C.skipGap*gap)*m))}
+function accSkipAff(h,g){const C=ACC_ETQ;const gap=Math.max(1,rkOf(h)-rkOf(g));const m=tv(C.skipTrait,h)||1;return -Math.max(1,Math.round(Math.min(C.skipMax,C.skipBase+C.skipGap*gap)*m))}
 /* the card: greet, or walk in without greeting, or not go; then carry on with what she meant to do */
 function accEtqCard(k,then){const h=accEtq(S,k);if(!h){then();return}if(!S||S.dead||Q.length)return;
  const tc=travel(S.place,k);const nm=accName(k);const hn=`${accRkName(h)} ${h.name}`;const left=Math.max(0,BAL.time.khac-used);const opts=[];

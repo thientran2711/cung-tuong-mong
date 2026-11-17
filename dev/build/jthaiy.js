@@ -159,7 +159,7 @@ function npcMonth(){let ev="";const c=doc();if(!c)return ev;c.af=c.af||{};
  for(const v of liveRivals(true)){if(!rv(v)||v.confined)continue;
   /* a hostile rival buys the physician (aims: her, or a rival who carries a child / holds the favour) */
   if((v.bac||0)>=T().npcBribeBac*2){const tg=[S].concat(liveRivals(true).filter(x=>rv(x)&&x!==v)).filter(t=>{try{return hostility(v,t)>=T().bribeHost&&(t.preg||(t===S?S.sung:t.sung||0)>=40)}catch(e){return false}});
-   const ev2=/Xảo quyệt|Tham vọng/.test(`${v.trait||""} ${v.trait2||""}`)?6:0;if(tg.length&&roll(T().npcBribe+ev2)){ap(v,{bac:-T().npcBribeBac});c.af[v.id]=(c.af[v.id]||0)+T().npcBribeAf;try{newsAdd(v,"ty",`Có người thấy ${v.name} cho mời thái y sang cung trò chuyện rất lâu`)}catch(e){}}}
+   const ev2=netRx(v,/Xảo quyệt|Tham vọng/)?6:0;if(tg.length&&roll(T().npcBribe+ev2)){ap(v,{bac:-T().npcBribeBac});c.af[v.id]=(c.af[v.id]||0)+T().npcBribeAf;try{newsAdd(v,"ty",`Có người thấy ${v.name} cho mời thái y sang cung trò chuyện rất lâu`)}catch(e){}}}
   /* her monthly visit finds a hidden harm in her */
   const tl=tainted(v);const bad=bribedBy(v);if(tl.length&&!bad&&roll(T().npcFind+(v.doctor?T().npcFindDoc:0))){const e=pick(tl);v.inv.splice(v.inv.indexOf(e),1);const by=byKey(e.by);
    if(by&&by!==v){evA(v,by,1);try{oanAdd(v,by,8)}catch(x){}}try{newsAdd(v,"ty",`Thái y bắt mạch cho ${v.name}, thấy dấu ${TAINT[e.t].n}; món đồ ấy bị đem đi`,by===S)}catch(x){}

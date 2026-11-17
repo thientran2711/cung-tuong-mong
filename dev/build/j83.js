@@ -66,7 +66,7 @@ function wkEmpMatch(w){const E=S.emp,K=E.known,L=E.likes,R=[];
  if(has("chamchinh")&&w.a==="ky")R.push("ngài thích bàn cờ, bàn việc");
  if(has("mesac")&&(w.kind==="ao"||w.kind==="huong"))R.push("ngài trọng sắc");
  return R}
-function wkSincere(r){if(r==="emp")return has("nhantu")||has("datinh");if(r==="th")return (traitsOf("th")[0]||"")==="Hiền lành";if(r==="maid")return true;if(r&&typeof r==="object")return traitsOf(r).some(t=>t==="Hiền lành"||t==="Nhu mì");return false}
+function wkSincere(r){if(r==="emp")return has("nhantu")||has("datinh");if(r==="th")return (traitsOf("th")[0]||"")==="Ân cần";if(r==="maid")return true;if(r&&typeof r==="object")return traitsOf(r).some(t=>t==="Ân cần"||t==="Khiêm nhường");return false}
 function wkProud(r){return r&&typeof r==="object"&&traitsOf(r).includes("Kiêu ngạo")}
 function wkBestArt(r){const a=(r&&r.arts)||{};let b=null,l=0;for(const k in a)if(a[k]>l){l=a[k];b=k}return b}
 /* emperor's fatigue: handmade gifts to him in the last 3 weeks, and the same kind among them */

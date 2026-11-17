@@ -213,7 +213,7 @@ Object.assign(BAL,{mline:{eye:[.1,.25,.6,1,1.2],eyeSung:.5,eyeAge:[16,29],seekSt
     non-poison feuds that are a frame (else a fight), fightLoy = lòng +N to both fighters; poisonLv = pzGive level; evN = chứng cứ per piece;
     hitBribeBac / hitBribe = a consort with Bạc ≥ N bribes (%), else a cruel one beats (hitBeat %), else frames; beatLoy = the beaten maid lòng +N;
     ageDef = age when unknown; offRank / offEye = the old rule behind the off switch (rank ≥ offRank at offEye %). */
- seekTr:{tham:2,lanh:1.5,chuyen:1,trung:.3,nhat:.3},feudFrame:50,fightLoy:2,poisonLv:1,evN:1,hitBribeBac:60,hitBribe:40,hitBeat:55,beatLoy:3,ageDef:20,offRank:2,offEye:1.2,
+ seekTr:{tham:2,lanh:1.5,chuyen:1,trung:.3,nhat:.3}/* servant-quality codes, read by qv() (BAL.net.qCode) */,feudFrame:50,fightLoy:2,poisonLv:1,evN:1,hitBribeBac:60,hitBribe:40,hitBeat:55,beatLoy:3,ageDef:20,offRank:2,offEye:1.2,
  /* review/servant-mline-r2 (gain and loss, measured: dev/measure/sim_maidline_r2.js): ONE caught key per harmful act, % per act:
     frameCatch = a maid's frame of another palace's maid is traced; poisonCatch = Thái y traces a maid's poison (the poisoner goes to
     Thận hình ti); hitCatch = a consort's frame of another palace's maid is traced (a beating is always seen: deed + hitEv % proof).
@@ -311,9 +311,7 @@ Object.assign(BAL,{mem:{cap:5,fadeMo:2,keepFloor:.35,modDiv:8,modMax:10,recallMi
   help:10,visit:10,warn:15,mediate:12,humiliate:20,drop:15,nightsteal:12,threat:20,demote:60,confine:30,srvreward:10,srvpunish:15,srvshield:45,rescue:70},
  holderCap:16,life:["poison","musk","kidharm","pardon","frame","takeaway","gifttaint","demote","srvshield","rescue"],lifeMin:60,lifeCap:3,lifeRel:30,
  fadeJit:.25,fadeMinK:.1,
- fadeT:{"Xảo quyệt":[1.3,.5],"Kiêu ngạo":[1.3,.6],"Hiền lành":[.8,1.8],"Đa nghi":[1.2,.7],"Tham vọng":[1.6,1],"Nhu mì":[.9,1.3],"Hiếu thảo":[.8,1],"Ghen tuông":[1,.7],
-  "Tham tiền":[1.5,1],"Trọng nghĩa":[.4,1],"Nhiều chuyện":[1.5,1.5],"Thù dai":[1,.25],"Cả nể":[.9,1.4],"Thẳng thắn":[1,1.2],"Mê tín":[1,1],"Khéo léo":[1.2,1.1],
-  trung:[.5,1.2],tham:[1.6,1],nhat:[1,.8],lanh:[1.2,1],chuyen:[1.4,1.4],
+ fadeT:{/* pool nết rows come from THE trait table BAL.net.T[t].fade (jnet.js); the Emperor's keys: */
   nongnay:[1.3,.6],nhantu:[.8,1.8],datinh:[1.6,1.3],lanhlung:[.6,.6],chamchinh:[1,1],danghi:[1,.6],mesac:[1.3,1],trongtai:[1,1],hieuthao:[1,1]},
  memDanger:.5,lifeDanger:.9,dangerMax:85,goodGate:40,goodOver:1,mirrorDiv:25,socDiv:20,socK:40,srvLoy:1.5},
  hook:{useOan:15,strikeCh:25,lostCh:20,fadeCh:4,pressBase:50,max:40,useStep:5,failRel:10,tcDiv:4,czMax:24,czClose:20,czRash:3,czTv:30,czGhenDiv:3,czDeadMax:8}});
@@ -425,3 +423,91 @@ Object.assign(BAL,{voice:{warm:40,cold:-25,sungMid:0,favMid:0,nuong:3,hi:5,hq:7,
    showTreasure j83/jecon (tier-3 piece shown at a banquet). Other ghenAll gains already live in BAL.night.ghen, BAL.visit.ghen, BAL.psk.ghen, jcycle rep.giauGhen. */
 Object.assign(BAL,{ghen:{datinh:1.5,dance:4,kinhHong:10,preg:6,rumor:12,cry:5,son:15,girl:8,rankUp:10,festival:8,bestow:3,ally:3,kidTop:2,
  flowerParty:2,follower:2,boast:4,keepGift:3,contest:4,praise:3,contestTop:8,showTreasure:2}});
+
+/* ===== ONE TRAIT POOL (owner 17/11 05:45Z/05:50Z/05:58Z/06:20Z, review/trait-pool) — THE trait table (one core) =====
+   Everyone except the Emperor (ETRAITS) and Thái hậu (TH_ARCH archetypes) draws exactly 3 nết: one per group
+   tt TÍNH TÌNH · ld LÒNG DẠ · ch CHÍ HƯỚNG; the 8 nết of a group = 4 symmetric pairs and exclude each other.
+   Two pools by sex, SAME formulas: female F (consorts, maids, ma ma, female NPCs, the player) / male M (men, officials,
+   eunuchs, physicians, male NPCs). Only pair 4 of Tính tình differs (Kiêu ngạo↔Khiêm nhường / Cương trực↔Xu nịnh).
+   Row: g group · p pair · s sex (b both, f, m) · tend (player-visible, "Hay:") · gain / cost (player-visible, BALANCE LAW:
+   every nết has a usable good side AND a cost, both wired to existing acts) · PERS fields used by persW/persF:
+   w act weights (×, product over the 3 nết) · dang danger offset (+) · mal malice base (+) · slight/forgive/trust/gift/ghen (×) ·
+   harmGate (max: no harm act until the grievance reaches it) · lavish/riseGift (×) · fade [good,bad] memory fade (BAL.mem.fadeT) ·
+   q servant/agent qualities (sum, clamp qClamp; 1 = the strength of the old servant-only nết): loyal (che chủ, giữ lời, khó mua),
+   greed (ăn cắp, bán tin, mua rẻ), timid (bị ép thì khai, không dám phản), sharp (dò tin, tìm manh mối, muốn trèo cao),
+   talk (mang tin về, cũng làm lộ tin), hide (giấu ý: dấu hiệu báo trước khó thấy), omen (tin điềm), study (học nhanh). */
+BAL.net={qClamp:[-1,1.5],qOn:.8,malBase:30,
+ groups:{tt:"Tính tình",ld:"Lòng dạ",ch:"Chí hướng"},
+ F:{tt:["Ân cần","Lạnh lùng","Nóng nảy","Điềm tĩnh","Nhiều chuyện","Kín đáo","Kiêu ngạo","Khiêm nhường"],
+    ld:["Thật thà","Xảo quyệt","Thanh liêm","Ham lợi","Rộng lượng","Thù dai","Trọng nghĩa","Thực dụng"],
+    ch:["Tham vọng","An phận","Ham học","Ham vui","Mê tín","Thực tế","Vì gia tộc","Vì mình"]},
+ M:{tt:["Ân cần","Lạnh lùng","Nóng nảy","Điềm tĩnh","Nhiều chuyện","Kín đáo","Cương trực","Xu nịnh"],
+    ld:["Thật thà","Xảo quyệt","Thanh liêm","Ham lợi","Rộng lượng","Thù dai","Trọng nghĩa","Thực dụng"],
+    ch:["Tham vọng","An phận","Ham học","Ham vui","Mê tín","Thực tế","Vì gia tộc","Vì mình"]},
+ /* old saves / old code words → pool nết (each old one lands in its group; the missing groups are drawn) */
+ old:{"Hiểm độc":"Xảo quyệt","Xảo quyệt":"Xảo quyệt","Kiêu ngạo":"Kiêu ngạo","Hiền lành":"Ân cần","Đa nghi":"Kín đáo","Tham vọng":"Tham vọng","Nhu mì":"Khiêm nhường",
+  "Hiếu thảo":"Vì gia tộc","Ghen tuông":"Nóng nảy","Tham tiền":"Ham lợi","Trọng nghĩa":"Trọng nghĩa","Nhiều chuyện":"Nhiều chuyện","Thù dai":"Thù dai","Cả nể":"Rộng lượng",
+  "Thẳng thắn":"Thật thà","Mê tín":"Mê tín","Khéo léo":"Thực dụng",trung:"Trọng nghĩa",tham:"Ham lợi",nhat:"Khiêm nhường",lanh:"Tham vọng",chuyen:"Nhiều chuyện",
+  "phong lưu":"Ham vui","đa tình":"Ham vui","trung hậu":"Thật thà","tham vọng":"Tham vọng","cẩn trọng":"Kín đáo",
+  "Cẩn trọng":"Kín đáo","Tham lam":"Ham lợi","Trung hậu":"Thật thà","Cương trực":"Cương trực"},
+ /* servant-quality codes kept as keys of a few old tables (seekTr, proud, SG_TR, IMPR, SCAUSE…): qv() reads the strongest quality */
+ qCode:{trung:"loyal",tham:"greed",nhat:"timid",lanh:"sharp",chuyen:"talk"},
+ /* a female-only nết met in the male pool (old saves, old servant codes) */
+ toM:{"Kiêu ngạo":"Cương trực","Khiêm nhường":"Xu nịnh"},toF:{"Cương trực":"Kiêu ngạo","Xu nịnh":"Khiêm nhường"},
+ T:{
+ /* ---- TÍNH TÌNH ---- */
+ "Ân cần":{g:"tt",p:"Lạnh lùng",s:"b",tend:"hay thăm hỏi, giúp đỡ, can ngăn",gain:"dễ kết thân; hay giúp, hay báo tin cho người mình quý",cost:"mềm lòng: dễ bị bạn mạnh xui làm, quà mọn cũng làm nàng nể",
+  w:{help:2.2,visit:2.2,warn:1.8,mediate:2,apologise:1.8,pushed:1.6,provoke:.35,humiliate:.25,poison:.35,kpoison:.35,frame:.45,plant:.45,musk:.35,pushp:.35},dang:-8,mal:-15,slight:.8,forgive:1.4,trust:1.2,gift:1.2,harmGate:60,fade:[.8,1.4],q:{loyal:.3,talk:.2}},
+ "Lạnh lùng":{g:"tt",p:"Ân cần",s:"b",tend:"ít nói, khó gần; đã quý thì quý lâu",gain:"đã thân thì bền: khó bỏ đồng minh, khó bị mua, ít lộ chuyện",cost:"khó lấy lòng: quà và lời ngọt nhẹ ký, chậm tin người",
+  w:{help:.6,visit:.5,mediate:.6,gossip:.5,rumor:.7,drop:.35,ally:.8},mal:4,slight:1,forgive:.8,trust:.6,gift:.6,fade:[.6,1],q:{loyal:.5,talk:-.4,hide:.5}},
+ "Nóng nảy":{g:"tt",p:"Điềm tĩnh",s:"b",tend:"dễ nổi giận, nói thẳng mặt; giận mau, nguôi mau",gain:"không giấu mưu: ý đồ dễ đoán, giận mau nguôi",cost:"dễ gây sự, dễ bị khích, ghen ra mặt",
+  w:{provoke:2.2,humiliate:1.5,trip:1.4,warn:1.3,pushed:1.3,feign:.3,plant:.6,frame:.7},dang:3,mal:8,slight:1.5,forgive:1.4,ghen:1.3,fade:[1,1.4],q:{hide:-.8,talk:.3}},
+ "Điềm tĩnh":{g:"tt",p:"Nóng nảy",s:"b",tend:"bình thản, nhẫn được; khó bị khích",gain:"khó bị khích hay bị xui; hay can ngăn",cost:"nhẫn nại chờ thời: ý đồ khó thấy, hận ngầm lâu",
+  w:{provoke:.4,humiliate:.5,trip:.6,mediate:1.6,pushed:.5,feign:1.3},dang:-2,mal:-3,slight:.7,forgive:1,ghen:.8,fade:[1,.8],q:{hide:.8,timid:-.5}},
+ "Nhiều chuyện":{ban:["Tín"],g:"tt",p:"Kín đáo",s:"b",tend:"buôn chuyện, tin gì cũng lan",gain:"mang nhiều tin về: tai mắt, chuyện các cung",cost:"chuyện của chủ, của bạn cũng lan ra ngoài",
+  w:{rumor:2,gossip:3,spy:1.3},q:{talk:1}},
+ "Kín đáo":{g:"tt",p:"Nhiều chuyện",s:"b",tend:"giữ kín chuyện, để ý người quanh mình",gain:"giữ kín bí mật; dễ nhận ra tai mắt cài vào",cost:"ít khi kể tin cho ai; chậm tin người",
+  w:{gossip:.4,rumor:.5,spy:1.8,check:1.8,test:1.5},trust:.8,suspectWarn:1,q:{talk:-.7,hide:.6,sharp:.4}},
+ "Kiêu ngạo":{ban:["Khiêm"],g:"tt",p:"Khiêm nhường",s:"f",tend:"khoe ân sủng, hạ nhục người dưới, không chịu xin lỗi",gain:"trọng thể diện: lễ hậu, quà lớn được đáp mạnh; khó bị ép hay bị xui",cost:"quà mọn chẳng thèm nhìn; hay khiêu khích, hạ nhục",
+  w:{steal:1.4,provoke:2.4,humiliate:2.4,flaunt:2.4,rumor:1.3,trip:1.3,help:.6,mediate:.4,apologise:.15,pushed:.4},mal:12,slight:1.5,forgive:.7,gift:.6,lavish:60,fade:[1.2,.7],q:{timid:-.5}},
+ "Khiêm nhường":{g:"tt",p:"Kiêu ngạo",s:"f",tend:"nhún nhường, tránh va chạm, theo người cầm đầu",gain:"dễ hòa, dễ xin lỗi; không dám phản chủ",cost:"theo người mạnh, dễ bị xui làm; bị ép thì khai",
+  w:{steal:.5,follow:2.2,apologise:2,help:1.2,pushed:2,provoke:.3,humiliate:.2,flaunt:.3,poison:.4,frame:.5},dang:-4,mal:-10,slight:.8,forgive:1.3,trust:1.1,gift:1.1,q:{timid:1}},
+ "Cương trực":{g:"tt",p:"Xu nịnh",s:"m",tend:"thẳng lưng, nói thẳng điều sai trái",gain:"không mua được để nói dối; lời chứng đáng tin, hay báo việc sai",cost:"thẳng miệng mích lòng người trên; không nhận việc mờ ám",
+  w:{feign:.2,plant:.4,frame:.5,warn:1.8,provoke:1.3,accuse:1.4,dirty:.3},mal:-2,slight:1.2,gift:.8,q:{loyal:.4,greed:-.6,timid:-.5}},
+ "Xu nịnh":{g:"tt",p:"Cương trực",s:"m",tend:"lựa lời ngọt, bám người có thế",gain:"dễ lấy lòng bằng lời ngọt, quà cáp; ngươi lên thì hắn theo",cost:"người sa cơ là bỏ; bên mạnh hơn mua là đổi phe, bị ép thì khai",
+  w:{ally:2,serveTH:1.6,follow:1.8,drop:2,flaunt:1.2,pushed:1.4},mal:5,gift:1.4,riseGift:1.6,q:{greed:.4,timid:.6}},
+ /* ---- LÒNG DẠ ---- */
+ "Thật thà":{v:"Tín",g:"ld",p:"Xảo quyệt",s:"b",tend:"nói thật, ghét mưu ngầm",gain:"đáng tin: lời nàng báo là thật, không làm việc ám muội",cost:"dễ lỡ lời lộ bí mật; dễ tin người",
+  w:{feign:.2,plant:.4,frame:.5,warn:1.5,rumor:.7,dirty:.4},dang:-3,mal:-8,trust:1.2,q:{talk:.3,timid:.4,greed:-.3}},
+ "Xảo quyệt":{v:"Trí",ban:["Nhân","Tín"],g:"ld",p:"Thật thà",s:"b",tend:"tính trước tính sau, ngoài mặt thân thiện",gain:"đồng minh sắc trong mưu kế; tai mắt giỏi, dò tin giỏi",cost:"có lợi hơn là trở mặt; nhẫn nại giăng bẫy kẻ cản đường",
+  w:{feign:2.5,plant:1.8,frame:1.8,kframe:1.8,spy:1.6,poison:1.5,kpoison:1.5,musk:1.5,catswap:1.5,pushp:1.3,ally:1.5,drop:1.6,warn:.6,help:.8,mediate:.5},dang:5,mal:25,forgive:.8,trust:.8,fade:[1.3,.6],q:{sharp:.6,hide:.5}},
+ "Thanh liêm":{v:"Liêm",g:"ld",p:"Ham lợi",s:"b",tend:"không tham của, không nhận quà riêng",gain:"không bán tin, không ăn cắp; lời chứng không mua được",cost:"bạc không mua được nàng; quà hậu nàng chê",
+  w:{bribe:.2,bribeksp:.2,flaunt:.6,sell:.1,steal:.2,black:.1},mal:-5,gift:.7,q:{greed:-1}},
+ "Ham lợi":{v:"Cần",ban:["Liêm","Kiệm"],g:"ld",p:"Thanh liêm",s:"b",tend:"mê bạc vàng, việc gì cũng tính lời lỗ",gain:"mua được bằng bạc (tin tức, giúp việc) và giá rẻ hơn; quà nào cũng ấm lòng",cost:"bán tin cho người trả cao hơn; ăn cắp vặt",
+  w:{bribe:1.6,sell:3,steal:2,black:2,dirty:1.6,flaunt:1.2},mal:5,gift:1.6,q:{greed:1}},
+ "Rộng lượng":{v:"Nhân",g:"ld",p:"Thù dai",s:"b",tend:"dễ bỏ qua, hay làm hòa",gain:"oán mau nguôi, làm hòa được",cost:"ơn cũng mau quên; dễ bị người lợi dụng",
+  w:{help:1.4,mediate:1.6,provoke:.6,pushed:1.4},dang:-6,mal:-12,slight:.7,forgive:1.8,fade:[1.4,1.8],q:{loyal:.2}},
+ "Thù dai":{v:"Sỉ",g:"ld",p:"Rộng lượng",s:"b",tend:"nhớ oán rất lâu, nhớ ơn cũng lâu",gain:"không quên ơn: người từng giúp nàng được nàng giúp lại lâu dài",cost:"không quên oán: kẻ làm nàng mất mặt bị nhớ mãi",
+  w:{provoke:1.2,drop:.4},dang:4,mal:12,slight:1.4,forgive:.3,trust:.9,gift:.9,fade:[.5,.3],q:{loyal:.3}},
+ "Trọng nghĩa":{v:"Nghĩa",g:"ld",p:"Thực dụng",s:"b",tend:"giữ lời, không bỏ bạn lúc hoạn nạn",gain:"che chắn cho chủ, cho bạn; giữ lời hứa, khó bị mua",cost:"không làm việc thất đức cho ai, còn quỳ can; theo nghĩa chứ không theo lợi",
+  w:{steal:.6,help:1.6,warn:1.8,drop:.1,blame:3,dirty:.4},dang:-3,mal:-8,trust:1.2,fade:[.6,1],q:{loyal:1}},
+ "Thực dụng":{v:"Kiệm",g:"ld",p:"Trọng nghĩa",s:"b",tend:"khéo lấy lòng người trên, theo lợi",gain:"dễ kết minh khi đôi bên cùng có lợi; ngươi lên thì nàng xích lại",cost:"đồng minh sa cơ là bỏ; lợi lớn hơn thì đổi phe",
+  w:{ally:2,drop:2.2,serveTH:1.4,bribe:1.2,help:.8},mal:5,gift:1.2,riseGift:1.6,q:{greed:.3,sharp:.3}},
+ /* ---- CHÍ HƯỚNG ---- */
+ "Tham vọng":{g:"ch",p:"An phận",s:"b",tend:"bám người mạnh, cướp đêm thị tẩm, muốn trèo cao",gain:"lanh lợi, bám người đang lên: ngươi lên thì nàng theo",cost:"tranh đêm thị tẩm, đút lót Kính sự phòng; muốn trèo cao, bỏ kẻ sa cơ",
+  w:{ally:2,steal:2.2,bribeksp:2.2,drop:1.8,block:1.8,accuse:1.4,bribe:1.3,leave:2},mal:12,ghen:1.2,riseGift:2,fade:[1.4,1],q:{sharp:1}},
+ "An phận":{g:"ch",p:"Tham vọng",s:"b",tend:"không tranh sủng, yên với phận mình",gain:"không tranh đêm, ít ghen; ở lâu, không bỏ chủ",cost:"ít chịu liều vì người khác; khó kéo vào phe",
+  w:{steal:.4,bribeksp:.3,block:.4,accuse:.5,ally:.7,help:.8,follow:1.3,leave:.3},dang:-3,mal:-8,ghen:.7,q:{timid:.5,loyal:.3}},
+ "Ham học":{g:"ch",p:"Ham vui",s:"b",tend:"chăm đèn sách, tài nghệ",gain:"học nhanh, lanh trí: dò ra manh mối",cost:"ít giao du, ít đến thăm; khó kết thân bằng yến tiệc",
+  w:{visit:.7,gossip:.6,ally:.85,pray:.7},q:{sharp:.8,study:1}},
+ "Ham vui":{g:"ch",p:"Ham học",s:"b",tend:"thích yến tiệc, trò vui, chuyện phong tình",gain:"dễ kết thân: quà nhỏ, cuộc vui là đủ",cost:"lơ là việc, hay sơ suất; tình ý thay đổi",
+  w:{visit:1.5,gossip:1.5,rumor:1.2,pray:.6},gift:1.3,q:{talk:.5,study:-.5,greed:.3}},
+ "Mê tín":{g:"ch",p:"Thực tế",s:"b",tend:"tin điềm báo, sợ bùa ngải",gain:"lễ chùa, bùa hộ thân, điềm lành làm nàng vững lòng",cost:"điềm xấu, bùa ngải dọa được nàng",
+  w:{check:1.5,pray:3,pushed:1.2},q:{omen:1}},
+ "Thực tế":{g:"ch",p:"Mê tín",s:"b",tend:"chỉ tin điều tận mắt thấy",gain:"không bị dọa bằng điềm, bùa ngải; soát việc kỹ",cost:"khó thuyết phục; lời người khác nhẹ ký",
+  w:{pray:.3,check:1.3,test:1.2},trust:.9,gift:.9,q:{omen:-1,sharp:.2}},
+ "Vì gia tộc":{g:"ch",p:"Vì mình",s:"b",tend:"kính bề trên, giữ nề nếp, lo cho nhà",gain:"kính Thái hậu, giữ nề nếp; giữ lời vì danh nhà",cost:"nhà bảo gì nghe nấy, có khi bỏ bạn vì nhà",
+  w:{serveTH:2.2,ally:1.2,provoke:.7,follow:1.3,drop:1.3},dang:-2,mal:-3,trust:1.1,q:{loyal:.3}},
+ "Vì mình":{g:"ch",p:"Vì gia tộc",s:"b",tend:"lo cho mình trước hết",gain:"dễ mua bằng lợi riêng; phe phái khó kéo",cost:"không hy sinh cho ai; lúc nguy là bỏ",
+  w:{steal:1.4,block:1.4,drop:1.6,help:.7,warn:.7,accuse:1.2,follow:.5,pushed:.6},mal:8,gift:1.2,q:{greed:.5}}
+ }};
