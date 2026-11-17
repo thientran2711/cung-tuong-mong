@@ -87,9 +87,21 @@ const R=ROAD14;for(const r in R)console.log(r,Object.keys(R[r]).join(','));
    without the same change in jbalroad.js would silently shift every number after it. Lists beats whose counts differ, fx rows with no chapter /
    beat / ending, and road chapters with no fx row. Must be 0. */
 {const FX=(BAL.road&&BAL.road.fx)||{};const al=[];
- for(const id in FX){const a=ARC67[id];if(!a){al.push(`${id}: fx row, no chapter`);continue}
+ /* review road-b2-fix-r2: two rows/chapters are shared by design, not missing —
+    (1) SHARED BEAT ROWS: "ch_hoD" = the after-death ch_ho beats (CHHO_D spreads sD/cD/tD/xD into ch_ho .5–.11): checked against every chapter holding those beats;
+    (2) ALIAS CHAPTERS: bd_* replay the nc_* chapters (jrd_nc alias loop, fx already applied on the shared option objects): checked against the source row. */
+ const SHARED={ch_hoD:'ch_ho_'},ALIAS={bd_hoa:'nc_su',bd_ngua:'nc_gian',bd_tuc:'nc_tuc',bd_hoang:'nc_vuong'};
+ /* one-file mode (node road-option-scan.js dev/build/jrd_<f>.js): rows of roads not loaded are out of scope, not "no chapter" */
+ const ONE=process.argv.length>2,loaded=r=>Object.keys(ARC67).some(id=>id.startsWith(r));
+ for(const sid in SHARED){if(!FX[sid]||ONE&&!loaded(SHARED[sid]))continue;let seen=0;
+  for(const id in ARC67){if(!id.startsWith(SHARED[sid]))continue;const a=ARC67[id];for(const bk in FX[sid]){const O=a.B&&a.B[bk]&&a.B[bk].o;if(!Array.isArray(O))continue;seen++;
+   if(O.length!==FX[sid][bk].length)al.push(`${id}.${bk} (shared ${sid}): ${O.length} options, ${FX[sid][bk].length} fx entries`)}}
+  if(!seen)al.push(`${sid}: shared fx row, no chapter holds its beats`)}
+ for(const id in FX){if(SHARED[id])continue;const a=ARC67[id];if(!a&&ONE&&!loaded(id.replace(/_\d+$/,'_')))continue;if(!a){al.push(`${id}: fx row, no chapter`);continue}
   for(const bk in FX[id]){if(bk==='E'){for(const ek in FX[id].E)if(!a.E||!a.E[ek])al.push(`${id}.E.${ek}: fx, no ending`);continue}
    const O=a.B&&a.B[bk]&&a.B[bk].o;if(!Array.isArray(O)){al.push(`${id}.${bk}: fx, no option list`);continue}
    if(O.length!==FX[id][bk].length)al.push(`${id}.${bk}: ${O.length} options, ${FX[id][bk].length} fx entries`)}}
- for(const id in ARC67)if(ARC67[id].o==='rd'&&!FX[id])al.push(`${id}: road chapter with no BAL.road.fx row`);
+ for(const id in ARC67){if(ARC67[id].o!=='rd'||FX[id])continue;const m=id.match(/^(\w+?)_(\d+)$/),src=m&&ALIAS[m[1]]?ALIAS[m[1]]+'_'+m[2]:null;
+  if(!src||!FX[src]){al.push(`${id}: road chapter with no BAL.road.fx row`);continue}
+  for(const bk in FX[src]){if(bk==='E')continue;const O=ARC67[id].B&&ARC67[id].B[bk]&&ARC67[id].B[bk].o;if(!Array.isArray(O)||O.length!==FX[src][bk].length)al.push(`${id}.${bk} (alias of ${src}): option count differs from the source fx row`)}}
  console.log('FX ALIGN (BAL.road.fx rows vs options / endings):',al.length);al.forEach(x=>console.log('  '+x))}
