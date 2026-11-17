@@ -119,5 +119,24 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
   const n0=window.__amN.decline;const keep=JSON.stringify(m);const R0=roomFor;roomFor=()=>false;try{for(let i=0;i<60;i++){const r=amNight(m,o,"pick");if(/cáo bệnh/.test(String(r||"")))H.no++;else H.go++;Object.assign(m,JSON.parse(keep))}}finally{roomFor=R0}
   return{H,dec:window.__amN.decline-n0}});
  ok(r8.skip||r8.H.go>0&&r8.H.no>0&&r8.dec===r8.H.no,'gọi thị tẩm: an NPC maid weighs Tắm gội chờ giá / Cáo bệnh (both happen)',r8);
+ /* 2e4 maid dilemmas: ONE builder for her PEND card and the NPC maid (stf2Pick), both answers happen */
+ const r9=await p.evaluate(()=>{const o=liveRivals(true).find(x=>(x.staff||[]).some(s=>s.role==="maid"));if(!o)return{skip:1};const m=o.staff.find(s=>s.role==="maid");asSt(m);const keep=JSON.stringify(m);const st0=JSON.stringify(o.staff.map(x=>x.sid));
+  const B={scold:0,fest:0,black:0,aff:0};const W={};for(const k of ["cnvScoldOpts","cnvFestOpts","cnvBlackOpts","cnvAffOpts"]){W[k]=window[k];window[k]=function(){if(arguments[0]===m)B[k.slice(3,-4).toLowerCase()]++;return W[k].apply(this,arguments)}}
+  const H={};const reset=()=>{const K=JSON.parse(keep);for(const k in m)if(!(k in K))delete m[k];Object.assign(m,K);if(!o.staff.includes(m))o.staff.push(m)};const t=liveRivals(true).find(x=>x!==o&&!x.out);
+  try{for(let i=0;i<60;i++){reset();servDo(o,"phat",m);reset();m.lover=m.lover||9e6;threatServ(t,m);reset();
+    const c1=stf2Pick(m,cnvFestOpts(m,o),"fest");H["fest_"+c1.id]=1;t.affair=t.affair||1;const c2=stf2Pick(m,cnvAffOpts(m,t,o),"aff");H["aff_"+c2.id]=1}
+   const sm=S.month;S.month=1;const n0=B.fest;window.__p3see=BAL.ag.par3.cnv.aff.see;BAL.ag.par3.cnv.aff.see=100;try{reset();p3MaidMonth()}finally{S.month=sm;BAL.ag.par3.cnv.aff.see=window.__p3see}
+   H.monthFest=B.fest-n0}finally{for(const k in W)window[k]=W[k];reset()}
+  const N=window.__stf2N||{};const ids=k=>Object.keys(N).filter(x=>x.startsWith(k+"_")).map(x=>x.slice(k.length+1));
+  /* her card is built by the same builder */
+  const hb={};const w2={};for(const k of ["cnvScoldOpts","cnvFestOpts","cnvBlackOpts"]){w2[k]=window[k];window[k]=function(){if(arguments[0]===S)hb[k]=1;return w2[k].apply(this,arguments)}}
+  let her={};try{const sv=S.srv;const mm=liveRivals(true)[0];S.srv=S.srv||{};const isv=isSrv;isSrv=()=>true;const sM=srvM;srvM=()=>mm;try{PEND.cnvScold({});PEND.cnvFest({m:1});PEND.cnvBlack({r:mm.id})}finally{isSrv=isv;srvM=sM;S.srv=sv}}finally{for(const k in w2)window[k]=w2[k]}
+  const od=[cnvOd(150),cnvOd(-20),BAL.odds.hi,BAL.odds.lo];
+  return{B,H,scold:ids("scold"),black:ids("black"),hb:Object.keys(hb),od}});
+ ok(r9.skip||r9.B.scold>=1&&r9.scold.length>=2,'bị mắng: NPC maid punished (servDo phat) answers from cnvScoldOpts, more than one answer',r9.scold);
+ ok(r9.skip||r9.B.black>=1&&r9.black.length>=2,'bị nắm thóp: threatServ → the servant answers from cnvBlackOpts (not always Tai mắt)',r9.black);
+ ok(r9.skip||r9.H.monthFest>=1&&Object.keys(r9.H).some(k=>k.startsWith("aff_")),'yến / biết tư tình: monthly NPC maid picks from cnvFestOpts / cnvAffOpts',r9.H);
+ ok(r9.skip||r9.hb.length===3,'her PEND cnvScold / cnvFest / cnvBlack are built by the same builders',r9.hb);
+ ok(r9.skip||r9.od[0]===r9.od[2]&&r9.od[1]===r9.od[3]&&r9.od[0]<100&&r9.od[1]>0,'odds clamped by BAL.odds.lo/hi',r9.od);
  ok(errs.length===0,'no page errors',errs.slice(0,3));
  await b.close();const f=res.filter(x=>!x).length;console.log(f?`${f} FAIL`:'ALL PASS');process.exit(f?1:0)})();

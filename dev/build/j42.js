@@ -319,11 +319,8 @@ function srvFriendTip(){const f=srvFriendList();if(!f.length)return;const s=pick
  if(roll(55)&&L.length){const v=pick(L);S.srv.intel.push(v.id);log(`${s.name} kể nhỏ với ngươi chuyện trong cung ${v.name}. Ngươi có tin để bẩm chủ.`)}else{apply({bac:2});const gb=typeof goodsGive==="function"?goodsGive(S,"banhtrai",{from:"story",who:s.name}):"";log(`${s.name} chia cho ngươi ít bánh trái và 2 lạng bạc.${gb?` ${gb} vào rương.`:""}`)}}
 
 /* ---------- saveable choices ---------- */
-PEND.cnvScold=()=>{const m=srvM();if(!isSrv()||!m)return null;const o=od(40+S.sac/3);
- return{t:`<p>${m.name} ${hasT(m,"Kiêu ngạo")?"chê trà nguội, hắt cả chén vào người ngươi":hasT(m,"Kín đáo")?"nghi ngươi lén lút ra ngoài, gọi vào tra hỏi":"trách ngươi làm việc chậm chạp"}.</p>`,who:pv(m),o:[
-  {n:"Cúi đầu nhận lỗi",fx:{tin:1,duc:1},x:""},
-  {n:"Khóc lóc xin tha",fx:{},x:`${word(o)} · thành: Chủ tin +3 · hỏng: Chủ tin -3`,go:()=>{if(roll(o)){apply({tin:3});log("Chủ mềm lòng.")}else{apply({tin:-3});log("Chủ càng bực.")}}},
-  {n:"Cãi lại",fx:{danh:2,tin:-8},x:`đám cung nhân nể · kèm: bị phạt quỳ, Sức -15: ${chanceW(40)}`,go:()=>{if(roll(40)){apply({suc:-15});log("Bị phạt quỳ giữa sân. Sức -15.")}}}]}};
+PEND.cnvScold=()=>{const m=srvM();if(!isSrv()||!m)return null;
+ return{t:`<p>${m.name} ${hasT(m,"Kiêu ngạo")?"chê trà nguội, hắt cả chén vào người ngươi":hasT(m,"Kín đáo")?"nghi ngươi lén lút ra ngoài, gọi vào tra hỏi":"trách ngươi làm việc chậm chạp"}.</p>`,who:pv(m),o:cnvPend(S,cnvScoldOpts(S,m))}};
 PEND.cnvOrd=pp=>{const m=srvM(),t=RV(pp.t);if(!isSrv()||!m||!t||!t.alive||t.out)return null;const k=pp.k,o=ordOdds(k);
  const desc={spy:`dò la cung ${t.name}, xem nàng gặp ai, nói gì`,plant:`lén giấu hình nhân bùa ngải vào tẩm cung ${t.name}`,poison:`bỏ thuốc độc vào bát canh dâng ${t.name}`}[k];
  const gain={spy:`Chủ tin +4 · Bạc +3 · chủ nắm ${balAb(BAL.eff.j42.evN)} chứng cứ của ${t.name}`,plant:`Chủ tin +8 · Bạc +10 · ${t.name} bị vu, mất Danh`,poison:`Chủ tin +12 · Bạc +20 · ${t.name} trúng độc · ${kpDeathWord(kpDeathP("poison",t),"nàng")}`}[k];
@@ -364,6 +361,43 @@ function cnvFrameOpts(a,s,m){const fr=a===S?srvFriendList().length:(typeof asFri
     a.trouble=wk();if((a.suc||0)<=0&&typeof asOut==="function")asOut(a,"dead");else if((a.loyal||0)<8&&typeof asOut==="function")asOut(a,"tgk");return `${m.name} không tin ${a.name}, sai đánh đòn.`}},
   {id:"confess",n:"Nhận tội, xin tha",tag:"confess",fx:{tin:-6,suc:-8},x:"",go:()=>{if(a!==S)a.trouble=wk();return""}},
   {id:"pay",n:`Đút bạc cho ${s.name} rút lời`,tag:"bribe",fx:{bac:-10},x:`${s.name} thôi tố, người ấy quý ngươi +10`,lock:(a===S?S.bac:(a.bac||0))<10,go:()=>{stfLike(s,a,10);return""}}]}
+/* ===== ONE CORE (AG-ALL-2e4 parity, OD 17/11 ~15:25Z (3)): the maid's other dilemmas, built ONCE for the maid player's PEND card / person-card buttons
+   and an NPC maid (jagacts3: stf2Pick by her needs × nết, mindPick slip). Numbers BAL.ag.par3.cnv; odds clamped BAL.odds.lo/hi (cnvOd). ===== */
+function cnvOd(b){return cl(Math.round(b),BAL.odds.lo,BAL.odds.hi)}
+function cnvGo(a,op,ok){stfAp(a,op.fx);if(op.o!=null)stfAp(a,ok?op.w:op.l);return op.go?op.go(ok)||"":""}
+/* bị chủ quở mắng (her srvMoodEvent; an NPC maid when her master punishes her, j10 servDo "phat") */
+function cnvScoldOpts(a,m){const X=BAL.ag.par3.cnv.scold;const o=odA(a,X.beg.o+(a.sac||0)/X.beg.sacD);
+ return [{id:"humble",n:"Cúi đầu nhận lỗi",tag:"confess",fx:{...X.humble},x:""},
+  {id:"beg",n:"Khóc lóc xin tha",tag:"social",o,fx:{},w:{tin:X.beg.tin},l:{tin:-X.beg.tin},x:`${word(o)} · thành: Chủ tin ${balSg(X.beg.tin)} · hỏng: Chủ tin -${X.beg.tin}`,
+   go:ok=>{if(a===S)log(ok?"Chủ mềm lòng.":"Chủ càng bực.");return a===S?"":`${a.name} khóc lóc xin tha; ${m.name} ${ok?"mềm lòng":"càng bực"}`}},
+  {id:"talk",n:"Cãi lại",tag:"flee",fx:{danh:X.talk.danh,tin:-X.talk.tin},x:`đám cung nhân nể · kèm: bị phạt quỳ, Sức -${X.talk.suc}: ${chanceW(X.talk.kneel)}`,
+   go:()=>{if(!roll(cnvOd(X.talk.kneel)))return a===S?"":`${a.name} cãi lại ${m.name}`;stfAp(a,{suc:-X.talk.suc});if(a===S){log(`Bị phạt quỳ giữa sân. Sức -${X.talk.suc}.`);if(S.suc<=0)die("Quỳ phạt đến kiệt sức mà chết");return""}
+    if((a.suc||0)<=0&&typeof asOut==="function")asOut(a,"dead");return `${a.name} cãi lại ${m.name}, bị phạt quỳ giữa sân`}}]}
+/* yến tiệc đầu xuân / Thất tịch (months 1 and 7): she serves at her master's side */
+function cnvFestOpts(a,m){const X=BAL.ag.par3.cnv.fest;const o=odA(a,X.pour.o+(a.sac||0)/X.pour.sacD+(a.tai||0)/X.pour.taiD);
+ return [{id:"pour",n:"Rót rượu gần ngự tọa",tag:"social",o,fx:{},w:a===S?{}:{sung:amTeaG(a,X.pour.nt)},l:{tin:-X.pour.tin},x:`${word(o)} · thành: Hoàng thượng để ý +${X.pour.nt} · hỏng: Chủ tin -${X.pour.tin}`,
+   go:ok=>{if(!ok)return a===S?"":`${a.name} rót rượu gần ngự tọa, lỡ tay làm chủ mất mặt`;if(a===S){srvNotice("fest",X.pour.nt);return""}try{empMet(a,"fest",1)}catch(e){}
+    return `${a.name}, cung nữ của ${m?NM(m):"một cung"}, rót rượu gần ngự tọa, được Hoàng thượng để mắt`}},
+  {id:"stand",n:"Đứng sau hầu chủ",tag:"work",fx:{tin:X.stand.tin},x:""}]}
+/* bị nắm thóp (her affair seen, S.srv.leak; an NPC servant whose đối thực is known: j10 threatServ) — v = the one who threatens, m = her master */
+function cnvBlackOpts(a,v,m){const X=BAL.ag.par3.cnv.black;const o=cnvOd(X.ignore.o);const bac=a===S?S.bac:(a.bac||0);
+ return [{id:"obey",n:"Nghe lời, làm tai mắt",tag:"work",fx:{},x:a===S?`thành tai mắt của ${v.name} (không bạc) · kèm: ${cnvSpyX(m||{},1)}`:"",
+   go:()=>{if(a===S){S.srv.spyFor=v.id;S.srv.leak=null;return""}a.spyFor=key(v);return `${a.name} sợ hãi, thành tai mắt của ${NM(v)}`}},
+  {id:"pay",n:"Đút bạc bịt miệng",tag:"bribe",fx:{bac:-X.pay},lock:a!==S&&bac<X.pay,x:"lần này thôi; tin đồn bớt",
+   go:()=>{if(v===S)apply({bac:X.pay});else ap(v,{bac:X.pay});if(a===S){S.srv.leak=null;S.srv.rumor=0;return""}return `${a.name} đút ${X.pay} lạng bạc bịt miệng ${NM(v)}`}},
+  {id:"ignore",n:"Mặc kệ",tag:"flee",o,fx:{},w:{},l:{},x:`${word(o)} · thành: nàng không nói · hỏng: nàng mách ${m?m.name:"quản sự"}, bị lục rương`,
+   go:ok=>{if(a===S){if(!ok){const mm=manById(S.srv.lover)||srvMen().filter(x=>x.tinh>=BAL.tinhLv.warm)[0];if(mm)srvAffairCaught(mm,`${v.name} sai người mách chuyện tư tình của ngươi.`)}else S.srv.leak=null;return""}
+    if(ok)return `${a.name} mặc kệ lời dọa của ${NM(v)}; không ai nói ra`;if(m){m.knowDT=(m.knowDT||[]).concat([a.sid,a.lover]);stfAp(a,{tin:-X.caught.tin});if(roll(cnvOd(X.caught.tgk))&&typeof asOut==="function")asOut(a,"tgk")}
+    return `${NM(v)} mách ${m?NM(m):"quản sự"} chuyện đối thực của ${a.name}${a.out?"; bị đày xuống Tân Giả khố":""}`}}]}
+/* a maid who knows a consort's affair (her S.srv.knowAff, person card; an NPC maid s.knowAff, jagacts3): Dọa tố chuyện tư tình · Bẩm chủ chuyện của X · (NPC only) keep it */
+function cnvAffOpts(a,v,mis){const X=BAL.ag.par3.cnv.aff;const o=odA(a,X.threat.o+(a.tamco||0)/X.threat.tcD);const drop=()=>{if(a===S)S.srv.knowAff=(S.srv.knowAff||[]).filter(x=>x!==v.id);else a.knowAff=(a.knowAff||[]).filter(x=>x!==v.id)};const lm=manById(v.affair);
+ const O=[{id:"threat",n:"Dọa tố chuyện tư tình",tag:"bribe",o,fx:{},w:{bac:X.threat.bac},l:{},x:`Bạc +${X.threat.bac} · nàng phải che chở ngươi · hỏng: nàng oán ngươi, tìm cách hại ngươi`,
+   go:ok=>{drop();if(ok){if(a===S){affAdd(v,S,BAL.eff.j42.top);S.srv.hold=v.id}else a.hold=v.id;return a===S?`${v.name} tái mặt, dúi bạc vào tay ngươi: “Câm miệng.”`:`${a.name} dọa tố chuyện tư tình của ${v.name}, được bạc bịt miệng`}
+    if(a===S){oanAdd(v,S,BAL.eff.j42.top_2);if(roll(cnvOd(X.threat.lau)))srvLaundry(`${v.name} ra tay trước, vu cho ngươi ăn cắp.`,X.threat.lauW);return `${v.name} cười lạnh.`}
+    if(roll(cnvOd(X.threat.lau))&&typeof asOut==="function")asOut(a,"tgk");return `${a.name} dọa ${v.name}, bị nàng ra tay trước${a.out?", đày xuống Tân Giả khố":""}`}}];
+ if(mis&&mis!==v)O.push({id:"tell",n:`Bẩm chủ chuyện của ${v.name}`,tag:"help",fx:{tin:X.tell.tin},x:`Chủ tin +${X.tell.tin} · ${mis.name} nắm ${balAb(BAL.eff.j42.evTop)} chứng cứ của ${v.name}`,
+   go:()=>{drop();/*evok: affair*/evA(mis,v,BAL.eff.j42.evTop);return a===S?`${mis.name} ghi nhớ.${lm?" Chuyện "+v.name+" với "+lm.name+" thành thanh gươm trong tay chủ.":""}`:`${a.name} bẩm ${NM(mis)} chuyện tư tình của ${v.name}`}});
+ if(a!==S)O.push({id:"quiet",n:"Giữ kín",tag:"work",fx:{},x:""});return O}
 PEND.cnvName=pp=>{if(!isSrv()||(S.age||0)<18)return null;const m=srvM();const o=od(40+S.nt/2+S.sac/5);const risky=!amOn()&&!!m&&(m.malice||0)>=60&&S.tin<40;/* AG3: the mistress harms her by her own acts, no extra line */
  return{t:`<p>${pp.src==="month"?"Tổng quản Càn Thanh cung đến hỏi: Hoàng thượng còn nhớ cung nữ dâng trà hôm nọ.":"Hoàng thượng đặt chén trà xuống, hỏi: “Ngươi tên gì? Hầu ở cung nào?”"}</p>${risky?`<p class="r">${m.name} hiểm độc lại chẳng ưa ngươi: nàng ra tay trước ngày sắc phong: ${chanceW(25)}.</p>`:""}`,who:pEmp(),o:[
   {n:"Cúi đầu thưa tên",fx:{},x:`${word(o)} · thành: được phong ${RANKS[0].n}${risky?`, nhưng chủ giết ngươi trước ngày sắc phong: ${chanceW(25)}`:""} · hỏng: Chủ tin -15`,go:()=>{if(roll(o)){if(risky&&roll(25)){die(`Trước ngày sắc phong, ${m.name} sai người đẩy ngươi xuống giếng`);return}srvRise(pp.src==="month"?"Hoàng thượng nhớ đến ngươi":"Hoàng thượng để mắt đến cung nữ dâng trà")}else{apply({tin:-15});if(m)log(`${m.name} biết chuyện, giận ngươi lả lơi. Chủ tin -15.`)}}},
@@ -378,10 +412,8 @@ PEND.cnvAge=()=>{if(!isSrv())return null;const hi=S.srv.rk>=3;const fate=hi?"Ch�
  else if(S.tin>=60)o.push({n:"Xin chủ giữ lại",fx:{tin:2},x:"ở thêm đến 30 tuổi",go:()=>log(`${srvM()?srvM().name:"Chủ"} xin Nội vụ phủ giữ ngươi lại.`)});
  else o.push({n:"Xin ở lại",fx:{},x:"Chủ tin dưới 60: chủ không giữ · ở thêm đến 30 tuổi, Chủ tin -5",go:()=>apply({tin:-5})});
  return{t:`<p>Năm nay ngươi ${S.age} tuổi, đến tuổi cung nữ được xuất cung.</p>`,who:pMe(),o}};
-PEND.cnvFest=pp=>{if(!isSrv())return null;const m=srvM();const o=od(30+S.sac/3+S.tai/10);
- return{t:`<p>${pp.m===1?"Yến tiệc đầu xuân ở Thái Hòa điện":"Tiệc Thất tịch bên hồ sen"}. Ngươi theo hầu ${m?m.name:"chủ"}.</p>`,who:pMe(),o:[
-  {n:"Rót rượu gần ngự tọa",fx:{},x:`${word(o)} · thành: Hoàng thượng để ý +12 · hỏng: Chủ tin -4`,go:()=>{if(roll(o))srvNotice("fest",12);else apply({tin:-4})}},
-  {n:"Đứng sau hầu chủ",fx:{tin:3},x:""}]}};
+PEND.cnvFest=pp=>{if(!isSrv())return null;const m=srvM();
+ return{t:`<p>${pp.m===1?"Yến tiệc đầu xuân ở Thái Hòa điện":"Tiệc Thất tịch bên hồ sen"}. Ngươi theo hầu ${m?m.name:"chủ"}.</p>`,who:pMe(),o:cnvPend(S,cnvFestOpts(S,m))}};
 
 /* ---------- rising: she joins the consort game ---------- */
 function srvRise(why){if(!S||(S.age||0)<18)return;const m=srvM();const tin=S.tin;S.srv.risen=1;S.srv.wasMis=m?m.id:null;S.srv.sent=null;S.rank=0;S.sung=15+Math.round(S.nt/5);S.lastPromo=S.turn;apply({danh:5,bac:20});
@@ -501,8 +533,7 @@ function srvAffairCaught(m,how){if(!isSrv())return;const mis=srvM();const scheme
    if(m.rw!=="vương gia"&&S.srv.vow!==m.id)T("Hẹn ước trăm năm",od(SRVA.vow.o(S,null,{tinh:m.tinh})),"hắn hứa chờ ngươi xuất cung · mở đường thành thân",ok=>{if(ok){S.srv.vow=m.id;return `${m.name} thề sẽ chờ ngươi.`}return "Hắn ngập ngừng, chưa dám hứa."})}
   if(m.tinh>=SRVA.cut.at)T("Cắt đứt",100,"hắn thôi tơ tưởng; bớt hẳn rủi ro",()=>{m.tinh=0;if(S.srv.lover===m.id)S.srv.lover=null;if(S.srv.vow===m.id)S.srv.vow=null;return "Ngươi trả lại khăn tay."})}
  if((p.sk==="rv"||p.sk==="hh")&&p.ref){const v=RV(p.ref.id);if(v&&v!==mis&&(S.srv.knowAff||[]).includes(v.id)&&v.affair){const lm=manById(v.affair);
-  T(`Dọa tố chuyện tư tình`,od(45+S.tamco/3),`Bạc +30 · nàng phải che chở ngươi · hỏng: nàng oán ngươi, tìm cách hại ngươi`,ok=>{S.srv.knowAff=S.srv.knowAff.filter(x=>x!==v.id);if(ok){apply({bac:30});affAdd(v,S,BAL.eff.j42.top);S.srv.hold=v.id;return `${v.name} tái mặt, dúi bạc vào tay ngươi: “Câm miệng.”`}oanAdd(v,S,BAL.eff.j42.top_2);if(roll(35))srvLaundry(`${v.name} ra tay trước, vu cho ngươi ăn cắp.`,8);return `${v.name} cười lạnh.`},{act:1});
-  if(mis)T(`Bẩm chủ chuyện của ${v.name}`,100,`Chủ tin +6 · ${mis.name} nắm ${balAb(BAL.eff.j42.evTop)} chứng cứ của ${v.name}`,()=>{S.srv.knowAff=S.srv.knowAff.filter(x=>x!==v.id);/*evok: affair*/evA(mis,v,BAL.eff.j42.evTop);apply({tin:6});return `${mis.name} ghi nhớ.${lm?" Chuyện "+v.name+" với "+lm.name+" thành thanh gươm trong tay chủ.":""}`})}}}catch(e){console.error(e)}return A}})();
+  {const O=cnvAffOpts(S,v,mis);for(const op of O)if(op.id!=="quiet")T(op.n,op.o==null?100:op.o,op.x,ok=>cnvGo(S,op,ok),op.id==="threat"?{act:1}:{})}}}}catch(e){console.error(e)}return A}})();
 /* the week: talk spreads, rivals use it; a token may be found */
 (function(){const w0=srvWeek;srvWeek=function(){w0.apply(this,arguments);try{if(!isSrv()||S.dead||Q.length)return;const mis=srvM();const lover=S.srv.lover&&manById(S.srv.lover);
  const hot=srvMen().filter(m=>m.tinh>=BAL.tinhLv.warm);if(!hot.length&&!S.srv.rumor)return;
@@ -529,10 +560,7 @@ function maidLoveMonth(){let ev="";if((typeof asOn==="function"&&asOn()))return"
 (function(){const m0=monthTick;monthTick=function(){let ev=m0.apply(this,arguments);try{if(!S.dead&&!isSrv())maidLoveMonth()}catch(e){}return ev}})();
 /* the choice cards */
 PEND.cnvBlack=pp=>{const v=RV(pp.r),mis=srvM();if(!isSrv()||!v||!v.alive)return null;
- return{t:`<p>Thái giám của ${v.name} chặn ngươi sau hòn non bộ: “Chuyện ngươi với nam nhân bên ngoài, chủ tử nhà ta biết cả. Muốn giữ mạng thì nghe lời.”</p>`,who:pv(v),o:[
-  {n:"Nghe lời, làm tai mắt",fx:{},x:`thành tai mắt của ${v.name} (không bạc) · kèm: ${cnvSpyX(srvM()||{},1)}`,go:()=>{S.srv.spyFor=v.id;S.srv.leak=null}},
-  {n:"Đút bạc bịt miệng",fx:{bac:-20},x:"lần này thôi; tin đồn bớt",go:()=>{S.srv.leak=null;S.srv.rumor=0}},
-  {n:"Mặc kệ",fx:{},x:`${word(40)} · thành: nàng không nói · hỏng: nàng mách ${mis?mis.name:"quản sự"}, bị lục rương`,go:()=>{if(!roll(40)){const m=manById(S.srv.lover)||srvMen().filter(x=>x.tinh>=BAL.tinhLv.warm)[0];if(m)srvAffairCaught(m,`${v.name} sai người mách chuyện tư tình của ngươi.`)}else S.srv.leak=null}}]}};
+ return{t:`<p>Thái giám của ${v.name} chặn ngươi sau hòn non bộ: “Chuyện ngươi với nam nhân bên ngoài, chủ tử nhà ta biết cả. Muốn giữ mạng thì nghe lời.”</p>`,who:pv(v),o:cnvPend(S,cnvBlackOpts(S,v,mis))}};
 PEND.cnvGrant=pp=>{if(!isSrv()||(S.age||0)<18)return null;const m=pp.m&&manById(pp.m);const w=m?m.name:WEDW[pp.w||0];const by=pp.by==="th"&&!S.thDead?"Thái hậu":(srvM()?srvM().name:"Chủ nhân");
  return{t:`<p>${by} khen ngươi hầu hạ chu đáo, muốn ban gả ngươi cho <b>${w}</b>${m?`, người ngươi ${tinhW(m.tinh).replace("ngươi","")}`:""}.</p>`,who:pp.by==="th"?pTH():(srvM()?pv(srvM()):pMe()),o:[
   {n:"Tạ ơn, xuất giá",fx:{},x:"kết thúc kiếp này: được ban hôn",go:()=>over("Được ban hôn",`${by} ban gả ${S.name} cho ${w}. Ngươi rời cung có của hồi môn${m?", về với người mình thương":""}.`,`Được ${by} ban hôn cho ${w}`,true)},

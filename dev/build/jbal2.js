@@ -1082,6 +1082,11 @@ BAL.ag.par3={on:1,
 /* Mời đến cung ta (j21 inviteO, her button and an NPC host): odds = base + guest's liking of the host / affD + rank gap × rk; below hate the button says she will not come */
 /* Phòng bị · Thử độc đồ ăn (j70, her order and an NPC's): odds the taster tastes first, odds the taster dies of it */
 /* Dạy con học chữ / lễ nghi (j53 ktAct, her deck card and an NPC mother cx3:teach*): Sức and khắc of one lesson */
+/* 2e4 the maid's dilemmas, ONE builder for her card and an NPC maid (j42 cnvScoldOpts / cnvFestOpts / cnvBlackOpts / cnvAffOpts): scold = Cúi đầu (fx), Khóc lóc (odds o + Sắc/sacD, ± tin), Cãi lại (Danh, Chủ tin −tin, odds kneel of Sức −suc);
+   fest = Rót rượu (odds o + Sắc/sacD + Tài/taiD; his regard +nt, fail Chủ tin −tin), Đứng sau (tin); black = Đút bạc (pay), Mặc kệ (odds the threatener keeps quiet), caught (NPC đối thực told: lòng −tin, odds tgk);
+   aff = Dọa tố (odds o + Tâm cơ/tcD, Bạc, fail: odds lau of Tân Giả khố lauW tuần), Bẩm chủ (Chủ tin), see = % a month an NPC maid learns a consort's affair, w = worth weights of an NPC maid's pick */
+BAL.ag.par3.cnv={scold:{humble:{tin:1,duc:1},beg:{o:40,sacD:3,tin:3},talk:{danh:2,tin:8,kneel:40,suc:15}},fest:{pour:{o:30,sacD:3,taiD:10,nt:12,tin:4},stand:{tin:3}},
+ black:{pay:20,ignore:{o:40},caught:{tin:10,tgk:30}},aff:{threat:{o:45,tcD:3,bac:30,lau:35,lauW:8},tell:{tin:6},see:3}};
 BAL.kidTeach={suc:5,k:2,age:3};
 BAL.def70={taste:30,die:40,caught:12,ev:30};/* + Theo dõi một người, monthly: odds the watcher is caught / brings evidence */
 BAL.invite={base:40,affD:2,rk:5,hate:-30};
