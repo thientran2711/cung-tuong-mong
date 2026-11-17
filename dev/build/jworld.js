@@ -174,13 +174,13 @@ EVD.dich={place:w=>"tyv",
    (Cần Chính điện banquet), the j67 s_su / jrd_nc arcs stay as they are. Invited consorts (rank >= BAL) may show a talent. */
 EVD.su={place:w=>"thu",
  start(w){const b=B().su;moodSet(b.mood);const S1=[];for(const v of liveR()){if(rkOf(v)<b.rank)continue;const k=npcPick(v,[["show",mW(v,"art")],["quiet",1]]);
-   if(k==="show"){if(roll(odA(v,b.show[0]+(v.tai||0)/b.show[1]))){ap(v,{sung:b.showSung,danh:b.showDanh});S1.push(v)}else ap(v,{danh:b.failDanh})}}
+   if(k==="show"){const o=odA(v,b.show[0]+(v.tai||0)/b.show[1]);if(agTry(o)){ap(v,{sung:b.showSung,danh:b.showDanh});S1.push(v)}else if(!agSoft(o))ap(v,{danh:b.failDanh})}}
   return `Yến tiếp sứ ở Cần Chính điện; phi tần từ ${RANKS[b.rank].n} trở lên dự yến.${S1.length?` Được sứ thần khen tài: ${nmList(S1)}.`:""}`},
  end(w){return "Sứ đoàn đã lên đường về nước, mang theo quốc thư đáp lễ."},
  card(w){return{t:"Sứ đoàn vào triều",who:pEmp(),h:`<p>${w.cause}.</p><p>${w.txt||""}</p>`}},
  scene(w){const b=B().su;const ok=meCons()&&rkOf(S)>=b.rank;const o=od(b.show[0]+(S.tai||0)/b.show[1]);
   return{t:"Yến tiếp sứ",who:pEmp(),h:`<p>Sứ thần dâng lễ vật lạ, bá quan ngồi kín hai bên.</p>${ok?"":`<p class="past">Phẩm của ngươi chưa được dự yến; chỉ đứng xa mà xem.</p>`}`,
-   opts:ok?[{n:"Dâng một khúc đàn trong yến",fx:{},x:`${word(o)} · thành: Sủng +${b.showSung}, Danh +${b.showDanh} · hỏng: Danh ${b.failDanh}`,go:()=>{if(roll(agOdd(o)))apply({sung:b.showSung,danh:b.showDanh});else apply({danh:b.failDanh})}},
+   opts:ok?[{n:"Dâng một khúc đàn trong yến",fx:{},x:`${word(o)} · thành: Sủng +${b.showSung}, Danh +${b.showDanh} · hỏng: Danh ${b.failDanh}`,go:()=>{if(agTry(o))apply({sung:b.showSung,danh:b.showDanh});else if(agSoft(o))log(agSoftTxt(S));else apply({danh:b.failDanh})}},
     {n:"Ngồi yên giữ lễ",fx:{},x:"không được mất gì"}]:[{n:"Đứng xem rồi về",fx:{},x:"không được mất gì"}]}},
  night(w,p){return false}};
 /* 8 ĐẠI THỌ (row 3): the Emperor's 40/50/60… or Thái hậu's 60/70/80 birthday (j71 Tiết Vạn thọ / Thánh thọ days). Reuses FEST days,
@@ -194,7 +194,7 @@ EVD.tho={place:w=>w.x.who==="th"?"tn":"thu",
   return{t:wName(w),who:pEmp(),h:`<p>${w.cause}.</p><p>${w.txt||""}</p>`,opts:meCons()?[
    {n:"Dâng lễ vật quý",fx:{bac:-b.big},x:`thành: Sủng +${b.sungBig}${th?`, Thái hậu +${b.thBig}`:""}`,go:()=>apply(th?{sung:b.sungBig,th:b.thBig}:{sung:b.sungBig})},
    {n:"Dâng lễ vật vừa phải",fx:{bac:-b.mid},x:`thành: Sủng +${b.sungMid}`,go:()=>apply({sung:b.sungMid})},
-   {n:"Tự tay làm lễ vật",fx:{suc:-b.makeSuc},x:`${word(o)} · thành: Sủng +${b.sungBig} · hỏng: không ai để ý`,go:()=>{if(roll(agOdd(o)))apply({sung:b.sungBig})}}]:undefined}},
+   {n:"Tự tay làm lễ vật",fx:{suc:-b.makeSuc},x:`${word(o)} · thành: Sủng +${b.sungBig} · hỏng: không ai để ý`,go:()=>{if(agTry(o))apply({sung:b.sungBig})}}]:undefined}},
  night(w,p){return false}};
 /* 9 THIÊN TƯỢNG (row 7): eclipse / comet read by Khâm Thiên giám. Reuses the j7 comet card (it names her or a rival) — it leaves the weekly
    random pool and comes only with this window (LUẬT SỬA CẢ NHÓM); j3 mood; no feasts for the window. */

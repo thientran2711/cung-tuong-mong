@@ -8,7 +8,7 @@ const RISKRE=/(lộ:|mách lại|nắm thóp|có thể (mách|nắm|bị|lật)|
   if(a.n==="Cảnh báo nàng"&&/không có căn cứ/.test(a.x||"")){a.lock=true;a.t="chưa biết ai đang hại nàng"}
   if(a.open&&!S.inv.some(e=>!e.h)){a.lock=true;a.t="rương trống"}
   if(/^Bàn tán về/.test(a.n)&&/mách lại/.test(a.x||"")){a.x="";a.x=`nàng quý ngươi ${balSg(-BAL.talk.gossip.miss)}`;a.risk=`nàng mách lại, ${a.n.replace(/^Bàn tán về /,"")} oán ngươi ${balSg(BAL.talk.gossip.tellOan)}: ${chanceW(BAL.talk.gossip.tell)}`}
-  if(a.n==="Chia sẻ bí mật"&&/nắm thóp/.test(a.x||"")){a.x=a.x.replace(/ · nàng có thể nắm thóp ngươi/,"");a.risk=`nàng nắm ${balAb(BAL.eff.j9.evRun)} chứng cứ của ngươi: ${chanceW(50)}`}
+  if(a.n==="Chia sẻ bí mật"&&/nắm thóp/.test(a.x||"")){a.x=a.x.replace(/ · nàng có thể nắm thóp ngươi/,"");a.risk=`nàng nắm ${balAb(BAL.ag.ev.one)} chứng cứ của ngươi: ${chanceW(BAL.talk.secretGrab)}`}
   if(a.n==="Khiêu khích"){a.risk=a.x;a.x=""}
   return a})}})();
 /* the talk line: cost in khắc, gains green, risks and failure red, needs as disabled reasons */

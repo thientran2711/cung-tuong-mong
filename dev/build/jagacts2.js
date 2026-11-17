@@ -62,20 +62,22 @@ agReg("consort","cx2",(v,N,need)=>{const O=[];const X=BAL.ag.cx2;if(v===S||v.out
  return O});
 function ag2BribeS(v,t){const L=(t.staff||[]).filter(s=>s&&s.spyFor!==key(v));return L.length?mindPickBy(L,s=>Math.max(1,100-(s.loyal||0)),v):null}
 agRunReg("cx2:maidTalk",v=>{const m=v.maid;if(!m)return"";m.loyal=cl((m.loyal||0)+BAL.ag.cx2.maidTalk.w.maid,0,100);return ag2Res(v,"maidTalk",1,`${v.name} tâm sự với ${m.name}`)});
-agRunReg("cx2:maidSpy",v=>{const m=v.maid;if(!m)return"";const X=BAL.ag.cx2.maidSpy;if(!roll(odA(v,cx2O(v,"maidSpy")))){m.loyal=cl((m.loyal||0)+X.l.maid,0,100);return ag2Res(v,"maidSpy",0,`${m.name} đi dò la cho ${v.name}, chẳng nghe được gì`)}
+agRunReg("cx2:maidSpy",v=>{const m=v.maid;if(!m)return"";const X=BAL.ag.cx2.maidSpy,o=odA(v,cx2O(v,"maidSpy"));if(!agTry(o)){if(!agSoft(o))m.loyal=cl((m.loyal||0)+X.l.maid,0,100);return ag2Res(v,"maidSpy",0,`${m.name} đi dò la cho ${v.name}, chẳng nghe được gì`)}
  const x=evGuilty(v,others(v).filter(y=>y&&y!==v&&(y===S||y.alive)));const ok=!!(x&&evA(v,x,BAL.ag.ev.one));return ag2Res(v,"maidSpy",ok,ok?`${m.name} nghe lén được chuyện của ${agcNm(x)} cho ${v.name}`:`${m.name} đi dò la cho ${v.name}, chẳng thấy điều gì sai trái`)});
 agRunReg("cx2:bribeSrv",(v,t)=>{if(!t)return"";const s=ag2BribeS(v,t);if(!s)return"";const r=bribeServ(v,s);return ag2Res(v,"bribeSrv",!!r,r?String(r).replace(/\.\s*$/,""):"")});
 agRunReg("cx2:plantSrv",(v,t)=>{if(!t)return"";const r=plantServ(v,t);return ag2Res(v,"plantSrv",!!r,r?String(r).replace(/\.\s*$/,""):"")});
-function ag2Res(v,k,ok,txt){AG2.stat.land++;AG2.stat.by[k]=(AG2.stat.by[k]||0)+1;return txt}
+/* ag2Sf = the last ag2Roll failed SOFTLY at the cap (owner OD 17/11 ~17:35Z): its result line is the ONE BẠI line; cleared by ag2Res */
+let ag2Sf=false;
+function ag2Res(v,k,ok,txt){AG2.stat.land++;AG2.stat.by[k]=(AG2.stat.by[k]||0)+1;if(!ok&&ag2Sf)txt=agSoftTxt(v);ag2Sf=false;return txt}
 /* the card of a deed with odds: cost → roll odA(cx2O) → w or l (the player's go / fail effects after) */
-function ag2Roll(v,k,c){const X=BAL.ag.cx2[k];if(!ag2Pay(v,c||X.c))return null;const ok=roll(odA(v,cx2O(v,k)));ap(v,ok?X.w||{}:X.l||{});return ok}
+function ag2Roll(v,k,c){const X=BAL.ag.cx2[k];if(!ag2Pay(v,c||X.c))return null;const o=odA(v,cx2O(v,k)),ok=agTry(o);ag2Sf=!ok&&agSoft(o);ap(v,ok?X.w||{}:ag2Sf?{}:X.l||{});return ok}
 agRunReg("cx2:flat",v=>{const ok=ag2Roll(v,"flat");if(ok==null)return"";return ag2Res(v,"flat",ok,ok?`${v.name} khéo lời tâng bốc, Hoàng thượng vui vẻ`:`${v.name} tâng bốc vụng về, Hoàng thượng nhíu mày`)});
 agRunReg("cx2:true",v=>{const ok=ag2Roll(v,"true");if(ok==null)return"";if(ok&&roll(agCap(BAL.ag.cx2.true.disc))){const u=Object.keys(LIKES).filter(k=>!(v.eK||{})[k]);if(u.length)(v.eK=v.eK||{})[pick(u)]=1}
  return ag2Res(v,"true",ok,ok?`${v.name} thưa chuyện thật lòng, được Hoàng thượng để tâm`:`${v.name} nói thật lòng, Hoàng thượng không vui`)});
-agRunReg("cx2:show",v=>{const X=BAL.ag.cx2.show;if(!ag2Pay(v,X.c))return"";const ok=roll(odA(v,cx2O(v,"show")));let lv=0;for(const a in v.arts||{})lv=Math.max(lv,v.arts[a]||0);
- ap(v,ok?{"sung":X.w.sung+lv,"danh":X.w.danh}:X.l);return ag2Res(v,"show",ok,ok?`${v.name} phô tài trước Hoàng thượng, được ngài khen`:`${v.name} phô tài trước Hoàng thượng nhưng vụng về`)});
+agRunReg("cx2:show",v=>{const X=BAL.ag.cx2.show;if(!ag2Pay(v,X.c))return"";const o=odA(v,cx2O(v,"show")),ok=agTry(o);let lv=0;for(const a in v.arts||{})lv=Math.max(lv,v.arts[a]||0);
+ ap(v,ok?{"sung":X.w.sung+lv,"danh":X.w.danh}:agSoft(o)?{}:X.l);return ag2Res(v,"show",ok,ok?`${v.name} phô tài trước Hoàng thượng, được ngài khen`:`${v.name} phô tài trước Hoàng thượng nhưng vụng về`)});
 agRunReg("cx2:favor",v=>{const X=BAL.ag.cx2.favor;if((v.sung||0)<X.min)return"";const ok=ag2Roll(v,"favor",{});if(ok==null)return"";
- if(!ok&&S.emp&&S.emp.mood===3&&roll(agCap(X.angry)))punish(v,"làm phiền lúc thánh thượng nổi giận",1);return ag2Res(v,"favor",ok,ok?`${v.name} xin được ân điển của Hoàng thượng`:`${v.name} xin ân điển, bị Hoàng thượng gạt đi`)});
+ if(!ok&&!ag2Sf&&S.emp&&S.emp.mood===3&&roll(agCap(X.angry)))punish(v,"làm phiền lúc thánh thượng nổi giận",1);return ag2Res(v,"favor",ok,ok?`${v.name} xin được ân điển của Hoàng thượng`:`${v.name} xin ân điển, bị Hoàng thượng gạt đi`)});
 agRunReg("cx2:court",v=>{const ok=ag2Roll(v,"court");if(ok==null)return"";return ag2Res(v,"court",ok,ok?`${v.name} bàn chuyện triều chính, Hoàng thượng tán thưởng`:`${v.name} bàn chuyện triều chính, Hoàng thượng không vừa ý`)});
 agRunReg("cx2:nurse",v=>{if(!(S.emp&&S.emp.ill))return"";const ok=ag2Roll(v,"nurse");if(ok==null)return"";if(ok&&empGive(v,BAL.ag.cx2.nurse.best,"nurse"))bestow(v,"nurse");
  return ag2Res(v,"nurse",ok,ok?`${v.name} sang Dưỡng Hòa điện sắc thuốc, hầu bên giường Hoàng thượng`:`${v.name} hầu thuốc Hoàng thượng đến kiệt sức`)});
@@ -85,14 +87,14 @@ agRunReg("cx2:kidHeal",v=>{const X=BAL.ag.cx2.kidHeal;const k=ag2Sick(v,X.hp);if
 agRunReg("cx2:kidMed",v=>{const X=BAL.ag.cx2.kidMed;const k=ag2Sick(v,X.hp);if(!k||!ag2Pay(v,X.c))return"";k.hp=Math.min(100,k.hp+X.up);return ag2Res(v,"kidMed",1,`${v.name} đến Thái y viện xin thuốc cho ${k.name}`)});
 agRunReg("cx2:fert",v=>{const X=BAL.ag.cx2.fert;if(v.fert||!ag2Pay(v,X.c))return"";v.fert=X.m;return ag2Res(v,"fert",1,`${v.name} đến Thái y viện xin bài thuốc dễ thụ thai`)});
 agRunReg("cx2:doctor",v=>{const X=BAL.ag.cx2.doctor;if(v.doctor||!ag2Pay(v,X.c))return"";v.doctor=1;return ag2Res(v,"doctor",1,`${v.name} mời được một thái y làm tâm phúc`)});
-agRunReg("cx2:likes",v=>{const X=BAL.ag.cx2.likes;if(!ag2Pay(v,X.c))return"";const ok=roll(odA(v,X.o));if(ok){const u=Object.keys(LIKES).filter(k=>!(v.eK||{})[k]);const k=u.includes("flower")?"flower":u.length?pick(u):null;if(k)(v.eK=v.eK||{})[k]=1}
+agRunReg("cx2:likes",v=>{const X=BAL.ag.cx2.likes;if(!ag2Pay(v,X.c))return"";const ok=agTry(odA(v,X.o));if(ok){const u=Object.keys(LIKES).filter(k=>!(v.eK||{})[k]);const k=u.includes("flower")?"flower":u.length?pick(u):null;if(k)(v.eK=v.eK||{})[k]=1}
  return ag2Res(v,"likes",ok,ok?`${v.name} dò được sở thích của Hoàng thượng ở Kính sự phòng`:`${v.name} hỏi Kính sự phòng nhưng chẳng được gì`)});
-agRunReg("cx2:old",v=>{const ok=roll(odA(v,cx2O(v,"old")));let x=null;if(ok){const P=others(v).filter(t=>t&&t!==v&&(t===S||t.alive));x=evGuilty(v,P);if(x&&!evA(v,x,BAL.ag.ev.one))x=null}
+agRunReg("cx2:old",v=>{const ok=agTry(odA(v,cx2O(v,"old")));let x=null;if(ok){const P=others(v).filter(t=>t&&t!==v&&(t===S||t.alive));x=evGuilty(v,P);if(x&&!evA(v,x,BAL.ag.ev.one))x=null}
  return ag2Res(v,"old",ok,x?`${v.name} nghe phế phi kể chuyện cũ của ${agcNm(x)}`:`${v.name} sang lãnh cung hỏi chuyện cũ, chẳng được gì`)});
 agRunReg("cx2:vent",(v,t)=>{const X=BAL.ag.cx2.vent;if(!t||(t.pg||0)<X.pg||!ag2Pay(v,X.c))return"";t.pg=0;relAdd(v,t,-X.rel);try{agVent(v,t,"provoke")}catch(e){}
  return ag2Res(v,"vent",1,`${v.name} trút cơn ghen lên ${agcNm(t)}`)});
-agRunReg("cx2:chest",(v,t)=>{const X=BAL.ag.cx2.chest;if(!t)return"";if(roll(odA(v,cx2O(v,"chest")))){const r=evA(v,t,BAL.ag.ev.one);return ag2Res(v,"chest",1,r?`${v.name} lén lục rương của ${agcNm(t)}, tìm được thư từ`:`${v.name} lén lục rương của ${agcNm(t)}, chẳng thấy gì`)}
- relAdd(t,v,-X.rel);punish(v,"lục lọi cung phi tần",1);return ag2Res(v,"chest",0,`${v.name} lục rương của ${agcNm(t)}, bị cung nhân bắt gặp`)});
+agRunReg("cx2:chest",(v,t)=>{const X=BAL.ag.cx2.chest,o=t?odA(v,cx2O(v,"chest")):0;if(!t)return"";if(agTry(o)){const r=evA(v,t,BAL.ag.ev.one);return ag2Res(v,"chest",1,r?`${v.name} lén lục rương của ${agcNm(t)}, tìm được thư từ`:`${v.name} lén lục rương của ${agcNm(t)}, chẳng thấy gì`)}
+ if(agSoft(o))return ag2Res(v,"chest",0,agSoftTxt(v));relAdd(t,v,-X.rel);punish(v,"lục lọi cung phi tần",1);return ag2Res(v,"chest",0,`${v.name} lục rương của ${agcNm(t)}, bị cung nhân bắt gặp`)});
 agRunReg("cx2:help",(v,t)=>{const X=BAL.ag.cx2.help;if(!t||t===S)return"";if(aff(t,v)<X.aff){affAdd(t,v,-X.fail);return ag2Res(v,"help",0,`${t.name} khéo từ chối lời nhờ của ${v.name}`)}
  if(roll(agCap(X.p))&&(t.bac||0)>=X.bac){ap(t,{"bac":-X.bac});ap(v,{"bac":X.bac});return ag2Res(v,"help",1,`${t.name} cho ${v.name} mượn ${X.bac} lượng`)}
  const x=evGuilty(v,others(v).filter(y=>y&&y!==v&&y!==t&&(y===S||y.alive)));if(x&&evA(v,x,BAL.ag.ev.one))return ag2Res(v,"help",1,`${t.name} kể cho ${v.name} một chuyện về ${agcNm(x)}`);

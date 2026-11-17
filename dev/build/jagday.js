@@ -245,7 +245,7 @@ function agSeeNpc(p,doer){if(!agKhOn()||!BAL.ag.kh2.see.on)return;const R=agRec(
   if(hostile&&t&&t!==S&&typeof t==="object"&&TW.mediate&&aff(w,t)>=BAL.ag.goal.friend&&(!TW.mediate.req||TW.mediate.req(w,t))&&twCanPay(w,"mediate"))O.push(["mediate",A.w.mediate*agMW(w,"help")]);
   AGD.stat.seeN=(AGD.stat.seeN||0)+1;const c=mindPick(O.filter(x=>x[1]>0),w);if(!c||c==="ignore")continue;
   let r="";AG.inTick++;try{
-   if(c==="hear"){if(roll(agOdd(agHearOf(w)))){if(hostile&&dv)evA(w,dv,A.ev);r=`${w.name} nghe lén được ${dv?dv.name:""} ${p.act}`}else{if(dv)affAdd(dv,w,-B.caught)}}
+   if(c==="hear"){const ho=agHearOf(w);if(agTry(ho)){if(hostile&&dv)evA(w,dv,A.ev);r=`${w.name} nghe lén được ${dv?dv.name:""} ${p.act}`}else if(!agSoft(ho)){if(dv)affAdd(dv,w,-B.caught)}}
    else if(c==="join")r=twDo(w,p.k==="thHH"?queenP():t,p.k)||"";
    else if(c==="mediate")r=twDo(w,t,"mediate")||""}catch(e){agdErr("seeNpc",e)}finally{AG.inTick--}
   row[kh]=[p.pl,"ag_see:"+c,p.id,p.act||""];AG.stat.witNpc++;const SS=AGD.stat.see=AGD.stat.see||{};SS[c]=(SS[c]||0)+1;

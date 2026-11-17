@@ -101,9 +101,9 @@ function asLove(s){const L=[];s.mt=s.mt||{};const B=asB();
 function asRisk(s){return srvRiskOf(asHome(ownerOf(s)),S.mat||0,asFriends(s),s.tamco)}/* one table with the player maid (j42 srvRiskOf, BAL.srvRisk) */
 /* ---------- the shared execution (the player's card: cost, roll at its odds, gain or loss, công lao, then what the act does) ---------- */
 function asSee(m,t){try{return m===S||t===S||(S.mat||0)>=BAL.mline.seeMat}catch(e){return false}}
-function asRun(s,o){const m=ownerOf(s);if(!m)return"";const A=SRVA[o.sk];asC(s,o.sk);asAp(s,o.c);const ok=o.p>=100||roll(agOdd(o.p));
- asAp(s,ok?srvWa(o.sk,s,m):(A.l||{}));if(ok&&A.mp)servMerit(s,A.mp);let r="";
- try{r=(AS_DO[o.sk]||(()=>""))(s,m,o,ok)||""}catch(e){console.error("jagstaff "+o.sk,e)}
+function asRun(s,o){const m=ownerOf(s);if(!m)return"";const A=SRVA[o.sk];asC(s,o.sk);asAp(s,o.c);const ok=o.p>=100||agTry(o.p),sf=!ok&&agSoft(o.p);
+ asAp(s,ok?srvWa(o.sk,s,m):sf?{}:(A.l||{}));if(ok&&A.mp)servMerit(s,A.mp);let r="";
+ try{r=sf?agSoftTxt(s):(AS_DO[o.sk]||(()=>""))(s,m,o,ok)||""}catch(e){console.error("jagstaff "+o.sk,e)}
   return r}
 function asOut(s,why){const o=ownerOf(s);if(o&&o.staff){const i=o.staff.indexOf(s);if(i>=0)o.staff.splice(i,1)}s.out=why||1;ASN.out=(ASN.out||0)+1}
 const AS_DO={

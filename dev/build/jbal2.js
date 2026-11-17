@@ -893,6 +893,10 @@ BAL.ag.harm={spiteD:100,needs:["spite","sung","kid","safe","danh","ally"],
  hap:{wit:["provoke","humil","gossip","flaunt","effort","mediate","ksp","pray","harm:trip","harm:pushp","harm:rumor","harm:pond","harm:accuse","harm:vp","harm:xx","harm:takeaway"],pub:{effort:["vuon"],flaunt:["vuon"]}}};
 /* AG-ALL HYBRID day: intentW = × on the weight of a need that is part of her day intent when she picks her buổi; two = % she sets a second goal for the day */
 Object.assign(BAL.ag.day,{intentW:3,two:40});
+/* SOFT FAIL (owner OD 17/11 ~17:35Z "Trần 95%, việc chắc ăn mà hỏng thì chỉ hỏng nhẹ"): an act whose raw odds reached the cap (>= BAL.odds.hi:
+   sure before the cap) and fails only because of the cap fails SOFTLY: the cost / khắc already paid stays spent, nothing gained, no failure
+   consequence. me / npc = the ONE BẠI line ({n} = her name). Defined only if absent: Foreman D's game-wide BAL.odds.softFail wins on merge. */
+BAL.odds.softFail=BAL.odds.softFail||{me:"Việc tưởng nắm chắc, nào ngờ trời chẳng chiều người: công đã bỏ, chẳng được gì, cũng chẳng mất gì thêm.",npc:"{n} tưởng việc nắm chắc mà không thành; chẳng được gì, cũng chẳng mất gì thêm."};
 /* AG-ALL-2 (jagacts2.js; design dev/handover/reports/ag-all.md §16): the consort cards an NPC lacked + the Emperor's own visit / tea / bestowal.
    cx2     the player's cards read the SAME entries (j2 talkOpts / deck, j9 topicOpts, j20) through cx2O (j8): o base odds, sd / dd / td / thi / mat / y = the
            stat divisors / multipliers of the old literals, w gain, l loss, c cost; g = the need points an NPC's deed serves (BAL.ag.unit = one whole need).

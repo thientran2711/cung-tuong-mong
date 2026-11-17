@@ -156,8 +156,8 @@ function knHearRun(v,t,pd){const z=agZ();KN.stat.hear++;if(!t)return"";const tid
  const e=(z.log||[]).find(x=>x.id===tid&&x.w===wk()&&x.b===(S.buoi||0)&&x.pl===pd.pl&&x.k!=="know:hear");if(!e)return"";/* she came too late: nothing there */
  /* her khắc there is taken by this reaction (part 2b agSeeNpc reads it: no second reaction of hers to the same deed) */
  try{const R=agRec();const row=R&&R.P["v"+v.id];if(row&&row[pd.kh])row[pd.kh]=[pd.pl,"ag_see:hear",e.id,"nghe lén"]}catch(x){}
- const harm=knHarmK(e.k);if(roll(agOdd(knHearO(v)))){KN.stat.hearOk++;if(harm)evA(v,t,BAL.ag.ev.one);try{noteAdd(t.id,`${v.name} để ý chuyện nàng làm ở ${agPlaceTxt(pd.pl)}`)}catch(x){}return t===S?`${v.name} nghe lén chuyện ngươi làm ở ${agPlaceTxt(pd.pl)}`:""}
- affAdd(t,v,-BAL.ag.wit.caught);return t===S?`Ngươi bắt gặp ${v.name} đứng nghe lén`:""}
+ const harm=knHarmK(e.k),ho=knHearO(v);if(agTry(ho)){KN.stat.hearOk++;if(harm)evA(v,t,BAL.ag.ev.one);try{noteAdd(t.id,`${v.name} để ý chuyện nàng làm ở ${agPlaceTxt(pd.pl)}`)}catch(x){}return t===S?`${v.name} nghe lén chuyện ngươi làm ở ${agPlaceTxt(pd.pl)}`:""}
+ if(agSoft(ho))return"";affAdd(t,v,-BAL.ag.wit.caught);return t===S?`Ngươi bắt gặp ${v.name} đứng nghe lén`:""}
 /* the news reaches them after the buổi's deciders have chosen (the deeds exist only then): a consort still free this buổi (she kept her schedule)
    weighs going to listen against keeping it — the owner's option 1 (OD 17/11 ~15:00Z): re-decide when news comes, not every khắc */
 function knReact(){const key=agKey();if(KN.rk===key)return;KN.rk=key;if(!knDeedHaps().length)return;const t0=performance.now();
@@ -318,7 +318,8 @@ function tmRefuse(p,s){const o=ownerOf(s);if(!o||(s.loyal||0)<BAL.loy.mid||!roll
  if(o===S&&p!==S)knBao(s,S,`${p.name} vừa sai người tới mua chuộc {xung} làm tai mắt, {xung} không nhận`,knPal(p));return"tell"}
 /* one try: the recruiter turns to the most promising person (by the same odds); that person decides */
 function tmTry(p,why){const C=tmCands(p);if(!C.length)return null;let best=null,bo=-1;for(const s of C){const o=tmOdds(p,s);if(o>bo){bo=o;best=s}}
- KN.stat.tmTry=(KN.stat.tmTry||0)+1;if(roll(agOdd(bo))){best.spyFor=key(p);KN.stat.tmOk=(KN.stat.tmOk||0)+1;if(p===S&&!quiet)try{log(`${best.name} (người hầu cung ${NM(ownerOf(best))}) nhận lời làm tai mắt cho ngươi.`)}catch(e){}return best}
+ KN.stat.tmTry=(KN.stat.tmTry||0)+1;if(agTry(bo)){best.spyFor=key(p);KN.stat.tmOk=(KN.stat.tmOk||0)+1;if(p===S&&!quiet)try{log(`${best.name} (người hầu cung ${NM(ownerOf(best))}) nhận lời làm tai mắt cho ngươi.`)}catch(e){}return best}
+ if(agSoft(bo)){if(p===S&&!quiet)try{log(agSoftTxt(S))}catch(e){}return null}
  const t=tmRefuse(p,best);if(p===S&&!quiet)try{log(`Ngỏ ý với ${best.name} (người hầu cung ${NM(ownerOf(best))}), nàng không nhận${t?" và còn bẩm lại với chủ":""}.`)}catch(e){}return null}
 function tmLose(p,n){const L=taiMatRaw(p).sort((a,b)=>tmOdds(p,a)-tmOdds(p,b));for(let i=0;i<n&&i<L.length;i++)L[i].spyFor=null}
 function tmSync(p){if(!p||!tmOn())return;const c=Math.min(tmB().cap,taiMatRaw(p).length);

@@ -50,8 +50,8 @@ function amMW(s){try{return typeof mindW==="function"?mindW(s,"social"):1}catch(
 function amDecide(s,p,night){const o=odA(s,amTeaO(s,night));const sm=s.seek&&s.seek.used?BAL.mline.useMul:1;
  const u=amNeed(s)*(amTeaG(s)/BAL.ag.unit)*(o/100)*sm*amMW(s);if(!(u>0))return null;
  if(mindPick([["keep",BAL.ag.routine/BAL.ag.unit],["do",u*BAL.ag.needW]],s)!=="do")return null;return amDo(s,p,night?"teaN":"tea",o)}
-function amDo(s,p,kd,o){AMN[kd]++;const ok=roll(agOdd(o));let d=0;
- if(ok){amAdd(s,amTeaG(s));AMN.ok++;d=amJealD(p);if(d)s.loyal=cl((s.loyal||0)-d,0,100)}else s.loyal=cl((s.loyal||0)-amD().tea.fail,0,100);
+function amDo(s,p,kd,o){AMN[kd]++;const ok=agTry(o);let d=0;
+ if(ok){amAdd(s,amTeaG(s));AMN.ok++;d=amJealD(p);if(d)s.loyal=cl((s.loyal||0)-d,0,100)}else if(!agSoft(o))s.loyal=cl((s.loyal||0)-amD().tea.fail,0,100);
  empMet(s,kd,ok);
  const see=p===S||(S.mat||0)>=BAL.mline.seeMat;if(!see)return"";
  const W=kd==="teaN"?`bưng trà vào điện đêm Hoàng thượng ngự giá cung ${NM(p)}`:"quỳ dâng trà nơi Hoàng thượng đi qua";

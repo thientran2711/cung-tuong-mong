@@ -21,7 +21,7 @@ agReg("consort","cx",(v,N,need)=>{const O=[];const X=BAL.ag.cx;
  for(const k in AGCX){const D=X[k],A=AGCX[k];if(!D)continue;if(A.ok&&!A.ok(v))continue;if(need&&need!=="rest"&&D.need[need]==null)continue;if(need==="rest"&&k!=="rest")continue;if(!agcCan(v,D.c))continue;
   const g=Object.assign({},D.need);const N2=k==="rest"?Object.assign({},N,{rest:N.rest||0}):N;const u=agcU(v,N2,D.o,g,D.c,A.tag);if(u>0)O.push({k:"cx:"+k,t:null,u,tag:A.tag,act:A.act,at:()=>A.at(v)})}
  return O});
-for(const k in AGCX)agRunReg("cx:"+k,(v,t,p)=>{const D=BAL.ag.cx[k];if(!agcCan(v,D.c))return"";agcPay(v,D.c);if(!roll(odA(v,D.o)))return `${v.name} ${AGCX[k].act} nhưng chẳng được gì`;
+for(const k in AGCX)agRunReg("cx:"+k,(v,t,p)=>{const D=BAL.ag.cx[k];if(!agcCan(v,D.c))return"";agcPay(v,D.c);if(!agTry(odA(v,D.o)))return `${v.name} ${AGCX[k].act} nhưng chẳng được gì`;
  const w=Object.assign({},D.w);if(w.maid){if(v.maid&&v.maid.loyal!=null)v.maid.loyal=cl(v.maid.loyal+w.maid,0,100);delete w.maid}ap(v,w);return `${v.name} ${AGCX[k].act}`});
 /* study: Tự học / Học với thầy (the player's lesson; j85 npcStudyDo is the same rule for every NPC) */
 agReg("consort","study",(v,N,need)=>{if(need&&need!=="danh"&&need!=="duc")return[];if(typeof npcStudyDo!=="function")return[];const D=BAL.ag.cx.study;if((v.suc||0)<D.suc)return[];
@@ -33,8 +33,8 @@ agReg("consort","ask",(v,N,need)=>{const O=[];const X=BAL.ag.cx;
  let q=null;try{q=queenP()}catch(e){}
  if(q&&q!==v&&!v.queen&&(v.hh||0)>=X.hhShield.min&&!v.shield&&(!need||need==="safe")){const o=odA(v,X.hhShield.o+(v.hh||0)/X.hhShield.div);const u=agcU(v,N,o,{safe:X.hhShield.g},{},"greet",{hh:X.hhShield.l.hh});if(u>0)O.push({k:"cx:hhShield",t:q,u,tag:"greet",act:"xin Hoàng hậu che chở",at:(kh,vv,t)=>t===S?"home":palaceOf(t)})}
  return O});
-agRunReg("cx:thHelp",(v)=>{const X=BAL.ag.cx.thHelp;if(roll(odA(v,X.o+(v.th||0)/X.div))){ap(v,X.w);return `Thái hậu đỡ lời cho ${v.name}`}ap(v,X.l);return `${v.name} xin Thái hậu đỡ lời, Thái hậu không vui`});
-agRunReg("cx:hhShield",(v,q)=>{const X=BAL.ag.cx.hhShield;if(roll(odA(v,X.o+(v.hh||0)/X.div))){ap(v,X.w);v.shield=X.sh;return `${agcNm(q)} nhận che chở cho ${v.name}`}ap(v,X.l);return `${v.name} xin ${agcNm(q)} che chở nhưng bị từ chối`});
+agRunReg("cx:thHelp",(v)=>{const X=BAL.ag.cx.thHelp,o=odA(v,X.o+(v.th||0)/X.div);if(agTry(o)){ap(v,X.w);return `Thái hậu đỡ lời cho ${v.name}`}if(agSoft(o))return agSoftTxt(v);ap(v,X.l);return `${v.name} xin Thái hậu đỡ lời, Thái hậu không vui`});
+agRunReg("cx:hhShield",(v,q)=>{const X=BAL.ag.cx.hhShield,o=odA(v,X.o+(v.hh||0)/X.div);if(agTry(o)){ap(v,X.w);v.shield=X.sh;return `${agcNm(q)} nhận che chở cho ${v.name}`}if(agSoft(o))return agSoftTxt(v);ap(v,X.l);return `${v.name} xin ${agcNm(q)} che chở nhưng bị từ chối`});
 /* Mua ở Nội vụ phủ (the shop: buy, same price) and Tặng quà (giveTo, the player's gift rule) */
 agReg("consort","shop",(v,N,need)=>{if(need&&need!=="sung"&&need!=="ally"&&need!=="th")return[];const O=[];const X=BAL.ag.cx;
  if(!v.inv.some(e=>e&&!e.h&&IT[e.k]&&itm(e.k).gv&&!e.t)){const L=(S.shop||[]).filter(k=>IT[k]&&itm(k).gv&&!itm(k).il&&(v.bac||0)>=itm(k).pr+X.buy.keep);
@@ -59,7 +59,7 @@ agReg("consort","more",(v,N,need)=>{const O=[];const X=BAL.ag.cx;
  if((!need||need==="safe")&&(v.danh||0)>=-X.humble.c.danh){const L=others(v).filter(t=>t&&t!==v&&(t===S||t.alive)&&oan(t,v)>=X.humble.oan);if(L.length){const t=mindPickBy(L,x=>BAL.mind.pick.ag.base+oan(x,v),v);
   const u=agcU(v,N,100,{safe:X.humble.g},X.humble.c,"help");if(t&&u>0)O.push({k:"cx:humble",t,u,tag:"help",act:"sang nhún nhường",at:(kh,vv,tt)=>tt===S?"home":agAt(tt,kh)})}}
  return O});
-agRunReg("cx:portrait",(v)=>{const X=BAL.ag.cx.portrait;if(!agcCan(v,X.c))return"";agcPay(v,X.c);let aw=0;try{aw=artW2(v,"hoa")}catch(e){}if(roll(odA(v,X.o+aw*X.k))){ap(v,X.w);return `${v.name} vẽ chân dung dâng Thái hậu, Thái hậu rất vui`}ap(v,X.l);return `${v.name} vẽ chân dung dâng Thái hậu, Thái hậu chê không giống`});
+agRunReg("cx:portrait",(v)=>{const X=BAL.ag.cx.portrait;if(!agcCan(v,X.c))return"";agcPay(v,X.c);let aw=0;try{aw=artW2(v,"hoa")}catch(e){}const o=odA(v,X.o+aw*X.k);if(agTry(o)){ap(v,X.w);return `${v.name} vẽ chân dung dâng Thái hậu, Thái hậu rất vui`}if(agSoft(o))return agSoftTxt(v);ap(v,X.l);return `${v.name} vẽ chân dung dâng Thái hậu, Thái hậu chê không giống`});
 agRunReg("cx:humble",(v,t)=>{const X=BAL.ag.cx.humble;if(!t)return"";ap(v,X.c);oanAdd(t,v,-X.oanDown);affAdd(t,v,X.aff);return `${v.name} nhún nhường trước ${agcNm(t)}`});
 /* ---------------- 2. HOÀNG HẬU: the player-as-Empress buttons (empAct: Xử tội / Tịch thu / Ban thưởng / Ân xá / Khất bổng lộc) ---------------- */
 /* ONE function for her and the NPC Empress (empAct calls it for the player) */

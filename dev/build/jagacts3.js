@@ -33,8 +33,8 @@ const P3C={
     const who=typeof j78Who==="function"?j78Who(t):t.name;if(p===S)log(`${who} bị Thái hậu quở trách, mất sủng.`);return `${p.name} kể tội ${t.name} với Thái hậu; ${t.name} bị quở trách, mất sủng`}}},
  treat:p=>({n:"Xin chữa bệnh",c:{...BAL.ag.par3.treat.c},o:100,x:illName(p),run:()=>treat(p,"ty")})};
 /* run one card for an NPC: the player's runOpt order (cost, odds, gain or loss, then go / run) */
-function p3Run(v,C,why){if(!C||C.lock)return"";if(!agcCan(v,C.c))return"";agcPay(v,C.c);const o=C.o==null?100:C.o;const ok=o>=100||roll(agOdd(o));p3Ap(v,ok?C.w:C.l);let r="";
- try{if(ok&&C.go)r=C.go()||"";if(!ok&&C.fail)r=C.fail()||"";if(C.run)r=C.run()||r}catch(e){agdErr("par3:"+why,e)}AG3.stat.land++;AG3.stat.by[why]=(AG3.stat.by[why]||0)+1;
+function p3Run(v,C,why){if(!C||C.lock)return"";if(!agcCan(v,C.c))return"";agcPay(v,C.c);const o=C.o==null?100:C.o;const ok=o>=100||agTry(o),sf=!ok&&agSoft(o);p3Ap(v,ok?C.w:sf?null:C.l);let r="";
+ try{if(ok&&C.go)r=C.go()||"";if(!ok&&!sf&&C.fail)r=C.fail()||"";if(C.run&&!sf)r=C.run()||r}catch(e){agdErr("par3:"+why,e)}if(sf)r=agSoftTxt(v);AG3.stat.land++;AG3.stat.by[why]=(AG3.stat.by[why]||0)+1;
  return r?String(r).replace(/<[^>]+>/g,"").replace(/\.\s*$/,""):`${v.name} ${C.n.charAt(0).toLowerCase()+C.n.slice(1)}${ok?"":" nhưng không thành"}`}
 function p3Kc(C){try{return Math.max(1,cardCost(C))}catch(e){return 1}}
 /* the player's button each cx3 deed is (dev/test/ag-all.test.js okK, dev/test/ag-par3.js) */
@@ -121,8 +121,8 @@ const P3T={
  health:(p,v)=>{const T=BAL.talk,f=p3ChatF(p,v),n=Math.max(1,Math.round(T.health*f));return{n:"Hỏi han sức khỏe",o:100,x:`nàng quý ngươi +${n}`,
   run:()=>{affAdd(v,p,n);p3ChatMark(p,v);return p===S?`${v.name} cảm động. Nàng quý ngươi +${n}.`:`${p.name} hỏi han sức khỏe ${p3Who(v)}; ${p3Who(v)} quý ${p.name} +${n}`}}},
  praise:(p,v)=>{const T=BAL.talk,f=p3ChatF(p,v),n=Math.max(1,Math.round(nv(v,"praise")*f)),o=talkPraiseO(p);return{n:"Khen tài nghệ nàng",o,x:`nàng quý ngươi +${n}`,
-  run:()=>{p3ChatMark(p,v);if(roll(agOdd(o))){affAdd(v,p,n);return p===S?`${v.name} tươi cười. Nàng quý ngươi +${n}.`:`${p.name} khen tài nghệ ${p3Who(v)}; ${p3Who(v)} quý ${p.name} +${n}`}
-   affAdd(v,p,-T.praiseFail);return p===S?`${v.name} cho là ngươi giả lả. Nàng quý ngươi -${T.praiseFail}.`:`${p.name} khen tài nghệ ${p3Who(v)}, bị cho là giả lả`}}},
+  run:()=>{p3ChatMark(p,v);if(agTry(o)){affAdd(v,p,n);return p===S?`${v.name} tươi cười. Nàng quý ngươi +${n}.`:`${p.name} khen tài nghệ ${p3Who(v)}; ${p3Who(v)} quý ${p.name} +${n}`}
+   if(agSoft(o))return agSoftTxt(p);affAdd(v,p,-T.praiseFail);return p===S?`${v.name} cho là ngươi giả lả. Nàng quý ngươi -${T.praiseFail}.`:`${p.name} khen tài nghệ ${p3Who(v)}, bị cho là giả lả`}}},
  gossip:(p,v,third)=>{const T=BAL.talk,G=T.gossip,f=p3ChatF(p,v),n=Math.max(1,Math.round(G.hit*f));return{n:`Bàn tán về ${third.name}`,o:100,
   x:aff(v,third)<0?`nàng ghét người này, hợp chuyện: nàng quý ngươi +${n}`:`kèm: nàng quý ngươi -${G.miss} · nàng có thể mách lại`,
   run:()=>{p3ChatMark(p,v);if(aff(v,third)<0){affAdd(v,p,n);oanAdd(v,third,G.oan);return p===S?`Hai người to nhỏ chuyện ${third.name}. Nàng quý ngươi +${n}.`:`${p.name} và ${p3Who(v)} to nhỏ chuyện ${p3Who(third)}`}
@@ -211,7 +211,7 @@ agRunReg("cx3:drug",v=>p3DrugOk(v)?p3Run(v,P3C.drug(v),"drug"):"");
 function p3InvQ(){return(S.invQ=S.invQ||[])}
 function p3InvLand(){const Q=p3InvQ();if(!Q.length)return;S.invQ=[];for(const q of Q){const h=RV(q.h);if(!h||!h.alive||h.out||h.confined)continue;const k=palaceOf(h);
  if(q.g==="me"){S.where[h.id]=k;seeLoc(h,k);log(`${h.name} sai người mời ngươi sang cung nàng chơi buổi này.`);continue}
- const g=RV(q.g);if(!g||!g.alive||g.out||g.confined)continue;if(roll(inviteO(h,g))){S.where[g.id]=k;S.where[h.id]=k}else affAdd(h,g,BAL.eff.j21.top)}}
+ const g=RV(q.g);if(!g||!g.alive||g.out||g.confined)continue;const io=inviteO(h,g);if(agTry(io)){S.where[g.id]=k;S.where[h.id]=k}else if(!agSoft(io))affAdd(h,g,BAL.eff.j21.top)}}
 AGC3BTN.invite2="Mời đến cung ta";AGC3ACT.invite2="sai người đi mời khách";
 agReg("consort","par3inv",(v,N,need)=>{const O=[];if(!p3On()||v===S||v.out||v.confined||!v.alive||(need&&need!=="ally"))return O;const X=BAL.ag.par3.invite;
  try{if(p3InvQ().some(q=>q.h===v.id))return O;const L=others(v).filter(x=>x&&x.alive!==false&&!x.out&&!x.confined&&!sameHouse(v,x)&&aff(v,x)>=X.minAff&&aff(x,v)>=BAL.invite.hate);if(!L.length)return O;
