@@ -57,6 +57,10 @@ const {chromium}=require('playwright');const [,,URL,GAMES='6']=process.argv;cons
    Q.length=0;try{endTurn()}catch(e){F.push('R6 turn '+e.message)}ok(rivals.filter(v=>live(v)&&!v.queen&&rkOf(v)===4).length>=4,'R6 demoted after a turn');R1('R6');out.phi=rivals.filter(v=>live(v)&&rkOf(v)===4).length}
   /* R7 harem cap */
   {let n=0;while(roomFor('consort')&&n++<40){const v=newRival(0);Object.assign(v,drawFace());rivals.push(v)}ok(liveRivals(true).length+1===BAL.harem.cap,'R7 cap '+(liveRivals(true).length+1));palFix();R1('R7');R3('R7');
+   /* R9 (successor #2, whole family): adds that check the room when queued but add later. A newgirl event (j7) chosen after the harem
+      filled up, and every option of it, keeps the harem at the cap; bạc of the paid option comes back. j55 sớ tuyển tú re-checks roomFor. */
+   {const E=EVI.newgirl&&EVI.newgirl.b&&EVI.newgirl.b();if(!E)ok(false,'R9 no newgirl event');else for(const o of E.o){const b0=S.bac;try{o.go()}catch(e){ok(false,'R9 go '+e.message)}ok(liveRivals(true).length+1<=BAL.harem.cap,'R9 newgirl "'+o.n+'" -> '+(liveRivals(true).length+1));if(o.fx&&o.fx.bac)ok(S.bac>=b0,'R9 bạc not refunded')}
+    ok(/roomFor\("consort"\)\){const n=newRival\(roll\(70\)/.test(String(typeof tdTurn==='function'?'':'')+[...document.scripts].map(x=>x.text).join('')),'R9 j55 sớ tuyển tú re-checks roomFor')}
    out.capAt=liveRivals(true).length+1;const C={};for(const p of [S].concat(rivals))if(live(p)&&!p.queen){const r=residenceOf(p);C[r.part]=(C[r.part]||0)+1}out.full=C}
   render=r0;quiet=false;return {F,out}},+GAMES);
  console.log(JSON.stringify(res.out,null,0));for(const f of res.F)console.log('FAIL',f);if(errs.length)console.log('PAGE ERRORS',errs.slice(0,6));
