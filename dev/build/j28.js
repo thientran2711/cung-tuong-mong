@@ -26,7 +26,8 @@ const PERS={
  danghi:{tend:"dễ nghi, lời vu cáo khó gỡ",w:{punish:1.3},slight:1.2,forgive:.8},mesac:{tend:"trọng sắc",w:{visit:1.2},slight:1,forgive:1},trongtai:{tend:"trọng tài nghệ",w:{reward:1.2},slight:1,forgive:1},hieuthao:{tend:"nghe lời Thái hậu",w:{},slight:1,forgive:1}
 };
 const TH_TRAITS=["Ân cần","Kín đáo","Kiêu ngạo","Vì gia tộc"];
-function traitsOf(p){if(!p)return[];if(p===S)return[];if(p.kind==="emp"||p===S.emp)return S.emp.traits||[];if(p.kind==="th"||p==="th")return[S.thTrait||(S.thTrait=pick(["Ân cần","Kín đáo","Kiêu ngạo"])),"Vì gia tộc"].slice(0,1);if(p.role==="maid"||p.role==="eun"||p.tr&&PERS[p.tr]&&!p.trait)return[p.tr,p.tr2].filter(Boolean);return[p.trait,p.trait2].filter(Boolean)}
+/* base answer for the two own sets only; every other person is answered by the ONE pool (jnet.js netOf wraps this) */
+function traitsOf(p){if(!p||p===S)return[];if(p.kind==="emp"||p===S.emp)return S.emp.traits||[];if(p.kind==="th"||p==="th")return[S.thTrait||(S.thTrait="Ân cần")];return[]}
 function persW(p,act){let w=1;for(const t of traitsOf(p)){const P=PERS[t];if(P&&P.w&&P.w[act]!=null)w*=P.w[act]}return w}
 function persF(p,f,def){let v=def;for(const t of traitsOf(p)){const P=PERS[t];if(P&&P[f]!=null)v=(f==="dang"?v+P[f]:v*P[f])}return v}
 function tends(p){return traitsOf(p).map(t=>PERS[t]&&PERS[t].tend).filter(Boolean).join("; ")}
