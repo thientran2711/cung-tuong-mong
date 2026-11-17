@@ -107,3 +107,27 @@ STATE (all Magnific ids are in dev/handover/reports/fig-proportion-rollout/*.txt
 START_CTX ~4%. Method: gpt-2-6 2K, image 1 = ORIGINAL (old-backup-thaihau/fig-thaihau-h1-a18|a51), image 2 = live consort of the same band (c26-t2-a18 / c10-t2-a51; uploaded as parchment 1200x1600 refs from CDN img/_review/thaihau-night). No numbers, no train. bg removed, 900 px WebP.
 Measured (face h/fig h, face:shoulder, w/h): model a18 .100/.33/.35, ORIG a18 .083/.40/.35, NEW .084/.40/.31, NEW+squeeze x0.84 below 40% .094/.43/.34; model a51 .100/.44/.35, ORIG a51 .097/.43/.33, NEW .096/.47/.30.
 Finding: costume/face/props/colours kept, body proportion ≈ original (model copies the identity figure's body). Stronger "head as large as image 2" wording (2 tries, a18) overshoots to chibi + changed face -> discarded. Sheets: CDN img/_review/thaihau-night/sheet-light.jpg + sheet-dark.jpg. Cost ~270 cr. Reported to C; WAITING for go (options A squeeze / B as-is / C reversed base). Nothing uploaded to live paths. Magnific ids: orig a18 yiEn3V6PW9, orig a51 9ZFc2e0NYZ, model a18 Bh9FvrKoQR, model a51 bxVwj625Y2; gens SymRPeeUb8 (a18), aFArH6kfSh (a51); cutouts 9ZFc297NYZ, UPhZ97bwny.
+
+### ROLLOUT WORKER #3 — all 15 Thái hậu (C's GO option A: 2-ref gen + per-figure squeeze to face ≈ .100), NOT live
+Per figure: 1 gen (65 cr) + cutout (3 cr); squeeze factor s on the part below 40% of height (floor 0.80, so none stubby), rescaled to 900 px. Measured face h/fig h, face:shoulder, w/h. Models: a18 c26-t2-a18 (.100), a26 c26-t2-a26, a36 c10-t2-a36, a51 c10-t2-a51 (.100). fig-thaihau-1/2/3 = k01-a36 / k02-a51 / k03-a36 -> bands a36/a51/a36.
+| id | ORIGINAL | NEW (gen) | s | NEW+squeeze |
+|---|---|---|---|---|
+| fig-thaihau-h1-a18 | [0.083, 0.4, 0.35] | [0.084, 0.4, 0.31] | 0.8 | [0.097, 0.43, 0.35] |
+| fig-thaihau-h1-a26 | [0.091, 0.4, 0.3] | [0.091, 0.4, 0.28] | 0.85 | [0.1, 0.4, 0.31] |
+| fig-thaihau-h1-a36 | [0.086, 0.38, 0.31] | [0.091, 0.4, 0.31] | 0.85 | [0.102, 0.42, 0.34] |
+| fig-thaihau-h1-a51 | [0.097, 0.43, 0.33] | [0.096, 0.47, 0.3] | 0.93 | [0.099, 0.47, 0.32] |
+| fig-thaihau-h2-a18 | [0.091, 0.46, 0.29] | [0.079, 0.42, 0.27] | 0.8 | [0.09, 0.44, 0.31] |
+| fig-thaihau-h2-a26 | [0.088, 0.44, 0.31] | [0.094, 0.46, 0.29] | 0.91 | [0.099, 0.46, 0.31] |
+| fig-thaihau-h2-a36 | [0.096, 0.42, 0.33] | [0.084, 0.4, 0.3] | 0.8 | [0.096, 0.42, 0.34] |
+| fig-thaihau-h2-a51 | [0.084, 0.4, 0.34] | [0.088, 0.42, 0.3] | 0.8 | [0.098, 0.43, 0.34] |
+| fig-thaihau-h3-a18 | [0.089, 0.45, 0.3] | [0.086, 0.44, 0.29] | 0.8 | [0.098, 0.46, 0.33] |
+| fig-thaihau-h3-a26 | [0.091, 0.43, 0.3] | [0.093, 0.47, 0.26] | 0.89 | [0.099, 0.47, 0.28] |
+| fig-thaihau-h3-a36 | [0.084, 0.4, 0.32] | [0.093, 0.45, 0.29] | 0.89 | [0.099, 0.46, 0.31] |
+| fig-thaihau-h3-a51 | [0.091, 0.39, 0.33] | [0.097, 0.44, 0.3] | 0.94 | [0.096, 0.43, 0.31] |
+| fig-thaihau-1 | [0.091, 0.38, 0.29] | [0.086, 0.39, 0.28] | 0.8 | [0.096, 0.4, 0.31] |
+| fig-thaihau-2 | [0.096, 0.42, 0.29] | [0.096, 0.42, 0.29] | 0.93 | [0.099, 0.43, 0.31] |
+| fig-thaihau-3 | [0.091, 0.44, 0.3] | [0.088, 0.44, 0.3] | 0.8 | [0.1, 0.46, 0.34] |
+Faces below .100 after squeeze (floor 0.80 kept natural): h1-a18 .097, h2-a18 .090, h2-a36 .096, h3-a51 .096, fig-thaihau-1 .096 (h2-a18 is the lowest). None above .107.
+Honest: h2-a51 gen was accidentally generated twice by my slot-error mix-up; h3-a36 regenerated (+68 cr). Total ≈ 270 + 13x68 + 68 ≈ 1220 cr.
+Files (WebP 900 px, transparent, CDN review, NOT live): https://ctm-img.victoria-tntt.workers.dev/img/_review/thaihau-night/final/fig-thaihau-<id>.webp. Sheets: overview.jpg, sheet-{h1,h2,h3,k}-{dark,light}.jpg in the same folder (ORIGINAL | NEW+sq | model per identity).
+Not done: por busts, mk-fit re-check (no mediapipe set up; 0 cr, later), wipes of fig-oldrollout / oldroll-src / thaihau-night (after owner/C verdict).
