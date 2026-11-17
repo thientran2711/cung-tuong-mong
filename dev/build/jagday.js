@@ -72,8 +72,10 @@ function agDrawB(p,id,b,base,W){const c=j95c(b);const slot={pl:base[0],a:base[1]
  if(!pl||(W&&W.place&&W.place[pl]===0))return slot;
  if(p!==S.emp&&p!=="th"&&p.alive!==undefined){if(p.confined&&pl!==palaceOf(p))return slot;if(!j95acc(p,pl)&&pl!=="home"&&pl!==palaceOf(p))return slot}
  AGD.stat.deeds++;
- return {pl,a:"ag_"+o.k,t:o.t?ledgerId(o.t):null,why:o.why||AGWHY[need]||AGWHYX[need]||"lo việc của mình",k:o.k,kd:o.kd||"",need,act:o.act,base:base[0]}}
+ return {pl,a:"ag_"+o.k,t:o.t?ledgerId(o.t):null,why:agWhyN(o,need),k:o.k,kd:o.kd||"",need,act:o.act,base:base[0]}}
 /* reasons of the needs of other groups (part B / A: Emperor, Thái hậu): AGWHYX[need] = text */
+/* ONE reason text of a deed (day plan AND extra deeds agMore: an extra deed of a servant had an empty why when her need had no text — agent_check "every planned act … with a why") */
+function agWhyN(o,need){return (o&&o.why)||AGWHY[need]||AGWHYX[need]||"lo việc của mình"}
 const AGWHYX={company:"muốn có người bầu bạn",order:"lo giữ phép tắc hậu cung",fond:"thương người hiền thục",mercy:"mở lòng từ bi"};window.AGWHYX=AGWHYX;
 /* the old schedule's own row for buổi b, its surprise dice off (surprises are re-plans now) */
 function agBase(fn,args,b){const sur=J95.SUR;const bo=S.buoi;J95.SUR=0;try{S.buoi=b;return fn.apply(null,args)}finally{J95.SUR=sur;S.buoi=bo}}
@@ -219,7 +221,7 @@ function agMore(d,id,prev,max){const A=BAL.ag.kh2;const R=agRec();if(!R||!R.P[id
   if(cons){if(d.confined&&at!==palaceOf(d))break;if(!j95acc(d,at)&&at!=="home"&&at!==palaceOf(d))break}
   let w=0;try{w=at===pl?0:travel(pl,at)}catch(e){w=0}const kh=k0+w,kc=Math.max(1,agKhC(o,d));if(!agFitDay(kh,kc))break;/* no time left in the DAY for it (OD L852: a deed may run on into the next buổi): she keeps her schedule */
   let free=true;for(let q=kh;q<Math.min(kh+kc,J95.KH);q++)if(!agKhFree(R,id,q)){free=false;break}if(!free)break;
-  o.need=need;let p;if(cons){agPlan(d,o,N,kh,at);p=agZ().pend[agZ().pend.length-1]}else p=agPlanX(id,{k:o.k,t:o.t?ledgerId(o.t):null,pl:at,act:o.act,why:o.why||AGWHY[need]||AGWHYX[need]||""},kh);
+  o.need=need;let p;if(cons){agPlan(d,o,N,kh,at);p=agZ().pend[agZ().pend.length-1]}else p=agPlanX(id,{k:o.k,t:o.t?ledgerId(o.t):null,pl:at,act:o.act,why:agWhyN(o,need)},kh);
   if(!p)break;n++;AGD.stat.more=(AGD.stat.more||0)+1;end=agK1(p);pl=at;last=o.k}
  return n}
 (function(){

@@ -45,11 +45,17 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
   const H2=agHap();return{f,wit,landed,ab:txt.includes(a.name)&&txt.includes(b.name),again:H2.some(h=>h.x&&h.x.pid===q.x.pid)}});
  ok(r6.f&&(r6.landed&&r6.ab||r6.wit),"AG-HAP: a planned garden quarrel shows '!' and fires the quarrel card with the real two, the deed lands",r6);ok(r6.again===false,"AG-HAP: once seen, that '!' is gone",r6);
  /* 5 bot */
+ /* AG-ALL-2d2: Tai mắt must be EARNED (owner ~16:50Z, 2f r2) and the '!' shows only what she knows (OD L1638 chain) — a fresh start has no Tai mắt, so
+    this run plays a player who has earned some (2f's test knob, as ag-know): window.__tmOff + S.mat */
+ const tmSet=()=>p.evaluate(()=>{window.__tmOff=1;try{S.mat=3}catch(e){}});await tmSet();
  const H={};const hist=[];let same=1;
  for(let i=0;i<N;i++){const r=await p.evaluate(()=>{const clear=()=>{let n=0;while(Q.length&&n++<30){const m=Q[0];if(m.opts&&m.opts.length){try{chooseM(m.opts.length-1)}catch(e){Q.shift()}}else{try{closeModal()}catch(e){Q.shift()}}}};
    if(S.dead||S.out)return{dead:1};clear();try{nextBuoi()}catch(e){}try{agFlush()}catch(e){}clear();
-   const a=JSON.stringify(adHapRoll().map(h=>h.k+h.id)),b=JSON.stringify(adHapRoll().map(h=>h.k+h.id));const HN=adHapNow().filter(h=>!h.done);return{n:HN.length,ids:HN.map(h=>h.id),same:a===b}});
-  if(r.dead){await p.evaluate(()=>{localStorage.clear();window.__nlInner=1;start();for(let i=0;i<40&&isSrv();i++)start();/* F3: a consort start (a servant start hides the Dư đồ '!' by design) */window.__nlInner=0;Q.length=0});continue}hist.push(r.n);for(const id of r.ids||[])H[id]=(H[id]||0)+1;if(!r.same)same=0}
+   const a=JSON.stringify(adHapRoll().map(h=>h.k+h.id)),b=JSON.stringify(adHapRoll().map(h=>h.k+h.id));/* AG-ALL-2d2: the WORLD's happenings of a buổi (agHap: festival / walk / people's own deeds) read at every khắc. What SHE sees of them is gated by the khắc chain
+      (OD L1638: start + see + go; a deed in the last khắc reaches her only after it is over) and by EARNED Tai mắt — tested in ag-know / ag-dayk / ag-taimat, not here */
+   const seen=new Map();for(let q=0;q<J95.KH;q++){for(const h of agHap().filter(h=>!h.done))seen.set(h.k+":"+h.id+":"+(h.x&&h.x.pid||""),h.id);if(agKh()>=J95.KH-1)break;try{spend(1);j95sync()}catch(e){break}}
+   const ids=[...seen.values()];return{n:ids.length,ids,same:a===b}});
+  if(r.dead){await p.evaluate(()=>{localStorage.clear();window.__nlInner=1;start();for(let i=0;i<40&&isSrv();i++)start();/* F3: a consort start (a servant start hides the Dư đồ '!' by design) */window.__nlInner=0;Q.length=0});await tmSet();continue}hist.push(r.n);for(const id of r.ids||[])H[id]=(H[id]||0)+1;if(!r.same)same=0}
  const rep=await p.evaluate(()=>({by:HA.stat.by,stat:HA.stat,perf:agPerf(),errs:AG.errs.slice(-5),keysOk:(()=>{const R=new Set(RVGRP.flatMap(g=>g[1]));/* the player's rival-card buttons (j15 RVGRP) + her item act Tẩm đồ + her workshop */
    return Object.keys(HA.stat.by).every(k=>{const a=k.slice(5);return R.has(a)||["taint","cook"].includes(a)})})(),bandInRV:(()=>{const R=new Set(RVGRP.flatMap(g=>g[1]));return [...new Set(BANDS.flatMap(x=>x[2]))].filter(k=>!R.has(k))})()}));
  const h={};for(const n of hist)h[n]=(h[n]||0)+1;
