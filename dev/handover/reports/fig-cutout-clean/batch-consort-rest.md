@@ -96,3 +96,7 @@ Credits this session: 57 x 65 = 3705 (incl. 1 failed gen not charged?) ; session
 Ids TSV above (gen id per key). Render URLs expire ~2026-11-17+.
 ## W3c (successor, START_CTX ~5%) 17/11
 HD retro-fit done: 10 kc/ngheo a18 (c01-c05) hd twins uploaded; fragment hd-entries/W3c-0.json (10). Other 65 live files already had hd on CDN. NEXT: c05-tm0-a18.
+## W3c uploads 17/11: 32 a18 (c05-tm0..c07-tcold) UPLOADED (106 twins incl hd), fragment hd-entries/W3c-1.json. Gen ids:
+c05-tm0-a18 gOt3PMLSXO; c05-tm1 9ZFcAhXNYZ; c05-tm2 jUB97VKLD0; c05-tm3 N2H0GC86D9; c05-tm4 eIyEmwGdqL; c06-kc eIyEmJndqL; c06-ngheo 1leySe3r4r; c06-t1 Xm4Qv9WBfo; c06-t2 WDlIBGycXe; c06-t3 O6Cz276ynm; c06-t4 WDlIo9LcXe; c06-t5 CqzjrQWEEy; c06-t6 6AqTc4JiJO; c06-t7 8a6qF0kIrU; c06-t8 dtPuCmKXSL; c06-tcold LwoN4JeswO (note: hem covers shoes, no huadian)
+c06-tm0 VXwvo1KMMU; c06-tm1 eIyEms3dqL; c06-tm2 iGbVnC23uK; c06-tm3 xSX4wVmjfW; c06-tm4 mERKQNFhJQ; c07-kc P3uYZfJ42C; c07-ngheo 9ZFcAQhNYZ; c07-t1 JNfGiC9Oq4; c07-t2 eIyEauLdqL; c07-t3 aFArKjBfSh; c07-t4 u5YsxUJQLD; c07-t5 MB7amQJDCm; c07-t6 u5YsxJPQLD; c07-t7 JNfGZV5Oq4; c07-t8 JNfGZp1Oq4; c07-tcold dtPufjNXSL
+Next: todo_02 (c08..) running, todo_03; keys in /tmp/w lists = a18 order of lists/shards/consort-rest-A.txt after c05-tcold.
