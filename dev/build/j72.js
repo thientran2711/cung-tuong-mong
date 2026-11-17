@@ -127,6 +127,11 @@ function q72Cands(place){const q=q72(),C=q72Ctx(),out=[];const act=new Set(q.a.m
  const fresh=out.filter(z=>!z[2]);return fresh.length>=3?fresh:out}
 function q72Choose(L,place,rq){L=L.slice();for(let t=0;t<30&&L.length;t++){const tot=L.reduce((a,z)=>a+z[1],0);let r=Math.random()*tot,i=0;while(i<L.length-1&&r>L[i][1]){r-=L[i][1];i++}const T=L[i][0];L.splice(i,1);const x=q72Make(T,rq,place);if(x)return x}return null}
 
+/* VOICE BY TÍNH TÌNH (W-C): the asker's own tone — a lead-in ("‹A› hấp tấp kéo ngươi lại, nói liền một hơi:") before her quoted request, and her reaction when a
+   quest of hers ends with no line of its own written. Pools in jtone_c.js (TONE_POOL.askLead / askOk / askNo); only for a named woman who speaks (rv / hh / fallen / rsv) */
+const Q72_TONED={rv:1,hh:1,fallen:1,rsv:1};
+function q72Tone(X,pool,key){try{if(!X||!X.A||!Q72_TONED[X.A.k]||!window.TONE_POOL||!TONE_POOL[pool])return"";const sp=kSpk(X.A);return kLine(key,TONE_POOL[pool],{about:sp||X.A.o})||""}catch(e){return""}}
+function q72Lead(X,txt){try{if(typeof txt!=="string"||!/^[“"]/.test(txt))return txt;const l=q72Tone(X,"askLead","q72:ask");return l?`${X.A.n} ${l} ${txt}`:txt}catch(e){return txt}}
 /* ---------- the offer (a person comes to her, or she asked around) ---------- */
 function q72Offer(x,how){const q=q72();q.mo[S.turn]=(q.mo[S.turn]||0)+1;q.n.off++;q.cd[x.tid]=wk();evHistMark("j72:"+x.tid);const d=mkP("q72o",{x,how:how||""});if(!d)return false;
  Q.push({t:"Việc nhờ",h:d.t,opts:d.o,who:d.who,pid:d.pid,pp:d.pp});return true}
@@ -134,7 +139,7 @@ PEND.q72o=pp=>{try{const x=pp.x;const X=q72X(x);if(!X)return null;const T=X.T;co
   const owe=q72Debt(X.A)<0;const dec=Math.min(-2,-(T.dec||3)*(owe?2:1));const est=q72Est(X);
   const pre=pp.how==="ask"?`<p class="past">Ngươi hỏi han, ${X.A.n} ngỏ lời.</p>`:pp.how==="fu"?`<p class="past">Lại là ${X.A.n}: chuyện lần trước còn tiếp.</p>`:"";
   const tr=T.tr?`<p class="past">${q72Txt(T.tr,X)}</p>`:"";
-  const h=`${pre}<p>${q72Txt(T.h,X)}</p>${tr}<p class="past"><b>${KIND72[T.kind]}</b> · hạn ${T.dl||6} tuần · ${T.s.length} bước:<br>${q72Steps(X)}</p>${owe?`<p class="r">Ngươi đang nợ ${q72Short(X.A)} một ân: từ chối lần này mếch lòng gấp đôi.</p>`:""}`;
+  const h=`${pre}<p>${q72Lead(X,q72Txt(T.h,X))}</p>${tr}<p class="past"><b>${KIND72[T.kind]}</b> · hạn ${T.dl||6} tuần · ${T.s.length} bước:<br>${q72Steps(X)}</p>${owe?`<p class="r">Ngươi đang nợ ${q72Short(X.A)} một ân: từ chối lần này mếch lòng gấp đôi.</p>`:""}`;
   const accX=`${est>=95?"":word(est)+" · "}thành: ${ok.join(", ")||"êm chuyện"} · hỏng: ${no.join(", ")}${bad.length?` · kèm: nếu bại lộ: ${bad.join(", ")}`:""}`;
   const decX=`tốn: ${[q72Tok(X.A,dec)||R72(`${X.A.n} phật ý`)].concat(owe?[R72("nợ ân vẫn còn")]:[]).join(", ")}`;
   const o=[{n:"Nhận lời",fx:{},x:accX,go:()=>{const q=q72();if(q.a.length>=Q72CFG.max){log("Ngươi đang bận quá nhiều việc, đành khất.");return}x.t0=wk();x.dl=wk()+(T.dl||6);q.a.push(x);q.n.acc++;if(T.acc)try{T.acc(X)}catch(e){}q72Enter(x,X);log(`Ngươi nhận lời ${X.A.n}: ${q72Title(X)}. Hạn ${T.dl||6} tuần. ${T.acc?q72Txt(T.accX||"",X):""}`)}},
@@ -156,7 +161,8 @@ function q72End(x,res,X,late){const q=q72();const i=q.a.indexOf(x);if(i>=0)q.a.s
  q.n[res]=(q.n[res]||0)+1;
  const tok=q72OutTok(o,X,res==="ok"?"ok":"no").map(plain).join(", ");
  const head=res==="ok"?`Xong việc ${X.A.n} nhờ (${q72Title(X)})`:res==="bad"?`<span class="r">Bại lộ:</span> việc ${X.A.n} nhờ (${q72Title(X)})`:`<span class="r">${late?"Lỡ hẹn":"Không thành"}:</span> việc ${X.A.n} nhờ (${q72Title(X)})`;
- const end=q72Txt(res==="ok"?T.okT:res==="bad"?T.badT:T.noT,X);
+ let end=q72Txt(res==="ok"?T.okT:res==="bad"?T.badT:T.noT,X);
+ if(!end&&res!=="bad"){const l=q72Tone(X,res==="ok"?"askOk":"askNo",res==="ok"?"q72:ok":"q72:no");if(l)end=`${X.A.n} ${l}${/[.”]$/.test(l)?"":"."}`}
  log(`${head}. ${end?end+" ":""}${tok?tok+".":""} ${ev}`.trim());
  q.h.unshift({tid:x.tid,res,w:wk(),t:q72Title(X),n:X.A.n,pn:q72PgN(X.A),f:X.A.f,lg:x.log.slice(-4),end,tok});if(q.h.length>12)q.h.length=12;
  if(late&&!window.__bot&&!quiet)Q.push({t:"Lỡ hẹn",btn:"Đã hiểu",who:X.A.f,h:`<p>Đã quá hạn việc ${X.A.n} nhờ: <b>${q72Title(X)}</b>.</p>${end?`<p>${end}</p>`:""}<p>${q72OutTok(o,X,"no").join(" · ")||"Không mất gì."}</p>`});
