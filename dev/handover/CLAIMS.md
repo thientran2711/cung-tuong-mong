@@ -636,3 +636,4 @@
 | ONE TRAIT POOL 3 groups × 8 (24 traits, 2 pools by sex) + BALANCE LAW gain/cost table (opus; main s30 orders 05:46Z/06:12Z/06:21Z) | review/trait-pool | C ROOT | session_011xDdVQM2jyGVY8RsCxbtvX | RUNNING | 17/11 05:40Z |
 | ART A1 nine origin frames + A2 swaddled baby + A3 red-thread JOIN (sonnet art; reports/presentation-wiring.md ART REQUESTS) | CDN img/kit + reports/art-pres-a123.md | C ROOT | session_011xDdVQ93v6b8Bre1hVaJtG | RUNNING | 17/11 05:40Z |
 | night-final review r1 (opus BIG; main s30 04:50Z order) of 5535697b | review/night-final-r1 | D | session_01964izDUxnFjybggNj6Ukev | RUNNING | 17/11 05:36Z |
+| trait-rename review r1 (opus BIG, save migration) of 27886326 | review/trait-rename-r1 | B | session_01N1tNP31pNXiReqkE3LxVdh | RUNNING | 17/11 05:40Z |
