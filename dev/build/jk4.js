@@ -639,11 +639,28 @@ window.kitXHTML=kitXHTML;window.kitXAdd=kitXAdd;
    Used by: Ân oán cards (kitRel3), every person dialog (32.7 chips = `.kpsn.knr` at the column top, kitDpFit), the shop seller, person
    cards (Hậu cung / Cung nhân: `.pcl` name + rank moved above the portrait). The same look as the 32.7 chip's kitName (rank over name). */
 const KIT_TITLE_ONLY=/^(hoàng thượng|hoàng thái hậu|thái hậu|thánh thượng|hoàng đế|hoàng hậu)$/i;
-function kitNameRank(rank,name,col,me,small){const rt=rank?kitRankTone(rank,col):"";if(me==null)me=kitIsMyName(name);
+/* KIT 48.5 (owner 17/11 ~16:20Z, kit-rank-name): the rank is never printed twice. kitDedupRank(rank,name) drops the rank / title words a plain-text name already starts with
+   ("Hoàng hậu Lý Ngưng Sương" under the rank "Hoàng hậu" → "Lý Ngưng Sương"). Single-word ranks that are also surnames (Tần, Phi) are only dropped through kitTitledName's title-word list. */
+function kitDedupRank(rank,name){try{const r=String(rank||"").replace(/<[^>]*>/g,"").trim(),n=String(name==null?"":name);if(!r||!n||/</.test(n))return n;let m=typeof kitTitledName==="function"?kitTitledName(r,n):n;
+ if(m===n&&/\s/.test(r)&&n.toLowerCase().startsWith(r.toLowerCase()+" "))m=n.slice(r.length+1).trim();return m||n}catch(e){return name}}
+window.kitDedupRank=kitDedupRank;
+function kitNameRank(rank,name,col,me,small){const rt=rank?kitRankTone(rank,col):"";if(me==null)me=kitIsMyName(name);if(rank)name=kitDedupRank(rank,name);
  /* KIT 48.1i (owner 11/16 15:00Z 2.4): a person whose NAME is the title (Hoàng thượng, Thái hậu) is painted as a rank title (imperial gold), never black ink */
  if(!rank&&name&&KIT_TITLE_ONLY.test(String(name).replace(/<[^>]*>/g,"").trim()))return `<div class="knr${small?" knr-s":""}" style="--rc:${col||"#7a5530"}"><b class="knr-r krt knr-only" style="--rt:${kitRankTone(name,col)}">${name}</b></div>`;
  return `<div class="knr${small?" knr-s":""}" style="--rc:${col||"#7a5530"}">${rank?`<small class="knr-r krt" style="--rt:${rt}">${rank}</small>`:""}<b class="knr-n krn${me?" kmy":""}">${name||""}</b></div>`}
 window.kitNameRank=kitNameRank;
+/* KIT 48.6 · kitRankName(who, o) — THE ONE rank + name entry (owner 17/11 ~16:20Z: "hai cái kiểu hiện"). EXACTLY TWO FORMS:
+   STACKED (default): [title plate /] rank / name, top to bottom = kitNameRank (+ kitTitlePlate when she wears a title) — every avatar, portrait frame caption, figure-foot label, person card header, dialog column tag.
+   ONE LINE (o.form:"line"): "rank name" = kitName(p) — ONLY result lines, logs, toasts, Tuần lục / week book prose.
+   who = a person object, or o.parts = {rank,name,col,me,title} for pieces that are not a person yet. Never prints the rank twice (kitDedupRank). Scan: dev/measure/rank-name-scan.js. */
+function kitRankName(who,o){o=o||{};const line=o.form==="line";
+ if(line){if(o.parts){const q=o.parts;return `<b class="kname krl">${q.rank?`<span class="kti" style="--rt:${kitRankTone(q.rank,q.col)}">${q.rank}</span> `:""}${kitDedupRank(q.rank,q.name)}</b>`}return kitName(who,Object.assign({cap:true},o))}
+ let rank="",name="",col=o.col,me=o.me,tp="";
+ if(o.parts){rank=o.parts.rank||"";name=o.parts.name||"";col=col||o.parts.col;if(me==null)me=o.parts.me;tp=o.parts.title||""}
+ else if(who){const rn=typeof kszRankName==="function"?kszRankName(who):[kitTitleOf(who),who.name||""];rank=rn[0];name=rn[1];if(!col)try{col=kitPersonCol(who)}catch(e){}if(me==null&&typeof S!=="undefined")me=who===S;
+  try{if(typeof kitTitleWorn==="function"&&typeof kitTitlePlate==="function"){const w=kitTitleWorn(who);if(w)tp=kitTitlePlate(w,{cls:"kdh-cap"})}}catch(e){}}
+ const st=kitNameRank(rank,name,col,me,o.small);return tp?`<div class="kt3">${tp}${st}</div>`:st}
+window.kitRankName=kitRankName;
 /* ================= KIT 48.1 · RANK TITLE (owner, ref. shot "a title floating above the character's name") ==========
    The rank / role line above every name is a TITLE: serif (var(--display)), bold, in the rank's OWN colour = the colour family of that rank's
    portrait frame, VIVID (≥ 4.4:1 on paper). Owner 15/11 22:25Z: glow + thin dark outline ONLY on a painting (stage tags over the scene,
