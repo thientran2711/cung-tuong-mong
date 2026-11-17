@@ -964,3 +964,4 @@ base-body test (m09 body template, edit clothes only) | img/_review/maid-consort
 | hoa-dien r3 (position options + sharp layer; OD ~22:40Z) (sonnet; took over from B) | review/hoa-dien-r3 | MAIN s38 | session_01UV1SziQZkLLitwkfqjx3Bq | RUNNING | 17/11 22:31Z |
 hairpin try-on page (figure w/o pins + pin sprites + HTML, reuse Phòng Thử Y Phục) | img/_review/hairpin-tryon | session_011xDdVNmPeSUSmSWanPWpLQ | RUNNING | 2026-11-18T00:58Z (Foreman C ROOT-12 → ROOT-13)
 | balance-2 fix round 2 (opus; r1 FAIL 2 @371e3a22, Danh wall) | review/balance-2 | D | session_01964izFNvwWQ5k8z1K6nAZG | RUNNING | 17/11 22:41Z |
+looks-2 overlay art (fx-stain-tra/uot, smudge, ink, pox, scars, messy hair) | img/_review/looks-2 → exact fx-* keys | session_011xDdVPQnBXe5afV2AtnKsL | RUNNING | 2026-11-18T01:05Z (Foreman C ROOT-12 → ROOT-13)
