@@ -129,3 +129,20 @@ Note: the robe has a side slit and a mandarin collar (slight áo dài look) — 
 - 50% overlay on m09: https://ctm-img.victoria-tntt.workers.dev/img/_review/maid-consort-sample/neutral_base_grey_v2_overlay50.jpg
 
 Nothing live. No further gens until told.
+
+## Round 19 — base v2 dressed as t4 Tần and t6 Quý phi (ROOT-12 GO, owner 01:00Z)
+
+2 gens of the ≤4 allowed (540 cr). Source: base v2 on white, padded to 637x2100 (300 px headroom; uploaded as `neutral_base_v2_white_padded.png`), `images_retouch` mode=edit, quality high. Prompts asked for the grey robe to be COMPLETELY REPLACED, wide flowing consort sleeves past the hands, layered robe, floor-length hem with no train, own colour, real gold trâm, clean forehead; t6 with an open low cross-collar showing the collarbone, shoulder cape, crown into the headroom.
+
+- t4: apricot-peach, centre piece + one side pin (left), low cross-collar with bare throat, wide embroidered sleeves, sash, floor-length.
+- t6: deep rose-crimson, gold embroidery, wide open neckline with collarbone skin, shoulder cape, brocade sash, gold crown with pins, floor-length.
+
+Gate:
+- No grey visible: PASS in both, by eye. t6 collarbone and throat are skin.
+- 50% overlay on m09: face, eyes, chin, shoulders coincide by eye. Output canvas is 621x2048 (0.975 of 637x2100, same aspect), so I resized to 637x2100 for the overlay and the singles. Haar face h (scaled to 637 frame): m09 169, t4 174 (+3.2%, borderline, Haar noise), t6 170 (+0.8%). hairline/chin within ±3 px.
+- No maid-like sleeves or hem: PASS, sleeves wide and loose past the hands, hem to floor.
+- Headroom: crown not squashed in t6. Weak spots: t6 phoenix pins are on one side more than both; t4 crown pieces are small.
+
+Files (transparent PNG 637x2100, background removed locally, check edges; overlays are JPG): `base_v2_t4_dressed.png`, `base_v2_t6_dressed.png`, `base_v2_t4_dressed_overlay50.jpg`, `base_v2_t6_dressed_overlay50.jpg` under `.../img/_review/maid-consort-sample/`.
+
+Nothing live. Holding the other 2 gens.
