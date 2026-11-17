@@ -91,3 +91,9 @@ PRIORITY #1 CHECK: OD tail ~16:20Z (a) | main jtoil.js reused | review/toil-look
 - Sheet: https://ctm-img.victoria-tntt.workers.dev/img/_review/toil-looks/toil-looks-v10.png (rows 1-2: Vung A warm hophach / cool lantuyet x seeds 7,8, faces c07 c31; rows 3+: all levels per face). Delete after verdict. v9 sheet for comparison: .../toil-looks-v9.png.
 - Looked at the sheet: the blobs read as a soft pale haze over the blush with the blush's own softness, no hard white patches. If she still wants them whiter/clearer: BAL.toil.vungPuff.al/alv; sizes: big/small.
 - Sheet script (not committed): /home/user/wt/tl5-shots/sheet.js pattern = serve worktree, inject toil-fit2 + mkfit, toilMkLayer(portrait file name) cropped by box.
+
+### toil-looks5 v11 - review/toil-looks5 b9efd241 (owner ~17:00Z on ?v=10)
+PRIORITY #1 CHECK: OD tail ~17:00Z (blobs not all blush-sized, more opaque) | main jtoil.js reused | claims toil-looks5.
+- BAL.toil.vungPuff = {big .75, small .5, al .7, alv .2}: blob radius = blush disc rx x .75 or .5 (x .92-1.08), a mix on every cheek (first blob big on the "big" cheek, small on the other, swapped for the 2nd blob), centred within +-.25 rx of the blush centre so the blush stays visible around them; blush blur profile (BLP.wide); alpha .7-.9 (peak ~.55-.72). Same rng draw order. Other levels untouched.
+- Gates at b9efd241: mk-layer-scan 12960 0 bad, toil-tease 25/25, toil-overlay 0 bad, quickcheck PASS 157 s.
+- Sheet: https://ctm-img.victoria-tntt.workers.dev/img/_review/toil-looks/toil-looks-v11.png (+ small-size 190x210 row Mat moc | Vung A s7,8,9 on 2 faces). Small makeup sheet (all levels): .../toil-looks-small.png. Delete all after verdict.
