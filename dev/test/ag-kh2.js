@@ -15,7 +15,7 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
   const lastLand={};const l0=agLand0;agLand0=function(pp){const k=agKh();if(pp.k1!=null&&k<=pp.k1&&!arguments[1]&&!pp.gone&&!pp.drop&&agRec()&&agRec().key===pp.key)out.early++;return l0.apply(this,arguments)};
   for(let i=0;i<NB;i++){placeWhere();agFlush();const R=agRec();const z=agZ();const key=agKey();const C={};
    for(const pp of z.pend){if(pp.key!==key)continue;C[pp.id]=(C[pp.id]||0)+(pp.kc||1);out.kcHist[pp.kc||1]=(out.kcHist[pp.kc||1]||0)+1;
-    if(pp.k1!=null){out.spanN++;const want=Math.min(J95.KH-1,pp.kh+agKhC({k:pp.k},agDoer(pp))-1);if(pp.k1>want)out.spanBad++;
+    if(pp.k1!=null){out.spanN++;const want=Math.min(J95.KH-1,pp.kh+(pp.kc!=null?pp.kc:agKhC({k:pp.k},agDoer(pp)))-1);if(pp.k1>want)out.spanBad++;
      if(R&&R.P[pp.id])for(let q=pp.kh;q<=pp.k1;q++)if(!R.P[pp.id][q]||R.P[pp.id][q][0]!==pp.pl)out.rowBad++}}
    const nd={};for(const pp of z.pend)if(pp.key===key)nd[pp.id]=(nd[pp.id]||0)+1;for(const id in nd){const n=nd[id];out.per[n]=(out.per[n]||0)+1}
    for(const id in C)if(C[id]>J95.KH)out.over++;

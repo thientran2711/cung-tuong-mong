@@ -322,15 +322,15 @@ Object.assign(window,{agHeard,agTell,agRdTick,agRdDeliver});
    trải qua cái mốc thời gian giống nhau, cùng sống trên một cái mốc thời gian") =================
    Her clock IS the world clock: an NPC deed lands only when her clock has passed its last khắc (agWatch), news moves only on finished khắc (agTell →
    agRdDeliver), so no NPC is ever a khắc ahead of her. An NPC who comes TO her in khắc k starts ONE shared act: the popup "Có người tìm đến" offers
-   Tiếp chuyện (her answers inside it are part of the same act; she spends the deed's khắc from her clock to its end — both move on together) or
+   Tiếp chuyện (the whole talk, her answers inside it included, costs exactly ONE khắc — BAL.ag.kh2.sh.kh — and both move to k+1 together) or
    Không tiếp (the NPC's khắc is spent — she came — hers is not; the deed does not happen). NPC ↔ NPC: a consort whose deed is aimed at another
    consort meets her only if that one stands there with those khắc free; she receives or declines (mindPick: BAL.ag.kh2.sh rec vs dec × hostility);
    received = the met one's row holds the shared act (ag_with, the comer's row already holds her deed) and both spend those khắc; declined or away = the comer's khắc spent, a meeting deed (talk)
    does not happen. Co-op: each player's own clock (the popup spends only the clock of the player it opens for). Off: BAL.ag.kh2.sh.on = 0. */
 function agShOn(){try{return agKhOn()&&BAL.ag.kh2.sh&&BAL.ag.kh2.sh.on}catch(e){return false}}
-function agShKh(p){let kh=0;try{kh=agKh()}catch(e){}return Math.max(1,agK1(p)-kh+1)}
+function agShKh(p){return BAL.ag.kh2.sh.kh}/* owner (OD ~16:00Z ONE SHARED CLOCK, sub-line): staying to talk costs exactly ONE khắc in all — her answers inside add none */
 function agShOpts(p,v){const n=agShKh(p);const lock=typeof can==="function"&&!can(n)?(typeof whyTime==="function"&&whyTime(n)||"hết khắc buổi này"):"";const O=[];
- O.push({n:"Tiếp chuyện",r:"rec",fx:{},x:`Nắm chắc · tốn: ${n} khắc · thành: cùng ${v.name} trải qua khắc này`,go:()=>{if(!can(n)){agShDecl(p,v);return}spend(n);AGD.stat.shMe=(AGD.stat.shMe||0)+1;const r=agLand(p,true);if(r)log(`${r}.`)}});
+ O.push({n:"Tiếp chuyện",r:"rec",fx:{},x:`Nắm chắc · tốn: ${n} khắc · thành: cùng ${v.name} trải qua khắc này`,go:()=>{if(!can(n)){agShDecl(p,v);return}try{const k=agKh();p.k1=Math.min(agK1(p),k+n-1)}catch(e){}/* the comer's act ends with hers: both move to the next khắc together */spend(n);AGD.stat.shMe=(AGD.stat.shMe||0)+1;const r=agLand(p,true);if(r)log(`${r}.`)}});
  O.push({n:"Không tiếp",r:"dec",fx:{},x:`Nắm chắc · thành: ${v.name} ra về, khắc của ngươi còn nguyên`,go:()=>agShDecl(p,v)});
  if(lock)kitOff(O[0],lock,"");return O}
 function agShDecl(p,v){const z=agZ();const i=z.pend.indexOf(p);if(i>=0)z.pend.splice(i,1);p.drop=1;AG.stat.drop++;AGD.stat.shNo=(AGD.stat.shNo||0)+1;/* her row in the record keeps the khắc she spent coming */log(`Ngươi không tiếp ${v.name}.`)}

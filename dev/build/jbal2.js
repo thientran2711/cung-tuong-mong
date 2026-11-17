@@ -986,7 +986,7 @@ Object.assign(BAL.ag.kh2,{rd:{on:1,keep:.6,tell:2,quiet:1}});
 /* AG-ALL-2d per-khắc chain + one shared clock (owner OD 17/11 ~15:45Z L1638, ~16:00Z L1641): see = khắc after seeing before a servant reacts (next khắc);
    go = khắc her trip to her master takes (he hears at the START of the khắc after); cap = most re-deciders per khắc (low-end phones; the rest wait a khắc);
    qMax = news queue kept in the save; sh = an NPC met by another NPC receives / declines (× hostility / BAL.ag.wit.hoD) — both spend the khắc when received */
-Object.assign(BAL.ag.kh2.rd,{see:1,go:1,cap:6,qMax:40});Object.assign(BAL.ag.kh2,{sh:{on:1,rec:3,dec:1}});
+Object.assign(BAL.ag.kh2.rd,{see:1,go:1,cap:6,qMax:40});Object.assign(BAL.ag.kh2,{sh:{on:1,rec:3,dec:1,kh:1}});/* sh.kh = the khắc a whole talk with one who came to her costs (owner: exactly one) */
 /* AG-ALL-2b mg2 — NPC MINI-GAMES FAIR TO HER (owner OD 17/11 ~15:25Z (3): "lúc nào tôi có thì NPC cũng phải có … đổ xí ngầu cho nó … công bằng với tôi").
    ONE CORE jmgt mgNpcRaw(kind, p, o): an NPC's play = ONE draw on the board the player would get in that seat (mgTier: occasion, his/her rank, art level → gap d).
    on   switch (with agOn(); off = the old BAL.mgTier.npc paths)
@@ -999,7 +999,9 @@ Object.assign(BAL.ag.kh2.rd,{see:1,go:1,cap:6,qMax:40});Object.assign(BAL.ag.kh2
 Object.assign(BAL.ag,{mg2:{on:1,med:[[-2,8.9],[0,7.5],[2,5.8]],w:8,tat:{e:[0,2,5],w:[[32,54,15],[18,58,24],[2,50,49]]},study:1}});
 /* AG-ALL-2d hand ceiling (owner OD 17/11 ~16:00Z L1640; jmgt mgHand): lo / hi = the clumsiest / best hand (graded play reached on a matching board;
    hi − w/2 = 7.5 = the skilled human bot's median at the matching board, dev/PROGRESS_mg-balance.md); w = how far under her ceiling a play falls (mean of 3 draws) */
-BAL.ag.mg2.hand={on:1,lo:4,hi:9.5,w:4};
+/* skew (owner ~16:20Z (f): strong NPC hands RARE, weak hands clearly WORSE than her): hand = lo + (hi − lo)·b^skew, b = mean of 2 draws — median hand ≈ 5
+   (plays ≈ 3 on a matching board vs the skilled human 7.5), about 2 % of hands reach 8.5+. Interim mg-bots bands until the owner-only calibration writes them. */
+BAL.ag.mg2.hand={on:1,lo:3,hi:9.5,w:4,skew:1.6};
 /* j71 odds words under mg2: the same draw (mgNpcRaw, seeded by the plan) for every entrant, her included, on this contest's board (j71 mgX7) */
 (function(){if(typeof cOdds7!=="function"||typeof fxOdds7!=="function")return;const c0=cOdds7,f0=fxOdds7;
  const win=(E,base,kindAt,mi,r)=>{let w=0;const N=500;for(let t=0;t<N;t++){let b=-1,bi=-1;for(let i=0;i<E.length;i++){const x=base[i]+mgNpcRaw(kindAt(i),E[i],{rnd:r})/10*J71.luck;if(x>b){b=x;bi=i}}if(bi===mi)w++}return cl(Math.round(100*w/N),3,97)};

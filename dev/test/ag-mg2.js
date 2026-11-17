@@ -14,6 +14,7 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
   const m0=mgNpcRaw;window.__mg=[];mgNpcRaw=function(kind,pp,o){const r=m0.apply(this,arguments);__mg.push({kind,occ:(Object.assign({},MGX.o||{},o||{})).occ,raw:r,me:pp===S});return r};
   window.__med=a=>{const s=a.slice().sort((x,y)=>x-y);return s.length?s[Math.floor(s.length/2)]:null};
   window.__twin=(v)=>{v.arts=Object.assign({},S.arts);v.vir=Object.assign({},S.vir||{});v.rank=S.rank;v.queen=false;return v}});
+ /* AG-ALL-2d: the per-NPC hand ceiling (owner OD L1640) sits on top of this core; ag-mg2 checks the core curve + wiring with the hands off, dev/test/ag-mgh.js checks the hands */await p.evaluate(()=>{BAL.ag.mg2.hand.on=0});
  const on=await p.evaluate(()=>({ag:agOn(),mg2:mg2On(),med:BAL.ag.mg2.med}));ok(on.ag&&on.mg2,'switch: agOn and mg2On on a fresh host life',on);
  /* 0 the core itself: N draws at her matching board */
  const r0=await p.evaluate(()=>{const N=3000,a=[];for(let i=0;i<N;i++)a.push(mgNpcRaw("dan",null,{occ:"hoc",d:0}));const top=a.filter(x=>x>=9).length/N,ten=a.filter(x=>x===10).length/N;

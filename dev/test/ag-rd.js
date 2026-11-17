@@ -39,7 +39,7 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
   /* 2 shared act with her */
   const sh=(ans)=>{fresh();placeWhere();agFlush();const R=agRec();const kh=agKh(),me=R.P.me[kh][0];
    for(const v of liveRivals(true).filter(v=>v.alive&&!v.out&&!v.confined&&!sameHouse(S,v)&&R.P["v"+v.id])){let N;try{N=agNeedsC(v)}catch(e){continue}const O=agOptsG(v,N,null).filter(o=>o.t===S);if(!O.length)continue;
-    const o=O[0];const id="v"+v.id;const z=agZ();z.pend=z.pend.filter(x=>x.id!==id);agPlan(v,o,N,kh,me);const pd=z.pend[z.pend.length-1];agSpan(pd,o,v);
+    const o=O.slice().sort((a,b)=>agKhC(b,v)-agKhC(a,v))[0];/* prefer a deed of several khắc: still one khắc for the talk */const id="v"+v.id;const z=agZ();z.pend=z.pend.filter(x=>x.id!==id);agPlan(v,o,N,kh,me);const pd=z.pend[z.pend.length-1];agSpan(pd,o,v);
     Q.length=0;const k0=agKh();agWatch();const card=Q.find(x=>x.t==="Có người tìm đến");if(!card)return{err:"no popup",k:o.k,me};
     const names=(card.opts||[]).map(x=>x.n);const c=card.opts.find(x=>x.n===ans);c.go();Q.length=0;
     return{k:o.k,k0,k1:agK1(pd),after:agKh(),names,inPend:agZ().pend.includes(pd),drop:!!pd.drop,row:agRec().P[id][pd.kh][1]}}
@@ -67,7 +67,7 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
  ok(W.every(x=>{const t=at(x,3);return t&&t.A.split("/")[0]==="vuon"&&t.Awhere==="vuon"&&t.cnt>=1&&x.deed&&x.deed.kh===3&&x.deed.t==="me"}),'k4: A is in Ngự hoa viên (row, whereOf, Dư đồ count) with a deed aimed at her',G.map(x=>[at(x,3),x.deed]));
  ok(r.quiet&&!r.quiet.err&&r.quiet.T.every(t=>t.told===0&&t.rd===0),'a maid who keeps quiet → A never knows, keeps her plan',r.quiet&&(r.quiet.err||r.quiet.T));
  ok(r.off&&!r.off.err&&r.off.T.every(t=>t.rd===0),'switch off (BAL.ag.kh2.rd.on=0) → no re-decide',r.off&&(r.off.err||r.off.T));
- ok(r.shRec&&!r.shRec.err&&r.shRec.names.join()==="Tiếp chuyện,Không tiếp"&&r.shRec.after===r.shRec.k1+1&&!r.shRec.inPend,'shared act: Tiếp chuyện → the deed lands and her clock moves on with the NPC (both at k1+1)',r.shRec);
+ ok(r.shRec&&!r.shRec.err&&r.shRec.names.join()==="Tiếp chuyện,Không tiếp"&&r.shRec.after===r.shRec.k0+1&&!r.shRec.inPend,'shared act: Tiếp chuyện → the deed lands; the whole talk costs her exactly ONE khắc and both move to k+1 together',r.shRec);
  ok(r.shDec&&!r.shDec.err&&r.shDec.after===r.shDec.k0&&r.shDec.drop&&/^ag_/.test(r.shDec.row||""),'shared act: Không tiếp → her khắc kept, the deed does not happen, the NPC\'s row keeps the khắc she spent coming',r.shDec);
  ok(r.npc&&!r.npc.err&&r.npc.rec==="ag_with"&&r.npc.away.drop,'NPC ↔ NPC: the met one, free there, holds the shared act (ag_with); away → the meeting deed drops',r.npc);
  ok(!errs.length&&!r.errs.length,'no page / agent errors',errs.concat(r.errs).slice(0,5));

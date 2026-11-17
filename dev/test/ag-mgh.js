@@ -26,6 +26,8 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
   /* 5 slap */
   const heavy=(a)=>{let n=0;for(let i=0;i<600;i++)if(slapNpcDraw(a)===3)n++;return n/600};const sl=L.map(x=>[x,mgHand("tat",x)]).sort((a,b)=>a[1]-b[1]);
   o.slap={lo:[sl[0][1],heavy(sl[0][0])],hi:[sl[sl.length-1][1],heavy(sl[sl.length-1][0])]};
+  /* 7 owner ~16:20Z (f): strong hands RARE, weak hands clearly worse than her (skilled human median 7.5 at the matching board) */
+  {const C=[];for(let i=0;i<1000;i++)C.push(mgHand("dan",{name:"T"+i,id:9000+i}));C.sort((a,b)=>a-b);o.strong=C.filter(c=>c>=8.5).length/1000;o.medHand=C[500];o.medPlay=C[500]-H.w/2;o.skilled=mgMedD(0)}
   /* 6 off */
   H.on=0;o.off=mean(v,0);H.on=1;o.offMed=mgMedD(0);return o});
  console.log(JSON.stringify(r));
@@ -37,5 +39,6 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
  ok(r.meNoHand,'4 her own odds (p = S) never get a hand',r.meNoHand);
  ok(r.slap.hi[1]>r.slap.lo[1],'5 slap: a weaker hand lands the heavy blow less often',r.slap);
  ok(Math.abs(r.off-r.offMed)<.6,'6 switch off → part 2b one curve (median at the matching board)',{off:r.off,med:r.offMed});
+ ok(r.strong<=.05&&r.medPlay<=r.skilled-2,'7 strong hands rare (≤ 5 % reach 8.5), the middle hand plays clearly worse than a skilled human',{strong:r.strong,medHand:r.medHand,medPlay:r.medPlay,skilled:r.skilled});
  ok(!errs.length,'no page errors',errs.slice(0,5));
  await b.close();process.exit(res.every(x=>x)?0:1)})().catch(e=>{console.error(e);process.exit(1)});
