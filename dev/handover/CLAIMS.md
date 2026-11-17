@@ -685,5 +685,5 @@
 | REVIEW show-why-r1 (opus BIG) | review/show-why-r1 | C ROOT-3 | session_011xDdVRVL5MdC5V5iSZRy5P | RUNNING | 17/11 08:13Z |
 | mg-snap r1 PASS 931255b1 (review/mg-snap-r1 = 2a00405f + main 9fdc1199, FF-ready) → FOR MAIN | review/mg-snap-r1 | B | session_01N1tNP3VpMVoikpTW1oDAch | PASS (archived) | 17/11 08:15Z |
 | coop-thin-b r1 FAIL 9af781c2 (5 items + seam) → fixed with D r1 items by coop-thin-b worker #2 on review/coop-thin-b | review/coop-thin-b | B | session_01N1tNP3op5jQGEdK2Sf7aVD | RUNNING | 17/11 08:18Z |
-| one-core-dup2-r2 SẴN SÀNG KIỂM 069188d7 (r3 fix: one-core-bind guard 29→0, j17 AOUT, derived links; on main 05ebe3da) → review r4 (opus BIG; brief briefs/review-one-core-dup2-r4.md) | review/one-core-dup2-r4 | B | (opening) | RUNNING | 17/11 08:27Z |
-| one-core-arcs r2 successor (opus; merge dup2-r2 069188d7, fold amt1 into dup2's single-arg kind, gates; brief briefs/one-core-arcs-r2b.md) | review/one-core-arcs | B | (opening) | RUNNING | 17/11 08:27Z |
+| one-core-dup2-r2 SẴN SÀNG KIỂM 069188d7 (r3 fix: one-core-bind guard 29→0, j17 AOUT, derived links; on main 05ebe3da) → review r4 (opus BIG; brief briefs/review-one-core-dup2-r4.md) | review/one-core-dup2-r4 | B | session_01N1tNP3RUAMCUVaePSwSLjg | RUNNING | 17/11 08:27Z |
+| one-core-arcs r2 successor (opus; merge dup2-r2 069188d7, fold amt1 into dup2's single-arg kind, gates; brief briefs/one-core-arcs-r2b.md) | review/one-core-arcs | B | session_01N1tNP3SHnf4biK9aBwoNfv | RUNNING | 17/11 08:27Z |
