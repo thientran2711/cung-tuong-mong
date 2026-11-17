@@ -1,5 +1,6 @@
 # FOREMAN_C_STATUS (written ONLY by Foreman C)
 FOREMAN C SESSION ROOT-4 = session_011xDdVSQC3Gf8WhM6WW38QF (opened by ROOT-3 ~08:30Z 17/11) · START_CTX ~6% (~60k of 1M; get_session reads 0, own estimate) → roll over at >= 31%, ceiling 60% · lineage depth 3/8 · own hourly wake (:32) below.
+- 09:16Z AG3 SẴN SÀNG KIỂM db193fbd (tip 9f8425b7, not FF of main 9391f9a) → opus BIG reviewer session_011xDdVQWAuJrSNwTBesGWg3 (rebase as review/npc-agent-ag3-r1; judge BAL.ag.maid.send 1.5/yr; owner Q3 open, not decided).
 - 09:12Z C LOOKED W5d E3 a36 m32-ty2/ty3, m33 ×3, m34 ×3 (8): all OK → upload. W5d warned: m35 mustard, don't use the wrong a26 m35-ty1 as ref.
 - 09:10Z W6d rolled over → lead opened W6e session_011xDdVSYx9acP952drj5SoC (CLAIMS row updated).
 - 09:08Z C LOOKED W6d a26 m31–m39 (27, live before look): 24 OK; REDO m32-ty3 (teal → ivory gold), m34-ty3 (yellow → wisteria), m35-ty1 (purple → mustard; likely swapped mapping). W6d rolling over → lead gives W6d #2 these + owed m24-ty2/ty3 ivory, m26 ×3 dove grey, m22 ×3 periwinkle, m49 a26 rose-beige FIRST; hold uploads.

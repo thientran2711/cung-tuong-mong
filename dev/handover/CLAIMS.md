@@ -681,7 +681,8 @@
 | KỲ NGUYỆT SỰ length rolled 5/6/7 per (woman, month) (opus; MAIN s30 07:36Z, OD 07:35Z) | review/cycle-roll | D | session_01964izEeMN4FkyE99xVCtWw | PASS 968e6209 (review/cycle-roll-r1) FOR MAIN — archived | 17/11 07:41Z |
 | one-core-arcs r1 FAIL c682afe6 (66 one-arg go amounts + guard amt regex) → fix r2 by the arcs worker (opus) on review/one-core-arcs | review/one-core-arcs | B | session_01N1tNP5MRPzxmbFfWjw6LuT | RUNNING | 17/11 07:45Z |
 | 10-NIGHT LEDGER (opus; V3-B) on top of night-final-r2 52d5092d | review/night-ledger | D | session_01964izDibL8KfyVNtRh4GfU | RUNNING | 17/11 08:08Z |
-| npc-agent AG3 maids (opus; AG train §5 npc-agent.md) | review/npc-agent-ag3 | C ROOT-3 | session_011xDdVNfbt3vPg31Vfr7ihc | RUNNING | 17/11 08:10Z |
+| npc-agent AG3 maids (opus; AG train §5 npc-agent.md) | review/npc-agent-ag3 | C ROOT-3 | session_011xDdVNfbt3vPg31Vfr7ihc | SẴN SÀNG KIỂM db193fbd → in review | 17/11 08:10Z |
+| REVIEW npc-agent-ag3-r1 (opus BIG; rebase onto main 9391f9a) | review/npc-agent-ag3-r1 | C ROOT-4 | session_011xDdVQWAuJrSNwTBesGWg3 | RUNNING | 17/11 09:16Z |
 | REVIEW show-why-r1 (opus BIG) | review/show-why-r1 | C ROOT-3 | session_011xDdVRVL5MdC5V5iSZRy5P | PASS 9391f9a → main 08:55Z (archived) | 17/11 08:13Z |
 | mg-snap r1 PASS 931255b1 (review/mg-snap-r1 = 2a00405f + main 9fdc1199, FF-ready) → FOR MAIN | review/mg-snap-r1 | B | session_01N1tNP3VpMVoikpTW1oDAch | PASS (archived) | 17/11 08:15Z |
 | coop-thin-b r1 FAIL 9af781c2 (5 items + seam) → fixed with D r1 items by coop-thin-b worker #2 on review/coop-thin-b | review/coop-thin-b | B | session_01N1tNP3op5jQGEdK2Sf7aVD | RUNNING | 17/11 08:18Z |
