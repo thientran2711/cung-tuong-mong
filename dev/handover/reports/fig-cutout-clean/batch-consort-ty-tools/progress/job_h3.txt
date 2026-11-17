@@ -1,0 +1,36 @@
+216 consort-c28-ty1-a18 t1 | outer layer and pin flowers in soft peach on her cream robe
+224 consort-c29-ty1-a18 t1 | outer layer and pin flowers in mint green on her cream robe
+232 consort-c30-ty1-a18 t1 | outer layer and pin flowers in pale lilac on her cream robe
+240 consort-c31-ty1-a18 t1 | outer layer and pin flowers in apricot on her cream robe
+248 consort-c32-ty1-a18 t1 | outer layer and pin flowers in blush rose on her cream robe
+241 consort-c31-ty2-a18 t2 | REDO: change the gown colour family to coral rose and ivory, different embroidery motif and cut from other consorts
+242 consort-c31-ty3-a18 t3 | REDO: change the gown colour family to deep teal and jade, different embroidery motif and cut from other consorts
+249 consort-c32-ty2-a18 t2 | REDO: change the gown colour family to apricot amber and cream, different embroidery motif and cut from other consorts
+250 consort-c32-ty3-a18 t3 | REDO: change the gown colour family to plum mauve and silver grey, different embroidery motif and cut from other consorts
+0 consort-c01-ty1-a18 t1 | REPAINT of live file: keep cream robe base, outer layer and pin flowers in powder blue
+8 consort-c02-ty1-a18 t1 | REPAINT of live file: keep cream robe base, outer layer and pin flowers in light jade
+16 consort-c03-ty1-a18 t1 | REPAINT of live file: keep cream robe base, outer layer and pin flowers in butter yellow
+24 consort-c04-ty1-a18 t1 | REPAINT of live file: keep cream robe base, outer layer and pin flowers in soft peach
+32 consort-c05-ty1-a18 t1 | REPAINT of live file: keep cream robe base, outer layer and pin flowers in mint green
+40 consort-c06-ty1-a18 t1 | REPAINT of live file: keep cream robe base, outer layer and pin flowers in pale lilac
+48 consort-c07-ty1-a18 t1 | REPAINT of live file: keep cream robe base, outer layer and pin flowers in apricot
+56 consort-c08-ty1-a18 t1 | REPAINT of live file: keep cream robe base, outer layer and pin flowers in blush rose
+64 consort-c09-ty1-a18 t1 | REPAINT of live file: keep cream robe base, outer layer and pin flowers in powder blue
+72 consort-c10-ty1-a18 t1 | REPAINT of live file: keep cream robe base, outer layer and pin flowers in light jade
+80 consort-c11-ty1-a18 t1 | REPAINT of live file: keep cream robe base, outer layer and pin flowers in butter yellow
+88 consort-c12-ty1-a18 t1 | REPAINT of live file: keep cream robe base, outer layer and pin flowers in soft peach
+96 consort-c13-ty1-a18 t1 | REPAINT of live file: keep cream robe base, outer layer and pin flowers in mint green
+104 consort-c14-ty1-a18 t1 | REPAINT of live file: keep cream robe base, outer layer and pin flowers in pale lilac
+112 consort-c15-ty1-a18 t1 | REPAINT of live file: keep cream robe base, outer layer and pin flowers in apricot
+120 consort-c16-ty1-a18 t1 | REPAINT of live file: keep cream robe base, outer layer and pin flowers in blush rose
+128 consort-c17-ty1-a18 t1 | REPAINT of live file: keep cream robe base, outer layer and pin flowers in powder blue
+136 consort-c18-ty1-a18 t1 | REPAINT of live file: keep cream robe base, outer layer and pin flowers in light jade
+144 consort-c19-ty1-a18 t1 | REPAINT of live file: keep cream robe base, outer layer and pin flowers in butter yellow
+152 consort-c20-ty1-a18 t1 | REPAINT of live file: keep cream robe base, outer layer and pin flowers in soft peach
+160 consort-c21-ty1-a18 t1 | REPAINT of live file: keep cream robe base, outer layer and pin flowers in mint green
+168 consort-c22-ty1-a18 t1 | REPAINT of live file: keep cream robe base, outer layer and pin flowers in pale lilac
+176 consort-c23-ty1-a18 t1 | REPAINT of live file: keep cream robe base, outer layer and pin flowers in apricot
+184 consort-c24-ty1-a18 t1 | REPAINT of live file: keep cream robe base, outer layer and pin flowers in blush rose
+192 consort-c25-ty1-a18 t1 | REPAINT of live file: keep cream robe base, outer layer and pin flowers in powder blue
+200 consort-c26-ty1-a18 t1 | REPAINT of live file: keep cream robe base, outer layer and pin flowers in light jade
+208 consort-c27-ty1-a18 t1 | REPAINT of live file: keep cream robe base, outer layer and pin flowers in butter yellow
