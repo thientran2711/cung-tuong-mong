@@ -55,7 +55,7 @@ const until=async(o,fn,arg,ms=40000)=>{try{await o.p.waitForFunction(fn,arg,{tim
  const RUNS=ORG.map(k=>[k,null]).concat(ORG.includes('tt')?[['tt','nha']]:[]);
  for(const [k,kc] of RUNS){const tag=k+(kc?'/'+kc:'');
   const life0=await G.p.evaluate(()=>COOPW.life||0);const hn0=await H.p.evaluate(()=>S.name);
-  await H.p.evaluate(k=>{window.__forceOrigin=k},k);await G.p.evaluate(kc=>{window.__kcO=kc||undefined},kc);
+  await H.p.evaluate(k=>{window.__forceOrigin=k},k);await G.p.evaluate(([kc,k])=>{window.__kcO=kc||undefined;window.__forceOrigin=k/* the old path (level 1) builds on the guest: same origin there, for a fair before/after */},[kc,k]);
   await G.p.evaluate(()=>{try{over('<h3>Thử luân hồi</h3>','thử','Thử luân hồi')}catch(e){console.warn(e)}Q=[];start()});
   let card=null;
   if(LVL>=2){ok(await until(G,()=>COOPW.thin.life.key&&Q[0]&&Q[0].nl&&Q[0].h&&S&&Q[0].h.includes(S.name)&&!S.dead,null,30000),tag+': the card shows the host\'s person');
@@ -94,9 +94,9 @@ const until=async(o,fn,arg,ms=40000)=>{try{await o.p.waitForFunction(fn,arg,{tim
  const H1=await H.p.evaluate(()=>{const o={};for(const k of ['name','rank','tai','sac','tamco','duc','danh','age'])o[k]=S[k];o.ids=rivals.filter(v=>!v.coop).map(v=>v.id+':'+v.name+':'+v.rel).join(',');return o});
  {const D=await H.p.evaluate(()=>__wsd);ok(D.length>=RUNS.length*2&&D.every(x=>x===0),'the host\'s own person, its screen state and its own rows on every NPC are the same right before and right after each of the '+D.length+' life intents',D.filter(x=>x!==0).slice(0,3))}
  if(TRIP){const t=await G.p.evaluate(()=>{const a=window.__trip0,b=__trip();const d={};for(const k in b.statePart)d[k]=b.statePart[k]-((a.statePart||{})[k]||0);const r={};for(const k in b.byPart)r[k]=b.byPart[k]-((a.byPart||{})[k]||0);
-   const pa=new Map(((a.parts||{}).B||[]).map(x=>[x[0]+'|'+x[1],x[2]]));const pb=((b.parts||{}).B||[]).map(x=>[x[0],x[1],x[2]-(pa.get(x[0]+'|'+x[1])||0)]).filter(x=>x[2]);
-   return {state:b.state-a.state,total:b.total-a.total,statePart:d,byPart:r,parts:pb,sRep:b.sReplaced-a.sReplaced}});
-  console.log('TRIPWIRE rebirths ('+RUNS.length+') level '+LVL+': changing writes '+t.total+' · STATE '+t.state+' · by part '+JSON.stringify(t.statePart)+' · raw by part '+JSON.stringify(t.byPart)+' · S replaced '+t.sRep+'\n  B writers: '+JSON.stringify(t.parts.slice(0,12)))}
+   const dp=P=>{const pa=new Map(((a.parts||{})[P]||[]).map(x=>[x[0]+'|'+x[1],x[2]]));return ((b.parts||{})[P]||[]).map(x=>[x[0],x[1],x[2]-(pa.get(x[0]+'|'+x[1])||0)]).filter(x=>x[2])};const pb=dp('B');const oth={'C/H':dp('C/H').slice(0,6),D:dp('D').slice(0,6),'?':dp('?').slice(0,6)};
+   return {state:b.state-a.state,total:b.total-a.total,statePart:d,byPart:r,parts:pb,oth,sRep:b.sReplaced-a.sReplaced}});
+  console.log('TRIPWIRE rebirths ('+RUNS.length+') level '+LVL+': changing writes '+t.total+' · STATE '+t.state+' · by part '+JSON.stringify(t.statePart)+' · raw by part '+JSON.stringify(t.byPart)+' · S replaced '+t.sRep+'\n  B writers: '+JSON.stringify(t.parts.slice(0,12))+'\n  other parts (top): '+JSON.stringify(t.oth))}
  /* the host's own rebirth: the old path, unchanged */
  {const g0=await G.p.evaluate(()=>COOPW.base.P.a&&COOPW.base.P.a.life||0);
   await H.p.evaluate(()=>{window.__forceOrigin='dtq';try{over('<h3>Thử luân hồi</h3>','thử','Thử luân hồi')}catch(e){}Q=[];start()});
