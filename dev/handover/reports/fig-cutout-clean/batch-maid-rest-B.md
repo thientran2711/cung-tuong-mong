@@ -114,3 +114,19 @@ maid-m33-t2-a18	UPhZ4pZwny	79aANSBJAL	ok
 maid-m33-t3-a18	iGbVzaZ3uK	lJIiOsOgv9	ok
 maid-m33-t4-a18	UPhZ4dAwny	s786Og9l8e	ok
 ## 104 a18 done through maid-m33-t4-a18. NEXT = line 105 (maid-m33-t5-a18).
+maid-m34-a18	jUB9yWkLD0	mERKqBOhJQ	ok
+maid-m34-cold-a18	tC35HJbmZJ	SymR6lxUb8	ok
+maid-m34-kc-a18	xSX4O0PjfW	P3uYGPD42C	ok
+maid-m34-ngheo-a18	5jM7SzBKxe	jUB9PlnLD0	ok
+maid-m34-t1-a18	O6Cz2IEynm	SymRivhUb8	ok
+maid-m34-t2-a18	u5YsxZGQLD	8a6qFZEIrU	ok
+maid-m34-t3-a18	eIyEaURdqL	jUB9Pw0LD0	ok
+maid-m34-t4-a18	kspOwTI16B	9ZFcYAyNYZ	ok
+maid-m34-t5-a18	s78640dl8e	9ZFcn7rNYZ	ok
+maid-m34-t6-a18	kspOwze16B	eIyEaVhdqL	ok
+maid-m34-t7-a18	DoJfhjUpcl	eIyEfPzdqL	ok
+maid-m34-t8-a18	6AqTWamiJO	lJIi9sUgv9	ok
+maid-m34-tm0-a18	EbnLr3SuuO	gOt3NgMSXO	ok
+maid-m34-tm2-a18	xSX4OV9jfW	s7869Syl8e	ok
+maid-m34-tm3-a18	0eSm8j5TfW	VXwvmySMMU	ok
+maid-m34-tm4-a18	N2H0YEB6D9	4RQWnKp9Aa	REDO (live but a big paddle-shaped object behind the head; regenerate, prop = hairpin fingertip is the cause: use a different prop)
