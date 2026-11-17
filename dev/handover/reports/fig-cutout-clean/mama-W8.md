@@ -11,3 +11,6 @@ Note: OLD files had a forehead huadian dot on maids; new ones have none (rule: h
 COLOUR RULE: new mN-tK-aXX must match the LIVE a18 mN-tK (= OLD colour), NOT the consort-tier table. m01/m02/m03 pilot v1 (table gold/saffron/peach) FAILED the check -> redone in a18 colour (sage/sage/dusty blue-grey); m04 v1 too orange -> redone peach-apricot; m04-t3 v2 had a faint forehead dot copied from the old ref -> redone with 'ERASE the dot' line. Prompt now: "SAME outfit colours (<describe from image 1>) ... keep colours exactly, do not recolour; FOREHEAD bare, erase any mark".
 Final gen ids: m01-t1-a36 s78zNUvl8e | m01-t3-a51 SymW396Ub8 | m02-t2-a36 mERlKV7hJQ | m02-t5-a51 5jM67Q7Kxe | m03-t1-a51 p8O5FvZehw | m03-t4-a36 P3upTcu42C | m04-t3-a36 5jM6RvHKxe | m04-t5-a51 cpguEkq0eP. Credits so far 532 + 8x65 = 1052 (+3 bg removal x4 earlier).
 Sheet = pilot-mama/pilot-sheet.jpg (a18 | OLD | NEW per file). Scratch /home/user/wt/w8 (proc.sh, sheet3.py, fore.py).
+
+## OWED / DENIED (do not retry; ROOT-5 raising with main)
+- m05-t1-a36: creations_upload_image of the OLD ref denied by classifier ('Unsanctioned Communication') 10:5xZ. Skipped. Not routed around.
