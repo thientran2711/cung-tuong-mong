@@ -836,7 +836,7 @@
 | AG-ALL-2 remaining NPC acts (opus; brief briefs/ag-all-2.md) | review/ag-all-2 | C-AG | session_01UV1Szhs6A6KH6MfsDpei7t | RUNNING | 17/11 14:28Z |
 | staff-root fix #1 (returned maid cut by capTrim; opus; brief briefs/staff-root-fix-1.md) | review/staff-root-fix-1 | B | session_01N1tNP4tMiPQEh5DXeZP29x | RUNNING | 17/11 14:40Z |
 >>>>>>> 61f334cd (review kit-ico-rank-r2 report: PASS aaa1bec1)
-| loading-words: every loading/wait line literary cổ trang (OD ~15:25Z (7)), whole family | review/loading-words | MAIN s33 | session_01UV1SzkaNQaeHGcLrqFrzzQ | RUNNING | 17/11 15:28Z |
+| loading-words: every loading/wait line literary cổ trang (OD ~15:25Z (7)), whole family | review/loading-words | MAIN s33 | session_01UV1SzkaNQaeHGcLrqFrzzQ | READY 7221f0b17 (quickcheck PASS; report reports/loading-words.md) | 17/11 15:28Z |
 | REVIEW morechip-sil r2 PASS 4821b39d (count math + name plaque fixed) — waits for round 4 icon gaps, then icon-delta re-check → batch | review/morechip-sil-r2 | MAIN s33 | session_01UV1SzmEh1P3ynxAm3BMz7L | PASS (icon delta pending) | 17/11 15:27Z |
 | tinbao-ui: TIN BÁO top-bar badge + gold toast + kit card on C-AG API (OD ~14:50Z (2)) | review/tinbao-ui | MAIN s33 | session_01UV1Szjhrq5VUWD5Haiagxz | RUNNING | 17/11 15:31Z |
 | trait-rename-r1 LIVE bbb3b4ca (main 2de320ac → bbb3b4ca; rollback 2de320ac) | review/land-trait-rename-r1 | B | session_01N1tNP6NHm7FrTkoTUSGnpa | LIVE | 17/11 15:33Z |
