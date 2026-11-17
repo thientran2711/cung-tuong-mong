@@ -232,11 +232,12 @@ const WKE_NAME="[A-ZÀ-ỸĐ][\\p{L}]*(?: [A-ZÀ-ỸĐ][\\p{L}]*){0,3}";
 const WKE_TOK=new RegExp("(?<![\\p{L}\\d])((?:Thái hậu|Hoàng hậu|phi tần|các phi tần|mọi phi tần|kẻ khác|người khác|"+WKE_NAME+")\\s+)?(Sủng(?: của "+WKE_NAME+")?|quý ngươi|quý ta|thiện cảm|oán ngươi|oán ta|ghen|Danh|Sức|Bạc|Đức|Tai mắt|Ân tình|Tài|Sắc|Tâm cơ)\\s+(-?\\d+\\s*(?:→|->)\\s*-?\\d+|[+\\-−]\\d+)(?![\\d])","gu");
 const WKE_CARD=/(^|\s)·\s*(kèm|thành|hỏng)\s*:|\b(Liều|Khó|Năm ăn năm thua|Khá chắc|Chắc chắn|Rất chắc|Nắm chắc|Chắc)\s*·|ai gặp ta cũng nhìn|\(thẻ [^)]*\)|chọn món trong rương|Dùng được ở thẻ|^Xem sổ thị tẩm|Sổ thị tẩm:/;
 function wkeDelta(v){v=String(v).replace(/−/g,"-");const m=/^(-?\d+)\s*(?:→|->)\s*(-?\d+)$/.exec(v);return m?+m[2]-+m[1]:parseInt(v,10)}
-function wkeNorm(h){return kpMapText(String(h||""),s=>s.replace(/\b(Thái hậu|Hoàng hậu)\s+(?=[+\-−]\d)/g,"$1 thiện cảm "))}
+function wkeNorm(h){return kpMapText(String(h||""),s=>s.replace(/\b(Thái hậu|Hoàng hậu)\s+(?=[+\-−]\d)/g,"$1 thiện cảm ").replace(/\b(Thái hậu|Hoàng hậu) → (?:ta|ngươi):? thiện cảm\s+(?=-?\d)/g,"$1 thiện cảm "))}
 /* every number of a unit: {m:[start,end] in the plain segment, who: person | "me" | null, row:"sung"|"aff"|"oan"|"ghen"|"", d, label} */
 function wkeTokens(html,people,nodup){const out=[];const TH=S.thO||{kind:"th"};
  kpMapText(wkeNorm(html),s=>{WKE_TOK.lastIndex=0;let m;while((m=WKE_TOK.exec(s))){let [all,pre,lab,val]=m;pre=(pre||"").trim();const d=wkeDelta(val);if(!d)continue;let who=null,row="";
-  const byName=n=>{const e=people.find(x=>x[0]===n||x[0].endsWith(" "+n)||n.endsWith(" "+x[0]));return e?e[1]:null};
+  const byName=n=>{const e=people.find(x=>x[0]===n);if(e)return e[1];/* a part of a name ("Dao" when a tag split "Kiều Bích Dao") counts only when ONE person fits (tuanluc-sync: it filed one consort's ghen on another) */
+   const L=people.filter(x=>x[0].endsWith(" "+n)||n.endsWith(" "+x[0]));return L.length===1?L[0][1]:null};
   const pers=n=>/^(phi tần|các phi tần|mọi phi tần|kẻ khác|người khác)$/.test(n)?"grp":n==="Thái hậu"?TH:n==="Hoàng hậu"?((typeof rivals!=="undefined"&&rivals.find(v=>v.queen))||null):byName(n);
   if(/^Sủng/.test(lab)){const o=/^Sủng của (.+)$/.exec(lab);if(o){who=byName(o[1]);if(who===S)who="me"}else{who=S.emp||null;row="sung"}}
   else if(/^(quý|thiện|oán|ghen)/.test(lab)){row=/^oán/.test(lab)?"oan":lab==="ghen"?"ghen":"aff";if(pre)who=pers(pre)}
@@ -249,6 +250,8 @@ function wkeStrip(html,people,keep){const toks=wkeTokens(html,people,true);if(!t
  h=kpMapText(h,s=>{WKE_TOK.lastIndex=0;return s.replace(WKE_TOK,(all,pre,lab,val)=>{const t=toks.find(x=>x.all===all.trim()||x.all===all);return t&&!keep(t)?"":all})});
  return h.replace(/<(span|b|i)[^>]*>\s*<\/\1>/g,"").replace(/(\s*[,;·]\s*)+(?=\.|$)/g,"").replace(/([.:;])\s*,\s*/g,"$1 ").replace(/,\s*,/g,",").replace(/\s+([.,;:])/g,"$1").replace(/\.\s*\./g,".").replace(/^\s*[,;·.]\s*/,"").replace(/(^|[.:;>]\s*)vì [^.<]*\.?/g,"$1").replace(/(\s*·\s*){2,}/g," · ").replace(/\s*·\s*(?=[,;.]|$)/g,"").replace(/(^|[.:;]\s+)·\s*/g,"$1").replace(/\s{2,}/g," ").replace(/(^|[.!?]\s+)([a-zà-ỹđ])/g,(m,a,b)=>a+b.toUpperCase()).trim()}
 function wkeTrim(h){let p;h=String(h||"");do{p=h;h=h.replace(/(?:[\s,;·:.]|→)+((?:<\/[a-z]+>)*)$/,"$1")}while(h!==p);return h.trim()}
+/* Tuần lục line (OD:L1458(3)): every number token taken out, the sentence kept; a line that was only numbers keeps its cause words */
+function wkeLit(h,people){try{const s=wkeTrim(wkeStrip(h,people,()=>false));const p=kpPlain(s).replace(/[\s.:;,·]+/g,"");return p?s.replace(/:\s*$/,"")+(/[.!?…”"]\s*$/.test(kpPlain(s))?"":"."):h}catch(e){return h}}
 function wkeSign(d){return d>0?"+"+d:"-"+Math.abs(d)}
 /* the entry of one owner: the unit's cause (numbers removed) + why it moved + the owner's own numbers */
 function wkeEntry(html,people,p,toks){const mine=toks.filter(t=>t.who===p);let cause=wkeTrim(wkeStrip(html,people,()=>false));
@@ -263,7 +266,10 @@ function wkeEntry(html,people,p,toks){const mine=toks.filter(t=>t.who===p);let c
   else if(k==="ghen"){why.push(d>0?`${sjl} thêm ghen ghét ta`:`${sjl} bớt ghen`);chips.push(`${sj} ghen ${wkeSign(d)}`)}
   else chips.push(`${k} ${wkeSign(d)}`)}
  const w0=why.length&&!(cause&&why.every(x=>kpPlain(cause).toLowerCase().includes(x.toLowerCase())))?why:[];
- return `${cause?cause+(w0.length?", ":""):""}${w0.length?w0.join("; "):""}${cause||w0.length?". ":""}${chips.join(", ")}${chips.length?".":""}`.replace(/\.{2,}/g,".").replace(/([”"])\./g,"$1").replace(/^\s*,\s*/,"").trim()}
+ /* OD:L1458(3) canon (owner 17/11 ~03:15Z): Tuần lục = the literary sentence only; the numbers (Sủng +7 …) live in the Sổ ghi. The chips are
+    still worked out (the relation table's change = what the week did) but never printed in the entry. */
+ void chips;
+ return `${cause?cause+(w0.length?", ":""):""}${w0.length?w0.join("; "):""}${cause||w0.length?".":""}`.replace(/\.{2,}/g,".").replace(/([”"])\./g,"$1").replace(/^\s*,\s*/,"").trim()}
 function wkBookData(){const s=S.wkSnap||wkSnap();const n=Math.max(0,Math.min(S.logs.length,(S.logSeq||0)-(s.seq||0)));
  const raw=S.logs.slice(0,n).slice().reverse();const people=kpPeople();const SKIPRE=/^(Xin xăm|Gieo lại|Đến Tẩm cung của ngươi)/;
  const TH=S.thO||{kind:"th"};let pay="";const U=[];let last=null;
@@ -296,7 +302,7 @@ function wkBookData(){const s=S.wkSnap||wkSnap();const n=Math.max(0,Math.min(S.l
  /* ---- units → pages: by the owner of each number, then by the person the unit is about ---- */
  const by=new Map(),me=[],world=[];const add=(p,e)=>{if(!by.has(p))by.set(p,{who:p,F:[],tk:[]});const x=by.get(p);if(e)x.F.push(e)};
  const SEEN=new Map();const meKeep=t=>t.who==="me"||t.who==="grp"||t.who===S.emp&&t.row==="sung";
- for(const u of U){if(u.world){world.push(u.t);continue}
+ for(const u of U){if(u.world){world.push(wkeLit(u.t,people));continue}
   const toks=wkeTokens(u.t,people).filter(t=>{if(!t.ab||!t.who)return true;const k=(t.row||t.lab)+"|"+t.ab;let m=SEEN.get(t.who);if(!m)SEEN.set(t.who,m=new Set());if(m.has(k))return false;m.add(k);return true});const owners=new Set();
   toks.forEach(t=>{if(t.who&&t.who!=="me"&&t.who!=="grp")owners.add(t.who)});
   /* an unattributed relation number ("nàng quý ngươi +2") belongs to the person the unit is about */
@@ -307,7 +313,8 @@ function wkBookData(){const s=S.wkSnap||wkSnap();const n=Math.max(0,Math.min(S.l
    if(!mine.length&&p!==u.home)continue;
    const e=wkeEntry(u.t,people,p,toks);if(e&&kpPlain(e))add(p,e);by.get(p)&&by.get(p).tk.push(...mine)}
   const hasMe=toks.some(meKeep);
-  if(hasMe||(!u.home&&!owners.size)||(!toks.length&&!u.home))me.push(hasMe?wkeStrip(u.t,people,meKeep):u.t)}
+  if(/class="kls"/.test(u.t))continue;/* bookkeeping line (jlogsync): person pages only */
+  if(hasMe||(!u.home&&!owners.size)||(!toks.length&&!u.home))me.push(wkeLit(u.t,people))}
  /* duplicates: one row, "2 lần" */
  /* the "n lần" chip only for a real act done again; a one-time line, a tip or a spoken line (“…”) is listed once, no chip (tuanluc-sync) */
  const noN=t=>{const p=kpPlain(t);return /[“”]/.test(p)||/từ nay|Từ nay|có thêm nhóm|Lối riêng|lần đầu|đã lành/.test(p)};
@@ -327,7 +334,9 @@ function wkBookData(){const s=S.wkSnap||wkSnap();const n=Math.max(0,Math.min(S.l
     const got=x.tk.filter(t=>(t.row||"")===k).reduce((a,t)=>a+t.d,0);const rest=r.d-got;if(!rest)continue;
     const lab=k==="sung"?"Sủng":k==="aff"?`${sj} thiện cảm`:k==="oan"?`${sj} oán ta`:`${sj} ghen`;
     const why=k==="sung"?(rest>0?"Hoàng thượng để tâm đến ta hơn":"Hoàng thượng nhạt lòng với ta"):k==="aff"?(rest>0?`${sjl} thêm quý mến ta`:`${sjl} bớt vừa lòng về ta`):k==="oan"?(rest>0?`${sjl} thêm oán ta`:`${sjl} bớt oán ta`):(rest>0?`${sjl} thêm ghen ghét ta`:`${sjl} bớt ghen`);
-    F.push(`Mấy việc vặt trong tuần chưa ghi riêng, ${why}. ${lab} ${wkeSign(rest)}.`)}}
+    /* tuanluc-sync item 6 (owner 17/11 03:26Z): no catch-all line ("Mấy việc vặt …") any more — jlogsync rlSync writes every change with its
+       real cause the moment it happens; what is still unexplained here is a bug, counted for the scan (dev/test/tuanluc-sync.js), never shown */
+    void why;void lab;(window.__wkResid=window.__wkResid||[]).push(`${p.name||"?"} ${k} ${wkeSign(rest)}`)}}
   return {kind:"person",who:p,rel,blocks:[{facts:dedup(F)}],n:F.length}}).filter(x=>x.n>0||x.rel.some(r=>r.d));
  const rk=p=>S.emp&&p.who===S.emp?0:(S.thO&&p.who===S.thO)||p.who.kind==="th"?1:2;
  persons.sort((a,b)=>rk(a)-rk(b)||b.n-a.n);
