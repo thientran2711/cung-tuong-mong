@@ -39,7 +39,9 @@ function serve(){return new Promise(res=>{const s=http.createServer((q,r)=>{let 
  s.listen(0,'127.0.0.1',()=>res({url:'http://127.0.0.1:'+s.address().port+'/',close:()=>s.close()}))})}
 const within=(ms,p,what)=>Promise.race([p,new Promise((_,rej)=>setTimeout(()=>rej(new Error(what+' took > '+ms/1000+' s')),ms))]);
 /* in-page helpers (run inside the game frame) */
-const NEWLIFE=()=>{try{localStorage.removeItem('hclh-opt')}catch(e){}SLOT=3;document.getElementById('title').hidden=true;for(let i=0;i<40;i++){start();if(!(S.origin&&S.origin.k==='cnv')&&!(window.isSrv&&isSrv()))break}
+/* reroll = a NEW pending life: without clearing ctm-nextlife (j52 NL_KEY) start() re-rolls the SAME stored life, so a first life that is a
+   cung nữ looped 40 identical start() calls in one task (27–33 s 'long task', seen on new AND live; fix oi-perf 11/17, same idiom as origin-intros/flow.js) */
+const NEWLIFE=()=>{try{localStorage.removeItem('hclh-opt')}catch(e){}SLOT=3;document.getElementById('title').hidden=true;for(let i=0;i<40;i++){if(i)try{store.set(NL_KEY,null)}catch(e){}start();if(!(S.origin&&S.origin.k==='cnv')&&!(window.isSrv&&isSrv()))break}
  ['kroul','dawn','kload'].forEach(i=>{const e=document.getElementById(i);if(e)e.remove()});return S.name};
 const SETTLE=()=>{try{for(let j=0;j<8&&Q.length&&!S.dead;j++){const m=Q[0];if(m.opts&&m.opts.length)chooseM(0);else closeModal()}}catch(e){try{Q.shift()}catch(x){}}
  const n=document.getElementById('next');return !!n&&!n.disabled&&!Q.length&&!S.dead};
