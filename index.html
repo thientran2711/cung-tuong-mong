@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"4eac30bc+","t":"2026-11-17T22:57Z","c":"review coop-thin-c r1 #2: her NPC pack resend (F1) listens on any guest seat, not only while the C switch is on: a level drop / build hold …","b":"bdc96ec5f83e","h":[{"s":"c7375c0c+","t":"2026-11-17T22:33Z","c":"batch s38a: dudo-blank-r1 2270c4c5 merged onto main 99f3978d; site rebuilt"},{"s":"99f3978d+","t":"2026-11-17T21:07Z","c":"batch s37a: display-shelf-r3rv 41418cd8 merged onto main 4c8568f5; site rebuilt"},{"s":"4c8568f5+","t":"2026-11-17T20:30Z","c":"batch s36a: main 60b0e3bf (display-shelf) merged; jdisp gated on BAL.shelf.ui (=0, room hidden); site rebuilt"},{"s":"da86e866","t":"2026-11-17T20:29Z","c":"Thẻ hành sự chia hai khối THÀNH và BẠI cho rõ được mất; khung dài có chữ \"Kéo xuống\" nhắc còn nữa; thẻ người chỉ ghi tước vị một lần, không…"},{"s":"9c6292d3+","t":"2026-11-17T20:17Z","c":"review display-shelf r2: Thái hậu rebuke through the one stat path ap (favour runs -100..100; cl(...,0,100) RAISED a negative favour to 0);…"},{"s":"85545ce7+","t":"2026-11-17T20:02Z","c":"world_check2 §1: a kind she died in is played again on a new life (fresh() kept as window.__wcFresh) — her random death mid-loop failed tha…"},{"s":"fc7c649f+","t":"2026-11-17T19:42Z","c":"review looks-2 r2: looks-2 layer scan follows the owner's AVATAR = ID CARD rule (17/11 ~18:10Z, main kit-fx-register): portrait/avatar rows…"},{"s":"0a508368+","t":"2026-11-17T18:53Z","c":"wx-anim: site rebuilt"},{"s":"25c3b626","t":"2026-11-17T19:06Z","c":"Dư đồ dựng dọc gọn hơn, dấu ! sáng và to hơn; thẻ người nêu thẳng điều đã biết, chạm dòng gạch chấm mới thấy cách biết; Bảng vàng giữ đúng …"},{"s":"315af52e+","t":"2026-11-17T18:04Z","c":"Công chúa hòa thân nay chung một thẻ thân phận: rút trúng thì tùy duyên mà làm công chúa Nam Chiếu hay Bắc Địch, mỗi nơi một cố hương, một …"}]};
+window.CTM_BI={"s":"eb3675a6+","t":"2026-11-17T22:59Z","c":"review coop-thin-c r1 #2: merge origin/main b048e495 (kit-display-room r2, jdisp/jshelf only; generated files from main + site rebuilt)","b":"c728ef2f893d","h":[{"s":"4eac30bc+","t":"2026-11-17T22:57Z","c":"review coop-thin-c r1 #2: her NPC pack resend (F1) listens on any guest seat, not only while the C switch is on: a level drop / build hold …"},{"s":"c7375c0c+","t":"2026-11-17T22:33Z","c":"batch s38a: dudo-blank-r1 2270c4c5 merged onto main 99f3978d; site rebuilt"},{"s":"99f3978d+","t":"2026-11-17T21:07Z","c":"batch s37a: display-shelf-r3rv 41418cd8 merged onto main 4c8568f5; site rebuilt"},{"s":"4c8568f5+","t":"2026-11-17T20:30Z","c":"batch s36a: main 60b0e3bf (display-shelf) merged; jdisp gated on BAL.shelf.ui (=0, room hidden); site rebuilt"},{"s":"da86e866","t":"2026-11-17T20:29Z","c":"Thẻ hành sự chia hai khối THÀNH và BẠI cho rõ được mất; khung dài có chữ \"Kéo xuống\" nhắc còn nữa; thẻ người chỉ ghi tước vị một lần, không…"},{"s":"9c6292d3+","t":"2026-11-17T20:17Z","c":"review display-shelf r2: Thái hậu rebuke through the one stat path ap (favour runs -100..100; cl(...,0,100) RAISED a negative favour to 0);…"},{"s":"85545ce7+","t":"2026-11-17T20:02Z","c":"world_check2 §1: a kind she died in is played again on a new life (fresh() kept as window.__wcFresh) — her random death mid-loop failed tha…"},{"s":"fc7c649f+","t":"2026-11-17T19:42Z","c":"review looks-2 r2: looks-2 layer scan follows the owner's AVATAR = ID CARD rule (17/11 ~18:10Z, main kit-fx-register): portrait/avatar rows…"},{"s":"0a508368+","t":"2026-11-17T18:53Z","c":"wx-anim: site rebuilt"},{"s":"25c3b626","t":"2026-11-17T19:06Z","c":"Dư đồ dựng dọc gọn hơn, dấu ! sáng và to hơn; thẻ người nêu thẳng điều đã biết, chạm dòng gạch chấm mới thấy cách biết; Bảng vàng giữ đúng …"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -40331,18 +40331,21 @@ function snapStats(){const o={};for(const k of ["sung","danh","bac","suc","sac",
 function waiting(){const s=COOP.state;return CW.on&&(CW.sent===wk()||!!(s.ended&&s.ended[CW.seat]))}
 function frozen(){const s=COOP.state;return CW.on&&(s.status!=="open"||!s.peerOnline||!!CW.hold)}  /* CW.hold: the two are on different builds (swreg.js, KIT §35.2) */
 /* touch #next only when its state really changes (j63 observes every "disabled" write) */
-function lockNext(){const n=$("next");if(!n)return;const wb=CW.on&&(CW.bend||nReady()||needWhere()||!!CW.pendBuoi);const lock=CW.on&&(waiting()||frozen()||CW.pend||!CW.base||wb);
+function lockNext(){const n=$("next");if(!n)return;const eR=!!(CW.on&&eW()&&CW.eWait&&CW.eWait());const wb=CW.on&&(CW.bend||eR||nReady()||needWhere()||!!CW.pendBuoi);const lock=CW.on&&(waiting()||frozen()||CW.pend||!CW.base||wb);
  if(lock){if(!n.disabled)n.disabled=true;if(n.dataset.coopWait!=="1")n.dataset.coopWait="1";/* owner 16/11 (owner-coop-stuck.jpg: faded "Sang buổi", no word): every lock says why */
-  const s=COOP.state;const t=(CW.bend||nReady()||waiting()||CW.pend)?CTM_WAIT.coopWaitPeer:wb?CTM_WAIT.coopWaitPeer2:CW.hold?CTM_WAIT.coopWaitBuild:frozen()?(s.status==="moved"?CTM_WAIT.coopMoved:s.status!=="open"?CTM_WAIT.coopRelink:CTM_WAIT.coopAbsent):CTM_WAIT.coopLinking;if(t&&n.textContent!==t){/* keep the button's own width (the tabs beside it must not shrink): the longer words wrap inside */
+  const s=COOP.state;const t=(CW.bend||eR||nReady()||waiting()||CW.pend)?CTM_WAIT.coopWaitPeer:wb?CTM_WAIT.coopWaitPeer2:CW.hold?CTM_WAIT.coopWaitBuild:frozen()?(s.status==="moved"?CTM_WAIT.coopMoved:s.status!=="open"?CTM_WAIT.coopRelink:CTM_WAIT.coopAbsent):CTM_WAIT.coopLinking;if(t&&n.textContent!==t){/* keep the button's own width (the tabs beside it must not shrink): the longer words wrap inside */
   if(!n.style.maxWidth&&n.offsetWidth)n.style.maxWidth=n.offsetWidth+"px";n.classList.add("kcwait");n.textContent=t}}
  else if(n.dataset.coopWait){delete n.dataset.coopWait;n.style.maxWidth="";n.classList.remove("kcwait");n.disabled=!!(S&&(S.dead||Q.length||S.mg));const t=CW.on?"Sẵn sàng":S&&(S.buoi||0)>=(typeof B4L==="number"?B4L:2)?"Sang ngày mới":"Sang buổi";if(n.textContent!==t)n.textContent=t}}
 /* ---------- phase 2 (PROTOCOL §9): same buổi, same place, acts between the two ---------- */
 Object.assign(CW,{bend:false,whereKey:"",lastWhere:null,fpos:null,posKey:"",p2:true,allow:false,acts:{},rpend:{}});
 const bkey=()=>wk()+":"+((S&&S.buoi)||0);
-function needWhere(){return CW.on&&CW.p2&&!host()&&CW.whereKey!==bkey()}
+/* thin guest part E (jcoopthine, level 5): ONE switch eW(); the buổi step is the host's for both seats: the old bend / buoi / badbuoi / pendBuoi /
+   needWhere / where / ctm-nr paths below step aside (bypassed here, deleted when level >= 5 is the default, part H) */
+const eW=()=>!!(CW.thin&&CW.thin.on&&CW.thin.on(5));CW.eW=eW;
+function needWhere(){if(eW())return false;return CW.on&&CW.p2&&!host()&&CW.whereKey!==bkey()}
 /* her place as I see it: her "home" is her own palace; my palace in her eyes ("r"+my pid) is my "home" */
 function mapPlace(pl){if(!pl)return null;if(pl==="home"){const f=friendEntry();return f?palaceOf(f):null}if(pl==="r"+me())return"home";return pl}
-function sendWhere(){if(!CW.on||!CW.p2||!host()||!S||!S.where)return;const W=mapMe(J(S.where),true,me());delete W[String(fp())];if(S.menW)W.__menW=J(S.menW);
+function sendWhere(){if(eW())return;if(!CW.on||!CW.p2||!host()||!S||!S.where)return;const W=mapMe(J(S.where),true,me());delete W[String(fp())];if(S.menW)W.__menW=J(S.menW);
  COOP.send({t:"where",week:wk(),buoi:S.buoi||0,W})}
 function setWhere(m){if(!m||!m.W||!S||host()||m.week!==wk()||m.buoi!==(S.buoi||0))return false;
  const W=mapMe(J(m.W),false,me());const mw=W.__menW;delete W.__menW;const fpl=S.where&&S.where[fp()];S.where=W;if(fpl)S.where[fp()]=fpl;if(mw)S.menW=mw;
@@ -40373,9 +40376,9 @@ function famLive(){return {bag:bagOf(S.inv),kids:kidsCopy(S.kids),preg:S.preg&&!
 const FK="ctm-fam";
 function hstr(s){let h=5381;for(let i=0;i<s.length;i++)h=((h<<5)+h+s.charCodeAt(i))|0;return (h>>>0).toString(36)+"."+s.length}
 function famPack(){const pl=petLive(),fm=famLive();return {pl,fm,h:hstr(JSON.stringify([pl,fm]))}}
-function sendFam(P){if(!CW.on||!S||S.dead)return;P=P||famPack();CW.famSentH=P.h;COOP.send({t:"act",k:FK,mode:"fam",h:P.h,pets:P.pl,fam:P.fm,name:S.name,id:FK+":"+newId()})}
+function sendFam(P){if(CW.ctx||!CW.on||!S||S.dead)return;P=P||famPack();CW.famSentH=P.h;COOP.send({t:"act",k:FK,mode:"fam",h:P.h,pets:P.pl,fam:P.fm,name:S.name,id:FK+":"+newId()})}
 CW.famPack=famPack;
-function sendPos(){if(!CW.on||!CW.p2||!S||S.dead)return;const st={};for(const x of LIVE)st[x]=S[x];
+function sendPos(){if(CW.ctx||!CW.on||!CW.p2||!S||S.dead)return;const st={};for(const x of LIVE)st[x]=S[x];
  const P=famPack();if(P.h!==CW.famSentH)sendFam(P);
  const tl=S.toilette&&S.toilette.wk===wk()?J(S.toilette):null,wd=S.wd?J(S.wd):null;const fx={};for(const x of FXL)fx[x]=S[x]==null?null:J(S[x]);const fxs=JSON.stringify(fx);/* her look of the day + worn clothes, live (diemtrang-coop-look) */
  const k=[wk(),S.buoi||0,S.place||"home",used,LIVE.map(x=>S[x]).join("/"),!!S.out,S.name,P.h,tl?JSON.stringify(tl):"",wd?JSON.stringify(wd):"",fxs].join(":");if(k===CW.posKey)return;CW.posKey=k;
@@ -40404,15 +40407,15 @@ COOP.on("act",m=>{if(!m||m.k!==FK||!CW.on||m.from===CW.seat||!S)return;
  if(m.mode!=="fam"||typeof m.h!=="string")return;CW.famLast=m;if(famTake()){refreshHere();if(!Q.length)render()}});
 function onPos(m){if(!CW.on||m.from===CW.seat||!S)return;CW.fpos=m;const pl=mapPlace(m.place);const f=friendEntry();if(!f)return;
  let sc=liveStats(m);if(typeof m.fh==="string"){if(famTake())sc=true;if(CW.famGotH!==m.fh)famAsk(m.fh)}S.where=S.where||{};const was=S.where[f.id];S.where[f.id]=pl||palaceOf(f);if(was!==S.where[f.id]||sc){refreshHere();if(!Q.length)render()}}
-function keepFriendPos(){if(!CW.on||!S||!S.where)return;const f=friendEntry();if(!f)return;const pl=CW.fpos&&CW.fpos.week===wk()&&CW.fpos.buoi===(S.buoi||0)?mapPlace(CW.fpos.place):null;S.where[f.id]=pl||palaceOf(f)}
-function onBuoi(m){T("onBuoi "+m.week+"."+m.buoi+" me "+wk()+"."+(S&&S.buoi)+" Q"+Q.length+(S&&S.mg?" mg":""));if(!CW.on||!S)return;CW.bend=false;
+function keepFriendPos(){if(!CW.on||!S||!S.where)return;const f=friendEntry();if(!f)return;if(CW.ctx){/* part E: her step on the host: the host's own place */const o=CW.thin&&CW.thin.outerS;S.where[f.id]=o&&o.place&&o.place!=="home"?mapPlace(o.place):palaceOf(f);return}const pl=CW.fpos&&CW.fpos.week===wk()&&CW.fpos.buoi===(S.buoi||0)?mapPlace(CW.fpos.place):null;S.where[f.id]=pl||palaceOf(f)}
+function onBuoi(m){T("onBuoi "+m.week+"."+m.buoi+" me "+wk()+"."+(S&&S.buoi)+" Q"+Q.length+(S&&S.mg?" mg":""));if(!CW.on||!S||eW())return;CW.bend=false;
  /* the room moved on: if a dialog is still open, step as soon as it is closed */
  if((Q.length||S.mg)&&m.week===wk()&&(S.buoi||0)===m.buoi-1){CW.pendBuoi=m;lockNext();return}CW.pendBuoi=null;
  if(m.week===wk()&&(S.buoi||0)===m.buoi-1&&!S.dead){CW.allow=true;try{nextBuoi()}finally{CW.allow=false}}
  /* the room is further on (came back after both steps, or a pendBuoi older than the room): next step at once */
  if(!S.dead&&typeof CW.rbuoi==="number"&&CW.rweek===wk()&&CW.rbuoi>(S.buoi||0)&&(S.buoi||0)===m.buoi)setTimeout(()=>{if(CW.on&&S&&CW.rweek===wk()&&CW.rbuoi>(S.buoi||0))onBuoi({week:wk(),buoi:(S.buoi||0)+1})},0);
  if(host())sendWhere();else if(CW.lastWhere)applyWhere(CW.lastWhere);sendPos();lockNext()}
-function bend(){T("bend "+wk()+"."+(S&&S.buoi));if(CW.bend)return;CW.bend=true;COOP.send({t:"bend",week:wk(),buoi:S.buoi||0});lockNext()}
+function bend(){T("bend "+wk()+"."+(S&&S.buoi));if(CW.bend||eW())return;CW.bend=true;COOP.send({t:"bend",week:wk(),buoi:S.buoi||0});lockNext()}
 /* a night with the Emperor spends the rest of her day (jnight). In co-op the day only moves through the sync path above:
    sáng / chiều → `bend` (the server's `buoi` then runs the real step for both), tối → endTurn → `end` → the merged week.
    CW.nightEnd() ends THIS seat's current buổi once: nothing while her buổi is already ended (bend sent, week pending / sent), while
@@ -40429,7 +40432,7 @@ COOP.on("buoi",rb);COOP.on("presence",rb);COOP.on("room",rb);COOP.on("week",m=>{
 COOP.on("bended",m=>{if(CW.on)lockNext()});
 COOP.on("where",m=>{CW.lastWhere=m;if(CW.on)applyWhere(m)});
 COOP.on("pos",onPos);
-COOP.on("error",m=>{T("err "+m.code+" "+m.msg);if(CW.on&&m.code==="badbuoi"){CW.bend=false;/* refused because the room is already further on: catch up */if(S&&!S.dead&&CW.rweek===wk()&&typeof CW.rbuoi==="number"&&CW.rbuoi>(S.buoi||0))onBuoi({week:wk(),buoi:(S.buoi||0)+1});lockNext()}});
+COOP.on("error",m=>{T("err "+m.code+" "+m.msg);if(CW.on&&m.code==="badbuoi"&&!eW()){CW.bend=false;/* refused because the room is already further on: catch up */if(S&&!S.dead&&CW.rweek===wk()&&typeof CW.rbuoi==="number"&&CW.rbuoi>(S.buoi||0))onBuoi({week:wk(),buoi:(S.buoi||0)+1});lockNext()}});
 
 /* acts between the two (PROTOCOL §9.1). Every act tab works on her entry exactly as on an NPC (same place/rank/conditions).
    mode "do": I resolve it here (odds, detection, my costs, text) and send `res` with the effect on her; she applies it to her own S
@@ -40655,9 +40658,9 @@ function syncRoom(m){if(!m||!CW.on||!S)return;try{const o=COOP.other();if(m.wher
  /* a `bend` / `end` sent while the socket was down (COOP.send drops it when the socket is not open) is lost: the seat waits for a
     friend who waits for it. The room snapshot after the reconnect says what the server holds; send it again. */
  try{if(!S.dead&&m.week===wk()){const me=CW.seat;
-  if(CW.bend&&m.buoi===(S.buoi||0)&&m.bended&&!m.bended[me]){T("rebend "+m.week+"."+m.buoi);CW.bend=false;bend()}
+  if(!eW()&&CW.bend&&m.buoi===(S.buoi||0)&&m.bended&&!m.bended[me]){T("rebend "+m.week+"."+m.buoi);CW.bend=false;bend()}
   if(CW.sent===wk()&&m.ended&&!m.ended[me]){T("re-end "+m.week);CW.sent=-1;CW.pend=true;soonEnd()}}}catch(e){console.error(e)}
- if(CW.p2&&!S.dead&&m.week===wk()&&CW.sent!==wk()&&typeof m.buoi==="number")while((S.buoi||0)<m.buoi){const b0=S.buoi||0;onBuoi({week:m.week,buoi:b0+1});if((S.buoi||0)===b0)break}/* a dialog open: onBuoi keeps the step as pendBuoi (stepped when it closes) — before, nothing caught her up and her next bend was refused (badbuoi): stuck */
+ if(CW.p2&&!eW()&&!S.dead&&m.week===wk()&&CW.sent!==wk()&&typeof m.buoi==="number")while((S.buoi||0)<m.buoi){const b0=S.buoi||0;onBuoi({week:m.week,buoi:b0+1});if((S.buoi||0)===b0)break}/* a dialog open: onBuoi keeps the step as pendBuoi (stepped when it closes) — before, nothing caught her up and her next bend was refused (badbuoi): stuck */
  if(host())sendWhere();else if(CW.lastWhere)applyWhere(CW.lastWhere);sendPos();lockNext()}
 COOP.on("room",m=>{if(m.buoi!==undefined)CW.p2=true;CW.roomMsg=m;T("room "+m.week+"."+m.buoi+" sent "+CW.sent+" in "+CW.wkIn);if(!CW.on||!m.state)return;const C=m.state;
  /* reconnect: the merge happened while we were away → rebuild; otherwise keep the local week */
@@ -40678,7 +40681,7 @@ COOP.on("room",m=>{if(m.buoi!==undefined)CW.p2=true;CW.roomMsg=m;T("room "+m.wee
    Lost messages (socket drop): a ready guest re-sends rd on every room snapshot / peer return; a host that already went answers
    any rd with go again. A seat whose friend already sent `end` for this week takes that as the host's commit. */
 const NK="ctm-nr";
-function nsay(mode){try{COOP.send({t:"act",k:NK,mode,week:wk(),id:NK+mode+wk()+":"+Date.now().toString(36)})}catch(e){}}
+function nsay(mode){if(eW())return;try{COOP.send({t:"act",k:NK,mode,week:wk(),id:NK+mode+wk()+":"+Date.now().toString(36)})}catch(e){}}
 function nAtNight(){return !!(S&&!S.dead&&(S.buoi||0)>=LASTB())}
 function nReady(){return CW.on&&CW.nrdy===wk()&&nAtNight()&&CW.sent!==wk()&&!CW.pend}
 function nOtherEnded(){const e=COOP.state.ended||{};return !!e[fs()]}
@@ -40691,6 +40694,7 @@ function nCheck(){if(!CW.on||!S)return;const w=wk();
  if(!host()&&CW.ngoW!==w&&nAtNight()&&nOtherEnded()&&COOP.state.week===w)CW.ngoW=w;   /* the host's end is out: it committed */
  if(CW.ngoW!==w||CW.pend||CW.sent===w||!nAtNight()||S.dead||Q.length||S.mg||frozen()||!CW.base||needWhere()||CW.inLife)return;
  T("night "+w);CW.allowN=true;try{nextBuoi()}finally{CW.allowN=false}}
+CW.nCheck=()=>nCheck();CW.nightReady=()=>nightReady();CW.mapPlace=mapPlace;CW.refreshHere=()=>refreshHere();
 CW.forceNight=()=>{if(!CW.on||!host()||!nAtNight()||CW.ngo===wk())return false;CW.nforce=wk();nCheck();return true};
 CW.nReady=nReady;
 COOP.on("act",m=>{if(!m||m.k!==NK||!CW.on||m.from===CW.seat)return;T("nr "+m.mode+" "+m.week+" me "+wk());if(m.week!==wk())return;
@@ -40821,6 +40825,7 @@ const mute=n=>{const f=window[n];if(typeof f!=="function")return;window[n]=funct
  if(!CW.on)return f.apply(this,arguments);let r;CW.inTurn=true;const alt=typeof CW.altTurn==="function"?CW.altTurn():null;/* a route with its own week (jkc at home: kcEndTurn) */
  try{r=withoutFriend(()=>(alt||f).apply(this,arguments))}finally{CW.inTurn=false}if(S){CW.pend=true;try{render()}catch(e){}lockNext()}return r};CW.weekEnd=endTurn/* a route with its own week (jkc) calls this directly, past the palace-only wrappers made after it */})();
 (function(){const f=nextBuoi;nextBuoi=function(){if(!CW.on)return f.apply(this,arguments);if(waiting()||frozen()||CW.pend||!CW.base)return;
+ if(eW()&&!CW.allow&&!CW.allowN&&CW.eNext)return CW.eNext();
  /* same buổi for both: buổi sáng / chiều end with `bend`; the server's `buoi` runs the real step (CW.allow); buổi tối ends the week (`end`) */
  if(CW.p2&&!CW.allow&&(S.buoi||0)<(typeof B4L==="number"?B4L:2)){if(!S||S.dead||Q.length||S.mg||needWhere())return;bend();return}
  /* buổi tối: "Sẵn sàng" only marks her ready; the night + week end (endTurn) runs on the host's `go` for both (nightReady below) */
@@ -40829,7 +40834,7 @@ const mute=n=>{const f=window[n];if(typeof f!=="function")return;window[n]=funct
 /* #next was wired to the bare nextBuoi in j6 (before any wrapper): in co-op route the button through the wrapped one */
 (function(){const n=$("next");if(!n)return;const o=n.onclick;n.onclick=function(e){if(CW.on)return nextBuoi();return o?o.call(this,e):undefined}})();
 /* NPC whereabouts are the host's: the guest's own placement is replaced by the host's for this buổi; the host re-sends whenever it re-places */
-(function(){const f=placeWhere;placeWhere=function(){const r=f.apply(this,arguments);if(CW.on)try{if(!host()&&CW.p2){if(!setWhere(CW.lastWhere))CW.whereKey=""}keepFriendPos();if(host()&&CW.p2&&!CW.pend&&!CW.inTurn)sendWhere()/* the new week's places go out with the merged week, not from inside endTurn */}catch(e){}return r}})();
+(function(){const f=placeWhere;placeWhere=function(){const r=f.apply(this,arguments);if(CW.on)try{if(!host()&&CW.p2&&!eW()){if(!setWhere(CW.lastWhere))CW.whereKey=""}keepFriendPos();if(host()&&CW.p2&&!CW.pend&&!CW.inTurn)sendWhere()/* the new week's places go out with the merged week, not from inside endTurn */}catch(e){}return r}})();
 (function(){const f=goTo;goTo=function(){const r=f.apply(this,arguments);if(CW.on)try{sendPos()}catch(e){}return r}})();
 (function(){const f=save;save=function(){if(!CW.on)return f.apply(this,arguments);try{if(S&&!S.dead&&CW.base)localStorage.setItem("ctm-coop-last",JSON.stringify({room:COOP.state.room,at:Date.now()}))}catch(e){}}})();
 (function(){const f=over;over=function(){if(CW.on&&S&&!S.dead){/* keep the world as it stands at her death; the new life is put into it */
@@ -40854,7 +40859,7 @@ CW.toCanon=toCanon;CW.fromCanon=fromCanon;CW.friend=friendEntry;CW.sendEnd=sendE
    the buổi ran out: sends `bend` even with a dialog / mini game open (the room's step then waits for it: CW.pendBuoi, nothing is cut);
    only for the day buổi (tối ends through nextBuoi → endTurn → end), only when her buổi is the room's buổi and not already ended. */
 CW.isWaiting=waiting;CW.isFrozen=frozen;CW.lockNext=lockNext;
-CW.forceBend=()=>{if(!CW.on||!S||S.dead||CW.inLife||CW.bend||waiting()||frozen()||CW.pend||!CW.base||!CW.p2)return false;const b=S.buoi||0;
+CW.forceBend=()=>{if(eW())return CW.eForce?CW.eForce():false;if(!CW.on||!S||S.dead||CW.inLife||CW.bend||waiting()||frozen()||CW.pend||!CW.base||!CW.p2)return false;const b=S.buoi||0;
  if(b>=(typeof B4L==="number"?B4L:2))return false;if(typeof CW.rbuoi==="number"&&CW.rweek===wk()&&CW.rbuoi!==b)return false;bend();return true};
 /* rolling copy of her week (review/coop-night-sync): written ~1 s after each render and when the page hides, read back by begin()
    on a reload / rejoin. Only taken for the same room, seat, week, life and name; a sent / pending week end is never restored. */
@@ -65759,7 +65764,7 @@ try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§89",title:"kitDi
 (function(){try{
 const CW=window.COOPW;if(!CW||!CW.X||typeof COOP!=="object")return;
 const X=CW.X,J=X.J,LS={get(k){try{return localStorage.getItem(k)}catch(e){return null}}};
-const TH=CW.thin={CAP:4/* B life + rebirth on the host (jcoopthinb.js), C world read-only on the guest (jcoopthinc.js), D remote dialogs (section 6) */,lvl:0,REG:[],bridge:[],rlog:[],view:null,hv:0,dn:0,dr:null,ctxN:0};
+const TH=CW.thin={CAP:5/* E buổi + night gate on the host (jcoopthine.js), B life + rebirth on the host (jcoopthinb.js), C world read-only on the guest (jcoopthinc.js), D remote dialogs (section 6) */,lvl:0,REG:[],bridge:[],rlog:[],view:null,hv:0,dn:0,dr:null,ctxN:0};
 const host=()=>CW.seat==="a";
 const D={};   /* part D (remote dialogs), filled in section 6 */
 TH.on=n=>!!(CW.on&&!CW.hold&&TH.lvl>=(n||1));
@@ -66640,6 +66645,136 @@ if(typeof rivalsBuoi==="function"){const f=rivalsBuoi;rivalsBuoi=function(){if(!
   v.rel=x[0];v.oan=x[1];v.ghen=x[2];v.ev=x[3];if(plain(v.evm))delete v.evm.me;if(v.resHead==="me")v.resHead=null}}catch(e){console.error("C life rows",e)}return r})}
 }catch(e){console.error("jcoopthinc",e)}})();
 
+/* jcoopthine: CO-OP THIN GUEST, part E = THE BUỔI STEP (and the night gate) ON THE HOST (review/coop-thin-e; audit
+   dev/handover/reports/coop-thin-guest-audit.md §3 row E; report dev/handover/reports/coop-thin-e.md; owner GO 17/11 ~01:40Z, no option-1
+   patching ~02:05Z). Behind the room level: TH.on(5), on only when BOTH seats run a build with it (Worker: level = min(want, cap a, cap b)).
+   Solo and rooms below level 5 run nothing here (jcoopworld's eW() is the one switch for the old paths).
+
+   GUEST: "Sẵn sàng" never steps her buổi and never sends `bend`. It sends the intent `do ready` {w, b}, first preceded by `do erd` packs =
+     her person as it is NOW against the host's copy of it (the view's P.<seat>: pDiff, the same patch form part D uses the other way), so
+     the host steps the person she really is (her own acts of this buổi still run on her phone until part F). She sends only once every
+     host patch in the view is applied (S.thpn), so the diff is exactly her own changes. While she is ready #next is locked (COOPW.eWait).
+     Her step comes back as a part-D patch (pq, applied by TH.gSync): buổi, khắc reset, her place / visit / where, her cards (thq). When her
+     buổi moves by that patch, her phone resets what lives outside S (used, popIdx / popMsg) and plays the curtain: display only.
+     At buổi tối her ready marks the night gate (CW.nrdy) and is the same intent; the host's go rides the view (o.e.go), never `ctm-nr`.
+   HOST: "Sẵn sàng" marks him ready. The step runs when both are ready for the room's buổi, or when his clock ran out (COOPW.forceBend →
+     eForce: host clock only; the guest's clock never steps anything): his own buổi (the real nextBuoi, rivalsBuoi with her entry in the
+     harem through part C / B4, placeWhere), then HER step in withSeat("b") from the top of the event loop: nextBuoi for her person with
+     the world READ-ONLY in it — rivalsBuoi / placeWhere do not run again (her NPC places = his, mapped to her perspective), and every write
+     of her step into the world (NPC entries, the NPC list, the world keys of S, rid) is put back as it was when her step ends, except her own
+     viewer rows (rel / oan / ghen / ev / <map>.me: what that NPC feels / holds toward HER) and her own part of emp / cm / men. This is the
+     same rule as part C's lens on her phone (world frames dropped): the world is computed once, by the host's own step.
+   Retired at level 5 (bypassed through eW(), deleted when level >= 5 is the default, part H): bend / buoi / bended / badbuoi, pendBuoi,
+   needWhere / where relay / setWhere, the night relay ctm-nr (rd / go / q), the guest's forced bend (jcooptimer: host clock only).
+   API: TH.E = {on, stat, rd (her ready), log}. */
+(function(){try{
+const CW=window.COOPW;if(!CW||!CW.thin||!CW.X||typeof COOP!=="object")return;
+const TH=CW.thin,X=CW.X,J=X.J,D=TH.D,LV=5;
+const host=()=>CW.seat==="a",on=()=>TH.on(LV);
+const LAST=()=>typeof B4L==="number"?B4L:2;
+const E=TH.E={on,stat:{rd:0,erd:0,ops:0,big:0,step:0,her:0,herSkip:0,forced:0,wrW:0,wrR:0,addDrop:0,rmBack:0,ridBack:0,curtain:0,go:0},rd:{},hr:"",forced:"",mine:"",log:[]};
+const lg=x=>{E.log.push(x);if(E.log.length>80)E.log.shift()};
+const bk=()=>(COOP.state.week||0)+":"+((S&&S.buoi)||0);
+const wkx=()=>typeof wk==="function"?wk():0;
+const plain=o=>o!==null&&typeof o==="object";
+const npcs=()=>(rivals||[]).filter(v=>v&&!v.coop);
+const other=()=>CW.seat==="a"?"b":"a";
+
+/* ---------- GUEST ---------- */
+const BAD=new Set(["thq","thpn","heir","hr","cyb"]);
+function curP(){const o=J(ser().S);for(const k of X.W_KEYS)delete o[k];for(const k of BAD)delete o[k];return o}
+const PACK=15000;
+/* her ops in packs the Worker takes (an intent over DOMAX 20 000 chars is refused); one op too big alone is counted, not sent */
+function packs(ops){const out=[];let cur=[],n=2;for(const o of ops){const s=JSON.stringify(o).length+1;if(s>PACK){E.stat.big++;lg(["big",String(o[1]&&o[1].join?o[1].join("."):o[1]).slice(0,60),s]);continue}
+  if(n+s>PACK&&cur.length){out.push(cur);cur=[];n=2}cur.push(o);n+=s}if(cur.length)out.push(cur);return out}
+function gReady(){if(!S||S.dead||Q.length||S.mg||CW.inLife)return;const b=S.buoi||0;const k=bk();if(E.mine===k)return;
+ const V=TH.view,P=V&&V.o&&V.o.P&&V.o.P[CW.seat];
+ if(V&&V.o){const mx=Math.max(0,...(V.o.pq||[]).map(x=>x.n|0));if((S.thpn||0)<mx){try{TH.gSync(V)}catch(e){}if((S.thpn||0)<mx){lg(["wait-pq",S.thpn||0,mx]);return}}}
+ let ops=[];if(P)try{const base=J(P);for(const k of BAD)delete base[k];for(const k of X.W_KEYS)delete base[k];ops=TH.pDiff(base,curP())}catch(e){console.error("thin E diff",e)}
+ const L=packs(ops);const id="r"+Date.now().toString(36);
+ L.forEach((ops,i)=>{TH.doSend("erd",{id,i,ops});E.stat.ops+=ops.length});
+ if(b>=LAST()){try{CW.nightReady()}catch(e){console.error(e)}}
+ TH.doSend("ready",{w:COOP.state.week||0,b,id,n:L.length});E.mine=k;E.stat.rd++;lg(["ready",k,ops.length,L.length]);
+ try{CW.lockNext();render()}catch(e){}}
+CW.eWait=()=>!!(on()&&!host()&&E.mine&&E.mine===bk()&&((S&&S.buoi)||0)<LAST());
+/* her buổi moved by the host's patch: what lives outside S on her phone (display / per-seat counters) */
+let seen="";
+function gView(V){if(!on()||host()||!S||!V||!V.o)return;const k=bk();
+ if(seen&&seen!==k){const [w0]=seen.split(":");if(+w0===(COOP.state.week||0)){used=0;popIdx=null;popMsg="";try{if(typeof curtain==="function"&&!S.dead){curtain();E.stat.curtain++}}catch(e){}}E.mine="";try{render()}catch(e){}}
+ seen=k;const e=V.o.e;
+ if(e&&e.go===wkx()&&CW.ngoW!==e.go&&(S.buoi||0)>=LAST()){CW.ngoW=e.go;E.stat.go++;lg(["go",e.go]);try{CW.nCheck()}catch(x){console.error(x)}}
+ try{CW.lockNext()}catch(x){}}
+COOP.on("thinview",V=>{try{gView(V)}catch(e){console.error("thin E view",e)}});
+COOP.on("week",()=>{E.mine="";seen="";E.rd={};E.hr="";E.forced=""});
+
+/* ---------- HOST ---------- */
+/* her ops onto her stored person (in her context: runDo); the part-D patch then starts after them (they are hers, never echoed back) */
+TH.onDo("erd",a=>{a=a||{};const n=TH.pApply(S,Array.isArray(a.ops)?a.ops:[]);try{D.rebase()}catch(e){}E.stat.erd++;return {n}});
+TH.onDo("ready",a=>{a=a||{};const seat=CW.ctx;E.rd[seat]={w:a.w|0,b:a.b|0,at:Date.now()};lg(["her-ready",seat,a.w,a.b]);
+ if((a.b|0)>=LAST()&&(a.w|0)===(COOP.state.week||0))CW.nfr=a.w|0;
+ setTimeout(()=>{try{check();if((a.b|0)>=LAST())CW.nCheck()}catch(e){console.error(e)}},0);return {ok:1}});
+function hReady(){if(!S||S.dead||Q.length||S.mg)return;const b=S.buoi||0;if(b>=LAST()){try{CW.nightReady()}catch(e){console.error(e)}return}
+ E.hr=bk();lg(["host-ready",E.hr]);check();try{CW.lockNext();render()}catch(e){}}
+CW.eNext=()=>{if(!on())return;if(host())hReady();else gReady()};
+CW.eForce=()=>{if(!on()||!host()||!S||S.dead)return false;const b=S.buoi||0;if(b>=LAST())return false;E.forced=bk();E.stat.forced++;lg(["forced",E.forced]);check();return true};
+let busy=false;
+function check(){if(!on()||!host()||busy||!S||S.dead)return;const w=COOP.state.week||0,b=S.buoi||0;if(b>=LAST())return;const k=bk();
+ const r=E.rd[other()];const her=!!(r&&r.w===w&&r.b===b)||E.forced===k;const me=E.hr===k||E.forced===k;
+ if(!me||!her||Q.length||S.mg||CW.pend||CW.inLife)return;
+ if(CW.isFrozen&&CW.isFrozen())return;
+ busy=true;E.stat.step++;lg(["step",k,!!r]);
+ /* the host's own buổi (world + his person) */
+ CW.allow=true;try{nextBuoi()}catch(e){console.error("thin E own step",e)}finally{CW.allow=false}
+ E.hr="";E.forced="";delete E.rd[other()];
+ const Wh=whereOut();
+ setTimeout(()=>{try{herStep(Wh)}finally{busy=false;try{TH.flush()}catch(e){}try{CW.lockNext()}catch(e){}}},0)}
+/* the host's NPC places, from his perspective → room form (his pid for "me"); her side maps them back in her context */
+function whereOut(){if(!S||!S.where)return null;const W=X.mapMe(J(S.where),true,901);delete W["902"];return {W,menW:S.menW?J(S.menW):null}}
+function whereIn(o){if(!o||!o.W)return;const W=X.mapMe(J(o.W),false,902);const keep=S.where&&S.where[901];S.where=W;if(keep)S.where[901]=keep;if(o.menW)S.menW=J(o.menW)}
+let her=null;
+function herStep(Wh){const seat=other();let st=null;try{st=TH.seatOf(seat)}catch(e){}if(!st||!CW.on){E.stat.herSkip++;return}
+ if(TH.held&&TH.held(seat)){E.stat.herSkip++;lg(["held",seat]);return}
+ TH.withSeat(seat,()=>{if(!S||S.dead||S.mg){E.stat.herSkip++;return}const target=(TH.outerS&&TH.outerS.buoi)||0;
+  her={W:Wh};const snap=wSnap();let n=0;
+  try{while(((S.buoi||0)!==target)&&n<4&&!S.dead){const b0=S.buoi||0;CW.allow=true;try{nextBuoi()}finally{CW.allow=false}n++;if((S.buoi||0)===b0)break}}
+  catch(e){console.error("thin E her step",e)}finally{her=null;try{wRestore(snap)}catch(e){console.error("thin E restore",e)}}
+  E.stat.her+=n;lg(["her-step",target,S.buoi,n])})}
+/* in her step: no NPC acts again (his step rolled them, with her entry in the harem), her places = his, no host screen work */
+if(typeof rivalsBuoi==="function"){const f=rivalsBuoi;rivalsBuoi=function(){if(her&&CW.ctx)return "";return f.apply(this,arguments)}}
+if(typeof placeWhere==="function"){const f=placeWhere;placeWhere=function(){if(her&&CW.ctx){whereIn(her.W);try{CW.refreshHere()}catch(e){}return}return f.apply(this,arguments)}}
+if(typeof curtain==="function"){const f=curtain;curtain=function(){if(CW.ctx)return;return f.apply(this,arguments)}}
+/* ---------- the world is read-only in her step (put back at its end) ---------- */
+const ROWF=new Set(["rel","oan","ghen","ev"]);
+/* one field as text; other NPCs / S inside it are written as refs so the copy never drags the world along */
+function txt(v,root,R){try{return JSON.stringify(v,function(k,x){if(x&&typeof x==="object"&&x!==root&&this!==undefined&&(R.has(x)||x===S))return {$r:x===S?"S":x.id};return typeof x==="function"?undefined:x})}catch(e){return null}}
+function back(t,R){const byId=new Map();for(const r of R)byId.set(r.id,r);return JSON.parse(t,(k,x)=>x&&typeof x==="object"&&!Array.isArray(x)&&Object.keys(x).length===1&&"$r" in x?(x.$r==="S"?S:byId.get(x.$r)||null):x)}
+function wSnap(){const L=npcs(),R=new Set(L);const o={L:L.slice(),ids:L.map(r=>r.id),N:new Map(),W:{},rid};
+ for(const r of L){const m={};for(const k of Object.keys(r))m[k]=txt(r[k],r,R);o.N.set(r,m)}
+ for(const k of X.W_KEYS)o.W[k]=k in S?txt(S[k],null,R):undefined;return o}
+function persOf(k,v){if(!plain(v))return null;if(k==="emp")return "known" in v?{known:v.known}:null;
+ if(k==="cm"){const p={};for(const f of X.CM_P)if(f in v)p[f]=v[f];return p}
+ if(k==="men"&&Array.isArray(v)){const p={};for(const x of v)if(plain(x)&&x.id!=null){const q={};for(const f of X.MEN_P)if(f in x)q[f]=x[f];p[x.id]=q}return p}return null}
+function persBack(k,v,p){if(!p||!plain(v))return;if(k==="men"&&Array.isArray(v)){for(const x of v)if(plain(x)&&p[x.id]){for(const f of X.MEN_P)delete x[f];Object.assign(x,p[x.id])}return}
+ if(k==="cm")for(const f of X.CM_P)delete v[f];if(k==="emp")delete v.known;Object.assign(v,p)}
+function wRestore(o){const L=npcs(),R=new Set(L.concat(o.L));
+ /* persons her step added to the world / took out of it */
+ for(const r of L)if(!o.N.has(r)){const i=rivals.indexOf(r);if(i>=0){rivals.splice(i,1);E.stat.addDrop++;lg(["add-drop",r.id,r.name])}}
+ o.L.forEach((r,i)=>{if(!rivals.includes(r)){rivals.splice(Math.min(i,rivals.length),0,r);E.stat.rmBack++}});
+ for(const r of o.L){const m=o.N.get(r);
+  for(const k of new Set([...Object.keys(m),...Object.keys(r)])){if(ROWF.has(k))continue;const now=k in r?txt(r[k],r,R):undefined;if(now===m[k])continue;
+   const me=plain(r[k])&&!Array.isArray(r[k])&&typeof r[k].me==="number"?r[k].me:undefined;
+   if(m[k]===undefined)delete r[k];else if(m[k]!==null)r[k]=back(m[k],R);
+   if(me!==undefined&&plain(r[k]))r[k].me=me;E.stat.wrR++}}
+ for(const k of X.W_KEYS){const was=o.W[k];const now=k in S?txt(S[k],null,R):undefined;if(now===was)continue;
+  const p=persOf(k,S[k]);if(was===undefined)delete S[k];else if(was!==null){S[k]=back(was,R);persBack(k,S[k],p)}E.stat.wrW++;lg(["w-back",k])}
+ if(rid!==o.rid){rid=o.rid;E.stat.ridBack++}}
+E.wSnap=wSnap;E.wRestore=wRestore;
+/* the night: his go rides the view (the guest reads o.e.go), never the ctm-nr relay */
+{const hv=TH.hostView;TH.hostView=function(){const o=hv.apply(this,arguments);if(o&&on())o.e={go:CW.ngo===(COOP.state.week||0)?CW.ngo:-1,w:COOP.state.week||0};return o}}
+/* his ready / clock / a closed dialog: try the step again */
+if(typeof render==="function"){const f=render;render=function(){const r=f.apply(this,arguments);try{if(on()&&host()&&!CW.ctx&&(E.hr||E.forced))check()}catch(e){}return r}}
+}catch(e){console.error("jcoopthine",e)}})();
+
 try{regSweep();setTimeout(regSweep,0)}catch(e){console.error(e)}
 
 window.__ctmBuilt=1;
@@ -66669,7 +66804,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="bdc96ec5f83e";window.CTM_BUILD=BUILD;
+const BUILD="c728ef2f893d";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

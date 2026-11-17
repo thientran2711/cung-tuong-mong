@@ -1,0 +1,85 @@
+/* coop-thin-e (part E: the buổi step + night gate on the HOST). Two clients, host Fold 686x880 + guest iPad 1180x820 (swap=1: iPad hosts).
+   usage: python3 dev/build/assemble.py && node dev/test/coop-thin-e.js <workerURL> [level=5] [swap=0]
+   E1 level 5 both seats · E2 her ready never steps her phone, no bend / where / ctm-nr from the guest, #next locked while she waits ·
+   E3 the host steps both once (his step + her step in withSeat b), her buổi arrives as a part-D patch · E4 her own change of this buổi
+   (bac, a log line) reaches the host's copy before her step and is not undone · E5 the world is read-only in her step (unit: an NPC
+   number + a world key put back, her viewer row kept) · E6 host clock: a forced step runs both with her not ready ·
+   E7 buổi tối: both ready → the night runs → week merged once · E8 no page errors. */
+const {chromium}=require('playwright');const {serve,BASE}=require('./coop-serve.js');const fs=require('fs'),path=require('path');
+const WURL=process.argv[2]||'https://ctm-coop.victoria-tntt.workers.dev';const LVL=+(process.argv[3]||5);const SWAP=+(process.argv[4]||0);
+const res=[];const ok=(c,m,x)=>{res.push([!!c,m]);console.log((c?'ok  ':'FAIL')+' '+m+(x!==undefined?' '+JSON.stringify(x).slice(0,c?300:2500):''))};
+const sleep=ms=>new Promise(r=>setTimeout(r,ms));
+const TRIPSRC=process.env.TRIP?fs.readFileSync(path.join(__dirname,'coop-thin-trip.js'),'utf8'):null;
+async function mk(b,name,vp,want){const ctx=await b.newContext({viewport:{width:vp[0],height:vp[1]},deviceScaleFactor:process.env.SHOTS?2:1,reducedMotion:'reduce'});await serve(ctx);
+  await ctx.addInitScript(([u,w])=>{window.COOP_URL=u;if(w)try{localStorage.setItem('ctm-thin',String(w))}catch(e){}
+   window.__co=()=>{const c=window.COOP;if(!c)return{};return{code:c.code,seat:c.seat,world:typeof S!=='undefined'&&!!S&&!!(window.COOPW&&COOPW.on)}}},[WURL,want]);
+  if(TRIPSRC&&name==='guest')await ctx.addInitScript(TRIPSRC);
+  const p=await ctx.newPage();p.setDefaultTimeout(90000);const o={name,ctx,p,errs:[]};
+  p.on('pageerror',e=>o.errs.push(e.message));p.on('console',m=>{if(m.type()==='error'&&!/Failed to load resource|favicon|fonts\.gstatic|CORS/.test(m.text()))o.errs.push('console: '+m.text().slice(0,300))});return o}
+const tapText=async(o,re,ms=8000)=>{const t0=Date.now();while(Date.now()-t0<ms){const r=await o.p.evaluate(src=>{const R=new RegExp(src);
+  const b=[...document.querySelectorAll('button')].find(b=>b.offsetParent!==null&&!b.disabled&&R.test(b.textContent.trim()));if(b){b.click();return true}return false},re.source);if(r)return true;await sleep(250)}return false};
+const clear=(()=>{const t=fs.readFileSync(path.join(__dirname,'coop-e2e.js'),'utf8');const i=t.indexOf('async function clear(');const j=t.indexOf("return'many'}",i)+13;return eval('('+t.slice(i,j)+')')})();
+const until=async(o,fn,arg,ms=40000)=>{try{await o.p.waitForFunction(fn,arg,{timeout:ms});return true}catch(e){return false}};
+const press1=o=>o.p.evaluate(()=>{const b=document.getElementById('next');if(!b||b.disabled)return false;b.click();return true});
+async function press(o,ms=20000){const t0=Date.now();while(Date.now()-t0<ms){if(await press1(o))return true;await clear(o);await sleep(300)}return false}
+async function week(A,B,tag){for(let i=0;i<3;i++){await clear(A);await clear(B)}const w0=await A.p.evaluate(()=>COOP.state.week);
+ for(let g=0;g<12;g++){const a=await A.p.evaluate(()=>S.buoi||0),c=await B.p.evaluate(()=>S.buoi||0);await press(A);await press(B);
+  const t0=Date.now();while(Date.now()-t0<30000){await clear(A);await clear(B);if(await A.p.evaluate(w=>COOP.state.week>w,w0)&&await B.p.evaluate(w=>COOP.state.week>w,w0))break;if(await A.p.evaluate(x=>(S.buoi||0)!==x,a)&&await B.p.evaluate(x=>(S.buoi||0)!==x,c))break;await sleep(400)}
+  if(await A.p.evaluate(w=>COOP.state.week>w&&!COOPW.pend,w0)&&await B.p.evaluate(w=>COOP.state.week>w&&!COOPW.pend,w0))break}
+ const okw=await A.p.evaluate(w=>COOP.state.week===w+1,w0)&&await B.p.evaluate(w=>COOP.state.week===w+1,w0);ok(okw,tag+': week merged once',okw?undefined:[await A.p.evaluate(()=>({w:COOP.state.week,b:S.buoi,pend:COOPW.pend,sent:COOPW.sent,Q:Q.map(q=>q.t).slice(0,3),dis:document.getElementById('next').disabled,nt:document.getElementById('next').textContent})),await B.p.evaluate(()=>({w:COOP.state.week,b:S.buoi,pend:COOPW.pend,sent:COOPW.sent,Q:Q.map(q=>q.t).slice(0,3),dis:document.getElementById('next').disabled,nt:document.getElementById('next').textContent,log:COOPW.thin.C.log.slice(-5),modal:(document.getElementById('modal')||{}).hidden,q0:Q[0]&&Object.keys(Q[0]).join(','),q0p:Q[0]&&(Q[0].pid||Q[0].ev||''),mg:!!S.mg,km:document.querySelectorAll('.kmov').length,fr:COOP.frozen,cy:COOPW.cyHold,dead:S.dead}))]);await sleep(1500);return okw}
+(async()=>{const b=await chromium.launch(/127\.0\.0\.1|localhost/.test(WURL)?{args:['--disable-features=BlockInsecurePrivateNetworkRequests,PrivateNetworkAccessSendPreflights,PrivateNetworkAccessRespectPreflightResults,LocalNetworkAccessChecks']}:{});
+ const FOLD=[686,880],IPAD=[1180,820];
+ const H=await mk(b,'host',SWAP?IPAD:FOLD,LVL),G=await mk(b,'guest',SWAP?FOLD:IPAD,0);
+ await H.p.goto(BASE);await H.p.waitForTimeout(3000);await tapText(H,/^(Chơi cùng bạn|Cùng hảo hữu)/);await H.p.waitForTimeout(500);await tapText(H,/^(Mời bạn|Mời hảo hữu)/);
+ await until(H,()=>window.COOP&&COOP.code&&COOP.seat==='a');const code=await H.p.evaluate(()=>COOP.code);console.log('room',code,'level',LVL,'swap',SWAP);
+ await G.p.goto(BASE+'?room='+code);await G.p.waitForTimeout(3000);await tapText(G,/^(Vào phòng|Tiếp tục)/,4000);
+ ok(await until(G,()=>window.COOP&&COOP.seat==='b'&&!COOP.frozen,null,60000),'guest joined seat b');
+ const inW=async()=>{const t0=Date.now();while(Date.now()-t0<150000){await clear(H);await clear(G);const a=await H.p.evaluate(()=>__co().world&&rivals.some(v=>v.coop)),c=await G.p.evaluate(()=>__co().world&&rivals.some(v=>v.coop));if(a&&c)return true;await sleep(500)}return false};
+ await inW();
+ for(const o of [H,G])await o.p.evaluate(()=>{try{if(BAL.coopTm)BAL.coopTm.buoiMs=600000}catch(e){}if(S.srv)S.srv.risen=1;if(S.kc)S.kc.inPal=1;S.kpWarn=1;render()});
+ if(!(await until(H,()=>!!COOPW.friend(),null,20000)&&await until(G,()=>!!COOPW.friend(),null,20000)))await week(H,G,'setup');
+ const lv=[await H.p.evaluate(()=>COOPW.thin.lvl),await G.p.evaluate(()=>COOPW.thin.lvl)];ok(lv[0]===LVL&&lv[1]===LVL,'E1 room level '+LVL+' on both seats',lv);
+ /* the guest's outgoing messages */
+ await G.p.evaluate(()=>{window.__sent=[];const s=COOP.send;COOP.send=function(m){try{window.__sent.push(m.t==='act'?'act:'+m.k+':'+(m.mode||''):m.t==='do'?'do:'+m.op:m.t)}catch(e){}return s.apply(this,arguments)}});
+ for(let i=0;i<4;i++){await clear(H);await clear(G);await sleep(300)}
+ const st=async o=>o.p.evaluate(()=>({w:COOP.state.week,b:S.buoi||0,bac:S.bac,lg:(S.logs||[]).length,dis:document.getElementById('next').disabled,nt:document.getElementById('next').textContent,E:JSON.parse(JSON.stringify(COOPW.thin.E.stat))}));
+ const h0=await st(H),g0=await st(G);
+ /* E4 setup: her own change this buổi */
+ await G.p.evaluate(()=>{S.bac=(S.bac||0)+7;window.__mark='E-test-'+Date.now();(S.logs=S.logs||[]).unshift({t:window.__mark});render()});
+ const gb=g0.bac+7;
+ ok(await press(G),'E2 guest pressed Sẵn sàng');await sleep(2500);
+ const g1=await st(G),h1=await st(H);
+ ok(g1.b===g0.b&&h1.b===h0.b,'E2 her ready alone steps nobody',[g0.b,g1.b,h0.b,h1.b]);
+ ok(g1.dis===true,'E2 her #next locked while she waits',g1.nt);
+ /* her change is already in the host's copy of her */
+ const hc=await H.p.evaluate(()=>{const B=COOPW.thin.seatOf('b');return {bac:B&&B.S.bac,mark:!!(B&&(B.S.logs||[]).some(x=>x&&x.t&&/^E-test-/.test(x.t)))}});
+ ok(hc.bac===gb&&hc.mark,'E4 her change reached the host copy before the step',[hc,gb]);
+ ok(await press(H),'E3 host pressed');
+ const moved=await until(G,b=>(S.buoi||0)===b+1,g0.b,20000);const h2=await st(H),g2=await st(G);
+ ok(moved&&h2.b===h0.b+1,'E3 both moved one buổi',[h0.b,h2.b,g0.b,g2.b]);
+ ok(h2.E.step===1&&h2.E.her>=1,'E3 host ran his step + her step once',h2.E);
+ ok(g2.bac===gb,'E4 her change kept after the step (not undone)',[g2.bac,gb]);
+ const hc2=await H.p.evaluate(()=>{const B=COOPW.thin.seatOf('b');return {b:B&&B.S.buoi,bac:B&&B.S.bac}});
+ ok(hc2.b===g2.b&&hc2.bac===g2.bac,'E3 host copy == her phone (buổi, bac)',[hc2,g2.b,g2.bac]);
+ const sent=await G.p.evaluate(()=>window.__sent.slice());
+ ok(!sent.some(x=>x==='bend'||x==='where'||/^act:ctm-nr/.test(x)),'E2 guest sent no bend / where / ctm-nr',sent.filter(x=>!/^pos|^act:ctm-fam|^seat/.test(x)).slice(0,30));
+ ok(sent.includes('do:ready'),'E2 guest sent do ready',sent.filter(x=>/^do:/.test(x)));
+ /* E5: the world is read-only in her step (unit in her context on the host) */
+ const u=await H.p.evaluate(()=>{const TH=COOPW.thin,E=TH.E;return TH.withSeat('b',()=>{const v=rivals.find(x=>x&&!x.coop&&x.alive);if(!v)return {skip:1};
+   const s0=v.sung,m0=S.emp.mood,r0=v.rel||0;const o=E.wSnap();v.sung=(v.sung||0)+33;S.emp.mood=(S.emp.mood+1)%3;v.rel=r0+5;(v.inv=v.inv||[]).push({k:'x-test'});E.wRestore(o);
+   return {sung:v.sung===s0,mood:S.emp.mood===m0,rel:v.rel===r0+5,inv:!(v.inv||[]).some(x=>x&&x.k==='x-test'),rel0:r0}})});
+ ok(u.skip||u.sung&&u.mood&&u.rel&&u.inv,'E5 world put back after her step, her viewer row kept',u);
+ /* E6: host clock forces a step, she is not ready */
+ for(let i=0;i<3;i++){await clear(H);await clear(G);await sleep(300)}
+ const g3=await st(G),h3=await st(H);
+ if(h3.b<2){await H.p.evaluate(()=>COOPW.forceBend());const m2=await until(G,b=>(S.buoi||0)===b+1,g3.b,20000);const h4=await st(H);ok(m2&&h4.b===h3.b+1,'E6 host clock steps both (she was not ready)',[h3.b,h4.b,g3.b,(await st(G)).b])}
+ else ok(false,'E6 not reached (host buổi '+h3.b+')');
+ /* E7: buổi tối → the night → week merged once */
+ await week(H,G,'E7');
+ const sent2=await G.p.evaluate(()=>window.__sent.slice());ok(!sent2.some(x=>x==='bend'||x==='where'||/^act:ctm-nr/.test(x)),'E7 still no bend / where / ctm-nr from the guest',sent2.filter(x=>x==='bend'||x==='where'||/ctm-nr/.test(x)));
+ const fin=[await st(H),await st(G)];ok(fin[0].b===fin[1].b,'E7 same buổi both seats after the week',fin.map(x=>[x.w,x.b]));
+ console.log('E stat host',JSON.stringify(fin[0].E),'guest',JSON.stringify(fin[1].E));
+ console.log('E log host',JSON.stringify(await H.p.evaluate(()=>COOPW.thin.E.log.slice(-25))));
+ ok(!H.errs.length&&!G.errs.length,'E8 no page errors',[H.errs.slice(0,3),G.errs.slice(0,3)]);
+ const nok=res.filter(r=>!r[0]).length;console.log('RESULT',res.length-nok+'/'+res.length);
+ await b.close();process.exit(nok?1:0)})().catch(e=>{console.error(e);process.exit(2)});
