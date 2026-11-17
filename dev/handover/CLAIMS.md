@@ -475,7 +475,7 @@
 | WHOLE FIGURE REPAINT pilot maid (sonnet art, 8–12 files a18, no upload; opened by lead #3) | review/fig-cutout-clean | C | session_011xDdVP57zPp4r9Gi61fiKp | RUNNING | 16/11 23:16Z |
 | WHOLE FIGURE REPAINT pilot eunuch-kid-mama-man (sonnet art, 8–12 files a18, no upload; opened by lead #3) | review/fig-cutout-clean | C | session_011xDdVPRFDEZZgSVGj5StKL | RUNNING | 16/11 23:16Z |
 | WHOLE FIGURE REPAINT pilot hero-4k-test (sonnet art, 8–12 files a18, no upload; opened by lead #3) | review/fig-cutout-clean | C | session_011xDdVQK3g91ieUt2tJBYy7 | RUNNING | 16/11 23:16Z |
-| kit-size #9 grade chip on item frame edge everywhere (sonnet keeper; owner chose 1, s26) | review/kit-size-9 | main s26 | session_01UV1Szgwvq9ThhT3PVXASCT | SẴN SÀNG KIỂM ad1a3399 (build fd91dd72) | 16/11 23:18Z |
+| kit-size #9 grade chip on item frame edge everywhere (sonnet keeper; owner chose 1, s26) | review/kit-size-9 | main s26 | session_01UV1Szgwvq9ThhT3PVXASCT | SẴN SÀNG KIỂM r1 526e1bc8 (build 0295fa45) | 16/11 23:18Z |
 | origin intro pictures ~45 panels + G2–G7 (VẼ by main s26 23:05Z; ch1–4 first; samples first) (sonnet art) | review/intro-art | C | session_011xDdVQJPz4LjYQi4oTALJR | RUNNING | 16/11 23:22Z |
 | road-onecore (opus): B1 road files jrd_cn/tt/muoi/dtq 303 typed numbers → BAL (one-core-guard 0), from PASS c012bf32 | review/road-onecore | B | session_01N1tNP2CnQZTs1376PcZZun | RUNNING | 16/11 23:25Z |
 | tut-followups review r1 (opus, BIG) of aa391edf | review/tut-followups-r1 | B | session_01N1tNP54HW3RMjDu7rXSHce | RUNNING | 16/11 23:26Z |
