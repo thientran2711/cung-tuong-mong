@@ -433,7 +433,7 @@ function wdPawnUI(ix){if(!can(1))return;const r=wdPawn(S,ix);if(!r)return;spend(
 function wdRedeemUI(i){if(!can(1))return;const r=wdRedeem(S,i);if(!r)return;spend(1);log(r);render()}
 if(typeof wrapR==="function"){wrapR("wdAutoUI",()=>"Tự chọn đồ");wrapR("wdWearUI",()=>"Thay y phục");wrapR("wdSellUI",()=>"Bán lén");wrapR("wdPawnUI",()=>"Cầm cố");wrapR("wdRedeemUI",()=>"Chuộc lại")}
 
-/* ---------- CHẢI CHUỐT: ~10 s mini-game in the kit game frame (j82 overlay); the needle's average decides the outcome ---------- */
+/* ---------- CHẢI CHUỐT: ~10 s mini-game in the kit game frame (j82 overlay); two of the three needle marks in the green = Vừa vặn (review/mg-snap) ---------- */
 function wdGroomW(p){const tai=(p.tai||0)/WD.groomTai;let art=0;try{art=WD.groomArt*Math.max(kg82Lv(p,"hoa")||0,kg82Lv(p,"theu")||0)}catch(e){}
  return Math.min(WD.groomMax,WD.groomBase+tai+art+(wdMama(p)?WD.groomMama:0))}
 const KG92={last:null};window.KG92=KG92;
@@ -450,9 +450,11 @@ function kg92Groom(box,env){const C=kg82Canvas(box,.62,320),{g,W,H}=C;const w=en
   if(k<3){const x=x0+pos(now)*bw;g.fillStyle="#8a2a1e";g.beginPath();g.moveTo(x,by-16);g.lineTo(x-9,by-34);g.lineTo(x+9,by-34);g.closePath();g.fill();g.fillRect(x-1.5,by-16,3,32)}
   if(marks.length===3){const m=marks.reduce((a,b)=>a+b,0)/3;const x=x0+m*bw;g.strokeStyle="#2a1a12";g.lineWidth=3;g.beginPath();g.moveTo(x,by-20);g.lineTo(x,by+20);g.stroke()}
   kg82DrawPops(g,pops,now)}
- function tap(auto){if(stop||k>=3)return;const now=performance.now();const m=pos(now);marks.push(m);const z=m<lo?"Giản dị":m>hi?"Lộng lẫy":"Vừa vặn";kg82Pop(pops,x0+m*(x1-x0),by-40,auto?z+" (hết giờ)":z,m<lo?kg82Col("--gold","#8f5f0c"):m>hi?kg82Col("--red","#c23b22"):kg82Col("--good","#2d7a52"));
-  k++;t0=performance.now()-Math.random()*900;if(k>=3){stop=true;const avg=marks.reduce((a,b)=>a+b,0)/3;const zone=avg<lo?"under":avg>hi?"over":"ok";KG92.last={avg,zone,marks:marks.slice(),w};
-   draw(performance.now());setTimeout(()=>env.end(zone==="ok"?10-Math.round(Math.abs(avg-.5)/(w/2)*4):Math.max(0,5-Math.round(Math.abs(avg-.5)*10))),700)}}
+ function tap(auto){if(stop||k>=3)return;const now=performance.now();const m=auto?0:pos(now);marks.push(m);/* review/mg-snap: a mark the clock made is the plainest (she never chose), no longer a random needle spot */const z=m<lo?"Giản dị":m>hi?"Lộng lẫy":"Vừa vặn";kg82Pop(pops,x0+m*(x1-x0),by-40,auto?z+" (hết giờ)":z,m<lo?kg82Col("--gold","#8f5f0c"):m>hi?kg82Col("--red","#c23b22"):kg82Col("--good","#2d7a52"));
+  k++;t0=performance.now()-Math.random()*900;if(k>=3){stop=true;const avg=marks.reduce((a,b)=>a+b,0)/3,inZ=marks.filter(m=>m>=lo&&m<=hi).length;/* review/mg-snap: "Vừa vặn" needs 2 of the 3 marks in the green (the average of 3 blind marks lands there most times) */const zone=inZ>=2?"ok":avg<.5?"under":"over";KG92.last={avg,zone,marks:marks.slice(),w};
+   /* review/mg-snap: every mark is scored on its own (the average of 3 random marks drifts to the middle, so blind taps scored ~5–6); a mark the clock made sits at 0 = plain, scores 0 */
+   const one=m=>m>=lo&&m<=hi?10-Math.abs(m-.5)/(w/2)*4:Math.max(0,5-Math.abs(m-.5)*10);const sc=marks.reduce((s,m)=>s+one(m),0)/3;
+   draw(performance.now());setTimeout(()=>env.end(Math.round(sc)),700)}}
  function frame(now){if(stop)return;const left=Math.max(0,LIM-(now-T0));env.hud({score:`${k}/3`,round:k<3?STEPS[k]:"–",time:`${Math.ceil(left/1000)} giây`});if(left<=0){while(k<3)tap(true);return}draw(now);raf=requestAnimationFrame(frame)}
  C.cv.addEventListener("pointerdown",e=>{e.preventDefault();tap(false)});const kd=e=>{if(e.key===" "||e.key==="Enter"){e.preventDefault();tap(false)}};document.addEventListener("keydown",kd);
  KG82.peek=()=>{if(stop||k>=3)return null;return Math.abs(pos(performance.now())-.5)<w/6?C.client(W/2,by):null};
@@ -460,7 +462,7 @@ function kg92Groom(box,env){const C=kg82Canvas(box,.62,320),{g,W,H}=C;const w=en
 try{KG82_ENG.groom=kg92Groom;KG82_KIND.chai={e:"groom",n:"Chải chuốt",t:"Điểm trang trước gương",how:""}}catch(e){}
 function wdGroomApply(p,zone){const tgt=Math.min(8,wdPOf(p))+(zone==="ok"?0:zone==="over"?1.5:-2.25);wdApply(p,wdBest(p,tgt,e=>wdP(e,p)))}
 function wdGroomUI(){if(!S||S.dead||!can(1))return;const w=wdGroomW(S);const m=wdMama(S);
- const how=`Kim lướt qua lại trên thước. Chạm ba lần: cài trâm, chọn áo, điểm trang (trong ${WD.groomSec} giây). Trung bình ba lần dừng ở vùng giữa là đúng phẩm; lệch phải là vượt phẩm, lệch trái là quá giản dị. Vùng giữa rộng theo Tài, khéo tay${m?`, có ${m.name} tinh ý giúp`:", ma ma tinh ý"}.`;
+ const how=`Kim lướt qua lại trên thước. Chạm ba lần: cài trâm, chọn áo, điểm trang (trong ${WD.groomSec} giây). Hai trong ba lần dừng ở vùng giữa là đúng phẩm; lệch phải là vượt phẩm, lệch trái là quá giản dị; hết giờ mà chưa chạm là quá giản dị. Vùng giữa rộng theo Tài, khéo tay${m?`, có ${m.name} tinh ý giúp`:", ma ma tinh ý"}.`;
  const d=kg82Open({art:"Chải chuốt",title:"Điểm trang trước gương",how});if(!d){wdAutoUI();return}const box=kg82Box();
  const done=zone=>{spend(1);wdGroomApply(S,zone);const t=wdItemsTxt(S);log(`Ngươi chải chuốt, ${zone==="ok"?"ăn vận vừa vặn":zone==="over"?"ăn vận lộng lẫy":"ăn vận giản dị"}: ${t}.`);
   const html=kg82Rows([["Trâm cài",wdItem(wdOf(S).tram)?wdItem(wdOf(S).tram).n:"không cài","t"],["Y phục",wdItem(wdOf(S).y)?wdItem(wdOf(S).y).n:"thường phục","t"],["Kim dừng",zone==="ok"?"vùng giữa":zone==="over"?"lệch về phía lộng lẫy":"lệch về phía giản dị","n"]])+`<div class="kg82act"><button class="${kg82Btn()}" id="kg92ok">Đã hiểu</button></div>`;
