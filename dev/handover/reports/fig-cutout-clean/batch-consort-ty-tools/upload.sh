@@ -1,7 +1,7 @@
 #!/bin/bash
 # upload.sh BATCHNAME : for every key in progress/ids.tsv not yet in progress/uploaded.txt: ensure hd twin, copy to img/, cdn_sync, check, write hd-entries fragment.
 R=/home/user/cung-tuong-mong; B=$R/dev/handover/reports/fig-cutout-clean; P=$B/batch-consort-ty-tools
-S=/tmp/claude-0/-home-user-cung-tuong-mong/dad78ca2-b43f-5b5f-9eea-225524ea5f8a/scratchpad
+S=/tmp/claude-0/-home-user-cung-tuong-mong/67d1407f-68b2-5631-8d46-96a77ea62baf/scratchpad
 cd $R; touch $P/progress/uploaded.txt; mkdir -p img/hd $B/hd-entries; export FORCE_HD=1
 F=""; keys=()
 while IFS=$'\t' read k id; do grep -qx "$k" $P/progress/uploaded.txt && continue; [ -f $S/out/img/fig-$k.webp ] || continue

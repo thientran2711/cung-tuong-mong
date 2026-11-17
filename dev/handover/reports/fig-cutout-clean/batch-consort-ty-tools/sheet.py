@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # sheet.py OUT.jpg KEY... : per key: fitted fig on light + dark and face crop of the master (native)
 import sys; from PIL import Image
-S="/tmp/claude-0/-home-user-cung-tuong-mong/dad78ca2-b43f-5b5f-9eea-225524ea5f8a/scratchpad"
+S="/tmp/claude-0/-home-user-cung-tuong-mong/67d1407f-68b2-5631-8d46-96a77ea62baf/scratchpad"
 out=sys.argv[1]; keys=sys.argv[2:]; n=len(keys); W=330 if n<=4 else 190; H=700 if n<=4 else 400; cols=[]
 for k in keys:
     f=Image.open(f"{S}/out/img/fig-{k}.webp").convert("RGBA"); f=f.resize((int(f.width*H/f.height),H),Image.LANCZOS)
