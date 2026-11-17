@@ -22,3 +22,6 @@ Done: (1) each row = informer name+role (kitName), (2) big figure = informer of 
 
 ## r3 (owner e + Tai mắt list) review/tinbao-ui-r3b 44500057 (on reviewer PASS 05e82176 / ag-all-2 72263137)
 (1) card header "Tai mắt báo". (2) kitTaiMatCard: tap Tai mắt N -> kit list (person, rank/name, where placed, lòng word). (3) each TIN BÁO row names informer kind (tai mắt của ta / người hầu của ta / bạn trong cung / người qua đường); sold-out only when data says discovered. ONE ADAPTER in jtinbao.js: tbTaiMat() / tbInformerKind() read taiMatList(S) / informerInfo(item) when C-AG #2 ships them; until then STUB (her servants by lòng, as many as Tai mắt N; kind from item.by). Test tinbao-ui 22/22. Shots CDN img/_review/tinbao-ui/ (8, Fold+iPad @2). NOTE: old branch review/tinbao-ui-r3 84152ddc (wrong base) left untouched; use r3b.
+
+## r5 review/tinbao-ui-r5 30bb1851 (r4 changes on ag-all-2 7de949ee)
+Adapter switched to 2f API: taiMatList(S) (placedAt/placedName/loyaltyKnown null -> "chưa rõ"/reports) and informerInfo(item) (taiMat/ownMaid/friend/passerby, soldOutKnown -> "đã bán đứng ta"); informer person via item.inf (servById / RV / maid). Stub only when the functions are absent. tinbao-ui.test 22/22 (plants a spyFor=me servant). Shots CDN img/_review/tinbao-ui/ refreshed. Branch is ag-all-2 7de949ee + my tinbao source files (r4 patch), site rebuilt.
