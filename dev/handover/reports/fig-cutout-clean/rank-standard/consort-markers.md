@@ -9,6 +9,7 @@
 | t6 | Quý phi | heavy brocade, layered shawl collar over several under-robes; large ornate gold headdress with pearl tassels; pearl/jade necklace, long jade-pendant sash |
 | t7 | Hoàng quý phi | cape-like layered outer garment + shawl collar, gold embroidery; tallest tassel headdress (no phoenix); full jewellery set |
 | t8 | Hoàng hậu | PHOENIX crown with pearl tassels; phoenix-embroidered golden-coral ceremonial robe, long pearl necklaces, jade pendants; hem at feet, no train |
-| t9 | Hoàng thái hậu | deep gold-coral heavy brocade, dense gold embroidery, stately gold-jade headdress, long pearl strands; dignified (same face) |
+| t9 | Hoàng thái hậu | (NEW gen MB7azJCDCm, same identity at age ~51, slightly mature face, a few silver strands) deep gold-coral heavy brocade, dense gold embroidery, stately gold-jade headdress, long pearl strands |
 | t10 | Nữ đế | NEW: golden-yellow + ivory robe, dragon-and-phoenix embroidery, tall pearl-beaded crown with flowers, jade belt; imperial yet feminine, no train |
 Notes: t1 sheet is taller in frame only because of generation framing; heights are fitted per cell. t9 face looks the same age (no ageing) by design of 'same face'.
+Layout rank-standard-consort-2row.jpg: 2 rows, all 10 same bbox height, t9 = new a51 gen (old a18 t9 CqzjBk5EEy superseded).
