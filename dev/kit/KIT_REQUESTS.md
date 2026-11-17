@@ -52,7 +52,7 @@ Also (non-blocking, pre-existing): kit row label small-caps makes "Sổ trên m�
 ## 17/11 kit-display-room — ART REQUESTS (Foreman C) + status
 | Date | Who | Part | Used in | Given to | Status |
 |---|---|---|---|---|---|
-| 17/11 | kit-display-room | `img/kit/ico-disp.webp` left-rail icon "Phòng trưng bày" (square kit icon, same family as mo-calendar / mo-edict-closed) | kitStageRail `disp` (jdisp.js) | Foreman C | placeholder `img/kit/ico-room.webp` in use |
+| 17/11 | kit-display-room | `img/kit/ico-disp.webp` left-rail icon "Đa Bảo Các" (square kit icon, same family as mo-calendar / mo-edict-closed) | kitStageRail `disp` (jdisp.js) | Foreman C | placeholder `img/kit/ico-room.webp` in use |
 | 17/11 | kit-display-room | `img/kit/disp-backdrop.webp` painted shop-style shelf wall (iPad half 590x820 portrait and one-page phone; shelves are CSS planks until the wall carries painted shelves) + optional `img/kit/disp-plank.webp` (9-slice plank) | kitDisplayRoom `KDR_BG` / `.kdr-plank` | Foreman C | placeholder `img/kit/bg-default.webp` + CSS plank |
-| 17/11 | kit-display-room | KIT READY §87 kitDisplayRoom (view, drawer, rail); data API stays review/display-shelf (rail icon hidden until it is on main) | Phòng trưng bày | kit-display-room | built, awaiting review |
+| 17/11 | kit-display-room | KIT READY §87 kitDisplayRoom (view, drawer, rail); data API stays review/display-shelf (rail icon hidden until it is on main) | Đa Bảo Các | kit-display-room | built, awaiting review |
 | 17/11 | kit-display-room-r2 | Painted cabinet pictures `img/display/cabinet-land.webp` (2x6) + `cabinet-port*.webp` (1x12) + `reports/display-bg.md` slot points (cx, floor fy, w, h as fractions) replace the earlier `disp-backdrop` / `disp-plank` request | kitDisplayRoom `KDR_PIC` | Foreman C | stub slots (even grid) in jdisp.js until the picture lands |
