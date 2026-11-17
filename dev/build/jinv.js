@@ -226,7 +226,7 @@ document.addEventListener("keydown",e=>{if((e.key==="Enter"||e.key===" ")&&e.tar
 .keq .keqc{display:flex;flex-direction:column;align-items:center;gap:2px;min-width:0;text-align:center}
 .keq .keqc>.kitem-slot{width:min(var(--keqsz,96px),100%)}
 /* KIT §54.1b: the grade chip hangs half below the frame, so the caption under a wear / pet slot starts below it */
-.keq .keqc>.kitem-slot:not(.kitem-empty){margin-bottom:max(calc(var(--keqsz,var(--kside,72px))*.06),6px)}
+.keq .keqc>.kitem-slot:not(.kitem-empty){margin-bottom:calc(max(var(--keqsz,var(--kside,72px))*.06,6px) + 3px)}
 @supports (grid-template-rows:subgrid){.keq .keqs{grid-auto-rows:auto;align-items:start}.keq .keqc{display:grid;grid-row:span 4;grid-template-rows:subgrid;row-gap:2px;align-items:start;justify-items:center;align-content:start}
  .keq .keqc>.keqfx:empty,.keq .keqc>.keqnote:empty{min-height:0}.keq .keqc>.keqnm{margin-top:0}}
 .keq .keqnote{display:flex;justify-content:center;min-width:0}.keq .keqnote>.keql2{flex-basis:auto}
@@ -468,6 +468,8 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape"){for(const k in KSHO
 .kshpic{all:unset;box-sizing:border-box;display:block;width:100%;max-width:84px;aspect-ratio:1;cursor:zoom-in;border-radius:6px}
 .kshpic:focus-visible{box-shadow:0 0 0 2px var(--gold,#c9a46a)}
 .kshpic>.kitem-slot{width:100%;height:100%}
+/* KIT §54.1b: the grade chip hangs half below the frame; the name / price row starts below it (gap >= 3 px) */
+.kshc>.kshpic{margin-bottom:8px}
 .kshc.kshno .kshpic>.kitem-slot{filter:grayscale(.85) brightness(.92);opacity:.7}
 .kshn,.kshe{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden;line-height:var(--kshl);overflow-wrap:anywhere;width:100%;align-self:start}
 .kshn{font-weight:700;font-size:.8rem}

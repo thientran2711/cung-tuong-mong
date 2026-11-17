@@ -858,7 +858,7 @@ document.addEventListener("click",ev=>{const t=ev.target.closest&&ev.target.clos
 /* the Xa xỉ box sits top-right, so the "đã tẩm" tag moves to the top-left (under the seal "Ngự" when both are there) */
 .kitem[class*=" kig"]:has(.kitx)>.kitb .kitm{right:auto;left:9%;top:max(31cqw,19px)}
 /* room for the half of the grade chip that hangs below the frame (named tiles; a bag slot has no name line and relies on its grid gap) */
-.kitem:not(.kitem-slot)>.kitb:has(>.kgchip-fr){margin-bottom:max(calc(var(--isz)*.06),5px)}
+.kitem:not(.kitem-slot)>.kitb:has(>.kgchip-fr){margin-bottom:calc(max(var(--isz)*.06,5px) + 3px)}
 `;const st=document.createElement("style");st.id="k2b-itemgrade";st.textContent=c;document.head.appendChild(st)})();
 
 /* ---------- 16. STAGE LAYOUT OWNER = j59 (main): after merging main, j59 lays out the stage (one height for every adult by the visible body,
