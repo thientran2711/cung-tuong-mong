@@ -53,3 +53,20 @@ man-quytu-1-a18	iGbTSxH3uK	ok
 man-quytu-2-a18	fHGreThCDY	ok
 man-quytu-4-a18	Lwo9QCeswO	ok (all uploaded; S2 total so far 39 files uploaded, 31 new gens x65 = 2015 cr)
 ## man a18 still to do: quytu-5..9, suthan-2, thive-1..4, vuonggia-1..2 (12); then mama k02-k04,k06-k08; eunuch u09-r3 reuse s789zGil8e + rest
+man-quytu-5-a18	gOtiKYySXO	ok
+man-quytu-6-a18	tC3bDlUmZJ	ok
+man-quytu-7-a18	Lwo9qn5swO	ok
+man-quytu-8-a18	4RQYgod9Aa	ok
+man-quytu-9-a18	s78Nb0bl8e	ok
+man-suthan-2-a18	gOtiKD3SXO	ok
+man-thive-1-a18	vQ2kd4Sa47	ok
+man-thive-2-a18	MB7vGsIDCm	ok (uploaded). Men left: thive-3, thive-4, vuonggia-1, vuonggia-2
+man-thive-3-a18	Bh9QMx7oQR	ok
+man-thive-4-a18	eIyC01YdqL	ok
+man-vuonggia-1-a18	yiEzSdDPW9	ok
+man-vuonggia-2-a18	Sym3xVfUb8	ok
+mama-k02-a18	ovNFDSv829	ok
+mama-k03-a18	WDl825rcXe	ok
+mama-k04-a18	bxVUEG85Y2	ok (7 pinholes accepted)
+mama-k06-a18	ovNFDJE829	ok (4 pinholes accepted)
+## ALL man a18 (33) DONE + uploaded. mama a18 left: k07, k08. Then eunuch a18 (u01 done; u05-r2 done; u09-r3 reuse s789zGil8e; rest ~117), kid a18-equivalent (a14/a9 in list; pilot ids in pilot-misc.md: kid-f01-a14 yiEGDDLPW9, f05 aFAkU3mfSh, p03-a9 Cqzr72fEEy).
