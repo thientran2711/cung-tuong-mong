@@ -16,7 +16,7 @@ const HTML=path.resolve(__dirname,'../index.html');
    /* fresh: open lost, no line → announced ONCE, then never again; shown as ONE BÁO */
    S.logs=S.logs.filter(x=>!/lối khác|ngoài con đường tranh sủng/.test(x));delete S.rt.open;delete (S.once||{}).rtOpen;S.lbAt=null;S.turn=0;
    S.tm96=S.tm96||{};try{menInit();for(const m of (S.men||[]).filter(x=>x.alive)){m.seen=1;m.tinh=20}}catch(e){}
-   for(let i=0;i<6;i++){try{rtCards()}catch(e){}render()}await sl(50);o.fresh=cnt();o.q=Q.map(x=>x.t);o.bao=Q.filter(x=>/klbao/.test(x.cls||'')).length;return o});
+   for(let i=0;i<6;i++){try{rtCards()}catch(e){}render()}await sl(900);o.fresh=cnt();o.q=Q.map(x=>x.t);o.bao=Q.filter(x=>/klbao/.test(x.cls||'')).length;return o});
   const skip=async()=>{for(let i=0;i<3;i++){const x=p.getByRole('button',{name:'Bỏ qua'});if(await x.count()&&await x.first().isVisible()){await x.first().click();await p.waitForTimeout(500)}}};
   await skip();await p.waitForTimeout(1500);await p.screenshot({path:path.join(OUT,`bao-${dev}.png`)});
   /* the week book */
@@ -35,4 +35,4 @@ const HTML=path.resolve(__dirname,'../index.html');
   for(let k=2;k<=5;k++){try{await p.click('.kbk-next',{timeout:2000})}catch(e){}await p.waitForTimeout(900);await p.screenshot({path:path.join(OUT,`book-${dev}-${k}.png`)})}
   res[dev]={...r,wb,errs};await ctx.close()}
  await b.close();console.log(JSON.stringify(Object.fromEntries(Object.entries(res).map(([k,x])=>[k,{oldA:x.oldA,oldB:x.oldB,fresh:x.fresh,bao:x.bao,onMine:x.wb&&x.wb.onMine,err:x.wb&&x.wb.err,errs:x.errs}]))));
- const ok=Object.values(res).every(x=>x.oldA===0&&x.oldB===0&&x.fresh===1&&x.bao<=1&&x.wb&&x.wb.onMine===0&&!x.wb.err&&!x.errs.length);console.log('TUANLUC-SHOTS '+(ok?'PASS':'FAIL'))})();
+ const ok=Object.values(res).every(x=>x.oldA===0&&x.oldB===0&&x.fresh===1&&x.bao===1&&x.wb&&x.wb.onMine===0&&!x.wb.err&&!x.errs.length);console.log('TUANLUC-SHOTS '+(ok?'PASS':'FAIL'))})();
