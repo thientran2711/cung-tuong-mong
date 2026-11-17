@@ -692,3 +692,4 @@
 | one-core-arcs SẴN SÀNG KIỂM 2831e112 (r2, contains dup2-r2 069188d7) → re-review r2 (opus BIG, FRESH reviewer; r1 reviewer near rollover; brief briefs/review-one-core-arcs-r2.md) | review/one-core-arcs-r2v | B | session_01N1tNP5234t4p9HE1eAvTYL | RUNNING | 17/11 08:49Z |
 | one-core-dup2-r2 r4 PASS 069188d7 → FOR MAIN (land first: dup2-r2 → arcs → roads-r1) | review/one-core-dup2-r2 | B | session_01N1tNP3RUAMCUVaePSwSLjg | PASS (archived) | 17/11 08:54Z |
 | staff-root SẴN SÀNG KIỂM e0431afa → review r1 (opus BIG; brief briefs/review-staff-root-r1.md) | review/staff-root-r1 | B | session_01N1tNP5HB9qHe8rHrMv1JDw | RUNNING | 17/11 09:19Z |
+| coop-thin-b SẴN SÀNG KIỂM be599e1e (B + D + D r1 + B r1 fixes) → ONE combined B+D re-review r2 (fresh opus BIG; brief briefs/review-coop-thin-b-r2.md) | review/coop-thin-b-r2 | B | (opening) | RUNNING | 17/11 09:22Z |
