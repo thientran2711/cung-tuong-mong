@@ -23,3 +23,14 @@ FAIL items:
 3. Minor: iPad card button "Để ta tới xem" wraps to two lines next to its picture (narrow option); give the option its normal width or shorten.
 4. Minor: Fold Tai mắt card, 3rd row (the confidant maid) shows the kit placeholder-picture frame (image not loaded at shot time, or her portrait path missing): re-shoot after load and confirm it is her portrait.
 G1 one-core-text (quickcheck) still only the ag-all-2 sites. Worker CDN shots wiped.
+
+# r4 review (worker 55294eaf = r3b code on r3r 47a462ca) — FAIL: adapter does not match the REAL 2f API now in ag-all-2 7de949ee
+Helper base (newest ag-all-2 7de949ee + r4 source + KIT §87/87.1 + build): origin/review/tinbao-ui-r4r 76b93af6. Against it tinbao-ui.test = 20/22 (2 FAIL), one-core-guard FAIL.
+Probe with the REAL taiMatList/informerInfo (a rival's servant set spyFor "me"): taiMatList → {id,sid,name,role,placedAt:"kn",placedWith:"v1",placedName,loyaltyKnown:null,reports}; informerInfo → {kind:"taiMat"|"ownMaid"|"friend"|"passerby", isTaiMat, soldOutKnown}.
+FAIL items (all in the adapter, jtinbao.js):
+1. tbNorm reads x.place / x.loy / x.loyal; the API gives placedAt / placedName / loyaltyKnown. Result: the card prints "đặt ở Ngọc Thanh các" (HER OWN palace, palaceOf(S) fallback) for a servant placed in Diệp Linh Lung's palace (kn). Map place ← placedAt (+ placedName "ở cung <name>"), person ← servById(sid) (portrait), role/rank from the person.
+2. Loyalty: loyaltyKnown null (= she does not know) is printed as "khó tin" (the 0-lòng fallback) — a false statement. null → "chưa rõ lòng"; a number → word by BAL.loy.trust / BAL.loy.low (see 4). Never read the servant's hidden .loyal.
+3. tbInformerKind returns the raw API kind ("taiMat","ownMaid","friend","passerby") with label "" (KL has no such keys). Map taiMat→mat, ownMaid→hau (soldOutKnown → "sold"), friend→ban, passerby→qua; "here"→tai stays. Fixes the 2 failing tests (informer kind per row, Tai mắt list).
+4. ONE CORE: LOYW hard-codes 70 / 40 → BAL.loy.trust / BAL.loy.low (ag-all-2 alone PASS).
+5. Still open from r3b: iPad "Để ta tới xem" wraps to 2 lines; re-shoot Fold Tai mắt card after images load (3rd row showed the placeholder frame). Drop the stub branch once the real API is used (taiMatList exists now) or keep it only when typeof taiMatList!=="function".
+Worker CDN shots wiped.
