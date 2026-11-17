@@ -11,10 +11,10 @@ def _fit(xs, ys, v):
 def _ev(c, xs, ys):
     return np.stack([np.ones_like(xs), xs, ys, xs * xs, xs * ys, ys * ys], 1) @ c
 
-def detect(rgb, cx, ey, fw, zone=None, th=None):
+def detect(rgb, cx, ey, fw, zone=None, th=None, expect=None):
     H, W = rgb.shape[:2]
     if zone is None:
-        zone = (cx - 0.20 * fw, ey - 0.58 * fw, cx + 0.20 * fw, ey - 0.07 * fw)
+        zone = (cx - 0.28 * fw, ey - 0.62 * fw, cx + 0.28 * fw, ey - 0.06 * fw)
     x0, y0, x1, y1 = [int(round(v)) for v in zone]
     x0, y0 = max(x0, 0), max(y0, 0); x1, y1 = min(x1, W), min(y1, H)
     reg = rgb[y0:y1, x0:x1].astype(np.float32); h, w = reg.shape[:2]
@@ -45,49 +45,44 @@ def detect(rgb, cx, ey, fw, zone=None, th=None):
             hair |= lbl == i
     hairD = cv2.dilate(hair.astype(np.uint8), np.ones((5, 5), np.uint8)).astype(bool)
     T = th if th is not None else max(9.0, 2.0 * base)
-    cand = (dE > T) & ~hairD
+    baseC = float(np.percentile(dC[keep], 99))
+    dL = L - fit[..., 0]
+    hl = (dL < -18) & (dC < 9)                          # hair / brow look: darker, not coloured -> never touched
+    hlD = cv2.dilate(hl.astype(np.uint8), np.ones((3, 3), np.uint8)).astype(bool)
+    colour = (dC > max(6.0, 1.6 * baseC)) & (dE > T)
+    bright = (dL > 9) & (dE > T)                        # white / pale marks
+    cand = (colour | bright) & ~hlD
     cand = cv2.morphologyEx(cand.astype(np.uint8), cv2.MORPH_OPEN, np.ones((2, 2), np.uint8)).astype(bool)
-    # cluster: parts of one motif within ~0.05 fw
-    g = max(3, int(0.05 * fw)) | 1
+    g = max(3, int(0.035 * fw)) | 1
     cl = cv2.dilate(cand.astype(np.uint8), cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (g, g)))
     n, lbl, st, cen = cv2.connectedComponentsWithStats(cl)
     ex, eyy = cx - x0, (ey - 0.27 * fw) - y0
+    if expect is not None: ex, eyy = expect[0] - x0, expect[1] - y0
     best = None
     for i in range(1, n):
         m = (lbl == i) & cand; ar = int(m.sum())
         if ar < 6: continue
         bx, by, bw, bh, _ = st[i]
         if bw > 0.30 * fw or bh > 0.30 * fw: continue
-        if bx <= 0 or by <= 0 or bx + bw >= w:
-            # touching the zone border: only accept if most of it is coloured (not a hair edge)
-            if (dC[m] > 10).mean() < 0.6: continue
         mx, my = cen[i]
-        if abs(mx - ex) > 0.13 * fw: continue
+        if abs(mx - ex) > 0.20 * fw: continue
+        if bx <= 0 or bx + bw >= w or by <= 0:
+            if (dC[m] > 12).mean() < 0.5: continue
         pk = float(np.percentile(dE[m], 90))
-        sc = ar * pk / (1 + abs(mx - ex) / (0.05 * fw) + abs(my - eyy) / (0.12 * fw))
+        sc = ar * pk / (1 + abs(mx - ex) / (0.05 * fw) + abs(my - eyy) / (0.15 * fw))
         if best is None or sc > best[0]: best = (sc, i, ar, pk)
     if best is None or best[3] < MINPEAK or best[2] < 10: return None
     _, i, ar, pk = best
     core = (lbl == i) & cand
-    # pendant specks right under/beside the motif (tiny, COLOURED, far from brow/hair)
-    ys_, xs_ = np.nonzero(core); ccx = xs_.mean()
-    hair9 = cv2.dilate(hair.astype(np.uint8), np.ones((9, 9), np.uint8)).astype(bool)
-    sat = (dE > max(7.0, 1.6 * base)) & (dC > 6) & ~hair9 & ~core
-    ns, ls, ss, cs = cv2.connectedComponentsWithStats(sat.astype(np.uint8))
-    for j in range(1, ns):
-        sx, sy, sw, sh, sa = ss[j]
-        if sa > 14 or sw > 0.04 * fw or sh > 0.04 * fw: continue
-        mxj, myj = cs[j]
-        if abs(mxj - ccx) <= 0.05 * fw and ys_.max() - 2 <= myj <= ys_.max() + 0.09 * fw and dC[ls == j].mean() > 9:
-            core |= ls == j
-    # grow into the faint rim of the motif (same cluster, weaker threshold), never into hair
-    weak = (dE > max(4.0, 1.0 * base)) & ~hairD
-    near = cv2.dilate(core.astype(np.uint8), np.ones((7, 7), np.uint8)).astype(bool)
+    ys_, xs_ = np.nonzero(core); mgn = int(round(0.05 * fw))
+    R = np.zeros((h, w), bool); R[max(ys_.min() - mgn, 0):ys_.max() + mgn + 1, max(xs_.min() - mgn, 0):xs_.max() + mgn + 1] = True
+    weak = (dE > max(4.0, 1.0 * base)) & ~hl & R
     nw, lw = cv2.connectedComponents(weak.astype(np.uint8))
-    ids = np.unique(lw[near & weak]); ids = ids[ids > 0]
-    rim = np.isin(lw, ids) & near
-    mk = core | rim
-    mk = cv2.dilate(mk.astype(np.uint8), np.ones((5, 5), np.uint8)).astype(bool) & ~hair
+    touch = cv2.dilate(core.astype(np.uint8), np.ones((3, 3), np.uint8)).astype(bool)
+    ids = np.unique(lw[touch & weak]); ids = ids[ids > 0]
+    mk = core | np.isin(lw, ids)
+    mk = cv2.dilate(mk.astype(np.uint8), np.ones((5, 5), np.uint8)).astype(bool) & ~hl & R
+    hair = hl
     full = np.zeros((H, W), bool); full[y0:y1, x0:x1] = mk
     ys, xs = np.nonzero(core)
     box = (x0 + xs.min(), y0 + ys.min(), x0 + xs.max() + 1, y0 + ys.max() + 1)
@@ -97,22 +92,19 @@ def detect(rgb, cx, ey, fw, zone=None, th=None):
     return dict(mask=full, box=tuple(int(v) for v in box), peak=round(pk, 1), area=ar, base=round(base, 1), th=round(T, 1),
                 anchor=(round(ax, 1), round(ay, 1)), zone=(x0, y0, x1, y1), width=round((box[2] - box[0]) / fw, 4), noise=noise)
 
-def remove(rgba, d, seed=7):
+def remove(rgba, d, seed=7, iters=int(os.environ.get("ITERS", 800))):
+    """harmonic (Laplace) fill of the mask from its border, NO grain (owner-approved ROOT-8 method, 17/11 ~20:00Z)."""
     A = np.asarray(rgba.convert('RGBA')).copy()
     m = d['mask']; ys, xs = np.nonzero(m)
-    pad = 12; H, W = m.shape
+    pad = 3; H, W = m.shape
     X0, Y0, X1, Y1 = max(xs.min() - pad, 0), max(ys.min() - pad, 0), min(xs.max() + pad + 1, W), min(ys.max() + pad + 1, H)
-    reg = A[Y0:Y1, X0:X1, :3].copy(); mm = m[Y0:Y1, X0:X1].astype(np.uint8)
-    bg = cv2.inpaint(reg, mm, 6, cv2.INPAINT_TELEA).astype(np.float32)
-    bl = cv2.GaussianBlur(bg, (0, 0), 1.6); bg = np.where(mm[..., None] > 0, bl, bg)
-    # skin grain from the ring around the mask (high-pass of the original), so the patch is not plastic-smooth
-    ring = cv2.dilate(mm, np.ones((9, 9), np.uint8)).astype(bool) & ~mm.astype(bool)
-    hp = reg.astype(np.float32) - cv2.GaussianBlur(reg.astype(np.float32), (0, 0), 1.6)
-    sd = np.minimum(1.4826 * np.median(np.abs(hp[ring]), 0), 2.0) if ring.sum() > 20 else np.array([1.2, 1.2, 1.2])
-    rng = np.random.default_rng(seed); nz = rng.normal(0, 1, reg.shape).astype(np.float32) * sd * 0.7
-    bg = bg + nz * mm[..., None]
-    fe = mm.astype(np.float32)  # hard mask: pixels outside the mask stay bit-identical
-    out = reg * (1 - fe[..., None]) + bg * fe[..., None]
+    reg = A[Y0:Y1, X0:X1, :3].astype(np.float64); mm = m[Y0:Y1, X0:X1]
+    f = cv2.inpaint(reg.astype(np.uint8), mm.astype(np.uint8), 3, cv2.INPAINT_TELEA).astype(np.float64)  # warm start
+    for _ in range(iters):
+        p = np.pad(f, ((1, 1), (1, 1), (0, 0)), mode='edge')
+        avg = (p[:-2, 1:-1] + p[2:, 1:-1] + p[1:-1, :-2] + p[1:-1, 2:]) / 4
+        f[mm] = avg[mm]
+    out = reg.copy(); out[mm] = f[mm]
     A[Y0:Y1, X0:X1, :3] = np.clip(np.round(out), 0, 255).astype(np.uint8)
     from PIL import Image
     return Image.fromarray(A, 'RGBA'), (int(X0), int(Y0), int(X1), int(Y1))
