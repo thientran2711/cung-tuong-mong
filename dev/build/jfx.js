@@ -100,10 +100,10 @@ const KFK_U=/^(petal-|osmanthus$|leaf$|snow$|ash$|paper$)/;
 /* the layers that live INSIDE the painted stage rectangle (Pixi mask): weather, season, light shafts */
 /* falling celebration petals: born at the TOP of the painted stage and clipped to it (never over the top bar / stat numbers / chips); no stage on screen = whole screen as before */
 function kfFall(tex,v,sc){const sr=KFX.sr||kfStageRect(),W=sr?sr.w:innerWidth,x=(sr?sr.x:0)+RS(0,W),y=(sr?sr.y:0)+RS(-70,-8),o=kfSp(tex,x,y,v,null,sc);if(o&&o.v&&sr&&KFX.wroot){o.v.clip=1;KFX.wroot.addChild(o)}return o}
-/* rectangles of the info chips drawn ON the stage (side cards .k3c/.k3p, rail buttons, place name); refreshed every 1.5 s, cheap point test per particle */
-const KF_INFO="#stage .k3c,#stage .k3p,#stage .krailb,#stage #sc-t";
-function kfOverInfo(x,y){const t=performance.now();if(!kfOverInfo.r||t-kfOverInfo.t>1500){kfOverInfo.t=t;try{kfOverInfo.r=[...document.querySelectorAll(KF_INFO)].map(e=>e.getBoundingClientRect()).filter(r=>r.width>4)}catch(e){kfOverInfo.r=[]}}
- for(const r of kfOverInfo.r)if(x>r.left-4&&x<r.right+4&&y>r.top-4&&y<r.bottom+4)return true;return false}
+/* rectangles of the info chips drawn ON the stage (side cards .k3c/.k3p, rail buttons, place name); refreshed every 0.5 s (ui-fixes-1; was 1.5 s), cheap box test per particle: the margin is the sprite's HALF SIZE, so a petal whose centre is outside the chip but whose edge touches it is hidden too (the pill was half-covered by a petal edge) */
+const KF_INFO="#stage .k3c,#stage .k3p,#stage .krailb,#stage #sc-t,#stage .mlab,.mapw .mlab";
+function kfOverInfo(x,y,hw,hh){hw=Math.max(4,hw||0);hh=Math.max(4,hh||hw);const t=performance.now();if(!kfOverInfo.r||t-kfOverInfo.t>500){kfOverInfo.t=t;try{kfOverInfo.r=[...document.querySelectorAll(KF_INFO)].map(e=>e.getBoundingClientRect()).filter(r=>r.width>4)}catch(e){kfOverInfo.r=[]}}
+ for(const r of kfOverInfo.r)if(x>r.left-hw&&x<r.right+hw&&y>r.top-hh&&y<r.bottom+hh)return true;return false}
 const kfClipLay=l=>l==="wx"||l==="se"||l==="se2";
 function kfSp(tex,x,y,v,tint,sc,blend){const k=KF_ALIAS[tex]||tex;const s=kfkSp(k,x,y,v,tint,sc,blend);if(s)return s;if(!KFK.loaded.has(k))kfkLoad([k]).catch(()=>{});return{v:{},scale:{set(){},x:1},rotation:0}}
 /* THE ONE SWAP LINE for the real-look weather pictures (owner 16/11 snow + fireflies redo): snow = soft round flakes, firefly = glowing point. Now the painted soft "orb"; when
@@ -150,7 +150,7 @@ function kfTick(tk){const d=Math.min(3,tk.deltaTime),H=innerHeight,W=innerWidth,
   v.ph+=.03*d;if(v.gust)s.x+=KFX.gust*v.gust*d;if(v.drag!==1){const k=Math.pow(v.drag,d);v.vx*=k;v.vy=v.vy*k+v.g*d}else if(v.g)v.vy+=v.g*d;s.x+=(v.vx+(v.sway?Math.sin(v.ph)*v.sway:0))*d;s.y+=v.vy*d;
   if(v.spin)s.rotation+=v.spin*d;if(v.coin)s.scale.x=v.sc*Math.cos(v.ph*3);if(v.grow)s.scale.set(s.scale.y+v.grow*d);
   const f=v.life/v.max;let a=v.a0;if(v.fade==="out")a=v.a0*Math.min(1,f*2.2);else if(v.fade==="inout")a=v.a0*Math.min(1,f*4,(1-f)*6);if(v.tw)a*=.55+.45*Math.sin(v.ph*v.tw*40);if(v.bl){const q=.5+.5*Math.sin(v.ph*v.bl);a*=.3+.7*Math.sqrt(q)}s.alpha=Math.max(0,a);
-  if(v.clip&&kfOverInfo(s.x,s.y))s.alpha=0;  /* wx-fx-size: weather never sits over a stage chip / the place name (text stays readable) */
+  if(v.clip&&kfOverInfo(s.x,s.y,Math.abs(s.width||0)/2+2,Math.abs(s.height||0)/2+2))s.alpha=0;  /* wx-fx-size: weather never sits over a stage chip / the place name (text stays readable) */
   if(v.amb)amb++}
  KFX.live=L.length;KFX.amb=amb;kfBoltTick(d);
  /* PERF (owner 16/11 lag): ambient-only weather (snow / fireflies / petals / mist) runs at 30 fps (motion is dt-based, so speed is unchanged); bursts and lightning get 60; rain streaks are dt-based too */
