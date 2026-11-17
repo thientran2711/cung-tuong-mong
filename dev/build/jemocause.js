@@ -18,6 +18,8 @@ window.kitEmoWord=function(k){return kitFaceName(k)||"tâm tư"};/* generic word
 function kitFaceDrive(p,m){try{if(typeof window.faceKeyFor==="function"){const f=window.faceKeyFor(p);if(f){if(f.feel&&f.feel.key)return f.feel.key;if(f.kind==="feel"&&f.key)return f.key}}
  if(typeof window.sealKeyFor==="function"){const k=window.sealKeyFor(p);if(k)return k}}catch(e){}return m&&m.k}
 window.kitFaceDrive=kitFaceDrive;
+/* the name of what the seal shows now (header sub line, badge alt, data-kemo, bold group): the seal key's name, else (an act with no name yet) its feeling's name, else the generic word */
+window.kitSealName=function(p,m){const sk=window.emoSealKey?emoSealKey(p,m):m&&m.k;return kitFaceName(sk)||kitFaceName(kitFaceDrive(p,m))||kitEmoWord("")};
 function kitMoodCauseRows(L,drive,o){o=o||{};const name=o.name||kitEmoWord;const cls=o.cls||kitEmoTone;
  /* group by the DISPLAY label (ghen + chanh are both "Chạnh lòng" = one group; old saves and new causes mix) */
  const g={};for(const x of L||[]){if(!x||!x.k)continue;const lb=name(x.k);(g[lb]=g[lb]||{k:x.k,lb,sum:0,rows:[]});g[lb].sum+=+x.v||0;g[lb].rows.push(x)}
