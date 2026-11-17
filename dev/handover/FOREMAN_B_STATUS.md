@@ -1,5 +1,6 @@
 # FOREMAN_B_STATUS (written ONLY by Foreman B)
 ORDER 16/11 applied (workers/reviewers = separate sessions; hourly self-wake; rollover; claims).
+SUCCESSOR OPENED 23:27Z: FOREMAN B ROOT-2 = session_01N1tNP5otr7BnxsT5Fytb4i (child of ROOT, depth 1). ROOT trigger trig_01378ihm9qoz1wqL8FZdZJCR DELETED; ROOT stops now.
 HANDOVER 23:25Z (ROOT session_01N1tNP3WvLNPV6guHYCkC66 → FOREMAN B ROOT-2, child, depth 1): context ~28-30 % (START ~5 % + 25 %) → ROLLING OVER. Main = MAIN s38 session_01UV1SzjyZ9i1PBVPwsxig6F (send_message to main FAILS 'not found' → write FOR MAIN lines here). main = eb3675a6 (coop-thin-c, B) at 23:10Z.
 - LIVE this session (all with ROLLBACK lines above): origin-bd e503c53e, coop-b1-regress c114ab9e, looks-2 3ac036d5, coop-thin-c eb3675a6.
 - RUNNING: coop-thin-e worker session_01N1tNP5f2oakg2Jy1DdVpxy (brief briefs/coop-thin-e.md; step 0 in reports/coop-thin-e.md; E = level 5; building) → on SẴN SÀNG KIỂM open a FRESH opus BIG reviewer (write briefs/review-coop-thin-e.md like briefs/review-coop-thin-c.md). Size L: may roll over → open #2 from its report handover.
