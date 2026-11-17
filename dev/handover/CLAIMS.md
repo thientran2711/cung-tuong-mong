@@ -578,7 +578,7 @@
 | item-ledger SOLO landing (opus): from PASS 7aba5de9, branch co-op transport removed (live giftin only), co-op part parked | review/item-ledger-solo | D | session_01964izCwq2JLHTHaaBox66W | RUNNING | 17/11 03:35Z |
 | npc-death re-wire (opus): jnpcd/jly into j95 place-people record (Lý Trường Môn viện, dead off lists, Thái y viện new name) | review/npc-death-wire | D | session_01964izBuQu8dWabKyYB69JE | RUNNING | 17/11 03:35Z |
 | suc-khoe review r2 (opus BIG) of da50857d | review/suc-khoe-r2 | D | session_01964izEdQ4cDsTpuGgdScHp | RUNNING | 17/11 03:35Z |
-| C44 cloud-del 'Xóa sổ trên mây' (sonnet UI, KIT §83.9) | review/cloud-del | D | session_01964izCcuExvScNgYEs1xN6 | RUNNING | 17/11 03:35Z |
+| C44 cloud-del 'Xóa sổ trên mây' (sonnet UI, KIT §83.9) | review/cloud-del | D | session_01964izCcuExvScNgYEs1xN6 | DONE SẴN SÀNG KIỂM e12ef99a (archived) | 17/11 03:35Z |
 | P5 STORY BOT balance (opus, report only, ch1–4 first) | review/story-bot | D | session_01964izEJdhucE8HEDCzfJ25 | RUNNING | 17/11 03:35Z |
 | scenes-3 r1 PASS 92b6c60f (review/scenes-3-r1) → builder batch-0232 (or next batch); worker + reviewer archived | review/scenes-3-r1 | main s29 | session_01UV1Szkquo1hWfgug5N5F9Q | PASS | 17/11 03:37Z |
 | ART event-art-style (sonnet art): OWNER 03:42Z event pictures off-style (faces / colour / brushwork) → audit every event/act/opt/intro picture vs anchor, 4 samples → C, then redo (brief briefs/event-art-style.md) | handover reports/event-art-style.md | C | session_011xDdVNnHxuy2KotX9dH3zb | RUNNING | 17/11 03:40Z |
@@ -610,3 +610,4 @@
 | newlife-reset r1 PASS b2da25cc0 → next batch after 0415 (builder session_01UV1SzjhxXkcba8uS4TZeVm stays alive) | review/newlife-reset-r1 | main s30 | - | PASS | 17/11 04:20Z |
 | map-full r1 PASS 29131677 (review/map-full-r1; trial-merge app-edge clean) → ships TOGETHER with app-edge after app-edge r1 PASS, next batch | review/map-full-r1 | main s30 | session_01UV1Szipn2t9xXY2WubCJ1T | PASS | 17/11 04:22Z |
 | mg-clutter r1 PASS cbbbc7d9 (review/mg-clutter-r1; needs merge on main) → next batch with newlife-reset b2da25cc0 + map-full 29131677 (+ app-edge on PASS) | review/mg-clutter-r1 | main s30 | session_01UV1SzhB4ckkvjk7TVuS92E | PASS | 17/11 04:23Z |
+| cloud-del review r1 (sonnet SMALL) of e12ef99a | review/cloud-del-r1 | D | session_01964izGAVcoDZanXLDNekPh | RUNNING | 17/11 04:23Z |
