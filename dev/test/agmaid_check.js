@@ -36,7 +36,7 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
  const r4=await p.evaluate(()=>{const L=amMaids().filter(([s,o])=>o!==S);if(!L.length)return{skip:1};const [s,o]=L[0];const nm=s.name;s.sung=40;S.emp.met={};S.emp.met["s"+s.sid]=[[wk(),"tea",1]];
   const C=consorts().filter(p=>nightCh(p)>0);const mp=mindPick;mindPick=(O)=>{const x=O.find(z=>z[0]&&z[0].m===s);return x?x[0]:mp(O)};let t;try{t=empPick(C)}finally{mindPick=mp}
   const amT=S.amT&&S.amT.k;S.nightWhy={wk:wk(),pick:null,emp:Object.assign({},S.empWhy),rows:[]};const why=empWhyTxt(S.nightWhy);
-  const rf=roomFor;roomFor=()=>true;const n0=rivals.length;let txt="";try{S.tonight=null;txt=resolveTonight()}finally{roomFor=rf}const n=rivals[rivals.length-1];
+  const rf=roomFor;roomFor=()=>true;const n0=rivals.length;let txt="";const mpk=mindPick;mindPick=(O,p)=>O.some(z=>z[0]==="go")?"go":mpk(O,p);/* r2: she may decline (Cáo bệnh) — this check is the night she accepts, as r4b */try{S.tonight=null;txt=resolveTonight()}finally{roomFor=rf;mindPick=mpk}const n=rivals[rivals.length-1];
   return{t:t===null,amT,why,txt,added:rivals.length-n0,nm,newName:n&&n.name,road:n&&n.ag&&n.ag.o,inStaff:(o.staff||[]).includes(s)}});
  ok(r4.skip||r4.t&&r4.amT&&/cho gọi/.test(r4.why),'pool: a remembered maid is picked from his night pool, nightWhy says he called her',r4);
  ok(r4.skip||r4.added===1&&r4.newName&&r4.newName.endsWith(" "+r4.nm)&&r4.road==="cn"&&!r4.inStaff,'her night with a seat: the same person raised Đáp ứng (her name, road cn)',r4);
