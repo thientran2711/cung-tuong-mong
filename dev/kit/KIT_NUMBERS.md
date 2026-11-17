@@ -69,4 +69,4 @@ Why this order: face-sharp (§71) and tutorial (§72) were already registered by
 - (17/11, scenes-3) §86 = kitLearn (jlevel.js, review/scenes-3); demotion tray is §66.3 (no new number). Next free: §87.
 - (17/11, kit-ico-rank) §87 = THE RANKED LIST (kitRankList / kitRankRow / kitRankHead / kitRankFoot, jkrank.js, review/kit-ico-rank; renumbered by review kit-ico-rank-r1 from a clash with review/scenes-3 kitLearn §86). Next free: §88.
 - (17/11, kit-thanh-bai) §88 = THÀNH / BẠI blocks on every act / option card (review/kit-thanh-bai → r4c).
-- (17/11, kit-display-room) §89 = kitDisplayRoom · Nơi trưng bày (jdisp.js, review/kit-display-room; renumbered by batch s36a from a clash with kit-ico-rank §87; §88 = kit-thanh-bai). Next free: §90.
+- (17/11, kit-display-room) §89 = kitDisplayRoom · Đa Bảo Các (jdisp.js, review/kit-display-room; renumbered by batch s36a from a clash with kit-ico-rank §87; §88 = kit-thanh-bai). Next free: §90.
