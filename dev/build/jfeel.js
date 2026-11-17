@@ -95,7 +95,7 @@ Object.assign(BAL,{feel:{
    vui:"vui",tutin:"vui",tinhtu:"vui",tinhnghich:"vui",hanghai:"vui",chuyentam:"vui",hungkhoi:"vui"},
   kh:{khoc:1,tui:1,sk:1,dapdo:1,mang:1,danh:1,khac:1,pham:1,noi:1,quo:1,boan:4,thu:1,matngu:"buoi",emat:"buoi",soat:2,cau:2,cham:1,thuong:1,khoe:1,tiec:2,hat:2,ban:1,eyen:2,
    tron:"buoi",caobenh:"buoi",bodo:2,bove:2,moi:2,okhoc:1,kquay:1,kbo:2,caugat:1,ngoithu:2,noimoc:1,khoetai:1,treo:1,mach:"buoi",quengio:"buoi",sangtac:2},
-  fx:{tron:{vent:12,danh:1},caobenh:{vent:12,danh:1},bodo:{vent:10,tai:1},bove:{vent:12,rel:5},moi:{vent:8,sung:2,ghen:2,oan:2},
+  fx:{tron:{vent:12,danh:1},caobenh:{vent:12,danh:1},bodo:{vent:10,tai:1},bove:{vent:12,rel:5,sung:1},moi:{vent:8,sung:2,ghen:2,oan:2},
    caugat:{vent:10,loy:3},ngoithu:{vent:8},noimoc:{use:"cham"},khoetai:{vent:8,danh:1,ghen:2,oan:1},treo:{vent:10,rel:2,loy:1},
    mach:{vent:8,tai:1,suc:3},quengio:{vent:8,tai:2,suc:2},sangtac:{vent:8,tai:1,danh:1}}}}});
 const FEEL_KEY_CHANH="ghen";/* MOOD-MEM keeps the feeling key "ghen", named EMO_GHEN ("Chạnh lòng", jemo); the score v.ghen stays "Ghen" */
@@ -215,7 +215,7 @@ window.feelIntentOf=feelIntentOf;
 /* ---------- the clock: a buổi tick (intents, sulks) and a tuần tick (quiet life) ---------- */
 function feelPeople(){try{return typeof mkAll==="function"?mkAll():[]}catch(e){return[]}}
 function feelBuoi(){if(!feelOn()||S.dead)return;try{feelActTick(S)}catch(e){console.error(e)}if(!feelWorld())return;for(const p of feelPeople()){if(p!==S)try{feelActTick(p)}catch(e){}try{feelIntentTick(p)}catch(e){}
-  try{const lv=feelLv(p,"hon");if(lv&&p!==S){const now=mkNow();const m=(p.mk||[]).find(x=>x.k==="hon"&&x.t!=null&&x.k1>now);const t=m&&emoByKey(String(m.t));const d=fB().honDrift[lv-1];if(t&&t!==p&&d&&typeof affAdd==="function")affAdd(p,t,d)}}catch(e){}}}
+  try{const lv=feelLv(p,"hon");if(lv&&p!==S){const now=mkNow();const m=(p.mk||[]).find(x=>x.k==="hon"&&x.t!=null&&x.k1>now);const t=m&&emoByKey(String(m.t));const d=fB().honDrift[lv-1];if(t&&t!==p&&t!==S.emp&&d&&typeof affAdd==="function")affAdd(p,t,d)}}catch(e){}}}
 /* one tick a buổi (render sees the buổi change; host / single player only) and the quiet life once a tuần */
 (function(){if(typeof render!=="function")return;const r0=render;render=function(){try{if(feelOn()&&!S.dead){const w=emoW(),b=w*10+(S.buoi||0);if(FEEL.b==null)FEEL.b=b;else if(FEEL.b!==b){const wOld=Math.floor(FEEL.b/10);FEEL.b=b;feelBuoi();if(w!==wOld)feelLife()}}}catch(e){console.error("jfeel",e)}return r0.apply(this,arguments)}})();
 /* ---------- ACTS: heavy level + bar past the line → one act from the ONE reaction table; a short khắc timer (the face shows it) + cooldown ---------- */
@@ -240,7 +240,7 @@ function feelDo(p,r){const me=p===S,F=fB().act.fx[r.k];if(!F)return window.eaDo(
  case"tron":pay({danh:-F.danh});h=me?"Lòng sợ hãi chưa yên, ngươi đóng cửa tẩm cung, cả buổi không dám bước ra.":`${emoName(p)} đóng cửa trốn trong phòng cả buổi.`;break;
  case"caobenh":pay({danh:-F.danh});h=me?"Xấu hổ chẳng dám nhìn ai, ngươi sai người báo bệnh, không đến thỉnh an.":`${emoName(p)} cáo bệnh, không đến thỉnh an.`;break;
  case"bodo":pay({tai:-F.tai});h=me?"Lòng chán chường, việc đang làm dở ngươi cũng bỏ ngang.":`${emoName(p)} bỏ dở việc đang làm.`;break;
- case"bove":{const t=feelHonT(p);if(!t)return null;target=t;try{relAdd(p,t,-F.rel)}catch(e){}if(me)add(`${t===S.emp?"Hoàng thượng":emoName(t)} thiện cảm −${F.rel}`);
+ case"bove":{const t=feelHonT(p);if(!t)return null;target=t;/* review r1: the Emperor has no thiện cảm map (j9 affAdd keys by id; he has none) → a sulk at him costs Sủng */if(t===S.emp)pay({sung:-F.sung});else{try{relAdd(p,t,-F.rel)}catch(e){}if(me)add(`${emoName(t)} thiện cảm −${F.rel}`)}
   h=me?`Còn hờn ${t===S.emp?"Hoàng thượng":emoName(t)}, ngươi bỏ về, không muốn tiếp.`:`${emoName(p)} còn hờn ${t===S?"ngươi":emoName(t)}, bỏ về không tiếp.`;break}
  case"moi":pay({sung:F.sung});if(me){try{ghenAll(F.ghen)}catch(e){}add("các phi tần ganh ghét thêm")}else{try{for(const x of liveRivals(true))if(x!==p&&x.alive)oanAdd(x,p,F.oan)}catch(e){}}
   h=me?"Lòng xao xuyến, ngươi sai người dâng trà mời Hoàng thượng ghé cung.":`${emoName(p)} sai người mời Hoàng thượng ghé cung.`;break;

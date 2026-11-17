@@ -112,5 +112,11 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
  const r7=await p.evaluate(async(D)=>{const bad=new Set();for(let d=0;d<D*4;d++){try{Q.length=0;nextBuoi();render()}catch(e){bad.add("throw:"+e.message)}
    for(const x of mkAll()){for(const m of x.mk||[])if(m.k&&!EMO[m.k])bad.add(m.k);if(x.emo&&!EMO[x.emo.k])bad.add("emo:"+x.emo.k)}}return {bad:[...bad],stat:feelStat()}},DAYS);
  ok(r7.bad.length===0,'bot days: every feeling key in the set',r7);
+ /* review r1: Hờn dỗi at the Emperor (the common sulk) → "bỏ về" costs Sủng; no thiện cảm row keyed "undefined", his rel stays a number */
+ const r10=await p.evaluate(()=>{const R0=window.roll,FB=window.feelBar;const out=[];try{window.roll=()=>true;
+  for(const v of [S,__F.R()[0]]){__F.clean(v);v.fcd={};if(v===S)S.fa2={w:-1,n:0};emoSet(v,"hon",95,"bị Hoàng thượng quở",emoKey(S.emp));window.feelBar=q=>q===v?-95:FB(q);
+   if(v===S)S.sung=Math.max(S.sung||0,20);else v.sung=Math.max(v.sung||0,20);const s0=v===S?S.sung:v.sung;feelActTick(v);window.feelBar=FB;out.push({act:v.fa&&v.fa.k,dSung:(v===S?S.sung:v.sung)-s0,bad:("undefined" in (S.rl||{}))||("undefined" in (v.rl||{}))||("undefined" in (S.ro||{})),empRel:S.emp.rel})}}
+  finally{window.roll=R0;window.feelBar=FB}return out});
+ ok(r10.every(x=>x.act==="bove"&&x.dSung<0&&!x.bad&&(x.empRel===undefined||typeof x.empRel==="number"&&!isNaN(x.empRel))),'hờn at the Emperor: bỏ về costs Sủng, no "undefined" relation key',r10);
  ok(errs.length===0,'no page errors',errs.slice(0,5));
  await b.close();const f=res.filter(x=>!x).length;console.log(`${res.length-f}/${res.length} PASS`);process.exit(f?1:0)})();
