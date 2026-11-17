@@ -3,7 +3,8 @@
    «Đức 80+», «tới 90») is set beside the cuts the CODE compares that stat with (x.<stat> >=/</… N or a BAL key), across the whole game:
      TYPED  = the number is one of the stat's rule cuts but typed in the text (change the BAL value → the text lies): print the key instead;
      DIFF   = the number is none of the stat's rule cuts (the text tells the player a cut the rules never use): list → read → fix the text or the rule.
-   ${…} prints are skipped (they already print). Scales «0–100», «trên 100» and 0 / 100 are skipped. Output: one row per hit (file:line).
+   ${…} prints are skipped (they already print). Scales «0–100», «từ 0 đến 10», «trên 100» and 0 / 100 are skipped. jkitpage / jksize = the kit
+   sample pages (demo numbers, no rule): listed as SAMPLE. Output: one row per hit (file:line).
    usage: node dev/measure/one-core-text-rule.js [buildDir] [--json] */
 const fs=require('fs'),path=require('path');
 const acorn=(()=>{try{return require('acorn')}catch(e){return require('/opt/node-tools/node_modules/acorn')}})();
@@ -30,20 +31,20 @@ for(const f of ORDER){if(/^jbal/.test(f))continue;const p=path.join(B,f);if(!fs.
  (function walk(n,par){if(!n||typeof n.type!=='string')return;
   if(n.type==='BinaryExpression'&&CMP.has(n.operator)){for(const [a,b] of [[n.left,n.right],[n.right,n.left]]){const pr=propOf(a),v=numOf(b);if(pr&&v!==undefined){(rules[pr]=rules[pr]||new Map());const m=rules[pr];if(!m.has(v))m.set(v,[]);m.get(v).push(f+':'+lineOf(src,n.start)+(b.type==='MemberExpression'?'(BAL)':''))}}}
   if(n.type==='Literal'&&typeof n.value==='string')texts.push({f,line:lineOf(src,n.start),s:n.value,key:par&&par.type==='Property'&&par.value===n?(par.key.name||par.key.value):null});
-  if(n.type==='TemplateLiteral')n.quasis.forEach(q=>texts.push({f,line:lineOf(src,q.start),s:q.value.cooked||'',key:par&&par.type==='Property'&&par.value===n?(par.key.name||par.key.value):null}));
+  if(n.type==='TemplateLiteral')texts.push({f,line:lineOf(src,n.start),s:n.quasis.map(q=>q.value.cooked||'').join('${…}'),key:par&&par.type==='Property'&&par.value===n?(par.key.name||par.key.value):null});/* the whole template: a stat word in one piece, the number in the next */
   for(const k in n){if(k==='type'||k==='start'||k==='end')continue;const c=n[k];if(Array.isArray(c))c.forEach(x=>walk(x,n));else if(c&&typeof c.type==='string')walk(c,n)}})(ast,null)}
 /* a threshold phrase: «từ 60», «tới 85», «dưới 40», «trên 50», «đủ 70», «quá 80», «ít nhất 30», «60+», «≥ 60» … */
 const PH=/(?:(từ|tới|đến|dưới|trên|đủ|quá|chạm|đạt|cần|ít nhất|hơn|lên|xuống|còn|≥|>=|<|>|≤)\s+(\d{1,3})(?![\d.,%]|\s*(?:tháng|năm|ngày|lượng|lạng|tuổi|người|buổi|lần|việc|đêm|bước|phần))|(\d{1,3})\+)/gi;
 const out=[];
 for(const t of texts){if(!/[à-ỹÀ-Ỹ]/.test(t.s))continue;let m;PH.lastIndex=0;
- while((m=PH.exec(t.s))){const n=+(m[2]||m[3]);if(!n||n>=100)continue;const pre=t.s.slice(Math.max(0,m.index-40),m.index);if(/0\s*[–-]\s*$/.test(pre))continue;
+ while((m=PH.exec(t.s))){const n=+(m[2]||m[3]);if(!n||n>=100)continue;const pre=t.s.slice(Math.max(0,m.index-40),m.index);if(/0\s*[–-]\s*$/.test(pre))continue;if(/từ 0 đến\s*$/i.test(t.s.slice(Math.max(0,m.index-8),m.index+m[0].length-String(n).length)))continue;/* a score range «từ 0 đến 10» */
   let props=null,word=null;for(const [re,ps] of WORDS){const all=[...pre.matchAll(new RegExp(re.source,'gi'))];if(all.length){const at=all[all.length-1].index;if(word===null||at>word.at){word={at,w:all[all.length-1][0]};props=ps}}}
   if(!props&&t.key&&rules[t.key]){props=[t.key];word={w:'('+t.key+')'}}
   if(!props&&t.key)for(const [re,ps] of WORDS)if(re.test(t.key)){props=ps;word={w:'('+t.key+')'};break}/* KIT_GLOSS {"Áp lực hôn sự":"…"} */
   if(!props)continue;
   const cuts=new Map();for(const pr of props)for(const [v,w] of (rules[pr]||new Map()))cuts.set(v,(cuts.get(v)||[]).concat(w));
-  const kind=cuts.has(n)?'TYPED':'DIFF';
+  const kind=/^(jkitpage|jksize)\.js$/.test(t.f)?'SAMPLE':cuts.has(n)?'TYPED':'DIFF';
   out.push({kind,f:t.f,line:t.line,word:word.w,n,props:props.join('/'),cuts:[...cuts.keys()].sort((a,b)=>a-b).join(','),where:(cuts.get(n)||[]).slice(0,3).join(' '),text:t.s.slice(Math.max(0,m.index-50),m.index+m[0].length+25).replace(/\s+/g,' ')})}}
 if(process.argv.includes('--json')){console.log(JSON.stringify(out,null,1));process.exit(0)}
 for(const o of out)console.log(`${o.kind}\t${o.f}:${o.line}\t${o.word}=${o.n}\t[${o.props}: ${o.cuts}]\t${o.where}\t«${o.text}»`);
-console.log(JSON.stringify({hits:out.length,TYPED:out.filter(o=>o.kind==='TYPED').length,DIFF:out.filter(o=>o.kind==='DIFF').length}));
+console.log(JSON.stringify({hits:out.length,TYPED:out.filter(o=>o.kind==='TYPED').length,DIFF:out.filter(o=>o.kind==='DIFF').length,SAMPLE:out.filter(o=>o.kind==='SAMPLE').length}));
