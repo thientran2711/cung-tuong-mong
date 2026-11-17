@@ -41,14 +41,19 @@ const slotsOf=g=>{if(!FIXON()&&typeof shelfSlots==="function")return shelfSlots(
 const grpOfE=e=>{try{if(FIXON())return e.g;return typeof shelfGrpE==="function"?shelfGrpE(e):shelfGrp(e.k)}catch(x){return null}};
 function mkFix(){/* a believable chest: 2 real pieces per group; 5 groups already on the shelf, two of them holding 2-3 pieces; one piece above her rank to show the warning */
  const keys=[];try{for(const k of Object.keys(IT)){if(k&&srcOf(k)&&!/^wd-/.test(k))keys.push(k);if(keys.length>=30)break}}catch(e){}
- const G=GFIX,inv=[],placed={},used={};
- keys.forEach((k,i)=>{const g=G[i%G.length][0];const e={k,g,over:i===3?1:0};if(i===5)e.from="emp";
+ const G=GFIX,inv=[],placed={},used={},kg={};
+ keys.forEach((k,i)=>{const g=G[i%G.length][0];(kg[g]=kg[g]||[]).push(k);const e={k,g,over:i===3?1:0};if(i===5)e.from="emp";if(i<3)e.set={id:"fx1",name:"Bộ mẫu",full:true};if(i===4)e.set={id:"fx2",name:"Bộ dở",full:false};
   if(i<5||i===15||i===16||i===27){const n=used[g]=(used[g]||0);used[g]++;placed[n?g+"~"+n:g]=e}else inv.push(e)});
- return{inv,placed}}
+ return{inv,placed,kg}}
 const fixOf=()=>KDR.fix||(KDR.fix=mkFix());
 function placedOf(g){/* [[slot, entry]] of one group in slot order (a piece keeps its spot) */
  if(FIXON()){if(KDR.p!==S&&KDR.p)return[];const F=fixOf();return slotsOf(g).filter(s=>F.placed[s]).map(s=>[s,F.placed[s]])}
  try{const z=shelfOf(KDR.p).g;return slotsOf(g).filter(s=>z[s]).map(s=>[s,z[s]])}catch(e){return[]}}
+/* grey SILHOUETTE of an EMPTY slot (owner OD 21:20Z): made in code from the group's existing painted cut-outs (representative piece, varied over the group's pieces), no new art */
+function silKeys(g){if(FIXON())return(fixOf().kg||{})[g]||[];try{const I=BAL.shelf.it,o=[];for(const k in I)if(I[k].g===g&&k!=="caykho"&&srcOf(k))o.push(k);return o}catch(e){return[]}}
+/* complete SET glow (data: C-AG set builder, shelfView items[i].set {id,name,full}); fixture: e.set */
+function setMap(){const m={};if(FIXON()){const F=fixOf();for(const s in F.placed)if(F.placed[s].set)m[s]=F.placed[s].set;return m}
+ try{if(typeof shelfView==="function")for(const G of shelfView(KDR.p).groups)for(const it of G.items||[])if(it.set)m[it.slot]=it.set}catch(e){}return m}
 function ownedOf(g){/* [{e, ix}] owned pieces of this group, in chest order (her room only) */
  if(FIXON())return fixOf().inv.map((e,ix)=>({e,ix})).filter(x=>x.e.g===g);
  const out=[];(S.inv||[]).forEach((e,ix)=>{try{if(e&&!e.h&&grpOfE(e)===g)out.push({e,ix})}catch(x){}});return out}
@@ -65,19 +70,20 @@ function pc(e){if(!e)return null;const k=e.k;const over=e.over!=null?!!e.over:((
 /* spot x (fraction of the picture) of the i-th of n pieces of a compartment: slot.spots (measured, reports/display-bg.md) or n evenly spaced points across the compartment (stub) */
 const spotX=(s,i,n)=>s.spots&&s.spots[i]!=null?s.spots[i]:s.cx-s.w/2+s.w*(i+.5)/n;
 function shelfHTML(g,list,o){const ro=!!o.ro,s=o.slot,n=o.per||5;list=list||[];
- const Ps=list.map(([sl,e],i)=>({sl,P:pc(e),i}));
+ const Ps=list.map(([sl,e],i)=>({sl,P:pc(e),i}));const SM=o.sets||{};const full=new Set(list.map(x=>x[0]));
  const lab=`<span class="kdr-lab kchip n">${esc(gName(g))}</span>`;
  const over=!ro&&Ps.some(x=>x.P.over),wi=!ro&&Ps.some(x=>x.P.wither);
  const tags=`${over?`<span class="kdr-tag kchip r">Vượt phẩm</span>`:""}${wi?`<span class="kdr-tag kchip r">Héo</span>`:""}`;
  const si=sl=>{const k=String(sl).split("~");return k.length>1?+k[1]:0};
- const stand=Ps.length?Ps.map(x=>{const sx=spotX(s,si(x.sl),n),left=((sx-(s.cx-s.w/2))/s.w*100).toFixed(2);return `<img class="kdr-it${x.P.wither?" kdr-wither":""}" data-kdrp="${esc(x.sl)}" style="left:${left}%;max-width:${(92/n).toFixed(1)}%" src="${esc(x.P.src)}" alt="" draggable="false" onerror="this.style.visibility='hidden'">`}).join(""):`<i class="kdr-empty">${ro&&!o.known?"Chưa thấy":"Còn trống"}</i>`;
+ const SK=silKeys(g),sil=SK.length?slotsOf(g).map((sl,i)=>full.has(sl)?"":`<img class="kdr-sil" style="left:${((spotX(s,i,n)-(s.cx-s.w/2))/s.w*100).toFixed(2)}%;max-width:${(92/n).toFixed(1)}%" src="${esc(srcOf(SK[i%SK.length]))}" alt="" aria-hidden="true" draggable="false" onerror="this.remove()">`).join(""):"";
+ const stand=sil+(Ps.length||sil?"":`<i class="kdr-empty">${ro&&!o.known?"Chưa thấy":"Còn trống"}</i>`)+Ps.map(x=>{const sx=spotX(s,si(x.sl),n),left=((sx-(s.cx-s.w/2))/s.w*100).toFixed(2);return `<img class="kdr-it${x.P.wither?" kdr-wither":""}${SM[x.sl]&&SM[x.sl].full?" kdr-glow":""}" data-kdrp="${esc(x.sl)}" style="left:${left}%;max-width:${(92/n).toFixed(1)}%" src="${esc(x.P.src)}" alt="" draggable="false" onerror="this.style.visibility='hidden'">`}).join("");
  const lbl=`${gName(g)}: ${Ps.length?Ps.map(x=>x.P.name).join(", "):"còn trống"}`;
  const box=`left:${((s.cx-s.w/2)*100).toFixed(3)}%;top:${((s.fy-s.h)*100).toFixed(3)}%;width:${(s.w*100).toFixed(3)}%;height:${(s.h*100).toFixed(3)}%`;
  return `<button type="button" class="kdr-sh${Ps.length?" has":""}" data-kdrg="${esc(g)}" aria-label="${esc(lbl)}" title="${esc(lbl)}" style="${box}">${lab}${tags}${stand}<span class="kdr-plank" aria-hidden="true"></span></button>`}
 function kitDisplayRoomHTML(m){m=m||{};const G=m.groups||groups(),ro=!!m.ro;const n=G.reduce((a,x)=>a+((m.placed&&m.placed[x[0]])||[]).length,0);
  const title=m.title||"Phòng trưng bày";const P=(m.land!=null?m.land:kv2())?KDR_PIC.land:KDR_PIC.port;let gi=0;
  const segs=P.segs.map(sg=>`<div class="kdr-seg" style="--ar:${sg.ar}"><img class="kdr-bgi" src="${esc(sg.src)}" alt="" draggable="false" onload="this.parentNode.classList.remove('kdr-nopic')" onerror="this.remove()">`+
-  sg.slots.map(sl=>{const x=G[gi++];return x?shelfHTML(x[0],m.placed&&m.placed[x[0]],{ro,known:m.known!==false,slot:sl,per:m.per||5}):""}).join("")+`</div>`).join("");
+  sg.slots.map(sl=>{const x=G[gi++];return x?shelfHTML(x[0],m.placed&&m.placed[x[0]],{ro,known:m.known!==false,slot:sl,per:m.per||5,sets:m.sets||{}}):""}).join("")+`</div>`).join("");
  return `<div class="kdr-hd"><span class="kdr-cart">${esc(title)}</span><span class="kdr-cnt">${ro&&!m.known?"":`Đã bày ${n} món`}</span>${typeof kitXHTML==="function"?kitXHTML('data-kdrx="1"',"Đóng"):'<button type="button" class="kit-x" data-kdrx="1" aria-label="Đóng">✕</button>'}</div>`+
   `<div class="kdr-sc"><div class="kdr-cab">${segs}</div></div>`}
 function tileHTML(x,g){const P=pc(x.e),why=whyNot(x.e);
@@ -96,8 +102,8 @@ function box(){/* the area between the top bar and the bottom bar, inside the ga
  const gm=document.getElementById("game"),h=gm&&gm.querySelector("header.hud"),b=gm&&gm.querySelector("nav.bar");if(!gm||!h||!b)return null;
  const g=gm.getBoundingClientRect(),a=h.getBoundingClientRect(),c=b.getBoundingClientRect();return{l:g.left,r:innerWidth-g.right,t:Math.round(a.bottom+4),b:Math.round(innerHeight-c.top+4)}}
 function place(){const el=$k();if(!el)return;const x=box();if(!x)return;el.style.left=x.l+"px";el.style.right=x.r+"px";el.style.top=x.t+"px";el.style.bottom=x.b+"px"}
-function model(){const m={ro:KDR.ro,known:KDR.known,groups:groups(),placed:{},title:KDR.ro&&KDR.p&&KDR.p!==S?`Phòng trưng bày của ${esc((KDR.p&&KDR.p.name)||"")}`:"Phòng trưng bày"};m.per=perN();for(const x of m.groups)m.placed[x[0]]=KDR.known?placedOf(x[0]):[];return m}
-function paint(){const el=$k();if(!el)return;const keep=el.querySelector(".kdr-sc"),st=keep?keep.scrollTop:0;el.innerHTML=kitDisplayRoomHTML(model())+`<div class="kdr-drw" id="kdrdrw" hidden></div>`;
+function model(){const m={ro:KDR.ro,known:KDR.known,groups:groups(),placed:{},title:KDR.ro&&KDR.p&&KDR.p!==S?`Phòng trưng bày của ${esc((KDR.p&&KDR.p.name)||"")}`:"Phòng trưng bày"};m.per=perN();m.sets=KDR.known?setMap():{};for(const x of m.groups)m.placed[x[0]]=KDR.known?placedOf(x[0]):[];return m}
+function paint(){const el=$k();if(!el)return;try{el.classList.toggle("kdr-calm",typeof reducedMotion==="function"&&reducedMotion())}catch(e){}const keep=el.querySelector(".kdr-sc"),st=keep?keep.scrollTop:0;el.innerHTML=kitDisplayRoomHTML(model())+`<div class="kdr-drw" id="kdrdrw" hidden></div>`;
  const s2=el.querySelector(".kdr-sc");if(s2)s2.scrollTop=st;if(KDR.drawer)drawer(KDR.drawer,true);place()}
 function kitDisplayRoomOpen(p,o){o=o||{};kitDisplayRoomClose(true);KDR.p=p||S;KDR.ro=!!o.ro||(KDR.p!==S);KDR.fixture=!!o.fixture||!real();KDR.known=o.known!==false;try{if(KDR.ro&&real()&&o.known==null&&typeof shelfView==='function')KDR.known=!!shelfView(KDR.p).known}catch(e){}KDR.drawer=null;
  if(KDR.fixture&&!o.fixture)return null;/* no real API yet: never open for the player with made-up data */
@@ -156,6 +162,11 @@ html.kv2 .kdr-seg{width:min(100cqw,calc(100cqh*var(--ar)));margin:0 auto}
 .kdr-it{position:absolute;left:50%;bottom:0;transform:translateX(-50%);max-height:calc(100% - 26px);max-width:84%;width:auto;height:auto;object-fit:contain;display:block;filter:drop-shadow(0 6px 7px #3a201666) drop-shadow(0 1px 2px #3a20164d);transition:transform .12s}
 .kdr-it.kdr-wither{filter:grayscale(.6) sepia(.4) drop-shadow(0 4px 5px #3a201655)}
 .kdr-empty{position:absolute;left:50%;bottom:14%;transform:translateX(-50%);white-space:nowrap;padding:3px 12px;border:1px dashed #8a6a3a88;border-radius:8px;font-size:.74rem;font-style:normal;color:#6a4a2a;opacity:.7;background:#fff6e340}
+.kdr-sil{position:absolute;bottom:0;transform:translateX(-50%);max-height:calc(100% - 26px);width:auto;height:auto;object-fit:contain;display:block;pointer-events:none;filter:brightness(0) opacity(.2) drop-shadow(0 0 1px #3a201688)}
+.kdr-glow{filter:var(--k-glow,drop-shadow(0 0 5px #ffd66e)) drop-shadow(0 6px 7px #3a201666);animation:kdrGlow calc(2.4s*var(--pace,1)) ease-in-out infinite}
+@keyframes kdrGlow{0%,100%{opacity:1}50%{opacity:.86}}
+@media (prefers-reduced-motion:reduce){.kdr-glow{animation:none}}
+.kdr-calm .kdr-glow{animation:none}
 .kdr-plank{display:none}
 /* STUB ONLY: while the painted cabinet is not on the CDN yet (img onerror removes it) the compartments show a plain plank so the room stays usable; gone as soon as the picture loads */
 .kdr-seg:not(:has(.kdr-bgi)) .kdr-plank{display:block;position:absolute;left:0;right:0;bottom:-6px;height:10px;border-radius:3px;background:linear-gradient(#b98a52,#8c5f33 70%,#6b4524);box-shadow:0 3px 5px #3a201655}
