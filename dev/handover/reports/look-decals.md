@@ -37,3 +37,14 @@ Looked at: every raw image, then every final on ivory (248,244,230) and red (170
 Contact sheets (ivory + red, ≤1200 px): https://ctm-img.victoria-tntt.workers.dev/img/_review/look-decals/sheet-1.png .. sheet-6.png (delete after the verdict: python3 dev/site/cdn_sync.py --wipe-review look-decals).
 Notes for code: wet/mud/scar/thuydau/hair/moc are translucent by nature (alpha max 0.45-0.95); multiply on the cloth mask. Mud strips are wide (4:1), tile or scale along the hem. Dark hair on a red robe is dim by design.
 Note: uot/bun keys were re-uploaded after the first batch (same keys, cleaner edges on red). Nothing committed to git (images are on the CDN only).
+
+## Add-on (owner OD ~23:48Z "Vẽ miếng nếp nhăn bằng Magnific"): crease decals
+Neutral grey crumpled-silk patches (light ridges, dark valleys), opaque on transparent, AI cut-out + 2 px alpha erosion. Multiply/tint on the cloth mask. Sheet: img/_review/look-decals/sheet-7.png.
+| key | raw creation | cut-out creation | size | looked OK |
+|---|---|---|---|---|
+| fx-crease-1 | lJItH8igv9 | N2HqgYj6D9 | 208x768 | yes (tall ~1:3.7) |
+| fx-crease-2 | SymhbtzUb8 | aFAGekRfSh | 204x768 | yes |
+| fx-crease-3 | huZ2MRwvqL | kspefJP16B | 221x768 | yes |
+| fx-crease-4 | 5jMDhVVKxe | Ifi3Tb5tvE | 214x768 | yes |
+| fx-crease-knot-1 | 8a6ic6MIrU | xSXBu97jfW | 768x753 | yes (radiating gathers round a knot) |
+| fx-crease-hem-1 | Lwo8QIoswO | Symh5ZLUb8 | 768x92 | yes (thin ruffle strip ~8:1, tile or scale) |
