@@ -1,6 +1,7 @@
 # DISPLAY SHELF — GROUP SET BONUS table (history / drama expert, sonnet)
 
-Brief: dev/handover/briefs/display-set-bonus-expert.md. Owner rulings: OD:L1715 (20:45Z idea), OD:L1716 (20:42Z, option 1), OD:L1714 (5 per group), OD:L1327 (history ideas: expert first).
+Brief: dev/handover/briefs/display-set-bonus-expert.md. Owner rulings: OD:L1715 (20:45Z idea), OD:L1716 (20:42Z + 20:47Z, CANON OVERWRITE: SETS 2 / 3 / 5 inside a group, random pieces nothing), OD:L1714 (5 per group), OD:L1327.
+REVISION 2 (rewrite after the owner's 20:47Z refinement; revision 1 'full group of 5' is gone).
 START_CTX ~12 % of window (estimate); rollover at ~37 %, hard ceiling 60 %. Single pass, no rollover needed.
 
 PRIORITY #1 CHECK ('set bonus|đủ bộ|shelf.*(bonus|set)|groupBonus'): OD 2 (L1715, L1716) | ledger 0 | claims 0 | origin/main 0 real hits (only OD:L381 "vẽ đủ bộ", emotion art, unrelated) | review/display-shelf-r3 ae10b963 0 (jshelf.js has no set logic; BAL.shelf.per = 5, groups/it table, wt, mood, see, th). New feature, owner-ordered.
@@ -11,71 +12,91 @@ PRIORITY #1 CHECK ('set bonus|đủ bộ|shelf.*(bonus|set)|groupBonus'): OD 2 (
 2. **Title flat bonuses** (jbal2.js:465-467, jdh.js:114 wrapper): types `sac/danh/sung/duc/tai/tamco` +v "while worn"; Sắc goes through wearBonus, the others are APPLIED on wear and TAKEN BACK exactly on removal. This is the existing route for a lasting non-Sắc point.
 3. **Shelf data** (review/display-shelf-r3 jshelf.js): `BAL.shelf.groups` (:19-21, 12 groups), `BAL.shelf.per = 5` (:67), `shelfIn(p,g)` / `shelfList(p)` (:169-170, slots `g`, `g~1` … `g~4`), `shelfBad(e)` = plant below BAL.shelf.plant.wither (:164), dead pieces `caykho` / `longtrong` (:34, :60), `shelfOver` (vượt phẩm charge), `shelfSeed` for NPCs (:168), `BAL.shelf.th` Thái hậu rebuke (thAff −6, danh −2).
 
-**Build instruction (no new bonus system):** one function `shelfSetOf(p)` → list of groups whose set is whole. Sắc part: add to wearBonus by ONE more wrapper (same pattern as jinv.js:313), never multiplied by the ×1.5 over-rank rule. Danh / Đức / Tài / Tâm cơ part: the jdh flat apply / take-back pattern (item 2), driven by the weekly set check, so a broken set takes its point back exactly. NB for the builder: on origin/main wearBonus(p).danh is only a chip (j8.js:37 uses .sac only) — Danh must go through the apply / take-back route, not the chip.
+**Build instruction (no new bonus system):** one function `shelfSetsOf(p)` → list of whole sets. Sắc part: add to wearBonus by ONE more wrapper (same pattern as jinv.js:313), never multiplied by the ×1.5 over-rank rule. Danh / Đức / Tài / Tâm cơ part: the jdh flat apply / take-back pattern (item 2), driven by the weekly set check, so a broken set takes its point back exactly. NB for the builder: on origin/main wearBonus(p).danh is only a chip (j8.js:37 uses .sac only) — Danh must go through the apply / take-back route, not the chip.
 
-## B. When is a set "whole" (one rule for all 12 groups, player AND NPC)
+## B. Rules (one rule for all 12 groups, player AND NPC)
 
-A group's set is whole when, at the weekly check:
-1. all `BAL.shelf.per` (5) slots hold a piece, five DIFFERENT kinds (two of one kind never count twice);
-2. no piece is dead or withered/ailing (plant `pc < plant.wither`, `caykho`, `longtrong`, a starved bird / fish), tainted (ties to TAINT, a poisoned piece never counts), burnt out (incense `per`), stopped (clock / music box not wound, lamp out of oil);
-3. no piece is under a pending vượt phẩm charge or confiscated, and nothing was given away or sold (a piece leaving the shelf = the slot is empty = broken);
-4. checked once a tuần (no swap-in, swap-out trick); a broken set takes its point back at once and gets it again at the next check after it is whole.
-Imperial-only pieces (imp:1) can never be placed, so they never count.
+1. A SET (bộ) is a named list of 2, 3 or 5 pieces of ONE group, one table `BAL.shelf.set[id] = {g, m:[piece keys], size, st:{stat:+n}, minus:{…}}`. Pieces of one set share a maker / kiln / painter / series / occasion (the "reason" column). A piece belongs to exactly ONE set. Random pieces of a group, even five of them, give NOTHING.
+2. Size sets the bonus: **pair = +1, triple = +2, five = +3** of the set's stat (one equipment piece is +1, jinv.js:258; veil +2). A set of 5 fills the whole group (5 slots, BAL.shelf.per), so a 5-set means giving up the other sets of that group; a pair + a triple fits together. Matched kinds only: two of one kind never count twice.
+3. A set is whole at the weekly check when every member stands on the shelf (any slot of its group) and none is dead / withered (plant `pc < plant.wither`, `caykho`, `longtrong`, starved bird / fish), tainted, burnt out (incense per tuần), stopped (clock, music box not wound; lamp out of oil), under a pending vượt phẩm charge or confiscated, given away, or sold. A broken set gives NOTHING until the member is replaced or cared back (the other sets of the group keep working). Checked once a tuần: swapping pieces in and out gives nothing between checks. Imperial-only pieces never count.
+4. Hard ceiling (balance guard): total set points of one person ≤ `BAL.shelf.setCap` = 6, of which Danh ≤ 3; never Sủng.
+5. Stat route = section A. Sắc via a wearBonus wrapper (never ×1.5); Danh / Đức / Tài / Tâm cơ via the title-style apply / take-back, so a broken set takes its point back exactly. A minus rides the same route (negative stat) or the existing `BAL.shelf.th.thAff` Thái hậu line.
+6. NPCs: same table, same weekly check, in the weekly shelf pass (shelfSeed / arrange, BAL.shelf.npc); stats via `ap(p,{…})`, data only, host side in co-op. NPC plants / birds die on npc.care .8, so NPC sets break and mend by themselves; a show-loving NPC (taste +) is the one who collects whole sets; a rival's set is seen by visitors like any piece.
+7. Piece names marked **NEW** are not in dev/research/display-shelf-items.md: art list in section D. All other members already exist in that list (names from it).
 
-Data gaps for the builder (found while counting kinds):
-- **Chim cá has 4 kinds** (họa mi, vẹt, kim ngư, dế; the dead cage is not a kind) and **Quạt has 4 placeable kinds** (the 5th is the imperial trường phiến). A 5-different-kinds set is impossible there. Recommendation: add ONE new piece each — Chim cá: «Chim bạch yến trong lồng» (rank TT, low care, ties to the cricket/songbird pastime); Quạt: «Quạt xếp ngà chạm» (rank Tần, tượng nha phiến, Suzhou/Guangzhou make).
-- Nhạc khí, Chuông gió, Văn phòng, Đồ Tây dương have exactly 5 kinds; Ngọc ngoạn has exactly 5 placeable kinds (2 are imperial-only). Their full set therefore needs EVERY piece, including the Phi / Quý phi ones, so these sets are rank-gated by nature (fine: a late reward).
+## C. THE TABLE — sets per group (12 groups, 26 sets)
 
-## C. THE TABLE — 12 groups
+Confidence [S] well attested, [~] period practice, [?] drama detail from memory (check the script before quoting).
 
-Plus = ONE lasting point, +1 each (= one equipment piece, jinv.js:258). No set gives Sủng. Minus only where history gives a real reason. Confidence tags as in display-shelf-items.md: [S] well attested, [~] period practice, [?] drama detail from memory (check the script before quoting).
+| Group | Set (bộ) | Members | Size | Bonus | Minus | Reason (same maker / series; history / drama) | Breaks when |
+|---|---|---|---|---|---|---|---|
+| 1 Hoa cảnh | Tam quân tử | Chậu lan, Chậu cúc thu, Mai trắng | 3 | Đức +2 | — | Mai, lan, cúc are three of the four "quân tử"; the gentlewoman's flowers [S]. | any of the three withers / dies |
+| 1 Hoa cảnh | Ngọc đường phú quý | Mẫu đơn, Hải đường | 2 | Danh +1 | — | Hải đường + mẫu đơn = the "ngọc đường phú quý" pun; Dương Quý phi is the peony beauty, hải đường her sleepy look (Lý Bạch; Minh Hoàng) [S]. | either withers |
+| 1 Hoa cảnh | Hoa Tết | Thủy tiên, Chậu Phật thủ | 2 | Sắc +1 | — | Narcissus basins and Phật thủ citron were the two Tết room pieces of Qing palaces [~]. | either withers (thủy tiên 2 tuần, quickest) |
+| 2 Đồ sứ | Lam bạch Cảnh Đức Trấn | Bình thanh hoa, Mai bình men lam | 2 | Danh +1 | — | Both blue-and-white of Jingdezhen: the everyday good ware of a rich house [S]. | either given away / confiscated |
+| 2 Đồ sứ | Ngự diêu | Chén bát bảo cửu đào, Bình phấn thái hoa điểu, Chén đấu thái | 3 | Danh +2 | Chủ vị (Hoàng hậu, Thái hậu) thiện cảm −1 | One imperial kiln, Qing / Ming court ware; kept by emperors [S]. Minus: Niên Canh Nghiêu and his sister fell on charges of over-show and over-rank [S]. | any one taken (the chén đấu thái above Phi is a vượt phẩm charge) |
+| 3 Ngọc ngoạn | Phúc tử | Hồ lô ngọc, Cải thảo phỉ thúy | 2 | Đức +1 | — | Hồ lô (many seeds) and the cabbage with locust and katydid both mean many sons and blessing; the cabbage was in Cẩn phi's dowry [S]. | either given away / lost |
+| 3 Ngọc ngoạn | Như ý cát tường | Ngọc Như Ý, San hô đỏ | 2 | Sắc +1 | Danh −1 (tiếng khoe của) | Như Ý = "as you wish", the sceptre of promotion; red coral tree = tribute treasure of the inner palace [~]. Minus: jade and coral in a hall is the sign historians held against Triệu Hợp Đức's Chiêu Dương điện (Hán thư Ngoại thích truyện) [S]. | either taken |
+| 4 Thư họa | Tay mình | Bức tranh tự vẽ, Bức thư pháp (her handmade) | 2 | Tài +1 | — | A consort's own brush and calligraphy read as a woman of letters [~]. | either given away |
+| 4 Thư họa | Tết liễn | Câu đối đỏ thêu chỉ vàng, Chữ «Phúc» ngự bút | 2 | Danh +1 | — | Couplets and the emperor's New Year «Phúc» (Khang Hy writing it for Thái hậu is the famous case) [S]. | either taken |
+| 4 Thư họa | Danh gia cổ họa | Tranh cổ, NEW Sơn thủy cổ họa, NEW Hoa điểu cổ họa | 3 | Tài +2 | — | Three scrolls of one old painter (a hand, a school): the collector's series, as the Yongzheng-era Thập nhị mỹ nhân albums were a series [S/~]. | any one given away |
+| 5 Hương lô | Đồng khí | Lư hương đồng nhỏ, Lư Tuyên Đức, NEW Hạp hương đồng | 3 | Tâm cơ +2 | — | Xuande bronze burners were the connoisseur's ideal; a burner, a box of incense and its bronze fittings a full set [S/~]. A burner set also knows scents (Chân Hoàn recognises the musk of Hoan Nghi hương [S]); a tainted piece never counts. | any one taken / tainted |
+| 5 Hương lô | Hương cung đình | Lư men pháp lam, Hộp hương hạc đứng | 2 | Sắc +1 | — | Cloisonné burners = imperial workshop; crane burners stood in Thái hậu's rooms [S/~]. | either taken |
+| 6 Chuông gió | Phong linh | Chuông đồng nhỏ (phong linh), Thiết mã mái hiên | 2 | Đức +1 | — | Both are eave bells of palace and temple roofs [S]. | either taken |
+| 6 Chuông gió | Dây chuông | Chuông vỏ sò, Chuông ngọc khánh, Chuông pha lê Tây | 3 | Đức +2 | — | Strung chimes of three materials, hung together under one eave [~]. | any one taken |
+| 7 Bình phong, rèm | Rèm hạ | Rèm trúc, Rèm lụa mỏng | 2 | Tâm cơ +1 | — | Summer blinds of a low consort: seeing without being seen, thùy liêm [~]. | either taken |
+| 7 Bình phong, rèm | Bình phong Tô thêu | Bình phong thêu để bàn, Bình phong khảm xà cừ | 2 | Danh +1 | — | Suzhou embroidery and lacquer-and-pearl were court-workshop gifts [S/~]. | either taken |
+| 8 Đồ Tây dương | Cơ giới Tây | Đồng hồ tự minh, Hộp nhạc Tây dương | 2 | Danh +1 | Thái hậu thiện cảm −1 | Both are Jesuit / tribute clockwork (Ricci's clock to Wanli; Tự minh chung xử) [S]. Minus: Qianlong's 1793 edict to Macartney: the court "never valued ingenious articles" (kỳ kỹ dâm xảo) [S]; an old Thái hậu frowns. | either unwound or taken |
+| 8 Đồ Tây dương | Thiên văn | Kính viễn vọng, Địa cầu nhỏ, NEW Nhật quy nhỏ | 3 | Tài +2 | — | Khang Hy's court of Jesuit astronomers: telescope, globe, sundial [S]; a scholarly, not romantic, set. | any one taken |
+| 9 Quạt | Quạt mùa | Quạt tròn lụa, Quạt gấp trúc vẽ | 2 | Sắc +1 | — | Round silk fan (Ban Tiệp dư's Oán ca hành) and the painted folding fan are the summer pair of a lady [S/~]. | either taken |
+| 9 Quạt | Quạt quý | Quạt đàn hương chạm, Quạt lông công | 2 | Danh +1 | — | Carved sandalwood and peacock feather: the gift fans of high consorts [~]. | either taken (peacock fan below Phi = charge) |
+| 10 Chim cá | Chim lồng | Họa mi, Vẹt biết nói | 2 | Tâm cơ +1 | — | Songbirds and Dương Quý phi's parrot "Tuyết y nữ" that warned of the emperor [S]: the room has ears. | either dies / ailing |
+| 10 Chim cá | Thú vui nhàn | Dế trong lồng, Chậu cá vàng | 2 | Sắc +1 | Danh −1 (mê chơi) | Cricket keeping and goldfish bowls were palace pastimes; Xuande, the "cricket emperor" (Xúc chức thiên tử), is the example of a ruler mocked for it [S/~]. | dế dies (1 tuần, short life) or fish ailing |
+| 11 Nhạc khí | Dây | Đàn cổ Tiêu Vĩ, Tỳ bà lưng ngà, Đàn tranh nhỏ | 3 | Tài +2 | — | Three string instruments: the zither, pipa and zheng of a court consort (Dương Quý phi's pipa) [S/~]. | any one taken |
+| 11 Nhạc khí | Sáo ngọc | Sáo trúc treo giá, Ngọc địch | 2 | Tài +1 | — | Bamboo flute and jade flute: Chân Hoàn's xiao scenes [~]. | either taken |
+| 12 Văn phòng, đèn | Ngũ bảo thư phòng | Nghiên Đoan Khê, Chặn giấy ngọc, Thạch Thái Hồ, NEW Bút lông, NEW Mực Huy | 5 | Tài +3 | — | The scholar's table: ink-stone, paperweight, rock, brush, ink; "văn phòng tứ bảo" plus the literati rock [S]. Fills the whole group. | any one taken |
+| 12 Văn phòng, đèn | Đèn dạ | Cung đăng lụa, Dạ minh châu | 2 | Danh +1 | — | Palace lantern and night-shining pearl = lights of the inner halls (Chiêu Dương điện lore) [S/~]. | lamp out of oil / pearl taken (alternative to the 5-set: the group holds only 5 slots) |
 
-| # | Group | SET PLUS | SET MINUS | Historical / drama reason | What breaks the set |
-|---|---|---|---|---|---|
-| 1 | Hoa cảnh | Đức +1 | none | Lan = quân tử, cúc = ẩn sĩ, mai = chịu rét: a room of living flowers reads as a gentle, steady woman [S]; the Qing court's 9th-month chrysanthemum viewing and the Tết narcissus basins [~]. | Any plant withered or dead (plant clock, jshelf plant.wither / `caykho`); a plant given away. Set returns when the pot is watered back or replaced. |
-| 2 | Đồ sứ | Danh +1 | none | Five good Jingdezhen pieces = a house of means and taste; porcelain was the standing gift and the Qianlong court's pride (phấn thái) [S/~]. | A piece given away, confiscated (vượt phẩm: chén đấu thái below Quý phi), or broken by a quarrel event. |
-| 3 | Ngọc ngoạn | Sắc +1 | Danh −1 | Jade was thought to feed the skin and keep beauty (jade worn and rubbed on the face, the Dương Quý phi tradition) [~]. Minus: a hall of jade and pearl was the very sign historians held against Triệu Hợp Đức's Chiêu Dương điện (Hán thư Ngoại thích truyện) [S]; the Niên family fell partly on over-show [S]: the whole room of jade earns «tiếng khoe của». | Any piece given away / confiscated / lost to a frame-up (planted ngọc tỷ is not a set piece). Both plus and minus go together: broken set = neither. |
-| 4 | Thư họa | Tài +1 | none | A consort who hangs her own brush and good scrolls is read as a woman of letters; the emperor's praise of such consorts (Như Ý truyện / Diên Hy công lược scenes) [~]; the ngự bút «Phúc» is the strongest favour sign [S]. | A scroll given away or taken; tranh tự vẽ taken down. (Biển ngự bút hangs at the door, not a set piece.) |
-| 5 | Hương lô | Sắc +1 | none | Incense scented robe and room: the cheap daily art of a well-kept woman [~]. Drama: Chân Hoàn truyện's Hoan Nghi hương with xạ hương [S] — a tainted burner NEVER counts, so a set can never hide a poisoned piece. | Incense burnt out (hương trầm per tuần), a tainted piece (nghiệm độc positive), a piece given away. Needs a refill each tuần: a real upkeep cost. |
-| 6 | Chuông gió | Đức +1 | none | Eave bells and jade chimes steady the heart; phong linh hung under palace and temple eaves for centuries, khánh = ritual sound [S/~]. | A piece given away or taken; a storm / vandal event may break one (builder's choice). |
-| 7 | Bình phong, rèm | Tâm cơ +1 | none | Screens and curtains are how a palace room sees without being seen (thùy liêm, rèm châu, bình phong: a lady speaks and listens behind them) [~]. | A piece given away or confiscated. (Rèm châu above her rank = charge → breaks it.) |
-| 8 | Đồ Tây dương | Danh +1 | Thái hậu thiện cảm −1 | Clocks, music boxes, telescopes, globes were Jesuit tribute and talk of the court (Matteo Ricci's clock to Wanli; the Qing Tự minh chung xử) [S]. Minus: the old guard called them «kỳ kỹ dâm xảo» and Qianlong's 1793 edict to Macartney says the court «never valued ingenious articles» [S]; a conservative Thái hậu frowns on foreign toys in a consort's room. | A clock / music box not wound (servant forgets), any piece given away. |
-| 9 | Quạt | Sắc +1 | none | A fan is a woman's grace: Ban Tiệp dư's round fan (Oán ca hành) [S], painted folding fans as courtesy gifts [~]. A full cabinet of fans reads as a woman who knows how to carry herself. | A piece given away; a peacock fan above her rank = charge. Needs the 5th piece added (see B). |
-| 10 | Chim cá | Tâm cơ +1 | none | Dương Quý phi's parrot «Tuyết y nữ» that warned of the emperor [S]; songbird and goldfish keeping was palace pastime [~]: the room has eyes and ears. | ANY bird / fish dead or ailing (the empty cage stays); starved 2 tuần (hw 2). The set that costs most care. Needs the 5th piece added (see B). |
-| 11 | Nhạc khí | Tài +1 | none | Instruments on stands = a consort who plays: tỳ bà and khánh were Dương Quý phi's famous skill, Chân Hoàn plays flute and zither [S/~]; music is the oldest way into the emperor's evening. | A piece given away. (Not played = no break; it is not a care item.) |
-| 12 | Văn phòng, đèn | Danh +1 | none | A scholar's desk (nghiên Đoan Khê, chặn giấy, thạch Thái Hồ, cung đăng, dạ minh châu) = thanh danh văn nhã [S]. Counter: Phú Sát Hoàng hậu's frugality praised, so there is NO minus here. | Lamp out of oil (thêm dầu 1×/tuần), a piece given away. Dạ minh châu is Quý phi+, ngự ban only: this set is the latest to complete. |
+Left out on purpose (no set, history gives none): Bonsai tùng, đĩa Long Tuyền, Tư ấn, Gương Tây. Pieces outside a set simply stand as décor with their luxury value only.
 
-Totals if one holds ALL 12: Sắc +3, Danh +3 −1 = +2, Đức +2, Tài +2, Tâm cơ +2, Thái hậu thiện cảm −1. Never Sủng.
+Minus rows (4 of 25, each with a real reason): Ngự diêu (Niên family), Như ý cát tường (Triệu Hợp Đức), Cơ giới Tây (Macartney edict / Thái hậu), Thú vui nhàn (Xuande).
 
-## D. NPC rule
+## D. NEW pieces needed (art list for Foreman C) — 6 pieces
 
-The same table, same check, same numbers for every NPC consort (two-way law). Builder: NPC shelves already seed by rank (shelfSeed, BAL.shelf.npc) and arrange weekly within capF × allowance; the set check runs inside that weekly pass and applies / takes back through `ap(p,{…})` (data only, host side in co-op, like jpromo NPC). NPC plants and birds die on the existing NPC care rate (npc.care .8), so an NPC set breaks and mends on its own; a vain NPC (taste +) is the one who fills a whole group. A rival's set is visible to visitors like any shelf piece (OD 17/11 ~18:30Z) and a Hoàng hậu with Danh set sees a minus-set room the same way the player does.
+| NEW piece | Group | Set | Look (painted, one cut-out, Magnific gpt-2-6, ratio as the other shelf pieces) | Rank / source / price hint |
+|---|---|---|---|---|
+| Sơn thủy cổ họa | Thư họa | Danh gia cổ họa | A hanging scroll, aged silk mounting, a misty mountain-and-water ink landscape, brown seal at the corner | QN; mua / EV; giá ~200 |
+| Hoa điểu cổ họa | Thư họa | Danh gia cổ họa | A hanging scroll in the same aged mounting: a bird on a flowering branch (small), same painter's red seal | QN; mua / EV; giá ~200 |
+| Hạp hương đồng | Hương lô | Đồng khí | A small lidded bronze incense box with a round lid and a little ladle and tongs laid beside it, warm Xuande bronze colour | TT; mua; giá ~100 |
+| Nhật quy nhỏ | Đồ Tây dương | Thiên văn | A small brass sundial / gnomon plate on a wooden stand, engraved hour ring, Jesuit instrument style | Phi; ngự ban; giá ~240 |
+| Bút lông | Văn phòng, đèn | Ngũ bảo thư phòng | A bamboo-handled writing brush on a small jade brush rest, soft white-and-dark hairs | TT; mua; giá ~80 |
+| Mực Huy | Văn phòng, đèn | Ngũ bảo thư phòng | Two black ink sticks (Huy mực) with gold characters on one, in a little lacquer tray | TT; mua; giá ~100 |
 
-## E. Balance note — total of all 12 sets vs the Hoàng hậu band (estimate, NOT measured)
+Each needs a `BAL.shelf.it` entry (group, rank, gr, pr, src) and an IT "Bày biện" item; nothing else new.
 
-- Numbers: Hoàng hậu needs Sủng 85 and Danh 78 (j1.js:6-8). Steps between ranks need Danh +8 … +13. The target band is Hoàng hậu ≈ 20–35 % (HANDOVER:38; measured ≈32 %, HANDOFF_MAIN:14).
-- Sủng, the binding gate, is untouched (no set grants it). Danh: all 12 sets together = net +2 (and that is impossible in practice: 60 pieces against an allowance of 36 + 16 × rank = 148 at Hoàng hậu, with the falling shares wt [1, .5, .3, .2, .1] ≈ 2.1 × the best piece per group; a realistic Phi (allowance 100) fits 1–2 sets, i.e. +1 to +2 points of anything).
-- One equipment piece is worth +1; a realistic player ends with 1–3 set points, about the weight of 1–3 extra equipment pieces. Versus a Danh rank step of 8–13 this is ≈ 10–25 % of ONE step spread over a whole life.
-- Estimate: Hoàng hậu reach moves by less than 1 point of the ≈32 % (well inside the paired-smoke standard error: about ±9 at n = 30, ±6 at n = 60). Minus side: −1 Danh (jade) and −1 Thái hậu thiện cảm (Tây dương) cost about as much as they give, so the net is not positive on average.
-- Guards if the smoke disagrees: (1) drop every Danh plus to Đức / Tài, (2) per-life cap of 3 set points (BAL.shelf.setCap), (3) sets count only from Quý nhân up. Smoke as ordered: paired ≥ 60 lives vs main, report Hoàng hậu share and early death.
-- BAL keys proposed (one table, in jshelf.js beside BAL.shelf): `BAL.shelf.set = {g:{hoa:{duc:1}, su:{danh:1}, ngoc:{sac:1,danh:-1}, thuhoa:{tai:1}, huong:{sac:1}, chuong:{duc:1}, phong:{tamco:1}, tay:{danh:1,thAff:-1}, quat:{sac:1}, chim:{tamco:1}, nhac:{tai:1}, van:{danh:1}}, cap:3}` — all sizes small, tunable; no % anywhere.
+## E. Balance note — total of all sets vs the Hoàng hậu band (estimate, NOT measured)
+
+- Hoàng hậu needs Sủng 85 and Danh 78 (j1.js:6-8); Danh steps between ranks +8 … +13; target band Hoàng hậu ≈ 20–35 % (HANDOVER:38; measured ≈ 32 %, HANDOFF_MAIN:14).
+- Sủng, the binding gate, is untouched. All 26 sets together would give Danh about +9 (minus about −2), but the ceiling `setCap` = 6 points per person (Danh ≤ 3) makes that moot; and allowance (36 + 16 × rank, 148 at Hoàng hậu) with the falling shares wt (≈ 2.1 × the best piece per group) lets a Phi (allowance 100) hold perhaps 3–5 pieces' worth of sets, i.e. 1–2 sets, +1 to +3 points.
+- One equipment piece is +1; a realistic player ends with 1–6 set points = 1–6 extra equipment pieces. Versus a Danh step of 8–13, set Danh ≤ 3 is ≤ about a quarter of ONE step over a whole life.
+- Estimate: Hoàng hậu reach moves by about 1 point of ≈ 32 % at the ceiling, probably less (paired-smoke standard error ≈ ±9 at n = 30, ±6 at n = 60, so the shift is below what the smoke can see). Minus rows (4) cost Danh −1 / thiện cảm −1 each, so the average net is smaller than the plus side alone.
+- Guards if the smoke disagrees: lower `setCap` to 4, turn Danh pluses into Đức / Tài, or sets count only from Quý nhân up. Smoke as ordered: paired ≥ 60 lives vs main; report Hoàng hậu share and early death.
+- BAL keys: `BAL.shelf.set = {cap:6, capDanh:3, size:{2:1,3:2,5:3}, s:{<id>:{g,m:[…],st:{…},minus:{…}}}}`, one table in jshelf.js beside BAL.shelf; no % anywhere.
 
 ## F. Player-visible words (cổ trang, no %, VANPHONG)
 
-Names: «Đủ bộ Hoa cảnh», «Đủ bộ Đồ sứ», «Đủ bộ Ngọc ngoạn», «Đủ bộ Thư họa», «Đủ bộ Hương lô», «Đủ bộ Chuông gió», «Đủ bộ Bình phong, rèm», «Đủ bộ Đồ Tây dương», «Đủ bộ Quạt», «Đủ bộ Chim cá», «Đủ bộ Nhạc khí», «Đủ bộ Văn phòng, đèn».
-Lines: «Đủ bộ Hoa cảnh: Đức +1.» · «Đủ bộ Ngọc ngoạn: Sắc +1, nhưng tiếng khoe của: Danh −1.» · «Đủ bộ Đồ Tây dương: Danh +1, nhưng Thái hậu không ưa đồ ngoại bang.» · broken: «Bộ Hoa cảnh khuyết: chậu lan đã héo.» · mended: «Bộ Hoa cảnh đủ lại.» Hoa and Chim cá broken lines name the piece that failed, so she knows what to fix.
+Set name shown as «Bộ <tên>»: «Bộ Tam quân tử: Đức +2.» · «Bộ Ngự diêu: Danh +2, nhưng chủ vị không ưa khoe của.» · «Bộ Cơ giới Tây: Danh +1, nhưng Thái hậu không ưa đồ ngoại bang.» · on the shelf, an unfinished set shows «Bộ Tam quân tử: còn thiếu Mai trắng» (so she knows what to collect; random pieces show nothing) · broken: «Bộ Tam quân tử khuyết: chậu lan đã héo.» · mended: «Bộ Tam quân tử đủ lại.» Plants / birds name the piece that failed.
 
 ## G. Short Vietnamese summary for the owner (ONE yes / no)
 
 ```
-Sếp ơi, bảng "đủ bộ" cho Nơi trưng bày (12 nhóm, mỗi nhóm đủ 5 món KHÁC loại):
-- Mỗi bộ cộng đúng 1 điểm nhỏ, bằng một món trang bị. Không bộ nào cộng Sủng.
-- Hoa cảnh Đức+1 · Đồ sứ Danh+1 · Ngọc ngoạn Sắc+1 · Thư họa Tài+1 · Hương lô Sắc+1 · Chuông gió Đức+1
-- Bình phong Tâm cơ+1 · Đồ Tây dương Danh+1 · Quạt Sắc+1 · Chim cá Tâm cơ+1 · Nhạc khí Tài+1 · Văn phòng Danh+1
-- Có trừ (vì sử): Ngọc ngoạn Danh−1 (hầu Triệu Hợp Đức bị chê khoe của); Đồ Tây dương Thái hậu bớt ưa 1 (kỳ kỹ dâm xảo).
-- Bộ bị khuyết khi: cây héo/chết, chim cá chết, hương cháy hết, đèn cạn dầu, món bị tặng đi hay bị tịch thu; thế lại món là đủ bộ lại.
-- NPC dùng y bảng này; cây chim của họ cũng héo, bộ của họ cũng khuyết.
-- Em thêm 2 món mới: Chim bạch yến, Quạt xếp ngà (Chim cá và Quạt mới có 4 loại, thiếu một).
-- Dùng lại đường cộng điểm trang bị có sẵn; em ước chừng dải Hoàng hậu lệch chưa tới 1 điểm, sẽ đo bằng smoke ≥ 60 kiếp.
+Sếp ơi, bảng "bộ" cho Nơi trưng bày: 12 nhóm, 26 bộ (cặp, ba, năm món cùng một thợ/một lò/một họa sĩ).
+- Cặp cộng 1, bộ ba cộng 2, bộ năm cộng 3 điểm nhỏ (Sắc, Danh, Đức, Tài hay Tâm cơ). Không bộ nào cộng Sủng.
+- Bày lẫn lộn món rời thì không được gì. Phải gom đúng bộ: ví dụ Tam quân tử (lan, cúc, mai), Ngự diêu (ba món sứ cung đình).
+- 4 bộ có điểm trừ vì sử: Ngự diêu (nhà họ Niên bị tội khoe của), Như ý cát tường (Triệu Hợp Đức), Cơ giới Tây (Thái hậu ghét đồ ngoại bang), Thú vui nhàn (vua Tuyên Đức mê dế).
+- Cây héo, chim cá chết, hương cháy hết, đèn cạn dầu hay món bị tặng đi: bộ đó khuyết cho tới khi thế lại.
+- NPC dùng y bảng này, bộ của họ cũng khuyết khi cây chim chết.
+- Cần vẽ thêm 6 món mới: 2 tranh cổ, hạp hương đồng, nhật quy, bút lông, mực Huy (có mô tả sẵn).
+- Mỗi người cộng tối đa 6 điểm bộ (Danh tối đa 3); em ước chừng dải Hoàng hậu lệch khoảng 1 điểm, sẽ đo bằng smoke ≥ 60 kiếp.
 Sếp duyệt: CÓ hay KHÔNG?
 ```
