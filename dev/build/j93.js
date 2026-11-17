@@ -157,7 +157,7 @@ function kitCalendar(el,o){if(!el)return null;o=o||{};const d=document.createEle
  el.appendChild(d);return d}
 
 /* ================= 6 CÓ THAI / SINH CON / CHẾT ================= */
-function kitBloom(o){o=o||{};const pet=Array.from({length:12},(_,i)=>`<img class="kmpet" src="${KM_DIR}mo-petal-peach.webp" alt="" style="--a:${i*30}deg;--d:${(.55+(i%4)*.08)*BAL.pace}s;--v:${110+(i*29)%80}px">`).join("");
+function kitBloom(o){o=o||{};const pet=Array.from({length:12},(_,i)=>`<img class="kmpet" src="${KM_DIR}mo-petal-peach.webp" alt="" style="--a:${i*30}deg;--d:${(.55+(i%4)*.08)*BAL.pace}s;--v:${110+(i*29)%80}px;width:${Math.round(15*(typeof kfUnit==="function"?kfUnit():1))}px">`).join("");
  const html=`<div class="kmbloom"><div class="kmglow"></div><img class="kmpeony" src="${KM_DIR}mo-peony.webp" alt="" draggable="false">${pet}<div class="kmbcap"><b>${kmEsc(o.title||"")}</b>${o.sub?`<small>${kmEsc(o.sub)}</small>`:""}</div></div>`;
  kmPush(done=>kmStage("km-bloom",html,{dur:1800,hold:1600,onEnd:done}))}
 function kitInk(o){o=o||{};const html=`<div class="kmink"><img class="kmblot b1" src="${KM_DIR}mo-ink.webp" alt="" draggable="false"><img class="kmblot b2" src="${KM_DIR}mo-ink.webp" alt="" draggable="false"><div class="kmicap"><b>${kmEsc(o.title||"Hồng nhan bạc mệnh")}</b><small>Mở Sổ luân hồi</small></div></div>`;

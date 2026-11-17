@@ -139,7 +139,7 @@ function confTick(p){const c=p.dhConf;if(!c)return;if(!c.open){if(confOpenOK(p))
  if(p.out||(p.confined||0)>0)return;const st=confState(p);if(!st.done)return;
  if(p===S){if((c.ask|0)>wk()||Q.length)return;c.ask=wk()+3;pushDil(mkP("dhatone"),"Dâng biểu sám hối")}else window.dhRestore(p)}
 /* ---------- 5. LOSS / THEFT (jlost case for that piece) ---------- */
-let FORCE=null;
+let FORCE=null;(window.THIN_REG=window.THIN_REG||[]).push(["FORCE",()=>FORCE,v=>{FORCE=v}]);/* per-player state for the co-op host (jcoopthin TH.reg) */
 (function(){if(typeof loOk!=="function")return;const o0=loOk;loOk=function(e){if(FORCE)return e===FORCE;if(isDh(e))return false;return o0.apply(this,arguments)}})();
 function dhLose(p,e){if(typeof loLose!=="function"||!p||!e)return null;let c=null;FORCE=e;const cd=p.loCd;
  const q0=Q.length;try{const cause=Object.assign({},typeof loCause==="function"?loCause(p):{cause:"mis"});if(cause.cause==="riv"&&roll(LO.keepP))cause.keep=1;c=loLose(p,cause)}finally{FORCE=null}
