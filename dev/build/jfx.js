@@ -197,7 +197,7 @@ function kfSeCfg(){const m=(typeof S!=="undefined"&&S&&S.month)||1,night=typeof 
  if(m>=4&&m<=6&&night)return{lay:"se",id:"sunn",k:["orb"],cap:0,off:1,float:1,vx:[0,0],vy:[0,0],sc:[1,1],a0:0,life:[60,60],night};  /* no sunlight at night: the night room shows fireflies (weather layer) only */
  if(m>=4&&m<=6)return{lay:"se",id:"sun",k:KF_SEASON(),cap:36,float:1,vx:[-.25,.25],vy:[-.55,-.15],sway:.5,sc:[1.1,2],a0:.95,life:[260,420],tint:0xffe08a,night};
  return{lay:"se",id:"se",k:KF_SEASON(),cap:8,vx:[-.35,.25],vy:[.4,.8],sway:.9,spin:.03,sc:[.5,.8],a0:.7,fall:1,night:typeof S!=="undefined"&&S&&(S.buoi||0)===B4L}}
-function kfStageRect(){try{const st=document.getElementById("stage");if(!st)return null;const r=st.getBoundingClientRect();return r.width>40&&r.height>40&&getComputedStyle(st).visibility!=="hidden"?{x:r.left,y:r.top,w:r.width,h:r.height}:null}catch(e){return null}}
+function kfStageRect(){try{/* KIT §85.7 (owner 17/11 12:25Z): on the Dư đồ the room weather (same layer, same kinds, same caps) plays over the map area */const mp=document.querySelector(".game.maptab .mapsc");if(mp){const r=mp.getBoundingClientRect();if(r.width>40&&r.height>40)return{x:r.left,y:r.top,w:r.width,h:r.height}}const st=document.getElementById("stage");if(!st)return null;const r=st.getBoundingClientRect();return r.width>40&&r.height>40&&getComputedStyle(st).visibility!=="hidden"?{x:r.left,y:r.top,w:r.width,h:r.height}:null}catch(e){return null}}
 function kfWxSync(){const r=kfStageRect();KFX.sr=r;const P=window.PIXI;if(!P||!KFX.app)return;
  if(!KFX.wroot){KFX.wroot=new P.Container();KFX.wmask=new P.Sprite(P.Texture.WHITE);KFX.wroot.mask=KFX.wmask;KFX.app.stage.addChild(KFX.wroot,KFX.wmask)}  /* clip = a plain white rectangle sprite, not art */
  if(r){KFX.wmask.x=r.x;KFX.wmask.y=r.y;KFX.wmask.width=r.w;KFX.wmask.height=r.h}else{KFX.wmask.width=0;KFX.wmask.height=0}}
@@ -229,7 +229,7 @@ let kfAmbT=0;
 function kfAmbLive(lay){let n=0;for(const s of KFX.parts)if(s.v&&s.v.amb&&s.v.lay===lay&&s.v.fade!=="out")n++;return n}
 /* night decoration on the stage (moved from j11's code-drawn dots): warm lantern glows + stars, PAINTED orb / spark sprites */
 function kfDecoClear(){for(const s of KFX.parts)if(s.v&&s.v.deco)s.v.life=0}
-function kfDeco(){let key="";try{if(typeof S!=="undefined"&&S&&(S.buoi||0)===B4L&&KFX.sr){const P=placeOf(S.place);key=P.sc+"|"+(["vuon","lc","home"].includes(P.sc)?1:0)}}catch(e){}
+function kfDeco(){let key="";try{if(typeof S!=="undefined"&&S&&(S.buoi||0)===B4L&&KFX.sr&&!document.querySelector(".game.maptab")){const P=placeOf(S.place);key=P.sc+"|"+(["vuon","lc","home"].includes(P.sc)?1:0)}}catch(e){}
  if(KFX.decoK===key)return;KFX.decoK=key;kfDecoClear();if(!key)return;const out=key.endsWith("|1");
  kfkLoad(["orb","spark"]).then(()=>{if(KFX.decoK!==key)return;[[.12,.3],[.88,.3],[.3,.18],[.7,.18]].forEach(([x,y],i)=>{const s=kfSp("orb",0,0,{life:1e9,max:1e9,a0:.5,fade:"none",deco:1,fx:x,fy:y,lay:"wx"},0xffb050,2.2);if(s&&s.v&&s.v.max)KFX.wroot&&KFX.wroot.addChild(s)});
   if(out)for(let i=0;i<14;i++){const s=kfSp("spark",0,0,{life:1e9,max:1e9,a0:.8,fade:"none",deco:1,fx:Math.random(),fy:Math.random()*.25,lay:"wx"},null,.3);if(s&&s.v&&s.v.max)KFX.wroot&&KFX.wroot.addChild(s)}kfWake()}).catch(()=>{})}

@@ -22,9 +22,21 @@ html body .game .mapv.kside.kleather>.maptools{position:absolute!important;top:6
 html body .game .mapv.kside.kleather>.maptools>*{pointer-events:auto}
 html body .game .mapv.kside.kleather>.maptools:not(:has(.kpm-back))::before{filter:drop-shadow(0 1px 2px #3a2a1e88)}
 html body .game .mapv.kside.kleather>.maptools .mz{box-shadow:0 1px 3px #3a2a1e66}
+/* §85.7 FIT-ALL + SOFT EDGES + FLUSH PAN (owner 17/11 ~12:12Z "Dư đồ zoom gần quá", ~12:25Z "loang ở mép … 2 mép trái phải", ~12:35Z "mờ 2 mép trên dưới … mỏng thôi"):
+   KIT_MAPV values (CSS vars, one place): --kmv-fl/--kmv-fr = space the left rail / right card column take (the map's pan range is padded by them, so its edge lands FLUSH against the frames and nothing hides under them),
+   --kmv-ft = space of the tools row on top, --kmv-fade-x = WIDE left/right soft edge, --kmv-fade-y = THIN top/bottom soft edge (painted map edge dissolves into the paper; labels stay on top).
+   mapFit (j38) reads the margins below: default zoom = whole palace inside the free area; the place labels shrink (--mls) so they do not touch. */
+html body .game .mapv.kside.kleather{--kmv-ov:0px;--kmv-fl:calc(56px + var(--kmv-ov));--kmv-fr:calc(var(--kgrw,150px) + 8px + var(--kmv-ov));--kmv-ft:46px;--kmv-fb:0px;--kmv-fade-x:clamp(44px,9%,120px);--kmv-fade-y:12px}
+html body .game .mapv.kside.kleather:not(.kpmv)>.mapsc{display:flex!important;justify-content:safe center;align-items:safe center;overflow:auto!important;scrollbar-width:none;background:#e6dabf}
+html body .game .mapv.kside.kleather:not(.kpmv)>.mapsc::-webkit-scrollbar{display:none}
+html body .game .mapv.kside.kleather>.mapsc>.mapw{margin:var(--kmv-ft) var(--kmv-fr) var(--kmv-fb) var(--kmv-fl)!important;flex:none!important;min-width:0!important;position:relative}
+html body .game .mapv.kpmv.kside.kleather{--kmv-fb:54px}
+html body .game .mapv.kpmv.kside.kleather>.mapsc{background:#e6dabf!important}
+html body .game .mapv.kside.kleather>.mapsc .mapimg{-webkit-mask-image:linear-gradient(90deg,#0000,#000 var(--kmv-fade-x),#000 calc(100% - var(--kmv-fade-x)),#0000),linear-gradient(#0000,#000 var(--kmv-fade-y),#000 calc(100% - var(--kmv-fade-y)),#0000);-webkit-mask-composite:source-in;mask-image:linear-gradient(90deg,#0000,#000 var(--kmv-fade-x),#000 calc(100% - var(--kmv-fade-x)),#0000),linear-gradient(#0000,#000 var(--kmv-fade-y),#000 calc(100% - var(--kmv-fade-y)),#0000);mask-composite:intersect}
+.mapw .mspot .mlab,.mapw .mspot .mmeta{zoom:var(--mls,1)}
 /* §85.6 courtyard level (.kpmv): the painting COVERS the whole page area (pan sideways when the page is narrower than the painting), the hall rows sit on it at the bottom */
 html body .game .mapv.kpmv.kside.kleather{display:block!important;height:100%!important}
-html body .game .mapv.kpmv.kside.kleather>.mapsc{overflow:auto!important;display:flex!important;justify-content:safe center;align-items:center;scrollbar-width:none}
+html body .game .mapv.kpmv.kside.kleather>.mapsc{overflow:auto!important;display:flex!important;justify-content:safe center;align-items:safe center;scrollbar-width:none}
 html body .game .mapv.kpmv.kside.kleather>.mapsc::-webkit-scrollbar{display:none}
 html body .game .mapv.kpmv.kside.kleather>.mapsc>.mapw{width:max(100cqw,calc(100cqh * 1.76))!important}
 html body .game .mapv.kpmv.kside.kleather>.kpm-list{position:absolute;left:6px;right:6px;bottom:6px;z-index:8;padding:0;margin:0!important;grid-template-columns:repeat(3,minmax(0,1fr))}
