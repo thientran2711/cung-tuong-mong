@@ -549,7 +549,7 @@ document.getElementById("kgbox-res").innerHTML = kitGameResult({
   rivals:[{who:v, score:80, sub:"tài nghệ 45 + chuẩn bị 8 + màn thi 27"},{who:S, score:75}],
   gains:[["Sủng",3]], losses:[["Sức",-10]]});
 ```
-Header seal TÀI NGHỆ; "Cách chơi" line; HUD cells (`.kgc`); game box `.kgbox`; result rows (true numbers; "Phần chơi", never "điểm"), standings "Bảng định thứ" with face + rank title (the score `.kgrow>b` never wraps), Được/Mất chips.
+Header seal TÀI NGHỆ; "Cách chơi" line; HUD cells (`.kgc`, kept in the DOM but HIDDEN: the PHẦN/HỒI/CÒN chip row is never shown, owner 17/11; engines still call `kitGameSet`); a game with a real time limit (HUD time value "N giây") shows the existing kit clock chip `kitCoopClock` (§69.4) at the right of the title line via `kitGameClock` (hidden for "nhìn kỹ", "–", "N tên", "đã hết", "không hạn"); the Điểm trang "Hôm nay" agenda block is removed; game box `.kgbox`; result rows (true numbers; "Phần chơi", never "điểm"), standings "Bảng định thứ" with face + rank title (the score `.kgrow>b` never wraps), Được/Mất chips.
 In-game pieces keep the existing lesson-game classes (`.lanes`, `.lbtns`, `.simon`, `.memo`, `.goban`, `.mgopts`, p1.html) which are part of the kit;
 game buttons use `.kgbtn` (or `.btn` inside `.kgbox`), `.on` = selected. The lesson overlay `#ov .mg` wears the same frame.
 
