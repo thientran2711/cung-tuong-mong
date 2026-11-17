@@ -271,6 +271,22 @@ function wkeEntry(html,people,p,toks){const mine=toks.filter(t=>t.who===p);let c
     still worked out (the relation table's change = what the week did) but never printed in the entry. */
  void chips;
  return `${cause?cause+(w0.length?", ":""):""}${w0.length?w0.join("; "):""}${cause||w0.length?".":""}`.replace(/\.{2,}/g,".").replace(/([”"])\./g,"$1").replace(/^\s*,\s*/,"").trim()}
+/* review tuanluc-sync-r1, whole family of OD:L1458(3) (owner 17/11 ~03:15Z: Tuần lục = the literary line only, Được/Mất numbers live in the
+   Sổ ghi). The label list in litNo misses most number shapes the game writes (maid "lòng -5", "Kho lúa -8", "(tâm trạng −6)", "cảm kích -3",
+   kitRelDelta chips, "Vì sao: … → oán +1", the stipend "+48 bạc … = +41 bạc"). Generic pass: a delta chip becomes its text, the "Vì sao" cause
+   note goes, a bracket holding a number goes, then every clause (split at , ; : · — = and sentence ends, outside brackets) that still holds a
+   signed number or an "a → b" pair goes. Tags are kept (only text is cut), so the markup stays balanced. Scan: dev/test/tuanluc-nochips.js. */
+const KBK_NUM=/(^|[\s(>])[+\-−]\d|\d\s*(?:→|->)\s*-?\d/;
+function kbkNoNum(h){try{h=String(h||"");if(!KBK_NUM.test(h.replace(/<[^>]+>/g," ")))return h;
+  const T=[];let x=h.replace(/<span class="past kwl">\s*Vì sao:[\s\S]*?<\/span>\.?/g,"").replace(/<[^>]+>/g,m=>{T.push(m);return "\u0001"+(T.length-1)+"\u0002"});
+  const txt=c=>c.replace(/\u0001\d+\u0002/g," ");
+  x=x.replace(/\s*\(([^()]*)\)/g,(m,a)=>KBK_NUM.test(" "+txt(a))?"":m);
+  const P=[];let cur="",dep=0;for(let i=0;i<x.length;i++){const c=x[i];if(c==="(")dep++;else if(c===")"&&dep)dep--;
+   const sep=!dep&&(/[,;:·—=]/.test(c)||(c==="."&&(i+1>=x.length||/[\s\u0001]/.test(x[i+1]))));if(sep){P.push(cur,c);cur=""}else cur+=c}P.push(cur);
+  let out="";for(let i=0;i<P.length;i+=2){const c=P[i],sp=P[i+1]||"";if(KBK_NUM.test(" "+txt(c))){out+=(c.match(/\u0001\d+\u0002/g)||[]).join("");if(sp===".")out=out.replace(/\s*[,;:·—=]\s*((?:\u0001\d+\u0002)*)$/,"$1")+".";continue}out+=c+sp}
+  out=out.replace(/\u0001(\d+)\u0002/g,(m,n)=>T[+n]).replace(/<(b|i|span|em|strong)(?:\s[^>]*)?>\s*<\/\1>/g,"")
+   .replace(/^\s*[,;:·—=.]+\s*/,"").replace(/\s*[,;:·—=]+\s*((?:<[^>]+>\s*)*)(?=\.|$)/g,"$1").replace(/([.;:,·])\s*[,;:·=.]+/g,"$1").replace(/\s+([.,;:])/g,"$1").replace(/\(\s*\)/g,"").replace(/\s{2,}/g," ").trim();
+  return kpPlain(out).replace(/[\s.:;,·—=-]+/g,"")?out:""}catch(e){return h}}
 function wkBookData(){const s=S.wkSnap||wkSnap();const n=Math.max(0,Math.min(S.logs.length,(S.logSeq||0)-(s.seq||0)));
  const raw=S.logs.slice(0,n).slice().reverse();const people=kpPeople();const SKIPRE=/^(Xin xăm|Gieo lại|Đến Tẩm cung của ngươi)/;
  const TH=S.thO||{kind:"th"};let pay="";const U=[];let last=null;
@@ -322,7 +338,7 @@ function wkBookData(){const s=S.wkSnap||wkSnap();const n=Math.max(0,Math.min(S.l
  /* last pass (OD:L1458(3)): no number left in a Tuần lục line, whatever path built it; a line that was only numbers goes */
  const litNo=h=>{let s=String(h).replace(/\b(Thái hậu|Hoàng hậu) → (?:ta|ngươi):?\s*/g,"$1 ").replace(/(Sủng|Danh|Sức|Bạc|Đức|Tai mắt|Ân tình|Tài|Sắc|Tâm cơ|thiện cảm|ghen|oán ta|oán ngươi|quý ngươi|quý ta|Chủ tín|Công lao|Hoàng thượng để ý)\s*(?:-?\d+\s*(?:→|->)\s*-?\d+|[+\-−]\d+)(?:\s*\([+\-−]?\d+\))?((?:<\/[^>]+>)*)(?:\s*\([^)]*\))?/g,"$2");/* successor #3: the cause in brackets goes with its number even after the number's closing tag ("Danh 30→28</span> (bị chê trách)") */
   s=s.replace(/(\s*[,;·]\s*)+(?=[.<]|$)/g,"").replace(/([.:;])\s*[,;·]\s*/g,"$1 ").replace(/,\s*,/g,",").replace(/\s+([.,;:])/g,"$1").replace(/(Thái hậu|Hoàng hậu)\s*([.,;]|$)/g,"$2").replace(/\s{2,}/g," ").replace(/<span[^>]*><\/span>/g,"").replace(/\s*—\s*(?=[.<]|$)/g,"").replace(/:\s*(?=\.|$)/g,"").replace(/\.{2,}/g,".").trim();
-  return kpPlain(s).replace(/[\s.:;,·—-]+/g,"")?s:""};
+  s=kbkNoNum(s);return kpPlain(s).replace(/[\s.:;,·—-]+/g,"")?s:""};
  const dedup=L=>{L=L.map(litNo).filter(Boolean);const m=new Map();for(const t of L){const k=kpPlain(t);if(m.has(k))m.get(k).n++;else m.set(k,{t,n:1})}return [...m.values()].map(x=>x.n>1&&!noN(x.t)?{text:x.t,chips:[[`${x.n} lần`,"n"]]}:{text:x.t})};
  const D=[["Sủng",S.sung-s.sung],["Danh",S.danh-s.danh],["Sức",S.suc-s.suc],["Bạc",S.bac-s.bac]];
  if(s.duc!=null)D.push(["Đức",S.duc-s.duc]);if(s.mat!=null)D.push(["Tai mắt",S.mat-s.mat]);if(s.an!=null)D.push(["Ân tình",(S.an||0)-s.an]);
@@ -466,9 +482,10 @@ function wkBookPages(){const d=wkBookData();const date=kitDate(S.month,S.year,S.
  const P=[{kind:"cover",title:"Tuần lục",sub:date,note:sea}];
  const b=[];b.push({rows:[["Ngày",date,"t"],["Tiết",sea,"n"]]});
  if(S.lot){const bad=LVB[S.lot.lv]<0||(S.lot.dom==="Hung"&&S.lot.lv>=3),good=LVB[S.lot.lv]>0;b.push({h:kitGloss("Quẻ tuần")});b.push({rows:[["Quẻ",`<span class="ef t">${LV[S.lot.lv]} · ${S.lot.dom}</span>`],["Lời quẻ",(LOTS[S.lot.i]||[])[2]||"","n"],["Tuần này",String(lotEffect(S.lot)).replace(/\s*Gồm:.*$/,"").replace(/^Tuần này:\s*/,"")/* owner 17:16Z: short, no list of acts */,bad?"r":good?"g":"n"]]})}
- b.push({h:"Ngươi tuần qua"});b.push({chips:d.D.filter(([,v])=>v)});
- const mine=[];if(d.rank)mine.push({text:`<b class="g">${d.rank}</b>`,who:S});if(d.kids>0)mine.push({text:`Thêm ${d.kids} con.`,who:S});if(mine.length)b.push({facts:mine});
- b.push({h:kitGloss("Bổng lộc")});b.push(d.pay?{rows:[["Đã lĩnh",kpChipify(d.pay),"t"]]}:{rows:[["Kỳ tới",`còn ${3-(S.tuan||0)} tuần`,"n"]]});
+ /* OD:L1458(3) (owner 17/11 ~03:15Z): Tuần lục = the literary line only; the week's Được/Mất numbers (Sủng −8, Danh −8…) live in the Sổ ghi.
+    No number chips here (review tuanluc-sync-r1); the heading stays only for her own rank / children lines. d.D is still worked out for other readers. */
+ const mine=[];if(d.rank)mine.push({text:`<b class="g">${d.rank}</b>`,who:S});if(d.kids>0)mine.push({text:`Thêm ${d.kids} con.`,who:S});if(mine.length){b.push({h:"Ngươi tuần qua"});b.push({facts:mine})}
+ b.push({h:kitGloss("Bổng lộc")});b.push(d.pay?{rows:[["Đã lĩnh",kbkNoNum(kpChipify(d.pay))||"Bổng lộc tháng này","t"]]}:{rows:[["Kỳ tới",`còn ${3-(S.tuan||0)} tuần`,"n"]]});
  if(d.persons.length){b.push({h:"Sổ này ghi"});b.push(`<div class="kbk-toc">${d.persons.map(p=>`<span class="kbk-tc">${kitFaceH(p.who,"xs")}${kitName(p.who,{cap:true})}</span>`).join("")}</div>`)}
  if(d.me.length){b.push({h:"Việc của ngươi"});b.push({facts:kbkArt(d.me.map(f=>Object.assign(f,{who:S})),"me")})}
  if(!d.me.length&&!d.persons.length&&!d.world.length&&!mine.length)b.push({facts:[{text:"Một tuần yên ả.",kind:"world",auto:false}]});
