@@ -156,7 +156,7 @@ let K61RAW=false;(function(){const d0=directActs;directActs=function(){K61RAW=tr
   return [g].concat(A.map(a=>Object.assign({},a,{lock:true,t:K61WHY})))}}catch(x){}return A}})();
 (function(){const t0=talk;talk=function(oi){try{if(S&&popIdx!=null&&!S.dead&&!Q.length){const p=curPeople()[popIdx];const a=p&&talkOpts(p)[oi];
   if(a&&(a.k61==="greet"||a.k61==="name")){const e=k61Ent(a.kke);if(e&&can(1)){spend(1);const k=k61Kind(e);
-   if(a.k61==="greet"){k61Meet(e,"",1);popMsg=`Ngươi đã thấy mặt ${k61Desc(e)}; chưa biết tên.`}
+   if(a.k61==="greet"){/* jgreet: ONE greeting name rule (rank + nết), the line says why */const G=greetName(S,e);popMsg=G.line;log(G.line)}
    else{k61Meet(e,k==="emp"?"Nam nhân áo vàng chính là Hoàng thượng; ngươi vội quỳ xuống.":"Người ấy xưng danh.",2);popMsg=`<span class="g">Ngươi đã biết: đó là ${k61Title(e)}.</span>`}render()}return}
   const e=p&&k61VisEnt(p);const st0=e?k61St(e):3;const r=t0.apply(this,arguments);if(e&&st0===2&&S.visit&&(S.visit.tk||{})[popIdx])k61Know(e,"Trò chuyện thêm, ngươi hiểu người ấy hơn.",false,3);return r}}catch(x){console.error(x)}return t0.apply(this,arguments)}})();
 /* asking a servant (true answers only) */
@@ -213,7 +213,7 @@ function k61Backfill(){try{if(!S||!S.known||S.k61bf)return;S.k61bf=1;const T=(S.
 (function(){const a0=act;act=function(i){const a=deck[i];const was=a&&a.done;const r=a0.apply(this,arguments);try{if(a&&a.done&&!was&&S&&S.known){
   if(/^Thỉnh an Thái hậu/.test(a.n)&&!S.thDead){S.thO=S.thO||{};k61Know(S.thO,"Buổi thỉnh an, ngươi được dẫn đến trước mặt Thái hậu.")}
   if(/^Thỉnh an Hoàng hậu/.test(a.n)&&qOn()){const q=rivals[0];const others=k61Unknown().filter(v=>v!==q).sort(()=>Math.random()-.5).slice(0,2);
-   k61Know([q].concat(others),"Buổi thỉnh an ở Càn Ninh cung, từng người được xướng tên.");[q].concat(others).forEach(v=>npcLearn(v,S))}}}catch(e){}return r}})();
+   k61Know([q].concat(others),"Buổi thỉnh an ở Càn Ninh cung, từng người được xướng tên.");[q].concat(others).forEach(v=>greetName(S,v,{ann:1}))/* jgreet: herald = the rule's announce step */}}}catch(e){}return r}})();
 /* festival banquets: every name is announced */
 (function(){const f0=festival;festival=function(title){const r=f0.apply(this,arguments);try{if(r&&S&&S.known){S.thO=S.thO||{};k61Know(liveRivals(true).concat(S.thDead?[]:[S.thO]),`${title}: tên từng người được xướng lên trước yến.`);npcLearnAll()}}catch(e){}return r}})();
 /* the first night: she sees the Emperor's face */
@@ -224,9 +224,9 @@ function k61Backfill(){try{if(!S||!S.known||S.k61bf)return;S.k61bf=1;const T=(S.
 const K61FACE=["help","visit","warn","provoke","humiliate","test","ally","feign","apologise","drop"];
 (function(){if(typeof SOC!=="object")return;for(const k in SOC){const s=SOC[k];const ok0=s.ok,run0=s.run;
   s.ok=function(v,t){if(t&&v&&!npcKnows(v,t))return false;return ok0.apply(this,arguments)};
-  s.run=function(v,t){const r=run0.apply(this,arguments);try{if(t===S&&K61FACE.includes(k)&&S.known&&!k61Named(v)){k61Know(v,"Nàng tự đến gặp ngươi.",true);npcLearn(v,S)}}catch(e){}return r}}})();
+  s.run=function(v,t){const r=run0.apply(this,arguments);try{if(t===S&&K61FACE.includes(k)&&S.known&&v)greetName(v,S)/* jgreet: ONE greeting rule */}catch(e){}return r}}})();
 (function(){const r0=runAct;runAct=function(a,t,k){try{if(a&&t&&a!==S&&(rivals||[]).includes(a)&&!npcKnows(a,t)){if(roll(50))npcLearn(a,t);return""}
-  if(a===S&&t&&(rivals||[]).includes(t))npcLearn(t,S);if(t===S&&a&&a!==S&&["ally","gift"].includes(k)&&S.known&&!k61Named(a))k61Know(a,"Nàng tự tìm đến ngươi.",true)}catch(e){}return r0.apply(this,arguments)}})();
+  if(a===S&&t&&(rivals||[]).includes(t))npcLearn(t,S);if(t===S&&a&&a!==S&&["ally","gift"].includes(k)&&S.known)greetName(a,S)/* jgreet: ONE greeting rule */}catch(e){}return r0.apply(this,arguments)}})();
 (function(){const e0=endTurn;endTurn=function(){const r=e0.apply(this,arguments);try{k61Week()}catch(e){}return r}})();
 /* ---- names of strangers never reach the screen: every text node is rewritten to the descriptor ---- */
 const K61T="(?:(Hoàng hậu|Hoàng quý phi|Quý phi|Phế phi|Phi|Tần|Quý nhân|Thường tại|Đáp ứng) )?";let K61RX=null,K61RN=-1,K61RV=-1,K61RT=0,K61MAP={};
