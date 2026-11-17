@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"7aba5de9+","t":"2026-11-16T17:06Z","c":"item-ledger-r1: reviewer fixes — no unrouted removal left, co-op safe, save size bounded","b":"bad7b8007a2b","h":[{"s":"babc9b4a","t":"2026-11-17T01:39Z","c":"Chơi chung không còn treo máy vì tên bạn lặp chữ; số bóng người trên dư đồ khớp đúng người đang ở đó; việc có hạn giờ hiện đồng hồ ngay dướ…"},{"s":"92685210+","t":"2026-11-17T00:53Z","c":"Khung việc và khung sự kiện bốn cỡ, tranh lấp đầy khung, việc nhắc tên ai hiện chân dung người ấy; phẩm của món đồ nằm ngay trên viền khung…"},{"s":"6f513340","t":"2026-11-16T23:24Z","c":"Vào game mới không còn bật ngay màn lật thẻ, lật thẻ chỉ khi vào buổi tối; dư đồ nhãn giấy mới; việc dài lấn sang buổi sau; lời trong cung …"},{"s":"7a18d957","t":"2026-11-16T22:44Z","c":"review-diemtrang-fx-r1 report"},{"s":"afe2bcbc","t":"2026-11-16T22:25Z","c":"review r1: KIT 84.1a note + report"},{"s":"dea1d445+","t":"2026-11-16T21:32Z","c":"golive lag-play-2: CHANGE line + site rebuilt"},{"s":"674f3af4","t":"2026-11-16T21:21Z","c":"Chơi cùng bạn: bạn chơi chung chưa gặp mặt nay hiện tên gọi chung “Hảo hữu của ta” ở mọi nơi, không còn ẩn thành dấu hỏi."},{"s":"923567d5+","t":"2026-11-16T21:03Z","c":"Hình nhân vật: hết vệt xám ở cổ và viền tối quanh người."},{"s":"59812a63+","t":"2026-11-16T20:41Z","c":"Khung chung: khoảng cách đều nhau ở sổ tuần và thẻ thân phận; hàng sổ gọn, thẻ lật không đè chữ."},{"s":"ab12d6fc","t":"2026-11-16T20:53Z","c":"Tuyết và đom đóm mới, mượt hơn; nền tranh không còn vẽ lại mỗi khung hình."}]};
+window.CTM_BI={"s":"8b576d32+","t":"2026-11-17T03:39Z","c":"item-ledger-r1: reviewer fixes — no unrouted removal left, co-op safe, save size bounded","b":"dcc97fe6fe56","h":[{"s":"babc9b4a","t":"2026-11-17T01:39Z","c":"Chơi chung không còn treo máy vì tên bạn lặp chữ; số bóng người trên dư đồ khớp đúng người đang ở đó; việc có hạn giờ hiện đồng hồ ngay dướ…"},{"s":"92685210+","t":"2026-11-17T00:53Z","c":"Khung việc và khung sự kiện bốn cỡ, tranh lấp đầy khung, việc nhắc tên ai hiện chân dung người ấy; phẩm của món đồ nằm ngay trên viền khung…"},{"s":"6f513340","t":"2026-11-16T23:24Z","c":"Vào game mới không còn bật ngay màn lật thẻ, lật thẻ chỉ khi vào buổi tối; dư đồ nhãn giấy mới; việc dài lấn sang buổi sau; lời trong cung …"},{"s":"7a18d957","t":"2026-11-16T22:44Z","c":"review-diemtrang-fx-r1 report"},{"s":"afe2bcbc","t":"2026-11-16T22:25Z","c":"review r1: KIT 84.1a note + report"},{"s":"dea1d445+","t":"2026-11-16T21:32Z","c":"golive lag-play-2: CHANGE line + site rebuilt"},{"s":"674f3af4","t":"2026-11-16T21:21Z","c":"Chơi cùng bạn: bạn chơi chung chưa gặp mặt nay hiện tên gọi chung “Hảo hữu của ta” ở mọi nơi, không còn ẩn thành dấu hỏi."},{"s":"923567d5+","t":"2026-11-16T21:03Z","c":"Hình nhân vật: hết vệt xám ở cổ và viền tối quanh người."},{"s":"59812a63+","t":"2026-11-16T20:41Z","c":"Khung chung: khoảng cách đều nhau ở sổ tuần và thẻ thân phận; hàng sổ gọn, thẻ lật không đè chữ."},{"s":"ab12d6fc","t":"2026-11-16T20:53Z","c":"Tuyết và đom đóm mới, mượt hơn; nền tranh không còn vẽ lại mỗi khung hình."}]};
 /* KBOOT — BOOT COVER (owner 15/11 "Khi vừa bấm vào game, có chừng ít hơn 1 giây hiện khung này"; KIT §14.1).
    Before: while the 4 MB page parsed, the browser painted the bare static markup of p1.html (HUD box, a vertical stat label list, empty
    panels, the old 11-tab bar) for ~1 s on a warm open and many seconds on a cold one, before any kit CSS/JS existed.
@@ -11665,7 +11665,7 @@ TWD("test",{n:"Thử lòng",req:(a,t)=>!!t&&aff(a,t)>=0,o:()=>G().test[2],run:(a
 TWD("drop",{n:"Lạnh nhạt",req:(a,t)=>!!t&&aff(a,t)>=30&&((t.sung||0)<25||!!t.confined),run:(a,t)=>{affAdd(a,t,-G().drop);return `${twNm(a)} lạnh nhạt với ${NM(t)} lúc sa cơ`}});
 TWD("follow",{n:"Nương theo",req:(a,t)=>!!t&&rkOf(t)>rkOf(a)+1,run:(a,t)=>{relAdd(a,t,G().follow);return `${twNm(a)} nép theo ${NM(t)}`}});
 TWD("gossip",{n:"Rỉ tai chuyện trong cung",req:(a,t)=>!!t,run:(a,t)=>{const x=pick(liveRivals(true).filter(y=>y!==a&&y!==t));if(x)ap(x,{danh:-G().gossip});return `${twNm(a)} rỉ tai ${NM(t)} chuyện trong cung`}});
-TWD("check",{n:"Soát quà được tặng",req:a=>(a.inv||[]).some(e=>!e.h),run:a=>{const i=(a.inv||[]).findIndex(e=>e.t);if(i>=0){a.inv.splice(i,1);return `${twNm(a)} cho soát quà, vứt bỏ một món có độc`}return `${twNm(a)} cho thái y soát lại quà được tặng`}});
+TWD("check",{n:"Soát quà được tặng",req:a=>(a.inv||[]).some(e=>!e.h),run:a=>{const i=(a.inv||[]).findIndex(e=>e.t);if(i>=0){const x=a.inv.splice(i,1)[0];/* tang vật (item ledger jil), as j28 check */if(typeof ilGone==="function")ilGone(a,x,"evid");return `${twNm(a)} cho soát quà, vứt bỏ một món có độc`}return `${twNm(a)} cho thái y soát lại quà được tặng`}});
 TWD("admon",{n:"Khuyên Hoàng thượng mưa móc đều khắp",req:(a,t)=>{if(!t||t===a||!(a===S?S.rank>=7:a.queen))return false;const f=typeof favNow==="function"?favNow():null;return !!f&&f.p===t&&!(t.admonWk!=null&&wk()-t.admonWk<G().admonCd)},
  run:(a,t)=>{twAp(t,{sung:-G().admon});t.admonWk=wk();return `${twNm(a)} khuyên Hoàng thượng “mưa móc đều khắp”, đừng chỉ sủng ${NM(t)}`}});
 /* whom t resents most (not the doer): the quarrel a mediator can settle */
@@ -46335,6 +46335,7 @@ function ilGone(p,e,how,o){if(!e||typeof e!=="object"||!e.k)return null;if(ilAt(
  const x={e,at,why:how,own,w:wk(),by:o.by||""};
  if(at==="mkt"){x.ret=wk()+ilRng(B.retW);x.pr=Math.max(1,Math.round(ilVal(e)*B.ransomPct/100))}
  if(how==="conf")x.rel=wk()+B.confW;if(how==="fix"||how==="burn")x.rel=wk()+ilRng(B.fixW);
+ try{if(typeof dhIsItem==="function"&&dhIsItem(e))x.dh=1}catch(z){}/* sắc phong book / seal: jdh2 owns its road in the store */
  I.box.push(x);ilUid(e);ilLog(e,own,at,how);return x}
 /* take a piece out of the box into a person's chest */
 function ilTake(x,p,how){const I=ilS();const i=I.box.indexOf(x);if(i<0||!p)return false;I.box.splice(i,1);p.inv=p.inv||[];p.inv.push(x.e);ilLog(x.e,x.at,ilKey(p),how||"về");return true}
@@ -46350,6 +46351,7 @@ function ilGuard(name,how,who){const f=window[name];if(typeof f!=="function"||f.
 /* ---- census: ids for every piece, a dead person's effects to the store, anything vanished without a route caught ("net") ---- */
 function ilStaleCases(){const held=new Map();for(const p of ilPeople())for(const a of ilSlots(p))if(a.iu)held.set(a.iu,[p,a]);
  for(const c of ilCases()){const h=c.e&&c.e.iu&&held.get(c.e.iu);if(!h||h[1]===c.e)continue;c.st="done";c.end=wk();c.how="tra";ilLog(c.e,"lo"+c.id,ilKey(h[0]),"đã ở rương")}}
+const IL_DH=["sacphong","ngocan"];
 const IL_BOXES=["mkt","nvp","cct","emp","th","srv","dlg"];
 function ilCensus(){if(!S)return;const I=ilS();const now={};const seen=new Set();try{ilStaleCases()}catch(z){}
  /* a found/held lost case and the copy in the holder's chest are ONE piece: same id (old saves had none; lostReturn hands back a copy of c.e) */
@@ -46363,7 +46365,7 @@ function ilCensus(){if(!S)return;const I=ilS();const now={};const seen=new Set()
  for(const c of ilCases()){ilUid(c.e);seen.add(c.e.iu);now[c.e.iu]=[c.e.k,"lo"+c.id,0]}
  /* a gift on its way (a dialog still waiting for her answer) */
  try{for(const m of (typeof Q!=="undefined"?Q:[])){const e=m&&m.pp&&m.pp.e;if(e&&typeof e==="object"&&e.k&&e.iu){seen.add(e.iu);now[e.iu]=[e.k,"dlg",0]}}}catch(z){}
- if(I.at)for(const id in I.at){if(seen.has(+id))continue;const [k,h,wkf]=I.at[id];const e0={k,iu:+id};if(wkf||!ilDur(e0))continue;if(ilCoop()&&h!=="me"&&!IL_BOXES.includes(h)&&!/^lo/.test(h))continue;
+ if(I.at)for(const id in I.at){if(seen.has(+id))continue;const [k,h,wkf]=I.at[id];const e0={k,iu:+id};if(wkf||!ilDur(e0))continue;if(IL_DH.includes(k))continue;/* jdh2 census keeps one book + one seal per hiệu (drops copies, recreates a missing one) */if(ilCoop()&&h!=="me"&&!IL_BOXES.includes(h)&&!/^lo/.test(h))continue;
   /* vanished without a route: the piece is still in the game (Nội vụ phủ found it); ilAudit counts these (bot audit target 0) */
   I.net++;I.box.push({e:e0,at:"nvp",why:"net",own:h,w:wk()});ilLog(e0,h,"nvp","net");now[id]=[k,"nvp",0]}
  I.at=now}
@@ -46383,6 +46385,7 @@ function ilWeek(){if(!S||S.dead)return;const I=ilS(),B=BAL.il;let ask=false;
   if(x.at==="srv"&&x.why==="pil"&&wk()-x.w>=B.srvW){x.at="mkt";x.why="sell";x.ret=wk()+ilRng(B.retW);x.pr=Math.max(1,Math.round(ilVal(x.e)*B.ransomPct/100));ilLog(x.e,"srv","mkt","kẻ hầu bán ra ngoài");continue}
   if(x.at==="cct"&&wk()-x.w>=B.cctW){x.at="nvp";x.why="kho";x.own="";x.w=wk();ilLog(x.e,"cct","nvp","tang vật trả kho");continue}
   if(x.at!=="nvp")continue;
+  if(x.dh)continue;/* jdh2 (sắc phong book / seal): its own atonement / census road; never resold */
   if((x.why==="fix"||x.why==="burn")&&wk()>=x.rel){if(live){ilTake(x,o,"sửa xong");if(o===S)Q.push({t:"Đồ sửa xong",who:pMe(),h:`${ilTag(x.e)}<p>Nội vụ phủ sửa xong <b>${ilNm(x.e)}</b>, sai người đem trả về rương ngươi.</p>`,btn:"Đã hiểu"})}else{x.why="dead";x.own=""}continue}
   if(x.why==="conf"&&wk()>=x.rel){if(live&&o===S){if(!ask){ask=true;x.rel=wk()+ilRng(B.againW);pushDil(mkP("ilconf",{u:x.e.iu}),"Đồ bị tịch thu")}}
    else if(live&&roll(B.npcConfP))ilTake(x,o,"xin lại");else if(!live){x.why="dead";x.own=""}continue}
@@ -46418,7 +46421,7 @@ function ilMineHTML(){if(!S||S.dead)return"";const L=ilS().box.filter(x=>x.own==
  let h=`<div class="kwd"><div class="kpsec"><h4 class="kpst">Đồ ở nơi khác</h4>`;
  for(const x of L){const st=ST[x.at]||["Ở nơi khác","no"];const f=[`${ilNm(x.e)} · ${IL_HOW[x.why]||""}`];
   if(x.at==="mkt")f.push(x.shop?"Đang có trong khay đồ của thái giám Nội vụ phủ":"Có thể quay lại: trong khay đồ Nội vụ phủ, hoặc có người mang đến chuộc");
-  if(x.why==="conf")f.push(wk()<x.rel?`Còn ${x.rel-wk()} tuần mới xin lại được`:"Đã xin lại được: chờ Nội vụ phủ báo");
+  if(x.why==="conf"&&!x.dh)f.push(wk()<x.rel?`Còn ${x.rel-wk()} tuần mới xin lại được`:"Đã xin lại được: chờ Nội vụ phủ báo");
   if(x.why==="fix"||x.why==="burn")f.push(`Còn ${Math.max(0,x.rel-wk())} tuần sửa xong`);
   let pic="";try{pic=typeof loPic==="function"?loPic(x.e,"md"):""}catch(z){}
   h+=`<div class="kwdsel">${pic}<div>${kitChip(st[0],st[1])}${kitFacts(f)}</div></div>`}
@@ -47359,7 +47362,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="bad7b8007a2b";window.CTM_BUILD=BUILD;
+const BUILD="dcc97fe6fe56";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

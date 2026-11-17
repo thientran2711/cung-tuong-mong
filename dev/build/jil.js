@@ -72,6 +72,7 @@ function ilGone(p,e,how,o){if(!e||typeof e!=="object"||!e.k)return null;if(ilAt(
  const x={e,at,why:how,own,w:wk(),by:o.by||""};
  if(at==="mkt"){x.ret=wk()+ilRng(B.retW);x.pr=Math.max(1,Math.round(ilVal(e)*B.ransomPct/100))}
  if(how==="conf")x.rel=wk()+B.confW;if(how==="fix"||how==="burn")x.rel=wk()+ilRng(B.fixW);
+ try{if(typeof dhIsItem==="function"&&dhIsItem(e))x.dh=1}catch(z){}/* sắc phong book / seal: jdh2 owns its road in the store */
  I.box.push(x);ilUid(e);ilLog(e,own,at,how);return x}
 /* take a piece out of the box into a person's chest */
 function ilTake(x,p,how){const I=ilS();const i=I.box.indexOf(x);if(i<0||!p)return false;I.box.splice(i,1);p.inv=p.inv||[];p.inv.push(x.e);ilLog(x.e,x.at,ilKey(p),how||"về");return true}
@@ -87,6 +88,7 @@ function ilGuard(name,how,who){const f=window[name];if(typeof f!=="function"||f.
 /* ---- census: ids for every piece, a dead person's effects to the store, anything vanished without a route caught ("net") ---- */
 function ilStaleCases(){const held=new Map();for(const p of ilPeople())for(const a of ilSlots(p))if(a.iu)held.set(a.iu,[p,a]);
  for(const c of ilCases()){const h=c.e&&c.e.iu&&held.get(c.e.iu);if(!h||h[1]===c.e)continue;c.st="done";c.end=wk();c.how="tra";ilLog(c.e,"lo"+c.id,ilKey(h[0]),"đã ở rương")}}
+const IL_DH=["sacphong","ngocan"];
 const IL_BOXES=["mkt","nvp","cct","emp","th","srv","dlg"];
 function ilCensus(){if(!S)return;const I=ilS();const now={};const seen=new Set();try{ilStaleCases()}catch(z){}
  /* a found/held lost case and the copy in the holder's chest are ONE piece: same id (old saves had none; lostReturn hands back a copy of c.e) */
@@ -100,7 +102,7 @@ function ilCensus(){if(!S)return;const I=ilS();const now={};const seen=new Set()
  for(const c of ilCases()){ilUid(c.e);seen.add(c.e.iu);now[c.e.iu]=[c.e.k,"lo"+c.id,0]}
  /* a gift on its way (a dialog still waiting for her answer) */
  try{for(const m of (typeof Q!=="undefined"?Q:[])){const e=m&&m.pp&&m.pp.e;if(e&&typeof e==="object"&&e.k&&e.iu){seen.add(e.iu);now[e.iu]=[e.k,"dlg",0]}}}catch(z){}
- if(I.at)for(const id in I.at){if(seen.has(+id))continue;const [k,h,wkf]=I.at[id];const e0={k,iu:+id};if(wkf||!ilDur(e0))continue;if(ilCoop()&&h!=="me"&&!IL_BOXES.includes(h)&&!/^lo/.test(h))continue;
+ if(I.at)for(const id in I.at){if(seen.has(+id))continue;const [k,h,wkf]=I.at[id];const e0={k,iu:+id};if(wkf||!ilDur(e0))continue;if(IL_DH.includes(k))continue;/* jdh2 census keeps one book + one seal per hiệu (drops copies, recreates a missing one) */if(ilCoop()&&h!=="me"&&!IL_BOXES.includes(h)&&!/^lo/.test(h))continue;
   /* vanished without a route: the piece is still in the game (Nội vụ phủ found it); ilAudit counts these (bot audit target 0) */
   I.net++;I.box.push({e:e0,at:"nvp",why:"net",own:h,w:wk()});ilLog(e0,h,"nvp","net");now[id]=[k,"nvp",0]}
  I.at=now}
@@ -120,6 +122,7 @@ function ilWeek(){if(!S||S.dead)return;const I=ilS(),B=BAL.il;let ask=false;
   if(x.at==="srv"&&x.why==="pil"&&wk()-x.w>=B.srvW){x.at="mkt";x.why="sell";x.ret=wk()+ilRng(B.retW);x.pr=Math.max(1,Math.round(ilVal(x.e)*B.ransomPct/100));ilLog(x.e,"srv","mkt","kẻ hầu bán ra ngoài");continue}
   if(x.at==="cct"&&wk()-x.w>=B.cctW){x.at="nvp";x.why="kho";x.own="";x.w=wk();ilLog(x.e,"cct","nvp","tang vật trả kho");continue}
   if(x.at!=="nvp")continue;
+  if(x.dh)continue;/* jdh2 (sắc phong book / seal): its own atonement / census road; never resold */
   if((x.why==="fix"||x.why==="burn")&&wk()>=x.rel){if(live){ilTake(x,o,"sửa xong");if(o===S)Q.push({t:"Đồ sửa xong",who:pMe(),h:`${ilTag(x.e)}<p>Nội vụ phủ sửa xong <b>${ilNm(x.e)}</b>, sai người đem trả về rương ngươi.</p>`,btn:"Đã hiểu"})}else{x.why="dead";x.own=""}continue}
   if(x.why==="conf"&&wk()>=x.rel){if(live&&o===S){if(!ask){ask=true;x.rel=wk()+ilRng(B.againW);pushDil(mkP("ilconf",{u:x.e.iu}),"Đồ bị tịch thu")}}
    else if(live&&roll(B.npcConfP))ilTake(x,o,"xin lại");else if(!live){x.why="dead";x.own=""}continue}
@@ -155,7 +158,7 @@ function ilMineHTML(){if(!S||S.dead)return"";const L=ilS().box.filter(x=>x.own==
  let h=`<div class="kwd"><div class="kpsec"><h4 class="kpst">Đồ ở nơi khác</h4>`;
  for(const x of L){const st=ST[x.at]||["Ở nơi khác","no"];const f=[`${ilNm(x.e)} · ${IL_HOW[x.why]||""}`];
   if(x.at==="mkt")f.push(x.shop?"Đang có trong khay đồ của thái giám Nội vụ phủ":"Có thể quay lại: trong khay đồ Nội vụ phủ, hoặc có người mang đến chuộc");
-  if(x.why==="conf")f.push(wk()<x.rel?`Còn ${x.rel-wk()} tuần mới xin lại được`:"Đã xin lại được: chờ Nội vụ phủ báo");
+  if(x.why==="conf"&&!x.dh)f.push(wk()<x.rel?`Còn ${x.rel-wk()} tuần mới xin lại được`:"Đã xin lại được: chờ Nội vụ phủ báo");
   if(x.why==="fix"||x.why==="burn")f.push(`Còn ${Math.max(0,x.rel-wk())} tuần sửa xong`);
   let pic="";try{pic=typeof loPic==="function"?loPic(x.e,"md"):""}catch(z){}
   h+=`<div class="kwdsel">${pic}<div>${kitChip(st[0],st[1])}${kitFacts(f)}</div></div>`}
