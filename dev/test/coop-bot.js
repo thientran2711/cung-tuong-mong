@@ -15,6 +15,8 @@ async function mk(b,name,vp){const ctx=await b.newContext({viewport:{width:vp[0]
       const on=typeof c.on==='boolean'?c.on:!!(s.playing||(s.status&&s.status!=='off'));
       return{code:c.code||s.room||'',seat:you,week:c.week!=null?c.week:(s.week||0),ended,on,
         frozen:!!(on&&(s.status!=='open'||!s.peerOnline)),waiting:!!(window.COOPW&&COOPW.on&&(COOPW.sent===(s.week||0)||(you&&ended[you]))),world:typeof S!=='undefined'&&!!S&&!!(window.COOPW&&COOPW.base)}}},WURL);
+  /* TRIP=1 (review/coop-thin-a): the guest tripwire (thin-guest progress meter) on the guest page */
+  if(process.env.TRIP&&name==='B')await ctx.addInitScript({path:path.join(__dirname,'coop-thin-trip.js')});
   const p=await ctx.newPage();p.setDefaultTimeout(30000);const o={name,ctx,p,errs:[],acts:0,deaths:0,names:[],meets:0,harms:0,hk:{}};
   p.on('pageerror',e=>o.errs.push(e.message));p.on('console',m=>{if(m.type()==='error'&&!/Failed to load resource|favicon/.test(m.text()))o.errs.push('console: '+m.text())});return o}
 const tapText=async(o,re,ms=8000)=>{const t0=Date.now();while(Date.now()-t0<ms){const r=await o.p.evaluate(src=>{const R=new RegExp(src);
@@ -50,7 +52,7 @@ const WORLD=()=>{const kidsOf=v=>(v.kids||[]).map(k=>k.name+(k.alive?'':'†')).
    me:{name:S.name,rank:S.srv&&!S.srv.risen?'srv':S.rank,dead:!!S.dead,srv:!!S.srv},mst:{sung:S.sung,danh:S.danh,suc:S.suc},fst:(f=>f&&f.id!=null?{sung:f.sung,danh:f.danh,suc:f.suc}:null)((rivals.find(v=>v.coop)||rivals.flatMap(v=>v.staff||[]).find(x=>x.coop)||null)),where:Object.entries(S.where||{}).filter(([k])=>!(+k>=900)).map(([k,v])=>k+'@'+v).sort().join(),buoi:S.buoi||0}};
 
 (async()=>{const b=await chromium.launch();const A=await mk(b,'A',[755,1000]),B=await mk(b,'B',[1180,820]);
- await A.p.goto(BASE);await A.p.waitForTimeout(3000);await tapText(A,/^Chơi cùng bạn/);await A.p.waitForTimeout(500);await tapText(A,/^Mời bạn/);
+ await A.p.goto(BASE);await A.p.waitForTimeout(3000);await tapText(A,/^(Chơi cùng bạn|Cùng hảo hữu)/);await A.p.waitForTimeout(500);await tapText(A,/^(Mời bạn|Mời hảo hữu)/);
  await until(A,()=>__co().code&&__co().seat==='a');const code=(await A.p.evaluate(()=>__co())).code;L('room '+code);
  await B.p.goto(BASE+'?room='+code);await B.p.waitForTimeout(3000);await tapText(B,/^Vào phòng/,4000);
  if(!await until(B,()=>__co().seat==='b'&&!__co().frozen,null,40000))L('FAIL B could not join');
@@ -89,5 +91,6 @@ const WORLD=()=>{const kidsOf=v=>(v.kids||[]).map(k=>k.name+(k.alive?'':'†')).
  const mins=((Date.now()-t0)/60000).toFixed(1);
  L(`\nweeks played ${weeks}/${WEEKS} in ${mins} min · acts A ${A.acts} B ${B.acts} · deaths A ${A.deaths} B ${B.deaths} · weeks with divergence ${div.length}`);
  L(`buổi compared ${buoiN} · buổi with NPC places differing ${whereDiff} · friend-position mismatches ${posDiff.length} · buổi where the friend's Sủng/Danh/Sức shown ≠ her own ${statLag} · meets A ${A.meets} B ${B.meets} · acts on the friend A ${A.harms} ${JSON.stringify(A.hk)} B ${B.harms} ${JSON.stringify(B.hk)}`);L('friend known-state A/B per buổi (0 stranger,1 face,3 face+name): '+JSON.stringify(knownLog));posDiff.slice(0,8).forEach(x=>L('  pos: '+x));
+if(process.env.TRIP){const t=await B.p.evaluate(()=>window.__trip&&__trip()).catch(e=>({err:e.message}));L(`\nTRIPWIRE guest writes outside fromCanon: ${t&&t.total} (every write incl. same value ${t&&t.raw}) · by root ${JSON.stringify(t&&t.byRoot)} · S replaced ${t&&t.sReplaced} rivals replaced ${t&&t.rReplaced} · fn|root pairs ${t&&t.pairs}`);(t&&t.top||[]).forEach(x=>L(`  ${x[2]}\t${x[0]}\t${x[1]}`));fs.writeFileSync(OUT+'/trip.json',JSON.stringify(t,null,1))}
  L(`page errors A ${A.errs.length} B ${B.errs.length}`);[...new Set([...A.errs,...B.errs])].slice(0,10).forEach(e=>L('  err: '+e.slice(0,200)));
  fs.writeFileSync(OUT+'/bot-log.txt',log.join('\n')+'\n');await b.close();process.exit(div.length||weeks<WEEKS||whereDiff||posDiff.length?1:0)})().catch(e=>{console.error(e);process.exit(2)});
