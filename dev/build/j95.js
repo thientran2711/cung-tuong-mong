@@ -87,7 +87,7 @@ function motiveOK(a,t,kind){if(!a||!t||a===S||a===t)return{ok:true,why:a===S?"ng
   if(af>=40&&!ex)return{ok:false,why:`thiện cảm ${af} với ${t===S?"ngươi":t.name}`};
   if(mot<30&&!ex)return{ok:false,why:`động cơ yếu (oán ${oa}, ghen ${gh}, thiện cảm ${af})`};
   if(ex)return{ok:true,why:ex,ex:1};
-  const parts=[];if(oa>=20)parts.push(`oán ${oa}`);if(gh>=20)parts.push(`ghen ${gh}`);if(af<=-20)parts.push(`ghét (thiện cảm ${af})`);if(ef)parts.push("khác phe");if(hasT(a,"Xảo quyệt"))parts.push("tính hiểm độc");
+  const parts=[];if(oa>=20)parts.push(`oán ${oa}`);if(gh>=20)parts.push(`ghen ${gh}`);if(af<=-20)parts.push(`ghét (thiện cảm ${af})`);if(ef)parts.push("khác phe");if(hasT(a,"Xảo quyệt"))parts.push("tính xảo quyệt");
   return{ok:true,why:parts.join(", ")||`động cơ ${mot}`}}
  if(F95.has(kind)){let fr=false;try{fr=!!(facOf(a)&&facOf(a)===facOf(t))}catch(e){}if(af<-20&&oa>=40&&!fr)return{ok:false,why:`ghét ${t===S?"ngươi":t.name} (thiện cảm ${af}, oán ${oa})`};
   return{ok:true,why:fr?"cùng phe":af>=10?`thiện cảm ${af}`:"lấy lòng vì lợi"}}
@@ -264,7 +264,7 @@ function j95view(R,kh){const W={};W.emp=R.P.emp?R.P.emp[kh][0]:"dtd";W.th=R.P.th
 function j95vis(id,k){if(!id||!k||k===J95OUT_||id==="me")return false;const c=id[0];
  if(c==="v"){const v=RV(+id.slice(1));return !!(v&&v.alive&&!(k==="home"&&sameHouse(S,v)))}
  if(id==="emp")return k!=="home"&&!(k==="dtd"&&(S.sung||0)<BAL.m95.dtdSung);if(id==="th")return true;
- if(c==="m"&&id[1]!=="m")return true;if(c==="q")return true;if(J95.eld&&J95.eld[id]){/* a named elder counts only where jstaff addStage draws her */const e=J95.eld[id];return e==="kn"?k==="kn":e==="tn"?(k==="tn"&&!S.thDead)||k==="tgk":e==="gt"?k==="home"&&(S.turn||0)<=4&&!S.out:false}if(id==="c:ty"||id==="c:ksp")return true;if(id==="c:ly")return k==="lc";if(id==="c:ped")return k==="nvp"&&j95nvp();/* jplx places draw the servants and children their lists put there (not on the maid road: jplx skips it) */if(typeof isSrv==="function"&&isSrv()&&(id==="c:tgk"||id==="c:ttp"||(c==="s"&&J95.px&&J95.px[id])||(c==="k"&&(k==="ttp"||k==="acs"||k==="dc"))))return false;if(id==="c:tgk"||id==="c:ttp")return true;if(c==="s"&&J95.px&&J95.px[id]===k)return true;if(c==="k"&&(k==="ttp"||k==="acs"||k==="dc"))return true;
+ if(c==="m"&&id[1]!=="m")return true;if(c==="q")return true;if(J95.eld&&J95.eld[id]){/* a named elder counts only where jstaff addStage draws her */const e=J95.eld[id];return e==="kn"?k==="kn":e==="tn"?(k==="tn"&&!S.thDead)||k==="tgk":e==="gt"?k==="home"&&gtAtHome():false}if(id==="c:ty"||id==="c:ksp")return true;if(id==="c:ly")return k==="lc";if(id==="c:ped")return k==="nvp"&&j95nvp();/* jplx places draw the servants and children their lists put there (not on the maid road: jplx skips it) */if(typeof isSrv==="function"&&isSrv()&&(id==="c:tgk"||id==="c:ttp"||(c==="s"&&J95.px&&J95.px[id])||(c==="k"&&(k==="ttp"||k==="acs"||k==="dc"))))return false;if(id==="c:tgk"||id==="c:ttp")return true;if(c==="s"&&J95.px&&J95.px[id]===k)return true;if(c==="k"&&(k==="ttp"||k==="acs"||k==="dc"))return true;
  /* her own household servants: jhouse (main, servant-system) draws them on her room / lãnh cung stage (r1 16/11) */if(c==="s"&&(k==="home"||k==="lc")&&j95hsv(id))return true;
  if(k==="home")return id==="mm:me"||id.indexOf("k:me:")===0;return false}
 function j95nvp(){try{return typeof adSrv==="function"&&!adSrv()&&!!(S&&S.court&&S.court.ped&&S.court.ped.name)}catch(e){return false}}
@@ -279,7 +279,7 @@ const J95OUT_="ngoai";
 function j95arrKh(k){const kh=j95kh();try{if(!k||k===S.place||k==="home")return kh;let from=S.place||"home";
  if(typeof isSrv==="function"&&isSrv()){const m=srvM();if(m&&k===palaceOf(m))return kh;if(from==="home"&&m)from=palaceOf(m)}/* j42 srvGoTo walks from her mistress's palace */
  return Math.min(J95.KH-1,kh+Math.max(0,travel(from,k)||0))}catch(e){return kh}}
-function j95elderK(x){if(x.eid==="kn")return"kn";if(x.eid==="gt"&&(S.turn||0)<=4&&!S.out)return"home";return"tn"}
+function j95elderK(x){if(x.eid==="kn")return"kn";if(x.eid==="gt"&&gtAtHome())return"home";return"tn"}
 function j95counts(R,kh){const C={};for(const id in R.P){const k=R.P[id][kh][0];if(k&&j95vis(id,k))C[k]=(C[k]||0)+1}return C}
 function j95sync(watch,plan){if(!j95on())return;let R=S.roster;if(!R||R.key!==j95key()){if(!plan)return;if(R)j95log(R);R=j95plan();j95secApply(R)}
  const kh=j95kh();const ppl=j95ppl(R);const ids={};

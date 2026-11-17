@@ -50,7 +50,7 @@ function kidCard(k){const lines=k.alive?[tuoi(k.age),`Sức khỏe <b>${k.hp}</b
 function kidTabHTML(hl){return `<div class="pgwrap"><div class="ph"><span>${hl}</span><span>${ic("con",14)}${mySons().length} hoàng tử · ${myDaus().length} công chúa</span></div>`+(S.kids.length?pager("kid",S.kids.map(k=>({f:kidFace(k),name:shortN(k.name),dim:!k.alive})),i=>kidCard(S.kids[i])):`<p class="past">Chưa có con. Chỉ được thị tẩm mới mang thai.</p>`)+`</div>`}
 
 /* ---- servants and palace people (Kẻ hầu tab) ---- */
-function staffTabHTML(){const [cm,ce]=capOf(S),nm=S.staff.filter(s=>s.role==="maid").length+1,ne=S.staff.filter(s=>s.role==="eunuch").length;
+function staffTabHTML(){const [cm,ce]=capOf(S),[nm,ne]=hhHas(S);
  const L=[];L.push({t:"maid",f:pMaid(),name:shortN(S.maid.name),sep:"Cung ngươi"});
  S.staff.forEach((s,j)=>L.push({t:"own",s,f:pServ(s),name:shortN(s.name)}));
  Object.entries(S.court).forEach(([k,c],j)=>L.push({t:"court",k,c,f:k==="ty"?pDoc():{src:courtSrc(k,c),ini:"Hoạn",col:"#8a8aa0"},name:shortN(c.name),sep:j?"":"Trong cung"}));

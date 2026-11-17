@@ -18,9 +18,9 @@ BAL.ex={win:2,cd:[1,1,1,1,2,2,3,3],bar:[22,25,28],wPlay:6,wVir:2,wArt:2,attDiv:1
 /* NO-WORD-GAMES family C (jnwq, owner 16/11 07:20Z): the four promotion-exam games (le lay · tc sort · xa clue · thq seat). tier = level tier 0..2 (+shift;
    review/mg-balance's mgTier overrides when present); free = first tier with free placement judged on «Xong» (below it a drop is checked at once);
    n = pieces per round by tier; rounds; lim = seconds per round by tier (rounds × lim stay under the 97 s game guard); idle = seconds before the quiet auto-hint
-   (0 = none); hint / auto = score cost of the Gợi ý button / the auto-hint; miss = cost per wrong drop; xaMiss = cost per wrong accusation (2 points a case);
+   (0 = none); hint / auto = score cost of the Gợi ý button / the auto-hint; miss = cost per wrong drop; xaMiss = cost per wrong accusation (2 points a case); xaFloor = least a solved case keeps (review/mg-snap: was a typed .4, blind tapping always ended on the culprit);
    clues = evidence pictures per case by tier; peek = seconds the model stays when it hides (tier 2). Raw score stays 0..10 like every j82 game. */
-BAL.nwq={shift:0,free:2,hint:.5,auto:.25,miss:.8,xaMiss:.9,peek:8,idle:[9,14,0],clues:[2,2,3],
+BAL.nwq={shift:0,free:2,hint:.5,auto:.25,miss:.8,xaMiss:.9,xaFloor:0,peek:8,idle:[9,14,0],clues:[2,2,3],
  n:{le:[3,4,5],tc:[5,6,8],thq:[4,5,6],xa:[3,4,5]},rounds:{le:3,tc:2,thq:3,xa:5},
  lim:{le:[30,30,28],tc:[45,45,42],thq:[30,30,28],xa:[14,10,8]}};/* xa 18/17/15 → 14/10/8 (review/mg-tune: a case is seen in ~3 s; the time part needs a limit near the play) */
 /* sickness in the palace: each month a healthy consort may also fall ill (illAdd %), and a critical illness kills a little more often (illDie × the illness' own death weight) */
@@ -246,8 +246,9 @@ Object.assign(BAL,{mgTier:{occ:{hoc:[0,.5],hoi:[1,.5],trieu:[1.5,.5],exam:[1,.5]
   tc:{fast:[.05,.175],keep:[.3,.3]},xa:{fast:[.05,.1],keep:[.1,.1]},thq:{fast:[.075,.45],keep:[.5,.5]},
   kim:{fast:[0,0],keep:[.6,.6]},/* review/mg-tune-r1: Khéo tay (untangle) moved onto mgPace, same curve as its old typed .6+.4·left/LIM */
   banh:{lag:[.6,.08],gust:[.6,.05],gap:[1.4,4]},co:{lim:[8000,20000],fast:[.1,.8],keep:[.6,.6],extra:[5,0]},mua:{beat:[1000,2600],sp:[520,770],retry:[0,1.99]},
-  td_hanh:{lim:[8000,20000],short:[2,0]},dauho:{aid:[.14,.6],mouth:[.8,1.3]},td_dung:{band:[.2,.6],kick:[2.4,1]},td_ngon:{band:[.05,.13],win:[1000,2600],rate:[2,.6],fade:[.07,.14]}},
- kG:{td_cong:1.6,td_ngon:2,ban:.8,dan:2.8,den:1.05,hat:.85,duho:1.5,hoa:2.3,huong:3.65,kim:1.8,kinh:1.5,may:1.5,ve:1.7,mua:1.25,theu:5.5,co:3},/* review/mg-balance-2-r1 re-trim on pooled raws (co n=120, td_ngon n=60 float): co 4→3, td_ngon 1.6→2 */
+  td_hanh:{lim:[8000,20000],short:[2,0]},td_cong:{tol:[.0075,.028]},den:{swing:[.36,.36],band:[.16,.208]},/* review/mg-snap: Thêu theo nét trace tolerance, share of the board width (was typed W·(.055+.006·lv)·mgTol) */dauho:{aid:[.14,.45],mouth:[.8,1.3]},td_dung:{band:[.2,.6],kick:[2.4,1],spill:[2,1.5]},td_ngon:{band:[.05,.13],win:[1000,2600],rate:[2,.6],fade:[.07,.14]}},
+ kG:{td_cong:1.3,td_ngon:2,ban:.8,dan:2.8,den:.8,hat:.85,duho:1.5,hoa:2.3,huong:3.65,kim:1.8,kinh:.9,may:.82,ve:.9,mua:1.25,theu:5.5,co:3},/* review/mg-balance-2-r1 re-trim on pooled raws (co n=120, td_ngon n=60 float): co 4→3, td_ngon 1.6→2; review/mg-snap re-trim after the trace fix (her line scored, BAL.mgTier.trace.acc 1) and the wider Hoa đăng channel: td_cong 1.6→1.3, ve 1.7→.9, kinh 1.5→.9, may 1.5→.82, den 1.05→.8 */
+ trace:{acc:1},/* review/mg-snap: weight of her line lying on the guide in the ONE trace score mgTraceScore (was a typed .5) */
  pace:{fast:[.2,.4],keep:[.5,.8]},word:[3,5,7,9],aid:[3.5,1.5],lesson:[5,8],lessonPts:[2,5,8],fullAt:4,gamma:1,tol:[.45,1,.4],more:2,npc:[4,.4],wk:{lvQ:[0,0,1,1,2,2],th:[6,10,15],cong:[3,2]}}});
 /* danh-balance (ONE CORE, owner 16/11 07:25Z): every Danh gate that was a typed number now reads BAL.danhG, and the succession
    condition rows read BAL.succN; values unchanged. forget: j3 "Bị bỏ quên" (Sủng ≤0 and Danh ≤ forget at the two lowest ranks →
@@ -854,7 +855,33 @@ BAL.world={on:1,maxOpen:2,pull:18,pullMax:80,
  su:{bien:60,len:1,cd:36,rank:3,mood:0,show:[30,2],showSung:4,showDanh:2,failDanh:-2,place:{thu:2},act:{court:1.5,art:1.4,social:1.3},force:[{b:1,pl:"thu",deed:"routine",why:"Dự yến tiếp sứ",g:["consort","queen"],rank:3}]},
  tho:{emp:[40,10],th:[60,10],len:1,kho:6,mood:0,big:60,mid:20,sungBig:5,sungMid:2,thBig:5,make:[35,2],makeSuc:10,npcGift:.15,npcSung:[1,4],place:{thu:2,tn:1.5},act:{art:1.5,social:1.3,greet:1.3},force:[{b:1,pl:"$",deed:"gift",why:"Dự yến mừng thọ",g:["consort","queen"]}]},
  sao:{p:1.2,len:1,cd:36,mood:2,place:{cnh:1.8},act:{greet:1.4,scheme:1.3,art:.6}},
- xa:{minM:3,npcP:60,kho:5,len:1,cd:36,afterDis:50,act:{help:1.3,harm:.6}}};
+ xa:{minM:3,npcP:60,kho:5,len:1,cd:36,afterDis:50,act:{help:1.3,harm:.6}},
+ /* ---- batch 2 (jworld2, dev/research/world-events-2.md §3; Địa chấn #9 PARKED: no repair-debt state) ----
+    day đầy tháng (a real birth; opens `delay` tuần after it) · lap lập Thái tử (S.heir set) · hau lập / phế hậu (the queen seat changes) ·
+    thb Thái hậu bệnh nặng (S.thIll stage >= st) · thi khoa thi (every `every` years, off = year mod) · vuong phiên vương (a living Vương gia) ·
+    ret đại hàn (heavy snow in `run` of the last run+1 tuần) · trung châu chấu (a failed flood/drought relief that left Kho lúa between dis.kho and kho) ·
+    vuco vu cổ (a real bùa frame found while someone of the Emperor's house is ill) · cam giới nghiêm (after a vu cổ / ngoại thích verdict,
+    or Biên cương < bien after a lost battle) · trom trộm ngự khố (year-end audit + a real greedy servant) · phong phóng cung nhân (maids at
+    BAL.srvAge.out, at least `min` in the palace) · hon công chúa xuất giá (a real daughter's wedding) · ngoai ngoại thích (a house >= pow
+    while the Emperor is young / ill or it is the queen's house) · phat Phật đản (yearly; big = đại trai đàn in a disaster) · benh long thể
+    bất an (S.emp.ill stage >= st) · tinh tỉnh thân (yearly after Tết). Pair numbers [a,b] in odds = base + stat / b. */
+ day:{npcW:{give:[1.2,.6],cold:[1.5,.3],skip:.4},coldOan:30,delay:3,len:1,kho:[3,1],mDanh:[3,1],mSung:[3,1],npcGift:.08,big:40,mid:15,bigAff:12,midAff:5,skipOan:8,coldGhen:60,feastBac:60,feastDanh:3,plainDuc:1,place:{tn:1.3},act:{social:1.3,greet:1.3,harm:1.2},force:[{b:1,pl:"$",deed:"gift",why:"Dự yến đầy tháng",g:["consort","queen"]}]},
+ lap:{len:1,pow:8,npcGift:.1,sonHarm:[1.5,.4],xaP:40,gift:30,giftAff:10,place:{thu:1.5},act:{scheme:1.4,frame:1.3,ally:1.3,greet:1.3}},
+ hau:{len:1,rise:10,fall:-15,gift:30,giftAff:12,place:{kn:2},act:{ally:1.5,social:1.3,greet:1.4}},
+ thb:{st:2,len:3,cd:18,npcW:{suc:40,weak:.3,no:.6},nightMul:.5,mood:1,qDanh:2,nurse:{suc:12,o:[40,8],th:8},pray:{suc:4,duc:1,th:3},med:{bac:25,th:4},npcTh:[5,2],place:{tn:1.8,cnh:1.4},act:{pray:1.6,social:.8,greet:1.3,scheme:1.2},force:[{b:0,pl:"tn",deed:"routine",why:"Phiên hầu bệnh Thái hậu",g:["consort","queen"],rank:2}]},
+ thi:{every:3,off:1,dflt:40,hanlam:30,month:3,len:1,pow:[6,2],danh:2,letter:{bac:30,o:[35,5],pow:5},place:{thu:1.4},act:{court:1.4,art:1.2,social:1.1}},
+ vuong:{every:3,off:2,month:10,len:1,bien:40,mood:2,sungDiv:100,meet:{o:[45,4],tinh:8,danh:-4},gossip:30,place:{tn:1.5,vuon:1.3},act:{social:1.3,spy:1.3,ally:1.2}},
+ ret:{run:2,cd:54,len:2,rank:2,suc:6,maidCatch:5,maidSuc:60,ill:"phonghan",catch:10,lcCatch:25,share:{bac:40,duc:2,danh:2},buy:{bac:20},cold:{suc:8},place:{vuon:.3},act:{help:1.3,social:.7,greet:.8},srvAct:{work:1.2}},
+ trung:{kho:50,xaP:25,m0:5,m1:9,len:3,cd:36,khoCut:6,payCut:.1,mood:1,give:20,giveDanh:2,giveTh:2,thrift:{duc:1},place:{cnh:1.4},act:{help:1.3,bribe:1.2}},
+ vuco:{len:2,cd:72,kidHp:40,spyFind:50,catch:25,schemeK:4,accuseK:30,innocent:30,payCut:.15,toCam:50,open:{duc:2},clean:{bac:30,mul:.3},accuse:{danh:3,miss:-4},act:{scheme:.6,frame:.5,warn:1.6,spy:1.4},place:{vuon:.5}},
+ cam:{len:2,cd:36,bien:25,closed:["vuon","cnh","thu"],place:{vuon:0,cnh:0,thu:0},act:{scheme:1.3,spy:.7,social:.6},srvAct:{work:.8}},
+ trom:{month:12,t:1,p:25,len:2,cd:72,catch:40,payCut:.1,scape:30,scapeDanh:-5,bribe:{bac:40,duc:-2},self:{duc:2},phongP:40,act:{spy:1.3,bribe:1.4,frame:1.2}},
+ phong:{month:2,min:3,len:1,cd:24,gift:{bac:10,duc:1},keep:{bac:40},npcKeep:40,act:{social:1.1}},
+ hon:{len:1,kho:4,mDanh:3,gift:25,giftAff:10,npcAff:5,npcGift:.06,place:{tn:1.4},act:{social:1.3,greet:1.2}},
+ ngoai:{pow:85,young:30,illSt:2,keepPow:-10,cd:72,len:2,purge:[50,25],fall:-30,rise:5,sung:-8,danh:-5,mood:3,toCam:60,advise:{o:[40,5],pow:-10},act:{ally:1.4,scheme:1.3,warn:1.3,social:.8}},
+ phat:{month:4,t:1,len:1,cd:24,afterP:50,endDis:50,big:{bac:40,th:5},sutra:{suc:8,duc:2,th:2},npcGive:.1,npcTh:3,place:{cnh:2,tn:1.3},act:{pray:2,social:1.2,scheme:.8},force:[{b:0,pl:"cnh",deed:"pray",why:"Lễ Phật",g:["consort","queen"]}]},
+ benh:{st:2,len:3,cd:18,mood:2,nurse:{suc:12,o:[45,6],sung:4},gin:{bac:30,sung:2},pray:{duc:2},npcSung:[3,1],place:{dtd:1.6,cnh:1.3},act:{social:1.2,greet:1.4,scheme:1.4,pray:1.5,art:.5},force:[{b:2,pl:"dtd",deed:"routine",why:"Hầu thuốc Hoàng thượng",g:["consort","queen"],rank:3}]},
+ tinh:{month:1,t:2,len:1,cd:24,bacK:.4,base:20,showPow:70,showDanh:1,ask:{o:[35,5],danh:3},act:{social:1.3,scheme:1.2,bribe:1.2}}};
 /* ---- review/one-core-jkc-2: BAL.odb (one-core-odb-move.js) ---- */
 /* BAL.odb.<module>.<site> = the odds base N of od(N…) (key od<Site>) / roll(N±…) (key rb<Site>) the module rolls (the guard's odb kind);
    site = the enclosing function / option key / act id (_2, _3 … for the next ones in it); the same call text (a preview word(od(N+x)) and the

@@ -26,11 +26,15 @@ const now=()=>{try{return wk()}catch(e){return 0}};
 const T_=()=>{try{return typeof trS==="function"?trS():null}catch(e){return null}};
 const WN={tang:"Quốc tang",away:"Ngự giá xa cung",tuyen:"Đại tuyển tú nữ",hoa:"Hỏa hoạn lớn",dis:"Thiên tai mất mùa",dich:"Ôn dịch",su:"Sứ đoàn vào triều",tho:"Đại thọ",sao:"Thiên tượng",xa:"Đại xá thiên hạ"};
 const AWAY_N={te:"Đại lễ tế Giao",san:"Thu săn",tuan:"Ngự giá tuần du",chinh:"Ngự giá thân chinh"};
-function wName(w){if(!w)return"";if(w.k==="away")return AWAY_N[w.x&&w.x.sub]||WN.away;if(w.k==="dis")return w.x&&w.x.sub==="han"?"Hạn hán, mất mùa":"Lũ lớn, mất mùa";if(w.k==="sao")return"Nhật thực, sao chổi";return WN[w.k]||w.k}
+function wName(w){if(!w)return"";try{if(EVD[w.k]&&EVD[w.k].nm)return EVD[w.k].nm(w)}catch(e){}if(w.k==="away")return AWAY_N[w.x&&w.x.sub]||WN.away;if(w.k==="dis")return w.x&&w.x.sub==="han"?"Hạn hán, mất mùa":"Lũ lớn, mất mùa";if(w.k==="sao")return"Nhật thực, sao chổi";return WN[w.k]||w.k}
 const WW={stat:{start:{},end:0,skip:{}},err:0};window.WW=WW;
 function wErr(t,e){WW.err++;console.error("jworld "+t,e)}
 function wZ(){if(!S)return null;let z=S.wwin;if(!z||typeof z!=="object")z=S.wwin={};if(!Array.isArray(z.L))z.L=[];if(!z.last)z.last={};if(!z.n)z.n={};if(z.seq==null)z.seq=0;return z}
-function worldWin(k){try{if(!S||!BAL.world||!B().on)return k?null:[];const z=S.wwin;if(!z||!Array.isArray(z.L))return k?null:[];const t=now();const A=z.L.filter(w=>w&&w.t0<=t&&t<w.t1);return k?(A.find(w=>w.k===k)||null):A}catch(e){return k?null:[]}}
+/* perf (buổi): nightCh / mindW / festToday / stipend call worldWin many times a buổi — the open list is memoised per (save, record, length, tuần) */
+let WM={S:null,L:null,n:-1,t:-1,A:null};
+function worldWin(k){try{if(!S||!BAL.world||!B().on)return k?null:[];const z=S.wwin;if(!z||!Array.isArray(z.L))return k?null:[];const t=now();
+ let A;if(WM.S===S&&WM.L===z.L&&WM.n===z.L.length&&WM.t===t&&WM.A&&WM.A.every(w=>w.t1>t))A=WM.A;else{A=z.L.filter(w=>w&&w.t0<=t&&t<w.t1);WM={S,L:z.L,n:z.L.length,t,A}}
+ return k?(A.find(w=>w.k===k)||null):A.slice()}catch(e){return k?null:[]}}
 function worldAny(f){return worldWin().some(f)}
 /* ---------- who is who ---------- */
 const isEmpP=p=>!!S&&(p===S.emp||p==="emp");
@@ -209,9 +213,9 @@ EVD.sao={place:w=>"cnh",
 EVD.xa={place:w=>"lc",
  start(w){const b=B().xa;const F=[];if(S.confined&&!(typeof isSrv==="function"&&isSrv())){S.confined=0;F.push(S)}
   for(const v of rivals){if(!v.alive)continue;if(v.confined){v.confined=0;F.push(v)}else if(v.out&&!v.coop&&roll(b.npcP)){v.out=false;v.rank=0;F.push(v)}}
-  const T=T_();if(T)T.kho=cl(T.kho-b.kho,0,100);w.x.me=S.out&&(S.turn-(S.coldTurn||0))>=b.minM?1:0;
+  const T=T_();if(T)T.kho=cl(T.kho-b.kho,0,100);
   return `Chiếu đại xá: miễn thuế một năm, người bị cấm túc được tha${F.length?`: ${nmList(F)}`:""}.`},
- card(w){if(w.x.me&&S.out){try{restore(false,"Chiếu đại xá thiên hạ")}catch(e){wErr("restore",e)}return null}return{t:"Đại xá thiên hạ",who:pEmp(),h:`<p>${w.cause}.</p><p>${w.txt||""}</p>`}},
+ card(w){if(S.out&&(S.turn-(S.coldTurn||0))>=B().xa.minM){try{restore(false,"Chiếu đại xá thiên hạ")}catch(e){wErr("restore",e)}return null}return{t:"Đại xá thiên hạ",who:pEmp(),h:`<p>${w.cause}.</p><p>${w.txt||""}</p>`}},
  night(w,p){return false}};
 function wNow0(w){return now()-w.t0}
 function wPresent(k){try{return liveR().filter(v=>whereOf(v)===k&&!v.confined)}catch(e){return[]}}
@@ -219,13 +223,14 @@ function wPresent(k){try{return liveR().filter(v=>whereOf(v)===k&&!v.confined)}c
 function rawNight(p){WW.noGate=1;try{return nightCh(p)||0}catch(e){return 0}finally{WW.noGate=0}}
 function nightBlocked(p){if(WW.noGate)return false;for(const w of worldWin()){const E=EVD[w.k];try{if(E&&E.night&&E.night(w,p||S))return true}catch(e){}}return false}
 {const n0=nightCh;nightCh=function(p){const c=n0.apply(this,arguments);try{if(c&&S&&B().on&&nightBlocked(p||S))return 0;
+  if(c)for(const w of worldWin()){const E=EVD[w.k];if(E&&E.nightMul){const m=E.nightMul(w,p||S);if(m!=null&&m!==1)return Math.round(c*m)}}
   const t=worldWin("tuyen");if(c&&t&&(t.x.n||[]).includes((p||S).id))return Math.round(c*B().tuyen.newNight)}catch(e){}return c}}
 if(typeof window.visRoll==="function"){const v0=window.visRoll;window.visRoll=function(){try{if(S&&B().on&&nightBlocked(S))return""}catch(e){}return v0.apply(this,arguments)}}
 function feastOff(){return worldAny(w=>EVD[w.k]&&EVD[w.k].feast)}
 {const f0=festToday;festToday=function(){const f=f0.apply(this,arguments);try{if(f&&S&&B().on&&feastOff())return null}catch(e){}return f}}
 if(typeof festival==="function"){const f0=festival;festival=function(title){try{if(S&&B().on&&feastOff()){log(`${title}: năm nay bãi yến vì ${wName(worldWin().find(w=>EVD[w.k].feast))}.`);return""}}catch(e){}return f0.apply(this,arguments)}}
-{const s0=stipend;stipend=function(p){let line=s0.apply(this,arguments);try{if(p&&!p.out&&S&&B().on&&worldAny(w=>EVD[w.k]&&EVD[w.k].pay)){const n=Math.round((BAL.pay[Math.min(7,rkOf(p))]||0)*B().dis.payCut);
-   if(n>0){ap(p,{bac:-n});if(p===S)line=(line||"")+` Mất mùa, cung giảm bổng: Bạc -${n}.`}}}catch(e){}return line}}
+{const s0=stipend;stipend=function(p){let line=s0.apply(this,arguments);try{if(p&&!p.out&&S&&B().on&&worldAny(w=>EVD[w.k]&&EVD[w.k].pay)){const W=worldWin().filter(w=>EVD[w.k]&&EVD[w.k].pay);const c=Math.max(...W.map(w=>(B()[w.k]||{}).payCut||0));const n=Math.round((BAL.pay[Math.min(7,rkOf(p))]||0)*c);
+   if(n>0){ap(p,{bac:-n});if(p===S)line=(line||"")+` ${wName(W.find(w=>(B()[w.k]||{}).payCut===c))}, cung giảm bổng: Bạc -${n}.`}}}catch(e){}return line}}
 if(typeof wdTang==="function"){const t0=wdTang;wdTang=function(){try{if(S&&B().on&&worldWin("tang"))return true}catch(e){}return t0.apply(this,arguments)}}
 /* j92 starts its own quốc tang at month end (S.wdTang = turn+3): the window is the one record. Its card stays (it is the announcement). */
 if(typeof wdMonth==="function"){const m0=wdMonth;wdMonth=function(pre){const had=!!worldWin("tang");const q0=Q.length;const r=m0.apply(this,arguments);
@@ -272,7 +277,7 @@ function wCourt(){const T=T_(),M=S.wMM;if(!T||!M||M.done)return;M.done=1;const b
  if((M.k==="lut"||M.k==="han")&&M.fail&&T.kho<b.dis.kho)worldStart("dis",`${M.k==="lut"?"Lũ lụt ở Giang Nam":"Hạn hán miền bắc"}, cứu tế chậm trễ, kho lúa cạn`,{x:{sub:M.k}});
  if(M.k==="giac"&&M.fail&&T.bien<b.away.chinh.bien){const c=b.away.chinh;const z=wZ();const ok=(S.emp.age||0)<=c.age&&!(S.emp.ill&&S.emp.ill.st>=2)&&(z.last.away_chinh==null||now()-z.last.away_chinh>=c.gapY*36);
   if(ok&&roll(c.p)&&worldStart("away","Giặc phá biên ải, Hoàng thượng quyết thân chinh",{len:b.away.len.chinh,x:{sub:"chinh"}}))z.last.away_chinh=now()}
- const d=wZ().H&&wZ().H.find(h=>h.k==="dis");if(T.kho<b.dich.kho&&(worldWin("dis")||(d&&now()-d.t1<b.dich.after))&&roll(b.dich.p))worldStart("dich","Đói kém kéo dài, dịch bệnh nổi lên");}
+ const d=wZ().H&&wZ().H.find(h=>h.k==="dis");if(T.kho<b.dich.kho&&(worldWin("dis")||worldWin("trung")||(d&&now()-d.t1<b.dich.after))&&roll(b.dich.p))worldStart("dich","Đói kém kéo dài, dịch bệnh nổi lên");}
 function wCalendar(){const b=B(),T=T_(),z=wZ(),y=S.year,m=S.month,t=S.tuan||0,E=S.emp||{};const ill=!!(E.ill&&E.ill.st>=2);
  /* tuyển tú: the KC.ty clock, every 3 years after the player's own (her home road ends at KC.ty) */
  if(typeof KC!=="undefined"&&m===KC.tm&&t===0&&y>KC.ty&&(y-KC.ty)%b.tuyen.every===0&&!(typeof isKc==="function"&&isKc()))worldStart("tuyen",`Năm thứ ${y}, đại tuyển tú nữ theo lệ ba năm`);
@@ -296,13 +301,14 @@ function wCalendar(){const b=B(),T=T_(),z=wZ(),y=S.year,m=S.month,t=S.tuan||0,E=
 if(typeof tsbBurn==="function"){const b0=tsbBurn;tsbBurn=function(p,n,cause){const L=b0.apply(this,arguments);try{if(!WW.inFire&&L&&L.length)WW.stat.fire=(WW.stat.fire||0)+1;if(!WW.inFire&&L&&L.length&&S&&B().on&&host()&&p&&!p.out){
    const dry=typeof tsbFireBase==="function"&&tsbFireBase(p)>1;if(roll(B().hoa.spread[dry?0:1]))worldStart("hoa",`Cung ${p===S?"của ngươi":p.name} bén lửa (${cause||"đèn nến"}), gió hanh thổi lửa lan`,{len:B().hoa.len,x:{who:pid(p)}})}}catch(e){wErr("fire",e)}return L}}
 /* ---------- the tuần tick (after endTurn) ---------- */
+const XH=[];/* batch-2 trigger hooks (jworld2.js) */
 function worldTick(){if(!S||S.dead||!B().on)return;const z=wZ();if(host()){WW.inTick=1;try{const t=now();
   for(const w of z.L.slice())if(t>=w.t1)worldEnd(w);
   for(const w of worldWin()){const E=EVD[w.k];if(E&&E.tick)try{E.tick(w)}catch(e){wErr("tick "+w.k,e)}
    if(w.k==="tang"&&wNow0(w)<(B().tang.noNight[w.x.why]||1))moodFloor(B().tang.mood);if(w.k==="dis")moodFloor(B().dis.mood)}
   for(const a of (z.q||[]).splice(0))worldStart(a.k,a.cause,a.o);
   if(!z.seen)z.seen=wSeen();else wDeaths();if(worldWin("tang")&&S.wdTang)S.wdTang=0;
-  if((S.tuan||0)===0)wCourt();wCalendar()}finally{WW.inTick=0}}
+  if((S.tuan||0)===0)wCourt();wCalendar();for(const f of XH)try{f()}catch(e){wErr("x tick",e)}}finally{WW.inTick=0}}
  worldShow()}
 /* the CENTER pop-up (existing modal card, Q → showModal): at the start (what happens + her own options, the same list the NPCs choose
    from) and at the end (what came of it). One per player per window (S.wwSeen / S.wwEnd), guest included (render hook). */
@@ -319,5 +325,7 @@ function worldShow(){if(!S||S.dead)return;S.wwSeen=S.wwSeen||{};S.wwEnd=S.wwEnd|
 /* co-op guest: cards of windows the host opened */
 {const r0=render;render=function(){const r=r0.apply(this,arguments);try{if(S&&!S.dead&&!host()&&!Q.length&&!S.mg){const n=Q.length;worldShow();if(Q.length>n&&$("modal").hidden)showModal()}}catch(e){}return r}}
 try{const K=window.COOPW&&COOPW.X&&COOPW.X.W_KEYS;if(Array.isArray(K)&&!K.includes("wwin"))K.push("wwin")}catch(e){}
+/* the batch-2 module (jworld2.js) adds its events into the same EVD / WN / BAL.world and reuses these helpers (one layer, no second copy) */
+window.WORLD_X={B,now,T_,wZ,wErr,wName,WN,TANG_NO,EVD,XH,liveR,cons,moodFloor,moodSet,nmList,npcPick,mW,monthsWord,meCons,pid,byPid,wNow0,wPresent,rawNight,wGroup,isEmpP,isThP};
 Object.assign(window,{worldQueue,worldWin,worldPlanW,worldStart,worldEnd,worldTick,worldName:wName,WORLD_EVD:EVD,worldNightBlocked:nightBlocked});
 })();

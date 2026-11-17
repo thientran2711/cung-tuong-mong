@@ -27,14 +27,14 @@ function npool(){S.npool=S.npool||{maid:[],eunuch:[]};return S.npool}
 function refillPool(){const P=npool();for(const r of ["maid","eunuch"]){P[r]=P[r].filter(()=>roll(50));while(P[r].length<2+R(2)&&roomFor(r))P[r].push(mkServ(r))}}
 function takeFromPool(role){const P=npool();if(!P[role].length)return null;return P[role].splice(R(P[role].length),1)[0]}
 /* NPC households fill from the same pool (one rule); she waits if it runs dry */
-function fillStaff(p,free){const [cm,ce]=capOf(p);let m=p.staff.filter(s=>s.role==="maid").length+1,e=p.staff.filter(s=>s.role==="eunuch").length;
+function fillStaff(p,free){const [cm,ce]=capOf(p);let [m,e]=hhHas(p);
  const get=r=>free?mkServ(r):takeFromPool(r);
  while(m<cm&&roomFor("maid")&&(free||p.bac>=BAL.house.hireBac)){const s=get("maid");if(!s)break;p.staff.push(s);m++;if(!free)ap(p,{bac:-BAL.house.hireBac})}
  while(e<ce&&roomFor("eunuch")&&(free||p.bac>=BAL.house.hireBac)){const s=get("eunuch");if(!s)break;p.staff.push(s);e++;if(!free)ap(p,{bac:-BAL.house.hireBac})}}
 /* hiring: she picks among this month's candidates (age, origin, impression only) */
 function hireCard(role){const P=npool()[role];if(!P.length){Q.push({t:"Nội vụ phủ",h:`<p>Tháng này Nội vụ phủ không còn ${role==="maid"?"cung nữ":"thái giám"} nào. Tháng sau sẽ có người mới.</p>`});showModal();return}
  Q.push({act:1,t:"Nội vụ phủ đưa người",h:`<p>Người hiện có (chỉ biết tuổi, xuất thân và dáng vẻ; nết thật phải ở lâu mới biết):</p>`,opts:P.map(s=>({n:`${s.name}, ${s.age} tuổi`,fx:{bac:BAL.eff.j29.bacFx},x:`${s.org} · trông ${s.imp}`,go:()=>{const i=P.indexOf(s);if(i>=0)P.splice(i,1);S.staff.push(s);log(`Nhận ${s.name} từ Nội vụ phủ. Bạc ${balSg(BAL.eff.j29.bacFx)}.`)}})).concat([{n:"Thôi",fx:{},x:"không nhận ai"}])});showModal()}
-document.addEventListener("click",e=>{const b=e.target.closest("[data-hire]");if(!b||b.disabled)return;e.stopPropagation();e.preventDefault();if(!S||S.dead||Q.length||S.bac<BAL.house.hireBac)return;const [cm,ce]=capOf(S);const role=b.dataset.hire;const n=S.staff.filter(s=>s.role===role).length+(role==="maid"?1:0);if(n>=(role==="maid"?cm:ce))return;hireCard(role)},true);
+document.addEventListener("click",e=>{const b=e.target.closest("[data-hire]");if(!b||b.disabled)return;e.stopPropagation();e.preventDefault();if(!S||S.dead||Q.length||S.bac<BAL.house.hireBac)return;const [cm,ce]=capOf(S),[nm,ne]=hhHas(S);const role=b.dataset.hire;if(role==="maid"?nm>=cm:ne>=ce)return;hireCard(role)},true);
 /* 'Xem người': a costly look (Bạc -15, 1 khắc) reveals the trait */
 document.addEventListener("click",e=>{const b=e.target.closest("[data-svlook]");if(!b||b.disabled)return;e.stopPropagation();const s=servById(+b.dataset.svlook);if(!s||S.bac<BAL.house.lookBac||!can(1)||Q.length)return;apply({bac:-BAL.house.lookBac});spend(1);servLearn(s,"Cho người dò xét lai lịch");render()},true);
 /* FIRING: Nội vụ phủ must agree (Chắc), Bạc -20, Danh -1 (more if she fires often), a random replacement from the pool; he knows her secrets */
