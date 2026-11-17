@@ -69,5 +69,4 @@ try{new MutationObserver(ms=>{if(ms.every(m=>m.target.closest&&m.target.closest(
 .kfshost{position:relative}
 img.kemo.kfseal{position:absolute!important;z-index:7;display:block;box-sizing:border-box;object-fit:contain;border-radius:50%;pointer-events:auto;cursor:pointer;-webkit-tap-highlight-color:transparent;filter:drop-shadow(0 1px 2px #000a);transform:none;margin:0;max-width:none;max-height:none;animation:none}
 img.kemo.kfseal.kemo-an{opacity:.85}
-@media (prefers-reduced-motion:no-preference){img.kemo.kfseal.kemo-gian,img.kemo.kfseal.kemo-dau{animation:kemoPulse 2.4s ease-in-out infinite}}
 `;document.head.appendChild(st)})();
