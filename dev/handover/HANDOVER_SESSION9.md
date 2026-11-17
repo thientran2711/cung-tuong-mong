@@ -826,3 +826,4 @@ LESSONS s36: owner wants ONE complete reviewed proposal, never item-by-item ques
 - (17/11 20:27Z) kit-display-room PASS c6d84567 (in batch s36a); s37 ordered r2 follow-up: xa xỉ numbers → VANPHONG words (review/kit-display-room-r2), SMALL review on its sha. C-AG #5: running 6, free 6; ag-all-2 r2 ETA ~21:10–21:40Z; FEELINGS-18 #2 building.
 - (17/11 20:30Z) s37: painted-cabinet kit re-map (OD 21:55Z) given to kit-display-room worker session_01UV1SzisVVpBnxyKZsxjCfY in review/kit-display-room-r2 (with xa xỉ→words); waits on C display-bg.md.
 - (17/11 20:27Z) s37 WITHDREW the xa xỉ→words order (wrong: per-item numbers are owner-ruled OD L1365/L1382/17/11 15:45Z); r2 = painted-cabinet re-map + kit lux parts only. Lesson: run prio1.sh before every order, even small ones.
+- (17/11 22:00Z) OWNER: no code-drawn picture anywhere (OD 22:00Z) — C audit + paint for care minigames ordered; main kit swaps art in when URLs arrive.
