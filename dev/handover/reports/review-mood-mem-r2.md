@@ -47,3 +47,32 @@ QUICKCHECK --cpu 4: PASS open 1576 ms, old save ok + buổi, perf new/live rende
 ## PHASE 2 (pending)
 Waits for the foreman: ag-all-2 LIVE on main → merge origin/main into review/mood-mem-r1 565e6c24 → site build → moodknow-step0, ag-moodknow,
 emotion-acts, coop-one-world 7+3, QUICKCHECK --cpu 4 → "PASS <sha> FF" → then the same for review/mood-mem-r2 on top.
+
+## PLAN CHANGE (C-AG #6, from main s37 21:17Z): ONE landing head review/npc-chain-land on LIVE main — WIP + HANDOVER (rollover, context ≈ 28 %)
+Branch review/npc-chain-land @ a088443d (merge main 4c8568f5) (pushed). Built from:
+1. review/feelings-18-r1 5ca1b262 + merge 68178e5d (mood-mem r2 review; only built files conflicted).
+2. + review/kit-figure-mood-r6 43fbf2e7 (only built files conflicted; r6 contains feelings-18-r1).
+3. + review/ag-all-2-r2 521a4ac3 (its WIP head, merged EARLY on purpose: it already holds the main c0a52168 resolutions → 37 conflicting files against main
+   dropped to 13 + 7). Resolutions (real merges): ag-all-2's BAL keys kept AND the chain's true ghen whys / ghenUp / pgUp (j7 j8 ×2 j68g j71 ×2 j75 jts);
+   jemo / jemoseal / jemocause / KIT.md / emotion-acts(-2) tests = FEELINGS-18 + kit-figure-mood r6 side (owner 20:15Z no intent, 20:25Z seal always for a
+   known person, no pop-over; no caller of kitEmoSeal.pop / emoSealSrc left); jbal2 both appended blocks kept (MOODKNOW/MOOD-MEM + AG-ALL-2f3);
+   assemble list = union.
+4. + origin/main 4c8568f5: assemble + jshelf/jdisp; j19 main "Bại" + fmt kept with ag-all-2 payWinFail; jemo/jemoseal/jemocause/KIT.md = r6 side
+   (supersedes main's kit-figure-mood r4/r5); CHANGE.txt main.
+Tests on the WIP build (dev/index.html via assemble; site NOT rebuilt yet): feelings18 34/34 · mood-mem 16/16 · moodknow-step0 19/19 ·
+ag-moodknow 33/33 (one earlier run 1 FAIL = the known random) · one-core-guard PASS.
+
+### TODO for the successor (in order)
+a. bash dev/site/build_site.sh → commit index.html / sw.js / assets.json.
+b. Step 2 of the order: G1 one-core-bind 6 mismatches at the root — j25.js:11 BAL.eff.j9.evRun and j78.js:127 BAL.eff.j2.evRun / BAL.eff.j2.run: the TEXT
+   prints a BAL key that the option's own rule does not read → make the rule read the same key (or print the key the rule reads). Check
+   .quickcheck/gates/g1-bind.txt after quickcheck; whole family (LUẬT SỬA CẢ NHÓM): the gate lists all.
+c. When the ag-all-2 r2 reviewer (session_01UV1SzibgyTxRDxLdJ5yW6t) gives its PASS sha on review/ag-all-2-r2: merge it in (only the delta after 521a4ac3).
+   If main moved: merge origin/main again.
+d. Gates: quickcheck --runs 5 (--cpu 4), coop-e2e 63/63, feelings18 34/34, mood-mem, moodknow-step0, ag-moodknow, one-core-guard, emotion-acts(-2),
+   coop-one-world 7+3, fig-seal shots Fold 755x1000 + iPad 1180x820 (shots outside git), old save → ONE "PASS <sha>" (origin/main ancestor) → C-AG #6
+   session_01UV1SzjqdQPh2K9YUVK9VhU.
+Tools used for the merge (re-creatable): a hunk char-diff printer + a hunk resolver (ours/theirs/sub on theirs) — plain python, nothing in the repo.
+ROLLOVER = CONTEXT, NEVER 30 TURNS (owner OD:L1217; repeated by the owner 16/11 09:20Z — she is tired of reminding)
+- Trigger = context (owner OD:L1217 + ceiling 16/11 08:15Z s13): at session start note your starting context as a % of the window (START_CTX; get_session context_usage.used_tokens, or your own estimate when it reads 0) in your first handover line. Roll over when context >= START_CTX % + 25 % of the window, and NEVER above 60 % of the window (hard ceiling). Then write the handover, open the next session yourself (create_session), and stop.
+- Every takeover prompt you write MUST copy these three lines verbatim. Workers roll over too (owner 16/11 08:22Z s14, option 1): at START_CTX % + 25 % of the window, ceiling 60 %; a worker may finish if only push + report remain; it writes its handover in its report file and tells its coordinator, and the COORDINATOR opens the successor (never the worker).
