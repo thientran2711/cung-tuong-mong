@@ -33,3 +33,6 @@ fold.jpg, ipadAir.jpg, ipadPro.jpg, iphone14.jpg (crowded home stage; ipadAir sh
 4. Place header: "Ngọc Thanh các [group] 5" via `j59hdrCount()` (same `j59ico()` as the chip). Longer stage lines keep their rest ("[icon] 5 · Càn Ninh cung: …"); "Không gặp ai." (0 people) stays text — decision for main if she wants "[icon] 0". Scan fails on any header still reading "Ở đây còn…".
 Tests: `node dev/test/morechip-scan.js` → MORECHIP OK, step-ups 0, ON column 0 at all 5 sizes. KIT 33.9 updated.
 Shots (CDN img/_review/morechip-sil/, old ones wiped): fold.jpg, ipadAir.jpg, ipadPro.jpg, iphone14.jpg, icon-group.png. Looked at Fold + iPad: header icon+number inline after the name, chips in true corners.
+
+## ROUND 3 — sha **d51137ff**
+Header count "Ngọc Thanh các [plaque: group icon + N]" now sits in the same light kit chip plaque (`.kchip.j59hchip`, background #fff8ee, 2 px border, shadow) as the corner chips, so it reads on dark scenes (every place header, via j59hdrCount). Scan MORECHIP OK at 5 sizes. Shots re-uploaded to img/_review/morechip-sil/ (fold.jpg, ipadAir.jpg, ipadPro.jpg, iphone14.jpg, curl 200).
