@@ -124,10 +124,7 @@ function fixRefs(s){const kid=n=>{try{return allKids().map(x=>x[0]).find(k=>k.na
 function standIn(PA,mine){if(!PA)return null;try{
  if(X.friendSrv(PA)){const m=typeof RV==="function"?RV(PA.S.srv.mid):null;if(m){const v=X.buildFriendSrv(PA);m.staff=m.staff||[];m.staff.push(v);return v}return null}
  const v=X.buildFriend(PA,mine);if(!v)return null;
- /* part B: "hh" (the Empress's regard) is derived from her row toward the host (Hoàng hậu.rl[901]); a plain copied number would be "migrated"
-    by j24 hhBind at the first consorts() of her turn (blended into that row: the host's own row moved, found by coop-thin-b.js). Bound now,
-    no migration; it is never bridged (the row it reads is the world's). */
- if(typeof hhBind==="function")try{delete v.hh;hhBind(v)}catch(e){}
+ /* "hh" (the Empress's regard) is bound in X.buildFriend (B r1 item 6, the root for both paths); it is never bridged (the row it reads is the world's) */
  try{rstats(v)}catch(e){}
  /* the bridge baseline is taken AFTER rstats (its derived numbers are not her acts; S.hh etc. are setters on the host's S) */
  if(v.__b){for(const k of X.STAT)v.__b[k]=v[k];v.__b.rel=v.rel;v.__b.oan=v.oan}
@@ -145,14 +142,17 @@ TH.withSeat=function(seat,fn){
  sb.origin=(typeof ORIGINS!=="undefined"&&ORIGINS.find(o=>o.k===B.ok))||A.S.origin;
  CW.ctx=seat;TH.ctxN++;TH.outerS=A.S/* part B: the host's own person, READ-ONLY inside (her names must not repeat the host's own servants: the stand-in has no staff) */;quiet=true;S=sb;for(const r of REG)if(r[0] in B.g)try{r[2](B.g[r[0]])}catch(e){}
  let v=null,p0=null;const dOn=TH.dOn();
- try{if(B.fresh){fixRefs(S);B.fresh=false}if(dOn&&D.hold)D.hold(S);v=standIn(PA,S);if(v)v.__inv0=(v.inv||[]).slice();if(dOn&&!D.noPatch)try{p0=pSnap()}catch(e){console.error("thin p0",e)}D.cur={p0,rv:dOn&&!D.noPatch&&TH.curDo!=="life"/* part B's life intents carry her rows themselves (rows) */?D.rvIn(seat):null};return fn()}
+ /* B r1 item 2 (ONE life-change path): a part-B life intent (roll / accept) answers with its own person (P), dialogs (q) and rows; part D's
+    steps (thq hold, takeQ of her cards, the person patch, her row tracking) do not run for it, so a new life never travels twice */
+ const dW=dOn&&TH.curDo!=="life";
+ try{if(B.fresh){fixRefs(S);B.fresh=false}if(dW&&D.hold)D.hold(S);v=standIn(PA,S);if(v)v.__inv0=(v.inv||[]).slice();if(dW&&!D.noPatch)try{p0=pSnap()}catch(e){console.error("thin p0",e)}D.cur={p0,rv:dW&&!D.noPatch?D.rvIn(seat):null};return fn()}
  finally{const sN=S;
-  if(dOn)try{D.takeQ()}catch(e){console.error("thin takeQ",e)}
+  if(dW)try{D.takeQ()}catch(e){console.error("thin takeQ",e)}
   let rvOps=[];if(dOn&&D.cur&&D.cur.rv)try{rvOps=D.rvOut(seat,D.cur.rv)}catch(e){console.error("thin rows",e)}
   try{for(const r of REG)B.g[r[0]]=r[1]()}catch(e){}
   for(const k of X.W_KEYS){if(k in sN)A.S[k]=sN[k];else delete A.S[k]}
   try{B.ok=sN.origin&&sN.origin.k||B.ok;const ss=ser().S;for(const k of X.W_KEYS)delete ss[k];B.S=ss;B.fresh=true;
-   if(dOn){p0=D.cur&&D.cur.p0||p0;D.cur=null;if(p0){const pt=pDiff(p0,ss).concat(rvOps);if(pt.length)D.patchOut(seat,pt)}D.save()}}catch(e){console.error("thin ser",e);B.S=sN}
+   if(dOn){p0=D.cur&&D.cur.p0||p0;D.cur=null;if(dW&&p0){const pt=pDiff(p0,ss).concat(rvOps);if(pt.length)D.patchOut(seat,pt)}D.save()}}catch(e){console.error("thin ser",e);B.S=sN}
   const Lb=X.pullFriend();TH.bridge=[];TH.bridgeItems=[];
   for(const [,e] of Lb){if(e!==v||!e.__b)continue;const b=e.__b;
    /* part D: things her turn put into the host's entry (a gift she gave, accepted by the host) go to the host as her gift (Quà tặng) */

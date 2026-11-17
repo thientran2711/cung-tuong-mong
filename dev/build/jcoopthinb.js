@@ -72,11 +72,11 @@ function rebase(K){const T=new Set((rivals||[]).filter(v=>v&&!v.coop));
  if(plain(s.cm)){for(const f of X.CM_P)delete s.cm[f];s.cm.seen={}}
  if(Array.isArray(s.men))for(const m of s.men){if(!plain(m))continue;for(const f of X.MEN_P)delete m[f];m.tinh=0;m.letters=0;m.trysts=0;m.af=0;m.knowsMe=[]}
  /* NPCs start fresh toward the new face (her viewer rows in context b); evm / resHead "me" = her */
- K.old=new Map();for(const r of npcs()){K.old.set(r,[r.rel,r.oan,r.ghen,r.ev,r.evm&&r.evm.me]);r.rel=0;r.oan=0;r.ghen=R(15);r.ev=0;if(plain(r.evm))r.evm.me=0;if(r.resHead==="me")r.resHead=null}
+ K.old=new Map();for(const r of npcs()){K.old.set(r,[r.rel,r.oan,r.ghen,r.ev,r.evm&&r.evm.me]);r.rel=0;r.oan=0;r.ghen=ghenNew0()/* ONE CORE: j1 newRival's rule */;r.ev=0;if(plain(r.evm))r.evm.me=0;if(r.resHead==="me")r.resHead=null}
  /* re-made on real people */
  if(s.foe&&!rivals.some(v=>v&&!v.coop&&v.name===s.foe)){const v=pick(liveRivals(false).filter(x=>!x.coop));if(v){s.foe=v.name;TB.stat.foe++}}
  if(s.ally){const L=(s.logs||[]);for(let i=L.length-1;i>=0;i--)if(/là người quen cũ, sẵn lòng che chở ngươi/.test(String(L[i]&&L[i].t||L[i])))L.splice(i,1);
-  const v=pick(liveRivals(false).filter(x=>!x.coop));if(v){relAdd(S,v,35);v.ghen=0;log(`${v.name} là người quen cũ, sẵn lòng che chở ngươi.`);TB.stat.ally++}}
+  if(allyBond(liveRivals(false).filter(x=>!x.coop)))TB.stat.ally++}/* ONE CORE: j2 allyBond (BAL.allyRel) */
  if(wasSrv&&typeof srvInit==="function"){const L=X.pullFriend();try{srvInit()}finally{X.pushFriend(L)}TB.stat.mistress++}
  if(!s.srv){s.place="home";s.visit={k:"home",people:homePeople(),talked:false}}}
 function npcs(){return (rivals||[]).filter(v=>v&&!v.coop)}
@@ -98,7 +98,7 @@ function roll(a){const seat=CW.ctx;const oP=CW.base&&CW.base.P&&CW.base.P[seat];
  checkNames();if(!mistressOk()){const L=X.pullFriend();try{S.srv=null;srvInit()}finally{X.pushFriend(L)}tab=tab0}
  if(a.re)S.nlRe=a.re|0;
  const life=((oP&&oP.life)||0)+1,rows=rowsOut(K);
- const key=K.seed+"#"+(a.re|0)+"#"+life;TB.last={key,life,rows,P:null};TB.hold=true;TB.stat.roll++;
+ const key=K.seed+"#"+(a.re|0)+"#"+life;TB.last={key,life,rows,P:null,wk:COOP.state&&COOP.state.week||0};TB.hold=true;TB.stat.roll++;
  const P=blob(life);TB.last.P=P;
  return {st:"roll",key,P,q:qSer(Q),rows,ok:mistressOk(),renamed:TB.renamed}}
 function accept(a){if(TB.cache[a.key])return TB.cache[a.key];try{if(TH.D&&TH.D.RV)delete TH.D.RV[CW.ctx]}catch(e){}/* D r1: a new face: this week's row deltas of the old face are gone with it */const L=TB.last;if(!L||L.key!==a.key)return {st:"accept",key:a.key,err:"stale"};
@@ -113,7 +113,12 @@ TH.blank=seat=>TH.curDo==="life"&&seat!==CW.seat;
 TH.onDo("life",(a)=>{a=a||{};if(a.st==="accept")return accept(a);return roll(a)});
 /* the store follows the room (her week is still played on her phone until E-G), except while a rolled life waits for her accept */
 const drop=()=>{if(host()&&!CW.ctx&&!TB.hold)TH.seatDrop(CW.seat==="a"?"b":"a")};
-COOP.on("week",drop);COOP.on("state",drop);
+/* B r1 item 3: the rolled life is held only while she can still accept it: she left / reloaded / dropped (peer offline: her phone keeps no
+   roll, an accept after it gets "stale" and re-rolls the same seed + reroll count) or a week merged after the roll → the hold, the rolled
+   person and her store go (rebuilt from the room = her real person) */
+function release(why){if(!host()||CW.ctx||!TB.hold)return;TB.hold=false;TB.last=null;TB.stat.release=(TB.stat.release||0)+1;TB.why=why;TH.seatDrop(CW.seat==="a"?"b":"a")}
+COOP.on("peer",o=>{if(!o)release("left")});
+COOP.on("week",()=>{if(TB.last&&(COOP.state&&COOP.state.week||0)>TB.last.wk)release("week");drop()});COOP.on("state",drop);
 
 /* ================= GUEST ================= */
 const SEND_MS=8000;
@@ -121,8 +126,10 @@ function ask(o){if(host()||!on())return false;const id=TH.doSend("life",o);TB.as
  clearTimeout(TB.t);TB.t=setTimeout(again,SEND_MS);return id}
 function again(){const A=TB.ask;if(!A||!CW.on)return;if(!on()){TB.ask=null;oldPath(A.o);return}TB.stat.resend++;ask(A.o)}
 /* the level dropped below 2 while she waited (a seat left / an old build joined): the old path builds her life on her phone */
-function oldPath(o){TB.stat.old++;if(o.st==="accept"){try{nlAcc0(false)}catch(e){console.error(e)}return}try{start0()}catch(e){console.error(e)}}
-function waitCard(){Q=Q.filter(m=>!m.nl);Q.unshift({nl:1,t:"Thân phận kiếp này",cls:"nlcard",h:`<p class="past">Sổ luân hồi đang định thân phận kiếp này, xin đợi giây lát.</p>`});try{showModal()}catch(e){}}
+function oldPath(o){TB.stat.old++;Q=Q.filter(m=>!m.thw);if(o.st==="accept"){try{nlAcc0(false)}catch(e){console.error(e)}return}try{start0()}catch(e){console.error(e)}}
+/* B r1 item 1: the wait note is a plain kit note (no nl / nlcard: those draw the person in S = her DEAD old life, with the Độ khó tabs and the
+   ✕ that accepted it); closing it only hides the note (no action); the host's answer replaces it (show: Q = her dialogs, then nlCard) */
+function waitCard(){Q=Q.filter(m=>!m.nl&&!m.thw);Q.unshift({thw:1,t:"Sổ luân hồi",h:`<p class="past">Sổ luân hồi đang định thân phận kiếp này, xin đợi giây lát.</p>`});try{showModal()}catch(e){}}
 function rollAsk(seed,re){CW.inLife=true;NLP={seed:0,thin:1};TB.key=null;ask({st:"roll",seed,re:re|0});if(S)waitCard()}
 /* the host's answer: her person shown through the display path (fromCanon of the room world + her blob + the rows toward her) */
 function show(r){const C2=J(CW.dying||CW.base);if(!C2||!C2.W)return false;C2.P=C2.P||{};C2.P[CW.seat]=J(r.P);
@@ -132,7 +139,7 @@ function show(r){const C2=J(CW.dying||CW.base);if(!C2||!C2.W)return false;C2.P=C
  const qs=[];for(const e of r.q||[]){try{if(e.pid){const d=mkP(e.pid,e.pp);if(d)qs.push({t:e.t||"Việc khó xử",h:d.t,opts:d.o,who:d.who,pid:d.pid,pp:d.pp,cls:d.cls})}
   else qs.push({t:e.t,h:e.h,cls:e.cls,btn:e.btn,who:typeof WHO==="function"?WHO(e.w):undefined,headArt:e.art||undefined,stage:e.st?[S]:undefined})}catch(x){console.error(x)}}
  Q=qs;return true}
-function lifeRes(r){if(!r||!r.P){if(r&&r.err==="stale"){const s=nlGet();rollAsk(s.seed,0)}return}
+function lifeRes(r){if(!r||!r.P){if(r&&r.err==="stale"){const s=nlGet();rollAsk(s.seed,s.re|0)/* B r1 item 4: her real reroll count */}return}
  clearTimeout(TB.t);TB.ask=null;
  if(r.st==="roll"){if(!show(r))return;CW.inLife=true;TB.key=r.key;NLP={seed:0,thin:1}/* truthy for the card (jkc road cards, no pdCheck); never a stored seed, so nlFaces never repaints faces here */;try{nlCard()}catch(e){console.error(e)}return}
  if(r.st==="accept"){if(!show(r))return;NLP=null;try{nlNew()}catch(e){}TB.key=null;CW.inLife=false;
@@ -152,9 +159,9 @@ start=function(){if(!guestThin())return start0.apply(this,arguments);
  if(seen||TH.CAP<LV)return start0.apply(this,arguments);
  const self=this,args=arguments,t0=Date.now();const w=()=>{if(on()){const d=nlGet();return rollAsk(d.seed,d.re|0)}if(seen||Date.now()-t0>WAITLVL)return start0.apply(self,args);setTimeout(w,100)};w()};
 const nlAcc0=nlAccept;
-nlAccept=function(viaClose){if(!(guestThin()&&TB.key))return nlAcc0.apply(this,arguments);
- if(TB.ask)return;const kc=window.__kcO||(S&&S.kcPick)||null;ask({st:"accept",key:TB.key,kc});if(!viaClose&&S)waitCard()};
+nlAccept=function(viaClose){if(guestThin()&&TB.ask&&on())return;/* B r1 item 1: an intent is out: nothing local, ever (the old accept would run on her dead S) */
+ if(!(guestThin()&&TB.key))return nlAcc0.apply(this,arguments);const kc=window.__kcO||(S&&S.kcPick)||null;ask({st:"accept",key:TB.key,kc});if(!viaClose&&S)waitCard()};
 const nlRe0=nlReroll;
-nlReroll=function(){if(!(guestThin()&&TB.key))return nlRe0.apply(this,arguments);if(TB.ask)return;
+nlReroll=function(){if(guestThin()&&TB.ask&&on())return;if(!(guestThin()&&TB.key))return nlRe0.apply(this,arguments);
  const pts=pdGet();if(pts<PD_COST)return;const re=(S&&S.nlRe||0)+1;pdSet(pts-PD_COST);const d={seed:nlSeed(),at:Date.now(),re};store.set(NL_KEY,d);rollAsk(d.seed,re)};
 }catch(e){console.error("jcoopthinb",e)}})();

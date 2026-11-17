@@ -57,12 +57,18 @@ function mapMe(o,toCanon,pid){if(!o||typeof o!=="object")return o;
 function friendSrv(P){return !!(P&&P.S&&P.S.srv&&!P.S.srv.risen)}
 /* the friend on the tiểu thư road (jkc) lives at her father's house until the tuyển tú: no palace entry for her until S.kc.inPal */
 function friendHome(P){return !!(P&&P.S&&P.S.kc&&!P.S.kc.inPal&&!P.dead&&!P.S.dead)}
+/* the bound "hh" reads the Empress (j24 queenP reads S): while the guest's first life is being shown (fromCanon before S exists) it reads 0 */
+function hhSafe(v){try{return v.hh}catch(e){return 0}}
 function buildFriend(P,mine){if(!P||!P.S||P.dead||P.S.dead||friendHome(P))return null;const s=J(P.S),mp=me();
  const rl=Object.assign({},s.rl||{}),ro=Object.assign({},s.ro||{});const rel=rl[mp]||0,oan=ro[mp]||0;delete rl[mp];delete ro[mp];
  const cev=s.cev||{};
  const v={id:fp(),coop:true,name:P.name||s.name,rank:s.rank||0,queen:(s.rank||0)>=7,trait:"Khiêm nhường",malice:15,rel,oan,rl,ro,ev:((mine||S||{}).cev||{})[fp()]||0,
   evm:{me:cev[mp]||0},alive:true,out:!!s.out,kids:[],ghen:0,pg:0,nights:0,inv:[],staff:[],nightLog:[]};
  for(const k of STAT)if(s[k]!=null)v[k]=s[k];for(const k of LOOK)if(s[k]!=null)v[k]=s[k];
+ /* B r1 item 6 (root, both paths): "hh" (the Empress's regard) is derived from the Empress's row toward this entry (j24 hhGet). A plain copied
+    number was "migrated" by j24 hhBind at the next consorts() (blended into that row: the Empress's row toward the other seat moved every
+    rebirth / every rebuild of the entry). Bound here, before anything sees the entry: no migration; the week write-back never sends it back. */
+ if(typeof hhBind==="function")try{delete v.hh;hhBind(v)}catch(e){}
  /* jtruth (reviewer r1): her own wrongs ledger travels with her, so true evidence on her is capped by what SHE really did (an empty
     ledger here made every piece on the friend a rumour each week, and NPC spies could never find a guilty friend); read-only copy */
  for(const k of ["wrongs","dw","dws","dkeys","schemes"])if(s[k]!=null)v[k]=J(s[k]);
@@ -72,7 +78,7 @@ function buildFriend(P,mine){if(!P||!P.S||P.dead||P.S.dead||friendHome(P))return
     Display copies only: what an act does to them goes to her through `res` (item / kid ops), never through the week write-back. */
  v.inv=bagOf(s.inv);v.kids=kidsCopy(s.kids);if(s.preg&&!s.hidden){v.preg=s.preg;if(s.fake)v.fake=s.fake}v.fx7=J((s.j71&&s.j71.fx)||null);
  mapMe(v,false,mp);v.id=fp();
- v.__b=J(Object.assign({},...STAT.map(k=>({[k]:v[k]})),{rel:v.rel,oan:v.oan,rl:v.rl,ro:v.ro,em:v.evm.me,out:v.out,rank:v.rank,ill:v.ill||null}));
+ v.__b=J(Object.assign({},...STAT.map(k=>({[k]:k==="hh"?hhSafe(v):v[k]})),{rel:v.rel,oan:v.oan,rl:v.rl,ro:v.ro,em:v.evm.me,out:v.out,rank:v.rank,ill:v.ill||null}));
  return v}
 function buildFriendSrv(P){const s=P.S;return {sid:fp(),coop:true,name:P.name||s.name,role:"maid",fc:s.fc,fk:s.fk,face:0,hue:0,age:s.age||18,loyal:60,
  spyFor:s.srv&&s.srv.spyFor!=null?(s.srv.spyFor===me()?"me":s.srv.spyFor):null/* p2 B1: whom she spies for (me = bought by me) */,lover:null,af:{},kn:1,imp:"hảo hữu chơi cùng",org:"hảo hữu chơi cùng"}}
@@ -116,7 +122,7 @@ function toCanon(){try{CW.hrSync&&CW.hrSync()}catch(e){console.error(e)}const L=
  const B=CW.base&&CW.base.P&&CW.base.P[fs()];
  if(B){const fP=J(B);const f=L.find(x=>x[0]>=0);const v=f&&f[1];
   if(v&&v.__b&&fP.S){const b=v.__b,s=fP.S;
-   for(const k of STAT)if(v[k]!==b[k]&&typeof v[k]==="number")s[k]=v[k];
+   for(const k of STAT)if(k!=="hh"&&v[k]!==b[k]&&typeof v[k]==="number")s[k]=v[k];/* hh = the Empress's row (the world merge carries it) */
    s.rl=s.rl||{};s.ro=s.ro||{};s.cev=s.cev||{};
    if(v.rel!==b.rel)s.rl[mp]=v.rel;if(v.oan!==b.oan)s.ro[mp]=v.oan;if((v.evm&&v.evm.me||0)!==b.em)s.cev[mp]=v.evm.me||0;
    for(const id in v.rl||{})if(v.rl[id]!==(b.rl||{})[id]&&id!=="me")s.rl[id]=v.rl[id];
