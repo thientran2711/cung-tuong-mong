@@ -899,3 +899,4 @@ LESSONS s38: never send one tall sheet (owner angry) — crop per option; look a
 - (17/11 23:41Z) Owner: glow chin too → tuyet-glow v7; colour fix = whole set eyes+lips+cheeks → toil-looks5 redo colour samples. look-decals worker was BLOCKED since 23:01 on a 1/2/3 question → answered 1 (paint now).
 - (17/11 23:49Z) Owner: creases = Magnific decals → look-decals adds fx-crease-*; cloth-xoc places them. kk whole-look samples sent (Lượt 35).
 - (18/11 00:01Z) stains fe95bc9: tea = pasted paint → fix; crease decals on CDN → cloth-xoc relief method. warm-set side-by-side asked again. Owner: hoa điền flat designs too vivid → tone/drop samples ordered.
+- (18/11 00:02Z) tuyet-glow 7e80f3cd SẴN SÀNG KIỂM (v7, quickcheck PASS) — waits owner OK on v7 + toil-looks5 landing first (it is built on toil-looks5 2712920c). Then one SMALL reviewer for toil-looks5 + tuyet-glow + smudge together → batch (upload toil-looks5 mkfit JSON to CDN in same batch).
