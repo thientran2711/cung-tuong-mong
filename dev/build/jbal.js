@@ -48,11 +48,13 @@ const BAL={wkFinCap:1,/* Đức from handmade works (kinh, vật cầu phúc): a
    is married (princes and princesses alike); matchShow = a child shows in the match lists from this age; matchMax = oldest prince offered as a match; age.reign = the young Emperor rules alone from this age (no regency).
    seat = seats per rank (7 Hoàng hậu, 6 Hoàng quý phi, 5 Quý phi, 4 Phi, 3 Tần); SEATCAP (j30) is this table.
    night = the least a night with the Emperor gives: Sủng +sung, Ân tình +an (the night's score adds more, j8 nightFx). */
-Object.assign(BAL,{time:{khac:4,sucMin:5},lot:{bac:10,k:1},walk:{near:1,far:2},sneak:{danh:8,heavy:15,seen:2},srvAge:{ask:25,out:30,mama:45},
+Object.assign(BAL,{time:{khac:4,sucMin:5},lot:{bac:10,k:1},walk:{near:1,far:2},sneak:{danh:8,heavy:15,seen:2},srvAge:{ask:25,out:30,mama:45,old:45},
  age:{sacFrom:25,sacLoss:2,sacMin:10,betroth:16,wed:18,matchShow:14,matchMax:21,reign:16},seat:{7:1,6:1,5:2,4:4,3:6}});
 /* ONE CORE r2 (review/one-core-land, 16/11): rule numbers of the modules that landed after review/one-core: story roads (jroute),
    origin arcs (jorigins), family house (jhouse), Tu duc lessons (jtds, jtd), small modules. One table per module; texts print the same key. */
-Object.assign(BAL,{route:{ /* jroute «Lối riêng» (tư tình / trốn cung / rời cung / ẩn dật / nghiệm thân): every rule number of that module */
+Object.assign(BAL,{route:{
+ /* k = the khắc each «Lối riêng» card costs, by card id (rtCard({id,…,k}); review/one-core-dup3, dev/measure/one-core-dup3-rtk-move.js) */
+ k:{tt0:1,tt1:1,tt2:2,tt3:3,ttord:1,ttcut:1,tc0:1,step_guard:1,step_maid:1,step_home:1,step_route:2,step_pass:1,step_cloth:1,step_drug:1,tcgo_:4,tcstop:1,hl_tu:2,hl_plead:1,hl_hon:2,hl_que:2,hl_phe:2,ad0:1,ad_kinh:2,ad_che:1,ad_off:1,mk_bribe:1,mk_swap:1,mk_alum:1,mk_spy:1,ngn_:1}, /* jroute «Lối riêng» (tư tình / trốn cung / rời cung / ẩn dật / nghiệm thân): every rule number of that module */
  ducFree:50 /* Đức above this lowers the odds of being seen / caught (rtDuc: (Đức-ducFree)/4) */,
  wearySung:25 /* Sủng below this (from month 6) = "ân sủng nhạt dần", a reason that opens Lối riêng */,
  tySuc:45 /* Sức below this lets her summon the physician lover to her palace */,
@@ -119,7 +121,12 @@ Object.assign(BAL,{route:{ /* jroute «Lối riêng» (tư tình / trốn cung /
  frame:{bac:-50,duc:-10} /* cost: have oil dropped in the rival's bowl */,
  alum:{bac:-20,duc:-4} /* cost: slip alum into her own bowl */,
  spy:{suc:-5} /* cost: spy on the accuser's bowl */,
- frameOil:70 /* roll: a rival framing her innocent child uses oil */
+ frameOil:70 /* roll: a rival framing her innocent child uses oil */,
+ heatW:[15,35,60,80] /* Lời ra tiếng vào: the cut points of its words (rtHeatW: Yên ắng < [0] ≤ Có kẻ xì xào < [1] … ≥ [3] Sắp vỡ lở) (review/one-core-arcs) */,
+ seen:{aff:45,rel:5} /* a rival who sees her with the man but likes her (thiện cảm ≥ aff) keeps quiet; thiện cảm +rel */,
+ oan:{report:40,threat:25,ngWin:30,demand:40,frame:50} /* oán the rival takes: reported to Cung Chính ti / threatened / lost the blood test / her false
+   accusation of the rival's child / caught framing the rival */,
+ threatEv:2 /* evidence on the rival gained by threatening her (printed in the choice) */
 }});
 Object.assign(BAL,{orig:{ /* jorigins.js: Bac Dich (bd) origin numbers */
  /* j69 origin roulette weights (approved 11/14 table, OD:L19). Hòa thân (nc) is ONE origin: its weight is the whole hòa thân slot, its country
@@ -217,11 +224,15 @@ function trystCh(p){return cl(conceiveCh(p),BAL.trystC[0],BAL.trystC[1])}
    4 ma ma, 3 cô cô) · age range at the start · names (the first holds the post at the start; successors take the next) · call = how
    the palace addresses her · tr (STR temperament key) · duties (shown on her card) */
 BAL.staff={retire:[63,68],gift:20,giftAf:10,talk:2,succAge:[46,54],
+ /* say = the cuts of the office holder's greeting pool (jstaff): tn = Thái hậu thiện cảm [hi from, mid from]; kn = Hoàng hậu thiện cảm [hi from, mid above] (review/one-core-dup3-land) */
+ say:{tn:[30,0],kn:[10,-10]},
  /* FRAME NARRATOR (owner 16/11 19:23Z s22, kit-size #4): a kit frame without its own person is told by the named palace official whose
     office covers that topic. ONE map (kind of the frame → post id gt / tn / kn, or the Emperor's eunuchs tq / ksp; "maid" = her thân tín
     maid, "me" = the player, where no office fits). Read by jksize kszWho3. */
  narrator:{news:"kn",notice:"kn",week:"kn",choice:"kn",rule:"tn",info:"tn",evidence:"tn",night:"ksp",reward:"tq",
   intel:"maid",threat:"maid",person:"maid",end:"me",result:"me"},
+ /* the Giáo tập ma ma stands in her room while S.turn <= gtDays (new tú nữ only; jstaff gtAtHome) */
+ gtDays:4,
  posts:[
   {id:"gt",title:"Giáo tập ma ma",palace:"Trữ Tú cung",master:"th",tr:"trung",rk:4,age:[50,55],
    names:[["Tống Quế Chi","Tống ma ma"],["Lạc Ngọc Dung","Lạc ma ma"],["Ôn Tú Hà","Ôn ma ma"]],
@@ -261,3 +272,81 @@ Object.assign(BAL,{st14:{max:14,parts:[[1,3],[4,11],[12,14]],lim:{nhap:6,nhapCnv
    Đáp ứng = nt / div − sub (j42 roll, the Thân phận row, the j67 / jst14 «Từ kẻ hầu thành tiểu chủ» step all read this) */
  ntRise:{at:45,div:2,sub:10}});
 function ntRiseOdds(){return Math.max(0,(S.nt||0)/BAL.ntRise.div-BAL.ntRise.sub)}
+/* ONE CORE odds ladder (review/one-core-dup; VANPHONG odds words Liều … Nắm chắc, words in KIT_ODDS j79): an odds value o reaches word
+   step i when o ≥ cut[i-1]; lo / hi = the lowest / highest odds a chancy option shows. Read by j1 word(), j79 kitOddsLv, jsgame sgLv /
+   SG_LO / SG_HI (before: the cuts were typed in all four). */
+Object.assign(BAL,{odds:{cut:[31,46,56,66,81,91],lo:5,hi:95}});
+function oddsLv(o){let i=0;for(const c of BAL.odds.cut)if(o>=c)i++;return i}
+/* ONE CORE number formatters for player texts (review/one-core-dup r2, OD:L1267 "text prints the constant"): balSg(n) = the signed amount as the
+   texts show it ("+4" / "-4"), balAb(n) = the amount without sign ("4"). A text that shows a BAL.eff / BAL.road / BAL.arc amount prints it with these
+   (dev/test/one-core-text.js fails a typed copy). */
+function balSg(n){return(n>0?"+":n<0?"-":"")+Math.abs(n)}
+function balAb(n){return String(Math.abs(n))}
+/* a printed count as a word («một chứng cứ»): balWord(balAb(BAL…)) — the number word of VP.num (j84, loads later; called only when the text is built) */
+function balWord(n){try{return window.VP&&VP.num?VP.num(+n):String(n)}catch(e){return String(n)}}
+/* balOan(n,"hurt"|"doer"|"mend"): the oán a relAdd amount n makes (relAdd gives the hurt one |n|×hurt, the doer |n|×doer, a kind act takes |n|×mend off), as the texts show it */
+function balOan(n,m){return String(Math.round(Math.abs(n)*BAL.relOan[m]))}
+/* ONE CORE age bands (owner art rule OD:L567: 18–25 / 26–35 / 36–50 / 51+; review/one-core-dup): band i starts at ageBand[i-1].
+   Read by band4 (j35), pidBand (j66), kcBand (jkc) (before: 26/36/51 typed in each). */
+Object.assign(BAL,{ageBand:[26,36,51]});
+function ageBandIx(a){let i=0;for(const c of BAL.ageBand)if(a>=c)i++;return i}
+/* ===== ONE CORE duplicate-rule hunt part 2 (review/one-core-dup2): one key per concept that had typed copies in several modules =====
+   quyLv  = the "quý" word ladder (thiện cảm) of VANPHONG:69 / owner OD:L247 (Ghét ≤ q0 · Không ưa < q1 · Bình thường ≤ q2 · Có cảm tình
+            < q3 · Quý mến < q4 · Thân thiết); quyIx(v) = word index 0…5, quyW (jhc) the word. Before: j21 affW (7 words incl. Thù /
+            Lạnh nhạt / Thân, banned by VANPHONG), jhc quyW and jts tsQuy typed their own cuts. Colour: > q2 green, < q1 red.
+   loy    = a servant's Lòng (loyalty) cut points used by the rules (trust 70 = "tin cẩn": she shields, warns, never sells her mistress;
+            close 60; firm 55; mid 50; warn 45 = may leave / shown red; low 40; bad 35; out 30 = betrays / runs; deep 75, top 80 = the
+            rare devoted tiers). Before: ~70 typed copies in 40 modules.
+   wit    = an NPC's Tâm cơ (j40 / j43 / j51 / j70 mind): lo 30 = weighs the odds / makes fewer mistakes, mid 35 = no longer foolish,
+            hi 60 = plans ahead, top 70 = hard to catch. (The "spot" bonus is 15 in j40/j43 and 12 in j70: kept, listed.)
+   ducLv  = Đức tiers: monthly drift of Thái hậu / Hoàng hậu thiện cảm (≥ up +1, < down −1), servants' Lòng drift (staffUp / staffDown),
+            the Đức word ducWord (word cuts thất đức < w0 ≤ bạc đức < w1 ≤ thường < w2 ≤ tử tế < w3 ≤ hiền đức).
+   sungLv = the Sủng word ladders, one per screen (no owner ruling yet; the cut sets differ, each keeps its live value):
+            emp = Hoàng thượng line in the person talk (j24), th = Thái hậu's word and the rumour (j68f / j68h), kinh = Kính sự phòng
+            (j68g), card = Hoàng thượng row of the people strip (jk2b), kc = consort lists (jkc). */
+Object.assign(BAL,{quyLv:[-30,-10,10,30,60],
+ loy:{trust:70,close:60,firm:55,mid:50,warn:45,low:40,bad:35,out:30,deep:75,top:80},
+ wit:{lo:30,mid:35,hi:60,top:70},
+ ducLv:{up:60,down:20,staffUp:70,staffDown:25,word:[20,40,60,80]},
+ sungLv:{emp:[25,45,70],th:[30,55],kinh:[15,35,60],card:[10,30,60],kc:[30,60]}});
+function quyIx(v){const q=BAL.quyLv;return v<=q[0]?0:v<q[1]?1:v<=q[2]?2:v<q[3]?3:v<q[4]?4:5}
+/* part 2 (review/one-core-dup2):
+   tinhLv  = a man's tình ý for the player (j22 / j42 / j24 / jmen): known 10 (shows), warm 30 (khăn tay, rumour), prince 40 (vương gia
+             asks for her), close 50 (meets alone, helps), ally 60 (vương gia ally), love 70 (word "si mê"); tinhW words on 10/30/50/70.
+   tinLv   = Chủ tin colour of the cung-nữ road (j42 chip + card): < lo red, ≥ hi green; watch = the Chủ tin a servant needs to keep watch
+             at the door for a secret meeting (jtin watcher, printed by jroute / j22 «… canh cửa (lòng …+, Chủ tin …+)»; review/one-core-dup3).
+   rareLv  = rarity word of an origin / event weight (j69 ow69Rare, jk2b kitRare): ≤ [0] Rất hiếm, ≤ [1] Hiếm.
+   sucLv   = Sức words: word = jthaiy sucWord (30/50/70), ask = Hỏi han result line (jaudit, 30/60) — two live ladders, kept, listed.
+   oanFade = oán that fades each month (j28 oanMonth: NPC × persF forgive, the player's own oán toward others flat).
+   tsDanger= "Nguy hiểm chung" (jts): hot ≥ 30 shown red, act ≥ 35 the NPC acts on it, calm < 10 shown green.
+   age.adult = the youngest adult in the game (owner OD:L104 18+; jage AGE_MIN lifts every adult below it). */
+Object.assign(BAL,{tinhLv:{known:10,warm:30,prince:40,close:50,ally:60,love:70},tinLv:{lo:30,hi:60,watch:60},rareLv:[6,9],
+ sucLv:{word:[30,50,70],ask:[30,60]},oanFade:2,tsDanger:{hot:30,act:35,calm:10}});BAL.age.adult=18;
+/* part 3 (review/one-core-dup2): single-copy cut ladders that were typed in their module, now named here (values unchanged):
+   rhythm = rhythm game hits for grade 2 / 3 (j5) · facRel = faction standing ±: thân / thù (j10) · tuanDays = day of month → tuần
+   (j31) · clanRel = clan relation ±: Đồng minh / Đối đầu (j55) · form = sports form words (j71) · virCong = công virtue level for
+   progress / tier 1 / tier 2 (j85) · wkQ = handmade work quality → tier (j85) · tho = lifespan words (jmort) · succEnd = succession
+   ending (j99succ) · veil = veil craft quality tiers (jveil) · lost = lost-item grade by price (jlost) · kidHp = kin health words (jht) · exTier = exam tier by target rank (jexam) · luxRep = luxury reputation tick (jlux) ·
+   rgTrust = reign faction trust words (jreign) · summon = summon gain steps (jts) · sgStep = minigame raw → odds step (jsgame). */
+/* review/one-core-jkc PART 2 (ONE CORE OD:L1267 + LUẬT SỬA CẢ NHÓM, dev/measure/one-core-text-rule.js): cuts whose number a help / gloss / tip text
+   ALSO typed (the tiểu thư fault family): the rule and the text now read the same key. */
+Object.assign(BAL,{
+ accNeedEv:[2,4],          /* chứng cứ needed to accuse (Tố giác): [anyone, Hoàng hậu (rank 7+)] — j8 accNeed + the act text */
+ coldEvNeed:2,             /* chứng cứ that clear her name from lãnh cung (j14 «Tìm chứng cứ minh oan») */
+ ngocboiSung:15,           /* the Ngọc bội ngự ban keeps its owner's Sủng from falling below this (j8; item text, jinv) */
+ sinhThanSung:50,          /* her birthday is bestowed only when Sủng is at least this (j20; ban thưởng list) */
+ m30:{tocaoEv:1,exposeEv:2,xinhhAff:40},     /* j30: chứng cứ for «Tố tội thật» / «Bóc chuyện tư tình»; Hoàng hậu thiện cảm for «Xin Hoàng hậu giáng» */
+ srvx:{tinOut:10,keepTin:60,secNeed:2,friendAf:30}, /* cung nữ road (j42): Chủ tin below tinOut = sent to Tân Giả khố; from keepTin the chủ keeps her past
+                           the age; secNeed = secrets of the chủ she must know to betray; friendAf = quý from which a colleague counts as a friend */
+ virx:{hanhCap:80,camSung:40},               /* j85: Hạnh bậc 3 monthly Đức +1 stops at hanhCap; Cầm bậc 5 cheers the Emperor when Sủng is at least camSung */
+ tsx:{empSung:30,denSung:20},                /* jts: at a birth the Emperor bestows when Sủng is at least empSung; he sees the lake lantern from denSung */
+ sucNeed:{self:25,wk:15,rcp:10,kid:5,yKid:15}, /* Sức an act needs (the lock, its «Sức dưới N» word and the act's own check read the same key): self = «Tự học»
+                           (j23 / j85 / jtabs / j83 deck card); wk = «Tự học, làm tác phẩm» (j83 / jtabs Tác phẩm tab); rcp = master / teacher lessons (jrcp);
+                           kid = teaching a child chữ / lễ nghi / nghệ (j53 / j54); yKid = Y thuật care of a sick child (jact) */
+ facJoinAff:30,             /* a consort with no faction joins hers when her thiện cảm with the player is at least this (j10 «lập phe») */
+});
+/* evWipe: the chứng cứ amount that clears every piece one person holds against another (evA(a,t,BAL.evWipe): a pardon, a death, a plot undone); review/one-core-dup3 */
+Object.assign(BAL,{evWipe:-99});
+Object.assign(BAL,{cut:{nightPrep:[1,2] /* night preparation q (j8 night1: Để mộc 1, Tắm 2, Tập 1+bậc) → why word sơ sài ≤[0] / chu đáo ≥[1] (jwhyn) */,rhythm:[8,13],facRel:20,tuanDays:[10,20],clanRel:25,form:[35,50,65],virCong:[2,3,5],wkQ:[25,45,65,85],
+ tho:[40,60,75],succEnd:{an:5,q:6},veil:[6,10,14],lost:[40,100,200],kidHp:[35,60],exTier:[3,5],luxRep:[2,3],
+ rgTrust:[15,35,60],summon:[3,5,8],sgStep:{up:7,down:3}}});

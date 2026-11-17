@@ -25,7 +25,7 @@ function ow69Pick(seed,ow){if(ow===true)ow=1;const r=nlRng((seed^0x9e3779b9)>>>0
  const L=ORIGINS.filter(o=>OW69[o.k]>0);const tot=L.reduce((a,o)=>a+OW69[o.k],0);
  let x=r*tot,k=L[L.length-1].k;for(const o of L){x-=OW69[o.k];if(x<0){k=o.k;break}}
  return originBrPick(k,nlRng((seed^0x5bd1e995)>>>0)())}
-function ow69Rare(k){const w=OW69[originRoot(k)]||0;/* a country branch shows its origin's rarity (one card) */return w<=6?"Rất hiếm":w<=9?"Hiếm":"Thường gặp"}
+function ow69Rare(k){const w=OW69[originRoot(k)]||0;/* a country branch shows its origin's rarity (one card) */return w<=BAL.rareLv[0]?"Rất hiếm":w<=BAL.rareLv[1]?"Hiếm":"Thường gặp"}
 if(typeof nlRun==="function")(function(){const r0=nlRun;nlRun=function(d){
  if(!d||window.__forceOrigin)return r0.apply(this,arguments);
  if(!d.ow&&!d.faces){d.ow=3;try{const c=store.get(NL_KEY);if(c&&c.seed===d.seed){c.ow=3;store.set(NL_KEY,c)}}catch(e){}}

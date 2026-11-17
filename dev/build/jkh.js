@@ -145,7 +145,7 @@ const d0=deal;deal=function(){d0.apply(this,arguments);try{if(!S||S.out||S.dead|
 if(typeof rtCards==="function"){const r0=rtCards;rtCards=function(){let A=r0.apply(this,arguments);try{if(!rtRoad()||S.out||(window.__bot&&!window.__rtGo))return A;
  for(const v of liveRivals(true)){const k=(v.kids||[]).find(x=>x.alive&&x.dateOff&&x.dateKnown&&!x.tfOk&&(x.age||0)<=P.ageMax);if(!k)continue;if(A.some(c=>c.rtId==="ngn_"+v.id))continue;
   const ev=typeof evG==="function"?evG(S,v):0;
-  A.push(rtCard({id:"ngl_"+v.id,n:`Tâu xin nghiệm thân ${k.name}`,t:`${k.name} của ${v.name} ${k.dateOff==="pre"?"sinh non":"sinh quá ngày"}, lệch ngày trong sổ Kính sự phòng.`,art:RT_ART.con,k:1,need:[[`chứng cứ về ${v.name} (có ${ev}/${P.accEv})`,ev>=P.accEv]],
+  A.push(rtCard({id:"ngl_"+v.id,n:`Tâu xin nghiệm thân ${k.name}`,t:`${k.name} của ${v.name} ${k.dateOff==="pre"?"sinh non":"sinh quá ngày"}, lệch ngày trong sổ Kính sự phòng.`,art:RT_ART.con,k:BAL.route.k.ngn_,need:[[`chứng cứ về ${v.name} (có ${ev}/${P.accEv})`,ev>=P.accEv]],
    x:"mở buổi trích huyết nghiệm thân (chọn cách ở bước sau)",kem:"máu hòa thì ngươi mang tội vu cáo",go:()=>{khStat("lech_me");rtPush("rtNgNpc",{v:v.id,k:k.name})}}));break}}catch(e){console.error(e)}return A}}
 /* ---- shown (spec 4.6, review r1 F2): the HUD Sức cell reads "N/M" (every writer of the cell goes through hudFmt); the Sức help panel lists
    Sức · Sức tối đa · Sức khỏe in kit rows (HXNOW); the person card's age line (her card, consorts' cards) carries the body in words ---- */

@@ -190,7 +190,7 @@ function hookResolve(id,res,o){if(off()||!id)return false;o=o||{};res=res||"laps
 const HK_RES={kept:"đã giữ lời",broken:"đã thất hứa",used:"đã dùng",lapsed:"người đã không còn",faded:"chứng cứ đã phai",lost:"bị hủy mất",paid:"đã trả",expired:"đã quá hạn"};
 function hookUse(id){const h=hookFind(id);if(!h)return null;const C=BH();if(h.str!=="strong"){hookResolve(id,"used");return{used:1}}
  h.uses=(h.uses||0)+1;const t=mp(h.on);const r={used:1};if(t&&t!==S&&h.by==="me"){try{oanAdd(t,S,C.useOan)}catch(e){}
-  if(roll(C.strikeCh+h.uses*C.useStep)){try{evA(t,S,1)}catch(e){}r.strike=1}else if(roll(C.lostCh+h.uses*C.useStep)){hookResolve(id,"lost",{quiet:1});r.lost=1}}
+  if(roll(C.strikeCh+h.uses*C.useStep)){try{evA(t,S,BAL.eff.jmem.evHookUse)}catch(e){}r.strike=1}else if(roll(C.lostCh+h.uses*C.useStep)){hookResolve(id,"lost",{quiet:1});r.lost=1}}
  return r}
 function hookLabel(h){return HK_KIND[h&&h.k]||"Chuyện chưa dứt"}
 function hookText(h){const r=hookText0(h);return r?r[0].toUpperCase()+r.slice(1):r}
