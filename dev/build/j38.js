@@ -15,7 +15,7 @@ function silChip(n){return"";if(!n)return"";const k=Math.min(n,3);return `<span 
 (function(){const r0=renderPanel0;renderPanel0=function(){const r=r0.apply(this,arguments);try{const gm=document.querySelector(".game");if(gm)gm.classList.toggle("maptab",tab==="go"&&!window.__mapList)}catch(e){}return r}})();
 /* the plan always covers the screen: the smallest zoom fills the height as well as the width */
 function mapFit(){try{const sc=document.querySelector(".game.maptab .mapsc");if(!sc)return;const w=sc.querySelector(".mapw"),img=sc.querySelector(".mapimg");if(!w)return;
- const asp=img&&img.naturalWidth?img.naturalWidth/img.naturalHeight:1.792;
+ const asp=img&&img.naturalWidth?img.naturalWidth/img.naturalHeight:sc.closest(".kpmv")?1.76:1.792;/* dudo-blank: the same box the CSS gives the frame before the picture has loaded */
  /* KIT §85.7 (owner 17/11 "Dư đồ zoom gần quá"): the default zoom shows the WHOLE palace map inside the free area (screen minus the left rail / right card column / tools row, read from the .mapw margins); +/- zoom from there */
  const kp=!!sc.closest(".kpmv");
  /* KIT §85.8 (owner 17/11 ~13:12Z "dư đồ nhỏ xíu"): PORTRAIT (kv1) = people cards row above, Ân sủng + Nguy hiểm row below (jmapc grid on #kshR); the map spans the full width between them: the margins come from the REAL row heights, the zoom FITS THE FREE HEIGHT (pan sideways), the open view is centred on her place + the "!" places */
