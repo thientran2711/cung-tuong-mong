@@ -1,6 +1,6 @@
 #!/bin/bash
 # batch.sh LIST.tsv SHEET.jpg  (LIST lines: key<TAB>url). Runs proc2.sh for all in parallel, prints compact result per key, builds ONE sheet.
-D=/tmp/claude-0/-home-user-cung-tuong-mong/b0fea55b-58f1-53e0-a07a-3e5ec42514dd/scratchpad; cd /home/user/cung-tuong-mong/dev/handover/reports/fig-cutout-clean
+D=/tmp/claude-0/-home-user-cung-tuong-mong/45013e47-a4be-59c1-97d1-90df001c483f/scratchpad; cd /home/user/cung-tuong-mong/dev/handover/reports/fig-cutout-clean
 keys=()
 while IFS=$'\t' read -r k u; do [ -z "$k" ] && continue; keys+=("$k"); $D/proc2.sh "$k" "$u" > /tmp/proc-$k.txt 2>&1 & done < "$1"
 wait
