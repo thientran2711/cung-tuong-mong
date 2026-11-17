@@ -11,7 +11,7 @@
 const J59BB={},J59W={};
 /* figure body box: the kit measurement (kitFigBody, jkit) — J59BB stays as the read cache other modules use */
 function j59bb(src,cb){if(J59BB[src])return J59BB[src];const v=kitFigBody(src,()=>{J59BB[src]=kitFigBody(src);if(cb)cb()});if(v)J59BB[src]=v;return v}
-const j59bt=b=>b.ht!=null&&b.ht>b.t?b.ht:b.t;
+const j59bt=b=>kitFigTop(b);/* review/fig-headtop: head top (jkit kitFigTop), never the crown / hairpin top */
 function j59age(p){try{const w=typeof figWho==="function"?figWho(p):p&&(p.ref||p);const a=w&&w.age;return typeof a==="number"?a:20}catch(e){return 20}}
 function j59fac(src,p){return KIT_FIG.fac(src,j59age(p))}
 let j59q=0;function j59sched(){if(j59q)return;j59q=requestAnimationFrame(()=>{j59q=0;j59lay()})}
