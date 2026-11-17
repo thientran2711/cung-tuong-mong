@@ -763,3 +763,4 @@
 | toil-looks3: Khuynh thành redraw, streaks→Vụng về, Đoan trang≠Kiều diễm, Diêm dúa lips (owner 13:05Z) on review/toil-looks2 | review/toil-looks2 | MAIN s31 | session_01UV1Szgv5xtMpkNRXeojDX5 | RUNNING | 17/11 12:59Z |
 | REVIEW opt-pic-same r2 of 42d52109 (+ 412/390 tall person cards) | review/opt-pic-same-r2 | MAIN s31 | session_01UV1SzioDmB4Xjzd2Wg26k4 | RUNNING | 17/11 13:01Z |
 | map-portrait: portrait Dư đồ cards row above/below, map zoomed, weather sky (owner 13:12Z) on top of map-me-mark-r1 a86ea58c (HELD from batch) | review/map-portrait | MAIN s31 | session_01UV1SzgdgEdCimFsVYDscwL | RUNNING | 17/11 13:04Z |
+| one-core-dup3 LAND (opus; PASS 3213abc8 + merge main 6ca04148+ (trial cd2810ff) + move batch-d8's 70 typed numbers into BAL + go-live prep; brief briefs/one-core-dup3-land.md) | review/one-core-dup3-land | B | (opening) | RUNNING | 17/11 13:15Z |
