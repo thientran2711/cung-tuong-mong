@@ -11,6 +11,7 @@ window.CTM_WAIT=window.CTM_WAIT||{
  bootFail:"Cửa cung chưa mở được",
  bootFailSlow:"Đường xa, cung chưa dựng xong. Có thể đợi thêm, hoặc mở lại.",
  bootFailBroken:"Cửa cung ở máy này chưa mở được. Xin mở lại; nếu vẫn vậy, quét sạch lối cũ rồi mở lại (sổ đã ghi vẫn giữ nguyên).",
+ bootDetail:"Chi tiết",
  bootRe:"Mở lại",
  bootClr:"Quét lối cũ rồi mở lại",
  /* Thỉnh tranh (jload.js) */
