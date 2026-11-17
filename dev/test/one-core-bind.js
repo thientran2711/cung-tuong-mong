@@ -55,7 +55,7 @@ function index(B){
     if(x.type==='TemplateLiteral'){const child=st[i+1]||n;if(x.expressions.includes(child)&&/^(MemberExpression|BinaryExpression|UnaryExpression)$/.test(child.type))pr=child;break}
     if(x.type==='CallExpression'||isFn(x)||/Statement|Property/.test(x.type))break}
    if(pr)prints.push({m,n,p,key:keyOf(p),stack:st.slice(),line:n.loc.start.line,col:n.loc.start.column});
-   else reads.push({m,n,key:keyOf(p)})}})}
+   else reads.push({m,n,key:keyOf(p),stack:st.slice()})}})}
  /* an act table entry: provoke:{w,ok,run:(v,t)=>…} (j28 SOC / PERS, any `key:{… run / f / go …}` table) is the act "provoke" */
  for(const m of mods)walk(m.ast,n=>{if(n.type==='Property'&&!n.computed&&n.value.type==='ObjectExpression'){const k=n.key.type==='Identifier'?n.key.name:litOf(n.key);
    if(k&&NAMEY.test(k)&&n.value.properties.some(pp=>pp.type==='Property'&&!pp.computed&&/^(run|go|act)$/.test(pp.key.name||'')&&isFn(pp.value)))addL(k,m,n.value,'table')}});
@@ -125,6 +125,27 @@ function bind(B){const idx=index(B);const {mods,FN,LINK,NOBJ,reads,prints}=idx;
   if(!how&&scope.type==='ObjectExpression'){const lits=new Set();walk(scope,n=>{const v=litOf(n);if(v&&NAMEY.test(v))lits.add(v)});
    for(const k of lits){if(names.has(k))continue;for(const L of (LINK[k]||[]).filter(L=>L.node.type==='CallExpression'))if(readDeep(L.m,L.node,key,2,new Set())){how='act '+k+' ('+L.m.f+':'+L.node.loc.start.line+')';break}if(how)break}}
   P.ok=!!how;P.how=how||'NOT read by this option ('+m.f+':'+scope.loc.start.line+' '+scope.type+(names.size?'; links '+[...names].slice(0,6).join(','):'')+')';out.push(P);if(!how)bad.push(P)}
+ /* SWAP (review/one-core-dup3, reviewer LIMIT of review-one-core-dup2-r4): two keys of the SAME option swapped between its success and failure texts
+    (AOUT.ally = aoLz(win text, lose text) printing f_3 / f_2 while the act reads f_2 on the roll's success and f_3 after it) is read by the option either
+    way, so the check above cannot see it. Here a text tied to a branch (an AOUT pair element 0 = win / 1 = lose; wt:[…] / lt:[…] of an option) must print
+    a key whose rule read sits on the same branch (inside if(roll(…)) = win, its else or the code after an if(roll(…)){…return} = lose; ok:()=> = win,
+    no / fail / bad:()=> = lose; a negated test !roll(…) swaps them). A read whose branch cannot be told is no verdict. */
+ const src=(m,n)=>m.src.slice(n.start,n.end);
+ const textBranch=P=>{const st=P.stack;for(let i=st.length-1;i>=0;i--){const x=st[i],child=st[i+1]||P.n;
+   if(x.type==='CallExpression'&&x.callee.type==='Identifier'&&x.callee.name==='aoLz'&&x.arguments.length===2){const k=x.arguments.indexOf(child);if(k>=0)return k?'lose':'win'}
+   if(x.type==='ArrayExpression'&&x.elements.length===2&&st.slice(0,i).some(y=>y.type==='AssignmentExpression'&&/^AOUT\b/.test(src(P.m,y.left))||y.type==='CallExpression'&&y.arguments[0]&&src(P.m,y.callee)==='Object.assign'&&src(P.m,y.arguments[0])==='AOUT')){const k=x.elements.indexOf(child);if(k>=0)return k?'lose':'win'}
+   if(x.type==='Property'&&!x.computed&&x.value===child&&/^(wt|lt)$/.test(x.key.name||''))return x.key.name==='wt'?'win':'lose'}return null};
+ const isRoll=(m,t)=>/\broll\(/.test(src(m,t));const neg=(m,t)=>/^\s*!/.test(src(m,t));
+ const readBranch=r=>{const st=r.stack;for(let i=st.length-1;i>=0;i--){const x=st[i],child=st[i+1]||r.n;
+   if(x.type==='Property'&&!x.computed&&x.value===child&&isFn(child)){const k=x.key.name||'';if(k==='ok')return 'win';if(/^(no|fail|bad)$/.test(k))return 'lose'}
+   if((x.type==='IfStatement'||x.type==='ConditionalExpression')&&isRoll(r.m,x.test)&&child!==x.test){const w=(child===x.consequent)!==neg(r.m,x.test);return w?'win':'lose'}
+   if((x.type==='BlockStatement'||x.type==='Program')&&x.body.includes(child)){const j=x.body.indexOf(child);for(let q=j-1;q>=0;q--){const y=x.body[q];
+     if(y.type==='IfStatement'&&!y.alternate&&isRoll(r.m,y.test)){const c=y.consequent,last=c.type==='BlockStatement'?c.body[c.body.length-1]:c;if(last&&last.type==='ReturnStatement')return neg(r.m,y.test)?'win':'lose'}}}
+   if(isFn(x))break}return null};
+ const RB={};for(const r of reads)(RB[r.key]=RB[r.key]||[]).push(r);
+ for(const P of out){if(!P.ok||!SITE.has(P.p[0]))continue;const tb=textBranch(P);if(!tb)continue;
+  const br=(RB[P.key]||[]).map(readBranch).filter(Boolean);if(!br.length||br.includes(tb))continue;
+  P.ok=false;P.how='SWAP: the text sits on the '+tb+' branch but the rule reads this key on the '+br[0]+' branch (two keys of one option swapped?)';bad.push(P)}
  return{prints:out,bad}}
 module.exports={bind,index,linkMods,namesAt};
 if(require.main===module){

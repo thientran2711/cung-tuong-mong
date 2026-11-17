@@ -90,7 +90,7 @@ function tsbBulO(a,t,ev){return cl(Math.round(odA(a,42+(rkOf(a)-rkOf(t))*7+(a.ta
 function tsbBulOK(a,t){return rkOf(a)>rkOf(t)&&!t.out&&(tsbBulPay(a,t)>=10||!!tsbWant(a,t))}
 A("batnat","Ép nộp của",{c:{},ok:(a,t)=>tsbBulOK(a,t),o:(a,t)=>tsbBulO(a,t),x:"cậy phẩm cao đòi bạc hoặc một món quý nàng đang có",
  f:(a,t)=>tsbBulNpc(a,t,"batnat")});
-AOUT.batnat=[`nàng nộp bạc hoặc một món quý; nàng oán ngươi ${balSg(BAL.eff.jtsb.tsbBulNpc_2)}`,`nàng không nộp, kể khắp nơi: Danh -2, nàng oán ${balSg(BAL.eff.jtsb.tsbBulNpc_3)}, nàng nắm 1 chứng cứ`];
+AOUT.batnat=[`nàng nộp bạc hoặc một món quý; nàng oán ngươi ${balSg(BAL.eff.jtsb.tsbBulNpc_2)}`,`nàng không nộp, kể khắp nơi: Danh -2, nàng oán ${balSg(BAL.eff.jtsb.tsbBulNpc_4)}, nàng nắm ${balAb(BAL.eff.jtsb.evTsbBulNpc_2)} chứng cứ`];
 try{ACTDOM.batnat="Mưu kế"}catch(e){}
 function tsbTake(a,t,want,kind){/* real transfer + ledger */if(want){const ix=t.inv.indexOf(want);if(ix<0)return"";const e=t.inv.splice(ix,1)[0];e.w=0;a.inv=a.inv||[];e.tsbFrom=key(t);a.inv.push(e);const n=tsbItemN(e);if(t===S)tsbLedger({what:n,how:"bị lấy",who:a.id,by:tsbNm(a)});return n}
  const g=tsbBulPay(a,t);ap(t,{bac:-g});ap(a,{bac:g});if(t===S)tsbLedger({what:`${g} lượng bạc`,how:"bị lấy",who:a.id,by:tsbNm(a)});return `${g} lượng bạc`}
