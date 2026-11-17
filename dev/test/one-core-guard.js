@@ -54,6 +54,9 @@ const CODE_PAT={
 const NUMV='[+-]?\\d+(?:\\.\\d+)?';
 const JOIN_PAT={
  amt:new RegExp('\\b(?:rdOan|rdRel|relAdd|oanAdd|affAdd|kcAf|tdPowAdd|e67(?:dad|bien|kho|ally|pun|foe|drop))\\((?:[^()]|\\([^()]*\\))*?[(,]\\s*(?:[\\w$.!]+\\s*\\?\\s*)?'+NUMV+'(?:\\s*:\\s*'+NUMV+')?\\s*\\)','g'),
+ /* amt1 (review/one-core-arcs r2, reviewer r1 item 1): the same effect calls with ONE argument — e67dad(10), e67heir(6) … — which amt's
+    pattern (a number after a comma) never saw; a new kind, so its first --update freezes the existing count, then it may only shrink */
+ amt1:new RegExp('\\b(?:rdOan|rdRel|relAdd|oanAdd|affAdd|kcAf|tdPowAdd|e67(?:dad|bien|kho|heir|ally|pun|foe|drop))\\(\\s*(?:[\\w$.!]+\\s*\\?\\s*)?'+NUMV+'(?:\\s*:\\s*'+NUMV+')?\\s*\\)','g'),
  ladder:new RegExp('(?:[\\w$.\\])]+\\s*(?:>=|>|<=|<)\\s*'+NUMV+'\\s*\\?\\s*(?:\\[[^\\[\\]]*\\]|'+NUMV+'|""|``)\\s*:\\s*){2,}(?:\\[[^\\[\\]]*\\]|'+NUMV+'|""|``)','g'),
 };
 const TXT_PAT={
@@ -100,7 +103,7 @@ for(const f of ORDER){const src=fs.readFileSync(path.join(B,f),'utf8');const T=l
    for(const [re,paths] of CORE_TEXT){const m=t.s.match(re);if(!m)continue;const nums=m.slice(1).filter(x=>x!=null).map(Number);
     const hit=!paths||paths.split(',').some(p=>nums.includes(coreVal(p)));
     if(hit)fail.push(`${f}:${t.line} text types a core number (print BAL.${paths||'pay'}): «${t.s.slice(0,110)}»`)}}}
- {const J=joinCode(T);for(const k in JOIN_PAT){const m=J.match(JOIN_PAT[k]);if(m)m.forEach(x=>{const v=x.replace(/\s+/g,'');if(k==='amt'&&/[(,][+-]?0\)$/.test(v))return;if(k==='ladder'&&[...v.matchAll(/(?:>=|>|<=|<)([+-]?[\d.]+)\?/g)].every(q=>+q[1]===0))return;/* a sign test (n>0 / n<0), not a table */add(k,v.length>90?v.slice(0,90)+'…':v)})}}
+ {const J=joinCode(T);for(const k in JOIN_PAT){const m=J.match(JOIN_PAT[k]);if(m)m.forEach(x=>{const v=x.replace(/\s+/g,'');if((k==='amt'||k==='amt1')&&/[(,][+-]?0\)$/.test(v))return;if(k==='ladder'&&[...v.matchAll(/(?:>=|>|<=|<)([+-]?[\d.]+)\?/g)].every(q=>+q[1]===0))return;/* a sign test (n>0 / n<0), not a table */add(k,v.length>90?v.slice(0,90)+'…':v)})}}
  now[f]=per;
  for(const [mf,name] of MIRRORS)if(mf===f){const m=src.match(new RegExp('(?:const |,)'+name+'\\s*=\\s*(\\[[^\\]]*\\]|\\{[^}]*\\})'));if(!m)fail.push(`${f}: mirror ${name} not found`);else if(/\d/.test(m[1].replace(/\/\*[\s\S]*?\*\//g,'')))fail.push(`${f}: mirror ${name} typed with numbers (${m[1].slice(0,60)}); it must be filled from BAL`)}
 }

@@ -105,7 +105,7 @@ window.addEventListener("click",e=>{const t=e.target.closest&&e.target.closest('
 (function(){const o0=obj67;obj67=function(){const r=o0.apply(this,arguments);try{const P=pl67();if(P)return `Lo liệu «${P.n}»: còn ${dlT67(P.due-absB67())} · `+r}catch(e){}return r}})();
 /* ---------- old story (j4, saves from before chapters): the witness also gets routes without silver ---------- */
 (function(){const t0=PEND.td1;if(!t0)return;PEND.td1=function(p){const d=t0.apply(this,arguments);try{if(d&&d.o){const st=S.st;
- d.o.splice(1,0,{n:`Nhờ ${S.maid?S.maid.name:"cung nữ thân tín"} giấu ông trong kho củi`,fx:BAL.arc.alt["td_an.c1"][0].c,x:`${word(od(rdOdds(BAL.arc.alt["td_an.c1"][0].o,{})))} · thành: giữ được nhân chứng · hỏng: Danh ${BAL.arc.alt["td_an.c1"][0].l.danh}, mất nhân chứng`,
+ d.o.splice(1,0,{n:`Nhờ ${S.maid?S.maid.name:"cung nữ thân tín"} giấu ông trong kho củi`,fx:{...BAL.arc.alt["td_an.c1"][0].c},x:`${word(od(rdOdds(BAL.arc.alt["td_an.c1"][0].o,{})))} · thành: giữ được nhân chứng · hỏng: Danh ${BAL.arc.alt["td_an.c1"][0].l.danh}, mất nhân chứng`,
   go:()=>{const Q=BAL.arc.alt["td_an.c1"][0];if(roll(od(rdOdds(Q.o,{}))))st.wit=1;else{apply(Q.l);S.caseEv=Math.max(0,(S.caseEv||0)-1);log(`<span class="r">Người của ${S.foeDad} lục soát, lão Vương bỏ trốn.</span>`)}}});
  const g=d.o.find(o=>/Tân Giả Khố/.test(o.n));if(g&&g.fx&&g.fx.bac)g.fx.bac=price67(g.fx.bac)}}catch(e){}return d}})();
 /* ---------- phụ tuyến (j72): every step that costs Bạc gets a branch without silver (owner 17:06Z, whole group) ----------

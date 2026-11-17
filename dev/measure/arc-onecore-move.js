@@ -48,7 +48,7 @@ function odds(fn){const b=fn.replace(/^(\(\)|A|\(A\))=>/,'');if(b===fn)return nu
  return bad?null:q}
 /* the amt calls (same family as dev/test/one-core-guard.js JOIN_PAT.amt) */
 const NUMV='[+-]?\\d+(?:\\.\\d+)?';
-const AMT=new RegExp('\\b(?:rdOan|rdRel|relAdd|oanAdd|affAdd|kcAf|tdPowAdd|e67(?:dad|bien|kho|ally|pun|foe|drop))\\((?:[^()]|\\([^()]*\\))*?[(,]\\s*(?:[\\w$.!]+\\s*\\?\\s*)?'+NUMV+'(?:\\s*:\\s*'+NUMV+')?\\s*\\)','g');
+const AMT=new RegExp('\\b(?:rdOan|rdRel|relAdd|oanAdd|affAdd|kcAf|tdPowAdd|e67(?:dad|bien|kho|heir|ally|pun|foe|drop))\\((?:(?:[^()]|\\([^()]*\\))*?[(,])?\\s*(?:[\\w$.!]+\\s*\\?\\s*)?'+NUMV+'(?:\\s*:\\s*'+NUMV+')?\\s*\\)','g');
 const TAIL=new RegExp('((?:[\\w$.!]+\\s*\\?\\s*)?)('+NUMV+')(?:(\\s*:\\s*)('+NUMV+'))?\\s*\\)$');
 const table={arcs:{},gb:{}},left=[],edits=[];let nOdds=0,nG=0;
 const LIT_STAT=/^\{(\s*[A-Za-z_$]+\s*:\s*-?\d+(\.\d+)?\s*,?)*\s*\}$/;
