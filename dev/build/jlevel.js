@@ -14,8 +14,8 @@ const PAINT="img/scene-thanhtai.webp";
 function info(kind,k,from,to){const V=kind==="vir",T=V?VIR.find(x=>x.k===k):ARTS.find(x=>x.k===k);if(!T)return null;
  const fx=(V?VIRFX:ARTFX)[k]||[];const L=[];for(let l=from+1;l<=to;l++)if(fx[l-1])L.push([`Bậc ${l}`,fx[l-1]]);
  let rec=[];if(V&&typeof RCP_ST==="object"&&typeof TDS_KIND==="object"&&typeof tdsOpenN==="function"){const kd=TDS_KIND[k],st=kd&&RCP_ST[kd];
-  if(st)rec=st.slice(tdsOpenN(from),tdsOpenN(to)).map(s=>s[0]).filter(Boolean)}
- if(rec.length)L.push(["Mở thêm",`công thức mới: ${rec.join(", ")}`]);
+  if(st)rec=st.slice(tdsOpenN(from),tdsOpenN(to)).map(s=>s[1]).filter(Boolean)}
+ if(rec.length)L.push(["Mở thêm",`lối mới: ${rec.join(", ")}`]);
  const name=V?`${T.n} (${T.full})`:T.n;let img="";try{img=V?kitSkillArt("vir",k,T.n):(kitSkillArt("art",k,T.n)||(typeof AIMG==="object"&&AIMG[k]?AIMG[k]:""))}catch(e){}
  return{name,rows:L,img,levelWord:`${name} lên bậc ${to}`}}
 function kitLearnHTML(o){const I=info(o.kind,o.k,o.from,o.to);if(!I)return"";
