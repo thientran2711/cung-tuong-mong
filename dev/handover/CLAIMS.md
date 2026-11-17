@@ -563,3 +563,4 @@
 | scenes-3 review r1 (opus rules) of 6b28243b | review/scenes-3 | main s29 | session_01UV1Szkquo1hWfgug5N5F9Q | RUNNING | 17/11 03:14Z |
 | save-dlg-fix #2 (sonnet kit keeper, opened by s28): Tuần lục figure column + kitRelTable on paper | review/save-dlg-fix | main s29 | session_01UV1SziJKTgua7Khmdj8zqg | RUNNING | 17/11 03:11Z |
 | mg-clutter (sonnet kit; OWNER BUG 03:22Z Điểm trang PHẦN/HỒI/CÒN + HÔM NAY clutter, whole mini-game frame family) | review/mg-clutter | main s29 | session_01UV1SzhuhfkdxN5hMZJhYDb | RUNNING | 17/11 03:16Z |
+| toil-reveal-fix (opened by s28; OWNER BUG 03:42Z makeup reveal: brows off the face brows, black band under 'Tiếp theo', close-up + card cut; brief briefs/toil-reveal-fix.md) | review/toil-reveal-fix | main s29 | session_01UV1SzhkR4i2bVXfUL54aTE | RUNNING | 17/11 03:21Z |
