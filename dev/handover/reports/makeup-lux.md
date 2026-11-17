@@ -71,3 +71,13 @@ Notes for B (not mine): the result's "Khuynh thành · 89 phần" is the sitting
 
 ## Numbers / one core
 New keys: BAL.toil.lv {dep, lux}, lvBase, taste.pts.moc, taste.lvTrait/lvLike/lvReact, BAL.lux.diem. Removed: toil heaviness keys, allowRk, NE.toil, taste.pts.lv. Words: TOIL_LUXW, TOIL_DV.diem (VANPHONG updated).
+
+## r2 — review/makeup-lux-r2 4497634ab (on main 99f3978d; MAIN s38 order via Foreman B ROOT)
+PRIORITY #1 CHECK: OD answer MAIN s38 22:15Z | main 99f3978d | review/makeup-lux-r1 052384f1 (PASS) | claims B.
+- Rebuilt on main by CHERRY-PICKING only makeup-lux's own commits (2d171b0e, a63dbead, 1f63b2e7, 84fb6c05, 710ba788) + reviewer r1's jtoil fix (052384f1: 'N phần' dropped; its stray _aa.html left out). No toil-looks2-r5 code: on every jtoil conflict main's toil line was kept (main's TOIL_LOOKS / TOIL_MKS data, toilMkPre with toilEyePx, its tease wording); r5-only dev/test/toil-tease.js not brought. 7fefc5a9 (jts restore) already in; ce9d5f84 (r5 tuple) not needed on main.
+- Main has no Khuynh thành face art yet (toil-looks5 brings it): toilLookOf keeps main's picture id (dep), the LEVEL still comes from the score (toilMk → tuyet); new `toilArt(k)` draws the nearest existing picture (Khuynh thành → Kiều diễm) until toil-looks5 lands — then it draws its own automatically.
+- assemble.py: main's list + 'jdress.js' after jworld2 (main's own order kept: jlooks.js, jdisp.js at the end).
+- One core on main's newer sweep: main already keyed j92 (danhWdAccuse_2/_3) + jdress.danhTop; jdress's remaining typed numbers read BAL.eff.j92 wdAccuse_2/_3, danhWdAccuse_3 and a new danhWdAccuseA +2 (also used by j92). Gates: one-core-guard 3843 → 3842, one-core-text, text-rule, bind PASS.
+- dress-offence: main's jshelf (display-shelf) makes the ROOM a second cause of the same Tố xa xỉ act; the test now stubs shelfCause to test the dress-sighting cause alone → ALL PASS.
+- Gates on 8e78454d / 4497634a: quickcheck PASS (157 s), makeup-lux Fold + iPad PASS, makeup-theme, toilette, luxury PASS, dress-offence ALL PASS, coop-toil-look 29/29 ×2, coop-e2e 63/63. LOOKED: Fold mirror ladder (Mộc mạc…Lộng lẫy · Xa xỉ 0…44), iPad result (Khuynh thành, "Lộng lẫy · Xa xỉ 44", Đáp ứng → quá phô trương).
+- golive.sh dry run NOT run: the session's permission guard refused it (the script works on main); the builder runs it.
