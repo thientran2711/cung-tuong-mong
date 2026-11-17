@@ -2,7 +2,7 @@
    refused or make them angrier") =================
    DATA: every consort (rivals) and the Emperor has 1-2 dislikes, stored in the save (v.dis / S.emp.dis = pool keys), drawn ONCE per life from
    a seeded hash (S.ctxSeed x person x pool key, same seed as jevb tastes) so reloading never changes them. Old saves get them from normAll.
-   POOL (what the game already gives as gifts): "art:<k>" = a handmade work of that art (ARTS), "kd:<kind>" = a bought item of that kind (IT[].kd);
+   POOL (what the game already gives as gifts): "art:<k>" = a handmade work of that art (ARTS), "kd:<kind>" = a bought item of that kind (itm().kd);
    the Emperor also draws from his own likes pools (LIKES flower / music / dish) = "flower:<v>" etc.
    NEVER OVERLAP LIKES: disLikeKeys(p) = the person's own likes in the same key space (Emperor: his 3 LIKES + the arts his traits favour;
    consort: her best art + item kinds whose every item is tagged for her); those keys are removed from the draw. At gift time an item the
@@ -22,7 +22,7 @@ const obj=p=>isEmp(p)?S.emp:isTh(p)?(S.thO=S.thO||{}):p;
 function pool(p){const P=[];ARTS.forEach(a=>P.push({k:"art:"+a.k,n:"tác phẩm "+a.n.split(" &")[0]}));KDS.forEach(k=>P.push({k:"kd:"+k,n:k.toLowerCase()}));
  if(isEmp(p))for(const f in LIKES)LIKES[f].forEach(v=>P.push({k:f+":"+v,n:v}));return P}
 function entry(k){const P=pool("emp").concat(pool(null));return P.find(x=>x.k===k)||{k,n:k.split(":").slice(1).join(":")}}
-function kdAllTag(kd,tag){const L=Object.keys(IT).filter(k=>IT[k].kd===kd);return L.length>0&&L.every(k=>(IT[k].tg||[]).includes(tag))}
+function kdAllTag(kd,tag){const L=Object.keys(IT).filter(k=>itm(k).kd===kd);return L.length>0&&L.every(k=>(itm(k).tg||[]).includes(tag))}
 /* the person's own likes, in the pool's key space */
 function likeKeys(p){const K=[];
  if(isEmp(p)){const E=S.emp;for(const f in LIKES)if(E.likes&&E.likes[f])K.push(f+":"+E.likes[f]);
@@ -46,9 +46,9 @@ function row(p){if(!p||(!isEmp(p)&&!isTh(p)&&typeof p!=="object"))return null;co
  return [isEmp(p)?"Ngài ghét":isTh(p)?"Người ghét":"Nàng ghét",K.length?txt+(un?` (còn ${un} điều chưa rõ)`:""):"chưa rõ",K.length?"t":"n"]}
 /* what a gift (inventory entry) is, as pool keys the recipient might dislike */
 function giftKeys(e){const K=[];if(!e)return K;if(e.wk){const w=e.wk;K.push("art:"+w.a);if(w.kind==="bhoa")K.push("flower:"+w.s);if(w.kind==="mon")K.push("dish:"+w.s);if(w.kind==="khuc"&&/^theo /.test(w.s||""))K.push("music:"+String(w.s).slice(4))}
- else if(IT[e.k]&&IT[e.k].kd)K.push("kd:"+IT[e.k].kd);return K}
+ else if(IT[e.k]&&itm(e.k).kd)K.push("kd:"+itm(e.k).kd);return K}
 function hit(r,e){if(!r||!e)return null;const D=disOf(r);if(!D.length)return null;const L=likeKeys(r),G=giftKeys(e);
- if(!e.wk&&IT[e.k]){const tag=isEmp(r)?"emp":isTh(r)?"th":r.queen?"hh":"rv";if((IT[e.k].tg||[]).includes(tag))return null}
+ if(!e.wk&&IT[e.k]){const tag=isEmp(r)?"emp":isTh(r)?"th":r.queen?"hh":"rv";if((itm(e.k).tg||[]).includes(tag))return null}
  const k=G.find(x=>D.includes(x)&&!L.includes(x));return k||null}
 window.disOf=disOf;window.disInit=disInit;window.disKnown=known;window.disUnk=p=>unk(p).length>0;window.disLearn=learn;window.disRow=row;window.disHit=hit;window.disEntry=entry;window.disLikeKeys=likeKeys;
 /* old saves + new lives */

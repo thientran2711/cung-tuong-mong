@@ -20,10 +20,10 @@ function mindMenu(v,t){const b=bandOf(danger(v,t));if(!b)return[];const allow=BA
   const f=v.fails[k]||0;if(f)w*=tc<35?1+.6*f:Math.pow(.5,f);/* the foolish repeat, the clever learn */
   O.push([k,w])};
  add("accuse",6);add("vp",3);add("musk",4);add("catswap",2);for(const k of ["kpoison","pond","kframe","ksab"])add(k,2);add("takeaway",2);add("pushp",1);add("trip",3);add("frame",2);add("poison",2);add("rumor",3);add("spy",3);add("bribe",2);add("block",t.nightLog&&t.nightLog.length?2:0);
- if(allow.includes("plant")&&v.inv.some(e=>e.t||(IT[e.k]&&IT[e.k].il)))O.push(["plant",3*persW(v,"plant")]);return O}
+ if(allow.includes("plant")&&v.inv.some(e=>e.t||(IT[e.k]&&itm(e.k).il)))O.push(["plant",3*persW(v,"plant")]);return O}
 function wpick(O){let r=Math.random()*O.reduce((a,b)=>a+b[1],0),i=0;while(r>O[i][1]&&i<O.length-1){r-=O[i][1];i++}return O[i][0]}
 const FAILRX=/bị lộ|bị bắt|phát giác|bị phát hiện|không thành|không ai tin|từ chối|chưa chuẩn|bị thử ra|lần ra|tra ra|báo cho chủ|đem chuyện kể/;
-function mindRun(v,t,k,err){v.__err=err||0;let r="";try{r=k==="plant"?runAct(v,t,"plant",v.inv.findIndex(e=>e.t||(IT[e.k]&&IT[e.k].il))):runAct(v,t,k)}finally{v.__err=0}
+function mindRun(v,t,k,err){v.__err=err||0;let r="";try{r=k==="plant"?runAct(v,t,"plant",v.inv.findIndex(e=>e.t||(IT[e.k]&&itm(e.k).il))):runAct(v,t,k)}finally{v.__err=0}
  v.fails=v.fails||{};const failed=FAILRX.test(r);if(failed)v.fails[k]=(v.fails[k]||0)+1;else if(r)v.fails[k]=0;
  if(r&&!failed&&k!=="spy"&&k!=="accuse"&&k!=="vp"&&k!=="xx")mindBelief(t,v,k);
  /* Hiểm độc over-plots: a success may leave a clue behind */

@@ -16,13 +16,21 @@ function kitRtOf(t,col){try{return typeof kitRankTone==="function"?kitRankTone(t
 function kitPersonCol(p){try{if(typeof rivals!=="undefined"&&rivals.includes(p))return p.out?KIT_COLD_COL:RCOL[p.queen?7:cl(p.rank||0,0,7)];if(p===S)return S.out?KIT_COLD_COL:RCOL[cl(S.rank||0,0,7)];
  const d=kitDecor(kitFace(p));return d.col||KIT_ROLE.slate}catch(e){return KIT_ROLE.slate}}
 function kitName(p,o){o=o||{};if(!p)return"";if(p===S&&o.named){const srv=typeof isSrv==="function"&&isSrv();return `<b class="kname kmy" style="--rc:${kitPersonCol(S)}">${srv||o.noTitle?"":`<span class="kti" style="--rt:${kitRtOf(S.out?"Phế phi":RANKS[S.rank].n)}">${S.out?"Phế phi":RANKS[S.rank].n}</span> `}${S.name}</b>`}if(p===S)return `<b class="kname kme" style="--rc:${kitPersonCol(S)}">${o.cap?"Ngươi":"ngươi"}</b>`;
- const t=o.noTitle?"":kitTitle(p);let nm=S&&p===S.emp?"":S&&(p===S.thO||p.kind==="th")?"":(p.name||"");if(t&&nm)nm=kitTitledName(t,nm);else if(o.pre&&nm)nm=kitTitledName(String(o.pre).trim().split(" ").slice(-5).join(" "),nm);/* old saves: "Tổng quản thái giám Tổng quản Lý Liên Anh" in a stored log */
+ const t=o.noTitle?"":kitTitleOf(p);let nm=S&&p===S.emp?"":S&&(p===S.thO||p.kind==="th")?"":(p.name||"");if(t&&nm)nm=kitTitledName(t,nm);else if(o.pre&&nm)nm=kitTitledName(String(o.pre).trim().split(" ").slice(-5).join(" "),nm);/* old saves: "Tổng quản thái giám Tổng quản Lý Liên Anh" in a stored log */
  return `<b class="kname" style="--rc:${kitPersonCol(p)}">${t?`<span class="kti" style="--rt:${kitRtOf(t,kitPersonCol(p))}">${t}</span>${nm?" ":""}`:""}${nm}</b>`}
 /* KIT 9 (owner 11/15 "Cung nữ Cung nữ thân tín …", "Tổng quản thái giám Tổng quản Lý Liên Anh"): ONE rule for every title + name builder —
    some names carry their own title ("Tổng quản Lý Liên Anh"); the words of the name's start that the title already says are dropped.
    kitTitledName(t,n) → the name part to print after t; kitTitled(t,n) → "t n" without a repeat (case ignored). */
 /* only words that are titles, never a surname that is also a rank word (Tần Khinh Vũ, rank Tần) */
-const KIT_NAME_TITLE_RX=/^(tổng quản|thái giám|cung nữ|cung nữ thân tín|thái y|ma ma|cô cô|thị vệ|nữ quan|nhũ mẫu|nhạc sư|họa sư|thợ \S+|tể tướng|thượng thư|thị lang|tướng quân|công tử|quan)$/;
+const KIT_NAME_TITLE_RX=/^(tổng quản|thái giám|cung nữ|cung nữ thân tín|thái y|ma ma|cô cô|thị vệ|nữ quan|nhũ mẫu|nhạc sư|họa sư|thợ \S+|tể tướng|thượng thư|thị lang|tướng quân|công tử|vương gia|hoàng tử|công chúa|phế phi|quản sự|sứ thần|quan)$/;
+/* KIT 48.2 (owner 17/11 "Kính sự phòng là cái phẩm hả?", OD:L1351): ONE tag rule for every figure that is not a consort — line 1 = the person's RANK / post grade (Thái giám, Tổng quản thái giám,
+   Cung nữ, Thái y, Thị vệ, Vương gia, Hoàng tử…), line 2 = the bare NAME. The office or place (Kính sự phòng, Thái y viện…) is the dialog title, never the rank line. kitTitleOf = kitTitle,
+   and for a person with no rank field (court men, children, bare NPCs) the title words their name starts with ("Thị vệ Mạnh Tử Khiêm" → Thị vệ + Mạnh Tử Khiêm). Read by kszRankName (v3 frame tag)
+   and kitName (32.7 column tag, inline names); kitTitledName then drops the repeat from the name. */
+const KIT_TAG_TITLE_RX=/^(tổng quản|thái giám|cung nữ|cung nữ thân tín|thái y|ma ma|cô cô|thị vệ|nữ quan|nhũ mẫu|nhạc sư|họa sư|thợ \S+|tể tướng|thượng thư|thị lang|tướng quân|công tử|vương gia|hoàng tử|công chúa|phế phi|quản sự|sứ thần)$/;
+function kitTitleOf(p){let t="";try{t=kitTitle(p)}catch(e){}if(t||!p||typeof p.name!=="string")return t;const w=p.name.trim().split(/\s+/);
+ for(let k=Math.min(3,w.length-1);k>=1;k--){if(KIT_TAG_TITLE_RX.test(w.slice(0,k).join(" ").toLowerCase()))return w.slice(0,k).join(" ")}return""}
+window.kitTitleOf=kitTitleOf;
 function kitTitledName(t,n){t=String(t||"").trim();n=String(n||"").trim();if(!t||!n)return n;const tl=t.toLowerCase(),w=n.split(" ");
  for(let k=Math.min(4,w.length-1);k>=1;k--){const pre=w.slice(0,k).join(" ").toLowerCase();if(!KIT_NAME_TITLE_RX.test(pre))continue;if(tl===pre||tl.startsWith(pre+" ")||tl.endsWith(" "+pre)||tl.includes(" "+pre+" "))return w.slice(k).join(" ")}return n}
 function kitTitled(t,n){const m=kitTitledName(t,n);return t?(m?`${t} ${m}`:t):m}
@@ -441,6 +449,8 @@ html body #modal:not(.pcm) .dlg.kpanel .kpb.kpshort .kpmain{align-items:center}
 .dlg.kpanel #mr{display:flex;justify-content:flex-end;gap:8px}
 .kbtn,.dlg.kpanel #mr .main{font-family:var(--display);font-weight:700;letter-spacing:.02em;color:#fff8e6;background:linear-gradient(#b0402c,#8a2a1e);border:1px solid #6e1d12;box-shadow:inset 0 0 0 1px #f0d07066,0 1px 0 #d9c49a;border-radius:8px;min-height:42px;padding:8px 22px;cursor:pointer;white-space:normal}
 .kbtn:hover{filter:brightness(1.06)}
+/* RULE (owner 17/11, every button in the game): a word never breaks inside a button; a button that is too narrow grows or wraps to a new row, it never breaks letters */
+html body .kbtn,html body .kbtn *{word-break:normal!important;overflow-wrap:normal!important;hyphens:none!important}
 .kbtn.alt{background:var(--k-card);color:var(--ink);border-color:var(--line);box-shadow:none}
 /* night: same light paper panel as every pop-up (owner s8 "Tại sao khung này màu tối"); the night feel comes from the backdrop + seal */
 .modal.end .dlg.kpanel{text-align:left}
