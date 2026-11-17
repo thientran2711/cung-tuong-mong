@@ -216,3 +216,12 @@ maid-m38-tm3-a18	w4v2uHm7EI	O6CzqKMynm	ok (plain-note)
 ## PAUSE (owner 17/11 ~03:55Z via lead): NO new maid-rank files until owner approves the rank standard. Running: repaint redo batches (batch-maid-rest-B-redo.tsv, 52 keys). RESUME POINT after approval = maid-m39-a18 (list line 192).
 ## REDO COMPLETE (17/11): 54 keys repainted in place with each maid's own original look (cold no jewellery), uploaded, fragments W6b-redo-rA..rG.json, sheets rank-sample/redo-r*.jpg. IDLE at resume point maid-m39-a18 (list line 192) until owner approves rank standard. Drift list in batch-maid-rest-B-redo.done.
 ## RESUME (lead GO 17/11 ~05:40Z, rank standard DROPPED: each maid keeps her OWN original look; no plain prompt). CORRECTION: list line 192 = maid-m38-tm4-a18 was NEVER painted (my line count missed it). NEXT = maid-m38-tm4-a18, then maid-m39-a18 (line 193) ... Refs = that maid's OLD CDN figure uploaded 1 per file AFTER daily upload reset ~06:19Z (2,500/day shared); before that only creation ids already held; img/FIGURES-servants.json has 'bg' ids only for m13,m26,m39,m52 base identity (m39 bg = Sytp7xRUb8, sheet xSdWxTojfW). FIRST 16 resumed files: contact sheet <=1100px dark to C s13 (session_011xDdVRGgKNzubDW5gNXGyG) + lead.
+maid-m38-tm4-a18	TdUakXIVNR	IfiKw3RtvE	ok (resumed, original look)
+maid-m39-a18	Sym2D4rUb8	gOtZMfrSXO	ok
+maid-m39-cold-a18	gOtZM9WSXO	s783TCgl8e	ok
+maid-m39-kc-a18	P3uc8zT42C	mER1JTEhJQ	ok
+maid-m39-ngheo-a18	4RQ0IYQ9Aa	6AqMhSEiJO	ok
+maid-m39-t1-a18	huZrOrfvqL	Bh9qSNqoQR	ok
+maid-m39-t2-a18	bxVJ2y15Y2	3z5pfjnREY	ok
+maid-m39-t3-a18	kspPzN316B	LwoiTChswO	ok
+## 199 a18 done (list lines 1-199 incl. m38-tm4). NEXT = maid-m39-t4-a18 (line 200).
