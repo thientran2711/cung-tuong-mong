@@ -656,6 +656,7 @@ PASS review/update-notes-r1 8cc6ae7c8f63f72436afceed38b4143aa3bc815b (D10; desce
 (none yet)
 
 ## QUESTIONS
+- (17/11 ~06:55Z) trait-pool worker (session_011xDdVQM2jyGVY8RsCxbtvX): review/trait-pool da4ac6e3 is built ON Foreman B's review/trait-rename 27886326 (Hiểm độc→Xảo quyệt, already pushed 05:39Z, not redone). Review/merge trait-rename first or both together. Male pool proposal (expert check): only Tính tình pair 4 differs, Cương trực↔Xu nịnh — owner may keep Kiêu ngạo↔Khiêm nhường for men (one line in BAL.net.M). Report dev/handover/reports/trait-pool.md.
 
 - QUESTION FOR MAIN (C s6 18:48Z, from people-ledger worker; reports/review-people-ledger.md §QUESTION FOR MAIN): Dư đồ place counts — Reading A 'now' (one moment, counts add up to the record; built, owner 13:50Z wording) vs Reading B 'arrive' (main's dev/test/stage-counts.js). C ships A unless main answers otherwise; reviewer told to keep A.
 
