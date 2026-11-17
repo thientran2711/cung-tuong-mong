@@ -72,7 +72,7 @@ function kitFloorFit(){try{const st=$("stage"),im=$("scimg");if(!st||!im)return;
  const ftA=KIT_FLOOR[scene]!=null?KIT_FLOOR[scene]:ft;const fs=A.feet!=null?A.feet:ftA+.9*(1-ftA);let feet=Math.min(H*.97,y0+fs*dh);
  const old=st.__kfa;st.__kfa={feet:Math.round(feet),ax:Math.round(x0+A.x*dw),scene};
  if(!old||old.feet!==st.__kfa.feet||old.ax!==st.__kfa.ax){clearTimeout(st.__kfaT);st.__kfaT=setTimeout(()=>{try{window.j59lay&&window.j59lay()}catch(e){}},0)}const kfb=Math.max(H*.03,24,H-feet);st.style.setProperty("--kfb",kfb.toFixed(0)+"px");st.style.setProperty("--kfh",Math.max(H*.45,H-kfb-H*.03).toFixed(0)+"px");st.dataset.kfloor=name}catch(e){}}
-(function(){if(typeof renderStage!=="function")return;const r0=renderStage;renderStage=function(){const r=r0.apply(this,arguments);kitFloorFit();return r};
+(function(){if(typeof renderStage!=="function")return;const r0=renderStage;renderStage=function(){const r=r0.apply(this,arguments);(window.renderAfter||((k,f)=>f()))("kitFloorFit",kitFloorFit)/* oi-render: reads the stage size — once at the end of a render (jlag2) */;return r};
  try{let ro=null;const hook=()=>{const st=$("stage");if(!st||ro)return;ro=new ResizeObserver(()=>kitFloorFit());ro.observe(st)};if(document.readyState!=="loading")hook();else addEventListener("DOMContentLoaded",hook)}catch(e){}
  const st=document.createElement("style");st.id="k2b-floor";st.textContent=`
 .stage[data-kfloor] .scimg{transition:background-position .2s}

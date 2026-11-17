@@ -121,7 +121,8 @@ function alt72(s,n){const bac=s.c&&s.c.bac,p0=Math.min(s.p!=null?s.p:(s.b==null?
  Object.defineProperty(o,"p",{get:()=>p0-altCost(bac,rk(),6,BAL.alt72Pen).pen,enumerable:true,configurable:true});
  Object.defineProperty(o,"k",{get:()=>k0+Math.round(bacK(bac,rk())*BAL.altK.k72),enumerable:true,configurable:true});
  Object.defineProperty(o,"c",{get:()=>({suc:-altCost(bac,rk(),6,BAL.alt72Pen).suc}),enumerable:true,configurable:true});return o}
-(function(){try{if(typeof T72==="undefined")return;for(const T of T72)for(const st of T.s||[]){if(st.w!=null&&!st.n)continue;
+/* jreg: quest lines registered later (jreign) get the cheaper second way too */
+(function(){try{if(typeof T72==="undefined")return;regEach(T72,(i,T)=>{if(T)for(const st of T.s||[]){if(st.w!=null&&!st.n)continue;
  if(!st.ch&&st.c&&st.c.bac<0){const o0={n:st.n,p:st.b<100?st.b:null,sk:st.sk,k:st.k,c:st.c,w:st.w,r:st.r,rb:st.rb,l:st.l,lr:st.lr,lrb:st.lrb,fn:st.fn,ok:st.ok,no:st.no,lto:st.f};
   st.ch=[o0,alt72(Object.assign({},st,{p:st.b}),st.n)]}
- else if(st.ch&&st.ch.length&&!st.ch.some(o=>o.alt72)&&st.ch.every(o=>o.c&&o.c.bac<0))st.ch.push(alt72(st.ch[0],st.ch[0].n))}}catch(e){console.error("jstory j72",e)}})();
+ else if(st.ch&&st.ch.length&&!st.ch.some(o=>o.alt72)&&st.ch.every(o=>o.c&&o.c.bac<0))st.ch.push(alt72(st.ch[0],st.ch[0].n))} },"T72 alt")}catch(e){console.error("jstory j72",e)}})();

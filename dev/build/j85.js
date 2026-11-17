@@ -71,7 +71,8 @@ function ducLow(s){return String(s||"").replace(/<[^>]+>/g,"").replace(/^./,c=>c
 (function(){const a0=ap;ap=function(p,o){const d=o&&o.duc;if(p===S||!d||!p)return a0.apply(this,arguments);const b=p.duc||0;const r=a0.apply(this,arguments);try{const dd=(p.duc||0)-b;if(dd)deedRec(p,dd,DEED85||"việc khuất tất")}catch(e){}return r}})();
 function ducAdd(p,n,why){if(!p||!n)return 0;return withDeed(why||"việc vừa làm",()=>{if(p===S){apply({duc:n})}else ap(p,{duc:n});return n})}
 /* every rulebook act (also when another module calls ACT[k].f directly) names itself */
-(function(){for(const k in ACT){const A2=ACT[k];if(!A2||A2.__j85||typeof A2.f!=="function")continue;const f0=A2.f;A2.f=function(a,t){return withDeed(A2.n,()=>f0.apply(this,arguments))};A2.__j85=1}})();
+/* jreg: acts added by later modules (giahoa, tat, phatquy, laydo, spyk…) name themselves too */
+regEach(ACT,k=>{const A2=ACT[k];if(!A2||A2.__j85||typeof A2.f!=="function")return;const f0=A2.f;A2.f=function(a,t){return withDeed(A2.n,()=>f0.apply(this,arguments))};A2.__j85=1},"ACT deed");
 (function(){const r0=runOpt;runOpt=function(a){return withDeed(a&&a.n,()=>r0.apply(this,arguments))}})();
 (function(){const c0=chooseM;chooseM=function(i){const m=Q[0],c=m&&m.opts&&m.opts[i];return withDeed(c?c.n:null,()=>c0.apply(this,arguments))}})();
 /* ---- what she knows: Đức (true nature) only once she knows the person; Danh is what the palace says ---- */

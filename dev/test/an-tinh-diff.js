@@ -12,7 +12,7 @@ const {chromium}=require('playwright');
   const snap=()=>{const v={};for(const [k] of K)v[k]=S[k]||0;return{v,seq:S.logSeq||0}};
   for(let round=0;round<6;round++){used=0;S.buoi=round%3;deal();
    for(let i=0;i<deck.length;i++){const a=deck[i];if(!a||a.done||!canPay(a)||a.lock||!can(cardCost(a))||(a.b!=null&&(S.buoi||0)!==a.b)||Q.length)continue;const b0=snap();act(i);chk("act "+a.n,b0);
-    let g=0;while(Q.length&&g++<5){const m=Q[0];const b1=snap();if(m.opts&&m.opts.length){const j=m.opts.findIndex(o=>!(o.fx&&o.fx.bac&&S.bac+o.fx.bac<0));chooseM(j<0?0:j);chk("choice "+(m.t||m.pid),b1)}else closeModal()}
+    let g=0;while(Q.length&&g++<5){const m=Q[0];const b1=snap();if(m.opts&&m.opts.length){const j=m.opts.findIndex(o=>!o.off&&!(o.fx&&o.fx.bac&&S.bac+o.fx.bac<0));chooseM(j<0?0:j);chk("choice "+(m.t||m.pid),b1)}else closeModal()}
     if(S.mg){S.mg=null;try{kg82Close(true)}catch(e){}}}
    try{const P=curPeople();for(let pi=0;pi<P.length;pi++){popIdx=pi;const T=talkOpts(P[pi]);for(let oi=0;oi<T.length&&S.visit&&S.visit.talked!==true;oi++){const b0=snap();talk(oi);chk("talk "+T[oi].n,b0);while(Q.length)Q[0].opts&&Q[0].opts.length?chooseM(0):closeModal()}}}catch(e){}}
   return {n,bad:bad.slice(0,10),badN:bad.length,an:S.an}});

@@ -24,7 +24,7 @@ const DRIVE=`window.__tick=async()=>{const W=t=>new Promise(r=>setTimeout(r,t));
  const dawn=document.getElementById('dawn');if(dawn&&!dawn.hidden&&dawn.innerHTML){const go=dawn.querySelector('#dawn-go');try{go&&go.click()}catch(e){}await W(30);dawn.hidden=true;dawn.innerHTML='';document.body.classList.remove('kbk-open');return 'dawn'}
  if(Q.length){const m=Q[0];if(window.__lq===m){window.__lqn=(window.__lqn||0)+1}else{window.__lq=m;window.__lqn=0}
   if(window.__lqn>8){window.__stuck={kind:'dialog',what:String(m.t||'').slice(0,60),opts:(m.opts||[]).map(o=>o.n).slice(0,4)};return 'stuck'}
-  if(m.opts&&m.opts.length){const i=m.opts.findIndex(c=>!(c.fx&&c.fx.bac&&S.bac+c.fx.bac<0));if(i<0)closeModal();else{const t=m.t;chooseM(i);
+  if(m.opts&&m.opts.length){const i=m.opts.findIndex(c=>!c.off&&!(c.fx&&c.fx.bac&&S.bac+c.fx.bac<0));if(i<0)closeModal();else{const t=m.t;chooseM(i);
     /* the same dialog back in the queue right after its answer = the re-queue bug: reported, never skipped */
     if(Q.some(x=>x===m||(x.pid&&x.pid===m.pid&&JSON.stringify(x.pp||null)===JSON.stringify(m.pp||null)&&x.t===t))){window.__stuck={kind:'requeue',what:String(t).slice(0,60),opt:m.opts[i].n};return 'stuck'}}}else closeModal();return 'q'}
  try{nextBuoi()}catch(e){}return 'buoi'};`;

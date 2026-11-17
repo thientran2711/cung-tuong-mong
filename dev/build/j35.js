@@ -28,6 +28,7 @@ function tuoi(n){return n>0?`Tuổi <b>${n}</b> <span class="past">(${BAND4N[ban
 (function(){const n0=nightCh;nightCh=function(p){const c=n0.apply(this,arguments);if(!c||!has("mesac"))return c;const ag=(p||S)===S?S.age:p.age;return Math.round(c*(ag<=25?1.15:ag>35?.8:1))}})();
 /* illness rises after 50 */
 (function(){const i0=illMonthP;illMonthP=function(p){let ev=i0.apply(this,arguments);try{const ag=p===S?S.age:p.age;if(ag>50&&!illOf(p)&&roll((ag-50)*.5))ev+=catchIll(p,pick(["lao","phonghan"]))||""}catch(e){}return ev}})();
-/* after a birth the body rests: six months of ở cữ and nursing before she can conceive again (everyone alike) */
+/* after a birth the body rests: ở cữ = BAL.kh.ocuMo month(s) before she can conceive again (everyone alike; owner 16/11 18:10Z: 1 month, as history —
+   wet nurses fed the child; the old permanent ×0.7 conception cut is gone, close births cost through the Sức khỏe ceiling, jkh.js) */
 (function(){const b0=birthP;birthP=function(p,fake){if(!fake)p.lastBirth=S.turn;return b0.apply(this,arguments)}})();
-(function(){const c0=conceiveCh;conceiveCh=function(p){p=p||S;if(p.lastBirth!=null&&S.turn-p.lastBirth<6)return 0;return Math.round(c0.apply(this,arguments)*.7)}})();
+(function(){const c0=conceiveCh;conceiveCh=function(p){p=p||S;if(khOcu(p))return 0;return c0.apply(this,arguments)}})();

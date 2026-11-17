@@ -58,7 +58,7 @@ const sleep=ms=>new Promise(r=>setTimeout(r,ms));
      nextBuoi();return'next'}catch(e){return'ERR '+e.message}});steps.push(r);if(/^Q:/.test(r))titles.add(r.slice(2));if(r==='dead'||/^ERR/.test(r))return r;if(await p.evaluate(stopIf))return'stop'}return'n'};
   R.play1=await play(500,()=>S.turn>=3||!isKc());R.after3=await p.evaluate(()=>({turn:S.turn,ym:S.year+'/'+S.month,kc:isKc(),dead:!!S.dead}));
   /* jump to the month before Sơ tuyển (the palace world keeps its own calendar values; only the date moves) */
-  if(!R.after3.dead&&R.after3.kc){R.endedAt3=await p.evaluate(()=>{/* r2-r1 FAIL 4: never press an end card here (its close starts a NEW life without S.kc) */for(let i=0;i<20&&Q.length&&!S.dead;i++){const m=Q[0];if(m.opts&&m.opts.length)chooseM(0);else closeModal()}return S.dead?(S.kc&&S.kc.end)||'NOEND':''});
+  if(!R.after3.dead&&R.after3.kc){R.endedAt3=await p.evaluate(()=>{/* r2-r1 FAIL 4: never press an end card here (its close starts a NEW life without S.kc) */for(let i=0;i<20&&Q.length&&!S.dead;i++){const m=Q[0];if(m.opts&&m.opts.length)chooseM(Math.max(0,m.opts.findIndex(c=>!c.off)));else closeModal()}return S.dead?(S.kc&&S.kc.end)||'NOEND':''});
    if(R.endedAt3){if(R.endedAt3==='NOEND')F('home life ended without S.kc.end');R.note='life ended at home while answering: '+R.endedAt3}}
   if(!R.after3.dead&&R.after3.kc&&!R.endedAt3){await p.evaluate(()=>{
     S.year=KC.ty;S.month=KC.tm-1;S.tuan=2;S.turn=Math.max(S.turn,20);S.kc.ev.chieu=1;S.kc.suit=[];S.kc.forced=0;S.kc.mien=0;
@@ -69,18 +69,18 @@ const sleep=ms=>new Promise(r=>setTimeout(r,ms));
   R.gate=await p.evaluate(()=>({Q:Q.map(m=>m.t),bac:S.bac,fam:S.kc&&S.kc.fam.map(m=>[m.t,m.name,m.alive]),fell:S.kc&&S.kc.fell,foeDad:S.foeDad,foe:S.foe,rank:S.rank}));
   if(R.gate.Q.length){for(let i=0;i<3;i++){for(let k=0;k<4;k++){if(!await p.evaluate(()=>document.body.classList.contains('kbk-open')))break;await p.keyboard.press('Escape');await sleep(600)}const t=await p.evaluate(()=>{showModal();return Q[0]&&Q[0].t});await sleep(900);await shot('G'+i+'-'+String(t).replace(/\W+/g,'_').slice(0,20),true);R['gateTxt'+i]=await p.evaluate(()=>document.getElementById('modal').innerText.replace(/\s+/g,' ').slice(0,700));R['gateM'+i]=await meas();
     const more=await p.evaluate(()=>{closeModal();return Q.length});if(!more)break}}
-  R.pal=await p.evaluate(()=>{for(let i=0;i<20&&Q.length&&!S.dead;i++){const m=Q[0];if(m.opts&&m.opts.length)chooseM(0);else closeModal()}render();
+  R.pal=await p.evaluate(()=>{for(let i=0;i<20&&Q.length&&!S.dead;i++){const m=Q[0];if(m.opts&&m.opts.length)chooseM(Math.max(0,m.opts.findIndex(c=>!c.off)));else closeModal()}render();
    return{isKc:isKc(),dead:!!S.dead,end:S.kc&&S.kc.end,inPal:!!(S.kc&&S.kc.inPal),rank:S.rank,rankN:RANKS[S.rank].n,inCons:consorts().includes(S),age:S.age,danh:S.danh,bac:S.bac,maid:S.maid&&S.maid.name,
     intel:S.kc&&S.kc.intel.length,fig:figFor(S),tabs:[...document.querySelectorAll('#tabs button')].filter(b=>b.offsetParent).map(b=>b.textContent.trim()),title:(document.getElementById('me-r')||{}).textContent}});
   if(R.pal.dead||R.pal.end)R.note='life ended at home: '+(R.pal.end||'dead');
   else{if(R.pal.isKc||!R.pal.inPal)F('did not enter the palace');if(!(R.pal.rank>=0&&R.pal.rank<=2))F('entry rank '+R.pal.rank);if(!R.pal.inCons)F('not in consorts()');
-   if(/-(kc|ngheo)-a18/.test(R.pal.fig||''))F('home dress in the palace');if(R.pal.danh>30)F('Danh carry-over '+R.pal.danh);if(R.pal.bac>400+200)F('Bạc carry-over '+R.pal.bac);
+   if(/-(kc|ngheo)-a18/.test(R.pal.fig||''))F('home dress in the palace');if(R.pal.danh>30+90)F('Danh carry-over '+R.pal.danh);/* old rule ≤30 + the home-years carry BAL.kcv (OD:L1288) */if(R.pal.bac>400+200)F('Bạc carry-over '+R.pal.bac);
    if(!R.pal.tabs.some(t=>/Hậu cung/.test(t)))F('palace tabs not back: '+R.pal.tabs);
    for(let i=0;i<4;i++){if(!await p.evaluate(()=>document.body.classList.contains('kbk-open')))break;await p.keyboard.press('Escape');await sleep(600)}/* Tuần lục of the first palace week */
    await p.evaluate(()=>{tab='act';render()});await sleep(1500);
    await shot('4-palace',true);R.m4=await meas();
-   for(let i=0;i<4;i++){await p.evaluate(()=>{for(let k=0;k<20&&Q.length;k++){const m=Q[0];if(m.opts&&m.opts.length)chooseM(0);else closeModal()}try{nextBuoi()}catch(e){}});await sleep(300)}
-   R.reload=await p.evaluate(()=>{for(let k=0;k<20&&Q.length;k++){const m=Q[0];if(m.opts&&m.opts.length)chooseM(0);else closeModal()}save();const s=SLOT;const n=S.name;deser(loadSlot(s));render();return{same:S.name===n,isKc:isKc(),inPal:!!(S.kc&&S.kc.inPal),rank:S.rank}});
+   for(let i=0;i<4;i++){await p.evaluate(()=>{for(let k=0;k<20&&Q.length;k++){const m=Q[0];if(m.opts&&m.opts.length)chooseM(Math.max(0,m.opts.findIndex(c=>!c.off)));else closeModal()}try{nextBuoi()}catch(e){}});await sleep(300)}
+   R.reload=await p.evaluate(()=>{for(let k=0;k<20&&Q.length;k++){const m=Q[0];if(m.opts&&m.opts.length)chooseM(Math.max(0,m.opts.findIndex(c=>!c.off)));else closeModal()}save();const s=SLOT;const n=S.name;deser(loadSlot(s));render();return{same:S.name===n,isKc:isKc(),inPal:!!(S.kc&&S.kc.inPal),rank:S.rank}});
    if(!R.reload.same||R.reload.isKc)F('reload '+JSON.stringify(R.reload))}
   R.errs=errs.slice(0,10);if(errs.length)F('page errors');rep.push(R);if(R.fail.length)bad++;await c.close()}
  console.log(JSON.stringify(rep,null,1));await b.close();process.exit(bad?1:0)})().catch(e=>{console.error(e);process.exit(1)});

@@ -64,7 +64,7 @@ function dsSpyX(A){return Array.isArray(A)?A.map(o=>o&&o.n==="Sai đi dò la"&&o
  try{const r=dressNow(obs,t);if(r&&r.vj&&r.vj.length&&dsVj(t).length)return{st:"over",sure:true,by:r.by==="cùng chỗ"?"tận mắt thấy":r.by,jw:1}}catch(e){}return null};window.wdCause=wdCause})();
 (function(){if(typeof wdAccuse!=="function")return;const a0=wdAccuse;wdAccuse=function(a,t){let J=[];try{J=dsVj(t)}catch(e){}let st="ok";try{st=wdStatus(t)}catch(e){}
  if(!J.length||st==="tang")return a0.apply(this,arguments);
- const dropJ=()=>{t.inv=(t.inv||[]).filter(e=>!(e&&e.w&&!e.h&&IT[e.k]&&itm(e.k).sl&&itm(e.k).rk>rkOf(t)))};
+ const dropJ=()=>{const keep=e=>!(e&&e.w&&!e.h&&IT[e.k]&&itm(e.k).sl&&itm(e.k).rk>rkOf(t));/* confiscated pieces go to the Nội vụ phủ store (item ledger jil) */if(typeof ilFilter==="function")ilFilter(t,keep,"conf");else t.inv=(t.inv||[]).filter(keep)};
  if(st==="over"){const r=a0.apply(this,arguments);if(/>thành</.test(r||"")){dropJ();return r+`${J.map(k=>itm(k).n).join(", ")} cũng bị tịch thu. `}return r}
  /* the outfit itself is fine, but she wears jewellery above her rank: judged by the same odds, the same numbers as a Vượt phẩm outfit */
  const judge=judgeName(t),A0=wdNmC(a),T0=wdNm(t);for(const o of consorts()){try{dressLook(o,t,judge)}catch(e){}}

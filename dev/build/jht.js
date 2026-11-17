@@ -276,7 +276,7 @@ function qtTab(){const L=qtList();const head=`<div class="ph"><span>Con c√°c nh√
 window.htTabHTML=function(t){return `<div class="pgwrap kht">`+({kid:kidTab,kvo:kvTab,kin:kinTab,hon:honTab,qt:qtTab}[t]||kidTab)()+`</div>`};
 if(typeof renderPanel0==="function"){const p0=renderPanel0;renderPanel0=function(){if(!HTK.includes(tab)||!S||S.dead||(typeof isSrv==="function"&&isSrv()))return p0.apply(this,arguments);
   const el=$("panel");faceInit();const gm=document.querySelector(".game");if(gm)gm.classList.add("cardtab");const h=htTabHTML(tab);
-  const same=el.dataset.tab===tab,keep=same?el.scrollTop:0;el.innerHTML=h;el.dataset.tab=tab;el.dataset.pg=String(PG[tab]);el.scrollTop=keep;kitFix(el)}}
+  const same=el.dataset.tab===tab,keep=same?el.scrollTop:0;el.innerHTML=h;el.dataset.tab=tab;el.dataset.pg=String(PG[tab]);kitFix(el);panelScrollKeep(el,keep)}}
 /* ---------- CSS ---------- */
 const st=document.createElement("style");st.id="kit-ht";st.textContent=`
 .khtempty{display:grid;grid-template-columns:minmax(110px,170px) minmax(0,1fr);gap:12px 16px;align-items:center;padding:12px;margin:4px 0 8px;border:1px solid var(--k-hair,#e6d3ac);border-radius:var(--k-rad,8px);background:var(--k-card,#fffaf0)}

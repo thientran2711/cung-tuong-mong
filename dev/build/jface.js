@@ -101,7 +101,7 @@ KIT_FACEFX.add({id:"ill",z:10,ready:true,                  /* owner approved (pi
   if(i&&i.k!=="docman"&&(i.k!=="longthe"||kd==="emp"))return{lvl:cl(i.st|0,1,3),ill:i};                      /* long thể bất an is the Emperor's own illness */
   if((p.sick||0)>0)return{lvl:2};
   if(kd==="kid"&&typeof p.hp==="number"&&p.hp<FXF.kidHp[0])return{lvl:p.hp<FXF.kidHp[1]?2:1,kid:true};     /* a child worn down (the same hp<35 the Hoàng tự list calls "ốm") */
-  if(typeof p.suc==="number"&&p.suc<FXF.weakSuc&&!(p.pz&&p.pz.until>wk()))return{lvl:1,weak:true};return null},
+  if(typeof p.suc==="number"&&(p.suc<FXF.weakSuc||typeof khB==="function"&&khB()&&khOf(p)<khB().faceLo)&&!(p.pz&&p.pz.until>wk()))return{lvl:1,weak:true};return null},
  seen:(p,st)=>p===S||(st.ill?fxIllSeen(p)&&fxSeen(p):fxSeen(p)),
  sac:(p,st)=>FXF.ill[st.lvl],
  chip:(p,st)=>st.ill?(["consort","player"].includes(KIT_FACEFX.kind(p))?null:[fxIllName(st.ill),"hot"]):[st.weak?"Sắc mặt nhợt nhạt":"Người ốm yếu, xanh xao","hot"],   /* a consort's illness already has its own chip (j13 illName) */

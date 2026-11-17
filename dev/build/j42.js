@@ -86,7 +86,7 @@ function srvVisitOf(k){const ppl=[];let msg="";const m=srvM();const W=S.where||{
  else{if(W.emp===k)P("emp",{name:"Hoàng thượng",ini:"Đế",col:"#f0d070",info:"Hoàng thượng"});
   for(const v of liveRivals(true).filter(v=>srvWhere(v)===k).slice(0,4))rvP(v);
   if(k[0]==="r"||k==="kn"){const hd=accHostK(k);for(const s of (hd&&hd.staff||[]).slice(0,2))svP(s,hd)}
-  if(k==="tyv")P("ty",{name:"Thái y Trương",ini:"Y",col:"#8fc38a",info:"Thái y viện"})}
+  if(k==="tyv")P("ty",{name:(S.court&&S.court.ty&&S.court.ty.name)||"Thái y Trương",ini:"Y",col:"#8fc38a",info:"Thái y viện"})}
  const sn=S.srv.sent;if(sn&&!sn.done&&sn.k===k&&sn.until>=bid())P("task",{name:"Việc chủ sai",ini:"Vụ",col:"#c9a46a",info:sn.n});
  if(!msg)msg=ppl.length?`Ở đây có ${ppl.length} người.`:"Không gặp ai.";
  return{k,people:ppl,talked:false,tk:{},msg}}
@@ -183,12 +183,12 @@ function srvIllWorld(){if(typeof illMonth!=="function"||(typeof worldOn==="funct
  try{return illMonth()||""}catch(e){console.error("srv ill",e);return""}finally{consorts=c0}}
 function srvEndTurn(){if(S.dead||Q.length||S.mg)return;S.buoi=0;const q0=Q.length;let ev="";
  /* AG3 (one world): the consorts sleep and rest in a maid life as in hers (j3 nightRg + j76sleep); before, their Sức only fell on this road */
- try{if(typeof worldOn!=="function"||worldOn())liveRivals(true).forEach(v=>v.suc=cl(v.suc+nightRg()+(typeof j76sleep==="function"?j76sleep(v):0),0,100))}catch(e){console.error("srv rest",e)}
+ try{if(typeof worldOn!=="function"||worldOn())liveRivals(true).forEach(v=>v.suc=cl(v.suc+nightRg()+(typeof j76sleep==="function"?j76sleep(v):0),0,typeof sucCap==="function"?sucCap(v):100))}catch(e){console.error("srv rest",e)}
  srvMisCheck();
  ev+=srvW(()=>resolveTonight()||"");ev+=srvW(()=>rivalsTurn()||"");if(S.dead)return;
  {const lb=typeof lsSnap==="function"?lsSnap():null;/* log-sync r1: the weekly rest gets its reason in the morning line */
- if(S.srv.lau>0){S.suc=cl(S.suc+5,0,100);if(lb)lsNote(lb,{suc:"nghỉ qua tuần (giặt đồ)"},true);S.srv.lau--;if(S.srv.lau<=0)srvFromLaundry()}
- else{S.suc=cl(S.suc+10,0,100);if(lb)lsNote(lb,{suc:"nghỉ qua tuần"},true);try{srvWeek()}catch(e){console.error(e)}}}
+ if(S.srv.lau>0){S.suc=cl(S.suc+5,0,sucCap(S));if(lb)lsNote(lb,{suc:"nghỉ qua tuần (giặt đồ)"},true);S.srv.lau--;if(S.srv.lau<=0)srvFromLaundry()}
+ else{S.suc=cl(S.suc+10,0,sucCap(S));if(lb)lsNote(lb,{suc:"nghỉ qua tuần"},true);try{srvWeek()}catch(e){console.error(e)}}}
  if(S.dead)return;
  if(S.suc<=0)return die(S.srv.lau>0?"Kiệt sức chết giữa đống đồ giặt ở Tân Giả khố":"Lao lực kiệt sức mà chết");
  if(S.tuan===2){ev+=srvMonth();if(S.dead)return}else S.tuan++;
@@ -319,7 +319,10 @@ function srvRise(why){if(!S||(S.age||0)<18)return;const m=srvM();const tin=S.tin
 /* ---------- UI: HUD, tabs, panels, self card, map ---------- */
 const SRVTABS={act:"Việc",go:null,staff:"Đồng liêu",story:"Thân phận",log:null};
 function srvTabs(){const on=isSrv();document.querySelectorAll("#tabs button").forEach(b=>{const t=b.dataset.tab;if(b.dataset.l0==null){b.dataset.l0=b.textContent;b.dataset.s0=b.dataset.s||""}
- if(on){b.style.display=t in SRVTABS?"":"none";const L=SRVTABS[t];b.textContent=L||b.dataset.l0;b.dataset.s=L||b.dataset.s0}else{b.style.display="";b.textContent=b.dataset.l0;b.dataset.s=b.dataset.s0}})}
+ /* oi-render: write only what differs, and a tab-group head (j79 kgBar, data-kg) keeps the group's label: this reset it to its own label on
+    every render and kgBar put the group label back right after — two text changes per render, so the tab bar was re-measured (tabsFit) twice */
+ const set=(d,l,s)=>{if(b.style.display!==d)b.style.display=d;if(b.dataset.kg&&!on)return;if(b.textContent!==l)b.textContent=l;if(b.dataset.s!==s)b.dataset.s=s};
+ if(on){const L=SRVTABS[t];set(t in SRVTABS?"":"none",L||b.dataset.l0,L||b.dataset.s0)}else set("",b.dataset.l0,b.dataset.s0)})}
 function srvHud(){const e=$("hud-sung");if(!e)return;const sm=e.querySelector("small");if(sm&&sm.dataset.o0==null)sm.dataset.o0=sm.innerHTML;
  if(isSrv()){$("me-r").textContent=srvTitle();if(sm)sm.innerHTML=sm.dataset.o0.replace("Sủng","Chủ tin");e.querySelector("span").textContent=S.tin;const u=e.querySelector("u");if(u)u.style.width=S.tin+"%";e.title=HX.tin}
  else if(sm&&sm.innerHTML!==sm.dataset.o0){sm.innerHTML=sm.dataset.o0;e.title=""}}
@@ -337,7 +340,7 @@ function srvMapFix(){const m=srvM(),mk=m&&palaceOf(m);document.querySelectorAll(
   const h=window.placeEnterHook(S,k);if(h&&!h.ok&&!b.disabled){b.disabled=true;b.classList.add("off","srvno");b.title=`${b.title.split(":")[0]}: ${h.why}`;let mt=b.querySelector(".mmeta");if(!mt){mt=document.createElement("span");mt.className="mmeta";b.appendChild(mt)}mt.innerHTML=`<em>${h.why}</em>`}})}
 (function(){const p0=renderPanel0;renderPanel0=function(){if(!isSrv()||!["staff","story","act"].includes(tab))return p0.apply(this,arguments);
  const el=$("panel");if(tab==="act"){const r=p0.apply(this,arguments);try{el.insertAdjacentHTML("afterbegin",srvHead())}catch(e){}return r}
- const gm=document.querySelector(".game");if(gm)gm.classList.remove("cardtab","maptab");const keep=el.dataset.tab===tab?el.scrollTop:0;el.innerHTML=tab==="staff"?srvStaffHTML():srvRoadHTML();el.dataset.tab=tab;el.dataset.pg="";el.scrollTop=keep;kitFix(el)}})();
+ const gm=document.querySelector(".game");if(gm)gm.classList.remove("cardtab","maptab");const keep=el.dataset.tab===tab?el.scrollTop:0;el.innerHTML=tab==="staff"?srvStaffHTML():srvRoadHTML();el.dataset.tab=tab;el.dataset.pg="";kitFix(el);panelScrollKeep(el,keep)}})();
 function srvHead(){const m=srvM();if(!m)return"";const w=srvWhere(m),mk=palaceOf(m);const sn=S.srv.sent&&!S.srv.sent.done&&S.srv.sent.until>=bid()?S.srv.sent:null;
  if(S.srv.lau>0)return `<div class="srvhead">${mdH(pMe(),"sm")}<span><b>Cung nữ Tân Giả khố</b> · <b class="r">còn ${S.srv.lau} tuần</b> · giặt đủ thì được về sớm; hết hạn, Nội vụ phủ chia về hầu chủ mới.</span></div>`;
  return `<div class="srvhead">${mdH(pv(m),"sm")}<span><b>${srvTitle()}</b> · chủ ${netTxt(m)} · ${w===mk?"đang ở cung":"đang ở "+placeOf(w).n} · Chủ tin <b class="${S.tin<BAL.tinLv.lo?"r":S.tin>=BAL.tinLv.hi?"g":""}">${S.tin}</b>${sn?` · <b class="g">Việc chủ sai: ${sn.n} (đến ${placeOf(sn.k).n})</b>`:""}${S.srv.lau>0?` · <b class="r">Tân Giả khố còn ${S.srv.lau} tuần</b>`:""}</span></div>`}

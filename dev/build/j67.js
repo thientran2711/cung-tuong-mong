@@ -151,9 +151,11 @@ function card67(kind,title,R,who,sub){if(quiet||window.__bot)return;R=R.filter(r
 /* month: at most one beat a month across all threads; shared arcs open later in the life */
 /* ---------- STORY wrappers: old saves keep the old storyline ---------- */
 /* wrap67(k) = story67Wrap(k) (both names kept, batch-0232: road-b2 calls wrap67 from jroad.js at load end, tut-followups calls story67Wrap from jorigins) */
-/* wrap one origin's v1 story slot into the chapter frame; idempotent. An origin registered by a module that loads after j67
-   (jorigins bd) calls story67Wrap itself (fix tut-followups: bd had no frame, so no chapters 1–3) */
-function story67Wrap(k){const old=STORY[k];if(!old||old.__old)return;const W={};
+/* wrap one origin's v1 story slot into the chapter frame; idempotent. Every STORY entry is wrapped, also one a module after j67 adds
+   (jorigins bd): regEach (jreg) runs the wrap again at the script end and at every life start (review/story-frame, story bot fault 1;
+   before, bd had no frame in 28/28 lives and jorigins had to call the wrap by hand). late = the entry came after j67 loaded (old saves of
+   such an origin may hold a life with no frame: f67Mig below starts it on load). */
+function story67Wrap(k,late){const old=STORY[k];if(!old||old.__old)return;const W={};if(late)W.__late=1;
  const d=(n,f)=>Object.defineProperty(W,n,{get:f,enumerable:true,configurable:true});
  d("t",()=>v267()&&S.st.ch?(QUEST67[k]||QUEST67.tt).t:old.t);
  d("goal",()=>{if(!v267()||!S.st.ch)return old.goal;const m=S.st.ms,M=S.st.M,c=S.st.ch;if(m){const d0=MS67[m.id];return `Chương ${c.n}: ${d0.t()}. ${d0.g()}`}return M?`Chương ${M.chap||1}: ${ARC67[M.a].t}. ${fill67(ARC67[M.a].g,M)}`:obj67()});
@@ -162,9 +164,9 @@ function story67Wrap(k){const old=STORY[k];if(!old||old.__old)return;const W={};
  d("hint",()=>v267()?(()=>obj67()):old.hint);
  d("month",()=>v267()?a67Month:old.month);
  d("acts",()=>v267()?(()=>[]):old.acts);
- W.init=function(){if(k==="td"&&old.init)old.init();a67init(k)};
+ W.init=function(){try{regSweep()}catch(e){}if(k==="td"&&old.init)old.init();a67init(k)};
  W.__old=old;STORY[k]=W;try{story67Acts(k)}catch(e){}}
-Object.keys(STORY).forEach(story67Wrap);
+regEach(STORY,(k,v,late)=>story67Wrap(k,late),"STORY wrap");
 function wrap67(k){return story67Wrap(k)}
 (function(){const s0=storyMonth;storyMonth=function(){if(v267())return a67Month()||"";return s0.apply(this,arguments)}})();
 if(typeof srvMonth==="function")(function(){const m0=srvMonth;srvMonth=function(){const r=m0.apply(this,arguments)||"";if(S&&!S.dead&&v267())return r+(a67Month()||"");return r}})();
@@ -1573,10 +1575,13 @@ ARC67.s_ban=arcFx("s_ban",{o:"*",ok:nsrv67,t:"Kẻ thù hóa tri kỷ",w:"v",sj:
   win2:{tag:"Đổi phe đúng lúc",t:"Ngươi đứng về phe thắng. Nhưng {v} sẽ không bao giờ quên.",go:(A,_ok,G)=>[e67ally(rv67(A,"v2"),G[0]),e67foe(rv67(A,"v"),G[1])].join(" ")},
   mid:{tag:"Ai lo phận nấy",t:"Mỗi người tự lo. Không thêm tri kỷ, không thêm thù."},
   lose:{tag:"Liên minh đổ vỡ",t:"Liên minh đổ vỡ, cả hai cùng bị phạt. {v2} đắc ý.",go:(A,_ok,G)=>e67foe(rv67(A,"v2"),G[0])}}});
-/* balance (measured): story choices must not wear her health down; Sức costs/losses of story options are halved */
-(function(){const h=o=>{for(const k of ["c","l"])if(o[k]){if(o[k].suc<0)o[k].suc=Math.min(-1,Math.round(o[k].suc/2));if(o[k].hh<0)o[k].hh=Math.min(-1,Math.round(o[k].hh/2))}};
- Object.values(ARC67).forEach(a=>Object.values(a.E).forEach(E=>{if(E.fx&&E.fx.hh<0)E.fx.hh=Math.round(E.fx.hh/2)}));
- const walk=b=>{if(b&&Array.isArray(b.o))b.o.forEach(h)};Object.values(GB67).forEach(walk);Object.values(ARC67).forEach(a=>Object.values(a.B).forEach(walk))})();
+/* balance (measured): story choices must not wear her health down; Sức costs/losses of story options are halved.
+   jreg: every hand-typed arc, also those of modules after j67 (jorigins bd_*, jst14 st_*, j96…). Road chapters (o:"rd", jroad rdDef) are
+   NOT halved: their numbers are read from BAL.road (jbalroad, one core) and already set at their final value. */
+(function(){const H=new WeakSet();/* each option / ending object is halved once, even when two arcs share it */
+ const h=o=>{if(!o||H.has(o))return;H.add(o);for(const k of ["c","l"])if(o[k]){if(o[k].suc<0)o[k].suc=Math.min(-1,Math.round(o[k].suc/2));if(o[k].hh<0)o[k].hh=Math.min(-1,Math.round(o[k].hh/2))}};
+ const walk=b=>{if(b&&Array.isArray(b.o))b.o.forEach(h)};Object.values(GB67).forEach(walk);
+ regEach(ARC67,(id,a)=>{if(!a||a.o==="rd"||H.has(a))return;H.add(a);Object.values(a.E||{}).forEach(E=>{if(!E||H.has(E))return;H.add(E);if(E.fx&&E.fx.hh<0)E.fx.hh=Math.round(E.fx.hh/2)});Object.values(a.B||{}).forEach(walk)},"ARC67 halve")})();
 
 /* one-line objective of the main quest on the Hành sự tab */
 (function(){const p0=renderPanel0;renderPanel0=function(){const r=p0.apply(this,arguments);try{if(tab==="act"&&v267()&&S.st.ch&&!window.kitStageRail){/* owner 16/11: the goal lives in the stage rail icon (§77), no strip here */const el=$("panel");if(el&&!el.querySelector(".obj67")){const o=obj67();/* KIT §72 (owner 16/11 "Không bấm xem được"): the line is the kit goal strip, tap → chapter detail (jgoal) */const g=typeof kitGoalStrip==="function"?kitGoalStrip():"";if(g)el.insertAdjacentHTML("afterbegin",`<div class="obj67">${g}</div>`);else if(o)el.insertAdjacentHTML("afterbegin",`<div class="srvhead obj67"><span><b>Mệnh truyện</b> · ${o}</span></div>`)}}}catch(e){console.error(e)}return r}})();
@@ -1748,7 +1753,8 @@ function msCheck67(){const m=S.st.ms,c=S.st.ch;if(!m||!c||!msDone67(m))return;co
 function storyActs67(){if(!v267()||S.dead||S.out)return[];const A=S.st.M;if(!A||A.done||A.cur||!A.nb||S.turn<A.due||isSrv67()||Q.some(m=>m.pid==="j67"))return[];const b=beatDef67(A,A.nb);if(!b)return[];
  return [{n:`Mệnh truyện: ${fill67(b.h||"",A)}`,t:`${lab67(A)} «${ARC67[A.a].t}» · còn ${Math.max(0,A.dl-S.turn)} tháng tới hạn.`,c:{...BAL.arc.card.c},o:BAL.arc.card.o,w:{},x:"mở hồi kế tiếp của chương, giữ Lợi thế, gần phần thưởng",dom:"Giao thiệp",j67:1,go:()=>{fireBeat67(A);try{showModal()}catch(e){}}}]}
 function story67Acts(k){Object.defineProperty(STORY[k],"acts",{get:()=>v267()?storyActs67:(STORY[k].__old||{}).acts,configurable:true,enumerable:true})}
-Object.keys(STORY).forEach(story67Acts);
+/* jreg: every STORY entry (story67Wrap also sets it; idempotent) */
+regEach(STORY,k=>{if(STORY[k]&&STORY[k].__old)story67Acts(k)},"STORY acts");
 (function(){const d0=deal;deal=function(){const r=d0.apply(this,arguments);try{if(v267()&&S.st.done&&deck)deck.push(...storyActs67())}catch(e){}return r}})();
 function a67Month(){if(!v267()||S.dead)return"";const st=S.st;try{msCheck67()}catch(e){console.error(e)}
  const A=st.M;if(A&&!A.done&&A.dl!=null&&!A.cur){

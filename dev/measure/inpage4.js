@@ -16,7 +16,7 @@ function modalStep(sens){
   if(Q.length){
     const m=Q[0];
     if(m.opts&&m.opts.length){
-      const okIdx=m.opts.map((c,i)=>[c,i]).filter(([c])=>!(c.fx&&c.fx.bac&&S.bac+c.fx.bac<0));
+      const okIdx=m.opts.map((c,i)=>[c,i]).filter(([c])=>!c.off&&!(c.fx&&c.fx.bac&&S.bac+c.fx.bac<0));
       if(!okIdx.length){closeModal();return true}
       let pickI;
       if(!sens)pickI=rpick(okIdx)[1];

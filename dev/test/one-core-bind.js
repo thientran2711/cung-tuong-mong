@@ -36,7 +36,7 @@ function eqLit(t){if(!t)return[];if(t.type==='LogicalExpression')return eqLit(t.
 function index(B){
  const ORDER=fs.readFileSync(path.join(B,'assemble.py'),'utf8').match(/for f in \[([^\]]+)\]/)[1].match(/'([^']+)'/g).map(s=>s.slice(1,-1)).filter(f=>/^j/.test(f));
  const mods=ORDER.map(f=>{const src=fs.readFileSync(path.join(B,f),'utf8');const comments=[];return{f,src,comments,ast:acorn.parse(src,{ecmaVersion:'latest',locations:true,onComment:comments})}});
- const FN={};/* name → [{m,node}] */const LINK={};/* key → [{m,node}] (A("k") defs, if(…==="k") branches, case "k") */
+ const FN=Object.create(null);/* name → [{m,node}] */const LINK=Object.create(null);/* key → [{m,node}] (A("k") defs, if(…==="k") branches, case "k") */
  const reads=[];/* {m,n,key} */const prints=[];const NOBJ={};/* option name → [{m,node}] */
  const addL=(k,m,node,kind)=>{(LINK[k]=LINK[k]||[]).push({m,node,kind})};
  for(const m of mods){walk(m.ast,(n,st)=>{const par=st[st.length-1];
