@@ -574,7 +574,7 @@
 | save-dlg-fix review r1 (sonnet SMALL UI) of 340c616a (worker #2 archived) | review/save-dlg-fix-r1 | main s29 | session_01UV1SzgbocUETEUWFViBc8f | RUNNING | 17/11 03:31Z |
 | night-final SUCCESSOR #6 (opus; HELD BY MAIN while Foreman D is out of quota; returns to D on a new D account) from ea74aff6: shots, buổi perf ≤ live +5 %, G4 probe proof; co-op PARKED | review/night-final | main s29 | session_01UV1SzkcuhnxeSAywiQC2hz | RUNNING | 17/11 03:33Z |
 | OI family (opus): render-cost root fix + origin-intros flow/oldsave tests + kc2val Chờ re-measure (carries kc-roads-cn-nc-fix2), then one OI reviewer | review/batch-0032-oi | D | session_01964izCi8228y2v2JjEknpd | RUNNING | 17/11 03:35Z |
-| npc-roads-fx FINISH (opus): F1–F6 scan, merge main, suites → SẴN SÀNG KIỂM, then BIG reviewer | review/npc-roads-fx | D | session_01964izFdMcMY1NA9hQZVoJw | RUNNING | 17/11 03:35Z |
+| npc-roads-fx FINISH (opus): F1–F6 scan, merge main, suites → SẴN SÀNG KIỂM, then BIG reviewer | review/npc-roads-fx | D | session_01964izFdMcMY1NA9hQZVoJw | DONE SẴN SÀNG KIỂM e34393b1 (archived) | 17/11 03:35Z |
 | item-ledger SOLO landing (opus): from PASS 7aba5de9, branch co-op transport removed (live giftin only), co-op part parked | review/item-ledger-solo | D | session_01964izCwq2JLHTHaaBox66W | RUNNING | 17/11 03:35Z |
 | npc-death re-wire (opus): jnpcd/jly into j95 place-people record (Lý Trường Môn viện, dead off lists, Thái y viện new name) | review/npc-death-wire | D | session_01964izBuQu8dWabKyYB69JE | DONE SẴN SÀNG KIỂM de166c3f (archived) | 17/11 03:35Z |
 | suc-khoe review r2 (opus BIG) of da50857d | review/suc-khoe-r2 | D | session_01964izEdQ4cDsTpuGgdScHp | RUNNING | 17/11 03:35Z |
@@ -613,3 +613,4 @@
 | cloud-del review r1 (sonnet SMALL) of e12ef99a | review/cloud-del-r1 | D | session_01964izGAVcoDZanXLDNekPh | RUNNING | 17/11 04:23Z |
 | npc-death-wire review r1 (opus BIG) of de166c3f | review/npc-death-wire-r1 | D | session_01964izCQT8gNjjT2WA7WDjh | RUNNING | 17/11 04:27Z |
 | newlife-reset r1 PASS 0045ff8ef (supersedes b2da25cc0; tuanluc-sync drops vmemFix) → next batch | review/newlife-reset-r1 | main s30 | session_01UV1Szj7gGyXgBXgvj6d6xG | PASS | 17/11 04:28Z |
+| npc-roads review r2 (opus BIG) of e34393b1 (U2/U3/U4 + r1 families + ch1–4 gate; on a test build with B's road engine) | review/npc-roads-r2 | D | session_01964izESTjuhUzS2khSQ5K9 | RUNNING | 17/11 04:28Z |
