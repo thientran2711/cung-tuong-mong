@@ -43,6 +43,7 @@ const sl=t=>new Promise(r=>setTimeout(r,t));
   out.T.plantLoyal=tl2.join(" ");F(shelfOf(S).g.cay.pc>=BAL.shelf.plant.wither,"loyal servant let the plant wither");
   S.maid={name:"Lười",loyal:10,traits:["Lười biếng"]};shelfOf(S).g.cay.pc=80;const tl3=[];for(let i=0;i<8;i++){shelfPlantWeek(S);tl3.push(Math.round(shelfOf(S).g.cay.pc))}out.T.plantLazy=tl3.join(" ");
   S.staff=st;S.maid=md;
+  {const t0=performance.now();for(let i=0;i<10;i++)shelfWeek();out.T.weekMs=+((performance.now()-t0)/10).toFixed(2);for(let i=0;i<3;i++){SHELF_PW.k='';placeWhere()}SHELF_PW.k='';const t1=performance.now();placeWhere();out.T.placeWhereMs=+(performance.now()-t1).toFixed(2);const t2=performance.now();placeWhere();out.T.placeWhereNoShelfMs=+(performance.now()-t2).toFixed(2);out.T.people=liveRivals(true).length}
   /* 8 OLD SAVE: people without p.shelf (old save) run the week */
   for(const x of [S].concat(rivals))delete x.shelf;let ok8=true;try{shelfWeek();shelfView(S);shelfView(v)}catch(e){ok8=false;out.fail.push("old save week: "+e.message)}out.T.oldSave=ok8;
   /* 9 LEDGER census with displayed pieces */

@@ -112,9 +112,10 @@ function shelfReact(obs,t){if(!obs||!t||obs===t||obs===S)return"";const B=BAL.sh
  if(x.wither)affAdd(obs,t,B.witherAff);return x.name}
 window.shelfReact=shelfReact;
 function shelfSee(obs,t,by){const r=shelfLook(obs,t,by,true);if(r)shelfReact(obs,t);return r}
+const SHELF_PW={k:""};/* once per buổi (placeWhere runs many times a buổi: perf) */
 /* her walk into a palace: she sees the rooms of everyone living there; NPCs at her palace the same buổi see hers */
 (function(){if(typeof goTo==="function"){const g0=goTo;goTo=function(){const was=S&&S.place;const r=g0.apply(this,arguments);try{if(S&&S.place!==was&&!S.out)for(const v of liveRivals(true))if(v.alive&&palaceOf(v)===S.place)shelfSee(S,v,"tận mắt")}catch(e){console.error("shelf goTo",e)}return r}}
- if(typeof placeWhere==="function"){const p0=placeWhere;placeWhere=function(){const r=p0.apply(this,arguments);try{if(S&&!S.dead&&S.where)for(const v of liveRivals(true)){if(!v.alive||v.out)continue;const w=whereOf(v);
+ if(typeof placeWhere==="function"){const p0=placeWhere;placeWhere=function(){const r=p0.apply(this,arguments);try{const kb=wk()+"-"+(S&&S.buoi||0);if(S&&!S.dead&&S.where&&SHELF_PW.k!==kb&&(SHELF_PW.k=kb))for(const v of liveRivals(true)){if(!v.alive||v.out)continue;const w=whereOf(v);
    if(w==="home"&&!S.out)shelfSee(v,S,"tận mắt");else for(const o of liveRivals(true))if(o!==v&&o.alive&&!o.out&&palaceOf(o)===w&&w!==palaceOf(v))shelfSee(v,o,"tận mắt")}}catch(e){console.error("shelf where",e)}return r}}})();
 /* Dò la (both ways) also reports the room; her maid's "Sai đi dò la" the same */
 function shelfSpyTxt(a,t,by){const r=shelfSee(a,t,by);if(!r||a!==S)return"";return `Phòng của ${NM(t)}: ${r.n?`bày ${r.n} món, ${SHELF_LV[r.lv].toLowerCase()}`:"không bày gì"}${r.wi?", có chậu cây héo":""}. `}
