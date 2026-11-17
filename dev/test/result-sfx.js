@@ -30,7 +30,7 @@ const [,,URL,...SZ]=process.argv;
   const names=async(ms,silent)=>{if(silent)await p.waitForTimeout(3500);else{await p.evaluate(()=>new Promise(res=>{const t0=performance.now();const iv=setInterval(()=>{if(KSFX.log.some(x=>/win|fail|expose|scheme|learn/.test(x.n))||performance.now()-t0>12000){clearInterval(iv);setTimeout(res,900)}},200)}))}return p.evaluate(()=>({n:KSFX.log.map(x=>x.n),dr:KSFX.drop.slice(-4).map(x=>x.n+":"+x.why),res:KSFX.log.filter(x=>x.m==="result").length,rs:KSFX.rs,drop:KSFX.rsDrop}))};
   /* result cards */
   await clean();await p.evaluate(card(true,"Dâng trà"));let r=await names();ck("card THÀNH: seal + win once",r.n.filter(x=>x==="sfx-seal-stamp").length===1&&r.n.filter(x=>x==="sfx-win").length===1,r);
-  await clean();await p.evaluate(card(false,"Bày mưu"));r=await names();ck("card HỎNG: seal + fail once",r.n.filter(x=>x==="sfx-seal-stamp").length===1&&r.n.filter(x=>x==="sfx-fail").length===1,r);
+  await clean();await p.evaluate(card(false,"Bày mưu"));r=await names();ck("card BẠI: seal + fail once",r.n.filter(x=>x==="sfx-seal-stamp").length===1&&r.n.filter(x=>x==="sfx-fail").length===1,r);
   await clean();await p.evaluate(()=>{window.__kmOn0=window.kmOn;window.kmOn=()=>false});await p.evaluate(card(true,"Dâng trà (kmOn tắt)"));r=await names();await p.evaluate(()=>{window.kmOn=window.__kmOn0});
   ck("card sound independent of kmOn",r.n.includes("sfx-win")&&r.n.includes("sfx-seal-stamp"),r);
   await clean();await p.evaluate(card(true,"Hai lần")+";"+card(true,"Hai lần b"));r=await names();ck("two results within 1.5 s -> one sound (dedupe)",r.n.filter(x=>x==="sfx-win").length===1&&r.drop>=1,{n:r.n,drop:r.drop});
