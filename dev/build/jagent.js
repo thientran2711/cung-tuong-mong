@@ -81,13 +81,16 @@ const AGSELF={
 /* the social deeds of the SOC menu (j28, mapped to TW by jtwoway): target = a person; friendly / hostile decides the motive kind */
 const AGSOC={help:["help","help","ally",g=>({ally:g.help})],apologise:["apol","help","safe",g=>({safe:g.apol})],visit:["visit","help","ally",g=>({ally:g.visit[0]})],
  mediate:["mediate","help","ally",g=>({ally:g.mediate})],follow:["follow","social","ally",g=>({ally:g.follow})],warn:["warn","help","ally",g=>({ally:g.warn})],
- test:["test","social","safe",g=>({safe:g.test[0]})],provoke:["provoke","harm","spite",g=>({spite:-g.provoke[1],danh:g.provoke[0]})],humiliate:["humil","harm","spite",g=>({spite:g.humil[0]})],
+ test:["test","social","safe",g=>({safe:g.test[0]})],provoke:["provoke","harm","spite",g=>({spite:-g.provoke[1],danh:g.provoke[0]}),(g,t)=>t===S?g.provoke[3]:g.provoke[2]],humiliate:["humil","harm","spite",g=>({spite:g.humil[0]}),g=>g.humil[0]],
  drop:["drop","social","safe",()=>({safe:BAL.ag.val.drop})],gossip:["gossip","scheme","spite",g=>({spite:g.gossip})]};
 const AGACTW={help:"sang giúp",apol:"sang tạ lỗi",visit:"sang thăm",mediate:"đứng ra hòa giải",follow:"đến nương theo",warn:"lén báo tin",test:"thử lòng",provoke:"tìm đến khiêu khích",humil:"hạ nhục",drop:"lạnh nhạt",gossip:"rỉ tai chuyện"};
 const AGHOST=new Set(["provoke","humil","drop","gossip"]);
 function agCostF(v,c){const A=BAL.ag,W=A.costW;let f=1;if(c&&c.bac<0)f*=1-Math.min(A.costCap,-c.bac/Math.max(1,v.bac||0))*W;if(c&&c.suc<0)f*=1-Math.min(A.costCap,-c.suc/Math.max(1,v.suc||0))*W;return Math.max(A.costMin,f)}
 function agU(v,N,o,gl,c,tag){const u=BAL.ag.unit;let s=0;for(const n in gl.g)s+=(N[n]||0)*gl.g[n]/u*(o/100);for(const n in gl.l||{})s-=(N[n]||0)*gl.l[n]/u*(1-o/100);
- for(const n of ["danh","duc","th","hh"])if(c&&c[n]<0)s-=(N[n]||0)*(-c[n])/u;if(s<=0)return 0;return s*agCostF(v,c)*agMW(v,tag)}
+ for(const n of ["danh","duc","th","hh"])if(c&&c[n]<0)s-=(N[n]||0)*(-c[n])/u;
+ /* r1 fault 8: a deed that makes the target hate her (provoke oán +9 / ghen +10, humil oán +10: the player's card shows it as the risk) costs her
+    safety for sure, weighed by how cautious her road is (road.safe), whatever her danger now — the player weighs the same line */
+ if(gl.f)s-=((BAL.ag.road[agOrg(v)]||BAL.ag.road._).safe)*gl.f/u;if(s<=0)return 0;return s*agCostF(v,c)*agMW(v,tag)}
 /* mindW once per person and tag in a tick */
 function agMW(v,tag){const C=AG.mwc=AG.mwc||{};const k=(v===S?"me":v.id)+":"+tag;if(C[k]==null){let m=1;try{m=typeof mindW==="function"?mindW(v,tag):1}catch(e){}C[k]=m}return C[k]}
 /* the khắc she can do it: from now to the end of the buổi, at a place she may enter, not while she keeps a secret meeting */
@@ -103,14 +106,14 @@ function agOpts(v,N,need){const O=[];
  for(const k in AGSELF){const D=TW[k],A=AGSELF[k];if(!D)continue;if(need&&A.g(v).g[need]==null)continue;const t=A.t(v);if(D.req&&!D.req(v,t))continue;if(!twCanPay(v,k))continue;if(k==="thHH"&&!t)continue;
   const o=D.o?D.o(v,t):100;const u=agU(v,N,o,A.g(v),twCost(k),A.tag);if(u<=0)continue;O.push({k,t,u,tag:A.tag,at:A.at,act:A.act})}
  let T=null;
- for(const s in AGSOC){const so=SOC[s];if(!so)continue;const [k,tag,nd,gf]=AGSOC[s];if(need&&gf(BAL.tw.g)[need]==null)continue;if(!TW[k]||!N[nd]||!twCanPay(v,k))continue;const host=AGHOST.has(k);
+ for(const s in AGSOC){const so=SOC[s];if(!so)continue;const [k,tag,nd,gf,ff]=AGSOC[s];if(need&&gf(BAL.tw.g)[need]==null)continue;if(!TW[k]||!N[nd]||!twCanPay(v,k))continue;const host=AGHOST.has(k);
   /* worth looking for a target at all? (the best case: odds sure, the need as it stands) */
   if(agU(v,N,100,{g:gf(BAL.tw.g),l:{}},twCost(k),tag)<=0)continue;
   const C=agSocT(v,s,so,()=>T=T||others(v).filter(x=>x&&x!==v&&x.alive!==false&&!(x.out&&x!==S)));if(!C.length)continue;
   const t=mindPickBy(C,x=>host?BAL.mind.pick.ag.base+agSpite(v,x):BAL.mind.pick.ag.base+Math.max(0,aff(v,x))+(nd==="safe"?danger(x,v):0),v);if(!t)continue;
   const g=motiveOK(v,t,host?"provoke":"visit");if(!g.ok)continue;
   const N2=Object.assign({},N);if(host)N2.spite=cl(agSpite(v,t)/100,0,1)*((BAL.ag.road[agOrg(v)]||BAL.ag.road._).spite);
-  const o=TW[k].o?TW[k].o(v,t):100;const u=agU(v,N2,o,{g:gf(BAL.tw.g),l:{}},twCost(k),tag);if(u<=0)continue;
+  const o=TW[k].o?TW[k].o(v,t):100;const u=agU(v,N2,o,{g:gf(BAL.tw.g),l:{},f:ff?ff(BAL.tw.g,t):0},twCost(k),tag);if(u<=0)continue;
   O.push({k,t:k==="follow"?twFollowT(v):t,u,tag,at:(kh,vv,tt)=>tt===S?"home":agAt(tt,kh),act:AGACTW[k]||k,mot:g.why})}
  /* her Sủng deck act (the player's dance / zither / chess / small gift cards) */
  if(!need||need==="sung"||need==="danh")try{const K=window.npcEffortKind&&window.npcEffortKind(v);if(K){const gl={g:K.w,l:Object.fromEntries(Object.entries(K.l||{}).map(([f,x])=>[f,-x]))};/* the deck act's own loss (BAL.deck via j75) */const tag=K.kd==="qf"?"greet":"art";const u=agU(v,N,K.o,gl,K.c,tag);
