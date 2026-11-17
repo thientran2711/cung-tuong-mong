@@ -668,7 +668,7 @@ const mute=n=>{const f=window[n];if(typeof f!=="function")return;window[n]=funct
    tuẫn táng…, from her own heir and rank) at the same moment; the new lives (Luân hồi) join the same world under a NEW Emperor, made
    once by the host (mkEmp) and carried by its next week. The guest's own roll never fires. */
 (function(){const f=emperorDies;emperorDies=function(){if(!CW.on)return f.apply(this,arguments);try{if(arguments[0])log(arguments[0])}catch(e){}
- if(!host()||!S||!S.emp||S.emp.dead)return;if(typeof S.emp.y0==="number"&&(S.year||0)-S.emp.y0<=(BAL.coopEmpY||12))return;
+ if(!host()||!S||!S.emp||S.emp.dead)return;if(typeof S.emp.y0==="number"&&(S.year||0)-S.emp.y0<=(BAL.coopEmpY))return;
  S.emp.dead={w:wk()+(CW.inTurn?1:0),y:S.year,age:S.emp.age}};
  CW.empWeek=function(){if(!CW.on||!S||S.dead)return false;const d=S.emp&&S.emp.dead;if(!d||d.w!==wk()||CW.empDone===d.w)return false;CW.empDone=d.w;
   let ne=null;if(host()){try{ne=mkEmp();ne.y0=S.year||0}catch(e){console.error(e)}}

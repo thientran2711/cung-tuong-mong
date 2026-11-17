@@ -207,7 +207,7 @@ const KIT_COSTRE=/khắc|\bSức\b|\bBạc\b|\bbạc\b/i;
    Risk: none / sure → "an toàn"; Khó / Liều or a deadly failure / side risk → "liều"; any other odds, "Khó lường" or a side risk → "có rủi ro".
    An option may carry its own `hint` (string or fn(lv)) and `risk`; hints may never lie (an override must match the data). */
 const KIT_HINT_LADDER=/(Liều|Khó lường|Khó|Năm ăn năm thua|Khá chắc|Rất chắc|Nắm chắc|Chắc chắn|Chắc)/;
-function kitHintLevel(){try{const t=S.tamco||0,m=S.mat||0;const B=typeof BAL==="object"?BAL:{};if(t>=(B.hintSharp||45)||m>=(B.hintMat||3))return 2;if(t>=(B.hintMid||25))return 1}catch(e){}return 0}
+function kitHintLevel(){try{const t=S.tamco||0,m=S.mat||0;const B=typeof BAL==="object"?BAL:{};if(t>=(B.hintSharp)||m>=(B.hintMat))return 2;if(t>=(B.hintMid))return 1}catch(e){}return 0}
 /* a count inside a story phrase in words (1..999): "20 trượng" → "hai mươi trượng" */
 function kitNumVi(n){const D=["không","một","hai","ba","bốn","năm","sáu","bảy","tám","chín"];n=Math.round(+n);if(!(n>=0&&n<1000))return String(n);
  const two=x=>{if(x<10)return D[x];const t=Math.floor(x/10),u=x%10;const a=t===1?"mười":D[t]+" mươi";return u===0?a:a+" "+(u===1&&t>1?"mốt":u===5?"lăm":u===4&&t>1?"tư":D[u])};

@@ -291,8 +291,8 @@ function tsDressPts(p,pickd,th){const T=TS_THEME[th]||TS_THEME.thanh,B=BAL.lux||
  const R=typeof luxThemeRange==="function"?luxThemeRange(p,T):{lo:T.r?T.r[0]:40,hi:T.r?T.r[1]:120,bud:999};let st="hop";
  if(L>R.bud){st="vuot";s+=B.ctOver!=null?B.ctOver:-2;vp.push(`bộ đồ Xa xỉ ${L}`)}
  else if(L>R.hi){st="photruong";s+=B.ctShow!=null?B.ctShow:1}
- else if(L<R.lo){st="giandi";s+=Math.max(B.ctPlainMin!=null?B.ctPlainMin:-1,(B.ctFit||3)-(B.ctPlainK||4)*(R.lo-L)/Math.max(1,R.lo))}
- else s+=B.ctFit||3;
+ else if(L<R.lo){st="giandi";s+=Math.max(B.ctPlainMin!=null?B.ctPlainMin:-1,(B.ctFit)-(B.ctPlainK)*(R.lo-L)/Math.max(1,R.lo))}
+ else s+=B.ctFit;
  return{raw:cl(Math.round(10*s/11),0,10),vp,lux:L,st,lo:R.lo,hi:R.hi}}
 function tsDressTotal(p,raw){return raw*4+Math.round(effSac(p)/5)+Math.round((p.tamco||0)/12)}
 /* the best set from the pieces at hand (smart pick: NPC by Tâm cơ, a loyal maid) — small search, top pieces per slot by theme */

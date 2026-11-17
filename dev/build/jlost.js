@@ -227,9 +227,9 @@ document.addEventListener("click",ev=>{const b=ev.target.closest&&ev.target.clos
    (wear it and it may be recognised; plant it with "Cài đồ vào rương" to frame someone; "Lén trả lại" ends it quietly).
    An NPC thief keeps it or plants it on someone she dislikes (the hidden rival cause). Caught: the target holds 2 true evidence (j8 caught). */
 function loStealOk(a,t){return !!t&&a!==t&&!t.out&&loAlive(t)&&(t.inv||[]).some(loOk)&&!loL().some(c=>c.own===key(t)&&c.st!=="done")}
-function loStealO(a,t,self){return cl(Math.round(odA(a,38+(a.tamco||0)/4+(a.mat||0)*3-((t.maid&&t.maid.loyal)||50)/5))-(self?(BAL.selfMinus||12):0),5,95)}
+function loStealO(a,t,self){return cl(Math.round(odA(a,38+(a.tamco||0)/4+(a.mat||0)*3-((t.maid&&t.maid.loyal)||50)/5))-(self?(BAL.selfMinus):0),5,95)}
 function loSteal(a,t,self){a.schemes=(a.schemes||0)+1;if(typeof ducAdd==="function")ducAdd(a,LO.act.duc,"sai người lấy trộm đồ");else ap(a,{duc:LO.act.duc});
- if(self){const m=typeof econLoyalMaid==="function"?econLoyalMaid(a):a.maid;if(m)m.loyal=cl((m.loyal||0)-(BAL.loyalCost||10),0,100)}
+ if(self){const m=typeof econLoyalMaid==="function"?econLoyalMaid(a):a.maid;if(m)m.loyal=cl((m.loyal||0)-(BAL.loyalCost),0,100)}
  const cg=caught(a,t,false,"sai người lấy trộm đồ trong rương "+NM(t));if(cg)return cg;
  if(!roll(loStealO(a,t,self))){relAdd(a,t,-4);return `Người ${NM(a)} sai đi lấy đồ của ${NM(t)} không gặp lúc vắng người, đành về tay không. `}
  const keep=a===S||roll(LO.keepP);const c=loLose(t,{cause:"riv",by:key(a),keep:keep?1:0});if(!c)return `Rương ${NM(t)} không còn món nào đáng lấy. `;
