@@ -918,4 +918,4 @@
 | UI-FIXES-1: rail blank slot, card art brown box, 412 header under seal, label under flower sprite (sonnet; brief briefs/s36-ui-fixes-1.md) | review/ui-fixes-1 | MAIN s36 | session_01UV1SzjovTp4KY9Xq1JSKvC | RUNNING | 17/11 19:08Z |
 | toil-looks7: finish toil-looks5 (V2-B smaller, final sheet v17, merge main) (sonnet; brief briefs/s36-toil-looks7.md) | review/toil-looks5 | MAIN s36 | session_01UV1SzknrVcN46ftwSGV7f9 | RUNNING | 17/11 19:36Z |
 | REVIEW display-shelf (opus BIG) of e0a86875 | review/display-shelf | C-AG | session_01UV1SzkUH3pxqYSkZMUQX7v | RUNNING | 17/11 19:09Z |
-| REVIEW kit-figure-mood r3 of 5758b6e3 (sonnet SMALL; brief briefs/s36-review-kit-figure-mood-r3.md) | review/kit-figure-mood-r3 | MAIN s36 | (opening) | RUNNING | 17/11 19:12Z |
+| REVIEW kit-figure-mood r3 of 5758b6e3 (sonnet SMALL; brief briefs/s36-review-kit-figure-mood-r3.md) | review/kit-figure-mood-r3 | MAIN s36 | session_01UV1Szh4nqVY4zaK7Nk1kui | RUNNING | 17/11 19:12Z |
