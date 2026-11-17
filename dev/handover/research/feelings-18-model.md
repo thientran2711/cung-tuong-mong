@@ -32,9 +32,9 @@ Signed sum of all active causes (good +, bad −). Decay = each cause's own kh�
 Fire when the feeling is at HEAVY level AND the bar passes its threshold (bad: bar ≤ BAL e.g. −50; good: bar ≥ BAL e.g. +50). Each act has its own short duration in khắc (BAL; khóc ~1 khắc, đập đồ 1, run sợ 1–2, cáo bệnh = the rest of that buổi) and a COOLDOWN before the same act may fire again (no crying all day). Example (owner): sad 9 khắc, cries 1 khắc, the other 8 khắc the face shows sad.
 
 ## INTENT (ý đồ) — hidden system
-Born from Chạnh lòng / Giận / Hờn dỗi at high level + low bar + traits. Lasts until acted on, exposed, or faded (several khắc to days). Shows on the face as "Toan tính" only by odds against Tâm cơ (high Tâm cơ hides it: face stays calm). Seeing the face = a clue, NEVER evidence for an accusation.
+Born from Chạnh lòng / Giận / Hờn dỗi at high level + low bar + traits. Lasts until acted on, exposed, or faded (several khắc to days). NEVER shown on the face seal or tap card (owner 20:15Z); discoverable only by scouting/evidence.
 
 ## ONE SEAL = "VẺ MẶT" (what you see on their face now)
-Priority: active ACT > visible INTENT > dominant FEELING. When the top one ends, the seal falls to the next. Tap card: "Đang: <act>" / "Cảm xúc: <name> (<bậc>)" / "Vẻ mặt: Toan tính" lines (only those present), then the cause list (order rule OD 18:25Z (a)); cause text only if known, else "Nguyên do chưa rõ".
-API for the kit: faceKeyFor(pid) → {kind:'act'|'intent'|'feel', key, level} + card lines.
-## Art (Foreman C): seal keys per set (women / young men / mature men): the new feelings, act faces emo-khoc, emo-phanno, emo-runso, emo-matngu, intent face emo-toantinh; fallback to nearest existing seal while missing.
+Priority: active ACT > dominant FEELING (intent never shown, owner 20:15Z). When the top one ends, the seal falls to the next. Tap card: "Đang: <act>" / "Cảm xúc: <name> (<bậc>)" lines (only those present), then the cause list (order rule OD 18:25Z (a)); cause text only if known, else "Nguyên do chưa rõ".
+API for the kit: faceKeyFor(pid) → {kind:'act'|'feel', key, level} + card lines.
+## Art (Foreman C): seal keys per set (women / young men / mature men): the new feelings, act faces emo-khoc, emo-phanno, emo-runso, emo-matngu; fallback to nearest existing seal while missing.
