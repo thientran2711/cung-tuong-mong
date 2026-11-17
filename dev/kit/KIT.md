@@ -1111,6 +1111,14 @@ so stage blocks may stand beside a head or between figures, never over the paint
   `kitFxPut(img,p,host)` (jk2b) lays the layers over any drawn figure (room stage, podium). Causes: j13 monthly illness for servants and children (jface `fxIllMonth`), epidemic reaches servants, taster poisoned, Phạt servant,
   servants with a grudge harm each other, hostile consorts reach servants (`fxServMonth`).
 ### 28.8c FACE EXPRESSIONS — removed (owner 11/14 22:50Z): no code-reshaped faces; feelings are shown by the small mood icons (emotion kit).
+
+### 28.8d FIGURE MOOD SEAL — `kitFigSeal` (review/kit-figure-mood, dev/build/jfigseal.js; owner 17/11 ~17:40Z, OD tail "kế bên cái đầu của họ")
+ONE kit part: the SAME mood seal as the pcPort frames (jemo `emoBadge`: `img.kemo.kemo-<k>`, `img/kit/emo-[m-|mo-]<k>.webp`, `emo-an` when the mood is not known to her, nothing for a stranger, same tap = kit popover) is pinned beside the HEAD of every interactable full-body figure. No new art, no new mood logic.
+- WHERE (scan table in reports/kit-figure-mood.md): room / place / Dư đồ place view / lãnh cung / home visits = j59 stage figures (`#tokens .tok.fig img.figimg`, her own `#mefig`); event + person dialogs, book person pages, pet-care dialog = `kitStageFig` (`img.kesimg`) and `kszFigHtml` (`.kszfs>img`). Both makers register WHO the figure is (`data-kfsp`, jfigseal registry); nobody reads it from the picture.
+- NOT: silhouettes (unknown-fig), mini-game figure `.kgfig`, new-life identity card `.kpfig`, crowds/shadows, hidden / still-loading figures, `window.__emoOff=1`.
+- RULE (`KIT_FIGSEAL`): size = `k` .105 x figure BODY height (kitFigBody head top -> feet), 22..50 px; centre at head height (about 8.5 % of the body under the head top); beside the head on the right, its inner edge `gap` .012 x body past the painted hair/headdress edge (kitFigBody wl/wr of the top 15 %); left side when the right would leave the stage / dialog column; clamped inside `#stage` / `.kszfig` / `.kesf`; never above the head (that is the kitMeMark of jmark), never over the face.
+- Host: nearest non-clipping ancestor of the figure (class `kfshost` = position:relative when it was static); the seal follows the figure (resize, paging, re-render, image load: `kitFigSealAll()`).
+- Test: `node dev/test/fig-seal.js <W>x<H>@dpr <outdir>` (seal inside stage, not on the face, size, beside the head).
 ### 28.9 DELTA CHIPS + WORDING
 - `kpChipify` (jk2b): a delta chip takes the whole short clause before the number (up to 6 words, stops at punctuation): "nhà Hộ bộ thế lực −2";
   linking words in front (và, được, mất, khiến, nên…) stay outside the chip.

@@ -32,8 +32,15 @@ const ROOT=path.resolve(__dirname,'../..');const MIME={html:'text/html;charset=u
    out.push({fig:f.id||f.className.slice(0,14),who:(f.closest('.tok')?.querySelector('.tag')?.textContent||'').slice(0,24),seal:s.getAttribute('src').replace(/^.*\/img\//,''),px:Math.round(sr.width),body:s.dataset.kfsb,inside,faceHit,
     dxHead:hd?Math.round(sr.left+sr.width/2-(fr.left+fr.width*((hd.cl+hd.cr)/2))):null,above:hd?Math.round((fr.top+fr.height*(hd.ht!=null?hd.ht:hd.t))-sr.bottom):null})});
   const figs=[...document.querySelectorAll('#mefig,#tokens .tok.fig img.figimg,img.kesimg,.kszfs>img')].filter(e=>e.getClientRects().length).length;return{tag,figs,seals:out}},tag);
- await p.waitForTimeout(2500);R.room=await check('room');await p.screenshot({path:`${OUT}/room-${W}x${H}.jpg`,type:'jpeg',quality:72});
+ await p.waitForTimeout(6000);R.room=await check('room');await p.screenshot({path:`${OUT}/room-${W}x${H}.jpg`,type:'jpeg',quality:72});
  /* event dialog with a person (kit sample: the real pop-up, Hoàng hậu on the stage) */
  await p.evaluate(()=>{try{kitPopSample('event')}catch(e){console.error(e)}});await p.waitForTimeout(2500);R.event=await check('event');R.dbg=await p.evaluate(()=>[...document.querySelectorAll('#modal img')].filter(i=>i.getBoundingClientRect().height>300).map(i=>({c:i.className,s:i.src.slice(-50),p:i.parentElement.className,pp:i.parentElement.parentElement.className})));await p.screenshot({path:`${OUT}/event-${W}x${H}.jpg`,type:'jpeg',quality:72});
  await clean();
+ /* Dư đồ → a place with several people (single-hall garden): the full-screen place view */
+ await p.evaluate(()=>{Q.length=0;window.kmPush=function(){};document.querySelectorAll('.kmov,#dawn,#kpodov,.kmfls').forEach(e=>e.remove());const Wh=S.where||(S.where={});liveRivals(true).slice(0,5).forEach(v=>{Wh[v.id]='vuon';S.met[v.id]=1});
+  goTo('home');tab='go';render();try{j77Tap('vuon','');const bs=[...document.querySelectorAll('#modal button')].filter(b=>b.offsetParent&&/Đi|đi|Vào|vào|Đến/.test(b.textContent));if(bs[0])bs[0].click()}catch(e){console.error(e)}});
+ await p.waitForTimeout(5000);await clean();await p.waitForTimeout(2500);R.place=await check('place '+await p.evaluate(()=>S.place));await p.screenshot({path:`${OUT}/place-${W}x${H}.jpg`,type:'jpeg',quality:72});
+ /* tap a person on the place stage = the person pop-up (kitPersonDlg, full-body figure) */
+ const tp=await p.evaluate(()=>{const ppl=curPeople();const t=[...document.querySelectorAll('#tokens .tok')].find(e=>e.style.display!=='none'&&e.querySelector('img.figimg')&&ppl[+e.dataset.p]&&ppl[+e.dataset.p].kind!=='chest');if(!t)return null;const q=t.querySelector('img.figimg').getBoundingClientRect();return{x:q.left+q.width/2,y:q.top+q.height*.5}});
+ if(tp){await p.mouse.click(tp.x,tp.y);await p.waitForTimeout(3000);R.pop=await check('pop');await p.screenshot({path:`${OUT}/pop-${W}x${H}.jpg`,type:'jpeg',quality:72})}
  console.log(JSON.stringify({W,H,...R,errs},null,1));await b.close()})();

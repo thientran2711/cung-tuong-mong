@@ -34,13 +34,14 @@ function kitFigSeal(fig){try{
  if(!fig||!fig.isConnected||typeof emoOn!=="function"||!emoOn())return kfsDrop(fig);
  const src=fig.currentSrc||fig.getAttribute("src")||"";if(!src||/unknown-fig/.test(src))return kfsDrop(fig);
  if(!fig.getClientRects().length||fig.classList.contains("j59off")||fig.closest(".j59off"))return kfsDrop(fig);
+ if(!fig.complete||!fig.naturalWidth)return kfsDrop(fig);{const c=getComputedStyle(fig);if(c.visibility==="hidden"||c.display==="none"||+c.opacity<.2)return kfsDrop(fig)}
  const p=kfsPerson(fig);if(!p)return kfsDrop(fig);const html=emoBadge(p);if(!html)return kfsDrop(fig);
  const host=kfsHost(fig);if(!host)return kfsDrop(fig);
  let el=KFS_SEAL.get(fig);
  if(!el||el.parentNode!==host||el.__h!==html){if(el)el.remove();const t=document.createElement("template");t.innerHTML=html.trim();el=t.content.firstChild;if(!el)return;
-  el.classList.add("kfseal");el.__h=html;el.__fig=fig;host.appendChild(el);KFS_SEAL.set(fig,el)}
- const b=kitFigBody(src,()=>kfsSched());if(!b){el.style.visibility="hidden";return}
- const B=kfsBox(fig);if(B.bh<60){el.style.visibility="hidden";return}
+  el.classList.add("kfseal");el.style.display="none";el.__h=html;el.__fig=fig;host.appendChild(el);KFS_SEAL.set(fig,el)}
+ const b=kitFigBody(src,()=>kfsSched());if(!b){el.style.display="none";return}
+ const B=kfsBox(fig);if(B.bh<60){el.style.display="none";return}
  const K=KIT_FIGSEAL,ht=b.ht!=null?b.ht:b.t,body=Math.max(20,(b.b-ht)*B.bh);
  const s=Math.round(Math.max(K.min,Math.min(K.max,body*K.k)));
  const k=Math.min(20,Math.max(1,K.rows|0)),rr=b.wr&&b.wr[k]!=null?b.wr[k]:null,ll=b.wl&&b.wl[k]!=null?b.wl[k]:null;
@@ -51,7 +52,7 @@ function kitFigSeal(fig){try{
  let L=edgeR+gap;if(L+s>bb.right-2){const L2=edgeL-gap-s;if(L2>=bb.left+2||L2>bb.right-2-s-0)L=L2;if(L2<bb.left+2)L=Math.max(bb.left+2,Math.min(L,bb.right-2-s))}
  L=Math.max(bb.left+2,Math.min(L,bb.right-2-s));
  let T=cy-s/2;T=Math.max(bb.top+2,Math.min(T,bb.bottom-2-s));
- const css=`left:${(L-hr.left+host.scrollLeft).toFixed(1)}px;top:${(T-hr.top+host.scrollTop).toFixed(1)}px;width:${s}px;height:${s}px;visibility:visible`;
+ const css=`left:${(L-hr.left+host.scrollLeft).toFixed(1)}px;top:${(T-hr.top+host.scrollTop).toFixed(1)}px;width:${s}px;height:${s}px`;
  if(el.style.cssText!==css){el.style.cssText=css}
  el.dataset.kfsb=body.toFixed(0)}catch(e){console.error("kitFigSeal",e)}}
 function kfsSweep(){document.querySelectorAll("img.kfseal").forEach(s=>{const f=s.__fig;if(!f||!f.isConnected)s.remove()})}
