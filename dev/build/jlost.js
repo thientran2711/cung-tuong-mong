@@ -111,7 +111,7 @@ function loKeepHear(c,a,h){const nm=loNm(c.k);const o=loKeepOdds(c,a,h);
  if(roll(o)){const x=loEntry(c);if(x){lostUnwear(x.h,a);const i=x.h.inv.indexOf(x.e);if(i>=0)x.h.inv.splice(i,1);lostReturn(x.e,"xet")}
   if(evG(a,h)>0)evA(a,h,-1);ap(h,LO.thief);punish(h,"lấy trộm đồ",1);relAdd(h,a,-6);
   return h===S?`<span class="r">Cung Chính ti soát cung ngươi, thấy ${nm} của ${wdNm(a)}.</span> Ngươi mang tội lấy trộm: Danh ${LO.thief.danh}, Sủng ${LO.thief.sung}, bị phạt. Món đồ về lại với chủ.`
-   :`Cung Chính ti soát ${loPal(h)}, thấy ${nm} của ${wdNm(a)}. ${wdNmC(h)} mang tội lấy trộm: Danh -10, Sủng -5, bị phạt. Món đồ về lại với ${wdNm(a)}.`}
+   :`Cung Chính ti soát ${loPal(h)}, thấy ${nm} của ${wdNm(a)}. ${wdNmC(h)} mang tội lấy trộm: Danh ${LO.thief.danh}, Sủng ${LO.thief.sung}, bị phạt. Món đồ về lại với ${wdNm(a)}.`}
  c.asked=0;c.reT=wk()+LO.hearCd;relAdd(h,a,-6);
  return h===S?`Cung Chính ti soát cung ngươi, không thấy ${nm}. ${wdNmC(a)} chưa đủ chứng cứ; việc tạm gác.`
   :`Cung Chính ti soát ${loPal(h)}, không thấy ${nm}. Chưa đủ chứng cứ: việc tạm gác, ${LO.hearCd} tuần sau mới báo lại được.`}
