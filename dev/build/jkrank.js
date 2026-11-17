@@ -19,12 +19,12 @@ function kitRankRow(o){o=o||{};const c=o.cols||[];
   `<span class="krl-pe">${o.line!=null?o.line:""}</span><span class="krl-s"><b>${o.score!=null?o.score:""}</b>${o.unit?`<small>${krlEsc(o.unit)}</small>`:""}</span></div>`}
 function kitRankHead(o){o=o||{};const c=o.cols||[];
  return `<div class="krl-row krl-hd" aria-hidden="true"><b class="krl-rk">${krlEsc(o.rank||"Hạng")}</b><span class="krl-fc"></span><span class="krl-who">${krlEsc(o.name)}</span><span class="krl-c krl-c1">${krlEsc(c[0])}</span><span class="krl-c krl-c2">${krlEsc(c[1])}</span><span class="krl-pe"></span><span class="krl-s">${krlEsc(o.unit)}</span></div>`}
-function kitRankList(o){o=o||{};return `<div class="krl">${o.head||""}${(o.rows||[]).join("")}</div>`}
+function kitRankList(o){o=o||{};return `<div class="krlist">${o.head||""}${(o.rows||[]).join("")}</div>`}
 function kitRankFoot(o){o=o||{};
  return `<div class="krl-ft"><div class="krl-me">${o.label?`<small class="krl-ml">${o.label}</small>`:""}${o.row||""}${o.note?`<small class="krl-q">${o.note}</small>`:""}</div>${o.btns?`<div class="krl-btns">${o.btns}</div>`:""}</div>`}
 window.kitRankRow=kitRankRow;window.kitRankHead=kitRankHead;window.kitRankList=kitRankList;window.kitRankFoot=kitRankFoot;
 (function(){const st=document.createElement("style");st.id="kitrankcss";st.textContent=`
-.krl{background:#fffaf0f2;border:1px solid var(--line,#c9a46a);border-radius:var(--k-rad,8px);box-shadow:inset 0 0 0 1px #ffffff80}
+.krlist{background:#fffaf0f2;border:1px solid var(--line,#c9a46a);border-radius:var(--k-rad,8px);box-shadow:inset 0 0 0 1px #ffffff80}
 .krl-row{display:grid;grid-template-columns:2.4em 40px minmax(0,2.3fr) minmax(0,1.2fr) minmax(0,1.3fr) minmax(4.6em,auto);grid-template-areas:"rk fc who c1 c2 s";
  align-items:center;gap:4px 10px;padding:6px 10px;border-bottom:1px solid var(--k-hair,#e6d3ac);font-size:.86rem;line-height:1.3}
 .krl-row:last-child{border-bottom:0}
@@ -37,7 +37,7 @@ window.kitRankRow=kitRankRow;window.kitRankHead=kitRankHead;window.kitRankList=k
 .krl-row>.krl-s{grid-area:s;text-align:right;white-space:nowrap}.krl-s b{display:block;font-family:var(--display);font-size:1.02rem;color:var(--k-seal,#9a2c1c)}.krl-s small{display:block;font-size:.68rem;color:var(--dim)}
 .krl-hd{font-size:.72rem;font-weight:700;color:var(--k-lab,#8a7350);padding-top:8px;padding-bottom:4px;background:var(--k-card2,#f6ead6);border-radius:var(--k-rad,8px) var(--k-rad,8px) 0 0}
 .krl-hd>.krl-rk{font-family:inherit;font-size:inherit;color:inherit}.krl-hd>.krl-s{white-space:normal}
-.krl>.krl-row:nth-child(2)>.krl-rk,.krl>.krl-row:nth-child(3)>.krl-rk,.krl>.krl-row:nth-child(4)>.krl-rk{font-size:1.15rem;color:#a8781c}
+.krlist>.krl-row:nth-child(2)>.krl-rk,.krlist>.krl-row:nth-child(3)>.krl-rk,.krlist>.krl-row:nth-child(4)>.krl-rk{font-size:1.15rem;color:#a8781c}
 .krl-mine{background:#fff3c4;box-shadow:inset 3px 0 0 #a8740c}
 .krl-ft{display:flex;flex-direction:column;gap:6px}
 .krl-me{background:#fffaf0f5;border:1px solid #a8740c;border-radius:var(--k-rad,8px);overflow:hidden}
