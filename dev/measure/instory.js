@@ -33,7 +33,7 @@ if(R&&!R.__st){const p0=R.push;R.push=function(x){try{if(x&&S)record(x)}catch(e)
 for(const nm of ["msStart67","chStartArc67"]){const o=window[nm];if(typeof o==="function")window[nm]=function(){const r=o.apply(this,arguments);try{poll()}catch(e){}return r}}
 /* tutorial quest closes: which quests were done when the chapter ended */
 {const o=window.msCheck67;if(typeof o==="function")window.msCheck67=function(){const m=S&&S.st&&S.st.ms;let st=null;try{const d=m&&MS67[m.id];if(d&&d.steps)st=d.steps(m).map(x=>x[1]?1:0)}catch(e){}const r=o.apply(this,arguments);
- try{if(m&&m.q14&&S.st.ms!==m&&L)L.tq.push({id:m.id,t:S.turn-m.t0,q:m.q14.L.map(q=>q.id+(q.ok?"+":q.x?"x":"-")),st,nt:S.nt||0,r:S.rank,r0:m.r0,d:S.danh})}catch(e){}return r}}
+ try{if(m&&m.q14&&S.st.ms!==m&&L)L.tq.push({id:m.id,t:S.turn-m.t0,q:m.q14.L.map(q=>q.id+(q.ok?"+":q.x?"x":"-")),st,nt:S.nt||0,r:S.rank,r0:m.r0,d:S.danh,aff:(()=>{try{return liveRivals(true).map(v=>[Math.round(aff(v,S)||0),Math.round(aff(S,v)||0),v.trait,v.queen?1:0,rkOf(v)]).sort((a,b)=>b[0]-a[0]).slice(0,4)}catch(e){return null}})(),fr:(window.__tqC||{}).fr||0})}catch(e){}return r}}
 {const nb=window.nextBuoi;window.nextBuoi=function(){try{poll()}catch(e){}return nb.apply(this,arguments)}}
 /* ---- 3. tutorial follower ---- */
 const QA={an:/^Thỉnh an (Thái hậu|Hoàng hậu)/,diem:/^(Điểm trang|Dưỡng nhan)/,cn:/^Trò chuyện với cung nữ/,hau:/^(Quét sân|Dâng trà|Theo hầu chủ|Lĩnh đồ|Việc chủ sai)/,
