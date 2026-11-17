@@ -846,7 +846,7 @@
 | KIT-OPTION-ROWS: iPad 2-option modal narrow columns + 'không được không mất' family + sure option 'thành:' rows (sonnet; brief briefs/s34-kit-option-rows.md) | review/kit-option-rows | MAIN s34 | session_01UV1SzjeZeh5hkf6FRmYPSc (kit worker) | PARTIAL 3dabd1f7 (report reports/kit-option-rows.md) | 17/11 |
 | world-events-2 LIVE e8b1906f (C-AG; main 7e0250ec → e8b1906f) | review/world-events-2-r1 | C-AG | - | LIVE | 17/11 16:18Z |
 | WORLD link đại hàn → đại phóng cung nhân (opus small; main s34 16:20Z (c); brief briefs/world-ret-phong.md) | review/world-ret-phong | C-AG | session_01UV1SzkMv4WH519U2wy8sQ2 | RUNNING | 17/11 16:25Z |
-| toil-looks5: Vụng A ?v=10 (OD 16:20Z (a)) on 97f57862 (sonnet; brief briefs/s34-toil-looks5.md) | review/toil-looks5 | MAIN s34 | (opening) | RUNNING | 17/11 16:30Z |
+| toil-looks5: Vụng A ?v=10 (OD 16:20Z (a)) on 97f57862 (sonnet; brief briefs/s34-toil-looks5.md) | review/toil-looks5 | MAIN s34 | session_01UV1SzjoLym3Q8XoYNGrcgt | SẴN SÀNG KIỂM 27ff57d3 ?v=10 | 17/11 16:30Z |
 | kit-rank-name: stacked title/rank/name vs one line (OD 16:20Z (b)), whole family (sonnet; brief briefs/s34-kit-rank-name.md) | review/kit-rank-name | MAIN s34 | session_01UV1SzhABncWo5Voyf4aTrz | r0 9f54a9a1 pushed; core fix done, site-list sweep + 3 viewports remain (~35%) | 17/11 16:30Z |
 | FACE TOKEN 404 (sonnet, owner-bug lane; img/@W<n>.webp × 33 on live, j25.js:88 CW; whole token family) | review/face-w404 | D | session_01964izC859jzWy9Hygkf3UJ | RUNNING | 17/11 16:25Z |
 | WEATHER per khắc by season + currentWeather(k) API (opus; owner OD ~16:20Z (g); main s34 16:23Z; brief briefs/weather-khac.md) | review/weather-khac | C-AG | session_01UV1SzhiC88PsoqSrcX1TAr | RUNNING | 17/11 16:28Z |

@@ -82,3 +82,12 @@ PRIORITY #1 CHECK: OD tail ~15:00Z makeup verdict | main jtoil.js (reused) | rev
 - Tests at a5e7f52f: mk-layer-scan 12960 pictures 0 bad; toil-tease 25/25; toil-react fails [] errs []; toil-overlay checks 33 bad 0; quickcheck PASS 151 s (core gates PASS).
 - Sheet: https://ctm-img.victoria-tntt.workers.dev/img/_review/toil-looks/toil-looks-v9.png (Vung A warm+cool x seeds 7,8 x faces c07,c31; bottom 2 rows = all 6 levels warm c07 / cool c31). Same sheet on v8: .../toil-looks-v8-compare.png (levels identical, only the puffs differ). Delete both after the verdict.
 - Sample-sheet script (not committed): playwright with page.route serving the worktree, as in the toil-looks3 handover.
+
+
+## toil-looks5 (sonnet worker) - review/toil-looks5 27ff57d3 = ?v=10 (Vung A powder blobs)
+PRIORITY #1 CHECK: OD tail ~16:20Z (a) | main jtoil.js reused | review/toil-looks2-r5 97f57862 (base) | claims toil-looks5 (this).
+- What: only the Vung A powder puffs (jtoil.js toilMkDraw + BAL.toil.vungPuff). Each blob is now sized from the BLUSH disc (c.rx x .9-1.1 x per-cheek factor: big 1.2 / small .8, second blob x.8), drawn with the SAME fall-off profile as the blush (BLP.wide, used directly, no copied table), colour [255,250,244], alpha .34+.14R (v9: .42-.62 white, much smaller, sharper), centred near the blush centre (+-.25 rx) so it layers over it. Same rng draw order as v9 (per-day seed, which cheek is bigger from own rng). Other levels untouched.
+- Gates at 27ff57d3: mk-layer-scan 12960 0 bad; toil-tease 25/25; toil-react fails []; toil-overlay checks 33 bad 0; quickcheck PASS 152 s (one run hit a flaky G4 coop-one-world "merge differs", file also says PASS; rerun PASS).
+- Sheet: https://ctm-img.victoria-tntt.workers.dev/img/_review/toil-looks/toil-looks-v10.png (rows 1-2: Vung A warm hophach / cool lantuyet x seeds 7,8, faces c07 c31; rows 3+: all levels per face). Delete after verdict. v9 sheet for comparison: .../toil-looks-v9.png.
+- Looked at the sheet: the blobs read as a soft pale haze over the blush with the blush's own softness, no hard white patches. If she still wants them whiter/clearer: BAL.toil.vungPuff.al/alv; sizes: big/small.
+- Sheet script (not committed): /home/user/wt/tl5-shots/sheet.js pattern = serve worktree, inject toil-fit2 + mkfit, toilMkLayer(portrait file name) cropped by box.
