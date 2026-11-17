@@ -52,11 +52,11 @@ function kitRel2(cols,o){o=o||{};const wk=!!o.week;cols=(cols||[]).filter(c=>c&&
   return `<div class="kr2b kr2-${c.dir||"x"}"><div class="kr2h" data-vp-skip>${c.head}</div><div class="kr2g${wk&&known?" kr2k":""}" role="table">${hd}`+c.rows.map(r=>{
     const g=r.gloss!==false&&typeof kitGloss==="function"&&typeof KIT_GLOSS==="object"&&KIT_GLOSS[r.gloss||r.w]?kitGloss(r.gloss||r.w,r.w):r.w;
     return `<span class="kr2-l" role="cell" data-vp-skip>${g}</span>`+(r.unk!=null?`<span class="kr2-u" role="cell">${r.unk}</span>`:`<span class="kr2-v ${kr2Cls(r)}" role="cell">${kr2Num(r)}</span>`+(wk?`<span class="kr2-d ${kitRelCls(r.d,r.kind)}" role="cell">${r.d?kitRelSign(r.d):"—"}</span>`:""))}).join("")+`</div></div>`};
- return `<div class="kr2w"><div class="kr2 kr2-n${cols.length}">${cols.map(box).join("")}</div></div>`}
+ return `<div class="kr2w${o.paper?" kr2-paper":""}"><div class="kr2 kr2-n${cols.length}">${cols.map(box).join("")}</div></div>`}
 /* rows from kitRelRows(p,snap) → the two columns */
 function kitRelTable(rows,o){o=o||{};if(!rows||!rows.length)return"";const L=rows.filter(r=>r.dir!=="me"),M=rows.filter(r=>r.dir==="me");const f=rows[0],sj=f.sj||"Nàng",ob=f.ob||"nàng";
  const wk=o.head!==false&&rows.some(r=>r.unk==null&&r.d!==undefined);
- return kitRel2([{head:`${sj} → ta`,dir:"them",rows:L},{head:`Ta → ${ob}`,dir:"me",rows:M}],{week:wk})}
+ return kitRel2([{head:`${sj} → ta`,dir:"them",rows:L},{head:`Ta → ${ob}`,dir:"me",rows:M}],{week:wk,paper:!!o.paper})}
 function kitRelDelta(label,dir,d,kind){d=KRT_INT(d)||0;return `<span class="krd">${label?(dir==="none"?`<span class="krd-l" data-vp-skip>${label}</span>`:kitRelLab(dir||"them",label))+" ":""}<b class="${kitRelCls(d,kind)}">${kitRelSign(d)}</b></span>`}
 /* week snapshot: also "ta → nàng" and every servant (so their row shows the week's change) */
 (function(){if(typeof wkSnap!=="function")return;const s0=wkSnap;wkSnap=function(){const s=s0.apply(this,arguments);try{
@@ -74,11 +74,19 @@ window.kitRelRows=kitRelRows;window.kitRelTable=kitRelTable;window.kitRel2=kitRe
 .kr2g.kr2k{grid-template-columns:minmax(0,1fr) max-content max-content}
 .kr2-c{font-size:.62em;font-weight:600;letter-spacing:.02em;text-transform:uppercase;color:var(--k-lab,#8a7350);padding-bottom:.1em;border-bottom:1px solid var(--k-hair,#e6d3ac)}
 .kr2-n,.kr2-v,.kr2-d{text-align:right;white-space:nowrap}
-.kr2-l{min-width:0;overflow-wrap:anywhere;font-weight:600;color:var(--ink,#2a1a12)}
+.kr2-l{min-width:min-content;overflow-wrap:normal;word-break:normal;hyphens:none;font-weight:600;color:var(--ink,#2a1a12)}   /* a word never breaks inside (kit button/label rule) */
 .kr2-v{font-weight:700}.kr2-v.g,.kr2-d.g{color:var(--good,#2d7a52)}.kr2-v.r,.kr2-d.r{color:var(--bad,#c23b22)}.kr2-v.n{color:var(--ink,#2a1a12)}
 .kr2-d{font-weight:700}.kr2-d.n{color:var(--k-lab,#8a7350);font-weight:400}
 .kr2-u{grid-column:1 / -1;min-width:0;white-space:normal;overflow-wrap:anywhere;color:var(--k-lab,#8a7350);font-style:italic}
 @container (max-width:260px){.kr2-n2,.kr2-n1{grid-template-columns:minmax(0,1fr)}.kr2g{font-size:.82em}}
+/* KIT 52 'on paper' (owner 17/11 03:26Z, every book page): no purple header band, no white card — the table sits straight on the paper; header = a coloured line of text over a hair rule; boxes stack when the text frame is narrower than two boxes; a lone box takes the whole frame */
+.kr2-paper .kr2b{background:none;border:0;border-radius:0;overflow:visible}
+.kr2-paper .kr2h{background:none;padding:.2em 0;border-bottom:1px solid color-mix(in srgb,var(--krc) 45%,transparent);color:color-mix(in srgb,var(--krc) 85%,#000);font-size:.82em}
+.kr2-paper .kr2g{padding:.3em 0 .2em}
+.kr2-paper .kr2-c{color:#6a5236;border-bottom-color:color-mix(in srgb,#6a5236 35%,transparent)}
+.kr2-paper .kr2-d.n{color:#6a5236}
+.kr2-paper .kr2-n1{grid-template-columns:minmax(0,1fr)}
+@container (max-width:430px){.kr2-paper .kr2-n2{grid-template-columns:minmax(0,1fr)}}
 .krd{white-space:nowrap;font-weight:600}.krd .krel{font-weight:600}.krd b.g{color:var(--good,#2f7a46)}.krd b.r{color:var(--bad,#b0332a)}.krd b.n{color:var(--ink,#3a2a1a)}
 `;document.head.appendChild(st)})();
 /* KIT SAMPLE PAGE §47 (jkitpage loads later in the same script): §52 relation table + inline deltas, §57 number deltas */

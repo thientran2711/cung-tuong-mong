@@ -1769,10 +1769,7 @@ cards with a person, the Nội vụ phủ shop, pet care):
 - The face is never cut and never squashed (aspect kept); the chip is never cut. Phones (< 600 px) use the same rule in the top row.
 Measured (`node dev/test/stage-fig-size.js <url> <outdir> <tag> [sizes] [kinds]`, before → after, column % of the dialog):
 Thái hậu chê dung nhan 755x1000 49 % → 36 %, 1180x820 42 % → 36 %; Thái hậu triệu 49 % / 42 % → 36 %; every kind ≤ 36 % at every size.
-- Week book (Tuần lục) person page (j87 `kitStageFig` + jsl `kitBookFigClamp`, owner 15/11 "p.6 Thái hậu: the robe spreads under the text"):
-  same rule — the figure stays INSIDE its column (`.kbk-por` clips) on every screen, phones included, never scaled; the body (head centre)
-  is centred in the column; train / hem / outer sleeve wider than the column is cut at the column edge with a 24 px soft fade. The old
-  "train runs behind the text on a paper panel" (.kbk-figover) is retired. Test: `dev/test/book-figwide.js` (+ overText = figure px under the text, faceIn).
+- Week book (Tuần lục) person page (j87 `kitStageFig` + jsl `kitBookFigClamp`, owner 17/11 03:12Z + 03:14Z): the figure column is NARROW (`--porf` = `KBK_FIG_COL` .36 of the page's inner width) and the figure is fitted INTO it by its painted width (aspect kept, feet visible, nothing cut, painted left edge on the page's left edge); the RIGHT text frame gets the freed width (text size unchanged). Every figure, wide robes and trains included, is fitted the same way; no figure runs under the text. Test: `dev/test/book-col-scan.js`.
 - INFO panels about a person (kind info ĐIỀU / rule LUẬT / person NGƯỜI) show the FULL-BODY figure column like every other person pop-up (owner 16/11 07:35Z, OD:L448) — kitEventStage no longer returns early on those kinds.
 - MAIN ACTOR: the column shows the first person who is not the player (stage / who); the player stands there only when the event is about her
   alone (then as rank + name, never "Ngươi" — owner rule: rank and name always together).
@@ -2037,7 +2034,7 @@ Rule (measured like the stage `kitEsOvFit` §33.6 and the dialog `kitDpFit` §32
   Picture plate (`o.stage`, = stage rule §33): body = `min(KIT_FIG.h × H, KIT_FIG.maxPx) × fac`. `ih` = picture box height, `iw = ih × true aspect` (never stretched),
   `dy` = how far the box hangs below the foot line (painted feet < 1 stand ON the line, the same line for every figure of the page).
 - Silhouettes use the SAME path, box and scale as real figures (a silhouette is a figure whose file is `unknown-fig-f|m|k`; `fac` from the same table).
-- Person pages (Tuần lục, Mệnh truyện, Sổ luân hồi — j87 `personBody` → `kitStageFig`): `kitBookFigCol` (column width, while paginating) and `kitBookFigClamp` (live, jsl)
+- Person pages (Tuần lục, Mệnh truyện, Sổ luân hồi — j87 `personBody` → `kitStageFig`): column `--porf` = 36 % of the inner page width (j87 layout); `kitBookFigClamp` (live, jsl) fits the figure into it, left edge against the page edge.
   both call `kitBookFig`. A figure is NEVER scaled to fit (the old "not below 85 %" shrink made a wide Thái hậu smaller than the silhouette beside her): the column widens as before
   (≤ 74 % of the page) and what is still wider is cut at the column edge (32.2a, soft 24 px fade). An unmeasured figure is hidden, never shown at its raw box.
 - `kitBookPic` figures: `h` is ignored (kept so old callers do not break); `age` = child factor; sized by `kitBookPicFit` (on load / resize / DOM insert), feet on `--feet`.
@@ -2638,7 +2635,7 @@ Relations are TWO columns (that person → me | me → that person), short words
 
 ### 36.5 WEEK BOOK PERSON PAGE (amends §27, owner 04:30Z + 04:35Z)
 Every page about a person, continuation pages included, is the same page: the full-body figure (kitStageFig) fills the page body height on the
-left (`.kbk-full`: column `--porf` = min(45 % page, .34 × page height); figure height = body × `--kfr`, men 1, women 1/KIT_FIG.man, same scale on
+left (`.kbk-full`: column `--porf` = 36 % of the inner page width; figure height = body × `--kfr`, men 1, women 1/KIT_FIG.man, same scale on
 every page), the text column on the right with the name (continuation: "(tiếp theo)", no small portrait). The text column is measured
 (`paginate`, real heights) and continues on the next page only when really full; the figure never shrinks. Phones (page < 440 px): same, the
 text sits on a soft paper panel over the figure's edge. The filler "(Đã ghi vào mục Đã biết …)" never becomes a fact in the book.
@@ -3269,24 +3266,9 @@ Lãnh cung (`coldVisit()`), a cung nữ serving in Tân Giả khố (`S.srv.lau>
 Test: `node dev/test/life-place.js <index.html> <WxH>` (lãnh cung in session / new day / reload / back home, restored, promoted palace,
 maid room, Tân Giả khố in session / reload / done, maid risen, old save).
 
-**56.3 Wide figures on the Tuần lục person page (owner 03:55Z one scale ≈85–90 %, never shrink to fit; 13:45Z Thái hậu cut; coordinator
-r8: text ≥ 220 px).** `.kbk-person.kbk-full` gives the figure a column `--porf` sized for a normal standing figure (aspect ≈ .42). A wider
-figure (Thái hậu h1–h3, t7/t8 trains, wide a51 sleeves) is handled in `dev/build/jsl.js`:
-- `kitBookFigCol(figHtml, PW, PH)` — called by j87 `personBody` WHILE PAGINATING, so the text is measured in its final column. It widens the
-  column until face + torso fit (head centre + 12 % of figure height; the head centre comes from the picture's alpha, so figures whose train
-  runs to one side are placed by their body, not the picture centre), but the text keeps ≥ 220 px (or, where the page is too small for 220,
-  never less than a normal figure's page). If both cannot hold, the figure is lowered from the kit height (≈ 93 %) towards **85 % — never
-  below**. Aspect + head centre are cached on first sight; a book already open then calls its OWN re-layout (`root.__kbk.relayout()`, no
-  window resize), which keeps the reader on the page holding the same fact (j87 leaves carry `b0`, the first block; spread = left page).
-- `kitBookFigClamp` (live pages, layout px): figure left edge at the page's left; if the body would reach under the text it slides left so
-  face + torso end at the column edge — only the outer train/sleeve may pass the page edge, and it FADES into the paper (48 px mask), never a
-  straight cut. What is wider than the column runs behind the text on the kit soft paper panel `.kbk-figover`; the panel costs no layout
-  (background + box-shadow spread, no padding), so pagination and the live page agree.
-- Phones (`.kbk.narrow`): unchanged from r7 (narrow portrait is not a supported layout, owner 05:50Z).
-- Tests (committed): `node dev/test/book-figwide.js <url|page.html> <outdir>` — 14 facts, every page: text cut, text width, broken words,
-  facts/page, figure height ≥ 0.85, never scaled, page-1 name, torso clear, body never past the left edge. `node dev/test/book-relayout.js
-  <url|page.html> <outdir>` — the figure download is held while the reader turns pages, then released: same fact still in view, 0 window
-  resize events.
+**56.3 Figure column on the Tuần lục person page (owner 17/11 03:12Z: "the figure takes more than half the page"; 03:14Z: "not bigger text, a bigger right frame"; overwrites the old wide-figure rule).** `.kbk-person.kbk-full` gives the figure a NARROW column `--porf` = `KBK_FIG_COL` (.36) × the inner page width, against the page's left edge. `kitBookFigClamp` (jsl) sizes the figure by its body (kitBookFig), then scales it down (aspect kept) until its PAINTED width fits the column, feet on the column floor (equal-gaps rule 32.2b still centres it between the running head and the bottom line), painted left edge on the column's left edge. Wide figures (Thái hậu, trains, wide sleeves) are fitted the same way: nothing is cut, nothing runs under the text, no paper panel. The right text frame is everything else (Fold 263 → 342 px, iPad 220 → 275 px); font size is unchanged. `kitBookFigCol` is a no-op kept for j87. Phones (`.kbk.narrow`): same column rule.
+- Test (committed): `node dev/test/book-col-scan.js <outdir> [shots]` — real week book at 755x1000, 1180x820, 1366x1024, 412x1058, 390x844: figure column / page, text frame width, relation table cut / header band / card background (must be 0).
+- §52 'on paper': `kitRelTable(rows,{paper:true})` (every book page) = no header band, no card; header is a coloured line over a hair rule; boxes stack when the frame is < 430 px; a lone box takes the whole frame; a label never breaks inside a word.
 
 ## 60. MAKEUP COLOURS · kitSwatches · kitFaceZoom · colour layer on her pictures (owner 15/11 19:05Z, review/mk-colour) — `dev/build/jtoil.js` §60
 Like modern dress-up / makeup games: the colours she picks at the morning mirror show in EXACTLY those colours on HER OWN pictures (portrait,

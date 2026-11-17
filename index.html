@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"62cd2d89","t":"2026-11-17T03:09Z","c":"Hình người trong khung việc không còn bị cắt mất chân, và bảng tên ghi đúng phẩm ở dòng trên, tên ở dòng dưới (Kính sự phòng là nơi, không …","b":"c3b5332d3101","h":[{"s":"babc9b4a","t":"2026-11-17T01:39Z","c":"Chơi chung không còn treo máy vì tên bạn lặp chữ; số bóng người trên dư đồ khớp đúng người đang ở đó; việc có hạn giờ hiện đồng hồ ngay dướ…"},{"s":"92685210+","t":"2026-11-17T00:53Z","c":"Khung việc và khung sự kiện bốn cỡ, tranh lấp đầy khung, việc nhắc tên ai hiện chân dung người ấy; phẩm của món đồ nằm ngay trên viền khung…"},{"s":"6f513340","t":"2026-11-16T23:24Z","c":"Vào game mới không còn bật ngay màn lật thẻ, lật thẻ chỉ khi vào buổi tối; dư đồ nhãn giấy mới; việc dài lấn sang buổi sau; lời trong cung …"},{"s":"7a18d957","t":"2026-11-16T22:44Z","c":"review-diemtrang-fx-r1 report"},{"s":"afe2bcbc","t":"2026-11-16T22:25Z","c":"review r1: KIT 84.1a note + report"},{"s":"dea1d445+","t":"2026-11-16T21:32Z","c":"golive lag-play-2: CHANGE line + site rebuilt"},{"s":"674f3af4","t":"2026-11-16T21:21Z","c":"Chơi cùng bạn: bạn chơi chung chưa gặp mặt nay hiện tên gọi chung “Hảo hữu của ta” ở mọi nơi, không còn ẩn thành dấu hỏi."},{"s":"923567d5+","t":"2026-11-16T21:03Z","c":"Hình nhân vật: hết vệt xám ở cổ và viền tối quanh người."},{"s":"59812a63+","t":"2026-11-16T20:41Z","c":"Khung chung: khoảng cách đều nhau ở sổ tuần và thẻ thân phận; hàng sổ gọn, thẻ lật không đè chữ."},{"s":"ab12d6fc","t":"2026-11-16T20:53Z","c":"Tuyết và đom đóm mới, mượt hơn; nền tranh không còn vẽ lại mỗi khung hình."}]};
+window.CTM_BI={"s":"6d60cfd7+","t":"2026-11-17T03:09Z","c":"Hình người trong khung việc không còn bị cắt mất chân, và bảng tên ghi đúng phẩm ở dòng trên, tên ở dòng dưới (Kính sự phòng là nơi, không …","b":"8ff284fc04f5","h":[{"s":"babc9b4a","t":"2026-11-17T01:39Z","c":"Chơi chung không còn treo máy vì tên bạn lặp chữ; số bóng người trên dư đồ khớp đúng người đang ở đó; việc có hạn giờ hiện đồng hồ ngay dướ…"},{"s":"92685210+","t":"2026-11-17T00:53Z","c":"Khung việc và khung sự kiện bốn cỡ, tranh lấp đầy khung, việc nhắc tên ai hiện chân dung người ấy; phẩm của món đồ nằm ngay trên viền khung…"},{"s":"6f513340","t":"2026-11-16T23:24Z","c":"Vào game mới không còn bật ngay màn lật thẻ, lật thẻ chỉ khi vào buổi tối; dư đồ nhãn giấy mới; việc dài lấn sang buổi sau; lời trong cung …"},{"s":"7a18d957","t":"2026-11-16T22:44Z","c":"review-diemtrang-fx-r1 report"},{"s":"afe2bcbc","t":"2026-11-16T22:25Z","c":"review r1: KIT 84.1a note + report"},{"s":"dea1d445+","t":"2026-11-16T21:32Z","c":"golive lag-play-2: CHANGE line + site rebuilt"},{"s":"674f3af4","t":"2026-11-16T21:21Z","c":"Chơi cùng bạn: bạn chơi chung chưa gặp mặt nay hiện tên gọi chung “Hảo hữu của ta” ở mọi nơi, không còn ẩn thành dấu hỏi."},{"s":"923567d5+","t":"2026-11-16T21:03Z","c":"Hình nhân vật: hết vệt xám ở cổ và viền tối quanh người."},{"s":"59812a63+","t":"2026-11-16T20:41Z","c":"Khung chung: khoảng cách đều nhau ở sổ tuần và thẻ thân phận; hàng sổ gọn, thẻ lật không đè chữ."},{"s":"ab12d6fc","t":"2026-11-16T20:53Z","c":"Tuyết và đom đóm mới, mượt hơn; nền tranh không còn vẽ lại mỗi khung hình."}]};
 /* KBOOT — BOOT COVER (owner 15/11 "Khi vừa bấm vào game, có chừng ít hơn 1 giây hiện khung này"; KIT §14.1).
    Before: while the 4 MB page parsed, the browser painted the bare static markup of p1.html (HUD box, a vertical stat label list, empty
    panels, the old 11-tab bar) for ~1 s on a warm open and many seconds on a cold one, before any kit CSS/JS existed.
@@ -14463,6 +14463,7 @@ function kitBookLive(){const g=document.querySelector(".game");if(!g)return;
 const KBK_ART={cover:"https://ctm-img.victoria-tntt.workers.dev/img/book-cover.webp",left:"https://ctm-img.victoria-tntt.workers.dev/img/book-left.webp",right:"https://ctm-img.victoria-tntt.workers.dev/img/book-right.webp",end:"https://ctm-img.victoria-tntt.workers.dev/img/book-end.webp",title:"https://ctm-img.victoria-tntt.workers.dev/img/title-tuanluc-d4s.webp"};
 /* KBK_TITLE_IMG: the cover label's written title as a picture (owner 11/15: vertical brush title d4 + the game's Trân nữ seal, KIT §27.1). A cover page whose
    title has a picture here draws it in the label (art cover only); any other title keeps the text. */
+const KBK_FIG_COL=.36;   /* figure column ≤ 36 % of the page (KIT T3) */
 const KBK_TITLE_IMG={"Tuần lục":KBK_ART.title};
 const KBK_HAVE={};
 /* lag-play (owner 16/11 15:05Z): ONE coalesced book re-layout. Every picture that arrived (book art, each figure's size/head measure)
@@ -14504,7 +14505,7 @@ function kitBook(spec){spec=spec||{};const rm=()=>{try{return reducedMotion()}ca
  /* KIT §27 person pages (owner 11/15 04:30Z + 04:35Z): EVERY page about a person — continuation pages too — is the same page: the full-body
     figure fills the page body on the left (same scale on every page), the text column on the right; "(tiếp theo)" on the title, no small portrait */
  const personTop=(p,cont)=>p.kind!=="person"?textTop(p,cont):cont?`<div class="kbk-pname">${kitName(p.who,{cap:true,named:p.who===S})} <small class="kbk-cont">(tiếp theo)</small></div>`
-   :`<div class="kbk-pname">${kitName(p.who,{cap:true,named:p.who===S})}${p.sub?`<small class="kbk-ts">${p.sub}</small>`:""}</div>${p.rel&&p.rel.length&&PW>=440?kitRelTable(p.rel):""}`;
+   :`<div class="kbk-pname">${kitName(p.who,{cap:true,named:p.who===S})}${p.sub?`<small class="kbk-ts">${p.sub}</small>`:""}</div>${p.rel&&p.rel.length&&PW>=440?kitRelTable(p.rel,{paper:true}):""}`;
  const personBody=(p,cont)=>{const fw=p.kind==="person"?p.who:p.fig;let fig=typeof kitStageFig==="function"&&fw&&kitStageFig(fw,{cap:false})||"";
   /* owner 17:45Z: every page has its subject's full-length figure; no painting (yet) or the figure list still loading → the kit silhouette */
   if(!fig&&fw&&typeof kitStageFig==="function"){let sx="f";try{const r=personRoleRank(fw);sx=r.kid?"k":r.sex==="m"?"m":"f"}catch(e){}fig=kitStageFig(fw,{cap:false,src:(typeof KIT_DIR==="string"?KIT_DIR:"https://ctm-img.victoria-tntt.workers.dev/img/kit/")+`unknown-fig-${sx}.webp`})||""}const kfr=(/--kfr:([\d.]+)/.exec(fig)||[])[1]||"1";
@@ -14516,7 +14517,7 @@ function kitBook(spec){spec=spec||{};const rm=()=>{try{return reducedMotion()}ca
    if(p.kind==="cover"){L.push({cls:"k-cover",html:coverH(p),kind:"cover"});continue}
    if(p.kind==="end"){L.push({cls:"k-end",html:endH(p),kind:"end",folio:true});continue}
    const isP=p.kind==="person"&&p.who||p.kind==="text"&&p.fig;const blocks=kbkExpand(p.blocks,p.kind==="person"?p.who:null);let i=0,first=true;
-   if(isP&&PW<440&&p.rel&&p.rel.length)blocks.unshift({html:kitRelTable(p.rel)});
+   if(isP&&PW<440&&p.rel&&p.rel.length)blocks.unshift({html:kitRelTable(p.rel,{paper:true})});
    /* a continuation page of a flowing text page is titled by the section it continues (owner 17:00Z: short sections share pages) */
    const secAt=k=>{for(let q=k-1;q>=0;q--)if(blocks[q]&&blocks[q].sec)return blocks[q].sec;return null};
    do{const b0=i;const tp=first?p:{title:blocks[i]&&blocks[i].sec?p.title:(secAt(i)||p.title)};meas.innerHTML=shell(isP?"k-person r":"k-text r",isP?personBody(p,!first):`${textTop(tp,!first)}<div class="kbk-flow"></div>`,"0");
@@ -14536,8 +14537,8 @@ function kitBook(spec){spec=spec||{};const rm=()=>{try{return reducedMotion()}ca
   root.classList.toggle("spread",spread);root.classList.toggle("single",!spread);root.classList.toggle("narrow",PW<440);
   root.style.setProperty("--pw",PW+"px");root.style.setProperty("--ph",PH+"px");root.style.setProperty("--fs",Math.max(13,Math.min(17,PW/34)).toFixed(2)+"px");
   root.style.setProperty("--por",Math.round(Math.min(PW*(PW<440?.42:.4),PH*.62*480/1037))+"px");
-  /* full-page figure column: about 0.42 of the body height wide (a standing figure), never more than 45 % of the page */
-  root.style.setProperty("--porf",Math.round(Math.min(PW*(PW<440?.4:.45),PH*.8*.42))+"px");
+  /* full-page figure column (owner 17/11 03:12Z, KIT 56.3): NARROW, against the page's left edge: KBK_FIG_COL of the inner page width (.kbk-in = 89 % of the page); the figure is fitted into it, the text frame gets the rest */
+  root.style.setProperty("--porf",Math.round(PW*.89*KBK_FIG_COL)+"px");
   leaves=paginate();
   /* page numbers (cover has none) */
   let no=0;leaves.forEach(l=>{if(l.kind!=="cover")l.no=++no});
@@ -15028,13 +15029,11 @@ function wkBookPages(){const d=wkBookData();const date=kitDate(S.month,S.year,S.
 /* full-page figure (owner 04:30Z): the figure column spans the whole page body; the figure's height = the body height (men ×1, women
    ×1/KIT_FIG.man through --kfr); the text column beside it scrolls into a "(tiếp theo)" page, the figure never shrinks */
 .kbk-person.kbk-full,.kbk.narrow .kbk-person.kbk-full{grid-template-columns:var(--porf) minmax(0,1fr);grid-template-areas:"por head" "por flow";grid-template-rows:auto minmax(0,1fr);height:100%}
-.kbk-person.kbk-full>.kbk-por{align-self:stretch;height:100%;min-height:0;position:relative;display:flex;justify-content:center;align-items:flex-end}
-.kbk-person.kbk-full>.kbk-por>.kesf{height:100%;margin:0;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;min-height:0}
+.kbk-person.kbk-full>.kbk-por{align-self:stretch;height:100%;min-height:0;position:relative;display:flex;justify-content:flex-start;align-items:flex-end;overflow:hidden}
+.kbk-person.kbk-full>.kbk-por>.kesf{height:100%;margin:0;display:flex;flex-direction:column;justify-content:flex-end;align-items:flex-start;min-height:0;max-width:100%}
 .kbk-person.kbk-full>.kbk-por .kesfi{display:block;position:relative;height:calc(100% * var(--kfr,1));width:auto;max-width:none;flex:0 0 auto}
 .kbk-person.kbk-full>.kbk-por .kesfi>.kesimg{display:block;height:100%!important;width:auto!important;max-width:none!important;max-height:none!important}
-/* phones: the figure keeps the full height; the text sits on a soft paper panel over its edge */
-.kbk.narrow .kbk-person.kbk-full>.kbk-phead,.kbk.narrow .kbk-person.kbk-full>.kbk-flow{position:relative;z-index:1;background:color-mix(in srgb,var(--paper,#f3e3c0) 86%,transparent);border-radius:6px;padding:.2em .4em}
-.kbk.narrow .kbk-person.kbk-full>.kbk-por{overflow:visible}
+/* phones: same narrow column, figure fitted into it (the text never sits on the figure, so no paper panel) */
 .kbk.narrow .kbk-person.kbk-full .kbk-pair{white-space:normal!important}.kbk.narrow .kbk-person.kbk-full .krv{min-width:0;overflow-wrap:anywhere}
 .kbk-pname{font-family:var(--display);font-size:1.4em;line-height:1.25;margin:.1em 0 .25em;padding-bottom:.25em;border-bottom:2px solid #9a2c1c55}
 .kbk-pname .kname{font-weight:700}
@@ -26475,48 +26474,25 @@ window.KIT_LIGHT=KIT_LIGHT;
  window.kitLifePlace=lifePlace;
  if(typeof render==="function"){const f0=render;render=function(){lifePlace();return f0.apply(this,arguments)}}
  if(typeof renderStage==="function"){const f1=renderStage;renderStage=function(){lifePlace();return f1.apply(this,arguments)}}})();
-/* ---- TUẦN LỤC: WIDE FIGURES (owner 13:45Z Thái hậu cut by the column; 03:55Z ONE figure scale: full body ≈85–90 % of picture
-   height, NEVER shrink to fit) — KIT §56.3 ----
-   The person page (.kbk-person.kbk-full) gives the figure a fixed column --porf sized for a normal standing figure. A wider figure
-   (Thái hậu, t7/t8 trains, wide sleeves) keeps its kit height and is never scaled:
-   · wide pages: the figure column widens only as far as the face + torso need (figure centre + 14 % of its height, ≤ 74 % of the
-     page), so the text keeps its room;
-   · whatever is still wider (train / outer sleeve) runs BEHIND the text, which then sits on the kit's soft paper panel
-     (.kbk-figover = the same panel phones use); the figure's left edge is moved inside the page so nothing is cut on the left;
-   · phones (.kbk.narrow): same — figure moved inside the page, never scaled; the text already sits on the paper panel. */
+/* ---- TUẦN LỤC: FIGURE COLUMN (owner 17/11 03:12Z + 03:14Z, KIT 56.3; overwrites the old "wide figures widen the column" rule) ----
+   The figure column of a book page is NARROW (--porf = KBK_FIG_COL of the page's inner width, set by j87 layout) and sits against the page's LEFT
+   edge; the figure keeps its true proportions and is fitted INTO the column (bottom on the column floor, feet visible, nothing cut, never
+   under the text); the freed width goes to the RIGHT text frame (text size unchanged). Wide figures (Thái hậu, trains, wide sleeves) are
+   scaled to the column width like everyone else. */
 /* KIT 32.2b: the painted page border (book-right/left.webp 768x1024): inner edge of the bottom double line at y 999 → 2.44 % above the page bottom */
 var KBK_ART_LINE=window.KBK_ART_LINE={b:.0244};
-(function(){let q=0;const TEXT_MIN=220,FIG_MIN=.85,TORSO=.12;   /* TORSO: half shoulder width ≈ 12 % of figure height (sleeves/train may go behind the text) */
- const AR=window.__figAR=window.__figAR||{},HX=window.__figHX=window.__figHX||{},R=window.__kbkRatio=window.__kbkRatio||{h:.86,w:.9};
- const st=document.createElement("style");st.textContent=`.kbk-person.kbk-figover>.kbk-phead,.kbk-person.kbk-figover>.kbk-flow{position:relative;z-index:1;background:color-mix(in srgb,var(--paper,#f3e3c0) 86%,transparent);border-radius:6px;box-shadow:0 0 0 .35em color-mix(in srgb,var(--paper,#f3e3c0) 86%,transparent)}.kbk-person.kbk-figover>.kbk-por{overflow:visible;z-index:0}html body .kbk-person.kbk-full>.kbk-por{overflow:clip!important}`;document.head.appendChild(st);
- /* where the BODY stands in the picture (0..1 of its width): centre of the head = alpha mass of the top 16 % rows. Trains/outpainted hems
-    make many figures asymmetric, so the body is not the picture centre. CDN images are CORS-open; on failure 0.5. */
- function headX(I){try{const w=96,h=Math.max(8,Math.round(96*I.naturalHeight/I.naturalWidth)),c=document.createElement("canvas");c.width=w;c.height=h;const g=c.getContext("2d",{willReadFrequently:true});g.drawImage(I,0,0,w,h);
-   const d=g.getImageData(0,0,w,Math.max(2,Math.round(h*.16))).data;let sx=0,sa=0;for(let i=3;i<d.length;i+=4){const a=d[i];if(a>40){sx+=((i>>2)%w)*a;sa+=a}}return sa?sx/sa/w:.5}catch(e){return .5}}
- function learn(src,then){if(AR[src]!=null)return;AR[src]=0;const I=new Image();I.crossOrigin="anonymous";
-   I.onload=()=>{AR[src]=I.naturalWidth/Math.max(1,I.naturalHeight);HX[src]=headX(I);then&&then()};I.onerror=()=>{delete AR[src]};I.src=src}
- /* column width + figure height for j87 personBody — called WHILE PAGINATING, so the text is measured in its final column */
- window.kitBookFigCol=function(fig,PW,PH){try{const m=/src="([^"]+)"/.exec(fig||"");if(!m||!PW||!PH||PW<440)return "";const src=m[1];
-   if(!AR[src]){learn(src,()=>kitBookRelayoutSoon());return ""}   /* the book's own re-layout, same reading position */
-   const kfr0=+((/--kfr:([\d.]+)/.exec(fig)||[])[1]||1),pic=PH*R.h,ar=AR[src],hx=HX[src]!=null?HX[src]:.5,base=Math.min(PW*.45,PH*.8*.42);
-   const bb=kitFigBody(src,()=>kitBookRelayoutSoon());if(!bb)return "";   /* KIT 34.6: sized by its BODY (kitBookFig), same as the stage and the dialogs */
-   const g=kitBookFig(bb,kfr0*KIT_FIG.man,pic);
-   const fs=Math.max(13,Math.min(17,PW/34)),boxW=PW*R.w,colMax=boxW-fs-Math.min(TEXT_MIN,boxW-base-fs);   /* text ≥ 220 px, or never narrower than a normal figure's page */
-   const per=hx*ar+TORSO,need=k=>per*g.ih*k+4;                                                  /* body right edge when the figure starts at the column's left */
-   const k=1;if(g.iw<=base+1)return "";   /* KIT 34.6: never scaled (the old ≥ 85 % shrink made Thái hậu smaller than the silhouette beside her); wider than the column = cut at its edge (32.2a) */
-   const col=Math.max(base,Math.min(need(k),colMax));
-   return `${k<1?`;--kfk:${k.toFixed(3)}`:""};grid-template-columns:${Math.round(col)}px minmax(0,1fr)`}catch(e){return ""}};
- /* live pages: place the figure (layout px, so page-turn transforms do not matter). Figure wider than its column: left edge at the page's
-    left; if the body would then reach under the text, slide it left so face + torso end at the column edge — only the outer train/sleeve may
-    pass the page edge, never the body. */
+(function(){let q=0;
+  window.kitBookFigCol=function(){return ""};   /* kept for j87 personBody: the column is the same narrow --porf for every figure */
+ /* live pages: place the figure (layout px, so page-turn transforms do not matter): true size by its body (kitBookFig), then scaled down
+    (aspect kept) when wider than the narrow column, so the whole figure, feet included, stays inside the column against the page's left edge. */
  function clamp(){q=0;try{document.querySelectorAll(".kbk-person.kbk-full .kesfi").forEach(f=>{const box=f.closest(".kbk-person");if(!box)return;
    const por=box.querySelector(":scope>.kbk-por"),pg=box.closest(".kbk-pg");if(!por)return;
    f.style.transform="";{const i0=f.querySelector("img");if(i0&&i0.style.maskImage){i0.style.maskImage="";i0.style.webkitMaskImage=""}}
    /* KIT 34.6 (owner 16/11 "Nhân vật sao chưa theo tỉ lệ chuẩn"): the figure (real or silhouette) is sized by its BODY — kitBookFig, the stage / dialog rule:
       body = min(KIT_FIG.h × column, maxPx) × fac, feet on the column floor, true aspect. Not measured yet → hidden (never shown at its raw box size). */
-   let dyF=0;{const i1=f.querySelector("img"),s1=i1&&i1.getAttribute("src"),b1=s1?kitFigBody(s1,soon):null,Hc=por.clientHeight;
-    if(!b1||!Hc){f.style.visibility="hidden"}else{const kf=parseFloat(getComputedStyle(box).getPropertyValue("--kfr"))||1,kk=parseFloat(getComputedStyle(box).getPropertyValue("--kfk"))||1;
-     const ar1=i1.naturalWidth&&i1.naturalHeight?i1.naturalWidth/i1.naturalHeight:b1.ar,g=kitBookFig(Object.assign({},b1,{ar:ar1}),kf*KIT_FIG.man,Hc);dyF=g.dy*kk;
+   let dyF=0,dxF=0;{const i1=f.querySelector("img"),s1=i1&&i1.getAttribute("src"),b1=s1?kitFigBody(s1,soon):null,Hc=por.clientHeight;
+    if(!b1||!Hc){f.style.visibility="hidden"}else{const kf=parseFloat(getComputedStyle(box).getPropertyValue("--kfr"))||1;let kk=1;
+     const ar1=i1.naturalWidth&&i1.naturalHeight?i1.naturalWidth/i1.naturalHeight:b1.ar,g=kitBookFig(Object.assign({},b1,{ar:ar1}),kf*KIT_FIG.man,Hc);const pwc=por.clientWidth,pw1=Math.max(.2,(b1.r||1)-(b1.l||0))*g.iw;if(pwc&&pw1>pwc)kk=pwc/pw1;dyF=g.dy*kk;dxF=-(b1.l||0)*g.iw*kk;   /* fitted INTO the narrow column by its PAINTED width (sleeves / train included): feet visible, nothing cut, painted left edge on the column's left edge */
      f.style.height=(g.ih*kk).toFixed(1)+"px";f.style.width=(g.iw*kk).toFixed(1)+"px";f.style.visibility="";f.dataset.kbody=(g.body*kk).toFixed(1);
      /* KIT 32.2b EQUAL GAPS (owner 16/11 s21/s22, whole group): the two frame lines round the figure are the running-head rule (.kbk-rh)
         and the page frame's bottom line: the painted border's inner edge on art pages (KBK_ART_LINE.b of the page height, measured on
@@ -26526,17 +26502,8 @@ var KBK_ART_LINE=window.KBK_ART_LINE={b:.0244};
       const pgE=box.closest(".kbk-pg"),art=!!(pgE&&(pgE.classList.contains("r")&&box.closest(".kbk.art-right")||pgE.classList.contains("l")&&box.closest(".kbk.art-left")));
       if(pt!=null){const lt=rh&&rh.offsetParent?rh.offsetTop+rh.offsetHeight:0,lb=art?pgE.offsetHeight*(1-KBK_ART_LINE.b)-inEl.offsetTop:inEl.clientHeight,figH=g.ih*kk*Math.max(.2,b1.b-b1.t),feet=pt+Hc;
        const s=Math.max(-(Hc-figH),Math.min(0,((lb-feet)-(feet-figH-lt))/2));dyF+=s;f.dataset.kgap=Math.round(feet+s-figH-lt)+"/"+Math.round(lb-feet-s)}}catch(e){}}}
-   const w0=f.offsetWidth,H=f.offsetHeight,bw=box.offsetWidth,pw=por.offsetWidth;if(!w0||!bw){box.classList.remove("kbk-figover");return}
-   if(pg&&pg.offsetHeight&&pg.offsetWidth&&!box.closest(".kbk.narrow")){R.h=+(por.offsetHeight/pg.offsetHeight).toFixed(3);R.w=+(bw/pg.offsetWidth).toFixed(3)}
-   const im=f.querySelector("img"),src=im&&im.getAttribute("src");if(src&&AR[src]==null)learn(src,soon);const hx=src&&HX[src]!=null?HX[src]:.5;
-   /* KIT 32.2a (owner 15/11, "Tuần lục p.6 Thái hậu": the robe spread under the text): the figure stays INSIDE its own column on every
-      screen (phones too) and is never scaled: the body (head centre) is centred in the column and whatever is wider (train, hem, outer
-      sleeve) is CUT at the column edge (the column clips), with a 24 px soft fade at a cut edge; the text never sits on the figure. */
-   box.classList.remove("kbk-figover");const over=w0>pw+1;
-   let L=(pw-w0)/2;if(over){L=pw/2-hx*w0;L=Math.min(0,Math.max(pw-w0,L))}
-   const dx=L-(pw-w0)/2,t=(Math.abs(dx)>0.5||Math.abs(dyF)>0.5)?`translate(${dx.toFixed(1)}px,${dyF.toFixed(1)}px)`:"";f.style.transformOrigin="50% 100%";if(f.style.transform!==t)f.style.transform=t;
-   if(im){const g=[];if(over&&L<-0.5)g.push(`transparent ${(-L).toFixed(0)}px,#000 ${(-L+24).toFixed(0)}px`);if(over&&L+w0>pw+0.5)g.push(`#000 ${(pw-L-24).toFixed(0)}px,transparent ${(pw-L).toFixed(0)}px`);
-    const mk=g.length?`linear-gradient(to right,${g.length===2?g.join(","):g[0].startsWith("transparent")?g[0]:"#000 0,"+g[0]})`:"";if(im.style.maskImage!==mk){im.style.maskImage=mk;im.style.webkitMaskImage=mk}}})}catch(e){}}
+   const w0=f.offsetWidth;if(!w0||!box.offsetWidth)return;
+   f.style.transformOrigin="50% 100%";const t=Math.abs(dyF)>0.5||Math.abs(dxF)>0.5?`translate(${dxF.toFixed(1)}px,${dyF.toFixed(1)}px)`:"";if(f.style.transform!==t)f.style.transform=t})}catch(e){}}
  function soon(){if(!q){q=requestAnimationFrame(clamp);setTimeout(clamp,450);setTimeout(clamp,1300)}}
  window.kitBookFigClamp=clamp;
  try{new MutationObserver(ms=>{if(ms.some(m=>[...m.addedNodes].some(n=>n.nodeType===1&&(n.matches(".kbk-person,.kesfi,.kbk")||n.querySelector&&n.querySelector(".kbk-person.kbk-full")))))soon()}).observe(document.body,{childList:true,subtree:true})}catch(e){}
@@ -31763,11 +31730,11 @@ function kitRel2(cols,o){o=o||{};const wk=!!o.week;cols=(cols||[]).filter(c=>c&&
   return `<div class="kr2b kr2-${c.dir||"x"}"><div class="kr2h" data-vp-skip>${c.head}</div><div class="kr2g${wk&&known?" kr2k":""}" role="table">${hd}`+c.rows.map(r=>{
     const g=r.gloss!==false&&typeof kitGloss==="function"&&typeof KIT_GLOSS==="object"&&KIT_GLOSS[r.gloss||r.w]?kitGloss(r.gloss||r.w,r.w):r.w;
     return `<span class="kr2-l" role="cell" data-vp-skip>${g}</span>`+(r.unk!=null?`<span class="kr2-u" role="cell">${r.unk}</span>`:`<span class="kr2-v ${kr2Cls(r)}" role="cell">${kr2Num(r)}</span>`+(wk?`<span class="kr2-d ${kitRelCls(r.d,r.kind)}" role="cell">${r.d?kitRelSign(r.d):"—"}</span>`:""))}).join("")+`</div></div>`};
- return `<div class="kr2w"><div class="kr2 kr2-n${cols.length}">${cols.map(box).join("")}</div></div>`}
+ return `<div class="kr2w${o.paper?" kr2-paper":""}"><div class="kr2 kr2-n${cols.length}">${cols.map(box).join("")}</div></div>`}
 /* rows from kitRelRows(p,snap) → the two columns */
 function kitRelTable(rows,o){o=o||{};if(!rows||!rows.length)return"";const L=rows.filter(r=>r.dir!=="me"),M=rows.filter(r=>r.dir==="me");const f=rows[0],sj=f.sj||"Nàng",ob=f.ob||"nàng";
  const wk=o.head!==false&&rows.some(r=>r.unk==null&&r.d!==undefined);
- return kitRel2([{head:`${sj} → ta`,dir:"them",rows:L},{head:`Ta → ${ob}`,dir:"me",rows:M}],{week:wk})}
+ return kitRel2([{head:`${sj} → ta`,dir:"them",rows:L},{head:`Ta → ${ob}`,dir:"me",rows:M}],{week:wk,paper:!!o.paper})}
 function kitRelDelta(label,dir,d,kind){d=KRT_INT(d)||0;return `<span class="krd">${label?(dir==="none"?`<span class="krd-l" data-vp-skip>${label}</span>`:kitRelLab(dir||"them",label))+" ":""}<b class="${kitRelCls(d,kind)}">${kitRelSign(d)}</b></span>`}
 /* week snapshot: also "ta → nàng" and every servant (so their row shows the week's change) */
 (function(){if(typeof wkSnap!=="function")return;const s0=wkSnap;wkSnap=function(){const s=s0.apply(this,arguments);try{
@@ -31785,11 +31752,19 @@ window.kitRelRows=kitRelRows;window.kitRelTable=kitRelTable;window.kitRel2=kitRe
 .kr2g.kr2k{grid-template-columns:minmax(0,1fr) max-content max-content}
 .kr2-c{font-size:.62em;font-weight:600;letter-spacing:.02em;text-transform:uppercase;color:var(--k-lab,#8a7350);padding-bottom:.1em;border-bottom:1px solid var(--k-hair,#e6d3ac)}
 .kr2-n,.kr2-v,.kr2-d{text-align:right;white-space:nowrap}
-.kr2-l{min-width:0;overflow-wrap:anywhere;font-weight:600;color:var(--ink,#2a1a12)}
+.kr2-l{min-width:min-content;overflow-wrap:normal;word-break:normal;hyphens:none;font-weight:600;color:var(--ink,#2a1a12)}   /* a word never breaks inside (kit button/label rule) */
 .kr2-v{font-weight:700}.kr2-v.g,.kr2-d.g{color:var(--good,#2d7a52)}.kr2-v.r,.kr2-d.r{color:var(--bad,#c23b22)}.kr2-v.n{color:var(--ink,#2a1a12)}
 .kr2-d{font-weight:700}.kr2-d.n{color:var(--k-lab,#8a7350);font-weight:400}
 .kr2-u{grid-column:1 / -1;min-width:0;white-space:normal;overflow-wrap:anywhere;color:var(--k-lab,#8a7350);font-style:italic}
 @container (max-width:260px){.kr2-n2,.kr2-n1{grid-template-columns:minmax(0,1fr)}.kr2g{font-size:.82em}}
+/* KIT 52 'on paper' (owner 17/11 03:26Z, every book page): no purple header band, no white card — the table sits straight on the paper; header = a coloured line of text over a hair rule; boxes stack when the text frame is narrower than two boxes; a lone box takes the whole frame */
+.kr2-paper .kr2b{background:none;border:0;border-radius:0;overflow:visible}
+.kr2-paper .kr2h{background:none;padding:.2em 0;border-bottom:1px solid color-mix(in srgb,var(--krc) 45%,transparent);color:color-mix(in srgb,var(--krc) 85%,#000);font-size:.82em}
+.kr2-paper .kr2g{padding:.3em 0 .2em}
+.kr2-paper .kr2-c{color:#6a5236;border-bottom-color:color-mix(in srgb,#6a5236 35%,transparent)}
+.kr2-paper .kr2-d.n{color:#6a5236}
+.kr2-paper .kr2-n1{grid-template-columns:minmax(0,1fr)}
+@container (max-width:430px){.kr2-paper .kr2-n2{grid-template-columns:minmax(0,1fr)}}
 .krd{white-space:nowrap;font-weight:600}.krd .krel{font-weight:600}.krd b.g{color:var(--good,#2f7a46)}.krd b.r{color:var(--bad,#b0332a)}.krd b.n{color:var(--ink,#3a2a1a)}
 `;document.head.appendChild(st)})();
 /* KIT SAMPLE PAGE §47 (jkitpage loads later in the same script): §52 relation table + inline deltas, §57 number deltas */
@@ -47133,7 +47108,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="c3b5332d3101";window.CTM_BUILD=BUILD;
+const BUILD="8ff284fc04f5";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
