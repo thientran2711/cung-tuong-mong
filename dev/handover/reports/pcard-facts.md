@@ -1,4 +1,4 @@
-# pcard-facts (worker, sonnet) — review/pcard-facts @ 654dd0c5 (base person-leftcol-r1 e06e38a1)
+# pcard-facts (worker, sonnet) — review/pcard-facts @ 87c73de4 (r1 after main LOOK; first cut 654dd0c5; base person-leftcol-r1 e06e38a1)
 PRIORITY #1 CHECK: OD ~14:15Z + ~14:40Z; reused kitKnownList (jhc), kpPop/.kgl tip style (j79), kpDateText; claims none other.
 
 ## What
@@ -9,14 +9,15 @@ Kit part change only. Person-card top block rows (Sở trọng / Đã biết / D
 - jk2b.js: removed the `.krv` line-clamp (the "…" cut-off) in the sticky info panel.
 - dev/test/pcard-facts.js: taps the first fact, checks pop-up text, no clamp, no date prefix.
 
-## Tests
-- pcard-fill.js 755x1000@2 + 1180x820@2: all cases info/sticky/key OK, no errors (earlier sizes unchanged code path).
-- pcard-facts.js 755x1000@2: pop = "…Khi nào: Tháng ba · trung tuần · năm thứ nhất", clamp false, prefix false.
-- quickcheck: PASS 126 s · open 1248 ms · old save ok · core gates PASS · perf render 150/141, tab 229/256, buổi 735/638.
-- Not run: pcard-fill at 5 sizes (only the 2 owner devices) — reviewer may run `node dev/test/pcard-fill.js <url> <out>`.
+## Tests (r1)
+- pcard-fill.js at ALL 5 sizes 755x1000 / 1180x820 / 1366x1024 / 412x1058 / 390x844 (@1): errs [] everywhere; rv0 rv1 court0 court1 info+sticky OK, no hscroll, no overflow; same pass/info pattern as the base build e06e38a1 (pop/popdone/me = no info, as before).
+- pcard-facts.js (new): person with 2 heard facts + likes + dislikes; taps a fact in the right panel and a Thích item in the left key block; pop-up shows Khi nào / Cách biết / Nguồn; no clamp, no date prefix.
+- quickcheck: see last line of this section (run on 87c73de4).
 
-## Shots (LOOKED at): CDN img/_review/pcard-facts/ before-755x1000.jpg, after-755x1000.jpg, before-1180x820.jpg, after-1180x820.jpg, after-popup-755x1000.jpg (host: https://ctm-img.victoria-tntt.workers.dev/)
-Before: "TRUNG TUẦN | Ta đã biết…"; after: "CHUYỆN | Ta đã biết…" with dotted underline, tap shows when. Delete the shots after the verdict.
+## Fixes after main LOOK
+(1) shots redone, all LOOKED: person with heard facts + likes/dislikes; pop-ups opened on a right-panel fact and on a Thích item. (2) r1 bug found while doing it: kitPcKey (jk2b) moved Thích/Ghét to the left block as the first item's plain text -> lost the other items and the tap; now it moves the whole .krv HTML. (3) test shots: a night "KẾT QUẢ" card from the test setup sometimes sits behind the pop-up; it is not part of the change.
+## Shots (CDN https://ctm-img.victoria-tntt.workers.dev/img/_review/pcard-facts/): before-{755x1000,1180x820}.jpg (old: "NGHE ĐƯỢC Tháng ba, năm thứ nhất ·…" cut with "…"), after-{…}.jpg, after-popup-fact-{…}.jpg (tap on a heard fact), after-popup-like-{…}.jpg (tap on a Thích item). after-popup-755x1000.jpg = same as after-popup-fact (old wrong file overwritten). Delete after the verdict.
+Note: on iPad the left key block's last line is partly clipped at the bottom of the card in BOTH before and after (existing layout of person-leftcol-r1, not touched here).
 
 ## Scan table (whole family)
 | place | before | after |
