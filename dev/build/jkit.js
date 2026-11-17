@@ -39,6 +39,8 @@ window.kitPetClass=kitPetClass;window.kitPetOf=kitPetOf;window.kitPetArt=kitPetA
 /* review/fig-headtop (owner 17/11): people stand level by the HEAD TOP (skull top), never by hair bun / hairpins / crown / hat — those stick out above.
    kitFigTop(b) = THE head-top line of a measured figure (fraction of the picture height; the painted top when the figure has no table row, e.g. a pet or silhouette);
    every layout measures body = kitFigTop .. feet. The row comes from img/fig-ht.json { "<file>": head top in 1/4000 of the picture height } (dev/art/headtop/headtop.py, face mesh). */
+/* half width of a standard woman's visible art, in body heights x picture aspect: .43 aspect x .862 / 2 (measured on fig-consort-*, see dev/handover/reports/fig-headtop.md) */
+const KIT_FIG_HALF=.185;
 const KIT_HT=window.__KITHT||(window.__KITHT={m:null,s:0,w:[],bad:0});
 function kitHtLoad(cb){if(KIT_HT.m)return true;if(cb)KIT_HT.w.push(cb);if(!KIT_HT.s){KIT_HT.s=1;
  const fin=(m,bad)=>{if(KIT_HT.m)return;KIT_HT.m=m;KIT_HT.bad=bad?1:0;const L=KIT_HT.w;KIT_HT.w=[];L.forEach(f=>{try{f()}catch(e){}});if(bad)setTimeout(()=>{KIT_HT.m=null;KIT_HT.s=0;KIT_HT.bad=0;try{kitHtLoad()}catch(e){}},20000)};/* a failed load is not final: the figures wait at most 8 s, then use the painted top and are measured again after the retry */
@@ -64,7 +66,9 @@ function kitFigBody(src,cb){const KIT_FB=window.__KITFB||(window.__KITFB={});con
        down to k/20 of the painted height (fractions of the picture width), so a dialog can fit "head → knees" into a capped column */
     const wl=[],wr=[];let ml=w,mr=-1;for(let k=0,y=t;k<=20;k++){const ye=t+Math.round((b-t)*k/20);for(;y<=ye;y++){const q=y*w*4;for(let i=0;i<ml;i++)if(d[q+i*4+3]>40){ml=i;break}for(let i=w-1;i>mr;i--)if(d[q+i*4+3]>40){mr=i;break}}
      wl.push((mr<0?l:ml)/w);wr.push((mr<0?r+1:mr+1)/w)}
-    v={t:t/h,b:(b+1)/h,l:l/w,r:(r+1)/w,ht:ht/h,ar:nw/nh,cl:cl/w,cr:cr/w,wl,wr}}}catch(x){}done(v)};
+    v={t:t/h,b:(b+1)/h,l:l/w,r:(r+1)/w,ht:ht/h,ar:nw/nh,cl:cl/w,cr:cr/w,wl,wr}}}catch(x){}
+   /* review/fig-headtop (owner 17/11 "exactly location"): a grey silhouette fills its whole picture width (hem to hem) while a real woman's art is ~.86 of hers; its l..r (what the slot clamp kitSlotIn pushes inside the stage) are those of a standard figure of the same body, so the silhouette stands at the SAME x as the real person in that slot, never nudged inwards (the gap to the next person is the slot gap) */
+   try{if(/unknown-fig-/.test(src)&&v.cl!=null&&v.cr>v.cl){const mid=(v.cl+v.cr)/2,hw=KIT_FIG_HALF/Math.max(.2,v.ar);v.l=Math.max(0,mid-hw);v.r=Math.min(1,mid+hw);v.wl=v.wl.map(()=>v.l);v.wr=v.wr.map(()=>v.r)}}catch(x){}done(v)};
  im.onerror=()=>{done({t:0,b:1,l:0,r:1,ht:0,ar:.45});setTimeout(()=>{if(KIT_FB[src]===e)delete KIT_FB[src]},1500)};/* review/stage-fig-size: a failed load is not cached for good (it fixed a wrong .45 aspect = squashed figure); measured again next time */if(kitHtLoad(()=>{im.src=src}))im.src=src;/* review/fig-headtop: the picture is measured only once the head-top table is in (a figure measured without it would take its crown for its head and stay cached) */return null}
 /* KIT 34.6 · kitBookFig(b, fac, H, o) — the ONE body size of a figure on a BOOK page (owner 16/11 "Nhân vật sao chưa theo tỉ lệ chuẩn": the Tuần lục
    silhouette stood far bigger than Thái hậu beside it: the book sized the whole PICTURE BOX, the silhouette box has no margin, and a wide real figure
