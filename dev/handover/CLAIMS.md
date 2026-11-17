@@ -814,7 +814,7 @@
 | pcard-facts: person card fact rows = fact first, details on tap (OD ~14:15Z/~14:40Z) on person-leftcol-r1 e06e38a1 | review/pcard-facts | MAIN s32 | session_01UV1Szh5bDFLJ7XCmCJoDvp | READY 654dd0c5 (report reports/pcard-facts.md) | 17/11 14:41Z |
 | GRAND ENDINGS DESIGN (opus; expert + audit + skeleton; design only; MAIN s32 14:35Z/14:40Z) | review/grand-endings-design | D | session_01964izFDJ18FWz2tTcPJvcK | DONE DESIGN READY r2 96b6f18b (archived) → FOR MAIN s32 | 17/11 15:08Z |
 | residence-seats review r1 (opus BIG) of d88883df | review/residence-seats-r1 | D | session_01964izCtfXkztCLGkiuxC7s | RUNNING | 17/11 14:48Z |
-| AG-ALL A2 successor: r1 fixes F2–F5 + weight pass (opus; brief reports/ag-all.md §16) | review/ag-all | C-AG | session_01UV1SziAW9nRRmuRJXDn5N6 | RUNNING | 17/11 14:56Z |
+| AG-ALL A2 successor: r1 fixes F2–F5 + weight pass (opus; brief reports/ag-all.md §16) | review/ag-all | C-AG | session_01UV1SziAW9nRRmuRJXDn5N6 | DONE 54bd9b56 (archived; into ag-all-2 r2) | 17/11 14:56Z |
 | origin-bd-branch r1 PASS 4e50e6ea → lander queue; reviewer + worker archived | review/origin-bd-branch-r1 | B | session_01N1tNP3r4Wz5SfLPnQXnXnJ | PASS (archived) | 17/11 14:56Z |
 | narrow-t3-r1 PASS 07747a9b (412/390 T3 narrow + showModal dup-list root fix; on opt-pic-same-r2) → builder batch s32a; worker + reviewer archived; follow-up: court tab rows + 10-option menu at phone width | review/narrow-t3-r1 | MAIN s32 | session_01UV1SzhfMi68Cmn88G2Yqze | PASS → BATCH | 17/11 14:57Z |
 | toil-looks4: Vụng A powder puffs more blurred + varied sizes (OD ~15:00Z) on review/toil-looks2 630eaa633 → ?v=9 | review/toil-looks2 | MAIN s33 | session_01UV1SzgeSNEfimjeQXX5dPa | SẴN SÀNG KIỂM a5e7f52f ?v=9 (pushed) | 17/11 15:01Z |
