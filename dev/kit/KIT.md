@@ -1111,6 +1111,14 @@ so stage blocks may stand beside a head or between figures, never over the paint
   `kitFxPut(img,p,host)` (jk2b) lays the layers over any drawn figure (room stage, podium). Causes: j13 monthly illness for servants and children (jface `fxIllMonth`), epidemic reaches servants, taster poisoned, Phạt servant,
   servants with a grudge harm each other, hostile consorts reach servants (`fxServMonth`).
 ### 28.8c FACE EXPRESSIONS — removed (owner 11/14 22:50Z): no code-reshaped faces; feelings are shown by the small mood icons (emotion kit).
+
+### 28.8d FIGURE MOOD SEAL — `kitFigSeal` (review/kit-figure-mood, dev/build/jfigseal.js; owner 17/11 ~17:40Z, OD tail "kế bên cái đầu của họ")
+ONE kit part: the SAME mood seal as the pcPort frames (jemo `emoBadge`: `img.kemo.kemo-<k>`, `img/kit/emo-[m-|mo-]<k>.webp`, `emo-an` when the mood is not known to her, nothing for a stranger, same tap = kit popover) is pinned beside the HEAD of every interactable full-body figure. No new art, no new mood logic.
+- WHERE (scan table in reports/kit-figure-mood.md): room / place / Dư đồ place view / lãnh cung / home visits = j59 stage figures (`#tokens .tok.fig img.figimg`, her own `#mefig`); event + person dialogs, book person pages, pet-care dialog = `kitStageFig` (`img.kesimg`) and `kszFigHtml` (`.kszfs>img`). Both makers register WHO the figure is (`data-kfsp`, jfigseal registry); nobody reads it from the picture.
+- NOT: silhouettes (unknown-fig), mini-game figure `.kgfig`, new-life identity card `.kpfig`, crowds/shadows, hidden / still-loading figures, `window.__emoOff=1`.
+- RULE (`KIT_FIGSEAL`): size = `k` .105 x figure BODY height (kitFigBody head top -> feet), 22..50 px; centre at head height (about 8.5 % of the body under the head top); beside the head on the right, its inner edge `gap` .012 x body past the painted hair/headdress edge (kitFigBody wl/wr of the top 15 %); left side when the right would leave the stage / dialog column; clamped inside `#stage` / `.kszfig` / `.kesf`; never above the head (that is the kitMeMark of jmark), never over the face.
+- Host: nearest non-clipping ancestor of the figure (class `kfshost` = position:relative when it was static); the seal follows the figure (resize, paging, re-render, image load: `kitFigSealAll()`).
+- Test: `node dev/test/fig-seal.js <W>x<H>@dpr <outdir>` (seal inside stage, not on the face, size, beside the head).
 ### 28.9 DELTA CHIPS + WORDING
 - `kpChipify` (jk2b): a delta chip takes the whole short clause before the number (up to 6 words, stops at punctuation): "nhà Hộ bộ thế lực −2";
   linking words in front (và, được, mất, khiến, nên…) stay outside the chip.
@@ -2739,6 +2747,15 @@ stranger card is not used for children (their card is drawn by jht). Old saves: 
 - No ring/aura around the frame (owner 11/14 late: removed); the seal alone shows the feeling.
 - Fog: stranger → nothing; known person, no fresh news → grey "?" seal; her own → always.
 - Data only through `window.kitEmotion(p)` → `{k,name,v,why,known}`; tooltip/alt "Tâm trạng: <tên> (<cause>)". Nobody draws another mood icon; no code-reshaped facial expressions (owner 22:50Z): the seal + ring are the only display of feelings.
+
+### 38.4 MOTION + LOOPS + EFFECT SPRITES — `kitEmoSeal` (review/kit-figure-mood, dev/build/jemoseal.js; owner 17/11 ~18:00Z + ~18:30Z (D))
+EVERY `img.kemo` (pcPort frames, person cards, lists, mood box, figure-head seal 28.8d) moves; no place draws its own motion.
+- Motion: class `kemo-m-<m>` from `KIT_EMOSEAL.keys[k].m`, live only while the seal is on screen (IntersectionObserver -> `kemo-live`), only with Cảnh động on, no reduced-motion, not Gọn (`OPT.fxon===false`). vui sway+glow · bình breathe · buồn droop · giận shake+heat · sợ tremble · ghen flicker · lo bob · đau wince · mưu glint · an bob · khóc droop · hờn flicker. Transform/filter only.
+- Frame loop (painted by Foreman C): `img/kit/emo-anim/<set><k>.webp` (set = "" / m- / mo-). Probed once; if present the seal plays it while on screen and returns to its still when it leaves; absent = still + CSS motion.
+- Effect sprite layer (painted): `img/kit/emo-fx/<k>.webp`, one sibling `img.kemofx` per live seal at `fxScale` 1.7 x the seal, pointer-events none; absent = no layer. Nothing is drawn in code.
+- Keys khoc + hon are in the seal map (names Khóc / Hờn); the mood logic (jemo EMO) decides when a person is in one.
+- Tap card (28.8d / jemo emoTipHTML): mood + cause ONLY when she knows it (`kitEmotion().causeKnown`, data-kemoc), else the line "Nguyên do chưa rõ"; the seal itself is shown to anyone who sees the person (never gated by intel).
+- Test: `MOTION=1 FAKE=1 node dev/test/fig-seal.js <W>x<H>@dpr <outdir>` (FAKE routes a loop + effect for gian to the still to prove the plumbing; prints per seal animation / fx).
 
 ## 42. CLOSE-BUGS RULES (owner 15/11 16:40Z–17:24Z, review/close-bugs) — `dev/build/jclose.js` (after jaudit, before j84)
 _(Renumbered by reviewer r6: this section was §40 on review/close-bugs; main already has §39 kitSeal, §40 APP ICON, §41 kitMeMark. Old refs "KIT §40.x" = §42.x.)_

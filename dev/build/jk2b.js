@@ -463,7 +463,7 @@ span.md.kfc.kfc.kit,span.md.kfc.kfc.kit.xs,span.md.kfc.kfc.kit.sm,span.md.kfc.kf
 span.md.kfc.kfc.xs,button.ka .kan span.md.kfc.kfc.xs{width:26px!important;height:auto!important;position:relative!important;display:inline-block!important}span.md.kfc.kfc.sm{width:38px!important}span.md.kfc.kfc.big{width:84px!important}
 span.md.kfc>.kin{position:absolute!important;left:0!important;top:0!important;width:100%!important;height:100%!important;transform:none!important;display:block!important;isolation:isolate}
 span.md.kfc .kin>.kbg{position:absolute;left:14.655%;top:20.289%;width:70.691%;height:49.373%;background:#5a1e16 center/cover no-repeat;z-index:-1}
-span.md.kfc .kin>img{position:absolute!important;right:auto!important;bottom:auto!important;max-width:none!important;max-height:none!important;border-radius:0!important;box-shadow:none!important;animation:none!important}
+span.md.kfc .kin>img:not(.kemo){position:absolute!important;right:auto!important;bottom:auto!important;max-width:none!important;max-height:none!important;border-radius:0!important;box-shadow:none!important;animation:none!important}
 span.md.kfc .kin>img.kpor{left:14.655%!important;top:24.733%!important;width:70.691%!important;height:44.930%!important;object-fit:cover!important;object-position:50% 0!important}
 span.md.kfc .kin>img.kpor:not([src*="face-"]):not([src*="unknown"]){left:9.707%!important;top:17.475%!important;width:80.588%!important;height:56.285%!important;clip-path:inset(5% 6.14% 7.28% 6.14%)}
 span.md.kfc .kin>img.kcrest{left:var(--cl)!important;top:var(--ct)!important;width:var(--cw)!important;height:var(--ch)!important;object-fit:fill!important;z-index:3}
