@@ -50,3 +50,31 @@ Reviewed review/one-core-dup2 @ 0ffa37bf. Work branch review/one-core-dup2-r1 @ 
 - Thái hậu / Hoàng hậu Đức drift runs twice a month for the player (j3 + j85) — intended?
 - Lòng: rule tiers vs word ladder 70/50/30 vs colour 60/45; Sức: 70/50/30 vs 60/30; Tâm cơ spot bonus 15 vs 12 — unify?
 - (seen, pre-existing) j21 relLines still labels "Ngươi với nàng:" — OD:L247 asked "Nàng quý ngươi / Ngươi quý nàng" labels everywhere.
+
+## FIX dup2 r2 — texts print the moved cuts (reviewer FAIL item 1, review-one-core-dup2-r1)
+PRIORITY #1 CHECK: OD:L1267 | main: balSg/balAb + dev/test/one-core-text.js landed in r2 f97a5841 only | review/* one-core-dup2(-r1) | claims B. START_CTX ≈ 5 %; no rollover.
+Branch review/one-core-dup2-r2 @ 097658ce4976876512b0b60770e90d9db54e33df (from review/one-core-dup2-r1 8e75df35, 1 commit, site rebuilt).
+
+### Before / after (whole-game scan, not only the reviewer's list)
+| concept (BAL key) | typed copies before | now | notes |
+|---|---|---|---|
+| loy.close 60 | j22:24, jroute:89, :95 | print balAb(BAL.loy.close) | watcher() |
+| loy.mid 50 | jroute:83 | print | |
+| loy.trust 70 | jroute:136, :321 text + rule mL>=70 ×2 | text printed AND rule reads BAL.loy.trust (value same) | missed cut |
+| loy.low 40 | j83:225, jlost:246 | print | |
+| loy.out 30 | j24:58, j24:64 (found by the new scan), jhouse:46, jpromsv:51 | print | |
+| loy.warn 45 | jtut:199, :316 | print | rule = maidMonthP / j72 rf (bribe) |
+| ducLv up 60 / down 20 / word[3] 80 / staffUp 70 / staffDown 25 | j85:164 Thang Đức tiers "80–100 / 60–79 / 20–49 / 0–19", "từ 70", "dưới 25" + 5 on: cuts | labels printed from BAL.ducLv, on: cuts read BAL.ducLv.* | "50–59", "49", "mẹ Thái tử: 40" stay typed (other rules, not ducLv) |
+Total 16 loy texts + 1 table (7 refs) in 9 modules: j22, j24, j83, j85, jhouse, jlost, jpromsv, jroute, jtut. Visible words unchanged.
+Left typed on purpose (number shared by coincidence with another rule, in the frozen list, listed by OC_WIDE=1): j8:171 + jinv:116/:258 "Sủng không dưới 15" (ngọc bội's own floor ≠ sungLv.kinh), j97 ×7 road gates "Đức từ 40 / Sủng từ 35 / 45" (typed gates S.duc>=40 …), j42:290 "Chủ tin dưới 60" (rule S.tin>=60 typed), j85:31 "(đến 80)" + j85:144 ducOf(p)<80 (Hạnh month cap, typed), jts:210/:216 "Sủng ≥ 30" (bestow rule, typed), jroute:89/:95 "Chủ tin 60+" (watcher() checks no Chủ tin at all: the TEXT claims a rule that does not exist → Foreman B's call, not changed here), jroute:184 "tình ý 50+" (rule (m.tinh||0)>=50 typed).
+
+### Guard
+dev/test/one-core-text.js extended (same file, same G1 gate, no baseline, 0 now): (1) beside-ref: any typed number equal to a leaf of a BAL.loy / wit / ducLv / quyLv / sungLv / tinhLv / tinLv / rareLv / sucLv / oanFade / tsDanger / cut / odds / ageBand / age.adult / srvAge.old / pet.life read in the same option object (±300 chars), the stat word just before it must be that ladder's own; (2) stat-word scan of the WHOLE game, rule far away or not: "lòng 60+" / "dưới 40" / "từ 30" for BAL.loy (any shape), a typed tier range "A–B" for ducLv / sungLv / sucLv / wit / tinLv. Loader now runs the BAL files statement by statement (jbal.js stops at contestOpen; the Object.assign after it never ran before). Planted in scratch: j22 "lòng 60+" typed → FAIL; j85 "20–49" typed → FAIL.
+
+### Proofs (all PASS)
+- one-core-text-same (r2→this, generalised: any ${balSg|balAb(BAL path + arithmetic)} printed, every numeric BAL path put back, both sides): 9 modules identical.
+- one-core-dup-same origin/review/one-core-dup2-r1: 4408 live functions before / after, 4408 identical (rule mL>=BAL.loy.trust proven by the put-back).
+- one-core-guard 0 fails, no --allow-grow (11790 = baseline). one-core-text 0 sites, 0 early reads.
+- quickcheck PASS (core gates PASS, old save ok, open 1233 ms, perf render 236/200 tab 340/303 buổi 743/828, longTaskMax 1310 vs live 1347). coop-e2e 60/60; coop-one-world seed 7 + 3 PASS.
+- Shots (scratch): Fold 755x1000 + iPad 1180x820 of the real Đức rule page (kitModal v85DucPanel): tiers 80–100 / 60–79 (từ 70) / 50–59 / 20–49 (dưới 25) / 0–19 identical, 0 page errors.
+- No rule value changed.
