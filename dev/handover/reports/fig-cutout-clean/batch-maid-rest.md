@@ -72,3 +72,19 @@ maid-m05-t2-a18	UPhZOVZwny	ok U
 maid-m05-t3-a18	u5Ysq9zQLD	ok U
 maid-m05-t4-a18	vQ21EyHa47	ok U
 maid-m05-t5-a18	eIyEogzdqL	ok U
+maid-m05-t6-a18	UPhZ4gFwny	ok U
+maid-m05-t7-a18	kspOlky16B	ok U
+maid-m05-t8-a18	EbnLKQIuuO	ok U
+maid-m05-tm0-a18	rgdPUstxtc	ok U
+maid-m05-tm2-a18	YMs8edXWeC	ok U (retry, 1st xSX4wSijfW failed 520)
+maid-m05-tm3-a18	aFArqHMfSh	ok U
+maid-m05-tm4-a18	lJIiyPUgv9	ok U
+maid-m06-a18	ovNHfE9829	ok U
+maid-m06-cold-a18	IfibH3DtvE	ok U
+maid-m06-kc-a18	9ZFcY5vNYZ	ok U
+maid-m06-ngheo-a18	s7869a6l8e	ok U
+maid-m06-t1-a18	UPhZi1Iwny	ok U
+maid-m06-t2-a18	lJIi9Kxgv9	ok U
+maid-m06-t3-a18	TdUht9MVNR	ok U
+maid-m06-t4-a18	79aARlMJAL	ok U
+maid-m06-t5-a18	3z5MTghREY	ok U
