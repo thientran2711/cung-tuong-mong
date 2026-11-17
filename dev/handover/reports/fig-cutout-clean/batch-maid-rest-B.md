@@ -63,3 +63,20 @@ maid-m30-t3-a18	DoJacPDpcl	YMsoAXuWeC	ok
 maid-m30-t4-a18	xSXP5IojfW	gOtiji1SXO	ok
 ## HANDOVER (W6 #1, 17/11 ~02:15Z): 56/416 a18 done (m27..m30-t4), 0 hard/retries, all CDN-uploaded + --check same (fig+tn+por, no hd), through maid-m30-t4-a18. Lead session_011xDdVRBW26agruDT2Bm65K was inactive when I tried to report -> lead/Foreman C please open the successor. NEXT = maid-m30-t5-a18 (entry 57 of: grep a18 lists/shards/maid-rest-B.txt). Then a26/a36/a51 with NEW a18 as identity ref (ids above in TSV col 3 = generation id usable as reference identifier).
 Recipe for successor: refs folder ba4aecfe-efce-47e2-b53f-30d292091886; upload old CDN fig via creations_upload_image; 8x images_generate gpt-2-6 1024x2048 resolution 2k extraSettings {"transparentBackground":true} refs [old, N2HYqYa6D9, bxVgMSX5Y2, dtPf4EDXSL, eIyaPEVdqL]; prompt ~100 words (redraw as same palace maid, age N, face/skin match images 2-5, calm frontal, ONE prop rotating fan/lantern/teacup/scroll/flower branch/handkerchief/jade pendant/hairpin, tiny huadian, NO train/hem at feet, FULLY TRANSPARENT BACKGROUND real alpha); creations_wait all 8; scratch driver (curl, alpha extrema check, tools/finish_fig.py, tools/qa_fig.py, contact sheet dark+light) - recreate from tools/maid_proc.py; pip install scipy opencv-python-headless first. Upload: get dev/site/cdn_sync.py from origin main, cp to img/, cdn_sync img then --check img. Pinhole FAILs and halo 1.5-2.4k = ignore.
+## W6b #1: hd retro-fit of 56 a18 (m27..m30-t4) uploaded, fragment hd-entries/W6b-0.json. Agents gA/gB/gC: TSV below (fig+hd+por, no tn: finish_fig makes none).
+maid-m30-t5-a18	P3uY9ck42C	mERKvnUhJQ	ok
+maid-m30-t6-a18	jUB9siELD0	cpgtTy30eP	ok
+maid-m30-t7-a18	w4v2Jn57EI	dtPuB2vXSL	ok
+maid-m30-t8-a18	O6CzP0aynm	rgdPjfyxtc	ok
+maid-m30-tm0-a18	LwoNl2tswO	KLDJ1v3kqp	ok
+maid-m30-tm2-a18	s786gGol8e	9ZFc6lsNYZ	ok
+maid-m30-tm3-a18	IfibmLYtvE	5jM7kf7Kxe	ok
+maid-m30-tm4-a18	IfibmsWtvE	1leyxQvr4r	ok
+maid-m31-t5-a18	LwoNliBswO	huZkandvqL	ok
+maid-m31-t6-a18	Ifibmk2tvE	p8OCdijehw	ok
+maid-m31-t7-a18	Ifibm1AtvE	9ZFc6r1NYZ	ok
+maid-m31-t8-a18	nVLoWhkYQD	JNfGyK0Oq4	ok
+maid-m31-tm0-a18	O6CzPTfynm	nVLoW4WYQD	ok
+maid-m31-tm2-a18	6AqT3XmiJO	gOt3UbuSXO	ok
+maid-m31-tm3-a18	s786gz8l8e	s786gbel8e	ok
+maid-m31-tm4-a18	huZkaS6vqL	O6CzPlZynm	ok
