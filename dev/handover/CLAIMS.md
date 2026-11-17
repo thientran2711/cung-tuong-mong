@@ -808,3 +808,4 @@
 | REVIEW world-events-2 r1 (opus BIG) of ee9f5396 | review/world-events-2-r1 | C-AG | session_01UV1SzjLZvCQHBpfo4LK15L | RUNNING | 17/11 15:16Z |
 | pcard-facts-r1 PASS d5f1abb2 → builder batch s32a; reviewer archived (main LOOKED Fold popup + iPad) | review/pcard-facts-r1 | MAIN s33 | session_01UV1SzhfMi68Cmn88G2Yqze | PASS → BATCH | 17/11 15:24Z |
 | pcard-facts-2: Thích/Ghét popup date via kpDateText + iPad left block Ghét clip (reviewer notes) on d5f1abb2 | review/pcard-facts-2 | MAIN s33 | session_01UV1Szh5bDFLJ7XCmCJoDvp | RUNNING | 17/11 15:24Z |
+| mg-snap-r1 LIVE 2de320ac (main ce29592e → 2de320ac; rollback ce29592e) | review/land-mg-snap-r1 | B | session_01N1tNP6NHm7FrTkoTUSGnpa | LIVE | 17/11 15:24Z |
