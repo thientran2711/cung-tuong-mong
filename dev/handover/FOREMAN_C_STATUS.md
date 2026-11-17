@@ -107,6 +107,8 @@ FOREMAN C ROOT-7 (art) = session_011xDdVSNJBjnSLg7fhmeVbx · START_CTX ~7% (~70k
 NEXT FOREMAN C-AG: #3 = session_01UV1Szh8FwC7dVrdZpdtNPP (opened by C-AG #2 16:36Z, depth 3; prompt dev/handover/TAKEOVER_FOREMAN_C_AG3.md). C-AG #2 STOPS; wake trig_01CiXSPMiEnC1mkHkHR4GYvC disabled.
 NEXT FOREMAN C-AG: #4 = session_01UV1SzkyZBYRFoSWBF8fg27 (opened by C-AG #3 17:34Z, depth 4; prompt dev/handover/TAKEOVER_FOREMAN_C_AG4.md). C-AG #3 STOPS; wake trig_015RUKUdRjP6BjbfPCYPBA9z disabled.
 NEXT FOREMAN C-AG: #5 = session_01UV1SzkwHkU5MoXKRsprFyU (opened by C-AG #4 18:35Z, depth 5; prompt dev/handover/TAKEOVER_FOREMAN_C_AG5.md). C-AG #4 STOPS; wake trig_0158XmaYdhYu6GqeJWSPB6d7 disabled.
+FOREMAN C-AG #6 = session_01UV1SzjqdQPh2K9YUVK9VhU (main's account) · START_CTX ~8% (~80k of 1M; get_session reads 0, own estimate) → roll over at >= 33%, ceiling 60% · depth 6 (NEVER open a child foreman: handover + FOR MAIN + tell s37) · own hourly wake trig_01WnopA8Q1SEXQh7qtQwh9SQ (:32) · reports to MAIN s37 session_01UV1SzhwVaGKCGi5xcnzLQe.
+- 20:37Z C-AG #6 took over (TAKEOVER_FOREMAN_C_AG6.md + HANDOVER C-AG #5 block + START_CORE/START_FOREMAN + OD tail 18:33Z→end read). Running 5: ag-all-2 r2 reviewer SzibgyT, mood reviewer SzhYFat (PHASE 1), FEELINGS-18 #2 Szhqo1w, shelf builder #2 Szj9tDw, shelf reviewer SzkUH3p (idle). Free 7.
 ## HANDOVER C-AG #5 (session_01UV1SzkwHkU5MoXKRsprFyU) → C-AG #6, 20:35Z 17/11
 Why: context 40.5 % (get_session 405k; START ~8 % → line 33 % overshot — get_session read 0 early). Depth 5 → #6 depth 6 (#6 must NOT open a child foreman).
 LIVE by C-AG #5: wx-anim 03f97e15 (19:46Z), world-ret-phong c0a52168 (20:17Z), display-shelf 60b0e3bf (20:30Z). From 20:29Z foremen don't FF main: PASS shas → s37.
