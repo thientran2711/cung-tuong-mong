@@ -12,7 +12,7 @@ const {chromium}=require('playwright');const URL=process.argv[2];const SCAN_ONLY
  await p.waitForFunction(()=>window.TOIL_FIT&&TOIL_FIT.fit&&window.KIT_VEIL&&KIT_VEIL.fit,null,{timeout:30000}).catch(()=>{});
  const out=await p.evaluate(async(SCAN_ONLY)=>{Q.length=0;document.getElementById('modal').hidden=true;
   const NEW=typeof lkSmudge==='function';if(NEW)for(const f of ['fx-smu-1.png','fx-smu-2.png','fx-smu-3.png','fx-muc-1.png','fx-pox-thuydau-2.png','fx-pox-daumua-2.png'])LOOKS_ART[f]=1;
-  try{toilAuto()}catch(e){}const T=S.toilette;
+  try{toilAuto()}catch(e){}const T=S.toilette;if(T&&(!T.makeup||!T.look)){T.makeup=true;T.look='dep'}/* toilAuto may pick mặt mộc: the scan needs makeup on */
   /* use a picture of hers that has every fit table (veil / scar / toil), so each mark can draw: same face, its portrait and its figure */
   const VF=KIT_VEIL.fit||{},SF=(KIT_SCAR&&KIT_SCAR.fit)||{},TF=TOIL_FIT.fit||{};
   const por=Object.keys(VF).find(k=>/^por-/.test(k)&&SF[k]&&TF[k]&&VF[k.replace(/^por-/,'fig-')]&&TF[k.replace(/^por-/,'fig-')]&&SF[k.replace(/^por-/,'fig-')]);const fig=por&&por.replace(/^por-/,'fig-');
