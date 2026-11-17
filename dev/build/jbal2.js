@@ -327,16 +327,6 @@ Object.assign(BAL,{mem:{cap:5,fadeMo:2,keepFloor:.35,modDiv:8,modMax:10,recallMi
    psk.ghen = the jealousy of the other consorts when she is raised by a direct decree or a passed grace exam (jexam exDirectUp / exGraceUp). */
 Object.assign(BAL,{psk:{ghen:10,son1:{hhOan:15,momOan:8},emp:{th:8,oan:10},th:{sung:6,errN:2,errAt:3,errGap:6},
  quyen:{danh:6,after:24,p:6,max:1,hitSung:10,hitDanh:6},seat:{bacM:4,hieuBac:120,danh:6,gifts:2,pow:8,dad:5,ghen:10,oan:6}}});
-/* ONE CORE (OD:L1267) for the full origin roads (jroad.js, ROAD_MAP.md): chapter .first … .last of a road are Phần giữa after the premise
-   chapter (.first−1); finTier = the family reward tier of the road finale by its ending (win / mid / lose; −1 = none), as j67 chFinale67. */
-Object.assign(BAL,{road:{get first(){return BAL.st14.parts[1][0]+1},get last(){return BAL.st14.parts[1][1]},finTier:{win:3,mid:1,lose:-1},
- /* tt_mat .6: the rank index the pact with the Hoàng hậu holds her under (RANKS[cap].n is printed) */
- cap:{tt_mat:4},
- /* Lợi thế the tt_mat rare «Hoàng hậu tiến lời» (S.st.f14.tienloi) gives at chapter 13 «Tranh ngôi Trung cung»;
-    read by the ch13 hồi form (B3, review/road-b3) — today hau is a milestone checklist with no Lợi thế */
- tienSc:2,
- /* a full-road life opens the Thanh mai trúc mã side story chapters a/b/c once the main story reaches these chapter numbers */
- tm:[2,6,10]}});
 /* NPC ROADS (Foreman D, review/npc-roads; ROAD_MAP §0 'NPC roads', reports/npc-roads.md) — ONE CORE: every number of jnroad.js */
 Object.assign(BAL,{nroad:{
  /* months from her arrival (or the game start) to her chapter .4; months between two chapters [min, max] */
@@ -391,6 +381,7 @@ BAL.seatCap=SEATCAP;
    "now" (owner 13:50Z wording: every place's count at ONE moment, the counts add up to the record, nobody twice / missing) or "arrive"
    (main's dev/test/stage-counts.js: a place's count = the people she meets on arrival, after the walk's khắc). One switch, read by j95. */
 Object.assign(BAL,{led:{court:2,cnt:"now"}});
+ /* BAL.road (full origin roads) lives in jbalroad.js: it must load before jroad.js / jrd_<origin>.js (review/road-onecore) */
 
 /* D13 spread events across buổi (jspread, owner 15/11 23:20Z): world cards shown per buổi at most cap; a card waits at most maxWait buổi
    (then shown even in a full buổi); a card whose options run code (cannot be saved; autosave held while it waits) at most codeWait buổi. */
