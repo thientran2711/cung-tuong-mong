@@ -113,6 +113,7 @@ Always create worker sessions WITH source_url (a session without it cannot get t
 - 01:48Z FP NC v24 (3 options, fresh 2K-class gen, transparent; worker recommends opt2) looked at by C (clean cut-out dark+light, slim straight skirt no train, lively hands, compact hair, no pearls) → SENT to owner (3 options sheet + opt2 in-room crop). FP #3 rolled over → archived; successor #4 sonnet session_011xDdVSKDexc7PYaJAwNMew (BD other ranks now; NC ranks after her pick).
 - 01:52Z old-people fix sheets looked at by C: old man p03 v5 head = Emperor ratio → OK upload + roll out; young Thái hậu a26 OK upload; a18 colours/face OK but head still ~10 % small vs c01 a18 (.091–.098 vs .104) → enlarge to ≈.10 then upload; a36/a51 keep.
 - 01:55Z OWNER (s10 chat) — FOR MAIN: log in OD (verbatim): "Cái trang phục của công chúa Nam Chiêu thiệt sự là nhìn nó giống như nó xấu quá, nhìn nó không có thước tha một cái chút nào hết trơn á." → NC v24 costume rejected; FP #4 redesigns NC costume graceful/flowing (no train), 3 options 2K, in-room next to a repainted consort.
+- 01:57Z old-people LIVE: 15 Thái hậu by age (a18/a26 young black hair + young colours on c01 build; a36 mature; a51 silver; mama build for older) + 8 por + old man p03-a51 head = Emperor ratio. C looked at thaihau-all15 → OK; a18 head enlarge (≈.10) still to apply. Next: p/f-series old people rollout.
 - Waiting owner: FP NC v24 pick; origin intro samples; por-vacant-hh.
 
 ## SESSION 9 LOG
