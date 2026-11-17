@@ -21,3 +21,18 @@ CDN img/_review/kit-figure-mood-r1/ (fold-room, fold-event, fold-place, ipad-roo
 - Perf (CPU 4x, Fold, 4 s rAF): real Dư đồ seals avg 16.7 ms, 0 frames >50 ms; 60 extra animated seals stress: avg 18.6 ms, 4 frames >50 ms (max 117 ms at insert) — far above real counts; Gọn 16.7 ms.
 - Tap card: known cause shows mood: cause; unknown cause shows "Nguyên do chưa rõ"; stranger "Tâm trạng chưa rõ". khoc/hon fallback: emoSealSrc gives buon/gian pictures (all 3 sets); kitEmoSeal.pop khoc swaps to buon picture + droop then restores the old key and class.
 - Old save 16/16. Shots not needed (no CDN upload for r2).
+
+# r3 — FAIL b8d3832c (review/kit-figure-mood-r3b tip = r3c; brief named 5758b6e3, tip is newer and checked)
+PRIORITY #1 CHECK: OD 18:25Z (a) / 18:38Z / 19:25Z | main jemo.js/jevb | review/kit-figure-mood-r3b b8d3832c | claims kit-figure-mood MAIN s36.
+Base: branch is NOT on latest origin/main (74 commits behind d4a850ce); needs rebase/merge before any PASS can fast-forward.
+Method: scratch harness (outside repo) stubs window.faceKeyFor / sealKeyFor / emoCauses(with `left`) on a known rival, opens emoBox; 4+1 cases at 755x1000@2, 1180x820@2, 412x1058@2 (phone shows rotate prompt over the card, expected). Looked at card shots.
+PASS parts: order (seal kind first+bold, others by summed strength, soonest-fade inside, "còn N khắc", "Nguyên do chưa rõ"); "Đang: Khóc / Cảm xúc: Buồn (nặng)"; intent "Cảm xúc … / Vẻ mặt: Toan tính"; ghen label "Chạnh lòng"; missing art: khoc->buon pic, toantinh->muu, phanno->gian; seals at figures (fig-seal MOTION=1): 0 page errors, all inside stage, none on face, all live (Fold, iPad); kit-only (kmcsub is a tiny weight rule, no private frame); no pop left.
+FAIL items (numbered for worker):
+1. Same displayed kind split in two groups: causes keyed `chanh` and `ghen` both print label "Chạnh lòng" but group separately (heading appears twice, 2nd at list bottom). Group by display label / alias ghen->chanh in kitMoodCauseRows (old saves + new causes will mix).
+2. Colour inconsistency: jevb `cls` is a hard-coded kind list ["gian","buon","dau","so","lo","ghen"]: `ghen` row red, `chanh` row (same label) uncoloured; every new kind (hon, hothen, khochiu…) gets no colour. Check (4) violated: derive tone from data (e.g. KIT table good/bad per key), not an inline list.
+3. Header contradicts seal: sub line "Hiện nay: <m.name>" and badge alt/data-kemo still use kitEmotion m.k (stub: Giận) while seal/lines show Buồn/Khóc/Chạnh lòng. Use the same face/seal name (kitFaceName(emoSealKey)) for sub, alt, data-kemo.
+4. Bold driver falls back to m.k when `sealKeyFor` is absent but `faceKeyFor` present (case E: no bold at all). Take the driver from faceKeyFor().feel.key (or key for kind feel) first.
+5. Raw key leaks to player text: unknown act/feeling key prints as the English key ("Đang: phanno", "Cảm xúc: phanno (nặng)"). Fallback must not show a raw key (hide the row or use a generic VANPHONG word) until names are registered.
+Not blocking: fig-seal run showed 2 transient non-live "an" seals once on iPad (timing; next run all live, 0 frozen).
+Perf/old save: see below.
+Perf (Fold 4x CPU) and old-save 16/16 NOT completed for r3 (oldsave-r1 stalled on CDN loads in this sandbox; OLD build part ok). Re-run on the fixed tip. No CDN shots uploaded (scratch only).
