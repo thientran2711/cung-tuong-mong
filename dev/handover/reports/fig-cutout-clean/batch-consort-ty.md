@@ -10,3 +10,4 @@ consort-c01-ty4-a18 5jMwcCBKxe OK
 consort-c01-ty5-a18 1leOVHJr4r OK
 (ids of all OK files: batch-consort-ty-tools/progress/ids.tsv; per-agent logs progress/g*.tsv)
 Method: sub-agents run JOB.md (4 images in parallel, max). First 9 files by lead W2 directly: c01 ty1-8 + c02 ty1 all OK.
+UPLOADED to CDN: first 73 a18 (fig+por) 17/11
