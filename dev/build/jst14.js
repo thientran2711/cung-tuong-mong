@@ -95,7 +95,8 @@ function f14Shared(E){const c=S.st.ch;const ids=arcIds67("*").filter(id=>!c.used
  c.all=1;S.st.done=S.st.done||1;syncMain67()}})();
 /* a tutorial chapter closed only by its time limit: the story goes on, no Danh, no reward (owner 07:55Z) */
 (function(){const m0=msCheck67;msCheck67=function(){if(!f14())return m0.apply(this,arguments);const m=S.st.ms,c=S.st.ch;if(!m||!c)return;if(F14T.test(m.id)&&f14Home())return;if(!msDone67(m))return;const d=MS67[m.id],st=d.steps(m);
- const real=st.filter(x=>!x[2]).some(x=>x[1]),late=st.some(x=>x[2]&&x[1]);if(real||!late)return m0.apply(this,arguments);
+ /* a chapter with tutorial quests (jtq14): really done = milestone AND every quest; the time step is the only "t" step */
+ const real=m.q14&&typeof tq14Real==="function"?tq14Real(m,st):st.filter(x=>!x[2]).some(x=>x[1]),late=st.some(x=>x[2]==="t"&&x[1]);if(real||!late)return m0.apply(this,arguments);
  c.past.push({ms:m.id,t:d.t(),tag:"Lỡ dịp",k:0,n:c.n,late:1});log(`<b>Chương ${c.n} «${d.t()}» tự khép.</b> Hết hạn mà việc chưa thành: không có phần thưởng.`);
  card67("result",`Chương ${c.n} khép lại`,[["Kết cục","Lỡ dịp"],["Sự việc","Hết hạn mà việc của chương chưa thành, truyện đi tiếp."],["Phần thưởng","không có: phần thưởng chỉ đến khi tự tay làm xong việc của chương","r"],["Về sau","Đường lên ngôi Hoàng hậu vẫn còn mở"]],pMe(),d.t());
  S.st.ms=null;chAdvance67(null);syncMain67()}})();

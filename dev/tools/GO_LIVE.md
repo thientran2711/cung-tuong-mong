@@ -50,3 +50,9 @@ It is written after V, so a rebuild that changes only this line never makes play
   natural break. CDN pictures untouched (content-keyed, only added) → the old build finds its pictures.
 - After: the broken branch merges main (its change is now undone), `git revert <rollback commit>` on the branch, fix, review, go live.
 - A save-format change in the bad build: ask that branch's owner before rolling back.
+
+## Core gates (review/one-core-land, owner CO-OP FIRST 16/11 s23 + OD:L1267)
+quickcheck.sh step 1b runs `dev/tools/coregates.sh` after the build: G1 one-core-guard (no BAL key set twice, no typed core text, no NEW inline
+rule number; the sha's frozen list may not be longer than live's), G2 rules-one-source (Fold), G3 kit-conform (Fold), G4 every
+`dev/tools/quickcheck.d/*.sh` hook (co-op one-world probe = `50-coop-one-world.sh`, contract in quickcheck.d/README.md). Any FAIL = the go-live FAILS.
+Typical cost ~85 s; whole quickcheck ~4.5 min.

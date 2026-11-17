@@ -68,7 +68,7 @@ function visitBtn(v){if(!v||!v.alive||v.out||sameHouse(S,v))return"";const k=pal
 function visitPal(id){const v=rivals.find(x=>x.id===id);if(!v||S.dead||Q.length)return;const k=palaceOf(v),tc=travel(S.place,k);if(S.confined||S.out)return;if(!walkOk(tc)){walkGo(k);return}goTo(k);if(S.place!==k)return;
  const i=curPeople().findIndex(p=>p.ref===v&&p.kind!=="chest");
  if(i>=0){if(aff(v,S)<=-40){S.visit.tk=S.visit.tk||{};S.visit.tk[i]=1;S.visit.msg=`${v.name} cáo bệnh không tiếp ngươi (nàng ghét ngươi).`}else{popIdx=i;popMsg=""}}
- else{const now=whereOf(v);const friend=aff(v,S)>=20||(v.staff||[]).some(s=>s.spyFor==="me");if(friend){seeLoc(v,now);S.visit.msg=`Cung nữ gác cửa: “Nương nương sang ${placeName(now)} rồi.” <button class="btn" data-follow="${v.id}">Theo đến<small>${travel(S.place,now)} khắc</small></button>`}else S.visit.msg="Cung nữ gác cửa: “Nương nương đi vắng.”"}
+ else{const now=whereOf(v);const friend=aff(v,S)>=20||(v.staff||[]).some(s=>s.spyFor==="me");if(friend){seeLoc(v,now);S.visit.msg=`Cung nữ gác cửa: “${kSay({srv:"f"},v,"{Goi}",{own:true})} sang ${placeName(now)} rồi.” <button class="btn" data-follow="${v.id}">Theo đến<small>${travel(S.place,now)} khắc</small></button>`}else S.visit.msg=`Cung nữ gác cửa: “${kSay({srv:"f"},v,"{Goi}",{own:true})} đi vắng.”`}
  renderStage()}
 document.addEventListener("click",e=>{const s=e.target.closest("[data-visit]");if(s&&!s.disabled){e.stopPropagation();visitPal(+s.dataset.visit)}},true);
 /* two-way: rivals call at her palace; if she is out, her maid tells or keeps quiet by loyalty */
