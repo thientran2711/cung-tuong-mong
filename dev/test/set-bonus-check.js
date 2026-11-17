@@ -20,7 +20,7 @@ const {chromium}=require('playwright');const D=require('./lib/device');
   F(ids.length===26,"sets "+ids.length+" ≠ 26");F(grp.size===12,"groups "+grp.size+" ≠ 12");F(!dup.length,"a piece in two sets: "+dup.join(";"));F(!badM.length,"unknown member: "+badM.join(","));
   F(!badG.length,"member of another group: "+badG.join(","));F(!badSz.length,"size not 2/3/5: "+badSz.join(","));F(!sung.length,"a set touches Sủng: "+sung.join(","));F(!newBad.length,"new piece missing: "+newBad.join(","));
   /* helpers: a clean room for p, place keys (ngự ban = never a vượt phẩm wait) */
-  const clean=x=>{x.shelf={g:{},sd:1};delete x.shSet};const put=(x,keys,emp=true)=>{for(const k of keys){x.inv=x.inv||[];x.inv.push({k,from:emp?"emp":"me"});const r=shelfPut(x,x.inv.length-1);if(!r.ok)out.fail.push("put "+k+": "+r.why)}};
+  const clean=x=>{x.shelf={g:{},sd:1};delete x.shSet;for(const k of ["duc","tai","tamco","danh"])x[k]=50;x.sac=50};/* mid stats: a random life near 100 would clip the measured gain */const put=(x,keys,emp=true)=>{for(const k of keys){x.inv=x.inv||[];x.inv.push({k,from:emp?"emp":"me"});const r=shelfPut(x,x.inv.length-1);if(!r.ok)out.fail.push("put "+k+": "+r.why)}};
   const slotOf=(x,k)=>Object.keys(x.shelf.g).find(s=>x.shelf.g[s].k===k);
   const rk0=S.rank;S.rank=5;/* high enough that no member is above rank (over-rank tested apart) */
   clean(S);const base={sac:effSac(S),duc:S.duc,tai:S.tai,danh:S.danh,th:S.th,hh:S.hh,sung:S.sung};
