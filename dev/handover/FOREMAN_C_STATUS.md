@@ -1,6 +1,7 @@
 # FOREMAN_C_STATUS (written ONLY by Foreman C)
 
 FOREMAN C SESSION ROOT-3 = session_011xDdVQvSf8pvDHnXCRCRsz (opened by ROOT-2 ~07:40Z 17/11) · START_CTX ~8% (~80k of 1M; get_session reads 0, own estimate) → roll over at >= 33%, ceiling 60% · lineage depth 2/8 · own hourly wake (:32) below.
+- 08:17Z C LOOKED W6c a26 redo+batch5/6: OK m14 ty1/3, m19 ×3, m23 ×3, m24-ty1, m25 ×3. REDO (W6c's successor): m24-ty2/ty3 (peach-coral → ivory), m26 ×3 (≈ m25 → warm dove/taupe grey), m21 ×3 + m22 ×3 (held, not uploaded). W6c rolled over (~30%) → lead opens successor.
 - 08:13Z SHOW-WHY SẴN SÀNG KIỂM 94ac121d (worker session_011xDdVNGZYsTXYyDqCqjnQg) → opus BIG reviewer session_011xDdVRVL5MdC5V5iSZRy5P (review/show-why-r1; must rebase onto main 05ebe3da). W5d D10 (8) OK.
 REQUEST to main (FOREMAN C ROOT-3 08:13Z) — KIT keeper: register-only KIT REQUEST from show-why (no new part built): register the result-card 'Vì sao' row (reuses kit rows) in KIT.md §7 + kit sample page (text in review/show-why dev/kit/KIT_REQUESTS.md + reports/show-why.md item 4).
 - 08:10Z AG2 PASS r2 05ebe3da (rebased on trait-pool; jmind migrated to the pool) → C fast-forwarded main 9fdc1199..05ebe3da (AG1 2756d2d2 came along). Note: netmig.py not idempotent on main — never rerun. AG3 maids → fresh opus worker session_011xDdVNfbt3vPg31Vfr7ihc (review/npc-agent-ag3); old AG2 worker RNkh (34% ctx) told to stop (not my child). AG2 reviewer PQSb done (not my child).
