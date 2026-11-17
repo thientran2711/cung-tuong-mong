@@ -30,6 +30,7 @@ reads the page height to decide columns/rows. **No `N vh` / `N dvh` sizes** insi
 use `calc(N*var(--kvh))`, `--kvh` = 1 % of the SPREAD height (8.2 px) in both modes, set by rot.js/kvfallback (review/page-scale codemod: 50 sizes in
 17 files — kit panel `--kph`, dialog art bands, reward tabs, pickers …); `100vh`/`100dvh` (fill the canvas) stay. `media-check.js` (build) fails on a new one. Test: `dev/test/page-scale.js` (every tab + every sub-tab of its first tab row + common pop-ups: page boxes
 equal, every grid same columns x rows, ≥95 % of first-screen element rects equal within 2 px; Dư đồ is a full-canvas map screen, exempt).
+**0.0b FULL SCREEN WIDTH (owner 17/11 03:54Z "hai cái mép trái và phải dư một khúc ... cho nó tràn màn hình luôn"; review/app-edge).** The app (top card, stage/content, bottom tab bar) always spans the FULL screen width (minus env(safe-area) insets); there are no left/right paper bands on any device. Root cause was `rot.js geo()`: one uniform scale `s = min(W/DW, H/DH)` on a fixed-width canvas, so a screen relatively wider than 590x852 (Fold portrait 755x1000: s 1.1737, canvas 692 px, 31 px band each side = 91.7 %) was letterboxed. Fix (ONE place, `geo()`): the scale stays the HEIGHT fit (so text, figures, chips keep their kit size) and the canvas width grows to `ceil(AW/s)` (Fold: 590 -> 644 design px; frames/columns grow, nothing is stretched), capped at `KIT_FRAME.maxGrow` (1.7) x the design width (beyond that, e.g. ultrawide, paper bands remain). `kitView().w` / `innerWidth` inside the frame are therefore >= 590 (page) / >= 1180 (spread); `--kpage-w` is the real page width. RULES: page content must be width-flexible (grid/flex, no fixed 582/590/1180 px); chrome uses the same kit inner padding at every width. Screens that never grow: width-limited 4:3 iPads (1366x1024, 1024x768) are already 100 % wide (spare paper strip at the TOP, §0 safe-area); narrow rotated phones (412x1058, 390x844) fill the screen width sideways. Measure: app width / viewport width = 100 % at 755x1000, 1180x820, 1366x1024, 412x1058, 390x844, 1024x768 (`#krotf` rect vs `innerWidth`).
 - RULE: page CONTENT (panels, person card, act cards, chips, kit panels/modals, stage plaques and figures) has NO width/orientation breakpoint;
   the same CSS lays it out in both modes. Only CHROME (top bar, tab bar, page grid, back-to-room) and full-canvas SCREENS (title, roulette, map,
   scene panel, mini-game overlay, podium, load) may differ per mode, written once per mode with `:where(.kv1)` / `:where(.kv2)` selectors
@@ -549,7 +550,7 @@ document.getElementById("kgbox-res").innerHTML = kitGameResult({
   rivals:[{who:v, score:80, sub:"tài nghệ 45 + chuẩn bị 8 + màn thi 27"},{who:S, score:75}],
   gains:[["Sủng",3]], losses:[["Sức",-10]]});
 ```
-Header seal TÀI NGHỆ; "Cách chơi" line; HUD cells (`.kgc`); game box `.kgbox`; result rows (true numbers; "Phần chơi", never "điểm"), standings "Bảng định thứ" with face + rank title (the score `.kgrow>b` never wraps), Được/Mất chips.
+Header seal TÀI NGHỆ; "Cách chơi" line; HUD cells (`.kgc`, kept in the DOM but HIDDEN: the PHẦN/HỒI/CÒN chip row is never shown, owner 17/11; engines still call `kitGameSet`); a game with a real time limit (HUD time value "N giây") shows the existing kit clock chip `kitCoopClock` (§69.4) at the right of the title line via `kitGameClock` (hidden for "nhìn kỹ", "–", "N tên", "đã hết", "không hạn"); the Điểm trang "Hôm nay" agenda block is removed; game box `.kgbox`; result rows (true numbers; "Phần chơi", never "điểm"), standings "Bảng định thứ" with face + rank title (the score `.kgrow>b` never wraps), Được/Mất chips.
 In-game pieces keep the existing lesson-game classes (`.lanes`, `.lbtns`, `.simon`, `.memo`, `.goban`, `.mgopts`, p1.html) which are part of the kit;
 game buttons use `.kgbtn` (or `.btn` inside `.kgbox`), `.on` = selected. The lesson overlay `#ov .mg` wears the same frame.
 
@@ -1311,7 +1312,7 @@ kitItem `lux:N` → a small dark corner tab "Xa xỉ N" (top-right; "đã tẩm"
 Header chip `kitLuxChip`: ONLY the worn total "Xa xỉ <total>", neutral colour (owner 11/15: never the allowance, never a level word, colour or
 warning — she learns the limit from what happens: ghen, gossip, Thái hậu). Item panels show only each item's own "Xa xỉ N". The ⚠ under a slot and the
 "N món vượt phẩm: dễ bị tố" chip are kept: vượt phẩm is palace LAW (j8 rank caps, tố vượt phẩm), not the hidden luxury rule. Rules (internal levels): ≤ allowance fine; ≤ 1.5× → others' Ghen +1
-(× trait: Kiêu ngạo/Tham vọng 1.5, Hiểm độc 1.2, Hiền lành/Nhu mì 0.5; half for an NPC wearer); above → Ghen +3, Thái hậu may frown
+(× trait: Kiêu ngạo/Tham vọng 1.5, Xảo quyệt 1.2, Hiền lành/Nhu mì 0.5; half for an NPC wearer); above → Ghen +3, Thái hậu may frown
 (chance 50 − Đức/2, 10–50: Thái hậu -3 / NPC Danh -2), gossip 1 in 4: Danh -1; nothing worn from Quý nhân up: 1 in 4 Đức +1.
 It extends ghen (v.ghen) and itemMonth; vượt phẩm/tố stays j8 vpItems/vpAccuse.
 ### KIT RULE (11/15): the category tab row — never clips, centred, sticky only on long pages
@@ -1480,6 +1481,7 @@ label column on the left (rule on its right, words kept together); on the right 
 buttons in ONE row below (30 px, equal width). Same rule in both canvases (no breakpoint). Solo row 72 px (was 144), room row 88 px, Sổ mây 66,
 Nhập ám hiệu 55 (its row shortened to "Gõ ám hiệu hảo hữu gửi", MAIN s22 content call (a)); iPad 1180x820: Một mình (Sổ mây + 3 sổ + Phúc duyên)
 520 px of the 574 max, Cùng hảo hữu (Nhập ám hiệu + 3 rooms + Phúc duyên) 558 px — no scroll on either tab; Fold 755x1000: no scroll. Test `dev/test/kit-fit2.js` slots / slotsco; kit page sample "§29 slot" (j74).
+- **Chọn sổ frame + buttons fix (owner 17/11 "Lỗi tùm lum", review/save-dlg-fix):** (1) ROOT of the small frame + empty picture column: `kitFrameLive3` (jksize.js) re-laid the title page as an event frame (380 px, picture column) because the page parts (`.kpt-mount`) are mounted AFTER showModal, so the `KSZ_LIVE_SKIP` test saw an empty body; `.kpt-mount` is now in `KSZ_LIVE_SKIP` (Chọn sổ, Thiết lập, Sổ luân hồi keep the page layout, 560 px). (2) ONE button rule (j79, every `.kbtn`): a word never breaks inside a button (`word-break/overflow-wrap normal`, no hyphens); `.kslot-a` buttons wrap to a new row (`min-width:min-content`) instead of squeezing. (3) "???" on a slot summary: the name masks of the loaded life (j61 `k61Node`, jaudit `kitRankNamePaint`) now skip `.kpt-mount` and `.kslot` (they show OTHER lives). Tests: `dev/test/save-dlg-scan.js`, `dev/test/save-dlg-mask.js`.
 - **Sổ mây card in Chọn sổ (owner 16/11, review/chonso-cloud, `jcloud.js` `miniHTML()`):** first card on the "Một mình" tab, above the 3 sổ, the SAME `.kslot` part: `h4.kpst` "Sổ mây" + `kitRows` (Tình trạng; linked: Ám hiệu masked `••••-••XY` + "đồng bộ lúc" time) + `.kslot-a` buttons from the ONE `btnsHTML()` shared with Thiết lập › Sổ mây (not linked: Giữ sổ trên mây / Nối sổ; linked: Đồng bộ ngay / Ám hiệu sổ / Các bản đã giữ). Opens the same `data-cl` jcloud flows; no co-op card (a co-op life never lives in the cloud).
 + `.kbtn` "Tiếp tục kiếp này" / `.kbtn.alt` "Kiếp mới" (asks "Chắc chắn?" once). The list is redrawn on every visit, so a half-confirmed
 "Chắc chắn?" never survives leaving the screen; the Nạp sổ paste box closes when Thiết lập is left.
@@ -1768,10 +1770,7 @@ cards with a person, the Nội vụ phủ shop, pet care):
 - The face is never cut and never squashed (aspect kept); the chip is never cut. Phones (< 600 px) use the same rule in the top row.
 Measured (`node dev/test/stage-fig-size.js <url> <outdir> <tag> [sizes] [kinds]`, before → after, column % of the dialog):
 Thái hậu chê dung nhan 755x1000 49 % → 36 %, 1180x820 42 % → 36 %; Thái hậu triệu 49 % / 42 % → 36 %; every kind ≤ 36 % at every size.
-- Week book (Tuần lục) person page (j87 `kitStageFig` + jsl `kitBookFigClamp`, owner 15/11 "p.6 Thái hậu: the robe spreads under the text"):
-  same rule — the figure stays INSIDE its column (`.kbk-por` clips) on every screen, phones included, never scaled; the body (head centre)
-  is centred in the column; train / hem / outer sleeve wider than the column is cut at the column edge with a 24 px soft fade. The old
-  "train runs behind the text on a paper panel" (.kbk-figover) is retired. Test: `dev/test/book-figwide.js` (+ overText = figure px under the text, faceIn).
+- Week book (Tuần lục) person page (j87 `kitStageFig` + jsl `kitBookFigClamp`, owner 17/11 03:12Z + 03:14Z): the figure column is NARROW (`--porf` = `KBK_FIG_COL` .36 of the page's inner width) and the figure is fitted INTO it by its painted width (aspect kept, feet visible, nothing cut, painted left edge on the page's left edge); the RIGHT text frame gets the freed width (text size unchanged). Every figure, wide robes and trains included, is fitted the same way; no figure runs under the text. Test: `dev/test/book-col-scan.js`.
 - INFO panels about a person (kind info ĐIỀU / rule LUẬT / person NGƯỜI) show the FULL-BODY figure column like every other person pop-up (owner 16/11 07:35Z, OD:L448) — kitEventStage no longer returns early on those kinds.
 - MAIN ACTOR: the column shows the first person who is not the player (stage / who); the player stands there only when the event is about her
   alone (then as rank + name, never "Ngươi" — owner rule: rank and name always together).
@@ -2036,7 +2035,7 @@ Rule (measured like the stage `kitEsOvFit` §33.6 and the dialog `kitDpFit` §32
   Picture plate (`o.stage`, = stage rule §33): body = `min(KIT_FIG.h × H, KIT_FIG.maxPx) × fac`. `ih` = picture box height, `iw = ih × true aspect` (never stretched),
   `dy` = how far the box hangs below the foot line (painted feet < 1 stand ON the line, the same line for every figure of the page).
 - Silhouettes use the SAME path, box and scale as real figures (a silhouette is a figure whose file is `unknown-fig-f|m|k`; `fac` from the same table).
-- Person pages (Tuần lục, Mệnh truyện, Sổ luân hồi — j87 `personBody` → `kitStageFig`): `kitBookFigCol` (column width, while paginating) and `kitBookFigClamp` (live, jsl)
+- Person pages (Tuần lục, Mệnh truyện, Sổ luân hồi — j87 `personBody` → `kitStageFig`): column `--porf` = 36 % of the inner page width (j87 layout); `kitBookFigClamp` (live, jsl) fits the figure into it, left edge against the page edge.
   both call `kitBookFig`. A figure is NEVER scaled to fit (the old "not below 85 %" shrink made a wide Thái hậu smaller than the silhouette beside her): the column widens as before
   (≤ 74 % of the page) and what is still wider is cut at the column edge (32.2a, soft 24 px fade). An unmeasured figure is hidden, never shown at its raw box.
 - `kitBookPic` figures: `h` is ignored (kept so old callers do not break); `age` = child factor; sized by `kitBookPicFit` (on load / resize / DOM insert), feet on `--feet`.
@@ -2637,7 +2636,7 @@ Relations are TWO columns (that person → me | me → that person), short words
 
 ### 36.5 WEEK BOOK PERSON PAGE (amends §27, owner 04:30Z + 04:35Z)
 Every page about a person, continuation pages included, is the same page: the full-body figure (kitStageFig) fills the page body height on the
-left (`.kbk-full`: column `--porf` = min(45 % page, .34 × page height); figure height = body × `--kfr`, men 1, women 1/KIT_FIG.man, same scale on
+left (`.kbk-full`: column `--porf` = 36 % of the inner page width; figure height = body × `--kfr`, men 1, women 1/KIT_FIG.man, same scale on
 every page), the text column on the right with the name (continuation: "(tiếp theo)", no small portrait). The text column is measured
 (`paginate`, real heights) and continues on the next page only when really full; the figure never shrinks. Phones (page < 440 px): same, the
 text sits on a soft paper panel over the figure's edge. The filler "(Đã ghi vào mục Đã biết …)" never becomes a fact in the book.
@@ -3269,24 +3268,9 @@ Lãnh cung (`coldVisit()`), a cung nữ serving in Tân Giả khố (`S.srv.lau>
 Test: `node dev/test/life-place.js <index.html> <WxH>` (lãnh cung in session / new day / reload / back home, restored, promoted palace,
 maid room, Tân Giả khố in session / reload / done, maid risen, old save).
 
-**56.3 Wide figures on the Tuần lục person page (owner 03:55Z one scale ≈85–90 %, never shrink to fit; 13:45Z Thái hậu cut; coordinator
-r8: text ≥ 220 px).** `.kbk-person.kbk-full` gives the figure a column `--porf` sized for a normal standing figure (aspect ≈ .42). A wider
-figure (Thái hậu h1–h3, t7/t8 trains, wide a51 sleeves) is handled in `dev/build/jsl.js`:
-- `kitBookFigCol(figHtml, PW, PH)` — called by j87 `personBody` WHILE PAGINATING, so the text is measured in its final column. It widens the
-  column until face + torso fit (head centre + 12 % of figure height; the head centre comes from the picture's alpha, so figures whose train
-  runs to one side are placed by their body, not the picture centre), but the text keeps ≥ 220 px (or, where the page is too small for 220,
-  never less than a normal figure's page). If both cannot hold, the figure is lowered from the kit height (≈ 93 %) towards **85 % — never
-  below**. Aspect + head centre are cached on first sight; a book already open then calls its OWN re-layout (`root.__kbk.relayout()`, no
-  window resize), which keeps the reader on the page holding the same fact (j87 leaves carry `b0`, the first block; spread = left page).
-- `kitBookFigClamp` (live pages, layout px): figure left edge at the page's left; if the body would reach under the text it slides left so
-  face + torso end at the column edge — only the outer train/sleeve may pass the page edge, and it FADES into the paper (48 px mask), never a
-  straight cut. What is wider than the column runs behind the text on the kit soft paper panel `.kbk-figover`; the panel costs no layout
-  (background + box-shadow spread, no padding), so pagination and the live page agree.
-- Phones (`.kbk.narrow`): unchanged from r7 (narrow portrait is not a supported layout, owner 05:50Z).
-- Tests (committed): `node dev/test/book-figwide.js <url|page.html> <outdir>` — 14 facts, every page: text cut, text width, broken words,
-  facts/page, figure height ≥ 0.85, never scaled, page-1 name, torso clear, body never past the left edge. `node dev/test/book-relayout.js
-  <url|page.html> <outdir>` — the figure download is held while the reader turns pages, then released: same fact still in view, 0 window
-  resize events.
+**56.3 Figure column on the Tuần lục person page (owner 17/11 03:12Z: "the figure takes more than half the page"; 03:14Z: "not bigger text, a bigger right frame"; overwrites the old wide-figure rule).** `.kbk-person.kbk-full` gives the figure a NARROW column `--porf` = `KBK_FIG_COL` (.36) × the inner page width, against the page's left edge. `kitBookFigClamp` (jsl) sizes the figure by its body (kitBookFig), then scales it down (aspect kept) until its PAINTED width fits the column, feet on the column floor (equal-gaps rule 32.2b still centres it between the running head and the bottom line), painted left edge on the column's left edge. Wide figures (Thái hậu, trains, wide sleeves) are fitted the same way: nothing is cut, nothing runs under the text, no paper panel. The right text frame is everything else (Fold 263 → 342 px, iPad 220 → 275 px); font size is unchanged. `kitBookFigCol` is a no-op kept for j87. Phones (`.kbk.narrow`): same column rule.
+- Test (committed): `node dev/test/book-col-scan.js <outdir> [shots]` — real week book at 755x1000, 1180x820, 1366x1024, 412x1058, 390x844: figure column / page, text frame width, relation table cut / header band / card background (must be 0).
+- §52 'on paper': `kitRelTable(rows,{paper:true})` (every book page) = no header band, no card; header is a coloured line over a hair rule; boxes stack when the frame is < 430 px; a lone box takes the whole frame; a label never breaks inside a word.
 
 ## 60. MAKEUP COLOURS · kitSwatches · kitFaceZoom · colour layer on her pictures (owner 15/11 19:05Z, review/mk-colour) — `dev/build/jtoil.js` §60
 Like modern dress-up / makeup games: the colours she picks at the morning mirror show in EXACTLY those colours on HER OWN pictures (portrait,
@@ -3596,6 +3580,9 @@ owner recognises "this one still lacks its picture" in play. They are deliberate
 Every effect is PAINTED (Magnific gpt-2-6, folder ba4aecfe…, Kling clips from painted stills); code only moves / fades / glows painted art.
 Files: CDN `img/fx/` (cdn_sync.py, never git), on demand only (assets.json group `fx`: jload never pre-downloads; sw.js caches each file by
 content the first time it plays). Sources + recipes: `dev/fxwork/` (gens.txt = every Magnific id, slice.py, light.sh, sheet.sh, atlas.json).
+### 68.0 PARTICLE SIZE + PLACE (owner 17/11 "hoa đào bay … hình hoa to quá", review/wx-fx-size)
+ONE size rule for every falling thing (petal-*, osmanthus, leaf, snow, ash, paper): `kfUnit()` (jfx.js) = stage size (sqrt of the stage rect area / 640, clamp .5–1.15), applied in `kfkSp`, so weather, season and every `kitFxBurst` of those kinds scale with the painted stage, never with the device pixel count. A petal is ~11–18 px (a fingernail next to a figure's hand); `kitFxBurst` petal kinds default to scale .65. Weather AND season layers (lay wx / se / se2) are clipped to the stage rectangle (the "petal = season" merged layer too); weather and falling celebration petals (`kfFall`: petals / peach / goldpetals) are hidden while over a stage chip or the place name (`KF_INFO`, `kfOverInfo`): never over text. Radial bursts (flowers, kitBloom) stay free but use the same small size. Test: `node dev/test/wx-fx-size.js <url> <out> <sizes> shots`.
+
 ### 68.1 API (target = element | {x,y} viewport px | null = screen centre; everything fire-and-forget, auto-cleans)
 | call | does |
 |---|---|
@@ -4066,11 +4053,13 @@ STATUS: LIVE since phase 2 (see "PHASE 2 · LIVE" below); sample sheets (`kitSiz
 
 ## 85. DƯ ĐỒ STYLE C · "họa đồ chú thiêm" (owner 16/11 "kiểu C là đã ok rồi"; Foreman C art + KIT REQUEST map-frame-c; review/map-frame-kit) — `dev/build/jmapc.js` (last module) + `j38.js` mapFit
 Replaces §34.1b (kitLeather frame on the Dư đồ), §34.1d chip look of `.mspot .mlab` / `.mmeta`, the floating `.maptools` overlay and the dark people-count chip `.msil`.
-- **85.1 No frame**: the map is full-bleed with a 1 px muted-gold hairline (`.mapsc` outline); the leather skin, rolls and stitches are hidden on the Dư đồ (`.kleather` stays as the container class).
+- **85.1 No frame, full screen**: the map fills the WHOLE page area edge to edge (map width = page width, map height = page height; no mask fade, no margins, no outline); the leather skin, rolls and stitches are hidden on the Dư đồ (`.kleather` stays as the container class).
 - **85.2 Slip**: every place name (`.mlab`) and its info row (`.mmeta` "N bóng · K khắc" / reason) sits on the pale-yellow paper slip `img/kit/mapslip.webp` (9-slice, painted by Foreman C). 13 px display serif 600 (label), 12 px (row). Used by: Dư đồ labels (locked / walk / here / empty) and the palace detail `.kpm-spot` (jpm). Not slips: `.mtile b`, `#sc-t h2`.
-- **85.3 Cartouche + tools band**: a small "Dư đồ" cartouche `img/kit/mapslip-cartouche.webp` (text from CSS) and the tools (−, +, Ra vào, Danh sách) in a slim paper band ABOVE the map (cannot cover a label). The palace detail keeps its own "‹ Dư đồ" button in the same band (no cartouche).
+- **85.3 Cartouche + tools row**: a small "Dư đồ" cartouche `img/kit/mapslip-cartouche.webp` (text from CSS) and the tools (−, +, Ra vào, Danh sách) float ON the map as an overlay row (top, between the left rail and the right column; no band, nothing shrinks the map). The palace detail keeps its own "‹ Dư đồ" button in the same row (no cartouche).
 - **85.4 One info line**: the dark chip `.msil` is GONE everywhere (`silChip`, `k61SilChip`, `kpmSil` return ""); the text row is the only info line and is shown on every device (Fold included, it was hidden under `.kv1`).
 - **85.5 Overlap test**: `mapFit` (j38) tests every place as ONE box (`.mlab` + `.mmeta` union), cap fit+3.5; floors: iPad 1.75, Fold ≈2.5 (zoom steps unchanged). Clipped labels at the pan edge fade out (14 px mask) except in the palace detail.
+- **85.6 Full screen, overlays (owner 17/11 03:52Z, OD:L133/L1410/L1433)**: on every Dư đồ level the plan/painting is `position:absolute;inset:0` of `.mapv`; the tools row, the left rail `#krail` (left 6 px, top 6 px) and the right column `#kshR` (right 6 px, top 6 px) are overlays ON it, same kit columns as her room stage. Palace map: the plan is pannable/zoomable as before. Courtyard level (`.kpmv`): the painting COVERS the area (width = max(100cqw, 100cqh x 1.76), centred, pan sideways), the hall rows sit on it at the bottom. The last level (place painting) was already full screen. jplfs's old `margin-left:56px / margin-right:column` rule is neutralised in `jmapc.js` (last module). The shell canvas width (side bands) belongs to app-edge, not this part.
+- Scan: `node dev/test/map-full.js <url> <shotdir|-> [WxH,..]` (map width / page width = 100 % and height 100 % on the palace map and the courtyard level, tools row overlay, columns inside the page, no horizontal scroll). Sizes 755x1000, 1180x820, 1366x1024, 412x1058, 390x844.
 - Test: `node dev/test/map-frame-kit.js <url> <shotdir> [WxH,…]` (no .msil, slip present, 0 overlaps at default/+1/+2 zoom, tools above the map, palace detail). Kit sample §85.
 
 ## 86. kitLearn · HỌC THÀNH TÀI level-up scene (review/scenes-3, owner OD:L712) — `dev/build/jlevel.js`

@@ -28,6 +28,7 @@ function tsNeedSuc(n){return{t:`Sức ≥${n} (có ${S.suc})`,ok:S.suc>=n}}
    if(c&&c.need&&c.need.length){b.dataset.kneed=encodeURIComponent(JSON.stringify(c.need));if(c.tsDis)b.disabled=true}}}catch(e){}return k0.apply(this,arguments)}})();
 (function(){const c0=chooseM;chooseM=function(i){const m=Q[0];const c=m&&m.opts&&m.opts[i];if(c&&c.tsDis){if(tsBot()){const j=m.opts.findIndex(x=>!x.tsDis);if(j>=0&&j!==i)return chooseM(j);Q.shift();showModal();return}return}if(c&&c.tsLater){TSA.pre=rsnap();window.__tsNoRes=1;try{return c0.apply(this,arguments)}finally{window.__tsNoRes=0}}return c0.apply(this,arguments)}})();
 (function(){const r0=resultShow;resultShow=function(){if(window.__tsNoRes)return;return r0.apply(this,arguments)}})();
+try{lifeStore("TSA.pre",()=>{TSA.pre=null})}catch(e){}
 function tsPre(){const b=TSA.pre||rsnap();TSA.pre=null;return b}
 /* a kit panel (event choice that shows outcomes: showOut) with its event picture and the people standing on it */
 function tsPanel(o,front){const m={t:o.t,h:o.h,opts:o.opts,who:o.who||null,art:o.art||"",stage:o.stage,showOut:true,btn:o.btn,onClose:o.onClose,tsk:o.tsk||""};if(front)Q.unshift(m);else Q.push(m);return m}
@@ -141,7 +142,7 @@ PEND.tsgiftpick=p=>{const v=RV(p.v);if(!v)return null;const G=BAL.tsGift;const i
 /* the guard: same rule for everyone (a target who keeps to herself is harder to reach) */
 (function(){if(typeof npcAct!=="function")return;const n0=npcAct;npcAct=function(v,t){try{const g=t===S?tsS().guard:t&&t.tsGuard;if(g>wk()&&roll(50))return""}catch(e){}return n0.apply(this,arguments)}})();
 /* NPC side: a consort whom many want to harm closes her doors / sends gifts, by her own nature (same costs) */
-function tsNpcDanger(){for(const v of liveRivals(true)){if(!v.alive||v.out||v.tsGuard>wk())continue;const D=tsDangerOf(v,false);if(D.n<35)continue;const care=v.trait==="Đa nghi"?70:v.trait==="Kiêu ngạo"?15:40;if(!roll(care))continue;v.tsGuard=wk()+2;v.sung=cl((v.sung||0)-2,0,100)}}
+function tsNpcDanger(){for(const v of liveRivals(true)){if(!v.alive||v.out||v.tsGuard>wk())continue;const D=tsDangerOf(v,false);if(D.n<35)continue;const care=nv(v,"tsCare");if(!roll(care))continue;v.tsGuard=wk()+2;v.sung=cl((v.sung||0)-2,0,100)}}
 /* the HUD chip (Tình trạng row) + điềm báo when her own known bar climbs a step */
 /* review ts-a FAIL 2: the chip sits in the stage's right column (K3_RIGHT), never on the top bar's buổi line (it broke the date line on Fold) */
 if(window.K3_RIGHT)window.K3_RIGHT.push("tsnh");

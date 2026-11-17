@@ -21,10 +21,10 @@ const {chromium}=require('playwright');const fs=require('fs');const [,,URL,OUT,S
    ok("migrate_old_save",memList(v1,S).length===1&&!S.mem[v1.id+"|me"]&&v1.mem.me.length===1);
    /* PER-PERSON FADE */
    const sv=(v,t)=>{v.trait=t[0];v.trait2=t[1]||null};const k=(v,s)=>memFadeK(String(v.id),s);
-   sv(v2,["Hiền lành"]);sv(v3,["Hiểm độc","Thù dai"]);ok("fade_by_personality_bad",k(v3,-1)<k(v2,-1),[k(v3,-1),k(v2,-1)]);
+   sv(v2,["Hiền lành"]);sv(v3,["Xảo quyệt","Thù dai"]);ok("fade_by_personality_bad",k(v3,-1)<k(v2,-1),[k(v3,-1),k(v2,-1)]);
    sv(v2,["Tham vọng"]);sv(v3,["Nhu mì","Trọng nghĩa"]);ok("fade_by_personality_good",k(v3,1)<k(v2,1),[k(v3,1),k(v2,1)]);
    const NM4=[v0,v1,v2,v3];const tr0=NM4.map(v=>[v.trait,v.trait2]);NM4.forEach(v=>sv(v,["Nhu mì"]));const ks=NM4.map(v=>k(v,-1));NM4.forEach((v,i)=>{v.trait=tr0[i][0];v.trait2=tr0[i][1]});ok("fade_spread_same_traits",new Set(ks).size>=2,ks);
-   sv(v2,["Hiền lành"]);sv(v3,["Hiểm độc","Thù dai"]);[v2,v3].forEach(v=>{v.mem={};memAdd(v,S,"rumor")});
+   sv(v2,["Hiền lành"]);sv(v3,["Xảo quyệt","Thù dai"]);[v2,v3].forEach(v=>{v.mem={};memAdd(v,S,"rumor")});
    for(let i=0;i<6;i++){S.turn++;memFade()}const g2=(memTop(v2,S)||{g:0}).g,g3=(memTop(v3,S)||{g:0}).g;ok("fade_6mo_grudge_kept_longer",g3>g2,{hienlanh:g2,thudai:g3});
    /* LIFELONG */
    v0.mem={};memAdd(v0,S,"poison");for(const d of ["care","apology","secret","humble","ally","provoke","vent"])memAdd(v0,S,d);memAdd(v0,S,"musk");

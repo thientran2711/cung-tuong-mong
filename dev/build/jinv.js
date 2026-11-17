@@ -274,7 +274,7 @@ try{RANKED_W.forEach(([n,pr,d],r)=>{IT["ngocboi_r"+r]={n,kd:"Trang sức",d:`Đe
    Level (internal): 0 nothing worn · 1 ≤ allowance · 2 ≤ 1.5 × allowance · 3 above.
    Monthly (j8 itemMonth, player and every NPC alike): Xa hoa → others' Ghen +1 (×trait); Quá xa xỉ → Ghen +3 (×trait), Thái hậu/Hoàng hậu
    may frown (chance falls with Đức): Thái hậu -3 for her / Danh -2 for an NPC, gossip 1 in 4: Danh -1. Giản dị from Tần up: 1 in 4 Đức +1. ---------- */
-const LUX_W=[0,1,2,3,5],LUX_N=[["Giản dị","n"],["Vừa phẩm","g"],["Xa hoa","n"],["Quá xa xỉ: dễ bị ghen","r"]],LUX_TR={"Kiêu ngạo":1.5,"Tham vọng":1.5,"Hiểm độc":1.2,"Đa nghi":1,"Hiền lành":.5,"Nhu mì":.5};
+const LUX_W=[0,1,2,3,5],LUX_N=[["Giản dị","n"],["Vừa phẩm","g"],["Xa hoa","n"],["Quá xa xỉ: dễ bị ghen","r"]],LUX_TR={"Kiêu ngạo":1.5,"Tham vọng":1.5,"Xảo quyệt":1.2,"Kín đáo":1,"Ân cần":.5,"Khiêm nhường":.5};
 function luxWorn(p){const L=(p.inv||[]).filter(e=>e.w&&!e.h&&IT[e.k]&&itm(e.k).sl).map(e=>e.k);if(p.dress&&p.dress.until>S.turn&&IT[p.dress.k])L.push(p.dress.k);return L}
 function luxGrade(k){const a=typeof itemArt==="function"?itemArt(k):null;return a?a.grade|0:0}
 const LUX_V=[8,16,28,44,64];
@@ -286,7 +286,7 @@ function luxOf(p){const L=luxWorn(p);const sc=L.reduce((s,k)=>s+luxVal(k),0);con
 /* owner 11/15: only the worn TOTAL, neutral — never the allowance, never a level word or colour; she learns the limit from what happens */
 function kitLuxChip(x){return `<span class="kchip n kluxc">Xa xỉ <b>${x.sc}</b></span>`}
 function luxMonth(p){try{if(!p||p.out||p.alive===false)return"";const x=luxOf(p);let r="";const me=p===S;
- if(x.lv>=2){const n=x.lv===3?3:1;liveRivals(true).forEach(v=>{if(v===p)return;const m=LUX_TR[v.trait]||1;v.ghen=cl((v.ghen||0)+Math.max(1,Math.round(n*m*(me?1:.5))),0,100)});
+ if(x.lv>=2){const n=x.lv===3?3:1;liveRivals(true).forEach(v=>{if(v===p)return;const m=tv(LUX_TR,v)||1;v.ghen=cl((v.ghen||0)+Math.max(1,Math.round(n*m*(me?1:.5))),0,100)});
   if(me&&x.lv===3)r+="Hậu cung xì xào ngươi ăn mặc quá xa xỉ, nhiều người ghen. "}
  if(x.lv===3&&roll(cl(50-(p.duc|0)/2,10,50))){if(me){apply({th:-3});r+="Thái hậu chê ngươi phô trương. Thái hậu -3. "}else ap(p,{danh:-2})}
  if(x.lv===3&&roll(25)){if(me){apply({danh:-1});r+="Lời đồn ngươi phung phí lan khắp cung. Danh -1. "}else ap(p,{danh:-1})}

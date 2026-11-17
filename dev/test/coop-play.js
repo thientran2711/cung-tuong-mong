@@ -51,11 +51,11 @@ const friend=o=>o.p.evaluate(()=>{const f=(rivals||[]).find(v=>v.coop)||(rivals|
  const step=async(m,f)=>{console.log('== '+m);try{await f()}catch(e){note(null,'step "'+m+'" lỗi: '+e.message.split('\n')[0])}};
  let code='';
  await step('title',async()=>{await A.page();await A.p.goto(SITE,{waitUntil:'domcontentloaded'});await A.p.waitForTimeout(3500);await shot(A,'title')});
- await step('Chơi cùng bạn',async()=>{if(!await tap(A,/^Chơi cùng bạn/))note(A,'không thấy nút Chơi cùng bạn');await A.p.waitForTimeout(700);await shot(A,'co-menu')});
- await step('Mời bạn',async()=>{await tap(A,/^Mời bạn/);await A.p.waitForFunction(()=>window.COOP&&COOP.code,null,{timeout:20000});code=await A.p.evaluate(()=>COOP.code);await A.p.waitForTimeout(500);await shot(A,'invite');
+ await step('Chơi cùng bạn',async()=>{if(!await tap(A,/^(Chơi cùng bạn|Cùng hảo hữu)/))note(A,'không thấy nút Chơi cùng bạn');await A.p.waitForTimeout(700);await shot(A,'co-menu')});
+ await step('Mời bạn',async()=>{await tap(A,/^(Mời bạn|Mời hảo hữu)/);await A.p.waitForFunction(()=>window.COOP&&COOP.code,null,{timeout:20000});code=await A.p.evaluate(()=>COOP.code);await A.p.waitForTimeout(500);await shot(A,'invite');
   const c=await tap(A,/^Chép/,2000);const clip=c?await A.p.evaluate(()=>(navigator.clipboard?navigator.clipboard.readText().catch(()=>''):'noclip')):'';log.push('clipboard '+clip);
   await A.p.waitForTimeout(300);await shot(A,'invite-copied');if(!c)note(A,'không có nút Chép');});
- await step('guest Nhập mã',async()=>{await B.page();await B.p.goto(SITE,{waitUntil:'domcontentloaded'});await B.p.waitForTimeout(3500);await tap(B,/^Chơi cùng bạn/);await B.p.waitForTimeout(500);
+ await step('guest Nhập mã',async()=>{await B.page();await B.p.goto(SITE,{waitUntil:'domcontentloaded'});await B.p.waitForTimeout(3500);await tap(B,/^(Chơi cùng bạn|Cùng hảo hữu)/);await B.p.waitForTimeout(500);
   await tap(B,/^Nhập mã/);await B.p.waitForTimeout(500);await shot(B,'join');
   const inp=await B.p.$('#coop-code');if(!inp)note(B,'không có ô Mã phòng');else{await inp.tap();await B.p.keyboard.type(code.toLowerCase());await shot(B,'join-typed')}
   await tap(B,/^Vào phòng/);await B.p.waitForTimeout(2500);await shot(B,'joined');await shot(A,'friend-in')});

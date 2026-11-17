@@ -1,0 +1,93 @@
+{
+ "FIGURES-congtu.json": {
+  "by": {
+   "man|None": 80
+  },
+  "n": 80
+ },
+ "FIGURES-huynh.json": {
+  "by": {
+   "man|None": 8
+  },
+  "n": 8
+ },
+ "FIGURES-kc.json": {
+  "by": {
+   "consort|kc": 128,
+   "consort|ngheo": 32,
+   "maid|kc": 208,
+   "maid|ngheo": 52
+  },
+  "n": 420
+ },
+ "FIGURES-kids.json": {
+  "by": {
+   "princess|None": 96,
+   "prince|None": 96
+  },
+  "n": 192
+ },
+ "FIGURES-others.json": {
+  "by": {
+   "man|None": 36,
+   "official|None": 24,
+   "physician|None": 12,
+   "thaihau|None": 12
+  },
+  "n": 84
+ },
+ "FIGURES-servants.json": {
+  "by": {
+   "maid|None": 208,
+   "maid|cold": 208,
+   "maid|t1": 208,
+   "maid|t2": 208,
+   "maid|t3": 208,
+   "maid|t4": 208,
+   "maid|t5": 208,
+   "maid|t6": 208,
+   "maid|t7": 208,
+   "maid|t8": 208,
+   "mama|None": 32
+  },
+  "n": 2112
+ },
+ "FIGURES-ty.json": {
+  "by": {
+   "consort|ty1": 128,
+   "consort|ty2": 128,
+   "consort|ty3": 128,
+   "consort|ty4": 128,
+   "consort|ty5": 128,
+   "consort|ty6": 128,
+   "consort|ty7": 128,
+   "consort|ty8": 128,
+   "maid|ty1": 208,
+   "maid|ty2": 208,
+   "maid|ty3": 208,
+   "maid|ty4": 208,
+   "maid|ty5": 208,
+   "maid|ty6": 208,
+   "maid|ty7": 208,
+   "maid|ty8": 208
+  },
+  "n": 2688
+ },
+ "FIGURES.json": {
+  "by": {
+   "consort|1": 128,
+   "consort|2": 128,
+   "consort|3": 128,
+   "consort|4": 128,
+   "consort|5": 128,
+   "consort|6": 128,
+   "consort|7": 128,
+   "consort|8": 128,
+   "consort|cold": 128,
+   "emperor|None": 8,
+   "eunuch|None": 120,
+   "player|1": 16
+  },
+  "n": 1296
+ }
+}

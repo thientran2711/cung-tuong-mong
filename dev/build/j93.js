@@ -33,8 +33,9 @@ function kmPush(fn){KMQ.push(fn);kmPump()}
    screen calls this: the queue is emptied, the running job's finish is voided (kmGen), every .kmov scene (card-flip, ink, reward, reveal…) and the
    podium / reward / buổi-transition overlays are removed, and modules that keep their own timers register a hook with kmOnReset(fn). */
 let kmGen=0;const KMR=[];function kmOnReset(f){KMR.push(f)}
+lifeStore("kaLastResult",()=>{window.kaLastResult=undefined});
 function kmReset(){kmGen++;KMQ.length=0;kmBusy=false;clearTimeout(kmPump.t);
- KMR.forEach(f=>{try{f()}catch(e){console.error(e)}});
+ LIFE_REG.forEach(([n,f])=>{try{f()}catch(e){console.error('lifeStore '+n,e)}});KMR.forEach(f=>{try{f()}catch(e){console.error(e)}});
  try{if(typeof kitPodiumClose==="function")kitPodiumClose(true)}catch(e){}
  try{if(typeof btrKill==="function")btrKill()}catch(e){}
  try{document.querySelectorAll(".kmov,#kmrew,.kmfly,.kmalarm").forEach(e=>e.remove())}catch(e){}}
@@ -157,7 +158,7 @@ function kitCalendar(el,o){if(!el)return null;o=o||{};const d=document.createEle
  el.appendChild(d);return d}
 
 /* ================= 6 CÓ THAI / SINH CON / CHẾT ================= */
-function kitBloom(o){o=o||{};const pet=Array.from({length:12},(_,i)=>`<img class="kmpet" src="${KM_DIR}mo-petal-peach.webp" alt="" style="--a:${i*30}deg;--d:${(.55+(i%4)*.08)*BAL.pace}s;--v:${110+(i*29)%80}px">`).join("");
+function kitBloom(o){o=o||{};const pet=Array.from({length:12},(_,i)=>`<img class="kmpet" src="${KM_DIR}mo-petal-peach.webp" alt="" style="--a:${i*30}deg;--d:${(.55+(i%4)*.08)*BAL.pace}s;--v:${110+(i*29)%80}px;width:${Math.round(15*(typeof kfUnit==="function"?kfUnit():1))}px">`).join("");
  const html=`<div class="kmbloom"><div class="kmglow"></div><img class="kmpeony" src="${KM_DIR}mo-peony.webp" alt="" draggable="false">${pet}<div class="kmbcap"><b>${kmEsc(o.title||"")}</b>${o.sub?`<small>${kmEsc(o.sub)}</small>`:""}</div></div>`;
  kmPush(done=>kmStage("km-bloom",html,{dur:1800,hold:1600,onEnd:done}))}
 function kitInk(o){o=o||{};const html=`<div class="kmink"><img class="kmblot b1" src="${KM_DIR}mo-ink.webp" alt="" draggable="false"><img class="kmblot b2" src="${KM_DIR}mo-ink.webp" alt="" draggable="false"><div class="kmicap"><b>${kmEsc(o.title||"Hồng nhan bạc mệnh")}</b><small>Mở Sổ luân hồi</small></div></div>`;
@@ -237,7 +238,7 @@ document.addEventListener("click",e=>{const c=e.target.closest&&e.target.closest
  if(typeof PX==="object")PX.key=""})();
 
 /* ================= hooks into the game ================= */
-let KMSNAP=null,KMS=null;
+let KMSNAP=null,KMS=null;lifeStore("KMSNAP",()=>{KMSNAP=null;KMS=null});
 function kmSnap(){return{srv:typeof isSrv==="function"&&isSrv(),rank:S.rank,out:!!S.out,preg:!!S.preg,kids:(S.kids||[]).length,inv:(S.inv||[]).slice(),dead:!!S.dead}}
 /* rank, cold palace, pregnancy, births and new things in the chest, read from the state after each render (any code path) */
 function kmDiff(){if(!kmOn()){return}if(KMS!==S||!KMSNAP){KMS=S;KMSNAP=kmSnap();return}const a=KMSNAP,b=kmSnap();KMSNAP=b;if(b.dead)return;

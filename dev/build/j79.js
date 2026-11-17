@@ -449,6 +449,8 @@ html body #modal:not(.pcm) .dlg.kpanel .kpb.kpshort .kpmain{align-items:center}
 .dlg.kpanel #mr{display:flex;justify-content:flex-end;gap:8px}
 .kbtn,.dlg.kpanel #mr .main{font-family:var(--display);font-weight:700;letter-spacing:.02em;color:#fff8e6;background:linear-gradient(#b0402c,#8a2a1e);border:1px solid #6e1d12;box-shadow:inset 0 0 0 1px #f0d07066,0 1px 0 #d9c49a;border-radius:8px;min-height:42px;padding:8px 22px;cursor:pointer;white-space:normal}
 .kbtn:hover{filter:brightness(1.06)}
+/* RULE (owner 17/11, every button in the game): a word never breaks inside a button; a button that is too narrow grows or wraps to a new row, it never breaks letters */
+html body .kbtn,html body .kbtn *{word-break:normal!important;overflow-wrap:normal!important;hyphens:none!important}
 .kbtn.alt{background:var(--k-card);color:var(--ink);border-color:var(--line);box-shadow:none}
 /* night: same light paper panel as every pop-up (owner s8 "Tại sao khung này màu tối"); the night feel comes from the backdrop + seal */
 .modal.end .dlg.kpanel{text-align:left}
@@ -475,7 +477,7 @@ button.ka .kr-why .ksep{display:none}
 
 /* ---------- converted panels: the rule ladder (Thang nguy hiểm) as kit tiers ---------- */
 (function(){if(typeof bandCard!=="function")return;bandCard=function(){const T=BANDS.map((b,i)=>({k:i<BANDS.length-1?`${b[0]}–${BANDS[i+1][0]-1}`:`${b[0]} trở lên`,n:i?`hại ${b[1]}`:"không ra tay",c:i?"r":"g",d:i?b[2].map(k=>ACT[k]?ACT[k].n:k).join(", "):""}));
- return `<div class="kpsec"><h4 class="kpst">Cách tính</h4>${kitRows([["Nguy hiểm",`${kitGloss("Ghen")}, ${kitGloss("Oán")} hoặc ghét: lấy số cao nhất`,"t"],["Cộng",[kitChip("Hiểm độc",10,"r"),kitChip("Hiền lành",-15,"g"),kitChip("Nhu mì",-10,"g")]],["Áp cho","mọi người, cùng một thang","n"]])}</div><div class="kpsec"><h4 class="kpst">Thang 4 mức</h4>${kitTiers(T)}</div><div class="kpsec"><h4 class="kpst">Ghi nhớ</h4><div class="kfacts">${["Trong mỗi mức, càng gần mức trên càng hay ra tay.","Ngươi hại ai thì Oán của người đó tăng; Oán đủ cao thì người đó lên mức trên."].map(t=>kpFactRow({text:t,kind:"world",auto:false},[])).join("")}</div></div>`}})();
+ return `<div class="kpsec"><h4 class="kpst">Cách tính</h4>${kitRows([["Nguy hiểm",`${kitGloss("Ghen")}, ${kitGloss("Oán")} hoặc ghét: lấy số cao nhất`,"t"],["Cộng",[kitChip("Xảo quyệt",10,"r"),kitChip("Ân cần",-15,"g"),kitChip("Khiêm nhường",-10,"g")]],["Áp cho","mọi người, cùng một thang","n"]])}</div><div class="kpsec"><h4 class="kpst">Thang 4 mức</h4>${kitTiers(T)}</div><div class="kpsec"><h4 class="kpst">Ghi nhớ</h4><div class="kfacts">${["Trong mỗi mức, càng gần mức trên càng hay ra tay.","Ngươi hại ai thì Oán của người đó tăng; Oán đủ cao thì người đó lên mức trên."].map(t=>kpFactRow({text:t,kind:"world",auto:false},[])).join("")}</div></div>`}})();
 
 /* ---------- week summary (dawn): same kit panel on the dawn sky; facts untruncated, deltas as chips ---------- */
 KP_SEAL.week="TUẦN";
@@ -501,12 +503,14 @@ KP_SEAL.week="TUẦN";
 
 /* ---------- MINI-GAME FRAME (for j82 and the lesson games): header + how-to + score/timer + game box + result rows ---------- */
 KP_SEAL.game="TÀI NGHỆ";
+/* OWNER 17/11 (OD "Điểm trang … clutter"): the PHẦN / HỒI / CÒN chip row is NOT shown in ANY mini-game (it pushed the play area down and forced scrolling);
+   the cells stay in the DOM, hidden, so every engine's env.hud / kitGameSet and the tests keep working. Round counts live in the "Cách chơi" line; a game with a real time limit shows the kit clock chip (kitGameClock) in the title line. */
 /* kitGameFrame({art:"Cầm", title:"Tấu khúc", how:"Chạm đúng dây khi nốt chạm vạch đỏ.", hud:[["score","Điểm",0],["time","Thời gian","30 giây"]], id:"kgbox"})
    -> HTML of the frame; the game draws into #<id> (.kgbox). Update a HUD cell with kitGameSet("score", 12). */
-function kitGameFrame(g){g=g||{};const fg=g.fig?kitGameFig(g):"";return `<div class="kgame">${kpHeader("game",`${g.art?g.art+": ":""}${g.title||""}`,"")}`+
+function kitGameFrame(g){g=g||{};const fg=g.fig?kitGameFig(g):"";return `<div class="kgame">${kpHeader("game",`${g.art?g.art+": ":""}${g.title||""}`,"").replace(/<\/div>$/,'<span class="kgclk" hidden></span></div>')}`+
  `<div class="kgbody${fg?" kgfig-on":g.pic?" kgpic-on":""}">`+(fg||(g.pic?`<div class="kgpic"><img src="${g.pic}" alt="" draggable="false" onerror="this.parentNode.parentNode.classList.remove('kgpic-on');this.parentNode.remove()"></div>`:""))+`<div class="kginfo">`+
  (g.how?`<div class="kghow"><span class="krl">Cách chơi</span><span>${g.how}</span></div>`:"")+
- (g.hud&&g.hud.length?`<div class="kghud">${g.hud.map(([k,l,v])=>`<span class="kgc"><small>${l}</small><b data-kg="${k}">${v==null?"":v}</b></span>`).join("")}</div>`:"")+
+ (g.hud&&g.hud.length?`<div class="kghud" hidden aria-hidden="true">${g.hud.map(([k,l,v])=>`<span class="kgc"><small>${l}</small><b data-kg="${k}">${v==null?"":v}</b></span>`).join("")}</div>`:"")+
  `<div class="kgbox" id="${g.id||"kgbox"}"></div><div class="kgres" id="${(g.id||"kgbox")}-res" hidden></div></div></div></div>`}
 /* KIT §N.1 kitGameFig (owner 16/11 ~21:30Z, mini-game layout): the LEFT column of every tài nghệ frame on a wide screen (html.kv2) = HER full figure in the
    outfit she wears NOW (kitStageFig: kit figure at the KIT_FIG ratio + the face layers, so makeup / scar / veil show live), the game's prop picture small in the
@@ -518,7 +522,12 @@ function kitGameFig(g){g=g||{};try{const p=g.fig&&g.fig!==true?g.fig:(typeof S!=
 function kitGameFigRefresh(p){try{const c=document.querySelector(".kgame .kgfig");if(!c||typeof kitStageFig!=="function")return;p=p||(c.dataset.kgf==="me"?S:null)||S;const f=kitStageFig(p,{cap:false});if(!f)return;
  const t=document.createElement("div");t.innerHTML=f;const n=t.firstElementChild,o=c.querySelector(".kesf");if(!n)return;if(o)o.replaceWith(n);else c.prepend(n)}catch(e){}}
 window.kitGameFig=kitGameFig;window.kitGameFigRefresh=kitGameFigRefresh;
-function kitGameSet(k,v){document.querySelectorAll(`[data-kg="${k}"]`).forEach(e=>e.innerHTML=v)}
+function kitGameSet(k,v){document.querySelectorAll(`[data-kg="${k}"]`).forEach(e=>e.innerHTML=v);if(k==="time")kitGameClock(v)}
+/* owner 17/11 + main s29: a game with a REAL time limit shows the EXISTING kit clock chip (kitCoopClock, "Còn N giây", KIT §69.4) in the frame's title line;
+   only the HUD value "<n> giây" is a time limit ("nhìn kỹ", "–", "5 tên", "đã hết", "không hạn" are not) -> the chip is hidden. No new part, no chip row. */
+function kitGameClock(v){document.querySelectorAll(".kgame .kgclk").forEach(e=>{const m=/^\s*(\d+)\s*giây\s*$/.exec(String(v==null?"":v));
+ if(!m||typeof kitCoopClock!=="function"){e.hidden=true;e.innerHTML="";return}const n=+m[1]*1000,len=Math.max(+e.dataset.len||0,n);e.dataset.len=len;e.innerHTML=kitCoopClock({left:n,len});e.hidden=false})}
+window.kitGameClock=kitGameClock;
 /* kitGameResult({raw, talent, prep, total, place:"Nhất", of:4, rivals:[{who:person, score}], gains:[["Sủng",3]], losses:[["Sức",-10]], note})
    -> result block: score rows (true numbers), standings with face + rank title, Được / Mất chips. */
 function kitGameResult(r){r=r||{};const rows=[];
@@ -552,7 +561,7 @@ function kitGameResult(r){r=r||{};const rows=[];
 (function(){const st=document.createElement("style");st.id="kp-game-css";st.textContent=`
 .kgame .kghow{display:grid;grid-template-columns:max-content minmax(0,1fr);gap:8px;align-items:baseline;font-size:.84rem;color:var(--ink);padding:8px 14px 0;margin:0}
 .kgame .kghow .krl{font-size:.64rem;font-weight:700;color:var(--k-lab);text-transform:uppercase}
-.kghud{display:flex;gap:6px;padding:6px 14px 0;flex-wrap:wrap}.kgc{flex:1 1 0;min-width:80px;display:flex;flex-direction:column;align-items:center;border:1px solid var(--k-hair);border-radius:var(--k-rad);background:#fffdf8;padding:3px 6px}
+.kghud[hidden]{display:none!important}.kgclk{margin-left:auto;flex:0 0 auto}.kgclk[hidden]{display:none}.kgclk .kchips{flex-wrap:nowrap}.kgclk .kchip{white-space:nowrap}.kghud{display:flex;gap:6px;padding:6px 14px 0;flex-wrap:wrap}.kgc{flex:1 1 0;min-width:80px;display:flex;flex-direction:column;align-items:center;border:1px solid var(--k-hair);border-radius:var(--k-rad);background:#fffdf8;padding:3px 6px}
 .kgc small{font-size:.66rem;color:var(--k-lab);text-transform:uppercase;font-weight:700}.kgc b{font-family:var(--display);font-size:1.05rem;color:var(--ink)}
 .kgbox{margin:8px 14px;min-height:120px}.kgres{padding:0 14px 10px}
 .kgrow{display:flex;justify-content:space-between;gap:8px;align-items:center}.kgrow>b{flex:none;white-space:nowrap}.kgr .kpkb .krl{white-space:normal;max-width:9rem}
@@ -639,7 +648,7 @@ const KIT_ACT_CATS=[["hai-nguoi",/hạ độc|đẩy|vu |vu oan|trù ẻo|ngáng
  ["buon-ban",/bán|mua|buôn|chợ|đổi|bạc/i],["le-nghi",/vấn an|thỉnh an|lễ|cầu|chùa|phật|xin xăm|cúng|bái/i],["giao-thiep",/thăm|tặng|kết|trò chuyện|mời|gặp|tâm sự|làm thân|nói/i],["di-lai",/đi |dạo|sang|ra |vào |đến /i]];
 let KIT_ACTS={acts:{},have:[]};try{fetch("img/ACTS.json",{cache:"no-cache"}).then(r=>r.ok?r.json():null).then(j=>{if(j){KIT_ACTS=j;try{document.querySelectorAll("button.ka.kcard[data-kart]").forEach(b=>{b.removeAttribute("data-kart");kpActArt(b)})}catch(e){}}}).catch(()=>{})}catch(e){}
 /* memoised (pure; hot in act-card lookups) */
-const KPSLUG_C=new Map();const kpSlug=s=>{const k=String(s||"");let v=KPSLUG_C.get(k);if(v===undefined){v=kpSlug0(k);if(KPSLUG_C.size>8000)KPSLUG_C.clear();KPSLUG_C.set(k,v)}return v};
+const KPSLUG_C=new Map();lifeStore("KPSLUG_C slug memo (keys = names of that life)",()=>KPSLUG_C.clear());const kpSlug=s=>{const k=String(s||"");let v=KPSLUG_C.get(k);if(v===undefined){v=kpSlug0(k);if(KPSLUG_C.size>8000)KPSLUG_C.clear();KPSLUG_C.set(k,v)}return v};
 const kpSlug0=s=>String(s||"").normalize("NFD").replace(/[̀-ͯ]/g,"").replace(/đ/g,"d").replace(/Đ/g,"D").toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"");
 function kitActCat(name){for(const [c,re] of KIT_ACT_CATS)if(re.test(name))return c;return"giao-thiep"}
 function kitActArt(name){const A=KIT_ACTS.acts||{};const key=A[name]||A[kpSlug(name)];const cat=kitActCat(name);const have=KIT_ACTS.have||[];
@@ -1209,7 +1218,7 @@ span.md.kmini.kmini>img.kveil{left:9.66%!important;top:11.75%!important;width:80
    stage tags .j59t/.j59n, podium plates), [data-vp-skip], [data-norank], form fields, script/style. */
 const KIT_RP_TITLES="Hoàng quý phi|Hoàng hậu|Quý phi|Quý nhân|Thường tại|Đáp ứng|Phế phi|Phi|Tần|Thái tử|Hoàng tử|Công chúa|Thái y|Thị vệ|Ma ma|Chưởng sự cô cô|Cô cô|[Cc]ung nữ thân tín|[Cc]ung nữ thô sử|[Đđ]ại cung nữ|[Cc]ung nữ|[Tt]iểu thái giám|[Tt]ổng quản thái giám|[Tt]ổng quản|[Tt]hái giám|[Nn]ữ quan|[Nn]hũ mẫu|[Nn]hạc sư|[Hh]ọa sư|[Tt]ể tướng|[Tt]hượng thư|[Tt]hị lang|[Tt]ướng quân|[Cc]ông tử";
 const KIT_RP_SKIP=".kname,.knr,.krt,.krn,.kpsn,.pcrk,.pcname,.j59t,.j59n,.kpod-plq,.kbk-pname,[data-vp-skip],[data-norank],[contenteditable]";
-let kitRpKey="",kitRpRe=null,kitRpMap=null;
+let kitRpKey="",kitRpRe=null,kitRpMap=null;lifeStore("kitRpMap name -> person",()=>{kitRpKey="";kitRpRe=null;kitRpMap=null});
 function kitRpRx(){const L=typeof kpPeople==="function"?kpPeople():[];const key=L.map(x=>x[0]).join("|");kitRpMap=new Map(L);if(key!==kitRpKey||!kitRpRe){kitRpKey=key;
   const N=L.map(x=>x[0].replace(/[.*+?^${}()|[\]\\]/g,"\\$&")).join("|");
   /* "title name" (m[1], m[2]) or "name (title, …)" (m[3], m[4]: lists such as "Mạnh Bích Dao (Tần, chủ vị)") */

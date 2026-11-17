@@ -36,7 +36,8 @@ const LOOK=["face","fc","fk","fcKeep","fid","pid","age","sac","tai","tamco","duc
 const J=x=>x==null?x:JSON.parse(JSON.stringify(x));
 const PETK2=["pets","petOn","petB","petBn"];
 const CW=window.COOPW={tr:[],on:false,seat:"",base:null,pend:false,sent:-1,dying:null,attachC:null,news:"",life:0};
-const me=()=>CW.seat==="a"?901:902, fp=()=>CW.seat==="a"?902:901, fs=()=>CW.seat==="a"?"b":"a";
+/* CW.ctx (jcoopthin withSeat, host only): the seat whose turn the host runs; me/fp/fs follow it (unset = this seat, as before) */
+const me=()=>(CW.ctx||CW.seat)==="a"?901:902, fp=()=>(CW.ctx||CW.seat)==="a"?902:901, fs=()=>(CW.ctx||CW.seat)==="a"?"b":"a";
 const T=x=>{try{CW.tr.push(x+" f="+(rivals||[]).some(v=>v&&v.coop));if(CW.tr.length>80)CW.tr.shift()}catch(e){}};
 const isF=v=>!!(v&&v.coop);
 const host=()=>CW.seat==="a";
@@ -59,12 +60,13 @@ function friendHome(P){return !!(P&&P.S&&P.S.kc&&!P.S.kc.inPal&&!P.dead&&!P.S.de
 function buildFriend(P,mine){if(!P||!P.S||P.dead||P.S.dead||friendHome(P))return null;const s=J(P.S),mp=me();
  const rl=Object.assign({},s.rl||{}),ro=Object.assign({},s.ro||{});const rel=rl[mp]||0,oan=ro[mp]||0;delete rl[mp];delete ro[mp];
  const cev=s.cev||{};
- const v={id:fp(),coop:true,name:P.name||s.name,rank:s.rank||0,queen:(s.rank||0)>=7,trait:"Nhu mì",malice:15,rel,oan,rl,ro,ev:((mine||S||{}).cev||{})[fp()]||0,
+ const v={id:fp(),coop:true,name:P.name||s.name,rank:s.rank||0,queen:(s.rank||0)>=7,trait:"Khiêm nhường",malice:15,rel,oan,rl,ro,ev:((mine||S||{}).cev||{})[fp()]||0,
   evm:{me:cev[mp]||0},alive:true,out:!!s.out,kids:[],ghen:0,pg:0,nights:0,inv:[],staff:[],nightLog:[]};
  for(const k of STAT)if(s[k]!=null)v[k]=s[k];for(const k of LOOK)if(s[k]!=null)v[k]=s[k];
  /* jtruth (reviewer r1): her own wrongs ledger travels with her, so true evidence on her is capped by what SHE really did (an empty
     ledger here made every piece on the friend a rumour each week, and NPC spies could never find a guilty friend); read-only copy */
  for(const k of ["wrongs","dw","dws","dkeys","schemes"])if(s[k]!=null)v[k]=J(s[k]);
+ try{const m=s.empMe||(s.emp&&s.emp.met&&s.emp.met.me);if(m)v.emet=J(m)}catch(e){}/* r1: her personal S.empMe (P.S never holds the world key emp) *//* AG2: what she did near the Emperor (her client's memory) weighs her card on the host's tray, as the host's own deeds weigh hers */
  for(const k of PETK2)if(s[k]!=null)v[k]=J(s[k]);  /* her pets: shown on her entry, acts on them go through `res` (pet ops), never the week write-back */
  /* B1 (review/coop-b1b5): her bag and her children on her entry, so the item / child acts are offered on her exactly as on an NPC.
     Display copies only: what an act does to them goes to her through `res` (item / kid ops), never through the week write-back. */
@@ -72,7 +74,7 @@ function buildFriend(P,mine){if(!P||!P.S||P.dead||P.S.dead||friendHome(P))return
  mapMe(v,false,mp);v.id=fp();
  v.__b=J(Object.assign({},...STAT.map(k=>({[k]:v[k]})),{rel:v.rel,oan:v.oan,rl:v.rl,ro:v.ro,em:v.evm.me,out:v.out,rank:v.rank,ill:v.ill||null}));
  return v}
-function buildFriendSrv(P){const s=P.S;return {sid:fp(),coop:true,name:P.name||s.name,role:"maid",fc:s.fc,fk:s.fk,face:0,hue:0,age:s.age||18,tr:"trung",loyal:60,
+function buildFriendSrv(P){const s=P.S;return {sid:fp(),coop:true,name:P.name||s.name,role:"maid",fc:s.fc,fk:s.fk,face:0,hue:0,age:s.age||18,loyal:60,
  spyFor:s.srv&&s.srv.spyFor!=null?(s.srv.spyFor===me()?"me":s.srv.spyFor):null/* p2 B1: whom she spies for (me = bought by me) */,lover:null,af:{},kn:1,imp:"hảo hữu chơi cùng",org:"hảo hữu chơi cùng"}}
 function pullFriend(){T("pull");const out=[];for(let i=rivals.length-1;i>=0;i--)if(isF(rivals[i]))out.push([i,rivals.splice(i,1)[0]]);
  for(const v of rivals)if(v.staff)for(let i=v.staff.length-1;i>=0;i--)if(isF(v.staff[i]))out.push([-1,v.staff.splice(i,1)[0],v]);return out}
@@ -125,7 +127,9 @@ function toCanon(){try{CW.hrSync&&CW.hrSync()}catch(e){console.error(e)}const L=
  return {v:1,week:wk(),W:{S:WS,R,rid:Math.max(rid,...R.map(r=>+r.id||0).filter(n=>n<900),0)},P}}
 
 /* ---------- canonical → local game ---------- */
-function fromCanon(C,opt){opt=opt||{};const mp=me(),Pm=C.P&&C.P[CW.seat];if(!Pm)return false;
+/* CW.inFC: inside fromCanon (the guest tripwire, dev/test/coop-thin-trip.js, counts only writes outside it); CW.afterFC: test hook */
+function fromCanon(C,opt){CW.inFC=(CW.inFC||0)+1;try{return fromCanon0(C,opt)}finally{CW.inFC--;if(CW.afterFC)try{CW.afterFC()}catch(e){}}}
+function fromCanon0(C,opt){opt=opt||{};const mp=me(),Pm=C.P&&C.P[CW.seat];if(!Pm)return false;
  const sS=J(Pm.S);Object.assign(sS,J(C.W.S||{}));joinP(sS,Pm.S);if(sS.emp)sS.emp.known=Pm.S.empKnown||{};delete sS.empKnown;delete sS.cnews;
  const R=J(C.W.R||[]).map(r=>{r.rl=r.rl||{};r.ro=r.ro||{};r.gp=r.gp||{};r.ep=r.ep||{};
   r.rel=r.rl[mp]||0;r.oan=r.ro[mp]||0;r.ghen=r.gp[mp]||0;/*evok: co-op sync*/r.ev=r.ep[mp]||0;delete r.rl[mp];delete r.ro[mp];delete r.gp[mp];delete r.ep[mp];
@@ -162,6 +166,8 @@ function attach(C){T("attach");if(!C||!C.W)return;const mp=me();
  S.place="home";S.visit={k:"home",people:homePeople(),talked:false};
  try{if(typeof sidN!=="undefined")sidN=Math.max(sidN,...allServ().map(s=>+s.sid||0).filter(n=>n<900),0)}catch(e){}}
 CW.attach=()=>{const C=CW.dying||CW.base;if(C)attach(C)};
+/* jcoopthin (thin guest, part A) reads the world split and the friend-entry builders from here: one source */
+CW.X={W_KEYS,HOST_ONLY,CM_P,MEN_P,REFF,STAT,mapMe,buildFriend,buildFriendSrv,friendSrv,myBlob,pullFriend,pushFriend,isF,J};
 CW.sendMe=()=>sendMe();CW.friendHome=friendHome;
 
 /* ---------- sending ---------- */
