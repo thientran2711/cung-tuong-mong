@@ -896,3 +896,4 @@
 | AG-ALL-2 2d4 assembler (opus; TIN BÁO walk timing OD L1668 (3) + bạc-on-success family + assemble → SẴN SÀNG KIỂM) | review/ag-all-2 | C-AG | session_01UV1SzjkUqtz6kFBa9EE59V | RUNNING | 17/11 18:02Z |
 | DISPLAY SHELF (Nơi trưng bày) + room xa xỉ + NPCs visit her room + info channels/tố xa xỉ + plant care (OD 18:30Z (A) + OD ~18:00Z s35) — whole job | review/display-shelf | C-AG | expert session_01UV1SzkTnXQm9bJonRJHkXs (sonnet) + builder session_01UV1SzjhM5kL1Mi3jpBfjY6 (opus) | RUNNING | 17/11 18:06Z |
 | mirror-center: makeup mirror face off-centre left (owner bug OD ~18:00Z s35) — whole family of round/mirror face frames | review/mirror-center | MAIN s35 | session_01UV1SzkWgty5ackK6juMHCE | RUNNING | 17/11 18:00Z |
+| toil-looks6 successor: v13 sample fix + AVATAR ID-CARD bake (kit-fx-register) | review/kit-fx-register | MAIN s35 | (opening) | RUNNING | 17/11 18:12Z |
