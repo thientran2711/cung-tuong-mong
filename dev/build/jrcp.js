@@ -61,7 +61,8 @@ function rcpKnows(p,kind,sid){return p===S?rcpKnown()[kind].includes(sid):rcpNpc
 function rcpGrant(kind,sid,how){const L=rcpKnown()[kind];if(!L||L.includes(sid)||!rcpSt(kind,sid))return"";L.push(sid);const s=rcpSt(kind,sid);
  const n=s[2].map(r=>wkrOf(kind,r)).filter(Boolean).map(r=>r.n).join(", ");return `Học được ${rcpStN(kind,sid)}${how?" ("+how+")":""}: ${n}.`}
 /* each sub-style's first recipe is open at bậc 0, so a teacher can open any sub-style from the start; the rest keep their level */
-for(const kind in RCP_ST)for(const s of RCP_ST[kind]){const r=wkrOf(kind,s[2][0]);if(r)r.lv=0}
+/* jreg: also the kinds later modules add (jtds kimchi/phanson/thuchuc/phucthien; it no longer copies this pass) */
+regEach(RCP_ST,kind=>{for(const s of RCP_ST[kind]){const r=wkrOf(kind,s[2][0]);if(r)r.lv=0}},"RCP first recipe");
 /* recipes she can make: art level AND a learnt sub-style */
 (function(){const o0=wkrOpen;wkrOpen=function(p,kind){const L=o0.apply(this,arguments);if(!RCP_ST[kind])return L;return (WKR[kind]||[]).filter(r=>rcpOpenR(p,kind,r))}})();
 /* ---------- art level-up: one new recipe of that art (owner 15/11 ~21:20Z), the same for every person ----------
@@ -86,7 +87,7 @@ function rcpLvTxt(g){const s=rcpStOf(g.kind,g.r.id);return `<span class="g">Họ
 function rcpPK(r){return r==="emp"||r==="th"?r:r&&typeof r==="object"?(r===S?"me":"v"+r.id+(r.name||"")):""}
 function rcpWho(r){return r==="emp"?"Hoàng thượng":r==="th"?"Thái hậu":r&&r.name?`${rkName(r)} ${r.name}`:""}
 function rcpThey(r){return r==="emp"?"bệ hạ":r==="th"?"Thái hậu":"nàng ta"}
-const RCP_PC={};
+const RCP_PC={};lifeStore("RCP_PC",()=>{for(const k in RCP_PC)delete RCP_PC[k]});
 function rcpProf(r){const pk=rcpPK(r);if(!pk)return null;const seed=rcpSeed();const ck=seed+pk;if(RCP_PC[ck])return RCP_PC[ck];const f={},h={};
  for(const kind in RCP_ST){const L=RCP_ST[kind],x=rcpH(seed+":"+pk+":"+kind);f[kind]=L[x%L.length][0];
   if((x>>>8)%100<BAL.rcp.hateP){const O=L.filter(s=>s[0]!==f[kind]);h[kind]=O[(x>>>16)%O.length][0]}}
@@ -172,8 +173,9 @@ PEND.rcpacc=pp=>{const r=rcpTgt(pp.t);if(!r)return null;const acc=pp.acc!=null?b
   t:`<p>${who} dùng ${pp.wn} ta ${big?"dâng":"tặng"} thì nổi mẩn đỏ, khó thở; thái y nói ${rcpThey(r)} vốn kiêng ${A}.</p><p>${acc===r?`${who} cho rằng ta cố ý mưu hại nàng ta`:`${accN?accN+" tâu":"Có kẻ tâu"} rằng ta cố ý mưu hại ${who}`}.</p>${pp.knew?`<p class="past">Ta vốn biết ${rcpThey(r)} kiêng ${A}: khó chối.</p>`:""}`,o:O}};
 /* ---------- books and hand-copied sheets (real items) ---------- */
 function rcpBookK(kind,sid,copy){return `${copy?"wkp":"wkb"}_${kind}_${sid}`}
-for(const kind in RCP_ST)RCP_ST[kind].forEach((s,i)=>{if(!i)return;for(const copy of [0,1]){const k=rcpBookK(kind,s[0],copy);
- IT[k]={n:copy?`Bản chép tay ${RCP_BK[kind].toLowerCase()} «${s[1]}»`:`${RCP_BK[kind]} «${s[1]}»`,kd:"Sách phổ",d:`Đọc: học ${rcpStN(kind,s[0])}`,pr:copy?BAL.rcp.sheetPr:BAL.rcp.bookPr[Math.min(3,i)],rk:0,tg:["rv"],bk:{kind,sid:s[0]}}}});
+/* jreg: books of the kinds later modules add (jtds) too */
+regEach(RCP_ST,kind=>RCP_ST[kind].forEach((s,i)=>{if(!i)return;for(const copy of [0,1]){const k=rcpBookK(kind,s[0],copy);
+ IT[k]={n:copy?`Bản chép tay ${RCP_BK[kind].toLowerCase()} «${s[1]}»`:`${RCP_BK[kind]} «${s[1]}»`,kd:"Sách phổ",d:`Đọc: học ${rcpStN(kind,s[0])}`,pr:copy?BAL.rcp.sheetPr:BAL.rcp.bookPr[Math.min(3,i)],rk:0,tg:["rv"],bk:{kind,sid:s[0]}}}}),"RCP books");
 /* book price follows her bổng (owner balance rule 15/11 20:30Z): the palace teacher's fee + a step per sub-style (BAL.rcp.bookAdd) */
 function rcpBookPr(i){return tchFeeOf(S)+BAL.rcp.bookAdd[Math.min(3,i)]}
 function rcpBookPrices(){if(!S)return;for(const kind in RCP_ST)RCP_ST[kind].forEach((s,i)=>{if(i){const it=IT[rcpBookK(kind,s[0],0)];if(it)it.pr=rcpBookPr(i)}})}

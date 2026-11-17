@@ -30,7 +30,7 @@ const MT={html:'text/html',js:'text/javascript',json:'application/json'};
    if(!a&&mode==='tt'){a=C.find(x=>/^tt0m/.test(x.rtId))||C.find(x=>x.rtId==='tt3')||C.find(x=>x.rtId==='tt2')||C.find(x=>x.rtId==='tt1')||C.find(x=>x.rtId==='ttord')||C.find(x=>PRI.tc.includes(x.rtId)&&T.tc)}
    if(!a&&PRI[mode])for(const id of PRI[mode]){a=C.find(x=>x.rtId===id);if(a)break}
    if(!a&&mode==='tc'&&T.tc&&prepN>=4&&careful!=='0'){}
-   if(!a)return;go(a);for(let k=0;k<20&&Q.length;k++){const m=Q[0];if(m.opts&&m.opts.length){const i=Math.floor(Math.random()*m.opts.length);try{chooseM(i)}catch(e){Q.shift()}}else closeModal()}}};
+   if(!a)return;go(a);for(let k=0;k<20&&Q.length;k++){const m=Q[0];if(m.opts&&m.opts.length){const i=(L=>L.length?L[Math.floor(Math.random()*L.length)]:0)(m.opts.map((c,i)=>c.off?-1:i).filter(i=>i>=0));try{chooseM(i)}catch(e){Q.shift()}}else closeModal()}}};
   /* a quiet-life player does not scheme */
   if(mode==='ad'){const d0=doAct;doAct=function(i,k){if(S&&S.rt&&S.rt.ad&&S.rt.ad.on&&RT_HARM.includes(k)){if(can(2))spend(2);return}return d0.apply(this,arguments)}}/* she stays in instead of scheming (time still passes, so the bot is not stuck) */
   const nb=nextBuoi;nextBuoi=function(){const r=nb.apply(this,arguments);try{window.__rtPol()}catch(e){}return r}},[MODE||'tc',CAREFUL==null?'1':CAREFUL]);

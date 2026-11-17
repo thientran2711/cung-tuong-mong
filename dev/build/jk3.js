@@ -29,7 +29,7 @@ function k3Hud(){try{if(!S)return;const d=$$("me-d");if(d){const t=k3Date();if(d
  k3TopRow();try{window.kitHxRoad&&kitHxRoad()}catch(e){}if(typeof kitStatSet!=="function")return;/* the Đức "!" (lập Hoàng hậu) is a consort goal: never on the cung nữ road or in lãnh cung */const nd=hhNeed(S).duc,hq=S.rank<7&&S.duc<nd&&!(window.kitRoad&&kitRoad()),dw=`Cần Đức ${BAL.hhDuc} mới được lập Hoàng hậu (mẹ Thái tử: ${BAL.hhDucHeir})`;
  [["sac","Sắc"],["tai","Tài"],["tamco","Tâm cơ"],["duc","Đức"]].forEach(([k,l])=>{const c=$$("hud-"+k);if(c)kitStatSet(c,S[k],{title:`${l} ${S[k]}${k==="duc"&&hq?" · "+dw:""} · chạm để xem đủ`,warn:k==="duc"&&hq?dw:""})});
  /* Danh · Sủng · Bạc · Sức: tooltip = name + value + "chạm để xem đủ" (the label line's own text, so the servant road's "Chủ tin" reads right) */
- ["danh","sung","bac","suc"].forEach(k=>{const c=$$("hud-"+k);if(!c)return;const l=T((c.querySelector(".kstl")||c).textContent),v=k3CellKey(k)==="tin"?S.tin:S[k];kitStatSet(c,v,{title:`${l} ${v} · chạm để xem đủ`})})}catch(e){}}
+ ["danh","sung","bac","suc"].forEach(k=>{const c=$$("hud-"+k);if(!c)return;const l=T((c.querySelector(".kstl")||c).textContent),v=k3CellKey(k)==="tin"?S.tin:S[k];kitStatSet(c,hudFmt(k3CellKey(k),v),{title:`${l} ${hudFmt(k3CellKey(k),v)} · chạm để xem đủ`})})}catch(e){}}
 /* the top bar's second row (KIT 31.1): time (buổi, khắc dots, weather, Quẻ tuần) + status chips | her Tư chất. ONE component, every device */
 function k3TopRow(){const hd=document.querySelector("header.hud");let tc=$$("k3tc");if(!tc&&hd){tc=document.createElement("div");tc.id="k3tc";tc.className="k3tc";
  tc.innerHTML=`<span id="k3tt" class="k3tt"></span>`;hd.appendChild(tc);
@@ -151,9 +151,15 @@ window.k3Sheet=k3Sheet;
 /* the sheet: tap on the dim backdrop closes it */
 document.addEventListener("click",e=>{const h=$$("hud2");if(h&&e.target===h&&!h.classList.contains("col"))k3Sheet(false)});
 document.addEventListener("keydown",e=>{if(e.key==="Escape"){const h=$$("hud2");if(h&&!h.classList.contains("col"))k3Sheet(false)}});
-if(typeof renderStage==="function"){const r0=renderStage;renderStage=function(){const r=r0.apply(this,arguments);try{k3Stage()}catch(e){}return r}}
-if(typeof renderHud2==="function"){const r0=renderHud2;renderHud2=function(){const r=r0.apply(this,arguments);try{k3Stage();k3Hud()}catch(e){}return r}}
-if(typeof render==="function"){const r0=render;render=function(){const r=r0.apply(this,arguments);try{k3Hud();k3Stage()}catch(e){}return r}}
+/* oi-render: k3Stage reads the stage size (clientWidth/Height) after writing the side column — it ran 3x per render (renderHud2, renderStage,
+   render), each a forced layout. Inside a render it now runs ONCE when the outermost render returns (jlag2 renderAfter); outside, at once.
+   The name tags (j59lay, inside renderStage) were placed with the gutters of this render's first k3Stage: when the gutters change, they are
+   placed again right after, so the frame shows the same as before. */
+function k3StageR(){(window.renderAfter||((k,f)=>f()))("k3Stage",()=>{const st=$$("stage");const g0=st?st.className+"|"+st.style.cssText:"";k3Stage();
+ try{if(st&&g0!==st.className+"|"+st.style.cssText){if(window.kitFloorFit)kitFloorFit();if(window.j59lay)j59lay()}}catch(e){}})}
+if(typeof renderStage==="function"){const r0=renderStage;renderStage=function(){const r=r0.apply(this,arguments);try{k3StageR()}catch(e){}return r}}
+if(typeof renderHud2==="function"){const r0=renderHud2;renderHud2=function(){const r=r0.apply(this,arguments);try{k3StageR();k3Hud()}catch(e){}return r}}
+if(typeof render==="function"){const r0=render;render=function(){const r=r0.apply(this,arguments);try{k3Hud();k3StageR()}catch(e){}return r}}
 try{const st=$$("stage");if(st&&window.ResizeObserver)new ResizeObserver(()=>{clearTimeout(window.__k3g);window.__k3g=setTimeout(k3Gut,30)}).observe(st)}catch(e){}
 
 /* ---------- CSS: the one layout ---------- */
@@ -385,7 +391,7 @@ function k3CatTabs(){try{const P=$$("panel");if(!P)return;P.querySelectorAll(".c
  const h=kitTabRowHTML(["all"].concat(cats).map(c=>{const [n,t]=cnt(c);return{k:c,label:c==="all"?"Tất cả":name(c),n:`${n}/${t}`,tip:`làm được ${n} trên ${t} việc`}}),cur,"data-kcat");
  if(row.dataset.h!==h){row.innerHTML=h;row.dataset.h=h}row.dataset.key=key;row.dataset.g=gi;
  /* act-dedupe UI: in "Tất cả" the usable cards come first, the greyed ones after (CSS order on the grid; every other tab keeps the dealt order) */
- cards.forEach(b=>{b.hidden=!(cur==="all"||(b.dataset.kart||"khac")===cur);const g=b.disabled||b.classList.contains("kdis");const o=cur==="all"&&g?"1":"";if(b.style.order!==o)b.style.order=o})});kitTabStick()}catch(e){console.error("k3CatTabs",e)}}
+ cards.forEach(b=>{b.hidden=!(cur==="all"||(b.dataset.kart||"khac")===cur);const g=b.disabled||b.classList.contains("kdis");const o=cur==="all"&&g?"1":"";if(b.style.order!==o)b.style.order=o})});(window.renderAfter||((k,g)=>g()))("kitTabStick",kitTabStick)/* oi-render: reads the panel height — at the end of a render */}catch(e){console.error("k3CatTabs",e)}}
 document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest(".kcattabs [data-kcat]");if(!b)return;e.stopPropagation();const row=b.closest(".kcattabs");
  try{localStorage.setItem(row.dataset.key,b.dataset.kcat)}catch(x){}k3CatTabs()},true);
 if(typeof renderPanel==="function"){const r0=renderPanel;renderPanel=function(){const r=r0.apply(this,arguments);try{setTimeout(k3CatTabs,0)}catch(e){}return r}}
@@ -621,7 +627,7 @@ html body .pc.kpwide .kst-chip{max-width:100%;min-width:0;flex-wrap:wrap}
    1) doable now · 2) blocked ONLY by time (wrong buổi / not enough khắc left) · 3) blocked by anything else (greyed as before);
    inside a group the source order stays. The order is decided once per list per buổi and then kept, so a re-render after an act
    (the act turns "đã làm") never makes the list jump while she reads. */
-const KAS_ORD=new Map(),KAS_TRY=new WeakMap();const kasT=s=>String(s||"").replace(/\s+/g," ").trim();
+const KAS_ORD=new Map(),KAS_TRY=new WeakMap();lifeStore("KAS_ORD card-order memo (keys = card text of that life)",()=>KAS_ORD.clear());const kasT=s=>String(s||"").replace(/\s+/g," ").trim();
 function kitActGroup(b){if(!b.disabled&&!b.classList.contains("kdis"))return 0;
  const x=[...b.querySelectorAll(".kr-why .kchip, .kr-why .kwhy")].map(e=>kasT(e.textContent)).filter(t=>/^✗/.test(t));
  if(x.length&&x.every(t=>/buổi|khắc/i.test(t)&&!/chưa làm|đã làm/i.test(t)))return 1;return 2}

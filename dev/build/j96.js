@@ -57,7 +57,7 @@ function loc96(){const m=man96();if(!m)return"vuon";try{if(typeof rosterWhere===
 function gate96(v,act){try{if(typeof motiveGate==="function")return motiveGate(v,S,act)!==false;if(typeof motiveOk==="function")return motiveOk(v,S,act)!==false}catch(e){}
  return !!(v&&(rel(v,S)<0||(v.ghen||0)>=55||oan(v,S)>=15))}
 function foe96(A){const t=T96();if(t&&t.foe!=null){const v=RV(t.foe);if(rvOk67(v)&&gate96(v,"accuse")){A.act.v=v.id;return v}}const v=rv67(A,"v");if(v&&gate96(v,"accuse"))return v;
- const used=Object.values(A.act||{});const L=liveRivals(false).filter(x=>!used.includes(x.id)&&gate96(x,"accuse"));if(!L.length)return null;const w=L.sort((a,b)=>(rel(a,S)-(a.ghen||0)/2)-(rel(b,S)-(b.ghen||0)/2))[0];A.act.v=w.id;if(t)t.foe=w.id;return w}
+ const used=Object.values(A.act||{});const L=liveRivals(false).filter(x=>!used.includes(x.id)&&gate96(x,"accuse"));if(!L.length)return null;const w=mindPickBy(L,x=>Math.max(BAL.mind.pick.j96.floor,BAL.mind.pick.j96.base+(x.ghen||0)/BAL.mind.pick.j96.ghen-rel(x,S))*mindW(x,"frame"),null);/* npc-mind: was ARGMIN */A.act.v=w.id;if(t)t.foe=w.id;return w}
 /* ---------- the man: a real NPC of S.men ---------- */
 function mkMan96(k){try{menInit()}catch(e){}if(!S.men)return null;const V=TM96V[k];const used=new Set(S.men.map(m=>m.name.split(" ").slice(-2).join(" ")));
  let nm="";for(let i=0;i<20;i++){const s=pick(V.sur||SURN.filter(x=>x.indexOf(" ")<0)),g=pick(MALEN);nm=`${s} ${g}`;if(!used.has(g))break}
@@ -237,7 +237,7 @@ function A96has(f){const t=T96();return !!(t&&t.f&&t.f[f])}
 /* two-way, month by month: his heart follows hers; a man in love reaches out by himself (true news, real evidence) */
 function tm96Month(){const t=T96(),m=man96();if(!t||!m||!m.alive||S.dead||t.endC)return"";let ev="";
  if((t.h||0)<35&&m.tinh>20&&roll(30))m.tinh=cl(m.tinh-1,0,100);
- if(m.trait==="tham vọng"&&m.tinh>30&&roll(8))m.tinh=cl(m.tinh-2,0,100);
+ if(hasT(m,"Tham vọng")&&m.tinh>30&&roll(8))m.tinh=cl(m.tinh-2,0,100);
  if(m.tinh>=72&&(t.h||0)>=50&&roll(4)){adj96({lt:1});ev+=`Có người lén đưa đến cho ngươi một mảnh giấy của ${m.name}: chàng vẫn nhớ. `}
  if(t.sus>0&&roll(25))t.sus=Math.max(0,t.sus-1);
  return ev}

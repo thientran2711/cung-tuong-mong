@@ -33,7 +33,7 @@ function doc(){return S&&S.court&&S.court.ty||null}
 function off(){return !S||S.dead||S.out||(typeof isSrv==="function"&&isSrv())}
 function rk(){try{return Math.max(0,Math.min(7,typeof rkOf==="function"?rkOf(S):S.rank|0))}catch(e){return 0}}
 function cost(){return T().cost[rk()]}
-function docName(){const c=doc();return c&&c.name?c.name:"Thái y"}
+function docName(){const c=doc();if(c&&c.name){try{if(typeof k61Named==="function"&&!k61Named(c))return"Thái y"}catch(e){}return c.name}return"Thái y"}/* j61 name rule: a physician she has not learnt the name of is his title alone, never "thái y ???" (the "Mạnh thái y ???" side flag) */
 function rv(v){return v&&v!==S&&v.alive!==false&&!v.out&&!v.coop}
 /* ---------- trust and bribes (one rule: her, NPCs, treat()) ---------- */
 function bribers(p){const c=doc();if(!c||!c.af)return[];return liveRivals(true).filter(v=>rv(v)&&v!==p&&(c.af[v.id]||0)>=T().bribeAf&&(()=>{try{return hostility(v,p)>=T().bribeHost}catch(e){return false}})()).sort((a,b)=>(c.af[b.id]||0)-(c.af[a.id]||0))}
@@ -48,7 +48,8 @@ const TW={xa:"dấu xạ hương",chi:"dấu chì ngấm dần",meo:"khí suyễ
 const TWHERE={xa:"túi thơm, hương trầm",chi:"son phấn",meo:"đệm gấm",bua:"túi thơm, đệm gấm"};
 const PW={tra:"dấu độc ngấm chậm, như từ trà uống hằng ngày",son:"dấu chì, chu sa, như từ son phấn",huong:"dấu hương độc, như từ lò trầm trong phòng",ty:"dấu thuốc lạ trong thang an thai",hh:"dấu hồng hoa trong canh bổ",tsv:"dấu thuốc lạ trong thang an thai",xh:"dấu xạ hương"};
 function sucWord(s){return s>=70?"khí huyết dồi dào":s>=50?"khí huyết điều hòa":s>=30?"khí huyết hơi hư nhược":"khí huyết rất suy nhược"}
-function verdict(lie){const i=illOf(S);const s=S.suc||0;if(i&&!lie)return["Có bệnh","r"];if(s<40||(i&&lie))return["Hơi yếu","n"];return["Khỏe mạnh","g"]}
+/* Sức khỏe (jkh, spec 4.6): ≥ thyLo Khỏe mạnh · thyBad..thyLo Hơi yếu · < thyBad or ill Có bệnh; a bribed physician softens one step */
+function verdict(lie){const i=illOf(S);const s=S.suc||0;const K=typeof khB==="function"?khB():null,kh=K?khOf(S):100;const bad=i||(K&&kh<K.thyBad);if(bad&&!lie)return["Có bệnh","r"];if(s<40||(bad&&lie)||(K&&kh<K.thyLo))return["Hơi yếu","n"];return["Khỏe mạnh","g"]}
 function wksPreg(){return S.preg&&S.pregUnk&&S.pregWk!=null?wk()-S.pregWk:-1}
 function lateHint(){try{return typeof cycleLate==="function"&&cycleLate(S)}catch(e){return false}}
 /* the j75 card finds it (j75 owns the card): bring its day to now */
@@ -120,7 +121,7 @@ function req(road,paid){const self=road==="self";if(!paid){if(why(road))return""
   if(S.preg&&S.hidden&&roll(T().seenPreg)){S.hidden=false;noteAdd(v.id,`thấy ngươi sang Thái y viện, đoán ngươi đã có thai`);P.push(`<p class="r">Lúc ra về, ngươi thấy người của ${v.name} đứng nhìn theo.</p>`)}}}
  log(`Mời thái y bắt mạch${self?" (sang Thái y viện)":""}: ${vd}${found?`, thấy ${found} điều đáng ngại`:""}.`);
  Q.push({t:"Thái y bắt mạch",kind:"notice",who:pDoc(),h:P.join("")});try{if($("modal").hidden)showModal()}catch(e){}try{render()}catch(e){}return ""}
-window.thyReq=req;window.thyWhy=why;window.thyCost=cost;
+window.thyReq=req;window.thyWhy=why;window.thyCost=cost;window.thyVerdict=verdict;
 /* deck cards (Hành sự): both roads, side by side, always */
 (function(){if(typeof illCards!=="function")return;const c0=illCards;illCards=function(){const A=c0.apply(this,arguments);try{if(!off()){
   A.push({n:"Mời thái y bắt mạch",t:`Mời ${docName()} đến tận cung xem mạch.`,c:{bac:-cost()},o:100,k:T().khPay,w:{},dom:"Sức khỏe",lock:!!why("pay"),x:xLine("pay"),go:()=>req("pay",true)});
@@ -159,7 +160,7 @@ function npcMonth(){let ev="";const c=doc();if(!c)return ev;c.af=c.af||{};
  for(const v of liveRivals(true)){if(!rv(v)||v.confined)continue;
   /* a hostile rival buys the physician (aims: her, or a rival who carries a child / holds the favour) */
   if((v.bac||0)>=T().npcBribeBac*2){const tg=[S].concat(liveRivals(true).filter(x=>rv(x)&&x!==v)).filter(t=>{try{return hostility(v,t)>=T().bribeHost&&(t.preg||(t===S?S.sung:t.sung||0)>=40)}catch(e){return false}});
-   const ev2=/Hiểm độc|Tham vọng/.test(`${v.trait||""} ${v.trait2||""}`)?6:0;if(tg.length&&roll(T().npcBribe+ev2)){ap(v,{bac:-T().npcBribeBac});c.af[v.id]=(c.af[v.id]||0)+T().npcBribeAf;try{newsAdd(v,"ty",`Có người thấy ${v.name} cho mời thái y sang cung trò chuyện rất lâu`)}catch(e){}}}
+   const ev2=nv(v,"thyEv");if(tg.length&&roll(T().npcBribe+ev2)){ap(v,{bac:-T().npcBribeBac});c.af[v.id]=(c.af[v.id]||0)+T().npcBribeAf;try{newsAdd(v,"ty",`Có người thấy ${v.name} cho mời thái y sang cung trò chuyện rất lâu`)}catch(e){}}}
   /* her monthly visit finds a hidden harm in her */
   const tl=tainted(v);const bad=bribedBy(v);if(tl.length&&!bad&&roll(T().npcFind+(v.doctor?T().npcFindDoc:0))){const e=pick(tl);v.inv.splice(v.inv.indexOf(e),1);const by=byKey(e.by);
    if(by&&by!==v){evA(v,by,1);try{oanAdd(v,by,8)}catch(x){}}try{newsAdd(v,"ty",`Thái y bắt mạch cho ${v.name}, thấy dấu ${TAINT[e.t].n}; món đồ ấy bị đem đi`,by===S)}catch(x){}

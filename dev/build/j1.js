@@ -1,3 +1,8 @@
+/* ONE per-life registry (review/newlife-reset, owner bug 17/11): S and rivals are rebuilt by start() / deser(); every OTHER store that belongs to one
+   life (module-level lets, window.* holding people, timers, scenes) registers itself here: lifeStore(name, reset). j93 kmReset runs every reset on
+   start() (new game, Luân hồi rebirth, co-op new life), on a slot load and on the title screen. LIFE_STORES = the names (dev/test/newlife-leak.js
+   checks no store outside this list still holds the old life). Static caches of art / words (KAK_C, KIT_TONE_CACHE, PETC_CACHE…) need no entry. */
+const LIFE_REG=[],LIFE_STORES=window.LIFE_STORES=[];function lifeStore(n,f){LIFE_REG.push([n,f]);LIFE_STORES.push(n)}lifeStore("__kitLastEvArt",()=>{window.__kitLastEvArt=null});
 const RANKS=[
  {n:"Đáp ứng",s:0,d:0},{n:"Thường tại",s:15,d:10},{n:"Quý nhân",s:25,d:20},{n:"Tần",s:38,d:30},
  {n:"Phi",s:52,d:42},{n:"Quý phi",s:66,d:55},{n:"Hoàng quý phi",s:78,d:68},{n:"Hoàng hậu",s:85,d:78}];
@@ -24,7 +29,14 @@ const ORIGINS=[
 const SURN=["Thẩm","Tô","Lâm","Diệp","Ôn","Hạ","Mộ Dung","Bạch","Liễu","Cố","Tạ","Vân","Chu","Trịnh","Phùng","Lục","Tống","Hàn","Lý","Đường","Thượng Quan","Âu Dương","Hoa","Kiều","Tần","Nhan","Mạnh","Từ","Khương","Đoan Mộc"];
 const GIVEN=["Mi Trang","Uyển Nhi","Thanh Ca","Lan Chi","Như Ý","Nguyệt Hoa","Tuyết Dao","Cẩm Tú","Ngọc Hành","Tịnh Nghi","Lăng Vân","Thục Nghi","Diễm Thu","Hàm Hương","Bích Dao","Linh Lung","Yên Nhiên","Tố Tâm","Mạn Châu","Khinh Vũ","Tử Yên","Vân Thường","Nhược Lan","Hải Đường","Thanh Liên","Mộng Điệp","Ngưng Sương","Tú Uyển","Phương Hoa","Họa Mi","Vân Khanh","Bạch Lộ","Kiều Nguyệt","Thủy Tiên","Hồng Diệp","Tịch Nhan","Lạc Anh","Băng Tâm","Ngọc Dao","Dao Cầm"];
 const MALEN=["Văn Uyên","Tử Khiêm","Minh Viễn","Thừa Chí","Lục Trường","Tiêu Viễn","Hàn Phong","Lăng Vân","Kính Chi","Bá Ngôn"];
-const TRAITS=[["Hiểm độc",80],["Kiêu ngạo",55],["Hiền lành",15],["Đa nghi",45],["Tham vọng",65],["Nhu mì",25]];
+/* TRAITS = figure LOOK keys only (FIGURES.json trait tags via TRK) + old malice; nết come from the ONE pool BAL.net (jnet.js) */
+const TRAITS=[["Xảo quyệt",80],["Kiêu ngạo",55],["Ân cần",15],["Kín đáo",45],["Tham vọng",65],["Khiêm nhường",25]];
+/* ONE trait-label map (owner 17/11 05:35Z): "Hiểm độc" renamed "Xảo quyệt" everywhere the player reads it. Old saves/codes store the old word: deser() runs trMigrate() so they load as the new label (behaviour keys unchanged). Add future renames HERE only. */
+const TRAIT_OLD={"Hiểm độc":"Xảo quyệt"};
+function traitLabel(t){return TRAIT_OLD[t]||t}
+function trMigrate(o){const OLD=Object.keys(TRAIT_OLD);const fx=s=>{for(const k of OLD)if(s.indexOf(k)>=0)s=s.split(k).join(TRAIT_OLD[k]);return s};
+ const w=(x,d)=>{if(!x||typeof x!=="object"||d>40)return;if(Array.isArray(x)){for(let i=0;i<x.length;i++){const v=x[i];if(typeof v==="string")x[i]=fx(v);else w(v,d+1)}return}
+  for(const k0 of Object.keys(x)){let k=k0;if(TRAIT_OLD[k0]&&!(TRAIT_OLD[k0] in x)){x[TRAIT_OLD[k0]]=x[k0];delete x[k0];k=TRAIT_OLD[k0]}const v=x[k];if(typeof v==="string"){const n=fx(v);if(n!==v)x[k]=n}else w(v,d+1)}};w(o,0);return o}
 const SEASON=["Xuân","Xuân","Xuân","Hạ","Hạ","Hạ","Thu","Thu","Thu","Đông","Đông","Đông"];
 const TUAN=["thượng tuần","trung tuần","hạ tuần"];
 const MAIDS=["Tiểu Đào","Bích Ngọc","Xuân Hạnh","Thu Cúc","Hồng Liên","Tiểu Thúy","Lục Châu","Hạ Vân","Tố Cầm","Ngọc Lan"];
@@ -81,12 +93,14 @@ function roll(o){return Math.random()*100<o}
 function has(t){return S.emp.traits.includes(t)}
 function mm(){return [10,0,-8,-15][S.emp.mood]}
 function sg(n){if(!n)return 0;let f=has("nongnay")?1.3:1;if(n>0&&has("lanhlung"))f*=.7;const r=Math.round(n*f);return n>0?Math.max(1,r):r}
-function fmt(o){return Object.entries(o||{}).filter(([k,v])=>NAMES[k]&&v).map(([k,v])=>{if(k==="sung")v=sg(v);return `<span class="${v>=0?"g":"r"}">${NAMES[k]} ${v>0?"+":""}${v}</span>`}).join(" · ")}
+/* KLOW: numbers where a FALL is good for her (Áp lực hôn sự / Nợ nhà / Phe chủ chiến, Lời đồn) — coloured by meaning (OD:L908), here and in the result card (j63) */
+const KLOW={kap:1,kld:1};function kGood(k,v){return KLOW[k]?v<=0:v>=0}
+function fmt(o){return Object.entries(o||{}).filter(([k,v])=>NAMES[k]&&v).map(([k,v])=>{if(k==="sung")v=sg(v);return `<span class="${kGood(k,v)?"g":"r"}">${NAMES[k]} ${v>0?"+":""}${v}</span>`}).join(" · ")}
 function apply(o){const pops=[];
   for(const k in o){let v=o[k];if(!v)continue;
     if(k==="maid"){S.maid.loyal=cl(S.maid.loyal+v,0,100);pops.push([k,v]);continue}
     if(k==="sung")v=sg(v);S[k]=(S[k]||0)+v;if(NAMES[k])pops.push([k,v])}
-  for(const k of ["sung","danh","suc","sac","tai","tamco","duc"])S[k]=cl(S[k],0,100);
+  for(const k of ["sung","danh","suc","sac","tai","tamco","duc"])S[k]=cl(S[k],0,100);S.suc=Math.min(S.suc,sucCap(S));
   S.th=cl(S.th,-100,100);S.hh=cl(S.hh,-100,100);S.bac=Math.max(0,S.bac);S.mat=cl(S.mat,0,10);
   if(!quiet)pops.forEach(([k,v],i)=>popNum(k,v,i))}
 function popNum(k,v,i){if(typeof kitStatFx==="function")return kitStatFx([{k,dv:v}],{src:"apply"});/* fallback before jstatfx is loaded */

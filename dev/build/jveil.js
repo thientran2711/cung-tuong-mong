@@ -40,14 +40,24 @@ function vlSrc(k,p){const t=vlTier({k},p||S);return `img/veil-${t||"t5"}.png`}
 (function(){if(typeof kitItemSrc!=="function")return;const k0=kitItemSrc;kitItemSrc=function(k,fb){if(vlIsK(k))return vlSrc(k);return k0.apply(this,arguments)}})();
 
 /* ---------- worn veil <-> p.scar.veil; old saves ---------- */
-function vlMig(p){try{if(!p||!p.scar)return;if(p.scar.veil&&!p.vl){const P=Math.min(8,wdPOf(p));p.vl={k:vlKey(P,0),src:"cu",d:typeof wdWhen==="function"?wdWhen():""};
+/* vlFix (review/newlife-reset, owner bug 17/11): p.vl is ONLY a worn veil entry. The ONE migration of the old voice memory (S.vl -> S.vmem, keyless
+   chest pieces dropped) is j8 itClean (it-key-guard, kept by main s29 17/11). vlFix only adds what itClean does not: the false line 'Vết thương trên mặt
+   đã lành, ngươi tháo mạng che' that bug logged leaves her log. It runs BEFORE itClean (wrapper below) while the old memory is still visible. */
+function vlMemLike(e){if(!e||typeof e!=="object"||Array.isArray(e)||e.k!=null)return false;const V=Object.values(e);return V.length>0&&V.every(x=>x&&typeof x==="object"&&!Array.isArray(x))||!V.length}
+function vlFix(p){if(!p||p!==S)return;try{if((p.vl!=null&&!vlIs(p.vl))||(Array.isArray(p.inv)&&p.inv.some(vlMemLike)))vlScrubLog()}catch(e){}}
+/* the false healing line of that bug: gone from her log when she never owned a veil (a real healing always follows a veil she wore) */
+function vlScrubLog(){try{if(!Array.isArray(S.logs)||vlIs(S.vl)||(S.inv||[]).some(vlIs))return;S.logs=S.logs.filter(l=>!/Vết thương trên mặt đã lành, ngươi tháo mạng che/.test(String(l)))}catch(e){}}
+function vlMig(p){try{vlFix(p);if(!p||!p.scar)return;if(p.scar.veil&&!p.vl){const P=Math.min(8,wdPOf(p));p.vl={k:vlKey(P,0),src:"cu",d:typeof wdWhen==="function"?wdWhen():""};
   if(p===S){S.wdk=S.wdk||{};S.wdk[p.vl.k]=1}else{p.wdk=p.wdk||{};p.wdk[p.vl.k]=1}}p.scar.veil=p.vl?1:0}catch(e){}}
-function vlSync(p){if(!p)return;if(p.scar)vlMig(p);if(!vlNeed(p)&&p.vl){p.inv=p.inv||[];p.inv.push(p.vl);p.vl=null;
+function vlSync(p){if(!p)return;vlFix(p);if(p.scar)vlMig(p);if(!vlNeed(p)&&vlIs(p.vl)){/* only a real veil comes off (never a foreign object in the veil slot) */p.inv=p.inv||[];p.inv.push(p.vl);p.vl=null;
   if(p===S)try{log("Vết thương trên mặt đã lành, ngươi tháo mạng che, cất vào rương.")}catch(e){}}}
 function vlPeople(){const L=[S];try{for(const v of rivals)if(v&&v!==S)L.push(v)}catch(e){}return L}
+/* r1 (merge with main it-key-guard): j8 itClean (inside normAll / co-op) also moves an old voice memory out of S.vl; vlFix runs FIRST so it still sees
+   the memory and removes the false healing line of that bug (after itClean S.vl is already null and the signal is gone) */
+(function(){if(typeof itClean!=="function")return;const c0=itClean;itClean=function(){try{for(const p of vlPeople())vlFix(p)}catch(e){}return c0.apply(this,arguments)}})();
 (function(){const n0=normAll;normAll=function(){const r=n0.apply(this,arguments);try{for(const p of vlPeople())vlMig(p)}catch(e){}return r}})();
 const VL_TIER0=KIT_VEIL.tierOf.bind(KIT_VEIL);
-KIT_VEIL.on=function(p){try{if(!p||!vlNeed(p))return false;vlMig(p);return !!p.vl}catch(e){return false}};
+KIT_VEIL.on=function(p){try{if(!p||!vlNeed(p))return false;vlMig(p);return vlIs(p.vl)}catch(e){return false}};
 KIT_VEIL.tierOf=function(p){try{if(p&&p.vl&&vlNeed(p))return vlTier(p.vl,p)||VL_TIER0(p)}catch(e){}return VL_TIER0(p)};
 /* the grade decides how much of the wound the veil hides (Thường = the old 2/3) */
 (function(){const e0=effSac;effSac=function(p){let r=e0.apply(this,arguments);try{if(p&&p.scar&&p.scar.veil&&p.vl){const d=p.scar.d;r=cl(r+Math.round(d*2/3)-Math.round(d*VL.cover[vlG(p.vl)]),0,130)}}catch(e){}return r}})();
@@ -55,7 +65,7 @@ KIT_VEIL.tierOf=function(p){try{if(p&&p.vl&&vlNeed(p))return vlTier(p.vl,p)||VL_
 
 /* ---------- wear / take off (same function for everyone) ---------- */
 function vlWear(p,ix){const e=p&&p.inv&&p.inv[ix];if(!vlIs(e)||e.h||!vlNeed(p))return"";p.inv.splice(ix,1);if(e.from){e.src=e.src||e.from;delete e.from}if(p.vl){p.inv.push(p.vl)}p.vl=e;if(p.scar)p.scar.veil=1;return itm(e.k).n}
-function vlOff(p){if(!p||!p.vl)return"";const n=itm(p.vl.k).n;p.inv=p.inv||[];p.inv.push(p.vl);p.vl=null;if(p.scar)p.scar.veil=0;return n}
+function vlOff(p){if(!p||!vlIs(p.vl))return"";const n=itm(p.vl.k).n;p.inv=p.inv||[];p.inv.push(p.vl);p.vl=null;if(p.scar)p.scar.veil=0;return n}
 function vlChest(p){return (p.inv||[]).map((e,ix)=>({e,ix})).filter(x=>vlIs(x.e)&&!x.e.h)}
 /* useItem on a veil = wear it (never consumed) */
 (function(){const u0=useItem;useItem=function(p,ix,tgt){const e=p&&p.inv&&p.inv[ix];if(vlIs(e)){const n=vlWear(p,ix);return n?`${NMc(p)} đeo ${n}. `:""}return u0.apply(this,arguments)}})();
@@ -104,7 +114,7 @@ function vlBuyNvp(p,k){const pr=itm(k).pr;if((p.bac||0)<pr)return"";ap(p,{bac:-p
 function vlOutList(p){const P=Math.min(8,wdPOf(p));const L=[];const seen={};for(const d of [-1,0,1,2])for(const g of [0,1]){const q=cl(P+d,0,8);const k=vlKey(q,g);if(!seen[k]){seen[k]=1;L.push(k)}}return L.slice(0,6)}
 function vlOutPrice(k){return Math.max(1,Math.round(itm(k).pr*VL.outX))}
 function vlAgent(p){try{const a=typeof wdAgent==="function"?wdAgent(p):null;if(a)return a}catch(e){}return p.maid&&(p.maid.loyal||0)>=40?p.maid:null}
-function vlLeak(p,ag){return cl(VL.outRisk+(ag&&ag.tr==="chuyen"?15:0)-(ag&&(ag.loyal||0)>=75?5:0),2,60)}
+function vlLeak(p,ag){return cl(VL.outRisk+(nv(ag,"agentLeak"))-(ag&&(ag.loyal||0)>=75?5:0),2,60)}
 function vlBuyOut(p,k){const ag=vlAgent(p);const pr=vlOutPrice(k);if(!ag||(p.bac||0)<pr)return"";ap(p,{bac:-pr});vlGain(p,k,{from:"ngoai",giver:""});
  let r=`${NMc(p)} sai ${ag.name} lén mua ${itm(k).n} ngoài cung: Bạc -${pr}. `;
  if(roll(vlLeak(p,ag))){ap(p,{danh:-VL.outDanh});r+=`<span class="r">Chuyện lộ ra: cả cung xì xào ${p===S?"ngươi":p.name} lén mua đồ ngoài cung.</span> Danh -${VL.outDanh}. `;if(p!==S)try{newsAdd(p,"wd",`${NMc(p)} sai người lén mua mạng che mặt ngoài cung.`)}catch(x){}}
@@ -198,4 +208,4 @@ function vlFriendGift(t){if(!t||!vlNeed(t)||t.vl||vlChest(t).length)return;const
 /* the Emperor's bestowal on a scarred, unveiled consort may add a veil of her phẩm (Trân phẩm) */
 (function(){if(typeof bestow!=="function")return;const b0=bestow;bestow=function(p,why){const r=b0.apply(this,arguments);try{if(p&&vlNeed(p)&&!p.vl&&!vlChest(p).length&&roll(VL.empP)){const k=vlKey(Math.min(8,wdPOf(p)),2);vlGain(p,k,{from:"emp",giver:"Hoàng thượng",known:"Hoàng thượng ban theo phẩm"});
   if(p===S){Q.push({t:"Thánh thượng ban thưởng",who:pEmp(),h:`<p style="text-align:center">${kitItem({src:vlSrc(k),name:itm(k).n,grade:2,size:"lg"})}</p><p>Hoàng thượng thương ngươi bị thương trên mặt, ban thêm <b>${itm(k).n}</b> (Trân phẩm).</p>`,btn:"Tạ ơn"});log(`Được Hoàng thượng ban ${itm(k).n}.`)}}}catch(e){console.error(e)}return r}})();
-window.vlWear=vlWear;window.vlOff=vlOff;window.vlCraft=vlCraft;window.vlBuyNvp=vlBuyNvp;window.vlBuyOut=vlBuyOut;window.vlAsk=vlAsk;window.VL=VL;
+window.vlWear=vlWear;window.vlOff=vlOff;window.vlFix=vlFix;window.vlCraft=vlCraft;window.vlBuyNvp=vlBuyNvp;window.vlBuyOut=vlBuyOut;window.vlAsk=vlAsk;window.VL=VL;

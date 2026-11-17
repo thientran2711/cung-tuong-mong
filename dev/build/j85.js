@@ -71,7 +71,8 @@ function ducLow(s){return String(s||"").replace(/<[^>]+>/g,"").replace(/^./,c=>c
 (function(){const a0=ap;ap=function(p,o){const d=o&&o.duc;if(p===S||!d||!p)return a0.apply(this,arguments);const b=p.duc||0;const r=a0.apply(this,arguments);try{const dd=(p.duc||0)-b;if(dd)deedRec(p,dd,DEED85||"việc khuất tất")}catch(e){}return r}})();
 function ducAdd(p,n,why){if(!p||!n)return 0;return withDeed(why||"việc vừa làm",()=>{if(p===S){apply({duc:n})}else ap(p,{duc:n});return n})}
 /* every rulebook act (also when another module calls ACT[k].f directly) names itself */
-(function(){for(const k in ACT){const A2=ACT[k];if(!A2||A2.__j85||typeof A2.f!=="function")continue;const f0=A2.f;A2.f=function(a,t){return withDeed(A2.n,()=>f0.apply(this,arguments))};A2.__j85=1}})();
+/* jreg: acts added by later modules (giahoa, tat, phatquy, laydo, spyk…) name themselves too */
+regEach(ACT,k=>{const A2=ACT[k];if(!A2||A2.__j85||typeof A2.f!=="function")return;const f0=A2.f;A2.f=function(a,t){return withDeed(A2.n,()=>f0.apply(this,arguments))};A2.__j85=1},"ACT deed");
 (function(){const r0=runOpt;runOpt=function(a){return withDeed(a&&a.n,()=>r0.apply(this,arguments))}})();
 (function(){const c0=chooseM;chooseM=function(i){const m=Q[0],c=m&&m.opts&&m.opts[i];return withDeed(c?c.n:null,()=>c0.apply(this,arguments))}})();
 /* ---- what she knows: Đức (true nature) only once she knows the person; Danh is what the palace says ---- */
@@ -127,8 +128,8 @@ document.addEventListener("click",e=>{const b=e.target.closest("[data-vlearn],[d
 function addArtP(p,k,g){if(p===S)return addArt(k,g);vNorm(p);const a=ARTS.find(x=>x.k===k);if(!a)return;if((k==="theu"||k==="nau")&&virtueBonus(p,"cong").prog)g+=1;p.artp[k]+=g;
  while(p.arts[k]<5&&p.artp[k]>=p.arts[k]+2){p.artp[k]-=p.arts[k]+2;p.arts[k]++;const l=p.arts[k];const f={[a.st]:2};if(l===3)f.danh=3;if(l===5)f.danh=6;const b=(ARTB85[k]||{})[l];if(b)for(const x in b)f[x]=(f[x]||0)+b[x];ap(p,f)}
  if(p.arts[k]>=5)p.artp[k]=0}
-function npcStudy(v){if(!v||!v.alive||v.out||!roll(40))return;vNorm(v);const T=traitsOf(v)||[];const W=[];
- const w=k=>{let x=1;if(/Hiền lành|Nhu mì/.test(T.join()))x*=(k==="hanh"?3:k==="dung"||k==="cong"?2:1);if(T.includes("Hiểm độc"))x*=(k==="ky"?3:k==="ngon"?2:k==="hanh"?.3:1);if(T.includes("Kiêu ngạo"))x*=(k==="vu"||k==="dung"?2:1);return x};
+function npcStudy(v){if(!v||!v.alive||v.out||!roll(40*(1+BAL.net.k.study*netQ(v,"study"))))return;vNorm(v);const T=traitsOf(v)||[];const W=[];
+ const w=k=>{let x=1;if(/Ân cần|Khiêm nhường/.test(T.join()))x*=(k==="hanh"?3:k==="dung"||k==="cong"?2:1);if(T.includes("Xảo quyệt"))x*=(k==="ky"?3:k==="ngon"?2:k==="hanh"?.3:1);if(T.includes("Kiêu ngạo"))x*=(k==="vu"||k==="dung"?2:1);return x};
  ARTS.forEach(a=>{if(v.arts[a.k]<5)W.push(["a",a.k,w(a.k)])});VIR.forEach(x=>{if(v.vir[x.k]<5)W.push(["v",x.k,w(x.k)])});if(!W.length)return;
  let r=Math.random()*W.reduce((s,x)=>s+x[2],0),i=0;while(r>W[i][2]&&i<W.length-1){r-=W[i][2];i++}const [t,k]=W[i];const l=t==="a"?v.arts[k]:v.vir[k],cost=t==="a"?(typeof tchFeeOf==="function"?tchFeeOf(v):5+l*5):virCost(l,v);
  let g=1;if((v.bac||0)>=cost+40&&roll(50)){ap(v,{bac:-cost});g=2+R(2)}if(t==="a")addArtP(v,k,g);else addVir(v,k,g)}
