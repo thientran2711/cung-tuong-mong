@@ -68,13 +68,21 @@ fs.mkdirSync(DIR,{recursive:true});let fail=0;const ck=(n,c,x)=>{console.log((c?
   if(good){const n=Math.round((pk.ideal-pk.ang)/3);for(let i=0;i<Math.abs(n);i++){if(TOUCH){const bb=await p.$eval(n>0?'#hdr':'#hdl',e=>{const r=e.getBoundingClientRect();return[r.x+r.width/2,r.y+r.height/2]});await p.touchscreen.tap(bb[0],bb[1])}else await p.click(n>0?'#hdr':'#hdl')}}
   const pk2=await p.evaluate(()=>HD.peek());await p.screenshot({path:`${DIR}/hd-${tag}-2-place${good?'':'-miss'}.jpg`,quality:70});
   if(TOUCH){const bb=await p.$eval('#hdok',e=>{const r=e.getBoundingClientRect();return[r.x+r.width/2,r.y+r.height/2]});await p.touchscreen.tap(bb[0],bb[1])}else await p.click('#hdok');
-  await p.waitForFunction(()=>S.toilette&&S.toilette.wk===toilWk(),null,{timeout:30000});await p.waitForTimeout(1500);
+  await p.waitForFunction(()=>S.toilette&&S.toilette.wk===toilWk(),null,{timeout:30000});const snap=await p.evaluate(()=>HD.peek());await p.waitForTimeout(1500);
   await p.screenshot({path:`${DIR}/hd-${tag}-3-result${good?'':'-miss'}.jpg`,quality:70});
     for(let i=0;i<6&&await p.$('.ktrv');i++){if(await p.$('.ktrv-ov>.kmend'))await p.click('.ktrv-ov>.kmend').catch(()=>{});else await p.evaluate(()=>{const o=document.querySelector('.ktrv-ov');o&&o.click()});await p.waitForTimeout(900)}
   await p.waitForSelector('#toildone',{timeout:30000}).catch(()=>{});await p.screenshot({path:`${DIR}/hd-${tag}-3b-rows${good?'':'-miss'}.jpg`,quality:70});
   const res=await p.evaluate(()=>({rec:S.toilette,row:[...document.querySelectorAll('#kg82 .kgr td,#kg82 .kgr .krow,#kg82 .kgr')].map(e=>e.textContent).join(' ').includes('Dán hoa điền'),lux:luxParts(S)}));
   try{await require('./lib/roulette').clearMoments(p)}catch(e){}const d=await p.$('#toildone');if(d)await d.click();await p.waitForTimeout(500);
-  return{pick,pk,pk2,res}}
+  /* r2: every view draws it at the anchor (kitFxLayers layer), straight or with the fixed vụng tilt */
+  await p.evaluate(()=>{try{render()}catch(e){}});await p.waitForFunction(()=>[...document.querySelectorAll('img[data-hdl]')].some(i=>/^data:image\/png/.test(i.src)),null,{timeout:60000}).catch(()=>{});await p.waitForTimeout(500);
+  const lay=await p.evaluate(()=>{const L=[...document.querySelectorAll('img[data-hdl]')];const where=[...new Set(L.map(e=>e.closest('#stage')?'stage':e.closest('header')?'header':e.closest('.kmini')?'avatar':'other'))];
+   const e=L.length?HD_FL[L[0].dataset.hdl]:null;return{n:L.length,where,painted:L.filter(i=>/^data:image\/png/.test(i.src)).length,at:e&&e.at,vung:hdVung(S.toilette.hd&&S.toilette.hd.q),look:S.toilette.look,slip:S.toilette.slip||''}});
+  await p.screenshot({path:`${DIR}/hd-${tag}-5-stage${good?'':'-vung'}.jpg`,quality:70});
+  for(const w of ['#stage','header']){const c=await p.evaluate(w=>{const i=[...document.querySelectorAll(w+' img[data-hdl]')].find(x=>x.getBoundingClientRect().width>0);if(!i)return null;const e=HD_FL[i.dataset.hdl];const r=i.getBoundingClientRect();if(!e||!e.at)return null;
+    const R=Math.max(24,r.width*.12);return{x:Math.max(0,r.x+e.at[0]*r.width-R),y:Math.max(0,r.y+e.at[1]*r.height-R),width:2*R,height:2*R}},w);
+   if(c)await p.screenshot({path:`${DIR}/hd-${tag}-6-face-${w.replace('#','')}${good?'':'-vung'}.jpg`,quality:85,clip:c})}
+  return{pick,pk,pk2,res,snap,lay}}
  const G=await sitting(true);
  ck('picker lists her 2 hoa điền + Không dán',G.pick.n===3,G.pick.lbl);
  ck('placed on the anchor → high q',G.res.rec.hd&&G.res.rec.hd.q>=.8,G.res.rec.hd);ck('result row "Dán hoa điền"',G.res.row);
@@ -82,6 +90,14 @@ fs.mkdirSync(DIR,{recursive:true});let fail=0;const ck=(n,c,x)=>{console.log((c?
  ck('anchor from the face mesh',!!(G.pk&&G.pk.mesh),G.pk);
  const Mi=await sitting(false);
  ck('miss still counts (lower q, still a part)',Mi.res.rec.hd&&Mi.res.rec.hd.q<G.res.rec.hd.q,Mi.res.rec.hd);
+ /* r2 owner OD 21:03Z: the result sits at the anchor whatever she dragged; straight when good, fixed vụng tilt when low */
+ const near=(a,b)=>Math.hypot(a.x-b.x,a.y-b.y)<2;const vA=await p.evaluate(()=>BAL.hd.vungA);
+ ck('good: snapped to the anchor, straight',G.snap&&near(G.snap.at,G.snap.anchor)&&Math.abs(G.snap.ang-G.snap.ideal)<.01,G.snap);
+ ck('vụng: snapped to the anchor, fixed tilt',Mi.snap&&near(Mi.snap.at,Mi.snap.anchor)&&Math.abs(Mi.snap.ang-Mi.snap.ideal-vA)<.01,Mi.snap);
+ ck('good: layer drawn on her pictures (stage/header), straight',G.lay.painted>0&&!G.lay.vung,G.lay);
+ ck('vụng: layer drawn with the vụng tilt + look vụng (praise/criticism follows)',Mi.lay.painted>0&&Mi.lay.vung&&Mi.lay.look==='vung',Mi.lay);
+ const npcL=await p.evaluate(()=>{const v=rivals.find(x=>x.alive&&!x.out&&toilNpc(x).makeup&&toilNpc(x).hd);if(!v)return{none:1};const f=String(figFor(v,'por')||'').split('/').pop().split('?')[0];MK_FIT.get(f);return{f,h:hdFaceLayer(v,f).length}});
+ if(!npcL.none){await p.waitForTimeout(3000);const h=await p.evaluate(f=>{const v=rivals.find(x=>x.alive&&!x.out&&toilNpc(x).makeup&&toilNpc(x).hd);return hdFaceLayer(v,f)},npcL.f);ck('NPC with a hoa điền: same layer on her portrait',/data-hdl/.test(h),npcL.f)}
 
  /* 5. Thử tay: the kind is registered and its board plays to env.end */
  const th=await p.evaluate(()=>({k:KG82_KIND.hoadien,eng:typeof KG82_ENG.hoadien}));ck('KG82_KIND.hoadien registered',!!th.k&&th.eng==='function',th);

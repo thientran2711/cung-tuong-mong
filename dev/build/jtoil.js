@@ -148,7 +148,7 @@ function toilPowderQ(G,I,sk){const B=BAL.toil.cheek,lo=B.doseLo-B.doseLoSk*sk,hi
 function toilLipQ(dtR,d,lr,sk){const B=BAL.toil.lip;const qt=Math.max(0,1-Math.abs(dtR)/(B.ttol+B.ttolSk*sk)),qp=Math.max(0,1-d/(lr*(B.tol+B.tolSk*sk)));return qt*qp}
 /* the look from parts + score: vụng (with the part that went wrong) · else by score up to Khuynh thành (makeup-lux: no overdone level; how lavish the
    whole look is, is the luxury total's business at events) */
-function toilLookOf(P,score){const B=BAL.toil;const parts=[["brow",P.brow],["powder",P.powder],["son",P.son]].filter(x=>typeof x[1]==="number");
+function toilLookOf(P,score){const B=BAL.toil;const parts=[["brow",P.brow],["powder",P.powder],["son",P.son],["hoadien",P.hd]].filter(x=>typeof x[1]==="number");/* r2: a vụng hoa điền (below the same fail cut) is a slip like the others */
  const worst=parts.reduce((a,x)=>!a||x[1]<a[1]?x:a,null);if(score<B.tier[0]||(worst&&worst[1]<B.fail))return{look:"vung",slip:worst?worst[0]:"brow"};
  return{look:score>=B.tier[2]?"tuyet":score>=B.tier[1]?"dep":null}}
 /* an NPC's day from WORLD facts only (Thái hậu alive, a festival) — never this seat's own rank / place / night:
@@ -447,7 +447,7 @@ function toilFinish(made){const st=TOIL.st;if(!st)return;try{if(KG82.run&&KG82.r
  if(!st.dv){const d=toilDress(S,st.F);st.dv=d.v;st.style=d.style}
  /* diemtrang-score: vụng = a part that went wrong (or a low total); else by the total, Khuynh thành the most (makeup-lux: no overdone level) */
  const P0=st.parts,occK=st.occ.map(o=>o.k);
- const L=made?toilLookOf({brow:P0.brow||0,powder:P0.powder||0,son:P0.son||0},score):{look:null};const look=L.look;
+ const L=made?toilLookOf(Object.assign({brow:P0.brow||0,powder:P0.powder||0,son:P0.son||0},typeof P0.hd==="number"?{hd:P0.hd}:{}),score):{look:null};const look=L.look;
  S.toilette={day:toilWk()*10,wk:toilWk(),score,makeup:!!made,style:st.style,dv:st.dv,F:st.F,occ:occK,look};if(L.slip)S.toilette.slip=L.slip;if(made&&st.hd&&typeof st.parts.hd==="number")S.toilette.hd={k:st.hd.k,q:+st.parts.hd.toFixed(3),dx:st.hd.dx,dy:st.hd.dy,a:st.hd.a};if(made){S.toilette.col=toilColFix(st.col);S.toilette.col.seed=toilWk()}TOIL.prev=null;
  /* makeup-lux: the day's verdict reads the ONE total, now with the face in it (clothes + jewels + makeup level) */
  try{const d=toilDress(S,st.F);st.dv=d.v;st.style=d.style;S.toilette.dv=d.v;S.toilette.style=d.style}catch(e){}
@@ -574,10 +574,10 @@ window.TOIL_TRAIT=TOIL_TRAIT;
 for(const [k,B] of Object.entries(TOIL_BAND)){const P=TOIL_SAY[k];if(!P)continue;const T=[];for(const [b,L] of Object.entries(B))for(const x of L)T.push(`[${b}]${x}`);for(const sub of Object.keys(P))P[sub]=P[sub].concat(T)}
 window.TOIL_SAY=TOIL_SAY;window.TOIL_BAND=TOIL_BAND;
 /* diemtrang-score: the funny line for a vụng face names the part that went wrong (S.toilette.slip); diêm dúa gets its own */
-const TOIL_SLIP={th:{brow:"“Đôi mày này một bên lên núi, một bên xuống sông à?”",powder:"“Má bên đỏ bên trắng thế kia, ngươi định ra hát tuồng sao?”",son:"“Son lem ra tận cằm, ngươi vừa ăn vụng mứt đỏ của ai thế?”"},
- hh:{brow:"“Muội kẻ mày lúc trời chưa sáng hay sao, bên cao bên thấp thế kia?”",powder:"“Phấn của muội… hình như chỉ chịu nằm một bên má.”",son:"“Son của muội hôm nay muốn đi dạo ra ngoài môi rồi.”"},
- emp:{brow:"“Hôm nay ái phi nhướn một bên mày với trẫm đấy à?”",powder:"“Một bên má ửng hồng, một bên trắng bệch: nàng đang thẹn một nửa sao?”",son:"“Son của ái phi chấm lạc chỗ rồi, để trẫm lau cho.”"},
- rival:{brow:"“Mày của muội hôm nay như hai con sâu cãi nhau.” Nàng ta che miệng cười khúc khích.",powder:"“Muội đánh phấn hay vừa ngã vào thúng bột thế?” Nàng ta che miệng cười.",son:"“Son của muội lem cả ra ngoài kìa.” Nàng ta che miệng cười khúc khích."},
+const TOIL_SLIP={th:{brow:"“Đôi mày này một bên lên núi, một bên xuống sông à?”",powder:"“Má bên đỏ bên trắng thế kia, ngươi định ra hát tuồng sao?”",son:"“Son lem ra tận cằm, ngươi vừa ăn vụng mứt đỏ của ai thế?”",hoadien:"“Hoa điền dán xiêu vẹo thế kia, trán ngươi cũng nghiêng theo à?”"},
+ hh:{brow:"“Muội kẻ mày lúc trời chưa sáng hay sao, bên cao bên thấp thế kia?”",powder:"“Phấn của muội… hình như chỉ chịu nằm một bên má.”",son:"“Son của muội hôm nay muốn đi dạo ra ngoài môi rồi.”",hoadien:"“Hoa điền của muội hôm nay nghiêng hẳn một bên, như sắp rơi đến nơi.”"},
+ emp:{brow:"“Hôm nay ái phi nhướn một bên mày với trẫm đấy à?”",powder:"“Một bên má ửng hồng, một bên trắng bệch: nàng đang thẹn một nửa sao?”",son:"“Son của ái phi chấm lạc chỗ rồi, để trẫm lau cho.”",hoadien:"“Hoa điền của ái phi nghiêng rồi, để trẫm dán lại cho.”"},
+ rival:{brow:"“Mày của muội hôm nay như hai con sâu cãi nhau.” Nàng ta che miệng cười khúc khích.",powder:"“Muội đánh phấn hay vừa ngã vào thúng bột thế?” Nàng ta che miệng cười.",son:"“Son của muội lem cả ra ngoài kìa.” Nàng ta che miệng cười khúc khích.",hoadien:"“Hoa điền của muội dán lệch cả rồi kìa.” Nàng ta che miệng cười khúc khích."},
  diem:{th:"“Son phấn dày thế này, ai gia tưởng gánh hát vào cung.”",hh:"“Muội định đi hội đèn hay đến thỉnh an bổn cung vậy?”",emp:"“Trẫm suýt tưởng hoa mẫu đơn biết đi.”",rival:"“Ôi chao, phấn son của muội hôm nay… đậm đà thật đấy.” Nàng ta che miệng cười khúc khích."}};
 /* VOICE BY TÍNH TÌNH (owner 17/11 06:05Z): the slip tease is a tone pool of the teaser (jtone_b.js TONE_POOL "toilSlip:<who>:<slip>"); the old one-liners stay as the fallback */
 function toilSlipSay(who,mk,sp){try{const tp=kTP;if(mk==="diem"){const P=tp("toilSlip:diem:"+who);return P?kLine("toilslip:diem:"+who,P,{sp,ls:S,t:kToneSt(sp,who)}):TOIL_SLIP.diem[who]||""}if(mk!=="vung")return"";const sl=(toilToday(S)||{}).slip;if(!sl)return"";
