@@ -21,10 +21,29 @@ fig-maid-m01-a18 xSXPMlnjfW/1leOTEUr4r | m01-cold-a18 3z5VF9VREY/jUB4eovLD0 | m0
 
 - STATUS 17/11 ~02:20Z: W5 #1 stopping here (context), 25/3172 done+uploaded, 0 hard. Lead: open the successor.
 
-## !! NEW RULES FROM LEAD (arrived 17/11 01:30-01:38Z, they SUPERSEDE the 4k/remove_background method above) — read BATCH_BRIEF.md (THROUGHPUT + CONTEXT DIET sections) too
-1. MY SHARD IS NOW lists/shards/maid-rest-A.txt (first half, 1586 files). maid-rest-B belongs to W6 (session_011xDdVNVPxjHSMerTjisLs3): never touch B. All a18 of A first, then a26/a36/a51.
-2. 2K ONLY from now on: images_generate gpt-2-6 width 1024 height 2048 resolution 2k (65 cr). The 25 files done at 4k stay.
-3. Transparency: extraSettings {"transparentBackground": true} + prompt "FULLY TRANSPARENT BACKGROUND (real alpha channel, cut-out PNG, no backdrop, no checkerboard, no ground shadow)", drop 'plain light parchment background' from the style prefix; verify alpha extrema (0 and 255) before finish_fig; opaque -> images_remove_background (+3 cr) fallback (tools/maid_proc.py, see BATCH_BRIEF).
-4. hd: maids have no hd on the CDN -> do not produce/upload hd. Upload fig + tn (if exists) + por only.
-5. Context diet: prompt <=110 words, 8 generations in ONE message, ONE creations_wait with all ids, ONE bash per batch (download+alpha+finish+qa+ONE contact sheet), look at <=2 images per batch, one TSV line per file. Target >=40 files per session.
-6. Done-list above is in A or B? m01/m02 a18 files are all in the first half of the list; check membership against maid-rest-A.txt before continuing.
+## W5 #2 (START_CTX ~8 %, 2k transparentBackground works: real alpha; no bg-removal needed). TSV key<TAB>gen id<TAB>status (uploaded=U)
+maid-m02-t6-a18	jUB4EoGLD0	ok
+maid-m02-t7-a18	Sym3qvsUb8	ok
+maid-m02-t8-a18	1leOaotr4r	ok
+maid-m02-tm0-a18	CqzxeTTEEy	ok
+maid-m02-tm2-a18	bxVUtoL5Y2	ok
+maid-m02-tm3-a18	gOtiHQ8SXO	ok
+maid-m02-tm4-a18	O6CG11cynm	ok
+maid-m03-a18	iGbTgSr3uK	ok
+maid-m03-cold-a18	1leOEPPr4r	ok
+maid-m03-kc-a18	s78Nq3vl8e	ok
+maid-m03-ngheo-a18	TdUmZfzVNR	ok
+maid-m03-t1-a18	4RQYlMT9Aa	ok
+maid-m03-t2-a18	VXwh2QgMMU	ok
+maid-m03-t3-a18	lJI6bndgv9	ok
+maid-m03-t4-a18	9ZFWgBCNYZ	ok
+maid-m03-t5-a18	KLD7f2Skqp	ok
+maid-m03-t6-a18	9ZFWwpINYZ	ok
+maid-m03-t7-a18	cpgI2Es0eP	ok
+maid-m03-t8-a18	Bh9QVxJoQR	ok
+maid-m03-tm0-a18	s78NKWNl8e	ok
+maid-m03-tm2-a18	nVLB3QyYQD	ok
+maid-m03-tm3-a18	rgdyHY3xtc	ok
+maid-m03-tm4-a18	Sym3rpfUb8	ok
+maid-m04-a18	IfiqpOmtvE	ok
+- W5 #2 STATUS: 24 a18 files (m02-t6 .. m04-a18) done, ALL UPLOADED (fig+por+tn where exists; no hd). NEXT: maid-m04-cold-a18 (then shard order, line 'grep a18 maid-rest-A.txt'). Method now: upload old fig as ref (creations_upload_image, folder ba4aecfe...), images_generate gpt-2-6 1024x2048 2k + extraSettings transparentBackground (real alpha), 8 in one message, one creations_wait, driver drv.py (scratch, recreate: curl master, alpha check, finish_fig, qa_fig, contact sheet) -- hd NOT made. Prop rotation: fan, lantern, jade pendant, teacup, scroll, flower branch, handkerchief, book+hairpin.
