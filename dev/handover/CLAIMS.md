@@ -869,3 +869,4 @@
 | REVIEW coop-thin-c 475beba7 (opus BIG; brief briefs/review-coop-thin-c.md) | review/coop-thin-c-r1 | B | session_01N1tNP4NkEVbfkftEhoSW5h | RUNNING | 17/11 17:05Z |
 | coop-b1 regression on main (laydo/takeaway 24/41; bisect + family fix; opus; brief briefs/coop-b1-regress.md) | review/coop-b1-regress | B | session_01N1tNP6usJ5fWhrv4JU1m4R | RUNNING | 17/11 17:05Z |
 | ODDS-CAP AUDIT: no rolled outcome 100 %/0 % (BAL one cap ~95/5), drop 'Chắc chắn' word; 85 o:100 acts in 23 files (OD 17:00Z) | review/odds-cap | D | (D opens) | ORDERED | 17/11 17:00Z |
+| REVIEW kit-option-rows r1 of 3dabd1f7 (sonnet; brief briefs/s34-review-kit-option-rows.md) | review/kit-option-rows-r1 | MAIN s34 | (opening) | RUNNING | 17/11 17:06Z |
