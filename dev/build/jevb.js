@@ -14,7 +14,10 @@
    (4) REAL PRECONDITIONS (whole group, dev/review/scan_claims.py): j68 "doubtVisit" variant "trả lại quà ngươi tặng" only when that
        consort really holds a gift from her, names it, and the gift really comes back to her chest; "borrowDress" asks only for a thing she
        really owns (a robe, a hairpin, an instrument when she plays Cầm, her maid). ============================================== */
-Object.assign(BAL,{ctxTaste:12,ctxRelDiv:10,ctxRelCap:8,ctxMoodBad:-9,ctxMoodGood:6,ctxEmp:[8,0,-5,-10],ctxCap:22,moodEvGood:28,moodEvBad:30,moodKeep:4});
+/* balance-2 (S3-126 bot-proof hint, owner OD:L478 "skilful play MUST clearly beat random"): ctxTaste 12→18, ctxCap 22→30. Measured (sens bot, Vừa, 40 lives per arm,
+   dev/handover/reports/balance-2-measure/bp_*): old 12/22 hint-reading bot HH 5 % / early end 30 % vs random 2 % / 15 % (skill did not pay);
+   new 18/30 hint HH 12 % / early 15 %, Danh m36 89 vs random HH 5 % / early 25 %, Danh m36 30. */
+Object.assign(BAL,{ctxTaste:18,ctxRelDiv:10,ctxRelCap:8,ctxMoodBad:-9,ctxMoodGood:6,ctxEmp:[8,0,-5,-10],ctxCap:30,moodEvGood:28,moodEvBad:30,moodKeep:4});
 function ctxSeed(){if(!S)return 1;if(!S.ctxSeed)S.ctxSeed=1+Math.floor(Math.random()*2147483646);return S.ctxSeed}
 function ctxHash(s){let h=2166136261;s=String(s);for(let i=0;i<s.length;i++){h^=s.charCodeAt(i);h=Math.imul(h,16777619)}return h>>>0}
 function ctxKey(p){try{return typeof key==="function"?key(p):p&&p.id}catch(e){return""}}
