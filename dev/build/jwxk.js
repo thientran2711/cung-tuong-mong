@@ -80,8 +80,11 @@ function wxkBuild(s0,i0){const sea=wxkSea();if(!wxkRow(sea,s0))s0=(WX[sea]||[[s0
 function wxkDay(){if(!S||!S.wx)return null;const D=S.wxDay;if(D&&D.d===wkKey()&&Array.isArray(D.s)&&D.s.length===wxkN())return D;
  if(typeof worldOn==="function"&&!worldOn())return null;return wxkBuild(S.wx.b||S.wx.n,wxkNow())}
 /* THE API: the weather at khắc k of today (default: now) */
+/* her own marks on today's day (r1): `at` = furthest khắc she reached (never back), `sk` = the khắc S.wx was last moved to. The host keeps them
+   on S.wxDay (as before); a co-op GUEST keeps her own (S.wxkG, personal, not a world key) so she sees the day at HER khắc, not the host's. */
+function wxkM(D){if(typeof worldOn!=="function"||worldOn())return D;let g=S.wxkG;if(!g||g.d!==D.d)g=S.wxkG={d:D.d,at:wxkNow(),sk:-1};return g}
 function currentWeather(k){if(!S)return null;const D=wxkDay();if(!D)return S.wx?Object.assign({},S.wx):null;
- k=k==null?Math.max(D.at||0,wxkNow()):Math.max(0,Math.min(wxkN()-1,k|0));const nm=D.s[k],row=wxkRow(wxkSea(),nm)||[nm,(S.wx&&S.wx.k)||"dust",(S.wx&&S.wx.f)||0];
+ k=k==null?Math.max(wxkM(D).at||0,wxkNow()):Math.max(0,Math.min(wxkN()-1,k|0));const nm=D.s[k],row=wxkRow(wxkSea(),nm)||[nm,(S.wx&&S.wx.k)||"dust",(S.wx&&S.wx.f)||0];
  const lv=[1,3,4].includes(row[2])?Math.max(1,(D.lv&&D.lv[k])||1):0;
  return{n:wxAt(nm,Math.floor(k/BAL.time.khac))[0],b:nm,k:row[1],f:row[2],kh:k,lv,lvN:BAL.wx.day.lvName[lv]}}
 function wxDayAny(f){try{const D=wxkDay();if(!D)return !!(S&&S.wx&&S.wx.f===f);const sea=wxkSea();return D.s.some(n=>{const r=wxkRow(sea,n);return r&&r[2]===f})}catch(e){return !!(S&&S.wx&&S.wx.f===f)}}
@@ -94,12 +97,13 @@ function wxkLine(a,b,burst){const W=x=>[1,3,4].includes(x.f),snow=x=>/tuyết/.t
  if(W(b))return snow(b)?(b.f===4?"Tuyết rơi dày.":"Tuyết bắt đầu rơi."):`Trời đổ ${b.n}.`;
  return `Bên ngoài, ${b.n}.`}
 /* move S.wx to her khắc; quiet = no line / no mood (day start, load) */
-function wxkSync(quiet){try{if(!S||S.dead||!S.wx)return;const D=wxkDay();if(!D)return;const k=Math.max(D.at||0,wxkNow());D.at=k;if(D.sk===k)return;D.sk=k;  /* sk: the khắc S.wx was last moved to (only a NEW khắc moves it) */
+function wxkSync(quiet){try{if(!S||S.dead||!S.wx)return;const D=wxkDay();if(!D)return;const M=wxkM(D),k=Math.max(M.at||0,wxkNow());M.at=k;if(M.sk===k)return;M.sk=k;  /* sk: the khắc S.wx was last moved to (only a NEW khắc moves it) */
  const w=currentWeather(k),prev=S.wx.b||S.wx.n;if(!w)return;if(prev===w.b){if(S.wx.lv!==w.lv)S.wx.lv=w.lv;return}
  const a={n:S.wx.n,b:prev,k:S.wx.k,f:S.wx.f,lv:S.wx.lv||0};S.wx={n:w.n,b:w.b,k:w.k,f:w.f,lv:w.lv};
  if(quiet)return;let burst=false;for(let i=k;i>=0&&D.s[i]===w.b;i--)if((D.u||[]).includes(i)){burst=true;break}
  log(wxkLine(a,S.wx,burst));
- if(typeof worldOn!=="function"||worldOn())wxMood([w.b,w.k,w.f]);
+ if(typeof worldOn!=="function"||worldOn()){const sea=wxkSea(),st0=S.storms,early=w.f===3&&D.s.slice(0,k).some(n=>{const r=wxkRow(sea,n);return r&&r[2]===3});
+  wxMood([w.b,w.k,w.f]);if(early)S.storms=st0}  /* r1: S.storms counts storm DAYS (illness / kid / rival rules read it per month): a 2nd storm the same day adds none */
  for(const fn of WXK_HOOKS)try{fn(a,Object.assign({},S.wx),{k,burst})}catch(e){console.error("wxk hook",e)}}catch(e){console.error("wxk",e)}}
 /* day start: the tuần's weather (rollWx, seeded) is khắc 0; the host rolls the rest of the day. jweather's own storm clear is replaced by the day. */
 (function(){const r0=rollWx;rollWx=function(){const r=r0.apply(this,arguments);try{if(S&&S.wx){delete S.wx.clr;if(typeof worldOn!=="function"||worldOn())wxkBuild(S.wx.b||S.wx.n,0)}}catch(e){console.error("wxk",e)}return r}})();
@@ -107,5 +111,5 @@ function wxkSync(quiet){try{if(!S||S.dead||!S.wx)return;const D=wxkDay();if(!D)r
 (function(){const w0=wxSync;wxSync=function(){const r=w0.apply(this,arguments);wxkSync(false);return r}})();
 (function(){const s0=spend;spend=function(){const r=s0.apply(this,arguments);try{wxSync()}catch(e){}return r}})();
 /* jweather wxClrName: the buổi the storm stops, read from the day */
-wxClrName=function(){try{const D=wxkDay();if(!D||!S.wx||S.wx.f!==3)return"";const sea=wxkSea();for(let i=Math.max(D.at||0,wxkNow());i<D.s.length;i++){const r=wxkRow(sea,D.s[i]);if(r&&r[2]!==3)return String(BUOI[Math.floor(i/BAL.time.khac)]).toLowerCase()}}catch(e){}return""};
+wxClrName=function(){try{const D=wxkDay();if(!D||!S.wx||S.wx.f!==3)return"";const sea=wxkSea();for(let i=Math.max(wxkM(D).at||0,wxkNow());i<D.s.length;i++){const r=wxkRow(sea,D.s[i]);if(r&&r[2]!==3)return String(BUOI[Math.floor(i/BAL.time.khac)]).toLowerCase()}}catch(e){}return""};
 Object.assign(window,{currentWeather,wxDayAny,wxkHook,wxkNow,wxkN,wxkSync});
