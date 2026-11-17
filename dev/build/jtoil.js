@@ -16,18 +16,18 @@ Object.assign(BAL,{toil:{khac:1,
  /* the day's dress verdict by formality F (0 ngày thường, 1 thỉnh an / gặp bề trên / thị tẩm, 2 yến, lễ lớn):
     d = j92 outfit level − her own phẩm; r = worn luxury / her allowance (jinv) */
  dress:[{under:-2.75,rLo:0,fitD:-9,fitR:0,fitHi:.62,showR:.9},{under:-1.75,rLo:.2,fitD:-.75,fitR:.38},{under:-1,rLo:.3,fitD:-.25,fitR:.55}],
- tier:[40,65],            /* makeup score → vụng < 40 ≤ vừa < 65 ≤ đẹp (owner 17/11 04:44Z: 'tuyệt' dropped, its band is đẹp's; diêm dúa = the overdone result, mặt mộc = skipped) */
+ tier:[40,65,85],          /* makeup score → vụng < 40 ≤ vừa < 65 ≤ đẹp < 85 ≤ tuyệt (owner 17/11 04:54Z: six results; diêm dúa = the overdone result, mặt mộc = skipped) */
  /* host reaction (thiện cảm; Hoàng thượng: + → Sủng +1, − → Sủng −1) by kind of host */
- react:{strict:{hopdip:2,hoppham:0,giandi:-3,photruong:-1,moc:-1,vung:-2,vua:0,dep:1,diem:-3},
-  normal:{hopdip:1,hoppham:0,giandi:-1,photruong:-1,moc:0,vung:-1,vua:0,dep:1,diem:-1},
-  frugal:{hopdip:1,hoppham:0,giandi:2,photruong:-2,moc:1,vung:0,vua:0,dep:0,diem:-2},
-  jealous:{hopdip:1,hoppham:0,giandi:-1,photruong:-2,moc:0,vung:-1,vua:0,dep:-1,diem:1},
-  nha:{hopdip:2,hoppham:1,giandi:1,photruong:-2,moc:0,vung:-2,vua:0,dep:2,diem:-2},
-  lay:{hopdip:2,hoppham:0,giandi:-2,photruong:1,moc:-2,vung:-2,vua:0,dep:2,diem:-1},
-  doan:{hopdip:3,hoppham:1,giandi:-1,photruong:-2,moc:-1,vung:-1,vua:0,dep:1,diem:-2}},
+ react:{strict:{hopdip:2,hoppham:0,giandi:-3,photruong:-1,moc:-1,vung:-2,vua:0,dep:1,tuyet:2,diem:-3},
+  normal:{hopdip:1,hoppham:0,giandi:-1,photruong:-1,moc:0,vung:-1,vua:0,dep:1,tuyet:1,diem:-1},
+  frugal:{hopdip:1,hoppham:0,giandi:2,photruong:-2,moc:1,vung:0,vua:0,dep:0,tuyet:1,diem:-2},
+  jealous:{hopdip:1,hoppham:0,giandi:-1,photruong:-2,moc:0,vung:-1,vua:0,dep:-1,tuyet:-1,diem:1},
+  nha:{hopdip:2,hoppham:1,giandi:1,photruong:-2,moc:0,vung:-2,vua:0,dep:2,tuyet:3,diem:-2},
+  lay:{hopdip:2,hoppham:0,giandi:-2,photruong:1,moc:-2,vung:-2,vua:0,dep:2,tuyet:3,diem:-1},
+  doan:{hopdip:3,hoppham:1,giandi:-1,photruong:-2,moc:-1,vung:-1,vua:0,dep:1,tuyet:2,diem:-2}},
  cap:[-4,3],strictPlainDanh:-1,
  /* other consorts who see her (a rival she meets, everyone at Thỉnh an Hoàng hậu): ghen / quý by nết */
- ghenShowy:2,ghenMul:{"Kiêu ngạo":1.5,"Tham vọng":1.5,"Hiểm độc":1.2,"Hiền lành":.5,"Nhu mì":.5},crowd:.5,praisePlain:1,frownShowy:-1,
+ ghenShowy:2,ghenTuyet:1,ghenMul:{"Kiêu ngạo":1.5,"Tham vọng":1.5,"Hiểm độc":1.2,"Hiền lành":.5,"Nhu mì":.5},crowd:.5,praisePlain:1,frownShowy:-1,
  /* NPC data: chance of a showy / plain day by nết, chance of no makeup, face score = base + Sắc × k ± spread */
  npc:{showy:{"Kiêu ngạo":.35,"Tham vọng":.3},plain:{"Hiền lành":.4,"Nhu mì":.35},showy0:.08,plain0:.1,moc:.1},
  /* skill: Sắc / sacDiv + Họa / hoaDiv + ma ma tinh ý (0..1) — widens tolerance, adds up to `skillShare` of the final share */
@@ -54,7 +54,7 @@ function toilEmpTaste(){try{const E=S.emp;E.likes=E.likes||{};if(!E.likes.dress)
 function toilOn(p){try{if(!S||S.dead)return false;if(typeof isSrv==="function"&&isSrv())return false;if(p&&p!==S)return !!(p.alive!==false&&!p.out&&(rivals||[]).includes(p));return !S.out}catch(e){return false}}
 function toilWk(){return typeof wk==="function"?wk():0}
 function toilToday(p){p=p||S;const t=p&&p.toilette;return t&&t.wk===toilWk()?t:null}
-function toilTier(sc){const T=BAL.toil.tier;return sc<T[0]?"vung":sc<T[1]?"vua":"dep"}
+function toilTier(sc){const T=BAL.toil.tier;return sc<T[0]?"vung":sc<T[1]?"vua":sc<T[2]?"dep":"tuyet"}
 /* the day's occasions, known in the morning */
 function toilOcc(){const L=[];try{if(!S.out){if(!S.thDead)L.push({k:"th",n:"Thỉnh an Thái hậu",F:1});if(qOn()&&S.rank<7)L.push({k:"hh",n:"Thỉnh an Hoàng hậu",F:1})}
  const f=typeof festToday==="function"?festToday():null;if(f)L.push({k:"fest",n:f.name,F:2});
@@ -89,7 +89,7 @@ Object.assign(BAL.toil,{skillShare:10,
   son:{haiduong:1,dotham:2,hongdao:0,chusa:1,manchin:2,sanho:0,camdao:1,hophach:2},may:{nau:0,den:1,thanhdai:0,naunhat:0,khoi:0}},
  tone:{mat:{hoadao:"w",hongmai:"c",rangchieu:"w",kimsa:"w",tuvi:"c",hophach:"w"},ma:{hongphan:"c",hoadao:"w",haiduong:"c",yenchi:"c",rangchieu:"w",hongsen:"c",camquyt:"w"},
   son:{haiduong:"c",dotham:"c",chusa:"w",manchin:"c",sanho:"w",camdao:"w",hophach:"w"}},
- teaseGhen:2,presetDiem:2,mixH:1,showyH:1,cakeH:[[.3,1],[.55,2]],
+ teaseGhen:2,harshAff:2,harshWin:40,presetDiem:2,mixH:1,showyH:1,cakeH:[[.3,1],[.55,2]],
  allow:{thuong:4,thinhan:3,night:5,fest:6,tang:1},diemOdds:[0,.3,.55,.8,.95],
  /* NPCs and the bot: how well each part goes, by skill (same skill formula), spread per part */
  play:{q0:.53,qSk:.15,spread:.44,cake:.12,cakeOver:.35,diemPre:.3}});
@@ -149,7 +149,7 @@ function toilAllow(occ,rk){const A=BAL.toil.allow;let tang=false;try{tang=typeof
 function toilLookOf(P,score,H,allow,seed){const B=BAL.toil;const parts=[["brow",P.brow],["powder",P.powder],["son",P.son]].filter(x=>typeof x[1]==="number");
  const worst=parts.reduce((a,x)=>!a||x[1]<a[1]?x:a,null);if(score<B.tier[0]||(worst&&worst[1]<B.fail))return{look:"vung",slip:worst?worst[0]:"brow"};
  const e=Math.max(0,Math.min(B.diemOdds.length-1,H-allow));const r=((seed>>>0)%1000)/1000;if(r<B.diemOdds[e])return{look:"diem"};
- return{look:score>=B.tier[1]?"dep":null}}
+ return{look:score>=B.tier[2]?"tuyet":score>=B.tier[1]?"dep":null}}
 /* an NPC's day from WORLD facts only (Thái hậu alive, a festival; mourning inside toilAllow) — never this seat's own rank / place / night:
    both co-op seats read the same allowance for the same consort (review r1, CO-OP FIRST) */
 function toilNpcOcc(){const L=[];try{if(!S.thDead)L.push("th");if(typeof festToday==="function"&&festToday())L.push("fest")}catch(e){}return L.length?L:["thuong"]}
@@ -233,14 +233,14 @@ if(typeof leAttire==="function"){const la0=leAttire;
     if(r0)o.run=function(){toilRival(v,true);return r0.apply(this,arguments)};else{o.go=function(){toilRival(v,true);return g0?g0.apply(this,arguments):undefined};o.fail=function(){toilRival(v,true);return f0?f0.apply(this,arguments):undefined}}return o})}
  }catch(e){console.error("toil talkOpts",e)}return A}})();
 function toilLook(){const rec=toilToday(S);const mk=toilMk(rec);const dr=toilDress(S,toilFOf(null));return{mk,dv:dr.v,showy:dr.style==="showy",plain:dr.style==="plain"}}
-function toilGhenOf(v,L){const B=BAL.toil;let g=(L.showy?B.ghenShowy:0);if(!g)return 0;for(const t of traitsOf(v))if(B.ghenMul[t])g*=B.ghenMul[t];return g}
+function toilGhenOf(v,L){const B=BAL.toil;let g=(L.showy?B.ghenShowy:0)+(L.mk==="tuyet"?B.ghenTuyet:0);if(!g)return 0;for(const t of traitsOf(v))if(B.ghenMul[t])g*=B.ghenMul[t];return g}
 function toilRival(v,doIt){if(!v||!toilOn(S)||toilSeen(v))return null;const L=toilLook(),B=BAL.toil;const T=traitsOf(v);const frugal=T.some(t=>t==="Hiền lành"||t==="Nhu mì");
  const g=Math.round(toilGhenOf(v,L));let aff=0,txt="";
  if(frugal&&(L.plain||L.mk==="moc")){aff=B.praisePlain;txt=`nàng ta chuộng giản dị: quý ta +${aff}`}else if(frugal&&L.showy){aff=B.frownShowy;txt=`ta ăn vận phô trương: nàng ta quý ta ${aff}`}
- if((L.mk==="diem"||L.mk==="vung")&&!txt){const n=BAL.toil.teaseGhen;txt=`nàng ta che miệng cười ${L.mk==="diem"?`lớp phấn son ${toilMkW("diem")}`:`gương mặt điểm trang ${toilMkW("vung")}`} của ta: bớt ghen ${n}`;if(doIt){v.ghen=cl((v.ghen||0)-n,0,100);toilMark(v)}return{txt,aff:0,g:0}}
+ if((L.mk==="diem"||L.mk==="vung")&&!txt){const n=BAL.toil.teaseGhen;txt=`thấy ta điểm trang ${toilMkW(L.mk)}, nàng ta bớt ghen (Ghen -${n})`;if(doIt){v.ghen=cl((v.ghen||0)-n,0,100);toilMark(v)}return{txt,aff:0,g:0}}
  if(g)txt=[txt,`${L.showy?"ta ăn vận phô trương":`dung nhan ta ${toilMkW("tuyet")}`}: nàng ta ghen +${g}`].filter(Boolean).join(" · ");if(!txt)return null;
  if(doIt){if(aff)affAdd(v,S,aff);if(g)v.ghen=cl((v.ghen||0)+g,0,100);toilMark(v)}return{txt,aff,g}}
-function toilCrowd(doIt){const L=toilLook();if(!L.showy)return{n:0};if(toilSeen("crowd"))return{n:0};let n=0;const R=liveRivals(false).filter(v=>!v.queen&&!v.out);
+function toilCrowd(doIt){const L=toilLook();if(!L.showy&&L.mk!=="tuyet")return{n:0};if(toilSeen("crowd"))return{n:0};let n=0;const R=liveRivals(false).filter(v=>!v.queen&&!v.out);
  for(const v of R){const g=Math.round(toilGhenOf(v,L)*BAL.toil.crowd);if(g){n=Math.max(n,g);if(doIt)v.ghen=cl((v.ghen||0)+g,0,100)}}if(doIt)toilMark("crowd");
  return{n,why:L.showy?"ăn vận phô trương":`dung nhan ${toilMkW("tuyet")}`}}
 /* NPCs: the same rule when they wait on Thái hậu (jaudit applies thiếu lễ; this adds the look of the day) */
@@ -566,7 +566,7 @@ function toilSay(k,ctx){const mk=ctx.mk,dv=ctx.dress;const plain=dv==="giandi",s
  let sub;switch(k){
   case"th-scold":case"hh-scold":sub=mk==="moc"?"moc":mk==="vung"&&P.vung?"vung":mk==="diem"?"diem":plain?"plain":"showy";break;
   case"th-praise":case"hh-praise":sub=plain||mk==="moc"?"plain":"neat";break;
-  case"emp-like":sub=mk==="dep"?"fair":"any";break;
+  case"emp-like":sub=mk==="tuyet"||mk==="dep"?"fair":"any";break;
   case"emp-dislike":sub=mk==="moc"?"moc":mk==="diem"?"diem":plain?"plain":"showy";break;
   case"rival-jealous":case"crowd-jealous":sub=showy?"showy":"any";break;
   default:sub="any"}
@@ -586,21 +586,29 @@ const TOIL_GEST={
  "emp-":["Hoàng thượng khẽ nhíu mày rồi cầm tấu chương lên","Hoàng thượng ngồi chưa ấm chỗ đã gọi người hầu trà","Hoàng thượng chỉ ừ một tiếng, chẳng hỏi han gì thêm","Ánh mắt Hoàng thượng lướt qua ta rồi dừng ở nơi khác","Hoàng thượng đứng dậy sớm hơn thường lệ"],
  "v+":["Nàng ta nắm tay ta, giọng thân mật hẳn","Nàng ta ghé lại gần, cười như chị em lâu ngày","Nàng ta khen ta trước mặt mọi người","Nàng ta cười tươi, kéo ta đi cùng một đoạn","Nàng ta khẽ gật đầu với ta, vẻ thân thiện"],
  "v-":["Nàng ta cười, nhưng tay vò nát chiếc khăn lụa","Nàng ta liếc ta một cái, sắc như dao","Nàng ta quay sang thì thầm với người bên cạnh","Nàng ta phe phẩy quạt, giọng mát như nước giếng","Nàng ta cười khẩy, quay mặt đi"]};
-function toilGest(r){if(r.g!=null)return r.g;const host=r.host;const k=(host==="th"?"th":host==="emp"?"emp":host&&host.queen?"hh":"v")+(r.n>0?"+":"-");
+/* ONE reaction line (owner 17/11 06:30Z): a spoken line that already ends with its own gesture ("…” Nàng ta che miệng cười.") or a plain narration needs no second gesture */
+function toilSayOwnGest(t){t=String(t||"");return !/[“"]/.test(t)||/[”"]\s*[A-ZÀ-Ỹ][^”"]*[.!…]\s*$/.test(t)}
+function toilGest(r){if(r.g!=null)return r.g;if(r.say!=null&&toilSayOwnGest(r.say))return r.g="";const host=r.host;const k=(host==="th"?"th":host==="emp"?"emp":host&&host.queen?"hh":"v")+(r.n>0?"+":"-");
  return r.g=TOIL_GEST[k]?kLine("toil-gest:"+k,TOIL_GEST[k]):""}
-function toilLit(r){const g=toilGest(r);return (g?g+" — ":"")+r.line+"."}
+function toilLit(r){const g=toilGest(r);let l=String(r.line||"");if(!g)l=l.charAt(0).toUpperCase()+l.slice(1);return (g?g+" — ":"")+l+(/[.)]$/.test(l)?"":".")}
 /* r = {k, who (face), host ("th" | "emp" | consort), n (signed change shown in words), line (numbers), ctx} */
 /* the gesture is drawn once: the event panel shows it (long form) and the Sổ ghi line of the reaction gets it too (jvoice kLitLog, long form);
    the result card keeps the short facts (kShort) */
-function toilReact(r){try{toilGest(r);if(r.s0!=null)kLitLog(r.s0,r.g)}catch(e){}TOIL_POP.push(r);clearTimeout(TOIL_POPT);TOIL_POPT=setTimeout(toilFlush,0)}
+function toilReact(r){try{if(r.say==null)r.say=toilSay(r.k,Object.assign({host:r.host},r.ctx));toilGest(r);if(r.s0!=null)kLitLog(r.s0,r.g)}catch(e){}TOIL_POP.push(r);clearTimeout(TOIL_POPT);TOIL_POPT=setTimeout(toilFlush,0)}
 function toilBack(host,n){if(!n)return;if(host==="th")apply({th:n});else if(host==="emp")apply({sung:n>0?1:-1});else if(host&&host!==S)affAdd(host,S,n)}
 function toilFlush(){if(!TOIL_POP.length||!S||S.dead)return;const L=TOIL_POP.splice(0).sort((a,b)=>Math.abs(b.n)-Math.abs(a.n));const top=L.slice(0,BAL.toil.popMax),rest=L.slice(BAL.toil.popMax);
  top.forEach((r,i)=>{const bad=r.n<0;const who=toilWho(r.host==null?null:r.host)||"";const more=i===top.length-1&&rest.length?`<p class="past">Còn: ${rest.map(x=>`${x.name||toilWho(x.host)} — ${x.line}`).join(" · ")}.</p>`:"";
-  const h=`<p>${toilSay(r.k,Object.assign({host:r.host},r.ctx))}</p><p class="past">${toilLit(r)}</p>${more}`;
+  const h=`<p>${r.say!=null?r.say:toilSay(r.k,Object.assign({host:r.host},r.ctx))}</p><p class="past">${toilLit(r)}</p>${more}`;
   const back=Math.ceil(Math.abs(r.n)*BAL.toil.sorryBack);
   /* cost mode (KIT 28.6 / §53 kitHint): the options' fx are empty (the change happens in go), so each says its own true hint */
   const nm=r.name||who,boss=r.host==="th"||r.host==="emp"||(r.host&&r.host.queen),them=lv=>lv?nm:boss?"bề trên":"nàng ta";
-  const opts=bad?[
+  const peer=bad&&!boss&&r.host&&r.host!=="th"&&r.host!=="emp";/* mocked / envied by a consort: she answers, she does not apologise (owner 17/11 06:30Z); a scolding from above keeps "Xin lỗi" */
+  const opts=peer?[
+    {n:"Cười cho qua",fx:{},hideOut:true,hint:"cho qua, không đổi gì",risk:"an toàn",go:()=>{log("Ta mỉm cười cho qua, như chẳng nghe thấy.")}},
+    {n:"Đáp lại khéo",fx:{suc:-2},hideOut:true,hint:lv=>lv?`đáp khéo thì thêm danh tiếng, thành bại khó đoán, hỏng thì ${nm} càng phật ý${r.v?", nàng ta càng ghen":""}`:"có thể thêm danh tiếng, cũng có thể mất lòng",risk:"có rủi ro",go:()=>{if(roll(BAL.toil.replyWin)){apply({danh:BAL.toil.replyDanh});log(`Ta đáp lại khéo léo, ${nm} đỏ mặt, người nghe gật gù.`)}else{toilBack(r.host,-1);if(r.v)r.v.ghen=cl((r.v.ghen||0)+2,0,100);log("Ta đáp lại, không khí càng gượng.")}}},
+    {n:"Đáp trả gay gắt",fx:{},hideOut:true,hint:lv=>lv?`đáp thẳng thì ${nm} nể ta hơn hoặc oán ta hơn; nàng ta chắc kém quý ta đi, hỏng thì mất danh, mất đức`:"đáp thẳng, mất chút thiện cảm; có thể được nể, cũng có thể mất lòng",risk:"có rủi ro",go:()=>{toilBack(r.host,-BAL.toil.harshAff);if(roll(BAL.toil.harshWin)){apply({danh:BAL.toil.replyDanh});if(r.v)r.v.ghen=cl((r.v.ghen||0)-1,0,100);log(`Ta đáp trả thẳng thừng; ${nm} cứng họng, không dám trêu nữa.`)}else{apply({danh:-1,duc:-1});log(`Ta đáp trả gay gắt, ai nghe cũng chê ta nóng nảy.`)}}},
+    {n:"Im lặng lui đi",fx:{},hideOut:true,hint:"lặng lẽ rời đi, không đổi gì",risk:"an toàn",go:()=>{log("Ta im lặng quay đi, không đáp lời.")}}]
+  :bad?[
     {n:"Xin lỗi",fx:{},hideOut:true,hint:lv=>`${them(lv)} nguôi giận phần nào`,risk:"an toàn",go:()=>{toilBack(r.host,back);log(`Ta cúi đầu nhận lỗi; ${r.name||who} nguôi giận phần nào.`)}},
     {n:"Cười trừ",fx:{},hideOut:true,hint:"cho qua, không đổi gì",risk:"an toàn",go:()=>{log("Ta cười trừ cho qua.")}},
     {n:"Đáp lại",fx:{suc:-2},hideOut:true,hint:lv=>lv?`đáp khéo thì thêm danh tiếng, thành bại khó đoán, hỏng thì ${nm} càng phật ý${r.v?", nàng ta càng ghen":""}`:"có thể thêm danh tiếng, cũng có thể mất lòng",risk:"có rủi ro",go:()=>{if(roll(BAL.toil.replyWin)){apply({danh:BAL.toil.replyDanh});log("Ta đáp lại khéo léo, người nghe gật gù.")}else{toilBack(r.host,-1);if(r.v)r.v.ghen=cl((r.v.ghen||0)+2,0,100);log("Ta đáp lại, không khí càng gượng.")}}}]
@@ -628,31 +636,34 @@ try{TOIL_FIT.load()}catch(e){}
 const TOIL_LOOKS={
  vua:{skin:[255,250,244,.13,.62],blush:[238,128,144,.21,.165,0],lip:[206,60,80,.33,.072,.032],powder:0},
  dep:{skin:[255,251,246,.185,.63],blush:[237,116,134,.305,.1825,0],lip:[202,50,72,.445,.078,.035],powder:0},
+ /* tuyệt (Khuynh thành): luminous, dewy: a pearl-gold glow on the cheekbones (glow), glossy refined lips, a touch of sparkle by the eyes (TOIL_MKS.tuyet.shim); never heavy */
+ tuyet:{skin:[255,248,236,.24,.66],blush:[238,120,138,.3,.2,0],lip:[200,48,72,.5,.08,.036],powder:0,glow:1},
  /* vụng: uneven smudged blush (see toilMakeupSvg jitter), a pale caked patch, lip colour past the line (colour layer) */
- vung:{skin:[255,252,248,.08,.6],blush:[236,112,130,.36,.17,0],lip:[206,60,80,.4,.08,.036],powder:0,vung:1},
+ vung:{skin:[255,252,248,.08,.6],blush:[236,112,130,.3,.17,0],lip:[206,60,80,.4,.08,.036],powder:0,vung:1},
  /* diêm dúa: overdone, funny not ugly: chalky powder, heavy hard-edged blush, very red lips */
- diem:{skin:[255,252,250,.40,.66],blush:[230,78,104,.62,.2,.5],lip:[186,16,46,.85,.09,.042],powder:1}};
+ diem:{skin:[255,251,247,.30,.66],blush:[232,90,110,.58,.25,0],lip:[192,30,58,.62,.085,.04],powder:1,glow:1}};
 /* the look a record draws: its own look, else 'vừa' (middle score, owner 17/11: a light 'đẹp' layer); mặt mộc / no makeup = none */
 function toilLookRec(r){if(!r||!r.makeup)return null;if(r.look)return r.look;return r.score!=null&&toilTier(r.score|0)==='vua'?'vua':null}
 function toilLookOfP(p){try{if(!S)return null;if(p&&p!==S&&p.coop){return toilLookRec(toilFriendRec(p))}if(p!==S)return null;if(TOIL.prev)return TOIL.prev.look;return toilLookRec(toilToday(S))}catch(e){return null}}
 const TOIL_SVGC={};
 function toilRnd(seed){let a=(seed*2654435761)>>>0||1;return()=>{a=(a+0x6D2B79F5)>>>0;let t=a;t=Math.imul(t^t>>>15,t|1);t^=t+Math.imul(t^t>>>7,t|61);return((t^t>>>14)>>>0)/4294967296}}
 /* col = her picks (toilColOf): the blush disc and the fallback lip oval take HER colours; noLip = the lips come from the colour layer (§60) */
-function toilMakeupSvg(file,look,col,noLip){const L=TOIL_LOOKS[look];const v=toilRow(file);if(!L||!v)return"";col=col||toilColDef();
+function toilMakeupSvg(file,look,col,noLip){const L=TOIL_LOOKS[look];const v=toilRow(file);if(!L||!v)return"";col=col||toilColDef();if(MK_FIT.face(file))noLip=true;/* a face with a mesh gets its lips ONLY from the colour layer (mesh points); the oval is for mesh-less faces */
  const key=file+"|"+(v===TOIL_FIT.fit[file]?0:1)+"|"+look+"|"+col.ma+"|"+col.son+"|"+(noLip?1:0)+"|"+(L.vung?col.seed|0:"");if(TOIL_SVGC[key])return TOIL_SVGC[key];
  const A=v[8]||1.3,Y=y=>y*A,[mx,my,lx,ly,rx,ry,fw]=v;const H=100*A;const c=(a)=>`rgb(${a[0]},${a[1]},${a[2]})`;
  const cx=(lx+rx)/2,cy=Y((ly+ry)/2);const d=Math.hypot(rx-lx,Y(ry)-Y(ly))||fw*.5;const ang=Math.atan2(Y(ry)-Y(ly),rx-lx)*180/Math.PI;
  const sk=L.skin,bl=toilColRGB("ma",col.ma).concat(L.blush.slice(3)),lp=toilColRGB("son",col.son).concat(L.lip.slice(3));const br=fw*bl[4]*1.0;
  /* vụng: the two cheeks differ (size, place, strength) and a patch of caked powder sits off the cheek — seeded per day, in face units, so portrait and figure match */
  const R=toilRnd((col.seed|0)+7);const jl=L.vung?[1.2+.5*R(),(R()-.5)*fw*.12,(R()-.3)*fw*.1,1.25]:[1,0,0,1],jr=L.vung?[.55+.25*R(),(R()-.5)*fw*.1,(R()-.6)*fw*.09,.7]:[1,0,0,1];
- const pw=L.vung?[(R()<.5?lx:rx)+(R()-.5)*fw*.12,Y(ly)-fw*(.04+.06*R()),fw*(.05+.03*R())]:null;
+ const ja=L.vung?[.6+.25*R(),.65+.3*R(),R()*70-35,R()*70-35]:[1,1,0,0];const pw=L.vung?[(R()<.5?lx:rx)+(R()-.5)*fw*.12,Y(ly)-fw*(.04+.06*R()),fw*(.05+.03*R())]:null;
  /* skin light: an oval over the face, feathered; blush: two feathered discs (the hard stop makes the diêm dúa circles); lips: a blurred oval */
  const svg=`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 ${H.toFixed(2)}" preserveAspectRatio="none">`+
  `<defs><radialGradient id="s"><stop offset="0" stop-color="${c(sk)}" stop-opacity="${sk[3]}"/><stop offset="${L.powder?.7:.45}" stop-color="${c(sk)}" stop-opacity="${(sk[3]*(L.powder?.85:.6)).toFixed(3)}"/><stop offset="1" stop-color="${c(sk)}" stop-opacity="0"/></radialGradient>`+
  `<radialGradient id="b"><stop offset="0" stop-color="${c(bl)}" stop-opacity="${bl[3]}"/><stop offset="${bl[5]||.35}" stop-color="${c(bl)}" stop-opacity="${(bl[3]*(bl[5]?.92:.55)).toFixed(3)}"/><stop offset="1" stop-color="${c(bl)}" stop-opacity="0"/></radialGradient>`+
- `<filter id="f" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="${(fw*.012).toFixed(3)}"/></filter></defs>`+
+ `<filter id="f" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="${(fw*.012).toFixed(3)}"/></filter><filter id="g" x="-100%" y="-100%" width="300%" height="300%"><feGaussianBlur stdDeviation="${(fw*.05).toFixed(3)}"/></filter></defs>`+
  `<g transform="rotate(${ang.toFixed(2)} ${cx.toFixed(2)} ${cy.toFixed(2)})"><ellipse cx="${cx.toFixed(2)}" cy="${(cy-d*(L.powder?.02:.18)).toFixed(2)}" rx="${(d*sk[4]*1.25).toFixed(2)}" ry="${(d*sk[4]*1.55).toFixed(2)}" fill="url(#s)"/></g>`+
- `<circle cx="${(lx+jl[1]).toFixed(2)}" cy="${(Y(ly)+jl[2]).toFixed(2)}" r="${(br*jl[0]).toFixed(2)}" fill="url(#b)" fill-opacity="${Math.min(1,jl[3])}"/><circle cx="${(rx+jr[1]).toFixed(2)}" cy="${(Y(ry)+jr[2]).toFixed(2)}" r="${(br*jr[0]).toFixed(2)}" fill="url(#b)" fill-opacity="${jr[3]}"/>`+(pw?`<ellipse cx="${pw[0].toFixed(2)}" cy="${pw[1].toFixed(2)}" rx="${pw[2].toFixed(2)}" ry="${(pw[2]*.7).toFixed(2)}" fill="rgb(255,250,246)" fill-opacity=".4" filter="url(#f)"/>`:"")+
+ `<ellipse cx="${(lx+jl[1]).toFixed(2)}" cy="${(Y(ly)+jl[2]).toFixed(2)}" rx="${(br*jl[0]).toFixed(2)}" ry="${(br*jl[0]*(L.vung?ja[0]:1)).toFixed(2)}" transform="rotate(${ja[2].toFixed(1)} ${(lx+jl[1]).toFixed(2)} ${(Y(ly)+jl[2]).toFixed(2)})" fill="url(#b)" fill-opacity="${Math.min(1,jl[3])}"/><ellipse cx="${(rx+jr[1]).toFixed(2)}" cy="${(Y(ry)+jr[2]).toFixed(2)}" rx="${(br*jr[0]).toFixed(2)}" ry="${(br*jr[0]*(L.vung?ja[1]:1)).toFixed(2)}" transform="rotate(${ja[3].toFixed(1)} ${(rx+jr[1]).toFixed(2)} ${(Y(ry)+jr[2]).toFixed(2)})" fill="url(#b)" fill-opacity="${jr[3]}"/>`+(pw?`<ellipse cx="${pw[0].toFixed(2)}" cy="${pw[1].toFixed(2)}" rx="${pw[2].toFixed(2)}" ry="${(pw[2]*.7).toFixed(2)}" fill="rgb(255,250,246)" fill-opacity=".2" filter="url(#f)"/>`:"")+
+ (L.glow?`<ellipse cx="${lx.toFixed(2)}" cy="${(Y(ly)-fw*.07).toFixed(2)}" rx="${(fw*.13).toFixed(2)}" ry="${(fw*.06).toFixed(2)}" transform="rotate(${ang.toFixed(2)} ${lx} ${Y(ly).toFixed(2)})" fill="rgb(255,240,208)" fill-opacity="${look==="tuyet"?.34:.18}" filter="url(#g)"/><ellipse cx="${rx.toFixed(2)}" cy="${(Y(ry)-fw*.07).toFixed(2)}" rx="${(fw*.13).toFixed(2)}" ry="${(fw*.06).toFixed(2)}" transform="rotate(${ang.toFixed(2)} ${rx} ${Y(ry).toFixed(2)})" fill="rgb(255,240,208)" fill-opacity="${look==="tuyet"?.34:.18}" filter="url(#g)"/>`:"")+
  (L.vung?`<ellipse cx="${(mx+(R()<.5?-1:1)*fw*.05).toFixed(2)}" cy="${(Y(my)+fw*.045*A/1.3).toFixed(2)}" rx="${(fw*.085).toFixed(2)}" ry="${(fw*.032).toFixed(2)}" transform="rotate(${ang.toFixed(2)} ${mx} ${Y(my).toFixed(2)})" fill="${c(lp)}" fill-opacity=".5" filter="url(#f)"/>`:"")+
  (noLip?"":`<ellipse cx="${mx}" cy="${Y(my).toFixed(2)}" rx="${(fw*lp[4]).toFixed(2)}" ry="${(fw*lp[5]).toFixed(2)}" transform="rotate(${ang.toFixed(2)} ${mx} ${Y(my).toFixed(2)})" fill="${c(lp)}" fill-opacity="${lp[3]}" filter="url(#f)"/>`)+`</svg>`;
  return TOIL_SVGC[key]="data:image/svg+xml;charset=utf-8,"+encodeURIComponent(svg)}
@@ -676,7 +687,7 @@ const TOIL_COL={
  ma:{label:"Phấn má",def:"hongphan",L:[["hongphan","Phấn hồng phấn","hồng phấn",[238,128,144]],["hoadao","Phấn má hoa đào","hoa đào",[242,150,140]],["haiduong","Phấn hải đường","hải đường",[230,110,126]],
   ["yenchi","Yên chi","yên chi",[214,76,100]],["rangchieu","Phấn ráng chiều","ráng chiều",[240,140,108]],["hongsen","Phấn hồng sen","hồng sen",[226,120,160]],["camquyt","Phấn cam quýt","cam quýt",[246,150,96]]]},
  son:{label:"Son môi",def:"haiduong",L:[["haiduong","Son hải đường","hải đường",[206,60,80]],["dotham","Son đỏ thắm","đỏ thắm",[176,20,40]],["hongdao","Son hồng đào","hồng đào",[226,104,112]],
-  ["chusa","Son chu sa","chu sa",[204,54,38]],["manchin","Son mận chín","mận chín",[132,36,66]],["sanho","Son san hô","san hô",[232,104,86]],["camdao","Son cam đào","cam đào",[238,122,74]],["hophach","Son hổ phách","hổ phách",[214,92,40]]]},
+  ["chusa","Son chu sa","chu sa",[204,54,38]],["manchin","Son mận chín","mận chín",[132,36,66]],["sanho","Son san hô","san hô",[232,104,86]],["camdao","Son cam đào","cam đào",[230,132,104]],["hophach","Son hổ phách","hổ phách",[208,108,72]]]},
  may:{label:"Màu mày",def:"nau",L:[["nau","Mày nâu trầm","nâu trầm",[84,56,42]],["den","Mày đen tuyền","đen tuyền",[34,28,28]],["thanhdai","Mày thanh đại","thanh đại",[46,58,76]],
   ["naunhat","Mày nâu nhạt","nâu nhạt",[122,88,64]],["khoi","Mày khói","khói",[88,82,82]]]}};
 window.TOIL_COL=TOIL_COL;
@@ -712,7 +723,7 @@ function toilColText(c){c=toilColFix(c);return ["mat","ma","son","may"].map(k=>t
 /* strength by look: lip / eyelid colour share, eyelid height (share of the lid→brow gap), brow tint, outer wing, lower lash line */
 /* the ladder (owner 17/11 04:36/04:44Z): vừa = the old 'đẹp' layer; đẹp = halfway between the old đẹp and the old Kiều diễm; diêm dúa = OVERDONE (heavy blush, very red lips, too much powder);
    vụng = lip colour smeared past the lip line + uneven smudged blush, brows NEVER drawn or touched; mặt mộc = no layer */
-const TOIL_MKS={vung:{lip:.95,eye:.4,eyeH:.5,brow:0,wing:0,low:0,vung:1},vua:{lip:.54,eye:.5,eyeH:.5,brow:.45,wing:.08,low:0},dep:{lip:.7,eye:.6,eyeH:.59,brow:.565,wing:.15,low:.2},diem:{lip:.97,eye:.9,eyeH:.85,brow:.75,wing:.3,low:.55}};
+const TOIL_MKS={vung:{lip:.5,eye:.4,eyeH:.5,brow:0,wing:0,low:0,vung:1},vua:{lip:.44,eye:.5,eyeH:.5,brow:.45,wing:.08,low:0},dep:{lip:.56,eye:.6,eyeH:.59,brow:.565,wing:.15,low:.2},tuyet:{lip:.64,eye:.55,eyeH:.62,brow:.6,wing:.17,low:.15,shim:.3,gloss:.5},diem:{lip:.74,eye:.95,eyeH:.9,brow:.78,wing:.32,low:.55,shim:.45,gloss:.3}};
 const MK_FIT={g:{},ld:{},face(f){const m=/^(?:por|fig)-([a-z]+-[a-z]*\d+)-/.exec(String(f||""));return m?m[1]:null},
  get(f){const g=this.face(f);if(!g)return null;const t=this.g[g];if(t)return t[f]||null;this.load(g);return null},
  load(g){if(this.ld[g])return;this.ld[g]=1;try{fetch("img/mk-fit/"+g+".json").then(r=>r.ok?r.json():null).then(j=>{if(j){MK_FIT.g[g]=j;try{if(typeof S!=="undefined"&&S&&!Q.length&&!TOIL.st)render();else if(TOIL.st&&TOIL.prev&&TOIL.prevUI)TOIL.prevUI()}catch(e){}}}).catch(()=>{})}catch(e){}}};
@@ -739,8 +750,8 @@ function toilMkDraw(im,v,look,col,box){const W=im.naturalWidth,H=im.naturalHeigh
  /* lips: outer minus the mouth opening */
  const R=toilRnd((col.seed|0)+11),VU=!!T.vung;const lc=P.slice(0,12).reduce((a,p)=>[a[0]+p[0]/12,a[1]+p[1]/12],[0,0]);
  /* vụng: the lip colour goes past the lip line (bigger, shifted outline), patchy */
- const lipO=VU?(()=>{const sx=1.28+.12*R(),sy=1.8+.3*R(),dx=(R()-.5)*u*.2,dy=(R()-.15)*u*.1;return P.slice(0,12).map(([x,y])=>[lc[0]+(x-lc[0])*sx+dx,lc[1]+(y-lc[1])*sy+dy])})():P.slice(0,12);
- const [cl,gl]=mk();toilSoft(gl,g=>{toilSmooth(g,lipO);toilSmooth(g,P.slice(12,20))},u*(VU?.05:.035),1,K);
+ const lipO=VU?(()=>{const sx=1.1+.07*R(),sy=1.32+.14*R(),dx=(R()-.5)*u*.1,dy=(R()-.15)*u*.05;return P.slice(0,12).map(([x,y])=>[lc[0]+(x-lc[0])*sx+dx,lc[1]+(y-lc[1])*sy+dy])})():P.slice(0,12);
+ const [cl,gl]=mk();toilSoft(gl,g=>{toilSmooth(g,lipO);toilSmooth(g,P.slice(12,20))},u*(VU?.06:.05),1,K);
  /* eyelids: soft layers from the lash line up toward the brow, stronger at the lash line, a small wing at the outer corner; the eye itself stays clear */
  const [ce,ge]=mk();const lerp=(a,b,t)=>[a[0]+(b[0]-a[0])*t,a[1]+(b[1]-a[1])*t];
 const eh=VU?[.6+.55*R(),.3+.35*R()]:[1,1];let en=0;
@@ -753,6 +764,10 @@ const eh=VU?[.6+.55*R(),.3+.35*R()]:[1,1];let en=0;
    ge.beginPath();const lo=[inn].concat(Lo,[out]).map(p=>[p[0],p[1]+u*.022]);ge.moveTo(lo[0][0],lo[0][1]);lo.slice(1).forEach(p=>ge.lineTo(p[0],p[1]));ge.stroke();ge.restore()}
   ge.save();ge.globalCompositeOperation="destination-out";ge.beginPath();U.forEach((p,i)=>i?ge.lineTo(p[0],p[1]):ge.moveTo(p[0],p[1]));Lo.forEach(p=>ge.lineTo(p[0],p[1]));ge.closePath();ge.fill();ge.restore()};
  eye(P.slice(20,27),P.slice(27,30),P.slice(45,50));eye(P.slice(30,37),P.slice(37,40),P.slice(55,60));
+ /* tuyệt / diêm dúa: pearl-gold shimmer on the lid (T.shim) and a gloss on the lower lip (T.gloss), soft dabs, never a sticker */
+ const [csh,gsh]=mk();if(T.shim||T.gloss){const U1=P.slice(20,27),U2=P.slice(30,37),B1=P.slice(45,50),B2=P.slice(55,60);const dab=(x,y,r,a)=>toilSoft(gsh,g=>{g.arc(x,y,r,0,7)},r*.7,a,K);
+  for(const [U,B] of [[U1,B1],[U2,B2]]){const bA=t=>{const f=t*(B.length-1),i=Math.min(B.length-2,Math.floor(f));return lerp(B[i],B[i+1],f-i)};if(T.shim)[2,4].forEach((k,j)=>{const q=lerp(U[k],bA(.86-.74*k/6),.35);dab(q[0],q[1],u*(j===0?.04:.03),T.shim)})}}
+ const [cgl,ggl]=mk();if(T.gloss){const gy=lc[1]+u*.03;toilSoft(ggl,g=>{g.ellipse(lc[0],gy,u*.1,u*.016,0,0,7)},u*.02,T.gloss,K)}
  /* brows */
  const [cbw,gb]=mk();toilSoft(gb,g=>{toilSmooth(g,P.slice(40,50));toilSmooth(g,P.slice(50,60))},u*.03,1,K);
  /* vụng ink (painted in the brow colour itself): one brow redrawn too high / too thick, the other's tail dragged long, a smear of ink off a tail */
@@ -760,7 +775,7 @@ const eh=VU?[.6+.55*R(),.3+.35*R()]:[1,1];let en=0;
   const Bu=[P.slice(40,45),P.slice(50,55)],Bl=[P.slice(45,50),P.slice(55,60)];/* upper edge outer→inner, lower edge inner→outer */
   const line=(L,w,a,blur)=>{gi.save();gi.globalAlpha=a;gi.lineWidth=w;gi.shadowColor="#000";gi.shadowBlur=blur*K;gi.beginPath();L.forEach((p,i)=>i?gi.lineTo(p[0],p[1]):gi.moveTo(p[0],p[1]));gi.stroke();gi.restore()};
   /* owner 17/11 04:15Z: vụng stays PRETTY — no drawn / thick brows, no ink: only soft faults (uneven blush + a caked powder patch in the SVG layer, lip line a little off, soft uneven lids) */}
- const D=g0.getImageData(0,0,cw,chh),mI=gi.getImageData(0,0,cw,chh).data,mL=gl.getImageData(0,0,cw,chh).data,mE=ge.getImageData(0,0,cw,chh).data,mB=gb.getImageData(0,0,cw,chh).data,o=D.data;
+ const D=g0.getImageData(0,0,cw,chh),mI=gi.getImageData(0,0,cw,chh).data,mL=gl.getImageData(0,0,cw,chh).data,mE=ge.getImageData(0,0,cw,chh).data,mB=gb.getImageData(0,0,cw,chh).data,mSh=gsh.getImageData(0,0,cw,chh).data,mGl=ggl.getImageData(0,0,cw,chh).data,o=D.data;
  const Lum=i=>.299*o[i]+.587*o[i+1]+.114*o[i+2];let sl=0,nl=0,se=0,ne=0;
  for(let i=0;i<o.length;i+=4){const l=Lum(i);if(mL[i+3]>140){sl+=l;nl++}if(mE[i+3]>60&&l>110){se+=l;ne++}}
  const Ll=nl?sl/nl:150,Le=ne?se/ne:205;const tl=toilColRGB("son",col.son),te=toilColRGB("mat",col.mat),tb=toilColRGB("may",col.may);
@@ -769,14 +784,16 @@ const eh=VU?[.6+.55*R(),.3+.35*R()]:[1,1];let en=0;
  const NS=u*.14,hv=(x,y)=>{let h=(x*374761393+y*668265263+(col.seed|0)*982451653)|0;h=Math.imul(h^h>>>13,1274126177);return((h^h>>>16)>>>0)/4294967296};
  const nz=(x,y)=>{const fx=(x-lc[0])/NS,fy=(y-lc[1])/NS,ix=Math.floor(fx),iy=Math.floor(fy),tx=fx-ix,ty=fy-iy,sx=tx*tx*(3-2*tx),sy=ty*ty*(3-2*ty);
   const a=hv(ix,iy),b=hv(ix+1,iy),c=hv(ix,iy+1),d=hv(ix+1,iy+1);return a+(b-a)*sx+(c-a)*sy+(a-b-c+d)*sx*sy};
- for(let i=0;i<o.length;i+=4){const ab=mB[i+3]/255,ae=mE[i+3]/255,al=mL[i+3]/255,ai=VU?mI[i+3]/255:0;if(!(ab||ae||al||ai)){o[i+3]=0;continue}
+ for(let i=0;i<o.length;i+=4){const ab=mB[i+3]/255,ae=mE[i+3]/255,al=mL[i+3]/255,ai=VU?mI[i+3]/255:0,as=mSh[i+3]/255,ag=mGl[i+3]/255;if(!(ab||ae||al||ai||as||ag)){o[i+3]=0;continue}
   const pn=VU?.6+.55*nz(bx+((i>>2)%cw)*bw/cw,by+Math.floor((i>>2)/cw)*bh/chh):1;
   const r0=o[i],g1=o[i+1],b0=o[i+2],l=Lum(i);let r=r0,g=g1,b=b0,keep=1;
   if(ab){/* only the brow hairs (darker than the skin) take the colour, with their own light */const dk=cl3((Le-l)/(Le*.42),0,1);const a=ab*T.brow*dk;
    if(a>0){const k=Math.min(2.4,l/Ltb)*(look==="diem"?.9:1);r+=(tb[0]*k-r)*a;g+=(tb[1]*k-g)*a;b+=(tb[2]*k-b)*a;keep*=1-a}}
   if(ae){const a=Math.min(1,ae*T.eye*pn);const k=cl3(l/Le,.35,1.12);r+=(te[0]*k-r)*a;g+=(te[1]*k-g)*a;b+=(te[2]*k-b)*a;keep*=1-a}
-  if(al){let a=Math.min(1,al*T.lip*pn);const q=l/Ll;const k=VU?cl3(q,.82,1.02):cl3(q,.55,1.22);/* highlights on the lip keep some of their shine; vụng: the smear past the line is as dark as the lip itself (readable at stage size) */if(!VU&&q>1.22)a*=Math.max(.45,1-(q-1.22)*1.6);
+  if(al){let a=Math.min(1,al*T.lip*pn);const q=l/Ll;const k=VU?cl3(Math.pow(q,1.25),.8,1.02):cl3(Math.pow(q,1.35),.45,1.25);/* highlights on the lip keep some of their shine; vụng: the smear past the line is as dark as the lip itself (readable at stage size) */if(!VU&&q>1.22)a*=Math.max(.45,1-(q-1.22)*1.6);
    r+=(tl[0]*k-r)*a;g+=(tl[1]*k-g)*a;b+=(tl[2]*k-b)*a;keep*=1-a}
+  if(as){const a=Math.min(.9,as);r+=(Math.min(255,te[0]*.35+235)-r)*a;g+=(Math.min(255,te[1]*.35+215)-g)*a;b+=(Math.min(255,te[2]*.35+170)-b)*a;keep*=1-a}
+  if(ag){const a=Math.min(.8,ag);r+=(255-r)*a;g+=(244-g)*a;b+=(238-b)*a;keep*=1-a}
   if(ai){const a=Math.min(1,ai*pn);const k=.85;r+=(tb[0]*k-r)*a;g+=(tb[1]*k-g)*a;b+=(tb[2]*k-b)*a;keep*=1-a}
   const A=1-keep;if(A<.004){o[i+3]=0;continue}/* overlay pixel so that mix(original, it, A) = the painted pixel */
   o[i]=cl3(Math.round(r0+(r-r0)/A),0,255);o[i+1]=cl3(Math.round(g1+(g-g1)/A),0,255);o[i+2]=cl3(Math.round(b0+(b-b0)/A),0,255);o[i+3]=Math.round(A*255)}
@@ -843,7 +860,11 @@ const TOIL_HINT={moc:"Gương mặt mộc: người trọng lễ dễ chê, kẻ
  diem:"Đậm quá dịp, quá phẩm: người ta chê phô trương, kẻ ưa phô trương lại khen."};
 function toilPreName(col,look){if(!col)return"";const k=toilPreOf(Object.assign({},col,{want:look==="diem"?"diem":""}));const p=TOIL_PRE.find(x=>x[0]===k&&(x[2]==="diem")===(look==="diem"));return p?p[1]:"màu tự chọn"}
 function toilFigAt(){let P=0;try{const it=wdItem(wdOf(S).y);P=it?it.P:0}catch(e){}const rank=P>=1?Math.min(7,P-1):S.rank;const f0=figTierOf;try{figTierOf=function(w){return w===S?rank:f0.apply(this,arguments)};return figFor(S,"")}catch(e){return""}finally{figTierOf=f0}}
-function toilReveal(o,done){let fin=false;const end=()=>{if(fin)return;fin=true;try{done()}catch(e){console.error(e)}};
+/* the face mesh (img/mk-fit) of a file must be loaded BEFORE its colour layers are built: the layer is baked into the reveal markup and is not redrawn when the mesh arrives
+   (r2 FAIL 17/11: a lip patch on the chin = the fallback lip oval from the old fit row, drawn while the mesh was still loading). Waits up to ~2.5 s, then goes on (the mesh-less fallback below draws no lips). */
+function toilMkReady(files,cb){let n=0;const need=()=>files.filter(f=>f&&MK_FIT.face(f)&&!MK_FIT.get(f));const go=()=>{if(!need().length||++n>31)return cb();setTimeout(go,80)};go()}
+function toilReveal(o,done){let fin=false;try{if(typeof kmStage==="function"&&kmOn()&&S&&TOIL_FIT.fit&&!o.mkWait){const f0=toilFigAt(),p0=toilPor();if(f0&&p0.src){o.mkWait=1;return toilMkReady([kitFile(f0),kitFile(p0.src)],()=>toilReveal(o,done))}}}catch(e){}
+ const end=()=>{if(fin)return;fin=true;try{done()}catch(e){console.error(e)}};
  try{if(typeof kmStage!=="function"||!kmOn()||!S||!TOIL_FIT.fit)return end();const fig=toilFigAt(),por=toilPor();if(!fig||!por.src)return end();
   const ff=kitFile(fig),pf=kitFile(por.src),v=toilRow(ff);if(!v)return end();const A=v[8]||1.3,red=kmReduced(),look=o.look;
   /* the close-up is HER PORTRAIT laid exactly over her face in the figure (same mouth point, same face width from img/toil-fit.json): the figure picture is too soft at 5x, the portrait has the pixels */
@@ -874,11 +895,11 @@ function toilReveal(o,done){let fin=false;const end=()=>{if(fin)return;fin=true;
   if(red){camSet();R.classList.add("ktrv-red");toZoom();return}
   /* step in, effect, zoom */
   requestAnimationFrame(()=>R.classList.add("ktrv-in"));
-  try{kitFxPreload&&kitFxPreload(look==="vung"?["ink"]:look==="diem"?["spark","petal-peach"]:look==="dep"?["petal-plum","petal-peach"]:[])}catch(e){}
-  const runFx=()=>{if(ph>=2)return;const SF={dep:"favour",diem:"rankNew",vung:"mglose",vua:"mirror",moc:"mirror"}[look]||"mirror";try{kitSfx(SF)}catch(e){}
+  try{kitFxPreload&&kitFxPreload(look==="vung"?["ink"]:look==="diem"?["spark","petal-peach"]:look==="dep"||look==="tuyet"?["petal-plum","petal-peach"]:[])}catch(e){}
+  const runFx=()=>{if(ph>=2)return;const SF={dep:"favour",tuyet:"favour",diem:"rankNew",vung:"mglose",vua:"mirror",moc:"mirror"}[look]||"mirror";try{kitSfx(SF)}catch(e){}
    /* KIT §68.7: light is a RIM only (starts at her outline, radiates outward, never over her face); sparks and petals leave from her silhouette's edges */
    const rc=im.getBoundingClientRect(),eL={x:rc.left+rc.width*.3,y:rc.top+rc.height*.42},eR={x:rc.right-rc.width*.3,y:rc.top+rc.height*.42};
-   try{if(look==="dep"){kitFxBurst("petal-plum",null,16,{});kitFxBurst("petal-peach",null,10,{});kitFxRim(im,{tone:"glow-gold",a:.65,r:16,dur:3200})}
+   try{if(look==="dep"||look==="tuyet"){kitFxBurst("petal-plum",null,16,{});kitFxBurst("petal-peach",null,10,{});kitFxRim(im,{tone:"glow-gold",a:.65,r:16,dur:3200})}
     else if(look==="diem"){kitFxRim(im,{tone:"glow-gold",a:.95,r:24,dur:3200});kitFxBurst("spark",eL,12,{});kitFxBurst("spark",eR,12,{});kitFxBurst("petal-peach",null,14,{})}
     else if(look==="vung"){kitFxBurst("ink",eR,3,{scale:.8});R.classList.add("ktrv-wob")}
     else if(look==="vua"){kitFxRim(im,{tone:"glow-gold",a:.45,r:12,dur:2400})}}catch(e){}};later(900,runFx);
@@ -892,7 +913,7 @@ window.toilReveal=toilReveal;
 .ktrv-moc .ktrv-plate,.ktrv-vua .ktrv-plate{filter:brightness(1.22) saturate(.78) contrast(.94)}
 .ktrv-lt{position:absolute;inset:0;pointer-events:none;opacity:0;transition:opacity 1s}
 .ktrv-moc .ktrv-lt{background:radial-gradient(ellipse at 50% 30%,#fff8e8aa,#fff8e800 70%);opacity:1}
-.ktrv-dep .ktrv-lt{background:radial-gradient(ellipse at 50% 55%,#ffe8c055,#ffe8c000 65%)}
+.ktrv-dep .ktrv-lt,.ktrv-tuyet .ktrv-lt{background:radial-gradient(ellipse at 50% 55%,#ffe8c055,#ffe8c000 65%)}
 .ktrv-diem .ktrv-lt{background:radial-gradient(ellipse at 50% 50%,#ffd27a99,#ffb03a00 70%)}
 .ktrv-in .ktrv-lt{opacity:1}
 .ktrv-fig{position:absolute;left:0;right:0;bottom:3%;height:88%;display:flex;justify-content:center;align-items:flex-end;pointer-events:none}

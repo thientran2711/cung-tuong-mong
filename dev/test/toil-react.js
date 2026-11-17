@@ -19,7 +19,7 @@ fs.mkdirSync(DIR,{recursive:true});const fails=[];const chk=(c,msg)=>{if(!c)fail
   chk(r.open,t+': modal open');chk(r.onTop,t+': modal is on top');chk(!r.hs,t+': horizontal overflow');chk(!r.bad,t+': truncated option');out['modal_'+t]=r;await p.screenshot({path:`${DIR}/toilr-${tag}-${t}.jpg`,quality:60})};
  /* 1. a slight from a consort whose face is better than hers: Ghi hận · Mách · Hỏi bí quyết next to the old three */
  await p.evaluate(()=>{window.np0=toilNpc;toilNpc=()=>({makeup:true,score:95,dv:'hopdip',npc:1});react('rival-jealous',-2)});await p.waitForTimeout(300);
- out.bad=await names();for(const n of['Xin lỗi','Cười trừ','Đáp lại','Ghi hận','Mách Hoàng hậu','Hỏi bí quyết'])chk(out.bad.includes(n),'bad has '+n);chk(!out.bad.some(n=>/^Tặng lại/.test(n)),'bad has no Tặng lại');
+ out.bad=await names();for(const n of['Cười cho qua','Đáp lại khéo','Đáp trả gay gắt','Im lặng lui đi','Ghi hận','Mách Hoàng hậu','Hỏi bí quyết'])chk(out.bad.includes(n),'bad has '+n);chk(!out.bad.includes('Xin lỗi'),'mocked by a consort: no Xin lỗi (owner 17/11 06:30Z)');chk(!out.bad.some(n=>/^Tặng lại/.test(n)),'bad has no Tặng lại');
  await modalOk('bad');
  /* Ghi hận */
  const g0=await p.evaluate(()=>({oan:oan(S,V),duc:S.duc,ro:S.ro[V.id]||0}));await pick('Ghi hận');await p.waitForTimeout(200);
