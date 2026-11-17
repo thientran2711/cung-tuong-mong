@@ -62,3 +62,23 @@ Vào game mới không còn bật ngay màn lật thẻ, lật thẻ chỉ khi v
 
 ## Next (this session): OI
 review/batch-2300-oi: origin-intros-r1 on top; jkc2.js 149 typed numbers → BAL.kc2 (values checked identical by substitution), BAL.entry.why / BAL.entry.w.kc as BAL tables, gate 0 fails locally. To do: rebase on 744b80e7, build, origin-intros tests + quickcheck + kc2val re-measure → "OI READY <sha>" to main s27.
+
+## HANDOVER — OI part (builder rolled over: context ≈ 35 % ≥ START 5 % + 25 %; coordinator opens the successor)
+ROLLOVER = CONTEXT, NEVER 30 TURNS (owner OD:L1217; repeated by the owner 16/11 09:20Z — she is tired of reminding)
+- The "Lượt n/30" counter from the owner's global chat preferences is ONLY a display counter here. It is NOT the rollover trigger for the Cung Tường Mộng main chat or any foreman. Never hand over because n reached 30.
+- Trigger = context (owner OD:L1217 + ceiling 16/11 08:15Z s13): at session start note your starting context as a % of the window (START_CTX; get_session context_usage.used_tokens, or your own estimate when it reads 0) in your first handover line. Roll over when context >= START_CTX % + 25 % of the window, and NEVER above 60 % of the window (hard ceiling). Then write the handover, open the next session yourself (create_session), and stop.
+- Every takeover prompt you write MUST copy these three lines verbatim. Workers roll over too (owner 16/11 08:22Z s14, option 1): at START_CTX % + 25 % of the window, ceiling 60 %; a worker may finish if only push + report remain; it writes its handover in its report file and tells its coordinator, and the COORDINATOR opens the successor (never the worker).
+
+TASK (main s26 order, 23:08Z): on review/batch-2300-oi move origin-intros-r1's typed numbers into BAL (never --allow-grow) so one-core-guard = 0 fails, rerun origin-intros' own tests + quickcheck, run the kc2val re-measure (nc/cnv "Chờ" value gap after fix2, OD:L1288) and print it in the report, then send "OI READY <sha>" to main s27 session_01UV1Szh248gDvHSAH88RvJm for the 00:32 batch.
+
+STATE: `review/batch-2300-oi` = **25546cf0** = 7c467596 (batch without flip-entry) + merge origin-intros-r1 34d90ea4 (c8078686; jroute conflict: branch NaN-cooldown text + main BAL.route.kidAge) + 25546cf0:
+- jkc2.js: 149 typed numbers (fx / cmp / can / roll) → `Object.assign(BAL,{kc2:{…}})` appended to jbal2.js, keys = card name (ASCII) or function + slot + stat; values checked IDENTICAL by substituting every BAL.kc2.key back and diffing with the original file; `inn={"tam":1,…}` is a place-kind flag (quoted, not a stat); map text "tốn: 1 khắc" prints BAL.kc2.kcGoWhy_k.
+- jbal2.js: `Object.assign(BAL.entry,{why:…})` → `BAL.entry.why={…}`, `Object.assign(BAL.entry.w,{kc:{…}})` → `BAL.entry.w.kc={…}` (the guard only masks `Object.assign(BAL,{` and `BAL.x=` bodies; w.kc / why did not exist before).
+- one-core-guard locally: PASS 0 fails (6672 vs 6691). Script used: /home/user/wt/oi-tools/kc2move.js (may be gone; logic = guard's lex + maskBal + same patterns).
+
+STEPS LEFT:
+1. New branch from review/batch-2300 744b80e7 (it has flip-entry + the test fixes), `git merge origin/review/origin-intros-r1` (expect the same jroute conflict: take the branch text, replace `(k.age||0)<15` with `<BAL.route.kidAge`), then `git cherry-pick 25546cf0` (or re-run the move) → gate 0 fails; assemble list keeps jseat.js, jcoopone.js LAST (jkc2/jentry/joi added).
+2. CHANGE line: prepend the origin-intros line to dev/site/CHANGE.txt line 1; `bash dev/site/build_site.sh`; commit; push review/batch-2300-oi.
+3. Tests: quickcheck; coop-e2e; origin-intros' own tests (see dev/handover/reports/review-origin-intros.md for the list); kc2val: `SEED=n node dev/measure/kc2val.js <lives> cnv,nc <out.json>` for a few seeds, then `python3 dev/measure/kc2val-gap.py <files>` → print the nc/cnv gap table (old fix2 table: nc +13 ±17, cnv −11 ±13).
+4. Report section here + CLAIMS row, then "OI READY <sha>" to s27.
+Env notes: tests that launch chromium with HTTPS_PROXY need a localhost bypass on this box (map-frame-kit); serve the build with a UTF-8 server (python http.server with charset). Shots never in git (CDN img/_review/<topic>/).
