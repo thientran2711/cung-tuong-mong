@@ -144,7 +144,7 @@ function talkOpts(p){const E=S.emp,K=E.known,L=E.likes,b=bestArt(),v=p.ref;
    {n:"Khiêu khích",o:100,w:{danh:2,hh:-15},x:"Hoàng hậu ghen +15, oán ngươi +9",go:()=>{v.ghen=cl(v.ghen+15,0,100);oanAdd(v,S,9)}}])}
  if(p.kind==="rival"){const A=topicOpts(v);
   if(!sameHouse(S,v)){A.push({n:"Tặng quà",o:100,x:"chọn món trong rương",open:()=>{if(S.inv.some(e=>!e.h))pushDil(mkP("giftpick",{v:v.id}),"Tặng quà")}});
-   A.push({n:"Khiêu khích",o:100,w:{danh:1},x:"nàng quý ngươi -15, oán ngươi +9, ghen +10",go:()=>{relAdd(S,v,-15);v.ghen=cl(v.ghen+10,0,100)}});
+   const PK=BAL.talk.provoke;A.push({n:"Khiêu khích",o:100,w:{danh:PK.danh},x:`nàng quý ngươi -${PK.rel}, oán ngươi +${Math.round(PK.rel*BAL.relOan.hurt)}, ghen +${PK.ghen}`,go:()=>{relAdd(S,v,-PK.rel);v.ghen=cl(v.ghen+PK.ghen,0,100)}});
    if(v.pg>=50)A.push({n:"Trút giận",o:100,w:{duc:-3},x:"hả cơn ghen; nàng oán",go:()=>{v.pg=0;relAdd(S,v,-20)}});
    A.push(...placeHarms(v,S.place));if(liveRivals(true).filter(x=>whereOf(x)===S.place).length>=2)A.push({n:"Nghe lén câu chuyện",o:od(BAL.ag.wit.hear+S.mat*BAL.ag.wit.mat),x:"chứng cứ +1",run:()=>overhear(S.place)})}
   return A}
