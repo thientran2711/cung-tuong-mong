@@ -39,3 +39,4 @@ YOUR LOOP: read notifications; when a worker reports a rollover, open its succes
 - Files live / credits: (fill each hour)
 - 02:15Z manifest merge #1: CDN FIGURES-hd.json 1598 -> 1635 (W4b maid fragment, rebuilt by lead from CDN). W4b->W4c = session_011xDdVShYq4ow4VaBTVm4CY; W7->W7b = session_011xDdVRfTXkRr1K97oJueiZ (retro-fits 56 hd). W2: 33/256 a18 (ctx ~15%).
 - 02:20Z W6->W6b = session_011xDdVNxAYRynZa8Sq6PzU6 (retro-fit hd of 56). Workers now: W1b ...Qbi2, W2 ...RJKY, W3b ...RasD, W4c ...ShYq4, W5b ...RUq5, W6b ...NxAY, W7b ...RfTX.
+- 02:22Z W1b rolled over (~63 files live at 2k, no hd). Per Foreman C (6 family workers): NO successor; remaining hero+misc (eunuch a18 ~108, kid, other ages, + hd retro-fit of ~63 live files; see batch-w1-hero-misc.md, lists/shards/w1-done-2k.txt) merged into W2's queue (W2 delegates generation to sub-agents, lightest context). Workers now: W2, W3b, W4c, W5b, W6b, W7b.
