@@ -794,3 +794,4 @@
 | kit-ico-rank-r2 PASS aaa1bec1 (co-op rebirth fixed; FF deploys rank Worker, safe) → builder batch s32a; worker r2 + reviewer archived; 13 review shots left on CDN (R2 403) → image sweep | review/kit-ico-rank-r2-r1 | MAIN s32 | session_01UV1SzhfMi68Cmn88G2Yqze | PASS → BATCH | 17/11 14:35Z |
 | pcard-facts: person card fact rows = fact first, details on tap (OD ~14:15Z/~14:40Z) on person-leftcol-r1 e06e38a1 | review/pcard-facts | MAIN s32 | session_01UV1Szh5bDFLJ7XCmCJoDvp | RUNNING | 17/11 14:41Z |
 | GRAND ENDINGS DESIGN (opus; expert + audit + skeleton; design only; MAIN s32 14:35Z/14:40Z) | review/grand-endings-design | D | session_01964izFDJ18FWz2tTcPJvcK | RUNNING | 17/11 14:42Z |
+| residence-seats review r1 (opus BIG) of d88883df | review/residence-seats-r1 | D | session_01964izCtfXkztCLGkiuxC7s | RUNNING | 17/11 14:48Z |
