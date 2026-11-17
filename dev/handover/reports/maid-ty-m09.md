@@ -21,3 +21,7 @@ Owner (verbatim via ROOT-11): "Hãy khoan vẽ hàng loạt đã ... Đợi đ�
 STEP 2 batch B01 (keys 1-40 = maids m01-m03) was stopped mid-run: 40 gens + ~38 cut-outs (~5.5k credits), NOTHING uploaded to live. 39 finished locally, measured: maid-ty-m09-B01-measure.tsv (hairline/chin read by eye on a 10 px ruler at 1800 tall; ref m09 0.099; B01 mean 0.097, range 0.088-0.100).
 Also made 4 other-maid samples (m04 ty5 a18, m05 ty2 a26, m06 ty3 a36, m10 ty1 a51) -> _review; ratios 0.098/0.101/0.103/0.095.
 FAULT FOUND: faces of m01/m02/m03 look almost identical (style ref dominates identity) -> identity must be strengthened before any mass run.
+
+## 17/11 ~22:15Z v2.1 (no gens) + measurements
+Owner rule (via ROOT-12): body measured from SKULL TOP (not bun/pins) to feet = 7.5 heads, same px for everyone; buns/ornaments are extra height; never shrink the body to fit them. v2.1 = v2 with that sentence replacing the PROPORTIONS sentence (fig-cutout-clean/PROMPT_V21.txt). Owner 23:30Z: face similarity ignored ("kệ đi"); costume, hairpins, BODY must look the same. Identity test variant (face fig as ref 1) kept for reference only: PROMPT_V21_IDTEST.txt (2 gens, m02/m03 ty1 a18, used for measuring).
+Measurement (px at 1800 tall, by eye on a 10 px ruler): see message to ROOT-12; B01 bodies measure ~8.1-8.6 heads (skull->chin 205-218) vs spec 7.4-7.5 (ref 239): the prompt sentence "1/7.5" yields ~8 heads, heads ~10 % too small, shoulders ~1.5-1.8 face-heights vs 2.0.
