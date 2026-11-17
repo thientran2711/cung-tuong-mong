@@ -383,7 +383,7 @@ function loop(){try{
 }catch(e){console.error(e)}}
 setInterval(loop,500);
 /* a new kiếp: fresh (the tour may start); after a past life, the luân hồi tip */
-try{const s0=start;start=function(){const r=s0.apply(this,arguments);try{/* not botOff(): quiet is still on while Luân hồi waits for the figures (j52 nlBegin) */if(!window.__bot){T.fresh=true;PICK=null;let past=0;try{past=lifeLog().length}catch(e){}if(past)NEWLIFE=true}}catch(e){}return r};window.start=start}catch(e){}
+try{const s0=start;start=function(){const r=s0.apply(this,arguments);try{/* not botOff(): quiet is still on while Luân hồi waits for the figures (j52 nlBegin) */if(!window.__bot&&!(window.COOPW&&COOPW.ctx)/* co-op thin B: the host building the GUEST's life (context b) is not a new life on this phone */){T.fresh=true;PICK=null;let past=0;try{past=lifeLog().length}catch(e){}if(past)NEWLIFE=true}}catch(e){}return r};window.start=start}catch(e){}
 
 /* ---------- Thiết lập: "Lời dặn tân thủ" switch (kit toggle) ---------- */
 try{const oh=optHTML;optHTML=function(){const h=oh.apply(this,arguments);
