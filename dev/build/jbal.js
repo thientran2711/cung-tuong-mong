@@ -253,8 +253,8 @@ function ntRiseOdds(){return Math.max(0,(S.nt||0)/BAL.ntRise.div-BAL.ntRise.sub)
    gift (Dâng lễ, P): an NPC gift weighs rich (bạc >= richBac: richV, she pays cost) else max(min, Tài*kTai + Họa*kHoa + người hầu*kHelp);
    her three gifts = [richV (ngọc quý, cost bạc), her own weight, plain]; every gift + luck*rand. praise/small to the best gift, miss if she gives none.
    fxWin = the feast-contest winner (Yến tiệc đầu xuân / Thất tịch, j8 festival); fxBestow / winBestow = odds (word ladder) of the Emperor's gift
-   to the winner. ctOan = Tranh ghế: Oán of each loser toward the winner. Jealousy is NOT here: ONE core = BAL.ghen.* (jbal2) applied by
+   to the winner. place / last = her Danh when she places 2nd-3rd / last (of 3+) in any contest. ctOan = Tranh ghế: Oán of each loser toward the winner. Jealousy is NOT here: ONE core = BAL.ghen.* (jbal2) applied by
    ghenAll() and printed by ghenN() (festival, contest, contestTop, praise, rankUp). */
 Object.assign(BAL,{fest:{gift:{richBac:100,richV:55,cost:60,min:15,plain:15,luck:25,kTai:.3,kHoa:8,kHelp:.8,
   praise:{th:{th:4,danh:1},emp:{sung:3,danh:1}},small:{th:{th:1},emp:{sung:1}},miss:{th:{th:-2},emp:{sung:-2}}},
- fxWin:{sung:8,danh:3},fxBestow:50,winBestow:30,ctOan:10}});
+ fxWin:{sung:8,danh:3},fxBestow:50,winBestow:30,ctOan:10,place:{danh:1},last:{danh:-1}}});
