@@ -49,7 +49,7 @@ const blob=(rev,f)=>execFileSync('git',['cat-file','blob',rev+':'+f],{cwd:__dirn
     const dawn=document.getElementById('dawn');if(dawn&&!dawn.hidden&&dawn.innerHTML){const go=dawn.querySelector('#dawn-go');try{go&&go.click()}catch(e){}await W(40);dawn.hidden=true;dawn.innerHTML='';document.body.classList.remove('kbk-open');continue}
     if(Q.length){const m=Q[0];const M=document.getElementById('modal');if(M.hidden)showModal();await W(60);
      const key=String(m.t||'').replace(/<[^>]+>/g,'').slice(0,40)+'|'+(m.pid||'');if(!seen.has(key)&&kitStagePeople(m).length&&!M.hidden){seen.add(key);const r=await window.__meas(m);r.src='play';out.push(r)}
-     if(m.opts&&m.opts.length){const i=m.opts.findIndex(c=>!(c.fx&&c.fx.bac&&S.bac+c.fx.bac<0));if(i<0)closeModal();else chooseM(i)}else closeModal();await W(30);continue}
+     if(m.opts&&m.opts.length){const i=m.opts.findIndex(c=>!c.off&&!(c.fx&&c.fx.bac&&S.bac+c.fx.bac<0));if(i<0)closeModal();else chooseM(i)}else closeModal();await W(30);continue}
     try{nextBuoi()}catch(e){}await W(40)}return out},+process.env.PLAY);rows.push(...pr)}
 
   /* one picture per kind for the eye */
