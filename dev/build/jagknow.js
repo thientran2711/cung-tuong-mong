@@ -390,7 +390,7 @@ function tmBest(p){let b=null,bo=-1;for(const s of tmCands(p)){const o=tmOdds(p,
 function tmTake(p,s){if(!p||!s)return"";s.spyFor=key(p);KN.stat.tmOk=(KN.stat.tmOk||0)+1;const r=`${tmWho(s)} nhận làm tai mắt cho ${p===S?"ngươi":p.name}.`;if(p===S&&!quiet)try{log(r)}catch(e){}return r}
 function tmNo(p,s,t){t=t==null?tmRefuse(p,s):t;const f=tmFear(p,1);const r=`${tmWho(s)} không nhận làm tai mắt cho ${p===S?"ngươi":p.name}${t?", còn bẩm lại với chủ":""}.${f?" "+f+".":""}`;if(p===S&&!quiet)try{log(r)}catch(e){}return r}
 /* one approach to a given person (her odds = tmOdds, + bonus for a threat) → the person decides */
-function tmAsk(p,s,bonus){KN.stat.tmTry=(KN.stat.tmTry||0)+1;return roll(agOdd(tmOdds(p,s)+(bonus||0)))?tmTake(p,s):(tmNo(p,s),"")}
+function tmAsk(p,s,bonus){KN.stat.tmTry=(KN.stat.tmTry||0)+1;const o=tmOdds(p,s)+(bonus||0);if(agTry(o))return tmTake(p,s);/* OD ~17:35Z: a capped near-sure miss is soft (no report, no fear) */if(agSoft(o)){if(p===S&&!quiet)try{log(agSoftTxt(S))}catch(e){}return""}tmNo(p,s);return""}
 /* the j7 volunteer: a real servant of another palace whose own odds for her reach vol.min */
 function tmVol(){const s=tmBest(S);return s&&tmOdds(S,s)>=tmB().vol.min?s:null}
 /* ================= AG-ALL-2g — INFO SELLERS (owner OD 17/11 ~16:50Z (2), verbatim in dev/OWNER_DECISIONS.md: "Có những người bán tin ... nô tài có một
