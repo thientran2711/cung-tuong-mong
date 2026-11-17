@@ -504,13 +504,18 @@ PEND.giftin=p=>{const f=byKey(p.f),e=p.e;if(!f)return null;const it=itm(e.k),hi=
  {n:"Nhận",fx:{},x:"cất vào rương",go:()=>S.inv.push(Object.assign({},e))},
  {n:"Trả lại quà",fx:{},x:hi?"nàng phẩm cao hơn, sẽ phật ý":"nàng hơi phật ý",go:()=>{/* the gift goes back to her (item ledger jil); co-op friend: the live path has no way back (parked, item-ledger.md) → Nội vụ phủ keeps it, never lost */if(f.coop&&typeof ilGone==="function")ilGone(S,Object.assign({},e),"kho",{own:""});else{f.inv=f.inv||[];f.inv.push(Object.assign({},e))}relAdd(S,f,hi?BAL.eff.j8.go_2[0]:BAL.eff.j8.go_2[1]);if(f.queen)apply({hh:-8})}},
  {n:"Đem đến Thái y viện xét nghiệm",fx:{bac:-10},x:`${word(cl(oSee(S,true)+25,5,95))} · thành: nếu đồ bị tẩm sẽ biết, ai gửi · hỏng: không thấy gì`,go:()=>{if(e.t&&roll(cl(oSee(S,true)+25,5,95))){evA(S,f,BAL.eff.j8.evGo);if(typeof ilGone==="function")ilGone(S,Object.assign({},e),"evid",{own:key(f)});log(`Thái y phát hiện ${it.n} của ${f.name} ${TAINT[e.t].n}. Chứng cứ ${f.name} ${balSg(BAL.eff.j8.evGo)}.`)}else{S.inv.push(Object.assign({},e));relAdd(S,f,BAL.eff.j8.go_3);log(`Thái y không thấy gì lạ ở ${it.n}.`)}}}]}};
+/* Nghiệm độc: ONE function for her button and an NPC (AG-ALL-2e2 cx3:test) */
+function itemTest(p,ix){const T=BAL.ag.par3.test;const e=(p.inv||[])[ix];if(!e||(p.bac||0)<T.bac)return"";const it=itm(e.k);if(p===S)apply({bac:-T.bac});else ap(p,{bac:-T.bac});e.tested=1;
+ if(e.t&&e.by!==key(p)&&roll(cl(oSee(p,true)+T.o,5,95))){p.inv.splice(ix,1);const by=byKey(e.by);if(by&&by!==p)/*evok: tainted by (scheme)*/evA(p,by,BAL.eff.j8.evItemAct);
+  return p===S?`Thái y phát hiện ${it.n} ${TAINT[e.t].n}${by?`; dấu vết dẫn về ${NM(by)} (chứng cứ ${balSg(BAL.eff.j8.evItemAct)})`:""}.`:`${p.name} đem ${it.n} đi nghiệm, thái y phát hiện đồ bị ${TAINT[e.t].n}`}
+ return p===S?`Thái y xét ${it.n}: không thấy gì lạ.`:`${p.name} đem ${it.n} đi nghiệm độc`}
 function itemAct(a,ix){const e=S.inv[ix];if(!e||S.dead||Q.length)return;const it=itm(e.k);
  if(a==="use"){if(it.evi){pushDil(mkP("evpick",{ix}),"Tập chứng cứ");render();return}if(e.k==="botngua"){if(!can(2))return;pushDil(mkP("itarget",{ix,k:e.k}),it.n);render();return}const r=useItem(S,ix);if(r)log(r)}
  else if(a==="wear")wear(S,ix);
  else if(a==="gift"){if(!can(2))return;pushDil(mkP("giftpick",{ix}),"Tặng quà")}
  else if(a==="sell"){const r=sellItem(S,ix);if(r)log(r)}
  else if(a==="taint")pushDil(mkP("taintpick",{ix}),"Tẩm đồ");
- else if(a==="test"){if(S.bac<10)return;apply({bac:-10});if(e.t&&e.by!=="me"&&roll(cl(oSee(S,true)+25,5,95))){S.inv.splice(ix,1);const by=byKey(e.by);if(by)/*evok: tainted by (scheme)*/evA(S,by,BAL.eff.j8.evItemAct);log(`Thái y phát hiện ${it.n} ${TAINT[e.t].n}${by?`; dấu vết dẫn về ${NM(by)} (chứng cứ ${balSg(BAL.eff.j8.evItemAct)})`:""}.`)}else log(`Thái y xét ${it.n}: không thấy gì lạ.`)}
+ else if(a==="test"){const r=itemTest(S,ix);if(r)log(r)}
  render()}
 function invAct(a){if(S.dead||Q.length)return;
  if(a==="shop"){pushDil(mkP("shop"),"Nhờ thái giám mua đồ");render();return}

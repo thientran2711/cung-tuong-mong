@@ -142,3 +142,53 @@ for(const k of ["health","praise","secret"]){const K="talk"+k.charAt(0).toUpperC
 agRunReg("cx3:talkGossip",(v,t)=>{if(!t)return"";const th=p3Third(v,t);return th?p3Res("talkGossip",P3T.gossip(v,t,th).run()):""});
 agRunReg("cx3:invoke",(v,t)=>t?p3Res("invoke",memInvoke(t,v)):"");
 Object.assign(window,{P3T,p3ChatF,p3ChatMark});
+/* ---------------- household: the same functions as her Cung nhân tab (j8 itemTest, j14 recommend / searchMaids, j29 hireTake, j10 threatServ, staffTam) ---------------- */
+function staffTam(m,s){s.loyal=cl((s.loyal||0)+BAL.eff.jhouse.loyalRun,0,100);return m===S?`${s.name} được ngươi hỏi han: lòng ${balSg(BAL.eff.jhouse.loyalRun)}.`:`${m.name} tâm sự với ${s.name}`}
+/* Nội vụ phủ hands a candidate over (her hireCard choice / an NPC's pick); paid = her option already took the bạc */
+function hireTake(m,role,s,paid){const P=npool()[role];const i=P.indexOf(s);if(i>=0)P.splice(i,1);if(!paid)ap(m,{bac:-BAL.ag.par3.hire.bac});(m.staff=m.staff||[]).push(s);return m===S?"":`${m.name} nhận ${s.name} từ Nội vụ phủ`}
+function p3HireRole(v){if((v.bac||0)<BAL.ag.par3.hire.bac)return null;const [cm,ce]=capOf(v);const n=r=>(v.staff||[]).filter(s=>s.role===r&&!s.out).length;
+ let P;try{P=npool()}catch(e){return null}if(n("maid")<cm&&(P.maid||[]).length)return"maid";if(n("eunuch")<ce&&(P.eunuch||[]).length)return"eunuch";return null}
+function p3TestIx(v){return p3Inv(v,(e,it)=>e.from&&e.from!==key(v)&&e.from!=="emp"&&e.from!=="th"&&!e.tested?1:null)}
+function p3ThreatT(v){const K=v.knowDT||[];if(!K.length)return null;const L=allServ().filter(s=>s.lover&&K.includes(s.sid)&&!s.spyFor&&ownerOf(s)&&ownerOf(s)!==v&&ownerOf(s)!==S&&agSpite(v,ownerOf(s))>0);
+ return L.length?mindPickBy(L,s=>agSpite(v,ownerOf(s)),v):null}
+Object.assign(AGC3BTN,{test:"Nghiệm độc",hire:"Thêm cung nữ",staffTam:"Tâm sự",staffUp:"Tiến cử",search:"Chưởng sự tra xét cung nữ",threat:"Dọa tố"});
+Object.assign(AGC3ACT,{test:"đem quà được tặng đi nghiệm độc",hire:"xin Nội vụ phủ thêm người",staffTam:"tâm sự với kẻ hầu",staffUp:"tiến cử kẻ hầu",search:"cho chưởng sự tra xét cung nữ",threat:"dọa tố chuyện đối thực"});
+agReg("consort","par3house",(v,N,need)=>{const O=[];if(!p3On()||v===S||v.out||!v.alive)return O;const X=BAL.ag.par3,H=X.house;const nd=g=>!need||g[need]!=null;const P=x=>x&&O.push(x);
+ try{if(nd(X.test.g)&&(v.bac||0)>=X.test.bac&&p3TestIx(v)>=0)P(p3O(v,"test",{n:"Nghiệm độc",c:{bac:-X.test.bac},o:100},N,X.test.g,"self",()=>"tyv"));
+  if(nd(X.hire.g)&&p3HireRole(v))P(p3O(v,"hire",{n:"Thêm cung nữ",c:{bac:-X.hire.bac},o:100},N,X.hire.g,"staff"));
+  const st=(v.staff||[]).filter(s=>s&&!s.out);
+  if(nd(H.gTam)&&st.some(s=>(s.loyal||0)<H.tamBelow))P(p3O(v,"staffTam",{n:"Tâm sự",c:{},o:100},N,H.gTam,"staff"));
+  if(nd(H.gUp)&&(v.bac||0)>=BAL.house.upBac&&st.some(s=>(s.loyal||0)>=H.upLoyal))P(p3O(v,"staffUp",{n:"Tiến cử",c:{bac:-BAL.house.upBac,danh:-BAL.house.upDanh},o:100},N,H.gUp,"staff"));
+  if(nd(H.gSearch)&&v.p3SearchM!==S.turn&&st.some(s=>s.role==="maid"&&srk(s)>=3))P(p3O(v,"search",{n:"Tra xét",c:{},o:100,k:2},N,H.gSearch,"staff"));
+  if(nd(H.gThreat)){const s=p3ThreatT(v);if(s)P(p3O(v,"threat",{n:"Dọa tố",c:{},o:100},N,H.gThreat,"scheme",(kh)=>agAt(ownerOf(s),kh),ownerOf(s)))}
+ }catch(e){agdErr("par3house",e)}return O});
+agRunReg("cx3:test",v=>{const i=p3TestIx(v);return i<0?"":p3Res("test",itemTest(v,i))});
+agRunReg("cx3:hire",v=>{const r=p3HireRole(v);if(!r)return"";const P=npool()[r];const s=mindPickBy(P,()=>1,v);return s?p3Res("hire",hireTake(v,r,s)):""});
+agRunReg("cx3:staffTam",v=>{const L=(v.staff||[]).filter(s=>s&&!s.out&&(s.loyal||0)<BAL.ag.par3.house.tamBelow);if(!L.length)return"";const s=L.sort((a,b)=>(a.loyal||0)-(b.loyal||0))[0];return p3Res("staffTam",staffTam(v,s))});
+agRunReg("cx3:staffUp",v=>{const L=(v.staff||[]).filter(s=>s&&!s.out&&(s.loyal||0)>=BAL.ag.par3.house.upLoyal);if(!L.length)return"";const s=L.sort((a,b)=>(b.loyal||0)-(a.loyal||0))[0];return p3Res("staffUp",recommend(s.sid,v))});
+agRunReg("cx3:search",v=>{v.p3SearchM=S.turn;return p3Res("search",searchMaids(v))});
+agRunReg("cx3:threat",v=>{const s=p3ThreatT(v);return s?p3Res("threat",String(threatServ(v,s)||"").trim()):""});
+Object.assign(window,{itemTest,hireTake,staffTam,recommend,searchMaids});
+/* ---------------- phe phái: Lập phe cùng · Xin vào phe · Rời phe · Bán đứng · Ly gián (j10 facAct for her = found / askJoin / leaveFac / sellOut / divide; the same for an NPC) ---------------- */
+function p3FacOn(){return p3On()&&!!BAL.ag.par3.fac}
+function p3FacFr(v){const F=BAL.ag.par3.fac;return others(v).filter(x=>x&&x!==S&&x.alive&&!x.out&&!facOf(x)&&!sameHouse(v,x)&&(aff(v,x)>=F.frAff||clanOf(v)===clanOf(x)&&aff(v,x)>=F.clanAff||consorts().some(e=>e!==v&&e!==x&&oan(v,e)>=F.sharedOan&&oan(x,e)>=F.sharedOan)))}
+function p3FacJoin(v){const F=BAL.ag.par3.fac;return (S.facs||[]).filter(f=>{const l=facLeader(f);return l&&l!==S&&aff(v,l)>=F.clanAff})}
+function p3FacFoe(v){const F=BAL.ag.par3.fac;const mine=facOf(v);return (S.facs||[]).filter(f=>f!==mine&&facMembers(f).filter(x=>x!==v).length>=2&&facMembers(f).reduce((s,m)=>s+agSpite(v,m),0)/facMembers(f).length>=F.foeOan)}
+Object.assign(AGC3BTN,{facFound:"Lập phe cùng",facJoin:"Xin vào phe",facLeave:"Rời phe",facSell:"Bán đứng",facDiv:"Ly gián"});
+Object.assign(AGC3ACT,{facFound:"rủ người lập phe",facJoin:"xin vào phe",facLeave:"rời phe",facSell:"bán đứng phe mình",facDiv:"ly gián một phe"});
+agReg("consort","par3fac",(v,N,need)=>{const O=[];if(!p3FacOn()||v===S||v.out||!v.alive||v.p3FacM===S.turn)return O;const F=BAL.ag.par3.fac;const nd=g=>!need||g[need]!=null;const P=x=>x&&O.push(x);
+ try{const f=facOf(v);const k={n:"",c:{},o:100,k:F.k};
+  if(!f){if(nd(F.gFound)){const L=p3FacFr(v);if(L.length){const x=mindPickBy(L,y=>BAL.mind.pick.j10fr.base+Math.max(0,aff(v,y)),v);if(x)P(p3O(v,"facFound",k,N,F.gFound,"social",(kh)=>agAt(x,kh),x))}}
+   if(nd(F.gJoin)){const L=p3FacJoin(v);if(L.length){const g=mindPickBy(L,f2=>BAL.mind.pick.j10fr.base+Math.max(0,aff(v,facLeader(f2))),v);const l=facLeader(g);
+    P(p3O(v,"facJoin",{n:"Xin vào phe",c:{},o:odA(v,30+aff(l,v)/2+(clanOf(v)===clanOf(l)?15:0)+rkOf(v)*3),k:F.k},N,F.gJoin,"social",(kh)=>agAt(l,kh),l))}}}
+  else{const l=facLeader(f);if(l&&l!==v&&aff(v,l)<0){if(nd(F.gLeave))P(p3O(v,"facLeave",{n:"Rời phe",c:{},o:100,k:0},N,F.gLeave,"self"));
+    if(nd(F.gSell)&&queenP()&&queenP()!==v)P(p3O(v,"facSell",k,N,F.gSell,"scheme",(kh)=>agAt(queenP(),kh),queenP()))}}
+  if(nd(F.gDiv)){const L=p3FacFoe(v);if(L.length){const g=mindPickBy(L,f2=>facMembers(f2).reduce((s,m)=>s+agSpite(v,m),0),v);P(p3O(v,"facDiv",{n:"Ly gián",c:{},o:odA(v,40+(v.tamco||0)/3),k:F.k},N,F.gDiv,"scheme",null,facLeader(g)))}}
+ }catch(e){agdErr("par3fac",e)}return O});
+function p3FacRes(v,k,r){v.p3FacM=S.turn;r=String(r||"").trim();if(r&&typeof seenNPC==="function"){const s=seenNPC(v,v,r);if(s)try{log(s)}catch(e){}}return p3Res(k,r)}
+agRunReg("cx3:facFound",(v,t)=>t&&!facOf(v)&&!facOf(t)?p3FacRes(v,"facFound",found(v,t)):"");
+agRunReg("cx3:facJoin",(v,l)=>{const g=l&&facOf(l);return g&&!facOf(v)?p3FacRes(v,"facJoin",askJoin(v,g)):""});
+agRunReg("cx3:facLeave",v=>facOf(v)?p3FacRes(v,"facLeave",leaveFac(v)):"");
+agRunReg("cx3:facSell",v=>facOf(v)?p3FacRes(v,"facSell",sellOut(v)):"");
+agRunReg("cx3:facDiv",(v,l)=>{const g=l&&facOf(l);return g&&g!==facOf(v)?p3FacRes(v,"facDiv",divide(v,g)):""});
+Object.assign(window,{p3FacOn});

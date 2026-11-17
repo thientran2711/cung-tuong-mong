@@ -1050,4 +1050,8 @@ BAL.ag.par3={on:1,
  cutRisk:30,cold:{friend:40,sonAge:8,beg:{bac:20,o:10,anD:2,sungD:4},out:{bac:10,o:15,dad:50,affD:3,facD:10,dadD:5},ev:{need:2,o:35,mat:6,tcD:5},poem:{an:30,o:10,anD:2,thi:8},son:{o:15,fondD:2},
   sutra:{c:{"suc":-3},w:{"duc":3}},veg:{w:{"suc":6}},embro:{c:{"suc":-5},o:70,w:{"bac":10}},nunSuc:10,nunO:10,oanFree:20,gFree:{"sung":30},gStay:{"duc":1,"rest":1,"bac":1}},charity:{g:{"duc":3,"danh":2}},restLat:{sucBelow:50,g:{"rest":2}},tyGift:{g:{"spite":1,"safe":1}},work:{g:{"danh":2,"ally":1}},
  /* 2e part 3 (AG-ALL-2e2): NPC↔NPC talk topics (P3T) — worth = the liking she would win from the listener */
- talk:{health:{"ally":1},praise:{"ally":1.5},secret:{"ally":2},gossip:{"ally":1.5,"spite":1},invoke:{"ally":2}}};
+ talk:{health:{"ally":1},praise:{"ally":1.5},secret:{"ally":2},gossip:{"ally":1.5,"spite":1},invoke:{"ally":2}},
+ /* household: Nghiệm độc (her button + NPC; bạc, odds bonus over oSee), Thêm cung nữ / thái giám (bạc), Tiến cử (công lao), Tâm sự / Tra xét / Dọa tố worth */
+ test:{bac:10,o:25,g:{"safe":2}},hire:{bac:20,g:{"safe":1,"danh":1}},house:{merit:5,tamBelow:50,upLoyal:70,gTam:{"safe":1},gUp:{"danh":1,"safe":1},gSearch:{"safe":3},gThreat:{"spite":2,"safe":1}},
+ /* phe phái (j10 facAct for her, cx3:fac* for an NPC): khắc of her button; friend bar to found; worth per deed */
+ fac:{k:2,frAff:35,clanAff:15,sharedOan:30,foeOan:25,gFound:{"ally":3},gJoin:{"ally":2,"safe":1},gLeave:{"safe":1},gSell:{"hh":1,"safe":1},gDiv:{"spite":3}}};

@@ -32,7 +32,7 @@ function hsvDone(lab,bf,ok){try{if(typeof resultShow==="function")setTimeout(()=
 function hsvActs(s){const A=[],H=BAL.house;if(!s||!(S.staff||[]).includes(s))return A;const nm=s.name,he=s.role==="eunuch"?"hắn":"nàng";
  const c=s.cause,fault=c&&c.fault,merit=c&&!c.fault,tr=s.trouble!=null&&wk()-s.trouble<=4,spy=s.spyFor&&s.spyFor!=="me";
  /* 1. the trusted maid's acts (j2 Tâm sự numbers, jwhy dò la / nghe ngóng with this servant sent) */
- A.push({n:"Tâm sự",dom:"Sai bảo",o:100,x:`lòng ${nm} ${balSg(BAL.eff.jhouse.loyalRun)}`,run:()=>{s.loyal=cl((s.loyal||0)+BAL.eff.jhouse.loyalRun,0,100);return `${nm} được ngươi hỏi han: lòng ${balSg(BAL.eff.jhouse.loyalRun)}.`}});
+ A.push({n:"Tâm sự",dom:"Sai bảo",o:100,x:`lòng ${nm} ${balSg(BAL.eff.jhouse.loyalRun)}`,run:()=>staffTam(S,s)});
  try{whyMaidInit(s);const t=spyTarget();
   if(!t)A.push({n:"Sai đi dò la",dom:"Mưu kế",lock:true,t:"không còn phi tần nào để dò",o:0});
   else A.push({n:"Sai đi dò la",dom:"Mưu kế",o:spyO(S,t,s),x:`nhắm: ${spyWho(t)} (chạm để chọn người khác) · biết 2 điều thật về nàng · chứng cứ ${balSg(BAL.eff.j78.evN)}`,/* previews: j78maidSpy */l:{},risk:`${nm} bị bắt gặp thì sợ hãi (lòng -${balAb(BAL.eff.jwhy.loyalSpyMaidRun)}) · nàng đoán ra: ${typeof pvOan==="function"?pvOan(t,5):"oán ta +5"}`,why:()=>spyFactors(S,t,s),act:1,open:()=>spyPick(2,s)});
