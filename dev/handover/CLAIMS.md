@@ -557,3 +557,4 @@
 | tuanluc-sync (opus; OWNER BUG 03:18Z: week-book-only info never shown in play, Lối riêng unlock ×9, unclear lines; whole family of log() call sites) | review/tuanluc-sync | main s28 | session_01UV1Szh89kMUtnfZPTNysLY | RUNNING | 17/11 03:00Z |
 | newlife-reset (opus; OWNER BUG 03:22Z: healed-wound/veil line on a brand-new life → previous-life state leaks; whole-family per-life reset registry) | review/newlife-reset | main s28 | session_01UV1SzgyQP6eCJz2hmcnLrF | RUNNING | 17/11 03:01Z |
 | fig-rank-match (sonnet; OWNER BUG 03:31Z Hoàng hậu shown in a lower-rank dress; exact dress tier = rank for everyone, audit + ART REQUEST list to C) | review/fig-rank-match | main s28 | session_01UV1SzjZ3ki1nnfEWtJvRjW | RUNNING | 17/11 03:05Z |
+| save-dlg-fix (kit keeper): Chọn sổ frame/columns/buttons/??? root fixes | review/save-dlg-fix | main s28 | session_01UV1SzhRZF6zDmg7pUydbUm | READY 668e4692 | 17/11 |
