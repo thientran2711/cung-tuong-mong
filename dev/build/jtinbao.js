@@ -51,12 +51,32 @@ function toastShow(it){const hud=document.querySelector("header.hud");let el=doc
  clearTimeout(TB.t);TB.t=setTimeout(()=>{el.classList.add("out");setTimeout(()=>{if(el.classList.contains("out"))el.remove();TB.t=0;next()},500)},3000);return el}
 function next(){if(TB.t)return;const it=TB.queue.shift();if(!it)return;if(modalOpen()){return next()}toastShow(it)}
 function kitTinBaoToast(it){if(!it||!it.id||TB.toasted[it.id])return false;TB.toasted[it.id]=1;if(it.seen||modalOpen())return false;TB.queue.push(it);next();return true}
+/* ---------- ONE ADAPTER: who her Tai mắt are + how an informer relates to them (owner OD ~16:25Z) ----------
+   The data side is C-AG #2's (taiMatList(her) / informerInfo(item), jagknow). Until it lands this adapter STUBS the read from what exists:
+   her Tai mắt = her own servants (S.staff + confidant maid) by lòng, as many as "Tai mắt N" says; informer kind from the item's `by`.
+   Nothing else in this file reads those two lists: switch here only. A sell-out is shown ONLY when the API marks it discovered (sold).
+   tbTaiMat() → [{id,p,name,role,place,loyal}]   tbInformerKind(it) → {kind:"mat"|"hau"|"ban"|"qua"|"tai"|"sold", label} */
+const LOYW=n=>n>=70?"một lòng với ta":n>=40?"còn dè dặt":"khó tin";
+function tbNorm(x){const p=x.p||x.person||x.ref||(x.name?x:null);const s=p||{};return{id:x.id!=null?x.id:(s.sid!=null?"s"+s.sid:s.name),p:p,name:x.name||s.name||"",role:x.role||x.roleName||(p&&p.role?(typeof srkName==="function"&&p.sid!=null?srkName(p):(p.role==="maid"?"Cung nữ thân tín":"Thái giám")):"Người hầu"),
+ place:x.place!=null?x.place:(()=>{try{return palaceOf(S)}catch(e){return""}})(),loyal:x.loyalWord||x.loyal_word||(typeof x.loyal==="string"?x.loyal:LOYW(+(x.loy!=null?x.loy:(s.loyal||0)))),sold:!!x.sold}}
+function tbTaiMat(){try{if(typeof taiMatList==="function"){const L=taiMatList(S);if(Array.isArray(L))return L.map(tbNorm)}}catch(e){console.error("taiMatList",e)}
+ try{const L=(S.staff||[]).slice();if(S.maid&&!L.includes(S.maid))L.push(S.maid);return L.sort((a,b)=>(b.loyal||0)-(a.loyal||0)).slice(0,Math.max(0,S.mat|0)).map(tbNorm)}catch(e){console.error("tbTaiMat stub",e);return[]}}
+function tbInformerKind(it){try{if(typeof informerInfo==="function"){const r=informerInfo(it);if(r&&r.kind)return{kind:r.kind,label:r.label||KL[r.kind]||""}}}catch(e){}
+ const by=String(it&&it.by||""),p=informer(it);if(by==="mat")return{kind:"mat",label:KL.mat};if(by==="here")return{kind:"tai",label:KL.tai};if(by==="le")return{kind:"qua",label:KL.qua};
+ if(p){if(tbTaiMat().some(x=>x.p===p))return{kind:"mat",label:KL.mat};if((S.staff||[]).includes(p)||S.maid===p||by.indexOf("scm")===0||/^s\d/.test(by))return{kind:"hau",label:KL.hau};if(/^v\d/.test(by))return{kind:"ban",label:KL.ban}}
+ return{kind:"qua",label:KL.qua}}
+const KL={mat:"tai mắt của ta",hau:"người hầu của ta",ban:"bạn trong cung",qua:"người qua đường",tai:"ta tận mắt thấy",sold:"đã bán đứng ta"};
+/* kitTaiMatCard: tap "Tai mắt N" → the list of WHO (kit panel kind intel, kit fact rows: person frame + role · where placed · lòng as she knows it) */
+function kitTaiMatCard(){try{const L=tbTaiMat();const n=S.mat|0;
+ const facts=L.length?L.map(x=>{const pl=x.place?`đặt ở ${esc(plName(x.place))}`:"ở bên ta";return{who:x.p||undefined,text:`${x.p?kitName(x.p)+" · ":`<b>${esc(x.name)}</b> · ${esc(x.role)} · `}${pl} · ${esc(x.loyal)}${x.sold?" · <b>đã bán đứng ta</b>":""}`}}):["Chưa có ai chịu làm tai mắt cho ta."];
+ const m=kitModal({kind:"intel",title:"Tai mắt của ta",sub:L.length?`${L.length} người`:"chưa có ai",facts,btn:"Đã rõ"});TB.tm=L.length;return m}catch(e){console.error("kitTaiMatCard",e);return null}}
+document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest('[data-kas="mat"], #kstat .kst[data-hx="mat"], #hud2 .hc[data-hx="mat"]');if(!b||!live())return;e.stopPropagation();e.preventDefault();try{if(typeof sfx==="function")sfx("sfx-tap")}catch(x){}kitTaiMatCard()},true);
 /* ---------- card ---------- */
 function goDuDo(){try{const b=document.querySelector('#tabs [data-tab="go"]');if(b)b.click()}catch(e){}}
 function kitTinBaoCard(){try{const L=items();if(!L.length){if(typeof kitLine==="function")kitLine("Chưa có tin báo",2600);return null}
  const U=L.filter(x=>!x.seen),A=U.concat(L.filter(x=>x.seen));
  const facts=A.map(it=>{const p=informer(it);const pn=plName(it.place);const at=String(it.line).indexOf(pn)>=0?"":`<b>${esc(pn)}</b> · `;
-  const t=`${p?`${kitName(p)} · `:""}${at}${it.line}${it.seen?" <small>(đã xem)</small>":""}`;return p?{who:p,text:t}:{text:t}});
+  const kd=tbInformerKind(it);const t=`${p?`${kitName(p)} <small>(${esc(kd.label)})</small>`:`<b>${esc(kd.label.charAt(0).toUpperCase()+kd.label.slice(1))}</b>`} · ${at}${it.line}${it.seen?" <small>(đã xem)</small>":""}`;return p?{who:p,text:t}:{text:t}});
  const lead=A.map(informer).find(Boolean)||null;/* the big figure = the informer of the first (unseen first) row that has a person */
  const pl=[...new Set(A.map(x=>x.place))];const opts=[{n:pl.length===1?`Để ta tới xem · ${esc(plName(pl[0]))}`:"Để ta tới xem",fx:{},go:()=>{try{tinBaoSeen()}catch(e){}goDuDo();kitTinBaoBadge()}},{n:"Thôi",fx:{},go:()=>kitTinBaoBadge()}];
  const m=kitModal({kind:"news",title:"Tai mắt báo",sub:U.length?`${U.length} tin mới`:"Đã xem hết",facts,subject:lead||undefined,opts,onClose:()=>kitTinBaoBadge()});
@@ -80,7 +100,7 @@ const st=document.createElement("style");st.id="kit-tinbao";st.textContent=`
 .ktbt{position:fixed;left:50%;transform:translateX(-50%);z-index:9760;max-width:calc(100vw - 24px);box-sizing:border-box;display:flex;align-items:center;gap:8px;padding:6px 14px 6px 8px;border-radius:14px;border:2px solid var(--trim,#e6c25a);
  background:#fffaf0f4;color:var(--ink,#3a2418);font:600 .84rem/1.3 var(--body,inherit);box-shadow:0 4px 14px #0004,0 0 0 1px var(--gold,#b8892b);cursor:pointer;transition:opacity .5s}
 .ktbt.out{opacity:0}.ktbt .ktbs{flex:0 0 auto;padding:1px 7px;border-radius:4px;background:var(--k-seal,#9a2c1c);color:#fff8e6;font:700 .7rem/1.5 var(--body,inherit);letter-spacing:.06em}`;document.head.appendChild(st);
-window.kitTinBaoBadge=kitTinBaoBadge;window.kitTinBaoToast=kitTinBaoToast;window.kitTinBaoCard=kitTinBaoCard;
+window.kitTinBaoBadge=kitTinBaoBadge;window.kitTinBaoToast=kitTinBaoToast;window.kitTinBaoCard=kitTinBaoCard;window.kitTaiMatCard=kitTaiMatCard;window.tbTaiMat=tbTaiMat;window.tbInformerKind=tbInformerKind;
 try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§87",title:"kitTinBaoBadge · kitTinBaoToast · kitTinBaoCard: dấu ! tin báo trên thanh trên, dòng vàng 3 giây, thẻ TIN BÁO",
  html:()=>`<div class="kitpg-row" style="display:flex;gap:14px;align-items:center;flex-wrap:wrap"><span class="ktbb on" style="position:relative"><i class="khap">!</i></span><span class="ktbb on" data-n="3" style="position:relative"><i class="khap">!</i></span><span class="ktbb" style="position:relative"><i class="khap">!</i></span>`+
   `<span class="ktbt" style="position:static;transform:none"><b class="ktbs">TIN</b><span>Ngọc Lan báo: Ngự hoa viên có chuyện</span></span></div>`})}catch(e){}
