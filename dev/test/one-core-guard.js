@@ -40,6 +40,21 @@ const CODE_PAT={
  fx:new RegExp('(?<![\\w$.])'+ST+'\\s*:\\s*[+-]?\\d+(?:\\.\\d+)?\\b','g'),           /* {danh:-8}, {sung:3} … a typed gain / cost */
  khac:/\b(?:can|spend|j77Kh|walkOk)\(\s*\d+\s*\)/g,                                    /* can(2), spend(1) … typed khắc */
  roll:/\broll\(\s*\d+\s*\)/g,                                                         /* roll(35) … a typed odds base */
+ /* review/one-core-dup (owner 17/11 03:00Z "cùng một vấn đề mà có 2-3 cái con số"; reviewer road-onecore-r1 item 3): typed amounts of
+    dialog go: closures and option / ending fields. sw = a typed stat write S.x+=N; sc = an option's / ending's Lợi thế score;
+    k = an ARC67 / road ending tier (-1 lose / 0 mid / 1 win, followed by its tag / text). */
+ sw:new RegExp('\\bS\\.'+ST+'\\s*[+-]=\\s*\\d+(?:\\.\\d+)?\\b','g'),
+ sc:/(?<![\w$.])sc\s*:\s*[+-]?\d+(?:\.\d+)?\b/g,
+ k:/(?<![\w$.])k\s*:\s*[+-]?[01]\b(?=\s*,\s*(?:tag|t|n|w)\s*:)/g,
+};
+/* the same, read on the code with every string / template / regex blanked (an effect call spans its string arguments):
+   amt    = the typed last amount (or `cond?N:M`) of a relation / family / power effect call: rdOan(A,"v",5), relAdd(p,S,-8), e67dad(10) …
+   ladder = a private threshold table typed as a ternary chain: r>=7?[4,2]:r>=5?[3,2]:… / o>=91?"Nắm chắc":o>=81?… (a second table for a
+            concept the rulebook should hold once: capOf, the odds-word cut points …) */
+const NUMV='[+-]?\\d+(?:\\.\\d+)?';
+const JOIN_PAT={
+ amt:new RegExp('\\b(?:rdOan|rdRel|relAdd|oanAdd|affAdd|kcAf|tdPowAdd|e67(?:dad|bien|kho|ally|pun|foe|drop))\\((?:[^()]|\\([^()]*\\))*?[(,]\\s*(?:[\\w$.!]+\\s*\\?\\s*)?'+NUMV+'(?:\\s*:\\s*'+NUMV+')?\\s*\\)','g'),
+ ladder:new RegExp('(?:[\\w$.\\])]+\\s*(?:>=|>|<=|<)\\s*'+NUMV+'\\s*\\?\\s*(?:\\[[^\\[\\]]*\\]|'+NUMV+'|""|``)\\s*:\\s*){2,}(?:\\[[^\\[\\]]*\\]|'+NUMV+'|""|``)','g'),
 };
 const TXT_PAT={
  stat:/(?:Sủng|Danh|Đức|Bạc|Sức|Thái hậu|Hoàng hậu|Tâm cơ|Tai mắt|Ân tình|thiện cảm|oán|Lòng|Chủ tin)\s*[+−-]\s*\d+/g,  /* "Danh -8" typed in a text */
@@ -71,6 +86,7 @@ const MIRRORS=[['j20.js','BL'],['j30.js','SEATCAP'],['j83.js','WVAL']];
 
 /* ---------- scan ---------- */
 const fail=[];const now={};
+const joinCode=T=>T.map(t=>t.t==='code'?t.s:t.t==='str'?'""':t.t==='tpl'?'``':t.t==='re'?'/r/':' ').join('');
 /* the rulebook itself (const BAL={…} / Object.assign(BAL,{…}) bodies) is where numbers BELONG: blank it before counting inline numbers */
 function balEnd(src,i){let d=0,inS=null;for(let j=i;j<src.length;j++){const c=src[j];if(inS){if(c==='\\'){j++;continue}if(c===inS)inS=null;continue}
   if(src.startsWith('/*',j)){j=src.indexOf('*/',j)+1;continue}if(src.startsWith('//',j)&&!/[\w)\]]\s*$/.test(src.slice(Math.max(0,j-3),j))){j=src.indexOf('\n',j);continue}
@@ -84,9 +100,22 @@ for(const f of ORDER){const src=fs.readFileSync(path.join(B,f),'utf8');const T=l
    for(const [re,paths] of CORE_TEXT){const m=t.s.match(re);if(!m)continue;const nums=m.slice(1).filter(x=>x!=null).map(Number);
     const hit=!paths||paths.split(',').some(p=>nums.includes(coreVal(p)));
     if(hit)fail.push(`${f}:${t.line} text types a core number (print BAL.${paths||'pay'}): «${t.s.slice(0,110)}»`)}}}
+ {const J=joinCode(T);for(const k in JOIN_PAT){const m=J.match(JOIN_PAT[k]);if(m)m.forEach(x=>{const v=x.replace(/\s+/g,'');if(k==='amt'&&/[(,][+-]?0\)$/.test(v))return;add(k,v.length>90?v.slice(0,90)+'…':v)})}}
  now[f]=per;
  for(const [mf,name] of MIRRORS)if(mf===f){const m=src.match(new RegExp('(?:const |,)'+name+'\\s*=\\s*(\\[[^\\]]*\\]|\\{[^}]*\\})'));if(!m)fail.push(`${f}: mirror ${name} not found`);else if(/\d/.test(m[1].replace(/\/\*[\s\S]*?\*\//g,'')))fail.push(`${f}: mirror ${name} typed with numbers (${m[1].slice(0,60)}); it must be filled from BAL`)}
 }
+/* 5. a SECOND TABLE for one concept (review/one-core-dup, owner 17/11 03:00Z):
+   (a) a rule function defined at the top level of two modules (the later one silently replaces the earlier, whose numbers stay in the
+       file as a dead second copy: fillStaff j10 + j29 …) — fails unless named in SHADOW_OK (pure helpers with no rule number);
+   (b) a typed numeric table outside BAL that equals a table typed inside a BAL body (a copy of the rulebook: [[1,1],[2,1],…]). */
+const SHADOW_OK=new Set((process.env.OC_SHADOW_OK||'').split(',').filter(Boolean));
+const topFns={},balLits=new Map(),outLits=[];
+const LIT=/\[\s*(?:\[[\d\s,.+-]*\]\s*,\s*){1,}\[[\d\s,.+-]*\]\s*\]|\[\s*(?:[+-]?\d+(?:\.\d+)?\s*,\s*){3,}[+-]?\d+(?:\.\d+)?\s*\]/g;
+for(const f of ORDER){const src=fs.readFileSync(path.join(B,f),'utf8');const J=joinCode(lex(src));let d=0;
+ for(let i=0;i<J.length;i++){const c=J[i];if(c==='{')d++;else if(c==='}')d--;else if(d===0&&c==='f'&&J.startsWith('function',i)&&!/[\w$]/.test(J[i-1]||'')){const m=J.slice(i).match(/^function\s+([\w$]+)\s*\(/);if(m)(topFns[m[1]]=topFns[m[1]]||[]).push(f)}}
+ const M=maskBal(J);let m;LIT.lastIndex=0;while((m=LIT.exec(J))){const v=m[0].replace(/\s+/g,'');if(M.slice(m.index,m.index+m[0].length).trim()==='')balLits.set(v,f);else outLits.push([f,v])}}
+for(const n in topFns)if(topFns[n].length>1&&!SHADOW_OK.has(n))fail.push(`function ${n} is defined at the top level of ${topFns[n].join(' + ')}: the later copy replaces the earlier — keep ONE (second copy = second table)`);
+for(const [f,v] of outLits)if(balLits.has(v)&&!/^\[(?:0,)*0\]$|^\[(?:1,)*1\]$/.test(v))fail.push(`${f}: typed table ${v.slice(0,70)} is a copy of the one in BAL (${balLits.get(v)}): read the BAL key`);
 /* 1. one value per BAL key */
 const sets={};
 function objKeys(src,i){let d=0,inS=null,keys=[],tok='',want=true;for(let j=i;j<src.length;j++){const c=src[j];
@@ -114,14 +143,22 @@ try{const tier=Function('return '+fs.readFileSync(path.join(B,'jecon.js'),'utf8'
 const base=fs.existsSync(BASE)?JSON.parse(fs.readFileSync(BASE,'utf8')):null;
 const total=o=>{let n=0;for(const f in o)for(const k in o[f])for(const s in o[f][k])n+=o[f][k][s];return n};
 let grew=[];
-if(base){for(const f in now)for(const k in now[f])for(const s in now[f][k]){const b=((base.files[f]||{})[k]||{})[s]||0,c=now[f][k][s];if(c>b)grew.push(`${f} [${k}] ${s}  (${b} → ${c})`)}}
+/* kinds the frozen list already counts; a kind added to the guard later (review/one-core-dup: amt / sw / sc / k / ladder) is frozen by its
+   first --update without --allow-grow (it is a new COUNT, not a new number), and from then on it may only shrink like the others */
+const KINDS=new Set(base?(base.kinds||[...new Set(Object.values(base.files).flatMap(o=>Object.keys(o)))]):[]);
+const fresh=new Set();
+if(base){for(const f in now)for(const k in now[f]){if(!KINDS.has(k)){fresh.add(k);continue}for(const s in now[f][k]){const b=((base.files[f]||{})[k]||{})[s]||0,c=now[f][k][s];if(c>b)grew.push(`${f} [${k}] ${s}  (${b} → ${c})`)}}}
+if(fresh.size&&!UPD)fail.push('kinds not frozen yet (run --update once): '+[...fresh].join(', '));
 if(LIST){for(const k in now[LIST]||{})for(const s in now[LIST][k])console.log(k,s,now[LIST][k][s]);process.exit(0)}
 if(UPD){if(grew.length&&!GROW){console.log('REFUSED: the list would grow (move these into BAL, or the coordinator passes --allow-grow):\n  '+grew.slice(0,40).join('\n  '));process.exit(1)}
  const files={};for(const f of Object.keys(now).sort()){const per={};for(const k of Object.keys(now[f]).sort()){const o={};for(const s of Object.keys(now[f][k]).sort())o[s]=now[f][k][s];per[k]=o}if(Object.keys(per).length)files[f]=per}
- fs.writeFileSync(BASE,JSON.stringify({note:'one-core frozen list of inline rule numbers (dev/test/one-core-guard.js). It may only shrink.',total:total(files),files},null,0).replace(/\},"/g,'},\n"')+'\n');
+ const kinds=[...new Set([...KINDS,...fresh,...Object.values(files).flatMap(o=>Object.keys(o))])].sort();
+ if(fresh.size)console.log('new kinds frozen: '+[...fresh].join(', '));
+ fs.writeFileSync(BASE,JSON.stringify({note:'one-core frozen list of inline rule numbers (dev/test/one-core-guard.js). It may only shrink.',total:total(files),kinds,files},null,0).replace(/\},"/g,'},\n"')+'\n');
  console.log('baseline written: '+total(files)+' inline rule numbers frozen'+(base?` (was ${base.total})`:''));}
 else if(!base)fail.push('no baseline (run with --update once)');
 else for(const g of grew)fail.push('NEW inline rule number: '+g);
+if(process.env.OC_DUMP)fs.writeFileSync(process.env.OC_DUMP,JSON.stringify(now));
 const T0=total(now);
 console.log(JSON.stringify({modules:ORDER.length,inlineNow:T0,baseline:base?base.total:null,balKeys:Object.keys(sets).length,fails:fail.length}));
 if(fail.length){console.log('FAIL\n  '+fail.slice(0,+(process.env.OCG_MAX||80)).join('\n  ')+(fail.length>+(process.env.OCG_MAX||80)?`\n  … ${fail.length-(process.env.OCG_MAX||80)} more`:''));process.exit(1)}
