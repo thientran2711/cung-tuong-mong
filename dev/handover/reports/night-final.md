@@ -269,3 +269,37 @@ Worktree /home/user/wt/nf3 (sparse) on review/night-final @ a7dabd93; serve `pyt
 3. Build 9.3 (1) seal after resolve (kit §81, jflip) and (2) kitOptPic 'tạm' for Giữ chân; rerun cardflip + night-final case 7.
 4. Then SẴN SÀNG KIỂM to main s27. HOLD go-live until reviewed.
 5. 10-night LEDGER (FOREMAN_D INBOX, spec reports/night-time.md V3-B) NOT started — best as its own branch review/night-ledger ON TOP of review/night-final. Notes: the spec's "at the START of tối" is superseded by OD 22:45Z → roll the ledger inside jnf realFlip (the commit at the end of tối); played tối = her first day else the first NPC day; the flip choice applies only to the played tối; extra days use `window.stealPass(holder,{live:false})` (lines only); cycle days exist (jcycle cyDaysM) but the length is fixed per person (cyBase l) — OD 19:05Z wants 5/6/7 rolled per woman per MONTH; Empress custom = j75 FAIRN.custom (a % on tuần 0/1 today) → days 1 and 15 by day; conception roll as a FLOAT × BAL.nt.concF (spec 7).
+
+## 10. WORKER s27 #4 (session_01UV1SzjDo8ctqPbXDejtf2u; coordinator MAIN s27 session_01UV1Szh248gDvHSAH88RvJm)
+START_CTX ≈ 3 % of 1M (own estimate; get_session reads 0). Rolled over at ≈ 28 % (START + 25 %). Read: brief night-final-s26b.md, OD from "(16/11 ~22:45Z real" to the end verbatim, §9.4, START_CORE, START_WORKER, KIT §81/§84, FOREMAN_D ledger INBOX + night-time.md V3-B.
+Branch review/night-final @ **09c0f055** (pushed). NOT SẴN SÀNG KIỂM: coop-steal 14/23 and quickcheck G4 (10.3).
+
+### 10.1 What changed
+| item | how | file |
+|---|---|---|
+| merge live main 744b80e7 | conflicts: assemble (main's list − jfe.js + jbalcore/jnf after jgrey), j2 (balance-core artOE/artO + main's ghenN/BAL.ghen), j7 empnight (main's BAL.visit + artOE), j79 stealX (mode prize + main's nightGain/BAL.night.bestow), jbal2 (both blocks) | 8de9b81e |
+| (a) "Tâm trạng" over the flip — ROOT FOUND | NOT a game queue bug: coop-steal's answer() clicked `.kmov.kcf [role=button]` = a mood seal img.kemo (role=button) → jevb emoBox("me") opened the kit look-up panel "Tâm trạng · Ta" (only ✕, which clear() never pressed). Proven with a click/stack probe. A real player's tap lands on the scene caption, and ✕ then shows the choice. Family fix anyway (no dialog may cover the flip choice): jnf window-capture guard — while the flip scene (cfBusy) or the choice is on screen, taps on look-up openers (img.kemo[data-emo], [data-emo-open], [data-svlook]) do nothing. Same family: jvisit (main) rolled his visit INSIDE flip() → "Ngự giá lâm cung" dialog between flip and choice; now the roll inside realFlip is only marked (S.nfVd) and runs in finish() after the resolve (night-final case 8). Test: answer() clicks real scene buttons only; clear() closes look-up panels with their ✕ | jnf.js, coop-steal.js |
+| (b1) seal after resolve | jflip kitCardFlip `seal` option (false while the flip choice is pending = nfOn); result chip while pending "Thẻ bài của ngươi được lật. / Hoàng thượng chọn ngươi hầu đêm nay."; button stays "Chuẩn bị thị tẩm". `window.cfSeal()` = her card alone, final still + painted seal + "Đêm nay ngươi được thị tẩm." + ONE §81 button "Chuẩn bị thị tẩm", once a day (S.cfSl); jnf calls it in herWin (won, both seats), resolveAll (kept her own flipped night), guest fin (kept). Robbed → no seal (winner's seat stamps hers) | jflip.js, jnf.js |
+| (b2) Giữ chân picture | jopic `KIT_OPT_TAM` (title → existing act picture) → kitOptPic returns tam:true → kpOptArt adds kitTam chip in .kaart; "Giữ chân Hoàng thượng" → act-thap-den-hau-ruou-h (looked at: lamp + wine, fits). KIT.md §84.4 "Wired" line updated. ART REQUEST = main's | jopic.js, KIT.md |
+| (b3) 10 s from choice shown | already so (TM.start in showModal when nfch is on screen) | — |
+| tests | night-final +case 8 (visit after resolve) +case 9 (no seal in scene, seal after keep); BAL.visit.cap=0 in night-final/night-multi/night-steal-unit (main's visit is not what they test; it gave her the night in night-multi 2/5 and nsu 11); night-steal-unit starts on a palace route (home route jkc has no flip choice — was a ~2/7 false FAIL) | dev/test/* |
+
+### 10.2 Tests (09c0f055 / 0fe53e72)
+| test | result |
+|---|---|
+| night-final.js | 10/10 (×2; case 7 once showed the Nhập cung card first = flake, passed on rerun) |
+| night-multi.js | 7/7 (×2) |
+| night-steal-unit.js | 29/29 (×11 after the palace-start fix) |
+| flip-entry.js 755x1000 | ALL OK |
+| quickcheck.sh | open/old save/perf PASS; **CORE GATE G4 50-coop-one-world FAIL "guest week changes the world"** — not checked whether main 744b80e7 fails it too |
+| coop-steal.js (live Worker) | **14/23**: case 1 "both seats get the choice" now PASSES (the stuck is gone); remaining 10.3 |
+| coop-night, coop-e2e, cardflip shots | NOT RUN |
+| 10-night ledger | NOT STARTED (too big for the rest of this context; see 10.3 5) |
+
+### 10.3 HANDOVER (the coordinator opens the successor)
+Worktree /home/user/wt/nf4 (sparse) on review/night-final @ 09c0f055; serve `python3 -m http.server 8741` from it (night-steal-unit takes `index.html`, others `http://localhost:8741/index.html`). Scratch: /home/user/wt/nf4-out, /home/user/wt/nf4-dbg.
+1. G4 first: `bash dev/tools/quickcheck.d/50-coop-one-world.sh` (details .quickcheck/gates/g4-50-coop-one-world.txt). Run the same gate on a main 744b80e7 worktree: if main fails too = pre-existing (tell main); if not, suspects: jnf visLate (finish → visRoll on the host only), the merge of jvisit/jseat.
+2. coop-steal remaining fails: (i) case 1 host: `S.tonight` null while ntk.who = 902 (friend) — the host already ended the day (nfP of the next day), so the check `S.tonight.coop` is read too late (test timing) or the host's resolveTonight wrapper nulls it; guest had Q [nfsum, "Kính sự phòng"] and tonight null — check whether a host message after the commit (hold null, same d) overwrites the guest's "me" (apply sets S.tonight=dec(m.hold) on every host message of that day) → if so, the guest must keep "me" once nfFin of the day is applied (real bug: guest loses her won night). (ii) case 2/3: STUCK with #dawn (week panel) open and cfBusy true: jflip busy() waits for #dawn; answer() must close the dawn panel like a player (find its button), then recheck that the choice shows. (iii) case 3 guest x.st "open" but no nfch after 60 s: verify step() ticks on the guest (WT interval) and X() day match.
+3. Then coop-night.js (baseline 105/105), coop-e2e.js (59/59; "A sees no friend at start" is pre-existing on main), cardflip.js + choice shots Fold 755x1000 + iPad 1180x820 (LOOK at the Giữ chân 'tạm' chip and the seal scene).
+4. SẴN SÀNG KIỂM to main s27 when 1–3 are green; HOLD go-live until reviewed. KIT REQUEST Fold clock chip = review/kit-size-10 (keeper, SẴN SÀNG KIỂM 8ab00ede) — not mine to style.
+5. 10-night LEDGER: own branch review/night-ledger ON TOP of review/night-final (spec reports/night-time.md V3-B + §9.4 5 notes): roll inside jnf realFlip (the commit at the end of tối), played tối = her first day else first NPC day, extra days via stealPass(holder,{live:false}), cycle 5/6/7 per woman per month (jcycle), Empress days 1 and 15, conception FLOAT × BAL.nt.concF, kit toast part via KIT REQUEST. Its own opus worker.
