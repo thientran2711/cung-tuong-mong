@@ -107,3 +107,25 @@ Keep the SAME person, the SAME face, skin, neck, shoulders, hands, feet, head si
 - 1 gen (gpt-2-6, ref eIyOFEidqL, 9:16 2k, 135 cr, 79aa1hKJAL): plain matte light-grey fitted under-robe, close long sleeves, high round neck, ankle length, no pattern/belt/jewellery; low simple bun, no pins; grey slippers; hands clasped at the chest like m09; big headroom. File: img/_review/maid-consort-sample/neutral_base_grey.png (1520x2688, white bg, not cut). Prompt: "A neutral BASE BODY reference figure for a dress-up system, semi-realistic painterly near-3D style, plain white background. ONE standing young woman, full body head to feet, centered. Face, skin, hair colour and body proportions like the reference image: same face, 7.5 heads tall measured from the top of her skull to the feet, shoulder width about twice the face width, waist about 1.15 times the face width. She wears ONE plain, matte LIGHT GREY, fitted but modest under-robe: close-fitting long sleeves down to the wrists, a high round neckline, ankle-length straight fitted skirt, NO pattern, NO embroidery, NO collar trim, NO belt, NO jewellery, like a plain grey mannequin dress. Hair in one simple low bun at the back of the head, smooth, NO hairpins, NO flowers, no ornaments. Plain grey slippers. Standing pose: relaxed, hands loosely clasped in front of her chest at the same place as in the reference, serene closed-lip smile, looking at the viewer. IMPORTANT: leave generous EMPTY white space above her head (about 15 percent of the image height) so tall headdresses can be added later; she must NOT fill the frame to the top edge. Soft even frontal light, luminous smooth skin, no grey shading on the face, no nasolabial lines."
 - px (canvas 1520x2688): skull top 319 (headroom 11.9%), hairline 429, chin 658, feet 2660, face h 229, face centre x 788. H/(hairline->feet) 0.1026 (spec 0.102 OK). Shoulder at chin+0.7H: x 526-994 = 2.04H (spec 2.0 OK; silhouette method, no sleeves/capes here so valid). Skull-top->feet = 6.91 skull-heights (spec 7.5): the hair mass above the hairline is taller than the m09 ref (0.48H vs 0.38H) so the 'skull top' is higher; by the face ratio it is on spec. Waist not measured (my silhouette probe failed on the clasped arms).
 - Caveat: rendering is smoother/more CG-like than the painterly m09; face is the same identity but simplified. The earlier first attempt with a skin-tight nude bodysuit was refused by the filter (Round 16).
+
+## Round 18 — neutral grey base v2 (overlays m09), ROOT-12 GO
+
+1 gen only: images_retouch edit of m09 hd `eIyOFEidqL` (270 cr, creation SymmsSoUb8) → plain matte light-grey fitted under-robe (stand collar, long sleeves, ankle length), low simple bun, no pins/earrings/book, hands clasped same place, grey slippers. Canvas stays 637x1800 (pixel-aligned); I only made the white background transparent (local flood-fill) and added 300 px empty headroom on top (2100 px tall).
+
+| px (637x1800, before headroom) | m09 | base v2 | off |
+|---|---|---|---|
+| hairline | 97 | 97 | 0 |
+| chin | 266 | 267 | 1 px (0.06%) |
+| face h | 169 | 170 | 0.6% |
+| face cx | 341 | 342 | 1 px |
+| feet (last row) | 1799 | 1792 | 7 px (0.4%) |
+| face/(hairline→feet) | 0.0993 | 0.1003 | +1% |
+
+By-eye zoom of the 50% overlay: eyes, nose, mouth, chin, face outline coincide; shoulder line coincides; only the hair differs (m09 has pins/flower, base has bare bun). Sleeves of the grey robe are fitted, so the wide m09 sleeve flares are not covered (by design). All within ≤3%.
+
+Note: the robe has a side slit and a mandarin collar (slight áo dài look) — fine as a base, can be flattened if the owner dislikes it.
+
+- Single (transparent PNG, 637x2100): https://ctm-img.victoria-tntt.workers.dev/img/_review/maid-consort-sample/neutral_base_grey_v2.png
+- 50% overlay on m09: https://ctm-img.victoria-tntt.workers.dev/img/_review/maid-consort-sample/neutral_base_grey_v2_overlay50.jpg
+
+Nothing live. No further gens until told.
