@@ -116,7 +116,7 @@ function tsbThWeek(){const L=S.tsbTh||[];const w=tsbWk();const keep=[];for(const
    if(t===S&&r){Q.push({t:th.k==="thathu"?"Hung tin trong cung":"Hỏa hoạn",h:`<p>${r}</p>`,headArt:th.k==="phonghoa"?tsbArt("ev-hoa-hoan","Hỏa hoạn"):undefined});log(r);tsbShow()}
    else if(r&&typeof knows==="function"&&knows(t)&&roll(50))log(r);continue}
   keep.push(th)}S.tsbTh=keep}
-PEND.tsbOmen=pp=>{if(!S)return null;const a=byKey(pp.a);if(!a)return null;const fire=pp.k==="phonghoa";const mm=tsbMaid(S);const see=S.mat||0;
+PEND.tsbOmen=pp=>{if(!S)return null;const a=byKey(pp.a);if(!a)return null;const fire=pp.k==="phonghoa";const mm=tsbMaid(S);const see=eyes(S);
  const named=see>=3||(S.tsbTh||[]).some(x=>x.a===pp.a&&x.seen&&evG(S,a)>0);
  const sign=fire?`Mấy đêm nay có bóng người lạ quanh kho chứa đồ của ngươi; cửa kho sáng ra thấy khép hờ.`:`Người giữ thú ở Ngự thú viên bị thấy lảng vảng gần cửa sau cung ngươi; đêm qua có tiếng thú lạ ngoài tường.`;
  const who=named?`Tai mắt nói kẻ ấy hay ra vào ${typeof houseName==="function"?houseName(a):"cung"} của ${tsbNm(a)}.`:`Chưa rõ ai đứng sau.`;
