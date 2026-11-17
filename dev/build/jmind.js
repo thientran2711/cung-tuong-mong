@@ -34,16 +34,16 @@ function mKey(p){if(!p||!S)return"";if(p===S||p.coop||p.id===901||p.id===902)ret
  const c=courtKey(p);if(c)return"court:"+c;if(isKid(p))return"kid:"+(p.name||"");if(p.sid!=null)return"s:"+p.sid;if(p.id!=null)return"id:"+p.id;return"n:"+(p.name||"")}
 function obj(p){if(isTh(p)){S.thO=S.thO||{};return S.thO}if(isEmp(p))return S.emp;return p}
 /* ---------- nết for the people who had none ---------- */
-const NET_POOL={court:["Khéo léo","Tham tiền","Thẳng thắn","Đa nghi","Cả nể","Trọng nghĩa","Thù dai"],kid:["Hiếu thảo","Thẳng thắn","Nhu mì","Khéo léo","Hiền lành","Kiêu ngạo","Đa nghi","Trọng nghĩa"],
- staff:["Thẳng thắn","Khéo léo","Đa nghi","Trọng nghĩa","Hiếu thảo","Tham tiền","Kiêu ngạo"]};
+const NET_POOL={court:["Thực dụng","Ham lợi","Thật thà","Kín đáo","Rộng lượng","Trọng nghĩa","Thù dai"],kid:["Vì gia tộc","Thật thà","Khiêm nhường","Thực dụng","Ân cần","Kiêu ngạo","Kín đáo","Trọng nghĩa"],
+ staff:["Thật thà","Thực dụng","Kín đáo","Trọng nghĩa","Vì gia tộc","Ham lợi","Kiêu ngạo"]};
 function netCls(p){if(!p||typeof p!=="object"||p===S)return null;if(courtKey(p))return"court";if(isKid(p))return"kid";if(p.eid&&!p.tr)return"staff";return null}
 function mnet(p){const c=netCls(p);if(!c)return null;if(p.mnet&&PERS[p.mnet])return p.mnet;const L=NET_POOL[c];p.mnet=L[H(life()+"|net|"+mKey(p))%L.length];return p.mnet}
 (function(){const t0=traitsOf;traitsOf=function(p){const r=t0.apply(this,arguments);try{if((!r||!r.length)&&p&&typeof p==="object"){const n=mnet(p);if(n)return[n]}}catch(e){}return r}})();
 /* ---------- sở trường ---------- */
 const SK={muu:"Mưu tính",giao:"Giao thiệp",do:"Dò la",vo:"Võ nghệ",chinh:"Chính sự",le:"Lễ nghi",quan:"Quán xuyến",so:"Sổ sách",buon:"Buôn bán",hau:"Hầu hạ",kinh:"Kinh kệ",tay:"Khéo tay"};
 function artN(k){const a=(typeof ARTS!=="undefined"?ARTS:[]).find(x=>x.k===k);return a?a.n.split(" &")[0]:k}
-const STR_TR={lanh:"sk:do",chuyen:"sk:giao",trung:"sk:hau",tham:"sk:buon",nhat:"sk:tay","Đa nghi":"sk:do","Khéo léo":"sk:giao","Tham vọng":"sk:muu","Hiểm độc":"sk:muu","Tham tiền":"sk:buon",
- "Thẳng thắn":"sk:le","Hiếu thảo":"sk:le","Trọng nghĩa":"sk:quan","Cả nể":"sk:hau","Nhiều chuyện":"sk:giao","Mê tín":"sk:kinh","Thù dai":"sk:muu","Nhu mì":"sk:tay",
+const STR_TR={lanh:"sk:do",chuyen:"sk:giao",trung:"sk:hau",tham:"sk:buon",nhat:"sk:tay","Kín đáo":"sk:do","Thực dụng":"sk:giao","Tham vọng":"sk:muu","Xảo quyệt":"sk:muu","Ham lợi":"sk:buon",
+ "Thật thà":"sk:le","Vì gia tộc":"sk:le","Trọng nghĩa":"sk:quan","Rộng lượng":"sk:hau","Nhiều chuyện":"sk:giao","Mê tín":"sk:kinh","Thù dai":"sk:muu","Khiêm nhường":"sk:tay",
  trongtai:"art:thi",chamchinh:"sk:chinh",lanh2:"sk:do",danghi:"sk:do",nongnay:"sk:vo",datinh:"art:cam"};
 const STR_TH={tuai:"art:y",nghiem:"sk:le",danghi:"sk:do",quyen:"sk:chinh",phat:"sk:kinh"};
 const STR_COURT={tq:"sk:quan",ksp:"sk:so",ped:"sk:buon",ty:"art:y"};
@@ -176,7 +176,7 @@ if(typeof mindMenu==="function"){const m0=mindMenu;mindMenu=function(v,t){const 
 /* a stray man seen in the hậu cung: was a fixed rule per trait (no dice); now each answer is weighted, the old answer stays the most likely */
 if(typeof menDecide==="function"){const d0=menDecide;menDecide=function(w,c){const d=d0.apply(this,arguments);try{const h=c?hostility(w,c):0;const T=traitsOf(w);
   const M=BAL.mind.men;
-  const O=[["report",(M.report[0]+h/M.report[1])*mindW(w,"court")],["hide",(T.includes("Tham vọng")?M.hide[0]:M.hide[1])*mindW(w,"bribe")],["listen",(T.includes("Đa nghi")?M.listen[0]:M.listen[1])*mindW(w,"spy")],["ignore",(T.includes("Hiền lành")||T.includes("Nhu mì")?M.ignore[0]:M.ignore[1])*Math.max(M.ignore[2],1-h/M.ignore[3])*mindW(w,"help")]];
+  const O=[["report",(M.report[0]+h/M.report[1])*mindW(w,"court")],["hide",(T.includes("Tham vọng")?M.hide[0]:M.hide[1])*mindW(w,"bribe")],["listen",(T.includes("Kín đáo")?M.listen[0]:M.listen[1])*mindW(w,"spy")],["ignore",(T.includes("Ân cần")||T.includes("Khiêm nhường")?M.ignore[0]:M.ignore[1])*Math.max(M.ignore[2],1-h/M.ignore[3])*mindW(w,"help")]];
   O.forEach(o=>{if(o[0]===d)o[1]+=M.keep});return mindPick(O,w)||d}catch(e){return d}}}
 
 })();
