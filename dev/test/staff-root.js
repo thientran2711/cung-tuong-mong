@@ -52,6 +52,10 @@ ok(!hits.length,'one table: no private capOf table / wrapper / +1 count outside 
  const h=await p.evaluate(()=>{S.bac=500;S.rank=1;S.staff=[];fillStaff(S,true);const n0=S.staff.length;const btn=document.createElement('button');btn.dataset.hire="eunuch";document.body.appendChild(btn);btn.click();btn.remove();
   return{n0,n1:S.staff.length,q:Q.length,has:hhHas(S),cap:capOf(S)}});
  ok(h.n1===h.n0&&h.has[1]<=h.cap[1],'hire button refused at the cap (Thường tại: no eunuch)',JSON.stringify(h));
+ /* a queen sent to the cold palace: her Quản sự ma ma goes back to Thái hậu at once, her household = row 0 */
+ const qc=await p.evaluate(()=>{window.__forceOrigin='tt';start();Q.length=0;const q=queenP();if(!q||q===S)return{skip:1};const kn=elders().find(s=>s.eid==='kn');const before=ownerOf(kn)===q;q.out=1;render();
+  return{before,toTh:ownerOf(kn)===S.thO,h:hhHas(q),c:capOf(q)}});
+ ok(qc.skip||(qc.before&&qc.toTh&&qc.h[0]<=qc.c[0]&&qc.h[1]<=qc.c[1]),'NPC queen to the cold palace: Quản sự ma ma back to Thái hậu at once, household within row 0',JSON.stringify(qc));
  /* servant road */
  const s=await p.evaluate(()=>{window.__forceOrigin=null;for(let i=0;i<300;i++){start();if(isSrv())break}Q.length=0;return{srv:isSrv(),cap:capOf(S),staff:(S.staff||[]).length}});
  ok(s.srv&&(s.cap[0]===0&&s.cap[1]===0&&s.staff===0),'servant road: no household of her own',JSON.stringify(s));

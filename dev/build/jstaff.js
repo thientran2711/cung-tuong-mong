@@ -42,6 +42,8 @@ function fitCap(m){try{if(!m||!m.staff||m===S.thO)return;const cap=capOf(m)[0];l
 function place(st){const post=postOf(st.eid);if(!post)return;const m=masterFor(post);if(!m)return;if(!m.staff)m.staff=[];
  for(const o of [S,S.thO].concat(rivals||[]))if(o&&o!==m&&Array.isArray(o.staff)&&o.staff.includes(st))o.staff.splice(o.staff.indexOf(st),1);
  if(!m.staff.includes(st)){m.staff.push(st);fitCap(m)}st.rk=Math.min(post.rk,srkMax(m,st));if(st.spyFor&&m===S)st.spyFor=null}
+/* every household sweep (j10 capSweep: render, buổi, month) first puts each named woman back with her right master (a queen sent to the cold palace loses hers at once) */
+if(typeof capSweep==="function"){const cs0=capSweep;capSweep=function(){try{if(S&&!isGuest())for(const st of elders())place(st)}catch(e){}return cs0.apply(this,arguments)}}
 function giveFace(st){if(!S||!st||isGuest())return;
  if(!st.fc&&typeof drawF==="function"){try{st.fc=drawF(["mama","womid"],st.age)||"";st.fk="mama"}catch(e){}}
  if(st.fid||typeof FIGS==="undefined"||!FIGS.length)return;
