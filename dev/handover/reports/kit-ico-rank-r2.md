@@ -35,4 +35,4 @@ Same family: rkSummary's life `mode` read the bare name `CW`, which in that scop
 NOT deployed. This branch DOES touch rank/worker/** vs main (the whole rank/worker/ tree comes from r1: src + tests + wrangler.toml, 10 files); r2 itself changes nothing there. So the FF to main WILL trigger .github/workflows/rank-worker.yml (tests + wrangler deploy). Safe per r1 verdict (same API, same migration tag v1; only the unused `sample` field differs from the live script). Steps/rollback: reports/review-kit-ico-rank-r1.md.
 
 ## Notes
-- Test lives from these runs sit on the LIVE coop/rank? No: rank-e2e + LOOK used the local stand-in; only coop-e2e touched the live ctm-coop Worker (as always). The live ctm-rank board gets lives only from coop-e2e's B death via the live game rank URL (same as earlier runs; r1 note on wiping test lives stands).
+- Test lives: rank-e2e and the LOOK shots used the local stand-in. coop-e2e runs the new build with the default rank URL, so each run's dead guest B sent one test life (mode coop) to the LIVE ctm-rank board (as the batch runs did). The r1 note about wiping test lives before the owner sees the board still applies.
