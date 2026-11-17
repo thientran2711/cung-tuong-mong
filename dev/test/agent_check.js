@@ -33,8 +33,8 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
   const pics=[...document.querySelectorAll('#modal .opts > button')].map(b=>b.dataset.kopic||"none");const m=Q.find(x=>x.t==="Ngươi bắt gặp");
   const txt=m?m.opts.map(o=>o.x).join(" | "):"";Q.length=0;try{closeModal()}catch(e){}
   const u0=used;used=4;const kh4=j95kh(),here4=S.roster.P.me[kh4][0];agPlan(v,{k:"thTH",t:null,act:"thỉnh an, hầu Thái hậu",need:"th"},agNeeds(v),kh4,here4);agZ().pend[agZ().pend.length-1].seen=0;agWatch();await new Promise(r=>setTimeout(r,800));
-  const m2=Q.find(x=>x.t==="Ngươi bắt gặp");const L=m2?m2.opts.filter(o=>o.r==="hear"||o.r==="join").map(o=>o.lock&&!!o.why):[];
-  const dis=[...document.querySelectorAll('#modal .opts > button')].filter(b=>b.disabled&&b.querySelector('.kwhy')).length;const u1=used;if(m2){const h=m2.opts.find(o=>o.r==="hear");h.go()}const u2=used;used=u0;Q.length=0;try{closeModal()}catch(e){}
+  const m2=Q.find(x=>x.t==="Ngươi bắt gặp");const L=m2?m2.opts.filter(o=>o.r==="hear"||o.r==="join").map(o=>!!(o.off&&o.off.why)):[];
+  const dis=[...document.querySelectorAll('#modal .opts > button')].filter(b=>b.disabled&&(b.querySelector('.kwhy')||b.dataset.kneed)).length;const u1=used;if(m2){const h=m2.opts.find(o=>o.r==="hear");h.go()}const u2=used;used=u0;Q.length=0;try{closeModal()}catch(e){}
   return{pics,khTxt:txt.includes("tốn: "+BAL.ag.kh+" khắc"),L,dis,free:u2!==u1}});
  ok(r2b.pics.length>=3&&r2b.pics.every(x=>x!=="none"&&!/^ph:/.test(x)),'kit: every reaction row carries its kit picture (no blank, no placeholder)',r2b);
  ok(r2b.khTxt&&r2b.L.length>=1&&r2b.L.every(x=>x)&&r2b.dis>=1&&!r2b.free,'khắc: reaction cost = BAL.ag.kh; no khắc left = kit locked option, nothing free',r2b);

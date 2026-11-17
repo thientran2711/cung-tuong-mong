@@ -82,8 +82,8 @@ function overhear(k){const here=liveRivals(true).filter(v=>whereOf(v)===k);if(he
 /* the palace map */
 const MAPL=[["thu","dtd","tn"],["kn","vuon","ksp"],["tyv","lc","home"]];
 function mapHTMLgrid(){const W=S.where||{};const dis=k=>!walkOk(travel(S.place,k))||S.confined||S.dead||S.place===k;
- const tile=(k,n,sc,sub)=>`<button class="mtile" data-go="${k}" ${k==="home"?(S.place==="home"?"disabled":""):(dis(k)?"disabled":"")} style="${(SCIMG[sc]||k==="home")?`background-image:url(img/${k==="home"&&sc!=="maid"?"tam-cung-dem":SCIMG[sc]}.webp)`:""}"><span class="mband">${k!=="home"&&S.place!==k&&!walkOk(travel(S.place,k))?`<span class="mchip">${used>=4?"hết khắc":`đi ${travel(S.place,k)} khắc`}</span>`:""}<b>${n}</b><span>${countAt(k)?silChip(countAt(k)):"vắng"} · ${k==="home"?"không tốn khắc":travel(S.place,k)+" khắc"}</span>${sub&&k!=="home"?`<small>${sub}</small>`:""}</span></button>`;
- let h=`<div class="ph"><span>Đi gần 1 khắc, xa 2 khắc · còn <b>${4-used}</b> ${pips(4-used)}. Đi được khi đường đi không quá số khắc còn; đến nơi hết khắc thì chỉ kịp xem ai ở đó.</span>${S.confined?`<span class="r">Cấm túc ${S.confined} tháng</span>`:""}</div><div class="pmap">`;
+ const tile=(k,n,sc,sub)=>`<button class="mtile" data-go="${k}" ${k==="home"?(S.place==="home"?"disabled":""):(dis(k)?"disabled":"")} style="${(SCIMG[sc]||k==="home")?`background-image:url(img/${k==="home"&&sc!=="maid"?"tam-cung-dem":SCIMG[sc]}.webp)`:""}"><span class="mband">${k!=="home"&&S.place!==k&&!walkOk(travel(S.place,k))?`<span class="mchip">${used>=BAL.time.khac?"hết khắc":`đi ${travel(S.place,k)} khắc`}</span>`:""}<b>${n}</b><span>${countAt(k)?silChip(countAt(k)):"vắng"} · ${k==="home"?"không tốn khắc":travel(S.place,k)+" khắc"}</span>${sub&&k!=="home"?`<small>${sub}</small>`:""}</span></button>`;
+ let h=`<div class="ph"><span>Đi gần ${BAL.walk.near} khắc, xa ${walkFarK()} khắc · còn <b>${BAL.time.khac-used}</b> ${pips(BAL.time.khac-used)}. Đi được khi đường đi không quá số khắc còn; đến nơi hết khắc thì chỉ kịp xem ai ở đó.</span>${S.confined?`<span class="r">Cấm túc ${S.confined} tháng</span>`:""}</div><div class="pmap">`;
  for(const row of MAPL)for(const k of row){if(k==="kn"&&!qOn()){h+=`<div class="mtile off"><b>Càn Ninh cung</b><span>bỏ trống</span></div>`;continue}const P=placeOf(k);h+=tile(k,k==="home"?"Tẩm cung":P.n,P.sc,k==="home"?"không tốn việc":"")}
  h+=`</div><div class="pmap two">`+liveRivals(false).filter(v=>palaceOf(v)!=="home").map(v=>{const k="r"+v.id;return tile(k,typeof palName==="function"?palName(k):"Cung phi tần","rv","")}).filter((x,i,a)=>a.indexOf(x)===i).join("")+`</div>`;
  return h}
@@ -102,18 +102,19 @@ function relHTML(){const P=consorts();const sel=relSel==="emp"||relSel==="th"?re
 function mapPos(k){for(let r=0;r<MAPL.length;r++){const c=MAPL[r].indexOf(k);if(c>=0)return[r,c]}if(k[0]==="r"){const i=liveRivals(false).findIndex(v=>"r"+v.id===k);return[3+Math.floor(Math.max(0,i)/3),Math.max(0,i)%3]}return[2,2]}
 /* the walk rule (owner 11/15 01:35Z): she may go anywhere whose WALK fits in the khắc left (arriving with 0 is fine: she sees who is
    there, next buổi she starts there). Never "hết khắc" unless 0 are left; otherwise the reason is the walk cost. */
-function walkOk(tc){return !!S&&!S.dead&&used+tc<=4}
-function walkWhy(tc){const left=Math.max(0,4-used);return left<=0?"hết khắc":`đi ${tc} khắc, còn ${left}`}
+function walkOk(tc){return !!S&&!S.dead&&used+tc<=BAL.time.khac}
+function walkWhy(tc){const left=Math.max(0,BAL.time.khac-used);return left<=0?"hết khắc":`đi ${tc} khắc, còn ${left}`}
 /* walk spill (owner 11/15 09:05Z): a walk longer than the khắc left is not a dead end. She pays what is left now, the buổi turns
    (normal end-of-buổi processing: NPCs move, news), the rest of the walk is paid from the new buổi's khắc and she arrives there in
    the new buổi, seeing who is there then (1 khắc left in the morning, 3-khắc walk → 1 now + 2 in the afternoon, arrives with 2 left).
    Not across the night: from buổi tối the existing night rule stands (wait until morning). The place must be open in the new buổi.
    While the walk is under way, travel(from,k) in the new buổi returns the part still to walk. NPCs do not pay walk costs (placeWhere). */
-function walkSpill(k){if(!S||S.dead||S.out||S.confined||S.mg||!k||k==="home"||k===S.place)return null;if(window.COOPW&&COOPW.on)return null; /* co-op world (jcoopworld: window.COOPW; the global CW is a face-key helper) */
- const b=S.buoi||0;if(b>=BUOI.length-1)return null;const tc=travel(S.place,k),left=Math.max(0,4-used);if(tc<=left)return null;
- let a={ok:true};if(typeof accessOf==="function"){try{S.buoi=b+1;a=accessOf(S,k)||{ok:true}}catch(e){}finally{S.buoi=b}}
- return{k,tc,now:left,rest:tc-left,b:b+1,ok:!!a.ok,why:a.why||""}}
-function walkSpillGo(k){const P=walkSpill(k);if(!P||!P.ok||Q.length)return;window.__walkSpill={k,from:S.place,rest:P.rest,b:P.b,tries:0};
+function walkSpill(k,o){if(!S||S.dead||S.out||S.confined||S.mg||!k||k==="home"||k===S.place)return null; /* co-op too (time-spill sweep 16/11): her buổi ends with `bend`, the walk finishes when the room turns (walkSpillTick waits for it) */
+ const b=S.buoi||0;if(b>=BUOI.length-1)return null;const tc=travel(S.place,k),left=Math.max(0,BAL.time.khac-used),pre=(o&&o.pre)||0;if(pre+tc<=left)return null;
+ let a={ok:true};if(!(o&&o.pass)&&typeof accessOf==="function"){try{S.buoi=b+1;a=accessOf(S,k)||{ok:true}}catch(e){}finally{S.buoi=b}}
+ const now=Math.max(0,left-pre);return{k,tc,now,rest:tc-now,b:b+1,ok:!!a.ok,why:a.why||""}}
+/* o.pass: she was let in this buổi (asked / sneaked / led in): the pass holds when she arrives next buổi. o.pre: khắc already spent here first */
+function walkSpillGo(k,o){const P=walkSpill(k,o);if(!P||!P.ok||Q.length)return;window.__walkSpill={k,from:S.place,rest:P.rest,b:P.b,tries:0,pass:!!(o&&o.pass),wk:wkKey()};
  spend(P.now);nextBuoi();walkSpillTick()}
 /* ONE "go there" rule for every button that walks her to a place (map, list, person cards, generic data-go) — owner-bug 16/11 18:30Z
    "chỗ nào cũng khóa hết" (review/dudo-lock): a walk longer than the khắc left is never a lock while walk spill can take her there.
@@ -125,13 +126,17 @@ function walkGo(k){if(!S||S.dead||Q.length)return;if(k==="home"||k===S.place||S.
 function walkSpillTick(){const W=window.__walkSpill;if(!W)return;if(!S||S.dead){window.__walkSpill=null;return}
  const md=document.getElementById("modal");if(Q.length||(md&&!md.hidden)||S.mg){setTimeout(walkSpillTick,300);return}
  const b=S.buoi||0;
- if(b===W.b-1&&S.place===W.from&&W.tries<3){W.tries++;nextBuoi();setTimeout(walkSpillTick,300);return} /* the buổi did not turn yet (an event card came first) */
+ const coop=!!(window.COOPW&&COOPW.on);if(coop&&W.wk&&W.wk!==wkKey()){window.__walkSpill=null;return}
+ if(b===W.b-1&&S.place===W.from&&(W.tries<3||coop)){W.tries++;if(W.tries<=3)nextBuoi();setTimeout(walkSpillTick,coop?600:300);return} /* the buổi did not turn yet (an event card came first; co-op: the friend has not ended the buổi yet) */
  if(b!==W.b||S.place!==W.from){window.__walkSpill=null;return}
+ if(W.pass&&typeof accGrant==="function")accGrant(S,W.k);
  goTo(W.k);if(S.place===W.k)window.__walkSpill=null;
  /* review/dudo-lock: the place shut while she walked (the rule read the new buổi before NPCs moved, e.g. a maid's mistress left): never a
     silent stop at home — the place card says why, the walk spent is not refunded (she did walk) */
  else if(!Q.length){window.__walkSpill=null;try{if(typeof j77Card==="function")j77Card(W.k)}catch(e){}}}
-function travel(a,b){if(a===b)return 0;{const W=window.__walkSpill;if(W&&S&&(S.buoi||0)===W.b&&a===W.from&&b===W.k)return W.rest}const [r1,c1]=mapPos(a||"home"),[r2,c2]=mapPos(b);const far=Math.abs(r1-r2)+Math.abs(c1-c2)>1;return far?(wet()?3:2):1}
+/* khắc of a far walk right now (one-core: texts print this, BAL.walk) */
+function walkFarK(){return BAL.walk.far}
+function travel(a,b){if(a===b)return 0;{const W=window.__walkSpill;if(W&&S&&(S.buoi||0)===W.b&&a===W.from&&b===W.k)return W.rest}const [r1,c1]=mapPos(a||"home"),[r2,c2]=mapPos(b);const far=Math.abs(r1-r2)+Math.abs(c1-c2)>1;return far?BAL.walk.far:BAL.walk.near}
 function rivalsBuoi(){let ev="";for(const v of liveRivals(true)){if(!v.alive||v.out)continue;const t=pickTarget(v);if(!t)continue;
   let want=((v.malice/100)*(rel(v,t)<0?1:.25)+hostility(v,t)/200)*(rkOf(t)>=rkOf(v)-1||(t===S&&v.ghen>=60)?1:.4);if(t.shield)want*=.5;
   if(t===S&&S.lot&&S.lot.dom==="Hung")want*=1.5;if(Math.random()<want*.04){ev+=seenNPC(v,t,npcAct(v,t));if(S.dead)return ev}}return ev}

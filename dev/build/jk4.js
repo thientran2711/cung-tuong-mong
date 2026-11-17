@@ -426,14 +426,18 @@ function kitDpFit(){try{const o=kitDpOn();if(!o||!o.d.classList.contains("kdper"
  const capH=Math.max(0,...L.map(x=>x.cap?x.cap.offsetHeight:0));
  /* reviewer popup-fullbody-r1 / evidence panel: a person panel WITHOUT an options group scrolls as a whole (#mb); the figure column must be the visible height of #mb (sticky at the top), never the whole scroll height (figure 1100 px below the fold) */
  if(!narrow&&!mb.querySelector(":scope > .opts")){col.style.removeProperty("height");col.style.removeProperty("align-self");if(mb.scrollHeight>mb.clientHeight+2){col.style.alignSelf="start";col.style.height=Math.max(200,mb.clientHeight-20)+"px"}}
- const H=col.clientHeight;if(H<80)return;
+ /* review/fig-cutout-code (owner 16/11 21:05Z, BÁO Nhập cung: hem / feet / shoes cut at the bottom): when the dialog is held shorter
+    than its content (CSS max-height), the column (grid rows 1/-1) runs past the visible bottom of #mb (overflow hidden) and the feet
+    placed on the column floor were cut. H = the VISIBLE column height (inside #mb's padding), for every person dialog. */
+ let H=col.clientHeight,cut=0;try{const mr=mb.getBoundingClientRect(),cr=col.getBoundingClientRect(),vis=Math.floor(mr.bottom-(parseFloat(getComputedStyle(mb).paddingBottom)||0)-cr.top);if(vis>0&&vis<H){cut=H-vis;H=vis}}catch(e){}
+ if(H<80)return;
  /* KIT 32.2b EQUAL GAPS (owner 16/11 s21, VIỆC "Tiết Thanh minh": "cách cái đường line của cái khung ở trên nó bằng với cái chân, với cái đường
     line của cái khung ở dưới"): in every frame with a full-body figure the gap from the frame line ABOVE (the header rule under the title, .kph)
     to the top of the name chip = the gap from the feet to the frame line BELOW (the frame's inner bottom edge). Both gaps are at least
     KIT_DP_GAP (pct of that height, ≥ min px), so the figure never touches a line; a figure the column width keeps shorter is CENTRED between
     the two lines (equal gaps), never left standing on the floor with the empty space above it. A figure cut at the floor (short column,
     32.2a minVis) is not full-body: its painted top stays one gap under the header line. kitFrameGaps(dlg) measures it (tests). */
- const gl=kitFrameLines(d,col),gA=H+gl.offTop+gl.offBot,gG=Math.max(KIT_DP_GAP.min,KIT_DP_GAP.pct*gA,gl.offTop,gl.offBot);
+ const gl=kitFrameLines(d,col);gl.offBot+=cut;const gA=H+gl.offTop+gl.offBot,gG=Math.max(KIT_DP_GAP.min,KIT_DP_GAP.pct*gA,gl.offTop,gl.offBot);
  const yTop=Math.min(H/3,Math.max(0,gG-gl.offTop)),floor=Math.max(H*2/3,Math.min(H,H+gl.offBot-gG));
  const capW=Math.max(0,...L.map(x=>x.cap?x.cap.scrollWidth:0));
  /* KIT 32.2 CAP + CROP (owner 15/11 "Sao khung này, khung trái nhân vật to vậy … nếu cắt váy thì cũng ok mà", review/stage-fig-size):
@@ -525,6 +529,11 @@ function kitDpNat(d,mb,col){try{const cs=e=>getComputedStyle(e);const items=[...
 html body #modal .dlg.kdper.kdpall>#mb{overflow-y:auto!important;overscroll-behavior:contain;grid-template-rows:max-content max-content!important;align-content:start}
 html body #modal .dlg.kdper.kdpall>#mb>.kpb>.kpsubj.kes{position:sticky!important;top:0;align-self:start;grid-row:1/-1;height:var(--kdpmbh,100%)!important}
 html body #modal .dlg.kdper.kdpall>#mb>.opts{grid-row:2!important;overflow:visible!important;min-height:max-content!important;align-self:start}
+/* KIT §32.5c (kit-size-10, night-final KIT REQUEST "clock chip off screen"): a dialog with a picture band (kdpbanner) has THREE rows in the right column —
+   band, text (+ any §69 countdown chip), options. kdpall used to force 2 rows and put the options in row 2, so the text fell into an implicit row 3
+   BELOW the options (chip at y 970–1300 on 412x1058 / 390x844). With the band: 3 rows, options in row 3, text stays above them. */
+html body #modal .dlg.kdper.kdpall.kdpbanner>#mb{grid-template-rows:max-content max-content max-content!important}
+html body #modal .dlg.kdper.kdpall.kdpbanner>#mb>.opts{grid-row:3!important}
 `;document.head.appendChild(st)})();
 (function(){const p0=kitStagePeople;kitStagePeople=function(m){let L=p0.apply(this,arguments);
  /* coordinator 15/11 ("Hoàng hậu triệu kiến" showed the PLAYER): the column shows the MAIN ACTOR — the first person who is not the player;
@@ -566,7 +575,12 @@ html body #modal .dlg.kdper.kdpall>#mb>.opts{grid-row:2!important;overflow:visib
 (function(){const e0=kitEsFit;kitEsFit=function(row){if(row&&row.closest&&row.closest(".dlg.kdper"))return kitDpFit();return e0.apply(this,arguments)};window.kitEsFit=kitEsFit})();
 (function(){if(typeof showModal!=="function")return;const s0=showModal;showModal=function(){const r=s0.apply(this,arguments);try{kitDpApply();requestAnimationFrame(kitDpFit)}catch(e){}return r};
  const d0=kitDlgFit;kitDlgFit=function(){const r=d0.apply(this,arguments);try{kitDpFit()}catch(e){}return r};window.kitDlgFit=kitDlgFit;
- let t=0;addEventListener("resize",()=>{clearTimeout(t);t=setTimeout(kitDpFit,160)})})();
+ let t=0;addEventListener("resize",()=>{clearTimeout(t);t=setTimeout(kitDpFit,160)});
+ /* review/fig-cutout-code (owner 16/11 21:05Z, BÁO Nhập cung: feet / shoes cut): the panel can change height AFTER the last fit (a late
+    banner / row / font, CSS max-height), leaving the figure column taller than the visible #mb and the feet cut. Re-fit whenever #mb
+    changes size (capped: at most 8 re-fits per second, so a fit that changes the size itself can never loop). */
+ try{if(typeof ResizeObserver==="function"){const mb=document.getElementById("mb");let n=0,t0=0,raf=0;if(mb)new ResizeObserver(()=>{const now=Date.now();if(now-t0>1000){t0=now;n=0}
+  if(++n>8||raf)return;raf=requestAnimationFrame(()=>{raf=0;try{kitDpFit()}catch(e){}})}).observe(mb)}}catch(e){}})();
 (function(){const st=document.createElement("style");st.id="kit-dlgperson";st.textContent=`
 #modal .dlg.kpanel.kdper{display:flex!important;flex-direction:column;overflow:hidden!important}
 #modal .dlg.kpanel.kdper>*{flex:none}

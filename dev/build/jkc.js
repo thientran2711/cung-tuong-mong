@@ -100,7 +100,7 @@ function kcCardHome(m){try{return !!(m&&m.nl&&S&&S.origin&&!S.srv&&!(typeof isSr
  try{b0.apply(this,arguments)}finally{if(sv){S.age=sv[0];S.danh=sv[1];S.bac=sv[2]}}
  try{if(home){const ti=$("mb")&&$("mb").querySelector(".kpidn .kti");if(ti)ti.textContent=kcTitle()}}catch(e){}
  try{if(!(m&&m.nl)||!S||typeof NLP==="undefined"||!NLP||!kcOk(S.origin.k))return;const mb=$("mb");if(!mb||mb.querySelector(".kkcp"))return;
- const w=document.createElement("div");w.innerHTML=kcPathHTML();const sec=w.firstElementChild;const at=mb.querySelector(":scope > .kpick")||mb.querySelector(":scope > .kpopts");if(at)mb.insertBefore(sec,at);else mb.appendChild(sec)}catch(e){console.error("jkc card",e)}}})();
+ const w=document.createElement("div");w.innerHTML=kcPathHTML();const sec=w.firstElementChild;/* r3 (kit-fit, reviewer: name + age line lost on the identity card): j86 wraps the card body in .kpscroll with ONLY Nhận / Đổi pinned below it; the road cards belong in that scroll area (they sat between the two as a 300 px block and left it 106 px) */const sc=mb.querySelector(":scope > .kpscroll");const at=(sc||mb).querySelector(":scope > .kpick")||(sc?null:mb.querySelector(":scope > .kpopts"));if(at)at.parentNode.insertBefore(sec,at);else (sc||mb).appendChild(sec)}catch(e){console.error("jkc card",e)}}})();
 $("modal").addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("button[data-kcp]");if(!b)return;e.preventDefault();e.stopPropagation();if(b.disabled||!S||typeof NLP==="undefined"||!NLP)return;S.kcPick=b.dataset.kcp;try{nlCard()}catch(x){console.error(x)}},true);
 (function(){const a0=nlAccept;nlAccept=function(){const was=typeof NLP!=="undefined"&&NLP;const W=window.COOPW;
  /* co-op: jcoopworld sends her new life right after the accept; hold it until the home life is built, then send that one */
@@ -533,7 +533,7 @@ function kcEnter(rank){const b=rsnap();const K=S.kc;K.inPal=1;K.r=rank;K.yIn=S.y
    kitRows(gone.map(x=>[x.t,"bị xử trảm","r"]).concat([["Em trai út","lạc trong đêm khám phủ","t"],["Hồi môn","bị tịch thu","r"],["Thế lực nhà","không còn","r"]]))}}
  /* r2-r1 (FAIL 3): home dialogs still queued (Phúc tuyển, family events …) never follow her into the palace, and an open mini-game card closes */
  for(let i=Q.length-1;i>=0;i--){const m=Q[i];if(m&&m.pid==="kcE"&&!(m.pp&&m.pp.e==="dien"))Q.splice(i,1)}try{if(typeof kg82Close==="function"&&document.getElementById("kg82"))kg82Close(true)}catch(e){}
- S.rank=rank;S.sung=8+rank*5;S.lastPromo=S.turn;S.danh=Math.min(30,Math.round(S.danh*.6));S.bac=Math.min(400,S.bac+(fall?0:Math.round(S.khm*KC.dowry)));
+ S.rank=rank=seatDown(S,rank);S.sung=8+rank*5;S.lastPromo=S.turn;S.danh=Math.min(30,Math.round(S.danh*.6));S.bac=Math.min(400,S.bac+(fall?0:Math.round(S.khm*KC.dowry)));
  S.staff=K.staff0||[];S.place="home";if(S.maid)S.maid.loyal=cl(S.maid.loyal+15,0,100);kcPd(rank>=2?10:5,`vào cung, phong ${RANKS[rank].n}`);S.out=0;S.pal=null;
  if(S.kc.tdFall){S.kc.hidden=1}
  /* the sister and friends who also passed enter as consorts (same score rule) */
@@ -559,7 +559,7 @@ function kcHud(){const r=$("me-r");if(r)r.textContent=kcTitle();const e=$("hud-s
 /* #hud2 = the state cells the k3 top bar reads (rule glosses on tap): her home numbers instead of the palace ones */
 function kcHud2(){const el=$("hud2");if(!el)return;const col=el.classList.contains("col");
  const c=(k,l,v,cls)=>`<button class="hc ${cls||""}${["buoi","date"].includes(k)?" keep":""}" data-hx="${k}">${l}${v!==""&&v!=null?` <b>${v}</b>`:""}</button>`;
- el.innerHTML=`<button class="h2t" data-h2t="1" aria-label="${col?"Mở ra":"Thu lại"}">${col?"▾":"▴"}</button>`+c("date",typeof VP==="object"&&VP.date?VP.date(S.month,S.year,S.tuan):`Tháng ${S.month}`,"")+c("buoi",`${BUOI[S.buoi||0].replace("Buổi ","")} · còn`,`${4-used} khắc`)
+ el.innerHTML=`<button class="h2t" data-h2t="1" aria-label="${col?"Mở ra":"Thu lại"}">${col?"▾":"▴"}</button>`+c("date",typeof VP==="object"&&VP.date?VP.date(S.month,S.year,S.tuan):`Tháng ${S.month}`,"")+c("buoi",`${BUOI[S.buoi||0].replace("Buổi ","")} · còn`,`${BAL.time.khac-used} khắc`)
   +c("sac","Sắc",S.sac)+c("tai","Tài",S.tai)+c("tamco","Tâm cơ",S.tamco)+c("duc","Đức",S.duc)+c("kgt","Gia thanh",S.kgt,S.kgt<25?"hot":"")+c("kap","Áp lực hôn sự",S.kap,S.kap>=60?"hot":"")+c("khm","Hồi môn",S.khm)
   +(S.kc.ldSeen?c("kld","Lời đồn",S.kld,S.kld>=50?"hot":""):"")+c("kty","Kỳ tuyển tú",`còn ${Math.max(0,kcMonthsLeft())} tháng`)+c("age","Tuổi",S.age)}
 (function(){const h0=hudTween;hudTween=function(){if(!isKc())return h0.apply(this,arguments);const s=S.sung;S.sung=S.kgt;try{return h0.apply(this,arguments)}finally{S.sung=s}}})();

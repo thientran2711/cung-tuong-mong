@@ -1,21 +1,21 @@
 /* ================= THE MAP TAB, FULL SCREEN: the plan fills all between the top bar and the tab bar ================= */
 /* people present show as anonymous silhouettes with a count (hữu duyên: who is there is learned only by going); residents are named inside the palace screen */
 const SILH=`<svg viewBox="0 0 10 14" aria-hidden="true"><circle cx="5" cy="3" r="2.4"/><path d="M1 14c0-4.4 1.6-7.2 4-7.2s4 2.8 4 7.2z"/></svg>`;
-function silChip(n){if(!n)return"";const k=Math.min(n,3);return `<span class="msil" aria-label="${n} bóng người">${SILH.repeat(k)}${n>1?`<b>${n}</b>`:""}</span>`}
+function silChip(n){return"";if(!n)return"";const k=Math.min(n,3);return `<span class="msil" aria-label="${n} bóng người">${SILH.repeat(k)}${n>1?`<b>${n}</b>`:""}</span>`}
 (function(){const m0=mapHTML;mapHTML=function(){let h=m0.apply(this,arguments);if(window.__mapList)return h;
  try{/* drop the faces of residents and the names in the hover title; add the silhouettes */
   h=h.replace(/<span class="mfaces">[\s\S]*?<\/span><\/button>/g,"</button>");
   h=h.replace(/ · ở: [^"]*"/g,'"');
   h=h.replace(/(<button class="mspot[^"]*" data-go="([^"]+)"[^>]*>)/g,(all,open,k)=>{const n=countAt(k);return open+(n?silChip(n):"")});
-  h=h.replace(/<span class="mleg">[^<]*<\/span>/,'<span class="mleg">đi gần 1 khắc, xa 2 · bóng: người khác đang ở đó, không tính ta</span>');}catch(e){}
+  h=h.replace(/<span class="mleg">[^<]*<\/span>/,'<span class="mleg">đi gần '+(BAL.walk.near)+' khắc, xa '+(walkFarK())+' · bóng: người khác đang ở đó, không tính ta</span>');}catch(e){}
  return h}})();
 /* the layout switch */
 (function(){const r0=renderPanel0;renderPanel0=function(){const r=r0.apply(this,arguments);try{const gm=document.querySelector(".game");if(gm)gm.classList.toggle("maptab",tab==="go"&&!window.__mapList)}catch(e){}return r}})();
 /* the plan always covers the screen: the smallest zoom fills the height as well as the width */
 function mapFit(){try{const sc=document.querySelector(".game.maptab .mapsc");if(!sc)return;const w=sc.querySelector(".mapw"),img=sc.querySelector(".mapimg");if(!w)return;
  const asp=img&&img.naturalWidth?img.naturalWidth/img.naturalHeight:1.792;const fit=Math.max(1,(sc.clientHeight/Math.max(1,sc.clientWidth))*asp);
- /* KIT 34.1d: the floor zoom is also the smallest at which no two place labels (13 px chips, owner 16/11) touch; the palace detail map (.kpmv) keeps its own layout */
- let fit2=fit;if(!sc.closest(".kpmv")){const cap=fit+2.5;const touch=()=>{const R=[...w.querySelectorAll(".mspot .mlab")].map(l=>l.getBoundingClientRect()).filter(r=>r.width>0);for(let i=0;i<R.length;i++)for(let j=i+1;j<R.length;j++){const a=R[i],b=R[j];if(Math.min(a.right,b.right)-Math.max(a.left,b.left)>0&&Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top)>0)return true}return false};
+ /* KIT 34.1d + §85: the floor zoom is also the smallest at which no two places (label + info row, as ONE box) touch; the palace detail map (.kpmv) keeps its own layout */
+ let fit2=fit;if(!sc.closest(".kpmv")){const cap=fit+3.5;const touch=()=>{const R=[...w.querySelectorAll(".mspot")].map(s=>{const p=[...s.querySelectorAll(".mlab,.mmeta")].map(e=>e.getBoundingClientRect()).filter(r=>r.width>0);if(!p.length)return{width:0};const L=Math.min(...p.map(r=>r.left)),T=Math.min(...p.map(r=>r.top)),R=Math.max(...p.map(r=>r.right)),B=Math.max(...p.map(r=>r.bottom));return{left:L,right:R,top:T,bottom:B,width:R-L}}).filter(r=>r.width>0);for(let i=0;i<R.length;i++)for(let j=i+1;j<R.length;j++){const a=R[i],b=R[j];if(Math.min(a.right,b.right)-Math.max(a.left,b.left)>0&&Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top)>0)return true}return false};
   for(let g=0;g<12;g++){w.style.width=(fit2*100)+"%";if(!touch()||fit2>=cap)break;fit2=Math.min(cap,fit2+.25)}}
  const z=Math.max(fit2,window.__mapZ||fit2);w.style.width=(z*100)+"%";window.__mapFit=fit2;
  const key=S.place+"|"+z.toFixed(2)+"|"+sc.clientWidth;if(window.__mapKey2===key&&window.__mapPos2){sc.scrollLeft=window.__mapPos2[0];sc.scrollTop=window.__mapPos2[1]}

@@ -59,9 +59,9 @@ function danger(v,t){const g=Math.max(t===S?(v.ghen||0)*(persF(v,"ghen",1)>1?1.1
 /* harm menu: the band's acts, each weighted by the doer's traits */
 function npcAct(v,t){const b=bandOf(danger(v,t));if(!b)return"";const allow=BANDS.slice(1,b+1).flatMap(x=>x[2]);const O=[];const add=(k,w)=>{const a=ACT[k];w*=persW(v,k);if(a&&allow.includes(k)&&a.ok(v,t)&&w>0)O.push([k,w])};
  add("accuse",6);add("vp",3);add("musk",4);add("catswap",2);for(const k of ["kpoison","pond","kframe","ksab"])add(k,2);add("takeaway",2);add("pushp",1);add("trip",3);add("frame",2);add("poison",2);add("rumor",3);add("spy",3);add("bribe",2);add("block",t.nightLog&&t.nightLog.length?2:0);
- if(allow.includes("plant")&&v.inv.some(e=>e.t||IT[e.k].il))O.push(["plant",3*persW(v,"plant")]);
+ if(allow.includes("plant")&&v.inv.some(e=>e.t||(IT[e.k]||{}).il))O.push(["plant",3*persW(v,"plant")]);
  if(!O.length)return"";const w=O.map(x=>x[1]);let r=Math.random()*w.reduce((a,b)=>a+b),i=0;while(r>w[i]&&i<w.length-1){r-=w[i];i++}const k=O[i][0];persCount(v,k);
- if(k==="plant")return runAct(v,t,"plant",v.inv.findIndex(e=>e.t||IT[e.k].il));return runAct(v,t,k)}
+ if(k==="plant")return runAct(v,t,"plant",v.inv.findIndex(e=>e.t||(IT[e.k]||{}).il));return runAct(v,t,k)}
 /* reactions: Oán from a slight scales with the victim's traits; forgiveness (monthly fade) too; trust gains from her too */
 (function(){const o0=oanAdd;oanAdd=function(x,y,n){if(n>0&&x&&x!==S)n*=persF(x,"slight",1);return o0.call(this,x,y,n)}})();
 (function(){const a0=affAdd;affAdd=function(x,y,n){if(n>0&&y===S&&x&&x!==S)n*=persF(x,"trust",1);return a0.call(this,x,y,Math.round(n))}})();

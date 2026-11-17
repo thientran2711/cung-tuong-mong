@@ -106,6 +106,8 @@ async function join(B,code){await B.page();await B.p.goto(BASE+'?room='+code,DCL
  for(let i=0;i<3;i++){await clear(A);await clear(B);await sleep(300)}
  /* 4 time out at tối, guest AFK */
  if(await toNight('4')){const w0=(await D(A)).w;await setTm(A,{buoiMs:9000,pauseCapMs:2000});await reset(A);
+  for(let i=0;i<3;i++){await clear(B);await sleep(300)}/* flip-entry: the tablet is turned at the START of buổi tối (jfe/jnf); the guest reads what tối brings (a summons is a real choice, never auto-made) and only then goes AFK */
+  
   const t0=Date.now();await clear(A);ok(await isRd(A)||await press(A),'4: host presses, guest AFK');
   let st=-1;while(Date.now()-t0<40000){const c=await D(B);if(c.pend||c.w>w0){st=Date.now()-t0;break}await sleep(300)}
   ok(st>=5000,'4: the guest night runs only when the clock ends (host commits)',st);await merged('4',w0)}
