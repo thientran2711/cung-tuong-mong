@@ -98,7 +98,7 @@ P3=[('j5.js','end(hits>=13?3:hits>=8?2:1)','end(hits>=BAL.cut.rhythm[1]?3:hits>=
 ('j99succ.js','end:()=>E.an>=5?"c_bad":E.q>=6?"c_ok":"c_abd"','end:()=>E.an>=BAL.cut.succEnd.an?"c_bad":E.q>=BAL.cut.succEnd.q?"c_ok":"c_abd"',1),
 ('jveil.js','const i=q>=14?3:q>=10?2:q>=6?1:0;','const i=q>=BAL.cut.veil[2]?3:q>=BAL.cut.veil[1]?2:q>=BAL.cut.veil[0]?1:0;',1),
 ('jlost.js','pr>=200?3:pr>=100?2:pr>=40?1:0','pr>=BAL.cut.lost[2]?3:pr>=BAL.cut.lost[1]?2:pr>=BAL.cut.lost[0]?1:0',1),
-('jroute.js','function rtHeatW(h){return h<15?"Yên ắng":h<35?"Có kẻ xì xào":h<60?"Nhiều người bàn tán":h<80?','function rtHeatW(h){return h<BAL.cut.heat[0]?"Yên ắng":h<BAL.cut.heat[1]?"Có kẻ xì xào":h<BAL.cut.heat[2]?"Nhiều người bàn tán":h<BAL.cut.heat[3]?',1),
+#('jroute.js','function rtHeatW(h){return h<15?"Yên ắng":h<35?"Có kẻ xì xào":h<60?"Nhiều người bàn tán":h<80?','function rtHeatW(h){return h<BAL.cut.heat[0]?"Yên ắng":h<BAL.cut.heat[1]?"Có kẻ xì xào":h<BAL.cut.heat[2]?"Nhiều người bàn tán":h<BAL.cut.heat[3]?',1),
 ('jht.js','function kinHealth(k){return k.hp<35?"đang ốm nặng, thái y ra vào":k.hp<60?','function kinHealth(k){return k.hp<BAL.cut.kidHp[0]?"đang ốm nặng, thái y ra vào":k.hp<BAL.cut.kidHp[1]?',1),
 ('jht.js','kinHealth(k),k.hp<35?"r"','kinHealth(k),k.hp<BAL.cut.kidHp[0]?"r"',1),
 ('jexam.js','function exTier(to){return to<=3?0:to<=5?1:2}','function exTier(to){return to<=BAL.cut.exTier[0]?0:to<=BAL.cut.exTier[1]?1:2}',1),

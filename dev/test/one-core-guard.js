@@ -48,12 +48,12 @@ const CODE_PAT={
  k:/(?<![\w$.])k\s*:\s*[+-]?[01]\b(?=\s*,\s*(?:tag|t|n|w)\s*:)/g,
 };
 /* the same, read on the code with every string / template / regex blanked (an effect call spans its string arguments):
-   amt    = the typed last amount (or `cond?N:M`) of a relation / family / power effect call: rdOan(A,"v",5), relAdd(p,S,-8), e67dad(10) …
+   amt    = the typed last amount (or `cond?N:M`) of a relation / family / power effect call: rdOan(A,"v",5), relAdd(p,S,-8), e67dad(10) … (a single-argument call e67dad(4) counts too: review/one-core-dup2, found by one-core-roads)
    ladder = a private threshold table typed as a ternary chain: r>=7?[4,2]:r>=5?[3,2]:… / o>=91?"Nắm chắc":o>=81?… (a second table for a
             concept the rulebook should hold once: capOf, the odds-word cut points …) */
 const NUMV='[+-]?\\d+(?:\\.\\d+)?';
 const JOIN_PAT={
- amt:new RegExp('\\b(?:rdOan|rdRel|relAdd|oanAdd|affAdd|kcAf|tdPowAdd|e67(?:dad|bien|kho|ally|pun|foe|drop))\\((?:[^()]|\\([^()]*\\))*?[(,]\\s*(?:[\\w$.!]+\\s*\\?\\s*)?'+NUMV+'(?:\\s*:\\s*'+NUMV+')?\\s*\\)','g'),
+ amt:new RegExp('\\b(?:rdOan|rdRel|relAdd|oanAdd|affAdd|kcAf|tdPowAdd|e67(?:dad|bien|kho|ally|pun|foe|drop))\\((?:(?:[^()]|\\([^()]*\\))*?[(,])?\\s*(?:[\\w$.!]+\\s*\\?\\s*)?'+NUMV+'(?:\\s*:\\s*'+NUMV+')?\\s*\\)','g'),
  ladder:new RegExp('(?:[\\w$.\\])]+\\s*(?:>=|>|<=|<)\\s*'+NUMV+'\\s*\\?\\s*(?:\\[[^\\[\\]]*\\]|'+NUMV+'|""|``)\\s*:\\s*){2,}(?:\\[[^\\[\\]]*\\]|'+NUMV+'|""|``)','g'),
 };
 const TXT_PAT={
