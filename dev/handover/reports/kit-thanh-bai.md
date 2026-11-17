@@ -28,3 +28,10 @@ dev/test/opt-render.js 1180x820: rolled seals BẠI/THÀNH ok; F:play "dialog ne
 
 ## HANDOVER
 None needed (finished). Reviewer: check dev/measure/thanh-bai-scan.js numbers + the 4 shot pairs; try an act with a real "hỏng:" string and a disabled card.
+
+## r2 (fix of reviewer r1 FAIL 922c7253) — branch review/kit-thanh-bai-r2 aa5a29d7 (on 922c7253)
+PRIORITY #1 CHECK: reports/review-kit-option-rows.md (r1 FAIL, 2 items) | main none (no scroll cue existed: git grep "Kéo xuống" none) | review/* none | claims MAIN s36.
+1. SCROLL CUE (kit, jksize kitScrollCues, one place): every modal frame column that scrolls and is not at its end gets a bottom fade + chip "Kéo xuống" (.kscue, last child, sticky bottom; hides at the end; MutationObserver keeps it last). Fold Hội phối đồ: 2nd card is cut but the chip shows (shot CDN img/_review/kit-thanh-bai/r2-fold-hoi-phoi-do.png, LOOKED). Scan: option-modal-scan flags CUT-NOCUE; fold 6 / ipadAir 7 / ipadPro 9 modals, 0 flagged (the scan now runs kitScrollCues() before probing, no race). kit-conform allows .kscue as #mb child (first quickcheck FAILED G3 on it).
+2. EMPTY THÀNH: own dim line "Không được gì thêm" (empty BẠI keeps "Tốn công, không được gì"). A no-roll card with hỏng: only (no thành:) = ONE block (THÀNH, row Mất): "Cáo bệnh, không dự" = THÀNH · Mất Danh -1 (shot shows it). No-roll with both parts still two blocks. Scan B (622 strings): 73 THÀNH-empty (roll) -> own line; 42 no-roll hỏng-only -> one block; 141 no-roll both parts -> two blocks.
+Docs: KIT.md (§88 r2 lines), VANPHONG.md (3 lines).
+Quickcheck on aa5a29d7: PASS, core gates PASS.
