@@ -57,7 +57,7 @@ const JOIN_PAT={
  /* amt also counts ONE-argument calls (dup2 c66ef16a: e67dad(4)); e67heir added by review/one-core-arcs r2 (reviewer r1 item 1) —
     one kind, the former 'amt1' folded in here; the number after the '(' of a roll( inside the call is an odds, not the amount
     (evA(v,t,roll(40)?…): counted by the roll kind — review/one-core-dup3); a wrapper g(8) still counts */
- amt:new RegExp('\\b(?:rdOan|rdRel|relAdd|oanAdd|affAdd|kcAf|tdPowAdd|e67(?:dad|bien|kho|heir|ally|pun|foe|drop|merit|srvUp)|srvMerit|evA|evStory)\\((?:(?:[^()]|\\([^()]*\\))*?(?:,|(?<!\\broll)\\())?\\s*(?:[\\w$.!]+\\s*\\?\\s*)?'+NUMA+'(?:\\s*:\\s*'+NUMA+')?\\s*\\)','g'),
+ amt:new RegExp('\\b(?:rdOan|rdRel|relAdd|oanAdd|affAdd|kcAf|tdPowAdd|e67(?:dad|bien|kho|heir|ally|pun|foe|drop|merit|srvUp)|srvMerit|evA|evStory|tsbLoyal|relDo)\\((?:(?:[^()]|\\([^()]*\\))*?(?:,|(?<!\\broll)\\())?\\s*(?:[\\w$.!]+\\s*\\?\\s*)?'+NUMA+'(?:\\s*:\\s*'+NUMA+')?\\s*\\)','g'),
  /* h96 = a typed amount inside the tư tình arc's adj96({h,t,sus,ev,rise,lt}) (j96; all read BAL.arc.h96 since review/one-core-dup3) */
  h96:/\badj96\(\s*\{[^{}]*?[:?]\s*[+-]?\d/g,
  ladder:new RegExp('(?:[\\w$.\\])]+\\s*(?:>=|>|<=|<)\\s*'+NUMV+'\\s*\\?\\s*(?:\\[[^\\[\\]]*\\]|'+NUMV+'|""|``)\\s*:\\s*){2,}(?:\\[[^\\[\\]]*\\]|'+NUMV+'|""|``)','g'),

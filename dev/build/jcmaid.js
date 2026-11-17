@@ -94,8 +94,8 @@ function cmGuard(t,p){try{if(t!==S||cmOff()||!S.maid||S.maid.src!=="home"||!S.or
   if(p!==S)cmInitNpc(p);
   const noBuy=p===S&&CM_NOBUY.includes(m.src);const kin=m.tal==="kin"&&cmTalOn(m)&&roll(B.kinSave);
   if(m.src==="old"){return""}/* loyal to death: no decay, cannot be bought */
-  if(noBuy||kin){m.loyal=cl(m.loyal-1,0,100);if(p===S&&m.src==="pick"&&roll(B.pickKeep))m.loyal=cl(m.loyal+1,0,100);if(kin)cmC("kinSave");return""}
-  if(p===S&&m.src==="pick"&&roll(B.pickKeep))m.loyal=cl(m.loyal+1,0,100)}}catch(e){}
+  if(noBuy||kin){m.loyal=cl(m.loyal-BAL.eff.jcmaid.loyalTop,0,100);if(p===S&&m.src==="pick"&&roll(B.pickKeep))m.loyal=cl(m.loyal+BAL.eff.jcmaid.loyalTop_2,0,100);if(kin)cmC("kinSave");return""}
+  if(p===S&&m.src==="pick"&&roll(B.pickKeep))m.loyal=cl(m.loyal+BAL.eff.jcmaid.loyalTop_3,0,100)}}catch(e){}
  const r=m0.apply(this,arguments);try{if(p===S&&m&&S.maid!==m){cmC("bought");if(S.maid&&!S.maid.src)cmInit(S.maid,"noi",true);if(m.src==="room"){apply({danh:-cmB().cnTurn});cmC("cnTurn");return r+`${m.name} biết chuyện cũ của ngươi thuở làm cung nữ, đem kể ra ngoài. Danh −${cmB().cnTurn}. `}}}catch(e){}return r}})();
 
 /* ---------- the month ---------- */

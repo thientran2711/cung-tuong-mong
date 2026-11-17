@@ -161,12 +161,12 @@ function rcpPayTy(){return Math.max(BAL.rcp.tFeeMin,Math.round((BAL.pay?BAL.pay[
 PEND.rcpacc=pp=>{const r=rcpTgt(pp.t);if(!r)return null;const acc=pp.acc!=null?byKey(pp.acc):null;const who=rcpWho(r),A=RCP_ALN[pp.al]||"";
  const big=r==="emp"||r==="th",sev=big?2:1;const base=BAL.rcp.defB+Math.round((S.duc||0)/3)+(S.mat||0)*4-(pp.knew?35:0);
  const o1=od(base),o2=od(base+BAL.rcp.defTy),fee=rcpPayTy();const accN=acc?(acc===S?"":`${rkName(acc)} ${acc.name}`):"";
- const fail=`bị phạt vì mưu hại ${who}, Danh -4${acc&&acc!==r?`, ${accN} nắm 1 chứng cứ của ta`:""}`;
+ const fail=`bị phạt vì mưu hại ${who}, Danh -4${acc&&acc!==r?`, ${accN} nắm ${balAb(BAL.eff.jrcp.evLose)} chứng cứ của ta`:""}`;
  const lose=()=>{apply({danh:-4});if(acc&&acc!==S)evA(acc,S,BAL.eff.jrcp.evLose);punish(S,`dâng đồ làm ${who} phát bệnh`,sev)};
  const win=()=>{apply({danh:1});if(acc&&acc!==S&&acc!==r){relAdd(S,acc,BAL.eff.jrcp.win)}log(`Ta được minh oan: ${who} vốn kiêng ${A}, ta không cố ý.`)};
  const O=[{n:`Kêu oan: ta không biết ${rcpThey(r)} kiêng ${A}`,fx:{},x:`${word(o1)} · thành: được minh oan, Danh +1 · hỏng: ${fail}`,go:()=>{if(roll(o1))win();else lose()}},
   {n:"Mời thái y làm chứng: chỉ là kiêng kỵ",fx:{bac:-fee},x:`${word(o2)} · thành: được minh oan, Danh +1 · hỏng: ${fail}`,go:()=>{if(roll(o2))win();else lose()}}];
- if(S.maid)O.push({n:`Để ${S.maid.name} nhận lỗi thay`,fx:{danh:-2},x:`thành: ta không bị phạt · kèm: ${S.maid.name} bị đánh, Lòng -30`,go:()=>{S.maid.loyal=cl((S.maid.loyal||0)-30,0,100);log(`${S.maid.name} quỳ nhận đã lỡ tay bỏ ${A} vào, bị đánh hai mươi trượng.`)}});
+ if(S.maid)O.push({n:`Để ${S.maid.name} nhận lỗi thay`,fx:{danh:-2},x:`thành: ta không bị phạt · kèm: ${S.maid.name} bị đánh, Lòng -${balAb(BAL.eff.jrcp.loyalGo)}`,go:()=>{S.maid.loyal=cl((S.maid.loyal||0)-BAL.eff.jrcp.loyalGo,0,100);log(`${S.maid.name} quỳ nhận đã lỡ tay bỏ ${A} vào, bị đánh hai mươi trượng.`)}});
  O.push({n:"Nhận lỗi vô ý, xin chịu phạt nhẹ",fx:big?(r==="emp"?{sung:-3,danh:-2}:{th:-5,danh:-2}):{danh:-2},x:big?"":`thành: không bị phạt · kèm: ${r.name} oán ta thêm`,go:()=>{if(!big)relAdd(S,r,BAL.eff.jrcp.go)}});
  return{who:acc&&acc!==S?(typeof pv==="function"?pv(acc):undefined):undefined,
   t:`<p>${who} dùng ${pp.wn} ta ${big?"dâng":"tặng"} thì nổi mẩn đỏ, khó thở; thái y nói ${rcpThey(r)} vốn kiêng ${A}.</p><p>${acc===r?`${who} cho rằng ta cố ý mưu hại nàng ta`:`${accN?accN+" tâu":"Có kẻ tâu"} rằng ta cố ý mưu hại ${who}`}.</p>${pp.knew?`<p class="past">Ta vốn biết ${rcpThey(r)} kiêng ${A}: khó chối.</p>`:""}`,o:O}};
@@ -261,8 +261,8 @@ function rcpTasteRows(){return rcpPeople().map(r=>{const P=rcpProf(r),K=rcpK(rcp
   const L=[];if(F.length)L.push("thích "+F.join(", "));if(H.length)L.push("chê "+H.join(", "));if(al)L.push(al);L.push(n?`còn ${n} điều chưa rõ`:"đã rõ hết");
   return[rcpWho(r),L,F.length||al?"g":"n"]})}
 function rcpAskQ(how){if(S.dead||Q.length)return;const ty=how==="ty",k=ty?1:2,fee=rcpPayTy();if(!can(k))return;if(ty&&S.bac<fee)return;if(!ty&&!S.maid)return;
- const O=rcpPeople().filter(r=>ty?!rcpKn(r,"a"):rcpUnknown(r).length).map(r=>({n:rcpWho(r),fx:ty?{bac:-fee}:{},x:ty?"thành: biết người ấy kiêng gì":`${word(rcpSpyO())} · thành: biết thêm một điều người ấy thích, chê hay kiêng · hỏng: Lòng ${S.maid.name} -3`,
-  go:()=>{spend(k);if(ty){log(rcpLearn(r,"a","thái y kể"))}else if(roll(rcpSpyO())){const u=rcpUnknown(r);log(rcpLearn(r,pick(u),`${S.maid.name} dò la`))}else{S.maid.loyal=cl((S.maid.loyal||0)-3,0,100);log(`${S.maid.name} dò la không ra gì, còn bị mắng.`)}}}));
+ const O=rcpPeople().filter(r=>ty?!rcpKn(r,"a"):rcpUnknown(r).length).map(r=>({n:rcpWho(r),fx:ty?{bac:-fee}:{},x:ty?"thành: biết người ấy kiêng gì":`${word(rcpSpyO())} · thành: biết thêm một điều người ấy thích, chê hay kiêng · hỏng: Lòng ${S.maid.name} -${balAb(BAL.eff.jrcp.loyalGo_2)}`,
+  go:()=>{spend(k);if(ty){log(rcpLearn(r,"a","thái y kể"))}else if(roll(rcpSpyO())){const u=rcpUnknown(r);log(rcpLearn(r,pick(u),`${S.maid.name} dò la`))}else{S.maid.loyal=cl((S.maid.loyal||0)-BAL.eff.jrcp.loyalGo_2,0,100);log(`${S.maid.name} dò la không ra gì, còn bị mắng.`)}}}));
  if(!O.length){log("Ta đã rõ hết những điều ấy.");return}O.push({n:"Thôi",fx:{}});
  Q.push({act:1,t:ty?"Hỏi thái y: ai kiêng thứ gì?":`Sai ${S.maid.name} dò la khẩu vị`,who:pMe(),h:ty?`<p>Thái y viện chép bệnh án cả cung: ai kiêng thứ gì, dùng phải là phát bệnh. Tốn 1 khắc, ${fee} bạc.</p>`:`<p>${S.maid.name} đi hỏi cung nhân hầu người ấy: thích lối nào, chê lối nào, kiêng thứ gì. Tốn 2 khắc.</p>`,opts:O});showModal();render()}
 function rcpSpyO(){return cl(Math.round(BAL.rcp.spyO+((S.maid&&S.maid.loyal)||0)/5-20),5,95)}

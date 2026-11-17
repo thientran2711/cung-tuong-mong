@@ -136,7 +136,7 @@ window.elderCardHTML=st=>{try{return cardHTML(typeof st==="string"?elderBy(st):s
 if(typeof popCard==="function"){const c0=popCard;popCard=function(p){if(p&&p.kind==="elder"&&p.ref)return cardHTML(p.ref);return c0.apply(this,arguments)}}
 function act(a,id){const st=elderBy(id);if(!st||!S||S.dead||Q.length)return;let r="";
  if(a==="bieu"){const g=B().gift||20;if(S.bac<g)return;apply({bac:-g});st.af.me=(st.af.me||0)+(B().giftAf||10);r=`Biếu ${st.call} ${g} lượng: người ấy quý ngươi +${B().giftAf||10}.`}
- if(a==="hoi"){const n=B().talk||2;if(!can(n))return;spend(n);st.af.me=(st.af.me||0)+1;try{if(typeof k61Meet==="function"&&k61St(st)<3)k61Meet(st,"trò chuyện",3)}catch(e){}r=`${st.call}: ${talkLine(st)}`}
+ if(a==="hoi"){const n=B().talk||2;if(!can(n))return;spend(n);st.af.me=(st.af.me||0)+BAL.eff.jstaff.meAct;try{if(typeof k61Meet==="function"&&k61St(st)<3)k61Meet(st,"trò chuyện",3)}catch(e){}r=`${st.call}: ${talkLine(st)}`}
  if(r){log(r);popMsg=r;render()}}
 document.addEventListener("click",e=>{const b=e.target&&e.target.closest&&e.target.closest("[data-elder]");if(!b||b.disabled)return;e.stopPropagation();e.preventDefault();act(b.dataset.elder,b.dataset.eid)},true);
 /* ---------- they speak by name in events and the log (LUẬT SỬA CẢ NHÓM: one table for every generic "ma ma" of these offices) ---------- */

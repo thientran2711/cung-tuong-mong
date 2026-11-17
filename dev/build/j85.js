@@ -137,7 +137,7 @@ function v85Month(){if(!S||S.dead)return"";let ev="";const season=S.turn%3===0;
  for(const p of consorts()){if(!p||(p!==S&&(!p.alive||p.out)))continue;vNorm(p);const me=p===S,A=p.arts,f={};const add=(k,n)=>{if(n)f[k]=(f[k]||0)+n};
   if(A.theu>=3)add("bac",A.theu>=5?10:5);if(A.nau>=2)add("suc",A.nau>=4?4:2);if(A.nau>=3)add("an",A.nau>=5?2:1);
   if(season){if(A.thi>=2)add("danh",1);if(A.hoa>=2)add("danh",A.hoa>=4?2:1)}
-  if(A.y>=5)kidsOf(p).forEach(k=>{if(k.hp!=null)k.hp=Math.min(100,k.hp+2)});
+  if(A.y>=5)kidsOf(p).forEach(k=>{if(k.hp!=null)k.hp=Math.min(100,k.hp+BAL.eff.j85.hpV85Month)});
   if(A.cam>=5&&(p.sung||0)>=40&&S.emp&&S.emp.mood>0&&roll(50))S.emp.mood--;
   if(Object.keys(f).length){if(me){apply(f);ev+=`Tài nghệ trong tháng: ${fmt(f)}. `}else ap(p,f)}
   /* Đức: Hạnh bậc 3 keeps it rising; it moves Thái hậu / Hoàng hậu and the servants' Lòng */

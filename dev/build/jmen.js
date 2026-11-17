@@ -118,7 +118,7 @@ function menNtCard(){if(!S||S.dead||Q.length)return;const T=(typeof trS==="funct
 
 /* officials on the stage (kind "min"): face, role, a polite greeting */
 (function(){const f0=pFaceOf;pFaceOf=function(p){if(p&&p.kind==="min"&&p.ref)return pMin(p.ref);return f0.apply(this,arguments)}})();
-(function(){const t0=talkOpts;talkOpts=function(p){if(p&&p.kind==="min"){const h=p.ref;return[{n:"Chào hỏi đúng lễ",o:100,w:{danh:1},x:"người ấy quý ngươi +3",go:()=>{try{h.af=h.af||{};h.af.me=(h.af.me||0)+3}catch(e){}}}]}return t0.apply(this,arguments)}})();
+(function(){const t0=talkOpts;talkOpts=function(p){if(p&&p.kind==="min"){const h=p.ref;return[{n:"Chào hỏi đúng lễ",o:100,w:{danh:1},x:`người ấy quý ngươi ${balSg(BAL.eff.jmen.meGo)}`,go:()=>{try{h.af=h.af||{};h.af.me=(h.af.me||0)+BAL.eff.jmen.meGo}catch(e){}}}]}return t0.apply(this,arguments)}})();
 
 /* ---------- 3. arrival: men and officials stand on the stage; a stray → the event card ---------- */
 (function(){const g=goTo;goTo=function(k){const fr=S&&S.place,t0=typeof used==="number"?used:0;const r=g.apply(this,arguments);try{if(!menRoad()||S.place!==k||!S.visit||S.visit.k!==k)return r;S.menFrom={k:fr,t:t0};

@@ -51,9 +51,9 @@ EV6("empOldFlame","emp",{a:["emp"],pp:()=>S.sung>=30?{a0:0}:null,w:C=>.7,
   c6("Lảng sang chuyện khác",{w:{suc:1},k:[R6("lỡ dịp gần ngài: Sủng -1")],ok:()=>{apply({sung:-1});return "Ngài thở dài, không nói thêm."}})]});
 EV6("kidTutor","kid",{a:["kid"],pp:()=>{const a=kid6(k=>k.age>=6);return a==null?null:{a0:a}},w:C=>1.2,
  v:["Thầy dạy ở Thượng thư phòng tâu {A} lười học, hay ngủ gật.","Thầy khen {A} thông minh hơn các anh em, muốn cho học thêm binh pháp.","{A} cãi lại thầy dạy, bị phạt đứng ngoài hiên cả buổi.","{A} trốn học ra ngự hoa viên bắt dế, thầy dạy không dám báo lên."],
- o:X=>[c6("Tự kèm con học",{c:{suc:-8},r:[[X.A,6]],ok:()=>{X.A.o.tal=cl((X.A.o.tal||40)+4,0,100);return `${X.A.n} chịu học hơn. Tài năng của con +4.`},wt:[G6("con tiến bộ")]}),
-  c6("Biếu thầy, nhờ dạy kỹ",{c:{bac:-25},ok:()=>{X.A.o.tal=cl((X.A.o.tal||40)+3,0,100);return "Thầy để tâm hơn. Tài năng của con +3."},wt:[G6("con tiến bộ")]}),
-  c6("Mắng con nghiêm khắc",{r:[[X.A,-8]],ok:()=>{X.A.o.tal=cl((X.A.o.tal||40)+2,0,100);return `${X.A.n} sợ mẹ, ngồi yên học. Tài năng của con +2.`},wt:[G6("con chịu học")]})]});
+ o:X=>[c6("Tự kèm con học",{c:{suc:-8},r:[[X.A,6]],ok:()=>{X.A.o.tal=cl((X.A.o.tal||40)+BAL.eff.j68g.talOk,0,100);return `${X.A.n} chịu học hơn. Tài năng của con ${balSg(BAL.eff.j68g.talOk)}.`},wt:[G6("con tiến bộ")]}),
+  c6("Biếu thầy, nhờ dạy kỹ",{c:{bac:-25},ok:()=>{X.A.o.tal=cl((X.A.o.tal||40)+BAL.eff.j68g.talOk_2,0,100);return `Thầy để tâm hơn. Tài năng của con ${balSg(BAL.eff.j68g.talOk_2)}.`},wt:[G6("con tiến bộ")]}),
+  c6("Mắng con nghiêm khắc",{r:[[X.A,-8]],ok:()=>{X.A.o.tal=cl((X.A.o.tal||40)+BAL.eff.j68g.talOk_3,0,100);return `${X.A.n} sợ mẹ, ngồi yên học. Tài năng của con ${balSg(BAL.eff.j68g.talOk_3)}.`},wt:[G6("con chịu học")]})]});
 EV6("kidLie","kid",{a:["kid","sv"],pp:()=>{const a=kid6(k=>k.age>=5&&k.age<=14);const b=sv6();return a==null||b==null?null:{a0:a,a1:b}},w:C=>1,
  v:["{A} làm vỡ bình hoa, rồi đổ cho {B}.","{A} lấy trộm bánh dâng Thái hậu, {B} bị nghi.","{A} xé sách của thầy, nói là {B} sơ ý.","{A} thả chim trong lồng của Hoàng thượng ban, rồi bảo {B} quên đóng cửa."],
  o:X=>[c6("Tra cho rõ, minh oan người hầu",{c:{suc:-3},r:[[X.B,12],[X.A,-5]],w:{duc:2}}),

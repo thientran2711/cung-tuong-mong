@@ -122,9 +122,9 @@ ARC67.tm96a=arcFx("tm96a",{o:"tm",ok:ok96,t:"Thanh mai trúc mã: Ngày từ bi�
   {n:"Hồi âm một chữ “An”",o:()=>45+(watcher()?watcher().loyal/3:0)+S.tamco/6,go:(A,ok)=>{adj96(BAL.arc.h96.tm96a.a4[1][0]);if(!ok){adj96(BAL.arc.h96.tm96a.a4[1][1])}},rt:"Thư đi trót lọt. Từ nay chàng biết ngươi vẫn sống tốt.",rf:"Người đưa thư bị một thái giám chặn hỏi. Thư đi được, nhưng có kẻ đã nhìn thấy phong bì."},
   {n:"Giữ thư, không hồi âm",go:()=>{adj96(BAL.arc.h96.tm96a.a4[2])},rt:"Bức thư nằm dưới đáy rương, cạnh những thứ không được phép có."}]},
  a5:{h:"Người hầu đã biết",w:"maid",t:"{maid} quỳ xuống: “Nô tỳ không mù. Tiểu thư và {lvn}… Nô tỳ chỉ sợ một ngày người khác cũng thấy.”",o:[
-  {n:"Tin nàng, nhờ nàng canh cửa",go:()=>{if(S.maid){S.maid.loyal=cl((S.maid.loyal||50)+8,0,100);S.maid.tin=cl((S.maid.tin==null?50:S.maid.tin)+10,0,100)}A96f("maid")},rt:"{maid} gật đầu: từ nay cửa sau có người canh."},
+  {n:"Tin nàng, nhờ nàng canh cửa",go:()=>{if(S.maid){S.maid.loyal=cl((S.maid.loyal||50)+BAL.eff.j96.loyalGo,0,100);S.maid.tin=cl((S.maid.tin==null?50:S.maid.tin)+BAL.eff.j96.tinGo,0,100)}A96f("maid")},rt:"{maid} gật đầu: từ nay cửa sau có người canh."},
   {n:"Dặn nàng quên chuyện này",go:()=>{adj96(BAL.arc.h96.tm96a.a5[1])},rt:"{maid} cúi đầu vâng dạ."},
-  {n:"Đổi nàng sang việc khác cho yên",go:()=>{if(S.maid)S.maid.loyal=cl((S.maid.loyal||50)-12,0,100)},rt:"{maid} đi, mắt đỏ hoe."}]},
+  {n:"Đổi nàng sang việc khác cho yên",go:()=>{if(S.maid)S.maid.loyal=cl((S.maid.loyal||50)-BAL.eff.j96.loyalGo_2,0,100)},rt:"{maid} đi, mắt đỏ hoe."}]},
  a6:{h:"Đêm rằm tháng tám",w:"lv",t:"Đêm rằm, cả hậu cung ra Ngự hoa viên ngắm trăng. Qua hàng đèn lồng, ngươi thấy {lvn} đứng hầu sau xa giá. Chàng {lvtinh}. Đêm nay ngươi phải định lòng mình.",o:[
   {n:"Giữ lời hẹn trong tim, không để ai biết",o:()=>50+S.tamco/4+(A96has("maid")?10:0)-(T96().ev||0)*10-(T96().sus||0)/5,e:["a_hen","a_lo"],go:()=>adj96(BAL.arc.h96.tm96a.a6[0]),rt:"Ngươi chỉ nhìn trăng. Không ai đọc được gì trên mặt ngươi.",rf:"Ngươi nhìn chàng lâu hơn một nhịp. Có kẻ đã ghi nhớ."},
   {n:"Gửi trả tín vật, xin chàng quên ta",e:"a_dut",go:()=>{adj96(BAL.arc.h96.tm96a.a6[1]);T96().tok=0},rt:"Ngươi tự tay đặt tín vật vào hộp, sai người đưa trả."},

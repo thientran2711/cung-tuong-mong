@@ -58,9 +58,9 @@ ev("minister",()=>S.rank>=2,()=>({o:od(40+S.tai/3+(has("chamchinh")?15:0))}),p=>
  {n:"Nói đỡ cho viên quan",fx:{bac:60,duc:-4},x:"đã nhận bạc của Thượng thư"}]}));
 ev("jealousprince",()=>mySons().some(k=>k.age>=8),()=>({k:mySons().filter(k=>k.age>=8)[0].name}),p=>{const k=KID(p.k);if(!k)return null;return{who:pEmp(),
  t:`Triều thần vây quanh ${k.name} sau buổi giảng kinh. Hoàng thượng nhìn từ xa, sắc mặt sa sầm.`,o:[
- {n:"Bắt con đóng cửa đọc sách",fx:{danh:-2},x:`Hoàng thượng thương ${k.name} +6`,go:()=>{k.fond=cl(k.fond+6,0,100)}},
- {n:"Để con tiếp tục kết giao",fx:{danh:4,sung:-6},x:`Tài ${k.name} +5`,go:()=>{k.tal=cl(k.tal+5,0,100)}},
- {n:"Xin cho con đi tuần biên",fx:{sung:4},x:`Hoàng thượng thương ${k.name} -8`,go:()=>{k.fond=cl(k.fond-8,0,100)}}]}});
+ {n:"Bắt con đóng cửa đọc sách",fx:{danh:-2},x:`Hoàng thượng thương ${k.name} ${balSg(BAL.eff.j7.fondGo)}`,go:()=>{k.fond=cl(k.fond+BAL.eff.j7.fondGo,0,100)}},
+ {n:"Để con tiếp tục kết giao",fx:{danh:4,sung:-6},x:`Tài ${k.name} ${balSg(BAL.eff.j7.talGo)}`,go:()=>{k.tal=cl(k.tal+BAL.eff.j7.talGo,0,100)}},
+ {n:"Xin cho con đi tuần biên",fx:{sung:4},x:`Hoàng thượng thương ${k.name} -${balAb(BAL.eff.j7.fondGo_2)}`,go:()=>{k.fond=cl(k.fond-BAL.eff.j7.fondGo_2,0,100)}}]}});
 /* court ties */
 ev("flood",()=>SEASON[S.month-1]==="Hạ",null,()=>({
  t:"Hoàng Hà vỡ đê, ba châu chìm trong nước. Hoàng hậu truyền các cung quyên góp cứu tế.",o:[
@@ -75,9 +75,9 @@ ev("newgirl",()=>liveRivals(true).length<9&&roomFor("consort"),null,()=>({
 /* children */
 ev("princefever",()=>S.kids.some(k=>k.alive&&k.age<10)&&(mon(1)||mon(8)),()=>({k:pick(S.kids.filter(k=>k.alive&&k.age<10)).name,o:od(40+S.arts.y*12)}),p=>{const k=KID(p.k);if(!k)return null;return{
  t:`Đêm yến tiệc, ${k.name} sốt cao co giật. Tiếng nhạc bên Thái Hòa điện vẫn vọng sang.`,o:[
- {n:"Bỏ yến, thức trắng bên con",fx:{suc:-20,sung:-3},x:`Sức khỏe ${k.name} +20`,go:()=>{k.hp=Math.min(100,k.hp+20)}},
- {n:"Mời thái y, vẫn dự yến",fx:{bac:-30,sung:3},x:`Sức khỏe ${k.name} +8`,go:()=>{k.hp=Math.min(100,k.hp+8)}},
- {n:"Tự bốc thuốc",fx:{},x:`${word(p.o)} · thành: Sức khỏe +30 · hỏng: Sức khỏe -25`,go:()=>{if(roll(p.o))k.hp=Math.min(100,k.hp+30);else kidHurt(k,25)}}]}});
+ {n:"Bỏ yến, thức trắng bên con",fx:{suc:-20,sung:-3},x:`Sức khỏe ${k.name} ${balSg(BAL.eff.j7.hpGo)}`,go:()=>{k.hp=Math.min(100,k.hp+BAL.eff.j7.hpGo)}},
+ {n:"Mời thái y, vẫn dự yến",fx:{bac:-30,sung:3},x:`Sức khỏe ${k.name} ${balSg(BAL.eff.j7.hpGo_2)}`,go:()=>{k.hp=Math.min(100,k.hp+BAL.eff.j7.hpGo_2)}},
+ {n:"Tự bốc thuốc",fx:{},x:`${word(p.o)} · thành: Sức khỏe ${balSg(BAL.eff.j7.hpGo_3)} · hỏng: Sức khỏe -25`,go:()=>{if(roll(p.o))k.hp=Math.min(100,k.hp+BAL.eff.j7.hpGo_3);else kidHurt(k,25)}}]}});
 ev("foreignwed",()=>myDaus().some(k=>k.age>=BAL.age.wed),()=>{const d=myDaus().filter(k=>k.age>=BAL.age.wed)[0];return d?{k:d.name,o:od(30+S.sung/3+mm())}:null},p=>{const k=KID(p.k);if(!k)return null;return{who:pEmp(),
  t:`Sứ thần Bắc Địch dâng ngựa quý, cầu hôn ${k.name}. Triều thần đều nói: một nàng công chúa đổi mười năm yên biên ải.`,o:[
  {n:"Thuận theo đại cục",fx:{danh:10,th:5,suc:-15},x:`${k.name} xuất giá phương bắc`,go:()=>{k.alive=false;k.wed=1;log(`${k.name} khóc từ biệt mẫu thân, theo đoàn sứ lên phương bắc.`)}},
@@ -111,7 +111,7 @@ ev("phoenix",()=>S.rank>=3&&S.rank<7,null,()=>({
 ev("doanngo",()=>mon(5),null,()=>({
  t:"Tết Đoan ngọ, thuyền rồng đua trên Thái Dịch trì. Các cung treo ngải cứu, gói bánh ú.",o:[
  {n:"Gói bánh ú dâng Thái hậu",fx:{suc:-5,th:6}},
- {n:"Đeo túi ngải cho các con",fx:{},x:"các con khỏe thêm 10",go:()=>S.kids.forEach(k=>{if(k.alive)k.hp=Math.min(100,k.hp+10)})},
+ {n:"Đeo túi ngải cho các con",fx:{},x:"các con khỏe thêm 10",go:()=>S.kids.forEach(k=>{if(k.alive)k.hp=Math.min(100,k.hp+BAL.eff.j7.hpGo_4)})},
  {n:"Đặt cược thuyền rồng",fx:{bac:-20},x:`${word(50)} · thắng: Bạc +60`,go:()=>{if(roll(50)){apply({bac:60});log("Thuyền ngươi cược về nhất.")}}}]}));
 ev("trungcuu",()=>mon(9),()=>({o:od(35+S.tai/2+artW("thi",S.arts.thi)*6)}),p=>({who:pEmp(),
  t:"Tiết Trùng cửu, Hoàng thượng lên Cảnh Sơn ngắm cúc, uống rượu thù du.",o:[

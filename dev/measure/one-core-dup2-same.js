@@ -10,7 +10,10 @@ const NS=['quyLv','loy','wit','ducLv','sungLv','nightEnd','tinhLv','tinLv','rare
  /* review/one-core-dup3: amounts (BAL.eff / road / arc / route …) and the night table; values from every BAL file (one-core-text loadBAL) */
  'eff','road','arc','route','night','net','evWipe'];
 /* owner-ruled word changes (VANPHONG:69 / OD:L247 thiện cảm words everywhere): */
-const INTENDED={'jhc.js':['window.quyW'],'j21.js':['affW'],'jts.js':['tsQuy'],'j55.js':['ccWord']};
+const INTENDED={'jhc.js':['window.quyW'],'j21.js':['affW'],'jts.js':['tsQuy'],'j55.js':['ccWord'],
+ /* review/one-core-dup3: jlost A("laydol") x + AOUT.laydo/laydol: the text said «cung nữ thân tín lòng -10» while the rule (jlost loSteal self / jecon bribel)
+    takes BAL.loyalCost = 25 → it now prints BAL.loyalCost (lazy getter / aoLz: jecon loads after jlost) and «Đức ${balSg(LO.act.duc)}» (= -4, same words) */
+ 'jlost.js':['ExpressionStatement','TryStatement']};
 /* j55 ccWord = side-chance scale (owner OD:L221) */
 const bal=()=>{const c={Math,BAL:{pace:1}};vm.createContext(c);
  const src=fs.readFileSync('dev/build/jbal.js','utf8')+'\n'+fs.readFileSync('dev/build/jbal2.js','utf8');
@@ -26,7 +29,7 @@ const isObjN=v=>v&&typeof v==='object'&&!Array.isArray(v)&&Object.keys(v).length
 const lit=v=>isObjN(v)&&Object.values(v).every(x=>typeof x==='number')?'{'+Object.entries(v).map(([k,x])=>k+':'+lit(x)).join(',')+'}':Array.isArray(v)&&v.length&&v.every(x=>typeof x==='number')?'['+v.map(lit).join(',')+']':typeof v!=='number'?null:v<0?`(-${-v})`:String(v);/* a number table (BAL.night.mood) goes back as the typed table */
 /* dead second copies deleted on purpose (the live copy is elsewhere): */
 const REMOVED={'j21.js':['oanW']};
-const RX=new RegExp('BAL\\.('+NS.join('|')+')((?:\\.[\\w$]+|\\[\\d+\\])*)','g');
+const RX=new RegExp('BAL\\.('+NS.join('|')+')(?![\\w$])((?:\\.[\\w$]+|\\[\\d+\\])*)','g');
 const nameOf=s=>s.type==='FunctionDeclaration'?s.id.name:s.type==='ExpressionStatement'&&s.expression.left?cp_src(s.expression.left):s.type;
 let cur='';const cp_src=n=>cur.slice(n.start,n.end);
 const changed=cp.execSync(`git diff --name-only ${REF} -- dev/build`,{encoding:'utf8'}).split('\n').filter(f=>/^dev\/build\/j[\w]+\.js$/.test(f)&&!/\/(jbal\w*|jpetlife)\.js$/.test(f));/* BAL files: new keys only, checked by the value table */

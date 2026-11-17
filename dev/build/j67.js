@@ -1626,10 +1626,10 @@ ARC67.st_con=arcFx("st_con",{o:"st",ok:()=>nsrv67()&&S.kids.some(k=>k.alive),t:"
  p:[["s1","s2"],["c1","c2","c3","G.emp","G.rival"],["t1"],["x1"]],
  B:{
  s1:{h:"Chọn thầy cho con",w:"emp",t:"Thượng thư phòng hỏi ngươi muốn chọn thầy nào cho con: một lão Hàn lâm nghiêm khắc hay một tiến sĩ trẻ được Hoàng thượng chuộng.",o:[
-  {n:"Lão Hàn lâm nghiêm khắc",wx:"con học chắc",f:"strict",go:()=>{const k=S.kids.find(x=>x.alive);if(k){k.tal=cl((k.tal||0)+5,0,100);return `Tài ${k.name} +5.`}return""},lx:"con khổ hơn",rt:"Con ngươi học ngày đêm."},
+  {n:"Lão Hàn lâm nghiêm khắc",wx:"con học chắc",f:"strict",go:()=>{const k=S.kids.find(x=>x.alive);if(k){k.tal=cl((k.tal||0)+BAL.eff.j67.talGo,0,100);return `Tài ${k.name} ${balSg(BAL.eff.j67.talGo)}.`}return""},lx:"con khổ hơn",rt:"Con ngươi học ngày đêm."},
   {n:"Tiến sĩ trẻ được ngài chuộng",f:"fav",wx:"Hoàng thượng để ý con",lx:"thầy chỉ giỏi nói",go:(A,ok,G)=>ok?e67heir(G[0]):"",rt:"Hoàng thượng hay ghé xem con học.",rf:"Thầy trẻ ham chơi, con chẳng tiến."}]},
  s2:{h:"Con ốm",w:"doc",t:"Con ngươi sốt cao giữa đêm, thái y trực lại là người của phi tần khác.",o:[
-  {n:"Tự thức canh, mời thái y khác",wx:"con qua khỏi nhanh",lx:"bệnh kéo dài",go:(A,ok)=>{const k=S.kids.find(x=>x.alive);if(k&&ok){k.hp=Math.min(100,(k.hp||80)+15);return `Sức khỏe ${k.name} +15.`}return""},rt:"Con hạ sốt lúc gà gáy.",rf:"Con khỏi, nhưng yếu đi."},
+  {n:"Tự thức canh, mời thái y khác",wx:"con qua khỏi nhanh",lx:"bệnh kéo dài",go:(A,ok)=>{const k=S.kids.find(x=>x.alive);if(k&&ok){k.hp=Math.min(100,(k.hp||80)+BAL.eff.j67.hpGo);return `Sức khỏe ${k.name} ${balSg(BAL.eff.j67.hpGo)}.`}return""},rt:"Con hạ sốt lúc gà gáy.",rf:"Con khỏi, nhưng yếu đi."},
   {n:"Để thái y trực lo",wx:"đỡ mệt",lx:"không yên tâm",rt:"Con khỏi sau vài ngày."}]},
  c1:{h:"Có kẻ nhắm vào con",w:"v",need:["v"],t:"Tai mắt báo: người của {v} hay lảng vảng quanh chỗ con ngươi chơi.",o:[
   {n:"Tăng người canh",wx:"con an toàn hơn",rt:"Con ngươi được canh cẩn mật."},

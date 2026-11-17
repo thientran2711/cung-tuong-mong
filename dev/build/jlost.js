@@ -238,9 +238,9 @@ function loSteal(a,t,self){a.schemes=(a.schemes||0)+1;if(typeof ducAdd==="functi
 A("laydo","Sai người lấy trộm đồ",{c:{bac:-LO.act.bac},ok:(a,t)=>(a.bac||0)>=LO.act.bac&&loStealOk(a,t),o:(a,t)=>loStealO(a,t),x:"một món quý trong rương nàng về tay ngươi",
  f:(a,t)=>{ap(a,{bac:-LO.act.bac});return loSteal(a,t,false)}});
 A("laydol","Sai cung nữ thân tín lấy đồ",{c:{},ok:(a,t)=>!!(typeof econLoyalMaid==="function"?econLoyalMaid(a):a.maid)&&loStealOk(a,t),o:(a,t)=>loStealO(a,t,true),
- x:"không tốn bạc · cung nữ thân tín lòng -10 · khó hơn",f:(a,t)=>loSteal(a,t,true)});
-try{AOUT.laydo=["một món quý trong rương nàng về tay ngươi (nàng chỉ biết là thất lạc) · Đức -4",`về tay không, nàng thù ${balSg(BAL.eff.jlost.loSteal)} · bị bắt: nàng nắm 2 chứng cứ`];
- AOUT.laydol=["một món quý trong rương nàng về tay ngươi · cung nữ thân tín lòng -10 · Đức -4","về tay không · bị bắt: nàng nắm 2 chứng cứ"];
+ get x(){return `không tốn bạc · cung nữ thân tín lòng -${balAb(BAL.loyalCost)} · khó hơn`},f:(a,t)=>loSteal(a,t,true)});/* lazy: BAL.loyalCost is set by jecon, which loads after this file */
+try{AOUT.laydo=[`một món quý trong rương nàng về tay ngươi (nàng chỉ biết là thất lạc) · Đức ${balSg(LO.act.duc)}`,`về tay không, nàng thù ${balSg(BAL.eff.jlost.loSteal)} · bị bắt: nàng nắm 2 chứng cứ`];
+ AOUT.laydol=aoLz(()=>`một món quý trong rương nàng về tay ngươi · cung nữ thân tín lòng -${balAb(BAL.loyalCost)} · Đức ${balSg(LO.act.duc)}`,"về tay không · bị bắt: nàng nắm 2 chứng cứ");
  const why=t=>!(t.inv||[]).some(loOk)?"rương nàng không có món nào đáng lấy":loL().some(c=>c.own===key(t)&&c.st!=="done")?"nàng đang tra xét đồ thất lạc":"";
  LACK.laydo=t=>S.bac<LO.act.bac?`cần Bạc ${LO.act.bac} để sai người`:why(t);
  LACK.laydol=t=>!(typeof econLoyalMaid==="function"?econLoyalMaid(S):S.maid)?`cần cung nữ thân tín (Lòng ${balAb(BAL.loy.low)}+)`:why(t);

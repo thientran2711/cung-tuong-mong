@@ -9,4 +9,4 @@ watcher=function(){const s=(S.staff||[]).filter(x=>x.loyal>=BAL.loy.close&&tinOf
 /* trust moves: a task done well raises it, a servant caught lowers it; being trusted slowly warms the servant's heart */
 (function(){const m0=servMerit;servMerit=function(s,n){const r=m0.apply(this,arguments);tinAdd(s,(n||1)*1.5);return r}})();
 (function(){const c0=servCaught;servCaught=function(p,s){if(s)tinAdd(s,-12);return c0.apply(this,arguments)}})();
-(function(){const m0=monthTick;monthTick=function(){const ev=m0.apply(this,arguments);try{const L=allServ().concat(S.maid?[S.maid]:[]);for(const s of L){const t=tinOf(s);if(t>=60&&roll(50))s.loyal=cl((s.loyal||50)+1,0,100);else if(t<25&&roll(50))s.loyal=cl((s.loyal||50)-1,0,100)}}catch(e){}return ev}})();
+(function(){const m0=monthTick;monthTick=function(){const ev=m0.apply(this,arguments);try{const L=allServ().concat(S.maid?[S.maid]:[]);for(const s of L){const t=tinOf(s);if(t>=60&&roll(50))s.loyal=cl((s.loyal||50)+BAL.eff.jtin.loyalTop,0,100);else if(t<25&&roll(50))s.loyal=cl((s.loyal||50)-BAL.eff.jtin.loyalTop_2,0,100)}}catch(e){}return ev}})();

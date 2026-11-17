@@ -9,7 +9,7 @@ const ARTMS={
  y:["Sắc +2","Nhận ra độc, xạ hương trong đồ","Bệnh tật nhẹ hơn; Sức hồi tốt hơn","Tự bào chế thuốc an thai, chữa bệnh cho con","Danh +6; các con ít bệnh"]};
 /* grade bonuses beyond the base +2 (applied once when the grade is reached) */
 (function(){const a0=addArt;addArt=function(k,g){const l0=S.arts[k];a0.apply(this,arguments);for(let l=l0+1;l<=S.arts[k];l++){const b={ky:{1:{tamco:1},2:{tamco:1},4:{tamco:2},5:{tamco:2}},hoa:{2:{th:3},4:{th:5},5:{th:5}},vu:{4:{sac:2}}}[k];if(b&&b[l]){apply(b[l]);log(`${ARTS.find(a=>a.k===k).n} bậc ${l}: ${fmt(b[l])}.`)}}}})();
-function artMonth(){if(!S||S.out)return;if(S.arts.cam>=1)S.suc=cl(S.suc+1,0,100);if(S.arts.cam>=4)S.kids.filter(k=>k.alive).forEach(k=>k.tal=cl(k.tal+1,0,100))}
+function artMonth(){if(!S||S.out)return;if(S.arts.cam>=1)S.suc=cl(S.suc+1,0,100);if(S.arts.cam>=4)S.kids.filter(k=>k.alive).forEach(k=>k.tal=cl(k.tal+BAL.eff.j23.talArtMonth,0,100))}
 (function(){const m0=monthTick;monthTick=function(){const ev=m0.apply(this,arguments);try{if(!S.dead)artMonth()}catch(e){}return ev}})();
 /* three roads */
 /* teacher fee (jrcp: depends on the chosen teacher) and the favour paid when the session starts */

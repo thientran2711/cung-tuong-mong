@@ -51,8 +51,8 @@ function kidActs(k){if(!k.alive)return[];const t2=whyTime(2);return [pbtn(`data-
  pbtn(`data-kid="guard"`,"Canh giữ các con",`Chắc chắn · tốn: 2 khắc, Bạc -20 · thành: 2 tháng kẻ hại con ngươi dễ bị chặn (1 trong 2 lần)`,t2||(S.bac<20?"thiếu bạc (cần 20)":S.kidGuard>0?`đang canh (còn ${S.kidGuard} tháng)`:""))]}
 function kidAct(a,name){const k=S.kids.find(x=>x.name===name&&x.alive);if(S.dead||Q.length||!can(2))return;const b=rsnap();
  if(a==="teach"&&k&&k.age>=3){spend(2);const g=4+Math.round(S.tai/20);k.tal=cl(k.tal+g,0,100);log(`Dạy ${k.name} học: Tài con +${g}.`)}
- else if(a==="care"&&k&&S.bac>=10){spend(2);apply({bac:-10});k.hp=cl(k.hp+10,0,100);log(`Chăm sóc ${k.name}: Sức khỏe con +10.`)}
- else if(a==="greet"&&k){spend(2);apply({suc:-5});if(roll(od(70+S.sung/10))){k.fond=cl(k.fond+8,0,100);apply({sung:2});log(`Dẫn ${k.name} thỉnh an: Hoàng thượng thương con +8, Sủng +2.`)}else log(`Dẫn ${k.name} đi thỉnh an, Hoàng thượng bận không gặp.`)}
+ else if(a==="care"&&k&&S.bac>=10){spend(2);apply({bac:-10});k.hp=cl(k.hp+BAL.eff.j25.hpKidAct,0,100);log(`Chăm sóc ${k.name}: Sức khỏe con ${balSg(BAL.eff.j25.hpKidAct)}.`)}
+ else if(a==="greet"&&k){spend(2);apply({suc:-5});if(roll(od(70+S.sung/10))){k.fond=cl(k.fond+BAL.eff.j25.fondKidAct,0,100);apply({sung:2});log(`Dẫn ${k.name} thỉnh an: Hoàng thượng thương con ${balSg(BAL.eff.j25.fondKidAct)}, Sủng +2.`)}else log(`Dẫn ${k.name} đi thỉnh an, Hoàng thượng bận không gặp.`)}
  else if(a==="guard"&&S.bac>=20&&!(S.kidGuard>0)){spend(2);apply({bac:-20});S.kidGuard=2;log("Ngươi cắt người canh giữ các con 2 tháng.")}else return;resultShow(a==="guard"?"Canh giữ các con":"Việc của con",b,a==="greet"?null:"sure");render()}
 document.addEventListener("click",e=>{const b=e.target.closest("[data-kid]");if(b&&!b.disabled){e.stopPropagation();kidAct(b.dataset.kid,b.dataset.kn)}},true);
 (function(){const kc=kidCard;kidCard=function(k){let h=kc.apply(this,arguments);if(k.alive){const acts=kidActs(k).join("");h=h.replace('<div class="pcr">',`<div class="pcr"><h5>Chăm con</h5><div class="pcb">${acts}</div>`)}return h}})();

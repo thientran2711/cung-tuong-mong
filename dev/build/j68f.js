@@ -45,18 +45,18 @@ EV6("clanFather","court",{a:["rv"],pp:()=>{const T=td6();if(!T)return null;const
 /* ---------- CÁC CON ---------- */
 EV6("kidSick","kid",{a:["kid","doc"],pp:()=>{const a=kid6(k=>k.age<=12);return a==null?null:{a0:a,a1:0}},w:C=>(C.sea==="Đông"||C.sea==="Xuân")?2:1,
  v:["{A} sốt nóng từ chiều, quấy khóc không chịu bú mớm.","{A} ho khan cả đêm, nhũ mẫu thức trắng.","{A} ăn phải quả lạ trong vườn, đau bụng quặn.","{A} nổi ban đỏ khắp người; thái y nghi là thủy đậu."],
- o:X=>[c6(`Mời ${X.B.n} chữa ngay`,{c:{bac:-20},r:[[X.A,5]],ok:()=>{X.A.o.hp=cl((X.A.o.hp||80)+10,0,100);return `${X.A.n} hạ sốt, ngủ yên.`}}),
-  c6("Tự mình thức canh",{c:{suc:-12},r:[[X.A,12]],ok:()=>{X.A.o.hp=cl((X.A.o.hp||80)+6,0,100);return `${X.A.n} khỏe dần trong vòng tay mẹ.`}}),
-  c6("Giao nhũ mẫu lo",{w:{suc:2},r:[[X.A,-4]],k:[R6("con bệnh lâu hơn")],ok:()=>{X.A.o.hp=cl((X.A.o.hp||80)-4,0,100);return "Nhũ mẫu chăm, con lâu khỏi."}})]});
+ o:X=>[c6(`Mời ${X.B.n} chữa ngay`,{c:{bac:-20},r:[[X.A,5]],ok:()=>{X.A.o.hp=cl((X.A.o.hp||80)+BAL.eff.j68f.hpOk,0,100);return `${X.A.n} hạ sốt, ngủ yên.`}}),
+  c6("Tự mình thức canh",{c:{suc:-12},r:[[X.A,12]],ok:()=>{X.A.o.hp=cl((X.A.o.hp||80)+BAL.eff.j68f.hpOk_2,0,100);return `${X.A.n} khỏe dần trong vòng tay mẹ.`}}),
+  c6("Giao nhũ mẫu lo",{w:{suc:2},r:[[X.A,-4]],k:[R6("con bệnh lâu hơn")],ok:()=>{X.A.o.hp=cl((X.A.o.hp||80)-BAL.eff.j68f.hpOk_3,0,100);return "Nhũ mẫu chăm, con lâu khỏi."}})]});
 EV6("kidFight","kid",{a:["kid","rv"],pp:()=>{const a=kid6(k=>k.age>=4&&k.age<=15);const b=rv6(v=>(v.kids||[]).some(k=>k.alive));return a==null||b==null?null:{a0:a,a1:b}},w:C=>1.2,
  v:["{A} đánh nhau với con của {B} ở thư phòng, cả hai đều bầm mặt.","Con của {B} giật đồ chơi của {A}, {A} cắn tay nó chảy máu.","{A} bị con của {B} chê là đứa ngốc trước mặt thầy dạy.","{A} và con của {B} trốn học ra hồ câu cá, suýt ngã xuống nước."],
  o:X=>[c6("Dẫn con sang xin lỗi",{c:{suc:-3},r:[[X.B,8],[X.A,-3]],w:{duc:2}}),
   c6("Bênh con, đòi lẽ phải",{p:od(35+S.rank*7),r:[[X.A,6]],w:{danh:1},lr:[[X.B,-10]],lt:[R6("hai cung xích mích")],l:{danh:-1}}),
-  c6("Phạt con, dạy lễ",{r:[[X.A,-6]],w:{duc:1},ok:()=>{X.A.o.tal=cl((X.A.o.tal||40)+2,0,100);return `${X.A.n} chép phạt trăm chữ, ngoan hơn.`}})]});
+  c6("Phạt con, dạy lễ",{r:[[X.A,-6]],w:{duc:1},ok:()=>{X.A.o.tal=cl((X.A.o.tal||40)+BAL.eff.j68f.talOk,0,100);return `${X.A.n} chép phạt trăm chữ, ngoan hơn.`}})]});
 EV6("kidGift","kid",{a:["kid"],pp:()=>{const a=kid6(k=>k.age>=5);return a==null?null:{a0:a}},w:C=>1,
  v:["{A} chạy sang khoe bức tranh vẽ mẹ, nét non nớt mà giống lạ.","{A} học thuộc bài thơ, muốn đọc cho mẹ nghe trước khi đọc cho phụ hoàng.","{A} nhặt được tổ chim non, xin mẹ cho nuôi.","{A} xin mẹ cho học cưỡi ngựa như các anh."],
  o:X=>[c6("Dành cả buổi bên con",{c:{suc:-4},r:[[X.A,10]]}),
-  c6("Mời thầy giỏi dạy thêm",{c:{bac:-30},ok:()=>{X.A.o.tal=cl((X.A.o.tal||40)+5,0,100);return `${X.A.n} được thầy giỏi dạy. Tài năng của con +5.`},wt:[G6("con tiến bộ")]}),
+  c6("Mời thầy giỏi dạy thêm",{c:{bac:-30},ok:()=>{X.A.o.tal=cl((X.A.o.tal||40)+BAL.eff.j68f.talOk_2,0,100);return `${X.A.n} được thầy giỏi dạy. Tài năng của con ${balSg(BAL.eff.j68f.talOk_2)}.`},wt:[G6("con tiến bộ")]}),
   c6("Dẫn con đến hầu phụ hoàng",{p:od(35+S.sung/3),w:{sung:3},r:[[X.A,4]],l:{sung:-1},lt:[R6("ngài bận, con buồn")]})]});
 /* ---------- KẺ HẦU (loyalty tests) ---------- */
 EV6("bribedServ","serv",{a:["sv","rv"],pp:()=>{const a=sv6();const b=rv6(fo6)??rv6();return a==null||b==null?null:{a0:a,a1:b}},w:C=>1.3,
@@ -107,7 +107,7 @@ EV6("hairpinThief","myst",{a:["sv","sv","sv"],big:true,items:MYST6,pp:()=>{const
  o:X=>{const G=[X.A,X.B,X.C][X.p.g];return[
   c6("Tra xét kỹ từng manh mối",{c:{suc:-6},p:od(40+S.tamco/3+S.mat*4),w:{tamco:1},wt:[G6("tìm ra kẻ lấy, lấy lại đồ")],r:[[G,-25]],l:{danh:-1},lt:[R6("không ra manh mối, đồ mất")],ok:()=>`Vết sáp nến trên tay áo và lời chứng của tiểu thái giám chỉ đúng ${G.n}; đồ tìm thấy dưới gối ${G.n}.`,no:()=>"Manh mối đứt, không ai bị buộc tội oan."}),
   c6("Nhờ Cung Chính ti tra",{c:{bac:-25},p:80,wt:[G6("tìm ra kẻ lấy")],r:[[G,-25]],k:[R6("chuyện xấu lan ra ngoài: Danh -1")],l:{danh:-1},lt:[R6("tra không ra")],ok:()=>{apply({danh:-1});return `Cung Chính ti tra ra ${G.n}.`}}),
-  c6("Cho kẻ lấy một đêm tự trả lại",{w:{duc:2},p:55,wt:[G6("đồ được trả, không ai mất mặt")],lt:[R6("không ai trả, đồ mất hẳn")],l:{tamco:-1},ok:()=>{relDo(G,6);return "Sáng hôm sau đồ nằm lại trong tráp; ngươi không truy nữa."}})]}});
+  c6("Cho kẻ lấy một đêm tự trả lại",{w:{duc:2},p:55,wt:[G6("đồ được trả, không ai mất mặt")],lt:[R6("không ai trả, đồ mất hẳn")],l:{tamco:-1},ok:()=>{relDo(G,BAL.eff.j68f.relOk);return "Sáng hôm sau đồ nằm lại trong tráp; ngươi không truy nữa."}})]}});
 EV6("poisonedFish","myst",{a:["sv"],pp:()=>{const a=sv6();return a==null?null:{a0:a}},w:C=>1,
  v:["Đàn cá chép trong chậu sứ trước sân chết nổi bụng hết một đêm.","Chú vẹt trong cung bỗng lăn ra chết, mỏ tím tái.","Chậu lan quý héo rũ chỉ sau một đêm, đất có mùi lạ.","Con chó nhỏ cung nữ nuôi ăn thức ăn thừa xong thì nôn mửa."],
  o:X=>[c6("Cho thái y nghiệm độc",{c:{bac:-20},p:70,wt:[G6("biết có độc hay không")],w:{tamco:1},l:{bac:-5},lt:[R6("xét không ra")],ok:()=>{const bad=liveRivals(true).some(v=>{try{return bandOf(danger(v,S))>=3}catch(e){return false}});return bad?"Thái y nói có dấu độc nhẹ; có kẻ đang thử tay. Ngươi đề phòng hơn.":"Thái y nói là do nước tù và trời trở, không có độc."}}),

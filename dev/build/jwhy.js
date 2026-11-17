@@ -58,7 +58,7 @@ function spyTarget(){S.mspy=S.mspy||{};const L=spyList();if(!L.length)return nul
  S.mspy.b=spyBk();return t}
 function spyMaidRun(t,ag){const m=ag||whyMaidInit(S.maid);S.mspy={b:spyBk(),id:t.id};const o=spyRoll(S,t,m);const ok=roll(o);
  if(ok){if(typeof j78maidSpy==="function")j78maidSpy(ag);else{log(evA(S,t,BAL.eff.jwhy.evSpyMaidRun)?`${m.name} dò la ${spyWho(t)}: chứng cứ ${balSg(BAL.eff.jwhy.evSpyMaidRun)}.`:`${m.name} dò la ${spyWho(t)}: không tìm ra điều gì sai trái.`)}}
- else{if(ag)ag.loyal=cl((ag.loyal||0)-5,0,100);else apply({maid:-5});if(typeof j78maidFail==="function")j78maidFail(ag);else log(`${m.name} bị bắt gặp khi dò la ${spyWho(t)}: lòng -5.`)}
+ else{if(ag)ag.loyal=cl((ag.loyal||0)-BAL.eff.jwhy.loyalSpyMaidRun,0,100);else apply({maid:-5});if(typeof j78maidFail==="function")j78maidFail(ag);else log(`${m.name} bị bắt gặp khi dò la ${spyWho(t)}: lòng -${balAb(BAL.eff.jwhy.loyalSpyMaidRun)}.`)}
  window.__lastOk=ok;return ok}
 /* review/pick-hint (owner 15/11 "Giải thích khó hiểu quá"): the picker's "what decides the odds" line is ONE short sentence — who raises it
    (the servant's skill, people she knows there), who lowers it (how watchful the target's palace is); the full list stays in "Vì sao…?" */

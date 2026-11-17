@@ -27,8 +27,8 @@ function loadBAL(B){
  /* the rulebook values (the BAL files only). Each top-level statement runs on its own, so one that needs the game (contestOpen …) cannot stop the
     Object.assign(BAL,{…}) after it from running */
  const ctx=vm.createContext({console,Math,Object,Array,JSON,Number,String,window:{},document:{},localStorage:{getItem(){return null}},navigator:{}});
- for(const f of ['jbal.js','jbal2.js','jbaleff.js','jbalroad.js','jbalarc.js']){const src=fs.readFileSync(path.join(B,f),'utf8');
-  for(const st of acorn.parse(src,{ecmaVersion:'latest'}).body){try{vm.runInContext(src.slice(st.start,st.end),ctx)}catch(e){}}}
+ for(const f of ['jbal.js','jbal2.js','jbaleff.js','jbalroad.js','jbalarc.js','jecon.js'])/* jecon: only its Object.assign(BAL,…) rule tables (BAL.loyalCost / selfMinus …) */{const src=fs.readFileSync(path.join(B,f),'utf8');
+  for(const st of acorn.parse(src,{ecmaVersion:'latest'}).body){const code=src.slice(st.start,st.end);if(f==='jecon.js'&&!/^Object\.assign\(BAL,/.test(code))continue;try{vm.runInContext(code,ctx)}catch(e){}}}
  return vm.runInContext('BAL',ctx)}
 /* BAL.a.b[2] / BAL.a["b"] path text → value */
 const BALPATH='BAL(?:\\.[\\w$]+|\\["[^"]+"\\]|\\[\\d+\\])+';
@@ -127,7 +127,7 @@ function scan(B){
    else if(n.type==='MemberExpression'&&!(par&&par.type==='MemberExpression'&&par.object===n)){
     const p=refOf(n);const printed=stack.some(x=>x.type==='CallExpression'&&x.callee.type==='Identifier'&&/^bal(Sg|Ab|Oan)$/.test(x.callee.name));
     if(printed){}/* a print (balSg / balAb / balOan) is not a rule read: nothing beside it copies it */
-    else if(p&&p.length>=2&&NS.has(p[0])){const v=valOf(p);if(isNum(v))refs.push({n,p,v,mode:'amt',stack:stack.slice()})}
+    else if(p&&p.length>=2&&NS.has(p[0])){let v=valOf(p);/* x.p-BAL.eff.m.k (the sign typed in the code, review/one-core-dup3 stat move): the amount it applies is −k */let neg=false;if(isNum(v)&&par&&par.right===n&&(par.type==='BinaryExpression'&&par.operator==='-'||par.type==='AssignmentExpression'&&par.operator==='-=')){v=-v;neg=true}if(isNum(v))refs.push({n,p,v,neg,mode:'amt',stack:stack.slice()})}
     else if(p&&p.length>=2&&(CUT.has(p[0])||(CUT2[p[0]]&&CUT2[p[0]].has(p[1])))){const v=valOf(p);const L=leaves(v,'');if(L.length&&L.length<=14)refs.push({n,p,v,mode:'cut',leaves:L,stack:stack.slice()})}}
    stack.push(n);for(const k in n){if(k==='type'||k==='start'||k==='end'||k==='loc')continue;const c=n[k];if(Array.isArray(c))c.forEach(x=>walk(x,stack));else if(c&&typeof c.type==='string')walk(c,stack)}stack.pop()})(ast,[]);
   /* a BAL.eff / road / arc read outside every function (it runs while the script loads) in a module that loads BEFORE the file that sets it = TDZ crash
@@ -158,9 +158,13 @@ function scan(B){
      if(r.mode==='cut'){const lf=r.leaves.find(l=>Math.abs(l.v)===+m[2]);if(!lf)continue;cand=lf;
       /* the stat word just before the number must be the ladder's own ("Chủ tin 60+" beside BAL.loy.close is another stat) */
       const before=t.s.slice(Math.max(0,m.index-24),m.index);const sw=STATS.filter(([re])=>re.test(before));if(sw.length&&!sw.some(([re,keys])=>keys.includes(r.p[0])))continue}
-     else{if(+m[2]!==absOf)continue;const sg=m[1];const pre=t.s.slice(Math.max(0,m.index-14),m.index);if(!sg&&!/(?:oán|thù|bớt|giảm|mất|thiện cảm|thân|quý|ghen|lòng)\s*$/i.test(pre))continue;/* an unsigned number must follow a relation word */
+     else{if(+m[2]!==absOf)continue;const sg=m[1];const pre=t.s.slice(Math.max(0,m.index-14),m.index);if(!sg&&!/(?:oán|thù|bớt|giảm|mất|thiện cảm|thân|quý|ghen|lòng)\s*$/i.test(pre)&&!(/^ev[A-Z]/.test(r.p[r.p.length-1])&&/^\s*chứng cứ/.test(t.s.slice(m.index+m[0].length))&&/(?:nắm|nắm thêm|thêm|được|lấy được|mất)\s*$/.test(pre)))continue;/* an unsigned number must follow a relation word; or (review/one-core-dup3) "nắm 2 chứng cứ" beside an evA amount BAL.eff.m.ev<Site> */
       const inv=/(?:oán|thù)\s*$/i.test(t.s.slice(Math.max(0,m.index-12),m.index));const v=inv?-r.v:r.v;
-      if(sg==='+'&&v<0||(sg==='-'||sg==='−')&&v>0)continue;cand={suf:'',v:r.v,inv}}
+      if(sg==='+'&&v<0||(sg==='-'||sg==='−')&&v>0)continue;
+      /* a person-stat amount (servant lòng / tin, child tài / sức khỏe, thương, mê: review/one-core-dup3) is not the number right after ANOTHER stat's word
+         ("Sức -15", "Danh -1" beside s.loyal-BAL.eff.j42.loyalGo belong to that stat's apply) */
+      if(/^(?:loyal|tin|tal|hp|fond|me)[A-Z0-9_]/.test(r.p[r.p.length-1])&&/(?:Sức|Danh|Đức|Bạc|Sủng|Thái hậu|Hoàng hậu|Tâm cơ|Sắc|Tai mắt|Ân tình|Chủ tin)\s*$/.test(pre)&&!(/^tin/.test(r.p[r.p.length-1])&&/Chủ tin\s*$/.test(pre)))continue;
+      cand={suf:'',v:r.v,inv:inv||!!r.neg}}
      const sg=m[1];const k=t.a+':'+m.index;const e=byTok.get(k)||{t,idx:m.index,sg,abs:m[2],inv:!!cand.inv,cut:r.mode==='cut',cands:[]};e.cands.push(Object.assign({},r,{suf:cand.suf,cv:cand.v}));byTok.set(k,e)}}}
   for(const e of byTok.values()){const uniq=[...new Map(e.cands.map(r=>[r.n.start+r.suf,r])).values()];
    sites.push({f,line:e.t.line,t:e.t,idx:e.idx,sg:e.sg,abs:e.abs,inv:e.inv,cut:e.cut,cands:uniq.map(x=>({key:x.p.join('.')+x.suf,v:x.cv!==undefined?x.cv:x.v,ref:src.slice(x.n.start,x.n.end)+x.suf})),amb:uniq.length>1,
@@ -174,7 +178,7 @@ function proof(B){const BAL=loadBAL(B);const re=new RegExp(BALPATH,'g');const li
  const back=src=>src.replace(re,m=>{const v=valAt(BAL,m);return typeof v==='number'?lit(v):m});
  const sg=n=>(n>0?'+':n<0?'-':'')+Math.abs(n);
  const oanF=(n,m)=>String(Math.round(Math.abs(n)*BAL.relOan[m]));
- const printed=src=>src.replace(/\$\{bal(Sg|Ab|Oan)\(((?:[^()]|\([^()]*\))*)\)\}/g,(m,fn,ex)=>{if(fn==='Oan'){const q=/^(.*),\s*"(\w+)"$/.exec(ex);return oanF(Function('return '+back(q[1]))(),q[2])}const n=Function('return '+back(ex))();return fn==='Sg'?sg(n):String(Math.abs(n))});
+ const printed=src=>src.replace(/\$\{bal(Sg|Ab|Oan)\(((?:[^()]|\([^()]*\))*)\)\}/g,(m,fn,ex)=>{try{if(fn==='Oan'){const q=/^(.*),\s*"(\w+)"$/.exec(ex);return oanF(Function('return '+back(q[1]))(),q[2])}const n=Function('return '+back(ex))();return fn==='Sg'?sg(n):String(Math.abs(n))}catch(e){return m}});/* a print of a non-BAL table (LO.act.duc) stays as code: the compare then shows it */
  return{printed,back,BAL}}
 module.exports={scan,loadBAL,valAt,BALPATH,proof};
 if(require.main===module){

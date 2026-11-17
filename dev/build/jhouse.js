@@ -32,20 +32,20 @@ function hsvDone(lab,bf,ok){try{if(typeof resultShow==="function")setTimeout(()=
 function hsvActs(s){const A=[],H=BAL.house;if(!s||!(S.staff||[]).includes(s))return A;const nm=s.name,he=s.role==="eunuch"?"hắn":"nàng";
  const c=s.cause,fault=c&&c.fault,merit=c&&!c.fault,tr=s.trouble!=null&&wk()-s.trouble<=4,spy=s.spyFor&&s.spyFor!=="me";
  /* 1. the trusted maid's acts (j2 Tâm sự numbers, jwhy dò la / nghe ngóng with this servant sent) */
- A.push({n:"Tâm sự",dom:"Sai bảo",o:100,x:`lòng ${nm} +6`,run:()=>{s.loyal=cl((s.loyal||0)+6,0,100);return `${nm} được ngươi hỏi han: lòng +6.`}});
+ A.push({n:"Tâm sự",dom:"Sai bảo",o:100,x:`lòng ${nm} ${balSg(BAL.eff.jhouse.loyalRun)}`,run:()=>{s.loyal=cl((s.loyal||0)+BAL.eff.jhouse.loyalRun,0,100);return `${nm} được ngươi hỏi han: lòng ${balSg(BAL.eff.jhouse.loyalRun)}.`}});
  try{whyMaidInit(s);const t=spyTarget();
   if(!t)A.push({n:"Sai đi dò la",dom:"Mưu kế",lock:true,t:"không còn phi tần nào để dò",o:0});
-  else A.push({n:"Sai đi dò la",dom:"Mưu kế",o:spyO(S,t,s),x:`nhắm: ${spyWho(t)} (chạm để chọn người khác) · biết 2 điều thật về nàng · chứng cứ +1`,l:{},risk:`${nm} bị bắt gặp thì sợ hãi (lòng -5) · nàng đoán ra: ${typeof pvOan==="function"?pvOan(t,5):"oán ta +5"}`,why:()=>spyFactors(S,t,s),act:1,open:()=>spyPick(2,s)});
+  else A.push({n:"Sai đi dò la",dom:"Mưu kế",o:spyO(S,t,s),x:`nhắm: ${spyWho(t)} (chạm để chọn người khác) · biết 2 điều thật về nàng · chứng cứ +1`,l:{},risk:`${nm} bị bắt gặp thì sợ hãi (lòng -${balAb(BAL.eff.jwhy.loyalSpyMaidRun)}) · nàng đoán ra: ${typeof pvOan==="function"?pvOan(t,5):"oán ta +5"}`,why:()=>spyFactors(S,t,s),act:1,open:()=>spyPick(2,s)});
   A.push({n:"Nghe ngóng chung",dom:"Mưu kế",o:100,x:`${nm} đi nghe ngóng: biết 1 điều thật trong cung (hay về người đang gây chuyện, người ${nm} quen bên ấy)${(S.mat||0)>=3?" · Tai mắt nhiều: thêm 1 điều":""}`,run:()=>spyNews(s)})}catch(e){console.error(e)}
  /* 2. the Cung nhân tab's acts for this servant (same functions, same costs); on the stage they also take the khắc the card shows
     (1, Hỏi chuyện 2 — j25 opens them without paying, so each pays here once it has run) */
  const pay=n=>{try{S.payOnPick=0;if(n)spend(n)}catch(e){}};
  const J=(n,how,c,x,risk,lock)=>A.push(Object.assign({n,dom:"Thưởng phạt",o:100,c,x},risk?{risk}:{},lock?{lock:true,t:lock}:{},{open:()=>{if(how==="thuong"&&S.bac<H.thuongBac)return;const bf=rsnap();judgeServ(s,how);pay(H.k);hsvDone(n,bf,true)}}));
- J(merit?`Thưởng vì ${c.txt}`:"Thưởng vô cớ","thuong",{bac:-H.thuongBac},merit?"lòng +15, kẻ hầu khác lòng +2":"lòng +6 (ít hơn thưởng có cớ)","",S.bac<H.thuongBac?`thiếu bạc (cần ${H.thuongBac})`:"");
- if(spy)A.push({n:"Tra khảo",dom:"Thưởng phạt",o:100,x:`${he} khai là tai mắt của ai · lòng -15`,open:()=>{const bf=rsnap();servAct("phat",s.sid);pay(H.k);hsvDone("Tra khảo",bf,true)}});
- else J(fault?`Phạt vì ${c.txt}`:"Phạt vô cớ","phat",{},fault?"kỷ cương, kẻ hầu khác lòng +1 · lòng -5":`lòng -25, Đức -${H.phatDuc}, kẻ hầu khác lòng -5`,fault?"":`${he} mang hận; lòng dưới ${balAb(BAL.loy.out)} thì mỗi tuần bán mình cho phi tần khác: ${chanceW(15)}`);
- if(fault)J("Tha lỗi","tha",{},"lòng +5 · kẻ hầu khác lòng -1");
- if(tr)A.push({n:"Che chở (đang bị bắt tội)",dom:"Thưởng phạt",o:100,c:{danh:-H.cheDanh},x:"lòng +20",open:()=>{const bf=rsnap();servAct("che",s.sid);pay(H.k);hsvDone("Che chở",bf,true)}});
+ J(merit?`Thưởng vì ${c.txt}`:"Thưởng vô cớ","thuong",{bac:-H.thuongBac},merit?`lòng ${balSg(BAL.eff.j24.loyalJudgeServ_7)}, kẻ hầu khác lòng ${balSg(BAL.eff.j24.loyalJudgeServ_8)}`:`lòng ${balSg(BAL.eff.j24.loyalJudgeServ_9)} (ít hơn thưởng có cớ)`,"",S.bac<H.thuongBac?`thiếu bạc (cần ${H.thuongBac})`:"");
+ if(spy)A.push({n:"Tra khảo",dom:"Thưởng phạt",o:100,x:`${he} khai là tai mắt của ai · lòng -${balAb(BAL.eff.j10.loyalServAct_2)}`,open:()=>{const bf=rsnap();servAct("phat",s.sid);pay(H.k);hsvDone("Tra khảo",bf,true)}});
+ else J(fault?`Phạt vì ${c.txt}`:"Phạt vô cớ","phat",{},fault?`kỷ cương, kẻ hầu khác lòng ${balSg(BAL.eff.j24.loyalJudgeServ_2)} · lòng -${balAb(BAL.eff.j24.loyalJudgeServ)}`:`lòng -${balAb(BAL.eff.j24.loyalJudgeServ_3)}, Đức -${H.phatDuc}, kẻ hầu khác lòng -${balAb(BAL.eff.j24.loyalJudgeServ_4)}`,fault?"":`${he} mang hận; lòng dưới ${balAb(BAL.loy.out)} thì mỗi tuần bán mình cho phi tần khác: ${chanceW(15)}`);
+ if(fault)J("Tha lỗi","tha",{},`lòng ${balSg(BAL.eff.j24.loyalJudgeServ_5)} · kẻ hầu khác lòng -${balAb(BAL.eff.j24.loyalJudgeServ_6)}`);
+ if(tr)A.push({n:"Che chở (đang bị bắt tội)",dom:"Thưởng phạt",o:100,c:{danh:-H.cheDanh},x:`lòng ${balSg(BAL.eff.j10.loyalServAct_3)}`,open:()=>{const bf=rsnap();servAct("che",s.sid);pay(H.k);hsvDone("Che chở",bf,true)}});
  A.push({n:"Hỏi chuyện",dom:"Sai bảo",act:1,o:netIs(s,"talk")&&s.kn?70:40,x:"chứng cứ +1 nếu quen người cung khác",l:{},open:()=>{S.payOnPick=0;const bf=rsnap();servAct("hoi",s.sid);hsvDone("Hỏi chuyện",bf,true)}});
  if(typeof def70m==="function"&&typeof PEND!=="undefined"){let od=null;try{od=ordOf70(s.sid)}catch(e){}
   A.push({n:od?"Đổi việc phòng bị":"Giao việc phòng bị",dom:"Sai bảo",o:100,x:od?ordSub70(s.sid):"chọn canh cung, thử độc, theo dõi, giữ sổ sách",open:()=>{pay(H.k);Q.push(def70m({s:4,sid:s.sid}));showModal()}})}
