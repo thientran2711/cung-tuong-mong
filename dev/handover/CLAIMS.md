@@ -520,3 +520,4 @@
 | WHOLE FIGURE REPAINT batch W4b maid-ty (successor of W4 session_011xDdVRqzYRpSYpnCiVfu8x, 2K) | review/fig-cutout-clean | C | session_011xDdVSDgWxxs57zsL4S2JZ | RUNNING | 17/11 01:36Z |
 | WHOLE FIGURE REPAINT batch W6 maid-rest-B 1586 (2K, a18 first; opened by lead #5) | review/fig-cutout-clean | C | session_011xDdVNVPxjHSMerTjisLs3 | RUNNING | 17/11 01:38Z |
 | WHOLE FIGURE REPAINT batch W7 consort-rest-B 976 (2K, a18 first; opened by lead #5) | review/fig-cutout-clean | C | session_011xDdVSQXPe2qq8TJQ8hLyw | RUNNING | 17/11 01:38Z |
+| WHOLE FIGURE REPAINT batch W1b hero+misc (successor of W1, 2K) | review/fig-cutout-clean | C | session_011xDdVQbi2xn77hhwc3Qh3P | RUNNING | 17/11 01:41Z |
