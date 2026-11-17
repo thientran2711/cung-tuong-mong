@@ -874,7 +874,7 @@
 | tinbao-ui-r6r PASS 220359da (supersedes 47a462ca; lands after ag-all-2 by C-AG #3) | review/tinbao-ui-r6r | MAIN s34 | - | PASS → C-AG land | 17/11 17:08Z |
 | face-w404 review r1 (sonnet) of df8b57bc | review/face-w404-r1 | D | session_01964izEvirrwGUKDneEGtXa | DONE FAIL 1 @51857175 (FAV=0 all pools: CDN prefix vs index keys) | 17/11 17:08Z |
 | REVIEW weather-khac r1 (opus BIG) of e1d540cf | review/weather-khac-r1 | C-AG | session_01UV1Szhk5EGru6rSkDekM6s | RUNNING | 17/11 17:10Z |
-| REVIEW learn-scene-fix-2 r1 of 8c30a85d (opus BIG; brief briefs/s34-review-learn-scene-fix-2.md) | review/learn-scene-fix-2-r1 | MAIN s34 | session_01UV1SziXvWUAbjGtoEq234J | RUNNING | 17/11 17:12Z |
+| REVIEW learn-scene-fix-2 r1 of 8c30a85d (opus BIG; brief briefs/s34-review-learn-scene-fix-2.md) | review/learn-scene-fix-2-r1 | MAIN s34 | session_01UV1SziXvWUAbjGtoEq234J | DONE PASS f8ac2f08 | 17/11 17:12Z |
 | day-khac-audit review r1 (opus BIG) of 4408ef0a | review/day-khac-audit-r1 | D | session_01964izE2ap49KwCk9DAQtjP | RUNNING | 17/11 17:12Z |
 | REVIEW looks-2 040ce3440 (opus BIG; brief briefs/review-looks-2.md) | review/looks-2-r1 | B | session_01N1tNP4D3L5wFB1qrZAfoHp | RUNNING | 17/11 17:20Z |
 | kit-figure-mood: mood seal beside the head of every interactable full-body figure (OD 17:40Z (2)) (sonnet; brief briefs/s34-kit-figure-mood.md) | review/kit-figure-mood | MAIN s34 | session_01UV1SzjLSjT2E1w24wsPwS5 (kit-figure-mood worker) | READY | 17/11 17:40Z |
