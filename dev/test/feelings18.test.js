@@ -37,7 +37,7 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
  /* 4 effects */
  const r4=await p.evaluate(()=>{const v=__F.R()[0];__F.clean(v);const o={};o.none=feelOdPts(v,"Học thêu");emoSet(v,"chuyentam",75,"chép kinh trọn quyển");o.focus=feelOdPts(v,"Học thêu");o.other=feelOdPts(v,"Hạ độc");
   __F.clean(S);S.mk=[];S.emo=null;const D=BAL.feel.od;let fk=null;const a=deck.find(x=>{if(!x||x.o==null||x.o>=100||x.exam||x.o>=BAL.odds.hi-6)return false;const c=kitActCat(String(x.n).replace(/<[^>]+>/g,""));fk=Object.keys(D).find(k=>D[k].c&&D[k].c.includes(c)&&D[k].p[2]>0);return !!fk});o.card=null;
-  if(a){const o0=a.o;emoSet(S,fk,80,"(thử) "+fk);feelDeck();o.card=[o0,a.o,a.__fo];S.mk=[];S.emo=null;feelDeck();o.card.push(a.o)}
+  if(a){const o0=a.o-(a.__fo||0);/* the base odds (a feeling she already had may move it) */emoSet(S,fk,80,"(thử) "+fk);feelDeck();o.card=[o0,a.o,a.__fo];S.mk=[];S.emo=null;feelDeck();o.card.push(a.o)}
   __F.clean(v);const n0=nightCh(v);emoSet(v,"tinhtu",80,"đêm qua được lật thẻ");const n1=nightCh(v);o.night=[n0,n1];
   const y=__F.R()[1];__F.clean(y);const a0=aff(y,v);affAdd(y,v,10);const g0=aff(y,v)-a0;__F.clean(v);emoSet(v,"vui",80,"vui (thử)");const a1=aff(y,v);affAdd(y,v,10);o.aff=[g0,aff(y,v)-a1];return o});
  ok(r4.none===0&&r4.focus>0&&r4.other===0,'Chuyên tâm raises study odds only (by kit category)',r4);
