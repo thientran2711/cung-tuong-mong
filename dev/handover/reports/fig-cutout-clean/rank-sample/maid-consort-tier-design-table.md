@@ -23,13 +23,13 @@ Finding behind it: a36 ty2 = one pale sage hanfu, ty3 = one pale grey-blue hanfu
 | m06 | peach | salmon | bamboo leaf | braided crown with tiny blossoms | silk handkerchief |
 | m07 | gold | olive green | crane | beaded hair ribbon | jade pendant |
 | m08 | peach | blush pink | butterfly | side coil with a fresh flower | book |
-| m09 | coral | vermilion | phoenix feather | bun with a long tassel hairpin | folded fan |
+| m09 | coral | copper-bronze (was vermilion; moved 17/11 ROOT-2: too close to m05 crimson) | phoenix feather | bun with a long tassel hairpin | folded fan |
 | m10 | gold | moss green | cloud scroll | feather pin | small lantern |
 | m11 | peach | lilac | wave crest | low chignon with a carved comb | teacup |
 | m12 | gold | jade green | pine | flower cluster at the temple | scroll |
 | m13 | coral | coral | magnolia | high bun with pearl pins | flower branch |
 | m14 | gold | pea green | camellia | half-up with a silk ribbon | silk handkerchief |
-| m15 | peach | lavender | begonia | butterfly hairpin | jade pendant |
+| m15 | peach | deep indigo-navy (was lavender; moved 17/11 ROOT-2: too close to m11 lilac) | begonia | butterfly hairpin | jade pendant |
 | m16 | coral | rose red | wisteria | double loop buns with ribbon | book |
 | m17 | gold | mint | lily | coil with a jade pin | folded fan |
 | m18 | peach | sky blue | osmanthus | step-shake (bu yao) pin | small lantern |
