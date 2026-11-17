@@ -637,3 +637,5 @@
 | ART A1 nine origin frames + A2 swaddled baby + A3 red-thread JOIN (sonnet art; reports/presentation-wiring.md ART REQUESTS) | CDN img/kit + reports/art-pres-a123.md | C ROOT | session_011xDdVQ93v6b8Bre1hVaJtG | RUNNING | 17/11 05:40Z |
 | night-final review r1 (opus BIG; main s30 04:50Z order) of 5535697b | review/night-final-r1 | D | session_01964izDUxnFjybggNj6Ukev | RUNNING | 17/11 05:36Z |
 | trait-rename review r1 (opus BIG, save migration) of 27886326 | review/trait-rename-r1 | B | session_01N1tNP31pNXiReqkE3LxVdh | RUNNING | 17/11 05:40Z |
+| one-core-roads — ONE CORE F1 roads: go:/sc:/k: amounts → BAL.road.fx, values identical (opus; split of one-core-dup §2b) | review/one-core-roads | B | session_01N1tNP4eyJ4AQGCmA1HpA9c | RUNNING | 17/11 05:41Z |
+| one-core-arcs — ONE CORE F2 arcs: ARC67/j97/j96/jorigins/jroute/jstory → BAL.arc.fx, values identical (opus; split of one-core-dup §2b) | review/one-core-arcs | B | session_01N1tNP5MRPzxmbFfWjw6LuT | RUNNING | 17/11 05:41Z |
