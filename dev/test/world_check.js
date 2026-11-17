@@ -26,11 +26,11 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
  ok(r2.open&&r2.why==='th','quốc tang opens from the real death (S.thDead)',r2);ok(r2.tang,'j92 wdTang() reads the window',r2);ok(r2.night===0,'nobody (her or NPC) can be called to the night the first weeks',r2);
  ok(r2.fest===null,'no festival day during the mourning',r2);ok(r2.len===r2.want,'length from BAL.world.tang.len',r2);
  /* 3 */
- await fresh();await p.evaluate(()=>{S.tuan=1;worldQueue("away","thử",{len:3,x:{sub:"san"}})});await step();
+ await fresh();await p.evaluate(()=>{S.tuan=1;worldQueue("away","thử",{len:3,x:{sub:"tuan"}})});await step();
  const r3=await p.evaluate(()=>{const w=worldWin("away");placeWhere();const F=(w&&w.x.f)||[];const C=consorts();const v=liveRivals(true).find(x=>!F.includes(x.id));
   const fol=C.filter(x=>F.includes(x===S?"me":x.id)).map(x=>nightCh(x));const non=C.filter(x=>!F.includes(x===S?"me":x.id)).map(x=>nightCh(x));
   const m1=mindW(v,"scheme");const z=S.wwin;const L=z.L;z.L=[];const m0=mindW(v,"scheme");z.L=L;const vr=visRoll();
-  return{open:!!w,emp:S.where.emp,F:F.length,want:BAL.world.away.fol.san,fol,nonMax:Math.max(0,...non),ratio:+(m1/m0).toFixed(2),wantR:BAL.world.away.act.scheme,vr}});
+  return{open:!!w,emp:S.where.emp,F:F.length,want:BAL.world.away.fol.tuan,fol,nonMax:Math.max(0,...non),ratio:+(m1/m0).toFixed(2),wantR:BAL.world.away.act.scheme,vr}});
  ok(r3.open&&r3.emp===null,'away: the Emperor is not in the palace (S.where.emp)',r3);ok(r3.F===r3.want,'away: followers chosen (BAL.world.away.fol)',r3);
  ok(r3.nonMax===0,'away: nobody left behind can be called (her and NPC alike)',r3);ok(r3.vr==='','away: no ngự giá visit',r3);ok(Math.abs(r3.ratio-r3.wantR)<.02,'NPC reaction: mindW scheme × BAL.world.away.act.scheme',r3);
  /* 4 */

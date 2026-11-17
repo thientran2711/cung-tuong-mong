@@ -92,7 +92,9 @@ EVD.tang={place:w=>w.x.why==="queen"?"kn":"tn",
    j55 Đại tướng quân roll formula for the war, jact2 "Xin theo hầu lễ tế / Theo ngài lên núi" are the same wish (followers by favour). */
 EVD.away={place:w=>"thu",
  start(w){const b=B().away,sub=w.x.sub;const n=b.fol[sub]||0;w.x.f=[];
-  if(n>0){const C=cons().filter(p=>!p.preg&&!p.confined&&!p.out);const W=C.map(p=>[p,Math.max(1,rawNight(p))*(p===S?1:mW(p,"social"))]);
+  if(n>0&&sub==="san"){/* thu săn: those who ride with him = jpet's hunt rule (Sủng >= BAL, the most favoured first), so the jpet hunt gifts go to them */
+   const C=cons().filter(p=>!p.out&&!p.confined&&(p.sung||0)>=b.san.folSung).sort((x,y)=>(y.sung||0)-(x.sung||0)).slice(0,n);w.x.f=C.map(pid)}
+  else if(n>0){const C=cons().filter(p=>!p.preg&&!p.confined&&!p.out);const W=C.map(p=>[p,Math.max(1,rawNight(p))*(p===S?1:mW(p,"social"))]);
    for(let i=0;i<n&&W.length;i++){const p=npcPick(null,W.slice());const j=W.findIndex(x=>x[0]===p);if(j>=0)W.splice(j,1);if(p)w.x.f.push(pid(p))}}
   const F=w.x.f.map(byPid).filter(Boolean);
   return `Ngài rời cung ${monthsWord(w.t1-w.t0)}${F.length?`; theo hầu: ${nmList(F)}`:""}. Thái hậu và Hoàng hậu trông coi hậu cung; không thị tẩm, không ngự giá.`},
@@ -132,8 +134,10 @@ EVD.tuyen={place:w=>typeof qOn==="function"&&qOn()?"kn":"tn",
 EVD.hoa={place:w=>{const p=byPid(w.x.who);return p&&p!==S&&typeof palaceOf==="function"?palaceOf(p):"nvp"},
  start(w){const b=B().hoa;moodFloor(b.mood);const L=[];for(const p of [S].concat(liveR())){if(pid(p)===w.x.who||p.out)continue;if(!roll(b.nb))continue;
    try{WW.inFire=1;const lost=typeof tsbBurn==="function"?tsbBurn(p,1,"lửa lan từ dãy cung bên"):[];if(lost.length)L.push(p)}catch(e){}finally{WW.inFire=0}}
+  try{if(S.rt)S.rt.fire=S.turn}catch(e){}
   const p=byPid(w.x.who);return `Lửa từ ${p?(p===S?"cung ngươi":"cung "+p.name):"một dãy cung"} lan sang cả dãy, cung nhân xách nước cả đêm.${L.length?` Mất đồ vì lửa lan: ${nmList(L)}.`:""} Nội vụ phủ tra xét nguyên do.`},
- card(w){return{t:"Hỏa hoạn lớn",who:pEmp(),h:`<p>${w.cause}.</p><p>${w.txt||""}</p>`,headArt:typeof tsbArt==="function"?tsbArt("ev-hoa-hoan","Hỏa hoạn"):undefined}},
+ card(w){const p=byPid(w.x.who);try{if(p&&p!==S&&p.alive&&EVI&&EVI.fire){const pp=EVI.fire.pp()||{};pp.v=p.id;const d=mkP("fire",pp);if(d){log(`${w.cause}. ${w.txt||""}`);return{t:"Hỏa hoạn lớn",h:d.t,opts:d.o,who:d.who,pid:d.pid,pp:d.pp}}}}catch(e){wErr("fire card",e)}
+  return{t:"Hỏa hoạn lớn",who:pEmp(),h:`<p>${w.cause}.</p><p>${w.txt||""}</p>`,headArt:typeof tsbArt==="function"?tsbArt("ev-hoa-hoan","Hỏa hoạn"):undefined}},
  scene(w){const b=B().hoa;const p=byPid(w.x.who);if(!p||p===S)return null;return{t:"Đám cháy đêm qua",who:pv(p),h:`<p>Cung ${p.name} còn khói. Nàng đứng giữa đống đồ cháy dở.</p>`,
   opts:[{n:"Mang đồ sang giúp",fx:{bac:-b.helpBac},x:`thành: ${p.name} quý ngươi +${b.helpAff}, Đức +${b.helpDuc}`,go:()=>{affAdd(p,S,b.helpAff);apply({duc:b.helpDuc})}},
    {n:"Hỏi han vài câu rồi về",fx:{},x:"không được không mất"}]}},
@@ -219,7 +223,19 @@ if(typeof wdTang==="function"){const t0=wdTang;wdTang=function(){try{if(S&&B().o
 if(typeof wdMonth==="function"){const m0=wdMonth;wdMonth=function(pre){const had=!!worldWin("tang");const q0=Q.length;const r=m0.apply(this,arguments);
   try{if(S&&B().on&&had&&S.wdTang>S.turn){S.wdTang=0;for(let i=Q.length-1;i>=q0;i--)if(Q[i]&&Q[i].t==="Quốc tang")Q.splice(i,1)}}catch(e){wErr("wdMonth",e)}return r}}
 /* the j7 comet leaves the weekly random pool: the sky window brings it (whole-group audit, research §5) */
-if(typeof freshEvents==="function"){const f0=freshEvents;freshEvents=function(){const L=f0.apply(this,arguments);try{if(B().on)return L.filter(e=>e&&e.id!=="comet")}catch(e){}return L}}
+const W_OUT={comet:()=>false,fire:()=>false,foreignwed:()=>!!worldWin("su")};/* comet → sky window, fire → fire window, foreignwed (an envoy asks) → envoy window */
+if(typeof freshEvents==="function"){const f0=freshEvents;freshEvents=function(){const L=f0.apply(this,arguments);try{if(B().on)return L.filter(e=>!(e&&W_OUT[e.id]&&!W_OUT[e.id]()))}catch(e){}return L}}
+/* jpet's autumn-hunt gifts (month 9, every year) only in a year the hunt really happens (z.sanY) */
+if(typeof petMonth==="function"){const p0=petMonth;petMonth=function(){try{if(S&&B().on&&S.month===B().away.san.month&&wZ().sanY!==S.year)S.petHunt=S.year}catch(e){}return p0.apply(this,arguments)}}
+/* LUẬT SỬA CẢ NHÓM (research §5): the world-ish events that ran on their own dice for her alone now need the real world state.
+   jroute: the monthly dice fire at Ngự thiện phòng (roll RTC.fire, "khắp cung chạy loạn" — nobody else touched) is gone; the escape
+     route's "Nhân lúc hỏa hoạn" reads the real fire window instead (EVD.hoa start sets S.rt.fire).
+   j71 "Lập công · Hỏa hoạn, thiên tai trong cung": each picture needs its real cause — fire (0, 4) a fire window, flood (1) a flood window
+     or a storm, storm (2) and lightning (5) a storm (rollWx severity 3), snow (3) a snow storm; no cause, no merit card. */
+try{if(typeof RTC!=="undefined"&&RTC)RTC.fire=0}catch(e){}
+try{if(typeof MF7!=="undefined"&&MF7.hoahoan){const H=MF7.hoahoan,w0=H.w;const storm=()=>!!(S&&S.wx&&S.wx.f===3);
+  const ok=i=>{if(!B().on)return true;const d=worldWin("dis");return i===0||i===4?!!worldWin("hoa"):i===1?!!(d&&d.x.sub==="lut")||storm():i===3?storm()&&/tuyết/.test(S.wx.n||""):storm()};
+  H.pick=ok;H.w=function(){const r=w0.apply(this,arguments);try{if(B().on&&!H.v.some((x,i)=>ok(i)))return 0}catch(e){}return r}}}catch(e){wErr("mf7",e)}
 /* places: the Emperor is out of the palace; NPCs go where the window draws them (fallback until AG-ALL's day plan reads worldPlanW) */
 {const pw=placeWhere;placeWhere=function(){const r=pw.apply(this,arguments);try{if(S&&S.where&&B().on){const A=worldWin();if(!A.length)return r;
   if(A.some(w=>EVD[w.k]&&EVD[w.k].emp))S.where.emp=null;if(!window.WORLD_PLAN_HOOKED&&host())wPull()}}catch(e){wErr("place",e)}return r}}
@@ -261,8 +277,9 @@ function wCalendar(){const b=B(),T=T_(),z=wZ(),y=S.year,m=S.month,t=S.tuan||0,E=
  if(typeof KC!=="undefined"&&m===KC.tm&&t===0&&y>KC.ty&&(y-KC.ty)%b.tuyen.every===0&&!(typeof isKc==="function"&&isKc()))worldStart("tuyen",`Năm thứ ${y}, đại tuyển tú nữ theo lệ ba năm`);
  /* tế Giao every 3 years before Đông chí */
  if(m===b.away.te.month&&t===0&&y%b.away.te.every===0&&!ill)worldStart("away","Hoàng thượng ra đàn Nam Giao tế trời",{len:b.away.len.te,x:{sub:"te"},cd:0});
- /* thu săn: autumn, peace at the border, he is well */
- if(m===b.away.san.month&&t===0&&!ill&&(!T||T.bien>=b.away.san.bien)&&(E.age||0)<=b.away.san.age&&roll(b.away.san.p))worldStart("away","Mùa thu, Hoàng thượng đi săn ở Mộc Lan",{len:b.away.len.san,x:{sub:"san"},cd:0});
+ /* thu săn: autumn, peace at the border, he is well; decided the tuần before (the jpet hunt gifts at the month's start read z.sanY) */
+ {const c=b.away.san;const pm=c.month===1?12:c.month-1;if(m===pm&&t===2)z.sanY=!ill&&(!T||T.bien>=c.bien)&&(E.age||0)<=c.age&&roll(c.p)?(c.month===1?y+1:y):0;
+  if(m===c.month&&t===0&&z.sanY===y)worldStart("away","Mùa thu, Hoàng thượng đi săn ở Mộc Lan",{len:b.away.len.san,x:{sub:"san"},cd:0})}
  /* tuần du: spring of a good year */
  {const c=b.away.tuan;if(m===c.month&&t===0&&!ill&&T&&T.kho>=c.kho&&T.bien>=c.bien&&(E.age||0)<=c.age&&(z.last.away_tuan==null||now()-z.last.away_tuan>=c.gapY*36)&&roll(c.p)){
   if(worldStart("away","Bốn bề yên ổn, Hoàng thượng tuần du phương nam",{len:b.away.len.tuan,x:{sub:"tuan"},cd:0}))z.last.away_tuan=now()}}
@@ -273,7 +290,7 @@ function wCalendar(){const b=B(),T=T_(),z=wZ(),y=S.year,m=S.month,t=S.tuan||0,E=
  /* the sky: a month's chance (Khâm Thiên giám) */
  if(t===0&&roll(b.sao.p))worldStart("sao",pick(["Nhật thực giữa trưa","Sao chổi hiện ở trời tây"]));}
 /* a real jtsb fire that spreads in the dry season */
-if(typeof tsbBurn==="function"){const b0=tsbBurn;tsbBurn=function(p,n,cause){const L=b0.apply(this,arguments);try{if(!WW.inFire&&L&&L.length&&S&&B().on&&host()&&p&&!p.out){
+if(typeof tsbBurn==="function"){const b0=tsbBurn;tsbBurn=function(p,n,cause){const L=b0.apply(this,arguments);try{if(!WW.inFire&&L&&L.length)WW.stat.fire=(WW.stat.fire||0)+1;if(!WW.inFire&&L&&L.length&&S&&B().on&&host()&&p&&!p.out){
    const dry=typeof tsbFireBase==="function"&&tsbFireBase(p)>1;if(roll(B().hoa.spread[dry?0:1]))worldStart("hoa",`Cung ${p===S?"của ngươi":p.name} bén lửa (${cause||"đèn nến"}), gió hanh thổi lửa lan`,{len:B().hoa.len,x:{who:pid(p)}})}}catch(e){wErr("fire",e)}return L}}
 /* ---------- the tuần tick (after endTurn) ---------- */
 function worldTick(){if(!S||S.dead||!B().on)return;const z=wZ();if(host()){WW.inTick=1;try{const t=now();
