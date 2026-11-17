@@ -21,3 +21,9 @@ Gens: m01 fHG21TmCDY, m02 jUBd9wKLD0, m03 IfiNbQztvE, m05 1leDPMTr4r, m07 IfiN53
 
 ## Handover
 START_CTX low; no rollover needed. Finished.
+
+## Round 2 (ROOT-9 orders 19:42-19:48Z)
+- Foreman is ROOT-9 (session_011xDdVRcPyvGXaGQCff5fCJ). Ref jpg not in git: pair rebuilt from LIVE figures instead (OD line 1501: Hạ Lăng Vân Đáp ứng vs Cung nữ Tiểu Hoa; names are random per game, so used consort c08 t1 a18 (pastel pink) vs maid m09 base a18 (pink)).
+- HOA ĐIỀN removed: all 6 proposals regenerated (6 more gens, total 12) with "bare clean forehead, no forehead mark"; every forehead looked at: clean. (The first-round sheet maid-consort-sample.jpg has huadian — SUPERSEDED, do not show; wipe with cdn_sync --wipe-review maid-consort-sample when done.) CURRENT files are live art and still carry huadian (c08 t1, maid t5 etc).
+- Gens (clean): m01 rgdpAAUxtc, m02 Xm4yxLZBfo, m03 LwoXYu7swO, m05 kspM2CS16B, m07 bxV0ZL75Y2, m09 rgdpn7Qxtc.
+- Single files under img/_review/maid-consort-sample/: pair_dapung-c08-t1_vs_cungnu-m09_current.jpg; <mNN>_<t1|t3|t5>_current.webp (live, transparent, 900px high) and <mNN>_<t1|t3|t5>_proposal.jpg (crop of the lineup gen, ~416x752, parchment bg, NOT upscaled/cut).
