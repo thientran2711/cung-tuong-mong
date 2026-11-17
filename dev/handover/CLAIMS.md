@@ -938,3 +938,4 @@
 | FOLD DƯ ĐỒ BLANK MAP (sonnet; MAIN s37 order 20:24Z; whole map/canvas family + title under −/+) | review/dudo-blank | D | session_01964izE1CDG7cgHhhYhzVKC | RUNNING | 17/11 20:55Z |
 | CONSORT-TY REPAINT W2e (successor of W2d; resume consort-c25-ty8-a36, 196 keys left: a36 36 + a51 160; m09 style ref + face sentence rules; sonnet opened by lead #7) | review/fig-cutout-clean | C | session_011xDdVNiPZPXTnXV8mKbypr | RUNNING | 17/11 20:53Z |
 | RESTORE maid trung y (owner GO ~21:25Z via ROOT-10; opened by ROOT-10, not by lead) | review/fig-cutout-clean | C | session_011xDdVNfbdbZPTtegkYCYtp | RUNNING | 17/11 20:50Z |
+| batch s36a LIVE 4c8568f5 (main 60b0e3bf → 4c8568f5; ROLLBACK 60b0e3bf): kit-rank-name-land, kit-display-room-r1, mirror-center-r2, ui-fixes-1-r6, kit-figure-mood-r4-r5, kit-thanh-bai-r4c | review/batch-s36a | MAIN s37 | session_01UV1SzhpLx156n52Xk9v9WR | LIVE | 17/11 21:01Z |

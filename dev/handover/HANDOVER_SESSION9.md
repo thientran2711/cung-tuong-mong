@@ -829,3 +829,4 @@ LESSONS s36: owner wants ONE complete reviewed proposal, never item-by-item ques
 - (17/11 22:00Z) OWNER: no code-drawn picture anywhere (OD 22:00Z) — C audit + paint for care minigames ordered; main kit swaps art in when URLs arrive.
 - (17/11 22:05Z) OWNER: up to 5 items per display group (OD 22:05Z) → C-AG shelf + C cabinet + main kit display-room slots (5 per compartment).
 - (17/11 20:34Z) C-AG #5 rolled over → C-AG #6 = session_01UV1SzjqdQPh2K9YUVK9VhU (depth 6: no child foreman; at its rollover s37 opens a ROOT C-AG or owner does). #5 archived. Batch s36a 4c8568f5 gates running (ETA ~21:15Z; jdisp gated on BAL.shelf.ui=0).
+- (17/11 21:01Z) batch s36a LIVE 4c8568f5 (rollback 60b0e3bf). Next batch s32b (builder s36a): balance chain baff0824→52d5092d→37018e74 + display-shelf-r3rv 41418cd8. Owner pending: set-bonus table (Lượt 17), blush step (Lượt 18). kit-figure-mood r6 ordered (gate seal for Người lạ, 'Đang:' line).
