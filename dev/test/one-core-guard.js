@@ -59,6 +59,8 @@ const JOIN_PAT={
     (evA(v,t,roll(40)?…): counted by the roll kind — review/one-core-dup3); a wrapper g(8) still counts */
  amt:new RegExp('\\b(?:rdOan|rdRel|relAdd|oanAdd|affAdd|kcAf|tdPowAdd|e67(?:dad|bien|kho|heir|ally|pun|foe|drop|merit|srvUp)|srvMerit|evA|evStory|tsbLoyal|relDo)\\((?:(?:[^()]|\\([^()]*\\))*?(?:,|(?<!\\broll)\\())?\\s*(?:[\\w$.!]+\\s*\\?\\s*)?'+NUMA+'(?:\\s*:\\s*'+NUMA+')?\\s*\\)','g'),
  /* h96 = a typed amount inside the tư tình arc's adj96({h,t,sus,ev,rise,lt}) (j96; all read BAL.arc.h96 since review/one-core-dup3) */
+ /* rtk = a typed khắc cost of a «Lối riêng» card (jroute rtCard({…k:N}) / step("x",{…k:N}) / mk("x",{…k:N}); all read BAL.route.k since review/one-core-dup3) */
+ rtk:/(?:\brtCard\(|\b(?:step|mk)\([^,()]*,)\s*\{(?:[^{}]|\{[^{}]*\})*?(?<![\w$.])k\s*:\s*\d/g,
  h96:/\badj96\(\s*\{[^{}]*?[:?]\s*[+-]?\d/g,
  ladder:new RegExp('(?:[\\w$.\\])]+\\s*(?:>=|>|<=|<)\\s*'+NUMV+'\\s*\\?\\s*(?:\\[[^\\[\\]]*\\]|'+NUMV+'|""|``)\\s*:\\s*){2,}(?:\\[[^\\[\\]]*\\]|'+NUMV+'|""|``)','g'),
 };

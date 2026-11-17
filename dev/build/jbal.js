@@ -52,7 +52,9 @@ Object.assign(BAL,{time:{khac:4,sucMin:5},lot:{bac:10,k:1},walk:{near:1,far:2},s
  age:{sacFrom:25,sacLoss:2,sacMin:10,betroth:16,wed:18,matchShow:14,matchMax:21,reign:16},seat:{7:1,6:1,5:2,4:4,3:6}});
 /* ONE CORE r2 (review/one-core-land, 16/11): rule numbers of the modules that landed after review/one-core: story roads (jroute),
    origin arcs (jorigins), family house (jhouse), Tu duc lessons (jtds, jtd), small modules. One table per module; texts print the same key. */
-Object.assign(BAL,{route:{ /* jroute «Lối riêng» (tư tình / trốn cung / rời cung / ẩn dật / nghiệm thân): every rule number of that module */
+Object.assign(BAL,{route:{
+ /* k = the khắc each «Lối riêng» card costs, by card id (rtCard({id,…,k}); review/one-core-dup3, dev/measure/one-core-dup3-rtk-move.js) */
+ k:{tt0:1,tt1:1,tt2:2,tt3:3,ttord:1,ttcut:1,tc0:1,step_guard:1,step_maid:1,step_home:1,step_route:2,step_pass:1,step_cloth:1,step_drug:1,tcgo_:4,tcstop:1,hl_tu:2,hl_plead:1,hl_hon:2,hl_que:2,hl_phe:2,ad0:1,ad_kinh:2,ad_che:1,ad_off:1,mk_bribe:1,mk_swap:1,mk_alum:1,mk_spy:1,ngn_:1}, /* jroute «Lối riêng» (tư tình / trốn cung / rời cung / ẩn dật / nghiệm thân): every rule number of that module */
  ducFree:50 /* Đức above this lowers the odds of being seen / caught (rtDuc: (Đức-ducFree)/4) */,
  wearySung:25 /* Sủng below this (from month 6) = "ân sủng nhạt dần", a reason that opens Lối riêng */,
  tySuc:45 /* Sức below this lets her summon the physician lover to her palace */,
