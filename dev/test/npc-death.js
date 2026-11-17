@@ -33,13 +33,16 @@ const res=[];const ok=(c,m,x)=>{res.push([!!c,m]);console.log((c?'ok  ':'FAIL')+
  await ev(()=>{for(const f of [].concat(...Object.values(FPOOL)))FAV[f]=1;SLOT=3;try{store.set(NL_KEY,null)}catch(e){}start();Q.length=0;faceInit()});
  /* 2 Lý beside a fallen rival; empty after her death */
  const r2=await ev(()=>{const v=rivals.find(x=>x.alive&&!x.queen);v.out=1;const LL=lcPeople("Phế phi");const a=LL.map(x=>x.ref?x.ref.name:x.name),nr=LL.filter(x=>!x.ref).length;
-  goTo("lc");const vis=(S.visit.people||[]).map(x=>x.name),vn=(S.visit.people||[]).filter(x=>x.kind==="fallen"&&!x.ref).length;S.place="home";v.out=0;
+  /* npc-death-wire harness: the game redraws the record each khắc (j95sync); a state set by hand needs the same sync, and a pending card (Q) blocks goTo */
+  const sync=()=>{try{j95sync(false,true)}catch(e){}Q.length=0};const fl=()=>(S.visit.people||[]).filter(x=>x.kind==="fallen");
+  sync();goTo("lc");const all1=(S.visit.people||[]).map(x=>x.kind+":"+x.name),vis=fl().map(x=>x.name),vn=fl().filter(x=>!x.ref).length;S.place="home";v.out=0;sync();
   const y=lyFallen();const K=new Set();const t=(function(){y.tho=y.age;y.thoM=S.month;return mortMonth()})();
-  const b=lcPeople("Phế phi").map(x=>x.name);goTo("lc");const vis2=(S.visit.people||[]).length;const msg=S.visit.msg;S.place="home";
-  return{a,nr,vn,vis,dead:!!y.dead,txt:String(t).replace(/<[^>]+>/g,'').match(/Phế phi [^.]*Trường Môn viện[^.]*\./)+"",b,vis2,msg}});
- ok(r2.a.length===2&&r2.nr===1&&r2.vn===1&&r2.vis.length===2,'Trường Môn viện: Lý stays beside a fallen rival',r2.vis);
+  const b=lcPeople("Phế phi").map(x=>x.name);sync();goTo("lc");const vis2=(S.visit.people||[]).length,all2=(S.visit.people||[]).map(x=>x.kind+":"+x.name);const msg=S.visit.msg;
+  /* the map count of Trường Môn viện = the record (no one left there) */const cnt=countAt("lc");S.place="home";Q.length=0;
+  return{a,nr,vn,vis,all1,all2,cnt,dead:!!y.dead,txt:String(t).replace(/<[^>]+>/g,'').match(/Phế phi [^.]*Trường Môn viện[^.]*\./)+"",b,vis2,msg}});
+ ok(r2.a.length===2&&r2.nr===1&&r2.vn===1&&r2.vis.length===2,'Trường Môn viện: Lý stays beside a fallen rival (stage = j95 record)',r2.all1);
  ok(r2.dead&&/qua đời ở Trường Môn viện/.test(r2.txt),'Lý dies of her lifespan, news line shown',r2.txt);
- ok(r2.b.length===0&&r2.vis2===0,'after her death nobody stands in for her (empty until a real person comes)',r2.msg);
+ ok(r2.b.length===0&&r2.vis2===0&&r2.cnt===0,'after her death nobody stands in for her (stage + map count empty until a real person comes)',{msg:r2.msg,all:r2.all2,cnt:r2.cnt});
  /* 3 maid death */
  const r3=await ev(()=>{faceInit();const m=S.maid;const fc=m.fc,nm=m.name;S.rgL=S.rgL||{};S.rgL.maid={st:2};const q=q72();q.a.push({tid:Object.keys(T72I)[0],rk:"maid",st:0,dl:wk()+5});
   m.tho=m.age;m.thoM=S.month;m.thoO=0;const t=String(mortMonth()).replace(/<[^>]+>/g,'');faceInit();const n=S.maid;
@@ -48,7 +51,7 @@ const res=[];const ok=(c,m,x)=>{res.push([!!c,m]);console.log((c?'ok  ':'FAIL')+
  ok(!r3.rgl&&r3.q===0,'her maid\'s Tâm nguyện + Việc nhờ end with her');
  /* 4 court seat (Thái y) */
  const r4=await ev(()=>{faceInit();const c=S.court.ty;try{figPick(c)}catch(e){}const fc=c.fc,fid=c.fid,nm=c.name;c.tho=c.age;c.thoM=S.month;c.thoO=0;const t=String(mortMonth()).replace(/<[^>]+>/g,'');faceInit();try{figPick(c)}catch(e){}
-  goTo("tyv");const vis=(S.visit.people||[]).filter(x=>x.kind==="ty").map(x=>x.name);S.place="home";
+  Q.length=0;goTo("tyv");const vis=(S.visit.people||[]).filter(x=>x.kind==="ty").map(x=>x.name);S.place="home";Q.length=0;
   /* nobody alive holds the dead face/figure afterwards, even after 40 new draws */
   for(let i=0;i<40;i++){const s={name:"x"+i,role:"eunuch",age:40};faceFor(s,"official",50);if(s.fc===fc&&fc){return{bad:"drawn "+fc}}}
   return{nm,n:c.name,fc,nfc:c.fc,fid,nfid:c.fid,ret:(S.fdead||[]).includes(fc)||!fc,fret:(S.fidDead||[]).includes(fid)||!fid,vis,t:t.match(/[^.]*lên thay[^.]*\./)+""}});
