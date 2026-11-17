@@ -63,7 +63,7 @@ function scoreAct(a,N,cost){
   if(a.c&&a.c.duc<0&&S.duc<50)return -1e9;
   if(a.j67&&!window.__noStory)return 6; /* a sensible player opens the next Mệnh truyện beat when it is ready */
   const lb=(typeof lotB==="function"?lotB(S,a.dom):0);const o=a.o==null?1:cl((a.o==null?100:a.o)+lb,5,100)/100;
-  let v=o*valW(a.w,N)+(1-o)*valW(a.l,N)-costW(a.c);
+  let v=o*valW(a.w,N)+(1-o)*valW(a.l,N)+costW(a.c)/* balance-2: costW is the (negative) price; it was subtracted, so every price counted as a gain */;
   if(a.x){if(/chứng cứ/.test(a.x))v+=1.5;if(/Hoàng thượng thương/.test(a.x))v+=1;if(/dễ có thai/.test(a.x))v+=(S.preg?0:1.5);if(/thị tẩm/.test(a.x))v+=3*o;if(/nguy cơ sảy thai/.test(a.x))v+=3;/* balance-2: a sensible player reads the red «kèm» risk on the card (chance words, j1 chanceLvl): punishment risk weighs by its chance */{const m=String(a.x).match(/kèm:[^·]*?(phạt|cấm túc|giáng|lãnh cung)[^·]*?khả năng (rất thấp|thấp|vừa|rất cao|cao)/);if(m)v-=({"rất thấp":.05,"thấp":.13,"vừa":.27,"cao":.47,"rất cao":.75}[m[2]])*(8*N.wd)}}
   try{const SA=STORY[S.origin.k];if(SA&&SA.acts&&SA.acts().some(x=>x.n===a.n))v+=6}catch(e){}
   if(a.n==="Báo tin có thai")v+=50;if(a.toil)v+=6;/* balance-pass: a sensible player makes up each morning (jtoil: else "Thái hậu chê dung nhan", Đức/Danh) */
@@ -77,7 +77,7 @@ function talkScore(t,N){const{p,a}=t;
   if(BAD.test(a.n)||a.open)return -1e9;
   if(S.suc+((a.c&&a.c.suc)||0)<20)return -1e9;
   const o=a.o==null?1:cl(a.o,5,100)/100;
-  let v=o*valW(a.w,N)+(1-o)*valW(a.l,N)-costW(a.c);
+  let v=o*valW(a.w,N)+(1-o)*valW(a.l,N)+costW(a.c)/* balance-2: costW is the (negative) price; it was subtracted, so every price counted as a gain */;
   if(a.x){if(/chứng cứ/.test(a.x))v+=o*2.5;if(/biết thêm|biết ngài thích|có thể biết/.test(a.x))v+=1.2;if(/dễ phát hiện/.test(a.x))v+=1;if(/dễ có thai/.test(a.x))v+=1.5;if(/che chở/.test(a.x))v+=1}
   if(a.run&&!a.w)v+=0.4;
   if(p.kind==="emp")v+=1;

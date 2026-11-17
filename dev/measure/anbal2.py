@@ -4,7 +4,7 @@ Head table per difficulty (and per origin with --orig): lives, Hoàng hậu reac
 --flow  top Danh losses / gains by cause (indanhlog x.ix.danh / danhG), per life.   --pun  punishments her (S) vs NPC (N) per life.
 --press per-rank pressure (inbal2 x.b2.rk): bạc held, monthly bạc net, Sức, khắc left unused per buổi, open cards left per buổi, monthly Danh/Sủng change."""
 import json,sys,collections as C,statistics as st
-A=[a for a in sys.argv[1:] if not a.startswith('--')];O=set(a for a in sys.argv[1:] if a.startswith('--'))
+A=[a for a in sys.argv[1:] if not a.startswith('--') and not a.endswith('.ext.json')];O=set(a for a in sys.argv[1:] if a.startswith('--'))
 R=[]
 for f in A:
   try:R+=json.load(open(f))
