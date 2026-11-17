@@ -643,3 +643,4 @@ WAKES: s29 set 04:32Z (trig_01KjViDNJxtnWRKXiM6QS6WV) — fires into s29; s30 se
 - (17/11 ~05:10Z) NEW OWNER BUGS for s31 (OD tail 05:08Z): stale stage caption (j77.js:242 keeps old goTo msg) + caption too faint/small over the backdrop (kit plate + size). Open one worker.
 - (17/11 ~05:13Z) OPEN OWNER QUESTION (OD tail 05:12Z, she was asking an opinion, NOT a rule): greeting / name reveal by rank + trait — waits her pick; then history expert (OD:L1327) + worker.
 - (17/11 ~05:47Z) SHOW WHY A NUMBER (OD tail 05:45Z) → MOVED to Foreman C at 06:12Z (belongs with the trait/trọng engine). s31 does not open it.
+- (17/11 ~06:31Z) NEW OWNER BUGS for s31 (OD tail 06:30Z, 'Phi tần cười cợt' dialog): double reaction line, number in story text, wrong reply options (Xin lỗi when mocked), VIỆC dialog empty band + options below fold + clipped name. (1)–(3) fit the toil-looks successor; (4) kit worker.
