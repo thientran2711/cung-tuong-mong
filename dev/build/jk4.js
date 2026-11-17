@@ -516,7 +516,7 @@ function kitDpAll(){try{const o=kitDpOn();if(!o||!o.d.classList.contains("kdper"
  d.classList.remove("kdpall");const tiny=op.scrollHeight>op.clientHeight+2&&op.clientHeight<280;if(tiny){d.classList.add("kdpall");if(!d.__kdpTop){d.__kdpTop=1;mb.scrollTop=0}}mb.style.setProperty("--kdpmbh",mb.clientHeight+"px")}catch(e){}}
 window.kitDpAll=kitDpAll;
 function kitDpNat(d,mb,col){try{const cs=e=>getComputedStyle(e);const items=[...mb.querySelectorAll(":scope > *, :scope > .kpb > *")].filter(e=>e!==col&&e.offsetParent&&cs(e).display!=="contents"&&cs(e).gridColumnStart==="2");
- let sum=0;items.forEach(e=>{const c=cs(e);let h=e.offsetHeight;if(e.classList.contains("opts")){const K=[...e.children].filter(x=>x.offsetParent);if(K.length){const t=e.getBoundingClientRect().top;h=Math.max(...K.map(x=>x.getBoundingClientRect().bottom))-t+e.scrollTop+parseFloat(c.paddingBottom||0)}}
+ let sum=0;items.forEach(e=>{const c=cs(e);let h=e.offsetHeight;if(e.classList.contains("kpmain")&&e.scrollHeight>e.clientHeight+1)h=e.scrollHeight+(e.offsetHeight-e.clientHeight);/* KIT 32.7d: a scrolling text side counts its full text */if(e.classList.contains("opts")){const K=[...e.children].filter(x=>x.offsetParent);if(K.length){const t=e.getBoundingClientRect().top;h=Math.max(...K.map(x=>x.getBoundingClientRect().bottom))-t+e.scrollTop+parseFloat(c.paddingBottom||0)}}
   sum+=h+parseFloat(c.marginTop||0)+parseFloat(c.marginBottom||0)});
  const m=cs(mb);sum+=parseFloat(m.paddingTop||0)+parseFloat(m.paddingBottom||0)+(parseFloat(m.rowGap)||0)*Math.max(0,items.length-1);
  return d.offsetHeight-mb.offsetHeight+sum}catch(e){return d.scrollHeight}}
@@ -762,6 +762,11 @@ html body #modal .dlg.kdper>#mb>.kdlgart.kdpban>.ksart{width:100%!important;heig
 html body #modal .dlg.kdper>#mb>.kdlgart.kdpban>.ksart img{width:100%!important;height:100%!important;object-fit:cover!important}
 #modal .dlg.kdper.kdpbanner>#mb>.kpb>.kpmain,#modal .dlg.kdper.kdpbanner>#mb>.kdpr:not(.kdlgart){grid-column:2}
 html body #modal .dlg.kdper>#mb>.opts.kdpo2,html body #modal .dlg.kdper>#mb>.opts.kdpo2.k3grid{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;align-content:start;gap:8px}
+/* KIT 32.7d (owner 15/11 end card "Kiếp này", D36; kit-keeper-1): a 32.7 dialog with NO option list (end card, Đã rõ cards) — the TEXT side scrolls by
+   itself and the person column keeps the dialog's visible height, so the whole figure is always in view (844x390 included). Never a sticky hack. */
+#modal .dlg.kdper:not(.kdnarrow)>#mb:not(:has(>.opts)){grid-template-rows:minmax(0,1fr)!important;grid-auto-rows:max-content}
+#modal .dlg.kdper.kdpbanner:not(.kdnarrow)>#mb:not(:has(>.opts)){grid-template-rows:max-content minmax(0,1fr)!important}
+#modal .dlg.kdper:not(.kdnarrow)>#mb:not(:has(>.opts))>.kpb>.kpmain{min-height:0;overflow-y:auto;overscroll-behavior:contain;align-self:stretch}
 /* 50.1: a kdpo2 group is all short by KIT 50 (≤ 2 rows): no 32.9 "long" full-width cell / reorder inside it; the natural height is measured
    from the right column's own parts (kitDpNat: banner + text + the options' content), so the dialog fits its options instead of scrolling them */
 html body #modal .dlg.kdper>#mb>.opts.kdpo2.kdpo2>button.ka.k3long,html body #modal .dlg.kdper>#mb>.opts.kdpo2.kdpo2>button.ka.k3odd{grid-column:auto!important;order:0!important}

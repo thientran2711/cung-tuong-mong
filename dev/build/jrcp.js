@@ -165,7 +165,7 @@ function rcpMeAl(w){try{const P=rcpProf(S);return P&&P.a&&rcpAlOf(w).includes(P.
 function rcpAllergyMe(f,w,al){const by=f?`${rkName(f)} ${f.name}`:"";ap(S,{suc:-BAL.rcp.alSuc});
  let t=`<span class="r">Ta dùng ${w.n}${by?" của "+by:""} thì nổi mẩn, khó thở: ta kiêng ${RCP_ALN[al]}.</span> Sức -${BAL.rcp.alSuc}.`;
  rcpRash(S,al,f);const L=rcpLearn(S,"a","phát bệnh trước mắt");if(L)t+=" "+L;
- if(f&&typeof f==="object"&&f!==S){let h=0;try{h=hostility(S,f)||0}catch(e){}if(roll(cl(BAL.rcp.alEv+Math.round(h/2),5,90))){evA(S,f,1);t+=` Ta nắm 1 chứng cứ của ${f.name}.`}}
+ if(f&&typeof f==="object"&&f!==S){let h=0;try{h=hostility(S,f)||0}catch(e){}if(roll(cl(BAL.rcp.alEv+Math.round(h/2),5,90))){evA(S,f,BAL.eff.jrcp.evRcpAllergy);t+=` Ta nắm ${BAL.eff.jrcp.evRcpAllergy} chứng cứ của ${f.name}.`}}
  return t}
 function rcpInWrap(d,p){try{const e=p&&p.e,w=e&&e.wk;if(!d||!d.o||d.rcpMe||!w)return d;const al=rcpMeAl(w);if(!al)return d;d.rcpMe=1;
   const f=p.f!=null?byKey(p.f):null,kn=rcpKn(S,"a");

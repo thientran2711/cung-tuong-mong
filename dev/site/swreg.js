@@ -129,7 +129,7 @@ function css(){if($i("kit-upd"))return;const st=document.createElement("style");
 /* the status icon (kitStatusIcon "upd", jstatus): shown only while a new build is pending, she is playing and no dialog is open; the rail repaints on every tick */
 const showIcon=()=>!!(K.pending&&!K.leaving&&playing()&&!busy());
 function place(){K.chip=showIcon();try{if(window.kitStatusIcon)kitStatusIcon.refresh()}catch(e){}}
-function chip(){css();try{if(window.kitStatusIcon)kitStatusIcon.set("upd",{title:"Có bản mới",order:20,glyph:"⟳",badge:()=>true,show:showIcon,onTap:()=>card()})}catch(e){}place()}
+function chip(){css();try{if(window.kitStatusIcon)kitStatusIcon.set("upd",{title:"Có bản mới",order:20,icon:"img/kit/ico-update.webp",badge:()=>true,show:showIcon,onTap:()=>card()})}catch(e){}place()}
 K.showChip=()=>{K.pending=true;chip()};/* test hook (dev/test/brand-seal.js): the chip alone, no card */
 function close(){if(K.cardEl){K.cardEl.remove();K.cardEl=null}place()}
 function mkCard(sub,note,btns){css();close();if(typeof kpHeader!=="function")return null;
