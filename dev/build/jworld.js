@@ -82,14 +82,14 @@ const EVD={};
    jlux/jtoil/jpm (read wdTang). Adds: no thị tẩm the first weeks, no festival/yến for the whole window, mourning rite at the hall. */
 EVD.tang={place:w=>w.x.why==="queen"?"kn":"tn",
  start(w){const b=B().tang;moodFloor(b.mood);let n=0;for(const v of liveR())if(v.wd&&typeof wdAutoFor==="function"){/* j92 does the dress by traits at month end; mid-month deaths: the same rule now */
-   try{if(roll(traitsOf(v).includes("Kiêu ngạo")?70:90)){wdAutoFor(v,0);n++}}catch(e){}}
+   try{const ob=BAL.world.tang.obey;if(roll(traitsOf(v).includes("Kiêu ngạo")?ob[0]:ob[1])){wdAutoFor(v,0);n++}}catch(e){}}
   return `Cả cung để tang ${monthsWord(w.t1-w.t0)}: không yến tiệc, không ca nhạc; ${monthsWord(b.noNight[w.x.why]||1)} đầu không ai được thị tẩm.`},
  end(w){return `Mãn tang (${wName(w)}): cung cấm trở lại như thường.`},
  card(w){for(let i=Q.length-1;i>=0;i--)if(Q[i]&&Q[i].t==="Quốc tang"&&!Q[i].wwin)Q.splice(i,1);/* j92's announcement: ours carries the same words + her options */
   return{wwin:1,t:"Quốc tang",who:pEmp(),h:`<p>${w.cause}. ${w.txt||""}</p><p class="past">Mặc đồ đỏ hay vàng lúc này là tội. Nên thay y phục, tháo trâm (Tư trang).</p>`}},
  scene(w){const b=B().tang.rite;const P=wPresent(EVD.tang.place(w));return{t:"Linh cữu",h:`<p>Quan tài đặt giữa chính điện, khói hương nghi ngút. ${P.length?nmList(P)+" đang quỳ túc trực.":"Cung nhân thay nhau túc trực."}</p>`,
   opts:[{n:"Quỳ túc trực, tụng kinh",fx:{suc:-b.suc},x:`thành: Đức +${b.duc}, Thái hậu +${b.th}`,go:()=>{apply({duc:b.duc});if(!S.thDead&&w.x.why!=="th")apply({th:b.th})}},
-   {n:"Thắp nén hương rồi lui",fx:{},x:"không được không mất"}]}},
+   {n:"Thắp nén hương rồi lui",fx:{},x:"không được mất gì"}]}},
  night(w,p){return wNow0(w)<(B().tang.noNight[w.x.why]||1)},feast:1};
 /* 2 NGỰ GIÁ XA CUNG (rows 10 + 11): tế Giao (calendar), thu săn (autumn, peace), tuần du (good years), thân chinh (a lost war).
    Reuses: S.where.emp (he is not in the palace: no stroll "!", countAt), nightCh (only those who follow him), visRoll (no ngự giá),
@@ -104,7 +104,7 @@ EVD.away={place:w=>"thu",
   return `Ngài rời cung ${monthsWord(w.t1-w.t0)}${F.length?`; theo hầu: ${nmList(F)}`:""}. Thái hậu và Hoàng hậu trông coi hậu cung; không thị tẩm, không ngự giá.`},
  tick(w){if(w.x.sub==="chinh"&&now()<w.t1-1){try{log(`Tin quân báo về: ngự giá ${pick(["đã tới biên ải","đóng quân bên sông","giao chiến với giặc","chờ lương thảo"])}.`)}catch(e){}}},
  end(w){const b=B().away,F=(w.x.f||[]).map(byPid).filter(p=>p&&(p===S||p.alive));for(const p of F)ap(p,{sung:b.folSung});let r=`${wName(w)} xong, ngự giá hồi cung.${F.length?` Người theo hầu được thêm ân sủng: ${nmList(F)}.`:""}`;
-  if(w.x.sub==="chinh"){const T=T_();if(T){const DT=T.H["Đại tướng quân"];const c=b.chinh.win;const o=cl(Math.round(c[0]+(DT?DT.pow/c[1]+DT.sk/c[2]:0)),10,92);
+  if(w.x.sub==="chinh"){const T=T_();if(T){const DT=T.H["Đại tướng quân"];const c=b.chinh.win;const o=cl(Math.round(c[0]+(DT?DT.pow/c[1]+DT.sk/c[2]:0)),b.chinh.winClamp[0],b.chinh.winClamp[1]);
     if(roll(o)){T.bien=cl(T.bien+b.chinh.winBien,0,100);moodSet(0);r+=` Đại thắng trở về, Biên cương +${b.chinh.winBien}.`;w.x.won=1}
     else{T.bien=cl(T.bien+b.chinh.loseBien,0,100);moodSet(3);r+=` Thua trận trở về, Biên cương ${b.chinh.loseBien}; ngài giận dữ.`}}}
   if(w.x.won)worldStart("xa","Thắng trận trở về, ban ân xá");return r},
@@ -122,7 +122,7 @@ EVD.tuyen={place:w=>typeof qOn==="function"&&qOn()?"kn":"tn",
    const v=newRival(R(b.rankMax+1));Object.assign(v,drawFace());v.age=b.age[0]+R(b.age[1]);v.sung=cl((v.sung||0)+b.newSung,0,100);v.wNew=w.id;rivals.push(v);N.push(v)}catch(e){wErr("tuyen new",e)}}
   try{if(N.length&&typeof palFix==="function")palFix()}catch(e){}w.x.n=N.map(v=>v.id);
   for(const p of old)ap(p,{sung:-b.sungThin});
-  for(const v of old){if(v===S||!N.length)continue;const t=pick(N);const k=npcPick(v,[["welcome",mW(v,"help")],["ambush",mW(v,"harm")*(1+(v.ghen||0)/50)],["ignore",1]]);
+  for(const v of old){if(v===S||!N.length)continue;const t=pick(N);const k=npcPick(v,[["welcome",mW(v,"help")],["ambush",mW(v,"harm")*(1+(v.ghen||0)/b.ghenDiv)],["ignore",1]]);
    if(k==="welcome")affAdd(t,v,b.welcomeAff);else if(k==="ambush"){relAdd(v,t,b.ambushRel);if(typeof newsAdd==="function")newsAdd(v,"tuyen",`${v.name} ra oai với tú nữ mới ${t.name}.`)}}
   return N.length?`${N.length} tú nữ vào cung: ${N.map(v=>`${v.name} (${RANKS[v.rank].n})`).join(", ")}. Ân sủng cũ phải chia bớt.`:"Hậu cung đã đủ người, lần này không ai được giữ lại."},
  end(w){const N=(w.x.n||[]).map(byPid).filter(v=>v&&v.alive);return N.length?`Các tú nữ mới đã ổn định chỗ ở: ${nmList(N)}.`:""},
@@ -131,7 +131,7 @@ EVD.tuyen={place:w=>typeof qOn==="function"&&qOn()?"kn":"tn",
   return{t:"Tú nữ mới vào cung",who:pv(t),h:`<p>Các tú nữ mới quỳ ra mắt. ${nmList(N)} cúi đầu, chưa dám ngẩng lên.</p>`,
    opts:[{n:"Tặng quà làm quen",fx:{bac:-b.giftBac},x:`thành: ${t.name} quý ngươi +${b.giftAff}`,go:()=>affAdd(t,S,b.giftAff)},
     {n:"Ra oai phủ đầu",fx:{},x:`thành: ${t.name} sợ ngươi · kèm: ${t.name} oán ngươi`,go:()=>relAdd(S,t,b.ambushRel)},
-    {n:"Đứng xem rồi về",fx:{},x:"không được không mất"}]}},
+    {n:"Đứng xem rồi về",fx:{},x:"không được mất gì"}]}},
  night(w,p){return false}};
 /* 4 HỎA HOẠN LỚN (row 4): a real jtsb fire (careless maid / falling wick / arsonist, the same rule for every cung) spreads in the dry season.
    Reuses jtsb tsbBurn (burn only flammables, Sổ đồ ledger), tsbFireBase dry check, newsAdd, j71 hoahoan stays her merit chance. */
@@ -145,30 +145,30 @@ EVD.hoa={place:w=>{const p=byPid(w.x.who);return p&&p!==S&&typeof palaceOf==="fu
   return{t:"Hỏa hoạn lớn",who:pEmp(),h:`<p>${w.cause}.</p><p>${w.txt||""}</p>`,headArt:typeof tsbArt==="function"?tsbArt("ev-hoa-hoan","Hỏa hoạn"):undefined}},
  scene(w){const b=B().hoa;const p=byPid(w.x.who);if(!p||p===S)return null;return{t:"Đám cháy đêm qua",who:pv(p),h:`<p>Cung ${p.name} còn khói. Nàng đứng giữa đống đồ cháy dở.</p>`,
   opts:[{n:"Mang đồ sang giúp",fx:{bac:-b.helpBac},x:`thành: ${p.name} quý ngươi +${b.helpAff}, Đức +${b.helpDuc}`,go:()=>{affAdd(p,S,b.helpAff);apply({duc:b.helpDuc})}},
-   {n:"Hỏi han vài câu rồi về",fx:{},x:"không được không mất"}]}},
+   {n:"Hỏi han vài câu rồi về",fx:{},x:"không được mất gì"}]}},
  night(w,p){return false}};
 /* 5 THIÊN TAI (row 5): j55 flood / drought whose relief FAILED and Kho lúa is low. Reuses j55 (Hộ bộ roll, Kho lúa), j3 mood, the stipend
    rule (pay cut, same for all), festival gates (yến cancelled). NPCs give or keep by their own silver and traits — the same options as hers. */
 EVD.dis={place:w=>"cnh",
- start(w){const b=B().dis;moodFloor(b.mood);const G=[],K=[];for(const v of liveR()){const k=npcPick(v,[["give",mW(v,"help")*(.3+Math.min(2,(v.bac||0)/100))],["thrift",1],["keep",mW(v,"bribe")*.8]]);
+ start(w){const b=B().dis;moodFloor(b.mood);const G=[],K=[],nw=b.npcW;for(const v of liveR()){const k=npcPick(v,[["give",mW(v,"help")*(nw.base+Math.min(nw.cap,(v.bac||0)/nw.per))],["thrift",1],["keep",mW(v,"bribe")*nw.keep]]);
    if(k==="give"&&(v.bac||0)>=b.give){ap(v,{bac:-b.give,danh:b.giveDanh});v.th=(v.th||0)+b.giveTh;G.push(v)}else if(k==="keep"&&(v.bac||0)>=b.stingyBac){ap(v,{danh:b.stingyDanh});K.push(v)}}
   w.x.G=G.map(v=>v.id);return `Hoàng thượng giảm thiện, bãi yến tiệc; bổng lộc trong cung bớt ${Math.round(b.payCut*10)} phần 10 cho đến khi qua nạn.${G.length?` Quyên bạc cứu đói: ${nmList(G)}.`:""}${K.length?` Bị chê keo kiệt: ${nmList(K)}.`:""}`},
  end(w){if(roll(B().xa.afterDis))worldStart("xa","Qua cơn thiên tai, ban ân điển");return "Nạn đói đã qua, cung cấm thôi giảm thiện."},
  card(w){const b=B().dis;const o=meCons()?[{n:"Quyên bạc cứu đói",fx:{bac:-b.give},x:`thành: Danh +${b.giveDanh}, Thái hậu +${b.giveTh}`,go:()=>apply({danh:b.giveDanh,th:b.giveTh})},
    {n:"Bớt chi dùng trong cung",fx:{},x:`thành: Đức +${b.thrift.duc}`,go:()=>apply(b.thrift)},
-   {n:"Làm như không biết",fx:{},x:(S.bac||0)>=b.stingyBac?`kèm: bị chê keo kiệt, Danh ${b.stingyDanh}`:"không được không mất",go:()=>{if((S.bac||0)>=b.stingyBac)apply({danh:b.stingyDanh})}}]:null;
+   {n:"Làm như không biết",fx:{},x:(S.bac||0)>=b.stingyBac?`kèm: bị chê keo kiệt, Danh ${b.stingyDanh}`:"không được mất gì",go:()=>{if((S.bac||0)>=b.stingyBac)apply({danh:b.stingyDanh})}}]:null;
   return{t:wName(w),who:pEmp(),h:`<p>${w.cause}.</p><p>${w.txt||""}</p>`,opts:o||undefined}},
  night(w,p){return false},feast:1,pay:1};
 /* 6 ÔN DỊCH (row 6): a famine that does not lift turns to plague. Reuses j13 illness rulebook (catchIll, ILL cont, illMonthP stages,
    careOdds, Thái y), nightCh (thị tẩm halted). Everyone may close her gate (the same option, NPCs by mindPick). */
 EVD.dich={place:w=>"tyv",
- start(w){const b=B().dich;moodFloor(2);const C=[];for(const v of liveR()){const k=npcPick(v,[["safe",mW(v,"flee")*(v.bac>=b.safeBac?1:.2)],["go",mW(v,"social")]]);if(k==="safe"&&v.bac>=b.safeBac){ap(v,{bac:-b.safeBac});v.wSafe=w.id;C.push(v)}}
+ start(w){const b=B().dich;moodFloor(b.mood);const C=[];for(const v of liveR()){const k=npcPick(v,[["safe",mW(v,"flee")*(v.bac>=b.safeBac?1:b.poorW)],["go",mW(v,"social")]]);if(k==="safe"&&v.bac>=b.safeBac){ap(v,{bac:-b.safeBac});v.wSafe=w.id;C.push(v)}}
   return `Dịch lan từ ngoài thành vào cung: cửa cung đóng, thị tẩm tạm dừng, Thái y viện ngày đêm sắc thuốc.${C.length?` Đóng cửa cung, xông ngải: ${nmList(C)}.`:""}`},
  tick(w){const b=B().dich;let n=0;for(const p of [S].concat(liveR())){if(p.out||p.dead||p.alive===false)continue;const safe=(p===S?S.wSafe:p.wSafe)===w.id;
    if(roll(b.catch*(safe?b.safeMul:1))){const r=catchIll(p,b.ill);if(p===S&&r)log(r);n++}}if(n)WW.stat.ill=(WW.stat.ill||0)+n},
  end(w){if(roll(B().xa.afterDis))worldStart("xa","Dịch đã qua, ban ân điển");return "Dịch đã lui, cửa cung mở lại."},
  card(w){const b=B().dich;return{t:"Ôn dịch",who:pEmp(),h:`<p>${w.cause}.</p><p>${w.txt||""}</p>`,
-  opts:[{n:"Đóng cửa cung, xông ngải",fx:{bac:-b.safeBac},x:"thành: khó nhiễm bệnh hơn cho đến khi hết dịch",go:()=>{S.wSafe=w.id}},{n:"Vẫn đi lại như thường",fx:{},x:"kèm: dễ nhiễm bệnh hơn"}]}},
+  opts:[{n:"Đóng cửa cung, xông ngải",fx:{bac:-b.safeBac},x:"thành: khó nhiễm bệnh hơn cho đến khi hết dịch",go:()=>{S.wSafe=w.id}},{n:"Vẫn đi lại như thường",fx:{},x:"kèm: có thể bị nhiễm bệnh"}]}},
  night(w,p){return true}};
 /* 7 SỨ ĐOÀN (row 1): j55 "cong" (Sứ thần các nước vào triều cống) while Biên cương is strong. Reuses j55 cong, FEST/jact2 place
    (Cần Chính điện banquet), the j67 s_su / jrd_nc arcs stay as they are. Invited consorts (rank >= BAL) may show a talent. */
@@ -181,7 +181,7 @@ EVD.su={place:w=>"thu",
  scene(w){const b=B().su;const ok=meCons()&&rkOf(S)>=b.rank;const o=od(b.show[0]+(S.tai||0)/b.show[1]);
   return{t:"Yến tiếp sứ",who:pEmp(),h:`<p>Sứ thần dâng lễ vật lạ, bá quan ngồi kín hai bên.</p>${ok?"":`<p class="past">Phẩm của ngươi chưa được dự yến; chỉ đứng xa mà xem.</p>`}`,
    opts:ok?[{n:"Dâng một khúc đàn trong yến",fx:{},x:`${word(o)} · thành: Sủng +${b.showSung}, Danh +${b.showDanh} · hỏng: Danh ${b.failDanh}`,go:()=>{if(roll(o))apply({sung:b.showSung,danh:b.showDanh});else apply({danh:b.failDanh})}},
-    {n:"Ngồi yên giữ lễ",fx:{},x:"không được không mất"}]:[{n:"Đứng xem rồi về",fx:{},x:"không được không mất"}]}},
+    {n:"Ngồi yên giữ lễ",fx:{},x:"không được mất gì"}]:[{n:"Đứng xem rồi về",fx:{},x:"không được mất gì"}]}},
  night(w,p){return false}};
 /* 8 ĐẠI THỌ (row 3): the Emperor's 40/50/60… or Thái hậu's 60/70/80 birthday (j71 Tiết Vạn thọ / Thánh thọ days). Reuses FEST days,
    j3 mood, j55 Kho lúa. Every consort gives a gift by her own silver (NPCs) or by her choice (her). */
@@ -250,7 +250,7 @@ try{if(typeof MF7!=="undefined"&&MF7.hoahoan){const H=MF7.hoahoan,w0=H.w;const s
 function wPull(){const W=S.where;for(const v of liveR()){if(v.confined||v.coop)continue;const P=worldPlanW(v).place;const cur=W[v.id];
   if(cur&&P[cur]===0){W[v.id]=palaceOf(v);continue}
   const L=Object.entries(P).filter(([k,m])=>m>1&&(k!=="kn"||(typeof qOn==="function"&&qOn()&&!v.queen)));if(!L.length)continue;
-  const [k,m]=L.sort((a,b)=>b[1]-a[1])[0];if(roll(Math.min(80,B().pull*(m-1)))){try{if(typeof accessOf==="function"&&!accessOf(v,k).ok)continue}catch(e){}W[v.id]=k}}}
+  const [k,m]=L.sort((a,b)=>b[1]-a[1])[0];if(roll(Math.min(B().pullMax,B().pull*(m-1)))){try{if(typeof accessOf==="function"&&!accessOf(v,k).ok)continue}catch(e){}W[v.id]=k}}}
 /* NO Dư đồ "!" for world events (owner OD 17/11 ~14:30Z: "sự kiện chung chỉ dùng khung giữa màn hình, Dư đồ chỉ cho chuyện của người").
    A scene at a place shows only as people being there (AG-ALL day plan reads worldPlanW place / force). */
 /* ---------- triggers (real causes) ---------- */
@@ -308,7 +308,9 @@ function worldTick(){if(!S||S.dead||!B().on)return;const z=wZ();if(host()){WW.in
    from) and at the end (what came of it). One per player per window (S.wwSeen / S.wwEnd), guest included (render hook). */
 function startCard(w){const E=EVD[w.k];let m=null;try{m=E.card(w)}catch(e){wErr("card "+w.k,e)}
  if(m&&E.scene&&!(m.opts&&m.opts.length)&&!(typeof isSrv==="function"&&isSrv())){let sc=null;try{sc=E.scene(w)}catch(e){wErr("scene "+w.k,e)}
-  if(sc&&sc.opts&&sc.opts.length){m.h=(m.h||"")+(sc.h||"");m.opts=sc.opts;if(!m.who&&sc.who)m.who=sc.who}}return m}
+  if(sc&&sc.opts&&sc.opts.length){m.h=(m.h||"")+(sc.h||"");m.opts=sc.opts;if(!m.who&&sc.who)m.who=sc.who}}
+ /* kit line format "word · tốn: … · thành: …" (j0 kitParse): a sure option leads with "Chắc chắn" (never shown) so its first label (thành / kèm) is read */
+ if(m&&m.opts)for(const o of m.opts)if(o&&typeof o.x==="string"&&/^(thành|kèm|hỏng|không được)/.test(o.x))o.x="Chắc chắn · "+o.x;return m}
 function worldShow(){if(!S||S.dead)return;S.wwSeen=S.wwSeen||{};S.wwEnd=S.wwEnd||{};const A=worldWin(),z=wZ();
  for(const h of (z.H||[])){if(h.id==null||!h.end||S.wwEnd[h.id]||!S.wwSeen[h.id])continue;S.wwEnd[h.id]=1;Q.push({t:h.n||"Tin trong cung",who:pEmp(),h:`<p>${h.end}</p>`})}
  for(const w of A){if(S.wwSeen[w.id])continue;S.wwSeen[w.id]=1;const m=startCard(w);if(m){if(!m.who)m.who=pEmp();if(!m.opts)delete m.opts;Q.push(m)}}
