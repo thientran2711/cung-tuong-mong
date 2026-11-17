@@ -1,7 +1,7 @@
 # JOB for a generation sub-agent (consort-ty batch, 2k figure repaint). Follow EXACTLY. Be terse; do not talk to the owner.
 Repo: /home/user/cung-tuong-mong (cwd for scripts: /home/user/cung-tuong-mong/dev/handover/reports/fig-cutout-clean = R). Tools dir R/batch-consort-ty-tools (= P): prompt.py, proc.sh, sheet.py, progress/. Needs Magnific MCP tools: images_generate, creations_upload_image, creations_wait (load via ToolSearch select:... if deferred).
 Folder for ALL Magnific calls: folderReference ba4aecfe-efce-47e2-b53f-30d292091886. Face refs (identifiers): N2HYqYa6D9 bxVgMSX5Y2 dtPf4EDXSL eIyaPEVdqL.
-You get a LIST of lines "idx key" (idx = gesture index; key e.g. consort-c02-ty3-a18). Work in batches of 8 files (lead's CONTEXT DIET: 8 images_generate calls in ONE message; if throttled drop to 6). Per batch:
+You get a LIST of lines "idx key" (idx = gesture index; key e.g. consort-c02-ty3-a18). Work in batches of 5 files (LEAD 17/11: Magnific slots exhausted: AT MOST 5 images_generate at once in total; on throttle wait and retry). Per batch:
 1. For each key: creations_upload_image url=https://ctm-img.victoria-tntt.workers.dev/img/fig-<key>.webp fileName=fig-<key>.webp folderReference=... -> old-ref id. (all uploads in parallel in one message.)
 2. Prompt = output of `python3 P/prompt.py <idx> <age>` (add a third arg `rich` for keys with -ty2- or -ty3-: python3 P/prompt.py <idx> <age> rich) where age = a18/a26/a36/a51 from the key suffix. Paste it verbatim as the prompt.
 3. images_generate: mode gpt-2-6, width 1024, height 2048, resolution 2k (OWNER 17/11: 2k only, NEVER 4k), folderReference, extraSettings {"transparentBackground": true} (MANDATORY), references (type image):
