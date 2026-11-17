@@ -156,6 +156,8 @@ RUNNING C sessions (12): lead #6 session_011xDdVS87fDNLJMJGzeiVWL + W2b session_
 
 - 04:57Z W7b maid standard v4b 8e61380b2 (rank 3 apricot opaque over-robe; rank 1 light embroidery) → C looked OK → waits owner morning. W3c rolled over → W3d session_011xDdVNgD6LSAWCKxGvMzYP (opened by lead #6) on consort standard v4.
 
+- 05:02Z W3d consort v4 (1e2ef578) looked: flowing + phi bạch OK, but t3–t7 same cut → v5 ordered (distinct Hán cut per tier). W3c (still alive, double v4 unpushed) told to stop; lead #6 to archive it.
+
 ## SESSION 12 LOG
 - 04:40Z ROLLOVER at ctx ~26%. 04:33Z: W6b + W5c plain-maid repaint done (own original looks); drift lists parked for post-standard pass. Relayed owner 04:48Z (player 4 figures → 36 consorts; mama from maid figures) to lead #6: mama new files paused, hero grid report asked.
 - 03:33Z start (depth 6/8, START_CTX ~5% → roll at 30%). s11 told to stop + ARCHIVED; s11 trig disabled; own wake trig_0117UxAwzdJZpDAAmy4cTHSM (:33). All C sessions told C = s12. rank-sample-v2 shown to owner.
