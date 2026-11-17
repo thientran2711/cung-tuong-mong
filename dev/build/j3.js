@@ -67,14 +67,14 @@ PEND.vase=()=>({who:pMaid(),t:`${S.maid.name} lỡ tay đánh vỡ chén ngọc 
 PEND.coldletter=p=>{const f=RV(p.f),v=p.v==null?null:RV(p.v);if(!f)return null;return{who:pv(f),t:`${f.name} từ lãnh cung lén gửi thư, xin chút bạc chạy thuốc.`,o:[
     {n:"Giúp nàng",fx:{bac:-30,duc:5},x:v?`${v.name} nghe chuyện, mến ngươi hơn`:"",go:()=>{if(v)v.rel+=20}},{n:"Làm ngơ",fx:{duc:-2}}]}};
 PEND.embezzle=()=>{const q=rivals[0];return{who:pEunOf(q),t:`Một thái giám lén mang đến sổ sách chứng Hoàng hậu ${q.name} biển thủ bạc nội khố, đòi 80 lượng.`,o:[
-    {n:"Mua lấy",fx:{bac:-80},x:"chứng cứ Hoàng hậu +2",go:()=>{evStory(q,2,"biển thủ bạc nội khố")}},{n:"Đuổi hắn đi",fx:{}}]}};
+    {n:"Mua lấy",fx:{bac:-80},x:`chứng cứ Hoàng hậu ${balSg(BAL.eff.j3.evGo)}`,go:()=>{evStory(q,BAL.eff.j3.evGo,"biển thủ bạc nội khố")}},{n:"Đuổi hắn đi",fx:{}}]}};
 PEND.tuyen=()=>({who:pEmp(),t:"Hoàng thượng hỏi ý ngươi: năm nay nên tuyển thêm tú nữ hay không.",o:[
     {n:"Tâu nên tuyển ít",fx:{danh:4,sung:-3}},{n:"Tâu nên tuyển nhiều",fx:{sung:5,duc:-3},x:"tháng sau thêm một tú nữ",go:()=>{S.moreRivals=1}}]});
 PEND.thbenh=()=>({who:pTH(),t:"Thái hậu lâm bệnh, Đức Thọ cung đóng cửa không tiếp khách.",o:[
     {n:"Hầu bệnh cả tháng",fx:{suc:-25,th:15,duc:4}},{n:"Gửi lễ vật vấn an",fx:{bac:-30,th:4}}]});
 PEND.loveletter=p=>{const v=RV(p.v);if(!v)return null;return{who:pSpy(),t:`Tai mắt nhặt được thư tình ${v.name} viết cho một thị vệ.`,o:[
     {n:"Trình lên Hoàng thượng",fx:{},x:`${word(50)} · thành: ${v.name} thất thế · hỏng: Danh -8`,go:()=>{if(roll(50))fall(v,"bị bắt được thư tư tình với thị vệ");else{apply({danh:-8});log(`<span class="r">Hoàng thượng cho là thư giả, trách ngươi gây chuyện.</span> Danh -8.`)}}},
-    {n:"Cất giữ làm con tin",fx:{},x:`chứng cứ ${v.name} +2`,go:()=>{evStory(v,2,"viết thư tình cho một thị vệ")}}]}};
+    {n:"Cất giữ làm con tin",fx:{},x:`chứng cứ ${v.name} ${balSg(BAL.eff.j3.evGo_2)}`,go:()=>{evStory(v,BAL.eff.j3.evGo_2,"viết thư tình cho một thị vệ")}}]}};
 function makeDil(){const pool=liveRivals(false),L=[];
   if(qOn())L.push(()=>mkP("vase"));
   if(rivals.some(v=>v.alive&&v.out))L.push(()=>{const f=pick(rivals.filter(v=>v.alive&&v.out));const v=pool.length?pick(pool):null;return mkP("coldletter",{f:f.id,v:v?v.id:null})});

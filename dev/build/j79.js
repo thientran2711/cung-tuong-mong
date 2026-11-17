@@ -1007,7 +1007,7 @@ function kitTgt(){try{if(typeof J78==="object"&&J78.cardV)return J78.cardV}catch
   return[`Hoàng thượng thương ${k.name} -35, Danh nàng -10, nàng bị phạt${k.heir?`, ${k.name} bị phế ngôi Thái tử`:""}`,fail("kframe")]});
  D("trip",v=>[`nàng vấp ngã: Danh nàng -3${v&&v.preg&&!v.hidden?` · nàng động thai: ${chanceW(25)}`:""}`,fail("trip")]);
  D("pushp",v=>[`nàng rơi xuống hồ sen: Sức nàng -25${v&&v.preg&&!v.hidden?` · nàng sảy thai: ${chanceW(60)}`:""}`,fail("pushp")]);
- if(typeof actLineRaw==="function"){const a0=actLineRaw;actLineRaw=function(k,w,c){let r=a0.apply(this,arguments);try{if(typeof CAUGHT==="string"&&String(r).includes(CAUGHT)){const v=kitTgt();const t=v&&kaCaughtTxt(v,k);r=String(r).split(CAUGHT).join(t||"kèm: bị người của nàng phát giác, nàng nắm 2 chứng cứ")}}catch(e){}return r}}})();
+ if(typeof actLineRaw==="function"){const a0=actLineRaw;actLineRaw=function(k,w,c){let r=a0.apply(this,arguments);try{const CW=typeof caughtW==="function"?caughtW():null;if(CW&&String(r).includes(CW)){/* previews: caught */const v=kitTgt();const t=v&&kaCaughtTxt(v,k);r=String(r).split(CW).join(t||`kèm: bị người của nàng phát giác, nàng nắm ${balAb(BAL.eff.j8.evCaught)} chứng cứ`)}}catch(e){}return r}}})();
 /* ---- TAB GROUPS (owner 11/14: 8 bottom tabs): Hậu cung = Phi tần · Giao tình · Phe phái; Mệnh truyện = Mệnh truyện · Việc nhờ · Sổ ghi.
    The game's own tab keys stay (rv, rel, fac, story, nho/quest, log), so every "open the Sổ ghi" link keeps working; the bar shows one button per
    group and the panel gets the kit SUB-TABS (segmented control .ksub); the last sub-tab of each group is remembered. Servant mode keeps its tabs. */

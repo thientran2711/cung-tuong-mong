@@ -244,7 +244,7 @@ function sgJob(p){if(!p||typeof S==="undefined"||!S)return null;if(!p.j)p.j="act
   else{J.pay=sgPopPay(p.pi,BAL.actK);J.run=m=>{SG.mod=m&&m.step?m:null;let r="";try{r=runAct(S,v,k)||""}finally{SG.mod=null}if(r)log(`${a.n}: ${r}`);render()}}
   return J}
  if(p.j==="over"){const G=SG.K.over,b=40+S.mat*6;
-  return{gk:"over",G,t:G.t,v:{},name:"",art:"Nghe lén",ask:G.ask(),cost:"không tốn bạc",p0:()=>od(b),line:w=>`Nghe lén câu chuyện · ${w} · biết 1 điều thật về nàng · chứng cứ +1 · tốn: không tốn bạc`,pay:sgPopPay(p.pi,1),
+  return{gk:"over",G,t:G.t,v:{},name:"",art:"Nghe lén",ask:G.ask(),cost:"không tốn bạc",p0:()=>od(b),line:w=>`Nghe lén câu chuyện · ${w} · biết 1 điều thật về nàng · chứng cứ ${balSg(BAL.eff.j78.evTop)} · tốn: không tốn bạc`,pay:sgPopPay(p.pi,1),
    run:m=>{SG.mod=m&&m.step?m:null;let r="";try{r=overhear(S.place)||""}finally{SG.mod=null}if(r)log(`Nghe lén câu chuyện: ${r}`);render()}}}
  if(p.j==="serv"){const s=servById(p.sid),G=SG.K.serv;if(!s)return null;const o=ownerOf(s),c=sgServCost(s);if(!o||o===S)return null;
   return{gk:"serv",G,t:G.t,v:{maid:s},name:s.name,art:"Mua chuộc",ask:`Mua chuộc ${s.name}, người hầu của ${NM(o)}: tự mặc cả, hay giao cho người làm?`,cost:`${c} bạc`,p0:()=>sgServOdds(s),

@@ -42,6 +42,8 @@ function index(B){
   if(n.type==='FunctionDeclaration'&&n.id)(FN[n.id.name]=FN[n.id.name]||[]).push({m,node:n});
   if(n.type==='VariableDeclarator'&&n.id.type==='Identifier'&&isFn(n.init))(FN[n.id.name]=FN[n.id.name]||[]).push({m,node:n.init});
   if(n.type==='AssignmentExpression'&&n.left.type==='Identifier'&&isFn(n.right))(FN[n.left.name]=FN[n.left.name]||[]).push({m,node:n.right});
+  /* a handler kept on a table (P2H.briber=m=>{…}, review/one-core-dup3 r1): named by its property, for a "previews: briber" comment */
+  if(n.type==='AssignmentExpression'&&n.left.type==='MemberExpression'&&!n.left.computed&&isFn(n.right))(FN[n.left.property.name]=FN[n.left.property.name]||[]).push({m,node:n.right});
   if(n.type==='CallExpression'&&n.callee.type==='Identifier'&&n.callee.name==='A'&&n.arguments.length>=3){const k=litOf(n.arguments[0]);if(k)addL(k,m,n)}
   if(n.type==='AssignmentExpression'&&n.left.type==='MemberExpression'&&n.left.object.type==='Identifier'&&n.left.object.name==='ACT'){const k=n.left.computed?litOf(n.left.property):n.left.property.name;if(k)addL(k,m,n)}
   if(n.type==='IfStatement'||n.type==='ConditionalExpression')for(const k of eqLit(n.test))addL(k,m,n.consequent,'branch');
@@ -136,7 +138,10 @@ function bind(B){const idx=index(B);const {mods,FN,LINK,NOBJ,reads,prints}=idx;
    if(x.type==='ArrayExpression'&&x.elements.length===2&&st.slice(0,i).some(y=>y.type==='AssignmentExpression'&&/^AOUT\b/.test(src(P.m,y.left))||y.type==='CallExpression'&&y.arguments[0]&&src(P.m,y.callee)==='Object.assign'&&src(P.m,y.arguments[0])==='AOUT')){const k=x.elements.indexOf(child);if(k>=0)return k?'lose':'win'}
    if(x.type==='Property'&&!x.computed&&x.value===child&&/^(wt|lt)$/.test(x.key.name||''))return x.key.name==='wt'?'win':'lose'}return null};
  const isRoll=(m,t)=>/\broll\(/.test(src(m,t));const neg=(m,t)=>/^\s*!/.test(src(m,t));
- const readBranch=r=>{const st=r.stack;for(let i=st.length-1;i>=0;i--){const x=st[i],child=st[i+1]||r.n;
+ /* a helper whose roll is the OTHER side's (caught(): the target sees the act) says so with a comment "roll-side: catch" in its body: its reads have no
+    win / lose branch of the act (review/one-core-dup3 r1: jlost AOUT lose text "bị bắt: nàng nắm N chứng cứ" prints caught()'s BAL.eff.j8.evCaught) */
+ const catchSide=r=>{const f=r.stack.find(isFn);return !!f&&(r.m.comments||[]).some(c=>c.start>=f.start&&c.end<=f.end&&/roll-side:\s*catch/.test(c.value))};
+ const readBranch=r=>{if(catchSide(r))return null;const st=r.stack;for(let i=st.length-1;i>=0;i--){const x=st[i],child=st[i+1]||r.n;
    if(x.type==='Property'&&!x.computed&&x.value===child&&isFn(child)){const k=x.key.name||'';if(k==='ok')return 'win';if(/^(no|fail|bad)$/.test(k))return 'lose'}
    if((x.type==='IfStatement'||x.type==='ConditionalExpression')&&isRoll(r.m,x.test)&&child!==x.test){const w=(child===x.consequent)!==neg(r.m,x.test);return w?'win':'lose'}
    if((x.type==='BlockStatement'||x.type==='Program')&&x.body.includes(child)){const j=x.body.indexOf(child);for(let q=j-1;q>=0;q--){const y=x.body[q];

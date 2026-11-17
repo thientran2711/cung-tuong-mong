@@ -44,7 +44,7 @@ function fireServ(p,s,quietly){const me=p===S;const cost=20;if(p.bac<cost)return
  p.staff.splice(p.staff.indexOf(s),1);const n=takeFromPool(s.role);if(n)p.staff.push(n);
  /* he may sell what he knows: by trait, loyalty and how he was treated */
  const sell=cl(qv({tham:55,chuyen:40,lanh:30,nhat:12,trung:4},s,25)+(harsh?15:0)-Math.round(s.loyal/3)+((p.schemes||0)>0?10:0),0,90);let leak="";
- if(roll(sell)){const foes=others(p).filter(x=>x!==p&&(x===S||x.alive)&&danger(x,p)>=20);const f=foes.length?pick(foes):null;if(f){evA(f,p,1+((p.schemes||0)>2?1:0));leak=f===S?` ${s.name} tìm đến cung ngươi, kể chuyện của ${p.name}: chứng cứ +1.`:me?" Có tin hắn đã bán chuyện của ngươi cho người khác.":""}}
+ if(roll(sell)){const foes=others(p).filter(x=>x!==p&&(x===S||x.alive)&&danger(x,p)>=20);const f=foes.length?pick(foes):null;if(f){const g=BAL.eff.j29.evFireServ+((p.schemes||0)>2?BAL.eff.j29.evFireServ_2:0);evA(f,p,g);leak=f===S?` ${s.name} tìm đến cung ngươi, kể chuyện của ${p.name}: chứng cứ ${balSg(g)}.`:me?" Có tin hắn đã bán chuyện của ngươi cho người khác.":""}}
  if(!me&&roll(25))S.news&&newsAdd(p,"fire",`${p.name} đuổi ${s.name} khỏi cung`,false);
  return me?`Trả ${s.name} về Nội vụ phủ. Bạc -${cost}, Danh -${harsh?3:1}${harsh?" (tiếng khắc nghiệt)":""}. ${n?`Nội vụ phủ đưa ${n.name} đến thay (nết chưa rõ).`:"Nội vụ phủ chưa có người thay."}${leak} `:leak}
 (function(){const s0=servAct;servAct=function(a,id){if(a==="doi"){const s=servById(id);if(!s||ownerOf(s)!==S||S.dead||Q.length||S.bac<20)return;log(fireServ(S,s));render();return}return s0.apply(this,arguments)}})();

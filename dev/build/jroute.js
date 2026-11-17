@@ -87,7 +87,7 @@ function rtTtCards(){const T=rtS(),A=[],tt=T.tt,ducK=S.duc>=BAL.route.guiltDuc?"
   if(tt.st===2||!night||!sp||sp.k==="tyv"||sp.k==="tn"){const o=sp?rtSeeO(sp.k):30;
    A.push(rtCard({id:"tt2",n:`Hẹn gặp lén ${rtMnm(m)}`,t:sp?`Buổi này ${sp.why}.`:`Buổi này không có chỗ nào gặp ${rtMnm(m)} được.`,art:RT_ART.hen,c:{...BAL.route.meet},o,k:BAL.route.k.tt2,
     need:[[sp?`y ở chỗ hẹn được (${rtPlace(sp.k)})`:"y ở chỗ hẹn được buổi này (giả sơn Ngự hoa viên buổi tối, Thái y viện, cung ngươi khi truyền thái y / họa sư)",!!sp],[`kẻ hầu ngươi tin cẩn canh cửa (lòng ${balAb(BAL.loy.close)}+, Chủ tin ${balAb(BAL.tinLv.watch)}+)${w?": "+w.name:""}`,!!w]],
-    x:`tình ý +12 · Sức +${BAL.route.meetG.suc}`,lx:`có người thấy · chứng cứ về ngươi +2 · Lời ra tiếng vào +20`,kem:[`Lời ra tiếng vào +${Math.round((sp?RTC.heat[sp.k]||14:14)*rtDf().h)}`,sp&&rtWit(sp.k).length?`đang có ${rtWit(sp.k).length} phi tần ở ${rtPlace(sp.k)}`:"",ducK].filter(Boolean).join(" · "),
+    x:`tình ý +12 · Sức +${BAL.route.meetG.suc}`,lx:`có người thấy · chứng cứ về ngươi ${balSg(BAL.eff.jroute.evRtSeen[1])} · Lời ra tiếng vào +20`,kem:[`Lời ra tiếng vào +${Math.round((sp?RTC.heat[sp.k]||14:14)*rtDf().h)}`,sp&&rtWit(sp.k).length?`đang có ${rtWit(sp.k).length} phi tần ở ${rtPlace(sp.k)}`:"",ducK].filter(Boolean).join(" · "),
     go:()=>{m.tinh=(m.tinh||0)+12;tt.meet++;apply(BAL.route.meetG);rtHeat(RTC.heat[sp.k]||14);rtEmo("vui",35,`gặp ${m.name}`);if(tt.meet>=2&&(m.tinh||0)>=60)tt.st=3;rtStat("tt_meet");log(`Ngươi gặp ${rtMnm(m)} ở ${rtPlace(sp.k)}. Đôi ba câu, rồi mỗi người một ngả.`)},
     fail:()=>{rtStat("tt_seen");rtSeen(m,sp?sp.k:"vuon","gap")}}))}
   if(tt.st>=3){const sp2=night&&sp&&(sp.k==="vuon"||sp.k==="lc"||sp.k==="home")?sp:null;const o=sp2?rtSeeO(sp2.k,8):25;

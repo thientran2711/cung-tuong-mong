@@ -798,7 +798,7 @@ const isSrvMe=()=>typeof isSrv==="function"&&isSrv();
 P2H.bribe=m=>{if(S.dead||!isSrvMe())return p2say("briber",{rid:m.rid,no:1});const mis=srvM(),B=BAL.coopBribe,nm=esc(m.who||friendName()),mn=esc(mis?mis.name:"chủ nhân");
  pushModal({act:1,t:"Bạc lạ",h:`<p>Một thái giám của <b>${nm}</b> chặn ngươi ở hành lang, dúi vào tay ngươi một túi bạc: “Chủ tử nhà ta muốn biết chuyện trong cung ${mn}.”</p>`,opts:[
   {n:"Nhận bạc, làm tai mắt",fx:{bac:+m.pay||B.pay},x:cnvSpyX(mis),go:()=>{S.srv.spyFor=fp();p2say("briber",{rid:m.rid,ok:1})}},
-  {n:"Từ chối, bẩm chủ",fx:{tin:B.tin},x:`${mn} nắm 1 chứng cứ của ${nm}`,go:()=>p2say("briber",{rid:m.rid,told:1})},
+  {n:"Từ chối, bẩm chủ",fx:{tin:B.tin},/* previews: briber (P2H.briber, told) */x:`${mn} nắm ${balAb(BAL.eff.jcoopworld.evBriber)} chứng cứ của ${nm}`,go:()=>p2say("briber",{rid:m.rid,told:1})},
   {n:"Từ chối, im lặng",fx:{},x:"trả lại bạc",go:()=>p2say("briber",{rid:m.rid})}]});showModal();render()};
 P2H.briber=m=>{const a=(CW.brb||{})[m.rid];if(!a)return;delete CW.brb[m.rid];if(S.dead)return;const s=fSrvE(),o=RV(a.o),B=BAL.coopBribe,nm=esc(friendName()),on=esc(o?o.name:"cung khác");let h="";
  if(m.no)h=`<p><b>${nm}</b> nay không còn hầu ở cung ${on}.</p>`;

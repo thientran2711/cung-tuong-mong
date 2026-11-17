@@ -364,7 +364,7 @@ ARC67.tt_mat=arcFx("tt_mat",{o:"tt",t:"Mật ước với Hoàng hậu",w:"hh",s
   {n:"Trình thư lên Hoàng thượng",e:["win2","lose"],rt:"Hoàng thượng nổi giận với họ ngoại của Hoàng hậu.",rf:"Hoàng thượng cho là ngươi vu cáo, cả cha cũng bị trách."},
   {n:"Đốt hết, đứng ngoài",e:"mid",lx:"bỏ lỡ thời cơ (thế lực nhà -8)",rt:"Lửa liếm sạch mấy bức thư."}]}},
  E:{win:{tag:"Hoàng hậu nợ ngươi",w:"hh",t:"Hoàng hậu {hh} buộc phải che chở ngươi. Nàng không còn cản bước ngươi, còn nói tốt cho ngươi trước Thái hậu."},
-  win2:{tag:"Lật mật ước, Trung cung lung lay",w:"emp",t:"Hoàng thượng trách Hoàng hậu kết bè với ngoại thần, tước quyền quản lục cung của nàng một thời gian. Ngươi được ngài tin là người trung thực.",go:()=>{const q=rivals[0];if(q&&q.queen){evStory(q,2,"kết bè với ngoại thần");return `Chứng cứ về Hoàng hậu ${q.name} +2.`}return""}},
+  win2:{tag:"Lật mật ước, Trung cung lung lay",w:"emp",t:"Hoàng thượng trách Hoàng hậu kết bè với ngoại thần, tước quyền quản lục cung của nàng một thời gian. Ngươi được ngài tin là người trung thực.",go:()=>{const q=rivals[0];if(q&&q.queen){evStory(q,BAL.eff.j67.evGo_2,"kết bè với ngoại thần");return `Chứng cứ về Hoàng hậu ${q.name} ${balSg(BAL.eff.j67.evGo_2)}.`}return""}},
   mid:{tag:"Mật ước chìm xuống",t:"Không ai nhắc lại mật ước. Cha giữ được mình, Hoàng hậu thôi để ý ngươi."},
   lose:{tag:"Bị coi là vu cáo",w:"emp",t:"Hoàng thượng cho rằng ngươi vu cáo Trung cung. Cha bị trách, ngươi bị lạnh nhạt.",go:(_A,_ok,G)=>e67dad(G[0])}}});
 /* ================= ĐẠI TƯỚNG QUÂN ================= */
@@ -711,7 +711,7 @@ ARC67.cn_ban=arcFx("cn_ban",{o:"cn",t:"Tri kỷ ở Tân Giả khố",w:"maid",s
   {n:"Đưa Tố Nga ra làm chứng trước Thái hậu",e:["win","lose"],rt:"Thái hậu nổi giận, cho tra đến cùng.",rf:"Lời một tội nô không ai tin, ngươi bị trách."},
   {n:"Giữ bí mật, dùng Tố Nga làm tai mắt",e:["win2","mid"],rt:"Tố Nga thành tai mắt tin cẩn nhất của ngươi.",rf:"Tố Nga sợ hãi xin rời cung."},
   {n:"Xin cho Tố Nga xuất cung về quê",e:"mid",lx:"mất một nhân chứng",rt:"Tố Nga ra cung, lạy ngươi ba lạy."}]}},
- E:{win:{tag:"Vạch tội ác cái giếng",w:"th",t:"Thái hậu tra ra kẻ bỏ thuốc. Ngươi được khen là người có nghĩa, Thái hậu tin ngươi hơn hẳn.",go:()=>{const q=rivals[0];if(qOn()){evStory(q,1,"dính líu vụ bỏ thuốc ở giếng");return `Chứng cứ về Hoàng hậu ${q.name} +1.`}return""}},
+ E:{win:{tag:"Vạch tội ác cái giếng",w:"th",t:"Thái hậu tra ra kẻ bỏ thuốc. Ngươi được khen là người có nghĩa, Thái hậu tin ngươi hơn hẳn.",go:()=>{const q=rivals[0];if(qOn()){evStory(q,BAL.eff.j67.evGo_3,"dính líu vụ bỏ thuốc ở giếng");return `Chứng cứ về Hoàng hậu ${q.name} ${balSg(BAL.eff.j67.evGo_3)}.`}return""}},
   win2:{tag:"Tai mắt trong bóng tối",t:"Tố Nga hầu bên ngươi, biết hết đường đi lối lại của Càn Ninh cung. Ngươi nghe được những gì người khác không nghe."},
   mid:{tag:"Tình bạn giữ trọn",t:"Tố Nga thoát khổ. Bí mật ngủ yên, ngươi giữ được lòng mình."},
   lose:{tag:"Bị cho là vu cáo",t:"Lời tố của Tố Nga bị bác. Ngươi mang tiếng vu cáo, Hoàng hậu càng ghét ngươi."}}});

@@ -62,6 +62,9 @@ const JOIN_PAT={
  /* rtk = a typed khắc cost of a «Lối riêng» card (jroute rtCard({…k:N}) / step("x",{…k:N}) / mk("x",{…k:N}); all read BAL.route.k since review/one-core-dup3) */
  rtk:/(?:\brtCard\(|\b(?:step|mk)\([^,()]*,)\s*\{(?:[^{}]|\{[^{}]*\})*?(?<![\w$.])k\s*:\s*\d/g,
  h96:/\badj96\(\s*\{[^{}]*?[:?]\s*[+-]?\d/g,
+ /* evn = a typed chứng cứ amount the amt kind cannot see (review/one-core-dup3 r1): evStory(t,N,"why") — the amount is the 2nd argument, a why-text follows —
+    and an evA amount that is an expression starting with a number (evA(f,p,1+(…?1:0))). 0 is not an amount (evA(v,u,0) = a mark). All read BAL.eff since r1. */
+ evn:/\b(?:evStory\(\s*(?:[^(),]|\([^()]*\))+,|evA\(\s*(?:[^(),]|\([^()]*\))+,\s*(?:[^(),]|\([^()]*\))+,)\s*[+-]?(?!0(?![.\d]))\d/g,
  ladder:new RegExp('(?:[\\w$.\\])]+\\s*(?:>=|>|<=|<)\\s*'+NUMV+'\\s*\\?\\s*(?:\\[[^\\[\\]]*\\]|'+NUMV+'|""|``)\\s*:\\s*){2,}(?:\\[[^\\[\\]]*\\]|'+NUMV+'|""|``)','g'),
 };
 const TXT_PAT={

@@ -76,7 +76,7 @@ function fall(p,why){if(p===S){if(ACTX.a&&ACTX.a!==S)S.framedBy=key(ACTX.a);if(S
 /* a fabricated charge that sticks */
 function framed(p,why){if(ACTX.a&&ACTX.a!==p)p.framedBy=key(ACTX.a);const d=Math.round(12*(DG()?1.3:1));ap(p,{danh:-d,sung:-10});punish(p,why,2);return d}
 /* the target's people notice first: same detection for everyone */
-function caught(a,t,ps,desc){if(!roll(cl(oSee(t,ps)-4*(facN(a)-1),5,95)))return"";evA(t,a,BAL.eff.j8.evCaught);relAdd(a,t,BAL.eff.j8.caught);
+function caught(a,t,ps,desc){/* roll-side: catch (the roll is the target seeing the act: a "kèm" of every scheme, not its win) */if(!roll(cl(oSee(t,ps)-4*(facN(a)-1),5,95)))return"";evA(t,a,BAL.eff.j8.evCaught);relAdd(a,t,BAL.eff.j8.caught);
  if(t===S)return `${ps&&(S.doctor||S.arts.y>=2)?"Ngươi nhận ra điều lạ":"Tai mắt báo"}: ${a.name} định ${desc}. Ngươi chặn kịp và nắm ${balAb(BAL.eff.j8.evCaught)} chứng cứ. `;
  return `Người của ${t.name} phát giác ${NM(a)} định ${desc}; ${t.name} nắm ${balAb(BAL.eff.j8.evCaught)} chứng cứ của ${NM(a)}. `}
 function judgeName(t){return t.queen||t===S&&S.rank>=7?"Hoàng thượng":queenP()&&queenP()!==t?(queenP()===S?"ngươi (Hoàng hậu)":"Hoàng hậu"):"Hoàng thượng"}
@@ -172,7 +172,7 @@ const IT={
  sacphong:{n:"Sắc phong",kd:"Kỷ vật",d:"Chiếu sắc phong hiệu của Hoàng thượng · không bán, không tặng · mất là bị trách",pr:0,keep:1,tg:[]},
  ngocan:{n:"Ngọc ấn",kd:"Kỷ vật",d:"Ấn ngọc khắc hiệu được ban · không bán, không tặng · mất là bị trách",pr:0,keep:1,tg:[]},
  thunha:{n:"Thư nhà",kd:"Thư từ",d:"Đọc: Sức +10, Đức +2",pr:0,use:{suc:10,duc:2},tg:[]},
- chungcu:{n:"Tập chứng cứ",kd:"Thư từ",d:"Dùng với một phi tần: chứng cứ +2",pr:0,evi:2,tg:[]}};
+ chungcu:{n:"Tập chứng cứ",kd:"Thư từ",get d(){return "Dùng với một phi tần: chứng cứ +"+this.evi}/* prints its own evi (the amount the item gives) */,pr:0,evi:2,tg:[]}};
 /* ngự tứ mark of the two title keepsakes (a yes/no flag, not the "Hoàng thượng để ý" stat nt; j92/j97 set it the same way for ngocboi/bienngu) */
 for(const k of ["sacphong","ngocan"])IT[k].nt=1;
 /* ONE ITEM LOOKUP (review/it-key-guard, family fix of the npcMonthly "reading 'tg'" crash). An inventory entry can name a key this
@@ -472,7 +472,7 @@ PEND.giftpick=p=>{const e=S.inv[p.ix!=null?p.ix:-1];const L=p.v!=null?[[p.v,(RV(
  if(p.v!=null){const items=S.inv.map((e,i)=>[e,i]).filter(([e])=>!e.h);return{t:"<p>Chọn món đồ để tặng.</p>",o:items.map(([e,i])=>({n:iname(e)+(e.t?" (đã tẩm)":""),ik:i,fx:{},x:(IT[e.k]||{}).d,go:()=>{spend(2);log(giveTo(S,RV(p.v),i))}})).concat([{n:"Thôi",fx:{}}])}}
  if(!e)return null;return{t:`<p>Tặng <b>${iname(e)}</b> cho ai?</p>`,o:L.map(([id,n])=>({n,fx:{},x:id==="emp"||id==="th"?(e.t?"không thể dâng đồ đã tẩm":giftVal(Object.assign({k:e.k},IT[e.k]),id)>=8?"rất hợp ý":""):"",go:()=>{if((id==="emp"||id==="th")&&e.t)return;spend(2);log(giveTo(S,id==="emp"||id==="th"?id:RV(id),p.ix))}})).concat([{n:"Thôi",fx:{}}])}};
 PEND.plantpick=p=>{const v=RV(p.v);if(!v)return null;const items=S.inv.map((e,i)=>[e,i]).filter(([e])=>!e.h);
- return{who:pv(v),t:`<p>Sai người lẻn vào cung ${v.name}, cài món gì vào rương nàng?</p><p class="past">${word(oPlant(S,v))} · hỏng: bị bắt, nàng nắm 2 chứng cứ</p>`,o:items.map(([e,i])=>({n:iname(e)+(e.t?" ("+TAINT[e.t].n+")":""),ik:i,fx:{},x:(IT[e.k]||{}).il||(e.t&&TAINT[e.t].il)?"khám ra là có tội":(IT[e.k]||{}).rk>rkOf(v)?"vượt phẩm của nàng":"",go:()=>{spend(2);if(p.here){ACTX={a:S,pen:-15};try{log(plantItem(S,v,i)+" (tại cung nàng)")}finally{ACTX={a:null,pen:0}}}else log(runAct(S,v,"plant",i))}})).concat([{n:"Thôi",fx:{}}])}};
+ return{who:pv(v),t:`<p>Sai người lẻn vào cung ${v.name}, cài món gì vào rương nàng?</p><p class="past">${word(oPlant(S,v))} · hỏng: bị bắt, nàng nắm ${balAb(BAL.eff.j8.evPlantItem)} chứng cứ</p>`,o:items.map(([e,i])=>({n:iname(e)+(e.t?" ("+TAINT[e.t].n+")":""),ik:i,fx:{},x:(IT[e.k]||{}).il||(e.t&&TAINT[e.t].il)?"khám ra là có tội":(IT[e.k]||{}).rk>rkOf(v)?"vượt phẩm của nàng":"",go:()=>{spend(2);if(p.here){ACTX={a:S,pen:-15};try{log(plantItem(S,v,i)+" (tại cung nàng)")}finally{ACTX={a:null,pen:0}}}else log(runAct(S,v,"plant",i))}})).concat([{n:"Thôi",fx:{}}])}};
 PEND.taintpick=p=>{const e=S.inv[p.ix];if(!e)return null;const L=Object.entries(TAINT).filter(([k,T])=>T.on.includes(e.k)&&(!T.need||S.inv.some(x=>x.k===T.need&&!x.h)));
  return{t:`<p>Lén làm gì với <b>${iname(e)}</b>?</p>`,o:L.map(([k,T])=>({n:T.n[0].toUpperCase()+T.n.slice(1),fx:T.c?{bac:-T.c,duc:-3}:{duc:-3},x:T.hurt+(T.need?" · tốn "+itm(T.need).n:""),go:()=>log(taintItem(S,p.ix,k))})).concat([{n:"Thôi",fx:{}}])}};
 PEND.evpick=p=>({t:"<p>Tập chứng cứ này nói về ai?</p>",o:liveRivals(true).map(v=>({kgt:v,n:v.name,fx:{},go:()=>log(useItem(S,p.ix,v))})).concat([{n:"Thôi",fx:{}}])});

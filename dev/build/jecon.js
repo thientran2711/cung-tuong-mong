@@ -156,7 +156,7 @@ A("blockf","Nhờ ơn người quen rút thẻ bài",{c:{},ok:(a,t)=>!!econFavor
  const v=econFavor(a);if(!v)return"";relAdd(v,a,-BAL.favorCost);const c=caught(a,t,false,"nhờ người rút thẻ bài của "+NM(t));if(c)return c;
  if(roll(oBlock(a))){t.block=2;return `${v.name} nhờ người ở Kính sự phòng rút thẻ bài của ${NM(t)} giúp ${NM(a)}: 2 tuần nàng không được lật thẻ. `}return `Kính sự phòng không dám rút thẻ bài của ${NM(t)}. `}});
 try{for(const [k,g] of [["spyk","Hại nhỏ"],["bribel","Hại nặng"],["blockf","Hại nặng"]]){const G=RVGRP.find(x=>x[0]===g);if(G&&!G[1].includes(k))G[1].push(k);ACTDOM[k]=ACTDOM[k]||"Mưu kế"}
- AOUT.spyk=["nắm thêm một chứng cứ, Tâm cơ +1",`bị bắt gặp: Danh -2, nàng thù ${balSg(BAL.eff.jecon.f)}`];AOUT.bribel=["cung nữ của nàng ngả về phía ngươi (dò ra mưu kế: 1 chứng cứ)","bị báo cho chủ: nàng nắm 1 chứng cứ"];AOUT.blockf=["2 tuần nàng không được lật thẻ","không thành; người quen vẫn mất thiện cảm"];
+ AOUT.spyk=["nắm thêm một chứng cứ, Tâm cơ +1",`bị bắt gặp: Danh -2, nàng thù ${balSg(BAL.eff.jecon.f)}`];AOUT.bribel=[`cung nữ của nàng ngả về phía ngươi (dò ra mưu kế: ${balAb(BAL.eff.jecon.evF)} chứng cứ)`,`bị báo cho chủ: nàng nắm ${balAb(BAL.eff.jecon.evF_2)} chứng cứ`];AOUT.blockf=["2 tuần nàng không được lật thẻ","không thành; người quen vẫn mất thiện cảm"];
  J78VERB.spyk="tự dò la {t}";J78VERB.bribel="sai cung nữ lấy lòng người của {t}";J78VERB.blockf="nhờ người rút thẻ bài của {t}"}catch(e){}
 /* watched more at high rank */
 (function(){const c0=caught;caught=function(a,t,ps,desc){const r=c0.apply(this,arguments);try{if(r&&a&&rkOf(a)>=BAL.watchRank){const n=rkOf(a)-BAL.watchRank+1;ap(a,{danh:-n});return r+`Phẩm cao, nhiều mắt nhìn: Danh -${n}. `}}catch(e){}return r}})();

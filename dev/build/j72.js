@@ -101,7 +101,7 @@ function q72Title(X){return q72Txt(X.T.t,X)}
 /* tokens of an outcome (for offer lines and the list) */
 function q72OutTok(o,X,which){if(!o)return[];const t=q72Fx(o.fx);if(o.r)t.push(q72Tok(X.A,o.r));if(o.rb&&X.B)t.push(q72Tok(X.B,o.rb));
  const d=o.d==null?(which==="ok"?1:0):o.d;if(d)t.push(q72DTok(X.A,d));if(o.x)t.push(...[].concat(q72Txt(o.x,X)).map(s=>which==="ok"?G72(s):R72(s)));
- if(o.pun)t.push(R72("bị cấm túc 1–3 tháng"));if(o.ev){const E=o.ev==="B"?X.B:X.A;if(E)t.push(R72(`${E.n} nắm Chứng cứ về ngươi +1`))}if(o.cc&&typeof ccLine==="function")t.push(R72(ccLine(S)));return t.filter(Boolean)}
+ if(o.pun)t.push(R72("bị cấm túc 1–3 tháng"));if(o.ev){const E=o.ev==="B"?X.B:X.A;if(E)t.push(R72(`${E.n} nắm Chứng cứ về ngươi ${balSg(BAL.eff.j72.evQ72End)}`))/* previews: q72End */}if(o.cc&&typeof ccLine==="function")t.push(R72(ccLine(S)));return t.filter(Boolean)}
 function q72OkDef(X){return X.T.ok||{}}
 function q72NoDef(X){const n=X.T.no||{};return Object.assign({r:-6},n)}
 /* rough chance of finishing (only rolled steps that can end it), for the ladder word on the offer */

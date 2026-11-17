@@ -32,7 +32,7 @@ function aaFallenT(){const L=liveRivals(true);if(!L.length)return null;const d=v
  const v=typeof J78==="object"&&J78.cardV;if(!v||!S||v===S||together(S,v)||["accuse","vp","xx","gift","steal","road","takeaway"].includes(k))return h;const sv=bestSent(S);
  const tin=s=>s?String(h).replace(/thành: ([^·]+)/,(m,x)=>`thành: ${x.trim()} · Chủ tin với ${s.name} +3 `):h;/* runAct → servMerit(sv,2) → tinAdd 1.5×2 */
  if(["ally","spy"].includes(k))return tin(sv);
- h=tin(sv);const r=confessRisk(sv);return h+` · kèm: ${sv?`${sv.name} được sai đi`:"người được sai"} bị bắt thì khai ra ngươi (nàng nắm 1 chứng cứ), có khi bị đánh chết: ${typeof chanceW==="function"?chanceW(r):word(r)}`}catch(e){}return h}})();
+ h=tin(sv);const r=confessRisk(sv);/* previews: runAct (sent servant confesses) */return h+` · kèm: ${sv?`${sv.name} được sai đi`:"người được sai"} bị bắt thì khai ra ngươi (nàng nắm ${balAb(BAL.eff.j9.evN)} chứng cứ), có khi bị đánh chết: ${typeof chanceW==="function"?chanceW(r):word(r)}`}catch(e){}return h}})();
 
 /* 4. ĐỀ BẠT (owner): she raises her own servant one tier (SRK), capped by srkMax for her rank; NPC mistresses by the same rule
    (servRanks already promotes by merit; an NPC may also đề bạt a loyal servant early, same numbers). Numbers in BAL (one source).
@@ -84,10 +84,10 @@ function pvRel(t,n){return n<0?`${pvQuy(t,n)}, ${pvOan(t,-n*.6)}`:`${pvQuy(t,n)}
 (function(){if(typeof kaCaughtTxt!=="function")return;const k0=kaCaughtTxt;kaCaughtTxt=function(v,k){const r=k0.apply(this,arguments);try{return r?`${r}, ${pvRel(v,-10)}`:r}catch(e){return r}}})();
 /* consort acts: outcome texts written from the code (j8 ACT.f) with the scaled numbers for the card's target */
 (function(){const T=()=>typeof J78==="object"&&J78.cardV||null;const def=(k,fn)=>{try{const old=AOUT[k];Object.defineProperty(AOUT,k,{configurable:true,enumerable:true,get(){const t=T();return t?fn(t):old},set(v){}})}catch(e){}};
- def("spy",t=>["chứng cứ +1, Tâm cơ +2",`bị lộ: ${pvRel(t,-8)}`]);
+ def("spy",t=>[`chứng cứ ${balSg(BAL.eff.jtruth.evN)}, Tâm cơ +2`,`bị lộ: ${pvRel(t,-8)}`]);
  def("ally",t=>[`${pvRel(t,25)}, nàng bớt ghen 10`,`bị lạnh nhạt: ${pvRel(t,-5)}`]);
- def("rumor",t=>["Danh nàng -8",`không ai tin: nàng nắm 1 chứng cứ, ${pvRel(t,-5)}`]);
- def("frame",t=>["nàng mất Danh và Sủng -10, Danh +3, Tâm cơ +2",`bị lộ: Danh -15, Sủng -8, ${pvRel(t,-30)}, nàng nắm 1 chứng cứ, bị cấm túc 2 tháng`]);})();
+ def("rumor",t=>["Danh nàng -8",`không ai tin: nàng nắm ${balAb(BAL.eff.j8.evF)} chứng cứ, ${pvRel(t,-5)}`]);
+ def("frame",t=>["nàng mất Danh và Sủng -10, Danh +3, Tâm cơ +2",`bị lộ: Danh -15, Sủng -8, ${pvRel(t,-30)}, nàng nắm ${balAb(BAL.eff.j8.evF_2)} chứng cứ, bị cấm túc 2 tháng`]);})();
 /* Tranh sủng / Chặn ngự giá (stealWin: relAdd −15, ghen +25) */
 (function(){if(typeof stealX!=="function")return;const s0=stealX;stealX=function(v,road){const h=s0.apply(this,arguments);try{return h.replace(/kèm: (.+?) ghen \+25, thù -15/,(m,n)=>`kèm: ${n} ghen +25, ${n} ${pvRel(v,-15)}`)}catch(e){return h}}})();
 /* talk options on a consort's card: "thiện cảm ±N" / "oán ±N" are affAdd/oanAdd on her → scaled, in the new labels */

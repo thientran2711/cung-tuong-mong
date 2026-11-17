@@ -412,7 +412,7 @@ function j95catchOpts(v,m,s,out){const O=[];const q=queenP();const love=s.kind==
  if(q&&q!==S&&q!==v)O.push({n:"Tố giác lên Hoàng hậu",fx:{},x:`${word(j95accO(v,"hh"))} · tốn: ${BAL.m95.k} khắc · thành: ${win} · hỏng: ${lose} · ${why}`,go:()=>j95accuse(v,m,s,"hh")});
  if(S.rank>=7)O.push({n:"Xử tội theo luật cung",fx:{},x:`${word(j95accO(v,"hh"))} · tốn: ${BAL.m95.k} khắc · thành: ${win} · hỏng: ${lose} · ${why}`,go:()=>j95accuse(v,m,s,"hh")});
  O.push({n:"Tố giác lên Hoàng thượng",fx:{},x:`${word(j95accO(v,"emp"))} · tốn: ${BAL.m95.k} khắc · thành: ${win} · hỏng: ${lose.replace("bị cấm túc","bị cấm túc hay giáng phẩm")} · ${why} · (Sủng càng cao Hoàng thượng càng tin)`,go:()=>j95accuse(v,m,s,"emp")});
- O.push({n:"Giữ làm con bài khống chế",fx:{},x:`Nắm chắc · thành: chứng cứ về nàng +1 · giữ kín, chờ lúc dùng`,go:()=>j95hold(v)});
+ O.push({n:"Giữ làm con bài khống chế",fx:{},x:`Nắm chắc · thành: chứng cứ về nàng ${balSg(BAL.eff.j95.evJ95hold)} · giữ kín, chờ lúc dùng`,go:()=>j95hold(v)});
  const risk=(v.malice||0)>=70?25:0;
  O.push({n:"Lặng im, đổi lấy ân tình",fx:{},x:`${word(100-risk)} · tốn: ${BAL.m95.k} khắc (gặp riêng nàng) · thành: nàng quý ngươi ${balSg(BAL.eff.j95.j95silent_2)} · nàng bớt oán ngươi 10 · nàng nợ ngươi một ân tình${risk?` · hỏng: nàng vẫn coi ngươi là mối nguy, oán ngươi ${balSg(BAL.eff.j95.j95silent)}`:""}`,go:()=>j95silent(v)});
  O.push({n:"Giả như không thấy",fx:{},x:"Nắm chắc · thành: không dính vào chuyện",go:()=>log("Ngươi lặng lẽ quay đi như không thấy gì.")});return O}

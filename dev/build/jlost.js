@@ -33,7 +33,7 @@ const LO={rate:8,cd:6,minPr:30,findW:[2,7],
 function loL(){S.lost=S.lost||[];return S.lost}
 function loGet(id){return loL().find(c=>c.id===id)||null}
 function lostEv(id){const c=loGet(id);return c?(c.cev||0):0}
-function lostEvUse(id){const c=loGet(id);if(c&&c.cev>0){c.cev--;return true}return false}
+function lostEvUse(id){const c=loGet(id);if(c&&c.cev>0){c.cev=Math.max(0,c.cev+BAL.eff.jlost.evLostEvUse);return true}return false}
 function loNm(k){return typeof wdFrameNm==="function"?wdFrameNm(k):((IT[k]||{}).n||"món đồ")}
 function loP(k){return byKey(k)}
 function loAlive(p){return !!p&&(p===S?!S.dead:p.alive&&!p.out)}
@@ -114,7 +114,7 @@ function loQuietHear(c,a,h){const nm=loNm(c.k);const x=loEntry(c);if(x){lostUnwe
 function loWatch(p){return [p.maid].concat(p.staff||[]).some(s=>s&&(s.loyal||0)>=BAL.loy.close)}
 function loOdds(kind,p){if(kind==="ask")return cl(Math.round(35+(p.mat||0)*6+(p.tamco||0)/5+(loWatch(p)?10:0)),5,95);
  if(kind==="cct")return cl(Math.round(50+(p.danh||0)/8+rkOf(p)*3),5,95);if(kind==="book")return cl(Math.round(55+(p.tai||0)/5+(p.mat||0)*3),5,95);return oSee(p,true)}
-function loEvAdd(c,p,why){if(c.cause==="riv"&&c.by&&loP(c.by)&&p!==loP(c.by)){evA(p,loP(c.by),BAL.eff.jlost.evLoEvAdd);return `${why}, dấu vết dẫn về ${wdNm(loP(c.by))} (chứng cứ ${balSg(BAL.eff.jlost.evLoEvAdd)})`}c.cev=(c.cev||0)+1;return `${why} (chứng cứ tra xét ${balSg(BAL.eff.jlost.evLoEvAdd)})`}
+function loEvAdd(c,p,why){if(c.cause==="riv"&&c.by&&loP(c.by)&&p!==loP(c.by)){evA(p,loP(c.by),BAL.eff.jlost.evLoEvAdd);return `${why}, dấu vết dẫn về ${wdNm(loP(c.by))} (chứng cứ ${balSg(BAL.eff.jlost.evLoEvAdd)})`}c.cev=(c.cev||0)+BAL.eff.jlost.evLoEvAdd;return `${why} (chứng cứ tra xét ${balSg(BAL.eff.jlost.evLoEvAdd)})`}
 function loDo(kind,p,c){const C=LO.cost[kind]||{};if(C.bac)ap(p,{bac:-C.bac});const o=loOdds(kind,p);const nm=loNm(c.k);
  if(kind==="soat"){const f=inspect(p);return f.length?`Soát rương, tìm thấy: ${f.join("; ")}.`:"Soát rương: không thấy gì lạ."}
  if(!roll(o))return kind==="ask"?"Hỏi cung nhân: không ai biết gì.":kind==="cct"?"Cung Chính ti ghi lại, chưa tra ra gì.":"Đối chiếu sổ Nội vụ phủ: sổ sách lộn xộn, không rõ.";
@@ -172,9 +172,9 @@ function loWhy(kind){const C=LO.cost[kind];return Q.length?"đang có việc ch�
 function loBtn(c,a,n,sm,why){return pbtn(`data-lo="${a}" data-lc="${c.id}"`,n,sm,why||"")}
 /* the acts that fit her place in a case (owner, holder, suspect, a witness) */
 function loActs(c){const B=[];const me=c.own==="me",h=c.at?loP(c.at):null,atMe=c.at==="me",known=me&&c.st==="found"&&h&&!atMe;const thief=atMe&&c.keep&&c.by==="me";
- const tra=()=>{B.push(loBtn(c,"ask","Hỏi cung nhân",`${word(loOdds("ask",S))} · ${loCostTxt("ask")} · thành: thêm 1 chứng cứ, có khi biết món đồ ở đâu · hỏng: không ai biết gì`,loWhy("ask")));
-  B.push(loBtn(c,"cct","Báo Cung Chính ti",`${word(loOdds("cct",S))} · ${loCostTxt("cct")} · thành: thêm 1 chứng cứ; món đồ đang ở cung nào thì tìm ra · hỏng: chưa tra ra gì`,loWhy("cct")));
-  B.push(loBtn(c,"book","Đối chiếu sổ Nội vụ phủ",`${word(loOdds("book",S))} · ${loCostTxt("book")} · thành: thêm 1 chứng cứ, biết món đồ ghi tên ai · hỏng: sổ sách không rõ`,loWhy("book")))};
+ const tra=()=>{B.push(loBtn(c,"ask","Hỏi cung nhân",`${word(loOdds("ask",S))} · ${loCostTxt("ask")} · thành: thêm ${balAb(BAL.eff.jlost.evLoEvAdd)} chứng cứ, có khi biết món đồ ở đâu · hỏng: không ai biết gì`,loWhy("ask")));
+  B.push(loBtn(c,"cct","Báo Cung Chính ti",`${word(loOdds("cct",S))} · ${loCostTxt("cct")} · thành: thêm ${balAb(BAL.eff.jlost.evLoEvAdd)} chứng cứ; món đồ đang ở cung nào thì tìm ra · hỏng: chưa tra ra gì`,loWhy("cct")));
+  B.push(loBtn(c,"book","Đối chiếu sổ Nội vụ phủ",`${word(loOdds("book",S))} · ${loCostTxt("book")} · thành: thêm ${balAb(BAL.eff.jlost.evLoEvAdd)} chứng cứ, biết món đồ ghi tên ai · hỏng: sổ sách không rõ`,loWhy("book")))};
  if(thief){B.push(loBtn(c,"sneak","Lén trả lại",`Chắc chắn · tốn: 1 khắc · thành: món đồ lặng lẽ về rương ${wdNm(loP(c.own))}, không ai bị tra${c.hear?"; Cung Chính ti thôi xét":""}`,whyTime(1)));return B}
  if(me&&!known&&c.st!=="done"){tra();return B}
  if(known){const x=loEntry(c);const o=x?cl(WD.clearBase+(h.mat||0)*WD.clearMat+wdFrameEv(h,S,x.e)*10,5,95):50;
@@ -183,7 +183,7 @@ function loActs(c){const B=[];const me=c.own==="me",h=c.at?loP(c.at):null,atMe=c
   tra();return B}
  if(atMe&&(c.open||c.hear)){const ownK=c.kn["ome"]||c.hear;
   if(c.hear)tra();
-  else{B.push(loBtn(c,"book","Đối chiếu sổ Nội vụ phủ",`${word(loOdds("book",S))} · ${loCostTxt("book")} · thành: biết món đồ của ai, thêm 1 chứng cứ · hỏng: sổ sách không rõ`,loWhy("book")));
+  else{B.push(loBtn(c,"book","Đối chiếu sổ Nội vụ phủ",`${word(loOdds("book",S))} · ${loCostTxt("book")} · thành: biết món đồ của ai, thêm ${balAb(BAL.eff.jlost.evLoEvAdd)} chứng cứ · hỏng: sổ sách không rõ`,loWhy("book")));
    B.push(loBtn(c,"giveback","Trả về chủ",`tốn: 1 khắc · thành: món đồ về tay chủ, thân ${balSg(BAL.eff.jlost.loUI_2)}`,ownK?whyTime(1):"chưa biết của ai: đối chiếu sổ trước"));
    B.push(loBtn(c,"handin","Nộp Nội vụ phủ",`tốn: 1 khắc · thành: Nội vụ phủ trả về chủ, Danh +1`,whyTime(1)))}
   return B}
@@ -239,8 +239,8 @@ A("laydo","Sai người lấy trộm đồ",{c:{bac:-LO.act.bac},ok:(a,t)=>(a.ba
  f:(a,t)=>{ap(a,{bac:-LO.act.bac});return loSteal(a,t,false)}});
 A("laydol","Sai cung nữ thân tín lấy đồ",{c:{},ok:(a,t)=>!!(typeof econLoyalMaid==="function"?econLoyalMaid(a):a.maid)&&loStealOk(a,t),o:(a,t)=>loStealO(a,t,true),
  get x(){return `không tốn bạc · cung nữ thân tín lòng -${balAb(BAL.loyalCost)} · khó hơn`},f:(a,t)=>loSteal(a,t,true)});/* lazy: BAL.loyalCost is set by jecon, which loads after this file */
-try{AOUT.laydo=[`một món quý trong rương nàng về tay ngươi (nàng chỉ biết là thất lạc) · Đức ${balSg(LO.act.duc)}`,`về tay không, nàng thù ${balSg(BAL.eff.jlost.loSteal)} · bị bắt: nàng nắm 2 chứng cứ`];
- AOUT.laydol=aoLz(()=>`một món quý trong rương nàng về tay ngươi · cung nữ thân tín lòng -${balAb(BAL.loyalCost)} · Đức ${balSg(LO.act.duc)}`,"về tay không · bị bắt: nàng nắm 2 chứng cứ");
+try{AOUT.laydo=[`một món quý trong rương nàng về tay ngươi (nàng chỉ biết là thất lạc) · Đức ${balSg(LO.act.duc)}`,`về tay không, nàng thù ${balSg(BAL.eff.jlost.loSteal)} · bị bắt: nàng nắm ${balAb(BAL.eff.j8.evCaught)} chứng cứ`];
+ AOUT.laydol=aoLz(()=>`một món quý trong rương nàng về tay ngươi · cung nữ thân tín lòng -${balAb(BAL.loyalCost)} · Đức ${balSg(LO.act.duc)}`,()=>`về tay không · bị bắt: nàng nắm ${balAb(BAL.eff.j8.evCaught)} chứng cứ`);
  const why=t=>!(t.inv||[]).some(loOk)?"rương nàng không có món nào đáng lấy":loL().some(c=>c.own===key(t)&&c.st!=="done")?"nàng đang tra xét đồ thất lạc":"";
  LACK.laydo=t=>S.bac<LO.act.bac?`cần Bạc ${LO.act.bac} để sai người`:why(t);
  LACK.laydol=t=>!(typeof econLoyalMaid==="function"?econLoyalMaid(S):S.maid)?`cần cung nữ thân tín (Lòng ${balAb(BAL.loy.low)}+)`:why(t);

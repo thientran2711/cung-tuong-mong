@@ -265,7 +265,7 @@ PEND.cnvScold=()=>{const m=srvM();if(!isSrv()||!m)return null;const o=od(40+S.sa
   {n:"Cãi lại",fx:{danh:2,tin:-8},x:`đám cung nhân nể · kèm: bị phạt quỳ, Sức -15: ${chanceW(40)}`,go:()=>{if(roll(40)){apply({suc:-15});log("Bị phạt quỳ giữa sân. Sức -15.")}}}]}};
 PEND.cnvOrd=pp=>{const m=srvM(),t=RV(pp.t);if(!isSrv()||!m||!t||!t.alive||t.out)return null;const k=pp.k,o=ordOdds(k),mal=m.malice||40;
  const desc={spy:`dò la cung ${t.name}, xem nàng gặp ai, nói gì`,plant:`lén giấu hình nhân bùa ngải vào tẩm cung ${t.name}`,poison:`bỏ thuốc độc vào bát canh dâng ${t.name}`}[k];
- const gain={spy:`Chủ tin +4 · Bạc +3 · chủ nắm 1 chứng cứ của ${t.name}`,plant:`Chủ tin +8 · Bạc +10 · ${t.name} bị vu, mất Danh`,poison:`Chủ tin +12 · Bạc +20 · ${t.name} trúng độc · ${kpDeathWord(kpDeathP("poison",t),"nàng")}`}[k];
+ const gain={spy:`Chủ tin +4 · Bạc +3 · chủ nắm ${balAb(BAL.eff.j42.evN)} chứng cứ của ${t.name}`,plant:`Chủ tin +8 · Bạc +10 · ${t.name} bị vu, mất Danh`,poison:`Chủ tin +12 · Bạc +20 · ${t.name} trúng độc · ${kpDeathWord(kpDeathP("poison",t),"nàng")}`}[k];
  const q=queenP();const who=q&&q!==m&&q!==t&&q!==S?q:t;
  return{t:`<p>${m.name} gọi ngươi vào phòng trong, đóng cửa: “Ngươi đi ${desc}.”</p><p class="past">Kẻ hầu nào làm cũng một luật: hỏng thì nửa phần bị bắt; bị bắt thì 3 phần bị đánh chết ở Thận Hình ti, hoặc phải khai ra chủ.</p>`,who:pv(m),o:[
   {n:"Vâng lệnh",fx:{},x:`${word(o)} · thành: ${gain} · hỏng: Chủ tin -2, nửa phần bị bắt`,go:()=>srvDoOrder(k,t)},

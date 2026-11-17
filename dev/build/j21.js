@@ -14,7 +14,7 @@ function favorBook(full){kn();const P=consorts().filter(p=>!p.out).sort((a,b)=>b
 /* every talk result also shows what was learned (the lines it logged) */
 (function(){const t1=talk;talk=function(oi){const b=S?S.logSeq||0:0;const p=S&&curPeople()[popIdx];const r=t1.apply(this,arguments);try{if(p&&p.ref&&p.ref.id!=null){kn();S.met[p.ref.id]=wk()}const n=(S.logSeq||0)-b;if(n>0&&popMsg){const L=S.logs.slice(0,n).map(plain).filter(x=>!/^[^.]{1,40}\. (Thành|Hỏng)\./.test(x)&&!popMsg.includes(x));if(L.length)popMsg+=`<br><span class="past">${L.join(" ")}</span>`;renderStage()}}catch(e){}return r}})();
 /* acting on someone means having met her */
-(function(){const d0=doAct;doAct=function(i,k){const v=rivals[i];if(v){kn();S.met[v.id]=wk();if(k==="spy"){const e0=v.ev;const r=d0.apply(this,arguments);if(v.ev>e0)noteAdd(v.id,`dò la được thêm 1 chứng cứ (nay ${v.ev}); Sủng ${v.sung}`);S.kf[v.id]={s:v.sung,n:(v.nightLog||[]).filter(w=>w>=S.turn*3).length,w:wk()};return r}}return d0.apply(this,arguments)}})();
+(function(){const d0=doAct;doAct=function(i,k){const v=rivals[i];if(v){kn();S.met[v.id]=wk();if(k==="spy"){const e0=v.ev;const r=d0.apply(this,arguments);if(v.ev>e0)noteAdd(v.id,`dò la được thêm ${v.ev-e0} chứng cứ (nay ${v.ev}); Sủng ${v.sung}`);S.kf[v.id]={s:v.sung,n:(v.nightLog||[]).filter(w=>w>=S.turn*3).length,w:wk()};return r}}return d0.apply(this,arguments)}})();
 /* ladder words for feelings */
 function affW(v){return quyW(v)}/* ONE CORE: the VANPHONG "quý" word (jhc quyW, BAL.quyLv); was its own 7-word ladder with Thù / Lạnh nhạt / Thân */
 /* (ONE CORE: dead second oán ladder 10/30/60 removed; the live one is jhc window.oanW on BAL.oanLv) */

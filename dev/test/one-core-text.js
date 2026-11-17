@@ -104,6 +104,63 @@ function scanAmt(B,BAL,ORDER){
    out.push({f:m.f,line:t.line,t,idx:q.index,sg,abs:q[2],inv:false,amt2:true,cands:uq.map(c=>({key:c.ref.replace(/^BAL\./,''),v:c.v,ref:c.ref,as:c.as,mult:c.mult,mod:c.mod})),amb:uq.length>1,
     text:t.s.slice(Math.max(0,q.index-24),q.index+q[2].length+14).replace(/\s+/g,' ')})}}});
  return out}
+/* ---- EVIDENCE COUNT SCAN (review/one-core-dup3 r1, reviewer FAIL 2: the window pass above missed every typed "nắm 1 chứng cứ" whose evA read sat
+   > 300 chars away, in another function, an AOUT pair or a caught() helper) ----
+   A typed chứng cứ count in a player text: "chứng cứ +1" / "Chứng cứ -1" / "chứng cứ ${v.name} +2" (signed, after the word, a name between allowed) or
+   "nắm 2 chứng cứ" / "tốn: 1 chứng cứ" / "(dò ra mưu kế: 1 chứng cứ)" (unsigned, before the word, after nắm / thêm / tốn / dùng / trả lại / được / "(" / ":").
+   Thresholds ("cần 2 chứng cứ", "có …", "đủ …", "Gom 3 …", "N/2") are not counts. It FAILS when the number equals an evidence amount BAL.eff.<m>.ev<Site>
+   (the 2nd / 3rd argument of evA / evStory, BAL.evWipe excluded) read in the text's own module or a module it previews (BIND.linkMods, the same links as
+   the amount scan; signed text: sign included). A caught / confession sentence ("bị phát giác", "bị bắt", "bắt gặp", "khai ra" ≤ 80 chars before) is also
+   compared with the two shared catch rules every scheme runs through: caught() BAL.eff.j8.evCaught and runAct's sent-servant confession BAL.eff.j9.evN.
+   Not a copy (skipped): the option / function the text sits in changes a counter with the SAME typed number and reads no ev amount (S.coldEv+1, st.proof++,
+   S.caseEv-1, deA(a,t,1) — a quest / tham-ô counter: the typed rule belongs to one-core-guard, not to this text scan).
+   Templates are read whole (each ${} = "{}") so "chứng cứ ${v.name} +2" is one sentence. */
+const EV_SG=/chứng cứ((?:\s*(?:về|của)?\s*(?:\{\}|[^\d\s·;,.:()+\-−{}<>][^\d·;,.:()+\-−{}<>]{0,30}?))?)\s*([+\-−])(\d+)(?![\d.,]\d|\s*\/)/gi;
+const EV_AB=/(?<![\w$.,\/])(\d+)\s+chứng cứ/gi;
+const EV_PRE=/(?:nắm(?: thêm| được)?|thêm|tốn:?|dùng|trả lại|chuộc lại|lấy được|được|ra|kế:|\(|:)\s*$/i;
+const EV_THR=/(?:cần|có|đủ|gom|tới|ít nhất|hơn)\s*$/i;
+function scanEv(B,BAL,ORDER){
+ const idx=BIND.index(B);const out=[];const vals=[];/* {v,ref,mod} */
+ const mods=ORDER.map(f=>{const src=fs.readFileSync(path.join(B,f),'utf8');return{f,src,ast:acorn.parse(src,{ecmaVersion:'latest',locations:true})}});
+ const refPath=n=>{const p=[];let c=n;while(c.type==='MemberExpression'){const k=c.computed?(c.property.type==='Literal'?c.property.value:null):c.property.name;if(k==null)return null;p.unshift(k);c=c.object}return c.type==='Identifier'&&c.name==='BAL'?p:null};
+ const valOfP=p=>{try{let o=BAL;for(const k of p)o=o[k];return o}catch(e){return undefined}};
+ const walk=(n,stack,fn)=>{if(!n||typeof n.type!=='string')return;fn(n,stack);stack.push(n);for(const k in n){if(k==='type'||k==='start'||k==='end'||k==='loc')continue;const c=n[k];if(Array.isArray(c))c.forEach(x=>walk(x,stack,fn));else if(c&&typeof c.type==='string')walk(c,stack,fn)}stack.pop()};
+ const per=mods.map(m=>{const R=[],T=[];walk(m.ast,[],(n,stack)=>{const par=stack[stack.length-1];
+   if(n.type==='MemberExpression'&&!(par&&par.type==='MemberExpression'&&par.object===n)){const p=refPath(n);if(p&&p[0]==='eff'&&p.length>=3&&/^ev[A-Z0-9_]/.test(p[2])){const v=valOfP(p);const L=Array.isArray(v)?v.map((x,i)=>[x,'BAL.'+p.join('.')+'['+i+']']):[[v,'BAL.'+p.join('.')]];for(const [x,ref] of L)if(isNum(x))R.push({v:x,ref,mod:m.f,pos:n.start})}}
+   if(n.type==='TemplateLiteral'&&!(par&&par.type==='TaggedTemplateExpression'))T.push({node:n,stack:stack.slice(),s:n.quasis.map(q=>q.value.cooked||'').join('{}'),line:n.loc.start.line,a:n.start});
+   else if(n.type==='Literal'&&typeof n.value==='string'&&!(par&&par.type==='Property'&&par.key===n&&!par.computed))T.push({node:n,stack:stack.slice(),s:n.value,line:n.loc.start.line,a:n.start})});
+  R.forEach(r=>vals.push(r));return{R,T}});
+ /* CALL LINKS (x / go of one option, result text of an act): a function the text's own option object (or function) calls → every module that defines or
+    re-defines it (function f(){…}, f=function…, const f=()=>…). The evidence API itself (evA / evStory / evG) is not a link: its amount is an argument. */
+ const defs={};mods.forEach(m=>walk(m.ast,[],(n,stack)=>{let nm=null;if(n.type==='FunctionDeclaration'&&n.id)nm=n.id.name;
+   else if(n.type==='AssignmentExpression'&&n.left.type==='Identifier'&&/Function/.test(n.right.type))nm=n.left.name;
+   else if(n.type==='VariableDeclarator'&&n.id.type==='Identifier'&&n.init&&/Function/.test(n.init.type))nm=n.id.name;
+   if(nm)(defs[nm]=defs[nm]||new Set()).add(m.f)}));
+ /* only an OPTION: the nearest object around the text (no function boundary between) and only the calls inside its function-valued properties
+    (go / run / open / ok / f / fail …): what choosing it runs. A text inside a render / map callback (kit sample rows, pbtn / ch helpers) has no call link. */
+ const callLinks=t=>{let box=null,own=null;for(let i=t.stack.length-1;i>=0;i--){const x=t.stack[i];
+   /* a text in a function-valued property (line:w=>`…`, x:()=>…) belongs to that property's option; any other function boundary ends the search */
+   if(/Function/.test(x.type)){const p=t.stack[i-1],o=t.stack[i-2];if(p&&p.type==='Property'&&p.value===x&&o&&o.type==='ObjectExpression'){box=o;own=p;break}break}
+   if(x.type==='ObjectExpression'){box=x;own=t.stack[i+1];break}}const M=new Set();if(!box)return M;
+  for(const pr of box.properties)if(pr!==own&&pr.type==='Property'&&pr.value&&/Function/.test(pr.value.type))walk(pr.value,[],n=>{if(n.type==='CallExpression'&&n.callee.type==='Identifier'&&!/^ev(A|Story|G)$/.test(n.callee.name)&&defs[n.callee.name])defs[n.callee.name].forEach(f=>M.add(f))});return M};
+ const catchV=['BAL.eff.j8.evCaught','BAL.eff.j9.evN'].map(ref=>({v:valOfP(ref.slice(4).split('.')),ref,mod:'*'})).filter(c=>isNum(c.v));
+ /* the counter rule beside a text: an UpdateExpression / x=…±N / call(…,N) with the same number in the nearest option object or function, and no ev read there */
+ const counterNear=(m,t,n)=>{let box=null;for(let i=t.stack.length-1;i>=0;i--){const x=t.stack[i];if(x.type==='ObjectExpression'||/Function/.test(x.type)){box=x;break}}if(!box)return false;
+  const code=m.src.slice(box.start,box.end);if(/BAL\.eff\.\w+\.ev[A-Z0-9_]/.test(code))return false;
+  return new RegExp('(?:\\b(?:\\w+Ev|proof|cev)\\s*(?:\\+\\+|--)|(?:\\+\\+|--)\\s*[\\w.]*(?:Ev|proof|cev)\\b|(?:Ev|proof|cev)\\b[^;]{0,24}[+\\-]\\s*'+n+'\\b|\\bdeA\\([^()]*,\\s*-?'+n+'\\s*\\))').test(code)};
+ mods.forEach((m,mi)=>{for(const t of per[mi].T){if(!/chứng cứ/i.test(t.s))continue;const hits=[];let q;
+   EV_SG.lastIndex=0;while((q=EV_SG.exec(t.s)))hits.push({i:q.index+q[0].length-q[3].length,n:+q[3],sg:q[2]==='+'?1:-1});
+   EV_AB.lastIndex=0;while((q=EV_AB.exec(t.s))){const pre=t.s.slice(Math.max(0,q.index-24),q.index);if(EV_THR.test(pre)||!EV_PRE.test(pre))continue;hits.push({i:q.index,n:+q[1],sg:0})}
+   for(const h of hits){if(!h.n)continue;if(counterNear(m,t,h.n))continue;
+    if(!t.links){t.links=BIND.linkMods(idx,m.f,t.stack,t.node);callLinks(t).forEach(f=>t.links.add(f))}
+    const before=t.s.slice(Math.max(0,h.i-80),h.i);
+    const pool=vals.filter(c=>process.env.OC_GLOBAL||t.links.has(c.mod)).concat(/phát giác|bị bắt|bắt gặp|khai ra/i.test(before)?catchV:[]);
+    const cands=pool.filter(c=>h.sg?c.v===h.sg*h.n:Math.abs(c.v)===h.n);if(!cands.length)continue;
+    cands.sort((a,b)=>(a.mod===m.f?0:1)-(b.mod===m.f?0:1)||(a.mod===m.f?Math.abs(a.pos-t.a)-Math.abs(b.pos-t.a):0));
+    const uq=[...new Map(cands.map(c=>[c.ref,c])).values()];
+    out.push({f:m.f,line:t.line,t:{a:t.a+1},idx:h.i,sg:h.sg>0?'+':h.sg<0?'-':'',abs:String(h.n),inv:false,ev:true,cands:uq.map(c=>({key:c.ref.replace(/^BAL\./,''),v:c.v,ref:c.ref,mod:c.mod})),amb:uq.length>1,
+     text:t.s.slice(Math.max(0,h.i-34),h.i+String(h.n).length+14).replace(/\s+/g,' ')})}}});
+ return out}
 function scan(B){
  const BAL=loadBAL(B);
  const ORDER=fs.readFileSync(path.join(B,'assemble.py'),'utf8').match(/for f in \[([^\]]+)\]/)[1].match(/'([^']+)'/g).map(s=>s.slice(1,-1));
@@ -170,6 +227,7 @@ function scan(B){
    sites.push({f,line:e.t.line,t:e.t,idx:e.idx,sg:e.sg,abs:e.abs,inv:e.inv,cut:e.cut,cands:uniq.map(x=>({key:x.p.join('.')+x.suf,v:x.cv!==undefined?x.cv:x.v,ref:src.slice(x.n.start,x.n.end)+x.suf})),amb:uniq.length>1,
     text:e.t.s.slice(Math.max(0,e.idx-24),e.idx+e.abs.length+14).replace(/\s+/g,' ')})}}
  {const seen=new Set(sites.map(x=>x.f+':'+x.t.a+':'+x.idx));for(const x of scanAmt(B,BAL,ORDER)){const k=x.f+':'+x.t.a+':'+x.idx;if(!seen.has(k)){seen.add(k);sites.push(x)}}}
+ {const seen=new Set(sites.map(x=>x.f+':'+x.line+':'+x.text));for(const x of scanEv(B,BAL,ORDER)){const k=x.f+':'+x.line+':'+x.text;if(!seen.has(k)){seen.add(k);sites.push(x)}}}/* evidence counts (r1) */
  sites.sort((x,y)=>ORDER.indexOf(x.f)-ORDER.indexOf(y.f)||x.line-y.line);
  sites.early=early;return sites}
 /* proof helpers (dev/measure/one-core-text-same.js, one-core-dup-same.js): printed(src) turns every ${balSg(expr)} / ${balAb(expr)} back into the words it prints

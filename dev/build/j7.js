@@ -15,7 +15,7 @@ const newGirl=rel=>{const n=newRival(1+R(2));Object.assign(n,drawFace());n.rel=r
 /* framing */
 ev("doll",()=>S.rank>=1&&liveRivals(false).length,()=>({v:rvTop((a,b)=>b.ghen-a.ghen).id,o:od(35+S.mat*6+S.tamco/4)}),p=>{const v=RV(p.v);if(!v)return null;return{who:pMaid(),
  t:`Canh ba, ${S.maid.name} hớt hải quỳ xuống: dưới gốc quế sân ngươi có hình nhân vải ghi ngày sinh của Hoàng thượng.<br>Người của Cung Chính ti đang trên đường tới.`,o:[
- {n:"Đốt ngay, lần dấu kẻ chôn",fx:{},x:`${word(p.o)} · thành: chứng cứ ${v.name} +2 · hỏng: bị phạt`,go:()=>{if(roll(p.o)){evStory(v,2,"chôn hình nhân trù ẻo hại ngươi");log(`Dấu giày dưới gốc quế dẫn về cung ${v.name}.`)}else punish("chôn hình nhân trù ẻo",2)}},
+ {n:"Đốt ngay, lần dấu kẻ chôn",fx:{},x:`${word(p.o)} · thành: chứng cứ ${v.name} ${balSg(BAL.eff.j7.evGo_3)} · hỏng: bị phạt`,go:()=>{if(roll(p.o)){evStory(v,BAL.eff.j7.evGo_3,"chôn hình nhân trù ẻo hại ngươi");log(`Dấu giày dưới gốc quế dẫn về cung ${v.name}.`)}else punish("chôn hình nhân trù ẻo",2)}},
  {n:"Tự trình lên Hoàng thượng",fx:{danh:-3},x:`${word(od(50+S.duc/3))} · thành: Sủng +4 · hỏng: Sủng -8`,go:()=>{if(roll(od(50+S.duc/3)))apply({sung:4,duc:2});else apply({sung:-8})}},
  {n:"Mua chuộc Cung Chính ti",fx:{bac:-60},x:"chuyện chìm xuống"}]}});
 ev("poisongift",()=>liveRivals(false).length&&S.rank>=1,()=>({v:rvAny().id,o:od(40+S.mat*5+S.tamco/4)}),p=>{const v=RV(p.v);if(!v)return null;return{who:pv(v),
@@ -28,11 +28,11 @@ ev("guardrumour",()=>S.nights>=1,()=>({v:(rvAny()||{}).id,o:od(40+S.duc/2)}),p=>
  t:"Lời đồn lan khắp các cung: đêm đêm có thị vệ lẻn vào tẩm cung của ngươi.<br>Hoàng thượng chưa nói gì, nhưng đã hai tuần không lật thẻ ngươi.",o:[
  {n:"Xin Hoàng thượng tra xét",fx:{},x:`${word(p.o)} · thành: Danh +4 · hỏng: Sủng -10`,go:()=>{if(roll(p.o))apply({danh:4,sung:2});else apply({sung:-10,danh:-6})}},
  {n:"Đút bạc dập lời đồn",fx:{bac:-40,danh:-2}},
- {n:"Tìm kẻ tung tin",fx:{suc:-10},x:v?`${word(oSpy())} · thành: chứng cứ ${v.name} +1`:"không ra manh mối",go:()=>{if(v&&roll(oSpy())){evStory(v,1,"tung tin đồn bẩn về ngươi");v.rel-=10;log(`Kẻ tung tin là người của ${v.name}.`)}}}]}});
+ {n:"Tìm kẻ tung tin",fx:{suc:-10},x:v?`${word(oSpy())} · thành: chứng cứ ${v.name} ${balSg(BAL.eff.j7.evGo_4)}`:"không ra manh mối",go:()=>{if(v&&roll(oSpy())){evStory(v,BAL.eff.j7.evGo_4,"tung tin đồn bẩn về ngươi");v.rel-=10;log(`Kẻ tung tin là người của ${v.name}.`)}}}]}});
 ev("ghost",()=>SEASON[S.month-1]==="Thu"||SEASON[S.month-1]==="Đông",()=>({v:(rvAny()||{}).id}),p=>{const v=p.v!=null?RV(p.v):null;return{
  t:"Cung nhân thì thầm: đêm qua có bóng áo trắng khóc bên giếng sau cung ngươi.<br>Ba cung nữ xin đổi đi nơi khác.",o:[
  {n:"Mời sư làm lễ trừ tà",fx:{bac:-30,duc:2,suc:5}},
- {n:"Rình bắt kẻ giả ma",fx:{suc:-10},x:v?`${word(od(45+S.mat*5))} · thành: chứng cứ ${v.name} +2`:"chỉ là mèo hoang",go:()=>{if(v&&roll(od(45+S.mat*5))){evStory(v,2,"sai cung nữ giả ma dọa ngươi");log(`Kẻ giả ma là cung nữ của ${v.name}.`)}}},
+ {n:"Rình bắt kẻ giả ma",fx:{suc:-10},x:v?`${word(od(45+S.mat*5))} · thành: chứng cứ ${v.name} ${balSg(BAL.eff.j7.evGo_5)}`:"chỉ là mèo hoang",go:()=>{if(v&&roll(od(45+S.mat*5))){evStory(v,BAL.eff.j7.evGo_5,"sai cung nữ giả ma dọa ngươi");log(`Kẻ giả ma là cung nữ của ${v.name}.`)}}},
  {n:"Mặc kệ",fx:{danh:-3,maid:-5}}]}});
 /* alliances */
 ev("pact",()=>qOn()&&liveRivals(false).length,()=>({v:rvTop((a,b)=>b.rel-a.rel).id}),p=>{const v=RV(p.v),q=rivals[0];if(!v)return null;return{who:pv(v),
@@ -87,7 +87,7 @@ ev("foreignwed",()=>myDaus().some(k=>k.age>=BAL.age.wed),()=>{const d=myDaus().f
 ev("maidhostage",()=>liveRivals(false).length,()=>({v:rvAny().id,o:od(40+S.tamco/3+S.maid.loyal/5)}),p=>{const v=RV(p.v);if(!v)return null;return{who:pMaid(),
  t:`${S.maid.name} quỳ khóc: người của ${v.name} giữ cha mẹ nàng, bắt nàng lấy trộm thư từ của ngươi.`,o:[
  {n:"Bỏ bạc chuộc người",fx:{bac:-60,maid:25}},
- {n:"Bày kế phản gián",fx:{},x:`${word(p.o)} · thành: chứng cứ ${v.name} +2 · hỏng: Lòng cung nữ -20`,go:()=>{if(roll(p.o)){evStory(v,2,"bắt cha mẹ cung nữ của ngươi để ép nàng trộm thư");apply({maid:10})}else apply({maid:-20})}},
+ {n:"Bày kế phản gián",fx:{},x:`${word(p.o)} · thành: chứng cứ ${v.name} ${balSg(BAL.eff.j7.evGo_6)} · hỏng: Lòng cung nữ -20`,go:()=>{if(roll(p.o)){evStory(v,BAL.eff.j7.evGo_6,"bắt cha mẹ cung nữ của ngươi để ép nàng trộm thư");apply({maid:10})}else apply({maid:-20})}},
  {n:"Bỏ mặc",fx:{maid:-35}}]}});
 ev("doctorblack",()=>S.doctor,()=>({o:od(35+S.tamco/3+S.mat*4)}),p=>({who:pDoc(),
  t:"Thái y tâm phúc của ngươi lén báo: có kẻ biết ông từng kê nhầm thuốc cho tiên phi, đòi 50 lượng mỗi tháng.",o:[
@@ -152,7 +152,7 @@ ev("coldvisit",()=>rivals.some(v=>v.alive&&v.out),()=>({f:pick(rivals.filter(v=>
 /* dangers */
 ev("taster",()=>S.rank>=2&&liveRivals(false).length,()=>({v:rvTop((a,b)=>b.malice-a.malice).id,o:oSpy()}),p=>{const v=RV(p.v);if(!v)return null;return{
  t:"Tiểu thái giám nếm canh ngự ban cho ngươi bỗng ôm bụng ngã gục, môi tím tái.",o:[
- {n:"Truy đến cùng Ngự thiện phòng",fx:{suc:-10},x:`${word(p.o)} · thành: chứng cứ ${v.name} +2`,go:()=>{if(roll(p.o)){evStory(v,2,"sai người bỏ thuốc vào đồ ăn của ngươi");log(`Đầu bếp khai ra người của ${v.name}.`)}else v.rel-=10}},
+ {n:"Truy đến cùng Ngự thiện phòng",fx:{suc:-10},x:`${word(p.o)} · thành: chứng cứ ${v.name} ${balSg(BAL.eff.j7.evGo_7)}`,go:()=>{if(roll(p.o)){evStory(v,BAL.eff.j7.evGo_7,"sai người bỏ thuốc vào đồ ăn của ngươi");log(`Đầu bếp khai ra người của ${v.name}.`)}else v.rel-=10}},
  {n:"Đổi người nấu, giấu chuyện",fx:{bac:-30},x:"2 tháng phi tần khó hại ngươi",go:()=>{S.shield=Math.max(S.shield,2)}},
  {n:"Khóc kể với Hoàng thượng",fx:{sung:3},x:`cả hậu cung bị tra, ai cũng ghen +${ghenN(BAL.ghen.cry)}`,go:()=>ghenAll(BAL.ghen.cry)}]}});
 ev("letterhome",()=>S.turn>=3,()=>({o:od(30+S.sung/3)}),p=>({
@@ -170,7 +170,7 @@ ev("rvframe",()=>liveRivals(false).length>=2,two,p=>{const a=RV(p.a),b=RV(p.b);i
  t:`Ngươi nghe lén sau hòn non bộ: ${a.name} bàn với thái giám giấu đồ ngự dụng vào cung ${b.name} để vu tội trộm.`,o:[
  {n:`Báo cho ${b.name}`,fx:{duc:2},x:`${b.name} thiện cảm +25 · ${a.name} thù -15`,go:()=>{b.rel+=25;a.rel-=15}},
  {n:`Giúp ${a.name} một tay`,fx:{duc:-5},x:`${a.name} thiện cảm +20 · ${b.name} thất thế: ${chanceW(50)}`,go:()=>{a.rel+=20;S.schemes++;if(roll(50))fall(b,"bị vu trộm đồ ngự dụng")}},
- {n:"Ghi nhớ làm chứng cứ",fx:{tamco:1},x:`chứng cứ ${a.name} +2`,go:()=>{evStory(a,2,`bàn mưu giấu đồ ngự dụng vào cung ${b.name} để vu tội trộm`)}}]}});
+ {n:"Ghi nhớ làm chứng cứ",fx:{tamco:1},x:`chứng cứ ${a.name} ${balSg(BAL.eff.j7.evGo_8)}`,go:()=>{evStory(a,BAL.eff.j7.evGo_8,`bàn mưu giấu đồ ngự dụng vào cung ${b.name} để vu tội trộm`)}}]}});
 ev("rvquarrel",()=>liveRivals(false).length>=2,two,p=>{const a=RV(p.a),b=RV(p.b);if(!a||!b)return null;return{who:pv(a),
  t:`Trong Ngự hoa viên, ${a.name} và ${b.name} tranh nhau một chậu mẫu đơn Hoàng thượng ban, lời qua tiếng lại.`,o:[
  {n:"Đứng ra can ngăn",fx:{duc:2,danh:1},x:"cả hai thiện cảm +5",go:()=>{a.rel+=5;b.rel+=5}},

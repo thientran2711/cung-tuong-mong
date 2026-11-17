@@ -345,12 +345,12 @@ PEND.wdframe=pp=>{const a=byKey(pp.a);if(!a)return null;const nm=wdFrameNm(pp.k)
   apply({danh:-10,sung:-5});punish(S,"lấy trộm đồ",1);Q.push({t:"Mang tội ăn trộm",who:pMe(),h:`<p class="r">Không minh oan được: ngươi mang tội lấy trộm ${nm} của ${wdNm(a)}. Danh -10, Sủng -5, bị phạt.</p>`})};
  const spendEv=()=>{const x=cur();if(x.e&&x.e.lo&&typeof lostEvUse==="function"&&lostEvUse(x.e.lo))return true;if(cu&&evG(S,cu)>0){evA(S,cu,BAL.eff.j92.evSpendEv);return true}return false};
  const O=[];
- O.push({n:"Trình chứng cứ minh oan",fx:{},j67:lo?"tốn: 1 chứng cứ đã tra xét":`tốn: 1 chứng cứ về ${a.name}`,go:()=>{if(!spendEv()){guilty(false);return}if(roll(o1))clear(lo?"Ngươi trình chứng cứ đã tra xét.":`Ngươi trình chứng cứ về ${wdNm(a)}.`);else guilty(false)}});
+ O.push({n:"Trình chứng cứ minh oan",fx:{},j67:lo?`tốn: ${balAb(BAL.eff.jlost.evLostEvUse)} chứng cứ đã tra xét`:`tốn: ${balAb(BAL.eff.j92.evSpendEv)} chứng cứ về ${a.name}`,go:()=>{if(!spendEv()){guilty(false);return}if(roll(o1))clear(lo?"Ngươi trình chứng cứ đã tra xét.":`Ngươi trình chứng cứ về ${wdNm(a)}.`);else guilty(false)}});
  O.push({n:"Xin Cung Chính ti tra xét",fx:{},j67:"tốn: không tốn gì",go:()=>{if(roll(o2))clear("Cung Chính ti tra hỏi người ra vào.");else guilty(false)}});
  O.push({n:"Nhận lỗi, xin khoan hồng",fx:{},j67:"tốn: không tốn gì",go:()=>guilty(true)});
  return{t:lo?`<p>${wdNmC(a)} báo Cung Chính ti: <b>${nm}</b> của nàng bị thất lạc, nay thấy ở cung ngươi. Cung Chính ti khám phòng ngươi và tìm thấy món ấy.</p>`:`<p>${wdNmC(a)} tố ngươi lấy trộm <b>${nm}</b>. Cung Chính ti khám phòng ngươi và tìm thấy món ấy trong rương.</p>`,o:ev>=1?O:O.slice(1),who:pv(a)}};
 A("giahoa","Giá họa trộm đồ",{c:{bac:-40},ok:(a,t)=>a.bac>=40&&!(t===S&&S.wdFrame),o:(a,t)=>oPlant(a,t),x:"sai người lén đặt đồ quý vào phòng nàng rồi tố nàng ăn cắp",f:(a,t)=>wdFrame(a,t)});
-try{AOUT.giahoa=["nàng mang tội ăn trộm: Danh -10, Sủng -5, bị phạt",`kẻ đặt đồ bị bắt: nàng nắm 2 chứng cứ, thù ${balSg(BAL.eff.j92.wdFrame)} · hoặc nàng minh oan được: ngươi Danh -10, bị phạt`]}catch(e){}
+try{AOUT.giahoa=["nàng mang tội ăn trộm: Danh -10, Sủng -5, bị phạt",`kẻ đặt đồ bị bắt: nàng nắm ${balAb(BAL.eff.j92.evWdFrame)} chứng cứ, thù ${balSg(BAL.eff.j92.wdFrame)} · hoặc nàng minh oan được: ngươi Danh -10, bị phạt`]}catch(e){}
 try{LACK.giahoa=()=>S.bac<40?"cần Bạc 40 để sai người":""}catch(e){}
 try{ACTDOM.giahoa="Mưu kế";J78VERB.giahoa="giá họa {t} tội ăn trộm";DIRTY.push("giahoa");
  const g=RVGRP.find(x=>x[0]==="Hại nặng");if(g&&!g[1].includes("giahoa"))g[1].push("giahoa");if(BANDS[2]&&!BANDS[2][2].includes("giahoa"))BANDS[2][2].push("giahoa")}catch(e){}

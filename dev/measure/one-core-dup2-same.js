@@ -10,12 +10,24 @@ const NS=['quyLv','loy','wit','ducLv','sungLv','nightEnd','tinhLv','tinLv','rare
  /* review/one-core-dup3: amounts (BAL.eff / road / arc / route …) and the night table; values from every BAL file (one-core-text loadBAL) */
  'eff','road','arc','route','night','net','evWipe'];
 /* owner-ruled word changes (VANPHONG:69 / OD:L247 thiện cảm words everywhere): */
-const INTENDED={'jhc.js':['window.quyW'],'j21.js':['affW'],'jts.js':['tsQuy'],'j55.js':['ccWord'],
+const INTENDED={'jhc.js':['window.quyW'],'jts.js':['tsQuy'],'j55.js':['ccWord'],
  /* review/one-core-dup3: jlost A("laydol") x + AOUT.laydo/laydol: the text said «cung nữ thân tín lòng -10» while the rule (jlost loSteal self / jecon bribel)
     takes BAL.loyalCost = 25 → it now prints BAL.loyalCost (lazy getter / aoLz: jecon loads after jlost) and «Đức ${balSg(LO.act.duc)}» (= -4, same words) */
  'jlost.js':['ExpressionStatement','TryStatement'],
  /* review/one-core-dup3 item 5: j22 «Hẹn gặp riêng» lock text named only «lòng 60+» while the live watcher (jtin) also needs Chủ tin BAL.tinLv.watch: it now says both, as jroute does */
- 'j22.js':['talkOpts']};
+ 'j22.js':['talkOpts'],
+ /* review/one-core-dup3 r1 (evidence counts print their key; same words, the digit is the key). Statements whose SHAPE had to change (the proof can only
+    compare a string with a print in place):
+    j17 CAUGHT const → caughtW() (j17 loads before BAL.eff, a const could not print the key) + actLine calls it; AOUT bribe / block: plain arrays → aoLz pairs
+        (VariableDeclaration AOUT) · j63 rvGroups / j79 actLineRaw (IfStatement) match caughtW() · jdress spy text: replace() by the printed number (regex)
+    j8 IT.chungcu.d / jpet PET.vet.use: getters that print the table's own evi / BAL.eff.jpet.evPetMonthOf (VariableDeclaration of the table)
+    j78 actLineRaw: the "Chứng cứ -N" cost table reads -BAL.eff.j30.evF / j78.evF / evF_2 / evF_3 (was typed 1 / 1 / 2 / 1)
+    TEXT ↔ RULE disagreements fixed: j21 doAct note «dò la được thêm 1» → the real gain ${v.ev-e0}; j29 fireServ evA(f,p,1+(…?1:0)) said «chứng cứ +1» even
+    when 2 → BAL.eff.j29.evFireServ(+_2) and the text prints that amount; jlost lostEvUse c.cev-- → c.cev+BAL.eff.jlost.evLostEvUse (j92 «tốn: N chứng cứ đã
+    tra xét» prints it) */
+ 'j17.js':['caughtW','VariableDeclaration','actLine'],'j21.js':['affW','doAct'],'j29.js':['fireServ'],'j63.js':['rvGroups'],'j78.js':['actLineRaw'],'j79.js':['IfStatement'],
+ 'j8.js':['VariableDeclaration'],'jdress.js':['IfStatement'],'jpet.js':['VariableDeclaration']};
+INTENDED['jlost.js'].push('lostEvUse');
 /* j55 ccWord = side-chance scale (owner OD:L221) */
 const bal=()=>{const c={Math,BAL:{pace:1}};vm.createContext(c);
  const src=fs.readFileSync('dev/build/jbal.js','utf8')+'\n'+fs.readFileSync('dev/build/jbal2.js','utf8');
