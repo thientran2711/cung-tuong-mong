@@ -609,3 +609,4 @@
 | opt-pic-same review r1 → given to mg-clutter reviewer after its verdict | review/opt-pic-same-r1 | main s30 | session_01UV1SzhB4ckkvjk7TVuS92E | QUEUED | 17/11 04:20Z |
 | newlife-reset r1 PASS b2da25cc0 → next batch after 0415 (builder session_01UV1SzjhxXkcba8uS4TZeVm stays alive) | review/newlife-reset-r1 | main s30 | - | PASS | 17/11 04:20Z |
 | map-full r1 PASS 29131677 (review/map-full-r1; trial-merge app-edge clean) → ships TOGETHER with app-edge after app-edge r1 PASS, next batch | review/map-full-r1 | main s30 | session_01UV1Szipn2t9xXY2WubCJ1T | PASS | 17/11 04:22Z |
+| mg-clutter r1 PASS cbbbc7d9 (review/mg-clutter-r1; needs merge on main) → next batch with newlife-reset b2da25cc0 + map-full 29131677 (+ app-edge on PASS) | review/mg-clutter-r1 | main s30 | session_01UV1SzhB4ckkvjk7TVuS92E | PASS | 17/11 04:23Z |
