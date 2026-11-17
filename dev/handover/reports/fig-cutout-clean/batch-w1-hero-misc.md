@@ -234,6 +234,7 @@ kid-f17-a14	gOtRhNeSXO	https://pikaso.cdnpk.net/private/production/6061423763/re
 kid-f18-a14	kspydJx16B	https://pikaso.cdnpk.net/private/production/6061424151/render.png	ok 2k+hd (W4d-K2)
 kid-f19-a14	SymZvREUb8	https://pikaso.cdnpk.net/private/production/6061424505/render.png	ok 2k+hd (W4d-K2)
 ## W4d: K2 done (kid f11-f19 a14, 585cr; f20 NOT done: Magnific creations_upload_image daily limit 2500 hit, resets ~1h)
+<<<<<<< HEAD
 kid-f20-a14	vQ2xJtsa47	https://pikaso.cdnpk.net/private/production/6061814597/render.png	ok 2k+hd (W4d-K3)
 kid-f21-a14	P3ucBPZ42C	https://pikaso.cdnpk.net/private/production/6061815257/render.png	ok 2k+hd (W4d-K3)
 kid-f22-a14	Xm4Hs8dBfo	https://pikaso.cdnpk.net/private/production/6061815941/render.png	ok 2k+hd (W4d-K3)
@@ -278,3 +279,5 @@ maid-m24-ty5-a18	P3ucScw42C	https://pikaso.cdnpk.net/private/production/60620539
 maid-m24-ty6-a18	iGbDOdY3uK	https://pikaso.cdnpk.net/private/production/6062054054/render.png	ok 2k+hd (W4d-MK1)
 maid-m24-ty7-a18	aFAjoSLfSh	https://pikaso.cdnpk.net/private/production/6062054830/render.png	ok 2k+hd (W4d-MK1)
 ## W4d: MK1 done (kid f05 -> kid a14 ALL 48 DONE; maid-ty a18 m23-ty7/8, m24-ty1..ty7 2k; DRIFT m24-ty4~ty6 alike; m24-ty1/ty2/ty3 = same cut recolour -> to be redone in consort-tier redraw; 650cr)
+=======
+>>>>>>> 5d649e20 (report: story-bot REPORT READY line)

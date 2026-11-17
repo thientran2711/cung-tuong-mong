@@ -766,6 +766,7 @@ Staged results (NOT live): CDN img/_review/event-art-style/ready/<key>.webp, sam
 DONE keys (41): ev-am-muu ev-ch1 ev-ch2 ev-con-tre ev-cyrep ev-e68-{allyoffer autumnmoon bordernews borrowdress clanfather doccheck doubtvisit droughtprayer embroidery envoygift eunrequest faminedonate fortunenun giftarrive hhsummons kindvisit leakroof letterhome lotusseason musician newgirladvice officialwife painter poisonedfish proudvisit rumoremplove rumorfavor rumorpreg rumorth servhero servleave sickservant silkallot snowday spoiledfood springallergy}
 NEXT in table order: e68-stormnight straycat templerite thmama, evpick, fest-* (night ones stay night but muted), giftpick, hh-viec, j70thr, j71f-*, j71x-*, mood-binh*, morning-after-b, nc1, news-tin-trong-cung, nhap-cung*, night1*, night2*, plantpick, q72-*, runner, shop, taintpick, td1, thd1, toil-*, tt1-3, vlcraft, vlnvp, vlout, vulan, wk-*, opt-giu-chan-hoang-thuong (sample file in review/), then intro (49; samples intro-ch-h3 / intro-td-h1 in review/), then acts with faces (list at end).
 Going live (only after Foreman C confirms a sheet): cdn_sync the staged webp onto img/<key>.webp (same key, no manifest).
+<<<<<<< HEAD
 
 ## HANDOVER (art worker -> Foreman C ROOT, 17/11 ~06:10Z) — STOPPED, nothing live
 STATUS: 103 ev redo images staged at CDN img/_review/event-art-style/ready/<key>.webp (sheets batch-01..04.jpg in the same folder). ALL 103 ARE MARKED REJECTED-METHOD by the owner/ROOT (see below). Nothing was uploaded live. No render running.
@@ -930,3 +931,5 @@ JOB 3 redos LIVE (C OK 08:03Z): img/ev-vlnvp.webp u5YUjJNQLD (silk bolts, no swa
 Review sheets (CDN img/_review/thanhtai/s1,s2,s3) can be wiped with the verdict (cdn_sync.py --wipe-review thanhtai).
 Wiring NOT done by art: game still loads single img/scene-thanhtai.webp (jlevel.js:13); a coder must map ARTS (j1.js:61) + VIR (j85.js:9) keys -> img/scene-thanhtai-<k>.webp (KIT_REQUESTS if a kit part is missing). Acts untouched (OD:L84). Credits: ~19 pictures x 40.
 HANDOVER: none needed (stopped at ~15% context). ~100% art done / ~0% chơi được until wiring.
+=======
+>>>>>>> 5d649e20 (report: story-bot REPORT READY line)

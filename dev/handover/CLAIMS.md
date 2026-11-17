@@ -528,7 +528,11 @@
 | BATCH 01:32 builder (opus): batch-0132 = main 0f61ff92 (coop-main-faults) + kit-size-10 8ab00ede; oi-perf / it-key-guard / coop-contest-fix not received | review/batch-0132 | main s28 | session_01UV1Szgb3UbRCJaMcocuGrF | SẴN SÀNG KIỂM 7abaf07a | 17/11 02:00Z |
 | BATCH 0132 LIVE: main = 7abaf07ac (0f61ff928 + kit-size-10 8ab00ede; quickcheck PASS, coop-e2e 60/60, timed-choice-fit 12/12; shots looked at by s28: clock chip on screen Fold+iPad) — builder rolled over, next batch needs a fresh builder | main | main s28 | session_01UV1Szgb3UbRCJaMcocuGrF | LIVE | 17/11 01:56Z |
 | fig-feet-crop-2 (sonnet kit keeper; OWNER BUG 17/11 ~02:00Z: VIỆC timed dialog figures lose feet Fold+iPad, whole family of figure dialogs; earlier fix 8fb59e05 kitDpFit did not cover it) | review/fig-feet-crop-2 | main s28 | session_01UV1SzhmYHAXz9FfRkTLF6Z | RUNNING | 17/11 01:55Z |
+<<<<<<< HEAD
 | WHOLE FIGURE REPAINT lead #6 (sonnet art; replaces lead #5 session_011xDdVRBW26agruDT2Bm65K archived; LEAD HANDOVER #5->#6 in BATCH_PLAN.md) | review/fig-cutout-clean | C | session_011xDdVS87fDNLJMJGzeiVWL | ROLLED OVER 17/11 10:25Z (75% ctx) -> lead #7 | 17/11 10:25Z |
+=======
+| WHOLE FIGURE REPAINT lead #6 (sonnet art; replaces lead #5 session_011xDdVRBW26agruDT2Bm65K archived; LEAD HANDOVER #5->#6 in BATCH_PLAN.md) | review/fig-cutout-clean | C | session_011xDdVS87fDNLJMJGzeiVWL | RUNNING | 17/11 01:58Z |
+>>>>>>> 5d649e20 (report: story-bot REPORT READY line)
 | WHOLE FIGURE REPAINT batch W5b maid-rest-A (successor of W5, 2K) | review/fig-cutout-clean | C | session_011xDdVRUq5KAtiVYtgqEjkS | RUNNING | 17/11 01:58Z |
 | old-people proportion ROLLOUT #2 (sonnet art, 2K): ~85 p/f-series by age/sex base + mk-fit thaihau check (successor of session_011xDdVRzEtFchdNQKaMfih7) | reports/fig-proportion-redo on handover | C | session_011xDdVSy3ERmyVnLWqMYT6p | RUNNING | 17/11 01:59Z |
 | coop-contest-fix review r3 (opus) of 1ce276b7 | review/coop-contest-fix-r1 a7f4ab13 | main s28 | session_01UV1SziJoyYJ3o5iLXG8BuP | CANCELLED by s28 (thin guest); findings in report §r3 | 17/11 02:01Z |
@@ -536,7 +540,11 @@
 | FP princess art SUCCESSOR #5 (sonnet art, 2K): v25 NC graceful + BD ranks with owner → NC ranks after pick; game-ready keys | review/foreign-princess-samples + reports on handover | C | session_011xDdVQLLoooSkPhJraizSu | RUNNING | 17/11 02:04Z |
 | WHOLE FIGURE REPAINT batch W7b consort-rest-B (successor of W7: 56 a18 live; first hd retro-fit) | review/fig-cutout-clean | C | session_011xDdVRfTXkRr1K97oJueiZ | RUNNING | 17/11 02:06Z |
 | WHOLE FIGURE REPAINT batch W4c maid-ty (successor of W4b: 37 live; next maid-m05-ty6-a18) | review/fig-cutout-clean | C | session_011xDdVShYq4ow4VaBTVm4CY | RUNNING | 17/11 02:08Z |
+<<<<<<< HEAD
 | balance-core review r2b (opus numbers): ONE item — early-death gap (<3y 2/42 main vs 7/41 branch, p≈0.08) with ≥150 sens-bot lives per side, baff0824 vs main 7abaf07a; PASS stands or FAIL (r2 PASS baff0824 conditional; reviewer #1 + worker #2 archived) | review/balance-core-r2 | main s28 → s30 | session_01UV1Szk2uZjmbYdXJKyXFCH | DONE PASS baff0824 stands (150/150 lives, same seeds: ended <3y main 27 vs branch 20, p 0.34; her own deaths 15 vs 12, p 0.69; gap was noise — reports/review-balance-core-r2.md §r2b) | 17/11 |
+=======
+| balance-core review r2b (opus numbers): ONE item — early-death gap (<3y 2/42 main vs 7/41 branch, p≈0.08) with ≥150 sens-bot lives per side, baff0824 vs main 7abaf07a; PASS stands or FAIL (r2 PASS baff0824 conditional; reviewer #1 + worker #2 archived) | review/balance-core-r2 | main s28 | session_01UV1Szk2uZjmbYdXJKyXFCH | RUNNING | 17/11 02:12Z |
+>>>>>>> 5d649e20 (report: story-bot REPORT READY line)
 | BATCH 02:32 builder (opus): batch-0232 = main 7abaf07ac + B PASSes road-b2-fix-r2 fba2b5de → road-b3-fix2-r1 b837b0d1 → emotion-acts-3-r1 2118d118 → diff-remeasure-r1 ebe9ab2d → tut-followups-r1 92cce50b (brief briefs/batch-0232.md) | review/batch-0232 | main s28 | session_01UV1SzkcNCwgZaSP59sonVH | RUNNING | 17/11 02:14Z |
 | WHOLE FIGURE REPAINT batch W6b maid-rest-B (successor of W6: 56 live, hd retro-fit first; NEXT m30-t5-a18) | review/fig-cutout-clean | C | session_011xDdVNxAYRynZa8Sq6PzU6 | RUNNING | 17/11 02:19Z |
 | ART: residence ROOMS per place (OD 17/11 01:45Z–02:05Z): audit every Hành sự stage / visit backdrop; every residence (rank seat cap from BAL) × 2 rooms (chính điện + phòng ngủ) × buổi × season; samples to owner first (sonnet art, 2K) | reports/residence-rooms on handover | C | session_011xDdVPn56ykNbvErsniswH | RUNNING | 17/11 02:20Z |
@@ -552,7 +560,11 @@
 | presentation-wiring (sonnet): remaining jpres animations S3-151/182/205, entrance edict S3-152 (owner-bug-sweep) | review/presentation-wiring | main s28 | session_01UV1SziPP4d9141LvjeJ4wM | PARTIAL b0b972b97 pushed (kitFigFx §68.8 + people moments); ROLLOVER: coordinator opens successor (report reports/presentation-wiring.md: visual check, entrance/origin frames, seal, ART REQUEST A1-A3) | 17/11 |
 | save-dlg-fix (sonnet kit keeper; OWNER BUG 02:47Z 'Lỗi tùm lum' Chọn sổ: squeezed column, letter-by-letter buttons, '???' life title, cut picture; whole family: picture+info dialogs, no word breaks in any button) | review/save-dlg-fix | main s28 | session_01UV1SzhRZF6zDmg7pUydbUm | RUNNING | 17/11 02:44Z |
 | wx-fx-size (sonnet; OWNER BUG 03:08Z petals too big + over text; whole family of weather particles/bursts, inside the stage only) | review/wx-fx-size | main s28 | session_01UV1SzjkM9jo2gPxyFWVcaP | RUNNING | 17/11 02:53Z |
+<<<<<<< HEAD
 | WHOLE FIGURE REPAINT batch W5c maid-rest-A (successor of W5b session_011xDdVRUq5KAtiVYtgqEjkS, archived; opened by lead #6) | review/fig-cutout-clean | C | session_011xDdVPuKQaYeJ9rNmE133Y → W5d session_011xDdVS67MZHvG6dfdxn9we (17/11 08:00Z; a18 m27–m52 rest 22 → a36 m27–m52) | RUNNING | 17/11 02:55Z |
+=======
+| WHOLE FIGURE REPAINT batch W5c maid-rest-A (successor of W5b session_011xDdVRUq5KAtiVYtgqEjkS, archived; opened by lead #6) | review/fig-cutout-clean | C | session_011xDdVPuKQaYeJ9rNmE133Y | RUNNING | 17/11 02:55Z |
+>>>>>>> 5d649e20 (report: story-bot REPORT READY line)
 | npc-agent AG1 r1-fix #2 review (opus BIG) of d4796840 (review/npc-agent-r1 tip 55acd2d6) | review/npc-agent-r1 | C | session_011xDdVRyN4EWAMkVGeM4BB3 | RUNNING | 17/11 02:53Z |
 | tuanluc-sync (opus; OWNER BUG 03:18Z: week-book-only info never shown in play, Lối riêng unlock ×9, unclear lines; whole family of log() call sites) | review/tuanluc-sync | main s28 | session_01UV1Szh89kMUtnfZPTNysLY | RUNNING | 17/11 03:00Z |
 | newlife-reset (opus; OWNER BUG 03:22Z: healed-wound/veil line on a brand-new life → previous-life state leaks; whole-family per-life reset registry) | review/newlife-reset | main s28 | session_01UV1SzgyQP6eCJz2hmcnLrF | READY 631b8898 (SẴN SÀNG KIỂM; root = S.vl field collision jvoice/jveil; lifeStore registry; leak test FAIL 0) | 17/11 03:01Z |
@@ -570,7 +582,11 @@
 | presentation-wiring #2 (sonnet, opened by s28; base b0b972b97) | review/presentation-wiring | main s29 | session_01UV1SzhippoJhAJG9kpDYJP | RUNNING | 17/11 03:23Z |
 | newlife-reset review r1 (opus BIG save/state) of 631b8898 (worker archived) | review/newlife-reset-r1 | main s29 | session_01UV1Szj7gGyXgBXgvj6d6xG | RUNNING | 17/11 03:26Z |
 | fig-rank-match-r2 review (sonnet URGENT; manifests 656→1296 / 240→2112 + strict picker + guard; safe-first verdict per manifest) of 2d0f41c56 | review/fig-rank-match-r2-r1 | main s29 | session_01UV1SzgpLfyJgZdu2ie2XYZ | RUNNING | 17/11 03:27Z |
+<<<<<<< HEAD
 | WHOLE FIGURE REPAINT batch W4d (successor of W4c session_011xDdVShYq4ow4VaBTVm4CY, archived; hero+misc remainder, maid-ty on GO after owner OK of rank-sample-v2) | review/fig-cutout-clean | C | session_011xDdVPnYcsf2h5vWcgL2Z5 → W4e session_011xDdVPcfZBTUBL5um1QC4E (17/11 07:59Z, maid consort-tier a18/a36/a51 m01–m26) | RUNNING | 17/11 03:29Z |
+=======
+| WHOLE FIGURE REPAINT batch W4d (successor of W4c session_011xDdVShYq4ow4VaBTVm4CY, archived; hero+misc remainder, maid-ty on GO after owner OK of rank-sample-v2) | review/fig-cutout-clean | C | session_011xDdVPnYcsf2h5vWcgL2Z5 | RUNNING | 17/11 03:29Z |
+>>>>>>> 5d649e20 (report: story-bot REPORT READY line)
 | save-dlg-fix review r1 (sonnet SMALL UI) of 340c616a (worker #2 archived) | review/save-dlg-fix-r1 | main s29 | session_01UV1SzgbocUETEUWFViBc8f | RUNNING | 17/11 03:31Z |
 | night-final SUCCESSOR #6 (opus; HELD BY MAIN while Foreman D is out of quota; returns to D on a new D account) from ea74aff6: shots, buổi perf ≤ live +5 %, G4 probe proof; co-op PARKED | review/night-final | main s29 | session_01UV1SzkcuhnxeSAywiQC2hz | RUNNING | 17/11 03:33Z |
 | OI family (opus): render-cost root fix + origin-intros flow/oldsave tests + kc2val Chờ re-measure (carries kc-roads-cn-nc-fix2), then one OI reviewer | review/batch-0032-oi | D | session_01964izCi8228y2v2JjEknpd | DONE SẴN SÀNG KIỂM de6a876b (archived) | 17/11 03:35Z |
@@ -579,7 +595,11 @@
 | npc-death re-wire (opus): jnpcd/jly into j95 place-people record (Lý Trường Môn viện, dead off lists, Thái y viện new name) | review/npc-death-wire | D | session_01964izBuQu8dWabKyYB69JE | DONE SẴN SÀNG KIỂM de166c3f (archived) | 17/11 03:35Z |
 | suc-khoe review r2 (opus BIG) of da50857d | review/suc-khoe-r2 | D | session_01964izEdQ4cDsTpuGgdScHp | PASS 7e1f42ca (archived) → FOR MAIN batch | 17/11 03:35Z |
 | C44 cloud-del 'Xóa sổ trên mây' (sonnet UI, KIT §83.9) | review/cloud-del | D | session_01964izCcuExvScNgYEs1xN6 | DONE SẴN SÀNG KIỂM e12ef99a (archived) | 17/11 03:35Z |
+<<<<<<< HEAD
 | P5 STORY BOT balance (opus, report only, ch1–4 first) | review/story-bot | D | session_01964izEJdhucE8HEDCzfJ25 | DONE REPORT READY 0e8f8ff8 (archived) | 17/11 03:35Z |
+=======
+| P5 STORY BOT balance (opus, report only, ch1–4 first) | review/story-bot | D | session_01964izEJdhucE8HEDCzfJ25 | RUNNING | 17/11 03:35Z |
+>>>>>>> 5d649e20 (report: story-bot REPORT READY line)
 | scenes-3 r1 PASS 92b6c60f (review/scenes-3-r1) → builder batch-0232 (or next batch); worker + reviewer archived | review/scenes-3-r1 | main s29 | session_01UV1Szkquo1hWfgug5N5F9Q | PASS | 17/11 03:37Z |
 | ART event-art-style (sonnet art): OWNER 03:42Z event pictures off-style (faces / colour / brushwork) → audit every event/act/opt/intro picture vs anchor, 4 samples → C, then redo (brief briefs/event-art-style.md) | handover reports/event-art-style.md | C | session_011xDdVNnHxuy2KotX9dH3zb | RUNNING | 17/11 03:40Z |
 | fig-rank-match-r2 review PASS 2558a2f1 (review/fig-rank-match-r2-r1); manifests safe-first both. UPLOAD BLOCKED: s29's cdn_sync push of img/FIGURES*.json was denied by the auto-mode classifier → waiting on the owner's OK. Rebuilt files verified (guard PASS, 1296/2112) in s29 scratch; live backups 656/240 kept. Code → next batch. | review/fig-rank-match-r2-r1 | main s29 | session_01UV1SzgpLfyJgZdu2ie2XYZ | PASS | 17/11 03:43Z |
@@ -613,11 +633,19 @@
 | cloud-del review r1 (sonnet SMALL) of e12ef99a | review/cloud-del-r1 | D | session_01964izGAVcoDZanXLDNekPh | PASS 7d67ba1f (archived) → FOR MAIN batch | 17/11 04:23Z |
 | npc-death-wire review r1 (opus BIG) of de166c3f | review/npc-death-wire-r1 | D | session_01964izCQT8gNjjT2WA7WDjh | PASS 9253ec1b | 17/11 04:27Z |
 | newlife-reset r1 PASS 0045ff8ef (supersedes b2da25cc0; tuanluc-sync drops vmemFix) → next batch | review/newlife-reset-r1 | main s30 | session_01UV1Szj7gGyXgBXgvj6d6xG | PASS | 17/11 04:28Z |
+<<<<<<< HEAD
 | npc-roads review r2 (opus BIG) of e34393b1 (U2/U3/U4 + r1 families + ch1–4 gate; on a test build with B's road engine) | review/npc-roads-r2 | D | session_01964izESTjuhUzS2khSQ5K9 | PASS 1f49625d (archived) → FOR MAIN batch | 17/11 04:28Z |
 | BATCH 04:15 LIVE: main = 4719d424 (FF from 64c39ca28; save-dlg-fix-r1, fig-rank-match-r2-r1, wx-fx-size-r1); s30 looked at Fold/iPad shots | review/batch-0415 | main s30 | session_01UV1SzjhxXkcba8uS4TZeVm | LIVE | 17/11 04:31Z |
 | person-leftcol HELD by worker until owner confirms (WIP 66228c7a; worker context high → successor needed from a root main) | review/person-leftcol | main s30 | session_01UV1SzhEnrDEEXPkBwigyNF | HELD | 17/11 04:31Z |
 | item-ledger-solo review r1 (opus BIG) of ac939102 | review/item-ledger-solo-r1 | D | session_01964izDZwBFDcEekKPJkVPu | PASS be8dd7a1 (archived) → FOR MAIN batch | 17/11 04:36Z |
 | RESIDENCE + SEATS halved + HAREM 20 (opus; main s29 04:12Z/04:21Z/04:31Z/04:33Z; OD 04:08Z–04:32Z) | review/residence-seats | D | session_01964izBzU18L6Nv89Q2F288 (code 020890d1, rolled over) → #2 session_01964izFhVAJv8rPJzYXtQWx (measure + quickcheck) | RUNNING | 17/11 04:36Z |
+=======
+| npc-roads review r2 (opus BIG) of e34393b1 (U2/U3/U4 + r1 families + ch1–4 gate; on a test build with B's road engine) | review/npc-roads-r2 | D | session_01964izESTjuhUzS2khSQ5K9 | RUNNING | 17/11 04:28Z |
+| BATCH 04:15 LIVE: main = 4719d424 (FF from 64c39ca28; save-dlg-fix-r1, fig-rank-match-r2-r1, wx-fx-size-r1); s30 looked at Fold/iPad shots | review/batch-0415 | main s30 | session_01UV1SzjhxXkcba8uS4TZeVm | LIVE | 17/11 04:31Z |
+| person-leftcol HELD by worker until owner confirms (WIP 66228c7a; worker context high → successor needed from a root main) | review/person-leftcol | main s30 | session_01UV1SzhEnrDEEXPkBwigyNF | HELD | 17/11 04:31Z |
+| item-ledger-solo review r1 (opus BIG) of ac939102 | review/item-ledger-solo-r1 | D | session_01964izDZwBFDcEekKPJkVPu | PASS be8dd7a1 (archived) → FOR MAIN batch | 17/11 04:36Z |
+| RESIDENCE + SEATS halved + HAREM 20 (opus; main s29 04:12Z/04:21Z/04:31Z/04:33Z; OD 04:08Z–04:32Z) | review/residence-seats | D | session_01964izBzU18L6Nv89Q2F288 | RUNNING | 17/11 04:36Z |
+>>>>>>> 5d649e20 (report: story-bot REPORT READY line)
 | presentation-wiring r1 PASS bc8461cc (review/presentation-wiring-r1; residuals: seal fx nearly invisible, slap flush subtle, origin frame placeholder until A1) → batch after current | review/presentation-wiring-r1 | main s30 | session_01UV1Szipn2t9xXY2WubCJ1T | PASS | 17/11 04:56Z |
 | kit-ico-rank r1 PASS a1c7a37c (review/kit-ico-rank-r1; score.js RULES = BAL.rank one rulebook; ctm-rank Worker deploy by main AFTER go-live, steps in reports/review-kit-ico-rank-r1.md) → batch after presentation-wiring | review/kit-ico-rank-r1 | main s30 | session_01UV1Szh3wz6vc9DcUjfYN4f | PASS | 17/11 04:56Z |
 | fig-headtop SẴN SÀNG KIỂM 203a8291 → review asked of map-full reviewer | review/fig-headtop | main s30 | session_01UV1SziNzVtVrRy8QmSoLTB | READY | 17/11 04:56Z |
@@ -634,6 +662,7 @@
 | staff-root — capOf duplicates → BAL.promo.cap only, caps DOWN (lowest rank 1 servant), close-maid/ma ma root, old saves graceful (opus; OD 1497, 1549, L1155) | review/staff-root | B | session_01N1tNP3ZSe15ZCwXea7LSMe | RUNNING | 17/11 05:35Z |
 | npc-agent AG2 Emperor agent + nights (opus; reports/npc-agent.md §5 AG2; after AG1 PASS 2756d2d2) | review/npc-agent-ag2 | C ROOT | session_011xDdVRNkhkw9vZBGkZ1mDK | RUNNING | 17/11 05:40Z |
 | ONE TRAIT POOL 3 groups × 8 (24 traits, 2 pools by sex) + BALANCE LAW gain/cost table (opus; main s30 orders 05:46Z/06:12Z/06:21Z) | review/trait-pool | C ROOT | session_011xDdVQM2jyGVY8RsCxbtvX | RUNNING | 17/11 05:40Z |
+<<<<<<< HEAD
 | ART A1 nine origin frames + A2 swaddled baby + A3 red-thread JOIN (sonnet art; reports/presentation-wiring.md ART REQUESTS) | CDN img/kit + reports/art-pres-a123.md | C ROOT | session_011xDdVQ93v6b8Bre1hVaJtG | A1 frames REJECTED by owner (too heavy/big) → deleted from CDN, KIT REQUEST cancelled; A2 baby + A3 thread live (archived) | 17/11 05:40Z |
 | night-final review r1 (opus BIG; main s30 04:50Z order) of 5535697b | review/night-final-r1 | D | session_01964izDUxnFjybggNj6Ukev | FAIL 1 @72148b66 (co-op weeks hang at end of tối) (archived) | 17/11 05:36Z |
 | trait-rename review r1 (opus BIG, save migration) of 27886326 | review/trait-rename-r1 | B | session_01N1tNP31pNXiReqkE3LxVdh | RUNNING | 17/11 05:40Z |
@@ -709,3 +738,13 @@
 | VOICE BY TÍNH TÌNH (sonnet; s30 order 06:06Z; brief briefs/voice-trait.md) | review/voice-trait | C ROOT-5 | session_011xDdVRM5yu7W5UoCp4jMmC | RUNNING | 17/11 11:38Z |
 | coop-thin-b SẴN SÀNG KIỂM 4609afa6 (r2 seam fix by #4) → re-review r3 (fresh opus BIG; brief briefs/review-coop-thin-b-r3.md) | review/coop-thin-b-r3 | B | session_01N1tNP5hpVGVh45GCMzd9Ah | RUNNING | 17/11 11:40Z |
 | MAID CONSORT-TIER REDRAW W4f (successor of W4e; a36 m22 + a51 m01-m26; opened by lead #7) | review/fig-cutout-clean | C | session_011xDdVSvgMHhWjrFtf6Qv8J | RUNNING | 17/11 11:48Z |
+=======
+| ART A1 nine origin frames + A2 swaddled baby + A3 red-thread JOIN (sonnet art; reports/presentation-wiring.md ART REQUESTS) | CDN img/kit + reports/art-pres-a123.md | C ROOT | session_011xDdVQ93v6b8Bre1hVaJtG | RUNNING | 17/11 05:40Z |
+| night-final review r1 (opus BIG; main s30 04:50Z order) of 5535697b | review/night-final-r1 | D | session_01964izDUxnFjybggNj6Ukev | RUNNING | 17/11 05:36Z |
+| trait-rename review r1 (opus BIG, save migration) of 27886326 | review/trait-rename-r1 | B | session_01N1tNP31pNXiReqkE3LxVdh | RUNNING | 17/11 05:40Z |
+| one-core-roads — ONE CORE F1 roads: go:/sc:/k: amounts → BAL.road.fx, values identical (opus; split of one-core-dup §2b) | review/one-core-roads | B | session_01N1tNP4eyJ4AQGCmA1HpA9c | RUNNING | 17/11 05:41Z |
+| one-core-arcs — ONE CORE F2 arcs: ARC67/j97/j96/jorigins/jroute/jstory → BAL.arc.fx, values identical (opus; split of one-core-dup §2b) | review/one-core-arcs | B | session_01N1tNP5MRPzxmbFfWjw6LuT | RUNNING | 17/11 05:41Z |
+| OI branch review r1 (opus BIG) of de6a876b (origin-intros + entry-exam + kc-roads fix2 + render-cost) | review/batch-0032-oi-r1 | D | session_01964izCyrKPEnt2GpVBazHD | RUNNING | 17/11 05:50Z |
+| one-core-dup part 1 SẴN SÀNG KIỂM 648461b5 → review r1 (opus BIG) | review/one-core-dup-r1 | B | session_01N1tNP6WJifjTnmrtNwmBm4 | RUNNING | 17/11 05:53Z |
+| one-core-dup2 — successor (rolled over): dup hunt round 2 (§5 disagreements + ~30 single-copy concepts), owns guard (opus) | review/one-core-dup2 | B | session_01N1tNP5YW8yGvX2ZkQozRyk | RUNNING | 17/11 05:53Z |
+>>>>>>> 5d649e20 (report: story-bot REPORT READY line)

@@ -11,6 +11,8 @@ BEFORE you open ANY worker, write ANY brief or order, answer ANY owner question,
 - Every takeover prompt you write MUST copy these three lines verbatim. Workers roll over too (owner 16/11 08:22Z s14, option 1): at START_CTX % + 25 % of the window, ceiling 60 %; a worker may finish if only push + report remain; it writes its handover in its report file and tells its coordinator, and the COORDINATOR opens the successor (never the worker).
 
 
+## SLEEP = PASTE BLOCKS (owner 17/11 ~08:35Z, angry): when the owner says she is going to sleep, the same reply gives ready paste blocks for a fresh ROOT main + ROOT Foreman B / C (/ D) so work and wakes go on overnight.
+
 ## SPREAD THE WORK — EVERY WAKE, NO REMINDER (owner 17/11 ~02:30Z, angry: she has reminded this session after session)
 Owner (verbatim): "Tại sao lần nào cũng phải để tao nhắc vậy ta? ... tao có tới 4 cái tài khoản lận, không có đưa qua bớt để mà làm đi. Rồi tài khoản D, đó, tài khoản C, đủ thứ hết mà không có chịu đưa qua đi ... Một mình ôm hết bên này, trong khi là tao lại đang muốn cái game chơi lẹ." (with OD:L1286 hourly load check, OD:L1197 main = her bugs + UI only, OD:L1229/L1237 whole jobs, never split).
 MANDATORY on session start AND on every wake, BEFORE anything else, written as one line in HANDOVER: "LOAD: main running n (owner bugs/UI/go-live only) | B free n | C free n | D free n | moved: <items>".

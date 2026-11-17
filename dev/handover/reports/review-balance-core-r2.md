@@ -38,6 +38,7 @@ Successor task (one item only): on review/balance-core-r2 @ baff0824 vs origin/m
 (parallel shards under the box's CPU budget; the kchh.js harness is ~10 min/life, too slow). Report died < 3 y per side + causes + Fisher p.
 p ≥ 0.2 and the gap < ~8 points → PASS baff0824 stands; a real gap → FAIL with the cause (worker's guess: slower Tâm cơ / Y bậc for poison detection, BAL.art.gate.yCure).
 Everything else in r2 is checked (table above). Worktrees removed; no scratch left.
+<<<<<<< HEAD
 
 ## r2b — early-death gap re-measured → **PASS baff0824 STANDS (no longer conditional)**
 Reviewer session_01UV1Szk2uZjmbYdXJKyXFCH (opus; START_CTX ≈ 5 %), coordinator s28 → s30. No game code changed.
@@ -60,3 +61,5 @@ Reviewer session_01UV1Szk2uZjmbYdXJKyXFCH (opus; START_CTX ≈ 5 %), coordinator
 **Reading.** The r2 gap (2/42 vs 7/41) reversed with 150 lives: the branch ends early slightly LESS often, and no difference is near significance (p 0.34 / 0.69). The only cause higher on the branch is her poison death (5 vs 2, p 0.45, small counts). It is not driven by the new numbers the worker suspected: the bot takes no Y lessons on either side (Y ≈ 0, so BAL.art.gate.yCure / Y detection play no part), and Tâm cơ is near the cap on both by month 36 (95 vs 100). → No BAL lever to change. Watch item at go-live: poison deaths in the first 3 years (expected ≈ 1–3 %).
 
 Tools/output: scratch only (runner + patched inpage6 copy + analysis script), deleted after the verdict; worktrees removed.
+=======
+>>>>>>> 5d649e20 (report: story-bot REPORT READY line)

@@ -247,6 +247,7 @@ Counts: 119 ladder lines. 64 lines belong to the 29 multi-copy concepts in secti
 | panel67 | j67.js:218 | j67.js:1819 | UI |
 
 Typed copies of BAL tables: jhc.js:39 `[5,20,45,75]` = fallback of BAL.oanLv (drop it). jexam.js:270 `(B.srvCd||[1,1,1,2,2])` = a truncated fallback of BAL.ex.srvCd [1,1,1,2,2,3] (jbal2.js:17) (drop it). `[0,18,20,22,24,24]` is not in jexam.js at HEAD; only BAL.ex.srvBar holds it.
+<<<<<<< HEAD
 
 ## 6. PART 2 — review/one-core-dup2 (successor worker session_01N1tNP5YW8yGvX2ZkQozRyk)
 PRIORITY #1 CHECK ('one-core-dup|quyW|affW|sungLv|BAL.loy|staff-root|finTier'): OD 3 (L221 side-chance scale, L247 quý words everywhere, L104 adults 18+) | ledger 0 | CLAIMS: staff-root (servants per rank, capOf, j10/j29), one-core-roads, one-core-arcs (finTier), trait-rename (trait labels) — left to them | main 0 / review/* 0 hits for these keys (no other branch moves them).
@@ -340,3 +341,5 @@ dev/test/one-core-text.js (sibling of one-core-guard, run by coregates.sh G1 rig
 - Not changed: no rule value, no odds, no layout.
 
 ### Rollover: none (context well under START_CTX + 25 %). Next: re-review review/one-core-dup-r2.
+=======
+>>>>>>> 5d649e20 (report: story-bot REPORT READY line)

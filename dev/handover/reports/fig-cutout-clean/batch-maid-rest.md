@@ -211,6 +211,7 @@ maid-m09-tm3-a18	fHGjrjHCDY	redo ok U
 maid-m09-tm4-a18	DoJCaCHpcl	redo ok U
 maid-m10-a18	Ifi5q5JtvE	redo ok U
 - W5c REPAINT of the 56 plain-prompt maids DONE (R1-R7, own original look, in place, fig+hd+tn+por, fragments W5c-redo-R1..R7.json). Before|after sheet: rank-sample/maid-rest-A-redo.jpg. Drift: m08-t7, m08-t8, m09-t7, m09-t8 (originals already alike). New maids PAUSED; resume at maid-m10-cold-a18. Total this session: 48 original-prompt/plain new + 8 + 56 repaints.
+<<<<<<< HEAD
 maid-m10-cold-a18	dtPFsNNXSL	ok HELD(not uploaded; wait C OK)
 maid-m10-kc-a18	Xm4Hl34Bfo	ok HELD
 maid-m10-ngheo-a18	79azdFgJAL	ok HELD
@@ -281,3 +282,5 @@ W5d E7 LIVE a36 (key\tgen): m43-ty1/2/3 vQ2lnWXa47 YMsaU4EWeC lJIGfWHgv9; m44-ty
 W5d E8 LIVE a36 (key\tgen): m45-ty3 Symnx5iUb8; m46-ty1/2/3 O6CTglpynm cpgCnYh0eP P3uMOiK42C; m47-ty1/2/3 SymYwZdUb8 kspir6u16B xSXZgZ6jfW. Fragment W5d-12. m48-ty1 a36 held (redo in E9, emerald). E9 running: m44-ty2/3 redo, m48-ty1/2/3, m49 x3. Then m50-m52.
 W5d E9 LIVE a36 (key\tgen): m44-ty2/3 s78GNbVl8e P3uDnJe42C (sea blue-teal redo); m48-ty1/2/3 SymYZmtUb8 1le3PoWr4r VXwFCh8MMU (emerald); m49-ty1/2/3 VXwFCChMMU P3uDM0C42C KLD6NiIkqp. Fragment W5d-13. E10 running m50-m52 (last a36 batch).
 W5d E10 LIVE a36 (key\tgen): m50-ty1/2/3 tC3LJI9mZJ 1le3WlBr4r MB7HlubDCm; m51-ty1/2/3 aFASiJMfSh 4RQpCVq9Aa aFASMFrfSh; m52-ty1/2/3 0eSugXPTfW N2HdFcr6D9 s78GtgNl8e. Fragment W5d-14. W5d COMPLETE: a18 m27-m52 x ty1-3 (78) + a36 m27-m52 x ty1-3 (78) all live; fragments W5d-1..14.
+=======
+>>>>>>> 5d649e20 (report: story-bot REPORT READY line)
