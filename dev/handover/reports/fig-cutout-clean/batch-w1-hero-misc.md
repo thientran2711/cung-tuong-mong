@@ -168,3 +168,4 @@ eunuch-u19-r3-a18	cpgmBBB0eP	https://pikaso.cdnpk.net/private/production/6061177
 eunuch-u20-a18	P3uWAGa42C	https://pikaso.cdnpk.net/private/production/6061176944/render.png	ok 2k+hd (W4d-E7)
 eunuch-u20-r0-a18	WDltX8TcXe	https://pikaso.cdnpk.net/private/production/6061177583/render.png	ok 2k+hd (W4d-E7)
 ## W4d: E7 done (u18x4,u19x4,u20,u20-r0; 650cr; 70/102 eunuch a18)
+## W4d: mama paused (lead order, owner via C s12): no new mama files; mama a18 k01-k08 already live; other-age mama stays queued/paused.
