@@ -157,3 +157,12 @@ maid-m35-tm0-a18	SymR2Y2Ub8	EbnLlIGuuO	ok
 maid-m35-tm2-a18	SymR2WAUb8	kspOPFl16B	ok
 maid-m35-tm3-a18	eIyEQkgdqL	6AqTMyliJO	ok
 ## 136 a18 done through maid-m35-tm3-a18. NEXT = maid-m35-tm4-a18, then m36 (a18 list line 137+). LOOKALIKE check pending for several t5-t8 files that kept ornate headdresses.
+maid-m35-tm4-a18	rgdP3tuxtc	SymRYJxUb8	ok
+maid-m36-a18	Xm4QKZ2Bfo	JNfGTNTOq4	ok
+maid-m36-cold-a18	u5Ys7pcQLD	0eSmudZTfW	ok
+maid-m36-kc-a18	O6CzTK5ynm	LwoNAOPswO	ok
+maid-m36-ngheo-a18	lJIiGQagv9	WDlICXNcXe	ok
+maid-m36-t1-a18	O6CzT1kynm	LwoNAvjswO	ok
+maid-m36-t2-a18	SymRnbtUb8	u5YsJecQLD	ok
+maid-m36-t3-a18	gOt3zbMSXO	vQ21gMKa47	ok
+## HANDOVER (W6b #1): 144 a18 done through maid-m36-t3-a18 (+56 hd retro-fit). NEXT = maid-m36-t4-a18 (a18 list line 145: grep a18 lists/shards/maid-rest-B.txt). Method: sub-agents per tools/AGENT_GEN_BRIEF.md (8 keys each, ONE agent at a time because of rate limit 5 gens in flight), I record TSV + push fragments hd-entries/W6b-g*.json. Push recipe: commit, flock fetch --depth=1, checkout -B x FETCH_HEAD, cherry-pick, push (retry). Never commit dev/site/cdn_sync.py, __pycache__. Lookalike redo list above.
