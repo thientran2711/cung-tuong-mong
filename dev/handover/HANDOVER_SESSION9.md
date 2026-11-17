@@ -889,3 +889,4 @@ LESSONS s38: never send one tall sheet (owner angry) — crop per option; look a
 - (17/11 23:12Z) cloth-xoc r2 rolled over (still FAIL look, b6a9824) → archived SzgpiW9; successor r3 opus session_01UV1SzkYmApqhLJ8fozxZi3 (brief briefs/cloth-xoc-r3.md). smudge r2 73c87f7: lvl 1/2 OK, lvl 3 fixes (mask leak, hard lip block) sent; no-makeup crying = red eyes only (main decision).
 - (17/11 23:14Z) smudge-code r3 245aeeb LOOK OK (skin-clipped, soft lip drag) → 4 images sent to owner (s39 Lượt 9); waits her OK, then SMALL review → batch.
 - (17/11 23:16Z) tuyet-glow v5b (calm→burst→calm 16 s; stars cheeks/forehead/eye corners + eye catchlights, no lips) LOOK OK → A/B/C + B-room sent to owner (s39 Lượt 10); waits her pick, then build everywhere.
+- (17/11 23:18Z) OWNER: lip off the mouth (smudge-0). Cause = mk-fit points; freeze OD 04:05Z/21:20Z → asked her keep-freeze vs fit-now (Lượt 13).
