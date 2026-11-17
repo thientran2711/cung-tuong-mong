@@ -80,7 +80,13 @@ const R=ROAD14;for(const r in R)console.log(r,Object.keys(R[r]).join(','));
    without the same change in jbalroad.js would silently shift every number after it. Lists beats whose counts differ, fx rows with no chapter /
    beat / ending, and road chapters with no fx row. Must be 0. */
 {const FX=(BAL.road&&BAL.road.fx)||{};const al=[];
- for(const id in FX){const a=ARC67[id];if(!a){al.push(`${id}: fx row, no chapter`);continue}
+ /* jend14 (Phần cuối hồi form, road-b3-fix2): ARC67.noi14/hau14/ke14 are j67 arcs (not rdDef) whose rows live in BAL.road.fx too:
+    load jend14.js alone in a lenient sandbox (unknown names = no-op) to get their option lists */
+ const EG={};try{const vm=require('vm');const nop=new Proxy(function(){},{get:(f,k)=>k===Symbol.toPrimitive?()=>0:nop,apply:()=>nop,construct:()=>({})});
+  const base={console,Math,JSON,Object,Array,Number,String,Symbol,isFinite,parseInt,Set,ARC67:EG,BAL,RANKS:[{n:''}],rdFx:()=>0};
+  const cx=vm.createContext(new Proxy(base,{has:()=>true,get:(o,k)=>k in o?o[k]:k==='window'||k==='globalThis'?cx:nop,set:(o,k,v)=>(o[k]=v,true)}));
+  vm.runInContext(fs.readFileSync('dev/build/jend14.js','utf8'),cx)}catch(e){console.log('note: jend14 not loaded ('+(e&&e.message||e)+')')}
+ for(const id in FX){const a=ARC67[id]||(EG[id]&&EG[id].o==='eg'?EG[id]:null);if(!a){al.push(`${id}: fx row, no chapter`);continue}
   for(const bk in FX[id]){if(bk==='E'){for(const ek in FX[id].E)if(!a.E||!a.E[ek])al.push(`${id}.E.${ek}: fx, no ending`);continue}
    const O=a.B&&a.B[bk]&&a.B[bk].o;if(!Array.isArray(O)){al.push(`${id}.${bk}: fx, no option list`);continue}
    if(O.length!==FX[id][bk].length)al.push(`${id}.${bk}: ${O.length} options, ${FX[id][bk].length} fx entries`)}}
