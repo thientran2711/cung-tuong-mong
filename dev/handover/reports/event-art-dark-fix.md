@@ -259,3 +259,7 @@ Sheet LIVE | LIFTED with lum: dev/handover/reports/event-art-dark-fix/lift-sheet
 | intro/td-2 | 60 | 72 |
 | ev-nc1 | 45 | 72 |
 Self-check: compositions identical, deep red/indigo shadows kept, moon/candle/lantern glow still read, details readable, no haze/clipping seen at sheet size. ev-toil-crowd-jealous (99) skipped as told.
+
+## UPLOADED (C OK 12:31Z, sample2 relight): ev-am-muu, ev-e68-poisonedfish, ev-toil-hh-scold, ev-plantpick (NEW 72/77/69/62 lum) — cdn_sync explicit paths, 1024x768 webp q84.
+## Batch A (relight method, same prompt; 11 keys, NOT uploaded): sheet LIVE0 (original dark, before event-art #2 interim) | NEW with lum: dev/handover/reports/event-art-dark-fix/batchA-LIVE0-NEW.jpg
+creations: rumoremplove YMsQKPsWeC, rumorfavor ovNs7Tv829, rumorpreg mERUPBLhJQ, rumorth LwoYDlZswO, spoiledfood ksp2clg16B, hhsummons 79aD8ZoJAL, bordernews 1leA04ur4r, stormnight lJIcezSgv9, leakroof 5jMRYRGKxe, nc1 huZw9ylvqL (scheming: spy envoy), news-tin-trong-cung 6AqICQBiJO. Refs = current live + act-bat-dau-bay-muu. 4 images >82 (stormnight 88) were gamma-trimmed to 80. Self-check: compositions kept, storm/rain kept, backs only, no text; nc1 keeps the live letter's small red seal (unchanged from live).
