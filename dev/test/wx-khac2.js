@@ -8,7 +8,8 @@
    §5 old save (S.wx without kd/kl, wxDay with lv 0 on dry khắc): currentWeather gives kd + kl 1, no line
    §6 co-op guest: no roll; fog / storm / frost effects read the host's S.wx
    §7 fog: oSee (the witness roll) drops by BAL.wx.fx.fog.see[kl], held to BAL.odds.lo; preview j63 kaCaughtTxt changes with it
-   §8 storm: accessOf(vuon) closed, no sneak/ask, map reason; NPCs at the garden sent home (placeWhere); the turn line names it
+   §8 storm (owner 17/11 ~18:05Z: weather never closes a place): garden open, she can go, no grey reason; the walk invite stays open with fewer odds;
+      an NPC in the garden leaves by odds (BAL.wx.fx.storm.leave), not forced; one turn line, no 'đóng cửa'
    §9 frost: mgTier ease of đàn / thêu lower by BAL.wx.fx.frost.ease[kl], cờ unchanged; intro row says "tay cóng"; kit weather popup rows
    + no page errors. */
 const {chromium}=require('playwright');const [,,URL,SIZE]=process.argv;
@@ -66,7 +67,11 @@ const sleep=t=>new Promise(r=>setTimeout(r,t));
    const v=rivals.find(x=>x.alive&&!x.out);S.where=S.where||{};S.where[v.id]="vuon";S.where.emp="vuon";const nl=S.logs.length;spend(1);render();
    const a1=accessOf(S,"vuon"),st=accState("vuon");const swept=S.where[v.id]!=="vuon"&&S.where.emp!=="vuon";
    placeWhere();const none=!Object.values(S.where).includes("vuon");
-   o.storm={open0:!!a0.ok,wx:S.wx.b,open1:!!a1.ok,why:st.why,sneak:!!st.kind,swept,none,line:S.logs.slice(0,S.logs.length-nl).map(x=>String(x).replace(/<[^>]+>/g,"")).filter(x=>/giông/i.test(x)).join(" / "),lines:S.logs.slice(0,S.logs.length-nl).filter(x=>/giông/i.test(String(x))).length}}
+   S.where.emp="thu";S.buoi=1;S.kmEmpDay=-1;const wWhy=typeof kmEmpWhy==="function"?kmEmpWhy(S,"walk"):"";const wO1=typeof kmEmpO==="function"?kmEmpO(S,"walk"):0;
+   const sv=S.wx;S.wx={n:"nắng gắt",b:"nắng gắt",k:"sun",f:2,kd:"heat",kl:2};const wO0=typeof kmEmpO==="function"?kmEmpO(S,"walk"):0;S.wx=sv;
+   let left=0,n=0;const rid=String(v.id);for(let i=0;i<400;i++){const W={[rid]:"vuon"};wxkSweepW(W);n++;if(W[rid]!=="vuon")left++}
+   o.storm={open0:!!a0.ok,wx:S.wx.b,open1:!!a1.ok,why:st.why||"",grey:!!st.grey,walkWhy:/giông|tuyết/.test(wWhy),walkO:[wO0,wO1],leave:left/n,
+    line:S.logs.slice(0,S.logs.length-nl).map(x=>String(x).replace(/<[^>]+>/g,"")).filter(x=>/giông/i.test(x)).join(" / "),lines:S.logs.slice(0,S.logs.length-nl).filter(x=>/giông/i.test(String(x))).length}}
   /* §9 frost */
   {S.month=12;S.wx={n:"tuyết nhẹ",b:"tuyết nhẹ",k:"snow",f:1,kd:"snow",kl:1};const e0={dan:mgTier("dan",{occ:"hoc",lv:3}).ease,theu:mgTier("theu",{occ:"hoc",lv:3}).ease,co:mgTier("co",{occ:"hoc",lv:3}).ease};
    const e2={};S.wx={n:"sương giá",b:"sương giá",k:"frost",f:0,kd:"frost",kl:2};for(const k of ["dan","theu","co"])e2[k]=mgTier(k,{occ:"hoc",lv:3}).ease;
@@ -85,9 +90,9 @@ const sleep=t=>new Promise(r=>setTimeout(r,t));
   F=r.flow,ok3=F.heat[1]>F.heat[0]&&F.heat[1]>F.heat[3]&&F.fog[0]>F.fog[2]&&F.frost[0]>F.frost[2]&&r.keep.wind<r.keep.rain,
   ok4=r.mono&&r.follow&&r.lvOnly,ok5=r.old.built&&r.old.kd==="wind"&&r.old.kl>=1&&r.old.lines===0&&r.old.zero,ok6=r.guest.every(Boolean),
   f=r.fog,ok7=f.sl.every((x,i)=>x===f.want[i])&&f.sl[2]<f.s0&&f.floor>=5&&f.noon===f.s0&&f.prev,
-  s=r.storm,ok8=s.open0&&s.wx==="giông tố"&&!s.open1&&/giông/.test(s.why)&&!s.sneak&&s.swept&&s.none&&/Ngự hoa viên đóng cửa/.test(s.line)&&s.lines===1,
+  s=r.storm,ok8=s.open0&&s.wx==="giông tố"&&s.open1&&!/giông|đóng/.test(s.why)&&!s.walkWhy&&s.walkO[1]<s.walkO[0]&&s.leave>.5&&s.leave<.9&&!/đóng cửa/.test(s.line)&&s.lines===1,
   lk=r.look,ok10=lk.ids.map(x=>x[0]).join()==="drizzle,rain2,rainh"&&!lk.ids[2][1]&&lk.ids[0][2]<lk.ids[1][2]&&lk.ids[1][2]<lk.ids[2][2]&&lk.wash[2]>lk.wash[0]&&lk.wi.join()==="wind1,wind,wind3"&&lk.sn.join()==="snow,snowh"&&lk.storm[0]==="storm"&&lk.storm[1],
-    z=r.frost,ok9=Math.abs(z.e0.dan-z.d-z.e2.dan)<.051&&Math.abs(z.e0.theu-z.d-z.e2.theu)<.051&&z.e0.co===z.e2.co&&/tay cóng/.test(z.txt)&&/tay cóng/.test(z.pop)&&/Sương mù/.test(r.frost.popF)&&/Ngự hoa viên đóng cửa/.test(z.popS);
+    z=r.frost,ok9=Math.abs(z.e0.dan-z.d-z.e2.dan)<.051&&Math.abs(z.e0.theu-z.d-z.e2.theu)<.051&&z.e0.co===z.e2.co&&/tay cóng/.test(z.txt)&&/tay cóng/.test(z.pop)&&/Sương mù/.test(r.frost.popF)&&/Giông tố: ít ai ở lại ngoài vườn/.test(z.popS)&&!/đóng cửa/.test(z.popS);
  console.log(JSON.stringify(r,null,1));
  console.log("§1 kinds",ok1?"OK":"FAIL","§2 levels",ok2?"OK":"FAIL","§3 flow",ok3?"OK":"FAIL","§4 monotone",ok4?"OK":"FAIL","§5 old save",ok5?"OK":"FAIL","§6 guest",ok6?"OK":"FAIL","§7 fog",ok7?"OK":"FAIL","§8 storm",ok8?"OK":"FAIL","§9 frost",ok9?"OK":"FAIL","§10 looks",ok10?"OK":"FAIL");
  const KD=["rain","storm","snow","wind","fog","frost","heat","petal","leaf","cloud","calm"];

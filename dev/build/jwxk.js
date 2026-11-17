@@ -66,9 +66,11 @@ Object.assign(BAL.wx,{day:{
    "gió bấc":[["tuyết nhẹ",[1,1,2,2]],["tuyết dày",[0,1,1,1]],["trời âm u",[1,1,1,1]],["sương giá",[1,0,0,2]]]}}},
  /* WORLD EFFECTS (weather-khac-2, owner 17/11 ~17:40Z (3)), through existing rules only; kl = the level 1 nhẹ · 2 vừa · 3 nặng:
     fog  -> the target's chance to SEE a scheme (j8 oSee, the one witness roll) drops by see[kl]; still held to BAL.odds lo..hi
-    storm-> Ngự hoa viên closed for everyone (j77 accessOf; NPC places swept); no extra walking khắc (owner 15/11 06:40Z, jclose §7)
+    storm-> WEATHER NEVER CLOSES OR GREYS A PLACE (owner 17/11 ~18:05Z: "Muốn đi đâu là chuyện của mình"): the garden stays open; an NPC out
+             in the garden goes home by HER OWN choice with odds leave (BAL.odds lo..hi), Hoàng thượng's "dạo vườn" invite stays open with
+             walk fewer odds; no extra walking khắc (owner 15/11 06:40Z, jclose §7)
     frost-> cold hands: the board ease of the listed minigames (jmgt mgTier, the one difficulty input) drops by ease[kl] */
- fx:{fog:{kd:["fog"],see:[0,8,15,25]},storm:{f:[3],shut:["vuon"]},frost:{kd:["frost"],kinds:["dan","theu"],ease:[0,.5,1,1.5]}}});
+ fx:{fog:{kd:["fog"],see:[0,8,15,25]},storm:{f:[3],out:["vuon"],leave:70,walk:20},frost:{kd:["frost"],kinds:["dan","theu"],ease:[0,.5,1,1.5]}}});
 const WXK_HOOKS=[];
 function wxkHook(fn){if(typeof fn==="function")WXK_HOOKS.push(fn)}
 function wxkLast(){return typeof B4L==="number"?B4L:3}
@@ -150,28 +152,28 @@ Object.assign(window,{currentWeather,wxDayAny,wxkHook,wxkNow,wxkN,wxkSync});
 
 /* ================= WORLD EFFECTS of the weather (weather-khac-2, owner 17/11 ~17:40Z (3)) — numbers BAL.wx.fx, existing rules only =================
    fog   : j8 oSee (the target's chance to see a scheme: caught() + every preview that prints it) − see[kl], held to BAL.odds.lo..hi
-   storm : Ngự hoa viên closed (j77 accessOf: map grey reason, no sneak / ask); NPC places (j9 placeWhere, j95 j95view) leave the garden
+   storm : nothing closes (owner 17/11 ~18:05Z); each NPC in the garden leaves by odds (her choice, rolled once at the turn + once per buổi in placeWhere)
    frost : jmgt mgTier ease − ease[kl] for the listed kinds (the one board-difficulty input); the intro row "Độ khó" says why
    Shown: one clause on the weather line in the log (wxkFxLine) + the kit weather popup rows (kitWxEffects). Host and guest read the same S.wx. */
 function wxkFx(name){try{if(!S||!S.wx)return 0;const F=BAL.wx.fx[name];if(!F)return 0;
  if(F.f)return F.f.includes(S.wx.f)?1:0;const kd=S.wx.kd||wxkKd(S.wx.b||S.wx.n);if(!F.kd.includes(kd))return 0;
  if(name==="fog"&&!/sương/.test(S.wx.n||""))return 0;  /* sương sớm lifts by noon (its words turn "nắng dịu"): no fog effect then */
  return Math.max(1,Math.min(3,S.wx.kl||1))}catch(e){return 0}}
-function wxkShut(k){return !!(k&&wxkFx("storm")&&BAL.wx.fx.storm.shut.includes(k))}
 function wxkFxLine(a,b){const was=x=>BAL.wx.fx.fog.kd.includes(x.kd)&&/sương/.test(x.n||"")?"fog":BAL.wx.fx.frost.kd.includes(x.kd)?"frost":BAL.wx.fx.storm.f.includes(x.f)?"storm":"";
  const e=was(b);if(!e||e===was(a))return"";
- return e==="fog"?" Người ngoài khó trông rõ việc trong cung.":e==="storm"?" Ngự hoa viên đóng cửa tránh giông.":" Giá rét, tay cóng khó đàn khó thêu."}
+ return e==="fog"?" Người ngoài khó trông rõ việc trong cung.":e==="storm"?" Người trong vườn lục tục tìm chỗ trú.":" Giá rét, tay cóng khó đàn khó thêu."}
 /* fog: the witness roll */
 (function(){const o0=oSee;oSee=function(){const n=o0.apply(this,arguments);const l=wxkFx("fog");if(!l)return n;const O=BAL.odds;return cl(n-BAL.wx.fx.fog.see[l],O.lo,O.hi)}})();
-/* storm: the garden gate (same reason path as "đóng cửa tối") */
-/* wraps the one place gate (j77 accessOf) so the storm wins over every role pass (festival, invite): nobody enters, no sneak / ask */
-(function(){const a0=accessOf;accessOf=function(p,k){if(wxkShut(k))return{ok:false,why:"giông tố, đóng cửa"};return a0.apply(this,arguments)}})();
-function wxkSweepW(W){if(!W||!wxkFx("storm"))return W;const L=BAL.wx.fx.storm.shut;
- for(const id of Object.keys(W)){if(!L.includes(W[id]))continue;if(id==="emp")W[id]="thu";else if(id==="th")W[id]="tn";
-  else{const v=(typeof rivals!=="undefined"?rivals:[]).find(x=>x&&String(x.id)===id);if(v)W[id]=palaceOf(v);else delete W[id]}}return W}
+/* storm: nobody is barred (owner 17/11 ~18:05Z); NPCs out in the garden go home by their own choice (odds, BAL.wx.fx.storm.leave, held to BAL.odds) */
+function wxkSweepW(W){if(!W||!wxkFx("storm"))return W;const F=BAL.wx.fx.storm,O=BAL.odds,p=cl(F.leave,O.lo,O.hi);
+ for(const id of Object.keys(W)){if(!F.out.includes(W[id])||!roll(p))continue;if(id==="emp")W[id]="thu";else if(id==="th")W[id]="tn";
+  else{const v=(typeof rivals!=="undefined"?rivals:[]).find(x=>x&&String(x.id)===id);if(v)W[id]=palaceOf(v)}}return W}
 function wxkFxSweep(){if(S&&S.where&&(typeof worldOn!=="function"||worldOn()))wxkSweepW(S.where)}
 (function(){const p0=placeWhere;placeWhere=function(){const r=p0.apply(this,arguments);try{wxkFxSweep()}catch(e){}return r}})();
-(function(){if(typeof j95view!=="function")return;const v0=j95view;j95view=function(){return wxkSweepW(v0.apply(this,arguments))}})();
+/* jgift "Mời ngài dạo ngự hoa viên": the old weather gate (kmStorm: giông tố / tuyết dày = greyed) is gone — she may ask; Hoàng thượng
+   answers by odds, fewer in a storm or heavy snow (BAL.wx.fx.storm.walk; kmEmpO -> odA holds it to 5..95) */
+(function(){if(typeof kmStorm!=="function"||typeof kmEmpO!=="function")return;const st=kmStorm;kmStorm=function(){return false};
+ const o0=kmEmpO;kmEmpO=function(a,kind){const o=o0.apply(this,arguments);try{if(kind==="walk"&&st()){const O=BAL.odds;return cl(o-BAL.wx.fx.storm.walk,O.lo,O.hi)}}catch(e){}return o}})();
 /* frost: cold hands */
 function wxkCold(kind){const l=wxkFx("frost");return l&&BAL.wx.fx.frost.kinds.includes(kind)?BAL.wx.fx.frost.ease[l]:0}
 (function(){const m0=mgTier;mgTier=function(kind){const t=m0.apply(this,arguments);try{const e=wxkCold(kind);if(e>0&&t){t.ease=Math.round(Math.max(BAL.mgTier.easeMin,t.ease-e)*10)/10;t.cold=1}}catch(x){}return t}})();
@@ -179,7 +181,7 @@ function wxkCold(kind){const l=wxkFx("frost");return l&&BAL.wx.fx.frost.kinds.in
 /* the kit weather popup (j93 kitWxEffects rows) */
 (function(){if(typeof kitWxEffects!=="function")return;const e0=kitWxEffects;kitWxEffects=function(){const L=e0.apply(this,arguments);try{
  const add=[];if(wxkFx("fog"))add.push(["g","Sương mù: người khác khó trông thấy việc ngươi làm, mưu kế khó bị phát giác hơn."]);
- if(wxkFx("storm"))add.push(["r","Giông tố: Ngự hoa viên đóng cửa, không ai vào được."]);
+ if(wxkFx("storm"))add.push(["r","Giông tố: ít ai ở lại ngoài vườn; Hoàng thượng khó nhận lời dạo vườn."]);
  if(wxkFx("frost"))add.push(["r","Giá rét: tay cóng, đàn và thêu khó hơn."]);
  if(add.length){const q=L.filter(x=>!/^Trời yên/.test(x[1]));return q.concat(add)}}catch(e){}return L}})();
 /* the level shows (reviewer r1 B): the jfx weather layer picks the row for the khắc's level; storm keeps its own row (thunder + bolt) */
@@ -187,4 +189,4 @@ function wxkFxId(w){try{const L=w&&BAL.wx.day.fxLv[w.kd];if(!L)return null;const
 (function(){if(typeof kfWxCfg!=="function")return;const c0=kfWxCfg;kfWxCfg=function(){const c=c0.apply(this,arguments);try{
  if(!c||!S||!S.wx||c.id==="gold"||c.id==="fly"||c.id==="storm")return c;const id=wxkFxId(S.wx);if(!id||id===c.id)return c;
  return Object.assign({lay:"wx"},KF_WX[id],{id,night:c.night})}catch(e){}return c}})();
-Object.assign(window,{wxkFx,wxkShut,wxkCold,wxkFxId});
+Object.assign(window,{wxkFx,wxkCold,wxkFxId});
