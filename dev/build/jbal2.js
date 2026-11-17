@@ -465,7 +465,23 @@ Object.assign(BAL,{ag:{on:1,
     seat    a vacant Hoàng hậu seat: % per tuần that he decides = b + m × (months vacant − mourn), [lo, hi], × duty, × th when Thái hậu lives
             (was the flat j8 roll 12) */
  emp:{summon:[90,65],custom:[40,20],duty:{chamchinh:1.25,hieuthao:1.25,datinh:.75,mesac:.75},want:[.5,2],
-  met:{w:.15,miss:.5,keep:2,cap:3,n:4},seat:{b:6,m:3,lo:6,hi:40,mourn:3,th:1.2}}}});
+  met:{w:.15,miss:.5,keep:2,cap:3,n:4},seat:{b:6,m:3,lo:6,hi:40,mourn:3,th:1.2}},
+ /* AG3 maids reach the Emperor by their own deeds (jagmaid.js; design reports/npc-agent.md §3.3 / §3.4, §5 AG3; owner OD 16/11 17:15Z):
+    st      a staff maid's looks / letters drawn once (data, like every person's Sắc / Tài; the player maid has her own) [lo, hi]
+    tea     "Quỳ dâng trà" where he passes (the player's card j42 and an NPC maid's deed, ONE rule): odds = b + Sắc / sac + Tài / tai + his mood;
+            "Hầu trà khi ngự giá" on her master's night adds her regard / nt (her "Hoàng thượng để ý" IS her sung, §3.4);
+            g = his regard gained on success (+ Sắc / gs, srvNotice), fail = master's trust (Chủ tin / lòng) lost on a spilt cup
+    jeal    the master sees him look at her: % = b + master's malice / d; trust lost = BAL.net.n.misJealTin by the master's nết (one table with show-why)
+    decay   his regard for a maid fades per month (was S.nt − 2 / month, j42)
+    ch      her weight in his night pool (the terms of a consort's nightCh: regard / sung + Sắc / sac, cap; bot-tuned so maid nights ≈ the old
+            eye-roll rises); only maids he MET (S.emp.met)
+    night   a maid's night: his regard + b + q / 2 (q = Sắc / 20 + luck, rivalNight's own formula); rise = her Sủng as a consort = b + regard / d
+            (srvRise's own conversion: was 15 + nt / 5)
+    send    the consort's "Tiến cử <maid> hầu thay" on her night: × on her need (tired / ill; × (1 + ally need) with a trusted maid) against
+            keeping it (BAL.ag.routine). .05 (review ag3-r1, bot 2 yr × 2 seeds per life): .15 gave consort life ~1.5 and maid life ~3.5 maid rises / yr (Tiến cử on ill nights; a seat is always free, so every send rises) vs ~0.6 / yr on main; .05 → consort life 0.5, maid life 1.5 (her NPC consorts are ill on 15–18 % of their nights there vs ~5 %: a one-world gap left to Foreman C)
+    decline the player maid begs off his summons: his regard lost */
+ maid:{st:{sac:[20,60],tai:[0,30]},tea:{b:25,sac:2.5,tai:10,nt:5,g:8,gs:20,fail:1},jeal:{b:30,d:3},decay:2,ch:{sung:2,sac:8,cap:70},
+  night:{b:2},rise:{b:15,d:5},send:.05,decline:10}}});
 
 /* BAL.mind — jmind (one mind for every person, review/npc-mind; moved here from jmind.js, r1 fault 3 ONE CORE)
    like      regard gained on top when a gift is one the receiver likes (jdis BAL.dis.aff is the one dislike penalty)
@@ -637,3 +653,20 @@ BAL.net.n={
  menHide:{"Kín đáo":10,"_":0},
  thyEv:{"Xảo quyệt":6,"Tham vọng":6,"_":0},
  tsCare:{"Kín đáo":70,"Kiêu ngạo":15,"_":40}};
+/* ===== GREETING NAME RULE + AG-MEET (owner 17/11 05:12Z chosen 05:28Z "phẩm + tính cách"; 05:25Z NPCs come to her) — jgreet.js reads ONLY this =====
+   Rank side: a title held by ONE seat (BAL.seatCap[r] === 1: Hoàng hậu, Hoàng quý phi) or a chí tôn (Hoàng thượng, Thái hậu) is public: the lower one
+   knows the name at once. Trait side: a nết-keyed table in the ONE trait pool (BAL.net.n.greetName, read by nv()): 1 = the higher / equal one gives
+   her name back, 0 = she only nods (Tính tình Kiêu ngạo / Lạnh lùng). ann = who walks with a herald who calls the name (chí tôn retinue).
+   rank = the ladder used to compare (consort rank r → cons + r; servants srv + their rank (tq / mama: srv + tq / mama, her too); a child cons + kid; men / officials man; chí tôn top).
+   meet = AG-MEET: each buổi a consort present where others are spends her ONE deed of the buổi (agent law) on approaching someone, or keeps her
+   schedule (stay). Utility of approaching = (ally need + spite need × spite) × her nết's sociability (BAL.net.n.meetW) — needs from agNeeds, no new bar;
+   pick weights: base for a stranger (a grey shadow, picked at random), + thiện cảm / + oán for people she knows. opt = how her nết weighs each
+   person-dialog option she uses on the one she approaches (product over her 3 nết of BAL.net.T[t].w[tag], the same w the agent loop uses). */
+BAL.greet={ann:{emp:1,th:1},rank:{top:100,th:99,cons:10,out:9,man:8,srv:1,tq:5,mama:4,kid:3},
+ meet:{on:1,stay:.35,spite:.6,base:1,affK:20,oanK:20,max:3,
+  opt:{greet:"visit",health:"visit",praise:"help",secret:"ally",gossip:"gossip",warn:"warn",provoke:"provoke"}}};
+BAL.net.n.greetName={"Kiêu ngạo":0,"Lạnh lùng":0,"_":1};
+BAL.net.n.meetW={"Ân cần":1.6,"Nhiều chuyện":1.8,"Xu nịnh":1.4,"Nóng nảy":1.2,"Lạnh lùng":.4,"Kín đáo":.6,"Kiêu ngạo":.8,"_":1};
+/* the person-dialog chat options (j9 topicOpts, j2 Khiêu khích): ONE table read by her options AND by the same options an NPC uses on her (AG-MEET, jgreet:
+   mirrored, she is the judge). Gains are × chatF (fewer each repeat). praise odds = od(o + the speaker's Tài / div); foe = oán a third must hold to warn. */
+BAL.talk={health:4,praise:{o:60,div:5},praiseFail:2,secret:10,secretBond:30,gossip:{hit:8,miss:3,oan:5,tell:50,tellOan:10},warn:{hit:10,miss:2,oan:10,foe:30},provoke:{rel:15,ghen:10,danh:1}};

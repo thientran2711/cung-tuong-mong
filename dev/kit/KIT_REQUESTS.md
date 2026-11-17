@@ -34,3 +34,6 @@ Thợ báo "KIT REQUEST" trong báo cáo → điều phối ghi vào đây → g
   text wraps one syllable per line. At 1180x820@2 the same card is fine. Shot: CDN img/_review/coop-thin-b-r2fix/r7-guest-755x1000.png.
 - Not from the r2 fix (the card is the native kit dilemma, rendered by D's stand-in = same fields); likely every 2-option card with option
   art at Fold width. Ask: kit keeper checks the option-tile grid at 755 (stack the tiles or shrink the art) in the kit part, whole family.
+
+## 17/11 — npc-agent AG3 (Foreman C worker): short option cell too narrow in a narrow dialog (observation, kit keeper)
+| 17/11 | npc-agent-ag3 | jksize §kit-size option grid: in a dialog that the kit sizes to ~560 px on iPad 1180x820 (e.g. the new "Hoàng thượng cho gọi" = same kit Q dialog as "Kính sự phòng báo tin"), a SHORT option ("Cáo bệnh", `data-kbs="S"`) gets a 1-of-2 cell of 177 px and its GỢI Ý line wraps one syllable per line; the long option spans 2 cells. Same short option in the 860 px "Kính sự phòng báo tin" dialog is fine. AG3 uses the kit as is (no private layout); asks the kit keeper whether a cell under ~220 px should fall back to one column. | Q dialogs with 1 long + 1 short option on iPad | kit-size | mở |
