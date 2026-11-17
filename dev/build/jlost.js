@@ -178,16 +178,16 @@ function loActs(c){const B=[];const me=c.own==="me",h=c.at?loP(c.at):null,atMe=c
  if(thief){B.push(loBtn(c,"sneak","Lén trả lại",`Chắc chắn · tốn: 1 khắc · thành: món đồ lặng lẽ về rương ${wdNm(loP(c.own))}, không ai bị tra${c.hear?"; Cung Chính ti thôi xét":""}`,whyTime(1)));return B}
  if(me&&!known&&c.st!=="done"){tra();return B}
  if(known){const x=loEntry(c);const o=x?cl(WD.clearBase+(h.mat||0)*WD.clearMat+wdFrameEv(h,S,x.e)*10,5,95):50;
-  B.push(loBtn(c,"askback","Đòi lại êm thấm",`${word(loAskOdds(h,S,c))} · tốn: 1 khắc · thành: nàng trả lại món đồ · hỏng: nàng chối, thân -4`,c.hear?"đã báo Cung Chính ti":whyTime(1)));
+  B.push(loBtn(c,"askback","Đòi lại êm thấm",`${word(loAskOdds(h,S,c))} · tốn: 1 khắc · thành: nàng trả lại món đồ · hỏng: nàng chối, thân ${balSg(BAL.eff.jlost.go_2)}`,c.hear?"đã báo Cung Chính ti":whyTime(1)));
   B.push(loBtn(c,"raise","Báo Cung Chính ti thu hồi",`tốn: 1 khắc · thành: Cung Chính ti xét trong 1–2 tuần, soát cung nàng; thấy món đồ thì về lại rương · kèm: ai có lỗi thật (giữ đồ người khác, chối) thì bị phạt, Danh -10; người vô can được minh oan · hỏng: không thấy, ${LO.hearCd} tuần sau mới báo lại được`,c.hear?"đã báo, đang chờ xét":(c.reT||0)>wk()?`vừa xét xong, chờ ${c.reT-wk()} tuần`:whyTime(1)));
   tra();return B}
  if(atMe&&(c.open||c.hear)){const ownK=c.kn["ome"]||c.hear;
   if(c.hear)tra();
   else{B.push(loBtn(c,"book","Đối chiếu sổ Nội vụ phủ",`${word(loOdds("book",S))} · ${loCostTxt("book")} · thành: biết món đồ của ai, thêm 1 chứng cứ · hỏng: sổ sách không rõ`,loWhy("book")));
-   B.push(loBtn(c,"giveback","Trả về chủ",`tốn: 1 khắc · thành: món đồ về tay chủ, thân +4`,ownK?whyTime(1):"chưa biết của ai: đối chiếu sổ trước"));
+   B.push(loBtn(c,"giveback","Trả về chủ",`tốn: 1 khắc · thành: món đồ về tay chủ, thân ${balSg(BAL.eff.jlost.go)}`,ownK?whyTime(1):"chưa biết của ai: đối chiếu sổ trước"));
    B.push(loBtn(c,"handin","Nộp Nội vụ phủ",`tốn: 1 khắc · thành: Nội vụ phủ trả về chủ, Danh +1`,whyTime(1)))}
   return B}
- if(!me&&c.kn.me&&!atMe&&!c.told&&c.at){B.push(loBtn(c,"tell",`Báo cho ${loP(c.own)?loP(c.own).name:"chủ món đồ"}`,`tốn: 1 khắc · thành: nàng biết đồ của mình ở đâu, thân với nàng +6 · kèm: ${h?h.name:"người giữ đồ"} thù -6`,whyTime(1)))}
+ if(!me&&c.kn.me&&!atMe&&!c.told&&c.at){B.push(loBtn(c,"tell",`Báo cho ${loP(c.own)?loP(c.own).name:"chủ món đồ"}`,`tốn: 1 khắc · thành: nàng biết đồ của mình ở đâu, thân với nàng ${balSg(BAL.eff.jlost.loUI_3)} · kèm: ${h?h.name:"người giữ đồ"} thù ${balSg(BAL.eff.jlost.loUI_4)}`,whyTime(1)))}
  return B}
 function loMine(){return loL().filter(c=>c.st!=="done"&&(c.own==="me"||(c.at==="me"&&(c.open||c.hear||(c.keep&&c.by==="me")))||(c.kn.me&&c.own!=="me"&&c.at!=="me"&&!c.told)))}
 function loState(c){const h=c.at?loP(c.at):null,o=loP(c.own);
@@ -239,7 +239,7 @@ A("laydo","Sai người lấy trộm đồ",{c:{bac:-LO.act.bac},ok:(a,t)=>(a.ba
  f:(a,t)=>{ap(a,{bac:-LO.act.bac});return loSteal(a,t,false)}});
 A("laydol","Sai cung nữ thân tín lấy đồ",{c:{},ok:(a,t)=>!!(typeof econLoyalMaid==="function"?econLoyalMaid(a):a.maid)&&loStealOk(a,t),o:(a,t)=>loStealO(a,t,true),
  x:"không tốn bạc · cung nữ thân tín lòng -10 · khó hơn",f:(a,t)=>loSteal(a,t,true)});
-try{AOUT.laydo=["một món quý trong rương nàng về tay ngươi (nàng chỉ biết là thất lạc) · Đức -4","về tay không, nàng thù -4 · bị bắt: nàng nắm 2 chứng cứ"];
+try{AOUT.laydo=["một món quý trong rương nàng về tay ngươi (nàng chỉ biết là thất lạc) · Đức -4",`về tay không, nàng thù ${balSg(BAL.eff.jlost.loSteal)} · bị bắt: nàng nắm 2 chứng cứ`];
  AOUT.laydol=["một món quý trong rương nàng về tay ngươi · cung nữ thân tín lòng -10 · Đức -4","về tay không · bị bắt: nàng nắm 2 chứng cứ"];
  const why=t=>!(t.inv||[]).some(loOk)?"rương nàng không có món nào đáng lấy":loL().some(c=>c.own===key(t)&&c.st!=="done")?"nàng đang tra xét đồ thất lạc":"";
  LACK.laydo=t=>S.bac<LO.act.bac?`cần Bạc ${LO.act.bac} để sai người`:why(t);

@@ -8,10 +8,11 @@ const B=path.join(__dirname,'..','build');
 const SKIP=(process.env.SKIP||'').split(',').filter(Boolean);/* file names left for a hand edit */
 const seen=new Set();const sites=scan(B).filter(s=>!SKIP.includes(s.f)).filter(s=>{const k=s.f+':'+s.t.a+':'+s.idx;if(seen.has(k))return false;seen.add(k);return true});const by={};for(const s of sites)(by[s.f]=by[s.f]||[]).push(s);
 const bad=[];let n=0;
-const rep=s=>{const r=s.cands[0].ref;if(s.cut)return '${balAb('+r+')}';return s.inv&&(s.sg==='+'||s.sg==='-')?s.sg+'${balAb('+r+')}':(s.sg==='+'||s.sg==='-')?'${balSg('+r+')}':s.sg==='±'?'±${balAb('+r+')}':'${balAb('+r+')}'};
+const keep=s=>s.cut||(s.amt2&&s.cands[0].as!=='sg');/* the sign char stays typed; only the digits are replaced */
+const rep=s=>{const c=s.cands[0],r=c.ref;if(s.amt2&&c.as==='ab')return '${balAb('+r+')}';if(s.amt2&&c.as==='oan')return '${balOan('+r+',"'+c.mult+'")}';if(s.cut)return '${balAb('+r+')}';return s.inv&&(s.sg==='+'||s.sg==='-')?s.sg+'${balAb('+r+')}':(s.sg==='+'||s.sg==='-')?'${balSg('+r+')}':s.sg==='±'?'±${balAb('+r+')}':'${balAb('+r+')}'};
 for(const f in by){let src=fs.readFileSync(path.join(B,f),'utf8');const E=[];const groups=new Map();
  for(const s of by[f]){if(s.sg==='−'){bad.push(f+':'+s.line+' unicode minus');continue}(groups.get(s.t.a)||groups.set(s.t.a,[]).get(s.t.a)).push(s)}
- const st=s=>s.idx+(s.cut?s.sg.length:0),ln=s=>s.abs.length+(s.cut?0:s.sg.length);
+ const st=s=>s.idx+(keep(s)?s.sg.length:0),ln=s=>s.abs.length+(keep(s)?0:s.sg.length);
  for(const [a,L] of groups){const t=L[0].t,sorted=L.slice().sort((x,y)=>y.idx-x.idx);
   if(t.lit){const body=src.slice(a+1,t.b-1);if(body!==t.s){bad.push(f+':'+t.line+' literal with escapes — by hand');continue}
    /* cut the body at the typed numbers, escape the pieces for a template, join with the ${} */

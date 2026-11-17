@@ -266,6 +266,8 @@ function oddsLv(o){let i=0;for(const c of BAL.odds.cut)if(o>=c)i++;return i}
    (dev/test/one-core-text.js fails a typed copy). */
 function balSg(n){return(n>0?"+":n<0?"-":"")+Math.abs(n)}
 function balAb(n){return String(Math.abs(n))}
+/* balOan(n,"hurt"|"doer"|"mend"): the oán a relAdd amount n makes (relAdd gives the hurt one |n|×hurt, the doer |n|×doer, a kind act takes |n|×mend off), as the texts show it */
+function balOan(n,m){return String(Math.round(Math.abs(n)*BAL.relOan[m]))}
 /* ONE CORE age bands (owner art rule OD:L567: 18–25 / 26–35 / 36–50 / 51+; review/one-core-dup): band i starts at ageBand[i-1].
    Read by band4 (j35), pidBand (j66), kcBand (jkc) (before: 26/36/51 typed in each). */
 Object.assign(BAL,{ageBand:[26,36,51]});

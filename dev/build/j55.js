@@ -54,12 +54,12 @@ function leakO(a,t){return odA(a,30+deG(a,t)*15+(tdPow(tdHouse(a))-tdPow(tdHouse
 function traceO(a){return cl(Math.round(35-(a.tamco||0)/4),10,40)}
 function tdGift(a,h){if(!h||a.bac<40)return"";ap(a,{bac:-40});const k=key(a);let r;
  window.__tdOk=false;if(roll(giftO(a,h))){window.__tdOk=true;h.af[k]=cl((h.af[k]||0)+20,-100,100);r=`${TDOFF[h.c]} ${h.name} nhận lễ vật của ${tdName(a)}: người ấy quý ngươi +20${tdBacks(h,a)?`, nay đứng sau ${a===S?"ngươi":"nàng"}`:""}. `}
- else if(h.tr==="Cương trực"){h.af[k]=cl((h.af[k]||0)-10,-100,100);a.cc=(a.cc||0)+1;r=`${TDOFF[h.c]} ${h.name} trả lại lễ vật của ${tdName(a)}, còn nói ra ngoài: người ấy quý ngươi -10, can chính thêm nặng. `}
+ else if(h.tr==="Cương trực"){h.af[k]=cl((h.af[k]||0)-10,-100,100);a.cc=(a.cc||0)+1;r=`${TDOFF[h.c]} ${h.name} trả lại lễ vật của ${tdName(a)}, còn nói ra ngoài: người ấy quý ngươi ${balSg(BAL.eff.j55.tdLeak_3)}, can chính thêm nặng. `}
  else r=`${TDOFF[h.c]} ${h.name} nhận quà của ${tdName(a)} nhưng chưa hứa gì (Bạc -40 mất trắng). `;
  return r+ccStep(a)}
 function tdAsk(a){const c=tdHouse(a);if(!c)return"";tdPowAdd(c,BAL.eff.j55.tdAsk);a.askT=S.turn;let r;
  window.__tdOk=false;if(roll(askO(a))){window.__tdOk=true;ap(a,{danh:4,sung:2});if(a!==S)a.dad=cl((a.dad||40)+3,0,100);r=`Cha ${tdName(a)} dâng sớ tâu đức hạnh của con gái; Hoàng thượng để ý: ${a===S?"Danh +4 · Sủng +2":"nàng được khen"}. Nhà ${c} thế lực ${balSg(BAL.eff.j55.tdAsk)} vì dốc vốn liếng. `;tdNews(`Một quan nhà ${c} dâng sớ khen ${tdName(a)}.`)}
- else{ap(a,{danh:-2});r=`Sớ của cha ${tdName(a)} bị Hoàng thượng gác lại${a===S?": Danh -2":""}; nhà ${c} thế lực -3. `}
+ else{ap(a,{danh:-2});r=`Sớ của cha ${tdName(a)} bị Hoàng thượng gác lại${a===S?": Danh -2":""}; nhà ${c} thế lực ${balSg(BAL.eff.j55.tdAsk)}. `}
  return r+ccStep(a)}
 function tdProbe(a,t){if(a.bac<30||!tdHouse(t))return"";ap(a,{bac:-30});let r="";
  window.__tdOk=false;if(roll(probeO(a))){window.__tdOk=true;if(tdDadT(t)){deA(a,t,1);r=`Người của ${tdName(a)} dò được sổ sách: cha của ${tdName(t)} (nhà ${tdHouse(t)}) có tham ô. Chứng cứ +1 (có ${deG(a,t)}). `}
@@ -112,7 +112,7 @@ function tdSoMonth(force){const T=trS();if(!force&&(S.turn-T.soT<TD.soGap||!roll
  T.soT=S.turn;let ev="";
  if(k==="praise"){const c=T.praise;T.praise=null;const h=T.H[c];tdPowAdd(c,BAL.eff.j55.tdSoMonth);const M=tdMembers(c);M.forEach(p=>ap(p,{danh:2}));
   ev=`<b>Sớ khen:</b> triều thần dâng sớ ca ngợi ${TDOFF[c]} ${h.name}. Nhà ${c} thế lực ${balSg(BAL.eff.j55.tdSoMonth)}; ${M.length?`phi tần nhà ấy được thơm lây (Danh +2): ${M.map(tdName).join(", ")}`:"trong cung chưa có phi tần nhà ấy"}. `;
-  tdNews(`Sớ khen ${TDOFF[c]} ${h.name}; nhà ${c} được thơm lây.`);if(M.includes(S))tdPop("Sớ khen nhà ngươi",h,`<p>Triều thần dâng sớ ca ngợi ${TDOFF[c]} ${h.name}. Nhà ${c} thế lực +3.</p><p class="g">Ngươi là người nhà ${c}, được thơm lây: Danh +2.</p>`)}
+  tdNews(`Sớ khen ${TDOFF[c]} ${h.name}; nhà ${c} được thơm lây.`);if(M.includes(S))tdPop("Sớ khen nhà ngươi",h,`<p>Triều thần dâng sớ ca ngợi ${TDOFF[c]} ${h.name}. Nhà ${c} thế lực ${balSg(BAL.eff.j55.tdSoMonth)}.</p><p class="g">Ngươi là người nhà ${c}, được thơm lây: Danh +2.</p>`)}
  else if(k==="dich"){const q=queenP();const c=q&&q!==S?tdHouse(q):S.rank>=7?tdHouse(S):null;const sp=c||"Lễ bộ";const h=T.H[sp];const d0=KV.deb,g0=S.kvDeb;KV.deb=100;let r="";try{r=kvDebate()}finally{KV.deb=d0}
   if(!r){T.soT=-9;return""}const won=S.heir&&S.heir.k&&kvQueenMom(S.heir.v);tdPowAdd(sp,won?BAL.eff.j55.tdSoMonth_2[0]:BAL.eff.j55.tdSoMonth_2[1]);
   ev=`${TDOFF[sp]} ${h.name} đứng đầu bá quan. ${r}Nhà ${sp} thế lực ${won?"+4":"-3"}. `;tdNews(`${TDOFF[sp]} ${h.name} dâng sớ xin lập đích; ${won?"Hoàng thượng nghe theo":"Hoàng thượng chưa nghe"}.`)}
@@ -171,9 +171,9 @@ function tdHTML(){const T=trS();const myC=tdHouse(S),myH=tdHead(myC);const busy=
  h+=`<div class="ph"><span>${myC?`Ngươi là người nhà <b>${myC}</b>${myH&&myH.dadOf==="me"?" (cha ngươi đứng đầu)":""}`:"Nhà mẹ đẻ ngươi không thuộc năm nhà quyền thần"}</span><span>Can chính: ${S.cc||0} lần gần đây · nguy cơ bị hặc ${ccWord(S)}</span></div>`;
  const askWhy=!myC?"nhà ngươi không có người ở triều":busy||(S.turn-(S.askT==null?-99:S.askT)<3?"mới nhờ, đợi 3 tháng":"");
  const prT=liveRivals(true).filter(v=>tdHouse(v)&&!sameHouse(S,v));const lkT=consorts().filter(v=>v!==S&&deG(S,v)>=1);
- h+=`<div class="rbtn tdacts">`+tdActBtn(`data-td="ask"`,"Nhờ cha dâng sớ",myC?`${word(askO(S))} · tốn: nhà ${myC} thế lực -3 · thành: Danh +4 · Sủng +2 · hỏng: Danh -2 · kèm: ${ccLine(S)}`:"cần nhà mẹ đẻ có người ở triều",askWhy)
-  +tdActBtn(`data-td="probe"`,"Dò la nhà ngoại phi tần",`tốn: Bạc -30 · thành: biết thật cha nàng có tham ô không; có thì Chứng cứ tham ô +1 · kèm: nàng biết chuyện (${chanceW(25)}): thiện cảm -8, ${typeof pvOanAny==="function"?pvOanAny(12.8):"oán ta +13"} · kèm: ${ccLine(S)}`,busy||(S.bac<30?"thiếu bạc (cần 30)":!prT.length?"không có phi tần nhà khác":""))
-  +tdActBtn(`data-td="leak"`,"Tung chứng cứ tham ô",`tốn: Bạc -20 (lót tay ngự sử) · thành: nhà nàng thế lực -6 · nàng mất chỗ dựa, Danh -4 · hỏng: Chứng cứ -1 · kèm: tra ra ngươi thì nàng oán +25 · kèm: ${ccLine(S)}`,busy||(S.bac<20?"thiếu bạc (cần 20)":!lkT.length?"chưa có chứng cứ tham ô của ai (dò la trước)":""))+tdMarryBtn()+`</div>`;
+ h+=`<div class="rbtn tdacts">`+tdActBtn(`data-td="ask"`,"Nhờ cha dâng sớ",myC?`${word(askO(S))} · tốn: nhà ${myC} thế lực ${balSg(BAL.eff.j55.fail)} · thành: Danh +4 · Sủng +2 · hỏng: Danh -2 · kèm: ${ccLine(S)}`:"cần nhà mẹ đẻ có người ở triều",askWhy)
+  +tdActBtn(`data-td="probe"`,"Dò la nhà ngoại phi tần",`tốn: Bạc -30 · thành: biết thật cha nàng có tham ô không; có thì Chứng cứ tham ô +1 · kèm: nàng biết chuyện (${chanceW(25)}): thiện cảm ${balSg(BAL.eff.j55.tdProbe)}, ${typeof pvOanAny==="function"?pvOanAny(12.8):"oán ta +13"} · kèm: ${ccLine(S)}`,busy||(S.bac<30?"thiếu bạc (cần 30)":!prT.length?"không có phi tần nhà khác":""))
+  +tdActBtn(`data-td="leak"`,"Tung chứng cứ tham ô",`tốn: Bạc -20 (lót tay ngự sử) · thành: nhà nàng thế lực ${balSg(BAL.eff.j55.top_9)} · nàng mất chỗ dựa, Danh -4 · hỏng: Chứng cứ -1 · kèm: tra ra ngươi thì nàng oán ${balSg(BAL.eff.j55.tdLeak_2)} · kèm: ${ccLine(S)}`,busy||(S.bac<20?"thiếu bạc (cần 20)":!lkT.length?"chưa có chứng cứ tham ô của ai (dò la trước)":""))+tdMarryBtn()+`</div>`;
  h+=CLANS.map(c=>{const hd=T.H[c];const f=pMin(hd);const M=tdMembers(c);const af=hd.af.me||0;const gw=busy||(S.bac<40?"thiếu bạc (cần 40)":c===myC&&hd.dadOf==="me"?"là cha ngươi":"");
   const rel=CLANS.filter(x=>x!==c).map(x=>[x,tdRel(c,x)]).filter(z=>Math.abs(z[1])>=25);
   return `<div class="rival tdh"><div class="top tdtop">${mdH(f,"sm")}<div class="tdn"><b>Nhà ${c}</b><em>${TDOFF[c]} ${hd.name}${hd.dadOf==="me"?" (cha ngươi)":""} · ${hd.age} tuổi · ${hd.tr}: ${TDTR[hd.tr]}</em></div></div>
@@ -201,7 +201,7 @@ function tdAct(a,d){if(!S||S.dead||Q.length||!can(2)||S.out||S.confined)return;c
  else if(a==="gift"){const h=T.H[d.tc];if(!h||S.bac<40||h.dadOf==="me")return;spend(2);ttl=`Biếu quà ${h.name}`;r=tdGift(S,h)}
  else if(a==="probe"||a==="leak"){const L=a==="probe"?liveRivals(true).filter(v=>tdHouse(v)&&!sameHouse(S,v)):consorts().filter(v=>v!==S&&deG(S,v)>=1);if(!L.length)return;
   Q.push({act:1,t:a==="probe"?"Dò la nhà ngoại ai?":"Tung chứng cứ tham ô của ai?",h:`<p>${a==="probe"?"Sai người ngoài cung dò sổ sách nhà cha nàng. Tin dò được là tin thật.":"Lót tay một ngự sử dâng chứng cứ cha nàng tham ô lên Hoàng thượng."}</p>`,
-   opts:L.slice(0,8).map(v=>({kgt:v,n:`${v.name} (nhà ${tdHouse(v)})`,fx:{},x:a==="probe"?`${word(probeO(S))} · tốn: Bạc -30 · thành: biết thật cha nàng có tham ô không · hỏng: mất bạc · kèm: nàng biết chuyện (${chanceW(25)}): thiện cảm -8, ${typeof pvOanAny==="function"?pvOanAny(12.8):"oán ta +13"} · kèm: ${ccLine(S)}`:`${word(leakO(S,v))} · tốn: Bạc -20 · thành: nhà ${tdHouse(v)} thế lực -6, nàng nhà mẹ đẻ -15, Danh -4 · hỏng: Chứng cứ -1 · kèm: tra ra ngươi: nàng oán +25 · kèm: ${ccLine(S)}`,
+   opts:L.slice(0,8).map(v=>({kgt:v,n:`${v.name} (nhà ${tdHouse(v)})`,fx:{},x:a==="probe"?`${word(probeO(S))} · tốn: Bạc -30 · thành: biết thật cha nàng có tham ô không · hỏng: mất bạc · kèm: nàng biết chuyện (${chanceW(25)}): thiện cảm ${balSg(BAL.eff.j55.tdProbe)}, ${typeof pvOanAny==="function"?pvOanAny(12.8):"oán ta +13"} · kèm: ${ccLine(S)}`:`${word(leakO(S,v))} · tốn: Bạc -20 · thành: nhà ${tdHouse(v)} thế lực ${balSg(BAL.eff.j55.top_9)}, nàng nhà mẹ đẻ -15, Danh -4 · hỏng: Chứng cứ -1 · kèm: tra ra ngươi: nàng oán ${balSg(BAL.eff.j55.tdLeak_2)} · kèm: ${ccLine(S)}`,
     go:()=>{spend(2);const b2=rsnap();const r2=a==="probe"?tdProbe(S,v):tdLeak(S,v);if(r2)log(r2);const ok=!!window.__tdOk;setTimeout(()=>{try{resultShow(a==="probe"?`Dò la nhà ngoại ${v.name}`:`Tung chứng cứ: cha ${v.name}`,b2,ok)}catch(e){}},0)}})).concat([{n:"Thôi",fx:{}}])});showModal();return}
  if(r)log(r);resultShow(ttl,b,!!window.__tdOk);render()}
 document.addEventListener("click",e=>{const v=e.target.closest("[data-tdv]");if(v){e.stopPropagation();window.__tdV=v.dataset.tdv;try{render()}catch(x){}return}

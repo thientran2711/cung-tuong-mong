@@ -123,7 +123,7 @@ PEND.j71f=pp=>{if(!S)return null;const k=pp.k,V=(FV7[k]||[])[pp.vi];if(!V)return
    o.push({n:"Mang lễ sang dự",fx:{bac:-10},x:`${G7(`${H.name} thiện cảm ${balSg(BAL.eff.j71.go_3)}`)}, Danh +1`,go:()=>{relAdd(S,H,BAL.eff.j71.go_3);apply({danh:1});log(`${fn}: ngươi sang dự tiệc của ${H.name}.`)}});
    o.push({n:"Cáo mệt, không đi",fx:{},x:`Sức +4 · kèm: ${H.name} mất thiện cảm ${balSg(BAL.eff.j71.go_4)}`,go:()=>{apply({suc:4});relAdd(S,H,BAL.eff.j71.go_4);log(`${fn}: ngươi không sang dự tiệc của ${H.name}.`)}})}
   else{const G=(pp.g||[]).map(RV).filter(v=>v&&v.alive&&!v.out);const cost=40+S.rank*8,po=cl(Math.round(40+help7(S)*3+(S.tamco||0)/4),15,92);
-   const gt=G.map(v=>G7(`${v.name} thiện cảm +6`)).join(", ");
+   const gt=G.map(v=>G7(`${v.name} thiện cảm ${balSg(BAL.eff.j71.go_5)}`)).join(", ");
    o.push({n:"Bày tiệc lớn",fx:{bac:-cost},x:`${word(po)} · thành: Danh +4, Sủng +2${gt?", "+gt:""} · hỏng: món ăn hỏng, khách chê: Danh -2`,go:()=>{if(roll(po)){apply({danh:4,sung:2});G.forEach(v=>relAdd(S,v,BAL.eff.j71.go_5));log(`${fn}: tiệc của ngươi được khen, Hoàng thượng ghé qua.`)}else{apply({danh:-2});log(`${R7("Không thành:")} ${fn}: tiệc của ngươi trục trặc, món ăn hỏng, khách chê.`)}}});
    if(G[0])o.push({n:`Tiệc trà nhỏ mời ${G[0].name}`,fx:{bac:-15},x:`${G7(`${G[0].name} thiện cảm ${balSg(BAL.eff.j71.go_6)}`)}, Danh +1`,go:()=>{relAdd(S,G[0],BAL.eff.j71.go_6);apply({danh:1});log(`${fn}: ngươi mời ${G[0].name} uống trà.`)}});
    o.push({n:"Không bày tiệc, nghỉ ngơi",fx:{},x:"Sức +4",go:()=>{apply({suc:4});log(`${fn}: ngươi nghỉ trong cung.`)}})}}
@@ -201,7 +201,7 @@ MF("thbenh",{t:"Lập công · Hầu bệnh Thái hậu",cd:9,w:()=>!S.thDead&&S
    CH7("Tìm thuốc quý dâng bà",{c:{bac:-50},p:od(55),w:{th:7,danh:1},wt:[G7("Thái hậu khỏi bệnh")],l:{th:2},ok:()=>{cure();return "Thuốc quý hợp bệnh, Thái hậu khỏi hẳn."},ll:"Thuốc không hợp bệnh; Thái hậu chỉ cảm ơn lấy lệ."}),
    CH7("Chép kinh cầu an",{c:{suc:-6},w:{th:3,duc:2},wl:"Ngươi chép kinh cầu an, Thái hậu cảm động."}),
    CH7("Hỏi thăm cho phải phép",{w:{th:1},wl:"Ngươi đến hỏi thăm rồi về."})]},
- npc:v=>{if(S.thDead||!S.thIll||(v.suc||0)<40)return"";const ok=roll(cl(40+aw7(v,"y")*8+(v.duc||0)/5,5,95));ap(v,ok?{suc:-18,th:10,duc:3,danh:2}:{suc:-18,th:3});if(ok){S.thIll=null;daiDo7(v)}return ok?`${v.name} ngày đêm hầu thuốc, Thái hậu khỏi bệnh (Thái hậu với nàng +10).`:`${v.name} thức hầu thuốc Thái hậu (Thái hậu với nàng +3).`}});
+ npc:v=>{if(S.thDead||!S.thIll||(v.suc||0)<40)return"";const ok=roll(cl(40+aw7(v,"y")*8+(v.duc||0)/5,5,95));ap(v,ok?{suc:-18,th:10,duc:3,danh:2}:{suc:-18,th:3});if(ok){S.thIll=null;daiDo7(v)}return ok?`${v.name} ngày đêm hầu thuốc, Thái hậu khỏi bệnh (Thái hậu với nàng ${balSg(BAL.eff.j71.npc)}).`:`${v.name} thức hầu thuốc Thái hậu (Thái hậu với nàng +3).`}});
 MF("conbenh",{t:"Lập công · Trông con bệnh",cd:24,w:()=>allKids().some(([k])=>k.alive&&k.age<16)?1:0,
  v:["{K} sốt cao, mê man; {A} khóc cạn nước mắt.","{K} lên đậu, cả cung lo sợ lây; {A} không dám rời con.","{K} ăn phải đồ lạ, đau bụng quằn quại suốt đêm.","{K} ho rũ rượi đã nửa tháng, thái y đổi mấy đơn thuốc không khỏi.","{K} ngã xuống hồ cá, được vớt lên thì lạnh run, sốt.","{K} bị mẩn đỏ khắp người, ngứa ngáy khóc suốt.","{K} trúng nắng sau buổi tập cưỡi ngựa, nằm li bì."],
  who:X=>X.mom?pv(X.mom):(X.kid?kidFace(X.kid):pEmp()),

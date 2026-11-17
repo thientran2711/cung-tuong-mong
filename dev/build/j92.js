@@ -295,7 +295,7 @@ function wdAccuse(a,t){const c=wdCause(a,t);const truth=wdStatus(t);const judge=
  if(truth==="under"){ap(t,{danh:-4});return `${A0} hặc ${T0} ăn vận quá giản dị, làm mất thể diện hoàng gia: <span class="${t===S?"r":"g"}">thành</span>. ${wdNmC(t)} bị quở, Danh -4. `}
  ap(t,{danh:-8,sung:-5});punish(t,"mặc đồ đỏ vàng giữa quốc tang",2);return `${A0} hặc ${T0} mặc đồ đỏ vàng giữa quốc tang: <span class="${t===S?"r":"g"}">thành</span>. ${wdNmC(t)} Danh -8, Sủng -5. `}
 A("vp","Hặc ăn mặc sai phẩm",{c:{},ok:(a,t)=>!!wdCause(a,t),o:a=>oWd(a),x:"cần nguyên cớ: đã nghe người nhận xét, hoặc tai mắt báo nàng mặc sai phẩm",f:(a,t)=>wdAccuse(a,t)});
-try{AOUT.vp=["nàng bị quở (đồ vượt phẩm bị tịch thu; phạm tang thì bị phạt nặng); Danh +2","nàng hóa ra đúng phẩm: Danh -5, thù -12 · hoặc bị bỏ qua: Danh -2"]}catch(e){}
+try{AOUT.vp=["nàng bị quở (đồ vượt phẩm bị tịch thu; phạm tang thì bị phạt nặng); Danh +2",`nàng hóa ra đúng phẩm: Danh -5, thù ${balSg(BAL.eff.j92.wdAccuse)} · hoặc bị bỏ qua: Danh -2`]}catch(e){}
 try{LACK.vp=t=>{if(wdCause(S,t))return"";const r=S.wdSeen&&S.wdSeen[wdKey(t)];return r&&r.st!=="ok"&&r.it!==wdCur(t)?"nàng đã thay bộ khác từ lúc bị nhận xét":"chưa có nguyên cớ: chưa ai nhận xét, tai mắt chưa báo nàng mặc sai phẩm"}}catch(e){}
 try{J78VERB.vp="hặc {t} ăn mặc sai phẩm";HARMK["Hặc ăn mặc sai phẩm"]="vp"}catch(e){}
 
@@ -350,7 +350,7 @@ PEND.wdframe=pp=>{const a=byKey(pp.a);if(!a)return null;const nm=wdFrameNm(pp.k)
  O.push({n:"Nhận lỗi, xin khoan hồng",fx:{},j67:"tốn: không tốn gì",go:()=>guilty(true)});
  return{t:lo?`<p>${wdNmC(a)} báo Cung Chính ti: <b>${nm}</b> của nàng bị thất lạc, nay thấy ở cung ngươi. Cung Chính ti khám phòng ngươi và tìm thấy món ấy.</p>`:`<p>${wdNmC(a)} tố ngươi lấy trộm <b>${nm}</b>. Cung Chính ti khám phòng ngươi và tìm thấy món ấy trong rương.</p>`,o:ev>=1?O:O.slice(1),who:pv(a)}};
 A("giahoa","Giá họa trộm đồ",{c:{bac:-40},ok:(a,t)=>a.bac>=40&&!(t===S&&S.wdFrame),o:(a,t)=>oPlant(a,t),x:"sai người lén đặt đồ quý vào phòng nàng rồi tố nàng ăn cắp",f:(a,t)=>wdFrame(a,t)});
-try{AOUT.giahoa=["nàng mang tội ăn trộm: Danh -10, Sủng -5, bị phạt","kẻ đặt đồ bị bắt: nàng nắm 2 chứng cứ, thù -20 · hoặc nàng minh oan được: ngươi Danh -10, bị phạt"]}catch(e){}
+try{AOUT.giahoa=["nàng mang tội ăn trộm: Danh -10, Sủng -5, bị phạt",`kẻ đặt đồ bị bắt: nàng nắm 2 chứng cứ, thù ${balSg(BAL.eff.j92.wdFrame)} · hoặc nàng minh oan được: ngươi Danh -10, bị phạt`]}catch(e){}
 try{LACK.giahoa=()=>S.bac<40?"cần Bạc 40 để sai người":""}catch(e){}
 try{ACTDOM.giahoa="Mưu kế";J78VERB.giahoa="giá họa {t} tội ăn trộm";DIRTY.push("giahoa");
  const g=RVGRP.find(x=>x[0]==="Hại nặng");if(g&&!g[1].includes("giahoa"))g[1].push("giahoa");if(BANDS[2]&&!BANDS[2][2].includes("giahoa"))BANDS[2][2].push("giahoa")}catch(e){}

@@ -402,7 +402,7 @@ function j95caught(s){const v=RV(+s.a.slice(1));if(!v||!v.alive)return;const m=s
   else{v.j95bribe=wk()}}
  Q.push({t:out==="rev"?"Bắt gặp, và bị thấy":"Bắt gặp",who:pv(v),h:`<p>Ở ${W}, ngươi thấy rõ ${v.name} ${what}.</p>${out==="rev"?`<p class="r">Nàng ngẩng lên, bắt gặp ánh mắt ngươi. Nàng biết ngươi đã thấy.</p>`:""}`,opts:j95catchOpts(v,m,s,out)});
  if(out==="rev"&&v.j95bribe===wk()){const g=Math.min(60,Math.max(10,Math.floor((v.bac||0)/3)));Q.push({t:"Lời nhờ cậy",who:pv(v),h:`<p>Tối ấy cung nữ của ${v.name} lén mang sang một hộp gấm, trong có ${g} lượng bạc: “Chủ tử nhà nô tỳ xin ${kSay({srv:"f"},S,"{goi}")} coi như chưa thấy gì.”</p>`,
-  opts:[{n:"Nhận lễ, giữ im lặng",fx:{},x:`Nắm chắc · thành: Bạc +${g} · nàng quý ngươi +6 · nàng nợ ngươi một ân tình · kèm: nhận lễ là đã hứa giữ kín`,go:()=>j95bribeTake(v,g)},{n:"Trả lại hộp gấm",fx:{},x:`Nắm chắc · thành: không mắc nợ nàng · kèm: nàng oán ngươi ${balSg(BAL.eff.j95.go)}`,go:()=>{oanAdd(v,S,BAL.eff.j95.go);log(`Ngươi trả lại lễ của ${v.name}.`)}}]})}}
+  opts:[{n:"Nhận lễ, giữ im lặng",fx:{},x:`Nắm chắc · thành: Bạc +${g} · nàng quý ngươi ${balSg(BAL.eff.j95.j95bribeTake)} · nàng nợ ngươi một ân tình · kèm: nhận lễ là đã hứa giữ kín`,go:()=>j95bribeTake(v,g)},{n:"Trả lại hộp gấm",fx:{},x:`Nắm chắc · thành: không mắc nợ nàng · kèm: nàng oán ngươi ${balSg(BAL.eff.j95.go)}`,go:()=>{oanAdd(v,S,BAL.eff.j95.go);log(`Ngươi trả lại lễ của ${v.name}.`)}}]})}}
 function j95bribeTake(v,g){const n=Math.min(g,Math.floor(v.bac||0));v.bac=Math.max(0,(v.bac||0)-n);apply({bac:n});relAdd(v,S,BAL.eff.j95.j95bribeTake);j95z().owe[v.id]=(j95z().owe[v.id]||0)+1;log(`Nhận ${n} lượng bạc của ${v.name}, hứa giữ kín.`)}
 /* port 16/11 (owner 11/15 07:15Z): every option shows its whole Tốn / Được / Mất and the odds word, split by " · " for the kit rows (jmen format) */
 function j95accO(v,to){const pr=evG(S,v);const q=queenP();return to==="emp"?cl(20+pr*15+(S.sung||0)/5,5,90):S.rank>=7?cl(40+pr*15,5,95):cl(25+pr*15+(q?aff(q,S)/4:0),5,90)}
@@ -414,7 +414,7 @@ function j95catchOpts(v,m,s,out){const O=[];const q=queenP();const love=s.kind==
  O.push({n:"Tố giác lên Hoàng thượng",fx:{},x:`${word(j95accO(v,"emp"))} · tốn: ${BAL.m95.k} khắc · thành: ${win} · hỏng: ${lose.replace("bị cấm túc","bị cấm túc hay giáng phẩm")} · ${why} · (Sủng càng cao Hoàng thượng càng tin)`,go:()=>j95accuse(v,m,s,"emp")});
  O.push({n:"Giữ làm con bài khống chế",fx:{},x:`Nắm chắc · thành: chứng cứ về nàng +1 · giữ kín, chờ lúc dùng`,go:()=>j95hold(v)});
  const risk=(v.malice||0)>=70?25:0;
- O.push({n:"Lặng im, đổi lấy ân tình",fx:{},x:`${word(100-risk)} · tốn: ${BAL.m95.k} khắc (gặp riêng nàng) · thành: nàng quý ngươi +12 · nàng bớt oán ngươi 10 · nàng nợ ngươi một ân tình${risk?" · hỏng: nàng vẫn coi ngươi là mối nguy, oán ngươi +15":""}`,go:()=>j95silent(v)});
+ O.push({n:"Lặng im, đổi lấy ân tình",fx:{},x:`${word(100-risk)} · tốn: ${BAL.m95.k} khắc (gặp riêng nàng) · thành: nàng quý ngươi ${balSg(BAL.eff.j95.j95silent_2)} · nàng bớt oán ngươi 10 · nàng nợ ngươi một ân tình${risk?` · hỏng: nàng vẫn coi ngươi là mối nguy, oán ngươi ${balSg(BAL.eff.j95.j95silent)}`:""}`,go:()=>j95silent(v)});
  O.push({n:"Giả như không thấy",fx:{},x:"Nắm chắc · thành: không dính vào chuyện",go:()=>log("Ngươi lặng lẽ quay đi như không thấy gì.")});return O}
 function j95accuse(v,m,s,to){if(typeof can==="function"&&can(BAL.m95.k))spend(BAL.m95.k);const pr=evG(S,v);const q=queenP();
  const o=j95accO(v,to);

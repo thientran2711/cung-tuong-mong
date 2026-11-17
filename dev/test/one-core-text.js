@@ -9,6 +9,9 @@
    CUTS (review/one-core-dup2 r2): also fails a typed threshold copy of a moved ladder: beside a BAL.loy / ducLv / quyLv / wit / sungLv / tinhLv / tinLv / sucLv /
    rareLv / oanFade / tsDanger / cut / odds / ageBand read, or (stat-word scan, whole game) "lòng 60+" / "dưới 40" for BAL.loy, a typed tier range "80–100" for ducLv / sungLv …
    OC_WIDE=1 lists every stat-word threshold in any shape (diagnostic: lone "Đức từ 40" gates of other rules share numbers by coincidence and are NOT failures).
+   AMOUNTS (review/one-core-dup r3, scanAmt): a typed signed amount after "thiện cảm / quý / thân / với ngươi" (rel), "oán / thù" (oán) or "thế lực" (pow) that equals a BAL.eff
+   amount of the same kind read in the same module (or the linked modules, LINK) fails — previews, AOUT / add() tables, risk: lines, buttons, BOTH branches of an if; relAdd-derived
+   oán (|n|×BAL.relOan.hurt / doer / mend, print balOan(ref,"hurt")) and an inverted read count. OC_GLOBAL=1 compares with every module (diagnostic).
    usage: node dev/test/one-core-text.js [--list]      (--list prints every site, exit 0)
    module: require('./one-core-text.js').scan(buildDir) → sites (used by dev/measure/one-core-text-move.js) */
 const fs=require('fs'),path=require('path'),vm=require('vm');
@@ -36,6 +39,55 @@ function sameBranch(sa,sb,na,nb){let i=0;while(i<sa.length&&i<sb.length&&sa[i]==
  if(L.type==='IfStatement'||L.type==='ConditionalExpression')return !(ca!==cb&&[L.consequent,L.alternate].includes(ca)&&[L.consequent,L.alternate].includes(cb));
  if(L.type==='SwitchStatement'||L.type==='SwitchCase'&&false)return ca===cb;
  return true}
+
+/* ---- AMOUNT SCAN (review/one-core-dup r3): every typed signed amount in a text that equals a BAL.eff amount of the SAME KIND, anywhere in the game ----
+   kind of a BAL.eff key = what the call that reads it changes: relAdd / affAdd / kcAf / rdRel / e67ally … = thiện cảm (rel); oanAdd / rdOan = oán;
+   tdPowAdd = thế lực (pow). A text number counts when the words just before it name that kind ("thiện cảm +8", "quý ngươi -3", "thân -4", "oán +5",
+   "thù -12", "thế lực -3") and it equals a value of that kind (sign included). Derived oán: relAdd(n<0) also gives oán |n|×BAL.relOan.hurt (hurt one) and
+   |n|×doer (the doer), relAdd(n>0) takes mend×n off: those derived amounts count as oán values too (print balOan(ref)). A relation read inverted ("nàng oán +10" for a
+   Thân amount -10) counts. Searched in EVERY module (previews, action tables AOUT / add() / risk:, buttons) and in both branches of an if. */
+const KIND_OF={relAdd:'rel',affAdd:'rel',kcAf:'rel',rdRel:'rel',e67ally:'rel',e67dad:'rel',e67bien:'pow',e67kho:'pow',e67pun:'rel',e67foe:'rel',e67drop:'rel',oanAdd:'oan',rdOan:'oan',tdPowAdd:'pow'};
+const WORD={rel:/(?:thiện cảm|thù|quý(?: mến)?(?: ngươi| nàng| ta| nhau)?|[Tt]hân(?: với ngươi| với nàng)?|với ngươi|với nàng|với ta|mến)\s*$/,oan:/(?:oán|thù)[^\d+\-−()]{0,26}\(?\s*$/i,pow:/thế lực\s*$/};
+/* a text is compared with the BAL.eff amounts read in ITS OWN module and in the modules whose actions it previews. A module that wraps another module's option
+   (Object.assign({},A[i],{x:…,risk:…}) in a talkOpts / coldActs wrapper) shows that module's amounts: list the pair here (text module → rule modules). OC_GLOBAL=1 compares
+   with every module (diagnostic: lists numbers that coincide, to find a missing pair). */
+const LINK={'j78.js':['j8.js','j2.js']};
+const linked=(tm,rm)=>tm===rm||(LINK[tm]||[]).includes(rm);
+function scanAmt(B,BAL,ORDER){
+ const mods=ORDER.map(f=>{const src=fs.readFileSync(path.join(B,f),'utf8');return{f,src,ast:acorn.parse(src,{ecmaVersion:'latest',locations:true})}});
+ const kindOf={};/* key → Set of kinds */
+ const refPath=n=>{const p=[];let c=n;while(c.type==='MemberExpression'){const k=c.computed?(c.property.type==='Literal'?c.property.value:null):c.property.name;if(k==null)return null;p.unshift(k);c=c.object}return c.type==='Identifier'&&c.name==='BAL'&&p[0]==='eff'?p:null};
+ const valOfP=p=>{try{let o=BAL;for(const k of p)o=o[k];return o}catch(e){return undefined}};
+ const refsOf=m=>{const R=[],S=[];(function walk(n,stack){if(!n||typeof n.type!=='string')return;const par=stack[stack.length-1];
+   if(n.type==='Literal'&&typeof n.value==='string'&&!(par&&par.type==='Property'&&par.key===n&&!par.computed))S.push({a:n.start,b:n.end,s:n.value,lit:1,line:n.loc.start.line});
+   else if(n.type==='TemplateElement')S.push({a:n.start,b:n.end,s:n.value.cooked||'',lit:0,line:n.loc.start.line});
+   else if(n.type==='MemberExpression'&&!(par&&par.type==='MemberExpression'&&par.object===n)){const p=refPath(n);if(p&&p.length>=3){let call=null;for(let i=stack.length-1;i>=0;i--){const x=stack[i];if(x.type==='CallExpression'&&x.callee.type==='Identifier'&&KIND_OF[x.callee.name]){call=x.callee.name;break}if(/Function|Statement/.test(x.type))break}
+     R.push({n,p,kind:call?KIND_OF[call]:null,src:m.src.slice(n.start,n.end)})}}
+   stack.push(n);for(const k in n){if(k==='type'||k==='start'||k==='end'||k==='loc')continue;const c=n[k];if(Array.isArray(c))c.forEach(x=>walk(x,stack));else if(c&&typeof c.type==='string')walk(c,stack)}stack.pop()})(m.ast,[]);return{R,S}};
+ /* pass 1: the amounts of each kind (key + [i] index), every module */
+ const vals={rel:[],oan:[],pow:[]};const per=mods.map(m=>refsOf(m));
+ const hurt=BAL.relOan?BAL.relOan.hurt:.6,doer=BAL.relOan?BAL.relOan.doer:.2,mend=BAL.relOan?BAL.relOan.mend:.3;
+ const seen=new Set();
+ per.forEach((pr,mi)=>pr.R.forEach(r=>{if(!r.kind)return;const v=valOfP(r.p);const list=Array.isArray(v)?v.map((x,i)=>[x,r.src.replace(/\[[01]\]$/,'')+'['+i+']']):[[v,r.src]];
+  for(const [x,ref] of list){if(!isNum(x))continue;const id=r.kind+ref;if(seen.has(id))continue;seen.add(id);
+   vals[r.kind].push({v:x,ref,as:'sg',mod:mods[mi].f,pos:r.n.start});
+   if(r.kind==='rel'){if(x<0){vals.oan.push({v:-x,ref,as:'ab',inv:1,mod:mods[mi].f,pos:r.n.start});const d=Math.round(-x*hurt),e=Math.round(-x*doer);if(d)vals.oan.push({v:d,ref,as:'oan',mult:'hurt',mod:mods[mi].f,pos:r.n.start});if(e)vals.oan.push({v:e,ref,as:'oan',mult:'doer',mod:mods[mi].f,pos:r.n.start})}else{const d=Math.round(x*mend);if(d)vals.oan.push({v:-d,ref,as:'oan',mult:'mend',mod:mods[mi].f,pos:r.n.start})}}}}));
+ const out=[];
+ mods.forEach((m,mi)=>{for(const t of per[mi].S){if(!/\d/.test(t.s))continue;
+  const re=/([+\-−±]?)(?<![\w$.,])(\d+(?:\.\d+)?)(?![\d]|[.,]\d)/g;let q;
+  while((q=re.exec(t.s))){const before=t.s.slice(Math.max(0,q.index-40),q.index).replace(/\s+$/,' ');const kinds=Object.keys(WORD).filter(k=>WORD[k].test(before));if(!kinds.length)continue;
+   const sg=q[1];if(!sg&&!/(?:oán|thù|bớt|giảm|mất|thiện cảm|thân|quý|ghen|lòng)\s*$/i.test(before))continue;/* unsigned only straight after a relation word */
+   const n=+q[2];const cands=[];
+   for(const k of kinds)for(const c of vals[k]){if(!(process.env.OC_GLOBAL||linked(m.f,c.mod)))continue;const sv=sg==='-'||sg==='−'?-n:(sg==='+'?n:null);const cv=c.v;
+     /* signed typed: equal value and sign; unsigned: equal magnitude */
+     if(sv!=null?cv!==sv&&!(c.inv&&cv===n&&sg==='+'):Math.abs(cv)!==n)continue;cands.push(c)}
+   if(!cands.length)continue;
+   /* nearest rule first: same module, closest in the file; then the linked modules */
+   const tp=t.a;cands.sort((a,b)=>(a.mod===m.f?0:1)-(b.mod===m.f?0:1)||(a.mod===m.f?Math.abs(a.pos-tp)-Math.abs(b.pos-tp):0));
+   const uq=[...new Map(cands.map(c=>[c.ref+c.as+(c.mult||''),c])).values()];
+   out.push({f:m.f,line:t.line,t,idx:q.index,sg,abs:q[2],inv:false,amt2:true,cands:uq.map(c=>({key:c.ref.replace(/^BAL\./,''),v:c.v,ref:c.ref,as:c.as,mult:c.mult,mod:c.mod})),amb:uq.length>1,
+    text:t.s.slice(Math.max(0,q.index-24),q.index+q[2].length+14).replace(/\s+/g,' ')})}}});
+ return out}
 function scan(B){
  const BAL=loadBAL(B);
  const ORDER=fs.readFileSync(path.join(B,'assemble.py'),'utf8').match(/for f in \[([^\]]+)\]/)[1].match(/'([^']+)'/g).map(s=>s.slice(1,-1));
@@ -78,7 +130,7 @@ function scan(B){
     if(hit.length){const uq=[...new Map(hit.map(h=>[h.key,h])).values()];sites.push({f,line:t.line,t,idx:pos,sg:'',abs:String(num),inv:false,cut:true,cands:uq,amb:uq.length>1,text:t.s})}}}
   /* per typed number: every ref it could copy */
   const byTok=new Map();
-  for(const r of refs){
+  for(const r of refs){if(r.mode==='amt')continue;/* amounts: scanAmt() below */
    let box=null;for(let i=r.stack.length-1;i>=0;i--){const x=r.stack[i];if(x.type==='ObjectExpression'&&x.end-x.start<=2500){box=x;break}}
    const a=Math.max(box?box.start:0,r.n.start-WIN),b=Math.min(box?box.end:src.length,r.n.end+WIN);
    const absOf=r.mode==='cut'?null:Math.abs(r.v);
@@ -95,6 +147,7 @@ function scan(B){
   for(const e of byTok.values()){const uniq=[...new Map(e.cands.map(r=>[r.n.start+r.suf,r])).values()];
    sites.push({f,line:e.t.line,t:e.t,idx:e.idx,sg:e.sg,abs:e.abs,inv:e.inv,cut:e.cut,cands:uniq.map(x=>({key:x.p.join('.')+x.suf,v:x.cv!==undefined?x.cv:x.v,ref:src.slice(x.n.start,x.n.end)+x.suf})),amb:uniq.length>1,
     text:e.t.s.slice(Math.max(0,e.idx-24),e.idx+e.abs.length+14).replace(/\s+/g,' ')})}}
+ for(const x of scanAmt(B,BAL,ORDER))sites.push(x);
  sites.sort((x,y)=>ORDER.indexOf(x.f)-ORDER.indexOf(y.f)||x.line-y.line);
  sites.early=early;return sites}
 /* proof helpers (dev/measure/one-core-text-same.js, one-core-dup-same.js): printed(src) turns every ${balSg(expr)} / ${balAb(expr)} back into the words it prints
@@ -102,7 +155,8 @@ function scan(B){
 function proof(B){const BAL=loadBAL(B);const re=new RegExp(BALPATH,'g');const lit=v=>v<0?`(-${-v})`:String(v);
  const back=src=>src.replace(re,m=>{const v=valAt(BAL,m);return typeof v==='number'?lit(v):m});
  const sg=n=>(n>0?'+':n<0?'-':'')+Math.abs(n);
- const printed=src=>src.replace(/\$\{bal(Sg|Ab)\(((?:[^()]|\([^()]*\))*)\)\}/g,(m,fn,ex)=>{const n=Function('return '+back(ex))();return fn==='Sg'?sg(n):String(Math.abs(n))});
+ const oanF=(n,m)=>String(Math.round(Math.abs(n)*BAL.relOan[m]));
+ const printed=src=>src.replace(/\$\{bal(Sg|Ab|Oan)\(((?:[^()]|\([^()]*\))*)\)\}/g,(m,fn,ex)=>{if(fn==='Oan'){const q=/^(.*),\s*"(\w+)"$/.exec(ex);return oanF(Function('return '+back(q[1]))(),q[2])}const n=Function('return '+back(ex))();return fn==='Sg'?sg(n):String(Math.abs(n))});
  return{printed,back,BAL}}
 module.exports={scan,loadBAL,valAt,BALPATH,proof};
 if(require.main===module){
