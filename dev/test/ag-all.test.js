@@ -46,7 +46,7 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
  ok(r5.me[0]===r5.want[0]&&r5.me[1]===r5.want[1]&&r5.npc[1]===r5.want[1]&&r5.npc[0]>=r5.want[0],'Empress: one function for her button and the NPC Empress (same numbers, BAL.tw)',r5);
  /* 5b the Empress's and Thái hậu's acts are offered when their gates hold */
  const r5b=await p.evaluate(()=>{const q=queenP();const v=liveRivals(true).find(x=>x!==q&&!x.out);v.hh=60;q.bac=500;const O=AGREG.hh.acts(q,agNeedsC(q),null).map(o=>o.k);
-  S.th=80;S.thGiftWk=null;const N=agNeedsG("th");const T=AGREG.th.acts("th",N,null).map(o=>o.k+">"+(o.t===S?"me":o.t&&o.t.name));return{O,T,N}});
+  const f=liveRivals(true).find(x=>!x.out&&x!==q)||v;f.th=80;f.thGiftWk=null;const N=agNeedsG("th");const T=AGREG.th.acts("th",N,null).map(o=>o.k+">"+(o.t===S?"me":o.t&&o.t.name));return{O,T,N}});
  ok(r5b.O.includes('hh:reward'),'Empress: Ban thưởng is her option when the gate holds',r5b.O);ok(r5b.T.some(x=>/^th:gift/.test(x)),'Thái hậu: Ban thưởng is her option for a consort she favours',r5b);
  /* 6 */
  const r6=await p.evaluate(()=>{delete S.ag.day;const e=AGD.errs.length;try{placeWhere();agFlush()}catch(x){return{err:x.message}}const D=agDz();
