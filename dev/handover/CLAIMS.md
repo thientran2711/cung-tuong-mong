@@ -898,3 +898,4 @@
 | mirror-center: makeup mirror face off-centre left (owner bug OD ~18:00Z s35) — whole family of round/mirror face frames | review/mirror-center | MAIN s35 | session_01UV1SzkWgty5ackK6juMHCE | RUNNING | 17/11 18:00Z |
 | toil-looks6 successor: v13 sample fix + AVATAR ID-CARD bake (kit-fx-register) | review/kit-fx-register | MAIN s35 | session_01UV1SzkpQ27MXeaU77haA2o | RUNNING | 17/11 18:12Z |
 | REVIEW makeup-lux 7c6ef2fda (opus BIG; brief briefs/review-makeup-lux.md) | review/makeup-lux-r1 | B | session_01N1tNP2jpShYBDZTqRuh3Gk | RUNNING | 17/11 18:20Z |
+| kit-rank-name r1 PASS a4ccfc74 (+scan fix 188f63c9) → rebase → builder batch; reviewer archived | review/kit-rank-name-land | MAIN s35 | session_01UV1SzgiSj7gRNYszv9YgxE | PASS → BATCH | 17/11 18:20Z |
