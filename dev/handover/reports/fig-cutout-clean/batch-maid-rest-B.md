@@ -140,3 +140,11 @@ maid-m33-tm3-a18	lJIi9dWgv9	s7869SXl8e	ok
 maid-m33-tm4-a18	lJIi9Xcgv9	huZk50TvqL	ok
 ## 120 a18 done (m27..m34, m34-tm4 REDO pending in gJ). NEXT after gJ/gK = m35-tm4 + m36 (line 144+).
 ## LOOKALIKE redo list (lead #6 rule): m32-t5..t8, m33-t5..t8 kept ornate crowns (a18 live) - review after owner anchor.
+maid-m34-tm4-a18	iGbVDDr3uK	8a6q5GCIrU	ok (REDO done, supersedes earlier tm4 line)
+maid-m35-a18	KLDJyPDkqp	u5YsgpMQLD	ok
+maid-m35-cold-a18	gOt3ZAvSXO	79aAz53JAL	ok
+maid-m35-kc-a18	P3uYcVf42C	O6CzY1jynm	ok
+maid-m35-ngheo-a18	eIyEQbLdqL	N2H0VSQ6D9	ok
+maid-m35-t1-a18	YMs8tfIWeC	4RQW0S89Aa	ok
+maid-m35-t2-a18	WDlImEMcXe	O6CzYlUynm	ok
+maid-m35-t3-a18	Xm4QHrlBfo	LwoNi1gswO	ok
