@@ -85,7 +85,12 @@ export class Room {
     const del = []; for (let i = n; i < old; i++) del.push("s:" + i); if (del.length) await this.ctx.storage.delete(del);
     if (s.length > 8e6) return false; return true;
   }
-  socks(seat) { return this.ctx.getWebSockets(seat ? "seat-" + seat : undefined); }
+  /* review/coop-stable: a socket the server has closed (stale, replaced) stays in getWebSockets() until the peer answers the close frame.
+     A peer that vanished without a TCP close (phone off the network, a proxy that keeps the upstream open) never answers, so the seat read
+     "online" for ever: the friend never froze ("Hảo hữu đang vắng") and her buổi/week waited on a ghost. Closed sockets are marked `gone`
+     and never count again. */
+  socks(seat) { return this.ctx.getWebSockets(seat ? "seat-" + seat : undefined).filter(ws => { if (typeof ws.readyState === "number" && ws.readyState > 1) return false; const at = ws.deserializeAttachment && ws.deserializeAttachment(); return !(at && at.gone); }); }
+  bury(ws, code, why) { try { const at = ws.deserializeAttachment() || {}; at.gone = 1; ws.serializeAttachment(at); } catch (e) {} try { ws.close(code, why); } catch (e) {} }
   online(seat) { return this.socks(seat).length > 0; }
   seatsView() {
     const m = this.meta, o = {};
@@ -129,7 +134,7 @@ export class Room {
       if (!m.seats[seat]) m.seats[seat] = { pid, name };
       if (name) m.seats[seat].name = name;
       await this.saveMeta();
-      for (const old of this.socks(seat)) { try { old.close(4001, "replaced"); } catch (e) {} }
+      for (const old of this.socks(seat)) this.bury(old, 4001, "replaced");
       const [c2, s2] = Object.values(new WebSocketPair());
       this.ctx.acceptWebSocket(s2, ["seat-" + seat]);
       s2.serializeAttachment({ seat, last: Date.now() });
@@ -145,7 +150,7 @@ export class Room {
 
   async webSocketMessage(ws, data) {
     let msg; try { const s = typeof data === "string" ? data : await gunzipText(data); if (s.length > 9e6) throw 0; msg = JSON.parse(s); } catch (e) { return this.send(ws, { t: "error", code: "bad", msg: "bad message" }); }
-    const at = ws.deserializeAttachment() || {}; const seat = at.seat; if (!seat) return;
+    const at = ws.deserializeAttachment() || {}; const seat = at.seat; if (!seat || at.gone) return; /* a buried socket (stale / replaced) never writes again */
     at.last = Date.now(); ws.serializeAttachment(at);
     const m = await this.loadMeta(); if (!m) return;
     const t = msg.t;
@@ -298,7 +303,7 @@ export class Room {
     for (const ws of this.socks()) {
       const at = ws.deserializeAttachment() || {}; let last = at.last || 0;
       try { const ar = this.ctx.getWebSocketAutoResponseTimestamp(ws); if (ar && ar.getTime() > last) last = ar.getTime(); } catch (e) {}
-      if (now - last > STALE) { try { ws.close(4003, "stale"); } catch (e) {} changed = true; }
+      if (now - last > STALE) { this.bury(ws, 4003, "stale"); changed = true; }
     }
     if (changed) await this.presence();
     if (this.socks().length) { await this.ctx.storage.setAlarm(now + 20000); return; }

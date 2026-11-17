@@ -5,8 +5,8 @@
      kitItemRef(ref)               → R {k, e, g, I (kitItemInfo §54.1), wd, it, work, veil, worn, who} — the resolver (null = no such item)
      kitItemDetailRows(ref, o)     → kitRows (KIT §51): Phẩm · Loại · Hợp đề · Được · Mất · Xa xỉ · Lai lịch · Ghi chú (empty rows dropped)
                                      o = {months, dress, pawn, note:[…], lead:[[label,val,cls]…] rows put first (price), noLux}
-     kitItemDetail(ref, o)         → HTML block `.kidet`: picture (kitItem, the kit graded frame) · name in the grade colour · kitGradeChip(grade,
-                                     kind) · "Đang mặc" chip · the rows · o.acts (pbtn buttons, any data-* the caller handles). o.size "md"|"lg".
+     kitItemDetail(ref, o)         → HTML block `.kidet`: picture (kitItem, the kit graded frame) · name in the grade colour (the grade chip is ON the
+                                     picture frame, kitItem KIT §54.1b) · kind · "Đang mặc" chip · the rows · o.acts (pbtn buttons, any data-* the caller handles). o.size "md"|"lg".
      kitItemCard(ref, o)           → floats the block over the screen (above dialogs and minigames): ✕ (kit-x) / tap outside / Esc close it.
                                      o.acts = [{id, n, sub, why, go()}] → kit buttons; a tap runs go() and closes the card.
      kitItemTap(ref)               → `data-kid… role="button" tabindex="0"` attributes: any tile carrying them opens kitItemCard on tap
@@ -71,11 +71,11 @@ function kitItemDetailRows(ref,o){o=o||{};const R=kitItemRef(ref);if(!R)return""
   ["Xa xỉ",X?X.vals.map((v,i)=>i===1&&X.over?`<span class="ef r">${v}: quá hạn mức</span>`:v):[],"n"],["Lai lịch",F,"n"],["Ghi chú",G,"n"]]))}
 /* the block */
 function kitItemDetail(ref,o){o=o||{};const R=kitItemRef(ref);if(!R)return"";const I=R.I;const sz=o.size||"md";
- const pic=kitItem({src:sz==="lg"?I.src512||I.src:I.src,name:"",grade:I.grade,size:sz,qty:R.qty>1?R.qty:0,tip:I.name}).replace('<span class="kitn"></span>','');
- const kind=kidKind(R);const chip=typeof kitGradeChip==="function"?kitGradeChip(I.grade,{name:I.gname,size:"sm"}):"";
+ const pic=kitItem({src:sz==="lg"?I.src512||I.src:I.src,name:"",grade:I.grade,gname:I.gname,size:sz,qty:R.qty>1?R.qty:0,tip:I.name}).replace('<span class="kitn"></span>','');
+ const kind=kidKind(R);/* the grade = the chip ON the picture frame (kitItem, KIT §54.1b), not a second chip here */
  const acts=(o.acts||[]).map(a=>typeof a==="string"?a:pbtn(`data-kidact="${a.id}"`,a.n,a.sub||"",a.why||"")).join("");
  return `<div class="kidet kidet-${sz}${o.cls?" "+o.cls:""}" data-kidk="${kidEsc(R.k)}"><div class="kidhd"><span class="kidpic">${pic}</span><div class="kidt">`+
-  `<b class="kidn" style="color:${I.col}">${kidEsc(I.name)}</b><span class="kidsub">${chip}<span class="kidkind">${kidEsc(kind)}</span>${R.worn?(typeof kitChip==="function"?kitChip("Đang mặc","g"):""):""}</span></div></div>`+
+  `<b class="kidn" style="color:${I.col}">${kidEsc(I.name)}</b><span class="kidsub"><span class="kidkind">${kidEsc(kind)}</span>${R.worn?(typeof kitChip==="function"?kitChip("Đang mặc","g"):""):""}</span></div></div>`+
   `<div class="kinvrows kidrows">${kitItemDetailRows(R,o)}</div>${acts?`<div class="rbtn kidacts">${acts}</div>`:""}</div>`}
 /* the floating card */
 const KIDC={card:null};
@@ -85,8 +85,8 @@ function kitItemCard(ref,o){o=o||{};const R=kitItemRef(ref);if(!R)return null;ki
  /* KIT §8.2 T2 (review/kit-sweep, owner 16/11 "kit chung đâu"): the item card is the kit PANEL frame (kpHeader seal ĐIỀU + name + kind,
     kit ✕ in the header) with the item picture LEFT (.kpsubj.kpiart) and its kit rows + acts RIGHT; no private card frame. */
  const I=R.I,acts2=acts.map(a=>typeof a==="string"?a:pbtn(`data-kidact="${a.id}"`,a.n,a.sub||"",a.why||"")).join("");
- const pic=kitItem({src:I.src512||I.src,name:"",grade:I.grade,size:"lg",qty:R.qty>1?R.qty:0,tip:I.name}).replace('<span class="kitn"></span>','');
- const chip=typeof kitGradeChip==="function"?kitGradeChip(I.grade,{name:I.gname,size:"sm"}):"";const worn=R.worn&&typeof kitChip==="function"?kitChip("Đang mặc","g"):"";
+ const pic=kitItem({src:I.src512||I.src,name:"",grade:I.grade,gname:I.gname,size:"lg",qty:R.qty>1?R.qty:0,tip:I.name}).replace('<span class="kitn"></span>','');
+ const worn=R.worn&&typeof kitChip==="function"?kitChip("Đang mặc","g"):"";
  const head=(typeof kpHeader==="function"?kpHeader("info",`<span style="color:${I.col}">${kidEsc(I.name)}</span>`,kidEsc(kidKind(R))):`<div class="kph"><b>${kidEsc(I.name)}</b></div>`).replace(/<\/div>$/,(typeof kitXHTML==="function"?kitXHTML('data-kidx="1"'):'<button type="button" class="kit-x" data-kidx="1" aria-label="Lui">✕</button>')+"</div>");
  f.innerHTML=`<div class="dlg kpanel kidc" data-kind="info" role="dialog" aria-modal="true" aria-label="${kidEsc(I.name)}">${head}<div class="body kidb"><div class="kpb kphas kpinfo kidet" data-kidk="${kidEsc(R.k)}"><div class="kpsubj kpiart kidpic">${pic}</div><div class="kpmain">${worn?`<div class="kpsec">${worn}</div>`:""}<div class="kinvrows kidrows">${kitItemDetailRows(R,o)}</div>${acts2?`<div class="rbtn kidacts">${acts2}</div>`:""}</div></div></div></div>`;
  document.body.appendChild(f);KIDC.card={R,o};try{if(typeof kitFix==="function")kitFix(f)}catch(e){}try{const x=f.querySelector(".kit-x");x&&x.focus({preventScroll:true})}catch(e){}
@@ -115,7 +115,7 @@ if(typeof wdItemRowsE==="function")wdItemRowsE=function(e,o){return kitItemDetai
 (function(){const st=document.createElement("style");st.id="kid-css";st.textContent=`
 .kidet{display:flex;flex-direction:column;gap:6px;min-width:0}
 .kidet .kidhd{display:grid;grid-template-columns:auto minmax(0,1fr);gap:10px;align-items:center}
-.kidet .kidpic>.kitem{margin:0}.kidet .kidpic .kitg{display:none}
+.kidet .kidpic>.kitem{margin:0}
 .kidet .kidt{display:flex;flex-direction:column;gap:3px;min-width:0}
 .kidet .kidn{font-family:var(--display);font-size:1.05rem;line-height:1.25;overflow-wrap:anywhere}
 .kidet .kidsub{display:flex;flex-wrap:wrap;align-items:center;gap:4px 6px;font-size:.78rem;color:var(--ink2,#6a5040)}

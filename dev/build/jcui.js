@@ -74,3 +74,6 @@ window.kcuHonorRows=function(n){const H=(typeof S!=="undefined"&&S&&S.honors)||[
 /* podium in short landscape (844x390): compact header + plaque so figures keep their scale and nothing runs under the header */
 
 `;document.head.appendChild(st)})();
+
+/* KIT §13.4 sample: the tài nghệ frame with her live figure (wide) — on the Fold (html.kv1) the column is not drawn */
+try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§13.4",title:"kitGameFrame + kitGameFig · khung tài nghệ có hình toàn thân của nàng",where:"MỌI trò tài nghệ (thi, học, tự luyện, Điểm trang, khảo hạch…) qua kg82Open; cột trái chỉ ở màn rộng (kv2)",html:()=>{try{return `<div class="mg kpanel kgame kg82" style="position:relative;max-width:760px;margin:0 auto">${kitGameFrame({art:"Đàn",title:"Tấu khúc",how:"Chạm đúng dây khi hoa chạm vạch son.",hud:[["score","Phần","0/10"],["round","Hồi","1/20"],["time","Còn","30 giây"]],id:"kgsample",fig:true})}</div>`}catch(e){return ""}}})}catch(e){}
