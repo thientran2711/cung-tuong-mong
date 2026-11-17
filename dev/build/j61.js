@@ -238,7 +238,7 @@ function k61Table(){if(!S||!S.known)return null;const now=Date.now();const rn=(r
  for(const e of ents){const kn=k61Named(e);for(const v of k61Vars(e)){if(kn){prot.add(v);M[v]=null}else if(!(v in M))M[v]=kOf61(e)}}
  for(const v of prot)M[v]=null;const keys=Object.keys(M).filter(v=>M[v]||prot.has(v));if(!keys.some(v=>M[v])){K61RX=false;return false}
  keys.sort((a,b)=>b.length-a.length);K61MAP=M;const esc=s=>s.replace(/[.*+?^${}()|[\]\\]/g,"\\$&");
- K61RX=new RegExp(`(?<![\\p{L}\\p{M}])${K61T}(${keys.map(esc).join("|")})(?![\\p{L}\\p{M}])`,"gu");return K61RX}
+ K61RX=kRx(`(?<![\\p{L}\\p{M}])${K61T}(${keys.map(esc).join("|")})(?![\\p{L}\\p{M}])`,"gu");return K61RX}
 /* the mask for a name she does not know: "<title> ???" (title = what the dress shows), never a descriptor sentence */
 function k61MaskT(e){const k=k61Kind(e);if(k==="consort")return e.out?"Phế phi":e.queen?"Hoàng hậu":RANKS[cl(e.rank||0,0,7)].n;if(k==="emp")return"Hoàng thượng";if(k==="th")return"Thái hậu";
  if(k==="tq")return"Tổng quản thái giám";if(k==="eun")return"thái giám";if(k==="phys")return"thái y";if(k==="maid")return"cung nữ";if(k==="mama")return"ma ma";

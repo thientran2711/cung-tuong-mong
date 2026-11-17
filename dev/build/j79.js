@@ -1226,7 +1226,7 @@ let kitRpKey="",kitRpRe=null,kitRpMap=null;lifeStore("kitRpMap name -> person",(
 function kitRpRx(){const L=typeof kpPeople==="function"?kpPeople():[];const key=L.map(x=>x[0]).join("|");kitRpMap=new Map(L);if(key!==kitRpKey||!kitRpRe){kitRpKey=key;
   const N=L.map(x=>x[0].replace(/[.*+?^${}()|[\]\\]/g,"\\$&")).join("|");
   /* "title name" (m[1], m[2]) or "name (title, …)" (m[3], m[4]: lists such as "Mạnh Bích Dao (Tần, chủ vị)") */
-  kitRpRe=L.length?new RegExp(`(?<![\\p{L}])(?:(${KIT_RP_TITLES}) (${N})|(${N}) \\((${KIT_RP_TITLES})(?=[,;)·]))(?![\\p{L}])`,"gu"):null}
+  kitRpRe=L.length?kRx(`(?<![\\p{L}])(?:(${KIT_RP_TITLES}) (${N})|(${N}) \\((${KIT_RP_TITLES})(?=[,;)·]))(?![\\p{L}])`,"gu"):null}
  return kitRpRe}
 /* the kit markup for one "title name" pair (= kitName with the text's own title) */
 function kitRankNameH(p,title,name){const col=typeof kitPersonCol==="function"?kitPersonCol(p):"#8a7350";const me=typeof S!=="undefined"&&p===S;

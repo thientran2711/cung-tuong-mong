@@ -152,7 +152,7 @@ const LUX_TH={thanh:{col:["xanh","trang","lam"],re:/ngọc|lụa|lan|trúc|bạc
  xuan:{col:["hong"],re:/hoa|đào|mai|hải đường|xuân|điệp|lụa/i},
  co:{col:["nau"],re:/gỗ|đồng|cổ|vân|hạc|điền|chồn|bông|lam/i}};
 /* whole words only ("thạch" is not "hạc", "Hòa Điền" stays a place): letters on either side break the match */
-for(const t in LUX_TH)LUX_TH[t].re=new RegExp(`(?<!\\p{L})(?:${LUX_TH[t].re.source})(?!\\p{L})`,"iu");
+for(const t in LUX_TH)LUX_TH[t].re=kRx(`(?<!\\p{L})(?:${LUX_TH[t].re.source})(?!\\p{L})`,"iu");
 function luxThemesOf(k){const L=[];try{const w=typeof WD_ITEMS==="object"?WD_ITEMS[k]:null,it=IT[k];const nm=(w&&w.n)||(it&&it.n)||"",col=w?w.col:"";
  for(const t in LUX_TH){const D=LUX_TH[t];if((col&&D.col.includes(col))||D.re.test(nm))L.push(t)}}catch(e){}return L}
 window.luxThemesOf=luxThemesOf;

@@ -35,7 +35,7 @@
   "#kboot .kbtx{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}#kboot .kbtx button{flex:1 1 150px;min-height:42px;padding:8px 14px;border-radius:8px;cursor:pointer;"+
   "font:700 15px/1.2 'Noto Serif',Georgia,serif;letter-spacing:.02em;color:#fff8e6;background:linear-gradient(#b0402c,#8a2a1e);border:1px solid #6e1d12;box-shadow:inset 0 0 0 1px #f0d07066,0 1px 0 #d9c49a}"+
   "#kboot .kbtx button.alt{background:#fffaf0;color:#2a1a12;border-color:#d2b071;box-shadow:none}"+
-  "#kboot .kbte{margin-top:8px;font:11px/1.35 ui-monospace,monospace;color:#6b5643;max-height:4.2em;overflow:hidden;word-break:break-word}#kboot.fail .kbtp i{display:none}"+
+  "#kboot .kbtd{display:inline-block;margin-top:10px;font-size:12px;color:#8a6b3f;text-decoration:underline;cursor:pointer}#kboot .kbte{margin-top:6px;font:11px/1.35 ui-monospace,monospace;color:#6b5643;max-height:4.2em;overflow:hidden;word-break:break-word}#kboot.fail .kbtp i{display:none}"+
   "@keyframes kbootRun{to{transform:translateX(286%)}}@media (prefers-reduced-motion:reduce){#kboot .kbtp i:after{animation:none;transform:none;width:30%}#kboot{transition:none}}";
  function shape(w,h){return w<h?"p":w/h<=1.4?"m":"l"}
  function make(w,h){if(!d.getElementById("kboot-css")){var s=d.createElement("style");s.id="kboot-css";s.textContent=css;(d.head||d.documentElement).appendChild(s)}
@@ -57,8 +57,10 @@
  function fail(why){if(window.__kbootDone)return;if(c.classList.contains("fail")){if(why==="broken"&&c.getAttribute("data-why")!=="broken"){c.setAttribute("data-why","broken");var sm=c.querySelector(".kbtp small");if(sm)sm.textContent=MSG_BROKEN}return}c.classList.add("fail");c.setAttribute("data-why",why);c.setAttribute("aria-busy","false");
   var p=c.querySelector(".kbtp");p.innerHTML='<b>'+W.bootFail+'</b><small>'+(why==="slow"?W.bootFailSlow:MSG_BROKEN)+'</small>'+
    '<div class="kbtx"><button type="button" data-kb="re">'+W.bootRe+'</button><button type="button" class="alt" data-kb="clr">'+W.bootClr+'</button></div>'+
-   (ERR.length?'<div class="kbte"></div>':"");var e=p.querySelector(".kbte");if(e)e.textContent=ERR.slice(-2).join(" · ");
-  p.addEventListener("click",function(ev){var b=ev.target.closest&&ev.target.closest("[data-kb]");if(!b)return;b.disabled=true;
+   (ERR.length?'<a class="kbtd" role="button" tabindex="0" data-kb="dt">'+W.bootDetail+'</a><div class="kbte" hidden></div>':"");var e=p.querySelector(".kbte");if(e)e.textContent=ERR.slice(-2).join(" · ");
+  p.addEventListener("click",function(ev){var b=ev.target.closest&&ev.target.closest("[data-kb]");if(!b)return;
+   if(b.getAttribute("data-kb")==="dt"){/* the raw error line (English, for a bug report) shows only behind this small tap */if(e)e.hidden=!e.hidden;return}
+   b.disabled=true;
    if(b.getAttribute("data-kb")==="re"){try{return window.top.location.reload()}catch(x){return location.reload()}}
    /* the stale-shell risk: drop the app-shell caches and the service worker; pictures (ctm-assets, content-keyed) and saves stay */
    var jobs=[];try{if(window.caches)jobs.push(caches.keys().then(function(K){return Promise.all(K.filter(function(k){return k!=="ctm-assets"&&!/^ctm-\d+$/.test(k)}).map(function(k){return caches.delete(k)}))}))}catch(x){}

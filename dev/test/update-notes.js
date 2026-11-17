@@ -9,6 +9,8 @@ const ok=(c,m,x)=>{if(!c)bad++;console.log((c?'ok  ':'FAIL')+' '+m+(x!==undefine
   const ctx=await b.newContext({viewport:{width:w,height:h},hasTouch:true,isMobile:w<1100,reducedMotion:'reduce'});await serve(ctx);
   await ctx.addInitScript(()=>{window.COOP_URL='http://127.0.0.1:9/'});
   const p=await ctx.newPage();const errs=[];p.on('pageerror',e=>errs.push(e.message));
+  /* the title's Tiếp tục opens Chọn sổ; the saved sổ is then loaded from its card ([data-load]) */
+  const cont=async()=>{await p.evaluate(()=>{document.querySelector('[data-tgo="slots"]').click()});await p.waitForSelector('#modal [data-load]',{timeout:15000});await p.evaluate(()=>{document.querySelector('#modal [data-load]').click()})};
   const boot=async()=>{await p.goto(BASE,{waitUntil:'domcontentloaded',timeout:120000});await p.waitForFunction(()=>window.CTM_NOTES_UI&&document.querySelector('#modal.kpthome'),null,{timeout:90000})};
   const ovf=()=>p.evaluate(()=>{const M=document.getElementById('modal');const d=M&&M.querySelector('.dlg');return {page:document.documentElement.scrollWidth-innerWidth,dlg:d?d.scrollWidth-d.clientWidth:0,top:d?Math.round(d.getBoundingClientRect().top):null,bot:d?Math.round(d.getBoundingClientRect().bottom)-innerHeight:null}});
   /* 1. brand-new player: no pop-up, id recorded, boot not delayed */
@@ -37,7 +39,7 @@ const ok=(c,m,x)=>{if(!c)bad++;console.log((c?'ok  ':'FAIL')+' '+m+(x!==undefine
   await p.evaluate(()=>{try{nlAccept()}catch(e){}while(Q.length)Q.shift();try{closeModal()}catch(e){}try{render()}catch(e){}save()});
   await p.evaluate(()=>{CTM_NOTES_UI.reset()});
   await boot();
-  await p.evaluate(()=>{document.querySelector('[data-tgo="cont"]').click()});   /* old-save load through the title's own Tiếp tục */
+  await cont();   /* old-save load through the title's own Tiếp tục (opens Chọn sổ) → the saved sổ */
   await p.waitForFunction(()=>typeof S!=='undefined'&&S&&S.name&&document.getElementById('title').hidden,null,{timeout:60000});
   for(let i=0;i<40;i++){const up=await p.evaluate(()=>/Điều mới trong cung/.test(document.body.innerText));if(up)break;   /* clear other dialogs (the test has no tutorial), never the notes pop-up */
    await p.evaluate(()=>{while(Q.length&&!(Q[0].kit&&/Điều mới/.test(Q[0].kit.title||'')))Q.shift();});await p.waitForTimeout(500)}
@@ -50,7 +52,7 @@ const ok=(c,m,x)=>{if(!c)bad++;console.log((c?'ok  ':'FAIL')+' '+m+(x!==undefine
   const gone=await p.evaluate(()=>{const M=document.getElementById('modal');return M.hidden||!/Điều mới trong cung/.test(M.innerText)});ok(gone,`${tag} pop-up closes`);
   await p.waitForTimeout(4200);const again=await p.evaluate(()=>{const d=document.querySelector('#modal:not([hidden]) .dlg');return !!(d&&/Điều mới trong cung/.test(d.innerText))});ok(!again,`${tag} not shown again in the same visit`);
   /* 4. reload: remembered, no pop-up */
-  await boot();await p.evaluate(()=>{document.querySelector('[data-tgo="cont"]').click()});
+  await boot();await cont();
   await p.waitForFunction(()=>typeof S!=='undefined'&&S&&S.name&&document.getElementById('title').hidden,null,{timeout:60000});await p.waitForTimeout(5000);
   const again2=await p.evaluate(()=>/Điều mới trong cung/.test(document.body.innerText));ok(!again2,`${tag} after reload: remembered, no pop-up`);
   /* 5. co-op room: never shown, never marked seen */
