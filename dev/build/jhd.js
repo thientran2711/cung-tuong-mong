@@ -19,7 +19,7 @@
    ============================================================================================================== */
 Object.assign(BAL,{hd:{
  size:.085,            /* sticker width / face width (owner's pick 0.085, Foreman C huadian-size) */
-  up:.25,           /* anchor: above the brows' inner-end midpoint, × eye distance, perpendicular to the eye line */
+  up:.12,           /* anchor: above the brows' inner-end midpoint, × eye distance, perpendicular to the eye line */
  tolD:.24,tolA:30,     /* q of a part falls to 0 at this distance (× eye distance) / this tilt (degrees). r1: .45 → .24 = careful-bot top grade
                           70 % → ~25 % at Vừa (ease 2) while the painted hoa điền still marks the spot; RE-MEASURE when clean foreheads land */
  wD:.7,wA:.3,          /* share of distance vs tilt in q */
@@ -31,7 +31,9 @@ Object.assign(BAL,{hd:{
  shop:35,              /* % a restock brings a hoa điền */
  npcHave:60,           /* % a consort holds one (once) */
  find:4,               /* % per month her people find one */
- pop:[.8,.5]}});       /* q ≥ [0] "ngay ngắn", ≥ [1] "hơi lệch", else "lệch" */
+ pop:[.8],             /* q ≥ [0] "ngay ngắn"; below BAL.toil.fail = "dán vụng" (the same cut that makes any makeup part vụng); between: "hơi lệch" */
+ vungA:9,              /* r2 (owner OD 17/11 ~21:03Z): the SHOWN hoa điền always sits at the forehead anchor; a vụng one (q < BAL.toil.fail) shows this fixed tilt */
+ edFw:.42}});          /* eye distance / face width (fallback when a picture has no face-width row) */
 /* board ease → tolerance (mgLev reads BAL.mgTier.lev[kind][name]: ease 0 → [0], ease 5 → [1]) */
 try{BAL.mgTier.lev=BAL.mgTier.lev||{};BAL.mgTier.lev.hoadien={tol:[.7,1.2]}}catch(e){}
 
@@ -47,6 +49,8 @@ const HD_IMG={};function hdImg(k){let i=HD_IMG[k];if(i)return i;const w=WD_ITEMS
  const fb=[w&&w.icon,WD_ITEMS.hoadien_bac&&WD_ITEMS.hoadien_bac.icon].filter((s,j,a)=>s&&a.indexOf(s)===j);
  i.onerror=()=>{const n=i.__fb|0;if(n<fb.length){i.__fb=n+1;i.src=U(fb[n])}};i.src=U(`img/hd-${k.replace(/_/g,"-")}.webp`);return HD_IMG[k]=i}
 
+/* ---------- vụng = below the ONE makeup fail cut (BAL.toil.fail), for her, NPCs and every view ---------- */
+function hdVung(q){return typeof q==="number"&&q<BAL.toil.fail}
 /* ---------- the score: ONE formula for her, NPCs, the bot and Thử tay ---------- */
 function hdQ(d,a,sk,lvF){const B=BAL.hd;const tf=(1+B.skTol*Math.max(0,Math.min(1,sk||0)))*(lvF||1);
  const qd=Math.max(0,Math.min(1,1-d/(B.tolD*tf))),qa=Math.max(0,Math.min(1,1-Math.abs(a)/(B.tolA*tf)));return B.wD*qd+B.wA*qa}
@@ -61,13 +65,13 @@ function hdNpc(v,h,sk){try{const L=hdOwned(v);if(!L.length)return null;let cap=M
 function hdAnchor(file,img,fws,G){const B=BAL.hd;let m=null;try{m=MK_FIT.get(file)}catch(e){}
  const P=i=>[img.x+m[2*i]/4000*img.w,img.y+m[2*i+1]/4000*img.h];
  if(m&&m.length>=120){const eye=s=>{let x=0,y=0;for(let i=0;i<10;i++){const p=P(s+i);x+=p[0]/10;y+=p[1]/10}return[x,y]};const E=[eye(20),eye(30)].sort((a,b)=>a[0]-b[0]);
-  const ed=Math.hypot(E[1][0]-E[0][0],E[1][1]-E[0][1])||fws*.42,ang=Math.atan2(E[1][1]-E[0][1],E[1][0]-E[0][0]),mx=(E[0][0]+E[1][0])/2;
+  const ed=Math.hypot(E[1][0]-E[0][0],E[1][1]-E[0][1])||fws*BAL.hd.edFw,ang=Math.atan2(E[1][1]-E[0][1],E[1][0]-E[0][0]),mx=(E[0][0]+E[1][0])/2;
   let at=null;try{const o=window.HD_ANCHOR&&window.HD_ANCHOR[file];if(o)at=[img.x+o[0]/4000*img.w,img.y+o[1]/4000*img.h]}catch(e){}
-  if(!at){const inner=s=>{let best=null;for(let i=0;i<10;i++){const p=P(s+i);if(!best||Math.abs(p[0]-mx)<Math.abs(best[0]-mx))best=p}return best};const a=inner(40),b=inner(50);
+  if(!at){/* r2: the brow's inner END on its centre line = mean of the 2 contour points nearest the face midline (upper + lower edge) */const inner=s=>{const L=[];for(let i=0;i<10;i++)L.push(P(s+i));L.sort((a,b)=>Math.abs(a[0]-mx)-Math.abs(b[0]-mx));return[(L[0][0]+L[1][0])/2,(L[0][1]+L[1][1])/2]};const a=inner(40),b=inner(50);
    const mid=[(a[0]+b[0])/2,(a[1]+b[1])/2];at=[mid[0]+Math.sin(ang)*B.up*ed,mid[1]-Math.cos(ang)*B.up*ed]}
   return{x:at[0],y:at[1],ed,ang:ang*180/Math.PI,mesh:true}}
  /* no face points: the face box of toil-fit (top-centre of the face), so the board still plays */
- if(G&&G.T){const p=G.T(.5,.06);return{x:p[0],y:p[1],ed:fws*.42,ang:0,mesh:false}}return null}
+ if(G&&G.T){const p=G.T(.5,.06);return{x:p[0],y:p[1],ed:fws*BAL.hd.edFw,ang:0,mesh:false}}return null}
 
 /* ---------- the board: drag + tilt + Dán. o = {C, G, file, box, k, sk, lvF, paint(g,now), label, seed, onEnd(q,info)} ---------- */
 function hdBoard(o){const B=BAL.hd,{C,G}=o,{g,W,H}=C;let stop=false,raf=0;const pops=[];
@@ -83,9 +87,12 @@ function hdBoard(o){const B=BAL.hd,{C,G}=o,{g,W,H}=C;let stop=false,raf=0;const 
  C.cv.addEventListener("pointerdown",down);C.cv.addEventListener("pointermove",move);C.cv.addEventListener("pointerup",up);C.cv.addEventListener("pointercancel",up);
  function result(){const d=A?Math.hypot(pos[0]-A.x,pos[1]-A.y)/A.ed:9;let a=((ang-(A?A.ang:0))%360+540)%360-180;const q=hdQ(d,a,o.sk,o.lvF);
   return{q,info:{k:o.k,dx:A?+((pos[0]-A.x)/A.ed).toFixed(3):0,dy:A?+((pos[1]-A.y)/A.ed).toFixed(3):0,a:+a.toFixed(1)}}}
- function commit(){if(stop)return;const R=result();const t=R.q>=B.pop[0]?"Hoa điền ngay ngắn giữa trán!":R.q>=B.pop[1]?"Hơi lệch một chút":"Dán lệch mất rồi";
-  kg82Pop(pops,A?A.x:W/2,(A?A.y:H*.3)-G.fws*.12,t,R.q>=B.pop[1]?kg82Col("--good","#2d7a52"):kg82Col("--red","#c23b22"));
-  const a=o.box.querySelector(".kg82act");if(a)a.remove();setTimeout(()=>{stop=true;cancelAnimationFrame(raf);o.onEnd(R.q,R.info)},700)}
+ function commit(){if(stop)return;const R=result();const vung=hdVung(R.q);const t=R.q>=B.pop[0]?"Hoa điền ngay ngắn giữa trán!":vung?"Dán vụng mất rồi":"Hơi lệch một chút";
+  kg82Pop(pops,A?A.x:W/2,(A?A.y:H*.3)-G.fws*.12,t,vung?kg82Col("--red","#c23b22"):kg82Col("--good","#2d7a52"));
+  /* r2 (owner OD 17/11 ~21:03Z "tôi gắn sao kệ tôi, nhưng mà kết quả cuối cùng thì nó vẫn sẽ là theo cái vị trí mà tôi muốn"): the result snaps to the
+     forehead anchor; straight when good, the fixed vụng tilt when low — the same look every view then draws (hdFaceLayer) */
+  if(A){pos=[A.x,A.y];ang=A.ang+(vung?B.vungA:0)}
+  const a=o.box.querySelector(".kg82act");if(a)a.remove();setTimeout(()=>{stop=true;cancelAnimationFrame(raf);o.onEnd(R.q,R.info)},900)}
  const act=`<div class="kg82act"><button class="${kg82Btn(true)}" id="hdl">Nghiêng trái</button><button class="${kg82Btn(true)}" id="hdr">Nghiêng phải</button><button class="${kg82Btn()}" id="hdok">Dán</button></div>`;
  const old=o.box.querySelector(".kg82act");if(old)old.remove();o.box.insertAdjacentHTML("beforeend",act);
  $("hdl").onclick=()=>{ang-=B.rot};$("hdr").onclick=()=>{ang+=B.rot};$("hdok").onclick=commit;
@@ -109,6 +116,28 @@ function hdStep(ctx){try{if(!S||!TOIL.st)return false;const L=hdOwned(S);if(!L.l
    onEnd:(q,info)=>{st.parts.hd=q;st.hd=info;TOIL.hdLbl="";ctx.done()}});
   KG82.run={stop:run.stop}});
  return true}catch(e){console.error("hdStep",e);return false}}
+
+/* ---------- r2 (owner OD 17/11 ~21:03Z): the SHOWN hoa điền on every picture of a person (portrait, figure on the stage, avatar, mirror reveal,
+   NPCs, co-op friend) — one layer through kitFxLayers, like the makeup colour layer. ALWAYS at that picture's forehead anchor (face mesh /
+   HD_ANCHOR), never where she dragged it; straight when q ≥ BAL.toil.fail, the fixed tilt BAL.hd.vungA when vụng. Size BAL.hd.size × face width.
+   Painted once per (picture, hoa điền, vụng) into a transparent canvas the size of the picture; a picture without face points shows none (never guessed). */
+const HD_FL={},HD_FLQ=[];
+function hdShown(p){try{const r=typeof toilMkRec==="function"?toilMkRec(p):null;if(!r||!r.makeup||!r.hd||!hdIsK(r.hd.k))return null;return{k:r.hd.k,vung:hdVung(r.hd.q)}}catch(e){return null}}
+function hdFaceLayer(p,file){const sh=hdShown(p);if(!sh||!file)return"";let v=null;try{v=MK_FIT.get(file)}catch(e){}if(!v)return"";
+ const key=[file,sh.k,sh.vung?1:0].join("|");let e=HD_FL[key];if(!e){e=HD_FL[key]={src:""};HD_FLQ.push(key);if(HD_FLQ.length>80)delete HD_FL[HD_FLQ.shift()];hdFlPaint(file,sh,e,key)}
+ return `<img class="kmkl" data-hdl="${key}" src="${e.src||TOIL_BLANK}" alt="" aria-hidden="true" style="--fleft:0%;--ftop:0%;--fwidth:100%;--fheight:100%">`}
+function hdFlPaint(file,sh,e,key){const U=s=>typeof IMG_U==="function"?IMG_U(s):s;const face=new Image();face.decoding="async";const spr=new Image();spr.crossOrigin="anonymous";spr.decoding="async";
+ let n=0;const go=()=>{if(++n<2)return;try{if(!face.naturalWidth||!spr.naturalWidth){e.src=TOIL_BLANK;return}
+   const B=BAL.hd,K=Math.min(1,1024/face.naturalWidth),W=Math.round(face.naturalWidth*K),H=Math.round(face.naturalHeight*K);
+   let fw=0;try{const r=toilRow(file);if(r&&r[6])fw=r[6]/100*W}catch(x){}
+   const A=hdAnchor(file,{x:0,y:0,w:W,h:H},fw||W*.3,null);if(!A){e.src=TOIL_BLANK;return}if(!fw)fw=A.ed/B.edFw;
+   const c=document.createElement("canvas");c.width=W;c.height=H;const g=c.getContext("2d");const w=B.size*fw,h=w*spr.naturalHeight/spr.naturalWidth;
+   g.translate(A.x,A.y);g.rotate((A.ang+(sh.vung?B.vungA:0))*Math.PI/180);g.drawImage(spr,-w/2,-h/2,w,h);e.src=c.toDataURL("image/png");e.at=[A.x/W,A.y/H,A.ang+(sh.vung?B.vungA:0)]}catch(x){e.src=TOIL_BLANK}
+  document.querySelectorAll("img[data-hdl]").forEach(x=>{if(x.dataset.hdl===key)x.src=e.src})};
+ face.onload=go;face.onerror=go;spr.onload=go;spr.onerror=()=>{const w=WD_ITEMS[sh.k];if(!spr.__fb&&w&&w.icon){spr.__fb=1;spr.src=U(w.icon)}else go()};
+ face.src=U("img/"+file);spr.src=U(`img/hd-${sh.k.replace(/_/g,"-")}.webp`)}
+if(typeof kitFxLayers==="function"){const fx0=kitFxLayers;kitFxLayers=function(p,file){const h=fx0.apply(this,arguments);let m="";try{m=hdFaceLayer(p,file)}catch(e){}return h+m}}
+window.hdFaceLayer=hdFaceLayer;window.HD_FL=HD_FL;window.hdVung=hdVung;
 
 /* ---------- Thử tay / mini-game kind: the same board on her own face ---------- */
 function kgHoaDien(box,env){const C=kg82Canvas(box,.86,620),{g,W,H}=C;C.cv.style.touchAction="none";let por={src:""};try{por=toilPor()}catch(e){}
