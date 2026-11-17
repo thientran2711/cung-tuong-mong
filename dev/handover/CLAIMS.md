@@ -914,3 +914,4 @@
 | REVIEW looks-2 r2 cfd4a6813 (fresh opus BIG; r1 reviewer rolled over; brief briefs/review-looks-2-r2.md) | review/looks-2-r2 | B | session_01N1tNP45Tvkk65nx19mgPyQ | RUNNING | 17/11 18:56Z |
 | FEELINGS-18 (opus; s36 order 19:26Z, OD 18:55Z–19:25Z): 18 feelings × 3 levels + acts + hidden intent + faceKeyFor | review/feelings-18 | C-AG | session_01UV1SzmJYgJQJkt1RUTV1wK | RUNNING | 17/11 18:59Z |
 | REVIEW kit-display-room r1 of c35952b7 (sonnet SMALL; brief briefs/s36-review-kit-display-room.md) | review/kit-display-room-r1 | MAIN s36 | session_01UV1SzjzC6iVhRrTbemy4L6 | RUNNING | 17/11 19:01Z |
+| batch-s32a LIVE d4a850ce (main c114ab9e → d4a850ce; ROLLBACK TARGET c114ab9e; 11 branches, OUT tuanluc-sync/learn-scene-fix-2/pcard-facts-2) | review/batch-s32a | MAIN s36 | session_01UV1SzgWoEmnjTTEv7UgBNP | LIVE | 17/11 19:05Z |
