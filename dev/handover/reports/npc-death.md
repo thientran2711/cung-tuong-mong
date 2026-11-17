@@ -1,3 +1,57 @@
+PRIORITY #1 CHECK ('npc-death|jnpcd'): OD 0 | ledger 3 | claims 8 | main 0 | review/* 4 → reused review/npc-death-r1 PASS 5f58a715 + review/npc-death-r1-golive 33e1bc22 (review/* 4 = those 3 + this branch).
+
+# D8 npc-death re-wire → review/npc-death-wire @de166c3f (worker opus session_01964izBuQu8dWabKyYB69JE for Foreman D #8)
+START_CTX ≈ 4 % of 1M (get_session reads 0; own estimate). Finished ≈ 25 %; no rollover.
+
+## What was wrong (golive HOLD, d-golive row 5)
+Main's j95 people record (S.roster, j95ppl) is the ONE source of who stands where; Lý was not in it, so j95stage dropped her entry (kind "fallen" with no consort ref) at every Trường Môn viện visit. The Thái y viện FAIL and the "dead man fc" FAIL were harness: on main a pending card (Q) blocks goTo, and hand-set state needs the record sync the game does each khắc.
+
+## Changes (branch = 33e1bc22 + origin/main 7abaf07a merged)
+| file | change |
+|---|---|
+| merge | assemble: main's list + jnpcd.js LAST; jcoopworld W_KEYS = main's (incl. thIll/cm/men/menG2) + lyF/fdead/fidDead/dnames; j14 coldVisit uses lcPeople + main's seat-aware restore; CHANGE union; site rebuilt |
+| dev/build/jly.js | `lyAlive()` + `lyEntry(info)`: ONE Lý stage entry (record id lid "c:ly"); lcPeople uses it |
+| dev/build/j95.js | j95ppl: Lý = record person c:ly, home "lc" while alive (none after death / old-save freed); her plan = lc every khắc; old j95vis rule c:ly→lc; j95stage keeps a fallen entry by its lid (was: dropped for no ref) and adds Lý when the record has her here; j95ledObj("c:ly"); NEW `j95gone(id)`: ledger stage drops anyone drawn whose person is no longer in the palace (dead consort / maid / servant / child / man / Lý / Thái hậu), whatever path drew them; court post names on the stage follow the holder for ty + ped (ksp was already) incl. maid-road srv entries; a rival freed from lãnh cung leaves lc in the record from the current khắc |
+| dev/build/j2.js | Kính sự phòng visit shows the current post holder's name (was fixed "Tổng quản"; same as Thái y) |
+| dev/build/j61.js | k61SexAt lc: Lý + fallen rivals, no forced 1 (dead code today: silChip returns "") |
+| dev/test/npc-death.js | harness: j95sync + Q cleared before goTo; Lý check = fallen entries on the stage (main design also draws the fallen rival's servants); after her death stage AND countAt("lc") = 0 |
+| dev/test/roster_audit.js | its independent palace list counts Lý (c:ly) while alive |
+| dev/measure/npc-death-places.js | NEW family scan (below) |
+No new UI / kit part; no new number (lcShow etc. already BAL.mort.ly); no wording change except names.
+
+## Family scan — every Dư đồ place after deaths (`node dev/measure/npc-death-places.js <root> 3 18`; each month a rival / servant / court holder / man reaches the end of life via jmort, rivals sent to and freed from lãnh cung, Lý dies month 9 (branch only))
+| check | before (main 7abaf07a) | after (this branch) |
+|---|---|---|
+| place visits checked | 342 | 477 |
+| deaths forced (rival / servant / court / man / Lý) | 13 / 46 / 24 / 11 / – | 15 / 54 / 27 / 12 / 3 |
+| dead person on a stage | 0 | 0 |
+| court post shown under a dead/old name | 0 | 0 |
+| Lý missing at Trường Môn viện while alive | **44 / 44** | **0 / 54** |
+| Lý shown after her death | n/a (main: no death) | 0 |
+| fallen people at Trường Môn viện ≠ (fallen rivals + Lý) | 44 | 0 |
+| page errors | 0 | 0 |
+
+## Tests
+| suite | result |
+|---|---|
+| dev/test/npc-death.js (main checkout = old save) | **13/13** (was 10/13 on this branch before the wire; golive had 8/4) |
+| ledger_shadows 30 moments (shown = record) | new bad 0 · main bad 0 |
+| stage-counts (old suite) | new mism 2 places thd + 1 cnv · main 4+ places thd (pre-existing, not worse) |
+| roster_audit sens 2 lives | new a2 g3 · main a1 g5 (same pre-existing kinds: "buổi thiếu s<sid>", empnight gate), 0 page errors, j95errs [] |
+| mortality.js 120 2 | miss 0, errs [], pageErrors [] |
+| quickcheck.sh (de166c3f vs live 7abaf07a) | **PASS** · core gates PASS (one-core-guard, rules-one-source, kit-conform, coop-one-world) · old save ok · render 200/208 ms, buổi 734/1022 ms |
+| coop-e2e (live Worker, regression guard only) | 60/60 |
+| shots (looked at; scratch, not in git) | 1180x820@2 Trường Môn viện: player + fallen rival (Người lạ, j61) + Phế phi Lý Uyển Dung + servant, names clean, feet not cut. 755x1000@2: kit pages 2 per page (+6), Lý on the next page; no overlap |
+
+## Notes for Foreman D
+- Main design: a fallen rival's servants follow her to Trường Môn viện in the record (5 people with her). The player's own fall keeps only 1 loyal servant (j14 cold). Not changed here (not this task); flag if the owner wants rivals to lose their servants the same way.
+- ART NEEDED from D4 still stands (portrait pools for eunuch / official / maid; img/fig-fallen-ly1-a26.webp on CDN not wired).
+
+SẴN SÀNG KIỂM de166c3fbf28d232a119ddb72db7f985806809d7
+
+---
+(previous D4 report below)
+
 SẴN SÀNG KIỂM 84b184c47d2168c05f969c191a9a8dc827e3fcc6 — D4 npc-death (orphan audit #18): NPC deaths → NEW persons with new faces/names, Phế phi họ Lý lives beside fallen rivals and dies; branch review/npc-death (on main b85cdb1e, built on jmort).
 
 # D4 — NPC death + new faces + Phế phi họ Lý (review/npc-death)
