@@ -182,7 +182,7 @@ function emoArtSet(p){try{if(p&&p.__kp)p=p.__kp;const q=emoRes(p)||p;if(!q||q===
  return r.role==="official"||r.role==="physician"||(q.age||0)>=45?"mo-":"m-"}catch(e){return""}}
 /* ONE source of the seal's picture key (owner 17/11 ~18:40Z: no two-source seal): emoSealKey(p,m) = the key drawn. The Sims model (AG-MOODKNOW, window.sealKeyFor(pid) = strongest summed feeling among live causes) decides it for a person she SEES; an unknown mood stays "an". Never a second source: a new event shows through the causes list, not a pop. */
 function emoSealKey(p,m){try{if(!(m&&m.known))return m.k;
-  if(typeof window.faceKeyFor==="function"){const f=window.faceKeyFor(p);if(f&&f.key)return f.key}/* "vẻ mặt" (owner 19:25Z): act > visible intent > dominant feeling, FEELINGS-18 */
+  if(typeof window.faceKeyFor==="function"){const f=window.faceKeyFor(p);if(f&&f.key&&f.kind!=="intent")return f.key;if(f&&f.kind==="intent"&&f.feel&&f.feel.key)return f.feel.key}/* owner 20:15Z: no intent face — an intent never draws the seal *//* "vẻ mặt" (owner 19:25Z): act > visible intent > dominant feeling, FEELINGS-18 */
   if(typeof window.sealKeyFor==="function"){const k=window.sealKeyFor(p);if(k)return k}}catch(e){}return m.k}
 window.emoSealKey=emoSealKey;
 /* KIT FALLBACK (main s35): khoc shows the buon picture and hon the gian picture (all three sets) until img/kit/emo-<set>khoc|hon.webp exist on the CDN; jemoseal probes the real file once and swaps automatically */
