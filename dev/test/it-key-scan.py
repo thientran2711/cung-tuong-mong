@@ -3,6 +3,7 @@
 Counts, per game file dev/build/j*.js, reads of the item table that throw when the key is not an IT item:
   IT[x].p / IT[x][p]   (direct property read on a raw lookup)
 Writes (IT[x]=, IT[x].p=, delete IT[x].p), existence checks (IT[x]&&, if(IT[x])) and safe forms ((IT[x]||{}).p, itm(x).p) are not counted.
+Part 2: piece-vs-map field clashes (S.vl veil vs jvoice memory).
 usage: python3 dev/test/it-key-scan.py [--git <ref>] [--list]     exit 1 when any unguarded read is left."""
 import re,sys,subprocess,glob,os
 args=sys.argv[1:];ref=None;lst='--list' in args
@@ -49,4 +50,14 @@ for name,src in files():
     if n: rows.append((name,n,hits));tot+=n
 print(f"unguarded item-table reads: {tot} in {len(rows)} files"+(f" ({ref})" if ref else ""))
 for name,n,h in sorted(rows,key=lambda r:-r[1]): print(f"  {name:14s} {n:4d}"+(f"  lines {h[:12]}" if lst else ""))
-sys.exit(1 if tot else 0)
+# part 2: field-name clash (the S.vl case): a person field read as an item piece (x.f.k) in one module and used as a memory map
+# (x.f=x.f||{} or x.f[key]=) in another -> the map ends up worn / put in the chest as a piece with no key
+piece={};mapf={}
+for name,src in files():
+    for m in re.finditer(r'\b(?:S|p|v|t|a|f|r|o)\.([a-zA-Z_$][\w$]*)\.k\b',src): piece.setdefault(m.group(1),set()).add(name)
+    for m in re.finditer(r'\b(S|p|v|t)\.([a-zA-Z_$][\w$]*)=\1\.\2\|\|\{\}',src): mapf.setdefault(m.group(2),set()).add(name)
+    for m in re.finditer(r'\b(?:S|p|v|t)\.([a-zA-Z_$][\w$]*)\[(?!["\d])[a-zA-Z_$][\w$]*\]\s*=',src): mapf.setdefault(m.group(1),set()).add(name)
+cl=[(k,sorted(piece[k]),sorted(mapf[k])) for k in piece if k in mapf and k not in ('inv','wd')]
+print(f"piece-vs-map field clashes: {len(cl)}")
+for k,a,b in cl: print(f"  {k}: piece in {a[:6]} / map in {b[:6]}")
+sys.exit(1 if tot or cl else 0)
