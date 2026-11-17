@@ -831,4 +831,4 @@
 | staff-root LIVE 7e0250ec (r1 + fix-1; main bbb3b4ca → 7e0250ec; rollback bbb3b4ca); worker + reviewer archived | review/staff-root-fix-1-r1 | B | session_01N1tNP6QsncpxxS2jeBjMi5 | LIVE | 17/11 15:52Z |
 | REVIEW pcard-facts-2 r1 of 7ec2aa9b (sonnet) | review/pcard-facts-2-r1 | MAIN s33 | session_01UV1SzhQ2iUk4UXLNwCnsgN | RUNNING | 17/11 15:51Z |
 | TINBAO-UI badge+toast+card (sonnet; brief briefs/s33-tinbao-ui.md) | review/tinbao-ui | MAIN s33 | worker (this session) | READY for review e988d2e9 | 17/11 |
-| REVIEW tinbao-ui r1 of e988d2e9 (sonnet; lands after ag-all-2) | review/tinbao-ui-r1 | MAIN s33 | (opening) | RUNNING | 17/11 15:58Z |
+| REVIEW tinbao-ui r1 of e988d2e9 (sonnet; lands after ag-all-2) | review/tinbao-ui-r1 | MAIN s33 | session_01UV1Szjrj8Z1MLukab13oZM | RUNNING | 17/11 15:53Z |
