@@ -1,0 +1,6 @@
+PRIORITY #1 CHECK: OD tail "(17/11 ~16:20Z real" item (b) | main rank/name sites (scan dev/measure/rank-name-scan.js) | review/kit-rank-name-r1 a4ccfc74 | claims kit-rank-name MAIN s35.
+# REVIEW kit-rank-name r1 (sonnet, SMALL tier) of a4ccfc74
+Read dev/handover/briefs/s35-common.md, START_REVIEWER, dev/rules/topic/kit-ui.md, the owner rule OD item (b) VERBATIM, reports/kit-rank-name.md, KIT.md 48.6.
+RULE: two kit forms only. STACKED (title / rank / name) on avatars, portrait frames, figure feet, person card header, avatar option rows. ONE LINE (rank name) only in result lines, log prose and Tuần lục rows. Rank never twice.
+CHECK: (1) one kit entry kitRankName/kitDedupRank, no private variants; rerun the scan at 755x1000, 1180x820, 1366x1024, 412x1058, 390x844 → 0 dup, every site classified; (2) take the MISSING played-in-life shots over http (not file://): Dư đồ figure feet, a Tuần lục entry, iPad gift picker, person card; (3) Tuần lục cover title page: STACK only if the name sits with a portrait/avatar on the cover; otherwise one line — judge from the shot; (4) quickcheck + old-save load.
+Verdict "PASS/FAIL <sha>" to MAIN s35 + worker session_01UV1SzgiSj7gRNYszv9YgxE; report reports/review-kit-rank-name.md; shots CDN img/_review/kit-rank-name-r1/.
