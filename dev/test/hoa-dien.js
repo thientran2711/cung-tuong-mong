@@ -97,7 +97,8 @@ fs.mkdirSync(DIR,{recursive:true});let fail=0;const ck=(n,c,x)=>{console.log((c?
  ck('good: layer drawn on her pictures (stage/header), straight',G.lay.painted>0&&!G.lay.vung,G.lay);
  ck('vụng: layer drawn with the vụng tilt + look vụng (praise/criticism follows)',Mi.lay.painted>0&&Mi.lay.vung&&Mi.lay.look==='vung',Mi.lay);
  const npcL=await p.evaluate(()=>{const v=rivals.find(x=>x.alive&&!x.out&&toilNpc(x).makeup&&toilNpc(x).hd);if(!v)return{none:1};const f=String(figFor(v,'por')||'').split('/').pop().split('?')[0];MK_FIT.get(f);return{f,h:hdFaceLayer(v,f).length}});
- if(!npcL.none){await p.waitForTimeout(3000);const h=await p.evaluate(f=>{const v=rivals.find(x=>x.alive&&!x.out&&toilNpc(x).makeup&&toilNpc(x).hd);return hdFaceLayer(v,f)},npcL.f);ck('NPC with a hoa điền: same layer on her portrait',/data-hdl/.test(h),npcL.f)}
+ if(!npcL.none){await p.waitForTimeout(3000);const h=await p.evaluate(f=>{const v=rivals.find(x=>x.alive&&!x.out&&toilNpc(x).makeup&&toilNpc(x).hd);const off=hdFaceLayer(v,f);BAL.hd.npcShow=1;const on=hdFaceLayer(v,f);BAL.hd.npcShow=0;return{off,on,dom:[...document.querySelectorAll('img[data-hdl]')].filter(i=>!i.dataset.hdl.includes(String(figFor(S,'por')||'').split('/').pop().split('?')[0])&&!i.dataset.hdl.includes(String(figFor(S)||'').split('/').pop().split('?')[0])).length}},npcL.f);
+  ck('NPC switch OFF (BAL.hd.npcShow 0): no sticker on NPC portraits',h.off===''&&h.dom===0,{f:npcL.f,dom:h.dom});ck('NPC switch ON: the same layer',/data-hdl/.test(h.on))}
 
  /* 5. Thử tay: the kind is registered and its board plays to env.end */
  const th=await p.evaluate(()=>({k:KG82_KIND.hoadien,eng:typeof KG82_ENG.hoadien}));ck('KG82_KIND.hoadien registered',!!th.k&&th.eng==='function',th);

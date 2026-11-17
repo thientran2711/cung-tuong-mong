@@ -33,7 +33,8 @@ Object.assign(BAL,{hd:{
  find:4,               /* % per month her people find one */
  pop:[.8],             /* q ≥ [0] "ngay ngắn"; below BAL.toil.fail = "dán vụng" (the same cut that makes any makeup part vụng); between: "hơi lệch" */
  vungA:9,              /* r2 (owner OD 17/11 ~21:03Z): the SHOWN hoa điền always sits at the forehead anchor; a vụng one (q < BAL.toil.fail) shows this fixed tilt */
- edFw:.42}});          /* eye distance / face width (fallback when a picture has no face-width row) */
+ edFw:.42,
+ npcShow:0}});         /* r3 (MAIN s38 22:15Z): NPCs' hoa điền layer OFF until Foreman C's per-face HD_ANCHOR lands (stale meshes put it off the forehead on some figures); her own (and the co-op friend's) stays ON */          /* eye distance / face width (fallback when a picture has no face-width row) */
 /* board ease → tolerance (mgLev reads BAL.mgTier.lev[kind][name]: ease 0 → [0], ease 5 → [1]) */
 try{BAL.mgTier.lev=BAL.mgTier.lev||{};BAL.mgTier.lev.hoadien={tol:[.7,1.2]}}catch(e){}
 
@@ -123,7 +124,7 @@ function hdStep(ctx){try{if(!S||!TOIL.st)return false;const L=hdOwned(S);if(!L.l
    Painted once per (picture, hoa điền, vụng) into a transparent canvas the size of the picture; a picture without face points shows none (never guessed). */
 const HD_FL={},HD_FLQ=[];
 function hdShown(p){try{const r=typeof toilMkRec==="function"?toilMkRec(p):null;if(!r||!r.makeup||!r.hd||!hdIsK(r.hd.k))return null;return{k:r.hd.k,vung:hdVung(r.hd.q)}}catch(e){return null}}
-function hdFaceLayer(p,file){const sh=hdShown(p);if(!sh||!file)return"";let v=null;try{v=MK_FIT.get(file)}catch(e){}if(!v)return"";
+function hdFaceLayer(p,file){if(!BAL.hd.npcShow&&p&&p!==S&&!p.coop)return"";const sh=hdShown(p);if(!sh||!file)return"";let v=null;try{v=MK_FIT.get(file)}catch(e){}if(!v)return"";
  const key=[file,sh.k,sh.vung?1:0].join("|");let e=HD_FL[key];if(!e){e=HD_FL[key]={src:""};HD_FLQ.push(key);if(HD_FLQ.length>80)delete HD_FL[HD_FLQ.shift()];hdFlPaint(file,sh,e,key)}
  return `<img class="kmkl" data-hdl="${key}" src="${e.src||TOIL_BLANK}" alt="" aria-hidden="true" style="--fleft:0%;--ftop:0%;--fwidth:100%;--fheight:100%">`}
 function hdFlPaint(file,sh,e,key){const U=s=>typeof IMG_U==="function"?IMG_U(s):s;const face=new Image();face.decoding="async";const spr=new Image();spr.crossOrigin="anonymous";spr.decoding="async";
