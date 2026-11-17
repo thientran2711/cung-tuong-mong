@@ -38,7 +38,7 @@ function spOpen(s){if(!S||!s||ownerOf(s)!==S)return;const nx=SRK[s.role][srk(s)+
  const kem=[`kẻ hầu khác ghen tị (lòng -${BAL.dbEnvy})`];const both=spKemTxt(S,s).split(" · kèm: ").map(x=>x.trim()).filter(Boolean);/* shared Kèm of both roads: once, above the options (short option cards) */
  const duoc=[`${s.name} lên ${nx}`,`lòng +${BAL.dbGain}`];const go=road=>()=>{spend(BAL.sp.k);dbDo(S,s,road,true)};
  tsPanel({t:`Đề bạt ${s.name}`,who:pServ(s),h:`<p>Muốn ${s.name} lên <b>${nx}</b> thì phải qua Nội vụ phủ. Có hai đường: lót tay bằng bạc, hoặc ${fv.how} (mất chút thể diện với người).</p>${both.length&&typeof tsRows==="function"?tsRows(both.map(x=>["Kèm",x,"r"])):""}`,
-  opts:[tsOpt({n:"Lót tay Nội vụ phủ",odds:od,fx:{bac:-c},need:[tsNeedBac(c)],duoc,mat:[`mất ${c} bạc`,`lòng -${BAL.dbFail}`],kem,go:go("bac")}),
+  opts:[tsOpt({n:"Lót tay Nội vụ phủ",odds:od,fx:{},need:[tsNeedBac(c)],duoc:duoc.concat([`Bạc -${c}`]),mat:["không mất bạc",`lòng -${BAL.dbFail}`],kem,go:go("bac")})/* bạc only when approved (dbDo) */,
    tsOpt({n:fv.k==="hh"?"Xin Hoàng hậu chuẩn":"Xin Thái hậu chuẩn",odds:od,fx:{[fv.k]:-fv.n},need:[{t:`${fv.lbl} ${fv.n} (có ${fv.val})`,ok:fv.ok}],duoc,mat:["lời xin mất",`lòng -${BAL.dbFail}`],kem,go:go("fav")})]});
  showModal()}
 /* moving a servant to another mistress (NPC side and "Cho đi"): a higher palace with room, else back to Nội vụ phủ */
