@@ -33,8 +33,9 @@ function kmPush(fn){KMQ.push(fn);kmPump()}
    screen calls this: the queue is emptied, the running job's finish is voided (kmGen), every .kmov scene (card-flip, ink, reward, reveal…) and the
    podium / reward / buổi-transition overlays are removed, and modules that keep their own timers register a hook with kmOnReset(fn). */
 let kmGen=0;const KMR=[];function kmOnReset(f){KMR.push(f)}
+lifeStore("kaLastResult",()=>{window.kaLastResult=undefined});
 function kmReset(){kmGen++;KMQ.length=0;kmBusy=false;clearTimeout(kmPump.t);
- KMR.forEach(f=>{try{f()}catch(e){console.error(e)}});
+ LIFE_REG.forEach(([n,f])=>{try{f()}catch(e){console.error('lifeStore '+n,e)}});KMR.forEach(f=>{try{f()}catch(e){console.error(e)}});
  try{if(typeof kitPodiumClose==="function")kitPodiumClose(true)}catch(e){}
  try{if(typeof btrKill==="function")btrKill()}catch(e){}
  try{document.querySelectorAll(".kmov,#kmrew,.kmfly,.kmalarm").forEach(e=>e.remove())}catch(e){}}
@@ -237,7 +238,7 @@ document.addEventListener("click",e=>{const c=e.target.closest&&e.target.closest
  if(typeof PX==="object")PX.key=""})();
 
 /* ================= hooks into the game ================= */
-let KMSNAP=null,KMS=null;
+let KMSNAP=null,KMS=null;lifeStore("KMSNAP",()=>{KMSNAP=null;KMS=null});
 function kmSnap(){return{srv:typeof isSrv==="function"&&isSrv(),rank:S.rank,out:!!S.out,preg:!!S.preg,kids:(S.kids||[]).length,inv:(S.inv||[]).slice(),dead:!!S.dead}}
 /* rank, cold palace, pregnancy, births and new things in the chest, read from the state after each render (any code path) */
 function kmDiff(){if(!kmOn()){return}if(KMS!==S||!KMSNAP){KMS=S;KMSNAP=kmSnap();return}const a=KMSNAP,b=kmSnap();KMSNAP=b;if(b.dead)return;

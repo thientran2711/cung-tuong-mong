@@ -1201,7 +1201,7 @@ span.md.kmini.kmini>img.kveil{left:9.66%!important;top:11.75%!important;width:80
    stage tags .j59t/.j59n, podium plates), [data-vp-skip], [data-norank], form fields, script/style. */
 const KIT_RP_TITLES="Hoàng quý phi|Hoàng hậu|Quý phi|Quý nhân|Thường tại|Đáp ứng|Phế phi|Phi|Tần|Thái tử|Hoàng tử|Công chúa|Thái y|Thị vệ|Ma ma|Chưởng sự cô cô|Cô cô|[Cc]ung nữ thân tín|[Cc]ung nữ thô sử|[Đđ]ại cung nữ|[Cc]ung nữ|[Tt]iểu thái giám|[Tt]ổng quản thái giám|[Tt]ổng quản|[Tt]hái giám|[Nn]ữ quan|[Nn]hũ mẫu|[Nn]hạc sư|[Hh]ọa sư|[Tt]ể tướng|[Tt]hượng thư|[Tt]hị lang|[Tt]ướng quân|[Cc]ông tử";
 const KIT_RP_SKIP=".kname,.knr,.krt,.krn,.kpsn,.pcrk,.pcname,.j59t,.j59n,.kpod-plq,.kbk-pname,[data-vp-skip],[data-norank],[contenteditable]";
-let kitRpKey="",kitRpRe=null,kitRpMap=null;
+let kitRpKey="",kitRpRe=null,kitRpMap=null;lifeStore("kitRpMap name -> person",()=>{kitRpKey="";kitRpRe=null;kitRpMap=null});
 function kitRpRx(){const L=typeof kpPeople==="function"?kpPeople():[];const key=L.map(x=>x[0]).join("|");kitRpMap=new Map(L);if(key!==kitRpKey||!kitRpRe){kitRpKey=key;
   const N=L.map(x=>x[0].replace(/[.*+?^${}()|[\]\\]/g,"\\$&")).join("|");
   /* "title name" (m[1], m[2]) or "name (title, …)" (m[3], m[4]: lists such as "Mạnh Bích Dao (Tần, chủ vị)") */

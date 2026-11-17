@@ -11,7 +11,7 @@
    Off switches: "Cảnh động" off or prefers-reduced-motion → no particles, no shake, no flash, no ripple/sheen (kfStill()); "Rung" off → no buzz.
    Bots (window.__bot) and quiet code paths: nothing.
    Test hook: window.KFX {log:[kinds], app, q, live, loaded}. */
-const KFX=window.KFX={log:[],app:null,q:1,live:0,loaded:false,loading:null,parts:[],tex:{},amb:0,fps:60,slow:0,fast:0};
+const KFX=window.KFX={log:[],app:null,q:1,live:0,loaded:false,loading:null,parts:[],tex:{},amb:0,fps:60,slow:0,fast:0};lifeStore("KFX.log/loses",()=>{KFX.log.length=0;KFX.loses=[]});
 /* buzz patterns added to j11's VIB (ms) */
 Object.assign(VIB,{win:[12,40,12],fail:[35],death:[45],lock:[14],demote:[60,50,60],preg:[15,30,15],harm:[30,30,70]});
 /* THE TABLE: kind → buzz · shake (1 light, 2 hard) · flash · particles (comma list) */
