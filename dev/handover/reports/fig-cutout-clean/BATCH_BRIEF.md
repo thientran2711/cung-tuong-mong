@@ -21,3 +21,11 @@ Report to the lead (session_011xDdVRBW26agruDT2Bm65K) by send_message every ~200
 ## HD TWINS + THROUGHPUT (lead 17/11)
 - hd: create/upload an hd (1800) twin ONLY where the CDN already has that hd file today (check img/_index.json); do NOT upload new hd twins for families that have none (maids, ty3 consorts, most kid/man) — fig + tn (if exists) + por always.
 - THROUGHPUT: ~4 files per 14 tool calls is too slow for thousands of files. Write ONE driver script (python, scratch) that for a list of keys: uploads refs once, submits generations 4 at a time via the tools you call in batches of 4 (one message, 4 parallel images_generate), then after completion runs download + alpha check + finish_fig + qa_fig for the whole batch in ONE bash call and writes ONE contact sheet (8-12 figures, dark+light, plus forehead crops) that you LOOK at ONCE. Look = the contact sheet, not file by file; zoom only where qa flags. Target >= 12 files per ~10 tool calls. Keep ids/status in batch-<shard>.md as a TSV so a successor resumes exactly.
+## CONTEXT DIET (lead 17/11; W3/W5 measured only ~25 files per session = ~350 sessions total, NOT acceptable)
+Context per file is the cost, not credits. Cut it:
+1. SHORT prompt: put identity + gesture + huadian + no-train + transparent in <=110 words (tool results echo the prompt; a 400-word prompt x every file burns the window). Style anchor in 1 sentence.
+2. Send 8 images_generate calls in ONE message (rate-limit permitting; if throttled drop to 6), then ONE creations_wait with identifiers=[all ids] (omit timeoutSeconds). Never creations_get/creations_read per file.
+3. ONE bash call per batch: download all renders (curl), alpha check, finish_fig, qa_fig, build ONE contact sheet (all figures side by side on dark, forehead crops strip, light version of the whole row); print a 1-line-per-file result only. Look at the sheet ONCE (<=2 images per batch). Zoom only on qa-flagged files.
+4. Halo FAIL on pale/pink gowns that look clean on dark+light = accept (W3 ruling by lead). Pinholes <400 px ignore.
+5. Do not write long notes: append one TSV line per file (key, creation id, status) to batch-<shard>.md and push every batch of ~24.
+6. Target >= 40 files per session, >= 8 files per ~6 tool calls.
