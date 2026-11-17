@@ -517,3 +517,4 @@
 | BATCH 00:32 LIVE: main = f5220eaa (kit-size-r7, kit-size-8, opt-greyed-2, time-spill-seed, diemtrang-score, kit-size-9, coop-stable-r1); co-op Worker deployed by s27: new version f7d52a7d-a2d5-4a4a-95a2-84499cc53b3b, ROLLBACK = npx wrangler rollback 49ec67a6-b1f1-49d2-9dbf-4ea38af6eeba | main | main s27 | session_01UV1Szgb3UbRCJaMcocuGrF | LIVE | 17/11 01:40Z |
 | it-key-guard review r1 (opus BIG) of ce1eda7b | review/it-key-guard-r1 | main s27 | session_01UV1SzkM4xXVtuGJCpS4Sdh | RUNNING | 17/11 01:36Z |
 | coop-thin A FOUNDATIONS (opus co-op; owner GO 17/11 01:40Z): room thin level + capability check, host withSeat(), room RNG, server snap/delta/do, guest tripwire build — no visible change | review/coop-thin-a | main s27 | (opening) | RUNNING | 17/11 01:41Z |
+| WHOLE FIGURE REPAINT batch W4b maid-ty (successor of W4 session_011xDdVRqzYRpSYpnCiVfu8x, 2K) | review/fig-cutout-clean | C | session_011xDdVSDgWxxs57zsL4S2JZ | RUNNING | 17/11 01:36Z |
