@@ -173,6 +173,8 @@ RUNNING C sessions (12): lead #6 session_011xDdVS87fDNLJMJGzeiVWL + W2b session_
 
 - 05:21Z upload-cap tests: CDN URL refs NO; only existing creation ids work → repaints reuse own master ids (0 uploads), ages 1 upload each, new a18 1 each → practical ~1,500–2,000 files/day; creation-id ledger per shard ordered by lead. Cap resets ~06:19Z.
 
+- 05:47Z GO to lead #6: keep the ~850 repainted (owner praised the live repainted rest a18 sheets); finish a18 ~84 old, then a26/a36/a51 ~2,042 with the same keep-design cut-out + 2K process; consort-TY drift → old|new sheet to C first; start at 06:19Z upload reset. Rank-standard workers W3c/W3d to be archived; W7b idle.
+
 ## SESSION 12 LOG
 - 04:40Z ROLLOVER at ctx ~26%. 04:33Z: W6b + W5c plain-maid repaint done (own original looks); drift lists parked for post-standard pass. Relayed owner 04:48Z (player 4 figures → 36 consorts; mama from maid figures) to lead #6: mama new files paused, hero grid report asked.
 - 03:33Z start (depth 6/8, START_CTX ~5% → roll at 30%). s11 told to stop + ARCHIVED; s11 trig disabled; own wake trig_0117UxAwzdJZpDAAmy4cTHSM (:33). All C sessions told C = s12. rank-sample-v2 shown to owner.
