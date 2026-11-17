@@ -20,7 +20,7 @@ const {chromium}=require('playwright');const [,,URL,TS]=process.argv;const T=+TS
   add('dress remark under',()=>{const R0=Math.random;Math.random=()=>0;try{return txt(wdRemark(v,"under"))}catch(x){return null}finally{Math.random=R0}});
   if(typeof kOutcome==='function')for(const k of ["th","hh","emp","rival"])for(const ok of [1,0])add(`talk outcome ${k} ${ok?"ok":"fail"}`,()=>kOutcome(k,!!ok));
   const out={};const W=5;/* the same window for every build: BAL.voice.noRepeat */
-  for(const k in SIT){const L=[];S.turn=0;S.tuan=0;S.vl={};for(let i=0;i<T;i++){if(/cycle/.test(k)&&i%3)continue;/* the cycle comes once a month */S.tuan=i%3;S.turn=Math.floor(i/3);let x=null;try{x=SIT[k]()}catch(e){x=null}if(x)L.push([i,String(x).replace(/\d+/g,'#')])}
+  for(const k in SIT){const L=[];S.turn=0;S.tuan=0;S.vmem={};for(let i=0;i<T;i++){if(/cycle/.test(k)&&i%3)continue;/* the cycle comes once a month */S.tuan=i%3;S.turn=Math.floor(i/3);let x=null;try{x=SIT[k]()}catch(e){x=null}if(x)L.push([i,String(x).replace(/\d+/g,'#')])}
    let rep=0;const last={};for(const [i,x] of L){if(last[x]!=null&&i-last[x]<W)rep++;last[x]=i}
    out[k]={n:L.length,distinct:new Set(L.map(x=>x[1])).size,rep6:rep,ex:L.slice(0,3).map(x=>x[1])}}
   return out},T);

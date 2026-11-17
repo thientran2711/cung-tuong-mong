@@ -3,7 +3,8 @@
    resized window, centred, with paper-coloured bars:
      landscape (and narrow portrait phones, pre-rotated)  1180 x 820  (the iPad layout)
      portrait (Fold-size, width/height >= 0.62)          590 x 852   (ONE PAGE = the iPad half + 32 px for its taller tab bar, KIT_FRAME)
-     s = min(available width / design width, available height / design height)
+     s = min(available width / design width, available height / design height); when the screen is relatively WIDER than the design (Fold portrait 755x1000, wide landscape) the
+     scale stays the height fit and the canvas WIDTH grows to the screen width (capped KIT_FRAME.maxGrow x design) — no side bands (owner 17/11 03:54Z, KIT §0.0b)
    Narrow portrait phones (width/height < 0.62: 390x844, 412x915, 412x1058 …): the frame is also rotated 90° so the landscape layout appears
    sideways and the player turns the phone; turned to real landscape the rotation drops (no reload).
    Inside the frame the game sees ONLY the design size: innerWidth/innerHeight, every media query and every JS breakpoint read 1180x820 or
@@ -23,10 +24,10 @@
    scaled — same columns, rows and positions (bag rows, fills by free height, everything). The one page's canvas is the spread's height + 32 px
    because its chrome is 32 px taller (bottom bar = two rows of 4 tabs, 76 px, vs the spread's one row, 44 px; owner 16/11 13:25Z (C)).
    box = the page content box both modes must measure (dev/test/page-scale.js fails if they differ). Change chrome height → change page.h. */
-window.KIT_FRAME={spread:{w:1180,h:820},page:{w:590,h:852},box:{w:582,h:623},margin:8,pageMargin:4,gutter:0};
+window.KIT_FRAME={spread:{w:1180,h:820},page:{w:590,h:852},box:{w:582,h:623},margin:8,pageMargin:4,gutter:0,maxGrow:1.7};
 function kvPages(){return innerWidth<innerHeight?1:2}
 function kvMark(){var r=document.documentElement,p=kvPages();r.classList.toggle("kv1",p===1);r.classList.toggle("kv2",p===2);
- r.style.setProperty("--kpage-w",KIT_FRAME.page.w+"px");r.style.setProperty("--kpage-h",KIT_FRAME.page.h+"px");/* --kvh = 1 % of the SPREAD height in both modes: page content and pop-ups size by it, never by vh/dvh (the one page is 32 px taller, §0.0a) */r.style.setProperty("--kvh",KIT_FRAME.spread.h/100+"px");
+ r.style.setProperty("--kpage-w",(p===1?innerWidth:Math.round(innerWidth/2))+"px");r.style.setProperty("--kpage-h",KIT_FRAME.page.h+"px");/* --kvh = 1 % of the SPREAD height in both modes: page content and pop-ups size by it, never by vh/dvh (the one page is 32 px taller, §0.0a) */r.style.setProperty("--kvh",KIT_FRAME.spread.h/100+"px");
  if(!kvMark.on){kvMark.on=1;addEventListener("resize",kvMark)}}
 (function(){var inFrame;try{inFrame=window.top!==window}catch(e){inFrame=true}
  if(inFrame){document.documentElement.classList.add("kview-in");
@@ -63,7 +64,10 @@ function kvMark(){var r=document.documentElement,p=kvPages();r.classList.toggle(
  var sap=null;function insets(){if(window.__kinsetsTest)return window.__kinsetsTest;/* test hook (dev/test/host-safe-area.js) */try{if(!sap){sap=d.createElement("div");sap.style.cssText="position:fixed;left:0;top:0;width:0;height:0;visibility:hidden;pointer-events:none;padding:env(safe-area-inset-top,0px) env(safe-area-inset-right,0px) env(safe-area-inset-bottom,0px) env(safe-area-inset-left,0px)";(d.body||d.documentElement).appendChild(sap)}
   var c=getComputedStyle(sap);return{t:parseFloat(c.paddingTop)||0,r:parseFloat(c.paddingRight)||0,b:parseFloat(c.paddingBottom)||0,l:parseFloat(c.paddingLeft)||0}}catch(e){return{t:0,r:0,b:0,l:0}}}
  function geo(){var w=window.innerWidth,h=window.innerHeight;if(!w||!h)return null;
-  var nr=narrow(w,h),land=nr||w>=h,DW=land?KIT_FRAME.spread.w:KIT_FRAME.page.w,DH=land?KIT_FRAME.spread.h:KIT_FRAME.page.h,I0=nr?{t:0,r:0,b:0,l:0}:insets(),I={t:I0.t,r:I0.r,l:I0.l,b:land?0:I0.b}/* landscape: the tab bar goes flush to the screen bottom, under the thin home-indicator line (owner: no strip under the tabs) */,AW=(nr?h:w)-I.l-I.r,AH=(nr?w:h)-I.t-I.b,s=Math.min(AW/DW,AH/DH),ox=I.l+(AW-DW*s)/2,oy=I.t+(nr?(AH-DH*s)/2:(AH-DH*s));
+  var nr=narrow(w,h),land=nr||w>=h,DW=land?KIT_FRAME.spread.w:KIT_FRAME.page.w,DH=land?KIT_FRAME.spread.h:KIT_FRAME.page.h,I0=nr?{t:0,r:0,b:0,l:0}:insets(),I={t:I0.t,r:I0.r,l:I0.l,b:land?0:I0.b}/* landscape: the tab bar goes flush to the screen bottom, under the thin home-indicator line (owner: no strip under the tabs) */,AW=(nr?h:w)-I.l-I.r,AH=(nr?w:h)-I.t-I.b,s=Math.min(AW/DW,AH/DH);
+  /* FULL WIDTH (owner 17/11 03:54Z, review/app-edge): when the screen is relatively WIDER than the design the scale is set by the height, and the canvas WIDTH grows to fill the rest (frames grow, the scale — so text and figures — stays the kit size); capped so the layout never sees an absurd width */
+  if(!nr&&AW/s>DW)DW=Math.min(Math.ceil(AW/s),Math.round(DW*KIT_FRAME.maxGrow));
+  var ox=I.l+(AW-DW*s)/2,oy=I.t+(nr?(AH-DH*s)/2:(AH-DH*s));
   return{w:w,h:h,nr:nr,DW:DW,DH:DH,s:s,tf:(nr?"translateX("+w+"px) rotate(90deg) ":"")+"translate("+ox.toFixed(2)+"px,"+oy.toFixed(2)+"px) scale("+s.toFixed(4)+")"}}
  function place(el,g){if(el.style.width!==g.DW+"px")el.style.width=g.DW+"px";if(el.style.height!==g.DH+"px")el.style.height=g.DH+"px";el.style.transform=g.tf}
  (function(){var g=geo();if(!g||!window.__kbootHost)return;place(cw,g);d.documentElement.appendChild(cw);window.__kbootHost(cw,g.DW,g.DH);

@@ -91,7 +91,7 @@ function frameDef(p,a){const T=BAL.truth;const base=T.clearBase+(p.mat||0)*T.cle
 function frameExpose(a,p,how){const T=BAL.truth;ap(a,{danh:-T.fDanh});if(typeof ducAdd==="function")ducAdd(a,-T.fDuc,"vu khống người khác");else ap(a,{duc:-T.fDuc});
  relAdd(a,p,BAL.eff.jtruth.frameExpose);evA(p,a,2);punish(a,`vu khống ${p===S?"ngươi":p.name}`,2);
  const A=a===S?"Ngươi":a.name,P=p===S?"Ngươi":p.name;return `${P} minh oan được: ${how}. ${A} bị lộ là kẻ vu khống: Danh -${T.fDanh}, Đức -${T.fDuc}, bị phạt. `}
-let FRAME_LAST="";
+let FRAME_LAST="";try{lifeStore("FRAME_LAST",()=>{FRAME_LAST=""})}catch(e){}/* per life (review/newlife-reset-r1): the last framing sentence names people of that life */
 (function(){const f0=framed;framed=function(p,why){FRAME_LAST="";const a=ACTX.a&&ACTX.a!==p?ACTX.a:null;if(!a||!p||window.__truthAuto)return f0.apply(this,arguments);
  if(p===S&&!window.__truthAuto){pushDil(mkP("vuoan",{a:key(a),why}),"Bị vu oan");return -1}
  const D=frameDef(p,a);try{window.__frames=(window.__frames||0)+1;if(p===S)window.__framesMe=(window.__framesMe||0)+1}catch(e){}
