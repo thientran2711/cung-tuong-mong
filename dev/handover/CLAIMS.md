@@ -576,7 +576,7 @@
 | OI family (opus): render-cost root fix + origin-intros flow/oldsave tests + kc2val Chờ re-measure (carries kc-roads-cn-nc-fix2), then one OI reviewer | review/batch-0032-oi | D | session_01964izCi8228y2v2JjEknpd | RUNNING | 17/11 03:35Z |
 | npc-roads-fx FINISH (opus): F1–F6 scan, merge main, suites → SẴN SÀNG KIỂM, then BIG reviewer | review/npc-roads-fx | D | session_01964izFdMcMY1NA9hQZVoJw | RUNNING | 17/11 03:35Z |
 | item-ledger SOLO landing (opus): from PASS 7aba5de9, branch co-op transport removed (live giftin only), co-op part parked | review/item-ledger-solo | D | session_01964izCwq2JLHTHaaBox66W | RUNNING | 17/11 03:35Z |
-| npc-death re-wire (opus): jnpcd/jly into j95 place-people record (Lý Trường Môn viện, dead off lists, Thái y viện new name) | review/npc-death-wire | D | session_01964izBuQu8dWabKyYB69JE | RUNNING | 17/11 03:35Z |
+| npc-death re-wire (opus): jnpcd/jly into j95 place-people record (Lý Trường Môn viện, dead off lists, Thái y viện new name) | review/npc-death-wire | D | session_01964izBuQu8dWabKyYB69JE | DONE SẴN SÀNG KIỂM de166c3f (archived) | 17/11 03:35Z |
 | suc-khoe review r2 (opus BIG) of da50857d | review/suc-khoe-r2 | D | session_01964izEdQ4cDsTpuGgdScHp | RUNNING | 17/11 03:35Z |
 | C44 cloud-del 'Xóa sổ trên mây' (sonnet UI, KIT §83.9) | review/cloud-del | D | session_01964izCcuExvScNgYEs1xN6 | DONE SẴN SÀNG KIỂM e12ef99a (archived) | 17/11 03:35Z |
 | P5 STORY BOT balance (opus, report only, ch1–4 first) | review/story-bot | D | session_01964izEJdhucE8HEDCzfJ25 | RUNNING | 17/11 03:35Z |
@@ -611,3 +611,4 @@
 | map-full r1 PASS 29131677 (review/map-full-r1; trial-merge app-edge clean) → ships TOGETHER with app-edge after app-edge r1 PASS, next batch | review/map-full-r1 | main s30 | session_01UV1Szipn2t9xXY2WubCJ1T | PASS | 17/11 04:22Z |
 | mg-clutter r1 PASS cbbbc7d9 (review/mg-clutter-r1; needs merge on main) → next batch with newlife-reset b2da25cc0 + map-full 29131677 (+ app-edge on PASS) | review/mg-clutter-r1 | main s30 | session_01UV1SzhB4ckkvjk7TVuS92E | PASS | 17/11 04:23Z |
 | cloud-del review r1 (sonnet SMALL) of e12ef99a | review/cloud-del-r1 | D | session_01964izGAVcoDZanXLDNekPh | RUNNING | 17/11 04:23Z |
+| npc-death-wire review r1 (opus BIG) of de166c3f | review/npc-death-wire-r1 | D | session_01964izCQT8gNjjT2WA7WDjh | RUNNING | 17/11 04:27Z |
