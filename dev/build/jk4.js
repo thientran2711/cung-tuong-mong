@@ -748,7 +748,7 @@ html body .stage .tok .tag .j59n.kmy,html body .stage #j59metag .tag .j59n.kmy,h
 .knr>.knr-n{font-size:.98rem;color:color-mix(in srgb,var(--rc,#7a5530) 45%,#2a1a12);overflow-wrap:anywhere}
 /* person cards (j15 pcard + jk2b layout): the same order — rank line, name, THEN the portrait. Narrow card: the name block is a full row
    above the portrait and the bars (was beside the portrait); wide card: rank above the name, both above the portrait. */
-.pc.kpnar[data-k2]>.pcl{grid-template-areas:"nm nm" "por bars" "por fx"!important;grid-template-rows:auto auto 1fr!important}
+.pc.kpnar[data-k2]>.pcl{grid-template-areas:"nm nm" "por bars" "por fx" "key key"!important;grid-template-rows:auto auto 1fr auto!important}
 .pc.kpnar[data-k2]>.pcl>.kpnm{display:flex!important;flex-direction:column!important;align-items:flex-start!important;gap:0!important;margin:0 0 4px}
 .pc.kpnar[data-k2]>.pcl>.kpnm>.pcrk{order:-1}
 html body .pc.kpwide[data-k2]>.pcl>.pcrk{order:-4!important;margin:0!important}

@@ -39,7 +39,7 @@ function pcfIntel(e){try{if(e.id==null||typeof kitRows!=="function")return"";con
  old.forEach(t=>{if(rows.length<2&&!L.some(x=>plain(x.fact).includes(plain(t))))rows.push(["Nghe được",t])});
  const n=Math.max(L.length,old.length);const ev=e.ev||0;
  const chips=[n?`<button class="chip kchipb" data-kintel="${e.id}">Đã biết: ${n} tin ›</button>`:"",ev?`<button class="chip hot kchipb" data-kev="${e.id}" title="Xem chứng cứ">Chứng cứ ${ev} ›</button>`:""].filter(Boolean);
- return `<div class="kpsec"><h4 class="kpst">Đã biết</h4>${rows.length?kitRows(rows):`<div class="kpnote">Chưa biết gì thêm. Dò la, hỏi kẻ hầu để biết.</div>`}${chips.length?`<div class="kchips">${chips.join(" ")}</div>`:""}</div>`}catch(x){return""}}
+ return `<div class="kpsec pcf-i"><h4 class="kpst">Đã biết</h4>${rows.length?kitRows(rows):`<div class="kpnote">Chưa biết gì thêm. Dò la, hỏi kẻ hầu để biết.</div>`}${chips.length?`<div class="kchips">${chips.join(" ")}</div>`:""}</div>`}catch(x){return""}}
 function pcfLog(e){try{const nm=pcfName(e);if(!nm||!S.logs)return"";const parts=nm.split(" ");const key=isEmp(e)||isTh(e)?nm:parts.slice(-2).join(" ");const mark=`T${S.month}/${S.year} `;const rows=[];
  for(const h of S.logs){const m=/^<span class="ld">(T\d+\/\d+) ([^<]*)<\/span>([\s\S]*)$/.exec(h);if(!m||(m[1]+" ")!==mark)continue;const t=plain(m[3]);if(!t.includes(key)&&!(isEmp(e)&&/Hoàng thượng|ngài /i.test(t)))continue;
   rows.push([m[2],m[3]]);if(rows.length>=1)break}
@@ -86,18 +86,18 @@ document.addEventListener("click",e=>{const t=e.target.closest&&e.target.closest
    existing kitStatDelta -> kitStatGlow, no new kit part): when a card/tile/relation number is drawn again with another value than the one drawn for the same
    cell a moment ago, that cell glows GREEN for a rise / RED for a fall. Key = card/sheet name + cell label; memory lasts 20 s. HUD cells keep their own path. */
 (function(){if(typeof MutationObserver!=="function"||typeof kitStatDelta!=="function")return;
- const SEL=".kst-tile,.kst-chip,.krt-v",MEM=new Map(),TTL=20000;
+ const SEL=".kst-tile,.kst-chip,.krt-v,.kr2-cp .kr2-v",MEM=new Map(),TTL=20000;
  const num=t=>{const m=/^\s*([−-]?)\s*(\d+(?:[.,]\d+)?)/.exec(String(t||"").replace(/ /g," "));return m?(m[1]?-1:1)*parseFloat(m[2].replace(",",".")):null};
  const still=()=>{try{return typeof ksfStill==="function"&&ksfStill()}catch(e){return false}};
  const txt=e=>e?e.textContent.replace(/\s+/g," ").trim():"";
  function ckey(c){const h=c.closest(".pc,.kpsc,.kpstats,#modal,.dlg");if(!h)return null;
   const who=txt(h.querySelector(".pcname"))||txt(h.querySelector(".kpidn"))||(h.id||h.className);
-  let lab,val;if(c.classList.contains("krt-v")){const l=c.previousElementSibling&&c.previousElementSibling.classList.contains("krt-d")?c.previousElementSibling.previousElementSibling:c.previousElementSibling;lab=txt(l);val=txt(c)}
+  let lab,val;if(c.classList.contains("kr2-v")){const l=c.previousElementSibling;const h=c.closest(".kr2cl");lab=txt(h&&h.querySelector(".kr2ch"))+" "+txt(l);val=txt(c)}else if(c.classList.contains("krt-v")){const l=c.previousElementSibling&&c.previousElementSibling.classList.contains("krt-d")?c.previousElementSibling.previousElementSibling:c.previousElementSibling;lab=txt(l);val=txt(c)}
   else{lab=txt(c.querySelector(".kstl"));val=txt(c.querySelector(".kstv"))}
   return lab?who+"|"+lab:null}
  function scan(root){const L=root.matches&&root.matches(SEL)?[root]:[];if(root.querySelectorAll)root.querySelectorAll(SEL).forEach(x=>L.push(x));
   const now=Date.now();for(const c of L){if((c.id||"").startsWith("hud-")||c.closest("header.hud"))continue;const k=ckey(c);if(!k)continue;
-   const v=num(c.classList.contains("krt-v")?c.textContent:txt(c.querySelector(".kstv")));if(v==null)continue;const o=MEM.get(k),n={v,t:now};MEM.set(k,n);
+   const v=num(c.classList.contains("krt-v")||c.classList.contains("kr2-v")?c.textContent:txt(c.querySelector(".kstv")));if(v==null)continue;const o=MEM.get(k),n={v,t:now};MEM.set(k,n);
    if(o&&now-o.t<TTL&&o.v!==v){const bad=/oán|ghen|hận|thù|ghét/i.test(k.split("|").pop());/* a rise in grudge / jealousy is a loss for her: colour by meaning */const dv=bad?o.v-v:v-o.v;n.g=dv;n.gt=now;try{if(!still())kitStatGlow(c,dv)}catch(e){}}
    /* the card is often drawn 2-3 times in a row (render + shell): the glow of the first draw must survive into the next one while its pulse is still running */
    else if(o&&o.g&&o.v===v&&now-o.gt<KSF.PULSE){n.g=o.g;n.gt=o.gt;try{if(!still())kitStatGlow(c,o.g)}catch(e){}}}

@@ -1111,11 +1111,13 @@ html body .pc.kpwide[data-k2]>.pcl>.pcp.kit.kit{width:var(--kpcw)!important;marg
 .pc.kpwide[data-k2]>.pcl>.kpkey{order:1!important}
 .pc.kpwide[data-k2]>.pcl>.kwear,.pc.kpwide[data-k2]>.pcl>.kpgrid,.pc.kpwide[data-k2]>.pcl>.kpfacts{order:2!important}
 .pc.kpwide[data-k2]>.pcl>.kwear{width:auto}
-.pc.kpnar[data-k2]>.pcl>.kpkey{grid-area:bars;margin:4px 0 0}
+.pc.kpnar[data-k2]>.pcl>.kpkey{grid-area:key;margin:6px 0 0;flex-direction:row;flex-wrap:wrap;align-items:center;gap:4px 12px}
+.pc.kpnar[data-k2]>.pcl>.kpkey .kr2-cp{flex:1 1 220px}
 .pc[data-k2] .kpstick .pcf{margin:0 0 5px;max-height:calc(34*var(--kvh));overflow-y:auto;overscroll-behavior:contain}
 .pc[data-k2] .kpstick .pcf .kpsec{margin:0 0 2px;display:grid;grid-template-columns:4.4rem minmax(0,1fr);column-gap:6px;align-items:start}
 .pc[data-k2] .kpstick .pcf .kpst{margin:2px 0 0;font-size:.66rem;line-height:1.2;border:0;padding:0}
 .pc[data-k2] .kpstick .pcf .kpsec>:not(.kpst){grid-column:2;min-width:0}
+.pc[data-k2] .kpstick .pcf .pcf-i .krv{-webkit-line-clamp:1}
 .pc[data-k2] .kpstick .pcf .krv{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 .kpgrid{display:flex;flex-direction:column;gap:4px;margin:4px 0 6px}
 .kpgr{display:flex;flex-wrap:wrap;gap:4px}
