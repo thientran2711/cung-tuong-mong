@@ -31,3 +31,8 @@ Context per file is the cost, not credits. Cut it:
 6. Target >= 40 files per session, >= 8 files per ~6 tool calls.
 
 ## SPLIT (17/11, 7 workers): maid-rest and consort-rest are split in halves. W5 = maid-rest-A.txt, W6 = maid-rest-B.txt; W3 = consort-rest-A.txt, W7 = consort-rest-B.txt. Do all a18 of your half first. Progress files: batch-<shard>.md (W6: batch-maid-rest-B.md, W7: batch-consort-rest-B.md).
+
+## HD FOR EVERY FIGURE incl. MAIDS (lead #6, 17/11; supersedes the 'hd only where CDN has it' rule above; owner OD:L1160 EVERY figure sharp when enlarged, maids/mama/eunuchs/men included)
+FINDING: the game (jfighd.js, index.html) needs NO code change for maids. It loads the manifest img/FIGURES-hd.json = {"files":{"fig-x.webp":[w_fig,w_hd]}} and for ANY img/fig-*.webp that has an entry it sets srcset to img/hd/fig-x.webp. The manifest today has 1598 entries and NONE for maids (and none for most new 2k files), so maid hd twins were never used.
+DO for EVERY file you finish (fig, not por/tn): finish_fig.py makes the hd twin (1800 tall, FORCE_HD=1 when needed) -> upload img/hd/fig-*.webp with cdn_sync.py together with img/fig-*.webp. Then register in the manifest ONCE PER UPLOAD BATCH: python3 dev/site/cdn_sync.py --pull img/FIGURES-hd.json; add/merge entries {"fig-x.webp":[width of the fig file, width of the hd file]} (see dev/figwork/hdmanifest.py on origin/main for the merge logic) ; python3 dev/site/cdn_sync.py img/FIGURES-hd.json (never --force; if refused as changed by someone else, pull again and re-merge). Check: curl the CDN manifest and the hd file.
+Files already uploaded without hd (e.g. maids live before this note): make their hd twin from the master now and register it.

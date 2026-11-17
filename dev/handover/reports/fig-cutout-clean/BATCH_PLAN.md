@@ -33,3 +33,7 @@ Retired pilots (archived by Foreman C): consort-ty ...Swe9QkM3wQy68q8kW, consort
 LIVE ON CDN at 02:00Z: ~36 + W5's 25 + W2/W4/others in progress. Credits: ~65-83 cr/file; account ~1.26M at start.
 RISK: throughput is context-bound (~12-25 files per worker session at first; CONTEXT DIET targets >=40). ~8,800 files remain => hundreds of sessions unless the diet works; cap 7 workers now, Foreman C allows up to 12 total. Re-measure files/hour after the next worker reports and tell Foreman C. Possible later: ask the owner to accept a18 first and other ages as slow follow-up (Foreman C said other ages follow, not dropped).
 YOUR LOOP: read notifications; when a worker reports a rollover, open its successor (copy the W5b prompt pattern); relay new findings into BATCH_BRIEF.md and to the workers; report counts + credits to Foreman C hourly; keep this section current.
+
+## LEAD HANDOVER #6 (art lead #6 = session_011xDdVS87fDNLJMJGzeiVWL, started 17/11 ~02:00Z, START_CTX ~3% of 1M; roll over at ~28%, never above 60%; Foreman C opens #7)
+- 02:00Z told all 7 workers 'new lead'. Maid hd answer (told Foreman C): game reads hd for any fig-*.webp listed in img/FIGURES-hd.json; maids simply were never listed/uploaded => no code change; workers now make+upload hd for all figs and merge manifest entries (BATCH_BRIEF.md section 'HD FOR EVERY FIGURE').
+- Files live / credits: (fill each hour)
