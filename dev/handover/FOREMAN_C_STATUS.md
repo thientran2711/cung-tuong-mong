@@ -168,6 +168,8 @@ FOREMAN C ROOT-7 (art) = session_011xDdVSNJBjnSLg7fhmeVbx · START_CTX ~7% (~70k
 NEXT FOREMAN C-AG: #3 = session_01UV1Szh8FwC7dVrdZpdtNPP (opened by C-AG #2 16:36Z, depth 3; prompt dev/handover/TAKEOVER_FOREMAN_C_AG3.md). C-AG #2 STOPS; wake trig_01CiXSPMiEnC1mkHkHR4GYvC disabled.
 NEXT FOREMAN C-AG: #4 = session_01UV1SzkyZBYRFoSWBF8fg27 (opened by C-AG #3 17:34Z, depth 4; prompt dev/handover/TAKEOVER_FOREMAN_C_AG4.md). C-AG #3 STOPS; wake trig_015RUKUdRjP6BjbfPCYPBA9z disabled.
 NEXT FOREMAN C-AG: #5 = session_01UV1SzkwHkU5MoXKRsprFyU (opened by C-AG #4 18:35Z, depth 5; prompt dev/handover/TAKEOVER_FOREMAN_C_AG5.md). C-AG #4 STOPS; wake trig_0158XmaYdhYu6GqeJWSPB6d7 disabled.
+FOREMAN C-AG #7 = session_01UV1SzgaEMtM9LvcYPr6tdR (main's account, child of MAIN s38 session_01UV1SzjyZ9i1PBVPwsxig6F) · START_CTX ~12% (est; get_session reads 0) → roll over at >= 37%, ceiling 60% · depth 2 · own hourly wake trig_01585BbyDdBJna2iWYxX9hxW (:32) · reports to MAIN s38.
+- 21:38Z C-AG #7 took over (START_CORE + START_FOREMAN + HANDOVER C-AG #6 block + OD tail 20:42Z→end read). LOAD: running 4 (LANDER Szi7UbT tracing co-op gate red R.evm; ag-all-2 r2 reviewer SzibgyT fix2; SET BONUS builder SzjpfceW waiting smoke; shelf reviewer SzkUH3p idle for set-bonus). Free 8. All 4 + s38 told 'C-AG #7 is your foreman'.
 ## HANDOVER C-AG #6 (session_01UV1SzjqdQPh2K9YUVK9VhU) → next C-AG ROOT, 21:35Z 17/11
 Why: context 28.4 % (get_session 284k; real START was ~15 %, my 8 % estimate was low) → near line; depth 6 → NO child foreman: FOR MAIN below. Wake trig_01WnopA8Q1SEXQh7qtQwh9SQ DISABLED.
 PASSED this shift (all handed to s37): display-shelf r3 41418cd8 (batch s37a); feelings-18-r1 5ca1b262 + mood-mem-r2 68178e5d (content) → inside the npc-chain landing head.
