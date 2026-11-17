@@ -1,6 +1,6 @@
 // review/staff-root bot measure: node dev/measure/staff-bots.js <game html, relative to the repo root> <lives> [origins] [out.json] [capSeconds]
-// The inpage6 palace bot (sensible) plays every life (as kchh.js "cung"). A probe at every month end (servMonth) and at the life end checks
-// every household — hers and every live NPC consort's — against the ONE table: maids (incl. the personal maid) <= cap[0], eunuchs <= cap[1].
+// The inpage6 palace bot (sensible) plays every life (as kchh.js "cung"). A probe at the end of every buổi checks
+// (outermost nextBuoi = after the game's own trims, what the next stage shows) every household — hers and every live NPC consort's — against the ONE table: maids (incl. the personal maid) <= cap[0], eunuchs <= cap[1].
 // Works on the old build too (it has no hhHas: the probe counts the same way, personal maid = +1). Prints per-rank max maids/eunuchs seen,
 // over-cap counts, HH reach %, early death (dead before 5 palace years) %, servant-road lives.
 const {chromium}=require('playwright');const path=require('path');const fs=require('fs');
@@ -20,9 +20,9 @@ const N=+process.argv[3]||4,ORIG=(process.argv[4]||'tt,dtq,muoi,cn,nc,td,ch,thd'
     for(const q of [S].concat(rivals||[])){if(!q||(q!==S&&q.alive===false))continue;if(q===S&&typeof isSrv==="function"&&isSrv())continue;const c=capOf(q),h=has(q);tot+=h[0]-1+h[1];
      const rk=q.out?"cold":String(q===S?S.rank:(q.queen?7:q.rank));const m=P.max[rk]=P.max[rk]||[0,0];m[0]=Math.max(m[0],h[0]);m[1]=Math.max(m[1],h[1]);
      if(h[0]>c[0]||h[1]>c[1])P.over.push({who:q===S?"her":"npc",rk,h,c,t:S.turn})}P.tot=Math.max(P.tot,tot)}catch(e){}};
-   const m0=servMonth;servMonth=function(){const r=m0.apply(this,arguments);window.__probe();return r}});
+   const n0=nextBuoi;nextBuoi=function(){const r=n0.apply(this,arguments);window.__probe();return r}});
   await p.evaluate(()=>{try{start()}catch(e){console.error(e)}});
-  const t1=Date.now();while(true){let n=0;try{n=await p.evaluate(()=>{/* bot-side unstick (pre-existing on main 17/11: a dilemma whose answer chooseM refuses keeps the bot looping; same on old and new build): drop it */if((window.__stn||0)>200&&Q.length){window.__sp.unstick=(window.__sp.unstick||0)+1;window.__sp.us=(Q[0].t||'').slice(0,30);Q.shift();try{const m=document.getElementById('modal');if(m)m.hidden=true}catch(e){}window.__stn=0;window.__stk=''}const r=window.__bot.step("sens",40);window.__probe();return r})}catch(e){errs.push('step '+String(e).slice(0,160));break}
+  const t1=Date.now();while(true){let n=0;try{n=await p.evaluate(()=>{/* bot-side unstick (pre-existing on main 17/11: a dilemma whose answer chooseM refuses keeps the bot looping; same on old and new build): drop it */if((window.__stn||0)>200&&Q.length){window.__sp.unstick=(window.__sp.unstick||0)+1;window.__sp.us=(Q[0].t||'').slice(0,30);Q.shift();try{const m=document.getElementById('modal');if(m)m.hidden=true}catch(e){}window.__stn=0;window.__stk=''}const r=window.__bot.step("sens",40);return r})}catch(e){errs.push('step '+String(e).slice(0,160));break}
    if(await p.evaluate(()=>window.__res.length>=1))break;if(Date.now()-t1>900e3){errs.push('life cap '+o);break}}
   const r=await p.evaluate(()=>{const x=window.__res[0];if(x&&x.stuck)x.ring=[Q.length,Q[0]&&Q[0].t,Q[0]&&(Q[0].o||Q[0].opts||[]).map(o=>o.n),String(Q[0]&&Q[0].h||'').replace(/<[^>]+>/g,'').slice(0,160),!document.getElementById('modal').hidden,typeof pending!=='undefined'?JSON.stringify(pending).slice(0,200):''];return x?{origin:x.origin,maxRank:x.maxRank,hhTurn:x.hhTurn,turns:x.turns,title:x.title,text:x.text,stuck:x.stuck,ring:x.ring,sp:window.__sp}:null});try{await p.close()}catch(e){}return r}
  for(let i=0;i<N;i++)for(const o of ORIG){if(Date.now()-t0>CAP)break;let r;try{r=await life(o)}catch(e){errs.push('life '+String(e).slice(0,160));continue}
