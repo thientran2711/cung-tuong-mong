@@ -30,3 +30,61 @@ QUICKCHECK on the final code (qc4 = after harness fix, qc5 = head): **4 PASS / 7
 
 ## HANDOVER
 Code pushed. Left: decide on renderMs/tabMs/longTasks200 borderline (follow-up render-cost task, or accept), update origin-intros/flow.js picture-band selector to the batch kit markup.
+
+---
+# oi-render (worker session_01964izCi8228y2v2JjEknpd, Foreman D #8, 17/11) — render-cost root fix + 2 tests + kc2val
+PRIORITY #1 CHECK ('render-cost|batch-0032-oi|oi-perf'): OD 1 | ledger 0 | claims 5 | main 0 | review/* 1 → reused review/batch-0032-oi @ 4f5c75d9 (no new branch); reused lag-play-2's jlag2 render depth (__rdep) as the one mechanism.
+START_CTX ≈ 5 % (get_session read 0; own estimate). Branch review/batch-0032-oi, head **de6a876b**.
+
+## 0. Merge live main 7abaf07a → 73db6e4a
+Conflicts: KIT_REQUESTS.md (both rows kept), CHANGE.txt (main's lines + "mỗi xuất thân có đoạn dẫn vào cung riêng"), index.html/sw.js/assets.json rebuilt.
+After the merge the old +35–45 % gap was mostly gone (the pre-OI batch is live now): render 232/251, tab 319/288 (new/live).
+
+## 1. Render-cost ROOT fix (same behaviour, no gate threshold touched)
+Cause (CDP trace, Layout/UpdateLayoutTree with JS stacks + InvalidateLayout between them): every render() forced **~12 layouts**, ~40 % of render time:
+part fits READ layout (clientWidth, scrollTop, getBoundingClientRect, innerText, computed style) after other parts had WRITTEN.
+Fix = ONE mechanism, `window.renderAfter(key, fn)` in jlag2 (owner of the render depth): inside a render the read runs once per key when the
+OUTERMOST render returns (same task, before paint); outside a render at once. Whole family converted:
+| reader (file) | before | after |
+|---|---|---|
+| k3Stage (jk3) | 3x per render (renderHud2, renderStage, render), 3 forced layouts each | once at render end; tags/floor re-placed if gutters changed |
+| kitSealHud (jseal) | in renderHUD | render end |
+| j59 name-tag tooltips innerText (j59) | in renderStage | render end |
+| kitFloorFit (jk2b) | in renderStage | render end |
+| kitPane bar measure (jpane) | in renderPanel/k3CatTabs | moves stay at once, measure at render end |
+| rail paint (jrail) | 2x (renderStage + render) | once at render end |
+| panel scroll keep — j6, j42, j72, jhc, jht, jkc (new shared `panelScrollKeep`) + jhc same-tab keep | scrollTop set right after innerHTML (full layout), read again after kaNorm (2nd full layout) | once at render end |
+| tabsFit (j57, j79 kgBar, jkc) | re-measured 2x EVERY render: j42 srvTabs reset the Hậu cung head to "Chí tôn" and kgBar set "Hậu cung" back (text flip) | flip removed (writes only when different, kg head left to kgBar); measure at render end |
+| kitTabStick in k3CatTabs (jk3) | in render | render end |
+| jhc court sub-tab | read P.clientWidth (both branches "Chí tôn") | no read |
+Per render: ~12 → 2 forced layouts (trace, iPad 1x). Pixel check (same saved life loaded in base 73db6e4a and new, every tab + scrolled act panel, Fold 755x1000 + iPad 1180x820): **0 px difference** except broken-image glyph timing (net blocked); panel scrollTop and tab font size identical.
+| quickcheck (iPad, CPU 4x, median of 3, new/live) | render ms | tab ms | buổi ms | tasks>200 ms |
+|---|---|---|---|---|
+| after merge, before fix | 232/251 | 319/288 | 757/795 | 11/11 |
+| run 1 | 145/254 | 250/280 | 622/734 | 8/10 |
+| run 2 | 171/245 | 230/291 | 725/1460 | 10/12 |
+| run 3 | 157/228 | 273/309 | 757/1142 | 11/11 |
+**QUICKCHECK PASS 3 runs in a row** (core gates PASS each: one-core-guard 0 fails, rules-one-source, kit-conform, co-op hook; old save ok).
+DOM/act cards: unchanged by this task (the greyed cards are live content now on main too).
+
+## 2. The two tests
+- origin-intros/flow.js: panels 1–3 are now the kit-size card (`#mb > .k3body > .k3main.k3mpic > figure.ksart`, jksize), panel 4 `.kdlgart`; the test accepts both kit picture frames (BAND). **PASS 3/3** (tt, nc, cnv @755x1000).
+- origin-intros/oldsave.js: serves old + new builds itself from ONE origin (args: git ref / index.html / folder / URL; "/" switched by /__ver). `node oldsave.js origin/main HEAD` **PASS 3/3**.
+
+## 3. kc2val re-measure (row 60) + a measuring-bot fault, whole family
+First run: nc palace arm 16/24 lives TIMEOUT at month 0. Cause: opt-greyed-2 shows "Tố giác …" greyed (c.off) on "Sau vụ mưu hại"; chooseM ignores a greyed option, the bot kept picking it → loop. Same on the base build (not this change). Fixed in every option-picking bot: 10 sites in dev/measure (inpage4/5/6, inkc, kc2val, reign) + dev/test (act-dedupe-bot, act-pics, event-dp-scan, news-face-real): before 10 sites without `!c.off`, after 0; quickcheck SETTLE/BUOI pick the first non-greyed option (thresholds untouched).
+Re-run SEED 51–54 × 6 lives per arm, both arms fresh (raw dev/measure/kc2val-oi-s5*.json):
+| origin | palace V (sd, alive) | home V (sd, alive) | gap home − palace (± se) | per seed |
+|---|---|---|---|---|
+| cnv | 315 (99, 23/24) | 298 (17, 24/24) | **−18** (±21) | −2 / −19 / 49 / −88 |
+| nc | 306 (66, 22/24) | 330 (9, 24/24) | **+25** (±14) | 29 / −2 / 39 / 33 |
+Both inside the band (within ~2 se and well inside the palace spread) → **BAL.kcv unchanged**.
+
+## 4. Other gates
+entry-exam/direct.js **PASS 9/9** (755x1000) · coop-e2e (live Worker) **60/60** (not worse than live) · Fold + iPad shots looked at (no overlap, nothing cut; identical to base).
+
+## Notes
+- All commits on review/batch-0032-oi: 73db6e4a (merge), 247a71b7, 62ac4436, 0eaa6353 (render), 7f984d67 (tests), bots fix, kc2val files, head de6a876b.
+- Worktree /home/user/wt/oirc removed after push.
+
+SẴN SÀNG KIỂM de6a876b72f1ee9c63bc3cc26438c499338a1aa9
