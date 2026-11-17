@@ -160,3 +160,10 @@ Level mix + day flow (avg level sáng / trưa / chiều / tối):
 
 ## Handover
 Done; nothing open on this branch. Context at finish ~22 %.
+
+## weather-khac-2 r1 update (foreman C-AG #4 + reviewer r1 A/B/C/D) — READY **fd829d49** on review/weather-khac-r1
+- C: the delta above was re-applied onto review/weather-khac-r1 11948a5f (e1d540cf rebased on main e9bbc4d6 + reviewer fixes); wxkM / S.wxkG guest marks and the storm-day count kept (wx-khac §5b/§6 OK). The old review/weather-khac head e8fd5b2d is superseded.
+- B: the level SHOWS (existing sprites only, jfx KF_WX rows + BAL.wx.day.fxLv): rain nhẹ drizzle (20) · vừa rain2 (44, faster) · nặng rainh (= storm streaks, 80, NO bolt / no thunder); wind wind1 / wind / wind3 (24 / 60 / 100, gustier); fog mist1 / mist / mist3; snow nặng → snowh; storm keeps its own row + bolt. Wet / snow wash × BAL.wx.day.wash [1,1,1.5,2.4] by lv, on a buổi painting washOwn [.25,.25,.45,.7] instead of a flat 1/4 (alpha capped .6). A day built without levels keeps a sudden downpour nặng.
+- D: wx-khac §1 now prints every kind's share + nhẹ/vừa/nặng mix per season; wx-khac2 §10 checks the looks per level (ids, caps rising, no bolt on nặng rain, wash rising, wind/snow rows, storm bolt kept).
+- Tests on fd829d49: wx-khac ALL OK (§1–§6) · wx-khac2 ALL OK (§1–§10) · wx-gear ALL OK · weather-port PASS · time-spill PASS · QUICKCHECK --cpu 4 PASS + core gates PASS (render 168/280, tab 273/323, buổi 907/917 new/live). No screenshots taken by me (boot cover in my quick probe); the reviewer's Fold/iPad shots cover it.
+- Still open: storm walking khắc NOT built (owner 15/11 06:40Z conflict, needs her overrule).
