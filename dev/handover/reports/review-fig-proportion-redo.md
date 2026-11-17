@@ -20,3 +20,16 @@ gpt-2-6 edit: image 1 = approved reference (c01 / Emperor) = the body, never red
 
 ## OWNER RULE relayed 16/11 21:24Z (applies to the v4 batch once she OKs it)
 ONE skin tone for everyone (STYLE_ANCHOR fair porcelain), PAINTED never code-tinted; use the approved c01 face as the fixed skin reference in every generation (v4 already uses c01/Emperor as the base image; in the batch also pass the c01 face as a skin reference and check skin next to c01). Status: WAITING for owner verdict on v4; no batch started.
+
+## 17/11 OWNER VERDICT on v4 (relayed by Foreman C s10) + ORDERS
+Owner: old man head still wrong; Thai hau v4 direction OK; use the palace MA MA figure (fig-mama-*) as the model for Thai hau, not c01; Thai hau h2a18 pink / orange young girls = wrong; no fish-tail trains; no more owner approval needed (C looks at sheets; upload when QA passes).
+
+## DONE 17/11: THAI HAU (all 15 figs + 15 por) ON CDN
+Method: gpt-2-6 edit, image 1 = ma ma figure of the matching age (fig-mama-k01 -> h1, k02 -> h2, k03 -> h3; fig-thaihau-1/2/3 on k01-a36 / k02-a51 / k03-a36) = body, height, head size, stance never redrawn; image 2 = current Thai hau figure (face + hair + crown); image 3 (a18/a26/a36 only) = the set's a51 dignified robe, so NO pastel pink/orange young-girl looks: h1 = amber/crimson phoenix, h2 = deep plum + gold, h3 = deep teal + gold; "hem reaching the floor, no long train" (no fish tail). bg removed (Magnific), bbox crop, 900 px tall WebP. Edges checked on dark + light sheets (thaihau-figs-dark-1.jpg, thaihau-figs-light-2.jpg): clean. Facial size (Haar face box / figure height): old .083-.097 -> new .094-.104 (c01 .098, mama .093-.110). Skin: painted, not tinted.
+LIVE on CDN (same names): img/fig-thaihau-1,2,3, fig-thaihau-h{1,2,3}-a{18,26,36,51} (15) and img/por-thaihau-1,2,3, por-thaihau-h*-a* (15; busts gen'd from the new figs, 384x506 transparent). Verified md5 live == local. Old live files backed up in fig-proportion-redo/old-backup-thaihau/ (30 files). Before/after: thaihau-before-after-1..3.jpg; por: thaihau-por-dark-1.jpg / light-2.jpg.
+NOT touched: face-thaihau-1..6 (six separate dowager portraits, not the 15 figure identities), thai-hau.webp icon, info-thai-hau, the 17 scene pictures (their Thai hau was already redone earlier), kit/frame-thaihau.
+RISK for C: img/mk-fit/thaihau-h1..3.json (makeup fit) was fitted to the old figures; bodies are now shorter/wider-set (mama build) so fit data may need a re-check.
+Honest: new Thai hau looks like the mama build (shorter, broader robe) than before; a18/a26 faces stay young-looking (same identity as before).
+
+## OLD MAN (fig-kid-p03-a51) — NOT uploaded, needs C's decision
+Measured face height / figure height: Emperor .097; previous live p03 .081; v4 .089; latest tries .085-.092 (best D = .085, chin line 14.4% vs Emperor 16.3%). So by measurement his head is SMALLER than the Emperor's, not bigger; the owner's first verdict was 'head tiny'. Relayed order says 'still too big'. Variant D (smallest, .085) is prepared (final/fig-kid-p03-a51.webp, not on CDN). If she means the crown+topknot make the whole head look big, say so and I shrink the crown/hair; if she means the face is small, I enlarge to Emperor's .097. Women f04/f01 v4 samples were not rolled out (only samples); no other old-people batch started.
