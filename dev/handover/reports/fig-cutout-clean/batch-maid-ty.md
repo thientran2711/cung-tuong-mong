@@ -32,3 +32,4 @@ START_CTX ~8 % (estimate). Rolled over early at ~25 % of window because the setu
 W4c: 76 done (a18 through m10-ty4); m10-ty5 HARD redo in batch G; F batch was duplicate of D (discarded). frag W4c-2.json. Next batches G/H/I in flight (k[76]..k[99]).
 W4c: 100 done (a18 through m13-ty4), frag W4c-3.json (24). Batches J/K/L in flight = k[100..123] (next after: sed -n 125,..p of a18 list).
 W4c: 124 done (a18 through m16-ty4), frag W4c-4.json. Batches M/N/O in flight = a18 list lines 125-148 (next: 149+).
+W4c: 148 done (a18 through m19-ty4), frag W4c-5.json. P/Q/R in flight = a18 list lines 149-172 (next: 173+).
