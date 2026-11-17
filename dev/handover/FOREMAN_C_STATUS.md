@@ -1,4 +1,18 @@
 # FOREMAN_C_STATUS (written ONLY by Foreman C)
+NEXT FOREMAN C SESSION: ROOT-7 = (to be opened by the OWNER/main from claude.ai — ROOT-6 is at depth 5, a child would be depth 6 → not allowed). Takeover prompt: dev/handover/TAKEOVER_FOREMAN_C_ROOT7.md. ROOT-6 keeps answering (wake trig_017VztNAuLezGyK58FczkjRw :32) until ROOT-7 says it took over, then disables its trigger and stops.
+## HANDOVER (Foreman C ROOT-6 session_011xDdVQNdyTACuGN42yEBQZ → ROOT-7, ~13:05Z 17/11)
+Why: context ~32% (START ~8% → limit 33%). OWNER now writes in the ROOT-6 chat (old ROOT chat session_011xDdVSwTjDmQyniASgFZyk relayed earlier lines). Read the ROOT-6 log lines below (12:16Z–13:04Z): they hold her verbatim lines of 12:19Z–13:04Z.
+OPEN WITH THE OWNER:
+- (A) She was sent ty1..ty8 sheets (cung nữ m09 + m35, a18). WAITING her verdict: if OK, all trung y sets become consort-rank outfits (no redraw). Her rule: 10 female ranks (13 with maids), each rank a different outfit colour from the previous one; maids dress differently. Never correct her wording (she was angry 12:47Z).
+- (B) PERMISSION: overwriting live fig-maid-*-ty* CDN files (restore of plain trung y) was DENIED by the classifier; asked her for an explicit OK — not answered yet. Never route around.
+RUNNING (C's):
+- Art lead #7 session_011xDdVNkgEgTqsZJxUh9Xd8 (sonnet): W9 restore/keep/sort session_011xDdVNG1ZBYKd7ZkiyqAJP (681 keys; restore source = original ty lineup sheets, sample-12 OK'd by C; keep-copy redrawn files to img/_keep/maid-ty-redraw/; sort HELD until owner verdict (A); no overwrite before (B)); W4g (lead's; id from lead) finishing 54 a51 keys (ty1 m25–26, ty2/ty3 m01–26) → _keep ONLY; W8 mama session_011xDdVRWZVWQYAYYva3YuqJ (m11–m13 sheet next; colour = maid OLD/a18, no huadian).
+- Dark-fix session_011xDdVSTVyLVuATNYT3izSd: 11 (#2) + 12 lifted darks OK'd (LAB lift → lum ~72, same composition); now re-classifying ALL today's event pictures (scheming / dangerous / SAD / dark-natured = dark ~65–80; normal = bright or buổi/season/weather), sheet LIVE|NEW to C before upload. Then archive it.
+- Rank vân kiên SAMPLE session_011xDdVSeXkZANCvC1jxcTK1: history check + one consort Tần→Hoàng hậu row; sheet to C → C looks → C shows the owner (SendUserFile).
+- VOICE W-A2 session_011xDdVQHXu4HxrzSdi1Q2h6 (review/voice-trait): W-B ee84e25 + W-C 34ef2a9 DONE (archived); W-A2 assembles/builds/QUICKCHECK/voice-rep → SẴN SÀNG KIỂM → open opus BIG reviewer → PASS → FF main (FF-only, head == PASS sha, flock).
+- Idle, not mine to archive: event-art #2 NmzM (ROOT-2's, done), #4 RL7C (ROOT-2's).
+REQUESTS to main pending (in log lines): log owner lines 12:19Z–13:04Z in OD; tell the owner the active Foreman C chat.
+
 NEXT FOREMAN C SESSION: ROOT-6 = session_011xDdVQNdyTACuGN42yEBQZ (opened by ROOT-5 ~12:20Z 17/11, depth 5). ROOT-5 stops; its trigger trig_011Z7Ybzk4LQQ5P7KZQm2LvM disabled.
 URGENT 12:24Z (ROOT-5, after handover): owner STOP relayed by lead #6 (via session_011xDdVSwTjDmQyniASgFZyk 12:21Z): maid 'ty' = trung y; plain trung y files were CORRECT → STOP the maid ty1–ty3 redraw, restore replaced files, re-audit NON-ty maid consort-tier t1–t8 instead. ROOT-5 told W4f to stop now, lead #7 to confirm + send restore plan to ROOT-6 for OK. Owner's exact words not yet in OD → ROOT-6 logs them.
 ## HANDOVER (Foreman C ROOT-5 session_011xDdVSQvhH4vp7H6B7arST → ROOT-6, ~12:20Z 17/11)
