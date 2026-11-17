@@ -2742,6 +2742,15 @@ stranger card is not used for children (their card is drawn by jht). Old saves: 
 - Fog: stranger → nothing; known person, no fresh news → grey "?" seal; her own → always.
 - Data only through `window.kitEmotion(p)` → `{k,name,v,why,known}`; tooltip/alt "Tâm trạng: <tên> (<cause>)". Nobody draws another mood icon; no code-reshaped facial expressions (owner 22:50Z): the seal + ring are the only display of feelings.
 
+### 38.4 MOTION + LOOPS + EFFECT SPRITES — `kitEmoSeal` (review/kit-figure-mood, dev/build/jemoseal.js; owner 17/11 ~18:00Z + ~18:30Z (D))
+EVERY `img.kemo` (pcPort frames, person cards, lists, mood box, figure-head seal 28.8d) moves; no place draws its own motion.
+- Motion: class `kemo-m-<m>` from `KIT_EMOSEAL.keys[k].m`, live only while the seal is on screen (IntersectionObserver -> `kemo-live`), only with Cảnh động on, no reduced-motion, not Gọn (`OPT.fxon===false`). vui sway+glow · bình breathe · buồn droop · giận shake+heat · sợ tremble · ghen flicker · lo bob · đau wince · mưu glint · an bob · khóc droop · hờn flicker. Transform/filter only.
+- Frame loop (painted by Foreman C): `img/kit/emo-anim/<set><k>.webp` (set = "" / m- / mo-). Probed once; if present the seal plays it while on screen and returns to its still when it leaves; absent = still + CSS motion.
+- Effect sprite layer (painted): `img/kit/emo-fx/<k>.webp`, one sibling `img.kemofx` per live seal at `fxScale` 1.7 x the seal, pointer-events none; absent = no layer. Nothing is drawn in code.
+- Keys khoc + hon are in the seal map (names Khóc / Hờn); the mood logic (jemo EMO) decides when a person is in one.
+- Tap card (28.8d / jemo emoTipHTML): mood + cause ONLY when she knows it (`kitEmotion().causeKnown`, data-kemoc), else the line "Nguyên do chưa rõ"; the seal itself is shown to anyone who sees the person (never gated by intel).
+- Test: `MOTION=1 FAKE=1 node dev/test/fig-seal.js <W>x<H>@dpr <outdir>` (FAKE routes a loop + effect for gian to the still to prove the plumbing; prints per seal animation / fx).
+
 ## 42. CLOSE-BUGS RULES (owner 15/11 16:40Z–17:24Z, review/close-bugs) — `dev/build/jclose.js` (after jaudit, before j84)
 _(Renumbered by reviewer r6: this section was §40 on review/close-bugs; main already has §39 kitSeal, §40 APP ICON, §41 kitMeMark. Old refs "KIT §40.x" = §42.x.)_
 Each rule closes a whole class; the scans that prove it live in `dev/test/cb-*.{js,py}` (before/after tables in `dev/PROGRESS_close_bugs.md`).
