@@ -45,7 +45,7 @@ Object.assign(BAL,{looks:{
     tear-run when the cause is crying. */
  smuFx:{blush:{len:[0,.8,1.15,1.65],a:[0,.34,.4,.48],blot:[0,0,.3,.6]},lid:{len:[0,.5,.8,1.05],a:[0,.24,.34,.44]},
   tear:{len:[0,.5,1,1.7],a:[0,.24,.42,.6],w:[0,.026,.03,.04],n:[0,1,1,2]},cry:{len:.8,a:.36,w:.03},
-  lip:{sm:[0,0,.6,1],a:[0,0,.3,.4]},streak:[0,.35,.45,.55]}}});
+  lip:{sm:[0,0,.6,1],a:[0,0,.32,.46]},streak:[0,.35,.45,.55]}}});
 window.LOOKS_ART={};
 const LK_N={smu:["","Phấn son lem nhẹ","Phấn son lem nhem","Phấn son lem nhem nặng"],bui:["","Mặt lấm bụi","Bụi bám đầy mặt","Bụi bám đầy mặt"],
  muoi:["","Mặt lấm muội khói","Mặt lấm muội khói","Mặt đen muội khói"],moho:["","Mồ hôi làm phấn trôi","Mồ hôi làm phấn trôi","Mồ hôi đẫm, phấn trôi hết"],
@@ -237,8 +237,8 @@ function lkSmuDraw(im,v,lv,why,cols,box,seed){const W=im.naturalWidth,H=im.natur
  /* 3 lipstick smeared past the line: a soft halo along the lower lip, pushed a little toward one corner, + a feathered drag from that corner that fades out; no hard shapes */
  const sm=fx(F.lip.sm);if(sm>0){const side=h1(3)<.5?-1:1,O=P.slice(0,12);let xl=1e9,xr=-1e9,cL,cR;O.forEach(p=>{if(p[0]<xl){xl=p[0];cL=p}if(p[0]>xr){xr=p[0];cR=p}});const cr=side<0?cL:cR;
   const low=O.filter(p=>p[1]>=lc[1]-u*.01).sort((a,b)=>a[0]-b[0]),m=new Float32Array(N);
-  for(let i=0;i<low.length-1;i++)soft(m,along(low[i],low[i+1],u*.02,(x,y)=>[x+side*u*.02*sm,y+u*.03*sm,u*.045,.5]));
-  soft(m,along(cr,[cr[0]+side*u*.2*sm,cr[1]+u*.13*sm],u*.015,(x,y,t)=>[x,y,u*(.055-.03*t),.55*(1-.85*t)]));
+  for(let i=0;i<low.length-1;i++)soft(m,along(low[i],low[i+1],u*.02,(x,y)=>[x+side*u*.035*sm,y+u*.055*sm,u*.065,.6]));
+  soft(m,along(cr,[cr[0]+side*u*.27*sm,cr[1]+u*.16*sm],u*.015,(x,y,t)=>[x,y,u*(.07-.035*t),.65*(1-.85*t)]));
   layers.push([blur(m,u*.03),cSon,fx(F.lip.a)*1.7])}
  /* 4 lash-run: mascara / liner washed down the cheek from under each eye — thin, wavering, fading, grey-brown (vừa / nặng, or crying) */
  {let len=fx(F.tear.len),a=fx(F.tear.a),w=fx(F.tear.w),nn=fx(F.tear.n);if(why==="khoc"){len=Math.max(len,F.cry.len);a=Math.max(a,F.cry.a);w=Math.max(w,F.cry.w);nn=Math.max(nn,1)}
@@ -254,7 +254,10 @@ function lkSmuDraw(im,v,lv,why,cols,box,seed){const W=im.naturalWidth,H=im.natur
   for(let i=0;i<N;i++){const r=D[i*4],g=D[i*4+1],b=D[i*4+2];sk[i]=r>140&&r-g>=20&&g>=b&&r-b>=26&&.299*r+.587*g+.114*b>135?1:0}
   const bl=blur(blur(sk,u*.12),u*.05);
   for(let y=0;y<ch;y++){const fy=cl3((chin+.04*u-y)/(u*.16),0,1),fyy=fy*fy*(3-2*fy);
-   for(let x=0;x<cw;x++){const v=cl3((bl[y*cw+x]-.55)/.3,0,1),w=cl3((1.35*u-Math.abs(x-fcx))/(u*.1),0,1);face[y*cw+x]=v*v*(3-2*v)*fyy*w}}}
+   for(let x=0;x<cw;x++){const v=cl3((bl[y*cw+x]-.55)/.3,0,1),w=cl3((1.35*u-Math.abs(x-fcx))/(u*.1),0,1);face[y*cw+x]=v*v*(3-2*v)*fyy*w}}
+  /* the lips are not skin-coloured: a grown, softened lip zone is allowed too, so the smear around the mouth shows */
+  const lz=blur(paint(g=>{g.fillStyle="#000";g.beginPath();P.slice(0,12).forEach((p,i)=>{const q=[lc[0]+(p[0]-lc[0])*1.7,lc[1]+(p[1]-lc[1])*2.1];i?g.lineTo(q[0],q[1]):g.moveTo(q[0],q[1])});g.closePath();g.fill()}),u*.06);
+  for(let i=0;i<N;i++)face[i]=Math.max(face[i],Math.min(1,lz[i]*1.6))}
  const out=new Uint8ClampedArray(N*4);
  for(let i=0;i<N;i++){let A=0,R=0,G=0,B=0;const k=cl3(Lum(i)/Lref,.74,1.1);
   for(const[m,c,s]of layers){const a=cl3(m[i]*s*edge[i]*face[i],0,1);if(a<.004)continue;const oa=a+A*(1-a);R=(c[0]*k*a+R*A*(1-a))/oa;G=(c[1]*k*a+G*A*(1-a))/oa;B=(c[2]*k*a+B*A*(1-a))/oa;A=oa}
