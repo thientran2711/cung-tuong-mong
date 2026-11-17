@@ -53,3 +53,35 @@ But the row TEXT of that one list differs per seat, and on one seat it is false:
   "Tự tay làm lễ vật" Sức -10, "Cược" Bạc -20 and jcui cuAward `roll(30)` are typed too → BAL.fest with the one-core audit.
 - Pre-existing on main (co-op = top priority, own worker): coop-p2 B1 bribe (`spyFor`) + test hang; coop-b1 step 8 laydo.
 - j7On() reads the host's S: a servant host runs the old j8 festival, a consort guest then gets no board (worker's note stands).
+
+---
+## r2 re-check (11/17/2026) — review/coop-contest-fix-r1 @ db92d8de (worker r2 on top of a3b5e963)
+
+### VERDICT: FAIL — only because origin/main moved; the code fixes themselves pass
+Both r1 items are fixed on db92d8de (base main 08725411):
+1. FIXED. `rowsH7` names the player of any played (mg) row, applyRes keeps mg for every row, the startContest R0 friend row carries mg.
+   Shots (Fold host / iPad guest, `Yến tiệc đầu xuân: kết quả`): host reads `Hảo hữu của ta — múa: 60 phần tự chơi (…)`, guest reads
+   `Ta — múa: 60 phần tự chơi (…)`; same rows, same order, no formula split.
+2. RESOLVED (by design). kpPeople now holds the pulled friend entry. On the host she still shows the grey kit "unknown" portrait,
+   the same as the fogged `Phi ???` row: she is unmet there (her name is masked as "Hảo hữu của ta"). That is the shared kit rule
+   for unmet people, so it is consistent. Accepted.
+Tests on db92d8de: coop-contest 70/71 (`3 guest Sủng +3` got +2, the known week-drift flake) then 71/71; no section-5 week stall in
+either run · dc 26/26 · p2 with B1 skipped 35/35 · e2e 57/59 (`A frozen when B left`, relay presence timing) then 59/59 · core 9/9 ·
+solo 6/6 · quickcheck PASS (open 977 ms, old save ok, perf ≈ live).
+
+### Blocking: re-merge origin/main 744b80e7 (batch-2300, ~20 branches) — worker job, not a reviewer merge
+Merging main into db92d8de conflicts in j34.js, j71.js (8 hunks), j8.js, assemble.py, index.html and sw.js. These are ONE CORE clashes,
+not just text:
+a. **Two sources for jealousy.** Main's ghen-shown moved every contest/festival jealousy number to `BAL.ghen.*`
+   (`contest`, `contestTop`, `praise`, `festival`, `rankUp`) and prints them with `ghenN()` (shown == applied). This branch put the
+   same numbers in `BAL.fest.winGhen / fxGhen / giftGhen / ctGhen`. Keep ONE: take main's `BAL.ghen.*` + `ghenN()` in j71, j8
+   festival(), j34 contestEnd AND jcoopcontest (texts + applies), then drop the duplicate BAL.fest ghen keys. coop-contest-core.js
+   must assert the main keys.
+b. **j34 contestEnd seat rule.** Main's seatcap wraps contestEnd in `seatHas`/`seatComp`. Keep main's seat check together with the
+   branch's BAL.fest prize/Oán reads. Check that the co-op Tranh ghế crown (host-only, plus the jcoopworld write-back
+   `queen → rank 7`) also goes through the seat rule, so there is never a second Hoàng hậu.
+c. **j71 / j8:** take the branch's BAL.fest prize/bestow/gift reads and main's ghen reads; keep main's `roll` changes only where
+   they are BAL reads.
+d. Then rebuild, and re-run quickcheck (main now has CORE GATES: one-core-guard frozen list, rules-one-source, kit-conform; the new
+   jcoopcontest typed `Danh ±1` copies may trip the guard), coop-contest ×2, dc, core, solo, p2 (B1 skipped), e2e, and
+   coop-one-world.
