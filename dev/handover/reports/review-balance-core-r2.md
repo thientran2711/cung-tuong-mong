@@ -38,3 +38,25 @@ Successor task (one item only): on review/balance-core-r2 @ baff0824 vs origin/m
 (parallel shards under the box's CPU budget; the kchh.js harness is ~10 min/life, too slow). Report died < 3 y per side + causes + Fisher p.
 p ≥ 0.2 and the gap < ~8 points → PASS baff0824 stands; a real gap → FAIL with the cause (worker's guess: slower Tâm cơ / Y bậc for poison detection, BAL.art.gate.yCure).
 Everything else in r2 is checked (table above). Worktrees removed; no scratch left.
+
+## r2b — early-death gap re-measured → **PASS baff0824 STANDS (no longer conditional)**
+Reviewer session_01UV1Szk2uZjmbYdXJKyXFCH (opus; START_CTX ≈ 5 %), coordinator s28 → s30. No game code changed.
+
+**Setup.** Both builds assembled from their own tree (dev/build/assemble.py): branch review/balance-core-r2 **baff0824** vs origin/main **7abaf07a**. Runner = dev/measure/run_par.js (seeded Math.random per page, pictures/sound blocked) with inpage6.js sens bot + inty.js, HHSTOP on, 8-origin rotation from inpage6 (bd/cnv appear only via story routes), 3 pages per side, **same seeds** (seed0 1, page k → 1+101k). Each life is stopped at month 36 (record "SURV3") because only "ended before 3 years" is asked; this cut the run from ~17 h to ~2.5 h. First **150 lives per side** used. 0 page errors, 0 TIMEOUT / CRASH.
+
+**Bot harness fault found (both sides, measure tool only).** Since main 42936b3f (KIT §84 greyed options, need[] → c.off) the sens bot in dev/measure/inpage6.js picks greyed options (e.g. "Tố giác X" in "Sau vụ mưu hại" without evidence); chooseM refuses them, so the life sticks → TIMEOUT. First try: 45 of 52 lives TIMEOUT. Fix used in my scratch copy (one filter term): `okIdx=…filter(([c])=>!c.off&&!(c.fx&&…))`. **Main/measure owner should apply this one-line fix to dev/measure/inpage6.js** — every bot run on current main is otherwise mostly TIMEOUTs (the worker's 41/42-life run §11.4 predates 42936b3f).
+
+| ended before 3 years (150 lives each) | main 7abaf07a | branch baff0824 |
+|---|---|---|
+| all endings < 3 y | **27 (18 %)** | **20 (13 %)** — Fisher p **0.34** |
+| her own death < 3 y (not the Emperor's) | 15 | 12 — Fisher p **0.69** |
+| · poison (Trúng độc) | 2 | 5 — p 0.45 |
+| · childbirth (khó sinh / băng huyết) | 7 | 3 |
+| · illness (trọng bệnh, lao phổi, kiết lỵ) | 6 | 4 |
+| Emperor dies (illness / poison / assassin / stroke) → her life ends (killed in succession, xuất gia, xuất cung) | 12 | 8 |
+| reached Hoàng hậu | 0 | 0 |
+| survivors at 36 months: avg Tâm cơ / Y points | 100 / 0.3 | 95 / 0.2 |
+
+**Reading.** The r2 gap (2/42 vs 7/41) reversed with 150 lives: the branch ends early slightly LESS often, and no difference is near significance (p 0.34 / 0.69). The only cause higher on the branch is her poison death (5 vs 2, p 0.45, small counts). It is not driven by the new numbers the worker suspected: the bot takes no Y lessons on either side (Y ≈ 0, so BAL.art.gate.yCure / Y detection play no part), and Tâm cơ is near the cap on both by month 36 (95 vs 100). → No BAL lever to change. Watch item at go-live: poison deaths in the first 3 years (expected ≈ 1–3 %).
+
+Tools/output: scratch only (runner + patched inpage6 copy + analysis script), deleted after the verdict; worktrees removed.
