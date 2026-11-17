@@ -219,7 +219,8 @@ function feelBuoi(){if(!feelOn()||S.dead)return;try{feelActTick(S)}catch(e){cons
 /* one tick a buổi (render sees the buổi change; host / single player only) and the quiet life once a tuần */
 (function(){if(typeof render!=="function")return;const r0=render;render=function(){try{if(feelOn()&&!S.dead){const w=emoW(),b=w*10+(S.buoi||0);if(FEEL.b==null)FEEL.b=b;else if(FEEL.b!==b){const wOld=Math.floor(FEEL.b/10);FEEL.b=b;feelBuoi();if(w!==wOld)feelLife()}}}catch(e){console.error("jfeel",e)}return r0.apply(this,arguments)}})();
 /* ---------- ACTS: heavy level + bar past the line → one act from the ONE reaction table; a short khắc timer (the face shows it) + cooldown ---------- */
-(function(){try{const R=window.EA_REACT;if(!Array.isArray(R))return;const has=k=>R.some(r=>r.k===k&&r.who==="c");const T=(k,g,n,art,ok)=>{if(!has(k))R.push({k,g,who:"c",n,art,ok:ok||(()=>true),w:()=>1})};
+(function(){try{const R=window.EA_REACT;if(!Array.isArray(R))return;const has=k=>R.some(r=>r.k===k&&r.who==="c");/* g = "f-<feeling>": the group picker of jemoact (eaPick, its own cards / outbursts) never draws these; jfeel runs them by key (feelDo) */
+ const T=(k,g,n,art,ok)=>{if(!has(k))R.push({k,g:"f-"+g,who:"c",n,art,ok:ok||(()=>true),w:()=>1})};
  T("tron","so","Trốn trong phòng","xa-huong");T("caobenh","hothen","Cáo bệnh không dự","xa-huong");T("bodo","chan","Bỏ dở việc đang làm","xa-huong");
  T("bove","hon","Không tiếp, bỏ về","dap-tra-mia-h",p=>!!feelHonT(p));T("moi","tinhtu","Chủ động mời Hoàng thượng","dang-tra",p=>!!S.emp&&!(p===S?S.confined:p.confined));
  T("caugat","khochiu","Cáu gắt với người hầu","phat-vo-co-h",p=>eaH().staffOf(p).length>0);T("ngoithu","choang","Ngồi thừ người","xa-huong");

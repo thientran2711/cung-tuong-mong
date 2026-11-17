@@ -105,7 +105,9 @@ function eaSealG(p){try{const e=emoGet(p);return e&&e.k!=="binh"?eaGrpK(e.k):nul
 /* FEELINGS-18 (owner OD 17/11 ~19:25Z: acts at the HEAVY level + the bar line; reviewer mood-mem step0 note): the level of p's dominant feeling
    (jfeel feelLv: summed strength of its live causes) must reach BAL.feel.gate[w] — "card" for the acts she / an NPC CHOOSES to vent with,
    "force" (heavy) for what the feeling forces (outbursts, the "Nhịn" lock, extreme consequences). No jfeel → true (old rule). */
-function eaLvOk(p,w){try{if(typeof feelLv!=="function"||!BAL.feel||!BAL.feel.gate)return true;const e=emoGet(p);if(!e||e.k==="binh")return false;return feelLv(p,e.k)>=BAL.feel.gate[w]}catch(e){return true}}
+function eaLvOk(p,w){try{if(typeof feelLv!=="function"||!BAL.feel||!BAL.feel.gate)return true;const e=emoGet(p);if(!e||e.k==="binh")return false;
+ /* a feeling written straight into p.emo (legacy writers, old saves) has no causes yet: its own strength counts the same way (feelings18 lv bands) */
+ const sum=Math.max((typeof feelSums==="function"?feelSums(p)[e.k]:0)||0,e.v||0);const L=BAL.feel.lv;const lv=sum>=L[2]?3:sum>=L[1]?2:sum>=L[0]?1:0;return lv>=BAL.feel.gate[w]}catch(e){return true}}
 window.eaLvOk=eaLvOk;
 /* NPC gate (owner OD 17/11 ~18:33Z (1), same lines as hers): the group g of the dominant feeling counts only when the signed mood bar (moodBar) is past
    line L on its side (vui: bar ≥ L; every other group: bar ≤ −L) */
