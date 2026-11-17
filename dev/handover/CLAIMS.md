@@ -842,3 +842,4 @@
 | trait-rename-r1 LIVE bbb3b4ca (main 2de320ac → bbb3b4ca; rollback 2de320ac) | review/land-trait-rename-r1 | B | session_01N1tNP6NHm7FrTkoTUSGnpa | LIVE | 17/11 15:33Z |
 | MAKEUP LEVELS + XA XỈ (ORDER main s33 15:40Z; OD:L1638; opus BIG; brief briefs/makeup-lux.md) | review/makeup-lux | B | session_01N1tNP5TN5Kkuv2HtxmuwZD | RUNNING | 17/11 15:45Z |
 | pcard-facts-2: tip date format · left column clip · top block own scroll · one act-card picture box (OD ~15:25Z (6)) on pcard-facts-r1 d5f1abb2 | review/pcard-facts-2 | worker (s32/s33) | session_01UV1Szh5bDFLJ7XCmCJoDvp | READY 117373ff (report reports/pcard-facts.md) | 17/11 15:50Z |
+| toil-looks2-r5 PASS 97f57862 (v8 + v9 Vụng A + ONE CORE fix; LAND THIS) — waits owner OK ?v=9, then builder batch + CDN upload list (review-toil-looks2-r1.md); worker toil-looks4 + reviewer archived | review/toil-looks2-r5 | MAIN s33 | session_01UV1Szhz851NPoNbAv8MGF7 | PASS (owner OK pending) | 17/11 15:41Z |
