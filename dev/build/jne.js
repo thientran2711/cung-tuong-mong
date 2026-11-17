@@ -208,7 +208,7 @@ function morningAfter(){const M=S&&S.neMorn;if(!M||S.dead)return;if(M.d===wk())r
    opts:[{n:"Nhẫn nhịn",fx:{duc:A.bearDuc,danh:A.bearDanh},hideOut:true,hint:"giữ tiếng hiền đức, nhưng người ta cho là ngươi yếu thế",risk:"an toàn",go:()=>{log("Ta nhẫn nhịn, không đáp một lời.")}},
     {n:"Cười trừ",fx:{},hideOut:true,hint:"cho qua, không đổi gì",risk:"an toàn",go:()=>{log("Ta cười trừ cho qua.")}},
     {n:"Đáp lại",fx:{suc:A.replySuc},hideOut:true,hint:"đáp khéo thì thêm danh tiếng, thành bại khó đoán, hỏng thì nàng ta càng ghét",risk:"có rủi ro",
-     go:()=>{if(roll(BAL.toil?BAL.toil.replyWin:50)){apply({danh:BAL.toil?BAL.toil.replyDanh:2});log("Ta đáp lại khéo léo, người nghe gật gù.")}else{if(v){try{relAdd(S,v,-3)}catch(e){}v.ghen=cl((v.ghen||0)+2,0,100)}log("Ta đáp lại, không khí càng gượng.")}}}]})}}
+     go:()=>{if(roll(BAL.toil?BAL.toil.replyWin:50)){apply({danh:BAL.toil?BAL.toil.replyDanh:2});log("Ta đáp lại khéo léo, người nghe gật gù.")}else{if(v){try{relAdd(S,v,BAL.eff.jne.go)}catch(e){}v.ghen=cl((v.ghen||0)+2,0,100)}log("Ta đáp lại, không khí càng gượng.")}}}]})}}
 {const et1=endTurn;endTurn=function(){const r=et1.apply(this,arguments);try{morningAfter()}catch(e){console.error(e)}return r}}
 window.kneMorningAfter=morningAfter;
 
@@ -222,7 +222,7 @@ window.kneMorningAfter=morningAfter;
             Both warm/tender pictures were drawn by review/pic-dupes (night_gens.txt ksDhGD716B / jUXCWBYLD0).
      night-end card (this file)                 → ne-night-<warm|normal|cold> by the card tier.
    Same thresholds as the j8 text (6 / 3), so picture and words always agree. */
-const NT_TONE=s=>s>=6?"warm":s>=3?"normal":"cold";
+const NT_TONE=s=>s>=BAL.nightEnd.warm?"warm":s>=BAL.nightEnd.normal?"normal":"cold";
 /* pictures drawn by review/pic-dupes (reuse first): warm = he draws her close (ev-night2-warm), normal = hand in hand (ev-night2-tender) */
 const NT_PIC={warm:"ev-night2-warm",normal:"ev-night2-tender"};
 if(typeof kitEvBanner==="function"){const eb0=kitEvBanner;kitEvBanner=function(m){try{if(m&&m.pid==="night2"&&m.pp&&typeof m.pp.s==="number"){const tn=NT_TONE(m.pp.s);

@@ -15,7 +15,6 @@ function bell(){if(typeof auOk!=="function"||!auOk())return;try{const C=window._
  [[392,.22,4.5],[784,.08,3],[1176,.05,2],[523,.06,3.5]].forEach(([f,g,d])=>{const o=C.createOscillator(),v=C.createGain();o.type="sine";o.frequency.value=f;v.gain.setValueAtTime(0,t);v.gain.linearRampToValueAtTime(g*OPT.sfx,t+.02);v.gain.exponentialRampToValueAtTime(.0001,t+d);o.connect(v).connect(C.destination);o.start(t);o.stop(t+d+.1)})}catch(e){}}
 function reducedMotion(){try{return matchMedia("(prefers-reduced-motion: reduce)").matches||(typeof OPT!=="undefined"&&OPT.fxon===false)}catch(e){return false}}
 function curtain(){if(!S)return;if((S.buoi||0)===0&&S.lastWk!==wkKey()){S.lastWk=wkKey();dawn();return}buoiShift()}
-function buoiShift(){const c=$("curtain");if(!c)return;c.className="curtain shift b"+(S.buoi||0);c.innerHTML=`<span>${BUOI[S.buoi||0]}</span>`;void c.offsetWidth;c.classList.add("on");setTimeout(()=>{c.classList.remove("on")},reducedMotion()?150:1000)}
 function dawn(){const sum=wkSummary();S.wkSnap=wkSnap();let w=$("dawn");if(!w){w=document.createElement("div");w.id="dawn";w.className="dawn";document.body.appendChild(w)}
  const d=sum.D.filter(([,v])=>v).map(([k,v])=>`<span class="${v>0?"g":"r"}">${k} ${v>0?"+":""}${v}</span>`).join("")||`<span class="past">Không đổi</span>`;
  const lot=S.lot?`<div class="dlot"><b>Quẻ ${LV[S.lot.lv]}</b> · ${S.lot.dom}<small>${(LOTS[S.lot.i]||[])[2]||""}</small><span class="ef ${LVB[S.lot.lv]<0||(S.lot.dom==="Hung"&&S.lot.lv>=3)?"r":LVB[S.lot.lv]>0?"g":"n"}">${lotEffect(S.lot)}</span></div>`:"";

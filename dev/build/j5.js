@@ -26,7 +26,7 @@ function gCam(b,lv,end){const L=["Cung","Thương","Giốc","Chủy"],N=16,fall=
   for(const n of notes){if(n.gone)continue;const y=(t-(n.t-fall))/fall*HIT;
    if(!n.el&&y>-20){n.el=document.createElement("i");lanes[n.l].appendChild(n.el)}
    if(n.el){n.el.style.transform=`translateY(${y}px)`;if(y>H+10){n.el.remove();n.el=null;n.gone=true}}}
-  if(t>notes[N-1].t+fall*0.3+500){done=true;return end(hits>=13?3:hits>=8?2:1)}
+  if(t>notes[N-1].t+fall*0.3+500){done=true;return end(hits>=BAL.cut.rhythm[1]?3:hits>=BAL.cut.rhythm[0]?2:1)}
   raf=requestAnimationFrame(frame)}
  raf=requestAnimationFrame(frame);
  function tap(l){if(done)return;const t=performance.now()-t0;const n=notes.find(x=>!x.gone&&x.l===l&&Math.abs(x.t-t)<180);
