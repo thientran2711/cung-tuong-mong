@@ -854,3 +854,5 @@
 | loading-words-2-r1 PASS 64e303045 → builder batch s32a (replaces d4318833); worker + reviewer archived | review/loading-words-2-r1 | MAIN s34 | session_01UV1SzgWoEmnjTTEv7UgBNP | PASS → BATCH | 17/11 16:26Z |
 | tinbao-ui-r2r PASS 05e82176 (lands after ag-all-2) → r3 "Tai mắt báo" + Tai mắt list (OD 16:20Z (e), 16:25Z) | review/tinbao-ui-r3 | MAIN s34 | session_01UV1Szjhrq5VUWD5Haiagxz | RUNNING | 17/11 16:26Z |
 | BISECT G4 50-coop-one-world seed 7 "merge differs from the host" on plain main 7e0250ec (pre-existing; candidates staff-root-fix-1 / trait-rename / mg-snap / world-events-2) | (diagnose) | D | (D opens) | ORDERED | 17/11 16:26Z |
+| STAFF CAPS COUNT (ORDER main s33 15:50Z; OD:L1636; opus; measure only; brief briefs/staff-caps-count.md) | review/staff-caps-count | B | (opening-a) | RUNNING | 17/11 16:40Z |
+| NEW LOOKS looks-2 (ORDER main s34 16:30Z; OD 16:20Z (g); opus BIG; brief briefs/looks-2.md) | review/looks-2 | B | (opening-b) | RUNNING | 17/11 16:40Z |
