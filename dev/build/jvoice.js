@@ -85,11 +85,28 @@ const untag=x=>String(x).replace(TAG,"");
 function older(a,b){try{return (a&&a.age||0)>=(b&&b.age||0)}catch(e){return true}}
 function kSay(sp,ls,s,o){if(s==null)return s;s=String(s);if(!/\{(?:[Gg]oi|[Xx]ung|[Tt]en)\}/.test(s))return s;const a=kAddr(sp,ls,o);
   return s.replace(/\{goi\}/g,a.goi).replace(/\{Goi\}/g,cap(a.goi)).replace(/\{xung\}/g,a.xung).replace(/\{Xung\}/g,cap(a.xung)).replace(/\{ten\}/g,a.ten).replace(/\{Ten\}/g,cap(a.ten))}
+/* ---- VOICE BY TÍNH TÌNH (owner 17/11 06:05Z): kTone(x) → the Tính tình nết of a person, or null (an unnamed servant).
+   The Emperor / Thái hậu are mapped by BAL.voice.tone; a male-only nết by BAL.voice.tone.alias. Never draws a nết for a nameless literal. ---- */
+function kTone(x){try{const T=V().tone,w=who(x);let t=null;
+  if(w.k==="emp"){for(const k of (S.emp&&S.emp.traits)||[]){if(T.emp[k]){t=T.emp[k];break}}}
+  else if(w.k==="th")t=T.th[S.thTrait||"Ân cần"]||null;
+  else{let p=w.me?S:w.o||(x&&typeof x==="object"?x:null);
+   if(w.k==="hh"&&!p&&typeof queenP==="function")p=queenP();
+   if(p&&(p===S||p.net||p.id!=null||p.name)){const n=traitsOf(p)[0];if(n&&typeof n==="string")t=n}}
+  return t?(T.alias[t]||t):null}catch(e){return null}}
+const TONES=["Ân cần","Lạnh lùng","Nóng nảy","Điềm tĩnh","Nhiều chuyện","Kín đáo","Kiêu ngạo","Khiêm nhường"];
+/* a pool object keyed by tone: {"Ân cần":[…] | {warm,cool,cold,any}, "Lạnh lùng":…, any:[…]}; the speaker's tone picks the sub-pool, the mood still shades inside it */
+const isTonePool=p=>p&&!Array.isArray(p)&&TONES.some(t=>p[t]);
 /* ---- varied pools, no repeat within BAL.voice.noRepeat tuần ---- */
 const REG={};
 function now(){try{return typeof wk==="function"?wk():0}catch(e){return 0}}
-function kLine(key,pool,o){o=o||{};let L=pool;if(!Array.isArray(L)){const m=o.m||(o.sp!=null||o.ls!=null?kAddr(o.sp,o.ls,o).m:"cool");L=(L[m]&&L[m].length?L[m]:[]).concat(L.any||[]);if(!L.length)L=[].concat(...Object.values(pool))}
-  REG[key]=pool;if(!L.length)return"";
+function kLine(key,pool,o){o=o||{};let L=pool;
+  /* tone pool: pick the sub-pool of the speaker's (o.t) / the person's the line is ABOUT (o.about) / the speaker's (o.sp) Tính tình; memory is kept per tone */
+  if(isTonePool(pool)){const t=o.t!==undefined?o.t:kTone(o.about!=null?o.about:o.sp),tn=pool[t]?t:pool[V().tone.dflt]?V().tone.dflt:TONES.find(x=>pool[x]);
+    const P=pool[tn];REG[key]=pool;key=key+"|"+tn;if(Array.isArray(P))pool=L=P;
+    else{const m=o.m||(o.sp!=null||o.ls!=null?kAddr(o.sp,o.ls,o).m:"cool");pool=L=(P[m]&&P[m].length?P[m]:[]).concat(P.any||[]);if(!L.length)pool=L=[].concat(...Object.values(P))}}
+  if(!Array.isArray(L)){const m=o.m||(o.sp!=null||o.ls!=null?kAddr(o.sp,o.ls,o).m:"cool");L=(L[m]&&L[m].length?L[m]:[]).concat(L.any||[]);if(!L.length)L=[].concat(...Object.values(pool))}
+  if(!REG[key.split("|")[0]])REG[key]=pool;if(!L.length)return"";
   {const bd=o.band||kBand(o.ls!=null?o.ls:S);const F=L.filter(x=>fits(x,bd));L=F.length?F:L.filter(x=>!TAG.test(x));if(!L.length)return""}
   /* co-op (owner CO-OP FIRST): a line of a SHARED event (o.shared = a seed both seats know) is not drawn at random from her own memory:
      it rotates with the week + buổi, so both seats show the same line, and no line comes back within L.length buổi */
@@ -126,7 +143,16 @@ OUT.hh.no.push("[lo]Hoàng hậu hỏi ma ma ta ở cung nào, rồi thôi chẳ
 OUT.emp.ok.push("[lo]Hoàng thượng hỏi tên ta, rồi khẽ nhắc lại như để nhớ","[mid]Hoàng thượng hứa mai sẽ ghé cung ta","[hi]Hoàng thượng kể ta nghe chuyện triều chính, như với người tâm phúc","[hq]Hoàng thượng bàn với ta việc lục cung, giọng ôn hòa");
 OUT.emp.no.push("[lo]Hoàng thượng nhìn ta như nhìn người xa lạ","[mid]Hoàng thượng hỏi qua chuyện cung ta rồi thôi","[hi]Hoàng thượng chỉ bảo ta về nghỉ, giọng nhạt","[hq]Hoàng thượng bảo việc lục cung để mai hãy bàn");
 OUT.fallen=OUT.rival;OUT.ksp=OUT.maid;OUT.ty=OUT.any;OUT.elder=OUT.maid;OUT.man=OUT.any;OUT.kid=OUT.any;
-function kOutcome(kind,ok){const P=OUT[kind]||OUT.any;return kLine("out:"+(OUT[kind]?kind:"any")+":"+(ok?"ok":"no"),ok?P.ok:P.no)}
+/* kOutcome(kind, ok, p): p = the stage person ({kind, ref}) — his / her Tính tình picks the line pool (jtone.js TONE_POOL: rival, maid, th, hh, emp; ty / man / kid / any keep the mood pools) */
+function kOutcome(kind,ok,p){const TP=window.TONE_POOL||{},tk={rival:"rival",fallen:"rival",maid:"maid",ksp:"maid",elder:"maid",th:"th",hh:"hh",emp:"emp"}[kind],tp=tk&&TP[tk+(ok?"Ok":"No")];
+  /* a host (Thái hậu / Hoàng thượng / Hoàng hậu) speaks to her: sp = the host, so {goi}/{xung} in a pooled line come from kAddr */
+  let host=null;if(kind==="th")host="th";else if(kind==="emp")host="emp";else if(kind==="hh")host=(p&&p.ref&&p.ref.queen?p.ref:null)||(typeof queenP==="function"&&queenP())||"hh";
+  const about=host||(p?(p.ref||(p.kind==="maid"?S.maid:null)):null);
+  if(tp){/* the rank-band lines of the old pool (a line only for her band) stay, added to every tone */
+   const OP=OUT[kind],bands=OP?(ok?OP.ok:OP.no).filter(x=>TAG.test(x)):[];let pool=tp;
+   if(bands.length){pool={};for(const t in tp)pool[t]=tp[t].concat(bands)}
+   return kLine("out:"+tk+":"+(ok?"ok":"no"),pool,host?{about,sp:host,ls:S}:{about})}
+  const P=OUT[kind]||OUT.any;return kLine("out:"+(OUT[kind]?kind:"any")+":"+(ok?"ok":"no"),ok?P.ok:P.no)}
 window.kOutcome=kOutcome;
 /* ---- ONE gain / loss text, TWO forms (owner 16/11 ~21:05Z, verbatim in OD): SHORT = the small result card at the bottom after each act
    (#rtoast: info only), LONG (literary) = event panels, TIN, Sổ ghi, Tuần lục. One string carries both: the literary part is wrapped in
@@ -142,15 +168,15 @@ function kLitLog(seq0,lit){try{if(!lit||!S||!S.logs||!S.logs.length||(S.logSeq||
 /* ---- SIGNATURE HABIT of a consort (palace-voice phase D): each consort has one small habit by her trait (TRAITS j1), fixed for her life
    (picked from her id, so both co-op seats see the same one, nothing stored); shown in the long form only (event panels), every other
    occurrence (week parity) so it marks her without wearing out. kHabit(v) → sentence or "" */
-const HABIT={"Hiểm độc":["Nàng ta khẽ vuốt chiếc hộ giáp bạc trên ngón út","Nàng ta lần chuỗi ngọc trên cổ tay, mắt không rời ta","Nàng ta mỉm cười, tay mân mê túi hương bên hông","Nàng ta khẽ thổi chén trà, mà chẳng uống"],
+const HABIT={"Xảo quyệt":["Nàng ta khẽ vuốt chiếc hộ giáp bạc trên ngón út","Nàng ta lần chuỗi ngọc trên cổ tay, mắt không rời ta","Nàng ta mỉm cười, tay mân mê túi hương bên hông","Nàng ta khẽ thổi chén trà, mà chẳng uống"],
  "Kiêu ngạo":["Nàng ta phe phẩy chiếc quạt lông công, cằm hơi ngẩng","Nàng ta đưa tay chỉnh lại cây trâm phượng trên tóc","Nàng ta liếc ta một cái rồi nhìn đi chỗ khác","Nàng ta gõ nhẹ hộ giáp vàng lên tay ghế"],
- "Hiền lành":["Nàng ta khẽ cười, hai má ửng hồng","Nàng ta vén lọn tóc mai, giọng nhỏ nhẹ","Nàng ta nắm chiếc khăn tay thêu hoa lan","Nàng ta cúi đầu, tay đặt ngay ngắn trước người"],
- "Đa nghi":["Nàng ta liếc nhanh về phía người hầu của ta","Nàng ta khẽ nhíu mày, ngón tay gõ lên mép bàn","Nàng ta nhìn quanh một lượt rồi mới nói","Nàng ta nheo mắt, như cân từng chữ"],
+ "Ân cần":["Nàng ta khẽ cười, hai má ửng hồng","Nàng ta vén lọn tóc mai, giọng nhỏ nhẹ","Nàng ta nắm chiếc khăn tay thêu hoa lan","Nàng ta cúi đầu, tay đặt ngay ngắn trước người"],
+ "Kín đáo":["Nàng ta liếc nhanh về phía người hầu của ta","Nàng ta khẽ nhíu mày, ngón tay gõ lên mép bàn","Nàng ta nhìn quanh một lượt rồi mới nói","Nàng ta nheo mắt, như cân từng chữ"],
  "Tham vọng":["Nàng ta đưa mắt về phía Càn Thanh cung","Nàng ta mỉm cười, ánh mắt tính toán","Nàng ta vuốt thẳng tà áo, dáng đứng thẳng tắp","Nàng ta khẽ gật đầu, như đã ghi nhớ điều gì"],
- "Nhu mì":["Nàng ta cúi đầu, giọng nhỏ như muỗi kêu","Nàng ta mân mê vạt áo, chẳng dám ngẩng lên","Nàng ta đỏ mặt, nép sau người hầu","Nàng ta nói xong vội lấy khăn che miệng"]};
+ "Khiêm nhường":["Nàng ta cúi đầu, giọng nhỏ như muỗi kêu","Nàng ta mân mê vạt áo, chẳng dám ngẩng lên","Nàng ta đỏ mặt, nép sau người hầu","Nàng ta nói xong vội lấy khăn che miệng"]};
 function hsh(x){let h=0;x=String(x);for(let i=0;i<x.length;i++)h=(h*31+x.charCodeAt(i))|0;return Math.abs(h)}
-function kHabit(v,always){try{if(!v||v===S||!HABIT[v.trait])return"";if(!always&&now()%2)return"";const L=HABIT[v.trait];return L[hsh(v.id!=null?v.id:v.name)%L.length]}catch(e){return""}}
+function kHabit(v,always){try{if(!v||v===S||!tv(HABIT,v))return"";if(!always&&now()%2)return"";const L=tv(HABIT,v);return L[hsh(v.id!=null?v.id:v.name)%L.length]}catch(e){return""}}
 window.kHabit=kHabit;window.kHabits=()=>HABIT;
 window.kGL=kGL;window.kShort=kShort;window.kLong=h=>String(h==null?"":h);window.kLitLog=kLitLog;window.kBand=kBand;
-window.kAddr=kAddr;window.kSay=kSay;window.kLine=kLine;window.kLines=()=>REG;window.kVoiceWho=who;window.kSpk=kSpk;
+window.kTone=kTone;window.kAddr=kAddr;window.kSay=kSay;window.kLine=kLine;window.kLines=()=>REG;window.kVoiceWho=who;window.kSpk=kSpk;
 })();

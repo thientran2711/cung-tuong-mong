@@ -168,4 +168,4 @@ KG82_KIND.tho={e:"calli",n:"Thơ",t:"Thư pháp đồ nét",how:"Đặt ngón ta
 KG82_KIND.doi={e:"doiline",n:"Câu đối",t:"Đối nét bút",how:"Bức liễn bên trái có các nét bút. Kéo nét trong khay vào ô bên phải, ngang hàng với nét trái: nét phải là hình lật gương của nét trái. Đặt sai thì nét tự quay về. Có nút Gợi ý. 3 câu đối. Làm nhanh thì được trọn phần."};
 KG82_SPR.tho=["tho-slip","ve-brush","ve-inkstone"];KG82_SPR.doi=["tho-slip"];
 KG82_MGL.thi=["Thi: thư pháp đồ nét","tho"];
-try{if(window.K91)window.K91.engines=Object.keys(KG82_ENG)}catch(e){}
+/* K91.engines is a live getter (j91, jreg): nothing to refresh here */

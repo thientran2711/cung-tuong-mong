@@ -54,7 +54,7 @@ Object.assign(MS67,{
     if she was raised before this chapter, a shared arc takes its place (chAdvance67 below) */
  len14:{t:()=>"Từ kẻ hầu thành tiểu chủ",
   g:()=>"Được Hoàng thượng để mắt mà phong Đáp ứng thì xong chương, có thưởng. Đến lúc ấy, các chương sau của đời người mới mở.",
-  steps:m=>[[S.srv&&S.srv.risen?"Được phong Đáp ứng":`Được phong Đáp ứng (Hoàng thượng để ý ${S.nt||0}/${BAL.ntRise.at})`,!!(S.srv&&S.srv.risen)]],
+  steps:m=>[[S.srv&&S.srv.risen?"Được phong Đáp ứng":(typeof amOn==="function"&&amOn()?`Được phong Đáp ứng (Hoàng thượng để ý ${S.nt||0})`:`Được phong Đáp ứng (Hoàng thượng để ý ${S.nt||0}/${BAL.ntRise.at})`),!!(S.srv&&S.srv.risen)]],
   any:1,get fx(){return{danh:F14D().len}},end:"Ngươi đã thành tiểu chủ.",get rw(){return["court",F14R().len]}}});
 /* "all2": every real step (not "t") must be done, or the time step */
 (function(){const d0=msDone67;msDone67=function(m){const d=MS67[m.id];if(d&&d.all2){const st=d.steps(m),real=st.filter(x=>!x[2]);return real.every(x=>x[1])||st.some(x=>x[2]&&x[1])}return d0.apply(this,arguments)}})();
@@ -110,6 +110,25 @@ function f14Info(){if(!f14())return null;const c=S.st.ch,n=Math.max(1,c.n||1),pi
  const rows=F14.parts.map((p,i)=>{const st=c.all||i<pi?"đã qua":i===pi?`đang ở chương ${n}`:"chưa tới";return[`Phần ${["đầu","giữa","cuối"][i]}`,`Chương ${p.a}–${p.b} · ${p.t}${i===1&&road?` «${road}»`:""} · ${st}`,i===pi&&!c.all?"g":""]});
  return {n,max:F14.max,part:P.t,partNo:pi,left:c.all?0:F14.max-n,road,rows}}
 window.f14Info=f14Info;
+/* OLD SAVES (review/story-frame, story bot fault 1): a life of an origin whose STORY entry came after j67 (jorigins bd: wrapped by the jreg
+   sweep, W.__late) could be saved with NO chapter frame (S.st without v2). On load the frame starts at the chapter that life has reached:
+   tutorial chapters whose months are already over close «Lỡ dịp» (no reward, exactly what their time limit would have done), the running
+   one keeps only the months it has left, then the story goes on as in a new life. Runs once (afterwards v267() is true): no double chapter.
+   The save holds no palace-entry month: a life that began in the palace entered at month 0; at home (f14Home) the tutorial just waits. */
+function f67Mig(){try{if(!S||S.dead||!S.origin||!S.st||v267())return 0;const k=S.origin.k,W=STORY[k];if(!W||!W.__late||!W.__old)return 0;
+ const q0=quiet,ls0=S.logSeq||0;quiet=true;let closed=0;
+ try{a67init(k);const c=S.st.ch;if(!c)return 0;const el=Math.max(0,S.turn||0);let used=0;
+  for(let g=0;g<6&&S.st.ms&&F14T.test(S.st.ms.id)&&!f14Home();g++){const m=S.st.ms,d=MS67[m.id],L=d&&d.lim?d.lim():0;if(!L)break;
+   if(el>=used+L){c.past.push({ms:m.id,t:d.t(),tag:"Lỡ dịp",k:0,n:c.n,late:1,mig:1});S.st.ms=null;used+=L;closed++;chAdvance67(null);continue}
+   m.t0=S.turn-(el-used);break}}
+ finally{quiet=q0;/* the chapter lines written while catching up would carry today's date: one summary line instead */
+  try{const d=(S.logSeq||0)-ls0;if(d>0)S.logs.splice(0,Math.min(d,S.logs.length))}catch(e){}}
+ syncMain67();const c=S.st.ch,m=S.st.ms;const now=m&&MS67[m.id]?MS67[m.id].t():S.st.M&&ARC67[S.st.M.a]?ARC67[S.st.M.a].t:"";
+ log(`<b>Mệnh truyện mở lại.</b> Đời này đang ở chương ${c.n}${now?` «${now}»`:""}${closed?`; ${closed} chương đầu đã qua hạn, khép lại không thưởng`:""}.`);
+ return 1}catch(e){console.error("f67Mig",e);return 0}}
+window.f67Mig=f67Mig;
+/* after a save loads (normAll); a new life is already framed by then (STORY init runs right after normAll), so this is a no-op there */
+(function(){const n0=normAll;normAll=function(){const r=n0.apply(this,arguments);try{setTimeout(()=>{if(f67Mig())try{render()}catch(e){}},0)}catch(e){}return r}})();
 /* the servant road panel (panel67, j67): same words for the 14-chapter frame */
 (function(){const p0=panel67;panel67=function(){let h=p0.apply(this,arguments);try{const F=f14Info();if(!F)return h;
  const pn=F14.parts.map(p=>f14Nv(p.b-p.a+1));
@@ -144,8 +163,8 @@ function f14Foe(){try{if(!f14()||!S.foe)return;const e=rivals.find(v=>v.name===S
    how the cast person feels about her (thiện cảm, oán), that person's nature, her own Tâm cơ and Đức, and how many consorts bear her a
    grudge (who is watching). f14Parts lists the parts with the words the result card uses to say why an ending turned. */
 function f14Parts(A){const P=[];if(!f14())return P;const C=BAL.st14.ctx;try{const v=rv67(A,"v")||rv67(A,"v2");
- if(v){const a=cl(Math.round((aff(v,S)||0)/C.aff),-C.affCap,C.affCap),o=cl(Math.round((oan(v,S)||0)/C.oan),0,C.oanCap),t=BAL.st14.tr[v.trait]||0;
-  if(a)P.push([a,a>0?`${v.name} có thiện cảm với ta`:`${v.name} không ưa ta`]);if(o)P.push([-o,`${v.name} oán ta`]);if(t)P.push([t,`${v.name} tính ${String(v.trait).toLowerCase()}`])}
+ if(v){const a=cl(Math.round((aff(v,S)||0)/C.aff),-C.affCap,C.affCap),o=cl(Math.round((oan(v,S)||0)/C.oan),0,C.oanCap),tk=traitsOf(v).find(k=>BAL.st14.tr[k]!=null),t=tk?BAL.st14.tr[tk]:0;
+  if(a)P.push([a,a>0?`${v.name} có thiện cảm với ta`:`${v.name} không ưa ta`]);if(o)P.push([-o,`${v.name} oán ta`]);if(t)P.push([t,`${v.name} tính ${String(tk).toLowerCase()}`])}
  const tm=Math.round(((S.tamco||0)-C.tam[0])/C.tam[1]),du=Math.round(((S.duc||0)-C.duc[0])/C.duc[1]);
  if(tm)P.push([tm,tm>0?"Tâm cơ của ta đủ sâu":"Tâm cơ của ta còn non"]);if(du)P.push([du,du>0?"Đức của ta được người kính":"Đức của ta còn mỏng"]);
  const foes=liveRivals(true).filter(x=>(oan(x,S)||0)>=C.foeOan).length;if(foes)P.push([-Math.min(C.foeCap,foes),`${f14Nv(foes)} người trong cung oán ta, đang dõi theo`])}catch(e){}return P}

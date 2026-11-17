@@ -56,6 +56,10 @@ function arcReveal67(t,A){try{if(typeof k61Know!=="function"||!A||typeof t!=="st
 /* palace voice: {goi}/{Goi} = how the beat's speaker w calls her, {xung}/{Xung} = the speaker's self word (jvoice kAddr, one core) */
 function sp67(w,A){try{if(w==="emp"||w==="th"||w==="hh")return w;if(w==="v"||w==="v2"){const v=rv67(A,w);if(v)return v}if(w==="eun")return{srv:"m"};if(w==="doc")return{role:"x",rw:"quan"}}catch(e){}return{srv:"f"}}
 function fill67(s,A,w){if(typeof s==="string")arcReveal67(s,A);return String(typeof s==="function"?s(A):s||"").replace(/\{([Gg]oi|[Xx]ung)\}/g,(m,k)=>{const a=kAddr(sp67(w,A),S);const x=k.toLowerCase()==="goi"?a.goi:a.xung;return k[0]===k[0].toUpperCase()?x.charAt(0).toUpperCase()+x.slice(1):x}).replace(/\{(\w+)\}/g,(m,k)=>TOK67[k]?TOK67[k](A):m)}
+/* VOICE BY TÍNH TÌNH (W-C): after the hand-written beat text, one sentence in the tone of the beat's speaker (a rival v / v2, Hoàng hậu, her maid) waiting for her answer (jtone_c.js beatWait) */
+function wait67(b,A){try{const w=b&&b.w;if(!window.TONE_POOL||!TONE_POOL.beatWait)return"";let p=null,n="";
+ if(w==="v"||w==="v2"){p=rv67(A,w);n=p&&p.name}else if(w==="hh"&&typeof qOn==="function"&&qOn()){p=rivals[0];n="Hoàng hậu"}else if(w==="maid"&&S.maid){p=S.maid;n=S.maid.name}
+ if(!p||!n)return"";const l=kLine("beat67:wait",TONE_POOL.beatWait,{about:p});return l?` <span class="past">${n} ${l}.</span>`:""}catch(e){return""}}
 function who67(w,A){try{switch(w){
  case"v":case"v2":{const v=rv67(A,w);return v?pv(v):null}
  case"th":return S.thDead?null:pTH();case"emp":return pEmp();case"hh":return qOn()?pv(rivals[0]):null;case"maid":return S.maid?pMaid():null;case"me":return pMe();
@@ -132,7 +136,7 @@ function ap67(o){if(!o)return;apply(o);if(S.tin!=null)S.tin=cl(S.tin,0,100);if(S
 function txt67(o){return Object.assign({},o||{})}
 PEND.j67=p=>{if(!v267())return null;const A=th67(p.t);if(!A||A.a!==p.a||A.cur!==p.b||A.done)return null;const a=ARC67[A.a],b=beatDef67(A,p.b);if(!b)return null;
  const O=opts67(A,b);const step=A.i+1,n=A.seq.length;
- return {who:who67(b.w,A),t:`<b>${a.t}</b> <span class="past">· hồi ${step}/${n}</span><br>${fill67(b.t,A,b.w)}`,o:O.map((o,i)=>{const od0=p.o[i]==null?100:p.o[i],sure=od0>=100;
+ return {who:who67(b.w,A),t:`<b>${a.t}</b> <span class="past">· hồi ${step}/${n}</span><br>${fill67(b.t,A,b.w)}${wait67(b,A)}`,o:O.map((o,i)=>{const od0=p.o[i]==null?100:p.o[i],sure=od0>=100;
   const cm=t=>String(t).replace(/, /g," – "),G=t=>t?`<span class="g">${cm(t)}</span>`:"",Rd=t=>t?`<span class="r">${cm(t)}</span>`:"";const gain=[fmt(o.w||{}),G(fill67(o.wx||"",A)),o.sc>0?`Lợi thế +${o.sc}`:""].filter(Boolean).join(" · ");
   const end=o.e?(Array.isArray(o.e)?o.e:[o.e,o.e]):null;/* an ending no roll decides (sure option, or the same ending either way) can still turn in a 14-chapter life (jst14 f14Hold, OD:L1253).
      VANPHONG: the act ladder (Liều…Nắm chắc) is ONLY the act's own success odds (a sure act carries no word); the chance that the ending turns is a side
@@ -188,9 +192,11 @@ function hint67(A){if(!A)return"";if(A.done)return A.tag;const b=A.cur?beatDef67
  if(A.cur)return `Đang chờ ngươi quyết: ${fill67(b.h||"",A)}`;const dm=Math.max(0,A.due-S.turn);
  return `Sắp tới: ${fill67(b.h||"",A)}${dm?` (khoảng ${dm} tháng nữa)`:" (tháng này hoặc tháng sau)"}`}
 /* wrap67(k) = story67Wrap(k) (both names kept, batch-0232: road-b2 calls wrap67 from jroad.js at load end, tut-followups calls story67Wrap from jorigins) */
-/* wrap one origin's v1 story slot into the chapter frame; idempotent. An origin registered by a module that loads after j67
-   (jorigins bd) calls story67Wrap itself (fix tut-followups: bd had no frame, so no chapters 1–3) */
-function story67Wrap(k){const old=STORY[k];if(!old||old.__old)return;const W={};
+/* wrap one origin's v1 story slot into the chapter frame; idempotent. Every STORY entry is wrapped, also one a module after j67 adds
+   (jorigins bd): regEach (jreg) runs the wrap again at the script end and at every life start (review/story-frame, story bot fault 1;
+   before, bd had no frame in 28/28 lives and jorigins had to call the wrap by hand). late = the entry came after j67 loaded (old saves of
+   such an origin may hold a life with no frame: f67Mig below starts it on load). */
+function story67Wrap(k,late){const old=STORY[k];if(!old||old.__old)return;const W={};if(late)W.__late=1;
  const d=(n,f)=>Object.defineProperty(W,n,{get:f,enumerable:true,configurable:true});
  d("t",()=>v267()&&S.st.ch?(QUEST67[k]||QUEST67.tt).t:old.t);
  d("goal",()=>{if(!v267()||!S.st.ch)return old.goal;const m=S.st.ms,M=S.st.M,c=S.st.ch;if(m){const d0=MS67[m.id];return `Chương ${c.n}: ${d0.t()}. ${d0.g()}`}return M?`Chương ${M.chap||1}: ${ARC67[M.a].t}. ${fill67(ARC67[M.a].g,M)}`:obj67()});
@@ -199,9 +205,9 @@ function story67Wrap(k){const old=STORY[k];if(!old||old.__old)return;const W={};
  d("hint",()=>v267()?(()=>obj67()):old.hint);
  d("month",()=>v267()?a67Month:old.month);
  d("acts",()=>v267()?(()=>[]):old.acts);
- W.init=function(){if(k==="td"&&old.init)old.init();a67init(k)};
+ W.init=function(){try{regSweep()}catch(e){}if(k==="td"&&old.init)old.init();a67init(k)};
  W.__old=old;STORY[k]=W;try{story67Acts(k)}catch(e){}}
-Object.keys(STORY).forEach(story67Wrap);
+regEach(STORY,(k,v,late)=>story67Wrap(k,late),"STORY wrap");
 function wrap67(k){return story67Wrap(k)}
 (function(){const s0=storyMonth;storyMonth=function(){if(v267())return a67Month()||"";return s0.apply(this,arguments)}})();
 if(typeof srvMonth==="function")(function(){const m0=srvMonth;srvMonth=function(){const r=m0.apply(this,arguments)||"";if(S&&!S.dead&&v267())return r+(a67Month()||"");return r}})();
@@ -1623,10 +1629,13 @@ ARC67.s_ban={o:"*",ok:nsrv67,t:"Kẻ thù hóa tri kỷ",w:"v",sj:"mối thù v�
   win2:{k:1,tag:"Đổi phe đúng lúc",t:"Ngươi đứng về phe thắng. Nhưng {v} sẽ không bao giờ quên.",fx:{tamco:3,danh:3},go:A=>[e67ally(rv67(A,"v2"),20),e67foe(rv67(A,"v"),20)].join(" ")},
   mid:{k:0,tag:"Ai lo phận nấy",t:"Mỗi người tự lo. Không thêm tri kỷ, không thêm thù.",fx:{duc:1}},
   lose:{k:-1,tag:"Liên minh đổ vỡ",t:"Liên minh đổ vỡ, cả hai cùng bị phạt. {v2} đắc ý.",fx:{danh:-6,sung:-4},go:A=>e67foe(rv67(A,"v2"),12)}}};
-/* balance (measured): story choices must not wear her health down; Sức costs/losses of story options are halved */
-(function(){const h=o=>{for(const k of ["c","l"])if(o[k]){if(o[k].suc<0)o[k].suc=Math.min(-1,Math.round(o[k].suc/2));if(o[k].hh<0)o[k].hh=Math.min(-1,Math.round(o[k].hh/2))}};
- Object.values(ARC67).forEach(a=>Object.values(a.E).forEach(E=>{if(E.fx&&E.fx.hh<0)E.fx.hh=Math.round(E.fx.hh/2)}));
- const walk=b=>{if(b&&Array.isArray(b.o))b.o.forEach(h)};Object.values(GB67).forEach(walk);Object.values(ARC67).forEach(a=>Object.values(a.B).forEach(walk))})();
+/* balance (measured): story choices must not wear her health down; Sức costs/losses of story options are halved.
+   jreg: every hand-typed arc, also those of modules after j67 (jorigins bd_*, jst14 st_*, j96…). Road chapters (o:"rd", jroad rdDef) are
+   NOT halved: their numbers are read from BAL.road (jbalroad, one core) and already set at their final value. */
+(function(){const H=new WeakSet();/* each option / ending object is halved once, even when two arcs share it */
+ const h=o=>{if(!o||H.has(o))return;H.add(o);for(const k of ["c","l"])if(o[k]){if(o[k].suc<0)o[k].suc=Math.min(-1,Math.round(o[k].suc/2));if(o[k].hh<0)o[k].hh=Math.min(-1,Math.round(o[k].hh/2))}};
+ const walk=b=>{if(b&&Array.isArray(b.o))b.o.forEach(h)};Object.values(GB67).forEach(walk);
+ regEach(ARC67,(id,a)=>{if(!a||a.o==="rd"||H.has(a))return;H.add(a);Object.values(a.E||{}).forEach(E=>{if(!E||H.has(E))return;H.add(E);if(E.fx&&E.fx.hh<0)E.fx.hh=Math.round(E.fx.hh/2)});Object.values(a.B||{}).forEach(walk)},"ARC67 halve")})();
 
 /* one-line objective of the main quest on the Hành sự tab */
 (function(){const p0=renderPanel0;renderPanel0=function(){const r=p0.apply(this,arguments);try{if(tab==="act"&&v267()&&S.st.ch&&!window.kitStageRail){/* owner 16/11: the goal lives in the stage rail icon (§77), no strip here */const el=$("panel");if(el&&!el.querySelector(".obj67")){const o=obj67();/* KIT §72 (owner 16/11 "Không bấm xem được"): the line is the kit goal strip, tap → chapter detail (jgoal) */const g=typeof kitGoalStrip==="function"?kitGoalStrip():"";if(g)el.insertAdjacentHTML("afterbegin",`<div class="obj67">${g}</div>`);else if(o)el.insertAdjacentHTML("afterbegin",`<div class="srvhead obj67"><span><b>Mệnh truyện</b> · ${o}</span></div>`)}}}catch(e){console.error(e)}return r}})();
@@ -1796,7 +1805,8 @@ function msCheck67(){const m=S.st.ms,c=S.st.ch;if(!m||!c||!msDone67(m))return;co
 function storyActs67(){if(!v267()||S.dead||S.out)return[];const A=S.st.M;if(!A||A.done||A.cur||!A.nb||S.turn<A.due||isSrv67()||Q.some(m=>m.pid==="j67"))return[];const b=beatDef67(A,A.nb);if(!b)return[];
  return [{n:`Mệnh truyện: ${fill67(b.h||"",A)}`,t:`${lab67(A)} «${ARC67[A.a].t}» · còn ${Math.max(0,A.dl-S.turn)} tháng tới hạn.`,c:{suc:-5},o:100,w:{},x:"mở hồi kế tiếp của chương, giữ Lợi thế, gần phần thưởng",dom:"Giao thiệp",j67:1,go:()=>{fireBeat67(A);try{showModal()}catch(e){}}}]}
 function story67Acts(k){Object.defineProperty(STORY[k],"acts",{get:()=>v267()?storyActs67:(STORY[k].__old||{}).acts,configurable:true,enumerable:true})}
-Object.keys(STORY).forEach(story67Acts);
+/* jreg: every STORY entry (story67Wrap also sets it; idempotent) */
+regEach(STORY,k=>{if(STORY[k]&&STORY[k].__old)story67Acts(k)},"STORY acts");
 (function(){const d0=deal;deal=function(){const r=d0.apply(this,arguments);try{if(v267()&&S.st.done&&deck)deck.push(...storyActs67())}catch(e){}return r}})();
 function a67Month(){if(!v267()||S.dead)return"";const st=S.st;try{msCheck67()}catch(e){console.error(e)}
  const A=st.M;if(A&&!A.done&&A.dl!=null&&!A.cur){

@@ -28,7 +28,10 @@ Object.assign(BAL,{tw:{
  /* gains (one source, read by both sides and by the option text) */
  g:{help:10,helpOan:5,apol:15,thTH:[8,2,1,-2],thHH:[4,2,1,-3,5],thTHo:75,thHHo:70,prayO:50,pray:2,ksp:2,ill:3,illWk:2,preg:[6,5,-5],ann:[6,5,6],
     provoke:[1,-15,10,9],humil:[10,2],visit:[5,3],mediate:10,flaunt:2,test:[3,-6,55],drop:20,follow:6,gossip:1,praiseO:60,warn:10,admon:5,admonCd:6,
-    accFail:[8,25,20],vu:[10,5,4],ky:[2,1],conf:[20,15],reward:[20,10,3]}
+    accFail:[8,25,20],vu:[10,5,4],ky:[2,1],conf:[20,15],reward:[20,10,3],
+    /* pillow slander at night (her night2 option and an NPC's night, two-way row 24, AG2): odds = o[0] + Ân tình / o[1] + night score × o[2]
+       − o[3] when he is Đa nghi; thành: the target's Sủng −hit, liking −rel; hỏng: Đa nghi → the speaker's Sủng −dg[0], Danh −dg[1], else Sủng −fail */
+    pillow:{o:[30,2,3,10],hit:10,rel:5,dg:[6,3],fail:2}}
 }});
 function twCost(k){return (BAL.tw&&BAL.tw[k])||{}}
 /* can doer a pay deed k? (the player's rule: bạc ≥ price; a Sức cost needs more Sức than it costs, j76) */
@@ -67,7 +70,7 @@ TWD("test",{n:"Thử lòng",req:(a,t)=>!!t&&aff(a,t)>=0,o:()=>G().test[2],run:(a
 TWD("drop",{n:"Lạnh nhạt",req:(a,t)=>!!t&&aff(a,t)>=30&&((t.sung||0)<25||!!t.confined),run:(a,t)=>{affAdd(a,t,-G().drop);return `${twNm(a)} lạnh nhạt với ${NM(t)} lúc sa cơ`}});
 TWD("follow",{n:"Nương theo",req:(a,t)=>!!t&&rkOf(t)>rkOf(a)+1,run:(a,t)=>{relAdd(a,t,G().follow);return `${twNm(a)} nép theo ${NM(t)}`}});
 TWD("gossip",{n:"Rỉ tai chuyện trong cung",req:(a,t)=>!!t,run:(a,t)=>{const x=pick(liveRivals(true).filter(y=>y!==a&&y!==t));if(x)ap(x,{danh:-G().gossip});return `${twNm(a)} rỉ tai ${NM(t)} chuyện trong cung`}});
-TWD("check",{n:"Soát quà được tặng",req:a=>(a.inv||[]).some(e=>!e.h),run:a=>{const i=(a.inv||[]).findIndex(e=>e.t);if(i>=0){a.inv.splice(i,1);return `${twNm(a)} cho soát quà, vứt bỏ một món có độc`}return `${twNm(a)} cho thái y soát lại quà được tặng`}});
+TWD("check",{n:"Soát quà được tặng",req:a=>(a.inv||[]).some(e=>!e.h),run:a=>{const i=(a.inv||[]).findIndex(e=>e.t);if(i>=0){const x=a.inv.splice(i,1)[0];/* tang vật (item ledger jil), as j28 check */if(typeof ilGone==="function")ilGone(a,x,"evid");return `${twNm(a)} cho soát quà, vứt bỏ một món có độc`}return `${twNm(a)} cho thái y soát lại quà được tặng`}});
 TWD("admon",{n:"Khuyên Hoàng thượng mưa móc đều khắp",req:(a,t)=>{if(!t||t===a||!(a===S?S.rank>=7:a.queen))return false;const f=typeof favNow==="function"?favNow():null;return !!f&&f.p===t&&!(t.admonWk!=null&&wk()-t.admonWk<G().admonCd)},
  run:(a,t)=>{twAp(t,{sung:-G().admon});t.admonWk=wk();return `${twNm(a)} khuyên Hoàng thượng “mưa móc đều khắp”, đừng chỉ sủng ${NM(t)}`}});
 /* whom t resents most (not the doer): the quarrel a mediator can settle */

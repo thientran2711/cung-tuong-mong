@@ -1312,7 +1312,7 @@ kitItem `lux:N` → a small dark corner tab "Xa xỉ N" (top-right; "đã tẩm"
 Header chip `kitLuxChip`: ONLY the worn total "Xa xỉ <total>", neutral colour (owner 11/15: never the allowance, never a level word, colour or
 warning — she learns the limit from what happens: ghen, gossip, Thái hậu). Item panels show only each item's own "Xa xỉ N". The ⚠ under a slot and the
 "N món vượt phẩm: dễ bị tố" chip are kept: vượt phẩm is palace LAW (j8 rank caps, tố vượt phẩm), not the hidden luxury rule. Rules (internal levels): ≤ allowance fine; ≤ 1.5× → others' Ghen +1
-(× trait: Kiêu ngạo/Tham vọng 1.5, Hiểm độc 1.2, Hiền lành/Nhu mì 0.5; half for an NPC wearer); above → Ghen +3, Thái hậu may frown
+(× trait: Kiêu ngạo/Tham vọng 1.5, Xảo quyệt 1.2, Hiền lành/Nhu mì 0.5; half for an NPC wearer); above → Ghen +3, Thái hậu may frown
 (chance 50 − Đức/2, 10–50: Thái hậu -3 / NPC Danh -2), gossip 1 in 4: Danh -1; nothing worn from Quý nhân up: 1 in 4 Đức +1.
 It extends ghen (v.ghen) and itemMonth; vượt phẩm/tố stays j8 vpItems/vpAccuse.
 ### KIT RULE (11/15): the category tab row — never clips, centred, sticky only on long pages
@@ -3282,6 +3282,7 @@ round avatar, stage figure, person dialogs, Tuần lục — every place `kitFxL
   đen tuyền · thanh đại · nâu nhạt · khói). Defaults = the approved "đẹp" blush + lip colours.
 - **Save**: `p.toilette.col = {mat, ma, son, may}` (only when made up). Old saves / bots: no `col` → `toilColFix` gives the defaults; unknown keys
   fall back too. The look rules are unchanged: a layer only for "đẹp" (score ≥ tier[1]) and "diêm dúa"; diêm dúa = the SAME picks, stronger
+  NAMES (makeup-theme, owner 17/11 OD:L1553-1554): the screen never prints these ids or "đẹp/tuyệt/vừa/vụng"; it reads ONE source `TOIL_MK` (VANPHONG §1 makeup table): `moc` Mặt mộc · `vung` Vụng về · `vua` Đoan trang · `dep` Kiều diễm · `tuyet` Khuynh thành · `diem` Diêm dúa (overdone). Preset rows: `TOIL_STY` "Kiểu thanh nhã" / "Kiểu cầu kỳ"; a preset shows only its name, never its tone (OD:L1515).
   (`TOIL_MKS`: lip .86 vs .62, lid colour .70 vs .50 and higher toward the brow, outer wing, lower lash line, deeper brows, the round strong blush).
 - **`kitSwatches({key, rows:[{k,label,sel,items:[{k,name,short,col:[r,g,b]}]}], onPick(rowK,itemK)})`**: one row per part — label (display
   font) + the picked full name (dim), then round colour swatches (30 px, a soft sheen) with the short name under each; picked = gold ring + gold
@@ -3464,7 +3465,7 @@ mood (liked / did not like) and the rewards; sound + light by mood; a new-day pi
   (`kitFlyItem`). It REPLACES the night's result toast ("Đêm thị tẩm") and the pillow-talk option's toast; the bestow tray (`kitReward`) is
   held during her night and shown on this card instead (no double reveal).
 - **Tier rule** = `BAL.nightEnd` (jne): points = the night's own score `s` (j8 night1: prep + talk fit + his mood + luck, −2 confiscation)
-  + toilette today (jtoil makeup tuyệt/đẹp +1, vụng/diêm dúa −1) − 2 if the pillow talk lost her Sủng or Ân tình − 2 if she is ill;
+  + toilette today (jtoil makeup `tuyet` Khuynh thành / `dep` Kiều diễm +1, `vung` Vụng về / `diem` Diêm dúa −1) − 2 if the pillow talk lost her Sủng or Ân tình − 2 if she is ill;
   ≥ 6 mặn nồng, ≥ 3 êm đềm, else lạnh nhạt. His mood after: warm one step better, cold one step worse (never to giận dữ), normal unchanged.
   `window.kneLast` = {tier, pts, why[], m0, m1, items} for tests.
 - **kitNewDay({host, night, day, wx, then})** — plays inside the week panel `#dawn` BEFORE the Tuần lục book (j87) when she had NO bedding
@@ -3624,6 +3625,24 @@ Old flat CSS flashes: red → painted blood edge; gold / warm → painted glowbu
 `node dev/test/fxkit.js <url> <out> [shots]` (5 sizes + reduced motion): every kind loads, 50 bursts → 0 leaks + pool reused, every kitFx kind,
 lights play (screen blend), low-end sheet, edges / gift / letter / sheets clean up, auto-Gọn, frame time, heap after bursts, bytes per scene.
 Kit page sample "§68": a button per sprite kind, light, sheet, edge, gift act, letter and kitFx moment.
+### 68.8 PERSON MOTION · kitFigMove(kind, who, o) (owner 15/11 20:05Z item 13 + 22:45Z list; review/presentation-wiring) — `dev/build/jfxkit.js`
+The ONE part that animates a stage figure. `who` = person (or its stage wrapper `ref`), `"me"` (her figure), a picture element, or a snapshot `kfkSnap(img)`. Filter + translate on the picture itself (composite "add", so the people-picture filter `url(#kfa)` stays first); terminal kinds use a GHOST copy so a re-render cannot cut them. Pace = kitPace. Gọn / reduced motion / bots / hidden figure (`kfkSeen`): nothing.
+| kind | what | ms (x BAL.pace) |
+|---|---|---|
+| `flush` | slapped / scolded: one jolt + brief red flush | 900 |
+| `poison` | poisoned: tints green, then blurs, recovers | 3200 |
+| `grey` | demoted / cold palace: dims to grey, recovers | 2600 |
+| `die` | death: ghost greys, sinks and fades; white silk (`kitFxSheet silk`) falls over | 3000 |
+| `drag` | punished: ghost dragged off the stage (`o.dir` -1 / 1), dims | 1700 |
+| `out` | leaves the stage: ghost slides out and fades | 1000 |
+| `in` | arrives: slides in and fades up (`o.from` px) | 1000 |
+| `glow` | rim light of a tone (`o.tone`: lotuslight = pregnancy pink, glow-gold, candle) via `kitFxRim`, never over the face | 2400 |
+`kitFxSheet(name, target, {reverse:true})` plays a sheet backwards (red thread JOINS two people = the snap sheet reversed; placeholder until the painted join thread lands, see ART REQUEST). Sample: kit page §68.8. Test: `node dev/test/presentation-people.js`.
+### 68.9 ENTRANCE · kitEdictOpen(dlg, {kind:"scroll"}) (owner 15/11 ~18:15Z, OD:L528; S3-152; review/presentation-wiring) — `dev/build/jfxkit.js`
+An event card opens like an imperial edict unrolling: the painted rolled edict (`img/kit/mo-edict-closed.webp`, same picture as j93 `kitEdict`) shows at the card's centre and fades while the card's own paper opens from its middle line to full height (clip-path, no drawn shapes). One call per card, fire-and-forget; `o.ms` x BAL.pace (default 1200). Gọn / reduced motion / bots / a card under 120x80 px: nothing. Co-op: local only. Returns `{stop()}` or null. Log `KFK.log` `edict:open`; ghost class `.kfxk-g`. Who calls it: `jpres.js` `kpresShow` when the plan has `ent:"scroll"` = group `trieu-chinh`, category `tan-phong`, every `Chính tuyến` main-story card (also a card whose picture category resolves to `tan-phong`, e.g. `Kết quả tranh ghế`). Side-story and plain cards: no entrance. Sample: kit page §68.9. Test: `node dev/test/presentation-people.js` (edict block).
+Seal moment (S3-205): `KPM.seal` -> `kitFx("seal")` (jfx FX table: lock vibration + shake + ink blots) at the stamp element: `Kết quả tranh ghế` card (showModal wrapper) and her promotion-exam verdict (`exDone` wrapper). Origin-frame PLACEHOLDER (until ART REQUEST A1 lands): a `Chính tuyến` card gets `data-kpres-origin` + a two-line inset rule in the origin colour (`KPO`); `KPO_ART[origin]` = painted frame url removes the rule.
+
+**People moments (jpres.js KPM, S3-151/182/205)** — one table, every call through the kit: `kpmGo(moment, person, second)` with moments slap · poison · harm · rumour · death · drag · out · preg · birth · rise · fall · favour · join · betray. Hooks: `ACT[k].f` (KPM_ACT table: tat, phatquy, poison, kpoison, slowpoison, pgift, pond, pushp, trip, huydung, thathu, phonghoa, rumor, lygian, frame, kframe, ally, xinhh, banphe: plays on a SUCCESS text only), `kill` / `deathSentence` / `dieIf` (NPC dies), `punish` / `fall` (NPC dragged / flushed), `slapGive`, `birthP`, `renderStage` (a figure that left the stage fades out), `render` (state scan of the people on the stage: pregnancy announced, rank up / down, cold palace). Her own moments stay the j93 scenes / j11 feedback.
 ### 68.7 PERSON-SAFE LIGHT · rim light only (owner 16/11 ~21:25Z OD; review/diemtrang-fx) — `kitFxRim` · `kfkPersons` · `KFK_PERSON` in `dev/build/jfxkit.js`
 RULE: light / glow NEVER lies over a person or a face (avatar, portrait, stage figure, her figure, makeup zoom, reveal figure). Light starts at the person's own outline and radiates OUTWARD only.
 `KFK_PERSON` = the selector of person pictures (`img.figimg, #mefig, img.kpor, .kfzoom, .ktrv-fw>img, span.md.kmini, .kpod-fig>img`; a new kind of person picture is ADDED THERE, never handled by a caller).
