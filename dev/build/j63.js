@@ -58,7 +58,9 @@ function kaRows(M){const R={why:[],ton:[],duoc:[],mat:[],kem:[],note:[],one:true
  /* kit-thanh-bai: every Được / Mất / Kèm value carries its block b: "t" THÀNH, "b" BẠI, "a" gained either way ("được ngay"); Cần / Tốn / Ghi chú carry none (Tốn = paid either way, shown once above both blocks).
     A sure act (no roll, nothing under "hỏng") has ONE block: every b collapses to "t". */
  const real=h=>{const p=kaPlain(h);return p&&!KA_NOTHING.test(p)};
- const sure=(!M.odds||/^Chắc chắn/.test(M.odds))&&!M.items.some(it=>(it.l==="hỏng"||it.b==="hỏng")&&real(it.h));R.one=sure;
+ /* a no-roll card with a hỏng part is ONE block when it has no thành part (only a certain loss: "Cáo bệnh, không dự" Danh -1 — nothing to win, nothing to fail); with both parts it still shows both */
+ const sure0=!M.odds||/^Chắc chắn/.test(M.odds),hasBad=M.items.some(it=>(it.l==="hỏng"||it.b==="hỏng")&&real(it.h)),hasWin=M.items.some(it=>it.l==="thành"&&real(it.h));
+ const sure=sure0&&(!hasBad||!hasWin);R.one=sure;
  const add=(r,h,c,b)=>{b=(r==="why"||r==="ton"||r==="note")?"":sure||!b?"t":b;if(!R[r].some(x=>kaPlain(x.h)===kaPlain(h)&&x.b===b))R[r].push({h,c,b})};
  for(const it of M.items){let [h,nt]=kaSplitNote(kRangeW(it.h));if(nt)add("note",nt,"n");const p=kaPlain(h);if(!p)continue;if(KA_NOTHING.test(p))continue; /* owner 11/15: a line that says nothing is not shown */const c=kaSent(h,it.old);const neu=KNEU.test(p);const l=it.l||"";const cont=!!it.cont;
   const kb=it.b==="hỏng"?"b":it.b==="thành"?"t":c==="r"?"b":"t";/* a Kèm belongs to the block label written before it; none → a bad thing is BẠI */
@@ -95,7 +97,7 @@ function kaBody(R,dis){kaNoteDedup(R);const one=R.one!==false;let h="";
  for(const [k,lab] of [["why","Cần"],["ton","Tốn"]])if(R[k].length)h+=kaRowH(k,lab,R[k]);
  {const A=R.duoc.filter(x=>x.b==="a");if(A.length)h+=kaRowH("duoc","Được ngay",A,"a")}
  for(const b of one?["t"]:["t","b"]){const rows=KA_BLK.map(([k,lab])=>[k,lab,R[k].filter(x=>x.b===b)]).filter(r=>r[2].length);if(!rows.length&&one)continue;
-  h+=`<span class="kbh kbh-${b}">${b==="t"?"Thành":"Bại"}</span>`+(rows.length?rows.map(([k,lab,L])=>kaRowH(k,lab,L,b)).join(""):`<span class="kr kr-none kb-${b}"><span class="krl"></span><span class="krv"><span class="ef n">Tốn công, không được gì</span></span></span>`)}
+  h+=`<span class="kbh kbh-${b}">${b==="t"?"Thành":"Bại"}</span>`+(rows.length?rows.map(([k,lab,L])=>kaRowH(k,lab,L,b)).join(""):`<span class="kr kr-none kb-${b}"><span class="krl"></span><span class="krv"><span class="ef n">${b==="t"?"Không được gì thêm":"Tốn công, không được gì"}</span></span></span>`)}
  if(R.note.length)h+=kaRowH("note","Ghi chú",R.note);
  return `<small class="kb${dis?" kbdis":""}">`+h+`</small>`}
 /* kitParse: same input, kit rows out (odds chip first, the frame moves it to the title row) */

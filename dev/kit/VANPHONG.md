@@ -183,7 +183,7 @@ Giữ rõ luật (mục 4): con số, bậc may rủi, Tốn/Thành/Bại/Kèm k
 
 - Con số giữ nguyên và đứng sau tên: "Sủng +6", "Bạc -30", "Sủng 28 → 31".
 - Các dòng của bộ giao diện (Cần / Tốn / Được / Mất / Kèm / Ghi chú; Tốn / Thành / Bại / Kèm trên thẻ việc; hai khối THÀNH và BẠI, mỗi khối có Được / Mất / Kèm) là của chủ bộ giao diện: không ai tự đổi. Đề xuất chữ cổ (chờ chủ bộ giao diện duyệt):
-- Khối BẠI không có gì để ghi: một dòng mờ "Tốn công, không được gì". Dấu kết quả sau mỗi việc: THÀNH / BẠI / KẾT QUẢ (không còn "HỎNG").
+- Khối BẠI không có gì để ghi: một dòng mờ "Tốn công, không được gì". Khối THÀNH không có gì để ghi (chỉ có phần hỏng): một dòng mờ riêng "Không được gì thêm". Việc không có roll mà chỉ có một khoản mất chắc chắn: MỘT khối THÀNH, hàng Mất. Nút cuộn của khung: "Kéo xuống". Dấu kết quả sau mỗi việc: THÀNH / BẠI / KẾT QUẢ (không còn "HỎNG").
 
 | Hiện tại | Đề xuất |
 |---|---|

@@ -33,7 +33,7 @@ for(const f of fs.readdirSync(P))if(/^j.*\.js$/.test(f)&&f!=='all.js'){const s=f
  for(const c of C.filter(c=>c.literal||(c.odds<100&&c.one)||(!c.one&&c.emptyT)).slice(0,8))console.log('   odd ·',c.name,'· odds',c.odds,'·',c.txt.slice(0,120));
  /* (B) source strings, forced to a roll act */
  const res=await g.evaluate(L=>L.map(e=>{const [f,x]=e.split('\t');const out={f,x:x.slice(0,140)};try{
-   const M=kaModelStr(x);if(!M.odds)M.odds='Khá chắc';const R=kaRows(M);const t=document.createElement('template');t.innerHTML=kaBody(R);
+   const M0=kaModelStr(x);const R0=kaRows(M0);out.sureOne=!M0.odds&&R0.one&&M0.items.some(i=>i.l==='hỏng');out.sureTwo=!M0.odds&&!R0.one;const M=kaModelStr(x);if(!M.odds)M.odds='Khá chắc';const R=kaRows(M);const t=document.createElement('template');t.innerHTML=kaBody(R);
    const rowsIn=b=>t.content.querySelectorAll('.kr.kb-'+b+':not(.kr-none)').length;
    out.nt=rowsIn('t');out.nb=rowsIn('b');out.emptyB=!out.nb;out.emptyT=!out.nt;out.hasHong=M.items.some(i=>i.l==='hỏng');
    out.kemFree=M.items.some(i=>i.l==='kèm'&&!i.b);out.statUnderThanh=R.mat.some(x=>x.b==='t'&&/^(Bạc|Sức|Sủng|Danh|Đức|Sắc|Tài|Tâm cơ|Tai mắt|Ân tình)\s*-/.test(x.h));out.raw=/\sbại:/.test(x);
@@ -43,6 +43,7 @@ for(const f of fs.readdirSync(P))if(/^j.*\.js$/.test(f)&&f!=='all.js'){const s=f
  console.log('| class | count |\n|---|---|');
  console.log('| has hỏng:/bại: (BẠI block filled) |',K(r=>r.hasHong),'|');console.log('| no hỏng: -> BẠI empty once it rolls |',K(r=>!r.hasHong&&r.emptyB),'|');
  console.log('| THÀNH empty (only hỏng: written) |',K(r=>r.emptyT),'|');console.log('| odd: Kèm with no block label before it (placed by sign: bad -> BẠI) |',K(r=>r.kemFree),'|');
- console.log('| odd: stat cost under thành: (paid only on success, in THÀNH Mất) |',K(r=>r.statUnderThanh),'|');console.log('| input alias "bại:" |',K(r=>r.raw),'|');
+ console.log('| odd: stat cost under thành: (paid only on success, in THÀNH Mất) |',K(r=>r.statUnderThanh),'|');console.log('| no-roll string with hỏng: and no thành: -> ONE block (r2) |',K(r=>r.sureOne),'|');console.log('| no-roll string with both parts -> still two blocks |',K(r=>r.sureTwo),'|');
+ console.log('| input alias "bại:" |',K(r=>r.raw),'|');
  if(OUT)require('fs').writeFileSync(OUT,JSON.stringify({cards:C,src:res},null,1));
  await b.close();srv.close();process.exit(0)})();

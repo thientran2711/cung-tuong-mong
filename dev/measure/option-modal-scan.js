@@ -1,6 +1,6 @@
 /* review/kit-option-rows scan (s34): every option modal the game pushes (endTurn x N) + extra builders, per device.
    Flags: NARROW (2/3 options laid out in columns narrower than MINW px), CLIP (a card/row/word cut: scrollHeight>clientHeight or a child
-   sticking out), EMPTY (an empty .kr row / empty .ef), LIT ("thành:" / "hỏng:" / "tốn:" / "kèm:" printed literally), NOTHING ("không được không mất"
+   sticking out), EMPTY (an empty .kr row / empty .ef), LIT ("thành:" / "hỏng:" / "tốn:" / "kèm:" printed literally), CUT-NOCUE (an option card cut by a scroll column that shows no .kscue "Kéo xuống" cue; r2), NOTHING ("không được không mất"
    style line shown), DOWN (downside-looking text under ĐƯỢC).
    usage: node dev/measure/option-modal-scan.js [device] [turns] [outjson]   (device: fold|ipadAir|ipadPro|pixel|iphone14, default ipadAir; run from repo root; needs a built site) */
 const {chromium}=require('playwright');const D=require('../test/lib/device');
@@ -20,18 +20,18 @@ const dev=process.argv[2]||'ipadAir',N=+process.argv[3]||120,OUT=process.argv[4]
    [...b.querySelectorAll('.krv,.ef,.kat,.kan')].forEach(c=>{const cr=c.getBoundingClientRect();if(cr.height>0&&(cr.right>br.right+1.5||cr.bottom>br.bottom+1.5||cr.left<br.left-1.5))clip=true;if(c.scrollWidth>c.clientWidth+1&&getComputedStyle(c).overflow!=='visible')clip=true});
    const txt=b.textContent.replace(/\s+/g,' ');const empty=[...b.querySelectorAll('.kr')].some(k=>!(k.querySelector('.krv')||{textContent:''}).textContent.trim())||[...b.querySelectorAll('.ef')].some(k=>!k.textContent.trim());
    const lit=/(^|[\s·])(thành|hỏng|tốn|kèm|mất|được)\s*:/i.test(txt);const nothing=/không được không mất|không mất không được/i.test(txt);
-   const tx=b.querySelector('.kb,.kat');const tw=tx?Math.round(tx.getBoundingClientRect().width):Math.round(r.width);const wrapW=[...b.querySelectorAll('.krv')].reduce((m,c)=>Math.min(m,Math.round(c.getBoundingClientRect().width)),999);return{w:Math.round(r.width),tw,wrapW:wrapW===999?0:wrapW,h:Math.round(r.height),clip,empty,lit,nothing,t:txt.slice(0,90)}});
+   const tx=b.querySelector('.kb,.kat');const tw=tx?Math.round(tx.getBoundingClientRect().width):Math.round(r.width);const wrapW=[...b.querySelectorAll('.krv')].reduce((m,c)=>Math.min(m,Math.round(c.getBoundingClientRect().width)),999);let cut=false,cue=true;{let sc=b.parentElement;while(sc&&sc.id!=='modal'){const cs2=getComputedStyle(sc);if((cs2.overflowY==='auto'||cs2.overflowY==='scroll'||cs2.overflowY==='hidden')&&sc.scrollHeight>sc.clientHeight+4){const sr=sc.getBoundingClientRect();if(r.bottom>sr.bottom+1||r.top<sr.top-1){cut=true;window.__scc=sc.tagName+'.'+sc.className+'#'+sc.id+' oy='+cs2.overflowY+' sh'+sc.scrollHeight+' ch'+sc.clientHeight;cue=!!sc.querySelector(':scope > .kscue.on')||(cs2.overflowY==='hidden'?false:false)}break}sc=sc.parentElement}}return{cut,cue,scc:window.__scc,w:Math.round(r.width),tw,wrapW:wrapW===999?0:wrapW,h:Math.round(r.height),clip,empty,lit,nothing,t:txt.slice(0,90)}});
   const grid=getComputedStyle(op).gridTemplateColumns;const cols=new Set(bs.map(b=>Math.round(b.getBoundingClientRect().left))).size;
   const ow=Math.round(op.getBoundingClientRect().width);const dlg=M.querySelector('.dlg');const dr=dlg?dlg.getBoundingClientRect():{width:0,height:0};
   return{key,title:title.trim().slice(0,40),n:bs.length,cols,ow,dlgW:Math.round(dr.width),cs,vw:innerWidth,vh:innerHeight}});
- const record=async(tag)=>{const r=await probe();if(!r)return;if(seen[r.key])return;seen[r.key]=1;r.tag=tag;
-  const narrow=r.n<=3&&r.cs.some(c=>(c.wrapW&&c.wrapW<150)||c.tw<170);r.flags=[];if(narrow)r.flags.push('NARROW');if(r.cs.some(c=>c.clip))r.flags.push('CLIP');if(r.cs.some(c=>c.empty))r.flags.push('EMPTY');if(r.cs.some(c=>c.lit))r.flags.push('LIT');if(r.cs.some(c=>c.nothing))r.flags.push('NOTHING');rows.push(r)};
+ const record=async(tag)=>{await g.evaluate(()=>{try{kitScrollCues()}catch(e){}});/* the cue is added 120 ms after showModal: compute it now so the scan never races it */const r=await probe();if(!r)return;if(seen[r.key])return;seen[r.key]=1;r.tag=tag;
+  const narrow=r.n<=3&&r.cs.some(c=>(c.wrapW&&c.wrapW<150)||c.tw<170);r.flags=[];if(narrow)r.flags.push('NARROW');if(r.cs.some(c=>c.clip))r.flags.push('CLIP');if(r.cs.some(c=>c.empty))r.flags.push('EMPTY');if(r.cs.some(c=>c.lit))r.flags.push('LIT');if(r.cs.some(c=>c.nothing))r.flags.push('NOTHING');if(r.cs.some(c=>c.cut&&!c.cue))r.flags.push('CUT-NOCUE');rows.push(r)};
  try{await g.evaluate(c=>{(0,eval)(c)},DIRECT);await p.waitForTimeout(1800);await record('direct:hoi-phoi-do')}catch(e){console.log('direct builder failed',String(e).slice(0,80))}
  for(let i=0;i<N;i++){const alive=await g.evaluate(()=>{try{if(!S||S.dead){start()}Q.length=0;endTurn();}catch(e){return 'err '+e.message.slice(0,60)}return 'ok'});
   for(let k=0;k<6;k++){await p.waitForTimeout(120);await record('turn'+i);const more=await g.evaluate(()=>{const M=document.getElementById('modal');if(!M||M.hidden)return 0;const q=typeof Q!=='undefined'&&Q.length;M.hidden=true;return q?1:0});if(!more)break;await g.evaluate(()=>{try{showModal()}catch(e){}})}
   await g.evaluate(()=>{try{document.getElementById('modal').hidden=true}catch(e){}})}
  const bad=rows.filter(r=>r.flags.length);
  console.log(`${dev}: ${rows.length} option modals seen, ${bad.length} flagged, page errors ${errs.length}`);
- for(const r of rows)console.log((r.flags.length?r.flags.join(','):'ok').padEnd(18),`n=${r.n} cols=${r.cols} optsW=${r.ow} cardW=${r.cs.map(c=>c.w+'(txt'+c.tw+'/val'+c.wrapW+')').join('/')}`,'|',r.title,'|',r.cs.filter(c=>c.clip||c.lit||c.nothing||c.empty).map(c=>c.t.slice(0,60)).join(' // '));
+ for(const r of rows)console.log((r.flags.length?r.flags.join(','):'ok').padEnd(18),`n=${r.n} cols=${r.cols} optsW=${r.ow} cardW=${r.cs.map(c=>c.w+'(txt'+c.tw+'/val'+c.wrapW+')').join('/')}`,'|',r.title,'|',r.cs.filter(c=>c.clip||c.lit||c.nothing||c.empty).map(c=>c.t.slice(0,60)+(c.cut&&!c.cue?' ['+c.scc+']':'')).join(' // '));
  if(OUT)require('fs').writeFileSync(OUT,JSON.stringify(rows,null,1));
  await b.close();srv.close();process.exit(0)})();

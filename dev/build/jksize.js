@@ -569,3 +569,18 @@ function kitAgendaPic(o){const ok=s=>s&&(typeof kitOptOnCdn!=="function"||kitOpt
  const a=typeof kitActArt==="function"?kitActArt(o.n||""):null;if(a&&ok(a.src))return{src:a.src,ini:""}}catch(e){}return null}
 function kitAgendaFact(o,text){const p=kitAgendaPic(o);return p?{text:text||o.n,who:p,auto:false}:{text:text||o.n}}
 Object.assign(window,{kitAgendaPic,kitAgendaFact});
+/* ===== kit-thanh-bai r2 (s34/s36): SCROLL CUE for every frame scroll column (reviewer r1 FAIL 1). A column of a modal frame (.k3right, #mb, .body, …) that scrolls and is NOT at its end gets a bottom fade + a small "Kéo xuống" chip (.kscue, sticky at the column's bottom, goes when she reaches the end). One place: kitScrollCues(); called after every showModal / frame pass / resize / scroll. ===== */
+function kitScrollCues(root){try{const M=root||document.getElementById("modal");if(!M||M.hidden)return;
+ const cand=[...M.querySelectorAll(".dlg, .dlg *")].filter(e=>{if(e.closest(".kscue"))return false;const cs=getComputedStyle(e);return(cs.overflowY==="auto"||cs.overflowY==="scroll")&&e.clientHeight>=100&&e.scrollHeight>e.clientHeight+6||(e.__kscue&&e.isConnected)});
+ for(const e of cand){let c=e.querySelector(":scope > .kscue");const more=e.scrollHeight>e.clientHeight+6&&e.scrollTop+e.clientHeight<e.scrollHeight-6;
+  if(!c&&e.scrollHeight>e.clientHeight+6){c=document.createElement("div");c.className="kscue";c.setAttribute("aria-hidden","true");c.innerHTML='<i class="kscg"></i><b class="kscc">Kéo xuống</b>';e.appendChild(c);e.__kscue=1;
+   if(!e.__kscl){e.__kscl=1;e.addEventListener("scroll",()=>kitScrollCues(),{passive:true});new MutationObserver(()=>{const k=e.querySelector(":scope > .kscue");if(k&&e.lastElementChild!==k)e.appendChild(k);else kitScrollCues()}).observe(e,{childList:true})}}
+  if(c){if(e.lastElementChild!==c)e.appendChild(c);/* always the LAST child: sticky bottom only works from the end of the content */c.classList.toggle("on",!!more)}}}catch(err){console.error("kitScrollCues",err)}}
+window.kitScrollCues=kitScrollCues;
+(function(){const sm=window.showModal;if(typeof sm==="function"){window.showModal=showModal=function(){const r=sm.apply(this,arguments);try{setTimeout(kitScrollCues,120);setTimeout(kitScrollCues,700)}catch(e){}return r}}
+ window.addEventListener("resize",()=>kitScrollCues());
+ const st=document.createElement("style");st.id="k-scroll-cue";st.textContent=`
+.kscue{position:sticky;bottom:0;flex:none;height:0;width:100%;margin:0;padding:0;pointer-events:none;display:none;z-index:5}
+.kscue.on{display:block}
+.kscue .kscg{position:absolute;left:0;right:0;bottom:0;height:46px;background:linear-gradient(to bottom,rgba(253,249,238,0),rgba(253,249,238,.96))}
+.kscue .kscc{position:absolute;left:50%;bottom:6px;transform:translateX(-50%);font-size:.72rem;font-weight:700;color:#7a5a1e;background:#fbf1d6;border:1px solid #c9a24a;border-radius:999px;padding:2px 10px;white-space:nowrap;box-shadow:0 1px 3px rgba(0,0,0,.18)}`;document.head.appendChild(st)})();
