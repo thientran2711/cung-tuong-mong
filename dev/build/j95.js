@@ -51,9 +51,9 @@ function j95bl(c){return J95.B4[c].toLowerCase()}
 function j95habPool(v){const a=v.arts||{},C=[];const add=(k,s,act,w)=>{if(w>0)C.push({k,s,a:act,w})};
  add("vuon",[0,15,35,5],"music",(a.cam||0)*2);add("vuon",[5,30,15,0],"paint",(a.hoa||0)*2);add("vuon",[10,15,25,5],"poem",(a.thi||0)*1.5);
  add("own",[5,15,30,5],"dance",(a.vu||0)*1.5);add("tyv",[10,30,15,0],"herb",(a.y||0)*2.5);
- if(v.trait==="Hiền lành"||v.trait==="Nhu mì"||(v.pray||0)>0)add("tn",[45,10,5,0],"pray",3);
- if(v.trait==="Tham vọng")add("ksp",[0,25,15,0],"spy",2);if(v.trait==="Kiêu ngạo")add("vuon",[5,30,25,0],"walk",2);
- if(v.trait==="Đa nghi")add("own",[10,20,20,10],"read",2);if(v.trait==="Hiểm độc")add("tyv",[5,15,20,0],"spy",1.5);
+ if(hasT(v,"Ân cần")||hasT(v,"Khiêm nhường")||(v.pray||0)>0)add("tn",[45,10,5,0],"pray",3);
+ if(hasT(v,"Tham vọng"))add("ksp",[0,25,15,0],"spy",2);if(hasT(v,"Kiêu ngạo"))add("vuon",[5,30,25,0],"walk",2);
+ if(hasT(v,"Kín đáo"))add("own",[10,20,20,10],"read",2);if(hasT(v,"Xảo quyệt"))add("tyv",[5,15,20,0],"spy",1.5);
  if((v.sac||0)>=75)add("vuon",[0,10,25,20],"walk",2);
  try{const f=facOf(v);const L=f&&facLeader(f);if(L&&L!==v&&L!==S)add("ally:"+key(L),[0,25,30,35],"visit",2.5)}catch(e){}
  try{const al=others(v).filter(x=>x!==S&&x.alive&&!x.out&&!sameHouse(v,x)).map(x=>[x,aff(v,x)]).sort((p,q)=>q[1]-p[1])[0];if(al&&al[1]>=10)add("ally:"+key(al[0]),[0,20,25,35],"visit",2)}catch(e){}
@@ -83,11 +83,11 @@ function motiveOK(a,t,kind){if(!a||!t||a===S||a===t)return{ok:true,why:a===S?"ng
  if(typeof a!=="object"||a.rel==null)return{ok:true,why:""};
  const af=aff(a,t),oa=oan(a,t),gh=t===S?(a.ghen||0):Math.max(0,Math.round(((t.sung||0)-(a.sung||0))/2));
  let ef=false;try{const f=facOf(a),g=facOf(t);ef=!!(f&&g&&f!==g)}catch(e){}
- if(H95.has(kind)){const ex=j95except(a,t);const mot=Math.max(oa,gh,-af)+(ef?10:0)+(a.trait==="Hiểm độc"?10:0);
+ if(H95.has(kind)){const ex=j95except(a,t);const mot=Math.max(oa,gh,-af)+(ef?10:0)+(nv(a,"motive"));
   if(af>=40&&!ex)return{ok:false,why:`thiện cảm ${af} với ${t===S?"ngươi":t.name}`};
   if(mot<30&&!ex)return{ok:false,why:`động cơ yếu (oán ${oa}, ghen ${gh}, thiện cảm ${af})`};
   if(ex)return{ok:true,why:ex,ex:1};
-  const parts=[];if(oa>=20)parts.push(`oán ${oa}`);if(gh>=20)parts.push(`ghen ${gh}`);if(af<=-20)parts.push(`ghét (thiện cảm ${af})`);if(ef)parts.push("khác phe");if(a.trait==="Hiểm độc")parts.push("tính hiểm độc");
+  const parts=[];if(oa>=20)parts.push(`oán ${oa}`);if(gh>=20)parts.push(`ghen ${gh}`);if(af<=-20)parts.push(`ghét (thiện cảm ${af})`);if(ef)parts.push("khác phe");if(hasT(a,"Xảo quyệt"))parts.push("tính hiểm độc");
   return{ok:true,why:parts.join(", ")||`động cơ ${mot}`}}
  if(F95.has(kind)){let fr=false;try{fr=!!(facOf(a)&&facOf(a)===facOf(t))}catch(e){}if(af<-20&&oa>=40&&!fr)return{ok:false,why:`ghét ${t===S?"ngươi":t.name} (thiện cảm ${af}, oán ${oa})`};
   return{ok:true,why:fr?"cùng phe":af>=10?`thiện cảm ${af}`:"lấy lòng vì lợi"}}
@@ -148,11 +148,11 @@ function j95week(){const z=j95z();if(z.itWk===wk())return;z.itWk=wk();if(z.mo!==
  /* the Emperor's week: a heavy court week sometimes; one personal leaning */
  z.emp=z.emp||{lean:{c:[1,2,3][Math.floor(Math.random()*3)],k:"vuon"}};z.empWk={busy:j95dice(20)};if(j95dice(10))z.emp.lean={c:[1,2,3][Math.floor(Math.random()*3)],k:j95dice(60)?"vuon":"thu"}}
 function j95intent(v,cs){const O=[],z=j95z();const af=aff(v,S),ho=hostility(v,S);
- O.push(["emp",(v.trait==="Tham vọng"||v.trait==="Kiêu ngạo"?2.5:1)*((v.sung||0)<50?1.4:.7)*(.5+(v.ghen||0)/60),null,`tranh sủng (Sủng ${Math.round(v.sung||0)}, ghen ${v.ghen||0})`]);
+ O.push(["emp",(nv(v,"empW"))*((v.sung||0)<50?1.4:.7)*(.5+(v.ghen||0)/60),null,`tranh sủng (Sủng ${Math.round(v.sung||0)}, ghen ${v.ghen||0})`]);
  const al=others(v).filter(x=>x!==S&&x.alive&&!x.out&&!sameHouse(v,x)).map(x=>[x,aff(v,x)]).sort((p,q)=>q[1]-p[1])[0];
  if(al&&al[1]>=25&&motiveOK(v,al[0],"visit").ok)O.push(["ally",1.6,key(al[0]),`thân với ${al[0].name} (thiện cảm ${al[1]})`]);
  const fo=others(v).filter(x=>x!==S&&x.alive&&!x.out).map(x=>[x,hostility(v,x)]).sort((p,q)=>q[1]-p[1])[0];
- if(fo&&fo[1]>=50)O.push(["avoid",(v.trait==="Đa nghi"||v.trait==="Nhu mì")?1.6:1,key(fo[0]),`tránh mặt ${fo[0].name} (oán ${oan(v,fo[0])})`]);
+ if(fo&&fo[1]>=50)O.push(["avoid",(hasT(v,"Kín đáo")||hasT(v,"Khiêm nhường"))?1.6:1,key(fo[0]),`tránh mặt ${fo[0].name} (oán ${oan(v,fo[0])})`]);
  if(af>=30&&!sameHouse(S,v)&&motiveOK(v,S,"visit").ok)O.push(["visit",1.2,"me",`thân với ngươi (thiện cảm ${af})`]);
  const mk=z.meK[v.id];const mo=motiveOK(v,S,"ambush");
  if(mk&&mo.ok&&ho>=45)O.push(["ambush",2.2,"me",`${mo.why}; biết ngươi hay đến ${j95pn(mk.k)} ${j95bl(mk.c)}`]);
@@ -339,7 +339,7 @@ function j95srvStage(R,kh,V){const k=S.place;const m=srvM();const mk=m?palaceOf(
  for(let i=V.people.length-1;i>=0;i--){const p=V.people[i];if(p.kind==="srv"&&p.ref&&p.ref.rel!=null&&(p.sk==="rv"||p.sk==="hh"||p.sk==="mis")&&!at(p.ref)){V.people.splice(i,1);popIdx=null;ch=true}}
  if(k!=="tgk"&&k!=="lc"){let n=V.people.filter(p=>p.kind==="srv"&&(p.sk==="rv"||p.sk==="hh"||p.sk==="mis")).length;const cap=k==="home"?1:4;
   for(const v of liveRivals(true)){if(n>=cap)break;if(v===S||!at(v)||(k==="home"&&v!==m)||V.people.some(p=>p.ref===v))continue;
-   V.people.push({kind:"srv",sk:v.queen?"hh":v===m?"mis":"rv",ref:v,name:(v.queen?"Hoàng hậu ":"")+v.name,ini:v.name.split(" ").pop()[0],col:RCOL[rkOf(v)],info:`${rkName(v)}${v===m?" · chủ nhân của ngươi":""} · ${v.trait}`});n++;ch=true}}
+   V.people.push({kind:"srv",sk:v.queen?"hh":v===m?"mis":"rv",ref:v,name:(v.queen?"Hoàng hậu ":"")+v.name,ini:v.name.split(" ").pop()[0],col:RCOL[rkOf(v)],info:`${rkName(v)}${v===m?" · chủ nhân của ngươi":""} · ${netTxt(v)}`});n++;ch=true}}
  return ch}
 /* one figure per person on the stage: an inner render can reconcile before an older goTo wrapper (j22 men) adds its own (port 16/11) */
 function j95dedupe(V){if(!V||!V.people)return;const seen=new Set();for(let i=0;i<V.people.length;i++){const p=V.people[i];const r=p&&p.ref;if(!r)continue;const k=p.kind+":"+(p.kind==="min"?(r.c!=null?r.c:r.name):r.id!=null?r.id:r.c!=null?r.c:r.name);if(seen.has(k)){V.people.splice(i,1);i--;popIdx=null}else seen.add(k)}}
@@ -358,7 +358,7 @@ function j95stage(R,kh){const V=S.visit;if(!V||!V.people||V.k!==S.place||S.dead)
  if(k==="home"&&!S.out)try{const ks=Object.keys(R.P).filter(id=>id.indexOf("k:me:")===0&&here(id));if(ks.length>V.people.filter(p=>p.kind==="kid").length)for(const p of homePeople())if(p.kind==="kid"&&!V.people.some(q=>q.kind==="kid"&&q.ref===p.ref)){V.people.push(p);popIdx=null;ch=true}}catch(e){}
  /* men, officials, the court physician and the Kính sự phòng eunuch the record puts here (port 16/11: the map counts them, so the stage draws them) */
  for(const id in R.P){if(!here(id))continue;
-  if(id[0]==="m"&&id[1]!=="m"){const m=manById(id);if(!m||!m.alive||V.people.some(p=>p.kind==="man"&&p.ref&&(p.ref===m||p.ref.id===m.id)))continue;V.people.push({kind:"man",ref:m,name:m.name.split(" ").slice(0,1).concat(m.name.split(" ").slice(-1)).join(" "),ini:m.name.split(" ").pop()[0],col:"#6a8aa0",info:`${m.role} · ${m.trait}`});ch=true}
+  if(id[0]==="m"&&id[1]!=="m"){const m=manById(id);if(!m||!m.alive||V.people.some(p=>p.kind==="man"&&p.ref&&(p.ref===m||p.ref.id===m.id)))continue;V.people.push({kind:"man",ref:m,name:m.name.split(" ").slice(0,1).concat(m.name.split(" ").slice(-1)).join(" "),ini:m.name.split(" ").pop()[0],col:"#6a8aa0",info:`${m.role} · ${netTxt(m)}`});ch=true}
   else if(id.indexOf("q:")===0){try{const c=id.slice(2);const h=(trS().H||{})[c];if(!h||V.people.some(p=>p.kind==="min"&&p.ref&&(p.ref===h||p.ref.c===c||p.ref.name===h.name)))continue;V.people.push({kind:"min",ref:h,name:h.name,ini:"Quan",col:"#7a6a50",info:`${TDOFF[h.c]||"Quan"} · ${R.P[id][kh][0]==="thu"?"vào chầu":"dự yến"}`});ch=true}catch(e){}}
   /* r1: jact draws the Nội vụ phủ eunuch only on goTo; any other arrival (a walk into the next buổi, a new buổi) draws him from the record */
   else if(id==="c:ped"&&k==="nvp"&&!V.people.some(p=>p.kind==="peddler")){const c=S.court&&S.court.ped;V.people.push({kind:"peddler",name:c&&c.name?c.name:"Thái giám Nội vụ phủ",ini:"Hoạn",col:"#b9a48a",info:"Thái giám Nội vụ phủ"});ch=true}
@@ -590,12 +590,12 @@ function j95ledId(p){if(!p)return null;if(p.lid)return p.lid;const k=p.kind;try{
 /* a stage entry for a record id (kit stage figure kinds only: rival/hh/fallen/emp/th/maid/serv/npc/kid/ty/ksp/peddler/elder) */
 function j95ledObj(id){const who=(S.roster.who||{})[id]||[];const c=id[0];try{
  if(j95srvR()){const m=srvM();
-  if(c==="v"){const v=RV(+id.slice(1));if(v&&v.alive&&!v.out)return{kind:"srv",sk:v.queen?"hh":v===m?"mis":"rv",ref:v,name:(v.queen?"Hoàng hậu ":"")+v.name,ini:v.name.split(" ").pop()[0],col:RCOL[rkOf(v)],info:`${rkName(v)}${v===m?" · chủ nhân của ngươi":""} · ${v.trait}`}}
+  if(c==="v"){const v=RV(+id.slice(1));if(v&&v.alive&&!v.out)return{kind:"srv",sk:v.queen?"hh":v===m?"mis":"rv",ref:v,name:(v.queen?"Hoàng hậu ":"")+v.name,ini:v.name.split(" ").pop()[0],col:RCOL[rkOf(v)],info:`${rkName(v)}${v===m?" · chủ nhân của ngươi":""} · ${netTxt(v)}`}}
   else if(id==="emp")return{kind:"srv",sk:"emp",name:"Hoàng thượng",ini:"Đế",col:"#f0d070",info:"Hoàng thượng"};
   else if(id==="c:ty")return{kind:"srv",sk:"ty",name:(S.court&&S.court.ty&&S.court.ty.name)||"Thái y",ini:"Y",col:"#8fc38a",info:"Thái y viện"};
   else if(c==="s"){const s=j95sv(id);if(s&&!s.eid){let o=null;try{o=rivals.find(v=>(v.staff||[]).includes(s))||null}catch(e){}if(o&&o!==m&&!S.srv.met.includes(s.sid))S.srv.met.push(s.sid);
    return{kind:"srv",sk:"sv",ref:s,sid:s.sid,name:s.name,ini:String(s.name).split(" ").pop()[0],col:"#b9a48a",info:`${typeof srkName==="function"?srkName(s):(s.role==="maid"?"Cung nữ":"Thái giám")} · ${o===m?"cùng cung":o?"người của "+o.name:"Nội vụ phủ"}`}}}
-  else if(c==="m"&&id[1]!=="m"){const x=manById(id);if(x&&x.alive){x.seen=bkey();return{kind:"srv",sk:"man",ref:x,mid:x.id,name:x.name.split(" ").slice(-2).join(" "),ini:x.name.split(" ").pop()[0],col:"#6a8aa0",info:`${x.role} · ${x.trait} · ${tinhW(x.tinh)}`}}return null}
+  else if(c==="m"&&id[1]!=="m"){const x=manById(id);if(x&&x.alive){x.seen=bkey();return{kind:"srv",sk:"man",ref:x,mid:x.id,name:x.name.split(" ").slice(-2).join(" "),ini:x.name.split(" ").pop()[0],col:"#6a8aa0",info:`${x.role} · ${netTxt(x)} · ${tinhW(x.tinh)}`}}return null}
   else if(id.indexOf("q:")===0){const h=(trS().H||{})[id.slice(2)];return h?{kind:"min",ref:h,name:h.name,ini:"Quan",col:"#7a6a50",info:`${TDOFF[h.c]||"Quan"} · ${S.roster.P[id][j95kh()][0]==="thu"?"vào chầu":"dự yến"}`}:null}}
  if(c==="v"){const v=RV(+id.slice(1));if(!v||!v.alive)return null;if(v.out)return{kind:"fallen",ref:v,name:v.name,ini:v.name.split(" ").pop()[0],col:"#6a7a8a",info:"Phế phi"};return v.queen&&qOn()?{...rp(v),kind:"hh",name:`Hoàng hậu ${v.name}`,ini:"鳳"}:rp(v)}
  if(id==="emp")return{kind:"emp",name:"Hoàng thượng",ini:"帝",col:"#f0d070",info:`${empName()} · ${MOODS[S.emp.mood][0].toLowerCase()}`};

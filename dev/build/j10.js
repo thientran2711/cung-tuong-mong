@@ -1,5 +1,5 @@
 /* ================= HOUSEHOLDS: maids and eunuchs, one rule for every consort ================= */
-const STR={trung:"trung thành",tham:"tham lam",nhat:"nhát gan",lanh:"lanh lợi",chuyen:"nhiều chuyện"};
+
 const EUN=["Tiểu Lộ Tử","Tiểu Phúc Tử","Tiểu Thuận Tử","Tiểu An Tử","Tiểu Hỉ Tử","Tiểu Quế Tử","Tiểu Lâm Tử","Tiểu Đức Tử","Tiểu Thọ Tử","Tiểu Xuân Tử"];
 let sidN=0;
 /* ONE household table (owner 17/11 OD 02:50Z + 04:48Z, review/staff-root): BAL.promo.cap[rank] = [maids INCLUDING the personal (close) maid, eunuchs],
@@ -9,7 +9,7 @@ function capOf(p){const B=BAL.promo,C=B.cap;if(S&&p&&p===S.thO)return B.capTh.sl
  return C[p&&p.out?0:Math.max(0,Math.min(C.length-1,rkOf(p)||0))].slice()}
 function hhHas(p){const L=(p&&p.staff)||[];return[L.filter(s=>s.role==="maid").length+1,L.filter(s=>s.role==="eunuch").length]}
 function mkServ(role){const n=role==="maid"?(AV.maids||[]).length:0;const used=allServ().map(x=>x.name);const pool=(role==="maid"?MAIDS:EUN).filter(x=>!used.includes(x));
- const sa=servAge(role);return{fc:drawF(role==="maid"?"maid":"eunuch",sa.age),fk:bandKeys(role==="maid"?"maid":"eunuch",sa.age)[0],sid:++sidN,name:pool.length?pick(pool):pick(role==="maid"?MAIDS:EUN)+" "+(R(8)+2),role,face:allServ().filter(x=>x.role===role).length,hue:0,...sa,tr:pick(Object.keys(STR)),loyal:45+R(36),spyFor:null,lover:null,af:{}}}
+ const sa=servAge(role);return{fc:drawF(role==="maid"?"maid":"eunuch",sa.age),fk:bandKeys(role==="maid"?"maid":"eunuch",sa.age)[0],sid:++sidN,name:pool.length?pick(pool):pick(role==="maid"?MAIDS:EUN)+" "+(R(8)+2),role,face:allServ().filter(x=>x.role===role).length,hue:0,...sa,loyal:45+R(36),spyFor:null,lover:null,af:{}}}
 function allServ(){const L=[];for(const p of [S].concat(rivals))if(p&&p.staff)L.push(...p.staff);return L}
 function ownerOf(s){for(const p of [S].concat(rivals))if(p&&p.staff&&p.staff.includes(s))return p;return null}
 function servById(id){return allServ().find(s=>s.sid===id)||null}
@@ -36,23 +36,23 @@ function servAge(role){const age=role==="maid"?16+R(10):18+R(45);return role==="
 function pServ(s){const g=rkOfFace("serv",s);return Object.assign(pServ0(s),{rk:g[0],rw:g[1]})}
 function pServ0(s){const n=s.role==="maid"?6:4,i=(s.face>=0?s.face:0);if(s.role!=="maid")return{src:fsrc(s.fc,`img/face-eunuch-${(s.fe>=0?s.fe:eunBand(s.age||30))+1}.webp`),hue:0,ini:"Hoạn",col:"#8a8aa0"};return{src:fsrc(s.fc,""),hue:0,ini:s.role==="maid"?s.name.split(" ").pop()[0]:"Hoạn",col:s.role==="maid"?"#b9a48a":"#8a8aa0"}}
 /* the servant one sends: loyalty and traits set the odds and the risk of confessing */
-function bestSent(p){const L=(p.staff||[]).filter(s=>!s.spyFor);if(!L.length)return null;return L.slice().sort((a,b)=>(b.loyal+(b.tr==="lanh"?15:0))-(a.loyal+(a.tr==="lanh"?15:0)))[0]}
-function sentPen(s){if(!s)return 20;return cl(15-(s.tr==="lanh"?8:0)-Math.round((s.loyal-50)/10),0,25)}
-function confessRisk(s){if(!s)return 25;return cl(20+(s.tr==="nhat"?20:0)-(s.tr==="trung"?15:0)-Math.round(s.loyal/10),3,60)}
+function bestSent(p){const L=(p.staff||[]).filter(s=>!s.spyFor);if(!L.length)return null;return L.slice().sort((a,b)=>(b.loyal+nq(b,"sharp",BAL.net.k.spySharp))-(a.loyal+nq(a,"sharp",BAL.net.k.spySharp)))[0]}
+function sentPen(s){if(!s)return 20;return cl(15-nq(s,"sharp",BAL.net.k.sentSharp)-Math.round((s.loyal-50)/10),0,25)}
+function confessRisk(s){if(!s)return 25;return cl(20+nq(s,"timid",BAL.net.k.confTimid)-nq(s,"loyal",BAL.net.k.confLoyal)-Math.round(s.loyal/10),3,60)}
 function servCaught(p,s){if(!s)return"";if(roll(30)){p.staff.splice(p.staff.indexOf(s),1);return `${s.name} bị đánh chết trong ngục Thận Hình ti. `}s.loyal=cl(s.loyal-10,0,100);s.trouble=wk();return""}
 /* acts on servants (same functions for NPC mistresses) */
-function bribeServ(a,s){const o=ownerOf(s);if(!o||o===a||a.bac<30)return"";ap(a,{bac:-30});const odds=odA(a,35+(s.tr==="tham"?25:0)-s.loyal/3+a.tamco/5);
+function bribeServ(a,s){const o=ownerOf(s);if(!o||o===a||a.bac<30)return"";ap(a,{bac:-30});const odds=odA(a,35+nq(s,"greed",BAL.net.k.bribeGreed)-s.loyal/3+a.tamco/5);
  if(roll(odds)){s.spyFor=key(a);return `${s.name} (người hầu của ${NM(o)}) nhận bạc của ${NM(a)}, thành tai mắt. `}s.loyal=cl(s.loyal+5,0,100);evA(o,a,1);relAdd(a,o,-5);return `${s.name} từ chối bạc của ${NM(a)} và mách chủ. `}
 function threatServ(a,s){const o=ownerOf(s);if(!o||!s.lover)return"";s.spyFor=key(a);return `${NMc(a)} dọa tố chuyện đối thực của ${s.name}; hắn/nàng sợ hãi, thành tai mắt. `}
-function plantServ(a,t){if(!a.staff)a.staff=[];const s=bestSent(a);if(!s||a.bac<40)return"";ap(a,{bac:-40});if(roll(odA(a,40+a.tamco/4+(s.tr==="lanh"?10:0)))){a.staff.splice(a.staff.indexOf(s),1);s.spyFor=key(a);(t.staff=t.staff||[]).push(s);/* a full household: the plant takes the place of its least trusted servant (one table, review/staff-root) */capTrim(t,s);return `${NMc(a)} cài ${s.name} vào cung ${NM(t)} làm tai mắt. `}evA(t,a,1);return `Nội vụ phủ thấy lạ, ${NM(t)} không nhận ${s.name}. `}
+function plantServ(a,t){if(!a.staff)a.staff=[];const s=bestSent(a);if(!s||a.bac<40)return"";ap(a,{bac:-40});if(roll(odA(a,40+a.tamco/4+nq(s,"sharp",BAL.net.k.poachSharp)))){a.staff.splice(a.staff.indexOf(s),1);s.spyFor=key(a);(t.staff=t.staff||[]).push(s);/* a full household: the plant takes the place of its least trusted servant (one table, review/staff-root) */capTrim(t,s);return `${NMc(a)} cài ${s.name} vào cung ${NM(t)} làm tai mắt. `}evA(t,a,1);return `Nội vụ phủ thấy lạ, ${NM(t)} không nhận ${s.name}. `}
 function servMonth(){let ev="";capSweep();for(const p of consorts()){if(!p.staff)p.staff=[];
   /* co-op guest (review/servant-mline-r2): an NPC household's own month (loyalty, NPC-vs-NPC spies, refilling) rolls on the host;
      the guest keeps only what concerns her: her spies' reports, her servants' friends, NPC acts aimed at her (pickTarget gives only her) */
   const G=p!==S&&typeof mlGuest==="function"&&mlGuest();
   const d=(p.schemes||0)-(p.schLast||0);p.schLast=p.schemes||0;
-  for(const s of p.staff.slice()){if(s.tr!=="trung"&&!G)s.loyal=cl(s.loyal-1,0,100);
+  for(const s of p.staff.slice()){if(!netIs(s,"loyal")&&!G)s.loyal=cl(s.loyal-1,0,100);
    if(s.spyFor&&!(G&&byKey(s.spyFor)!==S)){const m=byKey(s.spyFor);if(m&&(m===S||m.alive)){if(d>0&&roll(60)){/*evok: her schemes counter rose this week*/evA(m,p,1);if(m===S)ev+=`Tai mắt ${s.name} trong cung ${p.name} báo: nàng đang bày mưu. Chứng cứ +1. `}}else s.spyFor=null}
-   if(d>0)for(const fid in s.af){if(s.af[fid]<20)continue;const f=servById(+fid),o=f&&ownerOf(f);if(o&&o!==p&&(!G||o===S)&&roll((s.tr==="chuyen"?25:10)+srk(s)*5)){/*evok: same (d>0)*/evA(o,p,1);if(o===S)ev+=`${f.name} nghe bạn là ${s.name} kể chuyện cung ${NM(p)}: chứng cứ +1. `}}}
+   if(d>0)for(const fid in s.af){if(s.af[fid]<20)continue;const f=servById(+fid),o=f&&ownerOf(f);if(o&&o!==p&&(!G||o===S)&&roll((nv(s,"tellRoll"))+srk(s)*5)){/*evok: same (d>0)*/evA(o,p,1);if(o===S)ev+=`${f.name} nghe bạn là ${s.name} kể chuyện cung ${NM(p)}: chứng cứ +1. `}}}
   if(p!==S&&roll(10)){const t=pickTarget(p);if(t&&t.staff&&t.staff.length&&p.bac>=60){const s=pick(t.staff);const r=bribeServ(p,s);if(t===S&&r&&s.spyFor===key(p)&&S.mat>=3)ev+=`Có tin: ${r}`}}
   if(p!==S&&roll(2)){const t=pickTarget(p);if(t)plantServ(p,t)}
   if(p!==S&&!G)fillStaff(p,false)}
@@ -61,7 +61,7 @@ function servAct(a,id){const s=servById(id);if(!s||S.dead||Q.length)return;const
  if(o===S){if(a==="thuong"){if(S.bac<10)return;apply({bac:-10});s.loyal=cl(s.loyal+12,0,100);r=`Thưởng ${s.name}: lòng +12.`}
   else if(a==="phat"){s.loyal=cl(s.loyal-15,0,100);if(s.spyFor){const m=byKey(s.spyFor);r=`Tra khảo ${s.name}: khai là tai mắt của ${m?NM(m):"kẻ khác"}. Đuổi khỏi cung.`;S.staff.splice(S.staff.indexOf(s),1);if(m&&m!==S)evA(S,m,1)}else r=`Phạt ${s.name}: lòng -15.`}
   else if(a==="hoi"){if(!can(2))return;spend(2);const f=Object.keys(s.af).map(x=>servById(+x)).find(x=>x&&s.af[x.sid]>=20);const o2=f&&ownerOf(f);
-   if(o2&&o2!==S&&roll(s.tr==="chuyen"?70:40)){r=evA(S,o2,1)?`${s.name} kể chuyện nghe từ ${f.name} bên cung ${o2.name}: chứng cứ +1.`:`${s.name} kể chuyện nghe từ ${f.name} bên cung ${o2.name}: không có gì sai trái, chỉ biết ${harmTxt(o2)}.`}else r=`${s.name} không biết gì mới.`;
+   if(o2&&o2!==S&&roll(nv(s,"askTalk"))){r=evA(S,o2,1)?`${s.name} kể chuyện nghe từ ${f.name} bên cung ${o2.name}: chứng cứ +1.`:`${s.name} kể chuyện nghe từ ${f.name} bên cung ${o2.name}: không có gì sai trái, chỉ biết ${harmTxt(o2)}.`}else r=`${s.name} không biết gì mới.`;
    const dt=allServ().find(x=>x.lover&&!(S.knowDT||[]).includes(x.sid)&&ownerOf(x)!==S);if(dt&&roll(30)){S.knowDT=(S.knowDT||[]).concat([dt.sid,dt.lover]);r+=` Lại nghe đồn ${dt.name} và ${(servById(dt.lover)||{}).name} đối thực.`}}
   else if(a==="doi"){S.staff.splice(S.staff.indexOf(s),1);r=`Trả ${s.name} về Nội vụ phủ.`}
   else if(a==="che"){s.loyal=cl(s.loyal+20,0,100);apply({danh:-2});r=`Che chở ${s.name} trước Thận Hình ti: lòng +20, Danh -2.`}}
@@ -80,7 +80,7 @@ function staffHTML(){const row=(s,btns)=>`<div class="srow2">${mdH(pServ(s),"sm"
  h+=S.staff.map(s=>row(s,`<span class="past">lòng ${s.loyal}</span><button data-sv="thuong" data-sid="${s.sid}" ${S.bac<10?"disabled":""}>Thưởng<small>Bạc -10</small></button><button data-sv="phat" data-sid="${s.sid}">Phạt<small>lòng -15</small></button><button data-sv="hoi" data-sid="${s.sid}" ${!can(2)?"disabled":""}>Hỏi chuyện<small>2 khắc</small></button><button data-sv="che" data-sid="${s.sid}">Che chở<small>Danh -2</small></button><button data-sv="doi" data-sid="${s.sid}">Đổi người</button><button data-rec="${s.sid}" ${S.bac<30?"disabled":""}>Tiến cử<small>Bạc -30 · Danh -2</small></button>`)).join("")+(S.staff.some(s=>s.role==="maid"&&srk(s)>=3)?`<div class="rbtn"><button data-smaid="1" ${!can(2)?"disabled":""}>Chưởng sự tra xét cung nữ<small>2 khắc · tìm tai mắt, đối thực</small></button></div>`:"");
  h+=`<div class="rbtn" style="margin:4px 0"><button data-hire="maid" ${nm>=cm||S.bac<20?"disabled":""}>Nội vụ phủ: thêm cung nữ<small>Bạc -20</small></button><button data-hire="eunuch" ${ne>=ce||S.bac<20?"disabled":""}>Thêm thái giám<small>Bạc -20</small></button><button data-plantsv="1" ${!can(2)||S.bac<40||!bestSent(S)?"disabled":""}>Cài người vào cung khác<small>Bạc -40 · 2 khắc</small></button></div>`;
  h+=`<h3>Người trong cung</h3>`+Object.entries(S.court).map(([k,c])=>`<div class="srow2">${mdH(k==="ty"?pDoc():{src:`img/face-eunuch-${["tq","ksp","ped"].indexOf(k)%4+1}.webp`,ini:"Hoạn",col:"#8a8aa0"},"sm")}<div class="sinfo"><b>${c.name}</b><span>${c.n} · quý ngươi ${c.af.me||0}</span></div><div class="rbtn"><button data-cv="thuong" data-ck="${k}" ${S.bac<20?"disabled":""}>Biếu<small>Bạc -20</small></button><button data-cv="hoi" data-ck="${k}" ${!can(2)?"disabled":""}>Hỏi chuyện<small>2 khắc</small></button></div></div>`).join("");
- h+=`<h3>Kẻ hầu cung khác</h3>`+liveRivals(true).map(v=>`<div class="past" style="margin-top:4px"><b>${v.name}</b></div>`+(v.staff||[]).map(s=>row(s,s.spyFor==="me"?"":`<button data-sv="mua" data-sid="${s.sid}" ${!can(2)||S.bac<30?"disabled":""}>Mua chuộc<small>Bạc -30 · ${word(odA(S,35+(s.tr==="tham"?25:0)-s.loyal/3+S.tamco/5))}</small></button>${s.lover&&(S.knowDT||[]).includes(s.sid)?`<button data-sv="doa" data-sid="${s.sid}" ${!can(2)?"disabled":""}>Dọa tố đối thực<small>2 khắc</small></button>`:""}`)).join("")).join("");
+ h+=`<h3>Kẻ hầu cung khác</h3>`+liveRivals(true).map(v=>`<div class="past" style="margin-top:4px"><b>${v.name}</b></div>`+(v.staff||[]).map(s=>row(s,s.spyFor==="me"?"":`<button data-sv="mua" data-sid="${s.sid}" ${!can(2)||S.bac<30?"disabled":""}>Mua chuộc<small>Bạc -30 · ${word(odA(S,35+nq(s,"greed",BAL.net.k.bribeGreed)-s.loyal/3+S.tamco/5))}</small></button>${s.lover&&(S.knowDT||[]).includes(s.sid)?`<button data-sv="doa" data-sid="${s.sid}" ${!can(2)?"disabled":""}>Dọa tố đối thực<small>2 khắc</small></button>`:""}`)).join("")).join("");
  return h}
 PEND.plantsv=()=>({t:"<p>Cài người hầu của ngươi vào cung ai?</p>",o:liveRivals(true).filter(v=>!sameHouse(S,v)).map(v=>({kgt:v,n:v.name,fx:{},x:"Bạc -40",go:()=>{spend(2);log(plantServ(S,v))}})).concat([{n:"Thôi",fx:{}}])});
 
@@ -111,13 +111,13 @@ function facMonth(){let ev="";S.facs=(S.facs||[]).filter(f=>facMembers(f).length
   /* members share evidence and news */
   const T=[S].concat(rivals);for(const t of T){if(M.includes(t))continue;const mx=Math.max(...M.map(m=>evG(m,t)));if(mx>0)M.forEach(m=>{if(evG(m,t)<mx)evA(m,t,mx-evG(m,t))})}
   /* betrayal, split */
-  const b=M.find(m=>m!==S&&m!==l&&aff(m,l)<0);if(b&&roll(4))ev+=seenNPC(b,b,sellOut(b))||"";
+  const b=mindPickBy(M.filter(m=>m!==S&&m!==l&&aff(m,l)<0),m=>-aff(m,l)*mindW(m,"flee"),null);/* npc-mind: was FIRST */if(b&&roll(4))ev+=seenNPC(b,b,sellOut(b))||"";
   const top=M.filter(m=>m!==S).sort((a,c)=>c.sung-a.sung);if(top.length>=2&&top[0].ghen>60&&top[1].ghen>60&&roll(5))ev+=S.mat>=2?leaveFac(top[1]):(leaveFac(top[1]),"");
-  if(l!==S&&roll(6)){const e=consorts().filter(x=>!M.includes(x)&&M.reduce((s,m)=>s+oan(m,x),0)/M.length>=25)[0];if(e&&!sameHouse(l,e))ev+=seenNPC(l,e,jointScheme(f,e))}}
+  if(l!==S&&roll(6)){const E0=consorts().filter(x=>!M.includes(x)&&M.reduce((s,m)=>s+oan(m,x),0)/M.length>=25).filter(x=>!sameHouse(l,x));const e=mindPickBy(E0,x=>M.reduce((s,m)=>s+oan(m,x),0),l);if(e)/* npc-mind: was FIRST */ev+=seenNPC(l,e,jointScheme(f,e))}}
  /* NPCs found, join, invite, divide */
  for(const v of liveRivals(true)){if(facOf(v))continue;
   const fr=others(v).filter(x=>(x===S||x.alive)&&!sameHouse(v,x)&&(aff(v,x)>=35||clanOf(v)===clanOf(x)&&aff(v,x)>=15||consorts().some(e=>e!==v&&e!==x&&oan(v,e)>=30&&oan(x,e)>=30)));
-  const x=fr.find(y=>y!==S);if(x&&roll(25)){const g=facOf(x);ev+=g?(roll(odA(v,30+aff(x,v)/2))?(S.mat>=2||facOf(S)===g?joinFac(v,g):(joinFac(v,g),"")):""):(S.mat>=2?found(v,x):(found(v,x),""))}}
+  const x=mindPickBy(fr.filter(y=>y!==S),y=>BAL.mind.pick.j10fr.base+Math.max(0,aff(v,y)),v);/* npc-mind: was FIRST */if(x&&roll(25)){const g=facOf(x);ev+=g?(roll(odA(v,30+aff(x,v)/2))?(S.mat>=2||facOf(S)===g?joinFac(v,g):(joinFac(v,g),"")):""):(S.mat>=2?found(v,x):(found(v,x),""))}}
  const mine=facOf(S);for(const f of S.facs){if(f===mine)continue;const l=facLeader(f);if(l&&l!==S&&!facOf(S)&&aff(l,S)>=35&&roll(10))Q.push({t:"Lời mời vào phe",who:pv(l),h:`<p>${l.name} mời ngươi vào ${f.name}. Vào thì cùng chia tin tức, chứng cứ, che chở nhau.</p><p class="past">Mở mục Giao tình › Phe phái để xin vào.</p>`})}
  if(mine&&roll(5)){const o=S.facs.find(f=>f!==mine);const l=o&&facLeader(o);if(l&&l!==S){const r=divide(l,mine);if(r)ev+=r}}
  return ev}

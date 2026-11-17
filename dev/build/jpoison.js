@@ -112,7 +112,7 @@ function gfSincere(a,w,r){const made=w.by===key(a)||(a===S&&w.bn==="ngươi");co
  (made?have:miss).push(made?`tự tay làm cho ${who}`:"đồ tự tay làm");
  (fr?have:miss).push(fr?`hợp ý ${who}`:`làm đúng ý ${who}${r==="emp"?": món, hoa, nhạc ngài thích":r==="th"?": kinh, tranh, đồ thêu":(()=>{const k=wkBestArt(r);const A=k&&ARTS.find(x=>x.k===k);return A?`: nàng mê ${A.n}`:""})()}`);
  if(b>=need)have.push(`${lab} ${b} ≥ ${need}`);else miss.push(`${lab} từ ${need}, nay ${b}`);if(asked)miss.push(`đợi ${BAL.gift.askW} tuần sau khi nhờ việc`);
- let tr=0;try{if(r==="emp"&&(has("nhantu")||has("datinh")))tr=1;else if(r&&typeof r==="object"&&traitsOf(r).some(x=>x==="Hiền lành"||x==="Nhu mì"))tr=1}catch(e){}
+ let tr=0;try{if(r==="emp"&&(has("nhantu")||has("datinh")))tr=1;else if(r&&typeof r==="object"&&traitsOf(r).some(x=>x==="Ân cần"||x==="Khiêm nhường"))tr=1}catch(e){}
  const txt=ok?`Chân tình: đủ — ${have.join(", ")}${tr?", tính người nhận thêm +1":""}`:`Chân tình: chưa đủ — cần ${miss.join(" và ")}`;return{ok,have,miss,tr,txt}}
 wkSincere=function(r){return r==="maid"};/* the old hidden trait check: off (the maid keeps j83's fixed bonus); wkEval below adds the visible one */
 (function(){const e0=wkEval;wkEval=function(a,w,r){const ev=e0.apply(this,arguments);try{if(!ev||!ev.ok||r==="maid")return ev;const s=gfSincere(a,w,r);
