@@ -93,7 +93,7 @@ Setup: inevpick.js on the merged build (fde22752), sens bot, Vừa, 5-year cap.
 
 Skill pays clearly with ctxTaste 18 / ctxCap 30: HH 15 % vs 2 %, Phi 72 % vs 49 %, Danh roughly double. This confirms the worker's 40-life claim in direction and size.
 
-This table is at about 45 lives per arm. Bot pages crashed and the container restarted twice. More shards (4, 5) are running and this table will be updated in place if they finish. The verdict does not depend on it.
+This table is final at about 45 lives per arm, not the 150 the brief asked for. Bot pages crashed and the container restarted twice. The gap (HH 15 % vs 2 %, Danh about double) is large enough to confirm direction and size. The verdict does not depend on it; the r2 run can finish the 150 lives.
 
 ## 6. Open items FOR MAIN (CHECK 5, not fixed here)
 
