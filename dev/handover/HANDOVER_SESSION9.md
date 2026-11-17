@@ -631,3 +631,4 @@ FOREMEN: B = coop-thin parts B‖D (A live) + makeup tone/taste job (PARKING #4)
 LESSONS s29: open every worker WITH source_url=https://github.com/thientran2711/cung-tuong-mong + clone_depth 30 (else add_repo may be denied); s28 kept opening duplicates — s28 is now told to only record OD + forward; three branches fixed the same S.vl root → GATE ZERO must also grep open review/* diffs; cdn_sync now allowed by settings.local.json.
 WAKES: s29 set 04:32Z (trig_01KjViDNJxtnWRKXiM6QS6WV) — fires into s29; s30 sets its own minute-32 wake.
 - (17/11 ~04:16Z) s29 → s30 rollover.
+- (17/11 ~04:15Z) s29 opened MAIN SESSION 30 = session_01UV1SzhK3qSvU55wPgq9kKb and stops (forwards any late worker message to s30).
