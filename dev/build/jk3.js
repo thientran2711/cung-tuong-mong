@@ -337,8 +337,10 @@ html body .game#game.k3ph header.hud>#k3room:not([hidden]){grid-area:room}
 html body #hud2 .khg .khc .hc[data-hx="buoi"],html body #hud2 .khg .khc .hc[data-hx="sac"],html body #hud2 .khg .khc .hc[data-hx="tai"],html body #hud2 .khg .khc .hc[data-hx="tamco"],html body #hud2 .khg .khc .hc[data-hx="duc"]{display:none!important}
 html body #hud2 .khg .hc.hot[data-hx]{color:inherit}
 /* 3 + 4 · scene words straight on the painting (no plaque, no pill), one line each, soft light halo for readability */
-html body .stage #sc-t{background:none!important;border:0!important;box-shadow:none!important;backdrop-filter:none!important;padding:0 2px!important}
-html body .stage #sc-t h2,html body .stage #sc-t h2 *{white-space:nowrap!important;color:#3a1d10;text-shadow:0 0 2px #fff8ee,0 0 6px #fff8ee,0 0 10px #fff8eecc}
+/* s31 stage-caption (owner 17/11: caption too faint over the backdrop): the place name + caption sit on the SAME kit plate as the side plaques (.k3p: --k3pl paper, --line border, 8px radius) and the caption uses the kit body size */
+html body .stage #sc-t{background:var(--k3pl)!important;border:1px solid var(--line)!important;border-radius:8px!important;box-shadow:0 1px 4px #3a20101f!important;backdrop-filter:blur(2px)!important;padding:3px 8px!important}
+html body .stage #sc-t h2,html body .stage #sc-t h2 *{white-space:nowrap!important;color:#3a1d10;text-shadow:none}
+html body .stage #sc-t h2 .rmsg{font-size:.88rem!important;line-height:1.25;font-weight:600}
 /* the place line never runs under the court chips (review fold-layout): it ends before the right plaque column; the place NAME stays one
    line, the trailing note ("… đi vắng, đang ở …") wraps under it */
 html body .stage.k3g #sc-t{width:max-content!important;max-width:calc(var(--k3stw,100vw) - var(--kgr,0px) - 24px)!important}

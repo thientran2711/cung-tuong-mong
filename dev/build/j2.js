@@ -105,23 +105,30 @@ function places(){const L=[
  return L}
 function placeOf(k){if(k==="home")return{k,n:"Tẩm cung của ngươi",d:"Cung nữ và các con ở đây.",sc:"home"};const f=places().find(p=>p.k===k);if(f)return f;if(k&&k[0]==="r"){let nm="";try{nm=typeof palName==="function"?palName(k):""}catch(e){}const v=RV(+k.slice(1));if(!nm||/ngươi/.test(nm))nm=v?`Cung của ${v.name}`:"Cung phi tần";return{k,n:nm,d:"",sc:"rv"}}return{k,n:"Tẩm cung của ngươi",d:"",sc:"home"}}
 function rp(v){return{kind:"rival",ref:v,name:v.name,ini:v.name.split(" ").pop()[0],col:RCOL[v.queen?7:v.rank],info:`${v.queen?"Hoàng hậu":RANKS[v.rank].n} · ${trChip(v)} · Với ngươi: Thiện cảm ${aff(v,S)} · Oán ${oan(v,S)} · Ghen ${v.ghen}${sameHouse(S,v)?" · cùng cung":""}`}}
+/* s31 stage-caption: ONE source of who is where = the j95 place record (S.roster.P); falls back to the old S.where only when the record is off */
+function recAt(id,k){try{const R=S&&S.roster;if(R&&R.P&&R.P[id]&&typeof j95gate==="function"&&j95gate()&&!(window.COOPW&&COOPW.on)){const e=R.P[id][j95kh()];if(e)return e[0]===k}}catch(e){}return null}
+function stageCapFix(V){/* the caption is written AFTER the people are reconciled: person claims follow V.people, never a stale goTo line */
+ try{if(!V||!Array.isArray(V.people)||typeof V.msg!=="string")return;
+  const c=V.cap;if(c&&c.emp&&c.cur&&V.msg.includes(c.cur)){const w=V.people.some(p=>p.kind==="emp")?c.emp[0]:c.emp[1];if(w!==c.cur){V.msg=V.msg.replace(c.cur,w);c.cur=w}}
+  const n=V.people.filter(p=>p.kind!=="chest").length;const cnt=n?`Ở đây có ${n} người.`:"Không gặp ai.";
+  if(/Ở đây có \d+ người\./.test(V.msg))V.msg=V.msg.replace(/Ở đây có \d+ người\./,cnt);else if(V.msg==="Không gặp ai."&&n)V.msg=cnt}catch(e){}}
 function goTo(k){if(S.dead||Q.length||S.out)return;popIdx=null;popMsg="";
  if(k==="home"){S.place="home";S.visit={k,people:homePeople(),talked:false,tk:{}};render();return}
  const tc=travel(S.place,k);if(!walkOk(tc)||S.confined)return;const P=placeOf(k);spend(tc);S.place=k;const W=S.where||{};
  const ppl=[];let msg="";const emp={kind:"emp",name:"Hoàng thượng",ini:"Đế",col:"#f0d070",info:`${empName()} · ${MOODS[S.emp.mood][0].toLowerCase()}`};
- const here=liveRivals(true).filter(v=>W[v.id]===k);const empHere=W.emp===k;
- if(k==="vuon"){if(empHere){ppl.push(emp);apply({sung:S.emp.mood<=1?3:1});msg="Ngươi tình cờ gặp Hoàng thượng đang dạo bước. Ngài dừng lại nhìn ngươi."}else msg="Hoa nở rộ. Hoàng thượng không ra vườn hôm nay."}
+ const at=(id,w)=>{const r=recAt(id,k);return r==null?w===k:r};const here=liveRivals(true).filter(v=>at("v"+v.id,W[v.id]));const empHere=at("emp",W.emp);const cap={};
+ if(k==="vuon"){if(empHere){ppl.push(emp);apply({sung:S.emp.mood<=1?3:1});msg="Ngươi tình cờ gặp Hoàng thượng đang dạo bước. Ngài dừng lại nhìn ngươi.";cap.emp=[msg,"Hoa nở rộ. Hoàng thượng không ra vườn hôm nay."]}else{msg="Hoa nở rộ. Hoàng thượng không ra vườn hôm nay.";cap.emp=["Ngươi tình cờ gặp Hoàng thượng đang dạo bước. Ngài dừng lại nhìn ngươi.",msg]}}
  if(k==="thu"){if(empHere){if(S.sung<40&&!roll(od(40+S.sung+mm()))){apply({sung:-3});S.visit={k,people:[emp],talked:true,tk:{},msg:"Hoàng thượng cau mày: “Trẫm đang bận việc nước.” Ngươi phải lui ra."};log("Đến Cần Chính điện, bị đuổi về.");render();return}
-   ppl.push(emp);msg="Hoàng thượng đang phê tấu chương, ngẩng lên nhìn ngươi."}else msg="Ngài không có ở thư phòng."}
- if(k==="dtd"){if(S.sung<50)msg=kSay({srv:"m"},S,"Thái giám chặn cửa: “Không có khẩu dụ, {goi} xin hồi cung.”")+(empHere?" Hoàng thượng ở bên trong, ngươi không được gặp.":"");else if(empHere){ppl.push(emp);msg="Hoàng thượng đang nghỉ, cho ngươi vào hầu."}else msg="Hoàng thượng không có ở điện."}
+   ppl.push(emp);msg="Hoàng thượng đang phê tấu chương, ngẩng lên nhìn ngươi.";cap.emp=[msg,"Ngài không có ở thư phòng."]}else{msg="Ngài không có ở thư phòng.";cap.emp=["Hoàng thượng đang phê tấu chương, ngẩng lên nhìn ngươi.",msg]}}
+ if(k==="dtd"){if(S.sung<50)msg=kSay({srv:"m"},S,"Thái giám chặn cửa: “Không có khẩu dụ, {goi} xin hồi cung.”")+(empHere?" Hoàng thượng ở bên trong, ngươi không được gặp.":"");else if(empHere){ppl.push(emp);msg="Hoàng thượng đang nghỉ, cho ngươi vào hầu.";cap.emp=[msg,"Hoàng thượng không có ở điện."]}else{msg="Hoàng thượng không có ở điện.";cap.emp=["Hoàng thượng đang nghỉ, cho ngươi vào hầu.",msg]}}
  if(k==="tn"){if(S.thDead)msg="Đức Thọ cung vắng lặng từ ngày Thái hậu băng hà.";else ppl.push({kind:"th",name:"Thái hậu",ini:"Từ",col:"#c9a0e0",info:`Thái hậu · lòng ${S.th}`})}
  for(const v of here){if(v.ill)v.ill.known=true;if(v.queen&&qOn())ppl.push({...rp(v),kind:"hh",name:`Hoàng hậu ${v.name}`,ini:"Phượng"});else ppl.push(rp(v))}
  if(P.v&&!here.includes(P.v)&&P.v.alive&&!P.v.out){ppl.push({kind:"chest",ref:P.v,name:`Rương của ${P.v.name}`,ini:"Rương",col:"#8a6a4a",info:"Chủ nhân đi vắng"});msg=`${P.v.name} không có ở cung.`}
  if(k==="tyv")ppl.push({kind:"ty",name:"Thái y Trương",ini:"Y",col:"#8fc38a",info:"Thái y viện"});
  if(k==="ksp")ppl.push({kind:"ksp",name:"Tổng quản",ini:"Hoạn",col:"#b9a48a",info:"Giữ thẻ bài các phi tần"});
  if(k==="lc"){const f=rivals.filter(v=>v.alive&&v.out);(f.length?f.slice(0,3):[null]).forEach(v=>ppl.push(v?{kind:"fallen",ref:v,name:v.name,ini:v.name.split(" ").pop()[0],col:"#6a7a8a",info:"Phế phi"}:{kind:"fallen",name:"Phế phi họ Lý",ini:"Lý",col:"#6a7a8a",info:"Phế phi"}))}
- if(!msg)msg=ppl.length?`Ở đây có ${ppl.length} người.`:"Không gặp ai.";
- S.visit={k,people:ppl,talked:false,tk:{},msg};log(`Đến ${P.n}.`);render()}
+ if(!msg){msg=ppl.length?`Ở đây có ${ppl.length} người.`:"Không gặp ai.";cap.cnt=1}
+ if(cap.emp)cap.cur=msg;S.visit={k,people:ppl,talked:false,tk:{},msg,cap};log(`Đến ${P.n}.`);render()}
 function curPeople(){return S.visit?S.visit.people:[]}
 
 function talkOpts(p){const E=S.emp,K=E.known,L=E.likes,b=bestArt(),v=p.ref;
