@@ -581,3 +581,4 @@
 | C44 cloud-del 'Xóa sổ trên mây' (sonnet UI, KIT §83.9) | review/cloud-del | D | session_01964izCcuExvScNgYEs1xN6 | RUNNING | 17/11 03:35Z |
 | P5 STORY BOT balance (opus, report only, ch1–4 first) | review/story-bot | D | session_01964izEJdhucE8HEDCzfJ25 | RUNNING | 17/11 03:35Z |
 | scenes-3 r1 PASS 92b6c60f (review/scenes-3-r1) → builder batch-0232 (or next batch); worker + reviewer archived | review/scenes-3-r1 | main s29 | session_01UV1Szkquo1hWfgug5N5F9Q | PASS | 17/11 03:37Z |
+| ART event-art-style (sonnet art): OWNER 03:42Z event pictures off-style (faces / colour / brushwork) → audit every event/act/opt/intro picture vs anchor, 4 samples → C, then redo (brief briefs/event-art-style.md) | handover reports/event-art-style.md | C | session_011xDdVNnHxuy2KotX9dH3zb | RUNNING | 17/11 03:40Z |
