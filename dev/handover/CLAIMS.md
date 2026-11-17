@@ -843,7 +843,7 @@
 | B lander #2 (coop-thin-b-r3 S.wwin root cause + land; then origin-bd-r1; opus; brief briefs/land-b-2.md) | review/land-* | B | session_01N1tNP34QePRanPQevmttcs | RUNNING | 17/11 16:10Z |
 | REVIEW loading-words-2 r1 of 8816f08ee (sonnet) | review/loading-words-2-r1 | MAIN s33 | session_01UV1Szi9DmFFUQLdYo4pocU | RUNNING | 17/11 16:13Z |
 | pcard-facts-2-r1 PASS ab50f1c5 → builder batch s32a (replaces d5f1abb2); worker + reviewer archived | review/pcard-facts-2-r1 | MAIN s34 | session_01UV1SzgWoEmnjTTEv7UgBNP | PASS → BATCH | 17/11 16:20Z |
-| KIT-OPTION-ROWS: iPad 2-option modal narrow columns + 'không được không mất' family + sure option 'thành:' rows (sonnet; brief briefs/s34-kit-option-rows.md) | review/kit-option-rows | MAIN s34 | session_01UV1SzjeZeh5hkf6FRmYPSc (kit worker) | PARTIAL 3dabd1f7 (report reports/kit-option-rows.md) | 17/11 |
+| KIT-OPTION-ROWS: iPad 2-option modal narrow columns + 'không được không mất' family + sure option 'thành:' rows (sonnet; brief briefs/s34-kit-option-rows.md) | review/kit-option-rows | MAIN s34 | session_01UV1SzjeZeh5hkf6FRmYPSc (kit worker) | READY 3dabd1f7 (quickcheck PASS; report reports/kit-option-rows.md) | 17/11 |
 | world-events-2 LIVE e8b1906f (C-AG; main 7e0250ec → e8b1906f) | review/world-events-2-r1 | C-AG | - | LIVE | 17/11 16:18Z |
 | WORLD link đại hàn → đại phóng cung nhân (opus small; main s34 16:20Z (c); brief briefs/world-ret-phong.md) | review/world-ret-phong | C-AG | session_01UV1SzkMv4WH519U2wy8sQ2 | RUNNING | 17/11 16:25Z |
 | toil-looks5: Vụng A ?v=10 (OD 16:20Z (a)) on 97f57862 (sonnet; brief briefs/s34-toil-looks5.md) | review/toil-looks5 | MAIN s34 | session_01UV1SzjoLym3Q8XoYNGrcgt | SẴN SÀNG KIỂM 27ff57d3 ?v=10 | 17/11 16:30Z |

@@ -29,3 +29,6 @@ CORE GATES PASS (one-core-guard, rules-one-source, kit-conform, coop-one-world, 
 ## NOT done
 - quickcheck summary line may be missing from the first run (pipe cut); rerun log appended if it finished.
 - Option modals only reached via endTurn x50-60; 412x1058 and 390x844 not scanned.
+
+## Final quickcheck (3dabd1f7 vs live e8b1906f)
+QUICKCHECK PASS · 127 s · open 1367 ms · old save ok · perf (median of 3, new/live): render 158/150 ms, tab 271/248 ms, buổi 764/770 ms, tasks>200ms 11/10 · core gates PASS · build 2 s · total 285 s
