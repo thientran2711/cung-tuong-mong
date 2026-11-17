@@ -12,6 +12,17 @@ U = 4000
 HAIR_K = 0.30   # hair thickness above landmark 10, as a share of the face height (chin .. landmark 10); calibrated, see report
 # the face mesh cannot read a face with closed eyes looking down; head top read by eye (hairline just under the crown) -- one picture of 8890 (17/11)
 MANUAL = {"fig-maid-m15-t8-a18.webp": 382}
+# grey "Người lạ" silhouettes (img/kit/unknown-fig-f|m|k.webp, no face): head top = painted top + SIL_K x body, the same crown/hair allowance a plain-hair real figure has
+# (median of (head top - painted top) / (feet - head top) over the 60 cold-palace figures = 0.046, see the report), so a silhouette stands exactly where a real figure would
+SIL_K = 0.046
+SILS = ("unknown-fig-f.webp", "unknown-fig-m.webp", "unknown-fig-k.webp")
+def silhouette_rows():
+    out = {}
+    for n in SILS:
+        im = Image.open(io.BytesIO(get(BASE + "kit/" + n))).convert("RGBA"); a = np.asarray(im)[..., 3] > 40
+        ys = np.where(a.any(1))[0]; t, b = ys[0] / im.height, (ys[-1] + 1) / im.height
+        out[n] = int(round((t + SIL_K * b) / (1 + SIL_K) * U))
+    return out
 _LM = None
 def landmarker(model):
     global _LM
@@ -69,6 +80,7 @@ def main():
     out = {n: int(round((r[0] - HAIR_K * (r[1] - r[0])) / r[2] * U)) for n, r in raw.items() if r}
     for n, v in MANUAL.items():
         if n in raw and not raw[n]: out[n] = v
+    if not a.dir: out.update(silhouette_rows())
     fails = [n for n, r in raw.items() if not r and n not in MANUAL]
     print("figs", len(names), "ok", len(out), "fail", len(fails))
     json.dump(out, open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "fig-ht.json"), "w"), separators=(",", ":"), sort_keys=True)
