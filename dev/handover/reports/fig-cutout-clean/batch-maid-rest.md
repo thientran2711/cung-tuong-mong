@@ -162,3 +162,11 @@ maid-m06-tm2-a18	3z5MwUwREY	redo ok U
 maid-m06-tm3-a18	lJIiqqSgv9	redo ok U
 maid-m06-tm4-a18	SymR556Ub8	redo ok U
 maid-m07-a18	s786HHZl8e	redo ok U
+maid-m07-cold-a18	UPhZxvvwny	redo ok U
+maid-m07-kc-a18	VXwvz72MMU	redo ok U
+maid-m07-ngheo-a18	huZkX2IvqL	redo ok U
+maid-m07-t1-a18	O6Czlu9ynm	redo ok U
+maid-m07-t2-a18	dtPu09fXSL	redo ok U
+maid-m07-t3-a18	8a6qD3gIrU	redo ok U
+maid-m07-t4-a18	3z5MykbREY	redo ok U
+maid-m07-t5-a18	N2H07bj6D9	redo ok U
