@@ -59,5 +59,11 @@ ok(!hits.length,'one table: no private capOf table / wrapper / +1 count outside 
  /* servant road */
  const s=await p.evaluate(()=>{window.__forceOrigin=null;for(let i=0;i<300;i++){start();if(isSrv())break}Q.length=0;return{srv:isSrv(),cap:capOf(S),staff:(S.staff||[]).length}});
  ok(s.srv&&(s.cap[0]===0&&s.cap[1]===0&&s.staff===0),'servant road: no household of her own',JSON.stringify(s));
+ /* (7) co-op guest seat (review/staff-root-r1): her household is a personal key, so the guest trims her own (NPC households stay the host's) */
+ const gs=await newGame('tt');const gq=await p.evaluate(()=>{S.rank=4;fillStaff(S,true);while(hhHas(S)[0]<3)S.staff.push(mkServ("maid"));while(hhHas(S)[1]<1)S.staff.push(mkServ("eunuch"));
+  const v=rivals.find(x=>x.alive&&!x.out&&!x.queen);if(v){v.staff=[mkServ("maid"),mkServ("maid"),mkServ("maid"),mkServ("eunuch"),mkServ("eunuch"),mkServ("eunuch")];v.rank=0}const vb=v?hhHas(v):null;
+  const W0=window.COOPW;window.COOPW=Object.assign({},W0||{},{on:true,seat:"b"});S.rank=1;let a,va;try{capSweep();a=hhHas(S);va=v?hhHas(v):null}finally{window.COOPW=W0}
+  return{a,c:capOf(S),vb,va}});
+ ok(gq.a[0]<=gq.c[0]&&gq.a[1]<=gq.c[1]&&JSON.stringify(gq.vb)===JSON.stringify(gq.va),'co-op guest: her own household trimmed on her seat; NPC households left to the host',JSON.stringify(gq));
  ok(!errs.length,'no page errors',errs.join(' | '));
  for(const t of T)console.log(t.join(' | '));const n=T.filter(t=>t[0]==='FAIL').length;console.log(n?`FAIL ${n}/${T.length}`:`PASS ${T.length}/${T.length}`);await b.close();process.exit(n?1:0)})();
