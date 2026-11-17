@@ -36,3 +36,11 @@ FAIL items (numbered for worker):
 Not blocking: fig-seal run showed 2 transient non-live "an" seals once on iPad (timing; next run all live, 0 frozen).
 Perf/old save: see below.
 Perf (Fold 4x CPU) and old-save 16/16 NOT completed for r3 (oldsave-r1 stalled on CDN loads in this sandbox; OLD build part ok). Re-run on the fixed tip. No CDN shots uploaded (scratch only).
+
+# r4 — PASS 01e6275c (review/kit-figure-mood-r4-r5 = worker 26ace669 + merge origin/main 03f97e15, site rebuilt, only index.html/sw.js conflicted)
+PRIORITY #1 CHECK: OD 18:25Z(a), 18:38Z, 19:25Z, 20:15Z/20:20Z (no intent face) | main jemo*.js | review/kit-figure-mood-r4 26ace669 | claims kit-figure-mood MAIN s36.
+- r3 items 1-5 verified with the stub card harness (5 cases, Fold 755x1000@2 + iPad 1180x820@2, 0 page errors, shots looked at): (1) ghen+chanh one group "Chạnh lòng"; (2) tones from KIT_EMOTONE (chanh red like ghen, no inline list); (3) header sub, badge alt and data-kemo = same seal name (Khóc / Chạnh lòng); (4) bold group driven by faceKeyFor().feel.key without sealKeyFor; (5) no raw key ever printed (unnamed act row hidden). Order/bold/khắc/"Nguyên do chưa rõ" unchanged.
+- No intent anywhere: no toantinh in the build, no Vẻ mặt line, intent face falls to its feeling. Legacy EMO.muu "Toan tính" stays only for old saves' legacy mood key (C-AG migrates muu->binh); non-blocking.
+- Old save 16/16 (755/1180/1366, main build save). Fold 4x tab-perf-ab (4 reps, run alone, A=r4 vs ref main): no tab flagged SLOWER (act 1021/1037, go 748/822, story 281/385 ms tap); first run with fig-seal running concurrently flagged story, a contention artefact.
+- Figure seals: event dialog seals present, none on face, all inside; 0 errors. Room/place figure seals read 0 in this sandbox on iPad AND Fold for r3 and r4 alike this session (seals appear after kitFigBody measures the CDN image; slow here), so not attributable to r4; worker's own fig-seal run + earlier r3 run showed them.
+- quickcheck.sh does not exist on this tree; skipped. Shots scratch only.
