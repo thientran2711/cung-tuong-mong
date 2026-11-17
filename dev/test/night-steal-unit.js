@@ -34,8 +34,8 @@ const {chromium}=require('playwright');const path=require('path');
   v.sung=10;v.rank=1;v.kids=[];v.rl[t.id]=0;v.ro[t.id]=0;const w0=stealWant(v,t).u;v.rl[t.id]=90;const wf=stealWant(v,t).u;v.rl[t.id]=0;v.ro[t.id]=100;const wh=stealWant(v,t).u;
   ok("relation: a friend of the holder rarely robs her",wf<w0*.3,{w0,wf});
   ok("hatred adds only a little (oán 100 ≤ ×(1+oanW))",wh>w0&&wh<=w0*(1+BAL.steal.oanW)+1e-9,{w0,wh});
-  const tr0=v.trait,tr1=v.trait2;v.trait="Tham vọng";const wa=stealWant(v,t).u;v.trait="Hiền lành";const wk_=stealWant(v,t).u;v.trait=tr0;v.trait2=tr1;
-  ok("personality: Tham vọng tries far more than Hiền lành",wa>wk_*3,{wa,wk:wk_,traits:traitsOf(v)});
+  /* trait pool (owner OD 17/11 ~05:45Z, d296f3cd): nết live in v.net (3 groups, BAL.net.T[t].g); .trait is only the figure look key now. Same-group swap (Chí hướng): Tham vọng vs An phận, the other two nết kept */const n0=v.net,nI={tt:0,ld:1,ch:2};const nSd=w=>{const n=netOf(v).slice();n[nI[BAL.net.T[w].g]]=w;v.net=n};nSd("Tham vọng");const wa=stealWant(v,t).u;nSd("An phận");const wk_=stealWant(v,t).u;v.net=n0;
+  ok("personality: Tham vọng tries far more than An phận (BAL.net weights)",wa>wk_*3,{wa,wk:wk_,traits:traitsOf(v)});
   v.sung=10;v.rank=1;S.tonight=t;const pq=stealWant(v,t).p;ok("try chance ≤ pMax",pq<=BAL.steal.pMax);
   Object.assign(v,{sung:sav.sung,rank:sav.rank,kids:sav.kids,rl:sav.rl,ro:sav.ro});Math.random=M;
   /* 6 · no hatred needed: an NPC with zero oán/ill-will toward the holder still tries out of ambition */
