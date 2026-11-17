@@ -658,7 +658,7 @@ Grid rows: every card in a row has the row's height (fitted to content, `grid-au
 - Host page (rot.js design canvas): the same cover in the design box until the frame has painted its own.
 - Let go by `kbootDone()` (last `<script>`, assemble.py) only when the game script ran to its end (`window.__ctmBuilt`).
 - WATCHDOG (owner iPad 15/11 "Bị gì đây mới vào game"): script not finished (`data-why=broken`) → failure card "Cửa cung chưa mở được"
-  with "Tải lại" and "Xóa bộ nhớ đệm rồi tải lại" (drops shell caches + service worker; keeps pictures and saves; reloads the whole page, query
+  with "Mở lại" and "Quét lối cũ rồi mở lại" (drops shell caches + service worker; keeps pictures and saves; reloads the whole page, query
   such as `?room=` kept) and the last error, small. A SLOW open is not a failure (review r1): 15 s → the cover keeps its bar and says
   "Đường xa, cung đang dựng dần…"; 30 s → the same card with the slow text (`data-why=slow`), and it still lets go the moment the game is ready.
   Boot errors are kept in localStorage `ctm-boot-err` (last 8).
@@ -2561,7 +2561,7 @@ Owner 11/14: images + sounds are downloaded to the device on first entry with a 
   iPad/iPhone Safari: see 35.1). Buttons `.kpopts` only when the line is cut/stalls:
   `.kbtn.alt` "Vào cung ngay" + `.kbtn` "Thỉnh tiếp". Fades out (0.45 s) when the essential set is in; z 9600.
 - `kitProgress({label,have,total,sub})` → `.kprog`: `h4.kpst` label · track `.kprog-t` (12 px, `--line` border, `--k-card2` ground, fill
-  lacquer red → amber `#b0402c → #c98a2a` like the kit slider) · number `.kprog-n` "26 / 83 MB" (display font, `--gold`) · sub line `.kprog-s`
+  lacquer red → amber `#b0402c → #c98a2a` like the kit slider) · number `.kprog-n` in WORDS (mới chút ít / một phần tư / quá nửa / gần đủ / đủ cả, from CTM_WAIT.dlPart; never MB or %) (display font, `--gold`) · sub line `.kprog-s`
   (time left in words: "còn chừng nửa phút / một phút / N phút", "sắp xong"). Never "%" (VANPHONG); MB is the only unit.
 - Background indicator = the status icon `dl` (§36.6 / §77.1, no chip): tap → info panel with `kitProgress` + "Tạm ngưng / Thỉnh tiếp" (remembered); still ✓ then gone when done.
 - Wording: "thỉnh" (bring in) for downloading; no tải/dữ liệu/phiên bản (VANPHONG §3).
@@ -4132,3 +4132,6 @@ ONE list for every ranking ("place · face · name · numbers · score": the B�
 - `kitRankFoot({label, row, note, btns})` — the own-life strip under a list: small label line ("Ta trên bảng · hạng N trên M"), ONE `kitRankRow` (mine), a small queue note, then a button row (kit `.kbtn`, wraps; shares the width on kv1).
 - Layout reads `html.kv1` (one page: the two columns fold into the second line `line`, header hidden) / `html.kv2` (spread: all columns). No `@media` (§0). Classes `krl-*` belong to this part only.
 - Users: jrank (Bảng vàng, both tabs + the own-life footer). Podium entries (`kpodCol`, §26.1) take optional `fig` / `face` / `nameH` / `you` so a board can feed it without a person object. Sample: kit page §87. Test: `node dev/test/rank-e2e.js` (list rows + own row + footer).
+
+## §KWAIT — one table for every loading / waiting line (review/loading-words, 11/17)
+`dev/site/kwait.js` = `window.CTM_WAIT`: boot cover, Thỉnh tranh, Sổ mây, co-op wait/reconnect, new-build lines, Luân hồi wait, ghi sổ failure. Code reads `CTM_WAIT.key`, never types such a line. Literary cổ trang, no %, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt); the long road to the server is "đường xa". Scan: `python3 dev/test/wait-words-scan.py` (must print 0 BAD outside story prose).

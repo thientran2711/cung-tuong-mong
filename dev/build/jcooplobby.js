@@ -51,7 +51,7 @@ function body(pg){const s=COOP.state;
    `<div class="kcol-act"><button class="kbtn k1" data-coop="share">Gửi đường dẫn cho hảo hữu<small>qua Zalo, Messenger, tin nhắn</small></button><button class="kbtn alt" data-coop="copy">Chép đường dẫn</button><button class="kbtn alt" data-coop="copycode">Chép mã ${esc(c)}</button></div>`+
    `<div class="kpnote">${s.status==="open"?"Giữ màn này mở: hảo hữu vào phòng là cuộc chơi tự bắt đầu, ngươi không phải chạm gì thêm. Hảo hữu chạm vào đường dẫn (hay chọn Cùng hảo hữu, Nhập ám hiệu, gõ ám hiệu) là vào phòng. Muốn thử một mình: mở đường dẫn trên máy khác.":"Đang nối với phòng."}</div>`}
  if(pg==="join")return kitInput({id:"coop-code",label:"Ám hiệu",value:CODE,placeholder:"bốn chữ hảo hữu gửi"})+
-   `<div class="kcol-act"><button class="kbtn k1" data-coop="go">Vào phòng</button></div>`+(s.status==="connecting"||s.status==="retry"||PEND?`<div class="kpnote">Đang vào phòng ${esc(CODE)}…</div>`:`<div class="kpnote">Ám hiệu là bốn chữ hay số hảo hữu gửi, ví dụ K7QD. Có đường dẫn thì chỉ cần chạm vào đường dẫn.</div>`);
+   `<div class="kcol-act"><button class="kbtn k1" data-coop="go">Vào phòng</button></div>`+(s.status==="connecting"||s.status==="retry"||PEND?`<div class="kpnote">${CTM_WAIT.coopJoining.replace("{code}",esc(CODE))}</div>`:`<div class="kpnote">Ám hiệu là bốn chữ hay số hảo hữu gửi, ví dụ K7QD. Có đường dẫn thì chỉ cần chạm vào đường dẫn.</div>`);
  if(pg==="err")return `<div class="kpnote">${esc(ERR)}</div><div class="kcol-act"><button class="kbtn k1" data-coop="co">Thử lại</button></div>`;
 if(pg==="pick"){const c=s.room||CODE;return `<div class="kcol-code">${kitRows([["Ám hiệu",esc(c),"t"],["Hảo hữu","đang chọn thân phận","n"],["Ngươi","đã vào phòng","g"]])}</div>`+
    `<div class="kpnote">Hảo hữu mở phòng nên chọn thân phận trước, hậu cung dựng theo kiếp của hảo hữu. Hảo hữu chọn xong, màn chọn thân phận của ngươi tự hiện ra. Không cần bấm gì.</div><div class="kcol-act"><button class="kbtn alt" data-coop="back">‹ Về màn đầu</button></div>`}
@@ -76,7 +76,7 @@ async function join(code){code=String(code||"").trim().toUpperCase().replace(/[^
 async function resume(code){ERR="";CODE=code||stored();try{if(code)localStorage.setItem("ctm-coop-room",code)}catch(e){}try{open("join");await COOP.resume();open("wait")}catch(e){ERR=errText(e);open("err")}}
 function errText(e){const c=e&&(e.code||e.message)||"";
  if(/full/i.test(c))return "Phòng này đã đủ hai người.";if(/not.?found|no.?room|404/i.test(c))return "Không thấy phòng mang mã này. Xem lại mã hảo hữu gửi.";
- return "Chưa nối được với phòng. Xem lại đường mạng rồi thử lại."}
+ return CTM_WAIT.coopJoinErr}
 $("modal").addEventListener("click",e=>{const b=e.target.closest("button[data-coop]");if(!b)return;e.stopPropagation();
  try{if(typeof sfx==="function")sfx("sfx-tap")}catch(x){}
  const a=b.dataset.coop;
@@ -107,7 +107,7 @@ COOP.on("error",e=>{if(LM&&(PG==="wait"||PG==="join")){ERR=errText(e);open("err"
 COOP.on("both",()=>{if(!LM)return;window.__cuxBoth=PG;if(PG==="wait"){try{if(typeof sfx==="function")sfx("sfx-join")}catch(e){}try{if(typeof kitLine==="function")kitLine("Hảo hữu đã vào phòng. Cuộc chơi bắt đầu.",3500)}catch(e){}}SENT=false;WT0=0;drop();PG="";try{T.hidden=true}catch(e){}const s=COOP.state;COOP.emit("start",{room:s.room,you:s.you,host:s.you==="a",week:s.week,state:s.C})});
 /* freeze overlay: kit panel markup (.modal.kpscene > .dlg.kpanel with kpHeader), above everything, no way around it but waiting or leaving */
 let FZ=null;
-const FZT={me:["Đợi hảo hữu trở lại","Đường mạng của ngươi vừa đứt. Đang tự nối lại, không mất gì."],peer:["Đợi hảo hữu trở lại","Hảo hữu đang vắng (máy ngủ hay chuyển sang việc khác). Hảo hữu mở lại trò chơi là tự vào lại; hậu cung dừng lại cho đến lúc ấy."],
+const FZT={me:["Đợi hảo hữu trở lại",CTM_WAIT.coopCutMe],peer:["Đợi hảo hữu trở lại","Hảo hữu đang vắng (máy ngủ hay chuyển sang việc khác). Hảo hữu mở lại trò chơi là tự vào lại; hậu cung dừng lại cho đến lúc ấy."],
  moved:["Cuộc chơi đã sang máy khác","Ngươi vừa vào phòng này từ một máy khác; cuộc chơi đi theo máy ấy, ở đây dừng lại. Muốn chơi tiếp ở máy này: Về màn đầu, Cùng hảo hữu, Trở lại phòng."],
  week:["Đợi hảo hữu xong tuần","Ngươi đã sang ngày mới. Khi hảo hữu cũng xong tuần, tuần mới bắt đầu cho cả hai."]};
 function fz(on,why){if(!on){if(FZ){FZ.remove();FZ=null}return}
