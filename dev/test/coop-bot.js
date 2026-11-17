@@ -15,6 +15,8 @@ async function mk(b,name,vp){const ctx=await b.newContext({viewport:{width:vp[0]
       const on=typeof c.on==='boolean'?c.on:!!(s.playing||(s.status&&s.status!=='off'));
       return{code:c.code||s.room||'',seat:you,week:c.week!=null?c.week:(s.week||0),ended,on,
         frozen:!!(on&&(s.status!=='open'||!s.peerOnline)),waiting:!!(window.COOPW&&COOPW.on&&(COOPW.sent===(s.week||0)||(you&&ended[you]))),world:typeof S!=='undefined'&&!!S&&!!(window.COOPW&&COOPW.base)}}},WURL);
+  /* THIN=n (review/coop-thin-b): the host asks the room for thin level n (dev flag ctm-thin); the level turns on only when both seats can */
+  if(process.env.THIN&&name==='A')await ctx.addInitScript(n=>{try{localStorage.setItem('ctm-thin',String(n))}catch(e){}},process.env.THIN);
   /* TRIP=1 (review/coop-thin-a): the guest tripwire (thin-guest progress meter) on the guest page */
   if(process.env.TRIP&&name==='B')await ctx.addInitScript({path:path.join(__dirname,'coop-thin-trip.js')});
   const p=await ctx.newPage();p.setDefaultTimeout(30000);const o={name,ctx,p,errs:[],acts:0,deaths:0,names:[],meets:0,harms:0,hk:{}};

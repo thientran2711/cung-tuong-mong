@@ -78,7 +78,7 @@ const until=async(o,fn,arg,ms=40000)=>{try{await o.p.waitForFunction(fn,arg,{tim
    const mn=P.S.maid&&P.S.maid.name;return {name:P.name,maid:mn,me:oth.filter(x=>x[0]===P.name||t(x[0])===t(P.name)),md:mn?oth.filter(x=>x[0]===mn):[]}});
   ok(!hn.me.length&&!hn.md.length,tag+': her name and her maid\'s name unique in the one world (the host\'s)',hn);
   const h=await H.p.evaluate(()=>({ids:rivals.filter(v=>!v.coop).map(v=>v.id).sort((a,b)=>a-b),names:rivals.filter(v=>!v.coop).map(v=>v.name).sort(),srvOf:(()=>{const P=COOPW.base.P.b;const m=P&&P.S&&P.S.srv?RV(P.S.srv.mid):null;return m?{id:m.id,name:m.name,alive:m.alive,out:!!m.out}:null})(),
-   knows:!!((S.known||{})['r902']),self:(()=>{const t=COOPW.thin.selfTest();/* a host at home (tiểu thư road) has no stand-in entry: the round trip itself is what counts */return (t.sameA&&t.sameB&&t.b&&t.b.ctx==='b')||{paths:t.paths,err:t.err,b:t.b}})(),ctx:COOPW.ctx||null,hold:COOPW.thin.life.hold,name:S.name,stat:COOPW.thin.life.stat}));
+   knows:!!((S.known||{})['r902']),hostHome:!!(S.kc&&!S.kc.inPal),self:(()=>{const t=COOPW.thin.selfTest();/* a host at home (tiểu thư road) has no stand-in entry: the round trip itself is what counts */return (t.sameA&&t.sameB&&t.b&&t.b.ctx==='b')||{paths:t.paths,err:t.err,b:t.b}})(),ctx:COOPW.ctx||null,hold:COOPW.thin.life.hold,name:S.name,stat:COOPW.thin.life.stat}));
   ok(g.ok===k&&!g.card,tag+': guest playing her new life (origin '+k+')',{ok:g.ok,card:g.card});
   if(card)ok(g.name===card.name,tag+': the life she got == the card',[g.name,card.name]);
   ok(JSON.stringify(g.ids)===JSON.stringify(h.ids)&&JSON.stringify(g.names)===JSON.stringify(h.names),tag+': same consorts on both seats',{g:g.ids.length,h:h.ids.length});
