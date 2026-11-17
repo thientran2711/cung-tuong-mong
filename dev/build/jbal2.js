@@ -487,3 +487,9 @@ Object.assign(BAL,{voice:{warm:40,cold:-25,sungMid:0,favMid:0,nuong:3,hi:5,hq:7,
    showTreasure j83/jecon (tier-3 piece shown at a banquet). Other ghenAll gains already live in BAL.night.ghen, BAL.visit.ghen, BAL.psk.ghen, jcycle rep.giauGhen. */
 Object.assign(BAL,{ghen:{datinh:1.5,dance:4,kinhHong:10,preg:6,rumor:12,cry:5,son:15,girl:8,rankUp:10,festival:8,bestow:3,ally:3,kidTop:2,
  flowerParty:2,follower:2,boast:4,keepGift:3,contest:4,praise:3,contestTop:8,showTreasure:2}});
+/* SIDE CHANCES printed on cards (review/balance-2, ONE CORE OD:L1267): the card text (chanceW) and the roll read the SAME key.
+   treatStep j13 treat (an illness eases one stage) · discover j2 «Nói thật lòng» · nurseGift j20 «Hầu thuốc Hoàng thượng» · abortDie j22 / abortDieSrv j42
+   (bleeding to death when the potion fails) · loanBack j24 (a borrower repays, per month) · kneel j42 «Cãi lại» · riseKill j42 «Cúi đầu thưa tên» (the mistress
+   kills her before the investiture) · maidRise j8 sendMaid (the maid sent in her place is raised) · vpTake j8 night1 (above-rank jewellery taken) ·
+   caught j34 sabotage (caught when the sabotage fails) · helpFall j7 «Giúp … một tay» (the target falls). */
+Object.assign(BAL,{rk:{treatStep:50,discover:50,nurseGift:40,abortDie:25,abortDieSrv:20,loanBack:40,kneel:40,riseKill:25,maidRise:30,vpTake:40,caught:50,helpFall:50}});

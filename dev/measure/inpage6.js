@@ -64,7 +64,7 @@ function scoreAct(a,N,cost){
   if(a.j67&&!window.__noStory)return 6; /* a sensible player opens the next Mệnh truyện beat when it is ready */
   const lb=(typeof lotB==="function"?lotB(S,a.dom):0);const o=a.o==null?1:cl((a.o==null?100:a.o)+lb,5,100)/100;
   let v=o*valW(a.w,N)+(1-o)*valW(a.l,N)-costW(a.c);
-  if(a.x){if(/chứng cứ/.test(a.x))v+=1.5;if(/Hoàng thượng thương/.test(a.x))v+=1;if(/dễ có thai/.test(a.x))v+=(S.preg?0:1.5);if(/thị tẩm/.test(a.x))v+=3*o;if(/nguy cơ sảy thai/.test(a.x))v+=3}
+  if(a.x){if(/chứng cứ/.test(a.x))v+=1.5;if(/Hoàng thượng thương/.test(a.x))v+=1;if(/dễ có thai/.test(a.x))v+=(S.preg?0:1.5);if(/thị tẩm/.test(a.x))v+=3*o;if(/nguy cơ sảy thai/.test(a.x))v+=3;/* balance-2: a sensible player reads the red «kèm» risk on the card (chance words, j1 chanceLvl): punishment risk weighs by its chance */{const m=String(a.x).match(/kèm:[^·]*?(phạt|cấm túc|giáng|lãnh cung)[^·]*?khả năng (rất thấp|thấp|vừa|rất cao|cao)/);if(m)v-=({"rất thấp":.05,"thấp":.13,"vừa":.27,"cao":.47,"rất cao":.75}[m[2]])*(8*N.wd)}}
   try{const SA=STORY[S.origin.k];if(SA&&SA.acts&&SA.acts().some(x=>x.n===a.n))v+=6}catch(e){}
   if(a.n==="Báo tin có thai")v+=50;if(a.toil)v+=6;/* balance-pass: a sensible player makes up each morning (jtoil: else "Thái hậu chê dung nhan", Đức/Danh) */
   if(/An thai|Tự bào chế thuốc an thai/.test(a.n)&&!S.anthai)v+=40;
