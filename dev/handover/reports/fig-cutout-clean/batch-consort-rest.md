@@ -113,3 +113,7 @@ NOTE (lead 17/11): 'richer than maid' wording was used for chunks 04-06 (c09-tm0
 c11-tm0 8a6q4MBIrU; tm1 w4v2tLx7EI; tm2 yiEnfoKPW9; tm3 DoJfwLhpcl; tm4 vQ21ZHja47; c12-kc 6AqTHnkiJO; ngheo lJIi8aygv9; t2 p8OCJ6Yehw; t3 Xm4Q6FMBfo; t4 P3uYH0Z42C; t5 s786hnWl8e; t6 5jM7dRsKxe; t7 KLDBGikqp (KLDJBGikqp); t8 EbnLT6DuuO; tcold 9ZFckCSNYZ
 c13-tm0 0eSm9KNTfW; tm1 iGbVsfm3uK; tm2 aFArM49fSh; tm3 tC35cORmZJ; tm4 nVLoPE6YQD; c14-kc P3uYxB242C; ngheo ovNHYM3829; t2 gOt3HxJSXO
 PAUSED by owner priority (rank standard sheet pushed in rank-standard/). t1 UNHELD by Foreman C GO but not generated yet: todo t1 keys c08,c10,c11,c12,c13,c14 (+ c09-t1 gen tC35kALmZJ generated, NOT uploaded). Remaining queue: /tmp/w/todo_08 rest (c14-t1,t3..tcold) and todo_09.. (a18 order of consort-rest-A.txt after c14-t2), then a26/a36/a51.
+## W3c chunk07 (generated, in scratch /tmp/w/out/img, NOT uploaded: held until owner OKs rank standard). All with the old 'richer than a maid' wording (too rich per owner verdict) -> candidates for redo/regeneration with 'same rank as image 1'. c13-tcold holds a broom (maid-like prop; redo).
+c12-tm0 lJIimZhgv9; tm1 UPhZan8wny; tm2 huZkAXOvqL; tm3 xSX4obejfW; tm4 DoJfPjBpcl; c13-kc jUB9ITGLD0; ngheo LwoNmdMswO; t2 9ZFc5uJNYZ; t3 vQ21Y51a47; t4 vQ21YKra47; t5 p8OCNNRehw; t6 lJIiaCwgv9; t7 TdUhPCpVNR; t8 gOt3CGBSXO; tcold ovNH2cR829
+(Note: c12-tm0..tm4 may be live-duplicates? c11-tm* and c12-t* were uploaded earlier; chunk07 tm0..tm4 of c12 are NOT uploaded.)
+Pending t1 (unheld): c08, c10, c11, c12, c13, c14.
