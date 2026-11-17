@@ -102,6 +102,11 @@ window.eaTemper=eaTemper;
 /* the group of a feeling: vui · gian · buon · so (căng thẳng) · ghen (cards: buồn) */
 /* the dominant feeling (the seal) of p as an act group, or null */
 function eaSealG(p){try{const e=emoGet(p);return e&&e.k!=="binh"?eaGrpK(e.k):null}catch(e){return null}}
+/* FEELINGS-18 (owner OD 17/11 ~19:25Z: acts at the HEAVY level + the bar line; reviewer mood-mem step0 note): the level of p's dominant feeling
+   (jfeel feelLv: summed strength of its live causes) must reach BAL.feel.gate[w] — "card" for the acts she / an NPC CHOOSES to vent with,
+   "force" (heavy) for what the feeling forces (outbursts, the "Nhịn" lock, extreme consequences). No jfeel → true (old rule). */
+function eaLvOk(p,w){try{if(typeof feelLv!=="function"||!BAL.feel||!BAL.feel.gate)return true;const e=emoGet(p);if(!e||e.k==="binh")return false;return feelLv(p,e.k)>=BAL.feel.gate[w]}catch(e){return true}}
+window.eaLvOk=eaLvOk;
 /* NPC gate (owner OD 17/11 ~18:33Z (1), same lines as hers): the group g of the dominant feeling counts only when the signed mood bar (moodBar) is past
    line L on its side (vui: bar ≥ L; every other group: bar ≤ −L) */
 function eaBarOk(p,g,L){try{const b=typeof moodBar==="function"?moodBar(p):0;return g==="vui"?b>=L:b<=-L}catch(e){return false}}
@@ -111,7 +116,7 @@ function eaBarAbs(p){try{return Math.abs(typeof moodBar==="function"?moodBar(p):
    Khó chịu/Hờn dỗi → giận, Choáng váng → sợ; Chuyên tâm/Bình thản → none); old keys khóc / đau khổ act as buồn, hờn as giận (reviewer mood-mem r1) */
 function eaGrpK(k){if(typeof feelGrp==="function")k=feelGrp(k);return k==="vui"?"vui":k==="gian"||k==="hon"?"gian":k==="buon"||k==="dau"||k==="khoc"?"buon":k==="so"||k==="lo"?"so":k==="ghen"?"ghen":null}
 /* hers, from the mood bar: band and flavour (jmood mbBand) */
-function eaMine(){try{if(typeof mbBand!=="function"||!S.mood)return{i:0,g:null};const b=mbBand();const sg=eaSealG(S);/* owner OD 17/11 ~18:33Z (1): the bar past its line AND the matching dominant feeling */const g=b.i>=1?(sg==="vui"?"vui":null):b.i<=-1?(sg&&sg!=="vui"?sg:null):null;return{i:b.i,g,b}}catch(e){return{i:0,g:null}}}
+function eaMine(){try{if(typeof mbBand!=="function"||!S.mood)return{i:0,g:null};const b=mbBand();const sg=eaSealG(S);/* owner OD 17/11 ~18:33Z (1): the bar past its line AND the matching dominant feeling */let g=b.i>=1?(sg==="vui"?"vui":null):b.i<=-1?(sg&&sg!=="vui"?sg:null):null;if(g&&!eaLvOk(S,"card"))g=null;return{i:b.i,g,b,hv:!!g&&eaLvOk(S,"force")}}catch(e){return{i:0,g:null}}}
 window.eaMine=eaMine;
 /* ---------- small helpers ---------- */
 function myMaids(){const L=[];try{if(S.maid&&S.maid.name)L.push(S.maid);for(const s of S.staff||[])if(s&&s.role==="maid"&&s!==S.maid&&s.alive!==false)L.push(s)}catch(e){}return L.slice(0,4)}
@@ -414,7 +419,7 @@ function eaHoi(){const A=eaS();if(!A.hoi.length)return;const x=A.hoi.shift();con
  Q.push({ev:1,t:`${ttl} đến hỏi tội`,who:eaWho(v),art:"img/act-xu-toi-h.webp",h:`<p>${{hot:`${ttl} dẫn theo cung nữ hôm trước xông vào cung ngươi, đập tay xuống án: “Đánh chó còn phải nhìn mặt chủ. Người của bản cung, muội muội cũng dám mắng?”`,even:`${ttl} dẫn theo cung nữ hôm trước đến cung ngươi, nghiêm giọng: “Đánh chó còn phải nhìn mặt chủ. Người của bản cung làm gì sai mà muội muội phải mắng?”`,timid:`${ttl} dẫn theo cung nữ hôm trước đến cung ngươi, khẽ nói: “Muội muội, người của ta có chỗ nào thất lễ, muội cứ bảo ta dạy lại. Mắng giữa hành lang thế, người ngoài cười cả hai cung.”`}[vk]}</p><p>Cung nữ kia đứng sau, mắt còn đỏ.</p>`,opts})}
 window.eaHoi=eaHoi;
 /* ======================= (2) EXTREME MOOD ======================= */
-function eaExtMe(){const M=eaMine(),A=eaS(),X=E().ext,w=W();const ext=Math.abs(M.i)>=2?M.g:null;
+function eaExtMe(){const M=eaMine(),A=eaS(),X=E().ext,w=W();const ext=Math.abs(M.i)>=2&&M.hv?M.g:null;
  if(ext&&A.xk===ext)A.xn=(A.xn||0)+1;else{A.xk=ext;A.xn=ext?1:0}
  if(!ext||A.xn<X.wk||(A.xcd||0)>w)return false;A.xcd=w+X.cd;A.xn=0;cnt(EA_N.ext,ext);const ui=!window.__bot&&typeof Q!=="undefined";
  let t,h,past,art;
@@ -486,7 +491,7 @@ const EA_NACT={m:{gian:"Ra thao trường luyện võ",buon:"Viết thư về qu
  e:{gian:"Ra vườn bắn cung",buon:"Một mình đọc sách",so:"Thắp hương ở Phụng Tiên điện",ghen:"Một mình đánh cờ",vui:"Mở tiệc ngắm hoa"},
  t:{gian:"Tụng kinh cho nguôi giận",buon:"Ngồi lần tràng hạt",so:"Thắp hương cầu an",ghen:"Ngồi lần tràng hạt",vui:"Ngắm hoa trong vườn"}};
 function eaNpcWeek(){if(!eaHost())return;const N=E().npc;try{eaMinFeel()}catch(e){}
- for(const p of eaPeople()){const e=p.emo;const g=e&&e.v>=15?eaGrpK(e.k):null;eaExtNpc(p,g);if(!g)continue;const T=eaTemper(p),kd=eaKind(p);
+ for(const p of eaPeople()){const e=p.emo;const g=e&&e.v>=15&&eaLvOk(p,"card")?eaGrpK(e.k):null;eaExtNpc(p,g&&eaLvOk(p,"force")?g:null);if(!g)continue;const T=eaTemper(p),kd=eaKind(p);
   if(!eaActsJfeel()&&eaBarOk(p,g,E().npc.bar.out)){const ch=N.outCh*(E().out.t[T.k]||1);if(roll(ch)){const P=eaPick(p,g);if(P){const o=eaDo(p,P.r);if(o){cnt(EA_N.npcOut,kd+":"+P.r.k);cnt(EA_N.npcOutT,T.k);eaSay(p,o.h,o.target===S)}}}}
   else if(!eaBarOk(p,g,E().npc.bar.out)&&eaBarOk(p,g,N.bar.act)&&ag2Ch(p,N.actCh*(window.agOn&&agOn()?Math.min(BAL.ag.emo2.max,eaBarAbs(p)/N.bar.act):1))){/* AG-ALL-2: the stronger her feeling, the likelier she acts on it (her own inclination, BAL.ag.emo2) *//* the same emotion acts as hers, chosen to calm down: vent + the act's own price */
    const C=E().card,cg=g==="ghen"?"buon":g;
@@ -539,8 +544,8 @@ function eaLockWhy(c,m){try{if(!eaOn()||!c||!m||!m.opts)return"";if(c.eaLock)ret
   /* another answer she can really take (bạc enough) of the wanted kind must stay open: never a dead end (bot r3: "Làm ngơ" greyed while
      the only other answer cost bạc she lacked → stuck) */
   const usable=o=>o&&o!==c&&!(o.fx&&o.fx.bac&&S.bac+o.fx.bac<0);const nmO=o=>String(o.n||"").replace(/<[^>]+>/g,"").trim();
-  if(T.k==="hot"&&M.g==="gian"&&S.mood.v<=-E().out.v&&EA_HOLD.test(n)&&m.opts.some(o=>usable(o)&&EA_HIT.test(nmO(o))))return`ngươi đang ${M.b.name.toLowerCase()}, tính nóng, không nhịn nổi`;
-  if(T.k==="timid"&&M.i<=-2&&M.g&&EA_HIT.test(n)&&m.opts.some(o=>usable(o)&&!EA_HIT.test(nmO(o))))return`ngươi đang ${M.b.name.toLowerCase()}, tính nhút nhát, không dám`;}catch(e){}return""}
+  if(T.k==="hot"&&M.g==="gian"&&M.hv&&S.mood.v<=-E().out.v&&EA_HOLD.test(n)&&m.opts.some(o=>usable(o)&&EA_HIT.test(nmO(o))))return`ngươi đang ${M.b.name.toLowerCase()}, tính nóng, không nhịn nổi`;
+  if(T.k==="timid"&&M.i<=-2&&M.g&&M.hv&&EA_HIT.test(n)&&m.opts.some(o=>usable(o)&&!EA_HIT.test(nmO(o))))return`ngươi đang ${M.b.name.toLowerCase()}, tính nhút nhát, không dám`;}catch(e){}return""}
 window.eaLockWhy=eaLockWhy;
 (function(){if(typeof showModal!=="function")return;const s0=showModal;showModal=function(){const r=s0.apply(this,arguments);try{const m=Q[0];if(m&&m.opts)document.querySelectorAll("#modal .opts > button.opt[data-m]").forEach(b=>{const c=m.opts[+b.dataset.m];const why=eaLockWhy(c,m);if(!why)return;
   b.disabled=true;const sm=b.querySelector("small");if(sm)sm.textContent="Cần: "+why;if(!c.__eaN){c.__eaN=1;cnt(EA_N,"lock")}})}catch(e){}return r}})();

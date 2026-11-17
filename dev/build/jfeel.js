@@ -23,6 +23,9 @@
 Object.assign(BAL,{feel:{
  /* level bands on the summed strength of one kind's live causes: nhẹ ≥ lv[0], vừa ≥ lv[1], nặng ≥ lv[2] */
  lv:[15,40,70],
+ /* jemoact gates by the level of the dominant feeling (eaLvOk): card = the venting acts one CHOOSES (her cards, NPC act cards), force = what the
+    feeling forces (the "Nhịn" lock, extreme consequences); jfeel acts themselves need the heavy level (act below) */
+ gate:{card:2,force:3},
  /* sign of each kind on the mood bar (good +, bad −); NPC bar = Σ sign × strength × bar.k, clamped ±100 (her bar is S.mood.v, jmood) */
  sg:{vui:1,tutin:1,hanghai:1,tinhtu:1,chuyentam:1,hungkhoi:1,tinhnghich:1,binh:0,buon:-1,gian:-1,lo:-1,so:-1,hothen:-1,chan:-1,khochiu:-1,choang:-1,hon:-1,ghen:-1},
  bar:{k:.6},
