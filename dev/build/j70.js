@@ -29,7 +29,7 @@ const OPP70={
  ill:{n:"lúc nàng đang đau ốm, thuốc thang lẫn lộn",ok:(p,t)=>{try{return !!illOf(t)}catch(e){return false}},b:10},
  preg:{n:"khi nàng đang mang thai",ok:(p,t)=>!!t.preg,b:4},
  birth:{n:"lúc nàng trở dạ",ok:(p,t)=>(t.preg||0)>=8,b:12},
- rain:{n:"sau cơn mưa, bậc đá trơn",ok:()=>!!(S.wx&&/mưa|bão|tuyết/i.test(S.wx.n||"")),b:8},
+ rain:{n:"sau cơn mưa, bậc đá trơn",ok:()=>!!(S.wx&&/mưa|bão|giông|tuyết/i.test(S.wx.b||S.wx.n||"")),b:8},
  lonely:{n:"lúc nàng thất sủng, ít người qua lại",ok:(p,t)=>(t===S?S.sung:t.sung||0)<25,b:6},
  night:{n:"một đêm vắng",ok:()=>true,b:0}};
 /* ---------- methods x routes (stage templates). k = the existing act that executes it ---------- */

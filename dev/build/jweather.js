@@ -23,8 +23,8 @@ IT.giaycoi={n:"Giày đế cỏ",kd:"Tạp vật",d:`Đế cỏ bện, đi đá 
 try{for(const k of ["du","aotoi","giaycoi"])if(!SHOP_ALL.includes(k))SHOP_ALL.push(k)}catch(e){}
 /* paintings (gpt-2-6, item-art style): img/item-<k>.webp 256 + img/item512/item-<k>.webp 512; grade Thường */
 try{for(const k of ["du","aotoi","giaycoi"]){if(typeof ITEM_ART_G==="object")ITEM_ART_G[k]=0;if(typeof ITIMG==="object")ITIMG[k]=k}}catch(e){}
-function wxSev(){if(!S||!S.wx)return 0;const f=S.wx.f,n=S.wx.n;if(f===3)return 3;if(f===4)return 2;if(f===1)return 1;if(/sương giá/.test(n||""))return 1;return 0}
-function wxKind(){const n=(S&&S.wx&&S.wx.n)||"";return /tuyết|sương giá/.test(n)?"băng tuyết":/giông/.test(n)?"giông tố":"mưa"}
+function wxSev(){if(!S||!S.wx)return 0;const f=S.wx.f,n=S.wx.b||S.wx.n;  /* b = the state (jclose), n = the buổi words ("trời giá lạnh") */if(f===3)return 3;if(f===4)return 2;if(f===1)return 1;if(/sương giá/.test(n||""))return 1;return 0}
+function wxKind(){const n=(S&&S.wx&&(S.wx.b||S.wx.n))||"";return /tuyết|sương giá/.test(n)?"băng tuyết":/giông/.test(n)?"giông tố":"mưa"}
 function wxPal(p,k){if(!k)return"";if(k==="home")return palaceOf(p);if(k[0]==="r"){const v=rivals.find(x=>"r"+x.id===k);return v?palaceOf(v):k}return k}
 function wxOutdoor(p,a,b){if(!a||!b||a===b)return false;return wxPal(p,a)!==wxPal(p,b)}
 function wxHasGear(p,g){return (p.inv||[]).some(e=>e&&!e.h&&itm(e.k).wxg===g&&wxGearLeft(e)>0)}

@@ -97,7 +97,8 @@ function ksfxText(t){t=String(t||"").replace(/<[^>]+>/g," ");for(const [re,k] of
 const SFXWX={rain:"rain",storm:"thunder",wind:"wind",leaf:"wind",petal:"wind",snow:"snow",snowh:"snow",snowp:"snow",frost:"snow",sun:"birds",mist:"birds",dust:"birds"};
 const SFXWXN={"hoa đào bay":"wind","mưa phùn":"rain","sương sớm":"birds","trời quang":"birds","nắng gắt":"cicada","ve kêu râm ran":"cicada","giông tố":"thunder",
  "đom đóm":"crickets","lá phong rơi":"wind","nắng vàng":"birds","gió heo may":"wind","trăng rằm":"crickets","tuyết nhẹ":"snow","tuyết dày":"snow","sương giá":"snow","mai nở trong tuyết":"snow"};
-function ksfxWx(w){return w?(SFXWXN[w.n]||SFXWX[w.k]||null):null}
+Object.assign(SFXWX,{cloud:"wind"});Object.assign(SFXWXN,{"trời âm u":"wind","mưa rào":"rain","mưa thu":"rain"});  /* weather-khac day states */
+function ksfxWx(w){return w?(SFXWXN[w.n]||SFXWXN[w.b]||SFXWX[w.k]||null):null}
 /* festival (j31 FEST + festivals JSON) → sound: new year nights = firecrackers, solemn days = the rite, the rest = the festive drum */
 const SFXFEST={newyear:"firecracker",giaothua:"firecracker",nguyentieu:"firecracker",thanhminh:"rite",trungcuu:"rite",dongchi:"rite",vulan:"rite",hanthuc:"rite"};
 function ksfxFest(k){return k?(SFXFEST[k]||"festival"):null}

@@ -58,7 +58,11 @@ const WX_BUOI={
  "tuyết nhẹ":[["tuyết nhẹ","tuyetnhe"],["tuyết nhẹ","tuyetnhe"],["tuyết nhẹ","tuyetnhe"],["tuyết nhẹ","tuyetnhe"]],
  "tuyết dày":[["tuyết dày","tuyetday"],["tuyết dày","tuyetday"],["tuyết dày","tuyetday"],["tuyết dày","tuyetday"]],
  "sương giá":[["sương giá","suonggia"],["trời giá lạnh","suonggia"],["chiều giá lạnh","suonggia"],["đêm sương giá","suonggia"]],
- "mai nở trong tuyết":[["mai nở trong tuyết","maino"],["mai nở trong tuyết","maino"],["mai nở trong tuyết","maino"],["mai nở trong tuyết","maino"]]};
+ "mai nở trong tuyết":[["mai nở trong tuyết","maino"],["mai nở trong tuyết","maino"],["mai nở trong tuyết","maino"],["mai nở trong tuyết","maino"]],
+ /* weather-khac in-season day states (j12 WX_KH); icons reuse the nearest painted ones until Foreman C paints mo-wx-amu / mo-wx-muarao (KIT_REQUESTS) */
+ "trời âm u":[["trời âm u","suongsom"],["trời âm u","suongsom"],["chiều âm u","suongsom"],["đêm u ám","suongsom"]],
+ "mưa rào":[["mưa rào","muaphun"],["mưa rào","muaphun"],["mưa rào","muaphun"],["mưa rào","muaphun"]],
+ "mưa thu":[["mưa thu","muaphun"],["mưa thu","muaphun"],["mưa thu","muaphun"],["mưa thu","muaphun"]]};
 function wxAt(base,b){const R=WX_BUOI[base];return R?R[Math.max(0,Math.min(3,b|0))]:[base,null]}
 function wxSync(){try{if(!S||!S.wx)return;if(!S.wx.b||!WX_BUOI[S.wx.b])S.wx.b=WX_BUOI[S.wx.n]?S.wx.n:(S.wx.b||S.wx.n);const [n]=wxAt(S.wx.b,S.buoi||0);S.wx.n=n}catch(e){}}
 /* icons for the buổi words (KM_WX is keyed by the shown words) */
