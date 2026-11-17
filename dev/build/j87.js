@@ -263,7 +263,7 @@ function wkeEntry(html,people,p,toks){const mine=toks.filter(t=>t.who===p);let c
   else if(k==="ghen"){why.push(d>0?`${sjl} thêm ghen ghét ta`:`${sjl} bớt ghen`);chips.push(`${sj} ghen ${wkeSign(d)}`)}
   else chips.push(`${k} ${wkeSign(d)}`)}
  const w0=why.length&&!(cause&&why.every(x=>kpPlain(cause).toLowerCase().includes(x.toLowerCase())))?why:[];
- return `${cause?cause+(w0.length?", ":""):""}${w0.length?w0.join("; "):""}${cause||w0.length?". ":""}${chips.join(", ")}${chips.length?".":""}`.replace(/\.{2,}/g,".").replace(/^\s*,\s*/,"").trim()}
+ return `${cause?cause+(w0.length?", ":""):""}${w0.length?w0.join("; "):""}${cause||w0.length?". ":""}${chips.join(", ")}${chips.length?".":""}`.replace(/\.{2,}/g,".").replace(/([”"])\./g,"$1").replace(/^\s*,\s*/,"").trim()}
 function wkBookData(){const s=S.wkSnap||wkSnap();const n=Math.max(0,Math.min(S.logs.length,(S.logSeq||0)-(s.seq||0)));
  const raw=S.logs.slice(0,n).slice().reverse();const people=kpPeople();const SKIPRE=/^(Xin xăm|Gieo lại|Đến Tẩm cung của ngươi)/;
  const TH=S.thO||{kind:"th"};let pay="";const U=[];let last=null;
@@ -273,7 +273,11 @@ function wkBookData(){const s=S.wkSnap||wkSnap();const n=Math.max(0,Math.min(S.l
   if(p&&(p===S.emp||p===TH)&&!people.some(x=>x[1]===p)){const q=kpPlain(t).replace(/\([^)]*\)/g,"");const i=q.search(p===S.emp?/Hoàng thượng|Thánh thượng/:/Thái hậu/);if(i<0||i>12)return null}
   return p}catch(e){return null}};
  for(const h of raw){const pl=plain(h);if(!pl||SKIPRE.test(pl))continue;if(/^Bổng lộc tháng/.test(pl)){pay=pl.replace(/^Bổng lộc tháng [^:]*:\s*/,"").replace(/\.$/,"");continue}
-  const html=kbkClean(String(h).replace(/<span class="ld">[^<]*<\/span>/,"").replace(/\s*\(Đã ghi vào mục Đã biết[^)]*\)\.?/g,""));last=null;
+  /* WHO (tuanluc-sync, owner 17/11 03:22Z "Cái này là quý phi chứ không phải là tôi"): jlogbao stamps the person the RAW line is about
+     (before the name mask). That person's page gets the line; a person she has not met yet → "Tin trong cung", never her own page. */
+  const WM=/<i class="kw" data-w="([^"]*)"><\/i>/.exec(String(h));let Wp=WM&&typeof lbFind==="function"?lbFind(WM[1]):null;
+  const Wunmet=!!(Wp&&typeof k61Named==="function"&&S.known&&(()=>{try{return !k61Named(Wp)}catch(e){return false}})());
+  const html=kbkClean(String(h).replace(/<i class="kw"[^>]*><\/i>/g,"").replace(/<span class="ld">[^<]*<\/span>/,"").replace(/\s*\(Đã ghi vào mục Đã biết[^)]*\)\.?/g,""));last=null;
   for(let t of kpSentences(html)){const tp=kpPlain(t);if(!tp||SKIPRE.test(tp)||/^\(?Đã ghi vào mục Đã biết/.test(tp))continue;
    /* the card's own promise / hint text is not an event (owner 15/11: Điểm trang entry on Hoàng thượng's page) */
    if(WKE_CARD.test(tp))continue;
@@ -282,7 +286,8 @@ function wkBookData(){const s=S.wkSnap||wkSnap();const n=Math.max(0,Math.min(S.l
    if(/^(Tháng này|Tin triều đình|Triều đình|Thiên hạ)\s*:/.test(tp)){t=t.replace(/^((?:<[^>]+>)*)\s*(Tháng này|Tin triều đình|Triều đình|Thiên hạ)\s*:\s*/,"$1");last={t,world:true};U.push(last);continue}
    /* a festival prize "X đoạt giải … (Sủng +2, Danh +2)" belongs to the winner X (a rival), not to her or to Hoàng thượng: drop the bracket (r1 review) */
    if(/đoạt giải/.test(tp)&&!/^(Ngươi|Ta)\b/.test(tp.replace(/^[^:]*:\s*/,"")))t=t.replace(/(đoạt giải(?:[^(<]|<[^>]*>)*?)\s*\((?=(?:<[^>]*>)*\s*(?:Sủng|Danh|Đức))[^)]*\)/,"$1");
-   const hm=homeOf(t);
+   let hm=homeOf(t);
+   if(Wp&&(!hm||hm===S)){if(Wunmet){last={t,world:true};U.push(last);continue}hm=Wp}
    /* a result / reaction / bare number joins the unit before it, but only when it is about the same person (no more "last" glued across people) */
    if(last&&(KBK_DELTA_ONLY.test(tp)||!/[\p{L}\d]/u.test(tp.replace(WKE_TOK,"").replace(/[+\-−→>]|\d/g,""))||(!kbkMeaning(tp)&&(!hm||hm===last.home||(last.home==null&&hm===S))))){last.t+=" "+t;continue}
    let p=hm;
@@ -304,7 +309,9 @@ function wkBookData(){const s=S.wkSnap||wkSnap();const n=Math.max(0,Math.min(S.l
   const hasMe=toks.some(meKeep);
   if(hasMe||(!u.home&&!owners.size)||(!toks.length&&!u.home))me.push(hasMe?wkeStrip(u.t,people,meKeep):u.t)}
  /* duplicates: one row, "2 lần" */
- const dedup=L=>{const m=new Map();for(const t of L){const k=kpPlain(t);if(m.has(k))m.get(k).n++;else m.set(k,{t,n:1})}return [...m.values()].map(x=>x.n>1?{text:x.t,chips:[[`${x.n} lần`,"n"]]}:{text:x.t})};
+ /* the "n lần" chip only for a real act done again; a one-time line, a tip or a spoken line (“…”) is listed once, no chip (tuanluc-sync) */
+ const noN=t=>{const p=kpPlain(t);return /[“”]/.test(p)||/từ nay|Từ nay|có thêm nhóm|Lối riêng|lần đầu|đã lành/.test(p)};
+ const dedup=L=>{const m=new Map();for(const t of L){const k=kpPlain(t);if(m.has(k))m.get(k).n++;else m.set(k,{t,n:1})}return [...m.values()].map(x=>x.n>1&&!noN(x.t)?{text:x.t,chips:[[`${x.n} lần`,"n"]]}:{text:x.t})};
  const D=[["Sủng",S.sung-s.sung],["Danh",S.danh-s.danh],["Sức",S.suc-s.suc],["Bạc",S.bac-s.bac]];
  if(s.duc!=null)D.push(["Đức",S.duc-s.duc]);if(s.mat!=null)D.push(["Tai mắt",S.mat-s.mat]);if(s.an!=null)D.push(["Ân tình",(S.an||0)-s.an]);
  const rank=S.rank!==s.rank?(S.rank>s.rank?"Được thăng ":"Bị giáng xuống ")+(S.rank>=7?"Hoàng hậu":RANKS[S.rank].n):"",kids=S.kids.length-(s.kids||0);

@@ -45,8 +45,14 @@ function rtWeary(){const L=[];if(!S)return L;const kids=rtKidsAlive().length;
  return L}
 function rtTm(){return (S.tm96&&S.tm96.mid)||null}
 function rtMenMet(){try{menInit()}catch(e){}const tm=rtTm();return (S.men||[]).filter(m=>m.alive&&!(typeof menBanned==="function"&&menBanned(m))&&(m.id===tm||m.seen||(m.af||0)>0||(m.tinh||0)>0))}
-function rtOpen(){if(!rtRoad())return false;const T=rtS();if(T.open)return true;const ok=rtWeary().length||rtMenMet().some(m=>(m.tinh||0)>=12||m.id===rtTm())||T.tt||T.tc||T.ad;
- if(ok){T.open=S.turn;log(`<span class="pdl">Lòng ngươi bắt đầu nghĩ đến những lối khác ngoài con đường tranh sủng. Mục Hành sự có thêm nhóm «Lối riêng».</span>`)}return !!ok}
+/* ONE-TIME (owner bug 17/11 03:18Z "9 lần"): the unlock is written once per life and kept in the save. It was T.open=S.turn — 0 in the first month,
+   so "if(T.open)" read it as closed and the line was written on every render. Now T.open!=null; an old save that lost it but already holds the line
+   (log, or S.once) never announces again. The words say what opened and where (owner: "không hiểu"). */
+const RT_OPEN_LINE=`<span class="pdl">Lòng ngươi chợt nghĩ: ngoài con đường tranh sủng, trong cung còn những lối khác — tư tình với một nam nhân, trốn khỏi cung, xin rời cung (xuất gia, về quê) hay ẩn dật một đời an nhiên. Từ nay trong Hành sự có thêm nhóm việc «Lối riêng» cho những lối ấy.</span>`;
+function rtOpen(){if(!rtRoad())return false;const T=rtS();if(T.open!=null)return true;
+ if((S.once&&S.once.rtOpen!=null)||(S.logs||[]).some(x=>/bắt đầu nghĩ đến những lối khác|ngoài con đường tranh sủng, trong cung còn những lối khác/.test(x))){T.open=S.turn||0;return true}
+ const ok=rtWeary().length||rtMenMet().some(m=>(m.tinh||0)>=12||m.id===rtTm())||T.tt||T.tc||T.ad;
+ if(ok){T.open=S.turn||0;if(typeof logOnce==="function")logOnce("rtOpen",RT_OPEN_LINE);else log(RT_OPEN_LINE)}return !!ok}
 /* ---------- ledger across lives (memory only) ---------- */
 function rtBook(){try{return JSON.parse(localStorage.getItem("ctm-routes")||"{}")||{}}catch(e){return {}}}
 function rtEnd(id){const T=rtS();if(T.ends.includes(id))return;T.ends.push(id);rtStat("end_"+id);try{const b=rtBook();const e=b[id]||{n:0};e.n++;if(!e.first)e.first={who:S.name,o:S.origin&&S.origin.n,y:S.year};b[id]=e;localStorage.setItem("ctm-routes",JSON.stringify(b))}catch(e){}}
@@ -285,7 +291,7 @@ function rtNpcMeet(){if(!rtRoad()||!rtNight()||Q.length)return;const T=rtS();for
 (function(){const o0=over;over=function(h,t,fate){try{if(S&&!S.dead&&!(S.rt&&S.rt.exposed)&&rtKidsAlive().some(k=>k.tf))rtEnd("tt_kin")}catch(e){}return o0.apply(this,arguments)}})();
 /* ---------- Mệnh truyện: the route chapters; Sổ luân hồi: endings met ---------- */
 function rtRows(L){return typeof rows67==="function"?rows67(L):`<div class="pcb rows">${L.map(r=>`<div class="pcrow"><span>${r[0]}</span><span>${r[1]}</span></div>`).join("")}</div>`}
-function rtStoryHTML(){if(!S||!S.rt||!S.rt.open)return"";const T=S.rt;const ck=(t,ok)=>(ok?"✓ ":"✗ ")+t;let h="";const on=[T.tt&&"Tư tình",T.tc&&"Trốn khỏi cung",T.ad&&T.ad.on&&"Ẩn dật"].filter(Boolean);
+function rtStoryHTML(){if(!S||!S.rt||S.rt.open==null)return"";const T=S.rt;const ck=(t,ok)=>(ok?"✓ ":"✗ ")+t;let h="";const on=[T.tt&&"Tư tình",T.tc&&"Trốn khỏi cung",T.ad&&T.ad.on&&"Ẩn dật"].filter(Boolean);
  const rows=[["Lối riêng",on.length?on.join(" · "):"đã mở nhóm «Lối riêng» ở Hành sự"],["Lời ra tiếng vào",`${rtHeatW(T.heat)} (${T.heat}/100)`,T.heat>=60?"r":""]];
  const why=rtWeary();if(why.length)rows.push(["Cớ chán cung",why.join("; ")]);
  const m=rtMan();if(T.tt&&m)rows.push([`Tư tình · ${rtMnm(m)}`,[ck("để ý y",1),ck("trao tín vật",T.tt.tok),ck(`hẹn gặp lén (${T.tt.meet||0} lần)`,T.tt.meet>=2),ck("đêm riêng",T.tt.night),ck("y hứa đưa ngươi đi",T.tt.st>=4)].join("<br>")]);
@@ -374,7 +380,7 @@ PEND.rtNgNpc=pp=>{const v=RV(pp.v);const k=v&&(v.kids||[]).find(x=>x.name===pp.k
   rtOpt("Sai người nhỏ dầu vào bát",{...BAL.route.frame},rtX(oF,`máu không hòa dù ${k.name} là con ai · ${v.name} rước họa vào thân`,"bị bắt quả tang gian lận · ngươi bị trị tội","vu oan người vô tội là ác nghiệp"),()=>{rtStat("ng_frame");rtNgSleight("oil",4,ok=>{if(ok){if(!k.tf)rtEnd("ng_vu");rtNgScene(false,k.name,()=>{fin(false);rtAfter()})}else{k.tfOk=1;oanAdd(v,S,50);fall(S,"gian lận khi trích huyết nghiệm thân");rtAfter()}})}),
   rtOpt("Thôi",{},rtX(100,"không tâu nữa","",""),()=>{})]}};
 RT_END.ng_vu=["tt","Vu oan người khác qua bát nước"];
-(function(){const r0=rtNgCards;rtNgCards=function(){let A=r0.apply(this,arguments);try{if(rtS().open)A=A.concat(rtNgNpcCards())}catch(e){}return A}})();
+(function(){const r0=rtNgCards;rtNgCards=function(){let A=r0.apply(this,arguments);try{if(rtS().open!=null)A=A.concat(rtNgNpcCards())}catch(e){}return A}})();
 /* rivals may frame her innocent child (rare; two-way) */
 (function(){const m0=rtMonth;rtMonth=function(){let ev=m0.apply(this,arguments);try{const T=S.rt;if(T&&!T.ng&&!S.out){const k=rtKidsAlive().find(x=>!x.tfOk&&(x.age||0)>=2);
  const f=k&&liveRivals(true).find(v=>/Hiểm/.test(v.trait||"")&&typeof danger==="function"&&danger(v,S)>=60);if(k&&f&&roll(k.tf?2:.6)&&rtGate(f,"accuse").ok){rtStat("ng_frameMe");rtNgSet(k,f.id,!k.tf?roll(BAL.route.frameOil):null)}}}catch(e){}return ev}})();

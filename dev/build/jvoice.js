@@ -10,7 +10,7 @@
    kSay(sp, ls, s, o): fills {goi} {Goi} {xung} {Xung} {ten} (listener's title) {Ten} in s.
    kLine(key, pool, o): picks a line from a pool without repeating any line used for that key in the last BAL.voice.noRepeat tuần
      (least-recently-used when the pool is exhausted). pool = array of strings, or an object {warm:[…], cool:[…], cold:[…], any:[…]}
-     picked by o.m (falls back to any). Lines may carry the {goi}… tokens: pass o.sp / o.ls to fill them. Memory S.vl (personal, old saves
+     picked by o.m (falls back to any). Lines may carry the {goi}… tokens: pass o.sp / o.ls to fill them. Memory S.vmem (was S.vl — that name is the worn VEIL of jveil: the voice memory looked like a veil, so every life 'healed a wound' and put the memory in her chest; tuanluc-sync) (personal, old saves
      start empty, co-op safe). kLines(key) = the pool registry for the repetition audit (dev/test/voice-rep.js). */
 (function(){
 const V=()=>BAL.voice;
@@ -95,7 +95,7 @@ function kLine(key,pool,o){o=o||{};let L=pool;if(!Array.isArray(L)){const m=o.m|
      it rotates with the week + buổi, so both seats show the same line, and no line comes back within L.length buổi */
   if(o.shared!=null){let h=0;const sd=key+"|"+o.shared;for(let i=0;i<sd.length;i++)h=(h*31+sd.charCodeAt(i))|0;let t3=0;try{t3=now()*3+(S.buoi|0)}catch(e){}
     const line=untag(L[((Math.abs(h)+t3)%L.length+L.length)%L.length]);return o.sp!=null||o.ls!=null?kSay(o.sp,o.ls,line,o):line}
-  let mem={};try{S.vl=S.vl||{};mem=S.vl[key]=S.vl[key]||{}}catch(e){}
+  let mem={};try{vmemFix(S);S.vmem=S.vmem||{};mem=S.vmem[key]=S.vmem[key]||{}}catch(e){}
   const t=now(),gap=V().noRepeat;
   /* a dialog rebuilt several times for ONE occurrence (PEND builders run on queue, show and reload) keeps its line: same key in the same buổi
      → the same line, so a rebuild does not use up the pool */
@@ -154,3 +154,8 @@ window.kHabit=kHabit;window.kHabits=()=>HABIT;
 window.kGL=kGL;window.kShort=kShort;window.kLong=h=>String(h==null?"":h);window.kLitLog=kLitLog;window.kBand=kBand;
 window.kAddr=kAddr;window.kSay=kSay;window.kLine=kLine;window.kLines=()=>REG;window.kVoiceWho=who;window.kSpk=kSpk;
 })();
+
+/* tuanluc-sync: move an old save's voice memory out of S.vl (the veil slot) into S.vmem; drop memory objects the bug put in her chest */
+function vmemFix(p){try{if(!p)return;if(p.vl&&typeof p.vl==="object"&&!p.vl.k){p.vmem=Object.assign(p.vmem||{},p.vl);p.vl=null}
+ const vm=e=>e&&typeof e==="object"&&!e.k&&!e.n&&Object.keys(e).every(x=>/:/.test(x));/* a voice memory: keys like "staff:gt" */
+ if(Array.isArray(p.inv)&&p.inv.some(vm))p.inv=p.inv.filter(e=>!vm(e))}catch(e){}}
