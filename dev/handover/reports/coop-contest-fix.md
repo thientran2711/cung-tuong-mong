@@ -46,3 +46,18 @@ board rows/order on both seats, no overflow. Fold invite hero picture was still 
   Co-op bugs = top priority: needs its own worker.
 - j7On() reads the HOST's S: a host who is a servant (not consort) runs the old j8 festival; the guest consort then gets no board.
 - j71 place rewards still typed Danh ±1 (r1 follow-up stands).
+
+## r2 — reviewer r1 FAIL items fixed (branch `review/coop-contest-fix-r1` @ db92d8de, on top of the reviewer's a3b5e963)
+1. The other player's played row showed a formula split ("60 phần = 60 tài nghệ … + 0 may rủi"): root = `rowsH7` printed every mg row as
+   "Ngươi", so applyRes dropped mg for the friend. Fix in the ONE shared row writer: a played row names its player (Ngươi only for her own);
+   applyRes keeps mg for every played row; the mini-game's friend row (startContest R0) carries mg and j82 prints "tự chơi màn thi, đã
+   cộng tài nghệ và chuẩn bị" for it. Both seats now read the same true row.
+2. Friend's row without portrait: root = when the result card is built/shown while the host's week end has her pulled out of the harem,
+   the kit people list (`kpPeople`, used by EVERY fact row / result card) did not hold her. Whole-family fix in jcoopworld: kpPeople also
+   holds the pulled friend entry; jcoopcontest who()/fName read her through withFriend. Unmet friend shows the kit unknown portrait like
+   every unmet NPC (name mask "Hảo hữu của ta").
+Tests (db92d8de): coop-contest 72/72 then 70/71 (`3 guest Sủng +3` got +2 = the known week-drift flake from r1; the two runs before
+had a section-5 week stall that the base a3b5e963 did not show in 1 run — rerun clean twice, watch it); new checks on BOTH seats: the
+other player's played row says "tự chơi", no formula split, kit portrait ✓. dc 26/26, core 9/9, solo 6/6, coop-p2 (B1 skipped,
+pre-existing main bug) 35/35, coop-e2e 58/59 (1 random: week after rebirth), quickcheck PASS. Shots looked at (scratch): Fold host +
+iPad guest result card, same rows/order, friend row "Hảo hữu của ta — múa: 60 phần tự chơi" with its portrait.
