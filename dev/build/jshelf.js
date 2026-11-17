@@ -1,4 +1,4 @@
-/* ================= jshelf: NƠI TRƯNG BÀY — a display shelf per person + DWELLING xa xỉ + plant care (owner OD 17/11 ~18:30Z (A) + ~18:00Z s35 Lượt 26) =================
+/* ================= jshelf: ĐA BẢO CÁC — a display shelf per person + DWELLING xa xỉ + plant care (owner OD 17/11 ~18:30Z (A) + ~18:00Z s35 Lượt 26) =================
    Brief: dev/handover/briefs/display-shelf-build.md (handover branch). Numbers: BAL.shelf (this file, one table). Reuses, never rebuilds:
    · UP TO BAL.shelf.per pieces per group (owner OD 17/11 ~22:05Z); a group's luxury = best piece full + falling shares BAL.shelf.wt.
    · items = ONE table BAL.shelf.it (12 groups / 70 pieces, dev/research/display-shelf-items.md): existing IT pieces + new décor (IT kd "Bày biện") + her own
