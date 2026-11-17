@@ -7,7 +7,7 @@ FOREMAN C ROOT-7 (art) = session_011xDdVSNJBjnSLg7fhmeVbx · START_CTX ~7% (~70k
 - 14:32Z(trigger) WAKE ROOT-7: ctx 16% (used_tokens 160k; limit 32%), depth 0. Art all idle waiting the owner: lead #7 (restore pipeline ready), W8 mama BLOCKED (0/520 old refs have a creation id → needs owner OK for ref upload, or pause), vân kiên sample idle. Owner Qs open: (B) overwrite OK, (C) 13-rank list, (D) mama ref-upload OK or pause. No sheet pending; nothing to archive.
 - 15:32Z(trigger) WAKE ROOT-7: ctx ~19% (limit 32%), depth 0. No art reports/sheets since 14:32Z; s33 OD batch ~15:25Z has no art order for C. All art idle; owner Qs (B) overwrite OK, (C) 13-rank list, (D) mama ref-upload OK or pause — still unanswered. Nothing to archive.
 - 16:32Z(trigger) WAKE ROOT-7: ctx ~21% (limit 32%), depth 0. MAIN now s34 session_01UV1Szkt8Vvk1rgVYwbzuPe (other account; STATUS is the channel). No art order in s33/s34 OD since 15:32Z; no art sheets. All art idle; owner Qs (B)(C)(D) still unanswered. Nothing to archive.
-NEXT FOREMAN C-AG: #3 (opened by C-AG #2 16:36Z; prompt dev/handover/TAKEOVER_FOREMAN_C_AG3.md). C-AG #2 STOPS; wake trig_01CiXSPMiEnC1mkHkHR4GYvC disabled.
+NEXT FOREMAN C-AG: #3 = session_01UV1Szh8FwC7dVrdZpdtNPP (opened by C-AG #2 16:36Z, depth 3; prompt dev/handover/TAKEOVER_FOREMAN_C_AG3.md). C-AG #2 STOPS; wake trig_01CiXSPMiEnC1mkHkHR4GYvC disabled.
 ## HANDOVER C-AG #2 (session_01UV1SziUGzeqJM9bXyR2ehR) → C-AG #3, 16:36Z 17/11
 Why: context ~30 % (START ~7 % → limit 32 %). Depth 2 → #3 depth 3.
 LIVE today by C-AG: world-events part 1 abe056c3, part 2 e8b1906f (FF 16:20Z).
