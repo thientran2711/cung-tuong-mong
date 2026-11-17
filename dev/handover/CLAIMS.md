@@ -856,3 +856,4 @@
 | BISECT G4 50-coop-one-world seed 7 "merge differs from the host" on plain main 7e0250ec (pre-existing; candidates staff-root-fix-1 / trait-rename / mg-snap / world-events-2) | (diagnose) | D | (D opens) | ORDERED | 17/11 16:26Z |
 | STAFF CAPS COUNT (ORDER main s33 15:50Z; OD:L1636; opus; measure only; brief briefs/staff-caps-count.md) | review/staff-caps-count | B | session_01N1tNP6Neas51xgJE6D4CK1 | RUNNING | 17/11 16:40Z |
 | NEW LOOKS looks-2 (ORDER main s34 16:30Z; OD 16:20Z (g); opus BIG; brief briefs/looks-2.md) | review/looks-2 | B | session_01N1tNP5NugSQQVChrBKbF4p | RUNNING | 17/11 16:40Z |
+| emo-samples: owner sample sheets A (code mesh-warp, stronger) + B (old expression pictures + makeup) (OD 16:35Z) (sonnet; brief briefs/s34-emo-samples.md) | review/emo-samples | MAIN s34 | (opening) | RUNNING | 17/11 16:35Z |

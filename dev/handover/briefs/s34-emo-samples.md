@@ -1,0 +1,8 @@
+PRIORITY #1 CHECK: OD L126/L130/L139 + OD tail "(17/11 ~16:35Z real" | main none (jexpr/face-lm removed) | review/appearance (history: jexpr/face-lm before removal) + review/appearance-port* | ledger #60 CLOSED (reopened by owner now) | claims none.
+# emo-samples (sonnet) — SAMPLE SHEET ONLY, no game change, nothing merged
+Read dev/handover/briefs/s34-common.md first. Read OD L126, L130, L139 and the OD tail line "(17/11 ~16:35Z real" VERBATIM.
+FIND: (1) the old code expressions jexpr / face-lm (landmark mesh warp + tear overlay) in the history of origin/review/appearance — fetch ONLY that branch deeper if needed (`flock /home/user/wt/fetch.lock git fetch --deepen=200 origin review/appearance`), `git log -S jexpr`; (2) "the old pictures made at the start" = any earlier expression images (search CDN listings / dev/art / reports / OD+LEDGER for expression / cảm xúc / buồn giận sample URLs). Report exactly what you found.
+MAKE (scratch branch review/emo-samples from latest origin/main; never merged):
+ A) code mesh-warp expressions restored and STRONGER (owner 14/11: "emotions must be clearer"): vui, buồn, giận, hờn + khóc (tears); on her face + 1 consort, each WITH today's makeup (Đoan trang and Khuynh thành from jtoil) — makeup must stay under the warp/tears (layer law).
+ B) if old expression pictures exist: the same 4 emotions + khóc with the makeup layer applied on top (same 2 looks). If none exist, say so plainly — do NOT paint new art (art = Foreman C).
+ONE sheet per option (A, B), readable at phone size, whole faces (no extreme zooms), labels in Vietnamese per VANPHONG. LOOK at them. Upload CDN img/_review/emo-samples/ (emo-A.png, emo-B.png). Report reports/emo-samples.md + send MAIN s34 "SAMPLES READY emo-samples <urls>".
