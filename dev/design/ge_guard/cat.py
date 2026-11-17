@@ -43,3 +43,51 @@ R=[
 ("cnv_mat","Ánh mắt nơi hành lang",[("Chiếc ô chiều mưa",3,"T","O","B","TK","umbrella"),("Tỳ nữ lên phượng",1,"A","Q","U","HH","favour"),("Gác ô ra đi",8,"T","R","A","FREE","self"),("Tỷ muội cùng hầu",4,"T","O","A","SIS","shared favour")]),
 ("cnv_ma","Ma ma dạy việc",[("Tổng quản lục cung",9,"H","Q","A","OFFICE","palace"),("Tay nắm Nội vụ",2,"A","Q","U","POWER","supplies"),("Ma ma về quê",8,"T","R","B","FREE","old age"),("Phụng Thánh phu nhân",6,"H","O","A","CHILD","wet nurse")]),
 ]
+# r3 (owner 17/11 ~15:25Z, option C): every grand ending has TWO shading variants, thiện and ác, each with its own title.
+# The r2 name is the title of the ending's natural side (base kind T -> thiện, A -> ác, H (giữa) -> thiện); OTHER = the opposite variant's title.
+OTHER={
+"Ngai vàng họ ngoại":"Nữ đế hiền minh","Hiền tướng hậu cung":"Gian tướng hậu cung","Buông cờ về núi":"Lật bàn bỏ đi","Đại nghĩa diệt thân":"Vì nước khuyên cha",
+"Thanh thiên hậu cung":"Án sắt hậu cung","Máu trả máu":"Lấy luật trả oan","Nữ phán quan":"Phán quan khắc nghiệt","Hoa nở ngoài cung":"Bỏ nhà theo người",
+"Nhất gia chi chủ":"Gia chủ độc đoán","Huynh muội tương tàn":"Thu phục huynh trưởng","Một mình một cõi":"Đoạn tuyệt gia môn","Phượng ấn về nhà":"Họ ngoại chuyên quyền",
+"Trung cung kế vị":"Đoạt ghế Trung cung","Tỷ muội Trung cung":"Ám vệ Trung cung","Dao trong mật ước":"Phá ước cứu người","Hai bóng chùa xa":"Ép hậu xuất gia",
+"Nữ tướng Nhạn Môn":"Huyết tướng Nhạn Môn","Dưỡng giặc giữ quyền":"Trấn biên giữ nước","Con nối nghiệp ông":"Con cầm binh quyền","Hồn về Nhạn Môn":"Đào ngũ theo chàng",
+"Đan tâm chiếu sử":"Giữ nhà bằng máu","Lập vua trong máu":"Phò vua chính thống","Cả nhà ra biên":"Trốn án ra biên","Ấn giả đền mạng":"Tìm ra ấn giả",
+"Binh phù trong tay":"Nữ đế an dân","Trung thần giao binh":"Giao binh đổi quyền","Theo cờ vương phủ":"Phản cung theo vương","Giải giáp quy điền":"Mang binh quy ẩn",
+"Huynh muội trùng phùng":"Cướp huynh về nước","Hòa thư hai nước":"Hòa thư lừa giặc","Thù nhà nợ nước":"Đánh giặc cứu huynh","Hồng nhan đất giặc":"Phản quốc theo chàng",
+"Hoàng thương thiên hạ":"Gian thương thiên hạ","Vương tước cho con":"Mua tước cho con","Thái hậu bạc vàng":"Thái hậu tán tài","Thuyền về cố hương":"Ôm bạc trốn đi",
+"Diệt lưới muối lậu":"Nuốt lưới muối lậu","Vua muối bóng tối":"Muối lậu nuôi dân","Theo thuyền giang hồ":"Thủ lĩnh giang hồ","Nợ máu nhà muối":"Đòi công nhà muối",
+"Bồ Tát Giang Nam":"Bán lương Giang Nam","Kho lương thiên hạ":"Mở kho cứu đói","Hiền phi cứu đói":"Mua danh cứu đói","Đầu cơ đền tội":"Khuyên kẻ đầu cơ",
+"Chủ nợ lục cung":"Ân nhân lục cung","Nợ hóa tình thân":"Nợ hóa xiềng xích","Xóa nợ ra đi":"Quỵt nợ ra đi","Thư sinh trả nợ":"Trói chàng bằng nợ",
+"Tớ cũ thành chủ":"Thương người hạ nhân","Ân chủ trọn đời":"Nắm thóp chủ cũ","Trả áo về quê":"Cuỗm vàng về quê","Thay chủ nuôi con":"Cướp con của chủ",
+"Trốn cùng thị vệ":"Bỏ trốn đêm loạn","Chôn tình giữ ngôi":"Gạt lệ giữ ngôi","Tình hóa trung nghĩa":"Lợi dụng tình xưa","Xuất gia đoạn tình":"Đoạn tình tuyệt nghĩa",
+"Chưởng sự lục cục":"Bà chúa lục cục","Tỷ muội trọn đời":"Tỷ muội đồng mưu","Cùng nhau ra cung":"Trốn cung bỏ bạn","Bán bạn cầu vinh":"Bỏ bạn vì nghĩa",
+"Họ Thẩm phục hưng":"Họ Thẩm báo oán","Nữ đế khoan nhân":"Nữ đế huyết thống","Mang họ mẹ đi":"Chối bỏ họ cha","Báo thù cho mẹ":"Đòi công cho mẹ",
+"Gián điệp hai triều":"Mật sứ hòa bình","Một lòng Đại Hy":"Bán đứng cố quốc","Thoát vòng hai nước":"Phản cả hai triều","Tình nơi quán dịch":"Câu chàng quán dịch",
+"Cầu nối vạn dặm":"Bán tin vạn dặm","Nữ sứ hai triều":"Nữ sứ hai lòng","Sứ đoàn đẫm máu":"Che chở sứ đoàn","Về nam theo sứ":"Trốn nam theo sứ",
+"Vũ khúc truyền đời":"Vũ khúc mê hồn","Thái hậu ngoại tộc":"Ngoại tộc chuyên quyền","Trả nhục ngàn lần":"Lấy đức rửa nhục","Về với núi mây":"Phóng hỏa về núi",
+"Nữ vương máu lạnh":"Nữ vương nhân từ","Hai ngai một lòng":"Hai ngai một chủ","Thôn tính cố quốc":"Hợp nhất hai cõi","Công chúa lưu vong":"Lưu vong phục thù",
+"Thống lĩnh ngự mã":"Ngự mã chuyên quyền","Tri kỷ lưng ngựa":"Lưng ngựa mưu sâu","Mũi tên trường săn":"Mũi tên cứu giá","Về với thảo nguyên":"Cướp ngựa về bắc",
+"Nữ Khả hãn":"Khả hãn sắt máu","Lập em làm hãn":"Dựng hãn bù nhìn","Sói già phải chết":"Bắt sói giao triều","Con trai hai cõi":"Con nắm hai cõi",
+"Mẹ của thảo nguyên":"Nữ chúa thảo nguyên","Lương thảo đổi hòa":"Lương thảo đổi đất","Mở cửa ải bắc":"Mở ải cứu người","Khúc ca tuyết trắng":"Khúc ca oán hận",
+"Lời thề trọn vẹn":"Đốt cầu theo chàng","Chôn lời thề cũ":"Gác lời thề cũ","Nghĩa huynh biên ải":"Lợi dụng nghĩa huynh","Đòi máu cho chàng":"Đòi công cho chàng",
+"Rửa oan chín họ":"Lật án đổ máu","Chín họ đền tội":"Xử án công minh","Bút sử chép lại":"Bút sử tùy tay","Tro tàn trở về":"Mang thù trở về",
+"Diệt tận gốc":"Nhổ gốc trả oan","Tha để thắng":"Tha để trói","Mạng lưới bóng đêm":"Mạng lưới che chở","Theo người cứu mạng":"Mượn người trốn án",
+"Tướng môn trở lại":"Tướng môn báo oán","Mở cổng thành đêm":"Mở cổng cứu giá","Chị em phiêu bạt":"Chị em lục lâm","Thay em gánh tội":"Đẩy tội cho người",
+"Oán hóa thành ân":"Giả tha chờ thời","Báo thù không tha":"Báo thù đúng người","Cửa Phật buông thù":"Mượn chùa náu thân","Yêu con kẻ thù":"Lấy tình làm dao",
+"Đức Thọ đời sau":"Đức Thọ chuyên quyền","Phản cô đoạt quyền":"Thay cô giữ nước","Cháu hiền giữ lễ":"Cháu ngoan giấu dao","Cửa thiền thay cô":"Mượn thiền tránh họa",
+"Thần y hậu cung":"Độc y hậu cung","Chén thuốc cuối cùng":"Chén thuốc hồi sinh","Hiếu nữ cầm ấn":"Mượn bệnh cầm ấn","Theo cô hành cung":"Giam cô hành cung",
+"Chị em một nhà":"Em làm bóng chị","Một phượng duy nhất":"Phượng nghi thiên hạ","Nhường ngôi cho em":"Bỏ em gánh họa","Họ ngoại trăm năm":"Họ ngoại lộng quyền",
+"Trả lại công bằng":"Bí mật thành dao","Giữ kín, nắm thóp":"Giữ kín che người","Mẹ con nhận nhau":"Cướp mẹ về mình","Hoàng tử thất lạc":"Hoàng tử giả danh",
+"Thi tiên đương thời":"Thi ma đương thời","Ngòi bút giết người":"Ngòi bút cứu người","Thơ theo gió đi":"Thơ đốt ra đi","Tri âm thiên tử":"Thi nữ dắt vua",
+"Nữ đế biến pháp":"Nữ đế khắc nghiệt","Đốt sách giữ ngôi":"Giấu sách giữ ngôi","Mở trường dạy chữ":"Mở trường kết đảng","Gánh sách theo chàng":"Trộm sách theo chàng",
+"Trạng nguyên phò tá":"Trạng nguyên con rối","Môn sinh thành phe":"Môn sinh đầy triều","Theo trò đi xa":"Bỏ hết theo trò","Khoa trường vạch tội":"Khoa trường thanh trừng",
+"Đế sư thiên tử":"Đế sư lộng quyền","Dạy vua thành rối":"Dạy vua thành người","Thư viện bên hồ":"Ôm sách cấm đi","Mẹ nuôi Đông cung":"Mẹ nuôi tranh ngôi",
+"Bóng sau ghế chủ":"Bóng che ghế chủ","Nghĩa chủ tình sâu":"Chủ tớ đồng tội","Giữ kín ra cung":"Bán tin ra cung","Rửa oan người cũ":"Trả oán người cũ",
+"Chị em ra cung":"Một mình ra cung","Bước lên vai bạn":"Kéo bạn cùng lên","Kim chỉ thành danh":"Kim chỉ cướp danh","Về làng theo chàng":"Bỏ bạn theo chàng",
+"Chiếc ô chiều mưa":"Chiếc ô giăng bẫy","Tỳ nữ lên phượng":"Tỳ nữ mẫu nghi","Gác ô ra đi":"Bẻ ô ra đi","Tỷ muội cùng hầu":"Mượn chị lên cao",
+"Tổng quản lục cung":"Tổng quản hà khắc","Tay nắm Nội vụ":"Nội vụ thanh liêm","Ma ma về quê":"Ma ma cuỗm bạc","Phụng Thánh phu nhân":"Nhũ mẫu nhiếp chính",
+}
+def titles(x):
+    """(thiện title, ác title) of one ending x"""
+    o=OTHER[x[0]]
+    return (o,x[0]) if x[2]=="A" else (x[0],o)
