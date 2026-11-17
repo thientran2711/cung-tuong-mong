@@ -618,3 +618,6 @@
 | person-leftcol HELD by worker until owner confirms (WIP 66228c7a; worker context high → successor needed from a root main) | review/person-leftcol | main s30 | session_01UV1SzhEnrDEEXPkBwigyNF | HELD | 17/11 04:31Z |
 | item-ledger-solo review r1 (opus BIG) of ac939102 | review/item-ledger-solo-r1 | D | session_01964izDZwBFDcEekKPJkVPu | RUNNING | 17/11 04:36Z |
 | RESIDENCE + SEATS halved + HAREM 20 (opus; main s29 04:12Z/04:21Z/04:31Z/04:33Z; OD 04:08Z–04:32Z) | review/residence-seats | D | session_01964izBzU18L6Nv89Q2F288 | RUNNING | 17/11 04:36Z |
+| presentation-wiring r1 PASS bc8461cc (review/presentation-wiring-r1; residuals: seal fx nearly invisible, slap flush subtle, origin frame placeholder until A1) → batch after current | review/presentation-wiring-r1 | main s30 | session_01UV1Szipn2t9xXY2WubCJ1T | PASS | 17/11 04:56Z |
+| kit-ico-rank r1 PASS a1c7a37c (review/kit-ico-rank-r1; score.js RULES = BAL.rank one rulebook; ctm-rank Worker deploy by main AFTER go-live, steps in reports/review-kit-ico-rank-r1.md) → batch after presentation-wiring | review/kit-ico-rank-r1 | main s30 | session_01UV1Szh3wz6vc9DcUjfYN4f | PASS | 17/11 04:56Z |
+| fig-headtop SẴN SÀNG KIỂM 203a8291 → review asked of map-full reviewer | review/fig-headtop | main s30 | session_01UV1SziNzVtVrRy8QmSoLTB | READY | 17/11 04:56Z |
