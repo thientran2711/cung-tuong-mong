@@ -28,7 +28,7 @@ if(typeof srkMax==="function"){const m0=srkMax;srkMax=function(o,s){if(S&&o&&o==
 if(typeof srkName==="function"){const n0=srkName;srkName=function(s){const p=s&&s.eid&&postOf(s.eid);return p?p.title:n0.apply(this,arguments)}}
 function elders(){try{return allServ().filter(s=>s&&s.eid&&postOf(s.eid))}catch(e){return[]}}
 function elderBy(id){return elders().find(s=>s.eid===id)||null}
-function masterFor(post){if(post.master==="hh"){const q=typeof queenP==="function"?queenP():null;if(q&&(q===S||(q.alive!==false&&!q.out)))return q}return thH()}
+function masterFor(post){if(post.master==="hh"){const q=typeof queenP==="function"?queenP():null;/* a queen in the cold palace keeps no palace office (review/staff-root): the woman goes back to Thái hậu's household */if(q&&!q.out&&(q===S||q.alive!==false))return q}return thH()}
 function masterName(m){if(!m)return"";if(m===S.thO)return"Thái hậu";if(m===S)return"ngươi";return m.queen?`Hoàng hậu ${m.name}`:m.name}
 function mk(post,i,age){const nm=post.names[i%post.names.length];if(typeof sidN!=="undefined")sidN=Math.max(sidN,...allServ().map(s=>s.sid||0),0);
  return{sid:typeof sidN!=="undefined"?++sidN:Date.now(),eid:post.id,n:i,name:nm[0],call:nm[1],role:"maid",rk:post.rk,age,retire:rint(...(B().retire||[63,68])),
