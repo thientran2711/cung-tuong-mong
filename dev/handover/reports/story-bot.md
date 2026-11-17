@@ -49,3 +49,4 @@ Sens bot ignores option risk text (fault 3 inflated), does not play minigames we
 `OUT=/tmp/sb bash dev/measure/runstory.sh $PWD/dev/index.html <shard> <lives> 5` (ch1–4) or `... <lives> 0 "<origins>" "vua"` (whole lives); `python3 dev/measure/anstory.py /tmp/sb/story_*.json`.
 
 SẴN SÀNG KIỂM 0e8f8ff8057fab2697b8b76e03c1117db6788699
+REPORT READY 0e8f8ff8057fab2697b8b76e03c1117db6788699
