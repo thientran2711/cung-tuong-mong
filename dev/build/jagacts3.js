@@ -105,3 +105,40 @@ function p3Cold(v){const X=BAL.ag.par3.cold;let N;try{N=agNeeds(v)}catch(e){N={}
 /* ledger labels */
 try{for(const k in AGC3ACT)ACT95["ag_cx3:"+k]=AGC3ACT[k]}catch(e){}
 Object.assign(window,{p3Cold,p3Free,p3Nun,AG3,P3C,AGC3BTN,AGC3ACT,p3On,p3Run,servDo});
+/* ================= 2e part 3 (AG-ALL-2e2): talk / social, household, faction, pregnancy, toilette, maid dilemmas ================= */
+/* ---------------- talk topics: ONE builder P3T.<k>(speaker, listener) — her talk (j9 topicOpts) and an NPC↔NPC talk (cx3:talk*) ----------------
+   the same chat repeated in a month gives less: the pair count lives on S.chat when she is one of the two (as before), else on the speaker (reset monthly) */
+function p3ChatBox(p,v){if(p===S||v===S){S.chat=S.chat||{};return[S.chat,p===S?v.id:p.id]}if(p.chatM!==S.turn){p.chat={};p.chatM=S.turn}return[p.chat,v.id]}
+function p3ChatF(p,v){const [b,k]=p3ChatBox(p,v);return 1/(1+(b[k]||0))}
+function p3ChatMark(p,v){const [b,k]=p3ChatBox(p,v);b[k]=(b[k]||0)+1}
+function p3Who(x){return x===S?"ngươi":x.name}
+const P3T={
+ health:(p,v)=>{const T=BAL.talk,f=p3ChatF(p,v),n=Math.max(1,Math.round(T.health*f));return{n:"Hỏi han sức khỏe",o:100,x:`nàng quý ngươi +${n}`,
+  run:()=>{affAdd(v,p,n);p3ChatMark(p,v);return p===S?`${v.name} cảm động. Nàng quý ngươi +${n}.`:`${p.name} hỏi han sức khỏe ${p3Who(v)}; ${p3Who(v)} quý ${p.name} +${n}`}}},
+ praise:(p,v)=>{const T=BAL.talk,f=p3ChatF(p,v),n=Math.max(1,Math.round(nv(v,"praise")*f)),o=talkPraiseO(p);return{n:"Khen tài nghệ nàng",o,x:`nàng quý ngươi +${n}`,
+  run:()=>{p3ChatMark(p,v);if(roll(o)){affAdd(v,p,n);return p===S?`${v.name} tươi cười. Nàng quý ngươi +${n}.`:`${p.name} khen tài nghệ ${p3Who(v)}; ${p3Who(v)} quý ${p.name} +${n}`}
+   affAdd(v,p,-T.praiseFail);return p===S?`${v.name} cho là ngươi giả lả. Nàng quý ngươi -${T.praiseFail}.`:`${p.name} khen tài nghệ ${p3Who(v)}, bị cho là giả lả`}}},
+ gossip:(p,v,third)=>{const T=BAL.talk,G=T.gossip,f=p3ChatF(p,v),n=Math.max(1,Math.round(G.hit*f));return{n:`Bàn tán về ${third.name}`,o:100,
+  x:aff(v,third)<0?`nàng ghét người này, hợp chuyện: nàng quý ngươi +${n}`:`kèm: nàng quý ngươi -${G.miss} · nàng có thể mách lại`,
+  run:()=>{p3ChatMark(p,v);if(aff(v,third)<0){affAdd(v,p,n);oanAdd(v,third,G.oan);return p===S?`Hai người to nhỏ chuyện ${third.name}. Nàng quý ngươi +${n}.`:`${p.name} và ${p3Who(v)} to nhỏ chuyện ${p3Who(third)}`}
+   affAdd(v,p,-G.miss);if(roll(G.tell)){oanAdd(third,p,G.tellOan);return p===S?`${v.name} đem lời ngươi kể lại với ${third.name}. ${third.name} oán ngươi +${G.tellOan}.`:`${p3Who(v)} đem lời ${p.name} bàn tán kể lại với ${p3Who(third)}`}
+   return p===S?`${v.name} lảng sang chuyện khác. Nàng quý ngươi -${G.miss}.`:`${p.name} bàn tán về ${p3Who(third)}, ${p3Who(v)} lảng sang chuyện khác`}}},
+ secret:(p,v)=>{const T=BAL.talk,f=p3ChatF(p,v),n=Math.max(1,Math.round(T.secret*f));return{n:"Chia sẻ bí mật",o:100,x:`nàng quý ngươi +${n}${v.malice>50?" · nàng có thể nắm thóp ngươi":""}`,
+  run:()=>{p3ChatMark(p,v);affAdd(v,p,n);if(v.malice>50&&roll(50)){evA(v,p,BAL.ag.ev.one);return p===S?`${v.name} lắng nghe chăm chú, ghi nhớ từng lời. Nàng quý ngươi +${n}.`:`${p.name} chia sẻ bí mật với ${p3Who(v)}; ${p3Who(v)} ghi nhớ từng lời`}
+   return p===S?`${v.name} cũng kể chuyện riêng. Nàng quý ngươi +${n}.`:`${p.name} và ${p3Who(v)} kể chuyện riêng cho nhau`}}}};
+function p3Third(p,v){return liveRivals(true).filter(x=>x!==v&&x!==p).sort((a,b)=>aff(v,a)-aff(v,b))[0]||null}
+Object.assign(AGC3BTN,{talkHealth:"Hỏi han sức khỏe",talkPraise:"Khen tài nghệ nàng",talkGossip:"Bàn tán về",talkSecret:"Chia sẻ bí mật",invoke:"Nhắc lại ân xưa"});
+Object.assign(AGC3ACT,{talkHealth:"sang hỏi han sức khỏe",talkPraise:"sang khen tài nghệ",talkGossip:"ghé tai bàn tán",talkSecret:"sang chia sẻ chuyện riêng",invoke:"nhắc lại ân xưa"});
+/* her listener-side options are the same cards: the NPC speaker p picks one listener (friend first) and one topic; target is where the listener is (agAt) */
+agReg("consort","par3talk",(v,N,need)=>{const O=[];if(!p3On()||v===S||v.out||v.confined||!v.alive)return O;const X=BAL.ag.par3.talk;if(need&&need!=="ally"&&need!=="spite")return O;
+ try{const L=others(v).filter(x=>x&&x!==S&&x!==v&&x.alive!==false&&!x.out);if(!L.length)return O;
+  const t=mindPickBy(L,x=>BAL.mind.pick.ag.base+Math.max(0,aff(v,x)),v);if(!t)return O;const at=(kh,vv,tt)=>agAt(tt||t,kh);
+  const add=(k,C,g)=>{const x=p3O(v,k,C,N,g,"social",at,t);if(x)O.push(x)};
+  add("talkHealth",P3T.health(v,t),X.health);add("talkPraise",P3T.praise(v,t),X.praise);add("talkSecret",P3T.secret(v,t),X.secret);
+  const th=p3Third(v,t);if(th){const C=P3T.gossip(v,t,th);if(aff(t,th)<0)add("talkGossip",C,X.gossip)}/* she sees "nàng ghét người này" on the card; the NPC weighs the same line */
+  const m=typeof memTop==="function"&&memTop(t,v,1);if(m&&m.g>=BAL.mem.invokeMin)add("invoke",{n:"Nhắc lại ân xưa",o:100},X.invoke);
+ }catch(e){agdErr("par3talk",e)}return O});
+for(const k of ["health","praise","secret"]){const K="talk"+k.charAt(0).toUpperCase()+k.slice(1);agRunReg("cx3:"+K,(v,t)=>t&&t.alive!==false?p3Res(K,P3T[k](v,t).run()):"")}
+agRunReg("cx3:talkGossip",(v,t)=>{if(!t)return"";const th=p3Third(v,t);return th?p3Res("talkGossip",P3T.gossip(v,t,th).run()):""});
+agRunReg("cx3:invoke",(v,t)=>t?p3Res("invoke",memInvoke(t,v)):"");
+Object.assign(window,{P3T,p3ChatF,p3ChatMark});

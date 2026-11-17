@@ -147,9 +147,11 @@ function memFade(){if(off())return;memMig();const M=memS();if(M._mo===S.turn)ret
 function memDead(){try{const C=BH();for(const v of (typeof rivals!=="undefined"?rivals:[])){if(!v||v.coop||v.alive!==false)continue;if(v.mem)delete v.mem;
   if(v.cz&&typeof v.cz==="object"){const ks=Object.keys(v.cz);if(ks.length>C.czDeadMax){ks.sort((a,b)=>(v.cz[b].w-v.cz[a].w)||((v.cz[b].q||0)-(v.cz[a].q||0)));for(const k of ks.slice(C.czDeadMax))delete v.cz[k]}}}}catch(e){}}
 /* "Nhắc lại ân xưa": spend a good memory → the person owes her one ân (j72 ledger) */
-function memInvoke(v){const C=B();const m=memTop(v,S,1);if(!m||m.g<C.invokeMin)return"";m.g=Math.max(0,m.g-C.invokeCost);
- let owe=false;try{if(typeof q72A==="function"&&typeof q72DebtAdd==="function"){const A=q72A("rv",v.id);if(A){q72DebtAdd(A,1);owe=true}}}catch(e){}
- if(!owe)try{affAdd(v,S,C.invokeAff)}catch(e){}
+/* AG-ALL-2e: p = who invokes (default her); an NPC invoking another NPC's memory of her goes through the same rule (no q72 ledger between NPCs → the liking step) */
+function memInvoke(v,p){p=p||S;const C=B();const m=memTop(v,p,1);if(!m||m.g<C.invokeMin)return"";m.g=Math.max(0,m.g-C.invokeCost);
+ let owe=false;if(p===S)try{if(typeof q72A==="function"&&typeof q72DebtAdd==="function"){const A=q72A("rv",v.id);if(A){q72DebtAdd(A,1);owe=true}}}catch(e){}
+ if(!owe)try{affAdd(v,p,C.invokeAff)}catch(e){}
+ if(p!==S)return `${p.name} nhắc ${v.name} chuyện xưa: ${p.name} đã ${phrase(m,v.name)}; ${v.name} quý ${p.name} hơn`;
  return `Ngươi nhắc ${v.name} chuyện xưa: ngươi đã ${phrase(m,"nàng")}. ${v.name} cúi đầu: “Ơn ấy ta chưa trả.”${owe?" Nàng nợ ngươi một ân.":""}`}
 Object.assign(window,{memAdd,memList,memScore,memMod,memTop,memLine,memFade,memInvoke,memAgo,memKey:mk,memFadeK,memHolders,memPairs,memFadeWord});
 
