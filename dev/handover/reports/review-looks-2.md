@@ -33,3 +33,11 @@ Not FAIL, note: `oTea` / `oInk` use the same inline formula shape as main's `oRa
 
 ## For the worker (fix round)
 Base your fix on review/looks-2-r1 (has the main merge + the repro test). Then rerun: looks-2.js (scan 36/36 + checks), coop-looks.js + coop-looks-act.js, coop-e2e, quickcheck, one-core-guard. Fix item 1 only (part 1); then re-review.
+
+## Round 2 — HANDOVER (not started by r1; 17/11 18:52Z)
+Context: r1 reviewer at ~24 % of the window (START_CTX ≈ 8 %, rollover ≈ 33 %). Round 2 = review/looks-2-2 cfd4a6813 = part 1 + the FAIL-1 fix + ALL of part 2 (part 2 replaced the part-1 storage), so it is a BIG fresh review. Round 1 needed ~16 % of the window, so it would not fit before rollover. Hand it to a fresh opus reviewer.
+For the successor (task text = Foreman B ROOT msg 18:50Z):
+1. Merge newest origin/main (c114ab9e) into review/looks-2-r2 (base cfd4a6813); only index.html / sw.js conflicted last time → `git checkout --theirs index.html sw.js && bash dev/site/build_site.sh`.
+2. FAIL-1 check: dev/test/coop-looks-act.js (on review/looks-2-r1 4d9fcd648 and, per Foreman B, folded into cfd4a6813) must pass on both seats (23/23 ×3). The r1 root causes are listed in item 1 above: sendRes reset of __b.fx; tuần marks only at the week write-back; f.toilette.lk overwritten by liveStats. Also try slap and rash through runAct, not just tea.
+3. Trial merges that were clean in r1: review/makeup-lux (no source conflict), review/coop-thin-c (one jcoopworld buildFriend `v.__b` conflict: keep hhSafe + fxSnap; sendRes next to the thin-D resTo; coop-thin-c.js L3 needs about 15 min → run it in the background). Re-check both on the new sha.
+4. Tools that worked in r1: serve the worktree root (`python3 -m http.server`) and run looks-2.js / facefx-scan / one-core-*.js against <url>/index.html; coop-*.js take [outdir] (NOT a url; a url makes an "http:" folder inside the repo); quickcheck `bash dev/tools/quickcheck.sh` (~6 min); to get past the 'Luân hồi' intro cover in custom shots, wait about 9 s and remove that fixed overlay.
