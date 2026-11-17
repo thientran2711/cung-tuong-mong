@@ -1,3 +1,12 @@
+# fig-tier-succ — STATE (tiers worker, 17/11 ~02:15Z)
+Owner words relayed by Foreman C (verbatim): "Rồi đang thiếu hai cái phẩm, vẽ cho nó vẽ tiếp đi. Hai cái phẩm mà phải đủ cái độ tuổi nữa hay sao á đúng không?" and "còn lại tất cả các ảnh khác mày cứ vẽ tiếp đi".
+Plan: t9 + t10 x 32 identities x a18/a26/a36/a51 = 256 figs, 2K gpt-2-6 (65 cr each, ~16.6k cr), a18 first; a26+ use old t8 of that age + the new a18 creation as refs; finish with finish_fig geometry taken from the same identity/age t8 twin; upload fig/hd/tn(if t8 has)/por + hd fragments.
+BLOCKED: the permission classifier denied 2 of the first 4 a18 generations (c02-t9, c04-t9). Not worked around. Waiting for the owner's OK typed in this session, or a tool permission.
+Done on the batch: c01-t9-a18 (creation yiEzSARPW9) and c03-t9-a18 (EbnjmLguuO) generated, downloaded, alpha 0/254, looked at: both good (crimson/gold phoenix, hem at feet, shoes visible, lively hands). Masters are in scratch only, not finished/uploaded. 130 cr.
+Reference uploads (old t8-a18 per identity, Magnific ids): see refs_a18 list below.
+c01 5jMwCbnKxe, c02 bxVUfbP5Y2, c03 Bh9QV8uoQR, c04 9ZFWwizNYZ, c05 6Aq0JZpiJO, c06 Xm4uTtwBfo, c07 u5YLm59QLD, c08 dtPE0m4XSL, c09 kspJQTk16B, c10 Sym3r8HUb8, c11 Sym3rIqUb8, c12 Bh9QV4GoQR, c13 tC3be3RmZJ, c14 79a2LfVJAL, c15 DoJaYODpcl, c16 lJI6kmQgv9, c17 1leOFBer4r, c18 s78NKhMl8e, c19 w4vZjuW7EI, c20 dtPE03uXSL, c21 lJI6kCwgv9, c22 1leOFthr4r, c23 8a6HDzJIrU, c24 jUB4bfDLD0, c25 vQ2kBV2a47, c26 IfiqpcxtvE, c27 5jMwEh4Kxe, c28 nVLB39dYQD, c29 aFA1oecfSh, c30 Xm4uTWqBfo, c31 huZKXeqvqL, c32 Sym3r19Ub8
+Face refs: 01 N2HYqYa6D9, 05 bxVgMSX5Y2, 12 dtPf4EDXSL, 18 eIyaPEVdqL. Sample a36 t8 refs: c01 0eStZVhTfW, c20 xSXPFsTjfW, c26 VXwhAeEMMU.
+
 # fig-tier-succ — new consort figure tiers t9 (Hoàng thái hậu) and t10 (Nữ đế)
 START_CTX ~8 % (sonnet art worker for Foreman C). Owner trigger: 17/11 ~02:05Z question (no figure tier for Nữ đế / Hoàng thái hậu).
 
