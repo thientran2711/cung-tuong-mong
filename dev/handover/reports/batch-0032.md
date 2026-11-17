@@ -2,9 +2,9 @@
 
 Builder session_01UV1Szgb3UbRCJaMcocuGrF (opus). Coordinator main s27 (session_01UV1Szh248gDvHSAH88RvJm). START_CTX ≈ 3 % (get_session read 0; own estimate). Finished at about 20 %, so no rollover was needed.
 
-**FINAL SHA: `f5220eaa5`** on `review/batch-0032` (base origin/main 744b80e7). Main pushes; the builder did not touch main.
+**FINAL SHA: `0f61ff928`** (was f5220eaa5 before coop-main-faults) on `review/batch-0032` (base origin/main 744b80e7). Main pushes; the builder did not touch main.
 
-## In (7)
+## In (8)
 | branch | PASS head | merge notes |
 |---|---|---|
 | review/kit-size-r7 (incl. minigame-frame-r1 + diemtrang-fx) | 7a8e1fd9 | assemble list union (+ jksize.js), jseat.js then jcoopone.js kept LAST |
@@ -14,6 +14,7 @@ Builder session_01UV1Szgb3UbRCJaMcocuGrF (opus). Coordinator main s27 (session_0
 | review/diemtrang-score | 8098201f | jtoil.js, 3 hunks: (1) friend's real look `toilFriendRec(p)||toilNpc(p)` + branch `toilMk(rec)`, main dress line kept; (2) main's palace-voice pools (TOIL_SAY/BAND/TRAIT, kLine) kept + branch TOIL_SLIP/toilSlipSay added, and the slip/diêm line is checked first in toilSay; (3) main's s0 log seq + branch's `mk==="vung"` tease |
 | review/kit-size-9 | a227d507 | clean (generated files rebuilt) |
 | review/coop-stable-r1 | 6f8e33a0 | clean. **Worker NOT deployed** (see below) |
+| review/coop-main-faults-r1 | 608309dc | clean (generated files rebuilt) |
 
 ## Out
 - **origin-intros (OI)**, i.e. review/origin-intros-r1 34d90ea4 + the BAL.kc2 move 25546cf0. Quickcheck FAILS: longTaskMaxMs 4.4 s vs 1.3 s live, 3 runs out of 3, plus one run at 25 s. Bisect: 42939eaa (batch before OI) PASS; 3f0f5e73 (OI merge alone, before the kc2 move) FAIL, so the cause is OI itself. Root place: choosing the "Thân phận kiếp này" life card (chooseM 0) is ONE task of 1.3–1.5 s vs 0.34 s on live (iPad 1180x820, CPU 1x). The 3 new intro cards after it cost 0.3–0.4 s each, so the harness's 8-step settle poll adds up to 4.4 s. Parked on **review/batch-0032-oi 5e5eb4c8** (OI + BAL.kc2 + kit one-core fix; gate 0). The oi-perf worker is on it (CLAIMS).
@@ -31,6 +32,11 @@ The batch client is safe with the CURRENT live Worker: coop-e2e on f5220eaa vs L
 ## Checks
 | check | sha | result |
 |---|---|---|
+| quickcheck | 0f61ff92 | **PASS** 112 s · open 830 ms · old save ok · render 197/209 · tab 254/236 · buổi 1224/1047 ms · core gates PASS |
+| one-core-guard | 0f61ff92 | PASS 0 fails |
+| coop-e2e (LIVE Worker) | 0f61ff92 | 60/60 |
+| text-idem-scan | 0f61ff92 | PASS, 509 strings, 0 fails, live rounds 1 |
+| roster_dom Fold 755x1000 / iPad 1180x820 | 0f61ff92 | 20 moments each, bad 0, page errors 0 |
 | quickcheck | f5220eaa | **PASS** 128 s · open 984 ms · old save ok · render 228/238 · tab 294/286 · buổi 898/825 ms · core gates PASS |
 | quickcheck | 92685210 (before coop-stable) | PASS 126 s |
 | quickcheck | 5e5eb4c8 (with OI) | FAIL perf (see Out) |
