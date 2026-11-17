@@ -22,3 +22,4 @@ Done: a18 251/256 (ty1 c28-c32 paused). Live with hd: b1-b4 fragments. g6 (a26 t
 TODO order: (1) older_ty4-8_index.txt lines 46..480 (a26 c9.. then a36, a51); (2) redo_rich.txt 7 files + after rank sample GO: all ty1-3 (rank-sample/consort-ty-at-risk.tsv) with 'rich' arg, then ty1-3 of a26/a36/a51 (not yet generated: 3 tiers x 32 x 3 ages = 288, in lists/shards/consort-ty.txt, gesture idx = a18 idx of same cNN-tyN); (3) W1b queue appended by lead #6 (eunuch a18 ~108, kid, man/mama other ages, hd retro-fit of ~63 W1b files; read batch-w1-hero-misc.md, tools/w1_drv.py, lists/shards/w1-done-2k.txt).
 Lead = session_011xDdVS87fDNLJMJGzeiVWL (Foreman C = ...VSeKM6qi8YXjVTPqrd). Tell lead to open the successor with BOTH queues.
 Credits so far: ~(4x80)+~290x65 = ~19.5k. START_CTX ~5%.
+NOTE for W2b: do NOT start generating until W2 reports g6 finished (slot limit); then start at older_ty4-8_index.txt LINE 46 (lines 1-45 = g6). W1b queue goes to W4c, not to W2b.
