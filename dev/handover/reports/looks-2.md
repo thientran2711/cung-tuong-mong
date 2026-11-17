@@ -64,11 +64,28 @@ All states are plain fields on person objects inside S → they ride the existin
 ### 0.8 Build order (no art needed)
 1 BAL.looks + states + clears + Sắc + chips · 2 weather hook (wxHit) · 3 crying hook · 4 two harm acts · 5 ILL.thuydau + pox face entry + spread · 6 layer law wrap + scan · 7 emotion-face key + art slot · 8 tests (face/toil/illness, one-core-guard, kit-conform, coop-e2e, old-save, quickcheck; Fold 755x1000@2 + iPad 1180x820@2).
 
-## 1. Build log
-(pending)
+## 1. Build log — SẴN SÀNG KIỂM 040ce3440 (review/looks-2, base origin/main e8b1906fb)
+- `dev/build/jlooks.js` (new, assembled LAST so its kitFxLayers wrap is outermost): BAL.looks; states smu / ink (on the day's toilette record → redo makeup or next tuần washes them) and stain (p.stain; wet dries after dryBuoi buổi; wdWearEntry / wdApply or next tuần clear it); weather hook on wxHit (her + every NPC, one roll; no cover = always smudged in rain; dù / áo tơi / maid umbrella / kiệu = odds); crying hook (jemoact eaDo "khóc" + her "Khóc thầm" ventMe → BAL.looks.smu.cry); two harm acts "Hắt nước trà" (tea) + "Tẩm mực khăn mặt" (ink), band Hại nhỏ, motive-gated in mindMenu, Hoàng thượng / Thái hậu denied; ILL.thuydau (Xuân, cont, die 0) + servant spread (BAL.looks.pox.spread); face-fx entries pox z22 / smu z24 / ink z26 (picture only when LOOKS_ART lists the file) + stain (chip + Sắc; no picture until the body-fit KIT REQUEST); emotion-face key looksEmoFace (vui / buồn / giận / hờn / khóc) + kitFace swap to por-X~key.webp only when listed in LOOKS_ART; LAYER LAW wrap (fit by base file; every img.kmkl hoisted under every mark).
+- `dev/build/jcoopworld.js` (family fix found by the co-op test): a co-op player's face marks were NOT seen by the other seat (rash, slap, poison, punishment, sickness, scar — only illness rode LOOK). Now FXL = rash/slap/pz/pen/sick/scar/stain/lk/lkCry ride the live pos relay + the week merge, and a mark one seat puts on the friend's entry goes back to her at the week write-back (the live relay does not stomp a pending local mark).
+- `dev/kit/KIT_REQUESTS.md`: body-fit box per figure (stains) + emotion portrait swap slot.
+- Art: ART REQUEST in FOREMAN_C_STATUS (17/11 ~17:20Z). Nothing drawn, no code drawing; every slot empty until delivered.
+- Open for Foreman B: "mụn" (pimples) has no state anywhere — nothing to layer; ask the owner via main whether pimples are a new mark or she meant nổi mẩn. Đậu mùa scar after recovery stays the old Sắc −8 (no scar picture). Emotion faces wait for your OK on §0.6 + the C pilot.
 
-## 2. Layer-law before/after table
-(pending)
+## 2. LAYER LAW before/after (dev/test/looks-2.js --scan-only; her with makeup on; picture por/fig-consort-c01-t1-a18 has veil + scar + toil fit)
+| place × mark | before (main e8b1906fb) | after (040ce3440) |
+|---|---|---|
+| portrait / avatar / stage figure / mirror zoom × ill, doc, rash, slap, scar, ALL | 24/24 makeup present + under every mark (held only by assembly order: jtoil wraps after jface) | 24/24, now enforced by the jlooks wrap |
+| same 4 places × pox, smudge, ink, ALL (8 marks) | — (no such marks) | 12/12 makeup present + under every mark |
+| co-op: A's marks as seen on B, B's on A (dev/test/coop-looks.js) | 16/21 — a player's rash / slap / stain / smudge / ink invisible on the other seat; a mark put on the friend lost | 21/21 |
+Note: the ill / doc tint paints pale lips OVER the lipstick (on top, per the law). If the owner reads that as "erasing", it is a tint-strength question for the ill entry, not layer order.
 
-## 3. Tests
-(pending)
+## 3. Tests (on 040ce3440)
+- dev/test/looks-2.js: scan 36/36; checks all true — thuydau rule, smudge Sắc = BAL, chip, redo clears, no makeup → no smudge, men no smudge but stain, rain without cover 20/20, umbrella ≈ 97/200 (gear[2] = 50), wet dries, outfit change clears, NPC ink gone next tuần, acts registered + emp denied, tea lands, crying ≈ 67/100 (cry 70), old-save object safe, emotion key gian + no swap without art; no page errors.
+- dev/test/coop-looks.js 21/21 (before 16/21); dev/test/coop-e2e.js 63/63.
+- dev/test/toilette.js 755x1000@2: no overflow, no errors.
+- one-core-guard PASS (inline 5092 ≤ baseline 5093); one-core-text PASS.
+- quickcheck PASS (core gates incl. kit-conform + co-op one-world probe; old save from live loads + plays; perf new/live render 181/156 ms, buổi 902/889 ms, tasks>200 ms 15/11 — earlier run 11/12, noise).
+- Devices Fold 755x1000@2 + iPad 1180x820@2: her card with smudge + tea stain + ink + thủy đậu → no overflow, no page errors; HUD shows "Thủy đậu · nặng" (shots outside git, not uploaded).
+
+## 4. Handover (if a successor is needed)
+review/looks-2 @ 040ce3440 is complete for the no-art scope. Next: when Foreman C delivers a file, add it to LOOKS_ART in jlooks.js (one line) and rerun dev/test/looks-2.js; emotion faces per §0.6 after Foreman B's OK.
