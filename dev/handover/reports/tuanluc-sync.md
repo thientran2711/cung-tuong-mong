@@ -97,3 +97,25 @@ OPEN for the successor (main s29 order 03:52Z, read the OD tail 03:26Z–03:36Z 
 - (8) Overnight "Trong cung vừa qua" KẾT QUẢ card: each Được/Mất/Kèm row names its cause ("Ngủ một đêm: Sức +9", "Lâu chưa được gặp Hoàng thượng, ân sủng nhạt: Sủng −1"); other people's news in its own "Tin trong cung" block, never her headline. Same in Sổ ghi.
 - (9) OD:L1458(3) canon: Tuần lục = literary sentence only (no Được/Mất number rows / chips in entries; the person relation table stays); Sổ ghi = full info (gains/losses/cause). j87 wkeEntry currently appends chips like "Sủng +7." — remove from Tuần lục, keep in Sổ ghi.
 - Then one SẴN SÀNG KIỂM to s29 with a before/after table per item (1–10). Shots go to CDN img/_review/tuanluc-sync/ (6 files already there).
+
+
+## SUCCESSOR #2 (session_01UV1SzhADWZHmWHmXNzN7eb, 17/11 ~04:00–04:55Z) — items 6–10 built, NOT yet SẴN SÀNG KIỂM
+PRIORITY #1 CHECK: predecessor report (this file) | main bad6d59f it-key-guard j8 itClean (S.vl→S.vmem) reused | jlogsync.js (log-sync r1: lsSync per action for HER stats) EXTENDED, not rebuilt | review/* only review/tuanluc-sync.
+START_CTX ≈ 5 %; rollover at ≈ 30 % (owner OD:L1217) — reached; handover below.
+
+| item | before (main bad6d59f, `node dev/test/tuanluc-sync.js 2 12`) | after (this branch) |
+|---|---|---|
+| (10) rebase | branch on 7abaf07a with its own S.vl→S.vmem | merged origin/main bad6d59f; own vmemFix DROPPED (j8 itClean moves the memory; itCleanL drops keyless chest objects); kept only vlSync `scar.veil=0`; jroute conflict resolved (main kitChecks + `open!=null`) |
+| (6) filler "Mấy việc vặt trong tuần chưa ghi riêng" | **280** lines in 2 lives | **0** (deleted in j87); jlogsync `rlSync` writes every consort / servant thiện cảm · oán · ghen change at the moment with the action as cause ("Múa trong yến tiệc: Lý Tần ghen +4, 9 người chưa quen biết thêm ghen ghét."); `rlTag`/`lsTag` name time-tick reasons. Scan: relation changes per action with no line naming the person = **0** (546 changes, 3 lives × 12 tuần) |
+| (7) cards in Sổ ghi | KẾT QUẢ / dialog cards: 0 kept | S.cards (save, cap 60): every #rtoast KẾT QUẢ card (as shown, kit seal + .kb rows + kitKemRow) and every titled dialog (title, text, rows, Lựa chọn) shown in the Sổ ghi between the lines at its moment; kept out of S.logs so the replay / Tuần lục never count numbers twice. Scan: 886 cards shown, missing 2 (→ 0 expected after the outer resultShow hook; re-run) |
+| (8) overnight card | headline = another consort's news; rows without cause | sentence dropped when there is news; rows "Ngủ một đêm: Sức 80→98 (+18)", "ân sủng nhạt dần: Sủng 23→22 (−1)"; others' news in its own row "Tin trong cung" (lines stamped about another person, not hers); Kèm unchanged (kitKemRow). OPEN: person rows ("Đáp ứng X: ghét ta hơn") often still lack a cause (whoWhy misses the rank-prefixed name) |
+| (9) Tuần lục literary only | entries end with chips "Sủng +7." | wkeEntry prints no chips; wkeLit + last pass `litNo` strip every number from me / world / person lines; relation table stays. shots2 check: numbers in Tuần lục lines = 0 |
+
+Tests: `node dev/test/tuanluc-sync.js 3 12` → one-time repeats 0 · clumsy 0 · BÁO max/buổi 1 · relation changes 546 (no cause line 0) · cards 886 (missing 2) · filler 0 · errors 0. `node dev/test/tuanluc-shots2.js <dir>` → PASS (night card found, Sổ ghi cards in the tab, filler 0, numbers 0, 0 page errors). "week-book residue" printed by the scan = j87 token sums vs the table (not shown anywhere now; pronoun lines like "nàng ghen +25" are counted on u.home) — informational.
+
+## HANDOVER #2 → successor #3 (coordinator opens it)
+1. Shots NOT looked at yet: tuanluc-shots2.js shoots while the scene interstitial ("Đêm không được triệu" / "Bình minh mùa xuân", "Chạm để bỏ qua") covers the screen — dismiss it (click the overlay / its skip) before night / soghi / book shots; then LOOK at night-*, soghi-* (kept card markup: .klk wrapper is a plain span, check seal + .kb rows render outside .rtoast), book-* on Fold 755x1000@2 + iPad 1180x820@2. Never commit shots; CDN img/_review/tuanluc-sync/.
+2. Re-run `node dev/test/tuanluc-sync.js 3 12` (card miss should be 0) and paste the line.
+3. Item 8 open bit: cause for person rows (j63 resultShow `whoWhy`: match the name without rank, e.g. v.name inside "Đáp ứng Tần Thục Nghi").
+4. `bash dev/tools/quickcheck.sh` (perf: rlSync runs in every lsSync — snapshot is cheap, wkeTokens only when something changed; check buổi time), `python3 dev/build/assemble.py`, `bash dev/site/build_site.sh`, commit, push review/tuanluc-sync, then ONE "SẴN SÀNG KIỂM <sha> review/tuanluc-sync" to main s29 with this table.
+Files touched: jlogsync.js (rlSnap/rlNote/rlSync/rlTag, lsTag relation reasons, wkSnap flush, wkBookData keeps bookkeeping lines), j87.js (filler gone → window.__wkResid, wkeEntry no chips, wkeLit, litNo, byName unique part-name, wkeNorm "X → ta: thiện cảm"), j63.js (overnight causes + Tin trong cung + lbCardRes call), jlogbao.js (S.cards, lbCardKeep, lbCardRes, showModal/renderPanel0 hooks), jveil.js, assemble.py, tests tuanluc-sync.js / tuanluc-shots2.js.
