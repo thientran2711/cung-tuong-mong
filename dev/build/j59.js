@@ -79,20 +79,32 @@ function j59sel(st,tk,me){let pi=null;try{pi=typeof popIdx==="number"?popIdx:nul
      corners (the name row), so they never cover a figure or a name.
    - the head count is ONE number (kitHereCount): the stage title, the page chips and the Dư đồ label of the place she stands in. */
 function j59person(p){return !!p&&p.kind!=="chest"&&p.kind!=="task"&&!(p.kind==="srv"&&p.sk==="task")}
-function j59chips(st,R,P){/* KIT 33.9 swipe stage: P: {pg, pages, before, after, xl, xr}. NO arrow buttons — two "+N" chips in the top corners of the backdrop: LEFT = people already passed (left of the view), RIGHT = people still to come; hidden at 0. Pure kit chip, not tappable (the row is swiped) */
+/* KIT 33.9 head-count icon (owner 17/11 ~14:15Z): the grey GROUP of three (man, woman, child) img/kit/unknown-ico-n.webp (192 px tall, ~145 px wide, ONE file, no srcset so the jcdn CDN fallback works).
+   j59ico(h) is the only place that draws it: the swipe-stage "+N" chips (j59chipIco) AND the place header "Ngọc Thanh các [icon] 5" (j59hdrCount) use it. Decorative alt="". */
+function j59ico(){return `<img class="j59ico" src="img/kit/unknown-ico-n.webp" alt="" draggable="false">`}
+function j59chipIco(n){return j59ico()+`<span class="j59n">+${n}</span>`}
+/* place header (every place with people): "Ở đây còn N người." -> [icon] N (the rest of a longer stage line is kept); "Không gặp ai." stays text */
+function j59hdrCount(){try{const m=document.querySelector("#sc-t .rmsg");if(!m||m.dataset.j59h===m.innerHTML)return;const t=m.innerHTML;const r=/^\s*·?\s*Ở đây (?:có|còn) (\d+) người\.?\s*/.exec(t);if(!r)return;
+  m.innerHTML=` <span class="kchip n j59hchip">${j59ico()}<span class="j59n">${r[1]}</span></span>`+(t.length>r[0].length?" · "+t.slice(r[0].length):"");m.classList.add("j59hc");m.setAttribute("aria-label",`Ở đây còn ${r[1]} người`);m.dataset.j59h=m.innerHTML}catch(e){}}
+function j59chips(st,R,P,again){/* morechip-fix: placed once now and once more on the next frame, after the side column (k3Stage) has its full height */if(!again)requestAnimationFrame(()=>{try{if(st.isConnected)j59chips(st,R,P,1)}catch(e){}});/* KIT 33.9 swipe stage: P: {pg, pages, before, after, xl, xr}. NO arrow buttons — two "+N" chips in the top corners of the backdrop: LEFT = people already passed (left of the view), RIGHT = people still to come; hidden at 0. Pure kit chip, not tappable (the row is swiped) */
  for(const side of ["l","r"]){let c=st.querySelector(".j59more.j59m"+side);const n=P&&P.pages>1?(side==="r"?P.after:P.before):0;
   if(!(n>0)){if(c)c.remove();continue}
   if(!c){c=document.createElement("div");c.className="kchip n j59more j59m"+side;st.appendChild(c)}
-  const txt="+"+n;if(c.textContent!==txt)c.textContent=txt;
+  /* morechip-sil (owner 17/11 ~14:05Z): the kit chip shows the grey gender-neutral figure icon + the number (no "+") — ONE kit function j59chipIco(n) for every chip, both corners, all sizes */
+  if(c.dataset.n!==String(n)){c.dataset.n=String(n);c.innerHTML=j59chipIco(n)}
   const lab=side==="r"?`${n} người ở bên phải · vuốt sang trái`:`${n} người ở bên trái · vuốt sang phải`;c.setAttribute("aria-label",lab);c.title=lab;
-  c.style.left=c.style.right="";if(side==="l")c.style.left=(P.xl+4).toFixed(0)+"px";else c.style.right=(P.xr+4).toFixed(0)+"px";
-  /* r6: the chips stand in the TOP corners ABOVE the heads (never on a figure): left = under the place title and the left rail buttons,
-     right = under the side column when it is reserved (room) or under the "‹ Dư đồ" button (place painting); 44 % only if that has no room */
-  let top=null;try{const R0=st.getBoundingClientRect();const bot=sel=>{let b=0;st.querySelectorAll(sel).forEach(e=>{if(!e.offsetParent||e.hidden)return;const q=e.getBoundingClientRect();if(q.width>2&&q.height>2&&q.top<R0.top+R0.height*.5&&(side==="l"?q.left<R0.left+R0.width*.3:q.right>R0.right-R0.width*.3))b=Math.max(b,q.bottom-R0.top)});return b};
-   const b=side==="l"?Math.max(bot("#sc-t"),bot(".krailb,#kshL")):Math.max(bot("#sc-t"),bot("#kshR,#tomap"));const ht=c.offsetHeight||26;const kR=document.getElementById("kshR");const underCol=side==="r"&&kR&&!kR.hidden&&kR.offsetHeight>0;if(b+6+ht<=(underCol&&P.floor?P.floor:R0.height*.45))top=b+6}catch(e){}
-  c.style.top=top!=null?top.toFixed(0)+"px":"";
-  /* under the reserved side column the right chip moves into that column's own (people-free) zone */
-  if(side==="r"&&top!=null){const kR=document.getElementById("kshR");if(kR&&!kR.hidden&&kR.offsetHeight)c.style.right="8px"}}}
+  /* morechip-corners (owner 17/11 13:02Z): the chip is BIG (kit chip size .kbig) and stands in the stage's BOTTOM corner of its own side: LEFT chip = people off the left side (bottom-left),
+     RIGHT chip = people off the right side (bottom-right). Never on a side column / rail (it steps beside it), never on a figure's name chip (it steps up above the name row, then beside) */
+  c.style.left=c.style.right=c.style.top=c.style.bottom="";c.style.bottom="6px";
+  /* morechip-sil: the TRUE corners of the stage (6 px in); the side column / rail only moves the chip BESIDE it (flush against it), never the page gutters */
+  if(side==="l")c.style.left="6px";else c.style.right="6px";
+  try{const R0=st.getBoundingClientRect();
+   const hit=(a,q)=>a.left<q.right-1&&a.right>q.left+1&&a.top<q.bottom-1&&a.bottom>q.top+1;
+   for(const e of st.querySelectorAll(side==="r"?"#kshR":"#kshL,.krailb")){if(!e.offsetParent||e.hidden||!e.offsetHeight)continue;const q=e.getBoundingClientRect(),cr=c.getBoundingClientRect();
+    if((side==="r"?cr.right>q.left-1:cr.left<q.right+1)&&cr.top<q.bottom+2&&cr.bottom>q.top-2){if(side==="r"){c.style.right=(R0.right-q.left+2).toFixed(0)+"px"}else{c.style.left=(q.right-R0.left+2).toFixed(0)+"px"}}}
+   const tags=[...st.querySelectorAll(".tok .tag,#j59metag .tag")].filter(g=>g.offsetParent&&g.getBoundingClientRect().width>2);
+   let cr=c.getBoundingClientRect();const over=tags.filter(g=>hit(cr,g.getBoundingClientRect()));
+   if(over.length){const top=Math.min(...over.map(g=>g.getBoundingClientRect().top));c.style.bottom=(R0.bottom-top+4).toFixed(0)+"px"}}catch(e){}}}
 /* KIT 33.9 SWIPE: drag the row of people left/right (touch or mouse); it follows the finger (translate var --j59dx on the figures, pets, name chips), and on release slides out and the next view slides in
    (transform only, 220 ms; reduced-motion = instant). A drag over 12 px never opens a person's pop-up (click swallowed). */
 const J59SW={ms:220,min:56,tap:12};
@@ -173,7 +185,8 @@ function j59lay(){const st=document.getElementById("stage");if(!st||!S)return;co
  const F=E.filter(x=>!x.nf);const nfW=Math.max(0,...E.filter(x=>x.nf).map(x=>x.tok.offsetWidth));
  const KA=st.__kfa;/* KIT_FLOOR anchor (jk2b kitFloorFit): feet on the painted floor line while the figure keeps its kit height */
  let capOn=(()=>{try{return kitView().pages===2}catch(e){return true}})();/* KIT §33 (canon): the maxPx cap applies to iPad-wide layouts only; Fold / phones keep the full .79 of their taller stage *//* KIT §0: the left page in the spread and the one-page room are the same page */
- const size=()=>{const fo=kitSlotFloor(sH);/* KIT 33.12 fixed slot table: ONE floor line per stage height (no name-chip or painted-floor shift), so a person snaps to the same x AND y on every stage / place / room */CAP=sH-fo-topR;return{fo,H:Math.max(sH*.2,Math.min(KF.h*sH,CAP,(KF.maxPx&&capOn)?KF.maxPx:1e9))}};
+ let FOX=0;/* fig-tag-chip: floor band the wrapped name tags need (phones: a long rank/plate/name wraps to 4-5 lines) */
+ const size=()=>{const fo=Math.max(kitSlotFloor(sH),FOX);/* KIT 33.12 fixed slot table: ONE floor line per stage height (no name-chip or painted-floor shift), so a person snaps to the same x AND y on every stage / place / room */CAP=sH-fo-topR;return{fo,H:Math.max(sH*.2,Math.min(KF.h*sH,CAP,(KF.maxPx&&capOn)?KF.maxPx:1e9))}};
  const maxF=Math.max(1,...F.map(x=>x.f));
  const widthFor=(z)=>{let rr=rightR;try{const kR=document.getElementById("kshR");const head=sH-z.fo-Math.min(z.H*maxF,sH-z.fo-topR);/* the right plaque column (court chips, maid, Ân sủng) is reserved when it reaches down to the heads: no face or name is ever under it
     (coordinator 11/15, supersedes "may stand under it"); a column that ends above the heads leaves the full width. Compact stages
@@ -204,6 +217,7 @@ function j59lay(){const st=document.getElementById("stage");if(!st||!S)return;co
  /* the name chips are at most one slot wide (they wrap, never cut); measure them at that width, then size the floor band for them */
  st.style.setProperty("--j59sw",Math.max(60,G.sw-8).toFixed(0)+"px");
  G=geo(N,Z);
+ {const th=Math.max(0,mt&&mt.firstChild&&!mt.classList.contains("j59off")?mt.firstChild.offsetHeight:0,...E.map(x=>x.tag&&x.tok.style.display!=="none"?x.tag.offsetHeight:0));/* fig-tag-chip: tag top = floor+3, so band >= tag height + 3 + 2 air; only grows past the fixed band when a tag wraps */if(th+5>Z.fo){FOX=Math.ceil(th+5);Z=size();G=geo(N,Z)}}
  const {fo,H}=Z;CAP=sH-fo-topR;
  st.dataset.j59dbg=[N,H.toFixed(0),G.sw.toFixed(0),mxW(H).toFixed(0),mePet?pEx(mePet,H).toFixed(0):0,...F.map(x=>(coreW(x,H)).toFixed(0)+"+"+(x.pet?pEx(x.pet,H).toFixed(0):0))].join(" ");
  /* pages: page 1 = her (slot 1) + N−1 others, then N others per page */
@@ -214,7 +228,7 @@ function j59lay(){const st=document.getElementById("stage");if(!st||!S)return;co
  const showMe=!!me&&pg===0;const vis=E.slice(s0,s1);
  if(me){me.classList.toggle("j59off",!showMe);if(mt)mt.classList.toggle("j59off",!showMe)}
  E.forEach(x=>{x.tok.style.display=vis.includes(x)?"":"none"});
- const persons=E.filter(x=>j59person(x.p)).length,after=E.slice(s1).filter(x=>j59person(x.p)).length,before=(showMe?0:1)+E.slice(0,s0).filter(x=>j59person(x.p)).length;
+ const persons=E.filter(x=>j59person(x.p)).length,after=E.slice(s1).filter(x=>j59person(x.p)).length,before=E.slice(0,s0).filter(x=>j59person(x.p)).length;
  if(pages>1)st.dataset.j59pg=[pg,pages,s0,s1,M].join(",");else delete st.dataset.j59pg;
  /* fixed slots (owner 16/11): 1 → centre, 2 → 1/3 · 2/3, 3 → 1/4 · 2/4 · 3/4 of the free width (stage minus the side column) */
  const kOn=(showMe?1:0)+vis.length;const cxOf=i=>kitSlotCxE(i,N,G.x0,G.avail);st.dataset.j59free=G.x0.toFixed(1)+","+G.avail.toFixed(1);const floorY=st.clientHeight-fo;
@@ -258,7 +272,11 @@ const css=document.createElement("style");css.textContent=`
 .stage.j59 .tok.fig .figimg.j59sz{max-height:none!important;max-width:none!important}
 .stage.j59 .tok.fig .tag{position:absolute;top:100%;left:50%;margin:3px 0 0 0;transform:translateX(-50%);width:max-content;text-align:center;z-index:2}
 .stage.j59.j59wait #tokens .tok,.stage.j59.j59wait #mefig,.stage.j59.j59wait #j59metag,.stage.j59.j59wait .kspet{visibility:hidden}
-.stage.j59 .j59more{position:absolute;z-index:4;top:44%;pointer-events:none;font-weight:700;white-space:nowrap}
+.stage.j59 .j59more{position:absolute;z-index:4;pointer-events:none;font-weight:700;white-space:nowrap}
+/* morechip-corners: the big kit chip (KIT 33.9): readable at Fold 755 */
+.kchip.j59more{display:flex;align-items:center;gap:3px;font-size:1.05rem;line-height:1.2;padding:3px 9px 3px 6px;border-radius:16px;border-width:2px;margin:0;box-shadow:0 2px 6px rgba(60,30,10,.28);background:#fff8ee}
+.kchip.j59more .j59ico{height:1.7rem;width:auto;display:block;flex:none;pointer-events:none;user-select:none}
+html body .stage #sc-t h2 .rt1{display:inline-block!important;padding:1px 10px;border:2px solid var(--line,#8a6a3a);border-radius:14px;background:#fff8ee;box-shadow:0 2px 6px rgba(60,30,10,.28);text-shadow:none!important;vertical-align:middle}.rmsg.j59hc{white-space:nowrap!important}.kchip.j59hchip{display:inline-flex;align-items:center;gap:3px;padding:1px 9px 1px 6px;border-radius:14px;border-width:2px;margin:0 0 0 4px;vertical-align:middle;font-size:1rem;font-weight:700;line-height:1.2;background:#fff8ee;box-shadow:0 2px 6px rgba(60,30,10,.28);color:var(--ink,#3a2a1a)}.kchip.j59hchip .j59ico{height:1.5rem;width:auto;display:block;flex:none}
 .stage.j59 #mefig,.stage.j59 #j59metag,.stage.j59 #tokens,.stage.j59 .kspet{translate:var(--j59dx,0px) 0;transition:var(--j59tr,none);will-change:translate}
 .stage.j59{touch-action:pan-y}
 .stage.j59 #mefig,.stage.j59 #tokens img{-webkit-user-drag:none;user-select:none}
@@ -306,7 +324,7 @@ html body #stage.j59slot #tokens>.tok .tag,html body #stage.j59slot #j59metag .t
 html body #stage.j59slot #tokens>.tok.fig .tag{top:100%!important;margin-top:3px!important}
 html body #stage.j59slot #j59metag{translate:none!important}
 html body #stage.j59ph #kshR{top:var(--j59kt,44px)!important;left:6px!important;right:6px!important;width:auto!important;max-width:none!important;min-width:0!important;flex-direction:row;flex-wrap:wrap;justify-content:flex-end;align-items:center;gap:3px}
-html body #stage.j59ph #kshR .k3cs{flex-direction:row;flex-wrap:wrap;justify-content:flex-end;gap:3px}
+html body #stage.j59ph #kshR .k3cs{display:flex;flex-direction:row;flex-wrap:wrap;justify-content:flex-end;gap:3px}
 html body #stage.j59ph #kshR .k3c{width:auto;padding:1px 6px;gap:3px}
 html body #stage.j59ph #kshR .k3c .md{display:none}
 html body #stage.j59ph #kshR .k3c .k3ct{flex-direction:row;align-items:baseline;gap:4px;white-space:nowrap}
@@ -353,7 +371,7 @@ function kitHereMsg(){try{const V=S&&S.visit;if(!V)return;const m=String(V.msg||
     the record can bring people in after the line was written) */
  if(m&&!/^(Ở đây (có|còn) \d+ người\.?|Không gặp ai\.?)$/.test(m)){if(/^Ở đây (có|còn) \d+ người\./.test(m)&&n)V.msg=m.replace(/^Ở đây (có|còn) \d+ người\./,`Ở đây còn ${n} người.`);return}
  V.msg=n?`Ở đây còn ${n} người.`:"Không gặp ai."}catch(e){}}
-const r0=renderStage;renderStage=function(){j59CourtNames();kitHereMsg();const r=r0.apply(this,arguments);try{j59lay()}catch(e){}return r};
+const r0=renderStage;renderStage=function(){j59CourtNames();kitHereMsg();const r=r0.apply(this,arguments);try{j59lay()}catch(e){}j59hdrCount();return r};
 /* every module has wrapped countAt by the time the game runs: the outermost wrap answers her own place from the stage itself */
 /* the maid road (j42 srvVisitOf) fills a place by its own rules: the same rules count its other places for the Dư đồ, so the
    number on the map is the number she meets on arrival (audit: dev/test/stage-counts.js) */

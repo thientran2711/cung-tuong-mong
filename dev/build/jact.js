@@ -77,9 +77,9 @@ const AD_ACTNAME={"Bỏ độc vào trà nàng":"poison","Bỏ xạ hương vào
  try{if(p&&a&&!a.open){const n=adDoorOfPop(p.kind,a.n);if(n&&((typeof used!=="undefined"&&used!==u0)||(S.logSeq||0)!==l0))adDoorMark(n)}}catch(e){}return r}})();
 /* ---------- 3. Hoàng tự: "Chữa bệnh cho con" moved from Hành sự (Y thuật ≥4, Sức -10, Sức khỏe con +30) ---------- */
 if(typeof kidActs==="function"){const k0=kidActs;kidActs=function(k){const L=k0.apply(this,arguments);try{if(k&&k.alive&&S.arts&&S.arts.y>=4&&k.hp<70&&!adSrv()){const t2=whyTime(2);
-  L.push(pbtn(`data-kid="heal" data-kn="${k.name}"`,"Tự bốc thuốc cho con",`Chắc chắn · tốn: 2 khắc, Sức -10 · thành: Sức khỏe con +30 (Y thuật của ngươi)`,t2||(S.suc<15?"thiếu Sức":"")))}}catch(e){}return L}}
+  L.push(pbtn(`data-kid="heal" data-kn="${k.name}"`,"Tự bốc thuốc cho con",`Chắc chắn · tốn: 2 khắc, Sức -10 · thành: Sức khỏe con +30 (Y thuật của ngươi)`,t2||(S.suc<BAL.sucNeed.yKid?"thiếu Sức":"")))}}catch(e){}return L}}
 if(typeof kidAct==="function"){const k0=kidAct;kidAct=function(a,name){if(a!=="heal")return k0.apply(this,arguments);const k=S.kids.find(x=>x.name===name&&x.alive);
- if(!k||S.dead||Q.length||!can(2)||S.suc<15||!(S.arts.y>=4))return;const b=rsnap();spend(2);apply({suc:-10});k.hp=Math.min(100,k.hp+BAL.eff.jact.hpTop);log(`Ngươi tự bốc thuốc cho ${k.name}: Sức khỏe con ${balSg(BAL.eff.jact.hpTop)}.`);resultShow("Việc của con",b,"sure");render()}}
+ if(!k||S.dead||Q.length||!can(2)||S.suc<BAL.sucNeed.yKid||!(S.arts.y>=4))return;const b=rsnap();spend(2);apply({suc:-10});k.hp=Math.min(100,k.hp+BAL.eff.jact.hpTop);log(`Ngươi tự bốc thuốc cho ${k.name}: Sức khỏe con ${balSg(BAL.eff.jact.hpTop)}.`);resultShow("Việc của con",b,"sure");render()}}
 /* ---------- 4. grey card tap = the reason (kit popover). A disabled button gets no click: open on pointerup, and keep the
    click that follows (on touch it can come later) from closing the popover at once. ---------- */
 window.addEventListener("click",e=>{const R=window.__adGreyR;if(R&&Date.now()-(window.__adGreyT||0)<1500&&e.clientX>=R.left&&e.clientX<=R.right&&e.clientY>=R.top&&e.clientY<=R.bottom){e.stopPropagation();e.preventDefault()}},true);
@@ -147,20 +147,23 @@ function adHapFire1(h,k){h.done=1;let fired=false;if(AD_HAP_FIRE[h.id]){try{fire
  else if(h.id==="favour"&&h.x){try{if(q72X(h.x)&&q72CanOffer()){q72().a.push(h.x);fired=q72Offer(h.x,"meet");if(!fired){const q=q72();q.a.splice(q.a.indexOf(h.x),1)}}}catch(e){console.error(e)}}
  return fired}
 /* the Emperor in the garden: "Đánh đàn ở ngự hoa viên" (was a Hành sự card) now lives here, same numbers */
-PEND.adStroll=()=>{const K=S.emp.known,L=S.emp.likes,tt=has("trongtai")?2:1;const o=od(35+S.tai/3+S.arts.cam*4*tt+(K.music?15:0)+mm());const w=K.music?9:7;
+PEND.adStroll=()=>{const K=S.emp.known,L=S.emp.likes,tt=has("trongtai")?2:1;const o=od(BAL.odb.jact.odO+S.tai/3+S.arts.cam*4*tt+(K.music?15:0)+mm());const w=K.music?9:7;
  return{who:pEmp(),t:`<p>Hoàng thượng đang dạo bước trong Ngự hoa viên, thái giám theo hầu cách xa mấy bước.</p>`,o:[
-  {n:"Đánh đàn chờ ngự giá",fx:{suc:-10},x:`${word(o)} · thành: Sủng +${w}${K.music?` (tấu ${L.music}, khúc ngài thích)`:""} · hỏng: Sủng -1`,go:()=>{const b=rsnap();if(roll(o)){apply({sung:w});log(`Tiếng đàn làm Hoàng thượng dừng bước. Sủng +${w}.`)}else{apply({sung:-1});log("Ngài đi qua, không để ý tiếng đàn. Sủng -1.")}}},
+  {n:"Đánh đàn chờ ngự giá",fx:{suc:-10},x:`${word(o)} · thành: Sủng +${w}${K.music?` (tấu ${L.music}, khúc ngài thích)`:""} · hỏng: Sủng ${balSg(BAL.eff.jact.sungGo)}`,go:()=>{const b=rsnap();if(roll(o)){apply({sung:w});log(`Tiếng đàn làm Hoàng thượng dừng bước. Sủng +${w}.`)}else{apply({sung:BAL.eff.jact.sungGo});log("Ngài đi qua, không để ý tiếng đàn. Sủng -1.")}}},
   {n:"Ra vấn an",fx:{},x:"chạm vào ngài trên cảnh để nói chuyện"},
   {n:"Lánh đi lối khác",fx:{},x:"không được không mất"}]}};
 (function(){const st=document.createElement("style");st.textContent=`
 /* KIT 78 (owner 11/16 15:00Z 5.6): the place icon sits ABOVE the name, centred, never left of it — map chips, map tiles, the stage title, the kit sample */
 .ic.kplic{display:block;margin:0 auto 1px;flex:none}
 .mspot .mlab:has(>.kplic),.mtile b:has(>.kplic),#sc-t h2:has(>.kplic){display:flex;flex-direction:column;align-items:center;text-align:center;gap:0}
-.mspot .mlab:has(>.kplic),.mtile b:has(>.kplic){position:relative}.mspot .mlab:has(>.kplic)>.khap,.mtile b:has(>.kplic)>.khap{position:absolute;top:-5px;right:-5px;margin:0}
+.mspot .mlab:has(>.kplic),.mtile b:has(>.kplic){position:relative}.mspot .mlab:has(>.kplic)>.khap,.mtile b:has(>.kplic)>.khap{position:absolute;top:-7px;right:-7px;margin:0}
 #sc-t h2:has(>.kplic){align-items:flex-start;text-align:left}#sc-t h2>.kplic{margin:0 0 1px}
 /* the 4.4em floor of a map chip counts the glyph (14 px + 3 px gap): a narrow chip (Trường Môn viện) must not push its text out of the border (OD:L1033) */
 .mspot .mlab:has(>.kplic){max-width:max(100%,4.4em)}
-.khap{display:inline-block;font-style:normal;font-weight:800;font-size:.62rem;line-height:13px;color:var(--ink);background:var(--trim);border-radius:50%;width:13px;height:13px;text-align:center;margin-left:4px;vertical-align:1px;box-shadow:0 0 0 1.5px #fff8e6,0 0 6px var(--trim)}
-.mspot.sm .khap{width:12px;height:12px;line-height:12px;font-size:.56rem}`;document.head.appendChild(st)})();
+.khap,.mspot .mlab i.khap{--khy:#ffd91a;display:inline-block;font-style:normal;font-weight:900;font-size:.82rem;line-height:19px;color:#3a2200;background:radial-gradient(circle at 35% 30%,#fff27a,var(--khy) 62%,#f2b800);border-radius:50%;width:19px;height:19px;text-align:center;margin-left:4px;vertical-align:1px;box-shadow:0 0 0 1.5px #fffbe0,0 0 5px 1px #ffe24a,0 0 11px 2px #ffd40099;transform-origin:50% 80%}
+/* KIT §78 (owner 17/11 ~13:32Z): the "!" is a BRIGHT FRESH YELLOW badge (--khy) with a soft glow; every ~5 s it gives a little shake + hop (transform only, 3 phases so the marks do not move together); reduced motion = the static glow */
+@keyframes khapNudge{0%,72%,100%{transform:none}76%{transform:translateY(-3px) rotate(-14deg)}80%{transform:translateY(0) rotate(12deg)}84%{transform:translateY(-2px) rotate(-9deg)}88%{transform:rotate(6deg)}92%{transform:none}}
+@media (prefers-reduced-motion:no-preference){.khap{animation:khapNudge 5.2s ease-in-out infinite}.mspot:nth-child(3n+1) .khap{animation-delay:-1.7s}.mspot:nth-child(3n+2) .khap{animation-delay:-3.4s}}
+/* .sm uses the same size: the old .mspot.sm .khap rule (13 px) never applied (lost to .mspot .mlab i.khap), so one size everywhere */`;document.head.appendChild(st)})();
 /* kit page samples */
 try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§78",title:"kitPlaceIcon + kitHapMark: tên nơi chốn có biểu tượng công dụng, dấu ! có chuyện",html:()=>Object.keys(KIT_PLACE_IC).map(k=>`<span class="mspot" style="position:static;transform:none;display:inline-flex;margin:4px 8px"><span class="mlab">${kitPlaceIcon(k)}${PLNAME[k]?PLNAME[k][0]:({home:"Cung của ta"}[k]||k)}${k==="vuon"?`<i class="khap" role="img" aria-label="Có chuyện buổi này">!</i>`:""}</span></span>`).join("")})}catch(e){}
