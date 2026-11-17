@@ -85,20 +85,17 @@ function j59chips(st,R,P,again){/* morechip-fix: placed once now and once more o
   if(!c){c=document.createElement("div");c.className="kchip n j59more j59m"+side;st.appendChild(c)}
   const txt="+"+n;if(c.textContent!==txt)c.textContent=txt;
   const lab=side==="r"?`${n} người ở bên phải · vuốt sang trái`:`${n} người ở bên trái · vuốt sang phải`;c.setAttribute("aria-label",lab);c.title=lab;
-  c.style.left=c.style.right="";if(side==="l")c.style.left=(P.xl+4).toFixed(0)+"px";else c.style.right=(P.xr+4).toFixed(0)+"px";
-  /* r6: the chips stand in the TOP corners ABOVE the heads (never on a figure): left = under the place title and the left rail buttons,
-     right = under the side column when it is reserved (room) or under the "‹ Dư đồ" button (place painting); 44 % only if that has no room */
-  let top=null;try{const R0=st.getBoundingClientRect();const bot=sel=>{let b=0;st.querySelectorAll(sel).forEach(e=>{if(!e.offsetParent||e.hidden)return;const q=e.getBoundingClientRect();if(q.width>2&&q.height>2&&q.top<R0.top+R0.height*.5&&(side==="l"?q.left<R0.left+R0.width*.3:q.right>R0.right-R0.width*.3))b=Math.max(b,q.bottom-R0.top)});return b};
-   const b=side==="l"?Math.max(bot("#sc-t"),bot(".krailb,#kshL")):Math.max(bot("#sc-t"),bot("#kshR,#tomap"));const ht=c.offsetHeight||26;const kR=document.getElementById("kshR");const underCol=side==="r"&&kR&&!kR.hidden&&kR.offsetHeight>0;if(b+6+ht<=(underCol&&P.floor?P.floor:R0.height*.45))top=b+6}catch(e){}
-  c.style.top=top!=null?top.toFixed(0)+"px":"";
-  /* under the reserved side column the right chip moves into that column's own (people-free) zone */
-  if(side==="r"&&top!=null){const kR=document.getElementById("kshR");if(kR&&!kR.hidden&&kR.offsetHeight)c.style.right="8px"}
-  /* morechip-fix (17/11, since app-edge the Fold page is shorter): the chip is NEVER on a side column / rail. When there is no room under the
-     column and the 44 % fallback lands on it, the chip stands BESIDE that column at the column's top (above the heads), on every stage/place/size */
-  try{const R0=st.getBoundingClientRect(),cr=c.getBoundingClientRect();
-   for(const e of st.querySelectorAll(side==="r"?"#kshR":"#kshL,.krailb")){if(!e.offsetParent||e.hidden||!e.offsetHeight)continue;const q=e.getBoundingClientRect();
-    if(cr.left<q.right&&cr.right>q.left&&cr.top<q.bottom&&cr.bottom>q.top){c.style.top=(q.top-R0.top).toFixed(0)+"px";
-     if(side==="r"){c.style.left="";c.style.right=(R0.right-q.left+6).toFixed(0)+"px"}else{c.style.right="";c.style.left=(q.right-R0.left+6).toFixed(0)+"px"}break}}}catch(e){}}}
+  /* morechip-corners (owner 17/11 13:02Z): the chip is BIG (kit chip size .kbig) and stands in the stage's BOTTOM corner of its own side: LEFT chip = people off the left side (bottom-left),
+     RIGHT chip = people off the right side (bottom-right). Never on a side column / rail (it steps beside it), never on a figure's name chip (it steps up above the name row, then beside) */
+  c.style.left=c.style.right=c.style.top=c.style.bottom="";c.style.bottom="6px";
+  if(side==="l")c.style.left=((P.xl||0)+6).toFixed(0)+"px";else c.style.right=((P.xr||0)+6).toFixed(0)+"px";
+  try{const R0=st.getBoundingClientRect();
+   const hit=(a,q)=>a.left<q.right-1&&a.right>q.left+1&&a.top<q.bottom-1&&a.bottom>q.top+1;
+   for(const e of st.querySelectorAll(side==="r"?"#kshR":"#kshL,.krailb")){if(!e.offsetParent||e.hidden||!e.offsetHeight)continue;const q=e.getBoundingClientRect(),cr=c.getBoundingClientRect();
+    if(hit(cr,q)){if(side==="r"){c.style.right=(R0.right-q.left+6).toFixed(0)+"px"}else{c.style.left=(q.right-R0.left+6).toFixed(0)+"px"}}}
+   const tags=[...st.querySelectorAll(".tok .tag,#j59metag .tag")].filter(g=>g.offsetParent&&g.getBoundingClientRect().width>2);
+   let cr=c.getBoundingClientRect();const over=tags.filter(g=>hit(cr,g.getBoundingClientRect()));
+   if(over.length){const top=Math.min(...over.map(g=>g.getBoundingClientRect().top));c.style.bottom=(R0.bottom-top+4).toFixed(0)+"px"}}catch(e){}}}
 /* KIT 33.9 SWIPE: drag the row of people left/right (touch or mouse); it follows the finger (translate var --j59dx on the figures, pets, name chips), and on release slides out and the next view slides in
    (transform only, 220 ms; reduced-motion = instant). A drag over 12 px never opens a person's pop-up (click swallowed). */
 const J59SW={ms:220,min:56,tap:12};
@@ -266,7 +263,9 @@ const css=document.createElement("style");css.textContent=`
 .stage.j59 .tok.fig .figimg.j59sz{max-height:none!important;max-width:none!important}
 .stage.j59 .tok.fig .tag{position:absolute;top:100%;left:50%;margin:3px 0 0 0;transform:translateX(-50%);width:max-content;text-align:center;z-index:2}
 .stage.j59.j59wait #tokens .tok,.stage.j59.j59wait #mefig,.stage.j59.j59wait #j59metag,.stage.j59.j59wait .kspet{visibility:hidden}
-.stage.j59 .j59more{position:absolute;z-index:4;top:44%;pointer-events:none;font-weight:700;white-space:nowrap}
+.stage.j59 .j59more{position:absolute;z-index:4;pointer-events:none;font-weight:700;white-space:nowrap}
+/* morechip-corners: the big kit chip (KIT 33.9): readable at Fold 755 */
+.kchip.j59more{font-size:1.05rem;line-height:1.2;padding:5px 15px;border-radius:16px;border-width:2px;margin:0;box-shadow:0 2px 6px rgba(60,30,10,.28);background:#fff8ee}
 .stage.j59 #mefig,.stage.j59 #j59metag,.stage.j59 #tokens,.stage.j59 .kspet{translate:var(--j59dx,0px) 0;transition:var(--j59tr,none);will-change:translate}
 .stage.j59{touch-action:pan-y}
 .stage.j59 #mefig,.stage.j59 #tokens img{-webkit-user-drag:none;user-select:none}
