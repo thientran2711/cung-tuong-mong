@@ -533,3 +533,4 @@
 | coop-contest-fix review r3 (opus) of 1ce276b7 | review/coop-contest-fix-r1 a7f4ab13 | main s28 | session_01UV1SziJoyYJ3o5iLXG8BuP | CANCELLED by s28 (thin guest); findings in report §r3 | 17/11 02:01Z |
 | ART: consort figure tiers t9 Hoàng thái hậu + t10 Nữ đế (32 identities × 4 ages; succession endings j99succ have no figure tier; samples first → owner) (sonnet art, 2K) | review/fig-cutout-clean + reports/fig-tier-succ on handover | C | session_011xDdVShLvZ7X2KBzWPp6Aj | RUNNING | 17/11 02:02Z |
 | FP princess art SUCCESSOR #5 (sonnet art, 2K): v25 NC graceful + BD ranks with owner → NC ranks after pick; game-ready keys | review/foreign-princess-samples + reports on handover | C | session_011xDdVQLLoooSkPhJraizSu | RUNNING | 17/11 02:04Z |
+| WHOLE FIGURE REPAINT batch W7b consort-rest-B (successor of W7: 56 a18 live; first hd retro-fit) | review/fig-cutout-clean | C | session_011xDdVRfTXkRr1K97oJueiZ | RUNNING | 17/11 02:06Z |
