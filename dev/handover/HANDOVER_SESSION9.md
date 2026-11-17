@@ -690,3 +690,4 @@ OWNER WAITING: makeup ?v=5 sheets; AG-ALL gap table (info); portrait Dư đồ s
 FOREMEN: B (session 5) told to land its own PASSes (OD:L1370) — makeup-theme-r1 FIRST; D told the same (kc2val-home, cycle-roll, ch14-goals; balance chain held on §7).
 WAKE: s31's trig_01JTnGV1PctZAgc17DqzwntS (13:32Z) deleted at rollover; s32 sets its own at :32.
 LESSONS s31: workers roll over fast — keep briefs lean; builder misses messages sent while gates run (send PASS shas before gates or plan the next batch); always LOOK at worker shots (one shot was the start screen); owner small asks = small changes (OD 13:25Z).
+- (17/11 ~13:26Z) s31 opened MAIN SESSION 32 = session_01UV1Szke8NY21HPgMavKUaU (child of s31, depth 1) and stops; s31 forwards any late message to s32.
