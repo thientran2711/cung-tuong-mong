@@ -116,9 +116,9 @@ function kcFreeName(mk,more){const used=new Set();const tail=n=>String(n).split(
  try{(typeof k61All==="function"?k61All():[]).forEach(e=>e&&add(e.name));(more||[]).forEach(m=>add(m.name))}catch(e){}
  let n=mk();for(let i=0;i<40&&(used.has(n)||used.has(tail(n)));i++)n=mk();return n}
 function kcInit(){const k=S.origin.k;const sur=tdSur(S.name);const nm=g=>`${sur} ${g}`;
- const ag=a=>a;const T=(r,t,name,age,role,pref,tr,af)=>({id:"f"+r,r,t,name,age,fid:kcFreeFid(role,pref),tr:tr||pick(["Ân cần","Khiêm nhường","Tham vọng","Kín đáo","Kiêu ngạo"]),af:af==null?30+R(25):af,me:30+R(20),oan:0,alive:1});
+ const ag=a=>a;const T=(r,t,name,age,role,pref,tr,af)=>({id:"f"+r,r,t,name,age,fid:kcFreeFid(role,pref),tr:tr||undefined,af:af==null?30+R(25):af,me:30+R(20),oan:0,alive:1});
  const fam=[];const gl=shuf(KCMN.slice());const g=()=>gl.pop();
- fam.push(T("cha","Phụ thân",nm(g()),48+R(8),"official",[],pick(["Tham vọng","Cương trực","Cẩn trọng"]),35+R(25)));
+ fam.push(T("cha","Phụ thân",nm(g()),48+R(8),"official",[],null,35+R(25)));
  /* KC LORE: the father of tt / dtq is the head of that house in the court (j55 trS, j67 {dad}): one name, one age, in the home and in the palace */
  try{const hd=(k==="tt"||k==="dtq")?tdHead(KCCLAN[k]):null;if(hd&&hd.dadOf==="me"){fam[0].name=hd.name;fam[0].age=Math.min(56,Math.max(46,hd.age||50));fam[0].net=netOf(hd).slice()}}catch(e){console.error("kc lore dad",e)}
  const momAlive=roll(60);

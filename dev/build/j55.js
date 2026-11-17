@@ -2,13 +2,13 @@
    sớ tấu về hậu cung; can chính (nhờ cha dâng sớ, biếu quà quyền thần, dò la, tung chứng cứ tham ô). Một luật cho mọi phi tần, kể cả ngươi. ================= */
 const TD={so:32,soGap:2,ccBase:6,ccStep:7,npc:.6};
 const TDOFF={"Tể tướng":"Tể tướng","Đại tướng quân":"Đại tướng quân","Lễ bộ":"Lễ bộ thượng thư","Hộ bộ":"Hộ bộ thượng thư","Hàn lâm":"Hàn lâm học sĩ"};
-const TDTR={"Cương trực":"không nhận quà, hay dâng sớ hặc tội; người nhà ít tham ô","Tham lam":"dễ nhận quà; người nhà dễ dính tham ô","Cẩn trọng":"ít dâng sớ, ít khi sai sót","Tham vọng":"hay xin đưa con gái vào cung, hay hặc nhà đối đầu","Trung hậu":"đã ủng hộ ai thì giữ lâu"};
+
 const TDAMB={"Tham vọng":1.6,"Xảo quyệt":1.4,"Kiêu ngạo":1.1,"Kín đáo":.8,"Khiêm nhường":.4,"Ân cần":.3};
 function tdOn(){return !!(S&&!S.dead&&!(typeof isSrv==="function"&&isSrv()))}
 function tdSur(n){const w=String(n||"").split(" ");return w.length>2?w.slice(0,w.length-2).join(" "):w[0]}
 function trS(){if(!S)return null;if(S.trieu&&S.trieu.H)return S.trieu;
  const T={H:{},rel:{},bien:58+R(10),kho:58+R(10),news:[],de:{},clean:{},soT:-9,tyY:-9,praise:null};S.trieu=T;
- const usedS=new Set([S].concat(rivals||[]).map(p=>tdSur(p.name)));const sur=shuf(SURN.filter(x=>!usedS.has(x)));const giv=shuf(MALEN.slice());const trs=Object.keys(TDTR);
+ const usedS=new Set([S].concat(rivals||[]).map(p=>tdSur(p.name)));const sur=shuf(SURN.filter(x=>!usedS.has(x)));const giv=shuf(MALEN.slice());
  CLANS.forEach((c,i)=>{const mine=(c==="Tể tướng"&&S.origin.k==="tt")||(c==="Đại tướng quân"&&S.origin.k==="dtq");
   const h={c,isMin:1,name:(mine?tdSur(S.name):(sur[i]||pick(SURN)))+" "+(giv[i]||pick(MALEN)),age:46+R(20),sex:"m",pow:mine?55+R(16):38+R(30),sk:35+R(35),af:{},dadOf:mine?"me":null};
   h.corrupt=roll(25+(hasT(h,"Ham lợi")?25:hasT(h,"Cương trực")?-15:0));T.H[c]=h});

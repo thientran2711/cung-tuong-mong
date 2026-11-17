@@ -1,10 +1,10 @@
 /* ================= HOUSEHOLDS: maids and eunuchs, one rule for every consort ================= */
-const STR={trung:"trung thành",tham:"tham lam",nhat:"nhát gan",lanh:"lanh lợi",chuyen:"nhiều chuyện"};
+
 const EUN=["Tiểu Lộ Tử","Tiểu Phúc Tử","Tiểu Thuận Tử","Tiểu An Tử","Tiểu Hỉ Tử","Tiểu Quế Tử","Tiểu Lâm Tử","Tiểu Đức Tử","Tiểu Thọ Tử","Tiểu Xuân Tử"];
 let sidN=0;
 function capOf(p){const r=rkOf(p);return r>=7?[4,2]:r>=5?[3,2]:r>=4?[2,1]:[1,1]}
 function mkServ(role){const n=role==="maid"?(AV.maids||[]).length:0;const used=allServ().map(x=>x.name);const pool=(role==="maid"?MAIDS:EUN).filter(x=>!used.includes(x));
- const sa=servAge(role);return{fc:drawF(role==="maid"?"maid":"eunuch",sa.age),fk:bandKeys(role==="maid"?"maid":"eunuch",sa.age)[0],sid:++sidN,name:pool.length?pick(pool):pick(role==="maid"?MAIDS:EUN)+" "+(R(8)+2),role,face:allServ().filter(x=>x.role===role).length,hue:0,...sa,tr:pick(Object.keys(STR)),loyal:45+R(36),spyFor:null,lover:null,af:{}}}
+ const sa=servAge(role);return{fc:drawF(role==="maid"?"maid":"eunuch",sa.age),fk:bandKeys(role==="maid"?"maid":"eunuch",sa.age)[0],sid:++sidN,name:pool.length?pick(pool):pick(role==="maid"?MAIDS:EUN)+" "+(R(8)+2),role,face:allServ().filter(x=>x.role===role).length,hue:0,...sa,loyal:45+R(36),spyFor:null,lover:null,af:{}}}
 function allServ(){const L=[];for(const p of [S].concat(rivals))if(p&&p.staff)L.push(...p.staff);return L}
 function ownerOf(s){for(const p of [S].concat(rivals))if(p&&p.staff&&p.staff.includes(s))return p;return null}
 function servById(id){return allServ().find(s=>s.sid===id)||null}

@@ -10,7 +10,7 @@
 function netRow(t){return BAL.net.T[t]||null}
 function netMix(s){let h=trHash(s);h^=h>>>13;h=Math.imul(h,0x5bd1e995)>>>0;h^=h>>>15;return h>>>0}
 function netSex(p){if(!p||p===S)return"f";if(p.sex==="m"||p.male)return"m";if(p.sex==="f")return"f";
- if(p.role==="eunuch"||p.role==="eun"||p.kind==="ty"||p.kind==="man"||p.rw!=null)return"m";
+ if(p.isMin||p.role==="eunuch"||p.role==="eun"||p.kind==="ty"||p.kind==="man"||p.rw!=null)return"m";
  if(typeof p.id==="string"&&/^m\d/.test(p.id))return"m";if(p.r==="cha"||/^huynh/.test(p.r||""))return"m";return"f"}
 function netKey(p){return p===S||p.coop||p.id===901||p.id===902?"me:"+(p.name||""):p.sid!=null?"s:"+p.sid:p.id!=null?"id:"+p.id+":"+(p.name||""):"n:"+(p.name||"")}
 function netOk(n,sx){const P=BAL.net[sx==="m"?"M":"F"];return Array.isArray(n)&&n.length===3&&P.tt.includes(n[0])&&P.ld.includes(n[1])&&P.ch.includes(n[2])}
@@ -22,7 +22,7 @@ function netDraw(p,key,sx,seed){const N=BAL.net,P=N[sx==="m"?"M":"F"],out={};
  return [out.tt,out.ld,out.ch]}
 function netOf(p0){let p;try{p=trRes(p0)}catch(e){p=p0}if(!p||p==="th"||typeof p!=="object"||(S&&p===S.emp)||p.kind==="emp"||p.kind==="th")return null;
  const sx=netSex(p);if(netOk(p.net,sx))return p.net;
- const seed=(Array.isArray(p.net)?p.net:[]).concat(p===S?[]:netOldOf(p));
+ const seed=(Array.isArray(p.net)?p.net:[]).concat(p===S||p.coop?[]:netOldOf(p));
  const n=netDraw(p,netKey(p),sx,seed);try{p.net=n;netTrong(p)}catch(e){}return n}
 /* first trọng follows the Lòng dạ nết; the second (1 of 13) stays */
 function netTrong(p){if(!Array.isArray(p.trong)||p.trong.length!==2)return;const ld=p.net[1],R=BAL.net.T[ld];if(!R||!R.v)return;const ban=new Set(R.ban||[]);

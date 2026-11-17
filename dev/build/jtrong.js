@@ -123,7 +123,7 @@ function trSnowGreet(){try{return Math.max(1,trGreet(S,"th",{base:5,tags:DEED.sn
 (function(){const p0=pcard;pcard=function(o){try{if(o&&S&&!o.__tr){o=Object.assign({},o,{__tr:1});const L=(o.lines||[]).slice();let who=null;
   if(o.name===S.name||o.me)who=S;else if(o.rank==="Thái hậu")who="th";else if(o.rank==="Hoàng thượng")who=S.emp;else if(S.maid&&o.name===S.maid.name)who=S.maid;
   else if(typeof kitPersonByName==="function")who=kitPersonByName(o.name);
-  if(who){if(who===S&&!L.some(x=>/Tính nết/.test(x)))L.push(`Tính nết: <b>${traitsOf(S)[0]}</b>`);
+  if(who){if(who===S&&!L.some(x=>/Tính nết/.test(x)))L.push(`Tính nết: ${traitsOf(S).map(t=>`<b title="${netTip(t)}">${t}</b>`).join(" · ")}`);
    if(who==="th"&&!L.some(x=>/Tính nết/.test(x)))L.push(`Tính nết: ${S.thO&&S.thO.archK?`<b>${thArch().n}</b>`:"chưa rõ"}`);
    if(who==="th"||who===S||who===S.emp||who===S.maid||(typeof rivals!=="undefined"&&rivals.includes(who)))L.push(trongLine(who));o.lines=L}}}catch(e){console.error(e)}return p0.call(this,o)}})();
 /* LUẬT SỬA CẢ NHÓM: every other deck act that raises Thái hậu regard (gifts, portrait, sutra…) follows the same family rule:

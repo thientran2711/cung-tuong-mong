@@ -24,6 +24,9 @@ async function open(b,url,errs){const p=await b.newPage();p.on('pageerror',e=>er
   const tr=rivals.map(v=>{const R=N.T[traitsOf(v)[1]];return !R.v||(trongOf(v)[0]===R.v)||(R.ban||[]).includes(R.v)});
   const same=JSON.stringify(traitsOf(v0))===JSON.stringify((()=>{const c=JSON.parse(JSON.stringify(v0));delete c.net;return netDraw(c,netKey(c),"f",netOldOf(c))})());
   return {dbg:rivals.map(v=>[v.id,v.trait,v.trait2,(v.net||[]).join("/")]),raw0:JSON.parse(raw).R.slice(0,3).map(v=>[v.id,v.trait,v.trait2,v.net]),bad,v0:traitsOf(v0),v1:traitsOf(v1),s0:s0&&[s0.role,netSex(s0),traitsOf(s0)],s1:s1&&[s1.role,traitsOf(s1)],men,me:traitsOf(S),trong:tr.every(Boolean),same,
+   heads:(()=>{try{return Object.values(trS().H).map(h=>netSex(h))}catch(e){return["err"]}})(),
+   coop:(()=>{let bad=0;for(let i=0;i<100;i++){const nm="Thử Danh "+i,own=netDraw({},"me:"+nm,"f",[]).join();
+    if(traitsOf({id:"p"+i,coop:true,name:nm,trait:"Khiêm nhường",rank:1}).join()!==own||traitsOf({sid:"p"+i,coop:true,name:nm,role:"maid",tr:"trung"}).join()!==own)bad++}return bad})(),
    saved:JSON.stringify(ser()).includes('"net":['),pers:Object.keys(N.T).every(t=>PERS[t]===N.T[t]),noPTr:S.pTr==null}},old);
  console.log(JSON.stringify(r).slice(0,900));
  ok(!r.bad.length,'every person (her, consorts, servants, men) holds 3 pool nết of the right sex pool',r.bad);
@@ -34,6 +37,7 @@ async function open(b,url,errs){const p=await b.newPage();p.on('pageerror',e=>er
  ok(r.men.every(m=>m[0]==="m"),'men draw from the male pool',r.men.slice(0,3));
  ok(r.trong,'first trọng follows the Lòng dạ nết');ok(r.same,'draw is deterministic per person');ok(r.saved,'the save carries p.net');ok(r.pers,'PERS rows = THE table BAL.net.T');
  ok(r.noPTr,'old S.pTr dropped (her 3 nết come from the pool)');
+ ok(r.heads.length&&r.heads.every(x=>x==='m'),'old-save court heads draw from the male pool (r1)',r.heads);ok(r.coop===0,'co-op: the friend on my seat (consort or maid) holds the same 3 nết as on her own seat (r1)',r.coop);
  /* C: a new life: everyone draws 3, table law, distribution, gain+cost */
  const c=await p1.evaluate(()=>{SLOT=3;start();Q.length=0;try{menInit()}catch(e){}const N=BAL.net;const ppl=[S].concat(rivals,S.staff||[],S.men||[]);
   const cnt={};for(const p of ppl)for(const t of traitsOf(p))cnt[t]=(cnt[t]||0)+1;
