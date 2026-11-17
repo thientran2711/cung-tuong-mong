@@ -49,6 +49,23 @@ Object.assign(BAL,{lux:{
 function luxPiece(k){try{if(typeof WD_ITEMS==="object"&&WD_ITEMS[k])return wdLux(k);if(typeof PET==="object"&&PET[k]&&typeof petLux==="function")return petLux(k);return IT[k]?luxVal(k):0}catch(e){return 0}}
 window.luxPiece=luxPiece;
 
+/* ---------- makeup-lux (owner 17/11 ~15:45Z / ~16:00Z, OD L1639/L1643; MAIN ADD 15:55Z/16:05Z): THE ONE TOTAL ----------
+   luxTotal(p) = clothes + jewels + today's makeup + pet xa xỉ, for her, every NPC and the co-op friend alike. It IS luxOf(p).sc (jinv worn pieces +
+   jwdinv WD slots + jpet pets + jtoil makeup wrapper): no second score — every event judgement (luxVerdict, leAttire, Hội phối đồ) reads this total.
+   luxParts(p) = the same total split for a display {y, trang, mk, pet, total}. Whenever HER total changes (any wear / unwear / sitting / pet, after
+   any render), window event "ctm-lux" fires with {total, prev, parts}: the display (Tư trang, room panel, Dư đồ) is MAIN's kit part reading it. */
+function luxTotal(p,o){try{return luxOf(p||S,o).sc|0}catch(e){return 0}}
+function luxParts(p){p=p||S;const o={y:0,trang:0,mk:0,pet:0,total:0};try{for(const k of luxWorn(p)){const v=luxVal(k);/* what luxOf sums (jinv), so the parts add up to the total */const w=typeof WD_ITEMS==="object"?WD_ITEMS[k]:null;
+  if((w&&w.sl==="y")||(p.dress&&p.dress.k===k&&!w))o.y+=v;else o.trang+=v}}catch(e){}
+ try{o.pet=typeof petLuxOf==="function"?petLuxOf(p):0}catch(e){}try{o.mk=typeof toilMkLux==="function"?toilMkLux(p):0}catch(e){}
+ o.total=luxTotal(p);return o}
+window.luxTotal=luxTotal;window.luxParts=luxParts;
+let LUX_LAST=null;
+function luxPing(){try{if(typeof S==="undefined"||!S||S.dead)return;const t=luxTotal(S);if(t===LUX_LAST)return;const prev=LUX_LAST;LUX_LAST=t;
+  window.dispatchEvent(new CustomEvent("ctm-lux",{detail:{total:t,prev,parts:luxParts(S)}}))}catch(e){}}
+window.luxPing=luxPing;
+(function(){if(typeof render!=="function")return;const r0=render;render=function(){const r=r0.apply(this,arguments);luxPing();return r}})();
+
 /* ---------- the context that overrides the occasion: quốc tang > lệnh tiết kiệm > lãnh cung ---------- */
 function luxEdictOn(){try{const E=S&&S.luxEdict;return !!(E&&E.until>S.turn)}catch(e){return false}}
 function luxCtx(p){p=p||S;try{if(typeof wdTang==="function"&&wdTang())return"tang";if(luxEdictOn())return"edict";if(p&&p.out)return"lanh"}catch(e){}return""}

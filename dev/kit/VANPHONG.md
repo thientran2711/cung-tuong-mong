@@ -90,7 +90,7 @@ Thi hành: `dev/build/j84.js` (module cuối trong assemble.py) sửa dữ liệ
 | `dep` | Kiều diễm | the beautiful level (positive); what big occasions / bold đề require |
 | `tuyet` | Khuynh thành | the most beautiful: luminous, never heavy |
 
-- Every level shows TWO numbers (makeup-lux, `BAL.toil.lv[level]`): **Dung nhan N** (its beauty points) and **Xa xỉ N** (its luxury), as kit chips `toilLvChips` (`kitChip(…,"n")` + `kitLuxChip`); the mirror shows the five-row ladder (`toilLvRows`, kitRows).
+- A look shows its NAME only — the name is its beauty, no beauty number (owner ~15:45Z, OD L1639). Each look has ONE xa xỉ value (`BAL.toil.lv[level].lux`, same scale as clothes/jewels) and a xa xỉ tier word (`TOIL_LUXW`): Mặt mộc **Mộc mạc** · Vụng về **Sơ sài** · Đoan trang **Thanh nhã** · Kiều diễm **Diễm lệ** · Khuynh thành **Lộng lẫy**; shown as `toilLvChips` (word chip + `kitLuxChip` "Xa xỉ N"), the mirror ladder `toilLvRows`. The TOTAL (y phục + trang sức + son phấn + thú cưng = `luxTotal`) is MAIN's kit display.
 - **diêm dúa** is no longer a level: it is the WORD people say when the whole look (y phục + trang sức + son phấn, the ONE total `luxOf`) is far above the occasion (`BAL.lux.diem` × its ceiling) — `TOIL_DV.diem`, in a reason line "ăn vận diêm dúa". Old saves holding the `diem` level read as Khuynh thành.
 
 - Preset groups the player picks from (`TOIL_STY`): **Kiểu thanh nhã** · **Kiểu cầu kỳ** (bold, elaborate, NOT negative; owner 03:38Z). A preset shows ONLY its own name (owner 03:35Z: never "(sắc lạnh)" / "(sắc ấm)").

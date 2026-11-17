@@ -17,10 +17,12 @@ Object.assign(BAL,{toil:{khac:1,
     d = j92 outfit level − her own phẩm; r = worn luxury / her allowance (jinv) */
  dress:[{under:-2.75,rLo:0,fitD:-9,fitR:0,fitHi:.62,showR:.9},{under:-1.75,rLo:.2,fitD:-.75,fitR:.38},{under:-1,rLo:.3,fitD:-.25,fitR:.55}],
  tier:[40,65,85],          /* makeup score → vụng < 40 ≤ vừa < 65 ≤ đẹp < 85 ≤ tuyệt (owner 17/11 04:54Z; 15:35Z: Khuynh thành = the maximum, no Diêm dúa level; mặt mộc = skipped) */
- /* makeup-lux (owner 17/11 ~15:35Z, OD L1638): every LEVEL shows its beauty points (dep, "Dung nhan N") and its xa xỉ (lux, "Xa xỉ N"). dep is the face's
-    worth where a face is scored (Hội phối đồ: dep − lvBase × taste.w; the night's end: sign(dep − lvBase)); lux joins the ONE luxury total (jinv luxOf)
-    with the clothes and jewels, judged only at events (luxVerdict / leAttire / Hội phối đồ), never on its own, never at the month tick. */
- lv:{moc:{dep:0,lux:0},vung:{dep:1,lux:6},vua:{dep:2,lux:6},dep:{dep:3,lux:12},tuyet:{dep:4,lux:20}},lvBase:2,
+ /* makeup-lux (owner 17/11 ~15:35Z / ~15:45Z / ~16:00Z, OD L1634/L1639/L1643): a look shows its NAME only (the name is its beauty) and ONE xa xỉ value
+    with its tier word (TOIL_LUXW). lux sits on the SAME scale as clothes and jewels (jinv LUX_V [8,16,28,44,64] by grade + giá/10; a Quý nhân outfit
+    ≈ 11): Vụng về = a grade-0 piece … Khuynh thành = a grade-3 (fine) outfit. It joins the ONE total (luxTotal = clothes + jewels + makeup + pet),
+    judged only at events, never on its own, never at the month tick. dep = the look's rank inside the rules only (never shown): Hội phối đồ points
+    dep − lvBase, the night's end sign(dep − lvBase). */
+ lv:{moc:{dep:0,lux:0},vung:{dep:1,lux:8},vua:{dep:2,lux:16},dep:{dep:3,lux:28},tuyet:{dep:4,lux:44}},lvBase:2,
  /* host reaction (thiện cảm; Hoàng thượng: + → Sủng +1, − → Sủng −1) by kind of host */
  react:{strict:{hopdip:2,hoppham:0,giandi:-3,photruong:-1,moc:-1,vung:-2,vua:0,dep:1,tuyet:2,diem:-3},/* diem = the TOTAL xa xỉ far above the occasion / her rank (jlux luxVerdict "diêm dúa", BAL.lux.diem), no longer a face level */
   normal:{hopdip:1,hoppham:0,giandi:-1,photruong:-1,moc:0,vung:-1,vua:0,dep:1,tuyet:1,diem:-1},
@@ -45,6 +47,8 @@ const TOIL_MK={moc:"Mặt mộc",vung:"Vụng về",vua:"Đoan trang",dep:"Kiề
 /* makeup-lux (OD L1638 "không cần làm thêm cái phần diêm dúa ... làm maximum là khuynh thành"): the five levels in order; an OLD save / an old co-op
    friend holding the dropped "diem" level reads as Khuynh thành (her words: "khuynh thành chính là diêm dúa luôn rồi") — the ONE map, in toilMk */
 const TOIL_LVS=["moc","vung","vua","dep","tuyet"],TOIL_OLDLV={diem:"tuyet"};
+/* the xa xỉ tier word of each look (owner ~15:45Z: "độ xa xỉ ... hiện thành cái tên luôn ... kèm con số"; never "Diêm dúa") */
+const TOIL_LUXW={moc:"Mộc mạc",vung:"Sơ sài",vua:"Thanh nhã",dep:"Diễm lệ",tuyet:"Lộng lẫy"};
 /* "Diêm dúa" survives only as the WORD people say when the whole look (clothes + jewels + makeup) is far too lavish: TOIL_DV.diem (jlux luxVerdict) */
 /* the two preset groups the player picks from (owner 17/11 03:38Z: the bold group is elaborate, not negative; "Diêm dúa" is only the overdone RESULT) */
 const TOIL_STY={dep:"Kiểu thanh nhã",diem:"Kiểu cầu kỳ"};/* internal group id "diem" = the bold preset group (col.want), not a level */
@@ -155,9 +159,9 @@ function toilLv(k){return BAL.toil.lv[TOIL_OLDLV[k]||k]||BAL.toil.lv.moc}
 /* the makeup part of a person's xa xỉ today (0 = bare face / no sitting / not a consort today). Reads the RAW NPC roll (TOIL_NPC0): jlux's toilNpc reads luxOf */
 function toilMkRec(p){try{if(!p||!toilOn(p))return null;if(p===S)return toilToday(S);if(p.coop){const t=p.toilette;return t&&t.wk===toilWk()?t:null}return TOIL_NPC0(p)}catch(e){return null}}
 function toilMkLux(p){const r=toilMkRec(p);return r&&r.makeup?toilLv(toilMk(r)).lux:0}
-/* the two numbers of a level as kit chips (KIT §9 kitChip status "n" + jinv kitLuxChip): "Dung nhan N" · "Xa xỉ N" — every place that shows a level's worth */
-function toilLvChips(k){const L=toilLv(k);return kitChip(`Dung nhan ${L.dep}`,"n")+kitLuxChip({sc:L.lux})}
-/* the ladder of the five levels (kitRows): name | its two chips — the mirror shows it before she paints */
+/* a look's xa xỉ: its tier word + the existing kit chip "Xa xỉ N" (jinv kitLuxChip) — no beauty number (owner ~15:45Z: the NAME is the beauty) */
+function toilLvChips(k){const L=toilLv(k);return `${kitChip(TOIL_LUXW[TOIL_OLDLV[k]||k]||TOIL_LUXW.moc,"n")}${kitLuxChip({sc:L.lux})}`}
+/* the ladder of the five looks (kitRows): name | xa xỉ word + number — the mirror shows it before she paints */
 function toilLvRows(){return TOIL_LVS.map(k=>[TOIL_MK[k],toilLvChips(k)])}
 /* NPCs and the bot: the same parts, score and look from skill (hash of person + day: no Math.random, both co-op seats agree) */
 function toilNpcPlay(sk,h,col,want,style,occ,rk){const N=BAL.toil.play,B=BAL.toil;const r=i=>(wdHash(h+":"+i)%1000)/1000;
@@ -444,12 +448,12 @@ function toilFinish(made){const st=TOIL.st;if(!st)return;try{if(KG82.run&&KG82.r
  try{const d=toilDress(S,st.F);st.dv=d.v;st.style=d.style;S.toilette.dv=d.v;S.toilette.style=d.style}catch(e){}
  const mk=toilMk(S.toilette);const good=mk==="dep"||mk==="tuyet";const tOk=made&&good?true:made&&mk==="vung"?false:null;if(tOk===null)try{kitSfx("mirror")}catch(e){}/* win / lose: kg82ShowRes(html,tOk) below plays it once */
  log(`Sáng nay ta điểm trang: y phục ${TOIL_DV[st.dv]}, ${made?`dung nhan ${toilMkW(mk)} (${score} phần)`:`để ${toilMkW("moc")}`}.`);
- const rows=[];/* the day's verdict sits on the "Cả bộ hôm nay" row below (makeup-lux: it reads clothes + jewels + face) */
+ const rows=[["Y phục",`<span class="ef ${st.style==="fit"?"g":"r"}"><b>${TOIL_DV[st.dv]}</b></span>`]];/* the day's verdict: the ONE total (clothes + jewels + face + pet) */
  if(made){const P=st.parts;rows.push(["Kẻ mày",`<span class="ef t">${Math.round(100*(P.brow||0))}/100</span>`],["Đánh phấn",`<span class="ef t">${Math.round(100*(P.powder||0))}/100</span>`],["Chấm son",`<span class="ef t">${Math.round(100*(P.son||0))}/100</span>`],
   ["Phần chơi",`<span class="ef t">${Math.round(raw*(100-BAL.toil.skillShare)/100)}</span>`],[`Tay nghề (Họa bậc ${sk.hoa}, Sắc ${S.sac|0}${sk.mama?", "+sk.mama.name+" giúp":""})`,kitChip("cộng",bonus,"g")],["Dung nhan",`<span class="ef ${good?"g":mk==="vung"?"r":"t"}"><b>${TOIL_MK[mk]} · ${score} phần</b></span>`])}
  else rows.push(["Dung nhan",`<span class="ef n">${TOIL_MK.moc}</span>`]);
- /* makeup-lux (OD L1638): the level's two numbers, and the ONE xa xỉ total of the day (judged only at events, never this face alone) */
- rows.push(["Mức điểm trang",toilLvChips(mk)]);try{const x=luxOf(S);rows.push(["Cả bộ hôm nay",`${kitLuxChip(x)} <span class="ef ${st.style==="fit"?"g":"r"}"><b>${TOIL_DV[st.dv]}</b></span>`])}catch(e){}
+ /* makeup-lux (OD L1639): the look's xa xỉ word + number (judged only at events, inside the ONE total, never this face alone) */
+ rows.push(["Xa xỉ son phấn",toilLvChips(mk)]);/* the TOTAL is shown by MAIN's kit display (it reads luxTotal) */
  /* what today's look does to the people she will meet (the real numbers; the nết shows only once known) */
  const eff=[];try{for(const h of ["th",qOn()?rivals[0]:null,"emp"].filter(Boolean)){if(h==="th"&&S.thDead)continue;const r=leAttire(S,"",h);const t=r.toil;if(!t||!t.aff)continue;
   eff.push(`${toilWho(h)}: ${h==="emp"?(t.aff>0?"Sủng +1":"Sủng -1"):`thiện cảm ${t.aff>0?"+":""}${t.aff}`} khi gặp hôm nay`)}}catch(e){}
@@ -904,7 +908,7 @@ try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§60",title:"kitSw
 /* (b0) CHỌN MÀU — before the three hồi: her portrait wears the picks live (the same layers as all day, at the "đẹp" strength) */
 function toilColUI(){const st=TOIL.st,box=kg82Box();if(!box||!st)return;box.hidden=false;st.col=toilColFix(st.col||(S.toilette&&S.toilette.col));
  TOIL.prev={look:st.col.want==="diem"?"tuyet":"dep",col:st.col};/* makeup-lux: the bold group previews at the top level (Khuynh thành), no overdone level */TOIL.prevUI=toilColUI;const por=toilPor(),me=pMe();
- box.innerHTML=`<div class="toilw"><div class="toilfig"><p class="past">Gương đồng soi trước: điểm trang khéo thì dung nhan mang đúng những màu này. Mỗi mức mang Dung nhan và Xa xỉ riêng như bảng dưới; ${TOIL_STY.diem} hợp dịp lớn. Gặp dịp, xa xỉ của son phấn cộng chung với y phục, trang sức mà xét; quá dịp, quá phẩm thì người ta chê ${TOIL_DV.diem}.${toilTasteNote()}</p><div class="kgr">${kitRows(toilLvRows())}</div></div>`+
+ box.innerHTML=`<div class="toilw"><div class="toilfig"><p class="past">Gương đồng soi trước: điểm trang khéo thì dung nhan mang đúng những màu này. Mỗi mức mang độ xa xỉ riêng như bảng dưới; ${TOIL_STY.diem} hợp dịp lớn. Gặp dịp, xa xỉ của son phấn cộng chung với y phục, trang sức mà xét; quá dịp, quá phẩm thì người ta chê ${TOIL_DV.diem}.${toilTasteNote()}</p><div class="kgr">${kitRows(toilLvRows())}</div></div>`+
   `<div>${kitSwatches({key:"toilcol",rows:toilPreRows(st.col).concat(toilColRows(st.col)),onPick:(r,k)=>{if(/^pre-/.test(r)){const x=TOIL_PRE.find(y=>y[0]===k&&"pre-"+y[2]===r);if(x){st.col=Object.assign({},x[4]);if(x[2]==="diem")st.col.want="diem"}}else st.col[r]=k;toilColUI()}})}</div></div>`+
   `<div class="kg82act"><button class="${kg82Btn()}" id="toilgo">Trang điểm<small>kẻ mày, đánh phấn, chấm son</small></button><button class="${kg82Btn(true)}" id="toilmoc2">Để ${toilMkW("moc")}</button></div>`;
  try{kitGameFigRefresh()}catch(e){}
@@ -935,7 +939,7 @@ function toilReveal(o,done){let fin=false;try{if(typeof kmStage==="function"&&km
   let porH="";try{const pv=toilRow(pf);if(pv&&pv[6]){const Ap=pv[8]||1.3,wp=100*v[6]/pv[6],hp=wp*Ap/A,pfx=kitFxLayers(S,pf);
    porH=`<span class="ktrv-pw" style="left:${(v[0]-pv[0]*wp/100).toFixed(2)}%;top:${(v[1]-pv[1]*hp/100).toFixed(2)}%;width:${wp.toFixed(2)}%;height:${hp.toFixed(2)}%"><img src="${IMG_U("img/"+pf)}" alt=""><span class="kfxf">${pfx}</span></span>`}}catch(e){}
   const fx=(()=>{try{return kitFxLayers(S,ff)}catch(e){return""}})();
-  const rows=[["Dung nhan",`<span class="ef ${o.good?"g":look==="vung"?"r":"t"}"><b>${TOIL_MK[look]}${o.made?` · ${o.score} phần`:""}</b></span>`]];if(o.made)rows.push(["Kiểu",o.pre]);rows.push(["Mức điểm trang",toilLvChips(look)]);rows.push(["Hôm nay",TOIL_HINT[look]]);
+  const rows=[["Dung nhan",`<span class="ef ${o.good?"g":look==="vung"?"r":"t"}"><b>${TOIL_MK[look]}${o.made?` · ${o.score} phần`:""}</b></span>`]];if(o.made)rows.push(["Kiểu",o.pre]);rows.push(["Xa xỉ son phấn",toilLvChips(look)]);rows.push(["Hôm nay",TOIL_HINT[look]]);
   const html=`<div class="ktrv ktrv-${look}" style="--ktpx:${v[0]}%;--ktpy:${(v[1]-v[6]*.25/A).toFixed(2)}%"><div class="ktrv-cam"><i class="ktrv-plate" style="background-image:url(${IMG_U("img/toil-mirror-room.webp")})"></i><i class="ktrv-lt"></i>`+
    `<div class="ktrv-fig"><span class="ktrv-fw"><img src="${IMG_U("img/"+ff)}" alt=""><span class="kfxf">${fx}</span>${porH}</span></div></div>`+
    `<div class="ktrv-card kgr">${kitRows(rows)}</div></div>`;

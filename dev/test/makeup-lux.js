@@ -16,10 +16,11 @@ fs.mkdirSync(DIR,{recursive:true});
  await require('./lib/roulette').dismissRoulette(p);await p.waitForTimeout(1200);
  await p.evaluate(()=>{const k=document.getElementById('kroul');if(k)k.remove();Q.length=0;try{closeModal()}catch(e){}S.suc=90;S.bac=200;render()});
  /* 1. five levels, one table, Khuynh thành the max */
- const L=await p.evaluate(()=>({lvs:TOIL_LVS,mk:TOIL_MK,lv:BAL.toil.lv,base:BAL.toil.lvBase,chips:toilLvChips("tuyet"),rows:toilLvRows().length,old:TOIL_OLDLV}));
+ const L=await p.evaluate(()=>({lvs:TOIL_LVS,mk:TOIL_MK,lv:BAL.toil.lv,base:BAL.toil.lvBase,chips:toilLvChips("tuyet"),rows:toilLvRows().length,old:TOIL_OLDLV,w:TOIL_LUXW,lv3:LUX_V[3]}));
  const lvOk=L.lvs.join()==="moc,vung,vua,dep,tuyet"&&!("diem" in L.mk)&&L.lvs.every((k,i)=>typeof L.lv[k].dep==="number"&&typeof L.lv[k].lux==="number"&&(i===0||(L.lv[k].dep>L.lv[L.lvs[i-1]].dep&&L.lv[k].lux>=L.lv[L.lvs[i-1]].lux)));
  ck('levels',lvOk&&L.old.diem==="tuyet",L);
- ck('chips',L.chips.includes(`Dung nhan ${L.lv.tuyet.dep}`)&&L.chips.includes(`Xa xỉ <b>${L.lv.tuyet.lux}</b>`)&&/class="kchip/.test(L.chips)&&L.rows===5,L.chips);
+ /* OD L1639: name only, no beauty number; one xa xỉ value + tier word; L1643: same scale as clothes (Khuynh thành = a grade-3 piece) */
+ ck('chips',!/Dung nhan/.test(L.chips)&&L.chips.includes(L.w.tuyet)&&L.chips.includes(`Xa xỉ <b>${L.lv.tuyet.lux}</b>`)&&/class="kchip/.test(L.chips)&&L.rows===5&&L.lv.tuyet.lux===L.lv3&&Object.keys(L.w).join()===L.lvs.join(),L.chips);
  /* 2. the ONE total: luxOf = clothes + jewels + pet + today's level; the month tick passes noMk */
  const T=await p.evaluate(()=>{const o={};for(const k of TOIL_LVS){S.toilette={day:toilWk()*10,wk:toilWk(),score:k==="tuyet"?92:k==="dep"?75:k==="vua"?50:20,makeup:k!=="moc",style:"fit",dv:"hopdip",F:1,occ:["th"],look:k==="vung"?"vung":k==="vua"?null:k==="moc"?null:k};
    o[k]=luxOf(S).sc-luxOf(S,{noMk:1}).sc}S.toilette=null;o.none=luxOf(S).sc-luxOf(S,{noMk:1}).sc;return o});
@@ -28,6 +29,10 @@ fs.mkdirSync(DIR,{recursive:true});
  const N=await p.evaluate(()=>{const R=liveRivals(true).filter(v=>!v.out).slice(0,8).map(v=>{const r=TOIL_NPC0(v);const want=r.makeup?BAL.toil.lv[toilMk(r)].lux:0;return{n:v.name,mk:toilMk(r),d:luxOf(v).sc-luxOf(v,{noMk:1}).sc,want,dv:toilNpc(v).dv}});
   const v=liveRivals(true).find(v=>!v.out);const c0=v.coop,t0=v.toilette;v.coop=true;v.toilette={wk:toilWk(),makeup:true,score:92,look:"tuyet"};const f=luxOf(v).sc-luxOf(v,{noMk:1}).sc;v.toilette={wk:toilWk(),makeup:false,score:0};const f0=luxOf(v).sc-luxOf(v,{noMk:1}).sc;v.coop=c0;v.toilette=t0;return{R,f,f0}});
  ck('npcFriend',N.R.length>0&&N.R.every(x=>x.d===x.want)&&N.f===L.lv.tuyet.lux&&N.f0===0,N);
+ /* luxTotal = clothes + jewels + makeup + pet = luxOf (no second score); luxParts sums to it; "ctm-lux" fires when her total changes */
+ const P=await p.evaluate(()=>{S.toilette={day:toilWk()*10,wk:toilWk(),score:92,makeup:true,style:"fit",dv:"hopdip",F:1,occ:["th"],look:"tuyet"};render();const a=luxParts(S);let ev=null;window.addEventListener("ctm-lux",e=>{ev=e.detail},{once:true});
+  S.toilette=null;render();const b=luxParts(S);const v=liveRivals(true).find(x=>!x.out);const pv0=luxParts(v);return{a,b,ev,sum:a.y+a.trang+a.mk+a.pet,tot:luxTotal(S),pv0,npcOk:luxTotal(v)===luxOf(v).sc}});
+ ck('luxTotal',P.sum===P.a.total&&P.a.mk===L.lv.tuyet.lux&&P.b.mk===0&&P.ev&&P.ev.total===P.b.total&&P.npcOk&&P.pv0.y+P.pv0.trang+P.pv0.mk+P.pv0.pet===P.pv0.total,P);
  /* 3. "diêm dúa" = the total far above the occasion: photruong just above, diem above hi × BAL.lux.diem; the host reacts with its diem row */
  const D=await p.evaluate(()=>{const a0=luxAllow;const res={};try{S.toilette={day:toilWk()*10,wk:toilWk(),score:92,makeup:true,style:"fit",dv:"hopdip",F:1,occ:["th"],look:"tuyet"};S.toilSeen=null;
    const tot=luxOf(S).sc;const R=luxRange(S,1,"th");for(const [k,r] of [["fit",.8*R.fit[1]],["show",(R.hi*(1+BAL.lux.diem)/2)],["diem",R.hi*BAL.lux.diem*1.2]]){const bud=Math.max(1,Math.round(tot/r));luxAllow=()=>bud;
@@ -57,12 +62,12 @@ fs.mkdirSync(DIR,{recursive:true});
  await p.evaluate(()=>{Q.length=0;try{closeModal()}catch(e){}S.toilette=null;S.buoi=0;toilOpen()});await p.waitForTimeout(1200);
  for(let i=0;i<4&&!(await p.$('#kg82 .toilw .kgr'));i++){const b2=await p.$('#kg82 .kg82act button');if(b2)await b2.click().catch(()=>{});await p.waitForTimeout(1200)}
  const lad=await p.evaluate(()=>{const g=document.querySelector('#kg82 .toilw .kgr');return g?{t:g.textContent,chips:g.querySelectorAll('.kchip').length}:null});
- ck('ladder',lad&&lad.chips===10&&/Khuynh thành/.test(lad.t)&&!/Diêm dúa/.test(lad.t),lad);
+ ck('ladder',lad&&lad.chips===10&&/Khuynh thành/.test(lad.t)&&/Lộng lẫy/.test(lad.t)&&!/Diêm dúa|Dung nhan \d/.test(lad.t),lad);
  await p.screenshot({path:`${DIR}/mlux-${tag}-1-ladder.jpg`,quality:72});
  await p.evaluate(()=>{const st=TOIL.st;st.parts={brow:.97,powder:.97,son:.97};toilFinish(true)});await p.waitForTimeout(1500);
  for(let i=0;i<6&&await p.$('.ktrv');i++){if(await p.$('.ktrv-ov>.kmend'))await p.click('.ktrv-ov>.kmend').catch(()=>{});else await p.evaluate(()=>{const o=document.querySelector('.ktrv-ov');o&&o.click()});await p.waitForTimeout(900)}
  await require('./lib/roulette').clearMoments(p);await p.waitForSelector('#toildone');
- const res=await p.evaluate(()=>document.querySelector('#kg82').textContent.replace(/\s+/g," "));ck('result',/Mức điểm trang/.test(res)&&/Dung nhan \d/.test(res)&&/Cả bộ hôm nay/.test(res)&&/Xa xỉ \d/.test(res),res.slice(0,400));
+ const res=await p.evaluate(()=>document.querySelector('#kg82').textContent.replace(/\s+/g," "));ck('result',/Xa xỉ son phấn/.test(res)&&!/Dung nhan \d/.test(res)&&/Xa xỉ \d/.test(res),res.slice(0,400));
  await p.screenshot({path:`${DIR}/mlux-${tag}-2-result.jpg`,quality:72});await p.click('#toildone');await p.waitForTimeout(800);
  /* 8. one event result: Thỉnh an Thái hậu with the day's look judged (the Vì sao / reaction names the total) */
  const ev=await p.evaluate(()=>{Q.length=0;try{closeModal()}catch(e){}S.toilSeen=null;const a0=luxAllow;const tot=luxOf(S).sc;const R=luxRange(S,1,"th");const bud=Math.max(1,Math.round(tot/(R.hi*BAL.lux.diem*1.2)));window.__a0=a0;luxAllow=()=>bud;
