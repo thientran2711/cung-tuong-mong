@@ -572,3 +572,4 @@ WAKES: s27 set send_later 02:32Z (trig_01Kaj14RQ7oCVkg94xPC9Add) — it fires in
 - (17/11 ~01:48Z) s27 → s28 rollover.
 - (17/11 ~01:49Z) s27 opened MAIN SESSION 28 = session_01UV1SzkNSYyuEkCJ3Bv1Evj and stopped.
 - (17/11 ~01:55Z) MAIN SESSION 28 = session_01UV1SzkNSYyuEkCJ3Bv1Evj; START_CTX ~4 % (estimate, ~40k of 1M; get_session reads 0) → roll over at ~29 %, ceiling 60 %.
+- (17/11 ~01:42Z) s28 pushed main = 0f61ff928 (coop-main-faults). Next: batch-0132 7abaf07ac (kit-size-10) after builder BATCH READY + shots.
