@@ -106,3 +106,8 @@ Game order (jbal2.js): 1 Đáp ứng, 2 Thường tại, 3 Quý nhân, 4 Tần �
 All: no shoulder piece, shoulders covered, no round/U collar, light flowing silhouette.
 Honest note: ranks 1–4 share a similar light-and-sheer cut (colour + hair + embroidery do the ranking); if she wants clearer cut differences between 1–4, redo cuts (e.g. one with a closed waist-sash jacket, one with layered half-sleeve vest). Ladder of headdress is clear: 1 pin → 2 pins+flower → small bu-yao → Tần flower set → Phi → Quý phi → HQP → HH.
 Sheet (2 rows × 4, 1600 px wide): https://ctm-img.victoria-tntt.workers.dev/img/_review/rank-vankien/sheet_figures_v6_8bac.jpg
+
+## V6b — hair restraint (owner 17/11 ~18:40Z: v5 hairpins WAY overdone; v4c too plain → middle)
+Redid ONLY the hair of ranks 4–8 on the v5 outfits/colours (5 images, 675 credits); lower 3 kept (already restrained: 1 pin / 2 pins + flower / small bu-yao pair). Hair stays visible; nothing wider than the head; no long dangle curtains.
+Tần 2 small flower pins + 1 short tassel | Phi double-loop bun + 2 small butterfly pins + 1 flower + 1 short bu-yao | Quý phi high bun + medium peony + 2 small pins + short bu-yao pair | HQP high chignon + small phoenix pin + small jade flower + 3 small pins | HH small phoenix crown, head-width, short temple dangles.
+Sheet replaced: https://ctm-img.victoria-tntt.workers.dev/img/_review/rank-vankien/sheet_figures_v6_8bac.jpg (cache-bust ?x=2 if the old one shows).
