@@ -60,7 +60,7 @@ function wxRiskWord(n){return typeof chanceW==="function"?chanceW(n):"khả năn
 /* what happens: same for her and NPCs; returns a line ("" = nothing) */
 function wxHit(p,R){let r="";const me=p===S,nm=me?"Ngươi":`${rkName(p)} ${p.name}`;
  if(roll(R.slip)){ap(p,{suc:-BAL.wx.slipSuc});r+=`${nm} trượt chân trên đá ${wxKind()==="băng tuyết"?"đóng băng":"ướt"}, ngã đau. Sức −${BAL.wx.slipSuc}. `;
-  if(p.preg&&!p.fake&&roll(BAL.wx.slipMisc)){p.preg=0;p.hidden=false;ap(p,{suc:-20});r+=`<span class="r">${me?"Ngươi":"Nàng"} sảy thai.</span> Sức −20. `}}
+  if(p.preg&&!p.fake&&roll(BAL.wx.slipMisc)){p.preg=0;p.hidden=false;ap(p,{suc:BAL.eff.jweather.sucSlip});r+=`<span class="r">${me?"Ngươi":"Nàng"} sảy thai.</span> Sức ${balSg(BAL.eff.jweather.sucSlip)}. `}}
  if(!illOf(p)&&roll(R.cold)){const t=catchIll(p,"phonghan");if(p.ill&&(p.suc|0)<BAL.wx.weakSuc)p.ill.st=2;r+=me?`Ngươi nhiễm lạnh, mắc phong hàn${p.ill&&p.ill.st>=2?" nặng":""}. `:`${nm} nhiễm lạnh, mắc phong hàn. `}
  return r}
 /* giông tố passes: known buổi it clears */

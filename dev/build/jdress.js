@@ -70,7 +70,7 @@ function dsSpyX(A){return Array.isArray(A)?A.map(o=>o&&o.n==="Sai đi dò la"&&o
  const judge=judgeName(t),A0=wdNmC(a),T0=wdNm(t);for(const o of consorts()){try{dressLook(o,t,judge)}catch(e){}}
  const nm=J.map(k=>itm(k).n).join(", ");
  try{a.vpA92=wk();t.vpT92=wk()}catch(e){}
- if(!roll(oVP(a))){ap(a,{danh:-2});relAdd(a,t,-10);return `${A0} tố ${T0} vượt phẩm (${nm}), ${judge} bỏ qua, chỉ dặn lần sau giữ ý. ${a===S?"Danh -2. ":""}`}
+ if(!roll(oVP(a))){ap(a,{danh:BAL.eff.jdress.danhTop});relAdd(a,t,-10);return `${A0} tố ${T0} vượt phẩm (${nm}), ${judge} bỏ qua, chỉ dặn lần sau giữ ý. ${a===S?`Danh ${balSg(BAL.eff.jdress.danhTop)}. `:""}`}
  relAdd(a,t,-10);ap(a,{danh:2});dropJ();ap(t,{danh:-6});punish(t,"ăn mặc vượt phẩm",1);
  return `${A0} tố ${T0} vượt phẩm: <span class="${t===S?"r":"g"}">thành</span>. ${nm} bị tịch thu. ${wdNmC(t)} Danh -6. `};window.wdAccuse=wdAccuse})();
 
