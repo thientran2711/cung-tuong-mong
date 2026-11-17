@@ -669,7 +669,7 @@ function toilMakeupSvg(file,look,col,noLip){const L=TOIL_LOOKS[look];const v=toi
  return TOIL_SVGC[key]="data:image/svg+xml;charset=utf-8,"+encodeURIComponent(svg)}
 window.toilMakeupSvg=toilMakeupSvg;window.TOIL_FIT=TOIL_FIT;
 /* her face layers: skin light + blush (SVG, as approved) under the colour layer (lips, eyelids, brows painted from the picture itself, §60) */
-function toilFaceLayer(p,file){const lk=toilLookOfP(p);if(!lk)return"";const col=toilColOfP(p);const mk=toilMkLayer(file,lk,col);const src=toilMakeupSvg(file,lk,col,!!mk);if(!src&&!mk)return"";
+function toilFaceLayer(p,file){const lk=toilLookOfP(p);if(!lk)return"";const col=toilColOfP(p);const mk=toilMkLayer(file,lk,col);const src=mk?"":toilMakeupSvg(file,lk,col,false);if(!src&&!mk)return"";
  return (src?`<img class="kmkl kmkl-${lk}" src="${src}" alt="" aria-hidden="true" style="--fleft:0%;--ftop:0%;--fwidth:100%;--fheight:100%">`:"")+mk}
 if(typeof kitFxLayers==="function"){const fx0=kitFxLayers;kitFxLayers=function(p,file){const h=fx0.apply(this,arguments);let m="";try{m=toilFaceLayer(p,file)}catch(e){}return m+h}}
 
@@ -723,7 +723,13 @@ function toilColText(c){c=toilColFix(c);return ["mat","ma","son","may"].map(k=>t
 /* strength by look: lip / eyelid colour share, eyelid height (share of the lid→brow gap), brow tint, outer wing, lower lash line */
 /* the ladder (owner 17/11 04:36/04:44Z): vừa = the old 'đẹp' layer; đẹp = halfway between the old đẹp and the old Kiều diễm; diêm dúa = OVERDONE (heavy blush, very red lips, too much powder);
    vụng = lip colour smeared past the lip line + uneven smudged blush, brows NEVER drawn or touched; mặt mộc = no layer */
-const TOIL_MKS={vung:{lip:.5,eye:.4,eyeH:.5,brow:0,wing:0,low:0,vung:1},vua:{lip:.44,eye:.5,eyeH:.5,brow:.45,wing:.08,low:0},dep:{lip:.56,eye:.6,eyeH:.59,brow:.565,wing:.15,low:.2},tuyet:{lip:.64,eye:.55,eyeH:.62,brow:.6,wing:.17,low:.15,shim:.3,gloss:.5},diem:{lip:.74,eye:.95,eyeH:.9,brow:.78,wing:.32,low:.55,shim:.45,gloss:.3}};
+const TOIL_MKS={
+ /* bl = blush strength, blr = blush size (x the eye distance), sk = skin-light lift, hl = soft luminous cheekbone (round, never a streak), dabs = white powder dabs, gloss = natural sheen INSIDE the lip. Every skin-side layer is clipped to the skin mask (toilMkDraw). */
+ vung:{lip:.5,eye:.4,eyeH:.5,brow:0,wing:0,low:0,vung:1,bl:.3,blr:.7,sk:.06,dabs:6},
+ vua:{lip:.3,eye:.24,eyeH:.4,brow:.36,wing:0,low:0,bl:.12,blr:.78,sk:.08},
+ dep:{lip:.74,eye:.85,eyeH:.74,brow:.6,wing:.24,low:.32,bl:.42,blr:1,sk:.14},
+ tuyet:{lip:.66,eye:.8,eyeH:.78,brow:.7,wing:.28,low:.3,shim:.42,gloss:.7,bl:.27,blr:.95,sk:.36,hl:1},
+ diem:{lip:.86,eye:.95,eyeH:.9,brow:.78,wing:.32,low:.55,shim:.45,gloss:.2,bl:.55,blr:1.1,sk:.3}};
 const MK_FIT={g:{},ld:{},face(f){const m=/^(?:por|fig)-([a-z]+-[a-z]*\d+)-/.exec(String(f||""));return m?m[1]:null},
  get(f){const g=this.face(f);if(!g)return null;const t=this.g[g];if(t)return t[f]||null;this.load(g);return null},
  load(g){if(this.ld[g])return;this.ld[g]=1;try{fetch("img/mk-fit/"+g+".json").then(r=>r.ok?r.json():null).then(j=>{if(j){MK_FIT.g[g]=j;try{if(typeof S!=="undefined"&&S&&!Q.length&&!TOIL.st)render();else if(TOIL.st&&TOIL.prev&&TOIL.prevUI)TOIL.prevUI()}catch(e){}}}).catch(()=>{})}catch(e){}}};
@@ -732,8 +738,8 @@ const TOIL_BLANK="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAA
 const TOIL_MKC={},TOIL_MKQ=[];
 function toilMkPts(v){const P=[];for(let i=0;i<60;i++)P.push([v[2*i]/40,v[2*i+1]/40]);return P}/* → % of width / height */
 function toilMkBox(v){const P=toilMkPts(v);let x0=1e9,y0=1e9,x1=-1e9,y1=-1e9;P.forEach(([x,y])=>{x0=Math.min(x0,x);x1=Math.max(x1,x);y0=Math.min(y0,y);y1=Math.max(y1,y)});
- const mx=(x1-x0)*.14,my=(y1-y0)*.14;return[x0-mx,y0-my,x1-x0+2*mx,y1-y0+2*my].map(n=>+n.toFixed(3))}
-function toilMkLayer(file,look,col){const v=MK_FIT.get(file);if(!v||!TOIL_MKS[look])return"";const key=[file,look,col.mat,col.son,col.may,look==="vung"?col.seed|0:""].join("|");
+ const mx=(x1-x0)*.3,my=(y1-y0)*.3;return[x0-mx,y0-my,x1-x0+2*mx,y1-y0+2*my].map(n=>+n.toFixed(3))}
+function toilMkLayer(file,look,col){const v=MK_FIT.get(file);if(!v||!TOIL_MKS[look])return"";const key=[file,look,col.mat,col.ma,col.son,col.may,look==="vung"?col.seed|0:""].join("|");
  let e=TOIL_MKC[key];if(!e){e=TOIL_MKC[key]={box:toilMkBox(v),src:""};TOIL_MKQ.push(key);if(TOIL_MKQ.length>80)delete TOIL_MKC[TOIL_MKQ.shift()];toilMkPaint(file,v,look,col,e,key)}
  const b=e.box;return `<img class="kmkl kmkc kmkl-${look}" data-mkk="${key}" src="${e.src||TOIL_BLANK}" alt="" aria-hidden="true" style="--fleft:${b[0]}%;--ftop:${b[1]}%;--fwidth:${b[2]}%;--fheight:${b[3]}%">`}
 function toilMkPaint(file,v,look,col,e,key){const im=new Image();im.crossOrigin="anonymous";im.decoding="async";
@@ -767,7 +773,24 @@ const eh=VU?[.6+.55*R(),.3+.35*R()]:[1,1];let en=0;
  /* tuyệt / diêm dúa: pearl-gold shimmer on the lid (T.shim) and a gloss on the lower lip (T.gloss), soft dabs, never a sticker */
  const [csh,gsh]=mk();if(T.shim||T.gloss){const U1=P.slice(20,27),U2=P.slice(30,37),B1=P.slice(45,50),B2=P.slice(55,60);const dab=(x,y,r,a)=>toilSoft(gsh,g=>{g.arc(x,y,r,0,7)},r*.7,a,K);
   for(const [U,B] of [[U1,B1],[U2,B2]]){const bA=t=>{const f=t*(B.length-1),i=Math.min(B.length-2,Math.floor(f));return lerp(B[i],B[i+1],f-i)};if(T.shim)[2,4].forEach((k,j)=>{const q=lerp(U[k],bA(.86-.74*k/6),.35);dab(q[0],q[1],u*(j===0?.04:.03),T.shim)})}}
- const [cgl,ggl]=mk();if(T.gloss){const gy=lc[1]+u*.03;toilSoft(ggl,g=>{g.ellipse(lc[0],gy,u*.1,u*.016,0,0,7)},u*.02,T.gloss,K)}
+ /* gloss = a soft sheen on the LOWER lip, inside the lip shape (it is multiplied by the lip mask below): never a white bar that reads as teeth */
+ const [cgl,ggl]=mk();if(T.gloss){const ib=Math.max(...P.slice(12,20).map(q=>q[1])),ob=Math.max(...P.slice(0,12).map(q=>q[1])),gy=ib+(ob-ib)*.42;
+  toilSoft(ggl,g=>{g.ellipse(lc[0],gy,u*.085,u*.013,0,0,7)},u*.018,T.gloss,K)}
+ /* SKIN pass (owner 17/11 13:08Z): skin light, blush, luminous cheekbones, powder dabs. Painted in real colour, then clipped to the SKIN MASK in the loop
+    (a colour close to her own cheek skin, never the eyes / iris, hair or background) */
+ const [cs,gs]=mk();const eyeAv=(c)=>c;const ang=Math.atan2(cb[1]-ca[1],cb[0]-ca[0]),mid=[(ca[0]+cb[0])/2,(ca[1]+cb[1])/2],eyeY=mid[1],mY=lc[1];
+ const cheeks=[ca,cb].map(e=>{const k=(e[0]-mid[0])*.02,yy=e[1]+(mY-eyeY)*.56;return[e[0]+k,yy]});
+ const mc=toilColRGB("ma",col.ma);const sp=(x,y)=>[(x-bx)*cw/bw,(y-by)*chh/bh];
+ const blob=(g,cx,cy,rx,ry,rot,rgb,al)=>{g.save();g.translate(cx,cy);g.rotate(rot);g.scale(rx,ry);const gr=g.createRadialGradient(0,0,0,0,0,1);gr.addColorStop(0,`rgba(${rgb[0]},${rgb[1]},${rgb[2]},${al})`);gr.addColorStop(.3,`rgba(${rgb[0]},${rgb[1]},${rgb[2]},${al*.78})`);gr.addColorStop(.65,`rgba(${rgb[0]},${rgb[1]},${rgb[2]},${al*.28})`);gr.addColorStop(1,`rgba(${rgb[0]},${rgb[1]},${rgb[2]},0)`);g.fillStyle=gr;g.beginPath();g.arc(0,0,1,0,7);g.fill();g.restore()};
+ const cmx=(mid[0]),cmy=eyeY+(mY-eyeY)*.5;
+ if(T.sk)blob(gs,cmx,cmy,u*1.22,u*1.6,0,[255,249,240],T.sk);
+ if(T.hl)cheeks.forEach(c=>blob(gs,c[0],c[1]-u*.2,u*.17,u*.14,0,[255,244,226],.22));/* tuyệt: two ROUND soft lights on the cheekbones (a wide blur, never a horizontal streak) */
+ cheeks.forEach((c,i)=>{const j=VU?[.8+.6*R(),.7+.6*R(),(R()-.5)*u*.1,(R()-.5)*u*.08,.65+.6*R()]:[1,1,0,0,1];const bs=T.blr*u;
+  blob(gs,c[0]+j[2],c[1]+j[3],bs*.34*j[0],bs*.22*j[1],ang+(VU?(R()-.5)*.9:0),mc,Math.min(.9,T.bl*j[4]));
+  if(VU){/* a few small blotches next to the cheek: uneven, small */for(let k=0;k<2;k++)blob(gs,c[0]+(R()-.5)*u*.45,c[1]+(R()-.5)*u*.3,u*(.07+.06*R()),u*(.05+.05*R()),R()*3,mc,.26+.2*R())}});
+ if(T.dabs)cheeks.forEach((c,i)=>{for(let k=0;k<Math.ceil(T.dabs/2);k++)blob(gs,c[0]+(R()-.5)*u*.62,c[1]+(R()-.5)*u*.4,u*(.035+.045*R()),u*(.03+.035*R()),R()*3,[255,251,247],.38+.3*R())});
+ /* the eyes (dilated) are cut out of the skin pass */
+ const [cx2,gx]=mk();[[20,27,27,30],[30,37,37,40]].forEach(([a,b,c2,d])=>{const poly=P.slice(a,b).concat(P.slice(c2,d));const ec=poly.reduce((q,p)=>[q[0]+p[0]/poly.length,q[1]+p[1]/poly.length],[0,0]);const gp=poly.map(p=>[ec[0]+(p[0]-ec[0])*1.45,ec[1]+(p[1]-ec[1])*1.6]);toilSoft(gx,g=>{g.moveTo(gp[0][0],gp[0][1]);gp.forEach(p=>g.lineTo(p[0],p[1]));g.closePath()},u*.05,1,K)});
  /* brows */
  const [cbw,gb]=mk();toilSoft(gb,g=>{toilSmooth(g,P.slice(40,50));toilSmooth(g,P.slice(50,60))},u*.03,1,K);
  /* vụng ink (painted in the brow colour itself): one brow redrawn too high / too thick, the other's tail dragged long, a smear of ink off a tail */
@@ -775,25 +798,29 @@ const eh=VU?[.6+.55*R(),.3+.35*R()]:[1,1];let en=0;
   const Bu=[P.slice(40,45),P.slice(50,55)],Bl=[P.slice(45,50),P.slice(55,60)];/* upper edge outer→inner, lower edge inner→outer */
   const line=(L,w,a,blur)=>{gi.save();gi.globalAlpha=a;gi.lineWidth=w;gi.shadowColor="#000";gi.shadowBlur=blur*K;gi.beginPath();L.forEach((p,i)=>i?gi.lineTo(p[0],p[1]):gi.moveTo(p[0],p[1]));gi.stroke();gi.restore()};
   /* owner 17/11 04:15Z: vụng stays PRETTY — no drawn / thick brows, no ink: only soft faults (uneven blush + a caked powder patch in the SVG layer, lip line a little off, soft uneven lids) */}
- const D=g0.getImageData(0,0,cw,chh),mI=gi.getImageData(0,0,cw,chh).data,mL=gl.getImageData(0,0,cw,chh).data,mE=ge.getImageData(0,0,cw,chh).data,mB=gb.getImageData(0,0,cw,chh).data,mSh=gsh.getImageData(0,0,cw,chh).data,mGl=ggl.getImageData(0,0,cw,chh).data,o=D.data;
+ const D=g0.getImageData(0,0,cw,chh),mI=gi.getImageData(0,0,cw,chh).data,mL=gl.getImageData(0,0,cw,chh).data,mE=ge.getImageData(0,0,cw,chh).data,mB=gb.getImageData(0,0,cw,chh).data,mSh=gsh.getImageData(0,0,cw,chh).data,mGl=ggl.getImageData(0,0,cw,chh).data,mS=gs.getImageData(0,0,cw,chh).data,mX=gx.getImageData(0,0,cw,chh).data,o=D.data;
  const Lum=i=>.299*o[i]+.587*o[i+1]+.114*o[i+2];let sl=0,nl=0,se=0,ne=0;
  for(let i=0;i<o.length;i+=4){const l=Lum(i);if(mL[i+3]>140){sl+=l;nl++}if(mE[i+3]>60&&l>110){se+=l;ne++}}
- const Ll=nl?sl/nl:150,Le=ne?se/ne:205;const tl=toilColRGB("son",col.son),te=toilColRGB("mat",col.mat),tb=toilColRGB("may",col.may);
+ const Ll=nl?sl/nl:150,Le=ne?se/ne:205;
+ /* her cheek skin colour (median of small windows on the cheeks, taken from the picture itself) */
+ const skc=(()=>{const ch=[[],[],[]];cheeks.forEach(c=>{const [px,py]=sp(c[0],c[1]),rr=Math.max(2,Math.round(u*.06*cw/bw));for(let y=-rr;y<=rr;y+=1)for(let x=-rr;x<=rr;x+=1){const X=Math.round(px+x),Y=Math.round(py+y);if(X<0||Y<0||X>=cw||Y>=chh)continue;const j=(Y*cw+X)*4;if(o[j+3]>0){ch[0].push(o[j]);ch[1].push(o[j+1]);ch[2].push(o[j+2])}}});const med=a=>{a.sort((x,y)=>x-y);return a.length?a[a.length>>1]:200};return[med(ch[0]),med(ch[1]),med(ch[2])]})();
+ const skinM=(i,lo,hi)=>{const dr=o[i]-skc[0],dg=o[i+1]-skc[1],db=o[i+2]-skc[2],d=Math.sqrt(dr*dr*.6+dg*dg+db*db);return d<=lo?1:d>=hi?0:1-(d-lo)/(hi-lo)};const tl=toilColRGB("son",col.son),te=toilColRGB("mat",col.mat),tb=toilColRGB("may",col.may);
  const Ltb=Math.max(20,.299*tb[0]+.587*tb[1]+.114*tb[2]);const cl3=(x,a,b)=>x<a?a:x>b?b:x;
  /* vụng patchiness: smooth value noise in face units (same blotches on portrait and figure) */
  const NS=u*.14,hv=(x,y)=>{let h=(x*374761393+y*668265263+(col.seed|0)*982451653)|0;h=Math.imul(h^h>>>13,1274126177);return((h^h>>>16)>>>0)/4294967296};
  const nz=(x,y)=>{const fx=(x-lc[0])/NS,fy=(y-lc[1])/NS,ix=Math.floor(fx),iy=Math.floor(fy),tx=fx-ix,ty=fy-iy,sx=tx*tx*(3-2*tx),sy=ty*ty*(3-2*ty);
   const a=hv(ix,iy),b=hv(ix+1,iy),c=hv(ix,iy+1),d=hv(ix+1,iy+1);return a+(b-a)*sx+(c-a)*sy+(a-b-c+d)*sx*sy};
- for(let i=0;i<o.length;i+=4){const ab=mB[i+3]/255,ae=mE[i+3]/255,al=mL[i+3]/255,ai=VU?mI[i+3]/255:0,as=mSh[i+3]/255,ag=mGl[i+3]/255;if(!(ab||ae||al||ai||as||ag)){o[i+3]=0;continue}
+ for(let i=0;i<o.length;i+=4){const ab=mB[i+3]/255,ae=mE[i+3]/255,al=mL[i+3]/255,ai=VU?mI[i+3]/255:0,as=mSh[i+3]/255,ag=mGl[i+3]/255,ak=mS[i+3]/255;if(!(ab||ae||al||ai||as||ag||ak)){o[i+3]=0;continue}
   const pn=VU?.6+.55*nz(bx+((i>>2)%cw)*bw/cw,by+Math.floor((i>>2)/cw)*bh/chh):1;
   const r0=o[i],g1=o[i+1],b0=o[i+2],l=Lum(i);let r=r0,g=g1,b=b0,keep=1;
+  if(ak){const a=ak*skinM(i,26,56)*(1-mX[i+3]/255);if(a>.002){r+=(mS[i]-r)*a;g+=(mS[i+1]-g)*a;b+=(mS[i+2]-b)*a;keep*=1-a}}
   if(ab){/* only the brow hairs (darker than the skin) take the colour, with their own light */const dk=cl3((Le-l)/(Le*.42),0,1);const a=ab*T.brow*dk;
    if(a>0){const k=Math.min(2.4,l/Ltb)*(look==="diem"?.9:1);r+=(tb[0]*k-r)*a;g+=(tb[1]*k-g)*a;b+=(tb[2]*k-b)*a;keep*=1-a}}
-  if(ae){const a=Math.min(1,ae*T.eye*pn);const k=cl3(l/Le,.35,1.12);r+=(te[0]*k-r)*a;g+=(te[1]*k-g)*a;b+=(te[2]*k-b)*a;keep*=1-a}
+  if(ae){const a=Math.min(1,ae*T.eye*pn)*skinM(i,46,92);const k=cl3(l/Le,.35,1.12);r+=(te[0]*k-r)*a;g+=(te[1]*k-g)*a;b+=(te[2]*k-b)*a;keep*=1-a}
   if(al){let a=Math.min(1,al*T.lip*pn);const q=l/Ll;const k=VU?cl3(Math.pow(q,1.25),.8,1.02):cl3(Math.pow(q,1.35),.45,1.25);/* highlights on the lip keep some of their shine; vụng: the smear past the line is as dark as the lip itself (readable at stage size) */if(!VU&&q>1.22)a*=Math.max(.45,1-(q-1.22)*1.6);
    r+=(tl[0]*k-r)*a;g+=(tl[1]*k-g)*a;b+=(tl[2]*k-b)*a;keep*=1-a}
-  if(as){const a=Math.min(.9,as);r+=(Math.min(255,te[0]*.35+235)-r)*a;g+=(Math.min(255,te[1]*.35+215)-g)*a;b+=(Math.min(255,te[2]*.35+170)-b)*a;keep*=1-a}
-  if(ag){const a=Math.min(.8,ag);r+=(255-r)*a;g+=(244-g)*a;b+=(238-b)*a;keep*=1-a}
+  if(as){const a=Math.min(.9,as)*skinM(i,46,92);r+=(Math.min(255,te[0]*.35+235)-r)*a;g+=(Math.min(255,te[1]*.35+215)-g)*a;b+=(Math.min(255,te[2]*.35+170)-b)*a;keep*=1-a}
+  if(ag){const a=Math.min(.8,ag)*(al>.35?1:0);r+=(255-r)*a*.8;g+=(236-g)*a*.8;b+=(230-b)*a*.8;keep*=1-a*.8}
   if(ai){const a=Math.min(1,ai*pn);const k=.85;r+=(tb[0]*k-r)*a;g+=(tb[1]*k-g)*a;b+=(tb[2]*k-b)*a;keep*=1-a}
   const A=1-keep;if(A<.004){o[i+3]=0;continue}/* overlay pixel so that mix(original, it, A) = the painted pixel */
   o[i]=cl3(Math.round(r0+(r-r0)/A),0,255);o[i+1]=cl3(Math.round(g1+(g-g1)/A),0,255);o[i+2]=cl3(Math.round(b0+(b-b0)/A),0,255);o[i+3]=Math.round(A*255)}
