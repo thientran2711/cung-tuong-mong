@@ -39,3 +39,6 @@ Shots (CDN img/_review/morechip-sil/, old ones wiped): fold.jpg, ipadAir.jpg, ip
 Header count "Ngọc Thanh các [plaque: group icon + N]" now sits in the same light kit chip plaque (`.kchip.j59hchip`, background #fff8ee, 2 px border, shadow) as the corner chips, so it reads on dark scenes (every place header, via j59hdrCount). Scan MORECHIP OK at 5 sizes. Shots re-uploaded to img/_review/morechip-sil/ (fold.jpg, ipadAir.jpg, ipadPro.jpg, iphone14.jpg, curl 200).
 =======
 >>>>>>> 61f334cd (review kit-ico-rank-r2 report: PASS aaa1bec1)
+
+## ROUND 4 — sha **c4cff1fc**
+Icon redrawn (Magnific gpt-2-6): man, woman, child painted with wide white gaps, cut out as 3 separate silhouettes and recomposed bottom-aligned with a 10 px gap at 192 px tall (189x192 px, grey 148) → `img/kit/unknown-ico-n.webp` (CDN, same name, overwritten). The three figures stay separate at 22/30/40 px (icon-group.png). Header total plaque already in place since d51137ff (owner-confirmed). Scan MORECHIP OK, step-ups 0, ON column 0 at 5 sizes. Shots re-uploaded (5 URLs 200).

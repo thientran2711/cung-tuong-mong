@@ -787,7 +787,7 @@
 | BATCH builder s31b (opus): fig-tag-chip-r1, morechip-fix-r1, kit-rcol-top-r1, stage-caption-r1, learn-scene-fix, opt-pic-same-r2 (+morechip-corners-r1 on PASS) + KPM_LOG clear | review/batch-s31b | MAIN s31 | session_01UV1SzhfMi68Cmn88G2Yqze | RUNNING | 17/11 13:24Z |
 | kit-ico-rank r2: co-op end card goes straight to rebirth (no Xem Bảng vàng in co-op; mode coop fix) → SẴN SÀNG KIỂM d0840f4e; coop-e2e LIVE 63/63 ×2 | review/kit-ico-rank-r2 | MAIN s32 | session_01UV1Szi6oANLyE5bWQnjMQv | READY | 17/11 14:20Z |
 <<<<<<< HEAD
-| morechip-sil: '+N' chip = grey neutral silhouette icon + number (OD 14:05Z; main draws) on top of morechip-corners-r1 a66f274c | review/morechip-sil | MAIN s32 | session_01UV1Szi57hvzWiNmX4GRXYk | SẴN SÀNG KIỂM d51137ff (r3; report dev/handover/reports/morechip-sil.md) | 17/11 14:20Z |
+| morechip-sil: '+N' chip = grey neutral silhouette icon + number (OD 14:05Z; main draws) on top of morechip-corners-r1 a66f274c | review/morechip-sil | MAIN s32 | session_01UV1Szi57hvzWiNmX4GRXYk | SẴN SÀNG KIỂM c4cff1fc (r4; report dev/handover/reports/morechip-sil.md) | 17/11 14:20Z |
 =======
 | morechip-sil: '+N' chip = grey neutral silhouette icon + number (OD 14:05Z; main draws) on top of morechip-corners-r1 a66f274c | review/morechip-sil | MAIN s32 | session_01UV1Szi57hvzWiNmX4GRXYk | SẴN SÀNG KIỂM bd3bb284 (report dev/handover/reports/morechip-sil.md) | 17/11 14:20Z |
 >>>>>>> 61f334cd (review kit-ico-rank-r2 report: PASS aaa1bec1)
