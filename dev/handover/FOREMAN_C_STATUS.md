@@ -1,5 +1,6 @@
 # FOREMAN_C_STATUS (written ONLY by Foreman C)
 FOREMAN C SESSION ROOT-4 = session_011xDdVSQC3Gf8WhM6WW38QF (opened by ROOT-3 ~08:30Z 17/11) · START_CTX ~6% (~60k of 1M; get_session reads 0, own estimate) → roll over at >= 31%, ceiling 60% · lineage depth 3/8 · own hourly wake (:32) below.
+- 08:52Z C LOOKED W6d (live before look): a26 m21 ×3 + m27–m30 ×3 OK; REDO m22 a26 ×3 (lavender ≈ m11 → blue periwinkle; same hue as W4e a18 m22, lead pins one ref in table). All workers: hold uploads until C looks.
 - 08:48Z C LOOKED W5d E1 a36 m27–m29 (8): all OK → upload; a36 faces a touch more mature in E2+.
 - 08:44Z C LOOKED W4e CT7 (17): 15 OK upload (m24 after hd halo re-cut); REDO m22-ty2 (lavender → periwinkle per table) + m02-ty3 (orange ≈ m04 → saffron marigold-gold) in CT8.
 - 08:38Z C LOOKED W5d D13 (m48-ty2/ty3 + m49 ×3 rose-beige, uploaded before look): all OK keep live → a18 m27–m52 COMPLETE. W5d told sheet-before-upload; next a36 m27–m52. show-why reviewer still running.
