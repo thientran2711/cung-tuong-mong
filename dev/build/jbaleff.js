@@ -99,6 +99,6 @@ Object.assign(BAL,{eff:{
  jts:{go:3,danhGo:1,danhGo_2:-2,bacGo:6,bacTsBirthReward:20,danhTsBirthReward:3,sungOnDone:4,danhOnDone:3,sungGo:2,sungGo_2:-2,ducGo:1,danhGo_3:-1},
  jtsb:{loyalNhin:2,loyalDap:2,thCall:3,thCall_2:-3,tsbBulNpc:3,tsbBulNpc_2:10,tsbBulNpc_3:12,tsbBulNpc_4:12,go:10,go_2:10,go_3:15,go_4:8,go_5:5,go_6:8,top:4,go_7:6,go_8:20,go_9:5,go_10:-5,go_11:-15,go_12:5,go_13:-3,evF:1,evF_2:1,evTsbBulNpc:-1,evTsbBulNpc_2:1,evGo:1,evGo_2:-1,evGo_3:-1,evGo_4:1,loyalGo:8,danhTsbBulNpc:-4,bacGo:-10,sucGo:-5,danhGo:-5,danhGo_2:-4,sucGo_2:-5,danhGo_3:-2,danhGo_4:1,danhGo_5:-1,ducGo:1,danhGo_6:1,danhGo_7:3,danhGo_8:-3,danhGo_9:-1,danhGo_10:1,sucGo_3:-5,bacFx:-20,sucTsbBulNpc:-5},
  jtwoway:{run:-2,run_2:-2,run_3:4},
- jweather:{},
+ jweather:{sucSlip:-20},
  jwhy:{f:-8,evRun:[1,0],evSpyMaidRun:1,loyalSpyMaidRun:5}
 }});
