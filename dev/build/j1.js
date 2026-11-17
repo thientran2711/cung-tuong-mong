@@ -106,9 +106,11 @@ function cl(v,a,b){return Math.max(a,Math.min(b,v))}
    opening a panel, an exam / minigame whose own play decides) is never rolled. */
 function roll(o){return Math.random()*100<Math.min(o,BAL.odds.hi)}
 function oddsCl(o){return cl(o,BAL.odds.lo,BAL.odds.hi)}
-function oddsSure(a){return !!(a&&(a.fix||a.open||a.adShop||a.exam||a.aaMG))}
+/* a.inner = the act's OWN inner roll decides (a cure, a check-up, a side risk): roll() caps that inner roll once, so the act is NOT
+   gated again at the cap and shows no false Nắm chắc; a.oi (optional) = the inner odds shown as its word (review r1 2a). */
+function oddsSure(a){return !!(a&&(a.fix||a.open||a.adShop||a.exam||a.aaMG||a.inner))}
 function oddsCapped(a){return !!a&&(a.o==null||a.o>=100)&&!oddsSure(a)}
-function oddsOf(a){const o=a.o==null?100:a.o;return o>=100?(oddsSure(a)?100:BAL.odds.hi):o}
+function oddsOf(a){if(a&&a.inner)return a.oi!=null?oddsCl(+a.oi):100;const o=a.o==null?100:a.o;return o>=100?(oddsSure(a)?100:BAL.odds.hi):o}
 function capW(){return word(BAL.odds.hi)}
 function has(t){return S.emp.traits.includes(t)}
 function mm(){return [10,0,-8,-15][S.emp.mood]}

@@ -143,7 +143,7 @@ document.addEventListener("click",ev=>{const b=ev.target.closest&&ev.target.clos
 /* ---------- Tài nghệ › Tác phẩm: one card per course (what it makes, lối learnt, practice when mastered) ---------- */
 (function(){if(typeof ktWorksHTML!=="function")return;const w0=ktWorksHTML;ktWorksHTML=function(){let h=w0.apply(this,arguments);try{const why=whyTime(BAL.tds.pracK)||(S.suc<BAL.tds.pracMin?`Sức dưới ${BAL.tds.pracMin}`:"");
   const C=VIR.filter(V=>TDS_KIND[V.k]).map(V=>{const k=V.k,l=virLv(S,k),kind=TDS_KIND[k],K=WK[kind],kn=rcpKnown()[kind].length;
-   const acts=l>=5?[pbtn(`data-tdsprac="${k}"${capAt(BAL.tds.pracK,{suc:-(BAL.tds.pracSuc)})}`,"Tự học, làm đồ",`${capW()} · tốn: Sức -${BAL.tds.pracSuc}, ${BAL.tds.pracK} khắc · thành: một món ${K.w.toLowerCase()}, ${wkOddsTxt(S,kind,0)}`,why)]:[];
+   const acts=l>=5?[pbtn(`data-tdsprac="${k}"`,"Tự học, làm đồ",`tốn: Sức -${BAL.tds.pracSuc}, ${BAL.tds.pracK} khắc · thành: một món ${K.w.toLowerCase()}, ${wkOddsTxt(S,kind,0)}`,why)]:[];
    return{kind:"wk",k,name:`${V.n} · ${V.full}`,level:l,prog:S.virp[k],need:l+2,desc:`<span class="kchip n">lối đã học ${kn}/${RCP_ST[kind].length}</span> <span class="kchip n">${K.w}${K.fin?" · "+wkFinTxt(K):""}</span> <span class="kchip g">phẩm +${wkLvQ(S,k)}</span><br>${wkOddsTxt(S,kind,0)}`,next:"",acts,img:kitSkillArt("vir",k,V.n),can:!!(acts.length&&!why)}});
   const tail=h.indexOf(`data-skill="wk-taste"`);const cards=C.map(kitSkillCard).join("");
   if(tail>0){const i=h.lastIndexOf("<div",tail);h=h.slice(0,i)+cards+h.slice(i)}else h+=cards}catch(e){console.error("tds works",e)}return h}})();

@@ -124,8 +124,8 @@ function req(road,paid){const self=road==="self";if(!paid){if(why(road))return""
 window.thyReq=req;window.thyWhy=why;window.thyCost=cost;window.thyVerdict=verdict;
 /* deck cards (Hành sự): both roads, side by side, always */
 (function(){if(typeof illCards!=="function")return;const c0=illCards;illCards=function(){const A=c0.apply(this,arguments);try{if(!off()){
-  A.push({n:"Mời thái y bắt mạch",t:`Mời ${docName()} đến tận cung xem mạch.`,c:{bac:-cost()},o:100,k:T().khPay,w:{},dom:"Sức khỏe",lock:!!why("pay"),x:xLine("pay"),go:()=>req("pay",true)});
-  A.push({n:"Sang Thái y viện xin bắt mạch",t:"Tự đi, đứng chờ thái y rảnh tay.",c:{suc:-T().sucSelf},o:100,k:T().khSelf,w:{},dom:"Sức khỏe",lock:!!why("self"),x:xLine("self"),go:()=>req("self",true)})}}catch(e){console.error(e)}return A};window.illCards=illCards})();
+  A.push({n:"Mời thái y bắt mạch",t:`Mời ${docName()} đến tận cung xem mạch.`,c:{bac:-cost()},o:100,inner:1,k:T().khPay,w:{},dom:"Sức khỏe",lock:!!why("pay"),x:xLine("pay"),go:()=>req("pay",true)});
+  A.push({n:"Sang Thái y viện xin bắt mạch",t:"Tự đi, đứng chờ thái y rảnh tay.",c:{suc:-T().sucSelf},o:100,inner:1,k:T().khSelf,w:{},dom:"Sức khỏe",lock:!!why("self"),x:xLine("self"),go:()=>req("self",true)})}}catch(e){console.error(e)}return A};window.illCards=illCards})();
 /* the physician's card (Hậu cung › Cung nhân, j15): a "Bắt mạch" group + the mạch án lines */
 window.thyCardGroup=function(){if(!S)return null;return["Bắt mạch",[pbtn(`data-cv="bm" data-ck="ty"`,"Mời thái y bắt mạch",`tốn: Bạc -${cost()} · ${T().khPay} khắc · ${xLine("pay")}`,why("pay")),
  pbtn(`data-cv="bm2" data-ck="ty"`,"Sang Thái y viện xin bắt mạch",`tốn: Sức -${T().sucSelf} · ${T().khSelf} khắc · ${xLine("self")}`,why("self"))]]};
@@ -142,7 +142,7 @@ window.thyCardLines=function(){if(!S)return[];const z=thy();const L=[];const r=z
   return c0.apply(this,arguments)};window.courtAct=courtAct})();
 /* the place Thái y viện: her own road from the physician there (she is already there: Sức only) */
 (function(){if(typeof talkOpts!=="function")return;const t0=talkOpts;talkOpts=function(p){const A=t0.apply(this,arguments);try{if(p&&p.kind==="ty"&&Array.isArray(A)&&!off())
-  A.push({n:"Xin bắt mạch",c:{suc:-T().sucSelf},o:100,x:xLine("self"),lock:!!(S.out||(S.suc||0)<20),t:(S.suc||0)<20?"Sức không đủ":"",run:()=>req("self",true)})}catch(e){console.error(e)}return A};window.talkOpts=talkOpts})();
+  A.push({n:"Xin bắt mạch",c:{suc:-T().sucSelf},o:100,inner:1,x:xLine("self"),lock:!!(S.out||(S.suc||0)<20),t:(S.suc||0)<20?"Sức không đủ":"",run:()=>req("self",true)})}catch(e){console.error(e)}return A};window.talkOpts=talkOpts})();
 
 /* ---------- 3. nausea: a hint before the physician finds it ---------- */
 (function(){if(typeof endTurn!=="function")return;const e0=endTurn;endTurn=function(){const w0=S&&!S.dead?wk():null;const r=e0.apply(this,arguments);try{
