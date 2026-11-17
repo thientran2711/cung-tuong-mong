@@ -37,6 +37,7 @@ KIT_SAMPLES.push(
 /* kit-fig2 parts (review r6): §48 kitNameRank, §49.1 kitRelRow (§50 kitEventDp is a live dialog: see dev/test/event-dp.js) */
 KIT_SAMPLES.push(
  {id:"§48",title:"kitNameRank: phẩm + tên trên hình",html:()=>`<div class="kitpg-row">${kitNameRank("Quý nhân","Khương Mạn Châu",kitRankCol(2))}${kitNameRank("Đáp ứng","Trịnh Ngọc Hành",kitRankCol(0))}${kitNameRank("","Hoàng thượng",KIT_ROLE.emp)}</div>`},
+ {id:"§48.6",title:"kitRankName: HAI dạng duy nhất — XẾP CHỒNG (danh hiệu / phẩm / tên) và MỘT DÒNG (phẩm tên, chỉ dòng kết quả + Tuần lục); phẩm không bao giờ hiện hai lần",html:()=>`<div class="kitpg-row">${kitRankName(null,{parts:{rank:"Hoàng hậu",name:"Hoàng hậu Lý Ngưng Sương",col:kitRankCol(7)}})}${kitRankName(null,{parts:{rank:"Quý nhân",name:"Khương Mạn Châu",col:kitRankCol(2)}})}${kitRankName(null,{parts:{rank:"Hoàng thượng",name:"Hoàng thượng",col:KIT_ROLE.emp}})}</div><div class="kitpg-row" style="padding:6px 10px;background:#fbf3e2">${kitRankName(null,{form:"line",parts:{rank:"Hoàng hậu",name:"Hoàng hậu Lý Ngưng Sương",col:kitRankCol(7)}})} · ${kitRankName(null,{form:"line",parts:{rank:"Quý nhân",name:"Khương Mạn Châu",col:kitRankCol(2)}})}</div>`},
  {id:"§1.3",title:"Bảng màu phẩm DUY NHẤT (RCOL · MRCOL · ERCOL · lãnh cung): màu gốc tươi + màu chữ trên giấy (kitToneOf) + hàng chọn",html:()=>{
   const S3=[["Đáp ứng",RCOL[0]],["Thường tại",RCOL[1]],["Quý nhân",RCOL[2]],["Tần",RCOL[3]],["Phi",RCOL[4]],["Quý phi",RCOL[5]],["Hoàng quý phi",RCOL[6]],["Hoàng hậu",RCOL[7]],["Lãnh cung",RCOL_COLD],
    ["Thô sử",MRCOL[0]],["Cung nữ",MRCOL[1]],["Đại cung nữ",MRCOL[2]],["Chưởng sự cô cô",MRCOL[3]],["Nữ quan",MRCOL[4]],["Tiểu thái giám",ERCOL[0]],["Thái giám",ERCOL[1]],["Thủ lĩnh",ERCOL[2]],["Tổng quản",ERCOL[3]]];
@@ -65,7 +66,7 @@ function kitPgKem(){let L=[];try{L=liveRivals(true).slice(0,3)}catch(e){}if(!L.l
 KIT_SAMPLES.push(
  {id:"§53",title:"kitChip tones · kitRisk",html:()=>`<p>${kitChip("Sủng",3)}${kitChip("Danh",-2)}${kitChip("Thường","n")}${kitChip("có rủi ro","w")}${kitChip("đủ Sức","ok")}${kitChip("thiếu bạc","no")}</p><p>${kitRisk("an toàn")}${kitRisk("có rủi ro")}${kitRisk("liều")}</p>`},
  {id:"§53",title:"Event option in cost mode: Tốn + kitHintRow + kitRisk (no Tốn when free)",html:kitPgEvOpts},
- {id:"§53",title:"kitResultSeal: THÀNH · HỎNG · KẾT QUẢ",html:kitPgSeals},
+ {id:"§53",title:"kitResultSeal: THÀNH · BẠI · KẾT QUẢ",html:kitPgSeals},
  {id:"§53",title:"kitKemRow (tap for names)",html:kitPgKem});
 /* §27.1 the Tuần lục cover title picture (review/book-title): the real cover label slot of kitBook, at a fixed small size */
 KIT_SAMPLES.push({id:"§27.1",title:"KBK_TITLE_IMG: tên sổ viết tay trên nhãn bìa (ấn Trân nữ)",html:()=>typeof KBK_TITLE_IMG==="undefined"?"":
