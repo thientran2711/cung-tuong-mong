@@ -804,3 +804,4 @@
 | REVIEW morechip-sil r2 of d51137ff (sonnet SMALL UI; + count math + dark-scene name) | review/morechip-sil-r2 | MAIN s33 | session_01UV1SzmEh1P3ynxAm3BMz7L | RUNNING | 17/11 15:04Z |
 | REVIEW pcard-facts r1 of 87c73de4 (sonnet SMALL UI) | review/pcard-facts-r1 | MAIN s33 | session_01UV1SzgsZeZ5eQhPhzEf88x | RUNNING | 17/11 15:06Z |
 | one-core-dup3-land LIVE ce29592e1 (main abe056c3 → ce29592e1; rollback abe056c3) | review/one-core-dup3-land | B | session_01N1tNP33c2NR3dwmam25S4X | LIVE | 17/11 15:12Z |
+| one-core jkc wave (kap help vs rules + text family + frozen odb/hst/oan; opus; brief briefs/one-core-jkc-wave.md) | review/one-core-jkc | B | (opening) | RUNNING | 17/11 15:20Z |
