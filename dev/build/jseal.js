@@ -65,7 +65,7 @@ header.hud.kseal-pad>.kseal-hud{top:calc(50% - var(--kseal) / 2)}
    seal all fit */
 
 `;document.head.appendChild(st)})();
-if(typeof renderHUD==="function"){const r0=renderHUD;renderHUD=function(){const r=r0.apply(this,arguments);try{kitSealHud()}catch(e){}return r}}
+if(typeof renderHUD==="function"){const r0=renderHUD;renderHUD=function(){const r=r0.apply(this,arguments);try{(window.renderAfter||((k,f)=>f()))("kitSealHud",kitSealHud)/* oi-render: reads the bar's boxes — once at the end of a render (jlag2) */}catch(e){}return r}}
 try{kitSealHud()}catch(e){}
 /* ================= §39.1 THE SEAL ON EVERY EVENT FRAME (owner 15/11 ~20:15Z, review/cal-plus) =================
    Every event dialog (#modal showing an event of the queue: kitEventDp person dialogs, the 32.7 person dialog, place-event frames, event stages,

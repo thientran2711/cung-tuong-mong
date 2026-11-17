@@ -12,7 +12,7 @@ const {chromium}=require('playwright');const [,,URL,NM,ORIG]=process.argv;const 
  await p.evaluate(o=>{localStorage.clear();SLOT=4;document.getElementById('title').hidden=true;if(o)window.__forceOrigin=o;window.__nlInner=1;start();window.__nlInner=0;window.__bot=1;quiet=false;Q.length=0;try{deal()}catch(e){}render()},ORIG||'');
  const agg={moments:0,buoi:{},menIn:0,offIn:0,court:0,courtOk:0,bad:{},ex:[]};
  for(let i=0;i<N;i++){
-  await p.evaluate(()=>{const clear=()=>{const ov=document.getElementById('ov');for(let j=0;j<5&&ov&&!ov.hidden;j++){const bs=ov.querySelectorAll('button');if(!bs.length)break;bs[bs.length-1].click()}let n=0;while(Q.length&&n++<30){const m=Q[0];if(m.opts&&m.opts.length){try{chooseM(m.opts.length-1)}catch(e){Q.shift()}}else{try{closeModal()}catch(e){Q.shift()}}}};clear();
+  await p.evaluate(()=>{const clear=()=>{const ov=document.getElementById('ov');for(let j=0;j<5&&ov&&!ov.hidden;j++){const bs=ov.querySelectorAll('button');if(!bs.length)break;bs[bs.length-1].click()}let n=0;while(Q.length&&n++<30){const m=Q[0];if(m.opts&&m.opts.length){try{chooseM((L=>L.length?L[L.length-1]:0)(m.opts.map((c,i)=>c.off?-1:i).filter(i=>i>=0)))}catch(e){Q.shift()}}else{try{closeModal()}catch(e){Q.shift()}}}};clear();
    const r=Math.random();if(r<.6){try{nextBuoi()}catch(e){}}else{const L=places().map(x=>x.k).filter(k=>k!==S.place&&accessOf(S,k).ok);if(L.length)try{goTo(L[Math.floor(Math.random()*L.length)])}catch(e){}}clear()});
   await p.waitForTimeout(200);
   const m=await p.evaluate(()=>{if(S.dead)return{dead:1};const R=S.roster;if(!R||R.key!==j95key())return{norec:1};const bad=[];const B=S.buoi||0,kh=j95kh();const OUT=J95OUT_;
@@ -25,7 +25,7 @@ const {chromium}=require('playwright');const [,,URL,NM,ORIG]=process.argv;const 
     const k=e[kh][0];if(k===OUT)continue;menIn++;
     const sec=j95z().sec.some(s=>s.b===x.id&&s.wk===wk()&&s.c===R.c);/* a planned secret meeting (j95 sec: the record carries its reason) */
     if((!y||!y.w)&&!sec)bad.push("man inside without a reason:"+x.rw+"@"+k);if(sec)agg_sec++;
-    else if(y.w!=="stray"&&W2[x.id]!==k)bad.push("man not at his set place:"+x.rw+":"+y.w+" rec "+k+" sched "+W2[x.id]);
+    else if(y&&y.w!=="stray"&&W2[x.id]!==k)bad.push("man not at his set place:"+x.rw+":"+y.w+" rec "+k+" sched "+W2[x.id]);
     if(B===B4L&&y&&(y.w==="duty"||y.w==="order"||y.w==="visit"||y.w==="fest")&&x.rw!=="thị vệ")bad.push("man inside at night:"+x.rw+":"+y.w)}
    for(const id in W2){const x=manById(id);if(x&&x.alive&&(!MY[id]||MY[id].w!=="stray")&&W2[id]!==MW[id])bad.push("schedule not deterministic:"+x.rw+" rec "+MW[id]+"/"+(MY[id]&&MY[id].w)+" sched "+W2[id]+"/"+(Y2[id]&&Y2[id].w)+" b"+B+" key "+R.key)}
    /* officials */let offIn=0;for(const id in R.P){if(id.indexOf("q:")!==0)continue;const c=id.slice(2);if(!MI[c])bad.push("official in record, not on roster:"+c);else if(R.P[id][kh][0]!==MI[c])bad.push("official not at his set place:"+c);if(R.P[id][kh][0]!==OUT)offIn++}

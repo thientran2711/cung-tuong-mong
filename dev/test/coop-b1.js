@@ -120,5 +120,9 @@ const seenTxt=o=>o.p.evaluate(()=>JSON.stringify(Q.map(q=>q.t+' '+(q.h||'')))+((
   ok(JSON.stringify(fb&&fb.inv)===JSON.stringify(oa.inv),'9 B\'s entry bag == A\'s own bag',[fb&&fb.inv,oa.inv]);
   ok(ob.kids.length===own0.kids.length-2,'9 B: two children fewer after the week (taken + drowned)',[own0.kids,ob.kids])}
  for(const o of [A,B])ok(!o.errs.length,o.name+': no page errors',o.errs.slice(0,5));
+ /* item ledger (review/item-ledger-solo): pieces the live path took from her chest are recorded, never netted into a store copy (one piece, one place) */
+ if(await B.p.evaluate(()=>typeof ilS==='function')){for(const [n,P] of [['A',A],['B',B]]){const L=await P.p.evaluate(()=>{try{ilCensus()}catch(e){}const I=ilS();return{net:I.net,coop:I.log.filter(l=>/hảo hữu/.test(l[5])).map(l=>l[2]+':'+l[5]).slice(-6)}});
+   ok(L.net===0,n+' ledger: no net after the co-op item acts',L)}
+  /* a piece taken as "lost" stays in her Đồ thất lạc case (located); burnt / handed-over ones are logged "hảo hữu …" — either way never netted */}
  const bad=res.filter(r=>!r[0]);console.log(`\n${res.length-bad.length}/${res.length} passed`);fs.writeFileSync(OUT+'/result.txt',res.map(r=>(r[0]?'ok  ':'FAIL')+' '+r[1]).join('\n')+'\n');
  await b.close();process.exit(bad.length?1:0)})().catch(e=>{console.error(e);process.exit(2)});

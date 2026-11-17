@@ -141,10 +141,14 @@ async function nightGap(A,B){const w0=(await C(A)).week;await clear(A);await cle
    const d0={};rivals.filter(v=>!v.coop).forEach(v=>d0[v.id]=v.duc||0);return{ev:rivals.filter(v=>!v.coop).reduce((a,v)=>a+(v.ev||0),0),d0,maids:S.staff.filter(x=>x.role==='maid').length,srv:!!(S.srv&&!S.srv.risen),inC:consorts().includes(S),rank:S.rank}});
   mlA0=await A.p.evaluate(()=>{window.__mlN={};const d0={};rivals.filter(v=>!v.coop).forEach(v=>d0[v.id]=v.duc||0);return{ev:rivals.filter(v=>!v.coop).reduce((a,v)=>a+(v.ev||0),0),d0}})}
  /* 3 three weeks */
+ const agB0=await B.p.evaluate(()=>window.AG?AG.stat.tick:-1);
  for(let w=0;w<3;w++){const wk=(await C(A)).week;
   await weekBoth(A,B,w);
   for(const o of [A,B]){const r=await untilC(o,x=>__co().week===x+1,wk,90000);ok(r,`week ${w+1}: ${o.name} advanced`,r?undefined:await o.p.evaluate(()=>({co:__co(),sent:COOPW.sent,pend:COOPW.pend,pendBuoi:!!COOPW.pendBuoi,bend:COOPW.bend,buoi:S.buoi,Q:Q.map(m=>(m.pid||'')+':'+String(m.t||'').slice(0,30)),mg:!!S.mg,tm:S.toMorning,stale:window.__nightStale,modal:(document.getElementById('modal')||{}).hidden,tr:COOPW.tr.slice(-20)})))}
   await clear(A);await clear(B);await same('after week '+(w+1))}
+ /* NPC agent loop (jagent AG1, host-only): the host runs one tick per buổi, the guest never runs it (the world is the host's) */
+ {const g=o=>o.p.evaluate(()=>({has:typeof agOn==='function',on:typeof agOn==='function'&&agOn(),tick:window.AG?AG.stat.tick:-1}));const ha=await g(A),hb=await g(B);
+  ok(ha.has&&ha.tick>0,'agent loop: the host ticks',ha);ok(hb.has&&!hb.on&&hb.tick===agB0,'agent loop: the guest never runs agTick',{...hb,before:agB0})}
  await shot(A,'07-after3');await shot(B,'07-after3');
  if(ML){const b1=await B.p.evaluate(()=>({hit:window.__mlHit,N:window.__mlN,ev:rivals.filter(v=>!v.coop).reduce((a,v)=>a+(v.ev||0),0),maids:S.staff.filter(x=>x.role==='maid').length,month:S.month,calls:window.__mlCalls,feud:BAL.mline.feud}));
   const a1=await A.p.evaluate(()=>({N:window.__mlN,ev:rivals.filter(v=>!v.coop).reduce((a,v)=>a+(v.ev||0),0),duc:Object.fromEntries(rivals.filter(v=>!v.coop).map(v=>[v.id,v.duc||0]))}));
@@ -162,7 +166,10 @@ async function nightGap(A,B){const w0=(await C(A)).week;await clear(A);await cle
  const wkF=(await C(A)).week;
  await B.page();await B.p.goto(BASE+'?room='+code,DCL);await B.p.waitForTimeout(3000);await tapText(B,/^Vào phòng|^Tiếp tục/,3000);
  ok(await until(B,x=>__co().seat==='b'&&__co().week===x&&!__co().frozen,wkF,40000),'B back in same seat and week');
- ok(await until(A,()=>!__co().frozen,null,20000),'A resumes');await clear(A);await clear(B);await same('after rejoin');await shot(B,'09-rejoined');
+ ok(await until(A,()=>!__co().frozen,null,20000),'A resumes');await clear(A);await clear(B);await same('after rejoin');
+ /* review/suc-khoe-fix (owner CO-OP FIRST OD:L1447): NPC health is host-computed; the guest shows the host's value (Sức khỏe, Sức tối đa, scars) */
+ {const hv=async o=>o.p.evaluate(()=>typeof khOf!=="function"?null:rivals.filter(v=>!v.coop&&v.alive).map(v=>[v.name,khOf(v),sucCap(v),v.khScar||0]).sort().join("|"));
+  await clear(A);await clear(B);const ha=await hv(A),hb=await hv(B);ok(ha!=null&&ha===hb,'NPC Sức khỏe / Sức tối đa: guest = host',ha===hb?undefined:[ha&&ha.slice(0,200),hb&&hb.slice(0,200)])}await shot(B,'09-rejoined');
  /* 5 B dies → normal rebirth choice → new person in the same world */
  const before=await B.p.evaluate(()=>({n:S.name,era:S.emp.era}));
  if(RECON){await netDown(A);await sleep(300)}/* her rebirth's `state` broadcast reaches nobody on the host: it must catch up from the room snapshot */
