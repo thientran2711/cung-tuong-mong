@@ -66,3 +66,4 @@ Why this order: face-sharp (§71) and tutorial (§72) were already registered by
 - (16/11, kit keeper 2) §81 = SCENE-END BUTTON (kitSceneEnd / kitSceneEndLabel, j93, review/kit-keeper-2). Next free: §82.
 - (16/11, title-tag) §82 = TITLE SYSTEM PARTS (jtitle.js, review/title-tag, on main).
 - (16/11, anim-pace-r1) §83 = ONE ANIMATION PACE (BAL.pace / kitPace / --pace, review/anim-pace; renumbered from a clash with title-tag's §82). Next free: §84.
+- (17/11, kit-ico-rank) §86 = THE RANKED LIST (kitRankList / kitRankRow / kitRankHead / kitRankFoot, jkrank.js, review/kit-ico-rank). Next free: §87.

@@ -3558,14 +3558,20 @@ Replaces j93 piece 1 (kitFlipTablet / kitFlipNote: muted while `flip()` runs). P
   page time, cards inside the floor, picked card on screen, chip never over it, 22 + 2 cards, reduced motion, old save, page errors).
 
 ## 59. PLACEHOLDER PICTURES · KIT_PH · kitPhTone (owner 15/11 ~18:45Z, review/placeholder-pics) — `dev/build/jph.js` (last module)
-Four generic palace still-lifes (Magnific gpt-2-6, no people, no faces) stand in for every EVENT or ACT that has no picture of its own, so the
+Generic palace still-lifes (Magnific gpt-2-6, no people, no faces) stand in for every EVENT or ACT that has no picture of its own, so the
 owner recognises "this one still lacks its picture" in play. They are deliberately emblematic (no scene, no people) so they never look like a real picture.
-| file | size | used for |
+**ONE SET PER REAL ORIENTATION AND SIZE** (owner OD:L1343 7.3 / OD:L1439; K-ICO-2, review/kit-ico-rank; art Foreman C, 2x the slot), each in light + dark:
+| set | files `img/ph-<o>-<tone>-<size>.webp` | slots (KIT_SIZE.pic §84) |
 |---|---|---|
-| `img/ph-event-light.webp` | 640x480 (as dialog banners `ev-<key>`) | event dialog, normal / positive tone: closed folding screen + sealed scroll, soft daylight |
-| `img/ph-event-dark-v2.webp` | 640x480 | event dialog, negative / scheming tone: same still-life in a gloomy hall on an overcast day — heavy shadow, cold muted slate/grey-green (owner: dark = gloomy mood, NOT night) |
-| `img/ph-act-light.webp` | 384x506 (as act pictures `act-<key>`) | act card, normal tone: blank round fan + lacquer box + jade hairpin, daylight |
-| `img/ph-act-dark-v2.webp` | 384x506 | act card, scheming / harmful tone: same objects in cold grey gloom, box ajar, vial |
+| portrait 3:4 | `ph-p-{light,dark}-{ps,pm,pl}` 168x224 · 240x320 · 324x432 | PS 84x112 · PM 120x160 · PL 162x216 (act cards, person-less frame pictures, 3:4 buttons) |
+| landscape 2:1 | `ph-l-{light,dark}-{ls,lm,ll}` 384x192 · 600x280 · full | LS 192x96 · LM 300x140 · LL full width; the narrow strips NS / NM crop the same set |
+| wide ~4.3:1 | `ph-w-{light,dark}-ll` 1720x400 | long strips (aspect > 3.8 and width >= 400: NL, the VIỆC DÀI top picture) |
+| square 1:1 | `ph-s-{light,dark}-{s56,s64,s72}` | Q56 · Q64 · Q72 buttons and thumbnails |
+- **ONE rule picks the file** (`kitPhPick(w,h,tone)` in jph.js): orientation from the slot's real aspect ratio (< .9 portrait, <= 1.15 square, else landscape / wide), size from its real
+  width (breakpoints = midpoints of the KIT_SIZE.pic widths, table `KIT_PH.sz`). The wraps (`kitEvArt`, `kitActArt`, jopic) hand out the LARGEST file of the orientation; `kitPhFit(root)` then
+  swaps every `<img src*="/ph-">` for the file of the slot it really sits in (on add through one MutationObserver, when a hidden slot gets a box through one IntersectionObserver, on resize).
+  Nobody names a ph file by hand; a new slot size needs no code, only a KIT_SIZE.pic entry and its art. Scan test: `node dev/test/ico-ph.js <url> <outdir>` (every visible placeholder = the file `kitPhPick` gives for its own slot).
+- The old pictures `ph-event-*` / `ph-act-*` are no longer referenced (they stay on the CDN, unused).
 - **Tone rule (`kitPhTone(text,{cat,fam})`)**: DARK when the act category is `hai-nguoi` / `muu-ke`, or the event family (j68) is `rumor` / `myst`,
   or the id + title + first sentence of the body (event) / the act name (act) match `KIT_PH_NEG` (harm, poison, framing, scheming, spying, rumours, bribery, theft,
   punishment, jealousy/rivalry, quarrels, resentment, cold palace, demotion, crime, illness, death…); otherwise LIGHT. Tone, never time of day.
@@ -3902,9 +3908,9 @@ ONE vertical column of small SQUARE kit icon buttons (rounded corners 8 px, the 
 (`#sc-t`), never over a face (left gutter only: 44 px buttons = the minimum tap target, on every screen height, 6 px apart). Kit look: card paper,
 gold hairline, inner hair ring, soft shadow, painted icon; a kit seal-red dot (the only round part: it is a dot, not a button) = something new.
 SHAPE RULE (owner 16/11 15:05Z, "game của mình đa số các nút là hình vuông hoặc chữ nhật … đừng làm hình tròn"): NO icon button in the game is round. Every icon button is a rounded-corner square (radius 8 px, like `.kit-x`) or a rectangle; `border-radius:50%` is only for dots, avatars/medallions, seals, sliders' thumbs and decoration, never for something you tap. New round tap target = FAIL.
-- Order: (1) **Lịch tháng** `img/kit/mo-calendar.webp` → `kitMonthCalOpen()` (§58; the desk calendar in her room's corner is retired: one place).
+- Order: (1) **Lịch tháng** `img/kit/ico-cal.webp` (K-ICO-1; `mo-calendar.webp` stays the 290x420 page-flip picture of the calendar panel) → `kitMonthCalOpen()` (§58; the desk calendar in her room's corner is retired: one place).
   (2) **Chat** (co-op only) — added by review/coop-chat through the API, `order:20`, icon `img/kit/ico-chat.webp`.
-  (3) **Mục tiêu chương** `img/kit/mo-edict-closed.webp` → `kitGoalDetail()` (§72.3); dot while the chapter goal / step changed since she
+  (3) **Mục tiêu chương** `img/kit/ico-goal.webp` (K-ICO-1; `mo-edict-closed.webp` stays the wide scroll of the goal flip) → `kitGoalDetail()` (§72.3); dot while the chapter goal / step changed since she
   last opened it (`S.goalSeen`, optional, old saves fine). It REPLACES the goal strip (§72.2): no strip on the stage, none on top of Hành sự.
 - API: `kitStageRail.add({id, icon, title, onTap, badge:()=>bool, when:()=>bool, order})` · `kitStageRail.remove(id)` · `kitStageRail.paint()`.
   Re-drawn after every `renderStage` / `render` and on resize. Nobody draws another floating stage button; new ones go into the rail.
@@ -3923,7 +3929,7 @@ rail button + (optional) activity animation + tap → a kit info panel with the 
   JS timer; off under reduced motion / Hiệu ứng Gọn via `reducedMotion()` — static glyph then); done = still, green; badge = the seal-red dot (needs her).
   No @media (KIT §0). While no game is on screen the rail items with `onTitle` sit in a fixed bottom-left dock (`.krail.kstdock`; hidden behind dialogs / the book).
 - Panel: `kitPanel({kind:"info",look:1,…})`; the only options are real actions (e.g. "Tạm ngưng / Thỉnh tiếp"); closing = ✕ / tap outside / Esc, never "Đã hiểu".
-- PLACEHOLDER GLYPHS (text ↓ ✓ ⟳) until Foreman C paints the icons: ART REQUEST: download icon, update icon (then `icon:"img/kit/….webp"`, no code change elsewhere).
+- PAINTED ICONS (K-ICO-3, review/kit-ico-rank): `dl` = `img/kit/ico-download.webp`, `upd` = `img/kit/ico-update.webp` via `icon:` (a text `glyph` is only the fallback for a status with no painted icon). busy = the painted icon bobs (same CSS-only motion), done = still with a green kit border, badge = the seal-red dot.
 - Users: `dl` (Thỉnh tranh nhân vật, jload; own info panel) · `upd` (Có bản mới, swreg; `onTap` opens its own card §35.2). NOT status icons: co-op buổi clock `#kctm` + friend chip `#kctmf`
   (jcooptimer; the countdown must stay readable — owner/coordinator ruling 16/11).
 - Sample: kit page §77.1. Test: `node dev/test/status-icon.js <url> <outdir> [WxH,...]` (idle → none; busy; paused dot; done ✓ then gone; panel ✕ / Esc / no "Đã hiểu";
@@ -4062,3 +4068,11 @@ Replaces §34.1b (kitLeather frame on the Dư đồ), §34.1d chip look of `.msp
 - **85.4 One info line**: the dark chip `.msil` is GONE everywhere (`silChip`, `k61SilChip`, `kpmSil` return ""); the text row is the only info line and is shown on every device (Fold included, it was hidden under `.kv1`).
 - **85.5 Overlap test**: `mapFit` (j38) tests every place as ONE box (`.mlab` + `.mmeta` union), cap fit+3.5; floors: iPad 1.75, Fold ≈2.5 (zoom steps unchanged). Clipped labels at the pan edge fade out (14 px mask) except in the palace detail.
 - Test: `node dev/test/map-frame-kit.js <url> <shotdir> [WxH,…]` (no .msil, slip present, 0 overlaps at default/+1/+2 zoom, tools above the map, palace detail). Kit sample §85.
+
+## 86. kitRankList · kitRankRow · kitRankHead · kitRankFoot · THE ranked list (KIT REQUEST A + B of review/rank-port-r2; kit keeper, review/kit-ico-rank) — `dev/build/jkrank.js` (before jrank)
+ONE list for every ranking ("place · face · name · numbers · score": the Bảng vàng "Kiếp" and "Người chơi" boards, any later top-N). Never a private row.
+- `kitRankRow({rank, face, name | nameH, you, sub, cols:[a,b], line, score, unit, mine, cls})` — place number (top 3 gold numeral) · kit face (`mdH(…,"sm")`) · name + the kit "Ta" chip (`kitChip(you,"n")`, only on `mine`) with a small second line `sub` · two value columns · score (number + small unit). `mine` = own-row highlight (cream-gold, seal-red bar at the left).
+- `kitRankHead({rank, name, cols:[a,b], unit})` — the header row (aria-hidden; hidden on the one-page layout). `kitRankList({head, rows:[row html]})` — the frame (cream card, gold hairline, rows split by the kit hair).
+- `kitRankFoot({label, row, note, btns})` — the own-life strip under a list: small label line ("Ta trên bảng · hạng N trên M"), ONE `kitRankRow` (mine), a small queue note, then a button row (kit `.kbtn`, wraps; shares the width on kv1).
+- Layout reads `html.kv1` (one page: the two columns fold into the second line `line`, header hidden) / `html.kv2` (spread: all columns). No `@media` (§0). Classes `krl-*` belong to this part only.
+- Users: jrank (Bảng vàng, both tabs + the own-life footer). Podium entries (`kpodCol`, §26.1) take optional `fig` / `face` / `nameH` / `you` so a board can feed it without a person object. Sample: kit page §86. Test: `node dev/test/rank-e2e.js` (list rows + own row + footer).
