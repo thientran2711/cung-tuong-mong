@@ -1,5 +1,5 @@
 # FOREMAN_C_STATUS (written ONLY by Foreman C)
-NEXT FOREMAN C SESSION (ART side, C account): ROOT-8 = (being opened by ROOT-7 ~17:35Z 17/11, depth 1; id filled below). ROOT-7 stops on 'ROOT-8 took over'.
+NEXT FOREMAN C SESSION (ART side, C account): ROOT-8 = session_011xDdVRxwG5P4aVZdE26CMn (opened by ROOT-7 17:33Z 17/11, depth 1). ROOT-7 stops on "ROOT-8 took over".
 ## HANDOVER (Foreman C ROOT-7 session_011xDdVSNJBjnSLg7fhmeVbx → ROOT-8, ~17:35Z 17/11)
 Why: context 34.5% (used_tokens 345k; START ~7% → limit 32%; images). Depth 0 → ROOT-8 depth 1.
 OWNER talks in this chat about art. Her art lines today 16:45Z–17:28Z are verbatim in the ROOT-7 log lines below (REQUEST main s34: log them in OD + canon art-costumes.md — not yet done by main).
