@@ -121,7 +121,6 @@ function monthTick(){let ev="";
   if(S.month===1)ev+=festival("Yến tiệc đầu xuân","sac","Sắc và điệu múa");
   if(S.month===7)ev+=festival("Thi tài ngày Thất tịch","tai","Tiếng đàn, lời thơ");
   return ev}
-function curtain(){const c=$("curtain");c.textContent=`${TUAN[S.tuan][0].toUpperCase()+TUAN[S.tuan].slice(1)} · ${BUOI[S.buoi||0]} · tháng ${S.month}, năm ${S.year}`;c.classList.add("on");setTimeout(()=>c.classList.remove("on"),650)}
 
 /* endings */
 function emperorDies(ev){if(ev)log(ev);let h=S.heir&&S.heir.k.alive?S.heir:null;
@@ -137,8 +136,4 @@ function emperorDies(ev){if(ev)log(ev);let h=S.heir&&S.heir.k.alive?S.heir:null;
   return die(`${pre}Tân Thái hậu ${v.name} xét lại chuyện cũ (khả năng: ${chanceLo(o)}), ban lụa trắng, ép ngươi tuẫn táng theo tiên đế`)}
 function record(fate){const p=store.get("cung-kiep")||[];const e={n:S.name,o:S.origin.n,r:RANKS[S.rank].n,age:S.age,f:fate+(S.st.tag?" · "+S.st.tag:"")};
   if(S.recorded&&p.length)p[0]=e;else p.unshift(e);S.recorded=true;store.set("cung-kiep",p.slice(0,12))}
-function pastHTML(){const p=store.get("cung-kiep")||[];return p.length?`<h3>Các kiếp trước</h3><div class="past">`+p.map((k,i)=>`Kiếp ${p.length-i}: ${k.n}, ${k.o}, ${k.r}, ${k.age} tuổi. ${k.f}.`).join("<br>")+`</div>`:""}
-function over(h,t,fate){S.dead=true;record(fate);const ms=mySons().length,md=myDaus().length;
-  Q=[{t:h,cls:"end",who:pMe(),h:`<p>${t}</p><p class="past">${S.name} · ${S.origin.n} · ${RANKS[S.rank].n} · ${S.age} tuổi · ${ms} hoàng tử, ${md} công chúa · ${S.year} năm trong cung${S.st.tag?` · ${S.st.tag}`:""}</p>`,btn:"Đầu thai kiếp sau",onClose:start}];
-  showModal();render()}
 function die(why){over("Hồng nhan bạc mệnh",why+".",why)}

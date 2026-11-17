@@ -100,7 +100,7 @@ for(const f of ORDER){const src=fs.readFileSync(path.join(B,f),'utf8');const T=l
    for(const [re,paths] of CORE_TEXT){const m=t.s.match(re);if(!m)continue;const nums=m.slice(1).filter(x=>x!=null).map(Number);
     const hit=!paths||paths.split(',').some(p=>nums.includes(coreVal(p)));
     if(hit)fail.push(`${f}:${t.line} text types a core number (print BAL.${paths||'pay'}): «${t.s.slice(0,110)}»`)}}}
- {const J=joinCode(T);for(const k in JOIN_PAT){const m=J.match(JOIN_PAT[k]);if(m)m.forEach(x=>{const v=x.replace(/\s+/g,'');if(k==='amt'&&/[(,][+-]?0\)$/.test(v))return;add(k,v.length>90?v.slice(0,90)+'…':v)})}}
+ {const J=joinCode(T);for(const k in JOIN_PAT){const m=J.match(JOIN_PAT[k]);if(m)m.forEach(x=>{const v=x.replace(/\s+/g,'');if(k==='amt'&&/[(,][+-]?0\)$/.test(v))return;if(k==='ladder'&&[...v.matchAll(/(?:>=|>|<=|<)([+-]?[\d.]+)\?/g)].every(q=>+q[1]===0))return;/* a sign test (n>0 / n<0), not a table */add(k,v.length>90?v.slice(0,90)+'…':v)})}}
  now[f]=per;
  for(const [mf,name] of MIRRORS)if(mf===f){const m=src.match(new RegExp('(?:const |,)'+name+'\\s*=\\s*(\\[[^\\]]*\\]|\\{[^}]*\\})'));if(!m)fail.push(`${f}: mirror ${name} not found`);else if(/\d/.test(m[1].replace(/\/\*[\s\S]*?\*\//g,'')))fail.push(`${f}: mirror ${name} typed with numbers (${m[1].slice(0,60)}); it must be filled from BAL`)}
 }
@@ -108,7 +108,8 @@ for(const f of ORDER){const src=fs.readFileSync(path.join(B,f),'utf8');const T=l
    (a) a rule function defined at the top level of two modules (the later one silently replaces the earlier, whose numbers stay in the
        file as a dead second copy: fillStaff j10 + j29 …) — fails unless named in SHADOW_OK (pure helpers with no rule number);
    (b) a typed numeric table outside BAL that equals a table typed inside a BAL body (a copy of the rulebook: [[1,1],[2,1],…]). */
-const SHADOW_OK=new Set((process.env.OC_SHADOW_OK||'').split(',').filter(Boolean));
+/* OWNED: a second copy another branch is removing (name → branch); drop the entry when that branch lands */
+const SHADOW_OK=new Set(['fillStaff'/* j10 + j29: servants per rank, owned by review/staff-root (capOf → BAL.promo.cap) */,...(process.env.OC_SHADOW_OK||'').split(',').filter(Boolean)]);
 const topFns={},balLits=new Map(),outLits=[];
 const LIT=/\[\s*(?:\[[\d\s,.+-]*\]\s*,\s*){1,}\[[\d\s,.+-]*\]\s*\]|\[\s*(?:[+-]?\d+(?:\.\d+)?\s*,\s*){3,}[+-]?\d+(?:\.\d+)?\s*\]/g;
 for(const f of ORDER){const src=fs.readFileSync(path.join(B,f),'utf8');const J=joinCode(lex(src));let d=0;

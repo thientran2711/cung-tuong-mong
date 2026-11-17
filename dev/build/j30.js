@@ -8,9 +8,6 @@ function seatTxt(r){return SEATCAP[r]==null?"":`${RANKS[r].n} ${holders(r).lengt
 (function(){const q0=promoReqP;promoReqP=function(p){const L=q0.apply(this,arguments);const r=rkOf(p);if(r<6&&!p.out&&SEATCAP[r+1]!=null){const free=seatFree(r+1);L.push([free||!!window.__seatPick,free?`Ghế ${seatTxt(r+1)}: còn chỗ`:`Chờ ghế trống (${seatTxt(r+1)})`])}return L}})();
 /* when seats are free and several qualify, the Emperor weighs them (sủng, Thái hậu, sons, danh, Hoàng hậu's word); her included */
 function seatPickW(p){const q=queenP();return seatW(p)+p.sung/2+(q&&q!==p?aff(q,p)/5:0)}
-function fillSeats(){let ev="";for(const r of [6,5,4,3]){if(!seatFree(r))continue;const C=consorts().filter(p=>rkOf(p)===r-1&&!p.out&&!p.confined&&promoReqP(p).every(x=>x[0]));
-  if(C.length<2)continue;/* single candidate: the ordinary decree handles it */
-  let n=SEATCAP[r]-holders(r).length;while(n-->0&&C.length){const tot=C.reduce((s,p)=>s+seatPickW(p),0);let x=Math.random()*tot,w=C[0];for(const p of C){x-=seatPickW(p);if(x<=0){w=p;break}}C.splice(C.indexOf(w),1);ev+=promoteP(w)||"";if(C.length)S.seatLost=(S.seatLost||[]).concat(C.includes(S)?[`${RANKS[r].n}: ${NM(w)}`]:[])}}return ev}
 /* DEMOTION REVIEW: Sủng under the rank's floor for two months, or a conviction, drops one rank (and frees the seat) */
 function sungFloor(r){return Math.max(0,RANKS[r].s-20)}
 function demote(p,why){if(p===S){if(S.rank<=0)return"";S.rank=seatDown(S,S.rank-1);S.lastPromo=S.turn;const t=`<span class="r">Ngươi ${why}, bị giáng xuống ${RANKS[S.rank].n}.</span>`;log(t);return t}
