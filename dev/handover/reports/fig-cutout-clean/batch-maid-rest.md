@@ -47,3 +47,20 @@ maid-m03-tm3-a18	rgdyHY3xtc	ok
 maid-m03-tm4-a18	Sym3rpfUb8	ok
 maid-m04-a18	IfiqpOmtvE	ok
 - W5 #2 STATUS: 24 a18 files (m02-t6 .. m04-a18) done, ALL UPLOADED (fig+por+tn where exists; no hd). NEXT: maid-m04-cold-a18 (then shard order, line 'grep a18 maid-rest-A.txt'). Method now: upload old fig as ref (creations_upload_image, folder ba4aecfe...), images_generate gpt-2-6 1024x2048 2k + extraSettings transparentBackground (real alpha), 8 in one message, one creations_wait, driver drv.py (scratch, recreate: curl master, alpha check, finish_fig, qa_fig, contact sheet) -- hd NOT made. Prop rotation: fan, lantern, jade pendant, teacup, scroll, flower branch, handkerchief, book+hairpin.
+maid-m04-cold-a18	MB7v04aDCm	ok U
+maid-m04-kc-a18	s78NxaTl8e	ok U
+maid-m04-ngheo-a18	aFA1m03fSh	ok U
+maid-m04-t1-a18	YMsoGOAWeC	ok U
+maid-m04-t2-a18	VXwhcinMMU	ok U
+maid-m04-t3-a18	w4vZgKT7EI	ok U
+maid-m04-t4-a18	rgdyKEXxtc	ok U
+maid-m04-t5-a18	vQ2kte2a47	ok U
+maid-m04-t6-a18	CqzxCLuEEy	ok U
+maid-m04-t7-a18	DoJaDElpcl	ok U
+maid-m04-t8-a18	Bh9QB51oQR	ok U
+maid-m04-tm0-a18	79a27WgJAL	ok U
+maid-m04-tm2-a18	iGbTiXi3uK	ok U
+maid-m04-tm3-a18	xSXPx28jfW	ok U
+maid-m04-tm4-a18	MB7vMbGDCm	ok U
+maid-m05-a18	Bh9QBsSoQR	ok U
+- W5 #2 STATUS: 40 a18 files done+uploaded (m02-t6..m05-a18). NEXT: maid-m05-cold-a18. Scratch driver (drv.py/up.sh) in session scratchpad, recreate if lost.
