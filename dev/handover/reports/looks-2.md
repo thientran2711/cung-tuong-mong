@@ -89,3 +89,38 @@ Note: the ill / doc tint paints pale lips OVER the lipstick (on top, per the law
 
 ## 4. Handover (if a successor is needed)
 review/looks-2 @ 040ce3440 is complete for the no-art scope. Next: when Foreman C delivers a file, add it to LOOKS_ART in jlooks.js (one line) and rerun dev/test/looks-2.js; emotion faces per §0.6 after Foreman B's OK.
+
+## 5. PART 2 — TABLE FIRST (Foreman B s6 17:32Z; MAIN s34 16:35Z/16:40Z/17:12Z/17:40Z + MAIN s35 17:30Z; OD tail 16:35Z, 16:40Z, 17:40Z (1)(3), 17:55Z (2))
+PRIORITY #1 CHECK: OD 16:40Z (3 smudge levels, pox-scar ointment via hủy dung path, tea/water/ink minigames), 17:40Z (1) emotion faces DROPPED for good, (3) every weather kind; 17:55Z (2) painted filters, A/B table, s34 Lượt 62 all approved | main: j12 WX (16 states) + jweather wxRisk/wxHit, j70 scar70 + scar cure, jlooks (part 1, 040ce3440) | review/weather-khac e1d540cf (currentWeather(k).lv, wxDayAny, wxkHook, WX_KH: trời âm u / mưa rào / mưa thu) | dev/design/HARM_ACTS.md: NOT on the handover branch yet (harm-acts-expert) → folded in when it lands | claims: looks-2 (me).
+EMOTION FACES: owner dropped them for good (OD 17:40Z (1) "bỏ đi, tốn credit không có đáng") → part 2 REMOVES the part-1 slot (looksEmoFace / kitFace swap) and the C pilot request is CANCELLED in FOREMAN_C_STATUS. The mood seal next to figures is kit-figure-mood (main), not looks-2.
+
+Rules for every row: same for every person (her, NPC women; men get no makeup/hair-ornament rows, the rest yes); levels nhẹ / vừa / nặng = the weather's own level (currentWeather(k).lv; dry kinds use BAL.looks level by kind) or the act's result; every A-look is ONE PAINTED OVERLAY FILTER per level (Magnific gpt-2-6 via Foreman C ART REQUEST, never code-drawn, OD:L1196) — slot empty until delivered; all numbers in BAL.looks; shown on the person card as a kit chip; cover (dù / lọng / áo tơi / kiệu / người che) lowers the odds, never to zero except kiệu.
+Clears: HAIR = redo hair (Điểm trang lại) · FACE = redo makeup · CLOTHES = change clothes (wdWearEntry / wdApply) · TIME = buổi/khắc count in BAL · every look ends at the next tuần (day).
+
+| Cause (season / source) | A — FASHION / appearance (painted filter, levels) · clears | B — GAMEPLAY effect (BAL odds/amounts) |
+|---|---|---|
+| **Mưa phùn** (Xuân) | lem phấn nhẹ; tóc ẩm, áo ẩm lấm tấm (nhẹ→vừa by lv) · FACE / CLOTHES / TIME (dries) | đường trơn: ngã (jweather slip, pregnant = risk of losing the child, OD:L1399); Sắc −small while it lasts |
+| **Mưa rào / mưa thu** (WX_KH, sudden burst) | lem vừa→nặng; áo ướt sũng; tóc bết · FACE / CLOTHES / TIME | slip + cảm lạnh (jweather); Sắc − by level |
+| **Giông tố** (Hạ) | ướt sũng + lem NẶNG + bùn gấu áo; tóc rối · FACE + CLOTHES + HAIR | slip ×, cảm lạnh ×, sấm làm giật mình → mood Sợ (jemo); pregnancy danger highest; lọng/ô useless at nặng |
+| **Gió heo may** (Thu) — and gió lớn when lv ≥ vừa | tóc rối, trâm lệch, áo xốc xếch, bụi bay vào mặt (mặt lấm bụi nhẹ) · HAIR / CLOTHES / FACE | lọng/ô useless at gió lớn; bụi vào mắt: small Sức/mood −; needs a wind LEVEL from C-AG (today wind has no lv) → tell C-AG |
+| **Nắng gắt** (Hạ) / ve kêu (heat) | mồ hôi làm phấn trôi nhẹ; má ửng · FACE / TIME | say nắng: Sức − (odds; lọng che lowers); |
+| **Nắng vàng** (Thu) | — (fine; no look) | — |
+| **Sương sớm** (Xuân) / sương mù | tóc ẩm, vạt áo ẩm nhẹ · HAIR / TIME | tầm nhìn kém: harder to be seen → dò la / mưu kế easier (C-AG owns: tell C-AG) |
+| **Tuyết nhẹ / tuyết dày** (Đông) | gấu áo ướt; má đỏ môi tái vì lạnh; bông tuyết vương tóc (nhẹ→nặng) · CLOTHES / TIME (warm up indoors) | trơn ngã, cảm lạnh (jweather); tuyết dày = more; pregnant risk |
+| **Sương giá** (Đông) | môi tái, má đỏ vì lạnh (nhẹ) · TIME | tay cóng: hand minigames (cầm, thêu…) worse (C-AG owns hand ceiling: tell C-AG); đá trơn (slip) |
+| **Mai nở trong tuyết** / **hoa đào bay** (Xuân) / **lá phong rơi** (Thu) | cánh hoa / lá vương tóc áo — PRETTY, no harm (nhẹ) · HAIR / CLOTHES / TIME | none (OD 17:40Z list: "đẹp, không hại") |
+| **Trời quang / đom đóm / trăng rằm / trời âm u** | — | — (âm u = a hint that rain may come; C-AG) |
+| **Khóc** (any cause; jemoact) | lem phấn nhẹ→vừa (by how long), mắt đỏ · FACE | mood already moved by the cry |
+| **Hắt nước** (harm act → MINIGAME, dodge kit) | ướt áo vừa + lem vừa · CLOTHES / FACE | Sắc − while it lasts; act odds = minigame result (her) / hand band (NPC); evidence: done in person |
+| **Hắt trà** (harm act → MINIGAME) | vết trà loang áo + lem vừa→nặng (nóng: má ửng đỏ) · CLOTHES / FACE | as above, a little more Sắc −; nóng = small Sức − |
+| **Tẩm mực khăn / quạt mực** (harm act → MINIGAME) | vệt mực trên mặt (nhẹ→nặng) · FACE | Sắc − until washed |
+| **Bị xô ngã** (env / scheme; jweather slip, harm acts) | bùn/bụi gấu áo, tóc xổ, trâm rơi · CLOTHES / HAIR | Sức − (exists), pregnant risk (exists) |
+| **Cành cây quẹt** (walking in Ngự hoa viên / outdoor places, odds by place) | tóc vướng lá, sợi tóc xổ, vạt áo móc chỉ (nhẹ) · HAIR / CLOTHES | none |
+| **Khói bếp / lò than** (Ngự thiện phòng, nấu ăn acts) | mặt lấm muội nhẹ, áo ám khói · FACE / CLOTHES | none |
+| **Bùn** (outdoor after rain, Dư đồ walk) | bùn bắn gấu áo/giày (nhẹ→vừa) · CLOTHES | none |
+| **Thủy đậu / đậu mùa** (illness, part 1) | nốt đậu trên mặt (st 1–3) · cure | contagion + Sắc − (part 1); đậu mùa leaves a SCAR → removed by a Thái y ointment she must BUY via the existing hủy dung scar cure (j70 scar70 path), no new system |
+| Approved acts from dev/design/HARM_ACTS.md | one painted filter each | per the expert list (folded in when the file lands) |
+
+SMUDGE LEVEL per cause (BAL.looks.smu.lvOf): mưa phùn = by lv (mostly nhẹ) · mưa rào/thu = vừa (nặng at lv 3) · giông tố = nặng · tuyết = nhẹ · nắng gắt = nhẹ · khóc = nhẹ (vừa if khóc suốt đêm) · hắt nước = vừa · hắt trà = vừa (nặng on a hit at full strength). Part 1 had 2 levels → part 2 makes it 3 (nhẹ / vừa / nặng) everywhere.
+MINIGAMES: hắt nước / hắt trà / quạt mực reuse the slap/dodge minigame kit (aim vs dodge), Thử tay calibration entry per OD 17:10Z; NPC hands from the calibrated bands (cap 95 %).
+ART REQUEST list (→ C, after you OK the table): per row above one transparent overlay per level, grouped HAIR (tóc rối/xổ, trâm lệch, tóc ẩm/bết, tuyết/hoa/lá vương), FACE (lem 1–3, bụi, muội, mực 1–3, mồ hôi, má lạnh), CLOTHES (ẩm, ướt sũng, vết trà, bùn gấu, xốc xếch, áo ám khói, móc chỉ) — CLOTHES/HAIR need the body-fit KIT REQUEST (filed in part 1).
