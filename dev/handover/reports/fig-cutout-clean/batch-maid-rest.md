@@ -143,3 +143,5 @@ maid-m09-t3-a18	Bh9F2tLoQR	ok U
 maid-m09-t4-a18	s786huFl8e	ok U
 maid-m09-t5-a18	nVLoS4EYQD	ok U
 - W5c: 48 done. NEXT maid-m09-t6-a18 (queue line 49).
+- OWNER VERDICT (lead 17/11 ~03:45Z): original maid look approved; NO maid redo; look-alike list and rank-sample/maid-rest-A-at-risk.tsv are IGNORED. From A8 on: original rich-silk prompt (brief2).
+- PLAIN-PROMPT BATCH (painted with the 'plain maid' prompt, lead asks Foreman C whether they stay; do not repaint): maid-m06-t6..m06-tm4, m07-a18, m07-cold..m07-t5, m07-t6..m07-tm4, m08-a18, m08-cold..m08-t5, m08-t6..m08-tm4, m09-a18, m09-cold..m09-t5 (all -a18) = 48 files, + A7 (m09-t6..m10-a18, 8) in progress.
