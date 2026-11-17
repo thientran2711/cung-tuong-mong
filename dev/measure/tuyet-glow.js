@@ -23,10 +23,12 @@ const SC={x:62,y:223,width:288,height:689},HC={x:112,y:228,width:200,height:150}
  const off=async o=>p.evaluate(o=>{let s=document.getElementById('gl-off');if(!s){s=document.createElement('style');s.id='gl-off';document.head.appendChild(s)}s.textContent=o?'.kglw{display:none!important}':''},o);
  await off(true);await p.waitForTimeout(100);fs.writeFileSync(`${OUT}/off.png`,await p.screenshot(clip?{clip}:{}));await off(false);
  /* timeline: SECS long (default 6, FPS 30); BURSTS = start seconds of the twinkle bursts (BAL burstMs long, the burst clock is off in the sampler: auto=false) */
+
+ if(process.env.FORCELO)await p.evaluate(()=>{window.__forceLo=1});/* debug: every lower-face star (chin / jaw / lower cheeks) at once */
  const SECS=+(process.env.SECS||6),FPS=+(process.env.FPS||30),BU=(process.env.BURSTS||'').split(',').filter(Boolean).map(Number),BMS=await p.evaluate(()=>BAL.toil.glow.burstMs);
  const total=Math.round(SECS*FPS);
  for(let i=0;i<total;i++){const t=i/FPS;const bs=BU.find(b0=>t>=b0&&t<b0+BMS/1000);
-  await p.evaluate(([t,bs])=>{const L=[...document.querySelectorAll('i.kglw')];L.forEach(x=>{if(bs!=null){if(!x.classList.contains('on'))toilGlowOn(x)}else x.classList.remove('on')});
+  await p.evaluate(([t,bs])=>{const L=[...document.querySelectorAll('i.kglw')];L.forEach(x=>{if(bs!=null){if(!x.classList.contains('on')){toilGlowOn(x);if(window.__forceLo)x.querySelectorAll('b.kg-st[data-lo="1"]').forEach(b=>b.classList.add('pk'))}}else x.classList.remove('on')});
    document.getAnimations().forEach(a=>{const n=a.animationName||'';if(/^kgst$/.test(n)){a.pause();a.currentTime=(t-bs)*1000}else if(/^kg/.test(n)){a.pause();a.currentTime=t*1000}})},[t,bs==null?null:bs]);
   await p.waitForTimeout(30);fs.writeFileSync(`${OUT}/f${String(i).padStart(3,'0')}.png`,await p.screenshot(clip?{clip}:{}))}
  await p.screenshot({path:OUT+'/full.png'});console.log('done',JSON.stringify(errs));await b.close()})();
