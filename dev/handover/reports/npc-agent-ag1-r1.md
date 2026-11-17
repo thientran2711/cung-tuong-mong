@@ -68,4 +68,22 @@ jsteal (agent choice, replaces the npc-mind `roll(6)` edit); index.html / sw.js 
 - No new kit part; the scene card is the T3 event card (same Q/opts path as j95 catch).
 
 ## Bot (40 lives, run_par sens + inag6, branch 2298416f vs main f1509d7c)
-Pending at verdict time — addendum below when done. HH reach 0 % on main is the known separate BALANCE BLOCKER (Foreman B).
+HH reach 0 % on main is the known separate BALANCE BLOCKER (Foreman B). Addendum (done 17/11), 0 timeouts / crashes either side:
+
+| measure (40 lives each) | main f1509d7c | branch 2298416f |
+|---|---|---|
+| HH reach | 0 % | 0 % |
+| early death (an7) | 65 % | **80 %** |
+| of which illness | 8 | **15** (dies from year 1.2; main from 2.6) |
+| of which "Xuất cung về quê" | 0 | 5 (cn/dtq/nc/td, rank 2–3, yr 3–10) |
+| childbirth deaths / births per life | 1 / 0.25 | 2 / 0.17 |
+| years per life | 13.0 | 12.0 |
+| her nights / year | 2.89 | 3.01 |
+| NPC births / year · NPC nights / year | 0.75 · 20.7 | 0.69 · 19.3 |
+| NPC Sủng / TH at her death (median) | 42 / 10 | 31 / -5 |
+| agent acts per life · ticks p95 under bot (median / max) | – | 3719 · 1.7 / 6.5 ms (bot CPU x1) |
+
+8. **Bot regression to explain (add to the fix list).** Early death 65 → 80 %: illness deaths nearly double (8 → 15, earlier) and
+   5 new "Xuất cung về quê" endings; NPC Sủng / TH at death drop (42/10 → 31/-5). Find the path (NPC acts draining her sức / bệnh,
+   witness reactions, muted drips not replaced, or the jmind gift/like changes) with a per-cause trace; after the fix the branch must be
+   within noise of main on early death and illness (rerun 40 lives sens + inag6, same table).
