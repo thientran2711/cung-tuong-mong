@@ -380,3 +380,38 @@ Merge of main 64c39ca2: assemble = main's list + jbalcore/jnf − jfe.js; j8 npc
 - Kit changes 32.8a + 43.0a touch every dialog using the live frame / compact option cards: kit reviewer consistency scan.
 - KIT REQUEST (open): flip tassel over the rank line (main's jflip/§48).
 - Co-op parts stay PARKED. Scratch (not in git): /home/user/wt/nf6s (cshots.js, fair*.js, cprof.js, bprof.js).
+
+## 13. FIX F1 (worker session_01964izGWAYU1GWVeqgVeUUc; coordinator Foreman D #8 session_01964izEvrHqnQQMQqZ2g5t1) — review/night-final-fix @ f7c54202
+PRIORITY #1 CHECK ('nfOn|COOPW.on|night-final'): OD 6 | ledger 0 | claims 8 | main 15 | review/* 2 → small fix on the existing branch (from review/night-final-r1 @ 72148b66), no rebuild.
+START_CTX ≈ 6 % of 1M (own estimate), ended ≈ 17 %. Rules read: START_CORE, START_WORKER, topic coop + time-calendar; review-night-final-r1.md; this report §2, §8, §11.
+
+**co-op night flow parked; enable by removing the COOPW gate in dev/build/jnf.js:36 (`nfParked()` → return false) and deleting `'jfe.js'` from dev/build/assemble.py (after `'jnf.js'`).**
+
+### 13.1 What changed (no co-op code touched; co-op keeps the live night)
+| entry point (jnf + friends) | parked (COOPW.on) → |
+|---|---|
+| ONE gate: `nfParked()` jnf.js:36 = `COOPW.on`; `nfOn()` = palace && !nfParked() | every hook below reads it |
+| flip, nightScene, endTurn commit, visRoll, click guard, step/wake (already behind nfOn) | live path |
+| jfe.js (live main's start-of-tối flip) restored, loaded right after jnf; runs ONLY while parked (`PK()`) | co-op flip at the start of tối as on live |
+| j2 deal: Tranh sủng / Chặn ngự giá deck cards | back in co-op (live code; loss = `stealLose(mode)`, one core) |
+| person menu RVGRP + NPC BANDS (`nfActs()` on every render, keys put back at their own index) + `ACT.steal/road.ok` | live lists / live ok in co-op; solo unchanged (removed, ok false) |
+| `window.stealPass` (jsteal flip, ledger) | jsteal's own pass in co-op; jnf batch solo |
+| render rerun, resolveTonight + rivalNight wrappers, relay send / ask / act listener / room re-send | off in co-op (no ctm-nf message) |
+| jflip `pending` (uses nfOn) | live seal in co-op |
+Mid-week switch: solo→room with the tablet waiting (S.nfP) → jfe turns it at once (render hook); room→solo after the room's flip (nfF / nightWhy) → jnf never re-flips, the choice opens for that pick; room on while the solo choice is open → live day end. Not reverted (outside the night flow, already reviewed): jcoopworld seatWeek tie rule (night-final audit OD 22:10Z).
+
+### 13.2 Tests (build f7c54202)
+| test | result |
+|---|---|
+| coop-e2e (live Worker) ×3 | **60/60 · 59/60 · 60/60** (live 60/60). The one FAIL = "friend starts as Người lạ" (friend rolled a servant origin, fsrv:true) — random life, not the night; the 8 night hangs of r1 are gone in all 3 |
+| coop-night | 99/99 |
+| night-coop-park.js (NEW, room stub, 6 cases: solo gate, room = live night + cards + no relay, solo→room mid-day, room→solo mid-day, room on with choice open, switch every day ×6) | ALL OK 6/6 ×3 |
+| night-final 11/11 · night-multi 8/8 | PASS |
+| night-steal-unit | 29/29 ×2; one earlier run 28/29 (case 11 nfOn false: the random life was the servant origin cnv — test flake, COOPW.on false) |
+| flip-entry 755x1000@2 + 1180x820@2 | ALL OK both |
+| one-core-guard | 0 fails |
+| quickcheck.sh --runs 7 | PASS · old save ok · render 225/238, tab 298/285, buổi 824/971 ms (new/live) · core gates PASS (G4 co-op probe green) |
+| shots Fold 755x1000@2 + iPad 1180x820@2 (LOOKED, scratch /home/user/wt/nffix-s, not uploaded) | co-op Hành sự: Tranh sủng card + "Tranh sủng 3/3" sub-tab as on live; solo flip choice unchanged (clock chip, 2 option cards, hints); no overlap, nothing cut |
+Still lands after balance-core (branch carries 9abcfa72). origin/main 6c4f21c3 is an ancestor (FF).
+
+SẴN SÀNG KIỂM f7c54202a786d58794f34318e212aa8b91e9a9b1
