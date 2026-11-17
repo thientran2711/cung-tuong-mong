@@ -57,5 +57,6 @@ window.CTM_WAIT=window.CTM_WAIT||{
  /* Luân hồi (jk2b.js) */
  rebirth:"Tranh luân hồi đang trải các thân phận…",
  /* ghi sổ (j16.js) */
+ notesName:"Sổ đổi mới",
  saveBlocked:"Không ghi được sổ (chỗ cất trong máy bị chặn hoặc đã đầy)."
 };

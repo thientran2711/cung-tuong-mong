@@ -1,4 +1,4 @@
-/* Update notes (D10): pop-up once per release, Settings "Thông tin cập nhật", never blocks boot / save load / co-op.
+/* Update notes (D10): pop-up once per release, Settings "Sổ đổi mới", never blocks boot / save load / co-op.
    usage: python3 dev/build/assemble.py && node dev/test/update-notes.js [WxH ...]   (default: the 5 viewports + 390x844) */
 const {chromium}=require('./lib/pw-roulette');const {serve,BASE}=require('./coop-serve.js');
 const VPS=(process.argv.slice(2).length?process.argv.slice(2):['755x1000','1000x755','1180x820','1366x1024','844x390','390x844']).map(s=>s.split('x').map(Number));
@@ -18,12 +18,12 @@ const ok=(c,m,x)=>{if(!c)bad++;console.log((c?'ok  ':'FAIL')+' '+m+(x!==undefine
   /* 2. Settings row + panel (title > Thiết lập) */
   await p.evaluate(()=>{document.querySelector('[data-tgo="opt"]').click()});await p.waitForTimeout(600);
   const row=await p.evaluate(()=>{const b=document.querySelector('#modal button[data-tgo="notes"]');if(!b)return null;const r=b.getBoundingClientRect();return {w:Math.round(r.width),h:Math.round(r.height),inView:r.bottom>0&&r.top<innerHeight}});
-  ok(row&&row.h>=36,`${tag} Settings row "Thông tin cập nhật" present`,row);
+  ok(row&&row.h>=36,`${tag} Settings row "Sổ đổi mới" present`,row);
   await p.evaluate(()=>{document.querySelector('#modal button[data-tgo="notes"]').scrollIntoView({block:'center'})});await p.waitForTimeout(200);
   await p.screenshot({path:`${OUTD}/${tag}-settings.png`});
   await p.evaluate(()=>document.querySelector('#modal button[data-tgo="notes"]').click());await p.waitForTimeout(700);
   const pn=await p.evaluate(()=>{const d=document.querySelector('#modal .dlg');return {kind:d&&d.dataset.kind,txt:d&&d.innerText.slice(0,260),facts:document.querySelectorAll('#modal .kfacts .kfact, #modal .kfacts > *').length,vis:!document.getElementById('modal').hidden}});
-  ok(pn.vis&&pn.kind==='notice'&&/thông tin cập nhật/i.test(pn.txt)&&/ngày 16 tháng mười một/i.test(pn.txt),`${tag} Settings panel lists releases`,pn.txt&&pn.txt.slice(0,90));
+  ok(pn.vis&&pn.kind==='notice'&&/sổ đổi mới/i.test(pn.txt)&&/ngày 16 tháng mười một/i.test(pn.txt),`${tag} Settings panel lists releases`,pn.txt&&pn.txt.slice(0,90));
   const o2=await ovf();ok(o2.page<=0&&o2.dlg<=0,`${tag} panel no horizontal overflow`,o2);
   await p.screenshot({path:`${OUTD}/${tag}-panel.png`});
   const nobad=await p.evaluate(()=>/%|phiên bản|cài đặt|lưu |điểm/i.test(document.querySelector('#modal .dlg').innerText));ok(!nobad,`${tag} no forbidden words`);
