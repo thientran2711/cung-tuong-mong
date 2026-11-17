@@ -68,10 +68,10 @@ function settle(d){const L=d.S.coopAsk;if(!Array.isArray(L)||!L.length)return;co
   if(a.k==="np"){const real=d.R.find(r=>r&&r.coopAsk===a.id);
    if(real){remapS(d.S,a.t,real.id);N.confirmed++;continue}
    if(res&&res[0]===0){remapS(d.S,a.t,null);N.refused++;
-    if(a.maid&&Array.isArray(d.S.staff)&&!d.S.staff.some(s=>s&&s.sid===a.maid.sid)){d.S.staff.push(a.maid);N.returned++;
+    if(a.maid&&Array.isArray(d.S.staff)&&!d.S.staff.some(s=>s&&s.sid===a.maid.sid)){d.S.staff.push(srvHome(a.maid));N.returned++;
      lines.push(`${a.maid.name} được Hoàng thượng để mắt, nhưng hậu cung đã đủ người, không có chỗ phong; nàng trở về hầu ngươi như cũ.`)}continue}
    if(a.v&&!d.R.some(r=>r&&r.id===a.t)){d.R.push(J(a.v));N.ghost++}keep.push(a);continue}
-  if(res){if(res[0]===0&&a.k==="srv"&&a.s&&Array.isArray(d.S.staff)&&!d.S.staff.some(s=>s&&s.sid===a.s.sid)&&a.s.spyFor==null){d.S.staff.push(a.s);N.returned++}continue}
+  if(res){if(res[0]===0&&a.k==="srv"&&a.s&&Array.isArray(d.S.staff)&&!d.S.staff.some(s=>s&&s.sid===a.s.sid)&&a.s.spyFor==null){d.S.staff.push(srvHome(a.s));N.returned++}continue}
   keep.push(a)}
  d.S.coopAsk=keep;if(lines.length)d.S.askNote=(d.S.askNote||[]).concat(lines)}
 /* ---------- host: apply requests ---------- */
@@ -101,7 +101,7 @@ function hostApply(L,why){if(!host()||!live()||!Array.isArray(L))return 0;S.askD
  try{const fP=CW.base.P&&CW.base.P.b,open=new Set(((fP&&fP.S&&fP.S.coopAsk)||[]).map(a=>a.id)),cur=new Set(L.map(a=>a&&a.id));
   for(const id of Object.keys(S.askDone))if(!open.has(id)&&!cur.has(id)&&wk()-(S.askDone[id][1]||0)>=3)delete S.askDone[id]}catch(e){}
  return n}
-CW.askApply=hostApply;CW.askN=N;
+CW.askApply=hostApply;CW.askN=N;CW.askSettle=settle;/* test hook (staff-root-fix-1: settle on a blob, both returns) */
 (function(){const f=deser;deser=function(d){try{if(guest()&&CW.base&&!CW.inLife&&d&&d.S&&Array.isArray(d.R))settle(d)}catch(e){console.error("ask settle",e)}
  const r=f.apply(this,arguments);
  try{if(guest()&&S&&S.askNote&&S.askNote.length){for(const l of S.askNote)log(l);S.askNote=null}}catch(e){}

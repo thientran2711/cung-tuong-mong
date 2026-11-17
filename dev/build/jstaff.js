@@ -24,25 +24,26 @@ if(typeof allServ==="function"){const a0=allServ;allServ=function(){const L=a0.a
 if(typeof ownerOf==="function"){const o0=ownerOf;ownerOf=function(s){const r=o0.apply(this,arguments);if(r)return r;try{if(S&&S.thO&&(S.thO.staff||[]).includes(s))return S.thO}catch(e){}return null}}
 /* Thái hậu ranks above every consort: the highest servant rank, the biggest household */
 if(typeof srkMax==="function"){const m0=srkMax;srkMax=function(o,s){if(S&&o&&o===S.thO)return s&&s.role==="maid"?4:3;return m0.apply(this,arguments)}}
-if(typeof capOf==="function"){const c0=capOf;capOf=function(p){if(S&&p&&p===S.thO)return[4,2];return c0.apply(this,arguments)}}
 /* her title is her post (SRK has no "ma ma" word: rank 4 is the Nữ quan dress) */
 if(typeof srkName==="function"){const n0=srkName;srkName=function(s){const p=s&&s.eid&&postOf(s.eid);return p?p.title:n0.apply(this,arguments)}}
 function elders(){try{return allServ().filter(s=>s&&s.eid&&postOf(s.eid))}catch(e){return[]}}
 function elderBy(id){return elders().find(s=>s.eid===id)||null}
-function masterFor(post){if(post.master==="hh"){const q=typeof queenP==="function"?queenP():null;if(q&&(q===S||(q.alive!==false&&!q.out)))return q}return thH()}
+function masterFor(post){if(post.master==="hh"){const q=typeof queenP==="function"?queenP():null;/* a queen in the cold palace keeps no palace office (review/staff-root): the woman goes back to Thái hậu's household */if(q&&!q.out&&(q===S||q.alive!==false))return q}return thH()}
 function masterName(m){if(!m)return"";if(m===S.thO)return"Thái hậu";if(m===S)return"ngươi";return m.queen?`Hoàng hậu ${m.name}`:m.name}
 function mk(post,i,age){const nm=post.names[i%post.names.length];if(typeof sidN!=="undefined")sidN=Math.max(sidN,...allServ().map(s=>s.sid||0),0);
  return{sid:typeof sidN!=="undefined"?++sidN:Date.now(),eid:post.id,n:i,name:nm[0],call:nm[1],role:"maid",rk:post.rk,age,retire:rint(...(B().retire||[63,68])),
   tr:post.tr||"trung",loyal:70+R(16),spyFor:null,lover:null,af:{},hue:0,face:-1,fc:"",fk:"",fid:"",elder:1,since:S?S.year:1}}
 const elderCallOf=m=>{const st=(m.staff||[]).find(s=>s.eid);return st?st.call:"ma ma"};
 /* keep the household rule: a master over her cap sends an ordinary maid back to Nội vụ phủ (never a named one, a spy of hers, a lover) */
-function fitCap(m){try{if(!m||!m.staff||m===S.thO)return;const cap=capOf(m)[0];let n=m.staff.filter(s=>s.role==="maid").length+1;
- while(n>cap){const L=m.staff.filter(s=>s.role==="maid"&&!s.eid&&s.spyFor!=="me"&&!s.lover);const x=L[L.length-1]||m.staff.find(s=>s.role==="maid"&&!s.eid);if(!x)break;
+function fitCap(m){try{if(!m||!m.staff||m===S.thO)return;const cap=capOf(m)[0];let n=hhHas(m)[0];
+ while(n>cap){/* a servant coming home (j10 srvHome mark, staff-root-fix-1) is never the one sent away here either */const L=m.staff.filter(s=>s.role==="maid"&&!s.eid&&!s.home&&s.spyFor!=="me"&&!s.lover);const x=L[L.length-1]||m.staff.find(s=>s.role==="maid"&&!s.eid&&!s.home);if(!x)break;
   m.staff.splice(m.staff.indexOf(x),1);try{if(x.fid){const U=figUsed();const i=U.indexOf(x.fid);if(i>=0)U.splice(i,1)}}catch(e){}n--;if(m===S)log(`Nội vụ phủ điều ${x.name} sang cung khác để ${elderCallOf(m)} về hầu.`)}}catch(e){}}
 /* every post filled, each woman in the right household; her rank within the master's cap (srkMax) */
 function place(st){const post=postOf(st.eid);if(!post)return;const m=masterFor(post);if(!m)return;if(!m.staff)m.staff=[];
  for(const o of [S,S.thO].concat(rivals||[]))if(o&&o!==m&&Array.isArray(o.staff)&&o.staff.includes(st))o.staff.splice(o.staff.indexOf(st),1);
  if(!m.staff.includes(st)){m.staff.push(st);fitCap(m)}st.rk=Math.min(post.rk,srkMax(m,st));if(st.spyFor&&m===S)st.spyFor=null}
+/* every household sweep (j10 capSweep: render, buổi, month) first puts each named woman back with her right master (a queen sent to the cold palace loses hers at once) */
+if(typeof capSweep==="function"){const cs0=capSweep;capSweep=function(){try{if(S&&!isGuest())for(const st of elders())place(st)}catch(e){}return cs0.apply(this,arguments)}}
 function giveFace(st){if(!S||!st||isGuest())return;
  if(!st.fc&&typeof drawF==="function"){try{st.fc=drawF(["mama","womid"],st.age)||"";st.fk="mama"}catch(e){}}
  if(st.fid||typeof FIGS==="undefined"||!FIGS.length)return;
@@ -96,11 +97,15 @@ function giaoBtns(st){const p=postOf(st.eid);const t2=typeof whyTime==="function
 function dutyRows(st){const p=postOf(st.eid);const m=ownerOf(st);return[["Chức",`${p.title} ${p.palace}`,"t"],["Chủ",masterName(m)+(p.master==="hh"&&m===S.thO?" (giữ thay Hoàng hậu)":p.id==="gt"?" sai đến Trữ Tú cung":""),"t"],["Việc",p.duties.join(", "),"t"]]}
 window.elderGroups=st=>{try{return st&&st.eid&&postOf(st.eid)?[["Chức việc",dutyRows(st)],["Giao thiệp",giaoBtns(st)]]:[]}catch(e){return[]}};
 /* ---------- the stage: where each one works; her card = the kit pcard ---------- */
+/* ONE rule (stage, record j95, map): the Giáo tập ma ma visits her room in her first days to teach a new tú nữ; a former palace maid
+   (origin cn, or risen from the servant road) needs no teaching, so she never stands there (owner 17/11 02:45Z, review/staff-root) */
+function gtAtHome(){return !!(S&&(S.turn||0)<=BAL.staff.gtDays&&!S.out&&!(S.origin&&S.origin.k==="cn")&&!(S.srv&&S.srv.risen))}
+window.gtAtHome=gtAtHome;
 function stageP(st){const p=postOf(st.eid);return{kind:"elder",ref:st,eid:st.eid,name:st.call,ini:String(st.call).split(" ")[0],col:staffFace(st).col,info:`${p.title} ${p.palace}`}}
 function addStage(V){try{if(!V||!V.people)return V;const k=V.k;if(V.people.some(p=>p.kind==="elder"))return V;
  const put=id=>{const st=elderBy(id);if(st)V.people.push(stageP(st))};
  if(k==="tn"&&!S.thDead)put("tn");if(k==="kn")put("kn");if(k==="tgk")put("tn");
- if(k==="home"&&(S.turn||0)<=4&&!S.out)put("gt")}catch(e){}return V}
+ if(k==="home"&&gtAtHome())put("gt")}catch(e){}return V}
 const tgkMsg=st=>`Nước giặt lạnh buốt, chậu gỗ chất cao. ${st.call} của Đức Thọ cung cầm roi đứng canh.`;
 if(typeof goTo==="function"){const g0=goTo;goTo=function(k){const r=g0.apply(this,arguments);try{if(S&&S.visit&&S.visit.k===k&&k!=="home"){addStage(S.visit);render()}}catch(e){}return r}}
 if(typeof homePeople==="function"){const h0=homePeople;homePeople=function(){const L=h0.apply(this,arguments);try{return addStage({k:"home",people:L}).people}catch(e){return L}}}
