@@ -48,3 +48,14 @@ fallback pictures unaffected. Other conflicts in that trial = the same ag-all-2-
   exist yet). FEELINGS-18 must replace "matching dominant feeling" by "that kind at heavy level" in eaSealG / eaMine / eaNpcWeek (one place each)
   and re-map khoc/hon (khóc becomes an ACT, OD ~19:10Z) — fix 1 is the bridge until then.
 - Reviewer branch also needs the main merge for the 390-wide .krl fix and main's test fixes once ag-all-2 is in.
+
+## Foreman follow-ups (19:26–19:42Z messages) + HANDOVER (reviewer rollover: context near the 60 % ceiling)
+- coop-one-world seed 7 flake (MOOD-MEM #2): I ran 7 + 3 alone on the r1 build: PASS; seed 3 repeated 6×: 2/6 S.wwin on branch AND on base → load/seed flake in jworld, not step 0.
+- Seal gate (OD ~20:25Z/20:35Z "seal always visible for every KNOWN person"): MOODKNOW gates only the CAUSES by knowledge (moodCauseKnown). The SEAL fog is older
+  jemo code: kitEmotion → known:false → "Tâm trạng: chưa rõ" (jemo.js:9 header rule "others only when she has seen them lately / has tai mắt", jemo.js:171/182/188).
+  That is the place FEELINGS-18 must change; not a step-0 FAIL.
+- MAIN MERGE NOT DONE: origin/main 3ac036d5 still does not hold review/ag-all-2 (86135854+), so merging main = 30 conflicting files (ag-all-2 vs main; incl.
+  j25/j78 G1 bind fix). A fresh reviewer (or ag-all-2's lander) should: worktree on review/mood-mem-r1 654b205b → git merge origin/main → resolve (take main for
+  generated index.html/sw.js/assets.json, then build_site.sh) → moodknow-step0, ag-moodknow, emotion-acts, coop-one-world 7+3, QUICKCHECK --cpu 4 (expect G1 PASS) → push → PASS <sha>.
+- Scope (2) 8e2ac171..6cadd5c3 (memory layers, v.pg family): NOT reviewed — needs a second reviewer (the r1 fixes here touch jemoact/j8/j2/jexam/jvisit/jcycle;
+  review/mood-mem 6cadd5c3 must take review/mood-mem-r1 first: j8 nightFx ghenAll why + 3718d030 j8 rivalNight may sit close).
