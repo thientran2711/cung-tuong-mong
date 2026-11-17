@@ -81,7 +81,7 @@ html body .game .mapv.kpmv.kside.kleather>.kpm-list .btn{background:#fff8e4ee;mi
 `;document.head.appendChild(st)})();
 
 /* §85.6: centre the covering courtyard painting once per slot */
-(function(){const r0=render;render=function(){const r=r0.apply(this,arguments);try{const v=document.querySelector(".game.maptab .mapv.kpmv"),sc=v&&v.querySelector(".mapsc");if(sc&&v.dataset.cen!==(v.dataset.kpm||"")){v.dataset.cen=v.dataset.kpm||"";const c=()=>{sc.scrollLeft=(sc.scrollWidth-sc.clientWidth)/2};c();const im=sc.querySelector(".mapimg");if(im&&!im.complete)im.addEventListener("load",c,{once:true})}}catch(e){}return r}})();
+(function(){const r0=render;render=function(){const r=r0.apply(this,arguments);try{const v=document.querySelector(".game.maptab .mapv.kpmv"),sc=v&&v.querySelector(".mapsc");if(sc&&v.dataset.cen!==(v.dataset.kpm||"")){v.dataset.cen=v.dataset.kpm||"";const c=()=>{sc.scrollLeft=(sc.scrollWidth-sc.clientWidth)/2};c();/* dudo-blank: also once the frame is laid out, not only when the picture arrives */requestAnimationFrame(()=>{try{c();requestAnimationFrame(c)}catch(e){}});const im=sc.querySelector(".mapimg");if(im&&!im.complete)im.addEventListener("load",c,{once:true})}}catch(e){}return r}})();
 /* §85.8: the day's sky (KIT_SKY = weather kind -> sky key in the CSS above; night = buổi tối veil); one attribute, set after every render */
 const KIT_SKY={sun:"sun",dust:"dust",petal:"petal",leaf:"leaf",wind:"wind",mist:"mist",rain:"rain",storm:"storm",snow:"snow",snowh:"snowh",frost:"frost",snowp:"snowp"};
 function kmSkyKey(){try{const k=(S&&S.wx&&S.wx.k)||"dust",night=typeof B4L==="number"&&(S.buoi||0)===B4L;return (KIT_SKY[k]||"dust")+(night?" night":"")}catch(e){return "dust"}}
