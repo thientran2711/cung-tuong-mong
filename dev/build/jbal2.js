@@ -928,10 +928,10 @@ BAL.odds.softFail=BAL.odds.softFail||{me:"Việc tưởng nắm chắc, nào ng�
            his mood × trait tr; th = the Thái hậu's (regard = her Thái hậu value) */
 BAL.ag.cx2={flat:{get o(){return BAL.odb.j2.odO_12},sd:5,w:{"sung":3},l:{"sung":-1},disc:25,g:{"sung":3}},true:{get o(){return BAL.odb.j2.odO_13},dd:3,nt:10,w:{"sung":2,"danh":2},l:{"sung":-2},disc:50,g:{"sung":2,"danh":2}},
  show:{c:{"suc":-5},get o(){return BAL.odb.j2.odO_14},k:10,w:{"sung":4,"danh":1},l:{"danh":-2},g:{"sung":4,"danh":1}},favor:{min:30,get o(){return BAL.odb.j2.odO_15},sd:3,w:{"bac":60},l:{"sung":-4},angry:40,g:{bac:6}},
- court:{get o(){return BAL.odb.j2.odO_16},td:2,thi:3,w:{"sung":4,"danh":3},l:{"sung":-2},g:{"sung":4,"danh":3}},vent:{pg:50,c:{"duc":-3},rel:20,g:{spite:5}},chest:{get o(){return BAL.odb.j2.odO_21},mat:5,rel:15,g:{spite:3,safe:3}},
- fert:{c:{"bac":-40},m:3,g:{kid:4}},doctor:{c:{"bac":-50},g:{safe:2,kid:3}},kidMed:{c:{"bac":-30},hp:80,up:25,g:{kid:4}},likes:{c:{"bac":-15},get o(){return BAL.odb.j2.odO_5},g:{"sung":2}},
- old:{get o(){return BAL.odb.j2.odO_22},td:5,g:{spite:3,safe:2}},nurse:{c:{"suc":-10},get o(){return BAL.odb.j20.odO},y:5,w:{"sung":4,"an":2},l:{"suc":-5},best:40,g:{"sung":5}},help:{get aff(){return BAL.bacFee.lendAff},p:50,get bac(){return BAL.bacFee.lend},fail:3,g:{bac:4,safe:2}},
- kidGreet:{c:{"suc":-5},get o(){return BAL.odb.j2.odO_11},sd:10,w:{"sung":2},fond:8,g:{"sung":2,kid:2}},kidHeal:{c:{"suc":-10},y:4,hp:70,up:30,g:{kid:5}},bac:{goal:120,w:.6},kidCare:.8};
+ court:{get o(){return BAL.odb.j2.odO_16},td:2,thi:3,w:{"sung":4,"danh":3},l:{"sung":-2},g:{"sung":4,"danh":3}},vent:{pg:50,c:{"duc":-3},get rel(){return -BAL.eff.j2.go_3},g:{spite:5}},chest:{get o(){return BAL.odb.j2.odO_21},mat:5,get rel(){return -BAL.eff.j2.run},g:{spite:3,safe:3}},
+ fert:{c:{"bac":-40},m:3,g:{kid:4}},doctor:{c:{"bac":-50},g:{safe:2,kid:3}},kidMed:{c:{"bac":-30},hp:80,get up(){return BAL.eff.j2.hpGo_2},g:{kid:4}},likes:{c:{"bac":-15},get o(){return BAL.odb.j2.odO_5},g:{"sung":2}},
+ old:{get o(){return BAL.odb.j2.odO_22},td:5,g:{spite:3,safe:2}},nurse:{c:{"suc":-10},get o(){return BAL.odb.j20.odO},y:5,w:{"sung":4,"an":2},l:{"suc":-5},best:40,g:{"sung":5}},help:{get aff(){return BAL.bacFee.lendAff},p:50,get bac(){return BAL.bacFee.lend},get fail(){return -BAL.eff.j9.run_5},g:{bac:4,safe:2}},
+ kidGreet:{c:{"suc":-5},get o(){return BAL.odb.j2.odO_11},sd:10,w:{"sung":2},get fond(){return BAL.eff.j2.fondGo},g:{"sung":2,kid:2}},kidHeal:{c:{"suc":-10},y:4,hp:70,get up(){return BAL.eff.j2.hpGo},g:{kid:5}},bac:{goal:120,w:.6},kidCare:.8};
 BAL.ag.emp3={desire:5,visB:[3],tea:.4,teaB:[1,2],teaGap:6};
 BAL.ag.give={b:1,ref:40,div:60,anDiv:200,lo:.4,hi:2,tr:{datinh:1.2,lanhlung:.7},th:{ref:40,div:60,lo:.4,hi:2}};
 /* AG-ALL-2 consort ↔ servants (jagacts2): maidTalk = Tâm sự with her confidant maid (below = her lòng under which she bothers), maidSpy = Sai đi dò la
@@ -1127,7 +1127,7 @@ Object.assign(BAL,{odb:{
  j72:{rbQ72Npc:30},
  j75:{odOP:40,rbFit:35,rbTop:10,rbTop_2:20},
  j77:{odAccLeadO:35},
- j78:{odO:40,odTop:40},
+ j78:{odTop:40},/* odO: Kể tội reads odO_18 through P3C.tell (merge r2 M1) */
  j8:{rbInspect:40,rbSearch:35,odO1:30,odO3:40,odO1_2:45,odO2:30,rbSeenNPC:15},
  j83:{odPts:35},
  j92:{rbWdRemark:30},
@@ -1143,7 +1143,7 @@ Object.assign(BAL,{odb:{
 }});
 /* AG-ALL-2b merge (ONE CORE): evidence a deed gives / clears where the player and NPC share one code path (j2 cx2 cards, j9 help, j10 servants,
    j42 dilemma builders, jcmaid, jpromsv, jeitem): one = 1 piece, two = 2 pieces (a Mật báo), all = clear every piece; rel = liking lost by a bribe told to the master */
-Object.assign(BAL.ag,{ev:{one:1,two:2,all:-99,rel:5}});
+Object.assign(BAL.ag,{ev:{one:1,two:2,all:-99,get rel(){return -BAL.eff.j42.go}}});/* review ag-all-2 r2 M1: the evidence amounts read this one key (main's per-site ev keys that only fed these sites are gone); rel = main's j42.go */
 /* AG-ALL-2e PARITY (jagacts3.js; report dev/handover/reports/ag-all-parity.md "2e"): the player's buttons that had no NPC side. Each card is built ONCE
    (P3C.<k>(p), used by her deck / talk card AND an NPC consort's cx3:<k> option); g = the needs the deed serves (agcU), as BAL.ag.cx2. on = 0 → no NPC option.
    dance  Múa trong yến tiệc (o + Sắc/sacD × mesac + múa lv × vu)   eyes Cài tai mắt   anthai An thai (buy) / Tự bào chế (self, Y ≥ y)
