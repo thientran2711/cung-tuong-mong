@@ -24,13 +24,15 @@ Object.assign(BAL,{eit:{
  pil:{loyal:45,base:8,k:.6,spy:15,ok:15,lowSung:8,cap:55,detM:6,see:25,seeMat:8,seeMaid:15,
       punLoyal:15,forgiveLoyal:4,ignoreLoyal:12,softM:3,npcPun:50},
  reG:{base:50,rk:5,sung:.2,tip:25,cause:15},   /* owner 16/11 s9: re-issue after a RANDOM 1–3 weeks weighted by how Nội vụ phủ regards her (eitRegard 0..100) */
+ cool:{bangda:[5,1],bangvun:[2,0]},  /* Sức from one block of ice: [in mùa Hạ, other seasons] (Băng đá, Băng vụn) */
+ kcSac:1,                             /* Sắc of a worn girlhood jewel (Ngọc bội khuê các, Vòng bạc hoa mai) */
  re:{tip:[6,8,10,12,15,18,22,26],base:50,rk:5,sungDiv:5,suc:6,altPen:10,maidAdj:5,maidFail:3,famSuc:2,famWk:1,famOk:75,famPoor:40,famCut:30}}});
 /* ---------- items: ice (art img/item-bangda.webp, img/item-bangvun.webp, gpt-2-6, dev/art/ITEM_ART.md §6) + the girlhood pieces of jkc ---------- */
 (function(){const N={
- bangda:{n:"Băng đá",kd:"Băng",d:"Mùa hạ giải nhiệt: Sức +5 · mùa khác Sức +1 · để qua tháng thì tan",pr:4,cool:[5,1],tg:[]},
- bangvun:{n:"Băng vụn (hàng kém)",kd:"Băng",d:"Băng vụn Nội vụ phủ phát: mùa hạ Sức +2 · để qua tháng thì tan",pr:0,cool:[2,0],tg:[]},
- ngocboikc:{n:"Ngọc bội khuê các",kd:"Trang sức",d:"Đeo eo: Sắc +1 · ngọc bội con gái mang từ nhà",pr:10,rk:0,sl:"waist",w:{sac:1}},
- vongbackc:{n:"Vòng bạc hoa mai",kd:"Trang sức",d:"Đeo tay: Sắc +1 · đôi vòng bạc con gái mang từ nhà",pr:10,rk:0,sl:"wrist",w:{sac:1}}};
+ bangda:{n:"Băng đá",kd:"Băng",d:`Mùa hạ giải nhiệt: Sức +${BAL.eit.cool.bangda[0]} · mùa khác Sức +${BAL.eit.cool.bangda[1]} · để qua tháng thì tan`,pr:4,cool:BAL.eit.cool.bangda,tg:[]},
+ bangvun:{n:"Băng vụn (hàng kém)",kd:"Băng",d:`Băng vụn Nội vụ phủ phát: mùa hạ Sức +${BAL.eit.cool.bangvun[0]} · để qua tháng thì tan`,pr:0,cool:BAL.eit.cool.bangvun,tg:[]},
+ ngocboikc:{n:"Ngọc bội khuê các",kd:"Trang sức",d:`Đeo eo: Sắc +${BAL.eit.kcSac} · ngọc bội con gái mang từ nhà`,pr:10,rk:0,sl:"waist",w:{sac:BAL.eit.kcSac}},
+ vongbackc:{n:"Vòng bạc hoa mai",kd:"Trang sức",d:`Đeo tay: Sắc +${BAL.eit.kcSac} · đôi vòng bạc con gái mang từ nhà`,pr:10,rk:0,sl:"wrist",w:{sac:BAL.eit.kcSac}}};
  for(const k in N)if(!IT[k])IT[k]=N[k];
  for(const k of ["bangda","bangvun"])Object.defineProperty(IT[k],"use",{enumerable:true,configurable:true,get(){let s=false;try{s=SEASON[S.month-1]==="Hạ"}catch(e){}const v=this.cool[s?0:1];return v?{suc:v}:{suc:0}}});
  try{for(const k in N){ITEM_ART_G[k]=0;ITIMG[k]=k}}catch(e){}
@@ -92,7 +94,7 @@ function eitReOdds(){const R=BAL.eit.re,r=Math.max(0,Math.min(7,rkOf(S)|0));cons
 /* the road without silver is priced like the silver at her rank (balance-pass rule: jstory altCost / BAL.bacTuan / BAL.altK when present,
    else the same numbers here): Sức + lower odds, floors R.suc / R.altPen */
 function eitAlt(bac,r){const R=BAL.eit.re;try{if(typeof altCost==="function")return altCost(bac,r,R.suc,R.altPen)}catch(e){}
- const T=BAL.bacTuan||[17,20,25,40,45,51,60,70],K=BAL.altK||{suc:1.2,pen:1.6,sucMax:20,penMax:40};const k=Math.abs(bac||0)*16/T[Math.max(0,Math.min(T.length-1,r|0))];
+ const T=BAL.bacTuan,K=BAL.altK;/* jstory (loads earlier) */const k=Math.abs(bac||0)*16/T[Math.max(0,Math.min(T.length-1,r|0))];
  return{suc:Math.max(R.suc,Math.min(K.sucMax,Math.round(k*K.suc))),pen:Math.max(R.altPen,Math.min(K.penMax,Math.round(k*K.pen)))}}
 function eitIssue(src,giver){const k=typeof earnPlainY==="function"?earnPlainY(S):null;if(!k||!WD_ITEMS[k])return null;const e={k,src,nvp:src==="nvp"?1:0,giver,d:typeof wdWhen==="function"?wdWhen():""};
  try{earnK(S,k)}catch(x){}if(!(wdOf(S)||{}).y){try{wdWearEntry(S,e)}catch(x){S.inv.push(e)}}else S.inv.push(e);S.tyNvp=null;

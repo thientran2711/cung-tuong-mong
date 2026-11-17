@@ -180,7 +180,7 @@ function kitReward(o){o=o||{};const kind=KM_BOX[o.kind]?o.kind:"chest";const B=K
  /* KIT §70: an item of the box (not the silver) is tappable: kitItemCard with the shared item detail */
  const kt=x=>x.k?` data-kid="${kmEsc(x.k)}" role="button" tabindex="0"`:"";if(coins)seq.push({n:`Bạc +${coins}`,img:`${KM_DIR}mo-ingot-silver.webp`,g:0,gn:"Bạc",coin:1});
  const info=x=>({name:x.n,src:x.img,src512:x.img,grade:x.g,gname:x.gn||KG[x.g].n,col:x.coin?"#c9a46a":KG[x.g].c,sub:""});
- const tile=(x,i)=>`<span class="kmsh" style="--i:${i}"${kt(x)}>${kitItem({src:x.img,name:"",grade:x.g,size:"sm",tip:x.n}).replace('<span class="kitn"></span>','')}</span>`;
+ const tile=(x,i)=>`<span class="kmsh" style="--i:${i}"${kt(x)}>${kitItem({src:x.img,name:"",grade:x.g,gname:x.gn||"",size:"sm",tip:x.n}).replace('<span class="kitn"></span>','')}</span>`;
  const rows=seq.map(x=>`<div class="kmrow"${kt(x)}>${typeof kitGradeChip==="function"?kitGradeChip(x.g,{name:x.gn,size:"sm",col:x.coin?"#c9a46a":""}):""}<b${x.coin?' class="g"':""}>${kmEsc(x.n)}</b>${x.d?`<small>${kmEsc(x.d)}</small>`:""}</div>`).join("");
  const html=`<div class="kmrew kmrew-${kind}${seq.length>6?" km-long":""}"><div class="kmrew-h"><b>${kmEsc(o.title||B[2])}</b>${o.from?`<small>${kmEsc(o.from)}</small>`:""}</div>
   <div class="kmbox"><i class="kmlight km-loop"></i><img class="kmbox-c km-loop" src="${KM_DIR}${B[0]}.webp" alt="" draggable="false"><img class="kmbox-o" src="${KM_DIR}${B[1]}.webp" alt="" draggable="false"><i class="kmlight kmlight-f km-loop"></i><div class="kmcoins">${coins?Array.from({length:Math.min(9,3+Math.round(coins/10))},(_,i)=>`<img src="${KM_DIR}mo-coin-silver.webp" alt="" style="--i:${i}">`).join(""):""}</div><div class="kmspot" style="--kshelf:${RV.shelf||380}ms"></div></div>
@@ -304,7 +304,7 @@ window.kitReward=kitReward;window.kitFlyItem=kitFlyItem;window.kitAlarm=kitAlarm
 .km-tablet.km-soft{background:#1a0f0a99}
 .kmflip{display:flex;flex-direction:column;align-items:center;gap:14px;width:100%}
 .kmcap{position:relative;z-index:3;font-family:var(--display);font-weight:700;color:#f6e3b4;font-size:1.05rem;letter-spacing:.05em;text-shadow:0 2px 6px #000a;animation:kmFade calc(.4s*var(--pace)) ease both}
-.kmtabs{display:flex;align-items:flex-end;justify-content:center;gap:clamp(6px,2vw,16px);height:min(52vh,420px);perspective:1100px;box-sizing:content-box;padding-top:clamp(28px,7%,40px)}
+.kmtabs{display:flex;align-items:flex-end;justify-content:center;gap:clamp(6px,2vw,16px);height:min(calc(52*var(--kvh,1vh)),420px);perspective:1100px;box-sizing:content-box;padding-top:clamp(28px,7%,40px)}
 .kmtab{height:82%;aspect-ratio:116/520;position:relative;filter:drop-shadow(0 8px 10px #0008)}
 .kmtab img{display:block;width:100%;height:100%}
 .kmtab-s{opacity:.85;animation:kmTabIn calc(.5s*var(--pace)) var(--km-out) calc(calc(.06s*var(--pace)) * (var(--i) + 3)) both}
@@ -380,7 +380,7 @@ window.kitReward=kitReward;window.kitFlyItem=kitFlyItem;window.kitAlarm=kitAlarm
 .kmchip-down{color:#cfc6be;background:#3a3236;border-color:#6a6064;animation:kmFade calc(.6s*var(--pace)) ease calc(1.9s*var(--pace)) both}
 .kmgcap{position:relative;display:flex;flex-direction:column;align-items:center;gap:4px;text-align:center;animation:kmFade calc(.6s*var(--pace)) ease calc(.6s*var(--pace)) both;padding:0 16px}
 .kmgcap b{font-family:var(--display);font-size:1.3rem;color:#d8d2cc;letter-spacing:.06em}.kmgcap small{color:#b8b0aa;font-size:.82rem;max-width:30rem}
-@keyframes kmLeaf{from{transform:translate(0,0) rotate(var(--r))}50%{transform:translate(var(--w),50vh) rotate(calc(var(--r) + 140deg))}to{transform:translate(calc(var(--w) * -1),105vh) rotate(calc(var(--r) + 300deg))}}
+@keyframes kmLeaf{from{transform:translate(0,0) rotate(var(--r))}50%{transform:translate(var(--w),calc(50*var(--kvh,1vh))) rotate(calc(var(--r) + 140deg))}to{transform:translate(calc(var(--w) * -1),calc(105*var(--kvh,1vh))) rotate(calc(var(--r) + 300deg))}}
 /* 5 buổi incense, week calendar */
 .curtain.shift span:has(.kminc){display:flex;align-items:center;gap:12px;padding:8px 22px 8px 14px;position:relative;z-index:1}
 .kminc{position:relative;display:block;height:78px;aspect-ratio:200/419;pointer-events:none;flex:none}
@@ -402,7 +402,7 @@ window.kitReward=kitReward;window.kitFlyItem=kitFlyItem;window.kitAlarm=kitAlarm
 @keyframes kmPage{to{transform:rotateX(-110deg) translateY(-6px);opacity:0}}
 @keyframes kmCalOut{to{opacity:0;transform:translate(-50%,-60%) scale(.8)}}
 /* 6 bloom, ink */
-.kmbloom{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;width:100%;height:min(70vh,520px)}
+.kmbloom{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;width:100%;height:min(calc(70*var(--kvh,1vh)),520px)}
 .kmglow{position:absolute;left:50%;top:42%;width:min(80vw,420px);aspect-ratio:1;transform:translate(-50%,-50%);background:url(img/fx/orb.webp) 100% 0/300% 100% no-repeat;mix-blend-mode:screen;filter:sepia(.5) saturate(1.6) hue-rotate(-25deg);animation:kmFade calc(.9s*var(--pace)) ease calc(.2s*var(--pace)) both}
 .kmpeony{position:absolute;left:50%;top:42%;width:min(56vw,280px);height:auto;transform:translate(-50%,-50%);animation:kmBloom calc(1.2s*var(--pace)) cubic-bezier(.2,.9,.3,1.1) both;filter:drop-shadow(0 8px 16px #0006)}
 .kmpet{position:absolute;left:50%;top:42%;width:26px;height:auto;opacity:0;animation:kmPet calc(1.1s*var(--pace)) var(--km-out) var(--d) both}
@@ -491,6 +491,6 @@ window.kitReward=kitReward;window.kitFlyItem=kitFlyItem;window.kitAlarm=kitAlarm
 @media (prefers-reduced-motion:reduce){.kmcard{transform:rotateY(180deg)}.kmtab-c{transform:translateY(-4%) scale(1.06)}.kmsc-c,.kmfr-old{display:none}.kmsc-o{clip-path:none}
  .km-open .kmlight{opacity:1;scale:1}.kmblot{opacity:.97;transform:translate(-50%,-50%) scale(3.2)}.kmstick{transform:translate(10px,6px) rotate(64deg)}.kmdark{opacity:1}}
 @media (prefers-reduced-motion:reduce){.kmov *,.kmseal,.kmxam *,.kmcal,.kmfl,.kmalarm,.dlg,#kpop,.rtoast.karesult.on{animation-duration:.01s!important;animation-delay:0s!important;animation-iteration-count:1!important}.kmfls,.kmalarm,.kmcal{display:none}}
-/* kv3:.kv1 */:where(.kv1) .kmtabs{height:min(46vh,360px)}:where(.kv1) .kmcap{font-size:.95rem}
-/* kv3:.kv2 */:where(.kv2) .kmtabs{height:min(50vh,380px)}:where(.kv2) .kmbloom{height:min(74vh,520px)}:where(.kv2) .kmbox{width:min(40vw,320px)}
+/* kv3:.kv1 */:where(.kv1) .kmtabs{height:min(calc(46*var(--kvh,1vh)),360px)}:where(.kv1) .kmcap{font-size:.95rem}
+/* kv3:.kv2 */:where(.kv2) .kmtabs{height:min(calc(50*var(--kvh,1vh)),380px)}:where(.kv2) .kmbloom{height:min(calc(74*var(--kvh,1vh)),520px)}:where(.kv2) .kmbox{width:min(40vw,320px)}
 `;document.head.appendChild(st)})();

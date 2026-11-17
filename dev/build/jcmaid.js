@@ -43,7 +43,7 @@ function cmTalOn(m){return m&&m.tal&&(m.src!=="pick"||(S.turn||0)-(m.at||0)>=cmB
 
 /* ---------- she picks one of several (thd at the start; cnv when she rises) ---------- */
 function cmCands(){const B=cmB();const L=[];for(let i=0;i<B.pickN;i++){let nm="";try{nm=mkServ("maid").name}catch(e){}if(!nm||L.some(c=>c.name===nm)||nm===(S.maid&&S.maid.name))nm=pick(MAIDS.filter(x=>!L.some(c=>c.name===x)))||pick(MAIDS);
- L.push({name:nm,loy:cmRange(B.loy.pick),age:16+R(7)})}const tals=cmTals("pick").sort(()=>Math.random()-.5);L.forEach((c,i)=>c.tal=tals[i%tals.length]);/* distinct talents to choose between */return L}
+ L.push({name:nm,loy:cmRange(B.loy.pick),age:BAL.cmaidx.age+R(BAL.cmaidx.ageR)})}const tals=cmTals("pick").sort(()=>Math.random()-.5);L.forEach((c,i)=>c.tal=tals[i%tals.length]);/* distinct talents to choose between */return L}
 PEND.cmPick=pp=>{const L=pp.c||[];if(!L.length)return null;return{who:pMaid(),t:`Nội vụ phủ đưa ${L.length} cung nữ đến để ngươi chọn một người làm thân tín. Không ai theo ngươi từ nhà: người ngươi chọn sẽ gắn bó lâu, nhưng những tháng đầu còn lạ.`,
  o:L.map(c=>({n:`Chọn ${c.name}`,fx:{},x:`${CM_TAL[c.tal]} · thiện cảm ban đầu ${c.loy}`,go:()=>{const m=newMaid(c.name,c.loy,c.age);m.src="pick";m.tal=c.tal;m.sec=cmSecFor();m.secKn=0;m.at=S.turn||0;
   try{if(S.maid&&S.maid.fc)m.fc=S.maid.fc}catch(e){}S.maid=m;cmC("picked");log(`Ngươi chọn ${m.name} làm cung nữ thân tín.`)}}))}};

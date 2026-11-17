@@ -92,7 +92,7 @@ window.slapGame=slapGame;
 /* ---------- her slap: the game decides the tier ---------- */
 (function(){const d0=doAct;doAct=function(i,k){
  if(k!=="tat"||SLAPG.busy||typeof window.__bot!=="undefined"||typeof kg82Open!=="function")return d0.apply(this,arguments);
- const v=rivals[i],a=ACT.tat,self=this,args=arguments;if(!v||!a||!can(2)||S.dead||Q.length||!v.alive||v.out||!a.ok(S,v))return d0.apply(this,arguments);
+ const v=rivals[i],a=ACT.tat,self=this,args=arguments;if(!v||!a||!can(BAL.actK)||S.dead||Q.length||!v.alive||v.out||!a.ok(S,v))return d0.apply(this,arguments);
  const B=BAL.slap;SLAPG.busy=1;
  slapGame({title:"Giáng tay",by:S,go:"Giơ tay",skip:"Tát luôn",skipSub:"không chơi: tay nhẹ",rows:[
   ["Vùng đỏ",`tay nặng: Đức ${B.duc[3]}, oán sâu, dấu tay đậm sưng đỏ ${B.wk[3]} tuần, dễ bị tố giác, Thái hậu có thể quở`,"r"],

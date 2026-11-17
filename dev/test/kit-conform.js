@@ -30,9 +30,12 @@ const VPS=(SIZES||'755x1000').split(',');
     if(!d.querySelector(':scope > .kph'))why.push('no kit header .kph');
     const mb=d.querySelector('#mb')||d.querySelector(':scope > .body');if(!mb)return{v:'CUSTOM',why:['no #mb']};
     const kids=[...mb.children].filter(e=>e.getClientRects().length);
-    kids.forEach(e=>{if(e.matches('.kpb,.opts,.kpscopts,.kdlgart.kesband,.kdlgart.kdpban,.kpnote,.kpsec'))return;if(e.matches('.kdlgart'))return;why.push('#mb child '+(e.className||e.tagName))});
+    kids.forEach(e=>{if(e.matches('.k3body,.kpb,.opts,.kpscopts,.kdlgart.kesband,.kdlgart.kdpban,.kpnote,.kpsec'))return;if(e.matches('.kdlgart'))return;why.push('#mb child '+(e.className||e.tagName))});
     const body=mb.querySelector(':scope > .kpb');let tpl='T1';
-    if(body){if(body.classList.contains('kpid'))tpl='T5';else{const sj=body.querySelector(':scope > .kpsubj');if(sj){if(sj.matches('.kes'))tpl='T3';else if(sj.matches('.kpiart,.kpev'))tpl='T2';else tpl='T4'}}}
+    /* T7 KIT SIZE FRAME (§84 live, kitFrameLive3): .ksz3 > #mb > .k3body (figure / portrait / event picture left + .k3right[event picture, .kpmain]) + .opts.k3btns */
+    const k3=mb.querySelector(':scope > .k3body');if(k3){tpl='T7';if(!d.classList.contains('ksz3')||!d.dataset.ksz)why.push('k3body without the kit size frame');if(!k3.querySelector(':scope > .k3right > .kpmain'))why.push('T7 without .kpmain');
+     if(!k3.querySelector(':scope > .kszfig,:scope > .k3mpor,:scope > .k3mpic'))why.push('T7 without its main picture');const P7=[...k3.querySelectorAll('.k3ev,.k3mpic')];if(P7.length!==1)why.push('T7 event pictures: '+P7.length)}
+    if(body&&!k3){if(body.classList.contains('kpid'))tpl='T5';else{const sj=body.querySelector(':scope > .kpsubj');if(sj){if(sj.matches('.kes'))tpl='T3';else if(sj.matches('.kpiart,.kpev'))tpl='T2';else tpl='T4'}}}
     if(tpl==='T4'&&body&&body.querySelector(':scope > .kpsubj .pframe,:scope > .kpsubj .pfwrap,:scope > .kpsubj .pcp,:scope > .kpsubj .pfr'))why.push('small framed portrait on a person pop-up (OD:L448): use the full-body figure column (T3)');
     /* pictures outside the options: T2 = 1, T3 = figure + ≤ 1 banner, T4 = portrait + ≤ 1 band, T1 = ≤ 1 band */
     const pics=[...mb.querySelectorAll('.ksart')].filter(e=>!e.closest('.opts,.kpscopts,.kaart,.kpkgrid,.kshg,.kinv,.kip,.kmc,.kmlist,.kfacts,.kpl')&&e.getClientRects().length);
@@ -42,7 +45,7 @@ const VPS=(SIZES||'755x1000').split(',');
     if(tpl==='T1'&&bands&&body&&body.querySelector(':scope > .kpsubj'))why.push('band + subject picture');
     if(tpl!=='T5'&&tpl!=='T3'&&tpl!=='T4'&&bands>1)why.push('two bands');
     /* hand-made blocks inside the main column */
-    const main=body&&body.querySelector(':scope > .kpmain');
+    const main=(body&&body.querySelector(':scope > .kpmain'))||mb.querySelector(':scope > .k3body > .k3right > .kpmain');
     if(main){[...main.children].forEach(e=>{const cl=[...e.classList].filter(c=>c!=='kpraw');const raw=e.classList.contains('kpraw');
       if(raw&&!cl.some(c=>KIT_BLOCK.test(c)))why.push('hand-made block .'+(cl.join('.')||e.tagName.toLowerCase()))});
      main.querySelectorAll('[style]').forEach(e=>{const s=e.getAttribute('style')||'';if(/display\s*:\s*(grid|flex)|position\s*:\s*absolute|grid-template/.test(s))why.push('inline layout on .'+(e.className||e.tagName))})}
@@ -75,9 +78,9 @@ const VPS=(SIZES||'755x1000').split(',');
   await run('goal-detail',()=>{if(typeof kitGoalDetail==="function")kitGoalDetail()});
   /* place cards (KIT 32.8 → §8.2): every place on the map */
   const places=await p.evaluate(()=>places().map(x=>x.k).filter(k=>k!=="home"));
-  for(const k of places.slice(0,+(process.env.KC_PLACES||40)))await run('place:'+k,k=>{document.querySelectorAll(".kroul").forEach(e=>e.remove());S.place="home";S.visit={k:"home",people:homePeople(),talked:false,tk:{}};S.out=0;S.confined=0;window.__walkSpill=null;S.wx=S.wx||{};tab="go";S.buoi=0;used=0;Q.length=0;render();j77Tap(k);if(!Q.length)window.__kcwhy=('noQ '+S.place+' dead='+S.dead+' srv='+isSrv()+' out='+S.out)},k);
+  for(const k of places.slice(0,+(process.env.KC_PLACES||40)))await run('place:'+k,k=>{document.querySelectorAll(".kroul").forEach(e=>e.remove());S.place="home";S.visit={k:"home",people:homePeople(),talked:false,tk:{}};S.out=0;S.confined=0;window.__walkSpill=null;S.wx=S.wx||{};tab="go";S.buoi=0;used=0;Q.length=0;render();j77Tap(k);/* kit-size #8: an OPEN place walks there instead of a card (stale MISSING 16/15): scan the real card builder for it */if(!Q.length){S.place='home';S.out=0;S.confined=0;try{j77Card(k)}catch(e){}}if(!Q.length)window.__kcwhy=('noQ '+S.place+' dead='+S.dead+' srv='+isSrv()+' out='+S.out)},k);
   await run('place:etq',()=>{document.querySelectorAll(".kroul").forEach(e=>e.remove());S.place="home";S.visit={k:"home",people:homePeople(),talked:false,tk:{}};S.out=0;S.confined=0;window.__walkSpill=null;S.wx=S.wx||{};tab="go";S.buoi=0;used=0;S.wx=S.wx||{};S.wx.f=0;Q.length=0;let pl=places().map(x=>x.k).find(x=>{try{return accEtq(S,x)&&accessOf(S,x).ok}catch(e){return false}});
-   if(!pl){const R=liveRivals(false).filter(v=>v.alive&&!v.out&&rkOf(v)>rkOf(S)+1);const h=R[0];if(h){pl=palaceOf(h);S.where[h.id]=pl}}render();j77Tap(pl);if(!Q.length&&pl&&typeof accEtqCard==='function'){accEtqCard(pl)}});
+   if(!pl){const R=liveRivals(false).filter(v=>v.alive&&!v.out&&rkOf(v)>rkOf(S)+1);const h=R[0];if(h){pl=palaceOf(h);S.where[h.id]=pl}}render();j77Tap(pl);if(!Q.length&&pl&&typeof accEtqCard==='function'){accEtqCard(pl,function(){})}});
   await run('place:night',()=>{document.querySelectorAll(".kroul").forEach(e=>e.remove());S.place="home";S.visit={k:"home",people:homePeople(),talked:false,tk:{}};S.out=0;S.confined=0;window.__walkSpill=null;S.wx=S.wx||{};tab="go";S.buoi=2;used=3;S.wx.f=1;Q.length=0;render();j77Tap('r5');if(!Q.length&&typeof j77LastWalk==='function')j77LastWalk('r5')});
   /* less-visited dialogs (coordinator 16/11 batch 2): outer court, contest, cold palace, co-op lobby */
   await run('outer-court',()=>{Q.length=0;document.getElementById('modal').hidden=true;S.buoi=0;used=0;menNtCard()});

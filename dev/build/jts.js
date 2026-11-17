@@ -8,7 +8,11 @@
 const TSA={};
 function tsS(){S.ts=S.ts||{};return S.ts}
 function tsOn(){return !!(typeof S!=="undefined"&&S&&!S.dead&&!(typeof isSrv==="function"&&isSrv()))}
-function tsGoi(p){p=p||S;return rkOf(p)>=7?"Hoàng hậu nương nương":rkOf(p)>=3?"nương nương":"tiểu chủ"}
+/* palace voice: the maid's warning is a pool (jvoice kLine, no repeat within BAL.voice.noRepeat tuần); {V} = who asks around */
+const TS_WARN=["“Dạo này người các cung nhìn {goi} không thiện ý. Nô tỳ nghe bên {V} hỏi giờ giấc cung ta.”","“{Goi}, người bên {V} cứ lảng vảng quanh cửa cung mình. Nô tỳ thấy không yên.”",
+ "“Tai vách mạch rừng, {goi} ạ. Bên {V} vừa dò hỏi chuyện ăn uống của cung ta.”","“Nô tỳ nghe phong thanh, {V} đang để mắt đến {goi}. Mấy hôm nay {goi} nên cẩn trọng.”",
+ "“Cung nữ bên {V} hỏi han nô tỳ đủ điều, nô tỳ chẳng dám hé răng. {Goi} phải đề phòng.”","“Cây cao thì đón gió, {goi} ạ. Bên {V} xì xào về cung mình đã mấy hôm.”"];
+function tsGoi(p){/* one address core (jvoice kAddr, VANPHONG §2) */return kSay({srv:"f"},p||S,"{goi}")}
 function tsNm(p){try{if(p===S)return"ngươi";return (p.queen?"Hoàng hậu":RANKS[cl(p.rank||0,0,7)].n)+" "+p.name}catch(e){return p&&p.name||""}}
 function tsBot(){return typeof window.__bot!=="undefined"}
 function tsLast(){return BUOI.length-1}
@@ -131,7 +135,7 @@ if(window.K3_RIGHT)window.K3_RIGHT.push("tsnh");
   el.insertAdjacentHTML("beforeend",`<button class="hc ${D.n>=30?"hot":D.n<10?"ok":""}" data-hx="tsnh">Nguy hiểm chung: ${D.n}</button>`)}}catch(e){}return r}})();
 document.addEventListener("click",e=>{const b=e.target.closest('[data-hx="tsnh"],[data-k3="tsnh"]');if(!b||!tsOn())return;e.stopPropagation();e.preventDefault();if(Q.length)return;tsDangerPanel()},true);
 function tsDangerOmen(){const s=tsS();const D=tsDangerOf(S,true);const st=TS_DW.filter(x=>D.n>=x[0]).length-1;const was=s.dStep||0;s.dStep=st;if(st<=was||st<2||!D.top.length)return;
- const x=D.top[0];tsPanel({t:"Lời cảnh báo",who:pMaid(),h:`<p>${S.maid.name} khẽ thưa: “Dạo này người các cung nhìn ${tsGoi()} không thiện ý. Nô tỳ nghe bên ${x.v.name} hỏi giờ giấc cung ta.”</p>${tsRows([["Nguy hiểm chung",`${D.n} · ${tsDWord(D.n)}`,"r"]])}`,
+ const x=D.top[0];tsPanel({t:"Lời cảnh báo",who:pMaid(),h:`<p>${S.maid.name} khẽ thưa: ${kLine("ts:warn",TS_WARN,{sp:{srv:"f"},ls:S}).replace(/\{V\}/g,x.v.name)}</p>${tsRows([["Nguy hiểm chung",`${D.n} · ${tsDWord(D.n)}`,"r"]])}`,
   opts:[tsOptGuard(),tsOptGifts(D),tsOpt({n:"Ghi nhớ, cứ như thường",duoc:["không tốn gì"],kem:["kẻ muốn hại vẫn rình"]})].filter(Boolean)})}
 
 /* =============== Ý 5 · NGƯỠNG XÉT PHẨM HIỆN TRƯỚC (promoReqP j8: cùng điều kiện cho mọi phi tần) =============== */
@@ -339,7 +343,7 @@ function tsDressGame(th,done){tsTagsFresh();const T=TS_THEME[th];const P={};cons
 #kg82 .ts-slots{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px;margin:4px 0 8px}
 #kg82 .ts-slot{display:flex;flex-direction:column;align-items:center;gap:2px;min-width:0}
 #kg82 .ts-slot>small{font-size:.74rem;color:var(--k-lab,#8a7350)}
-#kg82 .ts-items{display:grid;grid-template-columns:repeat(auto-fill,minmax(88px,1fr));gap:6px;max-height:42vh;overflow:auto;padding:2px;align-items:start}
+#kg82 .ts-items{display:grid;grid-template-columns:repeat(auto-fill,minmax(88px,1fr));gap:6px;max-height:calc(42*var(--kvh,1vh));overflow:auto;padding:2px;align-items:start}
 #kg82 .ts-det{margin:8px 0 4px}#kg82 .ts-det>.past{margin:4px 0}
 /* review ts-a FAIL 1: a <button> centres its content — every tile starts at the top so pictures and names line up across a row */
 #kg82 .ts-it{background:none;border:0;padding:0;cursor:pointer;min-width:0;opacity:.75;align-self:start;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;height:auto}

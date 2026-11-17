@@ -65,12 +65,15 @@ window.kcuHonorRows=function(n){const H=(typeof S!=="undefined"&&S&&S.honors)||[
 .kginfo{min-width:0;min-height:0;display:flex;flex-direction:column;overflow-y:auto;overscroll-behavior:contain;max-height:calc(100dvh - 128px)}
 .kginfo .kgbox{flex:0 1 auto}
 .kg82.kg-idle .kghud{display:none}
-.kgrv{max-height:clamp(120px,30dvh,260px);overflow-y:auto;overscroll-behavior:contain;margin:0 0 4px;border:1px solid var(--k-hair);border-radius:var(--k-rad);background:#fffdf8;padding:0 6px}
+.kgrv{max-height:clamp(120px,calc(30*var(--kvh,1dvh)),260px);overflow-y:auto;overscroll-behavior:contain;margin:0 0 4px;border:1px solid var(--k-hair);border-radius:var(--k-rad);background:#fffdf8;padding:0 6px}
 .kgrv .kfacts{margin:0}
 .kg82 .kg82act{position:sticky;bottom:0;background:linear-gradient(#fffaf000,var(--k-card) 22%);padding-top:10px;margin-bottom:0;z-index:2}
 /* kv3:.kv1 */:where(.kv1) .kgame .kgbody.kgpic-on{display:block;overflow:visible}:where(.kv1) .kgpic{margin:8px 10px 0;min-height:0;height:104px}:where(.kv1) .kgpic img{object-position:50% 55%}
- :where(.kv1) .kg82:not(.kg-idle) .kgpic{display:none}:where(.kv1) .kginfo{max-height:none;overflow:visible}:where(.kv1) #ov .mg.kg82{overflow-y:auto}:where(.kv1) .kgrv{max-height:clamp(110px,26dvh,220px)}
+ :where(.kv1) .kg82:not(.kg-idle) .kgpic{display:none}:where(.kv1) .kginfo{max-height:none;overflow:visible}:where(.kv1) #ov .mg.kg82{overflow-y:auto}:where(.kv1) .kgrv{max-height:clamp(110px,calc(26*var(--kvh,1dvh)),220px)}
 
 /* podium in short landscape (844x390): compact header + plaque so figures keep their scale and nothing runs under the header */
 
 `;document.head.appendChild(st)})();
+
+/* KIT §13.4 sample: the tài nghệ frame with her live figure (wide) — on the Fold (html.kv1) the column is not drawn */
+try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§13.4",title:"kitGameFrame + kitGameFig · khung tài nghệ có hình toàn thân của nàng",where:"MỌI trò tài nghệ (thi, học, tự luyện, Điểm trang, khảo hạch…) qua kg82Open; cột trái chỉ ở màn rộng (kv2)",html:()=>{try{return `<div class="mg kpanel kgame kg82" style="position:relative;max-width:760px;margin:0 auto">${kitGameFrame({art:"Đàn",title:"Tấu khúc",how:"Chạm đúng dây khi hoa chạm vạch son.",hud:[["score","Phần","0/10"],["round","Hồi","1/20"],["time","Còn","30 giây"]],id:"kgsample",fig:true})}</div>`}catch(e){return ""}}})}catch(e){}

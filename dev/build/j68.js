@@ -58,7 +58,7 @@ function c6(n,s){s=s||{};const wt=fx6(s.w).concat((s.r||[]).map(([a,v])=>relTok(
  const c={n,fx:s.c||{},x,go:()=>{let ok=true;if(p!=null)ok=Math.random()*100<p;
    if(ok){ap6(s.w);(s.r||[]).forEach(([a,v])=>relDo(a,v));let t="";try{t=s.ok?s.ok():""}catch(e){}log(t||s.wl||"Mọi việc êm xuôi.")}
    else{ap6(s.l);(s.lr||[]).forEach(([a,v])=>relDo(a,v));let t="";try{t=s.no?s.no():""}catch(e){}log(`<span class="r">Không thành:</span> ${t||s.ll||n+"."}`)}}};
- if(s.c&&s.c.suc&&S.suc+s.c.suc<5)c.n+=" (mệt)";return c}
+ if(s.c&&s.c.suc&&S.suc+s.c.suc<5)c.n+=" (mệt)";if(s.need&&typeof kitOffNeed==="function")kitOffNeed(c,s.need);return c}
 /* ---------- events ---------- */
 /* EV6(id, fam, spec): spec = {big, w(ctx)->weight, pp()->params|null (actor ids), v:[texts with {A} {B} {M} {S} {W} {P}], o(X)->choices, t title} */
 const FAM6={day:"Chuyện trong cung",visit:"Có người đến",emp:"Hoàng thượng",sea:"Thời tiết",fest:"Ngày hội",merit:"Lập công",court:"Tin triều đình",kid:"Chuyện các con",serv:"Kẻ hầu",rumor:"Tin đồn",myst:"Chuyện lạ cần tra",plot:"Mưu hại",quest:"Việc nhờ"};

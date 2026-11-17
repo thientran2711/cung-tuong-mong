@@ -22,7 +22,7 @@ function aaFallenT(){const L=liveRivals(true);if(!L.length)return null;const d=v
  if(p&&p.kind==="fallen"){const i=A.findIndex(a=>a.n==="Hỏi chuyện cũ");const x=aaFallenT();if(i>=0&&x){const nm=(x.queen?"Hoàng hậu ":RANKS[x.rank].n+" ")+x.name;
   A[i]=Object.assign({},A[i],{x:`về: ${nm} · biết 1 điều thật về nàng · chứng cứ +1 nếu nàng từng làm điều sai`,go:()=>{let f="";try{f=typeof intelLearn==="function"?intelLearn(x,1,{by:"Phế phi",how:"Hỏi chuyện cũ"}):""}catch(e){}const n=evA(S,x,1);try{evdSync()}catch(e){}log(`Phế phi kể chuyện của ${nm}: ${f||"một chuyện cũ"}${n?" Chứng cứ +1.":" Không có gì làm chứng cứ."}`)}})}}
  if(p&&(p.kind==="rival"||p.kind==="hh")&&p.ref){const v=p.ref;const i=A.findIndex(a=>a.n==="Nhờ giúp đỡ");if(i>=0){const x=liveRivals(true).filter(y=>y!==v).sort((a,b)=>aff(v,a)-aff(v,b))[0];
-  if(x)A[i]=Object.assign({},A[i],A[i].lock&&/cần thiện cảm 30/.test(A[i].t||"")&&!knows(v)?{t:`cần thiện cảm 30 (${KIT_REL.unknown})`}:{},{x:`nàng cho mượn Bạc +30 hoặc kể chuyện về ${x.name} (chứng cứ +1 nếu ${x.name} từng làm điều sai)`,run:()=>{chatMark(v);if(aff(v,S)>=30){if(roll(50)&&v.bac>=30){ap(v,{bac:-30});apply({bac:30});return `${v.name} cho ngươi mượn 30 lượng.`}return evA(S,x,1)?`${v.name} kể cho ngươi một chuyện về ${x.name}: chứng cứ +1.`:`${v.name} kể chuyện về ${x.name}: không có gì sai trái, chỉ biết ${harmTxt(x)}.`}affAdd(v,S,-3);return `${v.name} khéo từ chối. Thiện cảm -3.`}})}}}catch(e){console.error(e)}return A}})();
+  if(x)A[i]=Object.assign({},A[i],A[i].lock&&/cần thiện cảm 30/.test(A[i].t||"")&&!knows(v)?{t:`cần thiện cảm 30 (${KIT_REL.unknown})`}:{},{x:`nàng cho mượn Bạc +${BAL.audit.loan} hoặc kể chuyện về ${x.name} (chứng cứ +1 nếu ${x.name} từng làm điều sai)`,run:()=>{chatMark(v);if(aff(v,S)>=30){if(roll(50)&&v.bac>=BAL.audit.loan){ap(v,{bac:-BAL.audit.loan});apply({bac:BAL.audit.loan});return `${v.name} cho ngươi mượn ${BAL.audit.loan} lượng.`}return evA(S,x,1)?`${v.name} kể cho ngươi một chuyện về ${x.name}: chứng cứ +1.`:`${v.name} kể chuyện về ${x.name}: không có gì sai trái, chỉ biết ${harmTxt(x)}.`}affAdd(v,S,-3);return `${v.name} khéo từ chối. Thiện cảm -3.`}})}}}catch(e){console.error(e)}return A}})();
 
 /* 3. HIDDEN RISK of sending a servant (act audit): when she is not with the target, a consort act is done by her best servant
    (runAct → bestSent). For harm acts he may be caught (confessRisk): he confesses (the target holds 1 more chứng cứ against her)
@@ -339,7 +339,10 @@ let KRN_C={k:"",rx:null,m:null};
    person's title is read once. */
 let KRN_TM=null;
 function krnT(p){if(!KRN_TM)return kitTitle(p);if(KRN_TM.has(p))return KRN_TM.get(p);const t=kitTitle(p);KRN_TM.set(p,t);return t}
-function krnTable(){let L=[];try{L=kpPeople().filter(([n,p])=>p&&p!==S&&n.split(" ").length>=2&&krnT(p))}catch(e){return null}if(!L.length)return null;
+/* review/lag-play-2: the table (every person's name + title through kitTitle → kitFace, ~100-250 ms at 4x) is rebuilt only after a render
+   (titles change only through game actions, which render): window.__rendN is the render counter (jlag2.js). */
+function krnTable(){if(KRN_C&&KRN_C.rn!=null&&KRN_C.rn===window.__rendN&&KRN_C.S===S)return KRN_C;const t=krnTable0();if(t){t.rn=window.__rendN;t.S=S}return t}
+function krnTable0(){let L=[];try{L=kpPeople().filter(([n,p])=>p&&p!==S&&n.split(" ").length>=2&&krnT(p))}catch(e){return null}if(!L.length)return null;
  const k=L.map(x=>x[0]).join("|");if(KRN_C.k===k)return KRN_C;const esc=s=>s.replace(/[.*+?^${}()|[\]\\]/g,"\\$&");
  KRN_C={k,m:new Map(L),rx:new RegExp(`(?<![\\p{L}\\p{M}])(${L.map(x=>esc(x[0])).join("|")})(?![\\p{L}\\p{M}])`,"gu")};return KRN_C}
 function krnPrevText(n){try{return typeof k61PrevText==="function"?k61PrevText(n):""}catch(e){return""}}
@@ -347,7 +350,7 @@ function krnTitled(before,t,nm,blkPre){const b=String(before||"");if(t&&(kpTitle
  if(KP_TITLE_RX.test(b.slice(-40)))return true;/* any title word just before ("Phi Ôn Mạn Châu" with a stale rank is still a titled name) */
  return !!blkPre&&blkPre.includes(kitTitled(t,nm))}
 function kitRankNamePaint(root,dry){if(!KRN_TM){KRN_TM=new Map();try{return kitRankNamePaint(root,dry)}finally{KRN_TM=null}}const out=[];if(!root||!S||!document.createTreeWalker)return out;const T=krnTable();if(!T)return out;
- const W=document.createTreeWalker(root,NodeFilter.SHOW_TEXT,{acceptNode:n=>{const p=n.parentElement;if(!p||p.closest(KRN_SKIP))return NodeFilter.FILTER_REJECT;T.rx.lastIndex=0;return T.rx.test(n.nodeValue)?NodeFilter.FILTER_ACCEPT:NodeFilter.FILTER_REJECT}});
+ const W=document.createTreeWalker(root,NodeFilter.SHOW_TEXT,{acceptNode:n=>{/* review/lag-play-2: name test first, ancestor walk only for hits */T.rx.lastIndex=0;if(!T.rx.test(n.nodeValue))return NodeFilter.FILTER_REJECT;const p=n.parentElement;return !p||p.closest(KRN_SKIP)?NodeFilter.FILTER_REJECT:NodeFilter.FILTER_ACCEPT}});
  const L=[];while(W.nextNode())L.push(W.currentNode);
  for(const n of L){const v=n.nodeValue;const blk=n.parentElement.closest(KRN_BLK)||n.parentElement;let blkPre="";
   try{const r=document.createRange();r.setStart(blk,0);r.setEnd(n,0);blkPre=r.toString()}catch(e){}
