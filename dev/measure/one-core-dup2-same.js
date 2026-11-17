@@ -22,7 +22,8 @@ const B=(()=>{const b=bal(),T=require('../test/one-core-text.js').loadBAL(requir
 /* a text that prints a constant (${balSg(BAL…)} / ${balAb(BAL…)}) is turned back into the words it prints (one-core-text proof) before the compare */
 const PRINTED=require('../test/one-core-text.js').proof(require('path').join(__dirname,'..','build')).printed;
 const strip=n=>JSON.stringify(n,(k,v)=>{if(k==='start'||k==='end'||k==='raw')return undefined;/* "…" ≡ `…` without ${} */if(v&&v.type==='TemplateLiteral'&&v.expressions.length===0&&v.quasis.length===1)return{S:v.quasis[0].value.cooked};if(v&&v.type==='Literal'&&typeof v.value==='string')return{S:v.value};return v});
-const lit=v=>Array.isArray(v)&&v.length&&v.every(x=>typeof x==='number')?'['+v.map(lit).join(',')+']':typeof v!=='number'?null:v<0?`(-${-v})`:String(v);/* a number table (BAL.night.mood) goes back as the typed table */
+const isObjN=v=>v&&typeof v==='object'&&!Array.isArray(v)&&Object.keys(v).length&&Object.values(v).every(x=>typeof x==='number'||Array.isArray(x)&&x.every(y=>typeof y==='number'));/* an amount object (BAL.arc.h96: {h:10,t:6}) goes back as the typed object */
+const lit=v=>isObjN(v)&&Object.values(v).every(x=>typeof x==='number')?'{'+Object.entries(v).map(([k,x])=>k+':'+lit(x)).join(',')+'}':Array.isArray(v)&&v.length&&v.every(x=>typeof x==='number')?'['+v.map(lit).join(',')+']':typeof v!=='number'?null:v<0?`(-${-v})`:String(v);/* a number table (BAL.night.mood) goes back as the typed table */
 /* dead second copies deleted on purpose (the live copy is elsewhere): */
 const REMOVED={'j21.js':['oanW']};
 const RX=new RegExp('BAL\\.('+NS.join('|')+')((?:\\.[\\w$]+|\\[\\d+\\])*)','g');

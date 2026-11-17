@@ -58,6 +58,8 @@ const JOIN_PAT={
     one kind, the former 'amt1' folded in here; the number after the '(' of a roll( inside the call is an odds, not the amount
     (evA(v,t,roll(40)?…): counted by the roll kind — review/one-core-dup3); a wrapper g(8) still counts */
  amt:new RegExp('\\b(?:rdOan|rdRel|relAdd|oanAdd|affAdd|kcAf|tdPowAdd|e67(?:dad|bien|kho|heir|ally|pun|foe|drop|merit|srvUp)|srvMerit|evA|evStory)\\((?:(?:[^()]|\\([^()]*\\))*?(?:,|(?<!\\broll)\\())?\\s*(?:[\\w$.!]+\\s*\\?\\s*)?'+NUMA+'(?:\\s*:\\s*'+NUMA+')?\\s*\\)','g'),
+ /* h96 = a typed amount inside the tư tình arc's adj96({h,t,sus,ev,rise,lt}) (j96; all read BAL.arc.h96 since review/one-core-dup3) */
+ h96:/\badj96\(\s*\{[^{}]*?[:?]\s*[+-]?\d/g,
  ladder:new RegExp('(?:[\\w$.\\])]+\\s*(?:>=|>|<=|<)\\s*'+NUMV+'\\s*\\?\\s*(?:\\[[^\\[\\]]*\\]|'+NUMV+'|""|``)\\s*:\\s*){2,}(?:\\[[^\\[\\]]*\\]|'+NUMV+'|""|``)','g'),
 };
 const TXT_PAT={
@@ -157,7 +159,9 @@ if(fresh.size&&!UPD)fail.push('kinds not frozen yet (run --update once): '+[...f
 if(LIST){for(const k in now[LIST]||{})for(const s in now[LIST][k])console.log(k,s,now[LIST][k][s]);process.exit(0)}
 if(UPD){if(grew.length&&!GROW){console.log('REFUSED: the list would grow (move these into BAL, or the coordinator passes --allow-grow):\n  '+grew.slice(0,40).join('\n  '));process.exit(1)}
  const files={};for(const f of Object.keys(now).sort()){const per={};for(const k of Object.keys(now[f]).sort()){const o={};for(const s of Object.keys(now[f][k]).sort())o[s]=now[f][k][s];per[k]=o}if(Object.keys(per).length)files[f]=per}
- const kinds=[...new Set([...KINDS,...fresh,...Object.values(files).flatMap(o=>Object.keys(o))])].sort();
+ /* every kind the guard declares is frozen, even one with no site left (review/one-core-dup3: h96 is 0 after its move; a later typed copy is a NEW number, not a fresh kind) */
+ const DECL=[...Object.keys(CODE_PAT),...Object.keys(JOIN_PAT),...Object.keys(TXT_PAT).map(k=>'t.'+k)];
+ const kinds=[...new Set([...KINDS,...fresh,...DECL,...Object.values(files).flatMap(o=>Object.keys(o))])].sort();
  if(fresh.size)console.log('new kinds frozen: '+[...fresh].join(', '));
  fs.writeFileSync(BASE,JSON.stringify({note:'one-core frozen list of inline rule numbers (dev/test/one-core-guard.js). It may only shrink.',total:total(files),kinds,files},null,0).replace(/\},"/g,'},\n"')+'\n');
  console.log('baseline written: '+total(files)+' inline rule numbers frozen'+(base?` (was ${base.total})`:''));}

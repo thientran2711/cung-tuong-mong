@@ -14,6 +14,14 @@
    (arcOpt gives each choice a COPY, so the halving never changes this rulebook).
    Moved here from inline literals by dev/measure/arc-onecore-move.js (+ arc-onecore-emit.js); new arcs write their numbers here. */
 Object.assign(BAL,{arc:{
+ /* h96 = the tư tình arc's adj96 amounts (j96.js; review/one-core-dup3, dev/measure/one-core-dup3-h96-move.js): h = her heat, t = his tình ý,
+    sus = suspicion, ev = affair-case evidence, rise = his rise, lt = letters. <arc>.<beat>[option] = the object one option applies (two calls in one
+    option: [option][n]; 0 = no call); <arc>.E.<ending> = an ending's; month = the month tick (tm96Month). [a,b] = the two values of a `c ? a : b`. */
+ h96:{
+  tm96a:{a1:[{h:10,t:6},{h:-12,t:-8},{t:4,rise:1}],a2:[{h:-4,t:-4},{h:6,t:8,sus:[0,6]},{h:-6,t:-6}],a3:[{h:8,t:4},{h:-3},{h:-8,t:-12}],a4:[{h:-4,t:-5},[{h:8,t:10,lt:1},{ev:1,sus:5}],{h:4,t:-2,lt:1}],a5:[0,{h:-3}],a6:[{h:5},{h:-15,t:-15},[{h:10,t:10},{ev:1,sus:8}]],E:{a_lo:{ev:1}}},
+  tm96b:{b1l:[0,{sus:6}],b1h:[{h:6,t:4,lt:1},{h:-2},[{rise:1},{sus:6}]],b1d:[{t:-6,h:-3},{h:5,t:8}],b2a:[{t:-4,h:3},[{h:8,t:6},{rise:1},{sus:6}],{t:-15,h:-10}],b2b:[{h:-8},[{h:4},{t:12},{sus:8}]],b3a:[{t:-3,sus:-4},{sus:5,ev:1},{sus:4}],b3b:[0,{sus:6}],b4:[[{h:-4},{ev:1,sus:10}],[{t:4,h:6},{sus:8}],{sus:8}],b5:[{sus:[-10,12]},[{rise:1,sus:-4},{sus:12}],{sus:-8,h:-5}],E:{b_nghi:{sus:25},b_ton:{t:8,h:8,sus:-5},b_tin:{sus:-20}}},
+  tm96c:{c1n:[{sus:-12,t:-3},{sus:[-15,4]}],c1o:[{t:8,h:5},[{rise:1},{sus:8}],{h:-4}],c1t:[{t:2,rise:1},{rise:1,h:-3}],c2:[{h:-6,t:-4},[{t:6},{sus:10}],{h:2}],c3a:[{h:-6,t:-6},[{h:10,t:6},{sus:10,ev:1}]],c3b:[{h:-5,t:-8},{h:8,t:12,lt:1}],c4a:[{sus:12},{sus:-4},{sus:[2,12]}],c4b:[{t:6},{t:-8,h:-4}],c5:[{sus:6},{rise:1},{h:-10,sus:-6}]},
+  month:{lt:1}},
  gb:{
  rumor:[{c:{bac:-40},sc:1},{c:{suc:-5},o:[35,["m","mat",6],["d","tamco",4]],w:{mat:1},sc:1,l:{danh:-4}},{c:{danh:-3},w:{duc:2}}],
  hh:[{c:{danh:-2},w:{hh:8}},{c:{bac:-30},o:[40,["d","hh",3]],w:{hh:10},sc:1,l:{hh:-8}},{c:{suc:-3},o:[40,["d","tamco",3]],sc:1,l:{hh:-10}}],
