@@ -57,7 +57,7 @@ async function week(A,B,tag){for(let i=0;i<3;i++){await clear(A);await clear(B)}
  /* C2: every ACT kind on an NPC */
  const STAGE={musk:{h:'t.preg=3;t.hidden=0'},catswap:{h:'t.preg=7;t.hidden=0;delete t.catplot'},
   kpoison:{h:"t.kids=(t.kids||[]).concat([mkKid('f',4)])"},pond:{h:"t.kids=(t.kids||[]).concat([mkKid('f',4)])"},kframe:{h:"t.kids=(t.kids||[]).concat([mkKid('m',8)])"},
-  vp:{h:"const k=Object.keys(IT).find(k=>IT[k].sl&&itm(k).sl&&itm(k).rk>rkOf(t)&&!itm(k).nt);t.inv=(t.inv||[]).concat([{k}]);wear(t,t.inv.length-1)",g:"S.wdSeen=S.wdSeen||{};const st=wdStatus(t);S.wdSeen[wdKey(t)]={st:st&&st!=='ok'?st:'vuot',w:wk(),it:wdCur(t)}"},plant:{},
+  vp:{h:"const k=Object.keys(IT).find(k=>IT[k].sl&&itm(k).sl&&itm(k).rk>rkOf(t)&&!itm(k).nt);t.inv=(t.inv||[]).concat([{k}]);wear(t,t.inv.length-1)",g:"S.wdSeen=S.wdSeen||{};const st=wdStatus(t);S.wdSeen[wdKey(t)]={st:st&&st!=='ok'?st:'over',w:wk(),it:wdCur(t)}"},plant:{},
   takeaway:{h:"t.rank=Math.min(t.rank||0,1);t.kids=(t.kids||[]).concat([mkKid('f',2)])"},phatquy:{h:'t.rank=0;delete t.pen'},
   accuse:{h:'t.ev=9'},tocao:{h:'t.schemes=1;t.ev=3'},expose:{h:'t.scandal=1;t.ev=5'},trinhth:{h:'t.ev=3'},uyhiep:{h:'t.ev=3;t.bac=Math.max(t.bac||0,50)'},banphe:{h:'t.ev=3'},tieuhuy:{h:'t.ev=3'},
   xinhh:{h:'const q=rivals[0];q.queen=true;q.alive=true;q.out=0;q.rel=80;t.rank=Math.max(t.rank||0,1)'},trinhhh:{h:'const q=rivals[0];q.queen=true;q.alive=true;q.out=0;t.ev=4'},
@@ -111,6 +111,11 @@ async function week(A,B,tag){for(let i=0;i<3;i++){await clear(A);await clear(B)}
   const fields=[...new Set(r.ops.filter(o=>o.t==='npc').flatMap(o=>Object.keys(o.a).filter(f=>JSON.stringify(o.a[f])!==JSON.stringify(o.b[f]))))];
   const good=got&&r.same&&!chk.length&&hostSame===true;if(good)nOk++;
   table.push({k,id:r.id,staged:r.staged,ops:r.ops.length,fields,lensKept:r.same,hostGot:got,backOnHer:!chk.length,hostSame:hostSame===true,out:r.out});
+  /* TRACE=1 (reviewer r1): per changed field of her op: before / after on her act frame, now on the host world, now on her phone */
+  if(process.env.TRACE){const pick=async(o,ops)=>o.p.evaluate(ops=>ops.filter(x=>x.t==='npc').map(x=>{const v=rivals.find(y=>y.id===x.id);const f={};for(const k of Object.keys(x.a))if(JSON.stringify(x.a[k])!==JSON.stringify(x.b[k]))f[k]=v?JSON.stringify(v[k]):'gone';return [x.id,f]}),ops);
+   const hN=await pick(H,r.ops),gN=await pick(G,r.ops);for(const o of r.ops.filter(x=>x.t==='npc')){const h=(hN.find(x=>x[0]===o.id)||[])[1]||{},g=(gN.find(x=>x[0]===o.id)||[])[1]||{};
+    for(const f of Object.keys(h))console.log('TRACE',k,o.id,f,'b='+JSON.stringify(o.b[f]).slice(0,160),'a='+JSON.stringify(o.a[f]).slice(0,160),'host='+String(h[f]).slice(0,160),'her='+String(g[f]).slice(0,160))}
+   for(const o of r.ops.filter(x=>x.t!=='npc'))console.log('TRACE',k,'op',o.t,JSON.stringify(o).slice(0,300))}
   if(!good)ok(false,'C2 '+k,{same:r.same,got,chk,hostSame,ops:r.ops.map(o=>o.t+':'+o.id),glog:await G.p.evaluate(()=>[COOPW.thin.C.log.slice(-4),COOPW.thin.C.lastId,COOPW.thin.view&&COOPW.thin.view.o&&COOPW.thin.view.o.dr]),hlog:await H.p.evaluate(()=>[COOPW.thin.C.log.slice(-4),COOPW.thin.C.stat.applied,COOPW.thin.held&&COOPW.thin.held('b'),(COOPW.thin.D&&COOPW.thin.D.log||[]).slice(-4)])})}
  if(!process.env.NOACT)ok(nAct>0&&nAct===nOk,`C2 every ACT kind with an NPC effect: her world untouched by the act, effect applied once by the host and back on her phone (${nOk}/${nAct}; ${kinds.length} kinds, ${table.filter(x=>x.skip).length} without a target, ${table.filter(x=>!x.skip&&!x.ops).length} without an NPC effect)`);
  /* C3: a person she causes */
@@ -140,6 +145,14 @@ async function week(A,B,tag){for(let i=0;i<3;i++){await clear(A);await clear(B)}
  if(TRIPSRC){const t=await G.p.evaluate(()=>window.__trip&&__trip());ok(t&&t.world===0,'C7 tripwire: guest writes into W / R / Rarr = 0',t&&{world:t.world,byRoot:t.byRoot,lens:t.lens,state:t.state,top:t.top.filter(x=>/^(W|R)/.test(x[1])).slice(0,12)})}
  {const st=await G.p.evaluate(()=>{const C=COOPW.thin.C;let mx=0,mk='';for(const v of rivals)if(v&&!v.coop)for(const k in v){const l=JSON.stringify(v[k]||0).length;if(l>mx){mx=l;mk=v.id+'.'+k}}return {bado:C.stat.bado||0,big:C.stat.big||0,packs:C.stat.packs||0,sent:C.stat.sent,maxField:[mx,mk]}});
   ok(st.bado===0&&st.big===0,'C9 every NPC op reached the host: no intent over the Worker cap (bado 0, unsplittable 0)',st)}
+ /* C10 (review r1): a pack the Worker could not hand to the host ("nohost": his socket closed between her act and the send) is sent again
+    and applied ONCE (before: lost). Simulated on her phone: the first npc intent is swallowed and the Worker's nohost error emitted. */
+ {await sync();const x=await H.p.evaluate(()=>{const v=rivals.find(v=>v&&!v.coop&&v.alive!==false&&!v.out&&v.id<900);return {id:v.id,sung:v.sung}});
+  await G.p.evaluate(id=>{const s0=COOP.send;let n=0;COOP.send=function(o){if(o&&o.t==='do'&&o.op==='npc'&&!n++){setTimeout(()=>COOP.emit('error',{t:'error',code:'nohost',id:o.id}),300);return Promise.resolve(true)}return s0.apply(this,arguments)};
+   COOPW.thin.C.frame('act',()=>{const v=rivals.find(v=>v.id===id);v.sung=(v.sung||0)+3})},x.id);
+  const got=await until(H,x=>{const v=rivals.find(v=>v.id===x.id);return v&&v.sung===x.sung+3},x,15000);await sleep(2500);
+  const h1=await H.p.evaluate(id=>rivals.find(v=>v.id===id).sung,x.id),g=await G.p.evaluate(()=>({resend:COOPW.thin.C.stat.resend||0}));
+  ok(got&&h1===x.sung+3&&g.resend===1,'C10 a pack the host never got (nohost) is sent again and applied once',{before:x.sung,host:h1,guest:g})}
  {const [ho,go]=await both(()=>COOPW.oldRun||{});const n=o=>Object.values(o).reduce((a,b)=>a+b,0);
   ok(LVL>=3?n(ho)+n(go)===0:true,'C8 one switch: no old guest state guard ran in a C room (COOPW.oldRun, both seats)',{host:ho,guest:go})}
  ok(!H.errs.length&&!G.errs.length,'no page errors',{h:H.errs.slice(0,4),g:G.errs.slice(0,4)});

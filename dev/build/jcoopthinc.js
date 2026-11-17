@@ -150,10 +150,16 @@ let SQ=[],sT=0;
 function send(ops){if(ops.length){C.ops=ops;C.stat.sent++}SQ.push(...ops);clearTimeout(sT);sT=setTimeout(()=>{const L=SQ.splice(0);if(!L.length)return;
   /* packs under the intent cap, in order (an "add" and the ops after it stay in the order she made them) */
   const P=[];let cur=[],n=0;for(const o of L)for(const x of split(o)){const l=len(x)+1;if(cur.length&&n+l>CAP){P.push(cur);cur=[];n=0}cur.push(x);n+=l}if(cur.length)P.push(cur);
-  if(!TH.on(1)){/* the room holds (two builds) or reconnects: keep them, in order */SQ.unshift(...L);C.stat.wait=(C.stat.wait||0)+1;sT=setTimeout(()=>send([]),1000);return}
-  for(const ops of P){const id=TH.doSend("npc",{ops,w:COOP.state.week||0});if(!id){lg(["send-fail",ops.length]);C.stat.fail=(C.stat.fail||0)+1;continue}C.lastId=id;C.stat.packs=(C.stat.packs||0)+1;lg(["sent",id,ops.map(o=>o.t+":"+(o.id!=null?o.id:o.k)).join(",")])}},0)}
+  if(!TH.on(1)||COOP.frozen){/* the room holds (two builds), reconnects or the host is away (frozen): keep them, in order */SQ.unshift(...L);C.stat.wait=(C.stat.wait||0)+1;sT=setTimeout(()=>send([]),1000);return}
+  for(const ops of P){const id=TH.doSend("npc",{ops,w:COOP.state.week||0});if(!id){lg(["send-fail",ops.length]);C.stat.fail=(C.stat.fail||0)+1;SQ.push(...ops);sT=setTimeout(()=>send([]),1000);continue}
+   C.lastId=id;C.stat.packs=(C.stat.packs||0)+1;PD.set(id,ops);if(PD.size>40)PD.delete(PD.keys().next().value);lg(["sent",id,ops.map(o=>o.t+":"+(o.id!=null?o.id:o.k)).join(",")])}},0)}
+/* review r1: a pack the Worker could not hand to the host (nohost: his socket closed between her act and the send) was never applied:
+   it goes back in the queue, in order, and is sent again when the room is on (before: lost, her act's NPC effect silently gone) */
+const PD=new Map();
+COOP.on("thinview",V=>{try{const d=V&&V.o&&V.o.dr;if(d&&d.op==="npc")PD.delete(d.id)}catch(e){}});
 /* the Worker refused an intent (too big / bad): counted, never silent */
-COOP.on("error",m=>{try{if(gOn()&&m&&m.code==="bado"){C.stat.bado=(C.stat.bado||0)+1;lg(["bado",m.id])}}catch(e){}});
+COOP.on("error",m=>{try{if(!gOn()||!m)return;if(m.code==="bado"){C.stat.bado=(C.stat.bado||0)+1;lg(["bado",m.id]);PD.delete(m.id);return}
+ if((m.code==="nohost"||m.code==="nothin")&&PD.has(m.id)){const ops=PD.get(m.id);PD.delete(m.id);C.stat.resend=(C.stat.resend||0)+1;lg(["resend",m.id,m.code]);SQ.unshift(...ops);clearTimeout(sT);sT=setTimeout(()=>send([]),1000)}}catch(e){}});
 
 /* frames on the guest's engine entries (this module loads last but one: these wrappers are outermost) */
 function wrapF(n,kind,cond){const f=window[n];if(typeof f!=="function")return;window[n]=function(){if(!lOn()||(cond&&!cond.apply(this,arguments)))return f.apply(this,arguments);
