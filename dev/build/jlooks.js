@@ -62,11 +62,16 @@ function lkRec(p){const t=p&&p.toilette;return t&&typeof t==="object"&&t.wk===wk
 function lkPeek(p,part){if(!p)return null;if(part==="cloth"){const z=p.stain;return z&&z.w===wk()&&z.it?z:null}const t=lkRec(p);if(t)return t.lk&&t.lk.it?t.lk:null;const L=p.lk;return L&&L.w===wk()&&L.it?L:null}
 function lkBag(p,part){const b=lkPeek(p,part);if(b)return b;if(part==="cloth")return p.stain={w:wk(),it:{}};const t=lkRec(p);if(t)return t.lk={it:{}};return p.lk={w:wk(),it:{}}}
 function lkItem(p,id){const c=lkB().cat[id];if(!c||!p)return null;const bag=lkPeek(p,c.part);const x=bag&&bag.it[id];if(!x||!(x.lv>0))return null;
- if(LK_MK[id]&&!lkMadeUp(p))return null;const T=c.t[x.lv]|0;if(T&&lkNow()-(x.at|0)>=T)return null;return x}
+ if(LK_MK[id]&&!lkMadeUp(p))return null;const T=c.t[x.lv]|0;if(T&&!p.coop&&lkNow()-(x.at|0)>=T)return null;return x}   /* a co-op friend runs on HER clock: her seat sweeps it, the relay carries it */
+/* each new buổi: worn-off items leave the bag, so a co-op friend sees the same (her own seat decides) */
+function lkSweep(p){for(const part of ["face","hair","cloth"]){const b=lkPeek(p,part);if(!b)continue;for(const id in b.it){const c=lkB().cat[id],x=b.it[id],T=c&&x?c.t[x.lv]|0:0;if(!c||!x||T&&lkNow()-(x.at|0)>=T)delete b.it[id]}}}
+(function(){if(typeof nextBuoi!=="function")return;const n0=nextBuoi;nextBuoi=function(){const r=n0.apply(this,arguments);try{if(S&&!S.dead)lkSweep(S)}catch(e){}return r}})();
 function lkItems(p,ids){const out=[];for(const id of ids){const x=lkItem(p,id);if(x)out.push([id,x])}return out}
 /* ---------- give (level only goes up; a fresh hit restarts the clock) ---------- */
 function lkGive(p,id,lv,by,why){const c=lkB().cat[id];if(!c||!lkLive(p))return 0;lv=cl(lv|0||1,1,3);if(LK_MK[id]&&!lkMadeUp(p))return 0;
- const old=lkItem(p,id);if(old&&old.lv>=lv){old.at=lkNow();return 0}lkBag(p,c.part).it[id]={lv,at:lkNow(),by:fxKey(by),why:why||""};return lv}
+ const old=lkItem(p,id);if(old&&old.lv>=lv){old.at=lkNow();return 0}lkBag(p,c.part).it[id]={lv,at:lkNow(),by:fxKey(by),why:why||""};
+ try{if(p===S&&window.COOPW&&COOPW.on&&typeof sendPos==="function")sendPos()}catch(e){}   /* co-op: her new look reaches the friend at once */
+ return lv}
 function lkWord(id,lv){return (LK_N[id]||[])[lv]||""}
 function lkSay(p,L){const W=L.filter(Boolean);if(!W.length)return"";return `${p===S?"Ngươi":fxName(p)}: ${W.join(", ").toLowerCase()}. `}
 /* part-1 names kept for callers and tests */
@@ -82,7 +87,7 @@ function lkWxNow(){try{let c=typeof currentWeather==="function"?currentWeather()
 function lkCover(p){try{if(typeof wxKieuOk==="function"&&wxKieuOk(p))return"kieu";if(typeof wxHasGear==="function"&&wxHasGear(p,"cold"))return"du";if(typeof wxHelper==="function"&&wxHelper(p))return"help"}catch(e){}return""}
 function lkCoverX(p,k){const C=lkB().cover,c=lkCover(p),d=C.du[k]==null?1:C.du[k];return c==="kieu"?C.kieu:c==="du"?d:c==="help"?Math.max(C.help,d):1}
 /* one person outdoors for a while: roll the weather's looks + the B effects; returns the line for her */
-function lkOutdoor(p,o){if(!lkLive(p))return"";o=o||{};const W=lkWxNow(),B=lkB(),said=[];
+function lkOutdoor(p,o){if(!lkLive(p)||p.coop)return"";   /* a co-op friend's weather is rolled on HER seat only (the relay brings it) */o=o||{};const W=lkWxNow(),B=lkB(),said=[];
  if(W&&W.lv>0){const x=lkCoverX(p,W.k);
   for(const [id,odds,lvR] of B.wx[W.k]||[]){if(roll(Math.round((odds[W.lv]||0)*x))){const g=lkGive(p,id,lvR==="lv"?W.lv:lvR,null,"wx");if(g)said.push(lkWord(id,g))}}
   if(W.k==="storm"&&roll(Math.round(B.b.fear.o*x))){try{if(typeof emoSet==="function")emoSet(p,"so",B.b.fear.v,"sấm sét giữa trời")}catch(e){}said.push("sấm nổ làm giật mình")}
@@ -103,7 +108,7 @@ function lkAfterAct(o){try{if(!S||S.dead||!o)return;const n=String(o.n||"");let 
 /* a fall in bad weather (jweather wxHit "trượt chân") leaves mud and loose hair */
 (function(){if(typeof wxHit!=="function")return;const h0=wxHit;wxHit=function(p,R){const r=h0.apply(this,arguments);try{if(/trượt chân/.test(String(r||""))){lkGive(p,"bun",2,null,"nga");lkGive(p,"toc",2,null,"nga")}}catch(e){}return r}})();
 /* ---------- crying smudges the makeup (jemoact eaDo "khóc" for everyone, her "Khóc thầm" ventMe) ---------- */
-function lkCry(p,long){if(!lkLive(p))return"";const B=lkB().cry;return roll(B.o)?lkSmudge(p,long?B.lvLong:B.lv,"khoc"):""}
+function lkCry(p,long){if(!lkLive(p)||p.coop)return"";const B=lkB().cry;return roll(B.o)?lkSmudge(p,long?B.lvLong:B.lv,"khoc"):""}
 (function(){if(typeof eaDo!=="function")return;const d0=eaDo;eaDo=function(p,r){const out=d0.apply(this,arguments);try{if(p&&r&&/khóc/i.test(String(r.n||""))){const x=lkCry(p,/suốt đêm/.test(String(r.n||"")));if(x&&p===S)log(x)}}catch(e){}return out}})();
 (function(){if(typeof ventMe!=="function")return;const v0=ventMe;ventMe=function(n,why){const out=v0.apply(this,arguments);try{if(/khóc/i.test(String(why||""))){const x=lkCry(S);if(x)log(x)}}catch(e){}return out}})();
 /* ---------- changing clothes clears the clothes looks ---------- */

@@ -97,8 +97,9 @@ async function weekBoth(A,B,w){const n=await A.p.evaluate(()=>typeof B4N==='numb
    const ra=await read(A,false),rb=await read(B,true),rb2=await read(B,false),ra2=await read(A,true);
    ok(JSON.stringify(ra)===JSON.stringify(rb),tag+': A herself = A as seen on B',[ra,rb]);ok(JSON.stringify(rb2)===JSON.stringify(ra2),tag+': B herself = B as seen on A',[rb2,ra2]);return[ra,rb,rb2]};
  const marks=(o,friend)=>ev(o,fr=>{const p=fr?rivals.find(v=>v.coop):S;if(!p)return{none:1};const C=[];KIT_FACEFX.each(p,(d,st)=>{if(d.chip){const c=d.chip(p,st);if(c)C.push(d.id+':'+c[0])}});
-   return{C:C.sort(),stain:(typeof lkStainOf==='function'&&lkStainOf(p))?lkStainOf(p).k:null,smu:(typeof lkSmuOf==='function'&&lkSmuOf(p))?lkSmuOf(p).sev:0,ink:!!(typeof lkInkOf==='function'&&lkInkOf(p)),rash:p.rash?p.rash.sev:0}},friend);
+   return{C:C.sort(),stain:(typeof lkStainOf==='function'&&lkStainOf(p))?lkStainOf(p).k:null,smu:(typeof lkSmuOf==='function'&&lkSmuOf(p))?lkSmuOf(p).lv:0,ink:!!(typeof lkInkOf==='function'&&lkInkOf(p)),rash:p.rash?p.rash.sev:0}},friend);
  const sameM=async(tag)=>{let x,y,x2,y2;for(let i=0;i<40;i++){x=JSON.stringify(await marks(A,false));y=JSON.stringify(await marks(B,true));x2=JSON.stringify(await marks(B,false));y2=JSON.stringify(await marks(A,true));if(x===y&&x2===y2)break;await clear(A);await clear(B);await sleep(300)}
+   if(x!==y||x2!==y2){const d=await ev(A,()=>JSON.stringify({w:wk(),b:bid(),t:S.toilette&&{wk:S.toilette.wk,lk:S.toilette.lk},lk:S.lk}));const e=await ev(B,()=>{const f=rivals.find(v=>v.coop);return JSON.stringify({w:wk(),b:bid(),coop:f.coop,t:f.toilette&&{wk:f.toilette.wk,lk:f.toilette.lk},lk:f.lk,bx:f.__b&&f.__b.fx&&f.__b.fx.lk})});console.log('DBG A',d);console.log('DBG B-friend',e)}
    ok(x===y,tag+': A herself = A as seen on B',[x,y]);ok(x2===y2,tag+': B herself = B as seen on A',[x2,y2]);return[JSON.parse(x),JSON.parse(x2)]};
  await sameM('no marks');
  await ev(A,()=>{S.toilette=Object.assign({wk:toilWk(),day:toilWk()*10,F:1,occ:["th"],style:"fit",dv:"hopdip",makeup:true,score:80,look:"dep"});lkSmudge(S,2,'mua');lkStain(S,'uot');lkInk(S);render();return 1});

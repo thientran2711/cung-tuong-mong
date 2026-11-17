@@ -93,7 +93,9 @@ function freshFriend(P,o){if(!P)return;const key=(P.name||(P.S&&P.S.name)||"")+"
 function placeFriend(P){T("placeFriend "+(P&&P.name));pullFriend();if(!P)return;if(S)freshFriend(P,S);
  if(friendSrv(P)){const m=RV(P.S.srv.mid);if(m){m.staff=m.staff||[];m.staff.push(buildFriendSrv(P))}return}
  const v=buildFriend(P);if(!v)return;try{rstats(v)}catch(e){}
- if(v.queen&&!qOn()){rivals.unshift(v)}else{if(v.queen)v.queen=false,v.rank=Math.min(v.rank,6);rivals.push(v)}}
+ if(v.queen&&!qOn()){rivals.unshift(v)}else{if(v.queen)v.queen=false,v.rank=Math.min(v.rank,6);rivals.push(v)}
+ /* review/looks-2: a live pos of THIS week that came before her entry was (re)built carries newer face marks / look of the day than the base blob */
+ try{const m=CW.fpos;if(m&&m.week===wk()&&(!m.name||m.name===v.name)){if(m.fx&&typeof m.fx==="object")for(const x of FXL)if(x in m.fx)v[x]=m.fx[x]==null?null:J(m.fx[x]);if(m.tl&&typeof m.tl==="object")v.toilette=J(m.tl);if(v.__b)v.__b.fx=fxSnap(v)}}catch(e){}}
 
 /* ---------- local game → canonical ---------- */
 /* split / join the personal part of the world keys cm and men (her own knowledge of the court mood, her own ties to each man) */
