@@ -143,7 +143,7 @@ Frame / gem / brocade art (`img/kit/frame-consort-N`, `gem-N`, `bg-consort-N`) a
 | piece | function / class | rules |
 |---|---|---|
 | effect token | `eff(t)`, `effList(tokens,def)` → `.ef g/r/n` | colours of 1.2 |
-| odds chip | `oddsChip(word)` → `.oc .oc0..oc7` | ladder Liều/Khó/Năm ăn năm thua/Khá chắc/Chắc/Rất chắc/Nắm chắc; never %, never "Chắc chắn" (sure acts show no word) |
+| odds chip | `oddsChip(word)` → `.oc .oc0..oc7` | ladder Liều/Khó/Năm ăn năm thua/Khá chắc/Chắc/Rất chắc/Nắm chắc; never %, never "Chắc chắn"; ODDS CAP (owner 17/11): a formerly-sure CHANCE act shows the cap word `capW()` (= word(BAL.odds.hi), Nắm chắc) and fails softly through the ONE kit path `oddsSoft` (j63; hint `kitSoftW` / `kitCapLine`, button gate `capAt(khắc,cost)`); pure bookkeeping (walking, fixed price, opening a panel, a decision) shows no word and never rolls |
 | any price line | `kitParse('word · tốn: … · thành: … · hỏng: … · kèm: …')` | used by `optLine`, `dilLine`, `actLine`, `kitFix`; returns the labelled rows of section 6 (j63) |
 | act card | `cardH(a,i)` → `button.card.kcard.ka` | the ACT CARD frame of section 6 (j63): title + odds chip, description, rows Cần / Tốn / Được / Mất / Kèm / Ghi chú |
 | option (dialogs) | `button.opt` + `<small>` through `kitParse` → `.ka` | same ACT CARD frame (section 6) |
@@ -491,7 +491,7 @@ Rất thấp < Thấp < Vừa < Cao < Rất cao (0 → "Không có"), the same s
 - `CHW` (j1) recognises a chance phrase so `dilLine` treats a line with side chances like before (no "Khó lường").
 - Death risks on scheme buttons come from the real formula (poison / kpoison / pond): "nàng chết: khả năng thấp" (`kpDeathWord`).
 - Check: `node dev/test/sub-odds.js <site> index.html <out> after` (word detector: no ladder word after ':' or '(').
-Never %, never "Chắc chắn" (sure acts show nothing).
+Never %, never "Chắc chắn" (bookkeeping / decisions show nothing; a formerly-sure chance act shows Nắm chắc + the soft "hỏng", ODDS CAP §odds chip).
 
 ### 11.2 MÀU CHIỀU QUAN HỆ (owner 11/15) — `kitRel(dir,text)` + `kitRelPaint(root)` (jaudit §11), tokens in `p1.html :root`
 | Chiều | Token | Màu | Ví dụ nhãn |
@@ -1053,7 +1053,7 @@ so stage blocks may stand beside a head or between figures, never over the paint
       ("dễ thành" / "thành bại khó đoán" / "khó thành") and the failure ("hỏng thì cả họ bị tru di").
     2 SHARP — names ("Hoa Băng Tâm thất sủng") and the reading of the moment the data carries ("ngài trọng tài, rất hợp").
   · A hand-written override per option: `hint` (string or fn(lv)) and `risk`; it may never lie (must match the data).
-  · A "Chắc chắn" option cannot fail: its "Mất:" items are a sure price and read "nhưng …", never "hỏng thì …" (review/pets-fix-r6: ts-b "Nhịn"
+  · An option with NO odds word (a decision, no roll) cannot fail: its "Mất:" items are a sure price and read "nhưng …", never "hỏng thì …" (review/pets-fix-r6: ts-b "Nhịn"
     read "hỏng thì mất thể diện").
 - KIT PART `kitHintRow(text)` → the row `Gợi ý | <span class="ef i">…</span>` (`.kr-hint`; `.ef.i` = dim italic value, kit act-card CSS j63).
 - KIT PART `kitRisk(word)` → the risk chip in the option head: a `kitChip` tone — "an toàn" `.kchip.g`, "có rủi ro" `.kchip.w` (amber, kit

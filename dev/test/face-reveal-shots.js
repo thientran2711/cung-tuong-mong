@@ -17,7 +17,7 @@ if(OUT)fs.mkdirSync(OUT,{recursive:true});
    const e=k==='visit'?V:k==='th'?(S.thO=S.thO||{},S.thO):S.emp;const who=k==='visit'?pv(V):k==='th'?pTH():pEmp();
    const before={face:isKnown61(e),st:k61St(e)};
    const h=k==='visit'?'<p>Một phi tần áo bậc '+RANKS[V.rank].n+' sang chơi, ngồi chưa ấm chỗ đã hỏi chuyện ngươi.</p>':k==='th'?'<p>Thái hậu cho gọi ngươi đến Từ Ninh cung hỏi chuyện.</p>':'<p>Hoàng thượng cho gọi ngươi ra bờ Thái Dịch trì ngắm sen.</p>';
-   const mm={t,who,h,opts:[{n:'Vâng',fx:{},x:'Chắc chắn',go:()=>{}},{n:'Từ chối khéo',fx:{},x:'Chắc chắn',go:()=>{}}]};
+   const mm={t,who,h,opts:[{n:'Vâng',fx:{},x:'',go:()=>{}},{n:'Từ chối khéo',fx:{},x:'',go:()=>{}}]};
    /* a first-day card may still close the top dialog a moment later: put ours back until it stays */
    for(let i=0;i<4;i++){if(Q[0]!==mm){Q=Q.filter(x=>x!==mm);Q.unshift(mm)}showModal();render();await W(2500);if(Q[0]===mm&&!document.getElementById('modal').hidden)break}
    const M=document.getElementById('modal');const html=M.innerHTML;const fig=(M.querySelector('.kesimg')||{}).src||'';
