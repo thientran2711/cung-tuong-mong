@@ -24,22 +24,23 @@ const {chromium}=require('playwright');const fs=require('fs');const [,,URL,OUT,S
    ok("bad_deed",!memAdd(v0,S,"nope"),null);
    /* two-way through the existing acts: she befriends v2 (NPC remembers her); an NPC spies on her and is caught (she remembers the NPC) */
    roll=()=>true;try{runAct(S,v2,"ally")}finally{roll=R0}ok("runAct_ally",memList(v2,S).some(m=>m.d==="ally"),memList(v2,S).map(m=>m.d));
-   const sp=L[3]||v1;roll=()=>false;try{runAct(sp,S,"spy")}finally{roll=R0}ok("runAct_npc_on_me",memList(S,sp).some(m=>m.d==="spy"),memList(S,sp).map(m=>m.d));
+   const sp=L[3]||v1;roll=()=>false;window.__j95off=1;/* a forced NPC act: the j95 motive gate would stop it (D note, mem-upgrade-r1) */try{runAct(sp,S,"spy")}finally{roll=R0;window.__j95off=0}ok("runAct_npc_on_me",memList(S,sp).some(m=>m.d==="spy"),memList(S,sp).map(m=>m.d));
    /* the strong memory wrote a Sổ ghi line (→ Tuần lục) */
    ok("log_line",S.logs.slice(0,12).some(h=>/ghi lòng tạc dạ|để bụng/.test(h)),S.logs.slice(0,3).map(h=>h.replace(/<[^>]*>/g,"").slice(0,90)));
    /* RECALL */
    const line=memLine(v0,S);ok("recall_line",/ngươi đã/.test(line),line);
    ok("recall_mod",memMod(v0,S)>0,memMod(v0,S));
-   memAdd(v1,S,"poison");const bad=memMod(v1,S);ok("recall_mod_bad",bad<0,bad);
+   memAdd(v1,S,"judge");const bad=memMod(v1,S);ok("recall_mod_bad",bad<0,bad);
    const h0=hostility(v1,S);ok("npc_mind",typeof h0==="number",h0);
    const p0={kind:"rival",ref:v0,name:v0.name};const A=talkOpts(p0);const inv=A.find(a=>a.n==="Nhắc lại ân xưa");ok("invoke_option",!!inv,A.map(a=>a.n));
    const top0=memTop(v0,S,1).g;const msg=inv?inv.run():"";const q=q72();const dk=q72Key(q72A("rv",v0.id));
    ok("invoke_spends",memTop(v0,S,1).g<top0&&(q.d[dk]||0)>=1,{msg,before:top0,after:memTop(v0,S,1).g,debt:q.d[dk]});
    ok("invoke_ledger",hookQuery({k:"favour",on:v0}).length===1,hookQuery({on:v0}).map(h=>h.k));
    /* FADE */
-   const pz=memList(v1,S).find(m=>m.d==="poison");const gp=pz.g,ca=memList(v1,S).find(m=>m.d==="care");const gc=ca?ca.g:null;
-   S.turn++;memFade();ok("fade_month",pz.g===gp-BAL.mem.fadeMo,[gp,pz.g]);memFade();ok("fade_once_a_month",pz.g===gp-BAL.mem.fadeMo);
-   for(let i=0;i<60;i++){S.turn++;memFade()}ok("fade_keep_floor",pz.g===Math.round(pz.g0*BAL.mem.keepFloor),[pz.g,pz.g0]);
+   /* mem-upgrade: the monthly loss is fadeMo × the holder's nết multiplier (memFadeK); "judge" is a keep deed (floor), poison is lifelong now */
+   const pz=memList(v1,S).find(m=>m.d==="judge");const gp=pz.g,ca=memList(v1,S).find(m=>m.d==="care");const gc=ca?ca.g:null;const exp=Math.round((gp-BAL.mem.fadeMo*memFadeK(String(v1.id),-1))*10)/10;
+   S.turn++;memFade();ok("fade_month",pz.g===exp,[gp,pz.g,exp]);memFade();ok("fade_once_a_month",pz.g===exp);
+   for(let i=0;i<60;i++){S.turn++;memFade()}for(let i=0;i<200;i++){S.turn++;memFade()}ok("fade_keep_floor",pz.g===Math.round(pz.g0*BAL.mem.keepFloor),[pz.g,pz.g0]);
    ok("fade_gone",!memList(v1,S).some(m=>m.d==="care"),memList(v1,S).map(m=>m.d+":"+m.g));
    /* HOOKS */
    const id1=hookAdd("promise",v2,S,{t:"xin cho muội một chỗ trong buổi yến",due:wk()+6});ok("hook_add",!!id1&&hookQuery({k:"promise",by:v2,mir:false}).length===1);

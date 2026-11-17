@@ -29,7 +29,7 @@ function cmRange(a){return a[0]+R(a[1]-a[0]+1)}
 /* review/close-maid-r1: "kín miệng" only matters for a maid who can be bought; one who cannot (land / pick / old) gets another talent */
 const CM_NOBUY=["land","pick","old"];
 function cmTals(src){return Object.keys(CM_TAL).filter(k=>!(k==="kin"&&CM_NOBUY.includes(src)))}
-function cmSecFor(){const k=pick(Object.keys(CM_SEC));const o={k};if(k==="spy"){const L=liveRivals(true).filter(v=>v!==S);const v=L.length?pick(L):null;if(!v)return{k:"debt"};o.by=v.id}return o}
+function cmSecFor(){const k=pick(Object.keys(CM_SEC));const o={k};if(k==="spy"){/* planting a spy is a hostile act: only a consort with a motive (shared gate, OD:L35; schedules3-r4) */const L=liveRivals(true).filter(v=>v!==S&&(typeof motiveOK!=="function"||motiveOK(v,S,"spy").ok));const v=L.length?pick(L):null;if(!v)return{k:"debt"};try{if(typeof j95actLog==="function")j95actLog(v,S,"spy",motiveOK(v,S,"spy"))}catch(e){}o.by=v.id}return o}
 /* a new maid of hers: src from the origin (or given), loyalty in that src's range, one talent, one secret */
 function cmInit(m,src,keepLoy){if(!m||m.src)return m;const B=cmB();const k=S.origin&&S.origin.k;m.src=src||CM_SRC[k]||"noi";
  if(!keepLoy)m.loyal=cmRange(B.loy[m.src]||B.loy.noi);m.tal=m.tal||pick(cmTals(m.src));m.sec=m.sec||cmSecFor();m.secKn=0;m.at=S.turn||0;cmC("init_"+m.src);return m}
@@ -43,7 +43,7 @@ function cmTalOn(m){return m&&m.tal&&(m.src!=="pick"||(S.turn||0)-(m.at||0)>=cmB
 
 /* ---------- she picks one of several (thd at the start; cnv when she rises) ---------- */
 function cmCands(){const B=cmB();const L=[];for(let i=0;i<B.pickN;i++){let nm="";try{nm=mkServ("maid").name}catch(e){}if(!nm||L.some(c=>c.name===nm)||nm===(S.maid&&S.maid.name))nm=pick(MAIDS.filter(x=>!L.some(c=>c.name===x)))||pick(MAIDS);
- L.push({name:nm,loy:cmRange(B.loy.pick),age:16+R(7)})}const tals=cmTals("pick").sort(()=>Math.random()-.5);L.forEach((c,i)=>c.tal=tals[i%tals.length]);/* distinct talents to choose between */return L}
+ L.push({name:nm,loy:cmRange(B.loy.pick),age:BAL.cmaidx.age+R(BAL.cmaidx.ageR)})}const tals=cmTals("pick").sort(()=>Math.random()-.5);L.forEach((c,i)=>c.tal=tals[i%tals.length]);/* distinct talents to choose between */return L}
 PEND.cmPick=pp=>{const L=pp.c||[];if(!L.length)return null;return{who:pMaid(),t:`Nội vụ phủ đưa ${L.length} cung nữ đến để ngươi chọn một người làm thân tín. Không ai theo ngươi từ nhà: người ngươi chọn sẽ gắn bó lâu, nhưng những tháng đầu còn lạ.`,
  o:L.map(c=>({n:`Chọn ${c.name}`,fx:{},x:`${CM_TAL[c.tal]} · thiện cảm ban đầu ${c.loy}`,go:()=>{const m=newMaid(c.name,c.loy,c.age);m.src="pick";m.tal=c.tal;m.sec=cmSecFor();m.secKn=0;m.at=S.turn||0;
   try{if(S.maid&&S.maid.fc)m.fc=S.maid.fc}catch(e){}S.maid=m;cmC("picked");log(`Ngươi chọn ${m.name} làm cung nữ thân tín.`)}}))}};

@@ -22,7 +22,8 @@ function tabName(k){try{if(k==="act")return isS()?"Phận sự":"Hành sự";if(
 function road(){try{const Q0=(typeof QUEST67==="object"&&(QUEST67[S.origin.k]||QUEST67.tt))||null;return Q0?Q0.t:""}catch(e){return""}}
 function chapter(){try{/* a road with its own chapter (jkc at home before the tuyển tú) */if(typeof window.kitGoalAlt==="function"){const a=window.kitGoalAlt();if(a)return a}if(!S||!S.st)return null;const c=S.st.ch,m=S.st.ms,M=S.st.M;
  if(typeof v267==="function"&&v267()&&c){
-  if(m&&typeof MS67==="object"&&MS67[m.id]){const d=MS67[m.id],st=d.steps(m);return{kind:"ms",id:m.id,n:c.n,max:c.max,t:d.t(),g:d.g(),steps:st.map(x=>({t:x[0],ok:!!x[1]})),any:!!d.any}}
+  if(m&&typeof MS67==="object"&&MS67[m.id]){const d=MS67[m.id],st=d.steps(m);/* a tutorial chapter with quests (jtq14): every line must be done; its open quests are the "Việc nên làm" with "Đi làm" */
+  return{kind:"ms",id:m.id,n:c.n,max:c.max,t:d.t(),g:d.g(),steps:st.map(x=>({t:x[0],ok:!!x[1]})),any:!!d.any&&!m.q14,todo:m.q14&&typeof tq14Todo==="function"?tq14Todo(m):null}}
   if(M&&typeof ARC67==="object"&&ARC67[M.a]){const a=ARC67[M.a],P=(typeof pos67==="function"&&pos67(M))||{c:M.chap||1,i:M.i||0,n:M.seq.length};
    return{kind:"arc",n:P.c,max:c.max,t:a.t,g:fill67(a.g,M),act:P.i,acts:P.n,next:hint67(M),wait:!!M.cur,hist:M.hist||[],sc:M.sc||0,dl:M.dl}}
   if(c.all)return{kind:"all",n:c.n,max:c.max,t:"Mệnh truyện trọn vẹn",g:c.fin||""}}
@@ -40,7 +41,7 @@ function nextSteps(C){if(C&&C.todo)return C.todo.slice(0,3).map(x=>Object.assign
  else{
   if(hh)L.push({t:`Đi thỉnh an Hoàng hậu ${when}`,why:"Hoàng hậu thương thì được che chở; Danh, Đức tăng",tab:"act",act:/Thỉnh an Hoàng hậu/,card:"Thỉnh an Hoàng hậu"});
   else if(!S.thDead)L.push({t:`Đi thỉnh an Thái hậu ${when}`,why:"Thái hậu thương thì đường tấn phong rộng mở",tab:"act",act:/Thỉnh an Thái hậu/,card:"Thỉnh an Thái hậu"});
-  if(C&&C.kind==="ms"&&C.id==="nhap")L.push({t:"Làm Hoàng thượng để mắt tới",why:"đủ Sủng, đủ Danh thì được tấn phong một bậc",tab:"act",act:/Múa trong yến tiệc|Dưỡng nhan|Điểm trang|Đánh đàn|Dâng canh/,card:"Múa trong yến tiệc, Dưỡng nhan"});
+  if(C&&C.kind==="ms"&&/^(nhap|nhap14|sung14)$/.test(C.id))/* the 14-chapter tutorial (jst14 nhap14 / sung14, r3) is the same goal */L.push({t:"Làm Hoàng thượng để mắt tới",why:"đủ Sủng, đủ Danh thì được tấn phong một bậc",tab:"act",act:/Múa trong yến tiệc|Dưỡng nhan|Điểm trang|Đánh đàn|Dâng canh/,card:"Múa trong yến tiệc, Dưỡng nhan"});
   L.push({t:"Học một môn tài nghệ",why:"bậc cao mở việc mới, thắng thi tài, được để mắt",tab:"art"});
   L.push({t:"Kết giao một người",why:"có chị em che chở thì bớt bị hãm hại",tab:"rv"})}
  return L.slice(0,3).map(x=>Object.assign(x,{where:tabName(x.tab)+(x.card?` › thẻ ${x.card}`:"")}))}
@@ -66,7 +67,7 @@ function kitGoalDetail(){const G=kitGoalNow();if(!G)return;const C=G.C;
  /* the 14-chapter frame of a new life (jst14): which part she is in, chapters left */
  try{const F=typeof f14Info==="function"?f14Info():null;if(F)sec.push({h:`Đời người · ${F.max} chương`,rows:F.rows.concat([["Còn lại",F.left?`${F.left} chương`:"đã đi hết các chương"]])})}catch(e){}
  if(C.kind==="ms")sec.push({h:C.any?"Tiến độ · xong một điều là đủ":"Tiến độ",html:typeof kitChecks==="function"?kitChecks(C.steps.map(x=>[x.ok,esc(x.t)])):""});
- if(C.kind==="ms"&&C.id==="nhap"&&!isS()&&!S.out&&S.rank<7&&typeof promoReq==="function"){try{const R=promoReq();R.sort((a,b)=>a[0]-b[0]);
+ if(C.kind==="ms"&&/^nhap(14)?$/.test(C.id)&&!isS()&&!S.out&&S.rank<7&&typeof promoReq==="function"){try{const R=promoReq();R.sort((a,b)=>a[0]-b[0]);
   sec.push({h:`Muốn lên ${RANKS[S.rank+1].n}`,html:typeof kitReqRows==="function"?kitReqRows(R):""})}catch(e){}}
  /* C24 (review/chapter-detail): the same panel grown with the whole progress (chapModel, jchap.js): steps with how/where, the hồi so far with their pictures, risks */
  const CM=typeof chapModel==="function"?chapModel():null;
