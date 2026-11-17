@@ -148,6 +148,15 @@ function kitOptPic(title,b){const t=kitOptPlain(title);const tryKey=(k,how)=>{if
 /* the dialog option groups this applies to (every event / dilemma / night / reaction / servant / co-op dialog) */
 /* not: the identity card's approved pinned pair (.nlopts, KIT 31.16 "owner approved") */
 const KIT_OPT_SEL="#modal .opts:not(.nlopts) > button.ka, .kpscopts:not(.nlopts) > button.ka, .kitpg-opts > button.ka";/* r1: j79 kpIdentity moves the .nlopts pair into .kpscopts — still not a picture card */
+/* KIT 48.6 (kit-rank-name, owner 17/11 ~16:20Z): an option row that wears a PERSON's portrait is an avatar row, so its title is the STACK (rank over name), never "rank name" on one line.
+   Text based (works for a masked "Phi ???" too): the title's plain text must START with a rank word (RANKS, longest first); what follows up to " (" is the name; any tail
+   ("(Nữ công bậc 3)") stays as a small line under. Hoàng thượng / Thái hậu (one word) and rows already stacked are left alone. */
+function kitOptStackTitle(kan){if(!kan||kan.querySelector(".knr")||typeof RANKS==="undefined"||typeof kitRankName!=="function")return;
+ const t=String(kan.textContent||"").replace(/\s+/g," ").trim();let rk=RANKS.map(r=>r.n).sort((a,b)=>b.length-a.length).find(n=>t.startsWith(n+" "));if(!rk)return;
+ const rest=t.slice(rk.length+1);const i=rest.indexOf(" (");const name=(i<0?rest:rest.slice(0,i)).trim(),tail=i<0?"":rest.slice(i+1).trim();if(!name)return;
+ const rv=typeof rivals!=="undefined"?rivals.find(r=>r&&r.name===name):null;
+ kan.innerHTML=kitRankName(rv||null,{form:"stack",parts:{rank:rk,name}})+(tail?`<span class="kanx">${tail}</span>`:"")}
+window.kitOptStackTitle=kitOptStackTitle;
 function kpOptArt(b){if(!b||b.classList.contains("kcard"))return;if(b.dataset.kopt==="1"&&b.querySelector(":scope > .kaart"))return;
  const kan=b.querySelector(":scope > .kat > .kan, :scope > .kabody > .kat > .kan");if(!kan)return;
  const name=typeof kpActName==="function"?kpActName(kan):kitOptPlain(kan.textContent);
@@ -158,6 +167,7 @@ function kpOptArt(b){if(!b||b.classList.contains("kcard"))return;if(b.dataset.ko
  let cat="";try{cat=typeof kitActCat==="function"?kitActCat(name):""}catch(e){}const col=(typeof KIT_CAT!=="undefined"&&KIT_CAT[cat]||[])[1]||"";
  let body=b.querySelector(":scope > .kabody");if(!body){body=document.createElement("span");body.className="kabody";[...b.childNodes].forEach(n=>{if(!(n.nodeType===1&&n.classList.contains("kaart")))body.appendChild(n)});b.appendChild(body)}
  let art=b.querySelector(":scope > .kaart");if(!art){art=document.createElement("span");art.className="kaart";b.prepend(art)}
+ if(p.face)try{kitOptStackTitle(kan)}catch(e){}
  art.innerHTML=kitArtFrame(p.src,"","kopic"+(p.face?" kopface":""),"");art.dataset.kzoom=p.src;art.title="Chạm để xem tranh";
  if(col)b.style.setProperty("--kcc0",col);b.dataset.kopt="1";b.dataset.kopic=p.how+(p.key?":"+p.key:"");b.classList.add("kart","kopt")}
 window.kitOptPic=kitOptPic;window.kpOptArt=kpOptArt;window.KIT_OPT_RULES=KIT_OPT_RULES;
@@ -178,6 +188,10 @@ document.addEventListener("click",e=>{try{const a=e.target&&e.target.closest&&e.
 #kpzoom .kpzf{width:min(78vw,calc(calc(82*var(--kvh,1vh)) * 3 / 4),506px)}
 button.ka.kopt>.kaart[data-kzoom]{cursor:zoom-in}
 button.ka.kopt>.kaart .ksart.kopface>img{object-position:50% 12%}
+button.ka .kan .kanx{display:block;font-size:.82em;font-weight:600;opacity:.85;line-height:1.25}
+button.ka .kan .knr{display:flex;flex-direction:column;align-items:flex-start;text-align:left;padding:0;margin:0;line-height:1.2}
+button.ka .kan .knr-n{font-size:1em}
+button.ka .kan .knr-r{font-size:.78em}
 ${typeof kitCompactCSS==="function"?kitCompactCSS("button.ka.kart.kopt",84,112):""}
 /* one option card per row, full width (owner L109: horizontal option cards, no 2-col gaps; with the picture a half-width cell left the
    rows a thin column). Overrides jk3 31.16 k3grid and the person-dialog 2-column rules (jk4 32.7 / KIT 50 kdpo2, jplace): :is(#mb,*) +
