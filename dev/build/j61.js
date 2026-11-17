@@ -275,7 +275,7 @@ function k61SexAt(k){const W=S.where||{},L=[];for(const v of rivals)if(v.alive&&
  if(k==="tn"&&!S.thDead)L.push("f");if(k==="home"){L.push("f");S.kids.filter(x=>x.alive).forEach(()=>L.push("k"))}if(k==="tyv"||k==="ksp")L.push("m");
  if(k==="lc")for(let i=0;i<Math.max(1,Math.min(3,rivals.filter(v=>v.alive&&v.out).length));i++)L.push("f");
  for(const id in (S.menW||{}))if(S.menW[id]===k&&manById(id))L.push("m");return L}
-function k61SilChip(k,n){const L=k61SexAt(k);while(L.length<n)L.push("f");const im=g=>K61U["fig-"+g]?`<svg viewBox="0 0 10 14" aria-hidden="true"><image href="img/kit/unknown-fig-${g}.webp" width="10" height="14" preserveAspectRatio="xMidYMax meet"/></svg>`:SILH;
+function k61SilChip(k,n){return"";const L=k61SexAt(k);while(L.length<n)L.push("f");const im=g=>K61U["fig-"+g]?`<svg viewBox="0 0 10 14" aria-hidden="true"><image href="img/kit/unknown-fig-${g}.webp" width="10" height="14" preserveAspectRatio="xMidYMax meet"/></svg>`:SILH;
  return `<span class="msil" aria-label="${n} bóng người">${L.slice(0,Math.min(n,3)).map(im).join("")}${n>1?`<b>${n}</b>`:""}</span>`}
 (function(){const m0=mapHTML;mapHTML=function(){let h=m0.apply(this,arguments);try{if(S&&typeof SILH==="string"&&(K61U["fig-f"]||K61U["fig-m"]||K61U["fig-k"]))
  h=h.replace(/(<(?:button|div) class="mspot[^"]*" data-(?:go|ak)="([^"]+)"[^>]*>(?:(?!class="mspot)[\s\S])*?)<span class="msil" aria-label="(\d+) bóng người">[\s\S]*?<\/span>/g,(all,open,k,n)=>open+k61SilChip(k,+n))}catch(e){}return h}})();

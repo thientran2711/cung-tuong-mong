@@ -13,7 +13,8 @@
    Co-op: s.coop servants skip pride/leave. Old saves: new fields (s.proud) are optional. Numbers in BAL.sp (one source). ================= */
 Object.assign(BAL,{sp:{favPerBac:.2,favRef:4,favMin:3,favMax:30,favKeep:10,head:{maid:3,eunuch:2},
  proud:{tham:45,lanh:30,chuyen:30,nhat:10,trung:5},proudAvg:24,proudMo:6,proudLoy:3,bully:1,leaveCh:15,leaveLoyal:60,envySenior:5,
- keepMul:.5,keepMin:5,keepGain:6,keepMo:3,demoteLoy:15,demoteOthers:2,letOthers:2}});
+ keepMul:.5,keepMin:5,keepGain:6,keepMo:3,demoteLoy:15,demoteOthers:2,letOthers:2,
+ k:1/* khắc a đề bạt takes (either road) */}});
 function spQ(o){const q=typeof queenP==="function"?queenP():null;return q&&q!==o?q:null}
 /* the favour road for mistress o and servant s: {ok,n,k,lbl,how,val} */
 function spFav(o,s){const B=BAL.sp,pay=BAL.pay;const r=Math.min(7,Math.max(0,rkOf(o)));
@@ -35,7 +36,7 @@ function spAfter(o,s,r0){const B=BAL.sp;const me=o===S;const sn=spSenior(o,s,r0)
 /* the two-road card (KIT: tsPanel + tsOpt option cards with Cần / Tốn / Được / Mất / Kèm, the same as every dialog choice) */
 function spOpen(s){if(!S||!s||ownerOf(s)!==S)return;const nx=SRK[s.role][srk(s)+1];if(!nx)return;const c=dbCost(s),fv=spFav(S,s),od=dbOdds(S,s);
  const kem=[`kẻ hầu khác ghen tị (lòng -${BAL.dbEnvy})`];const both=spKemTxt(S,s).split(" · kèm: ").map(x=>x.trim()).filter(Boolean);/* shared Kèm of both roads: once, above the options (short option cards) */
- const duoc=[`${s.name} lên ${nx}`,`lòng +${BAL.dbGain}`];const go=road=>()=>{spend(1);dbDo(S,s,road,true)};
+ const duoc=[`${s.name} lên ${nx}`,`lòng +${BAL.dbGain}`];const go=road=>()=>{spend(BAL.sp.k);dbDo(S,s,road,true)};
  tsPanel({t:`Đề bạt ${s.name}`,who:pServ(s),h:`<p>Muốn ${s.name} lên <b>${nx}</b> thì phải qua Nội vụ phủ. Có hai đường: lót tay bằng bạc, hoặc ${fv.how} (mất chút thể diện với người).</p>${both.length&&typeof tsRows==="function"?tsRows(both.map(x=>["Kèm",x,"r"])):""}`,
   opts:[tsOpt({n:"Lót tay Nội vụ phủ",odds:od,fx:{bac:-c},need:[tsNeedBac(c)],duoc,mat:[`mất ${c} bạc`,`lòng -${BAL.dbFail}`],kem,go:go("bac")}),
    tsOpt({n:fv.k==="hh"?"Xin Hoàng hậu chuẩn":"Xin Thái hậu chuẩn",odds:od,fx:{[fv.k]:-fv.n},need:[{t:`${fv.lbl} ${fv.n} (có ${fv.val})`,ok:fv.ok}],duoc,mat:["lời xin mất",`lòng -${BAL.dbFail}`],kem,go:go("fav")})]});

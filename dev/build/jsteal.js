@@ -45,7 +45,7 @@ function stealPass(t,opt){opt=opt||{};const live=opt.live!==false;const out={hol
   if(!live){out.lines.push(txt);if(won){out.holder=v;break}continue}
   if(won){out.holder=v;
    if(t===S){for(let i=Q.length-1;i>=0;i--)if(Q[i].pid==="ksp")Q.splice(i,1);Q.push({t:"Kính sự phòng",h:`<p>Thẻ bài của ngươi đã được lật, nhưng ${txt}</p>`})}
-   else if(S.mat>=2)log(txt);
+   else if(S.mat>=BAL.stealx.hearMat)log(txt);
    try{const d=S.nightWhy;if(d&&d.wk===wk()){d.pick=v.id;d.cause="stolen"}}catch(e){}
    break}
   if(t===S)log(txt)}

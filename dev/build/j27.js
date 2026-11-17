@@ -63,10 +63,10 @@ function mapSpots(){palFix();const L=[];
  PALN.forEach((nm,i)=>{const s=MAPH.rivalSlots[i];const k=houses[i];if(k){L.push({k,box:s.box,n:nm,fn:palFn(k),res:residents(k),small:true})}else L.push({k:null,box:s.box,n:nm,fn:"cung trống",res:[],small:true,empty:true})});
  /* lower consorts whose head has no slot yet (more heads than palaces) live with no plan spot: listed under the nearest head */
  return L}
-function mapHTML(){const W=S.where||{};const disR=k=>S.out?"đang ở lãnh cung":S.confined?`đang cấm túc (${S.confined} tháng)`:S.place===k?"đang ở đây":k!=="home"&&!walkOk(travel(S.place,k))?(used>=4?"hết khắc":`đi ${travel(S.place,k)} khắc`):"";
+function mapHTML(){const W=S.where||{};const disR=k=>S.out?"đang ở lãnh cung":S.confined?`đang cấm túc (${S.confined} tháng)`:S.place===k?"đang ở đây":k!=="home"&&!walkOk(travel(S.place,k))?(used>=BAL.time.khac?"hết khắc":`đi ${travel(S.place,k)} khắc`):"";
  if(window.__mapList){return `<div class="ph"><button class="btn" data-maplist="0">Xem bản đồ hoàng cung<small>toàn cảnh</small></button></div>`+mapHTMLgrid()}
  const z=window.__mapZ||(kitView().pages===1?2.5:1);
- return `<div class="mapv"><div class="maptools"><span class="past">${SEASON[S.month-1]} · ${BUOI[S.buoi||0]} · còn ${4-used} khắc<span class="mleg"> · đi gần 1 khắc, xa 2 · mặt nhỏ: người ở cung · bóng: người đang có mặt</span></span><span><button class="btn mz" data-mapz="-1" aria-label="Thu nhỏ">−</button><button class="btn mz" data-mapz="1" aria-label="Phóng to">+</button><button class="btn mz" data-maplist="1">Danh sách</button></span></div>
+ return `<div class="mapv"><div class="maptools"><span class="past">${SEASON[S.month-1]} · ${BUOI[S.buoi||0]} · còn ${BAL.time.khac-used} khắc<span class="mleg"> · đi gần ${BAL.walk.near} khắc, xa ${walkFarK()} · mặt nhỏ: người ở cung · bóng: người đang có mặt</span></span><span><button class="btn mz" data-mapz="-1" aria-label="Thu nhỏ">−</button><button class="btn mz" data-mapz="1" aria-label="Phóng to">+</button><button class="btn mz" data-maplist="1">Danh sách</button></span></div>
  <div class="mapsc"><div class="mapw" style="width:${z*100}%"><img class="mapimg" src="${mapImg()}" alt="Toàn cảnh hoàng cung Đại Hy" onerror="this.src='img/map-${BUK[S.buoi||0]}.webp'">
  ${mapSpots().map(s=>{const b=s.box;const pos=`left:${b.x*100}%;top:${b.y*100}%;width:${b.w*100}%;height:${b.h*100}%`;
   if(s.empty)return `<div class="mspot sm off empty" title="${s.n}: ${s.fn}" style="${pos}"><span class="mlab">${s.n.replace(/ cung$/,"")}</span></div>`;
