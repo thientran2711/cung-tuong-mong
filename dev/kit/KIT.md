@@ -1086,8 +1086,7 @@ so stage blocks may stand beside a head or between figures, never over the paint
   re-cut after the fit was measured). No fit data → nothing drawn (never a guessed place).
 - **AVATAR = ID CARD (owner 17/11 ~18:10Z; review/kit-fx-register, jk2b.js `KIT_LASTING` / `KIT_BAKE`)**: every avatar-class frame (pcp tall, span.md / kmini / kfc,
   lists, cards, pickers: everything built by `pcPort` / `mdH`) shows the BASE PORTRAIT + LASTING marks only (today: the hủy dung scar; pox scars etc. plug in with
-  `KIT_LASTING.add({id,layers:(p,file)=>[{id,src,rect:[l,t,w,h,deg],o:[ox,oy],alpha}]})`). NO makeup, NO temporary mark (slap, rash, pallor, poison, ink, veil layers of
-  kitFxLayers) on any avatar, hers included. The lasting marks are BAKED with the photo into ONE image (canvas -> blob URL, cached per picture + marks + size
+  `KIT_LASTING.add({id,layers:(p,file)=>[{id,src,rect:[l,t,w,h,deg],o:[ox,oy],alpha}]})`). NO makeup, NO temporary mark (slap, rash, pallor, poison, ink, veil: the veil is worn, never on an avatar, kept on stage figures) on any avatar, hers included. The lasting marks are BAKED with the photo into ONE image (canvas -> blob URL, cached per picture + marks + size
   bucket tall 384 px / small 192 px, LRU 80, revoked 60 s after eviction) and the avatar `<img>` simply gets that src (`data-kbk` marks it until the bake is ready,
   then it is swapped). There is NO `.kfxc` / `.kfx` overlay box in avatar frames any more (the old box mis-registered by 5.5 %: lips on the chin, scar beside the cheek).
   A person without a lasting mark gets the plain photo: no canvas, no cost. Do NOT add per-frame overlay boxes; add a layer to `KIT_LASTING` instead.
