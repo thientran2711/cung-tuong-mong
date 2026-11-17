@@ -28,3 +28,5 @@ Refs per file: old fig-consort-cNN-t8-a36 + face-consort 01/05/12/18. Alpha extr
 | c26-t10-a36 | O6CGLm7ynm |
 Sheets (native 1024x2048 per figure, 3 across, dark + light): sheet-t9-dark/light.jpg, sheet-t10-dark/light.jpg in dev/handover/reports/fig-tier-succ/.
 Status: WAITING for owner OK via Foreman C. No batch, no upload yet.
+
+(image removed per OD ~14:15Z storage rule — images under reports/fig-tier-succ/ and any reports/fig-tier-succ.* pictures are no longer in git)

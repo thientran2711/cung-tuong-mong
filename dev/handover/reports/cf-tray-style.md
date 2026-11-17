@@ -6,3 +6,5 @@ Done. Final = round-2 "E" look (owner 16/11 21:39Z: "Lấy cái bản e cũ đi"
 - Rollback: the 4 previous live files were saved in the worker scratchpad only (not git); if needed re-run the tham-flip-ui art or ask for a re-generation.
 - Rejected samples (A–D, E-bright, round sheets): sample sheets git rm'd from this folder; Magnific outputs trashed (owner rule OD 18:50Z).
 Open: the owner's remark "in the game cards are not shown face-down like this" is about the flow of the scene, not the tray picture: this worker did not change card states (not in scope: file swap only) — Foreman C to decide if a separate task is needed.
+
+(image removed per OD ~14:15Z storage rule — images under reports/cf-tray-style/ and any reports/cf-tray-style.* pictures are no longer in git)

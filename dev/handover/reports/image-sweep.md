@@ -54,4 +54,21 @@ FOR MAIN/D: the biggest cleanup left is event-art-style2 (137 MB) + fig-feet-cro
 - Console check Fold 755x1000@2 + iPad 1180x820@2 (Playwright on the built site): 0 page errors, 0 broken <img>; image requests 535/545 OK, 33 × 404 on `https://ctm-img.victoria-tntt.workers.dev/img/@W<n>.webp`. NOT caused by this sweep: key `@W…` never existed in the CDN index; code origin = dev/build/j25.js:88 `CW=n=>"@W"+n` (main). Same on live code (tree is identical to main). FOR D: a whole-family bug of its own (a "@W" key sent as a file name) — open a separate topic, not part of the sweep.
 - Looked at: no visual change possible (no code diff), so no new shots; nothing stored in git or on the CDN.
 
+## PART 2 — handover branch `git rm` (tree only, no history rewrite; ordered by Foreman D #10)
+| folder (dev/handover/) | files | kept/removed | why |
+|---|---|---|---|
+| reports/fig-cutout-clean | 421 | removed | finished topic |
+| reports/fig-proportion | 141 | removed | finished topic |
+| reports/fig-proportion-redo | 60 | removed | finished topic |
+| reports/foreign-princess-art | 30 | removed | finished topic |
+| reports/pl-night-art | 11 | removed | finished topic |
+| reports/map-frame-art / map-frame-research | 7 / 6 | removed | finished topic |
+| reports/event-art-dark-fix | 6 | removed | finished topic |
+| reports/fig-tier-succ | 4 | removed | finished topic |
+| reports/cf-tray-style | 4 | removed | CLAIMS DONE (old E live on CDN) |
+| reports/art-complete-p2 | 1 | removed | CLAIMS DONE (48/48 live on CDN) |
+| shots/opt-pic-same 8, narrow-t3 5, morechip-corners 4, stage-caption 2 | 19 | KEPT | PASS / awaiting batch land per CLAIMS; remove after landing |
+| refs/* | 5 | KEPT | owner screenshots |
+Removed 691 files (~190 MB of tree; history keeps them). No verdict was open on a removed topic, so nothing was uploaded to the CDN. Each topic report that exists got the note "(image removed per OD ~14:15Z storage rule)". Handover branch now: 19 shots + 5 refs + 3 icons/icon.webp.
+
 SẴN SÀNG KIỂM 7e0250ec0bc3a4a0c2e296c335c6389d7b797427

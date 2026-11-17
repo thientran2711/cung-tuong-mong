@@ -212,3 +212,5 @@ Files (CDN review folder, NOT git; owner rule): https://ctm-img.victoria-tntt.wo
 Honest: NC reads clearly as a brocade-shawl costume, not Han gauze; faces are the same girl across ranks (NC) but not pixel-identical; Đáp ứng/Phi skirts are a wide A-line (gathered, not a clinging line), Phi BD hem is wide because of the layered robe of the game's model; BD Tần (approved v23) is still narrower/lower-res (752x1344 source). Hand/prop per rank differ. a18 only.
 Credits this session: 3 (Tần cut) + 3x65 (NC Tần) + 2x65x3 (NC ranks) + 2x65x2 (BD) + 8x3 cuts = 3+195+390+260+24 = 872 (v8-v27 ~6,760).
 In-game iPad 1180x820@2 shots (real origin/main build, CDN review folder): v26-INGAME-BD-QuyPhi-ipad-1180x820@2.png and v26-INGAME-NC-QuyPhi-ipad-1180x820@2.png — the princess as the player's figure beside a game figure (maid slot): same height and build as the game's own Quý phi/figures, no cut-off, sleeves as wide as game consorts. Local scripts (not in git) in /home/user/wt/fpa5-work.
+
+(image removed per OD ~14:15Z storage rule — images under reports/foreign-princess-art/ and any reports/foreign-princess-art.* pictures are no longer in git)

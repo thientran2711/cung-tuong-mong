@@ -28,3 +28,5 @@ Waiting for owner verdict via Foreman C.
 - 125 non-winter toi (all except dong, dongchi, giaothua, lapbat) got a one-off image grade baked in (not a runtime overlay): mask = bright + low-saturation + blue-leaning pixels (the pale pavement) -> warm-neutral grey stone, ~16% darker; lanterns, roofs, walls, trees untouched. Script: dev/handover/reports/pl-night-art/grade.py (pre-grade originals kept in /tmp only). 34 winter toi unchanged.
 - Re-encoded webp q<=80 (<=312 KB), same names, re-uploaded to the CDN (cdn_sync --check: same 159). Brightness now min 87.5 / median 102 / max 142; KB median 284.
 - Sheets final_00..09.jpg + table.csv regenerated.
+
+(image removed per OD ~14:15Z storage rule — images under reports/pl-night-art/ and any reports/pl-night-art.* pictures are no longer in git)

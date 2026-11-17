@@ -38,3 +38,5 @@ All three are rough mocks to judge DIRECTION, not final art. Mock assets: slip 6
 
 ## My recommendation
 B first (closest to refs 1, 5, 11 and the least chrome), A as the fallback if she wants some "palace" feel, C only if she likes yellow-slip labels (needs kit change). And ask her the one cheap question above (is it the frame or the map picture itself?) BEFORE any more painting.
+
+(image removed per OD ~14:15Z storage rule — images under reports/map-frame-research/ and any reports/map-frame-research.* pictures are no longer in git)

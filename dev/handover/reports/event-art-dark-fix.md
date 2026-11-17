@@ -279,3 +279,5 @@ sickservant 140->80, servleave 162->80 (autumn kept), faminedonate 156->74, drou
 | batch B (9) | ev-taintpick, ev-td1, ev-tt3, ev-toil-{rival-jealous,rival-tease,th-scold,crowd-jealous}, opt-giu-chan-hoang-thuong, intro/td-2 | relight | 69-80 |
 | batch C sad (7) | ev-e68-{sickservant,servleave,faminedonate,droughtprayer,letterhome}, ev-q72-doi-thuoc, ev-toil-emp-dislike | relight | 71-80 |
 Total 31 keys live. Not done (out of this round, credits): sad/dark re-class of festivals, q72 gift/visit, wk, tt1/tt2/vlout/thd1/runner/shop, other intro panels (see re-classify note above). Credits spent: 4 + 11 + 9 + 7 + 4(first full repaints, superseded) = ~35 gens x 40. Review sheets on CDN: none staged by me (sheets live in the handover branch only).
+
+(image removed per OD ~14:15Z storage rule — images under reports/event-art-dark-fix/ and any reports/event-art-dark-fix.* pictures are no longer in git)

@@ -31,3 +31,5 @@ Hand fixes: por-kid-p23-a51, f11-a51, f21-a26, f23-a26, f23-a36 were mis-cropped
 Tooling note: porcrop needs opencv 4.10 (pip --target .cache/pylib "opencv-python-headless==4.10.0.84"), not 5.x.
 Files here: kd_gensU.txt (gen ids), kd_bgU1.txt / kd_bgU2.txt (bg lines), kd_sheet_left23.jpg (contact sheet, dark bg, 23 ids x 3 ages).
 No code change needed. No successor needed for this job.
+
+(image removed per OD ~14:15Z storage rule — images under reports/art-complete-p2/ and any reports/art-complete-p2.* pictures are no longer in git)

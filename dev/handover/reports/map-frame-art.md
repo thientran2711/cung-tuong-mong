@@ -22,3 +22,5 @@ Files: sample-{a,b,c}-{ipad,fold}.jpg + sheet-map-frames.jpg in `map-frame-art/`
 
 ## Next (after owner choice)
 Upload the chosen variant's 4 webp (2 overlays + 2 masks) to the CDN as img/kit/mapsheet-<v>-<ipad|fold>[-mask].webp, kit-keeper spec (above), KIT READY-for-keeper.
+
+(image removed per OD ~14:15Z storage rule — images under reports/map-frame-art/ and any reports/map-frame-art.* pictures are no longer in git)
