@@ -115,6 +115,7 @@ const sl=t=>new Promise(r=>setTimeout(r,t));
    const iv=setInterval(()=>{const lv=SHPC.peek?SHPC.peek():0;if(lv>=BAL.shelf.plant.game.band[0]&&lv<=BAL.shelf.plant.game.band[1]){const b2=box.querySelector('[data-shw]');if(b2){b2.click();n++}}if(n>=BAL.shelf.plant.game.rounds)clearInterval(iv)},40)}));
  R.T.waterScore=wg;if(!(wg>=0.99))R.fail.push('water game in-band score '+wg);
  /* 4 NPC VISIT TIMELINE: play buổi until an agent "call" lands; record who/where/khắc */
+ await g.evaluate(()=>{for(const v of liveRivals(true))if((v.rel|0)<0)v.rel=0});/* r3 reviewer: the accuse steps above leave NPCs hostile to her (rel < visit.affMin) → nobody called in 40 buổi (~1 run in 6) */
  const tl=[];for(let i=0;i<40;i++){const r=await g.evaluate(async()=>{const sl=t=>new Promise(r=>setTimeout(r,t));for(let j=0;j<6;j++){Q.length=0;S.mg=null;try{closeModal()}catch(e){}try{nextBuoi()}catch(e){}await sl(30);try{if(typeof agFlush==='function')agFlush()}catch(e){}
     /* the khắc pass: land what is due (the loop lands a planned deed when its khắc passes; here we pass the whole buổi) */try{for(const q of (S.ag&&S.ag.pend||[]).slice())agLand(q)}catch(e){}}
    const L=((S.ag||{}).log||[]).filter(x=>x.k==="call");return{w:wk(),b:S.buoi,dead:S.dead,calls:L.map(x=>`w${x.w} b${x.b} k${x.kh} ${x.id}→${x.t}@${x.pl}`),seenMe:liveRivals(true).filter(x=>x.shn&&x.shn.me).length,by:Object.assign({},(window.AG&&AG.stat.by)||{}),agOn:typeof agOn==='function'&&agOn()}});
