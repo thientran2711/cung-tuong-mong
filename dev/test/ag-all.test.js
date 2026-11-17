@@ -44,6 +44,11 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
   const a0=sum();for(let i=0;i<60;i++)npcStudy(v);const on=sum()-a0;BAL.ag.day.on=0;const a1=sum();for(let i=0;i<60;i++)npcStudy(v);const off=sum()-a1;BAL.ag.day.on=1;return{on,off}});
  ok(r4.on===0&&r4.off>0,'old monthly study dice off while the day plan runs; back with BAL.ag.day.on=0',r4);
  /* 5 */
+ /* AG-ALL-2d4: the NPC Empress of line 16 can die / be deposed during the bot days (a real game outcome: base run crashed on q.bac of null);
+    the Empress checks below need an NPC Empress and the player below rank 7 (queenP() = S → AGREG.hh.acts(S) = [] and agNeedsG(S) has no
+    "order" → the 'Ban thưởng' + 'F5' pair fail together — the only state where both are empty, proven from jagacts agReg / agRegNeeds) */
+ const qs=await p.evaluate(()=>{const o={before:queenP()?(queenP()===S?"me":"npc"):"none",srank:S.rank};if(S.rank>=7)S.rank=6;if(!queenP()){const v=liveRivals(true).find(x=>x!==S&&x.alive&&!x.out&&!x.confined);v.queen=true;v.rank=7;const i=rivals.indexOf(v);if(i>0){rivals.splice(i,1);rivals.unshift(v)}}return o});
+ console.log('EMPRESS before the Empress checks: '+JSON.stringify(qs));
  const r5=await p.evaluate(()=>{const q=queenP();const v=liveRivals(true).find(x=>x!==q&&!x.out);const g=BAL.tw.g.reward;
   q.bac=500;v.hh=0;const h0=v.hh||0,d0=v.danh;hhAct(q,v,"reward");const npc=[(v.hh||0)-h0,v.danh-d0];
   /* the player AS the Empress (queenP() = S while S.rank ≥ 7): v.hh is then HER regard (j24 hhBind: "Hoàng hậu với X" = the Empress's own aff) */const rk0=S.rank;S.rank=7;S.bac=500;v.hh=0;const h1=v.hh||0,d1=v.danh;hhAct(S,v,"reward");const me=[(v.hh||0)-h1,v.danh-d1];S.rank=rk0;return{npc,me,want:[g[1],g[2]]}});

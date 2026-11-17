@@ -149,7 +149,7 @@ function knCarryOut(){if(!knOn()||!S||S.dead||S.out)return 0;const D=knRelay();i
  for(const h of L){if(!h||h.done||knFixed(h))continue;const hid=knHid(h);if(T.K[hid]||C.some(x=>x.id===hid+":c"))continue;const w=knWin(h);if(!w||w[1]+D<KH||w[1]>=KH)continue;/* runs on: in the next buổi list already *//* its news could not come inside this buổi */
   let r=null;agKh=()=>Math.max(real(),w[1])+D;try{r=knFor(S,h)}catch(e){agErr("knCarry",e)}finally{agKh=real}
   if(!r)continue;/* AG-ALL-2d4: the same walk — it reaches her in the next buổi at khắc (arrival − KH): a far informer comes later than a near one */
-  const due=Math.max(0,(r.at!=null?r.at:w[1]+D)-KH);const it={id:hid+":c",k:h.id,place:h.k,k0:0,k1:0,who:knWho(h),line:knLine(r,h),by:r.by,inf:knInf(r),infName:knInfName(r),seen:0,ended:0,carry:1,due};C.push(it)}
+  const due=Math.max(0,(r.at!=null?r.at:w[1]+D)-KH);const it={id:hid+":c",k:h.id,place:h.k,k0:-1,k1:-1,/* its window lay in the buổi before: over before khắc 0 of this one */who:knWho(h),line:knLine(r,h),by:r.by,inf:knInf(r),infName:knInfName(r),seen:0,ended:0,carry:1,due};C.push(it)}
  S.tb.C=C;KN.stat.carry=(KN.stat.carry||0)+C.length;return C.length}
 function knCarryIn(T){T.W=(T.C||[]).slice();T.C=[];knCarryTick(T)}
 /* a carried item lands when its bearer arrives (its khắc in this buổi), not all at the buổi's start */

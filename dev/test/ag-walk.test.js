@@ -26,10 +26,10 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
   const wf=BAL.walk.far;BAL.walk.far=3;o.eyeF3=run(far,"eye","f3");BAL.walk.far=wf;
   const sv=[BAL.ag.kh2.rd.see,BAL.ag.kh2.rd.go];BAL.ag.kh2.rd.see=0;BAL.ag.kh2.rd.go=0;o.eyeOff=run(far,"eye","o1");BAL.ag.kh2.rd.see=sv[0];BAL.ag.kh2.rd.go=sv[1];
   /* 4 carry: a happening in the LAST khắc */
-  const carry=(pl,tag)=>{const {pd,h}=mk(pl,tag,KH-1);const st0=S.staff,mat0=S.mat,md0=S.maid;S.staff=[];S.maid=null;S.mat=100;/* the eye route only (her confidant maid walks with her: one khắc) */const A0=adHapNow;adHapNow=function(){const L=A0.apply(this,arguments);KN.raw=(KN.raw||[]).concat([h]);return L};
+  const carry=(pl,tag)=>{const {pd,h}=mk(pl,tag,KH-1);const st0=S.staff,mat0=S.mat,md0=S.maid;S.staff=[];S.maid=null;S.mat=100;/* the eye route only (her confidant maid walks with her: one khắc) */const H0=knHit;knHit=()=>true;/* the eye always sees here: timing only */const A0=adHapNow;adHapNow=function(){const L=A0.apply(this,arguments);KN.raw=(KN.raw||[]).concat([h]);return L};
    const out={};try{used=KH-1;KN.m=null;out.now=knFor(S,h);out.walk=travel(pl,knAt("me",KH-1)||"home");const T=knTb();delete T.K[knHid(h)];knCarryOut();out.C=(T.C||[]).map(x=>({id:x.id,due:x.due}));
     Q.length=0;S.mg=0;nextBuoi();Q.length=0;adHapNow=A0;z.pend.splice(z.pend.indexOf(pd),1);S.staff=st0;S.mat=mat0;S.maid=md0;used=0;const c=out.C.find(x=>x.id.includes(":"+pl+":gossip"));const id=c&&c.id;out.due=c?c.due:null;out.at=[];
-    for(let k=0;k<KH;k++){used=k;KN.m=null;const L=tinBaoList();const it=L.find(x=>x.id===id);out.at.push(it?(it.ended?"ended":"live"):"-")}}catch(e){out.err=e.message}finally{adHapNow=A0;S.staff=st0;S.mat=mat0;S.maid=md0;used=0}return out};
+    for(let k=0;k<KH;k++){used=k;KN.m=null;const L=tinBaoList();const it=L.find(x=>x.id===id);out.at.push(it?(it.ended?"ended":"live"):"-")}}catch(e){out.err=e.message}finally{adHapNow=A0;knHit=H0;S.staff=st0;S.mat=mat0;S.maid=md0;used=0}return out};
   /* the carry: her place in the LAST khắc (her row may differ from khắc 1) */
   const meL=knAt("me",KH-1)||"home";o.meL=meL;o.cN=carry(PL.find(k=>k!==meL&&travel(k,meL)===1),"cn");o.cF=carry(PL.find(k=>k!==meL&&travel(k,meL)===2),"cf");
   o.errs=AG.errs.slice(0,5);return o});
