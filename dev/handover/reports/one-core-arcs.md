@@ -70,3 +70,37 @@ Pushed: review/one-core-arcs **882649ac** = f6b07eb3 (reviewer's stronger proof)
 3. Trial merge (temp branch, not pushed) with origin/review/one-core-roads-r1 75bc9f05 and origin/review/one-core-dup2-r2 711e637d (r3 in progress): note conflicts in dev/test/one-core-guard.js (my amt1 kind) / one-core-baseline.json for main.
 4. Fill the gate results here, push, send Foreman B s3 (session_01N1tNP3Jf9UG8ZtZdVruBg7) 'SẴN SÀNG KIỂM review/one-core-arcs <sha>'.
 Notes: QC_WT env must point at the worktree for coop-one-world; story tests take <url> args (file:///…/dev/index.html).
+
+## r2b FINISH (worker session_01N1tNP3SHnf4biK9aBwoNfv, successor) — SẴN SÀNG KIỂM review/one-core-arcs 2831e112
+PRIORITY #1 CHECK ('e67heir|amt1'): OD ONE CORE OD:L1267 | main 05ebe3da | review/one-core-arcs 882649ac (start), review/one-core-arcs-r1 f6b07eb3, review/one-core-dup2-r2 069188d7 (merged here), review/one-core-roads-r1 75bc9f05 (trial) | claims B arcs = this worker.
+START_CTX ≈ 10 % (estimate); finished well under rollover — no handover needed.
+Commits on top of 882649ac:
+- **ff6431d2** merge origin/review/one-core-dup2-r2 069188d7 (contains main 05ebe3da). Conflicts: assemble.py = dup2's list + 'jbalarc.js' after 'jbaleff.js'; j96 rare96 = arcFx wrapper + `w.loyal>=BAL.loy.trust` (70), tm96Month = BAL.arc.t96 lines + `hasT(m,"Tham vọng")`; jroute rtCaughtBy = BAL.route.seen.* + `netRx(v,/Tham|Xảo quyệt/)`; generated files rebuilt (build_site.sh).
+- Guard, ONE kind: dup2's `amt` already counts one-argument calls (dup2 commit c66ef16a, optional `[(,]` prefix; Foreman B's 08:28Z correction was based on a wrong note — confirmed by B 08:31Z). So `amt1` is deleted and folded into `amt`; `e67heir` added to amt's list; the join check line no longer names amt1.
+- **2831e112** baseline recount: 11790 → 9128 (427 entries shrank by 2669). **allow-grow = 7 pre-existing e67heir sites, foreman-approved 08:31Z.** Nothing else grew. Each exists on origin/main 05ebe3da with the same number (`git grep -nE '\be67heir\(\s*-?[0-9]+\s*\)' origin/main -- dev/build/jend14.js dev/build/jrd_thd.js`):
+  | file:line (main 05ebe3da) | site |
+  |---|---|
+  | jend14.js:134 | e67heir(6) |
+  | jend14.js:135 | e67heir(8) |
+  | jend14.js:138 | e67heir(6) |
+  | jend14.js:139 | e67heir(8) |
+  | jend14.js:159 | e67heir(4) |
+  | jend14.js:160 | e67heir(4) |
+  | jrd_thd.js:977 | e67heir(6) |
+  For the leftovers wave — BUT review/one-core-roads-r1 75bc9f05 already removes all 7 (0 left on the trial merge), so after roads lands they are gone.
+
+### Gates (on 2831e112; Chromium tests one at a time)
+| gate | result |
+|---|---|
+| arc-onecore-same.js vs 16d4925f | SAME · go runs 11448 ERR 0 · odds 201900 ERR 0 · page errors 0/0 |
+| arc-onecore-same.js vs 648461b5 | SAME · same counts, 0 ERR |
+| one-core-guard | 0 fails (inlineNow 9128 = baseline) |
+| one-core-text | PASS, 0 sites |
+| one-core-bind | PASS, prints 524, mismatches 0 |
+| quickcheck.sh | PASS (build same, core gates PASS, open 1415 ms 0 errors, old save from live loads + plays a buổi 0 errors, perf new/live render 250/268 ms, buổi 1147/1010 ms) |
+| coop-e2e | 62/62 passed |
+| coop-one-world (QC_WT=worktree) | PASS |
+| road-rare | ALL PASS |
+| road-end | 51/51 pass |
+| trial merge with review/one-core-roads-r1 75bc9f05 (temp, not pushed) | conflicts ONLY in generated assets.json / index.html / sw.js and dev/test/one-core-baseline.json; all code auto-merges. On the merged tree: guard 0 fails, `--update` shrinks 9128 → 4730 (no grow), arc-onecore-same vs 648461b5 SAME, 0 page errors. For main: take either baseline, then `--update` (shrink only), rebuild the site. |
+Pre-existing items from r1 (story14 p.startsWith, chap-label-oldsave v3 .obj67, chap-label head) not touched / not re-run.
