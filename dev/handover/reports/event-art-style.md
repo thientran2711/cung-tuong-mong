@@ -759,3 +759,10 @@ act-xu-toi.webp
 act-xuat-cung-thanh-than.webp
 act-xuat-cung-ve-que.webp
 act-xui-cha-dang-so.webp
+
+## REDO PROGRESS (17/11, after owner GO via Foreman C s13)
+Method per image: gpt-2-6, 4:3 (or the old aspect), 1k (40 cr), 3 style refs that already exist in the Magnific account (anchors DoJfAENpcl, IfibTkptvE, s786HZEl8e + samples yiEnj8mPW9 light / UPhZKBtwny, VXwvZlZMMU dark), prompt = "Soft painterly guofeng illustration in the style of the references: light warm pastel, gentle daylight, low contrast, delicate ink-and-wash, not photo-real. Scene: <scene, everyone seen from behind>. NO visible face of anyone. No text, no border." (dark/negative scenes: "muted night tone with plum shadow and one warm lantern", refs UPhZKBtwny+VXwvZlZMMU). Results come back as pikaso render.png URLs; download, look at a NEW-only grid, crop-check any figure that might face the viewer, resize to 1024 (4:3) / 768 (3:4) webp q84.
+Staged results (NOT live): CDN img/_review/event-art-style/ready/<key>.webp, same key as the live file. Sheets OLD|NEW: batch-01.jpg (25), batch-02.jpg (16).
+DONE keys (41): ev-am-muu ev-ch1 ev-ch2 ev-con-tre ev-cyrep ev-e68-{allyoffer autumnmoon bordernews borrowdress clanfather doccheck doubtvisit droughtprayer embroidery envoygift eunrequest faminedonate fortunenun giftarrive hhsummons kindvisit leakroof letterhome lotusseason musician newgirladvice officialwife painter poisonedfish proudvisit rumoremplove rumorfavor rumorpreg rumorth servhero servleave sickservant silkallot snowday spoiledfood springallergy}
+NEXT in table order: e68-stormnight straycat templerite thmama, evpick, fest-* (night ones stay night but muted), giftpick, hh-viec, j70thr, j71f-*, j71x-*, mood-binh*, morning-after-b, nc1, news-tin-trong-cung, nhap-cung*, night1*, night2*, plantpick, q72-*, runner, shop, taintpick, td1, thd1, toil-*, tt1-3, vlcraft, vlnvp, vlout, vulan, wk-*, opt-giu-chan-hoang-thuong (sample file in review/), then intro (49; samples intro-ch-h3 / intro-td-h1 in review/), then acts with faces (list at end).
+Going live (only after Foreman C confirms a sheet): cdn_sync the staged webp onto img/<key>.webp (same key, no manifest).
