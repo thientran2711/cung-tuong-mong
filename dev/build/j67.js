@@ -182,7 +182,8 @@ function a67Month(){if(!v267()||S.dead)return"";const st=S.st;try{msCheck67()}ca
 function hint67(A){if(!A)return"";if(A.done)return A.tag;const b=A.cur?beatDef67(A,A.cur):beatDef67(A,A.nb);if(!b)return"";
  if(A.cur)return `Đang chờ ngươi quyết: ${fill67(b.h||"",A)}`;const dm=Math.max(0,A.due-S.turn);
  return `Sắp tới: ${fill67(b.h||"",A)}${dm?` (khoảng ${dm} tháng nữa)`:" (tháng này hoặc tháng sau)"}`}
-Object.keys(STORY).forEach(k=>{const old=STORY[k];const W={};
+/* wrap67(k): the chapter frame over STORY[k]; keys added after j67 loads (jorigins STORY.bd) are wrapped by jroad.js at load end */
+function wrap67(k){const old=STORY[k];if(!old||old.__old)return;const W={};
  const d=(n,f)=>Object.defineProperty(W,n,{get:f,enumerable:true,configurable:true});
  d("t",()=>v267()&&S.st.ch?(QUEST67[k]||QUEST67.tt).t:old.t);
  d("goal",()=>{if(!v267()||!S.st.ch)return old.goal;const m=S.st.ms,M=S.st.M,c=S.st.ch;if(m){const d0=MS67[m.id];return `Chương ${c.n}: ${d0.t()}. ${d0.g()}`}return M?`Chương ${M.chap||1}: ${ARC67[M.a].t}. ${fill67(ARC67[M.a].g,M)}`:obj67()});
@@ -192,7 +193,8 @@ Object.keys(STORY).forEach(k=>{const old=STORY[k];const W={};
  d("month",()=>v267()?a67Month:old.month);
  d("acts",()=>v267()?(()=>[]):old.acts);
  W.init=function(){if(k==="td"&&old.init)old.init();a67init(k)};
- W.__old=old;STORY[k]=W});
+ W.__old=old;STORY[k]=W}
+Object.keys(STORY).forEach(wrap67);
 (function(){const s0=storyMonth;storyMonth=function(){if(v267())return a67Month()||"";return s0.apply(this,arguments)}})();
 if(typeof srvMonth==="function")(function(){const m0=srvMonth;srvMonth=function(){const r=m0.apply(this,arguments)||"";if(S&&!S.dead&&v267())return r+(a67Month()||"");return r}})();
 /* Sổ luân hồi: every story ending of the life */
