@@ -34,3 +34,9 @@ Re-review after the fix: only jgpick.js + the `.kshc>.kshpic` rule + a gift tile
 2. Chip/name gap: kit-size9-gap iPad 0 touches; my overlap scan shop / pet shop / gift tiles Fold + iPad = 0; kit-size9-gap Fold dupWord 0.
 Other checks: kit-size9-chip 60/60 bad 0; quickcheck PASS 147 s (old save ok); coop-e2e 59/59.
 Nit (not blocking): on the kit SAMPLE page at Fold, the XL "Ngự tứ" chip of the last item-frame sample hangs over the next section heading "§8.2b · Thẻ nơi chốn" (the sample has no bottom margin; docs page only, not a game screen). Also one sub-pixel touch (-0.6 px) "Tiến bộ" in a kinvg sample, did not reproduce on a second scan. Suggest a margin-bottom under the XL sample row at the next kit touch.
+
+## R3 delta check (code 844a3949 / build a227d507) — VERDICT: **PASS a227d507** (origin/main is an ancestor)
+Delta = kitItem draws no chip when `o.grade==null` (jk2b), recipe tiles (jrcp:210, jwkr:84) pass no grade; real grade 0 keeps "Thường".
+- Scan of every kitItem call without `grade:`: only empty slots, kitItem({}) sample and the 2 recipe tiles. Live: bag/wear/card Fold + iPad nochip 0; shop 12 + pet shop 11 + gift tiles 4 all have chips (no real item lost its chip through a missing grade); chip sheet 61 cells bad 0; kit page nochip = only the 2 recipe samples (Cháo trắng hành phi, Yến sào hầm sâm) as intended.
+- quickcheck PASS 149 s. coop-e2e not re-run (delta touches no co-op code; 59/59 on 0295fa45).
+- Nit still open (not blocking): §8.2b sample-page heading overlapped by the XL chip at Fold (gap -16.4 px) was not fixed.
