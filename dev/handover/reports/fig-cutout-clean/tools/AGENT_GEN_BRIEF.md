@@ -1,6 +1,6 @@
 # Sub-agent brief: generate+finish+upload 8 maid figures (W6b)
 Repo /home/user/cung-tuong-mong (detached on handover branch). Never git push/commit. Scratch: /tmp/claude-0/w/<AGENTNAME>/ (create). Tools: tools/finish_fig.py, tools/qa_fig.py in dev/handover/reports/fig-cutout-clean/tools/ (python3 -I; scipy/cv2/pillow already installed). dev/site/cdn_sync.py exists (uncommitted).
-Load Magnific tools with ToolSearch select:mcp__0ddfb647-f012-4bd3-adf9-4599110717d2__creations_upload_image,...__images_generate,...__creations_wait,...__creations_get (full prefixed names).
+Load Magnific tools with ToolSearch select:mcp__0ddfb647-f012-4bd3-adf9-4599110717d2__creations_upload_image,...__images_generate,...__creations_wait,...__creations_get (full prefixed names; the server may be named mcp__Magnific__* instead of the long id prefix).
 For your 8 keys (e.g. maid-m31-t1-a18):
 1. creations_upload_image url https://ctm-img.victoria-tntt.workers.dev/img/fig-<key>.webp fileName <key>.webp folderReference ba4aecfe-efce-47e2-b53f-30d292091886 -> old-ref id. (8 calls in ONE message.)
 2. 8 x images_generate in ONE message: mode gpt-2-6, width 1024, height 2048, resolution 2k, folderReference ba4aecfe-efce-47e2-b53f-30d292091886, extraSettings {"transparentBackground":true}, references (type image) = [old-ref id, N2HYqYa6D9, bxVgMSX5Y2, dtPf4EDXSL, eIyaPEVdqL]. If throttled, send 6 then the rest.
