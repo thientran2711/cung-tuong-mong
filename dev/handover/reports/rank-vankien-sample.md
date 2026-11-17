@@ -27,3 +27,13 @@ Silhouette light and flowing at every rank. Lower ranks untouched.
 - Not applied to live art; pilot → owner approval → roll out.
 
 ~30% xong / ~0% chơi được (sample only).
+
+## V2 (redo after owner rejection 17/11: "every outfit different, colour must change per rank")
+Same c01 face; each rank a different colour AND cut, Magnific gpt-2-6, all 5 compared side by side.
+- Tần: jade green straight jacket + mint skirt, tiny scalloped collar, silk handkerchief, flower hairpins.
+- Phi: lake blue crossed-collar layered organza robe, 4-lobe blue collar with white lotus, jade pendant.
+- Quý phi: crimson rose ruqun with 5-lobe gold-peony collar, gold brocade hem, round fan.
+- Hoàng quý phi: apricot-gold long over-vest, 6-lobe collar with gold phoenixes + pearl rows, ruyi sceptre, small phoenix hairpin.
+- Hoàng hậu: bright imperial yellow, red-gold phoenix on robe, modest red-gold collar, phoenix crown.
+Sheets v2: https://ctm-img.victoria-tntt.workers.dev/img/_review/rank-vankien/sheet_figures_v2.jpg and .../sheet_shoulders_v2.jpg
+Note: Tần collar is very small (mandarin-style scalloped), vân kiên barely visible by design.
