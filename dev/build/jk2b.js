@@ -577,9 +577,9 @@ function kitOriginArt(k){return `img/bg-origin-${k}.webp`}
 function kitOriginWide(k){return `img/origin-wide-${k}.webp`}
 /* o.size "thumb" = small square tile (28.19) */
 function kitSceneArt(src,label,o){o=o||{};const sh=o.shape==="tall"?"tall":"wide";const fb=o.fb?String(o.fb).replace(/'/g,""):"";
- const err=fb?`if(this.dataset.fb!=='1'){this.dataset.fb='1';this.src='${fb}'}else this.remove()`:"this.remove()";const lab=label?String(label).replace(/"/g,"&quot;"):"";
- return `<figure class="ksart ksart-${sh}${o.size==="thumb"?" ksart-thumb":""}${o.col?" ksart-cat":""}${o.cls?" "+o.cls:""}"${lab?` title="${lab}"`:""}${o.col?` style="--kcc:${o.col}"`:""}>`+
-  (lab?`<span class="ksart-ph">${label}</span>`:"")+(src?`<img src="${src}" alt="" loading="lazy" onerror="${err}">`:"")+
+ const err=fb?`if(this.dataset.fb!=='1'){this.dataset.fb='1';this.src='${fb}'}else{this.parentNode.classList.remove('ksart-ld');this.remove()}`:"this.parentNode.classList.remove('ksart-ld');this.remove()";const ok="this.parentNode.classList.remove('ksart-ld');this.parentNode.classList.add('kok')";const lab=label?String(label).replace(/"/g,"&quot;"):"";
+ return `<figure class="ksart ksart-${sh}${src?" ksart-ld":""}${o.size==="thumb"?" ksart-thumb":""}${o.col?" ksart-cat":""}${o.cls?" "+o.cls:""}"${lab?` title="${lab}"`:""}${o.col?` style="--kcc:${o.col}"`:""}>`+
+  (lab?`<span class="ksart-ph">${label}</span>`:"")+(src?`<img src="${src}" alt="" loading="lazy" onload="${ok}" onerror="${err}">`:"")+
   (label&&o.cap!==false?(o.col?`<em class="ksart-chip">${label}</em>`:`<figcaption>${label}</figcaption>`):"")+
   (o.mark?`<i class="ksart-mark" role="img" aria-label="${o.markAlt?String(o.markAlt).replace(/"/g,"&quot;"):""}" style="background-image:url('${String(o.mark).replace(/["'()]/g,"")}')"></i>`:"")+`</figure>`}
 (function(){const st=document.createElement("style");st.id="k-sceneart";st.textContent=`
@@ -599,6 +599,13 @@ function kitSceneArt(src,label,o){o=o||{};const sh=o.shape==="tall"?"tall":"wide
 .ksart>img{position:absolute;inset:3px;width:calc(100% - 6px);height:calc(100% - 6px);object-fit:cover;display:block;border-radius:2px;max-width:none}
 .ksart-ph{position:absolute;inset:3px;display:grid;place-items:center;text-align:center;padding:6px;font:700 .8rem/1.25 var(--display,serif);color:#fff3d8;
  background:linear-gradient(#5a3a1acc,#2a1a12cc),url(img/kit/bg-default.webp) center/cover;border-radius:2px}
+/* ui-fixes-1 (KIT loading look, owner-found 17/11): while the picture is still arriving (.ksart-ld) the frame shows the kit shimmer on card paper (soft gold sweep) and the label in dark ink
+   instead of a dark brown box; the picture covers it on load (.kok hides the label layer so a see-through webp never shows it). No picture at all (or it failed) = the old label plate. */
+@keyframes kitShim{0%{background-position:-160% 0}100%{background-position:260% 0}}
+.ksart.ksart-ld{background:linear-gradient(100deg,#efe4cf 30%,#fbf3e0 48%,#efe4cf 66%) 0 0/250% 100%;animation:kitShim 1.6s linear infinite}
+.ksart.ksart-ld>.ksart-ph{color:#7a5a2c;font-weight:600;background:none}
+.ksart.kok>.ksart-ph{display:none}
+@media (prefers-reduced-motion:reduce){.ksart.ksart-ld{animation:none}}
 .ksart-cat{border-color:var(--kcc);box-shadow:inset 0 0 0 2px #fffaf0,inset 0 0 0 3px var(--kcc)}
 .ksart-chip{position:absolute;left:50%;bottom:6px;transform:translateX(-50%);z-index:2;font-style:normal;font-size:.66rem;font-weight:700;color:#fff;
  background:var(--kcc);padding:1px 8px;border-radius:9px;white-space:nowrap;box-shadow:0 1px 3px #0006}
