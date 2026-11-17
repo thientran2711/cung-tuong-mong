@@ -55,7 +55,7 @@ if(typeof kitActArt==="function"){const k0=kitActArt;kitActArt=function(name){tr
 /* cards that open a picker / run a text act (the pop-up's own code), and the door stamp on every shared card */
 (function(){const a0=act;act=function(i){const a=deck&&deck[i];
  if(a&&a.ad&&(a.adOpen||a.adRun)){if(a.done||S.dead||Q.length||a.lock||!can(cardCost(a)))return;const k=cardCost(a);
-  if(a.adRun){spend(k);a.done=1;adDoorMark(a.n);let t="";try{t=a.adRun()||""}catch(e){console.error(e)}if(t){log(`${a.n}: ${t}`);pushModal({t:a.n,h:`<p>${t}</p>`});showModal()}render();return}
+  if(a.adRun){spend(k);a.done=1;adDoorMark(a.n);let t="";try{t=oddsCapped(a)&&!roll(BAL.odds.hi)?oddsSoft("",a.c):a.adRun()||""}catch(e){console.error(e)}/* ODDS CAP soft fail */if(t){log(`${a.n}: ${t}`);pushModal({t:a.n,h:`<p>${t}</p>`});showModal()}render();return}
   spend(k);window.__adPend=a;try{a.adOpen()}catch(e){console.error(e);window.__adPend=null}render();return}
  const r=a0.apply(this,arguments);try{if(a&&AD_DOOR[a.n]&&a.done)adDoorMark(a.n)}catch(e){}return r}})();
 /* the dò la picker: the card is done (and the door shut) only when someone is picked; "Thôi" refunds the khắc as before */

@@ -120,7 +120,7 @@ function gmOpts(v){const A=[],B=BAL.greet.meet;const f=chatF(v),g=n=>Math.max(1,
  return A}
 /* her replies: her own topicOpts entries for this person (same numbers), no khắc (the visitor spent hers); a proud higher one or a nod also offered */
 function gmReplies(v,G){const T=n=>{try{return topicOpts(v).find(a=>a.n===n)}catch(e){return null}};
- const wrap=a=>a&&{n:a.n,fx:a.c||{},x:a.x||"",go:()=>{let r="";try{if(a.c)apply(a.c);r=a.run?a.run():(runOpt(a)?"thành":"hỏng")}catch(e){}if(r)log(`${a.n}: ${r}`)}};
+ const wrap=a=>a&&{n:a.n,fx:a.c||{},x:oddsCapped(a)?kitCapLine(a.x?"thành: "+a.x:"",a.c):a.x||"",go:()=>{let r="";try{if(a.c)apply(a.c);r=a.run?(oddsCapped(a)&&!roll(BAL.odds.hi)?oddsSoft("",null):a.run()):(runOpt(a)?"thành":"hỏng")}catch(e){}if(r)log(`${a.n}: ${r}`)}};
  /* she is the higher one and nobody heralds her: her answer is HER choice (the rule's trait step is her own) */
  if(G&&G.B&&G.B.w==="me")return[{n:"Xưng danh đáp lễ",fx:{},x:`${grPron(v)} biết tên ngươi`,go:()=>{npcLearn(v,S);log(`Ngươi xưng danh đáp lễ ${v.name}.`)}},
   {n:"Khẽ gật đầu",fx:{},x:`giữ thể diện · ${grPron(v)} chưa biết tên ngươi`,go:()=>{log(`Ngươi chỉ khẽ gật đầu với ${v.name}.`)}}];

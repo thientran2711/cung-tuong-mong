@@ -12,7 +12,7 @@ function coldActs(){const A=[],fr=liveRivals(true).filter(v=>aff(v,S)>=40),f=fac
  if(S.an>=30)A.push({n:"Gửi bài thơ cũ",t:"Chép lại bài thơ đêm nào ngài khen, nhờ người lén dâng.",c:{},o:od(BAL.odb.j14.odO_4+S.an/2+S.arts.thi*8),k:2,w:{},l:{},x:"ngài nhớ chuyện cũ",go:()=>restore(false,"Hoàng thượng đọc bài thơ cũ, nhớ chuyện xưa")});
  if(son)A.push({n:`Nhờ ${son.name} cầu xin`,t:"Con quỳ trước Dưỡng Hòa điện xin cho mẹ.",c:{},o:od(BAL.odb.j14.odO_5+son.fond/2),k:1,w:{},l:{},x:"được tha",go:()=>restore(false,`${son.name} quỳ khóc xin cho mẹ`)});
  A.push({n:"Chép kinh, giữ đức",t:"Ngày ngày chép kinh Kim Cương.",c:{suc:-3},o:100,k:2,w:{duc:3}},{n:"Trồng rau",t:"Cuốc đất sau sân, trồng rau mà ăn.",c:{},o:100,k:2,w:{suc:6}},{n:"Thêu khăn bán",t:"Nhờ lính gác đem ra ngoài bán.",c:{suc:-5},o:od(BAL.odb.j14.odO_6),k:2,w:{bac:10},l:{}},
-  {n:"Xuất gia",t:"Cắt tóc đi tu, rời bỏ hồng trần.",c:{},o:100,k:4,w:{},x:"kết thúc kiếp này, yên ổn (sẽ hỏi lại)",go:()=>xgConfirm(()=>over("Xuất gia",`${S.name} cạo tóc, vào chùa Bảo Hoa tu hành, sống nốt quãng đời thanh tịnh.`,"Xuất gia"))});
+  {n:"Xuất gia",t:"Cắt tóc đi tu, rời bỏ hồng trần.",c:{},o:100,fix:1,k:4,w:{},x:"kết thúc kiếp này, yên ổn (sẽ hỏi lại)",go:()=>xgConfirm(()=>over("Xuất gia",`${S.name} cạo tóc, vào chùa Bảo Hoa tu hành, sống nốt quãng đời thanh tịnh.`,"Xuất gia"))});
  return A}
 function coldMonth(){let ev="";
  if(S.out){apply({bac:2});const w=SEASON[S.month-1]==="Đông";apply({suc:w?-12:-6});if(w&&roll(8)){apply({suc:BAL.eff.j14.sucColdMonth});ev+=`<span class="r">Đêm đông giá buốt, lãnh cung không than sưởi.</span> Sức ${balSg(BAL.eff.j14.sucColdMonth)}. `}

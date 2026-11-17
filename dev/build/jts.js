@@ -253,7 +253,7 @@ function tsSummonMe(k){const E=S.emp;/* a private summons: she is face to face w
 const TS_DEN=["nguyentieu","thattich","trungthu"];
 function tsDenFest(){try{const f=festToday();return f&&TS_DEN.includes(f.k)?f:null}catch(e){return null}}
 function tsDenCard(){const f=tsDenFest();if(!f||!tsOn()||S.out)return null;const s=tsS();const key=`${S.year}-${f.k}`;
- return{n:"Thả đèn hoa đăng",t:`Đêm ${f.name}, cung nhân thả đèn trên hồ Thái Dịch. Viết điều cầu vào đèn rồi thả trôi.`,c:{bac:-10},o:100,w:{},k:2,b:tsLast(),dom:"Giao thiệp",done:s.den===key?1:0,x:"chọn điều cầu ở bước sau",go:()=>{s.den=key;tsDenWish(f)}}}
+ return{n:"Thả đèn hoa đăng",t:`Đêm ${f.name}, cung nhân thả đèn trên hồ Thái Dịch. Viết điều cầu vào đèn rồi thả trôi.`,c:{bac:-10},o:100,w:{},k:2,b:tsLast(),fix:1,dom:"Giao thiệp",done:s.den===key?1:0,x:"chọn điều cầu ở bước sau",go:()=>{s.den=key;tsDenWish(f)}}}
 (function(){const d0=deal;deal=function(){const r=d0.apply(this,arguments);try{if(Array.isArray(deck)&&tsOn()){const c=tsDenCard();if(c)deck.unshift(c)}}catch(e){}return r}})();
 function tsDenSeen(){const E=S.emp;return (E.mood||0)<=1&&(S.sung||0)>=BAL.tsx.denSung}
 function tsDenWish(f){const s=tsS();const pdLeft=Math.max(0,6-(s.denPD||0));const hos=liveRivals(true).filter(v=>bandOf(danger(v,S))>=1&&!(S.dKnown&&S.dKnown[v.id])&&!knows(v));

@@ -71,7 +71,7 @@ function deal(){
  if(sick&&S.arts.y>=4)X.push({n:"Chữa bệnh cho con",t:`${sick.name} đang yếu, ngươi tự bốc thuốc.`,c:{suc:-10},o:100,w:{},x:`Sức khỏe ${sick.name} ${balSg(BAL.eff.j2.hpGo)}`,go:()=>{sick.hp=Math.min(100,sick.hp+BAL.eff.j2.hpGo)}});
  if(S.preg&&!S.fake)X.push(S.arts.y>=4?{n:"Tự bào chế thuốc an thai",t:"Ngươi tự sắc thuốc, không ai nhúng tay được.",c:{suc:-5},o:100,w:{},x:"tháng này nguy cơ sảy thai giảm một nửa",go:()=>S.anthai=1}
    :{n:"An thai",t:"Nằm nghỉ, uống thuốc an thai.",c:{bac:-20},o:100,w:{suc:10},x:"tháng này nguy cơ sảy thai giảm một nửa",go:()=>S.anthai=1});
- if(S.preg&&S.hidden&&S.preg<=3)X.push({n:"Báo tin có thai",t:"Đang giấu thai. Báo tin thì được sủng ái, nhưng kẻ ác cũng biết.",c:{},o:100,w:{sung:BAL.tw.g.ann[0],th:BAL.tw.g.ann[1]},x:`kèm: mọi phi tần ghen +${ghenN(BAL.tw.g.ann[2])}, ai cũng biết ngươi mang thai`,go:()=>{S.hidden=false;ghenAll(BAL.tw.g.ann[2])}});
+ if(S.preg&&S.hidden&&S.preg<=3)X.push({n:"Báo tin có thai",t:"Đang giấu thai. Báo tin thì được sủng ái, nhưng kẻ ác cũng biết.",c:{},o:100,fix:1,w:{sung:BAL.tw.g.ann[0],th:BAL.tw.g.ann[1]},x:`kèm: mọi phi tần ghen +${ghenN(BAL.tw.g.ann[2])}, ai cũng biết ngươi mang thai`,go:()=>{S.hidden=false;ghenAll(BAL.tw.g.ann[2])}});
  const s=STORY[S.origin.k];if(!S.st.done&&s.acts)X.push(...s.acts());
  X.push(...directActs());X.push(...illCards());
  X.forEach(a=>{if(!a.dom)a.dom=/Dạy dỗ|con đến|Chữa bệnh/.test(a.n)?"Con cái":/an thai|Báo tin/i.test(a.n)?"Sức khỏe":/Tranh sủng|Chặn ngự giá/.test(a.n)?"Sủng":/Thỉnh an|Hối lộ/.test(a.n)?"Giao thiệp":"Tài nghệ"});
@@ -144,7 +144,7 @@ function talkOpts(p){const E=S.emp,K=E.known,L=E.likes,b=bestArt(),v=p.ref;
   if(S.sung>=30)A.push({n:"Xin ân điển",o:od(BAL.odb.j2.odO_15+S.sung/3+mm()),w:{bac:60},l:{sung:-4},fail:()=>{if(E.mood===3&&roll(40))punish("làm phiền lúc thánh thượng nổi giận",1)}});
   if(has("chamchinh"))A.push({n:"Bàn chuyện triều chính",o:od(BAL.odb.j2.odO_16+S.tamco/2+S.arts.thi*3+mm()),w:{sung:4,danh:3},l:{sung:-2}});
   return A}
- if(p.kind==="th"){if(false)return[{n:"Xin xăm ở Phật đường",o:100,x:"rút hai quẻ, giữ quẻ tốt hơn",run:()=>{reLot(true);return "Ngươi thắp hương, xin một quẻ mới."}},];const t=liveRivals(false).filter(x=>x.ev>0).sort((a,c)=>c.ev-a.ev)[0];return[
+ if(p.kind==="th"){if(false)return[{n:"Xin xăm ở Phật đường",o:100,fix:1,x:"rút hai quẻ, giữ quẻ tốt hơn",run:()=>{reLot(true);return "Ngươi thắp hương, xin một quẻ mới."}},];const t=liveRivals(false).filter(x=>x.ev>0).sort((a,c)=>c.ev-a.ev)[0];return[
    {n:"Thỉnh an, chép kinh",lock:(S.buoi||0)!==0,t:"chỉ buổi sáng",c:{suc:-5},o:od(BAL.odb.j2.odO_6),w:{th:8,danh:2,duc:1},l:{th:-2}},
    {n:"Xin Thái hậu đỡ lời",o:od(BAL.odb.j2.odO_17+S.th/3),lock:S.th<30,t:"cần Thái hậu 30",w:{danh:4,hh:5},x:"Hoàng hậu nể mặt",l:{th:-5}},
    {n:t?`Kể tội ${t.name}`:"Kể tội một phi tần",lock:!t,t:"cần chứng cứ",o:t?od(BAL.odb.j2.odO_18+t.ev*10+S.th/5):0,w:{th:2,duc:-2},x:"nàng bị phạt",l:{th:-4},go:()=>{t.rel-=15;t.ev--;t.sung=cl(t.sung-10,0,100);log(`${t.name} bị Thái hậu quở trách, mất sủng.`)}}]}
@@ -166,8 +166,8 @@ function talkOpts(p){const E=S.emp,K=E.known,L=E.likes,b=bestArt(),v=p.ref;
   A.push({n:"Học hỏi y lý",c:{bac:-10},o:100,x:"Y thuật tiến bộ một phần",go:()=>addArt("y",1)});return A}
  if(p.kind==="ksp"){const A=[{n:"Đút lót lật thẻ",c:{bac:-30},o:100,lock:S.tablet>0,t:`đang có hiệu lực ${S.tablet} tuần`,x:`2 tuần tới dễ được lật thẻ: ${chanceW(nightCh())} → dễ hơn một bậc`,go:()=>S.tablet=2}];
   if(Object.keys(LIKES).some(k=>!K[k])||(typeof disUnk==="function"&&disUnk("emp")))A.push({n:"Hỏi sở thích Hoàng thượng",c:{bac:-15},o:od(BAL.odb.j2.odO_5),x:"biết thêm một điều ngài thích hay không ưa",go:()=>discover()});
-  A.push({n:"Xem sổ thị tẩm",o:100,x:"biết ai đang được sủng",go:()=>log("Sổ thị tẩm: "+kitNameList(liveRivals(true),x=>`${x.name} ${x.nights} lần`)+`; ngươi ${S.nights} lần.`)});return A}
- if(p.kind==="peddler")return S.shop.slice(0,6).map(k=>({n:`Mua ${itm(k).n}`,c:{bac:-itm(k).pr},o:100,x:itm(k).d,go:()=>S.inv.push({k})}));
+  A.push({n:"Xem sổ thị tẩm",o:100,fix:1,x:"biết ai đang được sủng",go:()=>log("Sổ thị tẩm: "+kitNameList(liveRivals(true),x=>`${x.name} ${x.nights} lần`)+`; ngươi ${S.nights} lần.`)});return A}
+ if(p.kind==="peddler")return S.shop.slice(0,6).map(k=>({n:`Mua ${itm(k).n}`,c:{bac:-itm(k).pr},o:100,fix:1,x:itm(k).d,go:()=>S.inv.push({k})}));
  if(p.kind==="fallen")return[
    {n:"Đưa cơm áo",c:{bac:-20},o:100,w:{duc:4}},
    {n:"Hỏi chuyện cũ",o:od(BAL.odb.j2.odO_22+S.tamco/5),x:`chứng cứ ${balSg(BAL.eff.j2.evGo)} về một phi tần từng làm điều sai`,go:()=>{const x=evGuilty(S,liveRivals(true));if(x&&evA(S,x,BAL.eff.j2.evGo))log(`Phế phi kể chuyện xấu của ${x.name}: chứng cứ ${balSg(BAL.eff.j2.evGo)}.`);else log("Phế phi chỉ kể chuyện cũ vô hại, không có gì làm chứng cứ.")}}];

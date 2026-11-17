@@ -1755,7 +1755,7 @@ function msCheck67(){const m=S.st.ms,c=S.st.ch;if(!m||!c||!msDone67(m))return;co
  card67("result",`Chương ${c.n} khép lại`,[["Kết cục","Xong","g"],["Sự việc",d.end],["Thay đổi",fmt(d.fx)],R&&R.row],pMe(),d.t());S.st.ms=null;chAdvance67(null);syncMain67()}
 /* the "Mệnh truyện" card: the only way an arc chapter moves on (not while she is a servant: then beats come on their own) */
 function storyActs67(){if(!v267()||S.dead||S.out)return[];const A=S.st.M;if(!A||A.done||A.cur||!A.nb||S.turn<A.due||isSrv67()||Q.some(m=>m.pid==="j67"))return[];const b=beatDef67(A,A.nb);if(!b)return[];
- return [{n:`Mệnh truyện: ${fill67(b.h||"",A)}`,t:`${lab67(A)} «${ARC67[A.a].t}» · còn ${Math.max(0,A.dl-S.turn)} tháng tới hạn.`,c:{...BAL.arc.card.c},o:BAL.arc.card.o,w:{},x:"mở hồi kế tiếp của chương, giữ Lợi thế, gần phần thưởng",dom:"Giao thiệp",j67:1,go:()=>{fireBeat67(A);try{showModal()}catch(e){}}}]}
+ return [{n:`Mệnh truyện: ${fill67(b.h||"",A)}`,t:`${lab67(A)} «${ARC67[A.a].t}» · còn ${Math.max(0,A.dl-S.turn)} tháng tới hạn.`,c:{...BAL.arc.card.c},o:BAL.arc.card.o,fix:1,w:{},x:"mở hồi kế tiếp của chương, giữ Lợi thế, gần phần thưởng",dom:"Giao thiệp",j67:1,go:()=>{fireBeat67(A);try{showModal()}catch(e){}}}]}
 function story67Acts(k){Object.defineProperty(STORY[k],"acts",{get:()=>v267()?storyActs67:(STORY[k].__old||{}).acts,configurable:true,enumerable:true})}
 /* jreg: every STORY entry (story67Wrap also sets it; idempotent) */
 regEach(STORY,k=>{if(STORY[k]&&STORY[k].__old)story67Acts(k)},"STORY acts");

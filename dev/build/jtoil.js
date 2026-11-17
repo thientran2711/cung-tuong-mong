@@ -250,7 +250,7 @@ function toilCrowd(doIt){const L=toilLook();if(!L.showy&&L.mk!=="tuyet")return{n
 /* ---------- the morning choice: a card in Hành sự + a chip in the top bar ---------- */
 function toilCanStart(){return toilOn(S)&&(S.buoi||0)===0&&!toilToday(S)&&!Q.length}
 function toilCard(){const occ=toilOcc().map(o=>o.n.toLowerCase()).join(", ");
- return{n:"Điểm trang",t:"Ngồi trước gương: chọn y phục theo dịp hôm nay, kẻ mày, đánh phấn, chấm son.",k:BAL.toil.khac,c:{},o:100,w:{},b:0,toil:1,
+ return{n:"Điểm trang",t:"Ngồi trước gương: chọn y phục theo dịp hôm nay, kẻ mày, đánh phấn, chấm son.",k:BAL.toil.khac,c:{},o:100,fix:1,w:{},b:0,toil:1,
   x:`hôm nay ${occ}: người gặp ta xét y phục và dung nhan · kèm: phô trương dễ bị ghen, ${toilMkW("moc")} bị chê (bỏ qua: mặc như hôm qua)`,
   go:()=>setTimeout(toilOpen,0)}}
 (function(){const d0=deal;deal=function(){const r=d0.apply(this,arguments);try{if(Array.isArray(deck)&&toilOn(S)&&(S.buoi||0)===0&&!toilToday(S)&&!deck.some(a=>a.toil))deck.unshift(toilCard())}catch(e){console.error(e)}return r}})();

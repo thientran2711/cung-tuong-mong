@@ -43,7 +43,8 @@ const TW={};
 function TWD(k,o){o.k=k;TW[k]=o}
 /* run deed k: pays (unless the caller already paid, as the player's talk() does with a.c), rolls the shared odds, applies the effect */
 function twDo(a,t,k,paid){const D=TW[k];if(!D||!a)return"";try{if(D.req&&!D.req(a,t))return"";if(!paid){if(!twCanPay(a,k))return"";twPay(a,k)}
- const o=D.o?D.o(a,t):100;const ok=o>=100||roll(o);return D.run(a,t,ok)||""}catch(e){console.error(e);return""}}
+ const o=D.o?D.o(a,t):100;/* ODDS CAP: a sure deed rolls at the cap too (hers through talk() already rolled: paid) and fails softly, nothing happens */
+ if(o>=100&&!(a===S&&paid)&&!roll(BAL.odds.hi))return a===S?oddsSoft("",null):"";const ok=o>=100||roll(o);return D.run(a,t,ok)||""}catch(e){console.error(e);return""}}
 const G=()=>BAL.tw.g;
 /* --- deeds both sides had (NPC side now pays and rolls like hers) --- */
 TWD("help",{n:"Giúp đỡ nàng",req:(a,t)=>!!t,run:(a,t)=>{relAdd(a,t,G().help);oanAdd(t,a,-G().helpOan);return `${twNm(a)} sang giúp ${NM(t)} việc khó`}});

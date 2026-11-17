@@ -140,7 +140,7 @@ function srvErrPick(){const m=srvM();const L=[{k:"tyv",n:"Sang Thái y viện l�
  const fr=liveRivals(true).filter(v=>v!==m&&aff(m,v)>=0&&palaceOf(v)!==palaceOf(m));if(fr.length){const v=pick(fr);L.push({k:palaceOf(v),n:`Mang quà sang cung ${v.name}`,v:v.id})}
  return pick(L)}
 function srvCards(){const m=srvM();const X=[];if(!m)return X;const B=bid();const home=srvMisHome();
- const med={n:"Mua thuốc bổ",t:"Mua chén thuốc bổ của tiểu thái giám bán rong.",k:1,c:{bac:-8},o:100,w:{suc:20},once:"med"};
+ const med={n:"Mua thuốc bổ",t:"Mua chén thuốc bổ của tiểu thái giám bán rong.",k:1,c:{bac:-8},o:100,fix:1,w:{suc:20},once:"med"};
  if(S.srv.lau>0){
   X.push({n:"Giặt đồ",t:"Vò từng chậu y phục của cung nhân trong nước lạnh.",k:2,c:{suc:-10},o:100,w:{},x:`6 lần giặt: được về sớm 1 tuần (nay ${S.srv.lw||0}/6)`,rep:1,go:()=>{S.srv.lw=(S.srv.lw||0)+1;if(S.srv.lw>=6){S.srv.lw=0;S.srv.lau=Math.max(1,S.srv.lau-1);log("Quản sự gật đầu: bớt một tuần phạt.")}}});
   X.push({n:"Nghỉ tay một lát",t:"Ngồi sau chồng chậu, thở một hơi.",k:1,c:{},o:od(BAL.odb.j42.odO),w:{suc:8},l:{suc:-3},x:"",rep:1,fail:()=>{S.srv.lau++;log("Bị quản sự bắt gặp: thêm một tuần phạt.")}});
@@ -149,7 +149,7 @@ function srvCards(){const m=srvM();const X=[];if(!m)return X;const B=bid();const
   X.forEach(a=>a.dom="");return X}
  X.push({n:S.srv.rk>=2?"Đốc thúc cung nữ quét dọn":"Quét sân, lau điện",t:S.srv.rk>=2?"Đi một vòng hậu điện, sai bảo cung nữ dưới.":"Quét lá ngoài sân, lau bàn ghế trong điện.",k:1,c:{suc:S.srv.rk>=2?-2:-5},o:100,w:{tin:1},x:`công lao ${balSg(BAL.eff.j42.meritSweep)}`,rep:1,go:()=>srvMerit(BAL.eff.j42.meritSweep)});
  X.push({n:"Dâng trà, hầu điểm tâm",t:home?`Pha trà dâng ${m.name}.`:`${m.name} đi vắng: chờ chủ về`,k:1,c:{suc:-2},o:od(BAL.odb.j42.odO_3+S.sac/10+S.tai/10+misAdj(m)),w:{tin:2},l:{tin:-2},x:`công lao ${balSg(BAL.eff.j42.meritTea)}`,rep:1,lock:!home,go:()=>srvMerit(BAL.eff.j42.meritTea)});
- const mw=srvWhere(m);if(mw!==palaceOf(m)&&S.place!==mw&&!srvOnce("follow","b"))X.push({n:"Theo hầu chủ",t:`${m.name} đang ở ${placeOf(mw).n}. Ngươi theo hầu.`,k:1,c:{},o:100,w:{tin:1},x:"đến nơi chủ đang ở",once:"follow",onceS:"b",go:()=>srvGoTo(mw)});
+ const mw=srvWhere(m);if(mw!==palaceOf(m)&&S.place!==mw&&!srvOnce("follow","b"))X.push({n:"Theo hầu chủ",t:`${m.name} đang ở ${placeOf(mw).n}. Ngươi theo hầu.`,k:1,c:{},o:100,fix:1,w:{tin:1},x:"đến nơi chủ đang ở",once:"follow",onceS:"b",go:()=>srvGoTo(mw)});
  if(!srvOnce("nvp","b"))X.push({n:"Lĩnh đồ ở Nội vụ phủ",t:"Lĩnh than, nến, vải vóc theo phần của cung.",k:2,c:{suc:-8},o:100,w:{tin:2},x:`công lao ${balSg(BAL.eff.j42.meritNvp)} · có thể gặp người`,once:"nvp",onceS:"b",go:()=>{srvMerit(BAL.eff.j42.meritNvp);srvMeet()}});
  X.push({n:"Học lễ nghi với cô cô",t:"Đứng nghe cô cô dạy cách đi đứng, dâng trà, quỳ lạy.",k:1,c:{suc:-3},o:100,w:{duc:1},x:`công lao ${balSg(BAL.eff.j42.meritRite)}`,rep:1,go:()=>srvMerit(BAL.eff.j42.meritRite)});
  X.push({n:"Luyện thêu thùa, chữ nghĩa",t:"Lén học chữ, thêu hoa dưới đèn dầu.",k:1,c:{suc:-3},o:od(BAL.odb.j42.odO_4),w:{tai:1},l:{},rep:1});
@@ -160,10 +160,10 @@ function srvCards(){const m=srvM();const X=[];if(!m)return X;const B=bid();const
  if(S.suc<50&&!srvOnce("med"))X.push(med);
  if(S.srv.rk>=3&&!srvOnce("so"))X.push({n:"Quản sổ sách trong cung",t:"Giữ sổ đồ dùng, sắp việc cho cung nữ dưới.",k:2,c:{suc:-4},o:od(BAL.odb.j42.odO_6),w:{bac:4,tin:2,danh:1},l:{tin:-2},x:`công lao ${balSg(BAL.eff.j42.meritBooks)}`,once:"so",go:()=>srvMerit(BAL.eff.j42.meritBooks)});
  if(!S.srv.err||S.srv.err.b!==B)S.srv.err=roll(45)?Object.assign({b:B},srvErrPick()):{b:B,none:1};
- const er=S.srv.err;if(!er.none&&!er.acc)X.push({n:"Việc chủ sai",t:er.n+".",k:1,c:{},o:100,w:{},x:"được vào nơi ấy buổi này · đến nơi chạm “Việc chủ sai”",go:()=>{er.acc=1;S.srv.sent={k:er.k,n:er.n,until:B,done:0,v:er.v||null};srvGoTo(er.k)}});
+ const er=S.srv.err;if(!er.none&&!er.acc)X.push({n:"Việc chủ sai",t:er.n+".",k:1,c:{},o:100,fix:1,w:{},x:"được vào nơi ấy buổi này · đến nơi chạm “Việc chủ sai”",go:()=>{er.acc=1;S.srv.sent={k:er.k,n:er.n,until:B,done:0,v:er.v||null};srvGoTo(er.k)}});
  if(S.tonight&&S.tonight!=="me"&&S.tonight.id===m.id&&!srvOnce("tea")){
   X.push({n:"Hầu trà khi ngự giá",t:`Tối nay Hoàng thượng ngự giá đến cung ${m.name}. Ngươi bưng khay trà vào điện.`,b:B4L,k:1,c:{},o:od(amTeaO(S,1)),w:{},l:{tin:-BAL.ag.maid.tea.fail},x:`Hoàng thượng để ý +${amTeaG(S)} · kèm: chủ ghen, Chủ tin -${amJealN(m)}: ${chanceW(amJealP(m))}`,once:"tea",go:()=>srvNotice("tea",BAL.ag.maid.tea.g)});
-  X.push({n:"Lui sau bình phong",t:"Để chủ nhân một mình hầu ngài.",b:B4L,k:1,c:{},o:100,w:{tin:2},once:"tea"})}
+  X.push({n:"Lui sau bình phong",t:"Để chủ nhân một mình hầu ngài.",b:B4L,k:1,c:{},o:100,fix:1,w:{tin:2},once:"tea"})}
  if(S.srv.spyFor!=null&&!srvOnce("spy")){const v=RV(S.srv.spyFor);if(v&&v.alive)X.push({n:`Lén báo tin cho ${v.name}`,t:"Kể chuyện trong cung chủ cho người đã mua chuộc ngươi.",k:1,c:{},o:od(BAL.odb.j42.odO_7+S.tamco/5),w:{bac:8},l:{tin:-15},x:`${v.name} nắm ${balAb(BAL.eff.j42.evGo)} chứng cứ của ${m.name}`,once:"spy",go:()=>/*evok: capped; preview only*/evA(v,m,BAL.eff.j42.evGo),fail:()=>{if(roll(40))srvLaundry(`${m.name} bắt gặp ngươi lén lút với người của ${v.name}.`,8)}})}
  X.forEach(a=>a.dom="");return X}
 function srvMeet(){const m=srvM();const L=allServ().filter(s=>ownerOf(s)!==m&&!S.srv.met.includes(s.sid));

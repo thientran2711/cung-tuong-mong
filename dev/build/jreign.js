@@ -208,6 +208,7 @@ function rgFire(id){const d=mkP("rg",{b:id});if(!d)return false;const m={t:rgTit
 /* the side's enemies: a consort of the named side (or any foe of hers) gets proof against her */
 function rgFoe(side){const s=rgSideNow();const L=liveRivals(true).filter(v=>side==="foe"?(rgSideOf(v)&&rgSideOf(v)!==s):rgSideOf(v)===side);return L.length?pick(L):null}
 function rgRes(id,i,od){const b=rgBeatDef(id);if(!b)return;const o=rgOpts(b)[i];if(!o)return;const r=rgMe();const W=rgW();
+ if(od>=100&&!roll(BAL.odds.hi)){oddsSoft(`${rgTitle(id)}: ${rgTok(o.n)}`,o.c);return}/* ODDS CAP: a sure court choice fails softly at the cap */
  const ok=od>=100||roll(od);const side=o.s||rgSideNow();const t0=rgTitle(id);const before=rsnap();let ex=[];
  r.done[id]=(r.done[id]||0)+1;r.last=S.turn;
  if(ok){apply(o.w||{});if(o.pw)rgPush(side,o.pw);if(o.tr)rgTr(o.tr);if(o.lq)rgQAf(o.lq);if(o.lead)rgLead(side,o.lead)}
