@@ -97,3 +97,12 @@ Recommendation: dress-up = base + OUTFIT layers (clean win), hair/pins as separa
 ## V5 (owner verdict on v4c, 17/11 ~18:27Z) — sheet_figures_v5.jpg
 Fixes: (1) Phi: vân kiên removed (starts at Quý phi). (2) Hoàng hậu: multi-colour robe, imperial yellow ~60% main + red/gold/jade/blue, multi-colour phoenix stitched in, phoenix crown kept; redone once more because the first crown looked smaller than HQP's pins → now the grandest headdress (big central phoenix + 2 side phoenixes, long pearl strands). (3) Hairpins step by step: Tần low bun + 3 flower pins + tassel pin + jade comb | Phi double-loop bun + 2 butterfly pins + bu-yao + pearl comb | Quý phi tall bun + peony crown + 2 long bu-yao + jewelled comb | HQP high chignon + large phoenix hairpin + jade/pearl flower crown + pearl fringe | HH full phoenix crown. (4) Tần: chest-high lilac band/skirt top added under the low V cross-collar.
 Credits: 6 images × 135 = 810. Caveat: the HH crown is tall/heavy, silhouette stays light below it; can be scaled down if she finds it too much. Same c01, same pose. Sheet: https://ctm-img.victoria-tntt.workers.dev/img/_review/rank-vankien/sheet_figures_v5.jpg
+
+## V6 — 8 ranks (owner 17/11 ~18:32Z: "đủ 8 bậc để dễ so sánh") — sheet_figures_v6_8bac.jpg
+Game order (jbal2.js): 1 Đáp ứng, 2 Thường tại, 3 Quý nhân, 4 Tần … 8 Hoàng hậu. Ranks 4–8 = v5 unchanged. New lower 3 (same c01 a18, same pose, one try each, 405 credits):
+- Đáp ứng: sage green sheer crossed-collar jacket + chest-high pale-green band, narrow sleeves, a few stitched leaves, ONE simple gold pin, white handkerchief.
+- Thường tại: powder sky-blue, straight parallel-lapel low collar, chest-high blue band, sheer white scarf-sleeve, small plum blossoms stitched, TWO small pins + 1 flower, plum sprig.
+- Quý nhân: dusty mauve-rose, wrapped deep-V low collar, chest-high band, sheer gauze outer layer, gold bamboo-leaf thread, small bu-yao pair with short pearl dangles, folded silk fan.
+All: no shoulder piece, shoulders covered, no round/U collar, light flowing silhouette.
+Honest note: ranks 1–4 share a similar light-and-sheer cut (colour + hair + embroidery do the ranking); if she wants clearer cut differences between 1–4, redo cuts (e.g. one with a closed waist-sash jacket, one with layered half-sleeve vest). Ladder of headdress is clear: 1 pin → 2 pins+flower → small bu-yao → Tần flower set → Phi → Quý phi → HQP → HH.
+Sheet (2 rows × 4, 1600 px wide): https://ctm-img.victoria-tntt.workers.dev/img/_review/rank-vankien/sheet_figures_v6_8bac.jpg
