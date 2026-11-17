@@ -25,7 +25,9 @@ function k61All(){const L=[];if(!S)return L;const add=e=>{if(e&&typeof e==="obje
  for(const c in (S.court||{}))add(S.court[c]);(S.men||[]).forEach(add);try{const T=S.trieu;if(T&&T.H)for(const c in T.H)add(T.H[c])}catch(e){}return L}
 /* her own household (maid, servants hired later, her own children born later) lives with her: always fully known (review/face-reveal:
    new servants were "Thái giám ???" in her own guard-order and spy dialogs) */
-function k61Own(e){try{return e===S.maid||(S.staff||[]).includes(e)||(S.kids||[]).includes(e)}catch(x){return false}}
+/* kc-roads fix: her own family while she still lives at home (S.kc.fam, !S.kc.inPal) are her own people — known, mood and nature seen (all nine home roads) */
+function k61Kin(e){try{return !!(e&&S&&S.kc&&!S.kc.inPal&&(S.kc.fam||[]).includes(e))}catch(x){return false}}
+function k61Own(e){try{return e===S.maid||(S.staff||[]).includes(e)||(S.kids||[]).includes(e)||k61Kin(e)}catch(x){return false}}
 function k61St(e){if(!e||!S||e===S)return 3;const K=k61S();if(!K)return 3;if(k61Own(e))return 3;return +K[kOf61(e)]||0}
 /* owner 11/15 (stranger rule, KIT §49.3): a consort Ta has NOT MET is a grey silhouette everywhere (portraits, strips, news rows, figures,
    the week book) — her name may be known, her face is not. Met = she talked / acted with her (S.met), or lives in the same palace
@@ -281,7 +283,7 @@ function k61Node(n){if(n.nodeType===3){const t=n.nodeValue;if(!t||t.length<4)ret
    same .msil chip; until the kit art is present the old drawn silhouette stays */
 function k61SexAt(k){const W=S.where||{},L=[];for(const v of rivals)if(v.alive&&!v.out&&W[v.id]===k)L.push("f");if(W.emp===k&&["vuon","thu","dtd"].includes(k))L.push("m");
  if(k==="tn"&&!S.thDead)L.push("f");if(k==="home"){L.push("f");S.kids.filter(x=>x.alive).forEach(()=>L.push("k"))}if(k==="tyv"||k==="ksp")L.push("m");
- if(k==="lc")for(let i=0;i<Math.max(1,Math.min(3,rivals.filter(v=>v.alive&&v.out).length));i++)L.push("f");
+ if(k==="lc")for(let i=0;i<Math.min(3,typeof lcPeople==="function"?lcPeople("").length:rivals.filter(v=>v.alive&&v.out).length);i++)L.push("f");
  for(const id in (S.menW||{}))if(S.menW[id]===k&&manById(id))L.push("m");return L}
 function k61SilChip(k,n){return"";const L=k61SexAt(k);while(L.length<n)L.push("f");const im=g=>K61U["fig-"+g]?`<svg viewBox="0 0 10 14" aria-hidden="true"><image href="img/kit/unknown-fig-${g}.webp" width="10" height="14" preserveAspectRatio="xMidYMax meet"/></svg>`:SILH;
  return `<span class="msil" aria-label="${n} bóng người">${L.slice(0,Math.min(n,3)).map(im).join("")}${n>1?`<b>${n}</b>`:""}</span>`}

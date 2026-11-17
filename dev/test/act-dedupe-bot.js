@@ -18,7 +18,7 @@ const {chromium}=require('playwright');const [,,URL,NL,NW]=process.argv;const LI
     if(S.dead)return"dead";
     const ov=q('#ov');if(ov&&!ov.hidden){const k=q('#kg82skip')||q('#ov .kg82act button:not(#kg82go)')||q('#kg82ok')||q('#mgok')||q('#mgskip')||q('#ov .kit-x')||q('#ov button.kbtn');if(k){k.click();return"ov"}ov.hidden=true;return"ov"}
     if(S.mg){try{S.mg=null}catch(e){}}
-    if(Q.length){const m=Q[0];if(m.opts&&m.opts.length){const ok=m.opts.map((c,i)=>[c,i]).filter(([c])=>!(c.fx&&c.fx.bac&&S.bac+c.fx.bac<0)&&!(typeof c.lk==="function"&&c.lk()));if(!ok.length){closeModal();return"m0"}chooseM(ok[Math.floor(Math.random()*ok.length)][1]);return"m"}closeModal();return"m"}
+    if(Q.length){const m=Q[0];if(m.opts&&m.opts.length){const ok=m.opts.map((c,i)=>[c,i]).filter(([c])=>!c.off&&!(c.fx&&c.fx.bac&&S.bac+c.fx.bac<0)&&!(typeof c.lk==="function"&&c.lk()));if(!ok.length){closeModal();return"m0"}chooseM(ok[Math.floor(Math.random()*ok.length)][1]);return"m"}closeModal();return"m"}
     const sh=q('.kshop');if(sh){const x=q('#ov .kit-x,.kshop ~ .kit-x,[data-kshopx]');try{document.getElementById('ov').hidden=true}catch(e){}}
     const C=[];const dayDone={};
     deck.forEach((a,i)=>{if(!a.done&&!a.lock&&canPay(a)&&can(cardCost(a))&&!(a.b!=null&&(S.buoi||0)!==a.b))C.push(["card",()=>{const n=a.n;act(i);if(a.done){B.acts++;B.cards[n]=(B.cards[n]||0)+1}}])});

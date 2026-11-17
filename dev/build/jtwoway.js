@@ -70,7 +70,7 @@ TWD("test",{n:"Thử lòng",req:(a,t)=>!!t&&aff(a,t)>=0,o:()=>G().test[2],run:(a
 TWD("drop",{n:"Lạnh nhạt",req:(a,t)=>!!t&&aff(a,t)>=30&&((t.sung||0)<25||!!t.confined),run:(a,t)=>{affAdd(a,t,-G().drop);return `${twNm(a)} lạnh nhạt với ${NM(t)} lúc sa cơ`}});
 TWD("follow",{n:"Nương theo",req:(a,t)=>!!t&&rkOf(t)>rkOf(a)+1,run:(a,t)=>{relAdd(a,t,G().follow);return `${twNm(a)} nép theo ${NM(t)}`}});
 TWD("gossip",{n:"Rỉ tai chuyện trong cung",req:(a,t)=>!!t,run:(a,t)=>{const x=pick(liveRivals(true).filter(y=>y!==a&&y!==t));if(x)ap(x,{danh:-G().gossip});return `${twNm(a)} rỉ tai ${NM(t)} chuyện trong cung`}});
-TWD("check",{n:"Soát quà được tặng",req:a=>(a.inv||[]).some(e=>!e.h),run:a=>{const i=(a.inv||[]).findIndex(e=>e.t);if(i>=0){a.inv.splice(i,1);return `${twNm(a)} cho soát quà, vứt bỏ một món có độc`}return `${twNm(a)} cho thái y soát lại quà được tặng`}});
+TWD("check",{n:"Soát quà được tặng",req:a=>(a.inv||[]).some(e=>!e.h),run:a=>{const i=(a.inv||[]).findIndex(e=>e.t);if(i>=0){const x=a.inv.splice(i,1)[0];/* tang vật (item ledger jil), as j28 check */if(typeof ilGone==="function")ilGone(a,x,"evid");return `${twNm(a)} cho soát quà, vứt bỏ một món có độc`}return `${twNm(a)} cho thái y soát lại quà được tặng`}});
 TWD("admon",{n:"Khuyên Hoàng thượng mưa móc đều khắp",req:(a,t)=>{if(!t||t===a||!(a===S?S.rank>=7:a.queen))return false;const f=typeof favNow==="function"?favNow():null;return !!f&&f.p===t&&!(t.admonWk!=null&&wk()-t.admonWk<G().admonCd)},
  run:(a,t)=>{twAp(t,{sung:-G().admon});t.admonWk=wk();return `${twNm(a)} khuyên Hoàng thượng “mưa móc đều khắp”, đừng chỉ sủng ${NM(t)}`}});
 /* whom t resents most (not the doer): the quarrel a mediator can settle */
