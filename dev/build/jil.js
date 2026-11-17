@@ -55,7 +55,7 @@ function ilNm(e){if(!e)return"món đồ";if(e.wk&&e.wk.n)return e.wk.n;const it
 const IL_USED_KD=["Thuốc","Thuốc bổ","Độc dược","Hương liệu","Trà","Than sưởi","Băng","Điểm tâm","Rượu","Thư từ","Vật chứng"];
 function ilDur(e){if(!e||!e.k||e.from==="base")return false;if(e.wk)return e.wk.p==null;
  let w=null;try{w=typeof wdItem==="function"?wdItem(e):null}catch(x){}if(w)return true;const it=(typeof IT==="object"&&IT[e.k])||null;if(!it)return false;
- if(it.sl==="scent"||it.k==="tp")return true;if(it.use||it.anti||it.ant||it.fert||it.dr||it.il||it.evi||it.story)return false;if(IL_USED_KD.includes(it.kd))return false;
+ if(it.sl==="scent"||it.k==="tp")return true;if(it.use||it.anti||it.ant||it.fert||it.dr||it.il||it.evi||it.story)return false;if(it.wxg)return false;/* weather gear wears out (jweather e.wxe, BAL.wx.gearMo): used up */if(IL_USED_KD.includes(it.kd))return false;
  if(["kimbac","giaycoi"].includes(e.k))return false;return true}
 function ilVal(e){try{if(e.wk&&typeof wkSellVal==="function")return wkSellVal(e.wk);if(typeof wdPrice==="function")return wdPrice(e)|0}catch(x){}return ((IT[e.k]||{}).pr)|0}
 /* a new id given between two censuses (by a guard) is entered in the census map at once, so a later unrouted removal is still caught (reviewer r1) */
@@ -63,7 +63,7 @@ function ilUid(e,p){const I=ilS();if(!e.iu){e.iu=(ilGuest()?1e7:0)+(++I.seq);if(
 function ilLog(e,f,t,how){const I=ilS();I.log.push([typeof wk==="function"?wk():0,ilUid(e),e.k,f||"",t||"",how||""]);const cap=(BAL.il&&BAL.il.logCap)||600;if(I.log.length>cap)I.log.splice(0,I.log.length-cap)}
 function ilRng(a){return a[0]+R(a[1]-a[0]+1)}
 /* ---- the ONE rule: where a piece goes when it leaves p's hands ---- */
-const IL_HOW={sell:"bán",pawn:"cầm cố quá hạn",conf:"bị tịch thu",evid:"tang vật",fix:"đem sửa",burn:"cháy, đem sửa",pil:"kẻ hầu bớt xén",lost:"thất lạc",maid:"tặng cung nữ",emp:"dâng Hoàng thượng",th:"dâng Thái hậu",dead:"di vật",kho:"trả Nội vụ phủ",net:"Nội vụ phủ nhặt được"};
+const IL_HOW={sell:"bán",pawn:"cầm cố quá hạn",conf:"bị tịch thu",evid:"tang vật",fix:"đem sửa",burn:"cháy, đem sửa",pil:"kẻ hầu bớt xén",lost:"thất lạc",maid:"tặng cung nữ",emp:"dâng Hoàng thượng",th:"dâng Thái hậu",dead:"di vật",kho:"trả Nội vụ phủ",net:"Nội vụ phủ nhặt được",demote:"thu khi giáng phẩm"};
 function ilGone(p,e,how,o){if(!e||typeof e!=="object"||!e.k)return null;if(ilAt(e))return null;{const f=ilToFriend(e);if(f){ilSent(e,f);return null}}o=o||{};const I=ilS();const B=BAL.il;const own=o.own||ilKey(p);
  if(how!=="sell"&&how!=="pawn"&&!ilDur(e))return null;if((how==="sell"||how==="pawn")&&e.wk&&e.wk.p!=null)return null;
  if(how==="lost"&&p&&ilAlive(p)&&typeof loLoseE==="function"){const c=loLoseE(p,e,o.cause);if(c){ilUid(e);ilLog(e,own,"lo"+c.id,"thất lạc");return c}}
