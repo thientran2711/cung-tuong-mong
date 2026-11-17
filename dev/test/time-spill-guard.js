@@ -120,6 +120,9 @@ const srv=http.createServer((q,r)=>{let p=decodeURIComponent(new URL(q.url,'http
     row(`court emp at ${k} b${bu}: spill walk open`,!!h&&!dis(h)&&!/buổi này/.test(txt(h)),txt(h).slice(0,180))}
    base(bu,3);if(!S.thDead){const st=accState("tn"),P=walkSpill("tn");if(!st.ask&&P&&P.ok){cm++;const h=courtMeet('th').find(x=>/data-kgmgo=/.test(x))||'';row(`court th b${bu}: spill walk open`,!!h&&!dis(h),txt(h).slice(0,180))}}}
   out.rows.push({id:'court walks checked',ok:true,info:cm});
+  /* 10b. the tap: the court button walks on into the next buổi (walkGo → walkSpillGo), it does not stall */
+  {base(0,3);const P=walkSpill("tn");if(P&&P.ok&&!S.thDead&&!accState("tn").ask){const h=courtMeet('th').find(x=>/data-kgmgo=/.test(x))||'';const d=document.createElement('div');d.innerHTML=h;document.body.appendChild(d);
+    try{const b=d.querySelector('button');if(b)b.click()}finally{d.remove()}const W=window.__walkSpill;row('court th tap at sáng 1 left: spill walk started',!!(W&&W.k==="tn")||S.place==="tn",{W:W&&W.k,place:S.place});window.__walkSpill=null}}
   /* 11. the whole family, by render: no disabled button anywhere (every tab + court cards) carries the spill sentence of j77WalkWhy
      ("đi N khắc, đến nơi đã sang buổi X" with no closing reason) — a spill is never a block */
   {const SPILL=/(^|\s)đi \d+ khắc, đến nơi đã sang buổi \S+(\s|$)(?!—)/;const seen=[];const p0=pbtn;pbtn=function(){const h=p0.apply(this,arguments);seen.push(h);return h};
