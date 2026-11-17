@@ -1,0 +1,18 @@
+# tinbao-ui report (worker, MAIN s33 job) — review/tinbao-ui e988d2e9 (on review/ag-all-2 4b82a0ca)
+PRIORITY #1 CHECK: OD ~14:50Z (2) + ~15:25Z (4)(5) | main none | review/* review/ag-all-2 (API only, no UI) | claims C-AG API owner; this row. START_CTX ~8 % of window.
+
+## What
+New module dev/build/jtinbao.js (after jagknow in assemble.py) + KIT.md §87 + kit page sample §87 + test dev/test/tinbao-ui.test.js.
+- kitTinBaoBadge: '!' (kitHapMark look, 22 px) in a 34 px kit round button on the top bar; blinks while tinBaoNew()>0, count tag from 2, calm when all seen, absent when nothing. Takes the first FREE spot of the bar (left of seal / under / left of time block) else sits on the seal; never moves the bar layout.
+- kitTinBaoToast: gold line under the top bar, 3 s, kitSfx("notice") once, once per item id, no modal; dialog open or item seen = no toast. Shown on every device (not Fold only) — owner may narrow.
+- kitTinBaoCard: kitModal kind news (seal TIN): kit fact rows (informer = person via kitFacts who; kit rule OD:L448 adds the informer's full-body figure), unseen first, seen marked "đã xem"; ONE option "Để ta tới xem (· place)" -> marks seen, opens Dư đồ tab. Opening marks all seen.
+Deviations: button reads "Để ta tới xem" (kit prints "không được mất gì" only for "Để/Thôi" names; plain "Tới xem" printed a false "xem kết quả ở bước sau"). One button to the Dư đồ tab, not per row: going to a place costs time, player picks on the map; per-row option cards got random act pictures from kitOptPic (looked broken).
+
+## Tests
+- dev/test/tinbao-ui.test.js 19/19 PASS (badge count, blink/calm/absent, toast once + one sound + no modal, dialog open no toast, card, Tới xem, old save, API missing / S null, geometry 5 viewports, no page errors).
+- quickcheck --runs 3: perf PASS (open 1476 ms, old save ok, render 170/160, tab 407/324, buổi 842/828, tasks>200ms 12/13). CORE GATE G1 FAIL "frozen list grew 5093 -> 6691": inherited from review/ag-all-2 base (my own one-core-guard run: inlineNow 6521 <= 6691, fails 0, so none added by jtinbao). Coordinator must refreeze after ag-all-2 lands.
+## Shots (LOOKED, @2) CDN img/_review/tinbao-ui/: fold-badge.png fold-toast.png fold-card.png ipad-badge.png ipad-toast.png ipad-card.png (base https://ctm-img.victoria-tntt.workers.dev/). Wipe with verdict: python3 dev/site/cdn_sync.py --wipe-review tinbao-ui
+## Known
+- 412x1058 bar is already crammed (seal hides "Buổi sáng"); badge sits on the seal there.
+- Natural items in the shots are planted into S.tb; real flow checked with knBao -> tinBaoOn -> toast.
+- If ag-all-2 changes the API: rebase.
