@@ -40,6 +40,8 @@ let kesQ=0;function kesSched(){if(kesQ)return;kesQ=requestAnimationFrame(()=>{ke
 try{new MutationObserver(ms=>{if(ms.some(m=>[...m.addedNodes].some(n=>n.nodeType===1&&(n.matches&&n.matches("img.kemo")||n.querySelector&&n.querySelector("img.kemo")))||[...m.removedNodes].some(n=>n.nodeType===1)))kesSched()}).observe(document.body,{childList:true,subtree:true})}catch(e){}
 addEventListener("resize",()=>document.querySelectorAll("img.kemo.kemo-live").forEach(kesFxSync));
 kesScan();
+/* r2 reviewer fix: Cảnh động / Gọn switched in Settings applies to the seals already on screen at once (saveOpt does not re-render) */
+(function(){if(typeof saveOpt!=="function")return;const o=saveOpt;saveOpt=function(){const r=o.apply(this,arguments);try{document.querySelectorAll("img.kemo").forEach(el=>{if(!el.__kes)return;const b=el.getBoundingClientRect();kesLive(el,b.width>2&&b.bottom>0&&b.top<innerHeight&&b.right>0&&b.left<innerWidth)})}catch(e){}return r}})();
 /* kitEmoSealPop(p,key,ms): a NEW event's feeling plays over the person's seal(s) for ms (default 2500) and the seal goes back to its bar state; same asset set, same motion table. Never a second persistent source. */
 function kesPop(p,key,ms){try{if(!KIT_EMOSEAL.keys[key])return;const id=emoKey(emoRes(p));document.querySelectorAll('img.kemo[data-kemop="'+id+'"]').forEach(el=>{if(el.__pop)return;const set=kesSet(el),still=el.dataset.kemos||el.getAttribute("src"),k0=kesKey(el),sp=KIT_EMOSEAL.keys[key];
   const ns=emoSealSrc(set,key);el.__pop=1;el.classList.remove("kemo-"+k0);[...el.classList].filter(c=>/^kemo-m-/.test(c)).forEach(c=>el.classList.remove(c));el.classList.add("kemo-"+key,"kemo-m-"+sp.m,"kemo-pop");el.dataset.kemos=ns;el.setAttribute("src",ns);
