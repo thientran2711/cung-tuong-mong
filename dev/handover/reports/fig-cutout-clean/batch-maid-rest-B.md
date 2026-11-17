@@ -225,3 +225,12 @@ maid-m39-t1-a18	huZrOrfvqL	Bh9qSNqoQR	ok
 maid-m39-t2-a18	bxVJ2y15Y2	3z5pfjnREY	ok
 maid-m39-t3-a18	kspPzN316B	LwoiTChswO	ok
 ## 199 a18 done (list lines 1-199 incl. m38-tm4). NEXT = maid-m39-t4-a18 (line 200).
+maid-m39-t4-a18	bxVJcro5Y2	gOtZomESXO	ok
+maid-m39-t5-a18	iGbDFzp3uK	yiEWaFyPW9	ok
+maid-m39-t6-a18	rgd9Dwsxtc	O6CYvq8ynm	ok
+maid-m39-t7-a18	u5YgGrIQLD	ovNbPGn829	ok
+maid-m39-t8-a18	1le4MJpr4r	IfiK9cAtvE	ok
+maid-m39-tm0-a18	JNfnhGYOq4	Ebnlz5RuuO	ok
+maid-m39-tm2-a18	Sym28Z5Ub8	KLDyMSwkqp	ok
+maid-m39-tm3-a18	UPhAIGvwny	xSXNdykjfW	ok
+## 207 a18 done (list lines 1-207). NEXT = maid-m39-tm4-a18 (line 208), then m40.
