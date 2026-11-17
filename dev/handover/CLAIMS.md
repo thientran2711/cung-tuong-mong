@@ -764,3 +764,4 @@
 | REVIEW opt-pic-same r2 of 42d52109 (+ 412/390 tall person cards) | review/opt-pic-same-r2 | MAIN s31 | session_01UV1SzioDmB4Xjzd2Wg26k4 | RUNNING | 17/11 13:01Z |
 | map-portrait: portrait Dư đồ cards row above/below, map zoomed, weather sky (owner 13:12Z) on top of map-me-mark-r1 a86ea58c (HELD from batch) | review/map-portrait | MAIN s31 | session_01UV1SzgdgEdCimFsVYDscwL | RUNNING | 17/11 13:04Z |
 | one-core-dup3 LAND (opus; PASS 3213abc8 + merge main 6ca04148+ (trial cd2810ff) + move batch-d8's 70 typed numbers into BAL + go-live prep; brief briefs/one-core-dup3-land.md) | review/one-core-dup3-land | B | session_01N1tNP33c2NR3dwmam25S4X | RUNNING | 17/11 13:15Z |
+| AG-ALL (opus; main s31 13:21Z, replaces AG4/AG5/AG6 + folds AG-HAP 13:16Z): every NPC group picks from the SAME full act list as the player of that group; step 1 = reports/ag-all.md gap table | review/ag-all | C ROOT-7 | session_01UV1Szh1sUAVP6FUuqZgkYs (gap table) | RUNNING | 17/11 13:40Z |

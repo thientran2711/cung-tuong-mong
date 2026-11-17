@@ -1,5 +1,7 @@
 # FOREMAN_C_STATUS (written ONLY by Foreman C)
-NEXT FOREMAN C SESSION: ROOT-7 = (to be opened by the OWNER/main from claude.ai — ROOT-6 is at depth 5, a child would be depth 6 → not allowed). Takeover prompt: dev/handover/TAKEOVER_FOREMAN_C_ROOT7.md. ROOT-6 keeps answering (wake trig_017VztNAuLezGyK58FczkjRw :32) until ROOT-7 says it took over, then disables its trigger and stops.
+NEXT FOREMAN C SESSION: ROOT-7 = session_01UV1Szh1sUAVP6FUuqZgkYs (opened by MAIN s31 ~13:10Z 17/11, depth 1). ROOT-6 stops; it disables its trigger trig_017VztNAuLezGyK58FczkjRw.
+FOREMAN C SESSION ROOT-7 = session_01UV1Szh1sUAVP6FUuqZgkYs · START_CTX ~6% (~60k of 1M; get_session reads 0, own estimate) → roll over at >= 31%, ceiling 60% · lineage depth 1/8 · own hourly wake (:32).
+- 13:40Z ROOT-7 took over; read TAKEOVER + HANDOVER + main s31 orders 13:16Z AG-HAP and 13:21Z AG-ALL. AG-ALL claimed; first deliverable reports/ag-all.md gap table (≤1 h) → main s31.
 ## HANDOVER (Foreman C ROOT-6 session_011xDdVQNdyTACuGN42yEBQZ → ROOT-7, ~13:05Z 17/11)
 Why: context ~32% (START ~8% → limit 33%). OWNER now writes in the ROOT-6 chat (old ROOT chat session_011xDdVSwTjDmQyniASgFZyk relayed earlier lines). Read the ROOT-6 log lines below (12:16Z–13:04Z): they hold her verbatim lines of 12:19Z–13:04Z.
 OPEN WITH THE OWNER:
