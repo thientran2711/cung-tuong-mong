@@ -657,3 +657,4 @@
 | CH1–4 GOALS (story-bot faults 4–6, BAL.st14) + HER ALLERGY (S4-allergy/D39) (opus) | review/ch14-goals | D | session_01964izEFbPPP2sy98Z4cBWn | RUNNING | 17/11 06:37Z |
 | ART event-art-style #3 (sonnet; successor of #2; batches b3+ of REMAINING list in reports/event-art-style.md HANDOVER #2) | handover reports/event-art-style.md | C ROOT-2 | session_011xDdVQS2NiQBmm8ahMxJkk → #3b session_011xDdVRvYPfrJjKVSj7JpuR (#3 had no repo, archived) | RUNNING | 17/11 06:39Z |
 | W6c maid ty1–ty3 a51 audit (156) + a26 ty1–ty3 redraw m01–m26 (78) (sonnet; under lead #6; successor of W6b NxAY) | CDN + reports/fig-cutout-clean | C ROOT-2 (lead #6) | session_011xDdVR2yZsyumoPD5vyhQ6 | RUNNING | 17/11 06:38Z |
+| coop-thin-d SẴN SÀNG KIỂM 099ce05b → review r1 (opus BIG co-op; brief briefs/review-coop-thin-d-r1.md) | review/coop-thin-d-r1 | B | session_01N1tNP6MvvQQJhGffLYV2m8 | RUNNING | 17/11 06:42Z |
