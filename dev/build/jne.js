@@ -91,7 +91,7 @@ function kitNightEnd(o){o=o||{};const T0=TIER[o.tier]||TIER.normal;const T=Objec
  const [mv,mc]=moodRow(o.m0,o.m1,o.tier);
  const rows=[["Hoàng thượng",mv,mc]];if(G.length)rows.push(["Được",G,"g"]);if(B.length)rows.push(["Mất",B,"r"]);
  let tb=kitRows(rows);try{const kem=kitKemRow(K);if(kem)tb=tb.replace(/<\/span>$/,kem+"</span>")}catch(e){}
- const items=(o.items||[]).map(e=>{let I={};try{I=kitItemInfo(e)}catch(x){}return `<div class="kmrow kne-it">${typeof kitItem==="function"?kitItem({src:I.src,name:"",grade:I.grade||0,size:"sm",tip:I.name}).replace('<span class="kitn"></span>',""):""}${typeof kitGradeChip==="function"?kitGradeChip(I.grade||0,{size:"sm"}):""}<b>${esc(I.name||"")}</b><small>Hoàng thượng ban</small></div>`}).join("");
+ const items=(o.items||[]).map(e=>{let I={};try{I=kitItemInfo(e)}catch(x){}return `<div class="kmrow kne-it">${typeof kitItem==="function"?kitItem({src:I.src,name:"",grade:I.grade||0,size:"sm",gname:I.gname,tip:I.name}).replace('<span class="kitn"></span>',""):""}<b>${esc(I.name||"")}</b><small>Hoàng thượng ban</small></div>`}).join("");
  const html=`<div class="kne kne-${o.tier}">${picHTML(DIR+T.pic+".webp",o.tier)}<div class="kne-side"><div class="kne-cap"><b>${T.t}</b>${o.line?`<small>${esc(o.line)}</small>`:""}</div>
   <div class="kmlist">${tb}${items}</div><button class="kbtn kmtake kne-take" data-km-close>${items?"Nhận":"Tiếp tục"}</button></div></div>`;
  const keys=(o.items||[]).map(e=>e.k);

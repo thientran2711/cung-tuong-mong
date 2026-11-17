@@ -8,6 +8,8 @@ Output, one file per face (the game loads only her own face):  img/mk-fit/<face>
   { "<file>": [x0,y0,x1,y1,...] }  60 points, integers in 1/4000 of the image width (x) and height (y), order MK_IDX below.
   dev/art/mkfit/md5.json = {file: CDN md5[:16]} measured on; `--stale` re-measures pictures changed since (e.g. portrait re-crops).
 usage: python3 -I dev/art/mkfit/mkfit.py [--only consort-c05] [--stale] [--model face_landmarker.task] [--jobs 8]
+       python3 -I dev/art/mkfit/mkfit.py --missing [--model …]   (diemtrang-score r1: every por-/fig- picture of a WOMAN (consort / maid / mama)
+       on the CDN that has no points yet — maid tm / kc / cold / ngheo, consort kc a26+ … — measured on the whole picture, no toil-fit row needed)
 needs: pip install mediapipe (+ libegl1 libgles2), model face_landmarker.task (MediaPipe model storage, float16/1).
 """
 import json, sys, io, os, re, math, urllib.request, concurrent.futures as cf
@@ -106,8 +108,50 @@ def sim_from(a, b):
 def tf_pts(v, W, H):
     return [(v[0] / 100 * W, v[1] / 100 * H), (v[2] / 100 * W, v[3] / 100 * H), (v[4] / 100 * W, v[5] / 100 * H)]
 
+WOMEN = ("consort", "maid", "mama", "thaihau")
+
+args_redo = None
+
+def main_missing(model, jobs):
+    """points for every picture of a woman that has none (no toil-fit row needed: detect_free on the whole picture)"""
+    idx = json.loads(get(BASE + "_index.json")); md5 = {f[0][4:]: f[1] for f in idx["files"]}
+    md5f = os.path.join(ROOT, "dev/art/mkfit/md5.json")
+    try: old5 = json.load(open(md5f))
+    except Exception: old5 = {}
+    outdir = os.path.join(ROOT, "dev/art/mkfit")
+    groups = {}
+    for n in md5:
+        if not re.match(r"(por|fig)-[a-z]+-[a-z]*\d+-.*\.webp$", n): continue
+        g = face_of(n)
+        if g and g.split("-")[0] in WOMEN: groups.setdefault(g, []).append(n)
+    tot = {"ok": 0, "fail": 0, "kept": 0}
+    for g, L in sorted(groups.items()):
+        fn = os.path.join(outdir, g + ".json")
+        try: cur = json.load(open(fn))
+        except Exception: cur = {}
+        redo = args_redo and g.startswith(args_redo)
+        todo = sorted(n for n in L if redo or n not in cur); tot["kept"] += len(L) - len(todo)
+        if not todo: continue
+        with cf.ThreadPoolExecutor(jobs) as ex:
+            datas = dict(zip(todo, ex.map(lambda n: get(BASE + n), todo)))
+        got = 0
+        for n in todo:
+            try: p, (W, H) = detect_free(model, datas[n])
+            except Exception as e: p = None; print("err", n, e, file=sys.stderr)
+            if p: cur[n] = enc(p, W, H); old5[n] = md5.get(n, ""); got += 1; tot["ok"] += 1
+            else: tot["fail"] += 1; print("FAIL", n, file=sys.stderr)
+        json.dump(cur, open(fn, "w"), separators=(",", ":"), sort_keys=True)
+        json.dump(old5, open(md5f, "w"), separators=(",", ":"), sort_keys=True)
+        print(g, len(L), "todo", len(todo), "detected", got, flush=True)
+    print(json.dumps(tot))
+
 def main():
     args = sys.argv[1:]
+    if "--missing" in args:
+        global args_redo
+        args_redo = args[args.index("--redo") + 1] if "--redo" in args else None   # --redo thaihau: measure that group again (whole picture)
+        model = args[args.index("--model") + 1] if "--model" in args else os.path.join(ROOT, ".mk/face_landmarker.task")
+        return main_missing(model, int(args[args.index("--jobs") + 1]) if "--jobs" in args else 8)
     model = args[args.index("--model") + 1] if "--model" in args else os.path.join(ROOT, ".mk/face_landmarker.task")
     only = args[args.index("--only") + 1] if "--only" in args else None
     jobs = int(args[args.index("--jobs") + 1]) if "--jobs" in args else 8
