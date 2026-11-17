@@ -1,0 +1,26 @@
+# Foreign princess — history check (owner rule OD:L1327; art worker #5, 17/11)
+Purpose: what Nam Chiếu (南詔 Nanzhao) and Bắc Địch noblewomen really wore, so the art is truthful, then made graceful. Written BEFORE generating.
+
+## Nam Chiếu = Nanzhao (738-902, Yunnan; Bai/Yi/Wuman peoples; Tang vassal-rival)
+Primary source, found and read in the text: Fan Chuo, *Man Shu* (蠻書, c.863), vol. 8 "Mán-di customs":
+- "妇人，一切不施粉黛，贵者以绫锦为裙襦，其上仍披锦方幅为饰。" Women use no face powder or rouge; a noble woman wears a **skirt and short jacket (裙襦) of damask/brocade silk, and over it drapes a rectangular piece of brocade** as ornament.
+- "两股辫其发为髻，髻上及耳，多缀真珠、金、贝、瑟瑟、琥珀。" Hair is **twisted in two plaits into a bun**, the bun rising to ear level (read: a high/side bun), **studded with pearls, gold, cowries, sese (turquoise-blue stone) and amber**.
+- "贵家仆女亦有裙衫，常披毡，及以缯帛韬其髻，亦谓之头囊。" Servants of noble houses: skirt + shirt, felt cloak, silk **head-bag (头囊)** wrapped round the bun (men's head-bag is described in the same chapter: a silk square knotted over the hair bun, red for the top rank).
+- All adults, men and women, wear a felt cloak (披毡); rank for men shown by tiger/leopard skin (波罗皮) and the sash 佉苴; commoners barefoot.
+Other notes (secondary, Bai dress history): Bai dress is traced to the Nanzhao/Dali period; white = dignity; later Bai women's pigtail/bun, embroidered belts, silver/gold jewellery, camellia embroidery. The Tang court strongly influenced Nanzhao silk and court dress, but nothing I could verify says Nanzhao noblewomen wore Han gauze over-robes with trailing sleeves.
+Sources (searched; secondary transcriptions, verify against the Zhonghua edition): zggdwx.com/manshu/8.html (Man Shu vol. 8 text); Zhang Yun, "从服饰、婚姻、饮食看南诏王族的社会生活" (sinoss.net/uploadfile/2010/1130/1619.pdf, not read in full); Wikipedia "Bai people". The Nanzhao Tuzhuan (南詔圖傳) and Zhang Shengwen scroll show court figures but I could not find a written description of the women's dress; not claimed.
+
+### What v25 NC got wrong (honest)
+v25 NC = sky-blue cross-collar silk + long sheer gauze over-robe + pleated floor skirt + low bun with silver flowers: that is generic Han/Tang fairy-hanfu (the "thước tha" look), with only a small bell as a "Nam Chiếu" mark. It contradicts the source in: (1) full-length trailing gauze over-robe (source: short jacket + skirt + brocade rectangle), (2) a low bun with silver flowers (source: two plaits twisted into a bun at ear height, pearls/gold/cowries/turquoise/amber), (3) plain pale-blue sheer cloth (source: damask/brocade patterned silk). Earlier "silver filigree, peacock feathers, indigo batik" (st_prompt.py) is Miao/Bai folk dress of much later centuries, not Nanzhao.
+
+### How to draw NC truthfully AND gracefully (plan)
+Short jacket (襦) with narrow-to-moderate sleeves and a cross collar, brocade/damask silk with woven patterns (camellia, lotus, cloud); a long skirt with a sash; a rectangular brocade shawl draped over both shoulders/arms and hanging in two soft panels (this gives the flowing "thước tha" line truthfully, no gauze); hair in two plaits wound into a bun at the side/top at ear height with pearls, small gold ornaments, cowrie shells, turquoise and amber beads; no face powder look (natural, soft). Rank readable by richness and colour only. Rank props: one per rank (fan, bell-sash, string of amber beads, ...).
+Reference descriptions: (a) brocade-patterned short jacket + long skirt + draped brocade rectangle; (b) two plaits coiled into a bun, pearl/gold/cowrie/turquoise/amber studding; (c) felt cloak on commoners (not used for princesses); (d) silk head-bag (头囊) for servants (maids only).
+
+## Bắc Địch (northern steppe court)
+Game canon (origin text, jorigins.js): "Con gái Khả hãn Bắc Địch, gả sang làm tin cho hòa ước mười năm"; Bắc Địch events: envoys in fur coats leading horses, horse market, the Bắc Địch prince bacdich-1. Owner rules: NOT only braids, vary hair and headwear; not every figure a hat; no winter-feeling fur; faces different from Nam Chiếu.
+Real analogue (Khitan/Liao, secondary: Wikipedia "Fashion in the Liao dynasty", Cleveland Museum Liao textiles): Khitan women wore tight-sleeved, cross-collared long robes, left lapel (buttoned/tied on the left), tied at the waist with a silk band; boots (high boots) were valued for the mobile life; gold-embroidered boots in an elderly woman's tomb; belts and silk headpieces; the shaved forelock style is mostly male.
+v25 BD (drum/fan, felt-style boots, braid) fits this reasonably for low ranks. The owner's complaint is different: the high ranks (Phi, Quý phi) must look like THAT rank in the game (the game's own Phi/Quý phi silhouette and richness) with only BD accents (boots, left lapel, belt, one steppe accessory), not a separate home costume.
+
+## Game's own Phi / Quý phi (t5 / t6), seen on the live figures (c05/c26/c30 t5, t6 hd)
+Wide-sleeved layered court robe, sheer outer layer in places, gold phoenix/peony embroidery, tall gold floral phoenix-crown with hanging strands, jade pendant + long tassel at the sash, pearl strands on the shoulders, one prop (round fan / scroll / jade disc). No repainted t5/t6 exist live yet (repaint batch is a18 t2 first), so the live figures are the rank model.
