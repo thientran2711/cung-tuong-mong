@@ -1,5 +1,5 @@
 # FOREMAN_C_STATUS (written ONLY by Foreman C)
-NEXT FOREMAN C SESSION (ART side, C account): ROOT-9 = (opening, see HANDOVER ROOT-8 → ROOT-9). ROOT-8 stops on "ROOT-9 took over".
+NEXT FOREMAN C SESSION (ART side, C account): ROOT-9 = session_011xDdVRcPyvGXaGQCff5fCJ (took over 19:42Z). ROOT-8 told 'ROOT-9 took over'.
 ## HANDOVER (Foreman C ROOT-8 session_011xDdVRxwG5P4aVZdE26CMn → ROOT-9, ~19:40Z 17/11)
 Why: context 28.7% (used_tokens 287k; START ~5% → limit 30%). Depth 1 → ROOT-9 depth 2.
 OWNER MOOD: very angry about repeated misses ("càng sửa càng sai", "vẽ xấu", "không giống ảnh mẫu"). Change ONLY what she names; LOOK hard before sending; never resend an unchanged image.
@@ -22,6 +22,10 @@ RANK OUTFIT SAMPLE (one consort c01 a18, 5 ranks Tần/Phi/Quý phi/Hoàng quý 
 OPEN OWNER QUESTIONS: (B) explicit OK to overwrite live fig-maid-*-ty* with the old plain trung y (lead #7 restore pipeline ready, RESTORE_TY_REPORT.md); (C) the list of 13 ranks; (D) W8 mama BLOCKED at 66/520 (old-ref upload to Magnific denied by classifier; 0/520 refs have a creation id) → her OK for the ref upload, or pause.
 IDLE (C's): art lead #7 session_011xDdVNkgEgTqsZJxUh9Xd8; W8 mama session_011xDdVRWZVWQYAYYva3YuqJ. ROOT-6 session_011xDdVQNdyTACuGN42yEBQZ stopped (ROOT-5's child; not archived by C).
 
+FOREMAN C ROOT-9 (art) = session_011xDdVRcPyvGXaGQCff5fCJ · START_CTX ~6% (get_session reads 0, own estimate) → roll over at >= 31%, ceiling 60% · lineage depth 2/8 · own hourly wake trig_016CmsFYJikQ6Ei2v5cqVsAW (:32) · reports to MAIN s34 via this file.
+- 19:42Z ROOT-9 took over (TAKEOVER_FOREMAN_C_ROOT9.md + ROOT-8 HANDOVER + log read). Told ROOT-8, lead #7, W8 (stay idle), vân kiên sample worker (job cancelled) → session_011xDdVSeXkZANCvC1jxcTK1 ARCHIVED.
+- 19:40Z (forward from ROOT-8 + lead #7): W10 = session_011xDdVQzeuta29DT66RfH38 makes maid→consort sample sheet CURRENT | PROPOSAL (6 maids × ty1/ty3/ty5 incl. Đáp ứng-vs-cung nữ case) at img/_review/maid-consort-sample/, to C first, nothing live. W2c = session_011xDdVPTZMoPrGxgDoi5gZL resumes consort-ty transparent repaint (lead's reading of '32 phi tần còn lại' = shard c01–c32, 572 keys: a18 5, a26 96, a36 215, a51 256), one 16-tile OLD|NEW sheet to C, live after C looks. Alt reading consort-rest non-ty (374 keys, 31 ids) only if owner objects.
+- 19:44Z ref dev/handover/refs/owner-dapung-vs-maid-same-1117.jpg is in NO branch (only cited, OD:L1501). W10 told to rebuild the pair from live figures: Hạ Lăng Vân (Đáp ứng) beside Cung nữ Tiểu Hoa.
 FOREMAN C ROOT-8 (art) = session_011xDdVRxwG5P4aVZdE26CMn · START_CTX ~5% (get_session reads 0, own estimate) → roll over at >= 30%, ceiling 60% · lineage depth 1/8 · own hourly wake (:32) · reports to MAIN s34 via this file.
 - 19:38Z OWNER (verbatim, angry): "Bạn vẽ xấu quá. Tôi nói hoài sửa giùm tôi mấy cây trăm từ bậc 5 tới bậc 8, bạn vẫn để cái hình này, bạn nộp cho tôi nãy giờ 3 4 lần liên tục vẫn cái hình này, rất là bực bội. Và hình vẽ cũng rất là xấu. Tôi đã nói là hình vẽ của bạn đang vẽ xấu, không giống ảnh mẫu, không thấy bạn sửa luôn." → v9 ordered (see HANDOVER). ROOT-8 rolling over (ctx 28.7%).
 - 19:25Z ROOT-8 LOOKED v8 (sheet_figures_v8_8bac.jpg; 540 cr) → SENT to owner. Ranks 1–4: real chest panels (Thường tại square, Quý nhân rose, Tần lilac clear; Đáp ứng cream panel faint), ink line + watercolour matte like v4c. Ranks 5–8 = v7. Seen: ranks 1–4 paler/thinner than 5–8. Waiting owner verdict.
