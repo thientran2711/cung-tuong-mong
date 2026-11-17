@@ -16,3 +16,9 @@ player-look1-t1-a36 8a6HNjlIrU | look2-t1-a36 rgdyeY6xtc | look3-t1-a36 u5YLnOCQ
 ## TODO (order): player-look*-t1-a51 (4), player-look*-t3-a18 (4, +a26? check list), emperor a26/a36/a51 -1/-2 (6), physician, official, tutor, steward, fallen (remaining), then man, mama, eunuch, kid. Remaining list = shard minus the done above.
 ## Gesture rotation used: a18 look1 branch, look2 handkerchief, look3 fan, look4 hairpin; a26 teacup/fan/scroll/jade; a36 branch/handkerchief/fan/lantern. Age lines: a26 'about 28', a36 'about 38 poised mature, subtle maturity', a51 'about 53, dignified, silver touches in hair' (not yet used).
 
+## LEAD UPDATES received after my handover (17/11 01:30-01:37Z) — these OVERRIDE my TODO order above; re-read BATCH_BRIEF.md
+- 2k ONLY for all new generations (1024x2048, resolution 2k, 65 cr). The 16 files above stay at 4k.
+- PRIORITY: ALL a18 files of the shard first (hero first), only then a26, a36, a51 (so the TODO "player a51 first" is obsolete).
+- Transparency: use extraSettings transparentBackground=true + "FULLY TRANSPARENT BACKGROUND (real alpha channel...)" prompt, verify alpha extrema; else images_remove_background (+3 cr) fallback.
+- hd twin only where the CDN already has it; fig + tn (if exists) + por always.
+- Throughput: short prompt <=110 words, 8 generations per message, one creations_wait, one bash per batch (download+alpha+finish+qa+ONE contact sheet), look <=2 images/batch, TSV line per file in this file; target >=40 files/session.
