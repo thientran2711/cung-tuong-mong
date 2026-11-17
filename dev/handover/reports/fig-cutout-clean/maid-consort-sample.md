@@ -27,3 +27,8 @@ START_CTX low; no rollover needed. Finished.
 - HOA ĐIỀN removed: all 6 proposals regenerated (6 more gens, total 12) with "bare clean forehead, no forehead mark"; every forehead looked at: clean. (The first-round sheet maid-consort-sample.jpg has huadian — SUPERSEDED, do not show; wipe with cdn_sync --wipe-review maid-consort-sample when done.) CURRENT files are live art and still carry huadian (c08 t1, maid t5 etc).
 - Gens (clean): m01 rgdpAAUxtc, m02 Xm4yxLZBfo, m03 LwoXYu7swO, m05 kspM2CS16B, m07 bxV0ZL75Y2, m09 rgdpn7Qxtc.
 - Single files under img/_review/maid-consort-sample/: pair_dapung-c08-t1_vs_cungnu-m09_current.jpg; <mNN>_<t1|t3|t5>_current.webp (live, transparent, 900px high) and <mNN>_<t1|t3|t5>_proposal.jpg (crop of the lineup gen, ~416x752, parchment bg, NOT upscaled/cut).
+
+## Round 3 (ROOT-9 19:50Z: PNG, transparent, full size)
+- Backgrounds removed with Magnific images_remove_background (3 credits each) on the 6 clean-forehead lineup gens, then split per figure by alpha column runs (stray neighbour fragments dropped), tight crop. Checked on dark bg: clean edges, no parchment, foreheads clean (no local fill needed: regenerated clean).
+- Files (PNG, RGBA) in img/_review/maid-consort-sample/: <mNN>_<t1|t3|t5>_proposal.png (~320x745 = native size of the 1344x752 gens; not downscaled, not upscaled) and <mNN>_<t1|t3|t5>_current.png (live fig 900 px high, converted from webp).
+- Superseded older files in the same folder (jpg/webp proposals, contact sheet) remain: wipe the folder when done.
