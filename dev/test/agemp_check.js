@@ -65,7 +65,7 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
  const r8=await p.evaluate(()=>{const G=BAL.tw.g.pillow;const v=liveRivals(true).find(x=>!x.queen)||liveRivals(true)[0];const r0=roll,mp=mindPick;const out={};
   try{roll=()=>true;S.sung=50;const b=S.sung;pillowDo(v,S,100);out.hit=b-S.sung;out.want=G.hit;
    S.an=20;out.o=pillowO(S,4);out.oWant=G.o[0]+20/G.o[1]+4*G.o[2]-(DG()?G.o[3]:0);
-   /* no spite → she keeps quiet (no deed) */const h0=hostility;hostility=()=>0;const r1=pillowNpc(v,5);out.quiet=r1===""&&S.sung===b-G.hit;hostility=h0;
+   /* no spite → she keeps quiet (no deed) */const h0=hostility;hostility=()=>0;const r1=pillowNpc(v,5);out.quiet=r1===null&&S.sung===b-G.hit;hostility=h0;
    /* a night2 option reads the deed */const m=PEND.night2({s:4,ex:""});const op=m.o.find(o=>/nói xấu/.test(o.n));out.txt=op?op.x:"";
   }finally{roll=r0;mindPick=mp}return out});
  ok(r8.hit===r8.want&&Math.abs(r8.o-r8.oWant)<1e-9,'pillow: one deed (BAL.tw.g.pillow) — gain and odds',r8);ok(r8.quiet,'pillow: no spite → the NPC keeps quiet',r8);

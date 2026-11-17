@@ -141,8 +141,9 @@ rivalNight=function(v){v.nights++;v.nightLog.push(wk());
  const grade=sc>=6?"đêm vui":sc>=3?"đêm êm":"đêm nhạt";
  let r=`Đêm qua thẻ bài của ${v.name} được lật${S.mat>=2?` (tai mắt nói: ${grade})`:""}. `;
  if(giuBlocked(v)){if(v.bac>=40&&roll(odA(v,45+v.tamco/3))){ap(v,{bac:-40});night(v)}}else night(v);
- if(typeof pillowNpc==="function"&&agOn())r+=pillowNpc(v,sc);/* AG2: her own choice by her spite need (two-way row 24, one deed BAL.tw.g.pillow) */
- else if(v.rel<-20&&roll(20)){const o=odA(v,30+v.an/2);if(roll(o)){const b=S.sung;apply({sung:-4});if(S.mat>=2)r+=`Tai mắt nghe được: gối đầu, ${v.name} nói xấu ngươi.${b!==S.sung?` Sủng của ta ${b} → ${S.sung}.`:""} `}else if(DG()){ap(v,{sung:-6})}}
+ {let x=null;if(typeof pillowNpc==="function"&&agOn())x=pillowNpc(v,sc);/* AG2: her own choice by her spite need (two-way row 24, one deed BAL.tw.g.pillow) */
+  else if(v.rel<-20&&roll(20)){const o=odA(v,30+v.an/2);if(roll(o)){const b=S.sung;apply({sung:-4});x={t:S,ok:1,b}}else if(DG()){ap(v,{sung:-6})}}
+  if(x&&x.t===S&&x.ok&&S.mat>=2)r+=`Tai mắt nghe được: gối đầu, ${v.name} nói xấu ngươi.${x.b!==S.sung?` Sủng của ta ${x.b} → ${S.sung}.`:""} `}
  if(roll(3)){r+=sendMaid(v)}
  if(roll(10+sc*4))bestow(v,"night");return r};
 /* (b) the quiet favour is a world act with a cost */
