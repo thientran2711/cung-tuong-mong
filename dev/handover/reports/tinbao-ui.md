@@ -19,3 +19,6 @@ Deviations: button reads "Để ta tới xem" (kit prints "không được mất
 
 ## r2 (fix of review r1 FAIL) review/tinbao-ui-r2 a0327a6b
 Done: (1) each row = informer name+role (kitName), (2) big figure = informer of the first row with a person (spec.subject), (3) place printed once (only when the line lacks it), (4) count tag moved to the badge LEFT corner + free-spot margin 8 px. tinbao-ui.test 19/19, site rebuilt. Shots (LOOKED, Fold+iPad @2) CDN img/_review/tinbao-ui/ (wipe with verdict).
+
+## r3 (owner e + Tai mắt list) review/tinbao-ui-r3b 44500057 (on reviewer PASS 05e82176 / ag-all-2 72263137)
+(1) card header "Tai mắt báo". (2) kitTaiMatCard: tap Tai mắt N -> kit list (person, rank/name, where placed, lòng word). (3) each TIN BÁO row names informer kind (tai mắt của ta / người hầu của ta / bạn trong cung / người qua đường); sold-out only when data says discovered. ONE ADAPTER in jtinbao.js: tbTaiMat() / tbInformerKind() read taiMatList(S) / informerInfo(item) when C-AG #2 ships them; until then STUB (her servants by lòng, as many as Tai mắt N; kind from item.by). Test tinbao-ui 22/22. Shots CDN img/_review/tinbao-ui/ (8, Fold+iPad @2). NOTE: old branch review/tinbao-ui-r3 84152ddc (wrong base) left untouched; use r3b.
