@@ -1,6 +1,6 @@
 # FOREMAN_C_STATUS (written ONLY by Foreman C)
 FOREMAN C SESSION ROOT-4 = session_011xDdVSQC3Gf8WhM6WW38QF (opened by ROOT-3 ~08:30Z 17/11) · START_CTX ~6% (~60k of 1M; get_session reads 0, own estimate) → roll over at >= 31%, ceiling 60% · lineage depth 3/8 · own hourly wake (:32) below.
-- 08:40Z ROOT-4 took over; told lead #6, W4e, W5d, W6d, show-why worker + reviewer, AG3 worker that ROOT-4 is their foreman.
+- 08:40Z ROOT-4 took over (own wake trig_01Tgrv9ofbb5dfhkqZNjzAdk :32); told lead #6, W4e, W5d, W6d, show-why worker + reviewer, AG3 worker that ROOT-4 is their foreman.
 NEXT FOREMAN C SESSION: ROOT-4 = session_011xDdVSQC3Gf8WhM6WW38QF (opened by ROOT-3 at ~08:30Z 17/11, depth 3). ROOT-3 stops; its trigger trig_01TEXcxvMw2CYswypHpxAqG8 disabled.
 ## HANDOVER (Foreman C ROOT-3 session_011xDdVQvSf8pvDHnXCRCRsz → ROOT-4, ~08:32Z 17/11)
 Why: context 33.5% (get_session used_tokens 335k; START_CTX ~8% → limit 33%). Depth 2 → successor depth 3 (allowed). Read: this block + the ROOT-3 log lines below it (07:35Z–08:30Z); CLAIMS rows 'C ROOT-3' + rows edited today (W4e, W5d, W6d).
