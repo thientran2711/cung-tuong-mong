@@ -26,7 +26,7 @@ const rdFb=(k,v)=>{try{const F=S.st.f14.fb=S.st.f14.fb||{};if(v!=null)F[k]=v;ret
 const RD_FL=rdFb;/* B2 road-long flag (review/road-b2-fix): same book as CN_FL / MUOI_FL */
 const rdIn=(c,f)=>Array.isArray(c)?c.some(f):f(c);
 function rdOdds(q,A){let x=q[0];for(let i=1;i<q.length;i++){const t=q[i],k=t[0],neg=k[0]==="-",K=neg?k.slice(1):k;let v;
-  if(K==="d")v=S[t[1]]/t[2];else if(K==="m")v=S[t[1]]*t[2];else if(K==="k")v=RDQ[t[1]](A)*t[2];
+  if(K==="d")v=S[t[1]]/t[2];else if(K==="m")v=S[t[1]]*t[2];else if(K==="k")v=RDQ[t[1]](A)*t[2];else if(K==="kd")v=RDQ[t[1]](A)/t[2];
   else if(K==="f")v=t[1].split("|").some(g=>A.f[g])?t[2]:t[3];else if(K==="e")v=rdIn(t[1],c=>rdEnd(c)===t[2])?t[3]:t[4];
   else if(K==="b")v=rdFb(t[1])?t[2]:t[3];else if(K==="q")v=RDQ[t[1]](A)?t[2]:t[3];else throw Error("rdOdds term "+k);
   x=neg?x-v:x+v}return x}

@@ -7,7 +7,7 @@
 const CHR_TH=n=>{if(S.thDead)return"";ap67({th:n});return fmt({th:n})};
 if(!RDQ.artY)RDQ.artY=()=>S.arts&&S.arts.y||0;/* same count as jrd_cn (loads earlier); kept here so jrd_ch stands alone */
 const CHTH=k=>BAL.road.chTh[k];/* Thái hậu / Hoàng hậu favour moved by a choice's go (key "<chapter>.<beat>.<option>|E.<end>|rare.<stat>"), BAL.road.chTh */
-RDQ.chcoTh=()=>S.thDead?0:S.th/BAL.road.ch_co.thDiv;RDQ.chco9=()=>S.thDead?S.danh/BAL.road.ch_co.stDiv:S.th/BAL.road.ch_co.stDiv;/* ch_co climax odds terms (rdOdds "k"): the Thái hậu's favour while she lives, else her Danh at .9 */
+RDQ.chcoTh=()=>S.thDead?0:S.th;RDQ.chco9=()=>S.thDead?S.danh:S.th;/* ch_co climax odds terms (rdOdds "kd", divided in BAL.road.fx): the Thái hậu's favour while she lives, else her Danh at .9 */
 const CHR_Q=()=>qOn()?"Càn Ninh cung":"cung người giữ việc lục cung";
 const CHR_H=()=>qOn()?"Hoàng hậu":"người giữ việc lục cung";
 const CHR_LAM=()=>rdEnd(4)==="r97";
