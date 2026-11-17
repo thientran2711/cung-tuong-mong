@@ -1143,7 +1143,7 @@ Object.assign(BAL,{odb:{
 }});
 /* AG-ALL-2b merge (ONE CORE): evidence a deed gives / clears where the player and NPC share one code path (j2 cx2 cards, j9 help, j10 servants,
    j42 dilemma builders, jcmaid, jpromsv, jeitem): one = 1 piece, two = 2 pieces (a Mật báo), all = clear every piece; rel = liking lost by a bribe told to the master */
-Object.assign(BAL.ag,{ev:{one:1,two:2,all:-99,get rel(){return -BAL.eff.j42.go}}});/* review ag-all-2 r2 M1: the evidence amounts read this one key (main's per-site ev keys that only fed these sites are gone); rel = main's j42.go */
+Object.assign(BAL.ag,{ev:{judge:2,one:1,two:2,all:-99,get rel(){return -BAL.eff.j42.go}}});/* review ag-all-2 r2 M1: the evidence amounts read this one key (main's per-site ev keys that only fed these sites are gone); rel = main's j42.go */
 /* AG-ALL-2e PARITY (jagacts3.js; report dev/handover/reports/ag-all-parity.md "2e"): the player's buttons that had no NPC side. Each card is built ONCE
    (P3C.<k>(p), used by her deck / talk card AND an NPC consort's cx3:<k> option); g = the needs the deed serves (agcU), as BAL.ag.cx2. on = 0 → no NPC option.
    dance  Múa trong yến tiệc (o + Sắc/sacD × mesac + múa lv × vu)   eyes Cài tai mắt   anthai An thai (buy) / Tự bào chế (self, Y ≥ y)
