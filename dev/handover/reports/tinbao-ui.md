@@ -25,3 +25,6 @@ Done: (1) each row = informer name+role (kitName), (2) big figure = informer of 
 
 ## r5 review/tinbao-ui-r5 30bb1851 (r4 changes on ag-all-2 7de949ee)
 Adapter switched to 2f API: taiMatList(S) (placedAt/placedName/loyaltyKnown null -> "chưa rõ"/reports) and informerInfo(item) (taiMat/ownMaid/friend/passerby, soldOutKnown -> "đã bán đứng ta"); informer person via item.inf (servById / RV / maid). Stub only when the functions are absent. tinbao-ui.test 22/22 (plants a spyFor=me servant). Shots CDN img/_review/tinbao-ui/ refreshed. Branch is ag-all-2 7de949ee + my tinbao source files (r4 patch), site rebuilt.
+
+## r6 review/tinbao-ui-r6 d685a491 (on ag-all-2 f4a065dc; fixes reviewer r3b FAIL 1-4)
+(1) ONE CORE: loyalty ladder removed; words come from taiMatList().loyalWord. (2) TRUTH: only taiMatList / informerInfo are read; without taiMatList the tap is not intercepted and no names shown; row marker only from informerInfo.code (+ by here/le/pass). (3) option label "Để ta xem" = one line on iPad. (4) Fold Tai mắt card re-shot after images loaded. Test 22/22, shots CDN img/_review/tinbao-ui/ (8). Pushed as r6 (not a force-push over r5).
