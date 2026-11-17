@@ -10,13 +10,13 @@ const WURL=process.argv[4]||'https://ctm-coop.victoria-tntt.workers.dev';
 const sleep=ms=>new Promise(r=>setTimeout(r,ms));
 const log=[];const L=s=>{console.log(s);log.push(s)};
 async function mk(b,name,vp){const ctx=await b.newContext({viewport:{width:vp[0],height:vp[1]},deviceScaleFactor:1,reducedMotion:'reduce'});await serve(ctx);
+  /* THIN=n (host's wanted thin level, dev flag) + THINPART=4,… (test-only part flags, contract C1) for a thin-guest run on a Worker with part A */
+  await ctx.addInitScript(([l,pts,host])=>{try{if(l&&host)localStorage.setItem('ctm-thin',l);for(const p of pts)if(p)localStorage.setItem('ctm-thin-part-'+p,'1')}catch(e){}},[process.env.THIN||'',(process.env.THINPART||'').split(','),name==='A']);
   await ctx.addInitScript(u=>{window.COOP_URL=u;
     window.__co=()=>{const c=window.COOP;if(!c)return{};const s=c.state||{};const you=c.seat||s.you||null;const ended=c.ended||s.ended||{};
       const on=typeof c.on==='boolean'?c.on:!!(s.playing||(s.status&&s.status!=='off'));
       return{code:c.code||s.room||'',seat:you,week:c.week!=null?c.week:(s.week||0),ended,on,
         frozen:!!(on&&(s.status!=='open'||!s.peerOnline)),waiting:!!(window.COOPW&&COOPW.on&&(COOPW.sent===(s.week||0)||(you&&ended[you]))),world:typeof S!=='undefined'&&!!S&&!!(window.COOPW&&COOPW.base)}}},WURL);
-  /* THIN=n (review/coop-thin-b): the host asks the room for thin level n (dev flag ctm-thin); the level turns on only when both seats can */
-  if(process.env.THIN&&name==='A')await ctx.addInitScript(n=>{try{localStorage.setItem('ctm-thin',String(n))}catch(e){}},process.env.THIN);
   /* TRIP=1 (review/coop-thin-a): the guest tripwire (thin-guest progress meter) on the guest page */
   if(process.env.TRIP&&name==='B')await ctx.addInitScript({path:path.join(__dirname,'coop-thin-trip.js')});
   const p=await ctx.newPage();p.setDefaultTimeout(30000);const o={name,ctx,p,errs:[],acts:0,deaths:0,names:[],meets:0,harms:0,hk:{}};
@@ -55,7 +55,7 @@ const WORLD=()=>{const kidsOf=v=>(v.kids||[]).map(k=>k.name+(k.alive?'':'†')).
    friend:((rivals.find(v=>v.coop)||rivals.flatMap(v=>v.staff||[]).find(x=>x.coop)||null)||null)&&(({name,rank,alive,queen,sid,id})=>({name,rank:id==null?'srv':queen?7:rank,alive}))((rivals.find(v=>v.coop)||rivals.flatMap(v=>v.staff||[]).find(x=>x.coop)||null)),
    me:{name:S.name,rank:S.srv&&!S.srv.risen?'srv':S.rank,dead:!!S.dead,srv:!!S.srv},mst:{sung:S.sung,danh:S.danh,suc:S.suc},fst:(f=>f&&f.id!=null?{sung:f.sung,danh:f.danh,suc:f.suc}:null)((rivals.find(v=>v.coop)||rivals.flatMap(v=>v.staff||[]).find(x=>x.coop)||null)),where:Object.entries(S.where||{}).filter(([k])=>!(+k>=900)).map(([k,v])=>k+'@'+v).sort().join(),buoi:S.buoi||0}};
 
-(async()=>{const b=await chromium.launch();const A=await mk(b,'A',[755,1000]),B=await mk(b,'B',[1180,820]);
+(async()=>{const b=await chromium.launch(/127\.0\.0\.1|localhost/.test(WURL)?{args:['--disable-features=BlockInsecurePrivateNetworkRequests,PrivateNetworkAccessSendPreflights,PrivateNetworkAccessRespectPreflightResults,LocalNetworkAccessChecks']}:{});/* a local Worker (wrangler dev) */const A=await mk(b,'A',[755,1000]),B=await mk(b,'B',[1180,820]);
  await A.p.goto(BASE);await A.p.waitForTimeout(3000);await tapText(A,/^(Chơi cùng bạn|Cùng hảo hữu)/);await A.p.waitForTimeout(500);await tapText(A,/^(Mời bạn|Mời hảo hữu)/);
  await until(A,()=>__co().code&&__co().seat==='a');const code=(await A.p.evaluate(()=>__co())).code;L('room '+code);
  await B.p.goto(BASE+'?room='+code);await B.p.waitForTimeout(3000);await tapText(B,/^Vào phòng/,4000);

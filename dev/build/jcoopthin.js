@@ -24,6 +24,7 @@ const CW=window.COOPW;if(!CW||!CW.X||typeof COOP!=="object")return;
 const X=CW.X,J=X.J,LS={get(k){try{return localStorage.getItem(k)}catch(e){return null}}};
 const TH=CW.thin={CAP:2/* B (review/coop-thin-b): life creation + rebirth on the host, dev/build/jcoopthinb.js */,lvl:0,REG:[],bridge:[],rlog:[],view:null,hv:0,dn:0,dr:null,ctxN:0};
 const host=()=>CW.seat==="a";
+const D={};   /* part D (remote dialogs), filled in section 6 */
 TH.on=n=>!!(CW.on&&!CW.hold&&TH.lvl>=(n||1));
 function want(){let v=null;try{const q=new URLSearchParams(location.search).get("thin");if(q!=null)v=q}catch(e){}if(v==null)v=LS.get("ctm-thin");return Math.max(0,Math.min(TH.CAP,(+v)|0))}
 TH.want=want;
@@ -143,23 +144,28 @@ TH.withSeat=function(seat,fn){
  const sb=B.S;for(const k of X.W_KEYS){if(k in A.S)sb[k]=A.S[k];else delete sb[k]}
  sb.origin=(typeof ORIGINS!=="undefined"&&ORIGINS.find(o=>o.k===B.ok))||A.S.origin;
  CW.ctx=seat;TH.ctxN++;TH.outerS=A.S/* part B: the host's own person, READ-ONLY inside (her names must not repeat the host's own servants: the stand-in has no staff) */;quiet=true;S=sb;for(const r of REG)if(r[0] in B.g)try{r[2](B.g[r[0]])}catch(e){}
- let v=null;
- try{if(B.fresh){fixRefs(S);B.fresh=false}v=standIn(PA,S);return fn()}
+ let v=null,p0=null;const dOn=TH.dOn();
+ try{if(B.fresh){fixRefs(S);B.fresh=false}if(dOn&&D.hold)D.hold(S);v=standIn(PA,S);if(v)v.__inv0=(v.inv||[]).slice();if(dOn&&!D.noPatch)try{p0=pSnap()}catch(e){console.error("thin p0",e)}D.cur={p0};return fn()}
  finally{const sN=S;
+  if(dOn)try{D.takeQ()}catch(e){console.error("thin takeQ",e)}
   try{for(const r of REG)B.g[r[0]]=r[1]()}catch(e){}
   for(const k of X.W_KEYS){if(k in sN)A.S[k]=sN[k];else delete A.S[k]}
-  try{B.ok=sN.origin&&sN.origin.k||B.ok;const ss=ser().S;for(const k of X.W_KEYS)delete ss[k];B.S=ss;B.fresh=true}catch(e){console.error("thin ser",e);B.S=sN}
-  const Lb=X.pullFriend();TH.bridge=[];
+  try{B.ok=sN.origin&&sN.origin.k||B.ok;const ss=ser().S;for(const k of X.W_KEYS)delete ss[k];B.S=ss;B.fresh=true;
+   if(dOn){p0=D.cur&&D.cur.p0||p0;D.cur=null;if(p0){const pt=pDiff(p0,ss);if(pt.length)D.patchOut(seat,pt)}D.save()}}catch(e){console.error("thin ser",e);B.S=sN}
+  const Lb=X.pullFriend();TH.bridge=[];TH.bridgeItems=[];
   for(const [,e] of Lb){if(e!==v||!e.__b)continue;const b=e.__b;
+   /* part D: things her turn put into the host's entry (a gift she gave, accepted by the host) go to the host as her gift (Quà tặng) */
+   if(dOn&&Array.isArray(e.inv))for(const x of e.inv)if(x&&x.k&&!x.h&&!(e.__inv0||[]).includes(x))TH.bridgeItems.push(J(x));
    for(const k of X.STAT)if(k!=="hh"&&typeof e[k]==="number"&&e[k]!==b[k]){TH.bridge.push([k,b[k],e[k]]);A.S[k]=e[k]}
    for(const [f,m] of [["rel","rl"],["oan","ro"]])if(e[f]!==b[f]){A.S[m]=A.S[m]||{};A.S[m][PID[seat]]=e[f];TH.bridge.push([m,b[f],e[f]])}}
   B.pers=persTake(A.S);swapView(seat,CW.seat,mks,A.S);persPut(A.S,hp);X.pushFriend(L);
-  CW.ctx=undefined;TH.outerS=null;S=A.S;for(const r of REG)try{r[2](A.g[r[0]])}catch(e){}quiet=A.quiet}};
+  CW.ctx=undefined;TH.outerS=null;S=A.S;for(const r of REG)try{r[2](A.g[r[0]])}catch(e){}quiet=A.quiet;
+  if(dOn)D.afterRun(seat)}};
 /* no host screen / save work for the other seat's turn: render, the modal and save stay the host's */
-/* part B (contract C3 "UI side effects"): her events must not play on the host's phone either: scene queue (kmPush / kmReset of the
-   card-flip, ink, reward scenes), toasts (kitLine), sounds (sfx / kitSfx / kitResultSfx), stat floaters (kitStatFx / kitStatGlow) and the
-   overlays (kitEdict / kitGloom / kitReward / kitResultFx). ONE list (TH.NOOP); coop-thin-b.js checks each name is wrapped. */
-TH.NOOP=["render","showModal","save","kmPush","kmReset","kitLine","sfx","kitSfx","kitResultSfx","kitStatFx","kitStatGlow","kitEdict","kitGloom","kitReward","kitResultFx"];TH.NOOPED=[];
+/* parts B + D (contract C3 "UI side effects"): her events must not play on the host's phone: scene queue (kmPush / kmReset), toasts (kitLine),
+   sounds (sfx / kitSfx / kitResultSfx), stat floaters (kitStatFx / kitStatGlow / kitStatDelta), overlays (kitEdict / kitGloom / kitReward /
+   kitResultFx). ONE list (TH.NOOP); coop-thin-b.js checks each name is wrapped. */
+TH.NOOP=["render","showModal","save","kmPush","kmReset","kitLine","sfx","kitSfx","kitResultSfx","kitStatFx","kitStatGlow","kitStatDelta","kitEdict","kitGloom","kitReward","kitResultFx"];TH.NOOPED=[];
 for(const n of TH.NOOP)if(typeof window[n]==="function"){const f=window[n];window[n]=function(){if(CW.ctx)return;return f.apply(this,arguments)};TH.NOOPED.push(n)}
 
 /* stable text of the host's whole state (the round-trip check) */
@@ -218,4 +224,127 @@ COOP.on("do",m=>{if(!host()||!m||!TH.on(1))return;const fn=DO[m.op];let r=null;T
  TH.dn=m.n|0;TH.dr={id:m.id,op:m.op,r:r===undefined?null:J(r)};deltaSoon(0)});
 /* part A test intent: read her person in context b (no change) */
 TH.onDo("probe",()=>({name:S.name,used,ctx:CW.ctx,host:(rivals.find(v=>v.coop)||{}).id||null}));
+
+/* ---------- 6. part D = remote dialogs (cards) (review/coop-thin-d; audit §3 row D; contract coop-thin-a.md C1-C6) ----------
+   ONE path for "a card for her": the host builds it in her context (TH.withSeat), it lives SERIALIZED in her stored person
+   (S.thq = the serQ form {pid,pp,t} / note {t,h,cls,btn,w} + id + v = the text and options as she reads them, built in her context)
+   and so travels in the snapshot as P.<seat>.thq (the Worker keeps it: a reconnect or a reload shows it again). The guest shows it with
+   the normal kit dialog (a stand-in entry in her Q: {thin:id}); her tap sends `do pick {card,i}`; the host rebuilds the card from
+   its pid IN HER CONTEXT and runs that option exactly as chooseM does (fx, go, log), once (the card leaves S.thq).
+   Closures are never stored: a pid card is rebuilt at pick time inside her context, so its handlers see HER S.
+   What the host's run did to her person reaches her phone as a PATCH (until part G the guest still holds her own person): her stored S
+   before/after → numbers as deltas, other values set, arrays by element ({pq} in the view; she applies each n once (S.thpn) and acks
+   with `do pack`; the host's week end waits for the ack like the old res ack). Things for the HOST (his own cards, his costs) run
+   in the host's context after withSeat returns (D.after). Every withSeat entered by part D starts at the top of the event loop
+   (D.later = setTimeout 0), never inside an engine call (contract C3: call-scoped flags).
+   Gate: TH.dOn() = TH.on(4), or, until part B is on main (contract C1: CAP stays at the lower merged part), TH.on(1) + the test-only
+   flag localStorage "ctm-thin-part-4" = "1" on BOTH seats. Off → the old relays in jcoopworld run unchanged (solo never reaches any of it). */
+TH.dOn=()=>TH.on(4)||(TH.on(1)&&LS.get("ctm-thin-part-4")==="1");
+TH.D=D;D.on=TH.dOn;D.bad=[];D.log=[];
+const room=()=>String(COOP.state.room||COOP.code||"");
+const SKIP=new Set(["thq","thpn","heir","hr","cyb"]);
+function pSnap(){const o=J(ser().S);for(const k of X.W_KEYS)delete o[k];return o}
+/* person patch: [op, path, value]; path = keys, an array element as {i, id} (matched by its id / sid / name+bt / k on her side) */
+const eid=x=>plain(x)?(x.id!=null?"i"+x.id:x.sid!=null?"s"+x.sid:x.name!=null?"n"+x.name+"#"+(x.bt==null?"":x.bt):x.k!=null?"k"+x.k+"#"+(x.ci==null?"":x.ci):null):null;
+const jq=(a,b)=>JSON.stringify(a)===JSON.stringify(b);
+function pDiff(a,b,pre,out){out=out||[];pre=pre||[];
+ for(const k of new Set([...Object.keys(a||{}),...Object.keys(b||{})])){if(!pre.length&&SKIP.has(k))continue;if(BADK.test(k))continue;
+  const x=a[k],y=b[k],p=pre.concat([k]);if(jq(x,y))continue;
+  if(!(k in b)){out.push(["-",p]);continue}
+  if(typeof x==="number"&&typeof y==="number"){out.push(["+",p,y-x]);continue}
+  if(Array.isArray(x)&&Array.isArray(y)){
+   if(x.length===y.length&&x.every((e,i)=>plain(e)&&plain(y[i])&&eid(e)!=null&&eid(e)===eid(y[i]))){x.forEach((e,i)=>{if(!jq(e,y[i]))pDiff(e,y[i],p.concat([{i,id:eid(e)}]),out)});continue}
+   const rest=x.map(e=>JSON.stringify(e)),add=[];for(const e of y){const j=rest.indexOf(JSON.stringify(e));if(j>=0)rest[j]=null;else add.push(e)}
+   const rm=rest.filter(v=>v!=null).map(v=>JSON.parse(v));const front=add.length&&jq(y.slice(0,add.length),add);
+   if(rm.length)out.push(["r",p,rm]);if(add.length)out.push(["a",p,add,front?1:0]);continue}
+  if(plain(x)&&plain(y)&&!Array.isArray(x)&&!Array.isArray(y)){pDiff(x,y,p,out);continue}
+  out.push(["=",p,J(y)])}
+ return out}
+TH.pDiff=(a,b)=>pDiff(a,b);
+/* a step inside her context changed her stored S on purpose before the real change (e.g. put her item in): the patch starts from here */
+D.rebase=()=>{if(D.cur&&CW.ctx)D.cur.p0=pSnap()};
+/* guest: one patch onto her live S */
+function pApply(root,L){let n=0;for(const [op,path,val,fr] of L||[]){try{let o=root;
+  for(let i=0;i<path.length-1;i++){const k=path[i];if(plain(k)&&Array.isArray(o)){o=o.find(e=>eid(e)===k.id)||(k.i<o.length&&eid(o[k.i])==null?o[k.i]:undefined)}else{if(typeof k!=="string"||BADK.test(k))o=undefined;else{if(!plain(o[k])&&(op==="+"||op==="="||op==="a")&&typeof path[i+1]==="string")o[k]={};o=o[k]}}if(!plain(o))break}
+  const k=path[path.length-1];if(!plain(o)||typeof k!=="string"||BADK.test(k))continue;
+  if(op==="+"){o[k]=(typeof o[k]==="number"?o[k]:0)+val}else if(op==="="){o[k]=J(val)}else if(op==="-"){delete o[k]}
+  else if(op==="a"){if(!Array.isArray(o[k]))o[k]=[];if(fr)o[k].unshift(...J(val));else o[k].push(...J(val))}
+  else if(op==="r"&&Array.isArray(o[k])){for(const e of val){const t=JSON.stringify(e);let j=o[k].findIndex(z=>JSON.stringify(z)===t);if(j<0&&eid(e)!=null)j=o[k].findIndex(z=>eid(z)===eid(e));if(j>=0)o[k].splice(j,1)}}
+  n++}catch(e){console.error("thin patch",e)}}return n}
+TH.pApply=pApply;
+
+/* host: card store = her stored S.thq; pending patches D.PQ[seat] = [{n,p,rid}]; both kept in localStorage per room (a host reload) */
+D.PQ={};D.N={};
+const LSK=()=>"ctm-thin-d:"+room();
+D.save=function(){try{const o={q:{},pq:D.PQ,n:D.N};for(const k in ST)o.q[k]=(ST[k].S&&ST[k].S.thq)||[];localStorage.setItem(LSK(),JSON.stringify(o))}catch(e){}};
+function loadLS(){try{return JSON.parse(localStorage.getItem(LSK())||"null")}catch(e){return null}}
+{const so=TH.seatOf;TH.seatOf=function(seat){const had=!!ST[seat];const B=so.apply(this,arguments);if(B&&!had&&TH.dOn()){const o=loadLS();
+  if(o){if(o.q&&Array.isArray(o.q[seat])&&!Array.isArray(B.S.thq))B.S.thq=o.q[seat];if(o.pq&&o.pq[seat]&&!D.PQ[seat])D.PQ[seat]=o.pq[seat];if(o.n&&o.n[seat]&&!D.N[seat])D.N[seat]=o.n[seat]}}return B}}
+D.hold=s=>{if(!Array.isArray(s.thq))s.thq=[]};
+const safe=o=>{try{return JSON.parse(JSON.stringify(o,(k,v)=>typeof v==="function"?undefined:v))}catch(e){return null}};
+function optV(o){const r=safe(o)||{n:o&&o.n,x:o&&o.x,fx:o&&o.fx};if(r)delete r.go;return r}
+let cN=0;
+/* inside her context: every dialog her turn queued (her Q) becomes a serialized card in S.thq */
+D.takeQ=function(){if(!CW.ctx||!Array.isArray(Q)||!Q.length)return 0;D.hold(S);let n=0;
+ for(const m of Q.splice(0,Q.length)){if(!m||(typeof isMenuCard==="function"&&isMenuCard(m)))continue;
+  const base=m.pid?{pid:m.pid,pp:safe(m.pp)||{},t:m.t}:!m.opts?{t:m.t,h:m.h,cls:m.cls,btn:m.btn,w:m.who&&m.who.w}:null;
+  if(!base){D.bad.push(String(m.t||"?"));console.warn("thin D: a card with handlers and no pid cannot be kept",m.t);continue}
+  const id="c"+Date.now().toString(36)+(cN++);
+  S.thq.push(Object.assign({id},base,{v:{t:m.t,h:m.h,cls:m.cls,btn:m.btn,who:safe(m.who),opts:m.opts?m.opts.map(optV):null,mustChoose:!!m.mustChoose}}));n++}
+ if(n){D.log.push(["card",CW.ctx,n]);setTimeout(()=>TH.flush(),0)}return n};
+/* things for the host to do after her context closes (his own cards, his costs, his note) */
+const AFTER=[];
+D.after=fn=>{if(CW.ctx)AFTER.push(fn);else try{fn()}catch(e){console.error("thin after",e)}};
+D.afterRun=function(seat){const L=AFTER.splice(0);for(const f of L)try{f()}catch(e){console.error("thin after",e)}
+ if(TH.bridgeItems&&TH.bridgeItems.length){const pid=PID[seat];for(const e of TH.bridgeItems.splice(0)){const x=J(e);x.from=pid;if(x.by==="me")x.by=pid;
+  try{pushDil(mkP("giftin",{f:pid,e:x}),"Quà tặng")}catch(er){console.error(er)}}}
+ if(L.length||AFTER.length)try{showModal();render()}catch(e){}
+ try{if(CW.reEnd)CW.reEnd()}catch(e){}};
+/* run fn in her context from the top of the event loop (her cards, her res); rid = a host wait (CW.rpend) released when she has it */
+D.later=function(seat,fn,rid){setTimeout(()=>{let pn=D.N[seat]||0;try{TH.withSeat(seat,fn)}catch(e){console.error("thin later",e)}
+  if(rid){if((D.N[seat]||0)>pn){const L=D.PQ[seat]||[];const P=L[L.length-1];if(P)P.rid=rid}else if(CW.rpend)delete CW.rpend[rid]}},0)};
+/* her card from the host's side: build is called in her context; true when a card was queued */
+D.cardFor=function(seat,build,rid){D.later(seat,()=>{build()},rid)};
+D.patchOut=function(seat,p){D.N[seat]=(D.N[seat]||0)+1;const L=D.PQ[seat]=D.PQ[seat]||[];L.push({n:D.N[seat],p});while(L.length>40)L.shift();
+ const k="pq"+seat+D.N[seat];if(CW.rpend)CW.rpend[k]=Date.now();D.log.push(["patch",seat,D.N[seat],p.length]);setTimeout(()=>TH.flush(),0)};
+/* an act / NPC event's effect on her (the old `res` message), applied on the host in her context; death / lãnh cung stay on the old path (part B/G) */
+D.resTo=function(seat,m,rid){const g=m.flags||{};if(g.dead||g.cold)return false;D.later(seat,()=>{try{X.resApply(m)}catch(e){console.error("thin res",e)}},rid);return true};
+{const hv=TH.hostView;TH.hostView=function(){const o=hv.apply(this,arguments);if(o&&TH.dOn()){const other=CW.seat==="a"?"b":"a";o.pq=(D.PQ[other]||[]).map(x=>({n:x.n,p:x.p}))}return o}}
+/* host: her choice */
+TH.onDo("pick",a=>{a=a||{};D.hold(S);const L=S.thq,i=L.findIndex(c=>c&&c.id===a.card);if(i<0)return {gone:1};const c=L.splice(i,1)[0];
+ let m=null;if(c.pid){const d=mkP(c.pid,c.pp||{});if(d)m={t:c.t||"Việc khó xử",h:d.t,opts:d.o,who:d.who,pid:d.pid,pp:d.pp,cls:d.cls}}else m={t:c.t,h:c.h,cls:c.cls,btn:c.btn};
+ if(!m){D.log.push(["pick-stale",c.pid]);return {stale:1}}
+ Q.unshift(m);const k=+a.i;const nw=window.__kpNoWarn;window.__kpNoWarn=true;/* asked on her phone already (kpGate) */
+ try{if(m.opts){if(k>=0&&m.opts[k])chooseM(k);if(Q[0]===m){Q.shift();if(k>=0){L.splice(i,0,c);return {refused:1}}}}
+ else closeModal()}finally{window.__kpNoWarn=nw}
+ D.log.push(["pick",c.pid||c.t,k]);return {ok:1,i:k}});
+/* her ack of the patches she applied */
+TH.onDo("pack",a=>{const n=+(a&&a.n)||0;const seat=CW.ctx;const L=D.PQ[seat]||[];
+ for(const x of L)if(x.n<=n&&CW.rpend){delete CW.rpend["pq"+seat+x.n];if(x.rid)delete CW.rpend[x.rid]}D.PQ[seat]=L.filter(x=>x.n>n);
+ setTimeout(()=>{try{if(CW.soonEnd)CW.soonEnd()}catch(e){}},0);return {n}});
+/* the stored person of the other seat is rebuilt from the merged week while part B is not on (her cards / patches are kept) */
+COOP.on("week",()=>{if(host()&&TH.dOn()&&!TH.on(2)){D.save();for(const k in ST)if(k!==CW.seat)TH.seatDrop(k)}});
+
+/* guest: her cards and patches from the view */
+const SENT=new Map();
+function gSync(V){if(host()||!TH.dOn()||!V||!V.o||!S)return;const me=V.o.P&&V.o.P[CW.seat];
+ /* patches first (a card may speak of what the patch changed) */
+ const pq=V.o.pq||[];let got=0;
+ for(const x of pq){if(x.n<=(S.thpn||0))continue;pApply(S,x.p);S.thpn=x.n;got++}   /* the host keeps each patch until she acks it */
+ if(got){try{TH.doSend("pack",{n:S.thpn})}catch(e){}try{if(CW.reEnd)CW.reEnd()}catch(e){}}
+ const cards=(me&&Array.isArray(me.thq)?me.thq:[]);const ids=new Set(cards.map(c=>c.id));let ch=false;
+ for(let i=Q.length-1;i>=0;i--)if(Q[i]&&Q[i].thin&&!ids.has(Q[i].thin)){Q.splice(i,1);ch=true}
+ const now=Date.now();for(const [id,t] of SENT)if(!ids.has(id)||now-t>15000)SENT.delete(id);
+ for(const c of cards){if(SENT.has(c.id)||Q.some(q=>q&&q.thin===c.id))continue;const v=c.v||{};
+  Q.push({thin:c.id,t:v.t||c.t,h:v.h||c.h||"",cls:v.cls,btn:v.btn,who:v.who||null,opts:v.opts||null,mustChoose:v.mustChoose});ch=true}
+ if(ch||got){try{showModal();render()}catch(e){console.error(e)}}}
+COOP.on("thinview",gSync);
+COOP.on("room",()=>SENT.clear());
+/* her tap on a card: never applied here; the host runs it */
+if(typeof chooseM==="function"){const f=chooseM;chooseM=function(i){const m=Q[0];if(m&&m.thin&&!host()){const c=m.opts&&m.opts[i];if(!c||c.off||c.fx&&c.fx.bac&&S.bac+c.fx.bac<0)return;
+  if(typeof window.kpGate==="function"&&window.kpGate(i))return;/* her "Kiếp này chưa trọn" warning is asked on her phone; the host never asks it */
+  Q.shift();SENT.set(m.thin,Date.now());TH.doSend("pick",{card:m.thin,i});showModal();render();return}return f.apply(this,arguments)}}
+if(typeof closeModal==="function"){const f=closeModal;closeModal=function(){const m=Q[0];if(m&&m.thin&&!host()){Q.shift();SENT.set(m.thin,Date.now());TH.doSend("pick",{card:m.thin,i:-1});showModal();render();return}return f.apply(this,arguments)}}
+if(typeof serQ==="function"){const f=serQ;serQ=function(){const q=Q;if(!q.some(m=>m&&m.thin))return f.apply(this,arguments);Q=q.filter(m=>!(m&&m.thin));try{return f.apply(this,arguments)}finally{Q=q}}}
+try{if(typeof CW.dInit==="function")CW.dInit(TH)}catch(e){console.error("thin dInit",e)}
 }catch(e){console.error("jcoopthin",e)}})();
