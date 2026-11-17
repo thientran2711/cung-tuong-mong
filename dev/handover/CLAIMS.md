@@ -727,3 +727,4 @@
 | one-core-dup3 SẴN SÀNG KIỂM 67430058 → re-review r2 (fresh opus BIG; brief briefs/review-one-core-dup3-r2.md) | review/one-core-dup3-r2 | B | session_01N1tNP6AWLddG5uQRXjrEPn | RUNNING | 17/11 12:25Z |
 | kit-rcol-top #2 (successor; #1 partial fa787165) — gates, kit page, shots | review/kit-rcol-top | MAIN s31 | session_01UV1SzkTmHFW7tFdo9JrjMv | RUNNING | 17/11 12:23Z |
 | REVIEW learn-scene-fix r1 of 41836865 (worker session_01UV1SziySB5E5PWMp5Wc7uX SẴN SÀNG KIỂM) | review/learn-scene-fix-r1 | MAIN s31 | session_01UV1SzkJwiGXxoBvWoVcncV | RUNNING | 17/11 12:23Z |
+| event-art DARK fix (sonnet; owner 17/11 12:19Z/12:22Z; brief briefs/event-art-dark-fix.md) | CDN only (report reports/event-art-dark-fix.md) | C ROOT-6 | session_011xDdVSTVyLVuATNYT3izSd | RUNNING | 17/11 12:24Z |
