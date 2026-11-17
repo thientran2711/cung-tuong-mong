@@ -863,7 +863,7 @@
 | REVIEW world-ret-phong r1 (opus BIG) of 54cb809f | review/world-ret-phong-r1 | C-AG | session_01UV1Szgs7rrynEBwLodvmU5 | RUNNING | 17/11 16:41Z |
 | REVIEW one-core-jkc-2 da026fc87 (opus BIG; brief briefs/review-one-core-jkc-2.md) | review/one-core-jkc-2-r1 | B | session_01N1tNP2MBRBHV2KnMWfTMRx | RUNNING | 17/11 16:55Z |
 | REVIEW one-core-jkc-2 da026fc87 (opus BIG; brief briefs/review-one-core-jkc-2.md) | review/one-core-jkc-2-r1 | B | (opening) | RUNNING | 17/11 16:55Z |
-| DAY-KHẮC AUDIT: every feasibility check uses total khắc left in the DAY, never the buổi (OD 16:45Z + L852/L1473) — scan + fix whole family | review/day-khac-audit | D | session_01964izGNNjem7GHhQv3q6B5 (opus) | RUNNING | 17/11 16:45Z |
+| DAY-KHẮC AUDIT: every feasibility check uses total khắc left in the DAY, never the buổi (OD 16:45Z + L852/L1473) — scan + fix whole family | review/day-khac-audit | D | session_01964izGNNjem7GHhQv3q6B5 (opus) | DONE SẴN SÀNG KIỂM 4408ef0a (archived) | 17/11 16:45Z |
 | one-core-jkc LIVE 086f1d607 (main e8b1906f → 086f1d60; rollback e8b1906f) | review/one-core-jkc-r1 | B | session_01N1tNP2T3QBr5EHz4r5RAmd | LIVE | 17/11 16:58Z |
 | STAFF CAPS COUNT DONE (A 38/40/39 · B1 ~29 · B2 ~31 · C ~23; faces 15+15) | review/staff-caps-count | B | session_01N1tNP6Neas51xgJE6D4CK1 | DONE (archived) | 17/11 17:00Z |
 | REVIEW coop-thin-c 475beba7 (opus BIG; brief briefs/review-coop-thin-c.md) | review/coop-thin-c-r1 | B | session_01N1tNP4NkEVbfkftEhoSW5h | RUNNING | 17/11 17:05Z |
@@ -875,3 +875,4 @@
 | face-w404 review r1 (sonnet) of df8b57bc | review/face-w404-r1 | D | session_01964izEvirrwGUKDneEGtXa | RUNNING | 17/11 17:08Z |
 | REVIEW weather-khac r1 (opus BIG) of e1d540cf | review/weather-khac-r1 | C-AG | session_01UV1Szhk5EGru6rSkDekM6s | RUNNING | 17/11 17:10Z |
 | REVIEW learn-scene-fix-2 r1 of 8c30a85d (opus BIG; brief briefs/s34-review-learn-scene-fix-2.md) | review/learn-scene-fix-2-r1 | MAIN s34 | (opening) | RUNNING | 17/11 17:12Z |
+| day-khac-audit review r1 (opus BIG) of 4408ef0a | review/day-khac-audit-r1 | D | (opening) | RUNNING | 17/11 17:12Z |
