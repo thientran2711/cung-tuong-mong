@@ -52,14 +52,16 @@ sendRes/b4Send `COOP.send(msg)` for non-death res. One commit when the level goe
 - quickcheck: **PASS** (old save ok; perf new/live render 228/219, tab 326/325, buổi 888/896 ms; core gates PASS); site rebuilt.
 - Shots: none in git; test shots (SHOTS=dir) kept in scratch only.
 
-## Guest tripwire (TRIP=1 coop-bot 4 weeks, local Worker, THIN=1 THINPART=4; random bot → noisy)
-| build | run | weeks | STATE total | D | D·patch | changing writes |
-|---|---|---|---|---|---|---|
-| main 4719d424 (D off) | 1 | 2/4 | 8 344 | 2 023 | – | 18 114 |
-| main 4719d424 (D off) | 2 | 3/4 | 6 114 | 1 461 | – | 15 747 |
-| review/coop-thin-d | 1 | 4/4 | 4 878 | 365 | 0 | 8 854 |
-| review/coop-thin-d | 2 | 4/4 | 8 016 | 1 394 | 272 | 32 812 |
-D STATE median **≈1 740 → ≈880 (+ ≈136 D·patch = the host's results copied onto her person until G)**; no other part's root raised beyond bot noise.
+## Guest tripwire (TRIP=1 coop-bot 4 weeks, local Worker, THIN=1 THINPART=4; corrected by FIX D r1 from the r1 reviewer's 4/4-week runs)
+Only runs that played all 4 weeks are compared (the first table mixed 2/4 and 3/4-week main runs, which skewed the per-run total).
+| build | run | weeks | D STATE | D·patch |
+|---|---|---|---|---|
+| main 6c4f21c3 (D off) | 1 | 4/4 | 2 872 | – |
+| main 6c4f21c3 (D off) | 2 | 4/4 | 2 794 | – |
+| review/coop-thin-d 099ce05b | 1 | 4/4 | 2 194 | 29 |
+| review/coop-thin-d 099ce05b | 2 | 4/4 | 2 166 | 370 |
+D STATE **≈ −23 %** (2 872 / 2 794 → 2 194 / 2 166); ≈ −16 % when the D·patch writes (the host's results copied onto her person until G)
+are counted. Not "≈1 740 → ≈880" as first written (that came from the stalled main runs).
 Most remaining "D" writes are HER OWN dialogs (chooseM of her own events: her week still runs on her phone) — they move with E/F/G.
 Note: the main build stalled before week 4 in both level-1 runs (not investigated; outside D).
 
