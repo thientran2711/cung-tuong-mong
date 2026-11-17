@@ -8,9 +8,10 @@ window.KIT_EMOLABEL=window.KIT_EMOLABEL||{ghen:"Chạnh lòng"};
 function kitMoodCauseRows(L,drive,o){o=o||{};const name=o.name||(k=>(window.KIT_EMOLABEL[k])||(typeof EMO!=="undefined"&&EMO[k])||k);const cls=o.cls||(()=>"");
  const g={};for(const x of L||[]){if(!x||!x.k)continue;(g[x.k]=g[x.k]||{k:x.k,sum:0,rows:[]});g[x.k].sum+=+x.v||0;g[x.k].rows.push(x)}
  const order=Object.values(g).sort((a,b)=>(b.k===drive)-(a.k===drive)||b.sum-a.sum);
- const bold=(t,on)=>on?`<b>${t}</b>`:t;const out=[];
+ const bold=(t,on)=>on?`<b>${t}</b>`:`<span class="kmcsub">${t}</span>`;const out=[];
  for(const G of order){G.rows.sort((a,b)=>(a.left==null)-(b.left==null)||a.left-b.left);const on=G.k===drive;
   G.rows.forEach((x,i)=>{const why=x.why&&x.why!=="Nguyên do chưa rõ"?x.why:"Nguyên do chưa rõ";const left=x.left!=null?`còn ${Math.max(0,x.left)} khắc`:(o.ago?o.ago(x):"");
    out.push([i?"":bold(name(G.k),on),bold(`${why}${left?" · "+left:""}`,on),cls(G.k)])})}
  return out}
 window.kitMoodCauseRows=kitMoodCauseRows;
+(function(){const st=document.createElement("style");st.id="kmc-css";st.textContent=`.kmcsub{font-weight:400}b:has(>.kmcsub){font-weight:400}`;document.head.appendChild(st)})();
