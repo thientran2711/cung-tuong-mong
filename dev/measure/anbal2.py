@@ -58,3 +58,7 @@ if '--gate' in O:
     if not m:continue
     L=sorted(((v,k.split('|',1)[1]) for k,v in c.items() if k.startswith(f"{r}|") and not k.endswith('|_m')),reverse=True)
     print(f"  {RK[r]} → {RK[r+1]} ({m} months): "+" · ".join(f"{k} {round(100*v/m)} %" for v,k in L[:6]))
+if '--dbl' in O:
+  c=C.Counter()
+  for x in R:c.update((x.get('b2') or {}).get('dbl') or {})
+  print("\noptions whose real change was exactly twice the shown fx (count over all lives):");[print(f"  {v:4d}  {k}") for k,v in c.most_common(20)]

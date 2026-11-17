@@ -15,6 +15,8 @@
 Object.assign(BAL,{
  pay:[40,55,70,95,125,165,215,280],payCold:5,payConfined:.5,payCut:.7,wage:3,
  duty:[0,4,10,18,30,48,72,100],banThuong:[0,0,0,0,0,0,20,40],dutySkip:{danh:1,duc:0},
+ /* review/balance-2: lễ nghĩa paid in full keeps face AND earns name, by rank (the duty grows with the rank; Danh gates RANKS[].d grow ~12 a rank) — everyone, NPCs too */
+ dutyDanh:[0,0,1,1,1,2,2,0],
  home:{tt:30,dtq:20,muoi:40,cn:0,nc:25,bd:20,td:0,ch:20,thd:5,cnv:0},homeEvery:3,nightBac:20,patronRel:40,patronPay:[10,10,12,14,16,18,20,22],
  sellPct:50,noivuPct:70,craftSell:[8,14,24,40],craftLv:3,craftGift:[2,3,5,7],
  giftLeak:{emp:35,th:25,hh:25},giftHit:{emp:{sung:-6,danh:-4},th:{th:-6,danh:-2},hh:{hh:-6,danh:-2}},
@@ -29,9 +31,10 @@ function econDuty(p){const r=Math.min(7,rkOf(p));return p.out||p.confined?0:BAL.
 function econBan(p){const r=Math.min(7,rkOf(p));return p.out||p.confined?0:BAL.banThuong[r]}
 /* who receives her ban thưởng: up to 2 lower consorts she likes best */
 function econBanTo(p){return consorts().filter(v=>v!==p&&!v.out&&v.alive!==false&&rkOf(v)<rkOf(p)).sort((a,b)=>rel(p,b)-rel(p,a)).slice(0,2)}
-function econDoDuty(p,pay){const d=econDuty(p),b=econBan(p);const r=Math.min(7,rkOf(p));
- if(pay&&(p.bac||0)>=d+b){if(d)ap(p,{bac:-d});if(b){ap(p,{bac:-b});const T=econBanTo(p);T.forEach(v=>{ap(v,{bac:Math.floor(b/T.length)});try{relAdd(v,p,2)}catch(e){}})}return{paid:1,d,b}}
- const dn=BAL.dutySkip.danh+Math.floor(r/2),du=BAL.dutySkip.duc;if(d||b){ap(p,{danh:-dn});if(du){if(typeof ducAdd==="function")ducAdd(p,-du,"bớt lễ nghĩa");else ap(p,{duc:-du})}}return{paid:0,d,b,dn,du}}
+/* pre = her month card already applied the option's fx (chooseM: bạc −(d+b) and Danh ±): only the rest happens here (review/balance-2: it was paid twice) */
+function econDoDuty(p,pay,pre){const d=econDuty(p),b=econBan(p);const r=Math.min(7,rkOf(p));
+ if(pay&&(pre||(p.bac||0)>=d+b)){const dg=d?BAL.dutyDanh[r]||0:0;if(!pre){if(d)ap(p,{bac:-d});if(dg)ap(p,{danh:dg})}if(b){if(!pre)ap(p,{bac:-b});const T=econBanTo(p);T.forEach(v=>{ap(v,{bac:Math.floor(b/T.length)});try{relAdd(v,p,2)}catch(e){}})}return{paid:1,d,b,dg}}
+ const dn=BAL.dutySkip.danh+Math.floor(r/2),du=BAL.dutySkip.duc;if(d||b){if(!pre)ap(p,{danh:-dn});if(du){if(typeof ducAdd==="function")ducAdd(p,-du,"bớt lễ nghĩa");else ap(p,{duc:-du})}}return{paid:0,d,b,dn,du}}
 /* nhà mẹ đẻ (by origin, every BAL.homeEvery months), patron errands */
 function econHome(p){try{if(p!==S||!S.origin||S.out||(S.month%BAL.homeEvery)!==1)return 0;return S.homeCut?0:(BAL.home[S.origin.k]||0)}catch(e){return 0}}
 function econPatron(p){if(p.out)return null;const r=rkOf(p);const L=consorts().filter(v=>v!==p&&!v.out&&v.alive!==false&&rkOf(v)>=r+2&&rel(v,p)>=BAL.patronRel&&(v.bac||0)>=40);
@@ -55,8 +58,8 @@ function econStipend(p){const r=rkOf(p),me=p===S,staff=(p.staff||[]).length;let 
    const card={ev:1,t:`Bổng lộc tháng ${econMonthName()}`,who:typeof pMe==="function"?pMe():null,h:kitRows(R)};
    if(d||bt){const sk=BAL.dutySkip.danh+Math.floor(Math.min(7,r)/2);const what=[d?`lễ nghĩa (lễ tiết, thưởng người hầu, tiếp khách) ${d} bạc`:"",bt?`ban thưởng phi tần dưới ${bt} bạc`:""].filter(Boolean).join(" · ");
     card.h+=`<p class="past">Việc theo phẩm ${rkName(S)} tháng này: ${what}.</p>`;
-    card.opts=[{n:"Chu toàn lễ nghĩa",fx:{bac:-(d+bt)},x:`tốn: Bạc -${d+bt} · thành: giữ thể diện${bt?" · phi tần được thưởng quý ngươi hơn":""}`,go:()=>{const x=econDoDuty(S,true);if(x.paid)log(`Ngươi chu toàn lễ nghĩa tháng: Bạc -${d+bt}.`);else log(`Không đủ bạc lo lễ nghĩa: Danh -${x.dn}${x.du?`, Đức -${x.du}`:""}.`)}},
-     {n:"Bớt lễ nghĩa",fx:{danh:-sk},x:`mất: Danh -${sk}${BAL.dutySkip.duc?`, Đức -${BAL.dutySkip.duc}`:""} · giữ lại ${d+bt} bạc`,go:()=>{econDoDuty(S,false);log(`Ngươi bớt lễ nghĩa tháng: Danh -${sk}${BAL.dutySkip.duc?`, Đức -${BAL.dutySkip.duc}`:""}.`)}}]}
+    card.opts=[{n:"Chu toàn lễ nghĩa",fx:Object.assign({bac:-(d+bt)},d&&BAL.dutyDanh[Math.min(7,rkOf(S))]?{danh:BAL.dutyDanh[Math.min(7,rkOf(S))]}:{}),x:`tốn: Bạc -${d+bt} · thành: giữ thể diện${BAL.dutyDanh[Math.min(7,rkOf(S))]?`, Danh +${BAL.dutyDanh[Math.min(7,rkOf(S))]}`:""}${bt?" · phi tần được thưởng quý ngươi hơn":""}`,go:()=>{const x=econDoDuty(S,true,true);if(x.paid)log(`Ngươi chu toàn lễ nghĩa tháng: Bạc -${d+bt}${x.dg?`, Danh +${x.dg}`:""}.`);else log(`Không đủ bạc lo lễ nghĩa: Danh -${x.dn}${x.du?`, Đức -${x.du}`:""}.`)}},
+     {n:"Bớt lễ nghĩa",fx:{danh:-sk},x:`mất: Danh -${sk}${BAL.dutySkip.duc?`, Đức -${BAL.dutySkip.duc}`:""} · giữ lại ${d+bt} bạc`,go:()=>{econDoDuty(S,false,true);log(`Ngươi bớt lễ nghĩa tháng: Danh -${sk}${BAL.dutySkip.duc?`, Đức -${BAL.dutySkip.duc}`:""}.`)}}]}
    Q.push(card);try{if(typeof stipShow==="function")stipShow(G,net,SK)}catch(e){console.error("stip show",e)}}else econDoDuty(p,true)}catch(e){console.error("econ card",e)}
  return line};
 blCard=function(){return `<p>Bổng lộc phát ngày đầu mỗi tháng, theo phẩm vị (mọi phi tần như nhau). Mỗi kẻ hầu ăn công ${BAL.wage} bạc/tháng. Phẩm càng cao, lễ nghĩa càng tốn.</p>${kitRows(BAL.pay.map((b,i)=>[i>=7?"Hoàng hậu":RANKS[i].n,[`<span class="ef t">${b} bạc</span>`,typeof stipRankTxt==="function"?stipRankTxt(i):BLG[i],BAL.duty[i]?`lễ nghĩa ${BAL.duty[i]}`:"",BAL.banThuong[i]?`ban thưởng ${BAL.banThuong[i]}`:""].filter(Boolean),"n"]))}<p class="past">Lãnh cung: chỉ ${BAL.payCold} bạc. Cấm túc: nửa bổng. Hoàng hậu ghét ngươi (thiện cảm dưới -30): mỗi tháng sai Nội vụ phủ khất bổng (bớt 3 phần 10): ${word(20)}. Sinh con, được ân thưởng: cộng thêm một lần.</p>${typeof stipRuleTxt==="function"?stipRuleTxt():""}`};
