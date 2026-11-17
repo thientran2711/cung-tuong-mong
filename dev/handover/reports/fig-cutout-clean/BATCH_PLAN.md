@@ -18,3 +18,18 @@ qa_fig.py every file + forehead-crop contact sheet + hands/feet look on dark+lig
 
 ## CREDITS (re-estimate 17/11 after owner: 2k only)
 ~8,800 files x 65 cr = ~572k + ~8% retries = ~620k (balance ~1.27M).
+
+## LEAD HANDOVER #5 -> #6 (17/11 ~02:00Z). START_CTX lead #5 ~3%; rolled over at ~28% (context). Foreman C s10 = session_011xDdVSeKM6qi8YXjVTPqrd opens lead #6 (lead never opens its own successor). Report to Foreman C by send_message; never talk to the owner.
+STATE: owner GO 17/11 ~01:25Z for the WHOLE set; owner 01:30Z "2K là được rồi" => 2k only (1024x2048, 65 cr, extraSettings transparentBackground=true gives real alpha at 2k; 4k = opaque/fake checkerboard -> remove_background +3 cr). Thaihau skipped (old-people proportion worker session_011xDdVRzEtFchdNQKaMfih7). NO fish-tail trains (hem at feet). Owner wants NO more sheets for approval; Foreman C spot-checks hourly. Priority: a18 of ALL families first, then a26/a36/a51. BATCH_BRIEF.md (this folder) = binding brief for workers (owner words, 2k, no trains, proportion, TRANSPARENCY, UPLOADER (cdn_sync.py only on origin/main), hd rule (hd only where CDN has it; maids none), THROUGHPUT, CONTEXT DIET).
+WORKERS (7 shards; each has batch-<shard>.md with TSV + handover; successors opened by the lead WITH source_url, sparse dev, branch handover, 3 rollover lines verbatim + CONTEXT DIET text):
+- W1b hero+misc 1063 (shard w1-hero-misc) = session_011xDdVQbi2xn77hhwc3Qh3P (W1 retired: 16 hero files live at 4k)
+- W2 consort-ty 1024 = session_011xDdVRJKYSAaQP1Z2rspXD (running, batch-consort-ty.md)
+- W3b consort-rest-A 976 = session_011xDdVRasDZpQLoZZZc3Mmn (W3 retired: 20 files live; next c02-t3-a18)
+- W7 consort-rest-B 976 = session_011xDdVSQXPe2qq8TJQ8hLyw (batch-consort-rest-B.md)
+- W4b maid-ty 1664 = session_011xDdVSDgWxxs57zsL4S2JZ (W4 retired after 5; batch-maid-ty.md)
+- W5b maid-rest-A 1586 = session_011xDdVRUq5KAtiVYtgqEjkS (W5 retired: 25 a18 live; next m02-t6-a18)
+- W6 maid-rest-B 1586 = session_011xDdVNVPxjHSMerTjisLs3 (batch-maid-rest-B.md)
+Retired pilots (archived by Foreman C): consort-ty ...Swe9QkM3wQy68q8kW, consort-rest ...StNhTvqiYzrTkyv2p, maid ...P57zPp4r9Gi61fiKp, misc ...PRFDEZZgSVGj5StKL, hero ...QK3g91ieUt2tJBYy7.
+LIVE ON CDN at 02:00Z: ~36 + W5's 25 + W2/W4/others in progress. Credits: ~65-83 cr/file; account ~1.26M at start.
+RISK: throughput is context-bound (~12-25 files per worker session at first; CONTEXT DIET targets >=40). ~8,800 files remain => hundreds of sessions unless the diet works; cap 7 workers now, Foreman C allows up to 12 total. Re-measure files/hour after the next worker reports and tell Foreman C. Possible later: ask the owner to accept a18 first and other ages as slow follow-up (Foreman C said other ages follow, not dropped).
+YOUR LOOP: read notifications; when a worker reports a rollover, open its successor (copy the W5b prompt pattern); relay new findings into BATCH_BRIEF.md and to the workers; report counts + credits to Foreman C hourly; keep this section current.
