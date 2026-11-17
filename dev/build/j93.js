@@ -119,7 +119,7 @@ function kitResultFx(card){if(!card)return;const red=kmReduced();const ok=card.c
   const a=Math.max(0,Math.min(100,+m[1])),b=Math.max(0,Math.min(100,+m[2]));const bar=document.createElement("i");bar.className="kmbar "+(b>=a?"up":"down");
   bar.innerHTML=`<b style="width:${red?b:a}%"></b>`;it.appendChild(bar);if(!red)requestAnimationFrame(()=>requestAnimationFrame(()=>{const f=bar.firstElementChild;if(f)f.style.width=b+"%"}))});
  /* floating numbers (green +, red −) rise from the card */
- if(red)return;const r=card.getBoundingClientRect();const L=[];card.querySelectorAll(".kr-duoc .ef.g,.kr-mat .ef.r").forEach(s=>{const t=s.textContent;const m=t.match(/^(.*?)\s+(-?\d+)→(-?\d+)/);if(m){const d=+m[3]-+m[2];if(d)L.push([m[1].trim(),d])}});
+ if(red)return;const r=card.getBoundingClientRect();const L=[];card.querySelectorAll(".kr-duoc .ef.g,.kr-mat .ef.r,.kr-thanh .ef.g,.kr-thanh .ef.r,.kr-bai .ef.g,.kr-bai .ef.r").forEach(s=>{const t=s.textContent;const m=t.match(/^(.*?)\s+(-?\d+)→(-?\d+)/);if(m){const d=+m[3]-+m[2];if(d)L.push([m[1].trim(),d])}});
  if(!L.length)return;document.querySelectorAll(".kmfls").forEach(e=>e.remove());const box=document.createElement("div");box.className="kmfls";box.style.left=Math.round(r.left+r.width/2)+"px";box.style.top=Math.round(r.top-34)+"px";box.style.maxWidth=Math.round(Math.min(innerWidth-16,Math.max(r.width,260)))+"px";
  L.slice(0,6).forEach(([n,d],i)=>{const f=document.createElement("span");f.className="kmfl "+(d>0?"g":"r");f.textContent=`${n} ${d>0?"+":"−"}${Math.abs(d)}`;f.style.animationDelay=((.25+i*.12)*BAL.pace)+"s";box.appendChild(f)});document.body.appendChild(box);setTimeout(()=>box.remove(),kitPace(2400))}
 

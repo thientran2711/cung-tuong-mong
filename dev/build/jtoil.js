@@ -89,7 +89,7 @@ Object.assign(BAL.toil,{skillShare:10,
   son:{haiduong:1,dotham:2,hongdao:0,chusa:1,manchin:2,sanho:0,camdao:1,hophach:2},may:{nau:0,den:1,thanhdai:0,naunhat:0,khoi:0}},
  tone:{mat:{hoadao:"w",hongmai:"c",rangchieu:"w",kimsa:"w",tuvi:"c",hophach:"w"},ma:{hongphan:"c",hoadao:"w",haiduong:"c",yenchi:"c",rangchieu:"w",hongsen:"c",camquyt:"w"},
   son:{haiduong:"c",dotham:"c",chusa:"w",manchin:"c",sanho:"w",camdao:"w",hophach:"w"}},
- teaseGhen:2,harshAff:2,harshWin:40,harshDanh:-1,harshDuc:-1,harshGhen:1,replyGhen:2,replySuc:-2,vungB:.5,vungSm:1,vungSide:1,vungRot:-1,vungSmSize:.7,/* the ONE corner smudge (owner 17/11 ~18:58Z: other direction): side -1 = left end of the lip in the picture, rot -1 = streak angled down-left, vungSmSize = smudge size (v17: V2-B side +1 = right end, 70 % of the v16 size) *//* vụng A lip smear beyond the lip line (x the v11 offset; owner 17/11 ~17:20Z: smudge a bit more) */lod:{fullAt:95,maxAt:25,boost:1.9,steps:3,cue:{lip:1,eye:1,wing:1.3,low:1.3,bl:1.3,vung:.3},look:{tuyet:.3,dep:.65}},/* size-aware makeup (owner 17/11 ~17:45Z): face px >= fullAt = the approved strength; as the face shrinks to maxAt px the macro cues (lip colour, eye/lid colour, wing, lower lash, blush, vụng powder) are multiplied up to x boost (per-cue weight in cue), in `steps` steps */vungPuff:{big:.75,small:.5,al:.7,alv:.1},/* vụng A powder puffs (v11): size x the BLUSH disc radius = .75 or .5 (a mix on every cheek, per-day seed; owner ~17:00Z: not every blob blush-sized or it hides the blush), more opaque, the SAME blur profile as the blush (BLP.wide, used directly in toilMkDraw) and a much less white alpha, layered over the blush (owner 17/11 ~16:20Z) *//* share of vụng days that are the 'đánh quá tay, như hề' variant B (the rest: A 'không biết trang điểm'); picked once per day from col.seed */presetDiem:2,mixH:1,showyH:1,cakeH:[[.3,1],[.55,2]],
+ teaseGhen:2,harshAff:2,harshWin:40,harshDanh:-1,harshDuc:-1,harshGhen:1,replyGhen:2,replySuc:-2,blush:{dep:.2304,tuyet:.2428},/* blush colour strength of Kiều diễm (dep) / Khuynh thành (tuyet): owner pick 17/11 ~21:37Z "Chọn 3 trang điểm" = row 3 "Rất nhẹ" (sampler review/toil-looks9 e227451c); TOIL_MKS reads it */vungB:.5,vungSm:1,vungSide:1,vungRot:-1,vungSmSize:.7,/* the ONE corner smudge (owner 17/11 ~18:58Z: other direction): side -1 = left end of the lip in the picture, rot -1 = streak angled down-left, vungSmSize = smudge size (v17: V2-B side +1 = right end, 70 % of the v16 size) *//* vụng A lip smear beyond the lip line (x the v11 offset; owner 17/11 ~17:20Z: smudge a bit more) */lod:{fullAt:95,maxAt:25,boost:1.9,steps:3,cue:{lip:1,eye:1,wing:1.3,low:1.3,bl:1.3,vung:.3},look:{tuyet:.3,dep:.65}},/* size-aware makeup (owner 17/11 ~17:45Z): face px >= fullAt = the approved strength; as the face shrinks to maxAt px the macro cues (lip colour, eye/lid colour, wing, lower lash, blush, vụng powder) are multiplied up to x boost (per-cue weight in cue), in `steps` steps */vungPuff:{big:.75,small:.5,al:.7,alv:.1},/* vụng A powder puffs (v11): size x the BLUSH disc radius = .75 or .5 (a mix on every cheek, per-day seed; owner ~17:00Z: not every blob blush-sized or it hides the blush), more opaque, the SAME blur profile as the blush (BLP.wide, used directly in toilMkDraw) and a much less white alpha, layered over the blush (owner 17/11 ~16:20Z) *//* share of vụng days that are the 'đánh quá tay, như hề' variant B (the rest: A 'không biết trang điểm'); picked once per day from col.seed */presetDiem:2,mixH:1,showyH:1,cakeH:[[.3,1],[.55,2]],
  allow:{thuong:4,thinhan:3,night:5,fest:6,tang:1},diemOdds:[0,.3,.55,.8,.95],
  /* NPCs and the bot: how well each part goes, by skill (same skill formula), spread per part */
  play:{q0:.53,qSk:.15,spread:.44,cake:.12,cakeOver:.35,diemPre:.3}});
@@ -154,7 +154,7 @@ function toilLookOf(P,score,H,allow,seed){const B=BAL.toil;const parts=[["brow",
    both co-op seats read the same allowance for the same consort (review r1, CO-OP FIRST) */
 function toilNpcOcc(){const L=[];try{if(!S.thDead)L.push("th");if(typeof festToday==="function"&&festToday())L.push("fest")}catch(e){}return L.length?L:["thuong"]}
 /* hồi 1: start loading THIS face's points (the portrait follows the dress she tries on) so the board never waits long */
-function toilMkPre(){try{MK_FIT.get(String(toilPor().src||"").split("?")[0].split("/").pop())}catch(e){}}
+function toilMkPre(){try{const f=String(toilPor().src||"").split("?")[0].split("/").pop();MK_FIT.get(f);toilEyePx(f)}catch(e){}}
 function toilMk(rec){return rec&&rec.makeup?(rec.look==="diem"?"diem":rec.look==="vung"?"vung":toilTier(rec.score|0)):"moc"}
 /* NPCs and the bot: the same parts, score and look from skill (hash of person + day: no Math.random, both co-op seats agree) */
 function toilNpcPlay(sk,h,col,want,style,occ,rk){const N=BAL.toil.play,B=BAL.toil;const r=i=>(wdHash(h+":"+i)%1000)/1000;
@@ -349,16 +349,16 @@ function toilFace(src){const n=String(src||"").split("?")[0].split("/").pop();le
  try{const v=toilRow(n);if(v)return[v[0]-.46*v[6],v[1]-.49*v[7],v[6],v[7],v[9]||0]}catch(e){}try{r=KIT_VEIL.fit&&KIT_VEIL.fit[n]}catch(e){}return r||[32,37,34,22,0]}
 function toilGeom(W,H,src){const ky=H*.94/(TOIL_MIR.ry*2*1024),k=Math.min(ky,W/(1024*.62));const S0=1024*k;const ox=W/2-TOIL_MIR.cx*S0,oy=H/2-TOIL_MIR.cy*S0;
  const mx=W/2,my=H/2,rx=TOIL_MIR.rx*S0,ry=TOIL_MIR.ry*S0;const f=toilFace(src);const IW=384,IH=506;const fx=f[0]/100*IW,fy=f[1]/100*IH,fw=f[2]/100*IW,fh=f[3]/100*IH,rot=(f[4]||0)*Math.PI/180;
- const s=rx*1.55/fw;const fcx=fx+fw/2,fcy=fy+fh*.3;const cs=Math.cos(rot),sn=Math.sin(rot);
+ const s=rx*1.55/fw;const ax=toilAxisX(src),fcx=ax!=null?ax*IW:fx+fw/2,fcy=fy+fh*.3;/* the eye-mesh axis sits in the middle of the glass (the face-box centre when there is no mesh) */const cs=Math.cos(rot),sn=Math.sin(rot);
  const T=(u,v)=>{/* face-box units (u: 0..1 of fw from the left, v: of fh from the top) → canvas */const px=fx+u*fw-(fx+fw/2),py=fy+v*fh-(fy+fh/2);const qx=px*cs-py*sn+(fx+fw/2),qy=px*sn+py*cs+(fy+fh/2);return[mx+(qx-fcx)*s,my+(qy-fcy)*s]};
- return{bg:{x:ox,y:oy,s:S0},mx,my,rx,ry,img:{x:mx-fcx*s,y:my-fcy*s,w:IW*s,h:IH*s},T,fws:fw*s}}
+ return{bg:{x:ox,y:oy,s:S0},mx,my,rx,ry,img:{x:mx-fcx*s,y:my-fcy*s,w:IW*s,h:IH*s},T,fws:fw*s,ax:ax!=null}}
 function toilQuad(a,c,b,n){const L=[];for(let i=0;i<=n;i++){const t=i/n;L.push([(1-t)*(1-t)*a[0]+2*(1-t)*t*c[0]+t*t*b[0],(1-t)*(1-t)*a[1]+2*(1-t)*t*c[1]+t*t*b[1]])}return L}
 function toilMakeup(){const st=TOIL.st,box=kg82Box();box.innerHTML="";box.hidden=false;const C=kg82Canvas(box,.86,620),{g,W,H}=C;C.cv.style.touchAction="none";
- const por=toilPor();const face=new Image();face.decoding="async";face.src=typeof IMG_U==="function"?IMG_U(por.src):por.src;const G=toilGeom(W,H,por.src);const sk=toilSkill();st.sk=sk;
+ const por=toilPor();const face=new Image();face.decoding="async";face.src=typeof IMG_U==="function"?IMG_U(por.src):por.src;let G=toilGeom(W,H,por.src);const sk=toilSkill();st.sk=sk;
  /* diemtrang-score (owner 16/11): NO guide lines. The hidden ideal is THIS face's own brows / cheekbones / mouth (img/mk-fit face points;
     a picture without points uses the measured average, BAL.toil.fb) — anchored per portrait, so the brow target is the painted brow itself */
  const file=String(por.src||"").split("?")[0].split("/").pop();let I,brows,cheeks,lips,lr,puffR,cpts;
- function anchor(){const J=toilIdeal(MK_FIT.get(file),G.img,G.fws);if(!J)return false;I=J;brows=I.brows.map(b=>b.c);cheeks=I.cheeks;lips=I.lips;lr=I.lr;puffR=cheeks[0].r*BAL.toil.cheek.puff;
+ function anchor(){const mv=MK_FIT.get(file);if(mv&&!G.ax){G=toilGeom(W,H,por.src);base=null}/* the mesh arrived after the board opened: re-centre on the eye axis before anchoring */const J=toilIdeal(mv,G.img,G.fws);if(!J)return false;I=J;brows=I.brows.map(b=>b.c);cheeks=I.cheeks;lips=I.lips;lr=I.lr;puffR=cheeks[0].r*BAL.toil.cheek.puff;
   const m=BAL.toil.cheek.margin,stp=puffR*BAL.toil.cheek.step,x0=Math.min(...cheeks.map(c=>c.x-c.r*m)),x1=Math.max(...cheeks.map(c=>c.x+c.r*m)),y0=Math.min(...cheeks.map(c=>c.y-c.r*m)),y1=Math.max(...cheeks.map(c=>c.y+c.r*m));
   cpts=[];for(let x=x0;x<=x1;x+=stp)for(let y=y0;y<=y1;y+=stp)cpts.push({x,y,c:0});pdirty=true;st.mesh=true;return true}
  /* the board waits (brush off, "đang soi gương") until THIS face's points are in; never a guessed face (review r1) */
@@ -732,8 +732,8 @@ const TOIL_MKS={
  /* bl = blush strength, blr = blush size (x the eye distance), sk = skin-light lift, hl = soft luminous cheekbone (round, never a streak), dabs = white powder dabs, gloss = natural sheen INSIDE the lip. Every skin-side layer is clipped to the skin mask (toilMkDraw). */
  vung:{lip:.5,eye:.4,eyeH:.5,brow:0,wing:0,low:0,vung:1,bl:.3,r:.17,sk:.08,dabs:2},/* A: 'không biết trang điểm' */
  vua:{lip:.44,eye:.5,eyeH:.5,brow:.45,wing:.08,low:0,bl:.21,r:.165,sk:.13},/* = the ?v=2 Đoan trang (approved by the owner 17/11 13:48Z) */
- dep:{lip:.7,eye:.9,eyeH:.8,brow:.7,wing:.3,low:.34,shim:.5,gloss:.65,bl:.31,r:.2,sk:.3,hl:1},/* Kiều diễm = the ?v=5 Khuynh thành look, moved down one step (owner 17/11 ~14:00Z) */
- tuyet:{lip:.76,eye:.96,eyeH:.9,brow:.78,wing:.42,low:.3,shim:.75,gloss:.78,bl:.35,r:.21,sk:.4,hl:1,glam:1},/* Khuynh thành: splendid, between Kiều diễm and the heavy v7 (owner 14:40Z) */
+ dep:{lip:.7,eye:.9,eyeH:.8,brow:.7,wing:.3,low:.34,shim:.5,gloss:.65,bl:BAL.toil.blush.dep,r:.2,sk:.3,hl:1},/* Kiều diễm = the ?v=5 Khuynh thành look, moved down one step (owner 17/11 ~14:00Z) */
+ tuyet:{lip:.76,eye:.96,eyeH:.9,brow:.78,wing:.42,low:.3,shim:.75,gloss:.78,bl:BAL.toil.blush.tuyet,r:.21,sk:.4,hl:1,glam:1},/* Khuynh thành: splendid, between Kiều diễm and the heavy v7 (owner 14:40Z) */
  diem:{lip:.92,eye:1,eyeH:.95,brow:.82,wing:.36,low:.6,shim:.5,gloss:.2,bl:.56,r:.24,sk:.32,diff:1},/* Diêm dúa = the v6 look, blush more diffuse (loang, lower centre) */
  vungB:{lip:1,eye:1,eyeH:1.18,brow:.9,wing:.55,low:.85,shim:.6,gloss:.2,bl:.78,r:.18,bp:"soft",sk:.36}};/* v18 (owner 17/11 19:55Z): blush SIZE = Đoan trang .165 / Kiều diễm .2 (was .23), outer edge blurred (BLP.soft); colour strength kept. Vụng về B "đánh quá tay, như hề" = the v7 Diêm dúa look; A = TOIL_MKS.vung */
 function toilVungB(col){const sd=((col&&col.seed)|0);if(!sd)return false;let h=Math.imul(sd^(sd>>>15),2246822519);h=Math.imul(h^(h>>>13),3266489917);h^=h>>>16;return((h>>>0)/4294967296)<(BAL.toil.vungB||0)}
@@ -741,6 +741,23 @@ const MK_FIT={g:{},ld:{},face(f){const m=/^(?:por|fig)-([a-z]+-[a-z]*\d+)-/.exec
  get(f){const g=this.face(f);if(!g)return null;const t=this.g[g];if(t)return t[f]||null;this.load(g);return null},
  load(g){if(this.ld[g])return;this.ld[g]=1;try{fetch("img/mk-fit/"+g+".json").then(r=>r.ok?r.json():null).then(j=>{if(j){MK_FIT.g[g]=j;try{if(typeof S!=="undefined"&&S&&!Q.length&&!TOIL.st)render();else if(TOIL.st&&TOIL.prev&&TOIL.prevUI)TOIL.prevUI()}catch(e){}}}).catch(()=>{})}catch(e){}}};
 window.MK_FIT=MK_FIT;
+/* KIT §60 face axis (owner 17/11 ~18:00Z, face left of the mirror centre): the TRUE vertical axis of a face picture = the midpoint of its two eyes from the face-mesh (img/mk-fit, eye rings = points 20-29 and 30-39, units 1/4000 of the picture);
+   returns it as a 0..1 share of the picture width, or null while that face's mesh is not loaded. toil-fit's mouth point sits on average 1.2 % of the picture width (up to 5.8 %) to the RIGHT of it, so every place
+   that centres a face in a round/mirror frame (camera close-up, makeup board, kitFaceZoom) centres THIS axis and falls back to the mouth point only when there is no mesh. */
+const TOIL_EYEPX={};
+function toilAxisX(file){try{const fn=String(file||"").split("?")[0].split("/").pop();if(TOIL_EYEPX[fn]!=null)return TOIL_EYEPX[fn];const e=MK_FIT.get(fn);if(!e||e.length<80)return null;let x=0;for(const s of[20,30])for(let i=0;i<10;i++)x+=e[2*(s+i)];return x/20/4000+TOIL_AXIS_BIAS}catch(err){return null}}
+/* THE FACE'S REAL CENTRE, from the picture's own pixels (owner 17/11 + review r1: the fit files lie, on average the mesh sits 3.0 % of the picture width RIGHT of the painted face, up to 10 %, and the toil-fit mouth is shifted the same way):
+   centroid x of the skin-coloured pixels in the face band (from a little above the eyes to the mouth line; hair, jewellery, clothes and hands are not skin); the fit points are only used to say which rows and what x range to look at.
+   async, once per picture, cached in TOIL_EYEPX (0..1 of the picture width); needs the CDN's CORS (it has it); resolves false when something is missing, then toilAxisX falls back to the mesh minus its measured bias */
+async function toilEyePx(file){const fn=String(file||"").split("?")[0].split("/").pop();if(TOIL_EYEPX[fn]!=null)return true;
+ try{const v=TOIL_FIT.fit&&TOIL_FIT.fit[fn];if(!v)return false;const bm=await createImageBitmap(await (await fetch(IMG_U("img/"+fn),{mode:"cors"})).blob()),Wd=bm.width,Hd=bm.height,c=document.createElement("canvas");c.width=Wd;c.height=Hd;const g=c.getContext("2d",{willReadFrequently:true});g.drawImage(bm,0,0);const d=g.getImageData(0,0,Wd,Hd).data;
+  const my=v[1]/100*Hd,fw=v[6]/100*Wd,mx=v[0]/100*Wd,y0=Math.max(0,v[3]/100*Hd-.06*Hd|0),y1=Math.min(Hd,my+.02*Hd|0),x0=Math.max(0,mx-.9*fw|0),x1=Math.min(Wd,mx+.9*fw|0);const cnt=new Float32Array(Wd);let n=0;
+  for(let y=y0;y<y1;y++)for(let x=x0;x<x1;x++){const i=(y*Wd+x)*4,r=d[i],gg=d[i+1],b=d[i+2];if(d[i+3]>200&&r>150&&r>gg&&gg>b&&r-b>18&&r-gg<60&&gg>110){cnt[x]++;n++}}
+  /* a hand or a sleeve beside the face is skin too: keep only the heaviest run of skin columns (gaps up to 2 % of the width are bridged) */
+  if(n<100)return false;const segs=[],thr=Math.max(...cnt)*.06;let cur=null,gap=0;for(let x=x0;x<x1;x++){if(cnt[x]>thr){if(!cur)cur={a:x,m:0,s:0};cur.m+=cnt[x];cur.s+=cnt[x]*x;cur.e=x;gap=0}else if(cur&&++gap>Wd*.02){segs.push(cur);cur=null}}if(cur)segs.push(cur);
+  const top=segs.reduce((a,b)=>b.m>a.m?b:a);TOIL_EYEPX[fn]=top.s/top.m/Wd;return true}catch(err){return false}}
+
+const TOIL_AXIS_BIAS=-.03;/* mesh eye midpoint -> painted face centre, mean over 229 portraits (sd 2.0 %, min -10.4 %); only used while the pixel centre is not known */
 const TOIL_BLANK="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7";
 const TOIL_MKC={},TOIL_MKQ=[];
 function toilMkPts(v){const P=[];for(let i=0;i<60;i++)P.push([v[2*i]/40,v[2*i+1]/40]);return P}/* → % of width / height */
@@ -887,7 +904,7 @@ document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest
 /* KIT §60 kitFaceZoom(p, file): her face up close in a round bronze-mirror frame, the picture + the SAME face layers as everywhere (kitFxLayers),
    centred on the measured face (img/toil-fit.json); "" when the picture has no points */
 function kitFaceZoom(p,file){const v=TOIL_FIT.fit&&TOIL_FIT.fit[file];if(!v)return"";const A=v[8]||1.3,zw=100/(v[6]*1.5)*100;/* picture width in % of the frame */
- const left=50-v[0]/100*zw,top=60-v[1]/100*zw*A;let fx="";try{fx=kitFxLayers(p,file)}catch(e){}
+ const ax=toilAxisX(file),left=50-(ax!=null?ax*100:v[0])/100*zw,top=60-v[1]/100*zw*A;let fx="";try{fx=kitFxLayers(p,file)}catch(e){}
  return `<div class="kfzoom" role="img" aria-label="Dung nhan trong gương"><div class="kfzoom-i" style="left:${left.toFixed(2)}%;top:${top.toFixed(2)}%;width:${zw.toFixed(2)}%;height:${(zw*A).toFixed(2)}%">`+
   `<img src="${IMG_U("img/"+file)}" alt=""><span class="kfxf">${fx}</span></div></div>`}
 window.kitFaceZoom=kitFaceZoom;
@@ -924,6 +941,8 @@ const TOIL_HINT={moc:"Gương mặt mộc: người trọng lễ dễ chê, kẻ
  diem:"Đậm quá dịp, quá phẩm: người ta chê phô trương, kẻ ưa phô trương lại khen."};
 function toilPreName(col,look){if(!col)return"";const k=toilPreOf(Object.assign({},col,{want:look==="diem"?"diem":""}));const p=TOIL_PRE.find(x=>x[0]===k&&(x[2]==="diem")===(look==="diem"));return p?p[1]:"màu tự chọn"}
 function toilFigAt(){let P=0;try{const it=wdItem(wdOf(S).y);P=it?it.P:0}catch(e){}const rank=P>=1?Math.min(7,P-1):S.rank;const f0=figTierOf;try{figTierOf=function(w){return w===S?rank:f0.apply(this,arguments)};return figFor(S,"")}catch(e){return""}finally{figTierOf=f0}}
+/* the dressing-room plate (img/toil-mirror-room.webp, 1200x800): bx = its CSS background-position-x (.ktrv-plate), gx = the bronze mirror's glass centre across the picture (measured) */
+const TOIL_PLATE={w:1200,h:800,bx:.52,gx:630/1200};/* gx = the mirror axis of symmetry measured on the painting (frame rows 60-470, left half vs flipped right half: x = 629.5-631 of 1200; dev/test/mirror-center.js re-measures it from the picture) */
 /* the face mesh (img/mk-fit) of a file must be loaded BEFORE its colour layers are built: the layer is baked into the reveal markup and is not redrawn when the mesh arrives
    (r2 FAIL 17/11: a lip patch on the chin = the fallback lip oval from the old fit row, drawn while the mesh was still loading). Waits up to ~2.5 s, then goes on (the mesh-less fallback below draws no lips). */
 function toilMkReady(files,cb){let n=0;const need=()=>files.filter(f=>f&&MK_FIT.face(f)&&!MK_FIT.get(f));const go=()=>{if(!need().length||++n>31)return cb();setTimeout(go,80)};go()}
@@ -932,7 +951,7 @@ function toilReveal(o,done){let fin=false;try{if(typeof kmStage==="function"&&km
  try{if(typeof kmStage!=="function"||!kmOn()||!S||!TOIL_FIT.fit)return end();const fig=toilFigAt(),por=toilPor();if(!fig||!por.src)return end();
   const ff=kitFile(fig),pf=kitFile(por.src),v=toilRow(ff);if(!v)return end();const A=v[8]||1.3,red=kmReduced(),look=o.look;
   /* the close-up is HER PORTRAIT laid exactly over her face in the figure (same mouth point, same face width from img/toil-fit.json): the figure picture is too soft at 5x, the portrait has the pixels */
-  let porH="";try{const pv=toilRow(pf);if(pv&&pv[6]){const Ap=pv[8]||1.3,wp=100*v[6]/pv[6],hp=wp*Ap/A,pfx=kitFxLayers(S,pf);
+  let porH="",porG=null;try{const pv=toilRow(pf);if(pv&&pv[6]){const Ap=pv[8]||1.3,wp=100*v[6]/pv[6],hp=wp*Ap/A,pfx=kitFxLayers(S,pf);porG={l:v[0]-pv[0]*wp/100,wp};
    porH=`<span class="ktrv-pw" style="left:${(v[0]-pv[0]*wp/100).toFixed(2)}%;top:${(v[1]-pv[1]*hp/100).toFixed(2)}%;width:${wp.toFixed(2)}%;height:${hp.toFixed(2)}%"><img src="${IMG_U("img/"+pf)}" alt=""><span class="kfxf">${pfx}</span></span>`}}catch(e){}
   const fx=(()=>{try{return kitFxLayers(S,ff)}catch(e){return""}})();
   const rows=[["Dung nhan",`<span class="ef ${o.good?"g":look==="vung"?"r":"t"}"><b>${TOIL_MK[look]}${o.made?` · ${o.score} phần`:""}</b></span>`]];if(o.made)rows.push(["Kiểu",o.pre]);rows.push(["Hôm nay",TOIL_HINT[look]]);
@@ -952,13 +971,17 @@ function toilReveal(o,done){let fin=false;try{if(typeof kmStage==="function"&&km
   const camSet=()=>{/* layout metrics (offset*), never rects: rects carry the design-canvas scale and the step-in transform */
    let ox=0,oy=0,el=fw;while(el&&el!==R){ox+=el.offsetLeft;oy+=el.offsetTop;el=el.offsetParent}
    const RW=R.offsetWidth||innerWidth,RH=R.offsetHeight||innerHeight,w0=fw.offsetWidth||1,h0=fw.offsetHeight||1,fwpx=v[6]/100*w0;/* her face centre in R's CSS px (the figure at rest) */
-   const fx0=ox+v[0]/100*w0,fy0=oy+(v[1]-v[6]*.25/A)/100*h0;
+   /* MIRROR CENTRE (owner 17/11 ~18:00Z): the face must sit in the MIDDLE OF THE GLASS, not just mid-screen. Face axis = the eye midpoint of the face-mesh (toilAxisX; the mouth point v[0] only when there is no mesh);
+      the glass centre on the screen comes from the plate's own cover/position maths (TOIL_PLATE), and the standing figure is slid sideways (--ktdx on .ktrv-fig) so the axis lands on it;
+      the camera then zooms about that point, so face, glass and screen centre are one vertical line at every size */
+   const axP=toilAxisX(pf),axF=toilAxisX(ff),fxr=ox+(porG&&axP!=null?porG.l+axP*porG.wp:axF!=null?axF*100:v[0])/100*w0,P=TOIL_PLATE,ps=Math.max(RW/P.w,RH/P.h),gx=(RW-P.w*ps)*P.bx+P.gx*P.w*ps;
+   const fx0=gx,fy0=oy+(v[1]-v[6]*.25/A)/100*h0;R.style.setProperty("--ktdx",`${(gx-fxr).toFixed(1)}px`);
    const sc=Math.max(1.5,Math.min(6,.34*Math.min(RW,RH)/Math.max(8,fwpx)));/* face width ≈ 34 % of the short side */
    R.style.setProperty("--kto",`${fx0.toFixed(1)}px ${fy0.toFixed(1)}px`);R.style.setProperty("--ktx",`${(RW/2-fx0).toFixed(1)}px`);R.style.setProperty("--kty",`${(RH*.36-fy0).toFixed(1)}px`);R.style.setProperty("--ktsc",sc.toFixed(2))};
   const goZoom=()=>{if(ph>=2)return;ph=1.5;camSet();R.classList.add("ktrv-go");later(1500,toZoom)};
   if(red){camSet();R.classList.add("ktrv-red");toZoom();return}
   /* step in, effect, zoom */
-  requestAnimationFrame(()=>R.classList.add("ktrv-in"));
+  camSet();/* the figure stands in front of the mirror from the first frame */[pf,ff].forEach(f=>toilEyePx(f).then(ok=>{if(ok&&ph<3){try{camSet()}catch(e){}}}));requestAnimationFrame(()=>R.classList.add("ktrv-in"));
   try{kitFxPreload&&kitFxPreload(look==="vung"?["ink"]:look==="diem"?["spark","petal-peach"]:look==="dep"||look==="tuyet"?["petal-plum","petal-peach"]:[])}catch(e){}
   const runFx=()=>{if(ph>=2)return;const SF={dep:"favour",tuyet:"favour",diem:"rankNew",vung:"mglose",vua:"mirror",moc:"mirror"}[look]||"mirror";try{kitSfx(SF)}catch(e){}
    /* KIT §68.7: light is a RIM only (starts at her outline, radiates outward, never over her face); sparks and petals leave from her silhouette's edges */
@@ -980,7 +1003,7 @@ window.toilReveal=toilReveal;
 .ktrv-dep .ktrv-lt,.ktrv-tuyet .ktrv-lt{background:radial-gradient(ellipse at 50% 55%,#ffe8c055,#ffe8c000 65%)}
 .ktrv-diem .ktrv-lt{background:radial-gradient(ellipse at 50% 50%,#ffd27a99,#ffb03a00 70%)}
 .ktrv-in .ktrv-lt{opacity:1}
-.ktrv-fig{position:absolute;left:0;right:0;bottom:3%;height:88%;display:flex;justify-content:center;align-items:flex-end;pointer-events:none}
+.ktrv-fig{position:absolute;left:0;right:0;bottom:3%;height:88%;display:flex;justify-content:center;align-items:flex-end;pointer-events:none;transform:translateX(var(--ktdx,0px))}
 .ktrv-cam{position:absolute;inset:0;transform-origin:var(--kto,50% 40%);transition:transform 1.5s cubic-bezier(.55,0,.25,1);will-change:transform}
 .ktrv-go .ktrv-cam,.ktrv-zin .ktrv-cam{transform:translate(var(--ktx,0px),var(--kty,0px)) scale(var(--ktsc,3))}
 .ktrv-zin .ktrv-cam{transition-duration:.6s}.ktrv-red .ktrv-cam{transition:none}
