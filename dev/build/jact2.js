@@ -57,7 +57,7 @@ if(typeof tsPanel==="function"&&typeof tsOpt==="function"){const p0=tsPanel;tsPa
   o.opts.splice(Math.max(0,o.opts.length-1),0,tsOpt({n:"Cầu con",duoc:["dễ có thai thêm một tháng"],go:()=>{S.fert=Math.max(S.fert||0,1);log(`Đêm ${f.name}, ngươi thả đèn cầu con.`)}}))}catch(e){console.error("jact2 den",e)}return p0.apply(this,arguments)}}
 /* ---------- WAVE 3: the night ---------- */
 /* sneaking at night: fewer guards (odds + nightSneak), heavier if caught (Danh + nightCaught) */
-if(typeof accSneakO==="function"){const o0=accSneakO;accSneakO=function(k,a){const o=o0.apply(this,arguments);try{if(as2Night())return cl(o+AD2.nightSneak,5,95)}catch(e){}return o}}
+if(typeof accSneakO==="function"){const o0=accSneakO;accSneakO=function(k,a){const o=o0.apply(this,arguments);try{if(as2Night())return oddsCl(o+AD2.nightSneak)}catch(e){}return o}}
 if(typeof accSneakPen==="function"){const p0=accSneakPen;accSneakPen=function(k){const P=p0.apply(this,arguments);try{if(as2Night()&&P){const d=P.danh+AD2.nightCaught;return Object.assign({},P,{danh:d,txt:String(P.txt||"").replace(/Danh -\d+/,`Danh ${d}`)+" (bắt giữa đêm, tội nặng thêm)"})}}catch(e){}return P}}
 if(typeof accSneakLine==="function"){const l0=accSneakLine;accSneakLine=function(){const t=l0.apply(this,arguments);return as2Night()?t+" · (đêm vắng người: dễ lọt hơn, bị bắt thì tội nặng hơn)":t}}
 /* the fallen consort's call: a night happening at Trường Môn viện (j7 coldvisit, same options; its 12-month rest via S.seen) */

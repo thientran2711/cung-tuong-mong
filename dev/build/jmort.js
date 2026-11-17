@@ -22,7 +22,7 @@ function mortGauss(){let u=0,v=0;while(!u)u=Math.random();while(!v)v=Math.random
 /* one draw from a group's curve: {mean,sd,lo,hi} bell curve (owner 16/11: early death rare, the average most common, long life rare);
    a child curve {risk,early,adult}: risk % die young at an age from the `early` bands, else the adult curve. A string = alias of another group. */
 function mortDraw(grp){const D=BAL.mort.life.dice;let c=D[grp]||D.adult;while(typeof c==="string")c=D[c];
- if(c.risk!=null){if(Math.random()*100<c.risk)return mortBand(c.early);return mortDraw(c.adult||"adult")}
+ if(c.risk!=null){if(roll(c.risk))return mortBand(c.early);return mortDraw(c.adult||"adult")}
  return Math.max(c.lo,Math.min(c.hi,c.mean+c.sd*mortGauss()))}
 /* roll a lifespan (whole years of age at death) not below the present age (conditioned: redraw); floor = minimum years still to live (switch) */
 function mortRoll(grp,age,floor){const min=age+Math.max(0,floor||0);
@@ -42,7 +42,7 @@ function nm(p){return p===S.emp?"Hoàng thượng":p===S.thO?"Thái hậu":p.nam
 /* give p a lifespan once */
 function assign(p,K,oldSave){if(!p||typeof p!=="object"||p.tho>0||p.nb)return;const a=ageOf(p);if(!(a>=0))return;const g=grpOf(p,K);
  let fl=g==="me"?M.life.floorMe:g==="emp"?M.life.floorEmp:p.lyF&&M.ly?M.ly.floor:0;if(oldSave&&(g==="me"||g==="emp"))fl=Math.max(fl,M.oldFloor);
- p.tho=mortRoll(g,a,fl);p.thoM=1+R(12);if((p.tho-a)*12+(p.thoM-(S.month||1))<M.life.minMo)p.tho=a+1;p.thoO=Math.random()*100<M.sudden?0:M.omen[0]+R(M.omen[1]-M.omen[0]+1);
+ p.tho=mortRoll(g,a,fl);p.thoM=1+R(12);if((p.tho-a)*12+(p.thoM-(S.month||1))<M.life.minMo)p.tho=a+1;p.thoO=roll(M.sudden)?0:M.omen[0]+R(M.omen[1]-M.omen[0]+1);
  if(p===S&&M.life.show){const w=p.tho<BAL.cut.tho[0]?"yểu mệnh":p.tho<BAL.cut.tho[1]?"trung thọ":p.tho<BAL.cut.tho[2]?"thượng thọ":"hạc thọ";
   log(`Thầy tướng xem tay ngươi, phán: số ${w}${M.life.show>=2?`, thọ chừng ${p.tho} tuổi`:""}.`)}}
 function worldPeople(){const L=[S.emp];if(!S.thDead&&S.thO)L.push(S.thO);(rivals||[]).forEach(v=>{if(v.alive&&!v.coop)L.push(v);(v.kids||[]).forEach(k=>k.alive&&L.push(k));(v.staff||[]).forEach(s=>!s.coop&&L.push(s))});
@@ -91,7 +91,7 @@ const ACC={me:["trượt chân trên bậc đá đóng băng trước điện, k
  odd:["nghẹn hạt sen giữa yến tiệc","mải đuổi con vẹt sổng lồng, trượt chân ngã từ lầu vọng nguyệt","cười quá đà khi xem gánh chèo, ngất đi không tỉnh"],
  emp:["ngã ngựa khi săn bắn ở Nam Uyển","trúng phong giữa buổi chầu"],empOdd:["ăn liền ba bát chè hạt sen đêm Trung thu, đau bụng rồi không qua khỏi"]};
 function accY(p,K){if(K.has(p))return 0;return p===S?M.acc.me:p===S.emp?M.acc.emp:M.acc.npc}
-function accText(p){const odd=Math.random()*100<M.oddP;if(p===S.emp)return pick(odd?ACC.empOdd:ACC.emp);return pick(odd?ACC.odd:p===S?ACC.me:ACC.adult)}
+function accText(p){const odd=roll(M.oddP);if(p===S.emp)return pick(odd?ACC.empOdd:ACC.emp);return pick(odd?ACC.odd:p===S?ACC.me:ACC.adult)}
 /* Emperor plots: an omen month(s) first, then cấm quân foils it or not */
 function empPlot(){if(cw())return "";const P=S.mort;let ev="";
  if(P.plot){P.plot.mo--;if(P.plot.mo>0)return "";const k=P.plot.k;P.plot=null;
@@ -149,7 +149,7 @@ function careN(p){return p?(p.suc>=M.life.careSuc?1:0)+(p.doctor?1:0)+(p.arts&&p
    Same rule for her and every NPC consort. The old death roll of birthP (roll birthRisk) is taken over here: birthRisk is set to 0 inside birthP. */
 function sonsAlive(){try{return allKids().filter(([k])=>k.alive&&k.sex==="m").length}catch(e){return 1}}
 function keepMomOdds(p,boy){const E=M.birth.emp;const th=p===S?S.th:(p.th||0);let o=E.base+E.sung*((p.sung||0)-50)+E.th*th*(has("hieuthao")?E.hieuthao:1);
- if(!sonsAlive())o-=E.heirNeed;if(boy)o-=E.boy;for(const k of ["nhantu","datinh","mesac","lanhlung","chamchinh"])if(has(k))o+=E[k];return cl(Math.round(o),5,95)}
+ if(!sonsAlive())o-=E.heirNeed;if(boy)o-=E.boy;for(const k of ["nhantu","datinh","mesac","lanhlung","chamchinh"])if(has(k))o+=E[k];return oddsCl(Math.round(o))}
 function birthEvent(t,h){if(typeof Q==="object"&&Q)Q.push({t,kind:"news",h})}
 (function(){const b0=birthP;birthP=function(p,fake){if(!M.on||fake||!p)return b0.apply(this,arguments);const me=p===S,B=M.birth;
  const r=birthRisk(p);const br0=birthRisk;let res;

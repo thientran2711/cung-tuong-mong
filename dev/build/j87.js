@@ -231,7 +231,7 @@ const KBK_WORLD=/(thế lực|Kho lúa|kho lúa|^Sớ|triều đình|Triều đ�
    "chuyện nhỏ khác" entry carries what no line explained). Card promise text is never an entry. */
 const WKE_NAME="[A-ZÀ-ỸĐ][\\p{L}]*(?: [A-ZÀ-ỸĐ][\\p{L}]*){0,3}";
 const WKE_TOK=new RegExp("(?<![\\p{L}\\d])((?:Thái hậu|Hoàng hậu|phi tần|các phi tần|mọi phi tần|kẻ khác|người khác|"+WKE_NAME+")\\s+)?(Sủng(?: của "+WKE_NAME+")?|quý ngươi|quý ta|thiện cảm|oán ngươi|oán ta|ghen|Danh|Sức|Bạc|Đức|Tai mắt|Ân tình|Tài|Sắc|Tâm cơ)\\s+(-?\\d+\\s*(?:→|->)\\s*-?\\d+|[+\\-−]\\d+)(?![\\d])","gu");
-const WKE_CARD=/(^|\s)·\s*(kèm|thành|hỏng)\s*:|\b(Liều|Khó|Năm ăn năm thua|Khá chắc|Chắc chắn|Rất chắc|Nắm chắc|Chắc)\s*·|ai gặp ta cũng nhìn|\(thẻ [^)]*\)|chọn món trong rương|Dùng được ở thẻ|^Xem sổ thị tẩm|Sổ thị tẩm:/;
+const WKE_CARD=/(^|\s)·\s*(kèm|thành|hỏng)\s*:|\b(Liều|Khó|Năm ăn năm thua|Khá chắc|Rất chắc|Nắm chắc|Chắc)\s*·|ai gặp ta cũng nhìn|\(thẻ [^)]*\)|chọn món trong rương|Dùng được ở thẻ|^Xem sổ thị tẩm|Sổ thị tẩm:/;
 function wkeDelta(v){v=String(v).replace(/−/g,"-");const m=/^(-?\d+)\s*(?:→|->)\s*(-?\d+)$/.exec(v);return m?+m[2]-+m[1]:parseInt(v,10)}
 function wkeNorm(h){return kpMapText(String(h||""),s=>s.replace(/\b(Thái hậu|Hoàng hậu)\s+(?=[+\-−]\d)/g,"$1 thiện cảm "))}
 /* every number of a unit: {m:[start,end] in the plain segment, who: person | "me" | null, row:"sung"|"aff"|"oan"|"ghen"|"", d, label} */

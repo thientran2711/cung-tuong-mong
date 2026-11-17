@@ -90,7 +90,7 @@ function trGreet(who,host,opt){opt=opt||{};const B=BAL.trong,th=host==="th",A=th
 /* wraps a "Thỉnh an" talk option so the card shows (and runs) the real numbers */
 function trGreetOpt(a,host){const th=host==="th",k=th?"th":"hh",G=trGreet(S,host);const w=Object.assign({},a.w||{}),l=Object.assign({},a.l||{});
  if(G.gain)w[k]=G.gain;else delete w[k];l[k]=-G.scold;const why0=a.why;
- const o=Object.assign({},a,{o:a.o==null?od(G.o):cl(a.o+G.o-(th?75:70),5,95),w,l,risk:[a.risk,G.x].filter(Boolean).join(" · "),why:()=>{const F=why0?why0().slice():[];G.why.forEach(f=>F.push(f));return F}});
+ const o=Object.assign({},a,{o:a.o==null?od(G.o):oddsCl(a.o+G.o-(th?75:70)),w,l,risk:[a.risk,G.x].filter(Boolean).join(" · "),why:()=>{const F=why0?why0().slice():[];G.why.forEach(f=>F.push(f));return F}});
  const mark=()=>{trGreetMark(S,host);if(th){S.thO.archK=1}trongLearn(th?"th":host,th?DEED.greet:DEED.greetHH,"Qua buổi thỉnh an")};
  if(a.run){const r0=a.run;o.run=function(){mark();return r0.apply(this,arguments)}}
  else{const g0=a.go,f0=a.fail;o.go=function(){mark();return g0?g0.apply(this,arguments):undefined};o.fail=function(){mark();return f0?f0.apply(this,arguments):undefined}}

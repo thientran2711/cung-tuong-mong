@@ -32,7 +32,7 @@ window.__kvS=null;window.__kvDue={};
 (function(){const m0=mindMenu;mindMenu=function(v,t){const K=window.__kvS;if(!K||K.v!==v||K.t!==t)return m0.apply(this,arguments);
  try{const b=bandOf(danger(v,t)+K.m);const allow=BANDS.slice(1,b+1).flatMap(x=>x[2]);const tc=witOf(v);const O=[];v.fails=v.fails||{};
   for(const [k,w0] of KVACT){const a=ACT[k];if(!a||!allow.includes(k))continue;let ok=false;try{ok=a.ok(v,t)}catch(e){}if(!ok)continue;
-   let w=w0*persW(v,k)*(1+K.m/40);let od=null;try{od=a.o?a.o(v,t):null}catch(e){}if(od!=null&&tc>=BAL.wit.lo)w*=Math.pow(cl(od,5,95)/50,(tc-BAL.wit.lo)/BAL.wit.mid);
+   let w=w0*persW(v,k)*(1+K.m/40);let od=null;try{od=a.o?a.o(v,t):null}catch(e){}if(od!=null&&tc>=BAL.wit.lo)w*=Math.pow(oddsCl(od)/50,(tc-BAL.wit.lo)/BAL.wit.mid);
    const f=v.fails[k]||0;if(f)w*=tc<BAL.wit.mid?1+.6*f:Math.pow(.5,f);if(w>0)O.push([k,w])}
   return O}catch(e){return[]}}})();
 /* con bị nhắm: con trai đứng cao nhất trong thứ tự kế vị */

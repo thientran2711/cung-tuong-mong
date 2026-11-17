@@ -43,7 +43,7 @@ function kRxEmu(src,flags){flags=flags||"";
    face + name chip .... mdH(face,"xs|sm|big")  (small round avatar, also rank ground)
    person card ......... pcard({f,name,rank,lines,chips,note,groups})  + pager(key,items,mk) face strip
    labelled bar ........ ghenBar(n) / fbar(v,lo,hi,good)  (always beside label + number)
-   odds chip ........... oddsChip(word)  ladder word or 'Chắc chắn'
+   odds chip ........... oddsChip(word)  ladder word, '' = no roll (ODDS CAP: no 'sure' word)
    effect line ......... eff(token) / effList(tokens,default) / kitParse('word · tốn: … · thành: … · hỏng: …')
    act card ............ cardH(a,i)  title, khắc, text, odds chip, Tốn / Thành / Hỏng rows, disabled reason
    button .............. pbtn(attrs,name,line,whyDisabled)  name + price + gain/loss, reason when disabled

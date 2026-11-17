@@ -38,8 +38,8 @@ function spyFactors(a,t,ag){const F=[],me=a===S;ag=spyAgent(a,t,ag);
  if((a.suc||0)<30)F.push(["Sức "+(me?"ngươi ":"")+(a.suc||0)+" (dưới 30)",-15]);
  return F.filter(x=>x[1]||/Tự tay/.test(x[0]))}
 function spyRaw(a,t,ag){return BAL.spyBase+spyFactors(a,t,ag).reduce((s,x)=>s+x[1],0)}
-function spyO(a,t,ag){return cl(Math.round(spyRaw(a,t,ag)),5,95)}
-function spyRoll(a,t,ag){return cl(Math.round(spyRaw(a,t,ag)+lotB(a,"Mưu kế")),5,95)}
+function spyO(a,t,ag){return oddsCl(Math.round(spyRaw(a,t,ag)))}
+function spyRoll(a,t,ag){return oddsCl(Math.round(spyRaw(a,t,ag)+lotB(a,"Mưu kế")))}
 /* consort act "Dò la" (everyone, two-way): the formula above; the servant penalty is inside it (no second sentPen) */
 (function(){const A0=ACT.spy;if(!A0)return;A0.o=(a,t)=>t?spyO(a,t):oSpy(a);A0.why=(a,t)=>spyFactors(a,t);
  A0.f=(a,t)=>{ap(a,{bac:-15});const o=spyRoll(a,t);if(roll(o)){ap(a,{tamco:2});return spyFind(a,t)}relAdd(a,t,BAL.eff.jwhy.f);return `${NMc(a)} dò la ${NM(t)}: <span class="r">bị phát hiện</span>. `};})();
@@ -82,7 +82,7 @@ function spyNews(m){const L=spyList();if(!L.length)return`${m.name} đi một v�
  const why=whyKnows(m,v)?`${m.name} quen người ${whyPal(v)}`:danger(v,S)>=30?"nàng đang có chuyện với ngươi":(v.sung||0)>=50?"nàng đang được sủng, ai cũng bàn":"chuyện nghe được ngoài hành lang";
  const t=`${m.name} nghe ngóng được về ${spyWho(v)} (${why}): ${f||"nàng dạo này ít ra ngoài, chưa có gì mới."}`;return t}
 /* servant start (j42): the mistress's order "dò la" weighs the target too */
-(function(){if(typeof ordOdds!=="function")return;const o0=ordOdds;ordOdds=function(k,t){if(k!=="spy"||!t)return o0.apply(this,arguments);return cl(Math.round(o0.apply(this,arguments)+BAL.spyCnv+cnvSpyF(t).reduce((s,x)=>s+x[1],0)),5,95)}})();
+(function(){if(typeof ordOdds!=="function")return;const o0=ordOdds;ordOdds=function(k,t){if(k!=="spy"||!t)return o0.apply(this,arguments);return oddsCl(Math.round(o0.apply(this,arguments)+BAL.spyCnv+cnvSpyF(t).reduce((s,x)=>s+x[1],0)))}})();
 function cnvSpyF(t){const F=[];const tn=whyNm(t);F.push([`Tâm cơ ${tn}`,-(t.tamco||0)/8]);if((typeof traitsOf==="function"?traitsOf(t):[]).includes("Kín đáo"))F.push([trKnown(t).includes("Kín đáo")?`${tn} đa nghi`:`Nết ${tn} (ngươi chưa rõ)`,-8]);
  const eu=(t.staff||[]).filter(s=>s.role==="eunuch").length;if(eu)F.push([`${eu} thái giám canh ${whyPal(t)}`,-3*eu]);if(t.mat)F.push([`Tai mắt ${tn}`,-(t.mat||0)*3]);
  const f=(t.staff||[]).find(s=>S.srv&&(S.srv.af[s.sid]||0)>=30);if(f)F.push([`Ngươi quen ${f.name} ở ${whyPal(t)}`,BAL.spyKnow]);return F}
@@ -111,7 +111,7 @@ function kitWhyHtml(b,lv){const W=whyOfBtn(b);if(!W)return"";const q=lotB(S,W.do
  h+=F.map(x=>row(x[0],x[1])).join("");if(q)h+=row("Quẻ tuần",q);
  if(!F.length&&!q)h+=row(W.deck?"Cơ may của việc này không đổi theo tư chất: chỉ Quẻ tuần và Sức mới làm khác đi":"Không có yếu tố nào làm dễ hay khó hơn",0);
  return h}
-function word_(o){return word(cl(Math.round(o),5,95))}
+function word_(o){return word(oddsCl(Math.round(o)))}
 document.addEventListener("click",e=>{const od=e.target.closest(".kodm");if(!od)return;const b=od.closest("button");if(!b)return;const lv=+od.dataset.kodds;
  const h=kitWhyHtml(b,lv);if(!h)return;e.stopPropagation();e.preventDefault();setTimeout(()=>kpPop(od,h+`<div class="kpwl">${kitOddsLadder(lv)}</div>`),0)},true);
 /* act-audit fix: the odds word on a consort-act card left out the penalty of sending a servant (runAct: ACTX.pen = sentPen − rank×3),
@@ -119,5 +119,5 @@ document.addEventListener("click",e=>{const od=e.target.closest(".kodm");if(!od)
 const WHY_NOSEND=["accuse","vp","gift","steal","road","takeaway","spy"];
 function sentPenNow(a,t,k){if(WHY_NOSEND.includes(k)||together(a,t))return 0;const sv=bestSent(a);const p0=ACTK;ACTK=k;try{return sentPen(sv)-(sv?srk(sv)*3:0)}finally{ACTK=p0}}
 (function(){for(const k in ACT){const A=ACT[k];if(!A||typeof A.o!=="function"||k==="spy")continue;const o0=A.o;
- A.o=function(a,t){const o=o0.apply(this,arguments);if(o==null||a!==S||!t||ACTX.a||o>=100)return o;const p=sentPenNow(a,t,k);return p?cl(o-p,5,95):o};
+ A.o=function(a,t){const o=o0.apply(this,arguments);if(o==null||a!==S||!t||ACTX.a||o>=100)return o;const p=sentPenNow(a,t,k);return p?oddsCl(o-p):o};
  if(!A.why)A.why=function(a,t){const F=whyDiff(()=>o0(a,t),[[a,a],[t,t]]);const p=sentPenNow(a,t,k);if(p){const sv=bestSent(a);F.push([sv?`Phải sai ${sv.name} đi, không tận mắt`:"Không có kẻ hầu đáng tin để sai đi",-p])}return F}}})();

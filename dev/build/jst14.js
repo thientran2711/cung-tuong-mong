@@ -169,7 +169,7 @@ function f14Parts(A){const P=[];if(!f14())return P;const C=BAL.st14.ctx;try{cons
  if(tm)P.push([tm,tm>0?"Tâm cơ của ta đủ sâu":"Tâm cơ của ta còn non"]);if(du)P.push([du,du>0?"Đức của ta được người kính":"Đức của ta còn mỏng"]);
  const foes=liveRivals(true).filter(x=>(oan(x,S)||0)>=C.foeOan).length;if(foes)P.push([-Math.min(C.foeCap,foes),`${f14Nv(foes)} người trong cung oán ta, đang dõi theo`])}catch(e){}return P}
 function f14Ctx(A){if(!f14())return 0;const C=BAL.st14.ctx;return cl(f14Parts(A).reduce((s,x)=>s+x[0],0),-C.cap,C.cap)}
-(function(){const o0=oOf67;oOf67=function(A,o,b){const x=o0.apply(this,arguments);if(!f14()||o.o==null||x>=100)return x;const O=BAL.st14.odds;return cl(Math.round(x+f14Ctx(A)),O[0],O[1])}})();
+(function(){const o0=oOf67;oOf67=function(A,o,b){const x=o0.apply(this,arguments);if(!f14()||o.o==null||x>=100)return x;return oddsCl(Math.round(x+f14Ctx(A)))}/* ODDS CAP: the one cap BAL.odds (was its own copy BAL.st14.odds) */})();
 window.f14Ctx=f14Ctx;
 /* OD:L1253 for endings no roll decides: an option whose ending is the same whether it succeeds or fails (sure, or o.e one key), or a chapter that
    ends on the tally of Lợi thế (scEnd67) after such an option. The ending still reads this life's context: c = f14Ctx + (Lợi thế − 1) × shift.sc

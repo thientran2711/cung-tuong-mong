@@ -349,11 +349,11 @@ if(typeof servAct==="function"){const v0=servAct;servAct=function(a,id){let s=nu
 if(typeof oanMonth==="function"){const o0=oanMonth;oanMonth=function(){const r=o0.apply(this,arguments);try{memFade();hookTick()}catch(e){console.error("mem",e)}return r}}
 
 /* ================= RECALL: odds, NPC minds, talk ================= */
-if(typeof oAlly==="function"){const a0=oAlly;oAlly=function(a,t){const o=a0.apply(this,arguments);try{return typeof o==="number"?cl(o+memMod(t,a),5,95):o}catch(e){return o}}}
+if(typeof oAlly==="function"){const a0=oAlly;oAlly=function(a,t){const o=a0.apply(this,arguments);try{return typeof o==="number"?oddsCl(o+memMod(t,a)):o}catch(e){return o}}}
 if(typeof hostility==="function"){const h0=hostility;hostility=function(v,t){const h=h0.apply(this,arguments);try{return h-memMod(v,t)}catch(e){return h}}}
 if(typeof talkOpts==="function"){const t0=talkOpts;talkOpts=function(p){const A=t0.apply(this,arguments);try{if(off()||!p||!Array.isArray(A))return A;const v=p.ref;
  if(!(p.kind==="rival"||p.kind==="hh")||!v||v===S)return A;const md=memMod(v,S);
- if(md)A.forEach(a=>{if(a&&typeof a.o==="number"&&a.o>0&&a.o<100)a.o=cl(a.o+md,5,95)});
+ if(md)A.forEach(a=>{if(a&&typeof a.o==="number"&&a.o>0&&a.o<100)a.o=oddsCl(a.o+md)});
  const C=B();const good=memTop(v,S,1);
  if(good&&good.g>=C.invokeMin&&!A.some(a=>a&&a.n==="Nhắc lại ân xưa"))A.push({n:"Nhắc lại ân xưa",o:100,x:`nàng nợ ngươi một ân · kỷ niệm ${MEM_DEEDS[good.d]?"“"+phrase(good,"nàng")+"”":""} phai bớt`,run:()=>memInvoke(v)});
  const sec=hookQuery({k:"secret",by:"me",on:v,mir:false}).find(h=>h.str==="strong");

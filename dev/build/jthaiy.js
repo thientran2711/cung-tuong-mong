@@ -87,7 +87,7 @@ window.thaiyNextVisit=function(){if(!S||off())return null;return visitAt(1)};/* 
 window.thaiyVisits=function(n){if(!S||off())return[];const f=window.thaiyNextVisit();const a=f.turn-S.turn;const L=[];for(let i=0;i<(n||6);i++)L.push(visitAt(a+i));return L};
 
 /* ---------- 2. Mời thái y bắt mạch (two roads) ---------- */
-function findO(self){const o=T().find+(S.arts&&S.arts.y||0)*T().findY+(trusted(S)?T().findTrust:0)+(self?T().findSelf:0);return cl(o,5,95)}
+function findO(self){const o=T().find+(S.arts&&S.arts.y||0)*T().findY+(trusted(S)?T().findTrust:0)+(self?T().findSelf:0);return oddsCl(o)}
 function why(road){if(!S||S.dead)return"không được";if(S.out)return"ở lãnh cung, Thái y viện không cử người";if(typeof isSrv==="function"&&isSrv())return"phận cung nữ";
  if(road==="pay"){if((S.bac||0)<cost())return `cần ${cost()} bạc`;if(!can(T().khPay))return"hết khắc";return""}
  if(S.confined)return"đang bị cấm túc";if(!can(T().khSelf))return `cần ${T().khSelf} khắc`;if((S.suc||0)<20)return"Sức không đủ";return""}
@@ -136,7 +136,7 @@ window.thyCardLines=function(){if(!S)return[];const z=thy();const L=[];const r=z
   if(k==="ty"&&(a==="bm"||a==="bm2")){if(!S||S.dead||Q.length)return;req(a==="bm"?"pay":"self");return}
   /* Hỏi chuyện: a physician who likes her tells her a rival's mạch án */
   if(k==="ty"&&a==="hoi"&&S&&!S.dead&&!Q.length&&can(2)&&doc()){const c=doc();const me=c.af.me||0;
-   if(me>=T().askAf&&roll(cl(T().askBase+me/2,5,95))){const L=liveRivals(true).filter(v=>rv(v)&&((v.preg&&v.hidden)||(illOf(v)&&!illKnown(v))));const v=L.length?pick(L):null;
+   if(me>=T().askAf&&roll(oddsCl(T().askBase+me/2))){const L=liveRivals(true).filter(v=>rv(v)&&((v.preg&&v.hidden)||(illOf(v)&&!illKnown(v))));const v=L.length?pick(L):null;
     if(v){spend(2);c.af.me=me+1;let t;if(v.preg&&v.hidden){t=`${v.name} đang mang thai, còn giấu`;noteAdd(v.id,"thái y kể: nàng ta đang mang thai, còn giấu")}else{v.ill.known=true;t=`${v.name} mắc ${ILL[v.ill.k].n.toLowerCase()}`;noteAdd(v.id,`thái y kể: nàng ta mắc ${ILL[v.ill.k].n.toLowerCase()}`)}
      log(`${c.name} hạ giọng kể mạch án: ${t}.`);render();return}}}
   return c0.apply(this,arguments)};window.courtAct=courtAct})();

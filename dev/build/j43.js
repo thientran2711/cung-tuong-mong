@@ -21,7 +21,7 @@ function m43odds(v,t,k){try{const a=ACT[k];return a&&a.o?a.o(v,t):null}catch(e){
    if(drop){mindLog(v,"_wait");if(!keep.length){const sp=O.find(x=>x[0]==="spy");return sp?[sp]:[]}}O=keep}/* the clever wait out poor odds and dig for evidence meanwhile */
  }catch(e){}return O}})();
 /* the push-down roads read Tâm cơ through odT: a blunder lowers them too */
-(function(){const o0=odT;odT=function(a,b){const r=o0.apply(this,arguments);return a&&a.__err?cl(r-a.__err,5,95):r}})();
+(function(){const o0=odT;odT=function(a,b){const r=o0.apply(this,arguments);return a&&a.__err?oddsCl(r-a.__err):r}})();
 /* belief book */
 function m43sev(k){for(let i=1;i<BANDS.length;i++)if(BANDS[i][2].includes(k))return [0,6,12,20][i];return 6}
 function belOf(t,x){t.bel=t.bel||{};const k=key(x);return t.bel[k]=t.bel[k]||{r:0,w:0}}

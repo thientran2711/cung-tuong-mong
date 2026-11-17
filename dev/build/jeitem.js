@@ -54,7 +54,7 @@ function eitPilfer(p,G){if(p===S)EIT_PIL=null;try{if(!p||p.dead||p.out||!G||!G.l
  const i=p.inv.indexOf(best.e);if(i>=0)p.inv.splice(i,1);best.g.E.splice(best.g.E.indexOf(best.e),1);best.g.n=Math.max(0,best.g.n-1);if(!best.g.n)best.g.lost=true;best.g.pil=1;
  hit.pilN=(hit.pilN||0)+1;const X={p,s:hit,k:best.e.k,g:best.g};
  if(p!==S){eitPilNpc(X);return X}
- const P=BAL.eit.pil;const see=cl(P.see+(S.mat||0)*P.seeMat+(S.maid&&S.maid!==hit&&(S.maid.loyal||0)>=BAL.loy.trust?P.seeMaid:0),5,95);
+ const P=BAL.eit.pil;const see=oddsCl(P.see+(S.mat||0)*P.seeMat+(S.maid&&S.maid!==hit&&(S.maid.loyal||0)>=BAL.loy.trust?P.seeMaid:0));
  if(roll(see))EIT_PIL=X;return X}catch(e){console.error("eitPilfer",e);return null}}
 function eitPilBack(X){const e={k:X.k,from:"noivu",d:S.turn};S.inv.push(e);X.g.E.push(e);X.g.n++;X.g.lost=false}
 function eitIsMaid(s){return s===S.maid}
@@ -72,7 +72,7 @@ function eitPilEvent(X){const s=X.s,P=BAL.eit.pil,it=IT[X.k]||{n:X.k};const nm=i
    go:()=>{eitPilBack(X);const i=S.staff.indexOf(s);if(i>=0){S.staff.splice(i,1);let n=null;try{n=mkServ(s.role);S.staff.push(n)}catch(e){}log(`Ngươi trả ${s.name} về Nội vụ phủ${n?`; ${n.name} đến hầu thay`:""}.`)}}});
  O.push({n:"Làm ngơ",fx:{},x:`thành: thiện cảm của ${s.name} với ngươi +${P.ignoreLoyal} (coi như thưởng) · kèm: mất món đồ, ${s.name} dễ ăn bớt nữa`,go:()=>{s.loyal=cl((s.loyal|0)+P.ignoreLoyal,0,100);s.pilOk=1;log(`Ngươi làm ngơ, coi như thưởng ${s.name}.`)}});
  return{ev:1,t:"Kẻ hầu ăn bớt",who,h,opts:O}}
-function eitPilNpc(X){const p=X.p,s=X.s,P=BAL.eit.pil;if(!roll(cl(P.see+(p.tamco|0)/4,5,95)))return;const harsh=netRx(p,/Xảo quyệt|Kiêu ngạo|Thù dai|Kín đáo/);
+function eitPilNpc(X){const p=X.p,s=X.s,P=BAL.eit.pil;if(!roll(oddsCl(P.see+(p.tamco|0)/4)))return;const harsh=netRx(p,/Xảo quyệt|Kiêu ngạo|Thù dai|Kín đáo/);
  const nm=(IT[X.k]||{n:X.k}).n.replace(/ \(hàng kém\)$/,"").toLowerCase();
  if(harsh||roll(P.npcPun)){s.loyal=cl((s.loyal|0)-P.punLoyal,0,100);s.pilDet=S.turn+P.detM;try{newsAdd(p,"stip",`${rkName(p)} ${p.name} bắt được ${s.name} lén giữ ${nm} Nội vụ phủ phát, phạt nặng`)}catch(e){}}
  else{s.loyal=cl((s.loyal|0)+P.forgiveLoyal,0,100)}}
@@ -87,9 +87,9 @@ function eitRegard(p){const G=BAL.eit.reG,B=BAL.stip;let g=G.base+rkOf(p)*G.rk+(
 function eitReWk(p){const g=eitRegard(p);return 1+(roll(BAL.odb.jeitem.rbEitReWk-g)?1:0)+(roll(BAL.odb.jeitem.rbEitReWk-g)?1:0)}
 (function(){if(typeof tyLost!=="function")return;const l0=tyLost;tyLost=function(p,why){const r=l0.apply(this,arguments);try{if(p)p.tyNvp=wk()+eitReWk(p)}catch(e){}return r};window.tyLost=tyLost})();
 function eitReNeed(){try{return !!(S&&!S.dead&&!S.out&&typeof tyOn==="function"&&tyOn(S)&&!(typeof isSrv==="function"&&isSrv()))}catch(e){return false}}
-function eitReOdds(){const R=BAL.eit.re,r=Math.max(0,Math.min(7,rkOf(S)|0));const bribe=cl(R.base+r*R.rk+Math.round((S.sung||0)/R.sungDiv),5,95);
- const m=S.maid&&!S.maid.spyFor?S.maid:null;const alt=eitAlt(R.tip[r],r);const maid=m?cl(bribe-alt.pen+cl(Math.round(((m.loyal||0)-50)/10)+Math.floor((S.mat||0)/2),-R.maidAdj,R.maidAdj),5,95):0;
- const home=S.origin&&BAL.home?(BAL.home[S.origin.k]||0):0;const fam=S.origin?cl((home>0?R.famOk:R.famPoor)-(S.homeCut?R.famCut:0),5,95):0;
+function eitReOdds(){const R=BAL.eit.re,r=Math.max(0,Math.min(7,rkOf(S)|0));const bribe=oddsCl(R.base+r*R.rk+Math.round((S.sung||0)/R.sungDiv));
+ const m=S.maid&&!S.maid.spyFor?S.maid:null;const alt=eitAlt(R.tip[r],r);const maid=m?oddsCl(bribe-alt.pen+cl(Math.round(((m.loyal||0)-50)/10)+Math.floor((S.mat||0)/2),-R.maidAdj,R.maidAdj)):0;
+ const home=S.origin&&BAL.home?(BAL.home[S.origin.k]||0):0;const fam=S.origin?oddsCl((home>0?R.famOk:R.famPoor)-(S.homeCut?R.famCut:0)):0;
  return{bribe,maid,fam,tip:R.tip[r],m,suc:alt.suc}}
 /* the road without silver is priced like the silver at her rank (balance-pass rule: jstory altCost / BAL.bacTuan / BAL.altK when present,
    else the same numbers here): Sức + lower odds, floors R.suc / R.altPen */

@@ -75,7 +75,7 @@ PEND.succ0=function(){const E=S.succ,son=succSon();if(!E||!son)return null;const
 <p>Đứng sau ngươi: ${hs}; binh quyền: ${U.mil?[U.milArmy?"nhà Đại tướng quân":"",U.milGuard?"cấm quân":""].filter(Boolean).join(", ")+" theo ngươi":"chưa có"}; phe trong hậu cung: ${U.allies} người.</p>
 <p>${S.thDead?"Thái hậu đã băng hà.":`Thái hậu (sắp thành Thái hoàng thái hậu) với ngươi: ${S.th||0}.`} ${U.vg?(U.vgAlly?`${succMN(U.vg)} đứng về phía ngươi.`:`${succMN(U.vg)} đang dòm ngó ngôi báu.`):""}</p>`;
  const o=[
-  {n:`Để ${sn} lên ngôi, làm ${E.dm?"Mẫu hậu Hoàng thái hậu":"Hoàng thái hậu"}`,fx:{},x:`Chắc chắn · thành: ${E.dm?"Mẫu hậu Hoàng thái hậu":"Hoàng thái hậu"}, an hưởng ở Từ Ninh cung`,need:[],go:()=>succBegin("a")},
+  {n:`Để ${sn} lên ngôi, làm ${E.dm?"Mẫu hậu Hoàng thái hậu":"Hoàng thái hậu"}`,fx:{},x:`thành: ${E.dm?"Mẫu hậu Hoàng thái hậu":"Hoàng thái hậu"}, an hưởng ở Từ Ninh cung`,need:[],go:()=>succBegin("a")},
   {n:"Buông rèm nhiếp chính",fx:{},x:`${word(pb)} · tốn: ${fmt({bac:-100,suc:-10})} · thành: buông rèm nghe chính đến khi tân đế ${BAL.age.reign} tuổi, Danh +8 · hỏng: đại thần không phục, Danh -10, chỉ làm Hoàng thái hậu · kèm: tân đế lớn lên sinh oán vì ngươi giữ quyền`,need:nb,go:()=>succTry("b")},
   {n:"Tự lên ngôi Nữ đế",fx:{},x:`${word(pc)} · tốn: ${fmt({bac:-300,suc:-20})} · thành: lên ngôi Nữ đế, đổi niên hiệu · hỏng: binh biến bại lộ, bị phế, ban chết · kèm: vương gia, đại thần dễ khởi binh, thích khách rình rập`,need:nc,go:()=>succTry("c")}];
  return{t,o,who:Object.assign(pMe(),{rw:E.dm?"Hoàng hậu · đích mẫu":RANKS[S.rank].n}),cls:"succ"}};
@@ -145,7 +145,7 @@ function succCH(){const E=S.succ,son=succSon(),sn=succSN(son),foe=E.foe!=null?ri
 /* the words of an epilogue choice (no numbers): from its hidden meters; risk (nguy up, mẫu tử down) goes to Kèm */
 const SUCC_W={hoa:["mẹ con thêm gần","mẹ con xa cách"],q:["quyền trong tay thêm chặt","quyền lỏng tay"],tam:["lòng người theo ngươi","mất lòng người"],an:["bớt kẻ dòm ngó","thêm kẻ dòm ngó, nguy hơn"]};
 function succWords(c){const g=[],k=[];const e=c.e||{};for(const m of ["hoa","q","tam","an"]){const v=e[m];if(!v)continue;const up=m==="an"?v<0:v>0;(up?g:k).push(SUCC_W[m][up?0:1])}
- if(c.end)g.push("khép lại vĩ thanh");return "Chắc chắn"+(g.length?" · thành: "+g.join(", "):"")+(k.length?" · kèm: "+k.join(", "):"")+" · hỏng: không mất gì"}
+ if(c.end)g.push("khép lại vĩ thanh");return ""+(g.length?" · thành: "+g.join(", "):"")+(k.length?" · kèm: "+k.join(", "):"")+" · hỏng: không mất gì"}
 PEND.succC=function(){const E=S.succ;if(!E||!E.on||!E.p)return null;const ch=succCH();if(!ch)return null;const son=succSon();
  const o=ch.o.filter(c=>!c.rare||(E.ch===2&&E.r)).map(c=>({n:c.n,fx:Object.assign({},c.c||{}),x:succWords(c),need:c.need||[],rare:c.rare?1:0,go:()=>succPick(Object.assign({},c,{c:null}))}));
  const ttl={a:E.dm?"Mẫu hậu Hoàng thái hậu":"Hoàng thái hậu",b:"Nhiếp chính Thái hậu",c:"Nữ đế"}[E.p];

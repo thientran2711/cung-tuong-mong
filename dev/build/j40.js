@@ -9,14 +9,14 @@ function bq(){return S.bqN||0}
 (function(){const o0=oanAdd;oanAdd=function(x,y,n){if(n>0&&x&&x!==S)x.slightAt=bq();return o0.apply(this,arguments)}})();
 function rashOf(v){const recent=v.slightAt!=null&&bq()-v.slightAt<=3;if(!recent)return 0;if(traitsOf(v).includes("Kiêu ngạo"))return 1;return roll(30)?1:0}
 /* a blunder: the act is done badly (lower odds); read inside odA for that doer only */
-(function(){const o0=odA;odA=function(a,b){const r=o0.apply(this,arguments);return a&&a.__err?cl(r-a.__err,5,95):r}})();
+(function(){const o0=odA;odA=function(a,b){const r=o0.apply(this,arguments);return a&&a.__err?oddsCl(r-a.__err):r}})();
 const BIG=["poison","kpoison","pond","pushp","musk","catswap","kframe","frame","plant"];
 const TELLS={musk:"lén mua xạ hương ở chợ ngoài cung",poison:"vào Thái y viện hỏi mua thạch tín, nói là để trừ chuột",kpoison:"hỏi mua thạch tín, nói là để trừ chuột",pond:"hay dẫn người ra hồ sen dò lối, hỏi giờ các hoàng tự đi chơi",
  pushp:"dò giờ người ta đi qua bậc đá trơn sau mưa",catswap:"cho một bà đỡ lạ ra vào cung mình",kframe:"mua vải vàng và kim bạc, đóng cửa may vá ban đêm",frame:"mua vải vàng và kim bạc, đóng cửa may vá ban đêm",plant:"lảng vảng quanh cung người khác lúc vắng người"};
 /* the choice: the band's menu weighted by traits; Tâm cơ tilts toward what works and away from what failed; low Tâm cơ repeats failed tricks */
 function mindMenu(v,t){const b=bandOf(danger(v,t));if(!b)return[];const allow=BANDS.slice(1,b+1).flatMap(x=>x[2]);const O=[];const tc=witOf(v);v.fails=v.fails||{};
  const add=(k,w)=>{const a=ACT[k];if(!a||!allow.includes(k))return;let ok=false;try{ok=a.ok(v,t)}catch(e){}if(!ok)return;w*=persW(v,k);if(w<=0)return;
-  let o=null;try{o=a.o?a.o(v,t):null}catch(e){}if(o!=null&&tc>=BAL.wit.lo)w*=Math.pow(cl(o,5,95)/50,(tc-BAL.wit.lo)/BAL.wit.mid);/* wit: weigh the odds, more so the cleverer */
+  let o=null;try{o=a.o?a.o(v,t):null}catch(e){}if(o!=null&&tc>=BAL.wit.lo)w*=Math.pow(oddsCl(o)/50,(tc-BAL.wit.lo)/BAL.wit.mid);/* wit: weigh the odds, more so the cleverer */
   const f=v.fails[k]||0;if(f)w*=tc<BAL.wit.mid?1+.6*f:Math.pow(.5,f);/* the foolish repeat, the clever learn */
   O.push([k,w])};
  add("accuse",6);add("vp",3);add("musk",4);add("catswap",2);for(const k of ["kpoison","pond","kframe","ksab"])add(k,2);add("takeaway",2);add("pushp",1);add("trip",3);add("frame",2);add("poison",2);add("rumor",3);add("spy",3);add("bribe",2);add("block",t.nightLog&&t.nightLog.length?2:0);

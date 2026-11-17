@@ -19,9 +19,9 @@ function tc70(p){try{return witOf(p)}catch(e){return p===S?S.tamco||0:p.tamco||0
 function nm70(p){return p===S?"ngươi":p.name}
 function who70(p){try{return p===S?null:pv(p)}catch(e){return null}}
 /* a choice through the shared kit helper (j68) with a local fallback */
-function ch70(n,s){if(typeof evChoice==="function")return evChoice(n,s);s=s||{};const p=s.p==null?null:cl(Math.round(s.p),5,95);
+function ch70(n,s){if(typeof evChoice==="function")return evChoice(n,s);s=s||{};const p=s.p==null?null:oddsCl(Math.round(s.p));
  const wt=(s.wt||[]).join(", "),lt=(s.lt||[]).join(", ");let x=p!=null?`${word(p)} · thành: ${wt||G70("êm chuyện")} · hỏng: ${lt||"không mất gì"}`:wt;if(s.k&&s.k.length)x+=(x?" · ":"")+"kèm: "+s.k.join(", ");
- return{n,fx:s.c||{},x,go:()=>{const ok=p==null||Math.random()*100<p;let t="";try{t=ok?(s.ok?s.ok():""):(s.no?s.no():"")}catch(e){}log(ok?(t||n+"."):`${R70("Không thành:")} ${t||n+"."}`)}}}
+ return{n,fx:s.c||{},x,go:()=>{const ok=p==null||roll(oddsCl(p));let t="";try{t=ok?(s.ok?s.ok():""):(s.no?s.no():"")}catch(e){}log(ok?(t||n+"."):`${R70("Không thành:")} ${t||n+"."}`)}}}
 
 /* ---------- opportunities: timing chosen by what the week offers ---------- */
 const OPP70={
@@ -115,7 +115,7 @@ function pr70(p){const M=M70[p.m];return M?M.R.find(r=>r.id===p.r)||M.R[0]:null}
 function alive70(x){return !!x&&(x===S?!S.dead:x.alive&&!x.out)}
 function tKid70(p){const t=pt70(p);try{return t?tKid(t)||kidsOf(t)[0]:null}catch(e){return null}}
 function okAct70(a,t,k){if(k==="joint")return !!(typeof facOf==="function"&&facOf(a));if(k==="pushp"||k==="trip")return true;const A=ACT[k];if(!A)return false;try{return !!A.ok(a,t)}catch(e){return false}}
-function oddsOf70(a,t,k,bonus){if(k==="joint"||!ACT[k]||!ACT[k].o)return null;let o=null;try{const e0=a.__err;a.__err=-(bonus||0);o=ACT[k].o(a,t);a.__err=e0}catch(e){return null}return o==null?null:cl(Math.round(o),5,95)}
+function oddsOf70(a,t,k,bonus){if(k==="joint"||!ACT[k]||!ACT[k].o)return null;let o=null;try{const e0=a.__err;a.__err=-(bonus||0);o=ACT[k].o(a,t);a.__err=e0}catch(e){return null}return o==null?null:oddsCl(Math.round(o))}
 function tellOf70(p,i){const r=pr70(p);if(!r)return"có động tĩnh lạ";let s=r.tl[Math.min(i,r.tl.length-1)];const t=pt70(p);return s.replace(/nạn nhân/g,t?(t===S?"ngươi":t.name):"người khác")}
 function where70(p){const r=pr70(p);return r&&r.pl?placeName(r.pl):""}
 function cnt70(f){const z=j70();return z?z.pl.filter(p=>!p.end&&f(p)).length:0}
@@ -282,7 +282,7 @@ function tick70(){const z=j70();if(!z)return;z.sh.push(S.sung||0);if(z.sh.length
   try{if(j70On()&&k==="spy"&&v){const p=j70().pl.find(p=>!p.end&&p.a===v.id&&!p.kn);if(p&&roll(50)){p.kn=1;p.dig=1;p.kt.push(tellOf70(p,p.pg));p.pend=p.t==="me"?"seen":"npc";noteAdd(v.id,`dò la ra: nàng đang bày mưu ${pm70(p).n.toLowerCase()} nhắm vào ${nm70(pt70(p))}`);log(`Dò la ra: ${v.name} đang bày mưu ${pm70(p).n.toLowerCase()} nhắm vào ${nm70(pt70(p))}.`)}}}catch(e){console.error(e)}
   return r}})();
 function start70(v,k){const d=mkP("j70start",{v:v.id,k});return{t:"Bày mưu",h:d.t,opts:d.o,who:d.who,pid:d.pid,pp:d.pp,kit:{kind:"choice",title:"Bày mưu",subject:v,facts:pfacts70(d.t)}}}
-PEND.j70start=pp=>{const v=RV(pp.v),A=ACT[pp.k];if(!v||!A||!S)return null;const k=pp.k;const o0=A.o?(()=>{try{return cl(A.o(S,v),5,95)}catch(e){return null}})():null;const O=[];
+PEND.j70start=pp=>{const v=RV(pp.v),A=ACT[pp.k];if(!v||!A||!S)return null;const k=pp.k;const o0=A.o?(()=>{try{return oddsCl(A.o(S,v))}catch(e){return null}})():null;const O=[];
  const now=ch70(`Ra tay ngay: ${A.n.toLowerCase()}`,{p:o0,wt:[G70(A.x&&!/^cần|^lộ/.test(A.x)?A.x:A.n)],lt:[R70("dễ bị lộ, nàng nắm chứng cứ")],k:A.c&&Object.keys(A.c).length?[R70(fmt(A.c))]:[]});now.go=()=>{window.__j70inst=1;try{doAct(rivals.indexOf(v),k)}finally{window.__j70inst=0}};if(o0==null)now.x=`thành: ${G70(A.x||A.n)} · kèm: ${R70("dễ bị lộ")}${A.c&&Object.keys(A.c).length?", "+R70(fmt(A.c)):""}`;O.push(now);
  const busyOwn=!canNew70("me",v.id);
  for(const m of OWN70[k]){const M=M70[m];for(const r of M.R){if(O.length>=5)break;if(r.acc==="tsv"&&!(v.staff||[]).length)continue;const o1=oddsOf70(S,v,M.k,J70CFG.prep+6+(r.acc?8:0));
@@ -323,7 +323,7 @@ function title70(p){if(!p||p===S)return"ngươi";try{const t=(typeof kitTitle===
 (function(){const o0=oSee;oSee=function(t,p){let r=o0.apply(this,arguments);try{if((t||S)===S&&S&&!window.__j70off){if(S.maid&&S.maid.loyal>=BAL.loy.trust)r-=10;
   for(const o of ords70()){if(o.k==="canh")r+=canhB70(o);if(o.k==="thudoc"&&p&&!traitor70(sv70(o.sid)))r+=20;if(o.k==="theodoi"&&window.__j70A&&o.tgt===window.__j70A.id&&!traitor70(sv70(o.sid)))r+=12}
   r+=(window.__j70self||0);
-  r=cl(Math.round(r),5,95)}}catch(e){}return r}})();
+  r=oddsCl(Math.round(r))}}catch(e){}return r}})();
 (function(){const c0=caught;caught=function(a){const p0=window.__j70A;window.__j70A=a;try{return c0.apply(this,arguments)}finally{window.__j70A=p0}}})();
 /* her ordered servants are busy: she cannot send them on her own errands */
 (function(){const b0=bestSent;bestSent=function(p){if(p===S&&S&&!window.__j70off){const busy=ords70().map(o=>o.sid);const L=(S.staff||[]).filter(s=>!s.spyFor&&!busy.includes(s.sid));if(!L.length)return null;return L.slice().sort((a,b)=>(b.loyal+nq(b,"sharp",BAL.net.k.spySharp))-(a.loyal+nq(a,"sharp",BAL.net.k.spySharp)))[0]}return b0.apply(this,arguments)}})();
@@ -426,7 +426,7 @@ function thrOpts70(v){const o=[];const mat=S.mat||0;
  o.push(Object.assign(ch70("Ra lệnh phòng bị",{wt:[G70("giữ được mình: chọn kẻ hầu canh cung, thử độc, theo dõi nàng")],k:[R70("kẻ hầu bận việc, có lệnh tốn bạc mỗi tháng")]}),{go:()=>{Q.unshift(def70m({s:1}))}}));
  o.push(Object.assign(ch70(`Dò la ${v.name}`,{c:{},p:oSpy(S),/* previews: spyFind (runAct spy) */wt:[G70(`chứng cứ về ${v.name} ${balSg(BAL.eff.jtruth.evN)}`)],lt:[R70(`${v.name} mất thiện cảm`)],k:[R70("Bạc -"+actBac("spy",S,v))]}),{go:()=>{if(S.bac<actBac("spy",S,v)){log("Không đủ bạc để dò la.");return}log(runAct(S,v,"spy")||"Ngươi cho người dò la.")}}));
  if(accOK(S,v)){const c=ch70(`Tố giác ${title70(v)}`,{p:oAccuse(S,v),wt:[G70("nàng bị xử theo chứng cứ")],lt:[R70("tố hụt: mất chứng cứ, Danh giảm")]});c.go=()=>log(runAct(S,v,"accuse")||"Ngươi tố giác.");o.push(c)}
- if(!S.thDead)o.push(ch70("Xin Thái hậu che chở",{c:{bac:-20},p:cl(30+(S.th||0)/2,5,95),wt:[G70("3 tuần tới kẻ hại ngươi khó ra tay gấp đôi")],lt:[R70(`Thái hậu với ngươi ${balSg(BAL.eff.j70.thShield)}`)],ok:()=>{S.guardWarn=Math.max(S.guardWarn||0,3);return "Thái hậu sai thị vệ để mắt đến cung ngươi."},no:()=>{apply({th:BAL.eff.j70.thShield});return "Thái hậu không muốn dính vào chuyện hậu cung."}}));
+ if(!S.thDead)o.push(ch70("Xin Thái hậu che chở",{c:{bac:-20},p:oddsCl(30+(S.th||0)/2),wt:[G70("3 tuần tới kẻ hại ngươi khó ra tay gấp đôi")],lt:[R70(`Thái hậu với ngươi ${balSg(BAL.eff.j70.thShield)}`)],ok:()=>{S.guardWarn=Math.max(S.guardWarn||0,3);return "Thái hậu sai thị vệ để mắt đến cung ngươi."},no:()=>{apply({th:BAL.eff.j70.thShield});return "Thái hậu không muốn dính vào chuyện hậu cung."}}));
  const al=liveRivals(true).filter(x=>x!==v&&aff(x,S)>=40&&!x.confined).sort((a,b)=>aff(b,S)-aff(a,S))[0];
  if(al)o.push(ch70(`Nhờ ${title70(al)} để ý giúp`,{wt:[G70(`6 tuần: người của ${al.name} báo khi thấy mưu nhắm vào ngươi`)],k:[R70(`${al.name} thiện cảm ${balSg(BAL.eff.j70.ok_3)} (ngươi mắc nợ ân)`)],ok:()=>{j70().allyW={id:al.id,until:wk()+6};relAdd(S,al,BAL.eff.j70.ok_3);return `${al.name} hứa để mắt giúp ngươi.`}}));
  o.push(ch70(`Tránh mặt ${v.name}`,{c:{danh:-1},wt:[G70("6 tuần không ở chung chỗ: mưu tay đôi của nàng khó thành")],k:[R70("người ta bảo ngươi nhút nhát")],ok:()=>{const z=j70();z.avoid=z.avoid||{};z.avoid[v.id]=wk()+6;return `Ngươi tránh những chỗ ${v.name} hay lui tới.`}}));
@@ -440,7 +440,7 @@ PEND.j70thr=pp=>{const v=RV(pp.v);if(!v||!S)return null;const b=bandOf(danger(v,
 /* warnings pushed by older modules (head maid's warning, the old tell) get the same answers */
 function thrify70(){for(let i=0;i<Q.length;i++){const m=Q[i];if(m.opts||m.pid||!/^(Lời cảnh báo|Tai mắt báo tin)$/.test(m.t||""))continue;
   let v=null;if(m.who&&m.who.w&&m.who.w[0]==="r")v=RV(m.who.w[1]);if(!v)v=liveRivals(true).find(x=>String(m.h||"").includes(x.name));if(!v)continue;
-  const d=mkP("j70thr",{v:v.id,h:String(m.h||"").replace(/<p>[^<]*Chắc chắn[^<]*<\/p>/,""),m:m.who&&m.who.w&&m.who.w[0]==="m"?1:0});if(!d)continue;Q[i]={t:m.t,h:d.t,opts:d.o,who:d.who||m.who,pid:d.pid,pp:d.pp};if(d.kit)Q[i].kit=d.kit}
+  const d=mkP("j70thr",{v:v.id,h:String(m.h||""),/* (the old strip of a "Chắc chắn" <p> never matched: kitParse output starts with a tag) */m:m.who&&m.who.w&&m.who.w[0]==="m"?1:0});if(!d)continue;Q[i]={t:m.t,h:d.t,opts:d.o,who:d.who||m.who,pid:d.pid,pp:d.pp};if(d.kit)Q[i].kit=d.kit}
  /* review kit-fig2 r8: one warning per consort in the queue — two "Lời cảnh báo" about the same consort (the maid's tell queued twice, or
     by two older modules in one turn) became two identical j70thr dialogs; a later one is dropped (Q[0], the dialog on screen, is kept) */
  const seen=new Set();for(let i=0;i<Q.length;i++){const m=Q[i];if(!m||m.pid!=="j70thr"||!m.pp)continue;const key=String(m.pp.v);if(seen.has(key)&&i>0){Q.splice(i,1);i--;continue}seen.add(key)}}
@@ -454,7 +454,7 @@ function thrify70(){for(let i=0;i<Q.length;i++){const m=Q[i];if(m.opts||m.pid||!
   for(const s of S.staff||[])h=h.replace(`<button data-sv="doi" data-sid="${s.sid}">`,`<button data-j70o="${s.sid}" ${S.dead?"disabled":""}>Phòng bị<small>${lab(s.sid)}</small></button><button data-sv="doi" data-sid="${s.sid}">`);
   if(S.maid)h=h.replace(`cung nữ thân tín · lòng ${S.maid.loyal}</span></div></div>`,`cung nữ thân tín · lòng ${S.maid.loyal}${ordOf70("maid")?` · Lệnh: ${ORD70[ordOf70("maid").k].n.toLowerCase()}`:""}</span></div><div class="rbtn"><button data-j70o="maid" ${S.dead?"disabled":""}>Phòng bị<small>${lab("maid")}</small></button></div></div>`)}catch(e){}return h}})();
 /* the Kẻ hầu tab is built from kit cards (pcard/pbtn): add a "Phòng bị" kit button to each of her servants and to the head maid, and a line naming the current order */
-function ordSub70(sid){const o=ordOf70(sid);return o?`đang giữ việc: ${ORD70[o.k].n.toLowerCase()}${o.tgt!=null&&RV(o.tgt)?" "+RV(o.tgt).name:""}`:"Chắc chắn · thành: chọn canh cung, thử độc, theo dõi, giữ sổ sách"}
+function ordSub70(sid){const o=ordOf70(sid);return o?`đang giữ việc: ${ORD70[o.k].n.toLowerCase()}${o.tgt!=null&&RV(o.tgt)?" "+RV(o.tgt).name:""}`:"thành: chọn canh cung, thử độc, theo dõi, giữ sổ sách"}
 (function(){if(typeof pcard!=="function")return;const p0=pcard;pcard=function(o){try{if(S&&!window.__j70off&&o&&typeof tab!=="undefined"&&tab==="staff"){let sid=null;if(o.rank==="Cung nữ thân tín"&&S.maid&&o.name===S.maid.name)sid="maid";else{const sv=(S.staff||[]).find(x=>x.name===o.name);if(sv&&(o.rank==="Cung nữ"||o.rank==="Thái giám"))sid=sv.sid}
    if(sid!=null){o=Object.assign({},o);const od=ordOf70(sid);if(od)o.lines=(o.lines||[]).concat([`Lệnh phòng bị: <b>${ORD70[od.k].n.toLowerCase()}${od.tgt!=null&&RV(od.tgt)?" "+RV(od.tgt).name:""}</b>`]);
     o.groups=(o.groups||[]).concat([["Phòng bị",[pbtn(`data-j70o="${sid}"`,od?"Đổi việc phòng bị":"Giao việc phòng bị",ordSub70(sid),S.dead?"đã hết kiếp":"")]]])}}}catch(e){}return p0.call(this,o)}})();
@@ -504,7 +504,7 @@ try{ORD70.thudoc.acts.push("huydung");ORD70.canh.acts.push("huydung");ORD70.thud
 (function(){const x0=exec70;exec70=function(p,opp){const pw=window.__j70hd;if(p&&p.m==="huydung")window.__j70hd=p.r;try{return x0.apply(this,arguments)}finally{window.__j70hd=pw}}})();
 /* her button on a rival card (same markup as the other scheme buttons) */
 (function(){const r0=rvButtons;rvButtons=function(v,i){let h=r0.apply(this,arguments);try{if(!S||!v||h.indexOf('data-a="huydung"')>=0||h.indexOf('data-a="poison"')<0)return h;const a=ACT.huydung,dis=!can(2)||!v.alive||v.out||S.dead,ok=a.ok(S,v),o=a.o(S,v);
-  const btn=`<button data-r="${i}" data-a="huydung" ${dis||!ok?"disabled":""}>${a.n}<small>${[ok?word(cl(o,5,95)):"",fmt(a.c),v.scar?"nàng đang có sẹo":S.bac<actBac("huydung",S,v)?"cần "+actBac("huydung",S,v)+" bạc":a.x].filter(Boolean).join(" · ")}</small></button>`;
+  const btn=`<button data-r="${i}" data-a="huydung" ${dis||!ok?"disabled":""}>${a.n}<small>${[ok?word(oddsCl(o)):"",fmt(a.c),v.scar?"nàng đang có sẹo":S.bac<actBac("huydung",S,v)?"cần "+actBac("huydung",S,v)+" bạc":a.x].filter(Boolean).join(" · ")}</small></button>`;
   h=h.replace(/(<button[^>]*data-a="poison")/,btn+"$1")}catch(e){}return h}})();
 /* recovery, the same weekly rule for everyone */
 function heal70(p){const s=p.scar;if(!s)return;let st=1;const me=p===S;if(me?S.doctor:(p.doc||roll(20)))st++;if(me&&(S.arts&&S.arts.y>=2))st++;if(s.tr>0){st++;s.tr--}s.pg+=st;
@@ -516,7 +516,7 @@ function heal70(p){const s=p.scar;if(!s)return;let st=1;const me=p===S;if(me?S.d
 PEND.j70scar=pp=>{const s=S&&S.scar;if(!s)return null;const sc=scarOf(S);const o=[];
  o.push(ch70("Mời thái y chữa trị",{c:{bac:-30,suc:BAL.eff.j70.sucC},wt:[G70("4 tuần tới mỗi tuần lành thêm một bước")],k:[R70(`thuốc đắng, Sức ${balSg(BAL.eff.j70.sucC)}`)],ok:()=>{s.tr=4;return "Thái y kê đơn, mỗi ngày bôi thuốc."}}));
  if(!s.cure&&s.sev>=2)o.push(ch70("Mua Ngọc dung cao",{c:{bac:-120},wt:[G70("lành không để sẹo")],k:[R70("giá rất đắt")],ok:()=>{s.cure=1;return "Ngươi có được hộp Ngọc dung cao, vết thương sẽ lành không sẹo."}}));
- if(!s.cure&&s.sev>=2&&!S.thDead)o.push(ch70("Xin Thái hậu ban Tuyết liên",{p:cl(20+(S.th||0)/2,5,95),wt:[G70("lành không để sẹo")],lt:[R70(`Thái hậu với ngươi ${balSg(BAL.eff.j70.thLotus)}`)],ok:()=>{s.cure=1;return "Thái hậu thương tình, ban cho một đóa Tuyết liên."},no:()=>{apply({th:BAL.eff.j70.thLotus});return "Thái hậu bảo Tuyết liên để dành cho việc lớn."}}));
+ if(!s.cure&&s.sev>=2&&!S.thDead)o.push(ch70("Xin Thái hậu ban Tuyết liên",{p:oddsCl(20+(S.th||0)/2),wt:[G70("lành không để sẹo")],lt:[R70(`Thái hậu với ngươi ${balSg(BAL.eff.j70.thLotus)}`)],ok:()=>{s.cure=1;return "Thái hậu thương tình, ban cho một đóa Tuyết liên."},no:()=>{apply({th:BAL.eff.j70.thLotus});return "Thái hậu bảo Tuyết liên để dành cho việc lớn."}}));
  o.push(ch70(s.veil?"Bỏ mạng che mặt":"Che mạng khi ra ngoài",{wt:[G70(s.veil?"không còn vướng víu":`người ta ít thấy vết thương, phần Sắc mất còn ${Math.round(s.d*2/3)}`)],k:[R70(s.veil?`Sắc mất trở lại ${s.d}`:"Hoàng thượng thấy lạ, ít hứng thú hơn lúc không che")],ok:()=>{s.veil=s.veil?0:1;return s.veil?"Ngươi đeo mạng che mặt.":"Ngươi bỏ mạng che mặt."}}));
  o.push(ch70("Để tự lành",{wt:[G70("không tốn gì")],k:[R70(`còn ${sc.weeksLeft} tuần${SCAR70[s.sev].perm&&!s.cure?`, sẽ để lại sẹo (Sắc -${SCAR70[s.sev].perm})`:""}`)],ok:()=>"Ngươi để vết thương tự lành."}));
  return{t:`<p>Mặt ngươi bị thương (${sc.name}): Sắc đang mất ${sc.sacLost}; còn ${sc.weeksLeft} tuần nữa mới lành.${SCAR70[s.sev].perm&&!s.cure?` Không có thuốc quý thì sẽ để lại sẹo (Sắc -${SCAR70[s.sev].perm}).`:""}</p>`,o}};

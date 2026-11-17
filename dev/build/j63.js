@@ -49,6 +49,8 @@ function kaModelStr(str){str=String(str||"").replace(/(nàng |hắn )?thù -(\d+
    const open=(ml[0].match(/<(span|b)[^>]*>/g)||[]).length;if(open&&/^\s*</.test(ml[0])){const tg=ml[0].match(/<(span|b)( class="(g|r)")?[^>]*>/);s=(tg?tg[0]:"")+s}}
   else{const m2=plain.match(/^tốn (\d+ khắc)$/);if(m2){M.items.push({h:m2[1],old:"n",l:"tốn",cont:false});continue}}
   for(let v of [].concat(...kSplitTop(s,/; /y).map(q=>/(^|\s)nàng(\s|$)/.test(kaPlain(q))?[q]:kSplitTop(q,/, /y)))){const vp=kaPlain(v);if(!vp)continue;const om=v.match(/^\s*<(?:span|b) class="(g|r)"/);M.items.push({h:/^\s*<(span|b) class="[gr]">[^<]*<\/\1>\s*$/.test(v)?vp:v.trim(),old:om?om[1]:"n",l:lab,cont})}}
+ /* ODDS CAP: a Nắm chắc act that names no failure (a formerly-sure act, kitCapLine / capW hints) fails softly — say so (one form, kitSoftW) */
+ if(M.odds&&M.odds===capW()&&!M.items.some(i=>i.l==="hỏng"))M.items.push({h:kitSoftW(M.items.some(i=>i.l==="tốn"&&/Bạc\s*[-−]/.test(kaPlain(i.h)))?{bac:-1}:null),old:"r",l:"hỏng",cont:false});
  return M}
 const KA_RISK=/^(có thể bị|bị người của nàng phát giác|bị lộ|bị khám|Đức \d+ → \d+|dễ lộ|có khi bị)/i;
 /* place every value in its row by meaning */
@@ -267,7 +269,7 @@ resultShow=function(title,before,okHint){if(!S||!before||S.dead)return;
 `;document.head.appendChild(st)})();
 /* "có thể bị người của nàng phát giác" -> the real chance word for this target (same formula as caught(), j8), never % */
 const KA_PS=["poison","musk","kpoison"];
-function kaCaughtTxt(v,k){/* previews: caught */try{const n=cl(oSee(v,KA_PS.includes(k))-4*(facN(S)-1),5,95);return `bị người của nàng phát giác: ${chanceW(n)} — nàng nắm ${balAb(BAL.eff.j8.evCaught)} chứng cứ`}catch(e){return null}}
+function kaCaughtTxt(v,k){/* previews: caught */try{const n=oddsCl(oSee(v,KA_PS.includes(k))-4*(facN(S)-1));return `bị người của nàng phát giác: ${chanceW(n)} — nàng nắm ${balAb(BAL.eff.j8.evCaught)} chứng cứ`}catch(e){return null}}
 (function(){if(typeof rvGroups!=="function")return;const g0=rvGroups;rvGroups=function(v){const G=g0.apply(this,arguments);try{for(const g of G)g[1]=g[1].map(h=>{const m=String(h).match(/data-a="(\w+)"/);const CW=caughtW();if(!m||!String(h).includes(CW))return h;const t=kaCaughtTxt(v,m[1]);return t?String(h).split(CW).join(t):h})}catch(e){}return G}})();
 /* ---------- "Cần" row: every condition an act needs, with its current status, from the real checks (can/whyTime/cardWhy/ok/LACK/evG) ---------- */
 function kaNeedAttr(L){return L&&L.length?` data-kneed="${encodeURIComponent(JSON.stringify(L))}"`:""}

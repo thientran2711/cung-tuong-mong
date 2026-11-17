@@ -100,7 +100,7 @@ const ns0=nightScene;nightScene=function(){if(cyTray(S)){log(`${RSN}.`);if(S.ton
     log(t);try{Q.push({t:"Kính sự phòng",who:typeof pEunCourt==="function"?pEunCourt("ksp"):null,h:`<p>${t}</p>`})}catch(e){}return}
    log("Ma ma Kính sự phòng soát người qua loa, không nhận ra điều gì.")}}}catch(e){console.error(e)}
  return ns0.apply(this,arguments)};
-function cyLieO(){const R=B().rep||{},loyal=(S.maid&&S.maid.loyal)||50;return cl_(Math.round(R.lieO+loyal/R.lieLoyal+(S.tamco||0)/R.lieTc),5,95)}
+function cyLieO(){const R=B().rep||{},loyal=(S.maid&&S.maid.loyal)||50;return oddsCl(Math.round(R.lieO+loyal/R.lieLoyal+(S.tamco||0)/R.lieTc))}
 function lockCyc(id,re){const p0=PEND[id];if(!p0)return;PEND[id]=function(){const d=p0.apply(this,arguments);try{if(d&&d.o){const o=d.o.find(o=>re.test(o.n||""));if(o){const lk0=o.lk;o.lk=()=>cyTray(S)?RSN:(typeof lk0==="function"?lk0():"")}}}catch(e){}return d}}
 lockCyc("ksp",/^Tắm gội chờ giá/);lockCyc("empnight",/^Thắp đèn hầu rượu/);
 const fl0=flip;flip=function(){const r=fl0.apply(this,arguments);try{if(!S||S.dead)return r;
@@ -134,7 +134,7 @@ function cyAsk(){if(!S||S.dead||S.out||(typeof isSrv==="function"&&isSrv())||!S.
  if(Array.isArray(Q)&&Q.some(m=>m&&m.t==="Nhập cung")){c.rk=wk();c.rv="dung";return false}
  c.df=wk();pushDil(mkP("cyrep"),"Kỳ nguyệt sự");return true}
 PEND.cyrep=()=>{if(!S||!S.maid||!cycOn(S))return null;const R=B().rep,c=cyb(),loyal=S.maid.loyal||50,po=cyLieO(),
-  lo=cl_(od(B().backO+Math.round((S.tamco||0)/B().backTc)+Math.round(loyal/5)),5,95),xg=kSay({srv:"f"},S,"{goi}")/* one address core (jvoice) */;
+  lo=oddsCl(od(B().backO+Math.round((S.tamco||0)/B().backTc)+Math.round(loyal/5))),xg=kSay({srv:"f"},S,"{goi}")/* one address core (jvoice) */;
  const done=k=>{c.rk=wk();c.rv=k;try{cyNoFriend(flip)}catch(e){console.error(e)}try{render()}catch(e){}};
  const mk=(n,s,k,pre)=>{const o=c6(n,s);const g=o.go;o.go=()=>{try{if(pre)pre()}catch(e){console.error(e)}g();done(k)};return o};
  const risk=`được lật thẻ mà bị ma ma soát ra (${chanceW(100-po)}): mất đêm ấy, Sủng -${R.lieSung} Danh -${R.lieDanh}`,evi="kẻ thù tra sổ có thể nắm chứng cứ";
@@ -204,7 +204,7 @@ function cyBook(how){const c=cyb();c.read=cyCur();const F=[];const L=consorts().
 window.cyBook=cyBook;
 /* Kính sự phòng (Tổng quản): two roads to the book */
 const to0=talkOpts;talkOpts=function(p){const A=to0.apply(this,arguments);try{if(!p||p.kind!=="ksp"||!S||(typeof isSrv==="function"&&isSrv()))return A;
-  const r=Math.min(7,S.rank||0),cost=B().read[r],af=(S.court&&S.court.ksp&&S.court.ksp.af.me)||0;const po=cl_(Math.round(B().peekO+af*B().peekAf+(S.tamco||0)/B().peekTc),5,95);
+  const r=Math.min(7,S.rank||0),cost=B().read[r],af=(S.court&&S.court.ksp&&S.court.ksp.af.me)||0;const po=oddsCl(Math.round(B().peekO+af*B().peekAf+(S.tamco||0)/B().peekTc));
   const lk=A[0]&&A[0].k61?{lock:true,t:"Chưa biết người này là ai"}:{};/* j61 stranger gate: greet first, like every other talk card */
   A.push(Object.assign({n:"Xem sổ nguyệt sự",c:{bac:-cost},o:100,x:"thấy từng người báo kỳ ngày nào, ai tháng này không báo",run:()=>cyBook("đút lót xem sổ")},lk));
   A.push(Object.assign({n:"Hầu chuyện, xem lén sổ nguyệt sự",c:{suc:-B().peekSuc},o:po,act:1,x:`thấy từng người báo kỳ ngày nào · hỏng: bị Tổng quản bắt gặp (thiện cảm -${B().peekAfLoss}), Danh -${B().peekDanh}`,
