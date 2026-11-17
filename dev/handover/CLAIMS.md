@@ -864,3 +864,4 @@
 | REVIEW one-core-jkc-2 da026fc87 (opus BIG; brief briefs/review-one-core-jkc-2.md) | review/one-core-jkc-2-r1 | B | session_01N1tNP2MBRBHV2KnMWfTMRx | RUNNING | 17/11 16:55Z |
 | REVIEW one-core-jkc-2 da026fc87 (opus BIG; brief briefs/review-one-core-jkc-2.md) | review/one-core-jkc-2-r1 | B | (opening) | RUNNING | 17/11 16:55Z |
 | DAY-KHẮC AUDIT: every feasibility check uses total khắc left in the DAY, never the buổi (OD 16:45Z + L852/L1473) — scan + fix whole family | review/day-khac-audit | D | (D opens) | ORDERED | 17/11 16:45Z |
+| one-core-jkc LIVE 086f1d607 (main e8b1906f → 086f1d60; rollback e8b1906f) | review/one-core-jkc-r1 | B | session_01N1tNP2T3QBr5EHz4r5RAmd | LIVE | 17/11 16:58Z |
