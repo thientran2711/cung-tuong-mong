@@ -707,4 +707,4 @@
 | REVIEW greet-meet-r1 (opus BIG; brief briefs/review-greet-meet-r1.md) | review/greet-meet-r1 | C ROOT-5 | session_011xDdVR96B2JxbaT3UMSFAk | PASS 65dcf52f → main 11:36Z (archived) | 17/11 11:02Z |
 | one-core-dup3 r1 FAIL b9f8d5cf (text family: ~76 typed evidence counts + one-core-text gate gap) → fix worker (opus; brief briefs/one-core-dup3-fix.md; base review/one-core-dup3-r1 607887ae) | review/one-core-dup3 | B | session_01N1tNP5gDUwBGqmKgc5zqMJ | RUNNING | 17/11 11:00Z |
 | VOICE BY TÍNH TÌNH (sonnet; s30 order 06:06Z; brief briefs/voice-trait.md) | review/voice-trait | C ROOT-5 | session_011xDdVRM5yu7W5UoCp4jMmC | RUNNING | 17/11 11:38Z |
-| coop-thin-b SẴN SÀNG KIỂM 4609afa6 (r2 seam fix by #4) → re-review r3 (fresh opus BIG; brief briefs/review-coop-thin-b-r3.md) | review/coop-thin-b-r3 | B | (opening) | RUNNING | 17/11 11:40Z |
+| coop-thin-b SẴN SÀNG KIỂM 4609afa6 (r2 seam fix by #4) → re-review r3 (fresh opus BIG; brief briefs/review-coop-thin-b-r3.md) | review/coop-thin-b-r3 | B | session_01N1tNP5hpVGVh45GCMzd9Ah | RUNNING | 17/11 11:40Z |
