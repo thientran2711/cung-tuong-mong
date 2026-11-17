@@ -836,3 +836,4 @@
 | AG-ALL-2 remaining NPC acts (opus; brief briefs/ag-all-2.md) | review/ag-all-2 | C-AG | session_01UV1Szhs6A6KH6MfsDpei7t | RUNNING | 17/11 14:28Z |
 | staff-root fix #1 (returned maid cut by capTrim; opus; brief briefs/staff-root-fix-1.md) | review/staff-root-fix-1 | B | session_01N1tNP4tMiPQEh5DXeZP29x | RUNNING | 17/11 14:40Z |
 >>>>>>> 61f334cd (review kit-ico-rank-r2 report: PASS aaa1bec1)
+| loading-words: every loading/wait line literary cổ trang (OD ~15:25Z (7)), whole family | review/loading-words | MAIN s33 | (opening) | RUNNING | 17/11 15:33Z |
