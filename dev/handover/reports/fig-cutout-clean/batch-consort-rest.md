@@ -126,3 +126,4 @@ Workflow: see above; sub-agent driver prompt: 8 uploads of old figs -> generates
 Credits this session ~ 76+? : 10 hd retrofit 0; ~137 generations (~8900 cr) incl. rank standard 18 (1170).
 ## HANDOVER (W3d, START_CTX ~3% (est., get_session reads 0), ended ~15%) 17/11 ~05:10Z session_011xDdVNgD6LSAWCKxGvMzYP
 DONE: rank standard v4 (c01 a18, t1-t10, flowing hanfu + phi bach every tier) pushed: rank-standard/rank-standard-consort-v4-2row.jpg, consort-v4-zoom-row1.jpg (t3,t5), consort-v4-zoom-row2.jpg (t8,t10), consort-markers-v4.md (gen ids + marker + phi bach per tier). 10 gens, 650 cr, alpha 0..254 verified, nothing uploaded. No options sheet. Masters not on disk (scratchpad); refetch via creations_get ids. All other generation remains PAUSED; next = owner verdict on v4, then lead GO.
+## W3d v5 (17/11): rank-standard/consort-markers-v5.md + rank-standard-consort-v5-2row.jpg pushed (t2-t7,t9 new cuts, ids in markers). Still paused.
