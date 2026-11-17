@@ -46,6 +46,12 @@ const CODE_PAT={
  sw:new RegExp('\\bS\\.'+ST+'\\s*[+-]=\\s*\\d+(?:\\.\\d+)?\\b','g'),
  sc:/(?<![\w$.])sc\s*:\s*[+-]?\d+(?:\.\d+)?\b/g,
  k:/(?<![\w$.])k\s*:\s*[+-]?[01]\b(?=\s*,\s*(?:tag|t|n|w)\s*:)/g,
+ /* review/one-core-dup3-land (main's batch-d8 jkc2 moved into BAL.kc2 / BAL.eff.jkc2; the older modules are frozen here and may only shrink):
+    odb = a typed odds base od(N…) / roll(N±…) (roll(N) alone is the roll kind); hst = a typed home-stat number (Gia thanh / Áp lực / Hồi môn
+    kgt / kap / khm / kgtu: a card's c / w / l {kap:-4}, S.kap>=60, S.kgt=40+…); oan = a typed oán write x.oan+=N */
+ odb:/\bod\(\s*\d+(?:\.\d+)?\b|\broll\(\s*\d+(?:\.\d+)?\s*[+-]/g,
+ hst:/(?<=(?<![\w$.])[cwl]\s*:\s*\{[^{}]*)(?<![\w$.])(?:kap|kgt|khm|kgtu)\s*:\s*[+-]?\d+(?:\.\d+)?\b|\bS\.(?:kap|kgt|khm|kgtu)\s*(?:[+-]?=(?!=)|>=?|<=?|===?)\s*\d+(?:\.\d+)?\b/g,
+ oan:/\.oan\s*[+-]=\s*\d+(?:\.\d+)?\b/g,
 };
 /* the same, read on the code with every string / template / regex blanked (an effect call spans its string arguments):
    amt    = the typed last amount (or `cond?N:M`) of a relation / family / power effect call: rdOan(A,"v",5), relAdd(p,S,-8), e67dad(10) … (a single-argument call e67dad(4) counts too: review/one-core-dup2, found by one-core-roads)
@@ -102,7 +108,7 @@ const joinCode=T=>T.map(t=>t.t==='code'?t.s:t.t==='str'?'""':t.t==='tpl'?'``':t.
 function balEnd(src,i){let d=0,inS=null;for(let j=i;j<src.length;j++){const c=src[j];if(inS){if(c==='\\'){j++;continue}if(c===inS)inS=null;continue}
   if(src.startsWith('/*',j)){j=src.indexOf('*/',j)+1;continue}if(src.startsWith('//',j)&&!/[\w)\]]\s*$/.test(src.slice(Math.max(0,j-3),j))){j=src.indexOf('\n',j);continue}
   if(c==='"'||c==="'"||c==='`'){inS=c;continue}if(c==='{'||c==='['||c==='(')d++;else if(c==='}'||c===']'||c===')'){d--;if(d===0)return j}}return src.length}
-function maskBal(src){const re=/Object\.assign\(BAL,\{|const BAL=\{|(?<![\w$.])BAL(?:\.[\w$]+)+\s*=(?!=)\s*[{[]/g;let m,out=src;while((m=re.exec(src))){const a=m.index+m[0].length-1,b=balEnd(src,a);
+function maskBal(src){const re=/Object\.assign\(BAL(?:\.[\w$]+)*,\{|const BAL=\{|(?<![\w$.])BAL(?:\.[\w$]+)+\s*=(?!=)\s*[{[]/g;let m,out=src;while((m=re.exec(src))){const a=m.index+m[0].length-1,b=balEnd(src,a);
   out=out.slice(0,a+1)+out.slice(a+1,b).replace(/[^\n]/g,' ')+out.slice(b)}return out}
 for(const f of ORDER){const src=fs.readFileSync(path.join(B,f),'utf8');const T=lex(maskBal(src));const per={};const add=(k,s)=>{const m=per[k]=per[k]||{};m[s]=(m[s]||0)+1};
  for(const t of T){
@@ -135,7 +141,7 @@ function objKeys(src,i){let d=0,inS=null,keys=[],tok='',want=true;for(let j=i;j<
   if(src.startsWith('/*',j)){j=src.indexOf('*/',j)+1;continue}
   if('{[('.includes(c)){d++;if(d===1){want=true;tok=''}continue}if('}])'.includes(c)){d--;if(d===0)return keys;continue}
   if(d===1){if(c===','){want=true;tok='';continue}if(want){if(/[\w$]/.test(c))tok+=c;else if(c===':'&&tok){keys.push(tok);want=false}else if(!/\s/.test(c))tok=''}}}return keys}
-for(const f of ORDER){const src=fs.readFileSync(path.join(B,f),'utf8');let m;const re=/Object\.assign\(BAL,\{|const BAL=\{/g;
+for(const f of ORDER){const src=fs.readFileSync(path.join(B,f),'utf8');let m;const re=/Object\.assign\(BAL(?:\.[\w$]+)*,\{|const BAL=\{/g;
  while((m=re.exec(src))){const ln=src.slice(0,m.index).split('\n').length;for(const k of objKeys(src,m.index+m[0].length-1))(sets[k]=sets[k]||[]).push(f+':'+ln)}
  for(const t of lex(src))if(t.t==='code'){const r2=/(?<![\w$.])BAL\.([A-Za-z_$][\w$]*)\s*=(?!=)\s*(?=[-+.\d\[{])/g  /* a typed value only (a copy b0 / a setter v forwards, not a second value) */;while((m=r2.exec(t.s))){(sets[m[1]]=sets[m[1]]||[]).push(f+':'+(t.line+t.s.slice(0,m.index).split('\n').length-1))}}}
 for(const k in sets)if(sets[k].length>1)fail.push(`BAL.${k} is set ${sets[k].length} times (${sets[k].join(', ')}): one rule, one value`);

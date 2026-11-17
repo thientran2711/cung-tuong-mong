@@ -8,7 +8,9 @@ const acorn=(()=>{try{return require('acorn')}catch(e){return require('/opt/node
 const REF=process.argv[2],REF2=process.argv[3];/* optional REF2 = a branch merged in later (review/one-core-dup-r1/r2): a statement equal to the one there is its change, not ours */if(!REF){console.log('usage: node dev/measure/one-core-dup2-same.js <old-ref>');process.exit(2)}
 const NS=['quyLv','loy','wit','ducLv','sungLv','nightEnd','tinhLv','tinLv','rareLv','sucLv','oanFade','tsDanger','age','srvAge','pet','cut',
  /* review/one-core-dup3: amounts (BAL.eff / road / arc / route …) and the night table; values from every BAL file (one-core-text loadBAL) */
- 'eff','road','arc','route','night','net','evWipe'];
+ 'eff','road','arc','route','night','net','evWipe',
+ /* review/one-core-dup3-land: main's batch-d8 jkc2 numbers (BAL.kc2 incl. kc2.st), the jentry word table (BAL.mgTier) */
+ 'kc2','mgTier'];
 /* owner-ruled word changes (VANPHONG:69 / OD:L247 thiện cảm words everywhere): */
 const INTENDED={'jhc.js':['window.quyW'],'jts.js':['tsQuy'],'j55.js':['ccWord'],
  /* review/one-core-dup3: jlost A("laydol") x + AOUT.laydo/laydol: the text said «cung nữ thân tín lòng -10» while the rule (jlost loSteal self / jecon bribel)
@@ -32,6 +34,9 @@ INTENDED['jlost.js'].push('lostEvUse');
    jtruth spyFind «thêm một chứng cứ» → jtruth.evN · j78 A("uyhiep") «chuộc lại một chứng cứ» → j78.evF_3 · jecon AOUT.spyk «nắm thêm một chứng cứ»
    → jtruth.evN (spyk runs spyFind; aoLz: balWord needs VP, which loads after jecon) */
 INTENDED['jtruth.js']=['spyFind'];INTENDED['j78.js'].push('ExpressionStatement');INTENDED['jecon.js']=['TryStatement'];
+/* review/one-core-dup3-land: jentry entExam drops the dead typed fallback copy of BAL.mgTier.word; joi kcDien reads the entry tier S.kc.r (0..2) instead of a typed ladder;
+   jkc2 KC2W help words become templates that print BAL.kc2.st.dan.siet / nc.pha (same words) */
+(INTENDED['jentry.js']=INTENDED['jentry.js']||[]).push('entExam');(INTENDED['joi.js']=INTENDED['joi.js']||[]).push('kcDien');(INTENDED['jkc2.js']=INTENDED['jkc2.js']||[]).push('VariableDeclaration');
 /* j55 ccWord = side-chance scale (owner OD:L221) */
 const bal=()=>{const c={Math,BAL:{pace:1}};vm.createContext(c);
  const src=fs.readFileSync('dev/build/jbal.js','utf8')+'\n'+fs.readFileSync('dev/build/jbal2.js','utf8');

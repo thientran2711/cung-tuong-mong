@@ -563,7 +563,7 @@ function kcHud(){const r=$("me-r");if(r)r.textContent=kcTitle();const e=$("hud-s
 function kcHud2(){const el=$("hud2");if(!el)return;const col=el.classList.contains("col");
  const c=(k,l,v,cls)=>`<button class="hc ${cls||""}${["buoi","date"].includes(k)?" keep":""}" data-hx="${k}">${l}${v!==""&&v!=null?` <b>${v}</b>`:""}</button>`;
  el.innerHTML=`<button class="h2t" data-h2t="1" aria-label="${col?"Mở ra":"Thu lại"}">${col?"▾":"▴"}</button>`+c("date",typeof VP==="object"&&VP.date?VP.date(S.month,S.year,S.tuan):`Tháng ${S.month}`,"")+c("buoi",`${BUOI[S.buoi||0].replace("Buổi ","")} · còn`,`${BAL.time.khac-used} khắc`)
-  +c("sac","Sắc",S.sac)+c("tai","Tài",S.tai)+c("tamco","Tâm cơ",S.tamco)+c("duc","Đức",S.duc)+c("kgt","Gia thanh",S.kgt,S.kgt<25?"hot":"")+c("kap","Áp lực hôn sự",S.kap,S.kap>=60?"hot":"")+c("khm","Hồi môn",S.khm)
+  +c("sac","Sắc",S.sac)+c("tai","Tài",S.tai)+c("tamco","Tâm cơ",S.tamco)+c("duc","Đức",S.duc)+c("kgt","Gia thanh",S.kgt,S.kgt<BAL.kc2.st.kgtLow?"hot":"")+c("kap","Áp lực hôn sự",S.kap,S.kap>=60?"hot":"")+c("khm","Hồi môn",S.khm)
   +(S.kc.ldSeen?c("kld","Lời đồn",S.kld,S.kld>=50?"hot":""):"")+c("kty","Kỳ tuyển tú",`còn ${Math.max(0,kcMonthsLeft())} tháng`)+c("age","Tuổi",S.age)}
 (function(){const h0=hudTween;hudTween=function(){if(!isKc())return h0.apply(this,arguments);const s=S.sung;S.sung=S.kgt;try{return h0.apply(this,arguments)}finally{S.sung=s}}})();
 /* top bar line 1 (k3 #k3tt, the kit row builder k3row): "Tuyển tú còn N tháng" and, once it matters, "Áp lực hôn sự N" — the palace
@@ -612,7 +612,7 @@ function kcFamHTML(){const nha=kcFamList("nha"),ban=kcFamList("ban");const rest=
  const cnt=L=>{const A=L.flatMap(kcFamActs);return{doable:A.filter(([a])=>kcDoable(a)).length,total:A.length}};
  const T=kitSubTabs("kcfam",[Object.assign({k:"nha",label:"Người nhà"},cnt(nha)),Object.assign({k:"ban",label:"Khuê hữu"},cnt(ban)),{k:"gia",label:"Gia thế",doable:rest.filter(([a])=>kcDoable(a)).length,total:rest.length}]);
  let h=T.html;
- if(T.cur==="gia")h+=kitRows([[kitInfo("Gia thanh"),S.kgt,S.kgt<25?"r":"t"],["Thế lực nhà",kcPow(),"t"],["Gia tư",S.kgtu,"t"],["Hồi môn cha mẹ hứa",kitChip("Bạc",S.khm,"n"),"t"],[kitInfo("Áp lực hôn sự"),S.kap,S.kap>=60?"r":"t"]])+kcCardsH(rest);
+ if(T.cur==="gia")h+=kitRows([[kitInfo("Gia thanh"),S.kgt,S.kgt<BAL.kc2.st.kgtLow?"r":"t"],["Thế lực nhà",kcPow(),"t"],["Gia tư",S.kgtu,"t"],["Hồi môn cha mẹ hứa",kitChip("Bạc",S.khm,"n"),"t"],[kitInfo("Áp lực hôn sự"),S.kap,S.kap>=60?"r":"t"]])+kcCardsH(rest);
  else{const L=T.cur==="ban"?ban:nha;const key=T.cur==="ban"?"kcban":"kcfam";h=L.length?`<div class="pgwrap"><div class="kpinline">${T.html}</div>`+pager(key,L.map(m=>({f:kcFace(m),name:m.t==="Khuê hữu"?shortN(m.name):m.t})),i=>kcFamCard(L[i]))+`</div>`:T.html+kitEmpty("Gia tộc","Không còn ai.")}
  return h}
 /* Dư đồ: sub-tabs Trong phủ · Kinh thành, one kit priced button per place (who is there; city = 1 khắc; why locked) */
