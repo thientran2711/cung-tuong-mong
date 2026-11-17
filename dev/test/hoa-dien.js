@@ -85,12 +85,20 @@ fs.mkdirSync(DIR,{recursive:true});let fail=0;const ck=(n,c,x)=>{console.log((c?
 
  /* 5. Thử tay: the kind is registered and its board plays to env.end */
  const th=await p.evaluate(()=>({k:KG82_KIND.hoadien,eng:typeof KG82_ENG.hoadien}));ck('KG82_KIND.hoadien registered',!!th.k&&th.eng==='function',th);
+ /* jmgcal (review/ag-all-2) lists a kind for Thử tay by exactly this filter (mgCalKinds) */
+ ck('Thử tay lists it (mgCalKinds filter)',await p.evaluate(()=>Object.keys(KG82_KIND).filter(k=>{const K=KG82_KIND[k];return K&&K.n&&typeof KG82_ENG[K.e]==='function'}).includes('hoadien')));
  await p.evaluate(()=>{window.__hdEnd=null;kg82Open({title:'Dán hoa điền',how:KG82_KIND.hoadien.how,round:'Thử tay'});KG82.lv=2;kg82Play('hoadien',r=>{window.__hdEnd=r})});
  await p.waitForFunction(()=>HD.peek&&HD.peek()&&document.getElementById('hdok'),null,{timeout:60000});await p.waitForTimeout(300);
  const pk=await p.evaluate(()=>HD.peek());await p.mouse.move(pk.at.x,pk.at.y);await p.mouse.down();await p.mouse.move(pk.anchor.x,pk.anchor.y,{steps:8});await p.mouse.up();
  await p.screenshot({path:`${DIR}/hd-${tag}-4-thutay.jpg`,quality:70});await p.click('#hdok');await p.waitForFunction(()=>window.__hdEnd!=null,null,{timeout:20000}).catch(()=>{});
  const end=await p.evaluate(()=>window.__hdEnd);ck('Thử tay board ends with a grade',end!=null,end);try{await p.evaluate(()=>kg82Close())}catch(e){}
 
+ /* 6. old save (fixture from before hoa-dien) with the old hair-slot hoa điền worn: loads, migrates, renders, NPC looks + totals work */
+ {const J=JSON.parse(fs.readFileSync(__dirname+'/fixtures/world30-met.json','utf8'));J.S.wd.tram={k:'hoadien_bac',from:'emp'};
+  const o=await p.evaluate(d=>{const e0=[];try{localStorage.setItem('hclh-save-v2-2',d);const x=loadSlot(2);SLOT=2;quiet=true;deser(x);quiet=false;document.getElementById('title').hidden=true;Q.length=0;render()}catch(e){e0.push(String(e))}
+   const w=wdOf(S);let n=0;try{for(const v of rivals)if(v.alive){toilNpc(v);luxTotal(v);n++}}catch(e){e0.push(String(e))}
+   return{e0,tram:w.tram&&w.tram.k,back:S.inv.some(e=>e&&e.k==='hoadien_bac'),tot:luxTotal(S),n}},JSON.stringify(J));
+  ck('old save loads + migrates the worn hoa điền',!o.e0.length&&o.tram!=='hoadien_bac'&&o.back&&o.n>0,o)}
  /* 6. no horizontal overflow, no page errors */
  const ov=await p.evaluate(()=>document.documentElement.scrollWidth>innerWidth+1);ck('no horizontal overflow',!ov);
  ck('no page errors',!errs.length,errs.slice(0,5));
