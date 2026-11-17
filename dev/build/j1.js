@@ -29,7 +29,14 @@ const ORIGINS=[
 const SURN=["Thẩm","Tô","Lâm","Diệp","Ôn","Hạ","Mộ Dung","Bạch","Liễu","Cố","Tạ","Vân","Chu","Trịnh","Phùng","Lục","Tống","Hàn","Lý","Đường","Thượng Quan","Âu Dương","Hoa","Kiều","Tần","Nhan","Mạnh","Từ","Khương","Đoan Mộc"];
 const GIVEN=["Mi Trang","Uyển Nhi","Thanh Ca","Lan Chi","Như Ý","Nguyệt Hoa","Tuyết Dao","Cẩm Tú","Ngọc Hành","Tịnh Nghi","Lăng Vân","Thục Nghi","Diễm Thu","Hàm Hương","Bích Dao","Linh Lung","Yên Nhiên","Tố Tâm","Mạn Châu","Khinh Vũ","Tử Yên","Vân Thường","Nhược Lan","Hải Đường","Thanh Liên","Mộng Điệp","Ngưng Sương","Tú Uyển","Phương Hoa","Họa Mi","Vân Khanh","Bạch Lộ","Kiều Nguyệt","Thủy Tiên","Hồng Diệp","Tịch Nhan","Lạc Anh","Băng Tâm","Ngọc Dao","Dao Cầm"];
 const MALEN=["Văn Uyên","Tử Khiêm","Minh Viễn","Thừa Chí","Lục Trường","Tiêu Viễn","Hàn Phong","Lăng Vân","Kính Chi","Bá Ngôn"];
-const TRAITS=[["Hiểm độc",80],["Kiêu ngạo",55],["Hiền lành",15],["Đa nghi",45],["Tham vọng",65],["Nhu mì",25]];
+/* TRAITS = figure LOOK keys only (FIGURES.json trait tags via TRK) + old malice; nết come from the ONE pool BAL.net (jnet.js) */
+const TRAITS=[["Xảo quyệt",80],["Kiêu ngạo",55],["Ân cần",15],["Kín đáo",45],["Tham vọng",65],["Khiêm nhường",25]];
+/* ONE trait-label map (owner 17/11 05:35Z): "Hiểm độc" renamed "Xảo quyệt" everywhere the player reads it. Old saves/codes store the old word: deser() runs trMigrate() so they load as the new label (behaviour keys unchanged). Add future renames HERE only. */
+const TRAIT_OLD={"Hiểm độc":"Xảo quyệt"};
+function traitLabel(t){return TRAIT_OLD[t]||t}
+function trMigrate(o){const OLD=Object.keys(TRAIT_OLD);const fx=s=>{for(const k of OLD)if(s.indexOf(k)>=0)s=s.split(k).join(TRAIT_OLD[k]);return s};
+ const w=(x,d)=>{if(!x||typeof x!=="object"||d>40)return;if(Array.isArray(x)){for(let i=0;i<x.length;i++){const v=x[i];if(typeof v==="string")x[i]=fx(v);else w(v,d+1)}return}
+  for(const k0 of Object.keys(x)){let k=k0;if(TRAIT_OLD[k0]&&!(TRAIT_OLD[k0] in x)){x[TRAIT_OLD[k0]]=x[k0];delete x[k0];k=TRAIT_OLD[k0]}const v=x[k];if(typeof v==="string"){const n=fx(v);if(n!==v)x[k]=n}else w(v,d+1)}};w(o,0);return o}
 const SEASON=["Xuân","Xuân","Xuân","Hạ","Hạ","Hạ","Thu","Thu","Thu","Đông","Đông","Đông"];
 const TUAN=["thượng tuần","trung tuần","hạ tuần"];
 const MAIDS=["Tiểu Đào","Bích Ngọc","Xuân Hạnh","Thu Cúc","Hồng Liên","Tiểu Thúy","Lục Châu","Hạ Vân","Tố Cầm","Ngọc Lan"];

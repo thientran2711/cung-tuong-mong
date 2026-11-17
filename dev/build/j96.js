@@ -57,7 +57,7 @@ function loc96(){const m=man96();if(!m)return"vuon";try{if(typeof rosterWhere===
 function gate96(v,act){try{if(typeof motiveGate==="function")return motiveGate(v,S,act)!==false;if(typeof motiveOk==="function")return motiveOk(v,S,act)!==false}catch(e){}
  return !!(v&&(rel(v,S)<0||(v.ghen||0)>=55||oan(v,S)>=15))}
 function foe96(A){const t=T96();if(t&&t.foe!=null){const v=RV(t.foe);if(rvOk67(v)&&gate96(v,"accuse")){A.act.v=v.id;return v}}const v=rv67(A,"v");if(v&&gate96(v,"accuse"))return v;
- const used=Object.values(A.act||{});const L=liveRivals(false).filter(x=>!used.includes(x.id)&&gate96(x,"accuse"));if(!L.length)return null;const w=L.sort((a,b)=>(rel(a,S)-(a.ghen||0)/2)-(rel(b,S)-(b.ghen||0)/2))[0];A.act.v=w.id;if(t)t.foe=w.id;return w}
+ const used=Object.values(A.act||{});const L=liveRivals(false).filter(x=>!used.includes(x.id)&&gate96(x,"accuse"));if(!L.length)return null;const w=mindPickBy(L,x=>Math.max(BAL.mind.pick.j96.floor,BAL.mind.pick.j96.base+(x.ghen||0)/BAL.mind.pick.j96.ghen-rel(x,S))*mindW(x,"frame"),null);/* npc-mind: was ARGMIN */A.act.v=w.id;if(t)t.foe=w.id;return w}
 /* ---------- the man: a real NPC of S.men ---------- */
 function mkMan96(k){try{menInit()}catch(e){}if(!S.men)return null;const V=TM96V[k];const used=new Set(S.men.map(m=>m.name.split(" ").slice(-2).join(" ")));
  let nm="";for(let i=0;i<20;i++){const s=pick(V.sur||SURN.filter(x=>x.indexOf(" ")<0)),g=pick(MALEN);nm=`${s} ${g}`;if(!used.has(g))break}
@@ -178,7 +178,7 @@ ARC67.tm96b=arcFx("tm96b",{o:"tm",ok:ok96,t:"Thanh mai trúc mã: Lửa thử v�
   b_ton:{tag:"Chàng gánh tội thay",w:"lv",t:"{lvn} bị giáng chức, phạt bổng, suýt bị đuổi khỏi kinh. Ngươi giữ được thanh danh; chàng giữ được lời hẹn theo cách của chàng.",go:()=>{T96().hurt=(T96().hurt||0)+1;T96().rise=Math.max(0,(T96().rise||0)-1);adj96({t:8,h:8,sus:-5});T96().endB="b_ton";return `${(man96()||{}).name||"Chàng"} bị giáng chức.`}},
   b_tin:{tag:"Qua được lửa thử",w:"emp",t:"Hoàng thượng tin ngươi. Kẻ đứng sau bị phạt, và chẳng ai dám nhắc lại chuyện cũ nữa.",go:(A,_ok,G)=>{adj96({sus:-20});T96().endB="b_tin";const v=rv67(A,"v");return v?e67pun(v,G[0]):""}}}});
 /* ================= CHƯƠNG CUỐI ĐỜI: LỰA CHỌN CUỐI ================= */
-function rare96(){const t=T96(),m=man96(),w=watcher();return !!(t&&m&&m.alive&&(t.h||0)>=80&&(m.tinh||0)>=80&&w&&w.loyal>=70&&!S.preg&&(t.sus||0)<40&&!S.out)}
+function rare96(){const t=T96(),m=man96(),w=watcher();return !!(t&&m&&m.alive&&(t.h||0)>=80&&(m.tinh||0)>=80&&w&&w.loyal>=BAL.loy.trust&&!S.preg&&(t.sus||0)<40&&!S.out)}
 ARC67.tm96c=arcFx("tm96c",{o:"tm",ok:ok96,t:"Thanh mai trúc mã: Lựa chọn cuối",w:"lv",sj:"mối tình cũ của ngươi",tslot:1,p:[[],[],[],[]],
  g:"Bao năm đã qua, mối tình ấy chưa bao giờ thật sự tắt. Nay triều đình định hôn sự cho {lvn}, kẻ thù sắp ra đòn cuối, và chàng đến xin ngươi một lời. Lần này, ngươi phải chọn hẳn.",
  ord:[["c1n","c1o","c1t"],["c2"],["c3a","c3b"],["c4a","c4b"],["c5"],["c6"]],
@@ -238,7 +238,7 @@ function A96has(f){const t=T96();return !!(t&&t.f&&t.f[f])}
 function tm96Month(){const t=T96(),m=man96();if(!t||!m||!m.alive||S.dead||t.endC)return"";let ev="";
  const M=BAL.arc.t96;
  if((t.h||0)<M.fade.h&&m.tinh>M.fade.tinh&&roll(M.fade.p))m.tinh=cl(m.tinh-M.fade.d,0,100);
- if(m.trait==="tham vọng"&&m.tinh>M.amb.tinh&&roll(M.amb.p))m.tinh=cl(m.tinh-M.amb.d,0,100);
+ if(hasT(m,"Tham vọng")&&m.tinh>M.amb.tinh&&roll(M.amb.p))m.tinh=cl(m.tinh-M.amb.d,0,100);
  if(m.tinh>=M.note.tinh&&(t.h||0)>=M.note.h&&roll(M.note.p)){adj96({lt:1});ev+=`Có người lén đưa đến cho ngươi một mảnh giấy của ${m.name}: chàng vẫn nhớ. `}
  if(t.sus>0&&roll(M.cool.p))t.sus=Math.max(0,t.sus-M.cool.d);
  return ev}

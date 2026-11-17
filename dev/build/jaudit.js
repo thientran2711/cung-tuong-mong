@@ -22,7 +22,7 @@ function aaFallenT(){const L=liveRivals(true);if(!L.length)return null;const d=v
  if(p&&p.kind==="fallen"){const i=A.findIndex(a=>a.n==="Hỏi chuyện cũ");const x=aaFallenT();if(i>=0&&x){const nm=(x.queen?"Hoàng hậu ":RANKS[x.rank].n+" ")+x.name;
   A[i]=Object.assign({},A[i],{x:`về: ${nm} · biết 1 điều thật về nàng · chứng cứ +1 nếu nàng từng làm điều sai`,go:()=>{let f="";try{f=typeof intelLearn==="function"?intelLearn(x,1,{by:"Phế phi",how:"Hỏi chuyện cũ"}):""}catch(e){}const n=evA(S,x,1);try{evdSync()}catch(e){}log(`Phế phi kể chuyện của ${nm}: ${f||"một chuyện cũ"}${n?" Chứng cứ +1.":" Không có gì làm chứng cứ."}`)}})}}
  if(p&&(p.kind==="rival"||p.kind==="hh")&&p.ref){const v=p.ref;const i=A.findIndex(a=>a.n==="Nhờ giúp đỡ");if(i>=0){const x=liveRivals(true).filter(y=>y!==v).sort((a,b)=>aff(v,a)-aff(v,b))[0];
-  if(x)A[i]=Object.assign({},A[i],A[i].lock&&/cần thiện cảm 30/.test(A[i].t||"")&&!knows(v)?{t:`cần thiện cảm 30 (${KIT_REL.unknown})`}:{},{x:`nàng cho mượn Bạc +${BAL.audit.loan} hoặc kể chuyện về ${x.name} (chứng cứ +1 nếu ${x.name} từng làm điều sai)`,run:()=>{chatMark(v);if(aff(v,S)>=30){if(roll(50)&&v.bac>=BAL.audit.loan){ap(v,{bac:-BAL.audit.loan});apply({bac:BAL.audit.loan});return `${v.name} cho ngươi mượn ${BAL.audit.loan} lượng.`}return evA(S,x,1)?`${v.name} kể cho ngươi một chuyện về ${x.name}: chứng cứ +1.`:`${v.name} kể chuyện về ${x.name}: không có gì sai trái, chỉ biết ${harmTxt(x)}.`}affAdd(v,S,BAL.eff.jaudit.run);return `${v.name} khéo từ chối. Thiện cảm -3.`}})}}}catch(e){console.error(e)}return A}})();
+  if(x)A[i]=Object.assign({},A[i],A[i].lock&&/cần thiện cảm 30/.test(A[i].t||"")&&!knows(v)?{t:`cần thiện cảm 30 (${KIT_REL.unknown})`}:{},{x:`nàng cho mượn Bạc +${BAL.audit.loan} hoặc kể chuyện về ${x.name} (chứng cứ +1 nếu ${x.name} từng làm điều sai)`,run:()=>{chatMark(v);if(aff(v,S)>=30){if(roll(50)&&v.bac>=BAL.audit.loan){ap(v,{bac:-BAL.audit.loan});apply({bac:BAL.audit.loan});return `${v.name} cho ngươi mượn ${BAL.audit.loan} lượng.`}return evA(S,x,1)?`${v.name} kể cho ngươi một chuyện về ${x.name}: chứng cứ +1.`:`${v.name} kể chuyện về ${x.name}: không có gì sai trái, chỉ biết ${harmTxt(x)}.`}affAdd(v,S,BAL.eff.jaudit.run);return `${v.name} khéo từ chối. Thiện cảm ${balSg(BAL.eff.jaudit.run)}.`}})}}}catch(e){console.error(e)}return A}})();
 
 /* 3. HIDDEN RISK of sending a servant (act audit): when she is not with the target, a consort act is done by her best servant
    (runAct → bestSent). For harm acts he may be caught (confessRisk): he confesses (the target holds 1 more chứng cứ against her)
@@ -63,7 +63,7 @@ document.addEventListener("click",e=>{const b=e.target.closest("[data-dbsv]");if
  const bf=rsnap();spend(1);const r=dbDo(S,s);if(r==null)return;try{resultShow(`Đề bạt ${s.name}`,bf,r)}catch(x){}render()},true);
 /* NPC mistresses: the same act, by motive — a loyal, deserving servant, a purse that can pay, once in a while */
 (function(){if(typeof servRanks!=="function")return;const r0=servRanks;servRanks=function(){const ev=r0.apply(this,arguments);try{if(typeof mlGuest==="function"&&mlGuest())return ev;/* co-op guest: NPC promotions roll on the host */for(const p of liveRivals(true)){for(const s of (p.staff||[])){
- if(!dbNeed(p,s).every(x=>x.ok)||s.loyal<70||!roll(15))continue;if((p.bac||0)>=dbCost(s)*2)dbDo(p,s);else if(typeof spFav==="function"&&spFav(p,s).ok)dbDo(p,s,"fav")}}}catch(e){console.error(e)}return ev}})();
+ if(!dbNeed(p,s).every(x=>x.ok)||s.loyal<BAL.loy.trust||!roll(15))continue;if((p.bac||0)>=dbCost(s)*2)dbDo(p,s);else if(typeof spFav==="function"&&spFav(p,s).ok)dbDo(p,s,"fav")}}}catch(e){console.error(e)}return ev}})();
 
 /* 5. RELATION NUMBERS ON CARDS = THE REAL CHANGE (owner: "a card must show what will really happen").
    The real change goes through affAdd/oanAdd, which scale a rise by the target's nết (persF "trust" for quý ta, "slight" for oán ta;
@@ -101,11 +101,11 @@ try{wrapR("k61Ask",()=>"Hỏi người hầu: đó là ai?");wrapR("invAct",a=>a
 /* 8. NO DO-NOTHING BUTTON (owner 07:30Z). "Hỏi han sức khỏe" now has a purpose that fits its meaning: a small "quý ta" by her
    temperament (affAdd, so persF trust applies; the second time in a month only +1) and, if she is unwell, she may tell what ails
    her (chance by her liking for you; Đa nghi hides it more). Costs 1 khắc like every talk. */
-function aaHealthO(v){return cl(Math.round(45+aff(v,S)/2-((typeof traitsOf==="function"&&traitsOf(v).includes("Đa nghi"))?15:0)),5,95)}
+function aaHealthO(v){return cl(Math.round(45+aff(v,S)/2-((typeof traitsOf==="function"&&traitsOf(v).includes("Kín đáo"))?15:0)),5,95)}
 (function(){const t0=talkOpts;talkOpts=function(p){const A=t0.apply(this,arguments);try{const v=p&&p.ref;if(!v||!(p.kind==="rival"||p.kind==="hh"))return A;
  const i=A.findIndex(a=>a&&a.n==="Hỏi han sức khỏe");if(i<0)return A;const n=(S.chat&&S.chat[v.id])?1:2;const ill=illOf(v)&&!illKnown(v);
  A[i]=Object.assign({},A[i],{x:`${pvQuy(v,n)}${ill?` · nàng có thể kể bệnh của mình: ${word(aaHealthO(v))}`:" · biết nàng khỏe hay yếu"}`,run:()=>{chatMark(v);affAdd(v,S,n);
-  let t=`${v.name} cảm động vì được hỏi han.`;const I=illOf(v);if(I&&!illKnown(v)){if(roll(aaHealthO(v))){I.known=true;t+=` Nàng kể đang mắc ${illName(v)}.`}else t+=" Nàng chỉ cười, giấu chuyện bệnh tật."}else if(I)t+=` Nàng vẫn đang ${illName(v)}.`;else t+=` Nàng khỏe mạnh (Sức ${v.suc>=60?"tốt":v.suc>=30?"vừa":"yếu"}).`;return t}});return A}catch(e){console.error(e);return A}}})();
+  let t=`${v.name} cảm động vì được hỏi han.`;const I=illOf(v);if(I&&!illKnown(v)){if(roll(aaHealthO(v))){I.known=true;t+=` Nàng kể đang mắc ${illName(v)}.`}else t+=" Nàng chỉ cười, giấu chuyện bệnh tật."}else if(I)t+=` Nàng vẫn đang ${illName(v)}.`;else t+=` Nàng khỏe mạnh (Sức ${v.suc>=BAL.sucLv.ask[1]?"tốt":v.suc>=BAL.sucLv.ask[0]?"vừa":"yếu"}).`;return t}});return A}catch(e){console.error(e);return A}}})();
 
 /* 9. "ban chết" on cards = what deathSentence (j8) really does; the odds word is the real one (it was forced to "Liều") */
 function aaDeathTxt(){if(S.turn<12&&!S.mercy)return"tội chết — năm đầu được tha một lần: giáng một bậc, cấm túc 3 tháng, Danh -10, Sủng -10";return has("nhantu")?"tội chết (Hoàng thượng nhân từ: có khi chỉ đày vào lãnh cung)":"tội chết: mất mạng"}
@@ -183,14 +183,14 @@ window.kitThey=kitThey;
 
 /* 16. THIẾU LỄ (owner): at formal moments (thỉnh an Thái hậu / Hoàng hậu, gặp Hoàng thượng) a consort who wears nothing proper for
    her rank (nothing worn, or what she wears is clearly below her rank: worn luxury < BAL.thieuLe.frac × her rank's allowance)
-   loses Danh/Đức and the host likes her a little less; a strict host (Thái hậu Đa nghi/Kiêu ngạo, Hoàng hậu Kiêu ngạo/Ghen tuông)
+   loses Danh/Đức and the host likes her a little less; a strict host (Thái hậu Đa nghi/Kiêu ngạo, Hoàng hậu Kiêu ngạo/Nóng nảy)
    reacts more. A bestowed rank set (review/gift-chest: p.rankSet === her rank, worn) always satisfies it. Vượt phẩm stays its own
    rule (jinv luxMonth). Same rule for NPCs (j28 serveTH). The card shows it in advance in Kèm; "Vì sao" names it. */
 Object.assign(BAL,{thieuLe:{danh:-2,duc:-1,aff:-3,strict:1.5,frac:.35}});
 function aaThieuLe0(p){try{if(!p||p.out)return false;if(p.rankSet!=null&&p.rankSet===rkOf(p)&&p.rankSetWorn)return false;if(typeof luxOf!=="function")return false;const x=luxOf(p);if(x.sc>0)return x.sc<x.bud*BAL.thieuLe.frac;
  /* nothing worn: thiếu lễ only when she could have dressed (a bestowed rank set, or wearable things in her chest) — nobody is blamed for clothes she does not own */
  return p.rankSet!=null||(p.inv||[]).some(e=>!e.h&&IT[e.k]&&itm(e.k).sl)}catch(e){return false}}
-function aaHostStrict(host){try{if(host==="th"){const t=traitsOf({kind:"th"});return t.includes("Đa nghi")||t.includes("Kiêu ngạo")}if(host&&host.queen)return traitsOf(host).some(t=>t==="Kiêu ngạo"||t==="Ghen tuông")}catch(e){}return false}
+function aaHostStrict(host){try{if(host==="th"){const t=traitsOf({kind:"th"});return t.includes("Kín đáo")||t.includes("Kiêu ngạo")}if(host&&host.queen)return traitsOf(host).some(t=>t==="Kiêu ngạo"||t==="Nóng nảy")}catch(e){}return false}
 function aaThieuLeFx(host){const B=BAL.thieuLe,m=aaHostStrict(host)?B.strict:1;return{danh:B.danh,duc:B.duc,aff:Math.round(B.aff*m)}}
 function aaThieuLeTxt(host,f0){const f=f0||aaThieuLeFx(host);const who=host==="th"?"Thái hậu":host==="emp"?"Hoàng thượng":host&&host.queen?"Hoàng hậu":"chủ nhà";
  return `thiếu lễ (y phục dưới phẩm): Danh ${f.danh}, Đức ${f.duc}, ${host==="emp"?`Sủng ${f.aff>0?"+":""}${Math.round(f.aff/3)||-1}`:`${who} thiện cảm ${f.aff}`}`}
@@ -215,11 +215,11 @@ function aaThieuLeWhy(host){try{const L=leAttire(S,"thỉnh an",host),who=host==
 /* 17. leAttire(p, occasion, host) — ONE judgement of how someone is dressed for a formal moment (owner 11/15), used by Thiếu lễ and
    by review/toilette (the morning dress-up + makeup game writes p.toilette = {wk: wk() day key, score 0–100, makeup: bool}).
    Returns {state:"ok"|"plain"|"showy"|"overRank", delta:{danh,duc,aff}, why:[…]}. Host reaction by nết:
-   etiquette-minded hosts (Thái hậu Đa nghi/Kiêu ngạo, Hoàng hậu Kiêu ngạo/Ghen tuông) punish "plain" ×BAL.thieuLe.strict;
-   a frugal host (Thái hậu Hiền lành, Hoàng hậu Hiền lành/Nhu mì) approves plain dress (small +). Showy/overRank stay the
+   etiquette-minded hosts (Thái hậu Đa nghi/Kiêu ngạo, Hoàng hậu Kiêu ngạo/Nóng nảy) punish "plain" ×BAL.thieuLe.strict;
+   a frugal host (Thái hậu Hiền lành, Hoàng hậu Hiền lành/Khiêm nhường) approves plain dress (small +). Showy/overRank stay the
    luxury rules (jinv luxMonth / vượt phẩm) — here they only cost a little host favour with a frugal host. */
 function leHostKind(host){try{const T=host==="th"?traitsOf({kind:"th"}):host&&host!=="emp"?traitsOf(host):[];
- if(T.some(t=>t==="Hiền lành"||t==="Nhu mì"))return"frugal";if(host==="th"?T.some(t=>t==="Đa nghi"||t==="Kiêu ngạo"):T.some(t=>t==="Kiêu ngạo"||t==="Ghen tuông"))return"strict";}catch(e){}return"normal"}
+ if(T.some(t=>t==="Ân cần"||t==="Khiêm nhường"))return"frugal";if(host==="th"?T.some(t=>t==="Kín đáo"||t==="Kiêu ngạo"):T.some(t=>t==="Kiêu ngạo"||t==="Nóng nảy"))return"strict";}catch(e){}return"normal"}
 function leAttire(p,occasion,host){p=p||S;const why=[];let state="ok";try{
  const x=typeof luxOf==="function"?luxOf(p):{lv:1,sc:1,bud:1};const tl=p.toilette&&p.toilette.wk!=null&&p.toilette.wk===(typeof wk==="function"?wk():-1)?p.toilette:null;/* one look per DAY (wk(): S.turn is the month, so turn*10+buoi never matched) */
  if(x.lv>=3){state="overRank";why.push("y phục vượt phẩm")}else if(x.lv===2){state="showy";why.push("y phục quá xa hoa")}

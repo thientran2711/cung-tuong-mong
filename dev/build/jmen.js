@@ -23,10 +23,10 @@ const menCap=s=>s?s[0].toUpperCase()+s.slice(1):s;
 /* four named guards share the two guard pictures (coordinator 11/15: many guards may share the 2 looks) */
 function menGuards(){return (S.men||[]).filter(m=>m.rw==="thị vệ")}
 (function(){const m0=menInit;menInit=function(){const r=m0.apply(this,arguments);try{if(S&&S.men&&!S.menG2){S.menG2=1;const sur=["Chu","Hà","Lâm","Ninh","Phan","Từ"];
-  for(let i=0;i<3;i++){const id="m"+(S.men.length);S.men.push({id,role:"Thị vệ",rw:"thị vệ",haunts:["thu","dtd"],age:20+R(14),name:`Thị vệ ${pick(sur)} ${pick(MALEN)}`,trait:pick(MTR),loyal:40+R(50),af:0,tinh:0,letters:0,trysts:0,alive:true,knowsMe:[]})}}}catch(e){}return r}})();
+  for(let i=0;i<3;i++){const id="m"+(S.men.length);S.men.push({id,role:"Thị vệ",rw:"thị vệ",haunts:["thu","dtd"],age:20+R(14),name:`Thị vệ ${pick(sur)} ${pick(MALEN)}`,loyal:40+R(50),af:0,tinh:0,letters:0,trysts:0,alive:true,knowsMe:[]})}}}catch(e){}return r}})();
 /* who a man fancies: set once from his nature (phong lưu / đa tình) and the consorts' looks; renewed if she is gone */
 (function(){const m0=menInit;menInit=function(){const r=m0.apply(this,arguments);try{if(S&&S.men)for(const m of S.men){const v=m.likeV!=null?RV(m.likeV):null;if(v&&v.alive&&!v.out)continue;m.likeV=null;
-  if(!MEN_FANCY.includes(m.trait))continue;const C=liveRivals(false).filter(x=>!x.queen&&(x.age||20)>=18&&!x.affair);if(!C.length)continue;
+  if(!MEN_FANCY.some(t=>hasT(m,t)))continue;const C=liveRivals(false).filter(x=>!x.queen&&(x.age||20)>=18&&!x.affair);if(!C.length)continue;
   /* the most beautiful one he can see (her looks), the id breaks ties: no dice */
   C.sort((a,b)=>((typeof effSac==="function"?effSac(b):b.sac||0)-(typeof effSac==="function"?effSac(a):a.sac||0))||(menH(a.id)-menH(b.id)));m.likeV=C[(menH(m.id)%Math.min(2,C.length))].id}}catch(e){}return r}})();
 (function(){if(typeof figPick!=="function")return;const f0=figPick;figPick=function(who){try{if(S&&who&&who.rw==="thị vệ"&&(S.men||[]).includes(who)){const M=FIGIX.man||{};const ks=Object.keys(M).filter(k=>/thive/.test(k)).sort();
@@ -77,19 +77,19 @@ function menPlanWeek(){S.menPlans=S.menPlans||[];const w=wk();if(S.menPW===w)ret
  S.menPlans=S.menPlans.filter(P=>P.w>=w-1);for(const t of first?[w,w+1]:[w+1])menMakePlans(t)}
 function menMakePlans(t){const add=P=>{P.id=(S.menPS=(S.menPS||0)+1);P.w=t;S.menPlans.push(P);menTip(P)};const C=liveRivals(false);
  /* 1. lovers (j22 v.affair): every 2–3 tuần by his nature, the night his guard roster leaves free, at a place her nature chooses */
- for(const v of C){const m=v.affair&&manById(v.affair);if(!m||menBanned(m))continue;const cad=MEN_ROVE.includes(m.trait)?2:3;if((t+menH(v.id))%cad)continue;
-  if(m.rw==="thị vệ"&&menDuty(m,t,B4L))continue;const careful=v.trait==="Đa nghi"||m.trait==="cẩn trọng";const k=careful?"lc":(menHcPal(v)&&v.trait==="Kiêu ngạo"?menHcPal(v):"vuon");
+ for(const v of C){const m=v.affair&&manById(v.affair);if(!m||menBanned(m))continue;const cad=MEN_ROVE.some(t=>hasT(m,t))?2:3;if((t+menH(v.id))%cad)continue;
+  if(m.rw==="thị vệ"&&menDuty(m,t,B4L))continue;const careful=hasT(v,"Kín đáo")||hasT(m,"Kín đáo");const k=careful?"lc":(menHcPal(v)&&hasT(v,"Kiêu ngạo")?menHcPal(v):"vuon");
   add({m:m.id,v:v.id,r:"tryst",b:B4L,h:3,k,from:m.rw==="thị vệ"?"dtd":"vuon",hide:30+(v.tamco||0)/3})}
  /* 2. secret letters: a consort with a reason to reach the outside, once a season (12 tuần) while the reason lasts, through a guard who can be bought, on his shift;
     one letter a tuần goes out at most (the guards can carry only one safely) */
  let lt=0;for(const v of C.slice().sort((a,b)=>menH(a.id+":"+t)-menH(b.id+":"+t))){if(lt||v.queen||!menHcPal(v))continue;const why=v.confined?"confined":v.plan?"plan":(v.preg&&v.hidden)?"preg":((v.sung||0)<25&&(v.ghen||0)>=50)?"jealous":"";if(!why||(t+menH(v.id))%12)continue;
-  const G=menGuards().filter(g=>g.alive&&!menBanned(g)&&(MEN_BRIBE.includes(g.trait)||(g.loyal||50)<50)).sort((a,b)=>(a.loyal||50)-(b.loyal||50));if(!G.length)continue;
+  const G=menGuards().filter(g=>g.alive&&!menBanned(g)&&(MEN_BRIBE.some(t=>hasT(g,t))||(g.loyal||50)<BAL.loy.mid)).sort((a,b)=>(a.loyal||50)-(b.loyal||50));if(!G.length)continue;
   const g=G[0];const bb=[B4L,2,0].find(x=>menDuty(g,t,x));if(bb==null)continue;add({m:g.id,v:v.id,r:"letter",why,b:bb,h:2,k:menHcPal(v),from:menDuty(g,t,bb),hide:20+(v.tamco||0)/4});lt=1}
  /* 3. overstay: a craftsman of a roving nature on a real order in a palace whose mistress is out of favour or the one he fancies */
- for(const m of S.men){const o=menOrder(m,t);if(!m.alive||!o||o.v==null||!MEN_ROVE.includes(m.trait))continue;const v=RV(o.v);if(!v||v.queen||!((v.sung||0)<40||m.likeV===v.id))continue;
+ for(const m of S.men){const o=menOrder(m,t);if(!m.alive||!o||o.v==null||!MEN_ROVE.some(t=>hasT(m,t)))continue;const v=RV(o.v);if(!v||v.queen||!((v.sung||0)<40||m.likeV===v.id))continue;
   add({m:m.id,v:v.id,r:"overstay",job:m.rw,b:o.b,h:4,k:o.k,from:o.k,hide:10})}
  /* 4. an admirer: every 12 tuần by his nature (đa tình 9), the first buổi he is inside while she stands in the hậu cung */
- for(const m of S.men){if(!m.alive||m.likeV==null||!MEN_FANCY.includes(m.trait)||(t+menH(m.id))%(m.trait==="đa tình"?9:12))continue;add({m:m.id,v:m.likeV,r:"seek",opp:1,h:2,hide:15})}}
+ for(const m of S.men){if(!m.alive||m.likeV==null||!MEN_FANCY.some(t=>hasT(m,t))||(t+menH(m.id))%(hasT(m,"Ham vui")?9:12))continue;add({m:m.id,v:m.likeV,r:"seek",opp:1,h:2,hide:15})}}
 /* tai mắt: she hears of a plan a tuần ahead when her eyes reach deep enough (Tai mắt, Tâm cơ) — true, partial */
 function menEye(p){return p===S?(S.mat||0)*8+(S.tamco||0)/3:(p.mat||0)*8+(p.tamco||0)/3}
 function menTip(P){try{if(!menRoad()||P.opp)return;if(menEye(S)<P.hide+40)return;P.tip=1;const t=P.w-wk();const when=`${t<=0?"tuần này":"tuần tới"}, ${BUOI[P.b].toLowerCase()}`;
@@ -163,16 +163,16 @@ PEND.menEnc=pp=>{const m=manById(pp.m);if(!m||!S)return null;const v=pp.v?RV(pp.
 function menOpts(m,v,y,heard){/* items split by " · " so the kit (j63 kaRows) puts each in its row: "nàng …" harm = Được (green), "(…)" = Ghi chú, kèm = red */
  const love=v&&y.r==="tryst";const d=S.danh||0,tc=S.tamco||0;const A=[];const ev=love?2:1;
  if(v&&love){const o=odA(S,58+d/5),o2=odA(S,42+d/5+tc/4);
-  A.push({k:"bao",n:"Báo thị vệ",x:`${word(o)} · tốn: 1 khắc · thành: Danh +4 · nàng bị ban chết hay đày lãnh cung · (hắn bị xử trảm) · hỏng: nàng chối được, Danh -2 · kèm: nàng oán ngươi +30 · phe nàng tìm cách trả thù`});
-  A.push({k:"ccti",n:"Báo Cung Chính ti",x:`${word(o2)} · tốn: 2 khắc · thành: Danh +4 · nàng bị ban chết hay đày lãnh cung · (xét án có sổ sách; hắn bị xử trảm) · hỏng: thiếu chứng nên nàng chối được, Danh -2 · kèm: nàng oán ngươi +30 · phe nàng tìm cách trả thù`})}
+  A.push({k:"bao",n:"Báo thị vệ",x:`${word(o)} · tốn: 1 khắc · thành: Danh +4 · nàng bị ban chết hay đày lãnh cung · (hắn bị xử trảm) · hỏng: nàng chối được, Danh -2 · kèm: nàng oán ngươi ${balSg(BAL.eff.jmen.menReport)} · phe nàng tìm cách trả thù`});
+  A.push({k:"ccti",n:"Báo Cung Chính ti",x:`${word(o2)} · tốn: 2 khắc · thành: Danh +4 · nàng bị ban chết hay đày lãnh cung · (xét án có sổ sách; hắn bị xử trảm) · hỏng: thiếu chứng nên nàng chối được, Danh -2 · kèm: nàng oán ngươi ${balSg(BAL.eff.jmen.menReport)} · phe nàng tìm cách trả thù`})}
  else if(v){const o2=odA(S,48+d/5+tc/4);const sg=(v.sung||0)>=60?" · Hoàng thượng không vui, Sủng -2":"";
-  A.push({k:"bao",n:"Báo thị vệ",x:`Chắc chắn · tốn: 1 khắc · thành: Danh +3 · Thái hậu quý ngươi +2 · nàng mất tự do, cấm túc · (hắn bị đánh trượng, đuổi ra ngoại triều) · kèm: nàng oán ngươi +22${sg}`});
-  A.push({k:"ccti",n:"Báo Cung Chính ti",x:`${word(o2)} · tốn: 2 khắc · thành: Danh +3 · Thái hậu quý ngươi +2 · nàng sa sút, có khi giáng phẩm · (hắn bị cấm vào cung một năm) · hỏng: thiếu chứng, mang tiếng vu khống, Danh -5 · kèm: nàng oán ngươi +22${sg}`})}
+  A.push({k:"bao",n:"Báo thị vệ",x:`Chắc chắn · tốn: 1 khắc · thành: Danh +3 · Thái hậu quý ngươi +2 · nàng mất tự do, cấm túc · (hắn bị đánh trượng, đuổi ra ngoại triều) · kèm: nàng oán ngươi ${balSg(BAL.eff.jmen.menReport_3)}${sg}`});
+  A.push({k:"ccti",n:"Báo Cung Chính ti",x:`${word(o2)} · tốn: 2 khắc · thành: Danh +3 · Thái hậu quý ngươi +2 · nàng sa sút, có khi giáng phẩm · (hắn bị cấm vào cung một năm) · hỏng: thiếu chứng, mang tiếng vu khống, Danh -5 · kèm: nàng oán ngươi ${balSg(BAL.eff.jmen.menReport_3)}${sg}`})}
  else{A.push({k:"bao",n:"Báo thị vệ",x:`Chắc chắn · tốn: 1 khắc · thành: Danh +2 · Thái hậu quý ngươi +1 · (hắn bị đánh trượng, đuổi ra ngoại triều) · kèm: hắn ôm hận, có thể tung tin đồn trả thù · Danh -3 mỗi lần bị trả thù`});
   A.push({k:"ccti",n:"Báo Cung Chính ti",x:`Chắc chắn · tốn: 2 khắc · thành: Danh +3 · Thái hậu quý ngươi +1 · (hắn bị cấm vào cung một năm) · kèm: hắn và đồng liêu thị vệ có thể trả thù · Danh -3 mỗi lần bị trả thù`})}
  const risk=cl(Math.round(10+menEyes(y.k,v)*5-tc/10),4,60);
- A.push({k:"giau",n:"Giấu giúp",x:`${word(100-risk)} · tốn: 1 khắc · thành: hắn mang ơn, người ấy quý ngươi +15 · giữ bí mật của hắn để uy hiếp về sau${v?` · chứng cứ về nàng +${ev} · nàng quý ngươi +15`:""} · hỏng: bị thấy, mắc tội che giấu, Danh -6, cấm túc · kèm: lộ ra về sau thì bị liên lụy`});
- if(!heard){const oh=od(35+(S.mat||0)*6+tc/4);A.push({k:"nghe",n:"Núp nghe lén",x:`${word(oh)} · tốn: 1 khắc · thành: biết tên ${v?"hai người":"hắn"} · biết vì sao hắn ở đây${v?` · chứng cứ về nàng +${ev}`:""} · (rồi chọn tiếp báo hay giấu) · (thành hay bại tùy Tai mắt và Tâm cơ của ngươi) · hỏng: bị phát hiện, họ tản đi, hắn quý ngươi -5${v?" · kèm: nàng oán ngươi +15":""}`})}
+ A.push({k:"giau",n:"Giấu giúp",x:`${word(100-risk)} · tốn: 1 khắc · thành: hắn mang ơn, người ấy quý ngươi ${balSg(BAL.eff.jmen.hideMan)} · giữ bí mật của hắn để uy hiếp về sau${v?` · chứng cứ về nàng +${ev} · nàng quý ngươi ${balSg(BAL.eff.jmen.menHide)}`:""} · hỏng: bị thấy, mắc tội che giấu, Danh -6, cấm túc · kèm: lộ ra về sau thì bị liên lụy`});
+ if(!heard){const oh=od(35+(S.mat||0)*6+tc/4);A.push({k:"nghe",n:"Núp nghe lén",x:`${word(oh)} · tốn: 1 khắc · thành: biết tên ${v?"hai người":"hắn"} · biết vì sao hắn ở đây${v?` · chứng cứ về nàng +${ev}`:""} · (rồi chọn tiếp báo hay giấu) · (thành hay bại tùy Tai mắt và Tâm cơ của ngươi) · hỏng: bị phát hiện, họ tản đi, hắn quý ngươi ${balSg(BAL.eff.jmen.hearMan)}${v?` · kèm: nàng oán ngươi ${balSg(BAL.eff.jmen.menChoose)}`:""}`})}
  A.push({k:"lo",n:"Làm như không thấy",x:`Chắc chắn · thành: không dính vào chuyện · kèm: nếu về sau lộ ra ngươi thấy mà không báo, dễ bị liên lụy`});
  return A}
 function menArt(k){try{const P=placeOf(k);const f=SCIMG[P.sc];return f?{src:`img/${f}.webp`,label:P.n}:undefined}catch(e){return undefined}}
@@ -196,20 +196,20 @@ function menReport(by,m,c,y,formal){const at=placeName(y.k);const nm=m.name;cons
    if(by===S&&c!==S&&(c.sung||0)>=60){apply({sung:-2});log("Hoàng thượng không vui vì người ngài thương bị phạt.")}if(by===S)S.th=cl((S.th||0)+2,-100,100);return true}
   log(`<span class="r">${menCap(byT)} trình Cung Chính ti chuyện ở ${at}, nhưng không đủ chứng: ${c===S?"ngươi":`${rkName(c)} ${c.name}`} vô can; ${byT} mang tiếng vu khống.</span>`);gain({danh:-5});return false}
  m.ban=wk()+(formal?MEN.banF:MEN.banS);m.grudge=key(by);m.grudgeN=2;gain({danh:formal?3:2});if(by===S)S.th=cl((S.th||0)+1,-100,100);
- if(formal){const G=menGuards().filter(x=>x!==m&&x.alive);if(G.length){const g=G.slice().sort((a,b)=>(a.loyal||50)-(b.loyal||50))[0];if((g.loyal||50)<60){g.grudge=key(by);g.grudgeN=1}}}
+ if(formal){const G=menGuards().filter(x=>x!==m&&x.alive);if(G.length){const g=G.slice().sort((a,b)=>(a.loyal||50)-(b.loyal||50))[0];if((g.loyal||50)<BAL.loy.close){g.grudge=key(by);g.grudgeN=1}}}
  log(`${menCap(byT)} báo ${formal?"Cung Chính ti":"thị vệ"}: ${nm} lảng vảng ở ${at} không có lệnh, bị ${formal?"giải ra ngoại triều, cấm vào cung một năm":"đánh trượng, đuổi ra ngoại triều"}.`);return true}
 /* by hides m (and c): a debt and evidence; found → by is punished */
 function menHide(by,m,c,y,eyes){menStat(by===S?"hideMe":"hideNpc");const risk=cl(Math.round(10+eyes*5-(by.tamco||0)/10),4,60);
  if(c&&c!==by){const prev=J78.ctx;if(by===S)J78.ctx={how:"Ngươi giấu giúp, nên biết rõ chuyện",proves:menTrue(m,c,y).replace(/\.$/,"")};try{evA(by,c,y.r==="tryst"?2:1)}finally{J78.ctx=prev}affAdd(c,by,BAL.eff.jmen.menHide);oanAdd(c,by,BAL.eff.jmen.menHide_2)}
  if(roll(risk)){ap(by,{danh:-6});punish(by,"che giấu nam nhân lẻn vào hậu cung",1);m.ban=wk()+MEN.banS;return false}
- if(by===S){m.af=(m.af||0)+15;m.debt=(m.debt||0)+1;S.menSec=S.menSec||{};S.menSec[m.id]={r:y.r,v:y.v||null,k:y.k,w:wk(),hid:1}}return true}
+ if(by===S){m.af=(m.af||0)+BAL.eff.jmen.hideMan;m.debt=(m.debt||0)+1;S.menSec=S.menSec||{};S.menSec[m.id]={r:y.r,v:y.v||null,k:y.k,w:wk(),hid:1}}return true}
 
 /* the player's choice */
 function menEyes(k,c){return liveRivals(true).filter(w=>w!==c&&whereOf(w)===k).reduce((s,w)=>s+1+(w.mat||0)/2,0)}
 function menChoose(m,v,y,a){const at=placeName(y.k);menStat("ch_"+a);if(a==="nghe"&&!v&&y.hv!=null){const hv=RV(y.hv);if(hv&&hv.alive&&!hv.out){v=hv;y=Object.assign({},y,{v:hv.id,hv:null})}}
  if(a==="bao"){menKh(1);try{k61Know(m,"Thị vệ tra hỏi, khai tên hắn.",true,2)}catch(e){}menReport(S,m,v,y,0);return}
  if(a==="ccti"){menKh(2);try{k61Know(m,"Cung Chính ti ghi tên hắn.",true,2)}catch(e){}menReport(S,m,v,y,1);return}
- if(a==="lo"){if(m.trait==="trung hậu"||m.trait==="cẩn trọng")m.af=(m.af||0)+3;log(`Ngươi làm như không thấy ${menNmFull(m)} ở ${at}, quay bước đi nơi khác.`);delete (S.menWhy||{})[m.id];return}
+ if(a==="lo"){if(hasT(m,"Thật thà")||hasT(m,"Kín đáo"))m.af=(m.af||0)+3;log(`Ngươi làm như không thấy ${menNmFull(m)} ở ${at}, quay bước đi nơi khác.`);delete (S.menWhy||{})[m.id];return}
  if(a==="giau"){menKh(1);try{k61Know(m,"Hắn quỳ tạ, khai tên mình.",true,3)}catch(e){}const ok=menHide(S,m,v,y,menEyes(y.k,v));
   if(ok)log(`<span class="g">Ngươi sai người dẫn ${m.name} ra cửa ngách${v?`, che cho ${rkName(v)} ${v.name}`:""}. Hắn mang ơn ngươi; chuyện này thành bí mật trong tay ngươi.</span>`);
   else log(`<span class="r">Ngươi giấu ${m.name}, nhưng bị người thấy: tội che giấu nam nhân lẻn vào hậu cung.</span>`);delete (S.menWhy||{})[m.id];return}
@@ -220,14 +220,14 @@ function menChoose(m,v,y,a){const at=placeName(y.k);menStat("ch_"+a);if(a==="ngh
    if(v){const prev=J78.ctx;J78.ctx={how:"Ngươi núp nghe lén",proves:menTrue(m,v,y).replace(/\.$/,"")};try{evA(S,v,y.r==="tryst"?2:1)}finally{J78.ctx=prev}
     try{intelAdd(v,{k:"man:"+m.id,kind:"secret",txt:menTrue(m,v,y)},{by:"me",how:"nghe lén"})}catch(e){}}
    setTimeout(()=>{try{if(S&&!S.dead&&manById(m.id))menCard(m,v,y,1)}catch(e){}},0);return}
-  menStat("hearBad");m.knowsMe=m.knowsMe||[];if(!m.knowsMe.includes("me"))m.knowsMe.push("me");m.af=(m.af||0)-5;
+  menStat("hearBad");m.knowsMe=m.knowsMe||[];if(!m.knowsMe.includes("me"))m.knowsMe.push("me");m.af=(m.af||0)+BAL.eff.jmen.hearMan;
   if(v){oanAdd(v,S,BAL.eff.jmen.menChoose);affAdd(v,S,BAL.eff.jmen.menChoose_2)}log(`<span class="r">Ngươi giẫm phải cành khô; ${menNmFull(m)}${v?" và "+menVT(v):""} giật mình tản đi. ${v?"Nàng đã thấy ngươi nghe lén.":"Hắn đã thấy mặt ngươi."}</span>`);delete (S.menWhy||{})[m.id];return}}
 
 /* ---------- 5. NPC consorts see the same strays and choose by their nature ---------- */
 /* NPC choice by nature and feeling, no dice: same rules for every consort */
-function menDecide(w,c){const tr=w.trait||"";const h=c?hostility(w,c):0;
- if(c){if(tr==="Hiểm độc"||tr==="Kiêu ngạo"||h>45)return"report";if(tr==="Tham vọng")return"hide";if(tr==="Đa nghi")return"listen";if(tr==="Hiền lành"||tr==="Nhu mì")return h>25?"hide":"ignore";return h>30?"report":"ignore"}
- if(tr==="Kiêu ngạo"||tr==="Đa nghi")return"report";if(tr==="Tham vọng")return"hide";return"ignore"}
+function menDecide(w,c){const h=c?hostility(w,c):0;
+ if(c){if(tr==="Xảo quyệt"||tr==="Kiêu ngạo"||h>45)return"report";if(tr==="Tham vọng")return"hide";if(tr==="Kín đáo")return"listen";if(tr==="Ân cần"||tr==="Khiêm nhường")return h>25?"hide":"ignore";return h>30?"report":"ignore"}
+ if(tr==="Kiêu ngạo"||tr==="Kín đáo")return"report";if(tr==="Tham vọng")return"hide";return"ignore"}
 function menNpcAct(w,m,c,y){const d=menDecide(w,c);menStat("npc_"+d);
  if(d==="report"){menReport(w,m,c,y,(w.tamco||0)>=50?1:0);return d}
  if(d==="hide"){menHide(w,m,c,y,menEyes(y.k,c));if(c===S||menEye(S)>=(y.hide||0)+25){try{intelAdd(w,{k:"menhide:"+m.id,kind:"secret",txt:`${rkName(w)} ${w.name} đã che giấu ${m.name} lẻn vào ${placeName(y.k)}${c&&c!==S?` cùng ${rkName(c)} ${c.name}`:""}.`},{by:"tai mắt",how:"tai mắt"})}catch(e){}}return d}
@@ -237,14 +237,14 @@ function menNpcAct(w,m,c,y){const d=menDecide(w,c);menStat("npc_"+d);
 function menNpcSee(m,y){if(!m||!y)return;const c=y.v!=null?RV(y.v):null;for(const w of liveRivals(true)){if(w===c||whereOf(w)!==y.k||menEye(w)<(y.hide||0))continue;menStat("npcSee");const d=menNpcAct(w,m,c,y);if(d==="report")break}}
 /* she is the one caught: a private word with a man in the hậu cung while another consort is there */
 (function(){const t0=talk;talk=function(oi){let p=null,a=null;try{p=S&&curPeople()[popIdx];a=p&&p.kind==="man"&&talkOpts(p)[oi]}catch(e){}const before=S&&S.logSeq;const r=t0.apply(this,arguments);
- try{if(a&&menRoad()&&!S.dead&&S.logSeq!==before&&!/^Chào hỏi/.test(a.n)&&menZone(S.place)==="hc"){const m=p.ref;const y={k:S.place,r:m.tinh>=50||m.trysts?"meet":"talk"};
+ try{if(a&&menRoad()&&!S.dead&&S.logSeq!==before&&!/^Chào hỏi/.test(a.n)&&menZone(S.place)==="hc"){const m=p.ref;const y={k:S.place,r:m.tinh>=BAL.tinhLv.close||m.trysts?"meet":"talk"};
   for(const w of liveRivals(true)){if(whereOf(w)!==S.place||menEye(w)<20)continue;menStat("seenMe");const d=menDecide(w,S);
    if(d==="report"){if(y.r==="talk"){ap(w,{danh:2});apply({danh:-4});oanAdd(S,w,BAL.eff.jmen.top);log(`<span class="r">${rkName(w)} ${w.name} thấy ngươi nói chuyện riêng với ${m.name} ở ${placeName(S.place)} và đem chuyện đi rêu rao: Danh -4.</span>`)}else menReport(w,m,S,y,0);break}
    if(d==="hide"||d==="listen"){evA(w,S,d==="hide"?2:1);break}}}}catch(e){console.error("men talk",e)}return r}})();
 
 /* ---------- 6. the secret is leverage: "Uy hiếp hắn" on his card; grudges come back as rumours ---------- */
 (function(){const t0=talkOpts;talkOpts=function(p){const A=t0.apply(this,arguments);try{if(p&&p.kind==="man"&&p.ref&&menRoad()){const m=p.ref;const s=(S.menSec||{})[m.id];
-  if(s&&!s.used){const o=od(45+(S.tamco||0)/3+(s.hid?10:0)-(m.trait==="cẩn trọng"?10:0));
+  if(s&&!s.used){const o=od(45+(S.tamco||0)/3+(s.hid?10:0)-(hasT(m,"Kín đáo")?10:0));
    A.push({n:"Uy hiếp hắn",o,x:`hắn nộp bạc hay khai tin để giữ kín chuyện ${MEN_RT[s.r]||"cũ"} · hỏng: hắn ôm hận`,run:()=>{s.used=1;menStat("threat");
     if(roll(o)){const T=liveRivals(true).filter(v=>v.affair||(v.preg&&v.hidden)||(v.plan));if(T.length){const v=T.slice().sort((a,b)=>menH(a.id)-menH(b.id))[0];const F=j78facts(v).filter(f=>f.kind==="secret"||f.kind==="plan");const f=F[0];
       if(f){intelAdd(v,f,{by:m.name,how:"uy hiếp "+m.name});return `Hắn run sợ, khai: ${f.txt}`}}

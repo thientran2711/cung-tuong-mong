@@ -24,7 +24,7 @@ function spFav(o,s){const B=BAL.sp,pay=BAL.pay;const r=Math.min(7,Math.max(0,rkO
  const ok=o===S?val>=n:val>=n+B.favKeep;return{ok,n,k,lbl,how,val,q}}
 function spPayFav(o,fv){if(o===S){apply({[fv.k]:-fv.n});return}if(fv.q)affAdd(fv.q,o,-fv.n);else o.th=cl((o.th||0)-fv.n,-100,100)}
 function spHead(s){return srk(s)>=BAL.sp.head[s.role]}
-function spProudCh(s,shown){const B=BAL.sp;const b=shown&&!s.kn?B.proudAvg:(B.proud[s.tr]||B.proudAvg);return cl(Math.round(b-((s.loyal||50)-50)/5),3,70)}
+function spProudCh(s,shown){const B=BAL.sp;const b=shown&&!s.kn?B.proudAvg:qv(B.proud,s,B.proudAvg);return cl(Math.round(b-((s.loyal||50)-50)/5),3,70)}
 function spProud(s){return !!(s&&s.proud&&s.proud>S.turn)}
 function spSenior(o,s,r0){const L=(o.staff||[]).filter(x=>x!==s&&x.role===s.role&&srk(x)>=r0);L.sort((a,b)=>srk(b)-srk(a)||(b.age||0)-(a.age||0));return L[0]||null}
 /* the Kèm part of the Đề bạt card (jaudit button) */
@@ -48,7 +48,7 @@ function spMove(o,s,v){const i=(o.staff||[]).indexOf(s);if(i>=0)o.staff.splice(i
 function spLeaveCard(s){const B=BAL.sp,v=spGoTo(S,s);const keep=Math.max(B.keepMin,Math.round(dbCost({role:s.role,rk:srk(s)-1})*B.keepMul));const others=S.staff.filter(x=>x!==s);
  tsPanel({t:"Kẻ hầu xin đi",who:pServ(s),h:`<p>${s.name} thưa rằng ${v?`bên ${tsNm(v)} muốn có ${s.role==="maid"?"nàng":"hắn"} sang hầu`:"muốn xin về Nội vụ phủ"}, xin ${tsGoi()} cho đi.</p>`,
   opts:[tsOpt({n:"Tăng tiền thưởng, giữ lại",fx:{bac:-keep},need:[tsNeedBac(keep)],duoc:[`lòng +${B.keepGain}`,"giữ người, giữ chức"],kem:[`kiêu thêm ${B.keepMo} tháng`],go:()=>{s.loyal=cl(s.loyal+B.keepGain,0,100);s.proud=Math.max(s.proud||0,S.turn)+B.keepMo;log(`Ngươi tăng tiền thưởng giữ ${s.name} lại.`)}}),
-   tsOpt({n:"Giáng một bậc, giữ kỷ cương",duoc:["hết kiêu",`kẻ hầu khác lòng +${B.demoteOthers}`],mat:[`${s.name} xuống ${SRK[s.role][srk(s)-1]}`,`lòng -${B.demoteLoy}`],kem:["lòng dưới 30 thì có khi bán mình cho cung khác"],go:()=>{s.rk=srk(s)-1;s.proud=0;s.loyal=cl(s.loyal-B.demoteLoy,0,100);others.forEach(x=>x.loyal=cl(x.loyal+B.demoteOthers,0,100));log(`Ngươi giáng ${s.name} xuống ${srkName(s)}.`)}}),
+   tsOpt({n:"Giáng một bậc, giữ kỷ cương",duoc:["hết kiêu",`kẻ hầu khác lòng +${B.demoteOthers}`],mat:[`${s.name} xuống ${SRK[s.role][srk(s)-1]}`,`lòng -${B.demoteLoy}`],kem:[`lòng dưới ${balAb(BAL.loy.out)} thì có khi bán mình cho cung khác`],go:()=>{s.rk=srk(s)-1;s.proud=0;s.loyal=cl(s.loyal-B.demoteLoy,0,100);others.forEach(x=>x.loyal=cl(x.loyal+B.demoteOthers,0,100));log(`Ngươi giáng ${s.name} xuống ${srkName(s)}.`)}}),
    tsOpt({n:"Cho đi",duoc:[`kẻ hầu khác lòng +${B.letOthers}`,"bớt một miệng ăn"],mat:[`mất ${s.name}`],kem:v?[`${s.name} mang chuyện cung ngươi sang bên ${tsNm(v)} (người ấy nắm thêm 1 chứng cứ)`]:[],go:()=>{spMove(S,s,v);others.forEach(x=>x.loyal=cl(x.loyal+B.letOthers,0,100));if(v&&typeof evA==="function")evA(v,S,1);log(`${s.name} rời cung ngươi${v?`, sang hầu ${tsNm(v)}`:", về Nội vụ phủ"}.`)}})]})}
 /* monthly: pride runs its course for every household (hers and the NPCs'), after the merit promotions */
 function spMonth(){let ev="";const B=BAL.sp;for(const o of consorts()){if(!o||o.dead||(o!==S&&!o.alive))continue;for(const s of (o.staff||[]).slice()){if(!s.proud||s.coop)continue;

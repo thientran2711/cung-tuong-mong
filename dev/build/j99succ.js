@@ -46,8 +46,8 @@ function succNeeds(p,son,U){const N=[];if(p==="a")return N;const cold=!!S.out;
   N.push(succNeed(`Bạc ${BAL.succN.cBac} (có ${S.bac||0})`,(S.bac||0)>=BAL.succN.cBac));if(cold)N.push(succNeed("Không ở lãnh cung",false))}
  return N.sort((x,y)=>(+x.ok)-(+y.ok))}
 /* ---------- NPC dowager (two-way): the same conditions as (b) ---------- */
-function succNpcClaims(v,k){if(!v||!v.alive||v.out||!k||k.age>=BAL.succN.bAge)return false;const tr=(typeof traitsOf==="function"?traitsOf(v):[v.trait]).concat([v.trait]);
- return (((v.danh||40)>=BAL.succN.npcDanh&&(v.tamco||40)>=BAL.succN.npcTam)||tr.some(t=>/Tham vọng|Hiểm độc|Kiêu ngạo/.test(t||"")))}
+function succNpcClaims(v,k){if(!v||!v.alive||v.out||!k||k.age>=BAL.succN.bAge)return false;const tr=(typeof traitsOf==="function"?traitsOf(v):[v.trait]);
+ return (((v.danh||40)>=BAL.succN.npcDanh&&(v.tamco||40)>=BAL.succN.npcTam)||tr.some(t=>/Tham vọng|Xảo quyệt|Kiêu ngạo/.test(t||"")))}
 let SUCC_NPC=null;
 (function(){const o0=over;over=function(h,t,fate,alive){if(SUCC_NPC&&S&&!S.dead){const v=SUCC_NPC;SUCC_NPC=null;
   if(!/buông rèm/.test(t||""))t=String(t||"").replace(/\.?\s*$/,".")+` Tân đế còn nhỏ, ${v.name} buông rèm nhiếp chính, nắm cả triều đình lẫn hậu cung.`;fate=(fate||"")+" · Thánh mẫu nhiếp chính"}
@@ -139,7 +139,7 @@ function succCH(){const E=S.succ,son=succSon(),sn=succSN(son),foe=E.foe!=null?ri
       {n:"Tự thân ra trận đốc chiến",c:{suc:-25},e:{tam:2,q:1,an:1},txt:"Ngươi tự thân ra cổng thành đốc chiến."}]},
   {t:"Đêm Nguyên tiêu",h:`<p>Đêm Nguyên tiêu, một thích khách lẻn vào giữa đám đèn hoa, bị cấm quân bắt ngay trước kiệu ngươi. Hôm sau, triều thần dâng sớ: “Xin bệ hạ trả ngôi cho chính thống.”</p>`,
    o:[{n:`Nhường ngôi cho ${sn}, lui về làm Thái thượng hoàng`,e:{hoa:2},txt:`Ngươi nhường ngôi cho ${sn}.`,end:"c_abd"},
-      {n:"Giữ ngôi đến cuối đời",e:{q:1},txt:"Ngươi giữ ngôi.",end:()=>E.an>=5?"c_bad":E.q>=6?"c_ok":"c_abd"},
+      {n:"Giữ ngôi đến cuối đời",e:{q:1},txt:"Ngươi giữ ngôi.",end:()=>E.an>=BAL.cut.succEnd.an?"c_bad":E.q>=BAL.cut.succEnd.q?"c_ok":"c_abd"},
       {n:"✦ Dặn lập bia không chữ",rare:1,c:{suc:-5},txt:"Ngươi dặn lập bia không chữ.",end:"c_rare"}]}];
  const L=E.p==="a"?A:E.p==="b"?B:C;return L[Math.min(E.ch||0,2)]}
 /* the words of an epilogue choice (no numbers): from its hidden meters; risk (nguy up, mẫu tử down) goes to Kèm */

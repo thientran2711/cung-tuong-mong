@@ -2,7 +2,7 @@
 /* ================= j51 KẾ VỊ: lập đích, lập trưởng, lập hiền; tranh ngôi Đông cung (cùng một luật cho mọi người mẹ) ================= */
 const KV={c:.007,base:22,deb:4,debGap:12};
 /* hệ số theo tính nết: người mẹ có con trai đứng sau mưu dọn đường cho con */
-const KVT={"Hiểm độc":2,"Tham vọng":1.7,"Kiêu ngạo":1.2,"Đa nghi":1,"Nhu mì":.4,"Hiền lành":.08};
+const KVT={"Xảo quyệt":2,"Tham vọng":1.7,"Kiêu ngạo":1.2,"Kín đáo":1,"Khiêm nhường":.4,"Ân cần":.08};
 const KVACT=[["kframe",3],["kpoison",2],["pond",1.5],["ksab",3],["spy",2.5],["frame",1.5]];
 /* thứ tự sinh: mỗi con một mốc (tháng sinh), con cũ được gán một lần theo tuổi */
 function kvStamp(){allKids().forEach(([k])=>{if(k.bt==null)k.bt=S.turn-(k.age||0)*12})}
@@ -32,8 +32,8 @@ window.__kvS=null;window.__kvDue={};
 (function(){const m0=mindMenu;mindMenu=function(v,t){const K=window.__kvS;if(!K||K.v!==v||K.t!==t)return m0.apply(this,arguments);
  try{const b=bandOf(danger(v,t)+K.m);const allow=BANDS.slice(1,b+1).flatMap(x=>x[2]);const tc=witOf(v);const O=[];v.fails=v.fails||{};
   for(const [k,w0] of KVACT){const a=ACT[k];if(!a||!allow.includes(k))continue;let ok=false;try{ok=a.ok(v,t)}catch(e){}if(!ok)continue;
-   let w=w0*persW(v,k)*(1+K.m/40);let od=null;try{od=a.o?a.o(v,t):null}catch(e){}if(od!=null&&tc>=30)w*=Math.pow(cl(od,5,95)/50,(tc-30)/35);
-   const f=v.fails[k]||0;if(f)w*=tc<35?1+.6*f:Math.pow(.5,f);if(w>0)O.push([k,w])}
+   let w=w0*persW(v,k)*(1+K.m/40);let od=null;try{od=a.o?a.o(v,t):null}catch(e){}if(od!=null&&tc>=BAL.wit.lo)w*=Math.pow(cl(od,5,95)/50,(tc-BAL.wit.lo)/BAL.wit.mid);
+   const f=v.fails[k]||0;if(f)w*=tc<BAL.wit.mid?1+.6*f:Math.pow(.5,f);if(w>0)O.push([k,w])}
   return O}catch(e){return[]}}})();
 /* con bị nhắm: con trai đứng cao nhất trong thứ tự kế vị */
 (function(){const t0=tKid;tKid=function(t){const K=window.__kvS;if(K&&K.t===t){const o=kvOrder();const L=o.filter(x=>(t===S?x.v===null:x.v===t)&&(x.k.age>=3||x.k.heir));if(L.length)return L[0].k}return t0.apply(this,arguments)}})();

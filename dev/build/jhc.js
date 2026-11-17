@@ -10,7 +10,7 @@
 (function(){
 const T=s=>String(s==null?"":s).replace(/<[^>]+>/g,"").replace(/\s+/g," ").trim();
 /* ---------- 3. relation words ---------- */
-window.quyW=function(v){return v<=-30?"Ghét":v<-10?"Không ưa":v<=10?"Bình thường":v<30?"Có cảm tình":v<60?"Quý mến":"Thân thiết"};
+window.quyW=function(v){return ["Ghét","Không ưa","Bình thường","Có cảm tình","Quý mến","Thân thiết"][quyIx(v)]};/* cuts: BAL.quyLv (VANPHONG:69) */
 const sg=n=>(n>0?"+":"")+Math.round(n);
 try{Object.assign(KIT_GLOSS,{
  "Quý":"Người này quý người kia bao nhiêu (từ -100 đến 100; âm là không ưa, ghét). Cao thì giúp đỡ, che chở; thấp thì gây khó dễ.",
@@ -186,7 +186,7 @@ if(typeof renderPanel0==="function"){const p0=renderPanel0;renderPanel0=function
 /* ---------- 4. Người chạy việc ---------- */
 if(typeof bestSent==="function"){const b0=bestSent;bestSent=function(p){try{if(p===S&&S.runner!=null){const s=(S.staff||[]).find(x=>x.sid===S.runner&&!x.spyFor);if(s)return s;S.runner=null}}catch(e){}return b0.apply(this,arguments)}}
 PEND.runner=()=>({t:"<p>Ai làm người chạy việc? Khi ngươi sai người dò la, đưa thư, mua đồ…, người này đi. Lòng cao thì ít khi khai ra ngươi.</p>",
- o:(S.staff||[]).filter(s=>!s.spyFor).map(s=>({n:`${s.name} (${s.role==="maid"?"cung nữ":"thái giám"})`,fx:{},x:`Lòng ${s.loyal}${s.tr==="lanh"?" · lanh lợi":""}${bestSent(S)===s?" · đang chạy việc":""}`,go:()=>{S.runner=s.sid;log(`Từ nay ${s.name} lo chạy việc cho ngươi.`)}})).concat(S.runner!=null?[{n:"Để game tự chọn",fx:{},x:"chọn theo Lòng và tài",go:()=>{S.runner=null}}]:[],[{n:"Thôi",fx:{}}])});
+ o:(S.staff||[]).filter(s=>!s.spyFor).map(s=>({n:`${s.name} (${s.role==="maid"?"cung nữ":"thái giám"})`,fx:{},x:`Lòng ${s.loyal}${netIs(s,"sharp")?" · lanh lợi":""}${bestSent(S)===s?" · đang chạy việc":""}`,go:()=>{S.runner=s.sid;log(`Từ nay ${s.name} lo chạy việc cho ngươi.`)}})).concat(S.runner!=null?[{n:"Để game tự chọn",fx:{},x:"chọn theo Lòng và tài",go:()=>{S.runner=null}}]:[],[{n:"Thôi",fx:{}}])});
 document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-runner]");if(!b)return;e.preventDefault();e.stopPropagation();if(!S||Q.length)return;pushDil(mkP("runner"),"Người chạy việc");render()},true);
 window.runnerLine=function(){const s=bestSent(S);return `<span class="krun">${gl("Người chạy việc","Người chạy việc:")} <b>${s?s.name:"chưa có ai"}</b>${(S.staff||[]).filter(x=>!x.spyFor).length>1?` <button class="chip kchipb" data-runner="1">Đổi ›</button>`:""}</span>`};
 

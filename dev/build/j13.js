@@ -34,7 +34,7 @@ function illMonth(){let ev="";for(const p of consorts())ev+=illMonthP(p);ev+=epi
 function illNightF(p){const i=illOf(p);if(p.fakeIll)return 1.2;return !i?1:ILL[i.k].cont?0:i.st>=2?.3:.7}
 function treatO(p,way){return cl(lotB(p,"Sức khỏe")+(way==="ty"?55+careOdds(p):way==="self"?30+p.arts.y*8:20+careOdds(p)),5,95)}
 function treat(p,way){const i=illOf(p);if(!i)return"";let o=lotB(p,"Sức khỏe")+(way==="ty"?55+careOdds(p):way==="self"?30+p.arts.y*8:20+careOdds(p));
- const bribed=typeof thyBribedBy==="function"?thyBribedBy(p):liveRivals(true).find(v=>v!==p&&S.court&&(S.court.ty.af[v.id]||0)>=30&&hostility(v,p)>=40);
+ const bribed=typeof thyBribedBy==="function"?thyBribedBy(p):mindPickBy(liveRivals(true).filter(v=>v!==p&&S.court&&(S.court.ty.af[v.id]||0)>=30&&hostility(v,p)>=40),v=>hostility(v,p)*mindW(v,"bribe"),null);/* npc-mind: was FIRST */
  if(way==="ty"&&bribed&&roll(25)){i.st=Math.min(3,i.st+1);return `<span class="r">Thang thuốc của thái y làm bệnh nặng thêm.</span> (Có kẻ đã mua chuộc thái y?) `}
  if(roll(cl(o,5,95))){p.ill=null;return `${NMc(p)} khỏi bệnh. `}if(i.st>1&&roll(50)){i.st--;return `Bệnh đỡ, còn ${STG[i.st]}. `}return "Bệnh chưa thuyên giảm. "}
 function illCards(){const A=[];const i=illOf(S);
@@ -56,8 +56,8 @@ const LOTS=[[0,"Phượng hoàng đậu ngọn ngô đồng,\nMây lành năm s�
 const LDOM=["Sủng","Giao thiệp","Danh","Mưu kế","Con cái","Tài nghệ","Con cái","Danh","Giao thiệp","Mưu kế","Tài nghệ","Sức khỏe","Mưu kế","Giao thiệp","Con cái","Sủng","Giao thiệp","Sức khỏe","Sức khỏe","Sủng","Danh","Giao thiệp","Mưu kế","Con cái","Hung","Sức khỏe","Hung","Danh","Mưu kế","Hung"];
 function drawLot(p,better){const pickL=()=>{const i=R(LOTS.length);return{i,lv:LOTS[i][0],dom:LDOM[i]||"Sủng"}};let l=pickL();if(better){const m=pickL();if(m.lv<l.lv)l=m}p.lot=l;return l}
 function lotB(p,dom){return p&&p.lot&&dom&&p.lot.dom===dom?LVB[p.lot.lv]:0}
-const LADW=["Liều","Khó","Năm ăn năm thua","Khá chắc","Chắc","Rất chắc","Nắm chắc"];
-function ladI(o){return LADW.indexOf(word(cl(Math.round(o),5,95)))}
+/* odds step of o (ONE CORE: the step words live only in KIT_ODDS j79, the cuts in BAL.odds; review/one-core-dup-r1) */
+function ladI(o){return oddsLv(cl(Math.round(o),BAL.odds.lo,BAL.odds.hi))}
 /* the lot's pull on one card, in ladder steps; o = the odds before the lot */
 function lotTag(dom,o){const b=lotB(S,dom);if(!b)return"";const d=o==null?0:ladI(o+b)-ladI(o);return ` · Quẻ: ${b<0?"khó":"dễ"} hơn ${d?Math.abs(d)+" bậc":"một chút"}`}
 /* the lot in plain words: scope, direction, the cards it touches */

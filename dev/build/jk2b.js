@@ -143,9 +143,9 @@ function kitStageEdge(){try{const st=$("stage");if(!st)return;const sr=st.getBou
    window.kitCourtKnown(who) -> bool (default: the Emperor's mood is public; Thái hậu / Hoàng hậu moods are "chưa rõ" until a module says). ---------- */
 function kitCourtRows(){const out=[];if(!S||S.dead)return out;const mood=w=>{try{if(typeof window.kitCourtMood==="function"){const r=window.kitCourtMood(w);if(r!=null)return r}}catch(e){}
   if(w==="emp"){const m=MOODS[S.emp&&S.emp.mood];return m?[m[0],m[1]]:null}return null};
- const att=(n)=>typeof affW==="function"?[affW(n),n>10?"g":n<-10?"r":""]:[String(n),""];
+ const att=(n)=>typeof affW==="function"?[affW(n),n>BAL.quyLv[2]?"g":n<BAL.quyLv[1]?"r":""]:[String(n),""];
  const known=w=>{try{if(typeof window.kitCourtKnown==="function"){const r=window.kitCourtKnown(w);if(r!=null)return r}}catch(e){}return true};
- out.push({k:"emp",who:"Hoàng thượng",f:pEmp(),mood:mood("emp"),att:known("emp")?[S.sung>=60?"Sủng ái":S.sung>=30?"Để mắt":S.sung>=10?"Biết mặt":"Chưa để ý",S.sung>=30?"g":""]:null});
+ out.push({k:"emp",who:"Hoàng thượng",f:pEmp(),mood:mood("emp"),att:known("emp")?[S.sung>=BAL.sungLv.card[2]?"Sủng ái":S.sung>=BAL.sungLv.card[1]?"Để mắt":S.sung>=BAL.sungLv.card[0]?"Biết mặt":"Chưa để ý",S.sung>=BAL.sungLv.card[1]?"g":""]:null});
  if(!S.thDead)out.push({k:"th",who:"Thái hậu",f:pTH(),mood:mood("th"),att:known("th")?att(S.th|0):null});
  const q=typeof queenP==="function"?queenP():null;if(q&&q!==S)out.push({k:"hh",who:"Hoàng hậu",f:pv(q),mood:mood("hh"),att:known("hh")?att(S.hh|0):null,ref:q});
  return out}
@@ -635,7 +635,7 @@ button.ka.kdis .kaart>.ksart{filter:grayscale(.7);opacity:.8}
    kitRoulette({items:[{k,src,wide,name,rare}], target:k, toEl:()=>element, done:fn}). Test state: window.__kroulStep (0 up · 1 shuffling · 2 pick · 3 shown). ---------- */
 const KIT_OW=(typeof OW69!=="undefined")?OW69:{nc:6,bd:7,thd:9,cn:13,dtq:17,muoi:17,ch:13,td:9,tt:8,cnv:8};
 const KIT_CARDBACK="img/kit/card-back.webp";
-function kitRare(k){try{if(typeof ow69Rare==="function")return ow69Rare(k)}catch(e){}const w=KIT_OW[k]||10;return w<=6?"Rất hiếm":w<=9?"Hiếm":"Thường gặp"}
+function kitRare(k){try{if(typeof ow69Rare==="function")return ow69Rare(k)}catch(e){}const w=KIT_OW[k]||10;return w<=BAL.rareLv[0]?"Rất hiếm":w<=BAL.rareLv[1]?"Hiếm":"Thường gặp"}
 /* ONE origin card face (front): art frame + name + rarity chip pinned to the bottom (kit rule: chips of a row share one baseline) */
 function kitOriginFace(it){return `<div class="kra">${kitSceneArt(it.wide||it.src,"",{shape:"wide",fb:it.src})}</div><span class="krn">${it.name}</span><span class="krr">${typeof kitChip==="function"?kitChip(it.rare,"n"):it.rare}</span>`}
 /* ONE FIT for every origin / identity card grid (owner 16/11 s23: "to ra, trải dài hết cái màn nền"): the cards grow to span the background width

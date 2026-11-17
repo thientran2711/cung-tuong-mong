@@ -48,15 +48,14 @@ const CODE_PAT={
  k:/(?<![\w$.])k\s*:\s*[+-]?[01]\b(?=\s*,\s*(?:tag|t|n|w)\s*:)/g,
 };
 /* the same, read on the code with every string / template / regex blanked (an effect call spans its string arguments):
-   amt    = the typed last amount (or `cond?N:M`) of a relation / family / power effect call: rdOan(A,"v",5), relAdd(p,S,-8), e67dad(10) …
+   amt    = the typed last amount (or `cond?N:M`) of a relation / family / power effect call: rdOan(A,"v",5), relAdd(p,S,-8), e67dad(10) … (a single-argument call e67dad(4) counts too: review/one-core-dup2, found by one-core-roads)
    ladder = a private threshold table typed as a ternary chain: r>=7?[4,2]:r>=5?[3,2]:… / o>=91?"Nắm chắc":o>=81?… (a second table for a
             concept the rulebook should hold once: capOf, the odds-word cut points …) */
 const NUMV='[+-]?\\d+(?:\\.\\d+)?';
 const JOIN_PAT={
- amt:new RegExp('\\b(?:rdOan|rdRel|relAdd|oanAdd|affAdd|kcAf|tdPowAdd|e67(?:dad|bien|kho|ally|pun|foe|drop))\\((?:[^()]|\\([^()]*\\))*?[(,]\\s*(?:[\\w$.!]+\\s*\\?\\s*)?'+NUMV+'(?:\\s*:\\s*'+NUMV+')?\\s*\\)','g'),
- /* amt1 (review/one-core-arcs r2, reviewer r1 item 1): the same effect calls with ONE argument — e67dad(10), e67heir(6) … — which amt's
-    pattern (a number after a comma) never saw; a new kind, so its first --update freezes the existing count, then it may only shrink */
- amt1:new RegExp('\\b(?:rdOan|rdRel|relAdd|oanAdd|affAdd|kcAf|tdPowAdd|e67(?:dad|bien|kho|heir|ally|pun|foe|drop))\\(\\s*(?:[\\w$.!]+\\s*\\?\\s*)?'+NUMV+'(?:\\s*:\\s*'+NUMV+')?\\s*\\)','g'),
+ /* amt also counts ONE-argument calls (dup2 c66ef16a: e67dad(4)); e67heir added by review/one-core-arcs r2 (reviewer r1 item 1) —
+    one kind, the former 'amt1' folded in here */
+ amt:new RegExp('\\b(?:rdOan|rdRel|relAdd|oanAdd|affAdd|kcAf|tdPowAdd|e67(?:dad|bien|kho|heir|ally|pun|foe|drop))\\((?:(?:[^()]|\\([^()]*\\))*?[(,])?\\s*(?:[\\w$.!]+\\s*\\?\\s*)?'+NUMV+'(?:\\s*:\\s*'+NUMV+')?\\s*\\)','g'),
  ladder:new RegExp('(?:[\\w$.\\])]+\\s*(?:>=|>|<=|<)\\s*'+NUMV+'\\s*\\?\\s*(?:\\[[^\\[\\]]*\\]|'+NUMV+'|""|``)\\s*:\\s*){2,}(?:\\[[^\\[\\]]*\\]|'+NUMV+'|""|``)','g'),
 };
 const TXT_PAT={
@@ -103,7 +102,7 @@ for(const f of ORDER){const src=fs.readFileSync(path.join(B,f),'utf8');const T=l
    for(const [re,paths] of CORE_TEXT){const m=t.s.match(re);if(!m)continue;const nums=m.slice(1).filter(x=>x!=null).map(Number);
     const hit=!paths||paths.split(',').some(p=>nums.includes(coreVal(p)));
     if(hit)fail.push(`${f}:${t.line} text types a core number (print BAL.${paths||'pay'}): «${t.s.slice(0,110)}»`)}}}
- {const J=joinCode(T);for(const k in JOIN_PAT){const m=J.match(JOIN_PAT[k]);if(m)m.forEach(x=>{const v=x.replace(/\s+/g,'');if((k==='amt'||k==='amt1')&&/[(,][+-]?0\)$/.test(v))return;if(k==='ladder'&&[...v.matchAll(/(?:>=|>|<=|<)([+-]?[\d.]+)\?/g)].every(q=>+q[1]===0))return;/* a sign test (n>0 / n<0), not a table */add(k,v.length>90?v.slice(0,90)+'…':v)})}}
+ {const J=joinCode(T);for(const k in JOIN_PAT){const m=J.match(JOIN_PAT[k]);if(m)m.forEach(x=>{const v=x.replace(/\s+/g,'');if(k==='amt'&&/[(,][+-]?0\)$/.test(v))return;if(k==='ladder'&&[...v.matchAll(/(?:>=|>|<=|<)([+-]?[\d.]+)\?/g)].every(q=>+q[1]===0))return;/* a sign test (n>0 / n<0), not a table */add(k,v.length>90?v.slice(0,90)+'…':v)})}}
  now[f]=per;
  for(const [mf,name] of MIRRORS)if(mf===f){const m=src.match(new RegExp('(?:const |,)'+name+'\\s*=\\s*(\\[[^\\]]*\\]|\\{[^}]*\\})'));if(!m)fail.push(`${f}: mirror ${name} not found`);else if(/\d/.test(m[1].replace(/\/\*[\s\S]*?\*\//g,'')))fail.push(`${f}: mirror ${name} typed with numbers (${m[1].slice(0,60)}); it must be filled from BAL`)}
 }

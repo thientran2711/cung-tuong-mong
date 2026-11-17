@@ -32,7 +32,7 @@ const EX_CKTT=[["cam","dan"],["ky","co"],["thi","tho"],["hoa","ve"]];
 function exOn(){return !!(typeof S!=="undefined"&&S&&BAL&&BAL.ex)}
 function exSrv(p){return p===S&&typeof isSrv==="function"&&isSrv()}
 function exRk(to){return to>=7?"Hoàng hậu":RANKS[Math.max(0,to)].n}
-function exTier(to){return to<=3?0:to<=5?1:2}
+function exTier(to){return to<=BAL.cut.exTier[0]?0:to<=BAL.cut.exTier[1]?1:2}
 function exCd(to){const c=BAL.ex.cd;return c[Math.max(0,Math.min(c.length-1,to))]}
 function exLv(p,k){try{if(EXK[k])return typeof virLv==="function"?virLv(p,EXK[k].vir):0;return kg82LvFor(p,k)}catch(e){return 0}}
 function exArt(p,k){try{return typeof artLv==="function"?artLv(p,k):((p.arts||{})[k]||0)}catch(e){return 0}}

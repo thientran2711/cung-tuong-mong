@@ -18,17 +18,17 @@ const EMO_EV={selfUp:["vui",60],selfDown:["buon",55],rivalUp:["ghen",30],friendU
 /* personality filter: trait → event → [emotion, ×strength] (null emotion = shrugs it off) */
 const EMO_TR={
  "Kiêu ngạo":{rivalUp:["gian",1.4],slight:["gian",1.5],punished:["gian",1.2],selfDown:["gian",1.3],gift:["vui",.6],otherKid:["ghen",1.4],selfUp:["vui",1.2]},
- "Nhu mì":{rivalUp:["buon",1],slight:["buon",1],punished:["so",1.4],selfDown:["buon",1.2],gift:["vui",1.2],otherKid:["buon",.8]},
+ "Khiêm nhường":{rivalUp:["buon",1],slight:["buon",1],punished:["so",1.4],selfDown:["buon",1.2],gift:["vui",1.2],otherKid:["buon",.8]},
  "Tham vọng":{rivalUp:["muu",1.3],otherKid:["muu",1.2],selfUp:["vui",1.3],punished:["muu",1],selfDown:["muu",1.2],friendDie:["lo",.6]},
- "Hiểm độc":{rivalUp:["muu",1.2],slight:["muu",1.3],punished:["muu",1.1],otherKid:["muu",1.3],foeDown:["vui",1.6],foeDie:["vui",1.5],gift:["vui",.8]},
- "Hiền lành":{rivalUp:["vui",.5],slight:["buon",.6],gift:["vui",1.3],punished:["so",1],otherKid:["vui",.5],foeDown:[null,0],foeDie:["buon",.6],friendDie:["dau",1]},
- "Đa nghi":{rivalUp:["lo",1],slight:["gian",1],gift:["lo",.5],punished:["so",1.2],ill:["lo",1.4],night:["lo",.3]},
- "Ghen tuông":{rivalUp:["ghen",1.6],otherKid:["ghen",1.6]},
+ "Xảo quyệt":{rivalUp:["muu",1.2],slight:["muu",1.3],punished:["muu",1.1],otherKid:["muu",1.3],foeDown:["vui",1.6],foeDie:["vui",1.5],gift:["vui",.8]},
+ "Ân cần":{rivalUp:["vui",.5],slight:["buon",.6],gift:["vui",1.3],punished:["so",1],otherKid:["vui",.5],foeDown:[null,0],foeDie:["buon",.6],friendDie:["dau",1]},
+ "Kín đáo":{rivalUp:["lo",1],slight:["gian",1],gift:["lo",.5],punished:["so",1.2],ill:["lo",1.4],night:["lo",.3]},
+ "Nóng nảy":{rivalUp:["ghen",1.6],otherKid:["ghen",1.6]},
  "Thù dai":{slight:["gian",1.4],foeDown:["vui",1.3]},
- "Tham tiền":{gift:["vui",1.6]},
+ "Ham lợi":{gift:["vui",1.6]},
  "Trọng nghĩa":{friendDie:["dau",1.1],friendUp:["vui",1.4]},
- "Cả nể":{slight:["buon",.8]},
- "Thẳng thắn":{slight:["gian",1.1],rivalUp:["ghen",.6]},
+ "Rộng lượng":{slight:["buon",.8]},
+ "Thật thà":{slight:["gian",1.1],rivalUp:["ghen",.6]},
  "Mê tín":{ill:["so",1.2],kidDie:["dau",1]},
  /* servants (j10 STR) */
  trung:{mistressDown:["lo",1.4],mistressUp:["vui",1.3]},tham:{gift:["vui",1.6],mistressDown:["muu",.8]},nhat:{punished:["so",1.6],mistressDown:["so",1.3],loyalDown:["so",1.2]},
@@ -37,7 +37,7 @@ const EMO_TR={
  nongnay:{slight:["gian",1.5],kidDie:["gian",.8]},nhantu:{slight:["buon",.7]},danghi:{slight:["gian",1.2],ill:["lo",1.3]}};
 /* decay per tuần (points); trait multipliers per emotion */
 const EMO_DECAY={vui:9,binh:0,buon:6,gian:8,so:9,ghen:6,lo:6,dau:3,muu:5};
-const EMO_DK={"Thù dai":{gian:.4,muu:.6},"Hiền lành":{gian:1.6,ghen:1.6,muu:1.5},"Nhu mì":{buon:.7,so:.8},"Kiêu ngạo":{gian:.8},"Ghen tuông":{ghen:.6},"Hiểm độc":{muu:.6},"Trọng nghĩa":{dau:.7}};
+const EMO_DK={"Thù dai":{gian:.4,muu:.6},"Ân cần":{gian:1.6,ghen:1.6,muu:1.5},"Khiêm nhường":{buon:.7,so:.8},"Kiêu ngạo":{gian:.8},"Nóng nảy":{ghen:.6},"Xảo quyệt":{muu:.6},"Trọng nghĩa":{dau:.7}};
 /* EFFECTS. persW multipliers at full strength (v=100); scaled linearly by v/100 */
 const EMO_HARM=["poison","kpoison","frame","kframe","plant","musk","catswap","pushp","provoke","humiliate","rumor","trip","accuse","block","steal","vp","pond","ksab","takeaway","bribe","spy","punish"];
 const EMO_KIND=["help","visit","warn","mediate","apologise","ally","gift","reward","pardon","serveTH"];
@@ -60,7 +60,7 @@ function emoKey(p){if(!p)return"";if(p===S)return"me";if(S.emp&&p===S.emp)return
 function emoByKey(k){if(k==="me")return S;if(k==="emp")return S.emp;if(k==="th")return emoTH();const v=(rivals||[]).find(x=>String(x.id)===String(k));if(v)return v;
  if(/^s\d+$/.test(k)){try{return allServ().find(s=>"s"+s.sid===k)||null}catch(e){}}return null}
 function emoName(p){if(!p)return"";if(p===S)return"ngươi";if(p===S.emp)return"Hoàng thượng";if(p===S.thO)return"Thái hậu";return p.name||""}
-function emoTraits(p){try{if(p===S.thO)return traitsOf("th");if(p&&p.tr&&!p.trait)return[p.tr,p.tr2].filter(Boolean);return traitsOf(p)}catch(e){return[]}}
+function emoTraits(p){try{if(p===S.thO)return traitsOf("th");return traitsOf(p)}catch(e){return[]}}
 function emoGet(p){p=emoRes(p);if(!p)return{k:"binh",v:0};const e=p.emo;if(!e||!EMO[e.k]||e.v<15)return{k:"binh",v:0,why:""};return e}
 /* ---------- set: a stronger feeling replaces a weaker one; the same feeling adds up ---------- */
 function emoSet(p,k,v,why,t){if(!emoOn())return;p=emoRes(p);if(!p||!EMO[k]||!(v>0))return;v=Math.round(cl(v,0,100));const e=p.emo;
@@ -97,7 +97,7 @@ function emoWeek(){if(!emoOn())return;const W=emoW();S.emoSnap=S.emoSnap||{};con
   if(n.conf&&!o.conf)emoEv(p,"punished","bị cấm túc");
   if(n.kidsAll>o.kidsAll){emoEv(p,"kidBorn","mẹ tròn con vuông");for(const x of others(p))if(aff(x,p)<25)emoEv(x,"otherKid",`${nm} sinh hạ hoàng tự`,emoKey(p))}
   if(n.kids<o.kids-(n.kidsAll-o.kidsAll)||(n.kids<o.kids&&n.kidsAll===o.kidsAll))emoEv(p,"kidDie","mất con");
-  if(n.n>o.n&&!(n.kidsAll>o.kidsAll)){emoEv(p,"night","được Hoàng thượng lật thẻ");if(S.emp&&((p===S?S.lastNightS:p.lastNightS)||0)>=6)S.emp.emoFond={k:emoKey(p),w:W};for(const x of others(p))if(aff(x,p)<10&&emoTraits(x).includes("Ghen tuông"))emoEv(x,"rivalUp",`${nm} được thị tẩm`,emoKey(p),.6)}
+  if(n.n>o.n&&!(n.kidsAll>o.kidsAll)){emoEv(p,"night","được Hoàng thượng lật thẻ");if(S.emp&&((p===S?S.lastNightS:p.lastNightS)||0)>=6)S.emp.emoFond={k:emoKey(p),w:W};for(const x of others(p))if(aff(x,p)<10&&emoTraits(x).includes("Nóng nảy"))emoEv(x,"rivalUp",`${nm} được thị tẩm`,emoKey(p),.6)}
   if(n.sung<=o.sung-6)emoEv(p,"neglect","Hoàng thượng lạnh nhạt");
   if(n.suc<30&&o.suc>=30)emoEv(p,"ill","sức khỏe sa sút")}
  /* servants: by their mistress and by their own Lòng */
@@ -123,10 +123,10 @@ function emoWeek(){if(!emoOn())return;const W=emoW();S.emoSnap=S.emoSnap||{};con
 /* ---------- effects ---------- */
 /* Đức + personality brake (owner 11/14): anger/jealousy only raise the WISH to harm; how much of it becomes harm depends on Đức and traits.
    f = share of the emotional harm boost that turns into harm acts. High Đức: 0 (anger turns into withdrawing / confronting words), mid: ½, low: 1,
-   low Đức + Hiểm độc / Tham vọng: 1.5. A severe grudge (oán ≥ 60 toward the target) keeps at least ½ even at high Đức. Same rule for everyone. */
-const EMO_BRAKE={hi:70,mid:40,fHi:0,fMid:.5,fLo:1,fBad:1.5,soft:{"Hiền lành":15,"Nhu mì":8,"Trọng nghĩa":8,"Hiếu thảo":5,"Hiểm độc":-10,"Tham vọng":-5,"Thù dai":-5}};
-function emoDuc(p){if(!p)return 50;if(p===S)return S.duc||0;let d=p.duc;if(d==null)d=p.tr==="trung"?60:p.tr==="tham"?30:45;for(const t of emoTraits(p))d+=EMO_BRAKE.soft[t]||0;return d}
-function emoBrake(p,t){const d=emoDuc(p),B=EMO_BRAKE;let f=d>=B.hi?B.fHi:d>=B.mid?B.fMid:B.fLo;const T=emoTraits(p);if(d<B.mid&&(T.includes("Hiểm độc")||T.includes("Tham vọng")))f=B.fBad;
+   low Đức + Xảo quyệt / Tham vọng: 1.5. A severe grudge (oán ≥ 60 toward the target) keeps at least ½ even at high Đức. Same rule for everyone. */
+const EMO_BRAKE={hi:70,mid:40,fHi:0,fMid:.5,fLo:1,fBad:1.5,soft:{"Ân cần":15,"Khiêm nhường":8,"Trọng nghĩa":8,"Vì gia tộc":5,"Xảo quyệt":-10,"Tham vọng":-5,"Thù dai":-5}};
+function emoDuc(p){if(!p)return 50;if(p===S)return S.duc||0;let d=p.duc;if(d==null)d=netIs(p,"loyal")?60:netIs(p,"greed")?30:45;for(const t of emoTraits(p))d+=EMO_BRAKE.soft[t]||0;return d}
+function emoBrake(p,t){const d=emoDuc(p),B=EMO_BRAKE;let f=d>=B.hi?B.fHi:d>=B.mid?B.fMid:B.fLo;const T=emoTraits(p);if(d<B.mid&&(T.includes("Xảo quyệt")||T.includes("Tham vọng")))f=B.fBad;
  if(t&&f<.5){try{if(oan(p,t)>=60)f=.5}catch(e){}}return f}
 function emoMul(p,act){const e=emoGet(p);if(e.k==="binh")return 1;const T=EMO_W[e.k];if(!T)return 1;const harm=EMO_HARM.includes(act);let m=T[act];if(m==null)m=harm?T.harm:EMO_KIND.includes(act)?T.kind:null;if(m==null)return 1;
  if(harm&&m>1){const f=emoBrake(p);m=f>0?1+(m-1)*f:.9}
@@ -139,7 +139,7 @@ function emoMul(p,act){const e=emoGet(p);if(e.k==="binh")return 1;const T=EMO_W[
 (function(){const t0=odT;odT=function(a,b){const r=t0.apply(this,arguments);try{if(emoOn()&&a){const e=emoGet(a);const m=Math.round((EMO_OD[e.k]||0)*e.v/100);if(m)return cl(r+m,5,95)}}catch(e){}return r}})();
 (function(){const n0=nightCh;nightCh=function(p){const c=n0.apply(this,arguments);try{p=p||S;if(emoOn()&&c){const e=emoGet(p);let m=EMO_NIGHT[e.k]||1;if((e.k==="buon"||e.k==="dau")&&(S.emp.traits||[]).includes("nhantu"))m=1.05;let x=1+(m-1)*e.v/100;
   /* his own mood: who he is angry with / fond of, and in grief or worry he seeks the gentle ones */
-  const E=S.emp.emo,k=emoKey(p);if(E&&E.v>=15){if(E.k==="gian"&&E.t===k)x*=1-.5*E.v/100;else if(["buon","dau","lo"].includes(E.k)&&emoTraits(p).some(t=>t==="Hiền lành"||t==="Nhu mì"))x*=1.08}
+  const E=S.emp.emo,k=emoKey(p);if(E&&E.v>=15){if(E.k==="gian"&&E.t===k)x*=1-.5*E.v/100;else if(["buon","dau","lo"].includes(E.k)&&emoTraits(p).some(t=>t==="Ân cần"||t==="Khiêm nhường"))x*=1.08}
   
   if(x!==1)return Math.max(1,Math.round(c*x))}}catch(e){}return c}})();
 function emoMonth(){if(!emoOn())return;for(const p of emoPeople())for(const s of p.staff||[]){const e=emoGet(s);const d=Math.round((EMO_LOY[e.k]||0)*e.v/60);if(d)s.loyal=cl((s.loyal||0)+d,0,100)}}

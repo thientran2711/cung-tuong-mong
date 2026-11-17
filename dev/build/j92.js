@@ -175,7 +175,7 @@ function wdBelPE(obs,e,owner){const it=wdItem(e);if(!it)return 0;if(it.nt&&e.own
 function wdBelStatus(obs,t){return wdStatusBy(t,e=>wdBelPE(obs,e,t))}
 function wdAutoFor(p,bias){const tgt=Math.min(8,wdPOf(p))+(bias||0);wdApply(p,wdBest(p,tgt,e=>wdBelPE(p,e,p)))}
 /* NPC choice: by belief + trait (Kiêu ngạo / Tham vọng dress up, Hiền lành / Nhu mì keep modest) */
-function wdNpcBias(v){const t=(typeof traitsOf==="function"?traitsOf(v):[v.trait]).join(" ");return /Kiêu ngạo|Tham vọng/.test(t)?1:/Hiền lành|Nhu mì/.test(t)?-.5:0}
+function wdNpcBias(v){const t=(typeof traitsOf==="function"?traitsOf(v):[v.trait]).join(" ");return /Kiêu ngạo|Tham vọng/.test(t)?1:/Ân cần|Khiêm nhường/.test(t)?-.5:0}
 
 /* bonus to Sắc / Danh while worn: the ONE wearBonus is in jwdinv (WD slots count their own effect, never ×1.5: the Vượt phẩm status stays hidden) */
 /* the old hair 'wear' button now puts the item into the TRÂM slot */
@@ -205,9 +205,9 @@ function wdCause(obs,t){if(!obs||!t||obs===t)return null;if(obs===S){const k=wdK
 window.wdCause=wdCause;
 const WD_ST_WORD={over:"vượt phẩm",under:"quá giản dị",tang:"mặc đồ đỏ vàng giữa quốc tang",ok:"đúng phẩm"};
 /* her ma ma (or a maid old enough to be one) who is sharp-eyed: lanh lợi and loyal */
-function wdMama(p){const L=[p.maid].concat(p.staff||[]).filter(Boolean);return L.find(s=>{let m=false;try{m=personRoleRank(s,"maid").role==="mama"||(s.age||0)>=36}catch(e){}return m&&(s.tr==="lanh"||(s.loyal||0)>=80)&&(s.loyal||0)>=60&&!s.spyFor})||null}
+function wdMama(p){const L=[p.maid].concat(p.staff||[]).filter(Boolean);return L.find(s=>{let m=false;try{m=personRoleRank(s,"maid").role==="mama"||(s.age||0)>=36}catch(e){}return m&&(netIs(s,"sharp")||(s.loyal||0)>=BAL.loy.top)&&(s.loyal||0)>=BAL.loy.close&&!s.spyFor})||null}
 /* someone to sell or pawn things quietly outside the palace: a ma ma or a eunuch of her own staff (loyal 40+) */
-function wdAgent(p){const L=[p.maid].concat(p.staff||[]).filter(s=>s&&!s.spyFor&&(s.loyal||0)>=40);
+function wdAgent(p){const L=[p.maid].concat(p.staff||[]).filter(s=>s&&!s.spyFor&&(s.loyal||0)>=BAL.loy.low);
  return L.find(s=>s.role==="eunuch")||L.find(s=>{try{return personRoleRank(s,"maid").role==="mama"||(s.age||0)>=36}catch(e){return false}})||null}
 
 /* ---------- getting things: a real item into the chest (rewards, purchases, gifts) ---------- */
@@ -295,7 +295,7 @@ function wdAccuse(a,t){const c=wdCause(a,t);const truth=wdStatus(t);const judge=
  if(truth==="under"){ap(t,{danh:-4});return `${A0} hặc ${T0} ăn vận quá giản dị, làm mất thể diện hoàng gia: <span class="${t===S?"r":"g"}">thành</span>. ${wdNmC(t)} bị quở, Danh -4. `}
  ap(t,{danh:-8,sung:-5});punish(t,"mặc đồ đỏ vàng giữa quốc tang",2);return `${A0} hặc ${T0} mặc đồ đỏ vàng giữa quốc tang: <span class="${t===S?"r":"g"}">thành</span>. ${wdNmC(t)} Danh -8, Sủng -5. `}
 A("vp","Hặc ăn mặc sai phẩm",{c:{},ok:(a,t)=>!!wdCause(a,t),o:a=>oWd(a),x:"cần nguyên cớ: đã nghe người nhận xét, hoặc tai mắt báo nàng mặc sai phẩm",f:(a,t)=>wdAccuse(a,t)});
-try{AOUT.vp=["nàng bị quở (đồ vượt phẩm bị tịch thu; phạm tang thì bị phạt nặng); Danh +2","nàng hóa ra đúng phẩm: Danh -5, thù -12 · hoặc bị bỏ qua: Danh -2"]}catch(e){}
+try{AOUT.vp=["nàng bị quở (đồ vượt phẩm bị tịch thu; phạm tang thì bị phạt nặng); Danh +2",`nàng hóa ra đúng phẩm: Danh -5, thù ${balSg(BAL.eff.j92.wdAccuse)} · hoặc bị bỏ qua: Danh -2`]}catch(e){}
 try{LACK.vp=t=>{if(wdCause(S,t))return"";const r=S.wdSeen&&S.wdSeen[wdKey(t)];return r&&r.st!=="ok"&&r.it!==wdCur(t)?"nàng đã thay bộ khác từ lúc bị nhận xét":"chưa có nguyên cớ: chưa ai nhận xét, tai mắt chưa báo nàng mặc sai phẩm"}}catch(e){}
 try{J78VERB.vp="hặc {t} ăn mặc sai phẩm";HARMK["Hặc ăn mặc sai phẩm"]="vp"}catch(e){}
 
@@ -350,7 +350,7 @@ PEND.wdframe=pp=>{const a=byKey(pp.a);if(!a)return null;const nm=wdFrameNm(pp.k)
  O.push({n:"Nhận lỗi, xin khoan hồng",fx:{},j67:"tốn: không tốn gì",go:()=>guilty(true)});
  return{t:lo?`<p>${wdNmC(a)} báo Cung Chính ti: <b>${nm}</b> của nàng bị thất lạc, nay thấy ở cung ngươi. Cung Chính ti khám phòng ngươi và tìm thấy món ấy.</p>`:`<p>${wdNmC(a)} tố ngươi lấy trộm <b>${nm}</b>. Cung Chính ti khám phòng ngươi và tìm thấy món ấy trong rương.</p>`,o:ev>=1?O:O.slice(1),who:pv(a)}};
 A("giahoa","Giá họa trộm đồ",{c:{bac:-40},ok:(a,t)=>a.bac>=40&&!(t===S&&S.wdFrame),o:(a,t)=>oPlant(a,t),x:"sai người lén đặt đồ quý vào phòng nàng rồi tố nàng ăn cắp",f:(a,t)=>wdFrame(a,t)});
-try{AOUT.giahoa=["nàng mang tội ăn trộm: Danh -10, Sủng -5, bị phạt","kẻ đặt đồ bị bắt: nàng nắm 2 chứng cứ, thù -20 · hoặc nàng minh oan được: ngươi Danh -10, bị phạt"]}catch(e){}
+try{AOUT.giahoa=["nàng mang tội ăn trộm: Danh -10, Sủng -5, bị phạt",`kẻ đặt đồ bị bắt: nàng nắm 2 chứng cứ, thù ${balSg(BAL.eff.j92.wdFrame)} · hoặc nàng minh oan được: ngươi Danh -10, bị phạt`]}catch(e){}
 try{LACK.giahoa=()=>S.bac<40?"cần Bạc 40 để sai người":""}catch(e){}
 try{ACTDOM.giahoa="Mưu kế";J78VERB.giahoa="giá họa {t} tội ăn trộm";DIRTY.push("giahoa");
  const g=RVGRP.find(x=>x[0]==="Hại nặng");if(g&&!g[1].includes("giahoa"))g[1].push("giahoa");if(BANDS[2]&&!BANDS[2][2].includes("giahoa"))BANDS[2][2].push("giahoa")}catch(e){}
@@ -361,7 +361,7 @@ try{ACTDOM.giahoa="Mưu kế";J78VERB.giahoa="giá họa {t} tội ăn trộm";D
 /* ---------- selling quietly, pawning, redeeming ---------- */
 function wdPrice(e){const it=wdItem(e);return it?it.pr:((IT[e.k]&&itm(e.k).pr)||0)}
 function wdSellPct(p,ag){return cl(WD.sellLo+Math.round(((ag?ag.loyal:50)-40)/3),WD.sellLo,WD.sellHi)}
-function wdLeak(p,ag,half){return cl(Math.round((WD.sellRisk+(ag&&ag.tr==="chuyen"?15:0)-(ag&&(ag.loyal||0)>=75?5:0))*(half?.5:1)),2,60)}
+function wdLeak(p,ag,half){return cl(Math.round((WD.sellRisk+(ag&&netIs(ag,"talk")?15:0)-(ag&&(ag.loyal||0)>=BAL.loy.deep?5:0))*(half?.5:1)),2,60)}
 function wdSell(p,ix){const e=p.inv[ix];if(!e||e.h||!wdItem(e))return"";if(wdIsNt(e))return"";const ag=wdAgent(p);if(!ag)return"";
  p.inv.splice(ix,1);const g=Math.max(1,Math.round(wdPrice(e)*wdSellPct(p,ag)/100));ap(p,{bac:g});let r=`${wdNmC(p)} sai ${ag.name} lén bán ${wdItem(e).n} ra ngoài cung: Bạc +${g}. `;
  if(roll(wdLeak(p,ag))){ap(p,{danh:-WD.sellDanh});r+=`<span class="r">Chuyện lộ ra: cả cung xì xào ${wdNm(p)} túng thiếu phải bán đồ.</span> Danh -${WD.sellDanh}. `;if(p!==S)try{newsAdd(p,"wd",`${wdNmC(p)} túng thiếu, lén bán đồ ra ngoài cung.`)}catch(x){}}
@@ -376,9 +376,9 @@ function wdPawnMonth(p){if(!p.wdPawn||!p.wdPawn.length)return"";let r="";p.wdPaw
 /* ---------- ngự tứ lost or broken = bất kính (the same risk for everyone holding one) ---------- */
 function wdNtHeld(p){const L=[];const w=wdOf(p);for(const sl of ["tram","y"])if(w[sl]&&wdIsNt(w[sl]))L.push({sl,e:w[sl]});(p.inv||[]).forEach(e=>{if(e&&!e.h&&WD_ITEMS[e.k]&&WD_ITEMS[e.k].nt)L.push({e})});return L}
 function wdNtRemove(p,e){const w=wdOf(p);for(const sl of ["tram","y"])if(w[sl]===e){w[sl]=null;const k=wdDefault(p,sl);if(k)w[sl]={k,from:"base"};return}const i=(p.inv||[]).indexOf(e);if(i>=0)p.inv.splice(i,1)}
-function wdNtMonth(p){const H=wdNtHeld(p);if(!H.length)return"";const clumsy=[p.maid].concat(p.staff||[]).find(s=>s&&(s.tr==="nhat"||s.tr==="tham"));
+function wdNtMonth(p){const H=wdNtHeld(p);if(!H.length)return"";const clumsy=[p.maid].concat(p.staff||[]).find(s=>s&&(netIs(s,"timid")||netIs(s,"greed")));
  if(p===S&&S.wdNtHide&&wk()>=S.wdNtHide.due){const h=S.wdNtHide;S.wdNtHide=null;if(roll(45)){apply({sung:-10});punish(S,"làm mất đồ ngự tứ mà giấu, tội bất kính",2);Q.push({t:"Tội bất kính",who:pEmp(),h:`<p class="r">Chuyện ${h.n} ngự tứ ${h.how} bị lộ. Hoàng thượng giận ngươi giấu giếm. Sủng -10, bị phạt.</p>`})}}
- if(!roll(clumsy?2.5:.8))return"";const x=pick(H);const it=wdItem(x.e);const how=clumsy&&clumsy.tr==="tham"?"bị mất":"bị làm vỡ";
+ if(!roll(clumsy?2.5:.8))return"";const x=pick(H);const it=wdItem(x.e);const how=clumsy&&netIs(clumsy,"greed")?"bị mất":"bị làm vỡ";
  if(p===S){pushDil(mkP("wdnt",{k:x.e.k,how,by:clumsy?clumsy.name:""}),"Đồ ngự tứ");return""}
  wdNtRemove(p,x.e);if(roll(55)){ap(p,{sung:-6});punish(p,"làm mất đồ ngự tứ, tội bất kính",1);try{newsAdd(p,"wd",`${wdNmC(p)} để ${it.n} ngự tứ ${how}, mang tội bất kính.`)}catch(e){}}return""}
 PEND.wdnt=pp=>{const it=WD_ITEMS[pp.k];if(!it)return null;const find=()=>wdNtHeld(S).find(x=>x.e.k===pp.k);

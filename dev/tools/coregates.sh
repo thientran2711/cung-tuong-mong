@@ -17,6 +17,12 @@ GB=$WT/dev/test/one-core-baseline.json
 if [ ! -f "$GB" ]; then FAILS+=("G1 no frozen list dev/test/one-core-baseline.json in the sha"); else
   if ! OC_BUILD=$WT/dev/build OC_BASE=$GB node "$KIT/dev/test/one-core-guard.js" > "$OUT/g1-guard.txt" 2>&1; then
     head -14 "$OUT/g1-guard.txt"; FAILS+=("G1 one-core-guard ($OUT/g1-guard.txt)"); fi
+  # review/one-core-dup r2: a player text may not TYPE an amount that is a BAL.eff / BAL.road / BAL.arc value read beside it (no baseline: always 0)
+  if ! OC_BUILD=$WT/dev/build node "$KIT/dev/test/one-core-text.js" > "$OUT/g1-text.txt" 2>&1; then
+    head -14 "$OUT/g1-text.txt"; FAILS+=("G1 one-core-text ($OUT/g1-text.txt)"); fi
+  # review/one-core-dup2 r3: a text that PRINTS a BAL amount prints the key the rule of its own option reads (never another rule's key with the same number)
+  if [ -f "$KIT/dev/test/one-core-bind.js" ] && ! OC_BUILD=$WT/dev/build node "$KIT/dev/test/one-core-bind.js" > "$OUT/g1-bind.txt" 2>&1; then
+    head -14 "$OUT/g1-bind.txt"; FAILS+=("G1 one-core-bind ($OUT/g1-bind.txt)"); fi
   if [ -n "$LIVE" ] && git -C "$WT" cat-file -e "$LIVE:dev/test/one-core-baseline.json" 2>/dev/null; then
     LT=$(git -C "$WT" show "$LIVE:dev/test/one-core-baseline.json" | node -e 'let s="";process.stdin.on("data",d=>s+=d).on("end",()=>console.log(JSON.parse(s).total))')
     # compare only the kinds the live list already counts (a kind added to the guard later, review/one-core-dup amt/sw/sc/k/ladder, is a

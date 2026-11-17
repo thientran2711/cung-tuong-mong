@@ -83,7 +83,7 @@ function frameDef(p,a){const T=BAL.truth;const base=T.clearBase+(p.mat||0)*T.cle
  /* one road, the best she has: the player also picks ONE road in PEND.vuoan (reviewer r1: NPC bonuses used to stack to 85 every time) */
  if((p.nightLog||[]).some(w=>wk()-w<=T.ksW))C.push({o:base+T.ksB,how:`sổ Kính sự phòng ghi đêm ấy ${W} hầu Hoàng thượng`});
  else C.push({o:base-10,how:"Cung Chính ti tra hỏi người ra vào"});
- if(p.maid&&(p.maid.loyal||0)>=60)C.push({o:base+T.wB,how:`cung nữ ${p.maid.name} làm chứng ${W} không rời cung`});
+ if(p.maid&&(p.maid.loyal||0)>=BAL.loy.close)C.push({o:base+T.wB,how:`cung nữ ${p.maid.name} làm chứng ${W} không rời cung`});
  if(p.doctor||((p.arts&&p.arts.y)||0)>=3)C.push({o:base+T.tyB,how:`Thái y nghiệm ra hình nhân còn mới, kim chỉ không phải của cung ${W}`});
  if(evG(p,a)>0)C.push({o:base+T.evB*2+10,how:`${W} trình chứng cứ về ${a.name}`});
  const D=C.sort((x,y)=>y.o-x.o)[0];return {o:cl(Math.round(D.o),T.clearMin,T.clearMax),how:D.how}}

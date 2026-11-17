@@ -18,7 +18,7 @@ if(typeof FEST!=="undefined"&&!FEST.thanhtho)FEST.thanhtho={name:"Thánh thọ T
 function nm7(p){return p===S?"ngươi":p.name}
 function gn7(p){return p===S?"ngươi":String(p.name).split(" ").pop()}
 function aw7(p,k){try{return artW2(p,k)}catch(e){return (p.arts&&p.arts[k])||0}}
-function help7(p){const m=p.maid?(p.maid.loyal||0)/10:0;const s=(p.staff||[]).filter(x=>(x.loyal||0)>=60).length*2;return Math.min(12,m+s)}
+function help7(p){const m=p.maid?(p.maid.loyal||0)/10:0;const s=(p.staff||[]).filter(x=>(x.loyal||0)>=BAL.loy.close).length*2;return Math.min(12,m+s)}
 function sac7(p){try{return effSac(p)}catch(e){return p.sac||0}}
 function present7(p){return p===S?(!S.out&&!S.confined&&!S.dead):(p.alive&&!p.out&&!p.confined)}
 /* deterministic sampler for the odds (stable between renders and reloads) */
@@ -68,7 +68,7 @@ const FBIG7=["newyear","trungthu","vantho","thanhtho","giaothua"];
 const WT7={ngua:["ngựa Xích Thố","ngựa Ô Truy","ngựa Bạch Long","ngựa Hoàng Phiêu"],rong:["rồng cửa Đông Hoa","rồng cửa Tây Hoa","rồng cửa Thần Vũ","rồng Ngọ Môn"],dieu:["diều phượng","diều rồng","diều hạc","diều bướm"],
  thuyen:["đội Thanh Long","đội Bạch Hổ","đội Chu Tước","đội Huyền Vũ"],thuyen2:["thuyền Ngự thiện phòng","thuyền Nội vụ phủ","thuyền Kính sự phòng","thuyền Ngự mã giám"],thuyen3:["thuyền đèn sen","thuyền đèn cá chép","thuyền đèn rồng","thuyền đèn thỏ ngọc"],
  xa:["thị vệ họ Lý","thị vệ họ Mạnh","thị vệ họ Đoàn","thị vệ họ Tô"],bang:["đội Kiện Duệ","đội Hộ Quân","đội Tiền Phong","đội Cấm Vệ"],phao:["pháo Càn Thanh cung","pháo Ngự thiện phòng","pháo Nội vụ phủ","pháo Ngự hoa viên"]};
-function form7(s){return s>=65?"phong độ rất tốt":s>=50?"phong độ tốt":s>=35?"phong độ thường":"phong độ kém"}
+function form7(s){return s>=BAL.cut.form[2]?"phong độ rất tốt":s>=BAL.cut.form[1]?"phong độ tốt":s>=BAL.cut.form[0]?"phong độ thường":"phong độ kém"}
 function prize7(k){return FBIG7.includes(k)?{sung:3,danh:3}:{sung:2,danh:2}}
 function pz7(o){return Object.entries(o).map(([k,v])=>`${NAMES[k]} +${v}`).join(", ")}
 /* pick a variant: unused this life first, then least seen in the last five lives */
@@ -110,22 +110,22 @@ PEND.j71f=pp=>{if(!S)return null;const k=pp.k,V=(FV7[k]||[])[pp.vi];if(!V)return
   o.push({n:`Dự thi ${c.n}`,fx:{suc:-J71.cost},x:`${word(p1)} · ${gain} · ${lose} · ${kem}`,go:run(0)});
   o.push({n:`Chuẩn bị kỹ rồi dự thi`,fx:{suc:-J71.cost,bac:-20},x:`${word(p2)} · ${gain} · ${lose} · ${kem}`,go:run(J71.prep)});
   const al=E.filter(p=>p!==S).sort((a,b)=>(aff(S,b)||0)-(aff(S,a)||0))[0];
-  if(al)o.push({n:`Không dự, cổ vũ ${al.name}`,fx:{},x:`${G7(`${al.name} thiện cảm +4`)} · kèm: không có phần thưởng`,go:()=>{relAdd(S,al,BAL.eff.j71.go);log(`${fn}: ${cRun7(k,sub,E,pp.pr||[],0,false)} Ngươi đứng xem, cổ vũ ${al.name}.`)}});
+  if(al)o.push({n:`Không dự, cổ vũ ${al.name}`,fx:{},x:`${G7(`${al.name} thiện cảm ${balSg(BAL.eff.j71.go)}`)} · kèm: không có phần thưởng`,go:()=>{relAdd(S,al,BAL.eff.j71.go);log(`${fn}: ${cRun7(k,sub,E,pp.pr||[],0,false)} Ngươi đứng xem, cổ vũ ${al.name}.`)}});
   else o.push({n:"Không dự, đứng xem",fx:{},x:"không được không mất",go:()=>log(`${fn}: ${cRun7(k,sub,E,pp.pr||[],0,false)}`)})}
  else if(t==="W"){const N=WT7[sub]||WT7.thuyen,s=pp.s||[50,50,50,50],sum=s.reduce((a,b)=>a+b,0);const P=s.map(x=>x/sum);const hi=s.indexOf(Math.max(...s)),lo=s.indexOf(Math.min(...s));
   h+=`<p>${N.map((n,i)=>`${i?n:n[0].toUpperCase()+n.slice(1)}: ${form7(s[i])}`).join(" · ")}.</p>`;const pay=i=>Math.round(20/P[i]*.9);
   const bet=i=>({n:`Cược ${N[i]}`,fx:{bac:-20},x:`${word(P[i]*100)} · thành: Bạc +${pay(i)} · hỏng: mất tiền cược`,go:()=>{let r=Math.random()*sum,wi=0;while(wi<3&&r>s[wi]){r-=s[wi];wi++}if(wi===i){apply({bac:pay(i)});log(`${fn}: ${N[wi]} về nhất; ngươi thắng cược, Bạc +${pay(i)}.`)}else log(`${R7("Không thành:")} ${fn}: ${N[wi]} về nhất; ngươi cược ${N[i]}, mất 20 bạc.`)}});
   o.push(bet(hi));if(lo!==hi)o.push(bet(lo));o.push({n:"Không cược, chỉ xem",fx:{},x:"không được không mất",go:()=>{let r=Math.random()*sum,wi=0;while(wi<3&&r>s[wi]){r-=s[wi];wi++}log(`${fn}: ${N[wi]} về nhất.`)}})}
- else if(t==="G"){if(!A)return null;who=pv(A);const st=Math.min(50,Math.floor((A.bac||0)/2));const g=n=>({n:`Chơi ván ${n>=40?"lớn":"nhỏ"} (${n} bạc)`,fx:{bac:-n},x:`${word(50)} · thành: Bạc +${n*2} (lấy lại tiền cược và ${n} của ${A.name}), ${A.name} thiện cảm +2 · hỏng: mất tiền cược, ${A.name} thiện cảm +2`,
+ else if(t==="G"){if(!A)return null;who=pv(A);const st=Math.min(50,Math.floor((A.bac||0)/2));const g=n=>({n:`Chơi ván ${n>=40?"lớn":"nhỏ"} (${n} bạc)`,fx:{bac:-n},x:`${word(50)} · thành: Bạc +${n*2} (lấy lại tiền cược và ${n} của ${A.name}), ${A.name} thiện cảm ${balSg(BAL.eff.j71.go_2)} · hỏng: mất tiền cược, ${A.name} thiện cảm ${balSg(BAL.eff.j71.go_2)}`,
    go:()=>{relAdd(S,A,BAL.eff.j71.go_2);if(roll(50)){apply({bac:n*2});ap(A,{bac:-n});log(`${fn}: ngươi thắng ${A.name} ván ${n} bạc.`)}else{ap(A,{bac:n});log(`${R7("Không thành:")} ${fn}: ${A.name} thắng ngươi ván ${n} bạc.`)}}});
   o.push(g(20));if(st>=40)o.push(g(40));o.push({n:"Từ chối khéo",fx:{},x:"không được không mất",go:()=>log(`${fn}: ngươi từ chối khéo lời rủ của ${A.name}.`)})}
  else if(t==="B"){if(pp.host!=null){const H=RV(pp.host);if(!H||!H.alive||H.out)return null;who=pv(H);h=`<p class="past">${fn}</p><p>${H.name} bày tiệc mừng ${fn} ở cung mình, sai người sang mời ngươi.</p>`;
-   o.push({n:"Mang lễ sang dự",fx:{bac:-10},x:`${G7(`${H.name} thiện cảm +5`)}, Danh +1`,go:()=>{relAdd(S,H,BAL.eff.j71.go_3);apply({danh:1});log(`${fn}: ngươi sang dự tiệc của ${H.name}.`)}});
-   o.push({n:"Cáo mệt, không đi",fx:{},x:`Sức +4 · kèm: ${H.name} mất thiện cảm -3`,go:()=>{apply({suc:4});relAdd(S,H,BAL.eff.j71.go_4);log(`${fn}: ngươi không sang dự tiệc của ${H.name}.`)}})}
+   o.push({n:"Mang lễ sang dự",fx:{bac:-10},x:`${G7(`${H.name} thiện cảm ${balSg(BAL.eff.j71.go_3)}`)}, Danh +1`,go:()=>{relAdd(S,H,BAL.eff.j71.go_3);apply({danh:1});log(`${fn}: ngươi sang dự tiệc của ${H.name}.`)}});
+   o.push({n:"Cáo mệt, không đi",fx:{},x:`Sức +4 · kèm: ${H.name} mất thiện cảm ${balSg(BAL.eff.j71.go_4)}`,go:()=>{apply({suc:4});relAdd(S,H,BAL.eff.j71.go_4);log(`${fn}: ngươi không sang dự tiệc của ${H.name}.`)}})}
   else{const G=(pp.g||[]).map(RV).filter(v=>v&&v.alive&&!v.out);const cost=40+S.rank*8,po=cl(Math.round(40+help7(S)*3+(S.tamco||0)/4),15,92);
-   const gt=G.map(v=>G7(`${v.name} thiện cảm +6`)).join(", ");
+   const gt=G.map(v=>G7(`${v.name} thiện cảm ${balSg(BAL.eff.j71.go_5)}`)).join(", ");
    o.push({n:"Bày tiệc lớn",fx:{bac:-cost},x:`${word(po)} · thành: Danh +4, Sủng +2${gt?", "+gt:""} · hỏng: món ăn hỏng, khách chê: Danh -2`,go:()=>{if(roll(po)){apply({danh:4,sung:2});G.forEach(v=>relAdd(S,v,BAL.eff.j71.go_5));log(`${fn}: tiệc của ngươi được khen, Hoàng thượng ghé qua.`)}else{apply({danh:-2});log(`${R7("Không thành:")} ${fn}: tiệc của ngươi trục trặc, món ăn hỏng, khách chê.`)}}});
-   if(G[0])o.push({n:`Tiệc trà nhỏ mời ${G[0].name}`,fx:{bac:-15},x:`${G7(`${G[0].name} thiện cảm +4`)}, Danh +1`,go:()=>{relAdd(S,G[0],BAL.eff.j71.go_6);apply({danh:1});log(`${fn}: ngươi mời ${G[0].name} uống trà.`)}});
+   if(G[0])o.push({n:`Tiệc trà nhỏ mời ${G[0].name}`,fx:{bac:-15},x:`${G7(`${G[0].name} thiện cảm ${balSg(BAL.eff.j71.go_6)}`)}, Danh +1`,go:()=>{relAdd(S,G[0],BAL.eff.j71.go_6);apply({danh:1});log(`${fn}: ngươi mời ${G[0].name} uống trà.`)}});
    o.push({n:"Không bày tiệc, nghỉ ngơi",fx:{},x:"Sức +4",go:()=>{apply({suc:4});log(`${fn}: ngươi nghỉ trong cung.`)}})}}
  else if(t==="P"){const th=sub==="th"&&!S.thDead;who=th?pTH():pEmp();const R2=ents7(pp);const gift=v=>(v.bac||0)>=100?55:Math.max(15,(v.tai||0)*.3+aw7(v,"hoa")*8+help7(v)*.8);
   const mine=[55,Math.round((S.tai||0)*.3+aw7(S,"hoa")*8+help7(S)*.8),15];const rv=R2.map(gift);
@@ -139,7 +139,7 @@ PEND.j71f=pp=>{if(!S)return null;const k=pp.k,V=(FV7[k]||[])[pp.vi];if(!V)return
   o.push({n:"Lễ mọn cho phải phép",fx:{bac:-10},x:`${word(odds(mine[2]))} · thành: lễ được khen nhất, ${pz7(praise)} · hỏng: không được gì`,go:run(2)});
   const miss=th?{th:-2}:{sung:-2};o.push({n:"Không dâng lễ",fx:miss,x:"không tốn bạc, không tốn sức",go:()=>{const L=R2.map((v,ix)=>({p:v,s:rv[ix]+Math.random()*25})).sort((a,b)=>b.s-a.s);R2.forEach(v=>{if((v.bac||0)>=100)ap(v,{bac:-60})});if(L[0]){ap(L[0].p,praise);log(`${fn}: ngươi không dâng lễ; ${tg} khen lễ của ${L[0].p.name} nhất (${pz7(praise)}).`)}else log(`${fn}: ngươi không dâng lễ.`)}})}
  else if(t==="R"){const lead=S.rank>=4;const po=cl(Math.round((lead?50:35)+(S.duc||0)/3),10,92);who=S.thDead?pEmp():pTH();
-  o.push({n:lead?"Đứng hàng đầu dâng hương":"Xin đứng hầu gần hương án",fx:{suc:-5},x:`${word(po)} · thành: Danh +3, ${S.thDead?"Sủng +2":"Thái hậu với ngươi +3"} · hỏng: sơ suất nghi lễ, Danh -2`,go:()=>{if(roll(po)){apply(S.thDead?{danh:3,sung:2}:{danh:3,th:3});log(`${fn}: ngươi hành lễ chu đáo, được khen.`)}else{apply({danh:-2});log(`${R7("Không thành:")} ${fn}: ngươi sơ suất trong lúc hành lễ, bị chê.`)}}});
+  o.push({n:lead?"Đứng hàng đầu dâng hương":"Xin đứng hầu gần hương án",fx:{suc:-5},x:`${word(po)} · thành: Danh +3, ${S.thDead?"Sủng +2":`Thái hậu với ngươi ${balSg(BAL.eff.j71.incenseTh)}`} · hỏng: sơ suất nghi lễ, Danh -2`,go:()=>{if(roll(po)){apply(S.thDead?{danh:3,sung:2}:{danh:3,th:BAL.eff.j71.incenseTh});log(`${fn}: ngươi hành lễ chu đáo, được khen.`)}else{apply({danh:-2});log(`${R7("Không thành:")} ${fn}: ngươi sơ suất trong lúc hành lễ, bị chê.`)}}});
   o.push({n:"Cúng dường bạc dầu đèn",fx:{bac:-15},x:"Đức +2, Lòng cung nữ +3",go:()=>{apply({duc:2,maid:3});log(`${fn}: ngươi cúng dường dầu đèn.`)}});
   o.push({n:"Lặng lẽ cầu cho gia đình",fx:{},x:"Sức +4",go:()=>{apply({suc:4});log(`${fn}: ngươi lặng lẽ khấn cho cha mẹ.`)}})}
  return o.length?{who,t:h,o}:null};
@@ -183,7 +183,7 @@ MF("cuute",{t:"Lập công · Cứu tế",cd:9,w:()=>{const d=j7s().dis;return d
   O.push(CH7("Quyên 60 bạc cứu dân",{c:{bac:-60},w:{danh:3,duc:3},wt:bonus7({qs:[["kho",3]]}),ok:()=>`Ngươi quyên 60 bạc cứu dân.${bonusDo7({qs:[["kho",3]]},"cứu tế")}`}));
   const p=od(35+S.danh/3+S.rank*4+(S.tamco||0)/5),B={dai:1,pd:1,back:["Hộ bộ",6],qs:[["kho",6]]};
   O.push(CH7("Đứng ra kêu gọi lục cung quyên góp",{c:{suc:-10},p,w:{danh:5,sung:3},wt:bonus7(B),l:{danh:-2},lr:A?[[A,-3]]:[],ok:()=>`Lục cung theo ngươi quyên góp, Hoàng thượng khen ngươi biết lo cho dân.${bonusDo7(B,"cứu tế")}`,ll:"Các cung góp chẳng bao nhiêu, người ta chê ngươi khoe mẽ."}));
-  const p2=od(30+S.danh/4+S.rank*5);O.push(CH7("Tâu xin cắt bớt chi tiêu hậu cung",{p:p2,w:{danh:4,sung:2},wt:bonus7({qs:[["kho",4]]}),l:{sung:-3},k:["các phi tần bị cắt bớt lệ: mỗi người mất thiện cảm -2"],ok:()=>{liveRivals(true).forEach(v=>relAdd(S,v,BAL.eff.j71.ok));return `Hoàng thượng chuẩn tấu, cắt bớt chi tiêu hậu cung.${bonusDo7({qs:[["kho",4]]},"cứu tế")}`},no:()=>{liveRivals(true).forEach(v=>relAdd(S,v,BAL.eff.j71.no));return "Hoàng thượng không vui vì ngươi bàn chuyện tiền bạc; các cung cũng ghét ngươi."}}));
+  const p2=od(30+S.danh/4+S.rank*5);O.push(CH7("Tâu xin cắt bớt chi tiêu hậu cung",{p:p2,w:{danh:4,sung:2},wt:bonus7({qs:[["kho",4]]}),l:{sung:-3},k:[`các phi tần bị cắt bớt lệ: mỗi người mất thiện cảm ${balSg(BAL.eff.j71.ok)}`],ok:()=>{liveRivals(true).forEach(v=>relAdd(S,v,BAL.eff.j71.ok));return `Hoàng thượng chuẩn tấu, cắt bớt chi tiêu hậu cung.${bonusDo7({qs:[["kho",4]]},"cứu tế")}`},no:()=>{liveRivals(true).forEach(v=>relAdd(S,v,BAL.eff.j71.no));return "Hoàng thượng không vui vì ngươi bàn chuyện tiền bạc; các cung cũng ghét ngươi."}}));
   O.push(CH7("Không can dự",{wt:["không được không mất"],wl:"Ngươi không dính vào chuyện cứu tế."}));return O},
  npc:v=>{if((v.bac||0)<80)return"";ap(v,{bac:-60,danh:3,duc:3});qsDo7("kho",3);return `${v.name} quyên 60 bạc cứu dân, được khen: Danh +3, Đức +3.`}});
 MF("cuuhoang",{t:"Lập công · Cứu giá",cd:60,w:()=>.6,who:()=>pEmp(),
@@ -197,11 +197,11 @@ MF("thbenh",{t:"Lập công · Hầu bệnh Thái hậu",cd:9,w:()=>!S.thDead&&S
  v:["Thái hậu nhiễm phong hàn, sốt mấy đêm liền, Từ Ninh cung đóng cửa.","Thái hậu trúng gió, đau lưng không trở mình được.","Thái hậu mất ngủ triền miên, người gầy rộc.","Thái hậu ngã trong vườn, trật chân, phải nằm một chỗ.","Trời nóng, Thái hậu sốt cao, ăn gì nôn nấy.","Thái hậu ho lâu ngày, các thái y bó tay.","Thái hậu đau mắt, không đọc kinh được, buồn bực khó chịu."],
  pp:()=>!S.thDead&&S.thIll?{}:null,
  o:X=>{const p=od(40+aw7(S,"y")*8+(S.duc||0)/5);const B={dai:1};const cure=()=>{S.thIll=null};
-  return [CH7("Ngày đêm hầu thuốc",{c:{suc:-18},p,w:{th:10,duc:3,danh:2},wt:bonus7(B).concat([G7("Thái hậu khỏi bệnh")]),l:{th:3},ok:()=>{cure();return `Thái hậu khỏi bệnh, nhắc tên ngươi trước mặt cả hậu cung.${bonusDo7(B,"hầu bệnh Thái hậu")}`},ll:"Bệnh Thái hậu dằng dai; bà vẫn nhớ ngươi đã thức hầu."}),
+  return [CH7("Ngày đêm hầu thuốc",{c:{suc:-18},p,w:{th:BAL.eff.j71.thNurse[0],duc:3,danh:2},wt:bonus7(B).concat([G7("Thái hậu khỏi bệnh")]),l:{th:BAL.eff.j71.thNurse[1]},ok:()=>{cure();return `Thái hậu khỏi bệnh, nhắc tên ngươi trước mặt cả hậu cung.${bonusDo7(B,"hầu bệnh Thái hậu")}`},ll:"Bệnh Thái hậu dằng dai; bà vẫn nhớ ngươi đã thức hầu."}),
    CH7("Tìm thuốc quý dâng bà",{c:{bac:-50},p:od(55),w:{th:7,danh:1},wt:[G7("Thái hậu khỏi bệnh")],l:{th:2},ok:()=>{cure();return "Thuốc quý hợp bệnh, Thái hậu khỏi hẳn."},ll:"Thuốc không hợp bệnh; Thái hậu chỉ cảm ơn lấy lệ."}),
    CH7("Chép kinh cầu an",{c:{suc:-6},w:{th:3,duc:2},wl:"Ngươi chép kinh cầu an, Thái hậu cảm động."}),
    CH7("Hỏi thăm cho phải phép",{w:{th:1},wl:"Ngươi đến hỏi thăm rồi về."})]},
- npc:v=>{if(S.thDead||!S.thIll||(v.suc||0)<40)return"";const ok=roll(cl(40+aw7(v,"y")*8+(v.duc||0)/5,5,95));ap(v,ok?{suc:-18,th:10,duc:3,danh:2}:{suc:-18,th:3});if(ok){S.thIll=null;daiDo7(v)}return ok?`${v.name} ngày đêm hầu thuốc, Thái hậu khỏi bệnh (Thái hậu với nàng +10).`:`${v.name} thức hầu thuốc Thái hậu (Thái hậu với nàng +3).`}});
+ npc:v=>{if(S.thDead||!S.thIll||(v.suc||0)<40)return"";const ok=roll(cl(40+aw7(v,"y")*8+(v.duc||0)/5,5,95));ap(v,ok?{suc:-18,th:BAL.eff.j71.thNurse[0],duc:3,danh:2}:{suc:-18,th:BAL.eff.j71.thNurse[1]});if(ok){S.thIll=null;daiDo7(v)}return ok?`${v.name} ngày đêm hầu thuốc, Thái hậu khỏi bệnh (Thái hậu với nàng ${balSg(BAL.eff.j71.thNurse[0])}).`:`${v.name} thức hầu thuốc Thái hậu (Thái hậu với nàng ${balSg(BAL.eff.j71.thNurse[1])}).`}});
 MF("conbenh",{t:"Lập công · Trông con bệnh",cd:24,w:()=>allKids().some(([k])=>k.alive&&k.age<16)?1:0,
  v:["{K} sốt cao, mê man; {A} khóc cạn nước mắt.","{K} lên đậu, cả cung lo sợ lây; {A} không dám rời con.","{K} ăn phải đồ lạ, đau bụng quằn quại suốt đêm.","{K} ho rũ rượi đã nửa tháng, thái y đổi mấy đơn thuốc không khỏi.","{K} ngã xuống hồ cá, được vớt lên thì lạnh run, sốt.","{K} bị mẩn đỏ khắp người, ngứa ngáy khóc suốt.","{K} trúng nắng sau buổi tập cưỡi ngựa, nằm li bì."],
  who:X=>X.mom?pv(X.mom):(X.kid?kidFace(X.kid):pEmp()),

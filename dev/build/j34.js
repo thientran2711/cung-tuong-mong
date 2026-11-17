@@ -15,7 +15,7 @@ function tScore(p,art,mini){const g=(p.arts||{})[art]||0;const base=Math.min(10,
 const DILEMMAS=[["Hai cung nữ cãi nhau, một người làm vỡ chén ngọc của Thái hậu rồi đổ cho người kia. Ngươi xử thế nào?",[["nhan","Tha cả hai, tự bỏ bạc đền chén"],["le","Phạt đúng người, giữ phép cung"],["tri","Lặng lẽ tra hỏi cho ra kẻ nói dối"]]],
  ["Một phi tần ốm nặng mà Hoàng thượng triệu ngươi thị tẩm. Ngươi làm gì?",[["nhan","Xin nhường đêm ấy, sang thăm nàng"],["le","Vâng chỉ, rồi sai người mang thuốc sang"],["tri","Tâu xin Hoàng thượng ghé thăm nàng trước"]]],
  ["Nhà mẹ đẻ xin ngươi nói giúp một chức quan. Ngươi đáp sao?",[["le","Từ chối, hậu cung không bàn chính sự"],["nhan","Gửi bạc riêng giúp nhà, không xin chức"],["tri","Chỉ người có tài thì mới tiến cử"]]]];
-function judgeVirtue(){const th=traitsOf("th")[0];const e=S.emp.traits;if(e.includes("nhantu")||e.includes("hieuthao")||th==="Hiền lành")return"nhan";if(e.includes("danghi")||e.includes("chamchinh")||th==="Đa nghi")return"tri";return"le"}
+function judgeVirtue(){const th=traitsOf("th")[0];const e=S.emp.traits;if(e.includes("nhantu")||e.includes("hieuthao")||th==="Ân cần")return"nhan";if(e.includes("danghi")||e.includes("chamchinh")||th==="Kín đáo")return"tri";return"le"}
 function dScore(p,v){const b=judgeVirtue();const m=v===b?6:3;return cl(Math.round(m+(p.duc||0)/25+(p.tamco||0)/30),0,10)}
 function backers(p){const L=[];const q=queenP();if(q&&q!==p&&aff(q,p)>=30)L.push("Hoàng hậu");if((p.th||0)>=50&&!S.thDead)L.push("Thái hậu");const f=facOf(p);if(f)L.push(`phe ${f.name} (${facMembers(f).length})`);if((p.dad||(p===S?S.origin.dad:0)||40)>=60)L.push("nhà mẹ đẻ quyền thế");for(const x of (ct().bk[key(p)]||[]))L.push(x);return L}
 function fScore(p){const L=backers(p);let n=0;for(const b of L)n+=/^phe/.test(b)?Math.min(4,1+(+(b.match(/\d+/)||[1])[0])/2):2;return cl(Math.round(n),0,10)}
@@ -23,8 +23,8 @@ function fScore(p){const L=backers(p);let n=0;for(const b of L)n+=/^phe/.test(b)
 function npcContestAct(p){const c=ct();const R2=c.c.map(byKey).filter(x=>x&&x!==p&&!c.dq.includes(key(x)));const k=key(p);
  const w={pr:2,lo:2,sc:R2.length?.6*persW(p,"poison")*persW(p,"frame"):0};const tot=w.pr+w.lo+w.sc;let r=Math.random()*tot;
  if((r-=w.pr)<0){c.pr[k]=(c.pr[k]||0)+1;return}if((r-=w.lo)<0){if(p.bac>=30&&roll(55)){ap(p,{bac:-30});(c.bk[k]=c.bk[k]||[]).push(pick(["một vị thượng thư","Tổng quản thái giám","một vị vương phi"]))}return}
- const t=R2.sort((a,b)=>(a===S?-1:0)-(b===S?-1:0))[0];sabotage(p,t)}
-function sabotage(a,t){const c=ct();const o=cl(40+(a.tamco||0)/4-(t===S&&S.maid&&S.maid.loyal>=70?10:0),5,90);persCount(a,"contest:scheme");
+ const t=mindPickBy(R2,x=>BAL.mind.pick.j34.base+Math.max(0,hostility(p,x)),p);sabotage(p,t)/* npc-mind: was FIRST (always her) */}
+function sabotage(a,t){const c=ct();const o=cl(40+(a.tamco||0)/4-(t===S&&S.maid&&S.maid.loyal>=BAL.loy.trust?10:0),5,90);persCount(a,"contest:scheme");
  if(roll(o)){c.sab[key(t)]=(c.sab[key(t)]||0)+1;const m=t===S?`Đàn của ngươi bị cắt dây trước buổi diễn (vòng sau -2).`:`${a===S?"Ngươi":a.name} phá ${t.name}: vòng sau nàng -2.`;if(t===S||a===S)log(m);return m}
  if(roll(50)){c.dq.push(key(a));ap(a,{danh:-6,sung:-8});const m=`${a===S?"Ngươi":a.name} ra tay với ${NM(t)} bị bắt quả tang: bị loại khỏi cuộc tranh ghế, Danh -6, Sủng -8.`;log(m);return m}return `${a===S?"Ngươi":a.name} định ra tay nhưng không thành.`}
 function myBetween(){if(quiet)return;const c=ct();const R2=c.c.map(byKey).filter(x=>x&&x!==S&&!c.dq.includes(key(x)));const top=R2.sort((a,b)=>(b.sung||0)-(a.sung||0))[0];
@@ -44,7 +44,7 @@ function contestEnd(){const c=ct();const C=c.c.map(byKey).filter(p=>p&&(p===S||p
  const tot=p=>(c.sc[key(p)]||[]).reduce((a,b,i)=>a+(b||0)*crW(i),0);C.sort((a,b)=>tot(b)-tot(a)||(b.sung||0)-(a.sung||0));const w=C[0];
  let res;if(!seatHas(w,c.r)){const cp=seatComp(w);res=`${w===S?"Ngươi":w.name} thắng, nhưng ghế ${c.r>=7?"Hoàng hậu":RANKS[c.r].n} đã có người ngồi trước`;if(cp)log(cp)}else if(c.r===7){if(w===S){S.rank=7;S.justCrowned=1;S.lastPromo=S.turn;ghenAll(BAL.ghen.rankUp)}else{w.rank=6;w.queen=true;rivals.splice(rivals.indexOf(w),1);rivals.unshift(w)}w.lastPromo=S.turn;res=`${w===S?"Ngươi":w.name} được lập làm Hoàng hậu`}else{window.__seatPick=1;try{res=promoteP(w)}finally{window.__seatPick=0}if(!res){seatUp(w,c.r)}res=`${w===S?"Ngươi":w.name} được phong ${RANKS[Math.min(6,rkOf(w))].n}`}
  for(const p of C.slice(1)){oanAdd(p,w,BAL.eff.j34.contestEnd);if(p!==S&&w===S)p.ghen=cl(p.ghen+10,0,100)}
- const txt=`<b>Tranh ghế xong: ${res}.</b>`;log(txt);if(!quiet&&c.c.includes("me"))Q.push({t:"Kết quả tranh ghế",who:w===S?pMe():pv(w),h:`<p>${res}.</p>${(()=>{S.contest=c;const h=scoreTable();S.contest=null;return h})()}<p class="past">Người thua thêm Oán với người thắng (+10)${w===S?"; các phi tần ghen thêm":""}.</p>`});return txt}
+ const txt=`<b>Tranh ghế xong: ${res}.</b>`;log(txt);if(!quiet&&c.c.includes("me"))Q.push({t:"Kết quả tranh ghế",who:w===S?pMe():pv(w),h:`<p>${res}.</p>${(()=>{S.contest=c;const h=scoreTable();S.contest=null;return h})()}<p class="past">Người thua thêm Oán với người thắng (${balSg(BAL.eff.j34.contestEnd)})${w===S?"; các phi tần ghen thêm":""}.</p>`});return txt}
 /* weekly driver: one round per tuần (Hoàng hậu seat: one per month), acts between */
 function contestWeek(){const c=ct();if(!c)return;if(!c.c.map(byKey).some(p=>p&&(p===S||p.alive)))return void(S.contest=null);const gap=c.len;if((wk()-c.t0)%gap!==0||wk()===c.t0)return;
  if(c.round<3){for(const k of c.c){const p=byKey(k);if(p&&p!==S&&p.alive&&!c.dq.includes(k))npcContestAct(p)}runRound();if(c.round<3&&c.c.includes("me")&&!c.dq.includes("me"))myBetween();if(c.round>=3)contestEnd()}else contestEnd()}

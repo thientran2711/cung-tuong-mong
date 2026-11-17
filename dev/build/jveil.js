@@ -99,7 +99,7 @@ const VL_MATN=["vải sa, chỉ thêu","dây bạc, trai, lưu ly","kim tuyến,
 function vlArt(){try{return ARTS.some(a=>a.k==="theu")?"theu":"hoa"}catch(e){return "hoa"}}
 function vlLv(p){const a=vlArt();try{return typeof wkLv==="function"?wkLv(p,a):((p.arts||{})[a]||0)}catch(e){return 0}}
 function vlQ(p,m,raw){let c=0;try{if(typeof wkCongPh==="function")c=wkCongPh(p)}catch(e){}return raw+vlLv(p)+m+c}
-function vlCraftOut(p,m,raw){const q=vlQ(p,m,raw);const i=q>=14?3:q>=10?2:q>=6?1:0;const [P,g]=VL_CRAFT[m][i];return vlKey(P,g)}
+function vlCraftOut(p,m,raw){const q=vlQ(p,m,raw);const i=q>=BAL.cut.veil[2]?3:q>=BAL.cut.veil[1]?2:q>=BAL.cut.veil[0]?1:0;const [P,g]=VL_CRAFT[m][i];return vlKey(P,g)}
 function vlCraft(p,m,raw){const k=vlCraftOut(p,m,raw);if(VL.mat[m])ap(p,{bac:-VL.mat[m]});vlGain(p,k,{from:"tay",giver:""});return k}
 /* (owner 14:50Z, paid tiers) the card shows the same concrete facts as every j83 material card: what 5 phần makes, its worth in bạc,
    the play score each better band needs, and what this material can never reach */
@@ -113,8 +113,8 @@ function vlBuyNvp(p,k){const pr=itm(k).pr;if((p.bac||0)<pr)return"";ap(p,{bac:-p
 /* buy outside: any phẩm near hers, cheaper, phẩm unknown, the errand may leak */
 function vlOutList(p){const P=Math.min(8,wdPOf(p));const L=[];const seen={};for(const d of [-1,0,1,2])for(const g of [0,1]){const q=cl(P+d,0,8);const k=vlKey(q,g);if(!seen[k]){seen[k]=1;L.push(k)}}return L.slice(0,6)}
 function vlOutPrice(k){return Math.max(1,Math.round(itm(k).pr*VL.outX))}
-function vlAgent(p){try{const a=typeof wdAgent==="function"?wdAgent(p):null;if(a)return a}catch(e){}return p.maid&&(p.maid.loyal||0)>=40?p.maid:null}
-function vlLeak(p,ag){return cl(VL.outRisk+(ag&&ag.tr==="chuyen"?15:0)-(ag&&(ag.loyal||0)>=75?5:0),2,60)}
+function vlAgent(p){try{const a=typeof wdAgent==="function"?wdAgent(p):null;if(a)return a}catch(e){}return p.maid&&(p.maid.loyal||0)>=BAL.loy.low?p.maid:null}
+function vlLeak(p,ag){return cl(VL.outRisk+(ag&&netIs(ag,"talk")?15:0)-(ag&&(ag.loyal||0)>=BAL.loy.deep?5:0),2,60)}
 function vlBuyOut(p,k){const ag=vlAgent(p);const pr=vlOutPrice(k);if(!ag||(p.bac||0)<pr)return"";ap(p,{bac:-pr});vlGain(p,k,{from:"ngoai",giver:""});
  let r=`${NMc(p)} sai ${ag.name} lén mua ${itm(k).n} ngoài cung: Bạc -${pr}. `;
  if(roll(vlLeak(p,ag))){ap(p,{danh:-VL.outDanh});r+=`<span class="r">Chuyện lộ ra: cả cung xì xào ${p===S?"ngươi":p.name} lén mua đồ ngoài cung.</span> Danh -${VL.outDanh}. `;if(p!==S)try{newsAdd(p,"wd",`${NMc(p)} sai người lén mua mạng che mặt ngoài cung.`)}catch(x){}}
