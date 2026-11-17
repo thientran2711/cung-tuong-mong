@@ -944,3 +944,4 @@
 | batch s36a LIVE 4c8568f5 (pushed by s37) → builder s36a ROLLED OVER; successor: batch s32b = balance chain baff0824→52d5092d→37018e74 + display-shelf-r3rv 41418cd8 on 4c8568f5 (27-file conflict, see HANDOVER end of reports/batch-s32a.md) | review/batch-s32b | MAIN s37 | session_01UV1SzhpLx156n52Xk9v9WR | HANDOVER | 17/11 21:05Z |
 | BUILDER s37a (sonnet): batch s37a = display-shelf-r3rv 41418cd8 on 4c8568f5, then hourly batches of PASS shas (brief briefs/s37-builder-a.md) | review/batch-s37a | MAIN s37 | session_01UV1SzjA6P5mZskv3JKn3BV | RUNNING | 17/11 21:06Z |
 | REVIEW face-fit 7068619d (sonnet SMALL; live CDN fit stale, repo right) | review/face-fit | MAIN s37 | session_01UV1SzgZrXwRJ3PMdetbaaf | RUNNING | 17/11 21:08Z |
+| toil-looks9: blush-step sheet IN ROOM (full figure, outfit; rows today / middle / very light; repo fit) (sonnet; owner OD 21:15Z) | review/toil-looks5 | MAIN s37 | session_01UV1SzivMP4MnTx1SiyB2oo | RUNNING | 17/11 21:11Z |
