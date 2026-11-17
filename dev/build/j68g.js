@@ -29,7 +29,7 @@ EV6("borrowDress","visit",{a:["rv"],pp:()=>{const a=rv6(v=>v.rank<=S.rank+1);ret
  o:X=>[c6("Cho mượn vui vẻ",{r:[[X.A,10]],k:[R6("có khi nàng nổi hơn ngươi ở yến"),R6("đồ có thể bị trả muộn")]}),
   c6("Cho mượn, đòi đáp lễ",{w:{bac:15},r:[[X.A,3]],k:[R6("nàng thấy ngươi tính toán")]}),
   c6("Từ chối khéo",{w:{sac:1},r:[[X.A,-6]]})]});
-EV6("doubtVisit","visit",{a:["rv"],pp:()=>{const a=rv6(v=>T6(v,"Đa nghi")||oan(v,S)>=15);return a==null?null:{a0:a}},w:C=>1,
+EV6("doubtVisit","visit",{a:["rv"],pp:()=>{const a=rv6(v=>T6(v,"Kín đáo")||oan(v,S)>=15);return a==null?null:{a0:a}},w:C=>1,
  v:["{A} sầm sập kéo đến, buộc tội ngươi cài người vào cung nàng.","{A} chặn ngươi giữa đường, hỏi sao cung nữ của ngươi lảng vảng gần cung nàng.","{A} sai người trả lại quà ngươi tặng, nhắn 'không dám nhận'.","{A} khóc với Hoàng hậu rằng ngươi xui Hoàng thượng lạnh nhạt với nàng."],
  o:X=>[c6("Thề thốt minh oan",{c:{suc:-3},p:od(40+S.duc/3+S.danh/4),r:[[X.A,8]],w:{danh:1},lr:[[X.A,-6]],lt:[R6("nàng càng nghi")]}),
   c6("Mời nàng tự đến khám xét",{p:od(55+S.duc/4),r:[[X.A,12]],w:{duc:1},l:{danh:-2},lt:[R6("nàng bới ra chuyện khác để nói")]}),

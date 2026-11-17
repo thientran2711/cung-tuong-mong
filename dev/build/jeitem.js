@@ -72,7 +72,7 @@ function eitPilEvent(X){const s=X.s,P=BAL.eit.pil,it=IT[X.k]||{n:X.k};const nm=i
    go:()=>{eitPilBack(X);const i=S.staff.indexOf(s);if(i>=0){S.staff.splice(i,1);let n=null;try{n=mkServ(s.role);S.staff.push(n)}catch(e){}log(`Ngươi trả ${s.name} về Nội vụ phủ${n?`; ${n.name} đến hầu thay`:""}.`)}}});
  O.push({n:"Làm ngơ",fx:{},x:`thành: thiện cảm của ${s.name} với ngươi +${P.ignoreLoyal} (coi như thưởng) · kèm: mất món đồ, ${s.name} dễ ăn bớt nữa`,go:()=>{s.loyal=cl((s.loyal|0)+P.ignoreLoyal,0,100);s.pilOk=1;log(`Ngươi làm ngơ, coi như thưởng ${s.name}.`)}});
  return{ev:1,t:"Kẻ hầu ăn bớt",who,h,opts:O}}
-function eitPilNpc(X){const p=X.p,s=X.s,P=BAL.eit.pil;if(!roll(cl(P.see+(p.tamco|0)/4,5,95)))return;const harsh=/Hiểm độc|Kiêu ngạo|Thù dai|Đa nghi/.test(`${p.trait||""} ${p.trait2||""}`);
+function eitPilNpc(X){const p=X.p,s=X.s,P=BAL.eit.pil;if(!roll(cl(P.see+(p.tamco|0)/4,5,95)))return;const harsh=netRx(p,/Xảo quyệt|Kiêu ngạo|Thù dai|Kín đáo/);
  const nm=(IT[X.k]||{n:X.k}).n.replace(/ \(hàng kém\)$/,"").toLowerCase();
  if(harsh||roll(P.npcPun)){s.loyal=cl((s.loyal|0)-P.punLoyal,0,100);s.pilDet=S.turn+P.detM;try{newsAdd(p,"stip",`${rkName(p)} ${p.name} bắt được ${s.name} lén giữ ${nm} Nội vụ phủ phát, phạt nặng`)}catch(e){}}
  else{s.loyal=cl((s.loyal|0)+P.forgiveLoyal,0,100)}}

@@ -123,7 +123,7 @@ function sgTruyen(box,env){const R=sgRM();const C=kg82Canvas(box,.9,420),{g,W,H}
    The silver actually spent is ALWAYS the act card's Tốn (same price as NPCs); the game only moves the odds one step. */
 const SG_TEMP=[["tham bạc",-.12],["nhát gan",.1],["thật thà",.04],["khôn lỏi",-.04]];
 const SG_TR={tham:0,nhat:1,trung:2,lanh:3,chuyen:3};
-function sgTemper(m){if(m&&m.tr&&SG_TR[m.tr]!=null)return SG_TEMP[SG_TR[m.tr]];const s=String(m&&m.name||"");let h=7;for(const c of s)h=(h*31+c.charCodeAt(0))%9973;return SG_TEMP[h%SG_TEMP.length]}
+function sgTemper(m){if(m&&qv(SG_TR,m)!=null)return SG_TEMP[qv(SG_TR,m)];const s=String(m&&m.name||"");let h=7;for(const c of s)h=(h*31+c.charCodeAt(0))%9973;return SG_TEMP[h%SG_TEMP.length]}
 function sgLoyW(l){return l>=BAL.loy.trust?"rất trung":l>=BAL.loy.mid?"trung":l>=BAL.loy.out?"vừa phải":"lỏng"}
 function sgThr(v){const m=v&&v.maid||{};const loy=m.loyal==null?50:m.loyal;return cl(.3+loy/220+sgTemper(m)[1]+(Math.random()-.5)*.1,.18,.86)}
 const SG_GIA=["Ít ỏi","Nhẹ tay","Vừa phải","Hậu","Rất hậu"];
@@ -234,8 +234,8 @@ function sgTitle(k){return SG.K[k]&&SG.K[k].hide?"Thời cơ":ACT[k].n}
 SG.K.over={g:"nghe",t:"Nghe ngóng",eng:sgNghe,dur:"30 giây",how:SG.K.spy.how,hud:SG.K.spy.hud,steps:SG.K.spy.steps,ask:()=>"Nghe lén câu chuyện ở đây: tự mình nép sau bình phong nghe ngóng, hay nghe qua loa?"};
 SG.K.serv={g:"mac",t:"Mặc cả",eng:sgMac,dur:"3 hồi, mỗi hồi 10 giây",how:SG.K.bribe.how,hud:SG_HUD("10 giây"),steps:SG.K.bribe.steps,ask:()=>"Mua chuộc người hầu cung khác: tự mặc cả, hay giao cho người làm?"};
 const SG_ACTS=[["Dò la","spy"],["Tung tin đồn","rumor"],["Bỏ độc vào trà nàng","poison"],["Bỏ xạ hương vào thuốc nàng","musk"],["Đẩy con nàng xuống hồ","pond"],["Vu oan","frame"]];
-function sgServCost(s){return s.tr==="tham"?15:30}
-function sgServOdds(s){return odA(S,35+(s.tr==="tham"?25:0)-(s.tr==="nhat"?25:0)-(s.tr==="trung"?10:0)-s.loyal/3+S.tamco/5)}
+function sgServCost(s){return netIs(s,"greed")?15:30}
+function sgServOdds(s){return odA(S,35+nq(s,"greed",25)-nq(s,"timid",25)-nq(s,"loyal",10)-s.loyal/3+S.tamco/5)}
 function sgPopPay(pi,tc){return()=>{if(!can(tc))return false;spend(tc);try{S.payOnPick=0}catch(e){}try{if(pi!=null&&S.visit){S.visit.tk=S.visit.tk||{};S.visit.tk[pi]=1}}catch(e){}return true}}
 function sgJob(p){if(!p||typeof S==="undefined"||!S)return null;if(!p.j)p.j="act";
  if(p.j==="act"||p.j==="place"){const v=RV(p.v),k=p.k,a=ACT[k],G=SG.K[k];if(!v||!a||!G)return null;

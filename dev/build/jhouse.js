@@ -46,7 +46,7 @@ function hsvActs(s){const A=[],H=BAL.house;if(!s||!(S.staff||[]).includes(s))ret
  else J(fault?`Phạt vì ${c.txt}`:"Phạt vô cớ","phat",{},fault?"kỷ cương, kẻ hầu khác lòng +1 · lòng -5":`lòng -25, Đức -${H.phatDuc}, kẻ hầu khác lòng -5`,fault?"":`${he} mang hận; lòng dưới ${balAb(BAL.loy.out)} thì mỗi tuần bán mình cho phi tần khác: ${chanceW(15)}`);
  if(fault)J("Tha lỗi","tha",{},"lòng +5 · kẻ hầu khác lòng -1");
  if(tr)A.push({n:"Che chở (đang bị bắt tội)",dom:"Thưởng phạt",o:100,c:{danh:-H.cheDanh},x:"lòng +20",open:()=>{const bf=rsnap();servAct("che",s.sid);pay(H.k);hsvDone("Che chở",bf,true)}});
- A.push({n:"Hỏi chuyện",dom:"Sai bảo",act:1,o:s.tr==="chuyen"&&s.kn?70:40,x:"chứng cứ +1 nếu quen người cung khác",l:{},open:()=>{S.payOnPick=0;const bf=rsnap();servAct("hoi",s.sid);hsvDone("Hỏi chuyện",bf,true)}});
+ A.push({n:"Hỏi chuyện",dom:"Sai bảo",act:1,o:netIs(s,"talk")&&s.kn?70:40,x:"chứng cứ +1 nếu quen người cung khác",l:{},open:()=>{S.payOnPick=0;const bf=rsnap();servAct("hoi",s.sid);hsvDone("Hỏi chuyện",bf,true)}});
  if(typeof def70m==="function"&&typeof PEND!=="undefined"){let od=null;try{od=ordOf70(s.sid)}catch(e){}
   A.push({n:od?"Đổi việc phòng bị":"Giao việc phòng bị",dom:"Sai bảo",o:100,x:od?ordSub70(s.sid):"chọn canh cung, thử độc, theo dõi, giữ sổ sách",open:()=>{pay(H.k);Q.push(def70m({s:4,sid:s.sid}));showModal()}})}
  if(!s.kn)A.push(Object.assign({n:"Xem người",dom:"Sai bảo",o:100,c:{bac:-H.lookBac},x:"biết nết thật"},S.bac<H.lookBac?{lock:true,t:`cần ${H.lookBac} bạc`}:{},{open:()=>{S.payOnPick=0;if(S.bac<H.lookBac||!can(H.k))return;const bf=rsnap();apply({bac:-H.lookBac});spend(H.k);servLearn(s,"Cho người dò xét lai lịch");hsvDone("Xem người",bf,true)}}));

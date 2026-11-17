@@ -144,8 +144,8 @@ function f14Foe(){try{if(!f14()||!S.foe)return;const e=rivals.find(v=>v.name===S
    how the cast person feels about her (thiện cảm, oán), that person's nature, her own Tâm cơ and Đức, and how many consorts bear her a
    grudge (who is watching). f14Parts lists the parts with the words the result card uses to say why an ending turned. */
 function f14Parts(A){const P=[];if(!f14())return P;const C=BAL.st14.ctx;try{const v=rv67(A,"v")||rv67(A,"v2");
- if(v){const a=cl(Math.round((aff(v,S)||0)/C.aff),-C.affCap,C.affCap),o=cl(Math.round((oan(v,S)||0)/C.oan),0,C.oanCap),t=BAL.st14.tr[v.trait]||0;
-  if(a)P.push([a,a>0?`${v.name} có thiện cảm với ta`:`${v.name} không ưa ta`]);if(o)P.push([-o,`${v.name} oán ta`]);if(t)P.push([t,`${v.name} tính ${String(v.trait).toLowerCase()}`])}
+ if(v){const a=cl(Math.round((aff(v,S)||0)/C.aff),-C.affCap,C.affCap),o=cl(Math.round((oan(v,S)||0)/C.oan),0,C.oanCap),tk=traitsOf(v).find(k=>BAL.st14.tr[k]!=null),t=tk?BAL.st14.tr[tk]:0;
+  if(a)P.push([a,a>0?`${v.name} có thiện cảm với ta`:`${v.name} không ưa ta`]);if(o)P.push([-o,`${v.name} oán ta`]);if(t)P.push([t,`${v.name} tính ${String(tk).toLowerCase()}`])}
  const tm=Math.round(((S.tamco||0)-C.tam[0])/C.tam[1]),du=Math.round(((S.duc||0)-C.duc[0])/C.duc[1]);
  if(tm)P.push([tm,tm>0?"Tâm cơ của ta đủ sâu":"Tâm cơ của ta còn non"]);if(du)P.push([du,du>0?"Đức của ta được người kính":"Đức của ta còn mỏng"]);
  const foes=liveRivals(true).filter(x=>(oan(x,S)||0)>=C.foeOan).length;if(foes)P.push([-Math.min(C.foeCap,foes),`${f14Nv(foes)} người trong cung oán ta, đang dõi theo`])}catch(e){}return P}
