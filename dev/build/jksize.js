@@ -127,7 +127,7 @@ function kszFigHtml(p){let src=kitFigOf(p);if(p&&p.kind==="th"&&(!src||/unknown|
 /* (6) ONE figure scale: the measured BODY (kitFigBody ht → b) of every figure = the layout's body height × KIT_FIG.fac (never the picture box) */
 function kszFigFit(root){(root||document).querySelectorAll(".kszf .kszfig>.kszfs>img").forEach(im=>{const f=im.closest(".kszf");const lay=KIT_SIZE.lay[f.dataset.lay||"big"]||KIT_SIZE.lay.big;
  const v=typeof kitFigBody==="function"?kitFigBody(im.src,()=>kszFigFit(f)):null;if(!v)return;const age=im.dataset.age===""?null:+im.dataset.age;
- const body=KIT_SIZE.fig[lay.fig].h*(typeof KIT_FIG==="object"?KIT_FIG.fac(im.src,age):1)*(f.__kszShrink||1);/* KIT 32.8 feet-fit: ×shrink only when the frame cap would cut the feet (kszFeetFit) */const H=body/Math.max(.2,v.b-v.ht);
+ const body=KIT_SIZE.fig[lay.fig].h*(typeof KIT_FIG==="object"?KIT_FIG.fac(im.src,age):1)*(f.__kszShrink||1);/* KIT 32.8 feet-fit: ×shrink only when the frame cap would cut the feet (kszFeetFit) */const H=body/Math.max(.2,v.b-kitFigTop(v));
  im.style.height=H+"px";im.style.bottom=(-(1-v.b)*H)+"px";im.parentElement.style.height=Math.ceil(H*(v.b-v.t))+"px"})}
 window.kszFigFit=kszFigFit;
 /* spec: {kind,title,sub,who,pic,ban,facts,rows,opts,btn,long} → frame html (size picked after mount by kitFrameApply) */
