@@ -1,0 +1,10 @@
+PRIORITY #1 CHECK: OD ~14:50Z (2), ~15:25Z (4)(5) | main none | review/* ag-all-2 aa92bbf9 + tinbao-ui e988d2e9 | claims tinbao-ui worker.
+# review tinbao-ui r1 — FAIL (small)
+Rebased review/tinbao-ui onto the NEWEST ag-all-2 aa92bbf9 (clean) -> review/tinbao-ui-r1 (site rebuilt, pushed). tinbao-ui.test 19/19 PASS, no page errors. quickcheck: perf PASS (render 205/193, tab 329/331, buoi 1061/761 = noise, live runs span 717-1115), old save ok; NOT BUILT fixed by the committed rebuild. G1 frozen list FAIL 5093->6691 inherited from ag-all-2 (judged there); one-core-guard inlineNow 6521 on both ag-all-2 and tinbao-ui = tinbao adds 0.
+PASS: kit parts only (no private frame), badge count = tinBaoNew (data-n), blinks/calm/absent, toast once per item, gold, ~3 s, one sound, no modal, top bar buttons not hidden (toast under bar; over place header on Fold, over chip row on iPad, fades), no %, old save / API missing / S null no crash, geometry 5 viewports, "Để ta tới xem" opens Du do.
+## FAIL items
+1. Card rows do not show the informer's name/role. Brief: "informer portrait (pframe) + name/role". Rows show only a small portrait + "<place>: <line>"; the name ("Thái giám Tiểu An Tử") appears only in the toast. Add the informer name (+ role) to each row (kit person row), "Tai mắt" for the own-ears rows.
+2. The big left figure on the card is an unrelated person (Quản sự ma ma Diệp Thanh Hòa, both Fold and iPad saves) while the row portraits are the informer (a eunuch servant). Reads as if she brought the news. Figure must be the informer of the first/unseen row (kit rule OD:L448) or none; find why kitFacts/kitModal picks her.
+3. Minor: place is printed twice in a row ("Ngự hoa viên: Bẩm chủ tử, Ngự hoa viên đang có chuyện") when the line already names the place; show the place once (header or prefix).
+4. Minor (iPad 1180x820): the count tag "4" touches the "Buổi sáng" text of the bar; give it 2-4 px more air or take the next free spot.
+Shots (scratch, Fold 755x1000@2 + iPad 1180x820@2, direct mode; host mode stuck on the first-run download card in this sandbox) looked at; worker CDN folder wiped with this verdict.
