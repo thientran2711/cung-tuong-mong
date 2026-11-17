@@ -142,7 +142,7 @@ try{const mt0=KG.mt&&KG.mt.keys?KG.mt.keys.slice():[];for(const k in KG)delete K
 try{if(window.VP&&VP.tabs)Object.assign(VP.tabs,{court:["Chí tôn","Chí tôn"],men:["Nam nhân","Nam nhân"],rel:["Ân oán","Ân oán"]})}catch(e){}
 /* the sub-tab label: long on wide panels, short ("Thánh thượng") where four segments are tight */
 (function(){if(typeof kgSub!=="function")return;const k0=kgSub;kgSub=function(){const r=k0.apply(this,arguments);try{const P=$("panel");const b=P&&P.querySelector('.ksub [data-ksub="court"]');
-  if(b){const w=P.clientWidth||innerWidth;b.innerHTML=w<640?"Chí tôn":"Chí tôn";b.title="Chí tôn"}
+  if(b){/* oi-render: both widths say "Chí tôn": no width read (it forced a layout), no rewrite when equal */if(b.innerHTML!=="Chí tôn")b.innerHTML="Chí tôn";if(b.title!=="Chí tôn")b.title="Chí tôn"}
   const r2=P&&P.querySelector('.ksub [data-ksub="rel"]');if(r2&&T(r2.textContent)!=="Ân oán")r2.textContent="Ân oán"}catch(e){}return r}})();
 
 /* court sub-tab: Hoàng thượng + Thái hậu, the same pager + person card; their acts = the day's act cards about them (from the Hành sự deck) */

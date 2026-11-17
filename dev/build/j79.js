@@ -1012,7 +1012,7 @@ function kgSub(){const P=$("panel");if(!P)return;const g=kgOf(tab);let nav=P.que
 document.addEventListener("click",e=>{const s=e.target.closest&&e.target.closest("[data-ksub]");if(s){e.preventDefault();e.stopPropagation();tab=s.dataset.ksub;render();return}
  const b=e.target.closest&&e.target.closest("#tabs [data-kg]");if(b&&kgOn()){e.preventDefault();e.stopPropagation();const g=b.dataset.kg;tab=kgOf(tab)===g?tab:kgLast(g);try{feedback("page")}catch(x){}render()}},true);
 (function(){const r0=renderPanel;renderPanel=function(){const r=r0.apply(this,arguments);try{kgSub()}catch(e){}return r}})();
-(function(){const r0=render;render=function(){const r=r0.apply(this,arguments);try{kgBar();kgSub();if(typeof tabsFit==="function")tabsFit()}catch(e){}return r}})();
+(function(){const r0=render;render=function(){const r=r0.apply(this,arguments);try{kgBar();kgSub();if(typeof tabsFitR==="function")tabsFitR()/* oi-render: at the end of the render */}catch(e){}return r}})();
 (function(){const st=document.createElement("style");st.id="kit2-tabs";st.textContent=`
 html body #tabs.tabs button.kghide{display:none!important}
 /* SUB-TABS: the ONE segmented control (same look everywhere a tab has sub-tabs) */
