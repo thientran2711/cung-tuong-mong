@@ -926,3 +926,4 @@
 | FEELINGS-18 #2 (opus): owner 20:15–20:45Z rulings + finish | review/feelings-18 | C-AG | session_01UV1Szhqo1wUz89vE6kRkkU | RUNNING | 17/11 19:34Z |
 | CONSORT-TY REPAINT resume (32 consorts, 572 keys missing; owner 17/11 19:40Z; transparent-bg repaint of old designs; sonnet W2c opened by lead #7) | review/fig-cutout-clean | C | session_011xDdVPTZMoPrGxgDoi5gZL | RUNNING | 17/11 19:40Z |
 | MAID->CONSORT TIER SAMPLE sheet (maid-like outfits at consort tiers; sample only, nothing live; sonnet W10 opened by lead #7) | review/fig-cutout-clean | C | session_011xDdVQzeuta29DT66RfH38 | RUNNING | 17/11 19:40Z |
+| RECOLOUR sample c01 a18 t1-t8 (owner 20:10Z: same outfits, 8 colours per person; sample only, nothing live; sonnet W11 opened by lead #7) | review/fig-cutout-clean | C | session_011xDdVPf1CXpFmoFrRYmPBm | RUNNING | 17/11 20:10Z |
