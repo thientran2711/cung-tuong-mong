@@ -47,3 +47,13 @@ Collar type per rank (no two alike), different cut + outer layer:
 - Hoàng quý phi: apricot gold, WIDE SQUARE neck + six-lobe phoenix/pearl vân kiên, amber over-vest with phoenix medallions.
 - Hoàng hậu: imperial yellow, tall TIERED PHOENIX collar (red-gold tabs), modest vân kiên, red-gold phoenix skirt, phoenix crown.
 Sheets: https://ctm-img.victoria-tntt.workers.dev/img/_review/rank-vankien/sheet_figures_v3.jpg and sheet_shoulders_v3.jpg
+
+## V4 (owner 17/11 ~17:00Z: new colour per rank, different hair + hairpins, item in hand, low neckline with covered shoulders)
+PRIORITY #1 CHECK: no neckline rule in OD/canon (per foreman). One try per rank, same c01 a18 face, ONE shared frontal pose/scale (dress-up idea, not final).
+- Tần: pale lilac, deep-V cross-collar (open neck/upper chest, shoulders covered), low side bun + flower pins, handkerchief.
+- Phi: soft peach-pink, wide square low neckline + chest-high skirt, small cream vân kiên, double-loop bun + gold butterflies, lotus bud.
+- Quý phi: deep plum, low U/round neck, defined peony vân kiên with pearl edge, high bun + flower crown + buyao pins, round fan.
+- Hoàng quý phi: peacock teal + gold, sweetheart low neck + chest-high skirt, 6-lobe phoenix/pearl vân kiên, upswept chignon + single gold phoenix pin, ruyi.
+- Hoàng hậu: imperial yellow kept (yellow is reserved for empress/emperor), low neckline framed by red-gold phoenix collar tabs, modest vân kiên, phoenix crown, jade ruyi.
+Caveat: Phi and Quý phi necklines show less chest than Tần/HQP/HH (chest-high skirt hides bust top); can push lower on request.
+Sheets: https://ctm-img.victoria-tntt.workers.dev/img/_review/rank-vankien/sheet_figures_v4.jpg and sheet_shoulders_v4.jpg
