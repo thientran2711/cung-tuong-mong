@@ -15,6 +15,11 @@
 function nrGuest(){const C=window.COOPW;return !!(C&&C.on&&C.seat&&C.seat!=="a")}
 function nrOn(){return !!(typeof S==="object"&&S&&!S.dead&&!window.__nroff&&typeof ARC67==="object")}
 const nrB=()=>BAL.nroad;
+/* owner priority 16/11 22:00Z (OD:L1477, chapters 1–4 first): while the player is in her learning chapters (Phần đầu, before chapter
+   BAL.st14.parts[1][0]) NPC roads run off-screen only — nobody asks her for help (no new card in front of the tutorial) and no NPC road casts
+   her as its rival / patron. Old-frame saves (no 14-chapter frame) are past that time. */
+function nrLearn(){try{return typeof f14==="function"&&f14()&&S.st.ch.n<BAL.st14.parts[1][0]}catch(e){return false}}
+window.nrLearn=nrLearn;
 const nrR=a=>a[0]+R(a[1]-a[0]+1);
 /* men road templates (U3, jnroadm.js): NRM[id] = {k kind, t title, sk test stat, c: {4..11: chapter {t, w, sk, E}}} */
 const NRM={};
@@ -39,7 +44,7 @@ function nrNew(o,r){const n=nrNext(r,BAL.road.first-1);const H=nrB().helpN;const
 function nrRival(v){const N=v.nr;const ok=p=>p===S?!S.dead&&!S.out:p&&p.alive&&!p.out&&p!==v;
  if(N.c!=null){const p=N.c==="me"?S:RV(N.c);if(ok(p))return p;const old=N.c==="me"?null:p;N.c=null;N.rc=old?old.name:""}
  /* the player is her rival only for a real reason (she is cold to the player) and only for a few NPCs at once (BAL.nroad.meMax) */
- const meN=rivals.filter(x=>x!==v&&x.alive&&!x.out&&x.nr&&!x.nr.x&&x.nr.c==="me").length;const meOk=!isSrv()&&aff(v,S)<0&&meN<nrB().meMax;
+ const meN=rivals.filter(x=>x!==v&&x.alive&&!x.out&&x.nr&&!x.nr.x&&x.nr.c==="me").length;const meOk=!isSrv()&&!nrLearn()&&aff(v,S)<0&&meN<nrB().meMax;
  const L=liveRivals(true).filter(p=>p!==v&&!p.coop).concat(meOk?[S]:[]);if(!L.length)return null;
  L.sort((a,b)=>aff(v,a)-aff(v,b));const p=L[Math.min(L.length-1,R(Math.min(nrB().rvTop,L.length)))];N.c=key(p);return p}
 /* the stat the chapter's climax rewards (tamco, danh, duc, tai, sac, sung …) — read from the chapter data */
@@ -69,7 +74,7 @@ function nrPlay(v){const N=v.nr,A=nrCh(N.r,N.n);if(!A){N.n=nrNext(N.r,N.n+1);ret
  const rc=N.rc?` ${N.rc} nay không còn, kẻ đứng đối mặt nàng là ${riv?NM(riv):"người khác"}.`:"";N.rc="";
  return {n:n0,t:plain(A.t),tag,k,me,rc,riv}}
 /* motive to ask the player (real reasons only): bond, a shared side, or the player is her rival (never asks her rival) */
-function nrAsk(v){try{if(isSrv()||S.out)return false;const N=v.nr;if(N.c==="me")return false;
+function nrAsk(v){try{if(isSrv()||S.out||nrLearn())return false;const N=v.nr;if(N.c==="me")return false;
  if(aff(v,S)>=nrB().askRel)return true;const f=facOf(v);if(f&&f===facOf(S))return true;
  const a=typeof rgSideOf==="function"?rgSideOf(v):null;return !!(a&&a===rgSideOf(S))}catch(e){return false}}
 /* the help kind of a chapter from its main cast key (w) */
@@ -208,7 +213,7 @@ function nrMPlay(s){const N=s.nr,A=nrCh(N.r,N.n);if(!A){N.n=nrNext(N.r,N.n+1);if
  return {n:n0,t:plain(A.t),tag,k,rc,riv,ms}}
 /* motive to ask the player: her own maid asks when her loyalty is high; another house's maid only when the player is close to her
    mistress (bond or a shared side) — never for a maid whose mistress is cold to the player */
-function nrMAsk(s){try{if(isSrv()||S.out)return false;const ms=nrMis(s);if(!ms)return false;if(ms===S)return (s.loyal||0)>=nrB().m.askLoy;
+function nrMAsk(s){try{if(isSrv()||S.out||nrLearn())return false;const ms=nrMis(s);if(!ms)return false;if(ms===S)return (s.loyal||0)>=nrB().m.askLoy;
  if(aff(ms,S)>=nrB().askRel)return true;const f=facOf(ms);return !!(f&&f===facOf(S))}catch(e){return false}}
 function nrMOffer(s){const N=s.nr,A=nrCh(N.r,N.n);if(!A||typeof q72!=="function")return false;const hk=nrKind(A);if(!T72I["nr_"+hk])return false;const q=q72();if(!q)return false;
  const [rk,ri]=nrMK(s);if(q.ch.concat(q.a).some(c=>nrSameA(c,rk,ri)&&/^nr_/.test(c.tid)))return false;

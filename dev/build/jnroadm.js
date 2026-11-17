@@ -103,7 +103,7 @@ function nrMenRival(e){const N=e.p.nr;const B=nrB().men;
   L.sort((a,b)=>NRM[N.r].ally?tdRel(e.c,b)-tdRel(e.c,a):tdRel(e.c,a)-tdRel(e.c,b));N.c=L[Math.min(L.length-1,R(Math.min(nrB().offTop,L.length)))];return N.c}
  if(e.g==="hz"){const L=allKids().map(z=>z[0]).filter(k=>k!==e.p&&k.sex==="m"&&k.alive);const p=N.c&&L.find(k=>k.name===N.c);if(p)return p;if(N.c){N.rc=N.c;N.c=null}if(!L.length)return null;const q=pick(L);N.c=q.name;return q}
  /* court men: the consort he leans toward (patron pk) and the one he leans against (c), from his af (key "me" = the player) */
- const C=liveRivals(true).filter(p=>!p.coop).concat(S.out||S.dead?[]:[S]);const af=p=>(e.p.af&&e.p.af[nrCKey(p)])||0;
+ const C=liveRivals(true).filter(p=>!p.coop).concat(S.out||S.dead||nrLearn()?[]:[S]);const af=p=>(e.p.af&&e.p.af[nrCKey(p)])||0;
  const ok=k=>{const p=k!=null&&nrCWho(k);return p&&(p===S||p.alive&&!p.out)};
  if(!ok(N.pk)||!ok(N.c)){if(N.c!=null&&!ok(N.c)){const o=RV(N.c);N.rc=o?o.name:""}if(C.length<2)return null;C.sort((a,b)=>af(b)-af(a));N.pk=nrCKey(C[0]);N.c=nrCKey(C[C.length-1])}
  return nrCWho(N.c)}
@@ -127,7 +127,7 @@ function nrMenPlay(e){const p=e.p,N=p.nr,A=nrCh(N.r,N.n);if(!A){N.n=nrNext(N.r,N
  return {n:n0,t:plain(A.t),tag,k,rc,me,hit}}
 /* motive to ask the player (real reasons only): a man fond of her (tinh), a court man / house head who leans to her (af.me), a house
    allied with hers; princes and the Nội vụ phủ buyer never ask (their mother / their master does) */
-function nrMenAsk(e){try{if(isSrv()||S.out||!e.a)return false;const M=nrB().men,p=e.p;
+function nrMenAsk(e){try{if(isSrv()||S.out||nrLearn()||!e.a)return false;const M=nrB().men,p=e.p;
  if(e.g==="men")return (p.tinh||0)>=M.askTinh;const af=(p.af&&p.af.me)||0;if(af>=M.askAf)return true;
  if(e.g==="off"){const h=tdHouse(S);return !!(h&&tdRel(e.c,h)>=M.askRel)}return false}catch(x){return false}}
 function nrMenOffer(e){const N=e.p.nr,A=nrCh(N.r,N.n);if(!A||!e.a||typeof q72!=="function")return false;const hk=nrKind(A);if(!T72I["nr_"+hk])return false;const q=q72();if(!q)return false;
