@@ -23,6 +23,17 @@
    worldOn() = true in single player and on the host seat, false on the co-op guest seat. EVERY world loop checks it (the guard table is
    jcoopone.js, the last script; a few inline checks in j3/j8/j13). The guest computes only HER OWN person; the world comes from the host. */
 window.worldOn=function(){const c=window.COOPW;return !(c&&c.on&&c.seat!=="a")};
+/* ONE SWITCH for the OLD guest state guards (thin part C, Foreman B 17/11: bypass at level >= 3, delete at part H when level >= 3 is the default).
+   In a C room the guest's world is a read-only lens over the host's (jcoopthinc.js): a write there can never reach the world, so the guards
+   that only STOP WRITES (HOST_ONLY copies in toCanon, the guestNet / unroll safety net, jcoopask temp ids, part D row tracking, part B's
+   old-rows rule) step aside. thinW() = the switch (a C room). stateOn(name) = may the world write run here: true in solo, on the host and
+   in a C room; false = the old guard runs (oldRan(name): COOPW.oldRun[name] + 1; the C-room tripwire asserts 0 on both seats, rooms below
+   level 3 show the counters live).
+   NOT this switch: the "who rolls a world event" guards (worldOn: NPC Sức ticks, illness, lots, kids month, the NPCs' day, Emperor visits,
+   jcoopone MUTE / ONLY_ME / PERSON, module npcOK guards) stay until parts E / G: the host rolls those once, for both seats (coop-thin-c.md). */
+window.thinW=function(){const c=window.COOPW;return !!(c&&c.on&&c.thin&&c.thin.on&&c.thin.on(3))};
+window.oldRan=function(n){const c=window.COOPW;if(c){c.oldRun=c.oldRun||{};c.oldRun[n]=(c.oldRun[n]||0)+1}};
+window.stateOn=function(n){if(worldOn()||thinW())return true;oldRan(n);return false};
 (function(){try{
 if(typeof COOP!=="object")return;
 /* thIll (Thái hậu illness), cm (Thái hậu / Hoàng hậu mood; her own "seen"/spy/drop part stays personal, CM_P), men (palace men; her own
@@ -112,7 +123,7 @@ function myBlob(sS){const P={pid:me(),ok:S.origin&&S.origin.k,name:S.name,rank:S
  delete P.S.thq;/* part D r1: her open cards live only in the host's store (localStorage per room); a copy in a blob came back stale after a host reload */return P}
 function toCanon(){try{CW.hrSync&&CW.hrSync()}catch(e){console.error(e)}const L=(CW.pulled||[]).concat(pullFriend());let d;try{S.cev=S.cev||{};const f=L.find(x=>x[0]>=0);if(f)S.cev[fp()]=f[1].ev||0;d=ser()}finally{pushFriend(L.filter(x=>!(CW.pulled||[]).includes(x)))}
  const mp=me(),sS=d.S;const WS={};for(const k of W_KEYS)if(k in sS)WS[k]=worldPart(k,sS[k]);if(WS.emp)delete WS.emp.known;
- if(!host()){const bS=(CW.base&&CW.base.W&&CW.base.W.S)||{};for(const k of HOST_ONLY){if(k in bS)WS[k]=J(bS[k]);else delete WS[k]}}
+ if(!stateOn("hostOnly")){const bS=(CW.base&&CW.base.W&&CW.base.W.S)||{};for(const k of HOST_ONLY){if(k in bS)WS[k]=J(bS[k]);else delete WS[k]}}
  if(host())WS.cnews={w:wk(),h:CW.news||""};else if(CW.base&&CW.base.W&&CW.base.W.S)WS.cnews=J(CW.base.W.S.cnews);
  const R=d.R.filter(r=>!r.coop).map(r=>{r.rl=r.rl||{};r.ro=r.ro||{};r.gp=r.gp||{};r.ep=r.ep||{};r.evm=r.evm||{};
   r.rl[mp]=r.rel||0;r.ro[mp]=r.oan||0;r.gp[mp]=r.ghen||0;r.ep[mp]=r.ev||0;delete r.rel;delete r.oan;delete r.ghen;delete r.ev;
@@ -202,7 +213,7 @@ function unroll(c0,c1,c2,own){if(own)return c2;if(nEq(c1,c0))return c2;if(nEq(c2
  return c2}   /* both changed and not mergeable: her act stands (the server's host-wins rule settles a clash) */
 function unrollR(r0,r1,r2,mp){const o=unroll(r0,r1,r2,false);if(!nObj(o))return o;const own=String(mp);
  for(const m of NET_OWN){const a=r2&&r2[m];if(a&&own in a){o[m]=nObj(o[m])?o[m]:{};o[m][own]=a[own]}else if(o[m]&&nObj(o[m]))delete o[m][own]}return o}
-function guestNet(C){const n=CW.net;if(host()||!n||n.week!==C.week||!n.c1||!C.W)return C;const mp=me(),W0=n.c0.W,W1=n.c1.W,W2=C.W;
+function guestNet(C){const n=CW.net;if(host()||!n||n.week!==C.week||!n.c1||!C.W||stateOn("guestNet"))return C;const mp=me(),W0=n.c0.W,W1=n.c1.W,W2=C.W;
  const S0=W0.S||{},S1=W1.S||{},S2=W2.S||{},SO={};
  for(const k of new Set([...Object.keys(S0),...Object.keys(S1),...Object.keys(S2)])){const v=NET_DATE.includes(k)||HOST_ONLY.includes(k)?S2[k]:unroll(S0[k],S1[k],S2[k],false);if(v!==undefined)SO[k]=v}
  const m0=new Map((W0.R||[]).map(r=>[String(r.id),r])),m1=new Map((W1.R||[]).map(r=>[String(r.id),r]));const R=[],seen=new Set();let back=0;
@@ -211,7 +222,7 @@ function guestNet(C){const n=CW.net;if(host()||!n||n.week!==C.week||!n.c1||!C.W)
  C.W={S:SO,R,rid:W0.rid!=null?Math.max(W0.rid,W2.rid||0):W2.rid};return C}
 CW.unroll=unroll;CW.guestNet=guestNet;
 /* her world just before and just after her whole week end: called by jcoopone.js around the OUTERMOST endTurn (every module's wrapper inside) */
-CW.netWrap=function(f,self,args){if(!CW.on||host()||(CW.thin&&CW.thin.on(3))){return f.apply(self,args)}/* part C: the guest's world is read-only, no safety net needed */const p0=CW.pend;let c0=null;try{c0=toCanon()}catch(e){}
+CW.netWrap=function(f,self,args){if(!CW.on||host()||stateOn("netWrap")){return f.apply(self,args)}/* part C: the guest's world is read-only, no safety net needed */const p0=CW.pend;let c0=null;try{c0=toCanon()}catch(e){}
  const r=f.apply(self,args);try{if(!p0&&CW.pend&&c0)CW.net={week:wk(),c0,c1:toCanon()}}catch(e){CW.net=null}return r};
 function sendEnd(){if(!CW.on||!S||S.dead||CW.sent===wk()||CW.cyHold!=null/* the host's night waits for her cycle answer (B2 × jcycle) */)return;const C=guestNet(toCanon());CW.sent=wk();CW.pend=false;CW.mine=snapStats();
  COOP.send({t:"end",week:wk(),state:C});try{localStorage.setItem("ctm-coop-last",JSON.stringify({room:COOP.state.room,C}))}catch(e){}lockNext()}

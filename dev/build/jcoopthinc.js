@@ -26,11 +26,14 @@
 const CW=window.COOPW;if(!CW||!CW.thin||!CW.X||typeof COOP!=="object")return;
 const TH=CW.thin,X=CW.X,J=X.J;
 const host=()=>CW.seat==="a";
-const on=()=>TH.on(3);
+const on=()=>thinW();/* the ONE switch (jcoopworld thinW / stateOn / oldRan) */
 const gOn=()=>on()&&!host()&&!!CW.seat;
+/* the lens is on her list (installed by fromCanon / relens): while it is, every write goes through a frame even if the level reads 0 for a
+   moment (COOPW.hold: the two builds differ until both reopen); her ops wait in the queue until the room is on again */
+const lOn=()=>gOn()||!!(CW.on&&!host()&&C&&C.Rraw&&typeof rivals!=="undefined"&&rivals&&rivals[LENS]);
 const plain=o=>o!==null&&typeof o==="object";
 const LENS=Symbol.for("ctm.lens"),RAW=Symbol.for("ctm.lens.raw");
-const C=TH.C={on,gOn,stat:{drop:0,dropW:0,act:0,ops:0,sent:0,applied:0,addN:0,addRe:0,world:0,frames:0,implicit:0,npcActOff:0,pickOff:0},ops:[],seen:null,log:[],dbgI:[]};
+const C=TH.C={on,gOn,stat:{drop:0,dropW:0,act:0,ops:0,sent:0,applied:0,addN:0,addRe:0,world:0,frames:0,implicit:0,npcActOff:0,pickOff:0},ops:[],seen:null,log:[]};
 const lg=x=>{C.log.push(x);if(C.log.length>60)C.log.shift()};
 
 /* ---------- 1. the lens ---------- */
@@ -74,8 +77,8 @@ C.raw=unl;
 let WB=null;   /* raw values of the world keys (the host's, in her perspective, with her own parts) */
 /* fresh = a new S (fromCanon / relens): the backing values start from its own keys; else (the host's world in) only keys it lacks get an accessor */
 function lensW(fresh){if(!gOn()||!S)return;const s=S;if(fresh||!WB)WB={};
- for(const k of X.W_KEYS){const d=Object.getOwnPropertyDescriptor(s,k);if(d&&d.get&&d.get.__lens)continue;if(d)WB[k]=s[k];else if(!(k in WB))continue;
-  const key=k;const g=function(){const F=topW(key);const v=F?F.v:WB[key];if(v===undefined&&key==="emp"&&!C.dbgE){C.dbgE=String(new Error().stack).slice(0,900)+" F="+!!F+" WB="+Object.keys(WB||{}).join(",")}return plain(v)?lp(v,"W."+key,[]):v};g.__lens=1;
+ for(const k of X.W_KEYS){const d=Object.getOwnPropertyDescriptor(s,k);if(d&&d.get&&d.get.__lens)continue;if(d)WB[k]=s[k];/* a key her S lacks gets the accessor too: a world key her loop creates (monthTick S.storms) lands in the frame, never on her S */
+  const key=k;const g=function(){const F=topW(key);const v=F?F.v:WB[key];return plain(v)?lp(v,"W."+key,[]):v};g.__lens=1;
   const st=function(v){v=unl(v);if(sync()){WB[key]=v;return}let F=FR[FR.length-1];if(!F)F=open("act",true);F.w[key]={v};F.roots.add("W."+key);C.stat.ops++};st.__lens=1;
   Object.defineProperty(s,k,{get:g,set:st,enumerable:true,configurable:true})}}
 function topW(k){for(let i=FR.length-1;i>=0;i--)if(k in FR[i].w)return FR[i].w[k];return null}
@@ -85,7 +88,7 @@ CW.lensR=function(R){if(!gOn()||!Array.isArray(R))return R;C.Rraw=R;return lp(R,
 C.isLens=x=>!!(x&&x[LENS]);
 
 /* ---------- 2. frames ---------- */
-function open(kind,implicit){if(implicit&&C.dbgI.length<6)C.dbgI.push(String(new Error().stack).split("\n").slice(2,9).join(" | "));const F={kind,cow:new Map(),w:{},roots:new Set(),implicit:!!implicit,t:Date.now()};FR.push(F);C.stat.frames++;
+function open(kind,implicit){const F={kind,cow:new Map(),w:{},roots:new Set(),implicit:!!implicit,t:Date.now()};FR.push(F);C.stat.frames++;
  if(implicit){C.stat.implicit++;queueMicrotask(()=>{const i=FR.indexOf(F);if(i<0)return;while(FR.length>i+1)close(FR[FR.length-1]);close(F)})}return F}
 function close(F){const i=FR.lastIndexOf(F);if(i<0)return;while(FR.length>i+1)close(FR[FR.length-1]);
  let ops=null;if(F.kind==="act"&&F.roots.size){try{ops=opsOf(F);if(F.implicit){/* display code (figUsed fidUsed, k61 thO …) writing world keys outside her acts: dropped */const n=ops.length;ops=ops.filter(o=>o.t!=="w");C.stat.dropIW=(C.stat.dropIW||0)+n-ops.length}}catch(e){console.error("lens ops",e)}}
@@ -94,7 +97,7 @@ function close(F){const i=FR.lastIndexOf(F);if(i<0)return;while(FR.length>i+1)cl
  if(F.kind!=="act"){if(F.roots.size){C.stat.drop++;C.stat.dropW+=F.roots.size}if(rows&&rows.length){C.stat.rows=(C.stat.rows||0)+rows.length;send(rows)}return}
  if(ops&&ops.length){C.stat.act++;send(ops)}}
 /* run fn inside a frame (kind "world" drops, "act" sends); an implicit act frame still open is closed first (its ops go out) */
-C.frame=function(kind,fn,self,args){if(!gOn())return fn.apply(self,args||[]);
+C.frame=function(kind,fn,self,args){if(!lOn())return fn.apply(self,args||[]);
  const F=open(kind,false);try{return fn.apply(self,args||[])}finally{close(F)}};
 C.flush=()=>{while(FR.length)close(FR[FR.length-1])};
 
@@ -113,33 +116,59 @@ function opsOf(F){const out=[];
   if(root==="R"){const b=snapRoot("R",true),a=snapRoot("R",false);const add=a.filter(id=>!b.includes(id)),rm=b.filter(id=>!a.includes(id));
    for(const id of add){const v=snapRoot(id,false);if(v)out.push({t:"add",id,a:v})}for(const id of rm)out.push({t:"rm",id});continue}
   if(typeof root==="string"&&root[0]==="W"){const k=root.slice(2);const b=stripW(k,snapRoot(root,true)),a=stripW(k,snapRoot(root,false));
-   if(JSON.stringify(a)!==JSON.stringify(b))out.push({t:"w",k,b,a});continue}
-  const b=snapRoot(root,true),a=snapRoot(root,false);if(!b||!a)continue;if(JSON.stringify(a)!==JSON.stringify(b))out.push({t:"npc",id:root,b,a})}
+   if(JSON.stringify(a)!==JSON.stringify(b)){const [pb,pa]=prune(b,a);out.push({t:"w",k,b:pb,a:pa})}continue}
+  const b=snapRoot(root,true),a=snapRoot(root,false);if(!b||!a)continue;if(JSON.stringify(a)!==JSON.stringify(b)){const [pb,pa]=prune(b,a);out.push({t:"npc",id:root,b:pb,a:pa})}}
  /* a person added in this frame is sent whole once ("add"), not as an npc op too */
  const added=new Set(out.filter(o=>o.t==="add").map(o=>o.id));return out.filter(o=>!(o.t==="npc"&&added.has(o.id)))}
+/* an op carries only what changed (the Worker takes one intent up to DOMAX = 20 000 chars; a whole NPC with its memories is ~10 000):
+   plain objects are cut to the keys whose value differs, recursively; arrays and values travel whole. The host's 3-way rule (m3) reads a
+   missing key as "she did not touch it" (keeps the host's), a key only in b as "she removed it", a key only in a as "she added it". */
+function prune(b,a){if(!plain(b)||!plain(a)||Array.isArray(b)||Array.isArray(a))return [b,a];const ob={},oa={};
+ for(const k of new Set([...Object.keys(b),...Object.keys(a)])){const inB=k in b,inA=k in a;
+  if(inB&&inA){if(JSON.stringify(b[k])===JSON.stringify(a[k]))continue;const [x,y]=prune(b[k],a[k]);ob[k]=x;oa[k]=y}else if(inB)ob[k]=b[k];else oa[k]=a[k]}
+ return [ob,oa]}
+C.prune=prune;
+/* an op too big for one intent is cut by keys (each part is a valid op: m3 treats keys apart); a value that alone exceeds the cap
+   (one huge array) cannot be cut: counted (stat.big) and sent, the Worker answers "bado" (stat.bado; the tests assert 0) */
+const CAP=17000,len=x=>JSON.stringify(x).length;
+function split(op){if(len(op)<=CAP||op.t==="add"||op.t==="rm"||op.t==="rows")return [op];
+ const cut=(b,a,wrap)=>{/* wrap(b,a) builds the op for a sub-part */const one=wrap(b,a);if(len(one)<=CAP)return [one];
+  if(!plain(a)||!plain(b)||Array.isArray(a)||Array.isArray(b)){C.stat.big=(C.stat.big||0)+1;return [one]}
+  const out=[];let cb={},ca={};const flush=()=>{if(Object.keys(cb).length||Object.keys(ca).length)out.push(wrap(cb,ca));cb={};ca={}};
+  for(const k of new Set([...Object.keys(b),...Object.keys(a)])){const pb={},pa={};if(k in b)pb[k]=b[k];if(k in a)pa[k]=a[k];
+   if(len(wrap(pb,pa))>CAP){flush();for(const x of cut(k in b?b[k]:{},k in a?a[k]:{},(sb,sa)=>{const ob={},oa={};if(k in b)ob[k]=sb;if(k in a)oa[k]=sa;return wrap(ob,oa)}))out.push(x);continue}
+   const tb=Object.assign({},cb,pb),ta=Object.assign({},ca,pa);if(len(wrap(tb,ta))>CAP){flush();Object.assign(cb,pb);Object.assign(ca,pa)}else{cb=tb;ca=ta}}
+  flush();return out};
+ return cut(op.b,op.a,(b,a)=>Object.assign({},op,{b,a}))}
+C.split=split;
 /* her own viewer rows on each NPC her week touched (the per-player rows rl/ro/gp/ep/evm[902] of the world: hers, as before part C) */
 const RW=["rel","oan","ghen","ev"];
 function rowsOf(F){const out=[];for(const root of F.roots){if(typeof root!=="number")continue;const b=snapRoot(root,true),a=snapRoot(root,false);if(!b||!a)continue;const d={};
   for(const f of RW){const x=(+a[f]||0)-(+b[f]||0);if(x)d[f]=x}const em=((a.evm&&+a.evm.me)||0)-((b.evm&&+b.evm.me)||0);if(em)d["evm.me"]=em;
   if(Object.keys(d).length)out.push({t:"rows",id:root,d})}return out}
 let SQ=[],sT=0;
-function send(ops){C.ops=ops;C.stat.sent++;SQ.push(...ops);clearTimeout(sT);sT=setTimeout(()=>{const L=SQ.splice(0);if(!L.length)return;
-  const id=TH.doSend("npc",{ops:L,w:COOP.state.week||0});if(!id){lg(["send-fail",L.length]);return}C.lastId=id;lg(["sent",id,L.map(o=>o.t+":"+(o.id!=null?o.id:o.k)).join(",")])},0)}
+function send(ops){if(ops.length){C.ops=ops;C.stat.sent++}SQ.push(...ops);clearTimeout(sT);sT=setTimeout(()=>{const L=SQ.splice(0);if(!L.length)return;
+  /* packs under the intent cap, in order (an "add" and the ops after it stay in the order she made them) */
+  const P=[];let cur=[],n=0;for(const o of L)for(const x of split(o)){const l=len(x)+1;if(cur.length&&n+l>CAP){P.push(cur);cur=[];n=0}cur.push(x);n+=l}if(cur.length)P.push(cur);
+  if(!TH.on(1)){/* the room holds (two builds) or reconnects: keep them, in order */SQ.unshift(...L);C.stat.wait=(C.stat.wait||0)+1;sT=setTimeout(()=>send([]),1000);return}
+  for(const ops of P){const id=TH.doSend("npc",{ops,w:COOP.state.week||0});if(!id){lg(["send-fail",ops.length]);C.stat.fail=(C.stat.fail||0)+1;continue}C.lastId=id;C.stat.packs=(C.stat.packs||0)+1;lg(["sent",id,ops.map(o=>o.t+":"+(o.id!=null?o.id:o.k)).join(",")])}},0)}
+/* the Worker refused an intent (too big / bad): counted, never silent */
+COOP.on("error",m=>{try{if(gOn()&&m&&m.code==="bado"){C.stat.bado=(C.stat.bado||0)+1;lg(["bado",m.id])}}catch(e){}});
 
 /* frames on the guest's engine entries (this module loads last but one: these wrappers are outermost) */
-function wrapF(n,kind,cond){const f=window[n];if(typeof f!=="function")return;window[n]=function(){if(!gOn()||(cond&&!cond.apply(this,arguments)))return f.apply(this,arguments);
+function wrapF(n,kind,cond){const f=window[n];if(typeof f!=="function")return;window[n]=function(){if(!lOn()||(cond&&!cond.apply(this,arguments)))return f.apply(this,arguments);
  /* a world frame never runs inside an act's frame: the act is closed first (her act's ops go out, then the world step) */
  if(kind==="world")C.flushAct();return C.frame(kind,f,this,arguments)}}
 C.flushAct=()=>{while(FR.length&&FR[FR.length-1].kind==="act")close(FR[FR.length-1])};
 for(const n of ["endTurn","nextBuoi","monthTick","render"])wrapF(n,"world");
 wrapF("chooseM","act");
 /* her act (she is the actor): its own frame, so the ops go out with that act; an NPC act on the guest: nothing (NPCs act on the host) */
-{const f=runAct;runAct=function(a){if(!gOn())return f.apply(this,arguments);if(a===S||(a&&a[RAW]===S))return C.frame("act",f,this,arguments);
+{const f=runAct;runAct=function(a){if(!lOn())return f.apply(this,arguments);if(a===S||(a&&a[RAW]===S))return C.frame("act",f,this,arguments);
  if(a&&!a.coop){C.stat.npcActOff++;return ""}return f.apply(this,arguments)}}
 /* G7: on the guest no NPC picks a target (the host rolls NPC buổi acts aimed at her, with her entry in the harem) */
 if(typeof pickTarget==="function"){const f=pickTarget;pickTarget=function(){if(gOn()){C.stat.pickOff++;return null}return f.apply(this,arguments)}}
 /* every server message is a sync step on the guest: a world write made while handling it is the old relay path (the host's world comes as a whole) */
-COOP.rxWrap=function(go,m){if(!gOn())return go();C.flushAct();const F=open("world",false);try{return go()}finally{close(F)}};
+COOP.rxWrap=function(go,m){if(!lOn())return go();C.flushAct();const F=open("world",false);try{return go()}finally{close(F)}};
 
 /* ---------- 3. the host's world in, on the guest (merged week = fromCanon; between weeks = the host's delta) ---------- */
 /* host perspective (rows rel/oan/ghen/ev = the host's; "me" = 901) → canonical (jcoopworld toCanon) → hers (fromCanon) */
@@ -182,6 +211,8 @@ CW.cW=function(out){if(!gOn())return out;const B=CW.base&&CW.base.W;if(!B)return
 /* 3-way: b = the world before her act (as she saw it), h = the host's now, a = after her act */
 const key=x=>plain(x)?(x.id!=null?"i"+x.id:x.sid!=null?"s"+x.sid:x.ci!=null?"c"+x.ci:null):null;
 function m3(b,h,a){const sb=JSON.stringify(b),sa=JSON.stringify(a);if(sa===sb)return h;
+ /* an object she added that the host also holds (or a part of a big op cut by keys): merged key by key */
+ if(b===undefined&&plain(a)&&plain(h)&&!Array.isArray(a)&&!Array.isArray(h))b={};
  if(typeof b==="number"&&typeof a==="number"&&typeof h==="number")return h+(a-b);
  if(Array.isArray(a)&&Array.isArray(b)&&Array.isArray(h)){const ka=a.map(key),kb=b.map(key),kh=h.map(key);
   if(ka.every(Boolean)&&kb.every(Boolean)&&kh.every(Boolean)){const mb=new Map(b.map((x,i)=>[kb[i],x])),ma=new Map(a.map((x,i)=>[ka[i],x]));const out=[];
@@ -226,8 +257,8 @@ if(typeof rivalsBuoi==="function"){const f=rivalsBuoi;rivalsBuoi=function(){if(!
 
 /* ---------- 6. parts B and D in a C room: the host's world keeps her rows ---------- */
 /* D: no row tracking (the host world keeps every change of her viewer rows; the guest gets it with the world) */
-{const D=TH.D;if(D&&D.rvIn){const f=D.rvIn;D.rvIn=function(){if(on())return null;return f.apply(this,arguments)}}}
+{const D=TH.D;if(D&&D.rvIn){const f=D.rvIn;D.rvIn=function(){if(on())return null;oldRan("rvIn");return f.apply(this,arguments)}}}
 /* B: a new life's rows toward her new face go into the host world at her accept (B kept the old numbers until the merge) */
-{const lf=TH.doFn&&TH.doFn("life");if(lf)TH.onDo("life",function(a,m){const r=lf.apply(this,arguments);try{if(on()&&r&&r.st==="accept"&&!r.err&&r.rows)for(const v of live()){const x=r.rows[v.id];if(!x)continue;
+{const lf=TH.doFn&&TH.doFn("life");if(lf)TH.onDo("life",function(a,m){const r=lf.apply(this,arguments);try{if(!on()&&r&&r.st==="accept"&&!r.err)oldRan("bRows");if(on()&&r&&r.st==="accept"&&!r.err&&r.rows)for(const v of live()){const x=r.rows[v.id];if(!x)continue;
   v.rel=x[0];v.oan=x[1];v.ghen=x[2];v.ev=x[3];if(plain(v.evm))delete v.evm.me;if(v.resHead==="me")v.resHead=null}}catch(e){console.error("C life rows",e)}return r})}
 }catch(e){console.error("jcoopthinc",e)}})();
