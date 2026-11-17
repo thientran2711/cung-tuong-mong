@@ -12,7 +12,7 @@ Kit part change only. Person-card top block rows (Sở trọng / Đã biết / D
 ## Tests (r1)
 - pcard-fill.js at ALL 5 sizes 755x1000 / 1180x820 / 1366x1024 / 412x1058 / 390x844 (@1): errs [] everywhere; rv0 rv1 court0 court1 info+sticky OK, no hscroll, no overflow; same pass/info pattern as the base build e06e38a1 (pop/popdone/me = no info, as before).
 - pcard-facts.js (new): person with 2 heard facts + likes + dislikes; taps a fact in the right panel and a Thích item in the left key block; pop-up shows Khi nào / Cách biết / Nguồn; no clamp, no date prefix.
-- quickcheck: see last line of this section (run on 87c73de4).
+- quickcheck on 87c73de4: PASS 118 s · open 1258 ms · old save ok · core gates PASS · perf render 150/141, tab 253/222, buổi 673/683.
 
 ## Fixes after main LOOK
 (1) shots redone, all LOOKED: person with heard facts + likes/dislikes; pop-ups opened on a right-panel fact and on a Thích item. (2) r1 bug found while doing it: kitPcKey (jk2b) moved Thích/Ghét to the left block as the first item's plain text -> lost the other items and the tap; now it moves the whole .krv HTML. (3) test shots: a night "KẾT QUẢ" card from the test setup sometimes sits behind the pop-up; it is not part of the change.
