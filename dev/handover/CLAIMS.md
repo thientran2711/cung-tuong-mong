@@ -605,3 +605,6 @@
 | BATCH 04:15 builder (opus): save-dlg-fix-r1 711d018 → fig-rank-match-r2-r1 2558a2f1 → wx-fx-size-r1 5b2664116 on main 64c39ca28 | review/batch-0415 | main s29 | session_01UV1SzjhxXkcba8uS4TZeVm | RUNNING | 17/11 04:14Z |
 | fig-tag-chip (sonnet kit; builder finding: rank+name tag pushed under the stage by the green state chip, cnv maid life) | review/fig-tag-chip | main s29 | session_01UV1Szj9BoSnbTTWB4gZJ5B | RUNNING | 17/11 04:14Z |
 | fig-headtop (sonnet kit; OWNER BUG 04:17Z crowned Hoàng hậu looks shorter: scale by head top, not crown) | review/fig-headtop | main s29→s30 | session_01UV1SziNzVtVrRy8QmSoLTB | RUNNING | 17/11 04:16Z |
+| person-leftcol (sonnet kit; OWNER UI 04:26Z sticky left column in every person dialog; reuse kitRelTable §52) — given to the idle opt-pic-same worker (s30 cannot open sessions) | review/person-leftcol | main s30 | session_01UV1SzhEnrDEEXPkBwigyNF | RUNNING | 17/11 04:20Z |
+| opt-pic-same review r1 → given to mg-clutter reviewer after its verdict | review/opt-pic-same-r1 | main s30 | session_01UV1SzhB4ckkvjk7TVuS92E | QUEUED | 17/11 04:20Z |
+| newlife-reset r1 PASS b2da25cc0 → next batch after 0415 (builder session_01UV1SzjhxXkcba8uS4TZeVm stays alive) | review/newlife-reset-r1 | main s30 | - | PASS | 17/11 04:20Z |
