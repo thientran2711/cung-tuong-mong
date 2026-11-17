@@ -14,12 +14,14 @@ Files (CDN, add-only): https://ctm-img.victoria-tntt.workers.dev/img/_review/rec
 | c01 t4 | sky blue | #6FA3D4 |
 | c01 t5 | emerald | #2E8B6A |
 | c01 t6 | rose pink | #E58CA8 |
-| c01 t7 | indigo | #3F52A3 |
-| c01 t8 | imperial yellow (Hoang hau) | #F2C230 |
+| c01 t7 | muted indigo | #5A6AA8 |
+| c01 t8 | imperial yellow, warm golden (Hoang hau) | #E8AC3C |
 
-Known minor leftovers: orange inner collar lining and gold trim keep their original hue on some tiers (t2, t4, t5, t7); tiny unshifted cuff patches next to the lower hand on t5/t7.
+v2 (ROOT-9 fixes): lower saturation threshold so shading/highlight patches shift too; held items (scroll, fans, cup, handkerchief, flower branches) keep original colour; inner-collar lining stays original on all tiers; t7/t8 softened. Per-tier boxes now in dev/figwork/recolour_c01_cfg.py.
+
+Known minor leftovers (v1 text, mostly fixed): orange inner collar lining and gold trim keep their original hue on some tiers (t2, t4, t5, t7); tiny unshifted cuff patches next to the lower hand on t5/t7.
 
 ## Rotation scheme (everyone's order differs; t8 always imperial yellow)
 Palette Q (11 colours, ordered so neighbours are different hue families):
 0 celadon #8FB9A3, 1 wisteria #A590C9, 2 apricot #E8A060, 3 sky blue #6FA3D4, 4 emerald #2E8B6A, 5 rose #E58CA8, 6 indigo #3F52A3, 7 crimson #B3364A, 8 teal #3A9A9A, 9 plum #7D4380, 10 terracotta #C0694A.
-Person index p (0 = c01): colour(t_k) = Q[(s*p + k - 1) mod 11] for k=1..7, with s = 1 for p=0..10 (rotation), then s = 2..10 for later batches (11 prime, so every (s,p) gives a different order; 110 distinct orders). Adjacent tiers are neighbours in Q, hence different families. t8 = #F2C230 for all.
+Person index p (0 = c01): colour(t_k) = Q[(s*p + k - 1) mod 11] for k=1..7, with s = 1 for p=0..10 (rotation), then s = 2..10 for later batches (11 prime, so every (s,p) gives a different order; 110 distinct orders). Adjacent tiers are neighbours in Q, hence different families. t8 = #E8AC3C for all.

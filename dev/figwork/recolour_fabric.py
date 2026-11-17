@@ -4,11 +4,11 @@ def smooth(x,a,b):
     t=np.clip((x-a)/(b-a),0,1);return t*t*(3-2*t)
 def hsv_arr(rgb):
     return np.array(Image.fromarray(rgb).convert('HSV')).astype(float)
-def weight(rgb,A,prot):
+def weight(rgb,A,prot,items=()):
     h=hsv_arr(rgb);H=h[...,0]*360/255;S=h[...,1]/255;V=h[...,2]/255
     hb=1-smooth(H,26,36)               # exclude gold/yellow
     hb=np.where(H>300,1.0,hb)
-    w=smooth(S,.20,.36)*smooth(V,.40,.58)*hb*(A/255.)
+    w=smooth(S,.13,.27)*smooth(V,.40,.58)*hb*(A/255.)
     pm=np.zeros(w.shape);sk=np.zeros(w.shape)
     skc=((H>8)&(H<34)&(S<.44)&(V>.70)).astype('uint8')*255
     skc=np.array(Image.fromarray(skc).filter(ImageFilter.MaxFilter(3)))>0
@@ -16,10 +16,15 @@ def weight(rgb,A,prot):
         if n==0: pm[y0:y1,x0:x1]=1
         else: sk[y0:y1,x0:x1]=1
     pm=np.maximum(pm,sk*skc)
+    for it in items:
+        m=Image.new('L',(w.shape[1],w.shape[0]),0);d=ImageDraw.Draw(m)
+        (d.ellipse if it[0]=='e' else d.rectangle)(it[1:],fill=255)
+        im_=(np.array(m).astype(float)/255)*((S<.42)|(H>34)|(V<.5))
+        pm=np.maximum(pm,im_)
     pm=np.array(Image.fromarray((pm*255).astype('uint8')).filter(ImageFilter.GaussianBlur(1.2*max(1,w.shape[0]/900)))).astype(float)/255
     w=w*(1-pm)
     return w,H,S,V
-from PIL import ImageFilter
+from PIL import ImageFilter,ImageDraw
 def skin(rgb,H,S,V,A):
     m=((H>10)&(H<32)&(S>.14)&(S<.40)&(V>.74)&(A>200))
     im=Image.fromarray((m*255).astype('uint8'))
@@ -29,9 +34,9 @@ def skin(rgb,H,S,V,A):
     d=o.filter(ImageFilter.MaxFilter(k+4)).filter(ImageFilter.GaussianBlur(2))
     return np.array(d).astype(float)/255
 def tohex(c): return tuple(int(c[i:i+2],16) for i in (1,3,5))
-def recolour(im,target,prot,src_h=8.,src_s=.52,lumexp=.8):
+def recolour(im,target,prot,items=(),src_h=8.,src_s=.52,lumexp=.8):
     a=np.array(im.convert('RGBA'));rgb=a[...,:3];A=a[...,3]
-    w,H,S,V=weight(rgb,A,prot)
+    w,H,S,V=weight(rgb,A,prot,items)
     tr,tg,tb=[c/255 for c in tohex(target)];th,ts,tv=colorsys.rgb_to_hsv(tr,tg,tb)
     th*=360
     dh=((H-src_h+180)%360)-180
