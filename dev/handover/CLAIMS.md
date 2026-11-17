@@ -697,3 +697,4 @@
 | one-core-arcs r2 PASS review/one-core-arcs-r2v 6b2ab41b → FOR MAIN (after dup2-r2 069188d7; before roads-r1 75bc9f05) | review/one-core-arcs-r2v | B | session_01N1tNP5234t4p9HE1eAvTYL | PASS (archived) | 17/11 09:29Z |
 | one-core-dup3 LEFTOVERS wave (opus; typed amounts the guard froze: road e67heir/amt sites, evA/evStory, j96 adj96 heat, maid/kid amounts, jroute rtCard khắc, jlost LO.act, jkc, e67merit/e67srvUp/srvMerit kinds, bind same-option swap) | review/one-core-dup3 | B | session_01N1tNP4sLwCuvMxzEYnptps | RUNNING | 17/11 09:29Z |
 | origin-bd-branch SẴN SÀNG KIỂM 24c23752 → review r1 (opus BIG; brief briefs/review-origin-bd-branch-r1.md) | review/origin-bd-branch-r1 | B | session_01N1tNP3r4Wz5SfLPnQXnXnJ | RUNNING | 17/11 09:50Z |
+| staff-root r1 PASS review/staff-root-r1 1abbf075 → FOR MAIN | review/staff-root-r1 | B | session_01N1tNP5HB9qHe8rHrMv1JDw | PASS (archived) | 17/11 10:04Z |
