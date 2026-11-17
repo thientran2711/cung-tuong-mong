@@ -777,3 +777,4 @@
 | REVIEW tuanluc-sync r1 of c70fb3973 (opus BIG; + remove TA TUẦN QUA chips per OD L1458(3)) | review/tuanluc-sync-r1 | MAIN s32 | session_01UV1Szm7QwzuJJuvFXUbJdi | RUNNING | 17/11 13:31Z |
 | person-leftcol #3 (rebuilt from spec: iPad fit + sizes; ksz3/kdper left for main to decide) | review/person-leftcol | MAIN s32 | session_01UV1SzgmaEVQSFzUscM5dKD | READY FOR REVIEW (see report) | 17/11 |
 | REVIEW person-leftcol r1 of 0872eae3 (SMALL UI) | review/person-leftcol-r1 | MAIN s32 | session_01UV1SzkWt4gmsPwYikTQqKQ | RUNNING | 17/11 13:58Z |
+| REVIEW kit-ico-rank r2 of d0840f4e (opus BIG co-op + rank Worker) | review/kit-ico-rank-r2-r1 | MAIN s32 | session_01UV1SzhhPVmkyz4wFoqDuLv | RUNNING | 17/11 13:56Z |
