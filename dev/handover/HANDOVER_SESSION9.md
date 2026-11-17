@@ -642,3 +642,4 @@ WAKES: s29 set 04:32Z (trig_01KjViDNJxtnWRKXiM6QS6WV) — fires into s29; s30 se
 - (17/11 ~05:06Z) NOTE for s31: the s31 paste block says person-dialog option pictures SQUARE — OWNER CHANGED IT (OD 05:00Z line overwritten): TALL RECTANGLE, one size, picture fills the card height. Follow the OD line.
 - (17/11 ~05:10Z) NEW OWNER BUGS for s31 (OD tail 05:08Z): stale stage caption (j77.js:242 keeps old goTo msg) + caption too faint/small over the backdrop (kit plate + size). Open one worker.
 - (17/11 ~05:13Z) OPEN OWNER QUESTION (OD tail 05:12Z, she was asking an opinion, NOT a rule): greeting / name reveal by rank + trait — waits her pick; then history expert (OD:L1327) + worker.
+- (17/11 ~05:47Z) NEW OWNER UI RULE for s31 (OD tail 05:45Z 'SHOW WHY A NUMBER'): result box + Sổ ghi show the factors behind every changed number (named if known, generic if not). One kit part, whole family; open a worker (link with tuanluc-sync #3 Sổ ghi).
