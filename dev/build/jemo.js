@@ -180,13 +180,22 @@ window.kitEmotion=function(p){try{if(!S)return null;const q=emoRes(p);if(!q)retu
 function emoArtSet(p){try{if(p&&p.__kp)p=p.__kp;const q=emoRes(p)||p;if(!q||q===S)return"";const r=personRoleRank(p.kind&&!p.name?p:q);const male=r.sex==="m"||(r.kid&&q.sex==="m");if(!male)return"";
  if(r.role==="emp"||r.role==="heir"||r.role==="prince"||r.role==="eunuch"||r.role==="guard")return"m-";
  return r.role==="official"||r.role==="physician"||(q.age||0)>=45?"mo-":"m-"}catch(e){return""}}
-function emoBadge(p){const m=window.kitEmotion(p);if(!m)return"";const t=m.known?`Tâm trạng: ${m.name}${m.why&&m.k!=="binh"?" ("+m.why+")":""}`:"Tâm trạng: chưa rõ";
+/* ONE source of the seal's picture key (owner 17/11 ~18:40Z: no two-source seal): sealKeyFor(p,m) -> the key drawn. Today = the mood state; the ruling (mood-bar band + the feeling that pushed it) is a one-line change HERE; a new event's feeling is shown by kitEmoSealPop(p,key), never by a second source. */
+function sealKeyFor(p,m){return m.k}
+/* KIT FALLBACK (main s35): khoc shows the buon picture and hon the gian picture (all three sets) until img/kit/emo-<set>khoc|hon.webp exist on the CDN; jemoseal probes the real file once and swaps automatically */
+function emoSealSrc(set,k){const K=window.KIT_EMOSEAL,fb=K&&K.fb&&K.fb[k];const real=`img/kit/emo-${set}${k}.webp`;return fb&&!(K.have&&K.have[real])?`img/kit/emo-${set}${fb}.webp`:real}
+window.emoSealSrc=emoSealSrc;
+window.sealKeyFor=sealKeyFor;
+function emoBadge(p){const m=window.kitEmotion(p);if(!m)return"";const sk=sealKeyFor(p,m);const t=m.known?`Tâm trạng: ${m.name}${m.why&&m.k!=="binh"?" ("+m.why+")":""}`:"Tâm trạng: chưa rõ";
  const E=x=>String(x==null?"":x).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
  /* owner 11/15: no visible label; TAP the seal = the kit popover (kpPop, j79) with the mood word + one-line cause; any other tap closes it */
- return `<img class="kemo kemo-${m.k}" src="img/kit/emo-${emoArtSet(p)}${m.k}.webp" alt="${E(t)}" data-kemo="${E(m.known?m.name:"Chưa rõ")}" data-kemow="${E(m.known&&m.k!=="binh"?m.why:"")}" role="button" tabindex="0" onerror="this.remove()">`}
+ return `<img class="kemo kemo-${sk}" data-kemop="${E(emoKey(emoRes(p)))}" src="${emoSealSrc(emoArtSet(p),sk)}" alt="${E(t)}" data-kemo="${E(m.known?m.name:"Chưa rõ")}" data-kemow="${E(m.known&&m.k!=="binh"?m.why:"")}" data-kemoc="${m.causeKnown===false?"0":"1"}" role="button" tabindex="0" onerror="this.remove()">`}
 /* tap on any seal (hers or an NPC's, any frame size): kit popover; capture phase so the tap never also opens the card/portrait under it */
 function emoTipHTML(el){const n=el.dataset.kemo||"",w=el.dataset.kemow||"";const E=x=>String(x).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
- return n==="Chưa rõ"?`<div class="kpopt">Tâm trạng chưa rõ</div><div class="kpopx">Lâu rồi chưa gặp, chưa biết lòng người này ra sao.</div>`:`<div class="kpopt">${E(n)}${w?": "+E(w):""}</div>`}
+ if(n==="Chưa rõ")return `<div class="kpopt">Tâm trạng chưa rõ</div><div class="kpopx">Lâu rồi chưa gặp, chưa biết lòng người này ra sao.</div>`;
+ /* owner 17/11 ~17:55Z: the seal is seen by anyone who SEES the person; tapping it shows the mood + the cause ONLY if she knows it (kitEmotion().causeKnown, AG-MOODKNOW), else "Nguyên do chưa rõ" */
+ const unk=el.dataset.kemoc==="0"&&n!=="Bình thường";
+ return `<div class="kpopt">${E(n)}${w&&!unk?": "+E(w):""}</div>${unk?`<div class="kpopx">Nguyên do chưa rõ</div>`:""}`}
 function emoTip(el){try{if(typeof kpPop==="function")kpPop(el,emoTipHTML(el))}catch(e){}}
 document.addEventListener("click",e=>{const el=e.target&&e.target.closest&&e.target.closest("img.kemo");if(!el)return;e.stopPropagation();e.preventDefault();emoTip(el)},true);
 document.addEventListener("keydown",e=>{if((e.key==="Enter"||e.key===" ")&&e.target&&e.target.matches&&e.target.matches("img.kemo")){e.preventDefault();emoTip(e.target)}},true);
@@ -196,13 +205,11 @@ document.addEventListener("keydown",e=>{if((e.key==="Enter"||e.key===" ")&&e.tar
   let depth=0,end=-1;const re=/<\/?span\b[^>]*>/g;re.lastIndex=i;let mm;while((mm=re.exec(h))){if(mm[0][1]==="/"){depth--;if(depth===0){end=mm.index;break}}else depth++}
   if(end<0)return h;return h.slice(0,end)+b+h.slice(end)}catch(e){return h}}})();
 (function(){const st=document.createElement("style");st.id="kemo-css";st.textContent=`
-.kin>img.kemo,.pcp.kit .kin>img.kemo:not(.kfr):not(.kgem):not(.kemb):not(.kpor),span.md.kfc .kin>img.kemo{position:absolute!important;inset:auto!important;left:8.5%!important;top:17.5%!important;right:auto!important;bottom:auto!important;width:22%!important;height:auto!important;aspect-ratio:1;max-width:none!important;max-height:none!important;object-fit:contain!important;border-radius:50%!important;clip-path:none!important;z-index:4!important;pointer-events:auto;filter:drop-shadow(0 1px 1.5px #000a);animation:none!important;transform:none!important;box-shadow:none!important;opacity:1!important}
+.kin>img.kemo,.pcp.kit .kin>img.kemo:not(.kfr):not(.kgem):not(.kemb):not(.kpor),span.md.kfc .kin>img.kemo{position:absolute!important;inset:auto!important;left:8.5%!important;top:17.5%!important;right:auto!important;bottom:auto!important;width:22%!important;height:auto!important;aspect-ratio:1;max-width:none!important;max-height:none!important;object-fit:contain!important;border-radius:50%!important;clip-path:none!important;z-index:4!important;pointer-events:auto;filter:drop-shadow(0 1px 1.5px #000a);box-shadow:none!important;opacity:1!important}
 span.md.kfc.sm .kin>img.kemo{width:30%!important;left:5%!important;top:16%!important}
 span.md.kfc.xs .kin>img.kemo{width:38%!important;left:2%!important;top:14%!important}
 .kin>img.kemo.kemo-an{opacity:.85!important}
 .kin>img.kemo{cursor:pointer;-webkit-tap-highlight-color:transparent}
-@media (prefers-reduced-motion:no-preference){.kin>img.kemo.kemo-gian,.kin>img.kemo.kemo-dau{animation:kemoPulse 2.4s ease-in-out infinite!important}}
-@keyframes kemoPulse{0%,100%{filter:drop-shadow(0 1px 1.5px #000a)}50%{filter:drop-shadow(0 0 4px #ffcf8a) drop-shadow(0 1px 1.5px #000a)}}
 `;document.head.appendChild(st)})();
 /* measurement hook */
 window.emoStat=function(){const c={};for(const p of emoPeople()){const e=emoGet(p);c[e.k]=(c[e.k]||0)+1}return Object.assign({now:c},EMO_N)};
