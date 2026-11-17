@@ -118,8 +118,8 @@ function kszBtn(o){const R=o.rows||[],hint=R.filter(r=>/^gợi ý$/i.test(r[0]))
  const info={rows:main.length,chars:(o.t+main.map(r=>String(r[1]).replace(/<[^>]+>/g,"")).join(" ")).length};
  const k=o.size||kitBtnSize(info);return `<button type="button" class="kszb" data-kbs="${k}"><span class="kszbr"><span class="kszbp">${kitSceneArt(kszImg(o.pic||""),"",{shape:"tall",cap:false})}</span><span class="kszbi"><span class="kszbt">${o.t}</span>${rows}</span></span>${hint.map(([l,v])=>`<span class="kszhint"><i>${l}</i><span>${v}</span></span>`).join("")}</button>`}
 /* rank + name of a person for the tag (kitTitle = the one rank / role word; Thái hậu / Hoàng thượng carry no own name) */
-function kszRankName(p){if(!p)return["",""];if(typeof S!=="undefined"&&p===S)return[S.out?"Phế phi":RANKS[S.rank].n,S.name];let r="";try{r=kitTitle(p)}catch(e){}if(!r&&(p.kind==="th"||(S&&p===S.thO)))r="Thái hậu";if(!r&&S&&p===S.emp)r="Hoàng thượng";if(!r&&p.queen)r="Hoàng hậu";if(!r&&typeof p.rank==="number"&&typeof RANKS!=="undefined"&&RANKS[p.rank]&&rivals&&rivals.includes(p))r=RANKS[p.rank].n;
- let n=(S&&(p===S.emp||p===S.thO||p.kind==="th"))?"":(p.name||"");try{if(r&&n)n=kitTitledName(r,n)}catch(e){}return[r,n]}
+function kszRankName(p){if(!p)return["",""];if(typeof S!=="undefined"&&p===S)return[S.out?"Phế phi":RANKS[S.rank].n,S.name];let r="";try{r=kitTitleOf(p)}catch(e){}if(!r&&(p.kind==="th"||(S&&p===S.thO)))r="Thái hậu";if(!r&&S&&p===S.emp)r="Hoàng thượng";if(!r&&p.queen)r="Hoàng hậu";if(!r&&typeof p.rank==="number"&&typeof RANKS!=="undefined"&&RANKS[p.rank]&&rivals&&rivals.includes(p))r=RANKS[p.rank].n;
+ let n=(S&&(p===S.emp||p===S.thO||p.kind==="th"))?"":(p.name||"");try{if(r&&n)n=kitTitledName(r,n)}catch(e){}/* review r1: a person whose name she does not know yet prints "???" on line 2 (as the 32.7 column does); never the half-masked "Bùi Thị vệ ???" the global name mask made of a bare name */try{if(n&&!(S&&(p===S||p===S.emp||p===S.thO||p.kind==="th"))&&typeof kitKnownName==="function"&&!kitKnownName(p))n="???"}catch(e){}return[r,n]}
 function kszFigHtml(p){let src=kitFigOf(p);if(p&&p.kind==="th"&&(!src||/unknown|sil/.test(src)))src=kszImg("img/fig-thaihau-h1-a51.webp");
  const [r,n]=kszRankName(p);let col="";try{col=kitPersonCol(p)}catch(e){}if(p&&(p.kind==="th"||(S&&(p===S.thO||p===S.emp)))&&typeof kitRankCol==="function")col=kitRankCol(7);
  const tag=typeof kitTitleTag3==="function"?kitTitleTag3(p,r,n,col):kitNameRank(r,n,col);const age=p&&typeof p.age==="number"?p.age:null;
@@ -127,7 +127,7 @@ function kszFigHtml(p){let src=kitFigOf(p);if(p&&p.kind==="th"&&(!src||/unknown|
 /* (6) ONE figure scale: the measured BODY (kitFigBody ht → b) of every figure = the layout's body height × KIT_FIG.fac (never the picture box) */
 function kszFigFit(root){(root||document).querySelectorAll(".kszf .kszfig>.kszfs>img").forEach(im=>{const f=im.closest(".kszf");const lay=KIT_SIZE.lay[f.dataset.lay||"big"]||KIT_SIZE.lay.big;
  const v=typeof kitFigBody==="function"?kitFigBody(im.src,()=>kszFigFit(f)):null;if(!v)return;const age=im.dataset.age===""?null:+im.dataset.age;
- const body=KIT_SIZE.fig[lay.fig].h*(typeof KIT_FIG==="object"?KIT_FIG.fac(im.src,age):1);const H=body/Math.max(.2,v.b-v.ht);
+ const body=KIT_SIZE.fig[lay.fig].h*(typeof KIT_FIG==="object"?KIT_FIG.fac(im.src,age):1)*(f.__kszShrink||1);/* KIT 32.8 feet-fit: ×shrink only when the frame cap would cut the feet (kszFeetFit) */const H=body/Math.max(.2,v.b-v.ht);
  im.style.height=H+"px";im.style.bottom=(-(1-v.b)*H)+"px";im.parentElement.style.height=Math.ceil(H*(v.b-v.t))+"px"})}
 window.kszFigFit=kszFigFit;
 /* spec: {kind,title,sub,who,pic,ban,facts,rows,opts,btn,long} → frame html (size picked after mount by kitFrameApply) */
@@ -483,7 +483,16 @@ function kszBtnGridLive3(g){const B=KIT_SIZE.v3.btn,w=g.clientWidth;if(!w)return
 /* the height the info column may take: the modal box minus the frame's header, button row and body padding */
 function kszLiveRoom3(dlg){const M=document.getElementById("modal");if(!M)return 9999;let ch=24+22+4;[...dlg.children].forEach(c=>{if(c.id!=="mb"&&c.getClientRects().length&&getComputedStyle(c).position!=="absolute")ch+=c.offsetHeight});
  const mb=document.getElementById("mb");if(mb)[...mb.children].forEach(c=>{if(!c.classList.contains("k3body")&&c.getClientRects().length)ch+=c.offsetHeight});return M.clientHeight-ch}
-function kitFrameApplyLive3(dlg){try{kszFigFit(dlg)}catch(e){}const g=dlg.querySelector(".opts.k3btns");if(g)kszBtnGridLive3(g);
+/* KIT 32.8 (fig-feet-crop-2, owner 17/11 "hình nào cũng bị crop mất chân", VIỆC timed choice on Fold + iPad): a live frame is capped (max-height, overflow hidden);
+   at a size whose figure column (tag + the layout's figure height) is taller than the cap leaves room for, the bottom of the figure (hem, shoes) was clipped.
+   The ONE rule: the figure column NEVER exceeds the room the frame has (cap − header − button row − body padding); when it would, the figure is scaled down
+   (dlg.__kszShrink, read by kszFigFit) just enough; the bottom is never cropped. Not touched when it already fits. */
+function kszFeetFit(dlg){try{const B=dlg.querySelector(".k3body"),L=B&&B.querySelector(":scope>.kszfig");dlg.__kszShrink=1;if(!L)return;kszFigFit(dlg);
+ const cap=parseFloat(getComputedStyle(dlg).maxHeight);if(!(cap>0))return;
+ for(let i=0;i<4;i++){const mbx=document.getElementById("mb"),fixed=dlg.clientHeight-(mbx?mbx.clientHeight:B.offsetHeight),room=cap-fixed-22,over=L.offsetHeight-room;if(over<=0.5)break;
+  const fs=L.querySelector(".kszfs"),h=fs?fs.offsetHeight:0;if(h<=60)break;dlg.__kszShrink=Math.max(.3,dlg.__kszShrink*Math.max(.3,(h-over-1)/h));kszFigFit(dlg)}}catch(e){console.error("kszFeetFit",e)}}
+window.kszFeetFit=kszFeetFit;
+function kitFrameApplyLive3(dlg){try{kszFeetFit(dlg)}catch(e){}const g=dlg.querySelector(".opts.k3btns");if(g)kszBtnGridLive3(g);
  const R=dlg.querySelector(".k3right"),L=dlg.querySelector(".k3body>.kszfig,.k3body>.k3mpor");
  if(R){R.style.maxHeight="";R.style.overflow="";R.style.minHeight=L?L.offsetHeight+"px":(dlg.dataset.pres==="one"?KIT_SIZE.v3.picMinS+"px":"");if(dlg.dataset.ksz==="XL"&&L){/* XL (approved #3): the body stays the figure's height; more content scrolls inside the info column */
   R.style.maxHeight=L.offsetHeight+"px";R.style.overflow="auto"}}
