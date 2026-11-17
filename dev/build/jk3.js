@@ -621,7 +621,7 @@ html body .pc.kpwide .kst-chip{max-width:100%;min-width:0;flex-wrap:wrap}
    1) doable now · 2) blocked ONLY by time (wrong buổi / not enough khắc left) · 3) blocked by anything else (greyed as before);
    inside a group the source order stays. The order is decided once per list per buổi and then kept, so a re-render after an act
    (the act turns "đã làm") never makes the list jump while she reads. */
-const KAS_ORD=new Map(),KAS_TRY=new WeakMap();const kasT=s=>String(s||"").replace(/\s+/g," ").trim();
+const KAS_ORD=new Map(),KAS_TRY=new WeakMap();lifeStore("KAS_ORD card-order memo (keys = card text of that life)",()=>KAS_ORD.clear());const kasT=s=>String(s||"").replace(/\s+/g," ").trim();
 function kitActGroup(b){if(!b.disabled&&!b.classList.contains("kdis"))return 0;
  const x=[...b.querySelectorAll(".kr-why .kchip, .kr-why .kwhy")].map(e=>kasT(e.textContent)).filter(t=>/^✗/.test(t));
  if(x.length&&x.every(t=>/buổi|khắc/i.test(t)&&!/chưa làm|đã làm/i.test(t)))return 1;return 2}

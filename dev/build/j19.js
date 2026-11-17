@@ -23,7 +23,7 @@ function kcls(t){const s=t.replace(/<[^>]+>/g,"").trim();if(!s)return"n";if(/b�
 function eff(t){t=String(t).trim();if(!t)return"";if(/^<span class="(g|r)">/.test(t)&&/<\/span>$/.test(t)&&(t.match(/<span/g)||[]).length===1)return t.replace(/^<span class="(g|r)">/,'<span class="ef $1">');
  if(/^<b class="r">/.test(t))return `<span class="ef r">${t.replace(/<[^>]+>/g,"")}</span>`;return `<span class="ef ${kcls(t)}">${t}</span>`}
 function effList(x,def){const parts=[].concat(x).filter(Boolean).join(" · ");if(!parts)return eff("không");return kSplitTop(parts,/ · |, /y).filter(s=>s.trim()).map(s=>{let h=eff(s);if(def&&/class="ef n"/.test(h)&&!KNEU.test(s.replace(/<[^>]+>/g,"").trim()))h=h.replace('class="ef n"',`class="ef ${def}"`);return h}).join('<span class="ksep">·</span>')}
-function oddsChip(w){if(/^Chắc chắn\b/.test(String(w))||String(w)==="Chắc chắn")return"";const m=String(w).match(ODDW);const k=m?m[1]:w;const lv={"Liều":0,"Khó":1,"Năm ăn năm thua":2,"Khá chắc":3,"Chắc":4,"Rất chắc":5,"Nắm chắc":6,"Chắc chắn":7}[k];const rest=String(w).replace(k,"").replace(/^\s*·\s*/,"");
+function oddsChip(w){if(/^Chắc chắn\b/.test(String(w))||String(w)==="Chắc chắn")return"";const m=String(w).match(ODDW);const k=m?m[1]:w;const lv=k==="Chắc chắn"?7:KIT_ODDS.indexOf(k)<0?undefined:KIT_ODDS.indexOf(k);const rest=String(w).replace(k,"").replace(/^\s*·\s*/,"");
  return `<span class="oc oc${lv==null?2:lv}">${k}</span>${rest?`<span class="ef ${/khó hơn/.test(rest)?"r":/dễ hơn/.test(rest)?"g":"n"}">${rest}</span>`:""}`}
 /* parse a 'word · tốn: … · thành: … · hỏng: … · note' line into kit HTML */
 function kitParse(str){str=String(str||"").trim();if(!str)return oddsChip("Chắc chắn");const segs=str.split(/ · (?![^<]*>)/);let odds="",out=[];let cur=null;

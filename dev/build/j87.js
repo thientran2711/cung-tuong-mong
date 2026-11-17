@@ -427,7 +427,7 @@ function kbkOptName(m,c){const n=String(c.n||"");if(c.lg)return c.lg;const ctx=k
   try{nm=noFx&&KBK_OPT_DROP.test(n)?null:kbkOptName(m,c)}catch(e){nm=n}
   /* the result card's title (j19 wrapR reads c.n) says the same as the line: the option carries its full name from here on */
   if(nm&&nm!==n)c.n=nm;
-  /* …and the result card shows this choice's own picture when it has one (jk2b reads __kitLastEvArt), not the question's */
+  /* (the last picture is per life: lifeStore __kitLastEvArt in j1) …and the result card shows this choice's own picture when it has one (jk2b reads __kitLastEvArt), not the question's */
   try{const sp=nm&&kbkSpecific(nm);if(sp)window.__kitLastEvArt={src:sp,lab:""}}catch(e){}
   const w=RW={n:c.n,nm,done:false,seq:0};let r;try{r=c0.apply(this,arguments)}finally{RW=null}
   /* the option only opened what the game then wrote as its own sentence ("Núp nghe lén." + "Núp sau hòn giả sơn, ngươi nghe rõ…"): keep the sentence */

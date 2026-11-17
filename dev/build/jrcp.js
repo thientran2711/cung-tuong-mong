@@ -86,7 +86,7 @@ function rcpLvTxt(g){const s=rcpStOf(g.kind,g.r.id);return `<span class="g">Họ
 function rcpPK(r){return r==="emp"||r==="th"?r:r&&typeof r==="object"?(r===S?"me":"v"+r.id+(r.name||"")):""}
 function rcpWho(r){return r==="emp"?"Hoàng thượng":r==="th"?"Thái hậu":r&&r.name?`${rkName(r)} ${r.name}`:""}
 function rcpThey(r){return r==="emp"?"bệ hạ":r==="th"?"Thái hậu":"nàng ta"}
-const RCP_PC={};
+const RCP_PC={};lifeStore("RCP_PC",()=>{for(const k in RCP_PC)delete RCP_PC[k]});
 function rcpProf(r){const pk=rcpPK(r);if(!pk)return null;const seed=rcpSeed();const ck=seed+pk;if(RCP_PC[ck])return RCP_PC[ck];const f={},h={};
  for(const kind in RCP_ST){const L=RCP_ST[kind],x=rcpH(seed+":"+pk+":"+kind);f[kind]=L[x%L.length][0];
   if((x>>>8)%100<BAL.rcp.hateP){const O=L.filter(s=>s[0]!==f[kind]);h[kind]=O[(x>>>16)%O.length][0]}}
