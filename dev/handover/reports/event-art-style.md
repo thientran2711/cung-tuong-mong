@@ -919,7 +919,7 @@ LIVE (C OK 17/11 07:51Z-08:03Z), img/scene-thanhtai-<k>.webp, all 200 on CDN:
 | cong | ovN5djI829 | spring, peony embroidery on hoop |
 | cam | 5jMPrsWKxe | summer lakeside, qin mid-melody, celadon |
 | ky | xSXilOTjfW | bamboo grove, won weiqi board, ivory-gold |
-| thi | mERxHPQhJQ | winter plum, partly rolled poem scroll (no script), sky blue (first try yiEc.. no: rgd6sP8xtc had script strokes, replaced) |
+| thi | mERxHPQhJQ | winter plum, partly rolled poem scroll (no script), sky blue (first try rgd6sP8xtc had script strokes, replaced) |
 | hoa | 9ZFM3MDNYZ | spring peach, finished painting, apricot |
 | vu | dtPq8K2XSL | autumn maple, sleeves flying, lilac |
 | y | ksp9j2m16B | herb room, mortar + pills tray, moss green |
