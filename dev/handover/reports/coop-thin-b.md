@@ -92,3 +92,24 @@ that makes level ≥ 2 the default (owner-visible decision), or B r1 deletes the
 
 ## Rollover
 Not needed (≈ 27 % < START_CTX 3 % + 25 %, only push + report remained).
+
+## ROLLOVER HANDOVER (worker session_01N1tNP6svxoSpRYt6QpgSiS, 11/17/2026 ~07:25Z) — for the successor that does "FIX D r1"
+Why: context ≈ 30 % of the 1M window ≥ START_CTX 3 % + 25 % (owner OD:L1217 / 16/11 08:22Z s14); new work arrived, so the worker stops here and
+the COORDINATOR (Foreman B s2 session_01N1tNP5QYubNg1dqA9BZitC) opens the successor.
+State: review/coop-thin-b @ 9af781c2 = B (4bf838e2) + merge of review/coop-thin-d 099ce05b, all gates green (numbers above). B reviewer
+session_01N1tNP5Gz14jVMwShSBh45K reviews 9af781c2. Old guest path stays behind the level check until part H (Foreman B answer 07:10Z).
+Next task (order 07:24Z, Foreman B s2, verbatim items): new commits on review/coop-thin-b after 9af781c2, first merge review/coop-thin-d-r1 c6792773
+(probe dev/test/coop-thin-d-probe.js); fix D r1 FAIL items from dev/handover/reports/review-coop-thin-d-r1.md (handover a4746d36):
+ (1) host reload loses the answer to HIS invite (CW.acts memory only) → carry k/v/item in thInv pp like thBribe;
+ (2) guest copy of a host-built card renders unlike the native card on Fold 755 + iPad 1180 (hint squeezed, ĐƯỢC/GHI CHÚ instead of GỢI Ý,
+     extra figure) → fix ONCE in gSync, kit-only (same kit card both seats);
+ (3) ev proof reaches her phone only at the merged week → family: her NPC viewer rows changed by host-run cards; avoid merge double count
+     (see "Rows decision" above: B keeps the host's old numbers and sends her the fresh rows — same pattern);
+ (4) correct D's tripwire claim to ≈ −23 % (2872/2794 → 2194/2166);
+ (5) tests: kpWarn flake at the bribe step, probe cases (ev, host reload, both seats at once), real dialog shots (overlays covered them; shots
+     outside git), res note on her phone in host perspective.
+Then append '## FIX D r1' here and send SẴN SÀNG KIỂM to Foreman B s2.
+Setup used: worktree /home/user/wt/thinb (sparse, at 4bf838e2 — fast-forward it to origin/review/coop-thin-b 9af781c2 first); test output dir
+/home/user/wt/thinb-out (outside git); live Worker https://ctm-coop.victoria-tntt.workers.dev has part A (level 2 works, no Worker change).
+Commands: python3 dev/build/assemble.py; node dev/test/coop-thin-b.js <worker> 2 [swap]; node dev/test/coop-thin-d.js <worker> 2 [swap];
+node dev/test/coop-e2e.js <out>; bash dev/tools/quickcheck.sh (needs dev/site/build_site.sh + committed index.html/sw.js/assets.json).
