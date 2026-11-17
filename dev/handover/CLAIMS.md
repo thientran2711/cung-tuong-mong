@@ -782,4 +782,4 @@
 | REVIEW morechip-sil r1 of bd3bb284 (SMALL UI) | review/morechip-sil-r1 | MAIN s32 | session_01UV1Szid6ogM8TKZmLSzU7z | RUNNING | 17/11 14:00Z |
 | REVIEW narrow-t3 r1 of aa1a3387 (sonnet kit) | review/narrow-t3-r1 | MAIN s32 | session_01UV1SzjC1Tv9FpCm2Fb4BPj | RUNNING | 17/11 13:59Z |
 | hapmark-size: Dư đồ '!' a little bigger (OD ~14:08Z) on map-portrait-r2 68979111 | review/hapmark-size | MAIN s32 | session_01UV1Szkay8XSKEjk9fKn7BK | RUNNING | 17/11 14:08Z |
-| coop-thin part C worker #2 (successor at 72d7768c; opus; brief briefs/coop-thin-c-2.md) | review/coop-thin-c | B | (opening) | RUNNING | 17/11 14:03Z |
+| coop-thin part C worker #2 (successor at 72d7768c; opus; brief briefs/coop-thin-c-2.md) | review/coop-thin-c | B | session_01N1tNP6EZvNuroq8VSupxw7 | RUNNING | 17/11 14:03Z |
