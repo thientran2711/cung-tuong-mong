@@ -54,3 +54,19 @@ Tools: dev/measure/arc-onecore-move.js (+ -lib, -emit, -rare-move).
 2. jbal.js: 4 BAL.route keys appended at the end of the route block.
 3. BAL.arc option numbers are the values BEFORE j67's measured halving of story Sức / Hoàng hậu costs (the halving pass still runs after registration; noted in jbalarc.js header).
 4. Feature freeze respected: nothing new built; ideas: none.
+
+## r2 FIX (worker session_01N1tNP5MRPzxmbFfWjw6LuT) — PARTIAL, HANDOVER (context rollover)
+PRIORITY #1 CHECK ('e67heir'): OD 0 | ledger 0 | claims 0 | main 15 | review/* one-core-arcs-r1 f6b07eb3 (reviewer proof) | claims B arcs = this worker.
+Pushed: review/one-core-arcs **882649ac** = f6b07eb3 (reviewer's stronger proof) + 1 commit:
+- (1) DONE: the 66 one-argument go amounts (j67 53 + j97 13: e67dad/bien/kho/heir(N)) moved into the g lists of BAL.arc (new dev/measure/arc-onecore-g2.js; appends to existing g, closure reads G[i]; 16 arcs + 13 rare entries rewritten in jbalarc.js). Mover lib AMT also matches one-arg calls + e67heir.
+- Reviewer's non-blocking note DONE: arcOpt copies BAL objects ({...x[k]}), the story halving no longer mutates the rulebook; jstory old-story fx copies too.
+- Proof (reviewer's r1 arc-onecore-same.js): **SAME vs 16d4925f and vs 648461b5**; go runs 11448 ERR 0; odds 201900 ERR 0.
+- (2) Guard DONE: new kind `amt1` in dev/test/one-core-guard.js = the same effect calls with ONE argument (incl. e67heir); `amt` unchanged. New kind ⇒ frozen at its first --update by the guard's existing fresh-kind rule (no --allow-grow). Guard 0 fails. Pre-existing amt1 frozen per file (ALL road files, none touched here → one-core leftovers wave review/one-core-dup3 after roads lands): jrd_dtq 109 · jrd_tt 68 · jrd_nc 32 · jrd_muoi 9 · jend14 6 · jrd_td 2 · jrd_thd 1 = 227. Arcs files amt1 = 0.
+- (3) Pre-existing on main (reviewer r1 found them identical main→main; not re-run by me): story14 `p.startsWith` crash in chAdvance67 (cnv block), chap-label-oldsave v3 `.obj67` head empty, chap-label «arc head has Chương · Hồi».
+
+### LEFT for the successor (in this order)
+1. Merge latest origin/main (9fdc1199, trait-pool + trait rename Hiểm độc→Xảo quyệt) into review/one-core-arcs. Trial merge gave 9 conflicts: assemble.py (keep main's list + 'jbalarc.js' after 'jbaleff.js'), j96.js tm96Month (keep BAL.arc.t96 lines but main's `hasT(m,"Tham vọng")`), jroute.js rtCaughtBy (keep BAL.route.seen.* + main's `netRx(v,/Tham|Xảo quyệt/)`), and 6 files owned by one-core-dup (j8, j9, j10, j24, j72, jkc: dup moved amounts into BAL.eff / deleted dead copies vs main's trait rename; combine = main's trait calls + dup's BAL.eff reads, dead copies stay deleted — or better wait for the dup r3 branch (session_01N1tNP5Muf9zF38i81jtdgj) to merge main and merge THAT). Then guard --update (shrink only) and rerun arc-onecore-same.js vs 648461b5.
+2. Gates: coop-e2e, coop-one-world (QC_WT=<worktree>), road-rare, road-end (run Chromium tests one at a time — OOM in parallel).
+3. Trial merge (temp branch, not pushed) with origin/review/one-core-roads-r1 75bc9f05 and origin/review/one-core-dup2-r2 711e637d (r3 in progress): note conflicts in dev/test/one-core-guard.js (my amt1 kind) / one-core-baseline.json for main.
+4. Fill the gate results here, push, send Foreman B s3 (session_01N1tNP3Jf9UG8ZtZdVruBg7) 'SẴN SÀNG KIỂM review/one-core-arcs <sha>'.
+Notes: QC_WT env must point at the worktree for coop-one-world; story tests take <url> args (file:///…/dev/index.html).
