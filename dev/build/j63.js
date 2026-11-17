@@ -50,7 +50,7 @@ function kaModelStr(str){str=String(str||"").replace(/(nàng |hắn )?thù -(\d+
   else{const m2=plain.match(/^tốn (\d+ khắc)$/);if(m2){M.items.push({h:m2[1],old:"n",l:"tốn",cont:false});continue}}
   for(let v of [].concat(...kSplitTop(s,/; /y).map(q=>/(^|\s)nàng(\s|$)/.test(kaPlain(q))?[q]:kSplitTop(q,/, /y)))){const vp=kaPlain(v);if(!vp)continue;const om=v.match(/^\s*<(?:span|b) class="(g|r)"/);M.items.push({h:/^\s*<(span|b) class="[gr]">[^<]*<\/\1>\s*$/.test(v)?vp:v.trim(),old:om?om[1]:"n",l:lab,cont})}}
  /* ODDS CAP: a Nắm chắc act that names no failure (a formerly-sure act, kitCapLine / capW hints) fails softly — say so (one form, kitSoftW) */
- if(M.odds&&M.odds===capW()&&!M.items.some(i=>i.l==="hỏng"))M.items.push({h:kitSoftW(M.items.some(i=>i.l==="tốn"&&/Bạc\s*[-−]/.test(kaPlain(i.h)))?{bac:-1}:null),old:"r",l:"hỏng",cont:false});
+ if(M.odds&&M.odds===capW()&&!M.items.some(i=>i.l==="hỏng"))M.items.push({h:kitSoftWb(M.items.some(i=>i.l==="tốn"&&/Bạc\s*[-−]/.test(kaPlain(i.h)))),old:"r",l:"hỏng",cont:false});
  return M}
 const KA_RISK=/^(có thể bị|bị người của nàng phát giác|bị lộ|bị khám|Đức \d+ → \d+|dễ lộ|có khi bị)/i;
 /* place every value in its row by meaning */
@@ -216,7 +216,8 @@ const kaKemHTML=kitKemRow;
    (owner 17:10Z (1)) nor Danh / Đức…; nothing is gained, no other loss. Writes the one BẠI line to the log and returns it (window.__oddsSoft holds it for the caller's card). The khắc of the act
    are spent by its caller as before. kitSoftW(c) = the same words for the act's own hint ('hỏng: …' of a Nắm chắc act, optLine / kitCapLine). */
 function oddsSoftCost(c){const o={};for(const k of BAL.odds.softFail.spend)if(c&&c[k]<0)o[k]=c[k];return o}
-function kitSoftW(c){return `chỉ uổng công${c&&c.bac<0&&!BAL.odds.softFail.spend.includes("bac")?", không mất bạc":""}, không mất gì khác`}
+function kitSoftW(c){return kitSoftWb(!!(c&&c.bac<0))}
+function kitSoftWb(hasBac){return `chỉ uổng công${hasBac&&!BAL.odds.softFail.spend.includes("bac")?", không mất bạc":""}, không mất gì khác`}
 function oddsSoft(n,c){apply(oddsSoftCost(c));const t=`<span class="r">bại</span> — người tính không bằng trời tính: ${kitSoftW(c)}.`;window.__oddsSoft=t;log(`${n?n+": ":""}${t}`);return t}
 /* a formerly-sure option of a dialog / button (no o): its hint starts with the cap word and ends with the soft 'hỏng' (ONE line form) */
 function kitCapLine(rest,c){return [capW(),rest,"hỏng: "+kitSoftW(c)].filter(Boolean).join(" · ")}
@@ -226,7 +227,7 @@ function kitCapLine(rest,c){return [capW(),rest,"hỏng: "+kitSoftW(c)].filter(B
 function capAt(k,c){return ` data-cap="${k||0}"${c&&c.suc<0?` data-capsuc="${-c.suc}"`:""}`}
 document.addEventListener("click",e=>{const b=e.target&&e.target.closest&&e.target.closest("button[data-cap]");if(!b||b.disabled||typeof S==="undefined"||!S||S.dead)return;
  if(roll(BAL.odds.hi))return;e.stopImmediatePropagation();e.preventDefault();const k=+b.dataset.cap||0;if(k&&can(k))spend(k);
- const n=String((b.childNodes[0]&&b.childNodes[0].nodeType===3?b.childNodes[0].textContent:b.textContent)||"").trim();
+ const kn=b.querySelector(".kan");const n=String(kn?kn.textContent:(b.childNodes[0]&&b.childNodes[0].nodeType===3?b.childNodes[0].textContent:"")).trim();
  let bf=null;try{bf=rsnap()}catch(x){}oddsSoft(n,{suc:-(+b.dataset.capsuc||0)});try{if(bf)resultShow(n,bf,false)}catch(x){}render()},true);
 /* KIT PART kitResultSeal(ok) (KIT 7): the result seal — true → THÀNH (.ok), false → HỎNG (.bad), no roll → "KẾT QUẢ" (.sure, the kit's grey seal, no stamp) */
 function kitResultSeal(ok){return ok===true?{cls:"ok",t:"THÀNH"}:ok===false?{cls:"bad",t:"HỎNG"}:{cls:"sure",t:"KẾT QUẢ"}}
@@ -240,6 +241,8 @@ resultShow=function(title,before,okHint){if(!S||!before||S.dead)return;
  /* owner 11/15: THÀNH / HỎNG come ONLY from the act's own roll (okHint true / false); no roll ("sure", null) → no seal, the neutral header
     "KẾT QUẢ" — never inferred from the log words or from how many lines are Được / Mất (failTxt / netBad stay for the old callers' log) */
  const ok=okHint===true?true:okHint===false?false:null;const SL=kitResultSeal(ok),seal=SL.t;void failTxt;void netBad;
+ /* ODDS CAP: a soft failure changes nothing but still shows its one BẠI line (j63 oddsSoft) */
+ if(okHint===false&&window.__oddsSoft&&!sen)sen=window.__oddsSoft;window.__oddsSoft="";
  if(!G.length&&!B.length&&!sen&&!(K&&K.length))return;if(window.__bot)return;
  let t=$("rtoast");if(!t){t=document.createElement("div");t.id="rtoast";document.body.appendChild(t)}
  t.onclick=e=>{const kk=e.target.closest(".kkem");if(kk){e.stopPropagation();const on=!kk.classList.contains("on");kk.classList.toggle("on",on);kk.setAttribute("aria-expanded",String(on));clearTimeout(window.__rtT);return}
