@@ -53,3 +53,40 @@ STEP (b) memory 2 layers — DRAFT EXISTS, tested 16/16 on the OLD base: branch 
 4. Tap-list ORDER is kit work (kit-figure-mood r3) — MOOD-MEM only supplies cause rows (mkCauses: kind, strength, khắc left, known).
 5. Then: tests (mood-mem, moodknow-step0, ag-moodknow, ag-know, ag-truth, memories.js, mem-upgrade (3–5 random FAILs same as base), mem-coop, one-core-guard, coop-one-world 7+3, QUICKCHECK --cpu 4), site build, push, report, send_message C-AG #5 'SẴN SÀNG KIỂM <sha>'.
 ROLLOVER (verbatim): Workers roll over too (owner 16/11 08:22Z s14, option 1): at START_CTX % + 25 % of the window, ceiling 60 %; a worker may finish if only push + report remain; it writes its handover in its report file and tells its coordinator, and the COORDINATOR opens the successor (never the worker).
+
+## MOOD-MEM #2 (session_01UV1Szigr35QvLkVSd2Vb9L, opus) — successor; START_CTX ≈ 12 % (estimate)
+PRIORITY #1 CHECK ('ghenUp|v\.ghen'): OD 0 | ledger 0 | claims 2 | main 15 | review/* 0 (this job = review/mood-mem + review/mood-mem-wip); by hand: draft b7f201a reused, step 0 ghenUp/ghenFeel reused, jmem memAdd/memHolders/memPairs reused, mkAdd/mkSync reused. No second system.
+
+### Step-0 checks on 8e2ac171 (sent to C-AG #5 + step-0 reviewer)
+| check | result |
+|---|---|
+| ag-know | 23/23 PASS |
+| ag-truth | 10/10 PASS |
+| coop-one-world seed 3 | PASS |
+| coop-one-world seed 7 | 1 FAIL (S.wwin ×8 merged≠host) under parallel CPU load; 2/2 PASS alone; base a2a1f6b5 2/2 PASS → load-flaky jworld path |
+| QUICKCHECK --cpu 4 | FAIL only G1 one-core-bind: 6 mismatches (j25:11, j78:127) — SAME on base a2a1f6b5, origin/main d4a850ce = 0 → pre-existing, fixed on main; needs a main merge. Rest PASS (open, old save, time-spill, perf) |
+
+### Step (b) — memory 2 layers (34624061)
+Ported from review/mood-mem-wip b7f201a: the MOOD-MEM section at the end of jmoodknow.js (MW, mwLoc/mwHome/mwPlaceOf, mwWhy, mwFeel, mwWake, mwTick, render/endTurn wrappers), the jmem memAdd m.pl stamp, BAL.memWake in jbal2.js (after the step-0 block), dev/test/mood-mem.test.js, VANPHONG line (name now marked approved, OD ~18:38Z).
+DROPPED as the handover says: mwGhen / mwGhenFeel / MW.gh / ghen part of the render wrapper, BAL.memWake.ghen, the BAL.mood2.dur.e.ghenUp line (step 0 has it), EMO_GHEN edits (step 0 has them), test section 7 (ghen).
+Changed: mwFeel falls back to the good/bad kind when its deed feeling key is not in EMO (FEELINGS-18 may drop 'dau' → buon heavy per OD ~19:10Z); BAL.memWake.kind still names so/dau/buon/gian/vui — FEELINGS-18 told.
+
+### Ghen family — her own score v.pg (3718d030) (LUẬT SỬA CẢ NHÓM)
+Dropping the draft watcher left HER jealousy score toward a consort (v.pg, "Ngươi ghen N") with no Chạnh lòng feeling; step 0 only routes v.ghen. New j1 `pgUp(v,n,why)` = one way to raise v.pg; the real rise adds her short feeling via ghenFeel(S,d,why,v) (aimed at that consort). Typed +6 → BAL.mood2.ghen.pgNight. Scan `python3 dev/measure/ghen-raise-scan.py --pg` (exit 1 on a direct raise):
+| before (direct v.pg raise) | after |
+|---|---|
+| j8.js:345 rivalNight `v.pg=cl(v.pg+6,0,100)` | pgUp(v,BAL.mood2.ghen.pgNight,"<name> được thị tẩm") |
+| j75.js:140 night `v.pg=cl(v.pg+6,0,100)` | same |
+Untouched (not raises): j2:147 SET0 (Trút giận), j8:443 LOWER, j20:26 SET0, jagacts2:92 SET0. v.ghen scan unchanged: 0 direct raises, 30 via ghenUp.
+
+### Tests on f62a2931 (site build)
+| test | result |
+|---|---|
+| mood-mem.test.js | 16/16 (meet, weight→strength/khắc, place, own dwelling never, anniversary once, light memory no, monthly cap, per-memory pause, NPC parity, moodCauseKnown secret/known, old save, pgUp score+feeling, feeling end keeps v.pg, rivalNight via pgUp, bot turns, no page errors) |
+| moodknow-step0 | 17/17 · ag-moodknow 33/33 · ag-know 23/23 · ag-truth 10/10 |
+| memories.js / mem-coop.js | PASS / PASS |
+| mem-upgrade.js (5 runs each) | mine 1–5 random FAILs/run, base 8e2ac171 1–6/run, same family (fade_*, behav_*, cause_soc_help every run on both); cause_servant + cause_log_api once in 5 (they read the jmem cause store czHomes, which MOOD-MEM never writes) |
+| coop-one-world 7 + 3 | PASS + PASS (R.mem/R.mk guest-raw rows same as base) |
+| QUICKCHECK --cpu 4 | FAIL only G1 one-core-bind (same pre-existing 6 as base; main = 0); one-core-guard PASS, one-core-text PASS, kit 102/3 as base, coop gate PASS, open 1317 ms, old save ok, perf new/live render 144/153, tab 255/288, buổi 830/781 |
+KIT FIRST: no UI part added (wake causes are rows for mkCauses; tap-list order = kit-figure-mood r3). Co-op: NPC wakes host-only (mwWorld/mckWorld).
+OPEN for the foreman: the branch base (ag-moodknow-r1) predates main's one-core-bind fix → merge origin/main before go-live.
