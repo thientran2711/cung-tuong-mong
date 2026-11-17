@@ -80,10 +80,10 @@ function econPrice(p,e){if(!e)return 0;if(e.wk)return Math.max(1,Math.round(wkSe
  const it=IT[e.k];return it&&it.pr?Math.floor(it.pr*BAL.sellPct/100):0}
 function econSellable(p){p=p||S;return (p.inv||[]).map((e,ix)=>{if(!e||e.h)return null;const it=IT[e.k];let grade=0,src="";
   try{if(e.wk){grade=econWkGrade(e.wk);const a=itemArt(e);src=a?a.src:""}else if(window.WD_ITEMS&&WD_ITEMS[e.k]){grade=WD_ITEMS[e.k].g|0;src=WD_ITEMS[e.k].icon}else{const a=itemArt(e.k);grade=a?a.grade|0:0;src=a?a.src:""}}catch(x){}
-  return{ix,k:e.k,name:e.wk?e.wk.n:it?it.n:e.k,grade,src,price:econPrice(p,e),via:e.wk||!(window.WD_ITEMS&&WD_ITEMS[e.k])?"noivu":"agent",risk:econRisk(p,e),no:econNo(p,e)}}).filter(Boolean)}
+  return{ix,k:e.k,name:e.wk?e.wk.n:itm(e.k).n,grade,src,price:econPrice(p,e),via:e.wk||!(window.WD_ITEMS&&WD_ITEMS[e.k])?"noivu":"agent",risk:econRisk(p,e),no:econNo(p,e)}}).filter(Boolean)}
 function econSell(p,ix){const e=p.inv&&p.inv[ix];if(!e)return"";const no=econNo(p,e);if(no)return"";
  if(typeof wdItem==="function"&&wdItem(e))return wdSell(p,ix);
- const pr=econPrice(p,e),R=econRisk(p,e),nm=e.wk?e.wk.n:IT[e.k].n,who=p===S?"Ngươi":`${rkName(p)} ${p.name}`;p.inv.splice(ix,1);ap(p,{bac:pr});
+ const pr=econPrice(p,e),R=econRisk(p,e),nm=e.wk?e.wk.n:itm(e.k).n,who=p===S?"Ngươi":`${rkName(p)} ${p.name}`;p.inv.splice(ix,1);ap(p,{bac:pr});
  let r=`${who} bán ${nm} cho thái giám Nội vụ phủ: Bạc +${pr}. `;
  if(R&&roll(R.pct)){ap(p,R.hit);const fx=Object.entries(R.hit).map(([k,v])=>`${NAMES[k]||k} ${v}`).join(", ");
   r+=`<span class="r">Chuyện ${p===S?"ngươi":"nàng"} đem bán ${nm} do ${ECON_GN[R.g]} ban lọt ra ngoài, ai cũng chê bất kính.</span> ${fx}. `;
@@ -117,7 +117,7 @@ function econWkOpen(x){const i=x.g.i,e=S.inv[i],w=e.wk,ar=ARTS.find(y=>y.k===w.a
   html:`<div class="kinvrows">${rows}</div><div class="rbtn kinvacts">${B.join("")}</div>`,btn:"Lui"})}
 (function(){const o0=kinvOpen;kinvOpen=function(x){try{const e=x&&x.g&&x.g.i>=0?S.inv[x.g.i]:null;if(e&&e.wk)return econWkOpen(x);
   /* plain items: the sale card says the real risk (a gift of Hoàng thượng / Thái hậu / Hoàng hậu) */
-  if(e&&!(window.WD_ITEMS&&WD_ITEMS[e.k])&&IT[e.k]&&IT[e.k].pr){const km=kitModal;kitModal=function(o){try{o.html=String(o.html||"").replace(/<button data-kinvact="sell"[^>]*>[\s\S]*?<\/button>/,econSellBtn(x.g.i))}catch(y){}return km.apply(this,arguments)};
+  if(e&&!(window.WD_ITEMS&&WD_ITEMS[e.k])&&IT[e.k]&&itm(e.k).pr){const km=kitModal;kitModal=function(o){try{o.html=String(o.html||"").replace(/<button data-kinvact="sell"[^>]*>[\s\S]*?<\/button>/,econSellBtn(x.g.i))}catch(y){}return km.apply(this,arguments)};
    try{return o0.apply(this,arguments)}finally{kitModal=km}}}catch(y){console.error("econ open",y)}return o0.apply(this,arguments)}})();
 /* a [data-wk] act inside the item panel closes the panel first */
 addEventListener("click",ev=>{const b=ev.target.closest&&ev.target.closest("[data-wk]");if(!b||b.disabled)return;if(b.closest("#mb,.dlg,.modal")){try{if(Q.length)closeModal()}catch(e){}}},true);

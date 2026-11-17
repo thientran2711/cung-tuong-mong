@@ -100,7 +100,7 @@ function todo(m){if(!m||!m.q14)return null;const L=[];for(const q of m.q14.L){if
   L.push({t:d.t,why:say(d.why)+hint(q.id),tab:d.tab,act:d.act,card:d.card,tl:d.tl})}return L.length?L:null}
 /* nothing in the chest for this quest: say where to get one (the Nội vụ phủ shop button is in Tư trang) */
 function hint(id){try{const inv=S.inv||[];
- if(id==="trang"&&!inv.some(e=>e&&!e.h&&((typeof wdItem==="function"&&wdItem(e))||(IT[e.k]&&IT[e.k].sl))))return " Rương chưa có món nào để thay: nhờ thái giám mua một món rồi mặc vào.";
+ if(id==="trang"&&!inv.some(e=>e&&!e.h&&((typeof wdItem==="function"&&wdItem(e))||(IT[e.k]&&itm(e.k).sl))))return " Rương chưa có món nào để thay: nhờ thái giám mua một món rồi mặc vào.";
  if(id==="ban"&&typeof econSellable==="function"&&!econSellable(S).some(x=>x&&!x.no))return " Rương chưa còn món nào bán được: nhờ thái giám mua một món, hoặc chờ đồ được ban thưởng.";
 }catch(e){}return ""}
 window.tq14Todo=todo;

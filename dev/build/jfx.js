@@ -392,7 +392,7 @@ window.kitGain=kitGain;
     came with no chest when j92 added a garment after it), with the silver. */
  W("bestow",o=>function(p,why){if(p!==S||!kfOn()||KFX.inBest)return o.apply(this,arguments);const n0=(S.inv||[]).length,b0=S.bac||0;KFX.inBest={spec:null};let r;
   try{r=o.apply(this,arguments)}finally{const hold=KFX.inBest;KFX.inBest=null;
-   try{const add=(S.inv||[]).slice(n0).filter(x=>x&&!x.h);if(add.length){try{if(typeof KMSNAP!=="undefined"&&KMSNAP&&KMS===S)for(const x of add)if(!KMSNAP.inv.includes(x))KMSNAP.inv.push(x)}catch(e){}
+   try{const add=(S.inv||[]).slice(n0).filter(x=>x&&!x.h&&(x.wk||typeof itKnown!=="function"||itKnown(x)));if(add.length){try{if(typeof KMSNAP!=="undefined"&&KMSNAP&&KMS===S)for(const x of add)if(!KMSNAP.inv.includes(x))KMSNAP.inv.push(x)}catch(e){}
      const royal=why==="son"||why==="sinhthan"||add.some(x=>x.nt),sp=hold.spec||{};
      kitReward({kind:royal?"royal":sp.kind||(why==="night"?"tray":"chest"),title:royal?"Ngự tứ":sp.title||"Rương bảo vật",from:sp.from||"Hoàng thượng ban",items:add.map(x=>kgItem(x,royal)),bac:Math.max(0,(S.bac||0)-b0)})}}catch(e){console.error(e)}}
   return r});
@@ -402,7 +402,7 @@ window.kitGain=kitGain;
   KFX.inDiff=true;let r;try{r=o.apply(this,arguments)}finally{KFX.inDiff=false}
   /* snapshot first (a card opened below may render again) */
   let same=false,d=0,lg=0,seen=null;try{if(S){same=kfS===S;d=(S.bac||0)-kfBac;lg=kfLog;seen=(S.inv||[]).filter(x=>x&&kfSeen.has(x));kfS=S;kfBac=S.bac||0;kfLog=S.logSeq||0;kfMark()}}catch(e){}
-  try{if(before&&same&&S&&!S.dead&&kfOn()){const add=(S.inv||[]).filter(x=>x&&!x.h&&!before.includes(x)&&!seen.includes(x));if(add.length)kgGroups(add);kfLoss(before,d,lg)}}catch(e){console.error(e)}
+  try{if(before&&same&&S&&!S.dead&&kfOn()){const add=(S.inv||[]).filter(x=>x&&!x.h&&!before.includes(x)&&!seen.includes(x)&&(x.wk||typeof itKnown!=="function"||itKnown(x)))/* an unknown key (old save / other build, j8 itm) is inert: never revealed, never listed */;if(add.length)kgGroups(add);kfLoss(before,d,lg)}}catch(e){console.error(e)}
   return r});
  /* KIT §54.2: who took the item out of her Tư trang. These calls tag each entry they remove; kfLoss (below) reads the tag. */
  const TAG=(n,why,toIx,title)=>W(n,o=>function(p){if(p!==S||!S||!S.inv)return o.apply(this,arguments);const b=S.inv.slice();const r=o.apply(this,arguments);
@@ -420,7 +420,7 @@ const KF_LOSEW=[[/tịch thu|thu hồi|sung công/i,"Bị tịch thu"],[/cướp
 function kfTexts(lg){const L=[];try{const n=Math.max(0,Math.min(40,(S.logSeq||0)-lg));for(let i=0;i<n;i++)L.push(S.logs[i]);for(const q of (typeof Q!=="undefined"?Q:[]))if(q&&typeof q.h==="string")L.push(q.h);
   const t=document.getElementById("rtoast");if(t&&t.classList.contains("on"))L.push(t.innerHTML)}catch(e){}
  return L.map(h=>String(h||"").replace(/<span class="ld">[^<]*<\/span>/g,"").replace(/<[^>]+>/g," ").replace(/\s+/g," ").trim()).filter(Boolean)}
-function kfLoseWhy(e,T){const tag=KFX.lt.get(e);const I=kitItemInfo(e);const nm=I.name,base=(IT[e.k]&&IT[e.k].n)||nm;
+function kfLoseWhy(e,T){const tag=KFX.lt.get(e);const I=kitItemInfo(e);const nm=I.name,base=(IT[e.k]&&itm(e.k).n)||nm;
  let line="";for(const h of T){const ss=h.replace(/([.!?:])\s+/g,"$1\n").split("\n");const s=ss.find(x=>x.includes(nm)||x.includes(base));if(s){line=s.trim();break}}
  if(line.length>170)line=line.slice(0,167).replace(/\s+\S*$/,"")+"…";
  if(tag)return{why:tag.why,to:tag.to,title:tag.title||"",text:line};

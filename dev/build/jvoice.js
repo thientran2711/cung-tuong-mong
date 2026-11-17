@@ -10,9 +10,8 @@
    kSay(sp, ls, s, o): fills {goi} {Goi} {xung} {Xung} {ten} (listener's title) {Ten} in s.
    kLine(key, pool, o): picks a line from a pool without repeating any line used for that key in the last BAL.voice.noRepeat tuần
      (least-recently-used when the pool is exhausted). pool = array of strings, or an object {warm:[…], cool:[…], cold:[…], any:[…]}
-     picked by o.m (falls back to any). Lines may carry the {goi}… tokens: pass o.sp / o.ls to fill them. Memory S.vmem (personal, old saves
-     start empty, co-op safe; it was S.vl until review/newlife-reset, which is the WORN VEIL's field (jveil): the two collided — kLine's {} looked like a
-     worn veil, so a brand-new life logged 'Vết thương trên mặt đã lành, ngươi tháo mạng che' and put the memory in the chest. Old saves: jveil vlFix moves it). kLines(key) = the pool registry for the repetition audit (dev/test/voice-rep.js). */
+     picked by o.m (falls back to any). Lines may carry the {goi}… tokens: pass o.sp / o.ls to fill them. Memory S.vmem (was S.vl until review/it-key-guard: S.vl is the worn veil of jveil, the clash put this memory in the chest; j8 itClean moves an old one) (personal, old saves
+     start empty, co-op safe). kLines(key) = the pool registry for the repetition audit (dev/test/voice-rep.js). */
 (function(){
 const V=()=>BAL.voice;
 const cap=s=>s?s.charAt(0).toUpperCase()+s.slice(1):s;

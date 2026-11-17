@@ -9,9 +9,10 @@ def wilson(k,n,z=1.96):
     if not n:return (0,0)
     p=k/n;d=1+z*z/n;c=(p+z*z/(2*n))/d;h=z*math.sqrt(p*(1-p)/n+z*z/(4*n*n))/d;return (100*max(0,c-h),100*min(1,c+h))
 def pc(k,n):lo,hi=wilson(k,n);return f"{100*k/max(1,n):.0f}% ({k}/{n}; {lo:.0f}–{hi:.0f})"
-OLD=('HH-STOP','CAP-STOP','Thái phi','Thái hậu','tiên đế','Tuẫn','Vương gia','Xuất gia','Lên ngôi','băng hà','ma ma','Xuất cung tuổi')
+OLD=('HH-STOP','Tuổi xuân qua đi','CAP-STOP','Thái phi','Thái hậu','tiên đế','Tuẫn','Vương gia','Xuất gia','Lên ngôi','băng hà','ma ma','Xuất cung tuổi')
 def cause(f):
     if any(o in f for o in OLD):return 'old/survived'
+    if 'Tuổi trời' in f:return 'lifespan (mortality dice)'
     if 'Khó sinh' in f or 'phá thai' in f:return 'childbirth'
     if 'độc' in f:return 'poison'
     if 'Bệnh' in f or 'nguy kịch' in f or 'nhiễm lạnh' in f:return 'illness'
@@ -66,3 +67,8 @@ else:
     print(f"- early-death causes: {dict(collections.Counter(cause(x['fate']) for x in died).most_common())}")
     print(f"- poison aimed at her per life {sum(len(p) for p in pz)/n:.1f}, landed {sum(sum(1 for e in p if e.get('hit')) for p in pz)/n:.2f}")
     print(f"- per origin (n/HH/died): "+", ".join(f"{o} {sum(1 for x in L if x['origin']==o)}/{sum(1 for x in hh if x['origin']==o)}/{sum(1 for x in died if x['origin']==o)}" for o in sorted(set(x['origin'] for x in L))))
+    def endk(x):
+        if x.get('maxRank',0)>=7:return 'Hoàng hậu'
+        c=cause(x['fate']);return 'survived (no HH)' if c=='old/survived' else 'died: '+c
+    print(f"- ending mix: {dict(collections.Counter(endk(x) for x in L).most_common())}")
+    print(f"- difficulty tags: {dict(collections.Counter(x.get('diff','?') for x in L))}")
