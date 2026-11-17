@@ -217,3 +217,48 @@ Suspects (not yet proven), in order:
 After the fix: rerun 40 lives sens + inag6 (`run_par.js root/index.html sens 40 … inag6 4 1`, ~37 min alone) — early death and illness must be
 within noise of main; add the row to the table above; then SẴN SÀNG KIỂM <sha> here + CLAIMS, message Foreman C (session 10 =
 session_011xDdVSeKM6qi8YXjVTPqrd).
+
+## r1-fix FAULT 8 (successor #2, session_011xDdVSQh3xBMmQ1KhP1rYA, 17/11) — bot regression: root causes + fix
+START_CTX ≈ 4 % (get_session reads 0; own estimate). Tool: `dev/measure/intrace.js` (per-cause trace), same seeds, main = f1509d7c (the
+reviewer's base; current main 744b80e7 has later merges and is not this branch's base).
+
+### What the trace showed (before the fix, branch 654afb61 vs main f1509d7c)
+- The headline numbers are mostly NOISE: with a bigger main sample (36 lives) main's own "early death" is 67 % (reviewer's 40: 65 %) and the
+  branch's first 18 lives gave 67 %; an7 counts the age-out endings "Tuổi xuân qua đi" (40, no son, rank < 7) and "Xuất cung về quê" as early
+  death, and those swing 0–11 per 40 lives on both sides. Births/life main 0.03 (an7 `kids` = children alive at the end) vs branch 0.39.
+- ONE real, large difference: NPC deeds landed ON HER (`tr.aimed`, per life): provoke **495** (main 12.6), humil 129 (6.2), apol 110 (4.0).
+  Root cause (suspect 4, a need-model bug, not odds): a spite deed FED the need it served — provoke lowers thiện cảm → `hostility` ↑ → spite
+  need ↑ → provoke again (runaway, ~40 a year on her); and the NPC weighed no enmity cost although the player's card shows the risk
+  ("oán ngươi +9"). Her oán then drove the NPCs' safety need → "Tạ lỗi" to her → provoke again (churn); NPCs spent buổi on it (NPC Sủng 37,
+  TH −2, NPC nights 220 vs main 41 / 11 / 270).
+- Not causes: j40 harm acts on her (runAct) the same as main per life (rumor/poison/frame within noise) → suspect 1 (npc-mind slip) not shown;
+  AG1b reactions cost her 25–33 khắc a LIFE and ~1 Sức (suspect 2: negligible); her illness onsets per life = main.
+
+### Fix (jagent, numbers in BAL.ag; NPC-agent LAW: the NPC weighs the same deed with the same gains and risks the player sees)
+1. A spite deed SERVES the spite need: its own gain (BAL.tw.g spite points; BAL.ag.unit points = one whole need, as for every need) closes
+   her spite toward THAT target (`agSpite` = hostility × (1 − vented/unit); flaunt = "*" everyone); her memory of it `v.ag.vent[target] =
+   [tuần, points]` fades by `BAL.ag.vent.fade` = 1 point per tuần. Used for the need, the target pick and the deed's spite value.
+2. A hostile deed's certain enmity (provoke: her oán +9 / an NPC's ghen +10; humil: oán +10 — the BAL.tw.g numbers of the risk line) is a
+   certain loss to her safety, weighed by her road's caution (`BAL.ag.road[o].safe`) — `agU` gl.f.
+No new bar, gate or roll; old saves without `v.ag.vent` load (two-way-oldsave ok). onecore-pick.py TOTAL 0.
+
+### Bot before / after (sens + inag + intrace, same tool)
+| measure (per life) | main f1509d7c (36) | branch 654afb61 (18) | branch fix (40) |
+|---|---|---|---|
+| early death (an7, incl. age-outs) | 67 % | 67 % | 70 % |
+| causes: illness / Tuổi xuân / childbirth / poisoned | 4 / 9 / 7 / 4 | 5 / 5 / 1 / 0 | 12 / 8 / 2 / 5 |
+| births / life (an7) · years / life | 0.03 · 12.9 | 0.39 · 11.7 | 0.35 · 11.4 |
+| NPC provoke / humil / apol ON HER | 12.6 / 6.2 / 4.0 | 495 / 129 / 110 | 140 / 10.5 / 89 |
+| her illness onsets | 11.0 | 10.9 | 9.2 |
+| her Sủng mean · NPC Sủng / TH / nights at death (median) | 78.8 · 41 / 11 / 270 | 78.4 · 37 / −2 / 220 | 85 · 41 / −0.5 / 234 |
+| her AG1b: scenes · khắc · Sức spent | – | 67 · 32 · 0.6 | 69 · 25 · 1 |
+- illness 12 = mostly "Tuổi trời đã tận, trọng bệnh" (old age; onsets per life are BELOW main). All outcome rows are within the noise of
+  n = 36–40 (one cause ± 4 lives).
+- Left as is, explained: (a) provoke on her is still ~11× main's old weekly dice (≈12 a year from all rivals, ≈1 per hostile consort per
+  year, each now chosen by her real hostility and caution); (b) NPC Thái hậu regard stays below main because the loop obeys the real access
+  rule the old monthly drip skipped (j41: Từ Ninh only at the morning greeting, rank ≥ Quý nhân) — the same rule as the player's.
+
+### Tests (final build 1eb87933 + report)
+agent_check 16/16 · npcmind-check (main 08725411 → branch) ERRS [] · likes-family ok · two-way-oldsave (08725411 save, 30 weeks) ok, 0 errors ·
+coop-one-world PASS · coop-e2e 61/61 · onecore-pick TOTAL 0 · agent_probe CPU ×4 Fold 755x1000 160 steps: slices 130, p50 2.8, p95 5.3,
+max 9.6 (one ksp landing), sync p95 0.8, 0 page errors.
