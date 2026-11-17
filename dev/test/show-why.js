@@ -60,4 +60,13 @@ async function open(b,url,errs){const p=await b.newPage();p.on('pageerror',e=>er
  ok(!r.nightErr&&r.night.length&&/sửa soạn chu đáo/.test(r.night[0])&&/Hoàng thượng đang vui/.test(r.night[0])&&/Đêm thị tẩm:/.test(r.night[0])&&/Sủng thêm \d/.test(r.night[0])&&!/Vì sao[^]*Sủng \+/.test(r.night[0]),'night: preparation + his mood, Sủng said in words',[r.nightErr,r.night,r.nightD]);
  ok(!r.tapErr&&r.tapTitle===0&&r.tapGl>=1&&/Được:.*Mất:/.test(r.tapPop),'nết word = kit gloss term, tap shows gain + cost, no native title',[r.tapErr,r.tapTitle,r.tapGl,r.tapPop]);
  ok(!errs.length,'no page errors',errs.slice(0,3));
+ /* ONE CORE: every nv() table names real nết (or a known quality) */
+ const tb=await p.evaluate(()=>{const bad=[];for(const k in BAL.net.n)for(const t in BAL.net.n[k]){if(t==="_")continue;if(t.startsWith("q:")){if(!(t.slice(2) in (BAL.net.qCode||{}))&&!["loyal","talk","hide","sharp","greed","timid"].includes(t.slice(2)))bad.push(k+":"+t)}else if(!BAL.net.T[t])bad.push(k+":"+t)}return bad});
+ ok(!tb.length,'BAL.net.n names only real nết / qualities',tb);
+ /* old save from the base build loads, a why still shows */
+ if(BASE){const e0=[],e1=[];const p0=await open(b,BASE,e0);const raw=await p0.evaluate(()=>{SLOT=2;document.getElementById('title').hidden=true;start();Q.length=0;for(let i=0;i<4;i++)try{endTurn()}catch(e){}return JSON.stringify(ser())});
+  const p1=await open(b,NEW,e1);const o=await p1.evaluate(async raw=>{SLOT=2;document.getElementById('title').hidden=true;start();Q.length=0;quiet=true;deser(JSON.parse(raw));quiet=false;
+   const v=liveRivals(true)[0];const t=Object.keys(BAL.net.T).find(t=>BAL.net.T[t].g==="tt"&&BAL.net.T[t].trust>1);v.net=traitsOf(v);v.net[0]=t;const b0=rsnap();affAdd(v,S,5);log(`${v.name} cười: thiện cảm +5.`);resultShow("Thử",b0,true);
+   for(let i=0;i<3;i++)try{endTurn()}catch(e){}return {why:(window.kaLastResult.rows.find(x=>x.k==="vi")||{}).items||[],turn:S.turn}},raw);
+  ok(o.why.length&&!e1.length&&!e0.length,'old save (base build) loads, plays 3 turns, why row shows, no page errors',[o,e0.slice(0,2),e1.slice(0,2)])}
  await b.close();const f=res.filter(x=>!x).length;console.log(f?`${f} FAIL`:'ALL OK');process.exit(f?1:0)})();
