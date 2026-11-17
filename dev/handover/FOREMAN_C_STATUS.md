@@ -2,6 +2,7 @@
 
 NEXT FOREMAN C SESSION: ROOT-2 = session_011xDdVPLp4pAuPFtBP2YetM (opened by ROOT at 06:34Z 17/11, depth 1). ROOT stops; its trigger disabled.
 FOREMAN C SESSION ROOT-2 = session_011xDdVPLp4pAuPFtBP2YetM (opened by ROOT 06:34Z 17/11) · START_CTX ~7% (~70k of 1M; own estimate, get_session reads 0) → roll over at >= 32%, ceiling 60% · lineage depth 1/8 · own hourly wake trig_0115gVzMubqiSyY3gyCKh7kS (:32).
+- 07:28Z SPLIT TABLE (lead #6, in BATCH_PLAN.md): W4d = a18 m01–m26 → a36 m01–m26 → a51 m01–m26 (234); W5c = a18 m27–m52 → a36 m27–m52 (156); W6c = a26 m01–m52 → a51 m27–m52 (234). Design table wins over W4d's ct_design.py. Maid ty4–ty8 audit later by W4d.
 - 07:26Z OVERLAP STOPPED: W4d redrew a18 ty1 m24–m39, but m27–m39 = W5c range (already live, approved) with other colours → W4d told to discard m27–m39, upload only m24–m26, stay in a18 m01–m26 × ty1–3 per the design table, no a26 (W6c). Lead #6 asked for ONE split table (worker × age × maid range × tier) incl. a36/a51.
 - 07:22Z C LOOKED at replaced b7 (13): all OK → live (+ b8 4). #3b writes HANDOVER #3 and stops; C opens #4 on its message.
 - 07:18Z C LOOKED: W5c D4 (8 incl. 4 redos) OK live (28/78 live). W6c a26 first16: method OK, 14 live; hold m09-ty3 (≈m05 crimson) + m15-ty3 (≈m11 lilac) → hue fix + design table + W4d a18 match.
