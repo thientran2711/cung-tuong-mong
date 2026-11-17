@@ -343,6 +343,23 @@ Object.assign(BAL,{
                            kid = teaching a child chữ / lễ nghi / nghệ (j53 / j54); yKid = Y thuật care of a sick child (jact) */
  facJoinAff:30,             /* a consort with no faction joins hers when her thiện cảm with the player is at least this (j10 «lập phe») */
 });
+/* review/one-core-jkc-2 (ONE CORE OD:L1267 + LUẬT SỬA CẢ NHÓM, the «thiếu bạc (cần N)» lock family; scan dev/measure/one-core-bac-lock.js): each action's
+   price is ONE key that its cost text («Bạc -N»), its lock (S.bac<N), its lock word («cần N bạc») and its handler (apply({bac:-N}), the NPC mirror
+   included) all read. Servant acts with a key already read BAL.house (thuongBac / lookBac / upBac / swapBac); the scheme bribe reads BAL.net.n.bribeCost;
+   Ban thưởng reads BAL.tw.reward; the tiểu thư dialog reads BAL.kc2.st.kc. */
+Object.assign(BAL.house,{hireBac:20,plantBac:40}); /* Nội vụ phủ: thêm cung nữ / thái giám (her and every NPC); «Cài người vào cung khác» */
+Object.assign(BAL,{
+ bacFee:{court:20,kidCare:10,kidGuard:20,cnvGift:5,h54Thu:15,h54Noi:10,h54Hoa:50,tdProbe:30,tdLeak:20,tdGift:40,itTest:10,htAsk:5,master:60,
+   lend:30,lendAff:30,ksp:30,midwife:40,backer:30,npcMat:15,giu:40},
+   /* court = «Biếu» a court person (j10 / j15; the NPC Tổng quản gift too) · kidCare / kidGuard = «Chăm sóc» / «Canh giữ các con» (j25) · cnvGift =
+      cung nữ road «Biếu quà» a colleague (j42) · h54Thu / h54Noi / h54Hoa = a married daughter: letter, «Nhờ con vào cung nói giúp», a tông nữ's dowry (j54) ·
+      tdProbe / tdLeak / tdGift = triều đình acts (j55, her and NPCs) · itTest = «Nghiệm độc» an item (j8 / jinv) · htAsk = «Dò hỏi gia thế» (jht) ·
+      master = hiring a danh sư (j2) · lend / lendAff = a friend lends her lend bạc when she likes her from lendAff (j9 «Trò chuyện») ·
+      NPC-side prices (the check and the charge read one key): ksp = an NPC bribes Kính sự phòng (j28) · midwife = a rival bribes the midwife (j32) ·
+      backer = a court backer (j34) · npcMat = an NPC buys craft material (j75) · giu = an NPC bribes past «giữ» (j8 + j75, one rule in two modules) */
+ actBac:{spy:15,ally:30,bribe:40,block:40,musk:30,catswap:50,lygian:20,slowpoison:40,xinhh:30,huydung:30,giahoa:40,thathu:40,phonghoa:30,thaopet:10},
+   /* base bạc of each scheme act (ACT[k].c, its ok and its f charge); jecon raises it by the target's rank / guards, and the lock words print that real price (actBac(k,a,t)) */
+});
 /* evWipe: the chứng cứ amount that clears every piece one person holds against another (evA(a,t,BAL.evWipe): a pardon, a death, a plot undone); review/one-core-dup3 */
 Object.assign(BAL,{evWipe:-99});
 Object.assign(BAL,{cut:{nightPrep:[1,2] /* night preparation q (j8 night1: Để mộc 1, Tắm 2, Tập 1+bậc) → why word sơ sài ≤[0] / chu đáo ≥[1] (jwhyn) */,rhythm:[8,13],facRel:20,tuanDays:[10,20],clanRel:25,form:[35,50,65],virCong:[2,3,5],wkQ:[25,45,65,85],
