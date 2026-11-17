@@ -41,8 +41,8 @@ function trLifeSeed(){try{if(window.COOPW&&COOPW.on&&typeof COOP==="object"&&COO
 function trHash(s){let h=7;for(const c of String(s))h=(h*31+c.charCodeAt(0))>>>0;return h}
 function thArch(){S.thO=S.thO||{};const O=S.thO;if(!O.arch||!TH_ARCH[O.arch]){const k=Object.keys(TH_ARCH);
   /* during start() her name / Thái hậu age are not set yet: answer without fixing the archetype */
-  if(!S.name||!S.thAge)return TH_ARCH[TH_FROM[S.thTrait]||"tuai"];
-  O.arch=TH_FROM[S.thTrait]||k[trHash("th:"+(S.thAge||0)+":"+trLifeSeed())%k.length]}
+  if(!S.name||!S.thAge)return TH_ARCH[TH_FROM[BAL.net.old[S.thTrait]||S.thTrait]||"tuai"];
+  O.arch=TH_FROM[BAL.net.old[S.thTrait]||S.thTrait]||k[trHash("th:"+(S.thAge||0)+":"+trLifeSeed())%k.length]}
  const A=TH_ARCH[O.arch];S.thTrait=A.trait;return A}
 /* who is this? → S / "th" / Emperor / the consort object / the servant */
 function trRes(p){if(!p)return null;if(p===S||p==="me")return S;if(p==="th"||p===S.thO||(p.kind==="th"&&!p.name))return"th";if(p.kind==="th")return"th";

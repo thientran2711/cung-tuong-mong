@@ -127,7 +127,7 @@ document.addEventListener("click",e=>{const b=e.target.closest("[data-vlearn],[d
 function addArtP(p,k,g){if(p===S)return addArt(k,g);vNorm(p);const a=ARTS.find(x=>x.k===k);if(!a)return;if((k==="theu"||k==="nau")&&virtueBonus(p,"cong").prog)g+=1;p.artp[k]+=g;
  while(p.arts[k]<5&&p.artp[k]>=p.arts[k]+2){p.artp[k]-=p.arts[k]+2;p.arts[k]++;const l=p.arts[k];const f={[a.st]:2};if(l===3)f.danh=3;if(l===5)f.danh=6;const b=(ARTB85[k]||{})[l];if(b)for(const x in b)f[x]=(f[x]||0)+b[x];ap(p,f)}
  if(p.arts[k]>=5)p.artp[k]=0}
-function npcStudy(v){if(!v||!v.alive||v.out||!roll(40))return;vNorm(v);const T=traitsOf(v)||[];const W=[];
+function npcStudy(v){if(!v||!v.alive||v.out||!roll(40*(1+BAL.net.k.study*netQ(v,"study"))))return;vNorm(v);const T=traitsOf(v)||[];const W=[];
  const w=k=>{let x=1;if(/Ân cần|Khiêm nhường/.test(T.join()))x*=(k==="hanh"?3:k==="dung"||k==="cong"?2:1);if(T.includes("Xảo quyệt"))x*=(k==="ky"?3:k==="ngon"?2:k==="hanh"?.3:1);if(T.includes("Kiêu ngạo"))x*=(k==="vu"||k==="dung"?2:1);return x};
  ARTS.forEach(a=>{if(v.arts[a.k]<5)W.push(["a",a.k,w(a.k)])});VIR.forEach(x=>{if(v.vir[x.k]<5)W.push(["v",x.k,w(x.k)])});if(!W.length)return;
  let r=Math.random()*W.reduce((s,x)=>s+x[2],0),i=0;while(r>W[i][2]&&i<W.length-1){r-=W[i][2];i++}const [t,k]=W[i];const l=t==="a"?v.arts[k]:v.vir[k],cost=t==="a"?(typeof tchFeeOf==="function"?tchFeeOf(v):5+l*5):virCost(l,v);

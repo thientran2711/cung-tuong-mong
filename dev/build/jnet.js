@@ -31,6 +31,8 @@ function netTrong(p){if(!Array.isArray(p.trong)||p.trong.length!==2)return;const
 (function(){const t0=traitsOf;traitsOf=function(p){try{const n=netOf(p);if(n)return n.slice()}catch(e){}return t0.apply(this,arguments)}})();
 /* jtrong's trọng reads trTraits: same pool for everyone (co-op friend included) */
 (function(){const r0=trTraits;trTraits=function(p){try{const n=netOf(p);if(n)return [n[1],n[0],n[2]]}catch(e){}return r0.apply(this,arguments)}})();
+/* the balance-law line of a nết (gain + cost), for tooltips and the coming SHOW-WHY row */
+function netTip(t){const R=BAL.net.T[t];return R?`Được: ${R.gain}. Mất: ${R.cost}.`:""}
 function hasT(p,t){try{return traitsOf(p).includes(t)}catch(e){return false}}
 function netRx(p,re){try{return re.test(traitsOf(p).join(" "))}catch(e){return false}}
 function netTxt(p,sep){try{return traitsOf(p).join(sep||", ")}catch(e){return""}}

@@ -162,7 +162,7 @@ let jointScheme0=null;
 /* ---------- detection (same shape for everyone) ---------- */
 function spyIn70(watcher,a){if(a===S)return(S.staff||[]).some(s=>s.spyFor===key(watcher));return(a.staff||[]).some(s=>s.spyFor===(watcher===S?"me":key(watcher)))}
 function seeP70(p,step){const a=pa70(p),t=pt70(p),r=pr70(p);const tc=tc70(a);let c;
- if(t===S||(a!==S&&t!==S)){/* her eyes */c=10+(S.mat||0)*6+(S.staff||[]).filter(s=>netIs(s,"sharp")||netIs(s,"talk")).length*6+(tc<35?12:0)-(tc>=70?8:0)+(r?r.vis:0)+(spyIn70(S,a)?30:0)+(r&&r.pl&&S.place===r.pl?15:0);
+ if(t===S||(a!==S&&t!==S)){/* her eyes */c=10+(S.mat||0)*6+(S.staff||[]).filter(s=>netIs(s,"sharp")||netIs(s,"talk")).length*6+(tc<35?12:0)-(tc>=70?8:0)+(r?r.vis:0)+(spyIn70(S,a)?30:0)+(r&&r.pl&&S.place===r.pl?15:0)-nq(a,"hide",BAL.net.k.hide);
   if(t===S)c+=(S.maid&&S.maid.loyal>=70?10:0);else c*=J70CFG.npcSeen}
  return cl(Math.round(c),3,85)}
 /* an NPC target (also when she is the plotter) notices with its own people */

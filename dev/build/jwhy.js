@@ -26,7 +26,7 @@ function spyFactors(a,t,ag){const F=[],me=a===S;ag=spyAgent(a,t,ag);
  if(ag===false)F.push(["Không có kẻ hầu đáng tin để sai đi",-BAL.spyNoAgent]);
  else if(ag){const nm=ag.name||"kẻ hầu";F.push([`Phải sai ${nm} đi, không tận mắt`,-BAL.spySent]);
   F.push([`Lòng ${nm} ${ag.loyal}`,((ag.loyal||0)-50)/5]);
-  const tb={lanh:8,chuyen:5,trung:2,tham:0,nhat:-5}[ag.tr]||0;if(tb)F.push([ag.kn||ag===S.maid?`${nm} ${STR[ag.tr]}`:`Nết ${nm} (ngươi chưa rõ)`,tb]);
+  const tb=qv({lanh:8,chuyen:5,trung:2,tham:0,nhat:-5},ag,0);if(tb)F.push([ag.kn||ag===S.maid?`${nm} ${netTxt(ag)}`:`Nết ${nm} (ngươi chưa rõ)`,tb]);
   if(ag.rk)F.push([`${nm} bậc ${srk(ag)}`,srk(ag)*3-3]);
   const f=whyKnows(ag,t);if(f)F.push([`${nm} quen người ${whyPal(t)}`,BAL.spyKnow])}
  else F.push(["Tự tay dò xét, tận mắt",0]);
