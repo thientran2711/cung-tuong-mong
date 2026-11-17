@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"911fa249+","t":"2026-11-17T04:48Z","c":"residence-seats: residence/seat/harem test + measure add-on","b":"030f7eb42c07","h":[{"s":"ee492cfd","t":"2026-11-17T04:15Z","c":"Hộp Chọn sổ nay rộng rãi, chữ trên nút đọc trọn, không còn ô hình bị cắt; trang Tuần lục hiện trọn dáng người đến tận gót chân, bảng thân s…"},{"s":"bad6d59f+","t":"2026-11-17T03:41Z","c":"Chơi chung: chuẩn bị đường truyền gọn nhẹ hơn giữa hai máy; khi chơi chưa có gì thay đổi."},{"s":"babc9b4a","t":"2026-11-17T01:39Z","c":"Chơi chung không còn treo máy vì tên bạn lặp chữ; số bóng người trên dư đồ khớp đúng người đang ở đó; việc có hạn giờ hiện đồng hồ ngay dướ…"},{"s":"92685210+","t":"2026-11-17T00:53Z","c":"Khung việc và khung sự kiện bốn cỡ, tranh lấp đầy khung, việc nhắc tên ai hiện chân dung người ấy; phẩm của món đồ nằm ngay trên viền khung…"},{"s":"6f513340","t":"2026-11-16T23:24Z","c":"Vào game mới không còn bật ngay màn lật thẻ, lật thẻ chỉ khi vào buổi tối; dư đồ nhãn giấy mới; việc dài lấn sang buổi sau; lời trong cung …"},{"s":"7a18d957","t":"2026-11-16T22:44Z","c":"review-diemtrang-fx-r1 report"},{"s":"afe2bcbc","t":"2026-11-16T22:25Z","c":"review r1: KIT 84.1a note + report"},{"s":"dea1d445+","t":"2026-11-16T21:32Z","c":"golive lag-play-2: CHANGE line + site rebuilt"},{"s":"674f3af4","t":"2026-11-16T21:21Z","c":"Chơi cùng bạn: bạn chơi chung chưa gặp mặt nay hiện tên gọi chung “Hảo hữu của ta” ở mọi nơi, không còn ẩn thành dấu hỏi."},{"s":"923567d5+","t":"2026-11-16T21:03Z","c":"Hình nhân vật: hết vệt xám ở cổ và viền tối quanh người."}]};
+window.CTM_BI={"s":"0f95ce98+","t":"2026-11-17T05:04Z","c":"residence-seats: measure runner reopens the page every few lives; analyser","b":"e84e4588c0fb","h":[{"s":"fa42f8c4","t":"2026-11-17T04:50Z","c":"Bước sang kiếp mới nay sạch sẽ như trang giấy trắng: không còn vết thương, khăn che mặt hay đồ vật không tên sót lại từ kiếp trước; các trò…"},{"s":"ee492cfd","t":"2026-11-17T04:15Z","c":"Hộp Chọn sổ nay rộng rãi, chữ trên nút đọc trọn, không còn ô hình bị cắt; trang Tuần lục hiện trọn dáng người đến tận gót chân, bảng thân s…"},{"s":"bad6d59f+","t":"2026-11-17T03:41Z","c":"Chơi chung: chuẩn bị đường truyền gọn nhẹ hơn giữa hai máy; khi chơi chưa có gì thay đổi."},{"s":"babc9b4a","t":"2026-11-17T01:39Z","c":"Chơi chung không còn treo máy vì tên bạn lặp chữ; số bóng người trên dư đồ khớp đúng người đang ở đó; việc có hạn giờ hiện đồng hồ ngay dướ…"},{"s":"92685210+","t":"2026-11-17T00:53Z","c":"Khung việc và khung sự kiện bốn cỡ, tranh lấp đầy khung, việc nhắc tên ai hiện chân dung người ấy; phẩm của món đồ nằm ngay trên viền khung…"},{"s":"6f513340","t":"2026-11-16T23:24Z","c":"Vào game mới không còn bật ngay màn lật thẻ, lật thẻ chỉ khi vào buổi tối; dư đồ nhãn giấy mới; việc dài lấn sang buổi sau; lời trong cung …"},{"s":"7a18d957","t":"2026-11-16T22:44Z","c":"review-diemtrang-fx-r1 report"},{"s":"afe2bcbc","t":"2026-11-16T22:25Z","c":"review r1: KIT 84.1a note + report"},{"s":"dea1d445+","t":"2026-11-16T21:32Z","c":"golive lag-play-2: CHANGE line + site rebuilt"},{"s":"674f3af4","t":"2026-11-16T21:21Z","c":"Chơi cùng bạn: bạn chơi chung chưa gặp mặt nay hiện tên gọi chung “Hảo hữu của ta” ở mọi nơi, không còn ẩn thành dấu hỏi."}]};
 /* KBOOT — BOOT COVER (owner 15/11 "Khi vừa bấm vào game, có chừng ít hơn 1 giây hiện khung này"; KIT §14.1).
    Before: while the 4 MB page parsed, the browser painted the bare static markup of p1.html (HUD box, a vertical stat label list, empty
    panels, the old 11-tab bar) for ~1 s on a warm open and many seconds on a cold one, before any kit CSS/JS existed.
@@ -105,7 +105,8 @@ window.CTM_BI={"s":"911fa249+","t":"2026-11-17T04:48Z","c":"residence-seats: res
    resized window, centred, with paper-coloured bars:
      landscape (and narrow portrait phones, pre-rotated)  1180 x 820  (the iPad layout)
      portrait (Fold-size, width/height >= 0.62)          590 x 852   (ONE PAGE = the iPad half + 32 px for its taller tab bar, KIT_FRAME)
-     s = min(available width / design width, available height / design height)
+     s = min(available width / design width, available height / design height); when the screen is relatively WIDER than the design (Fold portrait 755x1000, wide landscape) the
+     scale stays the height fit and the canvas WIDTH grows to the screen width (capped KIT_FRAME.maxGrow x design) — no side bands (owner 17/11 03:54Z, KIT §0.0b)
    Narrow portrait phones (width/height < 0.62: 390x844, 412x915, 412x1058 …): the frame is also rotated 90° so the landscape layout appears
    sideways and the player turns the phone; turned to real landscape the rotation drops (no reload).
    Inside the frame the game sees ONLY the design size: innerWidth/innerHeight, every media query and every JS breakpoint read 1180x820 or
@@ -125,10 +126,10 @@ window.CTM_BI={"s":"911fa249+","t":"2026-11-17T04:48Z","c":"residence-seats: res
    scaled — same columns, rows and positions (bag rows, fills by free height, everything). The one page's canvas is the spread's height + 32 px
    because its chrome is 32 px taller (bottom bar = two rows of 4 tabs, 76 px, vs the spread's one row, 44 px; owner 16/11 13:25Z (C)).
    box = the page content box both modes must measure (dev/test/page-scale.js fails if they differ). Change chrome height → change page.h. */
-window.KIT_FRAME={spread:{w:1180,h:820},page:{w:590,h:852},box:{w:582,h:623},margin:8,pageMargin:4,gutter:0};
+window.KIT_FRAME={spread:{w:1180,h:820},page:{w:590,h:852},box:{w:582,h:623},margin:8,pageMargin:4,gutter:0,maxGrow:1.7};
 function kvPages(){return innerWidth<innerHeight?1:2}
 function kvMark(){var r=document.documentElement,p=kvPages();r.classList.toggle("kv1",p===1);r.classList.toggle("kv2",p===2);
- r.style.setProperty("--kpage-w",KIT_FRAME.page.w+"px");r.style.setProperty("--kpage-h",KIT_FRAME.page.h+"px");/* --kvh = 1 % of the SPREAD height in both modes: page content and pop-ups size by it, never by vh/dvh (the one page is 32 px taller, §0.0a) */r.style.setProperty("--kvh",KIT_FRAME.spread.h/100+"px");
+ r.style.setProperty("--kpage-w",(p===1?innerWidth:Math.round(innerWidth/2))+"px");r.style.setProperty("--kpage-h",KIT_FRAME.page.h+"px");/* --kvh = 1 % of the SPREAD height in both modes: page content and pop-ups size by it, never by vh/dvh (the one page is 32 px taller, §0.0a) */r.style.setProperty("--kvh",KIT_FRAME.spread.h/100+"px");
  if(!kvMark.on){kvMark.on=1;addEventListener("resize",kvMark)}}
 (function(){var inFrame;try{inFrame=window.top!==window}catch(e){inFrame=true}
  if(inFrame){document.documentElement.classList.add("kview-in");
@@ -165,7 +166,10 @@ function kvMark(){var r=document.documentElement,p=kvPages();r.classList.toggle(
  var sap=null;function insets(){if(window.__kinsetsTest)return window.__kinsetsTest;/* test hook (dev/test/host-safe-area.js) */try{if(!sap){sap=d.createElement("div");sap.style.cssText="position:fixed;left:0;top:0;width:0;height:0;visibility:hidden;pointer-events:none;padding:env(safe-area-inset-top,0px) env(safe-area-inset-right,0px) env(safe-area-inset-bottom,0px) env(safe-area-inset-left,0px)";(d.body||d.documentElement).appendChild(sap)}
   var c=getComputedStyle(sap);return{t:parseFloat(c.paddingTop)||0,r:parseFloat(c.paddingRight)||0,b:parseFloat(c.paddingBottom)||0,l:parseFloat(c.paddingLeft)||0}}catch(e){return{t:0,r:0,b:0,l:0}}}
  function geo(){var w=window.innerWidth,h=window.innerHeight;if(!w||!h)return null;
-  var nr=narrow(w,h),land=nr||w>=h,DW=land?KIT_FRAME.spread.w:KIT_FRAME.page.w,DH=land?KIT_FRAME.spread.h:KIT_FRAME.page.h,I0=nr?{t:0,r:0,b:0,l:0}:insets(),I={t:I0.t,r:I0.r,l:I0.l,b:land?0:I0.b}/* landscape: the tab bar goes flush to the screen bottom, under the thin home-indicator line (owner: no strip under the tabs) */,AW=(nr?h:w)-I.l-I.r,AH=(nr?w:h)-I.t-I.b,s=Math.min(AW/DW,AH/DH),ox=I.l+(AW-DW*s)/2,oy=I.t+(nr?(AH-DH*s)/2:(AH-DH*s));
+  var nr=narrow(w,h),land=nr||w>=h,DW=land?KIT_FRAME.spread.w:KIT_FRAME.page.w,DH=land?KIT_FRAME.spread.h:KIT_FRAME.page.h,I0=nr?{t:0,r:0,b:0,l:0}:insets(),I={t:I0.t,r:I0.r,l:I0.l,b:land?0:I0.b}/* landscape: the tab bar goes flush to the screen bottom, under the thin home-indicator line (owner: no strip under the tabs) */,AW=(nr?h:w)-I.l-I.r,AH=(nr?w:h)-I.t-I.b,s=Math.min(AW/DW,AH/DH);
+  /* FULL WIDTH (owner 17/11 03:54Z, review/app-edge): when the screen is relatively WIDER than the design the scale is set by the height, and the canvas WIDTH grows to fill the rest (frames grow, the scale — so text and figures — stays the kit size); capped so the layout never sees an absurd width */
+  if(!nr&&AW/s>DW)DW=Math.min(Math.ceil(AW/s),Math.round(DW*KIT_FRAME.maxGrow));
+  var ox=I.l+(AW-DW*s)/2,oy=I.t+(nr?(AH-DH*s)/2:(AH-DH*s));
   return{w:w,h:h,nr:nr,DW:DW,DH:DH,s:s,tf:(nr?"translateX("+w+"px) rotate(90deg) ":"")+"translate("+ox.toFixed(2)+"px,"+oy.toFixed(2)+"px) scale("+s.toFixed(4)+")"}}
  function place(el,g){if(el.style.width!==g.DW+"px")el.style.width=g.DW+"px";if(el.style.height!==g.DH+"px")el.style.height=g.DH+"px";el.style.transform=g.tf}
  (function(){var g=geo();if(!g||!window.__kbootHost)return;place(cw,g);d.documentElement.appendChild(cw);window.__kbootHost(cw,g.DW,g.DH);
@@ -794,6 +798,11 @@ function kRxEmu(src,flags){flags=flags||"";
    result card ......... resultShow(title,before,ok)  THÀNH / HỎNG seal + coloured deltas + why
    dialog .............. showModal()  speaker portrait frame or place art, options through dilLine()
    Defined in j15 (cards, pager, bars), j17 (lines), j19 (kit core), j21 (relations). */
+/* ONE per-life registry (review/newlife-reset, owner bug 17/11): S and rivals are rebuilt by start() / deser(); every OTHER store that belongs to one
+   life (module-level lets, window.* holding people, timers, scenes) registers itself here: lifeStore(name, reset). j93 kmReset runs every reset on
+   start() (new game, Luân hồi rebirth, co-op new life), on a slot load and on the title screen. LIFE_STORES = the names (dev/test/newlife-leak.js
+   checks no store outside this list still holds the old life). Static caches of art / words (KAK_C, KIT_TONE_CACHE, PETC_CACHE…) need no entry. */
+const LIFE_REG=[],LIFE_STORES=window.LIFE_STORES=[];function lifeStore(n,f){LIFE_REG.push([n,f]);LIFE_STORES.push(n)}lifeStore("__kitLastEvArt",()=>{window.__kitLastEvArt=null});
 const RANKS=[
  {n:"Đáp ứng",s:0,d:0},{n:"Thường tại",s:15,d:10},{n:"Quý nhân",s:25,d:20},{n:"Tần",s:38,d:30},
  {n:"Phi",s:52,d:42},{n:"Quý phi",s:66,d:55},{n:"Hoàng quý phi",s:78,d:68},{n:"Hoàng hậu",s:85,d:78}];
@@ -19535,7 +19544,7 @@ function evNames(t){let x=t;try{(rivals||[]).forEach(r=>{x=x.split(r.name).join(
 function evKeys(m){const t=evTxt(m);const tpl=m.pid?"p:"+m.pid.replace(/^e68/,"e:"):"t:"+(m.t||"")+"|"+evNames(t).slice(0,26);return{tpl,key:tpl+"|"+evActorKey(m)+"|"+t.slice(0,40)}}
 function evS(){const e=e68();e.sch=e.sch||{tpl:{},key:{},last:"",bk:"",day:-1,dn:0};return e.sch}
 function bk6(){return wk()*B4N+(S.buoi||0)}
-let EVHOLD=[],EVLAST=null;
+let EVHOLD=[],EVLAST=null;lifeStore("EVHOLD held events",()=>{EVHOLD=[];EVLAST=null});/* was reset by start() only: a slot load released the OLD life's held events into the loaded one */
 function evDropInfo(m){if(!m.opts&&m.h){try{log(evTxt(m).slice(0,200))}catch(e){}}}
 /* dry=1 (D13 jspread, during a buổi change): hold / drop the optional cards exactly as at a real show, but mark nothing as shown */
 function evGate(dry){if(!S||S.dead||window.__e68off||!Q.length)return;const sc=evS();const b=bk6(),day=wk();if(sc.day!==day){sc.day=day;sc.dn=0}
@@ -23219,12 +23228,14 @@ KP_SEAL.week="TUẦN";
 
 /* ---------- MINI-GAME FRAME (for j82 and the lesson games): header + how-to + score/timer + game box + result rows ---------- */
 KP_SEAL.game="TÀI NGHỆ";
+/* OWNER 17/11 (OD "Điểm trang … clutter"): the PHẦN / HỒI / CÒN chip row is NOT shown in ANY mini-game (it pushed the play area down and forced scrolling);
+   the cells stay in the DOM, hidden, so every engine's env.hud / kitGameSet and the tests keep working. Round counts live in the "Cách chơi" line; a game with a real time limit shows the kit clock chip (kitGameClock) in the title line. */
 /* kitGameFrame({art:"Cầm", title:"Tấu khúc", how:"Chạm đúng dây khi nốt chạm vạch đỏ.", hud:[["score","Điểm",0],["time","Thời gian","30 giây"]], id:"kgbox"})
    -> HTML of the frame; the game draws into #<id> (.kgbox). Update a HUD cell with kitGameSet("score", 12). */
-function kitGameFrame(g){g=g||{};const fg=g.fig?kitGameFig(g):"";return `<div class="kgame">${kpHeader("game",`${g.art?g.art+": ":""}${g.title||""}`,"")}`+
+function kitGameFrame(g){g=g||{};const fg=g.fig?kitGameFig(g):"";return `<div class="kgame">${kpHeader("game",`${g.art?g.art+": ":""}${g.title||""}`,"").replace(/<\/div>$/,'<span class="kgclk" hidden></span></div>')}`+
  `<div class="kgbody${fg?" kgfig-on":g.pic?" kgpic-on":""}">`+(fg||(g.pic?`<div class="kgpic"><img src="${g.pic}" alt="" draggable="false" onerror="this.parentNode.parentNode.classList.remove('kgpic-on');this.parentNode.remove()"></div>`:""))+`<div class="kginfo">`+
  (g.how?`<div class="kghow"><span class="krl">Cách chơi</span><span>${g.how}</span></div>`:"")+
- (g.hud&&g.hud.length?`<div class="kghud">${g.hud.map(([k,l,v])=>`<span class="kgc"><small>${l}</small><b data-kg="${k}">${v==null?"":v}</b></span>`).join("")}</div>`:"")+
+ (g.hud&&g.hud.length?`<div class="kghud" hidden aria-hidden="true">${g.hud.map(([k,l,v])=>`<span class="kgc"><small>${l}</small><b data-kg="${k}">${v==null?"":v}</b></span>`).join("")}</div>`:"")+
  `<div class="kgbox" id="${g.id||"kgbox"}"></div><div class="kgres" id="${(g.id||"kgbox")}-res" hidden></div></div></div></div>`}
 /* KIT §N.1 kitGameFig (owner 16/11 ~21:30Z, mini-game layout): the LEFT column of every tài nghệ frame on a wide screen (html.kv2) = HER full figure in the
    outfit she wears NOW (kitStageFig: kit figure at the KIT_FIG ratio + the face layers, so makeup / scar / veil show live), the game's prop picture small in the
@@ -23236,7 +23247,12 @@ function kitGameFig(g){g=g||{};try{const p=g.fig&&g.fig!==true?g.fig:(typeof S!=
 function kitGameFigRefresh(p){try{const c=document.querySelector(".kgame .kgfig");if(!c||typeof kitStageFig!=="function")return;p=p||(c.dataset.kgf==="me"?S:null)||S;const f=kitStageFig(p,{cap:false});if(!f)return;
  const t=document.createElement("div");t.innerHTML=f;const n=t.firstElementChild,o=c.querySelector(".kesf");if(!n)return;if(o)o.replaceWith(n);else c.prepend(n)}catch(e){}}
 window.kitGameFig=kitGameFig;window.kitGameFigRefresh=kitGameFigRefresh;
-function kitGameSet(k,v){document.querySelectorAll(`[data-kg="${k}"]`).forEach(e=>e.innerHTML=v)}
+function kitGameSet(k,v){document.querySelectorAll(`[data-kg="${k}"]`).forEach(e=>e.innerHTML=v);if(k==="time")kitGameClock(v)}
+/* owner 17/11 + main s29: a game with a REAL time limit shows the EXISTING kit clock chip (kitCoopClock, "Còn N giây", KIT §69.4) in the frame's title line;
+   only the HUD value "<n> giây" is a time limit ("nhìn kỹ", "–", "5 tên", "đã hết", "không hạn" are not) -> the chip is hidden. No new part, no chip row. */
+function kitGameClock(v){document.querySelectorAll(".kgame .kgclk").forEach(e=>{const m=/^\s*(\d+)\s*giây\s*$/.exec(String(v==null?"":v));
+ if(!m||typeof kitCoopClock!=="function"){e.hidden=true;e.innerHTML="";return}const n=+m[1]*1000,len=Math.max(+e.dataset.len||0,n);e.dataset.len=len;e.innerHTML=kitCoopClock({left:n,len});e.hidden=false})}
+window.kitGameClock=kitGameClock;
 /* kitGameResult({raw, talent, prep, total, place:"Nhất", of:4, rivals:[{who:person, score}], gains:[["Sủng",3]], losses:[["Sức",-10]], note})
    -> result block: score rows (true numbers), standings with face + rank title, Được / Mất chips. */
 function kitGameResult(r){r=r||{};const rows=[];
@@ -23270,7 +23286,7 @@ function kitGameResult(r){r=r||{};const rows=[];
 (function(){const st=document.createElement("style");st.id="kp-game-css";st.textContent=`
 .kgame .kghow{display:grid;grid-template-columns:max-content minmax(0,1fr);gap:8px;align-items:baseline;font-size:.84rem;color:var(--ink);padding:8px 14px 0;margin:0}
 .kgame .kghow .krl{font-size:.64rem;font-weight:700;color:var(--k-lab);text-transform:uppercase}
-.kghud{display:flex;gap:6px;padding:6px 14px 0;flex-wrap:wrap}.kgc{flex:1 1 0;min-width:80px;display:flex;flex-direction:column;align-items:center;border:1px solid var(--k-hair);border-radius:var(--k-rad);background:#fffdf8;padding:3px 6px}
+.kghud[hidden]{display:none!important}.kgclk{margin-left:auto;flex:0 0 auto}.kgclk[hidden]{display:none}.kgclk .kchips{flex-wrap:nowrap}.kgclk .kchip{white-space:nowrap}.kghud{display:flex;gap:6px;padding:6px 14px 0;flex-wrap:wrap}.kgc{flex:1 1 0;min-width:80px;display:flex;flex-direction:column;align-items:center;border:1px solid var(--k-hair);border-radius:var(--k-rad);background:#fffdf8;padding:3px 6px}
 .kgc small{font-size:.66rem;color:var(--k-lab);text-transform:uppercase;font-weight:700}.kgc b{font-family:var(--display);font-size:1.05rem;color:var(--ink)}
 .kgbox{margin:8px 14px;min-height:120px}.kgres{padding:0 14px 10px}
 .kgrow{display:flex;justify-content:space-between;gap:8px;align-items:center}.kgrow>b{flex:none;white-space:nowrap}.kgr .kpkb .krl{white-space:normal;max-width:9rem}
@@ -23357,7 +23373,7 @@ const KIT_ACT_CATS=[["hai-nguoi",/hạ độc|đẩy|vu |vu oan|trù ẻo|ngáng
  ["buon-ban",/bán|mua|buôn|chợ|đổi|bạc/i],["le-nghi",/vấn an|thỉnh an|lễ|cầu|chùa|phật|xin xăm|cúng|bái/i],["giao-thiep",/thăm|tặng|kết|trò chuyện|mời|gặp|tâm sự|làm thân|nói/i],["di-lai",/đi |dạo|sang|ra |vào |đến /i]];
 let KIT_ACTS={acts:{},have:[]};try{fetch("https://ctm-img.victoria-tntt.workers.dev/img/ACTS.json",{cache:"no-cache"}).then(r=>r.ok?r.json():null).then(j=>{if(j){KIT_ACTS=j;try{document.querySelectorAll("button.ka.kcard[data-kart]").forEach(b=>{b.removeAttribute("data-kart");kpActArt(b)})}catch(e){}}}).catch(()=>{})}catch(e){}
 /* memoised (pure; hot in act-card lookups) */
-const KPSLUG_C=new Map();const kpSlug=s=>{const k=String(s||"");let v=KPSLUG_C.get(k);if(v===undefined){v=kpSlug0(k);if(KPSLUG_C.size>8000)KPSLUG_C.clear();KPSLUG_C.set(k,v)}return v};
+const KPSLUG_C=new Map();lifeStore("KPSLUG_C slug memo (keys = names of that life)",()=>KPSLUG_C.clear());const kpSlug=s=>{const k=String(s||"");let v=KPSLUG_C.get(k);if(v===undefined){v=kpSlug0(k);if(KPSLUG_C.size>8000)KPSLUG_C.clear();KPSLUG_C.set(k,v)}return v};
 const kpSlug0=s=>String(s||"").normalize("NFD").replace(/[̀-ͯ]/g,"").replace(/đ/g,"d").replace(/Đ/g,"D").toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"");
 function kitActCat(name){for(const [c,re] of KIT_ACT_CATS)if(re.test(name))return c;return"giao-thiep"}
 function kitActArt(name){const A=KIT_ACTS.acts||{};const key=A[name]||A[kpSlug(name)];const cat=kitActCat(name);const have=KIT_ACTS.have||[];
@@ -23927,7 +23943,7 @@ span.md.kmini.kmini>img.kveil{left:9.66%!important;top:11.75%!important;width:80
    stage tags .j59t/.j59n, podium plates), [data-vp-skip], [data-norank], form fields, script/style. */
 const KIT_RP_TITLES="Hoàng quý phi|Hoàng hậu|Quý phi|Quý nhân|Thường tại|Đáp ứng|Phế phi|Phi|Tần|Thái tử|Hoàng tử|Công chúa|Thái y|Thị vệ|Ma ma|Chưởng sự cô cô|Cô cô|[Cc]ung nữ thân tín|[Cc]ung nữ thô sử|[Đđ]ại cung nữ|[Cc]ung nữ|[Tt]iểu thái giám|[Tt]ổng quản thái giám|[Tt]ổng quản|[Tt]hái giám|[Nn]ữ quan|[Nn]hũ mẫu|[Nn]hạc sư|[Hh]ọa sư|[Tt]ể tướng|[Tt]hượng thư|[Tt]hị lang|[Tt]ướng quân|[Cc]ông tử";
 const KIT_RP_SKIP=".kname,.knr,.krt,.krn,.kpsn,.pcrk,.pcname,.j59t,.j59n,.kpod-plq,.kbk-pname,[data-vp-skip],[data-norank],[contenteditable]";
-let kitRpKey="",kitRpRe=null,kitRpMap=null;
+let kitRpKey="",kitRpRe=null,kitRpMap=null;lifeStore("kitRpMap name -> person",()=>{kitRpKey="";kitRpRe=null;kitRpMap=null});
 function kitRpRx(){const L=typeof kpPeople==="function"?kpPeople():[];const key=L.map(x=>x[0]).join("|");kitRpMap=new Map(L);if(key!==kitRpKey||!kitRpRe){kitRpKey=key;
   const N=L.map(x=>x[0].replace(/[.*+?^${}()|[\]\\]/g,"\\$&")).join("|");
   /* "title name" (m[1], m[2]) or "name (title, …)" (m[3], m[4]: lists such as "Mạnh Bích Dao (Tần, chủ vị)") */
@@ -24985,7 +25001,7 @@ function kbkOptName(m,c){const n=String(c.n||"");if(c.lg)return c.lg;const ctx=k
   try{nm=noFx&&KBK_OPT_DROP.test(n)?null:kbkOptName(m,c)}catch(e){nm=n}
   /* the result card's title (j19 wrapR reads c.n) says the same as the line: the option carries its full name from here on */
   if(nm&&nm!==n)c.n=nm;
-  /* …and the result card shows this choice's own picture when it has one (jk2b reads __kitLastEvArt), not the question's */
+  /* (the last picture is per life: lifeStore __kitLastEvArt in j1) …and the result card shows this choice's own picture when it has one (jk2b reads __kitLastEvArt), not the question's */
   try{const sp=nm&&kbkSpecific(nm);if(sp)window.__kitLastEvArt={src:sp,lab:""}}catch(e){}
   const w=RW={n:c.n,nm,done:false,seq:0};let r;try{r=c0.apply(this,arguments)}finally{RW=null}
   /* the option only opened what the game then wrote as its own sentence ("Núp nghe lén." + "Núp sau hòn giả sơn, ngươi nghe rõ…"): keep the sentence */
@@ -25859,7 +25875,7 @@ function kg82Pic(kind){if(["duho","den","may"].includes(kind))return "";const s=
 function kg82Frame(o){KG82.rlock=o.round||"";const hud=[["score","Phần","0/10"],["round",o.round||"Hồi",o.roundV||"–"],["time","Còn","–"]];
  if(kg82Kit())return kitGameFrame({art:o.art,title:o.title,how:o.how,hud,id:"kg82box",pic:o.pic,fig:o.fig!==false});
  return `<div class="kgame"><div class="kph"><b class="kpseal">TÀI NGHỆ</b><span class="kpht"><span class="kptitle">${o.art}: ${o.title}</span></span></div><div class="kghow"><span class="krl">Cách chơi</span><span>${o.how}</span></div>`+
-  `<div class="kghud">${hud.map(([k,l,v])=>`<span class="kgc"><small>${l}</small><b data-kg="${k}">${v}</b></span>`).join("")}</div><div class="kgbox" id="kg82box"></div><div class="kgres" id="kg82box-res" hidden></div></div>`}
+  `<div class="kghud" hidden aria-hidden="true">${hud.map(([k,l,v])=>`<span class="kgc"><small>${l}</small><b data-kg="${k}">${v}</b></span>`).join("")}</div><div class="kgbox" id="kg82box"></div><div class="kgres" id="kg82box-res" hidden></div></div>`}
 /* a HUD count "a/b" (Phần 7/10, Hồi 2/3) never shows above its ceiling; KG82.over counts any engine that tried (tests fail on it) */
 function kg82Cap(v){if(typeof v!=="string")return v;return v.replace(/(\d+)\/(\d+)/,(m,a,b)=>{if(+a>+b){KG82.over=(KG82.over||0)+1;return b+"/"+b}return m})}
 function kg82Set(k,v){if(k==="round"&&typeof v==="string"){let lab=null;const m=KG82_RW.exec(v.trim());
@@ -28012,7 +28028,7 @@ const FP88=()=>typeof facePool==="function"&&typeof faceChoose==="function";
 /* owner 16/11 s23 (face picker, NO tabs): the game picks the face set from her identity, never she: a cung nữ life (isSrv / origin cnv) sees the 52 maid faces only, every phi tần life the whole 84 (32 consort + 52 maid, all have consort dress art) */
 /* review/newgame-ui (owner 15/11 "quá lag"): the item list is built ONCE per (pool, her tier, age, dress, roll) — facePool walked all 84
    identities twice (por + fig) on every pick and every tab (≈ 0.3–1.8 s on a tablet); the cells show the small pre-sized copy (kitTn) */
-const FP_C={};
+const FP_C={};lifeStore("FP_C face-picker items (hold her person copy)",()=>{for(const k in FP_C)delete FP_C[k]});
 function fpKey(){const f=kitFaceScope();let t="",a="",v="";try{t=figTierOf(S);a=figAgeOf(S);v=(typeof isSrv==="function"&&isSrv())?"s":"c"}catch(e){}return [f,t,a,v,(NLP&&NLP.seed)||""].join("|")}
 function fpItems(){const key=fpKey();if(FP_C[key])return FP_C[key];let L=null;
  try{if(FP88()){L=(facePool(kitFaceScope())||[]).map(x=>{const f=Object.assign({},pMe());f.src=(typeof kitTn==="function"&&kitTn(x.por))||x.por||"";f.rw="";f.big=x.por||"";return{k:x.id,face:f,label:`${x.src==="maid"?"Dung mạo cung nữ":"Dung mạo"} ${x.n}`,fig:x.fig||""}})}}catch(e){L=null}
@@ -30431,8 +30447,9 @@ function kmPush(fn){KMQ.push(fn);kmPump()}
    screen calls this: the queue is emptied, the running job's finish is voided (kmGen), every .kmov scene (card-flip, ink, reward, reveal…) and the
    podium / reward / buổi-transition overlays are removed, and modules that keep their own timers register a hook with kmOnReset(fn). */
 let kmGen=0;const KMR=[];function kmOnReset(f){KMR.push(f)}
+lifeStore("kaLastResult",()=>{window.kaLastResult=undefined});
 function kmReset(){kmGen++;KMQ.length=0;kmBusy=false;clearTimeout(kmPump.t);
- KMR.forEach(f=>{try{f()}catch(e){console.error(e)}});
+ LIFE_REG.forEach(([n,f])=>{try{f()}catch(e){console.error('lifeStore '+n,e)}});KMR.forEach(f=>{try{f()}catch(e){console.error(e)}});
  try{if(typeof kitPodiumClose==="function")kitPodiumClose(true)}catch(e){}
  try{if(typeof btrKill==="function")btrKill()}catch(e){}
  try{document.querySelectorAll(".kmov,#kmrew,.kmfly,.kmalarm").forEach(e=>e.remove())}catch(e){}}
@@ -30635,7 +30652,7 @@ document.addEventListener("click",e=>{const c=e.target.closest&&e.target.closest
  if(typeof PX==="object")PX.key=""})();
 
 /* ================= hooks into the game ================= */
-let KMSNAP=null,KMS=null;
+let KMSNAP=null,KMS=null;lifeStore("KMSNAP",()=>{KMSNAP=null;KMS=null});
 function kmSnap(){return{srv:typeof isSrv==="function"&&isSrv(),rank:S.rank,out:!!S.out,preg:!!S.preg,kids:(S.kids||[]).length,inv:(S.inv||[]).slice(),dead:!!S.dead}}
 /* rank, cold palace, pregnancy, births and new things in the chest, read from the state after each render (any code path) */
 function kmDiff(){if(!kmOn()){return}if(KMS!==S||!KMSNAP){KMS=S;KMSNAP=kmSnap();return}const a=KMSNAP,b=kmSnap();KMSNAP=b;if(b.dead)return;
@@ -32337,14 +32354,24 @@ function vlSrc(k,p){const t=vlTier({k},p||S);return `https://ctm-img.victoria-tn
 (function(){if(typeof kitItemSrc!=="function")return;const k0=kitItemSrc;kitItemSrc=function(k,fb){if(vlIsK(k))return vlSrc(k);return k0.apply(this,arguments)}})();
 
 /* ---------- worn veil <-> p.scar.veil; old saves ---------- */
-function vlMig(p){try{if(!p||!p.scar)return;if(p.scar.veil&&!p.vl){const P=Math.min(8,wdPOf(p));p.vl={k:vlKey(P,0),src:"cu",d:typeof wdWhen==="function"?wdWhen():""};
+/* vlFix (review/newlife-reset, owner bug 17/11): p.vl is ONLY a worn veil entry. The ONE migration of the old voice memory (S.vl -> S.vmem, keyless
+   chest pieces dropped) is j8 itClean (it-key-guard, kept by main s29 17/11). vlFix only adds what itClean does not: the false line 'Vết thương trên mặt
+   đã lành, ngươi tháo mạng che' that bug logged leaves her log. It runs BEFORE itClean (wrapper below) while the old memory is still visible. */
+function vlMemLike(e){if(!e||typeof e!=="object"||Array.isArray(e)||e.k!=null)return false;const V=Object.values(e);return V.length>0&&V.every(x=>x&&typeof x==="object"&&!Array.isArray(x))||!V.length}
+function vlFix(p){if(!p||p!==S)return;try{if((p.vl!=null&&!vlIs(p.vl))||(Array.isArray(p.inv)&&p.inv.some(vlMemLike)))vlScrubLog()}catch(e){}}
+/* the false healing line of that bug: gone from her log when she never owned a veil (a real healing always follows a veil she wore) */
+function vlScrubLog(){try{if(!Array.isArray(S.logs)||vlIs(S.vl)||(S.inv||[]).some(vlIs))return;S.logs=S.logs.filter(l=>!/Vết thương trên mặt đã lành, ngươi tháo mạng che/.test(String(l)))}catch(e){}}
+function vlMig(p){try{vlFix(p);if(!p||!p.scar)return;if(p.scar.veil&&!p.vl){const P=Math.min(8,wdPOf(p));p.vl={k:vlKey(P,0),src:"cu",d:typeof wdWhen==="function"?wdWhen():""};
   if(p===S){S.wdk=S.wdk||{};S.wdk[p.vl.k]=1}else{p.wdk=p.wdk||{};p.wdk[p.vl.k]=1}}p.scar.veil=p.vl?1:0}catch(e){}}
-function vlSync(p){if(!p)return;if(p.scar)vlMig(p);if(!vlNeed(p)&&p.vl){p.inv=p.inv||[];p.inv.push(p.vl);p.vl=null;
+function vlSync(p){if(!p)return;vlFix(p);if(p.scar)vlMig(p);if(!vlNeed(p)&&vlIs(p.vl)){/* only a real veil comes off (never a foreign object in the veil slot) */p.inv=p.inv||[];p.inv.push(p.vl);p.vl=null;
   if(p===S)try{log("Vết thương trên mặt đã lành, ngươi tháo mạng che, cất vào rương.")}catch(e){}}}
 function vlPeople(){const L=[S];try{for(const v of rivals)if(v&&v!==S)L.push(v)}catch(e){}return L}
+/* r1 (merge with main it-key-guard): j8 itClean (inside normAll / co-op) also moves an old voice memory out of S.vl; vlFix runs FIRST so it still sees
+   the memory and removes the false healing line of that bug (after itClean S.vl is already null and the signal is gone) */
+(function(){if(typeof itClean!=="function")return;const c0=itClean;itClean=function(){try{for(const p of vlPeople())vlFix(p)}catch(e){}return c0.apply(this,arguments)}})();
 (function(){const n0=normAll;normAll=function(){const r=n0.apply(this,arguments);try{for(const p of vlPeople())vlMig(p)}catch(e){}return r}})();
 const VL_TIER0=KIT_VEIL.tierOf.bind(KIT_VEIL);
-KIT_VEIL.on=function(p){try{if(!p||!vlNeed(p))return false;vlMig(p);return !!p.vl}catch(e){return false}};
+KIT_VEIL.on=function(p){try{if(!p||!vlNeed(p))return false;vlMig(p);return vlIs(p.vl)}catch(e){return false}};
 KIT_VEIL.tierOf=function(p){try{if(p&&p.vl&&vlNeed(p))return vlTier(p.vl,p)||VL_TIER0(p)}catch(e){}return VL_TIER0(p)};
 /* the grade decides how much of the wound the veil hides (Thường = the old 2/3) */
 (function(){const e0=effSac;effSac=function(p){let r=e0.apply(this,arguments);try{if(p&&p.scar&&p.scar.veil&&p.vl){const d=p.scar.d;r=cl(r+Math.round(d*2/3)-Math.round(d*VL.cover[vlG(p.vl)]),0,130)}}catch(e){}return r}})();
@@ -32352,7 +32379,7 @@ KIT_VEIL.tierOf=function(p){try{if(p&&p.vl&&vlNeed(p))return vlTier(p.vl,p)||VL_
 
 /* ---------- wear / take off (same function for everyone) ---------- */
 function vlWear(p,ix){const e=p&&p.inv&&p.inv[ix];if(!vlIs(e)||e.h||!vlNeed(p))return"";p.inv.splice(ix,1);if(e.from){e.src=e.src||e.from;delete e.from}if(p.vl){p.inv.push(p.vl)}p.vl=e;if(p.scar)p.scar.veil=1;return itm(e.k).n}
-function vlOff(p){if(!p||!p.vl)return"";const n=itm(p.vl.k).n;p.inv=p.inv||[];p.inv.push(p.vl);p.vl=null;if(p.scar)p.scar.veil=0;return n}
+function vlOff(p){if(!p||!vlIs(p.vl))return"";const n=itm(p.vl.k).n;p.inv=p.inv||[];p.inv.push(p.vl);p.vl=null;if(p.scar)p.scar.veil=0;return n}
 function vlChest(p){return (p.inv||[]).map((e,ix)=>({e,ix})).filter(x=>vlIs(x.e)&&!x.e.h)}
 /* useItem on a veil = wear it (never consumed) */
 (function(){const u0=useItem;useItem=function(p,ix,tgt){const e=p&&p.inv&&p.inv[ix];if(vlIs(e)){const n=vlWear(p,ix);return n?`${NMc(p)} đeo ${n}. `:""}return u0.apply(this,arguments)}})();
@@ -32495,7 +32522,7 @@ function vlFriendGift(t){if(!t||!vlNeed(t)||t.vl||vlChest(t).length)return;const
 /* the Emperor's bestowal on a scarred, unveiled consort may add a veil of her phẩm (Trân phẩm) */
 (function(){if(typeof bestow!=="function")return;const b0=bestow;bestow=function(p,why){const r=b0.apply(this,arguments);try{if(p&&vlNeed(p)&&!p.vl&&!vlChest(p).length&&roll(VL.empP)){const k=vlKey(Math.min(8,wdPOf(p)),2);vlGain(p,k,{from:"emp",giver:"Hoàng thượng",known:"Hoàng thượng ban theo phẩm"});
   if(p===S){Q.push({t:"Thánh thượng ban thưởng",who:pEmp(),h:`<p style="text-align:center">${kitItem({src:vlSrc(k),name:itm(k).n,grade:2,size:"lg"})}</p><p>Hoàng thượng thương ngươi bị thương trên mặt, ban thêm <b>${itm(k).n}</b> (Trân phẩm).</p>`,btn:"Tạ ơn"});log(`Được Hoàng thượng ban ${itm(k).n}.`)}}}catch(e){console.error(e)}return r}})();
-window.vlWear=vlWear;window.vlOff=vlOff;window.vlCraft=vlCraft;window.vlBuyNvp=vlBuyNvp;window.vlBuyOut=vlBuyOut;window.vlAsk=vlAsk;window.VL=VL;
+window.vlWear=vlWear;window.vlOff=vlOff;window.vlFix=vlFix;window.vlCraft=vlCraft;window.vlBuyNvp=vlBuyNvp;window.vlBuyOut=vlBuyOut;window.vlAsk=vlAsk;window.VL=VL;
 /* ================= jface: kitFaceFx — ONE shared layer for face conditions (owner 11/14 01:15Z, review/appearance) =================
    Registry: KIT_FACEFX.add({id, z, ready, state(p), seen(p,st), sac(p,st), chip(p,st), html(p,file,st)}).
      state(p)   → the true condition object or null (rules: Sắc, cards, healing run on this, whatever the player knows)
@@ -34004,7 +34031,7 @@ html body .pc.kpwide .kst-chip{max-width:100%;min-width:0;flex-wrap:wrap}
    1) doable now · 2) blocked ONLY by time (wrong buổi / not enough khắc left) · 3) blocked by anything else (greyed as before);
    inside a group the source order stays. The order is decided once per list per buổi and then kept, so a re-render after an act
    (the act turns "đã làm") never makes the list jump while she reads. */
-const KAS_ORD=new Map(),KAS_TRY=new WeakMap();const kasT=s=>String(s||"").replace(/\s+/g," ").trim();
+const KAS_ORD=new Map(),KAS_TRY=new WeakMap();lifeStore("KAS_ORD card-order memo (keys = card text of that life)",()=>KAS_ORD.clear());const kasT=s=>String(s||"").replace(/\s+/g," ").trim();
 function kitActGroup(b){if(!b.disabled&&!b.classList.contains("kdis"))return 0;
  const x=[...b.querySelectorAll(".kr-why .kchip, .kr-why .kwhy")].map(e=>kasT(e.textContent)).filter(t=>/^✗/.test(t));
  if(x.length&&x.every(t=>/buổi|khắc/i.test(t)&&!/chưa làm|đã làm/i.test(t)))return 1;return 2}
@@ -34837,7 +34864,8 @@ Object.assign(BAL,{schemeRk:.15,schemeGuard:.1,selfMinus:8,loyalCost:25,favorRel
 const ECON_FREE=["ally","gift"];
 function econGuards(t){return Math.min(3,[t.maid].concat(t.staff||[]).filter(s=>s&&(s.loyal||0)>=70).length)}
 function econSchemeMul(a,t){if(!a||!t)return 1;/* two-way law (owner 16/11 s21): one price for everyone, no NPC discount (was .06/.04 for NPCs) */return 1+BAL.schemeRk*Math.max(0,rkOf(t)-rkOf(a))+BAL.schemeGuard*econGuards(t)}
-let ECON_AT=[null,null];
+let ECON_AT=[null,null];/* the actor / target of the scheme being priced: per life (review/newlife-reset: it kept the old life's people) */
+try{lifeStore("ECON_AT",()=>{ECON_AT=[null,null]})}catch(e){}
 function econSchemePrice(k,a,t){const A0=ACT[k];const base=A0&&A0.__c0&&A0.__c0.bac<0?-A0.__c0.bac:0;return Math.round(base*econSchemeMul(a,t))}
 (function(){for(const k in ACT){const A0=ACT[k];if(!A0||!A0.c||!(A0.c.bac<0)||ECON_FREE.includes(k))continue;const c0=Object.assign({},A0.c);A0.__c0=c0;
   const c={};for(const x in c0)if(x!=="bac")c[x]=c0[x];Object.defineProperty(c,"bac",{enumerable:true,get(){const [a,t]=ECON_AT;return a&&t?-econSchemePrice(k,a,t):c0.bac}});A0.c=c;
@@ -43576,7 +43604,7 @@ try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push(
    Off switches: "Cảnh động" off or prefers-reduced-motion → no particles, no shake, no flash, no ripple/sheen (kfStill()); "Rung" off → no buzz.
    Bots (window.__bot) and quiet code paths: nothing.
    Test hook: window.KFX {log:[kinds], app, q, live, loaded}. */
-const KFX=window.KFX={log:[],app:null,q:1,live:0,loaded:false,loading:null,parts:[],tex:{},amb:0,fps:60,slow:0,fast:0};
+const KFX=window.KFX={log:[],app:null,q:1,live:0,loaded:false,loading:null,parts:[],tex:{},amb:0,fps:60,slow:0,fast:0};lifeStore("KFX.log/loses",()=>{KFX.log.length=0;KFX.loses=[]});
 /* buzz patterns added to j11's VIB (ms) */
 Object.assign(VIB,{win:[12,40,12],fail:[35],death:[45],lock:[14],demote:[60,50,60],preg:[15,30,15],harm:[30,30,70]});
 /* THE TABLE: kind → buzz · shake (1 light, 2 hard) · flash · particles (comma list) */
@@ -45127,10 +45155,9 @@ function toilDressUI(){const box=kg82Box();if(!box)return;box.hidden=false;const
  const slots=TOIL_SL.map(([k,label,gk])=>({k,label,item:toilWorn(k),ghost:keqArt(gk)||"",sel:!!(sel&&sel.sl===k)}));const x=luxOf(S),wb=wearBonus(S);
  const sum=kitChips([wb.sac?["Sắc",wb.sac]:null,wb.danh?["Danh",wb.danh]:null].filter(Boolean))+kitLuxChip(x);
  const por=toilPor();const me=pMe();
- const occ=kitFacts(st.occ.map(o=>kitAgendaFact(o,`${o.n}${o.F===2?" (trang trọng nhất)":o.F===1?" (gặp bề trên)":""}`)),{group:false});/* every row with its picture (owner 16/11 21:18Z, KIT §84 agenda rows) */
  const mama=toilSkill().mama;
- box.innerHTML=`<div class="toilw"><div class="toilfig"><h4 class="kpst">Hôm nay</h4>${occ}`+
-  (mama?`<p class="past">${mama.name} khẽ nhắc: “Dịp ${st.F===2?"yến lễ phải lộng lẫy mà không vượt phẩm":st.F===1?"thỉnh an nên đoan trang, đủ phẩm":"thường ngày nên nhã nhặn, đừng phô trương"}.”</p>`:"")+`</div>`+
+ box.innerHTML=`<div class="toilw toil1">`+
+  (mama?`<p class="past toilmama">${mama.name} khẽ nhắc: “Dịp ${st.F===2?"yến lễ phải lộng lẫy mà không vượt phẩm":st.F===1?"thỉnh an nên đoan trang, đủ phẩm":"thường ngày nên nhã nhặn, đừng phô trương"}.”</p>`:"")+
   `<div class="toilinv">${kitInvGrid({key:"toil",tabs,items,minRows:2,minSlots:12,onPick:toilPick,side:kitEquipSlots({key:"toil",title:"Đang mặc",slots,sum,onPick:toilSlotPick,col:true}),sum})}`+
   `<div class="toildet">${toilDetHTML(sel)}</div></div></div>`+
   `<div class="kg82act"><button class="${kg82Btn()}" id="toilok">Mặc bộ này</button><button class="${kg82Btn(true)}" id="toilkeep">Giữ đồ hôm qua<small>mặc như cũ</small></button></div>`;
@@ -45277,6 +45304,7 @@ function toilFinish(made){const st=TOIL.st;if(!st)return;try{if(KG82.run&&KG82.r
 #kg82 .toilw .toilfig .pcp{max-width:220px;margin:0 auto 6px}
 #kg82 .toilw .kinv .kinvg{grid-template-columns:repeat(auto-fill,minmax(54px,1fr))}
 #kg82 .toilw .toildet{margin-top:8px}#kg82 .toilw .toildet>.past{margin:4px 0}
+#kg82 .toilw.toil1{grid-template-columns:1fr}#kg82 .toilw.toil1 .toilmama{margin:0}
 /* kv3:.kv1 */:where(.kv1) #kg82 .toilw{grid-template-columns:1fr}:where(.kv1) #kg82 .toilw .toilfig{display:block}`;document.head.appendChild(st)})();
 
 /* ---------- REACTIONS POP UP (owner 15/11): every reaction to her look is an event dialog with the person, never only a log line ----------
@@ -47015,6 +47043,7 @@ function tsNeedSuc(n){return{t:`Sức ≥${n} (có ${S.suc})`,ok:S.suc>=n}}
    if(c&&c.need&&c.need.length){b.dataset.kneed=encodeURIComponent(JSON.stringify(c.need));if(c.tsDis)b.disabled=true}}}catch(e){}return k0.apply(this,arguments)}})();
 (function(){const c0=chooseM;chooseM=function(i){const m=Q[0];const c=m&&m.opts&&m.opts[i];if(c&&c.tsDis){if(tsBot()){const j=m.opts.findIndex(x=>!x.tsDis);if(j>=0&&j!==i)return chooseM(j);Q.shift();showModal();return}return}if(c&&c.tsLater){TSA.pre=rsnap();window.__tsNoRes=1;try{return c0.apply(this,arguments)}finally{window.__tsNoRes=0}}return c0.apply(this,arguments)}})();
 (function(){const r0=resultShow;resultShow=function(){if(window.__tsNoRes)return;return r0.apply(this,arguments)}})();
+try{lifeStore("TSA.pre",()=>{TSA.pre=null})}catch(e){}
 function tsPre(){const b=TSA.pre||rsnap();TSA.pre=null;return b}
 /* a kit panel (event choice that shows outcomes: showOut) with its event picture and the people standing on it */
 function tsPanel(o,front){const m={t:o.t,h:o.h,opts:o.opts,who:o.who||null,art:o.art||"",stage:o.stage,showOut:true,btn:o.btn,onClose:o.onClose,tsk:o.tsk||""};if(front)Q.unshift(m);else Q.push(m);return m}
@@ -48328,7 +48357,7 @@ function resHTML(o,d){const tp=o.turned?byId(o.turned):null,fp=o.pick?byId(o.pic
 let inFlip=false,stoleFrom=null;(window.THIN_REG=window.THIN_REG||[]).push(["inFlip",()=>inFlip,v=>{inFlip=v}],["stoleFrom",()=>stoleFrom,v=>{stoleFrom=v}]);/* per-player state for the co-op host (jcoopthin TH.reg) */
 /* life token + the scene on screen: a new life / loaded slot / title (j93 kmReset) voids every waiting go() and closes the scene (review/flip-newlife) */
 let life=0,cur=null;
-try{if(typeof kmOnReset==="function")kmOnReset(()=>{life++;try{cur&&cur.close&&cur.close()}catch(e){}cur=null})}catch(e){}
+try{if(typeof lifeStore==="function")lifeStore("flip scene",()=>{life++;try{cur&&cur.close&&cur.close()}catch(e){}cur=null})}catch(e){}
 if(typeof stealNight==="function"){const s0=stealNight;stealNight=function(v,t){if(inFlip&&stoleFrom==null&&t)stoleFrom=t===S?"me":t.id;return s0.apply(this,arguments)}}
 if(typeof kitFlipTablet==="function"){const a0=kitFlipTablet;kitFlipTablet=function(){if(inFlip)return;return a0.apply(this,arguments)}}
 if(typeof kitFlipNote==="function"){const b0=kitFlipNote;kitFlipNote=function(){if(inFlip)return;return b0.apply(this,arguments)};window.kitFlipNote=kitFlipNote}
@@ -50285,7 +50314,7 @@ function rcpLvTxt(g){const s=rcpStOf(g.kind,g.r.id);return `<span class="g">Họ
 function rcpPK(r){return r==="emp"||r==="th"?r:r&&typeof r==="object"?(r===S?"me":"v"+r.id+(r.name||"")):""}
 function rcpWho(r){return r==="emp"?"Hoàng thượng":r==="th"?"Thái hậu":r&&r.name?`${rkName(r)} ${r.name}`:""}
 function rcpThey(r){return r==="emp"?"bệ hạ":r==="th"?"Thái hậu":"nàng ta"}
-const RCP_PC={};
+const RCP_PC={};lifeStore("RCP_PC",()=>{for(const k in RCP_PC)delete RCP_PC[k]});
 function rcpProf(r){const pk=rcpPK(r);if(!pk)return null;const seed=rcpSeed();const ck=seed+pk;if(RCP_PC[ck])return RCP_PC[ck];const f={},h={};
  for(const kind in RCP_ST){const L=RCP_ST[kind],x=rcpH(seed+":"+pk+":"+kind);f[kind]=L[x%L.length][0];
   if((x>>>8)%100<BAL.rcp.hateP){const O=L.filter(s=>s[0]!==f[kind]);h[kind]=O[(x>>>16)%O.length][0]}}
@@ -52202,7 +52231,7 @@ function frameDef(p,a){const T=BAL.truth;const base=T.clearBase+(p.mat||0)*T.cle
 function frameExpose(a,p,how){const T=BAL.truth;ap(a,{danh:-T.fDanh});if(typeof ducAdd==="function")ducAdd(a,-T.fDuc,"vu khống người khác");else ap(a,{duc:-T.fDuc});
  relAdd(a,p,-20);evA(p,a,2);punish(a,`vu khống ${p===S?"ngươi":p.name}`,2);
  const A=a===S?"Ngươi":a.name,P=p===S?"Ngươi":p.name;return `${P} minh oan được: ${how}. ${A} bị lộ là kẻ vu khống: Danh -${T.fDanh}, Đức -${T.fDuc}, bị phạt. `}
-let FRAME_LAST="";
+let FRAME_LAST="";try{lifeStore("FRAME_LAST",()=>{FRAME_LAST=""})}catch(e){}/* per life (review/newlife-reset-r1): the last framing sentence names people of that life */
 (function(){const f0=framed;framed=function(p,why){FRAME_LAST="";const a=ACTX.a&&ACTX.a!==p?ACTX.a:null;if(!a||!p||window.__truthAuto)return f0.apply(this,arguments);
  if(p===S&&!window.__truthAuto){pushDil(mkP("vuoan",{a:key(a),why}),"Bị vu oan");return -1}
  const D=frameDef(p,a);try{window.__frames=(window.__frames||0)+1;if(p===S)window.__framesMe=(window.__framesMe||0)+1}catch(e){}
@@ -56737,12 +56766,30 @@ html .game .kleather>.maptools .mz{min-height:28px;padding:0 9px;font-size:.72re
 .kleather:not(.kpmv)>.mapsc{flex:1;height:auto!important}
 .kleather>.mapsc{border-radius:0!important;box-shadow:none!important;outline:1px solid #b79a5bcc;outline-offset:-1px}
 .kleather:not(.kpmv)>.mapsc{-webkit-mask-image:linear-gradient(#0000,#000 14px,#000 calc(100% - 14px),#0000),linear-gradient(90deg,#0000,#000 14px,#000 calc(100% - 14px),#0000);-webkit-mask-composite:source-in;mask-image:linear-gradient(#0000,#000 14px,#000 calc(100% - 14px),#0000),linear-gradient(90deg,#0000,#000 14px,#000 calc(100% - 14px),#0000);mask-composite:intersect}
+/* §85.6 FULL SCREEN (owner 17/11 03:52Z, OD:L133/L1410/L1433): the map fills the whole page area edge to edge; the tools row, the left rail and the right column are OVERLAYS on it (same columns as her room stage), nothing shrinks the map */
+html body .mapv.kside>:not(#kshR):not(#krail):not(.kl-tone){margin-left:0!important;margin-right:0!important}
+html body .mapv.kside>#kshR{top:6px;right:6px}html body .mapv.kside>#krail{left:6px!important;top:6px!important}
+html body .game .mapv.kside.kleather>.mapsc{position:absolute!important;inset:0!important;width:auto!important;height:auto!important;flex:none!important;outline:0!important;-webkit-mask:none!important;mask:none!important}
+html body .game .mapv.kside.kleather>.maptools{position:absolute!important;top:6px!important;left:56px!important;right:calc(var(--kgrw,150px) + 14px)!important;inset-block-end:auto!important;height:38px;background:none!important;border:0!important;padding:0!important;pointer-events:none;z-index:8}
+html body .game .mapv.kside.kleather>.maptools>*{pointer-events:auto}
+html body .game .mapv.kside.kleather>.maptools:not(:has(.kpm-back))::before{filter:drop-shadow(0 1px 2px #3a2a1e88)}
+html body .game .mapv.kside.kleather>.maptools .mz{box-shadow:0 1px 3px #3a2a1e66}
+/* §85.6 courtyard level (.kpmv): the painting COVERS the whole page area (pan sideways when the page is narrower than the painting), the hall rows sit on it at the bottom */
+html body .game .mapv.kpmv.kside.kleather{display:block!important;height:100%!important}
+html body .game .mapv.kpmv.kside.kleather>.mapsc{overflow:auto!important;display:flex!important;justify-content:safe center;align-items:center;scrollbar-width:none}
+html body .game .mapv.kpmv.kside.kleather>.mapsc::-webkit-scrollbar{display:none}
+html body .game .mapv.kpmv.kside.kleather>.mapsc>.mapw{width:max(100cqw,calc(100cqh * 1.76))!important}
+html body .game .mapv.kpmv.kside.kleather>.kpm-list{position:absolute;left:6px;right:6px;bottom:6px;z-index:8;padding:0;margin:0!important;grid-template-columns:repeat(3,minmax(0,1fr))}
+html body .game .mapv.kpmv.kside.kleather>.kpm-list .btn{background:#fff8e4ee;min-height:40px}
 .mspot .mlab{background:none!important;border:solid transparent!important;border-width:3px 7px!important;border-image:url(https://ctm-img.victoria-tntt.workers.dev/img/kit/mapslip.webp) 20 22 fill/3px 7px stretch!important;border-radius:0!important;box-shadow:none!important;padding:0 1px!important;filter:drop-shadow(0 1px 1px #3a2a1e66);color:#2a1a12}
 .mspot .mlab i{background:none!important}
 .mspot .mmeta{background:none!important;border:solid transparent!important;border-width:3px 6px!important;border-image:url(https://ctm-img.victoria-tntt.workers.dev/img/kit/mapslip.webp) 20 22 fill/3px 6px stretch!important;border-radius:0!important;padding:0!important;filter:drop-shadow(0 1px 1px #3a2a1e55);color:#4a3a2a}
 :where(.kv1) .mspot .mmeta,.mspot .mmeta{display:block!important}
 .mspot .mlab em{display:inline!important}
 `;document.head.appendChild(st)})();
+
+/* §85.6: centre the covering courtyard painting once per slot */
+(function(){const r0=render;render=function(){const r=r0.apply(this,arguments);try{const v=document.querySelector(".game.maptab .mapv.kpmv"),sc=v&&v.querySelector(".mapsc");if(sc&&v.dataset.cen!==(v.dataset.kpm||"")){v.dataset.cen=v.dataset.kpm||"";const c=()=>{sc.scrollLeft=(sc.scrollWidth-sc.clientWidth)/2};c();const im=sc.querySelector(".mapimg");if(im&&!im.complete)im.addEventListener("load",c,{once:true})}}catch(e){}return r}})();
 try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§85 họa đồ chú thiêm",title:"DƯ ĐỒ STYLE C · place slip + info row + 'Dư đồ' cartouche (no frame, no figure chip)",where:"Dư đồ (all zooms), palace detail .kpm-spot; same slip everywhere",html:()=>`<div style="position:relative;max-width:420px;padding:24px 16px;background:#cdbb97;border-radius:6px"><div style="display:inline-flex;flex-direction:column;align-items:center"><span class="mspot" style="position:static;border:0;background:none;display:flex;flex-direction:column;align-items:center"><span class="mlab">Càn Ninh cung</span><span class="mmeta">11 bóng · <em class="ok">${BAL.kitpage.demo.mapK} khắc</em></span></span></div></div>`})}catch(e){}
 /* ================= jksize: KIT SIZE SYSTEM — 4 frame sizes S/M/L/XL, ONE figure scale per frame layout, picture sizes, ONE button (KIT §84) =================
    Owner 16/11 15:00Z (OD, s17 kit review, "chốt lại là 4 size"): every pop-up frame kind (ĐIỀU, LUẬT, VIỆC, KẾT QUẢ, TIN, VIỆC DÀI…) comes in
@@ -58177,7 +58224,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="030f7eb42c07";window.CTM_BUILD=BUILD;
+const BUILD="e84e4588c0fb";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
