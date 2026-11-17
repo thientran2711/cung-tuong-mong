@@ -798,3 +798,4 @@
 | AG-ALL A2 successor: r1 fixes F2–F5 + weight pass (opus; brief reports/ag-all.md §16) | review/ag-all | C-AG | session_01UV1SziAW9nRRmuRJXDn5N6 | RUNNING | 17/11 14:56Z |
 | origin-bd-branch r1 PASS 4e50e6ea → lander queue; reviewer + worker archived | review/origin-bd-branch-r1 | B | session_01N1tNP3r4Wz5SfLPnQXnXnJ | PASS (archived) | 17/11 14:56Z |
 | narrow-t3-r1 PASS 07747a9b (412/390 T3 narrow + showModal dup-list root fix; on opt-pic-same-r2) → builder batch s32a; worker + reviewer archived; follow-up: court tab rows + 10-option menu at phone width | review/narrow-t3-r1 | MAIN s32 | session_01UV1SzhfMi68Cmn88G2Yqze | PASS → BATCH | 17/11 14:57Z |
+| toil-looks4: Vụng A powder puffs more blurred + varied sizes (OD ~15:00Z) on review/toil-looks2 630eaa633 → ?v=9 | review/toil-looks2 | MAIN s33 | (opening) | RUNNING | 17/11 15:05Z |
