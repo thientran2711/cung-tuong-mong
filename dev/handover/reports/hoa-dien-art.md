@@ -32,3 +32,26 @@ Files (names the code requests): img/hd-hd-{mai,dao,diep,lan,sen,maudon,phuong}.
 ## Pending
 - ROOT-9 look on batch 1 + sprites; lossless decision; W2c consort-ty skip list.
 - Whole-family detector pass (counts per family) running; then batches by family (por → fig → hd → tn), counts reported per batch.
+
+## UPDATE 17/11 ~21:15Z — STEP 2 DONE (live), STEP 1 in progress, HANDOVER (context rollover)
+Code: review/hoa-dien-art @ 08318bb6. Foreman: ROOT-10 session_011xDdVReyG8hSRH5URJJdVX.
+
+### Sprites/icons LIVE (owner rounds: 10/tier → +10 different type/colour → no black/white/birds)
+- img/hd-<key>-NN.webp (long side 192; hd-phuong-05 256) + img/wd-<key>-NN.webp (256²), key ∈ hd-mai, hd-dao, hoadien-bac, hd-diep, hd-lan, hd-sen, hd-maudon, hd-phuong; NN 01..20 = 320 files, --check all same.
+- Legacy single names also live: img/hd-hd-*.webp, img/hd-hoadien-bac.webp, img/wd-hd-*.webp (= design 01; hd-lan = jade orchid, hd-mai = red plum).
+- Phoenix kept only as the t8 rank sign (ROOT-10/owner). No fruit, no leaves, no black, no white, no birds.
+- CODE SIDE (Foreman B / main) must read the -NN names (10→20 variants per tier) — not done by me.
+- Generation ids: dev/art/hoa-dien-art/grids*.txt, gens.txt; total ≈ 3.5k credits.
+
+### Forehead cleaning (STEP 1) — owner-approved harmonic method (no grain)
+- Tool: detf.py (locate v3b/v5 + brow guards + box mask) + det3.remove (Laplace), clean3.py (por, LOSSLESS, out_diff 0), twin.py (fig/hd/tn, q98, out_mad vs base_mad ≤ +0.2 = ROOT-9 rule).
+- POR run (this container /home/user/wt/hda/all): 6,403 women por (all families EXCEPT consort-ty), ~5,600 done at 21:15Z; logs log_part1.jsonl + log_chunk.*.jsonl; outputs out/. NOTHING of STEP 1 uploaded yet.
+- Inputs downloaded: all/por (6,403), all/fig (6,403), all/hd (2,804), all/tn (840).
+### Remaining (successor)
+1. When the POR run ends: counts per family (clean/nomark), 2 sample before/after per family to ROOT-10 (img/_review/hoa-dien-art/<family>/), look at 4× zooms of ~20 random per family (brows!), then cdn_sync out/*.webp to img/ (same names).
+2. twin.py fig → hd → tn per family from the por log (PORSRC = ORIGINAL por dir, not cleaned); QA table; upload.
+3. consort-ty: skip W2C_SKIP_KEYS_hoadien.txt (handover branch, 574 keys) + 16 W2c batch-1 keys; the 48 finished W2c keys (/home/user/wt/hda/w2c54.txt; ROOT-9 said 54) → fig+por now, hd only after W2d session_011xDdVSFebEJbrw8z3ZeoVU says.
+4. W12 session_011xDdVNfbdbZPTtegkYCYtp: 681 maid trung-y keys restored from sheets → clean after its message.
+5. Leftovers by hand: m44-t3 a26/a36 (old botched shrink), any pendant dots seen in QA.
+6. STEP 3: HD_ANCHOR table from the 'anchor' field of the logs (por px; code wants /4000 of img) — after fig/hd.
+If the container is gone: rerun clean3.py on por (≈1.5 h with 4 workers, OMP_NUM_THREADS=1) — tools are in the branch.
