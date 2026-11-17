@@ -30,7 +30,7 @@ function ilCoop(){try{return !!(window.COOPW&&COOPW.on)}catch(e){return false}}
 function ilGuest(){return ilCoop()&&COOPW.seat!=="a"}
 function ilPeople(){const L=[S];try{for(const v of rivals||[])if(v&&!v.coop&&L.indexOf(v)<0)L.push(v)}catch(e){}return L}
 /* every container slot of a person: chest, worn hairpin / robe (not the base robe), veil, pawned */
-function ilSlots(p){const o=[];if(!p)return o;for(const e of p.inv||[])if(e&&typeof e==="object")o.push(e);
+function ilSlots(p){const o=[];if(!p)return o;for(const e of p.inv||[])if(e&&typeof e==="object"&&e.k)o.push(e);
  const w=p.wd;if(w&&typeof w==="object")for(const sl of ["tram","y"]){const e=w[sl];if(e&&typeof e==="object"&&e.k&&e.from!=="base")o.push(e)}
  if(p.vl&&typeof p.vl==="object"&&p.vl.k)o.push(p.vl);for(const P of p.wdPawn||[])if(P&&P.e)o.push(P.e);return o}
 function ilHas(p,e){return ilSlots(p).indexOf(e)>=0}

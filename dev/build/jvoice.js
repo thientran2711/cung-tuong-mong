@@ -10,7 +10,7 @@
    kSay(sp, ls, s, o): fills {goi} {Goi} {xung} {Xung} {ten} (listener's title) {Ten} in s.
    kLine(key, pool, o): picks a line from a pool without repeating any line used for that key in the last BAL.voice.noRepeat tuần
      (least-recently-used when the pool is exhausted). pool = array of strings, or an object {warm:[…], cool:[…], cold:[…], any:[…]}
-     picked by o.m (falls back to any). Lines may carry the {goi}… tokens: pass o.sp / o.ls to fill them. Memory S.vl (personal, old saves
+     picked by o.m (falls back to any). Lines may carry the {goi}… tokens: pass o.sp / o.ls to fill them. Memory S.vom (personal, old saves
      start empty, co-op safe). kLines(key) = the pool registry for the repetition audit (dev/test/voice-rep.js). */
 (function(){
 const V=()=>BAL.voice;
@@ -87,6 +87,16 @@ function kSay(sp,ls,s,o){if(s==null)return s;s=String(s);if(!/\{(?:[Gg]oi|[Xx]un
   return s.replace(/\{goi\}/g,a.goi).replace(/\{Goi\}/g,cap(a.goi)).replace(/\{xung\}/g,a.xung).replace(/\{Xung\}/g,cap(a.xung)).replace(/\{ten\}/g,a.ten).replace(/\{Ten\}/g,cap(a.ten))}
 /* ---- varied pools, no repeat within BAL.voice.noRepeat tuần ---- */
 const REG={};
+/* line memory lives in S.vom. It was kept in S.vl, which is the worn VEIL slot (jveil): with no veil the memory looked like a worn veil
+   (Tư trang crashed on IT[undefined]) and taking the "veil" off put the memory into her chest as a fake item (item-ledger-solo, 17/11).
+   vomFix moves any old memory out of S.vl / her chest (old saves and live games) — once per call, cheap when clean. */
+const vomMem=x=>!!(x&&typeof x==="object"&&!Array.isArray(x)&&Object.keys(x).some(k=>{const v=x[k];return v&&typeof v==="object"&&("__l" in v||"__b" in v)}));
+function vomTake(p,x){p.vom=p.vom||{};for(const k of Object.keys(x)){const v=x[k];if(v&&typeof v==="object"&&("__l" in v||"__b" in v)){p.vom[k]=v;delete x[k]}}}
+function vomFix(p){if(!p||typeof p!=="object")return;
+ if(p.vl&&typeof p.vl==="object"&&vomMem(p.vl)){vomTake(p,p.vl);if(!p.vl.k)p.vl=null}else if(p.vl&&typeof p.vl==="object"&&!p.vl.k&&!Object.keys(p.vl).length)p.vl=null;
+ if(Array.isArray(p.inv))for(let i=p.inv.length-1;i>=0;i--){const e=p.inv[i];if(e&&typeof e==="object"&&!e.k&&vomMem(e)){vomTake(p,e);p.inv.splice(i,1)}}}
+window.vomFix=vomFix;
+(function(){if(typeof deser!=="function")return;const d0=deser;deser=function(){const r=d0.apply(this,arguments);try{if(typeof S!=="undefined"&&S)vomFix(S)}catch(e){}return r}})();
 function now(){try{return typeof wk==="function"?wk():0}catch(e){return 0}}
 function kLine(key,pool,o){o=o||{};let L=pool;if(!Array.isArray(L)){const m=o.m||(o.sp!=null||o.ls!=null?kAddr(o.sp,o.ls,o).m:"cool");L=(L[m]&&L[m].length?L[m]:[]).concat(L.any||[]);if(!L.length)L=[].concat(...Object.values(pool))}
   REG[key]=pool;if(!L.length)return"";
@@ -95,7 +105,7 @@ function kLine(key,pool,o){o=o||{};let L=pool;if(!Array.isArray(L)){const m=o.m|
      it rotates with the week + buổi, so both seats show the same line, and no line comes back within L.length buổi */
   if(o.shared!=null){let h=0;const sd=key+"|"+o.shared;for(let i=0;i<sd.length;i++)h=(h*31+sd.charCodeAt(i))|0;let t3=0;try{t3=now()*3+(S.buoi|0)}catch(e){}
     const line=untag(L[((Math.abs(h)+t3)%L.length+L.length)%L.length]);return o.sp!=null||o.ls!=null?kSay(o.sp,o.ls,line,o):line}
-  let mem={};try{S.vl=S.vl||{};mem=S.vl[key]=S.vl[key]||{}}catch(e){}
+  let mem={};try{vomFix(S);S.vom=S.vom||{};mem=S.vom[key]=S.vom[key]||{}}catch(e){}
   const t=now(),gap=V().noRepeat;
   /* a dialog rebuilt several times for ONE occurrence (PEND builders run on queue, show and reload) keeps its line: same key in the same buổi
      → the same line, so a rebuild does not use up the pool */
