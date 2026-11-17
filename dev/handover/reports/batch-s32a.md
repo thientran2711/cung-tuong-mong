@@ -67,3 +67,18 @@ kit-ico-rank: the FF deploys the rank Worker — check the GitHub Action run.
 - **MAIN s36 LOOK items** (same shots main e503c53e vs batch): (1) Fold rail blank square = load timing (fresh run: batch real icon); (2) iPad act-card brown boxes = SAME ON MAIN (art load timing); (3) 412x1058 header text under the TRẦN NỮ seal = SAME ON MAIN; (4) flower sprite over 'Ngọc Thanh các' = SAME ON MAIN → fix-worker list.
 - **NEW + FIXED**: kit-ico-rank root class `.krl` (rank list frame: border + radius) = the j63 act-card row LABEL class → every Cần/Tốn/Được/Mất label got a rounded box. Root renamed `.krlist` (jkrank, rank-e2e, KIT §87). Computed-style probe: label border 0px again. Scan of every class jkrank/jrank define vs old code: no other collision.
 - Final d4a850ce (main c114ab9e): quickcheck --runs 5 PASS (core gates PASS, buổi 647 vs 741, tab 301 vs 250), coop-e2e 63/63.
+
+## LANDED
+- main = **d4a850ce** (s32a, pushed by MAIN s36; rollback c114ab9e). Rank Worker Action 'Deploy rank Worker (Bảng vinh danh)' run 44154870834 = success on d4a850ce. Pages deploy success.
+- review/batch-s32a 579e8976 (= d4a850ce + kit-figure-mood-r2 + kit-fx-register-r1, gates PASS) was not pushed to main; the next batch can start from it.
+- CDN review folders batch-s31b-r2 and batch-s32a wiped.
+
+## HANDOVER (builder s32a → successor; context rollover)
+Next batch **s36a** (MAIN s36 orders 19:05-19:15Z), on main d4a850ce or newer:
+kit-figure-mood-r2 1d4e9796, kit-fx-register-r1 d665e39f, kit-rank-name-land 330c8bde, kit-display-room-r1 c6d84567, mirror-center-r2 0f0954fb (+ kit-thanh-bai/option-rows if its PASS arrives). NOT toil-looks5 (jtoil.js clash with mirror-center).
+Shortcut: review/batch-s32a 579e8976 already = main d4a850ce + kit-figure-mood-r2 + kit-fx-register-r1 (assemble: jfigseal.js, jemoseal.js after jrbatch; CHANGE line has 'con dấu tâm trạng…'). Merge origin/main into it, then the other three.
+Gates: quickcheck --runs 5, coop-e2e (alone), fig-seal.js <WxH@2> <out> dev/index.html, avatar-idcard.js <url> <WxH@2> <out>, rank-e2e, Fold/iPad shots (dev/tools/shots.js) → BATCH READY <sha> to MAIN s36 session_01UV1Szkkf3DbSpQipr7PJTy (it pushes).
+Then STEP 3 of the brief: balance chain baff0824 → 52d5092d → 37018e74 as batch s32b (re-run the life bot at landing, report early deaths).
+Recipe tips learned: main moves every ~20 min — re-merge right before BATCH READY; generated files (index.html, sw.js, assets.json) = ours then ONE rebuild; CHANGE.txt = batch line on top + main's lines; one-core-baseline.json = ours then `node dev/test/one-core-guard.js --update` (must not exceed live); assemble.py conflicts = ours + insert main's new module after the same neighbour; URL tests need a local `python3 -m http.server` + NO_PROXY=127.0.0.1; update-notes.js crashes on main too (test issue).
+Re-land notes: tuanluc-sync (perf: buổi ×2) and learn-scene-fix-2 (coop rebirth 'B reborn' FAIL with the batch) were removed by `git revert -m 1` inside batch history that is now on main → to land them, merge a NEW head of each (or revert the revert). pcard-facts-2 ab50f1c5 needs a rebase on main (76 box only for compact act cards; person dialogs keep kitOptFill).
+Fix-worker list (same on main): Fold rail icon blank on load, iPad act-card art loads late (brown boxes), 412x1058 header text under the TRẦN NỮ seal, flower sprite over the room label.
