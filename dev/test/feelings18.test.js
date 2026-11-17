@@ -1,5 +1,5 @@
 /* FEELINGS-18 checks (owner OD 17/11 ~19:10Z + ~19:25Z; jfeel.js, BAL.feel)
-   1 the set: EMO = 18 kinds with the VANPHONG names; old keys never stay (dau → buon heavy, muu → none, ghen → chanh, khoc → buon)
+   1 the set: EMO = 18 kinds with the VANPHONG names; old keys never stay (dau → buon heavy, muu → none, ghen = Chạnh lòng, khoc → buon)
    2 levels: summed strength of one kind's live causes → nhẹ / vừa / nặng; heavy names
    3 old save: stored causes / p.emo / emoH with old keys are converted on first read
    4 effects: odds by act category (her deck card a.o + NPC runAct), nightCh × Tình tứ, thiện cảm × Vui
@@ -18,10 +18,10 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
  const r1=await p.evaluate(()=>{const v=__F.R()[0];__F.clean(v);const o={keys:Object.keys(EMO).sort(),names:Object.assign({},EMO)};
   emoSet(v,"dau",50,"mất con (thử)");o.dau=[v.emo.k,v.emo.v];__F.clean(v);emoSet(v,"muu",80,"toan tính (thử)");o.muu=v.emo;__F.clean(v);
   emoSet(v,"ghen",40,"ghen (thử)");o.ghen=v.emo&&v.emo.k;__F.clean(v);emoSet(v,"khoc",40,"khóc (thử)");o.khoc=v.emo&&v.emo.k;return o});
- const WANT=["vui","tutin","hanghai","tinhtu","chuyentam","hungkhoi","tinhnghich","binh","buon","gian","lo","so","hothen","chan","khochiu","choang","hon","chanh"].sort();
+ const WANT=["vui","tutin","hanghai","tinhtu","chuyentam","hungkhoi","tinhnghich","binh","buon","gian","lo","so","hothen","chan","khochiu","choang","hon","ghen"].sort();
  ok(JSON.stringify(r1.keys)===JSON.stringify(WANT),'EMO = the 18 approved kinds',r1.keys);
- ok(r1.names.chanh==="Chạnh lòng"&&r1.names.hon==="Hờn dỗi"&&r1.names.binh==="Bình thản"&&r1.names.tinhtu==="Tình tứ",'VANPHONG names',r1.names);
- ok(r1.dau[0]==="buon"&&r1.dau[1]>=70&&r1.muu===null&&r1.ghen==="chanh"&&r1.khoc==="buon",'old keys convert at emoSet: dau→buon heavy, muu→none, ghen→chanh, khoc→buon',r1);
+ ok(r1.names.ghen==="Chạnh lòng"&&r1.names.hon==="Hờn dỗi"&&r1.names.binh==="Bình thản"&&r1.names.tinhtu==="Tình tứ",'VANPHONG names',r1.names);
+ ok(r1.dau[0]==="buon"&&r1.dau[1]>=70&&r1.muu===null&&r1.ghen==="ghen"&&r1.khoc==="buon",'old keys convert at emoSet: dau→buon heavy, muu→none, ghen stays (Chạnh lòng), khoc→buon',r1);
  /* 2 levels */
  const r2=await p.evaluate(()=>{const v=__F.R()[0];__F.clean(v);const L=[];emoSet(v,"gian",20,"bị mỉa mai (a)");L.push([feelLv(v,"gian"),faceKeyFor(v).lines[0]]);
   emoSet(v,"gian",25,"bị mỉa mai (b)");L.push([feelLv(v,"gian"),faceKeyFor(v).lines[0]]);emoSet(v,"gian",30,"bị làm nhục (c)");L.push([feelLv(v,"gian"),faceKeyFor(v).lines[0]]);
@@ -32,8 +32,8 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
  const r3=await p.evaluate(()=>{const v=__F.R()[1];__F.clean(v);const now=mkNow();v.__feelMig=0;
   v.mk=[{kd:"e:x",k:"dau",s:40,why:"mất con",k0:now,k1:now+50,w:0,n:1},{kd:"e:y",k:"muu",s:60,why:"tính kế",k0:now,k1:now+50,w:0,n:1},{kd:"e:z",k:"ghen",s:30,why:"bị cướp sủng",k0:now,k1:now+50,w:0,n:1}];
   v.emo={k:"muu",v:60,why:"tính kế",mk:1};v.emoH=[{k:"dau",v:40,why:"mất con",w:0}];v.__mkL={k:"muu",v:60};const e=emoGet(v);
-  return {mk:v.mk.map(m=>[m.k,m.s]),emo:e&&[e.k,e.v],h:v.emoH.map(h=>h.k),bad:v.mk.some(m=>["dau","muu","ghen","khoc"].includes(m.k))}});
- ok(!r3.bad&&r3.mk.some(x=>x[0]==="buon"&&x[1]>=70)&&r3.mk.some(x=>x[0]==="chanh")&&r3.h[0]==="buon"&&r3.emo&&r3.emo[0]==="buon",'old save: stored dau/muu/ghen causes converted on first read',r3);
+  return {mk:v.mk.map(m=>[m.k,m.s]),emo:e&&[e.k,e.v],h:v.emoH.map(h=>h.k),bad:v.mk.some(m=>["dau","muu","khoc"].includes(m.k))}});
+ ok(!r3.bad&&r3.mk.some(x=>x[0]==="buon"&&x[1]>=70)&&r3.mk.some(x=>x[0]==="ghen")&&r3.h[0]==="buon"&&r3.emo&&r3.emo[0]==="buon",'old save: stored dau/muu/ghen causes converted on first read',r3);
  /* 4 effects */
  const r4=await p.evaluate(()=>{const v=__F.R()[0];__F.clean(v);const o={};o.none=feelOdPts(v,"Học thêu");emoSet(v,"chuyentam",75,"chép kinh trọn quyển");o.focus=feelOdPts(v,"Học thêu");o.other=feelOdPts(v,"Hạ độc");
   __F.clean(S);S.mk=[];S.emo=null;const D=BAL.feel.od;let fk=null;const a=deck.find(x=>{if(!x||x.o==null||x.o>=100||x.exam||x.o>=BAL.odds.hi-6)return false;const c=kitActCat(String(x.n).replace(/<[^>]+>/g,""));fk=Object.keys(D).find(k=>D[k].c&&D[k].c.includes(c)&&D[k].p[2]>0);return !!fk});o.card=null;

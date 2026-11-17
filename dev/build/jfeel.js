@@ -3,7 +3,7 @@
    ONE feeling system, converted (not rebuilt): jemo p.emo / emoSet / emoEv, jmoodknow causes p.mk (khắc timers, summed seal), jmood her bar S.mood.v,
    jemoact outbursts. This piece:
    1. THE SET: 18 kinds (Sims 16 renamed + Hờn dỗi + Chạnh lòng). Old keys are converted at the ONE entry point (emoSet) and in stored causes
-      (mkSync): dau → buon at the heavy level, muu → no feeling (scheming is an INTENT now, see 4), ghen → chanh, khoc → buon (crying is an ACT).
+      (mkSync): dau → buon at the heavy level, muu → no feeling (scheming is an INTENT now, see 4), khoc → none (crying is an ACT); the short jealousy feeling keeps the key ghen, named Chạnh lòng.
    2. LEVELS: the level of a kind = the summed strength of that kind's live causes (≥ BAL.feel.lv[0] nhẹ, [1] vừa, [2] nặng); heavy names (Hân hoan,
       Đau khổ, Phẫn nộ, Bấn loạn, Khiếp đảm, Nhục nhã) are the VANPHONG words of the heavy level.
    3. EFFECTS per kind per level (numbers BAL.feel): odds of acts by the act's kit category (kitActCat) for her deck cards and every runAct (NPCs too),
@@ -20,10 +20,10 @@ Object.assign(BAL,{feel:{
  /* level bands on the summed strength of one kind's live causes: nhẹ ≥ lv[0], vừa ≥ lv[1], nặng ≥ lv[2] */
  lv:[15,40,70],
  /* sign of each kind on the mood bar (good +, bad −); NPC bar = Σ sign × strength × bar.k, clamped ±100 (her bar is S.mood.v, jmood) */
- sg:{vui:1,tutin:1,hanghai:1,tinhtu:1,chuyentam:1,hungkhoi:1,tinhnghich:1,binh:0,buon:-1,gian:-1,lo:-1,so:-1,hothen:-1,chan:-1,khochiu:-1,choang:-1,hon:-1,chanh:-1},
+ sg:{vui:1,tutin:1,hanghai:1,tinhtu:1,chuyentam:1,hungkhoi:1,tinhnghich:1,binh:0,buon:-1,gian:-1,lo:-1,so:-1,hothen:-1,chan:-1,khochiu:-1,choang:-1,hon:-1,ghen:-1},
  bar:{k:.6},
  /* her bar push per feeling point for the new kinds (extends BAL.mood.emo; old kinds keep their numbers) */
- mood:{tutin:.25,hanghai:.25,tinhtu:.3,chuyentam:.2,hungkhoi:.25,tinhnghich:.25,hothen:-.3,chan:-.15,khochiu:-.15,choang:-.1,hon:-.2,chanh:-.2},
+ mood:{tutin:.25,hanghai:.25,tinhtu:.3,chuyentam:.2,hungkhoi:.25,tinhnghich:.25,hothen:-.3,chan:-.15,khochiu:-.15,choang:-.1,hon:-.2,ghen:-.2},
  /* ODDS of acts by kit category (kitActCat): c = categories, p = points at [nhẹ, vừa, nặng] (bad kinds negative); all feelings together capped ±max */
  od:{max:6,
   vui:{c:["giao-thiep","ban-thuong"],p:[1,2,3]},
@@ -42,27 +42,27 @@ Object.assign(BAL,{feel:{
   khochiu:{c:["hau-ha","hoc-tap","giao-thiep"],p:[0,-1,-2]},
   choang:{c:["hoc-tap","giao-thiep","muu-ke"],p:[-1,-2,-3]},
   hon:{c:["giao-thiep"],p:[-1,-2,-3]},
-  chanh:{c:["giao-thiep"],p:[0,-1,-2]}},
+  ghen:{c:["giao-thiep"],p:[0,-1,-2]}},
  /* act weights of NPCs (jemo EMO_W shape: harm / kind / idle / an act key), scaled by strength like every feeling */
  w:{tutin:{kind:1.2,ally:1.3,accuse:1.3},hanghai:{idle:.7,kind:1.1},tinhtu:{kind:1.2,visit:1.4},chuyentam:{idle:.9,harm:.8},hungkhoi:{kind:1.2,idle:.9},
   tinhnghich:{kind:1.3,visit:1.3,harm:.8},hothen:{visit:.5,idle:1.4,kind:.8,harm:.8},chan:{idle:1.3,visit:1.2},khochiu:{harm:1.1,idle:1.3,kind:.9},
-  choang:{harm:.7,kind:.8,idle:1.5},chanh:{harm:1.3,steal:1.6,block:1.6,trip:1.4,rumor:1.4,kind:.8}},
+  choang:{harm:.7,kind:.8,idle:1.5},ghen:{harm:1.3,steal:1.6,block:1.6,trip:1.4,rumor:1.4,kind:.8}},
  /* odds points of any act at strength 100 (jemo EMO_OD shape, "a little") and servants' Lòng a month by their own feeling (EMO_LOY shape) */
- odAll:{tutin:1,hanghai:1,tinhtu:0,chuyentam:1,hungkhoi:0,tinhnghich:0,hothen:-1,chan:0,khochiu:-1,choang:-1,chanh:0},
- loy:{tutin:1,hanghai:2,tinhtu:0,chuyentam:1,hungkhoi:1,tinhnghich:1,hothen:-1,chan:-1,khochiu:-1,choang:0,chanh:-1},
+ odAll:{tutin:1,hanghai:1,tinhtu:0,chuyentam:1,hungkhoi:0,tinhnghich:0,hothen:-1,chan:0,khochiu:-1,choang:-1,ghen:0},
+ loy:{tutin:1,hanghai:2,tinhtu:0,chuyentam:1,hungkhoi:1,tinhnghich:1,hothen:-1,chan:-1,khochiu:-1,choang:0,ghen:-1},
  /* the Emperor's tablet chance × (Tình tứ of the consort, by level) */
  night:{tinhtu:[1.03,1.06,1.1]},
  /* thiện cảm gains of others toward a joyful person × (1 + this, by level); a sulk drifts the sulker's thiện cảm toward its target by this a day */
  aff:{vui:[.05,.1,.15]},honDrift:[0,-1,-2],
  /* old keys → the set (owner 19:10Z: muu→binh, dau→buon heavy; ghen = the short jealousy feeling Chạnh lòng; khóc is an act) */
- old:{dau:"buon",ghen:"chanh",khoc:"buon",muu:null},
+ old:{dau:"buon",khoc:"buon",muu:null},
  /* timers in khắc of the new kinds when a cause has no event key (BAL.mood2.dur.k shape) */
- dur:{tutin:12,hanghai:8,tinhtu:12,chuyentam:8,hungkhoi:8,tinhnghich:6,hothen:16,chan:12,khochiu:6,choang:3,chanh:12},
+ dur:{tutin:12,hanghai:8,tinhtu:12,chuyentam:8,hungkhoi:8,tinhnghich:6,hothen:16,chan:12,khochiu:6,choang:3,ghen:12},
  /* event → feeling of the new kinds (jemo EMO_EV shape [kind, strength]); a trait filter on top (EMO_TR shape) */
  ev:{night:["tinhtu",35],contestWin:["tutin",45],studyOk:["chuyentam",20],artOk:["hungkhoi",25],kidPlay:["tinhnghich",25],restOk:["hanghai",20],
   slap:["hothen",45],shamed:["hothen",40],confinedLong:["chan",30],idle:["chan",15],sick:["khochiu",30],weatherBad:["khochiu",15],dazed:["choang",40]},
- tr:{"Kiêu ngạo":{selfUp:["tutin",1.2]},"Tham vọng":{selfUp:["tutin",1.3],rivalUp:["chanh",1.3],otherKid:["chanh",1.2]},"Xảo quyệt":{rivalUp:["chanh",1.2],otherKid:["chanh",1.3]},
-  "Nóng nảy":{rivalUp:["chanh",1.6],otherKid:["chanh",1.6]},"Thật thà":{rivalUp:["chanh",.6]},"Kín đáo":{selfUp:["chuyentam",.8]}},
+ tr:{"Kiêu ngạo":{selfUp:["tutin",1.2]},"Tham vọng":{selfUp:["tutin",1.3],rivalUp:["ghen",1.3],otherKid:["ghen",1.2]},"Xảo quyệt":{rivalUp:["ghen",1.2],otherKid:["ghen",1.3]},
+  "Nóng nảy":{rivalUp:["ghen",1.6],otherKid:["ghen",1.6]},"Thật thà":{rivalUp:["ghen",.6]},"Kín đáo":{selfUp:["chuyentam",.8]}},
  /* a consort's quiet life: chance % a tuần of one small feeling by trait (true cause words; SECRET class) */
  life:{o:30,v:22,by:{"Ân cần":["tinhnghich","chơi đùa với cung nữ trong vườn"],"Kín đáo":["chuyentam","chép kinh trọn một quyển"],"Khiêm nhường":["chuyentam","thêu xong bức hoa"],
   "Kiêu ngạo":["tutin","được khen dung mạo trong buổi thỉnh an"],"Tham vọng":["hanghai","lo liệu việc cung đâu ra đấy"],"Trọng nghĩa":["vui","được bạn cũ gửi thư"],
@@ -70,7 +70,7 @@ Object.assign(BAL,{feel:{
  /* INTENT (ý đồ). from = min level of a source kind; bar = the person's bar at or under this; o = odds a buổi (+ trait points tr), clamped BAL.odds;
     dur = khắc it lasts, renewed while the source holds; fade = khắc after the source is gone; show: face odds = o − Tâm cơ × tc (clamped BAL.odds,
     one hashed draw per viewer per day); w = act weights while it lasts (the old Toan tính weights), danger = added to danger toward the target */
- intent:{from:{chanh:2,gian:2,hon:2},bar:-25,o:25,
+ intent:{from:{ghen:2,gian:2,hon:2},bar:-25,o:25,
   tr:{"Xảo quyệt":20,"Tham vọng":15,"Thù dai":15,"Kiêu ngạo":5,"Nóng nảy":5,"Ân cần":-25,"Khiêm nhường":-15,"Trọng nghĩa":-15,"Thật thà":-10,"Rộng lượng":-20},
   dur:48,fade:16,show:{o:70,tc:.6},w:{frame:1.5,plant:1.5,ally:1.3,bribe:1.5,bribeksp:1.5,feign:1.6,rumor:1.3,provoke:.8},danger:8}
 ,
@@ -81,25 +81,25 @@ Object.assign(BAL,{feel:{
  act:{o:35,meWk:2,def:2,
   /* the owner's own pairs (OD 18:33Z: "giận thì đập đồ ... buồn thì ... khóc"): the main act of a kind is taken with odds mainP % when the person's nết allows it, else the nết picks */
   main:{buon:"khoc",gian:"dapdo",lo:"matngu",so:"tron",hothen:"caobenh",chan:"bodo",hon:"bove",vui:"thuong",tinhtu:"moi"},mainP:60,cd:{def:24,buon:24,gian:24,so:36,tron:36,hothen:48,chan:24,hon:24,ghen:24,vui:48,tinhtu:72},
-  g:{buon:"buon",gian:"gian",lo:"so",so:"tron",hothen:"hothen",chan:"chan",hon:"hon",chanh:"ghen",vui:"vui",tinhtu:"tinhtu"},
+  g:{buon:"buon",gian:"gian",lo:"so",so:"tron",hothen:"hothen",chan:"chan",hon:"hon",ghen:"ghen",vui:"vui",tinhtu:"tinhtu"},
   kh:{khoc:1,tui:1,sk:1,dapdo:1,mang:1,danh:1,khac:1,pham:1,noi:1,quo:1,boan:4,thu:1,matngu:"buoi",emat:"buoi",soat:2,cau:2,cham:1,thuong:1,khoe:1,tiec:2,hat:2,ban:1,eyen:2,
    tron:"buoi",caobenh:"buoi",bodo:2,bove:2,moi:2,okhoc:1,kquay:1,kbo:2},
   face:{khoc:"khoc",tui:"khoc",okhoc:"khoc",kquay:"khoc",dapdo:"phanno",mang:"phanno",danh:"phanno",khac:"phanno",pham:"phanno",noi:"phanno",quo:"phanno",cai:"phanno",
    qgian:"phanno",matngu:"matngu",emat:"matngu",tron:"runso",soat:"runso"},
   fx:{tron:{vent:12,danh:1},caobenh:{vent:12,danh:1},bodo:{vent:10,tai:1},bove:{vent:12,rel:5},moi:{vent:8,sung:2,ghen:2,oan:2}}}}});
-const FEEL_KEY_CHANH="chanh";
+const FEEL_KEY_CHANH="ghen";/* MOOD-MEM keeps the feeling key "ghen", named EMO_GHEN ("Chạnh lòng", jemo); the score v.ghen stays "Ghen" */
 /* VANPHONG names (player words): light / middle name, heavy-level name, level words */
 const FEEL_N={vui:"Vui",tutin:"Tự tin",hanghai:"Hăng hái",tinhtu:"Tình tứ",chuyentam:"Chuyên tâm",hungkhoi:"Hứng khởi",tinhnghich:"Tinh nghịch",binh:"Bình thản",
- buon:"Buồn",gian:"Giận",lo:"Lo âu",so:"Sợ",hothen:"Hổ thẹn",chan:"Chán chường",khochiu:"Khó chịu",choang:"Choáng váng",hon:"Hờn dỗi",chanh:"Chạnh lòng"};
+ buon:"Buồn",gian:"Giận",lo:"Lo âu",so:"Sợ",hothen:"Hổ thẹn",chan:"Chán chường",khochiu:"Khó chịu",choang:"Choáng váng",hon:"Hờn dỗi",ghen:(typeof EMO_GHEN==="string"?EMO_GHEN:"Chạnh lòng")};
 const FEEL_HEAVY={vui:"Hân hoan",buon:"Đau khổ",gian:"Phẫn nộ",lo:"Bấn loạn",so:"Khiếp đảm",hothen:"Nhục nhã"};
 const FEEL_LVN=["","nhẹ","vừa","nặng"];
 const FEEL_INTENT_N="Toan tính";
 /* seal art keys while the new paintings are missing (Foreman C ROOT-8 order 19:26Z): new key → an existing seal (never drawn here) */
 const FEEL_FB={tutin:"vui",hanghai:"vui",tinhtu:"vui",chuyentam:"binh",hungkhoi:"vui",tinhnghich:"vui",hothen:"buon",chan:"buon",khochiu:"lo",choang:"lo",
- hon:"gian",chanh:"ghen",khoc:"dau",phanno:"gian",runso:"so",matngu:"lo",toantinh:"muu"};
+ hon:"gian",khoc:"dau",phanno:"gian",runso:"so",matngu:"lo",toantinh:"muu"};
 /* ONE group map for every older table keyed by the old 9 kinds (EMO_* shapes, reaction groups, colours, flavours, trong/why factors):
    a new kind reads the table entry of its nearest old kind. feelGrp(k) → that key; feelIn(T,k) → k when T has it, else its group key. */
-const FEEL_G={tutin:"vui",hanghai:"vui",tinhtu:"vui",hungkhoi:"vui",tinhnghich:"vui",chuyentam:"binh",hothen:"buon",chan:"buon",khochiu:"gian",choang:"so",hon:"gian",chanh:"ghen"};
+const FEEL_G={tutin:"vui",hanghai:"vui",tinhtu:"vui",hungkhoi:"vui",tinhnghich:"vui",chuyentam:"binh",hothen:"buon",chan:"buon",khochiu:"gian",choang:"so",hon:"gian",ghen:"ghen"};
 function feelGrp(k){return FEEL_G[k]||k}
 function feelIn(T,k){return T&&k in T?k:feelGrp(k)}
 function feelBad(k){try{return (BAL.feel.sg[k]||0)<0}catch(e){return false}}
@@ -111,7 +111,7 @@ function feelWorld(){try{return typeof worldOn!=="function"||!!worldOn()}catch(e
 const fB=()=>BAL.feel;
 /* ---------- 1. THE SET ---------- */
 (function(){try{
- for(const k of ["dau","muu","khoc"])delete EMO[k];if(FEEL_KEY_CHANH!=="ghen")delete EMO.ghen;
+ for(const k of ["dau","muu","khoc"])delete EMO[k];
  Object.assign(EMO,FEEL_N);
  const B=fB();Object.assign(EMO_W,B.w);Object.assign(EMO_OD,B.odAll);Object.assign(EMO_LOY,B.loy);for(const k in FEEL_N){if(EMO_NIGHT[k]==null)EMO_NIGHT[k]=1;if(EMO_DECAY[k]==null)EMO_DECAY[k]=Number.MIN_VALUE}
  if(BAL.mood&&BAL.mood.emo)for(const k in B.mood)if(BAL.mood.emo[k]==null)BAL.mood.emo[k]=B.mood[k];
