@@ -48,9 +48,12 @@ PRIORITY #1 CHECK: OD 17/11 ~23:30Z (smudge = CODE on the makeup layer, not Magn
 - Pink streak run: BAL.looks.smuFx.blush.sgain [0,1,.5,.5] (half opacity at vừa/nặng), streak breakup .3, extra blur .05u+.03u so no band edges; the wide wash (feathered bleed) unchanged. nhẹ untouched.
 - Test harness now waits for the picture to load before the shot.
 
+## r9 (s39: near-eye lash runs lost to the oval; jaw edge too firm)
+- mkFace(): two ovals from the same face points: wash / pink run / lip drag = inset .06u, feather .3u (≈ 13 % of the face width on the jaw curve, no firm edge); lash runs = roomier oval (eye extents ±.55u, no inset, feather .12u) so the under-eye area of BOTH eyes is inside → nặng shows 3 runs per eye again (near eye included). vừa short run floor-visible (pair [.55, 1.5], breaks floored at .8).
+
 ## Open items / follow-ups
 - Small figure faces (~40 px): nhẹ barely visible, vừa/nặng read as a tear stain.
 - Shots outside git; built root files not committed.
 
 ## State
-branch review/smudge-code 52c95a3 (pushed). Waiting for verdict.
+branch review/smudge-code 0cfc056 (pushed). Waiting for verdict.
