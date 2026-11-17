@@ -282,7 +282,7 @@ function toilChipPaint(){try{const tt=document.getElementById("k3tt");if(!tt)ret
 /* on window (capture): jk3's own top-row click handler is a document capture listener registered earlier */
 window.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest('[data-k3="toil"],[data-hx="toil"]');if(!b)return;e.stopImmediatePropagation();e.preventDefault();
  if(toilCanStart()){const i=Array.isArray(deck)?deck.findIndex(a=>a&&a.toil&&!a.done):-1;if(i>=0){act(i);return}if(!can(BAL.toil.khac))return;spend(BAL.toil.khac);toilOpen();return}
- const rec=toilToday(S);try{kpPop(b,rec?`<p>Sáng nay ta điểm trang: y phục ${TOIL_DV[rec.dv]}, ${rec.makeup?"dung nhan "+toilMkW(toilMk(rec))+" ("+rec.score+" phần)":"để "+toilMkW("moc")}.</p><p class="past">Người gặp ta hôm nay nhìn theo nết mình; thẻ việc ghi trước.</p>`
+ const rec=toilToday(S);try{kpPop(b,rec?`<p>Sáng nay ta điểm trang: y phục ${TOIL_DV[rec.dv]}, ${rec.makeup?"dung nhan "+toilMkW(toilMk(rec)):"để "+toilMkW("moc")}.</p><p class="past">Người gặp ta hôm nay nhìn theo nết mình; thẻ việc ghi trước.</p>`
   :`<p>Hôm nay ta chưa điểm trang: mặc như hôm qua, ${toilMkW("moc")}.</p><p class="past">Mỗi buổi sáng có việc “Điểm trang” trong Hành sự (1 khắc).</p>`)}catch(x){}},true);
 
 /* ---------- the mini-games ---------- */
@@ -447,10 +447,10 @@ function toilFinish(made){const st=TOIL.st;if(!st)return;try{if(KG82.run&&KG82.r
  /* makeup-lux: the day's verdict reads the ONE total, now with the face in it (clothes + jewels + makeup level) */
  try{const d=toilDress(S,st.F);st.dv=d.v;st.style=d.style;S.toilette.dv=d.v;S.toilette.style=d.style}catch(e){}
  const mk=toilMk(S.toilette);const good=mk==="dep"||mk==="tuyet";const tOk=made&&good?true:made&&mk==="vung"?false:null;if(tOk===null)try{kitSfx("mirror")}catch(e){}/* win / lose: kg82ShowRes(html,tOk) below plays it once */
- log(`Sáng nay ta điểm trang: y phục ${TOIL_DV[st.dv]}, ${made?`dung nhan ${toilMkW(mk)} (${score} phần)`:`để ${toilMkW("moc")}`}.`);
+ log(`Sáng nay ta điểm trang: y phục ${TOIL_DV[st.dv]}, ${made?`dung nhan ${toilMkW(mk)}`:`để ${toilMkW("moc")}`}.`);
  const rows=[["Y phục",`<span class="ef ${st.style==="fit"?"g":"r"}"><b>${TOIL_DV[st.dv]}</b></span>`]];/* the day's verdict: the ONE total (clothes + jewels + face + pet) */
  if(made){const P=st.parts;rows.push(["Kẻ mày",`<span class="ef t">${Math.round(100*(P.brow||0))}/100</span>`],["Đánh phấn",`<span class="ef t">${Math.round(100*(P.powder||0))}/100</span>`],["Chấm son",`<span class="ef t">${Math.round(100*(P.son||0))}/100</span>`],
-  ["Phần chơi",`<span class="ef t">${Math.round(raw*(100-BAL.toil.skillShare)/100)}</span>`],[`Tay nghề (Họa bậc ${sk.hoa}, Sắc ${S.sac|0}${sk.mama?", "+sk.mama.name+" giúp":""})`,kitChip("cộng",bonus,"g")],["Dung nhan",`<span class="ef ${good?"g":mk==="vung"?"r":"t"}"><b>${TOIL_MK[mk]} · ${score} phần</b></span>`])}
+  ["Phần chơi",`<span class="ef t">${Math.round(raw*(100-BAL.toil.skillShare)/100)}</span>`],[`Tay nghề (Họa bậc ${sk.hoa}, Sắc ${S.sac|0}${sk.mama?", "+sk.mama.name+" giúp":""})`,kitChip("cộng",bonus,"g")],["Dung nhan",`<span class="ef ${good?"g":mk==="vung"?"r":"t"}"><b>${TOIL_MK[mk]}</b></span>`])}
  else rows.push(["Dung nhan",`<span class="ef n">${TOIL_MK.moc}</span>`]);
  /* makeup-lux (OD L1639): the look's xa xỉ word + number (judged only at events, inside the ONE total, never this face alone) */
  rows.push(["Xa xỉ son phấn",toilLvChips(mk)]);/* the TOTAL is shown by MAIN's kit display (it reads luxTotal) */
@@ -939,7 +939,7 @@ function toilReveal(o,done){let fin=false;try{if(typeof kmStage==="function"&&km
   let porH="";try{const pv=toilRow(pf);if(pv&&pv[6]){const Ap=pv[8]||1.3,wp=100*v[6]/pv[6],hp=wp*Ap/A,pfx=kitFxLayers(S,pf);
    porH=`<span class="ktrv-pw" style="left:${(v[0]-pv[0]*wp/100).toFixed(2)}%;top:${(v[1]-pv[1]*hp/100).toFixed(2)}%;width:${wp.toFixed(2)}%;height:${hp.toFixed(2)}%"><img src="${IMG_U("img/"+pf)}" alt=""><span class="kfxf">${pfx}</span></span>`}}catch(e){}
   const fx=(()=>{try{return kitFxLayers(S,ff)}catch(e){return""}})();
-  const rows=[["Dung nhan",`<span class="ef ${o.good?"g":look==="vung"?"r":"t"}"><b>${TOIL_MK[look]}${o.made?` · ${o.score} phần`:""}</b></span>`]];if(o.made)rows.push(["Kiểu",o.pre]);rows.push(["Xa xỉ son phấn",toilLvChips(look)]);rows.push(["Hôm nay",TOIL_HINT[look]]);
+  const rows=[["Dung nhan",`<span class="ef ${o.good?"g":look==="vung"?"r":"t"}"><b>${TOIL_MK[look]}</b></span>`]];if(o.made)rows.push(["Kiểu",o.pre]);rows.push(["Xa xỉ son phấn",toilLvChips(look)]);rows.push(["Hôm nay",TOIL_HINT[look]]);
   const html=`<div class="ktrv ktrv-${look}" style="--ktpx:${v[0]}%;--ktpy:${(v[1]-v[6]*.25/A).toFixed(2)}%"><div class="ktrv-cam"><i class="ktrv-plate" style="background-image:url(${IMG_U("img/toil-mirror-room.webp")})"></i><i class="ktrv-lt"></i>`+
    `<div class="ktrv-fig"><span class="ktrv-fw"><img src="${IMG_U("img/"+ff)}" alt=""><span class="kfxf">${fx}</span>${porH}</span></div></div>`+
    `<div class="ktrv-card kgr">${kitRows(rows)}</div></div>`;
