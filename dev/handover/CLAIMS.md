@@ -881,7 +881,7 @@
 | WEATHER-KHAC-2 delta: every j12 kind per khắc + levels + world effects (opus; owner OD L1665 ~17:40Z (3); main s34) | review/weather-khac | C-AG | session_01UV1SzhyGUZ4FTxi1y3XNvr | RUNNING | 17/11 17:18Z |
 | face-w404 fix round 2 (sonnet; CDN prefix vs index key; seeded same-face proof) | review/face-w404 | D | session_01964izEN55ZZFTgoSkJ3BVj | DONE SẴN SÀNG KIỂM c81fd72c (archived) → r1 reviewer re-reviews | 17/11 17:22Z |
 | coop-thin-b-r3 LIVE b5d109fe0 (main e9bbc4d6 → b5d109fe; rollback e9bbc4d6) | review/land-coop-thin-b-r3 | B | session_01N1tNP34QePRanPQevmttcs | LIVE | 17/11 17:25Z |
-| kit-rank-name r1 successor (continues 9f54a9a1; report HANDOVER) | review/kit-rank-name | MAIN s35 | session_01UV1SzgiSj7gRNYszv9YgxE | RUNNING | 17/11 17:26Z |
+| kit-rank-name r1 successor (continues 9f54a9a1; report HANDOVER) | review/kit-rank-name | MAIN s35 | session_01UV1SzgiSj7gRNYszv9YgxE | SẴN SÀNG KIỂM a4ccfc74 on review/kit-rank-name-r1 | 17/11 17:26Z |
 | AG-MOODKNOW moodCauseKnown(pid): secret vs public palace info (opus; owner OD ~L1668 17:55Z (1); main s35) | review/ag-moodknow | C-AG | session_01UV1Szkwcqu7s9tTHPUXBrh | RUNNING | 17/11 17:28Z |
 | REVIEW coop-b1-regress 24d8eb38 (sonnet SMALL, tests only; brief briefs/review-coop-b1-regress.md) | review/coop-b1-regress-r1 | B | session_01N1tNP2QjFM4j8yePrC6qwU | RUNNING | 17/11 17:30Z |
 | emo-seal ANIM: every mood seal animates everywhere (one kit part) + khóc/hờn seals (OD 18:00Z) — folded into kit-figure-mood; art = Foreman C | review/kit-figure-mood | MAIN s35 | session_01UV1SzjLSjT2E1w24wsPwS5 | RUNNING | 17/11 17:32Z |
