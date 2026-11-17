@@ -36,7 +36,7 @@ function pool(){const L=S.emp.likes,K=S.emp.known,tt=has("trongtai")?2:1;
  const A=[
   {n:"Đánh đàn ở ngự hoa viên",t:K.music?`Tấu ${L.music}, khúc ngài yêu thích.`:"Đợi Hoàng thượng đi ngang.",c:{suc:-10},o:od(BAL.odb.j2.odO+S.tai/3+artOE(S,"cam")+(K.music?15:0)+mm()),w:{sung:K.music?9:7},l:{sung:-1}},
   {n:"Dâng canh ở ngự thư phòng",t:K.dish?`Tự tay nấu ${L.dish}, món ngài thích.`:"Tự tay nấu, sâm mua bằng bạc riêng.",c:{bac:-15,suc:-5},o:od(BAL.odb.j2.odO_2+S.sac/5+(K.dish?15:0)+mm()),w:{sung:K.dish?8:6},l:{danh:-2}},
-  {n:"Múa trong yến tiệc",t:"Cả hậu cung nhìn vào.",c:{suc:-20,bac:-10},o:od(BAL.odb.j2.odO_3+S.sac/2*(has("mesac")?1.3:1)+artO(S,"vu")),w:{sung:12,danh:4},l:{danh:-6},x:`phi tần ghen +${ghenN(BAL.ghen.dance)}`,go:()=>ghenAll(BAL.ghen.dance)},
+  {n:"Múa trong yến tiệc",t:"Cả hậu cung nhìn vào.",c:{suc:-20,bac:-10},o:od(BAL.odb.j2.odO_3+S.sac/2*(has("mesac")?1.3:1)+artO(S,"vu")),w:{sung:12,danh:4},l:{danh:-BAL.tw.g.vu[2]},x:`phi tần ghen +${ghenN(BAL.ghen.dance)}`,go:()=>ghenAll(BAL.ghen.dance)},
   {n:"Cắm hoa dâng Hoàng thượng",t:K.flower?`Một bình ${L.flower}, loài hoa ngài yêu.`:"Chưa biết ngài thích hoa gì.",c:{bac:-5,suc:-5},o:K.flower?100:od(BAL.odb.j2.odO_4),w:{sung:K.flower?5:2},l:{}},
   {n:"Cài tai mắt",t:"Mua chuộc cung nữ các cung khác.",c:{bac:-25},o:od(BAL.odb.j2.odO_5),w:{mat:2},l:{danh:-3}},
   {n:"Nghỉ ngơi dưỡng sức",t:"Uống thuốc bổ, ngủ sớm.",c:{},o:100,w:{suc:20},l:{}},
