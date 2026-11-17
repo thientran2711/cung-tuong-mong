@@ -6,8 +6,9 @@ const WX={Xuân:[["hoa đào bay","petal",0],["mưa phùn","rain",1],["sương s
 /* flags: 1 wet, 2 heat, 3 storm, 4 heavy snow */
 /* weather-khac (owner 17/11 (g) "nắng gắt ... trưa chiều âm u ... tối trời mưa"): IN-SEASON states the day can turn into khắc by khắc (jwxk.js).
    Never drawn as the tuần's first weather (the forecast keeps WX); a season's allowed states = WX[sea] + WX_KH[sea] (wxStates). */
-const WX_KH={Xuân:[["trời âm u","cloud",0],["mưa rào","rain",1]],Hạ:[["trời âm u","cloud",0],["mưa rào","rain",1]],
- Thu:[["trời âm u","cloud",0],["mưa thu","rain",1]],Đông:[["trời âm u","cloud",0]]};
+/* weather-khac-2 (owner 17/11 ~17:40Z (3) "dông bão nè, gió nè ... gió nhiều"): + wind gusts (gió lớn / gió bấc) and fog mornings (sương mù) */
+const WX_KH={Xuân:[["trời âm u","cloud",0],["mưa rào","rain",1],["gió lớn","wind",0]],Hạ:[["trời âm u","cloud",0],["mưa rào","rain",1],["gió lớn","wind",0]],
+ Thu:[["trời âm u","cloud",0],["mưa thu","rain",1],["sương mù","mist",0]],Đông:[["trời âm u","cloud",0],["sương mù","mist",0],["gió bấc","wind",0]]};
 function wxStates(sea){return (WX[sea]||[]).concat(WX_KH[sea]||[])}
 /* what a weather does to Hoàng thượng's mood (+ storm count): at the tuần roll AND when the day turns into it (jwxk) — one rule */
 function wxMood(w){if(w[2]===3){if(has("nongnay"))S.emp.mood=3;else if(S.emp.mood<2)S.emp.mood=2;S.storms=(S.storms||0)+1}
