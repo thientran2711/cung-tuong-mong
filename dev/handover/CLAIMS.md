@@ -965,3 +965,4 @@ base-body test (m09 body template, edit clothes only) | img/_review/maid-consort
 hairpin try-on page (figure w/o pins + pin sprites + HTML, reuse Phòng Thử Y Phục) | img/_review/hairpin-tryon | session_011xDdVNmPeSUSmSWanPWpLQ | RUNNING | 2026-11-18T00:58Z (Foreman C ROOT-12 → ROOT-13)
 | balance-2 fix round 2 (opus; r1 FAIL 2 @371e3a22, Danh wall) | review/balance-2 | D | session_01964izFNvwWQ5k8z1K6nAZG | RUNNING | 17/11 22:41Z |
 looks-2 overlay art (fx-stain-tra/uot, smudge, ink, pox, scars, messy hair) | img/_review/looks-2 → exact fx-* keys | session_011xDdVPQnBXe5afV2AtnKsL | RUNNING | 2026-11-18T01:05Z (Foreman C ROOT-12 → ROOT-13)
+| batch s38a LIVE c7375c0c (main 99f3978d → c7375c0c; ROLLBACK 99f3978d): D dudo-blank-r1 2270c4c5 (Fold Dư đồ blank map, owner bug) | review/batch-s38a | MAIN s38 | session_01UV1SzjA6P5mZskv3JKn3BV | LIVE | 17/11 22:43Z |
