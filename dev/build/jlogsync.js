@@ -159,6 +159,6 @@ if(typeof PEND==="object"&&PEND.night2){const n2=PEND.night2;PEND.night2=functio
  o.go=function(){let mk=null,mq=0;const nf=nightFx;nightFx=function(){const r=nf.apply(this,arguments);mk=lsSnap();mq=S.logSeq||0;return r};let r;try{r=g.apply(this,arguments)}finally{nightFx=nf}
   try{if(mk&&S&&!S.dead){/* what its own lines (e.g. "Đức +3 vì …") do not already say */const P=lsFix(lsLines((S.logSeq||0)-mq),mk);
    /* folded into the choice line "Đêm thị tẩm: <choice> — …": the choice is not named again; a rolled talk says thành / hỏng */
-   if(P.length){const roll=/thành:|hỏng:/.test(o.x||"");const bad=P.some(p=>p.b<p.a);log(`${roll?`<span class="${bad?"r":"g"}">${bad?"Hỏng":"Thành"}</span>: `:"Sau đó: "}${P.map(p=>partH(p)).join(", ")}.`)}}}catch(e){console.error(e)}
+   if(P.length){const roll=/thành:|hỏng:|bại:/.test(o.x||"");const bad=P.some(p=>p.b<p.a);log(`${roll?`<span class="${bad?"r":"g"}">${bad?"Bại":"Thành"}</span>: `:"Sau đó: "}${P.map(p=>partH(p)).join(", ")}.`)}}}catch(e){console.error(e)}
   return r}})}catch(e){console.error(e)}return d}}
 })();

@@ -154,11 +154,11 @@ Nguồn đối chiếu (chuyên gia, sếp OD:L1327): bản lồng tiếng / ph�
 6. **Theo tâm trạng và quan hệ.** Cùng một việc, người thương nói ấm, người ghét nói mát, người trên giận nói gọn và lạnh. Mỗi tình huống lặp lại có một **chùm câu** (≥ 4 câu, chia theo tâm trạng / quan hệ / kết quả), không lặp câu trong `BAL.voice.noRepeat` ngày (jvoice `kLine`).
 
 ### 2.5 Lời giải thích được / mất (thẻ việc, kết quả)
-Giữ rõ luật (mục 4): con số, bậc may rủi, Tốn/Thành/Hỏng/Kèm không đổi. Câu chữ kèm theo viết theo giọng cung: nói được gì, mất gì, ai vừa lòng ai phật ý — gọn, có hình ảnh, không sáo rỗng, không %.
+Giữ rõ luật (mục 4): con số, bậc may rủi, Tốn/Thành/Bại/Kèm không đổi. Câu chữ kèm theo viết theo giọng cung: nói được gì, mất gì, ai vừa lòng ai phật ý — gọn, có hình ảnh, không sáo rỗng, không %.
 | Khô | Cung đấu |
 |---|---|
 | Thái hậu thiện cảm +2 khi gặp hôm nay | Thái hậu khẽ gật đầu, ánh mắt dịu đi — thiện cảm +2 |
-| Hỏng thì Hoàng hậu phật ý | Hỏng thì Hoàng hậu ngoài mặt cười, trong lòng ghi một nét |
+| Bại thì Hoàng hậu phật ý | Bại thì Hoàng hậu ngoài mặt cười, trong lòng ghi một nét |
 | Có rủi ro | Được ăn cả, ngã về không |
 | Không đổi gì | Gió lặng sóng yên, chẳng ai để tâm |
 
@@ -182,14 +182,15 @@ Giữ rõ luật (mục 4): con số, bậc may rủi, Tốn/Thành/Hỏng/Kèm 
 ## 4. Giữ rõ luật chơi
 
 - Con số giữ nguyên và đứng sau tên: "Sủng +6", "Bạc -30", "Sủng 28 → 31".
-- Các dòng của bộ giao diện (Cần / Tốn / Được / Mất / Kèm / Ghi chú; Tốn / Thành / Hỏng / Kèm trên thẻ việc) là của chủ bộ giao diện: không ai tự đổi. Đề xuất chữ cổ (chờ chủ bộ giao diện duyệt):
+- Các dòng của bộ giao diện (Cần / Tốn / Được / Mất / Kèm / Ghi chú; Tốn / Thành / Bại / Kèm trên thẻ việc; hai khối THÀNH và BẠI, mỗi khối có Được / Mất / Kèm) là của chủ bộ giao diện: không ai tự đổi. Đề xuất chữ cổ (chờ chủ bộ giao diện duyệt):
+- Khối BẠI không có gì để ghi: một dòng mờ "Tốn công, không được gì". Dấu kết quả sau mỗi việc: THÀNH / BẠI / KẾT QUẢ (không còn "HỎNG").
 
 | Hiện tại | Đề xuất |
 |---|---|
 | Cần | Phải có |
 | Tốn | Hao |
 | Được / Thành | Đắc / Thành |
-| Mất / Hỏng | Thất / Hỏng |
+| Mất / Bại | Thất / Bại |
 | Kèm | Hệ lụy |
 | Ghi chú | Lời chua |
 

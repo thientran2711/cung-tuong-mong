@@ -65,7 +65,7 @@ function kitPgKem(){let L=[];try{L=liveRivals(true).slice(0,3)}catch(e){}if(!L.l
 KIT_SAMPLES.push(
  {id:"§53",title:"kitChip tones · kitRisk",html:()=>`<p>${kitChip("Sủng",3)}${kitChip("Danh",-2)}${kitChip("Thường","n")}${kitChip("có rủi ro","w")}${kitChip("đủ Sức","ok")}${kitChip("thiếu bạc","no")}</p><p>${kitRisk("an toàn")}${kitRisk("có rủi ro")}${kitRisk("liều")}</p>`},
  {id:"§53",title:"Event option in cost mode: Tốn + kitHintRow + kitRisk (no Tốn when free)",html:kitPgEvOpts},
- {id:"§53",title:"kitResultSeal: THÀNH · HỎNG · KẾT QUẢ",html:kitPgSeals},
+ {id:"§53",title:"kitResultSeal: THÀNH · BẠI · KẾT QUẢ",html:kitPgSeals},
  {id:"§53",title:"kitKemRow (tap for names)",html:kitPgKem});
 /* §27.1 the Tuần lục cover title picture (review/book-title): the real cover label slot of kitBook, at a fixed small size */
 KIT_SAMPLES.push({id:"§27.1",title:"KBK_TITLE_IMG: tên sổ viết tay trên nhãn bìa (ấn Trân nữ)",html:()=>typeof KBK_TITLE_IMG==="undefined"?"":

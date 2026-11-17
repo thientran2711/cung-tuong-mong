@@ -292,7 +292,7 @@ button.ka [.kdis when disabled]
 
 Rules
 - Rows always in this order; an empty row is left out. Labels are Vietnamese title case `Cần / Tốn / Được / Mất / Kèm / Ghi chú`,
-  shown small-caps in `#8a7350`. The old inline `TỐN / THÀNH / HỎNG / KÈM` labels are gone.
+  shown small-caps in `#8a7350`. The old inline `TỐN / THÀNH / BẠI / KÈM` labels are gone.
 - A value goes to its row by meaning (`kaRows`): a gain is always green and in Được; a cost/loss is always red (Tốn, Mất, Kèm).
   Sentiment uses `kcls` (j19 + j25): `+N` is a gain unless it is hostile (`ghen +`, `oán ngươi +`); harm to a rival ("nàng … -N") is a gain.
   Exceptions: a failure that still gives something ("đêm nhạt, Sủng +3") stays in Mất but its `+N` is green; "không mất gì" is neutral.
@@ -333,15 +333,15 @@ Rules
 `resultShow(title, before, ok)` (called by `wrapR`, options, servant/child/court acts) → `#rtoast.rtoast.karesult`:
 
 ```
-[seal THÀNH (green) | HỎNG (red)]  act name                  title row, hairline under it
+[seal THÀNH (green) | BẠI (red)]  act name                  title row, hairline under it
 One short sentence of what happened, from the log of this act, rival names with their rank title ("Hoàng hậu Liễu Họa Mi").
 Được  Sủng 8→17 (+9) · Ân tình 0→5 (+5) · Thái hậu: quý ngươi hơn (0→8, +8)                 green
 Mất   Đức 30→26 (−4) · Hoàng hậu Liễu Họa Mi: ghét ngươi hơn (thiện cảm −15), ghen +25, oán +20   red, person name in ink
                                                      Xem đầy đủ ở Nhật ký   (link: opens the Nhật ký tab)
 ```
-- SEAL (owner 11/15, replaces the old "outcome for her" guess): THÀNH / HỎNG come ONLY from the act's own roll (`resultShow(title,
+- SEAL (owner 11/15, replaces the old "outcome for her" guess): THÀNH / BẠI come ONLY from the act's own roll (`resultShow(title,
   before, true|false)`); an act without a roll ("sure", null) gets NO stamp: the neutral grey seal "KẾT QUẢ" (`.sure`). KIT PART
-  `kitResultSeal(ok)` (renamed by reviewer r7: `kitSeal` is the Trân nữ seal, §39) → {cls: ok | bad | sure, t: THÀNH | HỎNG | KẾT QUẢ} (j63; kit sample page). Never
+  `kitResultSeal(ok)` (renamed by reviewer r7: `kitSeal` is the Trân nữ seal, §39) → {cls: ok | bad | sure, t: THÀNH | BẠI | KẾT QUẢ} (j63; kit sample page). Never
   inferred from log words or from how many lines are Được / Mất (a good night stamped "BẤT LỢI · BẠI" because the option was named
   "Xin tha cho cung nữ bị phạt" and 12 consorts got jealous).
 - KÈM (owner 11/15): other people's feelings — the consorts' ghen / oán — are not her gains or losses: one collapsed line
@@ -2247,7 +2247,7 @@ on their own — they call `kitFx(kind,{el}|{x,y})` with a kind from the table b
 | demote | giáng phẩm / lãnh cung (`kitGloom`) | — | darkens | grey ash falls | demote [60,50,60] |
 | ash | goes to lãnh cung (`goTo('lc')`) | — | — | ash | — |
 | win | result card THÀNH (`resultShow`) | — | — | stars twinkle over the card | win [12,40,12] |
-| fail | result card HỎNG / BẤT LỢI | — | — | grey smoke puffs from the seal | fail 35 |
+| fail | result card BẠI / BẤT LỢI | — | — | grey smoke puffs from the seal | fail 35 |
 | mgwin / mglose | trò nhỏ thắng / thua (`openMG` grade ≥2 / <2) | — | — | stars / smoke | win / fail |
 | lantern | đêm lễ (festToday() + buổi tối, once per night) | — | — | 9 đèn trời rise slowly with a glow | — |
 | lock | locked button touched | element shake | — | — | lock 14 |
@@ -2375,7 +2375,7 @@ kitBook, game / lesson results in #ov and the person card opened from the room #
   with `go`) or leave `btn` empty on a card — the kit turns it into ✕ + tap outside + Esc. Words: VANPHONG §1.
 - THE TAP IS SPENT ON CLOSING (owner 11/15: "the outside tap closed the result card and also ran the act under it"): a card with a dimmed
   ground (#modal, the book, game results) closes on the ground's own click, so nothing under it fires. A card that floats WITHOUT a ground —
-  the act result card `#rtoast` (THÀNH / HỎNG / BẤT LỢI) — gets the full-screen transparent catcher `#kxcatch` (`kitCatchOn(card, close)` /
+  the act result card `#rtoast` (THÀNH / BẠI / BẤT LỢI) — gets the full-screen transparent catcher `#kxcatch` (`kitCatchOn(card, close)` /
   `kitCatchOff()`, jk4) right under it while it is open: the first tap outside closes it on release (pointerup / touchend) and every
   event of that tap (pointerdown / touchstart / touchend / mousedown / mouseup / click) is swallowed; the catcher stays 400 ms after the
   close to eat a late ghost click. A later floating card uses the same pair. Test: `dev/test/kit-close2.js` taps an act button's position
@@ -3159,7 +3159,7 @@ Index of the shared parts review/opt-render added (number from the coordinator's
 - `kitIsEventChoice(m)` + `KIT_ACT_PIDS` + data flags `ev` / `act` / `shop` — which dialogs are events (cost mode): §28.6.
 - `kitHint(o, m, lv)` → `{hint, risk}` (pure, bots too), `kitHintLevel()` (Tâm cơ / Tai mắt → vague / plain / sharp): §28.6.
 - `kitHintRow(text)` (`.kr-hint`, `.ef.i` in j63 kit CSS), `kitRisk(word)` (kitChip g / w / r + `.krisk`, j79 kit chip CSS): §28.6.
-- `kitResultSeal(ok)` (THÀNH / HỎNG / grey KẾT QUẢ, j63; not `kitSeal`, which is the Trân nữ seal §39), `kitKemRow(K)` (`.kb .kkem`): §7.
+- `kitResultSeal(ok)` (THÀNH / BẠI / grey KẾT QUẢ, j63; not `kitSeal`, which is the Trân nữ seal §39), `kitKemRow(K)` (`.kb .kkem`): §7.
 - Samples on the kit page (§47): ids "§53" (chip tones + kitRisk; an event option in cost mode through the real modal markup → kaNorm →
   kitHideOut; kitResultSeal ×3; kitKemRow). Tests: `dev/test/opt-render.js`, `dev/test/opt-scan.py --fail`.
 
@@ -3200,7 +3200,7 @@ No new kit part: the exam is built only from existing parts.
 - Rounds and result: the j82 game frame (`kg82Open` = `kitGameFrame`, `kg82Rows` = `kitRows`, `.kg82act` kit buttons, `kg82Play` engines,
   `kitGameResult` for the score table). The result's "Đã hiểu" is hidden by KIT 32.10 and the frame closes with the kit ✕ (jk4 kitOvBtn).
 - Quiz rounds (Lễ nghi, Trị cung, Xử án, Thái hậu hỏi) use the j82 quiz engine with new question banks (`EXQ`); no CSS.
-- Act card «Khảo hạch tấn phong» = an ordinary deck card (`cardH`: odds chip, Cần/Tốn/Được/Hỏng rows); the Hỏng row says the wait.
+- Act card «Khảo hạch tấn phong» = an ordinary deck card (`cardH`: odds chip, Cần/Tốn rows, THÀNH / BẠI blocks); the BẠI block says the wait.
   Picture: ONLY its own act picture (ACTS.json «Khảo hạch tấn phong» → act-khao-hach-tan-phong.webp); with no own key the card gets no
   picture slot at all (`data-kexam` + kpActArt guard, `.kanoart`), never the category tile/picture (owner 14:30Z). Category word: Lễ nghi.
 - Mệnh truyện › Sắc phong: the exam row is one more `kitChecks` row; status = `kitChip(text,"g"|"r"|"n")` in the `.ktop` row (as §46 header
@@ -4105,3 +4105,14 @@ Replaces §34.1b (kitLeather frame on the Dư đồ), §34.1d chip look of `.msp
 - dilLine (j17): a sure option x that already starts with a label (thành:/tốn:/hỏng:/ngay:/kèm:) is not wrapped in a second "thành: " (was the literal "thành:" under ĐƯỢC).
 - (r2, reviewer FAIL f7e2e1ef) Figure-left event frame (jksize kszLiveLay3): when the option column is narrower than a card needs (kszNeedTxt + KIT_SIZE.v3.btn.stackBelow 80 px; Fold 304 px beside the figure) the options get `.kszstk`: every row stacks LABEL OVER VALUE so values use the whole text column (190 px, was 137 and 2-3 words per line). Not moved under the figure: with the frame's own max height the second card then falls outside (tried, worse).
 - Scan (r2): node dev/measure/option-modal-scan.js <fold|ipadAir|ipadPro|pixel|iphone14> [turns] [json] [seed] — seeded Math.random (default 7) + a direct Hội phối đồ builder on every run; NARROW = text col < 170 or value col < 150; flags NARROW / CLIP / EMPTY / LIT / NOTHING.
+- Scan: node dev/measure/option-modal-scan.js <fold|ipadAir|ipadPro|pixel|iphone14> [turns] [json] flags NARROW / CLIP / EMPTY / LIT / NOTHING.
+
+## 88. THÀNH / BẠI blocks on every act / option card (kit-thanh-bai, s34; owner 17/11 ~17:10Z)
+Owner: "khi mà một cái nút nào đó nó sẽ có một cái chữ gọi là thành, là tôi được cái gì, mất cái gì. Còn nếu mà tôi bại thì được cái gì và mất cái gì."
+- Layout (j63 kaRows / kaBody, ONE place for every act card, person card act, dialog option and button): [title + odds] · Cần · Tốn (price paid EITHER way: khắc, Bạc/Sức spent regardless — shown ONCE above both blocks) · THÀNH block (head "THÀNH", rows Được / Mất / Kèm) · BẠI block (head "BẠI", rows Được / Mất / Kèm) · Ghi chú.
+- Kèm (other people's feelings, side risks) sits INSIDE the block it belongs to: the block label written before it in the source ("thành: … · kèm: …" -> THÀNH, "hỏng: … · kèm: …" -> BẠI); with no label a bad thing goes to BẠI. A cost written under "thành:" of a roll act (e.g. Bạc paid only when the bribe lands, OD 17:00Z) is THÀNH Mất, not Tốn.
+- A SURE act (no roll and nothing under hỏng:) shows ONE block, THÀNH. Any act that gets a roll shows both (OD 17:00Z: almost no act stays sure; the layout is the same for every act the moment it gets a roll). A sure act that still carries a "hỏng:" part is shown with both blocks.
+- BẠI with nothing to show prints one dim line "Tốn công, không được gì" (MAIN s34 17/11 ~17:35Z: odds cap 95 % + soft fail, nearly every act gets this; the owner asked what happens on failure, so the answer is shown; inside a block the old "says nothing" lines of §87 stay hidden). A disabled card hides its BẠI block (as it always hid Mất / Kèm).
+- Source strings are unchanged: "hỏng:" stays the INPUT label (alias "bại:" accepted by kaModel / kaModelStr / j19 kitParse); the player only ever sees THÀNH / BẠI. "được ngay:" gains stay above both blocks (row "Được ngay").
+- Every shown "HỎNG/Hỏng" is now "BẠI/Bại": result seal (kitResultSeal, j19/j25 seals), log "Bại.", quest tag, tutorial, option sample label, kit sample page, VANPHONG.
+- Row classes unchanged (.kr-duoc/.kr-mat/.kr-kem) plus .kb-t / .kb-b / .kb-a; heads .kbh .kbh-t/.kbh-b; empty BẠI row .kr-none. Scan: node dev/measure/thanh-bai-scan.js [json] (deck cards in 5 game states + every labelled source string).
