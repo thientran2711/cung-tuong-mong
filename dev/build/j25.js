@@ -92,7 +92,7 @@ function tierOf(p){const r=p===S?S.rank:(p.queen?7:p.rank);return r<=1?1:r<=3?2:
 (function(){const b0=bandKeys;bandKeys=function(kind,age,p){if(kind==="consort"&&p){const t=tierOf(p);const near=[1,2,3,4,5].sort((a,b)=>Math.abs(a-t)-Math.abs(b-t)||b-a).map(x=>"ct"+x);return age>35?["womid"].concat(near):near}return b0.apply(this,arguments)}})();
 /* a consort's face follows her rank tier: re-picked on promotion or demotion */
 (function(){const ff=faceFor;faceFor=function(o,kind,age){if(kind==="consort"){const keys=bandKeys("consort",age,o);const k=keys[0];if(o.fc==null||o.fk!==k){o.fc="";o.fc=drawF(keys);o.fk=k}return}return ff.apply(this,arguments)}})();
-(function(){const fs=fsrc;fsrc=function(fc,fb){if(fc&&fc[0]==="@"){const n=+fc.slice(2);return (AV.women||[])[n]||fb||""}return fs.apply(this,arguments)}})();
+/* "@W<n>" tokens resolve in the shared fsrc/faceUrl (j17) */
 /* owner review 11/13: only serene, fair-skinned, adult faces stay in the pools */
 Object.assign(FPOOL,{ct1:[3,8,9,10,11,12,13,16,22,23].map(CW).concat([2,5,11,37].map(CF)),ct4:[17].map(CW).concat([13,41,42,43,44,45].map(CF)),
  maid:[1,2,4,5].map(n=>"face-maid-"+n).concat([8,9,13,14,22,25,27,30,31,32,33].map(n=>"face-maid-"+pad(n))),mama:[1,3,4,6,7,8].map(n=>"face-mama-"+n),womid:[1,3,4,5,8].map(n=>"face-woman-mid-"+n),manold:[1,3].map(n=>"face-man-old-"+n),
