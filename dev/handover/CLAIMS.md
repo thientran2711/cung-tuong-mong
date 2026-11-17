@@ -573,10 +573,10 @@
 | WHOLE FIGURE REPAINT batch W4d (successor of W4c session_011xDdVShYq4ow4VaBTVm4CY, archived; hero+misc remainder, maid-ty on GO after owner OK of rank-sample-v2) | review/fig-cutout-clean | C | session_011xDdVPnYcsf2h5vWcgL2Z5 | RUNNING | 17/11 03:29Z |
 | save-dlg-fix review r1 (sonnet SMALL UI) of 340c616a (worker #2 archived) | review/save-dlg-fix-r1 | main s29 | session_01UV1SzgbocUETEUWFViBc8f | RUNNING | 17/11 03:31Z |
 | night-final SUCCESSOR #6 (opus; HELD BY MAIN while Foreman D is out of quota; returns to D on a new D account) from ea74aff6: shots, buổi perf ≤ live +5 %, G4 probe proof; co-op PARKED | review/night-final | main s29 | session_01UV1SzkcuhnxeSAywiQC2hz | RUNNING | 17/11 03:33Z |
-| OI family (opus): render-cost root fix + origin-intros flow/oldsave tests + kc2val Chờ re-measure (carries kc-roads-cn-nc-fix2), then one OI reviewer | review/batch-0032-oi | D | (opening) | RUNNING | 17/11 03:35Z |
-| npc-roads-fx FINISH (opus): F1–F6 scan, merge main, suites → SẴN SÀNG KIỂM, then BIG reviewer | review/npc-roads-fx | D | (opening) | RUNNING | 17/11 03:35Z |
-| item-ledger SOLO landing (opus): from PASS 7aba5de9, branch co-op transport removed (live giftin only), co-op part parked | review/item-ledger-solo | D | (opening) | RUNNING | 17/11 03:35Z |
-| npc-death re-wire (opus): jnpcd/jly into j95 place-people record (Lý Trường Môn viện, dead off lists, Thái y viện new name) | review/npc-death-wire | D | (opening) | RUNNING | 17/11 03:35Z |
-| suc-khoe review r2 (opus BIG) of da50857d | review/suc-khoe-r2 | D | (opening) | RUNNING | 17/11 03:35Z |
-| C44 cloud-del 'Xóa sổ trên mây' (sonnet UI, KIT §83.9) | review/cloud-del | D | (opening) | RUNNING | 17/11 03:35Z |
-| P5 STORY BOT balance (opus, report only, ch1–4 first) | review/story-bot | D | (opening) | RUNNING | 17/11 03:35Z |
+| OI family (opus): render-cost root fix + origin-intros flow/oldsave tests + kc2val Chờ re-measure (carries kc-roads-cn-nc-fix2), then one OI reviewer | review/batch-0032-oi | D | session_01964izCi8228y2v2JjEknpd | RUNNING | 17/11 03:35Z |
+| npc-roads-fx FINISH (opus): F1–F6 scan, merge main, suites → SẴN SÀNG KIỂM, then BIG reviewer | review/npc-roads-fx | D | session_01964izFdMcMY1NA9hQZVoJw | RUNNING | 17/11 03:35Z |
+| item-ledger SOLO landing (opus): from PASS 7aba5de9, branch co-op transport removed (live giftin only), co-op part parked | review/item-ledger-solo | D | session_01964izCwq2JLHTHaaBox66W | RUNNING | 17/11 03:35Z |
+| npc-death re-wire (opus): jnpcd/jly into j95 place-people record (Lý Trường Môn viện, dead off lists, Thái y viện new name) | review/npc-death-wire | D | session_01964izBuQu8dWabKyYB69JE | RUNNING | 17/11 03:35Z |
+| suc-khoe review r2 (opus BIG) of da50857d | review/suc-khoe-r2 | D | session_01964izEdQ4cDsTpuGgdScHp | RUNNING | 17/11 03:35Z |
+| C44 cloud-del 'Xóa sổ trên mây' (sonnet UI, KIT §83.9) | review/cloud-del | D | session_01964izCcuExvScNgYEs1xN6 | RUNNING | 17/11 03:35Z |
+| P5 STORY BOT balance (opus, report only, ch1–4 first) | review/story-bot | D | session_01964izEJdhucE8HEDCzfJ25 | RUNNING | 17/11 03:35Z |
