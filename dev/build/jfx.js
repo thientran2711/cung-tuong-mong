@@ -100,10 +100,10 @@ const KFK_U=/^(petal-|osmanthus$|leaf$|snow$|ash$|paper$)/;
 /* the layers that live INSIDE the painted stage rectangle (Pixi mask): weather, season, light shafts */
 /* falling celebration petals: born at the TOP of the painted stage and clipped to it (never over the top bar / stat numbers / chips); no stage on screen = whole screen as before */
 function kfFall(tex,v,sc){const sr=KFX.sr||kfStageRect(),W=sr?sr.w:innerWidth,x=(sr?sr.x:0)+RS(0,W),y=(sr?sr.y:0)+RS(-70,-8),o=kfSp(tex,x,y,v,null,sc);if(o&&o.v&&sr&&KFX.wroot){o.v.clip=1;KFX.wroot.addChild(o)}return o}
-/* rectangles of the info chips drawn ON the stage (side cards .k3c/.k3p, rail buttons, place name); refreshed every 1.5 s, cheap point test per particle */
-const KF_INFO="#stage .k3c,#stage .k3p,#stage .krailb,#stage #sc-t";
-function kfOverInfo(x,y){const t=performance.now();if(!kfOverInfo.r||t-kfOverInfo.t>1500){kfOverInfo.t=t;try{kfOverInfo.r=[...document.querySelectorAll(KF_INFO)].map(e=>e.getBoundingClientRect()).filter(r=>r.width>4)}catch(e){kfOverInfo.r=[]}}
- for(const r of kfOverInfo.r)if(x>r.left-4&&x<r.right+4&&y>r.top-4&&y<r.bottom+4)return true;return false}
+/* rectangles of the info chips drawn ON the stage (side cards .k3c/.k3p, rail buttons, place name); refreshed every 0.5 s (ui-fixes-1; was 1.5 s), cheap box test per particle: the margin is the sprite's HALF SIZE, so a petal whose centre is outside the chip but whose edge touches it is hidden too (the pill was half-covered by a petal edge) */
+const KF_INFO="#stage .k3c,#stage .k3p,#stage .krailb,#stage #sc-t,#stage .mlab,.mapw .mlab";
+function kfOverInfo(x,y,hw,hh){hw=Math.max(4,hw||0);hh=Math.max(4,hh||hw);const t=performance.now();if(!kfOverInfo.r||t-kfOverInfo.t>500){kfOverInfo.t=t;try{kfOverInfo.r=[...document.querySelectorAll(KF_INFO)].map(e=>e.getBoundingClientRect()).filter(r=>r.width>4)}catch(e){kfOverInfo.r=[]}}
+ for(const r of kfOverInfo.r)if(x>r.left-hw&&x<r.right+hw&&y>r.top-hh&&y<r.bottom+hh)return true;return false}
 const kfClipLay=l=>l==="wx"||l==="se"||l==="se2";
 function kfSp(tex,x,y,v,tint,sc,blend){const k=KF_ALIAS[tex]||tex;const s=kfkSp(k,x,y,v,tint,sc,blend);if(s)return s;if(!KFK.loaded.has(k))kfkLoad([k]).catch(()=>{});return{v:{},scale:{set(){},x:1},rotation:0}}
 /* THE ONE SWAP LINE for the real-look weather pictures (owner 16/11 snow + fireflies redo): snow = soft round flakes, firefly = glowing point. Now the painted soft "orb"; when
@@ -150,7 +150,7 @@ function kfTick(tk){const d=Math.min(3,tk.deltaTime),H=innerHeight,W=innerWidth,
   v.ph+=.03*d;if(v.gust)s.x+=KFX.gust*v.gust*d;if(v.drag!==1){const k=Math.pow(v.drag,d);v.vx*=k;v.vy=v.vy*k+v.g*d}else if(v.g)v.vy+=v.g*d;s.x+=(v.vx+(v.sway?Math.sin(v.ph)*v.sway:0))*d;s.y+=v.vy*d;
   if(v.spin)s.rotation+=v.spin*d;if(v.coin)s.scale.x=v.sc*Math.cos(v.ph*3);if(v.grow)s.scale.set(s.scale.y+v.grow*d);
   const f=v.life/v.max;let a=v.a0;if(v.fade==="out")a=v.a0*Math.min(1,f*2.2);else if(v.fade==="inout")a=v.a0*Math.min(1,f*4,(1-f)*6);if(v.tw)a*=.55+.45*Math.sin(v.ph*v.tw*40);if(v.bl){const q=.5+.5*Math.sin(v.ph*v.bl);a*=.3+.7*Math.sqrt(q)}s.alpha=Math.max(0,a);
-  if(v.clip&&kfOverInfo(s.x,s.y))s.alpha=0;  /* wx-fx-size: weather never sits over a stage chip / the place name (text stays readable) */
+  if(v.clip&&kfOverInfo(s.x,s.y,Math.abs(s.width||0)/2+2,Math.abs(s.height||0)/2+2))s.alpha=0;  /* wx-fx-size: weather never sits over a stage chip / the place name (text stays readable) */
   if(v.amb)amb++}
  KFX.live=L.length;KFX.amb=amb;kfBoltTick(d);
  /* PERF (owner 16/11 lag): ambient-only weather (snow / fireflies / petals / mist) runs at 30 fps (motion is dt-based, so speed is unchanged); bursts and lightning get 60; rain streaks are dt-based too */
@@ -180,9 +180,28 @@ const KF_WX={
  rainh:{k:["streak"],cap:80,vx:[-3.4,-2],vy:[14,19],a0:.8,rain:1,tint:0xbccde0,sc:[.9,1.2]},
  wind1:{k:["leaf","streak"],cap:24,vx:[3,6],vy:[.3,1.2],sway:1.2,spin:.08,sc:[.55,.85],a0:.85,gust:1.4,fall:1,fromLeft:1,line:1},
  wind3:{k:["leaf","leaf","streak","streak"],cap:100,vx:[8,13],vy:[.4,1.8],sway:1.6,spin:.14,sc:[.55,.95],a0:.95,gust:3,fall:1,fromLeft:1,line:1},
- mist1:{k:["smoke"],cap:3,vx:[.15,.45],vy:[-.12,.12],a0:.16,float:1,tint:0xf0ece4,sc:[3,4.6],life:[480,700]},
- mist3:{k:["smoke"],cap:7,vx:[.1,.35],vy:[-.1,.1],a0:.32,float:1,tint:0xf0ece4,sc:[3.6,5.4],life:[520,760]},
- mist:{k:["smoke"],cap:4,vx:[.15,.45],vy:[-.12,.12],a0:.22,float:1,tint:0xf0ece4,sc:[3,4.6],life:[480,700]},
+ /* wx-anim (owner 17/11 (h): every kind × nhẹ/vừa/nặng must show, clearly different): the rows below fill the levels that had no row of their own
+    (same painted sprites: streak / leaf / petal / smoke / orb / ember / glowburst; fxLvK in jwxk picks them). */
+ snow1:{k:[KF_SPR.snow],cap:46,vx:[-.2,.2],vy:[.5,.9],sway:.5,spin:.02,sc:[1,1.6],a0:.9,gust:.2,fall:1,snow:1},
+ frost1:{k:[KF_SPR.snow],cap:10,vx:[-.15,.15],vy:[.3,.6],sway:.3,spin:.01,sc:[.8,1.2],a0:.8,fall:1,snow:1},
+ frost3:{k:[KF_SPR.snow],cap:60,vx:[-.3,.3],vy:[.5,1],sway:.5,spin:.01,sc:[1,1.6],a0:.95,gust:.3,fall:1,snow:1},
+ petal1:{k:["petal-peach"],cap:6,vx:[.1,.5],vy:[.6,1.1],sway:.9,spin:.05,sc:[.45,.7],a0:.9,gust:.6,fall:1,tint:0xffc4d4},
+ petal3:{k:["petal-peach"],cap:34,vx:[.3,1.1],vy:[.9,1.6],sway:1.3,spin:.06,sc:[.5,.9],a0:.95,gust:1.6,fall:1,tint:0xffc4d4},
+ leaf1:{k:["leaf"],cap:4,vx:[0,.5],vy:[.7,1.1],sway:1,spin:.04,sc:[.5,.75],a0:.9,gust:.5,fall:1},
+ leaf3:{k:["leaf"],cap:26,vx:[.2,1],vy:[1,1.7],sway:1.4,spin:.07,sc:[.55,.95],a0:.95,gust:1.4,fall:1},
+ snowp1:{k:[KF_SPR.snow,"petal-plum"],cap:30,vx:[-.2,.3],vy:[.5,.9],sway:.5,spin:.02,sc:[1,1.6],a0:.95,gust:.3,fall:1,snow:1},
+ snowp3:{k:[KF_SPR.snow,KF_SPR.snow,"petal-plum","petal-plum"],cap:130,vx:[-.5,.7],vy:[1,1.8],sway:.9,spin:.04,sc:[1.1,2],a0:1,gust:.9,fall:1,snow:1},
+ storm1:{k:["streak"],cap:34,vx:[-1.4,-.8],vy:[11,14],a0:.78,rain:1,tint:0xc4d6e6,sc:[.85,1.15]},  /* giông tố nhẹ: far rumble, a downpour that has not broken yet (bolt rare, BAL.wx.day.bolt) */
+ storm2:{k:["streak"],cap:56,vx:[-2.4,-1.4],vy:[12,16],a0:.8,rain:1,tint:0xbccde0,sc:[.9,1.2]},
+ heat1:{k:["glowburst"],cap:2,vx:[-.05,.05],vy:[-.12,-.04],a0:.1,float:1,tint:0xffd9a0,sc:[3,4.4],life:[420,640]},  /* nắng gắt: heat glare patches, brighter and more of them with the level */
+ heat:{k:["glowburst"],cap:4,vx:[-.05,.05],vy:[-.14,-.05],a0:.17,float:1,tint:0xffd29a,sc:[3.2,4.8],life:[420,640]},
+ heat3:{k:["glowburst","ember"],cap:4,vx:[-.06,.06],vy:[-.2,-.06],a0:.3,float:1,tint:0xffc680,sc:[3.4,5.2],life:[380,600]},
+ cloud1:{k:["smoke"],cap:3,vx:[.1,.3],vy:[-.05,.05],a0:.7,float:1,tint:0x7f8aa0,sc:[3.4,5],life:[520,760]},  /* trời âm u: slow grey cloud banks drifting over the picture (smoke atlas is faint: see KIT_REQUESTS ART REQUEST fogbank) */
+ cloud:{k:["smoke"],cap:8,vx:[.12,.36],vy:[-.05,.05],a0:.9,float:1,tint:0x6c768a,sc:[3.8,5.8],life:[520,760]},
+ cloud3:{k:["smoke"],cap:11,vx:[.15,.45],vy:[-.06,.06],a0:1,float:1,tint:0x4a5468,sc:[4,6.5],life:[500,740]},
+ mist1:{k:["smoke"],cap:3,vx:[.15,.45],vy:[-.12,.12],a0:.3,float:1,tint:0xf0ece4,sc:[3,4.6],life:[480,700]},
+ mist3:{k:["smoke"],cap:12,vx:[.1,.35],vy:[-.1,.1],a0:.85,float:1,tint:0xf0ece4,sc:[3.6,5.4],life:[520,760]},
+ mist:{k:["smoke"],cap:6,vx:[.15,.45],vy:[-.12,.12],a0:.5,float:1,tint:0xf0ece4,sc:[3,4.6],life:[480,700]},
  fly:{k:[KF_SPR.fly],cap:90,vx:[-.3,.3],vy:[-.25,.25],sway:.8,a0:1,float:1,sc:[.5,.8],life:[300,560],glow:1},  /* each firefly = tiny warm core + soft green-gold halo (2 sprites), slow wander, deep slow blink, depth (near = bigger, far = tiny) */
  gold:{k:["petal-peach"],cap:12,vx:[-.3,.3],vy:[.5,1],sway:.8,spin:.04,sc:[.5,.8],a0:.85,gust:.4}
 };
@@ -203,9 +222,9 @@ const KF_RAYS={lay:"se2",id:"rays",k:["streak","streak","streak","glowburst"],ca
 function kfSeCfg(){const m=(typeof S!=="undefined"&&S&&S.month)||1,night=typeof S!=="undefined"&&S&&(S.buoi||0)===B4L;
  /* SUMMER (Apr-Jun, lotus season): no petals; sunlit golden motes drifting up through the light (+ light rays, see KF_RAYS) */
  if(m>=4&&m<=6&&(night||(typeof S!=="undefined"&&S&&S.wx&&(S.wx.k==="cloud"||(typeof wet==="function"&&wet())))))return{lay:"se",id:"sunn",k:["orb"],cap:0,off:1,float:1,vx:[0,0],vy:[0,0],sc:[1,1],a0:0,life:[60,60],night};  /* no sunlight at night: the night room shows fireflies (weather layer) only */
- if(m>=4&&m<=6)return{lay:"se",id:"sun",k:KF_SEASON(),cap:36,float:1,vx:[-.25,.25],vy:[-.55,-.15],sway:.5,sc:[1.1,2],a0:.95,life:[260,420],tint:0xffe08a,night};
+ if(m>=4&&m<=6)return{lay:"se",id:"sun",k:KF_SEASON(),cap:Math.round(36*(((typeof S!=="undefined"&&S&&S.wx&&S.wx.kd==="heat"&&typeof BAL==="object"&&BAL.wx&&BAL.wx.day&&BAL.wx.day.heatSe)||[])[Math.max(1,Math.min(3,S.wx.kl||1))]||1)),float:1,vx:[-.25,.25],vy:[-.55,-.15],sway:.5,sc:[1.1,2],a0:.95,life:[260,420],tint:0xffe08a,night};
  return{lay:"se",id:"se",k:KF_SEASON(),cap:8,vx:[-.35,.25],vy:[.4,.8],sway:.9,spin:.03,sc:[.5,.8],a0:.7,fall:1,night:typeof S!=="undefined"&&S&&(S.buoi||0)===B4L}}
-function kfStageRect(){try{const st=document.getElementById("stage");if(!st)return null;const r=st.getBoundingClientRect();return r.width>40&&r.height>40&&getComputedStyle(st).visibility!=="hidden"?{x:r.left,y:r.top,w:r.width,h:r.height}:null}catch(e){return null}}
+function kfStageRect(){try{/* KIT §85.7 (owner 17/11 12:25Z): on the Dư đồ the room weather (same layer, same kinds, same caps) plays over the map area */const mp=document.querySelector(".game.maptab .mapsc");if(mp){const r=mp.getBoundingClientRect();if(r.width>40&&r.height>40)return{x:r.left,y:r.top,w:r.width,h:r.height}}const st=document.getElementById("stage");if(!st)return null;const r=st.getBoundingClientRect();return r.width>40&&r.height>40&&getComputedStyle(st).visibility!=="hidden"?{x:r.left,y:r.top,w:r.width,h:r.height}:null}catch(e){return null}}
 function kfWxSync(){const r=kfStageRect();KFX.sr=r;const P=window.PIXI;if(!P||!KFX.app)return;
  if(!KFX.wroot){KFX.wroot=new P.Container();KFX.wmask=new P.Sprite(P.Texture.WHITE);KFX.wroot.mask=KFX.wmask;KFX.app.stage.addChild(KFX.wroot,KFX.wmask)}  /* clip = a plain white rectangle sprite, not art */
  if(r){KFX.wmask.x=r.x;KFX.wmask.y=r.y;KFX.wmask.width=r.w;KFX.wmask.height=r.h}else{KFX.wmask.width=0;KFX.wmask.height=0}}
@@ -237,7 +256,7 @@ let kfAmbT=0;
 function kfAmbLive(lay){let n=0;for(const s of KFX.parts)if(s.v&&s.v.amb&&s.v.lay===lay&&s.v.fade!=="out")n++;return n}
 /* night decoration on the stage (moved from j11's code-drawn dots): warm lantern glows + stars, PAINTED orb / spark sprites */
 function kfDecoClear(){for(const s of KFX.parts)if(s.v&&s.v.deco)s.v.life=0}
-function kfDeco(){let key="";try{if(typeof S!=="undefined"&&S&&(S.buoi||0)===B4L&&KFX.sr){const P=placeOf(S.place);key=P.sc+"|"+(["vuon","lc","home"].includes(P.sc)?1:0)}}catch(e){}
+function kfDeco(){let key="";try{if(typeof S!=="undefined"&&S&&(S.buoi||0)===B4L&&KFX.sr&&!document.querySelector(".game.maptab")){const P=placeOf(S.place);key=P.sc+"|"+(["vuon","lc","home"].includes(P.sc)?1:0)}}catch(e){}
  if(KFX.decoK===key)return;KFX.decoK=key;kfDecoClear();if(!key)return;const out=key.endsWith("|1");
  kfkLoad(["orb","spark"]).then(()=>{if(KFX.decoK!==key)return;[[.12,.3],[.88,.3],[.3,.18],[.7,.18]].forEach(([x,y],i)=>{const s=kfSp("orb",0,0,{life:1e9,max:1e9,a0:.5,fade:"none",deco:1,fx:x,fy:y,lay:"wx"},0xffb050,2.2);if(s&&s.v&&s.v.max)KFX.wroot&&KFX.wroot.addChild(s)});
   if(out)for(let i=0;i<14;i++){const s=kfSp("spark",0,0,{life:1e9,max:1e9,a0:.8,fade:"none",deco:1,fx:Math.random(),fy:Math.random()*.25,lay:"wx"},null,.3);if(s&&s.v&&s.v.max)KFX.wroot&&KFX.wroot.addChild(s)}kfWake()}).catch(()=>{})}

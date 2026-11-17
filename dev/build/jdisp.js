@@ -1,4 +1,4 @@
-/* ================= jdisp: kitDisplayRoom — ĐA BẢO CÁC, the full-screen display room (KIT §87; owner OD 17/11 ~18:30Z (A), ~18:25Z (c)(d), ~18:33Z (3)) =================
+/* ================= jdisp: kitDisplayRoom — ĐA BẢO CÁC, the full-screen display room (KIT §89; owner OD 17/11 ~18:30Z (A), ~18:25Z (c)(d), ~18:33Z (3)) =================
    KIT PART ONLY (view + drawer + rail icon). Data = the C-AG display-shelf API (review/display-shelf, jshelf.js): shelfOf(p).g[group], shelfPut(p,ix),
    shelfTake(p,group), shelfWhyNot(p,e), shelfGrp(k), BAL.shelf.groups, luxPiece(k). Until that branch lands on main every call is guarded: no real API ⇒ the rail icon
    stays hidden (no one-way door for the player) and the view only opens in FIXTURE mode (kit page sample, tests): kitDisplayRoomOpen(S,{fixture:true}).
@@ -25,7 +25,7 @@ const KDR_PIC={land:{segs:[{src:"img/display/cabinet-land.webp",ar:1.5,slots:gri
 const kv2=()=>document.documentElement.classList.contains("kv2");
 const GFIX=[["cay","Cây cảnh"],["chuong","Chuông gió"],["rem","Rèm, mành"],["phong","Bình phong"],["su","Đồ sứ"],["tranh","Tranh, thư pháp"],["van","Văn phòng tứ bảo"],["nhac","Nhạc khí"],["ngoc","Ngọc khí"],["huong","Lư hương"],["den","Đèn, lồng"],["tham","Thảm, gối tựa"]];
 const esc=s=>String(s==null?"":s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
-const real=()=>typeof shelfOf==="function"&&typeof shelfPut==="function"&&typeof shelfTake==="function"&&typeof BAL!=="undefined"&&!!BAL.shelf&&Array.isArray(BAL.shelf.groups);
+const real=()=>typeof shelfOf==="function"&&typeof shelfPut==="function"&&typeof shelfTake==="function"&&typeof BAL!=="undefined"&&!!BAL.shelf&&!!BAL.shelf.ui&&Array.isArray(BAL.shelf.groups);/* batch s36a: one switch BAL.shelf.ui (jshelf) opens both entries; 0 = room hidden */
 const groups=()=>KDR.fixture||!real()?GFIX:BAL.shelf.groups;
 const gName=g=>{const x=groups().find(z=>z[0]===g);return x?x[1]:g};
 const rk=()=>{try{return rkOf(S)|0}catch(e){return 0}};
@@ -187,7 +187,7 @@ html.kv2 .kdr-seg{width:min(100cqw,calc(100cqh*var(--ar)));margin:0 auto}
 .kdr-none{margin:10px 4px;font-size:.85rem;opacity:.8}
 `;document.head.appendChild(css);
 /* ---------- kit page sample ---------- */
-try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§87",title:"kitDisplayRoom · Đa Bảo Các (tủ trưng bày + ngăn kéo tư trang)",
+try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§89",title:"kitDisplayRoom · Đa Bảo Các (tủ trưng bày + ngăn kéo tư trang)",
  html:()=>{let F=null;try{F=mkFix()}catch(e){}const placed=F?F.placed:{};const m={groups:GFIX,placed};
   return `<div class="kitpg-row" style="position:relative;height:420px;overflow:hidden"><div class="kdr" style="position:absolute;inset:0;--kdr-bg:url('${KDR_BG}')">${kitDisplayRoomHTML(m)}</div></div>`}})}catch(e){}
 }catch(e){console.error("jdisp",e)}})();
