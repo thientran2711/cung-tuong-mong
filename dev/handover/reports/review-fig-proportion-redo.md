@@ -59,3 +59,31 @@ mk-fit/thaihau-h*.json fit data: C to re-check (bodies changed).
 
 ## C's APPROVAL + REFINEMENT of the rollout (17/11 01:58Z) — for the successor worker
 Method approved. Body base by AGE and SEX: young women (a18/a26) = c01 build (c01-a26 for open eyes); older women (a36/a51+) = mama build (fig-mama-k0x of the same age); young men = Emperor build; older men = the approved p03 v5 build (head = Emperor ratio; i.e. use fig-kid-p03-a51 v5 as base for older men). Face + costume from the CURRENT picture, colours by age (young bright, old dark), no trains, 2K, a measured table per file (face h/figure h, w/h, chin%) in this report. Send C the FIRST batch sheet; after that upload each batch when QA passes and just report counts to C.
+
+
+## ROLLOUT (successor worker, 17/11) — BATCH 1: 18 figures (kid f01-f04 all ages, p01-a36, p03-a20/a26/a36)
+START_CTX ~4%. Scope note: audit-list = 45 fig-kid (f x30, p x15; p03-a51 already live) + 39 consort figures; I do the kid ones first, consorts after (C to confirm).
+Method (as approved): gpt-2-6 2K edit, image 1 = body base by age/sex (women a20/a26 = c01-a26; a36 = mama k01-a36; a51 = mama k01-a51; men = Emperor), image 2 = current CDN figure (face+hair+costume); a36/a51 prompt asks a deeper, more muted version of the same colours (age rule); no train; no numbers in prompts. bg removed (Magnific), bbox crop, 900 px tall WebP q88. 65 + 3 credits per figure.
+Sheets (old|new pairs, dark + light): https://ctm-img.victoria-tntt.workers.dev/img/_review/fig-oldrollout/b1-dark-{1,2,3}.jpg and b1-light-{1,2,3}.jpg (wipe: python3 dev/site/cdn_sync.py --wipe-review fig-oldrollout).
+Measured (Haar, face h / fig h ; face:shoulder ; w/h ; chin%) old -> new. References: c01 .098/.44/.34/14.0, mama .093-.110, Emperor .097/.34/-/16.3.
+| file | face h old->new | face:shoulder | w/h | chin% |
+|---|---|---|---|---|
+| fig-kid-f01-a20 | 0.088 -> 0.1 | 0.376 -> 0.433 | 0.286 -> 0.302 | 16.0 -> 18.0 |
+| fig-kid-f01-a26 | 0.093 -> 0.099 | 0.449 -> 0.436 | 0.371 -> 0.328 | 16.7 -> 17.8 |
+| fig-kid-f01-a36 | 0.08 -> 0.082 | 0.396 -> 0.4 | 0.386 -> 0.317 | 14.1 -> 14.7 |
+| fig-kid-f01-a51 | 0.094 -> 0.096 | 0.436 -> 0.43 | 0.313 -> 0.289 | 15.1 -> 15.2 |
+| fig-kid-f02-a20 | 0.089 -> 0.092 | 0.435 -> 0.405 | 0.254 -> 0.319 | 15.6 -> 16.7 |
+| fig-kid-f02-a26 | 0.086 -> 0.101 | 0.381 -> 0.448 | 0.362 -> 0.322 | 15.2 -> 17.8 |
+| fig-kid-f02-a36 | 0.086 -> 0.089 | 0.36 -> 0.372 | 0.37 -> 0.33 | 15.4 -> 16.1 |
+| fig-kid-f03-a20 | 0.088 -> 0.099 | 0.427 -> 0.452 | 0.33 -> 0.331 | 15.4 -> 17.6 |
+| fig-kid-f03-a26 | 0.093 -> 0.099 | 0.431 -> 0.536 | 0.371 -> 0.327 | 16.1 -> 17.1 |
+| fig-kid-f03-a36 | 0.089 -> 0.093 | 0.415 -> 0.416 | 0.377 -> 0.336 | 15.6 -> 16.6 |
+| fig-kid-f04-a20 | 0.103 -> 0.1 | 0.404 -> 0.439 | 0.38 -> 0.324 | 27.7 -> 17.2 |
+| fig-kid-f04-a26 | 0.108 -> 0.099 | 0.495 -> 0.438 | 0.302 -> 0.316 | 20.6 -> 16.9 |
+| fig-kid-f04-a36 | 0.086 -> 0.096 | 0.445 -> 0.424 | 0.376 -> 0.318 | 14.7 -> 16.3 |
+| fig-kid-f04-a51 | 0.098 -> 0.102 | 0.468 -> 0.434 | 0.32 -> 0.324 | 15.9 -> 16.7 |
+| fig-kid-p01-a36 | 0.093 -> 0.101 | 0.387 -> 0.367 | 0.35 -> 0.379 | 15.2 -> 16.8 |
+| fig-kid-p03-a20 | 0.079 -> 0.093 | 0.324 -> 0.34 | 0.41 -> 0.38 | 13.7 -> 16.0 |
+| fig-kid-p03-a26 | 0.081 -> 0.098 | 0.349 -> 0.352 | 0.348 -> 0.379 | 14.2 -> 16.7 |
+| fig-kid-p03-a36 | 0.081 -> 0.098 | 0.336 -> 0.348 | 0.321 -> 0.383 | 13.4 -> 16.4 |
+Weak heads (<.094) by Haar: f01-a36 .082, f02-a20 .092, f02-a36 .089, f03-a36 .093 — by eye the heads look in proportion with the mama/c01 bases; a lower-body squeeze (x0.84 below 40%) is available if C wants them tightened. Women inherit the c01 / mama pose (hands low, beads at the chest), so props like the plum branch / pipa / fan are replaced by the base pose.
