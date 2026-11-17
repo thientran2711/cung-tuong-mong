@@ -303,3 +303,27 @@ Worktree /home/user/wt/nf4 (sparse) on review/night-final @ 09c0f055; serve `pyt
 3. Then coop-night.js (baseline 105/105), coop-e2e.js (59/59; "A sees no friend at start" is pre-existing on main), cardflip.js + choice shots Fold 755x1000 + iPad 1180x820 (LOOK at the Giữ chân 'tạm' chip and the seal scene).
 4. SẴN SÀNG KIỂM to main s27 when 1–3 are green; HOLD go-live until reviewed. KIT REQUEST Fold clock chip = review/kit-size-10 (keeper, SẴN SÀNG KIỂM 8ab00ede) — not mine to style.
 5. 10-night LEDGER: own branch review/night-ledger ON TOP of review/night-final (spec reports/night-time.md V3-B + §9.4 5 notes): roll inside jnf realFlip (the commit at the end of tối), played tối = her first day else first NPC day, extra days via stealPass(holder,{live:false}), cycle 5/6/7 per woman per month (jcycle), Empress days 1 and 15, conception FLOAT × BAL.nt.concF, kit toast part via KIT REQUEST. Its own opus worker.
+
+## 11. WORKER s27/s28 #5 (session_01UV1SzjKzCNds3XdRTnsRep; coordinator MAIN s27 → s28)
+START_CTX ≈ 6 % of 1M (own estimate; get_session reads 0). Ended ≈ 20 %. Branch review/night-final stays @ **09c0f055** (no new commit: every co-op change was reverted, see 11.2).
+
+### 11.1 Owner stop (OD 17/11 ~02:05Z, relayed by s28): NO option-1 co-op patching → co-op parts PARKED for coop-thin E
+| item | state @ 09c0f055 | what I found (input for coop-thin E, NOT built) |
+|---|---|---|
+| quickcheck G4 50-coop-one-world | FAIL on night-final, PASS on main 744b80e7 → caused by night-final | Not a world leak. The probe calls endTurn at tối with no host; jnf now holds the week until the night is resolved (guest: waits for the host's nfFin; host: waits for the choices), so the week never ends in the probe and the guest's S.wx.n is the night wording (jclose wxSync) vs base. A probe that marks tonight settled before each week end (S.nfC=S.nfN=S.nfFin=wk(), nfX done) turns G4 PASS ×2 — NOT committed (gate change; co-op parked). Decision for main/coop-thin: change the probe that way, or the gate stays red on night-final. |
+| coop-steal (live Worker) | 14/23 | Real guest bug: jnf apply() sets `S.tonight=dec(m.hold)` on EVERY host message of the day; after fin the host's own day end nulls a friend's night (resolveTonight wrapper) and its next message overwrites the guest's won "me" → guest loses her night. Fix tried: guest ignores m.hold once S.nfFin===day() (host-authoritative) → case 1 green (16/23). Test timing: host check must also accept S.ntk (host already ended the day). Cases 2/3: the flip queue waits behind the week panel `#dawn.kne-day.on.km-endon` (button "Tiếp theo", not #dawn-go) → jflip busy() true, choice never opens in the test; answer() must press that button. All reverted (parked). |
+| coop-night, coop-e2e | NOT RUN (parked) | — |
+
+### 11.2 Solo checks @ 09c0f055
+| check | result |
+|---|---|
+| quickcheck.sh | open 1092 ms, old save ok, time-spill PASS; only G4 FAIL (co-op, 11.1). Perf new/live: render 292/268, tab 337/338, **buổi 952/754 ms** (+26 %, look at it), tasks>200ms 13/11 |
+| cardflip.js 755x1000 + 1180x820 @2 | errs 0; LOOKED: final still + THỊ TẨM seal + "Đêm nay ta được thị tẩm." + one "Chuẩn bị thị tẩm" button, fine on both. Fold: the tassel crosses the rank line ("Đáp ứng") under the card (minor, pre-existing layout) |
+| choice shots (scratch script on night-final's T helpers) Fold 755x1000 + iPad 1180x820 | defence "Giữ chân Hoàng thượng" with the 'tạm' chip + "Còn 10 giây" + ✕ OK; attack "Tranh sủng / Chặn ngự giá". FINDINGS: (a) the two GỢI Ý lines are almost the same text (jk2b effect words) and both read "liều" at Sủng 8 — owner 22:50Z wants a distinct trade-off visible; (b) option/banner pictures blank in the headless run (CDN not loaded here — not judged) |
+| night-final / night-multi / night-steal-unit / flip-entry | green per §10.2 (#4), code unchanged since |
+
+### 11.3 Left for SOLO before SẴN SÀNG KIỂM
+1. Decide G4 (probe change in 11.1, or accept red until coop-thin) — main's call.
+2. Look at buổi perf 952 vs 754 ms.
+3. Distinct Tranh sủng vs Chặn ngự giá hint/odds (balance-core BAL.steal.m) — confirm with balance-core whether built.
+10-night ledger: not mine (own branch later).
