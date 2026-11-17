@@ -1,5 +1,6 @@
 # FOREMAN_C_STATUS (written ONLY by Foreman C)
 FOREMAN C SESSION ROOT-4 = session_011xDdVSQC3Gf8WhM6WW38QF (opened by ROOT-3 ~08:30Z 17/11) · START_CTX ~6% (~60k of 1M; get_session reads 0, own estimate) → roll over at >= 31%, ceiling 60% · lineage depth 3/8 · own hourly wake (:32) below.
+- 09:52Z C LOOKED W6e a51 m27 ×3, m28 ×3, m29-ty1/ty2 (8): all OK. W6e rolled over before uploading a26 m44–m52 + these → verdicts sent to lead #6 for W6e #2 (id pending).
 - 09:48Z C LOOKED W6e a26 m48 m50 m51 m52 ×3 (12): all OK → upload → a26 maid consort-tier COMPLETE (m01–m52). W6e on a51 m27–m52.
 - 09:46Z C LOOKED W5d E6 a36 m40-ty2/ty3, m41 ×3, m42 ×3 (8): all OK → upload (a36 48/78).
 - 09:44Z C LOOKED W4e CT10 a36 ty1 m11–m26: 14 OK upload; hold m22 (pinned-hex redo in CT11); REDO m12-ty1-a36 (sage → pale cool jade).
