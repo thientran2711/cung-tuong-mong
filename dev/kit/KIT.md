@@ -3625,6 +3625,24 @@ Old flat CSS flashes: red → painted blood edge; gold / warm → painted glowbu
 `node dev/test/fxkit.js <url> <out> [shots]` (5 sizes + reduced motion): every kind loads, 50 bursts → 0 leaks + pool reused, every kitFx kind,
 lights play (screen blend), low-end sheet, edges / gift / letter / sheets clean up, auto-Gọn, frame time, heap after bursts, bytes per scene.
 Kit page sample "§68": a button per sprite kind, light, sheet, edge, gift act, letter and kitFx moment.
+### 68.8 PERSON MOTION · kitFigMove(kind, who, o) (owner 15/11 20:05Z item 13 + 22:45Z list; review/presentation-wiring) — `dev/build/jfxkit.js`
+The ONE part that animates a stage figure. `who` = person (or its stage wrapper `ref`), `"me"` (her figure), a picture element, or a snapshot `kfkSnap(img)`. Filter + translate on the picture itself (composite "add", so the people-picture filter `url(#kfa)` stays first); terminal kinds use a GHOST copy so a re-render cannot cut them. Pace = kitPace. Gọn / reduced motion / bots / hidden figure (`kfkSeen`): nothing.
+| kind | what | ms (x BAL.pace) |
+|---|---|---|
+| `flush` | slapped / scolded: one jolt + brief red flush | 900 |
+| `poison` | poisoned: tints green, then blurs, recovers | 3200 |
+| `grey` | demoted / cold palace: dims to grey, recovers | 2600 |
+| `die` | death: ghost greys, sinks and fades; white silk (`kitFxSheet silk`) falls over | 3000 |
+| `drag` | punished: ghost dragged off the stage (`o.dir` -1 / 1), dims | 1700 |
+| `out` | leaves the stage: ghost slides out and fades | 1000 |
+| `in` | arrives: slides in and fades up (`o.from` px) | 1000 |
+| `glow` | rim light of a tone (`o.tone`: lotuslight = pregnancy pink, glow-gold, candle) via `kitFxRim`, never over the face | 2400 |
+`kitFxSheet(name, target, {reverse:true})` plays a sheet backwards (red thread JOINS two people = the snap sheet reversed; placeholder until the painted join thread lands, see ART REQUEST). Sample: kit page §68.8. Test: `node dev/test/presentation-people.js`.
+### 68.9 ENTRANCE · kitEdictOpen(dlg, {kind:"scroll"}) (owner 15/11 ~18:15Z, OD:L528; S3-152; review/presentation-wiring) — `dev/build/jfxkit.js`
+An event card opens like an imperial edict unrolling: the painted rolled edict (`img/kit/mo-edict-closed.webp`, same picture as j93 `kitEdict`) shows at the card's centre and fades while the card's own paper opens from its middle line to full height (clip-path, no drawn shapes). One call per card, fire-and-forget; `o.ms` x BAL.pace (default 1200). Gọn / reduced motion / bots / a card under 120x80 px: nothing. Co-op: local only. Returns `{stop()}` or null. Log `KFK.log` `edict:open`; ghost class `.kfxk-g`. Who calls it: `jpres.js` `kpresShow` when the plan has `ent:"scroll"` = group `trieu-chinh`, category `tan-phong`, every `Chính tuyến` main-story card (also a card whose picture category resolves to `tan-phong`, e.g. `Kết quả tranh ghế`). Side-story and plain cards: no entrance. Sample: kit page §68.9. Test: `node dev/test/presentation-people.js` (edict block).
+Seal moment (S3-205): `KPM.seal` -> `kitFx("seal")` (jfx FX table: lock vibration + shake + ink blots) at the stamp element: `Kết quả tranh ghế` card (showModal wrapper) and her promotion-exam verdict (`exDone` wrapper). Origin-frame PLACEHOLDER (until ART REQUEST A1 lands): a `Chính tuyến` card gets `data-kpres-origin` + a two-line inset rule in the origin colour (`KPO`); `KPO_ART[origin]` = painted frame url removes the rule.
+
+**People moments (jpres.js KPM, S3-151/182/205)** — one table, every call through the kit: `kpmGo(moment, person, second)` with moments slap · poison · harm · rumour · death · drag · out · preg · birth · rise · fall · favour · join · betray. Hooks: `ACT[k].f` (KPM_ACT table: tat, phatquy, poison, kpoison, slowpoison, pgift, pond, pushp, trip, huydung, thathu, phonghoa, rumor, lygian, frame, kframe, ally, xinhh, banphe: plays on a SUCCESS text only), `kill` / `deathSentence` / `dieIf` (NPC dies), `punish` / `fall` (NPC dragged / flushed), `slapGive`, `birthP`, `renderStage` (a figure that left the stage fades out), `render` (state scan of the people on the stage: pregnancy announced, rank up / down, cold palace). Her own moments stay the j93 scenes / j11 feedback.
 ### 68.7 PERSON-SAFE LIGHT · rim light only (owner 16/11 ~21:25Z OD; review/diemtrang-fx) — `kitFxRim` · `kfkPersons` · `KFK_PERSON` in `dev/build/jfxkit.js`
 RULE: light / glow NEVER lies over a person or a face (avatar, portrait, stage figure, her figure, makeup zoom, reveal figure). Light starts at the person's own outline and radiates OUTWARD only.
 `KFK_PERSON` = the selector of person pictures (`img.figimg, #mefig, img.kpor, .kfzoom, .ktrv-fw>img, span.md.kmini, .kpod-fig>img`; a new kind of person picture is ADDED THERE, never handled by a caller).

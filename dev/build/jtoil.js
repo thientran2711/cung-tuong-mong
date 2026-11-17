@@ -551,18 +551,20 @@ const TOIL_TRAIT={
   "Tham vọng":["“Giản dị mà vẫn được để mắt, {xung} phải học {goi} mới được.”"],"Khiêm nhường":["“{Goi} chọn màu khéo quá, {xung} muốn học mà chẳng dám hỏi.”"]}};
 window.TOIL_TRAIT=TOIL_TRAIT;
 for(const [k,B] of Object.entries(TOIL_BAND)){const P=TOIL_SAY[k];if(!P)continue;const T=[];for(const [b,L] of Object.entries(B))for(const x of L)T.push(`[${b}]${x}`);for(const sub of Object.keys(P))P[sub]=P[sub].concat(T)}
-window.TOIL_SAY=TOIL_SAY;
+window.TOIL_SAY=TOIL_SAY;window.TOIL_BAND=TOIL_BAND;
 /* diemtrang-score: the funny line for a vụng face names the part that went wrong (S.toilette.slip); diêm dúa gets its own */
 const TOIL_SLIP={th:{brow:"“Đôi mày này một bên lên núi, một bên xuống sông à?”",powder:"“Má bên đỏ bên trắng thế kia, ngươi định ra hát tuồng sao?”",son:"“Son lem ra tận cằm, ngươi vừa ăn vụng mứt đỏ của ai thế?”"},
  hh:{brow:"“Muội kẻ mày lúc trời chưa sáng hay sao, bên cao bên thấp thế kia?”",powder:"“Phấn của muội… hình như chỉ chịu nằm một bên má.”",son:"“Son của muội hôm nay muốn đi dạo ra ngoài môi rồi.”"},
  emp:{brow:"“Hôm nay ái phi nhướn một bên mày với trẫm đấy à?”",powder:"“Một bên má ửng hồng, một bên trắng bệch: nàng đang thẹn một nửa sao?”",son:"“Son của ái phi chấm lạc chỗ rồi, để trẫm lau cho.”"},
  rival:{brow:"“Mày của muội hôm nay như hai con sâu cãi nhau.” Nàng ta che miệng cười khúc khích.",powder:"“Muội đánh phấn hay vừa ngã vào thúng bột thế?” Nàng ta che miệng cười.",son:"“Son của muội lem cả ra ngoài kìa.” Nàng ta che miệng cười khúc khích."},
  diem:{th:"“Son phấn dày thế này, ai gia tưởng gánh hát vào cung.”",hh:"“Muội định đi hội đèn hay đến thỉnh an bổn cung vậy?”",emp:"“Trẫm suýt tưởng hoa mẫu đơn biết đi.”",rival:"“Ôi chao, phấn son của muội hôm nay… đậm đà thật đấy.” Nàng ta che miệng cười khúc khích."}};
-function toilSlipSay(who,mk){try{if(mk==="diem")return TOIL_SLIP.diem[who]||"";if(mk!=="vung")return"";const sl=(toilToday(S)||{}).slip;return sl&&TOIL_SLIP[who]&&TOIL_SLIP[who][sl]||""}catch(e){return""}}
+/* VOICE BY TÍNH TÌNH (owner 17/11 06:05Z): the slip tease is a tone pool of the teaser (jtone_b.js TONE_POOL "toilSlip:<who>:<slip>"); the old one-liners stay as the fallback */
+function toilSlipSay(who,mk,sp){try{const tp=kTP;if(mk==="diem"){const P=tp("toilSlip:diem:"+who);return P?kLine("toilslip:diem:"+who,P,{sp,ls:S,t:kToneSt(sp,who)}):TOIL_SLIP.diem[who]||""}if(mk!=="vung")return"";const sl=(toilToday(S)||{}).slip;if(!sl)return"";
+ const P=tp("toilSlip:"+who+":"+sl);return P?kLine("toilslip:"+who+":"+sl,P,{sp,ls:S,t:kToneSt(sp,who)}):TOIL_SLIP[who]&&TOIL_SLIP[who][sl]||""}catch(e){return""}}
 function toilSay(k,ctx){const mk=ctx.mk,dv=ctx.dress;const plain=dv==="giandi",showy=dv==="photruong"||dv==="vuot"||dv==="tang";
- const fun={"th-scold":"th","hh-scold":"hh","emp-dislike":"emp","rival-tease":"rival"}[k];const f=fun&&toilSlipSay(fun,mk);if(f)return f;/* diemtrang-score: the part that went wrong / diêm dúa, before the pools */
- const P=TOIL_SAY[k];if(!P)return"";const host=ctx.host;
- const sp=host==="th"?"th":host==="emp"?"emp":host&&host.queen?"hh":host&&typeof host==="object"?host:null;
+ const host=ctx.host;const sp=host==="th"?"th":host==="emp"?"emp":host&&host.queen?"hh":host&&typeof host==="object"?host:null;
+ const fun={"th-scold":"th","hh-scold":"hh","emp-dislike":"emp","rival-tease":"rival"}[k];const f=fun&&toilSlipSay(fun,mk,sp);if(f)return f;/* diemtrang-score: the part that went wrong / diêm dúa, before the pools */
+ const P=TOIL_SAY[k];if(!P)return"";
  let sub;switch(k){
   case"th-scold":case"hh-scold":sub=mk==="moc"?"moc":mk==="vung"&&P.vung?"vung":mk==="diem"?"diem":plain?"plain":"showy";break;
   case"th-praise":case"hh-praise":sub=plain||mk==="moc"?"plain":"neat";break;
@@ -572,7 +574,10 @@ function toilSay(k,ctx){const mk=ctx.mk,dv=ctx.dress;const plain=dv==="giandi",s
   default:sub="any"}
  /* a scolding never uses the warm words (no "con" / "ái phi" while she is being told off); praise follows the real relation */
  const bad=/scold|dislike|jealous|tease/.test(k);let m;try{m=sp?kAddr(sp,S).m:"cool"}catch(e){m="cool"}if(bad&&m==="warm")m="cool";if(!bad&&m==="cold")m="cool";
- let L=P[sub]||P.any,key="toil:"+k+":"+sub;const tk=TOIL_TRAIT[k]&&sp&&traitsOf(sp).find(x=>TOIL_TRAIT[k][x]),TT=tk&&TOIL_TRAIT[k][tk];if(TT){L=L.concat(TT);key+=":"+tk}
+ let L=P[sub]||P.any,key="toil:"+k+":"+sub;
+ /* VOICE BY TÍNH TÌNH: the reaction is a tone pool of the speaker (rank-band lines merged in by jtone_b.js); a crowd has no single speaker: a tone per occasion */
+ const TP=kToneBand(key,k);if(TP){const said=kLine(key,TP,{sp,ls:S,m,t:sp?undefined:kToneRand()});const hb=sp&&typeof sp==="object"&&!/^crowd/.test(k)&&/”$/.test(said)?kHabit(sp):"";return hb?`${said} ${hb}.`:said}
+ const tk=TOIL_TRAIT[k]&&sp&&traitsOf(sp).find(x=>TOIL_TRAIT[k][x]),TT=tk&&TOIL_TRAIT[k][tk];if(TT){L=L.concat(TT);key+=":"+tk}
  const said=kLine(key,L,{sp,ls:S,m});
  /* her signature habit (jvoice kHabit), long form only, when the line has no gesture of its own */
  const hb=sp&&typeof sp==="object"&&!/^crowd/.test(k)&&/”$/.test(said)?kHabit(sp):"";/* a crowd reaction is many voices: no one consort's habit (reviewer r1) */return hb?`${said} ${hb}.`:said}
@@ -589,7 +594,7 @@ const TOIL_GEST={
 /* ONE reaction line (owner 17/11 06:30Z): a spoken line that already ends with its own gesture ("…” Nàng ta che miệng cười.") or a plain narration needs no second gesture */
 function toilSayOwnGest(t){t=String(t||"");return !/[“"]/.test(t)||/[”"]\s*[A-ZÀ-Ỹ][^”"]*[.!…]\s*$/.test(t)}
 function toilGest(r){if(r.g!=null)return r.g;if(r.say!=null&&toilSayOwnGest(r.say))return r.g="";const host=r.host;const k=(host==="th"?"th":host==="emp"?"emp":host&&host.queen?"hh":"v")+(r.n>0?"+":"-");
- return r.g=TOIL_GEST[k]?kLine("toil-gest:"+k,TOIL_GEST[k]):""}
+ return r.g=TOIL_GEST[k]?kLine("toil-gest:"+k,kTP("toilGest:"+k)||TOIL_GEST[k],{about:host}):""}
 function toilLit(r){const g=toilGest(r);let l=String(r.line||"");if(!g)l=l.charAt(0).toUpperCase()+l.slice(1);return (g?g+" — ":"")+l+(/[.)]$/.test(l)?"":".")}
 /* r = {k, who (face), host ("th" | "emp" | consort), n (signed change shown in words), line (numbers), ctx} */
 /* the gesture is drawn once: the event panel shows it (long form) and the Sổ ghi line of the reaction gets it too (jvoice kLitLog, long form);
