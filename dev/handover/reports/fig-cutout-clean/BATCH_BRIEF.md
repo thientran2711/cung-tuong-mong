@@ -29,3 +29,5 @@ Context per file is the cost, not credits. Cut it:
 4. Halo FAIL on pale/pink gowns that look clean on dark+light = accept (W3 ruling by lead). Pinholes <400 px ignore.
 5. Do not write long notes: append one TSV line per file (key, creation id, status) to batch-<shard>.md and push every batch of ~24.
 6. Target >= 40 files per session, >= 8 files per ~6 tool calls.
+
+## SPLIT (17/11, 7 workers): maid-rest and consort-rest are split in halves. W5 = maid-rest-A.txt, W6 = maid-rest-B.txt; W3 = consort-rest-A.txt, W7 = consort-rest-B.txt. Do all a18 of your half first. Progress files: batch-<shard>.md (W6: batch-maid-rest-B.md, W7: batch-consort-rest-B.md).
