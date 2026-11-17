@@ -176,6 +176,11 @@ function srvMeet(){const m=srvM();const L=allServ().filter(s=>ownerOf(s)!==m&&!S
 /* ---------- the week, the month ---------- */
 (function(){const n0=nextBuoi;nextBuoi=function(){if(!isSrv())return n0.apply(this,arguments);const b0=bid();const r=n0.apply(this,arguments);if(isSrv()&&!S.dead&&bid()!==b0&&(S.buoi||0)>0){deal();render()}return r}})();
 (function(){const e0=endTurn;endTurn=function(){if(isSrv())return srvEndTurn();return e0.apply(this,arguments)}})();
+/* review ag3-r1 (one world, LUẬT SỬA CẢ NHÓM with AG3's rest fix): the month's illness of the consorts, the Emperor and Thái hậu (j13 illMonth)
+   runs in a maid life too; before, no NPC consort fell ill or got well on this road (bot: up to 38 % of her nights ill → Tiến cử by need).
+   Her own illness roll stays out (the maid road has none); host only (worldOn). */
+function srvIllWorld(){if(typeof illMonth!=="function"||(typeof worldOn==="function"&&!worldOn()))return"";const c0=consorts;consorts=function(){return c0.apply(this,arguments).filter(p=>p!==S)};
+ try{return illMonth()||""}catch(e){console.error("srv ill",e);return""}finally{consorts=c0}}
 function srvEndTurn(){if(S.dead||Q.length||S.mg)return;S.buoi=0;const q0=Q.length;let ev="";
  /* AG3 (one world): the consorts sleep and rest in a maid life as in hers (j3 nightRg + j76sleep); before, their Sức only fell on this road */
  try{if(typeof worldOn!=="function"||worldOn())liveRivals(true).forEach(v=>v.suc=cl(v.suc+nightRg()+(typeof j76sleep==="function"?j76sleep(v):0),0,100))}catch(e){console.error("srv rest",e)}
@@ -195,7 +200,7 @@ function srvEndTurn(){if(S.dead||Q.length||S.mg)return;S.buoi=0;const q0=Q.lengt
 function srvWeek(){srvMisCheck();const m=srvM();if(!m||!isSrv())return;
  if(roll(32))srvMoodEvent();else if(roll(Math.max(2,(m.malice||40)/8)))srvOrder();else if(roll(7))srvBribeOffer();else if(roll(8))srvFramedEvent();else if(roll(12))srvFriendTip()}
 function srvMonth(){let ev="";S.turn++;const rk=S.srv.rk;apply({bac:CNV_WAGE[rk]});log(`Lĩnh lương tháng: Bạc +${CNV_WAGE[rk]}.`)/* log-sync r1: the Sổ ghi reads "Bạc +N" */;
- ev+=srvW(()=>{let e="";for(const v of liveRivals(true))stipend(v);e+=rivalsMonth()||"";e+=servRanks()||"";e+=servMonth()||"";oanMonth();restock();e+=heirMonth()||"";e+=moodMonth()||"";return e})||"";
+ ev+=srvW(()=>{let e="";for(const v of liveRivals(true))stipend(v);e+=rivalsMonth()||"";e+=servRanks()||"";e+=servMonth()||"";oanMonth();restock();e+=heirMonth()||"";e+=moodMonth()||"";e+=srvIllWorld();return e})||"";
  if(S.dead)return ev;srvMisCheck();const m=srvM();
  if(isSrv()&&S.srv.lau<=0&&m){S.srv.mp+=1+Math.floor(rkOf(m)/3);const need=(S.srv.rk+1)*5,mx=srvMax();
   if(S.srv.mp>=need&&S.srv.rk<mx&&S.tin>=35&&typeof exSrvGate==="function"&&exSrvGate(S.srv.rk+1)){S.srv.mp=need}
