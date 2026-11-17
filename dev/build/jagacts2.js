@@ -58,7 +58,7 @@ agReg("consort","cx2",(v,N,need)=>{const O=[];const X=BAL.ag.cx2;if(v===S||v.out
   if(!need||need==="spite"||need==="safe"){const o=odA(v,cx2O(v,"maidSpy"));const u=agcU(v,N,o,X.maidSpy.g,{},"scheme");if(u>0)O.push({k:"cx2:maidSpy",t:null,u,tag:"scheme",act:"sai cung nữ thân tín đi dò la",at:()=>palaceOf(v)})}}
  if(!need||need==="safe"||need==="spite"){const L=T.filter(t=>t!==v&&sp(t)>0&&(t.staff||[]).some(s=>s.spyFor!==key(v)));
   if(L.length){const t=mindPickBy(L,x=>sp(x),v);const s=t&&ag2BribeS(v,t);if(s){const c=(typeof nv==="function"?nv(s,"bribeCost"):30)||30;if((v.bac||0)>=c){const u=agcU(v,N,odA(v,35-(s.loyal||0)/3+(v.tamco||0)/5),X.bribeSrv.g,{"bac":-c},"scheme");if(u>0)O.push({k:"cx2:bribeSrv",t,u,tag:"scheme",act:"mua chuộc kẻ hầu cung khác",at:()=>palaceOf(v)})}}
-   if(t&&(v.bac||0)>=X.plantSrv.bac&&typeof bestSent==="function"&&bestSent(v)&&(!need||need==="spite")){const u=agcU(v,N,odA(v,40+(v.tamco||0)/4),X.plantSrv.g,{"bac":-X.plantSrv.bac},"scheme");if(u>0)O.push({k:"cx2:plantSrv",t,u,tag:"scheme",act:"cài người vào cung khác",at:()=>palaceOf(v)})}}}
+   if(t&&(v.bac||0)>=X.plantSrv.cost&&typeof bestSent==="function"&&bestSent(v)&&(!need||need==="spite")){const u=agcU(v,N,odA(v,40+(v.tamco||0)/4),X.plantSrv.g,{"bac":-X.plantSrv.cost},"scheme");if(u>0)O.push({k:"cx2:plantSrv",t,u,tag:"scheme",act:"cài người vào cung khác",at:()=>palaceOf(v)})}}}
  return O});
 function ag2BribeS(v,t){const L=(t.staff||[]).filter(s=>s&&s.spyFor!==key(v));return L.length?mindPickBy(L,s=>Math.max(1,100-(s.loyal||0)),v):null}
 agRunReg("cx2:maidTalk",v=>{const m=v.maid;if(!m)return"";m.loyal=cl((m.loyal||0)+BAL.ag.cx2.maidTalk.w.maid,0,100);return ag2Res(v,"maidTalk",1,`${v.name} tâm sự với ${m.name}`)});

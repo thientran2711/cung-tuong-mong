@@ -897,6 +897,6 @@ BAL.ag.emp3={desire:5,visB:[3],tea:.4,teaB:[1,2],teaGap:6};
 BAL.ag.give={b:1,ref:40,div:60,anDiv:200,lo:.4,hi:2,tr:{datinh:1.2,lanhlung:.7},th:{ref:40,div:60,lo:.4,hi:2}};
 /* AG-ALL-2 consort ↔ servants (jagacts2): maidTalk = Tâm sự with her confidant maid (below = her lòng under which she bothers), maidSpy = Sai đi dò la
    (o + lòng / ld), bribeSrv = Mua chuộc a servant of a rival (the j29 bribeServ cost / odds), plantSrv = Cài người vào cung khác (j10 plantServ); g = need points */
-Object.assign(BAL.ag.cx2,{maidTalk:{w:{"maid":6},below:70,g:{safe:2}},maidSpy:{o:40,ld:3,l:{"maid":-5},g:{spite:3,safe:2}},bribeSrv:{g:{safe:3,spite:2}},plantSrv:{bac:40,g:{spite:3,safe:1}}});
+Object.assign(BAL.ag.cx2,{maidTalk:{w:{"maid":6},below:70,g:{safe:2}},maidSpy:{o:40,ld:3,l:{"maid":-5},g:{spite:3,safe:2}},bribeSrv:{g:{safe:3,spite:2}},plantSrv:{cost:40,g:{spite:3,safe:1}}});
 /* AG-ALL-2 emotion cards (jemoact eaNpcWeek): an NPC acts on a feeling with the old % × (feeling strength / actV), at most × max */
 BAL.ag.emo2={max:2};
