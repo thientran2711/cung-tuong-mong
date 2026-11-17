@@ -302,7 +302,7 @@ function nightGain(s){const BN=BAL.night;return{sung:BN.sung+Math.max(0,Math.rou
 /* main's nightG / nightA kept as thin reads of nightGain (one rule) */
 function nightG(s){return nightGain(s).sung}
 function nightA(s){return nightGain(s).an}
-function nx(b,note,p){const m=[1,0,-1,-2][S.emp.mood];const v=b+m;const w=v>=3?"Rất chắc":v>=2?"Chắc":v>=1?"Khá chắc":v>=0?"Năm ăn năm thua":"Khó";const q=p&&p.q!=null?p.q:1;
+function nx(b,note,p){const m=BAL.night.mood[S.emp.mood];const v=b+m;const w=v>=3?"Rất chắc":v>=2?"Chắc":v>=1?"Khá chắc":v>=0?"Năm ăn năm thua":"Khó";const q=p&&p.q!=null?p.q:1;
  const hi=nightGain(q+v+2),lo=nightGain(q+v-(p&&p.vp?2:0));return `${w} · thành: đêm vui, Sủng +${hi.sung}, Ân tình +${hi.an} · hỏng: đêm nhạt, Sủng +${lo.sung}, Ân tình +${lo.an}${note?" · "+note:""}${vpItems(S).length?` · kèm: đồ vượt phẩm bị thu, Danh -4 (nếu đang đeo): ${chanceW(40)}`:""}`}
 function nightFx(s){const BN=BAL.night;S.tablet=0;S.nights++;S.nightLog.push(wk());const NG=nightGain(s),g=NG.sung;apply({sung:g});S.an=cl(S.an+NG.an,0,100);ghenAll(BN.ghen);
  if(giuBlocked(S))pushFront(mkP("giu"),"Giữ hay không giữ");else night(S);
