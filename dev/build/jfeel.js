@@ -126,6 +126,8 @@ function feelConv(k,v){const O=fB().old;if(!(k in O))return[k,v];const n=O[k];FE
  if(k==="dau")return[n,Math.max(v,fB().lv[2])];return[n,v]}
 /* the ONE entry point: every emoSet of every module (old keys too) lands in the set */
 (function(){if(typeof emoSet!=="function")return;const s0=emoSet;emoSet=function(p,k,v,why,t){try{if(feelOn()&&k in fB().old){const c=feelConv(k,v);if(!c)return;arguments[1]=c[0];arguments[2]=c[1]}}catch(e){}return s0.apply(this,arguments)}})();
+/* causes written straight into the list (jmoodknow emo2Turn: the old khóc turn) obey the set too: khóc is an act now, so no khóc cause */
+(function(){if(typeof mkAdd!=="function")return;const a0=mkAdd;mkAdd=function(p,o){try{if(feelOn()&&o&&o.k&&o.k in fB().old){if(o.k==="khoc"){FEEL.stat.conv.khoc=(FEEL.stat.conv.khoc||0)+1;return null}const c=feelConv(o.k,o.s||0);if(!c)return null;o=Object.assign({},o,{k:c[0],s:c[1]});arguments[1]=o}}catch(e){}return a0.apply(this,arguments)}})();
 /* stored causes (old saves, legacy writers of p.emo): converted once per person */
 function feelMig(p){if(!p||p.__feelMig)return;p.__feelMig=1;FEEL.stat.mig++;const O=fB().old;
  if(Array.isArray(p.mk))p.mk=p.mk.filter(m=>{if(!m||!m.k||!(m.k in O))return true;const c=feelConv(m.k,m.s||0);if(!c)return false;m.k=c[0];m.s=c[1];return true});
