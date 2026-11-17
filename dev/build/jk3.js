@@ -533,7 +533,7 @@ small.kblf{display:block;margin-top:3px;font-size:.72rem;color:var(--dim,#7a6a58
    Per screen: a Q / kitModal item may set optLayout:'rows'|'grid'; otherwise it is read from the options' CONTENT: an option is LONG when it
    shows Cần / Được / Mất / Kèm rows, an odds word, or a text over 2 lines; SHORT = title + cost line. All short → grid, all long → rows,
    mixed → long ones full width, short ones in the grid. The identity card keeps its approved pinned pair. */
-function k3IsLong(b){if(b.querySelector(".kr-can,.kr-duoc,.kr-mat,.kr-kem,.kr-why,.kodds:not(:empty),.oc"))return true;const lh=parseFloat(getComputedStyle(b).lineHeight)||20;
+function k3IsLong(b){if(b.querySelector(".kr-can,.kr-duoc,.kr-mat,.kr-thanh,.kr-bai,.kr-kem,.kr-why,.kodds:not(:empty),.oc"))return true;const lh=parseFloat(getComputedStyle(b).lineHeight)||20;
  const t=b.querySelector(".kan");return !!(t&&t.getBoundingClientRect().height>lh*2.3)}
 function k3OptCols(){try{const W=innerWidth;const m=typeof Q!=="undefined"?Q[0]:null;const want=m&&(m.optLayout||(m.kit&&m.kit.optLayout));
  document.querySelectorAll("#modal .opts:has(> button.ka), #modal .kpscopts").forEach(g=>{const dl=g.closest(".dlg");if(dl&&dl.querySelector(".kpid"))return;

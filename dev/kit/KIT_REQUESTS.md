@@ -62,3 +62,10 @@ KIT FIRST: the worker draws nothing. Data is ready in jshelf.js `shelfView(p)` �
 
 ## 17/11 — review coop-thin-c r1 (Foreman B reviewer): item reveal card with many items overlaps its list (kit keeper)
 | 17/11 | review-coop-thin-c-r1 | kitRevealHTML item card (seen: a new life's "Phẩm phục Tần" card, 22 items, guest iPad 1180x820@2): the item-icon spotlight rows (9 + 9 + 4) are taller than the space above the list, the last row lands on the first list lines and the fixed Nhận button covers list text. Not co-op specific (no kit file differs from main). Ask: cap the icon rows (+N chip) or move the list below the icons, button outside the scroll. |
+
+## 17/11 kit-display-room — ART REQUESTS (Foreman C) + status
+| Date | Who | Part | Used in | Given to | Status |
+|---|---|---|---|---|---|
+| 17/11 | kit-display-room | `img/kit/ico-disp.webp` left-rail icon "Nơi trưng bày" (square kit icon, same family as mo-calendar / mo-edict-closed) | kitStageRail `disp` (jdisp.js) | Foreman C | placeholder `img/kit/ico-room.webp` in use |
+| 17/11 | kit-display-room | `img/kit/disp-backdrop.webp` painted shop-style shelf wall (iPad half 590x820 portrait and one-page phone; shelves are CSS planks until the wall carries painted shelves) + optional `img/kit/disp-plank.webp` (9-slice plank) | kitDisplayRoom `KDR_BG` / `.kdr-plank` | Foreman C | placeholder `img/kit/bg-default.webp` + CSS plank |
+| 17/11 | kit-display-room | KIT READY §89 kitDisplayRoom (view, drawer, rail); data API stays review/display-shelf (rail icon hidden until it is on main) | Nơi trưng bày | kit-display-room | built, awaiting review |
