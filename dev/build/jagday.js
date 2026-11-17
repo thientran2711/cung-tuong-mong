@@ -50,6 +50,8 @@ function agOptsG(p,N,need){const g=agGrp(p);let O=[];
  for(const gg of gs)for(const k in AGREG[gg]||{}){try{const L=AGREG[gg][k](p,N,need)||[];for(const o of L)if(o&&o.u>0)O.push(o)}catch(e){agdErr("prov:"+gg+":"+k,e)}}
  return O}
 function agWorld(p){try{return typeof window.worldPlanW==="function"?window.worldPlanW(p,agGrp(p)):null}catch(e){agdErr("world",e);return null}}
+/* LIFE: the feeling she wakes with (jemo p.emo, strong enough) leans what she wants today: BAL.ag.day.mood.k[feeling] = {need: ×, _: × keeping her schedule} */
+function agMoodF(p){try{const e=p&&typeof p==="object"&&p.emo;const M=BAL.ag.day.mood;if(!e||!(e.v>=M.min))return{};return M.k[e.k]||{}}catch(e){return{}}}
 function agTop(N){let b="",v=0;for(const n in N)if(N[n]>v){v=N[n];b=n}return b}
 /* one buổi of one person's plan: base place (the old schedule's weights) + what she wants + how */
 function agDrawB(p,id,b,base,W){const c=j95c(b);const slot={pl:base[0],a:base[1],t:base[2],why:base[3],k:null,need:null};
@@ -59,7 +61,8 @@ function agDrawB(p,id,b,base,W){const c=j95c(b);const slot={pl:base[0],a:base[1]
   const L=[[slot.pl,P[slot.pl]!=null?P[slot.pl]:1]];for(const k in P)if(P[k]>1&&k!==slot.pl&&(p===S.emp||p==="th"||j95acc(p,k)))L.push([k,(P[k]-1)*BAL.ag.day.worldPull]);
   if(L.length>1){const k=agPw(L);if(k!==slot.pl){slot.pl=k;slot.a="go";slot.why=W.why||"việc chung trong cung";AGD.stat.world++}}}
  let N;try{N=agNeedsG(p)}catch(e){return slot}
- const rt=BAL.ag.routine;const NL=[[null,rt]];for(const n in N)if(N[n]>0)NL.push([n,N[n]*BAL.ag.needW]);/* rest is a need (the rest card) */
+ const rt=BAL.ag.routine;const NL=[[null,rt]];const MF=agMoodF(p);for(const n in N)if(N[n]>0)NL.push([n,N[n]*BAL.ag.needW*(MF[n]||1)]);/* rest is a need (the rest card); her feeling of the day (jemo) leans her needs */
+ if(MF._)NL[0][1]*=MF._;
  const need=agPw(NL);if(!need)return slot;
  let O=agOptsG(p,N,need);
  if(W)O=O.map(o=>{let m=(W.deed&&W.deed[o.k]!=null?W.deed[o.k]:1);if(W.place){let pl=null;try{pl=o.at(0,p,o.t)}catch(e){}if(pl&&W.place[pl]!=null)m*=W.place[pl]}return m===1?o:Object.assign({},o,{u:o.u*m})}).filter(o=>o.u>0);
@@ -92,7 +95,10 @@ function agDayDraw(){const t0=performance.now();const D=agDz();D.d=wk();D.P={};D
 /* re-plan at a new buổi (b > 0): her top need changed, or she was touched; chance BAL.ag.day.replan */
 function agTouch(p){try{const id=ledgerId(p);if(!id)return;const z=agZ();z.rp=z.rp||{};z.rp[id]=1;AGD.stat.touch++}catch(e){}}
 function agReplanB(){const D=agDz();if(D.d!==wk())return;const b=agDayB();if(!b||D.rb===wk()+"-"+b)return;D.rb=wk()+"-"+b;const z=agZ();const T=z.rp||{};const R=BAL.ag.day.replan;
+ let rain=false;try{rain=wet()}catch(e){}
  for(const v of liveRivals(true)){if(!v.alive||v.out)continue;const id="v"+v.id;if(!D.P[id]){agDrawPerson(v,id,b,"consort");continue}
+  /* LIFE: plans broken by rain on a garden plan, or by falling ill (she always re-plans then) */
+  {const sl=D.P[id][b];let ill=false;try{ill=!!illOf(v)}catch(e){}if((rain&&sl&&sl.pl==="vuon")||(ill&&!(D.ill||{})[id])){(D.ill=D.ill||{})[id]=ill?1:0;agDrawPerson(v,id,b,"consort");AGD.stat.replan++;continue}}
   let ch=0;try{ch=agTop(agNeedsG(v))!==D.T[id]?R.need:0}catch(e){}if(T[id])ch=Math.max(ch,R.touch);
   if(ch&&roll(ch)){agDrawPerson(v,id,b,"consort");AGD.stat.replan++}else AGD.stat.keep++}
  z.rp={}}
