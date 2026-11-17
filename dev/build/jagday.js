@@ -32,7 +32,7 @@ function agDOn(){try{return !!(agOn()&&BAL.ag.day&&BAL.ag.day.on)}catch(e){retur
 function agGrp(p){if(!p)return"";if(S.emp&&p===S.emp)return"emp";if(p==="th"||(S.thO&&p===S.thO))return"th";if(p.kind==="mm"||p.kind==="st"||p.maidOf!=null||p.sid!=null)return p.eunuch||p.male?"srv":"maid";
  try{if(p.queen||(typeof queenP==="function"&&queenP()===p))return"hh"}catch(e){}return"consort"}
 function agNeedsG(p){const g=agGrp(p);if(AGNEEDREG[g])try{return AGNEEDREG[g](p)}catch(e){agdErr("needs:"+g,e)}return agNeedsC(p)}
-function agDz(){const z=agZ();if(!z.day||typeof z.day!=="object")z.day={d:-1,P:{},T:{}};z.day.P=z.day.P||{};z.day.T=z.day.T||{};return z.day}
+function agDz(){const z=agZ();if(!z.day||typeof z.day!=="object")z.day={d:-1,P:{},T:{},I:{}};z.day.P=z.day.P||{};z.day.T=z.day.T||{};z.day.I=z.day.I||{};return z.day}
 function agDayB(){return S.buoi||0}
 /* the buổi being drawn (null = live): jagent's place readers look at the PLAN of the Emperor / Thái hậu / the target for that buổi */
 AG.cB=null;
@@ -61,7 +61,7 @@ function agDrawB(p,id,b,base,W){const c=j95c(b);const slot={pl:base[0],a:base[1]
   const L=[[slot.pl,P[slot.pl]!=null?P[slot.pl]:1]];for(const k in P)if(P[k]>1&&k!==slot.pl&&(p===S.emp||p==="th"||j95acc(p,k)))L.push([k,(P[k]-1)*BAL.ag.day.worldPull]);
   if(L.length>1){const k=agPw(L);if(k!==slot.pl){slot.pl=k;slot.a="go";slot.why=W.why||"việc chung trong cung";AGD.stat.world++}}}
  let N;try{N=agNeedsG(p)}catch(e){return slot}
- const rt=BAL.ag.routine;const NL=[[null,rt]];const MF=agMoodF(p);for(const n in N)if(N[n]>0)NL.push([n,N[n]*BAL.ag.needW*(MF[n]||1)]);/* rest is a need (the rest card); her feeling of the day (jemo) leans her needs */
+ const rt=BAL.ag.routine;const NL=[[null,rt]];const MF=agMoodF(p);const IN=agIntentOf(id);for(const n in N)if(N[n]>0)NL.push([n,N[n]*BAL.ag.needW*(MF[n]||1)*(IN.includes(n)?BAL.ag.day.intentW:1)]);/* HYBRID: the day's intent steers which need she serves this buổi *//* rest is a need (the rest card); her feeling of the day (jemo) leans her needs */
  if(MF._)NL[0][1]*=MF._;
  const need=agPw(NL);if(!need)return slot;
  let O=agOptsG(p,N,need);
@@ -72,7 +72,9 @@ function agDrawB(p,id,b,base,W){const c=j95c(b);const slot={pl:base[0],a:base[1]
  if(!pl||(W&&W.place&&W.place[pl]===0))return slot;
  if(p!==S.emp&&p!=="th"&&p.alive!==undefined){if(p.confined&&pl!==palaceOf(p))return slot;if(!j95acc(p,pl)&&pl!=="home"&&pl!==palaceOf(p))return slot}
  AGD.stat.deeds++;
- return {pl,a:"ag_"+o.k,t:o.t?ledgerId(o.t):null,why:o.why||"",k:o.k,kd:o.kd||"",need,act:o.act,base:base[0]}}
+ return {pl,a:"ag_"+o.k,t:o.t?ledgerId(o.t):null,why:o.why||AGWHY[need]||AGWHYX[need]||"lo việc của mình",k:o.k,kd:o.kd||"",need,act:o.act,base:base[0]}}
+/* reasons of the needs of other groups (part B / A: Emperor, Thái hậu): AGWHYX[need] = text */
+const AGWHYX={company:"muốn có người bầu bạn",order:"lo giữ phép tắc hậu cung",fond:"thương người hiền thục",mercy:"mở lòng từ bi"};window.AGWHYX=AGWHYX;
 /* the old schedule's own row for buổi b, its surprise dice off (surprises are re-plans now) */
 function agBase(fn,args,b){const sur=J95.SUR;const bo=S.buoi;J95.SUR=0;try{S.buoi=b;return fn.apply(null,args)}finally{J95.SUR=sur;S.buoi=bo}}
 const AGD0={};const AGDRAW=[];
@@ -85,31 +87,36 @@ function agDrawPerson(p,id,from,kind,to){const D=agDz();const L=D.P[id]=D.P[id]|
     /* the Emperor / Thái hậu: their own providers when a part registers them (AG-ALL part A), else their schedule weights */
     if(Object.keys(AGREG[kind]||{}).length)return agDrawB(p,id,b,base,W);return s})();
    AGD.stat.slots++}catch(e){agdErr("draw",e)}finally{AG.cB=null;S.buoi=bo}}
- if(kind==='consort')try{D.T[id]=agTop(agNeedsG(p))}catch(e){}}
-/* perf (budget BAL.ag.perf): at the start of the day everyone's FIRST buổi is drawn at once (the record needs it now); the later buổi of
-   the same day plan are drawn in slices of BAL.ag.perf.slice ms over the next frames (AGD.q); a buổi that comes before its slice is drawn then */
+ }
+/* HYBRID DAY (Foreman C 13:51Z, design change from main): at the start of the day each NPC sets her day INTENT = 1–2 needs she means to serve
+   today (her long goals = road weights in her needs, her feeling of the day, her needs now); EVERY buổi she picks the concrete place + deed
+   toward it from what is true at that buổi (her needs after the last buổi's deeds and what befell her — agTouch, the results of her deeds).
+   Re-plan triggers (rain on a garden buổi, falling ill, touched, the top need changed) may change the INTENT for the rest of the day.
+   Perf: the per-buổi pick of everyone runs where the record is built (j95plan); measured in AGD.ms (budget BAL.ag.perf.p95). */
 function agDayList(){const L=[];if(S.emp)L.push([S.emp,"emp","emp"]);if(!S.thDead)L.push(["th","th","th"]);
  for(const v of liveRivals(true)){if(!v.alive||v.out)continue;L.push([v,"v"+v.id,"consort"])}
  for(const f of AGDRAW){try{for(const x of (f()||[]))L.push(x)}catch(e){agdErr("drawReg",e)}}return L}
-function agDayDraw(){const t0=performance.now();const D=agDz();D.d=wk();D.P={};D.T={};AGD.stat.draw++;const b0=agDayB();
- const L=agDayList();for(const [p,id,kind] of L){try{agDrawPerson(p,id,b0,kind,b0)}catch(e){agdErr("draw0",e)}}
- AGD.q={d:D.d,L:L.map(x=>x.concat([b0+1])),tm:0};
- const ms=performance.now()-t0;window.__agDayMs=ms;AGD.ms.push(ms);if(AGD.ms.length>60)AGD.ms.shift();agDaySliceLater()}
-function agDaySliceLater(){const Q=AGD.q;if(!Q||Q.tm||!Q.L.length)return;Q.tm=1;setTimeout(()=>{Q.tm=0;agDaySlice()},0)}
-function agDaySlice(all){const Q=AGD.q;if(!Q)return;const D=agDz();if(Q.d!==D.d||D.d!==wk()){AGD.q=null;return}const t0=performance.now();
- while(Q.L.length){if(!all&&performance.now()-t0>=BAL.ag.perf.slice)break;const [p,id,kind,from]=Q.L.shift();if(from<j95nB())try{agDrawPerson(p,id,from,kind)}catch(e){agdErr("drawS",e)}}
- const ms=performance.now()-t0;AGD.ms.push(ms);if(AGD.ms.length>60)AGD.ms.shift();if(Q.L.length)agDaySliceLater();else AGD.q=null}
-/* re-plan at a new buổi (b > 0): her top need changed, or she was touched; chance BAL.ag.day.replan */
+function agIntentOf(id){const D=agDz();const I=D.I&&D.I[id];return I&&I.g||[]}
+function agIntent(p,id){const D=agDz();D.I=D.I||{};let N;try{N=agNeedsG(p)}catch(e){N={}}const MF=agMoodF(p);const L=[];for(const n in N)if(N[n]>0)L.push([n,N[n]*(MF[n]||1)]);
+ const g=[];if(L.length){const a=agPw(L);g.push(a);const L2=L.filter(x=>x[0]!==a);if(L2.length&&roll(BAL.ag.day.two))g.push(agPw(L2))}
+ D.I[id]={g,why:g.map(n=>AGWHY[n]||n).join(", ")};try{D.T[id]=agTop(N)}catch(e){}return D.I[id]}
+function agDayDraw(){const t0=performance.now();const D=agDz();D.d=wk();D.P={};D.T={};D.I={};D.rb=null;AGD.stat.draw++;const b0=agDayB();
+ const L=agDayList();for(const [p,id,kind] of L){try{agIntent(p,id);agDrawPerson(p,id,b0,kind,b0)}catch(e){agdErr("draw0",e)}}D.rb=wk()+"-"+b0;
+ const ms=performance.now()-t0;window.__agDayMs=ms;AGD.ms.push(ms);if(AGD.ms.length>60)AGD.ms.shift()}
+function agDaySlice(){/* kept for callers: the hybrid day has no pre-drawn later buổi */}
+/* re-plan of the INTENT at a new buổi: her top need changed, or she was touched; chance BAL.ag.day.replan */
 function agTouch(p){try{const id=ledgerId(p);if(!id)return;const z=agZ();z.rp=z.rp||{};z.rp[id]=1;AGD.stat.touch++}catch(e){}}
-function agReplanB(){const D=agDz();if(D.d!==wk())return;const b=agDayB();if(!b||D.rb===wk()+"-"+b)return;D.rb=wk()+"-"+b;const z=agZ();const T=z.rp||{};const R=BAL.ag.day.replan;
+function agReplanB(){const D=agDz();if(D.d!==wk())return;const b=agDayB();if(D.rb===wk()+"-"+b)return;D.rb=wk()+"-"+b;const t0=performance.now();const z=agZ();const T=z.rp||{};const R=BAL.ag.day.replan;
  let rain=false;try{rain=wet()}catch(e){}
- for(const v of liveRivals(true)){if(!v.alive||v.out)continue;const id="v"+v.id;if(!D.P[id]){agDrawPerson(v,id,b,"consort");continue}
-  /* LIFE: plans broken by rain on a garden plan, or by falling ill (she always re-plans then) */
-  {const sl=D.P[id][b];let ill=false;try{ill=!!illOf(v)}catch(e){}if((rain&&sl&&sl.pl==="vuon")||(ill&&!(D.ill||{})[id])){(D.ill=D.ill||{})[id]=ill?1:0;agDrawPerson(v,id,b,"consort");AGD.stat.replan++;continue}}
-  let ch=0;try{ch=agTop(agNeedsG(v))!==D.T[id]?R.need:0}catch(e){}if(T[id])ch=Math.max(ch,R.touch);
-  if(ch&&roll(ch)){agDrawPerson(v,id,b,"consort");AGD.stat.replan++}else AGD.stat.keep++}
- z.rp={}}
-function agDayEnsure(){if(!agDOn())return;const D=agDz();if(D.d!==wk())agDayDraw();else{if(AGD.q&&agDayB()>0)agDaySlice(1);agReplanB()}}
+ for(const [p,id,kind] of agDayList()){try{
+  if(kind==="consort"&&D.I&&D.I[id]){const v=p;let ill=false;try{ill=!!illOf(v)}catch(e){}const prev=D.P[id]&&D.P[id][b-1];
+   /* LIFE: plans broken by rain on a garden plan, or by falling ill: she always re-thinks her day then */
+   if((rain&&prev&&prev.pl==="vuon")||(ill&&!(D.ill||{})[id])){(D.ill=D.ill||{})[id]=ill?1:0;agIntent(v,id);AGD.stat.replan++}
+   else{let ch=0;try{ch=agTop(agNeedsG(v))!==D.T[id]?R.need:0}catch(e){}if(T[id])ch=Math.max(ch,R.touch);if(ch&&roll(ch)){agIntent(v,id);AGD.stat.replan++}else AGD.stat.keep++}}
+  else if(!D.I||!D.I[id])agIntent(p,id);
+  agDrawPerson(p,id,b,kind,b)}catch(e){agdErr("buoi",e)}}
+ z.rp={};const ms=performance.now()-t0;AGD.ms.push(ms);if(AGD.ms.length>60)AGD.ms.shift()}
+function agDayEnsure(){if(!agDOn())return;const D=agDz();if(D.d!==wk())agDayDraw();else agReplanB()}
 /* the record's row for a person this buổi = her plan */
 function agRow(s){const r=[s.pl,s.a||"go",s.t||null,s.why||""];return [r,r.slice(),r.slice(),r.slice()]}
 /* ---------------- the planned deed lands (AG1 pend / ledger / witness path) ---------------- */
@@ -134,7 +141,10 @@ function agPlanX(id,s,kh){const z=agZ(),R=agRec();const p={key:agKey(),id,vid:nu
  AG.stat.by[s.k]=(AG.stat.by[s.k]||0)+1;const L={w:wk(),b:S.buoi||0,kh,id,k:s.k,t:s.t||null,pl:s.pl,why:p.why};z.log.push(L);if(z.log.length>60)z.log.shift();return p}
 function agTickX(){if(!agDOn())return;const D=agDz();if(D.d!==wk())return;const z=agZ(),key=agKey();const k0=agKh();
  for(const id in D.P){if(/^v\d/.test(id))continue;const s=agDaySlot(id);if(!s||!s.k||!AGRUN[s.k])continue;if(z.pend.some(p=>p.id===id&&p.key===key)||(z.didX&&z.didX[id]===key))continue;
-  (z.didX=z.didX||{})[id]=key;const kh=k0+Math.floor(Math.random()*Math.max(1,J95.KH-k0));agPlanX(id,s,Math.min(J95.KH-1,kh));AGD.stat.land++}
+  (z.didX=z.didX||{})[id]=key;
+  /* the khắc she can do it: from now on, not one a card / told deed / secret meeting already holds (same rule as a consort's agSlot) */
+  const R=agRec();const free=[];for(let kh=k0;kh<J95.KH;kh++){const e=R&&R.P[id]&&R.P[id][kh];if(e&&(e[1]==="tryst"||e[1]==="meet"||e[1]==="offduty"||e[1]==="laundry"))continue;/* off duty / punished: her khắc is not hers */if(R&&agBound(id,kh,R.key))continue;free.push(kh)}
+  if(!free.length){AGD.stat.miss++;continue}agPlanX(id,s,free[Math.floor(Math.random()*free.length)]);AGD.stat.land++}
  if(!agRec()){for(const p of z.pend.slice())if(p.key===key&&p.vid==null)agLand(p)}}
 (function(){
  const l0=agLand0;agLand0=function(p,seen){const f=AGRUN[p.k];if(!f)return l0.apply(this,arguments);
@@ -156,6 +166,8 @@ function agTickX(){if(!agDOn())return;const D=agDz();if(D.d!==wk())return;const 
  /* co-op host (no record): the plan's place replaces placeWhere's table */
  const pw0=placeWhere;placeWhere=function(){const r=pw0.apply(this,arguments);try{agTickX()}catch(e){agdErr("tickX",e)}try{if(agDOn()&&!j95on()){agDayEnsure();const W=S.where||{};
    for(const v of liveRivals(true)){if(!v.alive||v.out||v.confined)continue;const s=agDaySlot("v"+v.id);if(s)W[v.id]=s.pl}const e=agDaySlot("emp");if(e)W.emp=e.pl;S.where=W}}catch(e){agdErr("pw",e)}return r};
+ /* a deed whose khắc a card / told deed / binding took since it was planned does not happen: it leaves the pending list at once */
+ const ra0=agReapply;agReapply=function(){const r=ra0.apply(this,arguments);try{const z=agZ();const n=z.pend.length;z.pend=z.pend.filter(p=>!p.drop);AG.stat.drop+=n-z.pend.length}catch(e){}return r};
  /* touched: the player's deed aimed at her; a deed of hers that failed */
  const tw0=twDo;twDo=function(a,t,k){const r=tw0.apply(this,arguments);try{if(a===S&&t&&t!==S&&t.id!=null)agTouch(t);if(a&&a!==S&&AG.inTick&&!r)agTouch(a)}catch(e){}return r};
 })();

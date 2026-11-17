@@ -834,21 +834,21 @@ BAL.ag.day={on:1,replan:{need:25,touch:40}};
    gates (confHh, rewardHh, cutRelMax), cutRel relation lost, pardonAff / pardonRel / pardonDuc.
    th = Thái hậu: w = need weights (order: one consort holds his nights; fond: consorts she favours, th ≥ fondTh, not gifted for giftCd tuần;
    mercy: a favoured consort in lãnh cung, th ≥ mercyTh), g = utility per need, items = what she gives (the old j8 list) */
-Object.assign(BAL.ag,{cx:{face:{c:{bac:-30},o:92,w:{sac:3},need:{sung:2}},arts:{c:{suc:-10},o:100,w:{tai:2},need:{danh:2}},book:{c:{suc:-5},o:100,w:{tamco:2},need:{safe:2}},
-  alms:{c:{bac:-40},o:85,w:{danh:7,mat:1,duc:3},need:{danh:5,duc:3}},sutra:{c:{bac:-10},o:100,w:{duc:3},need:{duc:3}},maidR:{c:{bac:-20},o:100,w:{maid:20},need:{safe:3},below:60},
-  rest:{c:{},o:100,w:{suc:20},need:{rest:6}},study:{suc:10,g:3},thHelp:{o:45,div:3,min:30,w:{danh:4,hh:5},l:{th:-5}},hhShield:{o:45,div:3,min:20,g:6,w:{hh:3},l:{hh:-5},sh:2},
-  buy:{keep:20,g:2},gift:{g:4},ally:{bac:30,rel:10,g:4}},
- hh:{g:{judge:6,conf:4,reward:4,pardon:4,cutpay:3,admon:5},confHh:-40,rewardHh:50,cutRelMax:-30,cutRel:15,pardonAff:20,pardonRel:30,pardonDuc:2},
+Object.assign(BAL.ag,{cx:{face:{c:{"bac":-30},o:92,w:{"sac":3},need:{"sung":2}},arts:{c:{"suc":-10},o:100,w:{"tai":2},need:{"danh":2}},book:{c:{"suc":-5},o:100,w:{"tamco":2},need:{safe:2}},
+  alms:{c:{"bac":-40},o:85,w:{"danh":7,"mat":1,"duc":3},need:{"danh":5,"duc":3}},sutra:{c:{"bac":-10},o:100,w:{"duc":3},need:{"duc":3}},maidR:{c:{"bac":-20},o:100,w:{"maid":20},need:{safe:3},below:60},
+  rest:{c:{},o:100,w:{"suc":20},need:{rest:6}},study:{"suc":10,g:3},thHelp:{o:45,div:3,min:30,w:{"danh":4,"hh":5},l:{"th":-5}},hhShield:{o:45,div:3,min:20,g:6,w:{"hh":3},l:{"hh":-5},sh:2},
+  buy:{keep:20,g:2},gift:{g:4},ally:{"bac":30,"rel":10,g:4}},
+ hh:{g:{judge:6,conf:4,reward:4,pardon:4,cutpay:3,admon:5},confHh:-40,rewardHh:50,cutRelMax:-30,cutRel:15,pardonAff:20,pardonRel:30,pardonDuc:2,kh:2},
  th:{w:{order:1,fond:.6,mercy:.8},g:{order:10,fond:6,mercy:8},fondTh:60,giftCd:4,mercyTh:50,items:["nhansam","yensao","vongngoc","huongtram"]}});
 BAL.ag.day.worldPull=2;/* weight of a world window place against her own "no goal" place, per × above 1 (worldPlanW place) */
 /* LIFE: the day's feeling (jemo, strength ≥ min) leans her needs when she plans: × per need, _ = × on keeping her schedule (sad / afraid: stays in) */
-BAL.ag.day.mood={min:30,k:{vui:{ally:1.4,sung:1.2,_:.8},buon:{rest:1.6,ally:1.2,_:1.4},gian:{spite:1.6,_:.9},so:{safe:1.8,_:1.5},ghen:{spite:1.5,sung:1.3},lo:{safe:1.4,kid:1.2},dau:{rest:1.8,_:1.6},muu:{spite:1.2,danh:1.2,sung:1.2,_:.8}}};
+BAL.ag.day.mood={min:30,k:{vui:{ally:1.4,"sung":1.2,_:.8},buon:{rest:1.6,ally:1.2,_:1.4},gian:{spite:1.6,_:.9},so:{safe:1.8,_:1.5},ghen:{spite:1.5,"sung":1.3},lo:{safe:1.4,kid:1.2},dau:{rest:1.8,_:1.6},muu:{spite:1.2,"danh":1.2,"sung":1.2,_:.8}}};
 /* AG-ALL the Emperor's day (jagacts §4): company = his wish for company per buổi (× his mood tsMoodW; the old weekly roll 14 × mood ≈ this over the
    4 buổi of a day against BAL.ag.routine), busyF = × when busy (ill / Chăm chính / court crisis), rest = his rest need then, buoi = the buổi (j95c) he summons in */
 BAL.ag.emp2={company:.38,busyF:.4,rest:.5,buoi:[1,2]};
 /* AG-ALL consort cards (jagacts "more"; the player's j2 / j9 cards read the same): portrait = Vẽ chân dung tặng Thái hậu (Họa ≥ hoa, odds o + artW × k);
    humble = Nhún nhường (cost, oán −oanDown, quý +aff; an NPC does it before someone whose oán toward her ≥ oan; g = safety points) */
-Object.assign(BAL.ag.cx,{portrait:{hoa:3,c:{suc:-10,bac:-10},o:50,k:8,w:{th:10},l:{th:-1}},humble:{c:{danh:-2},oanDown:8,aff:2,oan:20,g:4}});
+Object.assign(BAL.ag.cx,{portrait:{hoa:3,c:{"suc":-10,"bac":-10},o:50,k:8,w:{"th":10},l:{"th":-1}},humble:{c:{"danh":-2},oanDown:8,aff:2,oan:20,g:4}});
 /* AG-ALL part C (jagharm.js; design dev/handover/reports/ag-all.md §1d/§8/§9/§10): the player's scheme / harm acts as every consort's own options.
    needs   the needs a scheme can serve (her pick of WHAT she wants this buổi comes first, jagent agDecide)
    g       per act key (ACT, j8 + modules): g = need points it closes when it works (BAL.ag.unit points = one whole need), l = points lost when it fails,
@@ -861,9 +861,11 @@ Object.assign(BAL.ag.cx,{portrait:{hoa:3,c:{suc:-10,bac:-10},o:50,k:8,w:{th:10},
    prep    spite points of the preparation deeds: taint (Tẩm đồ on a sachet), cook (a dish for a poisoner, jpoison)
    hap     AG-HAP: wit = the deed keys a passer-by can witness ('!' on the map); pub = the only places a show deed is seen (a garden show) */
 BAL.ag.harm={needs:["spite","sung","kid","safe","danh","ally"],
- g:{_:{g:{spite:4},f:2},spy:{g:{safe:3}},rumor:{g:{spite:4},f:2},trip:{g:{spite:5},f:2},pushp:{g:{spite:9},f:6},frame:{g:{spite:8,danh:1},l:{danh:4},f:5},
-  plant:{g:{spite:7},f:4},block:{g:{sung:4,spite:3},f:2},bribe:{g:{spite:3,safe:2},f:1},accuse:{g:{spite:10,safe:5,danh:2},l:{danh:3}},vp:{g:{spite:5,danh:1},l:{danh:2}},
-  xx:{g:{spite:5,danh:1},l:{danh:2}},ksab:{g:{spite:5},f:4},takeaway:{g:{kid:10}},poison:{g:{spite:12,safe:3},f:12},kpoison:{g:{spite:10},f:12},pond:{g:{spite:10},f:8},
-  musk:{g:{spite:10,sung:2},f:6},catswap:{g:{spite:8,sung:2},f:6},kframe:{g:{spite:10},f:12},pgift:{g:{spite:10},f:8},petsteal:{g:{spite:4},f:2},laydo:{g:{spite:4},f:2},tieuhuy:{g:{safe:5,ally:2}}},
- tw:{sung:.3,kid:10,seat:2},guard:.5,pen:.5,fail:{fool:.6,wise:.5},pat:[35,60],due:1,steal:{no:4},prep:{taint:3,cook:3},
+ g:{_:{g:{spite:4},f:2},spy:{g:{safe:3}},rumor:{g:{spite:4},f:2},trip:{g:{spite:5},f:2},pushp:{g:{spite:9},f:6},frame:{g:{spite:8,"danh":1},l:{"danh":4},f:5},
+  plant:{g:{spite:7},f:4},block:{g:{"sung":4,spite:3},f:2},bribe:{g:{spite:3,safe:2},f:1},accuse:{g:{spite:10,safe:5,"danh":2},l:{"danh":3}},vp:{g:{spite:5,"danh":1},l:{"danh":2}},
+  xx:{g:{spite:5,"danh":1},l:{"danh":2}},ksab:{g:{spite:5},f:4},takeaway:{g:{kid:10}},poison:{g:{spite:12,safe:3},f:12},kpoison:{g:{spite:10},f:12},pond:{g:{spite:10},f:8},
+  musk:{g:{spite:10,"sung":2},f:6},catswap:{g:{spite:8,"sung":2},f:6},kframe:{g:{spite:10},f:12},pgift:{g:{spite:10},f:8},petsteal:{g:{spite:4},f:2},laydo:{g:{spite:4},f:2},tieuhuy:{g:{safe:5,ally:2}}},
+ tw:{"sung":.3,kid:10,seat:2},guard:.5,pen:.5,fail:{fool:.6,wise:.5},pat:[35,60],due:1,steal:{no:4},prep:{taint:3,cook:3},
  hap:{wit:["provoke","humil","gossip","flaunt","effort","mediate","ksp","pray","harm:trip","harm:pushp","harm:rumor","harm:pond","harm:accuse","harm:vp","harm:xx","harm:takeaway"],pub:{effort:["vuon"],flaunt:["vuon"]}}};
+/* AG-ALL HYBRID day: intentW = × on the weight of a need that is part of her day intent when she picks her buổi; two = % she sets a second goal for the day */
+Object.assign(BAL.ag.day,{intentW:3,two:40});

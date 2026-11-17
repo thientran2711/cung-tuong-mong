@@ -22,10 +22,10 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
      if(/^v/.test(id)&&R&&R.P[id]){const v=RV(+id.slice(1));if(v&&!v.out&&!v.confined){if(R.P[id][0][0]===s.pl)out.follow++;else out.diff++}}}
     Q.length=0;S.mg=0;try{nextBuoi()}catch(e){out.nb=e.message}Q.length=0}
    out.draws.push(AGD.stat.draw-d0);out.days++}
-  if(AGD.q)agDaySlice(1);/* the later buổi of the day plan are drawn in slices over the next frames */const D=agDz();out.cover={emp:!!D.P.emp,th:S.thDead||!!D.P.th,consorts:liveRivals(true).filter(v=>v.alive&&!v.out).every(v=>D.P["v"+v.id]&&D.P["v"+v.id].length>=j95nB())};
+  if(AGD.q)agDaySlice(1);/* the later buổi of the day plan are drawn in slices over the next frames */const D=agDz();out.cover={emp:!!D.P.emp,th:S.thDead||!!D.P.th,consorts:liveRivals(true).filter(v=>v.alive&&!v.out).every(v=>D.P["v"+v.id]&&D.P["v"+v.id][S.buoi||0]&&D.I["v"+v.id]&&D.I["v"+v.id].g.length>=1)};
   for(const k in AG.stat.by)out.by[k]=AG.stat.by[k]-(by0[k]||0);out.ms=AGD.ms.slice();out.errs=AGD.errs.concat(AG.errs).slice(0,5);return out},DAYS);
  ok(r.draws.every(n=>n<=1)&&r.draws.filter(n=>n===1).length>=r.days-1,'day plan: drawn once per day',r.draws);
- ok(r.cover.emp&&r.cover.th&&r.cover.consorts,'day plan: Emperor, Thái hậu and every live consort have a slot per buổi',r.cover);
+ ok(r.cover.emp&&r.cover.th&&r.cover.consorts,'hybrid day: every live consort has a day intent and a pick for this buổi; Emperor and Thái hậu planned',r.cover);
  ok(r.follow>=(r.follow+r.diff)*.85,'record follows the plan (≥85 %; the rest = cards / invitations / trysts that bind her)',{follow:r.follow,diff:r.diff});
  console.log('HISTOGRAM per group (planned deeds over '+r.days+' days):');for(const g in r.byG)console.log('  '+g+': '+JSON.stringify(r.byG[g]));
  console.log('LANDED deeds: '+JSON.stringify(r.by));
