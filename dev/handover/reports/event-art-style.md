@@ -817,3 +817,29 @@ LIVE (Foreman C OK 17/11 06:16Z): img/ev-am-muu, ev-e68-stormnight, ev-e68-poiso
 | ev-e68-hhsummons | DARK | eIyQLgsdqL |
 | ev-e68-kindvisit | LIGHT | dtPFs77XSL |
 Redos inside the batch: allyoffer (maid cheek visible), fortunenun (priest profile). Self-check: all 20 looked at 1024px, no text, no face; each own place/season (summer lotus, wisteria, winter sickroom, drought, famine autumn, temple, etc).
+
+LIVE batch 1 (Foreman C OK 06:27Z): all 20 uploaded in place.
+## Batch 2 (20 keys, staged, NOT live): img/_review/event-art-style2/b2/ev-e68-<key>.jpg (OLD|NEW)
+| key | class | creation |
+|---|---|---|
+| ev-e68-leakroof | DARK | rgd9DWAxtc |
+| ev-e68-lotusseason | LIGHT | lJIRBplgv9 |
+| ev-e68-musician | LIGHT | 0eSvssdTfW |
+| ev-e68-newgirladvice | LIGHT | 3z5pHbPREY |
+| ev-e68-officialwife | LIGHT | nVLIrlCYQD |
+| ev-e68-painter | LIGHT | eIyQ7i7dqL |
+| ev-e68-proudvisit | LIGHT | s783XC1l8e |
+| ev-e68-rumoremplove | DARK | xSXNpCejfW |
+| ev-e68-rumorfavor | DARK | tC3kNpkmZJ |
+| ev-e68-rumorpreg | DARK | tC3kNdrmZJ |
+| ev-e68-rumorth | DARK | xSXNpr2jfW |
+| ev-e68-servhero | LIGHT | O6CYaP1ynm |
+| ev-e68-servleave | LIGHT | 9ZFTuRCNYZ |
+| ev-e68-sickservant | LIGHT | KLDyVlUkqp |
+| ev-e68-silkallot | LIGHT | Sym2Ii5Ub8 |
+| ev-e68-spoiledfood | DARK | 3z5pqDQREY |
+| ev-e68-springallergy | LIGHT | lJIRoZLgv9 |
+| ev-e68-straycat | LIGHT | IfiKNxqtvE |
+| ev-e68-templerite | LIGHT | kspPMR916B |
+| ev-e68-thmama | LIGHT | rgd9pGixtc |
+Self-check: all 20 looked at 1024px, no text/faces; lead robe colours varied (teal, lilac, peacock-blue, navy, cream…).
