@@ -1,5 +1,35 @@
 PRIORITY #1 CHECK ('review ag-moodknow'): OD L1651 (g), L1668 (1), L1669 | main none | review/* review/ag-moodknow (worker), review/kit-figure-mood (seal art) | claims worker session_01UV1Szkwcqu7s9tTHPUXBrh
-# REVIEW ag-moodknow r1 — BIG (opus) — VERDICT: PASS 1c964f88 (review/ag-moodknow-r1), with 2 landing conditions
+# REVIEW ag-moodknow r1 — BIG (opus) — FINAL VERDICT: FAIL (1 item, not small) · reviewer fixes on review/ag-moodknow-r1 @ a2a1f6b5
+(The earlier 'PASS 1c964f88' covered 35dc69d0 only and is superseded: the foreman asked for ONE verdict on 86135854..da4a6e83.)
+
+## FINAL (86135854..da4a6e83, Sims follow-up) — FAIL list for the successor
+1. OWNER CHECK s35 Lượt 41 (GHEN): separation holds (mk causes never touch v.ghen; a Ghen cause ending leaves v.ghen unchanged, probed), BUT
+   'every event that raises v.ghen also adds a short Ghen mood cause' is NOT done: v.ghen is written directly at 43 sites in 24 modules
+   (jts 5, jtwoway 4, jtoil 4, j8 3, j7 3, j2 3, jvisit 2, jtsb 2, j75 2, j28 2, j1 ghenAll, jagacts3 p3GhenAll, j42, j34, j24, j20, jinv, jgift,
+   jpet, jne, jthaiy, j70, jroute, jmood); only rivalUp/otherKid events give a Ghen feeling. Fix (whole group): ONE function ghenUp(v,n,why,by)
+   = v.ghen += n (BAL.ghen as now) + emoEv/mkAdd a Ghen cause (true why, aimed at 'by', timer BAL.mood2.dur.e.<key>); route every RAISE site
+   through it (decreases stay as they are); scan script + before/after table; test: each raise site adds a cause, its end never lowers v.ghen.
+   Build it on review/ag-moodknow-r1 @ a2a1f6b5 (holds all fixes below).
+
+## Reviewer fixes on a2a1f6b5 (= da4a6e83 + one commit)
+- co-op one world: R.mck host-only (mckWorld) — da4a6e83 alone keeps the same FAIL; after: seeds 7+3 PASS, no world path changed (R.mk too).
+- KHÓC at strength 100 never showed: the tears cause (s=min(100,val+1)) tied the đau cause and lost the summed seal; now s=val+1 (emo.v stays capped).
+- a cause she knows stayed 'Nguyên do chưa rõ' on its khóc/hờn row (knowledge keyed by feeling+cause): mckHas/mckPubHas now match the cause text
+  under any feeling (same event = same fact; a NEW cause text is still unknown, test 2 still PASS).
+- 'Đã biết' stale mood fact: intelOf marks kind mood current:false ('nay đã khác') when that cause is gone (probe: true → false).
+- old path (__mkOff) keeps the r1 emo2Row fix; ag-moodknow test: +1 khóc-row line, hờn NPC line reads the hờn cause (seal = strongest sum, a big
+  mưu may outweigh it: was a 1-in-3 flake). 33/33 ×5 runs.
+- site build (index.html, sw.js, assets.json).
+## Checks on the Sims part
+- per-cause khắc timers: BAL.mood2.dur (e/k/bar/def), one source; mkNow = tuần×(BUOI×J95.KH)+buổi×KH+khắc. Weekly decay gone (EMO_DECAY→MIN_VALUE,
+  jmood drift off, box line 'phai dần theo khắc'). Summed seal one source: p.emo rebuilt by mkSync, read by kitEmotion/sealKeyFor. NPC parity: mkAll
+  = her, rivals, staff, kids, Emperor, Thái hậu, maid, men, court. Old save: mkMigrate day→khắc + carry; quickcheck old save from live PASS.
+- ag-know base vs branch ×4: base 1 FAIL run (G2/ONE RULE lines), branch 4/4 PASS → base randomness. ag-truth 10/10. one-core-guard PASS.
+- ag-all p95 base 11.6/10.9 vs branch 10.1/12.8 ms: no added cost. QUICKCHECK a2a1f6b5: open/old save/perf PASS (render 141/171, tab 291/242,
+  buổi 831/800 ms); CORE GATES: only G1 one-core-bind + frozen list, identical on base 86135854 (ag-all-2).
+- Landing conditions A (after ag-all-2) and B (6 khóc/hờn seal files on the CDN first) unchanged.
+
+## Earlier r1 part (35dc69d0)
 Target review/ag-moodknow @ 35dc69d0 (foreman update), diff 86135854..35dc69d0 only. START_CTX ≈ 6 %.
 
 ## Fixes made by the reviewer (review/ag-moodknow-r1 = 35dc69d0 + 1c964f88)
