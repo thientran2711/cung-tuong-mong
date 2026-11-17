@@ -1138,3 +1138,11 @@ BAL.mood2={def:8,max:16,carry:24,kd:16,carryWhy:"chuyện cũ còn vương",
    BAL.mood.band, BAL.ea.out.v) AND the matching dominant feeling (the seal). GHEN: every raise of the SCORE v.ghen (ghenUp, j1) also adds a short
    Chạnh lòng FEELING cause: strength = raise × ghen.k clamped [ghen.min, ghen.max], timer dur.e.ghenUp khắc, aimed at the one who caused it. */
 Object.assign(BAL.mood.emo,{khoc:-.4,hon:-.2});BAL.mood2.dur.e.ghenUp=10;BAL.mood2.ghen={k:2,min:16,max:50};
+/* MOOD-MEM (owner OD 17/11 ~18:25Z (b) "làm theo 2 tầng"): layer 2 = jmem memories (months / years / lifelong) WAKE a short layer-1 mood cause (BAL.mood2)
+   when the holder MEETS that person (they come to one place), comes to the PLACE where it happened (m.pl; not the holder's own dwelling), or on the
+   ANNIVERSARY (same tuần of a later year). One rule for her and every NPC (consorts, Hoàng thượng, Thái hậu, servants).
+   min = weight a memory needs to wake (ann = for an anniversary) · cap = wakes a month per person · cd = tuần before the same memory wakes again ·
+   s = strength: weight × k, clamped [min, max] · dur = khắc: base + weight × k, × life for a lifelong memory, ≤ max ·
+   kind = the feeling: good memory → good, bad → bad, unless the deed is in d. */
+BAL.memWake={min:20,ann:30,cap:4,cd:6,s:{k:.6,min:18,max:60},dur:{base:4,k:.12,life:2,max:48},
+ kind:{good:"vui",bad:"gian",d:{poison:"so",musk:"dau",kidharm:"dau",takeaway:"dau",frame:"gian",gifttaint:"so",demote:"buon",rescue:"vui",pardon:"vui"}}};
