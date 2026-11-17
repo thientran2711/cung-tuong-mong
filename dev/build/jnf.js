@@ -181,7 +181,7 @@ function openChoice(){const x=X();if(!x)return;x.st="open";x.at=Date.now();
    BAL.steal.m (what it leans on, art weight, win / loss size vs the other attack, Hoàng hậu) — short, so the card fits the kit frame */
 function nfHint(mode){try{const M=BAL.steal.m,K=B().keep;
  const lean=w=>Object.keys(w||{}).sort((a,b)=>w[b]-w[a]).map(k=>({sung:"ân sủng",sac:"nhan sắc",tai:"tài học",danh:"danh tiếng"})[k]).filter(Boolean);
- if(mode==="keep")return `dựa vào ân sủng${K.sac?", nhan sắc":""}, tài nghệ · thành: kẻ tranh khó thêm một bậc · hỏng: chẳng mất gì`;
+ if(mode==="keep")return `dựa vào ân sủng${K.sac?", nhan sắc":""}, tài nghệ · thành: kẻ tranh khó thêm ${typeof kitNumVi==="function"?kitNumVi(K.rung):K.rung} bậc · hỏng: chẳng mất gì`;
  const me=M[mode],ot=M[mode==="road"?"feign":"road"];const big=(a,b)=>Math.abs(a||0)>Math.abs(b||0);
  const art=me.art>ot.art?"tài nghệ nặng ký (môn ngài chuộng thì lợi, môn ngài chán thì hại)":"tài nghệ góp ít";
  const win=big(me.win.sung,ot.win.sung)?`sủng nhiều${me.win.danh?", nổi danh":""}`:"sủng chút ít";
