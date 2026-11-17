@@ -5,7 +5,7 @@
    4 her other days: Sổ ghi line "ngày {d}, ngươi được lật thẻ thêm một đêm" + BAL.nt.extraFx gains + its own conception roll, nights recorded;
      NPC other days silent without tai mắt, one line with tai mắt
    5 conception = conceiveCh × BAL.nt.concF as a FLOAT while the ledger runs (BAL.nt.on false → the old whole-% chance)
-   6 a real day (tối → "Sang ngày mới"): ledger rolled at the commit and settled once; summons odds read BAL.nt (one core)
+   6 a real day (tối → "Sang ngày mới"): ledger rolled at the commit and settled once; summons odds read BAL.ag.emp.summon (AG2, one core)
    usage: node dev/test/ledger.js <url>   (exit 0 = all pass) */
 const {chromium}=require('playwright');const [,,URL]=process.argv;
 (async()=>{const b=await chromium.launch();const p=await (await b.newContext({viewport:{width:755,height:1000},reducedMotion:'reduce',serviceWorkers:'block'})).newPage();
@@ -26,8 +26,20 @@ const {chromium}=require('playwright');const [,,URL]=process.argv;
   {const L0=fresh();const A=L0.find(v=>(cycleDaysOf(v,null,0)||[]).length&&!(queenP()===v));const t0=S.tuan;S.tuan=cyBase(A).t;
    const cd=cycleDaysOf(A,null,0);const nc=nightCh;nightCh=function(p){p=p||S;const c=nc(p);return p===A?(c>0?100:100):(c>0?1e-3:0)};
    /* A is in her cycle tuần: jcycle's tray reads her off the whole tuần (cyTray), the ledger only on her days */
-   let onCyc=0,off=0,played=0;try{for(let k=0;k<40;k++){S.ledger=null;const L=ldRoll();for(const e of L.days){if(e.w===A.id){if(cd.includes(e.d))onCyc++;else off++}}if(L.p>=0&&L.days[L.p].w===A.id)played++}}finally{nightCh=nc;S.tuan=t0}
-   ok("2 cycle by day: drawn on her other days, never her cycle days, never played",cyTray(A)===false&&onCyc===0&&off>0&&played===0||(onCyc===0&&off>0&&played===0),{A:A.name,cd,onCyc,off,played})}
+   let onCyc=0,off=0,played=0,pCyc=0;try{for(let k=0;k<40;k++){S.ledger=null;const L=ldRoll();for(const e of L.days){if(e.w===A.id){if(cd.includes(e.d))onCyc++;else off++}}if(L.p>=0&&L.days[L.p].w===A.id){played++;if(cd.includes(L.days[L.p].d))pCyc++}}}finally{nightCh=nc;S.tuan=t0}
+   ok("2 cycle by day: drawn on her other days, never her cycle days, played only on a non-cycle day",onCyc===0&&off>0&&pCyc===0,{A:A.name,cd,onCyc,off,played,pCyc})}
+  /* 7. the PLAYED scene by day (review r1): her in her cycle tuần, 12 months (lengths 5/6/7 by cyLen) */
+  {fresh();S.age=20;S.preg=0;S.cyb={};const t0=S.tuan,u0=S.turn;const nc=nightCh;nightCh=function(p){p=p||S;const c=nc(p);return p===S?(c>0?100:0):(c>0?1e-3:0)};
+   const lens={},rows=[];let bad=0,playOff=0,blockIn=0,trayBefore=0;
+   try{for(let m=0;m<12;m++){S.turn=u0+m;S.tuan=cyBase(S).t;S.cyb={};const cd=cycleDaysOf(S,null,0);lens[cd.length]=(lens[cd.length]||0)+1;
+     if(cd.length!==cyLen(S,S.turn))bad++;
+     S.ledger=null;if(cyTray(S))trayBefore++;           /* before the roll nothing blocks the whole tuần */
+     const L=ldRoll();for(const e of L.days)if(e.w==="me"&&cd.includes(e.d))bad++;
+     const pe=L.days[L.p];if(pe&&pe.w==="me"){if(cd.includes(pe.d))bad++;else if(!cyTray(S)&&nightCh(S)>0)playOff++}
+     /* force the played tối onto her cycle day: the scene is blocked (cyTray true, nightCh 0) */
+     const save=L.p;const ci=L.days.findIndex(e=>cd.includes(e.d));if(ci>=0){L.p=ci;if(cyTray(S)&&nightCh(S)===0)blockIn++;L.p=save}
+     rows.push({m,len:cd.length,cd:cd[0]+"-"+cd[cd.length-1],p:pe?pe.d:null})}}finally{nightCh=nc;S.tuan=t0;S.turn=u0}
+   ok("7 played scene by day: plays her non-cycle day, blocked on a cycle day; per-month 5/6/7 length",bad===0&&trayBefore===0&&playOff===12&&blockIn===12&&Object.keys(lens).length>=2,{lens,bad,trayBefore,playOff,blockIn,rows:rows.slice(0,6)})}
   /* 3. played tối = her first day; j8 flip pin */
   {const L0=fresh();S.cyb=Object.assign(S.cyb||{},{lie:wk(),rk:wk(),rv:"lui"});const nc=nightCh;nightCh=function(p){p=p||S;const c=nc(p);return p===S?50:(c>0?50:0)};
    let good=0,tot=0,npcFirst=0,nT=0;try{for(let k=0;k<30;k++){S.ledger=null;S.tonight=null;const L=ldRoll();const i=L.days.findIndex(e=>e.w==="me");
@@ -52,7 +64,7 @@ const {chromium}=require('playwright');const [,,URL]=process.argv;
  const R6=await p.evaluate(()=>{for(const id of ['kload','kroul']){const x=document.getElementById(id);if(x)x.remove()}try{localStorage.clear()}catch(e){}window.__bot=1;
   for(let i=0;i<60;i++){start();if(!isSrv()&&!(typeof isKc==="function"&&isKc()))break}Q.length=0;
   const drain=()=>{for(let n=0;n<80&&Q.length;n++){const m=Q[0];const o=m.opts||m.o;if(o&&o.length){let i=m.pid==="nfch"?o.findIndex(x=>x.n==="Thôi"):o.findIndex(x=>!/Cáo bệnh|Tiến cử|Thôi/.test(x.n||""));if(i<0)i=0;try{chooseM(i)}catch(e){Q.shift()}if(Q[0]===m)Q.shift()}else Q.shift();S.mg=0}};
-  const rr=roll;const seen=[];roll=function(x){if(x===BAL.nt.summon||x===BAL.nt.summonBusy)seen.push(x);return rr.apply(this,arguments)};
+  const rr=roll;const seen=[];roll=function(x){if(BAL.ag.emp.summon.includes(x))seen.push(x);return rr.apply(this,arguments)};
   const out=[];try{for(let d=0;d<6;d++){const w=wk();const nS=S.nights||0,nR=rivals.reduce((a,v)=>a+(v.nights||0),0);
    for(let g=0;g<14&&wk()===w;g++){drain();S.toMorning=0;used=4;S.buoi=B4L;nextBuoi()}drain();
    const L=S.ledger;const got=L&&L.wk===w?L.days.filter(e=>e.w).length:-1;

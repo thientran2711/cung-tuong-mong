@@ -332,7 +332,11 @@ function rivalNight(v){v.nights++;v.nightLog.push(wk());const q=Math.round(effSa
 function sendMaid(a){const m=a.maid;const rise=roll(30);a.maid=a===S?newMaid(pick(MAIDS.filter(x=>x!==m.name)),45):{name:pick(MAIDS.filter(x=>x!==m.name)),loyal:45};if(a===S)S.tonight=null;
  if(rise&&roomFor("consort")){const n=newRival(0);Object.assign(n,drawFace());n.name=freshName();n.rel=0;relAdd(a,n,m.loyal>=60?30:-25);rivals.push(n);return `Cung nữ ${m.name} của ${NM(a)} hầu thay, được sủng hạnh, phong ${RANKS[0].n} ${n.name}${m.loyal>=60?" và vẫn nhớ ơn chủ cũ":" và trở mặt với chủ cũ"}. `}
  return `Cung nữ ${m.name} của ${NM(a)} hầu thay một đêm rồi được thả ra cung với chút bạc. `}
-function anMonth(p){const recent=(p.nightLog||[]).filter(w=>wk()-w<=3).length;p.an=cl((p.an||0)-Math.max(1,4-recent*2),0,100)}
+/* NIGHT PACE (review/night-ledger-r1, LUẬT SỬA CẢ NHÓM): rules that count RECENT nights were tuned for one night a tuần; with the 10-night
+   ledger a tuần holds ≈ BAL.nt.pace times as many. ntP() = that factor while the ledger runs (jledger ntPace), else 1. nightLog stays the
+   true record (books, evidence, words show real counts); only the RATE rules divide by it: anMonth (Ân fades), j75 favNow / satN. */
+function ntP(){try{return typeof ntPace==="function"?ntPace()||1:1}catch(e){return 1}}
+function anMonth(p){const recent=(p.nightLog||[]).filter(w=>wk()-w<=3).length/ntP();p.an=cl((p.an||0)-Math.max(1,4-recent*2),0,100)}
 
 /* ================= THE MONTH FOR EVERY CONSORT ================= */
 function pregMonthP(p){if(!p.preg)return"";p.preg++;const me=p===S;

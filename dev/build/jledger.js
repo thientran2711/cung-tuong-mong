@@ -31,6 +31,8 @@
 const N=()=>BAL.nt||{};
 function ldOn(){try{return !!(N().on&&(N().days||0)>1&&S&&!S.dead&&typeof nfOn==="function"&&nfOn())}catch(e){return false}}
 window.ldOn=ldOn;
+/* night pace for the rules that count recent nights (j8 ntP: anMonth, j75 favNow / satN): BAL.nt.pace while the ledger runs, else 1 */
+window.ntPace=()=>ldOn()?(+N().pace||1):1;
 const W=()=>wk();
 const idOf=p=>p===S?"me":p&&p.id;
 const ent=w=>w==="me"?S:w==null?null:(typeof rivals!=="undefined"?rivals:[]).find(v=>v&&v.id===w)||null;
@@ -75,7 +77,7 @@ window.ldPin=ldPin;
 window.ldCause=function(){const L=cur();const e=L&&L.days[L.p];return e&&e.y==="custom"?"custom":null};
 window.ldRoll=ldRoll;window.ldNow=()=>cur();
 /* ---------- 3. the other nights ---------- */
-function gain(p){const f=N().extraFx||{};const sg=roll(f.sungP==null?100:f.sungP)?(f.sung||0):0,an=f.an||0;
+function gain(p){const f=N().extraFx||{};const sg=roll(f.sungP==null?100:f.sungP)?(f.sung||0):0,an=roll(f.anP==null?100:f.anP)?(f.an||0):0;
  if(p===S){const b=S.sung;if(sg)apply({sung:sg});S.an=cl((S.an||0)+an,0,100);return{sg:S.sung-b,an}}
  ap(p,{sung:sg,an});return{sg,an}}
 function oneNight(p){p.nights=(p.nights||0)+1;(p.nightLog=p.nightLog||[]).push(W())}
