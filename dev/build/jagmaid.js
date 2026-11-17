@@ -100,6 +100,8 @@ function amSendQ(v){if(!amOn())return false;try{const m=v&&v.maid;if(!m)return f
 function amSendX(){const m=S.maid;if(!m)return"";const B=BAL.mline;
  return `Nắm chắc · thành: ${m.name} hầu thay đêm nay, được sủng hạnh${roomFor("consort")?`, rồi được phong ${RANKS[0].n}, ${(m.loyal||0)>=B.riseLoy?"vẫn là người của ngươi":"trở mặt với ngươi"} · kèm: mất ${m.name}, cung nữ mới lòng 45`:"; hậu cung không còn chỗ phong, nàng vẫn ở lại hầu ngươi"}`}
 /* ---------- 6 wiring ---------- */
+/* the help line of "Hoàng thượng để ý" (j42 HX.nt) follows the rule in force: with the loop on there is no 45 gate */
+try{const h0=HX.nt;Object.defineProperty(HX,"nt",{get(){return amOn()?`Hoàng thượng để ý: ngài có nhớ mặt ngươi không (0-100). Mỗi việc ngươi làm gần ngài (dâng trà, chạy việc, rót rượu…) ngài nhớ ${BAL.ag.emp.met.keep} tuần; càng để ý, đêm ngài càng dễ cho gọi ngươi đến hầu.`:h0},configurable:true,enumerable:true})}catch(e){}
 Object.assign(EMPMEM,{tea:"chén trà",teaN:"chén trà",meet:"chén trà",errand:"việc chạy",fest:"chén rượu",night:"đêm hầu"});
 (function(){
  const n0=normAll;normAll=function(){const r=n0.apply(this,arguments);amAlias();return r};
