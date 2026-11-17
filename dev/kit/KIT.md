@@ -706,14 +706,22 @@ Markup: dev/handover/refs/owner-option-picture-left.jpg (docs branch). Owner rul
 ### 6.2b PICTURE FORM BY CONTENT — tall or square, never empty space under the text (owner 16/11 s21, VIỆC "Tiết Thanh minh", Fold; refs/owner-viec-thanhminh.jpg; review/kit-fit) — `kitOptFit` / `kitOptFitAll` / `KIT_OPT_SQ` (jk4, beside `kitCompactCSS`)
 Owner rule (verbatim): "Bất kỳ khi nào mà mày cho thợ ráp nút vào á, mà mày thấy có một cái khoảng trống ở dưới thì phải lập tức đổi hình liền, đổi cái hình đại diện liền đó."
 - ONE rule for EVERY compact act card (`button.ka.kart` in the kitCompactCSS form: dialog options `.kopt`, person-card act rows §6.3, narrow-pane act
-  cards §43, the kit page). The card picks its picture form from its own content each time it is laid out:
-  TALL 3:4 (84x112, 72x96 in a pane < 420 px) when the text block `.kabody` is at least as tall as the tall picture;
-  SQUARE when the text is shorter: side = the text height, clamped to [`KIT_OPT_SQ.min` × w, w] (84 → 38..84 px, 72 → 32..72 px), so the card is as
-  tall as its text. Same meaning picture (kitOptPic §6.2), cover-cropped; class `kasq`, `data-kapic="tall|sq"`.
+  cards §43, the kit page). ONE PICTURE SIZE PER GROUP (owner 17/11 "nút to nút nhỏ", VIỆC "Kẻ hầu xin", Fold; review/opt-pic-same): all option cards of one
+  dialog (`#modal .dlg`) — else all siblings of one list — get the SAME picture size and shape; it never grows or shrinks with one card's text.
+  The size comes from the SHORTEST text block `m` of the group (`kitOptGroup` / `kitOptFit0`, jk4):
+  ALL TALL 3:4 (84x112, 72x96 in a pane < 420 px) when even the shortest text fills the tall picture (m >= tall height);
+  else ALL SQUARE, side = m clamped to [`KIT_OPT_SQ.min` × w, w] (84 → 38..84 px, 72 → 32..72 px), so the shortest card is as tall as its text and nothing is
+  left empty under it. Longer cards keep the same square (picture top-left, text grows the card). Same meaning picture (kitOptPic §6.2), cover-cropped;
+  class `kasq`, `data-kapic="tall|sq"`.
+- PERSON / SUBJECT DIALOGS (owner 17/11 ~05:00Z, final rule; `kitOptIsPerson` / `kitOptFill`, jk4): when the group is a person card's act rows (`.pc`) or a dialog with a figure column
+  (`.kpsubj` / `.kszfig` / kdper), the square form is NEVER used: every card is ONE size (the tallest text sets the height, min picture height 72 px) and its
+  picture is a TALL 3:4 RECTANGLE filling the card height (width = 3/4 of the height, 54..84 px and the text column keeps >= 190 px, cover-cropped, same meaning picture), `data-kapic="fill"`.
+  Same on every card whatever its text length; nothing is left empty beside the text. The options area scrolls (KIT §8.2 T3 / L191).
 - Re-measured automatically: after every kaNorm pass, after showModal, and by a ResizeObserver on each card + its text (dialog fit, fonts, rotation).
   No screen sets a picture size by hand. The big Hành sự card (§6) is not touched (its picture is wider than 112 px).
 - Residual: a text block shorter than the minimum square (one title line, no rows) keeps (min − text) px; reported as "at min" by the test.
-- Test: `node dev/test/kit-fit.js <url> <outdir> <tag> [WxH,..] [shots]` — empty px under the text of every option card in every frame kind (rule ≤ 2 px).
+- Test: `node dev/test/kit-fit.js <url> <outdir> <tag> [WxH,..] [shots]` — empty px under the text of every option card in every frame kind (rule ≤ 2 px) and `UNEQUAL option pictures` (more than one picture size in one dialog = violation), `PERSON DIALOG cards not one size`, `PERSON DIALOG card picture is square` and `ONE WORD PER LINE` (any value/text cell of a card wrapped to about one word per line).
+- Residual: in a 2-up row a card stretched to a much taller sibling shows the empty px under its own text (grid stretch, not the picture); unchanged by this rule.
 
 ## 6.3 PERSON-CARD ACT ROWS — every act a person card offers is the LONG HORIZONTAL ROW (owner 16/11, iPad 755x1000 shot of Tiểu Hoa's card; review/pcard-actrow) — `dev/build/jk4.js` (after the §43 compact block)
 Owner: "this button does not follow the shared kit; if the text is long we HAVE a kit part for that, the long horizontal option row — why not use it?"
