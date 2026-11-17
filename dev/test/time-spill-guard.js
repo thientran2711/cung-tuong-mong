@@ -53,9 +53,13 @@ const srv=http.createServer((q,r)=>{let p=decodeURIComponent(new URL(q.url,'http
  /* HOST mode may run the game in a frame: use the frame that has start() */
  let F=null;for(let t=0;t<120&&!F;t++){for(const fr of p.frames()){try{if(await fr.evaluate(()=>typeof start==='function'&&typeof showModal==='function'&&typeof dayFit==='function'))F=fr}catch(e){}}if(!F)await p.waitForTimeout(500)}
  if(!F){fail('runtime: game did not load (start/dayFit missing)');done();return}
- await F.evaluate(()=>{const kl=document.getElementById('kload');if(kl)kl.remove();try{localStorage.clear()}catch(e){}SLOT=3;const t=document.getElementById('title');if(t)t.hidden=true;window.__nlInner=1;start();window.__nlInner=0;quiet=false;Q.length=0;const md=document.getElementById("modal");if(md)md.hidden=true;try{NLP=null}catch(e){}});
+ /* SEEDED (reviewer time-spill-r1 follow-up, flake 2/56): the life and every roll in the checks come from one seeded RNG (env SEED,
+    default 7), like coop-one-world.js, so a FAIL replays exactly: SEED=<n> node dev/test/time-spill-guard.js <root> */
+ const SEED=+process.env.SEED||7;console.log('seed '+SEED);
+ await F.evaluate(sd=>{let x=sd;window.__tsgRnd=()=>{x=(x*1103515245+12345)%2147483648;return x/2147483648};Math.random=window.__tsgRnd},SEED);
+ await F.evaluate(()=>{const kl=document.getElementById('kload');if(kl)kl.remove();try{localStorage.clear()}catch(e){}SLOT=3;const t=document.getElementById('title');if(t)t.hidden=true;/* a consort life (the flake: a random life could be a maid, isSrv, where the consort gate greeting does not apply) */window.__forceOrigin='thd';window.__nlInner=1;start();window.__forceOrigin=0;window.__nlInner=0;quiet=false;Q.length=0;const md=document.getElementById("modal");if(md)md.hidden=true;try{NLP=null}catch(e){}});
  await p.waitForTimeout(800);
- const R=await F.evaluate(()=>{const out={rows:[],bad:[]};const B4=typeof B4L==='number'?B4L:BUOI.length-1,CH=B4-1;
+ const R=await F.evaluate(()=>{if(window.__tsgRnd)Math.random=window.__tsgRnd;const out={rows:[],bad:[]};const B4=typeof B4L==='number'?B4L:BUOI.length-1,CH=B4-1;
   const clr=()=>{Q.length=0;const md=document.getElementById('modal');if(md)md.hidden=true};
   const body=()=>{const M=document.getElementById('modal');if(!M||M.hidden)return null;return{t:(document.getElementById('mt')||{}).textContent||'',body:M.innerText.replace(/\s+/g,' '),opts:[...M.querySelectorAll('#mb .opts > button, #mb .opts button')].map(x=>({n:x.innerText.replace(/\s+/g,' ').trim(),dis:x.disabled}))}};
   const row=(id,ok,info)=>{out.rows.push({id,ok,info});if(!ok)out.bad.push({id,info})};
@@ -71,13 +75,13 @@ const srv=http.createServer((q,r)=>{let p=decodeURIComponent(new URL(q.url,'http
    let m=null;try{cbGreetCard(H.k);m=body()}catch(e){m={err:String(e)}}
    const o=m&&m.opts&&m.opts.find(x=>/^Bái kiến/.test(x.n));row('greet inside, 2 khắc, 1 left: offered',!!(o&&!o.dis)&&!/không kịp/.test(m&&m.body||''),m&&m.body&&m.body.slice(0,200));
    if(o){clr();const b0=S.buoi;cbGreetGo(H.k);row('greet inside: spills (carry 1, greeted next buổi too)',S.j76carry===1&&used===4&&(S.acGreetNx||{})[H.k]===wk()+"-"+(b0+1),{carry:S.j76carry,used});
-    nextBuoi();row('greet inside: next buổi starts with the carried khắc, no second greeting',S.buoi===b0+1&&used===1&&!cbGreetTodo(H.k),{buoi:S.buoi,used})}
+    const q0=Q.map(q=>q.t||'');clr();S.mg=0;nextBuoi();clr();row('greet inside: next buổi starts with the carried khắc, no second greeting',S.buoi===b0+1&&used===1&&!cbGreetTodo(H.k),{buoi:S.buoi,used,cardsBefore:q0,mg:!!S.mg})}
    ACC_ETQ.khac=kh0;
    /* 2. greeting at the gate: walk 1 + greet 1, 1 left */
    base(CH,3);S.where[H.v.id]=H.k;const tc=travel(S.place,H.k);used=4-tc;let g=null;try{accEtqCard(H.k,()=>{window.__j77etq=1;try{goTo(H.k)}finally{window.__j77etq=0}});g=body()}catch(e){g={err:String(e)}}
    const go=g&&g.opts&&g.opts.find(x=>/^Bái kiến .* rồi vào|^Đi \(đến nơi vào buổi sau\)/.test(x.n));
    row(`gate greeting: walk ${tc} + ${ACC_ETQ.khac}, ${4-used} left: offered`,!!(go&&!go.dis)&&!/không kịp/.test(g&&g.body||''),g&&g.body&&g.body.slice(0,200));
-   if(go&&/^Bái kiến/.test(go.n)){clr();accEtqGo(H.k,H.v,1,()=>{window.__j77etq=1;try{goTo(H.k)}finally{window.__j77etq=0}});row('gate greeting: inside, carry set',S.place===H.k&&S.j76carry>=1,{place:S.place,carry:S.j76carry})}
+   if(go&&/^Bái kiến/.test(go.n)){clr();accEtqGo(H.k,H.v,1,()=>{window.__j77etq=1;try{goTo(H.k)}finally{window.__j77etq=0}});row('gate greeting: inside, carry set',S.place===H.k&&S.j76carry>=1,{place:S.place,carry:S.j76carry,used,want:H.k,access:accessOf(S,H.k),walk:travel(S.place,H.k),Q:Q.map(q=>(q.t||'')+': '+String(q.h||'').replace(/<[^>]+>/g,' ').replace(/\s+/g,' ').slice(0,140)),log:(S.log||[]).slice(-4).map(x=>String(x&&x.t||x).replace(/<[^>]+>/g,'').slice(0,120))})}
   }else row('palace with a chủ vị',false,'no rival');
   /* 3. map place cards, chiều 1 left and sáng 1 left: no per-buổi "không kịp"; ask / sneak offered when the day has the khắc */
   for(const bu of [0,CH])for(const k of places().map(x=>x.k)){if(k==="home")continue;base(bu,3);if(H)S.where[H.v.id]=H.k;let m=null;try{if(accessOf(S,k).ok)j77Tap(k);else j77Card(k);m=body()}catch(e){m={err:String(e)}} /* a closed place: its card (j77Card) holds the ways in */
