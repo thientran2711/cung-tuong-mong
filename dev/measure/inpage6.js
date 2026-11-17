@@ -108,7 +108,7 @@ function sensibleStep(){
   if(!HS&&!window.__noSelf&&typeof lessonVir==="function"&&typeof VIR!=="undefined"&&S.vir&&!S.mg&&can(2)&&S.suc>=60){const V=VIR.filter(v=>(S.vir[v.k]||0)<5).sort((a,b)=>(S.vir[a.k]||0)-(S.vir[b.k]||0));if(V.length)opts.push({L:"vself",s:1.1-(S.suc<70?.5:0),f:()=>{note("virStudy");lessonVir(V[0].k,"self")}})}
   const sea=SEASON[S.month-1];const W=S.where||{};
   const pls=[];
-  const place=(k,s)=>{const p=places().find(x=>x.k===k);if(p&&placeOK(p))pls.push({k,s:s/Math.sqrt(travel(S.place,k)||1)})};
+  const place=(k,s)=>{const p=places().find(x=>x.k===k);if(p&&placeOK(p)){/* balance-2: the map spot shows the robbery risk (jty): a sensible player weighs it */let rk=0;try{if(typeof tyRobOdds==="function"&&!tyOn(S)&&wdOf(S).y)rk=tyRobOdds(k,countAt(k))/100}catch(e){}pls.push({k,s:s*(1-1.5*rk)/Math.sqrt(travel(S.place,k)||1)})}};
   // emperor: visit where he is (ranks by sung); garden preferred
   if(W.emp&&["vuon","thu","dtd"].includes(W.emp)&&(W.emp!=="dtd"||S.sung>=50)&&(W.emp!=="thu"||S.sung>=40||Math.random()<.3))place(W.emp,3.2*N.ws+(W.emp==="vuon"?1:0));
   else place("vuon",(sea==="Xuân"||sea==="Thu"?.45:.2)*3.5*N.ws+.3);
