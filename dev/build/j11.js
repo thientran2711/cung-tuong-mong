@@ -135,7 +135,7 @@ function pxTick(tk){const d=tk.deltaTime,W=PX.app.screen.width,H=PX.app.screen.h
   const need=Math.max(W/tw,H/th);if(sc<need)sc=need;const hw=tw*sc/2,hh=th*sc/2;cx=Math.min(hw,Math.max(W-hw,cx));cy=Math.min(hh,Math.max(H-hh,cy));
   PX.bg.scale.set(sc*(1.003+.003*Math.sin(PX.t/9)));PX.bg.x=cx;PX.bg.y=cy}
  else{const sc=Math.max(W/PX.bg.texture.width,H/PX.bg.texture.height)*1.08;PX.bg.scale.set(sc*(1+.03*Math.sin(PX.t/9)));PX.bg.x=W/2+Math.sin(PX.t/13)*W*.02;PX.bg.y=H/2+Math.cos(PX.t/17)*H*.015}}
- if(S&&S.wx&&S.wx.k==="storm"&&Math.random()<.003*d){sfx("sfx-thunder");if(typeof kfBolt==="function")kfBolt()}  /* lightning = kit weather layer kfBolt (jfx): flashes the WHOLE stage frame */
+ if(S&&S.wx&&S.wx.k==="storm"&&Math.random()<.003*d*((BAL.wx.day.bolt||[])[Math.max(1,Math.min(3,S.wx.kl||3))]||1)){sfx("sfx-thunder");if(typeof kfBolt==="function")kfBolt()}  /* lightning = kit weather layer kfBolt (jfx): flashes the WHOLE stage frame */
  for(const p of PX.parts){const v=p.v;if(v.kind==="lamp"){if(v.on>0){v.on-=d}else p.alpha=Math.min(.55,p.alpha+.01*d)*(RM?1:.85+.15*Math.sin(PX.t*9+v.ph));p.x=v.fx*W;p.y=v.fy*H;continue}if(v.kind==="star"){p.y=v.fy*H;p.alpha=.5+.4*Math.sin(PX.t*2+v.ph);continue}v.ph+=.02*d;if(S&&S.wx&&S.wx.k==="wind")p.x+=1.2*d;p.x+=(v.vx+Math.sin(v.ph)*.3)*d;p.y+=v.vy*d;if(v.kind==="fly"){p.alpha=.4+.5*Math.sin(v.ph*3);p.x+=Math.sin(v.ph*1.3)*.4*d;p.y+=Math.cos(v.ph)*.4*d}if(v.kind==="petal"||v.kind==="leaf")p.rotation+=.02*d;
   if(p.y>H+12){p.y=-10;p.x=Math.random()*W}if(p.y<-20){p.y=H+10;p.x=Math.random()*W}if(p.x<-20)p.x=W+10;if(p.x>W+20)p.x=-10}
  for(const p of PX.fxl.children.slice()){const v=p.v;v.vy+=.15*d;p.x+=v.vx*d;p.y+=v.vy*d;p.rotation+=.05*d;v.life-=d;p.alpha=Math.max(0,v.life/90);if(v.life<=0)p.destroy()}

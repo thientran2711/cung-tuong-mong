@@ -32,7 +32,9 @@ Object.assign(BAL.wx,{day:{
  lvB:{heat:[-1,1,0,-2],fog:[1,-1,-1,0],frost:[1,0,-1,0]},lvKeepOf:{wind:.3,storm:.5},
  /* what the level LOOKS like (reviewer r1 B): jfx weather-layer config per kind × [nhẹ, vừa, nặng] (KF_WX rows, existing sprites) and the wet / snow
     wash strength × on the light overlay (j12 lightTick); kinds not listed keep their own jfx row */
- fxLv:{rain:["drizzle","rain2","rainh"],snow:["snow","snow","snowh"],wind:["wind1","wind","wind3"],fog:["mist1","mist","mist3"]},wash:[1,1,1.5,2.4],washOwn:[.25,.25,.45,.7],
+ fxLv:{rain:["drizzle","rain2","rainh"],snow:["snow1","snow","snowh"],wind:["wind1","wind","wind3"],fog:["mist1","mist","mist3"],storm:["storm1","storm2","storm"],heat:["heat1","heat","heat3"],cloud:["cloud1","cloud","cloud3"],frost:["frost1","frost","frost3"]},
+ /* wx-anim: kinds whose state keeps its own row family (kd petal covers hoa đào + mai nở; kd leaf; snowp) keyed by the state kind S.wx.k; bolt = share of the lightning rate per level */
+ fxLvK:{petal:["petal1","petal","petal3"],leaf:["leaf1","leaf","leaf3"],snowp:["snowp1","snowp","snowp3"]},bolt:[0,.25,.6,1],heatSe:[1,.6,1,1.5],wash:[1,1,1.5,2.4],washOwn:[.25,.25,.45,.7],
  /* where a state goes when it changes: [to, weight by buổi [sáng, trưa, chiều, tối]] */
  next:{
   Xuân:{"hoa đào bay":[["trời quang",[2,2,1,1]],["trời âm u",[1,1,2,1]],["mưa phùn",[1,1,2,2]],["gió lớn",[1,1,2,1]]],
@@ -185,8 +187,10 @@ function wxkCold(kind){const l=wxkFx("frost");return l&&BAL.wx.fx.frost.kinds.in
  if(wxkFx("frost"))add.push(["r","Giá rét: tay cóng, đàn và thêu khó hơn."]);
  if(add.length){const q=L.filter(x=>!/^Trời yên/.test(x[1]));return q.concat(add)}}catch(e){}return L}})();
 /* the level shows (reviewer r1 B): the jfx weather layer picks the row for the khắc's level; storm keeps its own row (thunder + bolt) */
-function wxkFxId(w){try{const L=w&&BAL.wx.day.fxLv[w.kd];if(!L)return null;const id=L[Math.max(1,Math.min(3,w.kl||1))-1];return KF_WX[id]?id:null}catch(e){return null}}
+function wxkFxId(w){try{const L=w&&(BAL.wx.day.fxLvK[w.k]||BAL.wx.day.fxLv[w.kd]);if(!L)return null;const id=L[Math.max(1,Math.min(3,w.kl||1))-1];return KF_WX[id]?id:null}catch(e){return null}}
 (function(){if(typeof kfWxCfg!=="function")return;const c0=kfWxCfg;kfWxCfg=function(){const c=c0.apply(this,arguments);try{
- if(!c||!S||!S.wx||c.id==="gold"||c.id==="fly"||c.id==="storm")return c;const id=wxkFxId(S.wx);if(!id||id===c.id)return c;
- return Object.assign({lay:"wx"},KF_WX[id],{id,night:c.night})}catch(e){}return c}})();
+ if(c&&(c.id==="gold"||c.id==="fly"))return c;if(!S||!S.wx)return c;
+ /* wx-anim: kinds the base config does not draw (heat, cloud) get their level row too; not at night for heat (no sun) */
+ const night=(S.buoi||0)===B4L;if(!c&&S.wx.kd==="heat"&&night)return c;const id=wxkFxId(S.wx);if(!id||(c&&id===c.id))return c;
+ return Object.assign({lay:"wx"},KF_WX[id],{id,night:c?c.night:night})}catch(e){}return c}})();
 Object.assign(window,{wxkFx,wxkCold,wxkFxId});

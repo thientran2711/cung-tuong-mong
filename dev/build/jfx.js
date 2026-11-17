@@ -180,9 +180,28 @@ const KF_WX={
  rainh:{k:["streak"],cap:80,vx:[-3.4,-2],vy:[14,19],a0:.8,rain:1,tint:0xbccde0,sc:[.9,1.2]},
  wind1:{k:["leaf","streak"],cap:24,vx:[3,6],vy:[.3,1.2],sway:1.2,spin:.08,sc:[.55,.85],a0:.85,gust:1.4,fall:1,fromLeft:1,line:1},
  wind3:{k:["leaf","leaf","streak","streak"],cap:100,vx:[8,13],vy:[.4,1.8],sway:1.6,spin:.14,sc:[.55,.95],a0:.95,gust:3,fall:1,fromLeft:1,line:1},
- mist1:{k:["smoke"],cap:3,vx:[.15,.45],vy:[-.12,.12],a0:.16,float:1,tint:0xf0ece4,sc:[3,4.6],life:[480,700]},
+ /* wx-anim (owner 17/11 (h): every kind × nhẹ/vừa/nặng must show, clearly different): the rows below fill the levels that had no row of their own
+    (same painted sprites: streak / leaf / petal / smoke / orb / ember / glowburst; fxLvK in jwxk picks them). */
+ snow1:{k:[KF_SPR.snow],cap:46,vx:[-.2,.2],vy:[.5,.9],sway:.5,spin:.02,sc:[1,1.6],a0:.9,gust:.2,fall:1,snow:1},
+ frost1:{k:[KF_SPR.snow],cap:10,vx:[-.15,.15],vy:[.3,.6],sway:.3,spin:.01,sc:[.8,1.2],a0:.8,fall:1,snow:1},
+ frost3:{k:[KF_SPR.snow],cap:60,vx:[-.3,.3],vy:[.5,1],sway:.5,spin:.01,sc:[1,1.6],a0:.95,gust:.3,fall:1,snow:1},
+ petal1:{k:["petal-peach"],cap:6,vx:[.1,.5],vy:[.6,1.1],sway:.9,spin:.05,sc:[.45,.7],a0:.9,gust:.6,fall:1,tint:0xffc4d4},
+ petal3:{k:["petal-peach"],cap:34,vx:[.3,1.1],vy:[.9,1.6],sway:1.3,spin:.06,sc:[.5,.9],a0:.95,gust:1.6,fall:1,tint:0xffc4d4},
+ leaf1:{k:["leaf"],cap:4,vx:[0,.5],vy:[.7,1.1],sway:1,spin:.04,sc:[.5,.75],a0:.9,gust:.5,fall:1},
+ leaf3:{k:["leaf"],cap:26,vx:[.2,1],vy:[1,1.7],sway:1.4,spin:.07,sc:[.55,.95],a0:.95,gust:1.4,fall:1},
+ snowp1:{k:[KF_SPR.snow,"petal-plum"],cap:30,vx:[-.2,.3],vy:[.5,.9],sway:.5,spin:.02,sc:[1,1.6],a0:.95,gust:.3,fall:1,snow:1},
+ snowp3:{k:[KF_SPR.snow,KF_SPR.snow,"petal-plum","petal-plum"],cap:130,vx:[-.5,.7],vy:[1,1.8],sway:.9,spin:.04,sc:[1.1,2],a0:1,gust:.9,fall:1,snow:1},
+ storm1:{k:["streak"],cap:34,vx:[-1.4,-.8],vy:[11,14],a0:.78,rain:1,tint:0xc4d6e6,sc:[.85,1.15]},  /* giông tố nhẹ: far rumble, a downpour that has not broken yet (bolt rare, BAL.wx.day.bolt) */
+ storm2:{k:["streak"],cap:56,vx:[-2.4,-1.4],vy:[12,16],a0:.8,rain:1,tint:0xbccde0,sc:[.9,1.2]},
+ heat1:{k:["glowburst"],cap:2,vx:[-.05,.05],vy:[-.12,-.04],a0:.1,float:1,tint:0xffd9a0,sc:[3,4.4],life:[420,640]},  /* nắng gắt: heat haze patches, thicker and warmer with the level */
+ heat:{k:["glowburst"],cap:4,vx:[-.05,.05],vy:[-.14,-.05],a0:.17,float:1,tint:0xffd29a,sc:[3.2,4.8],life:[420,640]},
+ heat3:{k:["glowburst","ember"],cap:8,vx:[-.06,.06],vy:[-.2,-.06],a0:.26,float:1,tint:0xffc680,sc:[3.4,5.2],life:[380,600]},
+ cloud1:{k:["smoke"],cap:2,vx:[.1,.3],vy:[-.05,.05],a0:.12,float:1,tint:0x8c96a8,sc:[3.4,5],life:[520,760]},  /* trời âm u: slow grey cloud banks drifting over the picture */
+ cloud:{k:["smoke"],cap:4,vx:[.12,.36],vy:[-.05,.05],a0:.2,float:1,tint:0x7c869a,sc:[3.6,5.4],life:[520,760]},
+ cloud3:{k:["smoke"],cap:8,vx:[.15,.45],vy:[-.06,.06],a0:.32,float:1,tint:0x6a7488,sc:[3.8,5.8],life:[500,740]},
+ mist1:{k:["smoke"],cap:2,vx:[.15,.45],vy:[-.12,.12],a0:.12,float:1,tint:0xf0ece4,sc:[3,4.6],life:[480,700]},
  mist3:{k:["smoke"],cap:7,vx:[.1,.35],vy:[-.1,.1],a0:.32,float:1,tint:0xf0ece4,sc:[3.6,5.4],life:[520,760]},
- mist:{k:["smoke"],cap:4,vx:[.15,.45],vy:[-.12,.12],a0:.22,float:1,tint:0xf0ece4,sc:[3,4.6],life:[480,700]},
+ mist:{k:["smoke"],cap:5,vx:[.15,.45],vy:[-.12,.12],a0:.24,float:1,tint:0xf0ece4,sc:[3,4.6],life:[480,700]},
  fly:{k:[KF_SPR.fly],cap:90,vx:[-.3,.3],vy:[-.25,.25],sway:.8,a0:1,float:1,sc:[.5,.8],life:[300,560],glow:1},  /* each firefly = tiny warm core + soft green-gold halo (2 sprites), slow wander, deep slow blink, depth (near = bigger, far = tiny) */
  gold:{k:["petal-peach"],cap:12,vx:[-.3,.3],vy:[.5,1],sway:.8,spin:.04,sc:[.5,.8],a0:.85,gust:.4}
 };
@@ -203,7 +222,7 @@ const KF_RAYS={lay:"se2",id:"rays",k:["streak","streak","streak","glowburst"],ca
 function kfSeCfg(){const m=(typeof S!=="undefined"&&S&&S.month)||1,night=typeof S!=="undefined"&&S&&(S.buoi||0)===B4L;
  /* SUMMER (Apr-Jun, lotus season): no petals; sunlit golden motes drifting up through the light (+ light rays, see KF_RAYS) */
  if(m>=4&&m<=6&&(night||(typeof S!=="undefined"&&S&&S.wx&&(S.wx.k==="cloud"||(typeof wet==="function"&&wet())))))return{lay:"se",id:"sunn",k:["orb"],cap:0,off:1,float:1,vx:[0,0],vy:[0,0],sc:[1,1],a0:0,life:[60,60],night};  /* no sunlight at night: the night room shows fireflies (weather layer) only */
- if(m>=4&&m<=6)return{lay:"se",id:"sun",k:KF_SEASON(),cap:36,float:1,vx:[-.25,.25],vy:[-.55,-.15],sway:.5,sc:[1.1,2],a0:.95,life:[260,420],tint:0xffe08a,night};
+ if(m>=4&&m<=6)return{lay:"se",id:"sun",k:KF_SEASON(),cap:Math.round(36*(((typeof S!=="undefined"&&S&&S.wx&&S.wx.kd==="heat"&&typeof BAL==="object"&&BAL.wx&&BAL.wx.day&&BAL.wx.day.heatSe)||[])[Math.max(1,Math.min(3,S.wx.kl||1))]||1)),float:1,vx:[-.25,.25],vy:[-.55,-.15],sway:.5,sc:[1.1,2],a0:.95,life:[260,420],tint:0xffe08a,night};
  return{lay:"se",id:"se",k:KF_SEASON(),cap:8,vx:[-.35,.25],vy:[.4,.8],sway:.9,spin:.03,sc:[.5,.8],a0:.7,fall:1,night:typeof S!=="undefined"&&S&&(S.buoi||0)===B4L}}
 function kfStageRect(){try{const st=document.getElementById("stage");if(!st)return null;const r=st.getBoundingClientRect();return r.width>40&&r.height>40&&getComputedStyle(st).visibility!=="hidden"?{x:r.left,y:r.top,w:r.width,h:r.height}:null}catch(e){return null}}
 function kfWxSync(){const r=kfStageRect();KFX.sr=r;const P=window.PIXI;if(!P||!KFX.app)return;
