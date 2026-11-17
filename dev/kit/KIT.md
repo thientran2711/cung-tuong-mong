@@ -4083,3 +4083,10 @@ Replaces §34.1b (kitLeather frame on the Dư đồ), §34.1d chip look of `.msp
 
 ## 86. kitLearn · HỌC THÀNH TÀI level-up scene (review/scenes-3, owner OD:L712) — `dev/build/jlevel.js`
 `kitLearn({kind:"art"|"vir", k, from, to})` — the scene for HER tài nghệ (Cầm, Kỳ, Thi, Họa, Vũ, Y…) or Công Dung Ngôn Hạnh reaching a new bậc (hook = addArt / addVir, every road; NPCs: no scene). Built on kmStage + the §65.2 frame (header «Học thành tài» + «<tên> lên bậc N», the painting in `.kprev-fig.klearn-fig`, card: kitSteps «Bậc n/5», kit rows of what she gained = the skill card's own effect lines ARTFX / VIRFX + the recipes the level opens (Tứ đức, RCP_ST), ONE button «Tiếp theo» (KM_END `km-learn`)). `kitLearnHTML(o)` = its HTML. Painting `img/scene-thanhtai.webp` (ART REQUEST to Foreman C); until it lands the skill's own painting (kitSkillArt, as on the skill card) shows by `onerror` swap. Sparks = kitFxBurst glowburst + spark. Reduced motion / Gọn: final frame. Sample page: §86.
+
+
+## 87. Option rows (kit-option-rows, s34)
+- Option grid cells (jksize kszBtnGrid3 / kszBtnGridLive3): a card's TEXT column keeps >= KIT_SIZE.v3.btn.txtMin (200 px) beside its picture (kszNeedTxt), so two or three picture cards on a ~600 px area stack in ONE column and use the width; 2 columns only when each cell fits (e.g. 858 px). Never per modal.
+- "Says nothing" lines (j63 KA_NOTHING, one regex for kaRows + the empty Mất/Được filter): "không được mất gì", "không được không mất", "không mất không được", "không được gì", "không mất gì" are never shown. A real loss must be written as a loss, not as this line.
+- dilLine (j17): a sure option x that already starts with a label (thành:/tốn:/hỏng:/ngay:/kèm:) is not wrapped in a second "thành: " (was the literal "thành:" under ĐƯỢC).
+- Scan: node dev/measure/option-modal-scan.js <fold|ipadAir|ipadPro|pixel|iphone14> [turns] [json] flags NARROW / CLIP / EMPTY / LIT / NOTHING.

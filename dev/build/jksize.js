@@ -263,7 +263,7 @@ KIT_SIZE.v3={
  /* S = small content: body up to bodyS, body + its button rows up to capS */
  bodyS:200,capS:{kv1:340,kv2:340},
  colS:104,porS:88,picS:"PM",picMinS:KIT_SIZE.pic.PM.h,evMin:{one:46,fig:56},subjPad:.04,
- btn:{cellS:140,cellLong:280,gap:6}};
+ btn:{cellS:140,cellLong:280,gap:6,txtMin:200}};
 /* v3 figure sizes (measured BODY px, × KIT_FIG.fac) of the "fig" presentations: big enough that M holds more than S, L more than M, XL more than L */
 KIT_SIZE.fig3={M:{h:300,cw:140},L:{h:370,cw:162},XL:{h:480,cw:220}};Object.assign(KIT_SIZE.fig,{M3:KIT_SIZE.fig3.M,L3:KIT_SIZE.fig3.L,XL3:KIT_SIZE.fig3.XL});
 Object.assign(KIT_SIZE.lay,{M:{fig:"M3"},L:{fig:"L3"},XL:{fig:"XL3"}});
@@ -334,11 +334,13 @@ function kitPicFocus(c,im){const W=im.naturalWidth,H=im.naturalHeight,w=c.client
  const s=Math.max(w/W,h/H),vw=w/s,vh=h/s,bb=sj||[.5,.5,.5,.5],cx=(bb[0]+bb[2])/2*W,cy=(bb[1]+bb[3])/2*H;
  const px=W-vw>1?Math.min(1,Math.max(0,(cx-vw/2)/(W-vw))):.5,py=H-vh>1?Math.min(1,Math.max(0,(cy-vh/2)/(H-vh))):.5;im.style.objectPosition=`${(px*100).toFixed(1)}% ${(py*100).toFixed(1)}%`}
 window.kitPicFocus=kitPicFocus;
+/* kit option-rows (s34): a card's TEXT column keeps >= B.txtMin px (values never wrap word by word, no clipped line): the cell = text min + the picture column + paddings, so 2 options use the whole width (1 column) when the area is narrow */
+function kszNeedTxt(bs,need,B){const TX=B.txtMin||190;let pic=0,any=false;bs.forEach(b=>{const a=b.querySelector(".kaart");if(a){any=true;pic=Math.max(pic,Math.ceil(a.getBoundingClientRect().width||0))}});return Math.max(need,TX+(any?pic+44:16))}
 /* (4) button grid: cols from the area width, short buttons one cell, long ones the cells they need */
 function kszBtnGrid3(root){root.querySelectorAll(".k3btns").forEach(g=>{const B=KIT_SIZE.v3.btn,w=g.clientWidth;if(!w)return;const bs=[...g.querySelectorAll(":scope>.kszb")];
  /* the cell = what the widest SHORT button needs at its narrowest (title ≥ 7 em, a row may put its value under its label, chips never break), never less than cellS */
  g.classList.add("k3meas");let need=B.cellS;bs.filter(b=>b.dataset.kbs==="S").forEach(b=>{b.style.width="min-content";need=Math.max(need,Math.ceil(b.getBoundingClientRect().width));b.style.width=""});g.classList.remove("k3meas");
- const cols=Math.max(1,Math.floor((w+B.gap)/(need+B.gap)));const cell=(w-(cols-1)*B.gap)/cols,long=Math.min(cols,Math.ceil((B.cellLong+B.gap)/(cell+B.gap)));g.style.setProperty("--k3c",cols);
+ need=kszNeedTxt(bs,need,B);const cols=Math.max(1,Math.floor((w+B.gap)/(need+B.gap)));const cell=(w-(cols-1)*B.gap)/cols,long=Math.min(cols,Math.ceil((B.cellLong+B.gap)/(cell+B.gap)));g.style.setProperty("--k3c",cols);
  bs.forEach(b=>b.style.setProperty("--k3s",b.dataset.kbs==="S"?1:long))})}
 /* the left column decides the body height; the event picture in the info grows into what the text leaves */
 function kitFrameApply3(dlg){try{kszFigFit(dlg)}catch(e){}kszBtnGrid3(dlg);const R=dlg.querySelector(".k3right"),L=dlg.querySelector(".k3body>.kszfig,.k3body>.k3mpor");
@@ -478,7 +480,7 @@ function kszLiveSrc3(m,mb,kind){let src="";const im=mb.querySelector(":scope > .
 function kszBtnGridLive3(g){const B=KIT_SIZE.v3.btn,w=g.clientWidth;if(!w)return;const bs=[...g.children].filter(b=>b.tagName==="BUTTON"&&b.getClientRects().length);
  bs.forEach(b=>{b.dataset.kbs=kitBtnSize({rows:b.querySelectorAll(".kar,.kl,.kr-why,.kab>*").length,chars:((b.querySelector(".kabody")||b).textContent||"").replace(/\s+/g," ").trim().length})});
  g.classList.add("k3meas");let need=B.cellS;bs.filter(b=>b.dataset.kbs==="S").forEach(b=>{b.style.setProperty("width","min-content","important");b.style.setProperty("min-width","0","important");need=Math.max(need,Math.ceil(b.getBoundingClientRect().width));b.style.removeProperty("width");b.style.removeProperty("min-width")});g.classList.remove("k3meas");
- const cols=Math.max(1,Math.floor((w+B.gap)/(need+B.gap)));const cell=(w-(cols-1)*B.gap)/cols,long=Math.min(cols,Math.ceil((B.cellLong+B.gap)/(cell+B.gap)));g.style.setProperty("--k3c",cols);
+ need=kszNeedTxt(bs,need,B);const cols=Math.max(1,Math.floor((w+B.gap)/(need+B.gap)));const cell=(w-(cols-1)*B.gap)/cols,long=Math.min(cols,Math.ceil((B.cellLong+B.gap)/(cell+B.gap)));g.style.setProperty("--k3c",cols);
  bs.forEach(b=>b.style.setProperty("--k3s",b.dataset.kbs==="S"?1:long))}
 /* the height the info column may take: the modal box minus the frame's header, button row and body padding */
 function kszLiveRoom3(dlg){const M=document.getElementById("modal");if(!M)return 9999;let ch=24+22+4;[...dlg.children].forEach(c=>{if(c.id!=="mb"&&c.getClientRects().length&&getComputedStyle(c).position!=="absolute")ch+=c.offsetHeight});
