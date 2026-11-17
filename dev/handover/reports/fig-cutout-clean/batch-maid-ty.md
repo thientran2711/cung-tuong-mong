@@ -28,3 +28,4 @@ START_CTX ~8 % (estimate). Rolled over early at ~25 % of window because the setu
 - Needs each new container: pip install scipy opencv-python-headless; cdn_sync.py; /tmp/claude-0/w/out is lost with the container (already uploaded files are safe on CDN). Gesture rotation continues (jade pendant, scroll, lantern, teacup, flower branch, fan, handkerchief, tray/teapot, book, hairpin fingertip).
 - NEXT: maid-m05-ty6 .. (a18 order in lists/shards/maid-ty.txt; index 38 of 416 a18). Then a26/a36/a51 (ref = NEW a18 of that look + old file).
 - Note: 4k m01-ty1..5 QA showed pinhole FAIL flags on ty2/ty5 and halo 5299 on ty3 (W4 judged clean on dark); lead may want a second look.
+## W4c (17/11) START_CTX ~5 %. Subagent-driven batches of 8 (brief /tmp/claude-0/w/SUBBRIEF.md). Done 61/1664 (all a18 through m08-ty5), fig+hd+por on CDN (--check ok), fragment hd-entries/W4c-1.json (24 entries). Next: m08-ty6.. (batches D/E/F in flight).
