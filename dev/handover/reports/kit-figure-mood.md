@@ -21,5 +21,5 @@ Makers register the person (data-kfsp): kitStageFig + kszFigHtml wrapped in jfig
 ## Tests / shots
 - fig-seal.js Fold 755x1000@2 and iPad 1180x820@2 (room, event dialog, place/Dư đồ, tap person): every seal inside its stage/column, not on the face, 22..50 px, beside the head, 0 page errors. Looked at all shots.
 - Shots (CDN img/_review/kit-figure-mood/): room/event/place at 755x1000 and 1180x820 (delete after verdict: python3 dev/site/cdn_sync.py --wipe-review kit-figure-mood).
-- quickcheck: see line below.
+- quickcheck --runs 5 on 82a3e876 vs live e9bbc4d6: PASS (core gates, time-spill, open 0 errors, old save ok; perf median new/live render 232/253, tab 436/407, buổi 1248/1276, tasks>200ms 15/16). Later commits only add the kit-page sample + rebuild (kit-page.js: 85 samples ok, 0 errors, Fold + iPad).
 Known limit: wide phoenix headdresses push the seal ~50 px from the face (it sits past the headdress, by rule).
