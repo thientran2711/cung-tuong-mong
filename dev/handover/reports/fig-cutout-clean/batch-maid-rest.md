@@ -134,3 +134,12 @@ maid-m08-tm3-a18	jUB9BYTLD0	ok U
 maid-m08-tm4-a18	vQ212O3a47	ok U
 maid-m09-a18	IfibiwktvE	ok U
 - W5c: 40 done. NEXT maid-m09-cold-a18 (queue line 41).
+maid-m09-cold-a18	EbnL06puuO	ok U
+maid-m09-kc-a18	1leyo0vr4r	ok U
+maid-m09-ngheo-a18	EbnL0ZBuuO	ok U
+maid-m09-t1-a18	N2H0KEw6D9	ok U
+maid-m09-t2-a18	LwoNmX3swO	ok U
+maid-m09-t3-a18	Bh9F2tLoQR	ok U
+maid-m09-t4-a18	s786huFl8e	ok U
+maid-m09-t5-a18	nVLoS4EYQD	ok U
+- W5c: 48 done. NEXT maid-m09-t6-a18 (queue line 49).
