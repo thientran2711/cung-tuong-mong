@@ -39,6 +39,8 @@ OPEN OWNER QUESTIONS: (B) explicit OK to overwrite live fig-maid-*-ty* with the 
 IDLE (C's): art lead #7 session_011xDdVNkgEgTqsZJxUh9Xd8; W8 mama session_011xDdVRWZVWQYAYYva3YuqJ. ROOT-6 session_011xDdVQNdyTACuGN42yEBQZ stopped (ROOT-5's child; not archived by C).
 
 FOREMAN C ROOT-10 (art) = session_011xDdVReyG8hSRH5URJJdVX · START_CTX ~5% (get_session reads 0, own estimate) → roll over at >= 30%, ceiling 60% · lineage depth 3/8 · own hourly wake trig_016cbgoeT1np55rZem823Rxq (:32) · reports to MAIN s34 via this file.
+- 20:53Z(wall) C LOOKED hoa điền fixes (dao-02 magnolia/03 orchid/07 chrysanthemum, phuong-05 bigger) → GO live 160 (R5e4).
+- 20:55Z(wall) C LOOKED W10 m09 ladder v6 (one style ref = m09 base creation; t1–t3 distinct cuts; t4 floor robe; no jutting pins) + face3d tests t1/t2 (closer to ref) → SENT owner t1+t2 face3d singles; W10 regenerating t3–t8 with face clause (~800 cr).
 - 20:50Z(wall) C LOOKED W12 restore 6 samples (img/_review/restore-ty/SHEET-fig-current-restored.jpg): plain trung y, heights match, keep-copy 2043 md5-equal → GO overwrite all 681 keys in batches; restored keys then go to R5e4 for forehead clean.
 - 20:50Z(wall) C LOOKED W11 c01 t4 v4 (CqzGyQXEEy/cut jUBXnqMLD0; face softer, no contour, smaller eyes) → SENT owner single.
 - 20:48Z(wall) C LOOKED hoa điền 10×8 = 80 sprites (R5e4, 17 gens ~1.4k cr, img/_review/hoa-dien-art/hd10/): no leaves, tier materials step, OK; fix P2 hd-dao 02/03/07 (same 5-petal as 01) + P8 phuong-05 too small → worker redoing; then live. SENT owner singles hd-lan-01 (P5 leaf gone) + hd-phuong-02. Forehead POR 1,828/6,403.
