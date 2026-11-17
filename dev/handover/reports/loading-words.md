@@ -1,7 +1,7 @@
 PRIORITY #1 CHECK: OD 7 (loading screen, Thỉnh tranh chip) | main: jload.js, kboot.js, swreg.js, jk2b.js had the lines | review/* review/loading (already merged work: update card, chip) | claims status-icons / ios-install-first (kept their kit parts).
 
 # loading-words — worker (sonnet)
-Branch `review/loading-words` @ **7221f0b17** (base main 2de320ac). Built site committed. quickcheck --runs 3: **PASS** (open 1436 ms, old save ok, core gates PASS, perf render 124/133, tab 238/232, buổi 697/758).
+Branch `review/loading-words` @ **0b9829a8f** (rename «Thông tin cập nhật» → «Sổ đổi mới» added on top of 7221f0b17, per main; menu name resolved) (base main 2de320ac). Built site committed. quickcheck --runs 3: **PASS** (open 1436 ms, old save ok, core gates PASS, perf render 124/133, tab 238/232, buổi 697/758).
 Shots (CDN img/_review/loading-words/, Fold 755x1000 + iPad 1180x820, looked at): fold/ipad-1-boot-cover, fold-3-boot-fail, fold/ipad-5-loading-thinh-tranh, fold/ipad-4-rebirth-wait. Wipe after verdict: `python3 dev/site/cdn_sync.py --wipe-review loading-words`.
 Not shot: co-op wait/freeze overlay, Sổ mây busy lines (need a live room / cloud); changed by string only, node --check OK.
 
