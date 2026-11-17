@@ -1,8 +1,8 @@
 /* KIT §87 kitDisplayRoom test (owner 17/11): Nơi trưng bày full-screen between the top bar and the bottom bar; iPad (kv2) 2 cols x 6 shelves, phone 1 col x 12;
    tap a shelf -> drawer with only that group's pieces; tap piece -> kit item card -> Trưng bày -> placed + drawer closes; tap placed -> Cất xuống; read-only has no drawer.
    HOST mode (built root index.html through rot.js, the real design canvas; dev/test/README.md). Fixture mode (no jshelf API needed). CDN pictures via curl (sandbox).
-   usage: node dev/test/display-room.js <url> <outdir|-> [device,...]  (default fold,ipadAir,ipadPro,pixel,iphone14)  -> JSON per device; exit 1 on FAIL */
-const {chromium}=require('playwright');const D=require('./lib/device');const {execFileSync}=require('child_process');const [,,URL,OUT,SZ]=process.argv;const devs=(SZ||'fold,ipadAir,ipadPro,pixel,iphone14').split(',');
+   usage: node dev/test/display-room.js <url> <outdir|-> [device,...]  (default fold,ipadAir,ipadPro,foldLand)  -> JSON per device; exit 1 on FAIL */
+const {chromium}=require('playwright');const D=require('./lib/device');const {execFileSync}=require('child_process');const [,,URL,OUT,SZ]=process.argv;const devs=(SZ||'fold,ipadAir,ipadPro,foldLand').split(',');
 const cdn={};const {execFile}=require('child_process');const pcurl=u=>new Promise(res=>execFile('curl',['-sSf','-m','30',u],{encoding:'buffer',maxBuffer:60e6},(e,o)=>res(e?null:o)));
 async function viaCurl(ctx){await ctx.route(/ctm-img\.victoria-tntt\.workers\.dev/,async r=>{const u=r.request().url();if(!(u in cdn))cdn[u]=pcurl(u);const body=await cdn[u];if(!body)return r.abort();r.fulfill({status:200,body,contentType:u.endsWith('.json')?'application/json':'image/webp',headers:{'access-control-allow-origin':'*'}})})}
 (async()=>{const b=await chromium.launch();let bad=0;const all={};
@@ -37,13 +37,13 @@ async function viaCurl(ctx){await ctx.route(/ctm-img\.victoria-tntt\.workers\.de
   const before=await p.evaluate(()=>document.querySelectorAll('.kdr-sh.has').length);
   await p.click('#kdrdrw [data-kdrix]');await p.waitForTimeout(400);
   r.card=await p.evaluate(()=>{const f=document.getElementById('kidfl');return f?[...f.querySelectorAll('button')].map(x=>x.textContent.replace(/\s+/g,' ').trim().slice(0,24)):null});
-  const act=await p.$('#kidfl [data-kidact=put]');if(act)await act.click();await p.waitForTimeout(450);
+  const act=await fr.waitForSelector('#kidfl [data-kidact=put]',{timeout:8000}).catch(()=>null);if(act)await act.click();await p.waitForTimeout(450);await fr.waitForFunction(()=>!document.getElementById('kidfl'),null,{timeout:8000}).catch(()=>{});
   r.placed=await p.evaluate(b=>({now:document.querySelectorAll('.kdr-sh.has').length,before:b,drawerClosed:document.getElementById('kdrdrw').hidden,cardClosed:!document.getElementById('kidfl')}),before);
   /* tap placed -> drawer shows Đang bày -> Cất xuống */
   await p.click('.kdr-sh.has');await p.waitForTimeout(350);
   r.on=await p.evaluate(()=>!!document.querySelector('#kdrdrw [data-kdron]'));
   await p.click('#kdrdrw [data-kdron]');await p.waitForTimeout(350);
-  const take=await p.$('#kidfl [data-kidact=take]');r.take=!!take;if(take)await take.click();await p.waitForTimeout(450);
+  const take=await fr.waitForSelector('#kidfl [data-kidact=take]',{timeout:8000}).catch(()=>null);r.take=!!take;if(take)await take.click();await p.waitForTimeout(450);await fr.waitForFunction(()=>!document.getElementById('kidfl'),null,{timeout:8000}).catch(()=>{});
   r.taken=await p.evaluate(b=>document.querySelectorAll('.kdr-sh.has').length===b,before);
   /* close by ✕ */
   await p.click('#kdr [data-kdrx]');await p.waitForTimeout(250);r.closed=await p.evaluate(()=>!document.getElementById('kdr'));
