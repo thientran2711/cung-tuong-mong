@@ -29,9 +29,14 @@ PRIORITY #1 CHECK: OD 17/11 ~23:30Z (smudge = CODE on the makeup layer, not Magn
 - (b) lip smear = soft halo along the lower lip + a feathered drag from one corner that fades out; no polygon, no hard edge, smaller.
 - Decision recorded (s39): lash-run only when there is eye makeup; no makeup + crying = red eyes/nose tint (LOOK_DECALS B), no grey streaks → not in this branch.
 
+## r4 (owner: use the tuyet-glow face)
+- Face = fig-consort-c11-tcold-a18 (tuyet-glow sampler default FACE c11-tcold-a18), close-up on its FIGURE picture, as in the v5b videos. Level 0 lips sit exactly on the painted lips (looked at).
+- IMPORTANT finding: the CDN img/mk-fit/consort-c11.json differs from the repo's dev/art/mkfit/consort-c11.json (fig lip points ~1 % of width left / 0.4 % up). With the CDN table the colour layer's lips (the makeup itself, level 0) are off the mouth on this face; with the repo table (what the tuyet-glow sampler injected from dev/art) they fit. Samples were shot with LOCALFIT=1 (repo table) on a scratch merge of main + review/toil-looks5 (toil-looks5's lip handling is not on main yet). Someone should compare/push dev/art/mkfit to the CDN (owner's lips complaint = that mismatch).
+- lip zone is now allowed through the skin mask (lips are not skin-coloured) so the soft lip halo + corner drag show; tears/blush stay clipped to skin.
+
 ## Open items / follow-ups
 - Small figure faces (~40 px): nhẹ barely visible, vừa/nặng read as a tear stain.
 - Shots outside git; built root files not committed.
 
 ## State
-branch review/smudge-code 245aeeb (pushed). Waiting for verdict.
+branch review/smudge-code 66b1cda (pushed). Waiting for verdict.
