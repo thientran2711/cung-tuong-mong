@@ -1,4 +1,4 @@
-PRIORITY #1 CHECK ('Bắc Địch' / 'origin-bd'): OD:L1213–1220 (B37) + 17/11 ~02:42Z order | claims B origin-bd-branch session_01N1tNP2P9Eko2vdenJRPyk3 | review/* review/origin-bd-branch 24c23752, review/origins-r1 968ed007 (reused) | main: j1 origin registry, jorigins.js
+PRIORITY #1 CHECK ('Bắc Địch'): OD 14 (OD:L1213–1220 B37 + 17/11 ~02:42Z order) | ledger 0 | claims 8 (B origin-bd-branch session_01N1tNP2P9Eko2vdenJRPyk3) | main 15 (j1 origin registry, jorigins.js) | review/* review/origin-bd-branch 24c23752, review/origins-r1 968ed007 (reused)
 
 You are an opus REVIEWER (BIG: origins, progression, numbers, save) for the game Cung Tường Mộng (repo thientran2711/cung-tuong-mong). Coordinator = FOREMAN B SESSION 4 = session_01N1tNP2Mw57iytjNHmoygKN (send_message your verdict there + report file). Owner = "sếp"; you never talk to her.
 
