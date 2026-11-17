@@ -112,7 +112,7 @@ function tsMkNpc(v,w,cid){if(v&&v.coop){const r=toilFriendRec(v);if(r&&r.makeup)
  const h=mktH(wdKey(v)+":"+(v.name||"")+":hoi:"+cid);const knows=mktR(h+":k")<tsMkNpcKnow(v);
  const bold=knows?w.bold:mktR(h+":b")<BAL.toil.play.diemPre,tone=knows?w.tone:(mktR(h+":t")<.5?"w":"c");
  const L=TOIL_PRE.filter(x=>(x[2]==="diem")===bold&&(x[3]==="warm"?"w":"c")===tone);const col=Object.assign({},(L.length?L:TOIL_PRE)[h%(L.length||TOIL_PRE.length)][4]);if(bold)col.want="diem";
- let hoa=0;try{hoa=kg82Lv(v,"hoa")||0}catch(e){}const sk=Math.max(0,Math.min(1,(v.sac||50)/BAL.toil.sacDiv+hoa/BAL.toil.hoaDiv));
+ const sk=toilNpcSk(v);/* the one NPC skill (jtoil) */
  const R=toilNpcPlay(sk,h,col,bold?"diem":"","fit",["fest"],v.rank);return{makeup:true,score:R.score,look:R.look,col,knows}}
 /* the makeup points of one entrant (rec = a toilette record) against the want; returns {pts, add (to the total), mk, tone, bold} */
 function tsMkPts(rec,w){const P=BAL.toil.taste.pts;let s=0;const mk=toilMk(rec);const o={mk,tone:"",bold:false};

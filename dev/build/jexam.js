@@ -55,12 +55,15 @@ function exPlan(p){const e=exS(p),to=e.to,tier=exTier(to);const ex=exExaminer(p,
  return{to,tier,rounds:exRounds(p,tier),ex,bar0:B.bar[tier],sh,bar:B.bar[tier]-sh,V,vir:(virLv(p,V[0])+virLv(p,V[1]))*B.wVir,virL:`${exVirN(V[0])} ${virLv(p,V[0])}, ${exVirN(V[1])} ${virLv(p,V[1])}`,art:A.v,artL:A.l}}
 function exScore(P,raws){const avg=raws.reduce((a,b)=>a+b,0)/Math.max(1,raws.length);const play=Math.round(avg*BAL.ex.wPlay);const total=play+P.vir+P.art;return{avg:Math.round(avg*10)/10,play,total,pass:total>=P.bar}}
 /* one round rolled by level: the j82 rule for every person (raw ≈ 4 + 0.4·bậc ± 4) */
-function exRaw(lv,rnd){const r=(rnd()+rnd()+rnd())/3;return cl(Math.round(kg82NpcMean(lv)+(r-.5)*8),0,10)}
-function exSim(p,rnd){rnd=rnd||Math.random;const P=exPlan(p);const raws=P.rounds.map(k=>exRaw(exLv(p,k),rnd));return Object.assign(exScore(P,raws),{P,raws})}
+function exRaw(lv,rnd,k,p,rank){if(typeof mg2On==="function"&&mg2On())return mgNpcRaw(k,p||S,{occ:"exam",rank,lv,rnd});/* AG-ALL-2b mg2: the exam board she gets (occ exam, rank = the target) */
+ const r=(rnd()+rnd()+rnd())/3;return cl(Math.round(kg82NpcMean(lv)+(r-.5)*8),0,10)}
+/* "Để tài nghệ quyết định" of one round (her skip, an aborted round): mg2 = her median on that board (jmgt mgSkipRaw), else the old level mean */
+function exSkipRaw(P,k){const lv=exLv(S,k);return typeof mg2On==="function"&&mg2On()?mgSkipRaw(mgNpcTier(k,S,{occ:"exam",rank:P.to,lv})):Math.round(kg82NpcMean(lv))}
+function exSim(p,rnd){rnd=rnd||Math.random;const P=exPlan(p);const raws=P.rounds.map(k=>exRaw(exLv(p,k),rnd,k,p,P.to));return Object.assign(exScore(P,raws),{P,raws})}
 function exRng(seed){let a=seed>>>0||1;return function(){a=(a+0x6D2B79F5)|0;let t=Math.imul(a^(a>>>15),1|a);t=(t+Math.imul(t^(t>>>7),61|t))^t;return((t^(t>>>14))>>>0)/4294967296}}
 /* the honest chance shown on the card: the same draw, many times (stable between renders) */
 function exChance(p){const P=exPlan(p);const rnd=exRng(((p.id||7)*977+S.turn*131+P.to*17+P.vir*3+P.art)|0);const N=BAL.ex.mc;let ok=0;
- for(let i=0;i<N;i++){const raws=P.rounds.map(k=>exRaw(exLv(p,k),rnd));if(exScore(P,raws).pass)ok++}return Math.round(100*ok/N)}
+ for(let i=0;i<N;i++){const raws=P.rounds.map(k=>exRaw(exLv(p,k),rnd,k,p,P.to));if(exScore(P,raws).pass)ok++}return Math.round(100*ok/N)}
 /* the conditions before the exam: every promoReqP row except the seat rows (a seat is waited for after the exam); for the Hoàng hậu seat
    the wait since the last decree does not count (as candOK, j34) */
 const EX_SKIP=/^Ghế |Chờ ghế|Đang tranh ghế/;let exQ0=null;
@@ -193,14 +196,14 @@ try{KIT_ACT_CATS.unshift(["le-nghi",/khảo hạch tấn phong|khảo hạch n�
 /* ---------- the exam itself: the kit game frame (j82), one round after another, then the result ---------- */
 /* exRun(P, st, done): P = a plan (exPlan / exSrvPlan), st = the state holding .pend (survives a reload: exAbort* finish it at the same level),
    done(r) = the result. P.rk = the rank word, P.passTxt = the verdict line on a pass, P.cdN = months to wait on a fail. */
-function exFinish(P,pd){const raws=pd.raws.slice();while(raws.length<P.rounds.length)raws.push(Math.round(kg82NpcMean(exLv(S,P.rounds[raws.length]))));return Object.assign(exScore(P,raws),{P,raws})}
+function exFinish(P,pd){const raws=pd.raws.slice();while(raws.length<P.rounds.length)raws.push(exSkipRaw(P,P.rounds[raws.length]));return Object.assign(exScore(P,raws),{P,raws})}
 function exAbort(){const e=exS(S),pd=e.pend;if(!pd)return;exDone(S,exFinish(exPlan(S),pd))}
 function exStart(){const P=exPlan(S);P.rk=exRk(P.to);P.passTxt=P.to>=7?"Được dự chọn ngôi Hoàng hậu.":`Thánh chỉ tấn phong ${P.rk}.`;P.cdN=exCd(P.to);
  if(window.__exAuto||typeof kg82Open!=="function"||!document.getElementById("ov")){exDone(S,exSim(S));return}exRun(P,exS(S),r=>exDone(S,r))}
 function exRun(P,e,done){e.pend={raws:[]};const raws=e.pend.raws;let i=0;const n=P.rounds.length;
  const round=()=>{const k=P.rounds[i],K=KG82_KIND[k];KG82.ctx="thi";const lv=exLv(S,k);mgSet(k,{occ:"exam",rank:P.to,lv});/* mg-balance: board ease from the tier; skip keeps her level */try{kg82Preload(k)}catch(x){}
   const d=kg82Open({art:"Khảo hạch",title:`Môn ${i+1}/${n} · ${K.n}`,how:K.how,round:"Môn",roundV:`${i+1}/${n}`,pic:kg82Pic(k)});if(!d){e.pend=null;done(exFinish(P,{raws}));return}
-  const box=kg82Box();const SK=Math.round(kg82NpcMean(lv));
+  const box=kg82Box();const SK=exSkipRaw(P,k);
   box.innerHTML=`<h4 class="kpst">Khảo hạch ${P.srv?"lên":"tấn phong"} ${P.rk}</h4>`+kg82Rows([["Giám khảo",exExTxt(P),"t"],["Môn thi",`${i+1}/${n}: ${K.n} · ${K.t}`,"t"],["Độ khó",mgDiffTxt(KG82.tier,k),"n"],["Mức đỗ",`${exBarTxt(P)}, tính cả ${n} môn cùng Tứ đức và tài nghệ`,"n"]])+
    `<div class="kg82act"><button class="${kg82Btn()}" id="kg82go">Bắt đầu thi</button><button class="${kg82Btn(true)}" id="kg82skip">Để tài nghệ quyết định<small>môn này tính ${SK}/10, như người cùng bậc</small></button></div>`;
   $("kg82go").onclick=()=>kg82Play(k,raw=>after(raw,false));$("kg82skip").onclick=()=>after(SK,true)};
@@ -235,7 +238,7 @@ function exSrvPlan(to){const B=BAL.ex;const V=EX_VIR[0];const A=exArtPart(S,0);c
   passTxt:to==="mama"?"Được ở lại cung làm ma ma.":`Được thăng ${exSrvName(to)}.`}}
 function exSrvBarTxt(P){return P.sh?`${P.bar} phần (mức ${P.bar0}, ${P.sh>0?"hạ":"nâng"} ${Math.abs(P.sh)} vì chủ nhân ${P.sh>0?"tin cậy":"không tin"} ngươi)`:`${P.bar} phần`}
 (function(){const b0=exBarTxt;exBarTxt=function(P){return P&&P.srv?exSrvBarTxt(P):b0.apply(this,arguments)}})();
-function exSrvSim(P,rnd){rnd=rnd||Math.random;const raws=P.rounds.map(k=>exRaw(exLv(S,k),rnd));return Object.assign(exScore(P,raws),{P,raws})}
+function exSrvSim(P,rnd){rnd=rnd||Math.random;const raws=P.rounds.map(k=>exRaw(exLv(S,k),rnd,k,S,P.to));return Object.assign(exScore(P,raws),{P,raws})}
 function exSrvChance(P){const rnd=exRng(((S.turn||0)*131+exSrvIx(P.to)*17+P.vir*3+P.art+P.sh)|0);let ok=0;const N=BAL.ex.mc;for(let i=0;i<N;i++)if(exSrvSim(P,rnd).pass)ok++;return Math.round(100*ok/N)}
 /* j42 srvMonth asks before a merit rise: true = the exam decides (window opened / waiting), false = give the rise as before */
 function exSrvGate(to){if(!exOn()||!isSrv())return false;const e=exSrvS();if(e.to==="mama"&&(e.w1!=null||e.pend))return true;if(e.to!==to){S.srv.ex={to};return exSrvOpen(to)}
@@ -264,7 +267,7 @@ function exSrvTick(){if(!exOn()||!isSrv()||S.dead)return;const e=exSrvS();if(e.p
 function exSrvMama(){if(!exOn()){S.srv.mama=1;log("Ngươi ở lại cung làm ma ma.");return}S.srv.ex={to:"mama"};exSrvOpen("mama")}
 /* NPC servants: one seeded roll per month at their rank as level; true = the rise is given */
 function exSrvNpc(s){try{if(!exOn())return true;if(s.coop)return true;if(s.exCd>S.turn)return false;const lv=srk(s);
- const rnd=exRng(((s.sid||1)*7919+(S.turn||0)*104729)|0);const raws=[0,1].map(()=>exRaw(lv,rnd));const avg=(raws[0]+raws[1])/2;const B=BAL.ex;
+ const rnd=exRng(((s.sid||1)*7919+(S.turn||0)*104729)|0);const raws=[0,1].map(()=>exRaw(lv,rnd,null,s,Math.max(1,Math.min(4,lv+1))));/* mg2: their rank as level (servants keep no art levels), the target rank as the stake */const avg=(raws[0]+raws[1])/2;const B=BAL.ex;
  const tot=Math.round(avg*B.wPlay)+Math.round((s.loyal||50)/25);const pass=tot>=(B.srvBar||[0,18,20,22,24])[Math.max(1,Math.min(4,lv+1))];
  const N=window.__exN;N.npcSrvSit=(N.npcSrvSit||0)+1;if(pass){N.npcSrvPass=(N.npcSrvPass||0)+1;s.exCd=0;return true}
  s.exCd=S.turn+(B.srvCd||[1,1,1,2,2])[Math.max(1,Math.min(4,lv+1))];return false}catch(e){return true}}

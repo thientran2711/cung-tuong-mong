@@ -342,7 +342,7 @@ function fDay7(k){const j=j7s();const P=j.plans&&j.plans[k];if(P&&P.y===S.year){
   const E=[S].concat(ents7(pp));const meIn=P.me>0&&present7(S);const meB=(P.me===2?J71.prep:0)+(P.pb||0);
   if(meIn&&mgOn7())return{t:`${fShort7(k)} · ${fTitle7(k,pp.vi)}`,h:`<p>${V[2]}</p><p>Ngươi đã ghi tên. Phần của ngươi = phần tự chơi, cộng thêm theo tài nghệ (${det7(V[1],S)}) và chuẩn bị +${meB}.</p>`,who:pEmp(),must:1,
    opts:[{n:"Vào thi (tự chơi phần thi)",fx:{suc:-J71.cost},x:`đoạt giải, ${pz7(prize7(k))}, kèm vật quý và bạc theo hạng · hạng nhì hoặc ba: Danh +1 và quà nhỏ · hỏng: đứng chót thì Danh -1 · kèm: thắng thì các phi tần ghen +${ghenN(BAL.ghen.contest)}`,go:()=>mgRun7({title:fName7(k),big:FBIG7.includes(k),fk:k,art:V[1],E,kindOf:()=>V[1],pr:pp.pr||[],meB,stakes:stk7(prize7(k),30),done:(L,sh)=>cFin7(k,V[1],L,sh)})},
-    {n:"Bỏ thi",fx:{},x:"không được không mất",go:()=>{const L=cScore7(E.filter(p=>p!==S),()=>V[1],pp.pr||[],0);if(L.length)cFin7(k,V[1],L)}}]};
+    {n:"Bỏ thi",fx:{},x:"không được không mất",go:()=>{const L=mgX7(FBIG7.includes(k),()=>cScore7(E.filter(p=>p!==S),()=>V[1],pp.pr||[],0));if(L.length)cFin7(k,V[1],L)}}]};
   if(meIn)apply({suc:-J71.cost});window.__j71rows="";const r=cRun7(k,V[1],E,pp.pr||[],meB,meIn);if(!r)return null;log(`${fName7(k)}: ${r}`);
   return{t:`${fShort7(k)} · ${fTitle7(k,pp.vi)}`,h:`<p>${V[2]}</p>${meIn?"":"<p>Ngươi không ghi tên, chỉ đứng xem.</p>"}${window.__j71rows||""}`,who:pEmp(),must:1}}
  return fMake7(k,null,true)}
@@ -354,7 +354,7 @@ function pendC7(){const j=j7s(),L=[];for(const k in (j.plans||{})){const P=j.pla
 function stk7(pz,bp){return{win:Object.entries(pz).map(([k,v])=>[NAMES[k],v]),top3:[["Danh",1]],last:[["Danh",-1]],paid:[["Sức",-6]],note:`đứng đầu: Hoàng thượng có thể ban thêm một món đồ (${word(bp)})`}}
 function mgOn7(){return typeof startContest==="function"}
 function mgRun7(o){/* o: {title, art, E (incl. S), kindOf, pr, meB, done(L)} */const NPC=o.E.filter(p=>p!==S);const L0=cScore7(NPC,o.kindOf,o.pr||[],0);
- const fin=res=>{try{const sc=res&&typeof res.score==="number"?res.score:null;const her=sc!=null?{p:S,kind:o.art,t:Math.round(sc),pr:0,lk:0,s:Math.round(sc),mg:1}:cScore7([S],()=>o.art,[],o.meB)[0];const L=L0.concat([her]).sort((a,b)=>b.s-a.s);o.done(L,!!(res&&res.shown));showModal();render()}catch(e){console.error(e)}};
+ const fin=res=>{try{const sc=res&&typeof res.score==="number"?res.score:null;const her=sc!=null?{p:S,kind:o.art,t:Math.round(sc),pr:0,lk:0,s:Math.round(sc),mg:1}:mgX7(o.big,()=>cScore7([S],()=>o.art,[],o.meB))[0];const L=L0.concat([her]).sort((a,b)=>b.s-a.s);o.done(L,!!(res&&res.shown));showModal();render()}catch(e){console.error(e)}};
  try{startContest({art:o.art,artName:SC7[o.art].n,title:o.title,rivals:L0.map(x=>({id:x.p.id,name:x.p.name,face:pv(x.p),score:x.s,talent:x.t,prep:x.pr,luck:x.lk})),prep:o.meB,talent:Math.round(SC7[o.art].f(S)),talentBy:det7(o.art,S),luck:J71.luck,stakes:o.stakes,big:o.big,fk:o.fk,onDone:fin})}catch(e){console.error(e);fin(null)}}
 /* apply a finished contest (any source): prize to the winner, her rank effects, rows */
 function cFin7(k,kind,L,shown){const w=L[0].p,pz=prize7(k);ap(w,pz);const cu=window.CU&&CU.did;if(window.CU)CU.did=false;if(!cu&&w!==S&&empGive(w,30,"contest"))try{bestow(w,"contest")}catch(e){}const j=j7s();j.fn++;if(w===S){j.win++;ghenAll(BAL.ghen.contest);try{if(!cu&&empGive(S,30,"contest"))bestow(S,"contest")}catch(e){}}
@@ -385,7 +385,7 @@ function fxInvite7(){const j=j7s();for(const kk in FX7){const F=FX7[kk];const m0
   const meB=me?(me.pr?J71.prep:0)+(me.pb||0):0;
   if(me&&mgOn7()){Q.push({ev:1,t:`${title}`,h:`<p>Ngày ${title}. Ngươi đã ghi tên dâng ${SC7[me.a].n}; phần của ngươi = phần tự chơi, cộng thêm theo tài nghệ (${det7(me.a,S)}) và chuẩn bị +${meB}.</p>`,who:pEmp(),must:1,
     opts:[{n:"Vào thi (tự chơi phần thi)",fx:{suc:-J71.cost},x:`đứng đầu, Sủng +8, Danh +3, kèm vật quý và bạc theo hạng · hạng nhì hoặc ba: Danh +1 và quà nhỏ · hỏng: đứng chót thì Danh -1 · kèm: đứng đầu thì các phi tần ghen +${ghenN(BAL.ghen.contestTop)}`,go:()=>mgRun7({title,big:true,fk:F.f,art:me.a,E,kindOf:p=>p===S?me.a:fxBest7(p,F.arts),pr:[],meB,stakes:stk7({sung:8,danh:3},50),done:(L,sh)=>fxFin7(title,L,sh)})},
-     {n:"Bỏ thi",fx:{},x:"không được không mất",go:()=>fxFin7(title,cScore7(E.filter(p=>p!==S),p=>fxBest7(p,F.arts),[],0))}]});return ""}
+     {n:"Bỏ thi",fx:{},x:"không được không mất",go:()=>fxFin7(title,mgX7(true,()=>cScore7(E.filter(p=>p!==S),p=>fxBest7(p,F.arts),[],0)))}]});return ""}
   if(me)apply({suc:-J71.cost});
   const L=cScore7(E,p=>p===S?me.a:fxBest7(p,F.arts),[],meB);const w=L[0].p;ap(w,{sung:8,danh:3});if(empGive(w,50,"contest"))try{bestow(w,"contest")}catch(e){}
   let r="";const mi=L.findIndex(x=>x.p===S);
@@ -417,3 +417,10 @@ window.j71FeastInvite=function(kk){if(!S)return false;const d=mkP("j71x",{kk,y:S
 /* coordinator 15/11: every festival dialog shows its own festival picture as the wide header band (img/ev-fest-<k>-b.webp, 4:3) and carries
    evId "fest:<k>" (EVENTS.json → img/ev-fest-<k>.webp, 3:4, for the book). */
 (function(){const d0=fDay7;fDay7=function(k){const m=d0.apply(this,arguments);try{if(m&&typeof m==="object"&&!m.headArt){m.headArt={src:`img/ev-fest-${k}-b.webp`,label:fName7(k)};m.evId=m.evId||("fest:"+k)}}catch(e){}return m}})();
+/* AG-ALL-2b mg2 (owner OD 17/11 ~15:25Z (3)): the rivals' play part (jbal2 cScore7 → kg82NpcRaw → jmgt mgNpcRaw) and the odds words (cOdds7 / fxOdds7)
+   are drawn on the board of THIS contest: occasion "hoi", + BAL.mgTier.big for the big festivals (FBIG7) and the feast contests (FX7), as her own board (mgRun7 big). */
+function mgX7(big,f){return typeof mgWith==="function"?mgWith({occ:"hoi",big:!!big},f):f()}
+(function(){const f0=fDay7;fDay7=function(k){return mgX7(FBIG7.includes(k),()=>f0.apply(this,arguments))};const i0=fInv7;fInv7=function(k){return mgX7(FBIG7.includes(k),()=>i0.apply(this,arguments))};
+ const m0=mgRun7;mgRun7=function(o){return mgX7(o&&o.big,()=>m0.apply(this,arguments))};
+ const p0=PEND.j71f;PEND.j71f=function(pp){return mgX7(pp&&FBIG7.includes(pp.k),()=>p0.apply(this,arguments))};const x0=PEND.j71x;PEND.j71x=function(pp){return mgX7(true,()=>x0.apply(this,arguments))};
+ if(typeof festival==="function"){const v0=festival;festival=function(t,kk){return mgX7(!!FX7[kk],()=>v0.apply(this,arguments))}}})();

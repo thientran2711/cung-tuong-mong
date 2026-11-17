@@ -921,3 +921,65 @@ Object.assign(BAL.ag,{kh2:{on:1,rest:1,max:3,maxX:1,see:{on:1,w:{ignore:3,hear:1
    scout.oan = the target's regard lost when the spy is caught (the player's "Sai đi dò la": oán +5); keep = news kept per day */
 BAL.ag.know={eye:100,friend:30,close:70,tell:{tell:1,late:.5,keep:1,sell:1.5,q:{trung:.4,chuyen:.2,lanh:.1,tham:-.3,nhat:-.2}},voice:{warm:70,cool:40},serve:.25,
  hear:{safe:4,spite:2,ally:1},base:.01,listen:{k:1,o:50,tc:3,tin:2,mp:.25},scout:{k:2,tin:3,lose:5,mp:.5,oan:5,caught:50},watch:{k:1,tin:2,mp:.25},keep:20,share:[5,20]};
+/* AG-ALL-2 G11 (jagtoil): an NPC's face of the day is HER CHOICE among the player's own ways at the mirror (owner 17/11 ~14:50Z: NPCs pay the same
+   costs and suffer the same consequences, and choose by their own nết, not always the best). Host only (agOn); the result is the player's toilNpcPlay.
+   opt     the ways: moc = no sitting (mặt mộc), nha = Kiểu thanh nhã, cauky = Kiểu cầu kỳ, dam = cầu kỳ with thick powder (BAL.toil.play.cakeOver)
+   est     sittings she imagines per way to weigh it (her own hand, toilNpcSk); each scored by the REAL judgement toilFx of today's hosts
+   host    weight of each host's verdict (Thái hậu / Hoàng hậu / Hoàng thượng); emp × (1 + sungK × how far her Sủng is below sungRef)
+   peer    what she expects from the consorts: tease (a Diêm dúa / Vụng về face) × (1 + her caution), envy (a showy or Khuynh thành look) × her vanity
+   tr      per nết: v vanity (vainMk by result, vainOpt by way), m modesty (modOpt by way), c caution
+   base/k  weight = max(wMin, base + k × utility) × mindW(art) for a made face; then mindPick (BAL.mind.slip: she misjudges sometimes)
+   ans     her answer when mocked (the player's three: Xin lỗi / Cười trừ / Đáp lại via toilAns): base weight + per-nết weight */
+Object.assign(BAL.ag,{toil2:{on:1,est:3,base:2,k:1,wMin:.2,
+ opt:{moc:{moc:1},nha:{want:""},cauky:{want:"diem"},dam:{want:"diem",cake:1}},
+ host:{thaihau:1,hoanghau:1,emp:1},sungRef:60,sungK:1,peer:{tease:-1.5,envy:.5},
+ tr:{"Kiêu ngạo":{v:2},"Tham vọng":{v:1.5},"Khiêm nhường":{m:2},"Ân cần":{m:1.5},"Kín đáo":{c:1},"Xảo quyệt":{c:.5}},
+ vainMk:{dep:1,tuyet:2},vainOpt:{cauky:1.5,dam:2.5},modOpt:{moc:2.5,nha:1},
+ ans:{sorry:{b:1,tr:{"Khiêm nhường":2,"Ân cần":1.5}},smile:{b:2,tr:{"Kín đáo":1.5}},reply:{b:1,tr:{"Kiêu ngạo":2.5,"Tham vọng":1.5}}}}});
+/* AG-ALL-2 part 2b (G7): Biếu người trong triều (j10 courtAct "thuong", the player's button, and an NPC's cx:tqGift — one function courtGive):
+   gift = bạc paid, af = his favour gained. cx3.tq: an NPC weighs it as g Sủng-need points, scaled down as his favour nears cap; she keeps keep × the price */
+Object.assign(BAL,{court:{gift:{bac:20,af:10}}});Object.assign(BAL.ag,{cx3:{tq:{g:6,cap:60,keep:2}}});
+
+/* AG-ALL-2 part 2b — G5 / G6 / G10 + jcmaid choices (jagstf2.js, j42 SRVA.poison / pil / leave + cnvOrdOpts / cnvBribeOpts / cnvFrameOpts,
+   jmline mlPoisonDo / mlHitDo, jeitem eitPilOpts / eitPilJudge, jpromsv spLeaveOpts / spAsk, jcmaid cmSpyCh / cmLeakCh). One table for the maid
+   player's cards and the NPC staff / masters' choices.
+   base    weight floor of every option of a servant's dilemma (stf2Pick: base + valued outcome / BAL.ag.unit, × her nết on the option's tag)
+   net     × by nết (servant quality code, qv) on an option tag: confess / social / bribe / flee / help / work
+   accPen  Chủ tin / lòng an accuser loses when the framed one clears herself (the "Bị vu oan" card's Thanh minh; was typed in j42)
+   poison  Bỏ độc vào bát cơm: cost = bạc for the poison, k = khắc; u = × her spite at the victim (NPC weight; caught odds = BAL.mline.poisonCatch)
+   hit     k = khắc of the player consort's Bắt quỳ, vả miệng / Vu tội on another palace's maid (as Mua chuộc)
+   pil     Lén giữ đồ Nội vụ phủ phát: k = khắc; sell = she sells the piece for its price × sell bạc (player and NPC); lauWk = weeks of Tân Giả khố
+           when a spying maid player is caught and confesses under punishment
+   pilW    an NPC master's weights on a caught pilferer (× her punish / reward nết, jagent agMW): pun / forgive / back / ignore; harsh = × pun for a
+           Xảo quyệt / Kiêu ngạo / Thù dai / Kín đáo master
+   leave   Xin chủ cho đi hầu cung khác: k = khắc; cd = months before the same servant asks again; u = NPC weight × her lòng gap under BAL.sp.leaveLoyal
+   lvW     an NPC master's weights on a servant asking to leave (× reward / punish nết): keep / demote / let
+   bribe   a bribed servant: take weighs as the bribe's odds (j29 bribeOdds); the rest splits tell × lòng/100 against quiet
+   ord     a servant sent on a dishonourable deed: obey × lòng/100, refuse (+ loyalTr for a trung thành one), tell × (1 − lòng/100) × spy when she
+           already spies for someone (old rule: a trung thành servant refused at 30 %, others never)
+   cm      the close maid: "nghe" = talSpy × spy × lòng / talLoy; a leaked secret (debt / spy / family) = secOut × leak × (100 − lòng) / (100 − secTrust) */
+Object.assign(BAL.ag,{stf2:{base:1,net:{confess:{trung:1.5,nhat:1.5},social:{lanh:1.5,chuyen:1.3},bribe:{tham:1.6},flee:{tham:1.4,lanh:1.3},help:{trung:1.8},work:{nhat:1.3}},
+ poison:{cost:10,k:1,u:1},accPen:15,hit:{k:2},pil:{k:1,sell:.5,lauWk:10},pilW:{pun:1,forgive:1,back:.4,ignore:.3,harsh:2.5},leave:{k:1,cd:6,u:.2},lvW:{keep:1,demote:1,let:1},
+ bribe:{tell:1,quiet:.3},ord:{obey:1,refuse:.03,loyalTr:.35,tell:.03,spy:3},cm:{spy:1,leak:1}}});
+/* AG-ALL-2 part 2b — per-khắc event-driven re-decide (jagday agHeard / agTell / agRdTick; owner OD 17/11 ~15:25Z (2)):
+   keep  × BAL.ag.routine = the weight of keeping her plan when news reaches her (against the deeds aimed at the one she heard of: their utility)
+   tell  weight that a servant standing there tells her master (× her loyalty / 100 × the master's interest), quiet = keeping it to herself */
+Object.assign(BAL.ag.kh2,{rd:{on:1,keep:.6,tell:2,quiet:1}});
+/* AG-ALL-2b mg2 — NPC MINI-GAMES FAIR TO HER (owner OD 17/11 ~15:25Z (3): "lúc nào tôi có thì NPC cũng phải có … đổ xí ngầu cho nó … công bằng với tôi").
+   ONE CORE jmgt mgNpcRaw(kind, p, o): an NPC's play = ONE draw on the board the player would get in that seat (mgTier: occasion, his/her rank, art level → gap d).
+   on   switch (with agOn(); off = the old BAL.mgTier.npc paths)
+   med  [gap d, median graded play of the skilled bot] — the measured rows Dễ (d −2) / Vừa (d 0) / Khó (d +2), pooled over the 20 measured kinds of
+        dev/PROGRESS_mg-balance.md (+ r1 re-trim) and dev/PROGRESS_mg-balance-2.md (n = 30 per kind per row); linear between and beyond the points
+   w    width of the draw round the median (mean of 3 uniforms × w: ±w/2, sd ≈ w/6; at d 0 it gives ≈ 25 % "Xuất sắc" (≥ 9) like the skilled bot)
+   tat  her slap game (jslap) measured by ease (dev/PROGRESS_review-slap-mg-r2.md, skilled bot): e = board ease points, w = [nhẹ, vừa, nặng] % at each;
+        an NPC's slap tier = one draw from it at the NPC's own board (mgTier "tat", her/his rank and Vũ); an NPC dodges a slap at BAL.slap.dodgeOdds[tier]
+   study  1 = an NPC's lesson gains the player's points from one draw (lessonPts / tdPoints, j85 npcStudyDo); 0 = the old flat 1 / 2–3 */
+Object.assign(BAL.ag,{mg2:{on:1,med:[[-2,8.9],[0,7.5],[2,5.8]],w:8,tat:{e:[0,2,5],w:[[32,54,15],[18,58,24],[2,50,49]]},study:1}});
+/* j71 odds words under mg2: the same draw (mgNpcRaw, seeded by the plan) for every entrant, her included, on this contest's board (j71 mgX7) */
+(function(){if(typeof cOdds7!=="function"||typeof fxOdds7!=="function")return;const c0=cOdds7,f0=fxOdds7;
+ const win=(E,base,kindAt,mi,r)=>{let w=0;const N=500;for(let t=0;t<N;t++){let b=-1,bi=-1;for(let i=0;i<E.length;i++){const x=base[i]+mgNpcRaw(kindAt(i),E[i],{rnd:r})/10*J71.luck;if(x>b){b=x;bi=i}}if(bi===mi)w++}return cl(Math.round(100*w/N),3,97)};
+ cOdds7=function(kind,E,prep,meB,seed){if(!mg2On())return c0.apply(this,arguments);const mi=E.indexOf(S);if(mi<0)return 0;const f=SC7[kind].f;
+  const base=E.map(p=>f(p)+(prep.includes(p.id)?J71.prep:0));base[mi]+=meB;return win(E,base,()=>kind,mi,rng7(seed))};
+ fxOdds7=function(F,art,meB,seed){if(!mg2On())return f0.apply(this,arguments);const E=[S].concat(liveRivals(true).filter(present7));const K=E.map(p=>p===S?art:fxBest7(p,F.arts));
+  const base=E.map((p,i)=>p===S?SC7[art].f(S)+meB:SC7[K[i]].f(p));return win(E,base,i=>K[i],0,rng7(seed))};
+})();

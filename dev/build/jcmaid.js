@@ -98,6 +98,14 @@ function cmGuard(t,p){try{if(t!==S||cmOff()||!S.maid||S.maid.src!=="home"||!S.or
   if(p===S&&m.src==="pick"&&roll(B.pickKeep))m.loyal=cl(m.loyal+1,0,100)}}catch(e){}
  const r=m0.apply(this,arguments);try{if(p===S&&m&&S.maid!==m){cmC("bought");if(S.maid&&!S.maid.src)cmInit(S.maid,"noi",true);if(m.src==="room"){apply({danh:-cmB().cnTurn});cmC("cnTurn");return r+`${m.name} biết chuyện cũ của ngươi thuở làm cung nữ, đem kể ra ngoài. Danh −${cmB().cnTurn}. `}}}catch(e){}return r}})();
 
+/* AG-ALL-2 (jcmaid choices, owner OD 17/11 ~14:50Z): with the loop on (agOn) the close maid's "nghe" eavesdropping and the secrets SHE lets out
+   (debt: she takes from the jewel box; spy: she reports to the one who bought her; family: her heart turns) are her CHOICE — a weighted draw between doing
+   and not, weighted by the same % (talSpy / secOut) × her lòng (ag2Ch, as the other servant inclinations of AG-ALL-2): a loyal maid listens for her mistress more and leaks less, a disloyal one the
+   other way (BAL.ag.stf2.cm: spy × lòng / talLoy, leak × (100 − lòng) / (100 − secTrust)). A secret affair FOUND by Cung Chính ti (lover)
+   is not her choice: it stays the old witness roll. Loop off → the old rolls. */
+function cmCh(m,w){if(!(window.agOn&&agOn()&&typeof ag2Ch==="function"))return null;return !!ag2Ch(m,cl(w,0,100))}/* a weighted draw of her inclination (j8 ag2Ch), no jmind slip: a slip would bend a rare monthly rate (3 %) several times over */
+function cmSpyCh(m){const B=cmB(),K=BAL.ag.stf2.cm;const c=cmCh(m,B.talSpy*K.spy*(m.loyal||0)/B.talLoy);return c==null?roll(B.talSpy):c}
+function cmLeakCh(m,s){const B=cmB(),K=BAL.ag.stf2.cm;if(!s||s.k==="lover")return roll(B.secOut);const c=cmCh(m,B.secOut*K.leak*(100-(m.loyal||0))/Math.max(1,100-B.secTrust));return c==null?roll(B.secOut):c}
 /* ---------- the month ---------- */
 function cmFact(m,who){const x=evGuilty(S,liveRivals(true).filter(v=>v!==S));if(!x)return"";const d=evA(S,x,1);if(!d)return"";cmC("fact");return `${m.name} ${who}: chứng cứ về ${x.name} +${d}. `}
 function cmMonthMe(){const B=cmB(),m=S.maid;if(!m)return"";
@@ -108,10 +116,10 @@ function cmMonthMe(){const B=cmB(),m=S.maid;if(!m)return"";
  S.cmaid=S.cmaid||{};let ev="";const T=S.turn||0;S.cmaid=S.cmaid||{};const k=S.origin&&S.origin.k;const cdOk=(S.cmaid.cd||0)<=T;
  const dil=(id,pp)=>{S.cmaid.cd=T+B.dilCd;cmC("dil_"+id);pushDil(mkP(id,pp||{}),"Cung nữ thân tín")};
  /* talent */
- if(cmTalOn(m)&&m.loyal>=B.talLoy){if(m.tal==="theu"){apply({bac:B.talBac});cmC("talBac",B.talBac)}else if(m.tal==="thuoc"){S.suc=cl(S.suc+B.talSuc,0,sucCap(S));cmC("talSuc",B.talSuc)}else if(m.tal==="nghe"&&roll(B.talSpy))ev+=cmFact(m,"nghe lỏm được chuyện")}
+ if(cmTalOn(m)&&m.loyal>=B.talLoy){if(m.tal==="theu"){apply({bac:B.talBac});cmC("talBac",B.talBac)}else if(m.tal==="thuoc"){S.suc=cl(S.suc+B.talSuc,0,sucCap(S));cmC("talSuc",B.talSuc)}else if(m.tal==="nghe"&&cmSpyCh(m))ev+=cmFact(m,"nghe lỏm được chuyện")}
  /* secret: costs her until known; she confides when she trusts her */
  const s=m.sec;if(s&&!s.done){if(!m.secKn){if(m.loyal>=B.secTrust&&roll(B.secTell)){m.secKn=1;cmC("secTell");if(s.k==="lover"){m.loyal=cl(m.loyal+B.secLoy,0,100);s.done=1;ev+=`${m.name} thú thật với ngươi chuyện đối thực với một thái giám; ngươi giữ kín cho nàng ta (thiện cảm +${B.secLoy}). `}else if(cdOk){dil("cmSec");return ev}}
-   else if(roll(B.secOut)){cmC("secOut_"+s.k);if(s.k==="lover"){apply({danh:-B.secDanh});m.loyal=cl(m.loyal-B.secLoy,0,100);m.secKn=1;s.done=1;ev+=`Cung Chính ti bắt được ${m.name} đối thực với một thái giám; người ta cười chê cung ngươi. Danh −${B.secDanh}. `}
+   else if(cmLeakCh(m,s)){cmC("secOut_"+s.k);if(s.k==="lover"){apply({danh:-B.secDanh});m.loyal=cl(m.loyal-B.secLoy,0,100);m.secKn=1;s.done=1;ev+=`Cung Chính ti bắt được ${m.name} đối thực với một thái giám; người ta cười chê cung ngươi. Danh −${B.secDanh}. `}
     else if(s.k==="debt"){const g=Math.min(B.secBac,S.bac||0);apply({bac:-g});ev+=`Hộp trang sức vơi đi ${g} lượng; không ai biết ai lấy. `}
     else if(s.k==="family"){m.loyal=cl(m.loyal-Math.round(B.secLoy/2),0,100)}
     else if(s.k==="spy"){const v=RV(s.by);if(v&&v.alive){const d=evA(v,S,1);if(d)cmC("spyLeak",d)}}}}
@@ -129,7 +137,7 @@ function cmMonthMe(){const B=cmB(),m=S.maid;if(!m)return"";
  return ev}
 /* other consorts' maids: the same talents and secrets (host only in co-op: NPC state) */
 function cmMonthNpc(){const B=cmB();let ev="";if(typeof mlGuest==="function"&&mlGuest())return"";for(const p of liveRivals(true)){if(!p||p===S||p.coop||!p.maid)continue;cmInitNpc(p);const m=p.maid;
- if(m.loyal>=B.talLoy){if(m.tal==="theu")p.bac=(p.bac||0)+B.talBac;else if(m.tal==="thuoc")p.suc=cl((p.suc||0)+B.talSuc,0,sucCap(p));else if(m.tal==="nghe"&&roll(B.talSpy)){const x=evGuilty(p,others(p));if(x)evA(p,x,1)}}
- const s=m.sec;if(s&&!m.secKn&&roll(B.secOut)){cmC("npcSecOut");if(s.k==="lover"){p.danh=Math.max(0,(p.danh||0)-B.secDanh);m.secKn=1;if((S.mat||0)>=B.seeMat)ev+=`Cung Chính ti bắt được cung nữ thân tín của ${p.name} đối thực với một thái giám. `}else if(s.k==="debt")p.bac=Math.max(0,(p.bac||0)-B.secBac);else m.loyal=cl(m.loyal-Math.round(B.secLoy/2),0,100)}}
+ if(m.loyal>=B.talLoy){if(m.tal==="theu")p.bac=(p.bac||0)+B.talBac;else if(m.tal==="thuoc")p.suc=cl((p.suc||0)+B.talSuc,0,sucCap(p));else if(m.tal==="nghe"&&cmSpyCh(m)){const x=evGuilty(p,others(p));if(x)evA(p,x,1)}}
+ const s=m.sec;if(s&&!m.secKn&&cmLeakCh(m,s)){cmC("npcSecOut");if(s.k==="lover"){p.danh=Math.max(0,(p.danh||0)-B.secDanh);m.secKn=1;if((S.mat||0)>=B.seeMat)ev+=`Cung Chính ti bắt được cung nữ thân tín của ${p.name} đối thực với một thái giám. `}else if(s.k==="debt")p.bac=Math.max(0,(p.bac||0)-B.secBac);else m.loyal=cl(m.loyal-Math.round(B.secLoy/2),0,100)}}
  return ev}
 (function(){const m0=servMonth;servMonth=function(){let r=m0.apply(this,arguments)||"";try{if(!cmOff()){r+=cmMonthMe();r+=cmMonthNpc()}}catch(e){console.error("cmMonth",e)}return r}})();

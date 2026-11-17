@@ -229,7 +229,7 @@ function tsSummonWeek(){if(!S||S.dead||S.out||(typeof isSrv==="function"&&isSrv(
  const w=C.map(tsSummonW);let r=Math.random()*w.reduce((a,b)=>a+b,0),i=0;while(r>w[i]&&i<w.length-1){r-=w[i];i++}tsSummonGo(C[i])}
 /* his summons of one person (the weekly roll above, or his day plan's choice: jagacts emp:summon) */
 function tsSummonGo(p){const k=tsSummonKind(p);
- if(p!==S){const raw=typeof kg82NpcRaw==="function"?kg82NpcRaw(p,k==="duho"?"dan":k):5;const g=tsSummonGain(raw);ap(p,{sung:g.sung});p.an=cl((p.an||0)+g.an,0,100);
+ if(p!==S){const raw=typeof kg82NpcRaw==="function"?(typeof mg2On==="function"&&mg2On()?kg82NpcRaw(p,k,{occ:"trieu"}):kg82NpcRaw(p,k==="duho"?"dan":k)):5;/* mg2: her own game kind on the summons board (occ trieu, as tsGame) */const g=tsSummonGain(raw);ap(p,{sung:g.sung});p.an=cl((p.an||0)+g.an,0,100);
   if(k==="duho"&&tsRebel()&&roll(40)){if(roll(tsSummonOdds(p,k)))ap(p,{sung:4,danh:3})}if(knows(p)||S.mat>=2)log(`${p.name} được Hoàng thượng triệu ${k==="dan"?"đánh đàn":k==="co"?"đánh cờ":"du hồ"}.`);return}
  tsSummonMe(k)}
 function tsSummonMe(k){const E=S.emp;/* a private summons: she is face to face with him (never a grey "Người lạ" emperor) */try{if(typeof k61Meet==="function"&&E&&!tsNamed(E))k61Meet(E,"Ngài triệu riêng, ngươi được diện kiến.")}catch(e){}const odds=tsSummonOdds(S,k);const nm={dan:"đánh đàn",co:"đánh cờ",duho:"du hồ"}[k];const reb=k==="duho"?tsRebel():0;
@@ -255,9 +255,12 @@ function tsDenCard(){const f=tsDenFest();if(!f||!tsOn()||S.out)return null;const
  return{n:"Thả đèn hoa đăng",t:`Đêm ${f.name}, cung nhân thả đèn trên hồ Thái Dịch. Viết điều cầu vào đèn rồi thả trôi.`,c:{bac:-10},o:100,w:{},k:2,b:tsLast(),dom:"Giao thiệp",done:s.den===key?1:0,x:"chọn điều cầu ở bước sau",go:()=>{s.den=key;tsDenWish(f)}}}
 (function(){const d0=deal;deal=function(){const r=d0.apply(this,arguments);try{if(Array.isArray(deck)&&tsOn()){const c=tsDenCard();if(c)deck.unshift(c)}}catch(e){}return r}})();
 function tsDenSeen(){const E=S.emp;return (E.mood||0)<=1&&(S.sung||0)>=20}
+/* ONE rule for every lantern (hers and the NPCs', mg2): the odds of being seen / heard without a far lantern, and "far" from the play (raw ≥ 6) */
+function tsDenOdds(p){return 45+(p.tai||0)/4+(p.arts&&p.arts.hoa||0)*4}
+function tsDenFar(raw){return raw>=6}
 function tsDenWish(f){const s=tsS();const pdLeft=Math.max(0,6-(s.denPD||0));const hos=liveRivals(true).filter(v=>bandOf(danger(v,S))>=1&&!(S.dKnown&&S.dKnown[v.id])&&!knows(v));
- const odds=45+(S.tai||0)/4+(S.arts&&S.arts.hoa||0)*4;const seen=tsDenSeen();
- const play=(kind,after)=>{const b=tsPre();tsGame({kind:"den",art:"Hoa đăng",title:`Thả đèn đêm ${f.name}`,odds,intro:[["Điều cầu",kind,"t"],["Ghi chú","đèn trôi xa và sáng thì người bên hồ trông thấy","n"]],onDone:res=>{const far=res.raw>=6;after(far);tsRes("Thả đèn hoa đăng",b,true);render()}})};
+ const odds=tsDenOdds(S);const seen=tsDenSeen();
+ const play=(kind,after)=>{const b=tsPre();tsGame({kind:"den",art:"Hoa đăng",title:`Thả đèn đêm ${f.name}`,odds,intro:[["Điều cầu",kind,"t"],["Ghi chú","đèn trôi xa và sáng thì người bên hồ trông thấy","n"]],onDone:res=>{const far=tsDenFar(res.raw);after(far);tsRes("Thả đèn hoa đăng",b,true);render()}})};
  tsPanel({t:`Đêm ${f.name}: thả đèn`,art:f.k==="nguyentieu"?"img/ev-le-xuan-2.webp":"img/ev-le-thu-2.webp",who:pMaid(),h:`<p>${S.maid.name} đã dán sẵn chiếc đèn hoa sen. Ngươi cầm bút, nghĩ xem nên cầu điều gì.</p>`,opts:[
   tsOpt({n:"Cầu tin tức người nhà",odds:hos.length?Math.min(95,odds):null,duoc:hos.length?["người hầu ngoài bờ nghe được chuyện: biết lòng một người đang muốn hại ngươi"]:["người nhà cũng thả đèn, nhờ người gửi thư vào: Thư nhà"],note:"đèn trôi xa thì nghe rõ hơn",later:1,
    go:()=>play("tin tức",far=>{if(hos.length&&(far||roll(odds))){const v=hos.sort((a,b)=>danger(b,S)-danger(a,S))[0];kn();S.dKnown=S.dKnown||{};S.dKnown[v.id]=wk();noteAdd(v.id,`nghe được bên hồ đêm ${f.name}: nàng có ý hại ngươi (mức ${BANDS[bandOf(danger(v,S))][1]})`);log(`Đêm ${f.name}, người hầu nghe được bên hồ: ${v.name} có ý hại ngươi (mức ${BANDS[bandOf(danger(v,S))][1]}).`)}
@@ -268,7 +271,9 @@ function tsDenWish(f){const s=tsS();const pdLeft=Math.max(0,6-(s.denPD||0));cons
   tsOpt({n:"Thôi, không thả nữa",duoc:["không mất thêm gì"]})]})}
 /* NPCs float lanterns too, by the same rule (seen by the Emperor when he walks there and they are in favour) */
 function tsDenNpc(){const f=tsDenFest();if(!f)return;const s=tsS();const key=`${S.year}-${f.k}`;if(s.denN===key)return;s.denN=key;const E=S.emp;
- for(const v of liveRivals(true)){if(!roll(45))continue;v.duc=cl((v.duc||0)+1,0,100);if((E.mood||0)<=1&&(v.sung||0)>=20&&roll(30)){v.sung=cl(v.sung+3,0,100);if(knows(v))log(`Đêm ${f.name}, Hoàng thượng dừng chân ngắm đèn của ${v.name}.`)}}}
+ const mg=typeof mg2On==="function"&&mg2On();/* mg2: her lantern game for each NPC = one draw (occ trieu, as tsGame) + the same odds as hers (tsDenOdds), and the same Ân tình */
+ for(const v of liveRivals(true)){if(!roll(45))continue;const ok=(E.mood||0)<=1&&(v.sung||0)>=20&&(mg?tsDenFar(kg82NpcRaw(v,"den",{occ:"trieu"}))||roll(tsDenOdds(v)):roll(30));
+  if(!mg||!ok)v.duc=cl((v.duc||0)+1,0,100);/* mg2: as her «Cầu thánh ân»: seen = Sủng +3, Ân tình +2; not seen = Đức +1 */if(ok){v.sung=cl(v.sung+3,0,100);if(mg)v.an=cl((v.an||0)+2,0,100);if(knows(v))log(`Đêm ${f.name}, Hoàng thượng dừng chân ngắm đèn của ${v.name}.`)}}}
 
 /* =============== Ý 2 · HỘI PHỐI ĐỒ THEO ĐỀ (tháng tư và tháng mười, báo đề trước một tháng) =============== */
 /* D17 (owner 15/11 23:05Z/23:15Z): each đề has a luxury RANGE r (4 pieces, absolute; capped by her own allowance: jlux luxThemeRange) and its

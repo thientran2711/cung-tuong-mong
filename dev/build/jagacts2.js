@@ -124,3 +124,9 @@ function ag2Reg(p){const G=BAL.ag.give;const sg=(p===S?S.sung:p.sung)||0,an=(p==
 /* ledger labels of the new deeds */
 try{for(const k in AGC2)ACT95["ag_cx2:"+k]=AGC2[k].act;Object.assign(ACT95,{"ag_cx2:vent":"trút giận","ag_cx2:chest":"lén lục rương","ag_cx2:help":"sang nhờ giúp đỡ","ag_cx2:maidTalk":"tâm sự với cung nữ thân tín","ag_cx2:maidSpy":"sai cung nữ đi dò la","ag_cx2:bribeSrv":"mua chuộc kẻ hầu cung khác","ag_cx2:plantSrv":"cài người vào cung khác","ag_emp:visit":"ngự giá lâm cung","ag_emp:tea":"ghé uống chén trà"})}catch(e){}
 Object.assign(window,{AG2,AGC2,AGC2BTN,ag2Reg});
+/* AG-ALL-2 part 2b (G7): Biếu Tổng quản (the player's court button courtAct "thuong", j10) as a consort's choice — replaces npcCourt roll(10).
+   Its worth to her: the Tổng quản's favour helps her to the Emperor (need sung), less as his favour already stands high (BAL.ag.cx3.tq). */
+agReg("consort","court3",(v,N,need)=>{if(need&&need!=="sung")return[];if(!S.court||!S.court.tq)return[];const G=BAL.court.gift,X=BAL.ag.cx3.tq;const c={bac:-G.bac};if(!agcCan(v,c)||(v.bac||0)<G.bac*X.keep)return[];
+ const af=S.court.tq.af[v.id]||0;const u=agcU(v,N,100,{sung:X.g*cl(1-af/X.cap,0,1)},c,"bribe");return u>0?[{k:"cx:tqGift",t:null,u,tag:"bribe",act:"biếu quà Tổng quản thái giám",at:(kh,vv)=>palaceOf(vv||v)}]:[]});
+agRunReg("cx:tqGift",(v)=>courtGive(v,"tq"));
+try{ACT95["ag_cx:tqGift"]="biếu quà Tổng quản thái giám"}catch(e){}

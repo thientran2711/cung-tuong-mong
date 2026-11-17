@@ -54,7 +54,9 @@ function mlLosing(p){try{const L=liveRivals(true).map(v=>v.sung||0).sort((a,b)=>
    (jtruth deedAdd; she did order it), the victim's mistress gets evidence (evA, any mistress, not only the player) and oán, the master
    loses Đức / Danh (exposed framer, OD 16/11 evidence-truth). When the player's own maid did it (she gave no order), no deed and no
    evidence on her: she loses Danh for her household and the victim's mistress still resents her. */
-function mlCaught(p,t,k,w,x){const B=mlB();mlC("caught_"+k);if(p===S){apply({danh:-B.caughtDanh});oanAdd(t,S,B.caughtOan*w);return 0}
+/* AG-ALL-2: ord = the master herself ordered it (the player consort's own "Vu tội" button): the full rule, as for an NPC master;
+   own = a maid acted by her OWN choice (agent): her master loses Danh for her household, no deed / proof on the master (the p===S rule, any master) */
+function mlCaught(p,t,k,w,x,ord,own){const B=mlB();mlC("caught_"+k);if(own&&p!==S){ap(p,{danh:-B.caughtDanh});oanAdd(t,p,B.caughtOan*w);return 0}if(p===S&&!ord){apply({danh:-B.caughtDanh});oanAdd(t,S,B.caughtOan*w);return 0}
  deedAdd(p,"ml"+k,t,w,x);ap(p,{duc:-B.caughtDuc*w,danh:-B.caughtDanh});oanAdd(t,p,B.caughtOan*w);const d=evA(t,p,B.evN*w);mlC("ev",d);if(t===S)mlC("evMe",d);return d}
 /* 3. maids of hostile palaces harm each other */
 function mlFeud(p){const B=mlB();let ev="";const G=mlGuest();if(G&&p===S)return"";/* co-op guest: her maid's harm to an NPC maid is world state (host) */
@@ -69,28 +71,51 @@ function mlFeud(p){const B=mlB();let ev="";const G=mlGuest();if(G&&p===S)return"
    if(see)ev+=`${a.name} (cung ${NM(p)}) vu cho ${b.name} (cung ${NM(t)}) ăn cắp, bị ${t===S?"ngươi":t.name} tra ra; ${a.name} bị phạt quỳ${p===S?`; Danh −${B.caughtDanh}`:t===S&&d?`; chứng cứ về ${p.name} +${d}`:""}. `}
   else{b.loyal=cl(b.loyal-B.frameLoy,0,100);b.trouble=wk();mlFx(typeof penGive==="function"?penGive:null,b,"quy","bị vu ăn cắp",t);
    if(roll(B.frameOut)&&t!==S){t.staff.splice(t.staff.indexOf(b),1);mlC("frameOut")}if(see)ev+=`${a.name} (cung ${NM(p)}) vu cho ${b.name} (cung ${NM(t)}) ăn cắp; ${b.name} bị phạt quỳ${t===S?" (ngươi có thể Che chở ở Hậu cung › Cung nhân)":""}. `}}
- else{mlFx(typeof pzGive==="function"?pzGive:null,b,B.poisonLv,"bị bỏ độc vào bát cơm",p);let died=false;if(roll(B.poisonDie)){(t.staff||[]).splice(t.staff.indexOf(b),1);died=true;mlC("poisonDie");if(see)ev+=`${b.name} (cung ${NM(t)}) ăn bát cơm ${a.name} (cung ${NM(p)}) đưa sang, không qua khỏi. `}
-  else if(see)ev+=`${b.name} (cung ${NM(t)}) trúng độc trong bát cơm, môi tím tái mấy ngày. `;
-  if(roll(B.poisonCatch)){/* caught: the poisoner is taken to Thận hình ti (leaves her master) */const i=p.staff.indexOf(a);if(i>=0)p.staff.splice(i,1);mlC("poisonOut");
-   const d=mlCaught(p,t,"poison",B.poisonW,`sai người hầu bỏ độc cung nữ cung ${t===S?"ta":t.name}`);
-   if(see)ev+=`Thái y tra ra độc trong bát cơm ${a.name} (cung ${NM(p)}) đưa sang; ${a.name} bị giải sang Thận hình ti${p===S?`; Danh −${B.caughtDanh}`:t===S&&d?`; chứng cứ về ${p.name} +${d}`:""}. `}}
+ else ev+=mlPoisonDo(p,a,t,b,null,0,1);
+ return ev}
+/* AG-ALL-2 G5: ONE poison of a colleague (the old feud branch, unchanged numbers): p = the poisoner's master, a = the maid (S = the maid player),
+   t / b = the victim's mistress / the victim. caught: given (the act's own odds, j42 SRVA.poison) or rolled (old path). own = her own choice. */
+function mlPoisonDo(p,a,t,b,caught,own,pre){const B=mlB();let ev="";const see=a===S||mlSee(p,t);const A=a===S?"ngươi":a.name,AP=a===S?"ngươi":`${a.name} (cung ${NM(p)})`;
+ if(!pre){mlC("feud_poison");const g=typeof cmGuard==="function"?cmGuard(t,p):"";if(g)return g}/* pre: the feud already counted it and asked the guard */
+ mlFx(typeof pzGive==="function"?pzGive:null,b,B.poisonLv,"bị bỏ độc vào bát cơm",p);if(roll(B.poisonDie)){(t.staff||[]).splice(t.staff.indexOf(b),1);mlC("poisonDie");if(see)ev+=`${b.name} (cung ${NM(t)}) ăn bát cơm ${AP} đưa sang, không qua khỏi. `}
+ else if(see)ev+=`${b.name} (cung ${NM(t)}) trúng độc trong bát cơm, môi tím tái mấy ngày. `;
+ if(caught==null?roll(B.poisonCatch):caught){/* caught: the poisoner is taken to Thận hình ti (leaves her master) */mlC("poisonOut");
+  if(a===S){mlCaught(p,t,"poison",B.poisonW,`người hầu bỏ độc cung nữ cung ${t.name}`,0,1);ev+=`Thái y tra ra độc trong bát cơm ngươi đưa sang. `;try{die("Bị Thái y tra ra bỏ độc người hầu cung khác, giải sang Thận hình ti")}catch(e){}return ev}
+  const i=(p.staff||[]).indexOf(a);if(i>=0)p.staff.splice(i,1);
+  const d=mlCaught(p,t,"poison",B.poisonW,`sai người hầu bỏ độc cung nữ cung ${t===S?"ta":t.name}`,0,own);
+  if(see)ev+=`Thái y tra ra độc trong bát cơm ${AP} đưa sang; ${A} bị giải sang Thận hình ti${p===S?`; Danh −${B.caughtDanh}`:t===S&&d?`; chứng cứ về ${p.name} +${d}`:""}. `}
  return ev}
 /* 4. a consort targets another palace's maid (co-op guest: pickTarget (jcoopworld) returns only her, so an NPC's act aimed at her
    household lands on her side, NPC vs NPC rolls on the host) */
 function mlHit(p){const B=mlB();const HP=(typeof asOn==="function"&&asOn())?(p===S?null:asHitPick(p)):undefined;/* AG-ALL B: the consort's choice */if(HP===null)return"";if(HP===undefined&&(p===S||!roll(B.hit)))return"";const t=HP?HP.t:pickTarget(p);if(!t||!(t.staff||[]).some(x=>x.role==="maid"))return"";const s=pick(t.staff.filter(x=>x.role==="maid"));if(!s)return"";{const g=typeof cmGuard==="function"?cmGuard(t,p):"";if(g)return g}
- const tr=typeof traitsOf==="function"?traitsOf(p):[p.trait];const cruel=tr.some(x=>x==="Xảo quyệt"||x==="Kiêu ngạo");const k=HP?HP.k:(p.bac||0)>=B.hitBribeBac&&roll(B.hitBribe)?"bribe":cruel&&roll(B.hitBeat)?"beat":"frame";mlC("hit_"+k);let ev="";const see=mlSee(t);
+ const tr=typeof traitsOf==="function"?traitsOf(p):[p.trait];const cruel=tr.some(x=>x==="Xảo quyệt"||x==="Kiêu ngạo");const k=HP?HP.k:(p.bac||0)>=B.hitBribeBac&&roll(B.hitBribe)?"bribe":cruel&&roll(B.hitBeat)?"beat":"frame";return mlHitDo(p,t,s,k)}
+/* AG-ALL-2 G5: ONE act of a consort on another palace's maid s (t = her mistress), k = bribe / beat / frame — the NPC's mlHit choice and the
+   player consort's own buttons (mlHitBtns, the servant card of another palace) run this; caught: given or rolled at BAL.mline.hitCatch */
+function mlHitDo(p,t,s,k,caught){const B=mlB();mlC("hit_"+k);let ev="";const see=mlSee(t)||p===S;const PN=p===S?"ngươi":p.name,PB=p===S?"Ngươi":p.name;
  if(k==="bribe"){const r=bribeServ(p,s);if(t===S&&r&&s.spyFor!==key(p))ev+=r}
- else if(k==="beat"){mlFx(typeof slapGive==="function"?slapGive:null,s,p,`bị ${p.name} đánh`);s.loyal=cl(s.loyal+B.beatLoy,0,100);
+ else if(k==="beat"){mlFx(typeof slapGive==="function"?slapGive:null,s,p,`bị ${PN} đánh`);s.loyal=cl(s.loyal+B.beatLoy,0,100);
   /* a beating is done in the open: always a true deed; the victim's mistress resents it, and holds proof of it at hitEv % */
   deedAdd(p,"mlbeat",t,1,`đánh người hầu cung ${t===S?"ta":t.name} giữa đường`);oanAdd(t,p,B.caughtOan);const d=roll(B.hitEv)?evA(t,p,B.evN):0;mlC("ev",d);if(t===S)mlC("evMe",d);
-  if(see)ev+=`${p.name} gặp ${s.name} (cung ${NM(t)}) giữa đường, bắt quỳ, sai vả miệng${t===S?`; nàng về khóc với ngươi (thiện cảm +${B.beatLoy})${d?`; chứng cứ về ${p.name} +${d}`:""}`:""}. `}
- else if(roll(B.hitCatch)){/* caught: the maid is cleared, the consort behind it is exposed */const d=mlCaught(p,t,"hframe",1,`vu oan người hầu cung ${t===S?"ta":t.name}`);
-  if(see)ev+=`Người của ${p.name} vu cho ${s.name} (cung ${NM(t)}) làm vỡ đồ ngự tứ, bị tra ra; ${p.name} mất mặt${t===S&&d?`; chứng cứ về ${p.name} +${d}`:""}. `}
- else{s.loyal=cl(s.loyal-B.frameLoy,0,100);s.trouble=wk();mlFx(typeof penGive==="function"?penGive:null,s,"quy",`bị ${p.name} vu tội`,p);if(t!==S&&roll(B.frameOut)){t.staff.splice(t.staff.indexOf(s),1);mlC("frameOut")}
-  if(see)ev+=`Người của ${p.name} vu cho ${s.name} (cung ${NM(t)}) làm vỡ đồ ngự tứ; ${s.name} bị phạt${t===S?" (ngươi có thể Che chở ở Hậu cung › Cung nhân)":""}. `}
+  if(see)ev+=`${PB} gặp ${s.name} (cung ${NM(t)}) giữa đường, bắt quỳ, sai vả miệng${t===S?`; nàng về khóc với ngươi (thiện cảm +${B.beatLoy})${d?`; chứng cứ về ${p.name} +${d}`:""}`:""}. `}
+ else if(caught==null?roll(B.hitCatch):caught){/* caught: the maid is cleared, the consort behind it is exposed */const d=mlCaught(p,t,"hframe",1,`vu oan người hầu cung ${t===S?"ta":t.name}`,1);
+  if(see)ev+=`Người của ${PN} vu cho ${s.name} (cung ${NM(t)}) làm vỡ đồ ngự tứ, bị tra ra; ${PN} mất mặt${t===S&&d?`; chứng cứ về ${p.name} +${d}`:""}. `}
+ else{s.loyal=cl(s.loyal-B.frameLoy,0,100);s.trouble=wk();mlFx(typeof penGive==="function"?penGive:null,s,"quy",`bị ${PN} vu tội`,p);if(t!==S&&roll(B.frameOut)){t.staff.splice(t.staff.indexOf(s),1);mlC("frameOut")}
+  if(see)ev+=`Người của ${PN} vu cho ${s.name} (cung ${NM(t)}) làm vỡ đồ ngự tứ; ${s.name} bị phạt${t===S?" (ngươi có thể Che chở ở Hậu cung › Cung nhân)":""}. `}
  return ev}
 /* co-op guest (review/servant-mline-r2): NPC masters' own maids (seek, feud among NPCs) roll on the host; on the guest only what touches
    her household rolls: her maids' seeking, NPC maids feuding with hers, NPC consorts hitting her maids */
 function mlMonth(){if(!mlOn())return"";let ev="";const G=mlGuest();try{for(const p of consorts()){if(!p||!p.staff)continue;if(p!==S&&(!p.alive||p.out))continue;
   if(!G||p===S)ev+=mlSeek(p);ev+=mlFeud(p);ev+=mlHit(p)}}catch(e){console.error("mlMonth",e)}return ev}
 (function(){const m0=servMonth;servMonth=function(){const r=m0.apply(this,arguments)||"";return r+mlMonth()}})();
+/* AG-ALL-2 G5 (owner OD 17/11 ~14:50Z: every act an NPC consort does, she has too): on the card of another palace's maid (j15 "Mưu kế") the player
+   consort gets the NPC's two other mlHit acts — Bắt quỳ, vả miệng / Vu tội — running the SAME mlHitDo (same odds hitCatch, same deed / proof / oán);
+   khắc = BAL.ag.stf2.hit.k (as Mua chuộc). Co-op guest: none (an NPC maid is world state, host only). */
+function mlHitBtns(s,v,t2){try{if(!mlOn()||!s||s.role!=="maid"||!v||v===S||(typeof isSrv==="function"&&isSrv()))return[];const B=mlB(),K=BAL.ag.stf2.hit.k;
+ const why=mlGuest()?"việc trong thế giới chung do chủ phòng định":!can(K)?(t2||"hết khắc"):"";
+ return [pbtn(`data-mlh="beat" data-sid="${s.sid}"`,"Bắt quỳ, vả miệng",`tốn: ${K} khắc · thành: ${s.name} bị đánh, ${v.name} oán ngươi · kèm: ${v.name} nắm chứng cứ: ${chanceW(B.hitEv)}`,why),
+  pbtn(`data-mlh="frame" data-sid="${s.sid}"`,"Vu tội",`${word(100-B.hitCatch)} · tốn: ${K} khắc · thành: ${s.name} bị phạt quỳ, lòng với chủ -${B.frameLoy} · hỏng: bị tra ra, ngươi mất Đức, Danh; ${v.name} nắm chứng cứ`,why)]}catch(e){return[]}}
+function mlHitMe(k,sid){const s=servById(sid);const t=s&&ownerOf(s);if(!s||!t||t===S||S.dead||Q.length||mlGuest())return"";const K=BAL.ag.stf2.hit.k;if(!can(K))return"";spend(K);
+ const r=mlHitDo(S,t,s,k);if(r)log(r);return r}
+document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-mlh]");if(!b||b.disabled||!S||S.dead||Q.length)return;e.stopPropagation();e.preventDefault();
+ const bf=typeof rsnap==="function"?rsnap():null;mlHitMe(b.dataset.mlh,+b.dataset.sid);try{if(bf)resultShow(b.firstChild.textContent,bf)}catch(e){}render()},true);
+window.mlHitDo=mlHitDo;window.mlPoisonDo=mlPoisonDo;window.mlHitBtns=mlHitBtns;window.mlHitMe=mlHitMe;

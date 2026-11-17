@@ -6,7 +6,7 @@
 const {chromium}=require('playwright');const [,,URL0,WK0]=process.argv;const WK=+WK0||40;const URL=/^(https?|file):/.test(URL0)?URL0:'file://'+require('path').resolve(URL0);
 const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+m+(x!==undefined?' '+JSON.stringify(x):''))};
 /* player buttons of the maid life (srvCards / srvTalk / srvStaffAct / love): SRVA key → button label */
-const BTN={sweep:"Quét sân, lau điện",tea:"Dâng trà, hầu điểm tâm",nvp:"Lĩnh đồ ở Nội vụ phủ",rite:"Học lễ nghi với cô cô",study:"Luyện thêu thùa, chữ nghĩa",groom:"Chải chuốt, giữ nhan sắc",rest:"Nghỉ lấy sức",embro:"Thêu khăn bán ra ngoài",med:"Mua thuốc bổ",books:"Quản sổ sách trong cung",spy:"Lén báo tin",
+const BTN={/* AG-ALL-2 G5 / G6 (jagstf2) */leave:"Xin chủ cho đi hầu cung khác",poison:"Bỏ độc vào bát cơm",pil:"Lén giữ đồ Nội vụ phủ phát",sweep:"Quét sân, lau điện",tea:"Dâng trà, hầu điểm tâm",nvp:"Lĩnh đồ ở Nội vụ phủ",rite:"Học lễ nghi với cô cô",study:"Luyện thêu thùa, chữ nghĩa",groom:"Chải chuốt, giữ nhan sắc",rest:"Nghỉ lấy sức",embro:"Thêu khăn bán ra ngoài",med:"Mua thuốc bổ",books:"Quản sổ sách trong cung",spy:"Lén báo tin",
  massage:"Đấm lưng, hầu chuyện",askRew:"Xin chủ ban thưởng",tellMis:"Bẩm tin dò được",askRec:"Xin chủ tiến cử lên Nội vụ phủ",beside:"Hầu bên cạnh chủ",greet:"Hành lễ thỉnh an",betray:"Mật báo chuyện của",accuse:"Tố cáo",
  chat:"Trò chuyện",gift:"Biếu quà",ask:"Nhờ dò tin",frame:"Tố lỗi với chủ",tonic:"Xin thuốc bổ",learn:"Học lỏm nghề thuốc",hail:"Chào hỏi đúng lễ",flirt:"Liếc mắt đưa tình",token:"Trao khăn tay, thư",tryst:"Hẹn gặp riêng",vow:"Hẹn ước trăm năm",empTea:"Quỳ dâng trà",
  grantWed:"Tạ ơn, xuất giá",grantStay:"Xin ở lại",age_out:"Xuất cung",age_mama:"Ở lại làm ma ma",age_keep:"Xin chủ giữ lại"};

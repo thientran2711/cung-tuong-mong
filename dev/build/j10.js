@@ -51,11 +51,15 @@ function servAct(a,id){const s=servById(id);if(!s||S.dead||Q.length)return;const
  else if(o){if(!can(2))return;if(a==="mua"){spend(2);r=bribeServ(S,s)}else if(a==="doa"){spend(2);r=threatServ(S,s)}}
  if(r)log(r);render()}
 function courtAct(a,k){const c=S.court[k];if(!c||S.dead||Q.length)return;let r="";
- if(a==="thuong"){if(S.bac<20)return;apply({bac:-20});c.af.me=(c.af.me||0)+10;r=`Biếu ${c.name} 20 lượng: người ấy quý ngươi +10.`}
+ if(a==="thuong"){if(S.bac<BAL.court.gift.bac)return;r=courtGive(S,k)}
  if(a==="hoi"){if(!can(2))return;spend(2);c.af.me=(c.af.me||0)+1;if(k==="tq"&&roll(40+(c.af.me||0)/2)){discover();r=`${c.name} hé lộ một sở thích của Hoàng thượng.`}else if(k==="ksp")r="Sổ thị tẩm: "+kitNameList(liveRivals(true),x=>`${x.name} ${x.nights}`)+`; ngươi ${S.nights}.`;else r=`${c.name} chỉ cười, không nói gì.`}
  if(r)log(r);render()}
 function tqAf(p){return S.court&&S.court.tq?(S.court.tq.af[key(p)]||0):0}
-function npcCourt(v){if(roll(10)&&v.bac>=40&&S.court){ap(v,{bac:-20});S.court.tq.af[v.id]=(S.court.tq.af[v.id]||0)+10}}
+/* Biếu quà người trong triều (Tổng quản / Kính sự phòng): ONE function for the player's button (courtAct thuong) and an NPC consort (AG-ALL-2 cx:tqGift) */
+function courtGive(a,k){const c=S.court&&S.court[k];const G=BAL.court.gift;if(!c||(a.bac||0)<G.bac)return"";if(a===S)apply({bac:-G.bac});else ap(a,{bac:-G.bac});const id=a===S?"me":a.id;c.af[id]=(c.af[id]||0)+G.af;
+ return a===S?`Biếu ${c.name} ${G.bac} lượng: người ấy quý ngươi +${G.af}.`:`${a.name} biếu ${c.name} ${G.bac} lượng`}
+/* the old monthly drip (roll 10): off while the day plan runs — an NPC consort's own choice now (jagacts2 cx:tqGift) */
+function npcCourt(v){if(typeof agDOn==="function"&&agDOn())return;if(roll(10)&&v.bac>=BAL.court.gift.bac*2&&S.court)courtGive(v,"tq")}
 function staffHTML(){const row=(s,btns)=>`<div class="srow2">${mdH(pServ(s),"sm")}<div class="sinfo"><b>${s.name}</b><span>${srkName(s)} · ${strShow(s)}${s.lover&&(S.knowDT||[]).includes(s.sid)?" · <span class=\"r\">đối thực</span>":""}${s.spyFor==="me"?" · <span class=\"g\">tai mắt của ngươi</span>":""}</span></div><div class="rbtn">${btns}</div></div>`;
  const [cm,ce]=capOf(S),nm=S.staff.filter(s=>s.role==="maid").length+1,ne=S.staff.filter(s=>s.role==="eunuch").length;
  let h=`<div class="ph"><span>Kẻ hầu: ${nm}/${cm} cung nữ · ${ne}/${ce} thái giám</span></div>`;

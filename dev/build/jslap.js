@@ -100,7 +100,7 @@ window.slapGame=slapGame;
   ["Ngoài vùng",`tay nhẹ: Đức ${B.duc[1]}, dấu tay mờ ${B.wk[1]} tuần`,"r"]],
   onDone:res=>{SLAPG.busy=0;SLAP.next=res.skipped?B.def:slapTierOf(res.raw);try{d0.apply(self,args)}finally{SLAP.next=0}}})}})();
 /* ---------- an NPC slaps her: tier rolled, she may dodge ---------- */
-function slapNpcTier(a){const gap=Math.max(1,(typeof rkOf==="function"?rkOf(a)-rkOf(S):1)),w=BAL.slap.npc[Math.min(gap,3)-1];let r=Math.random()*(w[1]+w[2]+w[3]);for(let i=1;i<=3;i++){if(r<w[i])return i;r-=w[i]}return 1}
+function slapNpcTier(a){if(typeof mg2On==="function"&&mg2On())return slapNpcDraw(a);/* AG-ALL-2b mg2: her game, one draw */const gap=Math.max(1,(typeof rkOf==="function"?rkOf(a)-rkOf(S):1)),w=BAL.slap.npc[Math.min(gap,3)-1];let r=Math.random()*(w[1]+w[2]+w[3]);for(let i=1;i<=3;i++){if(r<w[i])return i;r-=w[i]}return 1}
 window.slapNpcTier=slapNpcTier;
 (function(){const r0=runAct;runAct=function(a,t,k,extra){
  if(k!=="tat"||t!==S||!a||a===S||SLAPG.npcDone)return r0.apply(this,arguments);
@@ -122,3 +122,18 @@ window.slapNpcTier=slapNpcTier;
  COOP.send=function(m){try{if(m&&m.t==="res"&&m.k==="tat"&&window.__slapLast)m.slap=window.__slapLast}catch(e){}return s0.apply(this,arguments)};
  COOP.on("res",m=>{try{const W=window.COOPW;if(!W||!W.on||m.from===W.seat||m.k!=="tat"||!m.slap||!S||S.dead)return;slapGive(S,null,"",m.slap)}catch(e){console.error(e)}})}catch(e){}})();
 (function(){const f=ACT.tat.f;ACT.tat.f=function(a,t){const r=f.apply(this,arguments);try{window.__slapLast=t&&t.slap?t.slap.sev:null}catch(e){}return r}})();
+/* ---------- AG-ALL-2b mg2 (owner OD 17/11 ~15:25Z (3) "lúc nào tôi có thì NPC cũng phải có … đổ xí ngầu cho nó … công bằng với tôi") ----------
+   An NPC's slap = ONE draw from her power-bar game as measured (BAL.ag.mg2.tat: [nhẹ, vừa, nặng] % of the skilled bot by board ease), on the board she would
+   get in that seat (mgTier "tat": the slapper's rank and Vũ / Sức — slapMg for her). Whoever is slapped by her or by an NPC dodges as she can: one roll
+   of BAL.slap.dodgeOdds[tier of the "ne" board: the target's Vũ, the slapper's rank] (her own card odds); a dodge lowers the tier by one, a dodged nhẹ misses.
+   Off (agOn false) = the old BAL.slap.npc weights, NPC targets never dodge, an NPC's slap on an NPC is nhẹ (B.def). */
+function slapNpcDraw(a){const T=BAL.ag.mg2.tat,E=T.e,e=cl(mgTier("tat",{occ:"tat",p:a}).ease,E[0],E[E.length-1]);let i=0;while(i<E.length-2&&e>E[i+1])i++;
+ const f=(e-E[i])/(E[i+1]-E[i]),w=T.w[i].map((x,j)=>x+(T.w[i+1][j]-x)*f);let r=Math.random()*(w[0]+w[1]+w[2]);for(let j=0;j<3;j++){if(r<w[j])return j+1;r-=w[j]}return 1}
+function slapNeOdds(t,a){const D=BAL.slap.dodgeOdds;return D[mgTier("ne",{occ:"ne",p:t,rank:typeof rkOf==="function"?rkOf(a):0}).tier]}
+window.slapNpcDraw=slapNpcDraw;window.slapNeOdds=slapNeOdds;
+(function(){const r0=runAct;runAct=function(a,t,k,extra){
+ if(k!=="tat"||!a||!t||t===S||t.coop||a.coop||SLAPG.npcDone||!(typeof mg2On==="function"&&mg2On()))return r0.apply(this,arguments);
+ const B=BAL.slap;let sev=a===S?cl(SLAP.next|0||B.def,1,3):slapNpcTier(a);
+ if(roll(slapNeOdds(t,a))){sev--;if(sev<=0){if(typeof ducAdd==="function")ducAdd(a,B.duc[1],"tát hụt");relAdd(t,a,B.missRel);SLAP.next=0;
+  const m=`${NMc(a)} giơ tay tát ${NM(t)} nhưng ${NM(t)} né kịp, cái tát hụt.`;return a===S?`<span class="r">${m}</span> `:m+" "}}
+ SLAP.next=sev;try{return r0.apply(this,arguments)}finally{SLAP.next=0}}})();

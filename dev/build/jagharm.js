@@ -103,7 +103,7 @@ function haLand(p,seen){const z=agZ();const i=z.pend.indexOf(p);if(i>=0)z.pend.s
  const k=p.k.slice(5),t=agPerson(p.t);let r="";AG.inTick++;
  try{if(k==="taint"){let ix=(v.inv||[]).findIndex(e=>e&&!e.h&&!e.t&&(e.k==="tuithom"||e.k==="huongtram"));if(ix<0&&v.bac>=itm("tuithom").pr){buy(v,"tuithom");ix=v.inv.length-1}
    const tk=(v.inv||[]).some(e=>e&&e.k==="xahuong"&&!e.h)?"xa":"bua";if(ix>=0){taintItem(v,ix,tk);HA.stat.taint++}}
-  else if(k==="cook"){if(typeof wkMake==="function"){v.inv.push(wkMake(v,"mon",0,4));HA.stat.cook++}}
+  else if(k==="cook"){if(typeof wkMake==="function"){v.inv.push(wkMake(v,"mon",0,typeof wkNpcRaw==="function"?wkNpcRaw(v,"mon"):0));HA.stat.cook++}}
   else if(t&&ACT[k]){/* an act done face to face (Ngáng chân, Đẩy xuống hồ sen): both stand at its place at its khắc in the record (the khắc, not the buổi's rough place) */
    if(HA_TOG.has(k)&&agAt(t,p.kh)===p.pl)HA.here={[v.id]:p.pl,[t===S?"me":t.id]:p.pl};
    let ok=false;try{ok=ACT[k].ok(v,t)}catch(e){}

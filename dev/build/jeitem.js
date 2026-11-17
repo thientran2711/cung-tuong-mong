@@ -48,34 +48,63 @@ function eitPilWho(p){const P=BAL.eit.pil,L=[];if(p.maid&&p.maid.alive!==false)L
  return L.map(s=>{const lo=s.loyal|0;if(lo>=P.loyal&&!s.spyFor)return null;if(s.pilDet!=null&&S.turn<s.pilDet)return null;
    let ch=P.base+Math.max(0,P.loyal-lo)*P.k+(s.spyFor?P.spy:0)+(s.pilOk?P.ok:0)+(p.pilSoft!=null&&S.turn<p.pilSoft&&p.pilSoftBy!==s.name?P.ok:0)+((p.sung||0)<BAL.stip.lowSung?P.lowSung:0);return{s,ch:Math.min(P.cap,Math.round(ch))}}).filter(Boolean)}
 function eitPilfer(p,G){if(p===S)EIT_PIL=null;try{if(!p||p.dead||p.out||!G||!G.length)return null;if(p===S&&typeof isSrv==="function"&&isSrv())return null;
- const C=eitPilWho(p);let hit=null;for(const c of C)if(ag2Ch(c.s,c.ch)){hit=c.s;break}if(!hit)return null;
+ const C=eitPilWho(p);let hit=null;for(const c of C)if(ag2Ch(c.s,c.ch)){hit=c.s;break}if(!hit)return null;/* (ag2Ch: her own inclination from lòng / spy / a soft master, AG-ALL-2) */
  /* the dearest piece that really arrived this month */
  let best=null;for(const g of G)for(const e of (g.E||[])){const v=(IT[e.k]&&itm(e.k).pr)||0;if(!best||v>best.v)best={g,e,v}}if(!best)return null;
  const i=p.inv.indexOf(best.e);if(i>=0)p.inv.splice(i,1);best.g.E.splice(best.g.E.indexOf(best.e),1);best.g.n=Math.max(0,best.g.n-1);if(!best.g.n)best.g.lost=true;best.g.pil=1;
- hit.pilN=(hit.pilN||0)+1;const X={p,s:hit,k:best.e.k,g:best.g};
+ hit.pilN=(hit.pilN||0)+1;const X={p,s:hit,k:best.e.k,g:best.g};if(window.agOn&&agOn()&&hit!==p.maid){const v=best.v;X.sold=()=>eitPilSell(hit,v)}/* AG-ALL-2 G6: she sells it, as the maid player does (when unnoticed, or let off with it) */
  if(p!==S){eitPilNpc(X);return X}
  const P=BAL.eit.pil;const see=cl(P.see+(S.mat||0)*P.seeMat+(S.maid&&S.maid!==hit&&(S.maid.loyal||0)>=70?P.seeMaid:0),5,95);
- if(roll(see))EIT_PIL=X;return X}catch(e){console.error("eitPilfer",e);return null}}
-function eitPilBack(X){const e={k:X.k,from:"noivu",d:S.turn};S.inv.push(e);X.g.E.push(e);X.g.n++;X.g.lost=false}
+ if(roll(see))EIT_PIL=X;else if(X.sold)X.sold();return X}catch(e){console.error("eitPilfer",e);return null}}
+function eitPilBack(X){const p=X.p||S;const e={k:X.k,from:"noivu",d:S.turn};p.inv=p.inv||[];p.inv.push(e);if(X.g){X.g.E.push(e);X.g.n++;X.g.lost=false}}
 function eitIsMaid(s){return s===S.maid}
-function eitPilEvent(X){const s=X.s,P=BAL.eit.pil,it=IT[X.k]||{n:X.k};const nm=it.n.replace(/ \(hàng kém\)$/,"");const role=eitIsMaid(s)?"cung nữ thân tín":s.role==="eunuch"?"thái giám":"cung nữ";
+/* how likely her master notices a pilfered piece (the NPC rule; the maid player's "Lén giữ đồ" card reads it as 100 − this) */
+function eitPilSee(p){const P=BAL.eit.pil;return cl(P.see+((p&&p.tamco)|0)/4,5,95)}
+/* AG-ALL-2 G6 / G10 (ONE CORE): the master's options on a caught pilferer — the player consort's card (eitPilEvent) and an NPC master's choice
+   (eitPilNpc → mindPick) read this one list; X.p = the master (S or an NPC), X.s = the servant (a staff, her confidant maid, or S on the maid road). */
+function eitPilZ(s){return s===S?S.srv:s}
+function eitPilLoy(s,n){if(s===S)apply({tin:n});else s.loyal=cl((s.loyal|0)+n,0,100)}
+function eitPilOpts(X){const p=X.p,s=X.s,P=BAL.eit.pil,me=p===S,z=eitPilZ(s);const it=IT[X.k]||{n:X.k};const nm=it.n.replace(/ \(hàng kém\)$/,"").toLowerCase();const SN=s===S?"ngươi":s.name;
+ const O=[
+  {id:"pun",n:"Phạt nặng",tag:"punish",x:`thành: lấy lại đồ, ${s.name} ${P.detM} tháng không dám tái phạm, kẻ hầu khác cũng sợ · kèm: thiện cảm của ${s.name} với ngươi -${P.punLoyal}${s.spyFor?" · tra khảo có thể khai ra kẻ đứng sau":""}`,
+   go:()=>{eitPilBack(X);eitPilLoy(s,-P.punLoyal);z.pilDet=S.turn+P.detM;z.pilOk=0;p.pilSoft=null;for(const o of (p.staff||[]))if(o&&o!==s&&(o.pilDet==null||o.pilDet<S.turn+Math.round(P.detM/2)))o.pilDet=S.turn+Math.round(P.detM/2);
+    let r=me?`Ngươi phạt ${s.name}, lấy lại ${nm}. Thiện cảm của ${s.name} với ngươi -${P.punLoyal}.`:s===S?`${p.name} bắt được ngươi lén giữ ${nm}, phạt nặng. Chủ tin -${P.punLoyal}.`:"";
+    if(!me&&s!==S)try{newsAdd(p,"stip",`${rkName(p)} ${p.name} bắt được ${s.name} lén giữ ${nm} Nội vụ phủ phát, phạt nặng`)}catch(e){}
+    if(s===S){if(S.srv.spyFor!=null){const v=RV(S.srv.spyFor);srvLaundry(`Bị tra khảo, ngươi khai là tai mắt của ${v?v.name:"kẻ khác"}.`,BAL.ag.stf2.pil.lauWk);if(v&&v.alive)try{evA(p,v,1)}catch(e){}}return r}
+    if(s.spyFor&&!(p===S&&eitIsMaid(s))&&p.maid!==s){const m=typeof byKey==="function"?byKey(s.spyFor):null;if(me)r+=` Bị tra khảo, ${s.name} khai là tai mắt của ${m&&m!==S?NM(m):"kẻ khác"}. Đuổi khỏi cung.`;const i=(p.staff||[]).indexOf(s);if(i>=0)p.staff.splice(i,1);if(m&&m!==p)try{evA(p,m,1)}catch(e){}}
+    return r}},
+  {id:"forgive",n:"Răn dạy rồi tha",tag:"reward",x:`thành: lấy lại đồ, thiện cảm của ${s.name} với ngươi +${P.forgiveLoyal} · kèm: kẻ hầu khác thấy ngươi dễ tính, ${P.softM} tháng tới dễ ăn bớt hơn`,
+   go:()=>{eitPilBack(X);eitPilLoy(s,P.forgiveLoyal);p.pilSoft=S.turn+P.softM;p.pilSoftBy=s.name;return me?`Ngươi răn dạy ${s.name} rồi tha. ${s.name} dập đầu tạ ơn. Thiện cảm của ${s.name} với ngươi +${P.forgiveLoyal}.`:s===S?`${p.name} bắt được ngươi lén giữ ${nm}, răn dạy rồi tha. Chủ tin +${P.forgiveLoyal}.`:""}}];
+ if(p.maid!==s)O.push({id:"back",n:"Trả về Nội vụ phủ",tag:"punish",x:`thành: lấy lại đồ, Nội vụ phủ đưa người khác đến thay · kèm: ${s.name} rời cung ngươi`,
+   go:()=>{eitPilBack(X);if(s===S){srvReassign(`${p.name} bắt được ngươi lén giữ ${nm}, trả ngươi về Nội vụ phủ.`);return""}const i=(p.staff||[]).indexOf(s);if(i>=0){p.staff.splice(i,1);let n=null;try{n=mkServ(s.role);p.staff.push(n)}catch(e){}return me?`Ngươi trả ${s.name} về Nội vụ phủ${n?`; ${n.name} đến hầu thay`:""}.`:""}return""}});
+ O.push({id:"ignore",n:"Làm ngơ",tag:"reward",x:`thành: thiện cảm của ${s.name} với ngươi +${P.ignoreLoyal} (coi như thưởng) · kèm: mất món đồ, ${s.name} dễ ăn bớt nữa`,
+   go:()=>{eitPilLoy(s,P.ignoreLoyal);z.pilOk=1;if(X.sold)X.sold();return me?`Ngươi làm ngơ, coi như thưởng ${s.name}.`:s===S?`${p.name} biết ngươi lén giữ ${nm} mà làm ngơ. Chủ tin +${P.ignoreLoyal}.`:""}});
+ return O}
+function eitPilEvent(X){const s=X.s;const it=IT[X.k]||{n:X.k};const nm=it.n.replace(/ \(hàng kém\)$/,"");const role=eitIsMaid(s)?"cung nữ thân tín":s.role==="eunuch"?"thái giám":"cung nữ";
  const who=eitIsMaid(s)?(typeof pMaid==="function"?pMaid():null):(typeof pServ==="function"?pServ(s):null);
  const h=`<p>Kiểm lại đồ Nội vụ phủ phát, thiếu một ${STIP_UNIT[X.k]||"món"} ${nm.toLowerCase()}. Hỏi ra mới biết ${role} ${s.name} lén giữ lấy.</p>${kitRows([["Mất",`1 ${STIP_UNIT[X.k]||"món"} ${nm.toLowerCase()}`,"r"],["Gợi ý",`<span class="ef i">thiện cảm của ${s.name} với ngươi ${s.loyal|0}${s.spyFor?", có điều khả nghi":""}${s.pilN>1?`, đã ${s.pilN} lần`:""}.</span>`]])}`;
- const O=[
-  {n:"Phạt nặng",fx:{},x:`thành: lấy lại đồ, ${s.name} ${P.detM} tháng không dám tái phạm, kẻ hầu khác cũng sợ · kèm: thiện cảm của ${s.name} với ngươi -${P.punLoyal}${s.spyFor?" · tra khảo có thể khai ra kẻ đứng sau":""}`,
-   go:()=>{eitPilBack(X);s.loyal=cl((s.loyal|0)-P.punLoyal,0,100);s.pilDet=S.turn+P.detM;s.pilOk=0;S.pilSoft=null;for(const o of (S.staff||[]))if(o&&o!==s&&(o.pilDet==null||o.pilDet<S.turn+Math.round(P.detM/2)))o.pilDet=S.turn+Math.round(P.detM/2);let r=`Ngươi phạt ${s.name}, lấy lại ${nm.toLowerCase()}. Thiện cảm của ${s.name} với ngươi -${P.punLoyal}.`;
-    if(s.spyFor&&!eitIsMaid(s)){const m=typeof byKey==="function"?byKey(s.spyFor):null;r+=` Bị tra khảo, ${s.name} khai là tai mắt của ${m&&m!==S?NM(m):"kẻ khác"}. Đuổi khỏi cung.`;const i=S.staff.indexOf(s);if(i>=0)S.staff.splice(i,1);if(m&&m!==S)try{evA(S,m,1)}catch(e){}}
-    log(r)}},
-  {n:"Răn dạy rồi tha",fx:{},x:`thành: lấy lại đồ, thiện cảm của ${s.name} với ngươi +${P.forgiveLoyal} · kèm: kẻ hầu khác thấy ngươi dễ tính, ${P.softM} tháng tới dễ ăn bớt hơn`,
-   go:()=>{eitPilBack(X);s.loyal=cl((s.loyal|0)+P.forgiveLoyal,0,100);S.pilSoft=S.turn+P.softM;S.pilSoftBy=s.name;log(`Ngươi răn dạy ${s.name} rồi tha. ${s.name} dập đầu tạ ơn. Thiện cảm của ${s.name} với ngươi +${P.forgiveLoyal}.`)}}];
- if(!eitIsMaid(s))O.push({n:"Trả về Nội vụ phủ",fx:{},x:`thành: lấy lại đồ, Nội vụ phủ đưa người khác đến thay · kèm: ${s.name} rời cung ngươi`,
-   go:()=>{eitPilBack(X);const i=S.staff.indexOf(s);if(i>=0){S.staff.splice(i,1);let n=null;try{n=mkServ(s.role);S.staff.push(n)}catch(e){}log(`Ngươi trả ${s.name} về Nội vụ phủ${n?`; ${n.name} đến hầu thay`:""}.`)}}});
- O.push({n:"Làm ngơ",fx:{},x:`thành: thiện cảm của ${s.name} với ngươi +${P.ignoreLoyal} (coi như thưởng) · kèm: mất món đồ, ${s.name} dễ ăn bớt nữa`,go:()=>{s.loyal=cl((s.loyal|0)+P.ignoreLoyal,0,100);s.pilOk=1;log(`Ngươi làm ngơ, coi như thưởng ${s.name}.`)}});
+ const O=eitPilOpts(Object.assign({p:S},X)).map(o=>({n:o.n,fx:{},x:o.x,go:()=>{const r=o.go();if(r)log(r)}}));
  return{ev:1,t:"Kẻ hầu ăn bớt",who,h,opts:O}}
-function eitPilNpc(X){const p=X.p,s=X.s,P=BAL.eit.pil;if(!roll(cl(P.see+(p.tamco|0)/4,5,95)))return;const harsh=netRx(p,/Xảo quyệt|Kiêu ngạo|Thù dai|Kín đáo/);
- const nm=(IT[X.k]||{n:X.k}).n.replace(/ \(hàng kém\)$/,"").toLowerCase();
- if(harsh||ag2Ch(p,P.npcPun*(window.agOn&&agOn()&&typeof agMW==="function"?agMW(p,"punish"):1))){s.loyal=cl((s.loyal|0)-P.punLoyal,0,100);s.pilDet=S.turn+P.detM;try{newsAdd(p,"stip",`${rkName(p)} ${p.name} bắt được ${s.name} lén giữ ${nm} Nội vụ phủ phát, phạt nặng`)}catch(e){}}
- else{s.loyal=cl((s.loyal|0)+P.forgiveLoyal,0,100)}}
+/* an NPC master who notices (eitPilSee) CHOOSES among the same four options (agent: punish / reward weights of her nết, a harsh nết ×harsh;
+   BAL.ag.stf2.pilW); loop off → the old rule (harsh, else npcPun %) */
+function eitPilJudge(X){const p=X.p,P=BAL.eit.pil;const harsh=netRx(p,/Xảo quyệt|Kiêu ngạo|Thù dai|Kín đáo/);
+ if(!(window.agOn&&agOn()&&typeof mindPick==="function")){const pun=harsh||ag2Ch(p,P.npcPun);if(X.s===S){const O=eitPilOpts(X);return (pun?O[0]:O[1]).go()}
+  /* the old NPC rule, unchanged */const s=X.s,nm=(IT[X.k]||{n:X.k}).n.replace(/ \(hàng kém\)$/,"").toLowerCase();
+  if(pun){s.loyal=cl((s.loyal|0)-P.punLoyal,0,100);s.pilDet=S.turn+P.detM;try{newsAdd(p,"stip",`${rkName(p)} ${p.name} bắt được ${s.name} lén giữ ${nm} Nội vụ phủ phát, phạt nặng`)}catch(e){}}else s.loyal=cl((s.loyal|0)+P.forgiveLoyal,0,100);return""}
+ const W=BAL.ag.stf2.pilW,O=eitPilOpts(X);const mw=t=>{try{return typeof agMW==="function"?agMW(p,t):mindW(p,t)}catch(e){return 1}};
+ const c=mindPick(O.map(o=>[o,(W[o.id]||0)*mw(o.tag)*(o.id==="pun"&&harsh?W.harsh:1)]),p)||O[1];
+ try{const N=window.__stf2N=window.__stf2N||{};N["pil_"+c.id]=(N["pil_"+c.id]||0)+1}catch(e){}return c.go()}
+function eitPilNpc(X){const p=X.p;if(!roll(eitPilSee(p))){if(X.sold)X.sold();return}eitPilJudge(X)}
+/* AG-ALL-2 G6: the maid player's "Lén giữ đồ Nội vụ phủ phát" — the dearest piece her master got from Nội vụ phủ this month; unnoticed (her odds =
+   100 − eitPilSee) she sells it (item price × BAL.ag.stf2.pil.sell bạc); noticed → her master's choice above (eitPilJudge), as for an NPC servant.
+   An NPC servant who pilfers sells it the same way (eitPilfer). */
+function eitPilPick(p){let best=null;for(const e of (p&&p.inv||[]))if(e&&e.from==="noivu"&&e.d===S.turn&&!e.h){const v=(IT[e.k]&&itm(e.k).pr)||0;if(!best||v>best.v)best={e,v}}return best}
+function eitPilSell(s,v){const g=Math.round(v*BAL.ag.stf2.pil.sell);if(!g)return 0;if(s===S)apply({bac:g});else s.bac=Math.max(0,(s.bac||0)+g);return g}
+function eitPilMaidOk(){try{const m=srvM();const P=BAL.eit.pil;return !!(isSrv()&&m&&S.srv.lau<=0&&(S.tin<P.loyal||S.srv.spyFor!=null)&&!(S.srv.pilDet!=null&&S.turn<S.srv.pilDet)&&S.srv.pilM!==S.turn&&eitPilPick(m))}catch(e){return false}}
+function eitPilTake(ok){const m=srvM();const b=eitPilPick(m);if(!m||!b)return"";S.srv.pilM=S.turn;const i=m.inv.indexOf(b.e);if(i>=0)m.inv.splice(i,1);S.srv.pilN=(S.srv.pilN||0)+1;
+ const nm=((IT[b.e.k]||{n:b.e.k}).n).replace(/ \(hàng kém\)$/,"").toLowerCase();
+ if(ok){const g=eitPilSell(S,b.v);return `Ngươi lén giữ ${nm} của ${m.name}, nhờ thái giám mang ra ngoài bán${g?`: Bạc +${g}`:""}.`}
+ const X={p:m,s:S,k:b.e.k,g:null,sold:()=>eitPilSell(S,b.v)};return eitPilJudge(X)||""}
 (function(){if(typeof stipGoods!=="function")return;const g0=stipGoods;stipGoods=function(p,SK){const G=g0.apply(this,arguments);eitPilfer(p,G);return G};window.stipGoods=stipGoods})();
 (function(){if(typeof stipShow!=="function")return;const s0=stipShow;stipShow=function(){const r=s0.apply(this,arguments);try{if(EIT_PIL&&EIT_PIL.p===S)Q.push(eitPilEvent(EIT_PIL))}catch(e){console.error("eit pil ev",e)}EIT_PIL=null;return r};window.stipShow=stipShow})();
 

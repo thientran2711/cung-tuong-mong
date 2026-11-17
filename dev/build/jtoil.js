@@ -157,10 +157,10 @@ function toilNpcOcc(){const L=[];try{if(!S.thDead)L.push("th");if(typeof festTod
 function toilMkPre(){try{MK_FIT.get(String(toilPor().src||"").split("?")[0].split("/").pop())}catch(e){}}
 function toilMk(rec){return rec&&rec.makeup?(rec.look==="diem"?"diem":rec.look==="vung"?"vung":toilTier(rec.score|0)):"moc"}
 /* NPCs and the bot: the same parts, score and look from skill (hash of person + day: no Math.random, both co-op seats agree) */
-function toilNpcPlay(sk,h,col,want,style,occ,rk){const N=BAL.toil.play,B=BAL.toil;const r=i=>(wdHash(h+":"+i)%1000)/1000;
+function toilNpcPlay(sk,h,col,want,style,occ,rk,ov){const N=BAL.toil.play,B=BAL.toil;const r=i=>(wdHash(h+":"+i)%1000)/1000;
  const q=i=>Math.max(0,Math.min(1,N.q0+N.qSk*sk+(r(i)+r(i+5)-1)*N.spread));const P={brow:q(0),powder:q(1),son:q(2)};
  const raw=Math.round(100*(.4*P.brow+.3*P.powder+.3*P.son));const score=Math.max(0,Math.min(100,Math.round(raw*(100-B.skillShare)/100)+Math.round(B.skillShare*sk)));
- const over=r(3)<N.cake?N.cakeOver:0;const H=toilHeavy(col,want,style,over);return Object.assign({score,parts:P},toilLookOf(P,score,H,toilAllow(occ,rk),wdHash(String(h)+":diem")))}
+ const over=ov!=null?ov:r(3)<N.cake?N.cakeOver:0;const H=toilHeavy(col,want,style,over);return Object.assign({score,parts:P},toilLookOf(P,score,H,toilAllow(occ,rk),wdHash(String(h)+":diem")))}
 /* ---------- the dress verdict (her clothes NOW, for formality F) ---------- */
 function toilDress(p,F){let st="ok";try{st=wdStatus(p)}catch(e){}if(st==="tang")return{v:"tang",style:"showy"};
  let vp=0;try{vp=(vpItems(p)||[]).length}catch(e){}if(st==="over"||vp)return{v:"vuot",style:"showy"};
@@ -168,11 +168,14 @@ function toilDress(p,F){let st="ok";try{st=wdStatus(p)}catch(e){}if(st==="tang")
  let d=0;try{d=wdLevel(p)-Math.min(8,wdPOf(p))}catch(e){}const B=BAL.toil.dress[Math.max(0,Math.min(2,F|0))];
  if(d<=B.under||r<B.rLo)return{v:"giandi",style:"plain"};if(B.showR!=null&&r>B.showR)return{v:"photruong",style:"showy"};
  if(d>=B.fitD&&r>=B.fitR&&(B.fitHi==null||r<=B.fitHi))return{v:"hopdip",style:"fit"};return{v:"hoppham",style:"fit"}}
-/* NPC look of the day (data, deterministic per person per day: no save field needed) */
+/* an NPC's hand at the mirror (0..1): Sắc / sacDiv + Họa / hoaDiv — the player's toilSkill without the ma ma (jagtoil reads the same) */
+function toilNpcSk(v){let hoa=0;try{hoa=kg82Lv(v,"hoa")||0}catch(e){}return Math.max(0,Math.min(1,((v&&v.sac)||50)/BAL.toil.sacDiv+hoa/BAL.toil.hoaDiv))}
+/* NPC look of the day (data, deterministic per person per day: no save field needed). With the agents on (BAL.ag.toil2, host only) jagtoil makes
+   the face part her CHOICE (G11); this stays the fallback (switch off, co-op guest before the host's choice arrives) */
 function toilNpc(v){const N=BAL.toil.npc,h=wdHash(wdKey(v)+":"+toilWk()),r1=(h%1000)/1000,r2=((h>>>10)%1000)/1000,r3=((h>>>20)%1000)/1000;const T=traitsOf(v);
  const sp=Math.max(N.showy0,...T.map(t=>N.showy[t]||0)),pp=Math.max(N.plain0,...T.map(t=>N.plain[t]||0));
  const dv=r1<sp?"photruong":r1<sp+pp?"giandi":r1<.8?"hopdip":"hoppham";const makeup=r2>=N.moc;
- const style=dv==="giandi"?"plain":dv==="photruong"?"showy":"fit";let hoa=0;try{hoa=kg82Lv(v,"hoa")||0}catch(e){}const sk=Math.max(0,Math.min(1,(v.sac||50)/BAL.toil.sacDiv+hoa/BAL.toil.hoaDiv));
+ const style=dv==="giandi"?"plain":dv==="photruong"?"showy":"fit";const sk=toilNpcSk(v);
  /* her colours: a showy day → a diêm dúa preset, a plain day → a thanh nhã one, else either (BAL.toil.play.diemPre) */
  const want=style==="showy"||(style!=="plain"&&((h>>>4)%1000)/1000<BAL.toil.play.diemPre)?"diem":"";const L=TOIL_PRE.filter(x=>(x[2]==="diem")===(want==="diem"));const col=Object.assign({},L[(h>>>12)%L.length][4]);
  const R=toilNpcPlay(sk,h,col,want,style,toilNpcOcc(),v.rank);
@@ -182,8 +185,8 @@ function toilNpc(v){const N=BAL.toil.npc,h=wdHash(wdKey(v)+":"+toilWk()),r1=(h%1
 function toilHostKind(host){if(host==="emp")return toilEmpTaste();let k="normal";try{k=leHostKind(host)}catch(e){}
  if(k==="normal"&&host&&host!=="th"){const T=traitsOf(host);if(T.some(t=>t==="Xảo quyệt"||t==="Tham vọng"))k="jealous"}return k}
 function toilHostKey(host){return host==="th"?"th":host==="emp"?"emp":host&&host.id!=null?"v"+host.id:"x"}
-function toilSeen(host){const s=S.toilSeen;return !!(s&&s.wk===toilWk()&&s.h&&s.h[toilHostKey(host)])}
-function toilMark(host){if(!S.toilSeen||S.toilSeen.wk!==toilWk())S.toilSeen={wk:toilWk(),h:{}};S.toilSeen.h[toilHostKey(host)]=1}
+function toilSeen(host,p){p=p||S;const s=p===S?S.toilSeen:p.tlSeen;return !!(s&&s.wk===toilWk()&&s.h&&s.h[toilHostKey(host)])}
+function toilMark(host,p){p=p||S;const f=p===S?"toilSeen":"tlSeen";if(!p[f]||p[f].wk!==toilWk())p[f]={wk:toilWk(),h:{}};p[f].h[toilHostKey(host)]=1}
 /* CO-OP (diemtrang-coop-look, CO-OP FIRST OD 16/11 ~20:32Z): the friend (a rival entry with coop:true) is judged by the look SHE made
    today (her S.toilette, carried by jcoopworld LOOK at the week merge and live by her pos relay), never by the toilNpc roll. No sitting
    today = mặt mộc; her dress verdict is toilDress on her real clothes (wd), as on her own seat. Both seats therefore read the same look. */
@@ -234,18 +237,29 @@ if(typeof leAttire==="function"){const la0=leAttire;
  }catch(e){console.error("toil talkOpts",e)}return A}})();
 function toilLook(){const rec=toilToday(S);const mk=toilMk(rec);const dr=toilDress(S,toilFOf(null));return{mk,dv:dr.v,showy:dr.style==="showy",plain:dr.style==="plain"}}
 function toilGhenOf(v,L){const B=BAL.toil;let g=(L.showy?B.ghenShowy:0)+(L.mk==="tuyet"?B.ghenTuyet:0);if(!g)return 0;for(const t of traitsOf(v))if(B.ghenMul[t])g*=B.ghenMul[t];return g}
-function toilRival(v,doIt){if(!v||!toilOn(S)||toilSeen(v))return null;const L=toilLook(),B=BAL.toil;const T=traitsOf(v);const frugal=T.some(t=>t==="Ân cần"||t==="Khiêm nhường");
- const g=Math.round(toilGhenOf(v,L));let aff=0,txt="";
- if(frugal&&(L.plain||L.mk==="moc")){aff=B.praisePlain;txt=`nàng ta chuộng giản dị: quý ta +${aff}`}else if(frugal&&L.showy){aff=B.frownShowy;txt=`ta ăn vận phô trương: nàng ta quý ta ${aff}`}
- if((L.mk==="diem"||L.mk==="vung")&&!txt){const n=BAL.toil.teaseGhen;txt=`nàng ta che miệng cười ${L.mk==="diem"?`lớp phấn son ${toilMkW("diem")}`:`gương mặt điểm trang ${toilMkW("vung")}`} của ta: bớt ghen ${n}`;if(doIt){v.ghen=cl((v.ghen||0)-n,0,100);toilMark(v)}return{txt,aff:0,g:0}}
+/* ONE rule for a consort v who SEES a look L ({mk, showy, plain}): frugal praise / frown, mockery of an overdone or clumsy face, jealousy.
+   The player's toilRival and the NPCs' meetings (jagtoil, G11) both call it. → {k:"praise"|"frown"|"tease"|"ghen", aff, g, n} or null */
+function toilSeeRule(v,L){const B=BAL.toil;const T=traitsOf(v);const frugal=T.some(t=>t==="Ân cần"||t==="Khiêm nhường");let k="",aff=0;
+ if(frugal&&(L.plain||L.mk==="moc")){k="praise";aff=B.praisePlain}else if(frugal&&L.showy){k="frown";aff=B.frownShowy}
+ if((L.mk==="diem"||L.mk==="vung")&&!k)return{k:"tease",aff:0,g:0,n:B.teaseGhen};
+ const g=Math.round(toilGhenOf(v,L));if(!k&&!g)return null;return{k:k||"ghen",aff,g}}
+/* the look of anyone today in the shape toilSeeRule reads (her: toilLook; the friend / an NPC: their record of the day) */
+function toilLookP(p){if(!p||p===S)return toilLook();const rec=toilFriendRec(p)||toilNpc(p);return{mk:toilMk(rec),dv:rec.dv,showy:rec.style==="showy",plain:rec.style==="plain"}}
+function toilRival(v,doIt){if(!v||!toilOn(S)||toilSeen(v))return null;const L=toilLook();const e=toilSeeRule(v,L);if(!e)return null;
+ const g=e.g,aff=e.aff;let txt=e.k==="praise"?`nàng ta chuộng giản dị: quý ta +${aff}`:e.k==="frown"?`ta ăn vận phô trương: nàng ta quý ta ${aff}`:"";
+ if(e.k==="tease"){const n=e.n;txt=`nàng ta che miệng cười ${L.mk==="diem"?`lớp phấn son ${toilMkW("diem")}`:`gương mặt điểm trang ${toilMkW("vung")}`} của ta: bớt ghen ${n}`;if(doIt){v.ghen=cl((v.ghen||0)-n,0,100);toilMark(v)}return{txt,aff:0,g:0}}
  if(g)txt=[txt,`${L.showy?"ta ăn vận phô trương":`dung nhan ta ${toilMkW("tuyet")}`}: nàng ta ghen +${g}`].filter(Boolean).join(" · ");if(!txt)return null;
  if(doIt){if(aff)affAdd(v,S,aff);if(g)v.ghen=cl((v.ghen||0)+g,0,100);toilMark(v)}return{txt,aff,g}}
 function toilCrowd(doIt){const L=toilLook();if(!L.showy&&L.mk!=="tuyet")return{n:0};if(toilSeen("crowd"))return{n:0};let n=0;const R=liveRivals(false).filter(v=>!v.queen&&!v.out);
  for(const v of R){const g=Math.round(toilGhenOf(v,L)*BAL.toil.crowd);if(g){n=Math.max(n,g);if(doIt)v.ghen=cl((v.ghen||0)+g,0,100)}}if(doIt)toilMark("crowd");
  return{n,why:L.showy?"ăn vận phô trương":`dung nhan ${toilMkW("tuyet")}`}}
 /* NPCs: the same rule when they wait on Thái hậu (jaudit applies thiếu lễ; this adds the look of the day) */
-(function(){try{if(typeof SOC==="object"&&SOC.serveTH){const r0=SOC.serveTH.run;SOC.serveTH.run=function(v){const r=r0.apply(this,arguments);try{let st="ok";try{st=aaThieuLe(v)?"plain":"ok"}catch(e){}
-  const t=toilFx(v,"th",toilFOf("th"),st);if(t){v.th=cl((v.th||0)+t.aff,-100,100);if(t.danh)ap(v,{danh:t.danh})}}catch(e){}return r}}}catch(e){}})();
+/* ONE judgement for an NPC v before a host ("th" | "emp" | a consort, e.g. Hoàng hậu): toilFx, once per host per day (toilSeen/toilMark on v),
+   the regard rows through toilBack; a reprimand for a Diêm dúa / Vụng về face goes into the news (two-way: she may hear of it). → the toilFx result or null */
+function toilJudgeNpc(v,host){if(!v||v===S||!toilOn(v)||toilSeen(host,v))return null;let st="ok";try{st=aaThieuLe(v)?"plain":"ok"}catch(e){}
+ const t=toilFx(v,host,toilFOf(host),st);toilMark(host,v);if(!t)return null;toilBack(host,t.aff,v);if(t.danh)ap(v,{danh:t.danh});
+ try{if(t.aff<0&&(t.mk==="diem"||t.mk==="vung")&&typeof newsAdd==="function")newsAdd(v,"toil",`${toilWho(host)} quở trách dung nhan ${toilMkW(t.mk)} của ${v.name}`,false)}catch(e){}return t}
+(function(){try{if(typeof SOC==="object"&&SOC.serveTH){const r0=SOC.serveTH.run;SOC.serveTH.run=function(v){const r=r0.apply(this,arguments);try{toilJudgeNpc(v,"th")}catch(e){}return r}}}catch(e){}})();
 
 /* ---------- the morning choice: a card in Hành sự + a chip in the top bar ---------- */
 function toilCanStart(){return toilOn(S)&&(S.buoi||0)===0&&!toilToday(S)&&!Q.length}
@@ -453,7 +467,7 @@ function toilFinish(made){const st=TOIL.st;if(!st)return;try{if(KG82.run&&KG82.r
    Kit event-with-person layout (KIT 32.7: `who` → the person full-body on the left; kitEventDp when kit-fig2 lands). Event choices show the
    cost only (28.6 hideOut). At most BAL.toil.popMax dialogs per occasion (one act), the strongest first; the rest join the last one as a line.
    Event keys (banner art to come, ab06): TOIL_EV. */
-Object.assign(BAL.toil,{popMax:2,replyDanh:1,replyWin:50,sorryBack:.5});
+Object.assign(BAL.toil,{popMax:2,replyDanh:1,replyWin:50,sorryBack:.5,replySuc:2,replyGhen:2,replyLose:1,teaseN:1});/* teaseN: the weight of a mockery shown on the dialog (r.n) — her and the NPCs (jagtoil) */
 const TOIL_EV={"th-scold":"Thái hậu chê dung nhan","th-praise":"Thái hậu khen","hh-scold":"Hoàng hậu chê dung nhan","hh-praise":"Hoàng hậu khen",
  "emp-like":"Hoàng thượng ưng ý","emp-dislike":"Hoàng thượng không vừa mắt","rival-jealous":"Phi tần ghen","rival-tease":"Phi tần cười cợt",
  "rival-praise":"Phi tần khen giản dị","crowd-jealous":"Cả hậu cung để ý"};
@@ -594,7 +608,14 @@ function toilLit(r){const g=toilGest(r);return (g?g+" — ":"")+r.line+"."}
 /* the gesture is drawn once: the event panel shows it (long form) and the Sổ ghi line of the reaction gets it too (jvoice kLitLog, long form);
    the result card keeps the short facts (kShort) */
 function toilReact(r){try{toilGest(r);if(r.s0!=null)kLitLog(r.s0,r.g)}catch(e){}TOIL_POP.push(r);clearTimeout(TOIL_POPT);TOIL_POPT=setTimeout(toilFlush,0)}
-function toilBack(host,n){if(!n)return;if(host==="th")apply({th:n});else if(host==="emp")apply({sung:n>0?1:-1});else if(host&&host!==S)affAdd(host,S,n)}
+/* a host's regard moves for person p (default her): Thái hậu → p.th, Hoàng thượng → Sủng ±1, a consort → thiện cảm (NPCs: the same rows on their own record) */
+function toilBack(host,n,p){if(!n)return;if(p&&p!==S){if(host==="th")p.th=cl((p.th||0)+n,-100,100);else if(host==="emp")ap(p,{sung:n>0?1:-1});else if(host&&host!==p)affAdd(host,p,n);return}
+ if(host==="th")apply({th:n});else if(host==="emp")apply({sung:n>0?1:-1});else if(host&&host!==S)affAdd(host,S,n)}
+/* the answer to a reaction to one's look (Xin lỗi / Cười trừ / Đáp lại): ONE function for her (the dialog below) and for an NPC (jagtoil, G11).
+   r = {host, n, v (the consort who reacted)}; → true / false for a reply that went well / badly, null otherwise. Her Sức for "Đáp lại" is the option's fx. */
+function toilAns(p,r,c){const B=BAL.toil;if(c==="sorry"){toilBack(r.host,Math.ceil(Math.abs(r.n)*B.sorryBack),p);return null}if(c!=="reply")return null;
+ const me=!p||p===S;if(!me)ap(p,{suc:-B.replySuc});if(roll(B.replyWin)){if(me)apply({danh:B.replyDanh});else ap(p,{danh:B.replyDanh});return true}
+ toilBack(r.host,-B.replyLose,p);if(r.v){if(me)r.v.ghen=cl((r.v.ghen||0)+B.replyGhen,0,100);else affAdd(r.v,p,-B.replyGhen)}return false}
 function toilFlush(){if(!TOIL_POP.length||!S||S.dead)return;const L=TOIL_POP.splice(0).sort((a,b)=>Math.abs(b.n)-Math.abs(a.n));const top=L.slice(0,BAL.toil.popMax),rest=L.slice(BAL.toil.popMax);
  top.forEach((r,i)=>{const bad=r.n<0;const who=toilWho(r.host==null?null:r.host)||"";const more=i===top.length-1&&rest.length?`<p class="past">Còn: ${rest.map(x=>`${x.name||toilWho(x.host)} — ${x.line}`).join(" · ")}.</p>`:"";
   const h=`<p>${toilSay(r.k,Object.assign({host:r.host},r.ctx))}</p><p class="past">${toilLit(r)}</p>${more}`;
@@ -602,9 +623,9 @@ function toilFlush(){if(!TOIL_POP.length||!S||S.dead)return;const L=TOIL_POP.spl
   /* cost mode (KIT 28.6 / §53 kitHint): the options' fx are empty (the change happens in go), so each says its own true hint */
   const nm=r.name||who,boss=r.host==="th"||r.host==="emp"||(r.host&&r.host.queen),them=lv=>lv?nm:boss?"bề trên":"nàng ta";
   const opts=bad?[
-    {n:"Xin lỗi",fx:{},hideOut:true,hint:lv=>`${them(lv)} nguôi giận phần nào`,risk:"an toàn",go:()=>{toilBack(r.host,back);log(`Ta cúi đầu nhận lỗi; ${r.name||who} nguôi giận phần nào.`)}},
+    {n:"Xin lỗi",fx:{},hideOut:true,hint:lv=>`${them(lv)} nguôi giận phần nào`,risk:"an toàn",go:()=>{toilAns(S,r,"sorry");log(`Ta cúi đầu nhận lỗi; ${r.name||who} nguôi giận phần nào.`)}},
     {n:"Cười trừ",fx:{},hideOut:true,hint:"cho qua, không đổi gì",risk:"an toàn",go:()=>{log("Ta cười trừ cho qua.")}},
-    {n:"Đáp lại",fx:{suc:-2},hideOut:true,hint:lv=>lv?`đáp khéo thì thêm danh tiếng, thành bại khó đoán, hỏng thì ${nm} càng phật ý${r.v?", nàng ta càng ghen":""}`:"có thể thêm danh tiếng, cũng có thể mất lòng",risk:"có rủi ro",go:()=>{if(roll(BAL.toil.replyWin)){apply({danh:BAL.toil.replyDanh});log("Ta đáp lại khéo léo, người nghe gật gù.")}else{toilBack(r.host,-1);if(r.v)r.v.ghen=cl((r.v.ghen||0)+2,0,100);log("Ta đáp lại, không khí càng gượng.")}}}]
+    {n:"Đáp lại",fx:{suc:-BAL.toil.replySuc},hideOut:true,hint:lv=>lv?`đáp khéo thì thêm danh tiếng, thành bại khó đoán, hỏng thì ${nm} càng phật ý${r.v?", nàng ta càng ghen":""}`:"có thể thêm danh tiếng, cũng có thể mất lòng",risk:"có rủi ro",go:()=>{if(toilAns(S,r,"reply"))log("Ta đáp lại khéo léo, người nghe gật gù.");else log("Ta đáp lại, không khí càng gượng.")}}]
    :[{n:r.host==="emp"||r.host==="th"||(r.host&&r.host.queen)?"Tạ ơn":"Cảm tạ",fx:{},hideOut:true,hint:"nhận lời khen, không đổi gì",risk:"an toàn",go:()=>{}}];
   Q.push({t:TOIL_EV[r.k]||"Dung nhan",who:r.who,h,opts,hideOut:true,toilEv:r.k,art:`img/ev-toil-${r.k}.webp`/* banner by ab06, 640×480 */})});
  try{render()}catch(e){}}
@@ -614,11 +635,11 @@ function toilFlush(){if(!TOIL_POP.length||!S||S.dead)return;const L=TOIL_POP.spl
    if(k){const who=host==="th"?pTH():host==="emp"?pEmp():pv(host);const nm=host==="emp"?"Sủng":`${toilWho(host)} thiện cảm`;
     toilReact({k,who,host,n,s0,name:toilWho(host),line:`${t.why.map(w=>w[0]).join(", ")}: ${host==="emp"?(n>0?"Sủng +1":"Sủng -1"):`${nm} ${n>0?"+":""}${n}`}${f.danh?`, Danh ${f.danh}`:""}`,ctx:{mk:t.mk,dress:t.dress}})}}}catch(e){console.error(e)}return r}})();
 (function(){const r0=toilRival;toilRival=function(v,doIt){const s0=S&&S.logSeq||0;const e=r0.apply(this,arguments);try{if(doIt&&e){const L=toilLook();const k=(L.mk==="diem"||L.mk==="vung")&&!e.aff&&!e.g?"rival-tease":e.g?"rival-jealous":e.aff>0?"rival-praise":"rival-jealous";
-  toilReact({k,who:pv(v),host:v,v,s0,n:e.g?-e.g:(e.aff||-1),name:v.name,line:e.txt,ctx:{mk:L.mk,dress:L.dv}})}}catch(x){}return e}})();
+  toilReact({k,who:pv(v),host:v,v,s0,n:e.g?-e.g:(e.aff||-BAL.toil.teaseN),name:v.name,line:e.txt,ctx:{mk:L.mk,dress:L.dv}})}}catch(x){}return e}})();
 (function(){const c0=toilCrowd;toilCrowd=function(doIt){const s0=S&&S.logSeq||0;const R0=doIt?liveRivals(false).filter(v=>!v.queen&&!v.out).map(v=>[v,v.ghen||0]):[];const e=c0.apply(this,arguments);try{if(doIt&&e&&e.n){
   const top=R0.map(([v,g])=>[v,(v.ghen||0)-g]).sort((a,b)=>b[1]-a[1])[0];const L=toilLook();if(top)toilReact({k:"crowd-jealous",who:pv(top[0]),host:top[0],v:top[0],s0,n:-e.n,name:top[0].name,line:`phi tần thấy ta ${e.why}: ghen +${e.n}`,ctx:{mk:L.mk,dress:L.dv}})}}catch(x){}return e}})();
 
-window.toilOpen=toilOpen;window.toilDress=toilDress;window.toilFx=toilFx;window.toilNpc=toilNpc;window.toilOcc=toilOcc;
+window.toilOpen=toilOpen;window.toilSeeRule=toilSeeRule;window.toilAns=toilAns;window.toilJudgeNpc=toilJudgeNpc;window.toilDress=toilDress;window.toilFx=toilFx;window.toilNpc=toilNpc;window.toilOcc=toilOcc;
 
 /* ---------- the look on her face, everywhere her portrait / figure is drawn (owner 15/11, coordinator 10:xxZ) ----------
    ONE layer in the kit's face-effects slot (jk2b kitFxLayers: tall frame, small avatar, stage figures — same box as the picture), so it lines

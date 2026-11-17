@@ -120,8 +120,10 @@ const AS_DO={
   if(ok&&(m.schemes||0)>(m.schLast||0)&&(s.af[x.sid]||0)>=20){const o2=ownerOf(x);if(o2&&o2!==m&&evA(o2,m,1)&&o2===S)return `${x.name} nghe bạn là ${s.name} kể chuyện cung ${NM(m)}: chứng cứ +1. `}return""},
  gift(s,m,o){const x=o.t;s.af=s.af||{};s.af[x.sid]=cl((s.af[x.sid]||0)+SRVA.gift.af/2,-100,100);x.af=x.af||{};x.af[s.sid]=cl((x.af[s.sid]||0)+SRVA.gift.af,-100,100);return""},
  ask(s,m,o){const L=liveRivals(true).filter(x=>x!==m);if(L.length){s.intel=(s.intel||[]).concat([L[R(L.length)].id]).slice(-3)}return""},
- frame(s,m,o,ok){const x=o.t;s.af=s.af||{};x.af=x.af||{};if(ok){x.loyal=cl((x.loyal||0)+SRVA.frame.loy,0,100);x.trouble=wk();x.af[s.sid]=cl((x.af[s.sid]||0)+SRVA.frame.af,-100,100);
-   let r=m===S?`${s.name} tố ${x.name} lười nhác; ngươi đã phạt hắn. `:"";if(roll(SRVA.frame.out)&&m.staff.includes(x)&&m!==S){asOut(x,"nvp")}return r}
+ frame(s,m,o,ok){const x=o.t;s.af=s.af||{};x.af=x.af||{};if(ok){x.af[s.sid]=cl((x.af[s.sid]||0)+SRVA.frame.af,-100,100);
+   /* AG-ALL-2 G10: the framed colleague answers with the maid player's own "Bị vu oan" options (j42 cnvFrameOpts) by her needs (jagstf2) */
+   const R=typeof stf2Framed==="function"?stf2Framed(x,s,m):null;if(R&&!R.stands)return m===S&&R.r?R.r+" ":"";if(!R)x.loyal=cl((x.loyal||0)+SRVA.frame.loy,0,100);x.trouble=wk();
+   let r=m===S?`${s.name} tố ${x.name} lười nhác; ngươi đã phạt hắn.${R&&R.r?" "+R.r:""} `:"";if(roll(SRVA.frame.out)&&m.staff.includes(x)&&m!==S){asOut(x,"nvp")}return r}
   x.af[s.sid]=cl((x.af[s.sid]||0)+SRVA.frame.afL,-100,100);return""},
  learn(s,m,o,ok){return""},
  hail(s,m,o){s.mt[o.man.id]=(s.mt[o.man.id]||0)+SRVA.hail.af/2;return""},

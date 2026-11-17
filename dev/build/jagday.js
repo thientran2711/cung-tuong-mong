@@ -226,7 +226,7 @@ function agMore(d,id,prev,max){const A=BAL.ag.kh2;const R=agRec();if(!R||!R.P[id
  const d0=agDecideDay;agDecideDay=function(v){const r=d0.apply(this,arguments);try{if(r===1&&agKhOn()){const z=agZ(),key=agKey();const P=z.pend.filter(p=>p.vid===v.id&&p.key===key);const prev=P[P.length-1];
    if(prev)agMore(v,"v"+v.id,prev,BAL.ag.kh2.max)}}catch(e){agdErr("more",e)}return r};
  const t0=agTickX;agTickX=function(){const z=agZ(),key=agKey();const before=new Set((z.pend||[]).filter(p=>p.key===key&&p.vid==null).map(p=>p.id));const r=t0.apply(this,arguments);
-  try{if(agKhOn()&&agRec()){for(const p of z.pend.slice()){if(p.key!==key||p.vid!=null||before.has(p.id))continue;const d=agDoer(p);if(d)agMore(d,p.id,p,BAL.ag.kh2.maxX)}}}catch(e){agdErr("moreX",e)}return r};
+  try{if(agKhOn()&&agRec()){for(const p of z.pend.slice()){if(p.key!==key||p.vid!=null||before.has(p.id)||!/^s\d/.test(p.id))continue;/* staff (the player can be a maid: same khắc budget); the Emperor / Thái hậu keep their one planned deed per buổi (his evening visit, summons and tea have their own buổi rules) */const d=agDoer(p);if(d)agMore(d,p.id,p,BAL.ag.kh2.maxX)}}}catch(e){agdErr("moreX",e)}return r};
 })();
 /* G9 two-way: the consorts who stand where an NPC's deed happens, in its khắc, see it and react by the player's own choice set
    (agReact: Nghe lén / the same deed / step in / Mặc kệ) — weighed by their needs, hostility and traits (mindPick, never always-best).
@@ -254,3 +254,46 @@ function agSeeNpc(p,doer){if(!agKhOn()||!BAL.ag.kh2.see.on)return;const R=agRec(
  try{ACT95["ag_see:hear"]="đứng nghe ngóng";ACT95["ag_see:join"]="cùng làm theo";ACT95["ag_see:mediate"]="đứng ra can"}catch(e){}
 })();
 Object.assign(window,{agKhC,agMore,agSpan,agSeeNpc,agKhOn});
+/* ================= PER-KHẮC EVENT-DRIVEN RE-DECIDE (owner OD 17/11 ~15:25Z (2), her Ngự hoa viên scenario) =================
+   An NPC keeps her buổi plan, but RE-DECIDES inside the khắc when something reaches her: news that the player arrived somewhere (her maid /
+   eunuch who stands there tells her — by the servant's own choice, loyalty to her master), a happening starting where her servant stands,
+   or any news another module hands her (agHeard: part 2c's TIN BÁO knowledge calls it too). She weighs the deeds aimed at the one she heard
+   of (her group's own options, same costs / odds) against keeping her plan (BAL.ag.kh2.rd.keep × routine), mindPick (never always-best);
+   if she goes, her not-yet-started deeds that clash are dropped, she walks there (travel khắc, rows on the way = "go") and her deed takes
+   the khắc after — so the Dư đồ shadow and counts move khắc by khắc. Only the people the news reaches decide (no per-khắc loop over everyone). */
+function agRdOn(){try{return agKhOn()&&BAL.ag.kh2.rd&&BAL.ag.kh2.rd.on}catch(e){return false}}
+function agRdLog(R,id,kh,k,t,why,pl){try{const L=R.acts=R.acts||[];L.push({id,kh,k,t,why,ok:1,ag:1,pl});if(L.length>60)L.shift()}catch(e){}}
+/* she heard: info = {pl, kh, who (the person it is about), why, by (the servant who told her)} */
+function agHeard(v,info){if(!agRdOn()||!v||v===S||typeof v!=="object"||!v.alive||v.out||v.confined||!info)return 0;const R=agRec();const id="v"+v.id;if(!R||!R.P[id])return 0;
+ const B=BAL.ag.kh2.rd;const k0=info.kh!=null?info.kh:agKh();if(k0>=J95.KH-1)return 0;let N;try{N=agNeedsC(v)}catch(e){return 0}
+ let O=[];try{O=agOptsG(v,N,null).filter(o=>!info.who||o.t===info.who)}catch(e){agdErr("rdOpts",e)}
+ AGD.stat.rdN=(AGD.stat.rdN||0)+1;
+ const c=mindPick([["keep",B.keep*BAL.ag.routine]].concat(O.map(o=>[o,o.u])),v);
+ if(!c||c==="keep"){agRdLog(R,id,k0,"ag:rd:keep",info.who?ledgerId(info.who):null,info.why||"",info.pl);return 0}
+ let at=null;try{at=c.at(k0+1,v,c.t)}catch(e){}/* a deed aimed at the one she heard of goes where she heard that one is */if(info.who&&c.t===info.who&&info.pl)at=info.pl;if(!at)return 0;if(!j95acc(v,at)&&at!=="home"&&at!==palaceOf(v))return 0;
+ const from=(R.P[id][k0]&&R.P[id][k0][0])||palaceOf(v);let w=0;try{w=at===from?0:travel(from,at)}catch(e){}const kh=k0+Math.max(1,w),kc=Math.max(1,agKhC(c,v));if(kh+kc-1>=J95.KH)return 0;
+ for(let q=k0+1;q<kh+kc;q++){const e=R.P[id][q];if(!e||e[1]==="tryst"||e[1]==="meet"||agBound(id,q,R.key))return 0}
+ /* she changes her mind: the deeds of hers not yet started in that time are dropped */
+ const z=agZ();for(const p of z.pend.slice())if(p.id===id&&p.key===R.key&&p.kh>k0&&p.kh<kh+kc){p.drop=1;z.pend.splice(z.pend.indexOf(p),1);AG.stat.drop++}
+ for(let q=k0+1;q<kh;q++)R.P[id][q]=[at,"go",null,info.why||""];/* on her way */
+ c.need=c.need||"rd";agPlan(v,c,N,kh,at);AGD.stat.rd=(AGD.stat.rd||0)+1;
+ agRdLog(R,id,k0,"ag:rd:"+c.k,c.t?ledgerId(c.t):null,info.why||"",at);
+ if(!AG.syQ){AG.syQ=1;setTimeout(agSyncNow,0)}/* the shadows of the khắc to come follow at once */
+ return 1}
+/* a servant who stands at pl in khắc kh tells her master (not the player — her own servants are part 2c's TIN BÁO) by her own choice */
+function agTell(R,pl,kh,why,who,interest){const B=BAL.ag.kh2.rd;let n=0;
+ for(const id in R.P){if(!/^s\d+$/.test(id))continue;const e=R.P[id][kh];if(!e||e[0]!==pl)continue;const s=servById(+id.slice(1));if(!s||s.out)continue;const m=ownerOf(s);
+  if(!m||m===S||m===who||!m.alive||m.out)continue;const it=interest?interest(m):1;if(!(it>0))continue;
+  const c=mindPick([["tell",B.tell*cl((s.loyal||0)/100,0,1)*it],["quiet",B.quiet]],s);if(c!=="tell")continue;
+  agRdLog(R,id,kh,"ag:tell",ledgerId(m),why,pl);n++;AGD.stat.tell=(AGD.stat.tell||0)+1;agHeard(m,{pl,kh,who,why,by:s})}
+ return n}
+/* the triggers: her ARRIVAL at a place (her place changed since the last resync), a happening STARTING at its khắc */
+function agRdTick(){if(!agRdOn()||AG.inRd)return;const R=agRec();if(!R)return;AG.inRd=1;try{const kh=agKh();let me=null;try{me=R.P.me?R.P.me[kh][0]:j95mePlace()}catch(e){}
+  const k=R.key+":"+kh+":"+me,L=AG.rdMe;if(L!==k){const moved=!L||L.split(":")[0]!==R.key||L.split(":").pop()!==me;AG.rdMe=k;
+   if(moved&&me&&me!=="home")agTell(R,me,kh,`nghe tin ngươi đến ${agPlaceTxt(me)}`,S,m=>{let x=0;try{x=agNeedsC(m)}catch(e){}return x?1:0})}
+  for(const p of agZ().pend){if(p.key!==R.key||p.st||p.kh>kh||p.drop||p.gone)continue;p.st=1;const d=agTgt(p.id),t=agTgt(p.t);
+   agTell(R,p.pl,kh,`nghe tin ${d&&d.name?d.name:""} ${p.act} ở ${agPlaceTxt(p.pl)}`,t&&t!==S?t:d,m=>{const a=typeof d==="object"&&d&&d!==m?Math.abs(aff(m,d)):0,b=typeof t==="object"&&t&&t!==m?Math.abs(aff(m,t)):0;return (a+b)/100})}}
+ catch(e){agdErr("rd",e)}finally{AG.inRd=0}}
+(function(){const sy0=j95sync;j95sync=function(){const r=sy0.apply(this,arguments);try{agRdTick()}catch(e){agdErr("rdSync",e)}return r}})();
+try{ACT95["ag_go"]=ACT95["ag_go"]||"đang trên đường tới"}catch(e){}
+Object.assign(window,{agHeard,agTell,agRdTick});

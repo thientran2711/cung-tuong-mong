@@ -31,7 +31,7 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
  console.log('LANDED deeds: '+JSON.stringify(r.by));
  const tot=Object.values(r.byG.consort||{}).reduce((a,b)=>a+b,0);ok(tot>0,'consorts choose deeds from their act list',tot);
  /* 3 every chosen key = a player button of that group */
- const r3=await p.evaluate((byG)=>{const P=new Set(Object.keys(TW).concat(["effort"]));for(const k in AGCX)P.add("cx:"+k);["cx:study","cx:thHelp","cx:hhShield","cx:buy","cx:gift","cx:ally","cx:portrait","cx:humble"].forEach(k=>P.add(k));/* AG-ALL-2: a cx2 deed counts only if its player button label is really in the game's code */const SRC=[...document.scripts].map(x=>x.textContent).join("\n");for(const k in AGC2BTN)if(SRC.includes('n:"'+AGC2BTN[k])||SRC.includes('n:`'+AGC2BTN[k])||SRC.includes('>'+AGC2BTN[k]+'<'))P.add("cx2:"+k);
+ const r3=await p.evaluate((byG)=>{const P=new Set(Object.keys(TW).concat(["effort"]));for(const k in AGCX)P.add("cx:"+k);["cx:study","cx:thHelp","cx:hhShield","cx:buy","cx:gift","cx:ally","cx:portrait","cx:humble","cx:tqGift"].forEach(k=>P.add(k));/* AG-ALL-2: a cx2 deed counts only if its player button label is really in the game's code */const SRC=[...document.scripts].map(x=>x.textContent).join("\n");for(const k in AGC2BTN)if(SRC.includes('n:"'+AGC2BTN[k])||SRC.includes('n:`'+AGC2BTN[k])||SRC.includes('>'+AGC2BTN[k]+'<'))P.add("cx2:"+k);
   for(const k in AGHH)P.add("hh:"+k);const TH=new Set(["th:gift","th:admon","th:release"]);const EMP=new Set(["emp:summon","emp:visit","emp:tea"]);/* AG-ALL-2: his visit mirrors her Ngự giá lâm cung night (the same visGo), his tea her "Hoàng thượng ghé cung uống chén trà" card (empTeaCard) *//* the Emperor is never the player: his summons mirrors her Xin hầu cờ / đánh đàn (jgift kmEmpAct) *//* Thái hậu is never the player: her acts mirror the Empress's Ban thưởng / Khuyên / Ân xá */
   const bad=[];for(const g in byG)for(const k in byG[g]){if(g==="emp"?!EMP.has(k):g==="th"?!TH.has(k):!(P.has(k)||/^(c|harm|maid|srv):/.test(k)))bad.push(g+":"+k)}return bad},r.byG);
  ok(r3.length===0,'no NPC-only hidden act: every chosen deed is a button of the player of that group',r3);
@@ -41,9 +41,9 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
  ok(r4.on===0&&r4.off>0,'old monthly study dice off while the day plan runs; back with BAL.ag.day.on=0',r4);
  /* 5 */
  const r5=await p.evaluate(()=>{const q=queenP();const v=liveRivals(true).find(x=>x!==q&&!x.out);const g=BAL.tw.g.reward;
-  q.bac=500;const h0=v.hh||0,d0=v.danh;hhAct(q,v,"reward");const npc=[(v.hh||0)-h0,v.danh-d0];
-  S.bac=500;const h1=v.hh||0,d1=v.danh;hhAct(S,v,"reward");const me=[(v.hh||0)-h1,v.danh-d1];return{npc,me,want:[g[1],g[2]]}});
- ok(r5.me[0]===r5.want[0]&&r5.me[1]===r5.want[1]&&r5.npc[1]===r5.want[1]&&r5.npc[0]>=r5.want[0],'Empress: one function for her button and the NPC Empress (same numbers, BAL.tw)',r5);
+  q.bac=500;v.hh=0;const h0=v.hh||0,d0=v.danh;hhAct(q,v,"reward");const npc=[(v.hh||0)-h0,v.danh-d0];
+  /* the player AS the Empress (queenP() = S while S.rank ≥ 7): v.hh is then HER regard (j24 hhBind: "Hoàng hậu với X" = the Empress's own aff) */const rk0=S.rank;S.rank=7;S.bac=500;v.hh=0;const h1=v.hh||0,d1=v.danh;hhAct(S,v,"reward");const me=[(v.hh||0)-h1,v.danh-d1];S.rank=rk0;return{npc,me,want:[g[1],g[2]]}});
+ ok(r5.me[0]>=r5.want[0]&&r5.me[1]===r5.want[1]&&r5.npc[1]===r5.want[1]&&r5.npc[0]>=r5.want[0],'Empress: one function for her button and the NPC Empress (same numbers, BAL.tw)',r5);
  /* 5b the Empress's and Thái hậu's acts are offered when their gates hold */
  const r5b=await p.evaluate(()=>{const q=queenP();const v=liveRivals(true).find(x=>x!==q&&!x.out);v.hh=60;q.bac=500;const O=AGREG.hh.acts(q,agNeedsC(q),null).map(o=>o.k);
   const f=liveRivals(true).find(x=>!x.out&&x!==q)||v;f.th=80;f.thGiftWk=null;const N=agNeedsG("th");const T=AGREG.th.acts("th",N,null).map(o=>o.k+">"+(o.t===S?"me":o.t&&o.t.name));return{O,T,N}});

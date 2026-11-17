@@ -55,6 +55,25 @@ function mgLev(env,kind,name){const L=((BAL.mgTier.lev||{})[kind]||{})[name];if(
    jlant lamp, j82 go): a right answer found quickly is Tuyệt phẩm, a right answer found slowly is Tinh xảo. */
 function mgPace(env,kind,el,lim){const P=BAL.mgTier.pace,e=cl(env&&env.lv!=null?+env.lv:5,0,5)/5,at=(n)=>{const v=mgLev(env,kind,n);return v!=null?v:P[n][0]+(P[n][1]-P[n][0])*e};
  const f=cl(at("fast"),0,.99),k=cl(at("keep"),0,1),u=cl((+el||0)/Math.max(1,+lim||1),0,1);return u<=f?1:1-(1-k)*(u-f)/(1-f)}
+/* ===== AG-ALL-2b mg2 · NPC MINI-GAMES = ONE DRAW FROM HER OWN CURVE (owner OD 17/11 ~15:25Z (3): "lúc nào tôi có thì NPC cũng phải có …
+   đổ xí ngầu cho nó … lỡ như nó chơi khôn quá … coi lại như thế nào để cho nó công bằng với tôi"). ONE CORE for every tiered game an NPC takes part in:
+     t   = mgNpcTier(kind, p, o): mgTier with HIS/HER own rank and art level (o.occ, o.big, o.rank, o.lv as the player's call would pass them)
+           = the very board the player would get in that seat (same stake, same gap d = stake − level);
+     med = mgMedD(t.d): the median graded play of the skilled bot at that gap (BAL.ag.mg2.med, the measured Dễ / Vừa / Khó rows of
+           dev/PROGRESS_mg-balance.md + _mg-balance-2.md), linear between the points and beyond them;
+     raw = clamp(round(med + (u − .5)·BAL.ag.mg2.w), 0, 10), u = mean of 3 draws of o.rnd (default Math.random; seeded for odds / co-op).
+   So an NPC plays like a good player of her level on that board: never a perfect player, never a sure win (spread ±w/2 round the median).
+   mgSkipRaw(t) = the median at her own gap = "Để tài nghệ quyết định". Switch: mg2On() = agOn() && BAL.ag.mg2.on; off (co-op guest,
+   BAL.ag.on 0) = the old kg82NpcMean (BAL.mgTier.npc) paths, untouched. MGX.o = the occasion of the NPC rows being scored (mgWith; j71 contests). */
+const MGX={o:null,n:0};
+function mg2On(){try{return typeof agOn==="function"&&agOn()&&!!(BAL.ag&&BAL.ag.mg2&&BAL.ag.mg2.on)}catch(e){return false}}
+function mgWith(o,f){const k=MGX.o;MGX.o=o;try{return f()}finally{MGX.o=k}}
+function mgMedD(d){const P=BAL.ag.mg2.med;d=+d||0;let i=0;while(i<P.length-2&&d>P[i+1][0])i++;const [a,ma]=P[i],[b,mb]=P[i+1];return cl(ma+(mb-ma)*(d-a)/(b-a),0,10)}
+function mgNpcTier(kind,p,o){o=o||{};return mgTier(kind,{occ:o.occ,big:!!o.big,rank:o.rank!=null?o.rank:mgRankOf(p),lv:o.lv,p})}
+function mgNpcRaw(kind,p,o){o=Object.assign({},MGX.o||{},o||{});const r=o.rnd||Math.random,u=(r()+r()+r())/3;MGX.n++;
+ return cl(Math.round(mgMedD(o.d!=null?o.d:mgNpcTier(kind,p,o).d)+(u-.5)*BAL.ag.mg2.w),0,10)}/* o.d: a known gap (no person: the matching level 0) */
+function mgSkipRaw(t){return cl(Math.round(mgMedD(t&&t.d!=null?t.d:0)),0,10)}
+window.mg2On=mg2On;window.mgWith=mgWith;window.mgMedD=mgMedD;window.mgNpcTier=mgNpcTier;window.mgNpcRaw=mgNpcRaw;window.mgSkipRaw=mgSkipRaw;window.MGX=MGX;
 window.mgTier=mgTier;window.mgPace=mgPace;window.mgLev=mgLev;window.mgFull=mgFull;window.mgTol=mgTol;window.mgMore=mgMore;window.mgGrade=mgGrade;window.mgSet=mgSet;window.mgWord=mgWord;window.mgTierOf=mgTierOf;
 /* wiring (edited in place, 16/11): j82 startContest (occ "hoi" / o.occ, o.big), playArt (occ "hoc" / o.occ), kg82Lesson (lessons), kg82Word → mgWord,
    jexam exRun (occ "exam", rank = target), jts tsGame (occ "trieu" / o.occ), jkc Phúc tuyển (playArt occ "tuyen"). Skip / "để tài nghệ quyết định"
