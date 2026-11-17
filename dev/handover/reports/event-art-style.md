@@ -792,3 +792,28 @@ PRIORITY #1 CHECK: OD 0 new (rule = [OD:L545]/[OD:L638] + C-ROOT 17/11 line in a
 | ev-q72-hh-trungcuu | LIGHT | tC3kLUhmZJ | autumn Double Ninth terrace, maples, backs |
 Self-check: all 6 looked at at 1024: no visible face, no fan/hand cover. Note: gpt-2-6 allows max 1 `style` ref → use `image` refs (2 per call). Waiting for Foreman C OK. Nothing live.
 LIVE (Foreman C OK 17/11 06:16Z): img/ev-am-muu, ev-e68-stormnight, ev-e68-poisonedfish, ev-e68-letterhome, ev-e68-snowday uploaded in place (cdn_sync explicit paths, 1024x768 webp). ev-q72-hh-trungcuu redone (no text on banner, nurse strictly from behind): creation gOtZco9SXO, live. Rules from C for all batches: NO written characters/text in any picture; faces fully hidden (back/turned, no near-profile).
+
+## Batch 1 (20 keys, staged, NOT live): sheets img/_review/event-art-style2/b1/<key>.jpg (OLD|NEW), NEW <key>-NEW.webp
+| key | class | creation |
+|---|---|---|
+| ev-ch1 | LIGHT | JNfndC1Oq4 |
+| ev-ch2 | LIGHT | 6AqMmkIiJO |
+| ev-con-tre | LIGHT | O6CYXqCynm |
+| ev-cyrep | LIGHT | lJIRTEogv9 |
+| ev-e68-allyoffer | LIGHT | rgd9csAxtc |
+| ev-e68-autumnmoon | LIGHT | rgd9nCQxtc |
+| ev-e68-bordernews | DARK | 5jMO2aaKxe |
+| ev-e68-borrowdress | LIGHT | UPhADjTwny |
+| ev-e68-clanfather | LIGHT | JNfndUiOq4 |
+| ev-e68-doccheck | LIGHT | WDlmb0scXe |
+| ev-e68-doubtvisit | LIGHT | xSXNWgrjfW |
+| ev-e68-droughtprayer | LIGHT | MB7CrtfDCm |
+| ev-e68-embroidery | LIGHT | O6CYBG6ynm |
+| ev-e68-envoygift | LIGHT | jUB6c6zLD0 |
+| ev-e68-eunrequest | LIGHT | dtPFsbbXSL |
+| ev-e68-faminedonate | LIGHT | huZrOlFvqL |
+| ev-e68-fortunenun | LIGHT | cpghkpN0eP |
+| ev-e68-giftarrive | LIGHT | vQ2xyJ0a47 |
+| ev-e68-hhsummons | DARK | eIyQLgsdqL |
+| ev-e68-kindvisit | LIGHT | dtPFs77XSL |
+Redos inside the batch: allyoffer (maid cheek visible), fortunenun (priest profile). Self-check: all 20 looked at 1024px, no text, no face; each own place/season (summer lotus, wisteria, winter sickroom, drought, famine autumn, temple, etc).
