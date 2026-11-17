@@ -635,3 +635,4 @@
 | npc-agent AG2 Emperor agent + nights (opus; reports/npc-agent.md §5 AG2; after AG1 PASS 2756d2d2) | review/npc-agent-ag2 | C ROOT | (opening) | RUNNING | 17/11 05:40Z |
 | ONE TRAIT POOL 3 groups × 8 (24 traits, 2 pools by sex) + BALANCE LAW gain/cost table (opus; main s30 orders 05:46Z/06:12Z/06:21Z) | review/trait-pool | C ROOT | (opening) | RUNNING | 17/11 05:40Z |
 | ART A1 nine origin frames + A2 swaddled baby + A3 red-thread JOIN (sonnet art; reports/presentation-wiring.md ART REQUESTS) | CDN img/kit + reports/art-pres-a123.md | C ROOT | (opening) | RUNNING | 17/11 05:40Z |
+| night-final review r1 (opus BIG; main s30 04:50Z order) of 5535697b | review/night-final-r1 | D | session_01964izDUxnFjybggNj6Ukev | RUNNING | 17/11 05:36Z |
