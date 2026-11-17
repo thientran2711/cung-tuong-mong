@@ -20,10 +20,11 @@
 Object.assign(BAL,{hd:{
  size:.085,            /* sticker width / face width (owner's pick 0.085, Foreman C huadian-size) */
   up:.25,           /* anchor: above the brows' inner-end midpoint, × eye distance, perpendicular to the eye line */
- tolD:.45,tolA:30,     /* q of a part falls to 0 at this distance (× eye distance) / this tilt (degrees) */
+ tolD:.24,tolA:30,     /* q of a part falls to 0 at this distance (× eye distance) / this tilt (degrees). r1: .45 → .24 = careful-bot top grade
+                          70 % → ~25 % at Vừa (ease 2) while the painted hoa điền still marks the spot; RE-MEASURE when clean foreheads land */
  wD:.7,wA:.3,          /* share of distance vs tilt in q */
  skTol:.5,             /* her makeup skill (toilSkill .sk 0..1) widens both tolerances by up to +50 % */
- mkLv:3,               /* board ease of the makeup step (0..5 like env.lv) */
+ mkLv:2,               /* board ease of the makeup step (0..5 like env.lv); r1: 3 → 2 = BAL.mgTier.mid (Vừa at matching level) */
  a0:[12,24],           /* the hoa điền comes off the tray tilted this many degrees (hashed per day; she straightens it) */
  rot:3,                /* degrees per tilt tap */
  npc:{q0:.5,qSk:.3,spread:.4},npcCap:.95,
@@ -41,7 +42,10 @@ function hdLux(rec){return rec&&rec.k&&hdIsK(rec.k)?wdLux(rec.k):0}
 function hdPick(P){try{return wdPickAt(P,"hd",0)}catch(e){return null}}
 /* the sprite placed on the face: img/hd-<key>.webp (transparent, Foreman C ART REQUEST) — until it exists, the item's own picture */
 const HD_IMG={};function hdImg(k){let i=HD_IMG[k];if(i)return i;const w=WD_ITEMS[k];i=new Image();i.decoding="async";const U=s=>typeof IMG_U==="function"?IMG_U(s):s;
- i.onerror=()=>{if(!i.__fb&&w&&w.icon){i.__fb=1;i.src=U(w.icon)}};i.src=U(`img/hd-${k.replace(/_/g,"-")}.webp`);return HD_IMG[k]=i}
+ /* r1: 7 of the 8 have no painting yet (neither hd-<key> nor wd-hd-*): the board must never show an invisible sticker → last fallback = the one
+    painted hoa điền that exists (wd-hoadien-bac), until Foreman C ships the sprites */
+ const fb=[w&&w.icon,WD_ITEMS.hoadien_bac&&WD_ITEMS.hoadien_bac.icon].filter((s,j,a)=>s&&a.indexOf(s)===j);
+ i.onerror=()=>{const n=i.__fb|0;if(n<fb.length){i.__fb=n+1;i.src=U(fb[n])}};i.src=U(`img/hd-${k.replace(/_/g,"-")}.webp`);return HD_IMG[k]=i}
 
 /* ---------- the score: ONE formula for her, NPCs, the bot and Thử tay ---------- */
 function hdQ(d,a,sk,lvF){const B=BAL.hd;const tf=(1+B.skTol*Math.max(0,Math.min(1,sk||0)))*(lvF||1);
