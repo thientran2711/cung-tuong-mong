@@ -113,7 +113,7 @@ function kitItemLists(k,o){o=o||{};const it=IT[k];if(!it)return null;const a=typ
  if(it.w)D.push(...eff(it.w));
  if(it.use){const u=Object.entries(it.use).filter(([x,v])=>v).map(([x,v])=>`${N[x]||x} ${v>0?"+":""}${v}`);if(u.length)D.push((it.kd==="Thư từ"?"đọc: ":"dùng: ")+u.join(", "))}
  if(it.ant)D.push("an thai");if(it.fert)D.push(`${it.fert} tháng dễ thụ thai`);if(it.anti)D.push("cứu một lần trúng độc");if(it.evi)D.push(`chứng cứ +${it.evi}`);
- if(k==="ngocboi")D.push("Sủng không dưới 15");/* the Sủng floor is ngocboi's own rule (j8), not every kỷ vật / ngự tứ (title-sys2 family fix) */if(it.gv)D.push("đem tặng: hợp ý");if(k==="botngua")D.push("phi tần trúng: Danh -5");if(it.mat)D.push("trộn vào túi thơm, hương trầm");
+ if(k==="ngocboi")D.push(`Sủng không dưới ${BAL.ngocboiSung}`);/* the Sủng floor is ngocboi's own rule (j8), not every kỷ vật / ngự tứ (title-sys2 family fix) */if(it.gv)D.push("đem tặng: hợp ý");if(k==="botngua")D.push("phi tần trúng: Danh -5");if(it.mat)D.push("trộn vào túi thơm, hương trầm");
  if(over)M.push("vượt phẩm: dễ bị tố");if(it.il)M.push("bị khám ra là có tội");if(it.keep)M.push("mất là đại họa");
  if(o.ownTaint&&typeof TAINT==="object"&&TAINT[o.ownTaint])M.push(`đã ${TAINT[o.ownTaint].n}: ${TAINT[o.ownTaint].hurt}`);
  const lux=it.sl||it.dr?luxVal(k):0;if(o.months!=null)G.push(`còn ${o.months} tháng`);else if(it.dr)G.push("áo mặc 3 tháng");
@@ -255,7 +255,7 @@ document.addEventListener("keydown",e=>{if((e.key==="Enter"||e.key===" ")&&e.tar
    Túi thơm = tuithom (worn at the belt: Sắc +1 instead of being used up; a tainted sachet keeps hurting through j8 taintHit as before).
    Hoa tai / Khăn che mặt / Giày hoa: no item painting exists → not added (owner to approve new art first). Old saves: worn hair/wrist keep their slots;
    a sachet or pendant becomes wearable, nothing is auto-worn. wearBonus counts every stat key (it only knew Sắc/Danh). ---------- */
-try{if(IT.ngocboi){IT.ngocboi.sl="waist";IT.ngocboi.w={danh:1};IT.ngocboi.d="Đeo eo: Danh +1 · còn giữ: Sủng không dưới 15 · mất là đại họa"}
+try{if(IT.ngocboi){IT.ngocboi.sl="waist";IT.ngocboi.w={danh:1};IT.ngocboi.d=`Đeo eo: Danh ${balSg(IT.ngocboi.w.danh)} · còn giữ: Sủng không dưới ${BAL.ngocboiSung} · mất là đại họa`}
  if(IT.tuithom){IT.tuithom.sl="scent";IT.tuithom.w={sac:1};delete IT.tuithom.use;IT.tuithom.d="Đeo bên mình: Sắc +1, thơm dịu"}}catch(e){}
 /* ---------- per-rank pieces of the promotion set (D45 small-art, review/small-art-wire): same slots as above, one painting per rank.
    Đeo eo ngocboi_r0..r7 (the plain Ngọc bội of a rank, NOT the ngự ban keepsake `ngocboi`), Đeo tay vongngoc_r1..r4 (r0 = vongngoc, r5..r7 = vongvang),

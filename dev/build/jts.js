@@ -210,13 +210,13 @@ let tsBirthOn=0;
  try{const born=(p.kids||[]).slice(n0);if(born.length&&(p===S?!S.dead:p.alive))r=(r||"")+tsBirthReward(p,born)}catch(e){console.error("tsBirth",e)}return r}})();
 function tsBirthReward(p,born){const me=p===S;const son=born.some(k=>k.sex==="m");const first=(p.kids||[]).length===born.length;const L=[];
  /* Hoàng thượng: always for a prince; for a princess when she is in favour (Sủng ≥ 30) or it is her first child */
- const emp=son||(p.sung||0)>=30||first;if(emp){const q0=Q.length,n0=(p.inv||[]).length;bestow(p,son?"son":"dau");for(let i=Q.length-1;i>=q0;i--)if(Q[i]&&Q[i].t==="Thánh thượng ban thưởng")Q.splice(i,1);
+ const emp=son||(p.sung||0)>=BAL.tsx.empSung||first;if(emp){const q0=Q.length,n0=(p.inv||[]).length;bestow(p,son?"son":"dau");for(let i=Q.length-1;i>=q0;i--)if(Q[i]&&Q[i].t==="Thánh thượng ban thưởng")Q.splice(i,1);
   const it=(p.inv||[]).length>n0?IT[p.inv[p.inv.length-1].k]:null;L.push(["Hoàng thượng",`${son?"mừng hoàng tử":"mừng công chúa"}: ${it?it.n:"một món ngự ban"}, Bạc +${son?30:15}`,"g"])}
  /* Thái hậu: when she favours the mother (Thái hậu ≥ 20) */
  const thOk=!S.thDead&&((me?S.th:p.th)||0)>=20;if(thOk){const k=pick(["nhansam","yensao","demgam"]);p.inv.push({k,from:"th"});ap(p,{bac:20});L.push(["Thái hậu",`${itm(k).n}, Bạc +20`,"g"])}
  if(first){ap(p,{danh:3});L.push(["Lần đầu làm mẹ","Danh +3","g"])}
  if(!me){if(L.length)return `${p.name} được ân thưởng sau sinh. `;return""}
- if(!emp&&!thOk)L.push(["Ghi chú","Hoàng thượng chưa ban gì: Sủng của ngươi dưới 30 và đây không phải con đầu","n"]);
+ if(!emp&&!thOk)L.push(["Ghi chú",`Hoàng thượng chưa ban gì: Sủng của ngươi dưới ${BAL.tsx.empSung} và đây không phải con đầu`,"n"]);
  Q.push({t:"Ân thưởng sau sinh",art:"img/ev-sinh-no.webp",h:`<p>Tin ngươi mẹ tròn con vuông truyền khắp lục cung.</p>${tsRows(L)}`,btn:"Tạ ơn",tsk:"birth"});return""}
 
 /* =============== Ý 3 · HOÀNG THƯỢNG TRIỆU RIÊNG: đàn theo nhịp, chơi cờ, du hồ (một luật cho mọi phi tần) =============== */
@@ -255,7 +255,7 @@ function tsDenFest(){try{const f=festToday();return f&&TS_DEN.includes(f.k)?f:nu
 function tsDenCard(){const f=tsDenFest();if(!f||!tsOn()||S.out)return null;const s=tsS();const key=`${S.year}-${f.k}`;
  return{n:"Thả đèn hoa đăng",t:`Đêm ${f.name}, cung nhân thả đèn trên hồ Thái Dịch. Viết điều cầu vào đèn rồi thả trôi.`,c:{bac:-10},o:100,w:{},k:2,b:tsLast(),dom:"Giao thiệp",done:s.den===key?1:0,x:"chọn điều cầu ở bước sau",go:()=>{s.den=key;tsDenWish(f)}}}
 (function(){const d0=deal;deal=function(){const r=d0.apply(this,arguments);try{if(Array.isArray(deck)&&tsOn()){const c=tsDenCard();if(c)deck.unshift(c)}}catch(e){}return r}})();
-function tsDenSeen(){const E=S.emp;return (E.mood||0)<=1&&(S.sung||0)>=20}
+function tsDenSeen(){const E=S.emp;return (E.mood||0)<=1&&(S.sung||0)>=BAL.tsx.denSung}
 function tsDenWish(f){const s=tsS();const pdLeft=Math.max(0,6-(s.denPD||0));const hos=liveRivals(true).filter(v=>bandOf(danger(v,S))>=1&&!(S.dKnown&&S.dKnown[v.id])&&!knows(v));
  const odds=45+(S.tai||0)/4+(S.arts&&S.arts.hoa||0)*4;const seen=tsDenSeen();
  const play=(kind,after)=>{const b=tsPre();tsGame({kind:"den",art:"Hoa đăng",title:`Thả đèn đêm ${f.name}`,odds,intro:[["Điều cầu",kind,"t"],["Ghi chú","đèn trôi xa và sáng thì người bên hồ trông thấy","n"]],onDone:res=>{const far=res.raw>=6;after(far);tsRes("Thả đèn hoa đăng",b,true);render()}})};
@@ -264,7 +264,7 @@ function tsDenWish(f){const s=tsS();const pdLeft=Math.max(0,6-(s.denPD||0));cons
    go:()=>play("tin tức",far=>{if(hos.length&&(far||roll(odds))){const v=hos.sort((a,b)=>danger(b,S)-danger(a,S))[0];kn();S.dKnown=S.dKnown||{};S.dKnown[v.id]=wk()+1;noteAdd(v.id,`nghe được bên hồ đêm ${f.name}: nàng có ý hại ngươi (mức ${BANDS[bandOf(danger(v,S))][1]})`);log(`Đêm ${f.name}, người hầu nghe được bên hồ: ${v.name} có ý hại ngươi (mức ${BANDS[bandOf(danger(v,S))][1]}).`)}
     else if(!hos.length&&s.thuY!==S.year){s.thuY=S.year;S.inv.push({k:"thunha",from:"home"});log("Người nhà gửi thư vào cung nhân đêm hoa đăng. Được Thư nhà.")}else log("Đèn trôi chưa xa, chưa nghe được tin gì.")})}),
   tsOpt({n:"Cầu bình an",duoc:pdLeft?[`Phúc duyên +2 (kiếp này còn được ${pdLeft})`,"Đức +1"]:["Đức +1"],note:"Phúc duyên từ đèn có giới hạn: 6 mỗi kiếp",later:1,go:()=>play("bình an",far=>{apply({duc:1});if(pdLeft&&typeof pdAdd==="function"){s.denPD=(s.denPD||0)+2;pdAdd(2,`thả đèn cầu bình an đêm ${f.name}`)}else log("Ngươi thả đèn cầu bình an.")})}),
-  tsOpt({n:"Cầu thánh ân",odds:seen?Math.min(95,odds):null,duoc:seen?["Hoàng thượng dạo bên hồ, trông thấy đèn: Sủng +3, Ân tình +2"]:["Đức +1"],kem:seen?[]:["đêm nay Hoàng thượng không ra hồ (ngài đang phiền, hoặc Sủng của ngươi dưới 20)"],later:1,
+  tsOpt({n:"Cầu thánh ân",odds:seen?Math.min(95,odds):null,duoc:seen?["Hoàng thượng dạo bên hồ, trông thấy đèn: Sủng +3, Ân tình +2"]:["Đức +1"],kem:seen?[]:[`đêm nay Hoàng thượng không ra hồ (ngài đang phiền, hoặc Sủng của ngươi dưới ${BAL.tsx.denSung})`],later:1,
    go:()=>play("thánh ân",far=>{if(seen&&(far||roll(odds))){apply({sung:3});S.an=cl((S.an||0)+2,0,100);log(`Đêm ${f.name}, Hoàng thượng dạo bên hồ, trông thấy đèn của ngươi trôi xa, dừng lại hỏi han.`)}else{apply({duc:1});log("Ngươi thả đèn, lặng lẽ cầu thánh ân.")}})}),
   tsOpt({n:"Thôi, không thả nữa",duoc:["không mất thêm gì"]})]})}
 /* NPCs float lanterns too, by the same rule (seen by the Emperor when he walks there and they are in favour) */

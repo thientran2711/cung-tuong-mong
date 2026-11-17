@@ -326,6 +326,23 @@ Object.assign(BAL,{tinhLv:{known:10,warm:30,prince:40,close:50,ally:60,love:70},
    progress / tier 1 / tier 2 (j85) · wkQ = handmade work quality → tier (j85) · tho = lifespan words (jmort) · succEnd = succession
    ending (j99succ) · veil = veil craft quality tiers (jveil) · lost = lost-item grade by price (jlost) · kidHp = kin health words (jht) · exTier = exam tier by target rank (jexam) · luxRep = luxury reputation tick (jlux) ·
    rgTrust = reign faction trust words (jreign) · summon = summon gain steps (jts) · sgStep = minigame raw → odds step (jsgame). */
+/* review/one-core-jkc PART 2 (ONE CORE OD:L1267 + LUẬT SỬA CẢ NHÓM, dev/measure/one-core-text-rule.js): cuts whose number a help / gloss / tip text
+   ALSO typed (the tiểu thư fault family): the rule and the text now read the same key. */
+Object.assign(BAL,{
+ accNeedEv:[2,4],          /* chứng cứ needed to accuse (Tố giác): [anyone, Hoàng hậu (rank 7+)] — j8 accNeed + the act text */
+ coldEvNeed:2,             /* chứng cứ that clear her name from lãnh cung (j14 «Tìm chứng cứ minh oan») */
+ ngocboiSung:15,           /* the Ngọc bội ngự ban keeps its owner's Sủng from falling below this (j8; item text, jinv) */
+ sinhThanSung:50,          /* her birthday is bestowed only when Sủng is at least this (j20; ban thưởng list) */
+ m30:{tocaoEv:1,exposeEv:2,xinhhAff:40},     /* j30: chứng cứ for «Tố tội thật» / «Bóc chuyện tư tình»; Hoàng hậu thiện cảm for «Xin Hoàng hậu giáng» */
+ srvx:{tinOut:10,keepTin:60,secNeed:2,friendAf:30}, /* cung nữ road (j42): Chủ tin below tinOut = sent to Tân Giả khố; from keepTin the chủ keeps her past
+                           the age; secNeed = secrets of the chủ she must know to betray; friendAf = quý from which a colleague counts as a friend */
+ virx:{hanhCap:80,camSung:40},               /* j85: Hạnh bậc 3 monthly Đức +1 stops at hanhCap; Cầm bậc 5 cheers the Emperor when Sủng is at least camSung */
+ tsx:{empSung:30,denSung:20},                /* jts: at a birth the Emperor bestows when Sủng is at least empSung; he sees the lake lantern from denSung */
+ sucNeed:{self:25,wk:15,rcp:10,kid:5,yKid:15}, /* Sức an act needs (the lock, its «Sức dưới N» word and the act's own check read the same key): self = «Tự học»
+                           (j23 / j85 / jtabs / j83 deck card); wk = «Tự học, làm tác phẩm» (j83 / jtabs Tác phẩm tab); rcp = master / teacher lessons (jrcp);
+                           kid = teaching a child chữ / lễ nghi / nghệ (j53 / j54); yKid = Y thuật care of a sick child (jact) */
+ facJoinAff:30,             /* a consort with no faction joins hers when her thiện cảm with the player is at least this (j10 «lập phe») */
+});
 /* evWipe: the chứng cứ amount that clears every piece one person holds against another (evA(a,t,BAL.evWipe): a pardon, a death, a plot undone); review/one-core-dup3 */
 Object.assign(BAL,{evWipe:-99});
 Object.assign(BAL,{cut:{nightPrep:[1,2] /* night preparation q (j8 night1: Để mộc 1, Tắm 2, Tập 1+bậc) → why word sơ sài ≤[0] / chu đáo ≥[1] (jwhyn) */,rhythm:[8,13],facRel:20,tuanDays:[10,20],clanRel:25,form:[35,50,65],virCong:[2,3,5],wkQ:[25,45,65,85],
