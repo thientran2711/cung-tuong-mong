@@ -255,6 +255,10 @@ function k61Scrub(s,lead,prev,ann,plain){const rx=k61Table();if(!rx||!s)return s
  return s.replace(rx,(m,ti,nm,off,str)=>{const k=K61MAP[nm];if(!k)return m;const e=k61Ent(k);if(!e||k61Named(e))return m;
   if(ann&&k61Announce(ann))return m;
   const before=(ti?"":(prev||""))+str.slice(0,off);let d=k61Mask(e,before,plain);
+  /* idempotent (review/coop-main-faults): a mask that holds the name itself (a friend named "Hảo hữu" → "Hảo hữu của ta") is already
+     in place when the text around the name reads the mask; masking it again grew the line forever and hung the page (the two DOM observers, this one
+     and j84's, kept answering each other) */
+  {const dl=String(d||"").toLowerCase(),j=dl.indexOf(m.toLowerCase());if(j>=0&&off>=j&&str.slice(off-j,off-j+dl.length).toLowerCase()===dl)return m}
   const capit=/^(\s|<[^>]+>)*$/.test(str.slice(0,off))?lead:/[.!?:(“"]\s*$/.test(str.slice(0,off));return capit?k61Cap(d):d})}
 function k61PrevText(n){let x=n;for(let i=0;i<6&&x;i++){let p=x.previousSibling;while(p){const t=p.textContent;if(t&&t.trim())return t;p=p.previousSibling}x=x.parentNode;if(!x||/^(DIV|P|LI|BUTTON|H\d|FIGCAPTION|SECTION|TD)$/.test(x.nodeName))return""}return""}
 function k61Node(n){if(n.nodeType===3){const t=n.nodeValue;if(!t||t.length<4)return;const p=n.parentNode;if(!p||/^(SCRIPT|STYLE|TEXTAREA|INPUT)$/.test(p.nodeName))return;if(p.closest&&p.closest("[data-k61skip]"))return;/* co-op chat Thư từ (KIT §76): real players' names are shown as they are */
