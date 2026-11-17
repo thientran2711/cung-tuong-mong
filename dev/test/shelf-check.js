@@ -92,6 +92,7 @@ const sl=t=>new Promise(r=>setTimeout(r,t));
   /* 8 OLD SAVE: people without p.shelf (old save) run the week */
   for(const x of [S].concat(rivals))delete x.shelf;let ok8=true;try{shelfWeek();shelfView(S);shelfView(v)}catch(e){ok8=false;out.fail.push("old save week: "+e.message)}out.T.oldSave=ok8;
   /* 11 REVIEW r1/r2: imperial never priced, one grade (kit info = BAL gr), her own Ghé chơi (two-way), co-op guest runs only her room (no rumour / NPC charge / Thái hậu) */
+  {const B0=BAL.shelf.it,rk0=rkOf(S)|0,bad=new Set();for(let i=0;i<40;i++){restock();for(const k of S.shop)if(B0[k]&&!SHOP_ALL.includes(k)&&(B0[k].rk|0)>rk0)bad.add(k)}F(!bad.size,"shop offers décor above her rank: "+[...bad].join(","))}
   {const B=BAL.shelf.it;const ip=Object.keys(B).filter(k=>B[k].imp&&IT[k]&&IT[k].pr>0);F(!ip.length,"imperial piece has a price: "+ip.join(","));
    const gm=Object.keys(B).filter(k=>B[k].gr!=null&&kitItemInfo(k).grade!==Math.min(4,B[k].gr|0));F(!gm.length,"kit grade differs from BAL gr: "+gm.join(","));
    const vv=liveRivals(true).find(x=>x.alive&&!x.out&&!sameHouse(S,x));const to=vv?topicOpts(vv).map(a=>a.n):[];F(to.includes(TW.call.n),"her talk list lacks Ghé chơi");
