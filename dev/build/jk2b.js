@@ -1048,7 +1048,7 @@ function kitPcKey(pc){const L=pc&&pc.querySelector(":scope > .pcl"),key=L&&L.que
  const ch=[...L.querySelectorAll(".chips .chip")].find(c=>W.some(w=>T(c.textContent).replace(/ⓘ/g,"").trim()===w));
  if(ch){const w=document.createElement("div");w.className="kpk-st";w.appendChild(ch);key.prepend(w)}
  const lines=[];pc.querySelectorAll(":scope > .pcr .pcf .kr").forEach(r=>{const l=T((r.querySelector(".krl")||{}).textContent);const m=/^(?:Nàng |Ngài |Hắn )?(thích|ghét)$/i.exec(l);if(!m)return;
-  const v=r.querySelector(".krv .ef");if(v&&v.classList.contains("t"))lines.push([m[1][0].toUpperCase()+m[1].slice(1).toLowerCase(),T(v.textContent)]);r.remove()});
+  const v=r.querySelector(".krv .ef"),kv=r.querySelector(".krv");if(v&&v.classList.contains("t"))lines.push([m[1][0].toUpperCase()+m[1].slice(1).toLowerCase(),kv.innerHTML]);/* pcard-facts: keep every fact + its tap (kitFactTap), not the first item's plain text */r.remove()});
  /* an empty "Sở trọng" panel section loses its heading */
  pc.querySelectorAll(":scope > .pcr .pcf .kpsec").forEach(sec=>{if(sec.querySelector(".kpst")&&!sec.querySelector(".kr,.kpnote,.kchips,button"))sec.remove()});
  if(lines.length){const d=document.createElement("div");d.className="kpkl";d.innerHTML=lines.map(([a,b])=>`<div><span class="kpkl-l">${a}</span> ${b}</div>`).join("");key.appendChild(d)}}
