@@ -222,6 +222,7 @@ function lkSmuDraw(im,v,lv,why,cols,box,seed){const W=im.naturalWidth,H=im.natur
  /* skin shade: every colour takes the picture's own light so it sits IN the face */
  const Lum=i=>.299*D[i*4]+.587*D[i*4+1]+.114*D[i*4+2];let sl=0,sn=0;cheeks.forEach(c=>{const i=Math.round(c[1])*cw+Math.round(c[0]);if(i>=0&&i<N){sl+=Lum(i);sn++}});const Lref=Math.max(90,sn?sl/sn:190);
  const layers=[];
+ const sk=new Float32Array(N);for(let i=0;i<N;i++){const r=D[i*4],g=D[i*4+1],b=D[i*4+2];sk[i]=r>140&&r-g>=20&&g>=b&&r-b>=26&&.299*r+.587*g+.114*b>135?1:0}/* skin-coloured pixels */
  /* soft line: dense points [x,y,sigma,alpha] splatted as gaussians, max-combined (no overlap ladders) */
  const soft=(m,pts)=>{for(const[x,y,sg,al]of pts){const R=Math.ceil(sg*2.6),x0=Math.max(0,Math.floor(x-R)),x1=Math.min(cw-1,Math.ceil(x+R)),y0=Math.max(0,Math.floor(y-R)),y1=Math.min(ch-1,Math.ceil(y+R));
    for(let yy=y0;yy<=y1;yy++)for(let xx=x0;xx<=x1;xx++){const d2=(xx-x)*(xx-x)+(yy-y)*(yy-y),v=al*Math.exp(-d2/(2*sg*sg)),i=yy*cw+xx;if(v>m[i])m[i]=v}}return m};
@@ -232,7 +233,7 @@ function lkSmuDraw(im,v,lv,why,cols,box,seed){const W=im.naturalWidth,H=im.natur
   if(bl>0)for(let y=0;y<ch;y++)for(let x=0;x<cw;x++){const i=y*cw+x,n=vn(x,y,u*.2),t=cl3((n-.38)/.3,0,1);sm[i]=Math.max(sm[i],m[i]*bl*t*(.6+.4*vn(x+999,y,u*.5)))}
   const wa=fx(F.blush.wash);if(wa>0){/* a wide feathered halo from each cheek, centre pushed down and outward, heavily blurred: the blush bleeds into the skin, no edge */
    const wm=new Float32Array(N);cheeks.forEach(([cx,cy],ci)=>{const sd=ci?1:-1,wx=cx+sd*rad*.35,wy=cy+rad*.55,R=rad*1.9;add(wm,paint(g=>{const gr=g.createRadialGradient(wx,wy,0,wx,wy,R);gr.addColorStop(0,"rgba(0,0,0,1)");gr.addColorStop(.45,"rgba(0,0,0,.55)");gr.addColorStop(1,"rgba(0,0,0,0)");g.fillStyle=gr;g.fillRect(wx-R,wy-R,2*R,2*R)}))});
-   const wb=blur(blur(wm,u*.1),u*.05);for(let i=0;i<N;i++)sm[i]=Math.max(sm[i],wb[i]*wa/Math.max(.01,fx(F.blush.a)))}
+   const wb=blur(blur(wm,u*.1),u*.05),core=blur(blur(sk,u*.3),u*.12);/* the wash fades out well before the face contour (core = deep inside the skin) */for(let i=0;i<N;i++){const c=cl3((core[i]-.8)/.17,0,1);sm[i]=Math.max(sm[i],wb[i]*c*c*(3-2*c)*wa/Math.max(.01,fx(F.blush.a)))}}
   layers.push([blur(blur(sm,u*.03),u*.012),cMa,fx(F.blush.a)*1.55])}
  /* 2 eyeshadow run from the lower lid */
  {const m=new Float32Array(N);eyes.forEach(([e,ix])=>{const L=[P[ix+6],P[ix+7],P[ix+8],P[ix+9],P[ix]];for(let k=0;k<4;k++)soft(m,along(L[k],L[k+1],u*.03,(x,y)=>[x,y+u*.05,u*.05,1]))});
@@ -253,11 +254,10 @@ function lkSmuDraw(im,v,lv,why,cols,box,seed){const W=im.naturalWidth,H=im.natur
  const edge=new Float32Array(N);{const mx=cw*.08,my=ch*.1;for(let y=0;y<ch;y++){const ey=cl3(Math.min(y,ch-1-y)/my,0,1);for(let x=0;x<cw;x++){const ex=cl3(Math.min(x,cw-1-x)/mx,0,1);edge[y*cw+x]=ex*ex*(3-2*ex)*ey*ey*(3-2*ey)}}}
  /* the runs stay ON the skin: the picture's own skin-coloured pixels, blurred so eyes / lips / brows inside the face are bridged and the soft edge sits just inside the real face edge;
     hair, background, neck below the chin fall outside. Nothing leaks onto hair or background (every level, every figure). */
- const face=new Float32Array(N);{const fcx=(eA[0]+eB[0])/2,chin=lc[1]+.5*u,sk=new Float32Array(N);
-  for(let i=0;i<N;i++){const r=D[i*4],g=D[i*4+1],b=D[i*4+2];sk[i]=r>140&&r-g>=20&&g>=b&&r-b>=26&&.299*r+.587*g+.114*b>135?1:0}
-  const bl=blur(blur(sk,u*.12),u*.05);
+ const face=new Float32Array(N);{const fcx=(eA[0]+eB[0])/2,chin=lc[1]+.5*u;
+  const bl=blur(blur(sk,u*.16),u*.09);/* wide blur = a feathered mask edge (≈ 2 % of the face width and more), never a cut */
   for(let y=0;y<ch;y++){const fy=cl3((chin+.04*u-y)/(u*.16),0,1),fyy=fy*fy*(3-2*fy);
-   for(let x=0;x<cw;x++){const v=cl3((bl[y*cw+x]-.55)/.3,0,1),w=cl3((1.35*u-Math.abs(x-fcx))/(u*.1),0,1);face[y*cw+x]=v*v*(3-2*v)*fyy*w}}
+   for(let x=0;x<cw;x++){const v=cl3((bl[y*cw+x]-.5)/.45,0,1),w=cl3((1.7*u-Math.abs(x-fcx))/(u*.5),0,1);face[y*cw+x]=v*v*(3-2*v)*fyy*w}}
   /* the lips are not skin-coloured: a grown, softened lip zone is allowed too, so the smear around the mouth shows */
   const lz=blur(paint(g=>{g.fillStyle="#000";g.beginPath();P.slice(0,12).forEach((p,i)=>{const q=[lc[0]+(p[0]-lc[0])*1.7,lc[1]+(p[1]-lc[1])*2.1];i?g.lineTo(q[0],q[1]):g.moveTo(q[0],q[1])});g.closePath();g.fill()}),u*.06);
   for(let i=0;i<N;i++)face[i]=Math.max(face[i],Math.min(1,lz[i]*1.6))}
