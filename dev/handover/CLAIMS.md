@@ -683,3 +683,4 @@
 | 10-NIGHT LEDGER (opus; V3-B) on top of night-final-r2 52d5092d | review/night-ledger | D | session_01964izDibL8KfyVNtRh4GfU | RUNNING | 17/11 08:08Z |
 | npc-agent AG3 maids (opus; AG train §5 npc-agent.md) | review/npc-agent-ag3 | C ROOT-3 | session_011xDdVNfbt3vPg31Vfr7ihc | RUNNING | 17/11 08:10Z |
 | REVIEW show-why-r1 (opus BIG) | review/show-why-r1 | C ROOT-3 | session_011xDdVRVL5MdC5V5iSZRy5P | RUNNING | 17/11 08:13Z |
+| mg-snap r1 PASS 931255b1 (review/mg-snap-r1 = 2a00405f + main 9fdc1199, FF-ready) → FOR MAIN | review/mg-snap-r1 | B | session_01N1tNP3VpMVoikpTW1oDAch | PASS (archived) | 17/11 08:15Z |
