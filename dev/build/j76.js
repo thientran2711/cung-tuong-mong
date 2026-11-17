@@ -40,7 +40,7 @@ function j76need(c,a,win){if(!S||S.dead||!(c>0))return{t:`${c||0} khắc`,ok:tru
    dayFit(n): n khắc can be started now: they fit this buổi, or they spill into the next buổi (j76spills: the day still has them and
    nothing ties the act to this buổi). dayWhy(n): the reason in words when not ("hết khắc trong ngày (cần N, còn M)" …), same words as the
    kit Cần chip (j76need). Every khắc gate outside the deck (walk-ins, greetings, asks, servant walks, court acts) asks these, never used+n<=4. */
-function dayFit(n){return !!S&&!S.dead&&(used+n<=4||j76spills(n))}
+function dayFit(n){return !!S&&!S.dead&&(used+n<=BAL.time.khac||j76spills(n))}
 function dayWhy(n){if(dayFit(n))return"";const r=j76need(n);return r.ok?"":r.t}
 /* ===== ONE Sức FLOOR (folds the j80 hotfix in) =====
    Sức under 5 = kiệt sức: acts of 2+ khắc wait until she rests. A card that costs Sức needs more Sức than it costs.
