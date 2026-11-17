@@ -16,9 +16,9 @@
    State: S.gmeet {key, pend:[{vid,kh,pl,key}]} (lazy; old saves load without it). Perf: one pass over the consorts per buổi (window.__gmMs). */
 const GM={stat:{tick:0,stay:0,meet:0,her:0,npc:0,shown:0,drop:0,byPl:{},byOpt:{}},ms:[]};
 function grRank(p){const R=BAL.greet.rank;if(!p||!S)return 0;if(p===S.emp)return R.top;if(S.thO&&p===S.thO)return R.th;
- if(p===S){try{if(typeof isSrv==="function"&&isSrv())return R.srv+(S.srv.mama?5:(+S.srv.rk||0))}catch(e){}return S.out?R.out:R.cons+(rkOf(S)||0)}
+ if(p===S){try{if(typeof isSrv==="function"&&isSrv())return R.srv+(S.srv.mama?R.mama:(+S.srv.rk||0))}catch(e){}return S.out?R.out:R.cons+(rkOf(S)||0)}
  if((rivals||[]).includes(p))return p.out?R.out:R.cons+(rkOf(p)||0);
- let k="";try{k=k61Kind(p)}catch(e){}if(k==="man"||k==="off"||k==="phys")return R.man;if(k==="tq")return R.srv+5;if(k==="mama")return R.srv+4;if(k==="kid")return R.cons+3;
+ let k="";try{k=k61Kind(p)}catch(e){}if(k==="man"||k==="off"||k==="phys")return R.man;if(k==="tq")return R.srv+R.tq;if(k==="mama")return R.srv+R.mama;if(k==="kid")return R.cons+R.kid;
  return R.srv+(+p.rk||0)}
 /* one seat / chí tôn: everyone knows who holds it */
 function grUniq(p){if(!p||!S)return false;if(p===S.emp||(S.thO&&p===S.thO))return true;const cons=p===S?!(typeof isSrv==="function"&&isSrv()):(rivals||[]).includes(p);
@@ -60,7 +60,7 @@ function grLine(G){const me=G.a===S,e=me?G.b:G.a,mine=me?G.A:G.B,hers=me?G.B:G.A
 function grPreview(a,b){const ra=grRank(a),rb=grRank(b);const P=grPron(b);const L=["thấy mặt, rõ thân phận"];
  L.push(ra<rb?`ngươi xưng danh trước, ${P} biết tên ngươi`:ra===rb?"ngang hàng: mỗi bên xưng danh hay không tùy tính nết":`${P} phận dưới, xưng danh trước`);
  if(rb>ra)L.push(grUniq(b)?"tên người ấy: ngôi chỉ một người giữ, biết ngay":"tên người ấy: tùy tính nết có xưng danh đáp lễ hay không");
- else if(rb<ra)L.push("biết tên người ấy");return L.join(" · ")}
+ else if(rb<ra)L.push("biết tên người ấy");if(rb<ra&&a===S&&!grUniq(S))L.push("tên ngươi: tùy tính nết ngươi có xưng danh đáp lễ hay không")/* r1: what happens to her own name is said too */;return L.join(" · ")}
 
 /* ===================== the greeting sites (LUẬT SỬA CẢ NHÓM: every one goes through greetName) ===================== */
 /* 1 j61 talk face to face: "Chào hỏi" / "Hành lễ" of a stranger (was: face only + a 2nd tap "Hỏi danh tính"): the tap is edited in j61 (greetName); here the preview */
@@ -84,7 +84,7 @@ function gmPlaces(){const R=agRec();const k0=agKh();const out=[];if(!R)return ou
 function gmPerson(id){if(id==="me")return S;if(id&&id[0]==="v")return RV(+id.slice(1));return null}
 /* her ONE deed of the buổi: approach someone here, or keep her schedule (agent law: needs × nết, human slip) */
 function gmWant(v){const B=BAL.greet.meet;let N;try{N=agNeedsC(v)}catch(e){return 0}const u=((N.ally||0)+(N.spite||0)*B.spite)*nv(v,"meetW");return u}
-function gmPickT(v,C){const B=BAL.greet.meet;return mindPickBy(C,x=>{let k=false;try{k=npcKnows(v,x)&&(x!==S||!!(S.known&&k61Named(v)))}catch(e){}
+function gmPickT(v,C){const B=BAL.greet.meet;return mindPickBy(C,x=>{let k=false;try{k=npcKnows(v,x)}catch(e){}/* r1: her bonds with the one she knows decide, whether or not that one knows her name */
   if(!k)return B.base;/* a grey shadow to her: picked at random */return B.base+Math.max(0,aff(v,x))/B.affK+Math.max(0,typeof agSpite==="function"?agSpite(v,x):0)/B.oanK},v)}
 function gmTick(){if(!gmOn())return;const t0=performance.now();const z=gmZ();const key=agKey();if(z.key===key)return;z.key=key;z.pend=z.pend.filter(p=>p.key===key);GM.stat.tick++;
  try{const PL=gmPlaces();const seen=new Set();const B=BAL.greet.meet;let nHer=0;
@@ -106,7 +106,7 @@ function gmWatch(){if(!gmOn())return;const H=agHereKh();if(!H)return;const z=gmZ
 function gmOpts(v){const A=[],B=BAL.greet.meet;const f=chatF(v),g=n=>Math.max(1,Math.round(n*f));const met=npcKnows(v,S)&&S.known&&k61Named(v);
  const W=tag=>{let w=1;try{for(const t of traitsOf(v)){const R=BAL.net.T[t];if(R&&R.w&&R.w[tag]!=null)w*=R.w[tag]}}catch(e){}return w};
  const fr=Math.max(0,aff(v,S)),sp=Math.max(0,typeof agSpite==="function"?agSpite(v,S):0);
- if(!met){A.push({k:"greet",w:W(B.opt.greet)*3,run:()=>{const hi=grRank(S)>grRank(v)&&!grUniq(S)&&!grHerald(S);const G=greetName(v,S,hi?{me:0}:{});return{h:`${k61Cap(k61Named(v)?k61Title(v):k61Desc(v))} tiến lại, cúi chào ngươi.`,line:G.line,G}}});return A}
+ if(!met){A.push({k:"greet",w:W(B.opt.greet),run:()=>{const hi=grRank(S)>grRank(v)&&!grUniq(S)&&!grHerald(S);const G=greetName(v,S,hi?{me:0}:{});return{h:`${k61Cap(k61Named(v)?k61Title(v):k61Desc(v))} tiến lại, cúi chào ngươi.`,line:G.line,G}}});return A}
  const TK=BAL.talk,third=liveRivals(true).filter(x=>x!==v&&x!==S).sort((a,b)=>aff(v,a)-aff(v,b))[0];
  A.push({k:"health",w:W(B.opt.health)*(1+fr/B.affK),run:()=>{const n=g(TK.health);affAdd(S,v,n);chatMark(v);return{h:`${v.name} hỏi han sức khỏe ngươi.`,line:`Ngươi quý nàng +${n}.`}}});
  {const o=talkPraiseO(v),n=g(nv(S,"praise"));A.push({k:"praise",w:W(B.opt.praise)*(1+fr/B.affK),run:()=>{chatMark(v);if(roll(o)){affAdd(S,v,n);return{h:`${v.name} khen tài nghệ của ngươi.`,line:`Ngươi quý nàng +${n}.`}}affAdd(S,v,-TK.praiseFail);return{h:`${v.name} khen tài nghệ của ngươi.`,line:`Ngươi cho là nàng giả lả. Ngươi quý nàng -${TK.praiseFail}.`}}})}
@@ -125,7 +125,7 @@ function gmReplies(v,G){const T=n=>{try{return topicOpts(v).find(a=>a.n===n)}cat
  if(!k61Named(v))return[{n:"Lặng lẽ đáp lễ",fx:{},x:"chưa biết tên người ấy",go:()=>{}}];
  const R=[];for(const n of ["Hỏi han sức khỏe","Khen tài nghệ nàng","Chia sẻ bí mật"]){const a=wrap(T(n));if(a)R.push(a)}
  R.push({n:"Khéo cáo lui",fx:{},x:"không thêm lời, giữ hòa khí đôi bên",go:()=>{}});return R}
-function gmCard(v){const O=gmOpts(v);if(!O.length)return null;const c=agPw(O.map(o=>[o,Math.max(.01,o.w)]));GM.stat.byOpt[c.k]=(GM.stat.byOpt[c.k]||0)+1;
+function gmCard(v){const O=gmOpts(v);if(!O.length)return null;const c=agPw(O.map(o=>[o,Math.max(BAL.mind.pickMin,o.w)]));GM.stat.byOpt[c.k]=(GM.stat.byOpt[c.k]||0)+1;
  const r=c.run();let opts;
  if(c.k==="provoke"){try{opts=apHostOpts(v)}catch(e){opts=null}}
  if(!opts)opts=gmReplies(v,r.G);
