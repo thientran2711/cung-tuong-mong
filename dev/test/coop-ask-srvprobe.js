@@ -107,8 +107,12 @@ async function weekAll(A,B,tag){const wk=(await C(A)).week;await weekBoth(A,B,1)
  ok(pa.m<=pa.cap[0]&&pa.e<=pa.cap[1],'probe host: the grown NPC household stays within its cap (no guest fill copied in)',pa);
  ok(!pa.log.some(l=>/ s\d/.test(l)),'probe host: no srv request applied',pa.log);
  console.log('probe host',JSON.stringify(pa));console.log('probe guest',JSON.stringify(pb));
- /* srvout: she takes a servant out of an NPC household into hers (as prStaff / j72 do) → the host's copy leaves that household */
- const o0=await B.p.evaluate(()=>{const v=rivals.find(x=>!x.coop&&x.id<900&&x.alive&&!x.out&&(x.staff||[]).some(s=>!s.coop&&!s.eid));const s=v.staff.find(s=>!s.coop&&!s.eid);v.staff.splice(v.staff.indexOf(s),1);s.spyFor=null;S.staff.push(s);return{id:v.id,sid:s.sid,name:s.name}});
+ /* srvout: she takes a servant out of an NPC household into hers (as prStaff / j72 do) → the host's copy leaves that household.
+    review staff-root-fix-1 r1: the real paths only move a servant into ROOM her rank gives (jpromo prStaff: only while hhHas < capOf, called
+    on a promotion; j72 rescue: capOk()). At rank 0 her table [1,0] is already full with the personal maid, so the old raw push went PAST the
+    table and staff-root's guest capTrim (r1 rule) sent the extra away before the week's ser (no srvout) — a path no game action takes.
+    So the probe first gives her the room, as a promotion does (rank up until the table has a maid seat free), then takes the servant. */
+ const o0=await B.p.evaluate(()=>{while(S.rank<8&&hhHas(S)[0]>=capOf(S)[0])S.rank++;if(hhHas(S)[0]>=capOf(S)[0])return{noRoom:1};const v=rivals.find(x=>!x.coop&&x.id<900&&x.alive&&!x.out&&(x.staff||[]).some(s=>!s.coop&&!s.eid));const s=v.staff.find(s=>!s.coop&&!s.eid);v.staff.splice(v.staff.indexOf(s),1);s.spyFor=null;S.staff.push(s);return{id:v.id,sid:s.sid,name:s.name}});
  for(let w=0;w<2;w++)await weekAll(A,B,'o'+w);
  const o1=await A.p.evaluate(o=>{const v=rivals.find(x=>x.id===o.id);return{inNpc:(v.staff||[]).some(s=>s.sid===o.sid&&s.name===o.name),log:(window.__askN||{}).log||[]}},o0);
  const o2=await B.p.evaluate(o=>({mine:(S.staff||[]).some(s=>s.sid===o.sid),inNpc:(rivals.find(x=>x.id===o.id).staff||[]).some(s=>s.sid===o.sid)}),o0);

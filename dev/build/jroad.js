@@ -26,18 +26,22 @@ const rdFb=(k,v)=>{try{const F=S.st.f14.fb=S.st.f14.fb||{};if(v!=null)F[k]=v;ret
 const RD_FL=rdFb;/* B2 road-long flag (review/road-b2-fix): same book as CN_FL / MUOI_FL */
 const rdIn=(c,f)=>Array.isArray(c)?c.some(f):f(c);
 function rdOdds(q,A){let x=q[0];for(let i=1;i<q.length;i++){const t=q[i],k=t[0],neg=k[0]==="-",K=neg?k.slice(1):k;let v;
-  if(K==="d")v=S[t[1]]/t[2];else if(K==="m")v=S[t[1]]*t[2];else if(K==="k")v=RDQ[t[1]](A)*t[2];else if(K==="kd")v=RDQ[t[1]](A)/t[2];
+  if(K==="d")v=S[t[1]]/t[2];else if(K==="m")v=S[t[1]]*t[2];else if(K==="dz")v=(S[t[1]]||0)/t[2];else if(K==="mz")v=(S[t[1]]||0)*t[2];else if(K==="a")v=artO(S,t[1]);else if(K==="k")v=RDQ[t[1]](A)*t[2];else if(K==="kd")v=RDQ[t[1]](A)/t[2];
   else if(K==="f")v=t[1].split("|").some(g=>A.f[g])?t[2]:t[3];else if(K==="e")v=rdIn(t[1],c=>rdEnd(c)===t[2])?t[3]:t[4];
   else if(K==="b")v=rdFb(t[1])?t[2]:t[3];else if(K==="q")v=RDQ[t[1]](A)?t[2]:t[3];else throw Error("rdOdds term "+k);
   x=neg?x-v:x+v}return x}
+/* review/one-core-roads: an option's Lợi thế sc and the typed amounts of its go: closure (g, read by the closure as its last parameter G,
+   in call order) and an ending's {fx, k (tier −1/0/1), sc, g} come from BAL.road.fx too (dev/measure/road-onecore-g-move.js) */
 function rdFx(id,def){const F=BAL.road.fx&&BAL.road.fx[id];if(!F)return;
- for(const bk in F){if(bk==="E"){for(const ek in F.E)if(def.E&&def.E[ek])def.E[ek].fx=F.E[ek];continue}
+ for(const bk in F){if(bk==="E"){for(const ek in F.E){const e=F.E[ek],d=def.E&&def.E[ek];if(!d)continue;
+    if(e.fx)d.fx=e.fx;for(const k of ["k","sc"])if(e[k]!=null)d[k]=e[k];if(e.g&&d.go){const f=d.go,G=e.g;d.go=A=>f(A,G)}}continue}
   const O=def.B&&def.B[bk]&&def.B[bk].o;if(!Array.isArray(O))continue;
-  F[bk].forEach((x,i)=>{const o=O[i];if(!x||!o)return;for(const k of ["c","w","l"])if(x[k])o[k]=x[k];if(x.o){const q=x.o;o.o=A=>rdOdds(q,A)}})}}
-/* the rare finale choice of a road (RD97L): its numbers live in BAL.road.rare[a] (p, np, sc, c, fx; bar = the floor its x condition reads
+  F[bk].forEach((x,i)=>{const o=O[i];if(!x||!o)return;for(const k of ["c","w","l"])if(x[k])o[k]=x[k];if(x.sc!=null)o.sc=x.sc;if(x.o){const q=x.o;o.o=A=>rdOdds(q,A)}
+   if(x.g&&o.go){const f=o.go,G=x.g;o.go=(A,ok)=>f(A,ok,G)}})}}
+/* the rare finale choice of a road (RD97L): its numbers live in BAL.road.rare[a] (p, np, sc, c, fx, g = its go amounts read as G; bar = the floor its x condition reads
    and its x text prints through RR(a).bar) */
 const RR=a=>BAL.road.rare[a];
-function rdRare(d){const R=RR(d.a);if(R)for(const k of ["p","np","sc","c","fx"])if(R[k]!=null)d[k]=R[k];return d}
+function rdRare(d){const R=RR(d.a);if(R){for(const k of ["p","np","sc","c","fx"])if(R[k]!=null)d[k]=R[k];if(R.g&&d.go){const f=d.go,G=R.g;d.go=A=>f(A,G)}}return d}
 /* register one chapter: n = 5..11 */
 function rdDef(road,n,def){const id=road+"_"+n;rdFx(id,def);ARC67[id]=Object.assign({o:"rd",road,rn:n},def);(ROAD14[road]=ROAD14[road]||{})[n]=id;
  try{if(typeof RTHEME67==="object"&&!RTHEME67[id])RTHEME67[id]=def.rth||RTHEME67[road]||"court"}catch(e){}return id}
@@ -102,7 +106,7 @@ window.RD97L=window.RD97L||[];
    (b) a road's rare path names options of the whole road (.4–.10), but j97 counts path/bad hits on the .11 thread only (A.q97) → the road
    keeps one tally S.st.f14.q97 fed by every chapter of the road, and the .11 thread starts from it (rdQ97 below). */
 function rdR97(){try{if(!window.RARE97)return;for(const d of RD97L){if(!RARE97.defs[d.a])RARE97.defs[d.a]=d;const a=ARC67[d.a];
- if(a&&a.E&&!a.E.r97)a.E.r97={k:1,tag:"✦ "+d.tag,w:d.w,t:d.t,fx:d.fx,go:A=>r97After(A,d)}}}catch(e){console.error(e)}}
+ if(a&&a.E&&!a.E.r97)a.E.r97={k:BAL.road.rareK,tag:"✦ "+d.tag,w:d.w,t:d.t,fx:d.fx,go:A=>r97After(A,d)}}}catch(e){console.error(e)}}
 /* the road's rare-ending definition (its .11) when this life runs a full road, else null */
 function rdQdef(){try{if(!rdOn())return null;const R=ROAD14[S.st.f14.rd];const id=R&&R[BAL.road.last];return id&&window.RARE97&&RARE97.defs[id]||null}catch(e){return null}}
 /* a choice made in any chapter of this road (the .4 premise and .5–.10) counts for the road's rare finale; the .11 itself is counted by j97 */

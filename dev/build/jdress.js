@@ -57,14 +57,14 @@ const DS_SPYX=" · thấy y phục nàng (Xa xỉ, vượt phẩm)";
 function dsSpyX(A){return Array.isArray(A)?A.map(o=>o&&o.n==="Sai đi dò la"&&o.x&&o.x.indexOf(DS_SPYX)<0?Object.assign({},o,{x:o.x+DS_SPYX}):o):A}
 (function(){if(typeof talkOpts==="function"){const t0=talkOpts;talkOpts=function(p){const A=t0.apply(this,arguments);try{return p&&p.kind==="maid"?dsSpyX(A):A}catch(e){return A}}}
  if(typeof hsvActs==="function"){const h0=hsvActs;hsvActs=function(){return dsSpyX(h0.apply(this,arguments))}}
- if(typeof spyPick==="function"){const k0=spyPick;spyPick=function(){const r=k0.apply(this,arguments);try{const q=Q[Q.length-1];if(q&&q.opts)for(const o of q.opts)if(o.kgt&&o.x)o.x=o.x.replace("chứng cứ +1 ·","chứng cứ +1, thấy y phục nàng ·")}catch(e){}return r}}})();
+ if(typeof spyPick==="function"){const k0=spyPick;spyPick=function(){const r=k0.apply(this,arguments);try{const q=Q[Q.length-1];if(q&&q.opts)for(const o of q.opts)if(o.kgt&&o.x)o.x=o.x.replace(/chứng cứ ([+\-]\d+) ·/,"chứng cứ $1, thấy y phục nàng ·")}catch(e){}return r}}})();
 
 /* ---------- Tố vượt phẩm: the visible jewellery rule becomes a cause once seen, and the inquiry judges it ---------- */
 (function(){if(typeof wdCause!=="function")return;const c0=wdCause;wdCause=function(obs,t){const c=c0.apply(this,arguments);if(c)return c;
  try{const r=dressNow(obs,t);if(r&&r.vj&&r.vj.length&&dsVj(t).length)return{st:"over",sure:true,by:r.by==="cùng chỗ"?"tận mắt thấy":r.by,jw:1}}catch(e){}return null};window.wdCause=wdCause})();
 (function(){if(typeof wdAccuse!=="function")return;const a0=wdAccuse;wdAccuse=function(a,t){let J=[];try{J=dsVj(t)}catch(e){}let st="ok";try{st=wdStatus(t)}catch(e){}
  if(!J.length||st==="tang")return a0.apply(this,arguments);
- const dropJ=()=>{t.inv=(t.inv||[]).filter(e=>!(e&&e.w&&!e.h&&IT[e.k]&&itm(e.k).sl&&itm(e.k).rk>rkOf(t)))};
+ const dropJ=()=>{const keep=e=>!(e&&e.w&&!e.h&&IT[e.k]&&itm(e.k).sl&&itm(e.k).rk>rkOf(t));/* confiscated pieces go to the Nội vụ phủ store (item ledger jil) */if(typeof ilFilter==="function")ilFilter(t,keep,"conf");else t.inv=(t.inv||[]).filter(keep)};
  if(st==="over"){const r=a0.apply(this,arguments);if(/>thành</.test(r||"")){dropJ();return r+`${J.map(k=>itm(k).n).join(", ")} cũng bị tịch thu. `}return r}
  /* the outfit itself is fine, but she wears jewellery above her rank: judged by the same odds, the same numbers as a Vượt phẩm outfit */
  const judge=judgeName(t),A0=wdNmC(a),T0=wdNm(t);for(const o of consorts()){try{dressLook(o,t,judge)}catch(e){}}

@@ -21,7 +21,7 @@ function illMonthP(p){const me=p===S;let ev="";const i=illOf(p);
  else if(i.st===3&&d.die&&roll(25*d.die)){if(me){die(`${d.n} nguy kịch, không qua khỏi`);return ev}p.alive=false;if(p.queen)p.queen=false;return ev+`<span class="r">${p.name} mất vì ${d.n.toLowerCase()}.</span> `}
  return ev}
 function epidemic(){const P=consorts().filter(p=>p===S||p.alive&&!p.out);if(!roll(1.2))return"";const h=pick(P),hk=houseOf(h);let ev=`<span class="r">Dịch đậu mùa phát ở ${houseName(h)==="cung riêng"?"cung "+NM(h):houseName(h)}.</span> Cả cung bị phong tỏa một tháng. `;
- for(const p of P)if(houseOf(p)===hk){if(roll(35))ev+=catchIll(p,"daumua")||(p!==S?`${p.name} nhiễm bệnh. `:"");p.confined=Math.max(p.confined||0,1);for(const k of kidsOf(p))if(roll(45)){k.hp-=40;if(k.hp<=0)ev+=kidDie(k,"mất vì đậu mùa",p===S)}(p.staff||[]).slice().forEach(s=>{if(roll(10))p.staff.splice(p.staff.indexOf(s),1)})}
+ for(const p of P)if(houseOf(p)===hk){if(roll(35))ev+=catchIll(p,"daumua")||(p!==S?`${p.name} nhiễm bệnh. `:"");p.confined=Math.max(p.confined||0,1);for(const k of kidsOf(p))if(roll(45)){k.hp-=BAL.eff.j13.hpEpidemic;if(k.hp<=0)ev+=kidDie(k,"mất vì đậu mùa",p===S)}(p.staff||[]).slice().forEach(s=>{if(roll(10))p.staff.splice(p.staff.indexOf(s),1)})}
  return ev}
 function illMonth(){let ev="";for(const p of consorts())ev+=illMonthP(p);ev+=epidemic();
  if(worldOn()){/* Emperor + Thái hậu illness: world facts, rolled on the host only (jcoopworld worldOn) */
@@ -58,8 +58,8 @@ const LOTS=[[0,"Phượng hoàng đậu ngọn ngô đồng,\nMây lành năm s�
 const LDOM=["Sủng","Giao thiệp","Danh","Mưu kế","Con cái","Tài nghệ","Con cái","Danh","Giao thiệp","Mưu kế","Tài nghệ","Sức khỏe","Mưu kế","Giao thiệp","Con cái","Sủng","Giao thiệp","Sức khỏe","Sức khỏe","Sủng","Danh","Giao thiệp","Mưu kế","Con cái","Hung","Sức khỏe","Hung","Danh","Mưu kế","Hung"];
 function drawLot(p,better){const pickL=()=>{const i=R(LOTS.length);return{i,lv:LOTS[i][0],dom:LDOM[i]||"Sủng"}};let l=pickL();if(better){const m=pickL();if(m.lv<l.lv)l=m}p.lot=l;return l}
 function lotB(p,dom){return p&&p.lot&&dom&&p.lot.dom===dom?LVB[p.lot.lv]:0}
-const LADW=["Liều","Khó","Năm ăn năm thua","Khá chắc","Chắc","Rất chắc","Nắm chắc"];
-function ladI(o){return LADW.indexOf(word(cl(Math.round(o),5,95)))}
+/* odds step of o (ONE CORE: the step words live only in KIT_ODDS j79, the cuts in BAL.odds; review/one-core-dup-r1) */
+function ladI(o){return oddsLv(cl(Math.round(o),BAL.odds.lo,BAL.odds.hi))}
 /* the lot's pull on one card, in ladder steps; o = the odds before the lot */
 function lotTag(dom,o){const b=lotB(S,dom);if(!b)return"";const d=o==null?0:ladI(o+b)-ladI(o);return ` · Quẻ: ${b<0?"khó":"dễ"} hơn ${d?Math.abs(d)+" bậc":"một chút"}`}
 /* the lot in plain words: scope, direction, the cards it touches */
