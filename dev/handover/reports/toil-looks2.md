@@ -58,3 +58,11 @@ PRIORITY #1 CHECK: OD ~14:05Z Vung ve not approved | reused jtoil.js (TOIL_MKS v
 - Khuynh thanh clearly more splendid than Kieu diem: lip 1.0 + sheen .9, eye/lid 1.0, wing .55, lower lash .6, shimmer 1.0, skin light .5, blush .46. Diem dua clearly overdone: blush .78 (clip keeps it off eyes/background), lip 1.0, lid height 1.18, lower lash .85, brow .9, wing .55. Mat moc / Doan trang / Kieu diem unchanged.
 - Gates: mk-layer-scan 12960 0 bad, toil-tease 25/25, toil-overlay 0 bad, quickcheck PASS 143 s.
 - Samples ?v=7: img/_review/toil-looks/toil-looks-1.png, -2.png, -side-1/-2 (v5 over v7), -vung-1/-2 (Vung v4|v5|v7).
+
+### looks3 v8 - review/toil-looks2 630eaa633 (owner ~14:40Z verdict on v7)
+PRIORITY #1 CHECK: OD ~14:40Z | reused jtoil.js (TOIL_MKS + toilVungB + BAL.toil.vungB).
+- Doan trang / Kieu diem / Mat moc untouched. Khuynh thanh = midpoint Kieu diem..v7 (lip .88, eye .96, lid .9, wing .42, lash .47, shimmer .75, sheen .78, blush .38, skin light .40). Diem dua = the v6 look with a more diffuse blush (BLP.diff, lower centre density, r .24).
+- Vung ve two variants, picked ONCE per day from col.seed (toilVungB: hash of seed < BAL.toil.vungB = .5; seed 0 = A): A "khong biet trang diem" = v4/v5 lips (less smeared), 1-2 ROUND soft powder-puff blobs per cheek (BLP.puff, alpha .42-.62) over the round blush; B "danh qua tay, nhu he" = TOIL_MKS.vungB = the v7 Diem dua values. Mask unchanged.
+- Gates: mk-layer-scan 12960 0 bad, toil-tease 25/25, toil-overlay 0 bad, quickcheck PASS 157 s (one-core guard: new number lives in BAL.toil).
+- Samples ?v=8: img/_review/toil-looks/toil-looks-1/2.png (Vung = A), -side-1/-2 (v7 over v8), -vung-1/-2 (A | B).
+- Sample-sheet script is not committed (was in the scratchpad): it loads index.html on a local http.server, injects dev/art/toil-fit2.json + dev/art/mkfit/<face>.json, builds a grid with toilMkLayer(file,look,col) over img/<por>.webp from the CDN. Seeds: A = 7, B = 5 for BAL .5.
