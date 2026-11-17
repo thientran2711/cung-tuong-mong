@@ -37,7 +37,7 @@ const AGC2={
  likes:{act:"hỏi Kính sự phòng sở thích của Hoàng thượng",tag:"scheme",at:"ksp",ok:v=>!(v.eK&&v.eK.flower)},
  old:{act:"hỏi chuyện cũ phế phi ở lãnh cung",tag:"scheme",at:"lc"}};
 /* the player's button each deed is (j2 talkOpts / deck, j9 topicOpts, j20) — checked by dev/test/ag-all.test.js (no NPC-only hidden act) */
-const AGC2BTN={flat:"Tâng bốc",true:"Nói thật lòng",show:"Phô tài",favor:"Xin ân điển",court:"Bàn chuyện triều chính",nurse:"Hầu thuốc Hoàng thượng",kidGreet:"Đưa con đến thỉnh an Hoàng thượng",
+const AGC2BTN={maidTalk:"Tâm sự",maidSpy:"Sai đi dò la",bribeSrv:"Mua chuộc",plantSrv:"Cài người vào cung khác",flat:"Tâng bốc",true:"Nói thật lòng",show:"Phô tài",favor:"Xin ân điển",court:"Bàn chuyện triều chính",nurse:"Hầu thuốc Hoàng thượng",kidGreet:"Đưa con đến thỉnh an Hoàng thượng",
  kidHeal:"Chữa bệnh cho con",kidMed:"Xin thuốc cho",fert:"Bài thuốc dễ thụ thai",doctor:"Mời làm thái y tâm phúc",likes:"Hỏi sở thích Hoàng thượng",old:"Hỏi chuyện cũ",vent:"Trút giận",chest:"Lục rương tìm chứng cứ",help:"Nhờ giúp đỡ"};
 function ag2At(A,v,kh){if(A.at==="emp")return agEmpAt(kh);if(A.at==="self")return palaceOf(v);return A.at}
 function ag2Pay(v,c){if(!agcCan(v,c))return false;agcPay(v,c);return true}
@@ -47,13 +47,25 @@ agReg("consort","cx2",(v,N,need)=>{const O=[];const X=BAL.ag.cx2;if(v===S||v.out
   const o=D.o==null?100:odA(v,cx2O(v,k));const u=agcU(v,N,o,D.g,D.c||{},A.tag,D.l&&D.l.sung?{sung:-D.l.sung}:null);
   if(u>0){AG2.stat.opt++;O.push({k:"cx2:"+k,t:null,u,tag:A.tag,act:A.act,at:(kh)=>ag2At(A,v,kh)})}}
  /* aimed at a person: Trút giận (she is jealous of a consort close to conceiving), Lục rương (a rival she resents), Nhờ giúp đỡ (one who likes her) */
- const T=others(v).filter(t=>t&&t!==v&&(t===S?!S.out:t.alive&&!t.out));
- if(!need||need==="spite"){const L=T.filter(t=>(t.pg||0)>=X.vent.pg&&agSpite(v,t)>0&&(v.ghen||0)>0);if(L.length&&agcCan(v,X.vent.c)){const t=mindPickBy(L,x=>agSpite(v,x),v);const u=agcU(v,N,100,X.vent.g,X.vent.c,"punish");if(t&&u>0)O.push({k:"cx2:vent",t,u,tag:"punish",act:"trút giận",at:(kh,vv,tt)=>tt===S?"home":agAt(tt,kh)})}}
- if(!need||need==="spite"||need==="safe"){const L=T.filter(t=>agSpite(v,t)>0);if(L.length){const t=mindPickBy(L,x=>agSpite(v,x),v);const o=odA(v,cx2O(v,"chest"));const u=agcU(v,N,o,X.chest.g,{},"scheme",{"danh":2});
+ const T=others(v).filter(t=>t&&t!==v&&(t===S?!S.out:t.alive&&!t.out));const SPm=new Map();const sp=t=>{let x=SPm.get(t);if(x==null){x=agSpite(v,t);SPm.set(t,x)}return x};/* perf: hostility once per target per call */
+ if(!need||need==="spite"){const L=T.filter(t=>(t.pg||0)>=X.vent.pg&&sp(t)>0&&(v.ghen||0)>0);if(L.length&&agcCan(v,X.vent.c)){const t=mindPickBy(L,x=>sp(x),v);const u=agcU(v,N,100,X.vent.g,X.vent.c,"punish");if(t&&u>0)O.push({k:"cx2:vent",t,u,tag:"punish",act:"trút giận",at:(kh,vv,tt)=>tt===S?"home":agAt(tt,kh)})}}
+ if(!need||need==="spite"||need==="safe"){const L=T.filter(t=>sp(t)>0);if(L.length){const t=mindPickBy(L,x=>sp(x),v);const o=odA(v,cx2O(v,"chest"));const u=agcU(v,N,o,X.chest.g,{},"scheme",{"danh":2});
   if(t&&u>0)O.push({k:"cx2:chest",t,u,tag:"scheme",act:"lén lục rương tìm chứng cứ",at:(kh,vv,tt)=>palaceOf(tt)})}}
  if(!need||need==="bac"||need==="safe"){const L=T.filter(t=>t!==S&&aff(t,v)>=X.help.aff);if(L.length){const t=mindPickBy(L,x=>BAL.mind.pick.ag.base+aff(x,v),v);const u=agcU(v,N,100,X.help.g,{},"social");
   if(t&&u>0)O.push({k:"cx2:help",t,u,tag:"social",act:"sang nhờ giúp đỡ",at:(kh,vv,tt)=>agAt(tt,kh)})}}
+ /* her confidant maid (Tâm sự / Sai đi dò la, j2 maid card) and the servants of other palaces (Mua chuộc / Cài người, j10 Người hầu tab) */
+ const m=v.maid;if(m&&m.loyal!=null){if((!need||need==="safe")&&m.loyal<X.maidTalk.below){const u=agcU(v,N,100,X.maidTalk.g,{},"help");if(u>0)O.push({k:"cx2:maidTalk",t:null,u,tag:"help",act:"tâm sự với cung nữ thân tín",at:()=>palaceOf(v)})}
+  if(!need||need==="spite"||need==="safe"){const o=odA(v,cx2O(v,"maidSpy"));const u=agcU(v,N,o,X.maidSpy.g,{},"scheme");if(u>0)O.push({k:"cx2:maidSpy",t:null,u,tag:"scheme",act:"sai cung nữ thân tín đi dò la",at:()=>palaceOf(v)})}}
+ if(!need||need==="safe"||need==="spite"){const L=T.filter(t=>t!==v&&sp(t)>0&&(t.staff||[]).some(s=>s.spyFor!==key(v)));
+  if(L.length){const t=mindPickBy(L,x=>sp(x),v);const s=t&&ag2BribeS(v,t);if(s){const c=(typeof nv==="function"?nv(s,"bribeCost"):30)||30;if((v.bac||0)>=c){const u=agcU(v,N,odA(v,35-(s.loyal||0)/3+(v.tamco||0)/5),X.bribeSrv.g,{"bac":-c},"scheme");if(u>0)O.push({k:"cx2:bribeSrv",t,u,tag:"scheme",act:"mua chuộc kẻ hầu cung khác",at:()=>palaceOf(v)})}}
+   if(t&&(v.bac||0)>=X.plantSrv.bac&&typeof bestSent==="function"&&bestSent(v)&&(!need||need==="spite")){const u=agcU(v,N,odA(v,40+(v.tamco||0)/4),X.plantSrv.g,{"bac":-X.plantSrv.bac},"scheme");if(u>0)O.push({k:"cx2:plantSrv",t,u,tag:"scheme",act:"cài người vào cung khác",at:()=>palaceOf(v)})}}}
  return O});
+function ag2BribeS(v,t){const L=(t.staff||[]).filter(s=>s&&s.spyFor!==key(v));return L.length?mindPickBy(L,s=>Math.max(1,100-(s.loyal||0)),v):null}
+agRunReg("cx2:maidTalk",v=>{const m=v.maid;if(!m)return"";m.loyal=cl((m.loyal||0)+BAL.ag.cx2.maidTalk.w.maid,0,100);return ag2Res(v,"maidTalk",1,`${v.name} tâm sự với ${m.name}`)});
+agRunReg("cx2:maidSpy",v=>{const m=v.maid;if(!m)return"";const X=BAL.ag.cx2.maidSpy;if(!roll(odA(v,cx2O(v,"maidSpy")))){m.loyal=cl((m.loyal||0)+X.l.maid,0,100);return ag2Res(v,"maidSpy",0,`${m.name} đi dò la cho ${v.name}, chẳng nghe được gì`)}
+ const x=evGuilty(v,others(v).filter(y=>y&&y!==v&&(y===S||y.alive)));const ok=!!(x&&evA(v,x,1));return ag2Res(v,"maidSpy",ok,ok?`${m.name} nghe lén được chuyện của ${agcNm(x)} cho ${v.name}`:`${m.name} đi dò la cho ${v.name}, chẳng thấy điều gì sai trái`)});
+agRunReg("cx2:bribeSrv",(v,t)=>{if(!t)return"";const s=ag2BribeS(v,t);if(!s)return"";const r=bribeServ(v,s);return ag2Res(v,"bribeSrv",!!r,r?String(r).replace(/\.\s*$/,""):"")});
+agRunReg("cx2:plantSrv",(v,t)=>{if(!t)return"";const r=plantServ(v,t);return ag2Res(v,"plantSrv",!!r,r?String(r).replace(/\.\s*$/,""):"")});
 function ag2Res(v,k,ok,txt){AG2.stat.land++;AG2.stat.by[k]=(AG2.stat.by[k]||0)+1;return txt}
 /* the card of a deed with odds: cost → roll odA(cx2O) → w or l (the player's go / fail effects after) */
 function ag2Roll(v,k,c){const X=BAL.ag.cx2[k];if(!ag2Pay(v,c||X.c))return null;const ok=roll(odA(v,cx2O(v,k)));ap(v,ok?X.w||{}:X.l||{});return ok}
@@ -106,9 +118,9 @@ function ag2Reg(p){const G=BAL.ag.give;const sg=(p===S?S.sung:p.sung)||0,an=(p==
  try{r*=empMemF(p)}catch(e){}try{r*=tsMoodW()}catch(e){}try{for(const t of S.emp.traits||[])r*=G.tr[t]||1}catch(e){}return r}
 (function(){const e0=empGive,t0=thGive;
  empGive=function(p,pct,why){if(!p||!(typeof agOn==="function"&&agOn())||!S.emp)return e0.apply(this,arguments);const w=cl(pct*ag2Reg(p),0,100);
-  const g=mindPick([["give",w],["keep",100-w]],S.emp)==="give";AG2.stat[g?"give":"giveNo"]++;return g};
+  const g=roll(w);/* his inclination = the site's % × his regard; a straight weighted draw (jmind slip would bend a rare gift's rate) */AG2.stat[g?"give":"giveNo"]++;return g};
  thGive=function(p,pct,why){if(!p||!(typeof agOn==="function"&&agOn())||S.thDead)return t0.apply(this,arguments);const G=BAL.ag.give.th;const w=cl(pct*cl(1+(((p===S?S.th:p.th)||0)-G.ref)/G.div,G.lo,G.hi),0,100);
-  return mindPick([["give",w],["keep",100-w]],null)==="give"};})();
+  return roll(w)};})();
 /* ledger labels of the new deeds */
-try{for(const k in AGC2)ACT95["ag_cx2:"+k]=AGC2[k].act;Object.assign(ACT95,{"ag_cx2:vent":"trút giận","ag_cx2:chest":"lén lục rương","ag_cx2:help":"sang nhờ giúp đỡ","ag_emp:visit":"ngự giá lâm cung","ag_emp:tea":"ghé uống chén trà"})}catch(e){}
+try{for(const k in AGC2)ACT95["ag_cx2:"+k]=AGC2[k].act;Object.assign(ACT95,{"ag_cx2:vent":"trút giận","ag_cx2:chest":"lén lục rương","ag_cx2:help":"sang nhờ giúp đỡ","ag_cx2:maidTalk":"tâm sự với cung nữ thân tín","ag_cx2:maidSpy":"sai cung nữ đi dò la","ag_cx2:bribeSrv":"mua chuộc kẻ hầu cung khác","ag_cx2:plantSrv":"cài người vào cung khác","ag_emp:visit":"ngự giá lâm cung","ag_emp:tea":"ghé uống chén trà"})}catch(e){}
 Object.assign(window,{AG2,AGC2,AGC2BTN,ag2Reg});

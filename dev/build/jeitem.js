@@ -48,7 +48,7 @@ function eitPilWho(p){const P=BAL.eit.pil,L=[];if(p.maid&&p.maid.alive!==false)L
  return L.map(s=>{const lo=s.loyal|0;if(lo>=P.loyal&&!s.spyFor)return null;if(s.pilDet!=null&&S.turn<s.pilDet)return null;
    let ch=P.base+Math.max(0,P.loyal-lo)*P.k+(s.spyFor?P.spy:0)+(s.pilOk?P.ok:0)+(p.pilSoft!=null&&S.turn<p.pilSoft&&p.pilSoftBy!==s.name?P.ok:0)+((p.sung||0)<BAL.stip.lowSung?P.lowSung:0);return{s,ch:Math.min(P.cap,Math.round(ch))}}).filter(Boolean)}
 function eitPilfer(p,G){if(p===S)EIT_PIL=null;try{if(!p||p.dead||p.out||!G||!G.length)return null;if(p===S&&typeof isSrv==="function"&&isSrv())return null;
- const C=eitPilWho(p);let hit=null;for(const c of C)if(roll(c.ch)){hit=c.s;break}if(!hit)return null;
+ const C=eitPilWho(p);let hit=null;for(const c of C)if(ag2Ch(c.s,c.ch)){hit=c.s;break}if(!hit)return null;
  /* the dearest piece that really arrived this month */
  let best=null;for(const g of G)for(const e of (g.E||[])){const v=(IT[e.k]&&itm(e.k).pr)||0;if(!best||v>best.v)best={g,e,v}}if(!best)return null;
  const i=p.inv.indexOf(best.e);if(i>=0)p.inv.splice(i,1);best.g.E.splice(best.g.E.indexOf(best.e),1);best.g.n=Math.max(0,best.g.n-1);if(!best.g.n)best.g.lost=true;best.g.pil=1;
@@ -74,7 +74,7 @@ function eitPilEvent(X){const s=X.s,P=BAL.eit.pil,it=IT[X.k]||{n:X.k};const nm=i
  return{ev:1,t:"Kẻ hầu ăn bớt",who,h,opts:O}}
 function eitPilNpc(X){const p=X.p,s=X.s,P=BAL.eit.pil;if(!roll(cl(P.see+(p.tamco|0)/4,5,95)))return;const harsh=netRx(p,/Xảo quyệt|Kiêu ngạo|Thù dai|Kín đáo/);
  const nm=(IT[X.k]||{n:X.k}).n.replace(/ \(hàng kém\)$/,"").toLowerCase();
- if(harsh||roll(P.npcPun)){s.loyal=cl((s.loyal|0)-P.punLoyal,0,100);s.pilDet=S.turn+P.detM;try{newsAdd(p,"stip",`${rkName(p)} ${p.name} bắt được ${s.name} lén giữ ${nm} Nội vụ phủ phát, phạt nặng`)}catch(e){}}
+ if(harsh||ag2Ch(p,P.npcPun*(window.agOn&&agOn()&&typeof agMW==="function"?agMW(p,"punish"):1))){s.loyal=cl((s.loyal|0)-P.punLoyal,0,100);s.pilDet=S.turn+P.detM;try{newsAdd(p,"stip",`${rkName(p)} ${p.name} bắt được ${s.name} lén giữ ${nm} Nội vụ phủ phát, phạt nặng`)}catch(e){}}
  else{s.loyal=cl((s.loyal|0)+P.forgiveLoyal,0,100)}}
 (function(){if(typeof stipGoods!=="function")return;const g0=stipGoods;stipGoods=function(p,SK){const G=g0.apply(this,arguments);eitPilfer(p,G);return G};window.stipGoods=stipGoods})();
 (function(){if(typeof stipShow!=="function")return;const s0=stipShow;stipShow=function(){const r=s0.apply(this,arguments);try{if(EIT_PIL&&EIT_PIL.p===S)Q.push(eitPilEvent(EIT_PIL))}catch(e){console.error("eit pil ev",e)}EIT_PIL=null;return r};window.stipShow=stipShow})();
