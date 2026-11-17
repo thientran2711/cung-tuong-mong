@@ -875,4 +875,4 @@
 | face-w404 review r1 (sonnet) of df8b57bc | review/face-w404-r1 | D | session_01964izEvirrwGUKDneEGtXa | RUNNING | 17/11 17:08Z |
 | REVIEW weather-khac r1 (opus BIG) of e1d540cf | review/weather-khac-r1 | C-AG | session_01UV1Szhk5EGru6rSkDekM6s | RUNNING | 17/11 17:10Z |
 | REVIEW learn-scene-fix-2 r1 of 8c30a85d (opus BIG; brief briefs/s34-review-learn-scene-fix-2.md) | review/learn-scene-fix-2-r1 | MAIN s34 | (opening) | RUNNING | 17/11 17:12Z |
-| day-khac-audit review r1 (opus BIG) of 4408ef0a | review/day-khac-audit-r1 | D | (opening) | RUNNING | 17/11 17:12Z |
+| day-khac-audit review r1 (opus BIG) of 4408ef0a | review/day-khac-audit-r1 | D | session_01964izE2ap49KwCk9DAQtjP | RUNNING | 17/11 17:12Z |
