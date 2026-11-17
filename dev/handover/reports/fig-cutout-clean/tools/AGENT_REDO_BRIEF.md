@@ -6,3 +6,4 @@ Same as tools/AGENT_GEN_BRIEF.md (read it fully: setup, tools, prompt text, fini
 - Fragment: hd-entries/W6b-redo-<AGENTNAME>.json (same format).
 - Contact sheet for the look: build ONE before|after sheet (<=1100 px wide): for each key a row-pair BEFORE(_old fig) | AFTER(new hd), 8 figures on dark; save it as /tmp/claude-0/w/<AGENTNAME>/redo_sheet.jpg AND copy to dev/handover/reports/fig-cutout-clean/rank-sample/redo-<AGENTNAME>.jpg (jpg quality 80).
 - Final reply: TSV "key<TAB>old-ref id<TAB>new gen id<TAB>status" x8 + 3 lines max.
+OWNER ORDER (17/11 ~03:48Z): NO template/uniform. Each maid keeps HER OWN original outfit (colours, cut, motifs, hairstyle) as in image 1. DRIFT CHECK in the sheet look: if two figures in your batch look dressed alike (same outfit), list the later key(s) as "DRIFT <key>" in your reply (do not redo).
