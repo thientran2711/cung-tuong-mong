@@ -916,6 +916,8 @@ Object.assign(BAL.ag,{kh2:{on:1,rest:1,max:3,maxX:1,see:{on:1,w:{ignore:3,hear:1
    voice = lòng / thiện cảm for the warm / cool line (else cold); serve = × the utility of a servant's own errand for her master (listen / scout / watch)
    at lòng 50 (base = the worth of serving her master, need points / BAL.ag.unit, besides what the errand brings her); hear = what a consort's "Nghe lén" at a happening is worth to her (need points: safe when it is aimed at her, spite on a rival, ally otherwise);
    listen / scout / watch = the player maid's cards "Nghe ngóng cho chủ" / "Tự đi dò la cho chủ" / "Canh chừng cung chủ" (SRVA rows read these);
+   share = the believable band (% of all servant deeds) of these errands, checked by ag-truth.test (owner: servants mostly serve, scouting is a sometime thing);
+   tell.late = weight of a report a buổi late (peaks at lòng 50); scout.caught = % of failed scouting that is caught (else she comes back empty-handed);
    scout.oan = the target's regard lost when the spy is caught (the player's "Sai đi dò la": oán +5); keep = news kept per day */
-BAL.ag.know={eye:100,friend:30,close:70,tell:{tell:1,keep:1,sell:1.5,q:{trung:.4,chuyen:.2,lanh:.1,tham:-.3,nhat:-.2}},voice:{warm:70,cool:40},serve:1,
- hear:{safe:4,spite:2,ally:1},base:.1,listen:{k:1,o:50,tc:3,tin:2,mp:.25},scout:{k:2,tin:3,lose:5,mp:.5,oan:5},watch:{k:1,tin:2,mp:.25},keep:20};
+BAL.ag.know={eye:100,friend:30,close:70,tell:{tell:1,late:.5,keep:1,sell:1.5,q:{trung:.4,chuyen:.2,lanh:.1,tham:-.3,nhat:-.2}},voice:{warm:70,cool:40},serve:.25,
+ hear:{safe:4,spite:2,ally:1},base:.01,listen:{k:1,o:50,tc:3,tin:2,mp:.25},scout:{k:2,tin:3,lose:5,mp:.5,oan:5,caught:50},watch:{k:1,tin:2,mp:.25},keep:20,share:[5,20]};
