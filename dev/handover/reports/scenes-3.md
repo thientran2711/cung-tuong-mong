@@ -1,3 +1,5 @@
+PRIORITY #1 CHECK: OD L374/L712/L752 read (rules exist, no earlier build) | main: git grep on 7abaf07ac for confiscat/kitGloom/thành tài/luxGift/Biếu quà làm lành → reused jdh2 dhConfiscate hook + kitPanel/kitItemTag, kitGloom, kmStage/§65.2 frame, jgift picker pattern, jlux.luxGift, wkEval/giftVal; only hiệu/title confiscation, kitGloom FX and bạc-only gift act existed, no level-up scene | review/*: checked branch names (ls-remote) for demot/level/learn/tai/confis/scene/promo/gift: no demotion-scene, level-up or gift-with-work branch (scenes-art = art only; promo-rules/gift-ui/luxury already in main); no content grep of all 845 branches (shallow clone) | claims: CLAIMS.md has only this job for these 3 items.
+
 # scenes-3 — report (worker sonnet, branch review/scenes-3)
 Base origin/main 7abaf07ac. START_CTX ≈ low (fresh session); no rollover needed.
 ## What was built (3 owner-approved items, nothing more)
