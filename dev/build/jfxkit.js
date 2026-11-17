@@ -120,8 +120,8 @@ function kfkHandle(d,target,o,kind,onStop){let done=false,iv=0,to=0;KFK.live.add
   if(o.follow!==false)kfkPlace(d,kfkBox(target,o,o.ar))},250);
  if(o.dur)to=setTimeout(()=>H.stop(),o.dur);return H}
 function kfkLayer(o,cls){const d=document.createElement("div");d.className="kfxk "+cls;d.setAttribute("aria-hidden","true");if(o.z!=null)d.style.zIndex=o.z;if(o.opacity!=null)d.style.setProperty("--kfo",o.opacity);return d}
-function kfkSheetRun(d,src,cols,rows,n,fps,loop,onEnd){d.style.backgroundImage=`url("${src}")`;d.style.backgroundSize=`${cols*100}% ${rows*100}%`;let i=0;
- const step=()=>{const c=i%cols,r=Math.floor(i/cols);d.style.backgroundPosition=`${cols>1?c*100/(cols-1):0}% ${rows>1?r*100/(rows-1):0}%`};step();
+function kfkSheetRun(d,src,cols,rows,n,fps,loop,onEnd,rev){d.style.backgroundImage=`url("${src}")`;d.style.backgroundSize=`${cols*100}% ${rows*100}%`;let i=0;
+ const step=()=>{const j=rev?n-1-i:i,c=j%cols,r=Math.floor(j/cols);d.style.backgroundPosition=`${cols>1?c*100/(cols-1):0}% ${rows>1?r*100/(rows-1):0}%`};step();
  const iv=setInterval(()=>{i++;if(i>=n){if(loop)i=0;else{clearInterval(iv);onEnd&&onEnd();return}}step()},1000/fps);return iv}
 function kitFxLight(name,target,o){o=Object.assign({},o||{});const L=KFK_LIGHT[name];if(!L||!kfOn())return null;kfkLog("light:"+name);
  {const gb=o.inside&&target?kfkRectBox(target):kfkCBox(kfkBox(target,o,L.w/L.h));const rim=gb&&kfkRimFor(gb,name,o);if(rim)return rim}/* KIT §68.7: never over a person */
@@ -143,7 +143,7 @@ function kitFxSheet(name,target,o){o=Object.assign({},o||{});const Sd=KFK_SHEET[
  if(o.inside&&target&&target.appendChild){d.classList.add("kfxk-in");target.appendChild(d)}else{kfkPlace(d,kfkBox(target,o,o.ar));document.body.appendChild(d)}
  const loop=o.loop!=null?o.loop:!!D.loop;
  if(kfStill()){d.style.backgroundImage=`url("${kfkU(D.poster||D.src)}")`;d.style.backgroundSize="contain";if(!o.dur&&!loop)o.dur=o.hold||1600}
- else iv=kfkSheetRun(d,kfkU(D.src||name+"-sheet.webp"),D.cols,D.rows,D.n,o.fps||D.fps,loop,()=>{if(!o.keep)setTimeout(()=>h.stop(),o.hold!=null?o.hold:500)});
+ else iv=kfkSheetRun(d,kfkU(D.src||name+"-sheet.webp"),D.cols,D.rows,D.n,o.fps||D.fps,loop,()=>{if(!o.keep)setTimeout(()=>h.stop(),o.hold!=null?o.hold:500)},!!o.reverse);
  requestAnimationFrame(()=>d.classList.add("on"));h=kfkHandle(d,target,o,"sheets",()=>clearInterval(iv));d.__h=h;return h}
 /* kitFxEdge(name, o) — the painted edge overlay bleeds in from outside the screen (scale 1.12 → 1 + fade), holds, fades.
    o {in:ms 450, hold:ms 700, out:ms 900, opacity}. Reduced motion / Gọn: shown still for hold+in, then gone. */
@@ -213,6 +213,49 @@ function kfkAuto(){try{if(typeof OPT==="undefined"||OPT.fxpick)return;if(kfkLow(
 kfkAuto();KFK.slowHits=0;
 setInterval(()=>{try{if(typeof OPT==="undefined"||OPT.fxpick||OPT.fxon===false||!KFX.app||document.hidden)return;
  if(KFX.q<=.31&&KFX.parts.length>8){if(++KFK.slowHits>=3){OPT.fxon=false;OPT.fxauto=1;KFK.auto="slow";kitFxClear()}}else KFK.slowHits=Math.max(0,KFK.slowHits-1)}catch(e){}},2000);
+/* ---------- §68.8 PERSON MOTION · kitFigFx(kind, who, o) — what happens TO a person's picture on the stage (owner 15/11 20:05Z item 13 + 22:45Z list; review/presentation-wiring) ----------
+   who = a person object | "me" (her figure #mefig) | a picture element. The ONE place that animates a stage figure; every caller (jpres people moments, kit page) goes through it.
+   Painted rule: no drawn shapes. A figure is moved / tinted / faded with CSS filter + translate on the picture itself (composite "add", so the people-picture filter url(#kfa)
+   (jfighd) stays first and the picture's own filters keep working); the painted sprites / sheets come from kitFxBurst / kitFxSheet / kitFxRim. Terminal kinds (die, drag, out)
+   animate a GHOST copy of the picture (the stage may re-render under them). Pace = kitPace (BAL.pace). Gọn / reduced motion / bots: nothing (the log line + sound already say it).
+   kinds: flush (slap: one jolt + red flush) · poison (tint green, blur, recover) · grey (dims to grey, recover) · die (ghost greys, sinks, fades; white silk falls over her) ·
+          drag (ghost dragged off the stage, dims) · out (ghost slides out, fades) · in (slides in, fades up) · glow (rim light of a tone; pregnancy pink / birth / favour; never over the face) */
+const KFK_FIG={flush:900,poison:3200,grey:2600,die:3000,drag:1700,out:1000,in:1000,glow:2400};
+/* a stage picture that can really be seen (a hidden silhouette must never get a ghost / glow) */
+function kfkSeen(e){try{if(!e||e.getBoundingClientRect().width<=8)return false;const c=getComputedStyle(e);return c.visibility!=="hidden"&&c.display!=="none"&&+c.opacity>.05}catch(x){return false}}
+function kfkFigEl(who){try{if(who&&who.nodeType===1)return kfkSeen(who)?who:null;if(who&&who.snap)return who;
+ if(who==="me"||(typeof S!=="undefined"&&who===S)){const m=document.getElementById("mefig");return kfkSeen(m)?m:null}
+ if(!who||typeof curPeople!=="function")return null;const L=curPeople();let i=L.indexOf(who);if(i<0)i=L.findIndex(x=>x&&x.ref===who);if(i<0)return null;   /* the stage lists wrappers {kind, ref, name…}: the real person is x.ref */
+ 
+ const t=document.querySelector(`#tokens .tok[data-p="${i}"]`);if(!t)return null;const e=t.querySelector("img.figimg")||t.querySelector(".md");return kfkSeen(e)?e:null}catch(x){return null}}
+/* el = a picture element, or a snapshot {snap:1, rect, src, filter} taken before a re-render removed it (kfkSnap) */
+function kfkSnap(el){try{const r=el.getBoundingClientRect();if(r.width<8||el.tagName!=="IMG")return null;const f=getComputedStyle(el).filter;return{snap:1,rect:{left:r.left,top:r.top,width:r.width,height:r.height},src:el.currentSrc||el.src,filter:f==="none"?"":f}}catch(x){return null}}
+function kfkGhost(el){try{const sn=!!el.snap,r=sn?el.rect:el.getBoundingClientRect();if(r.width<8)return null;let g;
+ if(sn||el.tagName==="IMG"){g=document.createElement("img");g.src=sn?el.src:(el.currentSrc||el.src);g.draggable=false}else{g=el.cloneNode(true)}
+ g.className="kfxk-g";g.setAttribute("aria-hidden","true");const fl=sn?el.filter:(c=>c.filter==="none"?"":c.filter)(getComputedStyle(el));
+ g.style.cssText+=`;left:${r.left}px;top:${r.top}px;width:${r.width}px;height:${r.height}px;filter:${fl}`;document.body.appendChild(g);
+ const pv=sn?"":el.style.visibility;if(!sn)el.style.visibility="hidden";KFK.live.add(g);
+ g.__h={stop(){try{if(!sn)el.style.visibility=pv}catch(x){}KFK.live.delete(g);g.remove()}};return g}catch(x){return null}}
+function kitFigFx(kind,who,o){o=o||{};const D=KFK_FIG[kind];if(!D||!kfOn())return null;
+ const el=kfkFigEl(who);if(!el||kfStill())return null;kfkLog("fig:"+kind);const ms=kitPace(o.ms||D);const ease="cubic-bezier(.3,.1,.3,1)";
+ const F=(x)=>({filter:x});const A=[];const run=(t,k,opt)=>{try{const a=t.animate(k,Object.assign({duration:ms,easing:ease,composite:"add"},opt||{}));A.push(a);return a}catch(x){return null}};
+ const h={el,kind,stop(){A.forEach(a=>{try{a.cancel()}catch(x){}});try{g&&g.__h.stop()}catch(x){}},get alive(){return A.some(a=>a.playState==="running")}};let g=null;
+ if(kind==="flush"){const R="sepia(.6) saturate(3.4) hue-rotate(-38deg)",Z="sepia(0) saturate(1) hue-rotate(0deg)";
+  run(el,[{filter:Z,translate:"0 0"},{filter:R,translate:"-5px 0",offset:.16},{filter:R,translate:"4px 0",offset:.3},{filter:R,translate:"-2px 0",offset:.46},{filter:Z,translate:"0 0"}])}
+ else if(kind==="poison"){const Z="hue-rotate(0deg) saturate(1) brightness(1) blur(0px)",P="hue-rotate(62deg) saturate(1.7) brightness(.82) blur(0px)",B="hue-rotate(62deg) saturate(1.7) brightness(.78) blur(2.2px)";
+  run(el,[{filter:Z},{filter:P,offset:.3},{filter:B,offset:.6},{filter:B,offset:.78},{filter:Z}])}
+ else if(kind==="grey"){const Z="grayscale(0) brightness(1)",G="grayscale(1) brightness(.78)";run(el,[{filter:Z},{filter:G,offset:.3},{filter:G,offset:.75},{filter:Z}])}
+ else if(kind==="glow"){return kitFxRim(el,{tone:o.tone||"lotuslight",a:o.a,r:o.r,dur:ms})}
+ else if(kind==="in"){run(el,[{opacity:0,translate:`${o.from||-40}px 0`},{opacity:1,translate:"0 0"}],{composite:"replace"})}
+ else{/* die / drag / out: ghost */
+  g=kfkGhost(el);if(!g)return null;const Z="grayscale(0) brightness(1) blur(0px)";const base=g.style.filter||"";
+  if(kind==="die"){const G="grayscale(1) brightness(.72) blur(1.2px)";g.animate([{filter:`${base} ${Z}`,opacity:1,translate:"0 0"},{filter:`${base} ${G}`,opacity:.85,translate:"0 0",offset:.45},{filter:`${base} ${G}`,opacity:0,translate:"0 18px"}],{duration:ms,easing:"ease-in",fill:"forwards"});
+   try{if(typeof kitFxSheet==="function")kitFxSheet("silk",el.snap?{x:el.rect.left+el.rect.width/2,y:el.rect.top+el.rect.height*.45}:el,el.snap?{size:el.rect.width*1.05}:{scale:1.05,cy:.45})}catch(x){}}
+  else if(kind==="drag"){const dx=(o.dir||1)*Math.min(innerWidth*.6,420);g.animate([{filter:`${base} ${Z}`,opacity:1,translate:"0 0",rotate:"0deg"},{filter:`${base} grayscale(.6) brightness(.8) blur(0px)`,opacity:.9,translate:`${dx*.35}px 0`,rotate:`${(o.dir||1)*2}deg`,offset:.4},{filter:`${base} grayscale(1) brightness(.6) blur(1px)`,opacity:0,translate:`${dx}px 0`,rotate:`${(o.dir||1)*4}deg`}],{duration:ms,easing:"ease-in",fill:"forwards"})}
+  else{g.animate([{opacity:1,translate:"0 0"},{opacity:0,translate:`${(o.dir||1)*60}px 0`}],{duration:ms,easing:"ease-in",fill:"forwards"})}
+  setTimeout(()=>g&&g.__h.stop(),ms+80)}
+ return h}
+Object.assign(window,{kitFigFx,kfkFigEl,kfkSnap,KFK_FIG});
 Object.assign(window,{kitFxRim,kfkPersons,KFK_PERSON,kitFxSprite,kitFxBurst,kitFxLight,kitFxSheet,kitFxEdge,kitFxObj,kitFxGift,kitFxGiftCarry,kitFxLetter,kitFxPreload,kitFxClear,KFK_SP,KFK_LIGHT,KFK_SHEET,KFK_EDGE});
 (function(){const st=document.createElement("style");st.textContent=`
 .kfxk{position:fixed;z-index:9445;pointer-events:none;opacity:0;transition:opacity .45s ease;background-repeat:no-repeat;background-position:center;background-size:contain}
@@ -221,10 +264,14 @@ Object.assign(window,{kitFxRim,kfkPersons,KFK_PERSON,kitFxSprite,kitFxBurst,kitF
 .kfxk-l,.kfxk-scr{mix-blend-mode:screen}
 .kfxk-e{inset:0;width:100vw;height:100vh;background-size:100% 100%;z-index:9446;transform-origin:50% 50%}
 .kfxk-o{background-repeat:no-repeat;will-change:transform}
+.kfxk-g{position:fixed;z-index:9439;pointer-events:none;object-fit:contain;margin:0;max-width:none;max-height:none;transform:none;will-change:opacity,transform}
 .kfxk-pgr{flex-wrap:wrap;gap:6px}.kfxk-pgd{background:#1c1820;padding:8px;border-radius:8px}.kfxk-pgi{height:22px;max-width:120px;object-fit:cover;object-position:left;vertical-align:middle}
 .kfxk-l video{width:100%;height:100%;object-fit:contain;display:block;background:#000}
 @media (prefers-reduced-motion:reduce){.kfxk{transition:none}}
 `;document.head.appendChild(st)})();
+/* §68.8 kit page sample: a demo picture + a button per kitFigFx kind (the kinds act on the picture itself) */
+try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§68.8",title:"kitFigFx · hoạt ảnh trên người (flush · poison · grey · die · drag · out · in · glow)",
+ html:()=>`<div class="kitpg-row kfxk-pgr kfxk-pgd"><img id="kfxk-demo" src="img/kit/unknown-fig-f.webp" alt="" style="height:150px;width:auto">${Object.keys(KFK_FIG).map(k=>`<button type="button" class="kbtn alt" onclick="kitFigFx('${k}',document.getElementById('kfxk-demo'),{dir:1})">fig ${k}</button>`).join("")}</div>`})}catch(e){}
 /* §47 kit page sample: every painted kind, every light, every sheet (tap to play) */
 try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§68",title:"painted-fx · kitFxBurst · kitFxLight · kitFxSheet (hiệu ứng vẽ tay)",
  html:()=>`<div class="kitpg-row kfxk-pgr">${Object.keys(KFK_SP).map(n=>`<button type="button" class="kbtn alt" onclick="kitFxBurst('${n}',this,14)"><img class="kfxk-pgi" src="${kfkU(n+".webp")}" alt=""> ${n}</button>`).join("")}</div>`+

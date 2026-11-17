@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"babc9b4a","t":"2026-11-17T01:39Z","c":"Chơi chung không còn treo máy vì tên bạn lặp chữ; số bóng người trên dư đồ khớp đúng người đang ở đó; việc có hạn giờ hiện đồng hồ ngay dướ…","b":"dc467b22ef69","h":[{"s":"92685210+","t":"2026-11-17T00:53Z","c":"Khung việc và khung sự kiện bốn cỡ, tranh lấp đầy khung, việc nhắc tên ai hiện chân dung người ấy; phẩm của món đồ nằm ngay trên viền khung…"},{"s":"6f513340","t":"2026-11-16T23:24Z","c":"Vào game mới không còn bật ngay màn lật thẻ, lật thẻ chỉ khi vào buổi tối; dư đồ nhãn giấy mới; việc dài lấn sang buổi sau; lời trong cung …"},{"s":"7a18d957","t":"2026-11-16T22:44Z","c":"review-diemtrang-fx-r1 report"},{"s":"afe2bcbc","t":"2026-11-16T22:25Z","c":"review r1: KIT 84.1a note + report"},{"s":"dea1d445+","t":"2026-11-16T21:32Z","c":"golive lag-play-2: CHANGE line + site rebuilt"},{"s":"674f3af4","t":"2026-11-16T21:21Z","c":"Chơi cùng bạn: bạn chơi chung chưa gặp mặt nay hiện tên gọi chung “Hảo hữu của ta” ở mọi nơi, không còn ẩn thành dấu hỏi."},{"s":"923567d5+","t":"2026-11-16T21:03Z","c":"Hình nhân vật: hết vệt xám ở cổ và viền tối quanh người."},{"s":"59812a63+","t":"2026-11-16T20:41Z","c":"Khung chung: khoảng cách đều nhau ở sổ tuần và thẻ thân phận; hàng sổ gọn, thẻ lật không đè chữ."},{"s":"ab12d6fc","t":"2026-11-16T20:53Z","c":"Tuyết và đom đóm mới, mượt hơn; nền tranh không còn vẽ lại mỗi khung hình."},{"s":"8adfd886+","t":"2026-11-16T20:33Z","c":"Tư trang: các trang đều nhau, ô đồ đeo gọn trên Fold và iPad."}]};
+window.CTM_BI={"s":"7abaf07a+","t":"2026-11-17T01:39Z","c":"batch-0132: CHANGE line + rebuild site","b":"7d878c7aba77","h":[{"s":"babc9b4a","t":"2026-11-17T01:39Z","c":"Chơi chung không còn treo máy vì tên bạn lặp chữ; số bóng người trên dư đồ khớp đúng người đang ở đó; việc có hạn giờ hiện đồng hồ ngay dướ…"},{"s":"92685210+","t":"2026-11-17T00:53Z","c":"Khung việc và khung sự kiện bốn cỡ, tranh lấp đầy khung, việc nhắc tên ai hiện chân dung người ấy; phẩm của món đồ nằm ngay trên viền khung…"},{"s":"6f513340","t":"2026-11-16T23:24Z","c":"Vào game mới không còn bật ngay màn lật thẻ, lật thẻ chỉ khi vào buổi tối; dư đồ nhãn giấy mới; việc dài lấn sang buổi sau; lời trong cung …"},{"s":"7a18d957","t":"2026-11-16T22:44Z","c":"review-diemtrang-fx-r1 report"},{"s":"afe2bcbc","t":"2026-11-16T22:25Z","c":"review r1: KIT 84.1a note + report"},{"s":"dea1d445+","t":"2026-11-16T21:32Z","c":"golive lag-play-2: CHANGE line + site rebuilt"},{"s":"674f3af4","t":"2026-11-16T21:21Z","c":"Chơi cùng bạn: bạn chơi chung chưa gặp mặt nay hiện tên gọi chung “Hảo hữu của ta” ở mọi nơi, không còn ẩn thành dấu hỏi."},{"s":"923567d5+","t":"2026-11-16T21:03Z","c":"Hình nhân vật: hết vệt xám ở cổ và viền tối quanh người."},{"s":"59812a63+","t":"2026-11-16T20:41Z","c":"Khung chung: khoảng cách đều nhau ở sổ tuần và thẻ thân phận; hàng sổ gọn, thẻ lật không đè chữ."},{"s":"ab12d6fc","t":"2026-11-16T20:53Z","c":"Tuyết và đom đóm mới, mượt hơn; nền tranh không còn vẽ lại mỗi khung hình."}]};
 /* KBOOT — BOOT COVER (owner 15/11 "Khi vừa bấm vào game, có chừng ít hơn 1 giây hiện khung này"; KIT §14.1).
    Before: while the 4 MB page parsed, the browser painted the bare static markup of p1.html (HUD box, a vertical stat label list, empty
    panels, the old 11-tab bar) for ~1 s on a warm open and many seconds on a cold one, before any kit CSS/JS existed.
@@ -34000,8 +34000,8 @@ function kfkHandle(d,target,o,kind,onStop){let done=false,iv=0,to=0;KFK.live.add
   if(o.follow!==false)kfkPlace(d,kfkBox(target,o,o.ar))},250);
  if(o.dur)to=setTimeout(()=>H.stop(),o.dur);return H}
 function kfkLayer(o,cls){const d=document.createElement("div");d.className="kfxk "+cls;d.setAttribute("aria-hidden","true");if(o.z!=null)d.style.zIndex=o.z;if(o.opacity!=null)d.style.setProperty("--kfo",o.opacity);return d}
-function kfkSheetRun(d,src,cols,rows,n,fps,loop,onEnd){d.style.backgroundImage=`url("${src}")`;d.style.backgroundSize=`${cols*100}% ${rows*100}%`;let i=0;
- const step=()=>{const c=i%cols,r=Math.floor(i/cols);d.style.backgroundPosition=`${cols>1?c*100/(cols-1):0}% ${rows>1?r*100/(rows-1):0}%`};step();
+function kfkSheetRun(d,src,cols,rows,n,fps,loop,onEnd,rev){d.style.backgroundImage=`url("${src}")`;d.style.backgroundSize=`${cols*100}% ${rows*100}%`;let i=0;
+ const step=()=>{const j=rev?n-1-i:i,c=j%cols,r=Math.floor(j/cols);d.style.backgroundPosition=`${cols>1?c*100/(cols-1):0}% ${rows>1?r*100/(rows-1):0}%`};step();
  const iv=setInterval(()=>{i++;if(i>=n){if(loop)i=0;else{clearInterval(iv);onEnd&&onEnd();return}}step()},1000/fps);return iv}
 function kitFxLight(name,target,o){o=Object.assign({},o||{});const L=KFK_LIGHT[name];if(!L||!kfOn())return null;kfkLog("light:"+name);
  {const gb=o.inside&&target?kfkRectBox(target):kfkCBox(kfkBox(target,o,L.w/L.h));const rim=gb&&kfkRimFor(gb,name,o);if(rim)return rim}/* KIT §68.7: never over a person */
@@ -34023,7 +34023,7 @@ function kitFxSheet(name,target,o){o=Object.assign({},o||{});const Sd=KFK_SHEET[
  if(o.inside&&target&&target.appendChild){d.classList.add("kfxk-in");target.appendChild(d)}else{kfkPlace(d,kfkBox(target,o,o.ar));document.body.appendChild(d)}
  const loop=o.loop!=null?o.loop:!!D.loop;
  if(kfStill()){d.style.backgroundImage=`url("${kfkU(D.poster||D.src)}")`;d.style.backgroundSize="contain";if(!o.dur&&!loop)o.dur=o.hold||1600}
- else iv=kfkSheetRun(d,kfkU(D.src||name+"-sheet.webp"),D.cols,D.rows,D.n,o.fps||D.fps,loop,()=>{if(!o.keep)setTimeout(()=>h.stop(),o.hold!=null?o.hold:500)});
+ else iv=kfkSheetRun(d,kfkU(D.src||name+"-sheet.webp"),D.cols,D.rows,D.n,o.fps||D.fps,loop,()=>{if(!o.keep)setTimeout(()=>h.stop(),o.hold!=null?o.hold:500)},!!o.reverse);
  requestAnimationFrame(()=>d.classList.add("on"));h=kfkHandle(d,target,o,"sheets",()=>clearInterval(iv));d.__h=h;return h}
 /* kitFxEdge(name, o) — the painted edge overlay bleeds in from outside the screen (scale 1.12 → 1 + fade), holds, fades.
    o {in:ms 450, hold:ms 700, out:ms 900, opacity}. Reduced motion / Gọn: shown still for hold+in, then gone. */
@@ -34093,6 +34093,49 @@ function kfkAuto(){try{if(typeof OPT==="undefined"||OPT.fxpick)return;if(kfkLow(
 kfkAuto();KFK.slowHits=0;
 setInterval(()=>{try{if(typeof OPT==="undefined"||OPT.fxpick||OPT.fxon===false||!KFX.app||document.hidden)return;
  if(KFX.q<=.31&&KFX.parts.length>8){if(++KFK.slowHits>=3){OPT.fxon=false;OPT.fxauto=1;KFK.auto="slow";kitFxClear()}}else KFK.slowHits=Math.max(0,KFK.slowHits-1)}catch(e){}},2000);
+/* ---------- §68.8 PERSON MOTION · kitFigFx(kind, who, o) — what happens TO a person's picture on the stage (owner 15/11 20:05Z item 13 + 22:45Z list; review/presentation-wiring) ----------
+   who = a person object | "me" (her figure #mefig) | a picture element. The ONE place that animates a stage figure; every caller (jpres people moments, kit page) goes through it.
+   Painted rule: no drawn shapes. A figure is moved / tinted / faded with CSS filter + translate on the picture itself (composite "add", so the people-picture filter url(#kfa)
+   (jfighd) stays first and the picture's own filters keep working); the painted sprites / sheets come from kitFxBurst / kitFxSheet / kitFxRim. Terminal kinds (die, drag, out)
+   animate a GHOST copy of the picture (the stage may re-render under them). Pace = kitPace (BAL.pace). Gọn / reduced motion / bots: nothing (the log line + sound already say it).
+   kinds: flush (slap: one jolt + red flush) · poison (tint green, blur, recover) · grey (dims to grey, recover) · die (ghost greys, sinks, fades; white silk falls over her) ·
+          drag (ghost dragged off the stage, dims) · out (ghost slides out, fades) · in (slides in, fades up) · glow (rim light of a tone; pregnancy pink / birth / favour; never over the face) */
+const KFK_FIG={flush:900,poison:3200,grey:2600,die:3000,drag:1700,out:1000,in:1000,glow:2400};
+/* a stage picture that can really be seen (a hidden silhouette must never get a ghost / glow) */
+function kfkSeen(e){try{if(!e||e.getBoundingClientRect().width<=8)return false;const c=getComputedStyle(e);return c.visibility!=="hidden"&&c.display!=="none"&&+c.opacity>.05}catch(x){return false}}
+function kfkFigEl(who){try{if(who&&who.nodeType===1)return kfkSeen(who)?who:null;if(who&&who.snap)return who;
+ if(who==="me"||(typeof S!=="undefined"&&who===S)){const m=document.getElementById("mefig");return kfkSeen(m)?m:null}
+ if(!who||typeof curPeople!=="function")return null;const L=curPeople();let i=L.indexOf(who);if(i<0)i=L.findIndex(x=>x&&x.ref===who);if(i<0)return null;   /* the stage lists wrappers {kind, ref, name…}: the real person is x.ref */
+ 
+ const t=document.querySelector(`#tokens .tok[data-p="${i}"]`);if(!t)return null;const e=t.querySelector("img.figimg")||t.querySelector(".md");return kfkSeen(e)?e:null}catch(x){return null}}
+/* el = a picture element, or a snapshot {snap:1, rect, src, filter} taken before a re-render removed it (kfkSnap) */
+function kfkSnap(el){try{const r=el.getBoundingClientRect();if(r.width<8||el.tagName!=="IMG")return null;const f=getComputedStyle(el).filter;return{snap:1,rect:{left:r.left,top:r.top,width:r.width,height:r.height},src:el.currentSrc||el.src,filter:f==="none"?"":f}}catch(x){return null}}
+function kfkGhost(el){try{const sn=!!el.snap,r=sn?el.rect:el.getBoundingClientRect();if(r.width<8)return null;let g;
+ if(sn||el.tagName==="IMG"){g=document.createElement("img");g.src=sn?el.src:(el.currentSrc||el.src);g.draggable=false}else{g=el.cloneNode(true)}
+ g.className="kfxk-g";g.setAttribute("aria-hidden","true");const fl=sn?el.filter:(c=>c.filter==="none"?"":c.filter)(getComputedStyle(el));
+ g.style.cssText+=`;left:${r.left}px;top:${r.top}px;width:${r.width}px;height:${r.height}px;filter:${fl}`;document.body.appendChild(g);
+ const pv=sn?"":el.style.visibility;if(!sn)el.style.visibility="hidden";KFK.live.add(g);
+ g.__h={stop(){try{if(!sn)el.style.visibility=pv}catch(x){}KFK.live.delete(g);g.remove()}};return g}catch(x){return null}}
+function kitFigFx(kind,who,o){o=o||{};const D=KFK_FIG[kind];if(!D||!kfOn())return null;
+ const el=kfkFigEl(who);if(!el||kfStill())return null;kfkLog("fig:"+kind);const ms=kitPace(o.ms||D);const ease="cubic-bezier(.3,.1,.3,1)";
+ const F=(x)=>({filter:x});const A=[];const run=(t,k,opt)=>{try{const a=t.animate(k,Object.assign({duration:ms,easing:ease,composite:"add"},opt||{}));A.push(a);return a}catch(x){return null}};
+ const h={el,kind,stop(){A.forEach(a=>{try{a.cancel()}catch(x){}});try{g&&g.__h.stop()}catch(x){}},get alive(){return A.some(a=>a.playState==="running")}};let g=null;
+ if(kind==="flush"){const R="sepia(.6) saturate(3.4) hue-rotate(-38deg)",Z="sepia(0) saturate(1) hue-rotate(0deg)";
+  run(el,[{filter:Z,translate:"0 0"},{filter:R,translate:"-5px 0",offset:.16},{filter:R,translate:"4px 0",offset:.3},{filter:R,translate:"-2px 0",offset:.46},{filter:Z,translate:"0 0"}])}
+ else if(kind==="poison"){const Z="hue-rotate(0deg) saturate(1) brightness(1) blur(0px)",P="hue-rotate(62deg) saturate(1.7) brightness(.82) blur(0px)",B="hue-rotate(62deg) saturate(1.7) brightness(.78) blur(2.2px)";
+  run(el,[{filter:Z},{filter:P,offset:.3},{filter:B,offset:.6},{filter:B,offset:.78},{filter:Z}])}
+ else if(kind==="grey"){const Z="grayscale(0) brightness(1)",G="grayscale(1) brightness(.78)";run(el,[{filter:Z},{filter:G,offset:.3},{filter:G,offset:.75},{filter:Z}])}
+ else if(kind==="glow"){return kitFxRim(el,{tone:o.tone||"lotuslight",a:o.a,r:o.r,dur:ms})}
+ else if(kind==="in"){run(el,[{opacity:0,translate:`${o.from||-40}px 0`},{opacity:1,translate:"0 0"}],{composite:"replace"})}
+ else{/* die / drag / out: ghost */
+  g=kfkGhost(el);if(!g)return null;const Z="grayscale(0) brightness(1) blur(0px)";const base=g.style.filter||"";
+  if(kind==="die"){const G="grayscale(1) brightness(.72) blur(1.2px)";g.animate([{filter:`${base} ${Z}`,opacity:1,translate:"0 0"},{filter:`${base} ${G}`,opacity:.85,translate:"0 0",offset:.45},{filter:`${base} ${G}`,opacity:0,translate:"0 18px"}],{duration:ms,easing:"ease-in",fill:"forwards"});
+   try{if(typeof kitFxSheet==="function")kitFxSheet("silk",el.snap?{x:el.rect.left+el.rect.width/2,y:el.rect.top+el.rect.height*.45}:el,el.snap?{size:el.rect.width*1.05}:{scale:1.05,cy:.45})}catch(x){}}
+  else if(kind==="drag"){const dx=(o.dir||1)*Math.min(innerWidth*.6,420);g.animate([{filter:`${base} ${Z}`,opacity:1,translate:"0 0",rotate:"0deg"},{filter:`${base} grayscale(.6) brightness(.8) blur(0px)`,opacity:.9,translate:`${dx*.35}px 0`,rotate:`${(o.dir||1)*2}deg`,offset:.4},{filter:`${base} grayscale(1) brightness(.6) blur(1px)`,opacity:0,translate:`${dx}px 0`,rotate:`${(o.dir||1)*4}deg`}],{duration:ms,easing:"ease-in",fill:"forwards"})}
+  else{g.animate([{opacity:1,translate:"0 0"},{opacity:0,translate:`${(o.dir||1)*60}px 0`}],{duration:ms,easing:"ease-in",fill:"forwards"})}
+  setTimeout(()=>g&&g.__h.stop(),ms+80)}
+ return h}
+Object.assign(window,{kitFigFx,kfkFigEl,kfkSnap,KFK_FIG});
 Object.assign(window,{kitFxRim,kfkPersons,KFK_PERSON,kitFxSprite,kitFxBurst,kitFxLight,kitFxSheet,kitFxEdge,kitFxObj,kitFxGift,kitFxGiftCarry,kitFxLetter,kitFxPreload,kitFxClear,KFK_SP,KFK_LIGHT,KFK_SHEET,KFK_EDGE});
 (function(){const st=document.createElement("style");st.textContent=`
 .kfxk{position:fixed;z-index:9445;pointer-events:none;opacity:0;transition:opacity .45s ease;background-repeat:no-repeat;background-position:center;background-size:contain}
@@ -34101,10 +34144,14 @@ Object.assign(window,{kitFxRim,kfkPersons,KFK_PERSON,kitFxSprite,kitFxBurst,kitF
 .kfxk-l,.kfxk-scr{mix-blend-mode:screen}
 .kfxk-e{inset:0;width:100vw;height:100vh;background-size:100% 100%;z-index:9446;transform-origin:50% 50%}
 .kfxk-o{background-repeat:no-repeat;will-change:transform}
+.kfxk-g{position:fixed;z-index:9439;pointer-events:none;object-fit:contain;margin:0;max-width:none;max-height:none;transform:none;will-change:opacity,transform}
 .kfxk-pgr{flex-wrap:wrap;gap:6px}.kfxk-pgd{background:#1c1820;padding:8px;border-radius:8px}.kfxk-pgi{height:22px;max-width:120px;object-fit:cover;object-position:left;vertical-align:middle}
 .kfxk-l video{width:100%;height:100%;object-fit:contain;display:block;background:#000}
 @media (prefers-reduced-motion:reduce){.kfxk{transition:none}}
 `;document.head.appendChild(st)})();
+/* §68.8 kit page sample: a demo picture + a button per kitFigFx kind (the kinds act on the picture itself) */
+try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§68.8",title:"kitFigFx · hoạt ảnh trên người (flush · poison · grey · die · drag · out · in · glow)",
+ html:()=>`<div class="kitpg-row kfxk-pgr kfxk-pgd"><img id="kfxk-demo" src="https://ctm-img.victoria-tntt.workers.dev/img/kit/unknown-fig-f.webp" alt="" style="height:150px;width:auto">${Object.keys(KFK_FIG).map(k=>`<button type="button" class="kbtn alt" onclick="kitFigFx('${k}',document.getElementById('kfxk-demo'),{dir:1})">fig ${k}</button>`).join("")}</div>`})}catch(e){}
 /* §47 kit page sample: every painted kind, every light, every sheet (tap to play) */
 try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§68",title:"painted-fx · kitFxBurst · kitFxLight · kitFxSheet (hiệu ứng vẽ tay)",
  html:()=>`<div class="kitpg-row kfxk-pgr">${Object.keys(KFK_SP).map(n=>`<button type="button" class="kbtn alt" onclick="kitFxBurst('${n}',this,14)"><img class="kfxk-pgi" src="${kfkU(n+".webp")}" alt=""> ${n}</button>`).join("")}</div>`+
@@ -37928,6 +37975,69 @@ function kpresShow(m){try{if(!m||m.__pres)return;const P=kpresPlan(m);if(!P)retu
 (function(){const W=(n,f)=>{const o=window[n];if(typeof o!=="function"||o.__kpres)return;const w=f(o);w.__kpres=1;window[n]=w;try{(0,eval)(n+"=window."+n)}catch(e){}};
  W("showModal",o=>function(){const r=o.apply(this,arguments);try{kpresShow(typeof Q!=="undefined"&&Q[0])}catch(e){}return r});
  W("musicCtx",o=>function(){try{const m=typeof Q!=="undefined"&&Q[0];if(m&&m.__presMus&&S&&!S.dead&&S.place!=="lc"&&(m.pid||m.evId))return m.__presMus}catch(e){}return o.apply(this,arguments)})})();
+/* ================= PEOPLE MOMENTS (owner 15/11 20:05Z item 13 + 22:45Z list; S3-151/182/205; review/presentation-wiring) =================
+   The 13 approved people animations + the painted-effect list, wired from ONE table (KPM) through the kit: kitFigFx (KIT §68.8, what happens to a stage figure),
+   kitFx (§54 screen moments), kitFxBurst / kitFxSheet / kitFxRim (§68). No private drawing here. Every moment is local presentation after the state applied
+   (co-op: nothing sent, nothing awaited); Gọn / reduced motion / bots / no figure on the stage: nothing. Where the person is not on the stage the log line already says it.
+   Her own moments (rank, cold palace, pregnancy, birth, death, hit, poison, harm) keep their j93 / j11 scenes; this adds what happens to OTHER people and to her figure.
+   Test hook window.KPM_LOG [{m, who, fig, t}]; test dev/test/presentation-people.js. */
+const KPM_LOG=window.KPM_LOG=[];const KPM_LAST={};let KPM_PREV=[],KPM_PL="";const KPM_OUT=new Set();   /* KPM_PREV = the people list the stage was LAST drawn with (the game changes the list before it re-renders) */
+const kpmKey=w=>w&&(w.ref||(w.kind?w.kind+":"+w.name:w));   /* the stage lists wrappers {kind, ref, name}; homePeople() builds NEW wrappers every render, so identity = ref, else kind:name */
+function kpmOn(){try{return typeof kfOn==="function"&&kfOn()&&typeof S!=="undefined"&&S&&!S.dead&&typeof kitFigFx==="function"}catch(e){return false}}
+function kpmOnce(k,ms){const n=performance.now();if(KPM_LAST[k]&&n-KPM_LAST[k]<ms)return false;KPM_LAST[k]=n;return true}
+function kpmDir(p){try{const e=kfkFigEl(p);if(!e||e.snap)return 1;const r=e.getBoundingClientRect();return r.left+r.width/2<innerWidth/2?-1:1}catch(x){return 1}}
+/* moment → what it does. p = the person it happens to (person | "me"), q = the second person (thread), o = options. Returns true when a figure moved. */
+const KPM={
+ slap:(p)=>{const f=kitFigFx("flush",p);if(!f&&p!==S&&kpmOnce("slapb"+(p&&p.name),800))kitFxBurst("brush",null,5);return !!f},                       /* one beat: jolt + brief red flush (hit's brush streak + shake is kitFx hit, her only, j11) */
+ poison:(p)=>{const f=kitFigFx("poison",p);if(p===S&&kpmOnce("poison",1500))kitFx("poison");return !!f},                                            /* figure tints green, then blurs */
+ harm:(p)=>{const f=kitFigFx("flush",p);if(p===S&&kpmOnce("harm",1500))kitFx("harm");return !!f},                                                  /* heavy harm: ink-blood edge on her; the figure jolts */
+ rumour:(p)=>{const e=kfkFigEl(p);if(kpmOnce("rumour",2500))kitFx("rumour",{el:e&&!e.snap?e:null});if(e&&!e.snap&&p!==S)kitFxBurst("paper",e,6);return !!e},    /* ink wisps + fluttering paper notes */
+ death:(p)=>{if(p===S)return false;return !!kitFigFx("die",p)},                                                                                    /* figure greys, sinks and fades; white silk falls over */
+ drag:(p)=>{return !!kitFigFx("drag",p,{dir:kpmDir(p)})},                                                                                          /* dragged off the stage, screen dims (her: j93 scenes) */
+ out:(p)=>!!kitFigFx("out",p,{dir:kpmDir(p)}),                                                                                                     /* leaves the stage: fades out */
+ preg:(p)=>{const f=kitFigFx("glow",p,{tone:"lotuslight",r:16});const e=kfkFigEl(p);if(e&&!e.snap)kitFxBurst("petal-lotus",e,5);return !!f},       /* soft pink light round her (rim only, never over the face) */
+ birth:(p)=>{const f=kitFigFx("glow",p,{tone:"lotuslight",r:20,ms:3200});const e=kfkFigEl(p);if(e&&!e.snap){kitFxBurst("petal-lotus",e,8);kitFxBurst("lotuslight",e,1)}return !!f},   /* ART REQUEST: swaddled baby appears in her arms (sprite not drawn yet) */
+ rise:(p)=>{const f=kitFigFx("glow",p,{tone:"glow-gold",r:18});const e=kfkFigEl(p);if(e&&!e.snap)kitFxBurst("petal-peach",e,6);return !!f},          /* promoted: gold rim + petals */
+ fall:(p)=>{return !!kitFigFx("grey",p)},                                                                                                          /* demoted / cold palace: figure greys */
+ favour:(p)=>{const e=kfkFigEl(p);if(e&&!e.snap)kitFxBurst("petal-peach",e,9);return !!kitFigFx("glow",p,{tone:"candle",r:12})},                       /* favoured: petals fall round her */
+ join:(p,q)=>kpmThread(p,q,true),betray:(p,q)=>kpmThread(p,q,false)};                                                                                /* alliance: a red thread joins two people; betrayal: it snaps */
+function kpmThread(p,q,join){try{const a=kfkFigEl(p),b=kfkFigEl(q);if(!a||!b||a.snap||b.snap||a===b){const e=a||b;if(e&&!e.snap)kitFxBurst("petal-peach",e,5);return false}
+ const ra=a.getBoundingClientRect(),rb=b.getBoundingClientRect(),x=(ra.left+ra.width/2+rb.left+rb.width/2)/2,y=(ra.top+ra.height*.45+rb.top+rb.height*.45)/2,w=Math.max(120,Math.min(innerWidth*.6,Math.abs(ra.left+ra.width/2-(rb.left+rb.width/2))*1.1));
+ kitFxSheet("thread",{x,y},{size:w,reverse:!!join,hold:700});return true}catch(e){return false}}
+function kpmGo(m,p,q,o){try{if(!kpmOn()||!p||!KPM[m])return false;const ok=KPM[m](p,q,o);KPM_LOG.push({m,who:p===S?"me":p&&p.name||"",fig:!!ok,t:Date.now()});if(KPM_LOG.length>80)KPM_LOG.shift();return ok}catch(e){console.error("kpm",m,e);return false}}
+window.kpmGo=kpmGo;window.KPM=KPM;
+/* hooks: ONE list of the game actions that do something to a person (ACT key → moment on the target / actor+target), plus the state functions */
+const KPM_ACT={tat:{m:"slap",ok:/./},phatquy:{m:"slap",ok:/./},
+ poison:{m:"poison",ok:/trúng độc|nôn ra máu|thập tử|chết sau/,no:/may có thuốc|bị phát hiện/},kpoison:{m:"poison",ok:/trúng độc|ốm|sốt|lâm bệnh|thập tử/,no:/bị phát hiện|chặn kịp/},slowpoison:{m:"poison",ok:/./,no:/bị phát hiện|không thành|chặn kịp/},pgift:{m:"poison",ok:/trúng độc|nôn|ngã bệnh|lâm bệnh/,no:/bị phát hiện|không thành/},
+ pond:{m:"harm",ok:/./,no:/bị phát hiện|bị lộ|không thành|chặn kịp/},pushp:{m:"harm",ok:/./,no:/bị phát hiện|bị lộ|không thành|chặn kịp/},trip:{m:"harm",ok:/./,no:/bị phát hiện|bị lộ|không thành|chặn kịp/},
+ huydung:{m:"harm",ok:/./,no:/bị phát hiện|bị lộ|không thành|chặn kịp/},thathu:{m:"harm",ok:/./,no:/bị phát hiện|bị lộ|không thành|chặn kịp/},phonghoa:{m:"harm",ok:/./,no:/bị phát hiện|bị lộ|không thành|chặn kịp/},
+ rumor:{m:"rumour",ok:/đồn/,no:/bị phát hiện|bị lộ|không thành/},lygian:{m:"rumour",ok:/./,no:/bị phát hiện|bị lộ|không thành/},frame:{m:"rumour",ok:/hình nhân|bùa ngải/,no:/bị lộ|bị phát hiện/},kframe:{m:"rumour",ok:/./,no:/bị lộ|bị phát hiện/},
+ ally:{m:"join",two:1,ok:/thành/,no:/lạnh nhạt/},xinhh:{m:"join",two:1,ok:/thành/,no:/không thành/},banphe:{m:"betray",two:1,ok:/./,no:/không thành|bị phát hiện/}};
+(function(){const W=(n,f)=>{const o=window[n];if(typeof o!=="function"||o.__kpm)return;const w=f(o);w.__kpm=1;window[n]=w;try{(0,eval)(n+"=window."+n)}catch(e){}};
+ for(const k in KPM_ACT){const A=typeof ACT==="object"&&ACT[k];if(!A||typeof A.f!=="function"||A.f.__kpm)continue;const D=KPM_ACT[k],F=A.f;
+  A.f=function(a,t){const r=F.apply(this,arguments);try{const s=String(r||"");if(t&&t!=="string"&&typeof t==="object"&&D.ok.test(s)&&!(D.no&&D.no.test(s)))setTimeout(()=>kpmGo(D.m,t,D.two?a:null),typeof kitPace==="function"?kitPace(450):450)}catch(e){}return r};A.f.__kpm=1}
+ /* death: an NPC on the stage greys, sinks and fades (kill = illness, ban chết, childbirth, dieIf) */
+ for(const n of ["kill","deathSentence","dieIf"])W(n,o=>function(p){const was=p&&typeof p==="object"&&p!==S&&p.alive!==false;const r=o.apply(this,arguments);try{if(was&&p.alive===false)kpmGo("death",p)}catch(e){}return r});
+ /* punished / phế: dragged off the stage (NPC, sev 2+ or fall); a light punishment is a flush */
+ W("punish",o=>function(p,why,sev){const r=o.apply(this,arguments);try{if(p&&typeof p==="object"&&p!==S)kpmGo((sev|0)>=2?"drag":"slap",p)}catch(e){}return r});
+ W("fall",o=>function(p){const r=o.apply(this,arguments);try{if(p&&typeof p==="object"&&p!==S)kpmGo("drag",p)}catch(e){}return r});
+ W("slapGive",o=>function(p){const r=o.apply(this,arguments);try{if(p&&typeof p==="object")kpmGo("slap",p)}catch(e){}return r});
+ /* a birth that lives: soft light + lotus petals round the mother (NPC; hers = the j93 bloom scene) */
+ W("birthP",o=>function(p,fake){const r=o.apply(this,arguments);try{if(p&&p!==S&&p.alive!==false&&!fake)kpmGo("birth",p)}catch(e){}return r});
+ /* people leave the stage: the figure fades out (the old pictures are snapshot before the stage re-renders) */
+ W("renderStage",o=>function(){let snap=[];try{if(kpmOn()&&KPM_PREV.length){document.querySelectorAll("#tokens .tok.fig").forEach(t=>{const e=t.querySelector("img.figimg"),w=KPM_PREV[+t.dataset.p],sn=e&&w&&kfkSnap(e);if(sn)snap.push([w,sn])})}}catch(e){}
+  const r=o.apply(this,arguments);try{const cur=typeof curPeople==="function"?curPeople():[];const pl=(S&&S.place)+"|"+(S&&S.visit&&S.visit.k),same=pl===KPM_PL;KPM_PL=pl;
+   if(snap.length&&same)kpmOutCheck(snap,cur);KPM_PREV=cur.slice()}catch(e){}return r});
+ /* state changes of the people on the stage, read after each render (any code path): pregnancy announced, rank up / down, cold palace */
+ W("render",o=>function(){const r=o.apply(this,arguments);try{kpmScan()}catch(e){}return r})})();
+/* snap = [[wrapper, kfkSnap(picture)]] of the figures drawn BEFORE; cur = the people list now: every figure whose person is gone fades out (a ghost of the old picture) */
+function kpmOutCheck(snap,cur){const now=new Set(cur.map(kpmKey));let n=0;for(const [w,sn] of snap){const k=kpmKey(w),pp=w.ref||w;if(!now.has(k)&&pp.alive!==false&&!KPM_OUT.has(k)){KPM_OUT.add(k);setTimeout(()=>KPM_OUT.delete(k),900);n++;try{kitFigFx("out",sn,{dir:sn.rect.left+sn.rect.width/2<innerWidth/2?-1:1})}catch(e){}}}return n}
+window.kpmOutCheck=kpmOutCheck;
+const KPM_SNAP=new WeakMap();
+function kpmScan(){if(!kpmOn()||typeof curPeople!=="function")return;for(const w of curPeople()){const p=w&&w.ref||w;if(!p||p===S||typeof p!=="object"||p.alive===false||typeof p.rank!=="number")continue;
+  const now={pg:!!(p.preg&&!p.hidden&&!p.fake),rk:typeof rkOf==="function"?rkOf(p):p.rank,out:!!p.out},old=KPM_SNAP.get(p);KPM_SNAP.set(p,now);if(!old)continue;
+  if(!old.pg&&now.pg)kpmGo("preg",p);else if(now.out&&!old.out)kpmGo("fall",p);else if(now.rk>old.rk&&!now.out)kpmGo("rise",p);else if(now.rk<old.rk&&!now.out)kpmGo("fall",p)}}
+window.kpmScan=kpmScan;
 window.kpresPlan=kpresPlan;window.kpresCat=kpresCat;window.KPC=KPC;window.KPG=KPG;
 /* ================= jflip: LẬT THẺ BÀI — the end-of-day card-flip scene (KIT §67 card-flip, owner 15/11 20:50Z, review/cardflip) =================
    Replaces j93 piece 1 (kitFlipTablet / kitFlipNote) with ONE scene played each week after the tablet is decided (flip(), j8 → j75 → j93):
@@ -47112,7 +47222,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="dc467b22ef69";window.CTM_BUILD=BUILD;
+const BUILD="7d878c7aba77";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

@@ -3627,6 +3627,20 @@ Old flat CSS flashes: red → painted blood edge; gold / warm → painted glowbu
 `node dev/test/fxkit.js <url> <out> [shots]` (5 sizes + reduced motion): every kind loads, 50 bursts → 0 leaks + pool reused, every kitFx kind,
 lights play (screen blend), low-end sheet, edges / gift / letter / sheets clean up, auto-Gọn, frame time, heap after bursts, bytes per scene.
 Kit page sample "§68": a button per sprite kind, light, sheet, edge, gift act, letter and kitFx moment.
+### 68.8 PERSON MOTION · kitFigFx(kind, who, o) (owner 15/11 20:05Z item 13 + 22:45Z list; review/presentation-wiring) — `dev/build/jfxkit.js`
+The ONE part that animates a stage figure. `who` = person (or its stage wrapper `ref`), `"me"` (her figure), a picture element, or a snapshot `kfkSnap(img)`. Filter + translate on the picture itself (composite "add", so the people-picture filter `url(#kfa)` stays first); terminal kinds use a GHOST copy so a re-render cannot cut them. Pace = kitPace. Gọn / reduced motion / bots / hidden figure (`kfkSeen`): nothing.
+| kind | what | ms (x BAL.pace) |
+|---|---|---|
+| `flush` | slapped / scolded: one jolt + brief red flush | 900 |
+| `poison` | poisoned: tints green, then blurs, recovers | 3200 |
+| `grey` | demoted / cold palace: dims to grey, recovers | 2600 |
+| `die` | death: ghost greys, sinks and fades; white silk (`kitFxSheet silk`) falls over | 3000 |
+| `drag` | punished: ghost dragged off the stage (`o.dir` -1 / 1), dims | 1700 |
+| `out` | leaves the stage: ghost slides out and fades | 1000 |
+| `in` | arrives: slides in and fades up (`o.from` px) | 1000 |
+| `glow` | rim light of a tone (`o.tone`: lotuslight = pregnancy pink, glow-gold, candle) via `kitFxRim`, never over the face | 2400 |
+`kitFxSheet(name, target, {reverse:true})` plays a sheet backwards (red thread JOINS two people = the snap sheet reversed; placeholder until the painted join thread lands, see ART REQUEST). Sample: kit page §68.8. Test: `node dev/test/presentation-people.js`.
+**People moments (jpres.js KPM, S3-151/182/205)** — one table, every call through the kit: `kpmGo(moment, person, second)` with moments slap · poison · harm · rumour · death · drag · out · preg · birth · rise · fall · favour · join · betray. Hooks: `ACT[k].f` (KPM_ACT table: tat, phatquy, poison, kpoison, slowpoison, pgift, pond, pushp, trip, huydung, thathu, phonghoa, rumor, lygian, frame, kframe, ally, xinhh, banphe: plays on a SUCCESS text only), `kill` / `deathSentence` / `dieIf` (NPC dies), `punish` / `fall` (NPC dragged / flushed), `slapGive`, `birthP`, `renderStage` (a figure that left the stage fades out), `render` (state scan of the people on the stage: pregnancy announced, rank up / down, cold palace). Her own moments stay the j93 scenes / j11 feedback.
 ### 68.7 PERSON-SAFE LIGHT · rim light only (owner 16/11 ~21:25Z OD; review/diemtrang-fx) — `kitFxRim` · `kfkPersons` · `KFK_PERSON` in `dev/build/jfxkit.js`
 RULE: light / glow NEVER lies over a person or a face (avatar, portrait, stage figure, her figure, makeup zoom, reveal figure). Light starts at the person's own outline and radiates OUTWARD only.
 `KFK_PERSON` = the selector of person pictures (`img.figimg, #mefig, img.kpor, .kfzoom, .ktrv-fw>img, span.md.kmini, .kpod-fig>img`; a new kind of person picture is ADDED THERE, never handled by a caller).
