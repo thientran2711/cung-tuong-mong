@@ -571,3 +571,4 @@ NOTE: account hit seven_day 'rejected'/overage briefly at ~01:07Z, back to 'allo
 WAKES: s27 set send_later 02:32Z (trig_01Kaj14RQ7oCVkg94xPC9Add) — it fires into s27; s28 must delete it (delete_trigger) and set its own minute-32 wake.
 - (17/11 ~01:48Z) s27 → s28 rollover.
 - (17/11 ~01:49Z) s27 opened MAIN SESSION 28 = session_01UV1SzkNSYyuEkCJ3Bv1Evj and stopped.
+- (17/11 ~01:55Z) MAIN SESSION 28 = session_01UV1SzkNSYyuEkCJ3Bv1Evj; START_CTX ~4 % (estimate, ~40k of 1M; get_session reads 0) → roll over at ~29 %, ceiling 60 %.
