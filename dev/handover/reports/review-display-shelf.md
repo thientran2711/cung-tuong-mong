@@ -61,3 +61,9 @@ D. r1 fixes re-applied: imperial price 0; kit grade = BAL gr; her own "Ghé chơ
 E. Nội vụ phủ buying gate KEPT (builder #2's stated call: 19:50Z lifts only the display block).
 assemble: jshelf before jlooks (jlooks must stay last, main c975f067).
 Tests on r2rv: shelf-check PASS ×4 (85df9b08 ×3, 60b0e3bf); QUICKCHECK --cpu 4 PASS on 78d1972a / 85df9b08 / 9c6292d3 / 60b0e3bf (buổi new/live 758/736, 837/669, 686/699, 845/704 — spread is run noise, shelf cost ≈0); one-core-bind / text-rule / it-key PASS; agent_check 16/16, agemp 20/20, agmaid 23/23, coop-e2e 63/63 (on 7c7397b9; later commits only the th line + test + main merges).
+
+## r3 (owner OD 17/11 ~22:05Z: up to 5 pieces per group) — PASS 41418cd82615a51bb87b1ebee63da4cd3dc7a343
+Branch **review/display-shelf-r3rv** = LIVE main 60b0e3bf + builder #2's 5-per-group commit d6933e6b (applied as a patch: builder's ae10b963 sat on 63582624, so it again lacked fix A (Thái hậu favour clamp), taste.fMin, the flaky-test fix, and assembled jshelf AFTER jlooks — jlooks must stay last). Do NOT land ae10b963.
+Delta checked: BAL.shelf.per 5, slots "<g>" + "<g>~1..4" (old saves: the first slot is the old key → no migration); group luxury = best full + BAL.shelf.wt shares (one path shelfLux); full group swaps its least piece; NPC seed/arrange (undo when no gain or over cap), vp/strip/care/plant cards on slot keys, jil ledger over every slot; shelfView groups[].items (+ item = items[0]); KIT_REQUESTS (2) updated; no score in player text.
+Reviewer fix: shelf-check visit timeline starts from neutral NPC regard (earlier accuse steps left them hostile → ~1 run in 6 no visit in 40 buổi).
+Tests: shelf-check PASS ×6 (after the test fix ×3); QUICKCHECK --cpu 4 PASS (median 5: render 143/150, tab 283/294, buổi 646/654); one-core-bind / text-rule / it-key PASS; agent_check 16/16.
