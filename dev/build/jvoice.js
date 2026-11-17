@@ -143,10 +143,15 @@ OUT.hh.no.push("[lo]Hoàng hậu hỏi ma ma ta ở cung nào, rồi thôi chẳ
 OUT.emp.ok.push("[lo]Hoàng thượng hỏi tên ta, rồi khẽ nhắc lại như để nhớ","[mid]Hoàng thượng hứa mai sẽ ghé cung ta","[hi]Hoàng thượng kể ta nghe chuyện triều chính, như với người tâm phúc","[hq]Hoàng thượng bàn với ta việc lục cung, giọng ôn hòa");
 OUT.emp.no.push("[lo]Hoàng thượng nhìn ta như nhìn người xa lạ","[mid]Hoàng thượng hỏi qua chuyện cung ta rồi thôi","[hi]Hoàng thượng chỉ bảo ta về nghỉ, giọng nhạt","[hq]Hoàng thượng bảo việc lục cung để mai hãy bàn");
 OUT.fallen=OUT.rival;OUT.ksp=OUT.maid;OUT.ty=OUT.any;OUT.elder=OUT.maid;OUT.man=OUT.any;OUT.kid=OUT.any;
-/* kOutcome(kind, ok, p): p = the stage person ({kind, ref}) — his / her Tính tình picks the line pool (jtone.js TONE_POOL: rival, maid so far; the other kinds keep the mood pools until written) */
-function kOutcome(kind,ok,p){const TP=window.TONE_POOL||{},tk=kind==="rival"||kind==="fallen"?"rival":kind==="maid"||kind==="ksp"||kind==="elder"?"maid":null,tp=tk&&TP[tk+(ok?"Ok":"No")];
-  const about=p?(p.ref||(p.kind==="maid"?S.maid:null)):null;
-  if(tp)return kLine("out:"+tk+":"+(ok?"ok":"no"),tp,{about});
+/* kOutcome(kind, ok, p): p = the stage person ({kind, ref}) — his / her Tính tình picks the line pool (jtone.js TONE_POOL: rival, maid, th, hh, emp; ty / man / kid / any keep the mood pools) */
+function kOutcome(kind,ok,p){const TP=window.TONE_POOL||{},tk={rival:"rival",fallen:"rival",maid:"maid",ksp:"maid",elder:"maid",th:"th",hh:"hh",emp:"emp"}[kind],tp=tk&&TP[tk+(ok?"Ok":"No")];
+  /* a host (Thái hậu / Hoàng thượng / Hoàng hậu) speaks to her: sp = the host, so {goi}/{xung} in a pooled line come from kAddr */
+  let host=null;if(kind==="th")host="th";else if(kind==="emp")host="emp";else if(kind==="hh")host=(p&&p.ref&&p.ref.queen?p.ref:null)||(typeof queenP==="function"&&queenP())||"hh";
+  const about=host||(p?(p.ref||(p.kind==="maid"?S.maid:null)):null);
+  if(tp){/* the rank-band lines of the old pool (a line only for her band) stay, added to every tone */
+   const OP=OUT[kind],bands=OP?(ok?OP.ok:OP.no).filter(x=>TAG.test(x)):[];let pool=tp;
+   if(bands.length){pool={};for(const t in tp)pool[t]=tp[t].concat(bands)}
+   return kLine("out:"+tk+":"+(ok?"ok":"no"),pool,host?{about,sp:host,ls:S}:{about})}
   const P=OUT[kind]||OUT.any;return kLine("out:"+(OUT[kind]?kind:"any")+":"+(ok?"ok":"no"),ok?P.ok:P.no)}
 window.kOutcome=kOutcome;
 /* ---- ONE gain / loss text, TWO forms (owner 16/11 ~21:05Z, verbatim in OD): SHORT = the small result card at the bottom after each act

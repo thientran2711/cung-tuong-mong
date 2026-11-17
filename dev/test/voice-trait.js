@@ -10,14 +10,20 @@ function serve(){return new Promise(r=>{const s=http.createServer((q,a)=>{const 
  const R=await p.evaluate(()=>{try{localStorage.clear()}catch(e){}document.getElementById('title').hidden=true;start();
   const fail=[],out=[];const T=(n,g,w)=>{out.push(n+" = "+g);if(w!=null&&g!==w)fail.push(`${n}: got ${g} want ${w}`)};
   const TONES=["Ân cần","Lạnh lùng","Nóng nảy","Điềm tĩnh","Nhiều chuyện","Kín đáo","Kiêu ngạo","Khiêm nhường"];
-  const P=TONE_POOL,all={};
-  for(const k in P){const seen=new Set();for(const t of TONES){const L=P[k][t]||[];if(L.length<10)fail.push(`${k}/${t}: only ${L.length} lines`);if(new Set(L).size!==L.length)fail.push(`${k}/${t}: duplicate line inside the tone`);
+  const P=TONE_POOL,all={};const REQ={thOk:["Ân cần","Kín đáo","Kiêu ngạo","Điềm tĩnh"],empOk:["Nóng nảy","Lạnh lùng","Kín đáo","Ân cần","Điềm tĩnh"]};REQ.thNo=REQ.thOk;REQ.empNo=REQ.empOk;/* th: BAL.voice.tone.th, emp: BAL.voice.tone.emp (the tones those two can have); every other pool needs all 8 */
+  for(const k in P){const seen=new Set();for(const t of (REQ[k]||TONES)){const L=P[k][t]||[];if(L.length<10)fail.push(`${k}/${t}: only ${L.length} lines`);if(new Set(L).size!==L.length)fail.push(`${k}/${t}: duplicate line inside the tone`);
     for(const x of L){if(seen.has(x))fail.push(`${k}: line shared by two tones: ${x}`);seen.add(x);if(/%|\d/.test(x))fail.push(`${k}/${t}: typed number/% in: ${x}`)}}all[k]=[...seen].length}
   /* same situation, 8 tones → 8 distinct lines (each speaker is a rival whose first nết is forced) */
   const v=rivals.find(x=>!x.queen&&x.alive);const first=v.net[0];
   const said={};for(const t of TONES){v.net=[t,v.net[1],v.net[2]];S.vmem={};const line=kOutcome("rival",true,{kind:"rival",ref:v});said[t]=line;T("rival ok / "+t,line)}
   T("8 tones → 8 distinct lines",new Set(Object.values(said)).size,8);
   for(const t of TONES)if(!P.rivalOk[t].includes(said[t]))fail.push(`rival ok / ${t}: line not from its own pool`);
+  /* hosts: Thái hậu / Hoàng thượng / Hoàng hậu speak in their own tone, address tokens filled */
+  S.thTrait="Kiêu ngạo";S.vmem={};T("th ok (Kiêu ngạo)",kOutcome("th",true,{kind:"th"}),null);
+  {const L=[];for(let i=0;i<12;i++){S.tuan=i%3;S.turn=Math.floor(i/3);L.push(kOutcome("th",false,{kind:"th"}))}if(L.some(x=>/\{/.test(x)))fail.push("th: unfilled token");if(new Set(L).size<8)fail.push("th no: too few distinct over 12 tuần: "+new Set(L).size)}
+  S.emp.traits=["nongnay"];S.vmem={};{const l=kOutcome("emp",false,{kind:"emp"});if(/\{/.test(l)||!/Hoàng thượng/.test(l))fail.push("emp line: "+l);T("emp no (nongnay)",l)}
+  S.emp.traits=["lanhlung"];S.vmem={};T("emp ok (lanhlung)",kOutcome("emp",true,{kind:"emp"}),null);
+  {const q=rivals.find(x=>x.queen);if(q){q.net=["Nóng nảy",q.net[1],q.net[2]];S.vmem={};T("hh no (Nóng nảy)",kOutcome("hh",false,{kind:"hh",ref:q}),null)}}
   /* kTone */
   v.net=["Nóng nảy",v.net[1],v.net[2]];T("kTone rival",kTone(v),"Nóng nảy");
   S.emp.traits=["nongnay"];T("kTone emp nongnay",kTone("emp"),"Nóng nảy");S.emp.traits=["lanhlung"];T("kTone emp lanhlung",kTone("emp"),"Lạnh lùng");
