@@ -16,7 +16,7 @@ function DUMP(){const out={opt:{},end:{},odds:{},go:{},rare:{},err:[]};
  try{crypto.getRandomValues=a=>{for(let i=0;i<a.length;i++)a[i]=Math.floor(R()*4294967296);return a}}catch(e){}
  const canon=v=>typeof v==='function'?'fn':Array.isArray(v)?v.map(canon):v&&typeof v==='object'?Object.fromEntries(Object.keys(v).sort().map(k=>[k,canon(v[k])])):v;
  let LOG=[];const arg=a=>typeof a==='number'||typeof a==='string'||typeof a==='boolean'||a==null?a:a===S?'S':(a.id!=null?'#'+a.id:'obj');
- for(const n of ['relAdd','oanAdd','affAdd','kcAf','tdPowAdd','rdOan','rdRel','e67dad','e67bien','e67kho','e67ally','e67pun','e67foe','e67drop','log','evA','harmTxt'])
+ for(const n of ['relAdd','oanAdd','affAdd','kcAf','tdPowAdd','rdOan','rdRel','e67dad','e67bien','e67kho','e67ally','e67pun','e67foe','e67drop','log','evA','harmTxt','apply','ap67'])
   try{const f=eval(n);if(typeof f==='function')eval(`${n}=function(){LOG.push(["${n}",...[...arguments].map(arg)]);return "${n}"}`)}catch(e){}
  const V=k=>({id:k.length,name:'V'+k,alive:true,rank:3,rel:10,oan:5,ro:{},kids:[],inv:[],loyal:40});
  try{rv67=(A,k)=>V(k||'v');RV=id=>V('x'+id)}catch(e){out.err.push('stub rv67 '+e.message)}
@@ -36,6 +36,10 @@ function DUMP(){const out={opt:{},end:{},odds:{},go:{},rare:{},err:[]};
  for(const bk of Object.keys(GB67))(GB67[bk].o||[]).forEach((o,i)=>walkO(`G.${bk}[${i}]`,o));
  try{for(const id of Object.keys(R97)){const d=R97[id];out.rare[id]=canon(d);const r=[];for(let t=0;t<40;t++){S=life();const A=AA();let v;try{v=d.x&&d.x[0](A)}catch(e){v='ERR '+e.message}r.push(v)}out.rare[id+'.x']=r;
   if(typeof d.go==='function'){const g=[];for(let t=0;t<4;t++){S=life();LOG=[];let v;try{v=d.go(AA())}catch(e){v='ERR '+e.message}g.push([v,LOG])}out.rare[id+'.go']=g}}}catch(e){out.err.push('R97 '+e.message)}
+ try{const L0=LOG;S=life();LOG=[];const call=f=>{try{return f()}catch(e){return 'ERR '+e.message}};
+  out.rare.__j67rest=canon({Q:QUEST67,MS:Object.fromEntries(Object.keys(MS67).map(k=>[k,MS67[k].fx])),
+   IT:['vangbac','bienvang','bienngu','ngocdungcao','nt_nhuy','nt_haiduong','nt_dongchau'].map(k=>IT[k]),
+   heir:call(()=>e67heir(5)),demote:call(()=>e67demote()),log:LOG});LOG=L0}catch(e){out.err.push('j67rest '+e.message)}
  try{if(typeof window.ARC_SAME_EXTRA==='function')out.extra=window.ARC_SAME_EXTRA({life,AA,canon,R,LOG:()=>LOG,setLog:l=>LOG=l})}catch(e){out.err.push('extra '+e.message)}
  S=S0;return JSON.stringify(out)}
 (async()=>{const {chromium}=require('playwright');const b=await chromium.launch();
