@@ -20,7 +20,7 @@ function ctxHash(s){let h=2166136261;s=String(s);for(let i=0;i<s.length;i++){h^=
 function ctxKey(p){try{return typeof key==="function"?key(p):p&&p.id}catch(e){return""}}
 /* the person's taste for this kind of answer this life: −1, −½, 0, ½, 1 */
 function ctxTaste(p,ans){const n=String(ans||"").replace(/<[^>]+>/g,"").replace(/\{[^}]*\}|\d+/g,"").toLowerCase().split(/[,:(]/)[0].trim();const h=ctxHash(ctxSeed()+"|"+ctxKey(p)+"|"+n);return [-1,-.5,0,.5,1][h%5]}
-function ctxMood(p){try{const e=emoGet(p);if(!e||e.k==="binh")return 0;if(["gian","ghen","dau"].includes(e.k))return BAL.ctxMoodBad;if(e.k==="vui")return BAL.ctxMoodGood;if(e.k==="so")return 3;return -3}catch(e){return 0}}
+function ctxMood(p){try{const e=emoGet(p);if(!e||e.k==="binh")return 0;const g=typeof feelGrp==="function"?feelGrp(e.k):e.k;if(g==="binh")return 0;if(["gian","ghen"].includes(g)||(g==="buon"&&typeof feelLv==="function"&&feelLv(p,e.k)>=3))return BAL.ctxMoodBad;if(g==="vui")return BAL.ctxMoodGood;if(g==="so")return 3;return -3}catch(e){return 0}}
 function ctxRel(p){try{if(!p||p===S||!rivals.includes(p))return 0;return cl(Math.round(aff(p,S)/BAL.ctxRelDiv),-BAL.ctxRelCap,BAL.ctxRelCap)}catch(e){return 0}}
 function ctxOdds(p,ans){if(!p||!S)return 0;return cl(Math.round(ctxTaste(p,ans)*BAL.ctxTaste+ctxMood(p)+ctxRel(p)),-BAL.ctxCap,BAL.ctxCap)}
 window.ctxOdds=ctxOdds;
@@ -61,7 +61,7 @@ function emoBoxArt(p,m,L){const k=m.known?m.k:"an";const c=m.known?(L.find(x=>x.
  const cap=c?String(c.why).replace(/\s*«[^»]*»/g,"").replace(/[,.]\s*$/,"").trim():m.known?(EMO[k]||""):"Chưa rõ lòng người";
  return{src,label:cap,mark:`img/kit/emo-${set}${k}.webp`,markAlt:`Tâm trạng: ${m.known?m.name:"chưa rõ"}`}}
 function emoBox(k){const p=emoByKey(k);if(!p||!S||S.dead)return;const m=window.kitEmotion(p);if(!m)return;let nm=p===S?"Ngươi":emoName(p);/* rank + name always together (owner 15/11, OD L820-821): same plain title+name as Đã biết về X */try{if(p!==S&&typeof kitName==="function"&&typeof kpPlain==="function"){const t=kpPlain(kitName(p)).trim();if(t)nm=t}}catch(e){}
- const cls=x=>x==="vui"?"g":["gian","buon","dau","so","lo","ghen"].includes(x)?"r":"";const W=emoW();const ago=w=>W-w<=0?"tuần này":`${W-w} tuần trước`;
+ const cls=x=>typeof feelGood==="function"?(feelGood(x)?"g":feelBad(x)?"r":""):x==="vui"?"g":["gian","buon","so","lo","ghen"].includes(x)?"r":"";const W=emoW();const ago=w=>W-w<=0?"tuần này":`${W-w} tuần trước`;
  const L=m.known?emoCauses(p):[];
  const rows=m.known?(L.length?L.map(x=>[EMO[x.k]||x.k,`${x.why} · ${x.left!=null?`còn ${x.left} khắc`:ago(x.w)}`,cls(x.k)]):[["Nguyên nhân","không có chuyện gì đáng kể gần đây"]]):[["Nguyên nhân","chưa rõ: ngươi chưa gặp, chưa có tai mắt bên người này"]];
  let art=null;try{art=emoBoxArt(p,m,L)}catch(e){}

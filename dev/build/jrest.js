@@ -8,7 +8,8 @@
      (jemo, chỉ khi tâm trạng đang xấu; bình thường hay vui thì không đổi — thẻ nói rõ).
    The cards are refreshed from the live state each time they are drawn or played, so Cần/Tốn/Được always match what happens. */
 Object.assign(BAL,{restDsSuc:24,restDsBac:6,restDsMinK:2,restDsBuoi:"Buổi tối",restLatSuc:6,restLatK:1,restLatEmo:8});
-const REST_BAD=["buon","gian","so","lo","ghen","dau"];
+const REST_BAD=["buon","gian","so","lo","ghen"];/* FEELINGS-18: every bad kind (BAL.feel.sg < 0) through restBad(k) */
+function restBad(k){return typeof feelBad==="function"?feelBad(k):REST_BAD.includes(k)}
 /* the cheapest tonic she owns (kind "Thuốc bổ"), or null */
 function restTonic(){if(!S||!Array.isArray(S.inv))return null;let best=-1,pr=1e9;
  S.inv.forEach((e,i)=>{const it=e&&IT[e.k];if(it&&it.kd==="Thuốc bổ"&&!e.h&&!e.w&&(it.pr||0)<pr){pr=it.pr||0;best=i}});return best<0?null:{i:best,e:S.inv[best],it:IT[S.inv[best].k]}}
@@ -19,13 +20,13 @@ function restDs(a){if(!a||a.rest!=="ds")return a;const T=restTonic(),k=restDsK()
  const B=BUOI[restDsB()].toLowerCase();a.t=`Uống thuốc bổ, ngủ sớm: ${(S.buoi||0)!==restDsB()?`chỉ ${B}, dùng hết số khắc còn lại của buổi.`:BAL.time.khac-used<BAL.restDsMinK?`cần còn ít nhất ${BAL.restDsMinK} khắc; hết ${B}.`:`dùng hết ${k} khắc còn lại, hết ${B}.`}${T?"":" Rương không có thuốc bổ: sai người mua một chén."}`;
  a.x="";a.restTon=T?`1 ${T.it.n} trong rương`:""; /* review R6: the tonic is a COST — it goes in the Tốn row (cardH below), not in a.x (a.x is read as Được); the "(thang thuốc bổ rẻ nhất…)" aside ran past the card at 844x390 */
  a.go=()=>{const t=restTonic();if(t&&!(a.c&&a.c.bac)){S.inv.splice(t.i,1);log(`Ngươi sắc ${t.it.n} uống rồi ngủ sớm.`)}else log("Ngươi sai người mua chén thuốc bổ, uống rồi ngủ sớm.")};return a}
-function restLat(a){if(!a||a.rest!=="lat")return a;const e=typeof emoGet==="function"?emoGet(S):{k:"binh",v:0};const bad=REST_BAD.includes(e.k)&&e.v>=15;
+function restLat(a){if(!a||a.rest!=="lat")return a;const e=typeof emoGet==="function"?emoGet(S):{k:"binh",v:0};const bad=restBad(e.k)&&e.v>=15;
  a.k=BAL.restLatK;a.c={};a.o=100;a.w={suc:BAL.restLatSuc};a.l={};
  a.t=`Nằm nghỉ trong tẩm cung, uống chén trà sen.${bad?"":` Tâm trạng đang ${typeof EMO==="object"&&EMO[e.k]?EMO[e.k].toLowerCase():"bình thường"}: không đổi.`}`;
  a.x=bad?`được: bớt ${EMO[e.k]} ${Math.min(BAL.restLatEmo,e.v)} (${e.v} → ${Math.max(0,e.v-BAL.restLatEmo)})`:"";
  a.go=()=>{const d=restLatEmo(S);if(d)log(`Nghỉ một lát, lòng nhẹ đi: bớt ${EMO[d[0]]} ${d[1]}.`)};return a}
 /* ONE function (her card and an NPC's cx3:restLat, jagacts3): a bad feeling ≥ 15 eases by BAL.restLatEmo; returns [feeling, points eased] */
-function restLatEmo(p){try{const m=p.emo;if(m&&REST_BAD.includes(m.k)&&m.v>=15){const v0=m.v;m.v=Math.max(0,m.v-BAL.restLatEmo);if(p===S)emoSync(S);return[m.k,v0-m.v]}}catch(x){}return null}
+function restLatEmo(p){try{const m=p.emo;if(m&&restBad(m.k)&&m.v>=15){const v0=m.v;m.v=Math.max(0,m.v-BAL.restLatEmo);if(p===S)emoSync(S);return[m.k,v0-m.v]}}catch(x){}return null}
 function restFix(a){return a&&a.rest==="ds"?restDs(a):a&&a.rest==="lat"?restLat(a):a}
 /* mark the two cards wherever they are dealt */
 (function(){const p0=pool;pool=function(){const A=p0.apply(this,arguments);try{for(const a of A)if(a&&a.n==="Nghỉ ngơi dưỡng sức"){a.rest="ds";restDs(a)}}catch(e){}return A}})();
