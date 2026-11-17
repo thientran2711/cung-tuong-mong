@@ -26,7 +26,8 @@ async function viaCurl(ctx){await ctx.route(/ctm-img\.victoria-tntt\.workers\.de
     cut:sh.some(e=>{const a=e.querySelector('.kdr-lab').getBoundingClientRect(),s=e.getBoundingClientRect();return a.right>s.right+1})}});
   r.geo=await geo();const g=r.geo;
   r.fit=g.room.t>=g.hud.b-1&&g.room.b<=g.bar.b+1&&g.room.b>=g.bar.t-6&&!g.hscroll;
-  r.layout=g.n===12&&(g.kv2?(g.cols===2&&!g.scrolls):g.cols===1);
+  r.inslot=await p.evaluate(()=>[...document.querySelectorAll('.kdr-sh.has')].every(s=>{const a=s.getBoundingClientRect(),i=s.querySelector('.kdr-it').getBoundingClientRect();return i.left>=a.left-2&&i.right<=a.right+2&&i.bottom<=a.bottom+2&&i.top>=a.top-2}));r.noBars=await p.evaluate(()=>{const s=document.querySelector('.kdr-seg');const pl=s&&s.querySelector('.kdr-plank');return !!s&&(s.querySelector('.kdr-bgi')?getComputedStyle(pl).display==='none':true)});
+  r.layout=r.inslot&&r.noBars&&g.n===12&&(g.kv2?(g.cols===2&&!g.scrolls):g.cols===1);
   if(OUT&&OUT!=='-')await p.screenshot({path:`${OUT}/disp-${sz}.jpg`,type:'jpeg',quality:60});
   /* drawer */
   await p.click('.kdr-sh:not(.has)');await p.waitForTimeout(350);

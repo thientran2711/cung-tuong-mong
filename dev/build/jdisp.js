@@ -15,6 +15,14 @@
 (function(){try{
 const KDR={fix:null,p:null,ro:false,fixture:false,known:true,drawer:null,raf:0};
 const KDR_BG="img/kit/bg-default.webp";
+/* THE PAINTED CABINET (owner OD 17/11 ~21:55Z: "cái hình nền này nó có sẵn mấy cái kệ trên nó luôn"): one painted curio cabinet (đa bảo các), 12 compartments, painted by Foreman C.
+   land = ONE picture 2 cols x 6 rows (kv2); port = a tall 1 x 12 picture (or stacked segments) that scrolls. Slot = fractions of ITS picture: cx = centre x, fy = the shelf floor line y,
+   w x h = the compartment interior; a piece stands on (cx,fy), its group label chip sits at the compartment's top-left. Numbers below are the STUB (even grid) until
+   reports/display-bg.md (measured slot points) lands: then paste its slot arrays into KDR_PIC.*.slots / .segs[].slots; nothing else changes. Picture missing on the CDN = the stub look (.kdr-nopic). */
+const gridSlots=(cols,rows,m)=>{m=m==null?.035:m;const w=(1-2*m)/cols,h=(1-2*m)/rows,o=[];for(let r=0;r<rows;r++)for(let c=0;c<cols;c++)o.push({cx:m+w*(c+.5),fy:m+h*(r+1)-h*.06,w:w*.92,h:h*.88});return o};
+const KDR_PIC={land:{segs:[{src:"img/display/cabinet-land.webp",ar:1.5,slots:gridSlots(2,6)}]},
+ port:{segs:[{src:"img/display/cabinet-port.webp",ar:.42,slots:gridSlots(1,12)}]}};
+const kv2=()=>document.documentElement.classList.contains("kv2");
 const GFIX=[["cay","Cây cảnh"],["chuong","Chuông gió"],["rem","Rèm, mành"],["phong","Bình phong"],["su","Đồ sứ"],["tranh","Tranh, thư pháp"],["van","Văn phòng tứ bảo"],["nhac","Nhạc khí"],["ngoc","Ngọc khí"],["huong","Lư hương"],["den","Đèn, lồng"],["tham","Thảm, gối tựa"]];
 const esc=s=>String(s==null?"":s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 const real=()=>typeof shelfOf==="function"&&typeof shelfPut==="function"&&typeof shelfTake==="function"&&typeof BAL!=="undefined"&&!!BAL.shelf&&Array.isArray(BAL.shelf.groups);
@@ -47,22 +55,25 @@ function doTake(g){if(KDR.fixture||!real()){const F=fixOf(),e=F.placed[g];if(!e)
 function pc(e){if(!e)return null;const k=e.k;const over=e.over!=null?!!e.over:(()=>{try{return itm(k).rk>rk()}catch(x){return false}})();
  return{k,e,name:nameOf(k),src:srcOf(k),grade:gradeOf(k),lux:lux(k),over,ngu:imperial(e),wither:!!(e.pc!=null&&typeof BAL!=="undefined"&&BAL.shelf&&BAL.shelf.plant&&(e.pc|0)<BAL.shelf.plant.wither)}}
 /* ---------- markup (pure) ---------- */
-function shelfHTML(g,e,o){const P=pc(e),ro=!!o.ro;
+function shelfHTML(g,e,o){const P=pc(e),ro=!!o.ro,s=o.slot;
  const lab=`<span class="kdr-lab kchip n">${esc(gName(g))}</span>`;
  const tags=P&&!ro?`${P.over?`<span class="kdr-tag kchip r">Vượt phẩm</span>`:""}${P.wither?`<span class="kdr-tag kchip r">Héo</span>`:""}`:"";
- const stand=P?`<span class="kdr-stand"><img class="kdr-it${P.wither?" kdr-wither":""}" src="${esc(P.src)}" alt="" draggable="false" onerror="this.style.visibility='hidden'"></span>`:`<span class="kdr-stand"><i class="kdr-empty">${ro&&!o.known?"Chưa thấy":"Còn trống"}</i></span>`;
+ const stand=P?`<img class="kdr-it${P.wither?" kdr-wither":""}" src="${esc(P.src)}" alt="" draggable="false" onerror="this.style.visibility='hidden'">`:`<i class="kdr-empty">${ro&&!o.known?"Chưa thấy":"Còn trống"}</i>`;
  const lbl=`${gName(g)}: ${P?P.name:"còn trống"}`;
- return `<button type="button" class="kdr-sh${P?" has":""}" data-kdrg="${esc(g)}" aria-label="${esc(lbl)}" title="${esc(lbl)}">${lab}${tags}${stand}<span class="kdr-plank" aria-hidden="true"></span></button>`}
+ const box=`left:${((s.cx-s.w/2)*100).toFixed(3)}%;top:${((s.fy-s.h)*100).toFixed(3)}%;width:${(s.w*100).toFixed(3)}%;height:${(s.h*100).toFixed(3)}%`;
+ return `<button type="button" class="kdr-sh${P?" has":""}" data-kdrg="${esc(g)}" aria-label="${esc(lbl)}" title="${esc(lbl)}" style="${box}">${lab}${tags}${stand}<span class="kdr-plank" aria-hidden="true"></span></button>`}
 function kitDisplayRoomHTML(m){m=m||{};const G=m.groups||groups(),ro=!!m.ro;const n=G.filter(x=>m.placed&&m.placed[x[0]]).length;
- const title=m.title||"Nơi trưng bày";
+ const title=m.title||"Nơi trưng bày";const P=(m.land!=null?m.land:kv2())?KDR_PIC.land:KDR_PIC.port;let gi=0;
+ const segs=P.segs.map(sg=>`<div class="kdr-seg" style="--ar:${sg.ar}"><img class="kdr-bgi" src="${esc(sg.src)}" alt="" draggable="false" onload="this.parentNode.classList.remove('kdr-nopic')" onerror="this.remove()">`+
+  sg.slots.map(sl=>{const x=G[gi++];return x?shelfHTML(x[0],m.placed&&m.placed[x[0]],{ro,known:m.known!==false,slot:sl}):""}).join("")+`</div>`).join("");
  return `<div class="kdr-hd"><span class="kdr-cart">${esc(title)}</span><span class="kdr-cnt">${ro&&!m.known?"":`Đã bày ${n}/${G.length} món`}</span>${typeof kitXHTML==="function"?kitXHTML('data-kdrx="1"',"Đóng"):'<button type="button" class="kit-x" data-kdrx="1" aria-label="Đóng">✕</button>'}</div>`+
-  `<div class="kdr-sc"><div class="kdr-grid" style="--kdr-n:${G.length}">${G.map(x=>shelfHTML(x[0],m.placed&&m.placed[x[0]],{ro,known:m.known!==false})).join("")}</div></div>`}
+  `<div class="kdr-sc"><div class="kdr-cab">${segs}</div></div>`}
 function tileHTML(x,g){const P=pc(x.e),why=whyNot(x.e);
- return kitItem({src:P.src,name:P.name,grade:P.grade,lux:P.lux,mark:P.over?["Vượt phẩm","r"]:(P.ngu?["Ngự tứ","n"]:null),size:"slot",tip:`${P.name} · xa xỉ ${P.lux}${P.over?" · vượt phẩm":""}${why?" · "+why:""}`,
+ return kitItem({src:P.src,name:P.name,grade:P.grade,lux:P.lux,mark:P.over?["Vượt phẩm","r"]:(P.ngu?["Ngự tứ","n"]:null),size:"slot",tip:`${P.name}${P.over?" · vượt phẩm":""}${why?" · "+why:""}`,
   data:`data-kdrix="${x.ix}" data-kdrk="${esc(P.k)}" role="button" tabindex="0"${why?' aria-disabled="true"':""}`})}
 function drawerHTML(g){const cur=placedOf(g),L=ownedOf(g),P=pc(cur);
  const head=`<div class="kdr-dh"><b>${esc(gName(g))}</b><small>${cur?"Chọn món khác để thay":"Chọn một món trong tư trang"}</small>${typeof kitXHTML==="function"?kitXHTML('data-kdrdx="1"',"Đóng"):'<button type="button" class="kit-x" data-kdrdx="1">✕</button>'}</div>`;
- const on=P?`<div class="kdr-on"><span class="kdr-onl">Đang bày</span>${kitItem({src:P.src,name:P.name,grade:P.grade,lux:P.lux,mark:P.over?["Vượt phẩm","r"]:null,size:"slot",tip:P.name,data:`data-kdron="${esc(g)}" role="button" tabindex="0"`})}<span class="kdr-onn">${esc(P.name)}<small>xa xỉ ${P.lux}</small></span></div>`:"";
+ const on=P?`<div class="kdr-on"><span class="kdr-onl">Đang bày</span>${kitItem({src:P.src,name:P.name,grade:P.grade,lux:P.lux,mark:P.over?["Vượt phẩm","r"]:null,size:"slot",tip:P.name,data:`data-kdron="${esc(g)}" role="button" tabindex="0"`})}<span class="kdr-onn">${esc(P.name)}</span></div>`:"";
  const tiles=L.map(x=>tileHTML(x,g)).join("");
  const body=L.length?`<div class="kinv kdr-inv" data-min="1"><div class="kinvbody"><div class="kinvmain"><div class="kinvg" data-n="${L.length}">${tiles}</div></div></div></div>`
   :`<p class="kdr-none">Tư trang chưa có món nào thuộc nhóm này${typeof kitInvEmpty==="function"?"":"."}</p>`;
@@ -120,18 +131,22 @@ const css=document.createElement("style");css.id="kit-disp";css.textContent=`
 .kdr-cnt{flex:1;min-width:0;font-size:.78rem;color:var(--ink,#3a2418);opacity:.8}
 .kdr-hd .kit-x{position:static;flex:0 0 auto}
 .kdr-sc{flex:1 1 auto;min-height:0;overflow-y:auto;overflow-x:hidden;padding:0 8px 8px;-webkit-overflow-scrolling:touch}
-.kdr-grid{display:grid;grid-template-columns:minmax(0,1fr);grid-auto-rows:132px;gap:6px}
-html.kv2 .kdr-grid{grid-template-columns:repeat(2,minmax(0,1fr));grid-template-rows:repeat(6,minmax(0,1fr));grid-auto-rows:unset;height:100%}
-.kdr-sh{position:relative;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;min-width:0;min-height:0;margin:0;padding:6px 8px 0;border:0;border-radius:8px;background:none;cursor:pointer;font:inherit;color:inherit}
-.kdr-sh:active .kdr-stand{transform:scale(.97)}
-.kdr-sh.sel .kdr-plank{box-shadow:0 0 0 2px var(--gold,#b8892b),0 3px 6px #0004}
-.kdr-lab{position:absolute;left:6px;top:4px;z-index:2;max-width:calc(100% - 12px);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.kdr-tag{position:absolute;right:6px;top:4px;z-index:2}
-.kdr-stand{position:relative;flex:1 1 auto;min-height:0;width:100%;display:flex;align-items:flex-end;justify-content:center;transition:transform .12s}
-.kdr-it{position:absolute;left:50%;bottom:-4px;transform:translateX(-50%);height:calc(100% - 22px);max-width:70%;width:auto;object-fit:contain;display:block;filter:drop-shadow(0 6px 7px #3a201666) drop-shadow(0 1px 2px #3a20164d);}
+.kdr-sc{container-type:size}
+.kdr-cab{display:flex;flex-direction:column;align-items:center}
+.kdr-seg{position:relative;flex:0 0 auto;width:100cqw;aspect-ratio:var(--ar);background:#ecdcb8}
+html.kv2 .kdr-seg{width:min(100cqw,calc(100cqh*var(--ar)));margin:0 auto}
+.kdr-bgi{position:absolute;inset:0;width:100%;height:100%;object-fit:fill;display:block;pointer-events:none}
+.kdr-sh{position:absolute;display:block;min-width:0;min-height:0;margin:0;padding:0;border:0;border-radius:6px;background:none;cursor:pointer;font:inherit;color:inherit}
+.kdr-sh:active .kdr-it{transform:translateX(-50%) scale(.97)}
+.kdr-sh.sel{box-shadow:0 0 0 2px var(--gold,#b8892b);background:#fff6e330}
+.kdr-lab{position:absolute;left:4px;top:3px;z-index:2;max-width:calc(100% - 8px);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.kdr-tag{position:absolute;right:4px;top:3px;z-index:2}
+.kdr-it{position:absolute;left:50%;bottom:0;transform:translateX(-50%);max-height:calc(100% - 26px);max-width:84%;width:auto;height:auto;object-fit:contain;display:block;filter:drop-shadow(0 6px 7px #3a201666) drop-shadow(0 1px 2px #3a20164d);transition:transform .12s}
 .kdr-it.kdr-wither{filter:grayscale(.6) sepia(.4) drop-shadow(0 4px 5px #3a201655)}
-.kdr-empty{align-self:center;margin-bottom:10px;padding:4px 14px;border:1px dashed #8a6a3a88;border-radius:8px;font-size:.74rem;font-style:normal;color:#6a4a2a;opacity:.7}
-.kdr-plank{flex:0 0 12px;width:100%;border-radius:3px;background:linear-gradient(#b98a52,#8c5f33 70%,#6b4524);box-shadow:0 3px 5px #3a201655,inset 0 1px 0 #e2bd8a}
+.kdr-empty{position:absolute;left:50%;bottom:14%;transform:translateX(-50%);white-space:nowrap;padding:3px 12px;border:1px dashed #8a6a3a88;border-radius:8px;font-size:.74rem;font-style:normal;color:#6a4a2a;opacity:.7;background:#fff6e340}
+.kdr-plank{display:none}
+/* STUB ONLY: while the painted cabinet is not on the CDN yet (img onerror removes it) the compartments show a plain plank so the room stays usable; gone as soon as the picture loads */
+.kdr-seg:not(:has(.kdr-bgi)) .kdr-plank{display:block;position:absolute;left:0;right:0;bottom:-6px;height:10px;border-radius:3px;background:linear-gradient(#b98a52,#8c5f33 70%,#6b4524);box-shadow:0 3px 5px #3a201655}
 .kdr-drw{position:absolute;left:0;right:0;bottom:0;z-index:5;max-height:min(62%,440px);display:flex;flex-direction:column;border-radius:14px 14px 0 0;background:var(--k-card,#fffaf0);border:1px solid var(--gold,#b8892b);border-bottom:0;box-shadow:0 -6px 16px #0005,inset 0 0 0 2px var(--k-card,#fffaf0),inset 0 0 0 3px var(--k-hair,#e6d3ac);padding:8px 10px 10px}
 .kdr-drw[hidden]{display:none}
 .kdr-drw.kdr-up{animation:kdrUp calc(.28s*var(--pace,1)) ease-out}
