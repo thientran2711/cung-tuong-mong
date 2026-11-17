@@ -17,13 +17,12 @@ function kitStatIcon(icon){if(!icon)return"";if(/[\/.]/.test(icon))return `<img 
    bar: 0–100 shows the thin bar; null keeps the empty slot (row cells) — nobar drops it (tiles, chips). */
 function kitStatCell(icon,label,value,o){o=o||{};const bar=o.bar==null?"":Math.max(0,Math.min(100,+o.bar||0));const tg=o.tag==="span"?"span":"div";
  const b=o.nobar?"":`<i class="mini kstb${bar===""?" kstb0":""}"><u${bar===""?"":` style="width:${bar}%"`}></u></i>`;
- return `<${tg} class="kst${o.cls?" "+o.cls:""}"${o.id?` id="${o.id}"`:""}${o.k?` data-k="${o.k}"`:""}${o.title?` title="${kitStatEsc(o.title)}"`:""}><small class="kstl">${kitStatIcon(icon)}${label}</small><span class="kstv${o.vcls?" "+o.vcls:""}">${value==null?"":value}</span>${o.warn?`<i class="kstw" aria-label="${kitStatEsc(o.warn)}">!</i>`:""}${b}</${tg}>`}
-/* kitStatSet(cell,value,{bar,title,warn}): update a live cell in place (no re-render, no flicker) */
+ return `<${tg} class="kst${o.cls?" "+o.cls:""}"${o.id?` id="${o.id}"`:""}${o.k?` data-k="${o.k}"`:""}${o.title?` title="${kitStatEsc(o.title)}"`:""}><small class="kstl">${kitStatIcon(icon)}${label}</small><span class="kstv${o.vcls?" "+o.vcls:""}">${value==null?"":value}</span>${b}</${tg}>`}
+/* kitStatSet(cell,value,{bar,title}): update a live cell in place (no re-render, no flicker) */
 function kitStatSet(c,v,o){if(!c)return;o=o||{};const s=c.querySelector(".kstv");const t=v==null?"":String(v);if(s&&s.textContent!==t){const was=s.textContent;s.textContent=t;try{if(was!==""&&typeof kitStatDelta==="function"&&!c.id.startsWith("hud-"))kitStatDelta(c,was,t)}catch(e){}}
  if(o.bar!=null){const u=c.querySelector(".kstb u");if(u)u.style.width=Math.max(0,Math.min(100,+o.bar||0))+"%"}
  if(o.title!=null&&c.title!==o.title)c.title=o.title;
- let w=c.querySelector(".kstw");if(o.warn&&!w){w=document.createElement("i");w.className="kstw";c.insertBefore(w,c.querySelector(".kstb"));w.textContent="!"}
- if(w){if(o.warn)w.setAttribute("aria-label",o.warn);else w.remove()}}
+ /* NO "!" badge on a stat cell (owner 17/11 08:00Z): the info stays on tap; any stray .kstw is dropped */const w=c.querySelector(".kstw");if(w)w.parentNode.removeChild(w)}
 /* kitStatRow([{id,cls,title,cells:[html…]}…],{id,cls}) → HTML: groups side by side, divided by a hairline. Each group carries --kn = its cell
    count, so where the row is stretched (two-row bar, phones) every CELL gets the same width whatever the group sizes (6 | 2 on the top bar). */
 function kitStatRow(groups,o){o=o||{};return `<div class="kstrow${o.cls?" "+o.cls:""}"${o.id?` id="${o.id}"`:""}>${groups.map(g=>`<div class="kstg${g.cls?" "+g.cls:""}"${g.id?` id="${g.id}"`:""} style="--kn:${g.cells.length}"${g.title?` title="${kitStatEsc(g.title)}"`:""}>${g.cells.join("")}</div>`).join("")}</div>`}
@@ -41,9 +40,6 @@ window.kitStatCell=kitStatCell;window.kitStatSet=kitStatSet;window.kitStatRow=ki
 .kst>.kstb{display:block;align-self:center;width:100%;height:3px;margin:0}
 .kst>.kstb0{visibility:hidden}
 .kst-tile>.kstv:not(.kunk){font-weight:700}.kst-tile>.kstl img.ic,.kst-chip>.kstl img.ic{width:13px;height:13px;vertical-align:-2px}
-/* one-row bar (cells sized to content): a cell wearing the "!" keeps the badge inside its own box (owner 15/11: Danh now follows Đức) */
-/* kv3:.kv2 */:where(.kv2) header.hud:not(.khd2) #kstrow .kst:has(>.kstw){padding-right:12px}
-.kst>.kstw{position:absolute;left:calc(50% + 1.1em);top:calc(var(--kst-l) + (var(--kst-n) - 13px)/2);font-style:normal;font-weight:800;font-size:.62rem;line-height:13px;color:#fff;background:var(--gold);border-radius:50%;width:13px;height:13px;text-align:center}
 /* the time block: same two line boxes as a stat cell */
 .k3tc .k3tt{display:grid!important;grid-template-rows:var(--kst-l) var(--kst-n) var(--kst-b);gap:0!important;min-width:0}
 /* each line is a block whose own font is the stat cell's font for that line: the line's strut puts the baseline exactly where the cells
