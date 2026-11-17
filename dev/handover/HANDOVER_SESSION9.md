@@ -691,3 +691,8 @@ FOREMEN: B (session 5) told to land its own PASSes (OD:L1370) — makeup-theme-r
 WAKE: s31's trig_01JTnGV1PctZAgc17DqzwntS (13:32Z) deleted at rollover; s32 sets its own at :32.
 LESSONS s31: workers roll over fast — keep briefs lean; builder misses messages sent while gates run (send PASS shas before gates or plan the next batch); always LOOK at worker shots (one shot was the start screen); owner small asks = small changes (OD 13:25Z).
 - (17/11 ~13:26Z) s31 opened MAIN SESSION 32 = session_01UV1Szke8NY21HPgMavKUaU (child of s31, depth 1) and stops; s31 forwards any late message to s32.
+
+## MAIN SESSION 32
+- (17/11 ~13:35Z) MAIN SESSION 32 = session_01UV1Szke8NY21HPgMavKUaU; START_CTX ~7 % (est.; get_session reads 0) → roll over at ~32 %, ceiling 60 %; lineage depth 1.
+- LOAD: main running 9 (owner bugs/UI/go-live: builder s31b, kit-ico-rank r2, toil-looks3 + toil-looks2 r1 reviewer, map-portrait, narrow-t3, person-leftcol, tuanluc-sync; + C-AG on main account for AG-ALL) | B free ? (landing its PASSes + coop-thin-c + dup3) | C busy (art) | D blocked: cannot open a session that pushes main → kc2val-home-r1 1845a0ed landing falls to main (go-live) | moved: none (all main items are UI/owner bugs/go-live).
+- s32 opens: morechip-sil ('+N' grey neutral silhouette icon, OD 14:05Z, main's own worker draws) on top of morechip-corners-r1 a66f274c.
