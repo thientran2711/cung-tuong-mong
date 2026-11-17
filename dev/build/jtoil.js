@@ -89,7 +89,7 @@ Object.assign(BAL.toil,{skillShare:10,
   son:{haiduong:1,dotham:2,hongdao:0,chusa:1,manchin:2,sanho:0,camdao:1,hophach:2},may:{nau:0,den:1,thanhdai:0,naunhat:0,khoi:0}},
  tone:{mat:{hoadao:"w",hongmai:"c",rangchieu:"w",kimsa:"w",tuvi:"c",hophach:"w"},ma:{hongphan:"c",hoadao:"w",haiduong:"c",yenchi:"c",rangchieu:"w",hongsen:"c",camquyt:"w"},
   son:{haiduong:"c",dotham:"c",chusa:"w",manchin:"c",sanho:"w",camdao:"w",hophach:"w"}},
- teaseGhen:2,harshAff:2,harshWin:40,harshDanh:-1,harshDuc:-1,harshGhen:1,replyGhen:2,replySuc:-2,vungB:.5,vungLipSm:1,/* vụng A lip smear beyond the lip line (x the v11 offset; owner 17/11 ~17:20Z: smudge a bit more) */lod:{fullAt:95,maxAt:25,boost:1.9,steps:3,cue:{lip:1,eye:1,wing:1.3,low:1.3,bl:1.3,vung:.3},look:{tuyet:.55,dep:.85}},/* size-aware makeup (owner 17/11 ~17:45Z): face px >= fullAt = the approved strength; as the face shrinks to maxAt px the macro cues (lip colour, eye/lid colour, wing, lower lash, blush, vụng powder) are multiplied up to x boost (per-cue weight in cue), in `steps` steps */vungPuff:{big:.75,small:.5,al:.7,alv:.1},/* vụng A powder puffs (v11): size x the BLUSH disc radius = .75 or .5 (a mix on every cheek, per-day seed; owner ~17:00Z: not every blob blush-sized or it hides the blush), more opaque, the SAME blur profile as the blush (BLP.wide, used directly in toilMkDraw) and a much less white alpha, layered over the blush (owner 17/11 ~16:20Z) *//* share of vụng days that are the 'đánh quá tay, như hề' variant B (the rest: A 'không biết trang điểm'); picked once per day from col.seed */presetDiem:2,mixH:1,showyH:1,cakeH:[[.3,1],[.55,2]],
+ teaseGhen:2,harshAff:2,harshWin:40,harshDanh:-1,harshDuc:-1,harshGhen:1,replyGhen:2,replySuc:-2,vungB:.5,vungSm:1,/* vụng A lip smear beyond the lip line (x the v11 offset; owner 17/11 ~17:20Z: smudge a bit more) */lod:{fullAt:95,maxAt:25,boost:1.9,steps:3,cue:{lip:1,eye:1,wing:1.3,low:1.3,bl:1.3,vung:.3},look:{tuyet:.3,dep:.65}},/* size-aware makeup (owner 17/11 ~17:45Z): face px >= fullAt = the approved strength; as the face shrinks to maxAt px the macro cues (lip colour, eye/lid colour, wing, lower lash, blush, vụng powder) are multiplied up to x boost (per-cue weight in cue), in `steps` steps */vungPuff:{big:.75,small:.5,al:.7,alv:.1},/* vụng A powder puffs (v11): size x the BLUSH disc radius = .75 or .5 (a mix on every cheek, per-day seed; owner ~17:00Z: not every blob blush-sized or it hides the blush), more opaque, the SAME blur profile as the blush (BLP.wide, used directly in toilMkDraw) and a much less white alpha, layered over the blush (owner 17/11 ~16:20Z) *//* share of vụng days that are the 'đánh quá tay, như hề' variant B (the rest: A 'không biết trang điểm'); picked once per day from col.seed */presetDiem:2,mixH:1,showyH:1,cakeH:[[.3,1],[.55,2]],
  allow:{thuong:4,thinhan:3,night:5,fest:6,tang:1},diemOdds:[0,.3,.55,.8,.95],
  /* NPCs and the bot: how well each part goes, by skill (same skill formula), spread per part */
  play:{q0:.53,qSk:.15,spread:.44,cake:.12,cakeOver:.35,diemPre:.3}});
@@ -732,8 +732,8 @@ const TOIL_MKS={
  /* bl = blush strength, blr = blush size (x the eye distance), sk = skin-light lift, hl = soft luminous cheekbone (round, never a streak), dabs = white powder dabs, gloss = natural sheen INSIDE the lip. Every skin-side layer is clipped to the skin mask (toilMkDraw). */
  vung:{lip:.5,eye:.4,eyeH:.5,brow:0,wing:0,low:0,vung:1,bl:.3,r:.17,sk:.08,dabs:2},/* A: 'không biết trang điểm' */
  vua:{lip:.44,eye:.5,eyeH:.5,brow:.45,wing:.08,low:0,bl:.21,r:.165,sk:.13},/* = the ?v=2 Đoan trang (approved by the owner 17/11 13:48Z) */
- dep:{lip:.74,eye:.9,eyeH:.8,brow:.7,wing:.3,low:.34,shim:.5,gloss:.65,bl:.31,r:.2,sk:.3,hl:1},/* Kiều diễm = the ?v=5 Khuynh thành look, moved down one step (owner 17/11 ~14:00Z) */
- tuyet:{lip:.88,eye:.96,eyeH:.9,brow:.78,wing:.42,low:.47,shim:.75,gloss:.78,bl:.38,r:.21,sk:.4,hl:1,glam:1},/* Khuynh thành: splendid, between Kiều diễm and the heavy v7 (owner 14:40Z) */
+ dep:{lip:.7,eye:.9,eyeH:.8,brow:.7,wing:.3,low:.34,shim:.5,gloss:.65,bl:.28,r:.2,sk:.3,hl:1},/* Kiều diễm = the ?v=5 Khuynh thành look, moved down one step (owner 17/11 ~14:00Z) */
+ tuyet:{lip:.76,eye:.96,eyeH:.9,brow:.78,wing:.42,low:.47,shim:.75,gloss:.78,bl:.28,r:.21,sk:.4,hl:1,glam:1},/* Khuynh thành: splendid, between Kiều diễm and the heavy v7 (owner 14:40Z) */
  diem:{lip:.92,eye:1,eyeH:.95,brow:.82,wing:.36,low:.6,shim:.5,gloss:.2,bl:.56,r:.24,sk:.32,diff:1},/* Diêm dúa = the v6 look, blush more diffuse (loang, lower centre) */
  vungB:{lip:1,eye:1,eyeH:1.18,brow:.9,wing:.55,low:.85,shim:.6,gloss:.2,bl:.78,r:.23,sk:.36}};/* Vụng về B "đánh quá tay, như hề" = the v7 Diêm dúa look; A = TOIL_MKS.vung */
 function toilVungB(col){const sd=((col&&col.seed)|0);if(!sd)return false;let h=Math.imul(sd^(sd>>>15),2246822519);h=Math.imul(h^(h>>>13),3266489917);h^=h>>>16;return((h>>>0)/4294967296)<(BAL.toil.vungB||0)}
@@ -747,7 +747,7 @@ function toilMkPts(v){const P=[];for(let i=0;i<60;i++)P.push([v[2*i]/40,v[2*i+1]
 function toilMkBox(v){const P=toilMkPts(v);let x0=1e9,y0=1e9,x1=-1e9,y1=-1e9;P.forEach(([x,y])=>{x0=Math.min(x0,x);x1=Math.max(x1,x);y0=Math.min(y0,y);y1=Math.max(y1,y)});
  const mx=(x1-x0)*.3,my=(y1-y0)*.3;return[x0-mx,y0-my,x1-x0+2*mx,y1-y0+2*my].map(n=>+n.toFixed(3))}
 const TOIL_MKA={};/* key -> [file,look,col]: the size pass (toilLodPass) re-fetches the same layer at another strength step */
-function toilMkLayer(file,look,col,step){const v=MK_FIT.get(file);if(!v||!TOIL_MKS[look])return"";const base=[file,look,col.mat,col.ma,col.son,col.may,look==="vung"?col.seed|0:""].join("|"),key=step?base+"|L"+step:base;TOIL_MKA[base]=[file,look,col];
+function toilMkLayer(file,look,col,step){const v=MK_FIT.get(file);if(!v||!TOIL_MKS[look])return"";const base=[file,look,col.mat,col.ma,col.son,col.may,look==="vung"?(col.seed|0)+"/"+BAL.toil.vungSm:""].join("|"),key=step?base+"|L"+step:base;TOIL_MKA[base]=[file,look,col];
  let e=TOIL_MKC[key];if(!e){e=TOIL_MKC[key]={box:toilMkBox(v),src:""};TOIL_MKQ.push(key);if(TOIL_MKQ.length>200)delete TOIL_MKC[TOIL_MKQ.shift()];toilMkPaint(file,v,look,col,e,key,step||0)}
  const b=e.box;return `<img class="kmkl kmkc kmkl-${look}" data-mkk="${key}" src="${e.src||TOIL_BLANK}" alt="" aria-hidden="true" style="--fleft:${b[0]}%;--ftop:${b[1]}%;--fwidth:${b[2]}%;--fheight:${b[3]}%">`}
 function toilMkPaint(file,v,look,col,e,key,step){const im=new Image();im.crossOrigin="anonymous";im.decoding="async";
@@ -784,9 +784,10 @@ function toilMkDraw(im,v,look,col,box,row,lod){const W=im.naturalWidth,H=im.natu
  const ca=P.slice(20,30).reduce((a,p)=>[a[0]+p[0]/10,a[1]+p[1]/10],[0,0]),cb=P.slice(30,40).reduce((a,p)=>[a[0]+p[0]/10,a[1]+p[1]/10],[0,0]);const u=Math.hypot(ca[0]-cb[0],ca[1]-cb[1])||20;
  /* lips: outer minus the mouth opening */
  const R=toilRnd((col.seed|0)+11),VU=!!T.vung;const lc=P.slice(0,12).reduce((a,p)=>[a[0]+p[0]/12,a[1]+p[1]/12],[0,0]);
- /* vụng: the lip colour goes past the lip line (bigger, shifted outline), patchy */
- const lipO=VU?(()=>{const f=BAL.toil.vungLipSm,sx=1+(.1+.07*R())*f,sy=1+(.32+.14*R())*f,dx=(R()-.5)*u*.1*f,dy=(R()-.15)*u*.05*f;return P.slice(0,12).map(([x,y])=>[lc[0]+(x-lc[0])*sx+dx,lc[1]+(y-lc[1])*sy+dy])})():P.slice(0,12);
- const [cl,gl]=mk();toilSoft(gl,g=>{toilSmooth(g,lipO);toilSmooth(g,P.slice(12,20))},u*(VU?.075:.052+.04*T.lip),1,K);/* owner 17/11 13:25Z: no visible lip outline; the darker the lip, the softer the edge */
+ /* vụng (v15, owner 18:58Z): the lip keeps its OWN outline (nothing grows); ONE faint smudge streak past the lip line at one corner, like lipstick rubbed by a finger (BAL.toil.vungSm = strength) */
+ const lipO=P.slice(0,12);let SMG=null;if(VU){const xs=lipO.map(q=>q[0]),ys=lipO.map(q=>q[1]),x0=Math.min(...xs),x1=Math.max(...xs),lw=x1-x0,lh=Math.max(...ys)-Math.min(...ys),sd=R()<.5?-1:1,k=BAL.toil.vungSm;SMG={x:(sd<0?x0:x1)+sd*lw*.02,y:lc[1]+lh*.35,rx:lw*(.2+.1*k),ry:lh*.42,rot:sd*.6,a:Math.min(.95,.6*k)}}
+ const [cl,gl]=mk();toilSoft(gl,g=>{toilSmooth(g,lipO);toilSmooth(g,P.slice(12,20))},u*(.052+.04*T.lip),1,K);/* owner 17/11 13:25Z: no visible lip outline; the darker the lip, the softer the edge */
+ if(SMG)toilSoft(gl,g=>{g.ellipse(SMG.x,SMG.y,SMG.rx,SMG.ry,SMG.rot,0,Math.PI*2)},u*.05,SMG.a,K);
  /* eyelids: soft layers from the lash line up toward the brow, stronger at the lash line, a small wing at the outer corner; the eye itself stays clear */
  const [ce,ge]=mk();const lerp=(a,b,t)=>[a[0]+(b[0]-a[0])*t,a[1]+(b[1]-a[1])*t];
 const eh=VU?[.6+.55*R(),.3+.35*R()]:[1,1];let en=0;
