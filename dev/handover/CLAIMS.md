@@ -748,3 +748,4 @@
 | MISSING TAIL of consort-tier redraw set (a51 ty1 m25-m26, ty2/ty3 m01-m26; keep path img/_keep/maid-ty-redraw only; owner GO 17/11 12:31Z; sonnet W4g opened by lead #7) | review/fig-cutout-clean | C | session_011xDdVPT851mSQjBmLn4Sw1 | RUNNING | 17/11 12:34Z |
 | stage-caption-r1 | reviewer r1 | PASS d59541fe (rebuilt site; scan table in reports/review-stage-caption-r1.md) |
 | BATCH-D8 LIVE: main = 6ca04148 (FF from 65dcf52f by MAIN s31 after LOOK at Fold+iPad home shots) | main | MAIN s31 | session_01UV1SzhZw2hHEAf6bi644Jn | LIVE | 17/11 12:36Z |
+| rank shoulder-piece (vân kiên) SAMPLE Tần→Hoàng hậu, one consort (sonnet; owner order 17/11 ~12:33Z; history check first) | CDN img/_review/rank-vankien/ + reports/rank-vankien-sample.md | C ROOT-6 | session_011xDdVSeXkZANCvC1jxcTK1 | RUNNING | 17/11 12:35Z |
