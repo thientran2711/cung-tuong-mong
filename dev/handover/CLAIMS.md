@@ -499,3 +499,4 @@
 | kit-size-10 (sonnet keeper): KIT REQUEST night-final — Fold clock chip off screen in the kit choice dialog, whole family | review/kit-size-10 | main s27 | session_01UV1SziEvZm2cX5xAAQe8Yq | RUNNING | 17/11 00:39Z |
 | road-onecore quick re-review r1 (opus, numbers) of 6a1112d1 (B1 road line) | review/road-onecore-r1 | B | session_01N1tNP67hg9cxyW2tQvWpBX | RUNNING | 17/11 00:55Z |
 | oi-perf (opus): origin-intros life-card click 1.3–1.5 s long task (quickcheck FAIL 4.4 s) → root-cause fix on review/batch-0032-oi 5e5eb4c8 | review/batch-0032-oi | main s27 | session_01UV1SziJLwwyFFAvzGMHcyD | RUNNING | 17/11 00:53Z |
+| coop-main-faults review r1 (opus co-op) of 3751fbba (a,b,d; (c) + start-friend fails moved to coop-stable #2) | review/coop-main-faults-r1 | main s27 | session_01UV1SzhNibrJw9xWf4TES12 | RUNNING | 17/11 00:59Z |
