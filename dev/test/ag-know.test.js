@@ -91,7 +91,7 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
   const h={k:"vuon",id:"gossip",x:{pid:a.id+":gossip:0",vid:a.id,t:null},done:0};const st0=S.staff,md0=S.maid,pl0=S.place;S.staff=[];S.maid=null;S.mat=100;S.tamco=100;S.place="home";
   const k0=agKh;o.at=[];try{for(let k=0;k<J95.KH;k++){agKh=()=>k;KN.m=null;const r=knFor(S,h);o.at.push(r?r.by:null)}}finally{agKh=k0}
   z.pend.splice(z.pend.indexOf(pd),1);S.staff=st0;S.maid=md0;S.place=pl0;S.mat=1;S.tamco=20;return o});
- ok(r8.D===2&&!r8.at[0]&&!r8.at[1]&&r8.at[2]==="mat",'8 khắc chain: a happening at khắc 1 reaches her Tai mắt at the start of khắc 3 (seen k1 → the bearer goes k2 → known k3), never before',r8);
+ ok(r8.D===2&&!r8.at[0]&&!r8.at[1]&&(r8.at[2]==="mat"||r8.at[2]==="pass")/* AG-ALL-2f: the eye route names a real person — her placed Tai mắt ("mat") or, none placed, a real passer-by ("pass") */,'8 khắc chain: a happening at khắc 1 reaches her Tai mắt at the start of khắc 3 (seen k1 → the bearer goes k2 → known k3), never before',r8);
  /* 9 (owner ~16:20Z (d)): the three scheme lies STAY (NO-LIES is only about what HER servants / Tai mắt report to her): the bribed physician's lie,
     NPC false rumours (j68f), the servant frame-up dilemma */
  const r9=await p.evaluate(()=>{const SRC=[...document.scripts].map(x=>x.textContent).join("\n");return{thy:BAL.thy&&BAL.thy.lie>0&&/roll\(T\(\)\.lie\)/.test(SRC),rumour:/j68f/.test(SRC)&&/Nghe đồn/.test(SRC),frame:typeof cnvFrameOpts==="function"}});
