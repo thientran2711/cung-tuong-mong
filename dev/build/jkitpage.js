@@ -140,7 +140,7 @@ function kitPopSample(k){try{if(typeof S==="undefined"||!S||typeof kitModal!=="f
  if(k==="place"||k==="personopt"){let m=null;
   if(k==="place"){const pk=(typeof places==="function"?places().map(x=>x.k):[]).find(x=>x&&x!=="home"&&x!==S.place&&typeof accState==="function"&&accState(x).why)||(typeof places==="function"?places().map(x=>x.k).find(x=>x&&x!=="home"&&x!==S.place):"");
    if(!pk||typeof kitPlaceDress!=="function"){back();return false}m={t:accName(pk),h:'<p>Không vào được lúc này: <b>chưa đến giờ mở cửa</b>.</p>',opts:[{n:"Sang buổi",fx:{},x:"buổi sau đủ khắc · thử lại",go:nop}]};kitPlaceDress(m,pk)}
-  else{const v=R[0];if(!v){back();return false}m={t:"Đêm thị tẩm",h:"<p>Hương trầm vấn vít. Ngài nắm tay ngươi rất lâu.</p>",opts:[{n:"Xin ân cho gia đình",fx:{},x:"Khá chắc · thành: Danh +5",go:nop},{n:"Thì thầm nói xấu "+v.name,fx:{},x:"Khó · thành: nàng Sủng -10",go:nop},{n:"Im lặng, tựa vai ngài",fx:{},x:"Ân tình +2",go:nop}]}}
+  else{const v=R[0];if(!v){back();return false}m={t:"Đêm thị tẩm",h:"<p>Hương trầm vấn vít. Ngài nắm tay ngươi rất lâu.</p>",opts:[{n:"Xin ân cho gia đình",fx:{},x:`Khá chắc · thành: Danh +${BAL.kitpage.demo.ask.danh}`,go:nop},{n:"Thì thầm nói xấu "+v.name,fx:{},x:`Khó · thành: nàng Sủng -${BAL.kitpage.demo.ask.sung}`,go:nop},{n:"Im lặng, tựa vai ngài",fx:{},x:`Ân tình +${BAL.kitpage.demo.ask.an}`,go:nop}]}}
   m.onClose=back;m.opts.forEach(o=>{const g=o.go;o.go=()=>{g();setTimeout(back,0)}});Q.push(m);showModal();return true}
  const sp=S0[k];if(!sp){back();return false}sp.onClose=back;
  if(sp.opts)sp.opts.forEach(o=>{const g=o.go;o.go=()=>{g();setTimeout(back,0)}});kitModal(sp);return true}catch(e){console.error("kitPopSample",e);const pg=document.getElementById("kitpage");if(pg)pg.hidden=false;return false}}
