@@ -86,3 +86,14 @@ No new UI part: kit notice panel (`kitPanel` kind "notice", facts) and the exist
 ## Open / notes
 - LOGBAO is a regex table on the sentence; a new log text that changes her game but uses other words falls to (b) — add its words to LOGBAO (the site scan shows the class of every call site).
 - "X không tin ngươi, sai đánh đòn" (j42:275) stays (b) (her punishment is already in that dialog).
+
+## HANDOVER (worker rollover, 17/11 ~04:05Z) — NOT ready for review yet
+START_CTX ≈ 5 %; context now ≈ START_CTX + 25 % → rollover per owner rule (OD:L1217, s14 option 1). Coordinator (main s29, session_01UV1SzjZSZnpbhRqnkyzg7p) opens the successor.
+Done on this branch (a1b683cbb): items 1–5 above (one-time lines, BÁO during play, who stamp + attribution, wording, "n lần" chip), tests dev/test/tuanluc-sync.js / tuanluc-sites.js / tuanluc-shots.js, quickcheck PASS.
+OPEN for the successor (main s29 order 03:52Z, read the OD tail 03:26Z–03:36Z + OD:L1458(3) VERBATIM first):
+- (10) FIRST: rebase on it-key-guard 02561fca (or the batch-0232 tip) and DROP this branch's own S.vl→S.vmem migration (jvoice.js `vmemFix`, S.vmem; jveil.js vlSync `vmemFix` call). Keep only the extra cleanup on top, using batch-0232's field name and old-save move: vlSync clears `p.scar.veil=0` when it takes the veil off; drop nameless voice-memory objects from `inv`.
+- (6) Delete the filler line j87.js wkBookData "Mấy việc vặt trong tuần chưa ghi riêng…" (+ same family). Find every code path that changes sủng / relation (aff/oán/ghen, e.g. Hoàng hậu ghen +6, close maid thiện cảm +3) WITHOUT a log() and give it a real cause line at the moment; replay rule OD:L921 must balance with 0 filler. Scan: filler count in a scripted 3-month life before/after = 0 (extend dev/test/tuanluc-sync.js).
+- (7) Sổ ghi keeps EVERY KẾT QUẢ / BÁO / VIỆC card shown in full (title, text, Được/Mất/Kèm rows incl. 'Kèm 12 phi tần ghen thêm 1–3' + list, who). Scan: every card shown in a 3-month life has a matching Sổ ghi entry (0 missing). Hook point idea: wrap showModal/kitPanel (jlogbao already wraps showModal).
+- (8) Overnight "Trong cung vừa qua" KẾT QUẢ card: each Được/Mất/Kèm row names its cause ("Ngủ một đêm: Sức +9", "Lâu chưa được gặp Hoàng thượng, ân sủng nhạt: Sủng −1"); other people's news in its own "Tin trong cung" block, never her headline. Same in Sổ ghi.
+- (9) OD:L1458(3) canon: Tuần lục = literary sentence only (no Được/Mất number rows / chips in entries; the person relation table stays); Sổ ghi = full info (gains/losses/cause). j87 wkeEntry currently appends chips like "Sủng +7." — remove from Tuần lục, keep in Sổ ghi.
+- Then one SẴN SÀNG KIỂM to s29 with a before/after table per item (1–10). Shots go to CDN img/_review/tuanluc-sync/ (6 files already there).
