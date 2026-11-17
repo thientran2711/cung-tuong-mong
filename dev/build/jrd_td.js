@@ -698,10 +698,10 @@ rdDef("td_song",8,{t:"Em bị thương",w:"maid",sj:"vết thương của em",ca
 rdDef("td_song",9,{t:"Đổi tên",w:"eun",sj:"tờ hộ tịch của em",cast(A){const e=foe67();if(e)A.act.foe=e.id;else delete A.act.foe;return rdCast(A,["v"])},
  g:"Cái tên Tiểu Thạch đã bị quá nhiều người nhắc. Cuối năm Hộ bộ tra lại sổ đinh, ai không có hộ tịch rõ ràng sẽ bị giữ lại hỏi. Còn hai tháng: làm cho em một tờ hộ tịch mới, hoặc dám để em đứng dưới họ thật.",
  p:[["s1","s2"],["c1","c2","c3"],["t1"],["x1"]],
- B:{s1:{h:"Em hỏi về họ thật",w:"maid",if:RDW(1),t:"Lành vết thương, em viết: “Tỷ, đệ không muốn cả đời làm Tiểu Thạch. Đệ muốn mang họ cha.”",o:[
+ B:{s1:{h:"Em hỏi về họ thật",w:"maid",if:RDW(1),t:()=>rdEnd(4)==="r97"?"Lành vết thương, em viết: “Tỷ, chiếu đã trả đệ họ cha, mà sổ đinh nơi biên vẫn ghi Tiểu Thạch. Đệ muốn tờ hộ tịch cũng mang họ cha.”":"Lành vết thương, em viết: “Tỷ, đệ không muốn cả đời làm Tiểu Thạch. Đệ muốn mang họ cha.”",o:[
   {n:"Hứa sẽ tìm cách",f:"name",wx:"em có điều để chờ",lx:"một lời hứa nặng",rt:"Em hồi thư, nét chữ vui hẳn."},
   {n:"Khuyên em chờ thêm",f:"wait",wx:"giữ an toàn",lx:"em buồn",rt:"Em không đáp thư ấy."},
-  {n:"Nhắn hỏi lão quan bộ Lễ về lệ khôi phục họ",sc:1,f:"name",wx:"biết đường đi",lx:"lão quan nói ra ngoài",rt:"Lão quan nói: có công lớn thì có thể xin.",rf:"Lão quan nói lệ ấy chưa từng có."}]},
+  {n:"Nhắn hỏi lão quan bộ Lễ về lệ khôi phục họ",sc:1,f:"name",wx:"biết đường đi",lx:"lão quan nói ra ngoài",rt:"Lão quan nói: có công lớn thì có thể xin.",rf:()=>rdEnd(4)==="r97"?"Lão quan nói: chiếu thì có, nhưng sửa sổ đinh nơi biên chưa có lệ.":"Lão quan nói lệ ấy chưa từng có."}]},
  s2:{h:"Sổ đinh cuối năm",w:"maid",if:RDW(0),t:"Em yếu tay, không còn ở hàng lính chiến. Người làm việc ở hậu doanh phải có hộ tịch rõ, mà tờ của em là giấy mua của một lái buôn năm nào.",o:[
   {n:"Lo một tờ giấy mới",sc:1,f:"paper",wx:"có giấy tạm",lx:"giấy mua thì có người bán",rt:"Lái buôn mua được một tờ hộ tịch của một người đã mất."},
   {n:"Dặn em xin về đội đồn điền",sc:1,f:"wait",wx:"đồn điền ít ai tra giấy",lx:"đồn điền cực khổ",rt:"Em xin được về đồn điền.",rf:"Đội trưởng không cho em đi."},
@@ -1083,6 +1083,6 @@ rdDef("td_tha",11,{t:"Cởi nút thắt",w:"foe",sj:"phiên Tam ty xét án {foe
   mid:{k:0,tag:"Thù trả, nghĩa tuyệt",t:"Hoàng thượng phê theo lời nghị nặng nhất, nhà {foed} tan. Thù nhà ngươi đã trả đủ. {foe} sẽ oán ngươi trọn đời, và cả cung biết điều ấy.",go:A=>{S.avenged=true;rdOan(A,"foe",25);return""}},
   lose:{k:-1,tag:"Đường ai nấy đi",t:"Hoàng thượng phê nhẹ tay cho {foed}. Ngươi và {foe} gặp nhau ở hành lang mà không ai dừng bước. Không ai tha ai, không ai thắng ai.",go:A=>{rdOan(A,"foe",8);return""}}}});
 RD97L.push(rdRare({a:"td_tha_11",tag:"Con gái làm chứng cho cha",w:"foe",n:"Xin Hoàng thượng nghe {foe} khai chống lại chính cha nàng",
- path:["Dâng lời trình có ký tên","Vẫn dâng lời trình","Hứa","Dâng tờ xin chỉ xét người có tội","Xin Hoàng thượng cho nộp thư","Sai {maid} ra cửa cung","Bảo ông nhắn cho con gái ông"],bad:["Bảo nàng không cần khai","Ký tên cùng nhà {v}","Không nhận thư","Không nghe"],x:[A=>!!rv67(A,"foe")&&S.duc>=RR("td_tha_11").bar,"Đức từ "+RR("td_tha_11").bar],
+ path:["Dâng lời trình có ký tên","Vẫn dâng lời trình","Hứa","Dâng tờ xin Hoàng thượng chỉ xét người có tội","Xin Hoàng thượng cho nộp thư","Sai {maid} ra cửa cung","Bảo ông nhắn cho con gái ông"],bad:["Bảo nàng không cần khai","Ký tên cùng nhà {v}","Không nhận thư","Không nghe"],x:[A=>!!rv67(A,"foe")&&S.duc>=RR("td_tha_11").bar,"Đức từ "+RR("td_tha_11").bar],
  t:"{foe} quỳ trước Hoàng thượng, không nhắc đến cha bằng chữ cha. Nàng kể đêm ông tập nét ấn giả, dâng bản nháp tờ sớ nàng giấu bấy lâu. Hoàng thượng sai đưa bản nháp sang Tam ty; {foed} nhìn nét chữ của chính mình, nhận tội từng chữ. Ngự phê ghi rằng con gái nhà vu cáo đã tự tay trả lại sự thật cho nhà bị vu, và ban ơn tha cho mẹ con nàng. Từ đó trong cung, hai người đi đâu cũng có nhau.",
  go:A=>{S.avenged=true;const e=rv67(A,"foe");if(e){e.enemy=false;return e67ally(e,50)}return""},rw:"nt_dongchau",ti:"Người cởi nút thắt hai nhà"}));
