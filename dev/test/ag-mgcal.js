@@ -52,6 +52,13 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
  ok(u.shared,'5 her device does not change the shared band (one core: only BAL.ag.mg2.cal.k)',u.shared);
  ok(u.back===u.btns&&u.rows,'5 «Thử môn khác» returns to the kind list; kit rows Đã thử 1/N · Chưa thử',{back:u.back,rows:u.rows});
  ok(u.only,'5 one kind at a time: the code carries only the kinds done',u.only);
+ /* 5c owner 17/11 ~17:10Z: ONE run through every kind in order; stop keeps progress; resume starts at the next kind not done */
+ const sq=await p.evaluate(async()=>{const sleep=t=>new Promise(r=>setTimeout(r,t));const o={};let n=0;const k0=kg82Play;window.kg82Play=function(kind,onEnd){n++;setTimeout(()=>onEnd(6),5)};try{kg82Play=window.kg82Play}catch(e){}
+  localStorage.removeItem("ctm-mgcal");const ks=mgCalKinds();mgCalOpen();await sleep(150);const b=document.getElementById("mgcal-seq");o.label=b&&b.textContent;b.click();o.played=[];
+  for(let j=0;j<3;j++){for(let i=0;i<5;i++){await sleep(60);document.getElementById("kg82go").click();await sleep(60);document.getElementById("kg82ok").click()}await sleep(80);o.played.push(Object.keys(JSON.parse(localStorage.getItem("ctm-mgcal")||"{}")).length);if(j<2)document.getElementById("mgcal-next").click()}
+  document.getElementById("kg82ok").click();await sleep(150);const b2=document.getElementById("mgcal-seq");o.resume=b2&&b2.textContent;b2.click();await sleep(100);o.resumeKind=(document.getElementById("kg82")||{}).textContent.includes(KG82_KIND[ks[3]].n);
+  o.order=Object.keys(JSON.parse(localStorage.getItem("ctm-mgcal")||"{}")).join()===ks.slice(0,3).join();kg82Close();try{kg82Play=k0}catch(e){}localStorage.removeItem("ctm-mgcal");return o});
+ ok(/Thử hết cả/.test(sq.label)&&sq.played.join()==="1,2,3"&&sq.order&&/Thử tiếp các môn còn lại/.test(sq.resume)&&sq.resumeKind,'5c one run walks kind after kind; «Dừng ở đây» keeps progress; resume starts at the next kind not done',sq);
  /* 5b every kind's real board starts from the test (1.2 s each), no errors */
  const e0=errs.length;const sm=await p.evaluate(async()=>{const sleep=t=>new Promise(r=>setTimeout(r,t));const bad=[];for(const k of mgCalKinds()){try{mgCalRun(k);await sleep(120);
    const g=document.getElementById("kg82go");if(!g){bad.push(k+":nogo");continue}g.click();await sleep(1200);if(!KG82.run&&KG82.phase!=="result")bad.push(k+":norun");kg82Close()}catch(e){bad.push(k+":"+e.message)}}return bad});
