@@ -17,6 +17,14 @@ Object.assign(BAL.looks,{xoc:{on:0,
  /* body anchors as a share of the figure box (waist tie row, elbow bend, shoulder), ridge = offset / width (in band widths) / strength of the lit edge, comp = brightness kept */
  body:{waist:.34,elbowX:.24,elbowY:.43,shoulder:.17},ridge:{off:1.5,w:.35,k:1,edge:.3,soft:2.4},comp:.85,bunchK:4,
  seed:7,light:[-.55,-.8],skin:{de:15,lum:.32,min:.003,max:.02,fill:.25,asp:2.6},hair:{de:26,reach:.34},head:.012,item:60}});
+/* r4 TASK 2: stain DECALS on the cloth (tra = tea, uot = wet, bun = mud). Decal art = CDN img/fx-stain-<kind>-<n>.webp (transparent webp); code places it on ANY figure through the cloth mask.
+   on:0 = live feature OFF. lv[1..3] (nhẹ / vừa / nặng): n = decals, sc = decal width as a share of the robe width, op = opacity, wet = overall cloth darkening (wet cloth), pos = anchors tried in order
+   (fx, fy = share of the robe box: chest / sleeve / hem), blend = multiply | soft | normal (folds and the robe's own pattern show through), variants = how many decal files exist per kind. */
+Object.assign(BAL.looks,{stain:{on:0,
+ lv:[null,{n:1,sc:.16,op:.7,wet:.04},{n:2,sc:.2,op:.78,wet:.09},{n:3,sc:.26,op:.85,wet:.15}],
+ anchor:{chest:[.5,.27],sleeve:[.2,.5],hem:[.5,.93],hemL:[.22,.94],hemR:[.78,.94]},
+ kind:{tra:{pos:["chest","sleeve","hem"],blend:"multiply",variants:3,wet:0},uot:{pos:["hem","sleeve","chest"],blend:"multiply",variants:2,wet:1},bun:{pos:["hem","hemL","hemR"],blend:"multiply",variants:2,wet:0}},
+ rot:.5,jit:.05}});
 /* ---------- tiny deterministic noise ---------- */
 function clothHash(x,y,s){let h=(x*374761393+y*668265263+s*2147483647)|0;h=(h^(h>>>13))*1274126177|0;return((h^(h>>>16))>>>0)/4294967295}
 function clothNoise(x,y,s){const xi=Math.floor(x),yi=Math.floor(y),fx=x-xi,fy=y-yi,u=fx*fx*(3-2*fx),v=fy*fy*(3-2*fy);
@@ -145,18 +153,50 @@ function clothXocBake(d,W,H,lv,opt){opt=opt||{};const B=BAL.looks.xoc,L=B.lv[cl(
  /* r4: away from every crease and from the hem / lapel warp the output is BYTE-IDENTICAL to the picture (no resampling, no blur, no brightness shift) */
  for(let i=0;i<n;i++){if(dk[i]<.002&&lt[i]<.002&&Math.abs(dxs[i])<.01&&Math.abs(dys[i])<.01){out[i*4]=d[i*4];out[i*4+1]=d[i*4+1];out[i*4+2]=d[i*4+2];out[i*4+3]=d[i*4+3]}}
  return{data:out,mask:mk,field:F}}
+/* ---------- TASK 2: one decal on the cloth (generic: stains now, crease decals later) ----------
+   out = RGBA Uint8ClampedArray (W×H, modified in place); mk = clothMask result; dec = {w,h,data RGBA} (transparent decal);
+   (ax,ay) = decal centre in pixels, scale = decal width as a share of the robe width, rot radians, op 0..1, blend multiply | soft | normal.
+   Clipped by the cloth mask and kept off skin / hair / held items (protect map); the figure's own alpha is never changed. */
+function drawDecalOnCloth(out,W,H,mk,dec,ax,ay,scale,rot,op,blend){const fw=mk.x1-mk.x0+1,dw=Math.max(2,fw*scale),sc=dw/dec.w,dh=dec.h*sc,c=Math.cos(rot),sn=Math.sin(rot),R=Math.hypot(dw,dh)/2+1;let n=0;
+ for(let y=Math.max(0,Math.floor(ay-R));y<=Math.min(H-1,Math.ceil(ay+R));y++)for(let x=Math.max(0,Math.floor(ax-R));x<=Math.min(W-1,Math.ceil(ax+R));x++){const i=y*W+x,mm=mk.m[i];if(mm<.02)continue;
+  const px=x-ax,py=y-ay,u=(px*c+py*sn)/sc+dec.w/2,v=(-px*sn+py*c)/sc+dec.h/2;if(u<0||v<0||u>=dec.w-1||v>=dec.h-1)continue;
+  const u0=u|0,v0=v|0,fx=u-u0,fy=v-v0,j=(v0*dec.w+u0)*4,w0=(1-fx)*(1-fy),w1=fx*(1-fy),w2=(1-fx)*fy,w3=fx*fy,D=dec.data,k=dec.w*4;
+  const da=(D[j+3]*w0+D[j+7]*w1+D[j+k+3]*w2+D[j+k+7]*w3)/255;if(da<.01)continue;
+  const a=Math.min(1,da*op*mm*(1-Math.min(1,Math.max(mk.protS[i]*1.6,mk.prot[i]*1.2))));if(a<.003)continue;
+  for(let q=0;q<3;q++){const dc=D[j+q]*w0+D[j+4+q]*w1+D[j+k+q]*w2+D[j+k+4+q]*w3,b=out[i*4+q];let o;
+   if(blend==="normal")o=dc;else if(blend==="soft")o=dc<128?2*b*dc/255:255-2*(255-b)*(255-dc)/255;else o=b*dc/255;/* multiply: the robe's folds and pattern show through */
+   out[i*4+q]=b+(o-b)*a}n++}
+ return n}
+/* kind = "tra" | "uot" | "bun", lv 1..3, decals = [{w,h,data}] (variants of that kind); opt.base = RGBA already shaded (e.g. the xoc bake) else the picture; returns {data,mask,count} */
+function clothStainBake(d,W,H,kind,lv,decals,opt){opt=opt||{};const B=BAL.looks.stain,L=B.lv[cl(lv|0,1,3)],K=B.kind[kind],seed=opt.seed==null?BAL.looks.xoc.seed:opt.seed,
+ mk=opt.mask||clothMask(d,W,H,opt.face||null,BAL.looks.xoc),out=new Uint8ClampedArray(opt.base||d),R=clothRng(seed*131+kind.charCodeAt(0)),fw=mk.x1-mk.x0+1,fh=mk.y1-mk.y0+1;let count=0;
+ /* wet cloth: the whole robe a little darker (own hue), more at the heavy level */
+ if(K.wet&&L.wet)for(let i=0;i<W*H;i++){const k=mk.m[i]*(1-Math.min(1,mk.protS[i]*1.6));if(k<.02)continue;const f=1-L.wet*k;out[i*4]*=f;out[i*4+1]*=f;out[i*4+2]*=f}
+ if(decals&&decals.length)for(let q=0;q<L.n;q++){const nm=K.pos[q%K.pos.length],an=B.anchor[nm],dec=decals[Math.floor(R()*decals.length)%decals.length],
+  ax=mk.x0+fw*(an[0]+(R()-.5)*B.jit*2),ay=mk.y0+fh*(an[1]+(R()-.5)*B.jit*2);
+  count+=drawDecalOnCloth(out,W,H,mk,dec,ax,ay,L.sc*(.85+.3*R()),(R()-.5)*2*B.rot,L.op*(.9+.2*R()),K.blend)}
+ return{data:out,mask:mk,count}}
+window.drawDecalOnCloth=drawDecalOnCloth;window.clothStainBake=clothStainBake;
 window.clothXocBake=clothXocBake;window.clothMask=clothMask;
 /* ---------- game wiring (only when the game is there): looks-2 CLOTHES "xoc" -> baked figure layer in the kit fx path ---------- */
 if(typeof KIT_FACEFX!=="undefined"&&typeof lkItem==="function"){
  const CLO={},CLQ=[],BLANK="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7";
  try{const st=document.createElement("style");st.textContent="img.kclo{pointer-events:none}img.kclo-on{visibility:hidden!important}";document.head.appendChild(st)}catch(e){}
  /* the figure picture -> canvas -> clothXocBake -> data URL (async, once per picture + level, cached 24); a redraw of the stage puts it in */
- function clothPaint(file,lv,e){fetch(IMG_U("img/"+file),{mode:"cors"}).then(r=>r.blob()).then(bl=>createImageBitmap(bl)).then(bm=>{const W=bm.width,H=bm.height,c=document.createElement("canvas");c.width=W;c.height=H;const g=c.getContext("2d",{willReadFrequently:true});g.drawImage(bm,0,0);
+ /* decal files (transparent webp) fetched once per kind+variant, cached; a missing file just means that decal is skipped */
+ const DEC={};function clothDecal(kind,n){const k=kind+"-"+n;if(!DEC[k])DEC[k]=fetch(IMG_U("img/fx-stain-"+k+".webp"),{mode:"cors"}).then(r=>r.ok?r.blob():Promise.reject()).then(bl=>createImageBitmap(bl)).then(bm=>{const c=document.createElement("canvas");c.width=bm.width;c.height=bm.height;const g=c.getContext("2d",{willReadFrequently:true});g.drawImage(bm,0,0);const id=g.getImageData(0,0,c.width,c.height);return{w:c.width,h:c.height,data:id.data}}).catch(()=>null);return DEC[k]}
+ /* the figure picture -> canvas -> xoc bake (creases) -> stain decals (tra / uot / bun) -> data URL (async, once per picture + effect set, cached 24); a redraw of the stage puts it in */
+ function clothPaint(file,fx,e){fetch(IMG_U("img/"+file),{mode:"cors"}).then(r=>r.blob()).then(bl=>createImageBitmap(bl)).then(bm=>{const W=bm.width,H=bm.height,c=document.createElement("canvas");c.width=W;c.height=H;const g=c.getContext("2d",{willReadFrequently:true});g.drawImage(bm,0,0);
   const id=g.getImageData(0,0,W,H);let face=null;try{const f=window.KIT_VEIL&&KIT_VEIL.fit&&KIT_VEIL.fit[file];if(f)face={x:f[0]/100*W,y:f[1]/100*H,w:f[2]/100*W,h:f[3]/100*H}}catch(x){}
-  let sd=7;for(const ch of file)sd=(sd*31+ch.charCodeAt(0))%9973;const o=clothXocBake(id.data,W,H,lv,{face,seed:sd});g.putImageData(new ImageData(o.data,W,H),0,0);e.src=c.toDataURL("image/png");try{if(typeof kitFigFx==="function")kitFigFx()}catch(x){}}).catch(()=>{e.src=""})}
- function clothXocLayer(file,lv){if(!BAL.looks.xoc.on||!/^fig-/.test(file))return"";const key=file+"|"+lv;let e=CLO[key];if(!e){e=CLO[key]={src:"",t:0};CLQ.push(key);if(CLQ.length>24)delete CLO[CLQ.shift()];clothPaint(file,lv,e)}
+  let sd=7;for(const ch of file)sd=(sd*31+ch.charCodeAt(0))%9973;let cur=id.data,mk=null;
+  if(fx.xoc){const o=clothXocBake(cur,W,H,fx.xoc,{face,seed:sd});cur=o.data;mk=o.mask}
+  const kinds=["tra","uot","bun"].filter(k=>fx[k]);let wait=Promise.resolve();
+  for(const k of kinds)wait=wait.then(()=>Promise.all(Array.from({length:BAL.looks.stain.kind[k].variants},(_,i)=>clothDecal(k,i+1)))).then(ds=>{const o=clothStainBake(id.data,W,H,k,fx[k],ds.filter(Boolean),{face,seed:sd,base:cur,mask:mk});cur=o.data;mk=o.mask});
+  return wait.then(()=>{g.putImageData(new ImageData(cur,W,H),0,0);e.src=c.toDataURL("image/png");try{if(typeof kitFigFx==="function")kitFigFx()}catch(x){}})}).catch(()=>{e.src=""})}
+ function clothXocLayer(file,fx){if(!/^fig-/.test(file))return"";if(typeof fx==="number")fx={xoc:fx};const on={};if(BAL.looks.xoc.on&&fx.xoc)on.xoc=fx.xoc;if(BAL.looks.stain.on)for(const k of["tra","uot","bun"])if(fx[k])on[k]=fx[k];if(!Object.keys(on).length)return"";
+  const key=file+"|"+JSON.stringify(on);let e=CLO[key];if(!e){e=CLO[key]={src:"",t:0};CLQ.push(key);if(CLQ.length>24)delete CLO[CLQ.shift()];clothPaint(file,on,e)}
   return e.src?`<img class="kclo" src="${e.src}" alt="" aria-hidden="true" style="--fleft:0%;--ftop:0%;--fwidth:100%;--fheight:100%">`:""}
- const ent=KIT_FACEFX.get("lkcloth");if(ent){const h0=ent.html;ent.html=(p,file,z)=>{const x=z.L.find(a=>a[0]==="xoc");return x?clothXocLayer(kitFile(file),x[1].lv):h0.apply(this,arguments)}}
+ const ent=KIT_FACEFX.get("lkcloth");if(ent){const h0=ent.html;ent.html=(p,file,z)=>{const fx={};for(const a of z.L)if(a[0]==="xoc"||a[0]==="tra"||a[0]==="uot"||a[0]==="bun")fx[a[0]]=a[1].lv;return Object.keys(fx).length?clothXocLayer(kitFile(file),fx):h0.apply(this,arguments)}}
  /* the cloth layer goes UNDER every face mark and the makeup (it repaints only the robe; the head is the picture's own) */
  (function(){if(typeof kitFxLayers!=="function")return;const f0=kitFxLayers;kitFxLayers=function(p,file){const h=f0.apply(this,arguments);if(!h||h.indexOf("kclo")<0)return h;const M=[];const rest=h.replace(/<img class="kclo"[^>]*>/g,m=>{M.push(m);return""});return M.join("")+rest}})();
  /* hide the plain picture under a finished cloth layer; toggled on every put so a cleared effect shows the picture again */
