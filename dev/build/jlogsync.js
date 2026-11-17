@@ -67,36 +67,6 @@ window.lsRest=function(b0,lines){try{const st={};for(const [k] of LK)st[k]=b0&&b
 window.lsLines=function(n){n=Math.max(0,Math.min(n,S.logs.length));const L=[];for(let i=n-1;i>=0;i--)L.push({get:()=>S.logs[i],set:h=>{S.logs[i]=h}});return L};
 window.lsArr=function(A){return A.map((x,i)=>({get:()=>A[i],set:h=>{A[i]=h}}))};
 
-/* ---- RELATIONS (tuanluc-sync item 6, owner 17/11 03:26Z: "mấy việc vặt trong tuần chưa ghi riêng … không hiểu"): every change of a
-   consort's feeling for her (thiện cảm / oán / ghen) and of a servant's (thiện cảm) has its own line with the action that caused it, the
-   moment it happens — the week book (j87) never needs a catch-all line. Same moments as her stats (lsSync); what the action's own lines
-   already say ("Lý Tần ghen +2", "nàng quý ngươi +3" — j87 wkeTokens) is not said again. A code path may name its reason (rlTag / lsTag). ---- */
-let RATT={};
-function rlPeople(){const L=[];try{for(const v of (typeof rivals!=="undefined"?rivals:[]))if(v&&v!==S&&v.id!=null&&!v.dead)L.push(["v"+v.id,v])}catch(e){}
- try{[S.maid].concat(S.staff||[]).forEach(x=>{if(x&&typeof x.loyal==="number")L.push(["s"+(x.sid!=null?x.sid:x.name),x])})}catch(e){}return L}
-const RLROW=["aff","oan","ghen"];
-function rlSnap(){const o={};if(!S)return o;for(const [k,p] of rlPeople())o[k]=k[0]==="v"?[p.rel||0,Math.round(p.oan||0),p.ghen||0]:[p.loyal];return o}
-function rlNote(b,why){try{if(!b||!why||!S)return;const a=rlSnap();for(const k in a){const x=b[k];if(!x)continue;a[k].forEach((n,i)=>{if(n!==x[i]){const key=k+"|"+RLROW[i];if(!RATT[key])RATT[key]=why}})}}catch(e){}}
-window.rlNote=rlNote;window.rlSnap=rlSnap;
-const RLW={aff:["thêm quý mến ta","bớt vừa lòng về ta"],oan:["thêm oán ta","bớt oán ta"],ghen:["thêm ghen ghét ta","bớt ghen"]};
-const RLT={aff:"thiện cảm",oan:"oán ta",ghen:"ghen"};
-function rlKnown(p){try{return !(typeof rivals!=="undefined"&&rivals.includes(p))||((typeof knows!=="function"||knows(p))&&(typeof kitKnownName!=="function"||kitKnownName(p)))}catch(e){return true}}
-function rlSync(label,n,b){if(!S||!b||quiet)return false;const a=rlSnap(),P=new Map(rlPeople());const D=[];
- for(const k in a){const x=b[k];if(!x)continue;a[k].forEach((v,i)=>{const d=v-x[i];if(d)D.push({k,p:P.get(k),row:RLROW[i],d})})}
- if(!D.length)return false;
- /* what this action's own lines already said */
- let people=[];try{people=typeof kpPeople==="function"?kpPeople():[]}catch(e){}
- const said=new Map();if(typeof wkeTokens==="function")for(let i=0;i<Math.min(n||0,S.logs.length);i++){try{for(const t of wkeTokens(S.logs[i],people,true)){if(!t.who||typeof t.who!=="object"||!t.row||!t.pre||(t.pre!==t.who.name&&!String(t.pre).endsWith(" "+t.who.name)))continue;/* only a number said with that person's whole name counts as said */const m=said.get(t.who)||{};m[t.row]=(m[t.row]||0)+t.d;said.set(t.who,m)}}catch(e){}}
- const G=new Map(),U=new Map();
- for(const x of D){const m=said.get(x.p);const got=m&&m[x.row]||0;const rest=x.d-got;if(!rest)continue;if(m)m[x.row]=0;/* used */
-  const why=RATT[x.k+"|"+x.row]||"";
-  if(!rlKnown(x.p)){const uk=why+"|"+x.row+(rest>0?"+":"-");U.set(uk,(U.get(uk)||0)+1);continue}
-  if(!G.has(why))G.set(why,[]);G.get(why).push(`<span class="${(x.row==="aff")===(rest>0)?"g":"r"}">${x.p.name} ${RLT[x.row]} ${rest>0?"+":"-"}${Math.abs(rest)}</span>`)}
- for(const [uk,c] of U){const [why,rw]=uk.split("|");const row=rw.slice(0,-1),up=rw.endsWith("+");if(!G.has(why))G.set(why,[]);G.get(why).push(`${c} người chưa quen biết ${RLW[row][up?0:1].replace(" ta","")}`)}
- if(!G.size)return false;
- const lb=String(label||"Trong cung").replace(/[.:\s]+$/,"");
- const parts=[...G].map(([why,L])=>`${why?why+": ":""}${L.join(", ")}`);
- log(`${MK("r")}${lb}: ${parts.join(" · ")}.`);return true}
 /* ---- the ledger: what the Sổ ghi shows; every action ends with lsSync ---- */
 let LG=null,ATT={},fold=0,depth=0,lab="",clickLab="",pm0="";
 /* bookkeeping lines carry a marker: shown in the Sổ ghi, kept out of the week card (reviewer r1) */
@@ -110,7 +80,7 @@ function tickFlush(label,n){if(!TICK.size||!S)return false;const g=[];for(const 
    /* its "Sức +N" already holds the weekly rest */const g2=g.filter(x=>!/^nghỉ ngơi qua tuần:/.test(x));if(!g2.length){S.logs[i]=h.replace(/^(<span class="ld">[^<]*<\/span>)?/,m=>m+MK("t"));return i+1}g.length=0;g.push(...g2);
    S.logs[i]=h.replace(/^(<span class="ld">[^<]*<\/span>)?/,m=>m+MK("t")).replace(/[.\s]*$/,"")+` · ${g.join(" · ")}.`;return i+1}}
  log(`${MK("t")}${String(label||lab||"Sang tuần mới").replace(/[.:\s]+$/,"")}: ${g.join(" · ")}.`);return 1}
-function reset(){LG=S?{s:S,v:lsSnap(),r:rlSnap(),seq:S.logSeq||0}:null;ATT={};RATT={};pm0=typeof popMsg==="string"?(typeof kShort==="function"?kShort(popMsg):popMsg):""}
+function reset(){LG=S?{s:S,v:lsSnap(),seq:S.logSeq||0}:null;ATT={};pm0=typeof popMsg==="string"?(typeof kShort==="function"?kShort(popMsg):popMsg):""}
 /* a change no reason was given for: the pop card's own sentence of this action, if it wrote one */
 function popWhy(){try{const p=typeof popMsg==="string"?(typeof kShort==="function"?kShort(popMsg):popMsg):"";if(!p||p===pm0)return"";const t=plain(p).replace(/\s+/g," ").trim().split(kRx("(?<=[.!?])\\s",""))[0].replace(/[.!?]+$/,"");return t.length>2&&t.length<=90?t:""}catch(e){return""}}
 function lsSync(label,why){try{if(!S||!Array.isArray(S.logs))return;if(!LG||LG.s!==S){reset();return}if(fold)return;
@@ -127,7 +97,6 @@ function lsSync(label,why){try{if(!S||!Array.isArray(S.logs))return;if(!LG||LG.s
    const own=n>0&&!tk&&!/class="kls"/.test(String(S.logs[0]||""))&&!/^(?:Sang (?:tuần|buổi) mới|Trong cung)/.test(String(label||lab||clickLab||""));
    if(tk||own){const i=tk?tk-1:0;S.logs[i]=String(S.logs[i]).replace(/[.\s]*$/,"")+`${tk?" ·":" —"} ${P}.`/* same sentence: the week card splits by sentence */}
    else log(`${MK("c")}${String(label||lab||clickLab||"Trong cung").replace(/[.:\s]+$/,"")}: ${P}.`);did=true}
-  try{if(rlSync(label||lab||clickLab,n,LG.r))did=true}catch(e){console.error("rlSync",e)}
   reset();return did}catch(e){console.error("lsSync",e);reset()}}
 /* last-resort reason words (a change no code path named): what the number is about */
 const DEF={sung:["Hoàng thượng phật ý","Hoàng thượng để mắt"],an:["tình nghĩa nhạt đi","thêm tình nghĩa"],suc:["hao sức","hồi sức"],bac:["tốn bạc","được bạc"],danh:["bị chê trách","được khen"],
@@ -142,8 +111,7 @@ window.lsSync=lsSync;window.lsSnap=lsSnap;window.lsReplay=lsReplay;
 window.lsNote=function(b,why,now){try{if(!b||!S)return;const G=new Map();for(const [k] of LK){const d=val(k)-b[k];if(!d)continue;const r=typeof why==="function"?why(k):why&&typeof why==="object"?why[k]:why;if(!r)continue;
   if(now&&!quiet){if(!TICK.has(r))TICK.set(r,{});const D=TICK.get(r);D[k]=(D[k]||0)+d}else{const A=ATT[k]=ATT[k]||[];if(!A.includes(r))A.push(r)}}
  if(TICK.size&&!depth&&!fold)lsSync(lab)}catch(e){console.error(e)}};
-function lsTag(name,why,now){const f0=window[name];if(typeof f0!=="function")return;window[name]=function(){const b=S?lsSnap():null,rb=S?rlSnap():null;const r=f0.apply(this,arguments);if(b)lsNote(b,why,now);if(rb)rlNote(rb,typeof why==="function"?why("rel"):why);return r}}
-window.rlTag=function(name,why){const f0=window[name];if(typeof f0!=="function")return;window[name]=function(){const rb=S?rlSnap():null;const r=f0.apply(this,arguments);if(rb)rlNote(rb,why);return r}};
+function lsTag(name,why,now){const f0=window[name];if(typeof f0!=="function")return;window[name]=function(){const b=S?lsSnap():null;const r=f0.apply(this,arguments);if(b)lsNote(b,why,now);return r}}
 /* an action: label it, flush what came before it, sync after it (outermost call only) */
 function top(name,lf,isFold){const f0=window[name];if(typeof f0!=="function")return;window[name]=function(){if(depth===0&&!fold){lsSync(lab);let l="";try{l=lf?lf.apply(this,arguments):""}catch(e){}lab=l||clickLab||lab}
   depth++;if(isFold)fold++;try{return f0.apply(this,arguments)}finally{depth--;if(isFold)fold--;if(depth===0&&!fold&&lsSync(lab))try{render()}catch(e){}}}}
@@ -172,11 +140,7 @@ function lsDucWhy(){return S&&S.duc>=BAL.ducLv.up?"Đức cao, được quý hơ
 function noBook(f0){return function(){if(!S||!Array.isArray(S.logs))return f0.apply(this,arguments);const keep=S.logs,ks=S.logSeq||0,s=S.wkSnap||(typeof wkSnap==="function"?wkSnap():{seq:0});
   const n=Math.max(0,Math.min(keep.length,ks-(s.seq||0)));const head=keep.slice(0,n).filter(x=>!/class="kls"/.test(String(x)));
   S.logs=head.concat(keep.slice(n));S.logSeq=ks-(n-head.length);try{return f0.apply(this,arguments)}finally{S.logs=keep;S.logSeq=ks}}}
-if(typeof wkSummary==="function")wkSummary=noBook(wkSummary);
-/* the week's snapshot is taken INSIDE endTurn: write what changed before it first, so a change and its line sit in the same week (tuanluc-sync) */
-if(typeof wkSnap==="function"){const w0=wkSnap;wkSnap=function(){try{if(!fold&&S&&LG&&LG.s===S)lsSync(lab||"Sang tuần mới")}catch(e){}return w0.apply(this,arguments)}}
-/* tuanluc-sync item 6: the Tuần lục person pages KEEP the bookkeeping lines — they hold the cause of every change of Sủng / thiện cảm / oán /
-   ghen (rlSync, the time ticks); j87 lists them on the person's page only, never on her own page (they restate her numbers) */
+if(typeof wkSummary==="function")wkSummary=noBook(wkSummary);if(typeof wkBookData==="function")wkBookData=noBook(wkBookData);
 /* ---- reasons of the time ticks (endTurn / monthTick); inline ones are noted in j3 ---- */
 /* silent ones: their own line at once (now) */
 lsTag("anMonth",k=>k==="an"?"lâu ngày, ân tình phai dần":"",true);
