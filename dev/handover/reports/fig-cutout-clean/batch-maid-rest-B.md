@@ -53,3 +53,13 @@ maid-m29-tm2-a18	tC3bDGYmZJ	Lwo9b4mswO	ok
 maid-m29-tm3-a18	vQ2kdWRa47	Sym31RDUb8	ok
 maid-m29-tm4-a18	w4vZrFV7EI	vQ2kXxFa47	ok
 UPLOADED+--check OK through maid-m29-tm4-a18 (48 files done, 0 hard). NEXT: maid-m30-a18 (line 49 of a18 list = 'grep a18 maid-rest-B.txt').
+maid-m30-a18	gOtixXBSXO	MB7vWMSDCm	ok
+maid-m30-cold-a18	jUB4Kp3LD0	tC3bBhtmZJ	ok
+maid-m30-kc-a18	rgdybDGxtc	Bh9QphQoQR	ok
+maid-m30-ngheo-a18	CqzxmA9EEy	Lwo917pswO	ok
+maid-m30-t1-a18	8a6HeNrIrU	KLD7Hlmkqp	ok
+maid-m30-t2-a18	iGbTPb83uK	gOtij99SXO	ok
+maid-m30-t3-a18	DoJacPDpcl	YMsoAXuWeC	ok
+maid-m30-t4-a18	xSXP5IojfW	gOtiji1SXO	ok
+## HANDOVER (W6 #1, 17/11 ~02:15Z): 56/416 a18 done (m27..m30-t4), 0 hard/retries, all CDN-uploaded + --check same (fig+tn+por, no hd), through maid-m30-t4-a18. Lead session_011xDdVRBW26agruDT2Bm65K was inactive when I tried to report -> lead/Foreman C please open the successor. NEXT = maid-m30-t5-a18 (entry 57 of: grep a18 lists/shards/maid-rest-B.txt). Then a26/a36/a51 with NEW a18 as identity ref (ids above in TSV col 3 = generation id usable as reference identifier).
+Recipe for successor: refs folder ba4aecfe-efce-47e2-b53f-30d292091886; upload old CDN fig via creations_upload_image; 8x images_generate gpt-2-6 1024x2048 resolution 2k extraSettings {"transparentBackground":true} refs [old, N2HYqYa6D9, bxVgMSX5Y2, dtPf4EDXSL, eIyaPEVdqL]; prompt ~100 words (redraw as same palace maid, age N, face/skin match images 2-5, calm frontal, ONE prop rotating fan/lantern/teacup/scroll/flower branch/handkerchief/jade pendant/hairpin, tiny huadian, NO train/hem at feet, FULLY TRANSPARENT BACKGROUND real alpha); creations_wait all 8; scratch driver (curl, alpha extrema check, tools/finish_fig.py, tools/qa_fig.py, contact sheet dark+light) - recreate from tools/maid_proc.py; pip install scipy opencv-python-headless first. Upload: get dev/site/cdn_sync.py from origin main, cp to img/, cdn_sync img then --check img. Pinhole FAILs and halo 1.5-2.4k = ignore.
