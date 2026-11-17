@@ -70,3 +70,16 @@ mama-k03-a18	WDl825rcXe	ok
 mama-k04-a18	bxVUEG85Y2	ok (7 pinholes accepted)
 mama-k06-a18	ovNFDJE829	ok (4 pinholes accepted)
 ## ALL man a18 (33) DONE + uploaded. mama a18 left: k07, k08. Then eunuch a18 (u01 done; u05-r2 done; u09-r3 reuse s789zGil8e; rest ~117), kid a18-equivalent (a14/a9 in list; pilot ids in pilot-misc.md: kid-f01-a14 yiEGDDLPW9, f05 aFAkU3mfSh, p03-a9 Cqzr72fEEy).
+mama-k07-a18	iGbT9CV3uK	ok
+mama-k08-a18	EbnjaRRuuO	ok
+eunuch-u02-a18	lJI6jd8gv9	ok
+eunuch-u02-r0-a18	yiEz7voPW9	ok
+eunuch-u02-r2-a18	P3unJCZ42C	ok
+eunuch-u02-r3-a18	s78NxoGl8e	ok
+eunuch-u03-a18	fHGrhnTCDY	ok
+eunuch-u03-r0-a18	P3unJqY42C	ok (all uploaded)
+## HANDOVER S2 -> S3 (17/11 ~02:25Z, S2 context ~30%): 8 generation batches done, 71 new files + pilot reuse, all uploaded (fig+por; CDN has no hd for these). Done keys (fig-<key>.webp) in lists/shards/w1-done-2k.txt (+ pilot reused masters listed above: huynh-1, quytu-3, suthan-1, thaiy-1, mama-k01, mama-k05, eunuch-u01, eunuch-u05-r2 are DONE+uploaded too).
+## DONE: all hero a18, all man a18 (33), all mama a18 (8), eunuch a18: u01, u01(base only), u02 x4, u03-a18, u03-r0, u05-r2.
+## TODO order: eunuch a18 remaining (u01-r0/r2/r3, u03-r2/r3, u04..u30 x4 = ~108; eunuch-u09-r3 = reuse pilot master s789zGil8e (creations_wait for url; no new gen)); then kid (a14/a9 files; pilot masters yiEGDDLPW9 f01-a14, aFAkU3mfSh f05-a14, Cqzr72fEEy p03-a9; kid prompt: 'a child of about N years, round soft cheeks'), then other ages (a26/a36/a51) of man/mama/eunuch/kid and hero (player t1 a51, t3 a26.., emperor/physician/official/tutor/steward/fallen other ages; ref identity = new a18 + old age file).
+## RECIPE per batch (works, ~35k tokens/batch of 8): (1) 8x creations_upload_image url=https://ctm-img.victoria-tntt.workers.dev/img/fig-<key>.webp -> id; (2) 8x images_generate mode gpt-2-6 width 1024 height 2048 resolution 2k extraSettings {"transparentBackground":true} references=[old id, N2HYqYa6D9, bxVgMSX5Y2, dtPf4EDXSL, eIyaPEVdqL] prompt (<110 words): 'Semi-realistic painterly guofeng style, near-3D soft light, fine detail, matching refs 2-5 (face beauty, porcelain skin, soft warm eyes, serene). Redraw image 1 as the same full-body handsome slim young palace eunuch about 18, same robe, hat, colours, embroidery. Gesture: <ONE: tray/fly-whisk/scroll/lantern>. No huadian, no beard. NOT pink or purple. Calm frontal. FULLY TRANSPARENT BACKGROUND (real alpha, cut-out PNG, no checkerboard, no shadow). Hem ends at the feet, both shoes visible, inside the canvas with margin.' (women add: tiny flower/leaf/butterfly huadian 1/12 face width, no teardrop, NO long trailing train); (3) one creations_wait on all 8 (re-wait the stragglers); (4) write tsv key<TAB>id<TAB>render url, run tools/w1_drv.py <tsv> <sheet.jpg> from a scratch dir that has m/ and out/ (needs pip scipy opencv-python-headless; edit T path to the repo tools dir) -> Read sheet once; (5) cp out/img -> repo img/, python3 dev/site/cdn_sync.py <files> (cdn_sync.py: git show origin/main:dev/site/cdn_sync.py > dev/site/cdn_sync.py, do not commit); (6) append TSV lines here, commit + push (recipe in task prompt). Failed gen (service 520) -> just resubmit.
+## NOTE: lead session_011xDdVRBW26agruDT2Bm65K was inactive when S2 tried to report (send_message refused); report went to Foreman C instead.
