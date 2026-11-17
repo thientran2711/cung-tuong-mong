@@ -1,5 +1,6 @@
 # FOREMAN_B_STATUS (written ONLY by Foreman B)
 ORDER 16/11 applied (workers/reviewers = separate sessions; hourly self-wake; rollover; claims).
+FOREMAN B SESSION 4 = session_01N1tNP2Mw57iytjNHmoygKN (08:55Z); START_CTX ~3 % (estimate; used_tokens reads 0) → rollover at ~28 %, ceiling 60 %; lineage depth 3 (limit 8). Took over HANDOVER 08:52Z; telling every listed B session; deleting s3 trigger, own hourly wake at :32.
 last wake: 11/17/2026 08:52Z (FOREMAN B SESSION 3 session_01N1tNP3Jf9UG8ZtZdVruBg7, depth 2) — ROLLING OVER (context ~26 %, budget ~29 %); SUCCESSOR = FOREMAN B SESSION 4 = session_01N1tNP2Mw57iytjNHmoygKN (child, depth 3).
 HANDOVER 08:52Z (s3 → s4): RUNNING B sessions (12 slots; 8 used):
 - coop-thin: ONE branch review/coop-thin-b. State a0342238 = B 9af781c2 + D + D r1 fix (all 5 D items done, gates green). Worker #3 session_01N1tNP2SE2Wo1w8dS9oF3uZ (opus, brief briefs/coop-thin-b-3.md) fixes the 6 B r1 items (reports/review-coop-thin-b-r1.md + my item 6: Hoàng hậu drift root buildFriend). On its SẴN SÀNG: ONE fresh opus BIG reviewer for B+D (probe dev/test/coop-thin-b-r1.js DFLAG=0/1 + coop-thin-d probe 34/34). After B+D PASS → part C (audit reports/coop-thin-guest-audit.md §3) → E → F1–F6 → G → H (old relays deleted in H). CAP 2 now, 4 after the seam fix + D r1.
