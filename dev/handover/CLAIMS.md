@@ -842,3 +842,4 @@
 | learn-scene-fix-2: root fix of jorder kmHold↔kmPump deadlock (co-op stall after rebirth) | review/learn-scene-fix-2 | MAIN s33 | session_01UV1SzikmgZjJmYQFugTW3f | RUNNING | 17/11 16:06Z |
 | B lander #2 (coop-thin-b-r3 S.wwin root cause + land; then origin-bd-r1; opus; brief briefs/land-b-2.md) | review/land-* | B | session_01N1tNP34QePRanPQevmttcs | RUNNING | 17/11 16:10Z |
 | REVIEW loading-words-2 r1 of 8816f08ee (sonnet) | review/loading-words-2-r1 | MAIN s33 | session_01UV1Szi9DmFFUQLdYo4pocU | RUNNING | 17/11 16:13Z |
+| pcard-facts-2-r1 PASS ab50f1c5 → builder batch s32a (replaces d5f1abb2); worker + reviewer archived | review/pcard-facts-2-r1 | MAIN s34 | session_01UV1SzgWoEmnjTTEv7UgBNP | PASS → BATCH | 17/11 16:20Z |
