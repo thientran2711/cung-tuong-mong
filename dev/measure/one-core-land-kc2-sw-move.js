@@ -1,3 +1,4 @@
+/* one-core-land-kc2-sw-move (review/one-core-dup3-land): the stat-move below with PROPS = oan / kap / kgt / khm, run on jkc2.js (main batch-d8) → BAL.eff.jkc2.<p><Site>. */
 /* one-core-dup3-stat-move (review/one-core-dup3, item 3 'maid / kid typed amounts', whole family): the typed amount of a PERSON stat write
    x.loyal / .tin (servant Lòng / tin), .tal / .hp (a child's tài / sức khỏe), .fond (thương), .me (the men's mê) = x.p+N, cl((x.p||d)+N,…), x.p+=N.
    The amount moves to BAL.eff.<module>.<p><Site>[_n] (the operator stays typed: x.p-12 → x.p-BAL.eff.m.loyalGo with 12 stored);
