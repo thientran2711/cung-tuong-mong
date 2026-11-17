@@ -1,0 +1,4 @@
+PRIORITY #1 CHECK ('silhouette|morechip'): OD 17/11 ~14:05Z | main j59chips | review/* morechip-corners-r1 a66f274c (base, PASS), morechip-sil bd3bb284 | claims morechip-sil worker session_01UV1Szi57hvzWiNmX4GRXYk READY.
+# s32 REVIEW morechip-sil r1 (sonnet, SMALL UI) — read dev/handover/briefs/s32-common.md + START_REVIEWER.md
+Review review/morechip-sil bd3bb284 (report reports/morechip-sil.md; owner line OD ~14:05Z verbatim). MAIN LOOK: icon-compare + ipadAir shots good ([grey neutral silhouette] 2 on both corners).
+CHECK: one kit function j59chipIco for every chip; icon loads from CDN img/kit/unknown-ico-n.webp at chip size on Fold 755 + iPad 1180 (+1366; 412/390 by scan); readable on light AND dark stage backgrounds; aria label; morechip-scan OK; quickcheck; old-save load. Re-merge newest origin/main on review/morechip-sil-r1. Report reports/review-morechip-sil-r1.md; send "PASS/FAIL morechip-sil-r1 <sha>" to main s32.
