@@ -40,11 +40,25 @@ const VP=[[755,1000],[1180,820],[1366,1024],[412,1058],[390,844]];
  await plant();await p.evaluate(()=>{const e=document.getElementById("ktbtoast");if(e)e.remove();clearTimeout(TB.t);TB.t=0});
  await p.click("#ktbbadge");await p.waitForTimeout(1500);
  const c3=await p.evaluate(()=>{const d=document.querySelector("#modal .dlg.kpanel");return {kind:d&&d.dataset.kind,seal:(d&&d.querySelector(".kpseal")||{}).textContent,title:(d&&d.querySelector(".kptitle")||{}).textContent,facts:d?d.querySelectorAll(".kfact").length:0,opts:d?d.querySelectorAll(".opts button").length:0,txt:d?d.querySelector("#mb").textContent:"",n:tinBaoNew()}});
- ok(c3.kind==="news"&&c3.seal==="TIN"&&c3.title==="Tin báo"&&c3.facts>=3,'card: kit TIN panel "Tin báo" lists every item',c3);
+ ok(c3.kind==="news"&&c3.seal==="TIN"&&c3.title==="Tai mắt báo"&&c3.facts>=3,'card: kit TIN panel "Tai mắt báo" lists every item',c3);
  ok(c3.txt.indexOf("Ngự hoa viên")>=0&&c3.txt.indexOf("Thái y viện")>=0&&c3.txt.indexOf("đã xem")>=0&&c3.txt.indexOf("Ngự hoa viên")<c3.txt.indexOf("Lãnh cung")&&!/%/.test(c3.txt),'card: unseen first, the seen one marked "đã xem", no %');
  ok(c3.n===0,'card: opening it marks everything seen');
  await p.click("#modal .opts button");await p.waitForTimeout(800);
  const c3b=await p.evaluate(()=>({tab,modal:!document.getElementById("modal").hidden}));ok(c3b.tab==="go"&&!c3b.modal,'card: "Để ta tới xem" closes the card and opens the Dư đồ tab',c3b);
+
+ /* 3b Tai mắt list + per-row informer kind (owner OD ~16:25Z; data stub behind ONE adapter) */
+ await plant();await p.evaluate(()=>{Q.length=0;try{closeModal()}catch(e){}S.mat=3;render()});await p.waitForTimeout(500);
+ const hasBtn=await p.evaluate(()=>!!document.querySelector('[data-kas="mat"]'));
+ if(hasBtn)await p.click('[data-kas="mat"]');else await p.evaluate(()=>kitTaiMatCard());await p.waitForTimeout(1500);
+ const tm=await p.evaluate(()=>{const d=document.querySelector("#modal .dlg.kpanel");return{title:(d&&d.querySelector(".kptitle")||{}).textContent,sub:(d&&d.querySelector(".kpsub")||{}).textContent,rows:d?d.querySelectorAll(".kfact").length:0,txt:d?d.querySelector("#mb").textContent:"",n:tbTaiMat().length,tapped:null}});
+ ok(tm.title==="Tai mắt của ta"&&tm.n>=1&&tm.rows>=1&&/đặt ở/.test(tm.txt)&&!/%/.test(tm.txt),'Tai mắt N tappable → kit list of WHO (name, role, where placed, lòng)',{hasBtn,title:tm.title,n:tm.n,rows:tm.rows});
+ await p.evaluate(()=>{Q.length=0;closeModal()});
+ const kd=await p.evaluate(()=>{const sv=(S.staff||[])[0],v=liveRivals(true)[0];const k=x=>tbInformerKind(x).kind;return{mat:k({by:"mat"}),hau:sv?k({by:"s"+sv.sid}):"hau",ban:v?k({by:"v"+v.id}):"ban",qua:k({by:"le"})}});
+ ok(["mat","hau"].includes(kd.mat)&&["mat","hau"].includes(kd.hau)&&kd.ban==="ban"&&kd.qua==="qua",'informer kind per row: Tai mắt / own servant / friend / passer-by',kd);
+ await plant();await p.evaluate(()=>{Q.length=0;try{closeModal()}catch(e){}kitTinBaoCard()});await p.waitForTimeout(1500);
+ const rowk=await p.evaluate(()=>document.querySelector("#modal #mb").textContent);
+ ok(/tai mắt của ta|người hầu của ta|bạn trong cung|người qua đường|ta tận mắt thấy/i.test(rowk),'every TIN BÁO row names what the informer is to her',rowk.slice(0,120));
+ await p.evaluate(()=>{Q.length=0;closeModal()});
  /* 4 old save + missing API */
  const o4=await p.evaluate(()=>{const o={};try{delete S.tb;render();o.a=true;kitTinBaoBadge();o.b=true}catch(e){o.err=String(e)}
   const f=window.tinBaoList,nb=window.tinBaoNew;try{window.tinBaoList=undefined;kitTinBaoBadge();kitTinBaoCard();o.c=true}catch(e){o.err2=String(e)}finally{window.tinBaoList=f;window.tinBaoNew=nb}
