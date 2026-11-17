@@ -247,3 +247,4 @@ maid-m39-ty1-a18	gOtZHpYSXO	redo ok HELD
 maid-m40-ty2-a18	JNfnktVOq4	redo ok HELD
 maid-m41-ty3-a18	yiEWxtCPW9	redo ok HELD
 maid-m42-ty1-a18	TdUa3saVNR	redo ok HELD
+- FOREMAN C ROOT-2 OK (06:51Z): 12 consort-tier redraws LIVE (fig+hd+por; tn not made): m27-ty1 m28-ty2 m29-ty3 m32-ty3 m33-ty1 m34-ty2 m35-ty3 m36-ty1 m37-ty2 m38-ty3 m39-ty1 m41-ty3 (a18), fragment W5c-redo-live1.json. REDO before upload: m30-ty1 + m31-ty2 (no prop in hand), m40-ty2 (too close to m28 vermilion: pick another hue), m42-ty1 (cream-peach too close to m39/m30: own clear colour). Vary poses more in next tiles (3/4 turn, lifted sleeve, walking step). Next sheets: one per batch to C ROOT-2.
