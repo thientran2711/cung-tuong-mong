@@ -931,3 +931,4 @@
 | REVIEW mood-mem r2 (memory layers) 1b4f4967 + MOODKNOW landing merge (opus BIG) | review/mood-mem-r1, review/mood-mem-r2 | C-AG | session_01UV1SzhYFatoThxPEGCiErj | RUNNING | 17/11 20:14Z |
 | CONSORT-TY REPAINT W2d (successor of W2c; resume at consort-c17-ty8-a36, 236 keys left: a36 76 + a51 160; clean forehead + hand-pose diversity rules; sonnet opened by lead #7) | review/fig-cutout-clean | C | session_011xDdVSFebEJbrw8z3ZeoVU | RUNNING | 17/11 20:20Z |
 | REVIEW hoa-dien r2 7907c543d delta (sonnet SMALL; brief briefs/review-hoa-dien-r2.md) | review/hoa-dien-r2v | B | session_01N1tNP2FcoMnHvVGtpBNrE6 | RUNNING | 17/11 20:37Z |
+| REVIEW feelings-18 r1 (opus BIG) of dec84f17 | review/feelings-18-r1 | C-AG | session_01UV1SziX79WYk6de8Qzdw9E | RUNNING | 17/11 20:37Z |
