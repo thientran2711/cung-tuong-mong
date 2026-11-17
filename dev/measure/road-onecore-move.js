@@ -22,18 +22,19 @@ const close=(m,i)=>{let d=0;for(let j=i;j<m.length;j++){const c=m[j];if('([{'.in
 /* depth-1 members of the object/array opening at i: [{key,ks (key start),vs (value start),ve (value end, exclusive)}] */
 function members(m,i,arr){const end=close(m,i);const out=[];let j=i+1;
  while(j<end){while(j<end&&/[\s,]/.test(m[j]))j++;if(j>=end)break;let key=null,ks=j;
-  if(!arr){const km=/^([A-Za-z_$][\w$]*|"[^"]*"|'[^']*')\s*(?::|(?=\())/.exec(m.slice(j,j+80));if(!km)throw Error('no key at '+j+': '+m.slice(j,j+40));key=km[1];j+=km[0].length}
+  if(!arr&&m.startsWith('...',j)){key='...';j+=3}else if(!arr){const km=/^([A-Za-z_$][\w$]*|"[^"]*"|'[^']*')\s*(?::|(?=\())/.exec(m.slice(j,j+80));if(!km)throw Error('no key at '+j+': '+m.slice(j,j+40));key=km[1];j+=km[0].length}
   const vs=j;let d=0;while(j<end){const c=m[j];if('([{'.includes(c))d++;else if(')]}'.includes(c))d--;else if(c===','&&d===0)break;j++}
   out.push({key,ks,vs,ve:j})}
  return out}
 const ODDS_T=[[/^S\.(\w+)\/(\d+(?:\.\d+)?)$/,m=>["d",m[1],+m[2]]],[/^\(S\.(\w+)\/(\d+(?:\.\d+)?)\)$/,m=>["d",m[1],+m[2]]],[/^S\.(\w+)\*(\d+(?:\.\d+)?)$/,m=>["m",m[1],+m[2]]],
  [/^\(A\.f\.(\w+)\?(\d+):(\d+)\)$/,m=>["f",m[1],+m[2],+m[3]]],[/^\(rdEnd\((\d+)\)==="(\w+)"\?(\d+):(\d+)\)$/,m=>["e",+m[1],m[2],+m[3],+m[4]]],
- [/^\((?:CN_FL|MUOI_FL)\("([\w.]+)"\)\?(\d+):(\d+)\)$/,m=>["b",m[1],+m[2],+m[3]]],
+ [/^\((?:CN_FL|MUOI_FL|RD_FL)\("([\w.]+)"\)\?(\d+):(\d+)\)$/,m=>["b",m[1],+m[2],+m[3]]],
  [/^\(((?:A\.f\.\w+\|\|)+A\.f\.\w+)\?(\d+):(\d+)\)$/,m=>["f",m[1].replace(/A\.f\./g,'').split('||').join('|'),+m[2],+m[3]]],
  [/^\(((?:rdEnd\(\d+\)==="win"\|\|)+rdEnd\(\d+\)==="win")\?(\d+):(\d+)\)$/,m=>["e",m[1].match(/\d+/g).map(Number),"win",+m[2],+m[3]]],
  /* named road predicates / counts (RDQ in jroad.js, registered by the data file; their own bars are BAL keys) */
  [/^DTQBN_WON\(\)\*(\d+)$/,m=>["k","dtqbnWon",+m[1]]],[/^DTQV_WON\(\)\*(\d+)$/,m=>["k","dtqvWon",+m[1]]],
  [/^\(S\.arts&&S\.arts\.y\|\|0\)\*(\d+)$/,m=>["k","artY",+m[1]]],
+ [/^\(RDQ\.(\w+)\(A\)\?(\d+):(\d+)\)$/,m=>["q",m[1],+m[2],+m[3]]],[/^RDQ\.(\w+)\(A\)\*(\d+(?:\.\d+)?)$/,m=>["k",m[1],+m[2]]],
  [/^\(CNCHU_UP\(A\)>=BAL\.road\.cn_chu\.gap\?(\d+):(\d+)\)$/,m=>["q","cnchuGap",+m[1],+m[2]]],
  [/^\(S\.danh>=BAL\.road\.cn_tinh\.danh\?(\d+):(\d+)\)$/,m=>["q","cnTinhDanh",+m[1],+m[2]]]];
 const ODDS_WHOLE={'A=>CNCHU_UP(A)>=0?55+S.danh/5:30+S.danh/5':[0,["q","cnchuUp",55,30],["d","danh",5]]};
@@ -42,7 +43,7 @@ function odds(fn){if(ODDS_WHOLE[fn])return ODDS_WHOLE[fn];const b=fn.replace(/^(
  let d=0;const parts=[];let a=0,sg='+';for(let i=0;i<b.length;i++){const c=b[i];if(c==='(')d++;else if(c===')')d--;else if(d===0){if(c==='+'||c==='-'){parts.push([sg,b.slice(a,i)]);sg=c;a=i+1}else if('?<>=|&'.includes(c))return null}}
  parts.push([sg,b.slice(a)]);const q=[];let bad=false;
  parts.forEach(([g,p],k)=>{if(bad)return;if(k===0&&g==='+'&&/^\d+(\.\d+)?$/.test(p)){q.push(+p);return}if(k===0)q.push(0);
-  for(const [re,f] of ODDS_T){const m=re.exec(p);if(m){const t=f(m);if(g==='-'){if(!/^[feb]$/.test(t[0])){bad=true;return}t[0]='-'+t[0]}q.push(t);return}}bad=true});
+  for(const [re,f] of ODDS_T){const m=re.exec(p);if(m){const t=f(m);if(g==='-'){if(!/^[febq]$/.test(t[0])){bad=true;return}t[0]='-'+t[0]}q.push(t);return}}bad=true});
  return bad?null:q}
 function _unused_evalOdds(q,S,A,rdEnd){let x=q[0];for(let i=1;i<q.length;i++){const t=q[i];
  x+=t[0]==="d"?S[t[1]]/t[2]:t[0]==="m"?S[t[1]]*t[2]:t[0]==="f"?(A.f[t[1]]?t[2]:t[3]):(rdEnd(t[1])===t[2]?t[3]:t[4])}return x}
@@ -50,7 +51,7 @@ const table={},left=[],check=[];
 for(const f of files){const fp=path.join(dir,f);let src=fs.readFileSync(fp,'utf8');const m=mask(src);const cuts=[];/* [a,b] ranges to delete */
  const re=/\brdDef\(/g;let r;
  while((r=re.exec(m))){const pa=r.index+5;const args=members(m,pa,true);if(args.length<3)continue;
-  const road=JSON.parse(src.slice(args[0].vs,args[0].ve).trim()),n=+src.slice(args[1].vs,args[1].ve).trim(),id=road+'_'+n;
+  const r0=src.slice(args[0].vs,args[0].ve).trim();if(!/^"[\w]+"$/.test(r0))continue;/* rdDef(b,…) alias loops copy registered chapters */const road=JSON.parse(r0),n=+src.slice(args[1].vs,args[1].ve).trim(),id=road+'_'+n;
   const def=args[2];if(m[def.vs]!=='{')throw Error(id+': def is not a literal');const T=table[id]={};
   const dm=members(m,def.vs,false);
   const take=(mem,keys,into,where)=>{const own=members(m,mem.vs,false);let any=false;
