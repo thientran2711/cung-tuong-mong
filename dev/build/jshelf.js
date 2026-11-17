@@ -1,5 +1,6 @@
 /* ================= jshelf: NƠI TRƯNG BÀY — a display shelf per person + DWELLING xa xỉ + plant care (owner OD 17/11 ~18:30Z (A) + ~18:00Z s35 Lượt 26) =================
    Brief: dev/handover/briefs/display-shelf-build.md (handover branch). Numbers: BAL.shelf (this file, one table). Reuses, never rebuilds:
+   · UP TO BAL.shelf.per pieces per group (owner OD 17/11 ~22:05Z); a group's luxury = best piece full + falling shares BAL.shelf.wt.
    · items = ONE table BAL.shelf.it (12 groups / 70 pieces, dev/research/display-shelf-items.md): existing IT pieces + new décor (IT kd "Bày biện") + her own
      handmade works (j83 tp); one luxury number per piece = jlux luxPiece (new décor: the kit formula luxVal on its BAL grade + price).
    · rank: a piece above her rank may stand only if it is ngự ban; imperial pieces never; anyone may accuse (seen / tip / guess) — owner OD 17/11 ~18:25Z (d).
@@ -63,6 +64,8 @@ Object.assign(BAL,{shelf:{
   /* 12 Văn phòng, đèn */
   nghien:{g:"van",rk:1,src:"mp"},tranchi:{g:"van",rk:1,gr:1,pr:120,src:"mp"},thaiho:{g:"van",rk:3,gr:2,pr:200,src:"np"},cungdang:{g:"van",rk:0,gr:0,pr:60,src:"mv"},
   daminh:{g:"van",rk:5,gr:3,pr:280,src:"n"}},
+ per:5,            /* owner OD 17/11 ~22:05Z: each group holds UP TO per pieces (12 groups × per). Slots: "<g>" (the first, old saves) then "<g>~1" … "<g>~(per-1)" */
+ wt:[1,.5,.3,.2,.1],/* room xa xỉ of one group: its best piece counts in full, the next ones these falling shares (owner: luxury must not explode; 5 cheap never beat 1 fine) */
  tp:{tranh:"thuhoa",tho:"thuhoa",bhoa:"hoa"},/* her own handmade works (j83 IT.tp, wk.kind) that may stand on the shelf; luxury by bậc (kit grade) */
  shopN:2,           /* Nội vụ phủ: each restock adds shopN décor pieces (src m) to her tray (the old shop list keeps its balance) */
  bestO:25,          /* a bestowal (j8 bestow) is a décor piece bestO in 100 (roll) (src n), may be above her rank (ngự ban, owner (d)) */
@@ -163,19 +166,27 @@ function shelfBad(e){return shelfIsPlant(e)&&(e.pc|0)<BAL.shelf.plant.wither}
 function shelfRk(e){if(!e||e.k==="tp")return 0;const s=BAL.shelf.it[e.k];return !s?0:s.imp?99:(s.rk|0)}
 function shelfOver(p,e){return shelfRk(e)>(rkOf(p)|0)}
 function shelfOf(p){if(!p)return{g:{}};const z=p.shelf=p.shelf&&typeof p.shelf==="object"?p.shelf:{g:{}};z.g=z.g||{};if(p!==S&&!z.sd){z.sd=1;try{shelfSeed(p)}catch(e){console.error("shelfSeed",e)}}return z}
-function shelfList(p){const z=shelfOf(p);return BAL.shelf.groups.map(x=>z.g[x[0]]).filter(Boolean)}
+function shelfSlots(g){const L=[g];for(let i=1;i<BAL.shelf.per;i++)L.push(g+"~"+i);return L}
+function shelfSlotG(s){return String(s).split("~")[0]}
+function shelfIn(p,g){const z=shelfOf(p);return shelfSlots(g).filter(s=>z.g[s]).map(s=>[s,z.g[s]])}/* [slot, entry] of one group */
+function shelfList(p){const z=shelfOf(p);const L=[];for(const x of BAL.shelf.groups)for(const s of shelfSlots(x[0]))if(z.g[s])L.push(z.g[s]);return L}
 /* why a chest entry cannot go on display ("" = it can). NO rank block (owner OD 17/11 ~19:50Z): over rank only risks a charge (shelfOver) */
 function shelfWhyNot(p,e){if(!e||!IT[e.k])return"không có món này";const g=shelfGrpE(e);if(!g)return"món này không để bày";if(e.h)return"không có trong rương";
  if(e.w)return"đang mặc, tháo ra trước";if(p.out)return"ở lãnh cung không được bày biện";return""}
 /* put chest entry ix on display (the piece already in that group goes back to the chest) */
-function shelfPut(p,ix){const e=(p.inv||[])[ix];const why=shelfWhyNot(p,e);if(why)return{ok:false,why};const z=shelfOf(p),g=shelfGrpE(e),old=z.g[g];
- p.inv.splice(ix,1);if(old)p.inv.push(old);if(shelfIsPlant(e)&&e.pc==null){e.pc=BAL.shelf.plant.start;e.pz=0}e.shw=wk();z.g[g]=e;return{ok:true,g,old:old?shelfNm(old):"",n:shelfNm(e)}}
+/* the slot a new piece of group g takes: the first free one, else (group full) the least luxurious piece's slot — that piece goes back to the chest */
+function shelfSlotFor(p,g){const z=shelfOf(p),S0=shelfSlots(g),fr=S0.find(s=>!z.g[s]);if(fr)return fr;return S0.slice().sort((a,b)=>shelfPiece(z.g[a])-shelfPiece(z.g[b]))[0]}
+function shelfPut(p,ix,slot){const e=(p.inv||[])[ix];const why=shelfWhyNot(p,e);if(why)return{ok:false,why};const z=shelfOf(p),g=shelfGrpE(e);
+ const s=slot&&shelfSlotG(slot)===g&&shelfSlots(g).includes(slot)?slot:shelfSlotFor(p,g),old=z.g[s];
+ p.inv.splice(ix,1);if(old)p.inv.push(old);if(shelfIsPlant(e)&&e.pc==null){e.pc=BAL.shelf.plant.start;e.pz=0}e.shw=wk();z.g[s]=e;return{ok:true,g,slot:s,old:old?shelfNm(old):"",n:shelfNm(e)}}
 function shelfNm(e){if(!e)return"";if(e.k==="tp"&&e.wk)return e.wk.n||itm("tp").n;return itm(e.k).n}
 function shelfTake(p,g){const z=shelfOf(p),e=z.g[g];if(!e)return"";delete z.g[g];p.inv=p.inv||[];p.inv.push(e);return shelfNm(e)}
 /* the one luxury number of a displayed piece: table / IT pieces = jlux luxPiece; her handmade work = the kit grade of its bậc (LUX_V); a living piece in bad care counts witherLux */
 function shelfPiece(e){if(!e)return 0;let v=0;try{if(e.k==="tp"){const a=itemArt(e);v=LUX_V[a?a.grade|0:0]}else v=luxPiece(e.k)}catch(x){v=0}if(shelfBad(e))v=Math.round(v*BAL.shelf.plant.witherLux);return v}
 /* the DWELLING score: sum of the displayed pieces vs the rank allowance × allowF (never shown to anyone: owner (d); the player learns it from consequences) */
-function shelfLux(p){const L=shelfList(p);const sc=L.reduce((s,e)=>s+shelfPiece(e),0);let bud=1;try{bud=Math.max(1,Math.round(luxAllow(p)*BAL.shelf.allowF))}catch(e){}
+/* one group's share of the room: best piece full, the next ones BAL.shelf.wt (sorted high → low) */
+function shelfGrpLux(p,g){const W=BAL.shelf.wt;return shelfIn(p,g).map(x=>shelfPiece(x[1])).sort((a,b)=>b-a).reduce((s,v,i)=>s+v*(W[i]!=null?W[i]:0),0)}
+function shelfLux(p){const L=shelfList(p);const sc=Math.round(BAL.shelf.groups.reduce((s,x)=>s+shelfGrpLux(p,x[0]),0));let bud=1;try{bud=Math.max(1,Math.round(luxAllow(p)*BAL.shelf.allowF))}catch(e){}
  const B=BAL.shelf;const lv=sc<bud*B.plainF?0:sc<=bud?1:sc<=bud*B.lv3?2:3;return{sc,bud,lv,name:SHELF_LV[lv],n:L.length,wither:L.some(shelfBad),vr:L.filter(e=>shelfOver(p,e)).length}}
 function shelfSig(p){return shelfList(p).map(e=>(e.k==="tp"&&e.wk?"tp-"+e.wk.kind+(e.wk.ti|0):e.k)+(shelfBad(e)?"~":"")).sort().join("|")}
 window.shelfOf=shelfOf;window.shelfPut=shelfPut;window.shelfTake=shelfTake;window.shelfLux=shelfLux;window.shelfList=shelfList;
@@ -184,12 +195,14 @@ window.shelfOf=shelfOf;window.shelfPut=shelfPut;window.shelfTake=shelfTake;windo
 function shelfPool(p,src){const B=BAL.shelf.it,r=rkOf(p)|0;return Object.keys(B).filter(k=>IT[k]&&!B[k].imp&&!B[k].dead&&(B[k].rk|0)<=r&&/[mpv]/.test(src||B[k].src||""))}
 function shelfSeed(p){const B=BAL.shelf,n=B.npc.seed[Math.max(0,Math.min(7,rkOf(p)|0))]|0;if(!n)return;let bud=1;try{bud=luxAllow(p)*B.allowF}catch(e){}
  const z=p.shelf;const pool=shelfPool(p);let left=bud*B.npc.capF;
- for(const k of shuf(pool.slice())){if(Object.keys(z.g).length>=n)break;const g=shelfGrp(k);if(z.g[g])continue;const v=luxPiece(k);if(v>left)continue;
-  const e={k,from:"me"};if(B.it[k].care){e.pc=B.plant.start;e.pz=0}e.shw=wk();z.g[g]=e;left-=v}}
+ for(const k of shuf(pool.slice())){if(Object.keys(z.g).length>=n)break;const g=shelfGrp(k);const sl=shelfSlots(g).find(s=>!z.g[s]);if(!sl)continue;const v=luxPiece(k);if(v>left)continue;
+  const e={k,from:"me"};if(B.it[k].care){e.pc=B.plant.start;e.pz=0}e.shw=wk();z.g[sl]=e;left-=v}}
 function shelfArrange(p){const B=BAL.shelf,z=shelfOf(p);let bud=1;try{bud=luxAllow(p)*B.allowF}catch(e){}
  const ta=shelfTaste(p),cap=bud*(B.npc.capF+ta*B.taste.npcCapK);
- for(let i=(p.inv||[]).length-1;i>=0;i--){const e=p.inv[i];if(shelfWhyNot(p,e)||e.t)continue;if(shelfOver(p,e)&&e.from!=="emp"&&ta<=0)continue;const g=shelfGrpE(e),cur=z.g[g];
-  const now=shelfLux(p).sc,gain=shelfPiece(e)-(cur?shelfPiece(cur):0);if(gain>0&&now+gain<=cap)shelfPut(p,i)}}
+ /* try each chest piece in its slot (free, or replacing the group's least piece); keep it only if the room gains and stays within her cap, else undo */
+ for(let i=(p.inv||[]).length-1;i>=0;i--){const e=p.inv[i];if(shelfWhyNot(p,e)||e.t)continue;if(shelfOver(p,e)&&e.from!=="emp"&&ta<=0)continue;
+  const now=shelfLux(p).sc,R=shelfPut(p,i);if(!R.ok)continue;const aft=shelfLux(p).sc;if(aft>now&&aft<=cap)continue;
+  const old=R.old?p.inv.pop():null;if(old)z.g[R.slot]=old;else delete z.g[R.slot];p.inv.splice(i,0,e)}}
 
 /* ---------- TASTE: each person's own like ↔ dislike of luxury (owner OD 17/11 ~19:50Z), numbers BAL.shelf.taste ---------- */
 function shelfTaste(p){const T=BAL.shelf.taste;if(!p)return 0;let v=0;try{for(const n of (typeof traitsOf==="function"?traitsOf(p==="th"?{kind:"th"}:p):[])||[])v+=T.tr[n]||0}catch(e){}
@@ -256,7 +269,7 @@ function shelfSpyTxt(a,t,by){const r=shelfSee(a,t,by);if(!r||a!==S)return"";retu
 function shelfCause(a,t,kind){if(!a||!t||a===t||t.alive===false||t.out)return null;const r=shelfSeen(a,t);
  if(r&&(kind==="vp"?r.vr>0:r.lv>=2))return{how:r.pf?"pf":"tip",r};return a===S?{how:"guess",r:null}:null}
 window.shelfCause=shelfCause;
-function shelfStrip(t){const L=BAL.shelf.groups.map(g=>[g[0],shelfOf(t).g[g[0]]]).filter(x=>x[1]).sort((x,y)=>shelfPiece(y[1])-shelfPiece(x[1]));return L.length?shelfTake(t,L[0][0]):""}
+function shelfStrip(t){const z=shelfOf(t);const L=Object.keys(z.g).filter(s=>z.g[s]).sort((x,y)=>shelfPiece(z.g[y])-shelfPiece(z.g[x]));return L.length?shelfTake(t,L[0]):""}
 function shelfInq(a,t){for(const o of liveRivals(true))if(o!==a&&o!==t&&o.alive&&!o.out)shelfLook(o,t,"tra xét",true)}/* the inquiry makes the room known */
 function shelfFalse(a,t,what){const B=BAL.shelf.acc,A0=NMc(a),T0=NM(t);ap(a,{danh:B.falseDanhA});ap(t,{danh:B.falseDanhT});relAdd(a,t,B.falseRel);
  return `${A0} tố ${T0} ${what}; <span class="${a===S?"r":"g"}">tra xét ra không có chuyện đó</span>, ${a===S?"ngươi":a.name} bị quở vì tố bừa. Danh ${B.falseDanhA}, ${T0} Danh +${B.falseDanhT}. `}
@@ -351,7 +364,7 @@ function shelfPlantBody(e,msg){const P=BAL.shelf.plant,W=shelfWord(e);const s=sh
   kitRows([["Mỗi tuần",[`${s?s.name+" chăm hộ":"không ai chăm"}${s?` (${shelfSrvWord(shelfSrvQ(s))})`:""}`],"n"],["Bỏ bê",[`${W.bad} thì phòng kém sang, ai thấy cũng chê; để lâu thì ${W.died}`],"r"]].concat(msg?[["Vừa rồi",[msg],"n"]]:[]))+
   `<div id="kshpgw"></div><div class="rbtn">${pbtn(`data-shc="water"`,W.act,`tốn: ${P.khacSelf} khắc · thành: Tươi tốt tăng · dừng tay khi vừa đủ (${P.game.rounds} lần)`,t1)}</div>`}
 function shelfPlantOpen(g){const e=shelfOf(S).g[g];if(!shelfIsPlant(e))return;SHPC.g=g;SHPC.game=null;try{if(!document.getElementById("modal").hidden)closeModal()}catch(x){}
- kitModal({kind:"info",title:`Chăm ${shelfNm(e).toLowerCase()}`,sub:shelfGName(g),itemPic:kitItem({src:typeof kitItemSrc==="function"?kitItemSrc(e.k,""):"",name:"",grade:0,size:"lg"}).replace('<span class="kitn"></span>',''),
+ kitModal({kind:"info",title:`Chăm ${shelfNm(e).toLowerCase()}`,sub:shelfGName(shelfSlotG(g)),itemPic:kitItem({src:typeof kitItemSrc==="function"?kitItemSrc(e.k,""):"",name:"",grade:0,size:"lg"}).replace('<span class="kitn"></span>',''),
   html:`<div id="kshp">${shelfPlantBody(e)}</div>`,onClose:()=>{SHPC.g=null;SHPC.game=null}})}
 window.shelfPlantOpen=shelfPlantOpen;
 /* the care minigame (also the Thử tay calibration entry): water rises step by step; stop it inside the band; score = closeness over the rounds */
@@ -376,19 +389,21 @@ document.addEventListener("click",ev=>{const b=ev.target.closest&&ev.target.clos
 /* ---------- interim entry points (kit parts only; the shelf screen itself waits for KIT READY) ---------- */
 /* item panel (jinv kinvOpen): an act card "Trưng bày" on every displayable piece */
 (function(){if(typeof kinvOpen!=="function")return;const k0=kinvOpen;kinvOpen=function(x){const r=k0.apply(this,arguments);if(!BAL.shelf.ui)return r;try{const i=x&&x.g?x.g.i:-1,e=S.inv[i];const g=e&&shelfGrpE(e);
-  if(g){const cur=shelfOf(S).g[g];const card=pbtn(`data-shelfput="${i}"`,"Trưng bày",`thành: bày lên kệ nhóm ${shelfGName(g)}${cur?` thay ${shelfNm(cur)}`:""} · kèm: còn bày thì không tặng hay bán được${shelfOver(S,e)?", quá phẩm mình: dễ bị tố vượt phẩm":""}`,shelfWhyNot(S,e));
+  if(g){const sl=shelfSlotFor(S,g),cur=shelfOf(S).g[sl];const card=pbtn(`data-shelfput="${i}"`,"Trưng bày",`thành: bày lên kệ nhóm ${shelfGName(g)}${cur?` (đã đủ ${BAL.shelf.per} món) thay ${shelfNm(cur)}`:""} · kèm: còn bày thì không tặng hay bán được${shelfOver(S,e)?", quá phẩm mình: dễ bị tố vượt phẩm":""}`,shelfWhyNot(S,e));
    const acts=document.querySelector("#modal .kinvacts"),body=document.querySelector("#modal .kpb");if(acts)acts.insertAdjacentHTML("beforeend",card);else if(body)body.insertAdjacentHTML("beforeend",`<div class="rbtn kinvacts">${card}</div>`)}}catch(e){console.error("shelf kinvOpen",e)}return r}})();
 document.addEventListener("click",ev=>{const b=ev.target.closest&&ev.target.closest("[data-shelfput],[data-shelftake]");if(!b||b.disabled)return;ev.stopPropagation();
  if(b.dataset.shelfput!=null){const R=shelfPut(S,+b.dataset.shelfput);try{closeModal()}catch(x){}if(R.ok)log(`Ngươi bày ${R.n} ở Nơi trưng bày${R.old?`, cất ${R.old} vào rương`:""}.`);try{render()}catch(x){}return}
  const n=shelfTake(S,b.dataset.shelftake);try{closeModal()}catch(x){}if(n)log(`Ngươi cất ${n} vào rương.`);try{render()}catch(x){}},true);
 /* interim shelf dialog (kit parts only: kitModal + kitRows + pbtn) until the painted shelf part lands: what stands in each group + take down / care */
-function shelfOpen(p){p=p||S;const V=shelfView(p),me=p===S;const rows=V.groups.filter(x=>x.item).map(x=>[x.n,[x.item.name+(x.item.plant&&x.item.plant.wither?` (${x.item.plant.bad})`:"")+(x.item.over?" · ngự ban, quá phẩm":"")],x.item.plant&&x.item.plant.wither?"r":"n"]);
- const acts=me?V.groups.filter(x=>x.item).map(x=>pbtn(x.item.take,`Cất ${x.item.name.toLowerCase()}`,"thành: về rương · tặng, bán, dùng được lại","")+(x.item.plant?pbtn(`data-shc="plant" data-g="${x.g}"`,`Chăm ${x.item.name.toLowerCase()}`,`tốn: ${BAL.shelf.plant.khacSelf} khắc · thành: ${x.item.plant.fresh}`,whyTime(BAL.shelf.plant.khacSelf)):"")).join(""):"";
- kitModal({kind:"info",title:me?"Nơi trưng bày":`Nơi trưng bày của ${p.name}`,html:(rows.length?kitRows(rows):kitFacts([V.known?"Chưa bày món nào.":"Chưa thấy phòng nàng bày gì."]))+(V.lux?kitFacts([`Phòng ốc: ${V.lux.name.toLowerCase()}`]):"")+(acts?`<div class="rbtn">${acts}</div>`:""),btn:"Lui"})}
+function shelfOpen(p){p=p||S;const V=shelfView(p),me=p===S;const rows=[],acts=[];
+ for(const x of V.groups)for(const it of x.items){rows.push([x.n,[it.name+(it.plant&&it.plant.wither?` (${it.plant.bad})`:"")+(it.over?" · quá phẩm":"")],it.plant&&it.plant.wither?"r":"n"]);
+  if(me)acts.push(pbtn(it.take,`Cất ${it.name.toLowerCase()}`,"thành: về rương · tặng, bán, dùng được lại","")+(it.plant?pbtn(`data-shc="plant" data-g="${it.slot}"`,`Chăm ${it.name.toLowerCase()}`,`tốn: ${BAL.shelf.plant.khacSelf} khắc · thành: ${it.plant.fresh}`,whyTime(BAL.shelf.plant.khacSelf)):""))}
+ kitModal({kind:"info",title:me?"Nơi trưng bày":`Nơi trưng bày của ${p.name}`,html:(rows.length?kitRows(rows):kitFacts([V.known?"Chưa bày món nào.":"Chưa thấy phòng nàng bày gì."]))+(V.lux?kitFacts([`Phòng ốc: ${V.lux.name.toLowerCase()}`]):"")+(acts.length?`<div class="rbtn">${acts.join("")}</div>`:""),btn:"Lui"})}
 window.shelfOpen=shelfOpen;
-/* the data the kit shelf part will draw (KIT REQUEST 17/11 display-shelf): one slot per group, cut-out picture, no frame */
+/* the data the kit shelf part draws (KIT REQUEST 17/11 display-shelf): per group UP TO BAL.shelf.per cut-out pieces side by side (owner OD 17/11 ~22:05Z), no frame.
+   groups[i] = {g, n, per, items:[{slot, k, name, src, plant, over, from, take}] (best first), item: items[0] (kept for the old one-piece shape)} */
 function shelfView(p){p=p||S;const z=shelfOf(p),me=p===S;let known=me?null:shelfSeen(S,p);
- return{who:me?"me":wdKey(p),groups:BAL.shelf.groups.map(([g,n])=>{const e=z.g[g];if(!e||(!me&&!known))return{g,n,item:null};
-   return{g,n,item:{k:e.k,name:shelfNm(e),src:typeof kitItemSrc==="function"?kitItemSrc(e.k==="tp"?e:e.k,""):"",plant:shelfIsPlant(e)?{care:Math.round(e.pc|0),wither:shelfBad(e),kind:shelfCareK(e),bad:shelfWord(e).bad,fresh:shelfWord(e).fresh}:null,over:shelfOver(p,e),from:e.from||"",take:me?`data-shelftake="${g}"`:""}}}),
+ const one=(s,e)=>({slot:s,k:e.k,name:shelfNm(e),src:typeof kitItemSrc==="function"?kitItemSrc(e.k==="tp"?e:e.k,""):"",plant:shelfIsPlant(e)?{care:Math.round(e.pc|0),wither:shelfBad(e),kind:shelfCareK(e),bad:shelfWord(e).bad,fresh:shelfWord(e).fresh}:null,over:shelfOver(p,e),from:e.from||"",take:me?`data-shelftake="${s}"`:""});
+ return{who:me?"me":wdKey(p),per:BAL.shelf.per,groups:BAL.shelf.groups.map(([g,n])=>{const items=me||known?shelfIn(p,g).sort((a,b)=>shelfPiece(b[1])-shelfPiece(a[1])).map(x=>one(x[0],x[1])):[];return{g,n,per:BAL.shelf.per,items,item:items[0]||null}}),
   lux:me||known?{lv:me?shelfLux(p).lv:known.lv,name:me?shelfLux(p).name:SHELF_LV[known.lv]}:null,known:me||!!known}}
 window.shelfView=shelfView;
