@@ -429,12 +429,13 @@ BAL.grow={keys:["sac","tai","tamco"],band:[40,60,80],mul:[1,.5,.25,.1],back:1 /*
    the winner, hh = Hoàng hậu → winner, ghen = holder's jealousy.
    ea (Emperor's month art, picked by the game each month, host in co-op): she knows it at the month start when Tai mắt ≥ mat, else each week
    rumour % = r0 + Tai mắt × rMat; NPCs the same; the shown 'known likes' (discover) can also name it (disc %).
-   Measured (dev/test/balance-night.js, real consort population, 2 seeds × 3 lives × 2 y, value of a night = 8 Sủng): road b 10 → best choice
-   Tranh sủng ≈ 66 % / Chặn ngự giá ≈ 25 %; b 14 → 36 % / 60 %; b 12 chosen (≈ half and half). Chặn ngự giá is best for most nights when her best art is his
-   favoured one, for few when it is the disfavoured one. */
+   Measured r2 (dev/measure/bc-night-opt.js on states from the real game: NPC consorts of 2 seeds × 3 lives × 2 y + HER states from the sens-bot
+   palace play, Sủng median 94): best choice Tranh sủng / Chặn ngự giá / Thôi, value of a night N 8 · 15 Sủng, holder thiện cảm + ghen counted
+   ×0.2 Sủng/pt or not: every case 24–64 % for each of the two (her N 15: 45 / 53 without, 58 / 37 with the holder cost); Tranh sủng the safer
+   (median odds +9 over Chặn ngự giá); Chặn ngự giá best ≈ 83 % of states when her best art is his favoured one, ≈ 25 % when disfavoured. */
 BAL.steal.cost={feign:{duc:0},road:{suc:0}};
-BAL.steal.m={feign:{b:22,w:{sung:.4,sac:.05},art:.5,win:{sung:2},lose:{sung:-4,duc:-1},rel:10,hh:0,ghen:15},
-    road:{b:12,w:{sac:.3,sung:.05},art:1.25,win:{sung:6,danh:3},lose:{sung:-5,danh:-2},rel:12,hh:3,ghen:20}};
+BAL.steal.m={feign:{b:30,w:{sung:.35},art:.75,win:{sung:1},lose:{sung:-3,duc:-1},rel:10,hh:0,ghen:15},
+    road:{b:4,w:{sac:.35,sung:.25},art:2,win:{sung:8,danh:3},lose:{sung:-8,danh:-2},rel:18,hh:2,ghen:20}};
 BAL.steal.art={fav:1,dis:.75,neu:0};
 BAL.steal.keep={base:35,sung:.3,sac:.1,art:1,rung:1,gain:2,oan:1.5,npcP:.85};/* names agreed with night-final (jnf nfOdds "keep"): odds = base + Sủng×sung + Sắc×sac + best art×art + mood; gain = Sủng when nobody took her night; oan = × of the robbed hit; npcP = chance a flipped NPC presses it, costs nothing (night-final value) */
 BAL.steal.ea={mat:5,r0:5,rMat:4,disc:35};
