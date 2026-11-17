@@ -431,7 +431,7 @@ window.q72Bot=function(){if(!S||S.dead||Q.length||!q72On())return false;const q=
  T7("tham_o","inv",{r:"off",b:"rv",bf:(o,z,A)=>typeof tdHouse==="function"&&!!tdHouse(o)&&tdHouse(o)!==A.id&&tdRel(A.id,tdHouse(o))<=-25,p:X=>({tru:tdDadT(X.B.o),c:tdHouse(X.B.o)}),
   t:"Dò xem cha {B} có tham ô không",h:X=>`“Nhà ${tdHouse(X.B.o)} đối đầu với nhà lão phu đã lâu. {Nc} ở trong cung, dò giúp lão phu xem sổ sách nhà ấy có sạch không.”`,dl:6,
   s:[G("ksp","Dò sổ sách qua thái giám","mat",40,2,{bac:-20}),C(X=>X.p.tru?"Ngươi biết sự thật: cha {B} quả có tham ô":"Ngươi biết sự thật: cha {B} thanh liêm, sổ sách sạch",
-   O("Báo đúng sự thật",{fn:X=>{if(X.p.tru&&typeof deA==="function"){deA(S,X.B.o,1);return `Ngươi nắm Chứng cứ tham ô của cha ${X.B.n} +1.`}return""}}),O("Giữ kín, chỉ báo “chưa rõ”",{r:-4}))],ok:{r:10,cc:1},no:{r:-5}});
+   O("Báo đúng sự thật",{fn:X=>{if(X.p.tru&&typeof deA==="function"){deA(S,X.B.o,BAL.ag.ev.one);return `Ngươi nắm Chứng cứ tham ô của cha ${X.B.n} ${balSg(BAL.ag.ev.one)}.`}return""}}),O("Giữ kín, chỉ báo “chưa rõ”",{r:-4}))],ok:{r:10,cc:1},no:{r:-5}});
  T7("off_bac","trade",{r:"off",rf:o=>o.pow>=50&&S.bac<80,acc:X=>{apply({bac:BAL.eff.j72.bacAcc});q72DebtAdd(X.A,-1)},accX:`Bạc ${balSg(BAL.eff.j72.bacAcc)}; ngươi nợ ông một ân.`,t:"Đổi ơn: bạc của quyền thần, lời nhắc tên con ông",
   h:"“Thấy {N} chi tiêu chật vật, lão phu có chút lễ mọn. Con trai lão phu thi đỗ mà chưa được bổ dụng; {N} nhắc giúp một câu.”",tr:"Nhận lời: ngay Bạc +50, ngươi nợ ông một ân. Đây là can chính.",dl:5,
   s:[G("","Nhắc tên con ông với Hoàng thượng","sung",50,1,{},"r",{emp:1})],ok:{r:15,d:1,cc:1,fn:X=>pow(X.A.id,2)()},no:{r:-12,cc:1}});
