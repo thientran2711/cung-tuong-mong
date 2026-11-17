@@ -1210,4 +1210,6 @@ BAL.ag.know.tm={cap:10,want:{bac:15,protect:15,post:10,revenge:20},post:3,loyalM
 BAL.ag.eye={w:3,cap:10};
 BAL.ag.bt={off:15,offMax:3,hon:5,honMax:3,mood:{gian:5,thuong:-5},fear:4,fearTimid:1.5,tamcoMid:50,tamcoDiv:5,
  tm:{base:{tham:55,lanh:35,chuyen:30,nhat:15,trung:5,_:30},tr:{"Thanh liêm":-15},loy:[[25,10],[50,0],[70,-10],[85,-25],[101,-45]],v:{"Trung":-10,"Nghĩa":-5,"Liêm":-10}},
- sell:{base:{tham:60,lanh:25,chuyen:20,nhat:0,trung:-20,_:5},tr:{"Thanh liêm":-40},loy:[[25,10],[50,0],[70,-20],[101,-60]],v:{"Nghĩa":-10,"Trung":-10,"Tín":-10,"Liêm":-5}}};
+ /* sell base (review ag-all-2 r2 C6, OD 17/11 ~17:00Z (3)): only the greedy (tham) offer on their own; any other nết stays ≤ 0 with the low-lòng band and an angry mood
+    (−15 + 10 + 5), so a non-greedy servant offers only once her master offended a chữ she holds (off, 17:20Z (2)) */
+ sell:{base:{tham:60,lanh:-15,chuyen:-15,nhat:-15,trung:-20,_:-15},tr:{"Thanh liêm":-40},loy:[[25,10],[50,0],[70,-20],[101,-60]],v:{"Nghĩa":-10,"Trung":-10,"Tín":-10,"Liêm":-5}}};

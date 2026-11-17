@@ -24,6 +24,13 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
   let picks={},n=0;for(let i=0;i<40;i++){const r=knSellPick(S);if(r){n++;picks[r.s.sid]=(picks[r.s.sid]||0)+1;o.ownSel=o.ownSel||(own&&r.s===own)}}o.picks=picks;o.n=n;o.sid=s.sid;
   s.spyFor="me";o.tmSel=!!knSellPick(S);s.spyFor=null;return o});
  ok(r1.wGreedy>0&&r1.wLoyal===0&&r1.wClean===0,'who: Ham lợi + low lòng sells; lòng ≥ BAL.ag.sell.loy or Thanh liêm never',r1);
+ /* 1b non-greedy (review ag-all-2 r2 C6, OD ~17:00Z (3)): low lòng alone never makes an offer; only her master offending a chữ she holds does */
+ const r1b=await p.evaluate(()=>{const {v,s}=__rig();const o={w:{}};s.loyal=10;s.trM=null;s.mdM=null;s.emo=null;
+  for(const ld of ["Thật thà","Nhiều chuyện","Tham vọng","Khiêm nhường","Trọng nghĩa","Thực dụng"]){__setNet(s,ld);o.w[ld]=knSellW(s)}
+  __setNet(s,"Nhiều chuyện");const tr0=s.trong;s.trong=["Nghĩa","Cần"];/* after __setNet (netOf re-derives trong) */s.trM=null;for(let i=0;i<3;i++)mindSeen(v,"flee");/* flee offends Nghĩa (jmind, as ag-betray) */o.off=mindTr(s,v).off.length;o.wOff=knSellW(s);
+  s.trong=tr0;__setNet(s,"Ham lợi");s.trM=null;s.mdM=null;s.emo=null;return o});
+ ok(Object.values(r1b.w).every(x=>x===0),'who: a non-greedy servant, unoffended, lòng 10 never offers (knSellW 0)',r1b.w);
+ ok(r1b.off>0&&r1b.wOff>0,'who: the same servant offers once her master offended a chữ she holds (off)',{off:r1b.off,w:r1b.wOff});
  ok(r1.n===40&&Object.keys(r1.picks).length===1&&r1.picks[r1.sid]===40&&!r1.ownSel,'pick: the only greedy disloyal servant of another palace with news is the seller; never her own staff',{n:r1.n,p:r1.picks,own:r1.ownSel});
  ok(!r1.tmSel,'her own Tai mắt does not sell to her (she reports)',r1.tmSel);
  /* 2 what + 3 price + buying */
