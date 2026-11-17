@@ -81,7 +81,7 @@ const KWR={k:null,mode:null,run:null,kind:null};
 function wkrTile(kind,r,l){const ok=r.lv<=l,a=ARTS.find(x=>x.k===WK[kind].a);const eff=r.st?r.st.map(s=>s[0]).join(", "):WK[kind].n;
  const why=ok?"":`Cần ${a.n} bậc ${r.lv}`;const A=`data-kwr="${kind}" data-kwri="${r.id}"`;
  return `<div class="kshc kshpick${ok?"":" kshno"}" ${A}>`+
-  `<span class="kshpic">${kitItem({src:wkrPic(kind,r,0),name:r.n,grade:0,size:"slot",tip:r.n})}</span>`+
+  `<span class="kshpic">${kitItem({src:wkrPic(kind,r,0),name:r.n,size:"slot",tip:r.n})}</span>`+
   `<span class="kshn" title="${r.n}">${r.n}</span><span class="kshe" title="${eff}">${eff}</span>`+
   `<span class="kshp">${r.lv?`${a.n} bậc ${r.lv}`:"mọi bậc"}</span>`+
   `<button type="button" class="kbtn kshgo" ${A} data-kwrgo="1"${ok?"":` disabled title="${why}"`}>${ok?"Làm":"Chưa mở"}</button></div>`}

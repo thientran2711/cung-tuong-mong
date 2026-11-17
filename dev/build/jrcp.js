@@ -207,7 +207,7 @@ wkrTile=function(kind,r,l){const gr=rcpHasR(S,kind,r.id),ok=gr||r.lv<=l,a=ARTS.f
  const eff=(s?`Lối ${s[1]}`:"")+(r.st?" · "+r.st.map(x=>x[0]).join(", "):"");
  const why=!ok?`Cần ${a.n} bậc ${r.lv}`:!kn&&!tch?`Chưa học lối «${s[1]}»: học với thầy, hoặc đọc ${RCP_BK[kind].toLowerCase()} «${s[1]}»`:"";const A=`data-kwr="${kind}" data-kwri="${r.id}"`;
  return `<div class="kshc kshpick${can2?"":" kshno"}" ${A}>`+
-  `<span class="kshpic">${kitItem({src:wkrPic(kind,r,0),name:r.n,grade:0,size:"slot",tip:r.n})}</span>`+
+  `<span class="kshpic">${kitItem({src:wkrPic(kind,r,0),name:r.n,size:"slot",tip:r.n})}</span>`+
   `<span class="kshn" title="${r.n}">${r.n}</span><span class="kshe" title="${eff}">${eff}</span>`+
   `<span class="kshp">${gr&&(r.lv>l||!rcpKnows(S,kind,s[0]))?"đã học món này":r.lv?`${a.n} bậc ${r.lv}`:"mọi bậc"}</span>`+
   `<button type="button" class="kbtn kshgo" ${A} data-kwrgo="1"${can2?"":` disabled title="${why}"`}>${!ok?"Chưa mở":tch?"Học lối này":kn?"Làm":"Chưa học"}</button></div>`};

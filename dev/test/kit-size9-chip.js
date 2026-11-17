@@ -9,12 +9,12 @@ const {chromium}=require('playwright');const [,,URL,OUT='-']=process.argv;
   const variants=[['plain',{}],['lux+qty',{lux:33,qty:3}],['worn+mark+lux',{on:true,mark:['đã tẩm','r'],lux:12}]];
   for(const [vn,vo] of variants){rows+=`<div style="display:flex;gap:10px;align-items:flex-start;margin-bottom:16px;flex-wrap:wrap"><div style="width:90px;font-size:11px">${vn}</div>`;
    for(const sz of ['slot','md','lg','xl'])for(const g of [0,1,2,3,4])rows+=`<div class="cell" data-sz="${sz}" data-g="${g}" data-v="${vn}" style="width:${W[sz]}px;flex:none">${kitItem(Object.assign({src,name:sz==='slot'?'':'Trâm ngọc',grade:g,size:sz,frame:true},vo))}</div>`;rows+='</div>'}
-  h.innerHTML=rows;const out=[];const rr=e=>e&&e.getBoundingClientRect();const ov=(a,c)=>a&&c&&!(a.right<=c.left||c.right<=a.left||a.bottom<=c.top||c.bottom<=a.top);
+  rows+=`<div style="display:flex;gap:10px"><div style="width:90px;font-size:11px">no grade</div>${['slot','md','lg','xl'].map(sz=>`<div class="ng" style="width:${W[sz]}px;flex:none">${kitItem({src,name:'Công thức',size:sz,frame:true})}</div>`).join('')}</div>`;h.innerHTML=rows;const out=[];const rr=e=>e&&e.getBoundingClientRect();const ov=(a,c)=>a&&c&&!(a.right<=c.left||c.right<=a.left||a.bottom<=c.top||c.bottom<=a.top);
   h.querySelectorAll('.cell').forEach(c=>{const it=c.querySelector('.kitem'),f=rr(it.querySelector('.kitb')),ch=rr(it.querySelector('.kgchip-fr')),n=rr(it.querySelector('.kitn')),x=rr(it.querySelector('.kitx')),s=rr(it.querySelector('.kits')),q=rr(it.querySelector('.kitq')),on=rr(it.querySelector('.kiton')),m=rr(it.querySelector('.kitm'));
    out.push({sz:c.dataset.sz,g:+c.dataset.g,v:c.dataset.v,frame:Math.round(f.width),chipW:ch?+(ch.width/f.width).toFixed(2):null,chipH:ch?Math.round(ch.height*10)/10:null,font:ch?parseFloat(getComputedStyle(it.querySelector('.kgchip-fr')).fontSize):null,
     edge:ch?+(((ch.top+ch.bottom)/2)-f.bottom).toFixed(1):null,inside:ch?(ch.left>=f.left-1&&ch.right<=f.right+1):null,
     hitLux:ov(ch,x),hitSeal:ov(ch,s),hitQty:ov(ch,q),hitOn:ov(ch,on),hitMark:ov(ch,m),sealLux:ov(s,x),markLux:ov(m,x),markSeal:ov(m,s),nameClear:n&&ch?ch.bottom<=n.top+.5:null,oldKitg:!!it.querySelector('.kitg')})});
-  return out});
+  const ng=[...h.querySelectorAll('.ng')].map(c=>c.querySelectorAll('.kgchip').length);out.push({sz:'noGrade',g:-1,v:'noGrade',frame:100,chipW:0,inside:true,oldKitg:ng.some(x=>x>0),edge:0});return out});
  const bad=R.filter(r=>r.chipW==null||!r.inside||r.hitLux||r.hitSeal||r.hitQty||r.hitOn||r.hitMark||r.sealLux||r.markLux||r.markSeal||r.nameClear===false||r.oldKitg||Math.abs(r.edge)>1);
  console.log('cells',R.length,'bad',bad.length);console.log(JSON.stringify(bad.slice(0,12)));
  const sm={};R.forEach(r=>{const k=r.sz;sm[k]=sm[k]||{frame:r.frame,font:r.font,chipH:r.chipH,maxChipW:0};sm[k].maxChipW=Math.max(sm[k].maxChipW,r.chipW)});console.log(JSON.stringify(sm));
