@@ -33,7 +33,7 @@ const tapText=async(o,re,ms=8000)=>{const t0=Date.now();while(Date.now()-t0<ms){
 const clear=(()=>{const t=require('fs').readFileSync(path.join(__dirname,'coop-e2e.js'),'utf8');const i=t.indexOf('async function clear(');const j=t.indexOf("return'many'}",i)+13;return eval('('+t.slice(i,j)+')')})();
 const until=async(o,fn,arg,ms=40000)=>{try{await o.p.waitForFunction(fn,arg,{timeout:ms});return true}catch(e){return false}};
 (async()=>{const b=await chromium.launch(/127\.0\.0\.1|localhost/.test(WURL)?{args:['--disable-features=BlockInsecurePrivateNetworkRequests,PrivateNetworkAccessSendPreflights,PrivateNetworkAccessRespectPreflightResults,LocalNetworkAccessChecks']}:{});
- const FOLD=[686,880],IPAD=[1180,820];const TRIP=!!process.env.TRIP;
+ const FOLD=process.env.FOLD755?[755,1000]:[686,880]/* r3: FOLD755=1 = the owner's Fold 755x1000 */,IPAD=[1180,820];const TRIP=!!process.env.TRIP;
  const H=await mk(b,'host',SWAP?IPAD:FOLD,LVL,false),G=await mk(b,'guest',SWAP?FOLD:IPAD,0,TRIP);
  await H.p.goto(BASE);await H.p.waitForTimeout(3000);await tapText(H,/^(Chơi cùng bạn|Cùng hảo hữu)/);await H.p.waitForTimeout(500);await tapText(H,/^(Mời bạn|Mời hảo hữu)/);
  await until(H,()=>window.COOP&&COOP.code&&COOP.seat==='a');const code=await H.p.evaluate(()=>COOP.code);console.log('room',code,'swap',SWAP,'level',LVL,'trip',TRIP);
@@ -76,25 +76,34 @@ const until=async(o,fn,arg,ms=40000)=>{try{await o.p.waitForFunction(fn,arg,{tim
  const cnt=t=>{const c={};for(const x of t){const k=x.split('|').slice(0,2).join('|');c[k]=(c[k]||0)+1}return Object.entries(c).filter(([k,n])=>n>1)};
  /* R10: two D kinds deferred at once while held */
  {const l0=(await lifeOf()).hb;await begin('tt');ok(await cardUp(),'R10 card up (roll held)');const n0=await H.p.evaluate(()=>COOPW.thin.D.log.length);
-  await H.p.evaluate(()=>{const T=COOPW.thin;runAct(S,rivals.find(v=>v.coop),'ally');const v=rivals.find(x=>!x.coop&&x.alive);T.D.kind('b','ev',{tg:v.id,n:1})});await sleep(3000);
+  await H.p.evaluate(()=>{const T=COOPW.thin;try{runAct(S,rivals.find(v=>v.coop),'ally')}catch(e){window.__r10e=String(e)}/* as R7: a harness call */const v=rivals.find(x=>!x.coop&&x.alive);T.D.kind('b','ev',{tg:v.id,n:1})});await sleep(3000);
   const h1=await hostQ();ok(h1.df.length===2&&h1.df.includes('inv')&&h1.df.includes('ev'),'R10 both kinds deferred while held (inv + ev)',h1);
   await G.p.evaluate(()=>{try{nlAccept()}catch(e){}});await until(G,l=>(COOPW.life||0)>l&&!COOPW.inLife,l0,30000);await sleep(4500);
   const q=await dupQ();const L=await H.p.evaluate(n=>COOPW.thin.D.log.slice(n).map(x=>x.join(':')),n0);console.log('R10 after accept',JSON.stringify(q),JSON.stringify(L));
   ok(!cnt(q.t).length&&q.t.filter(t=>/Nhập cung/.test(t)).length===1&&q.t.filter(t=>/Hảo hữu tìm đến/.test(t)).length===1,'R10 her Q: Nhập cung once, the invite once, no card twice',q.t);
   ok(L.includes('drop-life:b:ev')&&!L.some(x=>/^held-run/.test(x)),'R10 host: the old life proof dropped (life-bound), nothing ran on the held store',L);
+  if(process.env.SHOTS){/* r3: the R7/R10 scene at the NATIVE viewports (no resize), both seats; TOUCH=1: she answers the invite by a real tap */
+   await tapText(G,/^Bỏ qua$/,2500);await tapText(H,/^Bỏ qua$/,1500);await sleep(400);/* the Luân hồi intro cover */
+   for(let i=0;i<8&&!(await G.p.evaluate(()=>!!(Q[0]&&Q[0].thin)));i++){await G.p.evaluate(()=>{const m=document.getElementById('modal');const b=m&&!m.hidden?[...m.querySelectorAll('button:not([disabled])')].filter(x=>x.offsetParent!==null):[];const c=b.find(x=>!x.classList.contains('x')&&!/^[✕×]$/.test(x.textContent.trim()))||b[0];if(c)c.click()});await sleep(700)}
+   await sleep(1500);for(const [nm,o] of [['guest',G],['host',H]]){const vp=o.p.viewportSize();await o.p.screenshot({path:require('path').join(process.env.SHOTS,'r10-'+nm+'-'+vp.width+'x'+vp.height+'.png')});
+    ok(!(await o.p.evaluate(()=>document.documentElement.scrollWidth>innerWidth)),'R10 shot '+nm+' '+vp.width+'x'+vp.height+': no horizontal overflow')}
+   const same=await G.p.evaluate(()=>{const m=Q[0];return !!(m&&m.thin&&document.querySelector('#modal')&&!document.getElementById('modal').hidden&&document.querySelectorAll('#modal .opt').length===2)});ok(same,'R10 her invite shown as the native kit card (2 kit option tiles)');
+   if(process.env.TOUCH){const n0=await H.p.evaluate(()=>COOPW.thin.D.log.length);const bx=await G.p.evaluate(()=>{const e=[...document.querySelectorAll('#modal .opt')].filter(e=>e.offsetParent)[0];const r=e.getBoundingClientRect();const n=[...e.querySelectorAll('*')].find(x=>!x.children.length&&/Nhận/.test(x.textContent));const R=n?n.getBoundingClientRect():r;/* her finger on the option's name (the kit tile) */return [R.x+R.width/2,R.y+R.height/2,e.textContent.trim().slice(0,12),!!n]});
+    await G.p.touchscreen.tap(bx[0],bx[1]);await sleep(1200);await G.p.evaluate(()=>{const b=[...document.querySelectorAll('button')].find(b=>b.offsetParent&&/^(Vẫn làm|Đồng ý|Xác nhận)/.test(b.textContent.trim()));if(b)b.click()});await sleep(4000);
+    const dl=await H.p.evaluate(n=>COOPW.thin.D.log.slice(n).map(x=>x.join(':')),n0);ok(dl.some(x=>/^pick:thInv:0/.test(x)),'R10 real touch on "Nhận": the host ran her answer once',{bx,dl})}}
   await settle(l0);await answerAll();const h2=await hostQ();ok(!h2.thq.length&&!h2.df.length,'R10 host: her store empty after she answered, nothing deferred',h2)}
  /* R8: host reload while D work is deferred */
  {const l0=(await lifeOf()).hb;await begin('tt');ok(await cardUp(),'R8 card up (roll held)');
-  await H.p.evaluate(()=>{const T=COOPW.thin;runAct(S,rivals.find(v=>v.coop),'ally');const v=rivals.find(x=>!x.coop&&x.alive);T.D.kind('b','ev',{tg:v.id,n:1})});await sleep(3000);
+  await H.p.evaluate(()=>{const T=COOPW.thin;try{runAct(S,rivals.find(v=>v.coop),'ally')}catch(e){window.__r10e=String(e)}/* as R7: a harness call */const v=rivals.find(x=>!x.coop&&x.alive);T.D.kind('b','ev',{tg:v.id,n:1})});await sleep(3000);
   const ls=await H.p.evaluate(()=>{const k=Object.keys(localStorage).find(k=>/^ctm-thin-d:/.test(k));const o=k&&JSON.parse(localStorage.getItem(k));return o&&o.df&&o.df.b?o.df.b.map(x=>x.k||x.op):null});
   ok(ls&&ls.length===2,'R8 the deferred work is saved as data on the host (localStorage df)',ls);
   await H.p.goto(BASE+'?room='+code);await H.p.waitForTimeout(4000);await tapText(H,/^Vào phòng|^Tiếp tục/,4000);
   ok(await until(H,()=>window.COOP&&COOP.seat==='a'&&!COOP.frozen&&COOPW.thin.lvl>=2,null,60000),'R8 host back');await clear(H,4);await sleep(3000);
   const h1=await hostQ();console.log('R8 host after reload',JSON.stringify(h1));ok(!h1.df.length,'R8 after the reload the deferred work ran (nothing left in D.DF)',h1);
-  await G.p.evaluate(()=>{try{nlAccept()}catch(e){}});const L=await settle(l0);await sleep(3000);const q=await dupQ();console.log('R8 after accept',JSON.stringify(q));
+  for(let i=0;i<4;i++){await G.p.evaluate(()=>{try{nlAccept()}catch(e){}});/* stale after the host reload: she re-rolls, then accepts the card again */if(await until(G,l=>(COOPW.life||0)>l&&!COOPW.inLife&&!COOPW.thin.life.ask,l0,12000))break;await cardUp()}await sleep(4500);const q=await dupQ();console.log('R8 after accept',JSON.stringify(q));const L=await settle(l0);
   ok(L.hb===l0+1&&L.g===l0+1,'R8 one new life',L);
   ok(!cnt(q.t).length&&q.t.filter(t=>/Nhập cung/.test(t)).length<=1&&q.t.filter(t=>/Hảo hữu tìm đến/.test(t)).length===1,'R8 her Q after the stale re-roll + accept: the invite once, nothing twice',q.t);
-  await answerAll();const h2=await hostQ();ok(!h2.thq.length&&!h2.df.length&&!h2.log.some(x=>/^held-run/.test(x)),'R8 host: her invite answered, store empty, no held-run',h2)}
+  await answerAll();const h2=await hostQ();ok(!h2.thq.length&&!h2.df.length&&!h2.log.some(x=>/^held-run/.test(x))&&h2.log.filter(x=>/^pick:thInv/.test(x)).length===1,'R8 host: her invite answered once, store empty, no held-run',h2)}
  /* R9: her old-life offer answered by the host after her new life */
  {const l0=(await lifeOf()).hb;await H.p.evaluate(()=>{Q=Q.filter(m=>!(m&&m.pid==='thInv'))});
   const g0=await G.p.evaluate(()=>{try{return runAct(S,rivals.find(v=>v.coop),'ally')}catch(e){return 'ERR '+e}});
