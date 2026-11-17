@@ -32,7 +32,7 @@ function face(it){const p=informer(it);if(p){try{return kitFace(p)}catch(e){}}re
 function badgePos(b){try{const h=document.querySelector("header.hud");const s=b.offsetWidth||34;const hr=h.getBoundingClientRect();const seal=h.querySelector(".kseal-hud")||document.getElementById("emp");const sr=seal&&seal.getClientRects().length?seal.getBoundingClientRect():null;
  const tc=h.querySelector(".k3tc"),tr=tc&&tc.getClientRects().length?tc.getBoundingClientRect():null;
  const leaves=[...h.querySelectorAll("*")].filter(e=>!e.children.length&&e!==b&&e.getClientRects().length&&!(sr&&seal.contains(e))&&!e.matches(".kseal")&&(e.textContent.trim()||e.tagName==="IMG"||e.tagName==="I")).map(e=>e.getBoundingClientRect()).filter(r=>r.width>1&&r.height>1);
- const free=(x,y)=>x>=hr.left+2&&x+s<=hr.right-2&&y>=hr.top+2&&y+s<=hr.bottom-2&&!leaves.some(r=>x<r.right+3&&x+s>r.left-3&&y<r.bottom+2&&y+s>r.top-2);
+ const free=(x,y)=>x>=hr.left+2&&x+s<=hr.right-2&&y>=hr.top+2&&y+s<=hr.bottom-2&&!leaves.some(r=>x<r.right+8&&x+s>r.left-8&&y<r.bottom+4&&y+s>r.top-4);
  const C=[];if(sr){C.push([sr.left-s-6,sr.top+(sr.height-s)/2],[sr.right-s,sr.bottom+3],[sr.left-s-6,sr.bottom+3])}if(tr)C.push([tr.left-s-8,tr.top+(tr.height-s)/2]);
  let c=C.find(q=>free(q[0],q[1]));if(!c)c=sr?[sr.left+(sr.width-s)/2,sr.top+(sr.height-s)/2]:[hr.right-s-8,hr.top+4];/* nothing free (narrow bar): it sits ON the seal, which carries no text */
  b.style.left=Math.round(c[0])+"px";b.style.top=Math.round(c[1])+"px"}catch(x){}}
@@ -55,9 +55,11 @@ function kitTinBaoToast(it){if(!it||!it.id||TB.toasted[it.id])return false;TB.to
 function goDuDo(){try{const b=document.querySelector('#tabs [data-tab="go"]');if(b)b.click()}catch(e){}}
 function kitTinBaoCard(){try{const L=items();if(!L.length){if(typeof kitLine==="function")kitLine("Chưa có tin báo",2600);return null}
  const U=L.filter(x=>!x.seen),A=U.concat(L.filter(x=>x.seen));
- const facts=A.map(it=>{const p=informer(it);const t=`<b>${esc(plName(it.place))}</b>${it.seen?" · đã xem":""}: ${it.line}`;return p?{who:p,text:t}:{text:t}});
+ const facts=A.map(it=>{const p=informer(it);const pn=plName(it.place);const at=String(it.line).indexOf(pn)>=0?"":`<b>${esc(pn)}</b> · `;
+  const t=`${p?`${kitName(p)} · `:""}${at}${it.line}${it.seen?" <small>(đã xem)</small>":""}`;return p?{who:p,text:t}:{text:t}});
+ const lead=A.map(informer).find(Boolean)||null;/* the big figure = the informer of the first (unseen first) row that has a person */
  const pl=[...new Set(A.map(x=>x.place))];const opts=[{n:pl.length===1?`Để ta tới xem · ${esc(plName(pl[0]))}`:"Để ta tới xem",fx:{},go:()=>{try{tinBaoSeen()}catch(e){}goDuDo();kitTinBaoBadge()}},{n:"Thôi",fx:{},go:()=>kitTinBaoBadge()}];
- const m=kitModal({kind:"news",title:"Tin báo",sub:U.length?`${U.length} tin mới`:"Đã xem hết",facts,opts,onClose:()=>kitTinBaoBadge()});
+ const m=kitModal({kind:"news",title:"Tin báo",sub:U.length?`${U.length} tin mới`:"Đã xem hết",facts,subject:lead||undefined,opts,onClose:()=>kitTinBaoBadge()});
  try{tinBaoSeen()}catch(e){}TB.card++;setTimeout(kitTinBaoBadge,0);return m}catch(e){console.error("kitTinBaoCard",e);return null}}
 /* ---------- wiring ---------- */
 document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("#ktbbadge");if(!b)return;e.stopPropagation();e.preventDefault();try{if(typeof sfx==="function")sfx("sfx-tap")}catch(x){}kitTinBaoCard()},true);
@@ -72,7 +74,7 @@ const st=document.createElement("style");st.id="kit-tinbao";st.textContent=`
 .ktbb .khap{width:22px;height:22px;line-height:22px;font-size:.98rem;margin:0;vertical-align:0}
 .ktbb:not(.on) .khap{opacity:.45;box-shadow:0 0 0 1.5px #fff8e6}
 .ktbb.on .khap{animation:ktbBlink calc(1.1s*var(--pace,1)) ease-in-out infinite}.ktbb.calm .khap{animation:none}
-.ktbb[data-n]:not([data-n="0"]):not([data-n="1"]):after{content:attr(data-n);position:absolute;top:-4px;right:-4px;min-width:14px;height:14px;line-height:14px;border-radius:7px;padding:0 3px;box-sizing:border-box;text-align:center;font:700 .62rem/14px var(--body,inherit);color:#fff;background:var(--k-seal,#9a2c1c);box-shadow:0 0 0 1.5px var(--k-card,#fffaf0)}
+.ktbb[data-n]:not([data-n="0"]):not([data-n="1"]):after{content:attr(data-n);position:absolute;top:-4px;left:-4px;min-width:14px;height:14px;line-height:14px;border-radius:7px;padding:0 3px;box-sizing:border-box;text-align:center;font:700 .62rem/14px var(--body,inherit);color:#fff;background:var(--k-seal,#9a2c1c);box-shadow:0 0 0 1.5px var(--k-card,#fffaf0)}
 .ktbb:active{transform:scale(.94)}
 @keyframes ktbBlink{0%,100%{opacity:1;box-shadow:0 0 0 1.5px #fff8e6,0 0 10px var(--trim,#e6c25a)}50%{opacity:.35;box-shadow:0 0 0 1.5px #fff8e6,0 0 2px var(--trim,#e6c25a)}}
 .ktbt{position:fixed;left:50%;transform:translateX(-50%);z-index:9760;max-width:calc(100vw - 24px);box-sizing:border-box;display:flex;align-items:center;gap:8px;padding:6px 14px 6px 8px;border-radius:14px;border:2px solid var(--trim,#e6c25a);
