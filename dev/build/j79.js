@@ -1003,7 +1003,7 @@ function kgLabel(k){const b=document.querySelector(`#tabs [data-tab="${k}"]`);if
 function kgBar(){const T=$("tabs");if(!T)return;const on=kgOn();
  for(const g in KG){const ks=kgKeys(g);ks.forEach((k,i)=>{const b=T.querySelector(`[data-tab="${k}"]`);if(!b)return;
   if(!on){if(b.dataset.kg){b.textContent=b.dataset.kl0;b.dataset.s=b.dataset.ks0;delete b.dataset.kg}b.classList.remove("kghide");return}
-  if(i===0){if(!b.dataset.kg){b.dataset.kl0=b.textContent;b.dataset.ks0=b.dataset.s||"";}b.dataset.kg=g;b.classList.remove("kghide");/* a group head is always shown (a key that was a member of another group before KG changed keeps no stale kghide — review 11/15: Giao tình vanished) */if(b.textContent!==KG[g].l)b.textContent=KG[g].l;b.dataset.s=KG[g].s;b.setAttribute("aria-selected",String(kgOf(tab)===g));b.classList.toggle("kgon",kgOf(tab)===g)}
+  if(i===0){if(!b.dataset.kg){b.dataset.kl0=b.textContent;b.dataset.ks0=b.dataset.s||"";}b.dataset.kg=g;b.classList.remove("kghide");/* a group head is always shown (a key that was a member of another group before KG changed keeps no stale kghide — review 11/15: Giao tình vanished) */if(b.textContent!==KG[g].l)b.textContent=KG[g].l;if(b.dataset.s!==KG[g].s)b.dataset.s=KG[g].s;const sel=String(kgOf(tab)===g);if(b.getAttribute("aria-selected")!==sel)b.setAttribute("aria-selected",sel);b.classList.toggle("kgon",kgOf(tab)===g)}
   else b.classList.add("kghide")})}}
 function kgSub(){const P=$("panel");if(!P)return;const g=kgOf(tab);let nav=P.querySelector(":scope > .ksub:not(.kpgsub), :scope > .kpbar > .ksub:not(.kpgsub)");if(!g||!kgOn()){if(nav)nav.remove();return}
  try{localStorage.setItem("hclh-kg-"+g,tab)}catch(e){}

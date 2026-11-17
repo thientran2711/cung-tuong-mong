@@ -151,9 +151,15 @@ window.k3Sheet=k3Sheet;
 /* the sheet: tap on the dim backdrop closes it */
 document.addEventListener("click",e=>{const h=$$("hud2");if(h&&e.target===h&&!h.classList.contains("col"))k3Sheet(false)});
 document.addEventListener("keydown",e=>{if(e.key==="Escape"){const h=$$("hud2");if(h&&!h.classList.contains("col"))k3Sheet(false)}});
-if(typeof renderStage==="function"){const r0=renderStage;renderStage=function(){const r=r0.apply(this,arguments);try{k3Stage()}catch(e){}return r}}
-if(typeof renderHud2==="function"){const r0=renderHud2;renderHud2=function(){const r=r0.apply(this,arguments);try{k3Stage();k3Hud()}catch(e){}return r}}
-if(typeof render==="function"){const r0=render;render=function(){const r=r0.apply(this,arguments);try{k3Hud();k3Stage()}catch(e){}return r}}
+/* oi-render: k3Stage reads the stage size (clientWidth/Height) after writing the side column — it ran 3x per render (renderHud2, renderStage,
+   render), each a forced layout. Inside a render it now runs ONCE when the outermost render returns (jlag2 renderAfter); outside, at once.
+   The name tags (j59lay, inside renderStage) were placed with the gutters of this render's first k3Stage: when the gutters change, they are
+   placed again right after, so the frame shows the same as before. */
+function k3StageR(){(window.renderAfter||((k,f)=>f()))("k3Stage",()=>{const st=$$("stage");const g0=st?st.className+"|"+st.style.cssText:"";k3Stage();
+ try{if(st&&g0!==st.className+"|"+st.style.cssText){if(window.kitFloorFit)kitFloorFit();if(window.j59lay)j59lay()}}catch(e){}})}
+if(typeof renderStage==="function"){const r0=renderStage;renderStage=function(){const r=r0.apply(this,arguments);try{k3StageR()}catch(e){}return r}}
+if(typeof renderHud2==="function"){const r0=renderHud2;renderHud2=function(){const r=r0.apply(this,arguments);try{k3StageR();k3Hud()}catch(e){}return r}}
+if(typeof render==="function"){const r0=render;render=function(){const r=r0.apply(this,arguments);try{k3Hud();k3StageR()}catch(e){}return r}}
 try{const st=$$("stage");if(st&&window.ResizeObserver)new ResizeObserver(()=>{clearTimeout(window.__k3g);window.__k3g=setTimeout(k3Gut,30)}).observe(st)}catch(e){}
 
 /* ---------- CSS: the one layout ---------- */

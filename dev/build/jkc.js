@@ -583,7 +583,7 @@ function kcSel(id){const L=kcFamList("nha");const i=L.findIndex(m=>m.id===id);if
 (function(){const p0=renderPanel0;renderPanel0=function(){if(!isKc())return p0.apply(this,arguments);const el=$("panel");const gm=document.querySelector(".game");if(gm)gm.classList.remove("cardtab","maptab");
  let h="";if(tab==="art"||tab==="inv"){p0.apply(this,arguments);if(tab==="art")el.insertAdjacentHTML("beforeend",kcArtHTML());return}
  if(tab==="go")h=kcMapHTML();else if(tab==="story")h=kcStoryHTML();else if(tab==="rv")h=kcFamHTML();else if(tab==="staff")h=kcSocHTML();else if(tab==="kid")h=kcMailHTML();else h=kcGroupHTML(KCG[tab]||"khue");
- const keep=el.dataset.tab===tab?el.scrollTop:0;el.innerHTML=h;el.dataset.tab=tab;el.dataset.pg="";el.scrollTop=keep;try{kitFix(el)}catch(e){}if(!keep)requestAnimationFrame(()=>{el.scrollTop=0})/* the pane bar (kitPane) moves the sub-tab row after this render */}})();
+ const keep=el.dataset.tab===tab?el.scrollTop:0;el.innerHTML=h;el.dataset.tab=tab;el.dataset.pg="";try{kitFix(el)}catch(e){}panelScrollKeep(el,keep);if(!keep)requestAnimationFrame(()=>{el.scrollTop=0})/* the pane bar (kitPane) moves the sub-tab row after this render */}})();
 function kcDoable(a){return !a.done&&!a.lock&&can(cardCost(a))&&canPay(a)}
 function kcCardsH(L){return L.length?`<div class="cards">${L.map(([a,i])=>cardH(a,i)).join("")}</div>`:""}
 function kcGroupHTML(g){return kcCardsH(deck.map((a,i)=>[a,i]).filter(([a])=>a.g===g))}

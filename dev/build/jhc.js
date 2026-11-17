@@ -179,7 +179,7 @@ window.menTabHTML=function(){try{menInit()}catch(e){}menUnique();const M=(S.men|
 /* panel rendering of the two new keys (j6 renderPanel0 dispatches by key; these keys are new) */
 if(typeof renderPanel0==="function"){const p0=renderPanel0;renderPanel0=function(){if(tab!=="court"&&tab!=="men")return p0.apply(this,arguments);
   const el=$("panel");faceInit();const gm=document.querySelector(".game");if(gm)gm.classList.add("cardtab");const h=tab==="court"?courtTabHTML():menTabHTML();
-  const same=el.dataset.tab===tab,keep=same?el.scrollTop:0;el.innerHTML=h;el.dataset.tab=tab;el.dataset.pg=String(PG[tab]);el.scrollTop=keep;kitFix(el)}}
+  const same=el.dataset.tab===tab,keep=same?el.scrollTop:0;el.innerHTML=h;el.dataset.tab=tab;el.dataset.pg=String(PG[tab]);kitFix(el);panelScrollKeep(el,keep)}}
 /* servant road keeps its own tab set */
 (function(){const r0=render;render=function(){const r=r0.apply(this,arguments);try{const srv=typeof isSrv==="function"&&isSrv();document.querySelectorAll('#tabs [data-tab="court"],#tabs [data-tab="men"]').forEach(b=>{if(srv)b.style.display="none"})}catch(e){}return r}})();
 
@@ -197,7 +197,8 @@ if(typeof renderPanel==="function"){const r0=renderPanel;renderPanel=function(){
   const r=r0.apply(this,arguments);
   /* same tab (another person): keep the panel where it was — j6 restored scrollTop before the sticky sub-tab bar came back, which
      shifted the card by the bar's height for one frame */
-  try{if(P&&P.dataset.tab===t0&&Math.abs(P.scrollTop-top0)>0.5)P.scrollTop=top0}catch(e){}
+  /* oi-render: after the renderer's own scroll keep (both at the end of a render, jlag2 renderAfter: the read here forced a 2nd full layout) */
+  try{if(P&&P.dataset.tab===t0)(window.renderAfter||((k,g)=>g()))("pscroll2",()=>{if(P.dataset.tab===t0&&Math.abs(P.scrollTop-top0)>0.5)P.scrollTop=top0})}catch(e){}
   try{if(snap&&P.dataset.tab===t0){const n=P.querySelector(".pc>.pcl>.pcp.kit");const nk=n&&n.querySelector(".kin");if(nk&&nk.innerHTML!==snap.innerHTML){
     snap.removeAttribute("id");snap.classList.add("kpxf");nk.after(snap);snap.animate([{opacity:1},{opacity:0}],{duration:180,easing:"ease-out",fill:"forwards"}).onfinish=()=>snap.remove();setTimeout(()=>snap.remove(),400)}}}catch(e){}
   return r}}

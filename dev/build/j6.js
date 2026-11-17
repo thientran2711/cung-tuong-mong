@@ -50,7 +50,13 @@ function renderPanel0(){const el=$("panel");let h="";faceInit();const gm=documen
  if(tab==="staff")h=staffTabHTML();
  if(tab==="fac")h=facHTML();
  if(tab==="log")h=`<h3>Nhật ký</h3><div class="logs">${S.logs.map(x=>{const v=rivals.find(r=>x.includes(r.name));return `<div>${v?mdH(pv(v),"xs"):x.includes("Hoàng thượng")?mdH(pEmp(),"xs"):""}${x}</div>`}).join("")||"<div>Chưa có gì.</div>"}</div>`+pastHTML();
- const same=el.dataset.tab===tab&&el.dataset.pg===String(PG[tab]),keep=el.dataset.tab===tab?el.scrollTop:0,rc=el.querySelector(".pcr"),rk=same&&rc?rc.scrollTop:0,lc=el.querySelector(".pcl"),lk=same&&lc?lc.scrollTop:0;el.innerHTML=h;el.dataset.tab=tab;el.dataset.pg=String(PG[tab]);el.scrollTop=keep;kitFix(el);const r2=el.querySelector(".pcr");if(r2)r2.scrollTop=rk;const l2=el.querySelector(".pcl");if(l2)l2.scrollTop=lk}
+ const same=el.dataset.tab===tab&&el.dataset.pg===String(PG[tab]),keep=el.dataset.tab===tab?el.scrollTop:0,rc=el.querySelector(".pcr"),rk=same&&rc?rc.scrollTop:0,lc=el.querySelector(".pcl"),lk=same&&lc?lc.scrollTop:0;el.innerHTML=h;el.dataset.tab=tab;el.dataset.pg=String(PG[tab]);kitFix(el);panelScrollKeep(el,keep,rk,lk)}
+/* oi-render: the panel keeps its scroll place after a redraw. Setting scrollTop right after innerHTML forced a full layout of the new panel,
+   and the card fixes after it (kitFix, kaNorm) changed the panel again, so the next read laid it all out a second time. Inside a render the
+   scroll is set once when the outermost render returns (jlag2 renderAfter, same task, before the frame); outside a render, at once.
+   Every panel renderer (j6, j42, j72, jhc, jht, jkc) uses this one helper. */
+function panelScrollKeep(el,keep,rk,lk){const f=()=>{if(!el.isConnected)return;el.scrollTop=keep;if(rk!=null){const r2=el.querySelector(".pcr");if(r2)r2.scrollTop=rk}if(lk!=null){const l2=el.querySelector(".pcl");if(l2)l2.scrollTop=lk}};
+ (window.renderAfter||((k,g)=>g()))("pscroll",f)}
 function showSelf(){Q.unshift({t:S.name,cls:"pcm",h:selfCardHTML()});showModal()}
 function showEmp(){Q.unshift({t:empName(),cls:"pcm",h:empCardHTML()});showModal()}
 

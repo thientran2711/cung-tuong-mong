@@ -53,7 +53,8 @@ function j59unk(b,p,im){const s0=im.getAttribute("src")||"";const m=/fig-(empero
 function j59tags(st,tk){const ppl=typeof curPeople==="function"?curPeople():[];const TT=[];
  if(tk)tk.querySelectorAll(".tok").forEach(b=>{const g=b.querySelector(".tag"),p=ppl[+b.dataset.p];if(!g||!p)return;const h=j59tagHTML(p,p.name);if(g.dataset.j59!==h){g.innerHTML=h;g.dataset.j59=h}g.style.setProperty("--tc",j59col(p));g.classList.toggle("j59u",!j59known(p));g.classList.toggle("j59mine",p===S);TT.push(g);const im=b.querySelector(".figimg");if(im){if(!j59known(p))j59unk(b,p,im);else b.classList.remove("j59unk")}});
  /* lag-play: the tooltips read innerText (a layout read) AFTER all the writes: one layout instead of one per person */
- {const V=TT.map(g=>g.innerText.replace(/\n/g," · "));TT.forEach((g,i)=>{if(g.title!==V[i])g.title=V[i]})}
+ /* oi-render: and inside a render, at its end (jlag2 renderAfter: one layout for every part fit, not one more here) */
+ (window.renderAfter||((k,f)=>f()))("j59tt",()=>{const L=TT.filter(g=>g.isConnected);const V=L.map(g=>g.innerText.replace(/\n/g," · "));L.forEach((g,i)=>{if(g.title!==V[i])g.title=V[i]})});
  const me=document.getElementById("mefig");let mt=document.getElementById("j59metag");
  if(!me){if(mt)mt.remove();return null}
  if(!mt){mt=document.createElement("div");mt.id="j59metag";mt.className="tok j59me";mt.style.visibility="hidden";mt.innerHTML='<span class="tag"></span>';st.appendChild(mt)}
