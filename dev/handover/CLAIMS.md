@@ -693,3 +693,4 @@
 | one-core-dup2-r2 r4 PASS 069188d7 → FOR MAIN (land first: dup2-r2 → arcs → roads-r1) | review/one-core-dup2-r2 | B | session_01N1tNP3RUAMCUVaePSwSLjg | PASS (archived) | 17/11 08:54Z |
 | staff-root SẴN SÀNG KIỂM e0431afa → review r1 (opus BIG; brief briefs/review-staff-root-r1.md) | review/staff-root-r1 | B | session_01N1tNP5HB9qHe8rHrMv1JDw | RUNNING | 17/11 09:19Z |
 | coop-thin-b SẴN SÀNG KIỂM be599e1e (B + D + D r1 + B r1 fixes) → ONE combined B+D re-review r2 (fresh opus BIG; brief briefs/review-coop-thin-b-r2.md) | review/coop-thin-b-r2 | B | session_01N1tNP6CCHKYNJ1vfGrqtTP | RUNNING | 17/11 09:22Z |
+| one-core-arcs r2 PASS review/one-core-arcs-r2v 6b2ab41b (= 2831e112 + reviewer: 6 typed merit amounts in j67 → BAL.arc g, stronger proof stubs, nomut check, stray _old.html removed) → FOR MAIN after dup2-r2 (then roads-r1); report reports/review-one-core-arcs-r2.md | review/one-core-arcs-r2v | B | session_01N1tNP5234t4p9HE1eAvTYL | PASS | 17/11 09:27Z |
