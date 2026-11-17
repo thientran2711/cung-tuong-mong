@@ -573,7 +573,7 @@
 | WHOLE FIGURE REPAINT batch W4d (successor of W4c session_011xDdVShYq4ow4VaBTVm4CY, archived; hero+misc remainder, maid-ty on GO after owner OK of rank-sample-v2) | review/fig-cutout-clean | C | session_011xDdVPnYcsf2h5vWcgL2Z5 | RUNNING | 17/11 03:29Z |
 | save-dlg-fix review r1 (sonnet SMALL UI) of 340c616a (worker #2 archived) | review/save-dlg-fix-r1 | main s29 | session_01UV1SzgbocUETEUWFViBc8f | RUNNING | 17/11 03:31Z |
 | night-final SUCCESSOR #6 (opus; HELD BY MAIN while Foreman D is out of quota; returns to D on a new D account) from ea74aff6: shots, buổi perf ≤ live +5 %, G4 probe proof; co-op PARKED | review/night-final | main s29 | session_01UV1SzkcuhnxeSAywiQC2hz | RUNNING | 17/11 03:33Z |
-| OI family (opus): render-cost root fix + origin-intros flow/oldsave tests + kc2val Chờ re-measure (carries kc-roads-cn-nc-fix2), then one OI reviewer | review/batch-0032-oi | D | session_01964izCi8228y2v2JjEknpd | RUNNING | 17/11 03:35Z |
+| OI family (opus): render-cost root fix + origin-intros flow/oldsave tests + kc2val Chờ re-measure (carries kc-roads-cn-nc-fix2), then one OI reviewer | review/batch-0032-oi | D | session_01964izCi8228y2v2JjEknpd | DONE SẴN SÀNG KIỂM de6a876b (archived) | 17/11 03:35Z |
 | npc-roads-fx FINISH (opus): F1–F6 scan, merge main, suites → SẴN SÀNG KIỂM, then BIG reviewer | review/npc-roads-fx | D | session_01964izFdMcMY1NA9hQZVoJw | DONE SẴN SÀNG KIỂM e34393b1 (archived) | 17/11 03:35Z |
 | item-ledger SOLO landing (opus): from PASS 7aba5de9, branch co-op transport removed (live giftin only), co-op part parked | review/item-ledger-solo | D | session_01964izCwq2JLHTHaaBox66W | DONE SẴN SÀNG KIỂM ac939102 (archived) | 17/11 03:35Z |
 | npc-death re-wire (opus): jnpcd/jly into j95 place-people record (Lý Trường Môn viện, dead off lists, Thái y viện new name) | review/npc-death-wire | D | session_01964izBuQu8dWabKyYB69JE | DONE SẴN SÀNG KIỂM de166c3f (archived) | 17/11 03:35Z |
@@ -639,3 +639,4 @@
 | trait-rename review r1 (opus BIG, save migration) of 27886326 | review/trait-rename-r1 | B | session_01N1tNP31pNXiReqkE3LxVdh | RUNNING | 17/11 05:40Z |
 | one-core-roads — ONE CORE F1 roads: go:/sc:/k: amounts → BAL.road.fx, values identical (opus; split of one-core-dup §2b) | review/one-core-roads | B | session_01N1tNP4eyJ4AQGCmA1HpA9c | RUNNING | 17/11 05:41Z |
 | one-core-arcs — ONE CORE F2 arcs: ARC67/j97/j96/jorigins/jroute/jstory → BAL.arc.fx, values identical (opus; split of one-core-dup §2b) | review/one-core-arcs | B | session_01N1tNP5MRPzxmbFfWjw6LuT | RUNNING | 17/11 05:41Z |
+| OI branch review r1 (opus BIG) of de6a876b (origin-intros + entry-exam + kc-roads fix2 + render-cost) | review/batch-0032-oi-r1 | D | session_01964izCyrKPEnt2GpVBazHD | RUNNING | 17/11 05:50Z |
