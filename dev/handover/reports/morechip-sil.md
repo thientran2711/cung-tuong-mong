@@ -25,3 +25,11 @@ fold.jpg, ipadAir.jpg, ipadPro.jpg, iphone14.jpg (crowded home stage; ipadAir sh
 ## Notes
 - Image files not in git (allowlist); only on CDN: img/kit/unknown-ico-n.webp.
 - Reviewer: check icon grey vs f/m (mine is flatter, slightly less texture; accepted as icon-size).
+
+## ROUND 2 (owner feedback ~14:15Z) — sha **aed1c258**
+1. Icon REDRAWN as a GROUP of 3 (man, woman, child), Magnific gpt-2-6, flattened to the unknown-fig grey; `img/kit/unknown-ico-n.webp` 192 px tall x ~145 wide (overwritten on CDN; the old single-figure icon is gone).
+2. Chip text is "+N" again: `[group] +2` (`j59chipIco`).
+3. Chips at the TRUE bottom corners (6 px in). A side column / rail moves the chip beside it (flush, 2 px) ONLY if its height reaches the chip's y-range; on Fold and iPad the column stops above the bottom, so both chips sit in the real corners. The "step up over a name chip" fallback stays in code but fired 0 times in the scan (5 sizes x 30 places x 2 pages; scan counts it).
+4. Place header: "Ngọc Thanh các [group] 5" via `j59hdrCount()` (same `j59ico()` as the chip). Longer stage lines keep their rest ("[icon] 5 · Càn Ninh cung: …"); "Không gặp ai." (0 people) stays text — decision for main if she wants "[icon] 0". Scan fails on any header still reading "Ở đây còn…".
+Tests: `node dev/test/morechip-scan.js` → MORECHIP OK, step-ups 0, ON column 0 at all 5 sizes. KIT 33.9 updated.
+Shots (CDN img/_review/morechip-sil/, old ones wiped): fold.jpg, ipadAir.jpg, ipadPro.jpg, iphone14.jpg, icon-group.png. Looked at Fold + iPad: header icon+number inline after the name, chips in true corners.
