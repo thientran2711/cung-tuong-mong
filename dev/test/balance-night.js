@@ -16,7 +16,7 @@ const r=await p.evaluate(([n,Y])=>{window.render=function(){};if(typeof cyAsk===
     const lf=val(M.feign.lose)-(M.feign.hh?M.feign.hh/3:0),lr=val(M.road.lose)-(M.road.hh?M.road.hh/3:0);
     const ef=pf/100*(N+val(M.feign.win)-(M.feign.hh||0)/3)+(1-pf/100)*val(M.feign.lose),er=pr/100*(N+val(M.road.win)-(M.road.hh||0)/3)+(1-pr/100)*val(M.road.lose);
     if(Math.max(ef,er)<=0)out.thoi++;else if(er>ef)out.road++;else out.feign++;
-    const ba=bestArt(a),ea=empArt();const kd=!ba?"none":!ea?"neu":ba.k===ea.f?"fav":ba.k===ea.d?"dis":"neu";out.kind[kd]++;if(kd!=="none"){out.byArt[kd][0]++;if(er>ef)out.byArt[kd][1]++}}}}
+    const ba=stBestArt(a),ea=empArt();const kd=!ba?"none":!ea?"neu":ba.k===ea.f?"fav":ba.k===ea.d?"dis":"neu";out.kind[kd]++;if(kd!=="none"){out.byArt[kd][0]++;if(er>ef)out.byArt[kd][1]++}}}}
  const q=a=>{a.sort((x,y)=>x-y);return [a[Math.floor(a.length*.1)],a[Math.floor(a.length*.5)],a[Math.floor(a.length*.9)]]};
  return{n:out.n,share:{feign:+(out.feign/out.n).toFixed(2),road:+(out.road/out.n).toFixed(2),thoi:+(out.thoi/out.n).toFixed(2)},odds10_50_90:{feign:q(out.od.feign),road:q(out.od.road),keep:q(out.od.keep)},words:{feign:word(q(out.od.feign)[1]),road:word(q(out.od.road)[1]),keep:word(q(out.od.keep)[1])},artKind:out.kind,roadShareByArt:Object.fromEntries(Object.entries(out.byArt).map(([k,v])=>[k,v[0]?+(v[1]/v[0]).toFixed(2):null]))}},[+LS||4,+YS||2]);
 console.log(JSON.stringify(r));console.log('errors',errs.length,errs.slice(0,3).join(' | '));await b.close()})();

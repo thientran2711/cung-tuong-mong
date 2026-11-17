@@ -2,7 +2,7 @@
    ONE resolve and its numbers. 1 several successes → higher Sủng; equal → seeded pick, order-free · 2 NPC vs NPC at the flip (agent choice
    at the commit), thief only, true Sổ ghi line · 3 a failed try = jbalcore stealFail (the mode's own loss, BAL.steal.m[mode].lose) ·
    4 ONE odds function: nfOdds = oSteal / oKeep, a kept defence = rungDown(o, BAL.steal.keep.rung) · 5 defence numbers: nobody took it →
-   keepNoSteal (Sủng +BAL.steal.keep.keepSung); robbed → keepRobbed (heavier oán) · 6 the choice cards print the BAL numbers (no typed
+   keepNoSteal (Sủng +BAL.steal.keep.gain); robbed → keepRobbed (heavier oán) · 6 the choice cards print the BAL numbers (no typed
    number) · 7 ledger pass (live:false): lines only, no night record.
    usage: node dev/test/night-multi.js <url>   (exit 0 = all pass) */
 const {chromium}=require('playwright');const [,,URL]=process.argv;
@@ -57,23 +57,23 @@ const {chromium}=require('playwright');const [,,URL]=process.argv;
   return{feign:nfOdds(B,"feign")===cl(oSteal(B,"feign")),road:nfOdds(B,"road")===cl(oSteal(B,"road")),keep:nfOdds(A,"keep")===cl(oKeep(A)),
    down:nfOdds(B,"feign",{down:1})===rungDown(cl(oSteal(B,"feign")),BAL.steal.keep.rung),w:[word(nfOdds(B,"feign")),word(nfOdds(B,"feign",{down:1}))],rung:BAL.steal.keep.rung}}finally{mm=mood;T.fin()}});
  ok("4 nfOdds = oSteal / oKeep; defence = rungDown(BAL.steal.keep.rung)",r.feign&&r.road&&r.keep&&r.down&&r.w[0]!==r.w[1],r);
- /* 5. her defence at the flip: kept (nobody won) → keepNoSteal applies Sủng +keepSung (through ap: the growth curve may round it); robbed anyway → keepRobbed (her thiện cảm toward the winner drops more) */
+ /* 5. her defence at the flip: kept (nobody won) → keepNoSteal applies Sủng +keep.gain (through ap: the growth curve may round it); robbed anyway → keepRobbed (her thiện cảm toward the winner drops more) */
  r=await p.evaluate(()=>{const out={};const L=T.setup();const [A,B]=L;const mr=Math.random;
   /* kept: B attacks, her keep succeeds, B fails */
   window.stealWant=(v,t)=>v===B&&t===S?{u:1,p:1,mode:"feign"}:{u:0,p:0,mode:null};S.sung=50;T.ch="Giữ chân Hoàng thượng";const kn=keepNoSteal;let kg=null;keepNoSteal=function(p){const s=p.sung;const n=kn.apply(this,arguments);if(p===S)kg=[n,p.sung-s];return n};const os=oSteal,ok0=oKeep;oSteal=()=>1;oKeep=()=>99;/* her keep holds, B's try fails */
   Math.random=()=>.5;try{const un=T.only(S);try{T.endDay()}finally{un()}}finally{Math.random=mr;oSteal=os;oKeep=ok0}
-  keepNoSteal=kn;out.kept={kg,want:BAL.steal.keep.keepSung,x:S.nfX&&S.nfX.def};
+  keepNoSteal=kn;out.kept={kg,want:BAL.steal.keep.gain,x:S.nfX&&S.nfX.def};
   /* robbed: same, B succeeds although she held */
   const L2=T.setup();const [A2,B2]=L2;window.stealWant=(v,t)=>v===B2&&t===S?{u:1,p:1,mode:"road"}:{u:0,p:0,mode:null};T.ch="Giữ chân Hoàng thượng";
   const ra=typeof relAdd==="function"?relAdd:null;let hit=0,inK=0;relAdd=function(a,b,n){if(inK&&a===B2&&b===S)hit+=n;return ra.apply(this,arguments)};const kr=keepRobbed;keepRobbed=function(){inK=1;try{return kr.apply(this,arguments)}finally{inK=0}};
   Math.random=()=>.001;try{const un=T.only(S);try{T.endDay()}finally{un()}}finally{Math.random=mr;relAdd=ra;keepRobbed=kr}
-  const M=BAL.steal.m.road;out.rob={hit,base:-M.rel,extra:-Math.round(M.rel*(BAL.steal.keep.oanX-1)),B:S.tonight!=="me"};T.fin();return out});
+  const M=BAL.steal.m.road;out.rob={hit,base:-M.rel,extra:-Math.round(M.rel*(BAL.steal.keep.oan-1)),B:S.tonight!=="me"};T.fin();return out});
  ok("5 defence: kept → keepNoSteal; robbed → keepRobbed",r.kept.kg&&r.kept.kg[0]===r.kept.want&&r.kept.kg[1]>0&&r.rob.hit===r.rob.extra&&r.rob.B,r);
- /* 6. the choice cards print the BAL numbers: attacker sees each mode's own loss; the flipped one sees keep.rung / keep.keepSung */
+ /* 6. the choice cards print the BAL numbers: attacker sees each mode's own loss; the flipped one sees keep.rung / keep.gain */
  r=await p.evaluate(()=>{const L=T.setup();const [A]=L;T.ch="Thôi";T.commitA(A);const att=T.opts;T.expA=T.exp;const L2=T.setup();T.ch="Thôi";const un=T.only(S);try{T.endDay()}finally{un()}const def=T.opts;T.fin();
   const has=(o,n,s)=>!!(o||[]).find(x=>x.n===n&&String(x.x||"").includes(s));const E=T.expA;
   return{ax:att&&att.map(x=>x.x),E,att:att&&att.map(x=>x.n),def:def&&def.map(x=>x.n),f:has(att,"Tranh sủng",E.f)&&has(att,"Tranh sủng",E.fk),r:has(att,"Chặn ngự giá",E.r)&&has(att,"Chặn ngự giá",E.rk)&&has(att,"Chặn ngự giá",E.rw),
-   k:has(def,"Giữ chân Hoàng thượng",`khó thêm ${BAL.steal.keep.rung} bậc`)&&has(def,"Giữ chân Hoàng thượng",`Sủng +${BAL.steal.keep.keepSung}`)}});
+   k:has(def,"Giữ chân Hoàng thượng",`khó thêm ${BAL.steal.keep.rung} bậc`)&&has(def,"Giữ chân Hoàng thượng",`Sủng +${BAL.steal.keep.gain}`)}});
  ok("6 choice cards print BAL numbers",r.f&&r.r&&r.k,r);
  /* 7. ledger night (not played): stealPass(holder,{live:false}) returns lines, no night record */
  r=await p.evaluate(()=>{const L=T.setup();const [A,B]=L;window.stealWant=(v,t)=>v===B?{u:1,p:1,mode:"feign"}:{u:0,p:0,mode:null};const n0=T.recs(L);const o=window.stealPass(A,{live:false});const e=T.recs(L);T.fin();

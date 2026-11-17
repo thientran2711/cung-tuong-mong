@@ -24,7 +24,7 @@ EV6("lostItem","day",{a:["maid"],pp:()=>S.maid?{a0:0,it:R(4)}:null,w:C=>1.4,
 EV6("sickServant","serv",{a:["sv"],pp:()=>{const a=sv6();return a==null?null:{a0:a}},w:C=>(C.sea==="Đông"||C.sea==="Hạ"?2:1),
  v:["{A} sốt cao từ đêm, nằm mê man ở dãy nhà hầu phía sau.","{A} ho ra máu, các cung nhân sợ lây, không ai dám lại gần.","{A} trượt chân ngã ở bậc đá, sưng cả cổ chân, vẫn cố đứng dậy làm việc.","{A} bị trúng nắng khi đi lấy nước, ngất ngay ở giếng."],
  o:X=>[c6("Mời thái y chữa",{c:{bac:-25},r:[[X.A,15]],w:{duc:2}}),
-  c6("Tự sắc thuốc cho",{c:{suc:-8},p:od(35+(S.arts.y||0)*15),r:[[X.A,12]],w:{duc:1},lr:[[X.A,-2]],lt:[R6("bệnh kéo dài thêm")],ok:()=>`Thuốc ngươi sắc có hiệu nghiệm; ${X.A.n} đỡ hẳn.`}),
+  c6("Tự sắc thuốc cho",{c:{suc:-8},p:od(35+artO(S,"y")),r:[[X.A,12]],w:{duc:1},lr:[[X.A,-2]],lt:[R6("bệnh kéo dài thêm")],ok:()=>`Thuốc ngươi sắc có hiệu nghiệm; ${X.A.n} đỡ hẳn.`}),
   c6("Cho nghỉ, giảm việc",{w:{duc:1},r:[[X.A,5]],k:[R6("cung thiếu người hầu vài hôm")]}),
   c6("Bắt làm tiếp",{w:{suc:2},r:[[X.A,-12]],k:[R6("Đức -1")],ok:()=>{apply({duc:-1});return `${X.A.n} gượng làm, trong lòng oán.`}})]});
 EV6("maidQuarrel","serv",{a:["sv","sv"],pp:()=>{const L=(S.staff||[]).filter(s=>s.sid!=null);if(L.length<2)return null;const a=pick(L),b=pick(L.filter(x=>x!==a));return{a0:a.sid,a1:b.sid}},w:C=>1.5,
@@ -41,7 +41,7 @@ EV6("brokenHeirloom","day",{a:["sv"],pp:()=>{const a=sv6();return a==null?null:{
  v:["{A} lau dọn sơ ý làm vỡ chiếc bình men lam của mẹ ngươi để lại.","Tiếng choang vang lên: {A} đánh rơi đôi chén ngọc Hoàng thượng ban hôm sinh thần ngươi.","{A} làm nứt chiếc gương đồng hồi môn của ngươi khi bưng nước.","Bức họa Thái hậu ban bị {A} làm đổ mực loang một góc."],
  o:X=>[c6("Tha, cho người sửa",{c:{bac:-20},r:[[X.A,12]],w:{duc:2}}),
   c6("Phạt quỳ nửa ngày",{w:{danh:1},r:[[X.A,-10]]}),
-  c6("Giấu chuyện, tự chắp lại",{c:{suc:-5},p:od(40+(S.arts.hoa||0)*10),w:{tai:1},r:[[X.A,6]],lt:[R6("vết nứt lộ rõ; nếu người ban hỏi đến thì khó ăn nói")],l:{danh:-1}})]});
+  c6("Giấu chuyện, tự chắp lại",{c:{suc:-5},p:od(40+artO(S,"hoa")),w:{tai:1},r:[[X.A,6]],lt:[R6("vết nứt lộ rõ; nếu người ban hỏi đến thì khó ăn nói")],l:{danh:-1}})]});
 EV6("spoiledFood","day",{a:["sv"],pp:()=>{const a=sv6();return a==null?null:{a0:a}},w:C=>C.sea==="Hạ"?2:.8,
  v:["Ngự thiện phòng gửi sang mâm cơm đã ôi; {A} ngửi thấy mùi chua, không dám dọn lên.","Phần yến sào tháng này của cung ngươi bị bớt mất một nửa; {A} nói thái giám Ngự thiện phòng ăn chặn.","Canh gà đưa sang nguội ngắt, váng mỡ đông lại; {A} bất bình thay ngươi.","Nội vụ phủ cấp than {S} toàn than ẩm khói mù, {A} ho sặc sụa."],
  o:X=>[c6("Sai người đi hỏi tội",{p:od(30+S.rank*8+S.danh/4),w:{danh:2},wt:[G6("từ nay phần của cung ngươi đủ")],l:{danh:-2},lt:[R6("bị đồn là khó tính")],r:[[X.A,4]]}),
@@ -128,12 +128,12 @@ EV6("eunRequest","visit",{a:["sv"],pp:()=>{const a=sv6(s=>s.role!=="maid");retur
 /* ---------- HOÀNG THƯỢNG (moods and whims) ---------- */
 EV6("empDish","emp",{a:["emp"],pp:()=>S.sung>=15?{a0:0}:null,w:C=>1+(S.emp.mood===0?1:0),
  v:["Hoàng thượng sai người mang sang một bát chè tổ yến ngài ăn dở, nhắn 'ngon, nàng thử'.","Ngài muốn ăn món quê ngươi; thái giám Càn Thanh cung đến hỏi cách nấu.","Ngự thiện phòng chế món cá hấp mới, ngài muốn ngươi nếm và nói thật.","Ngài bỗng thèm bánh hoa quế do chính tay phi tần làm, truyền khắp lục cung."],
- o:X=>[c6("Tự tay vào bếp",{c:{suc:-8},p:od(40+S.tai/4+(S.arts.y||0)*6),w:{sung:4,an:1},l:{sung:-1},lt:[R6("món ăn không vừa miệng ngài")]}),
+ o:X=>[c6("Tự tay vào bếp",{c:{suc:-8},p:od(40+S.tai/4+artO(S,"y")),w:{sung:4,an:1},l:{sung:-1},lt:[R6("món ăn không vừa miệng ngài")]}),
   c6("Thuê đầu bếp giỏi làm thay",{c:{bac:-25},w:{sung:2},k:[R6("lộ ra bị chê dối")]}),
   c6("Nói thật món ăn chưa ngon",{p:od(35+S.duc/2+mm()),w:{sung:3,danh:1},wt:[G6("ngài quý người thật thà")],l:{sung:-3},lt:[R6("ngài phật ý")]})]});
 EV6("empPoem","emp",{a:["emp"],pp:()=>S.sung>=20?{a0:0}:null,w:C=>1,
  v:["Hoàng thượng sai thái giám mang sang một bài thơ ngài vừa viết, hỏi ngươi nên sửa chữ nào.","Ngài viết được nửa bài thơ vịnh {S}, muốn ngươi nối hai câu cuối.","Ngài đố ngươi đoán bài thơ trên quạt là của danh sĩ nào.","Ngài gửi một câu đối vế trên, chờ vế dưới trước khi lên đèn."],
- o:X=>[c6("Nghiêm túc góp ý",{c:{suc:-3},p:od(30+S.tai/2+(S.arts.thi||0)*6),w:{sung:4,tai:1},l:{sung:-2},lt:[R6("góp ý vụng, ngài cụt hứng")]}),
+ o:X=>[c6("Nghiêm túc góp ý",{c:{suc:-3},p:od(30+S.tai/2+artOE(S,"thi")),w:{sung:4,tai:1},l:{sung:-2},lt:[R6("góp ý vụng, ngài cụt hứng")]}),
   c6("Khen hết lời",{w:{sung:1},k:[R6("ngài thấy ngươi nịnh: Danh -1")],ok:()=>{apply({danh:-1});return "Ngài cười, không nói gì thêm."}}),
   c6("Nhờ người chấp bút",{c:{bac:-20},p:65,w:{sung:3},l:{sung:-4,danh:-2},lt:[R6("bị nhận ra nét chữ lạ")]})]});
 EV6("empSulk","emp",{a:["emp"],pp:()=>S.emp.mood>=2&&S.sung>=20?{a0:0}:null,w:C=>S.emp.mood>=2?2.5:0,
@@ -143,7 +143,7 @@ EV6("empSulk","emp",{a:["emp"],pp:()=>S.emp.mood>=2&&S.sung>=20?{a0:0}:null,w:C=
   c6("Kể chuyện vui cho ngài khuây",{c:{suc:-3},p:od(40+S.sac/4+S.tai/4),w:{sung:3},l:{sung:-1},lt:[R6("chuyện không đúng lúc")]})]});
 EV6("empChess","emp",{a:["emp"],pp:()=>S.sung>=25?{a0:0}:null,w:C=>1,
  v:["Canh hai, thái giám gõ cửa: Hoàng thượng muốn một ván cờ, ngài đang đợi ở thư phòng.","Ngài thua cờ Thân vương, muốn ngươi bày lại thế cờ cho ngài gỡ.","Ngài thách ngươi đánh cờ, cược một chiếc trâm.","Ngài muốn đánh cờ dưới giàn hoa, bảo ngươi đừng nhường."],
- o:X=>[c6("Đánh hết sức",{c:{suc:-5},p:od(25+(S.arts.ky||0)*14+S.tamco/5),w:{sung:4,tai:1},l:{sung:-1},lt:[R6("thua, ngài cụt hứng")]}),
+ o:X=>[c6("Đánh hết sức",{c:{suc:-5},p:od(25+artOE(S,"ky")+S.tamco/5),w:{sung:4,tai:1},l:{sung:-1},lt:[R6("thua, ngài cụt hứng")]}),
   c6("Khéo để ngài thắng sát nút",{c:{suc:-5},p:od(45+S.tamco/3),w:{sung:3},l:{sung:-2},lt:[R6("ngài nhận ra bị nhường")]}),
   c6("Cáo mệt xin hôm khác",{w:{suc:3},k:[R6("Sủng -2")],ok:()=>{apply({sung:-2});return "Ngài cho lui, hơi tiếc."}})]});
 EV6("empAsksAbout","emp",{a:["emp","rv"],pp:()=>{const b=rv6();return b==null||S.sung<25?null:{a0:0,a1:b}},w:C=>1,

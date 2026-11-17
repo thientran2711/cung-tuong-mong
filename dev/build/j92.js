@@ -81,7 +81,7 @@ const WD_LIST=[
  ["tramphuong","tram","Trâm phượng cửu vĩ",8,3,"vang",{sac:8,danh:4}],["phuongquan","tram","Phượng quan bán giá",8,3,"vang",{sac:8,danh:5}],
  ["nt_nhuy","tram","Trâm ngọc như ý ngự tứ",5,4,"xanh",{sac:5,danh:3}],["nt_haiduong","tram","Bộ diêu «Hải đường xuân thụy» ngự tứ",6,4,"hong",{sac:6,danh:4}],["nt_dongchau","tram","Trâm đông châu ngự tứ",7,4,"trang",{sac:7,danh:5}],
  ["y_cungnu","y","Áo vải xanh cung nhân",0,0,"xanh",{}],["y_luamoc","y","Áo lụa mộc hồng nhạt",0,0,"hong",{sac:1}],
- ["y_chuongsu","y","Áo gấm lam chưởng sự cô cô",0,0,"xanh",{sac:1}],["y_nuquan","y","Áo lụa chàm nữ quan",0,1,"lam",{sac:1}],["y_mama","y","Áo gấm xanh rêu ma ma",0,1,"xanh",{sac:2}],
+ ["y_chuongsu","y","Áo gấm lam chưởng sự cô cô",0,0,"xanh",{...BAL.m92.srvY.chuongsu}],["y_nuquan","y","Áo lụa chàm nữ quan",0,1,"lam",{...BAL.m92.srvY.nuquan}],["y_mama","y","Áo gấm xanh rêu ma ma",0,1,"xanh",{...BAL.m92.srvY.mama}],
  ["y_hoanho","y","Áo lụa thêu hoa nhỏ",1,0,"hong",{sac:1}],["y_saxanh","y","Váy sa xanh ngọc",1,0,"xanh",{sac:2}],
  ["y_maimai","y","Áo gấm hoa mai",2,1,"hong",{sac:2}],["y_vanthuy","y","Áo lụa Hàng Châu vân thủy",2,1,"lam",{sac:2}],
  ["y_lan","y","Áo the thêu lan",3,1,"xanh",{sac:3}],["y_tramnep","y","Váy lụa bách điệp",3,1,"tim",{sac:3}],

@@ -54,9 +54,8 @@ Object.assign(BAL,{accCdT:36});
  A.ok=function(a,t){if(cd(t))return false;return ok0.apply(this,arguments)};
  A.f=function(a,t){if(a!==S&&cd(t))return "";try{if(t)t.accT=wk()}catch(e){}return f0.apply(this,arguments)}}catch(e){}})();
 /* measured knobs of other modules (balance pass 11/14, see dev/measure/BALANCE_REPORT.md): scheme motive x3 and a prepared blow +10 (j70),
-   the Emperor's satiety with one favourite (j75 FAIRN.sat/satO). Same for every consort. */
-try{Object.assign(J70CFG,{mot:3,prep:10})}catch(e){}
-try{Object.assign(FAIRN,{sat:.2,satO:8})}catch(e){}
+   the Emperor's satiety with one favourite (j75 FAIRN.sat/satO). Same for every consort.
+   One-core: those values now sit once in J70CFG (j70) and FAIRN (j75); nothing sets them a second time here. */
 /* 8 bottom tabs (owner's choice): j72's "Việc nhờ" tab (data-tab q72) is a sub-tab of Mệnh truyện, not a 9th tab */
 try{if(typeof KG==="object"&&KG.mt&&!KG.mt.keys.includes("q72"))KG.mt.keys.splice(1,0,"q72");if(typeof kgBar==="function")kgBar()}catch(e){}
 /* balance 11/14 (late): death stays a real risk for a careful player too. Same rules for every woman in the palace, her and every NPC.
@@ -64,8 +63,7 @@ try{if(typeof KG==="object"&&KG.mt&&!KG.mt.keys.includes("q72"))KG.mt.keys.splic
    - seeMaxP: spotting a poisoned bowl or medicine (the "ps" check of caught(): physician, Y thuật, eyes) is capped at BAL.seeMaxP %. Guards lower the odds, never to near-zero.
    - poisonX: a poison that lands takes poisonX x the Sức it took before (for her and for an NPC alike). */
 Object.assign(BAL,{birthMin:8,seeMaxP:70,poisonX:1});
-/* v12 (worker 2, measured n=30): an empty Hoàng hậu seat goes to an outsider girl 60% of the time (was 85; jbal outQ) */
-Object.assign(BAL,{outQ:60});
+/* v12 (worker 2, measured n=30): an empty Hoàng hậu seat goes to an outsider girl 60% of the time: BAL.outQ (jbal, one value since review/one-core) */
 (function(){const b0=birthRisk;birthRisk=function(p){const r=b0.apply(this,arguments);return Math.max(r,BAL.birthMin||0)}})();
 (function(){const o0=oSee;oSee=function(t,p){const r=o0.apply(this,arguments);return p&&BAL.seeMaxP?Math.min(r,BAL.seeMaxP):r}})();
 (function(){try{const P=ACT.poison,f0=P.f;P.f=function(){window.__pz70=1;try{return f0.apply(this,arguments)}finally{window.__pz70=0}};
@@ -240,7 +238,7 @@ Object.assign(BAL,{mgTier:{occ:{hoc:[0,.5],hoi:[1,.5],trieu:[1.5,.5],exam:[1,.5]
    support / opposition, npc* = an NPC dowager's claim, rareCDanh: the rare end check of succRareOK. */
 Object.assign(BAL,{danhG:{forget:5,fatherBook:40,thdBook:40,srvWed:20,kcVihanh:60,kcR5:50},
  charity:{khac:1,bac:20,duc:3,danh:1},/* Tài nghệ · Tứ đức "Phát bạc cứu giúp cung nhân nghèo" (j85 charity, once a month; jtabs/j85 card text) */
- succN:{bAge:16,bDanh:50,bTam:35,bBac:100,cRank:4,cDanh:70,cTam:60,cTh:60,cBac:300,thB:50,thOpp:20,npcDanh:50,npcTam:35,rareCDanh:80}});
+ succN:{bAge:BAL.age.reign/* one-core: same concept as age.reign */,bDanh:50,bTam:35,bBac:100,cRank:4,cDanh:70,cTam:60,cTh:60,cBac:300,thB:50,thOpp:20,npcDanh:50,npcTam:35,rareCDanh:80}});
 /* CLOSE MAID BY ORIGIN (jcmaid.js, D58 review/close-maid, owner approved table v2 16/11). % per month unless named; loy = loyalty range at
    arrival by source; pickN candidates, the picked one's talent works after pickAlone months, pickKeep % a month her decay is undone;
    kinSave % a "kín miệng" maid refuses a buyer; talents: talBac bạc, talSuc Sức, talSpy % a true fact, while her loyalty ≥ talLoy;
@@ -386,17 +384,17 @@ BAL.dh={n0:[1,5,10],step:2,artLv:[3,4,5],
      Bạc / Danh / Sủng / Tai mắt / rank keep the approved origin odds (OD:L19/L43, owner OD:L1218: old origins are not re-tested);
      Sắc / Tài / Tâm cơ / Đức / Sức / arts fit the origin (history check: dev/handover/reports/balance-core.md §1).
    NPCs: their own rank adds what years in the palace give (npc: danh/bac per rank, art points per rank to their best courses). */
-BAL.orig={
+BAL.start={
  tt:  {sac:[45,70],tai:[35,50],tamco:[20,30],duc:40,danh:33,sung:8,bac:210,suc:75,mat:1,th:5,hh:-15,art:{cam:22,thi:18,hoa:14,ky:10},vir:{dung:12,ngon:12}},
  dtq: {sac:[45,70],tai:[15,30],tamco:[10,20],duc:30,danh:23,sung:8,bac:140,suc:100,mat:0,th:0,hh:0,art:{vu:22,ky:8,y:6},vir:{}},
- muoi:{sac:[50,75],tai:[20,35],tamco:[20,30],duc:25,danh:8,sung:8,bac:380,suc:80,mat:1,th:-5,hh:0,art:{cam:12,nau:16,theu:10},vir:{cong:12}},
+ muoi:{sac:[50,75],tai:[20,35],tamco:[20,30],duc:30,danh:8,sung:8,bac:380,suc:80,mat:1,th:-5,hh:0,art:{cam:12,nau:16,theu:10},vir:{cong:12}},
  cn:  {sac:[55,80],tai:[10,25],tamco:[30,40],duc:30,danh:14,sung:28,bac:70,suc:90,mat:3,th:5,hh:0,art:{y:16,nau:16,theu:14},vir:{cong:12,ngon:10}},
  nc:  {sac:[55,80],tai:[20,35],tamco:[15,25],duc:30,danh:38,sung:8,bac:180,suc:85,mat:0,th:-15,hh:0,art:{vu:24,y:16,cam:10},vir:{}},
  bd:  {sac:[50,75],tai:[10,20],tamco:[15,25],duc:30,danh:23,sung:8,bac:150,suc:100,mat:0,th:-20,hh:0,art:{vu:22,nau:10,y:8},vir:{}},
  td:  {sac:[45,70],tai:[30,45],tamco:[30,40],duc:30,danh:14,sung:18,bac:130,suc:75,mat:2,th:0,hh:0,art:{thi:18,cam:12,theu:12},vir:{}},
  ch:  {sac:[45,70],tai:[25,40],tamco:[20,30],duc:40,danh:28,sung:8,bac:160,suc:80,mat:1,th:40,hh:-5,art:{hoa:16,cam:12,theu:10},vir:{dung:12,hanh:10}},
  thd: {sac:[45,70],tai:[40,55],tamco:[15,25],duc:45,danh:8,sung:8,bac:80,suc:75,mat:0,th:0,hh:5,art:{thi:26,ky:16,hoa:10,theu:8,nau:8},vir:{hanh:12}},
- cnv: {sac:[45,70],tai:[10,25],tamco:[15,25],duc:30,danh:2,sung:0,bac:8,suc:85,mat:0,th:0,hh:0,art:{theu:12,nau:12},vir:{cong:12}},
+ cnv: {sac:[45,70],tai:[10,25],tamco:[25,35],duc:30,danh:2,sung:0,bac:8,suc:85,mat:0,th:0,hh:0,art:{theu:12,nau:12},vir:{cong:12}},
  quan:{sac:[45,75],tai:[25,40],tamco:[15,30],duc:40,danh:12,sung:8,bac:90,suc:80,mat:0,th:0,hh:0,art:{cam:14,thi:12,theu:12,hoa:8},vir:{dung:10}},
  npcW:{quan:40,tt:8,dtq:8,muoi:10,cn:6,ch:3,thd:10,td:3,nc:1,bd:1,cnv:0},
  npc:{danh:8,bac:20,art:4,mal:6,duc:10,study:60,focus:4}  /* per NPC rank: Danh +8, Bạc +20, art points +4 to her two best courses; malice moves Tâm cơ ±(malice−40)/mal and Đức ∓(malice−40)/2, duc = Đức of her years of palace conduct (keeps NPC Đức ≈ the old mean 48);
@@ -408,13 +406,18 @@ BAL.orig={
    prizes it (Trọng tài: Cầm/Kỳ/Thi/Họa · Mê sắc: Vũ); side = share of it for passive weights (lật thẻ, mưu kế). stUp = Tài (Vũ/Y: Sắc) at each new
    bậc; danh = Danh at bậc 3 / 5. Old saves keep their bậc (points = floor of that bậc + the old progress share). */
 BAL.art={tier:[0,10,25,45,70,100],nm:["Chưa thạo","Nhập môn","Thuần thục","Tinh thông","Xuất chúng","Tông sư"],
- gain:[1.2,1,.8,.6,.4],odds:[0,4,8,13,18,24],emp:1.5,side:.4,stUp:1,danh:{3:3,5:6}};
+ gain:[1.2,1,.8,.6,.4],odds:[0,4,8,13,18,24],emp:1.5,side:.4,stUp:1,danh:{3:3,5:6},
+ flipX:2 /* Mê sắc: × of Sắc and Vũ in the card-flip chance (j8 nightCh) */,
+ score:2.5 /* contest score per odds point (khuê các festival kcFest: score ≥ 60 first, ≥ 40 praised) */,
+ fee:[5,5] /* teacher fee = fee[0] + bậc × fee[1] Bạc (artFee) */,
+ gate:{yCure:3,thiFame:3} /* course gates moved with the slower ladder (report §F6 table): self-made medicine for a child / an thai at Tinh thông (was bậc 4, ~10 lessons; Xuất chúng now ≥ 1 year); "Thơ ngươi truyền ra ngoài cung" at Tinh thông (Thuần thục = a thầy đồ's daughter at entry) */,
+ fx:{q:.7,cong:.2,hanh:3,gift:{hoa:.5,theu:.4}} /* per POINT of a course: handmade quality q × points (+ Công × cong), gift bonus × points; hanh = Đức per bậc of Hạnh (monthly) */};
 /* growth of the trained abilities (Sắc, Tài, Tâm cơ): every gain is × mul[band] where band = how many of band[] the value has passed
    (0–39 ×1 · 40–59 ×.5 · 60–79 ×.25 · 80+ ×.1); the same for her and every NPC; fractions roll (expected value).
    Sủng / Danh are NOT on the curve (they gate promotion; owner proposal first, see the report): adding "sung" to keys is the whole change. */
 /* the odds word ladder (VANPHONG; word() in j1 reads it): floors of Khó, Năm ăn năm thua, Khá chắc, Chắc, Rất chắc, Nắm chắc (below the first: Liều) */
 BAL.lad=[31,46,56,66,81,91];
-BAL.grow={keys:["sac","tai","tamco"],band:[40,60,80],mul:[1,.5,.25,.1]};
+BAL.grow={keys:["sac","tai","tamco"],band:[40,60,80],mul:[1,.5,.25,.1],back:1 /* regaining a lost value (poison, scar, illness, age) below her own peak: × back (owner note r1 #7: a loss heals, only new heights are slow) */};
 /* NIGHT CHOICES after the card flip (owner 22:45Z / 22:50Z / 23:05Z). Odds of each choice = b + Σ w[stat]×stat + art + trait fit + Emperor mood
    (window.nfOdds in jnf reads these through oSteal(a,mode) / oKeep(p)). No khắc, no Sức, no Đức is paid: only gain / loss (cost 0).
    feign = Tranh sủng: favour pulls him (Sủng), safer, small loss, small extra prize. road = Chặn ngự giá: beauty + art on his path, bolder:
@@ -426,16 +429,15 @@ BAL.grow={keys:["sac","tai","tamco"],band:[40,60,80],mul:[1,.5,.25,.1]};
    the winner, hh = Hoàng hậu → winner, ghen = holder's jealousy.
    ea (Emperor's month art, picked by the game each month, host in co-op): she knows it at the month start when Tai mắt ≥ mat, else each week
    rumour % = r0 + Tai mắt × rMat; NPCs the same; the shown 'known likes' (discover) can also name it (disc %).
-   Measured (dev/test/balance-night.js, real consort population, value of a night = 8 Sủng): best choice Tranh sủng ≈ 58 %, Chặn ngự giá ≈ 37 %, Thôi ≈ 5 %;
-   Chặn ngự giá is best for ≈ 67 % when her best art is his favoured art, ≈ 20 % when it is the disfavoured one. */
-Object.assign(BAL.steal,{cost:{feign:{duc:0},road:{suc:0}},
- m:{feign:{b:34,w:{sung:.35,sac:.05},art:.5,win:{},lose:{sung:-3,duc:-1},rel:10,hh:0,ghen:15},
-    road:{b:14,w:{sac:.35,sung:.05},art:1.5,win:{sung:6,danh:2},lose:{sung:-5,danh:-2},rel:25,hh:4,ghen:30},
-    keep:{b:35,w:{sung:.3,sac:.1},art:1}},
- art:{fav:1,dis:.75,neu:0},keep:{rung:1,keepSung:2,oanX:1.5},
- ea:{mat:5,r0:5,rMat:4,disc:35}});
+   Measured (dev/test/balance-night.js, real consort population, 2 seeds × 3 lives × 2 y, value of a night = 8 Sủng): road b 10 → best choice
+   Tranh sủng ≈ 66 % / Chặn ngự giá ≈ 25 %; b 14 → 36 % / 60 %; b 12 chosen (≈ half and half). Chặn ngự giá is best for most nights when her best art is his
+   favoured one, for few when it is the disfavoured one. */
+BAL.steal.cost={feign:{duc:0},road:{suc:0}};
+BAL.steal.m={feign:{b:22,w:{sung:.4,sac:.05},art:.5,win:{sung:2},lose:{sung:-4,duc:-1},rel:10,hh:0,ghen:15},
+    road:{b:12,w:{sac:.3,sung:.05},art:1.25,win:{sung:6,danh:3},lose:{sung:-5,danh:-2},rel:12,hh:3,ghen:20}};
+BAL.steal.art={fav:1,dis:.75,neu:0};
+BAL.steal.keep={base:35,sung:.3,sac:.1,art:1,rung:1,gain:2,oan:1.5,npcP:.85};/* names agreed with night-final (jnf nfOdds "keep"): odds = base + Sủng×sung + Sắc×sac + best art×art + mood; gain = Sủng when nobody took her night; oan = × of the robbed hit; npcP = chance a flipped NPC presses it, costs nothing (night-final value) */
+BAL.steal.ea={mat:5,r0:5,rMat:4,disc:35};
 /* THE FLIP CHOICE timing (owner OD 16/11 22:45Z "Phải quyết định trong vòng 10 giây thôi"; jnf.js §2): ms = the countdown (timeout = Thôi);
-   waitMs = the co-op host's cap waiting for the friend's choice. keep.npcP = chance a flipped NPC presses 'Giữ chân Hoàng thượng' at the
-   same moment as the players (it costs nothing; agent variety). */
+   waitMs = the co-op host's cap waiting for the friend's choice. (keep.npcP lives in BAL.steal.keep above.) */
 BAL.steal.choice={ms:10000,waitMs:90000};
-if(BAL.steal.keep.npcP==null)BAL.steal.keep.npcP=.85;
