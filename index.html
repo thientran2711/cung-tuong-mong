@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"f3dc59a3+","t":"2026-11-17T00:52Z","c":"Khung việc và khung sự kiện bốn cỡ, tranh lấp đầy khung, việc nhắc tên ai hiện chân dung người ấy; phẩm của món đồ nằm ngay trên viền khung…","b":"17c51e969c27","h":[{"s":"6f513340","t":"2026-11-16T23:24Z","c":"Vào game mới không còn bật ngay màn lật thẻ, lật thẻ chỉ khi vào buổi tối; dư đồ nhãn giấy mới; việc dài lấn sang buổi sau; lời trong cung …"},{"s":"7a18d957","t":"2026-11-16T22:44Z","c":"review-diemtrang-fx-r1 report"},{"s":"afe2bcbc","t":"2026-11-16T22:25Z","c":"review r1: KIT 84.1a note + report"},{"s":"dea1d445+","t":"2026-11-16T21:32Z","c":"golive lag-play-2: CHANGE line + site rebuilt"},{"s":"674f3af4","t":"2026-11-16T21:21Z","c":"Chơi cùng bạn: bạn chơi chung chưa gặp mặt nay hiện tên gọi chung “Hảo hữu của ta” ở mọi nơi, không còn ẩn thành dấu hỏi."},{"s":"923567d5+","t":"2026-11-16T21:03Z","c":"Hình nhân vật: hết vệt xám ở cổ và viền tối quanh người."},{"s":"59812a63+","t":"2026-11-16T20:41Z","c":"Khung chung: khoảng cách đều nhau ở sổ tuần và thẻ thân phận; hàng sổ gọn, thẻ lật không đè chữ."},{"s":"ab12d6fc","t":"2026-11-16T20:53Z","c":"Tuyết và đom đóm mới, mượt hơn; nền tranh không còn vẽ lại mỗi khung hình."},{"s":"8adfd886+","t":"2026-11-16T20:33Z","c":"Tư trang: các trang đều nhau, ô đồ đeo gọn trên Fold và iPad."},{"s":"b77d3250+","t":"2026-11-16T20:20Z","c":"Chơi cùng bạn: lời đáp Kỳ nguyệt sự của bạn đến kịp trước khi rút thẻ đêm; ghế đã đủ người báo gọn một lần."}]};
+window.CTM_BI={"s":"92685210+","t":"2026-11-17T00:53Z","c":"Khung việc và khung sự kiện bốn cỡ, tranh lấp đầy khung, việc nhắc tên ai hiện chân dung người ấy; phẩm của món đồ nằm ngay trên viền khung…","b":"1c12209a0793","h":[{"s":"6f513340","t":"2026-11-16T23:24Z","c":"Vào game mới không còn bật ngay màn lật thẻ, lật thẻ chỉ khi vào buổi tối; dư đồ nhãn giấy mới; việc dài lấn sang buổi sau; lời trong cung …"},{"s":"7a18d957","t":"2026-11-16T22:44Z","c":"review-diemtrang-fx-r1 report"},{"s":"afe2bcbc","t":"2026-11-16T22:25Z","c":"review r1: KIT 84.1a note + report"},{"s":"dea1d445+","t":"2026-11-16T21:32Z","c":"golive lag-play-2: CHANGE line + site rebuilt"},{"s":"674f3af4","t":"2026-11-16T21:21Z","c":"Chơi cùng bạn: bạn chơi chung chưa gặp mặt nay hiện tên gọi chung “Hảo hữu của ta” ở mọi nơi, không còn ẩn thành dấu hỏi."},{"s":"923567d5+","t":"2026-11-16T21:03Z","c":"Hình nhân vật: hết vệt xám ở cổ và viền tối quanh người."},{"s":"59812a63+","t":"2026-11-16T20:41Z","c":"Khung chung: khoảng cách đều nhau ở sổ tuần và thẻ thân phận; hàng sổ gọn, thẻ lật không đè chữ."},{"s":"ab12d6fc","t":"2026-11-16T20:53Z","c":"Tuyết và đom đóm mới, mượt hơn; nền tranh không còn vẽ lại mỗi khung hình."},{"s":"8adfd886+","t":"2026-11-16T20:33Z","c":"Tư trang: các trang đều nhau, ô đồ đeo gọn trên Fold và iPad."},{"s":"b77d3250+","t":"2026-11-16T20:20Z","c":"Chơi cùng bạn: lời đáp Kỳ nguyệt sự của bạn đến kịp trước khi rút thẻ đêm; ghế đã đủ người báo gọn một lần."}]};
 /* KBOOT — BOOT COVER (owner 15/11 "Khi vừa bấm vào game, có chừng ít hơn 1 giây hiện khung này"; KIT §14.1).
    Before: while the 4 MB page parsed, the browser painted the bare static markup of p1.html (HUD box, a vertical stat label list, empty
    panels, the old 11-tab bar) for ~1 s on a warm open and many seconds on a cold one, before any kit CSS/JS existed.
@@ -27565,7 +27565,12 @@ async function rx(ev){lastRx=Date.now();let m;
  else if(m.t==="week")set({C:m.state,week:m.week,ended:{a:false,b:false}});
  else if(m.t==="error"){if(m.code==="full"||m.code==="noroom"||m.code==="nopid"){want=false;LS.del("ctm-coop-room");if(pend){pend.rej({code:m.code,message:m.msg});pend=null}}}
  emit(m.t,m)}
-function connect(code){clearTimeout(tmr);if(ws){try{ws.onclose=null;ws.close()}catch(e){}ws=null}
+/* review/coop-stable: a socket dropped here while still CONNECTING can still reach the Worker AFTER its successor (slow proxy / network):
+   the Worker then "replaces" the live one with that abandoned twin (4001) and this device sat on "Ở máy khác" (guest: double join from
+   the ?room= link + "Vào phòng"; any reconnect while one was in flight). A 4001 within 30 s of abandoning our own socket is our twin:
+   reconnect once instead of giving the seat up. */
+let abandonAt=0;
+function connect(code){clearTimeout(tmr);if(ws){try{ws.onclose=null;ws.close()}catch(e){}ws=null;abandonAt=Date.now()}
  want=true;both=false;set({status:tries?"retry":"connecting",room:code});
  let s;try{s=new WebSocket(wsURL(code))}catch(e){return drop()}
  s.binaryType="arraybuffer";ws=s;
@@ -27573,7 +27578,7 @@ function connect(code){clearTimeout(tmr);if(ws){try{ws.onclose=null;ws.close()}c
  s.onmessage=rx;
  /* 4001 "replaced": the same seat (same pid, Sổ mây) was opened on another device / tab. Do not take it back (the two would steal the
     seat from each other and the stale one would write an old week copy): stop here; "Về màn đầu" › Trở lại phòng takes it back. */
- s.onclose=e=>{if(ws===s){ws=null;if(e&&e.code===4001){want=false;clearInterval(pinger);pinger=0;both=false;set({status:"moved"});emit("moved",{});return}drop()}};
+ s.onclose=e=>{if(ws===s){ws=null;if(e&&e.code===4001&&abandonAt&&Date.now()-abandonAt<30000){abandonAt=0;tries=0;connect(st.room);return}if(e&&e.code===4001){want=false;clearInterval(pinger);pinger=0;both=false;set({status:"moved"});emit("moved",{});return}drop()}};
  s.onerror=()=>{}}
 function drop(){clearInterval(pinger);pinger=0;both=false;
  if(!want){set({status:"closed"});return}
@@ -28282,6 +28287,10 @@ function syncRoom(m){if(!m||!CW.on||!S)return;try{const o=COOP.other();if(m.wher
 COOP.on("room",m=>{if(m.buoi!==undefined)CW.p2=true;CW.roomMsg=m;T("room "+m.week+"."+m.buoi+" sent "+CW.sent+" in "+CW.wkIn);if(!CW.on||!m.state)return;const C=m.state;
  /* reconnect: the merge happened while we were away → rebuild; otherwise keep the local week */
  if(CW.sent>=0&&m.week>CW.sent&&m.week!==CW.wkIn){onWeek({state:C,week:m.week});return}
+ /* review/coop-stable: her new character (first / reborn) whose `state` broadcast came while my socket was down rides only this snapshot:
+    place her now, as onState does (before: she stayed missing / under her old name on my side until the next week merge) */
+ const fP=C.P&&C.P[fs()],fe=CW.base&&S&&!S.dead&&!CW.inLife?(friendEntry()||rivals.flatMap(v=>v.staff||[]).find(isF)||null):undefined;
+ if(fe!==undefined&&fP&&!fP.dead&&(fe?fe.name!==fP.name:!friendHome(fP))){T("room: friend new "+fP.name);onState({state:C});syncRoom(m);return}
  if(!CW.base)CW.base=J(C);else{CW.base.P=J(C.P);CW.base.W=J(C.W)}syncRoom(m)});
 
 /* ---------- the night gate (review/coop-night-sync, owner rule "nobody runs ahead") ----------
@@ -28312,8 +28321,12 @@ CW.nReady=nReady;
 COOP.on("act",m=>{if(!m||m.k!==NK||!CW.on||m.from===CW.seat)return;T("nr "+m.mode+" "+m.week+" me "+wk());if(m.week!==wk())return;
  if(m.mode==="rd"&&host()){CW.nfr=m.week;if(CW.ngo===m.week)nsay("go");else nCheck()}
  else if(m.mode==="go"&&!host()){CW.ngoW=m.week;nCheck()}
+ /* review/coop-stable: the host came back (reconnect) and asks again; her rd sent while its socket was down was lost (both sat on "Chờ hảo hữu…") */
+ else if(m.mode==="q"&&!host()){if(CW.nrdy===m.week&&CW.ngoW!==m.week)nsay("rd")}
  lockNext()});
-function nResync(){if(!CW.on||!S)return;if(!host()&&CW.nrdy===wk()&&CW.ngoW!==wk())nsay("rd");if(host()&&CW.ngo===wk())nsay("go");nCheck()}
+function nResync(){if(!CW.on||!S)return;if(!host()&&CW.nrdy===wk()&&CW.ngoW!==wk())nsay("rd");if(host()&&CW.ngo===wk())nsay("go");
+ /* host back on a new socket at night, not gone yet: ask the guest for her ready again (a fast reconnect never shows the guest a peer drop, so she would not resend) */
+ if(host()&&CW.ngo!==wk()&&nAtNight()&&CW.nfr!==wk())nsay("q");nCheck()}
 COOP.on("room",()=>setTimeout(nResync,350));COOP.on("peer",on=>{if(on)setTimeout(nResync,350)});
 COOP.on("presence",()=>{if(CW.on){nCheck();lockNext()}});
 
@@ -28453,10 +28466,14 @@ let qT=0;function reshowQ(){qT=0;try{const M=$("modal");if(CW.on&&S&&Q.length&&M
  if(CW.on&&!S){Q.shift();if(Q.length)showModal();else{const m=$("modal");if(m)m.hidden=true}return}const r=f.apply(this,arguments);if(CW.on)soonEnd();return r}})();
 COOP.on("status",()=>{if(CW.on){lockNext();soonEnd()}});
 /* the rebirth / first-life flow: Luân hồi builds the life (nlRun), she accepts it (nlAccept) */
-if(typeof nlRun==="function"){const f=nlRun;nlRun=function(){const r=f.apply(this,arguments);try{if(CW.on){const C=CW.dying||CW.base;if(C)attach(C);CW.inLife=true}}catch(e){console.error(e)}return r};}
+/* review/coop-stable: the new life's throwaway world (start() inside nlRun) is built while she is already "in life": before, CW.inLife was
+   set only after it, so on the GUEST jcoopask's newRival gave its ~10 consorts temp ids (1001…) as persons she "made", attach()'s ser()
+   turned them into new-consort requests to the host, she kept them as ghost consorts the host never had, and a reborn cung nữ could be
+   given one of them as mistress (the host then never saw her: RV(mid) missing). */
+if(typeof nlRun==="function"){const f=nlRun;nlRun=function(){if(CW.on)CW.inLife=true;const r=f.apply(this,arguments);try{if(CW.on){const C=CW.dying||CW.base;if(C)attach(C);CW.inLife=true}}catch(e){console.error(e)}return r};}
 if(typeof nlAccept==="function"){const f=nlAccept;nlAccept=function(){const r=f.apply(this,arguments);try{if(CW.on&&CW.inLife&&S&&!S.dead){CW.inLife=false;if(CW.holdMe)CW.heldMe=true;else sendMe()}}catch(e){console.error(e)}return r};}
 /* a start() that bypasses Luân hồi (window.__nlInner): attach + send at once */
-(function(){const f=start;start=function(){const r=f.apply(this,arguments);try{if(CW.on&&window.__nlInner&&S&&!S.dead){const C=CW.dying||CW.base;if(C)attach(C);CW.inLife=false;sendMe()}}catch(e){console.error(e)}return r}})();
+(function(){const f=start;start=function(){if(CW.on&&window.__nlInner&&!CW.inLife)CW.inLife=true;/* same: her throwaway world never counts as hers */const r=f.apply(this,arguments);try{if(CW.on&&window.__nlInner&&S&&!S.dead){const C=CW.dying||CW.base;if(C)attach(C);CW.inLife=false;sendMe()}}catch(e){console.error(e)}return r}})();
 CW.toCanon=toCanon;CW.fromCanon=fromCanon;CW.friend=friendEntry;CW.sendEnd=sendEnd;
 /* co-op buổi clock (jcooptimer, KIT §69): read-only views + the one forced step it may take. forceBend = "Sẵn sàng" pressed for her when
    the buổi ran out: sends `bend` even with a dialog / mini game open (the room's step then waits for it: CW.pendBuoi, nothing is cut);
@@ -47069,7 +47086,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="17c51e969c27";window.CTM_BUILD=BUILD;
+const BUILD="1c12209a0793";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
