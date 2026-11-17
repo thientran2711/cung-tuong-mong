@@ -4,6 +4,8 @@
      every option's and ending's fields (canonical JSON, functions as "fn"), every odds o(A) on many seeded random lives (=== bit-identical),
      every go: closure run on seeded lives with the effect calls (relAdd, oanAdd, e67ally …) stubbed to RECORD their arguments (call logs ===),
      the rare-ending catalogue R97 (j97) and the route / story extras listed in EXTRA below.
+   r1 (reviewer): the seeded life now holds rivals / kids / S.tm96 (before, 81 go closures and 13 odds fns of j67/j96/roads threw on
+   every run and were never compared); every go run also compares S and A after the call; the coverage line counts runs that threw.
    usage: node dev/measure/arc-onecore-same.js [old-ref]   (from the repo root; prints the before/after table, exit 1 on any difference) */
 const fs=require('fs'),cp=require('child_process'),path=require('path'),os=require('os');
 const REF=process.argv[2]||'16d4925f50baca7dc1b19c708d1df332ed0b6051';
@@ -22,13 +24,13 @@ function DUMP(){const out={opt:{},end:{},odds:{},go:{},rare:{},err:[]};
  try{rv67=(A,k)=>V(k||'v');RV=id=>V('x'+id)}catch(e){out.err.push('stub rv67 '+e.message)}
  const ST=['th','duc','sung','danh','bac','suc','tamco','tai','mat','hh','sac','an','loy','tam','tin','age','rank'];
  const life=()=>{const s={arts:{y:Math.floor(R()*6),thi:Math.floor(R()*6),vu:Math.floor(R()*6)},st:{f14:{fb:{}},v2:1},ro:{},inv:[],logs:[],month:1,year:1,tuan:0,turn:5};
-  for(const k of ST)s[k]=Math.floor(R()*130)-15;if(R()<.3)delete s.mat;return s};
+  try{rivals=[{id:71,name:'R1',alive:true,enemy:R()<.8,queen:true,rank:8,rel:5,oan:20,ev:0,ro:{},kids:[]},{id:72,name:'R2',alive:true,enemy:true,rank:4,rel:0,oan:10,ev:1,ro:{},kids:[]},{id:73,name:'R3',alive:true,rank:2,rel:30,oan:0,ro:{},kids:[]}]}catch(e){};s.tm96={k:['a','b','c'][Math.floor(R()*3)],mid:'m1',h:Math.floor(R()*100),sus:Math.floor(R()*80),ev:Math.floor(R()*4),rise:Math.floor(R()*5),tok:1,v:1,f:{fade:R()<.5?1:0,amb:R()<.5?1:0}};s.kids=[{id:91,name:'K1',alive:true,tal:20,hp:70,age:6,sex:'m'},{id:92,name:'K2',alive:R()<.7,tal:5,hp:60,age:2,sex:'f'}];s.staff=[];s.men=[];s.facs=[];s.kc={fam:[]};s.visit={people:[]};for(const k of ST)s[k]=Math.floor(R()*130)-15;if(R()<.3)delete s.mat;return s};
  const FL=['obey','own','cold','keep','clean','pact','help','quiet','greed','deal','trust','fight','loyal','spy','brave','calm'];
  const AA=()=>{const f={};for(const g of FL)if(R()<.5)f[g]=1;return {f,sc:Math.floor(R()*5),act:{v:1,v2:2,hh:3},a:'x',i:0,hist:[],used:[]}};
  const S0=S;
  const walkO=(key,o)=>{out.opt[key]=canon(o);
   if(typeof o.o==='function'){const r=[];for(let t=0;t<60;t++){S=life();const A=AA();let v;try{v=o.o(A)}catch(e){v='ERR '+e.message}r.push(v)}out.odds[key]=r}
-  if(typeof o.go==='function'){const r=[];for(let t=0;t<6;t++){S=life();LOG=[];const A=AA();let v;try{v=o.go(A,t%2===0)}catch(e){v='ERR '+e.message}r.push([v,LOG])}out.go[key]=r}};
+  if(typeof o.go==='function'){const r=[];for(let t=0;t<6;t++){S=life();LOG=[];const A=AA();let v;try{v=o.go(A,t%2===0)}catch(e){v='ERR '+e.message}r.push([v,LOG,JSON.stringify(S),JSON.stringify(A)])}out.go[key]=r}};
  for(const id of Object.keys(ARC67).sort()){const a=ARC67[id];
   for(const bk of Object.keys(a.B||{}))(Array.isArray(a.B[bk].o)?a.B[bk].o:[]).forEach((o,i)=>walkO(`${id}.${bk}[${i}]`,o));
   for(const ek of Object.keys(a.E||{}))walkO(`${id}.E.${ek}`,a.E[ek]);
@@ -37,7 +39,7 @@ function DUMP(){const out={opt:{},end:{},odds:{},go:{},rare:{},err:[]};
  try{out.rare.__heatW=[...Array(101).keys()].map(h=>rtHeatW(h))}catch(e){out.err.push('heatW '+e.message)}
  for(const bk of Object.keys(GB67))(GB67[bk].o||[]).forEach((o,i)=>walkO(`G.${bk}[${i}]`,o));
  try{for(const id of Object.keys(R97)){const d=R97[id];out.rare[id]=canon(d);const r=[];for(let t=0;t<40;t++){S=life();const A=AA();let v;try{v=d.x&&d.x[0](A)}catch(e){v='ERR '+e.message}r.push(v)}out.rare[id+'.x']=r;
-  if(typeof d.go==='function'){const g=[];for(let t=0;t<4;t++){S=life();LOG=[];let v;try{v=d.go(AA())}catch(e){v='ERR '+e.message}g.push([v,LOG])}out.rare[id+'.go']=g}}}catch(e){out.err.push('R97 '+e.message)}
+  if(typeof d.go==='function'){const g=[];for(let t=0;t<4;t++){S=life();LOG=[];let v;try{v=d.go(AA())}catch(e){v='ERR '+e.message}g.push([v,LOG,JSON.stringify(S)])}out.rare[id+'.go']=g}}}catch(e){out.err.push('R97 '+e.message)}
  try{const L0=LOG;S=life();LOG=[];const call=f=>{try{return f()}catch(e){return 'ERR '+e.message}};
   out.rare.__j67rest=canon({Q:QUEST67,MS:Object.fromEntries(Object.keys(MS67).map(k=>[k,MS67[k].fx])),
    IT:['vangbac','bienvang','bienngu','ngocdungcao','nt_nhuy','nt_haiduong','nt_dongchau'].map(k=>IT[k]),
@@ -55,6 +57,7 @@ function DUMP(){const out={opt:{},end:{},odds:{},go:{},rare:{},err:[]};
  if(J(O.err)!==J(N.err))bad.push('dump errors differ '+J(O.err)+' → '+J(N.err));
  const nOdds=Object.values(O.odds).reduce((s,x)=>s+x.length,0),nGo=Object.values(O.go).reduce((s,x)=>s+x.length,0);
  console.log(`options+endings+arcs ${cnt.opt} (fields deep-equal) · odds fns ${cnt.odds} (${nOdds} trials ===) · go closures ${cnt.go} (${nGo} runs, call logs ===) · rare entries ${Object.keys(O.rare).length}`);
+ {let e=0,n=0,lg=0;for(const x of Object.values(N.go))for(const y of x){n++;if(String(y[0]).startsWith("ERR"))e++;if(y[1].length)lg++}let oe=0,on=0;for(const x of Object.values(N.odds))for(const y of x){on++;if(String(y).startsWith("ERR"))oe++}{const all=[];for(const [k,x] of Object.entries(N.go)){const er=x.filter(y=>String(y[0]).startsWith("ERR"));if(er.length===x.length)all.push(k+" "+er[0][0].slice(0,60))}const oa=[];for(const [k,x] of Object.entries(N.odds)){const er=x.filter(y=>String(y).startsWith("ERR"));if(er.length)oa.push(k+" "+er.length+" "+String(er[0]).slice(0,60))}console.log("ALLERR go",all.length,all.slice(0,40).join("\n"));console.log("odds err",oa.join("\n"))}console.log("go runs",n,"ERR",e,"withLog",lg,"odds",on,"ERR",oe)}
  console.log('page errors OLD',eo.length,'NEW',en.length,en.slice(0,3));
  fs.rmSync(tmp,{recursive:true,force:true});
  console.log(bad.length?'DIFFERENT ('+bad.length+'):\n  '+bad.slice(0,40).join('\n  '):'SAME: every value before = after');process.exit(bad.length?1:0)})();
