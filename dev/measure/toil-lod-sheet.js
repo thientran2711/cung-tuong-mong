@@ -1,37 +1,33 @@
-/* Look sheet of HER six looks at stage size, head + full-body rows, drawn by the game's own layer (toilMkLayer + LOD pass).
-   usage: node dev/measure/toil-lod-sheet.js <http://host:port/index.html> <out.png> [face c05] [tier t4]
-   Cells: Mặt mộc, Vụng A (white powder), Vụng B (gaudy; a seed where toilVungB is true), Đoan trang, Kiều diễm, Khuynh thành.
-   Vụng A / B are forced by SEED only (BAL odds untouched). Row 1 = portrait head zoom (full strength); row 2 = figure at real @2 px, head crop x3 smooth. */
-const {chromium}=require('playwright');const [,,URL,OUT,FACE='c05',TIER='t4']=process.argv;
-const LOOKS=[['Mặt mộc',null,0],['Vụng A',"vung",'A'],['Vụng B (diêm dúa)',"vung",'B'],['Đoan trang',"vua",0],['Kiều diễm',"dep",0],['Khuynh thành',"tuyet",0]];
-(async()=>{const b=await chromium.launch();const ctx=await b.newContext({viewport:{width:1500,height:1000},deviceScaleFactor:2,serviceWorkers:'block'});const p=await ctx.newPage();const errs=[];p.on('pageerror',e=>errs.push(e.message));
- await p.goto(URL,{waitUntil:'domcontentloaded'});await p.waitForFunction(()=>window.TOIL_FIT&&TOIL_FIT.fit&&window.MK_FIT&&window.toilMkLayer,null,{timeout:120000});
- const info=await p.evaluate(async([face,tier,LOOKS])=>{
-  const B=typeof IMG_BASE==='string'?IMG_BASE:'';document.body.innerHTML='';document.body.style.cssText='margin:0;background:#f4ead8';
-  let sA=0,sB=0;for(let s=1;s<400&&!(sA&&sB);s++){const t=toilVungB({seed:s});if(t&&!sB)sB=s;if(!t&&!sA)sA=s}
-  const por=`por-consort-${face}-${tier}-a18.webp`,fig=`fig-consort-${face}-${tier}-a18.webp`;
-  const mk=async(file,look,kind,i,fw)=>{const v=TOIL_FIT.fit[file];const asp=v?v[8]:1.3;const box=document.createElement('div');box.id=file.slice(0,3)+i;
-   box.style.cssText=`position:absolute;left:${10+i*240}px;top:${file[0]==='p'?10:300}px;width:${fw}px;height:${fw*asp}px;overflow:hidden;background:#fffaf0`;
-   box.innerHTML=`<img src="${B}img/${file}" style="position:absolute;left:0;top:0;width:100%;height:100%">`;
-   if(look){const col=toilColFix({seed:kind==="B"?sB:sA});let h="";for(let t=0;t<80&&!(h=toilMkLayer(file,look,col));t++)await new Promise(r=>setTimeout(r,250));
-    h=h.replace('style="','style="position:absolute;left:var(--fleft);top:var(--ftop);width:var(--fwidth);height:var(--fheight);');box.insertAdjacentHTML('beforeend',h)}
-   document.body.appendChild(box);return v};
-  const rows=[];for(let i=0;i<LOOKS.length;i++){const l=LOOKS[i];rows.push([await mk(por,l[1],l[2],i,230),await mk(fig,l[1],l[2],i,150)])}return{sA,sB,rows}},[FACE,TIER,LOOKS]);
- /* LOD pass (the game's own) + wait for every colour layer to be painted */
- await p.waitForTimeout(1500);await p.evaluate(()=>toilLodPass&&toilLodPass());
- await p.waitForFunction(()=>[...document.images].every(i=>i.complete&&i.naturalWidth)&&[...document.querySelectorAll('img.kmkc')].every(i=>!i.src.includes('data:image/gif')&&i.naturalWidth>2),null,{timeout:120000}).catch(()=>{});
- await p.evaluate(()=>toilLodPass());await p.waitForTimeout(2500);
- await p.waitForFunction(()=>[...document.querySelectorAll('img.kmkc')].every(i=>i.complete&&i.naturalWidth>2),null,{timeout:60000}).catch(()=>{});
- const shots=[];for(let i=0;i<LOOKS.length;i++){const v=info.rows[i];
-  const pb=await (await p.$('#por'+i)).screenshot();
-  /* portrait: crop the face zone; figure: head crop */
-  const hb=await p.evaluate(([i,v])=>{const e=document.querySelector('#fig'+i);const r=e.getBoundingClientRect();const w=r.width;const fx=r.left+v[0]/100*w,fy=r.top+v[1]/100*r.height;return{x:Math.max(0,fx-45),y:Math.max(0,fy-48),w:90,h:96}},[i,v[1]]);
-  const hs=await p.screenshot({clip:{x:hb.x,y:hb.y,width:hb.w,height:hb.h}});
-  const info2=await p.evaluate(i=>{const l=document.querySelector('#fig'+i+' img.kmkc');return l?{lod:(l.dataset.mkk||'').split('|L')[1]||'0',w:Math.round(l.getBoundingClientRect().width/1.6)}:null},i);
-  shots.push([pb.toString('base64'),hs.toString('base64'),info2])}
- const q=await ctx.newPage();await q.setContent(`<body style="margin:0;background:#f4ead8;font:700 15px sans-serif;color:#6e4d0e"><div id=g style="display:grid;grid-template-columns:repeat(6,250px);gap:10px;padding:10px">`+
+/* Game-driven stage sample of HER six looks (the game itself draws her figure + head, seed 7), like the approved v16 sheet.
+   Injects the LOCAL fit data (dev/art/toil-fit2.json + dev/art/mkfit/*.json) over the CDN ones. Vụng A / B are forced by SEED only (BAL odds untouched).
+   usage: node dev/measure/toil-lod-sheet.js <http://host:port/index.html> <out.png> [WxH@dpr = 755x1000@2]  (serve the built site: python3 -m http.server)
+   Row 1 = head crop x3 (smooth), row 2 = full-body stage figure at real size, labels with diacritics both rows. Prints her portrait file + fit row. */
+const {chromium}=require('playwright');const fs=require('fs');const path=require('path');const [,,URL,OUT,VP]=process.argv;const m=/(\d+)x(\d+)@([\d.]+)/.exec(VP||'755x1000@2');
+const ROOT=path.join(__dirname,'..','art');
+const LOOKS=[['Mặt mộc',null,7],['Vụng A',"vung",'A'],['Vụng B (diêm dúa)',"vung",'B'],['Đoan trang',"vua",7],['Kiều diễm',"dep",7],['Khuynh thành',"tuyet",7]];
+(async()=>{const b=await chromium.launch();const ctx=await b.newContext({viewport:{width:+m[1],height:+m[2]},deviceScaleFactor:+m[3],serviceWorkers:'block'});const p=await ctx.newPage();p.setDefaultTimeout(120000);const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,150)));
+ await p.goto(URL,{waitUntil:'domcontentloaded',timeout:0});await p.waitForFunction(()=>typeof start==='function'&&typeof toilMakeup==='function',null,{timeout:0});await p.waitForTimeout(1500);
+ const fit2=JSON.parse(fs.readFileSync(path.join(ROOT,'toil-fit2.json'),'utf8'));const mk={};for(const f of fs.readdirSync(path.join(ROOT,'mkfit')))if(f.endsWith('.json'))mk[f.slice(0,-5)]=JSON.parse(fs.readFileSync(path.join(ROOT,'mkfit',f),'utf8'));
+ await p.evaluate(()=>{try{localStorage.clear()}catch(e){}document.getElementById('title').hidden=true;new MutationObserver(()=>document.querySelectorAll('.kroul,#kload').forEach(e=>e.remove())).observe(document.body,{childList:true});start()});
+ await p.waitForFunction(()=>typeof S!=='undefined'&&S&&S.origin,null,{timeout:120000});await p.waitForTimeout(3000);
+ await p.evaluate(([fit2,mk])=>{TOIL_FIT.fit=fit2;for(const g in mk){MK_FIT.g[g]=mk[g];MK_FIT.ld[g]=1}},[fit2,mk]);
+ let sA=0,sB=0;({sA,sB}=await p.evaluate(()=>{let a=0,b=0;for(let s=1;s<400&&!(a&&b);s++){const t=toilVungB({seed:s});if(t&&!b)b=s;if(!t&&!a)a=s}return{sA:a,sB:b}}));
+ const cells=[];
+ for(const [name,look,sd] of LOOKS){
+  await p.evaluate(([look,seed])=>{Q.length=0;try{closeModal()}catch(e){}const c=toilColFix(null);c.seed=seed;if(look)S.toilette={day:toilWk()*10,wk:toilWk(),score:30,makeup:true,style:'fit',dv:'chinh',F:0,occ:[],look,col:c};else S.toilette=null;TOIL.prev=null;try{toilMkPre()}catch(e){}render()},[look,sd==='A'?sA:sd==='B'?sB:sd]);
+  await p.waitForTimeout(3500);try{await p.evaluate(()=>toilLodPass())}catch(e){}await p.waitForTimeout(1500);
+  const r=await p.evaluate(()=>{const f=document.querySelector('#mefig');const im=f&&f.querySelector('img');const fr=f&&f.getBoundingClientRect();const k=document.querySelector('.kfxf img.kmkc')||[...document.querySelectorAll('img.kmkc')].find(e=>e.getBoundingClientRect().width>0);const kr=k&&k.getBoundingClientRect();return{fig:fr&&[fr.left,fr.top,fr.width,fr.height],mk:kr&&[kr.left,kr.top,kr.width,kr.height],src:im&&im.getAttribute('src'),mkk:k&&k.dataset.mkk}});
+  cells.push([name,r]);}
+ console.log(JSON.stringify({sA,sB,first:cells.map(c=>c[1]),errs}));
+ const shots=[];let HEAD=null;for(let i of [1,0,2,3,4,5]){const r=cells[i][1];/* (re-render each look again for its own shot) */
+  const [name,look,sd]=LOOKS[i];await p.evaluate(([look,seed])=>{Q.length=0;const c=toilColFix(null);c.seed=seed;if(look)S.toilette={day:toilWk()*10,wk:toilWk(),score:30,makeup:true,style:'fit',dv:'chinh',F:0,occ:[],look,col:c};else S.toilette=null;TOIL.prev=null;render()},[look,sd==='A'?sA:sd==='B'?sB:sd]);
+  await p.waitForTimeout(3500);try{await p.evaluate(()=>toilLodPass())}catch(e){}await p.waitForTimeout(1500);
+  const g=await p.evaluate(()=>{const f=document.querySelector('#mefig');const fr=f.getBoundingClientRect();const k=[...document.querySelectorAll('img.kmkc')].find(e=>e.getBoundingClientRect().width>0&&e.closest('#mefig, .kfxf'));const kr=(k||f).getBoundingClientRect();return{fig:{x:fr.left,y:fr.top,w:fr.width,h:fr.height},mk:{x:kr.left,y:kr.top,w:kr.width,h:kr.height},step:k?(k.dataset.mkk||'').split('|L')[1]||'0':'-',facePx:k?Math.round(kr.width/1.6):0}});
+  const cl=(o,pad)=>({x:Math.max(0,o.x-pad),y:Math.max(0,o.y-pad),width:Math.min(o.w+2*pad,+m[1]),height:Math.min(o.h+2*pad,+m[2])});
+  if(!HEAD)HEAD=g.mk;const head=await p.screenshot({clip:cl(HEAD,HEAD.w*.15)});const body=await p.screenshot({clip:cl(g.fig,2)});shots[i]=([head.toString('base64'),body.toString('base64'),g]);}
+ const q=await ctx.newPage();await q.setContent(`<body style="margin:0;background:#f4ead8;font:700 15px sans-serif;color:#6e4d0e"><div style="display:grid;grid-template-columns:repeat(6,260px);gap:10px;padding:10px;align-items:start">`+
   LOOKS.map(l=>`<div style="text-align:center">${l[0]}</div>`).join('')+
-  shots.map(s=>`<div style="width:250px;height:300px;overflow:hidden;position:relative;border:1px solid #c9a227"><img src="data:image/png;base64,${s[0]}" style="position:absolute;left:0;top:-10px;width:250px"></div>`).join('')+
-  shots.map(s=>`<div style="width:250px;height:260px;overflow:hidden;border:1px solid #c9a227"><img src="data:image/png;base64,${s[1]}" style="width:250px;image-rendering:auto"></div>`).join('')+
-  shots.map(s=>`<div style="text-align:center;font-weight:400;font-size:12px">${s[2]?'figure face '+s[2].w+' px, LOD step '+s[2].lod:'original picture'}</div>`).join('')+`</div></body>`);
- await q.setViewportSize({width:1560,height:960});await q.waitForTimeout(500);await q.screenshot({path:OUT,fullPage:true});console.log(JSON.stringify({seedA:info.sA,seedB:info.sB,errs}));await b.close()})();
+  shots.map(s=>`<div style="border:1px solid #c9a227;height:300px;display:flex;align-items:center;justify-content:center;overflow:hidden"><img src="data:image/png;base64,${s[0]}" style="width:260px;image-rendering:auto"></div>`).join('')+
+  shots.map(s=>`<div style="border:1px solid #c9a227;height:420px;display:flex;align-items:center;justify-content:center;overflow:hidden"><img src="data:image/png;base64,${s[1]}" style="max-width:260px;max-height:420px"></div>`).join('')+
+  shots.map(s=>`<div style="text-align:center;font-weight:400;font-size:12px">face ${s[2].facePx} px, LOD step ${s[2].step}</div>`).join('')+`</div></body>`);
+ await q.setViewportSize({width:1660,height:900});await q.waitForTimeout(500);await q.screenshot({path:OUT,fullPage:true});console.log(JSON.stringify({errs}));await b.close()})();
