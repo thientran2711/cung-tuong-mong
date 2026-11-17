@@ -65,17 +65,25 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
   clr();S.month=BAL.world.phat.month;S.tuan=BAL.world.phat.t;tick();R.phat=!!worldWin("phat");
   /* aged maids → phóng cung nhân; they leave an NPC household */
   clr();S.month=BAL.world.phong.month;S.tuan=0;const st=v.staff=v.staff||[];const M=[];for(let i=0;i<BAL.world.phong.min;i++){const s={sid:9000+i,name:"Cung nữ thử "+i,role:"maid",age:BAL.srvAge.out+1,loyal:10,rk:1};st.push(s);M.push(s)}
-  const keep0=BAL.world.phong.npcKeep;BAL.world.phong.npcKeep=0;tick();BAL.world.phong.npcKeep=keep0;R.phong=!!worldWin("phong");R.phongLeft=M.filter(s=>st.includes(s)).length;
+  const keep0=BAL.world.phong.npcKeep;BAL.world.phong.npcKeep=0;{const sr=Math.random;Math.random=()=>.01;/* spring odds phong.p pass */try{tick()}finally{Math.random=sr}}BAL.world.phong.npcKeep=keep0;R.phong=!!worldWin("phong");R.phongLeft=M.filter(s=>st.includes(s)).length;
   /* đại hàn ends → đại phóng cung nhân at BAL ret.phongP (ONE path phongAfter, shared with trộm); phong cd and palace min respected */
   const aged=n=>{for(let i=0;i<n;i++)st.push({sid:9100+i,name:"Cung nữ già "+i,role:"maid",age:BAL.srvAge.out+1,loyal:5,rk:1})};const unAged=()=>{for(const s of st.slice())if(s.sid>=9100&&s.sid<9200)st.splice(st.indexOf(s),1)};
   const endK=(k,r)=>{clr();S.wwin.L=[];WW.inTick=1;const sr=Math.random;try{Math.random=()=>.999;/* start catches nobody, so the test maids stay */const w=worldStart(k,"thử",{force:1});Math.random=r!=null?()=>r:sr;worldEnd(w)}finally{Math.random=sr;WW.inTick=0}return !!worldWin("phong")};
+  const isAged=s=>s&&s.role==="maid"&&(s.age||0)>=BAL.srvAge.ask&&!s.eid&&!s.coop&&!((s.rk||0)>=3)&&s!==S.maid;
+  const poolN=()=>[S].concat(liveRivals(true)).reduce((n,x)=>n+(x.staff||[]).filter(isAged).length,0);
   const PR={};unAged();aged(BAL.world.phong.min);
   for(const k of ["ret","trom"]){unAged();aged(BAL.world.phong.min);const hit=endK(k,0);unAged();aged(BAL.world.phong.min);PR[k]={hit,miss:endK(k,.999)};let n=0;const N=1000;for(let i=0;i<N;i++){unAged();aged(BAL.world.phong.min);if(endK(k))n++}PR[k].rate=Math.round(n*100/N);PR[k].want=BAL.world[k].phongP;
    /* cd: phong just opened (last set) → a second end inside phong.cd opens nothing */
    unAged();aged(BAL.world.phong.min);endK(k,0);S.wwin.L=[];const last=S.wwin.last.phong;WW.inTick=1;const sr=Math.random;Math.random=()=>.999;try{const w=worldStart(k,"thử",{force:1});Math.random=()=>0;worldEnd(w)}finally{Math.random=sr;WW.inTick=0}PR[k].cd=last!=null&&!worldWin("phong");
    /* min: too few aged maids palace-wide → no empty release */
-   unAged();aged(1);const mn0=BAL.world.phong.min;BAL.world.phong.min=allServ().filter(s=>s&&s.role==="maid"&&(s.age||0)>=BAL.srvAge.out).length+1;try{PR[k].min=!endK(k,0)}finally{BAL.world.phong.min=mn0}}
+   unAged();aged(1);const mn0=BAL.world.phong.min;BAL.world.phong.min=poolN()+1;try{PR[k].min=!endK(k,0)}finally{BAL.world.phong.min=mn0}}
   unAged();R.phongAfter=PR;
+  /* aged maids only in a dead and a lãnh cung household (none in the pool) → spring calendar, trộm end and đại hàn end open nothing */
+  {const P=[S].concat(liveRivals(true));const saved=P.map(x=>(x.staff||[]).slice());for(const x of P)if(x.staff)x.staff=x.staff.filter(s=>!isAged(s));
+   const R2=rivals.filter(x=>x!==v).slice(0,2);const old=R2.map(x=>({x,alive:x.alive,out:x.out,staff:x.staff}));
+   if(R2[0]){R2[0].alive=false}if(R2[1]){R2[1].out=1}for(const x of R2){x.staff=(x.staff||[]).slice();for(let i=0;i<BAL.world.phong.min+1;i++)x.staff.push({sid:9300+i,name:"Cung nữ ngoài "+i,role:"maid",age:BAL.srvAge.ask+1,loyal:5,rk:1})}
+   const D={pool:poolN(),outside:R2.length};D.ret=endK("ret",0);D.trom=endK("trom",0);clr();S.month=BAL.world.phong.month;S.tuan=0;{const sr=Math.random;Math.random=()=>.01;try{tick()}finally{Math.random=sr}}D.cal=!!worldWin("phong");
+   for(const o of old){o.x.alive=o.alive;o.x.out=o.out;o.x.staff=o.staff}P.forEach((x,i)=>{if(x.staff)x.staff=saved[i]});S.wwin.L=[];R.phongDead=D}
   /* giới nghiêm: places closed for NPC plans and for her walk */
   clr();worldQueue("cam","thử");tick();R.cam=!!worldWin("cam");R.camPlan=worldPlanW(v).place.vuon;S.place="home";Q.length=0;S.confined=0;S.out=false;try{goTo("vuon")}catch(e){}R.camWalk=S.place;
   R.err=WW.err;return R});
@@ -96,6 +104,7 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
  ok(r2.thi,'calendar: khoa thi Đình',r2.thi);ok(r2.phat,'calendar: lễ Phật đản',r2.phat);
  ok(r2.phong&&r2.phongLeft===0,'aged maids → phóng cung nhân; they leave an NPC household',{o:r2.phong,left:r2.phongLeft});
  for(const k of ["ret","trom"]){const q=r2.phongAfter[k];ok(q.hit&&!q.miss&&Math.abs(q.rate-q.want)<=5&&q.cd&&q.min,`${k} ends → đại phóng cung nhân at BAL ${k}.phongP (one path; phong cd + palace min kept)`,q)}
+ ok(r2.phongDead.pool===0&&r2.phongDead.outside===2&&!r2.phongDead.ret&&!r2.phongDead.trom&&!r2.phongDead.cal,'aged maids only in a dead / lãnh cung household → no phóng cung (calendar, trộm, đại hàn)',r2.phongDead);
  ok(r2.cam&&r2.camPlan===0&&r2.camWalk==="home",'giới nghiêm: Ngự hoa viên closed for NPC plans and for her walk',{o:r2.cam,plan:r2.camPlan,walk:r2.camWalk});
  ok(r2.err===0,'no jworld errors (2)',r2.err);
  /* old save without the batch-2 keys */

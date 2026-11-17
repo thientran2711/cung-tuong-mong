@@ -168,18 +168,25 @@ EVD.trom={place:()=>"home",
   {n:"Lo lót Nội vụ phủ cho qua",fx:{bac:-b.bribe.bac},x:`kèm: Đức ${b.bribe.duc}`,go:()=>{meSet(w,"me","bribe");apply({duc:b.bribe.duc})}},
   {n:"Tự tra người của mình",fx:{},x:`thành: kẻ tham trong cung ngươi bị lôi ra, Đức +${b.self.duc}`,go:()=>{meSet(w,"me","self");apply({duc:b.self.duc})}}]})},
  night(){return false},pay:1};
-/* ---------- 13 ĐẠI PHÓNG CUNG NHÂN (row 13): maids at BAL.srvAge.out (j42 rule, ageing j17) leave every household at once (spring, or
+/* ---------- 13 ĐẠI PHÓNG CUNG NHÂN (row 13): maids at BAL.srvAge.ask (j42 rule, ageing j17) leave every household at once (spring, or
    after a trộm / rét); rich NPCs pay Nội vụ phủ to keep a good one; Nội vụ phủ refills (fillStaff) at the end. Her: send them off with silver,
    keep one, or let them go. */
-const aged=s=>s&&s.role==="maid"&&(s.age||0)>=BAL.srvAge.out&&!s.eid&&!s.coop&&!((s.rk||0)>=3)&&s!==S.maid;
-/* ONE path for "a world event ends → the Emperor reduces the palace" (trộm, đại hàn): roll the event's own BAL phongP, then the same
-   palace-wide min of aged maids as the spring calendar (an empty release never opens); worldStart keeps phong's cd / maxOpen / host gate. */
-const phongAfter=(p,cause)=>{if(roll(p)&&allServ().filter(aged).length>=B().phong.min)ws("phong",cause)};
+/* mãn hạn = the j42 rule she meets as a maid: at BAL.srvAge.ask Nội vụ phủ asks her to leave; a chưởng sự (rk >= 3) may stay as ma ma.
+   (srvAge.out 30 was never reached in a live household: NPC maids turn over or rise to rk 3 first — world-ret-phong r1 bot, 0 in 2700 tuần.) */
+const aged=s=>s&&s.role==="maid"&&(s.age||0)>=BAL.srvAge.ask&&!s.eid&&!s.coop&&!((s.rk||0)>=3)&&s!==S.maid;
+/* ONE pool for every phóng cung opener and for the release itself: her household + the living NPC households not in lãnh cung
+   (a dead or cold-palace household is never counted, so the gate never opens an empty release). */
+const phongHH=()=>liveR();/* liveRivals: alive and not in lãnh cung */
+const phongN=()=>[S].concat(phongHH()).reduce((n,v)=>n+(v&&v.staff||[]).filter(aged).length,0);
+/* ONE opener (spring calendar, trộm end, đại hàn end): the cause's own BAL odds (clamped BAL.odds.lo..hi), then phong.min aged maids in
+   the pool; worldStart keeps phong's cd / maxOpen / host gate. */
+const phongOpen=(p,cause,o)=>{if(roll(cl(p,BAL.odds.lo,BAL.odds.hi))&&phongN()>=B().phong.min)return ws("phong",cause,o);return null};
+const phongAfter=(p,cause)=>phongOpen(p,cause);
 EVD.phong={place:()=>"home",
- start(w){const b=B().phong;let n=0;for(const v of liveR()){const L=(v.staff||[]).filter(aged);if(!L.length)continue;let keep=null;
-   if((v.bac||0)>=b.keep.bac&&roll(b.npcKeep)){keep=L.sort((x,y)=>(y.loyal||0)-(x.loyal||0))[0];ap(v,{bac:-b.keep.bac})}
+ start(w){const b=B().phong;let n=0;for(const v of phongHH()){const L=(v.staff||[]).filter(aged);if(!L.length)continue;let keep=null;
+   if(L.length>=2&&(v.bac||0)>=b.keep.bac&&roll(b.npcKeep)){/* keep one only when another still leaves: a release is never empty */keep=L.sort((x,y)=>(y.loyal||0)-(x.loyal||0))[0];ap(v,{bac:-b.keep.bac})}
    for(const s of L)if(s!==keep){v.staff.splice(v.staff.indexOf(s),1);n++}}
-  w.x.n=n;w.x.mine=(S.staff||[]).filter(aged).length;return `Chiếu cho cung nữ mãn hạn xuất cung về quê; ${n} người ở các cung đã ra đi.${w.x.mine?` Trong cung ngươi có ${w.x.mine} người đến tuổi.`:""}`},
+  w.x.n=n;w.x.mine=(S.staff||[]).filter(aged).length;return `Chiếu cho cung nữ mãn hạn xuất cung về quê${n?`; ${n} người ở các cung đã ra đi`:""}.${w.x.mine?` Trong cung ngươi có ${w.x.mine} người đến tuổi.`:""}`},
  end(w){const b=B().phong;const me=meGet(w,"me")||"let";const L=(S.staff||[]).filter(aged);let keep=null;if(me==="keep"&&L.length)keep=L.sort((x,y)=>(y.loyal||0)-(x.loyal||0))[0];
   for(const s of L)if(s!==keep)S.staff.splice(S.staff.indexOf(s),1);
   for(const v of [S].concat(liveR()))try{if(v.staff&&typeof fillStaff==="function")fillStaff(v,true)}catch(e){}
@@ -268,7 +275,7 @@ function x2Tick(){if(!S||S.dead)return;const b=B(),z=wZ(),t=now(),y=S.year,m=S.m
  if(m===b.tinh.month&&tu===b.tinh.t&&!ww("cam"))ws("tinh","Sau Tết, gia quyến được vào cung thỉnh an",{len:b.tinh.len});
  if(m===b.phat.month&&tu===b.phat.t)ws("phat","Mồng tám tháng tư, lễ Phật đản",{len:b.phat.len});
  if(m===b.trom.month&&tu===b.trom.t&&allServ().some(greedy)&&roll(b.trom.p))ws("trom","Kiểm kê ngự khố cuối năm thấy thiếu hụt",{len:b.trom.len});
- if(m===b.phong.month&&tu===0&&allServ().filter(aged).length>=b.phong.min)ws("phong","Cung nữ mãn hạn, theo lệ cho xuất cung",{len:b.phong.len});
+ if(m===b.phong.month&&tu===0)phongOpen(b.phong.p,"Cung nữ mãn hạn, theo lệ cho xuất cung",{len:b.phong.len});
  /* the weather: heavy snow (rollWx f 4) in `run` of the last run+1 tuần */
  z.snowL=(z.snowL||[]).concat(S.wx&&S.wx.f===4?1:0).slice(-(b.ret.run+1));z.snowR=z.snowL.reduce((a,c)=>a+c,0);if(S.wx&&S.wx.f===4&&z.snowR>=b.ret.run)ws("ret","Tuyết lớn nhiều tuần liền, than sưởi không đủ",{len:b.ret.len});
  /* the court: a house too strong (monthly) */
