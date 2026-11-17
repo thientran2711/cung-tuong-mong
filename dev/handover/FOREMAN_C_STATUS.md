@@ -1,5 +1,4 @@
 # FOREMAN_C_STATUS (written ONLY by Foreman C)
-<<<<<<< HEAD
 NEXT FOREMAN C SESSION: ROOT-7 = (to be opened by the OWNER/main from claude.ai — ROOT-6 is at depth 5, a child would be depth 6 → not allowed). Takeover prompt: dev/handover/TAKEOVER_FOREMAN_C_ROOT7.md. ROOT-6 keeps answering (wake trig_017VztNAuLezGyK58FczkjRw :32) until ROOT-7 says it took over, then disables its trigger and stops.
 ## HANDOVER (Foreman C ROOT-6 session_011xDdVQNdyTACuGN42yEBQZ → ROOT-7, ~13:05Z 17/11)
 Why: context ~32% (START ~8% → limit 33%). OWNER now writes in the ROOT-6 chat (old ROOT chat session_011xDdVSwTjDmQyniASgFZyk relayed earlier lines). Read the ROOT-6 log lines below (12:16Z–13:04Z): they hold her verbatim lines of 12:19Z–13:04Z.
@@ -60,8 +59,6 @@ REQUEST to main (C ROOT-6 12:25Z): (1) log the 4 owner lines above in OWNER_DECI
 - 12:16Z(wall) W8 ack: live 66/520, m11–m13 generating (sheet next). W-C partial 50bd7eb (quests j72 asker voice 240 lines; tests PASS); C ruled bespoke event beats = ONE tone-keyed lead-in pool for named-speaker beats, hand-written narration kept.
 - 12:25Z(wall) ROOT-6 took over (own wake trig_017VztNAuLezGyK58FczkjRw :32); told lead #7, W4f, W8, W-A, W-B, W-C that ROOT-6 is their foreman (delivered). Waiting: W-A HANDOVER DONE → open W-A2.
 
-=======
->>>>>>> 942503ed (report voice-trait part 1 (engine + 5 situations, split proposal))
 NEXT FOREMAN C SESSION: ROOT-5 = session_011xDdVSQvhH4vp7H6B7arST (opened by ROOT-4 ~10:25Z 17/11, depth 4). ROOT-4 stops; its trigger trig_01Tgrv9ofbb5dfhkqZNjzAdk disabled.
 ## HANDOVER (Foreman C ROOT-4 session_011xDdVSQC3Gf8WhM6WW38QF → ROOT-5, ~10:25Z 17/11)
 Why: context 31.6% (used_tokens 316k; START_CTX ~6% → limit 31%). Depth 3 → successor depth 4 (allowed). Read: this block + the ROOT-4 log lines below it (08:38Z–10:22Z); CLAIMS rows 'C ROOT-4' + W4e/W5d/W6f rows.
@@ -80,11 +77,8 @@ Push helper /home/user/wt/push.sh (commits dev/handover in /home/user/wt/c4).
 REQUEST to main (FOREMAN C ROOT-4 10:24Z): AG3 LIVE 7e264081. Reviewer follow-ups (not blocking, report review-npc-agent-ag3-r1.md): (A) AG3b — NPC maid tea/errand/feast deeds not in the ledger at place/khắc (owner's own OD 18:20Z example) → recommend as next AG item; (B) maid-life NPC consorts ill 15–18% of nights vs ~5% → audit srvMonth/srvEndTurn vs monthTick/endTurn; (D) "lòng 45" typed number → BAL. Say which C takes (C can run them after the s30 queue).
 
 FOREMAN C SESSION ROOT-5 = session_011xDdVSQvhH4vp7H6B7arST (opened by ROOT-4 ~10:25Z 17/11) · START_CTX ~7% (~70k of 1M; get_session reads 0, own estimate) → roll over at >= 32%, ceiling 60% · lineage depth 4/8 · own hourly wake (:32) below.
-<<<<<<< HEAD
 - 12:14Z(wall) C LOOKED W4f a51 ty1 m01–m08 age redo: overshot (60+, mostly grey) → redo all 8 to CT15 age (~50–55, dark hair + silver at temples) + colours m02 deeper saffron-gold, m05 crimson-rose, m06 rosy salmon. W-A RM5y at its rollover line (35%) → told to write handover; C opens W-A2.
 - 12:10Z(wall) VOICE part 1 SẴN SÀNG 4ed80a06 (engine kTone + jtone.js 5 situations; voice-trait.js PASS; QUICKCHECK PASS) → split accepted: W-A = RM5y (kOutcome + greet gmOpts + final build/report), W-B session_011xDdVNoZ7Yx3TZUQQfZipd (toil/wd/staff/cycle/ts/HABIT, jtone_b.js), W-C session_011xDdVRjiWzLX321cWLkeV2 (events kSay + voice-rep, jtone_c.js); brief briefs/voice-trait-writers.md. Review after W-A's final SẴN SÀNG. W4f a36 m22 ty2/ty3 OK + live.
-=======
->>>>>>> 942503ed (report voice-trait part 1 (engine + 5 situations, split proposal))
 - 11:48Z(wall) C LOOKED W4e CT15 a51 ty1 m09–m24 (age-corrected): 15 OK; m09-ty1 check vs other ages (copper-bronze?). CT14 8 live. W4e rolling → lead #7 opens W4f (open: a51 ty1 m01–m08 age redo, m22-ty3-a36 pinned hex, a51 ty1 m25–m26, a51 ty2/ty3).
 - 11:38Z(wall) VOICE BY TÍNH TÌNH → sonnet worker session_011xDdVRM5yu7W5UoCp4jMmC (review/voice-trait; brief briefs/voice-trait.md; may ask to split line writing by situation). Main s30 queue (greeting → AG-MEET → voice) now all started.
 - 11:36Z(wall) GREET-MEET PASS 65dcf52f (review-greet-meet-r1.md; QUICKCHECK PASS, coop-e2e 62/62, gmTick p95 1.1 ms) → C fast-forwarded main 7e264081..65dcf52f (FF-only, flock). Reviewer R96B + worker PQEB ARCHIVED. Not blocking (owner's call later): only consorts approach her; maids/eunuchs/men don't yet. Knob BAL.greet.meet.stay.

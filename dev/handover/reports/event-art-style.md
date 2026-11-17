@@ -930,7 +930,4 @@ JOB 3 redos LIVE (C OK 08:03Z): img/ev-vlnvp.webp u5YUjJNQLD (silk bolts, no swa
 Review sheets (CDN img/_review/thanhtai/s1,s2,s3) can be wiped with the verdict (cdn_sync.py --wipe-review thanhtai).
 Wiring NOT done by art: game still loads single img/scene-thanhtai.webp (jlevel.js:13); a coder must map ARTS (j1.js:61) + VIR (j85.js:9) keys -> img/scene-thanhtai-<k>.webp (KIT_REQUESTS if a kit part is missing). Acts untouched (OD:L84). Credits: ~19 pictures x 40.
 HANDOVER: none needed (stopped at ~15% context). ~100% art done / ~0% chơi được until wiring.
-<<<<<<< HEAD
 LIVE dark-fix (Foreman C ROOT-6 OK 12:26Z, INTERIM): 11 dark keys (ev-am-muu, ev-e68-{stormnight,poisonedfish,bordernews,hhsummons,leakroof,rumoremplove,rumorfavor,rumorpreg,rumorth,spoiledfood}) replaced by -FIX (LAB lightness lift to mean 72, chroma x1.3, S-curve; no repaint). Sheet img/_review/event-art-style2/dark-fix/ALL11.jpg. To be REPAINTED later (big foreground figures vs owner's newer back/distant-only rule) by worker session_011xDdVSTVyLVuATNYT3izSd.
-=======
->>>>>>> 942503ed (report voice-trait part 1 (engine + 5 situations, split proposal))
