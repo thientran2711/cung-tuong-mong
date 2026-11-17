@@ -769,3 +769,4 @@
 | WORLD EVENTS research batch 2 (sonnet expert, OD:L1327) | dev/research/world-events-2.md | C-AG | session_01UV1SzgePPmEtCBw9hECcZR | RUNNING | 17/11 13:22Z |
 | narrow-T3 kit: 412/390 T3 narrow mode + 1-col cards + dup option list (from opt-pic-same-r2 review item 1) | review/narrow-t3 | MAIN s31 | session_01UV1SzgsQDt2y7LHaYSDb8g | RUNNING | 17/11 13:22Z |
 | BATCH s31a builder (opus): presentation-wiring-r1 + fig-headtop-r1 IN; kit-ico-rank HELD (co-op rebirth 61/63); report reports/batch-s31a.md; ROLLED OVER | review/batch-s31a | MAIN s31 | session_01UV1SziPrputLM5qYtCL6zH | BATCH READY c29866a6 | 17/11 14:30Z |
+| BATCH s31a LIVE: main = c29866a6 (FF from 6ca04148 by MAIN s31 after LOOK; presentation-wiring-r1 + fig-headtop-r1; kit-ico-rank HELD co-op rebirth) | main | MAIN s31 | session_01UV1SzhZw2hHEAf6bi644Jn | LIVE | 17/11 13:27Z |
