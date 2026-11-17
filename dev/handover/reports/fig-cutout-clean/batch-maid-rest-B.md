@@ -148,3 +148,12 @@ maid-m35-ngheo-a18	eIyEQbLdqL	N2H0VSQ6D9	ok
 maid-m35-t1-a18	YMs8tfIWeC	4RQW0S89Aa	ok
 maid-m35-t2-a18	WDlImEMcXe	O6CzYlUynm	ok
 maid-m35-t3-a18	Xm4QHrlBfo	LwoNi1gswO	ok
+maid-m35-t4-a18	5jM7OORKxe	eIyEQindqL	ok
+maid-m35-t5-a18	MB7aCEsDCm	SymR2QtUb8	ok
+maid-m35-t6-a18	dtPuFqsXSL	vQ21xVxa47	ok
+maid-m35-t7-a18	s78632Gl8e	jUB96uULD0	ok
+maid-m35-t8-a18	kspOP6A16B	Xm4QHWMBfo	ok
+maid-m35-tm0-a18	SymR2Y2Ub8	EbnLlIGuuO	ok
+maid-m35-tm2-a18	SymR2WAUb8	kspOPFl16B	ok
+maid-m35-tm3-a18	eIyEQkgdqL	6AqTMyliJO	ok
+## 136 a18 done through maid-m35-tm3-a18. NEXT = maid-m35-tm4-a18, then m36 (a18 list line 137+). LOOKALIKE check pending for several t5-t8 files that kept ornate headdresses.
