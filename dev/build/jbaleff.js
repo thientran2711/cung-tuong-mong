@@ -10,7 +10,7 @@ Object.assign(BAL,{eff:{
  j10:{evPlantServ:1,evServMonth:1,evServMonth_2:1,evServAct:1,evServAct_2:1,evSellOut:2,evDivide:1,loyalServCaught:10,loyalServMonth:1,loyalServAct:12,loyalServAct_2:15,loyalServAct_3:20,meCourtAct:10,meCourtAct_2:1},
  j13:{hpEpidemic:40},
  j14:{coldMonth:40,evSearchMaids:2,loyalServRanks:5},
- j2:{start:35,go:9,go_3:-20,run:-15,evRun:1,evGo:1,evGo_2:1,fondGo:8,hpGo:30,hpGo_2:25},
+ j2:{go:9,go_3:-20,run:-15,evRun:1,evGo:1,evGo_2:1,fondGo:8,hpGo:30,hpGo_2:25},
  j21:{top:-3,meTop:1},
  j22:{evGo:1,evAffairMonth:3,evAffairMonth_2:2,evTop:2,evTop_2:3,evTop_3:2},
  j23:{evTop:1,talArtMonth:1},

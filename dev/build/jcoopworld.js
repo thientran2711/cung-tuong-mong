@@ -988,7 +988,7 @@ PEND.thBribe=pp=>{if(!pp||!isSrvMe())return null;const mis=srvM(),B=BAL.coopBrib
  const ans=r=>{const m=Object.assign({rid:pp.rid,o:pp.o},r);otherSide(()=>briberRes(m),"briber",m,pp.lf)};
  return {t:`<p>Một thái giám của <b>${nm}</b> chặn ngươi ở hành lang, dúi vào tay ngươi một túi bạc: “Chủ tử nhà ta muốn biết chuyện trong cung ${mn}.”</p>`,o:[
   {n:"Nhận bạc, làm tai mắt",fx:{bac:pay},x:cnvSpyX(mis),go:()=>{S.srv.spyFor=fp();ans({ok:1})}},
-  {n:"Từ chối, bẩm chủ",fx:{tin:B.tin},x:`${mn} nắm 1 chứng cứ của ${nm}`,go:()=>ans({told:1})},
+  {n:"Từ chối, bẩm chủ",fx:{tin:B.tin},x:`${mn} nắm ${balAb(BAL.eff.jcoopworld.evBriber)} chứng cứ của ${nm}`,go:()=>ans({told:1})},
   {n:"Từ chối, im lặng",fx:{},x:"trả lại bạc",go:()=>ans({})}]}};
 CW.dInit=function(T){
  /* B r2: every D work into the other player's context, as data (jcoopthin D.kind): the card kinds and their answers */
