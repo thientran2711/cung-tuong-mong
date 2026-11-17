@@ -291,11 +291,7 @@ function rtNpcMeet(){if(!rtRoad()||!rtNight()||Q.length)return;const T=rtS();for
 (function(){const o0=over;over=function(h,t,fate){try{if(S&&!S.dead&&!(S.rt&&S.rt.exposed)&&rtKidsAlive().some(k=>k.tf))rtEnd("tt_kin")}catch(e){}return o0.apply(this,arguments)}})();
 /* ---------- Mệnh truyện: the route chapters; Sổ luân hồi: endings met ---------- */
 function rtRows(L){return typeof rows67==="function"?rows67(L):`<div class="pcb rows">${L.map(r=>`<div class="pcrow"><span>${r[0]}</span><span>${r[1]}</span></div>`).join("")}</div>`}
-<<<<<<< HEAD
-function rtStoryHTML(){if(!S||!S.rt||S.rt.open==null)return"";const T=S.rt;const ck=(t,ok)=>(ok?"✓ ":"✗ ")+t;let h="";const on=[T.tt&&"Tư tình",T.tc&&"Trốn khỏi cung",T.ad&&T.ad.on&&"Ẩn dật"].filter(Boolean);
-=======
-function rtStoryHTML(){if(!S||!S.rt||!S.rt.open)return"";const T=S.rt;const ck=(t,ok)=>[!!ok,t],ckL=L=>typeof kitChecks==="function"?kitChecks(L):L.map(y=>(y[0]?"✓ ":"✗ ")+y[1]).join("<br>");/* kit §46 kitChecks rows (tut-followups: no typed ✓/✗ lines) */let h="";const on=[T.tt&&"Tư tình",T.tc&&"Trốn khỏi cung",T.ad&&T.ad.on&&"Ẩn dật"].filter(Boolean);
->>>>>>> origin/main
+function rtStoryHTML(){if(!S||!S.rt||S.rt.open==null)return"";const T=S.rt;const ck=(t,ok)=>[!!ok,t],ckL=L=>typeof kitChecks==="function"?kitChecks(L):L.map(y=>(y[0]?"✓ ":"✗ ")+y[1]).join("<br>");/* kit §46 kitChecks rows (tut-followups: no typed ✓/✗ lines) */let h="";const on=[T.tt&&"Tư tình",T.tc&&"Trốn khỏi cung",T.ad&&T.ad.on&&"Ẩn dật"].filter(Boolean);
  const rows=[["Lối riêng",on.length?on.join(" · "):"đã mở nhóm «Lối riêng» ở Hành sự"],["Lời ra tiếng vào",`${rtHeatW(T.heat)} (${T.heat}/100)`,T.heat>=60?"r":""]];
  const why=rtWeary();if(why.length)rows.push(["Cớ chán cung",why.join("; ")]);
  const m=rtMan();if(T.tt&&m)rows.push([`Tư tình · ${rtMnm(m)}`,ckL([ck("để ý y",1),ck("trao tín vật",T.tt.tok),ck(`hẹn gặp lén (${T.tt.meet||0} lần)`,T.tt.meet>=2),ck("đêm riêng",T.tt.night),ck("y hứa đưa ngươi đi",T.tt.st>=4)])]);
