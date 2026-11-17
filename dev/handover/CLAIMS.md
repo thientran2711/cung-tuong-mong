@@ -901,10 +901,11 @@
 | kit-rank-name r1 PASS a4ccfc74 (+scan fix 188f63c9) → rebase → builder batch; reviewer archived | review/kit-rank-name-land | MAIN s35 | session_01UV1SzgiSj7gRNYszv9YgxE | PASS → BATCH | 17/11 18:20Z |
 | REVIEW mirror-center r1 of ad226ed0 (sonnet SMALL) | review/mirror-center-r1 | MAIN s35 | session_01UV1SziReys4L5kSo9SXu1s | FAIL ad226ed0 | 17/11 18:25Z |
 | MOOD-MEM memory 2 layers + ghen feeling label (opus; OD L1678 (b)(g); after ag-moodknow) | review/mood-mem | C-AG | session_01UV1SzgwGeesPrLKFMeBNdz | RUNNING | 17/11 18:27Z |
-| WX-ANIM weather animation audit + fill + no 2nd icon (sonnet; OD L1678 (h)(i)) | review/wx-anim | C-AG | session_01UV1Szj67Gao9H4xeEuLrY9 | RUNNING | 17/11 18:27Z |
+| WX-ANIM weather animation audit + fill + no 2nd icon (sonnet; OD L1678 (h)(i)) | review/wx-anim | C-AG | session_01UV1Szj67Gao9H4xeEuLrY9 | DONE be36f27 (archived) | 17/11 18:27Z |
 | day-khac review ROUND 2 (opus BIG, successor reviewer) of 9e7ddc14 | review/day-khac-audit-r1 | D | session_01964izEHVzU6h14EnvhUm8C | RUNNING | 17/11 18:30Z |
 | DISPLAY ROOM kit UI (owner option 1, OD ~18:33Z (3)): full-screen room, shelves 2×6 / 1×12, per-shelf tư trang drawer filtered by group — kit part for C-AG display-shelf builder | review/kit-display-room | MAIN s35 | session_01UV1SzisVVpBnxyKZsxjCfY | RUNNING | 17/11 18:34Z |
 | REVIEW hoa-dien fa483a8ed delta on makeup-lux (opus BIG; brief briefs/review-hoa-dien.md) | review/hoa-dien-r1 | B | session_01N1tNP4LhhQaE7j3FQW5NGV | RUNNING | 17/11 18:40Z |
 | REVIEW ag-all-2 r2 (opus BIG) of 6badc4d4 | review/ag-all-2-r2 | C-AG | session_01UV1SzibgyTxRDxLdJ5yW6t | RUNNING | 17/11 18:36Z |
 | DISPLAY SHELF builder #2 (opus): 70 items + OD L1678 (d) + rebase → SẴN SÀNG KIỂM | review/display-shelf | C-AG | session_01UV1Szj9tDw8PAVnkXJ7CYJ | RUNNING | 17/11 18:41Z |
 | REVIEW kit-fx-register r1 of 893b3f45 (sonnet SMALL; brief briefs/s36-review-kit-fx-register.md) | review/kit-fx-register-r1 | MAIN s36 | session_01UV1SzjbQtX54oMDpW6uSfe | RUNNING | 17/11 18:44Z |
+| REVIEW wx-anim (sonnet SMALL) of be36f27 | review/wx-anim-r1 | C-AG | session_01UV1SzjfdPe1XaTKj3NacXr | RUNNING | 17/11 18:51Z |
