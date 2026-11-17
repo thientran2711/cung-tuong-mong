@@ -20,3 +20,14 @@ tuyet react rows / ghenTuyet 1 / crowd trigger are the 71d804787 values; Khuynh 
 
 ## Data on CDN
 Still HELD (dev/art/mkfit + toil-fit2.json are valid in git, not on CDN) - owner hold until Foreman C repaint. Until the CDN has the new mesh, production loads the OLD data; the reveal now waits for it and draws no lip oval, so the chin patch cannot appear.
+
+## looks3 - review/toil-looks2 d4b4e7440 (worker sonnet, her FINAL words OD 17/11 ~13:08Z)
+PRIORITY #1 CHECK: OD 17/11 ~13:08Z (overwrites 13:05Z) | reused jtoil.js toilMkDraw / TOIL_MKS (no new file) | review/toil-looks2 43b9a8b6 base.
+- ROOT of the spill: the cheek blush / skin light / glow were an UNMASKED SVG layer (huge discs, hard stop) laid over the picture box, so they covered the eyes/iris and landed on hair and background. FIX: for every face with a mesh the SVG layer is gone; skin light, blush, luminous spots and white powder are painted in the canvas colour layer and CLIPPED to a skin mask (colour close to her own cheek skin, sampled from the picture; eyes cut out, dilated). Eyelid colour and shimmer use a looser skin mask (never on hair/background). Blush is placed from the mesh (below the eyes, between eye and mouth), sized in eye-distance units. Layer box widened (30 %) to hold the cheeks. Mesh-less faces keep the old SVG (rare).
+- (1) Vung ve: small uneven blotches + 6 white powder dabs on the cheeks (the two pale streaks removed from Khuynh thanh are now this), lips/eyes soft as before.
+- (2) Doan trang light (eye .24 lip .30 blush .12) / Kieu diem fuller (eye .85 lip .74 blush .42, wing, lower lash) / Khuynh thanh: luminous skin lift .36 + two ROUND soft cheekbone lights (no streaks), blush .27, elegant eye .8 + champagne shimmer, lip sheen = soft ellipse clipped INSIDE the lower lip (no white bar, no teeth look).
+- (3) Diem dua: lips .74 -> .86; blush smaller/cleaner, clipped; rest unchanged. Mat moc unchanged (no layer).
+- Her 8 colours still drive every level (ma/son/mat/may; cache key now includes ma).
+- Samples (real renderer, 755x1000@2, c07-t3-a18 + c31-ty2-a18, Ho phach warm + Lan tuyet cool, 6 panels, LOOKED at both): https://ctm-img.victoria-tntt.workers.dev/img/_review/toil-looks/toil-looks-1.png?v=3 and -2.png?v=3
+- Gates: mk-layer-scan 12960 pictures 0 bad; toil-tease 25/25; toil-react PASS; toil-overlay 33 checks 0 bad; toil-allday PASS 10; toil-draw 0 bad; quickcheck PASS 158 s (render 193/231 ms).
+- Note: svg ellipse-count scan unchanged (SVG path kept for mesh-less faces). Data still HELD on CDN (mesh), as before.
