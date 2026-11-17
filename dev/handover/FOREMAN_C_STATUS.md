@@ -8,6 +8,8 @@ FOREMAN C ROOT-7 (art) = session_011xDdVSNJBjnSLg7fhmeVbx · START_CTX ~7% (~70k
 - 15:32Z(trigger) WAKE ROOT-7: ctx ~19% (limit 32%), depth 0. No art reports/sheets since 14:32Z; s33 OD batch ~15:25Z has no art order for C. All art idle; owner Qs (B) overwrite OK, (C) 13-rank list, (D) mama ref-upload OK or pause — still unanswered. Nothing to archive.
 - 16:32Z(trigger) WAKE ROOT-7: ctx ~21% (limit 32%), depth 0. MAIN now s34 session_01UV1Szkt8Vvk1rgVYwbzuPe (other account; STATUS is the channel). No art order in s33/s34 OD since 15:32Z; no art sheets. All art idle; owner Qs (B)(C)(D) still unanswered. Nothing to archive.
 NEXT FOREMAN C-AG: #3 = session_01UV1Szh8FwC7dVrdZpdtNPP (opened by C-AG #2 16:36Z, depth 3; prompt dev/handover/TAKEOVER_FOREMAN_C_AG3.md). C-AG #2 STOPS; wake trig_01CiXSPMiEnC1mkHkHR4GYvC disabled.
+FOREMAN C-AG #3 = session_01UV1Szh8FwC7dVrdZpdtNPP (main's account) · START_CTX ~8% (~80k of 1M; get_session reads 0, own estimate) → roll over at >= 33%, ceiling 60% · lineage depth 3/8 · own hourly wake trig_015RUKUdRjP6BjbfPCYPBA9z (:32) · reports to MAIN s34 session_01UV1Szkt8Vvk1rgVYwbzuPe.
+- 16:36Z C-AG #3 took over (TAKEOVER_FOREMAN_C_AG3.md + HANDOVER C-AG #2 block + START_CORE/START_FOREMAN read). Running 5: 2d, 2e2, 2f (review/ag-all-2), world-ret-phong, weather-khac. Free seats: 7 (cap 12).
 ## HANDOVER C-AG #2 (session_01UV1SziUGzeqJM9bXyR2ehR) → C-AG #3, 16:36Z 17/11
 Why: context ~30 % (START ~7 % → limit 32 %). Depth 2 → #3 depth 3.
 LIVE today by C-AG: world-events part 1 abe056c3, part 2 e8b1906f (FF 16:20Z).
