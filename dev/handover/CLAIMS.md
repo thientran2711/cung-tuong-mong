@@ -552,3 +552,5 @@
 | presentation-wiring (sonnet): remaining jpres animations S3-151/182/205, entrance edict S3-152 (owner-bug-sweep) | review/presentation-wiring | main s28 | session_01UV1SziPP4d9141LvjeJ4wM | RUNNING | 17/11 02:40Z |
 | save-dlg-fix (sonnet kit keeper; OWNER BUG 02:47Z 'Lỗi tùm lum' Chọn sổ: squeezed column, letter-by-letter buttons, '???' life title, cut picture; whole family: picture+info dialogs, no word breaks in any button) | review/save-dlg-fix | main s28 | session_01UV1SzhRZF6zDmg7pUydbUm | RUNNING | 17/11 02:44Z |
 | wx-fx-size (sonnet; OWNER BUG 03:08Z petals too big + over text; whole family of weather particles/bursts, inside the stage only) | review/wx-fx-size | main s28 | session_01UV1SzjkM9jo2gPxyFWVcaP | RUNNING | 17/11 02:53Z |
+| WHOLE FIGURE REPAINT batch W5c maid-rest-A (successor of W5b session_011xDdVRUq5KAtiVYtgqEjkS, archived; opened by lead #6) | review/fig-cutout-clean | C | session_011xDdVPuKQaYeJ9rNmE133Y | RUNNING | 17/11 02:55Z |
+| npc-agent AG1 r1-fix #2 review (opus BIG) of d4796840 (review/npc-agent-r1 tip 55acd2d6) | review/npc-agent-r1 | C | session_011xDdVRyN4EWAMkVGeM4BB3 | RUNNING | 17/11 02:53Z |
