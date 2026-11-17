@@ -5,7 +5,7 @@
      and BAL.ag.on=0 brings it back
    3 the deed lands through the act's own function (runAct / mindRun: v.fails learnt, evidence, belief); a big scheme is prepared first (v.plan, tell)
    4 steal: haStealTry is her choice (mindPick), not the try roll
-   5 bot N buổi: histogram of the harm deeds chosen (h_*), every key maps to a player act; '!' count per buổi: quiet (0) and busy (≥2) buổi both occur,
+   5 bot N buổi: histogram of the harm deeds chosen (harm:*), every key maps to a player act; '!' count per buổi: quiet (0) and busy (≥2) buổi both occur,
      and no dice: adHapRoll gives the same list twice in a row (no re-roll); perf p95 of the agent slices ≤ BAL.ag.perf.p95
    usage: node dev/test/ag-all-c.js <page URL or file> [buổi]   → exit 1 on any FAIL or page error */
 const {chromium}=require('playwright');const [,,URL0,NB]=process.argv;const N=+NB||160;const URL=/^(https?|file):/.test(URL0)?URL0:'file://'+require('path').resolve(URL0);
@@ -15,7 +15,7 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
  await p.evaluate(()=>{localStorage.clear();SLOT=4;document.getElementById('title').hidden=true;window.__nlInner=1;start();window.__nlInner=0;window.__bot=1;quiet=false;Q.length=0;try{deal()}catch(e){}render()});
  /* 1 */
  const r1=await p.evaluate(()=>{const L=liveRivals(true).filter(v=>!v.queen&&!v.confined);const v=L[0],t=L[1];oanAdd(v,t,70);relAdd(v,t,-60);v.bac=300;v.duc=60;
-  const N=agNeeds(v);N.spite=1;const O=haOpts(v,N,"spite");const bad=O.filter(o=>{const k=o.ak;return !(ACT[k]||["taint","cook","gift"].includes(k))});
+  const N=agNeeds(v);N.spite=1;const O=haOpts(v,N,"spite");const bad=O.filter(o=>{const k=o.ak;return !(ACT[k]||["taint","cook"].includes(k))});
   const band=O.filter(o=>ACT[o.ak]&&o.t&&!BANDS.slice(1,bandOf(danger(v,o.t))+1).flatMap(x=>x[2]).includes(o.ak));
   return{n:O.length,keys:O.map(o=>o.k+":"+o.u.toFixed(3)),bad:bad.length,band:band.length,at:O.map(o=>o.at(j95kh(),v,o.t)).slice(0,6)}});
  ok(r1.n>0&&r1.bad===0,'options: scheme options come from the player act list (ACT) only',r1);ok(r1.band===0,'options: none outside the danger band',r1);
@@ -27,9 +27,9 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
  const r3=await p.evaluate(()=>{const L=liveRivals(true).filter(v=>!v.queen&&!v.confined&&!sameHouse(S,v));const v=L[0],t=L[1];v.bac=300;v.plan=null;oanAdd(v,t,80);relAdd(v,t,-80);
   const kh=j95kh();const z=agZ();const out={};
   /* a plain act (spy) lands through runAct */
-  agPlan(v,{k:"h_spy",t,act:"dò la "+t.name,need:"safe"},agNeeds(v),kh,palaceOf(t));let p=z.pend[z.pend.length-1];const b0=v.bac;out.spy=agLand(p);out.paid=b0-v.bac;
+  agPlan(v,{k:"harm:spy",t,act:"dò la "+t.name,need:"safe"},agNeeds(v),kh,palaceOf(t));let p=z.pend[z.pend.length-1];const b0=v.bac;out.spy=agLand(p);out.paid=b0-v.bac;
   /* a big scheme is prepared first */
-  agPlan(v,{k:"h_musk",t,act:"lén mua xạ hương",need:"spite",prep:1},agNeeds(v),kh,"nvp");p=z.pend[z.pend.length-1];const tp=t.preg,th=t.hidden;t.preg=3;t.hidden=false;out.prep=p.prep;agLand(p);out.plan=v.plan&&v.plan.k;t.preg=tp;t.hidden=th;v.plan=null;
+  agPlan(v,{k:"harm:musk",t,act:"lén mua xạ hương",need:"spite",prep:1},agNeeds(v),kh,"nvp");p=z.pend[z.pend.length-1];const tp=t.preg,th=t.hidden;t.preg=3;t.hidden=false;out.prep=p.prep;agLand(p);out.plan=v.plan&&v.plan.k;t.preg=tp;t.hidden=th;v.plan=null;
   return out});
  ok(r3.paid===15&&typeof r3.spy==="string","land: Dò la pays the player's cost (15 bạc) via runAct",r3);ok(r3.prep===1&&r3.plan==="musk",'land: a big scheme is prepared first (v.plan)',r3);
  /* 4 */
@@ -50,10 +50,11 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
    if(S.dead)return{dead:1};clear();try{nextBuoi()}catch(e){}try{agFlush()}catch(e){}clear();
    const a=JSON.stringify(adHapRoll().map(h=>h.k+h.id)),b=JSON.stringify(adHapRoll().map(h=>h.k+h.id));const n=adHapNow().filter(h=>!h.done).length;return{n,same:a===b}});
   if(r.dead){await p.evaluate(()=>{localStorage.clear();window.__nlInner=1;start();window.__nlInner=0;Q.length=0});continue}hist.push(r.n);if(!r.same)same=0}
- const rep=await p.evaluate(()=>({by:HA.stat.by,stat:HA.stat,perf:agPerf(),errs:AG.errs.slice(-5),keysOk:Object.keys(HA.stat.by).every(k=>{const a=k.slice(2);return !!ACT[a]||["taint","cook","gift"].includes(a)})}));
+ const rep=await p.evaluate(()=>({by:HA.stat.by,stat:HA.stat,perf:agPerf(),errs:AG.errs.slice(-5),keysOk:(()=>{const R=new Set(RVGRP.flatMap(g=>g[1]));/* the player's rival-card buttons (j15 RVGRP) + her item act Tẩm đồ + her workshop */
+   return Object.keys(HA.stat.by).every(k=>{const a=k.slice(5);return R.has(a)||["taint","cook"].includes(a)})})(),bandInRV:(()=>{const R=new Set(RVGRP.flatMap(g=>g[1]));return [...new Set(BANDS.flatMap(x=>x[2]))].filter(k=>!R.has(k))})()}));
  const h={};for(const n of hist)h[n]=(h[n]||0)+1;
  console.log('harm deeds chosen over',N,'buổi:',JSON.stringify(rep.by));console.log("'!' per buổi histogram:",JSON.stringify(h));console.log('stat',JSON.stringify(rep.stat));
- ok(rep.keysOk,'bot: every chosen harm key is a player act',rep.by);ok((h[0]||0)>0&&Object.keys(h).some(k=>+k>=2),"bot: quiet buổi (0 '!') and busy buổi (≥2) both occur",h);
+ ok(rep.keysOk,'bot: every chosen harm key is a button on the player\'s rival card (RVGRP) or her Tẩm đồ / workshop',rep.by);ok(!rep.bandInRV.length,'every act the danger band opens to an NPC is a player rival-card button',rep.bandInRV);ok((h[0]||0)>0&&Object.keys(h).some(k=>+k>=2),"bot: quiet buổi (0 '!') and busy buổi (≥2) both occur",h);
  ok(same===1,"no dice: the '!' list is the same when asked twice (no re-roll)");ok(!rep.perf.p95||rep.perf.p95<=rep.perf.budget,'perf: agent slice p95 within BAL.ag.perf.p95',rep.perf);
  ok(!rep.errs.length,'no agent errors',rep.errs);ok(!errs.length,'no page errors',errs.slice(0,5));
  await b.close();process.exit(res.every(x=>x)?0:1)})();

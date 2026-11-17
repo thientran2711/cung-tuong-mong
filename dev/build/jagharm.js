@@ -34,12 +34,14 @@ const HA_CAUGHT={rumor:0,frame:0,block:0,ksab:0,kframe:0,poison:1,musk:1,kpoison
 const HA_TOG=new Set(["trip","pushp"]);
 /* where the deed is done (who might see it): tgt = where the target is at that khắc, tpal = the target's palace, judge = the judge's palace,
    own = her own palace; a big scheme is PREPARED where its tell says (j40 TELLS) */
-const HA_AT={trip:"tgt",pushp:"tgt",rumor:"vuon",spy:"tpal",block:"ksp",accuse:"judge",vp:"judge",xx:"judge",takeaway:"emp",bribe:"tpal",gift:"tpal",_:"tpal"};
+const HA_AT={tieuhuy:"tpal",trip:"tgt",pushp:"tgt",rumor:"vuon",spy:"tpal",block:"ksp",accuse:"judge",vp:"judge",xx:"judge",takeaway:"emp",bribe:"tpal",gift:"tpal",_:"tpal"};
 const HA_PREP={musk:"nvp",poison:"tyv",kpoison:"tyv",pond:"vuon",pushp:"vuon",catswap:"own",kframe:"own",frame:"own",plant:"tpal"};
 const HA_NO=new Set(["steal","road","gift","ally"]);/* not harm options here: steal / road at the flip (§3), gift / ally = part A (jagacts cx:gift / cx:ally) */
 function haName(t){return t===S?"ngươi":t&&t.name||""}
 function haVerb(k,t){const V=(typeof J78VERB==="object"&&J78VERB[k])||((ACT[k]&&ACT[k].n||k).toLowerCase()+" {t}");return V.replace("{t}",haName(t))}
-function haGain(k){const G=haB().g;return G[k]||G._}
+/* the player's cheaper ways of the same act (jecon / jlost: by her own trusted maid or a favour owed, no silver): open where the base act is open */
+const HA_VAR={spyk:"spy",bribel:"bribe",blockf:"block",laydol:"laydo"};
+function haGain(k){const G=haB().g;return G[k]||G[HA_VAR[k]]||G._}
 function haPlace(k,v,t,kh,prep){let w=prep?(HA_PREP[k]||"own"):(HA_AT[k]||HA_AT._);
  if(w==="own")return palaceOf(v);if(w==="tpal")return t===S?"home":palaceOf(t);if(w==="tgt"){const p=agAt(t,kh);return k==="pushp"&&p!=="vuon"?null:p}
  if(w==="emp")return agEmpAt(kh);
@@ -61,27 +63,33 @@ function haOpts(v,N,need){const O=[];if(!haOn()||v===S||v.coop||v.confined)retur
  const C=v.plan?[]:haTargets(v).filter(x=>bandOf(danger(v,x))>=1);const t=C.length?mindPickBy(C,x=>haScoreT(v,x,need),v):null;const g=t?motiveOK(v,t,"frame"):{ok:false};
  const N2=Object.assign({},N);if(t)N2.spite=cl(agSpite(v,t)/100,0,1)*road.spite;
  if(t&&g.ok){const allow=new Set(BANDS.slice(1,bandOf(danger(v,t))+1).flatMap(x=>x[2]));
+  for(const vk in HA_VAR)if(allow.has(HA_VAR[vk]))allow.add(vk);
   for(const k of allow){if(HA_NO.has(k))continue;const A=ACT[k];if(!A)continue;const gn=haGain(k);if(need&&gn.g[need]==null)continue;
    if(!HA_TOG.has(k)){let ok=false;try{ok=A.ok(v,t)}catch(e){}if(!ok)continue}
    if(k==="plant"&&haPlantIx(v)<0)continue;
    const prep=BIG.includes(k);const {o,pc}=haOdds(v,t,k);
    const gl={g:gn.g,l:gn.l||{},f:(gn.f||0)*pc};const u0=agU(v,N2,o,gl,haCost(k),"harm");if(u0<=0)continue;
    const u=u0*persW(v,k)*haFail(v,k);if(!(u>0))continue;HA.stat.opt++;
-   O.push({k:"h_"+k,ak:k,t,u,tag:"harm",prep,mot:g.why,act:prep?((typeof TELLS==="object"&&TELLS[k])||("chuẩn bị "+haVerb(k,t))):haVerb(k,t),
+   O.push({k:"harm:"+k,ak:k,t,u,tag:"harm",prep,mot:g.why,act:prep?((typeof TELLS==="object"&&TELLS[k])||("chuẩn bị "+haVerb(k,t))):haVerb(k,t),
     at:(kh,vv,tt)=>haPlace(k,vv||v,tt||t,kh,prep)})}
   /* §2 preparation of a poisoner / framer (the player's own Tẩm đồ and workshop): it serves the spite the next deed will vent */
   if((!need||need==="spite")&&N2.spite>0){
    const ti=(v.inv||[]).findIndex(e=>e&&!e.h&&!e.t&&(e.k==="tuithom"||e.k==="huongtram"));
    if(!(v.inv||[]).some(e=>e&&e.t)&&haPlantIx(v)<0){const tk=(v.inv||[]).some(e=>e&&e.k==="xahuong"&&!e.h)?"xa":"bua";const T=TAINT[tk];
     const pay=(ti<0?itm("tuithom").pr:0)+(T&&T.c||0);if(T&&(v.bac||0)>=pay){const u=agU(v,N2,100,{g:{spite:H.prep.taint}},{bac:-pay},"scheme")*persW(v,"plant");
-     if(u>0)O.push({k:"h_taint",ak:"taint",t,u,tag:"scheme",act:"lén tẩm đồ trong cung",at:(kh,vv)=>palaceOf(vv||v)})}}
+     if(u>0)O.push({k:"harm:taint",ak:"taint",t,u,tag:"scheme",act:"lén tẩm đồ trong cung",at:(kh,vv)=>palaceOf(vv||v)})}}
    if(typeof pgHeld==="function"&&pgHeld(v).length&&!(v.inv||[]).some(e=>typeof pgFood==="function"&&pgFood(e))){const u=agU(v,N2,100,{g:{spite:H.prep.cook}},{},"scheme");
-    if(u>0)O.push({k:"h_cook",ak:"cook",t,u,tag:"scheme",act:"tự tay nấu một món",at:(kh,vv)=>palaceOf(vv||v)})}}}
+    if(u>0)O.push({k:"harm:cook",ak:"cook",t,u,tag:"scheme",act:"tự tay nấu một món",at:(kh,vv)=>palaceOf(vv||v)})}}}
+ /* Trả chứng cứ lấy lòng (j78 tieuhuy): she hands back what she holds on someone she fears, to buy peace (need safe / ally) */
+ if((!need||need==="safe"||need==="ally")&&ACT.tieuhuy){const E=haTargets(v).filter(x=>{try{return evG(v,x)>=1&&ACT.tieuhuy.ok(v,x)}catch(e){return false}});
+  const x=E.length?mindPickBy(E,y=>BAL.mind.pick.ag.base+danger(y,v),v):null;
+  if(x&&motiveOK(v,x,"tieuhuy").ok){const gn=haGain("tieuhuy");const N3=Object.assign({},N);N3.safe=Math.max(N.safe||0,cl(danger(x,v)/100,0,1)*road.safe);
+   const u=agU(v,N3,100,{g:gn.g,l:gn.l||{}},{},"help");if(u>0&&(!need||gn.g[need]!=null))O.push({k:"harm:tieuhuy",ak:"tieuhuy",t:x,u,tag:"help",act:haVerb("tieuhuy",x),at:(kh,vv,tt)=>haPlace("tieuhuy",vv||v,tt||x,kh,false)})}}
  return O}
 /* ---------- the deed lands: the player's own act function ---------- */
 function haLand(p,seen){const z=agZ();const i=z.pend.indexOf(p);if(i>=0)z.pend.splice(i,1);const v=RV(p.vid);
  if(!v||!v.alive||v.out||S.dead||p.gone||p.drop){HA.stat.drop++;AG.stat.drop++;return""}
- const k=p.k.slice(2),t=agPerson(p.t);let r="";AG.inTick++;
+ const k=p.k.slice(5),t=agPerson(p.t);let r="";AG.inTick++;
  try{if(k==="taint"){let ix=(v.inv||[]).findIndex(e=>e&&!e.h&&!e.t&&(e.k==="tuithom"||e.k==="huongtram"));if(ix<0&&v.bac>=itm("tuithom").pr){buy(v,"tuithom");ix=v.inv.length-1}
    const tk=(v.inv||[]).some(e=>e&&e.k==="xahuong"&&!e.h)?"xa":"bua";if(ix>=0){taintItem(v,ix,tk);HA.stat.taint++}}
   else if(k==="cook"){if(typeof wkMake==="function"){v.inv.push(wkMake(v,"mon",0,4));HA.stat.cook++}}
@@ -104,7 +112,7 @@ function haScene(p,v){const t=agPerson(p.t);const W=agPlaceTxt(p.pl);
 
 /* ---------- §3 night stealing: her choice, not a try roll ---------- */
 function haStealTry(v,t,w){if(!haOn())return Math.random()<w.p;const c=mindPick([[1,w.u],[0,haB().steal.no]],v);const z=agZ();
- const L={w:wk(),b:S.buoi||0,kh:agKh(),id:"v"+v.id,k:c===1?"h_"+w.mode:"h_steal_no",t:ledgerId(t),pl:palaceOf(v),why:c===1?AGWHY.sung:""};
+ const L={w:wk(),b:S.buoi||0,kh:agKh(),id:"v"+v.id,k:c===1?"harm:"+w.mode:"harm:steal_no",t:ledgerId(t),pl:palaceOf(v),why:c===1?AGWHY.sung:""};
  if(c===1){HA.stat.steal++;z.log.push(L);if(z.log.length>60)z.log.shift()}else HA.stat.stealNo++;return c===1}
 window.haStealTry=haStealTry;
 
@@ -139,14 +147,14 @@ AD_HAP_T.deed="Có chuyện";
 /* ---------- wiring ---------- */
 (function(){
  /* the deeds' ledger labels (dev table, tai mắt lines) */
- try{for(const k in ACT){ACT95["ag_h_"+k]=haVerb(k,null).replace(/\s+$/,"");AGHOST.add("h_"+k)}ACT95.ag_h_taint="lén tẩm đồ";ACT95.ag_h_cook="tự tay nấu món";AGHOST.delete("h_spy")}catch(e){}
+ try{for(const k in ACT){ACT95["ag_harm:"+k]=haVerb(k,null).replace(/\s+$/,"");AGHOST.add("harm:"+k)}ACT95["ag_harm:taint"]="lén tẩm đồ";ACT95["ag_harm:cook"]="tự tay nấu món";AGHOST.delete("harm:spy");AGHOST.delete("harm:spyk");AGHOST.delete("harm:tieuhuy")}catch(e){}
  /* provider: through the AG-ALL core when present (jagday agReg), else beside jagent's own options */
  if(typeof agReg==="function"){try{agReg("consort","harm",(p,N,need)=>haOpts(p,N,need))}catch(e){agErr("harmReg",e)}}
  else{const o0=agOpts;agOpts=function(v,N,need){const O=o0.apply(this,arguments);try{if(haOn())for(const o of haOpts(v,N,need))O.push(o)}catch(e){agErr("harm",e)}return O}}
- const l0=agLand0;agLand0=function(p,seen){if(p&&typeof p.k==="string"&&p.k.indexOf("h_")===0)return haLand(p,seen);return l0.apply(this,arguments)};
- const s0=agScene;agScene=function(p,v){if(p&&typeof p.k==="string"&&p.k.indexOf("h_")===0)return haScene(p,v);return s0.apply(this,arguments)};
+ const l0=agLand0;agLand0=function(p,seen){if(p&&typeof p.k==="string"&&p.k.indexOf("harm:")===0)return haLand(p,seen);return l0.apply(this,arguments)};
+ const s0=agScene;agScene=function(p,v){if(p&&typeof p.k==="string"&&p.k.indexOf("harm:")===0)return haScene(p,v);return s0.apply(this,arguments)};
  /* agPlan keeps prep / act key on the pending deed */
- const p0=agPlan;agPlan=function(v,c,N,kh,k){const r=p0.apply(this,arguments);try{if(c&&typeof c.k==="string"&&c.k.indexOf("h_")===0){const z=agZ();const p=z.pend[z.pend.length-1];if(p&&p.vid===v.id){if(c.prep)p.prep=1;HA.stat.plan++;HA.stat.by[c.k]=(HA.stat.by[c.k]||0)+1}}}catch(e){}return r};
+ const p0=agPlan;agPlan=function(v,c,N,kh,k){const r=p0.apply(this,arguments);try{if(c&&typeof c.k==="string"&&c.k.indexOf("harm:")===0){const z=agZ();const p=z.pend[z.pend.length-1];if(p&&p.vid===v.id){if(c.prep)p.prep=1;HA.stat.plan++;HA.stat.by[c.k]=(HA.stat.by[c.k]||0)+1}}}catch(e){}return r};
  /* one path per deed: the old flat triggers of npcAct do nothing for NPC doers while the loop is on */
  const w0=whereOf;whereOf=function(p){const H=HA.here;if(H&&p){const x=H[p===S?"me":p.id];if(x!=null)return x}return w0.apply(this,arguments)};
  const n0=npcAct;npcAct=function(v,t){try{if(haOn()&&v&&v!==S){HA.stat.mute++;return""}}catch(e){}return n0.apply(this,arguments)};
