@@ -1,5 +1,6 @@
 # FOREMAN_C_STATUS (written ONLY by Foreman C)
 FOREMAN C SESSION ROOT-4 = session_011xDdVSQC3Gf8WhM6WW38QF (opened by ROOT-3 ~08:30Z 17/11) · START_CTX ~6% (~60k of 1M; get_session reads 0, own estimate) → roll over at >= 31%, ceiling 60% · lineage depth 3/8 · own hourly wake (:32) below.
+- 10:05Z C LOOKED W4e CT11 (17): 16 OK upload (m22 a18 ×3 + a36 ty1 periwinkle on pinned hex; m12-ty1-a36 jade; a36 ty2 m01 m03–m12); REDO m02-ty2-a36 (orange ≈ m04 → saffron marigold-gold). CT10 14 live.
 - 10:03Z C LOOKED W5d E8: 7 OK upload (m45-ty3, m46 ×3, m47 ×3); m48-ty1 a36 redo → deep emerald (E9). W6e 8 a51 (m27–m29) live; W6e stopped.
 - 10:00Z a26 maid consort-tier FULLY LIVE (m01–m52 ×ty1–3; W6e confirmed). Stray W6e #2 PfZRh (no repo) archived by lead; only W6f does a51 m30–m52 (+ re-sheet m29-ty3, m30-ty1).
 - 09:57Z W6e → W6f session_011xDdVRXvrX6q3VqFCVAtDF (lead; a51 m30–m52; CLAIMS updated). W6e #1 told to upload the OK'd 32 (a26 m44–m52 24 + a51 m27–m29 8); a51 m30-ty1 not on any sheet → W6f.
