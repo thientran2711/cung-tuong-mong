@@ -95,6 +95,18 @@ function agDrawPerson(p,id,from,kind,to){const D=agDz();const L=D.P[id]=D.P[id]|
    toward it from what is true at that buổi (her needs after the last buổi's deeds and what befell her — agTouch, the results of her deeds).
    Re-plan triggers (rain on a garden buổi, falling ill, touched, the top need changed) may change the INTENT for the rest of the day.
    Perf: the per-buổi pick of everyone runs where the record is built (j95plan); measured in AGD.ms (budget BAL.ag.perf.p95). */
+/* review ag-all-2 r2 W1 (owner OD ~18:05Z: weather never closes a place; staying indoors is the NPC's own choice, by odds): when her pick for buổi b
+   is an outdoor place (BAL.wx.fx.storm.out) and that buổi has a storm from now on (jwxk wxkStormB, the one day clock), she keeps it with odds
+   100 − BAL.wx.fx.storm.leave (held to BAL.odds), else she picks again through the same planner with the outdoor places weighted 0 (her palace if
+   nothing else). The jwxk sweep then leaves planned people alone, and jweather hits them where they really are (wxNpcHit after the plan). */
+(function(){const d0=agDrawB;agDrawB=function(p,id,b,base,W){const r=d0.apply(this,arguments);try{const F=BAL.wx&&BAL.wx.fx&&BAL.wx.fx.storm;
+  if(!F||!r||!F.out.includes(r.pl)||!(id==="emp"||id==="th"||/^v\d/.test(id))||typeof wxkStormB!=="function"||(typeof worldOn==="function"&&!worldOn()))return r;
+  if(!wxkStormB(b,b===agDayB()?agKh():0))return r;const O=BAL.odds;
+  if(roll(cl(100-F.leave,O.lo,O.hi))){AGD.stat.wxStay=(AGD.stat.wxStay||0)+1;return r}
+  AGD.stat.wxLeave=(AGD.stat.wxLeave||0)+1;const P=Object.assign({},W&&W.place||{});for(const k of F.out)P[k]=0;const b2=base.slice();if(F.out.includes(b2[0]))b2[0]=p===S.emp?"dtd":p==="th"?"tn":palaceOf(p);
+  const r2=d0.call(this,p,id,b,b2,Object.assign({},W||{},{place:P}));if(r2&&F.out.includes(r2.pl)){r2.pl=b2[0];r2.a="go";r2.k=null}if(r2)r2.why=r2.why||"trời giông, ở trong cho yên";return r2}catch(e){agdErr("wxPlan",e);return r}}})();
+/* W1: the weather hit on NPCs runs on the FINAL placement — wrapped after every module's placeWhere wrapper (jworld pulls, jagacts3 invites …) */
+setTimeout(()=>{try{const p0=placeWhere;placeWhere=function(){const r=p0.apply(this,arguments);try{if(agDOn()&&typeof wxNpcHit==="function")wxNpcHit()}catch(e){agdErr("wxHit",e)}return r};window.placeWhere=placeWhere}catch(e){agdErr("wxWrap",e)}},0);
 function agDayList(){const L=[];if(S.emp)L.push([S.emp,"emp","emp"]);if(!S.thDead)L.push(["th","th","th"]);
  for(const v of liveRivals(true)){if(!v.alive||v.out)continue;L.push([v,"v"+v.id,"consort"])}
  for(const f of AGDRAW){try{for(const x of (f()||[]))L.push(x)}catch(e){agdErr("drawReg",e)}}return L}

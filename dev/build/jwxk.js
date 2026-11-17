@@ -166,8 +166,12 @@ function wxkFxLine(a,b){const was=x=>BAL.wx.fx.fog.kd.includes(x.kd)&&/sương/.
 (function(){const o0=oSee;oSee=function(){const n=o0.apply(this,arguments);const l=wxkFx("fog");if(!l)return n;const O=BAL.odds;return cl(n-BAL.wx.fx.fog.see[l],O.lo,O.hi)}})();
 /* storm: nobody is barred (owner 17/11 ~18:05Z); NPCs out in the garden go home by their own choice (odds, BAL.wx.fx.storm.leave, held to BAL.odds) */
 function wxkSweepW(W){if(!W||!wxkFx("storm"))return W;const F=BAL.wx.fx.storm,O=BAL.odds,p=cl(F.leave,O.lo,O.hi);
- for(const id of Object.keys(W)){if(!F.out.includes(W[id])||!roll(p))continue;if(id==="emp")W[id]="thu";else if(id==="th")W[id]="tn";
+ const AGP=typeof agDOn==="function"&&agDOn()&&typeof agDaySlot==="function";/* agent day plan on: a planned NPC chose already (jagday agDrawB storm rule, review ag-all-2 r2 W1) */
+ for(const id of Object.keys(W)){if(!F.out.includes(W[id]))continue;if(AGP&&agDaySlot(id==="emp"||id==="th"?id:"v"+id))continue;if(!roll(p))continue;if(id==="emp")W[id]="thu";else if(id==="th")W[id]="tn";
   else{const v=(typeof rivals!=="undefined"?rivals:[]).find(x=>x&&String(x.id)===id);if(v)W[id]=palaceOf(v)}}return W}
+/* is there a storm in buổi b from khắc k on (the one day clock: S.wxDay, one state per khắc)? */
+function wxkStormB(b,k){try{if(!S||!S.wx)return false;const D=wxkDay();if(!D)return false;const sea=wxkSea(),K=BAL.time.khac,F=BAL.wx.fx.storm;
+ for(let q=Math.max(0,k||0);q<K;q++){const r=wxkRow(sea,D.s[b*K+q]);if(r&&F.f.includes(r[2]))return true}}catch(e){}return false}
 function wxkFxSweep(){if(S&&S.where&&(typeof worldOn!=="function"||worldOn()))wxkSweepW(S.where)}
 (function(){const p0=placeWhere;placeWhere=function(){const r=p0.apply(this,arguments);try{wxkFxSweep()}catch(e){}return r}})();
 /* jgift "Mời ngài dạo ngự hoa viên": the old weather gate (kmStorm: giông tố / tuyết dày = greyed) is gone — she may ask; Hoàng thượng
