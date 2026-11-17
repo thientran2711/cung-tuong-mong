@@ -9,7 +9,7 @@
        pointer-events none, removed when the seal leaves the screen. No file = no layer. Nothing is drawn in code (no code-drawn tears / smoke).
    KEYS: the seal map holds khoc + hon too (names "Khóc", "Hờn"); the mood logic (jemo EMO) decides when a person is in one — until then they never appear. ===== */
 window.KIT_EMOSEAL=window.KIT_EMOSEAL||{keys:{vui:{m:"sway"},binh:{m:"breathe"},buon:{m:"droop"},gian:{m:"shake"},so:{m:"tremble"},ghen:{m:"flicker"},lo:{m:"bob"},dau:{m:"wince"},muu:{m:"glint"},an:{m:"bob"},khoc:{m:"droop",name:"Khóc"},hon:{m:"flicker",name:"Hờn"}},
- anim:"img/kit/emo-anim/",fx:"img/kit/emo-fx/",fxScale:1.7};
+ fb:{khoc:"buon",hon:"gian"},have:{},anim:"img/kit/emo-anim/",fx:"img/kit/emo-fx/",fxScale:1.7};
 const KES_HAVE={};/* url -> true | false | "wait" (probe result) */
 function kesProbe(url,cb){const h=KES_HAVE[url];if(h===true||h===false){cb(h);return}
  if(h&&h.w){h.w.push(cb);return}const e={w:[cb]};KES_HAVE[url]=e;const im=new Image();const done=ok=>{KES_HAVE[url]=ok;e.w.forEach(f=>{try{f(ok)}catch(x){}})};im.onload=()=>done(true);im.onerror=()=>done(false);im.src=url}
@@ -20,7 +20,9 @@ function kesSet(el,k){const m=/emo-((?:m-|mo-)?)[a-z]+\.webp/.exec(el.getAttribu
 function kesFxOff(el){const f=el.__fx;if(f){f.remove();el.__fx=null}}
 function kesFxSync(el){const f=el.__fx;if(!f||!el.isConnected)return;const w=el.offsetWidth,h=el.offsetHeight,W=w*KIT_EMOSEAL.fxScale,H=h*KIT_EMOSEAL.fxScale;
  f.style.cssText=`left:${(el.offsetLeft+w/2-W/2).toFixed(1)}px;top:${(el.offsetTop+h/2-H/2).toFixed(1)}px;width:${W.toFixed(1)}px;height:${H.toFixed(1)}px`}
-function kesLive(el,on){if(!el.isConnected)return;
+function kesReal(el){/* khoc / hon: the real still replaces the fallback picture once it exists */const k=kesKey(el),fb=KIT_EMOSEAL.fb[k];if(!fb||el.__real)return;el.__real=1;const set=kesSet(el,k),real=`img/kit/emo-${set}${k}.webp`;
+ kesProbe(real,ok=>{if(!ok)return;KIT_EMOSEAL.have[real]=true;if(el.isConnected&&!el.__pop){el.dataset.kemos=real;if(!/emo-anim/.test(el.getAttribute("src")||""))el.setAttribute("src",real)}})}
+function kesLive(el,on){if(!el.isConnected)return;kesReal(el);
  if(!el.dataset.kemos){el.dataset.kemos=el.getAttribute("src")||""}
  el.classList.toggle("kemo-live",on&&kesMotionOK());const k=kesKey(el),spec=KIT_EMOSEAL.keys[k];if(spec)el.classList.add("kemo-m-"+spec.m);
  const still=el.dataset.kemos;
@@ -40,7 +42,7 @@ addEventListener("resize",()=>document.querySelectorAll("img.kemo.kemo-live").fo
 kesScan();
 /* kitEmoSealPop(p,key,ms): a NEW event's feeling plays over the person's seal(s) for ms (default 2500) and the seal goes back to its bar state; same asset set, same motion table. Never a second persistent source. */
 function kesPop(p,key,ms){try{if(!KIT_EMOSEAL.keys[key])return;const id=emoKey(emoRes(p));document.querySelectorAll('img.kemo[data-kemop="'+id+'"]').forEach(el=>{if(el.__pop)return;const set=kesSet(el),still=el.dataset.kemos||el.getAttribute("src"),k0=kesKey(el),sp=KIT_EMOSEAL.keys[key];
-  const ns=still.replace(/emo-((?:m-|mo-)?)[a-z]+\.webp/,"emo-"+set+key+".webp");el.__pop=1;el.classList.remove("kemo-"+k0);[...el.classList].filter(c=>/^kemo-m-/.test(c)).forEach(c=>el.classList.remove(c));el.classList.add("kemo-"+key,"kemo-m-"+sp.m,"kemo-pop");el.dataset.kemos=ns;el.setAttribute("src",ns);
+  const ns=emoSealSrc(set,key);el.__pop=1;el.classList.remove("kemo-"+k0);[...el.classList].filter(c=>/^kemo-m-/.test(c)).forEach(c=>el.classList.remove(c));el.classList.add("kemo-"+key,"kemo-m-"+sp.m,"kemo-pop");el.dataset.kemos=ns;el.setAttribute("src",ns);
   setTimeout(()=>{el.__pop=0;if(!el.isConnected)return;el.classList.remove("kemo-"+key,"kemo-pop");[...el.classList].filter(c=>/^kemo-m-/.test(c)).forEach(c=>el.classList.remove(c));el.classList.add("kemo-"+k0);el.dataset.kemos=still;el.setAttribute("src",still);kesLive(el,el.classList.contains("kemo-live"))},ms||2500)})}catch(e){}}
 window.kitEmoSeal={scan:kesScan,live:kesLive,probe:kesProbe,pop:kesPop};
 (function(){const st=document.createElement("style");st.id="kemoseal-css";st.textContent=`
