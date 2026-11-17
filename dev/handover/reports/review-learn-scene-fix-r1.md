@@ -7,5 +7,5 @@ Checked
 - Order: made-item dialog -> level-up scene -> buoi transition -> next VIEC; nothing opens under a running scene; no-scene path immediate. Steps 1-6 pass on both devices.
 - kmPush family: pre on learn, reward, tablet, promo; jne already preloads; edict / gloom / bloom / ink / cfPlay are CSS-only (no picture) - ok.
 - LOOKED at Fold learn-cong, iPad learn-cam (own pictures, kit frame, no black), Fold order-buoi (buoi picture shows after scene).
-Gates: site rebuild = same content (only build-line sha differs); media-check 0; img-allowlist OK; one-core-guard PASS (fails 0); oldsave-r1 16/16. Not run: quickcheck (absent), coregates.sh (stopped, >5 min, output buffered; its one-core part ran alone).
+Gates: coregates.sh PASS (G1 one-core, G2 rules-one-source, G3 kit-conform, hooks) ; site rebuild = same content (only build-line sha differs); media-check 0; img-allowlist OK; one-core-guard PASS (fails 0); oldsave-r1 16/16. Not run: quickcheck (absent).
 Faults found: none. Fixes by reviewer: none.
