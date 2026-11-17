@@ -23,7 +23,7 @@ const fresh=()=>{try{localStorage.clear()}catch(e){}window.__nlInner=1;for(const
  /* 2. the numbers: shown text == checked rule, and equal to the old effective rule, over many states */
  R.rules=await p.evaluate(`(()=>{(${fresh})();const out={bad:[],n:0};
   const oldEff=(p)=>{const hieu=has("hieuthao"),tn=hieu?40:50,sn=sonsOf(p).length>0,nd=S.heir&&S.heir.k&&S.heir.k.alive&&(S.heir.v===(p===S?null:p))?40:50;
-   return {th:Math.max(sn?tn:tn+30,BAL.hhTh),duc:nd}};
+   return {th:sn?Math.max(tn,BAL.hhTh):(hieu?BAL.hhThNoSonHieu:BAL.hhThNoSon),duc:nd}};/* balance-2 (D8) moved the no-son Thái hậu need on purpose (80→70, hiếu 70→62, one value in BAL); with a son the old rule stands */
   const heirKid=()=>S.kids.find(k=>k.alive&&k.sex==="m");
   for(let i=0;i<200;i++){S.rank=6;S.out=0;S.confined=0;S.th=Math.floor(Math.random()*101);S.duc=Math.floor(Math.random()*101);S.sung=99;S.danh=99;S.lastPromo=-99;
    const wantSon=i%2===0;S.kids=S.kids.filter(k=>false);if(wantSon){S.kids.push({name:"Thử",sex:"m",alive:true,age:3,hp:90,tal:30,fond:50})}
