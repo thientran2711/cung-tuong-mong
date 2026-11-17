@@ -130,7 +130,7 @@ if(typeof window.aaPayMG==="function"){const p0=window.aaPayMG;window.aaPayMG=fu
 document.addEventListener("click",e=>{try{const b=e.target.closest&&e.target.closest("button,.opt,[data-a],[data-k]");if(!b)return;const t=cut(b.getAttribute("aria-label")||b.textContent||"");if(t&&t.length>=2){if(depth===0&&!fold)lsSync(lab);clickLab=t;lab=""}}catch(x){}},true);
 {const r0=render;render=function(){if(depth===0&&!fold)lsSync(lab);return r0.apply(this,arguments)}}
 {const d0=deser;deser=function(){const r=d0.apply(this,arguments);reset();return r}}
-{const s0=start;start=function(){const r=s0.apply(this,arguments);reset();return r}}
+{const s0=start;start=function(){const r=s0.apply(this,arguments);if(!(window.COOPW&&COOPW.ctx))reset()/* co-op thin B: the guest's life built on the host (context b) leaves this phone's log sync alone */;return r}}
 
 /* one wording for the monthly Thái hậu / Hoàng hậu drift by Đức (j3 monthTick + j85 v85Month write into the same group) */
 function lsDucWhy(){return S&&S.duc>=60?"Đức cao, được quý hơn":"Đức thấp, bị coi nhẹ"}window.lsDucWhy=lsDucWhy;

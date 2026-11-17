@@ -167,7 +167,7 @@ function attach(C){T("attach");if(!C||!C.W)return;const mp=me();
 CW.attach=()=>{const C=CW.dying||CW.base;if(C)attach(C)};
 /* jcoopthin (thin guest, part A) reads the world split and the friend-entry builders from here: one source */
 CW.X={W_KEYS,HOST_ONLY,CM_P,MEN_P,REFF,STAT,mapMe,buildFriend,buildFriendSrv,friendSrv,myBlob,pullFriend,pushFriend,isF,J};
-CW.sendMe=()=>sendMe();CW.friendHome=friendHome;
+CW.sendMe=P=>sendMe(P);CW.friendHome=friendHome;
 
 /* ---------- sending ---------- */
 /* ONE WORLD safety net (guest only): whatever world change her endTurn still rolled (a loop the guard table missed, an inline tick)
@@ -203,11 +203,12 @@ CW.netWrap=function(f,self,args){if(!CW.on||host()){return f.apply(self,args)}co
  const r=f.apply(self,args);try{if(!p0&&CW.pend&&c0)CW.net={week:wk(),c0,c1:toCanon()}}catch(e){CW.net=null}return r};
 function sendEnd(){if(!CW.on||!S||S.dead||CW.sent===wk()||CW.cyHold!=null/* the host's night waits for her cycle answer (B2 × jcycle) */)return;const C=guestNet(toCanon());CW.sent=wk();CW.pend=false;CW.mine=snapStats();
  COOP.send({t:"end",week:wk(),state:C});try{localStorage.setItem("ctm-coop-last",JSON.stringify({room:COOP.state.room,C}))}catch(e){}lockNext()}
-function sendMe(){T("sendMe "+(S&&S.dead));if(!CW.on||!S||S.dead)return;
+/* P0 (co-op thin part B, jcoopthinb): the person the HOST built for her (her Luân hồi on the host); sent as it is, never re-serialized here */
+function sendMe(P0){T("sendMe "+(S&&S.dead));if(!CW.on||!S||S.dead)return;
  /* a new life: the old life's pending / sent week end is void (the server drops my sent end on `me`); she ends this week herself */
  if(CW.base){CW.pend=false;if(CW.sent===wk())CW.sent=-1;CW.bend=false;CW.nrdy=-1;CW.ngoW=-1}
- const C=toCanon();CW.dying=null;
- if(!CW.base){/* host's first world */COOP.send({t:"init",state:C,nb:typeof B4N==="number"?B4N:3});CW.base=C}else{COOP.send({t:"me",P:C.P[CW.seat]});CW.base.P=CW.base.P||{};CW.base.P[CW.seat]=J(C.P[CW.seat])}
+ const C=P0&&CW.base?null:toCanon();CW.dying=null;
+ if(!CW.base){/* host's first world */COOP.send({t:"init",state:C,nb:typeof B4N==="number"?B4N:3});CW.base=C}else{const Pm=P0||C.P[CW.seat];COOP.send({t:"me",P:Pm});CW.base.P=CW.base.P||{};CW.base.P[CW.seat]=J(Pm)}
  try{if(CW.base&&CW.base.P&&CW.base.P[fs()]&&!friendEntry())placeFriend(CW.base.P[fs()])}catch(e){console.error(e)}
  /* jkc: the friend chose first and is at home: say so once (her entry into the palace is told by onWeek) */
  try{const fP=CW.base&&CW.base.P&&CW.base.P[fs()];if(fP&&!fP.dead){const home=friendHome(fP);CW.fWasHome=home;const fk=(fP.name||"")+"#"+(fP.life||0)+"h";
@@ -708,10 +709,10 @@ COOP.on("status",()=>{if(CW.on){lockNext();soonEnd()}});
    set only after it, so on the GUEST jcoopask's newRival gave its ~10 consorts temp ids (1001…) as persons she "made", attach()'s ser()
    turned them into new-consort requests to the host, she kept them as ghost consorts the host never had, and a reborn cung nữ could be
    given one of them as mistress (the host then never saw her: RV(mid) missing). */
-if(typeof nlRun==="function"){const f=nlRun;nlRun=function(){if(CW.on)CW.inLife=true;const r=f.apply(this,arguments);try{if(CW.on){const C=CW.dying||CW.base;if(C)attach(C);CW.inLife=true}}catch(e){console.error(e)}return r};}
-if(typeof nlAccept==="function"){const f=nlAccept;nlAccept=function(){const r=f.apply(this,arguments);try{if(CW.on&&CW.inLife&&S&&!S.dead){CW.inLife=false;if(CW.holdMe)CW.heldMe=true;else sendMe()}}catch(e){console.error(e)}return r};}
+if(typeof nlRun==="function"){const f=nlRun;nlRun=function(){if(CW.ctx)return f.apply(this,arguments);if(CW.on)CW.inLife=true;const r=f.apply(this,arguments);try{if(CW.on){const C=CW.dying||CW.base;if(C)attach(C);CW.inLife=true}}catch(e){console.error(e)}return r};}
+if(typeof nlAccept==="function"){const f=nlAccept;nlAccept=function(){if(CW.ctx)return f.apply(this,arguments);const r=f.apply(this,arguments);try{if(CW.on&&CW.inLife&&S&&!S.dead){CW.inLife=false;if(CW.holdMe)CW.heldMe=true;else sendMe()}}catch(e){console.error(e)}return r};}
 /* a start() that bypasses Luân hồi (window.__nlInner): attach + send at once */
-(function(){const f=start;start=function(){if(CW.on&&window.__nlInner&&!CW.inLife)CW.inLife=true;/* same: her throwaway world never counts as hers */const r=f.apply(this,arguments);try{if(CW.on&&window.__nlInner&&S&&!S.dead){const C=CW.dying||CW.base;if(C)attach(C);CW.inLife=false;sendMe()}}catch(e){console.error(e)}return r}})();
+(function(){const f=start;start=function(){if(CW.ctx)return f.apply(this,arguments);if(CW.on&&window.__nlInner&&!CW.inLife)CW.inLife=true;/* same: her throwaway world never counts as hers */const r=f.apply(this,arguments);try{if(CW.on&&window.__nlInner&&S&&!S.dead){const C=CW.dying||CW.base;if(C)attach(C);CW.inLife=false;sendMe()}}catch(e){console.error(e)}return r}})();
 CW.toCanon=toCanon;CW.fromCanon=fromCanon;CW.friend=friendEntry;CW.sendEnd=sendEnd;
 /* co-op buổi clock (jcooptimer, KIT §69): read-only views + the one forced step it may take. forceBend = "Sẵn sàng" pressed for her when
    the buổi ran out: sends `bend` even with a dialog / mini game open (the room's step then waits for it: CW.pendBuoi, nothing is cut);

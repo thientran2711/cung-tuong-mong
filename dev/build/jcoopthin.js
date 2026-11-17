@@ -22,7 +22,7 @@
 (function(){try{
 const CW=window.COOPW;if(!CW||!CW.X||typeof COOP!=="object")return;
 const X=CW.X,J=X.J,LS={get(k){try{return localStorage.getItem(k)}catch(e){return null}}};
-const TH=CW.thin={CAP:1,lvl:0,REG:[],bridge:[],rlog:[],view:null,hv:0,dn:0,dr:null,ctxN:0};
+const TH=CW.thin={CAP:2/* B (review/coop-thin-b): life creation + rebirth on the host, dev/build/jcoopthinb.js */,lvl:0,REG:[],bridge:[],rlog:[],view:null,hv:0,dn:0,dr:null,ctxN:0};
 const host=()=>CW.seat==="a";
 TH.on=n=>!!(CW.on&&!CW.hold&&TH.lvl>=(n||1));
 function want(){let v=null;try{const q=new URLSearchParams(location.search).get("thin");if(q!=null)v=q}catch(e){}if(v==null)v=LS.get("ctm-thin");return Math.max(0,Math.min(TH.CAP,(+v)|0))}
@@ -58,6 +58,12 @@ TH.reg("EVB_ART",()=>EVB_ART,v=>{EVB_ART=v});
  window.THIN_REG={push(){for(const r of arguments)try{TH.reg(r[0],r[1],r[2])}catch(e){}return REG.length}}}
 TH.reg("NLP",()=>NLP,v=>{NLP=v});TH.reg("NLR",()=>NLR,v=>{NLR=v});TH.reg("DEED85",()=>DEED85,v=>{DEED85=v});TH.reg("DT85",()=>DT85,v=>{DT85=v});
 TH.reg("TR_DEED",()=>TR_DEED,v=>{TR_DEED=v});TH.reg("K61PASS",()=>K61PASS,v=>{K61PASS=v});
+/* part B (start / nlRun in context b, review r1 §3): the start() wrappers clear or set these per-player module states. KMS/KMSNAP (j93 kmDiff,
+   jkc kcSnapReset), J95B bind/ev/notes/next (j95b), J95C lastV/sig (j95c), SP13 L/held (jspread). Fields of a module object register one by one. */
+TH.reg("KMS",()=>KMS,v=>{KMS=v});TH.reg("KMSNAP",()=>KMSNAP,v=>{KMSNAP=v});
+for(const f of ["bind","ev","notes","next"])TH.reg("J95B."+f,()=>J95B[f],v=>{J95B[f]=v});
+for(const f of ["lastV","sig"])TH.reg("J95C."+f,()=>J95C[f],v=>{J95C[f]=v});
+for(const f of ["L","held"])TH.reg("SP13."+f,()=>window.SP13[f],v=>{window.SP13[f]=v});
 
 /* ---------- 3. withSeat (host) ---------- */
 const ST={};const PID={a:901,b:902};
@@ -102,7 +108,9 @@ function swapView(from,to,mks,wobj){const fp=PID[from],tp=PID[to];const L=npcs()
  for(const k of X.W_KEYS)if(wobj&&plain(wobj[k]))mapView(wobj[k],fp,tp,wobj[k],seen,skip)}
 /* her stored state: from the room's P[seat] the first time (S = personal keys only, refs as {$r}/{$k}) */
 TH.seatOf=function(seat){if(ST[seat])return ST[seat];
- const C=CW.base||COOP.state.C;const P=C&&C.P&&C.P[seat];if(!P||!P.S)return null;
+ const C=CW.base||COOP.state.C;let P=C&&C.P&&C.P[seat];
+ /* part B: a seat with no person yet (the guest's FIRST life) gets a blank store, only for the intent that builds her life (TH.blank) */
+ if(!P||!P.S){if(!(TH.blank&&TH.blank(seat)))return null;P={S:{},ok:"tt"}}
  const s=J(P.S);const pers={kn:[s.empKnown||{}],cm:s.cmP||{},men:s.menP||{}};
  for(const k of ["empKnown","cmP","menP","cnews","heir"])delete s[k];for(const k of X.W_KEYS)delete s[k];
  const g={};for(const r of REG)g[r[0]]=J(r[3]);g.used=0;g.deck=[];g.Q=[];g.popIdx=null;g.popMsg="";
@@ -114,7 +122,12 @@ function fixRefs(s){const kid=n=>{try{return allKids().map(x=>x[0]).find(k=>k.na
  for(const k in s)if(k!=="kids"&&!X.W_KEYS.includes(k))s[k]=fix(s[k])}
 function standIn(PA,mine){if(!PA)return null;try{
  if(X.friendSrv(PA)){const m=typeof RV==="function"?RV(PA.S.srv.mid):null;if(m){const v=X.buildFriendSrv(PA);m.staff=m.staff||[];m.staff.push(v);return v}return null}
- const v=X.buildFriend(PA,mine);if(!v)return null;try{rstats(v)}catch(e){}
+ const v=X.buildFriend(PA,mine);if(!v)return null;
+ /* part B: "hh" (the Empress's regard) is derived from her row toward the host (Hoàng hậu.rl[901]); a plain copied number would be "migrated"
+    by j24 hhBind at the first consorts() of her turn (blended into that row: the host's own row moved, found by coop-thin-b.js). Bound now,
+    no migration; it is never bridged (the row it reads is the world's). */
+ if(typeof hhBind==="function")try{delete v.hh;hhBind(v)}catch(e){}
+ try{rstats(v)}catch(e){}
  /* the bridge baseline is taken AFTER rstats (its derived numbers are not her acts; S.hh etc. are setters on the host's S) */
  if(v.__b){for(const k of X.STAT)v.__b[k]=v[k];v.__b.rel=v.rel;v.__b.oan=v.oan}
  if(v.queen&&typeof qOn==="function"&&!qOn())rivals.unshift(v);else{if(v.queen){v.queen=false;v.rank=Math.min(v.rank,6)}rivals.push(v)}return v}catch(e){console.error("thin standIn",e);return null}}
@@ -129,7 +142,7 @@ TH.withSeat=function(seat,fn){
  swapView(CW.seat,seat,mks,A.S);persPut(A.S,B.pers);
  const sb=B.S;for(const k of X.W_KEYS){if(k in A.S)sb[k]=A.S[k];else delete sb[k]}
  sb.origin=(typeof ORIGINS!=="undefined"&&ORIGINS.find(o=>o.k===B.ok))||A.S.origin;
- CW.ctx=seat;TH.ctxN++;quiet=true;S=sb;for(const r of REG)if(r[0] in B.g)try{r[2](B.g[r[0]])}catch(e){}
+ CW.ctx=seat;TH.ctxN++;TH.outerS=A.S/* part B: the host's own person, READ-ONLY inside (her names must not repeat the host's own servants: the stand-in has no staff) */;quiet=true;S=sb;for(const r of REG)if(r[0] in B.g)try{r[2](B.g[r[0]])}catch(e){}
  let v=null;
  try{if(B.fresh){fixRefs(S);B.fresh=false}v=standIn(PA,S);return fn()}
  finally{const sN=S;
@@ -138,12 +151,16 @@ TH.withSeat=function(seat,fn){
   try{B.ok=sN.origin&&sN.origin.k||B.ok;const ss=ser().S;for(const k of X.W_KEYS)delete ss[k];B.S=ss;B.fresh=true}catch(e){console.error("thin ser",e);B.S=sN}
   const Lb=X.pullFriend();TH.bridge=[];
   for(const [,e] of Lb){if(e!==v||!e.__b)continue;const b=e.__b;
-   for(const k of X.STAT)if(typeof e[k]==="number"&&e[k]!==b[k]){TH.bridge.push([k,b[k],e[k]]);A.S[k]=e[k]}
+   for(const k of X.STAT)if(k!=="hh"&&typeof e[k]==="number"&&e[k]!==b[k]){TH.bridge.push([k,b[k],e[k]]);A.S[k]=e[k]}
    for(const [f,m] of [["rel","rl"],["oan","ro"]])if(e[f]!==b[f]){A.S[m]=A.S[m]||{};A.S[m][PID[seat]]=e[f];TH.bridge.push([m,b[f],e[f]])}}
   B.pers=persTake(A.S);swapView(seat,CW.seat,mks,A.S);persPut(A.S,hp);X.pushFriend(L);
-  CW.ctx=undefined;S=A.S;for(const r of REG)try{r[2](A.g[r[0]])}catch(e){}quiet=A.quiet}};
+  CW.ctx=undefined;TH.outerS=null;S=A.S;for(const r of REG)try{r[2](A.g[r[0]])}catch(e){}quiet=A.quiet}};
 /* no host screen / save work for the other seat's turn: render, the modal and save stay the host's */
-for(const n of ["render","showModal","save"])if(typeof window[n]==="function"){const f=window[n];window[n]=function(){if(CW.ctx)return;return f.apply(this,arguments)}}
+/* part B (contract C3 "UI side effects"): her events must not play on the host's phone either: scene queue (kmPush / kmReset of the
+   card-flip, ink, reward scenes), toasts (kitLine), sounds (sfx / kitSfx / kitResultSfx), stat floaters (kitStatFx / kitStatGlow) and the
+   overlays (kitEdict / kitGloom / kitReward / kitResultFx). ONE list (TH.NOOP); coop-thin-b.js checks each name is wrapped. */
+TH.NOOP=["render","showModal","save","kmPush","kmReset","kitLine","sfx","kitSfx","kitResultSfx","kitStatFx","kitStatGlow","kitEdict","kitGloom","kitReward","kitResultFx"];TH.NOOPED=[];
+for(const n of TH.NOOP)if(typeof window[n]==="function"){const f=window[n];window[n]=function(){if(CW.ctx)return;return f.apply(this,arguments)};TH.NOOPED.push(n)}
 
 /* stable text of the host's whole state (the round-trip check) */
 function stable(o){const seen=new WeakSet();return JSON.stringify(o,function(k,v){if(typeof v==="function")return undefined;
@@ -196,7 +213,7 @@ COOP.on("delta",m=>{if(host()||!m)return;const V=TH.view;if(!V||V.v!==(m.base|0)
 const DO={};let doN=0;
 TH.onDo=(op,fn)=>{DO[op]=fn};
 TH.doSend=function(op,args){if(host()||!TH.on(1))return false;const id="d"+Date.now().toString(36)+"-"+(doN++);COOP.send({t:"do",op,args:args===undefined?null:args,base:TH.view?TH.view.v:0,id});return id};
-COOP.on("do",m=>{if(!host()||!m||!TH.on(1))return;const fn=DO[m.op];let r=null;
+COOP.on("do",m=>{if(!host()||!m||!TH.on(1))return;const fn=DO[m.op];let r=null;TH.curDo=m.op;
  try{if(fn)r=TH.withSeat(m.from||"b",()=>fn(m.args,m))}catch(e){console.error("thin do",m.op,e);r={err:String(e&&e.message||e)}}
  TH.dn=m.n|0;TH.dr={id:m.id,op:m.op,r:r===undefined?null:J(r)};deltaSoon(0)});
 /* part A test intent: read her person in context b (no change) */

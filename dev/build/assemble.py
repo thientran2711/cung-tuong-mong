@@ -16,6 +16,8 @@ js=''.join(cdn(f,open(d+'build/'+f,encoding='utf-8').read()) for f in ['jcdn.js'
 js=open(d+'site/kvfallback.js',encoding='utf-8').read()+'\n'+js
 # thin guest part A (review/coop-thin-a): its own last module, after jcoopone (reads COOPW.X from jcoopworld)
 js+='\n'+cdn('jcoopthin.js',open(d+'build/jcoopthin.js',encoding='utf-8').read())
+# thin guest part B (review/coop-thin-b): life creation + rebirth on the host; after jcoopthin (uses COOPW.thin)
+js+='\n'+cdn('jcoopthinb.js',open(d+'build/jcoopthinb.js',encoding='utf-8').read())
 open(d+'build/all.js','w',encoding='utf-8').write(js)
 subprocess.run(['node','--check',d+'build/all.js'],check=True)
 p1=cdn('p1.html',open(d+'build/p1.html',encoding='utf-8').read())
