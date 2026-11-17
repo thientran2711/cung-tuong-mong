@@ -101,3 +101,71 @@ SẴN SÀNG KIỂM 34520347 (review/world-events). Handover (if a successor is n
 
 ## 7. Interface for AG-ALL (sent 17/11 by send_message)
 `worldWin(k)`, `worldPlanW(p) → {place:{key:mult}, act:{TAG:mult}, force:[{b,pl,deed,why}], why}` (0 = closed place; AG-ALL accepted, ca94ddd4 on review/ag-all, sets WORLD_PLAN_HOOKED in jagday); mindW already multiplied; set `window.WORLD_PLAN_HOOKED=1` when the day plan multiplies its place weights by worldPlanW (my fallback pull then stops); Emperor away: `worldWin("away")`, followers `x.f` (ids, "me").
+
+## 8. PART 2 — batch 2 (dev/research/world-events-2.md, 18 events) on the same window layer
+
+Worker: WORLD-EVENTS PART 2 (opus), session_01UV1Szm9sHk4A9qggdUgHhF, opened by Foreman C-AG. Branch `review/world-events-2` from review/world-events 34520347 (rebase onto the r1 PASS sha when it lands). START_CTX ~4 % of the 1M window (roll-over at 29 %, ceiling 60 %); finished at ~13 %.
+
+PRIORITY #1 CHECK ('world window|worldWin|jworld|BAL.world'): OD 0 | ledger 0 | claims 1 (this job) | main 0 | review/* 0 (only review/world-events = part 1, built on). Every hook of research §2 re-grepped on the branch (j13 S.thIll, j3 S.emp.ill, j1 setHeir/allKids/mkKid, j54 k.wed/hW, j55 trS/T.H/tdPowAdd/tdHouse, j12 WX f 4, j8 framed, j10 allServ/fillStaff, j17 servant ageing, jnet netIs greed, j22 S.men Vương gia, BAL.srvAge) — reused, nothing rebuilt.
+
+### 8.1 What was built
+- `dev/build/jworld2.js` (assembled right after jworld.js): 17 EVD entries in the SAME `EVD` / `WN` / `S.wwin` / `worldStart` / gates. jworld.js only gained: `window.WORLD_X` (its helpers, one copy), `XH` trigger hooks run in the tuần tick after wCalendar, `EVD[k].nm` names, `nightMul` (a window lowers every night by one factor, her and NPC alike), stipend cut = the largest `payCut` of the open pay windows, ôn dịch also follows a locust window.
+- `BAL.world.<k>` one block per event (jbal2.js, same literal). No new UI: start / end CENTER pop-ups are the existing modal card via worldShow (her options = the same list NPCs pick from by mindPick), one Tuần lục line each, NO Dư đồ "!" (owner OD 17/11 ~14:30Z).
+- **#9 Địa chấn: PARKED** (research: no repair-debt state, no content; nothing to make it a real cause).
+
+| # | k | REAL cause | effect on everyone | NPC (two-way) | her options |
+|---|---|---|---|---|---|
+| 1 | day | a living child born (allKids new name), opens BAL delay 3 tuần later | mother Danh/Sủng (boy > girl), Kho lúa − | gift by own silver; jealous → cold gift / stay away (mother's grudge) | (mother) big feast / plain · (other) rich gift / mid / stay away |
+| 2 | lap | S.heir set (j3/j51/setHeir) | mother's house pow +; no night that tuần; đại xá chance | others with sons scheme/frame up (act) | gift / watch |
+| 3 | hau | queen seat changes (lập / phế) | old house falls, new rises (j55) | ally/social/greet up | congratulate / keep distance |
+| 4 | thb | S.thIll stage ≥ 2 | nights × 0.5 for all, no yến, queen Danh +, rota force slot at Đức Thọ | nurse / pray / ignore → Thái hậu favour | nurse (odds) / sutra / medicine |
+| 5 | thi | every 3 y, month 3 | winning house (pow+sk) pow +, its consorts Danh + | court/art up | (if her house) letter to father (odds) |
+| 6 | vuong | every 3 y, month 10 + a living Vương gia, Emperor in palace | weak border → Emperor wary; gossip on one consort | social/spy up | meet the prince (odds, gossip risk) / avoid |
+| 7 | ret | heavy snow (WX f 4) in 2 of the last 3 tuần, winter | low ranks buy charcoal or lose Sức / phong hàn; lãnh cung worst; maids | rich share (Đức, Danh) or keep | (low) buy / endure · (high) share / keep |
+| 8 | trung | j55 failed flood/drought relief, Kho lúa between dis.kho and 50, months 5–9 | Kho −, pay cut 1/10, Emperor eats less; raises ôn dịch | donate / hoard | donate / thrift / ignore |
+| 10 | vuco | a REAL bùa frame (j8 framed: frame, j42 plant, month search, jtruth) while Emperor / Thái hậu / a child is ill | every cung searched: planted spies caught; nights paused; pay held | the real planter caught by her own schemes, else a scapegoat; giới nghiêm may follow | open doors / clean up first / accuse her worst foe |
+| 11 | cam | after a vu cổ or ngoại thích verdict, or Biên < 25 after a lost battle | vuon / cnh / thu closed for NPC plans (0) AND her walk (goTo) | scheme up, spy down | — |
+| 12 | trom | month 12 audit + a real greedy servant (netIs greed) | greedy servants caught in every cung, pay held, scapegoat; phóng cung may follow | — | open / bribe audit / clean own house |
+| 13 | phong | month 2 with ≥ 3 maids at BAL.srvAge.out palace-wide (or after trộm) | aged maids leave every household; Nội vụ refills (fillStaff) | rich pay to keep one | silver home / keep one / let go |
+| 14 | hon | a real daughter's wedding (j54 k.wed; hòa thân flagged) | hồi môn Kho −, mother Danh + | gifts by own silver | gift / attend |
+| 15 | ngoai | a house pow ≥ 85 while Emperor < 30 or ill, or the queen's house | purge (house pow −30, its consorts Sủng/Danh −, curfew chance) or it rises | ally/scheme/warn up | (her house) advise father (odds) |
+| 16 | phat | month 4 (Phật đản) yearly; đại trai đàn 1 tuần into dis/dich/trung (Thái hậu alive) | Thái hậu favour by donation; big: no night, may end the disaster next tuần | pray up, donate by silver | donate / sutra / pray only |
+| 17 | benh | S.emp.ill stage ≥ 2 | no night, no yến; Hầu thuốc force slot (dtd) from rank 3 | greet/scheme/pray up | nurse (odds) / ginseng / pray |
+| 18 | tinh | month 1 tuần 3 yearly (not under curfew) | family silver by house pow; strong houses show off | social/scheme up | take the gift / ask father to speak (odds) |
+
+### 8.2 LUẬT SỬA CẢ NHÓM (world_scan.py now has batch-2 keywords: 38 definitions)
+| content | before | after |
+|---|---|---|
+| j7 `empnight` (the Emperor at her door at night, weekly pool) | came even while every night was barred (long thể bất an, dịch, away, tang weeks) | leaves the pool while worldNightBlocked(S) |
+| servants past BAL.srvAge.out in NPC / her households | only she (as a servant) was sent out at 30; household maids stayed forever | the phóng cung window sends them out for everyone |
+| j3 PEND.thbenh, j71 thbenh merit, deal() Hầu thuốc card, j54 hòa thân, story roads (jrd_*, j67, jnroadm Án mất trộm) | already tied to a real state / road | unchanged |
+
+### 8.3 Tests
+- `node dev/test/world_check2.js dev/index.html` → WORLD CHECK2 PASS 39/39 (each of 17 kinds: opens, start + end center pop-up, Tuần lục line, no Dư đồ "!"; every real cause opens its window; same night factor / night bar / pay hold for her and NPC; curfew closes NPC plan places and her walk; aged maids leave an NPC house; force slot; old save).
+- `node dev/test/world_check.js dev/index.html` → PASS 25/25 (one earlier run 24/25 out of 8 runs: a random flake, not reproduced in 7 reruns).
+- QUICKCHECK on 22a0ae32: PASS · 171 s · old save ok · perf new/live render 183/207, tab 351/355, buổi 1084/937, tasks>200ms 14/17 · core gates PASS.
+
+### 8.4 Bot (batch 1 + 2 together) — `node dev/measure/worldbot.js dev/index.html 35 <seed>`, 35 years each, 0 errors / page errors / stuck
+"hardship" = tang, dis, dich, hoa, trung, ret, vuco, cam, trom, ngoai, benh, thb.
+| per game year | seed 1 | seed 3 | seed 4 | seed 5 (final BAL) |
+|---|---|---|---|---|
+| windows of any kind | ~6.5 | ~6.7 | ~7.2 | ~7.0 |
+| day / lap / hau | .37/.09/.06 | .46/.09/.17 | .49/.11/.06 | .31/.11/.11 |
+| thb / benh | .20/0 | .23/.03 | .26/.03 | .11/0 |
+| thi / vuong / tinh / phat | .17/.14/.86/1.14 | .20/.20/.86/1.06 | .23/.20/.89/1.06 | .23/.17/.91/1.11 |
+| ret* / trung / vuco / cam | 0/.06/.06/.06 | 0/0/.11/0 | .46/.06/.06/.20 | .49/.03/.03/.06 |
+| trom / phong / hon / ngoai | .26/.11/0/0 | .29/.11/.03/.03 | .23/.09/0/.09 | .17/.06/0/.06 |
+| tuần with 2 windows / 3 | 49 / 0 | 48 / 0 | 62 / 0 | 44 / 0 |
+| share of tuần under ANY hardship | 12 % | 12 % | 15 % | 12 % |
+| longest hardship run (tuần) | 10 | 12 | 11 | 9 |
+| her nights barred (share of tuần) | 7.3 % | 6.3 % | 8.4 % | 7.5 % |
+| any window open | 25 % | 25 % | 28 % | 27 % |
+*seeds 1/3 ran before the snow rule fix (2 consecutive tuần never hit under the bot's LCG; now 2 of the last 3) and trộm p 40 → 25; seed 4 before ret cd 36 → 54.
+Reading: about 3 tuần in 4 have no window at all; hardship covers ~1 tuần in 8 and never runs longer than ~3 months; her nights are barred ~7 % of tuần (batch 1 alone 6.6 %). Rare ones (benh, hon, ngoai) are rare because their real cause is rare in ~6-year bot lives (the Emperor > 50, a daughter of 18, a house ≥ 85). Knobs if the reviewer wants calmer: BAL.world.ret.cd, phat (big afterP), maxOpen.
+
+### 8.5 Open
+- Co-op: triggers and NPC effects run on the host (as batch 1); the guest gets the cards and the gates; the goTo curfew gate reads the shared window.
+- AG-ALL: new force slots (Phiên hầu bệnh at tn, Hầu thuốc at dtd, Lễ Phật at cnh, Dự yến đầy tháng at the mother's palace) use deeds routine / pray / gift (the ones AG-ALL already knows); the curfew is place multiplier 0 (already handled as "closed").
+- kframe (j8 "Vu con nàng trù ẻo") does not call framed(), so it does not open a vu cổ window yet (one-line follow-up if wanted).
+
+SẴN SÀNG KIỂM 22a0ae32 (review/world-events-2).
