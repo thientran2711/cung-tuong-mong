@@ -34,3 +34,4 @@ W4c: 100 done (a18 through m13-ty4), frag W4c-3.json (24). Batches J/K/L in flig
 W4c: 124 done (a18 through m16-ty4), frag W4c-4.json. Batches M/N/O in flight = a18 list lines 125-148 (next: 149+).
 W4c: 148 done (a18 through m19-ty4), frag W4c-5.json. P/Q/R in flight = a18 list lines 149-172 (next: 173+).
 W4c: 172 done (a18 through m22-ty4), frag W4c-6.json. S/T/U in flight = a18 list lines 173-196 (next: 197+).
+## W4c PAUSED (17/11): Foreman C urgent: owner says Dap ung and cung nu dresses look identical. No more maid-ty painting until lead #6 gives the new maid anchor (plainer uniform, still fine silk + small trâm; consorts clearly richer) after owner OK on a side-by-side sample. Done 172 a18 (through m22-ty4), all on CDN w/ hd; S/T/U (a18 lines 173-196) stopped, any renders they made are unused (do not upload). Resume at a18 list line 173 (maid-m22-ty5). Existing 172 may need a redo if the new maid anchor differs.
