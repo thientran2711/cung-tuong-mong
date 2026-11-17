@@ -20,3 +20,11 @@ fig-maid-m01-a18 xSXPMlnjfW/1leOTEUr4r | m01-cold-a18 3z5VF9VREY/jUB4eovLD0 | m0
 - The commit trailer in my first commit has a typo'd session id; ignore.
 
 - STATUS 17/11 ~02:20Z: W5 #1 stopping here (context), 25/3172 done+uploaded, 0 hard. Lead: open the successor.
+
+## !! NEW RULES FROM LEAD (arrived 17/11 01:30-01:38Z, they SUPERSEDE the 4k/remove_background method above) — read BATCH_BRIEF.md (THROUGHPUT + CONTEXT DIET sections) too
+1. MY SHARD IS NOW lists/shards/maid-rest-A.txt (first half, 1586 files). maid-rest-B belongs to W6 (session_011xDdVNVPxjHSMerTjisLs3): never touch B. All a18 of A first, then a26/a36/a51.
+2. 2K ONLY from now on: images_generate gpt-2-6 width 1024 height 2048 resolution 2k (65 cr). The 25 files done at 4k stay.
+3. Transparency: extraSettings {"transparentBackground": true} + prompt "FULLY TRANSPARENT BACKGROUND (real alpha channel, cut-out PNG, no backdrop, no checkerboard, no ground shadow)", drop 'plain light parchment background' from the style prefix; verify alpha extrema (0 and 255) before finish_fig; opaque -> images_remove_background (+3 cr) fallback (tools/maid_proc.py, see BATCH_BRIEF).
+4. hd: maids have no hd on the CDN -> do not produce/upload hd. Upload fig + tn (if exists) + por only.
+5. Context diet: prompt <=110 words, 8 generations in ONE message, ONE creations_wait with all ids, ONE bash per batch (download+alpha+finish+qa+ONE contact sheet), look at <=2 images per batch, one TSV line per file. Target >=40 files per session.
+6. Done-list above is in A or B? m01/m02 a18 files are all in the first half of the list; check membership against maid-rest-A.txt before continuing.
