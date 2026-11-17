@@ -149,6 +149,8 @@ RUNNING C sessions (12): lead #6 session_011xDdVS87fDNLJMJGzeiVWL + W2b session_
 
 - 04:42Z W7b maid standard v3 eaa031f1a (5 different garments, no vest) → C looked OK → sent to owner. W3c consort redo (t2–t10 distinct designs, no vest) running.
 
+- 04:46Z W3c consort v2 FAILED by C (t2 + t7 vests) → v3 rank-standard-consort-v3-2row.jpg: no vest, distinct designs → C looked OK → sent to owner (flag: t2 plainer than t1; W3c prepares t2 alt).
+
 ## SESSION 12 LOG
 - 04:40Z ROLLOVER at ctx ~26%. 04:33Z: W6b + W5c plain-maid repaint done (own original looks); drift lists parked for post-standard pass. Relayed owner 04:48Z (player 4 figures → 36 consorts; mama from maid figures) to lead #6: mama new files paused, hero grid report asked.
 - 03:33Z start (depth 6/8, START_CTX ~5% → roll at 30%). s11 told to stop + ARCHIVED; s11 trig disabled; own wake trig_0117UxAwzdJZpDAAmy4cTHSM (:33). All C sessions told C = s12. rank-sample-v2 shown to owner.
