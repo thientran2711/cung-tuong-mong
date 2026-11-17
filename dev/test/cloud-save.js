@@ -164,6 +164,8 @@ const freePort=()=>new Promise(r=>{const s=net.createServer();s.listen(0,'127.0.
   const bw=await I.evaluate(()=>{const e=document.querySelector('#modal.kcloud [data-cl="drop"]'),r=e.getBoundingClientRect(),c=document.createRange();c.selectNodeContents(e);const rs=[...c.getClientRects()];return {h:r.height,lines:new Set(rs.map(q=>Math.round(q.top))).size,sw:e.scrollWidth<=e.clientWidth+1}});
   ok(bw.lines===1&&bw.sw,'delete button: one line, no word breaking',bw);await shot(I,'7-delete-btn');
   await I.click('#modal.kcloud [data-cl="drop"]');await I.waitForSelector('#modal .kcf [data-kcf-yes]');await shot(I,'8-delete-confirm');
+  await I.click('#modal .kit-x');await I.waitForTimeout(400);ok((await C(I)).k===kk&&!(await I.$('#modal .kcf')),'cancel (✕) on the confirm keeps the link');
+  await I.click('#modal.kcloud [data-cl="drop"]');await I.waitForSelector('#modal .kcf [data-kcf-yes]');
   const nb=await I.evaluate(()=>{const e=document.querySelector('#modal .kcf [data-kcf-yes]'),c=document.createRange();c.selectNodeContents(e);return new Set([...c.getClientRects()].map(q=>Math.round(q.top))).size});ok(nb===1,'confirm yes button: one line');
   ok((await head(kk)).rev>0||true,'cloud sổ exists before delete');
   await I.click('#modal .kcf [data-kcf-yes]');await I.waitForFunction(()=>!CTM_CLOUD.state.k,null,{timeout:15000});

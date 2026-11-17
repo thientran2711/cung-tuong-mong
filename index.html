@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"bad6d59f+","t":"2026-11-17T03:41Z","c":"Chơi chung: chuẩn bị đường truyền gọn nhẹ hơn giữa hai máy; khi chơi chưa có gì thay đổi.","b":"424aff341b45","h":[{"s":"babc9b4a","t":"2026-11-17T01:39Z","c":"Chơi chung không còn treo máy vì tên bạn lặp chữ; số bóng người trên dư đồ khớp đúng người đang ở đó; việc có hạn giờ hiện đồng hồ ngay dướ…"},{"s":"92685210+","t":"2026-11-17T00:53Z","c":"Khung việc và khung sự kiện bốn cỡ, tranh lấp đầy khung, việc nhắc tên ai hiện chân dung người ấy; phẩm của món đồ nằm ngay trên viền khung…"},{"s":"6f513340","t":"2026-11-16T23:24Z","c":"Vào game mới không còn bật ngay màn lật thẻ, lật thẻ chỉ khi vào buổi tối; dư đồ nhãn giấy mới; việc dài lấn sang buổi sau; lời trong cung …"},{"s":"7a18d957","t":"2026-11-16T22:44Z","c":"review-diemtrang-fx-r1 report"},{"s":"afe2bcbc","t":"2026-11-16T22:25Z","c":"review r1: KIT 84.1a note + report"},{"s":"dea1d445+","t":"2026-11-16T21:32Z","c":"golive lag-play-2: CHANGE line + site rebuilt"},{"s":"674f3af4","t":"2026-11-16T21:21Z","c":"Chơi cùng bạn: bạn chơi chung chưa gặp mặt nay hiện tên gọi chung “Hảo hữu của ta” ở mọi nơi, không còn ẩn thành dấu hỏi."},{"s":"923567d5+","t":"2026-11-16T21:03Z","c":"Hình nhân vật: hết vệt xám ở cổ và viền tối quanh người."},{"s":"59812a63+","t":"2026-11-16T20:41Z","c":"Khung chung: khoảng cách đều nhau ở sổ tuần và thẻ thân phận; hàng sổ gọn, thẻ lật không đè chữ."},{"s":"ab12d6fc","t":"2026-11-16T20:53Z","c":"Tuyết và đom đóm mới, mượt hơn; nền tranh không còn vẽ lại mỗi khung hình."}]};
+window.CTM_BI={"s":"9ed0d5e3","t":"2026-11-17T04:24Z","c":"cloud-del: Xóa sổ trên mây (kit danger button + kitConfirm at title layer → vault drop); test case 9","b":"796d26f3fded","h":[{"s":"bad6d59f+","t":"2026-11-17T03:41Z","c":"Chơi chung: chuẩn bị đường truyền gọn nhẹ hơn giữa hai máy; khi chơi chưa có gì thay đổi."},{"s":"babc9b4a","t":"2026-11-17T01:39Z","c":"Chơi chung không còn treo máy vì tên bạn lặp chữ; số bóng người trên dư đồ khớp đúng người đang ở đó; việc có hạn giờ hiện đồng hồ ngay dướ…"},{"s":"92685210+","t":"2026-11-17T00:53Z","c":"Khung việc và khung sự kiện bốn cỡ, tranh lấp đầy khung, việc nhắc tên ai hiện chân dung người ấy; phẩm của món đồ nằm ngay trên viền khung…"},{"s":"6f513340","t":"2026-11-16T23:24Z","c":"Vào game mới không còn bật ngay màn lật thẻ, lật thẻ chỉ khi vào buổi tối; dư đồ nhãn giấy mới; việc dài lấn sang buổi sau; lời trong cung …"},{"s":"7a18d957","t":"2026-11-16T22:44Z","c":"review-diemtrang-fx-r1 report"},{"s":"afe2bcbc","t":"2026-11-16T22:25Z","c":"review r1: KIT 84.1a note + report"},{"s":"dea1d445+","t":"2026-11-16T21:32Z","c":"golive lag-play-2: CHANGE line + site rebuilt"},{"s":"674f3af4","t":"2026-11-16T21:21Z","c":"Chơi cùng bạn: bạn chơi chung chưa gặp mặt nay hiện tên gọi chung “Hảo hữu của ta” ở mọi nơi, không còn ẩn thành dấu hỏi."},{"s":"923567d5+","t":"2026-11-16T21:03Z","c":"Hình nhân vật: hết vệt xám ở cổ và viền tối quanh người."},{"s":"59812a63+","t":"2026-11-16T20:41Z","c":"Khung chung: khoảng cách đều nhau ở sổ tuần và thẻ thân phận; hàng sổ gọn, thẻ lật không đè chữ."}]};
 /* KBOOT — BOOT COVER (owner 15/11 "Khi vừa bấm vào game, có chừng ít hơn 1 giây hiện khung này"; KIT §14.1).
    Before: while the 4 MB page parsed, the browser painted the bare static markup of p1.html (HUD box, a vertical stat label list, empty
    panels, the old 11-tab bar) for ~1 s on a warm open and many seconds on a cold one, before any kit CSS/JS existed.
@@ -39033,6 +39033,7 @@ function body(pg){
   `<div class="kpnote">Ám hiệu này là chìa khóa sổ: ai có nó đều mở được sổ của ngươi. Chớ đưa cho người khác.</div>`+
   `<div class="kslot-a"><button class="kbtn" data-cl="copy">Chép ám hiệu</button><button class="kbtn alt" data-cl="share">Gửi sang máy kia</button></div>`+
   `<div class="kslot"><h4 class="kpst">Thôi nối trên máy này</h4>${kitRows([["Sổ trên máy","vẫn giữ nguyên","n"],["Sổ trên mây","vẫn còn, nối lại bằng ám hiệu","n"]])}<div class="kslot-a"><button class="kbtn alt" data-cl="unlink">${ASK?"Chắc chắn?<small>máy này thôi gửi sổ lên mây</small>":"Thôi nối"}</button></div></div>`+
+  `<div class="kslot"><h4 class="kpst">Xóa sổ trên mây</h4>${kitRows([["Sổ trên máy","vẫn giữ nguyên","n"],["Sổ trên mây","xóa hẳn, không lấy lại được","r"],["Máy khác","mất mối nối bằng ám hiệu này","n"]])}<div class="kslot-a"><button class="kbtn kdanger" data-cl="drop"${STATE==="busy"?" disabled":""}>Xóa sổ trên mây</button></div></div>`+
   (MSG?`<div class="kpnote">${esc(MSG)}</div>`:"");
  if(pg==="link")return kitInput({id:"cl-in",label:"Ám hiệu sổ mây",value:"",placeholder:"tám chữ và số, như ABCD-EFGH"})+
   `<div class="kslot-a"><button class="kbtn" data-cl="go"${STATE==="busy"?" disabled":""}>Nối sổ</button></div>`+
@@ -39069,6 +39070,15 @@ async function link(v){const k=String(v||"").toUpperCase().replace(/[\s-]/g,"").
  C={k,rev:0,h:{},dev:devLabel()};saveC();MSG="";const r=await sync();
  if(r==="conflict"){PICK={};open("pick");return}
  MSG=r==="ok"||r==="same"?"Đã nối sổ. Sổ trên máy này đã khớp với mây.":ERR[C.err]||"";back()}
+/* Xóa sổ trên mây: kit danger button → kitConfirm → Worker "drop" (wipes the Vault only; the sổ on this device stay) → clear the link like "Thôi nối" */
+function dropAsk(){if(!C.k||STATE==="busy")return;
+ kitConfirm({title:"Xóa hẳn sổ trên mây?",lines:["Sổ trên máy này vẫn còn.","Các máy khác nối bằng ám hiệu này sẽ không còn sổ để nối. Sổ trên mây xóa rồi không lấy lại được."],yes:"Xóa hẳn",no:"Thôi",onYes:dropGo});
+ /* on the title the pop-up must sit at the title menu's layer (z 55) like every title sub-panel, or #title covers it */
+ const m=Q[0];if(m&&!/kptitle/.test(m.cls||"")){m.cls=((m.cls||"")+" kptitle").trim();showModal()}}
+async function dropGo(){const k=C.k;if(!k)return;STATE="busy";wire();const r=await api("drop",{k});STATE="";
+ if(r.s===200||r.s===404){C={};saveC();MSG="";ASK=0;wire();back();
+  try{kitModal({kind:"notice",title:"Đã xóa sổ trên mây",sections:[{h:"",html:"<p>Sổ trên máy này vẫn còn.</p>"}],btn:"Đã hiểu"})}catch(e){}return}
+ MSG=r.s===0?ERR.net:r.s===429?ERR.slow:ERR.srv;wire();redraw()}
 async function vers(){VERS=null;MSG="";open("vers");const r=await api("list",{k:C.k});if(r.s===200)VERS=r.j;else MSG=r.s===0?ERR.net:ERR.srv;redraw()}
 $("modal").addEventListener("click",async e=>{const b=e.target.closest("button[data-cl]");if(!b||b.disabled)return;e.stopPropagation();
  try{if(typeof sfx==="function")sfx("sfx-tap")}catch(x){}
@@ -39081,6 +39091,7 @@ $("modal").addEventListener("click",async e=>{const b=e.target.closest("button[d
  if(a==="copy")return copy(group(C.k),b,"Đã chép ám hiệu");
  if(a==="share"){if(navigator.share)navigator.share({title:"Cung Tường Mộng · Sổ mây",text:"Ám hiệu sổ mây: "+group(C.k)}).catch(()=>{});else copy(group(C.k),b,"Đã chép ám hiệu, dán sang máy kia");return}
  if(a==="unlink"){if(!ASK){ASK=1;redraw();return}ASK=0;C={};saveC();back();return}
+ if(a==="drop")return dropAsk();
  if(a==="now"){await sync();return}
  if(a==="pick"){PICK={};MSG="";return open("pick")}
  if(a==="keep"){PICK[+b.dataset.n]=b.dataset.v;const P=C.pend;if(P&&P.slots.every(n=>PICK[n])){MSG="Đang giữ bản đã chọn…";redraw();await resolve(PICK);PICK={};
@@ -58136,7 +58147,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="424aff341b45";window.CTM_BUILD=BUILD;
+const BUILD="796d26f3fded";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
