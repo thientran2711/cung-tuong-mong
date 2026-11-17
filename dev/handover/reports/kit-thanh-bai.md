@@ -35,3 +35,10 @@ PRIORITY #1 CHECK: reports/review-kit-option-rows.md (r1 FAIL, 2 items) | main n
 2. EMPTY THÀNH: own dim line "Không được gì thêm" (empty BẠI keeps "Tốn công, không được gì"). A no-roll card with hỏng: only (no thành:) = ONE block (THÀNH, row Mất): "Cáo bệnh, không dự" = THÀNH · Mất Danh -1 (shot shows it). No-roll with both parts still two blocks. Scan B (622 strings): 73 THÀNH-empty (roll) -> own line; 42 no-roll hỏng-only -> one block; 141 no-roll both parts -> two blocks.
 Docs: KIT.md (§88 r2 lines), VANPHONG.md (3 lines).
 Quickcheck on aa5a29d7: PASS, core gates PASS.
+
+## r3 (fix of reviewer r2 FAIL 8a1e5b3f) — branch review/kit-thanh-bai-r3 626b30dd (on 8a1e5b3f)
+PRIORITY #1 CHECK: reports/review-kit-option-rows.md r2 FAIL | main jk2b kitHideOut (KIT 28.6 cost mode) | review/* none | claims MAIN s36.
+Cause: cost-mode event options (PEND dialogs) run kitHideOut, which removes every .kb .kr row except Tốn/Cần and adds Gợi ý — but left the new .kbh heads, so THÀNH/BẠI stood empty ("Có người đến", "Thu làm tai mắt", sure "Bỏ bạc nhờ vẽ cho đẹp"). Fix (jk2b, one place): heads removed with the rows. I did NOT add "Không được gì thêm" / "Tốn công…" placeholders there: the kit hides the outcome on purpose in cost mode (KIT 28.6), a placeholder would announce one. Before/after on Hội phối-style cost-mode dialogs (pushDil mkP giu/night1/night2/doc/phan/trom, ipadAir): before heads 1-2 per card with 1 row (hint only); after 0 heads on every card.
+Scan: option-modal-scan now flags EMPTYHEAD, waits 900 ms per new modal then calls kitScrollCues before measuring (no race), and drives those 6 cost-mode builders directly; fold 7 / ipadAir 9 modals 0 flagged. (thanh-bai-scan stays the deck + source-string scan; the option-modal path is covered by option-modal-scan.)
+Re-checked the main-merge in jksize: no conflict markers, data-narrow (nar) path and our kszNeedTxt / .kszstk coexist (lines 347/488/515/520/550).
+Quickcheck 626b30dd: PASS, core gates PASS.
