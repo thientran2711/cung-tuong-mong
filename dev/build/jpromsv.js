@@ -67,7 +67,7 @@ function spAsk(o,s){if(!o||!s)return"";if(s===S)S.srv.lvCd=S.turn+BAL.ag.stf2.le
 function spLeaveCard(s){const B=BAL.sp;const O=spLeaveOpts(S,s);const [K,D,L]=O;const v=K.v,keep=K.keep;
  tsPanel({t:"Kẻ hầu xin đi",who:pServ(s),h:`<p>${s.name} thưa rằng ${v?`bên ${tsNm(v)} muốn có ${s.role==="maid"?"nàng":"hắn"} sang hầu`:"muốn xin về Nội vụ phủ"}, xin ${tsGoi()} cho đi.</p>`,
   opts:[tsOpt({n:K.n,fx:{},need:[tsNeedBac(keep)],duoc:[`lòng +${B.keepGain}`,"giữ người, giữ chức"],mat:[`mất ${keep} bạc`],kem:[`kiêu thêm ${B.keepMo} tháng`],go:()=>{const r=K.go();if(r)log(r)}}),
-   tsOpt({n:D.n,duoc:["hết kiêu",`kẻ hầu khác lòng +${B.demoteOthers}`],mat:[`${s.name} xuống ${SRK[s.role][srk(s)-1]}`,`lòng -${B.demoteLoy}`],kem:["lòng dưới 30 thì có khi bán mình cho cung khác"],go:()=>{const r=D.go();if(r)log(r)}}),
+   tsOpt({n:D.n,duoc:["hết kiêu",`kẻ hầu khác lòng +${B.demoteOthers}`],mat:[`${s.name} xuống ${SRK[s.role][srk(s)-1]}`,`lòng -${B.demoteLoy}`],kem:[`lòng dưới ${BAL.loy.out} thì có khi bán mình cho cung khác`],go:()=>{const r=D.go();if(r)log(r)}}),
    tsOpt({n:L.n,duoc:[`kẻ hầu khác lòng +${B.letOthers}`,"bớt một miệng ăn"],mat:[`mất ${s.name}`],kem:v?[`${s.name} mang chuyện cung ngươi sang bên ${tsNm(v)} (người ấy nắm thêm 1 chứng cứ)`]:[],go:()=>{const r=L.go();if(r)log(r)}})]})}
 /* monthly: pride runs its course for every household (hers and the NPCs'), after the merit promotions */
 function spMonth(){let ev="";const B=BAL.sp;for(const o of consorts()){if(!o||o.dead||(o!==S&&!o.alive))continue;for(const s of (o.staff||[]).slice()){if(!s.proud||s.coop)continue;

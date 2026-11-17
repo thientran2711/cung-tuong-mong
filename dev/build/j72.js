@@ -385,7 +385,7 @@ window.q72Bot=function(){if(!S||S.dead||Q.length||!q72On())return false;const q=
   t:"Tìm kẻ làm lọt chuyện trong cung ngươi",h:"“{Nc}, có người đang nắm chuyện riêng của cung mình. Chắc có kẻ làm tai mắt cho ai đó. Để nô tỳ cùng {N} dò xét.”",dl:5,tr:"Quả có phi tần đang nắm Chứng cứ về ngươi.",
   s:[G("home","Dò xét kẻ hầu","mat",45,2),C(X=>X.p.sid!=null?`Ngươi biết sự thật: ${X.p.sn} làm tai mắt cho ${(()=>{const v=byKey(X.p.who);return v&&v!==S?v.name:"người ngoài"})()}`:"Ngươi biết sự thật: kẻ hầu của ngươi không ai làm tai mắt; chuyện lọt ra từ chỗ khác",
    O(X=>X.p.sid!=null?`Gọi ${X.p.sn} ra răn đe, bắt thôi`:"Khen {A} cẩn thận",{fn:X=>{if(X.p.sid==null){S.maid.loyal=cl(S.maid.loyal+BAL.eff.j72.loyalFn_2,0,100);return `Lòng ${S.maid.name} ${balSg(BAL.eff.j72.loyalFn_2)}.`}const s=servById(X.p.sid);if(s&&ownerOf(s)===S){s.spyFor=null;s.loyal=cl((s.loyal||0)-BAL.eff.j72.loyalFn_3,0,100);return `${s.name} thôi làm tai mắt, lòng với ngươi -${balAb(BAL.eff.j72.loyalFn_3)}.`}return""}}),
-   O(X=>X.p.sid!=null?`Giữ ${X.p.sn} lại, giữ miệng trước mặt hắn`:"Để yên",{w:{tamco:1}}))],ok:{r:8},no:{r:-3}});
+   O(X=>X.p.sid!=null?`Giữ ${X.p.sn} lại, giữ miệng trước mặt hắn`:"Để yên",{w:{tamco:1},fn:X=>{const s=X.p.sid!=null?servById(X.p.sid):null;if(s&&ownerOf(s)===S)typeof knSoldFound==="function"&&knSoldFound(s);return""}}))],ok:{r:8},no:{r:-3}});
  T7("bac_mat","inv",{r:"sv",rf:s=>(S.staff||[]).some(z=>netIs(z,"greed")&&z!==s),p:X=>{const s=(S.staff||[]).find(z=>netIs(z,"greed")&&z.sid!==X.A.id);return{cul:s.sid,cn:s.name}},t:"Tìm số bạc lương {A} bị mất",
   h:"“Số bạc dành dụm cả năm của nô tỳ để dưới gối, giờ mất sạch. {Nc} làm chủ cho nô tỳ.”",dl:4,
   s:[G("home","Tra hỏi trong cung","mat",50,2),C(X=>`Ngươi biết sự thật: ${X.p.cn} lấy bạc`,

@@ -76,8 +76,8 @@ EV6("servLeave","serv",{a:["sv"],pp:()=>{const a=sv6();return a==null?null:{a0:a
   c6("Không cho",{w:{suc:1},r:[[X.A,-12]]})]});
 EV6("newServSus","serv",{a:["sv"],pp:()=>{const a=sv6();return a==null?null:{a0:a}},w:C=>1,
  v:["{A} dạo này hay ra vào cửa sau lúc nửa đêm.","Cung nhân bảo {A} có nhiều bạc lạ, mua cả son phấn đắt tiền.","{A} lật xem thư từ trên án của ngươi khi tưởng không ai thấy.","{A} biết những chuyện trong cung ngươi mà lẽ ra không ai kể."],
- o:X=>[c6("Cho người theo dõi",{c:{suc:-3},p:od(40+S.mat*6),w:{mat:1},wt:[G6("biết hắn có hai lòng hay không")],l:{danh:-1},lt:[R6("hắn biết bị theo dõi")],ok:()=>{const s=X.A.o;const two=!!(s.spyFor&&s.spyFor!=="me");return two?`${s.name} quả có làm tai mắt cho người khác. Ngươi đã rõ.`:`${s.name} không có hai lòng; chỉ là chuyện riêng.`}}),
-  c6("Hỏi thẳng",{p:od(35+S.danh/3),r:[[X.A,4]],lr:[[X.A,-8]],lt:[R6("hắn tủi thân hoặc giấu kín hơn")],ok:()=>{const s=X.A.o;return s.spyFor&&s.spyFor!=="me"?`${s.name} quỳ xuống khai thật đang bị người khác sai khiến.`:`${s.name} trong sạch, cảm động vì được hỏi thẳng.`}}),
+ o:X=>[c6("Cho người theo dõi",{c:{suc:-3},p:od(40+S.mat*6),w:{mat:1},wt:[G6("biết hắn có hai lòng hay không")],l:{danh:-1},lt:[R6("hắn biết bị theo dõi")],ok:()=>{const s=X.A.o;const two=!!(s.spyFor&&s.spyFor!=="me");if(two)typeof knSoldFound==="function"&&knSoldFound(s);return two?`${s.name} quả có làm tai mắt cho người khác. Ngươi đã rõ.`:`${s.name} không có hai lòng; chỉ là chuyện riêng.`}}),
+  c6("Hỏi thẳng",{p:od(35+S.danh/3),r:[[X.A,4]],lr:[[X.A,-8]],lt:[R6("hắn tủi thân hoặc giấu kín hơn")],ok:()=>{const s=X.A.o;if(s.spyFor&&s.spyFor!=="me")typeof knSoldFound==="function"&&knSoldFound(s);return s.spyFor&&s.spyFor!=="me"?`${s.name} quỳ xuống khai thật đang bị người khác sai khiến.`:`${s.name} trong sạch, cảm động vì được hỏi thẳng.`}}),
   c6("Đổi hắn đi việc khác",{w:{tamco:1},r:[[X.A,-6]],k:[R6("mất người quen việc")]})]});
 /* ---------- TIN ĐỒN (true or false; she can check; the game reports only the truth) ---------- */
 EV6("rumorPreg","rumor",{a:["rv"],pp:()=>{const a=rv6(v=>v.rank>=1);return a==null?null:{a0:a}},w:C=>1.2,
@@ -87,7 +87,7 @@ EV6("rumorPreg","rumor",{a:["rv"],pp:()=>{const a=rv6(v=>v.rank>=1);return a==nu
   c6("Mặc kệ lời đồn",{w:{duc:1},k:[R6("không biết thật hư")]})]});
 EV6("rumorSpy","rumor",{a:["sv"],pp:()=>{const a=sv6();return a==null?null:{a0:a}},w:C=>1,
  v:["Có kẻ rỉ tai ngươi: {A} là tai mắt người khác cài vào.","Lời đồn trong các dãy nhà hầu: {A} đem chuyện cung ngươi kể ra ngoài.","Người bên Kính sự phòng nói nhỏ: {A} có lui tới các cung khác.","{M} nghi {A} hai lòng, nhưng không có bằng chứng."],
- o:X=>[c6("Thử lòng bằng một tin giả",{c:{suc:-3},p:od(50+S.tamco/3),w:{tamco:1},wt:[G6("biết thật hư")],l:{danh:-1},lt:[R6("thử vụng, hắn biết")],ok:()=>{const s=X.A.o;return s.spyFor&&s.spyFor!=="me"?`Tin giả lọt ra ngoài: ${s.name} đúng là tai mắt người khác.`:`Tin giả nằm yên: ${s.name} trung thành, lời đồn sai.`}}),
+ o:X=>[c6("Thử lòng bằng một tin giả",{c:{suc:-3},p:od(50+S.tamco/3),w:{tamco:1},wt:[G6("biết thật hư")],l:{danh:-1},lt:[R6("thử vụng, hắn biết")],ok:()=>{const s=X.A.o;if(s.spyFor&&s.spyFor!=="me")typeof knSoldFound==="function"&&knSoldFound(s);return s.spyFor&&s.spyFor!=="me"?`Tin giả lọt ra ngoài: ${s.name} đúng là tai mắt người khác.`:`Tin giả nằm yên: ${s.name} trung thành, lời đồn sai.`}}),
   c6("Tin hắn, thưởng an lòng",{c:{bac:-10},r:[[X.A,8]],k:[R6("nếu hắn hai lòng thì vẫn lọt tin")]}),
   c6("Đuổi đi cho yên",{w:{suc:1},r:[[X.A,-30]],k:[R6("có thể đuổi oan người tốt")]})]});
 EV6("rumorEvidence","rumor",{a:["rv"],pp:()=>{const a=rv6(fo6)??rv6();return a==null?null:{a0:a}},w:C=>1,

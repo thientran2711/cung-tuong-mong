@@ -21,8 +21,8 @@ dtq:{t:"Trung thần nơi biên ải",n:3,goal:"Cha ngươi trấn giữ biên c
   if(!st.acc&&S.year>=3&&roll(15)){const p=liveRivals(false);if(p.length){const v=mindPickBy(p,x=>Math.max(BAL.mind.pick.j4.floor,BAL.mind.pick.j4.top-(x.rel||0))*mindW(x,"frame"),null);/* npc-mind: was ARGMIN rel */st.acc=S.turn+8;st.accuser=v;st.step=1;v.rel-=10;ev+=`<span class="r">${v.name} xúi cha nàng dâng sớ: Đại tướng quân giữ binh không về, có lòng phản.</span> Hoàng thượng cho 8 tháng tra xét. `}}
   else if(st.acc&&S.turn>=st.acc&&st.proof<2){apply({danh:-20,sung:-15});S.rank=seatDown(S,S.rank-2);stEnd(-1,"Cha bị xử trảm");ev+=`<span class="r">Hết hạn tra xét. Cha ngươi bị xử trảm, ngươi bị giáng xuống ${RANKS[S.rank].n}.</span> Danh -20 · Sủng -15. `}
   return ev},
- acts(){const st=S.st;if(!st.acc)return[];return[{n:"Tìm chứng cứ cha trung thành",t:`Tra quân báo, tìm người làm chứng. Còn ${Math.max(0,st.acc-S.turn)} tháng · chứng cứ ${st.proof}/2.`,c:{bac:-20,suc:-10},o:od(40+S.mat*6+S.tamco/5),w:{},l:{danh:-2},x:"chứng cứ +1",
-  go:()=>{st.proof++;st.step=1+st.proof;if(st.proof>=2){const v=st.accuser;apply({danh:8});stEnd(1,"Rửa oan cho cha");log(`<b class="g">Chứng cứ trình lên: cha ngươi trong sạch.</b> Danh +8.`);if(v&&v.alive&&!v.out)fall(v,"bị xét tội vu cáo trung thần")}}}]}},
+ acts(){const st=S.st;if(!st.acc)return[];return[{n:"Tìm chứng cứ cha trung thành",t:`Tra quân báo, tìm người làm chứng. Còn ${Math.max(0,st.acc-S.turn)} tháng · chứng cứ ${st.proof}/2.`,c:{bac:-20,suc:-10},o:od(40+S.mat*6+S.tamco/5),w:{},l:{danh:-2},x:evSg(BAL.ag.ev.one),
+  go:()=>{st.proof+=BAL.ag.ev.one;st.step=1+st.proof;if(st.proof>=2){const v=st.accuser;apply({danh:8});stEnd(1,"Rửa oan cho cha");log(`<b class="g">Chứng cứ trình lên: cha ngươi trong sạch.</b> Danh +8.`);if(v&&v.alive&&!v.out)fall(v,"bị xét tội vu cáo trung thần")}}}]}},
 muoi:{t:"Từ muối lên tước",n:3,goal:"Nhà buôn muối bị coi khinh. Dâng bạc vào quốc khố, được Thái hậu đỡ lời, xin cho cha được phong tước. Buôn lậu bị bắt ba lần là ô danh.",
  init(){S.st.don=0;S.st.caught=0},
  hint:()=>S.st.don<2?`Dâng bạc quốc khố ${S.st.don}/2`:"Xin phong tước cho cha (cần Thái hậu 30)",
@@ -117,7 +117,7 @@ PEND.nc1=p=>{const st=S.st;return {t:"Mật sứ Nam Chiếu trao thư của ph�
    {n:"Dâng thư lên Hoàng thượng",fx:{th:15,danh:5,sung:3},x:"đoạn tuyệt cố quốc",go:()=>{st.path="court";st.step=1}}]}};
 PEND.td1=p=>{const st=S.st;return {t:`Lão thái giám họ Vương, nhân chứng còn sống của vụ án nhà ngươi, đang bị người của ${S.foeDad} truy sát.`,o:[
    {n:"Giấu ông ở Tân Giả Khố",fx:{bac:-40},x:"giữ được nhân chứng",go:()=>{st.wit=1}},
-   {n:"Mặc kệ",fx:{},x:"chứng cứ -1",go:()=>{S.caseEv=Math.max(0,S.caseEv-1);log(`<span class="r">Xác lão Vương nổi trên sông Kim Thủy.</span>`)}}]}};
+   {n:"Mặc kệ",fx:{},x:evSg(-BAL.ag.ev.one),go:()=>{S.caseEv=Math.max(0,S.caseEv-BAL.ag.ev.one);log(`<span class="r">Xác lão Vương nổi trên sông Kim Thủy.</span>`)}}]}};
 PEND.ch1=p=>{const st=S.st,q=rivals[0];return {who:pTH(),t:kSay("th",S,'Thái hậu gọi ngươi vào Đức Thọ cung: “Hoàng hậu bất tài. {Goi} phải thay nàng ta. Trước hết, dò xem Càn Ninh cung giấu gì.”'),o:[
    {n:"Vâng mệnh cô mẫu",fx:{th:8},x:`chứng cứ Hoàng hậu ${balSg(BAL.eff.j4.evGo)}`,go:()=>{evStory(q,BAL.eff.j4.evGo,"giấu chuyện riêng trong Càn Ninh cung");st.tool++;st.step=1}},{n:"Thoái thác",fx:{th:-15,duc:2},go:()=>{st.step=1}}]}};
 PEND.ch2=p=>{const st=S.st,q=rivals[0],o=p.o;return {who:pTH(),t:'Thái hậu dúi vào tay ngươi một gói thuốc: “Bỏ vào trà của Hoàng hậu.”',o:[

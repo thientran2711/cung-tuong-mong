@@ -145,10 +145,10 @@ function talkOpts(p){const E=S.emp,K=E.known,L=E.likes,b=bestArt(),v=p.ref;
   if(!sameHouse(S,v)){A.push({n:"Tặng quà",o:100,x:"chọn món trong rương",open:()=>{if(S.inv.some(e=>!e.h))pushDil(mkP("giftpick",{v:v.id}),"Tặng quà")}});
    const PK=BAL.talk.provoke;A.push({n:"Khiêu khích",o:100,w:{danh:PK.danh},x:`nàng quý ngươi -${PK.rel}, oán ngươi +${Math.round(PK.rel*BAL.relOan.hurt)}, ghen +${PK.ghen}`,go:()=>{relAdd(S,v,-PK.rel);v.ghen=cl(v.ghen+PK.ghen,0,100)}});
    if(v.pg>=BAL.ag.cx2.vent.pg)A.push({n:"Trút giận",o:100,w:{...BAL.ag.cx2.vent.c},x:"hả cơn ghen; nàng oán",go:()=>{v.pg=0;relAdd(S,v,-BAL.ag.cx2.vent.rel)}});
-   A.push(...placeHarms(v,S.place));if(liveRivals(true).filter(x=>whereOf(x)===S.place).length>=2)A.push({n:"Nghe lén câu chuyện",o:od(BAL.ag.wit.hear+S.mat*BAL.ag.wit.mat),x:"chứng cứ +1",run:()=>overhear(S.place)})}
+   A.push(...placeHarms(v,S.place));if(liveRivals(true).filter(x=>whereOf(x)===S.place).length>=2)A.push({n:"Nghe lén câu chuyện",o:od(BAL.ag.wit.hear+S.mat*BAL.ag.wit.mat),x:evSg(BAL.eff.j9.evOverhear),run:()=>overhear(S.place)})}
   return A}
  if(p.kind==="chest"){if(sameHouse(S,v))return[];return[{n:"Cài đồ vào rương nàng",o:cl(oPlant(S,v)+15,5,95),x:"chọn món đồ · tại chỗ, dễ hơn sai người",open:()=>{if(S.inv.some(e=>!e.h)&&can(2))pushDil(mkP("plantpick",{v:v.id,here:1}),"Cài đồ vào rương")}},
-  {n:"Lục rương tìm chứng cứ",o:od(cx2O(S,"chest")),act:1,x:"chứng cứ +1 nếu nàng có làm điều sai · lộ: bị phạt",run:()=>{if(roll(od(cx2O(S,"chest")))){return evA(S,v,BAL.ag.ev.one)?`Lục được thư từ của ${v.name}: chứng cứ +1.`:`Lục rương ${v.name}: không thấy điều gì sai trái.`}relAdd(S,v,-BAL.ag.cx2.chest.rel);punish("lục lọi cung phi tần",1);return "Bị cung nhân bắt gặp."}}]}
+  {n:"Lục rương tìm chứng cứ",o:od(cx2O(S,"chest")),act:1,x:`${evSg(BAL.ag.ev.one)} nếu nàng có làm điều sai · lộ: bị phạt`,run:()=>{if(roll(od(cx2O(S,"chest")))){return evA(S,v,BAL.ag.ev.one)?`Lục được thư từ của ${v.name}: ${evSg(BAL.ag.ev.one)}.`:`Lục rương ${v.name}: không thấy điều gì sai trái.`}relAdd(S,v,-BAL.ag.cx2.chest.rel);punish("lục lọi cung phi tần",1);return "Bị cung nhân bắt gặp."}}]}
  if(p.kind==="ty"){const A=[];if(illOf(S))A.push(P3C.treat(S));A.push({n:"Bài thuốc dễ thụ thai",c:{...BAL.ag.cx2.fert.c},o:100,x:`${BAL.ag.cx2.fert.m} tháng dễ có thai hơn`,go:()=>S.fert=BAL.ag.cx2.fert.m});
   if(!S.doctor)A.push({n:"Mời làm thái y tâm phúc",c:{...BAL.ag.cx2.doctor.c},o:100,x:"dễ phát hiện xạ hương và độc; bệnh của con nhẹ hơn",go:()=>S.doctor=1});
   const k=S.kids.filter(x=>x.alive&&x.hp<BAL.ag.cx2.kidMed.hp).sort((a,c)=>a.hp-c.hp)[0];if(k)A.push({n:`Xin thuốc cho ${k.name}`,c:{...BAL.ag.cx2.kidMed.c},o:100,x:`Sức khỏe +${BAL.ag.cx2.kidMed.up}`,go:()=>{k.hp=Math.min(100,k.hp+BAL.ag.cx2.kidMed.up)}});
@@ -159,10 +159,10 @@ function talkOpts(p){const E=S.emp,K=E.known,L=E.likes,b=bestArt(),v=p.ref;
  if(p.kind==="peddler")return S.shop.slice(0,6).map(k=>({n:`Mua ${itm(k).n}`,c:{bac:-itm(k).pr},o:100,x:itm(k).d,go:()=>S.inv.push({k})}));
  if(p.kind==="fallen")return[
    {n:"Đưa cơm áo",c:{bac:-20},o:100,w:{duc:4}},
-   {n:"Hỏi chuyện cũ",o:od(cx2O(S,"old")),x:"chứng cứ +1 về một phi tần từng làm điều sai",go:()=>{const x=evGuilty(S,liveRivals(true));if(x&&evA(S,x,BAL.ag.ev.one))log(`Phế phi kể chuyện xấu của ${x.name}: chứng cứ +1.`);else log("Phế phi chỉ kể chuyện cũ vô hại, không có gì làm chứng cứ.")}}];
+   {n:"Hỏi chuyện cũ",o:od(cx2O(S,"old")),x:`${evSg(BAL.ag.ev.one)} về một phi tần từng làm điều sai`,go:()=>{const x=evGuilty(S,liveRivals(true));if(x&&evA(S,x,BAL.ag.ev.one))log(`Phế phi kể chuyện xấu của ${x.name}: ${evSg(BAL.ag.ev.one)}.`);else log("Phế phi chỉ kể chuyện cũ vô hại, không có gì làm chứng cứ.")}}];
  if(p.kind==="maid")return[
    {n:"Tâm sự",o:100,w:{...BAL.ag.cx2.maidTalk.w}},
-   {n:"Sai đi dò la",o:od(cx2O(S,"maidSpy")),w:{},l:{...BAL.ag.cx2.maidSpy.l},x:"chứng cứ +1 về một phi tần từng làm điều sai",go:()=>{const x=evGuilty(S,liveRivals(true));if(x&&evA(S,x,BAL.ag.ev.one))log(`${S.maid.name} nghe lén được chuyện của ${x.name}: chứng cứ +1.`);else{const y=pick(liveRivals(true));log(y?`${S.maid.name} nghe lén ${y.name}: không có gì sai trái, chỉ biết ${harmTxt(y)}.`:`${S.maid.name} không nghe được gì.`)}}}];
+   {n:"Sai đi dò la",o:od(cx2O(S,"maidSpy")),w:{},l:{...BAL.ag.cx2.maidSpy.l},x:`${evSg(BAL.ag.ev.one)} về một phi tần từng làm điều sai`,go:()=>{const x=evGuilty(S,liveRivals(true));if(x&&evA(S,x,BAL.ag.ev.one))log(`${S.maid.name} nghe lén được chuyện của ${x.name}: ${evSg(BAL.ag.ev.one)}.`);else{const y=pick(liveRivals(true));log(y?`${S.maid.name} nghe lén ${y.name}: không có gì sai trái, chỉ biết ${harmTxt(y)}.`:`${S.maid.name} không nghe được gì.`)}}}];
  return []}
 function talk(oi){if(popIdx==null||!S.visit||S.visit.talked===true||S.dead||Q.length)return;S.visit.tk=S.visit.tk||{};if(S.visit.tk[popIdx])return;const p=curPeople()[popIdx];if(!p)return;const a=talkOpts(p)[oi];if(!a||!canPay(a))return;
  const tcost=a.act?BAL.time.cost.talkAct:BAL.time.cost.talk;if(!can(tcost))return;spend(tcost);
