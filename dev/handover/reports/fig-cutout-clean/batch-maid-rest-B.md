@@ -212,3 +212,4 @@ maid-m38-tm0-a18	mERKznWhJQ	VXwv44XMMU	ok (plain-note)
 maid-m38-tm2-a18	P3uYbKa42C	p8OC6iZehw	ok (plain-note)
 maid-m38-tm3-a18	w4v2uHm7EI	O6CzqKMynm	ok (plain-note)
 ## 191 a18 done (lines 1-191). REPAINT ORDER (Foreman C s12): repaint the plain-note keys with ORIGINAL look BEFORE continuing; redo TSV in batch-maid-rest-B-redo.tsv; after that NEXT new = maid-m39-a18 (line 192).
+## COLD AUDIT (W6b, 17/11): live cold-a18 m27,m28,m29,m30 are jewelled (flower hairpins, tassels, earrings, forehead huadian) = WRONG (cold: plain clothes, no jewellery; maids no huadian). m31..m35 cold: one plain wooden stick hairpin, no earrings = acceptable. m36/m37/m38 cold are in the redo batches (no jewellery enforced). m27..m30 cold added to batch-maid-rest-B-redo.tsv (last 4 lines) for repaint with 'no jewellery at all'.
