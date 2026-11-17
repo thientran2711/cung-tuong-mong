@@ -10,7 +10,7 @@ const HOME=`window.__kc2Home=function(){const P=kc2Pre();const pri=S.kc.kd==="da
  :[/^Học lễ nghi Đại Hy/,/^Tự học lễ nghi/,/^Tiếp sứ thần/,/^Hầu .* nghe chính sự/,/^Gửi lễ vật|^Đánh cờ/,/^Vấn an/,/^Xin thêm hồi môn/,/^Cùng .* may áo/,/^Trò chuyện với/,/^Kết thân|^Dạy .* một điệu/,/^Dò ý/,/^Đọc sách/,/^Múa điệu|^Cưỡi ngựa/,/^Cầu phúc/,/^Ra chợ/];
  const bad=/Ở lại quê|Nhận lời làm thiếp|Theo họ về|đi thay|Mời thầy cúng|Tự mình chống trả/;let g=0,mv=0;
  while(g++<20000&&isKc()&&!S.dead){
-  if(Q.length){const m=Q[0];if(m.opts&&m.opts.length){const O=m.opts.map((c,i)=>[c,i]).filter(([c])=>!(c.fx&&c.fx.bac&&S.bac+c.fx.bac<0));let L=O.filter(([c])=>!bad.test(c.n));if(!L.length)L=O;if(!L.length){Q.shift();continue}chooseM(L[Math.random()<.65?0:Math.floor(Math.random()*L.length)][1])}else Q.shift();continue}
+  if(Q.length){const m=Q[0];if(m.opts&&m.opts.length){const O=m.opts.map((c,i)=>[c,i]).filter(([c])=>!c.off&&!(c.fx&&c.fx.bac&&S.bac+c.fx.bac<0));let L=O.filter(([c])=>!bad.test(c.n));if(!L.length)L=O;if(!L.length){Q.shift();continue}chooseM(L[Math.random()<.65?0:Math.floor(Math.random()*L.length)][1])}else Q.shift();continue}
   if(S.mg){S.mg=null;continue}
   if(S.suc<35){if(S.place!==P+(S.kc.kd==="dan"?"nha":"tam")&&!kcGoWhy(P+(S.kc.kd==="dan"?"nha":"tam"))){kcGo(P+(S.kc.kd==="dan"?"nha":"tam"));continue}const r=deck.findIndex(a=>/^Nghỉ ngơi/.test(a.n)&&!a.lock&&can(cardCost(a)));if(r>=0){act(r);continue}nextBuoi();continue}
   if(used>=4){mv=0;nextBuoi();continue}
