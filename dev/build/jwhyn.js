@@ -54,7 +54,7 @@ function whyWrapRun(o,mk){const W=f=>f?function(){let X=null;try{X=mk()}catch(e)
   if(n>=1)F.push({k:"rep",t:"mới làm gần đây: Thái hậu đỡ cảm động",s:-1});if(S.th>A.cap+B.thGiftCap)F.push({k:"cap",t:"Thái hậu đã quý ngươi lắm: khó thêm",s:-1});return{F,gain:(o.w&&o.w.th)||0,k:"th",who:"th"}})}catch(e){return o}}})();
 /* ---------- nights: Sủng after thị tẩm = her preparation (q) + the talk (b) + his mood + chance − overreach (j8 night1/night2/nightFx) ---------- */
 let WHY_NIGHT=null;
-(function(){if(typeof PEND!=="object"||!PEND.night1)return;const n1=PEND.night1;PEND.night1=function(p){try{WHY_NIGHT={q:p&&p.q||0,mood:[1,0,-1,-2][S.emp.mood]||0,vp:0}}catch(e){}return n1.apply(this,arguments)}})();
+(function(){if(typeof PEND!=="object"||!PEND.night1)return;const n1=PEND.night1;PEND.night1=function(p){try{WHY_NIGHT={q:p&&p.q||0,mood:BAL.night.mood[S.emp.mood]||0,vp:0}}catch(e){}return n1.apply(this,arguments)}})();
 (function(){if(typeof nightFx!=="function")return;const f0=nightFx;nightFx=function(s){const b=S?S.sung||0:0,q0=S?S.logSeq||0:0;const r=f0.apply(this,arguments);try{const W=WHY_NIGHT;WHY_NIGHT=null;const d=(S.sung||0)-b;if(W&&d){const F=[];
   F.push({k:"prep",t:W.q>=2?"sửa soạn chu đáo":W.q<=1?"sửa soạn sơ sài":"sửa soạn vừa phải"});
   if(W.mood)F.push({k:"mood",t:`Hoàng thượng đang ${W.mood>0?"vui":W.mood===-1?"buồn":"giận"}`,s:W.mood>0?1:-1});
@@ -64,7 +64,7 @@ function whyWho(p){if(p==="th")return"Thái hậu";if(p==="emp")return"Đêm th�
 function whyPron(p){if(p==="th")return"Thái hậu";if(p==="emp")return"Hoàng thượng";try{return typeof netSex==="function"&&netSex(p)==="m"?"người":"nàng"}catch(e){return"nàng"}}
 const WHY_STAT={aff:"thiện cảm",oan:"oán",th:"thiện cảm",hh:"thiện cảm",sung:"Sủng"};
 /* her own stats are said in words ("Sủng thêm 5"): the Sổ ghi replay (jlogsync) reads "Sủng +5" as a second change */
-const WHY_OWN={sung:1};
+const WHY_OWN=new Set(["sung"]);
 function whyText(e,d){const p=e.who;let kn=[],tk=false;try{kn=p==="th"||p==="emp"?[]:trKnown(p)||[]}catch(x){}try{tk=p!=="emp"&&trongKnown(p)}catch(x){}
  /* a person she has not met (name masked) is never described by her nết or trọng either */
  if(whyWho(p)==="người chưa quen"){kn=[];tk=false}
@@ -75,7 +75,7 @@ function whyText(e,d){const p=e.who;let kn=[],tk=false;try{kn=p==="th"||p==="emp
  {const Ns=parts.filter(x=>/^tính /.test(x));if(Ns.length>1){const i=parts.indexOf(Ns[0]);for(const x of Ns.slice(1))parts.splice(parts.indexOf(x),1);parts[i]="tính "+Ns.map(x=>x.slice(5)).join(", ")}}
  if(U.length){if(parts.some(x=>/^tính /.test(x)))U[U.indexOf("tính nết")]="nết khác chưa rõ";parts.push("theo "+U.filter(Boolean).join(" và "))}
  if(!parts.length)return"";const n=d!=null?d:e.d;if(!n)return"";
- return `${whyWho(p)}: ${parts.join(", ")} → ${WHY_STAT[e.stat]||e.stat} ${WHY_OWN[e.stat]?(n>0?"thêm ":"bớt "):(n>0?"+":"−")}${Math.abs(n)}`}
+ return `${whyWho(p)}: ${parts.join(", ")} → ${WHY_STAT[e.stat]||e.stat} ${WHY_OWN.has(e.stat)?(n>0?"thêm ":"bớt "):(n>0?"+":"−")}${Math.abs(n)}`}
 /* entries of one act merged per person + stat */
 function whyMerge(L){const M=[];for(const e of L){const m=M.find(x=>whyKey(x.who)===whyKey(e.who)&&x.stat===e.stat);if(m){m.d+=e.d;for(const f of e.F)if(!m.F.some(g=>whyFEq(g,f)))m.F.push(f)}else M.push({who:e.who,stat:e.stat,d:e.d,F:e.F.slice()})}return M}
 /* ---------- Sổ ghi: the line that shows the number carries the why ---------- */
