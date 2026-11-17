@@ -318,7 +318,11 @@ function wkBookData(){const s=S.wkSnap||wkSnap();const n=Math.max(0,Math.min(S.l
  /* duplicates: one row, "2 lần" */
  /* the "n lần" chip only for a real act done again; a one-time line, a tip or a spoken line (“…”) is listed once, no chip (tuanluc-sync) */
  const noN=t=>{const p=kpPlain(t);return /[“”]/.test(p)||/từ nay|Từ nay|có thêm nhóm|Lối riêng|lần đầu|đã lành/.test(p)};
- const dedup=L=>{const m=new Map();for(const t of L){const k=kpPlain(t);if(m.has(k))m.get(k).n++;else m.set(k,{t,n:1})}return [...m.values()].map(x=>x.n>1&&!noN(x.t)?{text:x.t,chips:[[`${x.n} lần`,"n"]]}:{text:x.t})};
+ /* last pass (OD:L1458(3)): no number left in a Tuần lục line, whatever path built it; a line that was only numbers goes */
+ const litNo=h=>{let s=String(h).replace(/\b(Thái hậu|Hoàng hậu) → (?:ta|ngươi):?\s*/g,"$1 ").replace(/(Sủng|Danh|Sức|Bạc|Đức|Tai mắt|Ân tình|Tài|Sắc|Tâm cơ|thiện cảm|ghen|oán ta|oán ngươi|quý ngươi|quý ta)\s*(?:-?\d+\s*(?:→|->)\s*-?\d+|[+\-−]\d+)(?:\s*\([^)]*\))?/g,"");
+  s=s.replace(/(\s*[,;·]\s*)+(?=[.<]|$)/g,"").replace(/([.:;])\s*[,;·]\s*/g,"$1 ").replace(/,\s*,/g,",").replace(/\s+([.,;:])/g,"$1").replace(/(Thái hậu|Hoàng hậu)\s*([.,;]|$)/g,"$2").replace(/\s{2,}/g," ").trim();
+  return kpPlain(s).replace(/[\s.:;,·—-]+/g,"")?s:""};
+ const dedup=L=>{L=L.map(litNo).filter(Boolean);const m=new Map();for(const t of L){const k=kpPlain(t);if(m.has(k))m.get(k).n++;else m.set(k,{t,n:1})}return [...m.values()].map(x=>x.n>1&&!noN(x.t)?{text:x.t,chips:[[`${x.n} lần`,"n"]]}:{text:x.t})};
  const D=[["Sủng",S.sung-s.sung],["Danh",S.danh-s.danh],["Sức",S.suc-s.suc],["Bạc",S.bac-s.bac]];
  if(s.duc!=null)D.push(["Đức",S.duc-s.duc]);if(s.mat!=null)D.push(["Tai mắt",S.mat-s.mat]);if(s.an!=null)D.push(["Ân tình",(S.an||0)-s.an]);
  const rank=S.rank!==s.rank?(S.rank>s.rank?"Được thăng ":"Bị giáng xuống ")+(S.rank>=7?"Hoàng hậu":RANKS[S.rank].n):"",kids=S.kids.length-(s.kids||0);
