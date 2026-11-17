@@ -713,10 +713,14 @@ Owner rule (verbatim): "Bất kỳ khi nào mà mày cho thợ ráp nút vào á
   else ALL SQUARE, side = m clamped to [`KIT_OPT_SQ.min` × w, w] (84 → 38..84 px, 72 → 32..72 px), so the shortest card is as tall as its text and nothing is
   left empty under it. Longer cards keep the same square (picture top-left, text grows the card). Same meaning picture (kitOptPic §6.2), cover-cropped;
   class `kasq`, `data-kapic="tall|sq"`.
+- PERSON / SUBJECT DIALOGS (owner 17/11 ~05:00Z, final rule; `kitOptIsPerson` / `kitOptFill`, jk4): when the group is a person card's act rows (`.pc`) or a dialog with a figure column
+  (`.kpsubj` / `.kszfig` / kdper), the square form is NEVER used: every card is ONE size (the tallest text sets the height, min picture height 72 px) and its
+  picture is a TALL 3:4 RECTANGLE filling the card height (width = 3/4 of the height, 54..84 px and the text column keeps >= 190 px, cover-cropped, same meaning picture), `data-kapic="fill"`.
+  Same on every card whatever its text length; nothing is left empty beside the text. The options area scrolls (KIT §8.2 T3 / L191).
 - Re-measured automatically: after every kaNorm pass, after showModal, and by a ResizeObserver on each card + its text (dialog fit, fonts, rotation).
   No screen sets a picture size by hand. The big Hành sự card (§6) is not touched (its picture is wider than 112 px).
 - Residual: a text block shorter than the minimum square (one title line, no rows) keeps (min − text) px; reported as "at min" by the test.
-- Test: `node dev/test/kit-fit.js <url> <outdir> <tag> [WxH,..] [shots]` — empty px under the text of every option card in every frame kind (rule ≤ 2 px) and `UNEQUAL option pictures` (more than one picture size in one dialog = violation).
+- Test: `node dev/test/kit-fit.js <url> <outdir> <tag> [WxH,..] [shots]` — empty px under the text of every option card in every frame kind (rule ≤ 2 px) and `UNEQUAL option pictures` (more than one picture size in one dialog = violation), `PERSON DIALOG cards not one size`, `PERSON DIALOG card picture is square` and `ONE WORD PER LINE` (any value/text cell of a card wrapped to about one word per line).
 - Residual: in a 2-up row a card stretched to a much taller sibling shows the empty px under its own text (grid stretch, not the picture); unchanged by this rule.
 
 ## 6.3 PERSON-CARD ACT ROWS — every act a person card offers is the LONG HORIZONTAL ROW (owner 16/11, iPad 755x1000 shot of Tiểu Hoa's card; review/pcard-actrow) — `dev/build/jk4.js` (after the §43 compact block)
