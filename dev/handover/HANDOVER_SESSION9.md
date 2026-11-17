@@ -802,7 +802,7 @@ OWNER RULED FINAL (OD 20:25Z): LARGE person-card portrait ALWAYS shows the curre
 RUNNING main children (tell them "main = s37"):
 - builder s36a session_01UV1SzhpLx156n52Xk9v9WR (successor of s32a, archived; its handover = end of reports/batch-s32a.md): batch s36a on 579e8976 = kit-rank-name-land 330c8bde + kit-display-room-r1 c6d84567 + mirror-center-r2 0f0954fb (+ kit-thanh-bai r2) → BATCH READY → main pushes; then STEP 3 balance chain baff0824 → 52d5092d → 37018e74 (batch s32b). Also: OD 20:15Z no intent face (told FEELINGS-18 + kit-figure-mood workers).
 - kit-figure-mood r4 worker session_01UV1Szm15TBGXbyca7ucqMq (predecessor archived; r3c b8d3832c FAIL 5 items + owner no-intent 20:15Z; rebase on 579e8976) → reviewer session_01UV1Szh4nqVY4zaK7Nk1kui re-reviews; then real-data recheck when FEELINGS-18 / ag-moodknow land.
-- kit-thanh-bai worker session_01UV1SzhiWiAzVtxCHuZo9Zy (r2 aa5a29d7) + reviewer session_01UV1Szhb1246Fs6RgQcMEqb (re-reviewing).
+- kit-thanh-bai r4 COMPACT worker session_01UV1Szjgn6cUQQEokDhq9uW (OD 20:50Z; on review/kit-thanh-bai-r3 626b30dd; predecessor archived) + reviewer session_01UV1Szhb1246Fs6RgQcMEqb (on HOLD until r4 sha).
 - kit-display-room worker session_01UV1SzisVVpBnxyKZsxjCfY (PASS; idle; got lux API change from C-AG) — archive when display-shelf lands.
 - ui-fixes-1 session_01UV1SzjovTp4KY9Xq1JSKvC (4 pre-existing UI faults; brief s36-ui-fixes-1.md) → needs a SMALL reviewer on SẴN SÀNG KIỂM.
 - toil-looks7 session_01UV1SzknrVcN46ftwSGV7f9 (finish review/toil-looks5: Vụng V2-B smaller, show Vụng A + Vụng B (diêm dúa) on final sheet v17; LOOK, send owner) → then SMALL reviewer → batch. Next for the toil line: FACE-FIT re-fit from pixels (fit files up to 10 % right).
