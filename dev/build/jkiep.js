@@ -41,11 +41,12 @@ function kpPenalty(base){const now=pdGet();const lost=Math.max(0,now-base);const
   const m=Q.find(x=>x&&!x.nl&&x.h&&!/kp-rule/.test(x.h));if(m)m.h+=`<p class="past kp-rule">${KP_RULE}</p>`}}catch(e){}return r}})();
 try{KIT_GLOSS["Phúc duyên"]="Điểm tích qua các kiếp. Dùng để đổi thân phận khi bắt đầu kiếp mới. "+KP_RULE}catch(e){}
 /* one warning per life before a choice that names death, while the life is unfinished */
-(function(){const c0=chooseM;chooseM=function(i){try{const m=Q[0],c=m&&m.opts&&m.opts[i];if(c&&S&&!S.dead&&!S.kpWarn&&!kpCheck()&&!m.kpw&&!window.__kpNoWarn){
+/* kpGate(i): true = the warning card was put in front of Q[0] (the choice waits for "Vẫn chọn"); also used by co-op thin cards (jcoopthin) */
+window.kpGate=function(i){try{const m=Q[0],c=m&&m.opts&&m.opts[i];if(c&&S&&!S.dead&&!S.kpWarn&&!kpCheck()&&!m.kpw&&!window.__kpNoWarn){
    const tx=[c.n,c.x,c.j67].join(" ");if(/tự vẫn|tự tận|tự sát|chết|bị giết|rượu độc/i.test(tx)){S.kpWarn=1;
     Q.unshift({act:1,t:"Kiếp này chưa trọn",kpw:1,who:pMe(),h:`<p>Kiếp này chưa trọn (${kpWhy()}), bỏ ngang sẽ mang nghiệp: mất Phúc duyên của kiếp này, trừ thêm ${KIEP.pen}, kiếp sau không được đổi thân phận.</p><p class="past">${KP_RULE}</p>`,
-     opts:[{n:"Nghĩ lại",fx:{},x:""},{n:`Vẫn chọn: ${c.n}`,fx:{},x:"",go:()=>{setTimeout(()=>{try{if(Q[0]===m){chooseM(i);render()}}catch(e){}},0)}}]});showModal();return}}}catch(e){console.error(e)}
- return c0.apply(this,arguments)}})();
+     opts:[{n:"Nghĩ lại",fx:{},x:""},{n:`Vẫn chọn: ${c.n}`,fx:{},x:"",go:()=>{setTimeout(()=>{try{if(Q[0]===m){chooseM(i);render()}}catch(e){}},0)}}]});showModal();return true}}}catch(e){console.error(e)}return false};
+(function(){const c0=chooseM;chooseM=function(i){if(window.kpGate(i))return;return c0.apply(this,arguments)}})();
 /* cung nữ milestones */
 function kpMs(k,why){S.kpMs=S.kpMs||{};if(S.kpMs[k])return;S.kpMs[k]=1;try{pdAdd(KIEP.ms[k],why,"ms_"+k)}catch(e){}(S.kpMsL=S.kpMsL||[]).push(why)}
 function kpMsCheck(){if(!S||S.dead||!S.origin||S.origin.k!=="cnv"||!S.srv)return;
