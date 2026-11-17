@@ -139,7 +139,7 @@ maid-m33-tm2-a18	4RQWzvG9Aa	jUB9Pv4LD0	ok
 maid-m33-tm3-a18	lJIi9dWgv9	s7869SXl8e	ok
 maid-m33-tm4-a18	lJIi9Xcgv9	huZk50TvqL	ok
 ## 120 a18 done (m27..m34, m34-tm4 REDO pending in gJ). NEXT after gJ/gK = m35-tm4 + m36 (line 144+).
-## LOOKALIKE redo list (lead #6 rule): m32-t5..t8, m33-t5..t8 kept ornate crowns (a18 live) - review after owner anchor.
+## (CANCELLED by owner 17/11 ~03:45Z: no maid repainted) LOOKALIKE redo list (lead #6 rule): m32-t5..t8, m33-t5..t8 kept ornate crowns (a18 live) - review after owner anchor.
 maid-m34-tm4-a18	iGbVDDr3uK	8a6q5GCIrU	ok (REDO done, supersedes earlier tm4 line)
 maid-m35-a18	KLDJyPDkqp	u5YsgpMQLD	ok
 maid-m35-cold-a18	gOt3ZAvSXO	79aAz53JAL	ok
@@ -202,3 +202,4 @@ maid-m38-t1-a18	3z5MKFlREY	huZkA3HvqL	ok
 maid-m38-t2-a18	aFArGZTfSh	IfibR6ltvE	ok
 maid-m38-t3-a18	aFArG2VfSh	fHGxnzECDY	ok
 ## 183 a18 done (list lines 1-183) through maid-m38-t3-a18. NEXT = maid-m38-t4-a18 (line 184). TODO: audit all *-cold-a18 for jewellery (owner: cold palace = plain clothes, no jewellery).
+## PLAIN-PROMPT batches (lead note active, painted since ~02:51Z; Foreman C decides if they stay; owner later said she likes the ORIGINAL look): gL = m35-tm4, m36-a/cold/kc/ngheo/t1/t2/t3; gM = m36-t4..t8, tm0, tm2, tm3; gN = m36-tm4, m37-a/cold/kc/ngheo/t1/t2/t3; gO = m37-t4..t8, tm0, tm2, tm3; gP = m37-tm4, m38-a/cold/kc/ngheo/t1/t2/t3; gQ (running, started with plain note) = m38-t4..t8, tm0, tm2, tm3. Earlier batches (m27-m35-tm3) used the original-look prompt (except none had the note). From gR on: ORIGINAL look.
