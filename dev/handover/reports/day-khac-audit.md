@@ -88,3 +88,41 @@ Rule (OD L852/L1473 + 17/11 ~16:45Z): an NPC deed of kc khắc that starts at bu
 Fine as is: agCanDay/agWhyDay (dayFit/dayWhy), jagknow.js:388/399 (dayFit), agSlot / jagday.js:146 (a START khắc is picked inside this buổi; length is agFitDay's job).
 
 SẴN SÀNG KIỂM 4408ef0a91ccb7776b3e83a78c7c5e0b4719b641
+
+## ROUND 2 (worker session_01964izFWMBhdej2k6C1qo1c, 17/11 ~18:25Z) — fixes for review r1 FAIL 3
+PRIORITY #1 CHECK ('j76left|dayFit|accState.why|day-khắc'): OD L852, L886, L1473 + OD tail '(17/11 ~16:45Z real' | main j76.js (j76left :17, dayFit :43) | review/day-khac-audit 4408ef0a (worker r1) + review/day-khac-audit-r1 319df260 (reviewer FAIL 3) — REUSED, fixed on top | claims DAY-KHẮC rows (D)
+
+START_CTX ≈ 4 % of the window (estimate; get_session reads 0). Read in full: START_CORE, START_WORKER, topic/time-calendar, the r1 review, this report, OD L852/L886/L1473 + the 16:45Z tail.
+Branch `review/day-khac-audit` = r1 319df260 + merge origin/main b5d109f + fixes + merge origin/main **03a776e4** (weather-khac; only index.html/sw.js conflicted, site rebuilt).
+
+### Fixes (whole family)
+| # | file:line | before | after |
+|---|---|---|---|
+| 1 | j77.js:36 accState | a walk that only spills returned `{why:"đi 2 khắc, đến nơi đã sang buổi tối", walk:1}` — every `!st.why` reader treated it as a block | same why (map label words) + `spill:true` when walkSpill(k).ok; ONE test for "open" = `accSpillOk(k,st)` (j41.js:93, reads st.spill) |
+| 1 | jgift.js courtMeet (emp) | "Đến <nơi> gặp ngài" DISABLED with the spill sentence (sáng: vuon tn r2 r3 r5 tyv cnh; chiều: tn r2 r3 r5) | open; Cần chip "✓ 2 khắc (sang buổi tối)" (j76 pbtn wrapper); words "đến <nơi> vào buổi tối, gặp ngài nếu ngài còn ngự ở đó"; tap → walkGo (goTo, or the spill walk = same as the Dư đồ card "Đi (đến nơi vào buổi sau)"). Closed on arrival stays red with the reason ("đến nơi đã sang buổi tối — đóng cửa tối") |
+| 1 | jgift.js courtMeet (th) | "Sang Đức Thọ cung thỉnh an" DISABLED by the spill sentence (sáng + chiều) | open, "đến Đức Thọ cung vào buổi trưa, thỉnh an Thái hậu tại đó", tap → walkGo. It is a walk to her palace (open all day per accessOf/walkSpill), not the sáng-only thỉnh an act, so no buổi tie |
+| 1 | jgift.js click [data-kgmgo] | goTo(k) — the j77 goTo wrapper answers walkOk only, so a spill walk did nothing | walkGo(k) |
+| 1 | jkitpage.js:142 (kit sample "locked place") | picked any place with accState().why — could pick a spill (open) place | skips spill places |
+| 1 | other accState readers checked | j41 accSpot/list (accSpillOk, r1), j77Tap/j77Card (card with "Đi (đến nơi vào buổi sau)" — open), j41/jgift accAsk (st.ask only), accEtqCard (spill option offered) | no change needed |
+| 2 | j76.js:43 dayFit | `used+n<=4` (typed 4) | `used+n<=BAL.time.khac` ; guard ALLOW list emptied of every stale entry (only j76 khongkip:3 stays) |
+| 3 | j77.js accAskLine / accSneakLine / accLead line (+ j41 originals, j41 accAsk result card + log) | "thành: được vào buổi này" while the ask/sneak/lead + walk spills | `j77When(n)`: " buổi này" when it fits, " (đến nơi vào buổi tối)" when it spills (j76arrive) — e.g. "thành: được vào (đến nơi vào buổi tối)"; result card "Được vào Đông cung (đến nơi vào buổi tối)." |
+
+### Fresh scan (beyond r1's list)
+- Every "buổi này / của buổi / trong buổi" player line (59 hits, story/tone text excluded): time-fit ones were j41/j77 ask, sneak, lead + the ask result → fixed above. The rest are not time-fit gates: news titles, "Thấy ở … (buổi này)" location, tai mắt "ở đâu buổi này", "Đã làm buổi này" (once-per-buổi doors), "giữ khắc buổi này" (decline options), jmood "mất một khắc buổi này" (1 khắc), j42 "Việc chủ sai" (access pass for this buổi), jkc/jkc2/j42 "Hết khắc buổi này" after !can(1) (1 khắc only fails at 0 left = the buổi turns: true words).
+- Every walkOk / walkWhy / j77Kh / walkBlock / `used+…` reader: j2 goTo base (wrapped by j76/j77), j9/j27 map labels (j41 accSpot rewrites spill labels, r1), j21/j22/j77 person walks (walkBlock/accGuestWhy: spill = open), j42 servant walk (dayFit), j77 accEtqCard (spill option), jplace/jclose/jmen "left" = labels. No other spill block found.
+- Runtime family scan (new guard check 11): every disabled button rendered on 11 tabs (map + list) + every court card, sáng and chiều with 1 khắc left (139 unique on the branch) — none carries the spill sentence. On live it finds 13.
+
+### Guard (dev/test/time-spill-guard.js, quickcheck step 1c) — new rows
+10 court emp at every spill place + th, sáng + chiều 1 left: open (13 rows) · 10b tap on "Sang Đức Thọ cung thỉnh an" at sáng 1 left starts the spill walk · 11 no disabled button anywhere says the spill sentence · 12 ask/sneak words at chiều 1 left say the arrival buổi (7 places) · 13 dayFit follows BAL.time.khac (khac+1 test) · static `dayfit4` (typed 4 in dayFit) and `thisbuoi` ("thành: được vào/vào được buổi này") = 0 allowed.
+- branch 9e7ddc14: **PASS** (static + 77 runtime).
+- live main 03a776e4: **FAIL 50** = static 6 (j41 thisbuoi 2, j77 thisbuoi 3, j76 used4 + dayfit4, jrest ofbuoi, jkc2 four) + runtime 43 (court 13, disabled-by-spill 13, ask/sneak words 7, dudo map 4 + list 4, rest card 1, dayFit typed 1). (Static line counts files: 6 FAIL lines.)
+
+### Gates (9e7ddc144893672076b30dffc5a80056ebecac68)
+- quickcheck.sh: **PASS** · core gates PASS (one-core-guard 0 fails, inline 4956 vs baseline 4957; rules-one-source; kit-conform; coop one-world) · old save from live loads + plays a buổi · open 1870 ms · perf median of 3 new/live: render 155/173, tab 252/237, buổi 802/842 ms, tasks>200 12/13. (Also PASS before the 03a776e4 merge: buổi 788/781.)
+- PERF seeded deterministic A/B of the buổi path (my script: seeded RNG, same life, 8 buổi = 2 days, synchronous, same 303 modals both builds, CPU ×4, iPad, live b5d109f vs branch pre-merge a569ada…42a1c50): 16 interleaved pairs, median **live 3704 / branch 3782 ms (+2 %)**, mean 3793 / 3750 ms (−1 %); first 6 pairs +8 %, next 10 pairs −1 % → noise, within +5 %. The only buổi-path addition is one walkSpill() call per far place in accState (map render).
+- coop-e2e: branch 63/63, live 63/63 (run before the 03a776e4 merge, which only adds weather code) → no worse. No co-op code touched.
+- Fold 755x1000@2 + iPad Air 1180x820@2 (scratch only, not committed/uploaded, deleted): Hậu cung › Chí tôn at chiều 1 left (Hoàng thượng at Ngự hoa viên → red "đến nơi đã sang buổi tối — đóng cửa tối", correct), Thái hậu card at sáng/chiều 1 left ("Sang Đức Thọ cung thỉnh an" open, ✓ "2 khắc (sang buổi trưa)", "đến Đức Thọ cung vào buổi trưa"), Đông cung card (Xin bái kiến / Lẻn vào "… (đến nơi vào buổi tối)"). LOOKED: no overlap, nothing cut, no horizontal overflow, 0 page errors.
+
+Notes (not done, outside this brief): jk3.js:96 / j95 `[0,1,2,3]` row shapes (r1 note); accLeadCost() typed 15 (j77) — one-core cleanup for the BAL owner.
+
+SẴN SÀNG KIỂM 9e7ddc144893672076b30dffc5a80056ebecac68
