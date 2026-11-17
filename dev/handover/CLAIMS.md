@@ -856,7 +856,7 @@
 | BISECT G4 50-coop-one-world seed 7 "merge differs from the host" on plain main 7e0250ec (pre-existing; candidates staff-root-fix-1 / trait-rename / mg-snap / world-events-2) | (diagnose) | D | (D opens) | ORDERED | 17/11 16:26Z |
 | STAFF CAPS COUNT (ORDER main s33 15:50Z; OD:L1636; opus; measure only; brief briefs/staff-caps-count.md) | review/staff-caps-count | B | session_01N1tNP6Neas51xgJE6D4CK1 | RUNNING | 17/11 16:40Z |
 | NEW LOOKS looks-2 (ORDER main s34 16:30Z; OD 16:20Z (g); opus BIG; brief briefs/looks-2.md) | review/looks-2 | B | session_01N1tNP5NugSQQVChrBKbF4p | RUNNING | 17/11 16:40Z |
-| emo-samples: owner sample sheets A (code mesh-warp, stronger) + B (old expression pictures + makeup) (OD 16:35Z) (sonnet; brief briefs/s34-emo-samples.md) | review/emo-samples | MAIN s34 | (opening) | RUNNING | 17/11 16:35Z |
+| emo-samples: owner sample sheets A (code mesh-warp, stronger) + B (old expression pictures + makeup) (OD 16:35Z) (sonnet; brief briefs/s34-emo-samples.md) | review/emo-samples | MAIN s34 | session_01UV1SzgTrNW | SAMPLES READY (A only; B none exist) 8ea55572 | 17/11 16:35Z |
 | one-core-jkc r1 PASS 9f3c96854 → re-merge main e8b1906f → Foreman B push | review/one-core-jkc-r1 | B | session_01N1tNP2T3QBr5EHz4r5RAmd | PASS | 17/11 16:45Z |
 | tinbao-ui-r3r PASS 47a462ca (supersedes 05e82176; lands after ag-all-2 by C-AG #3) → r4 = Tai mắt list on 2f API | review/tinbao-ui-r4 | MAIN s34 | session_01UV1Szjhrq5VUWD5Haiagxz | RUNNING | 17/11 16:37Z |
 | harm-acts-expert: drama/history list of harm acts nhẹ/vừa/nặng with visible filters + minigame fit (OD 16:40Z; OD:L1327) (sonnet; brief briefs/s34-harm-acts-expert.md) | review/harm-acts-design | MAIN s34 | session_01UV1SzhJvtkPFYjL1ee1Y1P | DESIGN READY e6e36106 | 17/11 16:40Z |
