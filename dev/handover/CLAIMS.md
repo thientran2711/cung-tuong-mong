@@ -946,3 +946,4 @@
 | REVIEW face-fit 7068619d (sonnet SMALL; live CDN fit stale, repo right) | review/face-fit | MAIN s37 | session_01UV1SzgZrXwRJ3PMdetbaaf | RUNNING | 17/11 21:08Z |
 | toil-looks9: blush-step sheet IN ROOM (full figure, outfit; rows today / middle / very light; repo fit) (sonnet; owner OD 21:15Z) | review/toil-looks5 | MAIN s37 | session_01UV1SzivMP4MnTx1SiyB2oo | RUNNING | 17/11 21:11Z |
 | DISPLAY SET BONUS build (opus; OD 21:15Z approved, s37 order 21:16Z) | review/display-set-bonus | C-AG | session_01UV1SzjpfceWSitedZq3R6g | RUNNING | 17/11 21:11Z |
+| odds-cap fix round 2 (opus; r1 FAIL 5 @bc58dd46) | review/odds-cap | D | session_01964izBuoCyMCGvstmPMb5T | RUNNING | 17/11 21:15Z |
