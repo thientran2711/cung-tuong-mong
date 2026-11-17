@@ -887,7 +887,7 @@
 | emo-seal ANIM: every mood seal animates everywhere (one kit part) + khóc/hờn seals (OD 18:00Z) — folded into kit-figure-mood; art = Foreman C | review/kit-figure-mood | MAIN s35 | session_01UV1SzjLSjT2E1w24wsPwS5 | RUNNING | 17/11 17:32Z |
 | HOA ĐIỀN item + placing minigame (ORDER main s34 17:45Z; opus BIG; brief briefs/hoa-dien.md; stacked on makeup-lux) | review/hoa-dien | B | session_01N1tNP6SdCcvsQaB11nruyu | RUNNING | 17/11 17:40Z |
 | REVIEW kit-figure-mood r1 of c7d4b72a (sonnet SMALL; brief briefs/s35-review-kit-figure-mood.md) | review/kit-figure-mood-r1 | MAIN s35 | session_01UV1Szkv9nsgVqSwQC5r8a8 | RUNNING | 17/11 17:47Z |
-| day-khac-audit fix round 2 (opus; courtMeet accState.why spill-block, dayFit typed 4, j77 "vào buổi này") | review/day-khac-audit-r1 | D | session_01964izFWMBhdej2k6C1qo1c | RUNNING | 17/11 17:50Z |
+| day-khac-audit fix round 2 (opus; courtMeet accState.why spill-block, dayFit typed 4, j77 "vào buổi này") | review/day-khac-audit-r1 | D | session_01964izFWMBhdej2k6C1qo1c | DONE SẴN SÀNG KIỂM 9e7ddc14 (archived) → r1 reviewer re-reviews | 17/11 17:50Z |
 | kit-fx-register: face-layer host .kfx box misregistered vs photo in avatar frames (lips on chin; live for makeup/scars/rash) — whole family of frame kinds (toil-looks5 as kit keeper's worker) | review/kit-fx-register | MAIN s35 | session_01UV1SzjoLym3Q8XoYNGrcgt | RUNNING | 17/11 17:50Z |
 | one-core-jkc-2 LIVE d5ea786d1 (main b5d109fe → d5ea786d; rollback b5d109fe) | review/one-core-jkc-2-r1 | B | session_01N1tNP2MBRBHV2KnMWfTMRx | LIVE | 17/11 17:52Z |
 | ODDS CAP (opus BIG; BAL.odds 95/5 in the one roll fn, soft fail, drop "Chắc chắn"; MAIN s34 17:00Z + 17:35Z) | review/odds-cap | D | session_01964izGRJM7BJPNcVuaqdcU | RUNNING | 17/11 17:58Z |
