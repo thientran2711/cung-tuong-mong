@@ -42,8 +42,8 @@ fs.mkdirSync(DIR,{recursive:true});
  ck('diemWord',D.show.v==="photruong"&&D.diem.v==="diem"&&D.diem.word==="diêm dúa"&&D.diem.mk===L.lv.tuyet.lux&&(D.diem.why||[]).some(w=>/diêm dúa/.test(w)&&/son phấn/.test(w)),D);
  /* 4. old save: a stored "diem" face loads as Khuynh thành (one map), its xa xỉ is Khuynh thành's */
  const O=await p.evaluate(()=>{const raw=JSON.parse(JSON.stringify(ser()));raw.S.toilette={day:toilWk()*10,wk:toilWk(),score:72,makeup:true,style:"showy",dv:"hopdip",F:1,occ:["th"],look:"diem",col:{mat:"hongmai",ma:"yenchi",son:"dotham",may:"den",want:"diem",seed:3}};
-  let ok=true,err="";try{deser(raw);render()}catch(e){ok=false;err=String(e)}const c=toilChip();return{ok,err,mk:toilMk(S.toilette),face:toilLookRec(S.toilette),chip:c&&c.full,d:luxOf(S).sc-luxOf(S,{noMk:1}).sc}});
- ck('oldSave',O.ok&&O.mk==="tuyet"&&O.face==="tuyet"&&/Khuynh thành/.test(O.chip||"")&&O.d===L.lv.tuyet.lux,O);
+  let ok=true,err="";try{deser(raw);render()}catch(e){ok=false;err=String(e)}const c=toilChip();return{ok,err,mk:toilMk(S.toilette),face:toilLookRec(S.toilette),art:toilArt("tuyet"),chip:c&&c.full,d:luxOf(S).sc-luxOf(S,{noMk:1}).sc}});
+ ck('oldSave',O.ok&&O.mk==="tuyet"&&O.face===O.art&&!!O.art&&/Khuynh thành/.test(O.chip||"")&&O.d===L.lv.tuyet.lux,O);
  /* 5. Hội phối đồ: the face's xa xỉ joins the outfit total; the level's contest points = dep − lvBase (bare face = pts.moc) */
  const C=await p.evaluate(()=>{const f={makeup:true,score:92,look:"tuyet",col:{}};const a=tsDressPts(S,{},"phu"),b=tsDressPts(S,{},"phu",f);const w=tsMkWant("phu",4);
   const pts={};for(const k of TOIL_LVS){const r=k==="moc"?{makeup:false}:{makeup:true,score:k==="tuyet"?92:k==="dep"?75:k==="vua"?50:20,look:k==="vung"?"vung":k==="vua"?null:k,col:{}};pts[k]=tsMkPts(r,w);}
