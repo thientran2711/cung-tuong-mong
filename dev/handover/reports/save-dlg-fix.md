@@ -32,3 +32,20 @@ B. KIT 52 kitRelTable (dev/build/jkrel.js:57): an 'on paper' mode for every book
 C. Then one SẴN SÀNG KIỂM for the whole branch to main s29 (id in dev/handover/HANDOVER_SESSION9.md; s28 forwards meanwhile).
 Tools already on the branch: dev/test/save-dlg-scan.js (Chọn sổ screens: harness pattern = dev/test/coop-serve.js + a life in each slot), save-dlg-mask.js. Build: python3 dev/build/assemble.py; node dev/test/*.js; final: bash dev/site/build_site.sh, commit, bash dev/tools/quickcheck.sh (run in background, ~270 s).
 Tips: direct-mode harness serves dev/index.html with images aborted (sparse), so for figure shots route img/ to the live site as dev/test/slot-card.js does.
+
+## UPDATE 17/11 ~03:50Z (successor worker): Tuần lục parts A + B DONE, branch 340c616a
+PRIORITY #1 CHECK: OD tail 03:12Z/03:14Z/03:26Z | main jsl.js KIT 32.2a/56.3 + jkrel.js §52 (reworked in place) | review/* none | claims save-dlg-fix.
+Whole family = every book person/text page with a figure (Tổng lược, Hoàng thượng, Thái hậu, Hoàng hậu, rivals, servants): one kit rule.
+A. Figure column NARROW against the page's left edge: `--porf` = KBK_FIG_COL .36 x inner page width (j87); jsl `kitBookFigClamp` fits the figure by its PAINTED width (aspect kept, feet visible, nothing cut, nothing under the text); `kitBookFigCol` is now a no-op; old widen/clip/figover code deleted. Text size unchanged.
+B. `kitRelTable(rows,{paper:true})` (both j87 call sites): no header band, no card; stacked boxes < 430 px, lone box full frame; `.kr2-l` never breaks inside a word (also fixed the 'T-h-i-ệ-n c-ả-m' letter column on the Thái hậu table).
+Scan (dev/test/book-col-scan.js, real week book; text frame px before -> after; relation tables cut/band/card before -> after):
+| size | figure col / page | text frame | tables cut+band+card |
+|---|---|---|---|
+| Fold 755x1000 | 53 % -> 36 % | 263 -> 342 | 2+2+2 -> 0 |
+| iPad 1180x820 | 52 % -> 36 % | 220 -> 275 | same -> 0 |
+| iPad 1366x1024 | 52 % -> 36 % | 254 -> 340 | -> 0 |
+| cover 412x1058 | 47 % -> 38 % | 159 -> 190 | -> 0 |
+| 390x844 | 47 % -> 38 % | 149 -> 178 | -> 0 |
+Shots looked at (Tổng lược p1 + Thái hậu on Fold, Thái hậu on iPad spread, 390): clean. Trade-off the owner should know: figures are smaller (fitted into 36 %), centred vertically by the 32.2b equal-gap rule.
+Tests: quickcheck PASS (164 s, old save ok, core gates PASS). KIT.md 56.3 / 32.2a rewritten in place; book-figwide.js marked superseded.
+SẴN SÀNG KIỂM 340c616a (whole branch review/save-dlg-fix: Chọn sổ 4 faults + Tuần lục A + B). Not done here: filler line "việc vặt trong tuần chưa ghi riêng" (OD 03:26Z (2)) = tuanluc-sync.
