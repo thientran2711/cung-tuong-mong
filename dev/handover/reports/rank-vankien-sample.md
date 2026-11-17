@@ -111,3 +111,11 @@ Sheet (2 rows × 4, 1600 px wide): https://ctm-img.victoria-tntt.workers.dev/img
 Redid ONLY the hair of ranks 4–8 on the v5 outfits/colours (5 images, 675 credits); lower 3 kept (already restrained: 1 pin / 2 pins + flower / small bu-yao pair). Hair stays visible; nothing wider than the head; no long dangle curtains.
 Tần 2 small flower pins + 1 short tassel | Phi double-loop bun + 2 small butterfly pins + 1 flower + 1 short bu-yao | Quý phi high bun + medium peony + 2 small pins + short bu-yao pair | HQP high chignon + small phoenix pin + small jade flower + 3 small pins | HH small phoenix crown, head-width, short temple dangles.
 Sheet replaced: https://ctm-img.victoria-tntt.workers.dev/img/_review/rank-vankien/sheet_figures_v6_8bac.jpg (cache-bust ?x=2 if the old one shows).
+
+## V7 — 8 ranks (owner: v6b over-trimmed hair; wants v5 hair back; lower ranks look fatter going up; HH robe stiff/loud) — sheet_figures_v7_8bac.jpg
+1) Ranks 5–8 hair/pins/phoenix crown = the v5 images unchanged (Phi, Quý phi, HQP not redrawn; HH crown kept, same crown).
+2) Ranks 1–4: a few pretty pins each, stepping up: Đáp ứng 3 small pieces (pearl pin, small white flower, leaf pin) | Thường tại 4 (2 gold pins, plum flower, pearl comb) | Quý nhân 5 (small bu-yao pair + 2 pins + mauve flower) | Tần = v5 hair.
+3) Silhouette: ranks 1–4 redrawn to the same body width/proportions as Phi (first try was pencil-thin → redone once using Phi as the width reference): sleeves and voile fall close to the body, no ballooning.
+4) Hoàng hậu robe: soft flowing silk, warm golden yellow main, muted dusty-red / blue-grey / jade accents, thinner embroidery, same crown, body at the same scale as the others.
+Credits: 5 + 5 redo images = 1,350. Sheet: https://ctm-img.victoria-tntt.workers.dev/img/_review/rank-vankien/sheet_figures_v7_8bac.jpg
+Dress-up v2 (head+neck / outfit+hands / hair layers) PAUSED by foreman; two bald-cap base edits for c01/c02 already launched before the pause (4RQf7Vv9Aa, 9ZFCJexNYZ), result not yet inspected.
