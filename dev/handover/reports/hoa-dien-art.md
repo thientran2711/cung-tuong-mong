@@ -55,3 +55,9 @@ Code: review/hoa-dien-art @ 08318bb6. Foreman: ROOT-10 session_011xDdVReyG8hSRH5
 5. Leftovers by hand: m44-t3 a26/a36 (old botched shrink), any pendant dots seen in QA.
 6. STEP 3: HD_ANCHOR table from the 'anchor' field of the logs (por px; code wants /4000 of img) — after fig/hd.
 If the container is gone: rerun clean3.py on por (≈1.5 h with 4 workers, OMP_NUM_THREADS=1) — tools are in the branch.
+
+## FINAL 17/11 ~21:55Z — R5e4 DONE (POR uploaded, option A by ROOT-11)
+- POR clean3 run: 6,403 women por (no consort-ty): clean 3,927 / nomark 2,476. Per family clean/nomark: consort t 931/93, kc 55/73, tm 181/458; maid t 1,322/342, ty 1,247/417, tm 85/747, kc 53/155, base 21/187; player 32/4.
+- QA all 3,927: same w×h, pixel diff outside the mask = 0 (lossless webp). Look: 30 random at 4× — brows/hair intact 30/30; ~1/3 still show a faint/partial mark (pale ornate ty/t at a26–a51); ~2/3 of sampled t 'nomark' are real misses → 2nd pass = hoa-điền #2 session_011xDdVNfSx9r7wqg7ooEXKn.
+- UPLOADED to img/ (same names): 3,927 (uploaded_por.txt on review/hoa-dien-art 65c0c2c5); final --check: 3,890 same, 37+ maid-ty differ = newer files written by W12 (maid trung-y restore) during my upload → left alone. RACE: my upload may have replaced W12 restores done before ~21:50Z on maid ty keys (uploaded_maid_ty.txt, 1,247 keys) — W12 told to re-push its restored keys; #2 cleans them after.
+- Sprites/icons: 320 live (see 21:15Z update). Logs: dev/art/hoa-dien-art/log_por.jsonl. Nothing else pending from this session.
