@@ -43,8 +43,8 @@ Object.assign(BAL.wx,{day:{
   Đông:{"tuyết nhẹ":[["tuyết dày",[1,1,2,2]],["mai nở trong tuyết",[1,2,1,0]],["trời âm u",[1,1,1,1]],["sương giá",[1,0,0,2]]],
    "tuyết dày":[["tuyết nhẹ",[3,3,3,3]],["trời âm u",[1,1,1,1]]],
    "sương giá":[["trời âm u",[1,1,1,1]],["tuyết nhẹ",[1,1,2,2]],["mai nở trong tuyết",[1,1,0,0]]],
-   "mai nở trong tuyết":[["tuyết nhẹ",[1,1,2,2]],["sương giá",[0,0,1,2]],["trời âm u",[1,1,1,1]]],
-   "trời âm u":[["tuyết nhẹ",[1,2,3,3]],["tuyết dày",[0,0,1,1]],["sương giá",[1,0,0,1]]]}}}});
+   "mai nở trong tuyết":[["tuyết nhẹ",[1,1,2,2]],["sương giá",[0,0,1,3]],["trời âm u",[1,1,1,1]]],
+   "trời âm u":[["tuyết nhẹ",[1,2,3,3]],["tuyết dày",[0,0,1,1]],["sương giá",[1,0,0,2]]]}}}});
 const WXK_HOOKS=[];
 function wxkHook(fn){if(typeof fn==="function")WXK_HOOKS.push(fn)}
 function wxkLast(){return typeof B4L==="number"?B4L:3}
