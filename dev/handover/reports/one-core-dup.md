@@ -87,4 +87,26 @@ Total: amt 1268 · sw 3 · sc 3007 · k 670 = **4948** in 64 modules (the old fr
 - Worker 3 (opus): F2 arcs — ARC67 (j67) + j97/j96/jorigins/jroute/jstory: BAL.arc.fx in the same shape. ≈680 amounts.
 Workers 2/3 start after my guard commit lands on review/one-core-dup (they base on it so the kinds and baseline are shared).
 
+## 2b. GUARD COMMIT for workers 2/3: review/one-core-dup 16d4925f (base on it)
+dev/test/one-core-guard.js now also counts (frozen in dev/test/one-core-baseline.json, kinds list `kinds`, may only shrink):
+amt (typed last amount / `cond?N:M` of rdOan, rdRel, relAdd, oanAdd, affAdd, kcAf, tdPowAdd, e67dad/bien/kho/ally/pun/foe/drop — read on code with strings blanked, so calls inside go: closures count), sw (S.<stat>+=N), sc (sc:N), k (ending tier k:-1/0/1 followed by tag/t/n/w), ladder (typed threshold ternary chain ≥2 cut points, sign tests excluded).
+Second-table detectors: (a) a top-level function declared in two modules (or twice in one) fails (SHADOW_OK: fillStaff only, owned by review/staff-root); (b) a typed numeric table outside BAL equal to a BAL table fails.
+Proof tools: dev/measure/one-core-dup-same.js (acorn; every live top-level function byte-identical vs a ref, dead `BAL.x||N` fallbacks allowed and listed), dev/measure/one-core-dup-unshadow.js.
+
+### BRIEF worker 2 — F1 roads (opus)
+Scope: dev/build/jrd_{tt,cn,muoi,dtq,nc,td,ch,thd,cnv}.js + jroad.js + jend14.js (≈ amt 865 · sc 2550 · k 517). Base: review/one-core-dup 16d4925f; branch review/one-core-roads.
+Shape: extend BAL.road.fx (jbalroad.js) — per beat option add `sc` and `g:[…]` (the typed amounts of its go: closure in call order; the closure reads `G[i]` via rdDef the same way c/w/l/o are filled), per ending E add `sc`, `k`, `g`. Data files keep words, flags and story logic only. Reuse road-onecore-move.js / road-onecore-emit.js.
+Texts: any player text that types one of these amounts prints the constant (VANPHONG, no %).
+Proof: copy dev/measure/road-onecore-same.js → road-onecore-g-same.js: OLD (ref 16d4925f) vs NEW sandboxes, compare every option/ending sc/k deep-equal AND run every go:/end go on many random lives with stubbed rdOan/rdRel/relAdd/oanAdd/e67* that RECORD their arguments → call logs identical (===). Gates: one-core-guard 0 fails, then `--update` (counts for these files → ~0, shrink only, no --allow-grow); road-rare / road tests; coop-e2e; quickcheck; old save.
+
+### BRIEF worker 3 — F2 arcs (opus)
+Scope: dev/build/j67.js (ARC67 arcs) + j97.js + j96.js + jorigins.js + jroute.js + jstory.js (≈ amt 80 · sc 456 · k 147, plus the inline c/w/l/o of ARC67 options that the old frozen list already holds for j67). Base: review/one-core-dup 16d4925f (it already removed 9 dead duplicate j67 functions); branch review/one-core-arcs.
+Shape: new BAL.arc.fx in a new jbalarc.js loaded right after jbal.js (same shape as BAL.road.fx: per arc id → beat → [option {c,w,l,o,sc,g}], E:{end:{fx,sc,k,g}}), filled into ARC67 when an arc is registered (one helper like rdDef). Odds arrows → the rdOdds term list.
+Proof: same OLD/NEW sandbox compare as worker 2 (values, odds o(A) bit-identical on random lives, go call logs). Gates as worker 2 + the arc / chapter tests (grep dev/test for j67 / arc / chapter).
+
 ## 3. DUPLICATE-RULE HUNT — running list (filled below as found)
+DONE on review/one-core-dup:
+- 28 dead second copies of top-level functions deleted (live copy unchanged, proof 4399/4399 identical): sentPen, confessRisk, bribeServ (j10; live j29 — j10 sentPen/confessRisk had DIFFERENT numbers: no DIRTY/rumor term, no 'tham' +5), npcAct (j8, j24; live j28 with persW), danger (j24 typed trait 10/−15/−10; live j28 persF), rivalsBuoi (j9; live j24), oanMonth (j9 −2 flat; live j28 persF forgive), birthRisk (j8; live j32), fillSeats (j30; live j34), relHTML/houseName (j9), mapHTML/mapSpots (j26), curtain/over/pastHTML (j3), cardH (j6), buoiShift (j18), tuoi (j17), 9× j67 (a67init, msStart67, msCheck67, chEnd67, end67, a67Month, hint67, obj67, panel67 declared twice in j67). Behaviour change: none.
+- 12 dead typed fallbacks after BAL keys deleted (BAL value was already live): BAL.selfMinus||12 (BAL 8 — DISAGREED), BAL.loyalCost||10 (BAL 25 — DISAGREED), B.srvBar||[0,18,20,22,24] (5-long copy), BAL.ex.srvCd||[…], BAL.oanLv||[…] (jhc), BAL.restLatK||1, BAL.restLatSuc||6, BAL.coopEmpY||12, BAL.thieuLe||{…}, B.hintSharp/hintMat/hintMid, B.ctFit/ctPlainK. Behaviour change: none.
+- OWNED ELSEWHERE: servants per rank (capOf j10, fillStaff j10+j29, jpromo/jstaff wrappers, close-maid +1) → review/staff-root (session_01N1tNP3ZSe15ZCwXea7LSMe), listed only.
+
