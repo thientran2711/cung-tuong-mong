@@ -105,8 +105,8 @@ function prCheck(){if(!S||S.dead)return;const srv=prRoad();let z=S.prSeen;
 function prHostOK(){try{const W=window.COOPW;return !(W&&W.on&&W.seat!=="a")}catch(e){return true}}
 function prNpcScan(){if(!S||!prHostOK())return;for(const v of (typeof rivals!=="undefined"?rivals:[])){if(!v||v.coop||v.alive===false)continue;const r=rkOf(v);
   if(v.prSeen==null){v.prSeen=r;continue}if(v.out)continue;if(r>v.prSeen){for(let i=v.prSeen+1;i<=r;i++){prGive(v,prSetFor(i));prStaff(v)}v.prSeen=r;window.__prNpc=(window.__prNpc||0)+1}else if(r<v.prSeen)v.prSeen=r}}
-(function(){const r0=render;render=function(){const r=r0.apply(this,arguments);try{prCheck()}catch(e){console.error("promo set",e)}return r}})();
-(function(){const n0=nextBuoi;nextBuoi=function(){const r=n0.apply(this,arguments);try{prNpcScan();prCheck()}catch(e){console.error("promo npc",e)}return r}})();
+(function(){const r0=render;render=function(){const r=r0.apply(this,arguments);try{prCheck()}catch(e){console.error("promo set",e)}/* a demotion / the cold palace sheds the extra servants at once (j10 capSweep, review/staff-root) */try{if(typeof capSweep==="function")capSweep()}catch(e){}return r}})();
+(function(){const n0=nextBuoi;nextBuoi=function(){const r=n0.apply(this,arguments);try{prNpcScan();prCheck()}catch(e){console.error("promo npc",e)}try{if(typeof capSweep==="function")capSweep()}catch(e){}return r}})();
 (function(){if(typeof rivalsMonth!=="function")return;const m0=rivalsMonth;rivalsMonth=function(){const r=m0.apply(this,arguments);try{prNpcScan()}catch(e){console.error("promo npc",e)}return r}})();
 /* ---------- CSS: §65.2 person reveal (§65.1 is j93 kitReward's own look) ---------- */
 (function(){const st=document.createElement("style");st.textContent=`
