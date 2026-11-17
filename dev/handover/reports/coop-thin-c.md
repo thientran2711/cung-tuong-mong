@@ -1,4 +1,4 @@
-# coop-thin C — WORLD READ-ONLY ON THE GUEST — WIP (rollover handover below), review/coop-thin-c @ 72d7768c
+# coop-thin C — WORLD READ-ONLY ON THE GUEST — SẴN SÀNG KIỂM review/coop-thin-c @ 475beba7 (#1 WIP 72d7768c + ## #2 below)
 
 PRIORITY #1 CHECK ('coop-thin|thin guest|worldOn|guestNet|unroll|jcoopone|coopAsk|lens'): OD 4 (17/11 ~01:15Z/~01:40Z/~02:05Z/~02:15Z) | ledger 0 | main 6ca04148 (part A only) | review/* coop-thin-b-r3 fee14ec5 (base: B+D PASS), no part C branch existed | claims: this worker only.
 
@@ -85,3 +85,118 @@ Known risks to test: performance of the lens on the guest (every NPC read goes t
 implicit frames from timers sending NPC ops (C.log "sent"); a host delta arriving inside an open implicit frame (C.apply flushes first).
 Setup: worktree /home/user/wt/thinc (sparse, hooks installed); test logs /home/user/wt/thinc-out; handover worktree /home/user/wt/hoC.
 Commands: python3 dev/build/assemble.py; `TRIP=1 OUT=<dir> node dev/test/coop-thin-c.js <W> 3 [swap]` (NOACT=1 skips the ACT script, ~4 min vs ~12).
+
+## #2 (worker #2 session_01N1tNP6EZvNuroq8VSupxw7, 11/17/2026) — DONE, review/coop-thin-c @ 475beba7
+
+PRIORITY #1 CHECK ('coop-thin-c|lens|DOMAX|bado|stateOn|oldRun'): OD co-op thin-guest 17/11 ~01:15Z/~01:40Z/~02:05Z/~02:15Z | ledger 0 | main abe056c3 (part A only; B fee14ec5 not on main yet) | review/* coop-thin-c 72d7768c (this branch), coop-thin-b-r3 fee14ec5 (base) | claims: this worker (row 785).
+START_CTX ≈ 4 % (used_tokens reads 0; estimate). Rollover not reached.
+
+### What changed in #2 (on top of 72d7768c)
+1. **Merged origin/main** 25bfd7cf (makeup-theme) + origin/main 7e0250ec (world-events, one-core-dup3, trait-rename, staff-root-fix; j2 conflict: allyBond kept, reads ONE key BAL.eff.j2.start, BAL.allyRel dropped per r3 note) (assemble keeps thin B/C then regSweep; site rebuilt).
+2. **Her act was being dropped by the Worker (found by the gift / vp runs):** an NPC op carried the whole NPC before + after (~10 000 chars each with memories); the Worker refuses an intent over DOMAX = 20 000 chars (`bado`, coop/worker/src/index.js:15/228) — silent on the guest, the act never reached the world. Fix in jcoopthinc (no Worker change): ops carry only what changed (`prune`: plain objects cut to the differing keys, recursively; m3 reads a missing key as "untouched", b-only as "removed", a-only as "added"), packs under 17 000 chars, an op too big is cut by keys (`split`; each part is a valid op); `bado` / unsplittable are counted (C.stat.bado / big) and asserted 0 (C9). m3: an object she adds that the host also holds merges key by key. Unit check: 300 random NPC ops, prune+split+m3 == m3 on the whole op.
+3. **Gift**: not a lens bypass — the test called runAct without the item index (giveTo(ix undefined) = no act). With the index (and the act frame fix 5) gift = 1 op, applied once, back on her phone.
+4. **ONE SWITCH for the old guest state guards** (Foreman B 17/11: bypass now, delete at H): jcoopworld `thinW()` = the switch (a C room), `stateOn(name)` = may the world write run here (solo / host / C room), `oldRan(name)` counts every run of an old guard (COOPW.oldRun). Wired: toCanon HOST_ONLY copies, guestNet/unroll, netWrap, jcoopask temp ids (guest()), part D row tracking (D.rvIn), part B old-rows rule; jcoopthinc's `on()` = thinW(). Test C8: COOPW.oldRun = {} on both seats in a C room.
+5. **Act frame closed early**: a render / buổi step inside her act (kpoison, kframe call render) flushed the act frame; the rest of the act went implicit. Now a world entry closes only an IMPLICIT act frame; an explicit act (runAct / chooseM) stays open, the nested world frame runs on top (reads see the act, its writes drop).
+6. **World key she lacks** (monthTick created S.storms on her S = 1 W write in the bot): every W key gets the lens accessor, present or not.
+7. Ops wait in order while the room holds (COOPW.hold: two builds) instead of failing; the lens frames stay on while the lens is installed (lOn).
+8. Host as a cung nữ in an NPC's palace (her view's coop staff entry, built by placeFriend) survived nothing: the host's delta (into) wiped it. Kept across C.apply (found by d-probe P3 at level 4).
+9. ONE CORE text (quickcheck G1): part D's "Từ chối, bẩm chủ" option typed "nắm 1 chứng cứ" → prints BAL.eff.jcoopworld.evBriber (one-core-dup3 family; main has the same fix on its copy).
+10. Tests: coop-thin-c.js stages a target for every ACT kind (world part on the host in withSeat b, her part on her phone), passes the item index (gift/plant), deep diff, C8 (old guards 0), C9 (bado 0), SHOTS=<dir> (Fold 755x1000@2 / iPad 1180x820@2). coop-thin-d-probe.js level-aware at >= 3: P3 harness adds the host's servant entry in the sync layer (like placeFriend), P5 asserts the one world (her rows in the host world at once, counted once after the merge).
+11. Debug hooks C.dbgE / C.dbgI removed.
+
+### Gates (LIVE Worker ctm-coop.victoria-tntt.workers.dev, part A; level 3/4 need no Worker change)
+| gate | result |
+|---|---|
+| coop-thin-c L3 (host Fold, guest iPad) | 16/16 post-merge (17/17 pre-merge r11); ACT 47/47 |
+| coop-thin-c L3 swap (iPad hosts) | 16/16 post-merge; ACT 48/48 |
+| coop-thin-c L4 (B+C+D, CAP 4) | 16/16 post-merge; ACT 49/49 pre-merge r12 |
+| C7 tripwire guest W / R / Rarr writes | 0 in every run (lens catches ~18 000 / run) |
+| C8 old guest state guards run in a C room (COOPW.oldRun, both seats) | {} / {} |
+| C9 intents refused by the Worker (bado) / unsplittable ops | 0 / 0 (54–62 packs per run; largest NPC field 2 943 chars) |
+| coop-bot TRIP=1 4 weeks, world writes W+R+Rarr | before THIN=2: 1 006 (W 95, Rarr 75, R 836; + F 208) · after THIN=3: 0 / 0 / 0 (3 runs after the storms fix; run 1 before it: 1, W.storms monthTick) |
+| coop-e2e (level 0 = old room) / COOP_SWAP=1 | 63/63 / 63/63 |
+| coop-p2 | 45/46 — FAIL "B1 guest: an NPC bribe reaches her as the j42 card" (check added on the B/D branch; main 45/45 has no B1); level 0, part C code does not run there → for Foreman B |
+| coop-b1 | 34/41 — the laydo / takeaway family FAILs; origin/main 7e0250ec itself: 24/41 (same family + more) → main regression, not part C |
+| coop-thin-a L0 / L1 | 19/19 / 24/24 (one L0 run 16/19: withSeat host-as-servant origin, rerun 19/19) |
+| coop-thin-b L2 / L4 / L4 swap | 148/148 / 148/148 / 148/148 |
+| coop-thin-b-r1 L2 | 39/39 |
+| coop-thin-b-r3 DFLAG=1 L2 | 25/25 (one run 23/25 R10, rerun 25/25; the first main merge alone gave 22/25 R9 → flaky on new main) |
+| coop-thin-d L4 | 52/52 |
+| coop-thin-d-probe L1 / L4 | 35/35 / 35/35 |
+| coop-one-world | PASS |
+| one-core-guard | PASS |
+| quickcheck (475beba7) | PASS · core gates PASS · old save ok · perf render 149/157 ms, buổi 664/897 ms (new/live) |
+| prune/split/m3 unit (300 random NPC ops) | PASS |
+| shots Fold 755x1000@2 + iPad 1180x820@2, both seats (L3 and L3 swap) | CDN img/_review/coop-thin-c/ (L3-host-fold755, L3-guest-ipad1180, L3-host-ipad1180, L3-guest-fold755) |
+
+### ACT kinds from the guest (whole family, staged targets; before = solo engine diff in her frame, after = host world + her phone)
+| kind | target staged | ops | NPC fields her act changed (solo engine, her frame) | her world untouched | host applied once + back on her (L3 / L3 swap / L4) |
+|---|---|---|---|---|---|
+| spy | no | 1 | rel oan cz mem | yes | yes / yes / yes |
+| ally | no | 1 | rel oan cz | yes | yes / yes / yes |
+| rumor | no | 1 | danh cz | yes | yes / yes / yes |
+| frame | no | 2 | evm rel oan cz mem slightAt emo emoH | yes | yes / yes / yes |
+| poison | no | 1 | cz | yes | yes / yes / yes |
+| accuse | yes | 1 | rel oan ev accT slightAt emo emoH cz mem | yes | yes / yes / yes |
+| bribe | no | 1 | maid evm cz mem | yes | yes / yes / yes |
+| block | no | 1 | block oan cz emo emoH bel | yes | yes / yes / yes |
+| musk | yes | 1 | suc preg hidden ro emo emoH cz bel blamed | yes | yes / yes / yes |
+| catswap | yes | 1 | oan emo emoH cz bel catplot | yes | yes / yes / yes |
+| ksab | no | 1 | kids cz | yes | yes / no target / yes |
+| kpoison | no | 1 | cz | yes | yes / yes / yes |
+| pond | no | 1 | evm rel oan cz slightAt emo emoH mem | yes | yes / yes / yes |
+| kframe | yes | 1 | cz | yes | yes / yes / yes |
+| takeaway | no | 1 | rel oan slightAt emo emoH cz mem | yes | yes / yes / yes |
+| vp | yes | 1 | danh inv rel oan emo emoH cz mem wd vpT92 | yes | yes / yes / yes |
+| plant | no | 1 | evm rel oan cz mem emo | yes | yes / yes / yes |
+| steal | no | 0 | — | — | no target / yes / yes |
+| road | no | 0 | — | — | no target / yes / yes |
+| gift | no | 1 | inv rl rel oan cz mem wd | yes | yes / yes / yes |
+| pushp | yes | 1 | suc rel oan emo emoH cz mem bel | yes | yes / yes / yes |
+| trip | no | 1 | evm rel oan cz emo mem bel | yes | yes / yes / yes |
+| lygian | no | 1 | evm rel oan cz mem emo emoH | yes | yes / yes / yes |
+| slowpoison | no | 1 | evm rel oan cz mem | yes | yes / yes / yes |
+| tocao | yes | 1 | ev cz dhWhy badWk | yes | yes / yes / yes |
+| expose | yes | 1 | sung ev dhWhy coldBy | yes | yes / yes / yes |
+| xinhh | yes | 1 | cz | yes | yes / yes / yes |
+| trinhth | yes | 1 | ev cz | yes | yes / yes / yes |
+| trinhhh | no | 2 | confined rel ev cz dhWhy badWk emo emoH mem | yes | yes / yes / yes |
+| uyhiep | yes | 1 | oan cz emo emoH slightAt | yes | yes / yes / yes |
+| banphe | no | 1 | oan ev cz emo emoH | yes | yes / yes / yes |
+| tieuhuy | yes | 1 | rel oan ev cz emoH | yes | yes / yes / yes |
+| huydung | no | 1 | sung danh evm cz mem scar | yes | yes / yes / yes |
+| giahoa | no | 1 | evm rel oan cz mem emoH frT92 | yes | yes / yes / yes |
+| tat | no | 1 | rel oan cz mem slap | yes | yes / yes / yes |
+| phatquy | no | 1 | suc rel oan cz mem pen | yes | yes / yes / yes |
+| rash | no | 1 | evm cz mem | yes | yes / yes / yes |
+| laydo | yes | 1 | rel oan cz | yes | yes / yes / yes |
+| laydol | no | 1 | rel oan cz | yes | yes / yes / yes |
+| spyk | no | 1 | rel oan cz mem | yes | yes / yes / yes |
+| bribel | yes | 1 | maid evm cz mem | yes | yes / yes / yes |
+| blockf | yes | 1 | cz block | yes | yes / yes / yes |
+| thathu | no | 1 | cz | yes | yes / yes / yes |
+| phonghoa | no | 1 | cz | yes | yes / yes / yes |
+| batnat | no | 1 | evm oan tsbBul slightAt emo emoH cz mem | yes | yes / yes / yes |
+| thaopet | yes | 1 | cz pets | yes | yes / yes / yes |
+| petcare | no | 1 | rel cz pets | yes | yes / yes / yes |
+| petsteal | no | 1 | evm rel oan cz emo emoH mem | yes | yes / yes / yes |
+| pgift | no | 1 | evm rel oan cz mem | yes | yes / yes / yes |
+(no target in one run = its staged condition was undone by an earlier act of the same run; every kind is green in at least two of the three runs, none NO)
+
+### Tripwire / meter (coop-bot TRIP=1, 4 weeks)
+see the gates table (coop-bot row). Not C: the post-merge THIN=2 "before" run stuck at week 1 (pre-merge THIN=2 ran 4/4); the first THIN=3 run stuck at week 3 after the guest died twice (seatresync) — the three later THIN=3 runs played 4/4 without a death. Rebirth at level 3/4 is covered by coop-thin-b L4 148/148.
+
+### Old guards: bypassed by the one switch now, cut at part H (level ≥ 3 default)
+Bypassed now through ONE switch (jcoopworld thinW / stateOn / oldRan; asserted 0 runs in a C room), DELETE at part H:
+- dev/build/jcoopworld.js:42 HOST_ONLY + :126 the toCanon copy (stateOn "hostOnly"); :206 unroll, :214 unrollR, :216 guestNet (stateOn "guestNet"), :225 CW.netWrap (stateOn "netWrap") + dev/build/jcoopone.js:53 its endTurn wrap; the merge's numeric W add is moot (CW.cW sends the room's W)
+- dev/build/jcoopask.js:24 guest() temp ids / requests (stateOn "ask") and every path behind it in jcoopask.js
+- dev/build/jcoopthin.js:304 D.rvIn, :306 D.rvOut, :266 pDiff row part, :388 D.patchOut rows (jcoopthinc.js:263 returns null, oldRan "rvIn")
+- dev/build/jcoopthinb.js part B old-rows rule (jcoopthinc.js:265 wrapper, oldRan "bRows")
+KEPT until parts E / G (they decide WHO ROLLS a world event, the host rolls it once for both seats; removing them makes the guest roll fabricated news / effects on her):
+- dev/build/jcoopone.js:18 MUTE, :22 ONLY_ME, :44 PERSON, :46–51 drawLot / cmMonth / fxIllMonth / wdNpcDress
+- inline worldOn: j3.js:92, j8.js:390, j13.js:27, j13.js:69, j42.js:182, j42.js:186, jgift.js:233
+- module guards: jagent.js:27, jdemo.js:13, jdh.js:46, jdh2.js:36, jemoact.js:87, jil.js:30, jkh.js:40, jlux.js:119, jmline.js:20, jnroad.js:15, jpet.js:128, jpromo.js:100, jreign.js:30, jseat.js:21, jstaff.js:20, jsteal.js:35, jweather.js:39, jmort.js:35, jpetlife.js:38, jvisit.js:18
+
+### Notes for the reviewer
+- Implicit frames (display code writing NPC fields lazily: wdOf migration, item iu, tsbPets normalisation) still send small ops; with prune they are a few hundred chars. Kept on purpose: dropping them would also drop her taps that write an NPC outside runAct / chooseM. Counted in C.stat.implicit.
+- Worker DOMAX 20 000 stays; a single changed array over 17 000 chars (never seen: largest NPC field in the runs 2 943 chars, 1.cz) would still be refused — counted (C.stat.big), asserted 0.
