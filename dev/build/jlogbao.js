@@ -80,26 +80,28 @@ window.LOGBAO=LOGBAO;window.lbTidy=lbTidy;window.lbClass=lbClass;window.logOnce=
    happened, between the log lines. Kept OUT of S.logs on purpose: the cards restate numbers ("Sức 91→100") that the Sổ ghi replay (jlogsync) and
    the Tuần lục (j87) already count once. Markup = the card's own kit parts (seal + title, .kb kit rows, kitKemRow) — no new frame or CSS. */
 const LBCARDS=60;
-function lbCardKeep(h,key){try{if(!S||!h)return;S.cards=S.cards||[];const k=lbKey()+"|"+key;if(S.cards.some(c=>c.k===k))return;
+function lbCardKeep(h,key){try{if(!S||!h)return;S.cards=S.cards||[];const k=lbKey()+"|"+key;if(S.cards.some(c=>c.k===k))return;if(S.cards[0]&&S.cards[0].h===String(h).slice(0,4000)&&String(S.cards[0].k).startsWith(lbKey()+"|"))return;/* the same card twice in a row (two hooks a tick apart, a log between them) = one */
   let d="";try{d=`T${S.month}/${S.year} ${TUAN[S.tuan]}`}catch(e){}
   S.cards.unshift({q:S.logSeq||0,k,d,h:String(h).slice(0,4000)});if(S.cards.length>LBCARDS)S.cards.length=LBCARDS}catch(e){}}
 const lbStrip=h=>String(h||"").replace(/<(img|video|audio|canvas|svg|button|figure|picture)\b[\s\S]*?(<\/\1>|\/?>)/gi,"").replace(/<(script|style)\b[\s\S]*?<\/\1>/gi,"")
   .replace(/\s(on\w+|id|data-a|data-k|tabindex|role)="[^"]*"/g,"").replace(/<span class="kalog"[\s\S]*?<\/span>/,"");
 /* the KẾT QUẢ card: what the toast really showed, after every wrapper (j63 resultShow calls lbCardRes a tick after it fills #rtoast) */
-function lbCardRes(title,any){try{const t2=document.getElementById("rtoast");const rt=t2&&(any||t2.classList.contains("on"))&&t2.querySelector(".rt");if(rt)lbCardKeep(`<span class="klk">${lbStrip(rt.innerHTML)}</span>`,"kq|"+lbPlain(String(title||"")).slice(0,60)+"|"+(S.logSeq||0))}catch(e){}}
+/* same title + same log moment but other rows (two acts with one name in a buổi) = another card: the key carries the text hash */
+const lbHash=t=>{let h=0;for(let i=0;i<t.length;i++)h=(h*31+t.charCodeAt(i))|0;return (h>>>0).toString(36)};
+function lbCardRes(title,any){try{const t2=document.getElementById("rtoast");const rt=t2&&(any||t2.classList.contains("on"))&&t2.querySelector(".rt");if(rt)lbCardKeep(`<span class="klk">${lbStrip(rt.innerHTML)}</span>`,"kq|"+lbPlain(String(title||"")).slice(0,60)+"|"+(S.logSeq||0)+"|"+lbHash(lbPlain(rt.innerHTML)))}catch(e){}}
 window.lbCardRes=lbCardRes;
 /* … and any other path that fills the result card (outermost wrapper: a card some wrapper builds itself) */
-(function(){if(typeof resultShow!=="function")return;const r0=resultShow;resultShow=function(title){const tt=document.getElementById("rtoast");const h0=tt?tt.innerHTML:"";const r=r0.apply(this,arguments);
+(function(){if(typeof resultShow!=="function")return;const r0=resultShow;resultShow=function(title){if(window.__tsNoRes)return r0.apply(this,arguments);/* jts holds this card back (shown later under its own title) */const tt=document.getElementById("rtoast");const h0=tt?tt.innerHTML:"";const r=r0.apply(this,arguments);
   setTimeout(()=>{try{const t2=document.getElementById("rtoast");if(t2&&t2.innerHTML!==h0)lbCardRes(title,1)}catch(e){}},20);return r}})();
 /* a dialog card: title + its text and rows (not menus without a title) */
 (function(){if(typeof showModal!=="function")return;const s0=showModal;showModal=function(){const r=s0.apply(this,arguments);try{const q=typeof Q!=="undefined"&&Q[0];const m=document.getElementById("modal");
-  if(q&&q.t&&m&&!m.hidden&&!S.mg){let body=lbStrip(typeof q.h==="string"?q.h:"");if(!lbPlain(body)){const mb=m.querySelector("#mb");if(mb)body=lbStrip(mb.innerHTML)}const who=q.who?lbPlain(String(q.who)).slice(0,40):"";
+  if(q&&q.t&&m&&!m.hidden&&!S.mg){let body=lbStrip(typeof q.h==="string"?q.h:"");if(!lbPlain(body)){const mb=m.querySelector("#mb");if(mb)body=lbStrip(mb.innerHTML)}const qw=q.who&&typeof q.who==="object"?(q.who.name||q.who.n||(q.who.__kp&&q.who.__kp.name)||""):q.who;const who=qw?lbPlain(String(qw)).slice(0,40):"";/* who may be a portrait object: its name, never "[object Object]" */
    const opts=Array.isArray(q.opts)&&q.opts.length?`<span class="kb"><span class="kr"><span class="krl">Lựa chọn</span><span class="krv">${q.opts.map(o=>`<span class="ef n">${lbPlain(o.n||"")}</span>`).join('<span class="ksep">·</span>')}</span></span></span>`:"";
    lbCardKeep(`<b>${lbPlain(String(q.t))}</b>${who&&!lbPlain(body).includes(who)?` · ${who}`:""} ${body}${opts}`,"dl|"+lbPlain(String(q.t)).slice(0,40)+"|"+lbPlain(body).slice(0,60))}}catch(e){}return r}})();
 /* shown in the Sổ ghi: each kept card sits above the first log line written before it */
 (function(){if(typeof renderPanel0!=="function")return;const p0=renderPanel0;renderPanel0=function(){const r=p0.apply(this,arguments);try{
   if(typeof tab==="undefined"||tab!=="log"||!S||!S.cards||!S.cards.length)return r;const box=document.querySelector("#panel .logs");if(!box)return r;
   const rows=[...box.children];const top=S.logSeq||0;let ri=0;
-  for(const c of S.cards){while(ri<rows.length&&top-ri>c.q)ri++;const el=document.createElement("div");el.dataset.card="1";el.innerHTML=`<span class="ld">${c.d||""}</span>${c.h}`;
+  for(const c of S.cards){while(ri<rows.length&&top-ri>c.q)ri++;const el=document.createElement("div");el.dataset.card="1";el.dataset.nrk="1";el.dataset.nrh="1";/* j65 kitNames must not paint the names a 2nd time (they are the card's own kit names: "Hoàng hậu Hoàng hậu X") */el.innerHTML=`<span class="ld">${c.d||""}</span>${c.h}`;
    if(ri<rows.length)rows[ri].before(el);else box.appendChild(el)}}catch(e){console.error("lbCards",e)}return r}})();
 window.lbCardKeep=lbCardKeep;

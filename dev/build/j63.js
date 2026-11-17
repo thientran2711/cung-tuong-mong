@@ -233,7 +233,10 @@ resultShow=function(title,before,okHint){if(!S||!before||S.dead)return;
    const why=nm=>{const W=[];for(const s of segs){const i=s.search(new RegExp(`(^|[:,;.]\\s)${nm.replace(/[.*+?^${}()|[\]\\]/g,"\\$&")}\\s*(?:[+\\-−]\\d|\\d+\\s*→)`));if(i<0)continue;
      /* the cause = the start of that line ("Ngủ một đêm", "ân sủng nhạt dần", "Có người đến · Để thái y kê thuốc bổ"), never the generic time step */
      const pre=s.slice(0,i).split(/\s+—\s+/)[0].replace(/[:,;.\s]+$/,"").replace(/^(Sang (?:buổi|tuần) mới|Trong cung)(?::\s*|$)/,"");const w=pre.split(/:\s*/).filter(Boolean).slice(0,2).join(" · ").trim();if(w&&w.length<=60&&!W.includes(w))W.push(w)}return W.join("; ")};
-   const whoWhy=nm=>{for(const s of segs){const i=s.search(new RegExp(`${nm.replace(/[.*+?^${}()|[\]\\]/g,"\\$&")}\\s+(?:thiện cảm|oán ta|ghen|quý ngươi)\\s*[+\\-−]?\\d`));if(i<0)continue;const pre=s.slice(0,i).replace(/[:,;.\s]+$/,"").replace(/^(Sang (?:buổi|tuần) mới|Trong cung)(?::\s*|$)/,"");const w=pre.split(/:\s*/).filter(Boolean).slice(0,2).join(" · ").trim();if(w&&w.length<=60)return w}return""};
+   /* successor #3: the row may carry the rank ("Đáp ứng Tần Thục Nghi") while the cause line names her without it ("Tần Thục Nghi ghen +4")
+      → try the whole name, then the name with leading words dropped (never shorter than two words) */
+   const whoWhy=nm=>{const ws=nm.split(/\s+/),C=[];for(let k=0;k<=ws.length-2;k++)C.push(ws.slice(k).join(" "));for(const c of C){const r=whoWhy1(c);if(r)return r}return""};
+   const whoWhy1=nm=>{for(const s of segs){const i=s.search(new RegExp(`${nm.replace(/[.*+?^${}()|[\]\\]/g,"\\$&")}\\s+(?:thiện cảm|oán ta|ghen|quý ngươi|ghét ta|thương ta)\\s*[+\\-−]?\\d`));if(i<0)continue;const pre=s.slice(0,i).replace(/[:,;.\s]+$/,"").replace(/^(Sang (?:buổi|tuần) mới|Trong cung)(?::\s*|$)/,"");const w=pre.split(/:\s*/).filter(Boolean).slice(0,2).join(" · ").trim();if(w&&w.length<=60)return w}return""};
    const cause=x=>{const m=/<span class="ef [gr]">([^<]+?) -?\d+→/.exec(x)||/<span class="ef [gr]">Lòng ([^<]+?) -?\d+→/.exec(x);if(!m){const q=/^<span class="ef t">(?:[^<]*? )?([^<: ]+ [^<: ]+(?: [^<: ]+)?):<\/span>/.exec(x);const w=q?whoWhy(q[1]):"";return w?x.replace(/:<\/span>/,` (${w}):</span>`):x}const w=why(m[1].trim())||"trong đêm";return `<span class="ef t">${w}:</span> ${x}`};
    for(let i=0;i<G.length;i++)G[i]=cause(G[i]);for(let i=0;i<B.length;i++)B[i]=cause(B[i]);
    /* news about others: a line with no marker of bookkeeping that is not about her */
@@ -248,14 +251,14 @@ resultShow=function(title,before,okHint){if(!S||!before||S.dead)return;
  /* tuanluc-sync item 7: the Sổ ghi keeps this card in full (jlogbao), as shown after every wrapper */setTimeout(()=>{try{if(typeof lbCardRes==="function")lbCardRes(title)}catch(e){}},0)};
 (function(){const st=document.createElement("style");st.id="ka-res-css";st.textContent=`
 .rtoast.karesult{display:block;max-width:min(94vw,520px);width:max-content;min-width:min(94vw,300px);padding:9px 12px 8px}
-.rtoast.karesult .rt{display:flex;flex-direction:column;gap:4px;font-size:.84rem}
-.rtoast.karesult .kat{display:flex;align-items:center;gap:8px;padding-bottom:4px;border-bottom:1px solid #e6d3ac}
-.rtoast.karesult .seal{font-size:.9rem;padding:3px 8px;flex:0 0 auto}
-.rtoast.karesult .kan{font-weight:700;color:var(--ink);overflow-wrap:anywhere}
-.rtoast.karesult .ksen{color:var(--ink);line-height:1.35}
-.rtoast.karesult .kb{grid-template-columns:3.4rem minmax(0,1fr);font-size:.8rem;line-height:1.4}
-.rtoast.karesult .kb .ef{font-weight:600}.rtoast.karesult .kb .ef.t{color:var(--ink);font-weight:700}
-.rtoast.karesult .kitem{display:block}
+.rtoast.karesult .rt,.klk{display:flex;flex-direction:column;gap:4px;font-size:.84rem;text-align:left}
+:is(.rtoast.karesult,.klk) .kat{display:flex;align-items:center;gap:8px;padding-bottom:4px;border-bottom:1px solid #e6d3ac}
+:is(.rtoast.karesult,.klk) .seal{font-size:.9rem;padding:3px 8px;flex:0 0 auto}
+:is(.rtoast.karesult,.klk) .kan{font-weight:700;color:var(--ink);overflow-wrap:anywhere}
+:is(.rtoast.karesult,.klk) .ksen{color:var(--ink);line-height:1.35}
+:is(.rtoast.karesult,.klk) .kb{grid-template-columns:minmax(3.4rem,max-content) minmax(0,1fr);font-size:.8rem;line-height:1.4}
+:is(.rtoast.karesult,.klk) .kb .ef{font-weight:600}:is(.rtoast.karesult,.klk) .kb .ef.t{color:var(--ink);font-weight:700}
+:is(.rtoast.karesult,.klk) .kitem{display:block;text-align:left;width:auto;align-items:normal;cursor:inherit}/* the item-cell class .kitem (jk2b) centred these rows */
 .kb .kr-kem .krl{color:var(--dim)}
 .kb .kkem{display:block;cursor:pointer;color:var(--ink)}
 .kb .kkem .kkems{text-decoration:underline dotted;text-underline-offset:3px}
