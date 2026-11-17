@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"a077b893+","t":"2026-11-17T02:07Z","c":"balance-core r2: night numbers BAL.steal.m retuned on real states (NPC + her sens-bot play); night measure scripts bc-night-collect/opt/sea…","b":"b15fe1273870","h":[{"s":"babc9b4a","t":"2026-11-17T01:39Z","c":"Chơi chung không còn treo máy vì tên bạn lặp chữ; số bóng người trên dư đồ khớp đúng người đang ở đó; việc có hạn giờ hiện đồng hồ ngay dướ…"},{"s":"92685210+","t":"2026-11-17T00:53Z","c":"Khung việc và khung sự kiện bốn cỡ, tranh lấp đầy khung, việc nhắc tên ai hiện chân dung người ấy; phẩm của món đồ nằm ngay trên viền khung…"},{"s":"6f513340","t":"2026-11-16T23:24Z","c":"Vào game mới không còn bật ngay màn lật thẻ, lật thẻ chỉ khi vào buổi tối; dư đồ nhãn giấy mới; việc dài lấn sang buổi sau; lời trong cung …"},{"s":"7a18d957","t":"2026-11-16T22:44Z","c":"review-diemtrang-fx-r1 report"},{"s":"afe2bcbc","t":"2026-11-16T22:25Z","c":"review r1: KIT 84.1a note + report"},{"s":"dea1d445+","t":"2026-11-16T21:32Z","c":"golive lag-play-2: CHANGE line + site rebuilt"},{"s":"674f3af4","t":"2026-11-16T21:21Z","c":"Chơi cùng bạn: bạn chơi chung chưa gặp mặt nay hiện tên gọi chung “Hảo hữu của ta” ở mọi nơi, không còn ẩn thành dấu hỏi."},{"s":"923567d5+","t":"2026-11-16T21:03Z","c":"Hình nhân vật: hết vệt xám ở cổ và viền tối quanh người."},{"s":"59812a63+","t":"2026-11-16T20:41Z","c":"Khung chung: khoảng cách đều nhau ở sổ tuần và thẻ thân phận; hàng sổ gọn, thẻ lật không đè chữ."},{"s":"ab12d6fc","t":"2026-11-16T20:53Z","c":"Tuyết và đom đóm mới, mượt hơn; nền tranh không còn vẽ lại mỗi khung hình."}]};
+window.CTM_BI={"s":"ea74aff6+","t":"2026-11-17T02:08Z","c":"night-final: flip options say the real difference (kit hint from BAL.steal.m: what each leans on, art weight, win/loss size) and show the l…","b":"ea60504ed650","h":[{"s":"babc9b4a","t":"2026-11-17T01:39Z","c":"Chơi chung không còn treo máy vì tên bạn lặp chữ; số bóng người trên dư đồ khớp đúng người đang ở đó; việc có hạn giờ hiện đồng hồ ngay dướ…"},{"s":"92685210+","t":"2026-11-17T00:53Z","c":"Khung việc và khung sự kiện bốn cỡ, tranh lấp đầy khung, việc nhắc tên ai hiện chân dung người ấy; phẩm của món đồ nằm ngay trên viền khung…"},{"s":"6f513340","t":"2026-11-16T23:24Z","c":"Vào game mới không còn bật ngay màn lật thẻ, lật thẻ chỉ khi vào buổi tối; dư đồ nhãn giấy mới; việc dài lấn sang buổi sau; lời trong cung …"},{"s":"7a18d957","t":"2026-11-16T22:44Z","c":"review-diemtrang-fx-r1 report"},{"s":"afe2bcbc","t":"2026-11-16T22:25Z","c":"review r1: KIT 84.1a note + report"},{"s":"dea1d445+","t":"2026-11-16T21:32Z","c":"golive lag-play-2: CHANGE line + site rebuilt"},{"s":"674f3af4","t":"2026-11-16T21:21Z","c":"Chơi cùng bạn: bạn chơi chung chưa gặp mặt nay hiện tên gọi chung “Hảo hữu của ta” ở mọi nơi, không còn ẩn thành dấu hỏi."},{"s":"923567d5+","t":"2026-11-16T21:03Z","c":"Hình nhân vật: hết vệt xám ở cổ và viền tối quanh người."},{"s":"59812a63+","t":"2026-11-16T20:41Z","c":"Khung chung: khoảng cách đều nhau ở sổ tuần và thẻ thân phận; hàng sổ gọn, thẻ lật không đè chữ."},{"s":"ab12d6fc","t":"2026-11-16T20:53Z","c":"Tuyết và đom đóm mới, mượt hơn; nền tranh không còn vẽ lại mỗi khung hình."}]};
 /* KBOOT — BOOT COVER (owner 15/11 "Khi vừa bấm vào game, có chừng ít hơn 1 giây hiện khung này"; KIT §14.1).
    Before: while the 4 MB page parsed, the browser painted the bare static markup of p1.html (HUD box, a vertical stat label list, empty
    panels, the old 11-tab bar) for ~1 s on a warm open and many seconds on a cold one, before any kit CSS/JS existed.
@@ -26062,9 +26062,12 @@ function kitCompactCSS(B,w,h){w=w||84;h=h||w;return `
  ${B}>.kaart>.ksart>:not(img){display:none!important}
  ${B}>.kaart>.ksart>img{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;object-fit:cover!important;border:0!important;border-radius:0!important;margin:0!important}
  ${B}>.kabody{flex:1 1 auto!important;min-width:0!important;gap:3px!important}
- ${B} .kat{flex-wrap:nowrap!important;align-items:flex-start!important;gap:6px!important}
- ${B} .kat>.kan{flex:1 1 auto!important;min-width:0!important}
+ /* the name never shrinks under its chips (odds ladder, risk): when the row has no room for both, the chips go to the next line, right-aligned
+    (nowrap + min-width:0 squeezed the name to one letter and the chips covered it: night-final flip choice, 17/11) */
+ ${B} .kat{flex-wrap:wrap!important;align-items:flex-start!important;gap:3px 6px!important}
+ ${B} .kat>.kan{flex:1 1 auto!important;min-width:min(6.5em,100%)!important}
  ${B} .kat>:not(.kan){flex:0 0 auto!important;white-space:nowrap!important}
+ ${B} .kat>.kodds{margin-left:auto!important}
  ${B} .klead{display:-webkit-box!important;-webkit-box-orient:vertical!important;-webkit-line-clamp:1!important;overflow:hidden!important}
  /* KIT §51 (kit-table r6): the Cần/Tốn/Được rows stay ONE kit table (j63 .kb grid, rows display:contents) so every value starts at the
     same x; only the value cell flows its chips. (Was a flex chip flow: short values sat beside the label, long ones under it.) */
@@ -46770,14 +46773,16 @@ function openChoice(){const x=X();if(!x)return;x.st="open";x.at=Date.now();
 /* the GỢI Ý line of each flip option (kit option `hint`, KIT §53): the REAL difference between the two attacks, read from BAL.steal
    (owner OD 16/11 22:50Z: each one a distinct trade-off): what it leans on (its weights), how much her art counts, and the size of the
    win / the loss compared with the other attack. Words only (VANPHONG), no numbers. */
+/* the GỢI Ý line of each flip option (owner 22:50Z: the trade-off must be visible): only what DIFFERS between the two attacks, read from
+   BAL.steal.m (what it leans on, art weight, win / loss size vs the other attack, Hoàng hậu) — short, so the card fits the kit frame */
 function nfHint(mode){try{const M=BAL.steal.m,K=B().keep;
  const lean=w=>Object.keys(w||{}).sort((a,b)=>w[b]-w[a]).map(k=>({sung:"ân sủng",sac:"nhan sắc",tai:"tài học",danh:"danh tiếng"})[k]).filter(Boolean);
- if(mode==="keep")return `dựa vào ân sủng${K.sac?", nhan sắc":""} và tài nghệ của ngươi; thành thì kẻ nào tranh đêm của ngươi cũng khó thêm một bậc, không ai giành được thì được để mắt hơn; hỏng thì chẳng mất gì, chỉ là không cản được ai`;
+ if(mode==="keep")return `dựa vào ân sủng${K.sac?", nhan sắc":""}, tài nghệ · thành: kẻ tranh khó thêm một bậc · hỏng: chẳng mất gì`;
  const me=M[mode],ot=M[mode==="road"?"feign":"road"];const big=(a,b)=>Math.abs(a||0)>Math.abs(b||0);
- const artW=me.art>ot.art?"tài nghệ nặng ký, môn Hoàng thượng chuộng tháng này càng lợi, môn ngài chán thì càng hại":"tài nghệ chỉ góp chút ít";
- const win=big(me.win.sung,ot.win.sung)?`được sủng nhiều${me.win.danh?", nổi danh":""}`:"được sủng chút ít";
- const lose=big(me.lose.sung,ot.lose.sung)?`mất sủng nhiều${me.lose.danh?", mất danh tiếng":""}${me.hh?", Hoàng hậu phật ý":""}`:`chỉ mất chút sủng${me.lose.duc?", chút tiếng đức":""}`;
- return `dựa vào ${lean(me.w).join(" và ")}; ${artW}; thành thì Hoàng thượng sang cung ngươi, ${win}; hỏng thì ${lose}`}catch(e){return ""}}
+ const art=me.art>ot.art?"tài nghệ nặng ký (môn ngài chuộng thì lợi, môn ngài chán thì hại)":"tài nghệ góp ít";
+ const win=big(me.win.sung,ot.win.sung)?`sủng nhiều${me.win.danh?", nổi danh":""}`:"sủng chút ít";
+ const lose=big(me.lose.sung,ot.lose.sung)?`mất sủng nhiều${me.lose.danh?", mất danh":""}${me.hh?", Hoàng hậu phật ý":""}`:`mất chút sủng${me.lose.duc?", chút đức":""}`;
+ return `dựa vào ${lean(me.w).join(", ")}; ${art} · thành: ${win} · hỏng: ${lose}`}catch(e){return ""}}
 /* her own choice: one kit dialog (option cards, ✕ = Thôi) with the §69 clock chip; the countdown starts when it is on screen */
 function showChoice(){const x=X();if(!x||x.dlg)return;x.dlg=1;const t=entOf(x.t);
  if(!x.role||!t){mine(null);return}
@@ -47439,7 +47444,9 @@ function kitFrameFitsLive3(dlg,strict){const K=dlg.dataset.ksz;if(K==="XL"&&!str
  const M=document.getElementById("modal"),room=M?M.clientHeight-24:9999;
  if(dlg.dataset.pres==="fig")return need<=lh+2&&dlg.offsetHeight<=room;const btn=dlg.querySelector("#mb>.k3btns");
  const body=Math.max(need,lh,KIT_SIZE.v3.picMinS);return (L?need<=lh+2:body<=KIT_SIZE.v3.bodyS)&&body+(btn?btn.offsetHeight:0)<=KIT_SIZE.v3.capS[kitSzMode()]}
-function kszLiveLay3(dlg,K){const X=dlg.__ksz3;if(!X)return;const V=KIT_SIZE.v3,pres=V.pres[K]||"fig",foc=V.focus[X.kind]||"person";
+/* a live 3-part frame is still the one on screen: its body is in #mb and its options (if any) were not replaced by a rebuild */
+function kszLive3Ok(dlg){const X=dlg&&dlg.__ksz3;return !!(X&&X.body.isConnected&&X.mb.isConnected&&X.mb.contains(X.body)&&(!X.opts||X.mb.contains(X.opts)))}
+function kszLiveLay3(dlg,K){const X=dlg.__ksz3;if(!X||!kszLive3Ok(dlg))return;const V=KIT_SIZE.v3,pres=V.pres[K]||"fig",foc=V.focus[X.kind]||"person";
  Object.assign(dlg.dataset,{ksz:K,pres,focus:foc,lay:K});
  const body=X.body,right=X.right;[...body.children].forEach(c=>{if(c!==right)c.remove()});right.querySelectorAll(":scope>.k3ev").forEach(c=>c.remove());
  let left="",ev=true;if(pres==="one"){if(foc==="event"){left=kszPic3(X.src,"k3main k3mpic");ev=false}else left=X.who?kszPor3(X.who):""}else left=X.who?kszFigHtml(X.who):"";
@@ -47449,16 +47456,18 @@ function kszLiveLay3(dlg,K){const X=dlg.__ksz3;if(!X)return;const V=KIT_SIZE.v3,
  right.querySelectorAll(":scope>.k3ev img").forEach(im=>{if(!im.complete)im.addEventListener("load",()=>kitFrameApplyLive3(dlg),{once:true})});
  kitFrameApplyLive3(dlg)}
 function kszLivePick3(dlg){for(const K of ["S","M","L","XL"]){kszLiveLay3(dlg,K);if(kitFrameFitsLive3(dlg))return K}return"XL"}
-let kszRepT=0;function kszLiveRepick3(dlg){clearTimeout(kszRepT);kszRepT=setTimeout(()=>{try{if(dlg.isConnected&&dlg.__ksz3)kszLivePick3(dlg)}catch(e){console.error("kszLiveRepick3",e)}},30)}
+let kszRepT=0;function kszLiveRepick3(dlg){clearTimeout(kszRepT);kszRepT=setTimeout(()=>{try{if(dlg.isConnected&&kszLive3Ok(dlg))kszLivePick3(dlg)}catch(e){console.error("kszLiveRepick3",e)}},30)}
 function kitFrameLive3(m){try{const M=document.getElementById("modal"),mb=document.getElementById("mb");if(!M||M.hidden||!mb)return false;const dlg=M.querySelector(".dlg.kpanel");
- if(!dlg||dlg.classList.contains("kp-person")||dlg.__ksz3||dlg.contains(document.getElementById("kload")))return false;
+ /* the same .dlg can be filled again (kpBuild rebuilds #mb while the dialog stays open): the old __ksz3 then points at nodes that left the page; drop it, lay the new body out again */
+ if(dlg&&dlg.__ksz3&&!kszLive3Ok(dlg))delete dlg.__ksz3;
+if(!dlg||dlg.classList.contains("kp-person")||dlg.__ksz3||dlg.contains(document.getElementById("kload")))return false;
  const kind=dlg.dataset.kind;if(!KIT_SIZE.v3.focus[kind])return false;const body=mb.querySelector(":scope > .kpb");if(!body||body.matches(".kpid"))return false;
  const main=body.querySelector(":scope > .kpmain");if(!main||main.querySelector(KSZ_LIVE_SKIP)||body.querySelector(":scope > .kpsubj.kes2"))return false;
  /* menus and pages are not event frames: a pick-list (≥ KIT_SIZE.v3.live.maxOpts options) or a sectioned page (≥ maxSecs headed sections) keeps its page layout */
  const LV=KIT_SIZE.v3.live,o0=mb.querySelector(":scope > .opts");if(o0&&o0.querySelectorAll(":scope > button").length>=LV.maxOpts)return false;if(main.querySelectorAll(":scope > .kpsec > .kpst").length>=LV.maxSecs)return false;
  let P=[];try{P=kitStagePeople(m)}catch(e){}const who=P[0]||kszWho3({kind});const src=kszLiveSrc3(m,mb,kind);const opts=mb.querySelector(":scope > .opts");
  /* the old layout classes go (their fit passes then find nothing to do); the game's nodes are moved, never rebuilt */
- dlg.classList.remove("kesdlg","kdper","kdpbanner","kdscroll");dlg.classList.add("kszf","ksz3","kszlive");dlg.style.removeProperty("--dart");dlg.style.removeProperty("height");dlg.style.removeProperty("--kdpic");
+ dlg.classList.remove("kesdlg","kdper","kdpbanner","kdscroll","kdpall");dlg.classList.add("kszf","ksz3","kszlive");dlg.style.removeProperty("--dart");dlg.style.removeProperty("height");dlg.style.removeProperty("--kdpic");
  const B=document.createElement("div");B.className="k3body";const R=document.createElement("div");R.className="k3right";B.appendChild(R);R.appendChild(main);
  if(opts){opts.classList.add("k3btns");opts.classList.remove("k3grid","kdpo2")}
  [...mb.children].forEach(c=>{if(c!==opts)c.remove()});mb.prepend(B);
@@ -47618,7 +47627,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="b15fe1273870";window.CTM_BUILD=BUILD;
+const BUILD="ea60504ed650";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

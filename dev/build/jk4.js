@@ -953,9 +953,12 @@ function kitCompactCSS(B,w,h){w=w||84;h=h||w;return `
  ${B}>.kaart>.ksart>:not(img){display:none!important}
  ${B}>.kaart>.ksart>img{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;object-fit:cover!important;border:0!important;border-radius:0!important;margin:0!important}
  ${B}>.kabody{flex:1 1 auto!important;min-width:0!important;gap:3px!important}
- ${B} .kat{flex-wrap:nowrap!important;align-items:flex-start!important;gap:6px!important}
- ${B} .kat>.kan{flex:1 1 auto!important;min-width:0!important}
+ /* the name never shrinks under its chips (odds ladder, risk): when the row has no room for both, the chips go to the next line, right-aligned
+    (nowrap + min-width:0 squeezed the name to one letter and the chips covered it: night-final flip choice, 17/11) */
+ ${B} .kat{flex-wrap:wrap!important;align-items:flex-start!important;gap:3px 6px!important}
+ ${B} .kat>.kan{flex:1 1 auto!important;min-width:min(6.5em,100%)!important}
  ${B} .kat>:not(.kan){flex:0 0 auto!important;white-space:nowrap!important}
+ ${B} .kat>.kodds{margin-left:auto!important}
  ${B} .klead{display:-webkit-box!important;-webkit-box-orient:vertical!important;-webkit-line-clamp:1!important;overflow:hidden!important}
  /* KIT §51 (kit-table r6): the Cần/Tốn/Được rows stay ONE kit table (j63 .kb grid, rows display:contents) so every value starts at the
     same x; only the value cell flows its chips. (Was a flex chip flow: short values sat beside the label, long ones under it.) */

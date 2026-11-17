@@ -177,17 +177,16 @@ function openChoice(){const x=X();if(!x)return;x.st="open";x.at=Date.now();
  /* the NPCs choose NOW, the same moment as the players (hidden from her) */
  x.npc=npcAttackers(t);x.nk=t!==S&&!t.coop?Math.random()<B().keep.npcP:false;
  send("open")}
-/* the GỢI Ý line of each flip option (kit option `hint`, KIT §53): the REAL difference between the two attacks, read from BAL.steal
-   (owner OD 16/11 22:50Z: each one a distinct trade-off): what it leans on (its weights), how much her art counts, and the size of the
-   win / the loss compared with the other attack. Words only (VANPHONG), no numbers. */
+/* the GỢI Ý line of each flip option (owner 22:50Z: the trade-off must be visible): only what DIFFERS between the two attacks, read from
+   BAL.steal.m (what it leans on, art weight, win / loss size vs the other attack, Hoàng hậu) — short, so the card fits the kit frame */
 function nfHint(mode){try{const M=BAL.steal.m,K=B().keep;
  const lean=w=>Object.keys(w||{}).sort((a,b)=>w[b]-w[a]).map(k=>({sung:"ân sủng",sac:"nhan sắc",tai:"tài học",danh:"danh tiếng"})[k]).filter(Boolean);
- if(mode==="keep")return `dựa vào ân sủng${K.sac?", nhan sắc":""} và tài nghệ của ngươi; thành thì kẻ nào tranh đêm của ngươi cũng khó thêm một bậc, không ai giành được thì được để mắt hơn; hỏng thì chẳng mất gì, chỉ là không cản được ai`;
+ if(mode==="keep")return `dựa vào ân sủng${K.sac?", nhan sắc":""}, tài nghệ · thành: kẻ tranh khó thêm một bậc · hỏng: chẳng mất gì`;
  const me=M[mode],ot=M[mode==="road"?"feign":"road"];const big=(a,b)=>Math.abs(a||0)>Math.abs(b||0);
- const artW=me.art>ot.art?"tài nghệ nặng ký, môn Hoàng thượng chuộng tháng này càng lợi, môn ngài chán thì càng hại":"tài nghệ chỉ góp chút ít";
- const win=big(me.win.sung,ot.win.sung)?`được sủng nhiều${me.win.danh?", nổi danh":""}`:"được sủng chút ít";
- const lose=big(me.lose.sung,ot.lose.sung)?`mất sủng nhiều${me.lose.danh?", mất danh tiếng":""}${me.hh?", Hoàng hậu phật ý":""}`:`chỉ mất chút sủng${me.lose.duc?", chút tiếng đức":""}`;
- return `dựa vào ${lean(me.w).join(" và ")}; ${artW}; thành thì Hoàng thượng sang cung ngươi, ${win}; hỏng thì ${lose}`}catch(e){return ""}}
+ const art=me.art>ot.art?"tài nghệ nặng ký (môn ngài chuộng thì lợi, môn ngài chán thì hại)":"tài nghệ góp ít";
+ const win=big(me.win.sung,ot.win.sung)?`sủng nhiều${me.win.danh?", nổi danh":""}`:"sủng chút ít";
+ const lose=big(me.lose.sung,ot.lose.sung)?`mất sủng nhiều${me.lose.danh?", mất danh":""}${me.hh?", Hoàng hậu phật ý":""}`:`mất chút sủng${me.lose.duc?", chút đức":""}`;
+ return `dựa vào ${lean(me.w).join(", ")}; ${art} · thành: ${win} · hỏng: ${lose}`}catch(e){return ""}}
 /* her own choice: one kit dialog (option cards, ✕ = Thôi) with the §69 clock chip; the countdown starts when it is on screen */
 function showChoice(){const x=X();if(!x||x.dlg)return;x.dlg=1;const t=entOf(x.t);
  if(!x.role||!t){mine(null);return}
