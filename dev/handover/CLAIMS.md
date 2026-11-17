@@ -963,3 +963,4 @@ base-body test (m09 body template, edit clothes only) | img/_review/maid-consort
 | REVIEW kit-display-room-r2 f4abade8 code-only (sonnet SMALL; cabinet art pending C) | review/kit-display-room-r2 | MAIN s38 | session_01UV1Szh5CeFAQytd8HYVjFo | RUNNING | 17/11 22:31Z |
 | hoa-dien r3 (position options + sharp layer; OD ~22:40Z) (sonnet; took over from B) | review/hoa-dien-r3 | MAIN s38 | session_01UV1SziQZkLLitwkfqjx3Bq | RUNNING | 17/11 22:31Z |
 hairpin try-on page (figure w/o pins + pin sprites + HTML, reuse Phòng Thử Y Phục) | img/_review/hairpin-tryon | session_011xDdVNmPeSUSmSWanPWpLQ | RUNNING | 2026-11-18T00:58Z (Foreman C ROOT-12 → ROOT-13)
+| balance-2 fix round 2 (opus; r1 FAIL 2 @371e3a22, Danh wall) | review/balance-2 | D | session_01964izFNvwWQ5k8z1K6nAZG | RUNNING | 17/11 22:41Z |
