@@ -71,7 +71,7 @@ function pillowDo(a,t,o){const G=BAL.tw.g.pillow;const fx=(p,d)=>p===S?apply(d):
    agSpite = hostility less what she already vented), mindPick with jmind's slip; the deed's own cost/odds as hers */
 function pillowNpc(v,sc){try{const T=others(v).filter(x=>x&&x!==v&&x.alive!==false&&!(x.out&&x!==S)&&agSpite(v,x)>0&&motiveOK(v,x,"provoke").ok);if(!T.length)return null;
   const t=mindPickBy(T,x=>agSpite(v,x),v);if(!t)return null;const o=odA(v,pillowO(v,sc));const W=BAL.ag.road[agOrg(v)]||BAL.ag.road._;
-  const sp=cl(agSpite(v,t)/100,0,1)*W.spite;const G=BAL.tw.g.pillow;const u=sp*(G.hit/BAL.ag.unit)*(o/100)*agMW(v,"scheme");
+  const sp=agSpN(agSpite(v,t))*W.spite;const G=BAL.tw.g.pillow;const u=sp*(G.hit/BAL.ag.unit)*(o/100)*agMW(v,"scheme");
   if(mindPick([["quiet",BAL.ag.routine/BAL.ag.unit],["say",u*BAL.ag.needW]],v)!=="say")return null;
   const r=pillowDo(v,t,o);AG.stat.by.pillow=(AG.stat.by.pillow||0)+1;try{agVent(v,t,"provoke")}catch(e){}
   return Object.assign({t},r)}catch(e){agErr("pillow",e);return null}}

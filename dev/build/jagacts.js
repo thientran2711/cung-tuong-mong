@@ -71,17 +71,26 @@ function hhAct(a,v,k){const me=a===S;const nm=me?"Ngươi":`Hoàng hậu ${a.nam
  if(k==="pardon"){if(!v.confined&&!v.out)return"";if(v===S){try{restore(false,`Hoàng hậu ${a.name} ân xá`)}catch(e){S.out=false;S.confined=0}}else{if(v.out){v.out=false;v.rank=0}v.confined=0}relAdd(a,v,BAL.ag.hh.pardonRel);if(me)apply({duc:BAL.ag.hh.pardonDuc});else ap(a,{duc:BAL.ag.hh.pardonDuc});return `${nm} ân xá cho ${NM(v)}`}
  return""}
 const AGHH={judge:{act:"xử tội",n:"spite"},conf:{act:"tịch thu trang sức",n:"spite"},reward:{act:"ban thưởng",n:"ally"},pardon:{act:"ân xá",n:"ally"},cutpay:{act:"khất bổng lộc",n:"spite"}};
+/* the gate of each of her buttons (the player-as-Empress sees the same: empAct below) — ONE list read by her options and by her duty need */
+const AGHHG={judge:(q,p)=>!p.out&&evG(q,p)>=2&&rel(q,p)<0,conf:(q,p)=>!p.out&&(p.hh||0)<=BAL.ag.hh.confHh&&p.inv.some(e=>(IT[e.k]||{}).kd==="Trang sức"&&!e.h),
+ reward:(q,p)=>!p.out&&(p.hh||0)>=BAL.ag.hh.rewardHh&&(q.bac||0)>=-BAL.tw.reward.bac,cutpay:(q,p)=>!p.out&&rel(q,p)<BAL.ag.hh.cutRelMax&&!p.cutPay,
+ pardon:(q,p)=>(p.confined||p.out)&&aff(q,p)>=BAL.ag.hh.pardonAff};
+/* AG-ALL r1 F5: the Empress's DUTY need "order" (keeping the inner palace in order): grows with the cases her buttons can act on now
+   (min(1, cases / BAL.ag.hh.orderN) × orderW); every Empress act also serves it. Before, her acts served only spite / ally, which a seated
+   Empress with friends rarely needs → ~0 acts per 60 days. */
+function agHhCases(q){let n=0;for(const p of consorts()){if(p===q||(p!==S&&!p.alive))continue;for(const k in AGHHG)try{if(AGHHG[k](q,p))n++}catch(e){}}
+ try{const f=favNow();if(f&&f.p!==q&&TW.admon&&TW.admon.req(q,f.p))n++}catch(e){}return n}
+agRegNeeds("hh",q=>{const N=agNeedsC(q);if(q===S||!q.queen)return N;const H=BAL.ag.hh;N.order=Math.min(1,agHhCases(q)/H.orderN)*H.orderW;return N});
 agReg("hh","acts",(q,N,need)=>{if(q===S||!q.queen)return[];const H=BAL.ag.hh;const O=[];const road=(BAL.ag.road[agOrg(q)]||BAL.ag.road._);
  for(const p of consorts()){if(p===q||(p!==S&&!p.alive))continue;const sp=agSpite(q,p),fr=Math.max(0,aff(q,p));
-  const N2=Object.assign({},N,{spite:cl(sp/100,0,1)*road.spite,ally:Math.max(N.ally||0,cl(fr/100,0,1)*road.ally)});
-  const add=(k,ok,g,c)=>{if(!ok||(need&&need!==AGHH[k].n&&!(need==="duc"&&k==="pardon")))return;const u=agcU(q,N2,100,g,c||{},k==="reward"||k==="pardon"?"help":"punish");if(u>0)O.push({k:"hh:"+k,t:p,u,tag:"punish",act:AGHH[k].act,at:()=>palaceOf(q)})};
-  if(!p.out){add("judge",evG(q,p)>=2&&rel(q,p)<0,{spite:H.g.judge,safe:H.g.judge});
-   add("conf",(p.hh||0)<=H.confHh&&p.inv.some(e=>(IT[e.k]||{}).kd==="Trang sức"&&!e.h),{spite:H.g.conf});
-   add("reward",(p.hh||0)>=H.rewardHh&&(q.bac||0)>=-BAL.tw.reward.bac,{ally:H.g.reward},{bac:BAL.tw.reward.bac});
-   add("cutpay",rel(q,p)<H.cutRelMax&&!p.cutPay,{spite:H.g.cutpay})}
-  add("pardon",(p.confined||p.out)&&aff(q,p)>=H.pardonAff,{ally:H.g.pardon,duc:H.g.pardon})}
+  const N2=Object.assign({},N,{spite:agSpN(sp)*road.spite,ally:Math.max(N.ally||0,cl(fr/100,0,1)*road.ally)});
+  const add=(k,ok,g,c)=>{if(!ok||(need&&need!=="order"&&need!==AGHH[k].n&&!(need==="duc"&&k==="pardon")))return;g=Object.assign({order:H.g[k]},g);const u=agcU(q,N2,100,g,c||{},k==="reward"||k==="pardon"?"help":"punish");if(u>0)O.push({k:"hh:"+k,t:p,u,tag:"punish",act:AGHH[k].act,at:()=>palaceOf(q)})};
+  const G=k=>{try{return AGHHG[k](q,p)}catch(e){return false}};
+  add("judge",G("judge"),{spite:H.g.judge,safe:H.g.judge});add("conf",G("conf"),{spite:H.g.conf});
+  add("reward",G("reward"),{ally:H.g.reward},{bac:BAL.tw.reward.bac});add("cutpay",G("cutpay"),{spite:H.g.cutpay});
+  add("pardon",G("pardon"),{ally:H.g.pardon,duc:H.g.pardon})}
  /* Khuyên Hoàng thượng mưa móc đều khắp (TW admon: her act when one consort holds his nights) */
- try{const f=favNow();if(f&&f.p!==q&&TW.admon&&TW.admon.req(q,f.p)&&(!need||need==="sung")){const u=agcU(q,N,100,{sung:H.g.admon},{},"greet");if(u>0)O.push({k:"admon",t:f.p,u,tag:"greet",act:"khuyên Hoàng thượng mưa móc đều khắp",at:kh=>agEmpAt(kh)})}}catch(e){}
+ try{const f=favNow();if(f&&f.p!==q&&TW.admon&&TW.admon.req(q,f.p)&&(!need||need==="sung"||need==="order")){const u=agcU(q,N,100,{sung:H.g.admon,order:H.g.admon},{},"greet");if(u>0)O.push({k:"admon",t:f.p,u,tag:"greet",act:"khuyên Hoàng thượng mưa móc đều khắp",at:kh=>agEmpAt(kh)})}}catch(e){}
  return O});
 for(const k in AGHH)agRunReg("hh:"+k,(q,t)=>{if(!q||!q.queen||!t)return"";return hhAct(q,t,k)});
 /* the player-as-Empress buttons call the same function */

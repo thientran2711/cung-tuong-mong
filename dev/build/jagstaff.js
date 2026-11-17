@@ -175,7 +175,7 @@ function asSeekReact(p,s,harsh){const B=BAL.mline;const O=[["none",BAL.ag.routin
  if(mlLosing(p)&&(p.bac||0)>=B.useBac){let need=1;try{need=agNeedsC(p).sung||1}catch(e){}O.push(["use",need*B.use/BAL.ag.unit])}
  const c=mindPick(O,p)||"none";ASN.react=ASN.react||{};ASN.react[c]=(ASN.react[c]||0)+1;return c}
 /* a consort and another palace's maid (jmline mlHit): her choice by her spite at that palace, not the monthly dice */
-function asHitPick(p){if(p===S)return null;const t=pickTarget(p);if(!t||!(t.staff||[]).some(x=>x.role==="maid"))return null;const B=BAL.mline;let sp=0;try{sp=agSpite(p,t)/100}catch(e){sp=hostility(p,t)/100}
+function asHitPick(p){if(p===S)return null;const t=pickTarget(p);if(!t||!(t.staff||[]).some(x=>x.role==="maid"))return null;const B=BAL.mline;let sp=0;try{sp=agSpN(agSpite(p,t))}catch(e){sp=agSpN(hostility(p,t))}
  const tr=typeof traitsOf==="function"?traitsOf(p):[p.trait];const cruel=tr.some(x=>x==="Xảo quyệt"||x==="Kiêu ngạo");let mw=1;try{mw=agMW(p,"scheme")}catch(e){}
  const O=[["none",BAL.ag.routine/BAL.ag.unit]];const u=sp*mw*BAL.ag.needW*asB().hit;
  if((p.bac||0)>=B.hitBribeBac)O.push(["bribe",u*B.hitBribe/100]);if(cruel)O.push(["beat",u*B.hitBeat/100]);O.push(["frame",u*(100-B.hitBribe)/100]);

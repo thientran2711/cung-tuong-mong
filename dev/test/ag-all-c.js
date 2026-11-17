@@ -12,7 +12,7 @@ const {chromium}=require('playwright');const [,,URL0,NB]=process.argv;const N=+N
 const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+m+(x!==undefined?' '+JSON.stringify(x):''))};
 (async()=>{const b=await chromium.launch();const p=await b.newPage({viewport:{width:755,height:1000}});const errs=[];p.on('pageerror',e=>errs.push(e.message));p.setDefaultTimeout(600000);
  await p.goto(URL,{waitUntil:'domcontentloaded',timeout:240000});await p.waitForTimeout(2500);
- await p.evaluate(()=>{localStorage.clear();SLOT=4;document.getElementById('title').hidden=true;window.__nlInner=1;start();window.__nlInner=0;window.__bot=1;quiet=false;Q.length=0;try{deal()}catch(e){}render()});
+ await p.evaluate(()=>{localStorage.clear();SLOT=4;document.getElementById('title').hidden=true;window.__nlInner=1;start();for(let i=0;i<40&&isSrv();i++)start();/* F3: a consort start (a servant start hides the Dư đồ '!' by design) */window.__nlInner=0;window.__bot=1;quiet=false;Q.length=0;try{deal()}catch(e){}render()});
  /* 1 */
  const r1=await p.evaluate(()=>{const L=liveRivals(true).filter(v=>!v.queen&&!v.confined);const v=L[0],t=L[1];oanAdd(v,t,70);relAdd(v,t,-60);v.bac=300;v.duc=60;
   const N=agNeeds(v);N.spite=1;const O=haOpts(v,N,"spite");const bad=O.filter(o=>{const k=o.ak;return !(ACT[k]||["taint","cook"].includes(k))});
@@ -48,13 +48,14 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
  const H={};const hist=[];let same=1;
  for(let i=0;i<N;i++){const r=await p.evaluate(()=>{const clear=()=>{let n=0;while(Q.length&&n++<30){const m=Q[0];if(m.opts&&m.opts.length){try{chooseM(m.opts.length-1)}catch(e){Q.shift()}}else{try{closeModal()}catch(e){Q.shift()}}}};
    if(S.dead||S.out)return{dead:1};clear();try{nextBuoi()}catch(e){}try{agFlush()}catch(e){}clear();
-   const a=JSON.stringify(adHapRoll().map(h=>h.k+h.id)),b=JSON.stringify(adHapRoll().map(h=>h.k+h.id));const n=adHapNow().filter(h=>!h.done).length;return{n,same:a===b}});
-  if(r.dead){await p.evaluate(()=>{localStorage.clear();window.__nlInner=1;start();window.__nlInner=0;Q.length=0});continue}hist.push(r.n);if(!r.same)same=0}
+   const a=JSON.stringify(adHapRoll().map(h=>h.k+h.id)),b=JSON.stringify(adHapRoll().map(h=>h.k+h.id));const HN=adHapNow().filter(h=>!h.done);return{n:HN.length,ids:HN.map(h=>h.id),same:a===b}});
+  if(r.dead){await p.evaluate(()=>{localStorage.clear();window.__nlInner=1;start();for(let i=0;i<40&&isSrv();i++)start();/* F3: a consort start (a servant start hides the Dư đồ '!' by design) */window.__nlInner=0;Q.length=0});continue}hist.push(r.n);for(const id of r.ids||[])H[id]=(H[id]||0)+1;if(!r.same)same=0}
  const rep=await p.evaluate(()=>({by:HA.stat.by,stat:HA.stat,perf:agPerf(),errs:AG.errs.slice(-5),keysOk:(()=>{const R=new Set(RVGRP.flatMap(g=>g[1]));/* the player's rival-card buttons (j15 RVGRP) + her item act Tẩm đồ + her workshop */
    return Object.keys(HA.stat.by).every(k=>{const a=k.slice(5);return R.has(a)||["taint","cook"].includes(a)})})(),bandInRV:(()=>{const R=new Set(RVGRP.flatMap(g=>g[1]));return [...new Set(BANDS.flatMap(x=>x[2]))].filter(k=>!R.has(k))})()}));
  const h={};for(const n of hist)h[n]=(h[n]||0)+1;
- console.log('harm deeds chosen over',N,'buổi:',JSON.stringify(rep.by));console.log("'!' per buổi histogram:",JSON.stringify(h));console.log('stat',JSON.stringify(rep.stat));
+ console.log('harm deeds chosen over',N,'buổi:',JSON.stringify(rep.by));console.log("'!' per buổi histogram:",JSON.stringify(h));console.log("'!' kinds over the run:",JSON.stringify(H));console.log('stat',JSON.stringify(rep.stat));
  ok(rep.keysOk,'bot: every chosen harm key is a button on the player\'s rival card (RVGRP) or her Tẩm đồ / workshop',rep.by);ok(!rep.bandInRV.length,'every act the danger band opens to an NPC is a player rival-card button',rep.bandInRV);ok((h[0]||0)>0&&Object.keys(h).some(k=>+k>=2),"bot: quiet buổi (0 '!') and busy buổi (≥2) both occur",h);
+ ok((H.quarrel||0)+(H.gossip||0)+(H.deed||0)>0,"F5: people's own deeds (quarrel / gossip / witnessed deeds) put '!' on the map, not only festival / walk / cold palace",H);
  ok(same===1,"no dice: the '!' list is the same when asked twice (no re-roll)");ok(!rep.perf.p95||rep.perf.p95<=rep.perf.budget,'perf: agent slice p95 within BAL.ag.perf.p95',rep.perf);
  ok(!rep.errs.length,'no agent errors',rep.errs);ok(!errs.length,'no page errors',errs.slice(0,5));
  await b.close();process.exit(res.every(x=>x)?0:1)})();

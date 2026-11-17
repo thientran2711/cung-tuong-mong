@@ -46,7 +46,7 @@ function agNeeds(v){const G=BAL.ag.goal,W=BAL.ag.road[agOrg(v)]||BAL.ag.road._;c
  for(const x of liveRivals(true))if(x!==v)sf=Math.max(sf,bandOf(danger(x,v)));
  let q=null;try{q=queenP()}catch(e){}
  return{sung:gap(G.sung,v.sung)*W.sung,th:S.thDead?0:gap(G.th,v.th)*W.th,hh:q&&q!==v&&!v.queen?gap(G.hh,v.hh)*W.hh:0,danh:gap(G.danh,v.danh)*W.danh,duc:gap(G.duc,v.duc)*W.duc,
-  kid:!sonsOf(v).length&&!v.preg&&(v.age||20)<G.kidAge?W.kid:0,ally:gap(G.ally,fr)*W.ally,spite:cl(sp/100,0,1)*W.spite,safe:cl(sf/Math.max(1,BANDS.length-1),0,1)*W.safe,
+  kid:!sonsOf(v).length&&!v.preg&&(v.age||20)<G.kidAge?W.kid:0,ally:gap(G.ally,fr)*W.ally,spite:agSpN(sp)*W.spite,safe:cl(sf/Math.max(1,BANDS.length-1),0,1)*W.safe,
   rest:gap(G.rest,v.suc)}}
 /* r1 fault 8: a spite deed SERVES the spite need (its gain BAL.tw.g closes it, BAL.ag.unit points = one whole need), like every other need —
    before, the deed fed the need it served (provoke lowers thiện cảm → hostility ↑ → spite ↑ → provoke again, ~40×/year on her).
@@ -54,6 +54,10 @@ function agNeeds(v){const G=BAL.ag.goal,W=BAL.ag.road[agOrg(v)]||BAL.ag.road._;c
 function agVentM(m){return m?Math.max(0,m[1]-(wk()-m[0])*BAL.ag.vent.fade):0}
 function agVentL(v,x){const V=v&&v.ag&&v.ag.vent;if(!V)return 0;return agVentM(V[key(x)])+agVentM(V["*"])}
 function agSpite(v,x){return Math.max(0,hostility(v,x))*(1-Math.min(1,agVentL(v,x)/BAL.ag.unit))}
+/* the spite NEED from a hostility (0..1): hostility / BAL.ag.spiteD (schemes: BAL.ag.harm.spiteD, kept at the old 100 so the pass raises quarrels, not schemes) (AG-ALL r1 F5 weight pass; was /100 typed in six places) */
+function agAskHer(v){let k="";try{k=agKey()}catch(e){}if(!AG.askc||AG.askc.k!==k){let c=false;/* once per buổi (perf): a request is on offer (q72); who asks is matched when the '!' fires */
+  try{c=!!(typeof q72CanOffer==="function"&&q72CanOffer()&&q72Cands().length)}catch(e){}AG.askc={k,c}}return AG.askc.c}
+function agSpN(h,d){return cl((h||0)/(d||BAL.ag.spiteD),0,1)}
 function agVent(v,t,k){const s=Object.keys(AGSOC).find(x=>AGSOC[x][0]===k);const g=s?AGSOC[s][3](BAL.tw.g):AGSELF[k]?AGSELF[k].g(v).g:null;const pts=g&&g.spite;if(!(pts>0))return;
  v.ag=v.ag||{};const V=v.ag.vent=v.ag.vent||{};const kk=t?key(t):"*";V[kk]=[wk(),agVentM(V[kk])+pts];for(const q in V)if(!agVentM(V[q]))delete V[q]}
 /* she weighs her needs once a day (tuần) and again after she acted (perf §4: "cache needs per agent") */
@@ -110,9 +114,10 @@ function agOpts(v,N,need){const O=[];
   /* worth looking for a target at all? (the best case: odds sure, the need as it stands) */
   if(agU(v,N,100,{g:gf(BAL.tw.g),l:{}},twCost(k),tag)<=0)continue;
   const C=agSocT(v,s,so,()=>T=T||others(v).filter(x=>x&&x!==v&&x.alive!==false&&!(x.out&&x!==S)));if(!C.length)continue;
-  const t=mindPickBy(C,x=>host?BAL.mind.pick.ag.base+agSpite(v,x):BAL.mind.pick.ag.base+Math.max(0,aff(v,x))+(nd==="safe"?danger(x,v):0),v);if(!t)continue;
+  const ask=!host&&C.includes(S)&&agAskHer(v)?BAL.ag.favAsk:0;/* F5: a consort with a favour to ask of her (q72) is drawn to seek her out */
+  const t=mindPickBy(C,x=>host?BAL.mind.pick.ag.base+agSpite(v,x):BAL.mind.pick.ag.base+Math.max(0,aff(v,x))+(nd==="safe"?danger(x,v):0)+(x===S?ask:0),v);if(!t)continue;
   const g=motiveOK(v,t,host?"provoke":"visit");if(!g.ok)continue;
-  const N2=Object.assign({},N);if(host)N2.spite=cl(agSpite(v,t)/100,0,1)*((BAL.ag.road[agOrg(v)]||BAL.ag.road._).spite);
+  const N2=Object.assign({},N);if(host)N2.spite=agSpN(agSpite(v,t))*((BAL.ag.road[agOrg(v)]||BAL.ag.road._).spite);
   const o=TW[k].o?TW[k].o(v,t):100;const u=agU(v,N2,o,{g:gf(BAL.tw.g),l:{},f:ff?ff(BAL.tw.g,t):0},twCost(k),tag);if(u<=0)continue;
   O.push({k,t:k==="follow"?twFollowT(v):t,u,tag,at:(kh,vv,tt)=>tt===S?"home":agAt(tt,kh),act:AGACTW[k]||k,mot:g.why})}
  /* her Sủng deck act (the player's dance / zither / chess / small gift cards) */
