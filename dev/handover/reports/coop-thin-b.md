@@ -1,4 +1,4 @@
-# coop-thin B — LIFE CREATION + REBIRTH ON THE HOST — SẴN SÀNG KIỂM review/coop-thin-b 4bf838e2
+# coop-thin B — LIFE CREATION + REBIRTH ON THE HOST — SẴN SÀNG KIỂM review/coop-thin-b 9af781c2 (= 4bf838e2 + merge of review/coop-thin-d 099ce05b)
 
 PRIORITY #1 CHECK ('coop-thin|thin guest|withSeat|nlRun'): OD 4 | ledger 5 | claims 8 | main 15 | review/* 3 (part A live on main 64c39ca2; no part B branch existed; parallel D = review/coop-thin-d c03c4f95)
 
@@ -56,6 +56,12 @@ Spec: coop-thin-guest-audit.md §3 row B; contract coop-thin-a.md C1-C6; review-
   no-op list → resolved as ONE `TH.NOOP` (union: + D's kitStatDelta). jcoopworld auto-merged. On the trial: coop-thin-b level 2 **148/148**,
   coop-thin-d level 1 **44/44**, level 2 **44/44**. C1: CAP stays 2 on B; the LAST merged of B/D sets CAP=4 (reviewer). Resolution text = the two
   hunks above (exact code in this session's trial worktree; reproduce with the description).
+
+## B‖D merged into this branch (Foreman B s2 order 06:41Z): 9af781c2
+Merge of review/coop-thin-d 099ce05b: conflicts jcoopthin.js (the 2 hunks above, resolved the same way: withSeat entry/exit joined, ONE TH.NOOP
+union list) + generated files (rebuilt); coop-bot.js auto-merged with D's THIN/THINPART env, B's duplicate THIN line removed (D's kept).
+On 9af781c2: one-core-guard PASS · quickcheck PASS (old save ok; render 218/228, tab 305/285, buổi 903/864 ms) · coop-thin-b L2 148/148, swapped
+148/148 · coop-thin-d L2 45/45 · coop-e2e 60/60. CAP stays 2; with D on this branch the reviewer may set CAP=4 at the merge (C1: last merged sets it).
 
 ## Guest tripwire (meter) — before/after
 Scripted: 11 guest rebirths (every origin + tiểu thư), same origins forced on both seats, counted only during the rebirths (coop-thin-b.js TRIP=1):
