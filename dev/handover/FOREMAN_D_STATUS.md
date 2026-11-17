@@ -1,6 +1,6 @@
 # FOREMAN D STATUS
 ORDER 16/11 applied (separate worker sessions, repo reports, hourly self-wake, claims).
-last wake: 17/11 18:55Z — FOREMAN D #10 (depth 2/8) HANDING OVER to #11 — see HANDOVER #10 → #11 at the end
+last wake: 17/11 18:57Z — FOREMAN D is now #11 = session_01964izFTp8oV5DHeadkPMRn (depth 3/8; opened by #10 at rollover; send result lines to #11)
 s7 START_CTX ≈ 6 % of 1M window (get_session reads 0; own estimate ~60k after start reading); rollover at 31 %, ceiling 60 %.
 - (17/11 12:40Z) s7 STOPPED: old Foreman D s7 (session_01DgYSWo6WxULHyNN9yjfAPm) woke after a ~14 h stall, saw FOREMAN D #9 already in charge, deleted its own hourly wake trig_01WRgJzWBhmuoRbMvDPTXtqt, touched no worker and no claim. s7 context 37 % (past its 31 % rollover). Nothing to hand over beyond this file.
 - 21:43Z: suc-khoe-fix SẴN SÀNG KIỂM da50857d (F1–F10 fixed; F6 waits KIT REQUEST y-duoc + art; coop-e2e 60/60 incl. new 'NPC Sức khỏe guest = host'; D57 births fix ≈ base 0.14–0.16; her deaths 25–27 vs 17–25 per 40 lives) — worker archived → opus BIG reviewer r2 session_01DgYSWmYNeB92ubrzxwYmXs.
@@ -424,3 +424,4 @@ FOR MAIN (open): grand endings DESIGN READY r3 52cdc078 (owner D2–D8; KIT REQU
 HOUSEKEEPING: other sessions' bad rebases left conflict markers twice today → each wake `grep -rln '^<<<<<<< ' dev`; clean = keep both sides, drop exact duplicates, delete stale pre-overwrite OD copies. Push recipe on this busy branch: fetch → reset --hard origin → re-apply your edit → commit → push, retry loop (never a keep-both rebase of append-only files).
 LINEAGE: state 'depth N/8' in every wake/handover line (START_FOREMAN line 14). #11 = depth 3.
 Hourly wake: #10's trig_01NQj22RN3xNZEJVdRUpcnUz is deleted at handover → #11 creates its own.
+- (17/11 18:57Z) #10 STOPPED (depth 2/8): successor Foreman D #11 = session_01964izFTp8oV5DHeadkPMRn (depth 3) opened with the repo attached (a first try session_01964izDdor9bBzQv6NbJLc5 had no repo → archived); #10 hourly trigger trig_01NQj22RN3xNZEJVdRUpcnUz deleted. Workers report to #11.
