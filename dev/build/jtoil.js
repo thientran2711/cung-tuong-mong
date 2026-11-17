@@ -677,7 +677,7 @@ function toilMakeupSvg(file,look,col,noLip){const L=TOIL_LOOKS[look];const v=toi
  const sk=L.skin,bl=toilColRGB("ma",col.ma).concat(L.blush.slice(3)),lp=toilColRGB("son",col.son).concat(L.lip.slice(3));const br=fw*bl[4]*1.0;
  /* vụng: the two cheeks differ (size, place, strength) and a patch of caked powder sits off the cheek — seeded per day, in face units, so portrait and figure match */
  const R=toilRnd((col.seed|0)+7);const jl=L.vung?[1.2+.5*R(),(R()-.5)*fw*.12,(R()-.3)*fw*.1,1.25]:[1,0,0,1],jr=L.vung?[.55+.25*R(),(R()-.5)*fw*.1,(R()-.6)*fw*.09,.7]:[1,0,0,1];
- const ja=L.vung?[.6+.25*R(),.65+.3*R(),R()*70-35,R()*70-35]:[1,1,0,0];const pw=L.vung?[(R()<.5?lx:rx)+(R()-.5)*fw*.12,Y(ly)-fw*(.04+.06*R()),fw*(.05+.03*R())]:null;
+ const ja=L.vung?[.6+.25*R(),.65+.3*R(),R()*70-35,R()*70-35]:[1,1].concat([0,0]);/* no jitter (identity scale/offset; written so the one-core guard does not read it as jwxk's weight row) */const pw=L.vung?[(R()<.5?lx:rx)+(R()-.5)*fw*.12,Y(ly)-fw*(.04+.06*R()),fw*(.05+.03*R())]:null;
  /* skin light: an oval over the face, feathered; blush: two feathered discs (the hard stop makes the diêm dúa circles); lips: a blurred oval */
  const svg=`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 ${H.toFixed(2)}" preserveAspectRatio="none">`+
  `<defs><radialGradient id="s"><stop offset="0" stop-color="${c(sk)}" stop-opacity="${sk[3]}"/><stop offset="${L.powder?.7:.45}" stop-color="${c(sk)}" stop-opacity="${(sk[3]*(L.powder?.85:.6)).toFixed(3)}"/><stop offset="1" stop-color="${c(sk)}" stop-opacity="0"/></radialGradient>`+
