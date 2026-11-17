@@ -614,3 +614,5 @@
 | npc-death-wire review r1 (opus BIG) of de166c3f | review/npc-death-wire-r1 | D | session_01964izCQT8gNjjT2WA7WDjh | RUNNING | 17/11 04:27Z |
 | newlife-reset r1 PASS 0045ff8ef (supersedes b2da25cc0; tuanluc-sync drops vmemFix) → next batch | review/newlife-reset-r1 | main s30 | session_01UV1Szj7gGyXgBXgvj6d6xG | PASS | 17/11 04:28Z |
 | npc-roads review r2 (opus BIG) of e34393b1 (U2/U3/U4 + r1 families + ch1–4 gate; on a test build with B's road engine) | review/npc-roads-r2 | D | session_01964izESTjuhUzS2khSQ5K9 | RUNNING | 17/11 04:28Z |
+| BATCH 04:15 LIVE: main = 4719d424 (FF from 64c39ca28; save-dlg-fix-r1, fig-rank-match-r2-r1, wx-fx-size-r1); s30 looked at Fold/iPad shots | review/batch-0415 | main s30 | session_01UV1SzjhxXkcba8uS4TZeVm | LIVE | 17/11 04:31Z |
+| person-leftcol HELD by worker until owner confirms (WIP 66228c7a; worker context high → successor needed from a root main) | review/person-leftcol | main s30 | session_01UV1SzhEnrDEEXPkBwigyNF | HELD | 17/11 04:31Z |
