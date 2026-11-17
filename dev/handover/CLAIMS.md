@@ -518,3 +518,5 @@
 | it-key-guard review r1 (opus BIG) of ce1eda7b | review/it-key-guard-r1 | main s27 | session_01UV1SzkM4xXVtuGJCpS4Sdh | RUNNING | 17/11 01:36Z |
 | coop-thin A FOUNDATIONS (opus co-op; owner GO 17/11 01:40Z): room thin level + capability check, host withSeat(), room RNG, server snap/delta/do, guest tripwire build — no visible change | review/coop-thin-a | main s27 | session_01UV1SzhV65dmdFBM2xfFYvT | RUNNING | 17/11 01:41Z |
 | WHOLE FIGURE REPAINT batch W4b maid-ty (successor of W4 session_011xDdVRqzYRpSYpnCiVfu8x, 2K) | review/fig-cutout-clean | C | session_011xDdVSDgWxxs57zsL4S2JZ | RUNNING | 17/11 01:36Z |
+| WHOLE FIGURE REPAINT batch W6 maid-rest-B 1586 (2K, a18 first; opened by lead #5) | review/fig-cutout-clean | C | session_011xDdVNVPxjHSMerTjisLs3 | RUNNING | 17/11 01:38Z |
+| WHOLE FIGURE REPAINT batch W7 consort-rest-B 976 (2K, a18 first; opened by lead #5) | review/fig-cutout-clean | C | session_011xDdVSQXPe2qq8TJQ8hLyw | RUNNING | 17/11 01:38Z |
