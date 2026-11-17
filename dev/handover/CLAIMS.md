@@ -765,3 +765,4 @@
 | REVIEW stage-caption r1 of ff3e0e74 (+ S.where family scan, 3 more sizes) | review/stage-caption-r1 | MAIN s31 | session_01UV1SzjCpLEqRoqbdxYksYe | RUNNING | 17/11 12:27Z |
 =======
 >>>>>>> 19ad1764 (reports/one-core-dup: §6 part 2 (review/one-core-dup2 0ffa37bf))
+| REVIEW kit-rcol-top r1 of 44ac9cda (perf re-run, trial-merge morechip) | review/kit-rcol-top-r1 | MAIN s31 | session_01UV1Szgi8dLemLxMTeHcsgj | RUNNING | 17/11 12:30Z |
