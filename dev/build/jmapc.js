@@ -74,7 +74,7 @@ html body .game .mapv.kpmv.kside.kleather>.mapsc>.mapw{width:max(100cqw,calc(100
 html body .game .mapv.kpmv.kside.kleather>.kpm-list{position:absolute;left:6px;right:6px;bottom:6px;z-index:8;padding:0;margin:0!important;grid-template-columns:repeat(3,minmax(0,1fr))}
 html body .game .mapv.kpmv.kside.kleather>.kpm-list .btn{background:#fff8e4ee;min-height:40px}
 .mspot .mlab{background:none!important;border:solid transparent!important;border-width:3px 7px!important;border-image:url(img/kit/mapslip.webp) 20 22 fill/3px 7px stretch!important;border-radius:0!important;box-shadow:none!important;padding:0 1px!important;filter:drop-shadow(0 1px 1px #3a2a1e66);color:#2a1a12}
-.mspot .mlab i{background:none!important}
+.mspot .mlab i:not(.khap){background:none!important}
 .mspot .mmeta{background:none!important;border:solid transparent!important;border-width:3px 6px!important;border-image:url(img/kit/mapslip.webp) 20 22 fill/3px 6px stretch!important;border-radius:0!important;padding:0!important;filter:drop-shadow(0 1px 1px #3a2a1e55);color:#4a3a2a}
 :where(.kv1) .mspot .mmeta,.mspot .mmeta{display:block!important}
 .mspot .mlab em{display:inline!important}
