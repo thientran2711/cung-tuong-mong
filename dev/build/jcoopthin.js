@@ -30,7 +30,7 @@ TH.want=want;
 
 /* ---------- 1. room level + capability check ---------- */
 function say(){if(!CW.on&&!(COOP.state&&COOP.state.you))return;
- COOP.send({t:"thin",cap:TH.CAP,v:String(window.CTM_BUILD||""),want:host()?want():0})}
+ COOP.send({t:"thin",cap:TH.CAP,v:String(window.CTM_BUILD||""),want:(COOP.state.you||CW.seat)==="a"?want():0})}   /* the room reply comes before the lobby hands over (CW.seat unset yet) */
 TH.say=say;
 COOP.on("room",()=>{TH.lvl=0;setTimeout(say,0)});
 COOP.on("peer",on=>{if(on)say()});

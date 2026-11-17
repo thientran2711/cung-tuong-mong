@@ -22,7 +22,8 @@ const tapText=async(o,re,ms=8000)=>{const t0=Date.now();while(Date.now()-t0<ms){
 /* the dialog clearer of coop-e2e.js (one source): taken from that file's text */
 const clear=(()=>{const t=require('fs').readFileSync(require('path').join(__dirname,'coop-e2e.js'),'utf8');const i=t.indexOf('async function clear(');const j=t.indexOf("return'many'}",i)+13;return eval('('+t.slice(i,j)+')')})();
 const until=async(o,fn,arg,ms=40000)=>{try{await o.p.waitForFunction(fn,arg,{timeout:ms});return true}catch(e){return false}};
-(async()=>{const b=await chromium.launch();
+(async()=>{/* a local Worker (wrangler dev on 127.0.0.1): let the page (http://ctm.local) reach the private address */
+ const b=await chromium.launch(/127\.0\.0\.1|localhost/.test(WURL)?{args:['--disable-features=BlockInsecurePrivateNetworkRequests,PrivateNetworkAccessSendPreflights,PrivateNetworkAccessRespectPreflightResults,LocalNetworkAccessChecks']}:{});
  const FOLD=[755,1000],IPAD=[1180,820];
  const H=await mk(b,'host',SWAP?IPAD:FOLD,LVL),G=await mk(b,'guest',SWAP?FOLD:IPAD,0);
  await H.p.goto(BASE);await H.p.waitForTimeout(3000);await tapText(H,/^(Chơi cùng bạn|Cùng hảo hữu)/);await H.p.waitForTimeout(500);await tapText(H,/^(Mời bạn|Mời hảo hữu)/);
@@ -58,7 +59,7 @@ const until=async(o,fn,arg,ms=40000)=>{try{await o.p.waitForFunction(fn,arg,{tim
  /* build-match hold → level off */
  ok(await H.p.evaluate(()=>{const h=COOPW.hold;COOPW.hold=true;const r=COOPW.thin.on(1);COOPW.hold=h;return r===false}),'build-match hold: no part on');
  if(LVL){
-  ok(await until(H,()=>COOPW.thin.lvl===1,null,20000)&&await until(G,()=>COOPW.thin.lvl===1,null,20000),'level 1 on both (same build, host asked)');
+  ok(await until(H,()=>COOPW.thin.lvl===1,null,20000)&&await until(G,()=>COOPW.thin.lvl===1,null,20000),'level 1 on both (same build, host asked)',await both(()=>({lvl:COOPW.thin.lvl,want:COOPW.thin.want(),tx:__tx.filter(t=>t!=='ping'),rx:__rxT.filter(t=>t!=='pong').slice(-12)})));
   ok(await until(G,()=>COOPW.thin.view&&COOPW.thin.view.o&&COOPW.thin.view.o.P&&COOPW.thin.view.o.P.a,null,20000),'guest received the host snapshot');
   await H.p.evaluate(()=>{S.danh=(S.danh||0)+1;COOPW.thin.flush()});
   const hv=await H.p.evaluate(()=>[COOPW.thin.hv,S.danh]);ok(await until(G,x=>COOPW.thin.view.v===x[0]&&COOPW.thin.view.o.P.a.danh===x[1],hv,20000),'delta: guest view follows the host (version + value)',hv);
