@@ -12,7 +12,7 @@ Base origin/main 7abaf07ac. START_CTX ≈ low (fresh session); no rollover neede
 | "Biếu quà làm lành" entries | 2 (panel, maid warning) bạc only | 2/2 also offer the item/work option |
 ## Tests
 - node dev/test/scenes3.js (Fold 755x1000@2.6 + iPad 1180x820@2): errors [] on both; gift picker rows (item/work ok/locked), gift go (ghen 40→32, item leaves chest), demo (2 worn pieces seized, scene queued), NPC seize, return on rank, cold (worn piece gone), level scene (Cầm bậc 3, VIR) all PASS. Shots looked at (kept outside git).
-- quickcheck: see main message.
+- quickcheck on final HEAD: PASS (old save ok, perf <= live, core gates PASS; first run FAILED G1 one-core on a literal spend(2), fixed -> BAL.tsGift.khac).
 ## Notes / for the coordinator
 - Eunuch name "???" in test = no court generated in the test life; real life shows the name (same as jdh2's notice).
 - Open: the cấm túc kind is left as is (OD says demotion / lãnh cung only).
