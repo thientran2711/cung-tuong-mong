@@ -627,3 +627,4 @@
 | coop-thin B — life creation + rebirth on host (opus co-op; audit §3 part B; wave 2 with D) | review/coop-thin-b | B | (opening) | RUNNING | 17/11 05:30Z |
 | coop-thin D — remote dialogs (cards) on host (opus co-op; audit §3 part D; wave 2 with B) | review/coop-thin-d | B | (opening) | RUNNING | 17/11 05:30Z |
 | one-core-dup — ONE CORE guard extension (go:/sc:/k: amounts) + DUPLICATE-RULE HUNT whole game (owner 17/11 03:00Z) (opus lead) | review/one-core-dup | B | (opening) | RUNNING | 17/11 05:30Z |
+| event-art-style REDO (owner GO 05:25Z; ev/opt 165 → intro 49 → acts ~419; no faces, pastel, soft brush) | img/ev|opt|intro|act (CDN) | C s13 | session_011xDdVNnHxuy2KotX9dH3zb | RUNNING | 17/11 05:26Z |
