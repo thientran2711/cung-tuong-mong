@@ -708,3 +708,4 @@
 | one-core-dup3 r1 FAIL b9f8d5cf (text family: ~76 typed evidence counts + one-core-text gate gap) → fix worker (opus; brief briefs/one-core-dup3-fix.md; base review/one-core-dup3-r1 607887ae) | review/one-core-dup3 | B | session_01N1tNP5gDUwBGqmKgc5zqMJ | RUNNING | 17/11 11:00Z |
 | VOICE BY TÍNH TÌNH (sonnet; s30 order 06:06Z; brief briefs/voice-trait.md) | review/voice-trait | C ROOT-5 | session_011xDdVRM5yu7W5UoCp4jMmC | RUNNING | 17/11 11:38Z |
 | coop-thin-b SẴN SÀNG KIỂM 4609afa6 (r2 seam fix by #4) → re-review r3 (fresh opus BIG; brief briefs/review-coop-thin-b-r3.md) | review/coop-thin-b-r3 | B | session_01N1tNP5hpVGVh45GCMzd9Ah | RUNNING | 17/11 11:40Z |
+| MAID CONSORT-TIER REDRAW W4f (successor of W4e; a36 m22 + a51 m01-m26; opened by lead #7) | review/fig-cutout-clean | C | session_011xDdVSvgMHhWjrFtf6Qv8J | RUNNING | 17/11 11:48Z |
