@@ -1,6 +1,6 @@
 /* ================= THE MAP TAB, FULL SCREEN: the plan fills all between the top bar and the tab bar ================= */
 /* people present show as anonymous silhouettes with a count (hữu duyên: who is there is learned only by going); residents are named inside the palace screen */
-const KMAP_MLS=.5; /* KIT §85.7: smallest place-label scale at fit-all (one kit value) */
+const KMAP_MLS=.85; /* KIT §85.7: smallest place-label scale at fit-all (one kit value) */
 const SILH=`<svg viewBox="0 0 10 14" aria-hidden="true"><circle cx="5" cy="3" r="2.4"/><path d="M1 14c0-4.4 1.6-7.2 4-7.2s4 2.8 4 7.2z"/></svg>`;
 function silChip(n){return"";if(!n)return"";const k=Math.min(n,3);return `<span class="msil" aria-label="${n} bóng người">${SILH.repeat(k)}${n>1?`<b>${n}</b>`:""}</span>`}
 (function(){const m0=mapHTML;mapHTML=function(){let h=m0.apply(this,arguments);if(window.__mapList)return h;
@@ -20,9 +20,15 @@ function mapFit(){try{const sc=document.querySelector(".game.maptab .mapsc");if(
  const availW=Math.max(120,cw-mL-mR),availH=Math.max(120,sc.clientHeight-mT-mB);
  const fit=kp?Math.max(1,(sc.clientHeight/cw)*asp):Math.min(availW,availH*asp)/cw;
  /* KIT 34.1d + §85: the place labels (label + info row, as ONE box) shrink (--mls, floor KMAP_MLS) until no two touch, at every zoom; the palace detail map (.kpmv) keeps its own layout */
- const z=Math.max(fit,window.__mapZ||fit);w.style.width=(z*100)+"%";window.__mapFit=fit;
- if(!kp){const touch=()=>{const R=[...w.querySelectorAll(".mspot")].map(s=>{const p=[...s.querySelectorAll(".mlab,.mmeta")].map(e=>e.getBoundingClientRect()).filter(r=>r.width>0);if(!p.length)return{width:0};const L=Math.min(...p.map(r=>r.left)),T=Math.min(...p.map(r=>r.top)),R=Math.max(...p.map(r=>r.right)),B=Math.max(...p.map(r=>r.bottom));return{left:L,right:R,top:T,bottom:B,width:R-L}}).filter(r=>r.width>0);for(let i=0;i<R.length;i++)for(let j=i+1;j<R.length;j++){const a=R[i],b=R[j];if(Math.min(a.right,b.right)-Math.max(a.left,b.left)>0&&Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top)>0)return true}return false};
-  let m=1;w.style.setProperty("--mls",1);while(touch()&&m>KMAP_MLS+.001){m=Math.max(KMAP_MLS,+(m-.1).toFixed(2));w.style.setProperty("--mls",m)}window.__mapMls=m}
+ /* KIT §85.7 label rule (main s31 17/11): label text never below KMAP_MLS x its size (floor = the kit's readable minimum); when labels still collide the low-priority (.sm) ones hide (her place and any place with a "!" never hide) and come back from the first zoom step; if even the main labels collide the floor zoom rises until they do not */
+ const kp2=kp;const labs=()=>[...w.querySelectorAll(".mspot")];
+ const box=s=>{const p=[...s.querySelectorAll(".mlab,.mmeta")].map(e=>e.getBoundingClientRect()).filter(r=>r.width>0);return p.length?{s,left:Math.min(...p.map(r=>r.left)),top:Math.min(...p.map(r=>r.top)),right:Math.max(...p.map(r=>r.right)),bottom:Math.max(...p.map(r=>r.bottom))}:null};
+ const pairs=()=>{const R=labs().map(box).filter(Boolean),o=[];for(let i=0;i<R.length;i++)for(let j=i+1;j<R.length;j++){const a=R[i],b=R[j];if(Math.min(a.right,b.right)-Math.max(a.left,b.left)>0&&Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top)>0)o.push([a.s,b.s])}return o};
+ const prot=s=>s.classList.contains("here")||!!s.querySelector(".khap");const rank=s=>prot(s)?9:s.classList.contains("sm")?0:1+Math.min(5,+((s.querySelector(".mmeta")||{}).textContent||"").replace(/\D.*$/,"")||0)/10;
+ const place=zz=>{w.style.width=(zz*100)+"%";if(kp)return;labs().forEach(e=>e.classList.remove("kmhide"));let m=1;w.style.setProperty("--mls",1);while(pairs().length&&m>KMAP_MLS+.001){m=Math.max(KMAP_MLS,+(m-.05).toFixed(2));w.style.setProperty("--mls",m)}
+  /* still touching at the floor size: hide the lower-priority label of each touching pair (.sm first, then fewer people), never her place or a "!" place */
+  for(let g=0;g<40;g++){const P=pairs();if(!P.length)break;const hid=new Set();for(const [a,b] of P){const l=a.classList.contains("here")?b:b.classList.contains("here")?a:rank(a)<=rank(b)?a:b;if(!l.classList.contains("here"))hid.add(l)}if(!hid.size)break;hid.forEach(e=>e.classList.add("kmhide"))}window.__mapMls=m};
+ const z=Math.max(fit,window.__mapZ||fit);place(z);window.__mapFit=fit;
  const key=S.place+"|"+z.toFixed(2)+"|"+sc.clientWidth+"|"+sc.clientHeight;if(window.__mapKey2===key&&window.__mapPos2){sc.scrollLeft=window.__mapPos2[0];sc.scrollTop=window.__mapPos2[1]}
  else{const h=sc.querySelector(".mspot.here")||sc.querySelector('[data-go="home"]')||sc.querySelector('[data-go="'+(S.pal!=null?palaceOf(S):"home")+'"]');if(h&&!kp){const hr=h.getBoundingClientRect(),sr=sc.getBoundingClientRect();sc.scrollLeft+=hr.left+hr.width/2-(sr.left+sr.width/2);sc.scrollTop+=hr.top+hr.height/2-(sr.top+sr.height/2)}window.__mapKey2=key}
  if(!sc.dataset.sv){sc.dataset.sv=1;try{if(window.ResizeObserver){let t=0,sz=sc.clientWidth+"x"+sc.clientHeight;new ResizeObserver(()=>{const n=sc.clientWidth+"x"+sc.clientHeight;if(n===sz)return;sz=n;clearTimeout(t);t=setTimeout(()=>{try{if(sc.isConnected&&!window.__mapList)mapFit()}catch(e){}},60)}).observe(sc)}}catch(e){}sc.addEventListener("scroll",()=>{window.__mapPos2=[sc.scrollLeft,sc.scrollTop]},{passive:true})}}catch(e){}}

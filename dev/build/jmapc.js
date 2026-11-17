@@ -34,6 +34,7 @@ html body .game .mapv.kpmv.kside.kleather{--kmv-fb:54px}
 html body .game .mapv.kpmv.kside.kleather>.mapsc{background:#e6dabf!important}
 html body .game .mapv.kside.kleather>.mapsc .mapimg{-webkit-mask-image:linear-gradient(90deg,#0000,#000 var(--kmv-fade-x),#000 calc(100% - var(--kmv-fade-x)),#0000),linear-gradient(#0000,#000 var(--kmv-fade-y),#000 calc(100% - var(--kmv-fade-y)),#0000);-webkit-mask-composite:source-in;mask-image:linear-gradient(90deg,#0000,#000 var(--kmv-fade-x),#000 calc(100% - var(--kmv-fade-x)),#0000),linear-gradient(#0000,#000 var(--kmv-fade-y),#000 calc(100% - var(--kmv-fade-y)),#0000);mask-composite:intersect}
 .mapw .mspot .mlab,.mapw .mspot .mmeta{zoom:var(--mls,1)}
+.mapw .mspot.kmhide .mlab,.mapw .mspot.kmhide .mmeta{display:none!important}
 /* §85.6 courtyard level (.kpmv): the painting COVERS the whole page area (pan sideways when the page is narrower than the painting), the hall rows sit on it at the bottom */
 html body .game .mapv.kpmv.kside.kleather{display:block!important;height:100%!important}
 html body .game .mapv.kpmv.kside.kleather>.mapsc{overflow:auto!important;display:flex!important;justify-content:safe center;align-items:safe center;scrollbar-width:none}
