@@ -177,10 +177,13 @@ window.kitEmotion=function(p){try{if(!S)return null;const q=emoRes(p);if(!q)retu
 function emoArtSet(p){try{if(p&&p.__kp)p=p.__kp;const q=emoRes(p)||p;if(!q||q===S)return"";const r=personRoleRank(p.kind&&!p.name?p:q);const male=r.sex==="m"||(r.kid&&q.sex==="m");if(!male)return"";
  if(r.role==="emp"||r.role==="heir"||r.role==="prince"||r.role==="eunuch"||r.role==="guard")return"m-";
  return r.role==="official"||r.role==="physician"||(q.age||0)>=45?"mo-":"m-"}catch(e){return""}}
-function emoBadge(p){const m=window.kitEmotion(p);if(!m)return"";const t=m.known?`Tâm trạng: ${m.name}${m.why&&m.k!=="binh"?" ("+m.why+")":""}`:"Tâm trạng: chưa rõ";
+/* ONE source of the seal's picture key (owner 17/11 ~18:40Z: no two-source seal): sealKeyFor(p,m) -> the key drawn. Today = the mood state; the ruling (mood-bar band + the feeling that pushed it) is a one-line change HERE; a new event's feeling is shown by kitEmoSealPop(p,key), never by a second source. */
+function sealKeyFor(p,m){return m.k}
+window.sealKeyFor=sealKeyFor;
+function emoBadge(p){const m=window.kitEmotion(p);if(!m)return"";const sk=sealKeyFor(p,m);const t=m.known?`Tâm trạng: ${m.name}${m.why&&m.k!=="binh"?" ("+m.why+")":""}`:"Tâm trạng: chưa rõ";
  const E=x=>String(x==null?"":x).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
  /* owner 11/15: no visible label; TAP the seal = the kit popover (kpPop, j79) with the mood word + one-line cause; any other tap closes it */
- return `<img class="kemo kemo-${m.k}" src="img/kit/emo-${emoArtSet(p)}${m.k}.webp" alt="${E(t)}" data-kemo="${E(m.known?m.name:"Chưa rõ")}" data-kemow="${E(m.known&&m.k!=="binh"?m.why:"")}" data-kemoc="${m.causeKnown===false?"0":"1"}" role="button" tabindex="0" onerror="this.remove()">`}
+ return `<img class="kemo kemo-${sk}" data-kemop="${E(emoKey(emoRes(p)))}" src="img/kit/emo-${emoArtSet(p)}${sk}.webp" alt="${E(t)}" data-kemo="${E(m.known?m.name:"Chưa rõ")}" data-kemow="${E(m.known&&m.k!=="binh"?m.why:"")}" data-kemoc="${m.causeKnown===false?"0":"1"}" role="button" tabindex="0" onerror="this.remove()">`}
 /* tap on any seal (hers or an NPC's, any frame size): kit popover; capture phase so the tap never also opens the card/portrait under it */
 function emoTipHTML(el){const n=el.dataset.kemo||"",w=el.dataset.kemow||"";const E=x=>String(x).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
  if(n==="Chưa rõ")return `<div class="kpopt">Tâm trạng chưa rõ</div><div class="kpopx">Lâu rồi chưa gặp, chưa biết lòng người này ra sao.</div>`;

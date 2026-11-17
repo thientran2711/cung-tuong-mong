@@ -38,7 +38,11 @@ let kesQ=0;function kesSched(){if(kesQ)return;kesQ=requestAnimationFrame(()=>{ke
 try{new MutationObserver(ms=>{if(ms.some(m=>[...m.addedNodes].some(n=>n.nodeType===1&&(n.matches&&n.matches("img.kemo")||n.querySelector&&n.querySelector("img.kemo")))||[...m.removedNodes].some(n=>n.nodeType===1)))kesSched()}).observe(document.body,{childList:true,subtree:true})}catch(e){}
 addEventListener("resize",()=>document.querySelectorAll("img.kemo.kemo-live").forEach(kesFxSync));
 kesScan();
-window.kitEmoSeal={scan:kesScan,live:kesLive,probe:kesProbe};
+/* kitEmoSealPop(p,key,ms): a NEW event's feeling plays over the person's seal(s) for ms (default 2500) and the seal goes back to its bar state; same asset set, same motion table. Never a second persistent source. */
+function kesPop(p,key,ms){try{if(!KIT_EMOSEAL.keys[key])return;const id=emoKey(emoRes(p));document.querySelectorAll('img.kemo[data-kemop="'+id+'"]').forEach(el=>{if(el.__pop)return;const set=kesSet(el),still=el.dataset.kemos||el.getAttribute("src"),k0=kesKey(el),sp=KIT_EMOSEAL.keys[key];
+  const ns=still.replace(/emo-((?:m-|mo-)?)[a-z]+\.webp/,"emo-"+set+key+".webp");el.__pop=1;el.classList.remove("kemo-"+k0);[...el.classList].filter(c=>/^kemo-m-/.test(c)).forEach(c=>el.classList.remove(c));el.classList.add("kemo-"+key,"kemo-m-"+sp.m,"kemo-pop");el.dataset.kemos=ns;el.setAttribute("src",ns);
+  setTimeout(()=>{el.__pop=0;if(!el.isConnected)return;el.classList.remove("kemo-"+key,"kemo-pop");[...el.classList].filter(c=>/^kemo-m-/.test(c)).forEach(c=>el.classList.remove(c));el.classList.add("kemo-"+k0);el.dataset.kemos=still;el.setAttribute("src",still);kesLive(el,el.classList.contains("kemo-live"))},ms||2500)})}catch(e){}}
+window.kitEmoSeal={scan:kesScan,live:kesLive,probe:kesProbe,pop:kesPop};
 (function(){const st=document.createElement("style");st.id="kemoseal-css";st.textContent=`
 img.kemo{transform-origin:50% 60%;will-change:auto}
 img.kemofx{position:absolute!important;pointer-events:none;z-index:8;object-fit:contain;max-width:none;max-height:none;margin:0;border-radius:0}
@@ -54,6 +58,7 @@ img.kemo.kemo-live.kemo-m-wince{animation:kemoWince 2.6s ease-in-out infinite}
 img.kemo.kemo-live.kemo-m-glint{animation:kemoGlint 3.4s ease-in-out infinite}
 img.kemofx{animation:kemoFx 2.4s ease-in-out infinite}
 }
+img.kemo.kemo-pop{filter:drop-shadow(0 0 6px #ffe9a0) drop-shadow(0 1px 1.5px #000a)}
 @keyframes kemoSway{0%,100%{transform:rotate(-3deg);filter:drop-shadow(0 1px 1.5px #000a)}50%{transform:rotate(3deg);filter:drop-shadow(0 0 4px #ffe9a0) drop-shadow(0 1px 1.5px #000a)}}
 @keyframes kemoBreathe{0%,100%{transform:scale(1)}50%{transform:scale(1.045)}}
 @keyframes kemoDroop{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(7%) rotate(-3deg)}}
