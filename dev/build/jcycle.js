@@ -1,7 +1,7 @@
 /* ================= jcycle: KỲ NGUYỆT SỰ · the monthly cycle + the Kính sự phòng cycle book (owner 15/11 ~20:25Z, review/cycle) =================
    1. EVERY WOMAN has her own cycle (her, every consort, the co-op friend entry): a pure function of her name (cyBase) + the month index
       (small monthly jitter), so old saves need nothing, and host / guest of a co-op room compute the same days for everyone.
-      TIME MODEL (as jmcal): a month = 3 tuần (1–10 thượng, 11–20 trung, 21–30 hạ); her cycle = 5–7 days inside ONE tuần (cyBase.t).
+      TIME MODEL (as jmcal): a month = 3 tuần (1–10 thượng, 11–20 trung, 21–30 hạ); her cycle = BAL.cyc.len days (rolled EACH MONTH per woman, cyLen) inside ONE tuần (cyBase.t).
       No cycle while truly pregnant (preg && !fake) or from age 50 (đã dứt kỳ).
    2. THE NIGHT FLIP: during her cycle tuần her card is out of the flip (nightCh → 0), however favoured; she cannot steal a night
       (Tranh sủng / Chặn ngự giá, NPC stealNight), the "Thắp đèn hầu rượu" option of the late visit and the ksp tablet card are locked
@@ -48,14 +48,22 @@ if(typeof BAL==="object")BAL.cyc={
  /* FERTILE WINDOW (owner 16/11 s9, D57 review/preg-rate, option 4 = 1+3): conception per night × by where the night falls in HER TRUE cycle
     (not what she reported): peak = the tuần after her cycle tuần (≈ 10–17 days after it starts), low = the tuần before it, cyc = her cycle
     tuần itself (a tryst / stolen night). No cycle (age ≥ 50, pregnant) → × 1. The base itself was doubled in BAL.conc (jbal.js). */
- fert:{peak:1.6,low:.5,cyc:.1}};
+ fert:{peak:1.6,low:.5,cyc:.1},
+ /* CYCLE LENGTH (owner 16/11 19:05Z OD:L1397, review/cycle-roll): EACH MONTH each woman rolls one of these day counts (player, NPCs,
+    co-op friend entry alike); seed = her name + the month index (S.turn: one value per year+month), so both co-op seats roll the same. */
+ len:[5,6,7]};
 const B=()=>(typeof BAL==="object"&&BAL.cyc)||{};
 const cl_=(x,a,b)=>Math.max(a,Math.min(b,x));
 function cyH(s){s=String(s==null?"":s);let h=2166136261>>>0;for(let i=0;i<s.length;i++){h^=s.charCodeAt(i);h=Math.imul(h,16777619)>>>0}return h>>>0}
 function cyName(p){return p===S?(S.name||"ta"):(p&&p.name)||""}
-function cyBase(p){const h=cyH("cyc|"+cyName(p));return{t:h%3,o:1+((h>>>3)%4),l:5+((h>>>7)%3)}}
-/* days (1..30) of month index mi (S.turn based) */
-function cyDaysM(p,mi){const b=cyBase(p);const j=(cyH("cyj|"+cyName(p)+"|"+mi)%3)-1;const o=cl_(b.o+j,1,11-b.l);const d0=b.t*10+o;const L=[];for(let i=0;i<b.l;i++)L.push(d0+i);return L}
+/* her fixed traits: t = her cycle tuần (0..2), o = her usual first day inside it. The LENGTH is NOT fixed per person: cyLen(p,mi). */
+function cyBase(p){const h=cyH("cyc|"+cyName(p));return{t:h%3,o:1+((h>>>3)%4)}}
+/* this month's length (review/cycle-roll, OD:L1397): rolled per (person, month index) from BAL.cyc.len — the ONE length function */
+function cyLen(p,mi){const L=Array.isArray(B().len)&&B().len.length?B().len:[5,6,7];return +L[cyH("cyl|"+cyName(p)+"|"+(mi|0))%L.length]||L[0]}
+/* days (1..30) of month index mi (S.turn based). The whole cycle sits inside ONE tuần of ONE month (first day clamped so the last day
+   stays in the tuần), so a cycle never crosses into the next month and never changes length mid-cycle. */
+const CY_TD=10; /* days per tuần (jmcal time model: 3 tuần × 10 days) */
+function cyDaysM(p,mi){const b=cyBase(p),l=cyLen(p,mi);const j=(cyH("cyj|"+cyName(p)+"|"+mi)%3)-1;const o=cl_(b.o+j,1,CY_TD+1-l);const d0=b.t*CY_TD+o;const L=[];for(let i=0;i<l;i++)L.push(d0+i);return L}
 function cyAge(p){return p===S?(S.age||18):(p&&p.age)||20}
 function cyPreg(p){return !!(p&&p.preg&&!p.fake)}
 function cyCur(){return S&&S.turn!=null?S.turn:0}
@@ -81,7 +89,7 @@ function cyRec(){const c=S&&S.cyb||{},o={};for(const k of CYK)if(c[k]!==undefine
 window.cyRec=cyRec;window.cyWk=()=>wk();
 /* lateness as the BOOK shows it: a pregnancy begun within luiCover tuần after a "báo lùi" reads one cycle later (foes, thái y) */
 function cyLateSeen(p){p=p||S;const n=cycleLate(p);return n&&cyCover(p)?Math.max(0,n-1):n}
-window.cyNoFriend=(f)=>cyNoFriend(f);window.cycleDaysOf=cycleDaysOf;window.cycleLate=cyLateSeen;window.cycleLateTrue=cycleLate;window.cyTray=cyTray;window.cycOn=cycOn;window.cyBase=cyBase;window.cyAge=cyAge;
+window.cyNoFriend=(f)=>cyNoFriend(f);window.cycleDaysOf=cycleDaysOf;window.cycleLate=cyLateSeen;window.cycleLateTrue=cycleLate;window.cyTray=cyTray;window.cycOn=cycOn;window.cyBase=cyBase;window.cyLen=cyLen;window.cyDaysM=cyDaysM;window.cyAge=cyAge;
 function cyb(){S.cyb=S.cyb||{};return S.cyb}
 const TU=["thượng tuần","trung tuần","hạ tuần"];
 function dName(L){if(!L.length)return"";const a=L[0],b=L[L.length-1];return `${a<=10?"mồng ":"ngày "}${a}\u2060–\u2060${b}`}
