@@ -137,7 +137,8 @@ function adHapNow(){if(!S||S.dead||adSrv()||S.out)return[];let b="";try{b=bkey()
 function adHapAt(k){return adHapNow().find(h=>h.k===k&&!h.done)||null}
 const AD_HAP_T={emp:"Hoàng thượng dạo vườn",quarrel:"Hai phi tần cãi nhau",gossip:"Nghe lỏm chuyện",favour:"Có người nhờ việc"};
 const AD_HAP_FIRE={};/* id → (h,k) => fired (jact2 adds fest, cold) */
-function adHapArrive(k){if(S.place!==k||S.dead)return;let any=false;for(let i=0;i<2;i++){const h=adHapAt(k);if(!h)break;if(adHapFire1(h,k))any=true}if(any){try{showModal()}catch(e){}}}
+/* AG-ALL-2c G1 (owner OD 17/11 ~14:50Z "có bao nhiêu sự kiện có thể xảy ra là nó đều xuất hiện"): no cap — every happening of that place fires on arrival */
+function adHapArrive(k){if(S.place!==k||S.dead)return;let any=false;const n=adHapNow().length;for(let i=0;i<n;i++){const h=adHapAt(k);if(!h)break;if(adHapFire1(h,k))any=true;else h.done=1}if(any){try{showModal()}catch(e){}}}
 function adHapFire1(h,k){h.done=1;let fired=false;if(AD_HAP_FIRE[h.id]){try{fired=!!AD_HAP_FIRE[h.id](h,k)}catch(e){console.error("jact fire",e)}return fired}
  if(h.id==="emp"&&(S.where||{}).emp==="vuon"){const d=mkP("adStroll",{});if(d){pushDil(d,AD_HAP_T.emp);fired=true}}
  else if(h.id==="quarrel"){const R=liveRivals(true).filter(v=>!v.confined);const here=adPresent(k);const a=here[0]||pick(R);const b=here.find(v=>v!==a)||pick(R.filter(v=>v!==a));

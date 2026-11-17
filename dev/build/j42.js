@@ -67,7 +67,11 @@ const SRVA={
  token:{k:1,o:a=>60+a.tamco/5,tinh:15,seen:4,at:30},
  tryst:{k:1,o:(a,m,x)=>100-x.risk,tinh:10,w:{suc:8},preg:10,at:50},
  vow:{k:1,o:(a,m,x)=>45+x.tinh/3,at:50},
- cut:{k:1,o:()=>100,at:30}};
+ cut:{k:1,o:()=>100,at:30},
+ /* AG-ALL-2c (jagknow): a servant's own errands for her master — the player maid's cards and every NPC servant (numbers BAL.ag.know) */
+ listen:{get k(){return BAL.ag.know.listen.k},o:a=>BAL.ag.know.listen.o+(a.tamco||0)/BAL.ag.know.listen.tc,get w(){return {tin:BAL.ag.know.listen.tin}},get mp(){return BAL.ag.know.listen.mp}},
+ scout:{get k(){return BAL.ag.know.scout.k},o:()=>100,get w(){return {tin:BAL.ag.know.scout.tin}},get l(){return {tin:-BAL.ag.know.scout.lose}},get mp(){return BAL.ag.know.scout.mp}},
+ watch:{get k(){return BAL.ag.know.watch.k},o:()=>100,get w(){return {tin:BAL.ag.know.watch.tin}},get mp(){return BAL.ag.know.watch.mp}}};
 function srvCa(k,a,m){const c=SRVA[k].c;return typeof c==="function"?c(a,m):(c||{})}
 function srvWa(k,a,m){const w=SRVA[k].w;return typeof w==="function"?w(a,m):(w||{})}
 function srvAf(s,n){S.srv.af[s.sid]=cl((S.srv.af[s.sid]||0)+n,-100,100)}
@@ -207,6 +211,8 @@ function srvCards(){const m=srvM();const X=[];if(!m)return X;const B=bid();const
   X.push({n:"Hầu trà khi ngự giá",t:`Tối nay Hoàng thượng ngự giá đến cung ${m.name}. Ngươi bưng khay trà vào điện.`,b:B4L,k:1,c:{},o:od(amTeaO(S,1)),w:{},l:{tin:-BAL.ag.maid.tea.fail},x:`Hoàng thượng để ý +${amTeaG(S)} · kèm: chủ ghen, Chủ tin -${amJealN(m)}: ${chanceW(amJealP(m))}`,once:"tea",go:()=>srvNotice("tea",BAL.ag.maid.tea.g)});
   X.push({n:"Lui sau bình phong",t:"Để chủ nhân một mình hầu ngài.",b:B4L,k:1,c:{},o:100,w:{tin:2},once:"tea"})}
  if(S.srv.spyFor!=null&&!srvOnce("spy")){const v=RV(S.srv.spyFor);if(v&&v.alive)X.push({n:`Lén báo tin cho ${v.name}`,t:"Kể chuyện trong cung chủ cho người đã mua chuộc ngươi.",k:SRVA.spy.k,c:{},o:od(SRVA.spy.o(S)),w:SRVA.spy.w,l:SRVA.spy.l,x:`${v.name} nắm ${SRVA.spy.ev} chứng cứ của ${m.name}`,once:"spy",go:()=>/*evok: capped; preview only*/evA(v,m,SRVA.spy.ev),fail:()=>{if(roll(SRVA.spy.out))srvLaundry(`${m.name} bắt gặp ngươi lén lút với người của ${v.name}.`,8)}})}
+ /* AG-ALL-2c: her own errands for her master (the same SRVA rows and run as every NPC servant, jagknow) */
+ try{if(typeof knSrvCards==="function")for(const a of knSrvCards(m))X.push(a)}catch(e){console.error("jagknow cards",e)}
  X.forEach(a=>a.dom="");return X}
 function srvMeet(){const m=srvM();const L=allServ().filter(s=>ownerOf(s)!==m&&!S.srv.met.includes(s.sid));
  if(roll(SRVA.nvp.bully)){apply(SRVA.nvp.bullyC);log("Tiểu thái giám Nội vụ phủ bắt nạt, bắt ngươi xách thêm hai gánh nước. Sức -5.");return}

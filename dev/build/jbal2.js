@@ -910,3 +910,12 @@ BAL.ag.emo2={max:2};
    see    NPCs who stand where a deed happens, in its khắc, react like the player (agSeeNpc): w = weights ignore / hear / join / mediate; hear odds =
           BAL.ag.wit.hear + Tai mắt × BAL.ag.wit.mat (one function agHearOf for her and them), a heard harm deed = 1 evidence (the player's rule) */
 Object.assign(BAL.ag,{kh2:{on:1,rest:1,max:3,maxX:1,see:{on:1,w:{ignore:3,hear:1,join:1,mediate:1},ev:1}}});
+/* AG-ALL-2c know (jagknow): who knows a Dư đồ happening and how the news travels (one rule for her and every NPC, OD 17/11 ~14:50Z + ~15:00Z).
+   eye = her own Tai mắt for a happening still to come: oSee(x) × eye/100; friend = an NPC who likes her this much (aff ≥) and meets her passes the news on (close = sends word without meeting);
+   tell = a servant's choice (mindPick) when she knows: tell ×(lòng/100), keep ×(1 − lòng/100), sell (a bought servant) ×(1 − lòng/100); q = her nết (jnet qv);
+   voice = lòng / thiện cảm for the warm / cool line (else cold); serve = × the utility of a servant's own errand for her master (listen / scout / watch)
+   at lòng 50 (base = the worth of serving her master, need points / BAL.ag.unit, besides what the errand brings her); hear = what a consort's "Nghe lén" at a happening is worth to her (need points: safe when it is aimed at her, spite on a rival, ally otherwise);
+   listen / scout / watch = the player maid's cards "Nghe ngóng cho chủ" / "Tự đi dò la cho chủ" / "Canh chừng cung chủ" (SRVA rows read these);
+   scout.oan = the target's regard lost when the spy is caught (the player's "Sai đi dò la": oán +5); keep = news kept per day */
+BAL.ag.know={eye:100,friend:30,close:70,tell:{tell:1,keep:1,sell:1.5,q:{trung:.4,chuyen:.2,lanh:.1,tham:-.3,nhat:-.2}},voice:{warm:70,cool:40},serve:1,
+ hear:{safe:4,spite:2,ally:1},base:.1,listen:{k:1,o:50,tc:3,tin:2,mp:.25},scout:{k:2,tin:3,lose:5,mp:.5,oan:5},watch:{k:1,tin:2,mp:.25},keep:20};
