@@ -751,6 +751,22 @@ Object.assign(BAL,{kc2:{kcGoWhy_k:1,nghiNgoi_w_suc:25,detVaiBan_c_suc:-15,detVai
    nc.month (+monthThuc with a «thuc» kin) = Phe chủ chiến growth a month;
    kgtBr / khm = [the bd branch, the other]; bdRoll = the bd branch bonus to «Tự mình chống trả». The amounts of S.kap / S.kgt / x.oan writes are in BAL.eff.jkc2. */
 Object.assign(BAL.kc2,{"detVaiBan_od":60,"soiBongNuocChai_od":65,"raRuongGiupCha_w_kap":-4,"haiLaThuocCho_od":45,"traBotNoNha_w_kap":-12,"lamKhongCongCho_w_kap":-12,"lamKhongCongCho_l_kgt":-3,"bieuQuaLyTruong_l_kgt":-2,"giatAoCungXuan_od":70,"hocLeNghiVoi_od":55,"ganhNuocQuetNha_od":50,"hocChuVoiSu_c_kgt":-1,"banVaiOCho_od":55,"hoiTinNguoiDi_od":45,"hauNgheChinhSu_od":45,"xinThemHoiMon_od":30,"xinThemHoiMon_w_khm":20,"troChuyenVoi_od":55,"ketThan_od":55,"dayMotDieuMua_od":55,"doYHoangThuc_od":30,"doYHoangThuc_w_kap":-6,"tiepSuThanDai_od":45,"tiepSuThanDai_w_kgt":3,"tiepSuThanDai_l_kgt":-2,"danhCoVoiSu_od":40,"cauPhuc_w_kap":-3,"raChoNgheDan_od":50,"raChoNgheDan_w_kgt":2,"raChoNgheDan_l_kgt":-3,"nghiemMatMangLai_rb":50,"bayChoNangGhi_rb":50,"nhanLoiDetRieng_rb":55,"raDongCuuLua_rb":50,"xinLyTruongKhat_rb":25,"xinChaTuChoi_rb":40,"noiChuyenThangVoi_rb":40,"tauVoiPhuThan_rb":45,"xinSuDoanMoi_rb":40,"xinGiuQuyenThu_rb":40,"tuMinhChongTra_rb":30,"nhanLoiChoEm_rb":40,"quyTruocTrieuXin_rb":35,"xinChaLoGach_rb":20,"tuLamTraNo_rb":45,"raMatDoanTrang_rb":40,"xinPhuHanHua_rb":30,"banDoiKhuyenBac_rb":70,"thucDemSacLa_rb":45,"moiThayCungVe_rb":30,"xinDeDiThay_rb":15,st:{kgtLow:25,kapHot:70,kapRow:50,dan:{kgt:[40,20],kap:[25,20],kgtu:15,moi:55,siet:100,sietLeft:[70,55]},nc:{kgt:[40,20],kgtBr:[-5,5],kap:[20,15],khm:[60,90],kgtu:70,thich:50,pha:90,phaLeft:[45,70,65],bdRoll:15,month:4,monthThuc:1}}});
+/* review/one-core-jkc (ONE CORE OD:L1267; the owner's own example: one text said 60 / 85, another 60 / 90, the rules used 40 / 90): the cuts of
+   Áp lực hôn sự on the TIỂU THƯ home road (jkc.js). Not jkc2's kapHot 70 / kapRow 50: there the same field is Nợ nhà / Phe chủ chiến, another rule
+   with other values, so the tiểu thư road has its own keys, one per rule, read by every rule AND printed by both help texts (HX.kap, KIT_GLOSS):
+   moi  = from here bà mối may come (monthly roll) — the Áp lực row of the top bar shows from the same cut;
+   hot  = red cut (top bar, HUD chip, Giao du, Nhà tab, summary);   mien = from here the house may ask for miễn tuyển (cha's «Xin cha lo…», tổ mẫu's chiêu);
+   nhan = from here she may say yes to a suitor («Nhận lời nhà …»);  dinh = cha định hôn (a suitor is waiting).
+   Starts / set-values / Gia tư cuts (PART 3, values unchanged): kgt / kap = [base, random span] at the start, kgtBr = [tt / ch house, td house] Gia thanh bonus;
+   gtuPoor = Gia tư below this adds 1 to the monthly Áp lực; gtuRich = Gia tư from this opens the rare muối event (kcR6); chaYes = Áp lực after cha
+   agrees to the tuyển tú; mienSo = Áp lực at least this when a miễn tuyển girl's Sơ tuyển comes (cha then định hôn). */
+Object.assign(BAL.kc2.st,{kc:{moi:40,hot:60,mien:50,nhan:70,dinh:90,kgt:[40,20],kgtBr:[10,-10],kap:[10,10],gtuPoor:40,gtuRich:90,chaYes:40,mienSo:85,
+ /* review/one-core-jkc-2: bạc of the tiểu thư dialog options (the option cost and its lock read the same key): bacHuynh = «Đưa bạc» to the elder brother,
+    bacThu = «Hồi âm, gửi kèm quà», bacMien = «Xin cha lo cho được miễn tuyển», bacMama = «Dúi bạc cho ma ma khám tuyển» */
+ bacHuynh:50,bacThu:15,bacMien:40,bacMama:60}});
+/* review/one-core-jkc (ONE CORE OD:L1267, dev/measure/one-core-jkc-move.js): BAL.kc2.kcCard = the tiểu thư home road (jkc.js) cards and event options —
+   odds bases od(N+…) (<card>_od) / roll(N±…) (<option>_rb) and the house-stat kap / kgt / khm amounts of a card's c / w / l (<card>_<slot>_<stat>). */
+Object.assign(BAL.kc2,{kcCard:{"vietNhatKyGiau_od":78,"chaiChuotThuY_od":70,"thinhAn_w_kgt":1,"hauChaOThu_od":55,"khuyenChaChonPhe_od":30,"xinChaDangSo_od":10,"xinChaTienRieng_od":45,"lamVuaLong_od":65,"lamVuaLong_w_khm":5,"ketThan_od":60,"ngangChanThuMuoi_od":40,"ngangChanThuMuoi_l_kgt":-3,"doLaVien_od":30,"toTruocToMau_od":50,"toTruocToMau_w_kgt":2,"quanViecNha_od":50,"quanViecNha_w_kgt":1,"quanViecNha_l_kgt":-2,"daoPhoCho_od":80,"ngheChuyenOTra_od":40,"ngheChuyenOTra_l_kgt":-4,"tham_od":65,"kheoTuChoiNha_od":45,"kheoTuChoiNha_w_kap":-10,"kheoTuChoiNha_l_kgt":-3,"giaBenhTranhXem_od":45,"giaBenhTranhXem_w_kap":-15,"guiThuChoNguoi_od":40,"moiDanhSu_od":35,"muaTinCuaThai_od":50,"guiQuaVaoCung_od":60,"xinToMauMoi_od":35,"nhoHuynhTruongDo_od":45,"guiBucTheuTu_od":50,"nhoToMauKhuyen_od":10,"hauTronBuoi_od":65,"hauTronBuoi_w_khm":5,"giupMotViec_od":60,"saiTyNuNgang_od":40,"saiTyNuNgang_l_kgt":-3,"kcCards_od":30,"kcCards_od_2":30,"diXemChoKhong_od":80,"ngheLomNgoaiHien_od":35,"ngheLomNgoaiHien_l_kgt":-4,"mangBanhNhaLam_od":65,"nhinAnTranhXem_od":45,"nhinAnTranhXem_w_kap":-15,"tuTayDuaThu_od":30,"kcMonth_rb":30,"dungThu_rb":50,"dungRaBenh_rb":40,"xinToMauCho_rb":45,"noiLaiVoiCha_rb":50,"doiLaiCauDoi_rb":30,"thucDemTheuBach_rb":50,"thuaConDoiKy_rb":40,"quyXinChaCho_rb":45,"thuMotChutLen_rb":50}});
 
 /* ONE CORE (owner OD:L1267; review/show-why, from review-trait-pool-r1 follow-up): every number chosen by a nết test lives here.
    BAL.net.k: quality-keyed sizes for nq(p,quality,n) / netIs (servant + agent qualities). BAL.net.n: nết-keyed tables read by
@@ -866,3 +882,52 @@ BAL.world={on:1,maxOpen:2,pull:18,pullMax:80,
  phat:{month:4,t:1,len:1,cd:24,afterP:50,endDis:50,big:{bac:40,th:5},sutra:{suc:8,duc:2,th:2},npcGive:.1,npcTh:3,place:{cnh:2,tn:1.3},act:{pray:2,social:1.2,scheme:.8},force:[{b:0,pl:"cnh",deed:"pray",why:"Lễ Phật",g:["consort","queen"]}]},
  benh:{st:2,len:3,cd:18,mood:2,nurse:{suc:12,o:[45,6],sung:4},gin:{bac:30,sung:2},pray:{duc:2},npcSung:[3,1],place:{dtd:1.6,cnh:1.3},act:{social:1.2,greet:1.4,scheme:1.4,pray:1.5,art:.5},force:[{b:2,pl:"dtd",deed:"routine",why:"Hầu thuốc Hoàng thượng",g:["consort","queen"],rank:3}]},
  tinh:{month:1,t:2,len:1,cd:24,bacK:.4,base:20,showPow:70,showDanh:1,ask:{o:[35,5],danh:3},act:{social:1.3,scheme:1.2,bribe:1.2}}};
+/* ---- review/one-core-jkc-2: BAL.odb (one-core-odb-move.js) ---- */
+/* BAL.odb.<module>.<site> = the odds base N of od(N…) (key od<Site>) / roll(N±…) (key rb<Site>) the module rolls (the guard's odb kind);
+   site = the enclosing function / option key / act id (_2, _3 … for the next ones in it); the same call text (a preview word(od(N+x)) and the
+   roll(od(N+x)) of its handler) reads one key. Moved from inline literals, values unchanged. */
+Object.assign(BAL,{odb:{
+ j10:{rbCourtAct:40},
+ j13:{rbIllMonthP:30,rbIllMonthP_2:35},
+ j14:{odO:10,odO_2:15,odO_3:35,odO_4:10,odO_5:15,odO_6:70},
+ j2:{odO:35,odO_2:55,odO_3:30,odO_4:50,odO_5:80,odO_6:75,odO_7:30,odO_8:85,odO_9:92,odO_10:50,odO_11:70,odGoTo:40,odO_12:55,odO_13:45,odO_14:30,odO_15:35,odO_16:40,odO_17:45,odO_18:40,odO_19:70,odO_20:45,odO_21:45,odO_22:50,odO_23:40},
+ j20:{odO:65},
+ j21:{odO:50,odO_2:40},
+ j22:{odO:55,odO_2:60,odO_3:55,odO_4:70,rbAffairMonth:10,rbTop:8},
+ j24:{odO:35,rbKnown:15},
+ j25:{odKidActs:70},
+ j28:{rbSeen:25},
+ j3:{odO:30},
+ j31:{odX:40,odX_2:35,odX_3:40,odX_4:35,odX_5:40,odX_6:35,odX_7:30},
+ j34:{rbI:40},
+ j4:{odO:25,odO_2:40,odO_3:65,odO_4:45,odO_5:50,odO_6:35,odMonth:30,odO_7:55,odO_8:70,odO_9:40,odO_10:45,odO_11:40,odO1:30,odO2:60,odO_12:35,odO_13:45},
+ j40:{rbMindBelief:30},
+ j42:{odSrvTalk:45,odSrvTalk_2:40,odSrvTalk_3:30,odSrvTalk_4:30,odSrvTalk_5:55,odSrvTalk_6:55,odSrvTalk_7:40,odSrvErrandDone:30,odO:70,odO_2:20,odO_3:50,odO_4:60,odO_5:55,odO_6:75,odO_7:70,rbSrvMonth:1.2,rbSrvMonth_2:2,odO_8:40,odO_9:30,odO_10:40,odO_11:30,odOf:30,odTop:55,odTop_2:60,odTop_3:45,odTop_4:45,rbTop:1.5,rbTop_2:2},
+ j43:{rbTop:30},
+ j5:{odInnerHTML:35},
+ j54:{odO:30,odO2:55,odO_2:40},
+ j55:{rbCorrupt:25,rbDadT:25,odO:15},
+ j61:{odO:45},
+ j68e:{odP:40,odP_2:55,odP_3:35,odP_4:45,odP_5:40,odP_6:30,odP_7:35,odP_8:25,odP_9:35,odP_10:40,odP_11:30,odP_12:30,odP_13:45,odP_14:35,odP_15:40,odP_16:35,odP_17:35,odP_18:40,odP_19:30,odP_20:40,odP_21:35,odP_22:30,odP_23:45,odP_24:25,odP_25:40,odP_26:25,odP_27:30,odP_28:55,odP_29:70,odP_30:30},
+ j68f:{odP:35,odP_2:30,odP_3:35,odP_4:40,odP_5:30,odP_6:40,odP_7:35,odP_8:40,odP_9:35,odP_10:35,odP_11:40,odP_12:30,odP_13:40,odP_14:45,odP_15:50,odP_16:45,odP_17:50,odP_18:35,odP_19:40,odP_20:40},
+ j68g:{odP:30,odP_2:40,odP_3:40,odP_4:55,odP_5:40,odP_6:35,odP_7:40,odP_8:50,odP_9:55,odP_10:35,odP_11:30},
+ j68h:{odP:40,odP_2:50,odP_3:35,odP_4:40,odP_5:40},
+ j7:{odO:35,odX:50,odO_2:40,odO_3:40,odX_2:45,odO_4:50,odO_5:40,odO_6:40,odO_7:30,odO_8:40,odO_9:35,odO_10:35,odO_11:35,odO_12:35,odO_13:30,odO_14:30,odO_15:45,odO_16:40},
+ j71:{odP:35,odP2:30,odP_2:30,odP_3:30,odP_4:40,odP_5:55,odP_6:40,odP_7:70,odP_8:25,odP_9:20,odP_10:20,odP_11:50,odP_12:30,odP_13:30,odP_14:40,odP_15:25,odP_16:30},
+ j72:{rbQ72Npc:30},
+ j75:{odOP:40,rbFit:35,rbTop:10,rbTop_2:20},
+ j77:{odAccLeadO:35},
+ j78:{odO:40,odTop:40},
+ j8:{rbInspect:40,rbSearch:35,odO1:30,odO3:40,odO1_2:45,odO2:30,rbSeenNPC:15},
+ j83:{odPts:35},
+ j92:{rbWdRemark:30},
+ jact:{odO:35},
+ jeitem:{rbEitReWk:100},
+ jface:{rbOk:40,rbFxIllMonth:30,rbFxIllMonth_2:35,rbFxServMonth:2},
+ jlost:{rbTop:40},
+ jmen:{odOh:35,odO:35,odO_2:45},
+ jpet:{rbGo:100},
+ jroute:{odRtSeeO:80,odO:62,odO_2:55,odO_3:55,odO_4:55,odO_5:42,odO_6:85,odO_7:50,odO_8:35,odO_9:22,odO_10:14,odO_11:38,odOA:30,odO_12:35,odOT:55,odOB:45,odOM:40,odO_13:45,odO_14:50,odO_15:30,odOV:45,odOR:38,odRtMgO:62},
+ jts:{rbSmart:40},
+ jtsb:{odOr:30,odTd:38,odTc:34,odTsbMockO:44}
+}});

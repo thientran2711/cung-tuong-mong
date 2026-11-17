@@ -241,16 +241,16 @@ function rcpTchAsk(k,then){const a=ARTS.find(x=>x.k===k),fee=rcpFeeNq(),O=[];con
 (function(){const o0=wkLessonOK;wkLessonOK=function(k,mode){if(mode==="teacher"&&!RCPT.go&&RCPT.k!==k){if(!S||S.dead||Q.length||S.mg||(S.arts[k]||0)>=5)return false;return can(2)&&S.suc>=10}return o0.apply(this,arguments)}})();
 /* bậc 5: the teacher still teaches new sub-styles (a practice session that ends with a work in that sub-style) */
 function rcpNewSt(k){return wkKindsOf(k).filter(x=>RCP_ST[x]).some(x=>RCP_ST[x].some(s=>!rcpKnows(S,x,s[0])))}
-function rcpMaster(k){if(!S||S.dead||Q.length||S.mg||(S.arts[k]||0)<5||!can(2)||S.suc<10)return;
- rcpTchAsk(k,()=>{wkAsk(k,"teacher",()=>{if(!can(2)||S.suc<10)return;const fee=tchFee(k);if(S.bac<fee)return;apply({suc:-10,bac:-fee});tchPaid(k);spend(2);
+function rcpMaster(k){if(!S||S.dead||Q.length||S.mg||(S.arts[k]||0)<5||!can(2)||S.suc<BAL.sucNeed.rcp)return;
+ rcpTchAsk(k,()=>{wkAsk(k,"teacher",()=>{if(!can(2)||S.suc<BAL.sucNeed.rcp)return;const fee=tchFee(k);if(S.bac<fee)return;apply({suc:-10,bac:-fee});tchPaid(k);spend(2);
   const pick=wkPend||{kind:WDEF[k],mat:0};wkPend=null;const an=ARTS.find(x=>x.k===k).n;S.mg={k,l:5,mode:"prac",wk:pick,pa:1};
   try{playArt({art:k,title:`Học ${an} với thầy`,onDone:(raw,o)=>{S.mg=null;if(o&&o.skipped)log("Học nhanh: không ra thành phẩm.");else wkFinishLesson(k,pick,cl(Math.round(raw),0,10),"học với thầy");render()}})}catch(x){S.mg=null}})})}
 document.addEventListener("click",ev=>{const b=ev.target.closest&&ev.target.closest("[data-rcpmt],[data-rcpls],[data-rcpq]");if(!b||b.disabled)return;ev.stopPropagation();
  if(b.dataset.rcpmt)rcpMaster(b.dataset.rcpmt);else if(b.dataset.rcpls)rcpListOpen(b.dataset.rcpls);else rcpAskQ(b.dataset.rcpq)},true);
 /* Tài nghệ cards: the teacher button with its real cost, the new-sub-style teacher at bậc 5, the learnt sub-styles */
 (function(){if(typeof ktArtSkills!=="function")return;const s0=ktArtSkills;ktArtSkills=function(){const L=s0.apply(this,arguments);try{const t2=whyTime(2);for(const s of L){if(s.kind!=="art")continue;const k=s.k,l=S.arts[k]||0;
-  s.acts=s.acts.map(h=>/data-mode="teacher"/.test(h)?pbtn(`data-learn="${k}" data-mode="teacher"`,"Học với thầy",`tốn: 2 khắc, Sức -10, Bạc -${rcpFeeNq()} (nữ quan) hoặc nợ một ân (phi tần giỏi nghề) · thành: tiến bộ +2..3, luôn hơn tự học 1, mở được lối mới`,t2||(S.suc<10?"Sức dưới 10":"")):h);
-  if(l>=5&&rcpNewSt(k))s.acts.push(pbtn(`data-rcpmt="${k}"`,"Học lối mới với thầy",`tốn: 2 khắc, Sức -10, Bạc -${rcpFeeNq()} hoặc nợ một ân · thành: mở một lối mới, ra một tác phẩm lối ấy`,t2||(S.suc<10?"Sức dưới 10":"")));
+  s.acts=s.acts.map(h=>/data-mode="teacher"/.test(h)?pbtn(`data-learn="${k}" data-mode="teacher"`,"Học với thầy",`tốn: 2 khắc, Sức -10, Bạc -${rcpFeeNq()} (nữ quan) hoặc nợ một ân (phi tần giỏi nghề) · thành: tiến bộ +2..3, luôn hơn tự học 1, mở được lối mới`,t2||(S.suc<BAL.sucNeed.rcp?"Sức dưới "+BAL.sucNeed.rcp:"")):h);
+  if(l>=5&&rcpNewSt(k))s.acts.push(pbtn(`data-rcpmt="${k}"`,"Học lối mới với thầy",`tốn: 2 khắc, Sức -10, Bạc -${rcpFeeNq()} hoặc nợ một ân · thành: mở một lối mới, ra một tác phẩm lối ấy`,t2||(S.suc<BAL.sucNeed.rcp?"Sức dưới "+BAL.sucNeed.rcp:"")));
   if(wkKindsOf(k).some(x=>RCP_ST[x]))s.acts.push(pbtn(`data-rcpls="${k}"`,"Các lối, sách phổ",`thành: xem lối đã học, lối chưa học và cách học`,""))}}catch(e){console.error("rcp skills",e)}return L}})();
 function rcpListOpen(k){const a=ARTS.find(x=>x.k===k);const R=[];for(const kind of wkKindsOf(k).filter(x=>RCP_ST[x]))RCP_ST[kind].forEach((s,i)=>{const kn=rcpKnows(S,kind,s[0]);
   const rs=s[2].map(r=>wkrOf(kind,r)).filter(Boolean).map(r=>!kn&&rcpHasR(S,kind,r.id)?`${r.n} (đã học món này)`:r.n).join(", ");
