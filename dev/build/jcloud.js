@@ -181,7 +181,9 @@ async function link(v){const k=String(v||"").toUpperCase().replace(/[\s-]/g,"").
  MSG=r==="ok"||r==="same"?"Đã nối sổ. Sổ trên máy này đã khớp với mây.":ERR[C.err]||"";back()}
 /* Xóa sổ trên mây: kit danger button → kitConfirm → Worker "drop" (wipes the Vault only; the sổ on this device stay) → clear the link like "Thôi nối" */
 function dropAsk(){if(!C.k||STATE==="busy")return;
- kitConfirm({title:"Xóa hẳn sổ trên mây?",lines:["Sổ trên máy này vẫn còn.","Các máy khác nối bằng ám hiệu này sẽ không còn sổ để nối. Sổ trên mây xóa rồi không lấy lại được."],yes:"Xóa hẳn",no:"Thôi",onYes:dropGo})}
+ kitConfirm({title:"Xóa hẳn sổ trên mây?",lines:["Sổ trên máy này vẫn còn.","Các máy khác nối bằng ám hiệu này sẽ không còn sổ để nối. Sổ trên mây xóa rồi không lấy lại được."],yes:"Xóa hẳn",no:"Thôi",onYes:dropGo});
+ /* on the title the pop-up must sit at the title menu's layer (z 55) like every title sub-panel, or #title covers it */
+ const m=Q[0];if(m&&!/kptitle/.test(m.cls||"")){m.cls=((m.cls||"")+" kptitle").trim();showModal()}}
 async function dropGo(){const k=C.k;if(!k)return;STATE="busy";wire();const r=await api("drop",{k});STATE="";
  if(r.s===200||r.s===404){C={};saveC();MSG="";ASK=0;wire();back();
   try{kitModal({kind:"notice",title:"Đã xóa sổ trên mây",sections:[{h:"",html:"<p>Sổ trên máy này vẫn còn.</p>"}],btn:"Đã hiểu"})}catch(e){}return}

@@ -171,7 +171,7 @@ const freePort=()=>new Promise(r=>{const s=net.createServer();s.listen(0,'127.0.
   ok(r.status===404,'Worker: the cloud sổ is gone (list → 404)',{s:r.status});
   ok((await slot(I,1)).h===s1a.h,'local Sổ 1 untouched by the delete');
   await I.waitForSelector('#modal',{timeout:5000});await I.waitForTimeout(300);await shot(I,'9-deleted');
-  ok(/Chưa giữ trên mây/.test(await I.evaluate(()=>document.body.innerText)),'link cleared: "Chưa giữ trên mây" shown')}
+  await title(I);await toOpt(I);ok(/Chưa giữ trên mây/.test(await I.textContent('#modal .cloudwrap'))&&(await C(I)).k===undefined,'link cleared: settings says "Chưa giữ trên mây"')}
  for(const p of [P,I,O,Lz])ok(!p.errs.length,`${p.k}: no page errors`,p.errs.slice(0,3));
  await b.close();mock.kill();
  const f=res.filter(x=>!x).length;console.log(f?`${f} FAIL of ${res.length}`:`ALL ${res.length} OK`);process.exit(f?1:0)})().catch(e=>{console.error(e);process.exit(2)});
