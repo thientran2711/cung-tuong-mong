@@ -76,3 +76,13 @@ const R=ROAD14;for(const r in R)console.log(r,Object.keys(R[r]).join(','));
   const dead=(d.path||[]).filter(x=>![5,6,7,8,9,10,11].some(n=>{const c=ARC67[R[n]];return c&&Object.values(c.B||{}).some(b=>(typeof b.o==='function'?[]:b.o).some(o=>String(o.n).includes(x)))}));
   const ok=chs+own>=(d.np||2)+1;rr.push(`${ok?'ok  ':'LOW '}${d.a}: np ${d.np||2}, road chapters .5–.10 with a path option ${chs} (beats ${beats}) + .11 pools ${own}${dead.length?`, path names found nowhere on the road: ${dead.join(' | ')}`:''}`)}
  console.log('RARE FINALES (RD97L) reachability — needs ≥ np+1 chances (road chapters .5–.10 + .11 pools before the climax holding a path option; LOW = fail):',rr.filter(x=>!x.startsWith('ok')).length);rr.forEach(x=>console.log('  '+x));}
+/* FX ALIGN (reviewer road-onecore-r1): BAL.road.fx is positional (option i of a beat = entry i), so an option added / removed in a jrd_<origin>.js
+   without the same change in jbalroad.js would silently shift every number after it. Lists beats whose counts differ, fx rows with no chapter /
+   beat / ending, and road chapters with no fx row. Must be 0. */
+{const FX=(BAL.road&&BAL.road.fx)||{};const al=[];
+ for(const id in FX){const a=ARC67[id];if(!a){al.push(`${id}: fx row, no chapter`);continue}
+  for(const bk in FX[id]){if(bk==='E'){for(const ek in FX[id].E)if(!a.E||!a.E[ek])al.push(`${id}.E.${ek}: fx, no ending`);continue}
+   const O=a.B&&a.B[bk]&&a.B[bk].o;if(!Array.isArray(O)){al.push(`${id}.${bk}: fx, no option list`);continue}
+   if(O.length!==FX[id][bk].length)al.push(`${id}.${bk}: ${O.length} options, ${FX[id][bk].length} fx entries`)}}
+ for(const id in ARC67)if(ARC67[id].o==='rd'&&!FX[id])al.push(`${id}: road chapter with no BAL.road.fx row`);
+ console.log('FX ALIGN (BAL.road.fx rows vs options / endings):',al.length);al.forEach(x=>console.log('  '+x))}
