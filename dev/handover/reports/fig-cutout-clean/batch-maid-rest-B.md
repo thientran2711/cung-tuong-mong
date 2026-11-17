@@ -165,4 +165,13 @@ maid-m36-ngheo-a18	lJIiGQagv9	WDlICXNcXe	ok
 maid-m36-t1-a18	O6CzT1kynm	LwoNAvjswO	ok
 maid-m36-t2-a18	SymRnbtUb8	u5YsJecQLD	ok
 maid-m36-t3-a18	gOt3zbMSXO	vQ21gMKa47	ok
-## HANDOVER (W6b #1): 151 a18 done (list lines 1-151) through maid-m36-t3-a18 (+56 hd retro-fit). NEXT = maid-m36-t4-a18 (a18 list line 152: grep a18 lists/shards/maid-rest-B.txt). Method: sub-agents per tools/AGENT_GEN_BRIEF.md (8 keys each, ONE agent at a time because of rate limit 5 gens in flight), I record TSV + push fragments hd-entries/W6b-g*.json. Push recipe: commit, flock fetch --depth=1, checkout -B x FETCH_HEAD, cherry-pick, push (retry). Never commit dev/site/cdn_sync.py, __pycache__. Lookalike redo list above.
+## HANDOVER (W6b #1, superseded by the 159 line below) (+56 hd retro-fit). NEXT = maid-m36-t4-a18 (a18 list line 152: grep a18 lists/shards/maid-rest-B.txt). Method: sub-agents per tools/AGENT_GEN_BRIEF.md (8 keys each, ONE agent at a time because of rate limit 5 gens in flight), I record TSV + push fragments hd-entries/W6b-g*.json. Push recipe: commit, flock fetch --depth=1, checkout -B x FETCH_HEAD, cherry-pick, push (retry). Never commit dev/site/cdn_sync.py, __pycache__. Lookalike redo list above.
+maid-m36-t4-a18	s786W6Jl8e	kspO2TW16B	ok (borderline rich)
+maid-m36-t5-a18	lJIici5gv9	yiEndf9PW9	ok
+maid-m36-t6-a18	yiEndYbPW9	SymRTtzUb8	ok
+maid-m36-t7-a18	rgdPG9Xxtc	kspO2pB16B	ok LOOKALIKE (gold phoenix embroidery)
+maid-m36-t8-a18	rgdPGN3xtc	nVLoul5YQD	ok LOOKALIKE (gold phoenix embroidery)
+maid-m36-tm0-a18	p8OC1FPehw	aFArOr2fSh	ok
+maid-m36-tm2-a18	4RQWBMk9Aa	aFArOxAfSh	ok
+maid-m36-tm3-a18	KLDJZNWkqp	SymRVAwUb8	ok
+## 159 a18 done (list lines 1-159) through maid-m36-tm3-a18. NEXT = maid-m36-tm4-a18 (line 160). Lookalike list: m32-t5..t8, m33-t5..t8, m36-t7, m36-t8 (+ m36-t4 borderline).
