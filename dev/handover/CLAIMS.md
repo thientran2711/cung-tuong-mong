@@ -671,3 +671,4 @@
 | one-core-dup2-r2 SẴN SÀNG KIỂM 711e637d (COMBINED: replaces one-core-dup-r2 + one-core-dup2; guard finds 78 sites itself) → review (opus BIG; brief briefs/review-one-core-dup2-r2.md) | review/one-core-dup2-r2 | B | session_01N1tNP4wGphNXaUrwZWBrVr | RUNNING | 17/11 07:25Z |
 | coop-thin-d r1 FAIL 099ce05b (5 items; verdict branch c6792773 + probe) → fixed by the coop-thin-b worker as new commits on review/coop-thin-b (B carries D) | review/coop-thin-b | B | session_01N1tNP6svxoSpRYt6QpgSiS | RUNNING | 17/11 07:25Z |
 | coop-thin-b worker #2 (successor; predecessor rolled over at ~30 % ctx) — fix the 5 coop-thin-d r1 items on review/coop-thin-b after 9af781c2 (opus) | review/coop-thin-b | B | session_01N1tNP3op5jQGEdK2Sf7aVD | RUNNING | 17/11 07:26Z |
+| mg-snap SẴN SÀNG KIỂM 2a00405f → review r1 (opus BIG; brief briefs/review-mg-snap-r1.md) | review/mg-snap-r1 | B | session_01N1tNP3VpMVoikpTW1oDAch | RUNNING | 17/11 07:27Z |
