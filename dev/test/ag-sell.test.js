@@ -26,10 +26,10 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
  ok(r1.wGreedy>0&&r1.wLoyal===0&&r1.wClean===0,'who: Ham lợi + low lòng sells; lòng ≥ BAL.ag.sell.loy or Thanh liêm never',r1);
  /* 1b non-greedy (review ag-all-2 r2 C6, OD ~17:00Z (3)): low lòng alone never makes an offer; only her master offending a chữ she holds does */
  const r1b=await p.evaluate(()=>{const {v,s}=__rig();const o={w:{}};s.loyal=10;s.trM=null;s.mdM=null;s.emo=null;
-  for(const ld of ["Thật thà","Nhiều chuyện","Tham vọng","Khiêm nhường","Trọng nghĩa","Thực dụng"]){__setNet(s,ld);o.w[ld]=knSellW(s)}
+  for(const ld of ["Thật thà","Nhiều chuyện","Tham vọng","Khiêm nhường","Trọng nghĩa","Thực dụng"]){__setNet(s,ld);/* review ag-all-2 r2 fix2: __setNet sets one trait slot; her other (random) traits can carry the greed quality too (suite: "Nhiều chuyện" 0.7 = tham 60 + lòng 10) — such a servant IS greedy, so she is marked, not counted as non-greedy */o.w[ld]=netIs(s,"greed")?"greedy":knSellW(s)}
   __setNet(s,"Nhiều chuyện");const tr0=s.trong;s.trong=["Nghĩa","Cần"];/* after __setNet (netOf re-derives trong) */s.trM=null;for(let i=0;i<3;i++)mindSeen(v,"flee");/* flee offends Nghĩa (jmind, as ag-betray) */o.off=mindTr(s,v).off.length;o.wOff=knSellW(s);
   s.trong=tr0;__setNet(s,"Ham lợi");s.trM=null;s.mdM=null;s.emo=null;return o});
- ok(Object.values(r1b.w).every(x=>x===0),'who: a non-greedy servant, unoffended, lòng 10 never offers (knSellW 0)',r1b.w);
+ ok(Object.values(r1b.w).every(x=>x===0||x==="greedy")&&Object.values(r1b.w).filter(x=>x===0).length>=3,'who: a non-greedy servant, unoffended, lòng 10 never offers (knSellW 0)',r1b.w);
  ok(r1b.off>0&&r1b.wOff>0,'who: the same servant offers once her master offended a chữ she holds (off)',{off:r1b.off,w:r1b.wOff});
  ok(r1.n===40&&Object.keys(r1.picks).length===1&&r1.picks[r1.sid]===40&&!r1.ownSel,'pick: the only greedy disloyal servant of another palace with news is the seller; never her own staff',{n:r1.n,p:r1.picks,own:r1.ownSel});
  ok(!r1.tmSel,'her own Tai mắt does not sell to her (she reports)',r1.tmSel);
@@ -77,7 +77,7 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
  ok(r5.buys>0&&r5.paid===r5.price&&r5.ev&&r5.poor,'NPC buyer: same price, buys by worth vs price, a proof fact gives evidence, cannot buy without bạc',r5);
  ok(r5.noEvme&&r5.knownSkip,'NPC buyer: news already known to her is not sold again; "evidence on the player" not sold to NPCs',r5);
  /* j67 story beat */
- const r6=await p.evaluate(()=>{const {v,s}=__rig();const o={};try{const op=GB67.spy.o[0];o.wrapped=/knSellArc/.test(String(op.go));const t=op.go({},true);o.t=t;o.has=t.includes(s.name)&&(S.intel[v.id]||[]).some(x=>x.how==="Mua tin");o.fail=GB67.spy.o[0].go({},false)===""}catch(e){o.err=e.message}return o});
+ const r6=await p.evaluate(()=>{const {v,s}=__rig();const o={};const w0=knSellW;/* review ag-all-2 r2 fix2: lòng 95 does not silence a greedy servant since C6 (her nết decides): the arc may pick another real seller (suite: the Empress's eunuch), so the check fixes WHO sells to the rigged one and tests the engine */knSellW=x=>x===s?w0(x):0;try{const op=GB67.spy.o[0];o.wrapped=/knSellArc/.test(String(op.go));const t=op.go({},true);o.t=t;o.has=t.includes(s.name)&&(S.intel[v.id]||[]).some(x=>x.how==="Mua tin");o.fail=GB67.spy.o[0].go({},false)===""}catch(e){o.err=e.message}finally{knSellW=w0}return o});
  ok(r6.wrapped&&r6.has&&r6.fail,'j67 "Một kẻ gạ bán tin": Mua tin brings a real seller\'s true news through the same engine',r6);
  /* 6 tick + bot + old save */
  const r7=await p.evaluate((DAYS)=>{const o={offers:0,bad:[]};delete S.tb;KN.m=null;let tick=0;try{knSellTick();tick=1}catch(e){o.err=e.message}o.tick=tick;
