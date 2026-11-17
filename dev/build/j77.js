@@ -239,4 +239,4 @@ accInfo=function(){if(!S||Q.length)return;const R=n=>`<b>${n}</b>`;
    S.place): the stage of that place shows who is there in the new buổi, with one line "Sang buổi tối · ngươi vẫn ở Kính sự phòng" */
 (function(){const n0=nextBuoi;nextBuoi=function(){const k=S&&S.place,b=S?(S.buoi||0):0;const r=n0.apply(this,arguments);
  try{if(S&&!S.dead&&!S.out&&k&&k!=="home"&&b<(typeof B4L==="number"?B4L:2)&&(S.buoi||0)===b+1&&S.place===k&&S.visit&&S.visit.k===k){const nm=typeof accName==="function"?accName(k):k;
-  const line=`Sang ${String(BUOI[S.buoi]).toLowerCase()} · ngươi vẫn ở ${nm}.`;{const stay=/Sang [^·.]+ · ngươi vẫn ở [^.]+\.\s*/g;let m0=(S.visit.msg||"").replace(stay,"");S.visit.msg=line+(m0?" "+m0:"");if(S.visit.cap&&S.visit.cap.cur)S.visit.cap.cur=S.visit.cap.cur;render()}}}catch(e){}return r}})();
+  const line=`Sang ${String(BUOI[S.buoi]).toLowerCase()} · ngươi vẫn ở ${nm}.`;{const stay=/Sang [^·.]+ · ngươi vẫn ở [^.]+\.\s*/g;let m0=(S.visit.msg||"").replace(stay,"");S.visit.msg=line+(m0?" "+m0:"");render()}}}catch(e){}return r}})();
