@@ -15,7 +15,7 @@ const {chromium}=require('playwright');const {serve,BASE}=require('./coop-serve.
 const WURL=process.argv[2]||'https://ctm-coop.victoria-tntt.workers.dev';const LVL=+(process.argv[3]||2);const SWAP=+(process.argv[4]||0);const ONLY=(process.argv[5]||'').split(',').filter(Boolean);
 const res=[];const ok=(c,m,x)=>{res.push([!!c,m]);console.log((c?'ok  ':'FAIL')+' '+m+(x!==undefined?' '+JSON.stringify(x).slice(0,c?300:2500):''))};
 const sleep=ms=>new Promise(r=>setTimeout(r,ms));
-async function mk(b,name,vp,want,trip){const ctx=await b.newContext({viewport:{width:vp[0],height:vp[1]},deviceScaleFactor:1,reducedMotion:'reduce'});await serve(ctx);if(process.env.DFLAG)await ctx.addInitScript(()=>{try{localStorage.setItem('ctm-thin-part-4','1')}catch(e){}});
+async function mk(b,name,vp,want,trip){const ctx=await b.newContext({viewport:{width:vp[0],height:vp[1]},deviceScaleFactor:process.env.SHOTS?2:1,reducedMotion:'reduce'});await serve(ctx);if(process.env.DFLAG)await ctx.addInitScript(()=>{try{localStorage.setItem('ctm-thin-part-4','1')}catch(e){}});
   await ctx.addInitScript(([u,w])=>{window.COOP_URL=u;window.__co=()=>{const c=window.COOP;if(!c)return{};const s=c.state||{};return{code:c.code,seat:c.seat,week:c.week,frozen:!!c.frozen,waiting:!!(window.COOPW&&COOPW.on&&(COOPW.sent===(s.week||0)||(c.seat&&(c.ended||{})[c.seat]))),world:typeof S!=='undefined'&&!!S&&!!(window.COOPW&&COOPW.base)}};if(w)try{localStorage.setItem('ctm-thin',String(w))}catch(e){}
    const W0=window.WebSocket;window.__tx=[];window.WebSocket=function(a,p){const s=p===undefined?new W0(a):new W0(a,p);window.__ws=s;const sd=s.send.bind(s);
     s.send=d=>{try{if(typeof d==='string'){const m=JSON.parse(d);__tx.push(m.t==='do'?'do:'+m.op+':'+(m.args&&m.args.st):m.t)}}catch(e){}return sd(d)};return s};
@@ -66,11 +66,13 @@ const until=async(o,fn,arg,ms=40000)=>{try{await o.p.waitForFunction(fn,arg,{tim
  const settle=async l0=>{const t0=Date.now();while(Date.now()-t0<40000){await clear(G,4);const L=await lifeOf();if(L.hb>=l0+1&&L.g>=l0+1&&!(await G.p.evaluate(()=>COOPW.inLife)))break;await sleep(400)}await sleep(1500);return lifeOf()};
  const dupQ=()=>G.p.evaluate(()=>{const t=Q.map(m=>(m.pid||'')+'|'+(m.t||'')+'|'+(m.thin?'thin':'loc'));return {n:Q.length,t,thq:(COOPW.base.P.b&&COOPW.base.P.b.S&&COOPW.base.P.b.S.thq||[]).length,pq:(COOPW.thin.view&&COOPW.thin.view.o&&COOPW.thin.view.o.pq||[]).length,thpn:S.thpn||0}});
  /* B r1 FIX item 1: while the host answers, the wait note renders no person (not her dead old life) and ✕ / Nhận do nothing local */
- {const l0=(await lifeOf()).hb;await G.p.evaluate(()=>{const f=COOP.send;window.__holdN=0;COOP.send=function(t,x){const o=typeof t==='string'?{t,...(x||{})}:t;
-   if(o.t==='do'&&o.op==='life'&&!window.__held){window.__held=1;const a=arguments,self=this;setTimeout(()=>f.apply(self,a),4000);return}return f.apply(this,arguments)}});
+ {const l0=(await lifeOf()).hb;await G.p.evaluate(HM=>{const f=COOP.send;window.__holdN=0;COOP.send=function(t,x){const o=typeof t==='string'?{t,...(x||{})}:t;
+   if(o.t==='do'&&o.op==='life'&&!window.__held){window.__held=1;const a=arguments,self=this;setTimeout(()=>f.apply(self,a),HM);return}return f.apply(this,arguments)}},process.env.SHOTS?7000:4000);
   const old=await G.p.evaluate(()=>S.name);const t0=(await tx()).length;await begin('tt');await sleep(800);
   const w=await G.p.evaluate(o=>{const M=document.getElementById('modal');const txt=M&&!M.hidden?M.textContent:'';
    return {thw:!!(Q[0]&&Q[0].thw),nl:Q.some(m=>m.nl),old:txt.includes(o),kpid:!!document.querySelector('#modal .kpid'),tabs:/Độ khó/.test(txt),wait:/đang định thân phận/.test(txt)}},old);
+  if(process.env.SHOTS){await tapText(G,/^Bỏ qua$/,1500);await sleep(300);for(const [vw,vh] of [[755,1000],[1180,820]]){await G.p.setViewportSize({width:vw,height:vh});await sleep(400);await G.p.screenshot({path:require('path').join(process.env.SHOTS,'wait-'+vw+'x'+vh+'.png')});
+    const ov=await G.p.evaluate(()=>document.documentElement.scrollWidth>innerWidth);ok(!ov,'R0 wait note '+vw+'x'+vh+': no horizontal overflow')}await G.p.setViewportSize({width:SWAP?686:1180,height:SWAP?880:820})}
   ok(w.thw&&!w.nl&&!w.old&&!w.kpid&&!w.tabs&&w.wait,'R0 wait note: no person drawn (not the dead old life '+old+'), no Độ khó tabs, the wait text shown',w);
   await G.p.evaluate(()=>{try{nlAccept(true)}catch(e){}try{nlAccept()}catch(e){}try{closeModal()}catch(e){}});
   const T=(await tx()).slice(t0);const g=await G.p.evaluate(()=>({life:COOPW.life||0,acc:(window.__ctx||[]).filter(x=>/do:life:accept|^me$/.test(x)).length}));
