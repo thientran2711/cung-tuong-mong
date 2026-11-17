@@ -53,3 +53,11 @@ Looked at all. shots.js map shot loads before the map picture (grey), same on li
 
 ### After FF
 kit-ico-rank: the FF deploys the rank Worker — check the GitHub Action run.
+
+## UPDATE (MAIN s35 rulings 17:41Z) — final batch
+- **G1 A done**: dev/test/one-core-guard.js skips EXACTLY `../../rank/worker/src/score.js` (comment: rank rulebook = source of BAL.rank, OD:L1267) + RANK_CHECK: score.js must bind `BAL.rank=CTM_RANK.RULES` and no other module may set BAL.rank (negative-tested both: FAIL lines appear). Twin check: BAL.rank IS the RULES object (score.js:68), so no BAL value duplicates its danh/duc weights. Baseline = live 3843.
+- **pcard-facts-2 ab50f1c5 OUT** (pcard-facts d5f1abb2 stays). Its reviewer was session_01UV1SzhQ2iUk4UXLNwCnsgN (archived); worker id unknown to me.
+- **learn-scene-fix-2-r1 f8ac2f08 IN** (assemble: jorder.js last).
+- **PERF / tuanluc-sync OUT**: quickcheck --runs 7 on the same box: full batch buổi 1319 vs 678 ms live (+95 %); batch minus tuanluc-sync 654 vs 738 (−11 %) → tuanluc-sync causes it; taken out by `git revert -m 1` of its merge (3ef538c8). NOTE for re-landing: git now sees tuanluc-sync as merged-then-reverted; to land it later, merge a NEW head of it on top (or revert the revert) — a plain re-merge of 4156a49d adds nothing. Tab median stays +20-24 % (282 vs 228) without tuanluc (inside the gate, not bisected).
+- Main merged up to d5ea786d (one-core-jkc-2): j68h hand-merge = main's BAL.odb text.
+- CHANGE line: the Tuần lục clause removed.
