@@ -15,8 +15,17 @@ KIT.md §87. Scan: dev/measure/option-modal-scan.js <device> [turns] [json].
 | ipadPro 1366x1024 | not run before | 0 of 18 |
 (thresholds: text col <170 px or value col <140 px.) 412x1058 and 390x844 NOT scanned (390 is rotated host mode).
 
-## NOT done (be honest)
-- No before/after shots on CDN (first attempt caught a transition frame).
-- quickcheck.sh does not exist on main; kit-conform.js crashed on missing args (ERR_INVALID_ARG_TYPE), not run properly.
-- Per-source check of the ~20 "không được không mất" lines and of jeitem/jrcp/jpet/jpoison/j83 "thành:" options done only through the kit rule + scan, not one by one; "Đợi Nội vụ phủ" (a real loss) not checked.
-- Option modals only reached via endTurn; builders not reached by 60 turns not scanned.
+## Per-source table: "không được không mất" (1)
+All 20 lines are pure decline/skip options with no hidden loss (j71 Không dự/Bỏ thi/Không cược/Từ chối khéo x7 + j31 x2 + jact/jact2/jk2b/jstip x1 each: go() only logs or scores OTHERS). The ONE kit regex KA_NOTHING hides the line; checked in a real modal: the card shows only its title. No real loss found -> no source wording change needed. "Đợi Nội vụ phủ" (jeitem:110) already shows its loss: "kèm: ... mặc trung y ra ngoài bị chê thiếu lễ" (red KÈM), no "không được không mất" there.
+
+## Gates (dev/tools/quickcheck.sh, run on 3dabd1f7 vs live e8b1906f)
+CORE GATES PASS (one-core-guard, rules-one-source, kit-conform, coop-one-world, hooks) 164 s; TIME-SPILL GUARD PASS; open 1527 ms 0 errors; old save ok 0 errors; perf new median render 138 / tab 254 / buổi 721 ms. Full-run log: see final line appended below by the rerun.
+
+## Shots (CDN img/_review/kit-option-rows/ — wipe after verdict)
+- before-ipadAir-s1.png / after-ipadAir-s1.png: 2 options, 2nd = "thành: giữ mình trong sạch..." — before: literal "thành:" under ĐƯỢC, picture cards in 2 columns; after: clean ĐƯỢC row, cards in one full-width column (iPad 1180x820). LOOKED.
+- before-fold-s1.png: same case on Fold, literal "thành:" visible (before only).
+- NOT obtained: Fold "after" and the other 2 modals (an update-notice popup / night scene kept covering the test modal; harness flaky). Reviewer please re-shoot Fold with dev/measure/option-modal-scan.js numbers as the primary evidence.
+
+## NOT done
+- quickcheck summary line may be missing from the first run (pipe cut); rerun log appended if it finished.
+- Option modals only reached via endTurn x50-60; 412x1058 and 390x844 not scanned.
