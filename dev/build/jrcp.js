@@ -195,7 +195,7 @@ function rcpBookRows(k){const b=rcpBk(k),a=itemArt(k),gr=KIT_GRADE[a?a.grade|0:0
  const kn=rcpKnows(S,b.kind,b.sid);const B=[pbtn(`data-rcpread="${i}"`,"Đọc, học lối này",`tốn: 1 khắc · thành: học ${rcpStN(b.kind,b.sid)}`,kn?"đã học lối này":whyTime(1)),
   pbtn(`data-kinvact="gift" data-ix="${i}"`,"Tặng","tốn: 2 khắc · thành: chọn người nhận",whyTime(2)),pbtn(`data-kinvact="sell" data-ix="${i}"`,"Bán",`thành: Bạc +${Math.floor((it.pr||0)/2)}`,"")];
  const F=[];if(g.n>1)F.push(`Trong rương: ${g.n} món.`);const fr=kinvFrom(g.from);if(fr)F.push(fr+".");
- kitModal({kind:"info",title:it.n,sub:`${it.kd} · ${KIT_GRADE[x.grade|0].n}`,itemPic:kitItem({src:x.src512||x.src,name:"",grade:x.grade,size:"lg",qty:g.n}).replace('<span class="kitn"></span>',''),
+ kitModal({kind:"info",title:it.n,sub:it.kd,itemPic:kitItem({src:x.src512||x.src,name:"",grade:x.grade,size:"lg",qty:g.n}).replace('<span class="kitn"></span>',''),
   html:`<div class="kinvrows">${rcpBookRows(g.k)}</div>${F.length?kitFacts(F):""}<div class="rbtn kinvacts">${B.join("")}</div>`})}})();
 document.addEventListener("click",ev=>{const b=ev.target.closest&&ev.target.closest("[data-rcpread]");if(!b||b.disabled)return;ev.stopPropagation();const ix=+b.dataset.rcpread;
  try{if(typeof kitModalClose==="function")kitModalClose()}catch(e){}if(Q.length&&!Q[0].opts)closeModal();rcpRead(ix)},true);
@@ -207,7 +207,7 @@ wkrTile=function(kind,r,l){const gr=rcpHasR(S,kind,r.id),ok=gr||r.lv<=l,a=ARTS.f
  const eff=(s?`Lối ${s[1]}`:"")+(r.st?" · "+r.st.map(x=>x[0]).join(", "):"");
  const why=!ok?`Cần ${a.n} bậc ${r.lv}`:!kn&&!tch?`Chưa học lối «${s[1]}»: học với thầy, hoặc đọc ${RCP_BK[kind].toLowerCase()} «${s[1]}»`:"";const A=`data-kwr="${kind}" data-kwri="${r.id}"`;
  return `<div class="kshc kshpick${can2?"":" kshno"}" ${A}>`+
-  `<span class="kshpic">${kitItem({src:wkrPic(kind,r,0),name:r.n,grade:0,size:"slot",tip:r.n})}</span>`+
+  `<span class="kshpic">${kitItem({src:wkrPic(kind,r,0),name:r.n,size:"slot",tip:r.n})}</span>`+
   `<span class="kshn" title="${r.n}">${r.n}</span><span class="kshe" title="${eff}">${eff}</span>`+
   `<span class="kshp">${gr&&(r.lv>l||!rcpKnows(S,kind,s[0]))?"đã học món này":r.lv?`${a.n} bậc ${r.lv}`:"mọi bậc"}</span>`+
   `<button type="button" class="kbtn kshgo" ${A} data-kwrgo="1"${can2?"":` disabled title="${why}"`}>${!ok?"Chưa mở":tch?"Học lối này":kn?"Làm":"Chưa học"}</button></div>`};

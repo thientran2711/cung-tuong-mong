@@ -28,11 +28,11 @@ function kitItemInfo(x){const e=x&&typeof x==="object"?x:{k:x};const k=e.k;const
  g=Math.max(0,Math.min(4,g|0));const G=KG[g]||KG[0];return{k,name,src,src512:src512||src,grade:g,gname:gn||G.n,col:G.c,sub}}
 function krEsc(s){return String(s==null?"":s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]))}
 function kitGradeChip(g,o){o=o||{};g=Math.max(0,Math.min(4,g|0));const G=(typeof KIT_GRADE!=="undefined"&&KIT_GRADE[g])||{n:"Thường",c:"#9a8a78"};
- return `<span class="kgchip kgc${g}${o.size==="sm"?" kgchip-sm":""}" style="--gc:${o.col||G.c}">${krEsc(o.name||G.n)}${o.extra?` · ${krEsc(o.extra)}`:""}</span>`}
+ return `<span class="kgchip kgc${g}${o.size==="sm"?" kgchip-sm":o.size==="fr"?" kgchip-fr":""}" style="--gc:${o.col||G.c}">${krEsc(o.name||G.n)}${o.extra?` · ${krEsc(o.extra)}`:""}</span>`}
 function kitRevealHTML(I,o){o=o||{};const R=(typeof BAL==="object"&&BAL.reveal)||{};
  return `<div class="krev" style="--gc:${I.col};--krise:${(R.rise||550)}ms">`+`<i class="krevl" aria-hidden="true"></i>`+
-  kitItem({src:I.src512||I.src,name:"",grade:I.grade,size:"xl",tip:I.name}).replace('<span class="kitn"></span>','')+
-  `<b class="krevn">${krEsc(I.name)}</b>${kitGradeChip(I.grade,{name:I.gname,extra:o.noSub?"":I.sub})}${o.from?`<small class="krevf">${krEsc(o.from)}</small>`:""}</div>`}
+  kitItem({src:I.src512||I.src,name:"",grade:I.grade,gname:I.gname,size:"xl",tip:I.name}).replace('<span class="kitn"></span>','')+
+  `<b class="krevn">${krEsc(I.name)}</b>${!o.noSub&&I.sub?`<small class="krevs">${krEsc(I.sub)}</small>`:""}${o.from?`<small class="krevf">${krEsc(o.from)}</small>`:""}</div>`}
 window.kitItemInfo=kitItemInfo;window.kitGradeChip=kitGradeChip;window.kitRevealHTML=kitRevealHTML;
 
 /* ---------- §54.2 kitLose ---------- */
@@ -52,7 +52,7 @@ function kitCoins(dir,n,from){if(!krOn()||krStill()||!(n>0))return;const R=(type
  try{if(typeof sfx==="function")sfx("sfx-coin")}catch(e){}}
 /* one item tile leaving from the Tư trang tab: "away" (sold), "give" (given), "fall" (faded away) */
 function krFly(I,mode,i){if(krStill())return null;const R=(typeof BAL==="object"&&BAL.reveal)||{};const p=krBagPt();const w=document.createElement("div");w.className="klsfly";
- w.innerHTML=kitItem({src:I.src,name:"",grade:I.grade,size:"md",tip:I.name}).replace('<span class="kitn"></span>','');document.body.appendChild(w);
+ w.innerHTML=kitItem({src:I.src,name:"",grade:I.grade,gname:I.gname,size:"md",tip:I.name}).replace('<span class="kitn"></span>','');document.body.appendChild(w);
  const ww=w.offsetWidth||72,hh=w.offsetHeight||72;const x0=Math.max(8,Math.min(innerWidth-ww-8,p.x-ww/2+(i||0)*24)),y0=Math.max(8,(p.r&&p.r.top>innerHeight*.6?p.r.top-hh-14:p.y-hh/2));
  const at=(x,y,s,o,r)=>({transform:`translate(${x}px,${y}px) scale(${s}) rotate(${r||0}deg)`,opacity:o});let K,d;
  if(mode==="fall"){K=[at(x0,y0-10,.7,0),Object.assign(at(x0,y0-18,1,1),{offset:.25,filter:"grayscale(0)"}),Object.assign(at(x0+10,y0+130,.9,0,14),{filter:"grayscale(1)"})];d=R.fall||1300}
@@ -64,7 +64,7 @@ function kitLose(x,o){o=o||{};if(!krOn())return;if(x&&!Array.isArray(x)&&typeof 
  if(why==="sell"||why==="give"||why==="fade"){let last=null;L.forEach((I,i)=>{last=krFly(I,why==="sell"?"away":why,i)||last});
   if(why==="sell"&&o.bac)setTimeout(()=>kitCoins("in",o.bac,last||krBagPt()),last?Math.round(last.d*.55):0);return}
  /* lose: the kit notice card; its picture (the kit item panel picture, itemPic) = the lost item fading and falling (CSS, §54.2); more items are named in the text */
- const I0=L[0];const pic=kitItem({src:I0.src512||I0.src,name:"",grade:I0.grade,size:"lg",tip:I0.name}).replace('<span class="kitn"></span>','').replace('class="kitem ','class="kitem klsfall ');
+ const I0=L[0];const pic=kitItem({src:I0.src512||I0.src,name:"",grade:I0.grade,gname:I0.gname,size:"lg",tip:I0.name}).replace('<span class="kitn"></span>','').replace('class="kitem ','class="kitem klsfall ');
  const names=L.map(I=>I.name);const facts=[];if(o.text)facts.push(o.text);facts.push(`Mất khỏi Tư trang: ${names.join(", ")}.`);
  try{const was=document.getElementById("modal");const open=was&&!was.hidden;
   kitPanel({kind:"notice",title:o.title||"Mất đồ",sub:L.length>1?`${L.length} món`:`${L[0].sub?L[0].sub+" · ":""}${L[0].gname}`,itemPic:pic,facts,btn:"Đã hiểu",cls:"klose"});
@@ -76,15 +76,16 @@ window.kitLose=kitLose;window.kitCoins=kitCoins;
 .kgchip{display:inline-block;font-size:.84rem;font-weight:700;line-height:1.3;padding:2px 12px;border-radius:999px;background:var(--gc);color:#fff;white-space:nowrap;box-shadow:inset 0 0 0 1px #fff4;text-shadow:0 1px 1px #0003}
 .kgchip.kgc4{background:linear-gradient(#c9a227,#a8261c)}
 .kgchip-sm{font-size:.66rem;padding:1px 7px;border-radius:6px}
+/* kitItem's grade chip (size "fr", KIT §54.1b): centred ON the bottom edge of the picture frame; every measure is in container units of the frame (.kitb is the container) so it scales with the frame: 7 px minimum at a wear or bag slot (43-58 px), 9.2 % of the frame at M (72), L (104), XL (150) */
+.kitb>.kgchip-fr{position:absolute;left:50%;bottom:0;translate:-50% 50%;z-index:3;font-size:max(9.2cqw,7px);line-height:1;font-weight:700;padding:max(1.3cqw,1px) max(2.4cqw,2px);border-radius:max(2.2cqw,2px);letter-spacing:.02em;box-shadow:0 0 0 max(.7cqw,1px) #fffaf0,0 1px 3px #0005;pointer-events:none;text-shadow:0 1px 1px #0004}
 /* §54.1 reveal spotlight (kitGain, each item of kitReward) */
 .krev{position:relative;display:flex;flex-direction:column;align-items:center;gap:6px;text-align:center;color:#fff3dc}
 .krevl{position:absolute;left:50%;top:75px;width:300px;height:300px;margin:-150px 0 0 -150px;border-radius:50%;pointer-events:none;
  background:radial-gradient(circle,color-mix(in srgb,var(--gc) 80%,#fff) 0,color-mix(in srgb,var(--gc) 45%,transparent) 32%,transparent 68%);animation:krevBurst calc(var(--krise)*2) ease-out both,krevBreath 2.4s ease-in-out calc(var(--krise)*2) infinite}
 .krev>.kitem{position:relative;animation:krevRise var(--krise) cubic-bezier(.2,.9,.3,1.2) both}
 .krev>.kitem>.kitb{filter:drop-shadow(0 0 14px var(--gc)) drop-shadow(0 4px 8px #0006)}
-.krev>.kitem>.kitg{display:none}
 .krevn{position:relative;font-family:var(--display,serif);font-size:1.18rem;line-height:1.25;text-shadow:0 2px 6px #000a;animation:krevUp calc(0.4s*var(--pace,1)) calc(var(--krise)*.6) ease-out both}
-.krev>.kgchip{position:relative;animation:krevUp calc(0.4s*var(--pace,1)) calc(var(--krise)*.8) ease-out both}
+.krevs{position:relative;font-size:.8rem;color:#f6ead6e0;animation:krevUp calc(0.4s*var(--pace,1)) calc(var(--krise)*.8) ease-out both}
 .krevf{position:relative;font-size:.76rem;color:#f6ead6c0}
 .krevok{position:relative;margin-top:6px;min-width:120px;animation:krevUp calc(.4s*var(--pace)) var(--kok,calc(900ms*var(--pace))) ease-out both}
 .krev.krev-out{animation:krevOut var(--kshelf,calc(380ms*var(--pace))) ease-in forwards}
@@ -105,6 +106,7 @@ window.kitLose=kitLose;window.kitCoins=kitCoins;
 `;document.head.appendChild(st)})();
 /* kit sample page (#kit, jkitpage): §54.1 grade chips + one reveal spotlight, §54.2 the lose card picture */
 try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push(
- {id:"§54.1",title:"kitGradeChip · kitRevealHTML (kitGain / kitReward)",where:"<b>ONE chip part</b> <code>kitGradeChip(grade,{size,name,extra})</code> in two sizes, never two parts: <b>normal</b> = under the item name on the reveal card (kitGain / kitReward), item detail, lists; <b>sm</b> (<code>size:\"sm\"</code>) = the grade tag laid over an item picture / inside a tight row (kitItem tile, Tư trang, week-book rows). Rows below: normal chips, a normal chip with a maker note, then the sm chip.",html:()=>`<div class="kitpg-row">${[0,1,2,3,4].map(g=>kitGradeChip(g)).join(" ")} ${kitGradeChip(2,{name:"Tinh xảo",extra:"Tác phẩm tự tay"})} <span class="kitpg-w" style="margin:0 0 0 14px;padding-left:12px;border-left:1px solid var(--k-hair)">chip cỡ NHỎ (<code>size:"sm"</code>, cùng một chip, dùng làm nhãn đề trên ảnh vật phẩm) →</span>${kitGradeChip(1,{size:"sm"})}</div>`+
+ {id:"§54.1",title:"kitGradeChip · kitRevealHTML (kitGain / kitReward)",where:"<b>ONE chip part</b> <code>kitGradeChip(grade,{size,name,extra})</code> in three sizes, never two parts: <b>normal</b> = a text line (lists, maker notes); <b>sm</b> (<code>size:\"sm\"</code>) = inside a tight row without a picture (week-book rows); <b>fr</b> (<code>size:\"fr\"</code>, KIT §54.1b) = the grade of EVERY item picture: kitItem draws it centred ON the bottom edge of the frame at every size (bag slot, M, L, XL, reveal card, detail card), scaled in container units of the frame; there is no grade line under a picture. Rows below: normal chips, a normal chip with a maker note, the sm chip, then item frames at 4 sizes with the fr chip.",html:()=>`<div class="kitpg-row">${[0,1,2,3,4].map(g=>kitGradeChip(g)).join(" ")} ${kitGradeChip(2,{name:"Tinh xảo",extra:"Tác phẩm tự tay"})} <span class="kitpg-w" style="margin:0 0 0 14px;padding-left:12px;border-left:1px solid var(--k-hair)">chip cỡ NHỎ (<code>size:"sm"</code>, cùng một chip, dùng làm nhãn đề trên ảnh vật phẩm) →</span>${kitGradeChip(1,{size:"sm"})}</div>`+
+  `<div class="kitpg-row" style="align-items:flex-end;gap:16px">${[["slot",0],["md",1],["lg",3],["xl",4]].map(([z,g])=>`<span style="width:${z==="slot"?58:z==="md"?72:z==="lg"?104:150}px;display:inline-block">${kitItem({src:kitItemInfo("nhansam").src,name:"",grade:g,size:z,tip:z})}</span>`).join("")}</div>`+
   `<div class="kitpg-row" style="background:#1a0f0acc;padding:14px;border-radius:8px">${kitRevealHTML(kitItemInfo("nhansam"),{from:"Thái hậu ban"})}</div>`},
  {id:"§54.2",title:"kitLose: thẻ mất đồ (món mờ dần, rơi)",html:()=>`<div class="kitpg-row"><span class="klspic">${["vongngoc","tramngoc"].map((k,i)=>{const I=kitItemInfo(k);return kitItem({src:I.src,name:I.name,grade:I.grade,size:"lg"}).replace('class="kitem ','class="kitem klsfall ')}).join("")}</span></div>`})}catch(e){}

@@ -172,7 +172,7 @@ Object.assign(BAL,{
       accWin:{danh:4}}, /* an accusation that holds: her Danh (a failed one: BAL.tw.g.accFail) */
  m95b:{k:1,             /* khắc to clear a rumour face to face, or to trace who spread it */
       trace:{bac:-10}}, /* silver to have the rumour traced */
- kitpage:{demo:{age:19,k:1,grey:{need:40,have:3,k:2,suc:10},/* §84 greyed-option sample (jgrey) */mapK:2,/* §85 Dư đồ sample khắc (jmapc) */tomb:{suc:10,duc:3},gift:{bac:20,hh:4,danh:2,th:1}},/* kit sample page demo option texts (jopic §6.2b) and slot age (j74) */
+ kitpage:{demo:{age:19,k:1,grey:{need:40,have:3,k:2,suc:10},/* §84 greyed-option sample (jgrey) */mapK:2,/* §85 Dư đồ sample khắc (jmapc) */tomb:{suc:10,duc:3},gift:{bac:20,hh:4,danh:2,th:1},study:{k:2,suc:15,bac:15},/* jksize sheet study cards */ask:{danh:5,sung:10,an:2},/* jkitpage night-ask sample */ev:{need:1,have:0}/* jgrey §84 need[] sample */},/* kit sample page demo option texts (jopic §6.2b) and slot age (j74) */
       wk:2,         /* kit sample page: the demo "· 2 tuần trước" age of a mood cause */
       listen:{duc:1}},  /* kit sample page: the demo option "Nghe hết rồi mới định" gain */
  diff:{bac:{de:1.5,vua:1,kho:.7}},   /* starting bạc × by difficulty (Dễ / Vừa / Khó) */
@@ -210,6 +210,11 @@ function trystCh(p){return cl(conceiveCh(p),BAL.trystC[0],BAL.trystC[1])}
    4 ma ma, 3 cô cô) · age range at the start · names (the first holds the post at the start; successors take the next) · call = how
    the palace addresses her · tr (STR temperament key) · duties (shown on her card) */
 BAL.staff={retire:[63,68],gift:20,giftAf:10,talk:2,succAge:[46,54],
+ /* FRAME NARRATOR (owner 16/11 19:23Z s22, kit-size #4): a kit frame without its own person is told by the named palace official whose
+    office covers that topic. ONE map (kind of the frame → post id gt / tn / kn, or the Emperor's eunuchs tq / ksp; "maid" = her thân tín
+    maid, "me" = the player, where no office fits). Read by jksize kszWho3. */
+ narrator:{news:"kn",notice:"kn",week:"kn",choice:"kn",rule:"tn",info:"tn",evidence:"tn",night:"ksp",reward:"tq",
+  intel:"maid",threat:"maid",person:"maid",end:"me",result:"me"},
  posts:[
   {id:"gt",title:"Giáo tập ma ma",palace:"Trữ Tú cung",master:"th",tr:"trung",rk:4,age:[50,55],
    names:[["Tống Quế Chi","Tống ma ma"],["Lạc Ngọc Dung","Lạc ma ma"],["Ôn Tú Hà","Ôn ma ma"]],
