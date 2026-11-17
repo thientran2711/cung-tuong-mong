@@ -125,7 +125,9 @@ const until=async(o,fn,arg,ms=40000)=>{try{await o.p.waitForFunction(fn,arg,{tim
  console.log("ERRS before 5.",H.errs.length,G.errs.length,JSON.stringify(G.errs.concat(H.errs).map(e=>e.slice(0,80))));
  /* 5. reconnect (socket drop) mid-roll */
  {const l0=(await lifeOf()).hb;await begin('bd');await G.p.evaluate(()=>{try{__ws.close()}catch(e){}});
-  const L=await settle(l0);await same('R5');ok(L.hb===l0+1&&L.g===l0+1,'R5 socket drop mid-roll: one new life',L)}
+  const L=await settle(l0);await same('R5');ok(L.hb===l0+1&&L.g===l0+1,'R5 socket drop mid-roll: one new life',L);
+  if(!(L.hb===l0+1&&L.g===l0+1))console.log('R5 DBG',JSON.stringify(await H.p.evaluate(()=>({st:COOPW.thin.life.stat,why:COOPW.thin.life.why,hold:COOPW.thin.life.hold,last:COOPW.thin.life.last&&COOPW.thin.life.last.key,dl:COOPW.thin.D.log.slice(-8),peer:COOP.state.peerOnline}))),
+   JSON.stringify(await G.p.evaluate(()=>({ask:COOPW.thin.life.ask,key:COOPW.thin.life.key,inLife:COOPW.inLife,Q:Q.map(m=>m.t),st:COOPW.thin.life.stat,frozen:COOP.frozen,ws:window.__ws&&__ws.readyState,tx:(window.__ctx||[]).slice(-25),M:(document.getElementById('modal')||{}).hidden}))))}
  /* r2 reviewer R7 (B‖D seam, D on): the host acts on HER (Kết giao invite = a part-D card built in her context) while her rolled life is
     still held (Luân hồi card up, not accepted) → after accept: no card twice (no "Nhập cung" from both B's q and D's takeQ), the invite once, thq 0 */
  /* R7c control (no invite): what her Q holds right after accept in the normal flow */
@@ -138,6 +140,13 @@ const until=async(o,fn,arg,ms=40000)=>{try{await o.p.waitForFunction(fn,arg,{tim
   console.log('R7 before',JSON.stringify(q0),JSON.stringify(hd0),'after invite',JSON.stringify(q1),JSON.stringify(hd1));
   await G.p.evaluate(()=>{try{nlAccept()}catch(e){}});await until(G,l=>(COOPW.life||0)>l&&!COOPW.inLife,l0,30000);await sleep(4000);
   const q2=await dupQ();console.log('R7 after accept',JSON.stringify(q2));
+  if(process.env.SHOTS){/* r2 FIX: the R7 scene on both seats (her: the host's invite after her new life's cards; him: waiting for her answer) */
+   await tapText(G,/^Bỏ qua$/,2000);await sleep(400);
+   /* her new life's own cards first (answered as she would), then the host's invite is on top */
+   for(let i=0;i<8&&!(await G.p.evaluate(()=>!!(Q[0]&&Q[0].thin)));i++){await G.p.evaluate(()=>{const m=document.getElementById('modal');const b=m&&!m.hidden?[...m.querySelectorAll('button:not([disabled])')].filter(x=>x.offsetParent!==null):[];const c=b.find(x=>!x.classList.contains('x')&&!/^[✕×]$/.test(x.textContent.trim()))||b[0];if(c)c.click()});await sleep(600)}
+   for(const [nm,o,vp0] of [['guest',G,SWAP?[686,880]:[1180,820]],['host',H,SWAP?[1180,820]:[686,880]]]){for(const [vw,vh] of [[755,1000],[1180,820]]){await o.p.setViewportSize({width:vw,height:vh});await sleep(500);
+     await o.p.screenshot({path:require('path').join(process.env.SHOTS,'r7-'+nm+'-'+vw+'x'+vh+'.png')});ok(!(await o.p.evaluate(()=>document.documentElement.scrollWidth>innerWidth)),'R7 shot '+nm+' '+vw+'x'+vh+': no horizontal overflow')}
+    await o.p.setViewportSize({width:vp0[0],height:vp0[1]})}}
   const cnt={};for(const t of q2.t){const k=t.split('|').slice(0,2).join('|');cnt[k]=(cnt[k]||0)+1}const dup=Object.entries(cnt).filter(([k,n])=>n>1);
   ok(!dup.length,'R7 after accept: no card twice in her Q (B q vs D takeQ)',{dup,t:q2.t});
   ok(q2.t.filter(t=>/Hảo hữu tìm đến/.test(t)).length===1,'R7 the host invite is still on her phone after accept, once (not lost by the new life, not doubled)',{q1:q1.t,q2:q2.t});
@@ -146,6 +155,7 @@ const until=async(o,fn,arg,ms=40000)=>{try{await o.p.waitForFunction(fn,arg,{tim
   /* r2 FIX: the invite was deferred while held (never run on the rolled store), then delivered after the accept */
   const dl=await H.p.evaluate(()=>COOPW.thin.D.log.map(x=>x[0]));ok(dl.includes('defer')&&dl.includes('flush')&&!dl.includes('held-run'),'R7 host: D work deferred while held, flushed after accept, none ran on the held store',dl.slice(-12));
   const L=await settle(l0);ok(L.hb===l0+1&&L.g===l0+1,'R7 one new life',L);const q3=await dupQ();ok(q3.thq===0,'R7 thq 0 after clearing',q3);
+  {const t0=Date.now();while(Date.now()-t0<30000){await clear(G,4);if(!(await G.p.evaluate(()=>Q.some(m=>m&&m.thin))))break;await sleep(500)}await sleep(2500)}/* she answers the invite (settle may return before her Q is cleared) */
   const hk=await H.p.evaluate(()=>{const B=COOPW.thin.seatOf('b');return {acts:Object.keys(COOPW.acts||{}).length,thq:(B&&B.S.thq||[]).length,df:(COOPW.thin.D.DF.b||[]).length}});ok(hk.thq===0&&hk.df===0,'R7 host: her card answered (store thq 0), nothing left deferred',hk)}
  console.log('final Q',JSON.stringify(await dupQ()));
  const E=[...H.errs,...G.errs].filter(e=>!/ResizeObserver/.test(e));ok(!E.length,'no page errors',E.slice(0,5));
