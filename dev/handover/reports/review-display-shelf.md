@@ -1,6 +1,6 @@
 PRIORITY #1 CHECK ('display-room|displayShelf|display-shelf'): OD 0 | ledger 0 | claims 6 | main 0 | review/* 1 (= review/display-shelf, this job). Shelf rulings read verbatim: OD L1670 (A), L1673, L1676 (plant care option 1), L1678 (d).
 
-# REVIEW display-shelf (BIG tier, opus reviewer) — PASS 8b7be006
+# REVIEW display-shelf (BIG tier, opus reviewer) — FINAL: PASS 60b0e3bf (r2 below; 8b7be006 superseded by owner OD L1682 (d) 19:50Z)
 
 Branch reviewed: review/display-shelf e0a86875 (builder #2). Reviewer branch: **review/display-shelf-r1 @ 8b7be00607867fb85045df76441c3bd0fe4335d9** = branch + origin/main 579e8976 (FF from current main) + reviewer fixes below. Foreman C-AG #5. START_CTX ≈ 4 % (1M window).
 
@@ -49,3 +49,15 @@ Branch reviewed: review/display-shelf e0a86875 (builder #2). Reviewer branch: **
 - When Foreman C's décor art lands: itemArt grade must equal BAL.shelf.it gr (shelf-check 11 guards the kit info; jact adRare will then see décor with grade ≥ 3 — dauthai/caithao/bpngubut/daminh are src "n" ngự ban: add a src/rank filter to adRare at that time, or the weekly rare item sells ngự-ban-only décor).
 - Expert ideas NOT built (Hoan Nghi hương taint, round-fan gossip) — parked as the worker said.
 - Worktrees: /home/user/wt/rv-ds (review/display-shelf-r1), shots none.
+
+## FINAL VERDICT r2 (after owner OD L1682 (d) overwrite ~19:50Z) — PASS 60b0e3bfa94401fa0a1240d50c9f0f881d763cee
+Branch **review/display-shelf-r2rv** (FF from origin/main c0a52168) = builder r3 0300361c (review/display-shelf) + origin/main c0a52168 + reviewer fixes. Builder r3 had been built on e0a86875, so ALL r1 fixes were missing; builder's parallel review/display-shelf-r2 63582624 (on 8b7be006) carried them but still had bug A below. Coordinator: land r2rv, not 63582624 / 0300361c.
+r3 delta vs owner (d) 19:50Z: no display block (imperial included) ✓; per-person taste (nết + trọng + once-per-life lean, BAL.shelf.taste) judges each viewer's eye ✓; even ngự ban can be "quá xa xỉ" to a frugal eye / Thái hậu ✓; inquiry judges by the rule (ngự ban back to chest; other over-rank piece confiscated + punish) ✓; same for NPC shelves ✓; no score in player text ✓.
+Reviewer fixes on r2rv:
+A. **BUG**: Thái hậu rebuke did `t.th=cl(th+thAff,0,100)` — Thái hậu favour runs −100…100, so a rebuke RAISED a negative favour to 0 (shelf-check caught it: th −20 → 0). Now `ap(t,{th,danh})` (the one stat path).
+B. shelf-check accuse step: the peer's random once-per-life taste made "Tố xa xỉ not open to a visitor who saw it" flaky → neutral eye stub in that step.
+C. typed .2 in shelfLvFor → BAL.shelf.taste.fMin.
+D. r1 fixes re-applied: imperial price 0; kit grade = BAL gr; her own "Ghé chơi"; co-op guest runs only her room (now also no Thái hậu rebuke on the guest); plant word cut in BAL; KIT REQUEST (5); shelf-check 11 (+ guest th count).
+E. Nội vụ phủ buying gate KEPT (builder #2's stated call: 19:50Z lifts only the display block).
+assemble: jshelf before jlooks (jlooks must stay last, main c975f067).
+Tests on r2rv: shelf-check PASS ×4 (85df9b08 ×3, 60b0e3bf); QUICKCHECK --cpu 4 PASS on 78d1972a / 85df9b08 / 9c6292d3 / 60b0e3bf (buổi new/live 758/736, 837/669, 686/699, 845/704 — spread is run noise, shelf cost ≈0); one-core-bind / text-rule / it-key PASS; agent_check 16/16, agemp 20/20, agmaid 23/23, coop-e2e 63/63 (on 7c7397b9; later commits only the th line + test + main merges).
