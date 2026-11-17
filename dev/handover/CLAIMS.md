@@ -555,3 +555,4 @@
 | WHOLE FIGURE REPAINT batch W5c maid-rest-A (successor of W5b session_011xDdVRUq5KAtiVYtgqEjkS, archived; opened by lead #6) | review/fig-cutout-clean | C | session_011xDdVPuKQaYeJ9rNmE133Y | RUNNING | 17/11 02:55Z |
 | npc-agent AG1 r1-fix #2 review (opus BIG) of d4796840 (review/npc-agent-r1 tip 55acd2d6) | review/npc-agent-r1 | C | session_011xDdVRyN4EWAMkVGeM4BB3 | RUNNING | 17/11 02:53Z |
 | tuanluc-sync (opus; OWNER BUG 03:18Z: week-book-only info never shown in play, Lối riêng unlock ×9, unclear lines; whole family of log() call sites) | review/tuanluc-sync | main s28 | session_01UV1Szh89kMUtnfZPTNysLY | RUNNING | 17/11 03:00Z |
+| newlife-reset (opus; OWNER BUG 03:22Z: healed-wound/veil line on a brand-new life → previous-life state leaks; whole-family per-life reset registry) | review/newlife-reset | main s28 | session_01UV1SzgyQP6eCJz2hmcnLrF | RUNNING | 17/11 03:01Z |
