@@ -1,5 +1,5 @@
 /* review/placeholder-pics (KIT §59): at one size — an old save (written by the old build) loads in the new build; the Hành sự deck renders,
-   every act card shows a picture (own or placeholder, data-kph); an event dialog with no own picture shows ph-event-*; no page errors,
+   every act card shows a picture (own or placeholder, data-kph); an event dialog with no own picture shows ph-l-*/ph-p-*/ph-w-*; no page errors,
    no horizontal overflow. usage: node dev/test/placeholder-pics.js <old build url> <new build url> <WxH@dpr> [shot.jpg] */
 const {chromium}=require('playwright');
 const [,,OLD,NEW,SIZE,SHOT]=process.argv;const sleep=t=>new Promise(r=>setTimeout(r,t));
@@ -21,16 +21,16 @@ const [,,OLD,NEW,SIZE,SHOT]=process.argv;const sleep=t=>new Promise(r=>setTimeou
  /* acts: a consort life (old save may be a maid), one act known to lack a picture put in the deck */
  const act=await p.evaluate(()=>{try{window.__forceOrigin="thd";SLOT=6;window.__nlInner=1;start();window.__nlInner=0;NLP=null;Q.length=0;document.getElementById('modal').hidden=true;tab="act";deal();
    const L=pool().concat(deck);const x=L.find(a=>a&&a.n&&kitActArt(a.n).ph);if(x&&!deck.some(a=>a.n===x.n))deck.unshift(Object.assign({},x,{done:false}));render();
-   const c=[...document.querySelectorAll('#panel button.ka.kcard[data-kph]')];return{name:x&&x.n,ph:c.length,img:c[0]&&!!c[0].querySelector(':scope>.kaart img[src*="ph-act-"]')}}catch(e){return{err:String(e).slice(0,200)}}});
+   const c=[...document.querySelectorAll('#panel button.ka.kcard[data-kph]')];return{name:x&&x.n,ph:c.length,img:c[0]&&!!c[0].querySelector(':scope>.kaart img[src*="/ph-"]')}}catch(e){return{err:String(e).slice(0,200)}}});
  await sleep(2500);
  const hz1=await p.evaluate(()=>document.documentElement.scrollWidth>innerWidth+1);
  if(SHOT){await p.evaluate(()=>{const c=document.querySelector('#panel button.ka.kcard[data-kph]');if(c)c.scrollIntoView({block:'center'})});await sleep(1200);await p.screenshot({path:SHOT.replace(/\.jpg$/,'-acts.jpg'),type:'jpeg',quality:55})}
  /* an event dialog with no own picture: first PEND builder that lands on a placeholder */
  const ev=await p.evaluate(()=>{let R=[];try{R=liveRivals(true)}catch(e){};const v=R[0];for(const id of Object.keys(PEND)){for(const pp of [{v:v&&v.id},{}]){let d=null;try{d=PEND[id](Object.assign({},pp))}catch(e){d=null}if(!d||!(d.o||d.t))continue;
     Q.length=0;document.getElementById('modal').hidden=true;try{pushDil(mkP(id,pp),id);showModal()}catch(e){continue}
-    const img=document.querySelector('#mb .ksart img[src*="ph-event-"]');if(img)return{id,src:img.getAttribute('src').split('/').pop()};break}}
+    const img=document.querySelector('#mb .ksart img[src*="/ph-"]');if(img)return{id,src:img.getAttribute('src').split('/').pop()};break}}
    /* no PEND dialog of this life lands on a placeholder: the E68 event known to have none (MISSING_PICS) */
-   Q.length=0;document.getElementById('modal').hidden=true;try{if(e68Test('flowerBloom')){const img=document.querySelector('#mb .ksart img[src*="ph-event-"]');if(img)return{id:'e68:flowerBloom',src:img.getAttribute('src').split('/').pop()}}}catch(e){}return null});
+   Q.length=0;document.getElementById('modal').hidden=true;try{if(e68Test('flowerBloom')){const img=document.querySelector('#mb .ksart img[src*="/ph-"]');if(img)return{id:'e68:flowerBloom',src:img.getAttribute('src').split('/').pop()}}}catch(e){}return null});
  await p.evaluate(()=>Promise.all([...document.querySelectorAll('img')].map(i=>i.complete?0:new Promise(r=>{i.onload=i.onerror=r;setTimeout(r,8000)}))));await sleep(800);
  const hz2=await p.evaluate(()=>document.documentElement.scrollWidth>innerWidth+1);
  if(SHOT)await p.screenshot({path:SHOT,type:'jpeg',quality:55});

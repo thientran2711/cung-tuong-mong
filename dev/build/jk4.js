@@ -107,6 +107,13 @@ html body .game#game.k3ph header.hud>#k3room:not([hidden]){grid-area:room}
  html:where(.kv1) body header.hud .k3tc .k3tt .k3r{white-space:nowrap;margin-right:0!important;max-width:100%;height:18px!important;line-height:18px!important;align-items:center}
  html:where(.kv1) body header.hud .k3tc .k3tt .k3wx img{width:16px!important;height:16px!important}
 
+/* .khd3 (ui-fixes-1): the narrow one-page bar — the time block on its own row, stats cells icon-only when their labels do not fit */
+html:where(.kv1) body .game#game header.hud.khd3{grid-template-columns:auto minmax(0,1fr)!important;grid-template-areas:"menu me" "tc tc" "stats stats"!important;grid-template-rows:auto auto auto!important;row-gap:2px!important}
+html:where(.kv1) body .game#game.k3ph header.hud.khd3:has(#k3room:not([hidden])){grid-template-columns:auto minmax(0,1fr)!important;grid-template-areas:"menu me" "room me" "tc tc" "stats stats"!important;grid-template-rows:auto minmax(0,1fr) auto auto!important}
+html:where(.kv1) body header.hud.khd3>#k3tc{justify-self:stretch!important;align-self:center!important;margin-right:0!important}
+html:where(.kv1) body header.hud.khd3 .k3tc .k3tt{justify-content:flex-start}
+html:where(.kv1) body header.hud.khd3s #kstrow .kstl{font-size:0!important;line-height:0!important;white-space:nowrap}
+html:where(.kv1) body header.hud.khd3s #kstrow .kstl .ic{font-size:0}
 html body .game#game header.hud.khd2{grid-template-columns:auto max-content minmax(0,1fr) minmax(0,max-content)!important;grid-template-areas:"menu me . tc" "menu me . room" "stats stats stats stats"!important;
  grid-template-rows:auto auto auto!important;row-gap:0!important}
 /* owner 16/11 (Q6): the room button also shows on wide / landscape: two-row bar (.khd2) = under the time block (area room); one-row bar = between the menu button and her name */
@@ -136,8 +143,15 @@ function kitHdClash(hd,tc){try{const me=hd.querySelector(":scope>.me");if(!me||!
  leaf(me,q=>{r=Math.max(r,q.right)});leaf(tc,q=>{l=Math.min(l,q.left)});return r>0&&l<1e9&&r+8>l}catch(e){return false}}
 /* one-row bar only from this width (1366 iPad Pro); 1000–1279 (iPad 1180, split views) = the two-row bar, always */
 const KHD1_MIN=1280;
+/* ui-fixes-1 (owner-found 17/11, shot 412x1058): on a page narrower than the design page (Fold cover, split view) the time block (Buổi / điểm trang / weather / quẻ) was squeezed to a sliver
+   beside her name block and ran under the TRÂN NỮ seal and off the screen. .khd3 = measured, not a width query: when the time block does not fit beside her block it takes its OWN ROW
+   under the name block (menu · me / time block full width / eight cells); .khd3s = the eight cells' labels do not fit either -> icon + number only (the title still names each cell). */
+function kitHd3(hd){try{hd.classList.remove("khd3","khd3s");const tc=document.getElementById("k3tc"),tt=document.getElementById("k3tt");
+ if(tc&&tt&&tc.offsetParent&&(tt.scrollWidth>tc.clientWidth+1||tc.clientWidth<70||kitHdClash(hd,tc)))hd.classList.add("khd3");
+ const row=document.getElementById("kstrow");if(row&&[...row.querySelectorAll(".kst")].some(c=>{const l=c.querySelector(".kstl");return l&&l.scrollWidth>c.clientWidth+1}))hd.classList.add("khd3s");
+ try{window.kitSealHud&&kitSealHud()}catch(e){}}catch(e){}}
 function kitHdFit(){try{const hd=document.querySelector("header.hud");if(!hd)return;kitHdMe(hd);const wide=kitView().pages===2;
- if(!wide){hd.classList.remove("khd2");kitTcFit(hd);return}const had=hd.classList.contains("khd2");
+ if(!wide){hd.classList.remove("khd2");kitHd3(hd);kitTcFit(hd);return}const had=hd.classList.contains("khd2");
  /* review/stage-side (owner 16/11 "nó không có giữ cố định một chỗ"): the bar form is FIXED per viewport, never re-decided by content
     (a dialog, a longer clothes / weather line). < KHD1_MIN px wide = always two rows; wider = one row, measured once per viewport size,
     and once it needed two rows it keeps them for that size (one-way latch = hysteresis: it never flips back on shorter text). */
@@ -155,7 +169,7 @@ window.kitHdFit=kitHdFit;
    the top bar — and so the page box under it — would be taller than the spread's. When a long day (state chips, a long weather or quẻ)
    still overflows, the whole block is scaled down together (zoom steps of 5 %, never below 80 %), like the tab bar's one font size. */
 function kitTcFit(hd){try{const tc=document.getElementById("k3tc"),me=hd.querySelector(":scope>.me");if(!tc||!me||!tc.offsetParent)return;
- tc.style.zoom="";const lim=me.offsetHeight+1;let z=1;while(tc.offsetHeight>lim&&z>.8){z=+(z-.05).toFixed(2);tc.style.zoom=String(z)}}catch(e){}}
+ tc.style.zoom="";if(hd.classList.contains("khd3"))return;const lim=me.offsetHeight+1;let z=1;while(tc.offsetHeight>lim&&z>.8){z=+(z-.05).toFixed(2);tc.style.zoom=String(z)}}catch(e){}}
 if(typeof renderHUD==="function"){const r0=renderHUD;renderHUD=function(){const r=r0.apply(this,arguments);if(!window.__rdep)kitHdFit();return r}}
 if(typeof render==="function"){const r1=render;render=function(){const r=r1.apply(this,arguments);kitHdFit();return r}}
 addEventListener("resize",()=>{clearTimeout(window.__khdf);window.__khdf=setTimeout(kitHdFit,40)});
@@ -516,7 +530,7 @@ function kitDpAll(){try{const o=kitDpOn();if(!o||!o.d.classList.contains("kdper"
  d.classList.remove("kdpall");const tiny=op.scrollHeight>op.clientHeight+2&&op.clientHeight<280;if(tiny){d.classList.add("kdpall");if(!d.__kdpTop){d.__kdpTop=1;mb.scrollTop=0}}mb.style.setProperty("--kdpmbh",mb.clientHeight+"px")}catch(e){}}
 window.kitDpAll=kitDpAll;
 function kitDpNat(d,mb,col){try{const cs=e=>getComputedStyle(e);const items=[...mb.querySelectorAll(":scope > *, :scope > .kpb > *")].filter(e=>e!==col&&e.offsetParent&&cs(e).display!=="contents"&&cs(e).gridColumnStart==="2");
- let sum=0;items.forEach(e=>{const c=cs(e);let h=e.offsetHeight;if(e.classList.contains("opts")){const K=[...e.children].filter(x=>x.offsetParent);if(K.length){const t=e.getBoundingClientRect().top;h=Math.max(...K.map(x=>x.getBoundingClientRect().bottom))-t+e.scrollTop+parseFloat(c.paddingBottom||0)}}
+ let sum=0;items.forEach(e=>{const c=cs(e);let h=e.offsetHeight;if(e.classList.contains("kpmain")&&e.scrollHeight>e.clientHeight+1)h=e.scrollHeight+(e.offsetHeight-e.clientHeight);/* KIT 32.7d: a scrolling text side counts its full text */if(e.classList.contains("opts")){const K=[...e.children].filter(x=>x.offsetParent);if(K.length){const t=e.getBoundingClientRect().top;h=Math.max(...K.map(x=>x.getBoundingClientRect().bottom))-t+e.scrollTop+parseFloat(c.paddingBottom||0)}}
   sum+=h+parseFloat(c.marginTop||0)+parseFloat(c.marginBottom||0)});
  const m=cs(mb);sum+=parseFloat(m.paddingTop||0)+parseFloat(m.paddingBottom||0)+(parseFloat(m.rowGap)||0)*Math.max(0,items.length-1);
  return d.offsetHeight-mb.offsetHeight+sum}catch(e){return d.scrollHeight}}
@@ -639,11 +653,28 @@ window.kitXHTML=kitXHTML;window.kitXAdd=kitXAdd;
    Used by: Ân oán cards (kitRel3), every person dialog (32.7 chips = `.kpsn.knr` at the column top, kitDpFit), the shop seller, person
    cards (Hậu cung / Cung nhân: `.pcl` name + rank moved above the portrait). The same look as the 32.7 chip's kitName (rank over name). */
 const KIT_TITLE_ONLY=/^(hoàng thượng|hoàng thái hậu|thái hậu|thánh thượng|hoàng đế|hoàng hậu)$/i;
-function kitNameRank(rank,name,col,me,small){const rt=rank?kitRankTone(rank,col):"";if(me==null)me=kitIsMyName(name);
+/* KIT 48.5 (owner 17/11 ~16:20Z, kit-rank-name): the rank is never printed twice. kitDedupRank(rank,name) drops the rank / title words a plain-text name already starts with
+   ("Hoàng hậu Lý Ngưng Sương" under the rank "Hoàng hậu" → "Lý Ngưng Sương"). Single-word ranks that are also surnames (Tần, Phi) are only dropped through kitTitledName's title-word list. */
+function kitDedupRank(rank,name){try{const r=String(rank||"").replace(/<[^>]*>/g,"").trim(),n=String(name==null?"":name);if(!r||!n||/</.test(n))return n;let m=typeof kitTitledName==="function"?kitTitledName(r,n):n;
+ if(m===n&&/\s/.test(r)&&n.toLowerCase().startsWith(r.toLowerCase()+" "))m=n.slice(r.length+1).trim();return m||n}catch(e){return name}}
+window.kitDedupRank=kitDedupRank;
+function kitNameRank(rank,name,col,me,small){const rt=rank?kitRankTone(rank,col):"";if(me==null)me=kitIsMyName(name);if(rank)name=kitDedupRank(rank,name);
  /* KIT 48.1i (owner 11/16 15:00Z 2.4): a person whose NAME is the title (Hoàng thượng, Thái hậu) is painted as a rank title (imperial gold), never black ink */
  if(!rank&&name&&KIT_TITLE_ONLY.test(String(name).replace(/<[^>]*>/g,"").trim()))return `<div class="knr${small?" knr-s":""}" style="--rc:${col||"#7a5530"}"><b class="knr-r krt knr-only" style="--rt:${kitRankTone(name,col)}">${name}</b></div>`;
  return `<div class="knr${small?" knr-s":""}" style="--rc:${col||"#7a5530"}">${rank?`<small class="knr-r krt" style="--rt:${rt}">${rank}</small>`:""}<b class="knr-n krn${me?" kmy":""}">${name||""}</b></div>`}
 window.kitNameRank=kitNameRank;
+/* KIT 48.6 · kitRankName(who, o) — THE ONE rank + name entry (owner 17/11 ~16:20Z: "hai cái kiểu hiện"). EXACTLY TWO FORMS:
+   STACKED (default): [title plate /] rank / name, top to bottom = kitNameRank (+ kitTitlePlate when she wears a title) — every avatar, portrait frame caption, figure-foot label, person card header, dialog column tag.
+   ONE LINE (o.form:"line"): "rank name" = kitName(p) — ONLY result lines, logs, toasts, Tuần lục / week book prose.
+   who = a person object, or o.parts = {rank,name,col,me,title} for pieces that are not a person yet. Never prints the rank twice (kitDedupRank). Scan: dev/measure/rank-name-scan.js. */
+function kitRankName(who,o){o=o||{};const line=o.form==="line";
+ if(line){if(o.parts){const q=o.parts;return `<b class="kname krl">${q.rank?`<span class="kti" style="--rt:${kitRankTone(q.rank,q.col)}">${q.rank}</span> `:""}${kitDedupRank(q.rank,q.name)}</b>`}return kitName(who,Object.assign({cap:true},o))}
+ let rank="",name="",col=o.col,me=o.me,tp="";
+ if(o.parts){rank=o.parts.rank||"";name=o.parts.name||"";col=col||o.parts.col;if(me==null)me=o.parts.me;tp=o.parts.title||""}
+ else if(who){const rn=typeof kszRankName==="function"?kszRankName(who):[kitTitleOf(who),who.name||""];rank=rn[0];name=rn[1];if(!col)try{col=kitPersonCol(who)}catch(e){}if(me==null&&typeof S!=="undefined")me=who===S;
+  try{if(typeof kitTitleWorn==="function"&&typeof kitTitlePlate==="function"){const w=kitTitleWorn(who);if(w)tp=kitTitlePlate(w,{cls:"kdh-cap"})}}catch(e){}}
+ const st=kitNameRank(rank,name,col,me,o.small);return tp?`<div class="kt3">${tp}${st}</div>`:st}
+window.kitRankName=kitRankName;
 /* ================= KIT 48.1 · RANK TITLE (owner, ref. shot "a title floating above the character's name") ==========
    The rank / role line above every name is a TITLE: serif (var(--display)), bold, in the rank's OWN colour = the colour family of that rank's
    portrait frame, VIVID (≥ 4.4:1 on paper). Owner 15/11 22:25Z: glow + thin dark outline ONLY on a painting (stage tags over the scene,
@@ -744,7 +775,7 @@ html body .stage .tok .tag .j59n.kmy,html body .stage #j59metag .tag .j59n.kmy,h
 .knr>.knr-n{font-size:.98rem;color:color-mix(in srgb,var(--rc,#7a5530) 45%,#2a1a12);overflow-wrap:anywhere}
 /* person cards (j15 pcard + jk2b layout): the same order — rank line, name, THEN the portrait. Narrow card: the name block is a full row
    above the portrait and the bars (was beside the portrait); wide card: rank above the name, both above the portrait. */
-.pc.kpnar[data-k2]>.pcl{grid-template-areas:"nm nm" "por bars" "por fx"!important;grid-template-rows:auto auto 1fr!important}
+.pc.kpnar[data-k2]>.pcl{grid-template-areas:"nm nm" "por bars" "por fx" "key key"!important;grid-template-rows:auto auto 1fr auto!important}
 .pc.kpnar[data-k2]>.pcl>.kpnm{display:flex!important;flex-direction:column!important;align-items:flex-start!important;gap:0!important;margin:0 0 4px}
 .pc.kpnar[data-k2]>.pcl>.kpnm>.pcrk{order:-1}
 html body .pc.kpwide[data-k2]>.pcl>.pcrk{order:-4!important;margin:0!important}
@@ -762,6 +793,11 @@ html body #modal .dlg.kdper>#mb>.kdlgart.kdpban>.ksart{width:100%!important;heig
 html body #modal .dlg.kdper>#mb>.kdlgart.kdpban>.ksart img{width:100%!important;height:100%!important;object-fit:cover!important}
 #modal .dlg.kdper.kdpbanner>#mb>.kpb>.kpmain,#modal .dlg.kdper.kdpbanner>#mb>.kdpr:not(.kdlgart){grid-column:2}
 html body #modal .dlg.kdper>#mb>.opts.kdpo2,html body #modal .dlg.kdper>#mb>.opts.kdpo2.k3grid{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;align-content:start;gap:8px}
+/* KIT 32.7d (owner 15/11 end card "Kiếp này", D36; kit-keeper-1): a 32.7 dialog with NO option list (end card, Đã rõ cards) — the TEXT side scrolls by
+   itself and the person column keeps the dialog's visible height, so the whole figure is always in view (844x390 included). Never a sticky hack. */
+#modal .dlg.kdper:not(.kdnarrow)>#mb:not(:has(>.opts)){grid-template-rows:minmax(0,1fr)!important;grid-auto-rows:max-content}
+#modal .dlg.kdper.kdpbanner:not(.kdnarrow)>#mb:not(:has(>.opts)){grid-template-rows:max-content minmax(0,1fr)!important}
+#modal .dlg.kdper:not(.kdnarrow)>#mb:not(:has(>.opts))>.kpb>.kpmain{min-height:0;overflow-y:auto;overscroll-behavior:contain;align-self:stretch}
 /* 50.1: a kdpo2 group is all short by KIT 50 (≤ 2 rows): no 32.9 "long" full-width cell / reorder inside it; the natural height is measured
    from the right column's own parts (kitDpNat: banner + text + the options' content), so the dialog fits its options instead of scrolling them */
 html body #modal .dlg.kdper>#mb>.opts.kdpo2.kdpo2>button.ka.k3long,html body #modal .dlg.kdper>#mb>.opts.kdpo2.kdpo2>button.ka.k3odd{grid-column:auto!important;order:0!important}
@@ -957,7 +993,7 @@ function kitCompactCSS(B,w,h){w=w||84;h=h||w;return `
  ${B} .klead{display:-webkit-box!important;-webkit-box-orient:vertical!important;-webkit-line-clamp:1!important;overflow:hidden!important}
  /* KIT §51 (kit-table r6): the Cần/Tốn/Được rows stay ONE kit table (j63 .kb grid, rows display:contents) so every value starts at the
     same x; only the value cell flows its chips. (Was a flex chip flow: short values sat beside the label, long ones under it.) */
- ${B} small.kb{display:grid!important;grid-template-columns:fit-content(var(--kt-lab,max(34%,7rem))) minmax(0,1fr)!important;column-gap:6px!important;row-gap:2px!important}
+ ${B} small.kb{display:grid!important;grid-template-columns:fit-content(4.3rem) minmax(0,1fr)!important;column-gap:6px!important;row-gap:2px!important}
  ${B} small.kb>.kr>.krl{font-size:.66rem!important;align-self:baseline}
  ${B} small.kb>.kr>.krv{display:flex!important;flex-wrap:wrap!important;gap:2px 4px!important;min-width:0!important}
  ${B} small.kb>.kr>.krv>*{display:inline-block!important;white-space:normal!important;max-width:100%!important;overflow-wrap:anywhere}

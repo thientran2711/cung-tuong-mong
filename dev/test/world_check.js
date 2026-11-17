@@ -11,7 +11,7 @@ const {chromium}=require('playwright');const [,,U0]=process.argv;const URL=/^(ht
 const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+m+(x!==undefined?' '+JSON.stringify(x):''))};
 (async()=>{const b=await chromium.launch();const p=await b.newPage({viewport:{width:1180,height:820}});const errs=[];p.on('pageerror',e=>errs.push(e.message));
  await p.goto(URL,{waitUntil:'domcontentloaded'});await p.waitForTimeout(2500);
- const fresh=()=>p.evaluate(()=>{localStorage.clear();SLOT=4;document.getElementById('title').hidden=true;window.__nlInner=1;start();window.__nlInner=0;window.__bot=1;quiet=true;Q.length=0;try{deal()}catch(e){}
+ const fresh=()=>p.evaluate(()=>{for(let i=0;i<12;i++){localStorage.clear();SLOT=4;document.getElementById('title').hidden=true;window.__nlInner=1;start();window.__nlInner=0;if(!(typeof isSrv==='function'&&isSrv())&&!S.out)break}/* a consort life (a maid start has no consort options; same loop as world_check2) */window.__bot=1;quiet=true;Q.length=0;try{deal()}catch(e){}
   for(const v of rivals)v.preg=0;S.preg=0;S.sung=Math.max(S.sung,60);return 1});
  const step=()=>p.evaluate(()=>{Q.length=0;S.mg=0;const t=wk();endTurn();Q.length=0;return wk()!==t});
  await fresh();

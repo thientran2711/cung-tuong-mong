@@ -54,8 +54,8 @@ const freePort=()=>new Promise(r=>{const s=net.createServer();s.listen(0,'127.0.
  await shot(A,'2-code-from-slots');
  await A.click('#modal .kit-x');await A.waitForSelector('#modal #slots .cloudmini',{timeout:10000});await idle(A);await A.waitForTimeout(400);
  m=await mini(A);
- ok(m&&/Khớp với mây/.test(m.t)&&/••••-••/.test(m.t)&&!m.t.includes(c1.k)&&!m.t.includes(c1.k.slice(0,4))&&/đồng bộ lúc/.test(m.t)&&m.btn.includes('now'),'A: back on Chọn sổ: linked state, ám hiệu masked, last sync time, Đồng bộ ngay',m);
- ok(await A.evaluate(()=>/Đồng bộ ngay/.test(document.querySelector('#modal #slots .cloudmini').innerText)),'A: button word "Đồng bộ ngay"');
+ ok(m&&/Khớp với mây/.test(m.t)&&/••••-••/.test(m.t)&&!m.t.includes(c1.k)&&!m.t.includes(c1.k.slice(0,4))&&/khớp lúc/.test(m.t)&&m.btn.includes('now'),'A: back on Chọn sổ: linked state, ám hiệu masked, last sync time, Khớp sổ ngay',m);
+ ok(await A.evaluate(()=>/Khớp sổ ngay/.test(document.querySelector('#modal #slots .cloudmini').innerText)),'A: button word "Khớp sổ ngay"');
  await shot(A,'3-slots-on');
  /* B: Nối sổ from the card */
  await newLife(B,2);const b2=await slot(B,2);await toSlots(B);
@@ -64,7 +64,7 @@ const freePort=()=>new Promise(r=>{const s=net.createServer();s.listen(0,'127.0.
  await B.waitForFunction(()=>CTM_CLOUD.state.rev>=2,null,{timeout:20000});await B.waitForSelector('#modal #slots .cloudmini',{timeout:10000});await idle(B);await B.waitForTimeout(500);
  const bs1=await slot(B,1);ok(bs1&&bs1.name===life.name,'B: Nối sổ from the card brought Sổ 1',{bs1});ok((await slot(B,2)).h===b2.h,'B: its own Sổ 2 kept');
  m=await mini(B);ok(m&&/Khớp với mây/.test(m.t)&&m.btn.includes('now'),'B: card now linked after returning to Chọn sổ',m);
- /* sync from the panel: B plays one buổi in Sổ 1, then A: Đồng bộ ngay */
+ /* sync from the panel: B plays one buổi in Sổ 1, then A: Khớp sổ ngay */
  await B.evaluate(()=>{$("title").hidden=false;showTitle();document.querySelector('#slots [data-load="1"]').click()});
  const bu=await buoi(B);await B.waitForFunction(()=>CTM_CLOUD.state.rev>=3,null,{timeout:20000}).catch(()=>{});
  const bAfter=await slot(B,1);
@@ -72,10 +72,10 @@ const freePort=()=>new Promise(r=>{const s=net.createServer();s.listen(0,'127.0.
  await A.evaluate(()=>{CTM_CLOUD.state.at=1});  // force old time to see the card refresh
  await A.click('#modal #slots .cloudmini [data-cl="now"]');
  await A.waitForFunction(h=>CTM_CLOUD.hash(localStorage.getItem(SK(1)))===h,bAfter.h,{timeout:20000}).catch(()=>{});
- const a1=await slot(A,1);ok(a1.b===bAfter.b&&a1.b!==a0.b||a1.h===bAfter.h,'A: Đồng bộ ngay from Chọn sổ pulled the buổi B played',{bu,a0:a0.b,a1:a1.b,b:bAfter.b});
+ const a1=await slot(A,1);ok(a1.b===bAfter.b&&a1.b!==a0.b||a1.h===bAfter.h,'A: Khớp sổ ngay from Chọn sổ pulled the buổi B played',{bu,a0:a0.b,a1:a1.b,b:bAfter.b});
  await A.waitForTimeout(500);m=await mini(A);ok(m&&/Khớp với mây/.test(m.t)&&!/Đang gửi/.test(m.t),'A: card refreshed in place after the sync',m);
  /* old time shown? card must show a real time, not 1/1 1970 */
- ok(/đồng bộ lúc/.test(m.t)&&!/ngày 1\/1\b/.test(m.t),'card shows the real last sync time (a pull counts, not only a send)',m.t);
+ ok(/khớp lúc/.test(m.t)&&!/ngày 1\/1\b/.test(m.t),'card shows the real last sync time (a pull counts, not only a send)',m.t);
  /* unlink from the card flow: Ám hiệu sổ → Thôi nối */
  await A.click('#modal #slots .cloudmini [data-cl="code"]');await A.waitForSelector('#modal.kcloud #cl-key');
  const hasUn=await A.$('#modal [data-cl="unlink"]');ok(!!hasUn,'A: Ám hiệu sổ panel opened from the card has "Thôi nối"');
