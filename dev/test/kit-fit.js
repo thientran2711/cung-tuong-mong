@@ -59,7 +59,7 @@ const MEAS=`(()=>{const M=document.getElementById('modal');let d;const vis=e=>e&
    await p.evaluate(()=>Promise.all([...document.querySelectorAll('#modal img')].map(i=>i.complete?0:new Promise(r=>{i.onload=i.onerror=r;setTimeout(r,15000)}))));await sleep(1800);
    const r=await p.evaluate(MEAS);r.k=k;if(process.env.DBG){const g=await p.evaluate(()=>{const a=kitFrameGaps();const c=document.querySelector('#mb .kpsubj.kes');const h=c&&c.clientHeight;const cls=document.querySelector('#modal .dlg').className;kitDpFit();return{a,h,cls,b:kitFrameGaps(),h2:c&&c.clientHeight,mb:document.getElementById('mb').clientHeight}});console.log('DBG',k,JSON.stringify(g))}
    const v=[];if(r.gapTop!=null&&r.full){if(Math.abs(r.gapTop-r.gapBot)>2)v.push(`gaps ${r.gapTop}/${r.gapBot} unequal`);if(Math.min(r.gapTop,r.gapBot)<14)v.push(`gap < 14`)}
-   (r.opts||[]).forEach(o=>{if(o.empty>2&&!o.atMin)v.push(`opt "${o.t}" empty ${o.empty}px (${o.form} ${o.pic}, text ${o.text})`)});r.viol=v;bad+=v.length;rows.push(r);
+   (r.opts||[]).forEach(o=>{if(o.empty>2&&!o.atMin)v.push(`opt "${o.t}" empty ${o.empty}px (${o.form} ${o.pic}, text ${o.text})`)});{const pz=new Set((r.opts||[]).map(o=>o.pic));if(pz.size>1)v.push('UNEQUAL option pictures: '+[...pz].join(' / '));r.unequal=pz.size>1?1:0}r.viol=v;bad+=v.length;rows.push(r);
    if(SHOTS==='all'||(SHOTS||'').split(',').includes(k))await p.screenshot({path:`${OUT}/${TAG}-${k}-${sz}.jpg`,type:'jpeg',quality:70});
    await p.evaluate(()=>{Q.length=0;const md=document.getElementById('modal');md.hidden=true;try{kitCoachOff();kitTipOff()}catch(e){}});}
   ALL.push({sz,rows,errs});await ctx.close()}

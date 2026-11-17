@@ -982,16 +982,20 @@ const KIT_OPT_FIT_SEL="button.ka.kart";
 let KIT_OPT_DPQ=0;/* a card that changed height inside a person dialog → the dialog (content height, 32.7c) and its figure (32.2b gaps) are laid out again */
 function kitOptFitDone(b,h0){try{if(Math.abs(b.offsetHeight-h0)>1&&b.closest("#modal .dlg.kdper")&&!KIT_OPT_DPQ){KIT_OPT_DPQ=requestAnimationFrame(()=>{KIT_OPT_DPQ=0;try{kitDpFit()}catch(e){}})}}catch(e){}}
 function kitOptFit(b){const h0=b&&b.offsetHeight||0;kitOptFit0(b);if(b)kitOptFitDone(b,h0)}
-function kitOptFit0(b){try{if(!b||!b.isConnected)return;const art=b.querySelector(":scope > .kaart"),body=b.querySelector(":scope > .kabody");if(!art||!body)return;
- const set=s=>{if(s){b.style.setProperty("--kah",s+"px","important");b.style.setProperty("--kaw",s+"px","important");["flex-basis","width","height"].forEach(k=>art.style.setProperty(k,s+"px","important"));b.classList.add("kasq")}
-  else{b.style.removeProperty("--kah");b.style.removeProperty("--kaw");["flex-basis","width","height"].forEach(k=>art.style.removeProperty(k));b.classList.remove("kasq")}};
- set(0);if(getComputedStyle(art).display==="none"||getComputedStyle(b).flexDirection!=="row"){b.dataset.kapic="";return}
- const a=art.getBoundingClientRect();if(a.width<24||a.width>112||a.height<a.width*1.15){b.dataset.kapic="";return}/* not the compact tall form (the big Hành sự card keeps its own) */
- const w=a.width,h=a.height,lo=Math.round(w*KIT_OPT_SQ.min);let bh=body.getBoundingClientRect().height;
- if(bh>=h-2){b.dataset.kapic="tall";b.__kof=b.clientWidth+"x"+Math.round(bh);return}
- let s=Math.round(Math.max(lo,Math.min(w,bh)));set(s);
- for(let i=0;i<2;i++){bh=body.getBoundingClientRect().height;const s2=Math.round(Math.max(lo,Math.min(w,bh)));if(s2===s)break;s=s2;set(s)}
- b.dataset.kapic="sq";b.__kof=b.clientWidth+"x"+Math.round(body.getBoundingClientRect().height)}catch(e){console.error("kitOptFit",e)}}
+function kitOptGroup(b){const r=b.closest("#modal .dlg")||b.parentElement||document;return [...r.querySelectorAll(KIT_OPT_FIT_SEL)].filter(x=>x.querySelector(":scope > .kaart")&&x.querySelector(":scope > .kabody"))}
+function kitOptSet(x,s){const art=x.querySelector(":scope > .kaart");if(!art)return;if(s){x.style.setProperty("--kah",s+"px","important");x.style.setProperty("--kaw",s+"px","important");["flex-basis","width","height"].forEach(k=>art.style.setProperty(k,s+"px","important"));x.classList.add("kasq")}
+ else{x.style.removeProperty("--kah");x.style.removeProperty("--kaw");["flex-basis","width","height"].forEach(k=>art.style.removeProperty(k));x.classList.remove("kasq")}}
+/* ONE PICTURE SIZE PER GROUP (owner 17/11 "nút to nút nhỏ", §6.2b): every option card of one dialog (or one sibling list) gets the SAME picture size.
+   The size is the one the SHORTEST card text allows (no empty space under any text-shortest card); all tall when every text fills the tall picture. */
+function kitOptFit0(b){try{if(!b||!b.isConnected)return;const G=kitOptGroup(b);if(!G.includes(b))G.push(b);G.forEach(x=>kitOptSet(x,0));
+ const E=[];let w=0,h=0;G.forEach(x=>{const art=x.querySelector(":scope > .kaart");x.dataset.kapic="";if(!x.isConnected||getComputedStyle(art).display==="none"||getComputedStyle(x).flexDirection!=="row")return;
+  const a=art.getBoundingClientRect();if(a.width<24||a.width>112||a.height<a.width*1.15)return;E.push(x);w=Math.max(w,a.width);h=Math.max(h,a.height)});
+ if(!E.length)return;const lo=Math.round(w*KIT_OPT_SQ.min),bhs=()=>E.map(x=>x.querySelector(":scope > .kabody").getBoundingClientRect().height);
+ const done=(f)=>E.forEach(x=>{x.dataset.kapic=f;x.__kof=x.clientWidth+"x"+Math.round(x.querySelector(":scope > .kabody").getBoundingClientRect().height)});
+ let m=Math.min(...bhs());if(m>=h-2){done("tall");return}
+ let s=Math.round(Math.max(lo,Math.min(w,m)));E.forEach(x=>kitOptSet(x,s));
+ for(let i=0;i<3;i++){m=Math.min(...bhs());const s2=Math.round(Math.max(lo,Math.min(w,m)));if(s2===s)break;s=s2;E.forEach(x=>kitOptSet(x,s))}
+ done("sq")}catch(e){console.error("kitOptFit",e)}}
 let KIT_OPT_RO=null;
 function kitOptFitAll(root){try{root=root&&root.querySelectorAll?root:document;const B=[...root.querySelectorAll(KIT_OPT_FIT_SEL)].filter(b=>b.querySelector(":scope > .kaart")&&b.querySelector(":scope > .kabody"));
  if(!KIT_OPT_RO&&typeof ResizeObserver==="function")KIT_OPT_RO=new ResizeObserver(E=>{const seen=new Set();E.forEach(e=>{const b=e.target.closest(KIT_OPT_FIT_SEL);if(!b||seen.has(b))return;seen.add(b);
