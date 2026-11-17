@@ -80,7 +80,7 @@ function rebase(K){const T=new Set((rivals||[]).filter(v=>v&&!v.coop));
  /* re-made on real people */
  if(s.foe&&!rivals.some(v=>v&&!v.coop&&v.name===s.foe)){const v=pick(liveRivals(false).filter(x=>!x.coop));if(v){s.foe=v.name;TB.stat.foe++}}
  if(s.ally){const L=(s.logs||[]);for(let i=L.length-1;i>=0;i--)if(/là người quen cũ, sẵn lòng che chở ngươi/.test(String(L[i]&&L[i].t||L[i])))L.splice(i,1);
-  if(allyBond(liveRivals(false).filter(x=>!x.coop)))TB.stat.ally++}/* ONE CORE: j2 allyBond (BAL.allyRel) */
+  if(allyBond(liveRivals(false).filter(x=>!x.coop)))TB.stat.ally++}/* ONE CORE: j2 allyBond (BAL.eff.j2.start) */
  if(wasSrv&&typeof srvInit==="function"){const L=X.pullFriend();try{srvInit()}finally{X.pushFriend(L)}TB.stat.mistress++}
  if(!s.srv){s.place="home";s.visit={k:"home",people:homePeople(),talked:false}}}
 function npcs(){return (rivals||[]).filter(v=>v&&!v.coop)}

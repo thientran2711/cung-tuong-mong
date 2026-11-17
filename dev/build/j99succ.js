@@ -139,7 +139,7 @@ function succCH(){const E=S.succ,son=succSon(),sn=succSN(son),foe=E.foe!=null?ri
       {n:"Tự thân ra trận đốc chiến",c:{suc:-25},e:{tam:2,q:1,an:1},txt:"Ngươi tự thân ra cổng thành đốc chiến."}]},
   {t:"Đêm Nguyên tiêu",h:`<p>Đêm Nguyên tiêu, một thích khách lẻn vào giữa đám đèn hoa, bị cấm quân bắt ngay trước kiệu ngươi. Hôm sau, triều thần dâng sớ: “Xin bệ hạ trả ngôi cho chính thống.”</p>`,
    o:[{n:`Nhường ngôi cho ${sn}, lui về làm Thái thượng hoàng`,e:{hoa:2},txt:`Ngươi nhường ngôi cho ${sn}.`,end:"c_abd"},
-      {n:"Giữ ngôi đến cuối đời",e:{q:1},txt:"Ngươi giữ ngôi.",end:()=>E.an>=5?"c_bad":E.q>=6?"c_ok":"c_abd"},
+      {n:"Giữ ngôi đến cuối đời",e:{q:1},txt:"Ngươi giữ ngôi.",end:()=>E.an>=BAL.cut.succEnd.an?"c_bad":E.q>=BAL.cut.succEnd.q?"c_ok":"c_abd"},
       {n:"✦ Dặn lập bia không chữ",rare:1,c:{suc:-5},txt:"Ngươi dặn lập bia không chữ.",end:"c_rare"}]}];
  const L=E.p==="a"?A:E.p==="b"?B:C;return L[Math.min(E.ch||0,2)]}
 /* the words of an epilogue choice (no numbers): from its hidden meters; risk (nguy up, mẫu tử down) goes to Kèm */

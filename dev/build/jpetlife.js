@@ -17,7 +17,7 @@
       petLose, src "th") — that rule stays for neglect / harm / theft only. A Ngự tứ pet that dies takes its ĐỠ MỘT MẠNG with it; NO compensation
       (owner 16/11 18:50Z, verbatim scope).
    5. Co-op: her own pets roll locally; NPC pets roll and die on the host only (jmort convention), the guest mirrors the host's state. */
-Object.assign(BAL.pet,{life:{on:1,wY:36,floorW:4,oldDecay:1.4,careOk:70,careAff:50,careP:25,careLapse:40,giaArt:0,
+Object.assign(BAL.pet,{life:{on:1,wY:36,floorW:4,oldDecay:1.4,careOk:70,careLow:30,careAff:50,careP:25,careLapse:40,giaArt:0,
  /* years: mean / sd / lo / hi of the bell curve; old = age the pet turns Già; careMax = most years care can add (hard ceiling) */
  dice:{thu:{mean:12,sd:3,lo:6,hi:20,old:9,careMax:1},chim:{mean:15,sd:4,lo:7,hi:25,old:11,careMax:1},ca:{mean:18,sd:5,lo:8,hi:30,old:13,careMax:1},
   hac:{mean:30,sd:7,lo:18,hi:45,old:22,careMax:2},linh:{mean:28,sd:7,lo:15,hi:45,old:21,careMax:2},than:{mean:40,sd:10,lo:22,hi:70,old:30,careMax:3}},
