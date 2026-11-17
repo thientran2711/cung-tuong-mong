@@ -57,7 +57,7 @@ const DS_SPYX=" · thấy y phục nàng (Xa xỉ, vượt phẩm)";
 function dsSpyX(A){return Array.isArray(A)?A.map(o=>o&&o.n==="Sai đi dò la"&&o.x&&o.x.indexOf(DS_SPYX)<0?Object.assign({},o,{x:o.x+DS_SPYX}):o):A}
 (function(){if(typeof talkOpts==="function"){const t0=talkOpts;talkOpts=function(p){const A=t0.apply(this,arguments);try{return p&&p.kind==="maid"?dsSpyX(A):A}catch(e){return A}}}
  if(typeof hsvActs==="function"){const h0=hsvActs;hsvActs=function(){return dsSpyX(h0.apply(this,arguments))}}
- if(typeof spyPick==="function"){const k0=spyPick;spyPick=function(){const r=k0.apply(this,arguments);try{const q=Q[Q.length-1];if(q&&q.opts)for(const o of q.opts)if(o.kgt&&o.x)o.x=o.x.replace("chứng cứ +1 ·","chứng cứ +1, thấy y phục nàng ·")}catch(e){}return r}}})();
+ if(typeof spyPick==="function"){const k0=spyPick;spyPick=function(){const r=k0.apply(this,arguments);try{const q=Q[Q.length-1];if(q&&q.opts)for(const o of q.opts)if(o.kgt&&o.x)o.x=o.x.replace(/chứng cứ ([+\-]\d+) ·/,"chứng cứ $1, thấy y phục nàng ·")}catch(e){}return r}}})();
 
 /* ---------- Tố vượt phẩm: the visible jewellery rule becomes a cause once seen, and the inquiry judges it ---------- */
 (function(){if(typeof wdCause!=="function")return;const c0=wdCause;wdCause=function(obs,t){const c=c0.apply(this,arguments);if(c)return c;

@@ -10,7 +10,7 @@
 (function(){
 const T=s=>String(s==null?"":s).replace(/<[^>]+>/g,"").replace(/\s+/g," ").trim();
 /* ---------- 3. relation words ---------- */
-window.quyW=function(v){return v<=-30?"Ghét":v<-10?"Không ưa":v<=10?"Bình thường":v<30?"Có cảm tình":v<60?"Quý mến":"Thân thiết"};
+window.quyW=function(v){return ["Ghét","Không ưa","Bình thường","Có cảm tình","Quý mến","Thân thiết"][quyIx(v)]};/* cuts: BAL.quyLv (VANPHONG:69) */
 const sg=n=>(n>0?"+":"")+Math.round(n);
 try{Object.assign(KIT_GLOSS,{
  "Quý":"Người này quý người kia bao nhiêu (từ -100 đến 100; âm là không ưa, ghét). Cao thì giúp đỡ, che chở; thấp thì gây khó dễ.",
@@ -36,7 +36,7 @@ window.kitPosBar=pbar;
    oán word ladder (oanW: BAL.oanLv thresholds, words in VANPHONG). kind "pos" = another 0..max value (sủng, ân tình), optional word. */
 const KIT_REL={in:"#7a4fa0",out:"#3f62a8",x:"#6a5040"};window.KIT_REL=KIT_REL;
 const OANW=["Không oán","Chút oán","Oán","Oán sâu","Oán hận"];
-window.oanW=function(v){const L=(typeof BAL==="object"&&BAL.oanLv)||[5,20,45,75];let i=0;while(i<L.length&&(+v||0)>=L[i])i++;return OANW[i]};
+window.oanW=function(v){const L=BAL.oanLv;let i=0;while(i<L.length&&(+v||0)>=L[i])i++;return OANW[i]};
 /* kitRelRow (bars, mixed rows) is retired: every relation is drawn by kitRel2 (jkrel.js, KIT §52) */
 /* who "nàng" is, in words: the Empress by title, others "nàng" */
 const subjOf=v=>v&&v.queen?"Hoàng hậu":"Nàng";

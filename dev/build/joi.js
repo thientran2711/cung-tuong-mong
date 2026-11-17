@@ -168,7 +168,7 @@ function oiPut(c,why){if(!c||!why||c.oiWhy)return;c.oiWhy=1;const h=String(c.h||
   oiPut(Q.find(m=>/^Nhập cung/.test(m.t||"")),X.why);log(`Vì sao: ${X.why}.`)}}catch(e){console.error("oiWhy home",e)}return r}})();
 /* tiểu thư: Điện tuyển (jkc kcDien) → kcEnter ("Nhập cung") or the returned tablet (kcTraveD) */
 (function(){if(typeof kcDien!=="function")return;const d0=kcDien;kcDien=function(way){const T=S&&S.kc&&S.kc.tt;const raw=T?T.raw:5;const r=d0.apply(this,arguments);
- try{if(S.oiV&&T&&!T.why){const C=KC.cut;const sc=T.sc;const tier=S.kc.inPal?(S.kc.r>=2?2:S.kc.r>=1?1:0):-1;
+ try{if(S.oiV&&T&&!T.why){const C=KC.cut;const sc=T.sc;const tier=S.kc.inPal?Math.max(0,+S.kc.r||0):-1;/* S.kc.r = the entry tier kcEnter got (0..2, jkc kcDien) */
   T.why=oiWhy(oiPartsKc(raw,way),tier<0?0:tier,"consort",oiArtN(T.art),way);T.whyT=tier;if(tier>=0){oiPut(Q.find(m=>/^Nhập cung/.test(m.t||"")&&!m.oiWhy),T.why)}log(`Vì sao: ${T.why}.`)}}catch(e){console.error("oiWhy kc",e)}return r}})();
 (function(){if(typeof kcTraveD!=="function")return;const t0=kcTraveD;kcTraveD=function(){const d=t0.apply(this,arguments);
  try{const T=S&&S.kc&&S.kc.tt;if(d&&S.oiV&&T&&T.why&&T.whyT<0)d.t=String(d.t||"")+oiRow(T.why)}catch(e){}return d}})();

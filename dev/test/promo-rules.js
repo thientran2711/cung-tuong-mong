@@ -28,7 +28,8 @@ const clearOv=p=>p.evaluate(()=>{document.querySelectorAll('.kmov').forEach(e=>e
    ok(g.after===g.rk&&g.grace===g.to&&g.elig&&g.w1!=null&&g.card,'daughter birth → exam at once, conditions waived (window + card)',g.t.slice(0,140)+' | '+JSON.stringify(g.row));
    await clearOv(p);
    /* 3. promotion: set + chest + servant reveal */
-   const r=await p.evaluate(async()=>{const rk=S.rank,n0=S.inv.length,st0=S.staff.length;const cap0=capOf(S);KFX.rewards=0;window.__prRev=0;
+   const r=await p.evaluate(async()=>{/* review/staff-root: the ONE table rises gently (some steps flat): promote across a step that adds a servant */const C=BAL.promo.cap,sum=x=>x[0]+x[1];S.rank=[0,1,2,3,4,5,6].find(i=>sum(C[i+1])>sum(C[i])&&i>=S.rank)??0;S.staff=[];fillStaff(S,true);try{S.prSeen={r:S.rank,s:null}}catch(e){}
+    const rk=S.rank,n0=S.inv.length,st0=S.staff.length;const cap0=capOf(S);KFX.rewards=0;window.__prRev=0;
     S.rank++;render();await new Promise(r=>setTimeout(r,400));const add=S.inv.slice(n0);
     const P=S.rank+1;const wd=add.filter(e=>WD_ITEMS[e.k]);return{rk,now:S.rank,keys:add.map(e=>e.k),wdP:wd.map(e=>WD_ITEMS[e.k].P+':'+WD_ITEMS[e.k].sl),P,
      wrist:add.some(e=>IT[e.k]&&IT[e.k].sl==="wrist"),scent:add.some(e=>IT[e.k]&&IT[e.k].sl==="scent"),nvp:add.every(e=>e.from==="nvp"),st:S.staff.length-st0,cap0,cap1:capOf(S),
@@ -81,7 +82,8 @@ const clearOv=p=>p.evaluate(()=>{document.querySelectorAll('.kmov').forEach(e=>e
     const im=o.querySelector('.kprev-img');const fig=o.querySelector('.kprev-fig');const fr=fig&&fig.getBoundingClientRect(),ir=im&&im.getBoundingClientRect();
     return{sw,btn:bt?(br.bottom<=innerHeight+1&&br.top>=0):null,clip,fig:fr?Math.round(fr.height):null,img:ir?Math.round(ir.height):null}});
    ok(m.sw<=0&&m.btn!==false&&!m.clip.length,`${SZ} ${n}: no overflow / clipping, button in view`,JSON.stringify(m));if(OUT)await p.screenshot({path:`${OUT}/${n}-${wh}.jpg`,type:'jpeg',quality:55})};
-  await p.evaluate(async()=>{S.rank=Math.min(5,S.rank+1);render();for(let i=0;i<40&&!document.querySelector('.km-reward .km-done');i++){const o=document.querySelector('.kmov.km-reward');if(o)o.click();const e=document.querySelector('.kmov.km-edict');if(e)e.click();__kmNext();await new Promise(r=>setTimeout(r,250))}});
+  await p.evaluate(async()=>{/* review/staff-root: start below a step of the ONE table that adds a servant (some steps are flat) */const C=BAL.promo.cap,sum=x=>x[0]+x[1];const r0=[0,1,2,3,4].find(i=>sum(C[i+1])>sum(C[i]))??0;S.rank=r0;S.staff=[];S.prSeen={r:r0,s:null};render();await new Promise(r=>setTimeout(r,300));document.querySelectorAll('.kmov').forEach(e=>e.remove());try{KMQ.length=0;kmBusy=false}catch(e){}
+   S.rank=r0+1;render();for(let i=0;i<40&&!document.querySelector('.km-reward .km-done');i++){const o=document.querySelector('.kmov.km-reward');if(o)o.click();const e=document.querySelector('.kmov.km-edict');if(e)e.click();__kmNext();await new Promise(r=>setTimeout(r,250))}});
   await p.waitForTimeout(400);await shot('chest');
   await p.evaluate(async()=>{const c=document.querySelector('.km-reward [data-km-close]');if(c)c.click();for(let i=0;i<30&&!document.getElementById('kprevov');i++)await new Promise(r=>setTimeout(r,200))});await p.waitForTimeout(900);
   if(await p.evaluate(()=>!!document.getElementById('kprevov')))await shot('reveal');else ok(false,`${SZ} reveal shown`);

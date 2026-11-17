@@ -47,7 +47,7 @@ function plotsOnHer(){try{const z=S.j70;if(!z||!z.pl)return[];return z.pl.filter
 const TW={xa:"dấu xạ hương",chi:"dấu chì ngấm dần",meo:"khí suyễn do lông thú",bua:"khí huyết bị hao mà không rõ vì sao"};
 const TWHERE={xa:"túi thơm, hương trầm",chi:"son phấn",meo:"đệm gấm",bua:"túi thơm, đệm gấm"};
 const PW={tra:"dấu độc ngấm chậm, như từ trà uống hằng ngày",son:"dấu chì, chu sa, như từ son phấn",huong:"dấu hương độc, như từ lò trầm trong phòng",ty:"dấu thuốc lạ trong thang an thai",hh:"dấu hồng hoa trong canh bổ",tsv:"dấu thuốc lạ trong thang an thai",xh:"dấu xạ hương"};
-function sucWord(s){return s>=70?"khí huyết dồi dào":s>=50?"khí huyết điều hòa":s>=30?"khí huyết hơi hư nhược":"khí huyết rất suy nhược"}
+function sucWord(s){return s>=BAL.sucLv.word[2]?"khí huyết dồi dào":s>=BAL.sucLv.word[1]?"khí huyết điều hòa":s>=BAL.sucLv.word[0]?"khí huyết hơi hư nhược":"khí huyết rất suy nhược"}
 /* Sức khỏe (jkh, spec 4.6): ≥ thyLo Khỏe mạnh · thyBad..thyLo Hơi yếu · < thyBad or ill Có bệnh; a bribed physician softens one step */
 function verdict(lie){const i=illOf(S);const s=S.suc||0;const K=typeof khB==="function"?khB():null,kh=K?khOf(S):100;const bad=i||(K&&kh<K.thyBad);if(bad&&!lie)return["Có bệnh","r"];if(s<40||(bad&&lie)||(K&&kh<K.thyLo))return["Hơi yếu","n"];return["Khỏe mạnh","g"]}
 function wksPreg(){return S.preg&&S.pregUnk&&S.pregWk!=null?wk()-S.pregWk:-1}
@@ -163,8 +163,8 @@ function npcMonth(){let ev="";const c=doc();if(!c)return ev;c.af=c.af||{};
    const ev2=nv(v,"thyEv");if(tg.length&&roll(T().npcBribe+ev2)){ap(v,{bac:-T().npcBribeBac});c.af[v.id]=(c.af[v.id]||0)+T().npcBribeAf;try{newsAdd(v,"ty",`Có người thấy ${v.name} cho mời thái y sang cung trò chuyện rất lâu`)}catch(e){}}}
   /* her monthly visit finds a hidden harm in her */
   const tl=tainted(v);const bad=bribedBy(v);if(tl.length&&!bad&&roll(T().npcFind+(v.doctor?T().npcFindDoc:0))){const e=pick(tl);v.inv.splice(v.inv.indexOf(e),1);const by=byKey(e.by);
-   if(by&&by!==v){evA(v,by,1);try{oanAdd(v,by,8)}catch(x){}}try{newsAdd(v,"ty",`Thái y bắt mạch cho ${v.name}, thấy dấu ${TAINT[e.t].n}; món đồ ấy bị đem đi`,by===S)}catch(x){}
-   if(by===S)ev+=`<span class="r">Thái y bắt mạch cho ${v.name}, lần ra món đồ ngươi đã tẩm: nàng ta nắm thêm 1 chứng cứ về ngươi.</span> `}
+   if(by&&by!==v){evA(v,by,BAL.eff.jthaiy.evNpcMonth);try{oanAdd(v,by,BAL.eff.jthaiy.npcMonth)}catch(x){}}try{newsAdd(v,"ty",`Thái y bắt mạch cho ${v.name}, thấy dấu ${TAINT[e.t].n}; món đồ ấy bị đem đi`,by===S)}catch(x){}
+   if(by===S)ev+=`<span class="r">Thái y bắt mạch cho ${v.name}, lần ra món đồ ngươi đã tẩm: nàng ta nắm thêm ${balAb(BAL.eff.jthaiy.evNpcMonth)} chứng cứ về ngươi.</span> `}
   const i=illOf(v);if(i&&!i.known&&!bad&&roll(T().npcFind+(v.doctor?T().npcFindDoc:0)))i.known=true}
  return ev}
 window.thyNpcMonth=npcMonth;

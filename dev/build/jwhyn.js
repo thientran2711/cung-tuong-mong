@@ -9,7 +9,7 @@
    Display (no new kit part): the result card gets one more row of the SAME kit .kb grid (§7), label "Vì sao", markup of the
    existing "Ghi chú" row (.kr.kr-note > .krv > .kitem > .ef.n); the Sổ ghi line that shows the number gets the same sentence
    appended (<span class="past kwl">Vì sao: …</span>). Old saves: nothing new is stored except log text. */
-const WHYL=[];let WHYN=0;let WHY_TICK=0;const WHY_CTX=new Map();
+const WHYL=[];let WHYN=0;let WHY_TICK=0;const WHY_CTX=new Map();lifeStore("WHYL why-notes (people of that life)",()=>{WHYL.length=0;WHY_CTX.clear()});
 let WHYN_T=0;/* tick id: one per task, so the notes of one act merge; cleared on the next microtask */
 function whyT(){if(!WHY_TICK){WHY_TICK=1;WHYN_T++;Promise.resolve().then(()=>{WHY_TICK=0;try{whyFlushLate()}catch(e){}WHY_CTX.clear()})}return WHYN_T}
 function whyKey(p){return p==="th"||p==="emp"?p:p&&p===S?"me":p&&p.id!=null?"r"+p.id:p&&p.sid!=null?"s"+p.sid:p&&p.name||"?"}
@@ -56,9 +56,9 @@ function whyWrapRun(o,mk){const W=f=>f?function(){let X=null;try{X=mk()}catch(e)
 let WHY_NIGHT=null;
 (function(){if(typeof PEND!=="object"||!PEND.night1)return;const n1=PEND.night1;PEND.night1=function(p){try{WHY_NIGHT={q:p&&p.q||0,mood:BAL.night.mood[S.emp.mood]||0,vp:0}}catch(e){}return n1.apply(this,arguments)}})();
 (function(){if(typeof nightFx!=="function")return;const f0=nightFx;nightFx=function(s){const b=S?S.sung||0:0,q0=S?S.logSeq||0:0;const r=f0.apply(this,arguments);try{const W=WHY_NIGHT;WHY_NIGHT=null;const d=(S.sung||0)-b;if(W&&d){const F=[];
-  F.push({k:"prep",t:W.q>=2?"sửa soạn chu đáo":W.q<=1?"sửa soạn sơ sài":"sửa soạn vừa phải"});
+  F.push({k:"prep",t:W.q>=BAL.cut.nightPrep[1]?"sửa soạn chu đáo":W.q<=BAL.cut.nightPrep[0]?"sửa soạn sơ sài":"sửa soạn vừa phải"});
   if(W.mood)F.push({k:"mood",t:`Hoàng thượng đang ${W.mood>0?"vui":W.mood===-1?"buồn":"giận"}`,s:W.mood>0?1:-1});
-  F.push({k:"talk",t:s>=6?"đêm vui":s>=3?"đêm êm":"đêm nhạt"});whyT();whyNote("emp","sung",d,F,q0)}}catch(e){}return r}})();
+  F.push({k:"talk",t:s>=BAL.nightEnd.warm?"đêm vui":s>=BAL.nightEnd.normal?"đêm êm":"đêm nhạt"});whyT();whyNote("emp","sung",d,F,q0)}}catch(e){}return r}})();
 /* ---------- the one sentence ---------- */
 function whyWho(p){if(p==="th")return"Thái hậu";if(p==="emp")return"Đêm thị tẩm";try{if(p&&p.queen&&typeof kaWho!=="function")return"Hoàng hậu";if(typeof kaNamed==="function"&&!kaNamed(p))return"người chưa quen";return typeof kaWho==="function"?kaWho(p):p.name||""}catch(e){return p&&p.name||""}}
 function whyPron(p){if(p==="th")return"Thái hậu";if(p==="emp")return"Hoàng thượng";try{return typeof netSex==="function"&&netSex(p)==="m"?"người":"nàng"}catch(e){return"nàng"}}
