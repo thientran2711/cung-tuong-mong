@@ -730,3 +730,4 @@
 | event-art DARK fix (sonnet; owner 17/11 12:19Z/12:22Z; brief briefs/event-art-dark-fix.md) | CDN only (report reports/event-art-dark-fix.md) | C ROOT-6 | session_011xDdVSTVyLVuATNYT3izSd | RUNNING | 17/11 12:24Z |
 | RESTORE maid trung y (ty) keys replaced by consort-tier redraw, 681 keys (sonnet W9; owner order 17/11 12:21Z, ROOT-6 GO 12:23Z; opened by lead #7) | review/fig-cutout-clean | C | session_011xDdVNG1ZBYKd7ZkiyqAJP | RUNNING | 17/11 12:26Z |
 | stage-caption SẴN SÀNG KIỂM ff3e0e74 | review/stage-caption | s31 worker | session_01UV1Szk3y43acKY1bEhtMWZ | READY | 17/11 |
+| REVIEW stage-caption r1 of ff3e0e74 (+ S.where family scan, 3 more sizes) | review/stage-caption-r1 | MAIN s31 | session_01UV1SzjCpLEqRoqbdxYksYe | RUNNING | 17/11 12:27Z |
