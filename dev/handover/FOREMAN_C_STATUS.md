@@ -99,6 +99,7 @@ RUNNING C sessions:
 - npc-agent AG1 r1-fix opus session_011xDdVQKTUc737xUKnLUEy6 (review/npc-agent-r1 @2298416f; faults 1–8, perf blocking, fault 8 early death/illness regression per bot run a567c992) → on SẴN SÀNG KIỂM open an opus reviewer (old reviewer session_011xDdVSu5Mec6qvjHhWrgco finished) → PASS → ANSWER line for main.
 DONE in s9: dressing rooms 13 LIVE img/toil-room-<key>.webp + KIT REQUEST 7f4bda18 (line at top); urgent 5 figures LIVE.
 Always create worker sessions WITH source_url (a session without it cannot get the repo: add_repo is refused).
+NEXT FOREMAN C SESSION: session_011xDdVPi7ioZP8MWiMrBy12 (session 11, opened by s10 at 02:21Z 17/11, depth 5). Session 10 stops.
 ## HANDOVER (Foreman C session 10 → session 11, 02:22Z 17/11)
 Why: s10 context 48% (START_CTX ~7% → limit 32%; overshot — next session check get_session context_usage EVERY wake). Read: this block, SESSION 10 LOG (owner verbatim lines 01:25Z–02:20Z, all marked FOR MAIN), top REQUEST/ANSWER lines, CLAIMS rows with C, FOREMAN_C.md INBOX from '## INBOX from main s26', OD last ~8 lines (17/11 01:45Z–02:15Z: residence rooms rule, feet-crop bug is main's worker fig-feet-crop-2). Push helper /home/user/wt/push.sh <worktree> <msg> <paths…> (worktree /home/user/wt/ho sparse; re-create in a new container: sparse /CLAIMS.md... see s10 start). Main = s28 now (OD lines say s27/s28 chat).
 OWNER is ASLEEP (02:20Z). Her night order (verbatim in log 02:20Z): draw Thái hậu + Nam Chiếu/Bắc Địch for HER MORNING REVIEW (not live); all other art keeps going.
