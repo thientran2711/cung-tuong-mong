@@ -309,3 +309,34 @@ one-core-guard PASS 0 fails, no --allow-grow except the ordered detection fix ab
 - Optional (Foreman B): the 2nd-table detector only sees typed tables ≥ 4 long; 3-long copies are not caught — not done.
 - Owner questions pending (6b): Sủng one ladder; Đức word vs Thang Đức page; double Thái hậu drift.
 - START_CTX ≈ 5 %; now ≈ 22 % (estimate) — below rollover (30 %).
+
+## 7 FIX r2 — texts print the constant (reviewer FAIL item 3, review-one-core-dup-r1)
+PRIORITY #1 CHECK: OD:L1267 (text prints the constant) | ledger 0 | main: BAL.eff in jbaleff.js, no balSg/balAb before | review/* one-core-dup(-r1) only | claims Foreman B ROOT. START_CTX ≈ 5 %; no rollover needed.
+Branch review/one-core-dup-r2 @ f97a5841 (from review/one-core-dup-r1 @ 3d43d535; 2 commits; site rebuilt).
+
+### What changed
+- New formatters in jbal.js: `balSg(n)` = "+4" / "-4", `balAb(n)` = "4". Every player text that typed an amount living in BAL.eff now prints it: `Thân ${balSg(BAL.eff.jlost.loUI)}`, `nàng oán +${balAb(…)}` (oán/thù read inverted: Thân -10 shows "oán +10"). Same visible words. A "…" string that gains a ${} became a `…` template.
+- Scan (AST, option object / ±300 chars, sign-aware, no if/else-branch crossing): 101 sites in 20 modules (reviewer's 71 + the sites his line scan missed: template pieces after a ${}, texts in a different statement than the call, oán/thù sign inverse). Per module: j9 17 · j55 18 · jkc 14 · jtsb 12 · j24 9 · j72 9 · j71 7 · j70 5 · jlost 4 · j2 2 · j25 2 · jpoison 3 · j30 1 · j31 1 · j68e 1 · j78 1 · j8 1 · j95 1 · jaudit 1 · jts 1.
+- j55 ccStep / tdSoMonth_5: the player path typed `apply({hh:-5})` beside the same text → now `apply({hh:BAL.eff.j55.ccStep})` (value -5 unchanged; the "Hoàng hậu … -5" text prints it). `th:-8` is not a BAL constant (typed rule number, stays in the frozen list).
+- FOUND BY MY OWN GATE: j30 loads before jbal.js; its `x:` text for "Xin Hoàng hậu giáng" is built at load → `Cannot access 'BAL' before initialization` (whole page dead; quickcheck open/G2/G3/G4 all crashed). Fixed: `get x(){return `…`}` (A() keeps the object by reference; Object.assign copies run at play time). Guard now also FAILS a BAL.eff/road/arc read outside every function in a module ordered before its BAL file (planted: caught at j30:26).
+- Family check: scan widened to every BAL.* path (not only eff/road/arc): 7 hits, all coincidences (kitpage demo tables, "+2..3", "/3"), 0 real. Road/arc namespaces: 0 sites. Typed texts beside NON-moved numbers (apply({danh:-4}), "Danh +1" …) stay in the one-core-guard frozen list (shrink-only; it shrank 11645 → 11609).
+
+### Guard (the new check)
+dev/test/one-core-text.js (sibling of one-core-guard, run by coregates.sh G1 right before the frozen-list compare): FAILS when a string / template piece types an amount equal (|value|, sign agrees) to a BAL.eff / BAL.road / BAL.arc constant read in the same option object (or ±300 chars); no baseline (0 now). Planted in a scratch copy: `Thân +4` beside loUI_2 → FAIL jlost.js:219; typed `+8` back in jkc go_4 → FAIL. Same module also exports scan() used by the mover.
+
+### Proofs (all PASS)
+| proof | result |
+|---|---|
+| one-core-text-same (dev/measure; r2 vs r1) | 20 modules: print `${bal*()}` as the old words, put every BAL.eff value back in both versions, compare ASTs ("…" ≡ `…`, `get x(){return e}` ≡ `x:e`) → all identical |
+| one-core-dup-same origin/review/one-core-dup-r1 | 4406 live functions before / 4408 after (+balSg, balAb) / 4406 identical, 0 differ |
+| one-core-eff-same (extended: allows printed text) on the F3 commit 076aa4ed vs 16d4925f | 42 modules, 326 refs, 0 fails (still proves F3; against current origin/main it differs only where main / r1 moved other things, so the r1→r2 delta is carried by text-same) |
+| one-core-guard (no --allow-grow) | 0 fails, inline 11609 (baseline 11645 → 11609, shrunk with --update) |
+| one-core-text | 0 sites, 0 early reads |
+
+### Gates on f97a5841
+- quickcheck: CORE GATES PASS (one-core-guard + one-core-text · rules-one-source · kit-conform · coop-one-world hook) 112 s; time-spill PASS; open 1179 ms 0 errors; OLD SAVE loads and plays a buổi. Perf: first run showed one 24 s long task in runs 2–3 (machine hiccup right after the gates' browsers; run 1 was 1.2 s); rerun with the same build: median render 212/216 ms, tab 274/268, buổi 1252/1390, longTaskMax 1207 vs live 1228 → PASS. (If it repeats, re-measure on an idle box.)
+- coop-e2e 60/60 (live Worker; fold / ipad / solo 0 page errors); coop-one-world seed 7 PASS.
+- Shots (scratch only, never in git): Fold 755x1000 and iPad 1180x820 of the real topicOpts dialog (j9: "Hỏi han sức khỏe … thiện cảm +4", "Giúp đỡ nàng +10 · oán -5", "Tạ lỗi oán -15"): words identical to before, kit chips render the printed numbers; page errors 0 in both.
+- Not changed: no rule value, no odds, no layout.
+
+### Rollover: none (context well under START_CTX + 25 %). Next: re-review review/one-core-dup-r2.
