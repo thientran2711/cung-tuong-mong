@@ -12,7 +12,7 @@ const {chromium}=require('playwright');const URL0=process.argv[2]||'dev/index.ht
 const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+m+(x!==undefined?' '+JSON.stringify(x):''))};
 (async()=>{const b=await chromium.launch();const p=await b.newPage({viewport:{width:755,height:1000}});const errs=[];p.on('pageerror',e=>errs.push(e.message));
  await p.goto(URL,{waitUntil:'domcontentloaded'});await p.waitForTimeout(2500);
- await p.evaluate(()=>{localStorage.clear();SLOT=4;document.getElementById('title').hidden=true;window.__nlInner=1;let g=0;do{start();g++}while(isSrv()&&g<30);window.__nlInner=0;window.__bot=1;window.__agAll=1;quiet=false;Q.length=0;try{deal()}catch(e){}render()});
+ await p.evaluate(()=>{localStorage.clear();SLOT=4;document.getElementById('title').hidden=true;window.__nlInner=1;let g=0;do{start();g++}while(isSrv()&&g<30);window.__nlInner=0;window.__bot=1;window.__agAll=1;window.__tmOff=1;/* AG-ALL-2f r2: this file turns S.mat as a knob; the earned-Tai-mắt sync is tested in ag-taimat */quiet=false;Q.length=0;try{deal()}catch(e){}render()});
  /* 1 G1 */
  const r1=await p.evaluate(()=>{const fired=[];const f0=AD_HAP_FIX.slice();AD_HAP_FIX.length=0;for(let i=0;i<3;i++){const id="t"+i;AD_HAP_FIX.push(()=>({k:"tyv",id}));AD_HAP_FIRE[id]=()=>{fired.push(id);return true}}
   S.adHapD=null;S.adHap=null;const pl=S.place;S.place="tyv";Q.length=0;adHapArrive("tyv");S.place=pl;AD_HAP_FIX.length=0;f0.forEach(f=>AD_HAP_FIX.push(f));Q.length=0;return fired});

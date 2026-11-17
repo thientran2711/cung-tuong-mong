@@ -1066,3 +1066,9 @@ BAL.ag.par3={on:1,
  drug:{g:{"safe":4,"kid":2}}};
 /* Chia sẻ bí mật (P3T.secret, her talk and NPC↔NPC): a listener with malice above secretMal may keep it against the speaker, odds secretGrab */
 BAL.talk.secretMal=50;BAL.talk.secretGrab=50;
+/* AG-ALL-2f r2 — TAI MẮT MUST BE EARNED (owner OD 17/11 ~16:50Z): becoming someone's Tai mắt is the PERSON's choice (jagknow tmOdds = bribeOdds + what
+   she wants from the recruiter; loyal servants mostly refuse and may tell their master). want = bonus when the recruiter can give it: bac (a greedy one,
+   recruiter can pay her price), protect (badly treated: lòng < BAL.loy.low, recruiter outranks her master), post (low post srk < post, recruiter outranks),
+   revenge (holds a grudge and the recruiter is at odds with her master). loyalMul = the odds × this for a servant at lòng ≥ BAL.loy.top. tell = % a refusing
+   servant at lòng ≥ BAL.loy.mid reports the attempt to her master (oan = the master's regard lost toward the recruiter). cap = most Tai mắt one can hold. */
+BAL.ag.know.tm={cap:10,lo:3,hi:95,want:{bac:15,protect:15,post:10,revenge:20},post:3,loyalMul:.35,tell:50,oan:6};

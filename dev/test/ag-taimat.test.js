@@ -64,6 +64,33 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
     try{nextBuoi()}catch(e){}Q.length=0}}return out},DAYS);
  console.log('bot: '+JSON.stringify(r4));
  ok(r4.items>0&&r4.bad.length===0,'bot run: every TIN BÁO item (not here / public) names a real informer',{items:r4.items,bad:r4.bad.slice(0,3),kinds:r4.kinds});
+ /* 5 EARNED (owner OD 17/11 ~16:50Z) */
+ const r6=await p.evaluate(()=>{const o={};const R0=Math.random;const seq=a=>{let i=0;Math.random=()=>i<a.length?a[i++]:R0()};
+  o.one=bribeOdds===tmOdds;
+  /* the number she sees = the real list */
+  for(const s of allServ())if(s.spyFor==="me")s.spyFor=null;tmSync(S);o.zero=S.mat===0&&taiMatList().length===0;
+  apply({mat:2});o.after={mat:S.mat,list:taiMatList().length,all:taiMatList().every(x=>x.p.spyFor==="me")};
+  /* loyal servants mostly refuse: odds of a top-loyal, non-greedy servant vs a disloyal greedy one */
+  const cand=tmCands(S);const s=cand[0];const L0=s.loyal,G0=s.grudge;s.loyal=95;s.grudge=0;const loyO=tmOdds(S,s);s.loyal=10;const disO=tmOdds(S,s);s.loyal=L0;s.grudge=G0;o.odds={loyal:loyO,disloyal:disO};
+  /* a loyal servant of hers refuses an NPC and tells her (true TIN BÁO); the NPC loses her regard */
+  const v=liveRivals(true).find(x=>x.alive&&!x.out);const mine=(S.staff||[]).find(x=>x.sid!=null);let tell=null;
+  if(v&&mine){mine.loyal=90;mine.spyFor=null;const a0=aff(S,v);const n0=knTb().R.length;seq([0]);const t=tmRefuse(v,mine);Math.random=R0;const it=knTb().R[knTb().R.length-1];
+   tell={t,bao:knTb().R.length>n0&&it&&it.line.includes(v.name)&&informerInfo(it).kind==="ownMaid",aff:aff(S,v)-a0}}
+  o.tell=tell;
+  /* the whole try: everyone loyal and Math.random high → nobody joins, number unchanged */
+  for(const x of allServ())if(x.spyFor==="me")x.spyFor=null;tmSync(S);seq(new Array(40).fill(.999));const n0=S.mat;apply({mat:3});Math.random=R0;o.noAuto={before:n0,after:S.mat,list:taiMatList().length};
+  /* NPC parity: the same gain path for a consort */
+  if(v){for(const x of allServ())if(x.spyFor===v.id)x.spyFor=null;tmSync(v);ap(v,{mat:2});o.npc={mat:v.mat,list:taiMatList(v).length}}
+  /* old save: a stored number with nobody behind it → tries once, then the real count */
+  for(const x of allServ())if(x.spyFor==="me")x.spyFor=null;S.mat=3;delete S.tmMig;tmSync(S);o.old={mat:S.mat,list:taiMatList().length,mig:S.tmMig};
+  return o});
+ ok(r6.one,'ONE odds: bribeOdds (Mua chuộc, every NPC bribeServ) = tmOdds');
+ ok(r6.zero&&r6.after.mat===r6.after.list&&r6.after.all,'the Tai mắt number = the real list (gain = tries; only those who accepted are listed)',r6.after);
+ ok(r6.odds.loyal<r6.odds.disloyal&&r6.odds.loyal<=40,'a loyal servant is much harder to win than a disloyal one',r6.odds);
+ ok(r6.tell&&r6.tell.t==="tell"&&r6.tell.bao&&r6.tell.aff<0,'a loyal servant refuses an NPC, tells her master (TIN BÁO from her own servant), the recruiter loses regard',r6.tell);
+ ok(r6.noAuto.after===r6.noAuto.before&&r6.noAuto.list===r6.noAuto.after,'no automatic Tai mắt: when everyone refuses, "+3" adds nobody',r6.noAuto);
+ ok(r6.npc&&r6.npc.mat===r6.npc.list,'NPC parity: a consort\'s number = her real list, same path',r6.npc);
+ ok(r6.old.mat===r6.old.list&&r6.old.mat<=3&&r6.old.mig===1,'old save: stored number → real people only (tries once), then the real count',r6.old);
  /* 4 old save */
  const r5=await p.evaluate(()=>{delete S.tmSold;delete S.tmN;const s=(S.staff||[]).find(x=>x.sid!=null);let a=null,b=null,c=null;try{a=informerInfo({by:"mat"});b=s?informerInfo({by:"s"+s.sid}):"x";c=taiMatList().length>=0}catch(e){return{err:String(e)}}
   return{a,b:b&&b.kind,c}});

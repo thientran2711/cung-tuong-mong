@@ -283,3 +283,43 @@ const KN_INFL={mat:"Tai mắt",hau:"Người hầu",ban:"Bằng hữu",qua:"Ngư
 function knInfUi(f){const c=f.soldOutKnown?"sold":{taiMat:"mat",ownMaid:"hau",friend:"ban",passerby:"qua"}[f.kind];f.code=c;f.label=KN_INFL[c]+(f.name?" "+f.name:"");return f}
 /* her Tai mắt's count of reports (set by the producers knScan / knBao) */
 function knTmN(e){if(!e||e.sid==null||!S)return;S.tmN=S.tmN||{};S.tmN[e.sid]=(S.tmN[e.sid]||0)+1}
+/* ================= AG-ALL-2f r2 — TAI MẮT MUST BE EARNED (owner OD 17/11 ~16:50Z verbatim on the handover branch: "một người trung thành mà tôi có
+   muốn mua chuộc người ta cũng chắc gì tôi mua chuộc được ... không phải cứ tôi bấm vô có tai mắt là auto ... người đó có chọn làm tai mắt cho tôi hay
+   không phụ thuộc vào cái mục đích và lợi ích của họ mà họ muốn ở tôi").
+   ONE odds function tmOdds(recruiter, servant) = the existing bribeOdds (nết greed / timid / loyal, lòng to her master, recruiter's Tâm cơ) + the best
+   "want" the recruiter can give (BAL.ag.know.tm.want), × loyalMul for a servant at lòng ≥ BAL.loy.top. bribeOdds IS tmOdds from here (Mua chuộc button
+   j15 / j19 and every NPC bribeServ read it: the same rule for her and NPCs).
+   The "Tai mắt N" number = the real list: p.mat is DERIVED (tmSync: min(cap, taiMatList(p).length)) for her and every consort. Every Tai mắt gain
+   (apply / ap {mat:+N}: "Cài tai mắt", story / event rewards, origins …) is N recruit tries (tmTry) of real servants of other palaces, each deciding by
+   tmOdds; a loss {mat:-N} lets N of them go. A refusing servant at lòng ≥ BAL.loy.mid may report the try to her master (oán; her own servant reports it
+   to her as a TIN BÁO). Old saves / starting values: a stored mat above the real count becomes that many tries once (p.tmMig). ================= */
+function tmB(){return BAL.ag.know.tm}
+function tmOn(){try{return !!(BAL.ag&&BAL.ag.know&&BAL.ag.know.tm)&&!window.__tmOff}catch(e){return false}}
+function tmWant(a,s){const W=tmB().want,o=ownerOf(s);if(!o)return["",0];const L=[];const out=(a.rank||0)>(o.rank||0);
+ if(nq(s,"greed",1)>0&&(a.bac||0)>=nv(s,"bribeCost"))L.push(["bac",W.bac]);
+ if(out&&(s.loyal||0)<BAL.loy.low)L.push(["protect",W.protect]);
+ if(out&&srk(s)<tmB().post)L.push(["post",W.post]);
+ let foe=false;try{foe=aff(a,o)<0||aff(o,a)<0}catch(e){}if(s.grudge&&foe)L.push(["revenge",W.revenge]);
+ return L.sort((x,y)=>y[1]-x[1])[0]||["",0]}
+const tmOdds0=typeof bribeOdds==="function"?bribeOdds:null;
+function tmOdds(a,s){const b=tmOdds0?tmOdds0(a,s):odA(a,35);if(!tmOn())return b;const w=tmWant(a,s)[1];return cl(Math.round((b+w)*((s.loyal||0)>=BAL.loy.top?tmB().loyalMul:1)),tmB().lo,tmB().hi)}
+if(tmOdds0)bribeOdds=tmOdds;
+/* who could be asked: a servant of another living palace, nobody's spy yet */
+function tmCands(p){return knAllSrv().filter(s=>{if(s.spyFor!=null)return false;const o=ownerOf(s);return !!o&&o!==p&&(o===S||(o.alive&&!o.out))})}
+function tmRefuse(p,s){const o=ownerOf(s);if(!o||(s.loyal||0)<BAL.loy.mid||!roll(tmB().tell))return"";affAdd(o,p,-tmB().oan);
+ if(o===S&&p!==S)knBao(s,S,`${p.name} vừa sai người tới mua chuộc {xung} làm tai mắt, {xung} không nhận`,knPal(p));return"tell"}
+/* one try: the recruiter turns to the most promising person (by the same odds); that person decides */
+function tmTry(p,why){const C=tmCands(p);if(!C.length)return null;let best=null,bo=-1;for(const s of C){const o=tmOdds(p,s);if(o>bo){bo=o;best=s}}
+ KN.stat.tmTry=(KN.stat.tmTry||0)+1;if(roll(bo)){best.spyFor=key(p);KN.stat.tmOk=(KN.stat.tmOk||0)+1;if(p===S&&!quiet)try{log(`${best.name} (người hầu cung ${NM(ownerOf(best))}) nhận lời làm tai mắt cho ngươi.`)}catch(e){}return best}
+ const t=tmRefuse(p,best);if(p===S&&!quiet)try{log(`Ngỏ ý với ${best.name} (người hầu cung ${NM(ownerOf(best))}), nàng không nhận${t?" và còn bẩm lại với chủ":""}.`)}catch(e){}return null}
+function tmLose(p,n){const L=taiMatRaw(p).sort((a,b)=>tmOdds(p,a)-tmOdds(p,b));for(let i=0;i<n&&i<L.length;i++)L[i].spyFor=null}
+function tmSync(p){if(!p||!tmOn())return;const c=Math.min(tmB().cap,taiMatRaw(p).length);
+ if(p.tmMig==null){p.tmMig=1;const d=Math.max(0,(p.mat||0)-c);for(let i=0;i<d;i++)tmTry(p,"mig");KN.m&&(KN.m.as=null);p.mat=Math.min(tmB().cap,taiMatRaw(p).length);return}p.mat=c}
+function tmGain(p,n){if(n>0){for(let i=0;i<n;i++)tmTry(p,"gain")}else if(n<0)tmLose(p,-n);if(KN.m)KN.m.as=null;tmSync(p)}
+(function(){const a0=apply;apply=function(o){if(!tmOn()||!o||!o.mat||!S||(typeof isSrv==="function"&&isSrv()))return a0.apply(this,arguments);
+  const n=o.mat;const x=Object.assign({},o);delete x.mat;const before=S.mat||0;const r=a0.call(this,x);if(S.tmMig==null)tmSync(S);tmGain(S,n);const d=(S.mat||0)-before;if(d&&!quiet)try{popNum("mat",d,0)}catch(e){}return r}})();
+(function(){const a0=ap;ap=function(p,o){if(p===S||!tmOn()||!o||!o.mat||!p)return a0.apply(this,arguments);const n=o.mat;const x=Object.assign({},o);delete x.mat;const r=a0.call(this,p,x);if(p.tmMig==null)tmSync(p);tmGain(p,n);return r}})();
+(function(){if(typeof bribeServ!=="function")return;const b0=bribeServ;bribeServ=function(a,s){const r=b0.apply(this,arguments);try{if(KN.m)KN.m.as=null;tmSync(a);const o=ownerOf(s);if(o)tmSync(o)}catch(e){}return r}})();
+/* every khắc: her and every consort's number follows the real list (spyFor changes in other modules: cut loose, dismissed, found out …) */
+function tmSyncAll(){if(!tmOn()||!S||(typeof isSrv==="function"&&isSrv()))return;tmSync(S);for(const v of liveRivals(true))if(v&&v.alive&&!v.out)tmSync(v)}
+(function(){const m0=knMemo;knMemo=function(){const k=agKey();const fresh=!KN.m||KN.m.key!==k;const M=m0.apply(this,arguments);if(fresh&&!KN.tmIn){KN.tmIn=1;try{tmSyncAll()}catch(e){agErr("tmSync",e)}finally{KN.tmIn=0}}return M}})();
