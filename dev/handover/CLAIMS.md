@@ -796,3 +796,4 @@
 | GRAND ENDINGS DESIGN (opus; expert + audit + skeleton; design only; MAIN s32 14:35Z/14:40Z) | review/grand-endings-design | D | session_01964izFDJ18FWz2tTcPJvcK | RUNNING | 17/11 14:42Z |
 | residence-seats review r1 (opus BIG) of d88883df | review/residence-seats-r1 | D | session_01964izCtfXkztCLGkiuxC7s | RUNNING | 17/11 14:48Z |
 | AG-ALL A2 successor: r1 fixes F2–F5 + weight pass (opus; brief reports/ag-all.md §16) | review/ag-all | C-AG | session_01UV1SziAW9nRRmuRJXDn5N6 | RUNNING | 17/11 14:56Z |
+| origin-bd-branch r1 PASS 4e50e6ea → lander queue; reviewer + worker archived | review/origin-bd-branch-r1 | B | session_01N1tNP3r4Wz5SfLPnQXnXnJ | PASS (archived) | 17/11 14:56Z |
