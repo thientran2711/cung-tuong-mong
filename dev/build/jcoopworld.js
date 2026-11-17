@@ -970,12 +970,12 @@ CW.reEnd=function(){if(CW.on&&S&&!S.dead&&CW.sent===wk()){CW.sent=-1;sendEnd()}}
 CW.soonEnd=soonEnd;
 CW.hrCardTest=h=>hrCard(h);   /* test hook (dev/test/coop-thin-d.js): her heir card in the current context */
 /* fn = the host's side (run after her context closes); k + a = her side as data (D.kind: deferred while her rolled life is held) */
-const otherSide=(fn,k,a)=>{const T=CW.thin;if(CW.ctx)T.D.after(fn);else T.D.kind(fs(),k,a)};
+const otherSide=(fn,k,a,lf)=>{const T=CW.thin;if(CW.ctx)T.D.after(fn);else T.D.kind(fs(),k,a,undefined,lf)/* r3: lf = the life that made her offer */};
 /* Kết giao / Tặng quà: pp {id, k, item, who, e (the guest's item, when she gives it)} */
 PEND.thInv=pp=>{if(!pp||!pp.id)return null;const what=pp.k==="gift"?`muốn tặng ngươi ${esc(pp.item||"một món quà")}`:`muốn kết giao với ngươi`;
  return {t:`<p><b>${esc(pp.who||friendName())}</b> ${what}.</p>`,o:[
-  {n:"Nhận",fx:{},x:"hảo hữu tiếp tục việc ấy",go:()=>otherSide(()=>invRun(pp.id,true,pp),"invHer",{pp,ok:true})},
-  {n:"Từ chối",fx:{},x:"không nhận",go:()=>otherSide(()=>invRun(pp.id,false,pp),"invHer",{pp,ok:false})}]}};
+  {n:"Nhận",fx:{},x:"hảo hữu tiếp tục việc ấy",go:()=>otherSide(()=>invRun(pp.id,true,pp),"invHer",{pp,ok:true},pp.lf)},
+  {n:"Từ chối",fx:{},x:"không nhận",go:()=>otherSide(()=>invRun(pp.id,false,pp),"invHer",{pp,ok:false},pp.lf)}]}};
 /* her invite accepted / refused by the host: run in HER context (she is the actor, the host's entry the target) */
 function invHer(pp,ok){if(!S||S.dead)return;const v=friendEntry();
  if(!ok||!v||v.alive===false){pushModal({t:"Hảo hữu từ chối",h:`<p><b>${esc(friendName())}</b> không nhận.</p>`});return}
@@ -985,7 +985,7 @@ function invHer(pp,ok){if(!S||S.dead)return;const v=friendEntry();
  pushModal({t:"Hảo hữu nhận lời",h:`<p>${r||"Hảo hữu đã nhận."}</p>`})}
 /* Mua chuộc on a player who serves as a cung nữ: pp {rid, who, pay, o (her mistress)} — the j42 card with the other player as the buyer */
 PEND.thBribe=pp=>{if(!pp||!isSrvMe())return null;const mis=srvM(),B=BAL.coopBribe,pay=+pp.pay||B.pay,nm=esc(pp.who||friendName()),mn=esc(mis?mis.name:"chủ nhân");
- const ans=r=>{const m=Object.assign({rid:pp.rid,o:pp.o},r);otherSide(()=>briberRes(m),"briber",m)};
+ const ans=r=>{const m=Object.assign({rid:pp.rid,o:pp.o},r);otherSide(()=>briberRes(m),"briber",m,pp.lf)};
  return {t:`<p>Một thái giám của <b>${nm}</b> chặn ngươi ở hành lang, dúi vào tay ngươi một túi bạc: “Chủ tử nhà ta muốn biết chuyện trong cung ${mn}.”</p>`,o:[
   {n:"Nhận bạc, làm tai mắt",fx:{bac:pay},x:cnvSpyX(mis),go:()=>{S.srv.spyFor=fp();ans({ok:1})}},
   {n:"Từ chối, bẩm chủ",fx:{tin:B.tin},x:`${mn} nắm 1 chứng cứ của ${nm}`,go:()=>ans({told:1})},
@@ -998,8 +998,8 @@ CW.dInit=function(T){
  /* a Mua chuộc card she can no longer answer (no longer a cung nữ after a new life): the buyer still gets "no longer serves there" */
  T.D.GONE.thBribe=pp=>briberRes({rid:pp.rid,o:pp.o,no:1});
  /* the guest's offers to the host: the host's own card (his context); her side runs in her context when he answers */
- T.onDo("inv",a=>{a=a||{};const who=S.name;T.D.after(()=>{if(!S||S.dead)return;pushDil(mkP("thInv",{id:a.id,k:a.k,item:a.item,who,e:a.e||null}),"Hảo hữu tìm đến");showModal();render()});return {ok:1}});
- T.onDo("bribe",a=>{a=a||{};const who=S.name;T.D.after(()=>{const d=S&&!S.dead&&isSrvMe()?mkP("thBribe",{rid:a.rid,who,pay:a.pay,o:a.o}):null;
+ T.onDo("inv",a=>{a=a||{};const who=S.name,lf=T.lifeOf("b")/* r3: her offer belongs to this life */;T.D.after(()=>{if(!S||S.dead)return;pushDil(mkP("thInv",{id:a.id,k:a.k,item:a.item,who,e:a.e||null,lf}),"Hảo hữu tìm đến");showModal();render()});return {ok:1}});
+ T.onDo("bribe",a=>{a=a||{};const who=S.name,lf=T.lifeOf("b");T.D.after(()=>{const d=S&&!S.dead&&isSrvMe()?mkP("thBribe",{rid:a.rid,who,pay:a.pay,o:a.o,lf}):null;
    if(d){pushDil(d,"Bạc lạ");showModal();render()}else T.D.kind("b","briber",{rid:a.rid,o:a.o,no:1})});return {ok:1}});
  T.onDo("ev",a=>{a=a||{};T.D.after(()=>evIn(a.tg,a.n));return {ok:1}})};
 }catch(e){console.error(e)}})();

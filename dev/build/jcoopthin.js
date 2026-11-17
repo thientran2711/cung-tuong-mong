@@ -364,13 +364,17 @@ D.afterRun=function(seat){const L=AFTER.splice(0);for(const f of L)try{f()}catch
    data (D.kind: k + args + the life it was meant for) survives a host reload; a kind about her PERSON (D.LIFEB: an effect, a proof, news)
    meant for a life she no longer has is dropped (her old life's news die with it); a kind that needs her answer or answers her own act
    (D.ANS cards, her own intents) is always delivered, so the other player's act gets its answer. */
-D.K={};D.ANS=["thInv","thBribe"];D.LIFEB=new Set(["res","ev","hr","nbribe","invHer"]);D.GONE={};D.DF={};
+D.K={};D.ANS=["thInv","thBribe"];D.LIFEB=new Set(["res","ev","hr","nbribe","invHer","briber"]);D.GONE={};D.DF={};
 D.later=function(seat,fn,rid,it){setTimeout(()=>{if(TH.held(seat)){D.defer(seat,it?Object.assign({},it,{rid}):{fn,rid});return}
   if(it&&D.LIFEB.has(it.k)&&it.life!=null&&TH.lifeOf(seat)>it.life){D.log.push(["drop-life",seat,it.k]);if(rid&&CW.rpend)delete CW.rpend[rid];return}
   const run=it?()=>{const f=D.K[it.k];if(f)f(it.a);else D.log.push(["no-kind",it.k])}:fn;
   let pn=D.N[seat]||0;try{TH.withSeat(seat,run)}catch(e){console.error("thin later",e)}
   if(rid){if((D.N[seat]||0)>pn){const L=D.PQ[seat]||[];const P=L[L.length-1];if(P)P.rid=rid}else if(CW.rpend)delete CW.rpend[rid]}},0)};
-D.kind=function(seat,k,a,rid){D.later(seat,null,rid,{k,a:a===undefined?null:J(a),life:TH.lifeOf(seat)})};
+/* r3 reviewer: `life` = the life the work is ABOUT. For the host's answer to HER offer (invHer / briber) that is the life that MADE the
+   offer (carried in the card's pp.lf from her intent), not the life she has when he answers: an offer of her old life answered after
+   her new life is in would otherwise run on the new person (her old item pushed into the new chest and given away, the old bribe paid
+   and its proof counted against the new person) */
+D.kind=function(seat,k,a,rid,life){D.later(seat,null,rid,{k,a:a===undefined?null:J(a),life:life!=null?life:TH.lifeOf(seat)})};
 D.defer=function(seat,it){(D.DF[seat]=D.DF[seat]||[]).push(it);D.log.push(["defer",seat,it.op||it.k||"fn"]);D.save()};
 /* the hold is over: the deferred work runs in order (each from the top of the event loop) */
 D.flush=function(seat){if(!host()||TH.held(seat))return 0;const L=(D.DF[seat]||[]).splice(0);if(!L.length)return 0;D.save();D.log.push(["flush",seat,L.length]);
