@@ -220,3 +220,4 @@ maid-m10-t3-a18	rgd9Yfwxtc	ok HELD
 maid-m10-t4-a18	3z5paUMREY	ok HELD
 maid-m10-t5-a18	Bh9qgWSoQR	ok HELD
 - W5c resumed 06:22Z: A8 (m10-cold..t5) generated+finished, HELD in /tmp/claude-0/w/A8/out (scratch) pending Foreman C OK of first-16 sheet; fragment W5c-A8.json in main checkout hd-entries (untracked, copy at upload).
+- W5c CONSORT-TIER AUDIT (ty1-ty3 x a36, 156 keys): rank-sample/maid-rest-A-consort-tier-audit.tsv + sheets rank-sample/maid-rest-A-ctier/t<T>_<n>.jpg. Finding: ty2 and ty3 a36 are each ONE plain pale outfit for all 52 maids (ty2 pale sage hanfu, ty3 pale grey-blue hanfu; no embroidery/layers); ty1 = plain cream, 3 loose clusters. No redraw until Foreman C OK.
