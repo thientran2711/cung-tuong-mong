@@ -54,7 +54,7 @@ Object.assign(MS67,{
     if she was raised before this chapter, a shared arc takes its place (chAdvance67 below) */
  len14:{t:()=>"Từ kẻ hầu thành tiểu chủ",
   g:()=>"Được Hoàng thượng để mắt mà phong Đáp ứng thì xong chương, có thưởng. Đến lúc ấy, các chương sau của đời người mới mở.",
-  steps:m=>[[S.srv&&S.srv.risen?"Được phong Đáp ứng":`Được phong Đáp ứng (Hoàng thượng để ý ${S.nt||0}/${BAL.ntRise.at})`,!!(S.srv&&S.srv.risen)]],
+  steps:m=>[[S.srv&&S.srv.risen?"Được phong Đáp ứng":(typeof amOn==="function"&&amOn()?`Được phong Đáp ứng (Hoàng thượng để ý ${S.nt||0})`:`Được phong Đáp ứng (Hoàng thượng để ý ${S.nt||0}/${BAL.ntRise.at})`),!!(S.srv&&S.srv.risen)]],
   any:1,get fx(){return{danh:F14D().len}},end:"Ngươi đã thành tiểu chủ.",get rw(){return["court",F14R().len]}}});
 /* "all2": every real step (not "t") must be done, or the time step */
 (function(){const d0=msDone67;msDone67=function(m){const d=MS67[m.id];if(d&&d.all2){const st=d.steps(m),real=st.filter(x=>!x[2]);return real.every(x=>x[1])||st.some(x=>x[2]&&x[1])}return d0.apply(this,arguments)}})();

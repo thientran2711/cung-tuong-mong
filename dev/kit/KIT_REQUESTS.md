@@ -32,3 +32,6 @@ Also (non-blocking, pre-existing): kit row label small-caps makes "Sổ trên m�
   VIRT_GL[v] (data only, added in jwhyn.js like jdiff/jexam add theirs) — replaces native `title` tooltips (touch).
 - Ask: kit keeper registers the row in KIT.md §7 + the kit sample page (or tells show-why to change it); work did not stop because
   no new display part was made.
+
+## 17/11 — npc-agent AG3 (Foreman C worker): short option cell too narrow in a narrow dialog (observation, kit keeper)
+| 17/11 | npc-agent-ag3 | jksize §kit-size option grid: in a dialog that the kit sizes to ~560 px on iPad 1180x820 (e.g. the new "Hoàng thượng cho gọi" = same kit Q dialog as "Kính sự phòng báo tin"), a SHORT option ("Cáo bệnh", `data-kbs="S"`) gets a 1-of-2 cell of 177 px and its GỢI Ý line wraps one syllable per line; the long option spans 2 cells. Same short option in the 860 px "Kính sự phòng báo tin" dialog is fine. AG3 uses the kit as is (no private layout); asks the kit keeper whether a cell under ~220 px should fall back to one column. | Q dialogs with 1 long + 1 short option on iPad | kit-size | mở |
