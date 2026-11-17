@@ -75,8 +75,11 @@ const INP=fs.readFileSync(path.join(__dirname,'../measure/inpage4.js'),'utf8');
  const late=await p.evaluate(()=>{quiet=true;localStorage.clear();window.__forceOrigin='tt';start();quiet=false;Q.length=0;const inv0=(S.inv||[]).length,d0=S.danh;S.st.ms.t0=S.turn-BAL.st14.lim.nhap-1;msCheck67();
   const c=S.st.ch;return{past:c.past.slice(-1)[0],inv:(S.inv||[]).length-inv0,danh:S.danh-d0,next:S.st.ms&&S.st.ms.id,n:c.n}});
  chk('tutorial chapter closed by time: no reward, no Danh, next chapter starts',late.past&&late.past.late&&late.inv===0&&late.danh===0&&late.next==='sung14'&&late.n===2,late);
- const real=await p.evaluate(()=>{Q.length=0;const inv0=(S.inv||[]).length;S.sung=30;msCheck67();const c=S.st.ch;return{past:c.past.slice(-1)[0],inv:(S.inv||[]).length-inv0,next:S.st.ms&&S.st.ms.id,n:c.n}});
- chk('tutorial chapter done for real: reward given, chapter 3 starts',real.past&&real.past.k===1&&real.inv>=1&&real.next==='tap14'&&real.n===3,real);
+ /* review/tut-quests: a tutorial chapter also needs its DO-the-feature quests (jtq14, tested one by one in dev/test/tut-quests.js);
+    here they are marked done (__tq14All) where the milestone alone used to close the chapter */
+ await p.evaluate(()=>{window.__tq14All=()=>{const m=S.st.ms;if(m&&m.q14)m.q14.L.forEach(q=>{q.ok=1})}});
+ const real=await p.evaluate(()=>{Q.length=0;const inv0=(S.inv||[]).length;S.sung=30;msCheck67();const open=S.st.ms&&S.st.ms.id;__tq14All();msCheck67();const c=S.st.ch;return{open,past:c.past.slice(-1)[0],inv:(S.inv||[]).length-inv0,next:S.st.ms&&S.st.ms.id,n:c.n}});
+ chk('tutorial chapter: milestone alone does not close it while a quest is open (jtq14); milestone + quests = done for real, reward given, chapter 3 starts',real.open==='sung14'&&real.past&&real.past.k===1&&real.inv>=1&&real.next==='tap14'&&real.n===3,real);
 
  /* ---- r1 item 1: home road («Ở nhà chờ tuyển tú», jkc): chapter 1 waits at home, restarts at palace entry with its full time ---- */
  const home=[];for(const rk of [0,1,2]){home.push(await p.evaluate(rk=>{quiet=true;localStorage.clear();window.__forceOrigin='tt';start();if(!S.kc&&kcOk(S.origin.k))kcInit();/* = the new-life accept with «Ở nhà chờ tuyển tú» (jkc nlAccept) */quiet=false;Q.length=0;
@@ -84,12 +87,12 @@ const INP=fs.readFileSync(path.join(__dirname,'../measure/inpage4.js'),'utf8');
    for(let i=0;i<3;i++){const t=S.turn;for(let g=0;g<40&&S.turn===t;g++){Q.length=0;used=0;try{nextBuoi()}catch(e){o.err=e.message;break}}}Q.length=0;
    o.homeMs=S.st.ms&&S.st.ms.id;o.homeN=S.st.ch.n;S.turn+=20;kcEnter(rk);Q.length=0;o.entryRank=S.rank;try{a67Month()}catch(e){o.err=e.message}Q.length=0;
    const m=S.st.ms;o.ms=m&&m.id;o.n=S.st.ch.n;o.left=m?m.t0+BAL.st14.lim.nhap-S.turn:null;o.lim=BAL.st14.lim.nhap;o.r0=m&&m.r0;o.past=S.st.ch.past.map(x=>x.ms+':'+x.tag).join(',');o.han=msHan67(m)[1];
-   const inv0=(S.inv||[]).length,d0=S.danh;S.rank=Math.min(6,S.rank+1);msCheck67();Q.length=0;const last=S.st.ch.past.slice(-1)[0];o.real=last&&last.ms==='nhap14'&&last.k===1&&!last.late;o.rew=(S.inv||[]).length-inv0;o.danh=S.danh-d0;return o},rk))}
+   const inv0=(S.inv||[]).length,d0=S.danh;S.rank=Math.min(6,S.rank+1);__tq14All();msCheck67();Q.length=0;const last=S.st.ch.past.slice(-1)[0];o.real=last&&last.ms==='nhap14'&&last.k===1&&!last.late;o.rew=(S.inv||[]).length-inv0;o.danh=S.danh-d0;return o},rk))}
  console.log('home road:',JSON.stringify(home));
  chk('r1 item 1: home road keeps chapter 1 open at home, restarts it at palace entry (entry rank, full time), rewards only a real step',home.every(o=>!o.err&&o.origin==='tt'&&o.home&&o.homeMs==='nhap14'&&o.homeN===1&&o.ms==='nhap14'&&o.n===1&&o.left===o.lim&&o.r0===o.entryRank&&!o.past&&o.real&&o.rew>=1&&o.danh>0&&/tính từ ngày nhập cung/.test(o.han0)&&/^còn \d+ tháng/.test(o.han)),home);
  /* ---- r1 item 2: cung nữ được sủng hạnh: servant tutorial steps; «Từ kẻ hầu thành tiểu chủ» only if not raised yet ---- */
  const cv=await p.evaluate(()=>{quiet=true;localStorage.clear();window.__forceOrigin='cnv';start();quiet=false;Q.length=0;const o={origin:S.origin.k,srv:isSrv()};const G=BAL.st14.goal;
-  o.s1=MS67.nhap14.steps(S.st.ms).map(x=>x[0]).join(' | ');o.d1a=msDone67(S.st.ms);S.tin=G.tin;o.d1b=msDone67(S.st.ms);
+  o.s1=MS67.nhap14.steps(S.st.ms).map(x=>x[0]).join(' | ');o.d1a=msDone67(S.st.ms);S.tin=G.tin;__tq14All();o.d1b=msDone67(S.st.ms);
   const fake={id:'sung14',t0:S.turn,r0:S.rank};o.s2=MS67.sung14.steps(fake).map(x=>x[0]).join(' | ');o.t2=MS67.sung14.t();o.d2a=msDone67(fake);S.nt=G.nt;o.d2b=msDone67(fake);
   const c=S.st.ch,j=c.plan.indexOf('ms:len14');o.hasLen=j>0;
   const snap=JSON.stringify({c,ms:S.st.ms,M:S.st.M,srv:S.srv});
@@ -138,7 +141,8 @@ const INP=fs.readFileSync(path.join(__dirname,'../measure/inpage4.js'),'utf8');
  const q=await boot(URL);
  for(const [nm,o] of olds){const r=await q.evaluate(s=>{const kl=document.getElementById('kload');if(kl)kl.remove();document.getElementById('title').hidden=true;Q.length=0;deser(JSON.parse(s));const plan=S.st.ch&&S.st.ch.plan.join(',');
     const n0=S.st.ch&&S.st.ch.n;for(let i=0;i<60;i++){Q.length=0;used=0;try{nextBuoi()}catch(e){return{err:e.message}}}Q.length=0;tab='story';render();const st=(document.getElementById('panel')||{}).textContent||'';tab='act';render();
-    return{f14:!!S.st.f14,v2:S.st.v2,same:plan===(S.st.ch&&S.st.ch.plan.join(',')),plan,n0,n:S.st.ch&&S.st.ch.n,max:S.st.ch&&S.st.ch.max,tab14:/\/14 ·/.test(st)}},o.save);
-  console.log(nm,JSON.stringify(r));chk(`old save (${nm}) loads, keeps its old frame, plays on`,!r.err&&!r.f14&&!o.f14&&!r.tab14&&r.n>=r.n0,r)}
+    return{q14:!!(S.st.ms&&S.st.ms.q14),f14:!!S.st.f14,v2:S.st.v2,same:plan===(S.st.ch&&S.st.ch.plan.join(',')),plan,n0,n:S.st.ch&&S.st.ch.n,max:S.st.ch&&S.st.ch.max,tab14:/\/14 ·/.test(st)}},o.save);
+  console.log(nm,JSON.stringify(r));/* main got the 14-chapter frame (c053ee92): a main-build save keeps whatever frame it had; a tutorial chapter it started has no quests (jtq14) */
+  chk(`old save (${nm}) loads, keeps its old frame, plays on`,!r.err&&r.f14===!!o.f14&&r.tab14===r.f14&&r.n>=r.n0&&!r.q14&&(nm!=='frame off'||!r.f14),r)}
  await q.context().close();
  console.log(JSON.stringify(ok),'errors:',errs.slice(0,10));await b.close();process.exit(ok.every(x=>x[1])&&!errs.length?0:1)})().catch(e=>{console.error(e);process.exit(2)});

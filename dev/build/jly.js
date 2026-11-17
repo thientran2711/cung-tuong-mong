@@ -4,7 +4,7 @@
    Loaded right after j88 (its tier-aware picker gives consort-rank dress only to the player and rivals: f88Wear). */
 /* B-answers art (D50): Phế phi họ Lý, Quản sự Tân Giả khố and Thầy dạy Thượng thư phòng have their OWN identities (FIGURES-others.json roles
    fallen/steward/tutor, 4 age bands each, same manifest format). Until the manifest lists them, Lý keeps the cold-palace consort art. */
-const NPCFIX={tgk:{name:"Quản sự Tân Giả khố",age:36,role:"steward"},ttp:{name:"Thầy dạy Thượng thư phòng",age:36,role:"tutor"}};
+const NPCFIX={tgk:{name:"Quản sự Tân Giả khố",age:BAL.ly.npcAge.tgk,role:"steward"},ttp:{name:"Thầy dạy Thượng thư phòng",age:BAL.ly.npcAge.ttp,role:"tutor"}};
 function lyArt(){try{return !!(FIGIX&&FIGIX.fallen)}catch(e){return false}}
 function npcFixOf(p){if(!p||p.kind!=="npc"||p.sid)return null;const k=Object.keys(NPCFIX).find(k=>NPCFIX[k].name===p.name);if(!k||!(FIGIX&&FIGIX[NPCFIX[k].role]))return null;S.npcFix=S.npcFix||{};if(!S.npcFix[k])S.npcFix[k]={name:NPCFIX[k].name,age:NPCFIX[k].age,npcFix:k};return S.npcFix[k]}
 function lyFallen(){if(!S.lyF)S.lyF={name:"Phế phi họ Lý",age:34,lyF:1};return S.lyF}

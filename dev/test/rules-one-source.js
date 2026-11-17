@@ -1,5 +1,6 @@
 /* rules-one-source check: every promotion threshold the player sees is the number the game checks (BAL / hhNeed), the Đức note
-   keeps the stat name, an old save (published build) loads, 0 page errors.
+   keeps the stat name, the ONE CORE constants (BAL.time/lot/walk/sneak/age/night, mirrors BL/SEATCAP/WVAL) are what texts and rules
+   print and check (§2b, perturbation), an old save (published build) loads, 0 page errors. Static half: dev/test/one-core-guard.js.
    usage: node dev/test/rules-one-source.js <base url dir> <W>x<H>@dpr   (serves <base>/_aa.html = new build, <base>/index.html = published main) */
 const {chromium}=require('playwright');
 const [,,BASE,SZ]=process.argv;const [WH,DPR]=(SZ||'755x1000@2').split('@');const [W,H]=WH.split('x').map(Number);
@@ -41,6 +42,28 @@ const fresh=()=>{try{localStorage.clear()}catch(e){}window.__nlInner=1;for(const
   S.duc=33;out.warn=ducWarnTxt({duc:-5});out.gloss=KIT_GLOSS["Đức"];out.bl=KIT_GLOSS["Bổng lộc"];out.hx=HX.duc;out.vp=VP.fix(ducWarnTxt({duc:-5}));
   S.rank=6;S.kids=[];out.reqNoSon=promoReqP(S).map(x=>x[1]);return out})()`);
  lg('rules done');
+ /* 2b. ONE CORE (owner OD:L1267, review/one-core): the mirror tables equal BAL, and every moved text PRINTS the constant: each core
+    number is set to an odd value, the texts / rules are read again and must show it, then BAL is put back (dev/test/one-core-guard.js
+    is the static half: no second value, no typed core text, no new inline rule number) */
+ R.core=await p.evaluate(()=>{const bad=[];const J=x=>JSON.stringify(x);const keep=J({time:BAL.time,lot:BAL.lot,walk:BAL.walk,sneak:BAL.sneak,srvAge:BAL.srvAge,age:BAL.age,night:BAL.night,pay:BAL.pay});
+  if(J(BL)!==J(BAL.pay))bad.push(['BL≠BAL.pay',BL,BAL.pay]);for(const k in BAL.seat)if(SEATCAP[k]!==BAL.seat[k])bad.push(['SEATCAP≠BAL.seat',k]);
+  if(J(WVAL)!==J(BAL.craftGift))bad.push(['WVAL≠BAL.craftGift',WVAL,BAL.craftGift]);
+  const used0=used,suc0=S.suc,buoi0=S.buoi;
+  try{Object.assign(BAL.lot,{bac:13,k:3});Object.assign(BAL.time,{khac:7,sucMin:11});BAL.pay[0]=41;Object.assign(BAL.night,{sung:9,an:6});
+   Object.assign(BAL.sneak,{danh:17,heavy:23,seen:6});Object.assign(BAL.walk,{near:5,far:6,farWet:6});Object.assign(BAL.age,{betroth:15,wed:19,reign:17});
+   const has=(name,txt,re)=>{if(!re.test(String(txt)))bad.push([name,String(txt).slice(0,160)])};
+   has('gloss Quẻ',KIT_GLOSS["Quẻ"],/13 bạc và 3 khắc/);has('HX.lot',HX.lot,/13 bạc và 3 khắc/);has('gloss khắc',KIT_GLOSS["khắc"],/7 khắc/);has('HX.buoi',HX.buoi,/7 khắc/);
+   has('gloss Bổng lộc',KIT_GLOSS["Bổng lộc"],/\(41–/);
+   {/* ghen-shown-r1 nx(): best night = nightGain(q+v+2), worst = nightGain(q+v) with q 1, v = b + his mood (j8) */const v=1+[1,0,-1,-2][S.emp.mood],hi=nightGain(1+v+2),lo=nightGain(1+v);if(lo.sung<9||lo.an<6)bad.push(['night floor not from BAL.night',lo]);
+    has('night card',nx(1),new RegExp('Sủng \\+'+hi.sung+', Ân tình \\+'+hi.an+'.*Sủng \\+'+lo.sung+', Ân tình \\+'+lo.an))}if(nightG(0)!==9||nightA(0)!==6)bad.push(['nightG/A',nightG(0),nightA(0)]);
+   has('sneak pen',accSneakPen("vuon").txt,/Danh -17/);has('sneak pen heavy',accSneakPen("dtd").txt,/Danh -23/);if(accSneakPen("vuon").danh!==-17)bad.push(['sneak rule',accSneakPen("vuon")]);
+   has('walk',travel(S.place==="home"?"home":S.place,S.place==="home"?"vuon":"home")+'',/^[56]$/);has('walk text',typeof walkFarK==="function"?walkFarK():'',/^6$/);
+   used=7;if(can(1))bad.push(['can(1) with the buổi spent (BAL.time.khac)']);used=6;if(!can(1))bad.push(['can(1) with 1 khắc left (BAL.time.khac)']);
+   used=0;S.suc=10;has('Sức floor',whyTime(2),/11/);if(can(2))bad.push(['can(2) with Sức under sucMin']);S.suc=12;if(!can(2))bad.push(['can(2) with Sức over sucMin']);
+  }catch(e){bad.push(['ERR',e.message])}
+  finally{const K=JSON.parse(keep);for(const k of ['time','lot','walk','sneak','srvAge','age','night'])Object.assign(BAL[k],K[k]);BAL.pay.splice(0,BAL.pay.length,...K.pay);used=used0;S.suc=suc0;S.buoi=buoi0}
+  return{bad,n:16}});
+ lg('core done '+JSON.stringify(R.core.bad));
  /* 3. the promotion panel + HUD chip render with the same numbers */
  R.ui=await p.evaluate(()=>{render();const t=document.body.innerText;const m=t.match(/Ngôi Hoàng hậu về sau cần:[^\n]*/);const d=document.getElementById('hud-duc');return{help:m&&m[0].slice(0,220),chip:d&&(d.getAttribute('title')||''),ovf:document.documentElement.scrollWidth>innerWidth+1}});
  console.log(JSON.stringify({R,errs,errsOld},null,1));await b.close()})().catch(e=>{console.error(e);process.exit(1)});

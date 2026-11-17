@@ -56,7 +56,7 @@ const {chromium}=require('playwright');const path=require('path');
   reset();A.coop=true;ok("the co-op friend (a human) is never an NPC stealer",!stealEligible(A,S));delete A.coop;
   oSteal=o0;Object.assign(BAL.steal,JSON.parse(keep));
   /* 11 · the real flip runs the pass: with forced odds, a week's flip ends stolen on some week */
-  reset();BAL.steal.k=1e6;BAL.steal.pMax=1;oSteal=function(){return 95};let st=0;for(let i=0;i<30;i++){reset();flip();const d=S.nightWhy;if(d&&d.cause==="stolen")st++}
+  reset();BAL.steal.k=1e6;BAL.steal.pMax=1;oSteal=function(){return 95};let st=0;for(let i=0;i<30;i++){reset();S.buoi=B4L;S.nfF=null;S.nightWhy=null;/* flip-entry: the flip runs at buổi tối (jfe) */flip();const d=S.nightWhy;if(d&&d.cause==="stolen")st++}
   ok("flip() → steal pass → nightWhy.cause 'stolen' (card-flip reads it)",st>0,{st});
   oSteal=o0;Object.assign(BAL.steal,JSON.parse(keep));
   ok("SOC 'steal' folded into the one choice",SOC.steal.ok(R0[0],S)===false);

@@ -8,11 +8,13 @@
      4. her own act after the week end (a dawn dialog that lowers an NPC's Sủng by 5) still lands: merged = host − 5;
      5. old rooms: thIll / cm / men are world keys; a guest whose room base lacks them never writes them, her own ties (menP) stay personal;
      6. single player: worldOn() is true when co-op is off.
-   usage: node dev/test/coop-one-world.js   (env W = warm-up weeks, RUNS = base weeks) */
+   usage: node dev/test/coop-one-world.js   (env W = warm-up weeks, RUNS = base weeks, SEED, QC_WT = worktree to test; ~15 s)
+   Go-live gate: dev/tools/quickcheck.d/50-coop-one-world.sh (2 seeds). */
 const {chromium}=require('playwright');const path=require('path');
-const ROOT=path.resolve(__dirname,'../..');const {serve,BASE}=require('./coop-serve.js');
+/* env QC_WT (go-live gate): test that worktree's build + server merge; default = this repo */
+const ROOT=path.resolve(process.env.QC_WT||path.join(__dirname,'../..'));const {serve,BASE}=require('./coop-serve.js');
 (async()=>{const {merge3}=await import(path.join(ROOT,'coop/worker/src/merge.js'));
-const b=await chromium.launch();const ctx=await b.newContext({viewport:{width:1180,height:820}});await serve(ctx);
+const b=await chromium.launch();const ctx=await b.newContext({viewport:{width:1180,height:820}});await serve(ctx,ROOT);
 await ctx.addInitScript(()=>{window.COOP_URL='http://127.0.0.1:9';});
 const p=await ctx.newPage();p.setDefaultTimeout(240000);const errs=[];p.on('pageerror',e=>errs.push(e.message));if(process.env.DBGID){p.on('console',m=>{if(m.text().startsWith('DBG'))console.log(m.text().slice(0,600))});await ctx.addInitScript(([id,k])=>{window.__DBG={id,k}},[process.env.DBGID,process.env.DBGK])}
 await p.goto(BASE+'index.html',{waitUntil:'domcontentloaded'});

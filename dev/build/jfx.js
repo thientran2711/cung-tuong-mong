@@ -100,7 +100,7 @@ const KF_SEASON=()=>{const m=(typeof S!=="undefined"&&S&&S.month)||1;return m<=3
 function kfBudget(n){const w=kitView().pages===1?.65:1;return Math.max(1,Math.round(n*KFX.q*w))}
 const R01=()=>Math.random(),RS=(a,b)=>a+Math.random()*(b-a);
 const KF_SPAWN={
- rays(p){const n=kfBudget(22);for(let i=0;i<n;i++){const a=RS(-Math.PI*.95,-Math.PI*.05),sp=RS(7,14);const s=kfSp("streak",p.x,p.y,{vx:Math.cos(a)*sp,vy:Math.sin(a)*sp,drag:.93,life:RS(40,60)},R01()<.5?0xf0d070:0xfff3c4,RS(.6,1.2));s.rotation=a}},
+ rays(p){if(typeof kfkPersons==="function"){/* KIT §68.7: light rays never start on a person: a rim light on the persons around the point instead */const P=kfkPersons({x:p.x-160,y:p.y-160,w:320,h:320});if(P.length){kitFxRim(P,{tone:"glow-gold",a:.9,dur:1800});return}}const n=kfBudget(22);for(let i=0;i<n;i++){const a=RS(-Math.PI*.95,-Math.PI*.05),sp=RS(7,14);const s=kfSp("streak",p.x,p.y,{vx:Math.cos(a)*sp,vy:Math.sin(a)*sp,drag:.93,life:RS(40,60)},R01()<.5?0xf0d070:0xfff3c4,RS(.6,1.2));s.rotation=a}},
  stars(p){const n=kfBudget(14),r=p.r,w=r?Math.max(120,r.width):260,h=r?Math.max(80,r.height):200;for(let i=0;i<n;i++){kfSp("spark",p.x+RS(-.55,.55)*w,p.y+RS(-.6,.5)*h,{life:RS(50,80),fade:"inout",tw:RS(.15,.3),vy:-.15},null,RS(.5,1.1)).rotation=0}},
  coins(p){const n=kfBudget(18);for(let i=0;i<n;i++){const s=kfSp("coin",RS(.08,.92)*innerWidth,RS(-120,-10),{vx:RS(-.6,.6),vy:RS(2,4),g:.22,life:RS(90,120),spin:RS(-.03,.03),coin:1,a0:1},null,RS(.8,1.25));s.v.ph=R01()*6}},
  ink(p){const n=kfBudget(6);for(let i=0;i<n;i++)kfSp("ink",p.x+RS(-60,60),p.y+RS(-50,50),{life:RS(70,95),grow:RS(.01,.02),a0:RS(.55,.75)},null,RS(.6,1.2))},
@@ -118,7 +118,7 @@ const KF_SPAWN={
  golddust(p){const n=kfBudget(22),r=p.r,w=r?Math.max(160,r.width):300;for(let i=0;i<n;i++)kfSp(R01()<.5?"spark":"ember",p.x+RS(-.5,.5)*w,p.y+RS(-40,10),{vx:RS(-.3,.3),vy:RS(.3,1.2),life:RS(70,120),fade:"inout",tw:.2,a0:.95},null,RS(.3,.7))},
  jade(p){const n=kfBudget(9);for(let i=0;i<n;i++){const a=RS(-Math.PI*.9,-Math.PI*.1),sp=RS(2,5.5);kfSp("jade",p.x+RS(-12,12),p.y+RS(-8,8),{vx:Math.cos(a)*sp,vy:Math.sin(a)*sp,g:.22,life:RS(60,90),spin:RS(-.18,.18),fade:"out"},null,RS(.8,1.3))}},
  incense(p){const n=kfBudget(6);for(let i=0;i<n;i++)kfSp("incense",RS(.25,.75)*innerWidth,innerHeight*RS(.65,.9),{vx:RS(-.15,.15),vy:RS(-.9,-.5),life:RS(160,220),grow:.002,fade:"inout",a0:.6,sway:.3},0xe8e2d8,RS(1.4,2.2)).rotation=0},
- lotus(p){kfSp("lotuslight",p.x,p.y,{life:120,grow:.004,fade:"inout",a0:.9},null,1.1).rotation=0;const n=kfBudget(10);for(let i=0;i<n;i++){const a=RS(0,Math.PI*2),sp=RS(1.5,4);kfSp("petal-lotus",p.x,p.y,{vx:Math.cos(a)*sp,vy:Math.sin(a)*sp-1,g:.05,drag:.97,life:RS(90,130),spin:RS(-.06,.06),sway:.5},null,RS(.8,1.2))}},
+ lotus(p){if(typeof kfkPersons==="function"){/* KIT §68.7 */const P=kfkPersons({x:p.x-130,y:p.y-130,w:260,h:260});if(P.length){kitFxRim(P,{tone:"lotuslight",a:.8,dur:2200});return}}kfSp("lotuslight",p.x,p.y,{life:120,grow:.004,fade:"inout",a0:.9},null,1.1).rotation=0;const n=kfBudget(10);for(let i=0;i<n;i++){const a=RS(0,Math.PI*2),sp=RS(1.5,4);kfSp("petal-lotus",p.x,p.y,{vx:Math.cos(a)*sp,vy:Math.sin(a)*sp-1,g:.05,drag:.97,life:RS(90,130),spin:RS(-.06,.06),sway:.5},null,RS(.8,1.2))}},
  peach(p){const n=kfBudget(18);for(let i=0;i<n;i++)kfSp("petal-peach",RS(0,innerWidth),RS(-80,-10),{vx:RS(-.5,.3),vy:RS(1.1,2),life:RS(150,210),spin:RS(-.05,.05),sway:.9,fade:"inout"},null,RS(.8,1.3))},
  letter(p){const s=kfSp("letter",p.x,p.y+40,{vy:-.5,drag:.97,life:110,fade:"inout",a0:1},null,1.6);s.rotation=RS(-.12,.12);s.texture=KFK.tex.letter[0]}
 };
@@ -226,7 +226,7 @@ function kfAmbient(){const on=kfAmbWant();KFX.ambOn=on;if(!on){clearInterval(kfA
    /* ONE petal effect: falling weather of the SAME kind as the season (peach/plum in spring, leaves in autumn, snow in winter) IS the season layer, full screen, in the weather's bolder motion but gentler count/size */
    if(w&&w.fall&&!w.line&&w.k.some(k=>se.k.includes(k))){se=Object.assign({},w,{lay:"se",cap:Math.round(w.cap*.85),sc:[w.sc[0]*.9,w.sc[1]*.9],a0:Math.min(.95,w.a0)});L.push(se)}
    else{if(!se.off)L.push(se);if(w&&KFX.sr)L.push(w)}
-   if(se.id==="sun")L.push(KF_RAYS);else if(KFX.keys.se2){KFX.keys.se2="";kfWxClear("se2",60)}
+   if(se.id==="sun"&&!(typeof kfkPersons==="function"&&KFX.sr&&kfkPersons({x:KFX.sr.x,y:KFX.sr.y,w:KFX.sr.w,h:KFX.sr.h}).length))L.push(KF_RAYS);/* KIT §68.7: no light shafts over persons on the stage */else if(KFX.keys.se2){KFX.keys.se2="";kfWxClear("se2",60)}
    if(!L.some(c=>c.lay==="wx")&&KFX.keys.wx){KFX.keys.wx="";kfWxClear("wx",60)}
    kfDeco();
    for(const c of L){const key=c.id+"|"+c.night+"|"+c.k.join();
