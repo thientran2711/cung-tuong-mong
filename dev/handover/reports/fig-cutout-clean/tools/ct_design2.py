@@ -6,7 +6,7 @@ T={}
 for l in open('/tmp/claude-0/w/design-table.md'):
     m=re.match(r"\| m(\d+) \| (\w+) \| ([^|]+)\| ([^|]+)\| ([^|]+)\| ([^|]+)\|",l)
     if m: T[int(m[1])]=[x.strip() for x in m.groups()[2:]]
-OVR={4:'warm orange-apricot (clearly more orange than peach-pink)',13:'strong coral (coral-orange-pink, clearly stronger than salmon)',14:'bright yellow-green (clearly yellower than mint or jade)',15:'bluer wisteria-violet (clearly bluer than lilac)',16:'deep rose-red (clearly deeper than blush pink)'}  # ROOT-3 redo overrides for ty1 a18
+OVR={4:'warm orange-apricot (clearly more orange than peach-pink)',13:'strong coral (coral-orange-pink, clearly stronger than salmon)',14:'bright yellow-green (clearly yellower than mint or jade)',15:'pale indigo-blue (clearly blue-navy, apart from lilac m11)',16:'deep rose-red (clearly deeper than blush pink)'}  # ROOT-3 redo overrides for ty1 a18
 TINT={1:"soft pale tint of",2:"mid-tone",3:"deep jewel tone of"}
 RICH={1:"ONE flowing sheer layer, wide flowing sleeves, embroidered border with a modest motif on hem and cuffs, crossed collar, thin sash, small hairpins",
 2:"TWO layers with a contrasting inner skirt, wide flowing sleeves, motif embroidered over bodice and sleeves, a sheer gauze shawl over one arm, richer hairpins",
