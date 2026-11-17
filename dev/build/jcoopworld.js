@@ -81,7 +81,7 @@ function withoutFriend(f){if(!CW.on||!S||CW.pulled)return f();const L=pullFriend
 function friendEntry(){return rivals.find(isF)||null}
 /* knowledge (owner 14/11): the friend follows j61 like any NPC — "Người lạ" until met. Her new life (rebirth) is a new person:
    forget what I knew of the old one (j61 stage, my Thiện cảm / Oán / chứng cứ toward that id). */
-function forgetFriend(o){const id=fp(),k="r"+id;if(!o)return;try{if(o.known)delete o.known[k];if(o.nkn)delete o.nkn[k]}catch(e){}
+function forgetFriend(o){const id=fp();if(!o)return;/* both her keys: "r"+id as a consort, "s"+id as a servant (buildFriendSrv sid) — before, a reborn servant friend kept the old stage */for(const k of ["r"+id,"s"+id])try{if(o.known)delete o.known[k];if(o.nkn)delete o.nkn[k]}catch(e){}
  if(o.rl)delete o.rl[id];if(o.ro)delete o.ro[id];if(o.cev)delete o.cev[id]}
 function freshFriend(P,o){if(!P)return;const key=(P.name||(P.S&&P.S.name)||"")+"#"+(P.life||0);if(CW.fKey!==undefined&&CW.fKey!==key)forgetFriend(o||S);CW.fKey=key}
 function placeFriend(P){T("placeFriend "+(P&&P.name));pullFriend();if(!P)return;if(S)freshFriend(P,S);
@@ -610,7 +610,12 @@ COOP.on("act",m=>{if(!m||m.k!==TK||!CW.on||m.from===CW.seat||!S||S.dead||m.week!
  try{r=f.apply(this,arguments)}finally{if(L&&L.length)pullFriend()}
  /* reviewer r2: the week's flip can run AFTER endTurn (main's jcycle defers it behind her maid's Kỳ nguyệt sự card, cyrep → flip again):
     CW.pend = this week's end is still waiting to go out, so that night is next week's too (else tn.w = the old week and the guest never takes it) */
- const nx=CW.inTurn||CW.pend?1:0;S.tn={w:wk()+nx,who:tnWho()};CW.tnLast=JSON.stringify([wk()+nx,tnWho()]);return r}})();
+ const nx=CW.inTurn||CW.pend?1:0;
+ /* jfe (flip-entry, main 16/11): the tablet now turns when buổi tối starts, INSIDE the week (not in endTurn). The guest takes a night only
+    from the merged week (tnWeek: tn.w === the new week) or from a relay, so a tối flip that only set S.tn (w = this week) never reached her:
+    the host's card for the friend was lost (coop-b2b5 B2.1). A flip inside the week = the host's final word now, relayed at once. */
+ if(!nx&&CW.base&&!S.dead){tnFinal();return r}
+ S.tn={w:wk()+nx,who:tnWho()};CW.tnLast=JSON.stringify([wk()+nx,tnWho()]);return r}})();
 CW.tnShared=true;/* jcycle cyNoFriend: the host's flip deck holds the friend (B2), the guest's flip draws nothing: no need to take her out */
 (function(){if(typeof resolveTonight!=="function")return;const f=resolveTonight;resolveTonight=function(){if(!CW.on)return f.apply(this,arguments);const t=S.tonight;
  /* her friend's night is played on her friend's client; an NPC's night only on the host (its gains are world numbers) */

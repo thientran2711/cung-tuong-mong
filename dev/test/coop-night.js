@@ -125,7 +125,9 @@ async function join(B,code){await B.page();await B.p.goto(BASE+'?room='+code,DCL
  async function rejoinHost(){await A.page();await A.p.goto(BASE,DCL);await A.p.waitForTimeout(3000);await tapText(A,/^(Chơi cùng bạn|Cùng hảo hữu)/);await A.p.waitForTimeout(600);await tapText(A,/^Trở lại phòng/);
    return until(A,()=>COOP.seat==='a'&&!COOP.frozen&&!!(window.COOPW&&COOPW.on&&typeof S!=='undefined'&&S),null,60000)}
  async function leaveBack(X,Y,tag,mid){const k0=await X.p.evaluate(()=>COOPW.tm.myKey());await X.p.close();
-  ok(await until(Y,()=>COOP.frozen&&!!document.getElementById('coopfz'),null,60000),tag+': '+Y.name+' sees the wait');if(mid)await mid();
+  /* bound = the Worker's: a socket gone without a close counts after STALE 45 s + one alarm 20 s = 65 s (coop/worker, coop-stable fix 1) */
+  const tw=Date.now(),seen=await until(Y,()=>COOP.frozen&&!!document.getElementById('coopfz'),null,75000);console.log('   '+tag+': wait seen after',Math.round((Date.now()-tw)/100)/10,'s');
+  ok(seen,tag+': '+Y.name+' sees the wait',seen?undefined:await Y.p.evaluate(()=>({st:COOP.state.status,seats:COOP.state.seats,peer:COOP.state.peerOnline,ws:window.__wsLog||null})));if(mid)await mid();
   const back=X===A?await rejoinHost():(await join(B,code),await until(B,()=>COOP.seat==='b'&&!COOP.frozen&&!!(window.COOPW&&COOPW.on&&typeof S!=='undefined'&&S),null,60000));
   ok(back,tag+': '+X.name+' back');if(X===B)await setTm(B,{readMs:2000});else await setTm(A,{readMs:2000});
   for(let i=0;i<3;i++){await clear(X);await sleep(300)}

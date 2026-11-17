@@ -83,7 +83,11 @@ function drop(){clearInterval(pinger);pinger=0;both=false;
 function startPing(){clearInterval(pinger);pinger=setInterval(()=>{if(!ws||ws.readyState!==1)return;
  if(Date.now()-lastRx>SILENT){try{ws.close()}catch(e){}return}try{ws.send('{"t":"ping"}')}catch(e){}},PING)}
 on("room",startPing);
-function wait(code){return new Promise((res,rej)=>{if(pend)pend.rej({code:"replaced"});pend={res,rej};tries=0;connect(code)})}
+/* a second join of the same room while our socket is still CONNECTING (guest: the ?room= link + "Vào phòng"): keep that socket. Abandoning
+   it closes it before the handshake ends: no close frame reaches the Worker, and the edge may keep its upstream open (a ghost of this seat:
+   the friend's presence stays "online", coop-night "sees the wait"; or it arrives late and replaces the live one, 4001). */
+function wait(code){return new Promise((res,rej)=>{if(pend)pend.rej({code:"replaced"});pend={res,rej};tries=0;
+ if(ws&&ws.readyState===0&&st.room===code&&want)return;connect(code)})}
 async function create(){const r=await fetch(base()+"/api/room",{method:"POST"}).catch(()=>null);
  if(!r||!r.ok)throw {code:"net"};const j=await r.json();return wait(j.code)}
 async function join(code){code=String(code||"").trim().toUpperCase();

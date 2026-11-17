@@ -46,6 +46,14 @@ async function week(A,B,tag){for(let i=0;i<3;i++){await clear(A);await clear(B)}
   const t0=Date.now();while(Date.now()-t0<30000){await clear(A);await clear(B);if(await A.p.evaluate(w=>COOP.state.week>w,w0)&&await B.p.evaluate(w=>COOP.state.week>w,w0))break;if(await A.p.evaluate(x=>(S.buoi||0)!==x,a)&&await B.p.evaluate(x=>(S.buoi||0)!==x,c))break;await sleep(400)}
   if(await A.p.evaluate(w=>COOP.state.week>w&&!COOPW.pend,w0)&&await B.p.evaluate(w=>COOP.state.week>w&&!COOPW.pend,w0))break}
  const okw=await A.p.evaluate(w=>COOP.state.week===w+1,w0)&&await B.p.evaluate(w=>COOP.state.week===w+1,w0);ok(okw,tag+': week merged once',[await D(A),await D(B)]);await sleep(1500);return okw}
+/* main flip-entry (jfe, 16/11): the tablet turns when buổi tối STARTS, inside the week (before: at the week start). Walk both seats to
+   tối of the same week and read the night there, before it is spent */
+async function toNight(A,B,tag){const at=o=>o.p.evaluate(()=>(S.buoi||0)>=B4L);const w0=await A.p.evaluate(()=>COOP.state.week);
+ for(let g=0;g<8;g++){if(await at(A)&&await at(B))break;for(let i=0;i<3;i++){await clear(A);await clear(B)}
+  const a=await A.p.evaluate(()=>S.buoi||0),c=await B.p.evaluate(()=>S.buoi||0);if(!await at(A))await press(A);if(!await at(B))await press(B);
+  await until(A,x=>(S.buoi||0)!==x[0]||(S.buoi||0)>=B4L,[a],30000);await until(B,x=>(S.buoi||0)!==x[0]||(S.buoi||0)>=B4L,[c],30000)}
+ const r=await at(A)&&await at(B)&&await A.p.evaluate(w=>COOP.state.week===w,w0)&&await B.p.evaluate(w=>COOP.state.week===w,w0);
+ for(let i=0;i<3;i++){await clear(A);await clear(B)}await sleep(1500);ok(r,tag+': both at buổi tối of the same week',[await D(A),await D(B)]);return r}
 /* the host's tablet forced to one card (pick(p) → true for the chosen one), dice inside flip set so the draw always happens and nobody steals */
 const forceFlip=(o,who)=>o.p.evaluate(who=>{window.__fw=who;if(!window.__ff){window.__ff=1;const f=flip;flip=function(){const w=window.__fw;if(w==null)return f.apply(this,arguments);
   const r0=roll,n0=nightCh;roll=x=>x>=60;nightCh=p=>{const id=p===S?'me':p.coop?'f':'npc'+p.id;return (w==='npc'?(!p.coop&&p!==S&&p.id===window.__npc):id===w)?100:0};try{return f.apply(this,arguments)}finally{roll=r0;nightCh=n0}}}
@@ -71,20 +79,21 @@ const forceFlip=(o,who)=>o.p.evaluate(who=>{window.__fw=who;if(!window.__ff){win
    drawn although her card is off the tray (her client then cancels the night: tn 902 vs null, a test artifact). Pick a name out of her cycle. */
 {const n=await B.p.evaluate(()=>{if(typeof cyBase!=='function')return null;const t=S.tuan||0,bad=[t,(t+1)%3],base=S.name;for(let i=0;i<400;i++){S.name=base+(i?' '+i:'');if(!bad.includes(cyBase(S).t))break}render();return S.name});
  if(n)await A.p.evaluate(n=>{const f=COOPW.friend();if(f)f.name=n},n)}
-await forceFlip(A,'f');ok(await week(A,B,'B2.1'),'B2.1 week');
- {const a=await D(A),c=await D(B);ok(a.tn&&a.tn.who===902&&a.tonight===902,'B2.1 host: tn = the guest (902), her own night = the friend',a);
+await forceFlip(A,'f');await toNight(A,B,'B2.1');
+ {const a=await D(A),c=await D(B);ok(a.tn&&a.tn.who===902&&a.tn.w===a.w&&a.tonight===902,'B2.1 host: tn = the guest (902), her own night = the friend',a);
   ok(c.tonight==='me','B2.1 guest: tonight is HER night (from the host\'s tn)',c);
   ok(await B.p.evaluate(()=>window.__dil.includes('Kính sự phòng báo tin')),'B2.1 guest gets the Kính sự phòng card',await B.p.evaluate(()=>window.__dil));
   await B.p.screenshot({path:OUT+'/b2-guest-night-1180x820.png'})}
- {const a=await A.p.evaluate(()=>COOPW.b4),c=await B.p.evaluate(()=>COOPW.b4);
-  ok(a.includes('rivalsTurn'),'B4 host: rivalsTurn ran WITH the guest in the harem',a);ok(!c.length,'B4 guest: no world roll with a friend',c)}
  /* ---- B2.2 in the week: the guest pleads illness (night gone) → the host sees no night; the host then claims it → the guest sees it is the host's ---- */
  for(let i=0;i<3;i++){await clear(A);await clear(B)}
  await B.p.evaluate(()=>{S.tonight=null;render()});ok(await until(A,()=>S.tonight==null,null,15000),'B2.2 host: the guest gave the night up → no night on the host',await D(A));
  await A.p.evaluate(()=>{S.tonight='me';render()});ok(await until(B,()=>S.tonight&&S.tonight!=='me'&&S.tonight.coop,null,15000),'B2.2 guest: the night is now the host\'s',await D(B));
  for(let i=0;i<3;i++){await clear(A);await clear(B)}
  /* ---- B2.3 an NPC's night: same NPC on both ---- */
- await forceFlip(A,'npc');ok(await week(A,B,'B2.3'),'B2.3 week');
+ ok(await week(A,B,'B2.2'),'B2.2 week');
+ {const a=await A.p.evaluate(()=>COOPW.b4),c=await B.p.evaluate(()=>COOPW.b4);
+  ok(a.includes('rivalsTurn'),'B4 host: rivalsTurn ran WITH the guest in the harem',a);ok(!c.length,'B4 guest: no world roll with a friend',c)}
+ await forceFlip(A,'npc');await toNight(A,B,'B2.3');
  {const a=await D(A),c=await D(B);ok(a.tonight!=null&&a.tonight!=='me'&&a.tonight<900&&a.tonight===c.tonight,'B2.3 the same NPC on both',[a.tonight,c.tonight])}
  /* ---- B5 seat caps ---- */
  {  const a=await A.p.evaluate(()=>{const f=COOPW.friend();const rk=rkOf(f);const L0=holders(rk).includes(f);let L1=null;const P=[];for(let i=rivals.length-1;i>=0;i--)if(rivals[i].coop)P.push([i,rivals.splice(i,1)[0]]);

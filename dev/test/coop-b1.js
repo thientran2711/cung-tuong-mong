@@ -66,7 +66,7 @@ const seenTxt=o=>o.p.evaluate(()=>JSON.stringify(Q.map(q=>q.t+' '+(q.h||'')))+((
  const kSteal=await pickIt(A,'steal'),kBurn=await pickIt(A,'burn');console.log('items',kSteal,kBurn);ok(kSteal&&kBurn,'test items found',[kSteal,kBurn]);
  /* B: two valuables, a burnable thing, three children (son 7, son 4, daughter 3), pregnant (open) */
  await B.p.evaluate(([a,c])=>{S.inv=S.inv||[];S.inv.push({k:a},{k:a},{k:c});S.kids=S.kids||[];
-   const s1=mkKid('m',7),s2=mkKid('m',4),d1=mkKid('f',3);S.kids.push(s1,s2,d1);S.preg=3;S.hidden=false;S.fake=0;render()},[kSteal,kBurn]);
+   /* push each at once: mkKid avoids the names of children already placed (j1 allKids), as every birth does — made together they could share a name */for(const [x,a] of [['m',7],['m',4],['f',3]])S.kids.push(mkKid(x,a));S.preg=3;S.hidden=false;S.fake=0;render()},[kSteal,kBurn]);
  ok(await waitFr(A,()=>{const f=COOPW.friend();return f&&(f.kids||[]).length>=3&&(f.inv||[]).length>=3&&f.preg>0}),'A\'s friend entry carries B\'s bag, children and open pregnancy (live pos)',await fr(A));
  const own0=await own(B);
  /* 1 laydo: thất lạc case on her side, the item in my chest */
