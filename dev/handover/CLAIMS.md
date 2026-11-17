@@ -834,3 +834,5 @@
 | REVIEW tinbao-ui r1 of e988d2e9 (sonnet; lands after ag-all-2) | review/tinbao-ui-r1 | MAIN s33 | session_01UV1Szjrj8Z1MLukab13oZM | RUNNING | 17/11 15:53Z |
 | GRAND ENDINGS r3 (opus; design only; 4 grand + 2 kỳ ngộ, no normal, option C, branch chart in Sổ luân hồi; MAIN s33 15:30Z, OD ~15:25Z (1)) | review/grand-endings-design | D | session_01964izFEk4tjfDFmF5Rz6mu | RUNNING | 17/11 15:58Z |
 | IMAGE SWEEP (sonnet; git images out of main + CDN _review leftovers of finished topics; MAIN s33 15:40Z) | review/image-sweep | D | session_01964izETC9aNsnh7fPiiwPp | RUNNING | 17/11 15:58Z |
+| REVIEW one-core-jkc r1 84129fa23 (opus BIG; brief briefs/review-one-core-jkc.md) | review/one-core-jkc-r1 | B | (opening-r) | RUNNING | 17/11 16:00Z |
+| one-core-jkc #2 (locks + fx amounts + game-wide odb; opus; brief briefs/one-core-jkc-2.md) | review/one-core-jkc-2 | B | (opening-w) | RUNNING | 17/11 16:00Z |
