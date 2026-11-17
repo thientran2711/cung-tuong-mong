@@ -723,3 +723,4 @@
 | stage-caption | review/stage-caption | MAIN s31 | session_01UV1Szk3y43acKY1bEhtMWZ | RUNNING | 17/11 12:11Z |
 | toil-looks #N (6 levels, colour, chin, tease 1-3) | review/toil-looks2 | MAIN s31 | session_01UV1SzmK8entV9CAWqPJaHH | RUNNING | 17/11 12:11Z |
 | tuanluc-sync #3 (opus) | review/tuanluc-sync | MAIN s31 | session_01UV1SziJFVGaiWpZGPF2Egd | RUNNING | 17/11 12:11Z |
+| map-me-mark #2 (successor; #1 rolled over at ff6ade20) — zoom fit-all, 4-edge fade, map weather, pan flush, Ta + N bóng | review/map-me-mark | MAIN s31 | session_01UV1SzjTth6eagb4DB6vtqt | RUNNING | 17/11 12:21Z |
