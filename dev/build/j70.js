@@ -67,7 +67,7 @@ const M70={
   {id:"tsv",n:"Mua cung nữ dẫn nàng ra hồ",tl:["gặp riêng cung nữ hầu nàng đi dạo","cung nữ ấy hay rủ chủ ra hồ sen ngắm trăng"],pl:null,vis:2,need:2,bac:30,acc:"tsv",gd:"Không theo lời rủ ra hồ lúc vắng",st:"Gọi cung nữ ấy ra hỏi chuyện"}]},
  kframe:{k:"kframe",band:3,n:"Vu con nàng trù ẻo",opp:["lonely","night","fest"],R:[
   {id:"bup",n:"May búp bê trù ẻo",tl:["mua vải vàng và kim bạc, đóng cửa may vá ban đêm","hỏi ngày sinh tháng đẻ của hoàng tự"],pl:null,vis:5,need:3,bac:20,gd:"Lục soát phòng con mỗi tối",st:"Cho người lục và đốt búp bê trước"},
-  {id:"thay",n:"Mua chuộc thầy dạy",tl:["mời thầy dạy của hoàng tự đến uống rượu","thầy dạy ấy bỗng hay hỏi chuyện chữ viết của hoàng tự"],pl:null,vis:3,need:3,bac:40,gd:"Đổi thầy dạy cho con",st:"Nói chuyện riêng với thầy dạy, cho hắn đường lui"},
+  {id:"thay",n:"Mua chuộc thầy dạy",tl:["mời thầy dạy của hoàng tự đến uống rượu","thầy dạy ấy bỗng hay hỏi chuyện chữ viết của hoàng tự"],pl:null,vis:3,need:3,bac:40,win:1,gd:"Đổi thầy dạy cho con",st:"Nói chuyện riêng với thầy dạy, cho hắn đường lui"},
   {id:"chu",n:"Giả chữ viết của hoàng tự",tl:["thu gom giấy viết bỏ của hoàng tự","thuê người khéo tay nhại chữ"],pl:null,vis:3,need:3,bac:30,gd:"Đốt hết giấy nháp của con",st:"Tìm người nhại chữ, bắt hắn khai"}]},
  frame:{k:"frame",band:2,n:"Vu oan bùa ngải",opp:["lonely","night","fest"],R:[
   {id:"bup",n:"May búp bê chôn trong vườn nàng",tl:["mua vải vàng và kim bạc, đóng cửa may vá ban đêm","sai người đêm đêm lảng vảng quanh vườn cung khác"],pl:null,vis:5,need:2,bac:20,gd:"Cho người đào xới, lục soát vườn",st:"Đào búp bê lên trước, giữ làm tang chứng"},
@@ -85,15 +85,15 @@ const M70={
   {id:"tq",n:"Biếu quà Tổng quản",tl:["đem lễ vật hậu sang chỗ Tổng quản","Tổng quản bỗng lạnh nhạt khi nhắc tên nạn nhân"],pl:null,vis:4,need:2,bac:50,gd:"Biếu Tổng quản một phần lễ",st:"Nhờ người nói khéo với Tổng quản"},
   {id:"benh",n:"Tung tin nàng đang có bệnh",tl:["hỏi Thái y viện về bệnh truyền nhiễm","đồn nhỏ rằng nạn nhân ho suốt đêm"],pl:"tyv",vis:5,need:2,bac:10,gd:"Mời thái y viết giấy khỏe mạnh",st:"Mời thái y bắt mạch công khai"}]},
  rumor:{k:"rumor",band:1,n:"Tung tin đồn bẩn",opp:["fest","lonely","night"],R:[
-  {id:"mama",n:"Trả bạc cho các ma ma già",tl:["mời các ma ma già uống trà, kể chuyện thâu đêm","ma ma bên ấy thì thầm tên nạn nhân"],pl:null,vis:5,need:2,bac:10,gd:"Giữ kẻ hầu kín miệng",st:"Gặp các ma ma, cho bạc gấp đôi để im"},
+  {id:"mama",n:"Trả bạc cho các ma ma già",tl:["mời các ma ma già uống trà, kể chuyện thâu đêm","ma ma bên ấy thì thầm tên nạn nhân"],pl:null,vis:5,need:2,bac:10,win:1,gd:"Giữ kẻ hầu kín miệng",st:"Gặp các ma ma, cho bạc gấp đôi để im"},
   {id:"tho",n:"Dán thơ nặc danh",tl:["mua giấy và mực loại rẻ","người bên ấy đi đêm qua các cổng"],pl:null,vis:4,need:2,bac:5,gd:"Cho người gỡ thơ ngay khi thấy",st:"Rình bắt kẻ dán thơ"},
-  {id:"tg",n:"Tung tin qua thái giám",tl:["hay trò chuyện với thái giám các cung","thái giám bên ấy bỗng biết nhiều chuyện riêng"],pl:"ksp",vis:4,need:2,bac:10,gd:"Ít để kẻ lạ ra vào cung",st:"Gọi thái giám ấy ra hỏi"}]},
+  {id:"tg",n:"Tung tin qua thái giám",tl:["hay trò chuyện với thái giám các cung","thái giám bên ấy bỗng biết nhiều chuyện riêng"],pl:"ksp",vis:4,need:2,bac:10,win:1,gd:"Ít để kẻ lạ ra vào cung",st:"Gọi thái giám ấy ra hỏi"}]},
  accuse:{k:"accuse",band:2,n:"Gom chứng cứ rồi tố",opp:["lonely","night"],R:[
   {id:"do",n:"Cho người rình rập",tl:["cho người rình trước cửa cung nạn nhân","hỏi han cung nữ bên ấy giờ giấc chủ"],pl:null,vis:5,need:3,bac:20,gd:"Cẩn trọng lời ăn tiếng nói",st:"Bắt kẻ rình, đuổi đi"},
-  {id:"chung",n:"Mua lời khai",tl:["tìm một kẻ hầu bị đuổi của nạn nhân","kẻ hầu cũ ấy được cho ăn ở tử tế"],pl:null,vis:4,need:3,bac:40,gd:"Đối xử tử tế với kẻ hầu cũ",st:"Tìm kẻ hầu cũ trước, cho bạc"},
+  {id:"chung",n:"Mua lời khai",tl:["tìm một kẻ hầu bị đuổi của nạn nhân","kẻ hầu cũ ấy được cho ăn ở tử tế"],pl:null,vis:4,need:3,bac:40,win:1,gd:"Đối xử tử tế với kẻ hầu cũ",st:"Tìm kẻ hầu cũ trước, cho bạc"},
   {id:"so",n:"Chờ nàng sơ hở",tl:["ghi chép từng việc nạn nhân làm","đếm số đồ trang sức nạn nhân đeo"],pl:null,vis:3,need:3,bac:0,gd:"Không mặc đồ quá phẩm, giữ lễ",st:"Xin gặp nói chuyện thẳng, gỡ mối"}]},
  ksab:{k:"ksab",band:2,n:"Phá việc học của con nàng",opp:["night"],R:[
-  {id:"thay",n:"Mua chuộc thầy dạy",tl:["mời thầy dạy của hoàng tự uống rượu","thầy dạy ấy dạo này hay cho nghỉ học"],pl:null,vis:3,need:2,bac:30,gd:"Tự kèm con học",st:"Đổi thầy dạy"},
+  {id:"thay",n:"Mua chuộc thầy dạy",tl:["mời thầy dạy của hoàng tự uống rượu","thầy dạy ấy dạo này hay cho nghỉ học"],pl:null,vis:3,need:2,bac:30,win:1,gd:"Tự kèm con học",st:"Đổi thầy dạy"},
   {id:"choi",n:"Dụ con nàng ham chơi",tl:["mua dế và diều tặng hoàng tự","người lạ hay rủ hoàng tự ra vườn"],pl:"vuon",vis:5,need:2,bac:15,gd:"Giữ con ở thư phòng",st:"Bắt kẻ dụ con, đuổi đi"},
   {id:"tin",n:"Tung tin con nàng đần độn",tl:["hỏi han thầy dạy về bài vở của hoàng tự","đồn nhỏ rằng hoàng tự học mãi không thuộc"],pl:null,vis:4,need:2,bac:10,gd:"Cho con trả bài trước mặt mọi người",st:"Mời thầy dạy nói rõ trước Hoàng thượng"}]},
  joint:{k:"joint",band:2,n:"Phe cánh liên thủ vu cáo",opp:["lonely","night"],R:[
@@ -126,9 +126,11 @@ function methFor70(k){const L=Object.keys(M70).filter(m=>M70[m].k===k);return L.
 function pickRoute70(a,t,M){const tc=tc70(a);const L=M.R.filter(r=>{if(a!==S&&r.bac&&(a.bac||0)<r.bac)return false;if(r.acc==="tsv"&&!((t.staff||[]).length))return false;return true});if(!L.length)return null;
  const w=L.map(r=>[r,Math.max(.2,(tc>=BAL.wit.hi?10-r.vis:5)+(r.acc&&traitsOf(a).includes("Xảo quyệt")?3:0))]);let s=Math.random()*w.reduce((x,y)=>x+y[1],0),i=0;while(s>w[i][1]&&i<w.length-1){s-=w[i][1];i++}return w[i][0]}
 /* AG-ALL-2d4 (OD 17/11 ~17:10Z (1), bạc only on success, whole family): a route whose bạc BUYS a person — a servant of the target (acc "tsv"),
-   or the bribe schemes "Mua người trong cung nàng" / "Rút thẻ bài" — pays only when that person takes it: tsv at her yes (newPlot70), the bribe
-   schemes when the act lands (exec70, a.__won set by econPayWin). Every other route's bạc is preparation (materials, hire) and is paid at the start. */
-function payWin70(M,r){return !!(r&&r.bac&&(r.acc==="tsv"||M&&(M.k==="bribe"||M.k==="block")))}
+   or the bribe schemes "Mua người trong cung nàng" / "Rút thẻ bài", or a route marked win:1 whose bạc buys a person's word or betrayal (Trả bạc
+   cho các ma ma già, Tung tin qua thái giám, Mua lời khai, Mua chuộc thầy dạy; review ag-all-2 r2) — pays only when that person takes it: tsv at
+   her yes (newPlot70), the others when the act lands (exec70, a.__won set by econPayWin in the act). Every other route's bạc is preparation
+   (materials, hired watchers) and is paid at the start. */
+function payWin70(M,r){return !!(r&&r.bac&&(r.acc==="tsv"||r.win||M&&(M.k==="bribe"||M.k==="block")))}
 function newPlot70(a,t,m,rid,mo,opt){const z=j70();const M=M70[m];if(!M)return null;const r=rid?M.R.find(x=>x.id===rid):pickRoute70(a,t,M);if(!r)return null;
  const tc=tc70(a);const p={id:++z.n,a:a===S?"me":a.id,t:t===S?"me":t.id,m,r:r.id,mo:mo||"band",st:"prep",pg:0,need:r.need+(a!==S&&tc>=BAL.wit.hi?1:0),born:wk(),g:0,kn:0,kt:[],err:(opt&&opt.err)||0,cool:0,wt:0};
  if(opt&&opt.fac)p.fac=1;if(M.k==="kpoison"||M.k==="pond"||M.k==="kframe"||M.k==="ksab"){const k=tKid70(p);if(k)p.kid=k.name}
@@ -291,7 +293,7 @@ PEND.j70start=pp=>{const v=RV(pp.v),A=ACT[pp.k];if(!v||!A||!S)return null;const 
  const now=ch70(`Ra tay ngay: ${A.n.toLowerCase()}`,{p:o0,wt:[G70(A.x&&!/^cần|^lộ/.test(A.x)?A.x:A.n)],lt:[R70("dễ bị lộ, nàng nắm chứng cứ")],k:A.c&&Object.keys(A.c).length?[R70(fmt(A.c))]:[]});now.go=()=>{window.__j70inst=1;try{doAct(rivals.indexOf(v),k)}finally{window.__j70inst=0}};if(o0==null)now.x=`thành: ${G70(A.x||A.n)} · kèm: ${R70("dễ bị lộ")}${A.c&&Object.keys(A.c).length?", "+R70(fmt(A.c)):""}`;O.push(now);
  const busyOwn=!canNew70("me",v.id);
  for(const m of OWN70[k]){const M=M70[m];for(const r of M.R){if(O.length>=5)break;if(r.acc==="tsv"&&!(v.staff||[]).length)continue;const o1=oddsOf70(S,v,M.k,J70CFG.prep+6+(r.acc?8:0));
-   const pw=payWin70(M,r);const c=ch70(`Bày mưu: ${r.n.toLowerCase()}`,{c:r.bac&&!pw?{bac:-r.bac}:{},need:pw?[{t:`cần ${r.bac} bạc`,ok:(S.bac||0)>=r.bac}]:undefined,wt:[G70(`chuẩn bị ${r.need} tuần, chờ ${OPP70[M.opp[0]].n}`),G70(o1!=null?`lúc ra tay: ${word(o1)}`:"dễ thành hơn")],k:[R70(`dấu vết: ${r.tl[0].replace(/nạn nhân/g,v.name)}`),R70(`${v.name} có thể phát hiện`)].concat(pw?[R70(`Bạc -${r.bac} chỉ khi người ấy nhận`)]:[])});
+   const pw=payWin70(M,r);const c=ch70(`Bày mưu: ${r.n.toLowerCase()}`,{c:r.bac&&!pw?{bac:-r.bac}:{},need:pw?[{t:`cần ${r.bac} bạc`,ok:(S.bac||0)>=r.bac}]:undefined,wt:[G70(`chuẩn bị ${r.need} tuần, chờ ${OPP70[M.opp[0]].n}`),G70(o1!=null?`lúc ra tay: ${word(o1)}`:"dễ thành hơn")],k:[R70(`dấu vết: ${r.tl[0].replace(/nạn nhân/g,v.name)}`),R70(`${v.name} có thể phát hiện`)].concat(pw?[R70(`Bạc -${r.bac} chỉ khi ${r.win?"mưu thành":"người ấy nhận"}`)]:[])});
    c.go=()=>{if(!canNew70("me",v.id)){log("Ngươi đang theo đuổi đủ mưu rồi.");return}spend(2);const p=newPlot70(S,v,m,r.id,"own");if(p&&!p.end)log(`Ngươi bắt đầu bày mưu ${M.n.toLowerCase()} nhắm vào ${v.name}: ${r.n.toLowerCase()}.`);if(p&&p.pend==="ownfail"){push70(p,true)}};if(!busyOwn)O.push(c)}}
  O.push(ch70("Thôi",{ok:()=>"Ngươi gác lại ý định."}));
  return{t:`<p>Ngươi định ${A.n.toLowerCase()} ${v.name}.</p><p class="past">Ra tay ngay thì nhanh mà dễ hỏng; bày mưu từ từ thì dễ thành hơn, nhưng mỗi tuần chuẩn bị là thêm một lần người của nàng có thể bắt gặp.${busyOwn?" Ngươi đang theo đuổi đủ mưu, chỉ có thể ra tay ngay.":""}</p>`,o:O,who:pv(v)}};
