@@ -883,3 +883,4 @@
 | coop-thin-b-r3 LIVE b5d109fe0 (main e9bbc4d6 → b5d109fe; rollback e9bbc4d6) | review/land-coop-thin-b-r3 | B | session_01N1tNP34QePRanPQevmttcs | LIVE | 17/11 17:25Z |
 | kit-rank-name r1 successor (continues 9f54a9a1; report HANDOVER) | review/kit-rank-name | MAIN s35 | session_01UV1SzgiSj7gRNYszv9YgxE | RUNNING | 17/11 17:26Z |
 | AG-MOODKNOW moodCauseKnown(pid): secret vs public palace info (opus; owner OD ~L1668 17:55Z (1); main s35) | review/ag-moodknow | C-AG | session_01UV1Szkwcqu7s9tTHPUXBrh | RUNNING | 17/11 17:28Z |
+| REVIEW coop-b1-regress 24d8eb38 (sonnet SMALL, tests only; brief briefs/review-coop-b1-regress.md) | review/coop-b1-regress-r1 | B | (opening) | RUNNING | 17/11 17:30Z |
