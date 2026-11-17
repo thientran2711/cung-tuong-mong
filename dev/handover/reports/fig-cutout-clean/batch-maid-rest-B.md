@@ -130,3 +130,12 @@ maid-m34-tm0-a18	EbnLr3SuuO	gOt3NgMSXO	ok
 maid-m34-tm2-a18	xSX4OV9jfW	s7869Syl8e	ok
 maid-m34-tm3-a18	0eSm8j5TfW	VXwvmySMMU	ok
 maid-m34-tm4-a18	N2H0YEB6D9	4RQWnKp9Aa	REDO (live but a big paddle-shaped object behind the head; regenerate, prop = hairpin fingertip is the cause: use a different prop)
+maid-m33-t5-a18	TdUhIK9VNR	LwoNP52swO	ok
+maid-m33-t6-a18	P3uYG8x42C	Bh9FuiJoQR	ok
+maid-m33-t7-a18	eIyEasNdqL	DoJfh0epcl	ok
+maid-m33-t8-a18	bxVwgGz5Y2	nVLodGcYQD	ok
+maid-m33-tm0-a18	1ley7c4r4r	s7869vNl8e	ok
+maid-m33-tm2-a18	4RQWzvG9Aa	jUB9Pv4LD0	ok
+maid-m33-tm3-a18	lJIi9dWgv9	s7869SXl8e	ok
+maid-m33-tm4-a18	lJIi9Xcgv9	huZk50TvqL	ok
+## 120 a18 done (m27..m34, m34-tm4 REDO pending in gJ). NEXT after gJ/gK = m35-tm4 + m36 (line 144+).
