@@ -88,6 +88,7 @@ OPEN OWNER QUESTIONS: (B) explicit OK to overwrite live fig-maid-*-ty* with the 
 IDLE (C's): art lead #7 session_011xDdVNkgEgTqsZJxUh9Xd8; W8 mama session_011xDdVRWZVWQYAYYva3YuqJ. ROOT-6 session_011xDdVQNdyTACuGN42yEBQZ stopped (ROOT-5's child; not archived by C).
 
 FOREMAN C ROOT-12 (art) = session_011xDdVP8NwhY7F8EwPHbZsi · START_CTX ~9% (get_session reads 0, own estimate) → roll over at >= 34%, ceiling 60% · depth 5 (lineage 5/8; no child foreman) · own hourly wake (:32) · reports to MAIN s34 via this file.
+- 02:00Z(real 18/11) W15 sample 2 ướt sũng overlay (stain-uot-overlay-room.jpg): C LOOKED — darker streaked robe + glossy droplets, clipped OK; face/hair wet sheen faint, tóc bết needs hair-fit box → SENT owner. Next smudge/ink/pox.
 - 01:52Z(real 18/11) OWNER: "Ok, vẽ theo lệnh của chat chính đi" → tea overlay v3 OK; W15 continues the full MAIN looks-2 list with the overlay method.
 - 01:48Z(real 18/11) W15 tea overlay v3 (translucent amber wash on left sleeve + chest, pattern visible, clipped to figure, tiny face droplets): C LOOKED OK → SENT owner room shot. Next ướt sũng, then smudge/ink/pox.
 - 01:42Z(real 18/11) W15 overlay-method tea sample (stain-tra-overlay-room.jpg): C LOOKED — stain is a blob spilling outside the figure, flat hem → NOT sent; W15 told: clip to figure alpha, smaller splash marks following folds (luminance mask, multiply), tiny face droplets. W11 pushed final c01 a18 record f31fa5c (current: t1 v4, t2 v9, t3 v4, t4 v10, t5 v8, t6 v8, t7 v6, t8 v7; stale versions to wipe on ROOT-13 word).
