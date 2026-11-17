@@ -680,7 +680,7 @@
 | one-core-dup2-r2 r3 FAIL 711e637d (15 wrong bindings + j17 AOUT + guard gaps) → opus fix r3 (brief briefs/one-core-dup2-r3.md; sonnet fix worker archived) | review/one-core-dup2-r2 | B | session_01N1tNP5Muf9zF38i81jtdgj | RUNNING | 17/11 07:41Z |
 | KỲ NGUYỆT SỰ length rolled 5/6/7 per (woman, month) (opus; MAIN s30 07:36Z, OD 07:35Z) | review/cycle-roll | D | session_01964izEeMN4FkyE99xVCtWw | PASS 968e6209 (review/cycle-roll-r1) FOR MAIN — archived | 17/11 07:41Z |
 | one-core-arcs r1 FAIL c682afe6 (66 one-arg go amounts + guard amt regex) → fix r2 by the arcs worker (opus) on review/one-core-arcs | review/one-core-arcs | B | session_01N1tNP5MRPzxmbFfWjw6LuT | RUNNING | 17/11 07:45Z |
-| 10-NIGHT LEDGER (opus; V3-B) on top of night-final-r2 52d5092d | review/night-ledger | D | session_01964izDibL8KfyVNtRh4GfU | RUNNING | 17/11 08:08Z |
+| 10-NIGHT LEDGER (opus; V3-B) on top of night-final-r2 52d5092d | review/night-ledger | D | session_01964izDibL8KfyVNtRh4GfU | SẴN SÀNG KIỂM 55141158 → reviewer session_01964izDmB732aEhch1p1ohV RUNNING | 17/11 08:08Z |
 | npc-agent AG3 maids (opus; AG train §5 npc-agent.md) | review/npc-agent-ag3 | C ROOT-3 | session_011xDdVNfbt3vPg31Vfr7ihc | SẴN SÀNG KIỂM db193fbd → in review | 17/11 08:10Z |
 | REVIEW npc-agent-ag3-r1 (opus BIG; rebase onto main 9391f9a) | review/npc-agent-ag3-r1 | C ROOT-4 | session_011xDdVQWAuJrSNwTBesGWg3 | RUNNING | 17/11 09:16Z |
 | REVIEW show-why-r1 (opus BIG) | review/show-why-r1 | C ROOT-3 | session_011xDdVRVL5MdC5V5iSZRy5P | PASS 9391f9a → main 08:55Z (archived) | 17/11 08:13Z |
