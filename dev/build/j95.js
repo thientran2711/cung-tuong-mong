@@ -300,6 +300,10 @@ function j95sync(watch,plan){if(!j95on())return;let R=S.roster;if(!R||R.key!==j9
  try{j95fixHouse(R,kh,ppl)}catch(e){j95err("house",e)}
  const W=j95view(R,kh);S.where=W;const MW={};for(const m of S.men||[]){const e=R.P[m.id];if(m.alive&&e&&e[kh][0]&&e[kh][0]!==J95OUT_)MW[m.id]=e[kh][0]}S.menW=MW;
  R.m[kh]=j95counts(R,kh);R.kh=kh;
+ /* ONE RULE for every reader (review/coop-main-faults): the record also keeps WHO the map leaves out at this khắc (j95vis false: herself, her
+    maid walking with her), so dev/tools/roster.js counts from the game's own rule instead of a private copy (its copy had kept the rule from
+    before the people ledger and counted 1-8 fewer than the screen) */
+ R.nv=R.nv||[];R.nv[kh]=Object.keys(R.P).filter(id=>{const w=R.P[id][kh][0];return w&&w!==J95OUT_&&!j95vis(id,w)});
  J95.stageCh=false;try{J95.stageCh=!!j95stage(R,kh)}catch(e){}if(watch)try{j95watch(R,kh)}catch(e){}}
 /* housing changed after the plan (jpal palFix at start / end of week / map / load, a head of house fallen, dead or raised):
    from the current khắc on, what is done at home happens in the NEW home; a visit follows the person visited to her new home or
@@ -450,7 +454,7 @@ function j95followers(p){try{const R=S&&S.roster;if(!R||R.key!==j95key()||!p)ret
 function j95log(R){try{const L=S.rlog=S.rlog||{e:{},who:{}};const ids=Object.keys(R.P);const D={P:[],A:[],T:[],W:[]};const ix=(arr,x)=>{x=x==null?"":String(x);let i=arr.indexOf(x);if(i<0){arr.push(x);i=arr.length-1}return i.toString(36).padStart(2,"0")};
  const s=ids.map(id=>{const q=R.P[id].map(e=>ix(D.P,e[0])+ix(D.A,ACT95[e[1]]||e[1])+ix(D.T,e[2])+ix(D.W,e[3]));return q.every(x=>x===q[0])?q[0]:q.join("")});
  const pn={};for(const k of D.P)if(k)pn[k]=j95pn(k);for(const id of ids)L.who[id]=R.who[id]||L.who[id]||[id,""];
- L.e[R.key]={wk:R.wk,b:R.b,nb:R.nb,ids,s,D,pn,m:(R.m||[]).map(o=>o?Object.entries(o).map(x=>x.join(":")).join(","):""),acts:(R.acts||[]).slice(-40),ev:R.ev||[]};
+ L.e[R.key]={wk:R.wk,b:R.b,nb:R.nb,ids,s,D,pn,m:(R.m||[]).map(o=>o?Object.entries(o).map(x=>x.join(":")).join(","):""),nv:(R.nv||[]).map(a=>(a||[]).join(",")),acts:(R.acts||[]).slice(-40),ev:R.ev||[]};
  for(const k in L.e)if(L.e[k].wk<R.wk-J95.LOGW)delete L.e[k];const keep={};for(const k in L.e)for(const id of L.e[k].ids)keep[id]=1;for(const id in L.who)if(!keep[id])delete L.who[id]}catch(e){}}
 function j95table(t,b,kh){/* the dev table (also used by dev/tools/roster.js logic) */const R=S.roster;const cur=t==null||(R&&R.wk===t&&R.b===(b==null?R.b:b));
  if(cur&&R){kh=kh==null?j95kh():kh;const rows=Object.keys(R.P).map(id=>{const e=R.P[id][kh];return{id,name:(R.who[id]||[id])[0],role:(R.who[id]||["",""])[1],place:e[0],placeName:j95pn(e[0]),act:ACT95[e[1]]||e[1],tgt:e[2]?((R.who[e[2]]||[e[2]])[0]):"",why:e[3]||""}});return j95check(rows,R.m&&R.m[kh],{wk:R.wk,b:R.b,kh})}
