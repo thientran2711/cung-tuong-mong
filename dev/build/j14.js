@@ -15,7 +15,7 @@ function coldActs(){const A=[],fr=liveRivals(true).filter(v=>aff(v,S)>=40),f=fac
   {n:"Xuất gia",t:"Cắt tóc đi tu, rời bỏ hồng trần.",c:{},o:100,k:4,w:{},x:"kết thúc kiếp này, yên ổn (sẽ hỏi lại)",go:()=>xgConfirm(()=>over("Xuất gia",`${S.name} cạo tóc, vào chùa Bảo Hoa tu hành, sống nốt quãng đời thanh tịnh.`,"Xuất gia"))});
  return A}
 function coldMonth(){let ev="";
- if(S.out){apply({bac:2});const w=SEASON[S.month-1]==="Đông";apply({suc:w?-12:-6});if(w&&roll(8)){apply({suc:-20});ev+=`<span class="r">Đêm đông giá buốt, lãnh cung không than sưởi.</span> Sức -20. `}
+ if(S.out){apply({bac:2});const w=SEASON[S.month-1]==="Đông";apply({suc:w?-12:-6});if(w&&roll(8)){apply({suc:BAL.eff.j14.sucColdMonth});ev+=`<span class="r">Đêm đông giá buốt, lãnh cung không than sưởi.</span> Sức ${balSg(BAL.eff.j14.sucColdMonth)}. `}
   if(illOf(S)&&S.ill.k==="tambenh"&&S.ill.st>=3&&roll(30)){over("Lãnh cung","Ngươi u uất thành điên dại, sống nốt quãng đời trong lãnh cung.","Phát điên trong lãnh cung",true);return ev}
   if(!S.thDead&&S.th>=50&&roll(10)){restore(false,"Thái hậu mở lòng từ bi");return ev}
   if((S.month===1||S.month===8)&&roll(25)){restore(false,S.month===1?"Đại xá đầu năm":"Đại xá nhân tiết Vạn thọ");return ev}

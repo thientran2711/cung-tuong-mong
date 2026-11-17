@@ -28,13 +28,13 @@ function affairExposed(m,how){/* full weight: the man dies; she faces death (fir
  if(m.tinh>=BAL.tinhLv.warm)A.push({n:"Cắt đứt",o:100,x:"hắn thôi tơ tưởng; giảm hẳn rủi ro",go:()=>{m.tinh=0}});
  return A}})();
 function tryst(m,risk){if(roll(risk)){affairExposed(m,`Đêm ${S.name} hẹn ${m.name} bị bắt gặp.`);return "Bị bắt gặp."}
- m.trysts++;m.tinh+=10;S.lastTryst=wk();apply({suc:12});S.protector=m.id;S.an=S.an||0;let r=`Đêm ấy trôi qua kín đáo. Sức +12. ${m.name} nguyện che chở ngươi. Người dễ biết chuyện: ${whoMayKnow()}.`;
+ m.trysts++;m.tinh+=10;S.lastTryst=wk();apply({suc:BAL.eff.j22.sucTryst});S.protector=m.id;S.an=S.an||0;let r=`Đêm ấy trôi qua kín đáo. Sức ${balSg(BAL.eff.j22.sucTryst)}. ${m.name} nguyện che chở ngươi. Người dễ biết chuyện: ${whoMayKnow()}.`;
  if(!S.preg&&roll(trystCh(S))){S.preg=1;S.hidden=true;S.pregWk=wk();S.trueFather=m.id;const ok=(S.nightLog||[]).some(w=>Math.abs(w-wk())<=1);S.pregMismatch=!ok;r+=ok?" Mấy hôm sau ngươi biết mình có thai; ngày tháng trùng đêm thị tẩm.":` <b class="r">Ngươi có thai, mà sổ Kính sự phòng không có đêm thị tẩm nào khớp ngày.</b>`}
  return r}
 /* pregnancy that the book cannot cover: her roads, each with its odds and cost */
 (function(){const d0=deal;deal=function(){d0.apply(this,arguments);if(!S||!S.preg||!S.pregMismatch||S.out)return;
  deck.unshift({n:"Hối lộ Kính sự phòng sửa sổ",t:"Nhờ Tổng quản ghi thêm một đêm thị tẩm cho khớp ngày.",c:{bac:-80},o:od(55+((S.court&&S.court.ksp&&S.court.ksp.af.me)||0)/2),w:{},l:{danh:-5},x:"sổ khớp ngày, hết bị nghi · hỏng: Tổng quản biết chuyện của ngươi",dom:"Mưu kế",go:()=>{S.pregMismatch=false;S.khBook=1},fail:()=>{S.ksKnows=1}});
- deck.unshift({n:"Uống thuốc phá thai",t:"Bài thuốc mạnh, hại thân.",c:{bac:-30},o:od(70+S.arts.y*5),w:{},l:{suc:-30},x:`mất đứa bé, Sức -20; hỏng: băng huyết, Sức -30 · kèm khi hỏng: băng huyết mà chết: ${chanceW(25)}`,dom:"Sức khỏe",go:()=>{S.preg=0;S.hidden=false;S.pregMismatch=false;S.trueFather=null;apply({suc:-20})},fail:()=>{S.preg=0;S.hidden=false;S.pregMismatch=false;S.trueFather=null;if(roll(25))die("Uống thuốc phá thai, băng huyết mà chết")}});
+ deck.unshift({n:"Uống thuốc phá thai",t:"Bài thuốc mạnh, hại thân.",c:{bac:-30},o:od(70+S.arts.y*5),w:{},l:{suc:BAL.eff.j22.sucL},x:`mất đứa bé, Sức ${balSg(BAL.eff.j22.sucGo)}; hỏng: băng huyết, Sức ${balSg(BAL.eff.j22.sucL)} · kèm khi hỏng: băng huyết mà chết: ${chanceW(25)}`,dom:"Sức khỏe",go:()=>{S.preg=0;S.hidden=false;S.pregMismatch=false;S.trueFather=null;apply({suc:BAL.eff.j22.sucGo})},fail:()=>{S.preg=0;S.hidden=false;S.pregMismatch=false;S.trueFather=null;if(roll(25))die("Uống thuốc phá thai, băng huyết mà chết")}});
  deck.unshift({n:"Thú tội với Hoàng thượng",t:"Quỳ trước Dưỡng Hòa điện, nhận hết tội.",c:{},o:100,w:{},x:"giữ được mạng (vào lãnh cung), hắn bị xử trảm",dom:"Sủng",go:()=>{const m=manById(S.trueFather);if(m){m.alive=false;log(`${m.name} bị xử trảm.`)}S.pregMismatch=false;cold("Thú tội tư thông")}})}})();
 /* each month: the book may be checked; rivals carry on affairs too and can be found out */
 function affairMonth(){if(!S||!S.men)return"";let ev="";

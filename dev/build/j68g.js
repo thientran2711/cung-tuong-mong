@@ -1,7 +1,7 @@
 /* ================= j68g: common event content, part 3 (more daily life, visitors, whims, children, rumours) ================= */
 EV6("silkAllot","day",{a:["rv"],pp:()=>{const a=rv6(v=>v.rank<=S.rank);return a==null?null:{a0:a}},w:C=>(C.m===3||C.m===9)?2.5:.6,
  v:["Nội vụ phủ chia lụa may áo mùa mới; xấp đẹp nhất đến tay ngươi, còn {A} nhận toàn màu cũ.","Lụa mùa {S} về muộn, chỉ đủ cho một nửa lục cung; {A} và ngươi cùng chờ.","{A} để mắt xấp gấm thêu hạc trong phần của ngươi, ướm hỏi có thể nhường không.","Thợ may Thượng y cục bảo áo của ngươi và {A} trùng mẫu, phải sửa một người."],
- o:X=>[c6(`Nhường ${X.A.n} phần đẹp`,{w:{duc:2},r:[[X.A,10]],k:[R6("Sắc -1 mùa này")],ok:()=>{apply({sac:-1});return `${X.A.n} cảm kích ra mặt.`}}),
+ o:X=>[c6(`Nhường ${X.A.n} phần đẹp`,{w:{duc:2},r:[[X.A,10]],k:[R6(`Sắc ${balSg(BAL.eff.j68g.sacOk)} mùa này`)],ok:()=>{apply({sac:BAL.eff.j68g.sacOk});return `${X.A.n} cảm kích ra mặt.`}}),
   c6("Giữ phần mình, mặc trước",{w:{sac:1,danh:1},r:[[X.A,-5]]}),
   c6("Bỏ bạc may thêm cho cả hai",{c:{bac:-30},r:[[X.A,6]],w:{danh:1}})]});
 EV6("templeRite","day",{a:["th"],pp:()=>S.thDead?null:{a0:0},w:C=>1,
@@ -22,7 +22,7 @@ EV6("hhSummons","visit",{a:["rv"],pp:()=>qOn()?{a0:rivals[0].id}:null,w:C=>qOn()
 EV6("allyOffer","visit",{a:["rv","rv"],big:true,pp:()=>{const a=rv6(v=>T6(v,"Tham vọng")||fr6(v));if(a==null)return null;const b=rv6(v=>v.id!==a&&aff(RV(a),v)<0)??rv6(v=>v.id!==a);return b==null?null:{a0:a,a1:b}},w:C=>1,
  v:["{A} hẹn ngươi ở đình nghỉ vắng: '{B} ngày càng lấn lướt. Hai ta liên thủ, thế nào?'","{A} gửi mật thư: muốn cùng ngươi tố {B} chuyện chi tiêu xa xỉ.","{A} gợi ý: nếu ngươi giúp nàng tranh ghế trống, nàng sẽ không đụng đến ngươi khi {B} ra tay.","{A} kể {B} đã nói xấu ngươi trước mặt Hoàng thượng, rủ ngươi cùng trả đũa."],
  o:X=>[c6("Bắt tay với nàng",{r:[[X.A,15],[X.B,-6]],k:[R6("nếu nàng trở mặt, nàng biết chuyện của ngươi")]}),
-  c6(`Lặng lẽ báo cho ${X.B.n}`,{r:[[X.B,12],[X.A,-15]],w:{tamco:1},k:[R6("Đức -1")],ok:()=>{apply({duc:-1});return `${X.B.n} nợ ngươi một ân tình.`}}),
+  c6(`Lặng lẽ báo cho ${X.B.n}`,{r:[[X.B,12],[X.A,-15]],w:{tamco:1},k:[R6(`Đức ${balSg(BAL.eff.j68g.ducOk)}`)],ok:()=>{apply({duc:BAL.eff.j68g.ducOk});return `${X.B.n} nợ ngươi một ân tình.`}}),
   c6("Khéo từ chối, đứng ngoài",{w:{duc:1},r:[[X.A,-4]]})]});
 EV6("borrowDress","visit",{a:["rv"],pp:()=>{const a=rv6(v=>v.rank<=S.rank+1);return a==null?null:{a0:a}},w:C=>1,
  v:["{A} ngập ngừng hỏi mượn bộ y phục thêu phượng của ngươi cho yến tiệc tối mai.","{A} xin mượn cây đàn tỳ bà của ngươi, nói đàn mình đứt dây.","{A} mượn ngươi chiếc trâm ngọc, hứa ba hôm sau trả.","{A} hỏi mượn cung nữ khéo tay nhất của ngươi chải tóc cho nàng."],
@@ -38,17 +38,17 @@ EV6("empWager","emp",{a:["emp"],pp:()=>S.sung>=25?{a0:0}:null,w:C=>(C.sea==="Thu
  v:["Hoàng thượng bày trò chọi dế ở ngự hoa viên, rủ ngươi đặt cược.","Ngài cược với ngươi xem con diều của ai bay cao hơn.","Ngài đố ngươi đoán số hạt sen trong bát, đoán đúng thì ban thưởng.","Ngài mở cuộc thi câu cá, ai câu được con lớn nhất được ngài ban thưởng."],
  o:X=>[c6("Cược lớn cho ngài vui",{c:{bac:-30},p:50,w:{bac:70,sung:2},l:{sung:1},lt:[R6("mất bạc cược")]}),
   c6("Cược nhỏ, giữ chừng mực",{c:{bac:-10},p:50,w:{bac:20,sung:1},lt:[R6("mất bạc cược")],l:{sung:0}}),
-  c6("Đứng xem, khen ngài",{w:{sung:1},k:[R6("ngài chê ngươi nhát: Danh -1")],ok:()=>{apply({danh:-1});return "Ngài cười ngươi nhát gan."}})]});
+  c6("Đứng xem, khen ngài",{w:{sung:1},k:[R6(`ngài chê ngươi nhát: Danh ${balSg(BAL.eff.j68g.danhOk)}`)],ok:()=>{apply({danh:BAL.eff.j68g.danhOk});return "Ngài cười ngươi nhát gan."}})]});
 EV6("empDream","emp",{a:["emp"],pp:()=>S.sung>=30?{a0:0}:null,w:C=>.8,
  v:["Hoàng thượng kể đêm qua mơ thấy rồng vàng quấn cột, hỏi ngươi điềm gì.","Ngài mơ thấy Tiên đế nhìn mình không nói, sáng ra buồn bã.","Ngài mơ thấy một đóa sen nở trong cung ngươi, cười hỏi có phải điềm hỷ.","Ngài mơ rụng răng, Khâm Thiên giám bảo điềm xấu, ngài hỏi ngươi nghĩ sao."],
  o:X=>[c6("Giải mộng theo hướng lành",{p:od(40+S.tai/3+S.tamco/4),w:{sung:3,an:1},l:{sung:-2},lt:[R6("lời giải gượng ép, ngài không tin")]}),
-  c6("Khuyên ngài chớ tin mộng",{w:{duc:2},k:[R6("ngài hơi cụt hứng: Sủng -1")],ok:()=>{apply({sung:-1});return "Ngài gật gù, nghĩ ngợi."}}),
+  c6("Khuyên ngài chớ tin mộng",{w:{duc:2},k:[R6(`ngài hơi cụt hứng: Sủng ${balSg(BAL.eff.j68g.sungOk)}`)],ok:()=>{apply({sung:BAL.eff.j68g.sungOk});return "Ngài gật gù, nghĩ ngợi."}}),
   c6("Xin lập đàn cầu an cho ngài",{c:{bac:-30},w:{sung:2,th:3}})]});
 EV6("empOldFlame","emp",{a:["emp"],pp:()=>S.sung>=30?{a0:0}:null,w:C=>.7,
  v:["Ngài ngồi trước bức họa một phi tần đã mất, hỏi ngươi có thấy nàng giống ai không.","Ngài nhắc đến người con gái thuở niên thiếu, rồi lặng im rất lâu.","Ngài bảo khúc đàn ngươi gảy giống hệt khúc của một người cũ.","Ngày giỗ một vị phi đã khuất, ngài không thiết thượng triều."],
  o:X=>[c6("Lắng nghe, an ủi",{c:{suc:-4},w:{sung:3,an:2}}),
-  c6("Cố giống người cũ",{p:od(35+S.sac/3+S.tai/4),w:{sung:5},l:{sung:-3},lt:[R6("ngài thấy ngươi bắt chước, chạnh lòng")],k:[R6("Đức -1")],ok:()=>{apply({duc:-1});return "Trong mắt ngài thoáng bóng người xưa."}}),
-  c6("Lảng sang chuyện khác",{w:{suc:1},k:[R6("lỡ dịp gần ngài: Sủng -1")],ok:()=>{apply({sung:-1});return "Ngài thở dài, không nói thêm."}})]});
+  c6("Cố giống người cũ",{p:od(35+S.sac/3+S.tai/4),w:{sung:5},l:{sung:-3},lt:[R6("ngài thấy ngươi bắt chước, chạnh lòng")],k:[R6(`Đức ${balSg(BAL.eff.j68g.ducOk_2)}`)],ok:()=>{apply({duc:BAL.eff.j68g.ducOk_2});return "Trong mắt ngài thoáng bóng người xưa."}}),
+  c6("Lảng sang chuyện khác",{w:{suc:1},k:[R6(`lỡ dịp gần ngài: Sủng ${balSg(BAL.eff.j68g.sungOk_2)}`)],ok:()=>{apply({sung:BAL.eff.j68g.sungOk_2});return "Ngài thở dài, không nói thêm."}})]});
 EV6("kidTutor","kid",{a:["kid"],pp:()=>{const a=kid6(k=>k.age>=6);return a==null?null:{a0:a}},w:C=>1.2,
  v:["Thầy dạy ở Thượng thư phòng tâu {A} lười học, hay ngủ gật.","Thầy khen {A} thông minh hơn các anh em, muốn cho học thêm binh pháp.","{A} cãi lại thầy dạy, bị phạt đứng ngoài hiên cả buổi.","{A} trốn học ra ngự hoa viên bắt dế, thầy dạy không dám báo lên."],
  o:X=>[c6("Tự kèm con học",{c:{suc:-8},r:[[X.A,6]],ok:()=>{X.A.o.tal=cl((X.A.o.tal||40)+BAL.eff.j68g.talOk,0,100);return `${X.A.n} chịu học hơn. Tài năng của con ${balSg(BAL.eff.j68g.talOk)}.`},wt:[G6("con tiến bộ")]}),
@@ -57,7 +57,7 @@ EV6("kidTutor","kid",{a:["kid"],pp:()=>{const a=kid6(k=>k.age>=6);return a==null
 EV6("kidLie","kid",{a:["kid","sv"],pp:()=>{const a=kid6(k=>k.age>=5&&k.age<=14);const b=sv6();return a==null||b==null?null:{a0:a,a1:b}},w:C=>1,
  v:["{A} làm vỡ bình hoa, rồi đổ cho {B}.","{A} lấy trộm bánh dâng Thái hậu, {B} bị nghi.","{A} xé sách của thầy, nói là {B} sơ ý.","{A} thả chim trong lồng của Hoàng thượng ban, rồi bảo {B} quên đóng cửa."],
  o:X=>[c6("Tra cho rõ, minh oan người hầu",{c:{suc:-3},r:[[X.B,12],[X.A,-5]],w:{duc:2}}),
-  c6("Bênh con, phạt người hầu",{r:[[X.A,4],[X.B,-15]],k:[R6("Đức -2"),R6("con quen thói đổ lỗi")],ok:()=>{apply({duc:-2});return `${X.B.n} chịu phạt oan.`}}),
+  c6("Bênh con, phạt người hầu",{r:[[X.A,4],[X.B,-15]],k:[R6(`Đức ${balSg(BAL.eff.j68g.ducOk_3)}`),R6("con quen thói đổ lỗi")],ok:()=>{apply({duc:BAL.eff.j68g.ducOk_3});return `${X.B.n} chịu phạt oan.`}}),
   c6("Dạy con tự nhận lỗi",{p:60,r:[[X.B,8],[X.A,2]],w:{duc:1},lr:[[X.A,-4]],lt:[R6("con bướng, khóc lóc")]})]});
 EV6("servHero","serv",{a:["sv"],pp:()=>{const a=sv6();return a==null?null:{a0:a}},w:C=>.9,
  v:["Đêm qua bếp cung bén lửa; {A} xông vào dập, bỏng cả tay.","{A} phát hiện bậc thềm đá bị bôi dầu trơn, kịp lau trước khi ngươi đi qua.","{A} đuổi được một con rắn độc bò vào buồng các con.","{A} thức trắng chép lại sổ sách cung bị nước làm nhòe."],
@@ -88,7 +88,7 @@ EV6("officialWife","court",{a:[],pp:()=>{const T=td6();return T?{c:pick(Object.k
  v:["Phu nhân một vị thượng thư vào cung thỉnh an, xin ngươi giới thiệu với Thái hậu.","Một mệnh phụ mang lễ vật đến, nhờ ngươi nói giúp cho con trai bà được vào Hàn lâm viện.","Mệnh phụ phu nhân nhà một vị tướng muốn ngươi làm mối con gái bà với một tông thất.","Phu nhân Lễ bộ thị lang xin ngươi chỉ cách dâng lễ mừng thọ cho phải phép."],
  o:X=>[c6("Nhận lời giới thiệu",{c:{suc:-4},w:{bac:30,danh:1},k:[R6("nếu người kia làm hỏng việc, ngươi mang tiếng")]}),
   c6("Chỉ bảo, không nhận quà",{w:{duc:2},k:[R6("mất một mối quan hệ ngoài triều")]}),
-  c6("Nhận quà, hứa hẹn suông",{w:{bac:40},k:[R6("Đức -3, bị đồn là tham")],ok:()=>{apply({duc:-3});return "Phu nhân về, chờ mãi không thấy tin."}})]});
+  c6("Nhận quà, hứa hẹn suông",{w:{bac:40},k:[R6(`Đức ${balSg(BAL.eff.j68g.ducOk_4)}, bị đồn là tham`)],ok:()=>{apply({duc:BAL.eff.j68g.ducOk_4});return "Phu nhân về, chờ mãi không thấy tin."}})]});
 EV6("envoyGift","court",{a:["emp"],pp:()=>({a0:0}),w:C=>.8,
  v:["Sứ thần nước ngoài dâng ngọc quý; Hoàng thượng chia cho lục cung mỗi nơi một món.","Cống phẩm phương nam về: vải thiều, long nhãn; ngài sai mang sang cung ngươi trước.","Sứ thần tặng một cây đàn lạ, ngài muốn xem phi tần nào gảy được.","Nước chư hầu dâng hai con công trắng, ngài hỏi cung nào muốn nuôi."],
  o:X=>[c6("Tạ ơn, chia cho người hầu",{w:{maid:6,duc:1},k:[R6("không giữ được gì cho mình")]}),

@@ -149,7 +149,7 @@ function adHapFire1(h,k){h.done=1;let fired=false;if(AD_HAP_FIRE[h.id]){try{fire
 /* the Emperor in the garden: "Đánh đàn ở ngự hoa viên" (was a Hành sự card) now lives here, same numbers */
 PEND.adStroll=()=>{const K=S.emp.known,L=S.emp.likes,tt=has("trongtai")?2:1;const o=od(35+S.tai/3+S.arts.cam*4*tt+(K.music?15:0)+mm());const w=K.music?9:7;
  return{who:pEmp(),t:`<p>Hoàng thượng đang dạo bước trong Ngự hoa viên, thái giám theo hầu cách xa mấy bước.</p>`,o:[
-  {n:"Đánh đàn chờ ngự giá",fx:{suc:-10},x:`${word(o)} · thành: Sủng +${w}${K.music?` (tấu ${L.music}, khúc ngài thích)`:""} · hỏng: Sủng -1`,go:()=>{const b=rsnap();if(roll(o)){apply({sung:w});log(`Tiếng đàn làm Hoàng thượng dừng bước. Sủng +${w}.`)}else{apply({sung:-1});log("Ngài đi qua, không để ý tiếng đàn. Sủng -1.")}}},
+  {n:"Đánh đàn chờ ngự giá",fx:{suc:-10},x:`${word(o)} · thành: Sủng +${w}${K.music?` (tấu ${L.music}, khúc ngài thích)`:""} · hỏng: Sủng ${balSg(BAL.eff.jact.sungGo)}`,go:()=>{const b=rsnap();if(roll(o)){apply({sung:w});log(`Tiếng đàn làm Hoàng thượng dừng bước. Sủng +${w}.`)}else{apply({sung:BAL.eff.jact.sungGo});log("Ngài đi qua, không để ý tiếng đàn. Sủng -1.")}}},
   {n:"Ra vấn an",fx:{},x:"chạm vào ngài trên cảnh để nói chuyện"},
   {n:"Lánh đi lối khác",fx:{},x:"không được không mất"}]}};
 (function(){const st=document.createElement("style");st.textContent=`

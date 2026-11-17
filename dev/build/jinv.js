@@ -288,9 +288,9 @@ function kitLuxChip(x){return `<span class="kchip n kluxc">Xa xỉ <b>${x.sc}</b
 function luxMonth(p){try{if(!p||p.out||p.alive===false)return"";const x=luxOf(p);let r="";const me=p===S;
  if(x.lv>=2){const n=x.lv===3?3:1;liveRivals(true).forEach(v=>{if(v===p)return;const m=tv(LUX_TR,v)||1;v.ghen=cl((v.ghen||0)+Math.max(1,Math.round(n*m*(me?1:.5))),0,100)});
   if(me&&x.lv===3)r+="Hậu cung xì xào ngươi ăn mặc quá xa xỉ, nhiều người ghen. "}
- if(x.lv===3&&roll(cl(50-(p.duc|0)/2,10,50))){if(me){apply({th:-3});r+="Thái hậu chê ngươi phô trương. Thái hậu -3. "}else ap(p,{danh:-2})}
- if(x.lv===3&&roll(25)){if(me){apply({danh:-1});r+="Lời đồn ngươi phung phí lan khắp cung. Danh -1. "}else ap(p,{danh:-1})}
- if(x.lv===0&&rkOf(p)>=3&&roll(25)){if(me){apply({duc:1});r+="Ngươi ăn mặc giản dị, được khen có đức. Đức +1. "}else ap(p,{duc:1})}
+ if(x.lv===3&&roll(cl(50-(p.duc|0)/2,10,50))){if(me){apply({th:BAL.eff.jinv.thLuxMonth});r+=`Thái hậu chê ngươi phô trương. Thái hậu ${balSg(BAL.eff.jinv.thLuxMonth)}. `}else ap(p,{danh:-2})}
+ if(x.lv===3&&roll(25)){if(me){apply({danh:BAL.eff.jinv.danhLuxMonth});r+=`Lời đồn ngươi phung phí lan khắp cung. Danh ${balSg(BAL.eff.jinv.danhLuxMonth)}. `}else ap(p,{danh:-1})}
+ if(x.lv===0&&rkOf(p)>=3&&roll(25)){if(me){apply({duc:BAL.eff.jinv.ducLuxMonth});r+=`Ngươi ăn mặc giản dị, được khen có đức. Đức ${balSg(BAL.eff.jinv.ducLuxMonth)}. `}else ap(p,{duc:1})}
  return r}catch(e){return""}}
 if(typeof itemMonth==="function"){const im0=itemMonth;itemMonth=function(p){let r=im0.apply(this,arguments)||"";r+=luxMonth(p);return r}}
 if(typeof wearBonus==="function")wearBonus=function(p){const b={sac:0,danh:0};if(!p||!p.inv)return b;const r=rkOf(p);
@@ -311,7 +311,7 @@ function veilSrc(p){try{if(window.KIT_VEIL&&KIT_VEIL.src)return KIT_VEIL.src(KIT
 function veilGrade(p){try{const t=window.KIT_VEIL?KIT_VEIL.tierOf(p):"silk";const n=+String(t).replace(/\D/g,"");return !n?0:n<=2?0:n<=4?1:n<=6?2:n===7?3:4}catch(e){return 0}}
 function veilSet(p,on){if(!p)return;p.scar=p.scar||{sev:0};p.scar.veil=on?1:0}
 (function(){const wb0=wearBonus;wearBonus=function(p){const b=wb0.apply(this,arguments);if(veilOn(p)&&veilNeed(p))b.sac=(b.sac||0)+2;return b}})();
-(function(){const im1=itemMonth;itemMonth=function(p){let r=im1.apply(this,arguments)||"";try{if(veilOn(p)&&!veilNeed(p)&&roll(25)){if(p===S){apply({danh:-1});r+="Có kẻ xì xào ngươi che mặt để giấu điều gì. Danh -1. "}else ap(p,{danh:-1})}}catch(e){}return r}})();
+(function(){const im1=itemMonth;itemMonth=function(p){let r=im1.apply(this,arguments)||"";try{if(veilOn(p)&&!veilNeed(p)&&roll(25)){if(p===S){apply({danh:BAL.eff.jinv.danhTop});r+=`Có kẻ xì xào ngươi che mặt để giấu điều gì. Danh ${balSg(BAL.eff.jinv.danhTop)}. `}else ap(p,{danh:-1})}}catch(e){}return r}})();
 document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-keqveil]");if(!b)return;e.stopPropagation();if(b.disabled)return;veilSet(S,b.dataset.keqveil==="on");try{closeModal()}catch(x){}try{render()}catch(x){}},true);
 /* Y phục slot shows the GARMENT, not the fabric roll (owner 11/15): the j92 wardrobe paintings img/wd512/wd-<tier>-y-NN.webp
    (10 per tier, NN 01-04 Thường · 05-07 Tinh phẩm · 08-09 Trân phẩm · 10 Tuyệt phẩm). j92 has no fabric→outfit table, so the outfit is

@@ -109,7 +109,7 @@ PEND.prep=()=>{const wb=wearBonus(S),vp=vpItems(S).length>0,b=bestArt();const jb
  {n:"Điểm trang lộng lẫy",fx:{bac:-5},x:"son phấn: Sắc đêm nay +3 → được ưa +1",go:nx1(2,0,"Điểm trang: Sắc đêm nay +3, được ưa +1.")},
  Object.assign({n:"Đeo trang sức đẹp nhất",fx:{},x:jb?`trang sức đang đeo Sắc +${wb.sac} → được ưa +${jb}${vp?" · kèm: vượt phẩm, Hoàng thượng có thể thu đồ, Danh -4":""}`:"cần đeo trang sức trong Rương đồ",go:nx1(1+jb,vp?1:0,`Đeo trang sức: được ưa +${jb}.`)},{lk:()=>jb?"":"Chưa đeo trang sức nào: vào mục Rương đồ, chọn Đeo"}),
  {n:`Tập trước ${b.n}`,fx:{suc:-5},x:`${word(oP)} · thành: được ưa +${1+lv} · hỏng: được ưa +1`,go:()=>{const ok=roll(oP);const g=ok?1+lv:1;log(`Tập trước ${b.n}: <span class="${ok?"g":"r"}">${ok?"thành":"hỏng"}</span>, đêm nay được ưa +${g}.`);pushFront(mkP("night1",{q:1+g,vp:0}),"Đêm thị tẩm")}},
- {n:"Để mộc, nghỉ ngơi",fx:{suc:3},x:"giữ sức: Sức +3 · không thêm được ưa",go:nx1(1,0,"")}]}};
+ {n:"Để mộc, nghỉ ngơi",fx:{suc:BAL.eff.j75.sucFx},x:`giữ sức: Sức ${balSg(BAL.eff.j75.sucFx)} · không thêm được ưa`,go:nx1(1,0,"")}]}};
 
 })();
 

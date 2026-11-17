@@ -392,7 +392,7 @@ const KCE={
  tmtron:{t:"Lời rủ trốn đi",b:()=>{const tm=kcTmMan();S.kc.ev.tmtron=1;const ok=S.tm96.h>=80&&(S.maid?S.maid.loyal:0)>=60&&S.kld<55;const r=ok&&kcRare("kcR1",.6);
   return{who:pMan(tm),t:`<p>${tm.name} gửi thư: đêm mười lăm, thuyền đợi ở bến sông. Nếu nàng đến, hai người đi về phương Nam, không bao giờ trở lại.</p>`,o:[
   kcO("Đốt thư, ở lại",{},()=>kcDo("Lời rủ trốn đi",()=>{S.tm96.h-=15;return"Ngươi đốt thư trước đèn."})),
-  kcO("Đến bến sông",{suc:-20},()=>kcElope(false))].concat(r?[kcO("✦ Theo chàng đi, có tỳ nữ lo liệu đường đi",{suc:-20},()=>kcElope(true),{r97:1,j67:"tốn: Sức -20 · (Cơ duyên hiếm)"})]:[])}}},
+  kcO("Đến bến sông",{suc:-20},()=>kcElope(false))].concat(r?[kcO("✦ Theo chàng đi, có tỳ nữ lo liệu đường đi",{suc:BAL.eff.jkc.sucO},()=>kcElope(true),{r97:1,j67:`tốn: Sức ${balSg(BAL.eff.jkc.sucO)} · (Cơ duyên hiếm)`})]:[])}}},
  caught:{t:"Bị bắt gặp",b:()=>{const tm=kcTmMan(),c=kcR("cha");return{who:kcFace(c),t:`<p>Gia nhân bắt gặp ngươi với ${tm?tm.name:"một nam nhân"} trong hoa viên. Cả phủ biết trước khi trời sáng.</p>`,o:[
   kcO("Quỳ xin cha tha",{suc:-10},()=>kcDo("Bị bắt gặp",()=>{if(c)kcAf(c,BAL.eff.jkc.o_24);S.kgt-=BAL.eff.jkc.kgtO_6;S.kap+=BAL.eff.jkc.kapO_5;S.kc.ldSeen=1;return"Cha cho ngươi cấm túc trong khuê phòng; bà mối được gọi đến."})),
   kcO("Nhận hết, xin gả cho chàng",{},()=>kcDo("Bị bắt gặp",()=>{if(c)kcAf(c,BAL.eff.jkc.o_25);S.kgt-=BAL.eff.jkc.kgtO_7;S.kc.ldSeen=1;S.kc.askTm=1;return"Cha không nói một lời, đóng cửa thư phòng."}))]}}},
@@ -401,7 +401,7 @@ const KCE={
   kcO("Trả lại, giữ lễ",{},()=>kcDo("Tín vật",()=>{S.tm96.h-=8;apply({duc:2});return"Chàng cúi đầu, cất tín vật đi."}))]}}},
  vihanh:{t:"Khách lạ ở chùa",b:()=>{const r=kcRare("kcR3",.5);return{who:pEmp(),t:`<p>Trong sân chùa, một nam nhân áo xanh, theo sau mấy người hầu im lặng, hỏi ngươi về câu đối trên cột. Người ta thì thầm: Hoàng thượng vi hành.</p>`,o:[
   kcO("Đối lại câu đối",{},()=>kcDo("Khách lạ",()=>{if(roll(BAL.kc2.kcCard.doiLaiCauDoi_rb+S.tai/3)){S.kc.vh=1;return"Người ấy cười, hỏi tên ngươi rồi đi."}return"Người ấy gật đầu rồi đi."})),
-  kcO("Cúi đầu tránh đi",{},()=>kcDo("Khách lạ",()=>{apply({duc:1});return""}))].concat(r?[kcO("✦ Đối đáp, rồi dâng một khúc đàn",{suc:-10},()=>kcEnd("kcR3"),{r97:1,j67:"tốn: Sức -10 · (Cơ duyên hiếm)"})]:[])}}},
+  kcO("Cúi đầu tránh đi",{},()=>kcDo("Khách lạ",()=>{apply({duc:1});return""}))].concat(r?[kcO("✦ Đối đáp, rồi dâng một khúc đàn",{suc:BAL.eff.jkc.sucO_2},()=>kcEnd("kcR3"),{r97:1,j67:`tốn: Sức ${balSg(BAL.eff.jkc.sucO_2)} · (Cơ duyên hiếm)`})]:[])}}},
  dich:{t:"Dịch trong kinh thành",b:()=>{S.kc.ev.dich=1;return{who:pMe(),t:`<p>Kinh thành có dịch sốt. Phố xá vắng tanh, nhà nào cũng đóng cửa.</p>`,o:[
   kcO("Đóng cửa khuê phòng, uống thuốc phòng",{bac:-20},()=>kcIll(15)),kcO("Vẫn đi lại như thường",{},()=>kcIll(45)),kcO("Đi chùa phát thuốc cho dân",{suc:-15,bac:-30},()=>kcIll(55,()=>{apply({duc:6,danh:4});return"Cả kinh thành nhắc tên ngươi."}))]}}},
  theu:{t:"Bức thêu mừng thọ",b:()=>({who:pMe(),t:`<p>Sắp đến thọ tổ mẫu. Nhà muốn mỗi cháu gái dâng một bức thêu.</p>`,o:[kcO("Thức đêm thêu bách thọ đồ",{suc:-30},()=>kcDo("Bức thêu",()=>{const t=kcR("to");if(t)kcAf(t,roll(BAL.kc2.kcCard.thucDemTheuBach_rb+S.tai/3)?BAL.eff.jkc.o_26[0]:BAL.eff.jkc.o_26[1]);return""})),kcO("Mua bức thêu ngoài phố",{bac:-25},()=>kcDo("Bức thêu",()=>{const t=kcR("to");if(t)kcAf(t,roll(50)?BAL.eff.jkc.o_27[0]:BAL.eff.jkc.o_27[1]);return""}))]})},
@@ -452,7 +452,7 @@ const KCOB={
   ["Cha gọi ngươi vào thư phòng dặn khẽ: dù ngày nào nhà có biến, ngươi cứ đi con đường của mình. Còn kịp làm một việc.","Đốt thư từ của cha","Gửi sổ sao sang nhà thế giao"]]};
 function kcOrigin(i){const k=S.origin.k;const B=KCOB[k]&&KCOB[k][i];if(!B)return null;const c=kcR("cha");
  const opts=[kcO(B[1],{suc:-5},()=>kcDo(KCO[k].t,()=>kcOriginFx(k,i,1))),kcO(B[2],{suc:-5},()=>kcDo(KCO[k].t,()=>kcOriginFx(k,i,0)))];
- if(i===2&&k==="dtq"&&S.suc>=90&&(S.kc.oc||0)<=1&&kcRare("kcR4",.6))opts.push(kcO("✦ Cải trang nam nhi, theo quân ra Nhạn Môn",{suc:-30},()=>kcEnd("kcR4"),{r97:1,j67:"tốn: Sức -30 · (Cơ duyên hiếm)"}));
+ if(i===2&&k==="dtq"&&S.suc>=90&&(S.kc.oc||0)<=1&&kcRare("kcR4",.6))opts.push(kcO("✦ Cải trang nam nhi, theo quân ra Nhạn Môn",{suc:BAL.eff.jkc.sucKcOrigin},()=>kcEnd("kcR4"),{r97:1,j67:`tốn: Sức ${balSg(BAL.eff.jkc.sucKcOrigin)} · (Cơ duyên hiếm)`}));
  if(i===2&&k==="muoi"&&S.tamco>=60&&S.kgtu>=BAL.kc2.st.kc.gtuRich&&kcRare("kcR6",.8))opts.push(kcO("✦ Xin cha giao cho ngươi giữ cả sổ muối",{},()=>kcEnd("kcR6"),{r97:1,j67:"tốn: không · (Cơ duyên hiếm)"}));
  return{who:c?kcFace(c):pMe(),t:`<p class="past">${KCO[k].t} · hồi ${i+1}/3</p><p>${B[0]}</p>`,o:opts}}
 function kcOriginFx(k,i,a){S.kc.oc=(S.kc.oc||0)+a;const c=kcR("cha");let t="";const cl0=KCCLAN[k];

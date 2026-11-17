@@ -239,7 +239,7 @@ function menNpcSee(m,y){if(!m||!y)return;const c=y.v!=null?RV(y.v):null;for(cons
 (function(){const t0=talk;talk=function(oi){let p=null,a=null;try{p=S&&curPeople()[popIdx];a=p&&p.kind==="man"&&talkOpts(p)[oi]}catch(e){}const before=S&&S.logSeq;const r=t0.apply(this,arguments);
  try{if(a&&menRoad()&&!S.dead&&S.logSeq!==before&&!/^Chào hỏi/.test(a.n)&&menZone(S.place)==="hc"){const m=p.ref;const y={k:S.place,r:m.tinh>=BAL.tinhLv.close||m.trysts?"meet":"talk"};
   for(const w of liveRivals(true)){if(whereOf(w)!==S.place||menEye(w)<20)continue;menStat("seenMe");const d=menDecide(w,S);
-   if(d==="report"){if(y.r==="talk"){ap(w,{danh:2});apply({danh:-4});oanAdd(S,w,BAL.eff.jmen.top);log(`<span class="r">${rkName(w)} ${w.name} thấy ngươi nói chuyện riêng với ${m.name} ở ${placeName(S.place)} và đem chuyện đi rêu rao: Danh -4.</span>`)}else menReport(w,m,S,y,0);break}
+   if(d==="report"){if(y.r==="talk"){ap(w,{danh:2});apply({danh:BAL.eff.jmen.danhTop});oanAdd(S,w,BAL.eff.jmen.top);log(`<span class="r">${rkName(w)} ${w.name} thấy ngươi nói chuyện riêng với ${m.name} ở ${placeName(S.place)} và đem chuyện đi rêu rao: Danh ${balSg(BAL.eff.jmen.danhTop)}.</span>`)}else menReport(w,m,S,y,0);break}
    if(d==="hide"||d==="listen"){evA(w,S,d==="hide"?BAL.eff.jmen.evTop[0]:BAL.eff.jmen.evTop[1]);break}}}}catch(e){console.error("men talk",e)}return r}})();
 
 /* ---------- 6. the secret is leverage: "Uy hiếp hắn" on his card; grudges come back as rumours ---------- */
@@ -248,10 +248,10 @@ function menNpcSee(m,y){if(!m||!y)return;const c=y.v!=null?RV(y.v):null;for(cons
    A.push({n:"Uy hiếp hắn",o,x:`hắn nộp bạc hay khai tin để giữ kín chuyện ${MEN_RT[s.r]||"cũ"} · hỏng: hắn ôm hận`,run:()=>{s.used=1;menStat("threat");
     if(roll(o)){const T=liveRivals(true).filter(v=>v.affair||(v.preg&&v.hidden)||(v.plan));if(T.length){const v=T.slice().sort((a,b)=>menH(a.id)-menH(b.id))[0];const F=j78facts(v).filter(f=>f.kind==="secret"||f.kind==="plan");const f=F[0];
       if(f){intelAdd(v,f,{by:m.name,how:"uy hiếp "+m.name});return `Hắn run sợ, khai: ${f.txt}`}}
-     apply({bac:40});m.af=(m.af||0)-10;return "Hắn run sợ, nộp 40 lạng bạc xin ngươi giữ kín. Bạc +40."}
+     apply({bac:BAL.eff.jmen.bacRun});m.af=(m.af||0)-10;return `Hắn run sợ, nộp 40 lạng bạc xin ngươi giữ kín. Bạc ${balSg(BAL.eff.jmen.bacRun)}.`}
     m.grudge="me";m.grudgeN=2;m.af=(m.af||0)-20;return "Hắn cứng cổ không chịu, từ nay ôm hận ngươi."}})}}}catch(e){console.error("men opts",e)}return A}})();
 (function(){const m0=monthTick;monthTick=function(){let ev=m0.apply(this,arguments);try{if(menRoad()){for(const m of (S.men||[])){if(!m.alive||m.grudge!=="me"||menBanned(m)||!(m.grudgeN>0)||(S.turn+menH(m.id))%3)continue;
-  m.grudgeN--;menStat("revenge");apply({danh:-3});ev+=`<span class="r">Trong cung rộ lời đồn ác ý về ngươi; nghe nói phát ra từ đám ${m.rw==="thị vệ"?"thị vệ":"người ngoài cung"} từng bị ngươi làm khó. Danh -3.</span> `}}}catch(e){}return ev}})();
+  m.grudgeN--;menStat("revenge");apply({danh:BAL.eff.jmen.danhTop_2});ev+=`<span class="r">Trong cung rộ lời đồn ác ý về ngươi; nghe nói phát ra từ đám ${m.rw==="thị vệ"?"thị vệ":"người ngoài cung"} từng bị ngươi làm khó. Danh ${balSg(BAL.eff.jmen.danhTop_2)}.</span> `}}}catch(e){}return ev}})();
 
 /* stage names: unknown men show "???" like unknown consorts (j61 masks the cards); the role is the tag title */
 function menStageNm(m){try{return k61Named(m)?m.name.replace(/^(Thị vệ|Thái y|Vương gia|Nhạc sư|Sứ thần|Họa sư)\s+/,""):"???"}catch(e){return m.name}}

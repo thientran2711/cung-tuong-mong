@@ -73,7 +73,7 @@ PEND.tuyen=()=>({who:pEmp(),t:"Hoàng thượng hỏi ý ngươi: năm nay nên 
 PEND.thbenh=()=>({who:pTH(),t:"Thái hậu lâm bệnh, Đức Thọ cung đóng cửa không tiếp khách.",o:[
     {n:"Hầu bệnh cả tháng",fx:{suc:-25,th:15,duc:4}},{n:"Gửi lễ vật vấn an",fx:{bac:-30,th:4}}]});
 PEND.loveletter=p=>{const v=RV(p.v);if(!v)return null;return{who:pSpy(),t:`Tai mắt nhặt được thư tình ${v.name} viết cho một thị vệ.`,o:[
-    {n:"Trình lên Hoàng thượng",fx:{},x:`${word(50)} · thành: ${v.name} thất thế · hỏng: Danh -8`,go:()=>{if(roll(50))fall(v,"bị bắt được thư tư tình với thị vệ");else{apply({danh:-8});log(`<span class="r">Hoàng thượng cho là thư giả, trách ngươi gây chuyện.</span> Danh -8.`)}}},
+    {n:"Trình lên Hoàng thượng",fx:{},x:`${word(50)} · thành: ${v.name} thất thế · hỏng: Danh ${balSg(BAL.eff.j3.danhGo)}`,go:()=>{if(roll(50))fall(v,"bị bắt được thư tư tình với thị vệ");else{apply({danh:BAL.eff.j3.danhGo});log(`<span class="r">Hoàng thượng cho là thư giả, trách ngươi gây chuyện.</span> Danh -8.`)}}},
     {n:"Cất giữ làm con tin",fx:{},x:`chứng cứ ${v.name} ${balSg(BAL.eff.j3.evGo_2)}`,go:()=>{evStory(v,BAL.eff.j3.evGo_2,"viết thư tình cho một thị vệ")}}]}};
 function makeDil(){const pool=liveRivals(false),L=[];
   if(qOn())L.push(()=>mkP("vase"));
@@ -113,7 +113,7 @@ function monthTick(){let ev="";
   const wasQ=S.rank>=7;ev+=promote();if(!wasQ&&S.rank>=7)S.justCrowned=1;
   S.month++;S.tuan=0;
   if(S.month>12){S.month=1;S.year++;S.age++;S.emp.age++;if(typeof ageYear==="function")ageYear();allKids().forEach(([k])=>{if(k.alive)k.age++});
-    if(S.heir&&!S.heir.v&&S.heir.k.alive){apply({danh:5});ev+="Ngươi là mẹ Thái tử, danh vọng thêm cao. Danh +5. "}
+    if(S.heir&&!S.heir.v&&S.heir.k.alive){apply({danh:BAL.eff.j3.danhMonthTick});ev+=`Ngươi là mẹ Thái tử, danh vọng thêm cao. Danh ${balSg(BAL.eff.j3.danhMonthTick)}. `}
     if(S.age>BAL.age.sacFrom){S.sac=Math.max(BAL.age.sacMin,S.sac-BAL.age.sacLoss);ev+=`Năm mới, ngươi ${S.age} tuổi; nhan sắc phai dần (Sắc ${S.sac}). `}}
   if(S.age>=40&&S.rank<7&&!mySons().length){over("Lãnh cung","Tuổi xuân qua đi, sống cô quạnh nơi thâm cung.","Tuổi xuân qua đi",true);return ev}
   if(typeof mortEmpDue==="function"?mortEmpDue():S.year>12&&roll((S.year-12)*1.5+Math.max(0,S.emp.age-50)*.5)){emperorDies(ev);return ev}

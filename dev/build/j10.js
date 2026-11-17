@@ -42,7 +42,7 @@ function servAct(a,id){const s=servById(id);if(!s||S.dead||Q.length)return;const
    if(o2&&o2!==S&&roll(nv(s,"askTalk"))){r=evA(S,o2,BAL.eff.j10.evServAct_2)?`${s.name} kể chuyện nghe từ ${f.name} bên cung ${o2.name}: chứng cứ ${balSg(BAL.eff.j10.evServAct_2)}.`:`${s.name} kể chuyện nghe từ ${f.name} bên cung ${o2.name}: không có gì sai trái, chỉ biết ${harmTxt(o2)}.`}else r=`${s.name} không biết gì mới.`;
    const dt=allServ().find(x=>x.lover&&!(S.knowDT||[]).includes(x.sid)&&ownerOf(x)!==S);if(dt&&roll(30)){S.knowDT=(S.knowDT||[]).concat([dt.sid,dt.lover]);r+=` Lại nghe đồn ${dt.name} và ${(servById(dt.lover)||{}).name} đối thực.`}}
   else if(a==="doi"){S.staff.splice(S.staff.indexOf(s),1);r=`Trả ${s.name} về Nội vụ phủ.`}
-  else if(a==="che"){s.loyal=cl(s.loyal+BAL.eff.j10.loyalServAct_3,0,100);apply({danh:-2});r=`Che chở ${s.name} trước Thận Hình ti: lòng ${balSg(BAL.eff.j10.loyalServAct_3)}, Danh -2.`}}
+  else if(a==="che"){s.loyal=cl(s.loyal+BAL.eff.j10.loyalServAct_3,0,100);apply({danh:BAL.eff.j10.danhServAct});r=`Che chở ${s.name} trước Thận Hình ti: lòng ${balSg(BAL.eff.j10.loyalServAct_3)}, Danh ${balSg(BAL.eff.j10.danhServAct)}.`}}
  else if(o){if(!can(2))return;if(a==="mua"){spend(2);r=bribeServ(S,s)}else if(a==="doa"){spend(2);r=threatServ(S,s)}}
  if(r)log(r);render()}
 function courtAct(a,k){const c=S.court[k];if(!c||S.dead||Q.length)return;let r="";

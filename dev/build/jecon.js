@@ -149,7 +149,7 @@ function econLoyalMaid(p){return p.maid&&!p.maid.spyFor&&(p.maid.loyal||0)>=BAL.
 function econFavor(p){return consorts().filter(v=>v!==p&&!v.out&&v.alive!==false&&rel(v,p)>=BAL.favorRel).sort((x,y)=>rel(y,p)-rel(x,p))[0]||null}
 A("spyk","Tự đi dò la",{c:{},ok:()=>true,o:a=>cl(oSpy(a)-BAL.selfMinus,5,95),x:"không tốn bạc · tự đi nghe ngóng: dễ lộ hơn · lộ: Danh -2",f:(a,t)=>{
  if(roll(cl(oSpy(a)-BAL.selfMinus,5,95))){ap(a,{tamco:1});return spyFind(a,t,"tự đi nghe ngóng")}
- relAdd(a,t,BAL.eff.jecon.f);ap(a,{danh:-2});return `${NMc(a)} rình nghe chuyện ${NM(t)}: <span class="r">bị bắt gặp</span>. Danh -2. `}});
+ relAdd(a,t,BAL.eff.jecon.f);ap(a,{danh:BAL.eff.jecon.danhF});return `${NMc(a)} rình nghe chuyện ${NM(t)}: <span class="r">bị bắt gặp</span>. Danh ${balSg(BAL.eff.jecon.danhF)}. `}});
 A("bribel","Sai cung nữ thân tín lấy lòng",{c:{},ok:(a,t)=>!!econLoyalMaid(a)&&!!t.maid,o:(a,t)=>cl(oBribe(a,t)-BAL.selfMinus,5,95),x:`không tốn bạc · cung nữ thân tín lòng -${BAL.loyalCost} · chậm và dễ hỏng hơn`,f:(a,t)=>{
  const m=econLoyalMaid(a);if(!m)return"";m.loyal=cl((m.loyal||0)-BAL.loyalCost,0,100);
  if(roll(cl(oBribe(a,t)-BAL.selfMinus,5,95))){t.maid.loyal=cl(t.maid.loyal-BAL.eff.jecon.loyalF,0,100);if(t.schemes>0){/*evok: schemes>0*/evA(a,t,BAL.eff.jecon.evF);return `${m.name} làm thân với ${t.maid.name}, dò ra mưu kế của ${NM(t)}: ${NM(a)} nắm ${balAb(BAL.eff.jecon.evF)} chứng cứ. `}return `${m.name} làm thân được với ${t.maid.name} của ${NM(t)}. `}

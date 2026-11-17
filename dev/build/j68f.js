@@ -4,7 +4,7 @@ EV6("heatStroke","sea",{a:[],pp:()=>({}),w:C=>C.sea==="Hạ"?(C.wx.f===2?3:1.2):
  v:["Nắng gắt như đổ lửa, trong cung oi nồng; ngươi chóng mặt từ sáng.","Ve kêu râm ran, nước giếng cạn dần; cung nhân xin thêm đá lạnh từ hầm băng.","Trời hầm hập, ngự hoa viên vắng tanh, chỉ có Hoàng thượng ngồi câu cá bên hồ.","Đêm hè không gió, các con trằn trọc không ngủ được."],
  o:X=>[c6("Xin đá lạnh hầm băng",{c:{bac:-20},w:{suc:8}}),
   c6("Ra hồ hầu Hoàng thượng",{c:{suc:-8},p:od(35+S.sung/3+mm()),w:{sung:4},l:{suc:-4},lt:[R6("say nắng, ngài sai người đưa về")]}),
-  c6("Nằm yên trong cung",{w:{suc:4},k:[R6("bỏ lỡ dịp gặp ngài: Sủng -1")],ok:()=>{apply({sung:-1});return "Ngươi nằm nghỉ, tránh nắng."}})]});
+  c6("Nằm yên trong cung",{w:{suc:4},k:[R6(`bỏ lỡ dịp gặp ngài: Sủng ${balSg(BAL.eff.j68f.sungOk)}`)],ok:()=>{apply({sung:BAL.eff.j68f.sungOk});return "Ngươi nằm nghỉ, tránh nắng."}})]});
 EV6("snowDay","sea",{a:[],pp:()=>({}),w:C=>C.sea==="Đông"?2:0,
  v:["Tuyết phủ trắng mái ngói, lò sưởi trong cung không đủ ấm, cung nhân co ro.","Mai nở trong tuyết ở góc vườn, Hoàng thượng truyền các cung làm thơ vịnh mai.","Ao sen đóng băng, các hoàng tử, công chúa đòi ra trượt băng.","Tuyết dày chặn lối sang Đức Thọ cung, lễ thỉnh an sáng nay khó đi."],
  o:X=>[c6("Phát áo bông cho cung nhân",{c:{bac:-25},w:{maid:8,duc:2}}),
@@ -19,7 +19,7 @@ EV6("springAllergy","sea",{a:["doc"],pp:()=>({a0:0}),w:C=>C.sea==="Xuân"?1.5:0,
  v:["Phấn hoa xuân bay khắp nơi, ngươi hắt hơi không dứt, mắt đỏ hoe.","Mưa phùn kéo dài, chăn đệm ẩm mốc, ngươi ngứa ngáy khắp người.","Hoa đào nở rộ, nhưng cung nữ nổi mẩn đỏ từng mảng.","Sương sớm lạnh, ngươi đau họng mất tiếng đúng lúc sắp có yến."],
  o:X=>[c6(`Mời ${X.A.n} kê thuốc`,{c:{bac:-15},w:{suc:6}}),
   c6("Tự pha trà cúc kim ngân",{c:{suc:-2},p:od(40+(S.arts.y||0)*15),w:{suc:6,tai:1},l:{suc:-4},lt:[R6("uống sai vị, nặng thêm")]}),
-  c6("Gắng chịu, che mặt the",{w:{bac:5},k:[R6("Sắc -1 vài hôm, ngài thấy ngươi tiều tụy")],ok:()=>{apply({sac:-1});return "Ngươi gắng chịu cho qua."}})]});
+  c6("Gắng chịu, che mặt the",{w:{bac:5},k:[R6(`Sắc ${balSg(BAL.eff.j68f.sacOk)} vài hôm, ngài thấy ngươi tiều tụy`)],ok:()=>{apply({sac:BAL.eff.j68f.sacOk});return "Ngươi gắng chịu cho qua."}})]});
 EV6("stormNight","sea",{a:["emp"],pp:()=>({a0:0}),w:C=>C.wx.f===3?3:0,
  v:["Giông tố nổi lên, sét đánh gãy cây hòe cổ trước điện; cả cung xôn xao điềm gở.","Mưa giông cả đêm, cung nhân đồn Hoàng thượng sợ sấm từ thuở nhỏ.","Gió lớn làm đổ giàn hoa, đè lên một tiểu thái giám.","Sấm chớp đùng đùng, các con khóc thét, không ai dỗ được."],
  o:X=>[c6("Sang hầu ngài giữa đêm",{c:{suc:-6},p:od(30+S.sung/2),w:{sung:4,an:2},l:{sung:-2},lt:[R6("ngài không muốn ai thấy mình sợ")]}),
@@ -41,7 +41,7 @@ EV6("clanFather","court",{a:["rv"],pp:()=>{const T=td6();if(!T)return null;const
  v:["Nghe đồn nhà {A} sắp bị hặc tội ăn hối lộ; nàng sang cung ngươi, mắt đỏ hoe.","{A} nhờ ngươi chuyển lời tới nhà thượng thư quen biết, xin nói đỡ cho cha nàng.","{A} khoe cha nàng vừa được thăng chức, cả nhà mở tiệc ba ngày.","{A} hỏi ngươi có biết ai trong triều đang nhắm vào nhà nàng."],
  o:X=>[c6("Hứa giúp hết sức",{c:{suc:-4},p:od(35+S.danh/3),r:[[X.A,12]],w:{danh:1},lr:[[X.A,-3]],lt:[R6("không giúp được, nàng thất vọng")],k:[R6("dính vào phe phái")]}),
   c6("An ủi, khuyên giữ mình",{r:[[X.A,5]],w:{duc:1},k:[R6("mất nửa buổi")]}),
-  c6("Mách lại nhà đối đầu",{p:od(40+S.tamco/3),w:{mat:1,bac:30},lr:[[X.A,-15]],lt:[R6("bị lộ, nàng thù")],r:[[X.A,-2]],k:[R6("Đức -2")],ok:()=>{apply({duc:-2});return "Nhà đối đầu trả công ngươi hậu hĩnh."}})]});
+  c6("Mách lại nhà đối đầu",{p:od(40+S.tamco/3),w:{mat:1,bac:30},lr:[[X.A,-15]],lt:[R6("bị lộ, nàng thù")],r:[[X.A,-2]],k:[R6(`Đức ${balSg(BAL.eff.j68f.ducOk)}`)],ok:()=>{apply({duc:BAL.eff.j68f.ducOk});return "Nhà đối đầu trả công ngươi hậu hĩnh."}})]});
 /* ---------- CÁC CON ---------- */
 EV6("kidSick","kid",{a:["kid","doc"],pp:()=>{const a=kid6(k=>k.age<=12);return a==null?null:{a0:a,a1:0}},w:C=>(C.sea==="Đông"||C.sea==="Xuân")?2:1,
  v:["{A} sốt nóng từ chiều, quấy khóc không chịu bú mớm.","{A} ho khan cả đêm, nhũ mẫu thức trắng.","{A} ăn phải quả lạ trong vườn, đau bụng quặn.","{A} nổi ban đỏ khắp người; thái y nghi là thủy đậu."],
@@ -99,14 +99,14 @@ EV6("rumorEmpLove","rumor",{a:["rv"],pp:()=>{const a=rv6();return a==null?null:{
  v:["Khắp cung đồn Hoàng thượng sắp phong {A} lên một bậc.","Người ta bảo Hoàng thượng đã chán {A}, cả tháng không lật thẻ nàng.","Lời đồn: {A} được Thái hậu chấm làm Hoàng hậu tương lai.","Có tin {A} sắp bị đưa ra lãnh cung vì phạm lỗi."],
  o:X=>[c6("Hỏi thái giám Kính sự phòng",{c:{bac:-15},p:od(50+S.mat*4),wt:[G6("biết sự thật")],w:{mat:1},lt:[R6("hắn kín miệng")],l:{bac:-5},ok:()=>{const v=X.A.o;return `Sự thật: ${v.name} hiện ${RANKS[v.queen?7:v.rank]?RANKS[v.queen?7:v.rank].n:"phi tần"}, sủng ${v.sung>=BAL.sungLv.th[1]?"cao":v.sung>=BAL.sungLv.th[0]?"vừa":"thấp"}, Thái hậu ${v.th>=40?"quý":"bình thường với"} nàng.`}}),
   c6("Sang thân thiết với nàng",{c:{bac:-10},r:[[X.A,6]],k:[R6("người ghét nàng sẽ để ý ngươi")]}),
-  c6("Lan thêm lời đồn",{p:od(35+S.tamco/3),wt:[G6(`${X.A.n} bị soi mói`)],w:{tamco:1},l:{danh:-3,duc:-2},lt:[R6("bị lần ra kẻ tung tin")],k:[R6("Đức -1")],ok:()=>{apply({duc:-1});X.A.o.danh=Math.max(0,(X.A.o.danh||20)-3);return `Lời đồn lan rộng; danh tiếng ${X.A.n} giảm.`}})]});
+  c6("Lan thêm lời đồn",{p:od(35+S.tamco/3),wt:[G6(`${X.A.n} bị soi mói`)],w:{tamco:1},l:{danh:-3,duc:-2},lt:[R6("bị lần ra kẻ tung tin")],k:[R6(`Đức ${balSg(BAL.eff.j68f.ducOk_2)}`)],ok:()=>{apply({duc:BAL.eff.j68f.ducOk_2});X.A.o.danh=Math.max(0,(X.A.o.danh||20)-3);return `Lời đồn lan rộng; danh tiếng ${X.A.n} giảm.`}})]});
 /* ---------- CHUYỆN LẠ CẦN TRA (small mysteries; the culprit is real and fixed when the event fires) ---------- */
 const MYST6=["cây trâm hồ điệp bằng vàng","ấn tín nhỏ của cung","túi bạc tháng","phong thư nhà gửi","lọ thuốc an thần","chuỗi hạt trầm Thái hậu ban"];
 EV6("hairpinThief","myst",{a:["sv","sv","sv"],big:true,items:MYST6,pp:()=>{const L=(S.staff||[]).filter(s=>s.sid!=null);if(L.length<3)return null;const T=shuf(L.slice()).slice(0,3);const g=T.findIndex(s=>netIs(s,"greed"));return{a0:T[0].sid,a1:T[1].sid,a2:T[2].sid,g:g>=0&&roll(70)?g:R(3),it:R(MYST6.length)}},w:C=>hasStaff6(3)?1.4:0,
  v:["Sáng ra, {it} trong tráp của ngươi biến mất. Đêm qua chỉ {A}, {B} và {C} ra vào buồng trong.","{it} mất ngay sau buổi dọn dẹp; ba người có mặt: {A}, {B}, {C}.","Tráp khóa còn nguyên mà {it} không thấy; chìa khóa chỉ {A}, {B} và {C} từng cầm.","Mất {it} giữa ban ngày. {M} nhớ lại chỉ {A}, {B}, {C} lui tới gần đó."],
  o:X=>{const G=[X.A,X.B,X.C][X.p.g];return[
   c6("Tra xét kỹ từng manh mối",{c:{suc:-6},p:od(40+S.tamco/3+S.mat*4),w:{tamco:1},wt:[G6("tìm ra kẻ lấy, lấy lại đồ")],r:[[G,-25]],l:{danh:-1},lt:[R6("không ra manh mối, đồ mất")],ok:()=>`Vết sáp nến trên tay áo và lời chứng của tiểu thái giám chỉ đúng ${G.n}; đồ tìm thấy dưới gối ${G.n}.`,no:()=>"Manh mối đứt, không ai bị buộc tội oan."}),
-  c6("Nhờ Cung Chính ti tra",{c:{bac:-25},p:80,wt:[G6("tìm ra kẻ lấy")],r:[[G,-25]],k:[R6("chuyện xấu lan ra ngoài: Danh -1")],l:{danh:-1},lt:[R6("tra không ra")],ok:()=>{apply({danh:-1});return `Cung Chính ti tra ra ${G.n}.`}}),
+  c6("Nhờ Cung Chính ti tra",{c:{bac:-25},p:80,wt:[G6("tìm ra kẻ lấy")],r:[[G,-25]],k:[R6(`chuyện xấu lan ra ngoài: Danh ${balSg(BAL.eff.j68f.danhL)}`)],l:{danh:BAL.eff.j68f.danhL},lt:[R6("tra không ra")],ok:()=>{apply({danh:BAL.eff.j68f.danhL});return `Cung Chính ti tra ra ${G.n}.`}}),
   c6("Cho kẻ lấy một đêm tự trả lại",{w:{duc:2},p:55,wt:[G6("đồ được trả, không ai mất mặt")],lt:[R6("không ai trả, đồ mất hẳn")],l:{tamco:-1},ok:()=>{relDo(G,BAL.eff.j68f.relOk);return "Sáng hôm sau đồ nằm lại trong tráp; ngươi không truy nữa."}})]}});
 EV6("poisonedFish","myst",{a:["sv"],pp:()=>{const a=sv6();return a==null?null:{a0:a}},w:C=>1,
  v:["Đàn cá chép trong chậu sứ trước sân chết nổi bụng hết một đêm.","Chú vẹt trong cung bỗng lăn ra chết, mỏ tím tái.","Chậu lan quý héo rũ chỉ sau một đêm, đất có mùi lạ.","Con chó nhỏ cung nữ nuôi ăn thức ăn thừa xong thì nôn mửa."],

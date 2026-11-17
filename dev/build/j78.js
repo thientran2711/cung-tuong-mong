@@ -135,7 +135,7 @@ function j78buyer(a,t){const L=others(t).filter(x=>x!==a&&(x===S||x.alive&&!x.ou
 function j78pay(t){return Math.min(60,Math.max(0,Math.floor(t===S?S.bac:(t.bac||0))))}
 function j78thFav(a){/* two-way: an NPC brings her own Thái hậu regard, as the player does */return a===S?S.th:(a&&a.th)||0}
 A("trinhth","Trình Thái hậu",{c:{duc:-2},ok:(a,t)=>evG(a,t)>=1&&!S.thDead&&rkOf(t)<7,o:(a,t)=>odA(a,40+evG(a,t)*10+j78thFav(a)/5),
- f:(a,t)=>{ap(a,{duc:-2});evA(a,t,BAL.eff.j78.evF);if(roll(odA(a,40+(evG(a,t)+1)*10+j78thFav(a)/5))){ap(t,{sung:-10});affAdd(t,a,BAL.eff.j78.f);if(a===S)apply({th:BAL.eff.j78.trinhth});return `${j78Who(a)} trình chứng cứ lên Thái hậu: ${j78who(t)} bị quở trách (Sủng -10). `}
+ f:(a,t)=>{ap(a,{duc:-2});evA(a,t,BAL.eff.j78.evF);if(roll(odA(a,40+(evG(a,t)+1)*10+j78thFav(a)/5))){ap(t,{sung:BAL.eff.j78.sungF});affAdd(t,a,BAL.eff.j78.f);if(a===S)apply({th:BAL.eff.j78.trinhth});return `${j78Who(a)} trình chứng cứ lên Thái hậu: ${j78who(t)} bị quở trách (Sủng ${balSg(BAL.eff.j78.sungF)}). `}
   if(a===S)apply({th:BAL.eff.j78.trinhth_2});return `Thái hậu gạt chứng cứ ${j78who(a)} trình về ${j78who(t)}. `}});
 A("trinhhh","Trình Hoàng hậu",{c:{},ok:(a,t)=>{const q=queenP();return evG(a,t)>=2&&q&&q!==a&&q!==t},o:(a,t)=>{const q=queenP();return q?cl(35+aff(q,a)/2+evG(a,t)*8,5,95):5},
  f:(a,t)=>{const q=queenP();const o=cl(35+aff(q,a)/2+evG(a,t)*8,5,95);evA(a,t,BAL.eff.j78.evF_2);if(roll(o)){punish(t,"bị Hoàng hậu xét tội theo chứng cứ",1);affAdd(t,a,BAL.eff.j78.f_2);return `${j78Who(a)} trình chứng cứ lên Hoàng hậu: ${j78who(t)} bị xét tội. `}affAdd(q,a,BAL.eff.j78.f_3);return `Hoàng hậu bác chứng cứ ${j78who(a)} trình về ${j78who(t)}. `}});

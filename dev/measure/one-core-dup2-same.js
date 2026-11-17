@@ -77,7 +77,7 @@ const fold=n=>{if(!n||typeof n!=='object')return n;if(Array.isArray(n))return n.
  if(n.type==='TemplateLiteral'){const Q=[n.quasis[0].value.cooked],E=[];n.expressions.forEach((e,i)=>{const v=numL(e)??strL(e);if(v!=null)Q[Q.length-1]+=v+n.quasis[i+1].value.cooked;else{E.push(e);Q.push(n.quasis[i+1].value.cooked)}});
   return E.length?{type:'TemplateLiteral',expressions:E,quasis:Q.map(c=>({type:'TemplateElement',value:{cooked:c}}))}:{type:'Literal',value:Q[0]}}
  if(n.type==='BinaryExpression'&&n.operator==='+'&&strL(n.left)!=null&&(numL(n.right)!=null||strL(n.right)!=null))return{type:'Literal',value:strL(n.left)+(numL(n.right)??strL(n.right))};
- if(n.type==='Property'&&n.kind==='get'&&n.value.body&&n.value.body.body&&n.value.body.body.length===1&&n.value.body.body[0].type==='ReturnStatement'&&strL(n.value.body.body[0].argument)!=null)
+ if(n.type==='Property'&&n.kind==='get'&&n.value.body&&n.value.body.body&&n.value.body.body.length===1&&n.value.body.body[0].type==='ReturnStatement'&&(strL(n.value.body.body[0].argument)!=null||numL(n.value.body.body[0].argument)!=null))/* review/one-core-jkc-2: c:{get bac(){return -K}} (j8 / j30 load before BAL) ≡ c:{bac:-N} */
   return Object.assign({},n,{kind:'init',method:false,value:n.value.body.body[0].argument});
  return n};
 const strip=n=>JSON.stringify(fold(JSON.parse(JSON.stringify(n))),(k,v)=>{if(k==='start'||k==='end'||k==='raw')return undefined;/* "…" ≡ `…` without ${} */if(v&&v.type==='TemplateLiteral'&&v.expressions.length===0&&v.quasis.length===1)return{S:v.quasis[0].value.cooked};if(v&&v.type==='Literal'&&typeof v.value==='string')return{S:v.value};return v});
