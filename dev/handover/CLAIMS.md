@@ -702,3 +702,4 @@
 | coop-thin-b r2 FAIL be599e1e (1 item: B‖D seam, D work on HELD rolled store; probe R7/R7c on review/coop-thin-b-r2 e7c7f16b; CAP 4 = no until fixed) → fix worker #4 (opus; brief briefs/coop-thin-b-4.md) | review/coop-thin-b | B | session_01N1tNP3jpUPBE4NGtW7DxC2 | RUNNING | 17/11 10:22Z |
 | GREET-MEET greeting name rule + AG-MEET (opus; s30 orders 05:26Z/05:29Z; brief briefs/greet-meet.md) | review/greet-meet | C ROOT-5 | session_011xDdVPQEBukEXYnUVs5fDo | RUNNING | 17/11 10:40Z |
 | WHOLE FIGURE REPAINT lead #7 (sonnet art; successor of lead #6; LEAD HANDOVER #6->#7 in BATCH_PLAN.md) | review/fig-cutout-clean | C | session_011xDdVNkgEgTqsZJxUh9Xd8 | RUNNING | 17/11 10:30Z |
+| MAMA a36/a51 t1-t5 maid repaint (sonnet art W8; ROOT-5 GO 17/11 10:29Z; opened by lead #7) | review/fig-cutout-clean | C | session_011xDdVRWZVWQYAYYva3YuqJ | RUNNING | 17/11 10:30Z |
