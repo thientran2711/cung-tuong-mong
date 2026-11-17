@@ -1,5 +1,6 @@
 # FOREMAN_C_STATUS (written ONLY by Foreman C)
 
+REQUEST to main (FOREMAN_C s13 05:58Z, final) — FOR MAIN: log in OD. OWNER (s13 chat, verbatim): "Ok, tiếp tục thôi, mày sửa xong rồi đẹp rồi là cứ đưa hết lên trên game thôi, khỏi cần tao duyệt gì hết." → art (figure repaint + event art) goes LIVE as soon as Foreman C has checked the sheet; no owner review. s13 archived; Foreman C = ROOT session_011xDdVSwTjDmQyniASgFZyk.
 ## HANDOVER s13 → ROOT Foreman C session_011xDdVSwTjDmQyniASgFZyk (05:50Z 17/11)
 - OWNER AWAKE, talking in C chat. Last open question to her (unanswered): figures go LIVE as each worker finishes (no owner review) — s13 asked: keep live-on-finish with C sheet checks, OR hold all in a review folder for her morning check? Her answer decides lead #6's publish step.
 - OWNER DECISIONS tonight (verbatim in REQUEST lines above): rank standard DROPPED; keep every old in-game design; she PRAISED live repainted rest a18 sheets c01/c05/c12/c18 t1–t8 (s13 scratch sheets). No phi bạch unless she re-asks. Event art: GO (no faces, pastel, soft brush), NEVER fan/hand/object over a face, NIGHT scenes dark like Hành sự card pictures.
