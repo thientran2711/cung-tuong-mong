@@ -48,15 +48,16 @@ function knownList(v){const out=[],seen=new Set();if(!v||v===S)return out;
  const nm=v.name,rk=typeof rkName==="function"?rkName(v):"";
  const esc=x=>x.replace(/[.*+?^${}()|[\]\\]/g,"\\$&");
  const short=t=>{let s=T(t).replace(/\.\s*$/,"");s=s.replace(new RegExp("^(?:"+esc(rk)+"\\s+)?"+esc(nm)+"\\s+"),"");s=s.replace(new RegExp("(?:"+esc(rk)+"\\s+)?"+esc(nm),"g"),"nàng");s=s.replace(/^nàng\s+/i,"");return cap(s)};
- const add=(fact,src,when)=>{const f=short(fact);if(!f||f.length<3)return;const k=f.replace(/\d+/g,"#").toLowerCase();if(seen.has(k))return;seen.add(k);out.push({f,src:T(src),when:T(when)})};
- try{const L=typeof intelOf==="function"?intelOf(v):[];for(let i=L.length-1;i>=0;i--){const x=L[i];if(x.current===false)continue;add(x.fact,x.by&&typeof x.by==="object"?x.by.name:x.by,x.when)}}catch(e){}
+ const add=(fact,src,when,how)=>{const f=short(fact);if(!f||f.length<3)return;const k=f.replace(/\d+/g,"#").toLowerCase();if(seen.has(k))return;seen.add(k);out.push({f,src:T(src),when:T(when),how:T(how||"")})};
+ try{const L=typeof intelOf==="function"?intelOf(v):[];for(let i=L.length-1;i>=0;i--){const x=L[i];if(x.current===false)continue;add(x.fact,x.by&&typeof x.by==="object"?x.by.name:x.by,x.when,x.how)}}catch(e){}
  try{kn();for(const n of (S.notes[v.id]||[])){let t=T(n),when="",src="";const m=t.match(/^(T\d+\/\d+ \S+ tuần):\s*/);if(m){when=m[1];t=t.slice(m[0].length)}
    const s2=t.match(/^([^:]{2,30}?) (dò được|kể|báo|nghe được):\s*/);if(s2){src=s2[1]+" "+s2[2];t=t.slice(s2[0].length)}
-   t.split(kRx("(?<=\\.)\\s+","")).forEach(x=>add(x.replace(/\.$/,""),src,when))}}catch(e){}
+   let how="";const s3=t.match(/^(Dò được|Chuyện trò|Dâng quà hợp ý|Dâng quà sai ý|Bị từ chối quà):\s*/);if(s3){how=s3[1];t=t.slice(s3[0].length)}/* pcard-facts: the "how" is detail (tap), never a prefix of the fact */
+   t.split(kRx("(?<=\\.)\\s+","")).forEach(x=>add(x.replace(/\.$/,""),src,when,how))}}catch(e){}
  return out}
 window.kitKnownList=knownList;
 function knownCol(v,max){const L=knownList(v);if(!L.length)return `<div class="kr3r"><b class="kr3h">Đã biết về ${v.name}</b><p class="kr3none">Chưa biết gì thêm. Dò la, hỏi kẻ hầu để biết.</p></div>`;
- const li=L.slice(0,max||4).map(x=>`<li><span>${x.f}</span>${x.src||x.when?`<small>${[x.src,x.when].filter(Boolean).join(" · ")}</small>`:""}</li>`).join("");
+ const li=L.slice(0,max||4).map(x=>`<li><span>${typeof kitFactTap==="function"?kitFactTap(x.f,x):x.f}</span></li>`).join("");
  return `<div class="kr3r"><b class="kr3h">Đã biết về ${v.name}</b><ul class="kr3l">${li}</ul>${L.length>(max||4)?`<button class="chip kchipb kr3more" data-kintel="${v.id}">Xem thêm ${L.length-(max||4)} điều ›</button>`:""}</div>`}
 
 /* ---------- THẺ QUAN HỆ 3 CỘT ---------- */

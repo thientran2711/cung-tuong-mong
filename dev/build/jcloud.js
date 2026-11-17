@@ -108,16 +108,16 @@ function refreshTitle(){try{if(!T.hidden&&window.CTM_ROOMS){const s=$("slots");i
 
 /* ---------- words ---------- */
 function fmtAt(t){if(!t)return "";const d=new Date(t);const p=x=>String(x).padStart(2,"0");return `${p(d.getHours())}:${p(d.getMinutes())} ngày ${d.getDate()}/${d.getMonth()+1}`}
-const ERR={net:"Chưa nối được mây; có đường mạng là tự gửi lại.",gone:"Không thấy sổ mây mang ám hiệu này (bỏ đã lâu hay gõ sai).",slow:"Gửi dày quá, đợi chốc lát rồi gửi lại.",
- big:"Sổ quá lớn, mây không nhận.",many:"Gõ sai nhiều lần quá; đợi một lúc lâu rồi gõ lại.",srv:"Mây chưa nhận; chốc nữa tự gửi lại.",old:"Bản này do bản trò chơi khác ghi, máy này chưa đọc được."};
-function stateWord(){if(STATE==="busy")return ["Đang gửi, đang lấy…","n"];if(C.pend)return ["Hai bản sổ khác nhau, chờ ngươi chọn","r"];if(C.err)return [ERR[C.err]||ERR.srv,"r"];return C.rev?["Khớp với mây","g"]:["Chưa gửi lần nào","n"]}
+const ERR={net:CTM_WAIT.cloudNet,gone:"Không thấy sổ mây mang ám hiệu này (bỏ đã lâu hay gõ sai).",slow:"Gửi dày quá, đợi chốc lát rồi gửi lại.",
+ big:"Sổ quá lớn, mây không nhận.",many:"Gõ sai nhiều lần quá; đợi một lúc lâu rồi gõ lại.",srv:"Mây chưa nhận; chốc nữa tự gửi lại.",old:CTM_WAIT.cloudOld};
+function stateWord(){if(STATE==="busy")return [CTM_WAIT.cloudBusy,"n"];if(C.pend)return ["Hai bản sổ khác nhau, chờ ngươi chọn","r"];if(C.err)return [ERR[C.err]||ERR.srv,"r"];return C.rev?["Khớp với mây","g"]:["Chưa gửi lần nào","n"]}
 const group=k=>String(k||"").replace(/(.{4})(?=.)/g,"$1-");
 function slotLine(s){return s?[`${s.w||""} ${s.n||""}`.trim(),s.d||""].filter(Boolean).join(" · "):"Chưa ghi"}
 
 /* ---------- Thiết lập section (.cloudwrap, borrowed by j74 like .optwrap / .xiowrap) ---------- */
 /* ONE button set for the two places that show Sổ mây (Chọn sổ › Một mình, Thiết lập): same words, same data-cl flows, no second implementation */
 function btnsHTML(){if(!C.k)return `<div class="kslot-a"><button class="kbtn" data-cl="make">Giữ sổ trên mây<small>lập ám hiệu sổ mới</small></button><button class="kbtn alt" data-cl="link">Nối sổ<small>máy kia đã có ám hiệu</small></button></div>`;
- return `<div class="kslot-a">${C.pend?`<button class="kbtn" data-cl="pick">Chọn bản sổ</button>`:`<button class="kbtn" data-cl="now"${STATE==="busy"?" disabled":""}>Đồng bộ ngay</button>`}<button class="kbtn alt" data-cl="code">Ám hiệu sổ</button><button class="kbtn alt" data-cl="vers">Các bản đã giữ</button></div>`}
+ return `<div class="kslot-a">${C.pend?`<button class="kbtn" data-cl="pick">Chọn bản sổ</button>`:`<button class="kbtn" data-cl="now"${STATE==="busy"?" disabled":""}>${CTM_WAIT.cloudSyncBtn}</button>`}<button class="kbtn alt" data-cl="code">Ám hiệu sổ</button><button class="kbtn alt" data-cl="vers">Các bản đã giữ</button></div>`}
 const mask=k=>{k=String(k||"");return k.length>=8?"••••-••"+esc(k.slice(-2)):"••••-••••"};
 function sectionHTML(){let h=`<div class="kslot"><h4 class="kpst">Sổ mây</h4>`;
  if(!C.k)return h+kitRows([["Tình trạng","Chưa giữ trên mây","n"],["Để làm gì","Một kiếp chơi tiếp được trên cả điện thoại lẫn máy tính bảng, một mình hay cùng hảo hữu","t"]])+btnsHTML()+`</div>`;
@@ -127,7 +127,7 @@ function sectionHTML(){let h=`<div class="kslot"><h4 class="kpst">Sổ mây</h4>
 function miniHTML(){const h=`<div class="kslot cloudmini"><h4 class="kpst">Sổ mây</h4>`;
  if(!C.k)return h+kitRows([["Tình trạng","Chưa giữ trên mây · chơi tiếp trên máy khác","n"]])+btnsHTML()+`</div>`;
  const w=stateWord();
- return h+kitRows([["Tình trạng",esc(w[0]),w[1]],["Ám hiệu",mask(C.k)+(C.sy||C.at?" · đồng bộ lúc "+esc(fmtAt(C.sy||C.at)):""),"n"]])+btnsHTML()+`</div>`}
+ return h+kitRows([["Tình trạng",esc(w[0]),w[1]],["Ám hiệu",mask(C.k)+(C.sy||C.at?CTM_WAIT.cloudSyncAt+esc(fmtAt(C.sy||C.at)):""),"n"]])+btnsHTML()+`</div>`}
 function wire(){let w=document.querySelector("#modal .cloudwrap")||T.querySelector(".cloudwrap");
  if(!w){const box=T.querySelector(".tbox");if(!box)return;w=document.createElement("div");w.className="cloudwrap";box.appendChild(w)}
  w.innerHTML=sectionHTML();try{document.querySelectorAll("#slots .cloudmini").forEach(e=>{e.outerHTML=miniHTML()})}catch(e){}if(LM&&PG&&Q[0]===LM&&!T.hidden&&STATE!=="busy")redraw()}
@@ -153,7 +153,7 @@ function body(pg){
    h+=`<div class="kslot"><h4 class="kpst">Sổ ${NO[n]} · bản trên máy này</h4>${rows(me,me&&me.at,"máy này")}<div class="kslot-a"><button class="kbtn${PICK[n]==="me"?" ksel":""}" data-cl="keep" data-n="${n}" data-v="me">Giữ bản trên máy này</button></div></div>`+
       `<div class="kslot"><h4 class="kpst">Sổ ${NO[n]} · bản trên mây</h4>${rows(cl,P.at,P.dev)}<div class="kslot-a"><button class="kbtn${PICK[n]==="cloud"?" ksel":""}" data-cl="keep" data-n="${n}" data-v="cloud">Giữ bản trên mây</button></div></div>`}
   return h+`<div class="kpnote">${esc(MSG||"Bản không chọn vẫn nằm trong «Các bản đã giữ» trên mây, lấy lại được.")}</div>`}
- if(pg==="vers"){if(!VERS)return `<div class="kpnote">${esc(MSG||"Đang lấy danh sách…")}</div>`;if(!VERS.versions.length)return `<div class="kpnote">Mây chưa có bản nào.</div>`;
+ if(pg==="vers"){if(!VERS)return `<div class="kpnote">${esc(MSG||CTM_WAIT.cloudList)}</div>`;if(!VERS.versions.length)return `<div class="kpnote">Mây chưa có bản nào.</div>`;
   return VERS.versions.map((v,i)=>{const s=v.sum||{};const r=(s.r||[]).map(x=>x.room).join(", ");
    const rows=[["Máy",esc(v.dev||""),"n"]].concat([1,2,3].map(n=>[`Sổ ${NO[n]}`,esc(slotLine(s[n])),s[n]?"t":"n"]),r?[["Phòng hảo hữu",esc(r),"n"]]:[],
     v.rev===VERS.head?[["Ghi chú","Bản đang theo","g"]]:v.keep?[["Ghi chú","Bản giữ lại khi chọn bản khác","n"]]:[]);
@@ -174,7 +174,7 @@ async function make(b){if(STATE==="busy")return;STATE="busy";if(b){b.disabled=tr
  C={k:r.j.k,rev:0,h:{},dev:devLabel()};saveC();MSG="";open("code");await sync();redraw()}
 async function link(v){const k=String(v||"").toUpperCase().replace(/[\s-]/g,"").replace(/O/g,"0").replace(/[IL]/g,"1");
  if(!/^[0-9A-HJKMNP-TV-Z]{8}$/.test(k)){MSG="Ám hiệu sổ mây có tám chữ và số. Xem lại rồi gõ lại.";redraw();return}
- STATE="busy";MSG="Đang nối…";redraw();const h=await api("head",{k});STATE="";
+ STATE="busy";MSG=CTM_WAIT.cloudLink;redraw();const h=await api("head",{k});STATE="";
  if(h.s!==200){MSG=h.s===404?ERR.gone:h.s===429?ERR.many:ERR.net;redraw();return}
  C={k,rev:0,h:{},dev:devLabel()};saveC();MSG="";const r=await sync();
  if(r==="conflict"){PICK={};open("pick");return}
@@ -203,10 +203,10 @@ $("modal").addEventListener("click",async e=>{const b=e.target.closest("button[d
  if(a==="drop")return dropAsk();
  if(a==="now"){await sync();return}
  if(a==="pick"){PICK={};MSG="";return open("pick")}
- if(a==="keep"){PICK[+b.dataset.n]=b.dataset.v;const P=C.pend;if(P&&P.slots.every(n=>PICK[n])){MSG="Đang giữ bản đã chọn…";redraw();await resolve(PICK);PICK={};
+ if(a==="keep"){PICK[+b.dataset.n]=b.dataset.v;const P=C.pend;if(P&&P.slots.every(n=>PICK[n])){MSG=CTM_WAIT.cloudKeep;redraw();await resolve(PICK);PICK={};
    if(C.pend){MSG="";open("pick")}else{MSG="";back()}}else redraw();return}
  if(a==="vers")return vers();
- if(a==="restore"){const rev=+b.dataset.rev;if(ASK!==rev){ASK=rev;redraw();return}ASK=0;MSG="Đang lấy lại…";redraw();const ok=await restore(rev);
+ if(a==="restore"){const rev=+b.dataset.rev;if(ASK!==rev){ASK=rev;redraw();return}ASK=0;MSG=CTM_WAIT.cloudBack;redraw();const ok=await restore(rev);
   if(ok){MSG="";back()}else{MSG=ERR[C.err]||ERR.srv;await vers();}return}},true);
 $("modal").addEventListener("keydown",e=>{if(e.key==="Enter"&&e.target&&e.target.id==="cl-in"){e.preventDefault();link(e.target.value)}});
 

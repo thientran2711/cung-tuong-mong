@@ -73,7 +73,9 @@ function wxClrName(){const c=S&&S.wx&&S.wx.clr;return c!=null&&typeof BUOI!=="un
 const WX_OUT=/dạo|ngắm|hái|vườn|hoa viên|hồ sen|săn|ngự giá|quỳ ngoài|quỳ trước|đứng ngoài|ngoài sân|ngoài điện|thả diều|đạp thanh|câu cá|tuyết|đón gió/i;
 /* acts that are indoor work even when she stands in the garden (the place fallback skips them) */
 const WX_IN=/điểm trang|nghỉ ngơi|ngủ|tắm|học|luyện|đọc|thêu|viết|chép|đàn|vẽ|nấu|sổ sách|thuốc|dưỡng|thiền|tụng|cầu phúc|trang điểm/i;
-function wxOutAct(o){if(!o||!wxSev())return false;const n=String(o.n||"");if(/Thôi|Đợi|ở lại|trong phòng|^Về |về phòng|về cung|hồi cung|quay về|chờ tạnh|lui về|đứng ngoài nhìn|đứng ngoài,? giữ mình|đứng ngoài$/i.test(n)&&!/quỳ/i.test(n))return false;
+/* wxOutActAny: is this act OUTDOORS, whatever the weather (jlooks reads it for every weather kind); wxOutAct = outdoors AND bad weather */
+function wxOutAct(o){return !!o&&!!wxSev()&&wxOutActAny(o)}
+function wxOutActAny(o){if(!o)return false;const n=String(o.n||"");if(/Thôi|Đợi|ở lại|trong phòng|^Về |về phòng|về cung|hồi cung|quay về|chờ tạnh|lui về|đứng ngoài nhìn|đứng ngoài,? giữ mình|đứng ngoài$/i.test(n)&&!/quỳ/i.test(n))return false;
  return WX_OUT.test(n)||(S&&S.place==="vuon"&&!o.indoor&&!WX_IN.test(n))}
 /* kit price-line format (kitParse): "kèm: a, b (note)" -> red Kèm row + the trailing note in Ghi chú; no commas / nested brackets inside the note */
 function wxMat(R){const pg=S&&S.preg&&!S.fake;return `kèm: cảm lạnh: ${wxRiskWord(R.cold)}, trơn ngã: ${wxRiskWord(R.slip)}${pg?", ngã có thể sảy thai":""} · (vì sao: ${R.why.join(" / ")})`}
@@ -92,4 +94,4 @@ function wxNpcHit(){try{if(!wxSev())return;const W=S.where||{};let news="";
   if(news)try{log(news)}catch(e){}}catch(e){console.error("wx npc",e)}}
 /* with the agent day plan on, the hit runs on the FINAL placement (jagday's placeWhere wrapper calls wxNpcHit after the plan sets S.where; review ag-all-2 r2 W1) */
 (function(){const p0=placeWhere;placeWhere=function(){const r=p0.apply(this,arguments);if(!(typeof agDOn==="function"&&agDOn()))wxNpcHit();return r}})();
-window.wxRisk=wxRisk;window.wxSev=wxSev;window.wxGearLeft=wxGearLeft;window.wxGearAll=wxGearAll;window.wxOutAct=wxOutAct;
+window.wxRisk=wxRisk;window.wxSev=wxSev;window.wxGearLeft=wxGearLeft;window.wxGearAll=wxGearAll;window.wxOutAct=wxOutAct;window.wxOutActAny=wxOutActAny;

@@ -47,16 +47,22 @@ const kr2Cls=r=>{const v=r.now;if(v==null)return"n";if(r.kind==="bad")return v>=
 /* KIT §52 kitRel2 — THE relation component, used by EVERY screen (owner 11/16 15:00Z 4.6 / 4.7 / 4.8): TWO column boxes, LEFT = that person → me ("Nàng → ta"),
    RIGHT = me → that person ("Ta → nàng"); a header tab on each box; rows are SHORT words only (Thiện cảm / Oán / Ghen / Sủng / Tin cậy), the number in its meaning colour, NO bars;
    o.week → inside each box the "Hiện nay" and "Tuần này" columns are aligned. cols = [{head, dir:"them"|"me"|"x", rows:[{w, now, d, kind:"good"|"bad"|"pos", gloss?, unk?}]}] (one or two boxes). */
-function kitRel2(cols,o){o=o||{};const wk=!!o.week;cols=(cols||[]).filter(c=>c&&c.rows&&c.rows.length);if(!cols.length)return"";
+function kitRel2(cols,o){o=o||{};const wk=!!o.week;cols=(cols||[]).filter(c=>c&&c.rows&&c.rows.length);if(!cols.length)return"";if(o.compact)return kitRelCompact(cols);
  const box=c=>{const known=c.rows.some(r=>r.unk==null);const hd=wk&&known?`<span class="kr2-c"></span><span class="kr2-c kr2-n">Hiện nay</span><span class="kr2-c kr2-n">Tuần này</span>`:"";
   return `<div class="kr2b kr2-${c.dir||"x"}"><div class="kr2h" data-vp-skip>${c.head}</div><div class="kr2g${wk&&known?" kr2k":""}" role="table">${hd}`+c.rows.map(r=>{
     const g=r.gloss!==false&&typeof kitGloss==="function"&&typeof KIT_GLOSS==="object"&&KIT_GLOSS[r.gloss||r.w]?kitGloss(r.gloss||r.w,r.w):r.w;
     return `<span class="kr2-l" role="cell" data-vp-skip>${g}</span>`+(r.unk!=null?`<span class="kr2-u" role="cell">${r.unk}</span>`:`<span class="kr2-v ${kr2Cls(r)}" role="cell">${kr2Num(r)}</span>`+(wk?`<span class="kr2-d ${kitRelCls(r.d,r.kind)}" role="cell">${r.d?kitRelSign(r.d):"—"}</span>`:""))}).join("")+`</div></div>`};
  return `<div class="kr2w${o.paper?" kr2-paper":""}"><div class="kr2 kr2-n${cols.length}">${cols.map(box).join("")}</div></div>`}
+/* KIT §52 COMPACT (owner 17/11 ~04:40Z, person dialog left column, "option 1 compact"): the same two directions, ONE line each — no box, no header band —
+   "Nàng → ta  Thiện cảm 12 · Oán 3 · Ghen 8" / "Ta → nàng  Thiện cảm 20". A word + its number never split; the line wraps only between pairs.
+   Numbers keep the §52 meaning colours (kr2Cls). Used by the person card's left key block (jpcf pcfKey); data-krk = direction|word so a change can glow. */
+function kitRelCompact(cols){return `<div class="kr2w kr2-cp">`+cols.map(c=>`<div class="kr2cl kr2-${c.dir||"x"}"><span class="kr2ch" data-vp-skip>${c.head}</span>`+c.rows.map(r=>{
+  const g=r.gloss!==false&&typeof kitGloss==="function"&&typeof KIT_GLOSS==="object"&&KIT_GLOSS[r.gloss||r.w]?kitGloss(r.gloss||r.w,r.w):r.w;
+  return `<span class="kr2ci"><span class="kr2-l" data-vp-skip>${g}</span> `+(r.unk!=null?`<span class="kr2-u">${r.unk}</span>`:`<b class="kr2-v ${kr2Cls(r)}">${kr2Num(r)}</b>`)+`</span>`}).join("")+`</div>`).join("")+`</div>`}
 /* rows from kitRelRows(p,snap) → the two columns */
 function kitRelTable(rows,o){o=o||{};if(!rows||!rows.length)return"";const L=rows.filter(r=>r.dir!=="me"),M=rows.filter(r=>r.dir==="me");const f=rows[0],sj=f.sj||"Nàng",ob=f.ob||"nàng";
  const wk=o.head!==false&&rows.some(r=>r.unk==null&&r.d!==undefined);
- return kitRel2([{head:`${sj} → ta`,dir:"them",rows:L},{head:`Ta → ${ob}`,dir:"me",rows:M}],{week:wk,paper:!!o.paper})}
+ return kitRel2([{head:`${sj} → ta`,dir:"them",rows:L},{head:`Ta → ${ob}`,dir:"me",rows:M}],{week:wk,paper:!!o.paper,compact:!!o.compact})}
 function kitRelDelta(label,dir,d,kind){d=KRT_INT(d)||0;return `<span class="krd">${label?(dir==="none"?`<span class="krd-l" data-vp-skip>${label}</span>`:kitRelLab(dir||"them",label))+" ":""}<b class="${kitRelCls(d,kind)}">${kitRelSign(d)}</b></span>`}
 /* week snapshot: also "ta → nàng" and every servant (so their row shows the week's change) */
 (function(){if(typeof wkSnap!=="function")return;const s0=wkSnap;wkSnap=function(){const s=s0.apply(this,arguments);try{
@@ -87,6 +93,12 @@ window.kitRelRows=kitRelRows;window.kitRelTable=kitRelTable;window.kitRel2=kitRe
 .kr2-paper .kr2-d.n{color:#6a5236}
 .kr2-paper .kr2-n1{grid-template-columns:minmax(0,1fr)}
 @container (max-width:430px){.kr2-paper .kr2-n2{grid-template-columns:minmax(0,1fr)}}
+/* KIT 52 compact (owner 17/11): one line per direction, pairs never split */
+.kr2-cp{margin:0;display:flex;flex-direction:column;gap:3px;font-size:.82em;line-height:1.3;font-variant-numeric:tabular-nums}
+.kr2cl{display:flex;flex-wrap:wrap;align-items:baseline;gap:0 .7em;min-width:0}
+.kr2ch{flex:0 0 100%;font-size:.86em;font-weight:700;letter-spacing:.02em;color:var(--krc);color:color-mix(in srgb,var(--krc,#6a5040) 90%,#000)}
+.kr2cl.kr2-them{--krc:#7a4fa0}.kr2cl.kr2-me{--krc:#3f62a8}
+.kr2ci{white-space:nowrap}.kr2ci .kr2-v{margin-left:.15em}
 .krd{white-space:nowrap;font-weight:600}.krd .krel{font-weight:600}.krd b.g{color:var(--good,#2f7a46)}.krd b.r{color:var(--bad,#b0332a)}.krd b.n{color:var(--ink,#3a2a1a)}
 `;document.head.appendChild(st)})();
 /* KIT SAMPLE PAGE §47 (jkitpage loads later in the same script): §52 relation table + inline deltas, §57 number deltas */
