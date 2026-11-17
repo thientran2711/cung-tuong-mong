@@ -867,7 +867,7 @@
 | one-core-jkc LIVE 086f1d607 (main e8b1906f → 086f1d60; rollback e8b1906f) | review/one-core-jkc-r1 | B | session_01N1tNP2T3QBr5EHz4r5RAmd | LIVE | 17/11 16:58Z |
 | STAFF CAPS COUNT DONE (A 38/40/39 · B1 ~29 · B2 ~31 · C ~23; faces 15+15) | review/staff-caps-count | B | session_01N1tNP6Neas51xgJE6D4CK1 | DONE (archived) | 17/11 17:00Z |
 | REVIEW coop-thin-c 475beba7 (opus BIG; brief briefs/review-coop-thin-c.md) | review/coop-thin-c-r1 | B | session_01N1tNP4NkEVbfkftEhoSW5h | RUNNING | 17/11 17:05Z |
-| coop-b1 regression on main (laydo/takeaway 24/41; bisect + family fix; opus; brief briefs/coop-b1-regress.md) | review/coop-b1-regress | B | session_01N1tNP6usJ5fWhrv4JU1m4R | RUNNING | 17/11 17:05Z |
+| coop-b1 regression on main (laydo/takeaway 24/41; bisect + family fix; opus; brief briefs/coop-b1-regress.md) | review/coop-b1-regress | B | session_01N1tNP6usJ5fWhrv4JU1m4R | SẴN SÀNG KIỂM 24d8eb38 (stale tests after ONE TRAIT POOL d296f3cd, no game bug; test family fixed; reports/coop-b1-regress.md) | 17/11 17:05Z |
 | ODDS-CAP AUDIT: no rolled outcome 100 %/0 % (BAL one cap ~95/5), drop 'Chắc chắn' word; 85 o:100 acts in 23 files (OD 17:00Z) | review/odds-cap | D | (D opens) | ORDERED | 17/11 17:00Z |
 | REVIEW kit-option-rows r1 of 3dabd1f7 (sonnet; brief briefs/s34-review-kit-option-rows.md) | review/kit-option-rows-r1 | MAIN s34 | (opening) | RUNNING | 17/11 17:06Z |
 | kit-thanh-bai: THÀNH/BẠI two-block act cards + HỎNG→BẠI (OD 17:10Z (2)); successor of kit-option-rows (sonnet; brief briefs/s34-kit-thanh-bai.md) | review/kit-thanh-bai | MAIN s34 | (opening) | RUNNING | 17/11 17:08Z |
