@@ -19,8 +19,8 @@ def med(L):
 def head(L,lab):
   n=len(L);hh=sum(1 for x in L if (x.get('maxRank') or 0)>=7);early=sum(1 for x in L if ended(x) and x['years']<3)
   stuck=sum(1 for x in L if x['title']=='TIMEOUT' or str(x['fate']).startswith('CRASH'))
-  print(f"| {lab} | {n} | {hh} ({round(100*hh/n) if n else 0} %) | {early} ({round(100*early/n) if n else 0} %) | {sum(x.get('maxRank') or 0 for x in L)/max(1,n):.1f} | {sum(x.get('rank') or 0 for x in L)/max(1,n):.1f} | {med([dm(x,12,1) for x in L])}/{med([dm(x,24,1) for x in L])}/{med([dm(x,36,1) for x in L])} | {med([dm(x,12,2) for x in L])}/{med([dm(x,24,2) for x in L])}/{med([dm(x,36,2) for x in L])} | {stuck} |")
-print("| group | lives | Hoàng hậu | early end < 3 y | avg max rank | avg rank at end | Sủng m12/24/36 | Danh m12/24/36 | stuck |\n|---|---|---|---|---|---|---|---|---|")
+  dd=sum(1 for x in L if ended(x));print(f"| {lab} | {n} | {hh} ({round(100*hh/n) if n else 0} %) | {dd} ({round(100*dd/n) if n else 0} %) | {early} ({round(100*early/n) if n else 0} %) | {sum(x.get('maxRank') or 0 for x in L)/max(1,n):.1f} | {sum(x.get('rank') or 0 for x in L)/max(1,n):.1f} | {med([dm(x,12,1) for x in L])}/{med([dm(x,24,1) for x in L])}/{med([dm(x,36,1) for x in L])} | {med([dm(x,12,2) for x in L])}/{med([dm(x,24,2) for x in L])}/{med([dm(x,36,2) for x in L])} | {stuck} |")
+print("| group | lives | Hoàng hậu | life ended before HH / cap | early end < 3 y | avg max rank | avg rank at end | Sủng m12/24/36 | Danh m12/24/36 | stuck |\n|---|---|---|---|---|---|---|---|---|---|")
 by=C.defaultdict(list)
 for x in R:by[x.get('diff') or 'vua'].append(x)
 for k in ('de','vua','kho'):
@@ -45,7 +45,7 @@ if '--press' in O:
   T=C.defaultdict(lambda:C.Counter())
   for x in R:
     for r,v in ((x.get('b2') or {}).get('rk') or {}).items():T[int(r)].update(v)
-  print("\n| rank | buổi | months | bạc held | bạc net / month | Sức | khắc left / buổi | open cards left / buổi | cards blocked by bạc | blocked by Sức | Danh / month | Sủng / month |\n|---|---|---|---|---|---|---|---|---|---|---|---|")
+  print("\n| rank | buổi | months | bạc held | bạc net / month | Sức | khắc left / buổi | open cards left / buổi | cards blocked by bạc | blocked by Sức | Danh / month | Sủng / month |\n|---|---|---|---|---|---|---|---|---|---|---|---|---|")
   for r in sorted(T):
     v=T[r];b=max(1,v['b']);m=max(1,v['m'])
     print(f"| {RK[r]} | {v['b']} | {v['m']} | {v['bac']/b:.0f} | {v['net']/m:+.0f} | {v['suc']/b:.0f} | {v['kl']/b:.2f} | {v['oc']/b:.1f} | {100*v['bb']/max(1,v['dk']):.0f} % | {100*v['sb']/max(1,v['dk']):.0f} % | {v['dn']/m:+.1f} | {v['sg']/m:+.1f} |")
