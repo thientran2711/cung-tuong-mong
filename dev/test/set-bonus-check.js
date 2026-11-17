@@ -68,6 +68,10 @@ const {chromium}=require('playwright');const D=require('./lib/device');
   /* 9 PLAYER TEXT: no %, numbers = BAL; "Phòng trưng bày" */
   {clean(S);S.rank=5;put(S,["quattron","holo"]);shelfSetCheck(S);const L=shelfSetLines(S).map(x=>x.t);const txt=L.join(" | ");out.T.text=L;F(!/%/.test(txt),"% in set text");
    F(L.some(t=>/còn thiếu Cải thảo phỉ thúy/.test(t)),"missing-piece line absent");F(L.some(t=>/Quạt mùa: còn thiếu Quạt gấp trúc vẽ/.test(t))&&!S.shSet.ids.length,"half a pair counts or shows wrong");S.rank=rk0}
+  /* 10 GLOW DATA (owner OD 17/11 ~21:20Z): shelfView items carry .set {id,name,full}; random pieces null */
+  {clean(S);S.rank=5;put(S,["quattron","quatgap","holo","binhsu","caytung"]);const V=shelfView(S),it=k=>V.groups.flatMap(g=>g.items).find(x=>x.k===k);
+   out.T.glow={quattron:it("quattron").set,holo:it("holo").set,caytung:it("caytung").set};F(it("quattron").set&&it("quattron").set.full&&it("quattron").set.name==="Quạt mùa"&&it("holo").set&&!it("holo").set.full&&it("caytung").set===null,"glow data "+JSON.stringify(out.T.glow));
+   S.rank=rk0}
   return out});
  R.T.errors=errs.slice(0,3);if(errs.length)R.fail.push('page errors: '+errs.slice(0,3).join(' | '));
  console.log(JSON.stringify(R.T,null,1));console.log(R.fail.length?'SET BONUS FAIL · '+R.fail.join(' · '):'SET BONUS PASS');await b.close();srv.close();process.exit(R.fail.length?1:0)})().catch(e=>{console.error(e);process.exit(1)});

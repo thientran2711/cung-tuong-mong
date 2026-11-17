@@ -54,7 +54,7 @@ function shelfHTML(g,e,o){const P=pc(e),ro=!!o.ro;
  const lbl=`${gName(g)}: ${P?P.name:"còn trống"}`;
  return `<button type="button" class="kdr-sh${P?" has":""}" data-kdrg="${esc(g)}" aria-label="${esc(lbl)}" title="${esc(lbl)}">${lab}${tags}${stand}<span class="kdr-plank" aria-hidden="true"></span></button>`}
 function kitDisplayRoomHTML(m){m=m||{};const G=m.groups||groups(),ro=!!m.ro;const n=G.filter(x=>m.placed&&m.placed[x[0]]).length;
- const title=m.title||"Phòng trưng bày";
+ const title=m.title||"Đa Bảo Các";
  return `<div class="kdr-hd"><span class="kdr-cart">${esc(title)}</span><span class="kdr-cnt">${ro&&!m.known?"":`Đã bày ${n}/${G.length} món`}</span>${typeof kitXHTML==="function"?kitXHTML('data-kdrx="1"',"Đóng"):'<button type="button" class="kit-x" data-kdrx="1" aria-label="Đóng">✕</button>'}</div>`+
   `<div class="kdr-sc"><div class="kdr-grid" style="--kdr-n:${G.length}">${G.map(x=>shelfHTML(x[0],m.placed&&m.placed[x[0]],{ro,known:m.known!==false})).join("")}</div></div>`}
 function tileHTML(x,g){const P=pc(x.e),why=whyNot(x.e);
@@ -73,12 +73,12 @@ function box(){/* the area between the top bar and the bottom bar, inside the ga
  const gm=document.getElementById("game"),h=gm&&gm.querySelector("header.hud"),b=gm&&gm.querySelector("nav.bar");if(!gm||!h||!b)return null;
  const g=gm.getBoundingClientRect(),a=h.getBoundingClientRect(),c=b.getBoundingClientRect();return{l:g.left,r:innerWidth-g.right,t:Math.round(a.bottom+4),b:Math.round(innerHeight-c.top+4)}}
 function place(){const el=$k();if(!el)return;const x=box();if(!x)return;el.style.left=x.l+"px";el.style.right=x.r+"px";el.style.top=x.t+"px";el.style.bottom=x.b+"px"}
-function model(){const m={ro:KDR.ro,known:KDR.known,groups:groups(),placed:{},title:KDR.ro&&KDR.p&&KDR.p!==S?`Phòng trưng bày của ${esc((KDR.p&&KDR.p.name)||"")}`:"Phòng trưng bày"};for(const x of m.groups)m.placed[x[0]]=KDR.known?placedOf(x[0]):null;return m}
+function model(){const m={ro:KDR.ro,known:KDR.known,groups:groups(),placed:{},title:KDR.ro&&KDR.p&&KDR.p!==S?`Đa Bảo Các của ${esc((KDR.p&&KDR.p.name)||"")}`:"Đa Bảo Các"};for(const x of m.groups)m.placed[x[0]]=KDR.known?placedOf(x[0]):null;return m}
 function paint(){const el=$k();if(!el)return;const keep=el.querySelector(".kdr-sc"),st=keep?keep.scrollTop:0;el.innerHTML=kitDisplayRoomHTML(model())+`<div class="kdr-drw" id="kdrdrw" hidden></div>`;
  const s2=el.querySelector(".kdr-sc");if(s2)s2.scrollTop=st;if(KDR.drawer)drawer(KDR.drawer,true);place()}
 function kitDisplayRoomOpen(p,o){o=o||{};kitDisplayRoomClose(true);KDR.p=p||S;KDR.ro=!!o.ro||(KDR.p!==S);KDR.fixture=!!o.fixture||!real();KDR.known=o.known!==false;try{if(KDR.ro&&real()&&o.known==null&&typeof shelfView==='function')KDR.known=!!shelfView(KDR.p).known}catch(e){}KDR.drawer=null;
  if(KDR.fixture&&!o.fixture)return null;/* no real API yet: never open for the player with made-up data */
- const el=document.createElement("div");el.id="kdr";el.className="kdr";el.setAttribute("role","dialog");el.setAttribute("aria-label","Phòng trưng bày");el.style.setProperty("--kdr-bg",`url("${KDR_BG}")`);if(KDR.ro)el.dataset.ro="1";
+ const el=document.createElement("div");el.id="kdr";el.className="kdr";el.setAttribute("role","dialog");el.setAttribute("aria-label","Đa Bảo Các");el.style.setProperty("--kdr-bg",`url("${KDR_BG}")`);if(KDR.ro)el.dataset.ro="1";
  document.body.appendChild(el);paint();try{if(typeof sfx==="function")sfx("sfx-tap")}catch(e){}return el}
 function kitDisplayRoomClose(quiet){const el=$k();if(el)el.remove();KDR.drawer=null;try{if(typeof kitItemCardClose==="function")kitItemCardClose()}catch(e){}if(!quiet)try{if(typeof kitStageRail!=="undefined")kitStageRail.paint()}catch(e){}}
 function drawer(g,still){const el=$k();if(!el||KDR.ro)return;const d=el.querySelector("#kdrdrw");if(!d)return;KDR.drawer=g;d.innerHTML=drawerHTML(g);const was=d.hidden;d.hidden=false;
@@ -108,7 +108,7 @@ const rp=()=>{cancelAnimationFrame(KDR.raf);KDR.raf=requestAnimationFrame(place)
 /* the room is her room's view: leaving the game (title screen) closes it */
 try{const r1=render;render=function(){const r=r1.apply(this,arguments);try{if($k()&&(typeof S==="undefined"||!S||S.dead))kitDisplayRoomClose();else if($k()){place()}}catch(e){}return r};window.render=render}catch(e){}
 /* ---------- rail icon (KIT §77): only when the real data API exists ---------- */
-try{if(typeof kitStageRail!=="undefined")kitStageRail.add({id:"disp",order:40,icon:"img/kit/ico-room.webp",title:"Phòng trưng bày",when:()=>real()&&!S.dead&&!S.out,onTap:()=>kitDisplayRoomOpen(S)})}catch(e){}
+try{if(typeof kitStageRail!=="undefined")kitStageRail.add({id:"disp",order:40,icon:"img/kit/ico-room.webp",title:"Đa Bảo Các",when:()=>real()&&!S.dead&&!S.out,onTap:()=>kitDisplayRoomOpen(S)})}catch(e){}
 window.kitDisplayRoomOpen=kitDisplayRoomOpen;window.kitDisplayRoomClose=kitDisplayRoomClose;window.kitDisplayRoomHTML=kitDisplayRoomHTML;
 /* ---------- css ---------- */
 const css=document.createElement("style");css.id="kit-disp";css.textContent=`
@@ -149,7 +149,7 @@ html.kv2 .kdr-grid{grid-template-columns:repeat(2,minmax(0,1fr));grid-template-r
 .kdr-none{margin:10px 4px;font-size:.85rem;opacity:.8}
 `;document.head.appendChild(css);
 /* ---------- kit page sample ---------- */
-try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§89",title:"kitDisplayRoom · Phòng trưng bày (phòng trưng bày + ngăn kéo tư trang)",
+try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§89",title:"kitDisplayRoom · Đa Bảo Các (phòng trưng bày + ngăn kéo tư trang)",
  html:()=>{let F=null;try{F=mkFix()}catch(e){}const placed=F?F.placed:{};const m={groups:GFIX,placed};
   return `<div class="kitpg-row" style="position:relative;height:420px;overflow:hidden"><div class="kdr" style="position:absolute;inset:0;--kdr-bg:url('${KDR_BG}')">${kitDisplayRoomHTML(m)}</div></div>`}})}catch(e){}
 }catch(e){console.error("jdisp",e)}})();
