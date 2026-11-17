@@ -499,7 +499,7 @@
 | kit-size-10 (sonnet keeper): KIT REQUEST night-final — Fold clock chip off screen in the kit choice dialog, whole family | review/kit-size-10 | main s27 | session_01UV1SziEvZm2cX5xAAQe8Yq | RUNNING | 17/11 00:39Z |
 | road-onecore quick re-review r1 (opus, numbers) of 6a1112d1 (B1 road line) | review/road-onecore-r1 | B | session_01N1tNP67hg9cxyW2tQvWpBX | PASS 74ba4f9a → main batch (archived) | 17/11 00:55Z |
 | oi-perf (opus): origin-intros life-card click 1.3–1.5 s long task (quickcheck FAIL 4.4 s) → root-cause fix on review/batch-0032-oi 5e5eb4c8 | review/batch-0032-oi | main s27 | session_01UV1SziJLwwyFFAvzGMHcyD | RUNNING | 17/11 00:53Z |
-| coop-main-faults review r1 (opus co-op) of 3751fbba (a,b,d; (c) + start-friend fails moved to coop-stable #2) | review/coop-main-faults-r1 | main s27 | session_01UV1SzhNibrJw9xWf4TES12 | RUNNING | 17/11 00:59Z |
+| coop-main-faults review r1 (opus co-op) of 3751fbba (a,b,d; (c) + start-friend fails moved to coop-stable #2) | review/coop-main-faults-r1 | main s27 | session_01UV1SzhNibrJw9xWf4TES12 | PASS 608309dc (trial merge onto main 744b80e7; report reports/review-coop-main-faults-r1.md) | 17/11 |
 | coop-stable r1 review PASS 6f8e33a0 (= 744b80e7 + 6696656e) → batch-0032 incl. Worker deploy by the builder (reviewer archived) | review/coop-stable-r1 | main s27 | session_01UV1SzgbJc6UCzVHi6vVpju | PASS | 17/11 01:08Z |
 | it-key-guard (opus bug): npcMonthly j8.js:399 IT[e.k].tg undefined crash on live + 25-file family | review/it-key-guard | main s27 | session_01UV1SzhtmrVzHNMoDZ13Wac | RUNNING | 17/11 01:08Z |
 | road-b2-fix review r2 (opus, BIG) of db5c49f4 (incl. road-onecore 6a1112d1) | review/road-b2-fix-r2 | B | session_01N1tNP5i7LqTvSFFBdZwQiG | RUNNING | 17/11 01:10Z |
