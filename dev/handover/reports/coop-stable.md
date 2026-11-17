@@ -57,3 +57,20 @@ Note: coop-dbg.js / coop-dbg-hostdeath.js / coop-ask-srvprobe.js / coop-rev2.js 
 candidates to retire. coop-lobby.js takes positional BASE/OUTDIR (old CLI). Successor: run each once on an idle box and fix or retire.
 
 Scratch (not in git): /home/user/wt/coopst-out (loop.sh, probe/stale.js, run logs).
+
+## PARKED at df846de6 (successor worker session_01UV1SzmJ6eZ5av9w4VjKgrt, 11/17/2026; owner 17/11 ~02:05Z via s28: stop option-1 co-op patching)
+START_CTX ≈ 6 %; parked at ≈ 25 %. Branch review/coop-stable @ df846de6 = 6696656e + merge of main 744b80e7 (merge, not rebase: the reviewed sha stays in history) + 2 commits. Site rebuilt. Not deployed (Worker fix #1 still needs main's deploy).
+DONE
+| # | item | root cause | fix | proof |
+|---|---|---|---|---|
+| 7 | OPEN #1 "fold #next enabled … Chờ hảo hữu…" (3/50) | **test**: the dump's b[0] is S.buoi = 3 (buổi TỐI, not a day buổi). Her tối khắc ran out → j6 auto nextBuoi → nightReady = she is legitimately ready; press() counted only bend/pend/waiting as done | press() also counts COOPW.nrdy === week; same helper fixed in coop-ask-srvprobe, coop-guest-maid, coop-toil-look | e2e 5/5 after (60/60) |
+| 8 | coop-b2b5 B2.1/B2.3 (guest never gets the host's night) | **REAL (game), from main's flip-entry (jfe)**: the tablet now turns at buổi tối INSIDE the week; the host's coop flip wrapper only set S.tn {w: this week}; the guest takes a night only from the merged week (tn.w = new week) or a relay → her card was lost | jcoopworld flip wrapper: a flip inside the week = tnFinal() (host's final word relayed at once); test reads the night at tối (toNight), B4 check after the week | b2b5 30/30 |
+| 9 | coop-night "host sees the wait" (owned from coop-main-faults (c)) | **REAL (game, jcoop)**: a 2nd join of the same room while the socket is CONNECTING (guest: ?room= link + "Vào phòng") abandoned it before the handshake: no close frame, the edge keeps the upstream → ghost of the seat, presence stays online (old Worker: for ever) | jcoop wait(): keep the CONNECTING socket of the same room; test bound 75 s (Worker STALE 45 + alarm 20) + failure dump | coop-night 105/105, every "wait seen after 0.3 s" (before: 3 FAIL); coop-twin ok |
+| 10 | coop-b1 3 ksab | test: two kids made with mkKid before pushing → same name | push each at once | passes |
+| 11 | (gap) | forgetFriend cleared only "r"+id, not the servant key "s"+id: a reborn servant friend kept the old stage | both keys | static |
+| — | e2e start fails ("each sees the other", "friend starts as Người lạ") | start race = fix #5 (already on branch). "Người lạ" with a cung nữ guest: k61InitNew o==="cn" knows every servant, incl. a servant friend = same rule as any NPC; the test lacks that reason | NOT changed (decide: test reason vs rule) | — |
+Checks on df846de6: coop-e2e 2/2 (60/60), b2b5, coop-night, coop-guest-maid, coop-pets, coop-rejoin-stats PASS; quickcheck PASS (156 s, old save ok, core gates PASS).
+OPEN (not fixed, stopped by owner)
+- coop-b1 case 8 (B laydo on host: B gained / A lost) FAIL; coop-r2 "each has the other as a consort entry" + "2 takeaway: not on her entry"; coop-p2 "B1 host: she is now my tai mắt" (+ timeout 1200 s); coop-sleep "1: A waits chip"; coop-invite-ux "step 1 done after copy"; coop-ask-srvprobe "week advanced" (one-off probe: retire with coop-dbg*, coop-rev2).
+- Not run: coop-timer, coop-timer-lag, coop-toil-look, coop-bot, coop-cyc, coop-rev2, coop-lag, coop-lobby, coop-play, evtruth-coop.
+- names-unique-r1 re-test on top of coop-stable (s27 add-on b): not done.
