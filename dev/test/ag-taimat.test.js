@@ -14,9 +14,10 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
  /* 1 list */
  const r1=await p.evaluate(()=>{const R=liveRivals(true).filter(v=>v.alive&&!v.out&&(v.staff||[]).length);if(R.length<2)return{skip:1};const [v,w]=R;
   for(const s of allServ())if(s.spyFor==="me")s.spyFor=null;const a=v.staff[0],c=w.staff[0];a.spyFor="me";c.spyFor=v.id;const own=(S.staff||[])[0];if(own)own.spyFor="me";KN.m=null;
-  const L=taiMatList();const Lv=taiMatList(v);const it=L.find(x=>x.sid===a.sid);
+  const L=taiMatList();const Lv=taiMatList(v);const it0=L.find(x=>x.sid===a.sid);const it=it0?Object.assign({},it0,{p:it0.p===a}):null;
   return{n:L.length,has:!!it,it,place:palaceOf(v),vk:"v"+v.id,own:own?L.some(x=>x.sid===own.sid):false,vHas:Lv.some(x=>x.sid===c.sid),vMine:Lv.some(x=>x.sid===a.sid),cMine:L.some(x=>x.sid===c.sid)}});
  ok(!r1.skip&&r1.has&&r1.n===1&&r1.it.placedAt===r1.place&&r1.it.placedWith===r1.vk&&r1.it.name&&r1.it.role&&r1.it.loyaltyKnown===null,'list: her Tai mắt = the real servant she placed in another palace (name, role, where, loyalty as she knows it: unknown)',r1);
+ ok(r1.it&&r1.it.p===true&&r1.it.place===r1.place&&r1.it.loy===null&&r1.it.loyalWord==="chưa rõ"&&r1.it.sold===false,'list: tinbao-ui adapter fields (p, place, loy, loyalWord, sold)',r1.it);
  ok(!r1.own&&!r1.cMine,'list: her own staff and another consort\'s spy are NOT her Tai mắt',{own:r1.own,c:r1.cMine});
  ok(r1.vHas&&!r1.vMine,'two-way: taiMatList(v) lists the NPC\'s own placed spy, not hers',{vHas:r1.vHas,vMine:r1.vMine});
  /* 2 producers */
@@ -43,13 +44,14 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
  ok(r2.bao&&/^s\d+$/.test(r2.bao.inf)&&r2.bao.info.kind==="ownMaid"&&r2.bao.info.name===r2.bao.infName&&!r2.bao.info.isTaiMat,'producer knBao: her own servant',r2.bao);
  ok(r2.sell.info&&r2.sell.info.kind==="taiMat"&&r2.sell.info.isTaiMat&&r2.sell.n===1&&r2.sell.list===1,'producer knErrSell (her bought servant in a rival palace): her Tai mắt; report counted',r2.sell);
  ok(r2.friend&&r2.friend.kind==="friend"&&r2.friend.name,'friend informer',r2.friend);
+ ok(r2.matInfo.code==="mat"&&r2.passInfo.code==="qua"&&r2.bao.info.code==="hau"&&r2.friend.code==="ban"&&/Tai mắt /.test(r2.matInfo.label),'tinbao-ui codes: mat / qua / hau / ban + label',{m:r2.matInfo.label,q:r2.passInfo.label,h:r2.bao.info.label,b:r2.friend.label});
  /* 3 sold out hidden until discovered */
  const r3=await p.evaluate(()=>{const v=liveRivals(true).find(x=>x.alive&&!x.out);const s=(S.staff||[]).find(x=>x.sid!=null);if(!s||!v)return{skip:1};S.tmSold=null;s.spyFor=v.id;
   knBao(s,S,"đi nghe ngóng một vòng nhưng chưa nghe được chuyện gì đáng bẩm",null);const T=knTb();const it=T.R[T.R.length-1];const before=informerInfo(it).soldOutKnown;
-  knSoldFound(s);const after=informerInfo(it).soldOutKnown;s.spyFor=null;const cleared=informerInfo(it).soldOutKnown;
+  knSoldFound(s);const after=informerInfo(it).soldOutKnown;const code=informerInfo(it).code;s.spyFor=null;const cleared=informerInfo(it).soldOutKnown;
   /* the confidant maid (no sid) */let cm=null;if(S.maid){const m0=S.maid.spyFor;S.maid.spyFor=v.id;S.tmSold=null;const i2={by:"scmme",inf:"maid"};const b2=informerInfo(i2).soldOutKnown;knSoldFound(S.maid);cm={b:b2,a:informerInfo(i2).soldOutKnown,kind:informerInfo(i2).kind};S.maid.spyFor=m0}
-  return{before,after,cleared,cm}});
- ok(!r3.skip&&r3.before===false&&r3.after===true&&r3.cleared===false,'sell-out: hidden until discovered, shown after, gone when she is no longer sold',r3);
+  return{before,after,cleared,cm,code}});
+ ok(!r3.skip&&r3.before===false&&r3.after===true&&r3.cleared===false&&r3.code==="sold",'sell-out: hidden until discovered, shown after, gone when she is no longer sold',r3);
  ok(!r3.cm||(r3.cm.b===false&&r3.cm.a===true&&r3.cm.kind==="ownMaid"),'sell-out: the confidant maid too',r3.cm);
  const src=fs.readFileSync(path.join(__dirname,'..','build','j68f.js'),'utf8').split('knSoldFound(').length-1+['j10.js','j14.js','jeitem.js','j72.js'].reduce((n,f)=>n+(fs.readFileSync(path.join(__dirname,'..','build',f),'utf8').split('knSoldFound(').length-1),0);
  ok(src>=7,'every discovery site records the discovery (j68f ×3, j10 Tra khảo, j14 tra xét, jeitem Tra khảo, j72 Giữ lại)',src);

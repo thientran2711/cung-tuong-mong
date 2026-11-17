@@ -56,7 +56,7 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
   z.pend.splice(z.pend.indexOf(pd),1);S.mat=1;S.tamco=20;BAL.ag.kh2.rd.see=1;BAL.ag.kh2.rd.go=1;return o});
  ok(r3.lowMe.n<=Math.round(40*r3.lowMe.odds/100)+8&&r3.highMe.n>=36,'ONE RULE (her): known by her own eyes and ears at her watch odds oSee (Tai mắt 0: few of 40; high: nearly all)',{low:r3.lowMe,high:r3.highMe});
  ok(r3.npcHigh&&(r3.npcLow==="skip"||!r3.npcLow),'ONE RULE (NPC): the same rule for a consort (her servants or her own Tai mắt)',{hi:r3.npcHigh&&r3.npcHigh.by,lo:r3.npcLow});
- ok(r3.doer&&r3.doer.how==="self",'the doer knows her own deed',r3.doer);
+ ok(r3.doer&&(r3.doer.how==="self"||r3.doer.how==="here")/* AG-ALL-2f: a doer standing at her own deed's place is caught by the presence rule first; she knows it either way */,'the doer knows her own deed',r3.doer);
  ok(/^v\d+$/.test(r3.friend||""),'a consort who likes her passes the news on (informer = that consort)',r3.friend);
  ok(r3.told&&/\S/.test(r3.line)&&!/\{|\}/.test(r3.line),'her loyal confidant maid tells her; the line is in that maid\'s voice',r3.line);
  ok(r3.sold,'a bought servant may sell the news to the one who bought her',r3.sold);

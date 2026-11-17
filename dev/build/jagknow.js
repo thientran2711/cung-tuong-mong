@@ -264,15 +264,22 @@ function knEye(x,h,hid){const doer=knWho(h)[0],pl=h.k,nw=agKh();const at=s=>{con
 function knPal(o){try{return palaceOf(o)}catch(e){return null}}
 function knLoyK(p,s){return p===S&&s&&s.kn?cl(s.loyal||0,0,100):null}
 function taiMatList(p){p=p||S;if(!p)return[];const N=p===S&&S.tmN||{};return taiMatRaw(p).map(s=>{const o=ownerOf(s);return{id:"s"+s.sid,sid:s.sid,name:s.name,role:s.role,
- placedAt:o?knPal(o):null,placedWith:o?knId(o):null,placedName:o?o.name:"",loyaltyKnown:knLoyK(p,s),reports:N[s.sid]||0}})}
+ placedAt:o?knPal(o):null,placedWith:o?knId(o):null,placedName:o?o.name:"",loyaltyKnown:knLoyK(p,s),reports:N[s.sid]||0,
+ /* the tinbao-ui adapter shape (main s34 / tinbao worker): p, place, loy, loyalWord, sold */
+ p:s,place:o?knPal(o):null,loy:knLoyK(p,s),loyalWord:knLoyW(knLoyK(p,s)),sold:p===S&&knIsSold(s)&&knSoldK(s)}})}
+const KN_LOYW={warm:"một lòng",cool:"tạm tin được",cold:"khó tin",none:"chưa rõ"};
+function knLoyW(n){return n==null?KN_LOYW.none:KN_LOYW[knMood(n)]}
 function knSoldKey(s){return s&&s.sid!=null?String(s.sid):"maid"}
 function knSoldFound(s){if(!s||!S)return;S.tmSold=S.tmSold||{};S.tmSold[knSoldKey(s)]=wk()}
 function knSoldK(s){return !!(S&&S.tmSold&&S.tmSold[knSoldKey(s)]!=null)}
 function knIsSold(s){return !!(s&&s.spyFor!=null&&s.spyFor!=="me")}
 function informerInfo(it){if(!it||!S)return null;const by=String(it.by||"");const k=it.inf||(/^[sv]\d/.test(by)?by:null);if(!k)return null;
- if(k[0]==="v"){const v=RV(+k.slice(1));return{id:k,name:v?v.name:it.infName||"",isTaiMat:false,kind:"friend",soldOutKnown:false}}
- const s=k==="maid"?S.maid:servById(+k.slice(1));if(!s)return{id:k,name:it.infName||"",isTaiMat:false,kind:"passerby",soldOutKnown:false};
+ if(k[0]==="v"){const v=RV(+k.slice(1));return knInfUi({id:k,name:v?v.name:it.infName||"",isTaiMat:false,kind:"friend",soldOutKnown:false})}
+ const s=k==="maid"?S.maid:servById(+k.slice(1));if(!s)return knInfUi({id:k,name:it.infName||"",isTaiMat:false,kind:"passerby",soldOutKnown:false});
  const o=s===S.maid?S:ownerOf(s);const kind=o===S?"ownMaid":s.spyFor==="me"?"taiMat":"passerby";
- return{id:k,name:s.name,isTaiMat:kind==="taiMat",kind,soldOutKnown:kind==="ownMaid"&&knIsSold(s)&&knSoldK(s)}}
+ return knInfUi({id:k,name:s.name,isTaiMat:kind==="taiMat",kind,soldOutKnown:kind==="ownMaid"&&knIsSold(s)&&knSoldK(s)})}
+/* the tinbao-ui adapter codes: code mat (her Tai mắt) / hau (her servant) / ban (friend) / qua (passer-by) / sold (a discovered sell-out); label = who, as she knows it */
+const KN_INFL={mat:"Tai mắt",hau:"Người hầu",ban:"Bằng hữu",qua:"Người đi ngang",sold:"Kẻ hai lòng"};
+function knInfUi(f){const c=f.soldOutKnown?"sold":{taiMat:"mat",ownMaid:"hau",friend:"ban",passerby:"qua"}[f.kind];f.code=c;f.label=KN_INFL[c]+(f.name?" "+f.name:"");return f}
 /* her Tai mắt's count of reports (set by the producers knScan / knBao) */
 function knTmN(e){if(!e||e.sid==null||!S)return;S.tmN=S.tmN||{};S.tmN[e.sid]=(S.tmN[e.sid]||0)+1}
