@@ -4,12 +4,14 @@
    style line shown), DOWN (downside-looking text under ĐƯỢC).
    usage: node dev/measure/option-modal-scan.js [device] [turns] [outjson]   (device: fold|ipadAir|ipadPro|pixel|iphone14, default ipadAir; run from repo root; needs a built site) */
 const {chromium}=require('playwright');const D=require('../test/lib/device');
-const dev=process.argv[2]||'ipadAir',N=+process.argv[3]||120,OUT=process.argv[4];const MINW=190;
+const dev=process.argv[2]||'ipadAir',N=+process.argv[3]||120,OUT=process.argv[4];const MINW=190,SEED=+process.argv[5]||7;/* r2: deterministic (seeded Math.random, same turns every run) + fixed direct builders */
 (async()=>{const srv=await D.serveRoot();const b=await chromium.launch(process.env.HTTPS_PROXY?{proxy:{server:process.env.HTTPS_PROXY,bypass:'localhost,127.0.0.1'}}:{});
  const ctx=await D.newDeviceContext(b,dev);const p=await ctx.newPage();const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,160)));
  const g=await D.openHost(p,srv.url);
  await g.evaluate(()=>{const kl=document.getElementById('kload');if(kl)kl.remove();try{localStorage.clear()}catch(e){}document.getElementById('title').hidden=true;window.__nlInner=1;for(let i=0;i<40;i++){start();if(S.ps&&!(typeof isSrv==='function'&&isSrv()))break}Q.length=0;$("modal").hidden=true});
  await g.addStyleTag({content:'#kroul,#kroulw,.kmov{display:none!important}'});
+ await g.evaluate(sd=>{let seed=sd;Math.random=()=>{seed|=0;seed=seed+0x6D2B79F5|0;let t=Math.imul(seed^seed>>>15,1|seed);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}},SEED);
+ const DIRECT=`Q.length=0;$("modal").hidden=true;S.bac=300;S.suc=100;const T={n:"Phú quý",d:"đề"};tsPanel({t:"Hội phối đồ · "+T.n,art:"img/ev-dieu-lanh.webp",who:pTH(),h:"<p>Ngự hoa viên bày bình phong gấm.</p>",opts:[tsOpt({n:"Tự tay phối đồ",fx:{suc:-5},need:[tsNeedSuc(5)],duoc:["đứng đầu: Sủng +3, Danh +3, một món ban thưởng","vào ba người đầu: Danh +2"],mat:["đồ vượt phẩm vị: Danh -3","bộ đồ quá đề (phô trương): Đức -1"]}),tsOpt({n:"Cáo bệnh, không dự",mat:["Danh -1"],go:()=>{}})]});showModal()`;
  const seen={};const rows=[];
  const probe=()=>g.evaluate(()=>{const M=document.getElementById('modal');if(!M||M.hidden)return null;const op=M.querySelector('.opts');if(!op)return null;
   const bs=[...op.querySelectorAll(':scope > button')];if(bs.length<2)return null;
@@ -23,7 +25,8 @@ const dev=process.argv[2]||'ipadAir',N=+process.argv[3]||120,OUT=process.argv[4]
   const ow=Math.round(op.getBoundingClientRect().width);const dlg=M.querySelector('.dlg');const dr=dlg?dlg.getBoundingClientRect():{width:0,height:0};
   return{key,title:title.trim().slice(0,40),n:bs.length,cols,ow,dlgW:Math.round(dr.width),cs,vw:innerWidth,vh:innerHeight}});
  const record=async(tag)=>{const r=await probe();if(!r)return;if(seen[r.key])return;seen[r.key]=1;r.tag=tag;
-  const narrow=r.n<=3&&r.cs.some(c=>(c.wrapW&&c.wrapW<140)||c.tw<170);r.flags=[];if(narrow)r.flags.push('NARROW');if(r.cs.some(c=>c.clip))r.flags.push('CLIP');if(r.cs.some(c=>c.empty))r.flags.push('EMPTY');if(r.cs.some(c=>c.lit))r.flags.push('LIT');if(r.cs.some(c=>c.nothing))r.flags.push('NOTHING');rows.push(r)};
+  const narrow=r.n<=3&&r.cs.some(c=>(c.wrapW&&c.wrapW<150)||c.tw<170);r.flags=[];if(narrow)r.flags.push('NARROW');if(r.cs.some(c=>c.clip))r.flags.push('CLIP');if(r.cs.some(c=>c.empty))r.flags.push('EMPTY');if(r.cs.some(c=>c.lit))r.flags.push('LIT');if(r.cs.some(c=>c.nothing))r.flags.push('NOTHING');rows.push(r)};
+ try{await g.evaluate(c=>{(0,eval)(c)},DIRECT);await p.waitForTimeout(1800);await record('direct:hoi-phoi-do')}catch(e){console.log('direct builder failed',String(e).slice(0,80))}
  for(let i=0;i<N;i++){const alive=await g.evaluate(()=>{try{if(!S||S.dead){start()}Q.length=0;endTurn();}catch(e){return 'err '+e.message.slice(0,60)}return 'ok'});
   for(let k=0;k<6;k++){await p.waitForTimeout(120);await record('turn'+i);const more=await g.evaluate(()=>{const M=document.getElementById('modal');if(!M||M.hidden)return 0;const q=typeof Q!=='undefined'&&Q.length;M.hidden=true;return q?1:0});if(!more)break;await g.evaluate(()=>{try{showModal()}catch(e){}})}
   await g.evaluate(()=>{try{document.getElementById('modal').hidden=true}catch(e){}})}

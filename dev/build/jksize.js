@@ -263,7 +263,7 @@ KIT_SIZE.v3={
  /* S = small content: body up to bodyS, body + its button rows up to capS */
  bodyS:200,capS:{kv1:340,kv2:340},
  colS:104,porS:88,picS:"PM",picMinS:KIT_SIZE.pic.PM.h,evMin:{one:46,fig:56},subjPad:.04,
- btn:{cellS:140,cellLong:280,gap:6,txtMin:200}};
+ btn:{cellS:140,cellLong:280,gap:6,txtMin:200,stackBelow:80}};
 /* v3 figure sizes (measured BODY px, × KIT_FIG.fac) of the "fig" presentations: big enough that M holds more than S, L more than M, XL more than L */
 KIT_SIZE.fig3={M:{h:300,cw:140},L:{h:370,cw:162},XL:{h:480,cw:220}};Object.assign(KIT_SIZE.fig,{M3:KIT_SIZE.fig3.M,L3:KIT_SIZE.fig3.L,XL3:KIT_SIZE.fig3.XL});
 Object.assign(KIT_SIZE.lay,{M:{fig:"M3"},L:{fig:"L3"},XL:{fig:"XL3"}});
@@ -513,7 +513,7 @@ function kszLiveLay3(dlg,K){const X=dlg.__ksz3;if(!X)return;const V=KIT_SIZE.v3,
  const body=X.body,right=X.right;[...body.children].forEach(c=>{if(c!==right)c.remove()});right.querySelectorAll(":scope>.k3ev").forEach(c=>c.remove());
  let left="",ev=true;if(pres==="one"){if(foc==="event"){left=kszPic3(X.src,"k3main k3mpic");ev=false}else left=X.who?kszPor3(X.who):""}else left=X.who?kszFigHtml(X.who):"";
  if(left)body.insertAdjacentHTML("afterbegin",left);if(ev&&X.src)right.insertAdjacentHTML("afterbegin",kszPic3(X.src,"k3ev"));
- if(X.opts){if(pres==="one")X.mb.appendChild(X.opts);else right.appendChild(X.opts)}
+ if(X.opts){if(pres==="one")X.mb.appendChild(X.opts);else right.appendChild(X.opts);/* kit-option-rows r2 (s34): the figure-left layout can leave the option column too narrow for a card (Fold: 304 px, values wrapped 2-3 words a line): then every row stacks label-over-value (.kszstk) and the values get the whole text column */const bs=[...X.opts.querySelectorAll(":scope>button")],w=X.opts.clientWidth;X.opts.classList.toggle("kszstk",!!(bs.length&&w&&pres!=="one"&&w<kszNeedTxt(bs,0,KIT_SIZE.v3.btn)+KIT_SIZE.v3.btn.stackBelow))}
  body.querySelectorAll("img").forEach(im=>{if(!im.complete)im.addEventListener("load",()=>kszLiveRepick3(dlg),{once:true})});
  right.querySelectorAll(":scope>.k3ev img").forEach(im=>{if(!im.complete)im.addEventListener("load",()=>kitFrameApplyLive3(dlg),{once:true})});
  kitFrameApplyLive3(dlg)}
@@ -536,6 +536,8 @@ Object.assign(window,{kitFrameLive3,kszLivePick3,kitFrameApplyLive3,kitFrameFits
 (function(){const st=document.createElement("style");st.id="k-size3-live";st.textContent=`
 html body #modal .dlg.kszlive.kszlive{width:var(--kszw)!important;max-width:calc(100% - 16px)!important;height:auto!important;min-height:0!important;max-height:calc(100% - 16px);padding:0;display:flex;flex-direction:column;overflow:hidden}
 #modal .dlg.kszlive>#mb{padding:0;margin:0;display:block;max-height:none;overflow:visible;flex:none}
+/* r2: narrow option column -> label above value (kit rows) */
+#modal .dlg.kszlive .opts.kszstk .kb,#modal .dlg.kszlive .opts.kszstk small.kb{grid-template-columns:minmax(0,1fr)!important;row-gap:0!important}#modal .dlg.kszlive .opts.kszstk .krl{padding-top:3px!important;line-height:1.1}
 #modal .dlg.kszlive>#mr:not(:has(button:not([hidden]))){display:none}
 #modal .dlg.kszlive[data-pres="one"] .k3right{justify-content:center}
 #modal .dlg.kszlive .k3right>.kpmain{flex:none;min-width:0;display:block;padding:0;margin:0}
