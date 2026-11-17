@@ -11,5 +11,9 @@ c01-t3-a18 u5YLGDyQLD / dtPEO1CXSL
 c01-t4-a18 eIyC7RwdqL / u5YLzyuQLD
 c01-t5-a18 jUB4efvLD0 / 8a6H9UOIrU
 c01-t6-a18 iGbTFlO3uK / N2HcQos6D9
+c01-t7-a18 N2HcFkZ6D9 / Lwo9oAUswO (halo 5366 FAIL metric, clean by eye)
+c01-t8-a18 cpgIlOm0eP / bxVUV9E5Y2 (empress gown, hem at feet, no train)
+c01-tcold-a18 TdUmS4SVNR / mER5RgOhJQ
+c01-tm0-a18 3z5Vbs6REY / eIyCy1hdqL
 ## Hard: none yet
-Credits so far: 8 x 83 = 664.
+Credits so far: 12 x 83 = 996.
