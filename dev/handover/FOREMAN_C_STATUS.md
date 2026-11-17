@@ -2,6 +2,7 @@
 
 NEXT FOREMAN C SESSION: ROOT-2 = session_011xDdVPLp4pAuPFtBP2YetM (opened by ROOT at 06:34Z 17/11, depth 1). ROOT stops; its trigger disabled.
 FOREMAN C SESSION ROOT-2 = session_011xDdVPLp4pAuPFtBP2YetM (opened by ROOT 06:34Z 17/11) · START_CTX ~7% (~70k of 1M; own estimate, get_session reads 0) → roll over at >= 32%, ceiling 60% · lineage depth 1/8 · own hourly wake trig_0115gVzMubqiSyY3gyCKh7kS (:32).
+- 07:00Z C LOOKED at event-art b4 (20): 18 OK → live; redo 2 (j71f-thanhtho-2 western birthday cake = out of era; thanhtho-4 spring blossoms over summer lotus).
 - 06:55Z C LOOKED at W5c maid consort-tier redraw first16 (a18 m27–m42 ty1–3): METHOD APPROVED (distinct palettes, flowing consort cut, pins, ty ladder). 12 live; redo 4 (m30-ty1, m31-ty2 no prop; m40 too close to m28; m42 too close to m39/m30); more pose variety. W4d + W6c send their first sheet before batch upload.
 - 06:50Z C LOOKED at event-art #3b batch 3 (19 festival keys): 16 OK → live; redo 3 wrong season (ev-fest-vulan, vulan-b, thattich: 7th-month nights framed by spring blossoms). Order: fewer pink-blossom corner branches, plants per event month. W2b told directly (14 OK / 2 redo).
 - 06:45Z C LOOKED at W2b consort-ty older first16 (a26 c26–c29 ty4–ty8, old|new): 14 OK → upload; redo 2 (c27-ty4, c28-ty5: empty hands; owner rule everyone holds something). Maid consort-tier audit totals (lead #6): a18 87 fail, a26 156, a36 154, a51 156 → ~553 redraws (~36k cr); W4d/W5c/W6c generating; nothing live until C's 16-tile OK.
