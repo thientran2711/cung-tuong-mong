@@ -48,7 +48,7 @@ function kitHtOf(src){const m=KIT_HT.m;if(!m)return null;const n=String(src||"")
 function kitFigTop(b){return b&&b.ht!=null&&b.ht>b.t?b.ht:(b?b.t:0)}
 window.kitFigTop=kitFigTop;window.kitHtLoad=kitHtLoad;window.kitHtOf=kitHtOf;
 function kitFigBody(src,cb){const KIT_FB=window.__KITFB||(window.__KITFB={});const o=KIT_FB[src];if(o&&o.v)return o.v;if(o){o.w.push(cb);return null}const e={v:null,w:[cb]};KIT_FB[src]=e;
- const done=v=>{e.v=v;const L=e.w;e.w=[];L.forEach(f=>{try{f&&f()}catch(x){}})};const im=new Image();im.decoding="async";/* review/stage-side: pictures live on the CDN (cross-origin): without CORS the canvas is tainted, getImageData throws and every figure measured as its whole image box (cores far too wide → paging, crowding) */im.crossOrigin="anonymous";
+ const done=v=>{e.v=v;if(KIT_HT.bad&&/fig-/.test(src))setTimeout(()=>{if(KIT_FB[src]===e)delete KIT_FB[src]},21000);const L=e.w;e.w=[];L.forEach(f=>{try{f&&f()}catch(x){}})};const im=new Image();im.decoding="async";/* review/stage-side: pictures live on the CDN (cross-origin): without CORS the canvas is tainted, getImageData throws and every figure measured as its whole image box (cores far too wide → paging, crowding) */im.crossOrigin="anonymous";
  im.onload=()=>{let v={t:0,b:1,l:0,r:1,ht:0,ar:im.naturalWidth/Math.max(1,im.naturalHeight)};try{const nh=im.naturalHeight,nw=im.naturalWidth,h=Math.min(500,nh),w=Math.max(1,Math.round(nw*h/nh));
    const c=document.createElement("canvas");c.width=w;c.height=h;const x=c.getContext("2d",{willReadFrequently:true});x.drawImage(im,0,0,w,h);const d=x.getImageData(0,0,w,h).data;
    let t=h,b=-1,l=w,r=-1;for(let y=0;y<h;y++){const q=y*w*4;for(let i=0;i<w;i++){if(d[q+i*4+3]>40){if(y<t)t=y;if(y>b)b=y;if(i<l)l=i;if(i>r)r=i}}}
@@ -65,7 +65,7 @@ function kitFigBody(src,cb){const KIT_FB=window.__KITFB||(window.__KITFB={});con
     const wl=[],wr=[];let ml=w,mr=-1;for(let k=0,y=t;k<=20;k++){const ye=t+Math.round((b-t)*k/20);for(;y<=ye;y++){const q=y*w*4;for(let i=0;i<ml;i++)if(d[q+i*4+3]>40){ml=i;break}for(let i=w-1;i>mr;i--)if(d[q+i*4+3]>40){mr=i;break}}
      wl.push((mr<0?l:ml)/w);wr.push((mr<0?r+1:mr+1)/w)}
     v={t:t/h,b:(b+1)/h,l:l/w,r:(r+1)/w,ht:ht/h,ar:nw/nh,cl:cl/w,cr:cr/w,wl,wr}}}catch(x){}done(v)};
- im.onerror=()=>{done({t:0,b:1,l:0,r:1,ht:0,ar:.45});setTimeout(()=>{if(KIT_FB[src]===e)delete KIT_FB[src]},1500)};/* review/stage-fig-size: a failed load is not cached for good (it fixed a wrong .45 aspect = squashed figure); measured again next time */im.src=src;return null}
+ im.onerror=()=>{done({t:0,b:1,l:0,r:1,ht:0,ar:.45});setTimeout(()=>{if(KIT_FB[src]===e)delete KIT_FB[src]},1500)};/* review/stage-fig-size: a failed load is not cached for good (it fixed a wrong .45 aspect = squashed figure); measured again next time */if(kitHtLoad(()=>{im.src=src}))im.src=src;/* review/fig-headtop: the picture is measured only once the head-top table is in (a figure measured without it would take its crown for its head and stay cached) */return null}
 /* KIT 34.6 · kitBookFig(b, fac, H, o) — the ONE body size of a figure on a BOOK page (owner 16/11 "Nhân vật sao chưa theo tỉ lệ chuẩn": the Tuần lục
    silhouette stood far bigger than Thái hậu beside it: the book sized the whole PICTURE BOX, the silhouette box has no margin, and a wide real figure
    (Thái hậu) was additionally shrunk to ≥ 85 %). Same measurement as the stage (kitEsOvFit) and the dialog (kitDpFit): the body = head top (ht, else painted
