@@ -22,7 +22,7 @@
 (function(){try{
 const CW=window.COOPW;if(!CW||!CW.X||typeof COOP!=="object")return;
 const X=CW.X,J=X.J,LS={get(k){try{return localStorage.getItem(k)}catch(e){return null}}};
-const TH=CW.thin={CAP:2/* B (review/coop-thin-b): life creation + rebirth on the host, dev/build/jcoopthinb.js */,lvl:0,REG:[],bridge:[],rlog:[],view:null,hv:0,dn:0,dr:null,ctxN:0};
+const TH=CW.thin={CAP:4/* B life + rebirth on the host (jcoopthinb.js), C world read-only on the guest (jcoopthinc.js), D remote dialogs (section 6) */,lvl:0,REG:[],bridge:[],rlog:[],view:null,hv:0,dn:0,dr:null,ctxN:0};
 const host=()=>CW.seat==="a";
 const D={};   /* part D (remote dialogs), filled in section 6 */
 TH.on=n=>!!(CW.on&&!CW.hold&&TH.lvl>=(n||1));
@@ -228,7 +228,7 @@ COOP.on("delta",m=>{if(host()||!m)return;const V=TH.view;if(!V||V.v!==(m.base|0)
  V.v=m.v|0;COOP.emit("thinview",V)});
 /* intents */
 const DO={};let doN=0;
-TH.onDo=(op,fn)=>{DO[op]=fn};
+TH.onDo=(op,fn)=>{DO[op]=fn};TH.doFn=op=>DO[op];/* part C wraps part B's "life" */
 TH.doSend=function(op,args){if(host()||!TH.on(1))return false;const id="d"+Date.now().toString(36)+"-"+(doN++);COOP.send({t:"do",op,args:args===undefined?null:args,base:TH.view?TH.view.v:0,id});return id};
 function runDo(m){const fn=DO[m.op];let r=null;TH.curDo=m.op;
  try{if(fn)r=TH.withSeat(m.from||"b",()=>fn(m.args,m))}catch(e){console.error("thin do",m.op,e);r={err:String(e&&e.message||e)}}

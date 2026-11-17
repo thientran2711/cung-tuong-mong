@@ -21,7 +21,7 @@
 if(typeof COOP!=="object"||!window.COOPW)return;
 const CW=window.COOPW;
 const J=x=>x==null?x:JSON.parse(JSON.stringify(x));
-const on=()=>!!(CW.on&&CW.seat),guest=()=>on()&&CW.seat!=="a",host=()=>on()&&CW.seat==="a";
+const on=()=>!!(CW.on&&CW.seat),guest=()=>on()&&CW.seat!=="a"&&!(CW.thin&&CW.thin.on(3))/* thin part C: the host makes the persons she causes on her op (jcoopthinc), no temp ids */,host=()=>on()&&CW.seat==="a";
 const wk=()=>(COOP.state&&COOP.state.week)||0;
 const TMP=1000;            /* temp ids of persons she made, until the host gives the world id (NPC < 900, players 901/902) */
 const GP=902;              /* the guest's player id in the world (PROTOCOL §3) */

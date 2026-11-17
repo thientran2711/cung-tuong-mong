@@ -59,7 +59,7 @@ async function rx(ev){lastRx=Date.now();let m;
  else if(m.t==="state")set({C:m.state,week:m.week!=null?m.week:st.week});
  else if(m.t==="week")set({C:m.state,week:m.week,ended:{a:false,b:false}});
  else if(m.t==="error"){if(m.code==="full"||m.code==="noroom"||m.code==="nopid"){want=false;LS.del("ctm-coop-room");if(pend){pend.rej({code:m.code,message:m.msg});pend=null}}}
- emit(m.t,m)}
+ if(COOP.rxWrap)COOP.rxWrap(()=>emit(m.t,m),m);else emit(m.t,m)}/* rxWrap: thin guest part C (jcoopthinc) runs every server message as a sync step */
 /* review/coop-stable: a socket dropped here while still CONNECTING can still reach the Worker AFTER its successor (slow proxy / network):
    the Worker then "replaces" the live one with that abandoned twin (4001) and this device sat on "Ở máy khác" (guest: double join from
    the ?room= link + "Vào phòng"; any reconnect while one was in flight). A 4001 within 30 s of abandoning our own socket is our twin:

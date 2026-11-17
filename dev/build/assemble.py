@@ -18,6 +18,8 @@ js=open(d+'site/kvfallback.js',encoding='utf-8').read()+'\n'+js
 js+='\n'+cdn('jcoopthin.js',open(d+'build/jcoopthin.js',encoding='utf-8').read())
 # thin guest part B (review/coop-thin-b): life creation + rebirth on the host; after jcoopthin (uses COOPW.thin)
 js+='\n'+cdn('jcoopthinb.js',open(d+'build/jcoopthinb.js',encoding='utf-8').read())
+# thin guest part C (review/coop-thin-c): the world is read-only on the guest; after jcoopthinb (wraps its life intent) — the outermost engine wrappers
+js+='\n'+cdn('jcoopthinc.js',open(d+'build/jcoopthinc.js',encoding='utf-8').read())
 open(d+'build/all.js','w',encoding='utf-8').write(js)
 subprocess.run(['node','--check',d+'build/all.js'],check=True)
 p1=cdn('p1.html',open(d+'build/p1.html',encoding='utf-8').read())

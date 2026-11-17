@@ -131,7 +131,9 @@ function toCanon(){try{CW.hrSync&&CW.hrSync()}catch(e){console.error(e)}const L=
    if(v.rank!==b.rank&&!v.out){s.rank=v.rank}
    if("ill" in b&&JSON.stringify(v.ill||null)!==JSON.stringify(b.ill))s.ill=v.ill?Object.assign(J(v.ill),{known:true}):null/* r1 (her own illness: she knows it): the host's epidemic caught her (one world) */}
   P[fs()]=fP}
- return {v:1,week:wk(),W:{S:WS,R,rid:Math.max(rid,...R.map(r=>+r.id||0).filter(n=>n<900),0)},P}}
+ const out={v:1,week:wk(),W:{S:WS,R,rid:Math.max(rid,...R.map(r=>+r.id||0).filter(n=>n<900),0)},P};
+ /* thin guest part C (jcoopthinc): in a C room the guest's week carries the room's world unchanged (W comes from the host only) */
+ return CW.cW?CW.cW(out):out}
 
 /* ---------- canonical → local game ---------- */
 /* CW.inFC: inside fromCanon (the guest tripwire, dev/test/coop-thin-trip.js, counts only writes outside it); CW.afterFC: test hook */
@@ -145,7 +147,9 @@ function fromCanon0(C,opt){opt=opt||{};const mp=me(),Pm=C.P&&C.P[CW.seat];if(!Pm
  const fP=C.P[fs()];if(fP)freshFriend(fP,sS);
  const f=fP&&!friendSrv(fP)?buildFriend(fP,sS):null;if(f)R.push(f);
  const keepTab=tab,keepUsed=used;quiet=true;
- try{deser({v:6,buoi:sS.buoi||0,ok:Pm.ok||"tt",S:sS,R,rid:C.W.rid||rid,tab:keepTab,used:keepUsed,P:qs})}finally{quiet=false}
+ /* thin guest part C (jcoopthinc): in a C room the guest's NPC list is the read-only lens, installed before deser resolves refs / rebuilds cards */
+ try{deser({v:6,buoi:sS.buoi||0,ok:Pm.ok||"tt",S:sS,R:CW.lensR?CW.lensR(R):R,rid:C.W.rid||rid,tab:keepTab,used:keepUsed,P:qs})}finally{quiet=false}
+ try{CW.lensW&&CW.lensW()}catch(e){console.error("lens W",e)}
  if(!opt.keepUsed)used=0;else used=keepUsed;
  /* guard enums/levels that a numeric merge could push out of range */
  const ci=(v,a,b)=>typeof v==="number"?Math.max(a,Math.min(b,Math.round(v))):v;
@@ -207,7 +211,7 @@ function guestNet(C){const n=CW.net;if(host()||!n||n.week!==C.week||!n.c1||!C.W)
  C.W={S:SO,R,rid:W0.rid!=null?Math.max(W0.rid,W2.rid||0):W2.rid};return C}
 CW.unroll=unroll;CW.guestNet=guestNet;
 /* her world just before and just after her whole week end: called by jcoopone.js around the OUTERMOST endTurn (every module's wrapper inside) */
-CW.netWrap=function(f,self,args){if(!CW.on||host()){return f.apply(self,args)}const p0=CW.pend;let c0=null;try{c0=toCanon()}catch(e){}
+CW.netWrap=function(f,self,args){if(!CW.on||host()||(CW.thin&&CW.thin.on(3))){return f.apply(self,args)}/* part C: the guest's world is read-only, no safety net needed */const p0=CW.pend;let c0=null;try{c0=toCanon()}catch(e){}
  const r=f.apply(self,args);try{if(!p0&&CW.pend&&c0)CW.net={week:wk(),c0,c1:toCanon()}}catch(e){CW.net=null}return r};
 function sendEnd(){if(!CW.on||!S||S.dead||CW.sent===wk()||CW.cyHold!=null/* the host's night waits for her cycle answer (B2 × jcycle) */)return;const C=guestNet(toCanon());CW.sent=wk();CW.pend=false;CW.mine=snapStats();
  COOP.send({t:"end",week:wk(),state:C});try{localStorage.setItem("ctm-coop-last",JSON.stringify({room:COOP.state.room,C}))}catch(e){}lockNext()}
@@ -934,6 +938,7 @@ function b4Wrap(n,f){return function(){if(!CW.on||!host()||!CW.pulled||!CW.pulle
  try{if(fest){if(CW.f7&&CW.f7.L)f7Done(CW.f7.L);else if(CW.f7&&!Q.some(q=>q&&q.t===CW.f7.title)){const c=CW.f7;CW.f7=null;b4Send(b4Ops(c.b,c.title),{tt:c.title})}}
   else{const pet=b4Pet(b);b4Send(b4Ops(b,""),{pet,force:pet.length})}}catch(e){console.error(e)}return r}}
 ["rivalsTurn","rivalsMonth","festival"].forEach(n=>{const f=window[n];if(typeof f!=="function")return;window[n]=b4Wrap(n,f)});
+CW.b4Wrap=b4Wrap;/* part C (jcoopthinc): the host's rivalsBuoi with her entry in the harem (G7) */
 /* r1 fix 2 (whole family): ANY NPC act on her entry, whatever path runs it (npcAct, mindRun, a j70 plot's exec70, the jealousy kv acts,
    a due plan in rivalsBuoi…), outside the diffed calls above: the host snapshots her entry around that one act and sends the same res.fam /
    res.pet ops, so the NPC gains AND she loses (never a copy). The guest never lets an NPC act on the host's entry (NPCs roll on the host).
