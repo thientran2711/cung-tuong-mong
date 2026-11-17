@@ -672,3 +672,4 @@
 | coop-thin-d r1 FAIL 099ce05b (5 items; verdict branch c6792773 + probe) → fixed by the coop-thin-b worker as new commits on review/coop-thin-b (B carries D) | review/coop-thin-b | B | session_01N1tNP6svxoSpRYt6QpgSiS | RUNNING | 17/11 07:25Z |
 | coop-thin-b worker #2 (successor; predecessor rolled over at ~30 % ctx) — fix the 5 coop-thin-d r1 items on review/coop-thin-b after 9af781c2 (opus) | review/coop-thin-b | B | session_01N1tNP3op5jQGEdK2Sf7aVD | RUNNING | 17/11 07:26Z |
 | mg-snap SẴN SÀNG KIỂM 2a00405f → review r1 (opus BIG; brief briefs/review-mg-snap-r1.md) | review/mg-snap-r1 | B | session_01N1tNP3VpMVoikpTW1oDAch | RUNNING | 17/11 07:27Z |
+| BATCH-D8 builder (opus): D's 7 PASSes (suc-khoe-r2, cloud-del-r1, item-ledger-solo-r1, npc-death-wire-r1, story-frame-r1, batch-0032-oi-r1, npc-roads-fx-r2) merged on live main + gates + shots → BATCH READY for main to FF | review/batch-d8 | D | session_01964izGMZ8GAccJj2diJHaA | RUNNING | 17/11 07:37Z |
