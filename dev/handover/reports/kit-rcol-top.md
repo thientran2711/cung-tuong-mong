@@ -22,5 +22,10 @@ KIT.md §33.40 written.
 ## Tests / looks
 Build ok (assemble + media-check), page errors [] on Fold + iPad, ⓘ click opens its gloss from the bar. Looked at iPad Tài nghệ shot. NOT run: quickcheck, Fold re-look after final build, CDN shots (shots in /home/user/wt/rcol-shots, not uploaded). Not updated: kit sample page jkitpage.js:26 (still uses kitInfo in a band) and tests small-bugs-2/header-danh (they only assert no/relative .kstw, still valid).
 
-## HANDOVER (if rolling over)
-Remaining: run quickcheck, view Fold art/story + 1366x1024, upload shots to CDN img/_review/kit-rcol-top, update kit sample page, then SẴN SÀNG KIỂM.
+## #2 (final) — SẴN SÀNG KIỂM, sha 44ac9cda (source only; main rebuilds site)
+PRIORITY #1 CHECK: continued fa787165; base origin/main 65dcf52f (no rebase needed).
+- Added: kit sample page §33.40 (kitSubTabs ⓘ slot + kitSecHead) in jkitpage.js.
+- quickcheck (on a temp built commit 54f2a41b, --runs 3): PASS · core gates PASS (G1 one-core, G2, G3 kit-conform, hook coop) · time-spill PASS · open 1396 ms · old save ok · perf median new/live render 211/141, tab 270/229, buổi 1100/567 (3 runs, noisy box), tasks>200ms 11/8. Built files not committed.
+- Shots LOOKED (Fold 755x1000, iPad 1180x820; Tài nghệ, Mệnh truyện, Dư đồ, Tư trang, Hành sự): ⓘ Cách học / Luật chương at the tab-bar right end, Tứ đức header holds Đức chip + ⓘ luật Đức, Dư đồ right column one width, cards aligned, page errors []. CDN: img/_review/kit-rcol-top/{art,story,go,inv,act}-{755x1000,1180x820}.jpg (https://ctm-img.victoria-tntt.workers.dev/img/_review/kit-rcol-top/...).
+- Not looked: 1366x1024, 412x1058, 390x844. Perf buổi gap worth a re-run by the reviewer.
+- Wipe shots with the verdict: cdn_sync.py --wipe-review kit-rcol-top.

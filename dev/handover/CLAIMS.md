@@ -757,7 +757,7 @@
 | tuanluc-sync #3 (opus) | review/tuanluc-sync | MAIN s31 | session_01UV1SziJFVGaiWpZGPF2Egd | RUNNING | 17/11 12:11Z |
 | map-me-mark #2 (successor; #1 rolled over at ff6ade20) — zoom fit-all, 4-edge fade, map weather, pan flush, Ta + N bóng | review/map-me-mark | MAIN s31 | session_01UV1SzjTth6eagb4DB6vtqt | RUNNING | 17/11 12:21Z |
 | one-core-dup3 SẴN SÀNG KIỂM 67430058 → re-review r2 (fresh opus BIG; brief briefs/review-one-core-dup3-r2.md) | review/one-core-dup3-r2 | B | session_01N1tNP6AWLddG5uQRXjrEPn | RUNNING | 17/11 12:25Z |
-| kit-rcol-top #2 (successor; #1 partial fa787165) — gates, kit page, shots | review/kit-rcol-top | MAIN s31 | session_01UV1SzkTmHFW7tFdo9JrjMv | RUNNING | 17/11 12:23Z |
+| kit-rcol-top #2 (successor; #1 partial fa787165) — gates, kit page, shots | review/kit-rcol-top | MAIN s31 | session_01UV1SzkTmHFW7tFdo9JrjMv | READY FOR REVIEW 44ac9cda | 17/11 12:23Z |
 | REVIEW learn-scene-fix r1 of 41836865 (worker session_01UV1SziySB5E5PWMp5Wc7uX SẴN SÀNG KIỂM) | review/learn-scene-fix-r1 | MAIN s31 | session_01UV1SzkJwiGXxoBvWoVcncV | RUNNING | 17/11 12:23Z |
 | event-art DARK fix (sonnet; owner 17/11 12:19Z/12:22Z; brief briefs/event-art-dark-fix.md) | CDN only (report reports/event-art-dark-fix.md) | C ROOT-6 | session_011xDdVSTVyLVuATNYT3izSd | RUNNING | 17/11 12:24Z |
 | RESTORE maid trung y (ty) keys replaced by consort-tier redraw, 681 keys (sonnet W9; owner order 17/11 12:21Z, ROOT-6 GO 12:23Z; opened by lead #7) | review/fig-cutout-clean | C | session_011xDdVNG1ZBYKd7ZkiyqAJP | RUNNING | 17/11 12:26Z |
