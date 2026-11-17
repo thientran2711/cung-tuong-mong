@@ -193,8 +193,8 @@ function sgThoiCo(box,env){const R=sgRM();const C=kg82Canvas(box,.6,300),{g,W,H}
 
 /* ---------- odds ladder: a game moves the odds by ONE step of Liều / Khó / Năm ăn năm thua / Khá chắc / Chắc / Rất chắc / Nắm chắc ----------
    raw 7–10 = up one step, 4–6 = unchanged, 0–3 = down one step. The number keeps its place inside the new step (word() boundaries). */
-const SG_LO=[5,31,46,56,66,81,91],SG_HI=[30,45,55,65,80,90,95];
-function sgLv(o){return o>=91?6:o>=81?5:o>=66?4:o>=56?3:o>=46?2:o>=31?1:0}
+const SG_LO=[BAL.odds.lo,...BAL.odds.cut],SG_HI=[...BAL.odds.cut.map(c=>c-1),BAL.odds.hi];
+function sgLv(o){return oddsLv(o)}
 function sgShift(o,d){if(!d)return o;const l=sgLv(o),l2=cl(l+d,0,6);if(l2===l)return o;const f=cl((o-SG_LO[l])/Math.max(1,SG_HI[l]-SG_LO[l]),0,1);return Math.round(SG_LO[l2]+f*(SG_HI[l2]-SG_LO[l2]))}
 function sgStep(raw){return raw>=7?1:raw<=3?-1:0}
 

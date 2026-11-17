@@ -19,7 +19,10 @@ if [ ! -f "$GB" ]; then FAILS+=("G1 no frozen list dev/test/one-core-baseline.js
     head -14 "$OUT/g1-guard.txt"; FAILS+=("G1 one-core-guard ($OUT/g1-guard.txt)"); fi
   if [ -n "$LIVE" ] && git -C "$WT" cat-file -e "$LIVE:dev/test/one-core-baseline.json" 2>/dev/null; then
     LT=$(git -C "$WT" show "$LIVE:dev/test/one-core-baseline.json" | node -e 'let s="";process.stdin.on("data",d=>s+=d).on("end",()=>console.log(JSON.parse(s).total))')
-    ST=$(node -e 'console.log(JSON.parse(require("fs").readFileSync(process.argv[1],"utf8")).total)' "$GB")
+    # compare only the kinds the live list already counts (a kind added to the guard later, review/one-core-dup amt/sw/sc/k/ladder, is a
+    # new COUNT frozen by its first --update, not a growth); every kind may only shrink per module (the guard itself checks that)
+    git -C "$WT" show "$LIVE:dev/test/one-core-baseline.json" > "$OUT/g1-live.json"
+    ST=$(node -e 'const fs=require("fs"),b=JSON.parse(fs.readFileSync(process.argv[1],"utf8")),L=JSON.parse(fs.readFileSync(process.argv[2],"utf8"));const K=new Set(L.kinds||[...new Set(Object.values(L.files).flatMap(o=>Object.keys(o)))]);let n=0;for(const f in b.files)for(const k in b.files[f])if(K.has(k))for(const s in b.files[f][k])n+=b.files[f][k][s];console.log(n)' "$GB" "$OUT/g1-live.json")
     if [ "$ST" -gt "$LT" ]; then FAILS+=("G1 frozen list grew $LT -> $ST (move the numbers into BAL; only the coordinator may grow it)"); fi
   fi
 fi

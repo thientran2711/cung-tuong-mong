@@ -31,9 +31,9 @@ function mindRun(v,t,k,err){v.__err=err||0;let r="";try{r=k==="plant"?runAct(v,t
  return r}
 /* knowledge: a victim of a hidden blow only guesses who did it; wit and evidence help; a wrong guess turns her hatred on someone else (the player too) */
 function mindBelief(t,v,k){if(!t||t===S||!t.alive)return;const ev=(t.evm&&t.evm[key(v)])||0;const p=cl(35+witOf(t)/2+(ev>0?25:0)-witOf(v)/4,10,90);mindLog(t,"_belief");
- if(roll(p)){oanAdd(t,v,8);return}
+ if(roll(p)){oanAdd(t,v,BAL.eff.j40.mindBelief);return}
  const L=others(t).filter(x=>x!==v&&(x===S||x.alive&&!x.out));if(!L.length)return;const w=L.map(x=>[x,1+oan(t,x)+Math.max(0,-aff(t,x))]);let r=Math.random()*w.reduce((a,b)=>a+b[1],0),i=0;while(r>w[i][1]&&i<w.length-1){r-=w[i][1];i++}
- const s=w[i][0];oanAdd(t,s,8);mindLog(t,"_wrongBelief");t.blamed=t.blamed||{};t.blamed[key(s)]=(t.blamed[key(s)]||0)+1;
+ const s=w[i][0];oanAdd(t,s,BAL.eff.j40.mindBelief_2);mindLog(t,"_wrongBelief");t.blamed=t.blamed||{};t.blamed[key(s)]=(t.blamed[key(s)]||0)+1;
  if(s===S&&roll(30+(S.mat||0)*8))noteAdd(t.id,`Nghe nói ${t.name} ngờ ngươi đứng sau chuyện ${ACT[k]?ACT[k].n.toLowerCase():"vừa rồi"}, dù không phải ngươi`)}
 /* the mind's turn: replaces the plain weighted pick */
 npcAct=function(v,t){try{if(!v||!t)return"";const T=traitsOf(v);const tc=witOf(v);mindLog(v,"_decide");

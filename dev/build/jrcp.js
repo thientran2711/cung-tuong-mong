@@ -163,11 +163,11 @@ PEND.rcpacc=pp=>{const r=rcpTgt(pp.t);if(!r)return null;const acc=pp.acc!=null?b
  const o1=od(base),o2=od(base+BAL.rcp.defTy),fee=rcpPayTy();const accN=acc?(acc===S?"":`${rkName(acc)} ${acc.name}`):"";
  const fail=`bị phạt vì mưu hại ${who}, Danh -4${acc&&acc!==r?`, ${accN} nắm 1 chứng cứ của ta`:""}`;
  const lose=()=>{apply({danh:-4});if(acc&&acc!==S)evA(acc,S,1);punish(S,`dâng đồ làm ${who} phát bệnh`,sev)};
- const win=()=>{apply({danh:1});if(acc&&acc!==S&&acc!==r){relAdd(S,acc,-3)}log(`Ta được minh oan: ${who} vốn kiêng ${A}, ta không cố ý.`)};
+ const win=()=>{apply({danh:1});if(acc&&acc!==S&&acc!==r){relAdd(S,acc,BAL.eff.jrcp.win)}log(`Ta được minh oan: ${who} vốn kiêng ${A}, ta không cố ý.`)};
  const O=[{n:`Kêu oan: ta không biết ${rcpThey(r)} kiêng ${A}`,fx:{},x:`${word(o1)} · thành: được minh oan, Danh +1 · hỏng: ${fail}`,go:()=>{if(roll(o1))win();else lose()}},
   {n:"Mời thái y làm chứng: chỉ là kiêng kỵ",fx:{bac:-fee},x:`${word(o2)} · thành: được minh oan, Danh +1 · hỏng: ${fail}`,go:()=>{if(roll(o2))win();else lose()}}];
  if(S.maid)O.push({n:`Để ${S.maid.name} nhận lỗi thay`,fx:{danh:-2},x:`thành: ta không bị phạt · kèm: ${S.maid.name} bị đánh, Lòng -30`,go:()=>{S.maid.loyal=cl((S.maid.loyal||0)-30,0,100);log(`${S.maid.name} quỳ nhận đã lỡ tay bỏ ${A} vào, bị đánh hai mươi trượng.`)}});
- O.push({n:"Nhận lỗi vô ý, xin chịu phạt nhẹ",fx:big?(r==="emp"?{sung:-3,danh:-2}:{th:-5,danh:-2}):{danh:-2},x:big?"":`thành: không bị phạt · kèm: ${r.name} oán ta thêm`,go:()=>{if(!big)relAdd(S,r,-5)}});
+ O.push({n:"Nhận lỗi vô ý, xin chịu phạt nhẹ",fx:big?(r==="emp"?{sung:-3,danh:-2}:{th:-5,danh:-2}):{danh:-2},x:big?"":`thành: không bị phạt · kèm: ${r.name} oán ta thêm`,go:()=>{if(!big)relAdd(S,r,BAL.eff.jrcp.go)}});
  return{who:acc&&acc!==S?(typeof pv==="function"?pv(acc):undefined):undefined,
   t:`<p>${who} dùng ${pp.wn} ta ${big?"dâng":"tặng"} thì nổi mẩn đỏ, khó thở; thái y nói ${rcpThey(r)} vốn kiêng ${A}.</p><p>${acc===r?`${who} cho rằng ta cố ý mưu hại nàng ta`:`${accN?accN+" tâu":"Có kẻ tâu"} rằng ta cố ý mưu hại ${who}`}.</p>${pp.knew?`<p class="past">Ta vốn biết ${rcpThey(r)} kiêng ${A}: khó chối.</p>`:""}`,o:O}};
 /* ---------- books and hand-copied sheets (real items) ---------- */
