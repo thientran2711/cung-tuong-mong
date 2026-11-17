@@ -13,8 +13,8 @@
        route's own loss + Danh −2. Indices stay stable (appended after the beat's own options).
    Audit: dev/review/story-deadlines.md (script dev/review/story_audit.js). ====================================================== */
 Object.assign(BAL,{dl67Khan:4,dl67Vua:9,dl67Lon:21,dl67Pen:2,cost67:[.6,.7,.8,.9,1,1.1,1.25,1.4,1.5],alt67Pen:15,alt67Suc:-6});
-function absB67(){try{return wk()*3+(S.buoi||0)}catch(e){return 0}}
-function dlT67(nb){nb=Math.max(0,nb|0);return nb<=0?"hết hạn":nb<3?`${nb} buổi`:nb%3===0?`${nb/3} ngày`:nb<6?`${nb} buổi`:`${Math.round(nb/3)} ngày`}
+function absB67(){try{return wk()*B4N+(S.buoi||0)}catch(e){return 0}}
+function dlT67(nb){nb=Math.max(0,nb|0);return nb<=0?"hết hạn":nb<B4N?`${nb} buổi`:nb%B4N===0?`${nb/B4N} ngày`:nb<2*B4N?`${nb} buổi`:`${Math.round(nb/B4N)} ngày`}
 function rkMul67(){const L=BAL.cost67;return L[Math.max(0,Math.min(L.length-1,(S&&S.rank)|0))]}
 function price67(n){return -Math.max(5,Math.round(-n*rkMul67()/5)*5)}
 /* severity: hand-set beats, else from the text (hunted / urgent) and the beat slot (climax and turn beats are big) */

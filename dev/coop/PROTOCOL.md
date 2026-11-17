@@ -37,13 +37,14 @@ as binary gzip when the JSON is over 200 KB (client must handle binary: `Decompr
 | `me` | `P` (personal blob) | set **my** `C.P[seat]` now (guest's first character after joining, or her reborn character). Server stores, broadcasts `state`; also drops my pending `end` and rewrites the OTHER seat's pending `end` so its view of me = the new blob (her old view of my dead character cannot overwrite the new one). Clients must rebuild local on `state`. |
 | `end` | `week`, `state` (C) | I finished week `week` (already ran my `endTurn()`); `state` = my canonical after it. Ignored if `week` ≠ room week. |
 | `unend` | `week` | take back my `end` (only while the other seat has not ended). Optional. |
+| `seatd` | `sv, set:{path:value}, del:[path], dev` | (review/lag-play-2) her seat copy as a DELTA on top of the stored copy of version `sv` (paths `buoi`, `used`, `c`, `d.<key>`, `d.S.<key>`). Applied only when the stored copy is exactly version `sv`, else `error seatresync` and the client sends the full `seat`. Answer `seatok`. Sent only to a server whose `room` reply lists `caps:["seatd"]`. Any client frame above 8 KB is gzip (binary). |
 | `ping` | – | keep-alive; server answers `pong`. Send every 20 s. |
 | `say` | `text` (≤ 200 chars) | optional short message to the friend, relayed as `said`. |
 
 ### server → client
 | t | fields | meaning |
 |---|---|---|
-| `room` | `code, you:"a"|"b", seats, week, ended:{a:bool,b:bool}, state` (C or null) | first reply after connect / reconnect; full snapshot. |
+| `room` | `code, you:"a"|"b", seats, week, ended:{a:bool,b:bool}, state` (C or null), `caps` (server features, e.g. `["seatd"]`) | first reply after connect / reconnect; full snapshot. |
 | `presence` | `seats, ended` | someone connected / disconnected / ended. `seats.<x>.online` drives the freeze. |
 | `state` | `state, week, by` | C changed outside the week tick (`init` / `me`). Rebuild local. |
 | `week` | `week, state` | the merged C for the new week. Rebuild local, unfreeze, play on. |
@@ -166,3 +167,14 @@ Order per buổi: both play → both `bend` → server `buoi` → each client ru
   and leaves its local friend entry for display.
 - Bot check: bots try harm acts on each other when in the same place. After each buổi both clients' views must agree:
   the victim's own S vs the actor's friend entry (sung, danh, suc, rank, alive).
+
+## 10. Chat (owner 16/11, review/coop-chat; server LIVE `coop-2`)
+Room-scoped (this Durable Object only; no endpoint reads another room), plain text.
+| t | direction | fields |
+|---|---|---|
+| `chat` | client → server | `text` (cut at 300 chars after stripping control / bidi characters, blank ignored), `nm` (sender name, ≤ 24), `g:{y,m,t,b}` (game year, month, tuần, buổi, for the game-style time). Whole frame ≤ 2.4 KB else `error toolarge`; one seat may send once per 350 ms else `error slow`. |
+| `chat` | server → BOTH seats (sender too) | `m:{i,s:"a"|"b",n,x,w,g,ts}` — `i` = per-room increasing id. |
+| `room` | server → client | now also `chat:[m…]` = the last 50 messages (history after reconnect / rejoin). |
+Storage: DO key `chat` (array, last 50). Deleted with the room (30 days idle). Clients escape the text when drawing it; the server stores it raw. Old clients ignore `chat` / `room.chat`.
+Client: `dev/build/jcoopchat.js` (KIT §80). Tests: `coop/worker/test/chat.test.mjs`, `dev/test/coop-chat.js`.
+

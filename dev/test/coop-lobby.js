@@ -16,7 +16,7 @@ const log=(...a)=>console.log(...a);
  await A.goto(BASE,{waitUntil:'domcontentloaded'});await A.waitForTimeout(2500);
  await shot(A,'1-home');
  await A.locator('#modal .kco').click();await shot(A,'2-co');
- await A.locator('[data-coop=make]').click();
+ await A.locator('[data-coop=make]').first().click();
  await A.waitForFunction(()=>COOP.state.status==='open',null,{timeout:20000});
  const code=await A.evaluate(()=>COOP.state.room);log('room',code);
  await shot(A,'3-wait');

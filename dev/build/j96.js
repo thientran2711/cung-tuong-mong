@@ -73,7 +73,7 @@ function tmRoll96(k){if(!window.TM96_ON)return false;let f=null;try{f=localStora
  const os=P.map((x,i)=>x==="o"?i:-1).filter(i=>i>=0);P.splice(os.length>=2?os[1]+1:P.indexOf("st:tm96a")+1,0,"st:tm96b");
  const fi=P.indexOf("fin");P.splice(fi>=0?fi+1:P.length-2,0,"st:tm96c");
  for(let n=0;n<2;n++){const j=P.lastIndexOf("s");if(j>=0)P.splice(j,1)}
- c.max=P.filter(x=>x!=="fin").length;histAdd67("tm","tm96a")}catch(e){console.error(e)}return r}})();
+ c.max=P.filter(x=>x!=="fin").length;if(typeof f14Norm==="function")f14Norm();/* a 14-chapter life (jst14) keeps 14 */histAdd67("tm","tm96a")}catch(e){console.error(e)}return r}})();
 /* ---------- faces: a man's figure already drawn, the preferred identity if free (never reused), frame by his real role ---------- */
 MANSUB["thống lĩnh cấm quân"]=["guard","thive"];MANSUB["phó sứ nam chiếu"]=["envoy","suthan"];MANSUB["vương gia"]=MANSUB["vương gia"]||["prince","royal","vuonggia"];
 (function(){const r0=figRoles;figRoles=function(who){try{if(who&&who.tm96){const V=TM96V[who.tm96];if(V.fr==="official")return["official","man"];if(V.fr==="physician")return["man","physician"];return["man"]}}catch(e){}return r0.apply(this,arguments)}})();
@@ -137,14 +137,14 @@ ARC67.tm96b={o:"tm",ok:ok96,t:"Thanh mai trúc mã: Lửa thử vàng",w:"lv",sj
  g:"Năm tháng trôi, {lvn} đã thành {lvr} có tiếng trong triều. Mối tình cũ vẫn nằm đó như than dưới tro: chàng có thể vì ngươi mà liều, kẻ thù có thể nhân đó giá họa, và Hoàng thượng không phải người dễ lừa.",
  ord:[["b1l","b1h","b1d"],["b2a","b2b"],["b3a","b3b"],["b4"],["b5"],["b6"]],
  B:{
- b1l:{h:"Kẻ nắm thóp đòi giá",w:"v",need:["v"],vf:v=>gate96(v,"blackmail"),if:()=>T96().endA==="a_lo"||(T96().ev||0)>0,t:"{v} hẹn gặp ngươi ở đình nghỉ, cười rất ngọt: “Chuyện của muội với {lv}, tỷ tỷ chưa nói với ai. Chỉ là dạo này tỷ tỷ thiếu một chỗ dựa.”",o:[
+ b1l:{h:"Kẻ nắm thóp đòi giá",w:"v",need:["v"],vf:v=>gate96(v,"blackmail"),if:()=>T96().endA==="a_lo"||(T96().ev||0)>0,t:"{v} hẹn gặp ngươi ở đình nghỉ, cười rất ngọt: “Chuyện của {goi} với {lv}, {xung} chưa nói với ai. Chỉ là dạo này {xung} thiếu một chỗ dựa.”",o:[
   {n:"Đưa bạc cho nàng ta im miệng",c:{bac:-80},w:{},go:A=>{const v=rv67(A,"v");if(v)relAdd(S,v,8)},rt:"{v} nhận bạc, nhưng kẻ nắm thóp hiếm khi chỉ đòi một lần."},
   {n:"Giả vờ không hiểu nàng nói gì",c:{suc:-2},o:()=>40+S.tamco/3-(T96().ev||0)*8,w:{tamco:2},l:{danh:-4},go:(A,ok)=>{if(!ok)adj96({sus:6})},rt:"{v} không moi được gì, đành bỏ đi.",rf:"{v} bỏ đi, ánh mắt như đã chắc chắn."},
   {n:"Thu thập chứng cứ nàng ta, nắm lại thóp",c:{suc:-4},o:()=>35+(S.mat||0)*6+S.tamco/5,w:{mat:1},l:{danh:-3},go:(A,ok)=>{const v=rv67(A,"v");if(v&&ok){evA(S,v,2);A96f("leverage")}},rt:"Ngươi có được chuyện riêng của {v}. Hai bên cùng nắm thóp nhau.",rf:"{v} phát hiện ngươi cho người theo dõi."}]},
  b1h:{h:"Tin chàng thăng chức",w:"lv",if:()=>T96().endA==="a_hen",t:"Tin từ Cần Chính điện: {lv} vừa được thăng chức. Đêm ấy, {lvroute}, có một cành hoa khô gửi đến cho ngươi.",o:[
   {n:"Ép cành hoa vào sách, giữ lại",c:{},w:{suc:4},go:()=>adj96({h:6,t:4,lt:1}),rt:"Cành hoa nằm giữa hai trang thơ."},
   {n:"Mừng thầm, nhưng đốt đi",c:{},w:{duc:2},go:()=>adj96({h:-2}),rt:"Ngươi đốt cành hoa, lòng vẫn mừng cho chàng."},
-  {n:"Khen chàng một câu trước mặt Hoàng thượng",c:{sung:-2},o:()=>50+S.sung/5,w:{sung:2},l:{sung:-3},go:(A,ok)=>{if(ok)adj96({rise:1});else adj96({sus:6})},rt:"Hoàng thượng gật gù: “Người này dùng được.”",rf:"Hoàng thượng nhìn ngươi: “Nàng biết hắn sao?”"}]},
+  {n:"Khen chàng một câu trước mặt Hoàng thượng",c:{sung:-2},o:()=>50+S.sung/5,w:{sung:2},l:{sung:-3},go:(A,ok)=>{if(ok)adj96({rise:1});else adj96({sus:6})},rt:"Hoàng thượng gật gù: “Người này dùng được.”",rf:()=>kSay("emp",S,"Hoàng thượng nhìn ngươi: “{Goi} biết hắn sao?”")}]},
  b1d:{h:"Ánh mắt từ xa",w:"lv",t:"Đã lâu ngươi không nhắc đến {lvn}. Nhưng mỗi lần ngươi đi qua {lvp}, chàng vẫn dừng việc mà nhìn theo. Chàng {lvtinh}.",o:[
   {n:"Đổi đường đi, tránh hẳn {lvp}",c:{suc:-2},w:{duc:2},go:()=>adj96({t:-6,h:-3}),rt:"Ngươi đổi đường. Ánh mắt kia dần thưa."},
   {n:"Gật đầu chào chàng một lần",c:{},w:{suc:3},go:()=>adj96({h:5,t:8}),rt:"Chỉ một cái gật đầu, mà đủ để chàng mỉm cười cả ngày."}]},
@@ -159,16 +159,16 @@ ARC67.tm96b={o:"tm",ok:ok96,t:"Thanh mai trúc mã: Lửa thử vàng",w:"lv",sj
   {n:"Tạm ngừng mọi liên lạc với chàng",c:{},w:{duc:2},go:()=>adj96({t:-3,sus:-4}),rt:"Một tháng trôi qua, kẻ theo dõi không thấy gì."},
   {n:"Đánh lạc hướng: để lộ một chuyện vô hại",c:{suc:-3},o:()=>40+S.tamco/3,w:{tamco:2},l:{danh:-3},sc:1,go:(A,ok)=>{if(!ok)adj96({sus:5,ev:1})},rt:"{v} đuổi theo một cái bóng không có thật.",rf:"Mưu đánh lạc hướng vụng về, {v} càng chắc mình đúng."},
   {n:"Bỏ bạc mua người của nàng ta",c:{bac:-60},o:()=>45+(S.mat||0)*4,w:{mat:1},sc:1,go:(A,ok)=>{if(!ok)adj96({sus:4})},rt:"Kẻ theo dõi từ nay báo về cho cả hai bên.",rf:"Kẻ ấy nhận bạc rồi báo lại cho {v}."}]},
- b3b:{h:"Thái giám đánh hơi",w:"eun",t:"Một thái giám Nội vụ phủ nháy mắt với ngươi: “{Xung} với {lvn} là đồng hương nhỉ? Nô tài nghe nói nhiều chuyện lắm.” Hắn chỉ muốn bạc.",o:[
+ b3b:{h:"Thái giám đánh hơi",w:"eun",t:"Một thái giám Nội vụ phủ nháy mắt với ngươi: “{Nc} với {lvn} là đồng hương nhỉ? Nô tài nghe nói nhiều chuyện lắm.” Hắn chỉ muốn bạc.",o:[
   {n:"Đút bạc bịt miệng",c:{bac:-50},w:{},rt:"Hắn cười hì hì, cất bạc."},
   {n:"Dọa tố hắn với Tổng quản",c:{},o:()=>45+(S.mat||0)*5,w:{tamco:2},l:{danh:-4},go:(A,ok)=>{if(!ok)adj96({sus:6})},rt:"Hắn tái mặt, chuồn thẳng.",rf:"Hắn chạy đi kể khắp nơi."}]},
  b4:{h:"Tang vật trong cung ngươi",w:"maid",t:()=>hasEv96()?"{maid} hớt hải: có kẻ sắp dẫn người đến soát cung ngươi. Mà trong rương ngươi thật sự còn giữ đồ của {lvn}.":"{maid} hớt hải: có kẻ đã lén nhét một bức thư giả nét chữ {lvn} vào rương ngươi, sắp dẫn người đến soát.",o:[
   {n:"Soát cung trước, tiêu hủy mọi thứ",c:{suc:-5},o:()=>40+(S.mat||0)*6+(A96has("maid")?15:0),w:{tamco:2},l:{danh:-5},go:(A,ok)=>{if(ok){const m=man96();if(m){m.letters=0;if(S.aff)S.aff[m.id]=0}T96().ev=0;T96().tok=0;adj96({h:-4})}else adj96({ev:1,sus:10})},rt:"Khi người soát cung đến, rương ngươi sạch như gương.",rf:"Người soát cung đến sớm hơn ngươi tưởng, kịp thấy một góc thư."},
   {n:"Nhờ {lvn} ra tay xóa dấu",c:{},if:()=>tinh96()>=40,o:()=>40+tinh96()/3,w:{},l:{},go:(A,ok)=>{adj96({t:4,h:6});if(ok){T96().ev=0}else{T96().hurt=(T96().hurt||0)+1;adj96({sus:8})}},rt:"Đêm ấy, mọi dấu vết biến mất. Người làm việc đó là chàng.",rf:"Chàng bị bắt gặp gần cung ngươi lúc nửa đêm, phải viện cớ tuần tra mới thoát."},
   {n:"Bình thản chờ, tin mình trong sạch",c:{},if:()=>!hasEv96(),o:()=>55+S.duc/5,w:{duc:3},l:{danh:-4},go:(A,ok)=>{if(!ok)adj96({sus:8})},rt:"Bức thư giả bị thái y nghiệm ra mực mới. Kẻ giá họa mất mặt.",rf:"Không ai chứng minh được thư giả, lời đồn vẫn bay."}]},
- b5:{h:"Hoàng thượng thử lòng",w:"emp",need:["nsrv"],t:"Yến tiệc trong cung. Hoàng thượng chợt gọi {lv} đến trước mặt, rồi quay sang ngươi: “Ái phi rót cho khanh ấy một chén. Trẫm nghe nói hai người là chỗ quen biết cũ.”",o:[
+ b5:{h:"Hoàng thượng thử lòng",w:"emp",need:["nsrv"],t:"Yến tiệc trong cung. Hoàng thượng chợt gọi {lv} đến trước mặt, rồi quay sang ngươi: “{Goi} rót cho khanh ấy một chén. Trẫm nghe nói hai người là chỗ quen biết cũ.”",o:[
   {n:"Thản nhiên rót rượu như với mọi quan",c:{},o:()=>45+S.tamco/3+(A96has("cut")?15:0)-(T96().sus||0)/3,w:{sung:4},l:{sung:-6},go:(A,ok)=>{adj96({sus:ok?-10:12})},rt:"Tay ngươi không run. Hoàng thượng cười, uống cạn chén của mình.",rf:"Rượu sóng sánh ra ngoài. Hoàng thượng đặt chén xuống, không nói gì."},
-  {n:"Tiến cử chàng hết lời trước mặt ngài",c:{sung:-2},o:()=>40+S.danh/5+(T96().rise||0)*5-(T96().sus||0)/4,w:{danh:3},l:{sung:-5},go:(A,ok)=>{if(ok)adj96({rise:1,sus:-4});else adj96({sus:12})},rt:"Hoàng thượng gật đầu: “Trẫm sẽ trọng dụng.”",rf:"Hoàng thượng nheo mắt: “Nàng lo cho hắn quá nhỉ.”"},
+  {n:"Tiến cử chàng hết lời trước mặt ngài",c:{sung:-2},o:()=>40+S.danh/5+(T96().rise||0)*5-(T96().sus||0)/4,w:{danh:3},l:{sung:-5},go:(A,ok)=>{if(ok)adj96({rise:1,sus:-4});else adj96({sus:12})},rt:"Hoàng thượng gật đầu: “Trẫm sẽ trọng dụng.”",rf:"Hoàng thượng nheo mắt: “{Goi} lo cho hắn quá nhỉ.”"},
   {n:"Xin ngài ban hôn cho chàng",c:{},w:{duc:3},go:()=>{T96().wedAsk=1;adj96({sus:-8,h:-5})},rt:"Hoàng thượng bật cười: “Được, trẫm sẽ để ý.”"}]},
  b6:{h:"Phiên tra hỏi",w:"emp",t:"Chuyện đến tai Hoàng thượng. Ngài cho gọi ngươi vào Dưỡng Hòa điện, trên án là {lvtok}. “Nàng nói đi.”",o:[
   {n:"Thẳng thắn: chuyện trước khi vào cung, nay đã không còn",c:{sung:-3},o:()=>40+S.duc/6+((man96()||{}).letters?-10:10)-(T96().sus||0)/5+(A96has("cut")?10:0),e:["b_tin","b_nghi"],rt:"Hoàng thượng nhìn ngươi rất lâu, rồi đẩy tín vật sang: “Trẫm tin nàng.”",rf:"Hoàng thượng không tin, chỉ phẩy tay cho lui."},
@@ -188,7 +188,7 @@ ARC67.tm96c={o:"tm",ok:ok96,t:"Thanh mai trúc mã: Lựa chọn cuối",w:"lv",
   {n:"Dồn sức lấy lại lòng Hoàng thượng",c:{suc:-6},o:()=>45+S.sac/5+S.sung/5,w:{sung:5},l:{sung:-3},go:(A,ok)=>adj96({sus:ok?-15:4}),rt:"Hoàng thượng lại ghé cung ngươi như xưa.",rf:"Ngài đến, nhưng vẫn lạnh lùng dò xét."}]},
  c1o:{h:"Người bị giáng",w:"lv",if:()=>T96().endB==="b_ton"||(T96().hurt||0)>=1,t:"{lv} sau lần gánh tội vẫn chưa ngóc đầu lên được. Nghe nói chàng sống thanh bần, đêm đêm vẫn đọc lại mấy chữ ngươi viết năm nào.",o:[
   {n:"Lén gửi bạc giúp chàng",c:{bac:-60},w:{},go:()=>adj96({t:8,h:5}),rt:"Bạc đến tay chàng qua ba người trung gian."},
-  {n:"Xin Hoàng thượng phục chức cho chàng",c:{sung:-4},o:()=>40+S.sung/4-(T96().sus||0)/4,w:{danh:2},l:{sung:-3},go:(A,ok)=>{if(ok)adj96({rise:1});else adj96({sus:8})},rt:"Chàng được phục chức. Không ai biết ai đã nói giúp.",rf:"Hoàng thượng hỏi lại: “Sao nàng quan tâm hắn vậy?”"},
+  {n:"Xin Hoàng thượng phục chức cho chàng",c:{sung:-4},o:()=>40+S.sung/4-(T96().sus||0)/4,w:{danh:2},l:{sung:-3},go:(A,ok)=>{if(ok)adj96({rise:1});else adj96({sus:8})},rt:"Chàng được phục chức. Không ai biết ai đã nói giúp.",rf:()=>kSay("emp",S,"Hoàng thượng hỏi lại: “Sao {goi} quan tâm hắn vậy?”")},
   {n:"Để mặc, giữ mình",c:{},w:{tamco:2},go:()=>adj96({h:-4}),rt:"Ngươi không nhúng tay. Lòng ngươi biết thế là phải."}]},
  c1t:{h:"Người được trọng dụng",w:"lv",t:"{lv} nay là cánh tay đắc lực trong triều, lời chàng nói Hoàng thượng đều nghe. Lần đầu tiên, chàng có đủ sức để giúp ngươi, hoặc để hại chính mình vì ngươi.",o:[
   {n:"Nhờ chàng đỡ một việc của nhà ngươi",c:{},w:{danh:4},go:()=>adj96({t:2,rise:1}),rt:"Chàng làm gọn gàng. Nhà ngươi qua được một cơn sóng."},

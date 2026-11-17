@@ -4,7 +4,8 @@ import { merge3 } from "./merge.js";
 import { vaultRoute, Vault } from "./vault.js";
 export { Vault };
 
-const V = "coop-1";
+const V = "coop-2";
+const CHAT_MAX = 50, CHAT_LEN = 300, CHAT_NAME = 24, CHAT_FRAME = 2400, CHAT_GAP = 350;   // chat: last 50 per room, 300 chars, 2.4 KB frame, 350 ms between two sends of one seat
 const ALPH = "ABCDEFGHJKMNPQRSTUVWXYZ23456789";
 const CHUNK = 40000;            // chars per storage value (<128 KiB even in 3-byte UTF-8)
 const BIG = 200000;             // send gzip binary above this many chars
@@ -84,7 +85,12 @@ export class Room {
     const del = []; for (let i = n; i < old; i++) del.push("s:" + i); if (del.length) await this.ctx.storage.delete(del);
     if (s.length > 8e6) return false; return true;
   }
-  socks(seat) { return this.ctx.getWebSockets(seat ? "seat-" + seat : undefined); }
+  /* review/coop-stable: a socket the server has closed (stale, replaced) stays in getWebSockets() until the peer answers the close frame.
+     A peer that vanished without a TCP close (phone off the network, a proxy that keeps the upstream open) never answers, so the seat read
+     "online" for ever: the friend never froze ("Hảo hữu đang vắng") and her buổi/week waited on a ghost. Closed sockets are marked `gone`
+     and never count again. */
+  socks(seat) { return this.ctx.getWebSockets(seat ? "seat-" + seat : undefined).filter(ws => { if (typeof ws.readyState === "number" && ws.readyState > 1) return false; const at = ws.deserializeAttachment && ws.deserializeAttachment(); return !(at && at.gone); }); }
+  bury(ws, code, why) { try { const at = ws.deserializeAttachment() || {}; at.gone = 1; ws.serializeAttachment(at); } catch (e) {} try { ws.close(code, why); } catch (e) {} }
   online(seat) { return this.socks(seat).length > 0; }
   seatsView() {
     const m = this.meta, o = {};
@@ -128,13 +134,13 @@ export class Room {
       if (!m.seats[seat]) m.seats[seat] = { pid, name };
       if (name) m.seats[seat].name = name;
       await this.saveMeta();
-      for (const old of this.socks(seat)) { try { old.close(4001, "replaced"); } catch (e) {} }
+      for (const old of this.socks(seat)) this.bury(old, 4001, "replaced");
       const [c2, s2] = Object.values(new WebSocketPair());
       this.ctx.acceptWebSocket(s2, ["seat-" + seat]);
       s2.serializeAttachment({ seat, last: Date.now() });
       const C = await this.loadC();
       const mine = await this.seatCopy(seat);
-      await this.send(s2, { t: "room", code: m.code, you: seat, seats: this.seatsView(), week: m.week, ended: this.endedView(), state: C, ...this.buoiView(), mine, msv: (m.sv && m.sv[seat]) || 0 });
+      await this.send(s2, { t: "room", code: m.code, you: seat, seats: this.seatsView(), week: m.week, ended: this.endedView(), state: C, chat: await this.chatLoad(), ...this.buoiView(), mine, msv: (m.sv && m.sv[seat]) || 0, caps: ["seatd"] });
       await this.presence();
       await this.ctx.storage.setAlarm(Date.now() + 20000);
       return new Response(null, { status: 101, webSocket: c2 });
@@ -144,7 +150,7 @@ export class Room {
 
   async webSocketMessage(ws, data) {
     let msg; try { const s = typeof data === "string" ? data : await gunzipText(data); if (s.length > 9e6) throw 0; msg = JSON.parse(s); } catch (e) { return this.send(ws, { t: "error", code: "bad", msg: "bad message" }); }
-    const at = ws.deserializeAttachment() || {}; const seat = at.seat; if (!seat) return;
+    const at = ws.deserializeAttachment() || {}; const seat = at.seat; if (!seat || at.gone) return; /* a buried socket (stale / replaced) never writes again */
     at.last = Date.now(); ws.serializeAttachment(at);
     const m = await this.loadMeta(); if (!m) return;
     const t = msg.t;
@@ -169,6 +175,7 @@ export class Room {
       await this.saveMeta(); return this.bcast({ t: "pos", from: seat, ...m.pos[seat] }, ws);
     }
     if (t === "act" || t === "actr" || t === "res" || t === "note") { const o = { ...msg, from: seat }; return this.bcast(o, ws); }
+    if (t === "chat") return this.chatIn(ws, seat, msg, m);
     /* per-seat copy of her week (review/coop-rejoin-xdev): the client's rolling snapshot (jcoopworld CW.snap), so a rejoin from ANOTHER
        device (same pid via Sổ mây) or with cleared storage restores her exact week. Version = server counter m.sv[seat]; a write based on an
        older version than the stored one is refused (a stale device must not overwrite a newer copy). */
@@ -178,6 +185,21 @@ export class Room {
       if ((msg.sv | 0) < cur) return this.send(ws, { t: "error", code: "seatold", sv: cur });
       if (JSON.stringify(o).length > SEATMAX) return this.send(ws, { t: "error", code: "seatbig" });
       m.sv[seat] = cur + 1; o.sv = m.sv[seat]; o.sat = Date.now();
+      await this.putBig("seat-" + seat, o); await this.saveMeta();
+      return this.send(ws, { t: "seatok", sv: m.sv[seat] });
+    }
+    /* seat copy as a DELTA (review/lag-play-2): only the parts that changed since the version she last stored. msg = {t:"seatd", sv:<her
+       version>, set:{path:value}, del:[path]}, a path = "buoi" | "used" | "c" | "d.<key>" | "d.S.<key>". Applied on top of the stored copy
+       only when that copy is exactly her version sv (server-authoritative); otherwise error "seatresync" -> the client sends the FULL copy. */
+    if (t === "seatd") {
+      m.sv = m.sv || {}; const cur = m.sv[seat] || 0; const o = await this.seatCopy(seat);
+      if (!o || (msg.sv | 0) !== cur || o.seat !== seat || !msg.set || typeof msg.set !== "object") return this.send(ws, { t: "error", code: "seatresync", sv: cur });
+      const put = (path, v, del) => { const k = String(path).split("."); let x = o; for (let i = 0; i < k.length - 1; i++) { if (!x[k[i]] || typeof x[k[i]] !== "object") { if (del) return; x[k[i]] = {}; } x = x[k[i]]; } if (del) delete x[k[k.length - 1]]; else x[k[k.length - 1]] = v; };
+      const ok = p => typeof p === "string" && /^(buoi|used|c|d\.[^.]+|d\.S\.[^.]+)$/.test(p) && !/__proto__|constructor|prototype/.test(p);
+      for (const p in msg.set) { if (!ok(p)) return this.send(ws, { t: "error", code: "seatresync", sv: cur }); put(p, msg.set[p]); }
+      for (const p of Array.isArray(msg.del) ? msg.del : []) { if (ok(p)) put(p, null, true); }
+      if (JSON.stringify(o).length > SEATMAX) return this.send(ws, { t: "error", code: "seatbig" });
+      m.sv[seat] = cur + 1; o.sv = m.sv[seat]; o.sat = Date.now(); if (msg.dev) o.dev = msg.dev;
       await this.putBig("seat-" + seat, o); await this.saveMeta();
       return this.send(ws, { t: "seatok", sv: m.sv[seat] });
     }
@@ -216,6 +238,28 @@ export class Room {
       if (m.ended[other] || !m.seats[other]) return this.tick();
       return this.presence();
     }
+  }
+
+
+  /* ---- chat (PROTOCOL §10): room-scoped (this Durable Object only), last CHAT_MAX messages in DO storage, plain text ---- */
+  async chatLoad() { const a = await this.ctx.storage.get("chat"); return Array.isArray(a) ? a : []; }
+  async chatIn(ws, seat, msg, m) {
+    let raw = typeof msg.text === "string" ? msg.text : "";
+    if (JSON.stringify(msg).length > CHAT_FRAME) return this.send(ws, { t: "error", code: "toolarge", msg: "tin quá dài" });
+    const clean = s => [...String(s).replace(/[\u0000-\u001F\u007F-\u009F\u2028\u2029\u200B-\u200F\u202A-\u202E\u2066-\u2069\uFEFF]+/g, " ").replace(/ {2,}/g, " ").trim()];
+    const text = clean(raw).slice(0, CHAT_LEN).join("");
+    if (!text) return;
+    const at = ws.deserializeAttachment() || {}; const now = Date.now();
+    if (at.cs && now - at.cs < CHAT_GAP) return this.send(ws, { t: "error", code: "slow", msg: "gửi chậm lại" });
+    at.cs = now; ws.serializeAttachment(at);
+    const nm = clean(msg.nm || (m.seats[seat] && m.seats[seat].name) || "").slice(0, CHAT_NAME).join("");
+    const g = msg.g && typeof msg.g === "object" ? msg.g : {};
+    const n = v => (Number.isFinite(+v) ? Math.max(0, Math.min(9999, Math.floor(+v))) : 0);
+    m.cn = (m.cn || 0) + 1;
+    const one = { i: m.cn, s: seat, n: nm, x: text, w: m.week | 0, g: { y: n(g.y), m: n(g.m), t: n(g.t), b: n(g.b) }, ts: now };
+    const list = await this.chatLoad(); list.push(one); while (list.length > CHAT_MAX) list.shift();
+    await this.ctx.storage.put("chat", list); await this.saveMeta();
+    return this.bcast({ t: "chat", m: one });          // to BOTH seats, the sender too: one order, one id
   }
 
   async putBig(key, obj) {
@@ -259,7 +303,7 @@ export class Room {
     for (const ws of this.socks()) {
       const at = ws.deserializeAttachment() || {}; let last = at.last || 0;
       try { const ar = this.ctx.getWebSocketAutoResponseTimestamp(ws); if (ar && ar.getTime() > last) last = ar.getTime(); } catch (e) {}
-      if (now - last > STALE) { try { ws.close(4003, "stale"); } catch (e) {} changed = true; }
+      if (now - last > STALE) { this.bury(ws, 4003, "stale"); changed = true; }
     }
     if (changed) await this.presence();
     if (this.socks().length) { await this.ctx.storage.setAlarm(now + 20000); return; }

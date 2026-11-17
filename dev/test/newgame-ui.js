@@ -46,7 +46,8 @@ const [,,PURL,SZ,SHOT]=process.argv;
  for(let i=0;i<3;i++)console.log('prev',JSON.stringify(await tap('#modal .kpick [data-pkpg="-1"]')));
  for(let i=0;i<3;i++)console.log('pick',JSON.stringify(await tap(`#modal .kpki:not([hidden]):not(.on)`)),JSON.stringify((await meas()).fig));
  if(SHOT)await p.screenshot({path:SHOT.replace('.jpg','-c.jpg'),type:'jpeg',quality:60});
- console.log('tab',JSON.stringify(await tap('#modal .kpick [data-pkf="maid"]')));console.log('maid',JSON.stringify(await meas()));
+ /* r3 (owner 16/11 s23): the face picker has NO tabs — the game picks the set from her identity; this probe measures the one list */
+ console.log('maid',JSON.stringify(await meas()));
  for(let i=0;i<2;i++)console.log('pickM',JSON.stringify(await tap(`#modal .kpki:not([hidden]):not(.on)`)),JSON.stringify((await meas()).fig));
  if(SHOT)await p.screenshot({path:SHOT,type:'jpeg',quality:60});
  if(SHOT){await p.evaluate(()=>{const b=document.querySelector('#modal button[data-nl=ok]');b&&b.click()});await sleep(5000);

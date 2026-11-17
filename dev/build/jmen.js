@@ -40,21 +40,29 @@ function menGuards(){return (S.men||[]).filter(m=>m.rw==="thị vệ")}
 function menH(x){let h=7;for(const c of String(x))h=(h*31+c.charCodeAt(0))%100003;return h}
 function menHcPal(v){const k=palaceOf(v);return k==="home"?null:k}
 function menGi(m){return Math.max(0,menGuards().indexOf(m))}
-/* the guards' roster: 2 buổi of 3 on duty, the post turns with the week */
-function menDuty(m,w,b){if(m.rw!=="thị vệ")return null;const i=menGi(m);if((w*3+b+i)%3===0)return null;return["thu","dtd","ksp"][(w+i)%3]}
+/* the guards' roster keeps its 3 shifts (old balance): buổi -> shift index [sáng, trưa, chiều, tối] = [0,0,1,2] (trưa rides the morning shift); 2 shifts of 3 on duty, the post turns with the week */
+const MEN_SHIFT=[0,0,1,2];
+function menDuty(m,w,b){if(m.rw!=="thị vệ")return null;const i=menGi(m);if((w*3+MEN_SHIFT[b]+i)%3===0)return null;return["thu","dtd","ksp"][(w+i)%3]}
 /* craftsmen's work orders (Nội vụ phủ): every other tuần, in the morning or afternoon, at the palaces in turn (highest rank first) */
 function menOrder(m,w){if(m.rw!=="nhạc sư"&&m.rw!=="họa sư")return null;const i=+m.id.slice(1)||0;if((w+i)%2)return null;
- const C=liveRivals(true).filter(menHcPal).sort((a,b)=>rkOf(b)-rkOf(a)||menH(a.id)-menH(b.id));const v=C.length&&(w>>1)%3!==2?C[((w>>1)+i)%C.length]:null;return{b:(w+i)%2?1:(w>>1)%2,k:v?menHcPal(v):"vuon",v:v?v.id:null}}
+ const C=liveRivals(true).filter(menHcPal).sort((a,b)=>rkOf(b)-rkOf(a)||menH(a.id)-menH(b.id));const v=C.length&&(w>>1)%3!==2?C[((w>>1)+i)%C.length]:null;return{b:(w+i)%2?2:(w>>1)%2?2:0,k:v?menHcPal(v):"vuon",v:v?v.id:null}}
 function menFestOn(){try{return festToday()}catch(e){return null}}
-function menPlace(){menInit();const W={},Y={};const b=S.buoi||0,night=b===2,w=wk();const f=menFestOn();const L=liveRivals(true);
+/* the fixed schedule (duty rosters, work orders, festivals, visits, the morning audience): the same on BOTH roads (people ledger, owner 16/11
+   13:40Z: "people outside the palace leave only at their set hours", no random presence); the maid road takes this instead of j22's dice.
+   Four buổi a tuần (jtime4): night = the last buổi (B4L), the afternoon (old buổi 1) = 2. */
+function menSchedRoad(){try{return menRoad()||(!!S&&!S.dead&&typeof isSrv==="function"&&isSrv())}catch(e){return false}}
+function menSched(){menInit();const W={},Y={};const b=S.buoi||0,night=b===B4L,w=wk();const f=menFestOn();const L=liveRivals(true);
  for(const m of S.men){if(!m.alive||menBanned(m))continue;const rw=m.rw;let k=null,ww="";const i=+m.id.slice(1)||0;
   if(rw==="thị vệ"){k=menDuty(m,w,b);ww=k?"duty":""}
-  else if(rw==="thái y"){const sick=L.filter(v=>(v.preg||v.ill||(v.suc!=null&&v.suc<40))&&menHcPal(v)).sort((a,b)=>menH(a.id)-menH(b.id));if(sick.length&&b===1){k=menHcPal(sick[w%sick.length]);ww="summons"}else if(!night){k="tyv";ww="duty"}}
+  else if(rw==="thái y"){const sick=L.filter(v=>(v.preg||v.ill||(v.suc!=null&&v.suc<40))&&menHcPal(v)).sort((a,b)=>menH(a.id)-menH(b.id));if(sick.length&&b===2){k=menHcPal(sick[w%sick.length]);ww="summons"}else if(!night){k="tyv";ww="duty"}}
   else if(rw==="vương gia"){if(f&&!night){k="vuon";ww="fest"}else if(!S.thDead&&b===0&&(w+i)%4===0){k="tn";ww="visit"}}
   else if(rw==="nhạc sư"||rw==="họa sư"){const o=menOrder(m,w);if(o&&o.b===b){k=o.k;ww="order"}}
   else if(rw==="sứ thần"){if(b===0&&(w+i)%3===0){k="thu";ww="duty"}else if(f&&!night){k="vuon";ww="fest"}}
   if(k){W[m.id]=k;Y[m.id]={w:ww,k}}}
- S.menW=W;S.menWhy=Y;menPlanWeek();
+ S.menW=W;S.menWhy=Y;menMinW(b,w,f)}
+/* officials (j55): two at the morning audience by turn of the week; one at a festival banquet */
+function menMinW(b,w,f){S.minW={};try{if(typeof trS==="function"&&typeof tdOn==="function"&&tdOn()){const H=Object.values(trS().H||{});if(H.length){if(b===0){S.minW[H[w%H.length].c]="thu";S.minW[H[(w+2)%H.length].c]="thu"}if(f&&b>0)S.minW[H[(w+1)%H.length].c]="vuon"}}}catch(e){}}
+function menPlace(){menSched();const W=S.menW,Y=S.menWhy;const b=S.buoi||0,w=wk();menPlanWeek();
  /* today's plans come true where they were planned */
  for(const P of (S.menPlans||[])){if(P.w!==w||P.done)continue;const m=manById(P.m);if(!m||menBanned(m)){P.done=1;continue}const v=P.v!=null?RV(P.v):null;
   if(P.v!=null&&(!v||!v.alive||v.out)){P.done=1;continue}
@@ -63,21 +71,20 @@ function menPlace(){menInit();const W={},Y={};const b=S.buoi||0,night=b===2,w=wk
   else if(P.b!==b)continue;
   P.done=1;W[m.id]=P.k;Y[m.id]={w:"stray",k:P.k,r:P.r,v:P.opp?null:P.v,why:P.why,likeV:P.r==="seek"?P.v:null,plan:P.id,h:P.h,from:P.from,hide:P.hide};
   if(v&&!P.opp)S.where[v.id]=P.k;menStat("stray");menStat("c_"+P.r);menNpcSee(m,Y[m.id])}
- /* officials (j55): two at the morning audience by turn of the week; one at a festival banquet */
- S.minW={};try{if(typeof trS==="function"&&typeof tdOn==="function"&&tdOn()){const H=Object.values(trS().H||{});if(H.length){if(b===0){S.minW[H[w%H.length].c]="thu";S.minW[H[(w+2)%H.length].c]="thu"}if(f&&b>0)S.minW[H[(w+1)%H.length].c]="vuon"}}}catch(e){}}
+}
 /* PLANS, made at the start of each tuần for the next one (and the current one when a life has none yet) */
 function menPlanWeek(){S.menPlans=S.menPlans||[];const w=wk();if(S.menPW===w)return;const first=S.menPW==null;S.menPW=w;
  S.menPlans=S.menPlans.filter(P=>P.w>=w-1);for(const t of first?[w,w+1]:[w+1])menMakePlans(t)}
 function menMakePlans(t){const add=P=>{P.id=(S.menPS=(S.menPS||0)+1);P.w=t;S.menPlans.push(P);menTip(P)};const C=liveRivals(false);
  /* 1. lovers (j22 v.affair): every 2–3 tuần by his nature, the night his guard roster leaves free, at a place her nature chooses */
  for(const v of C){const m=v.affair&&manById(v.affair);if(!m||menBanned(m))continue;const cad=MEN_ROVE.includes(m.trait)?2:3;if((t+menH(v.id))%cad)continue;
-  if(m.rw==="thị vệ"&&menDuty(m,t,2))continue;const careful=v.trait==="Đa nghi"||m.trait==="cẩn trọng";const k=careful?"lc":(menHcPal(v)&&v.trait==="Kiêu ngạo"?menHcPal(v):"vuon");
-  add({m:m.id,v:v.id,r:"tryst",b:2,h:3,k,from:m.rw==="thị vệ"?"dtd":"vuon",hide:30+(v.tamco||0)/3})}
+  if(m.rw==="thị vệ"&&menDuty(m,t,B4L))continue;const careful=v.trait==="Đa nghi"||m.trait==="cẩn trọng";const k=careful?"lc":(menHcPal(v)&&v.trait==="Kiêu ngạo"?menHcPal(v):"vuon");
+  add({m:m.id,v:v.id,r:"tryst",b:B4L,h:3,k,from:m.rw==="thị vệ"?"dtd":"vuon",hide:30+(v.tamco||0)/3})}
  /* 2. secret letters: a consort with a reason to reach the outside, once a season (12 tuần) while the reason lasts, through a guard who can be bought, on his shift;
     one letter a tuần goes out at most (the guards can carry only one safely) */
  let lt=0;for(const v of C.slice().sort((a,b)=>menH(a.id+":"+t)-menH(b.id+":"+t))){if(lt||v.queen||!menHcPal(v))continue;const why=v.confined?"confined":v.plan?"plan":(v.preg&&v.hidden)?"preg":((v.sung||0)<25&&(v.ghen||0)>=50)?"jealous":"";if(!why||(t+menH(v.id))%12)continue;
   const G=menGuards().filter(g=>g.alive&&!menBanned(g)&&(MEN_BRIBE.includes(g.trait)||(g.loyal||50)<50)).sort((a,b)=>(a.loyal||50)-(b.loyal||50));if(!G.length)continue;
-  const g=G[0];const bb=[2,1,0].find(x=>menDuty(g,t,x));if(bb==null)continue;add({m:g.id,v:v.id,r:"letter",why,b:bb,h:2,k:menHcPal(v),from:menDuty(g,t,bb),hide:20+(v.tamco||0)/4});lt=1}
+  const g=G[0];const bb=[B4L,2,0].find(x=>menDuty(g,t,x));if(bb==null)continue;add({m:g.id,v:v.id,r:"letter",why,b:bb,h:2,k:menHcPal(v),from:menDuty(g,t,bb),hide:20+(v.tamco||0)/4});lt=1}
  /* 3. overstay: a craftsman of a roving nature on a real order in a palace whose mistress is out of favour or the one he fancies */
  for(const m of S.men){const o=menOrder(m,t);if(!m.alive||!o||o.v==null||!MEN_ROVE.includes(m.trait))continue;const v=RV(o.v);if(!v||v.queen||!((v.sung||0)<40||m.likeV===v.id))continue;
   add({m:m.id,v:v.id,r:"overstay",job:m.rw,b:o.b,h:4,k:o.k,from:o.k,hide:10})}
@@ -87,7 +94,10 @@ function menMakePlans(t){const add=P=>{P.id=(S.menPS=(S.menPS||0)+1);P.w=t;S.men
 function menEye(p){return p===S?(S.mat||0)*8+(S.tamco||0)/3:(p.mat||0)*8+(p.tamco||0)/3}
 function menTip(P){try{if(!menRoad()||P.opp)return;if(menEye(S)<P.hide+40)return;P.tip=1;const t=P.w-wk();const when=`${t<=0?"tuần này":"tuần tới"}, ${BUOI[P.b].toLowerCase()}`;
  log(`<span class="g">Tai mắt báo: nghe nói ${when}, có nam nhân sẽ lẻn vào ${placeName(P.k)}${menEye(S)>=P.hide+30&&P.v!=null&&RV(P.v)?`, gặp ${menVT(RV(P.v))}`:""}. Muốn thấy tận mắt thì có mặt ở đó lúc ấy.</span>`);menStat("tip")}catch(e){}}
-(function(){const pw=placeWhere;placeWhere=function(){const r=pw.apply(this,arguments);try{if(menRoad())menPlace()}catch(e){console.error("menPlace",e)}return r}})();
+/* she becomes a maid after the consort start ran (j42 srvInit): this buổi's schedule is read again for her road (the consort start's court
+   roster must not linger for a buổi) */
+(function(){if(typeof srvInit!=="function")return;const s0=srvInit;srvInit=function(){const r=s0.apply(this,arguments);try{if(menSchedRoad()&&!menRoad())menSched()}catch(e){console.error("menSched",e)}return r}})();
+(function(){const pw=placeWhere;placeWhere=function(){const r=pw.apply(this,arguments);try{if(menRoad())menPlace();else if(menSchedRoad())menSched()}catch(e){console.error("menPlace",e)}return r}})();
 (function(){const c0=countAt;countAt=function(k){let n=c0(k);try{if(menRoad())for(const c in (S.minW||{}))if(S.minW[c]===k)n++}catch(e){}return n}})();
 
 /* ---------- 2. zones on the map data and the place cards ---------- */
@@ -97,7 +107,7 @@ const MEN_NT={box:{x:.445,y:.805,w:.11,h:.12}};
 /* the outer court: the NORMAL map label + a small lock mark (owner 11/15: no grey overlay on closed places); a tap opens a kit card with the
    reason and the options. The lock mark is .kmlock so the shared kit label (integrator, review/book-release) can take it over when it lands. */
 (function(){const h0=mapHTML;mapHTML=function(){let h=h0.apply(this,arguments);try{if(menRoad())h=h.replace(/<div class="mspot sm off empty" title="Ngoại triều: ([^"]*)" style="([^"]*)"><span class="mlab">Ngoại triều<\/span><\/div>/,(a,why,st)=>`<button class="mspot sm kmen-nt" data-mennt="1" title="Ngoại triều: ${why}" style="${st}"><span class="mlab"><span class="kmlock" aria-label="cấm vào">🔒</span> Ngoại triều</span><span class="mmeta"><em>${why}</em></span></button>`)}catch(e){}return h}})();
-function menNtCard(){if(!S||S.dead||Q.length)return;const T=(typeof trS==="function"&&typeof tdOn==="function"&&tdOn())?trS():null;const left=Math.max(0,4-used);
+function menNtCard(){if(!S||S.dead||Q.length)return;const T=(typeof trS==="function"&&typeof tdOn==="function"&&tdOn())?trS():null;const left=Math.max(0,BAL.time.khac-used);
  const opts=[];if(T&&left>=1)opts.push({n:"Hỏi thái giám tin ngoại triều",fx:{bac:-5},x:"Chắc chắn · tốn: 1 khắc",go:()=>{spend(1);const L=Object.keys(S.minW||{}).map(c=>T.H[c]&&`${TDOFF[c]||"Quan"} ${T.H[c].name} (${S.minW[c]==="thu"?"vào chầu ở Ngự thư phòng":"dự yến ở Ngự hoa viên"})`).filter(Boolean);
   log(L.length?`Thái giám kể: buổi này ${L.join("; ")}.`:"Thái giám kể: buổi này không có vị quan nào vào chầu.")}});
  opts.push({n:"Thôi",fx:{},x:""});
@@ -127,7 +137,7 @@ function menWatch(k,from){if(!menRoad()||S.dead)return;const Y=S.menWhy||{};S.me
   const sees=menEye(S)>=(y.hide||0);menStat(sees?"recog":"blur");menCard(m,sees?v:null,Object.assign({},y,{p:on?1:0,hv:!sees&&v?v.id:null}),0);break}}
 (function(){const s0=spend;spend=function(c){const r=s0.apply(this,arguments);try{if(menRoad()&&!S.dead&&S.place&&S.menArr&&S.menArr.k===S.place&&!Q.length)menWatch(S.place,null)}catch(e){}return r}})();
 /* the buổi ends with her still there: she was there through the last khắc too */
-(function(){const n0=nextBuoi;nextBuoi=function(){try{if(menRoad()&&!S.dead&&!Q.length&&S.place&&S.menArr&&S.menArr.k===S.place){const u=used;used=4;try{menWatch(S.place,null)}finally{used=u}if(Q.length){if(!window.__bot)showModal();return}}}catch(e){}return n0.apply(this,arguments)}})();
+(function(){const n0=nextBuoi;nextBuoi=function(){try{if(menRoad()&&!S.dead&&!Q.length&&S.place&&S.menArr&&S.menArr.k===S.place){const u=used;used=BAL.time.khac;try{menWatch(S.place,null)}finally{used=u}if(Q.length){if(!window.__bot)showModal();return}}}catch(e){}return n0.apply(this,arguments)}})();
 
 function menSeeLine(m,v,y){const at=(y.p?"lối đi gần ":"")+placeName(y.k);const t=BUOI[S.buoi||0].toLowerCase();
  if(v&&y.r==="tryst")return `${menCap(t)} ở ${at}, ngươi bắt gặp ${menNmFull(m)} đứng sát bên ${menVT(v)} sau hòn giả sơn; thấy động, hai người vội buông tay nhau.`;
@@ -169,7 +179,7 @@ function menArt(k){try{const P=placeOf(k);const f=SCIMG[P.sc];return f?{src:`img
 function menCard(m,v,y,heard){try{k61Know(m,"",true,1);if(v)k61Know(v,"",true,1)}catch(e){}const d=mkP("menEnc",{m:m.id,v:v?v.id:null,k:y.k,r:y.r,p:y.p||0,why:y.why||null,lv:y.likeV!=null?y.likeV:null,hv:y.hv!=null?y.hv:null,h:heard?1:0});if(!d)return;
  Q.push({t:heard?"Nghe lén sau hòn giả sơn":"Nam nhân nơi cấm địa",h:d.t,opts:d.o,stage:d.stage,headArt:d.headArt,optLayout:"rows",pid:d.pid,pp:d.pp});if(!window.__bot)showModal()}
 (function(){const d0=deserQ;deserQ=function(L){const out=d0.apply(this,arguments);try{out.forEach(q=>{if(q.pid==="menEnc"){const d=mkP("menEnc",q.pp);if(d){q.stage=d.stage;q.headArt=d.headArt;q.optLayout="rows"}}})}catch(e){}return out}})();
-function menKh(n){const c=Math.max(0,Math.min(n,4-used));if(c)spend(c)}
+function menKh(n){if(typeof j76spills==='function'&&j76spills(n)){spend(n);return}const c=Math.max(0,Math.min(n,BAL.time.khac-used));if(c)spend(c)} /* runs on into the next buổi like every act (time-spill sweep 16/11) */
 
 /* ---------- 4. the shared outcomes (the player and NPC consorts use the same ones) ---------- */
 /* by reports m (and the companion c) at the scene (formal=0) or to the Cung Chính ti (formal=1) */
@@ -195,7 +205,7 @@ function menHide(by,m,c,y,eyes){menStat(by===S?"hideMe":"hideNpc");const risk=cl
  if(by===S){m.af=(m.af||0)+15;m.debt=(m.debt||0)+1;S.menSec=S.menSec||{};S.menSec[m.id]={r:y.r,v:y.v||null,k:y.k,w:wk(),hid:1}}return true}
 
 /* the player's choice */
-function menEyes(k,c){return liveRivals(true).filter(w=>w!==c&&(S.where||{})[w.id]===k).reduce((s,w)=>s+1+(w.mat||0)/2,0)}
+function menEyes(k,c){return liveRivals(true).filter(w=>w!==c&&whereOf(w)===k).reduce((s,w)=>s+1+(w.mat||0)/2,0)}
 function menChoose(m,v,y,a){const at=placeName(y.k);menStat("ch_"+a);if(a==="nghe"&&!v&&y.hv!=null){const hv=RV(y.hv);if(hv&&hv.alive&&!hv.out){v=hv;y=Object.assign({},y,{v:hv.id,hv:null})}}
  if(a==="bao"){menKh(1);try{k61Know(m,"Thị vệ tra hỏi, khai tên hắn.",true,2)}catch(e){}menReport(S,m,v,y,0);return}
  if(a==="ccti"){menKh(2);try{k61Know(m,"Cung Chính ti ghi tên hắn.",true,2)}catch(e){}menReport(S,m,v,y,1);return}
@@ -224,11 +234,11 @@ function menNpcAct(w,m,c,y){const d=menDecide(w,c);menStat("npc_"+d);
  if(d==="listen"&&c&&c!==w){if(menEye(w)>=(y.hide||0)+10)evA(w,c,1);return d}
  return d}
 /* a consort standing at that place in that buổi sees it; she understands it iff her eyes reach how well it is hidden */
-function menNpcSee(m,y){if(!m||!y)return;const c=y.v!=null?RV(y.v):null;for(const w of liveRivals(true)){if(w===c||(S.where||{})[w.id]!==y.k||menEye(w)<(y.hide||0))continue;menStat("npcSee");const d=menNpcAct(w,m,c,y);if(d==="report")break}}
+function menNpcSee(m,y){if(!m||!y)return;const c=y.v!=null?RV(y.v):null;for(const w of liveRivals(true)){if(w===c||whereOf(w)!==y.k||menEye(w)<(y.hide||0))continue;menStat("npcSee");const d=menNpcAct(w,m,c,y);if(d==="report")break}}
 /* she is the one caught: a private word with a man in the hậu cung while another consort is there */
 (function(){const t0=talk;talk=function(oi){let p=null,a=null;try{p=S&&curPeople()[popIdx];a=p&&p.kind==="man"&&talkOpts(p)[oi]}catch(e){}const before=S&&S.logSeq;const r=t0.apply(this,arguments);
  try{if(a&&menRoad()&&!S.dead&&S.logSeq!==before&&!/^Chào hỏi/.test(a.n)&&menZone(S.place)==="hc"){const m=p.ref;const y={k:S.place,r:m.tinh>=50||m.trysts?"meet":"talk"};
-  for(const w of liveRivals(true)){if((S.where||{})[w.id]!==S.place||menEye(w)<20)continue;menStat("seenMe");const d=menDecide(w,S);
+  for(const w of liveRivals(true)){if(whereOf(w)!==S.place||menEye(w)<20)continue;menStat("seenMe");const d=menDecide(w,S);
    if(d==="report"){if(y.r==="talk"){ap(w,{danh:2});apply({danh:-4});oanAdd(S,w,10);log(`<span class="r">${rkName(w)} ${w.name} thấy ngươi nói chuyện riêng với ${m.name} ở ${placeName(S.place)} và đem chuyện đi rêu rao: Danh -4.</span>`)}else menReport(w,m,S,y,0);break}
    if(d==="hide"||d==="listen"){evA(w,S,d==="hide"?2:1);break}}}}catch(e){console.error("men talk",e)}return r}})();
 

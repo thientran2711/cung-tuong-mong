@@ -81,7 +81,7 @@ const KWR={k:null,mode:null,run:null,kind:null};
 function wkrTile(kind,r,l){const ok=r.lv<=l,a=ARTS.find(x=>x.k===WK[kind].a);const eff=r.st?r.st.map(s=>s[0]).join(", "):WK[kind].n;
  const why=ok?"":`Cần ${a.n} bậc ${r.lv}`;const A=`data-kwr="${kind}" data-kwri="${r.id}"`;
  return `<div class="kshc kshpick${ok?"":" kshno"}" ${A}>`+
-  `<span class="kshpic">${kitItem({src:wkrPic(kind,r,0),name:r.n,grade:0,size:"slot",tip:r.n})}</span>`+
+  `<span class="kshpic">${kitItem({src:wkrPic(kind,r,0),name:r.n,size:"slot",tip:r.n})}</span>`+
   `<span class="kshn" title="${r.n}">${r.n}</span><span class="kshe" title="${eff}">${eff}</span>`+
   `<span class="kshp">${r.lv?`${a.n} bậc ${r.lv}`:"mọi bậc"}</span>`+
   `<button type="button" class="kbtn kshgo" ${A} data-kwrgo="1"${ok?"":` disabled title="${why}"`}>${ok?"Làm":"Chưa mở"}</button></div>`}
@@ -95,7 +95,7 @@ function wkrMat(kind,rid){const k=KWR.k,mode=KWR.mode,run=KWR.run,K=WK[kind],r=w
  for(let m=0;m<3;m++)O.push({n:`${r.n} · ${K.mn[m]}`,fx:K.mat[m]?{bac:-K.mat[m]}:{},x:`${wkOddsTxt(S,kind,m)}${K.per?" · phải dâng trong tuần":""}${K.fin?" · "+wkFinTxt(K):""}`,
   go:()=>{wkPend={kind,mat:m,r:rid,subj:wkrSubj(kind,r)};run();if(!S.mg){wkPend=null;if(K.mat[m])apply({bac:K.mat[m]})}}});
  O.push({n:"Thôi",fx:{}});
- Q.push({act:1,t:`${r.n}: dùng vật liệu gì?`,who:pMe(),h:`<p>Phẩm = phần chơi (từ 0 đến 10) + ${a.n} bậc ${l}: +${l} + vật liệu (thường +${WMAT[0]}, tốt +${WMAT[1]}, quý +${WMAT[2]}).</p><p class="past">Thường dưới 6 · Khá 6 · Tinh xảo 10 · Tuyệt phẩm 14</p><p>Chỉ vật liệu quý mới thành Tuyệt phẩm. Vật liệu tốt, quý còn làm quà giá trị hơn và bán được giá hơn.${fee?` Phí thầy ${fee} bạc trả riêng.`:""}</p>`,opts:O})}
+ Q.push({act:1,t:`${r.n}: dùng vật liệu gì?`,who:pMe(),h:`<p>Phẩm = phần chơi (từ 0 đến 10) + ${a.n} bậc ${l}: +${wkLvQ(S,a.k)} + vật liệu (thường +${WMAT[0]}, tốt +${WMAT[1]}, quý +${WMAT[2]}).</p><p class="past">${wkThTxt()}</p><p>Chỉ vật liệu quý mới thành Tuyệt phẩm. Vật liệu tốt, quý còn làm quà giá trị hơn và bán được giá hơn.${fee?` Phí thầy ${fee} bạc trả riêng.`:""}</p>`,opts:O})}
 wkAsk=function(k,mode,run){const a=ARTS.find(x=>x.k===k);if(!wkKindsOf(k).some(x=>WKR[x]))return;Object.assign(KWR,{k,mode,run,kind:KWR.k===k?KWR.kind:null});
  Q.push({t:`${mode==="prac"?"Tự học":"Học"} ${a.n}: làm gì?`,kit:{kind:"info",pick:1,html:wkrBody()},btn:"Đã hiểu",cls:"kwrd"});showModal();render()};
 document.addEventListener("click",e=>{const t=e.target.closest&&e.target.closest("[data-kwrtab],[data-kwrgo]");if(!t||!document.querySelector("#modal .kshop.kwr"))return;e.stopPropagation();

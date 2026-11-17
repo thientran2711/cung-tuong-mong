@@ -25,7 +25,7 @@ const ARTFX={
  theu:["Tài +2 · đồ thêu tự làm: phẩm +14 mỗi bậc (thang 100)","Tài +2, Thái hậu +2","Tài +2, Danh +3 · mỗi tháng gửi đồ thêu bán ra ngoài: Bạc +5","Tài +2, Thái hậu +3","Tài +2, Danh +6 · mỗi tháng Bạc +10 (thay +5)"],
  nau:["Tài +2 · món tự nấu: phẩm +14 mỗi bậc (thang 100)","Tài +2 · ăn uống điều độ: mỗi tháng Sức +2","Tài +2, Danh +3 · mỗi tháng canh bổ dâng Dưỡng Hòa điện: Ân tình +1","Tài +2 · mỗi tháng Sức +4 (thay +2)","Tài +2, Danh +6 · mỗi tháng Ân tình +2 (thay +1)"]};
 const VIRFX={
- cong:["đồ thêu, món nấu tự làm: phẩm +4","phẩm +8 · học Thêu, Nấu: thêm 1 tiến bộ mỗi buổi","phẩm +12 · thành phẩm lên thêm 1 bậc","phẩm +16","phẩm +20 · thành phẩm lên thêm 2 bậc · Danh +4"],
+ cong:["đồ thêu, món nấu tự làm: phẩm +4","phẩm +8 · học Thêu, Nấu: thêm 1 tiến bộ mỗi buổi","phẩm +12 · thành phẩm lên thêm 1 bậc (tới Tinh xảo)","phẩm +16","phẩm +20 · thành phẩm lên thêm 2 bậc · Danh +4"],
  dung:["Sắc +2 · yến tiệc, lễ nghi, thỉnh an dễ thành hơn (+3)","yến tiệc, lễ nghi, thỉnh an +6","Sắc +2 · yến tiệc, lễ nghi, thỉnh an +9","yến tiệc, lễ nghi, thỉnh an +12","Sắc +2, Danh +4 · yến tiệc, lễ nghi, thỉnh an +15"],
  ngon:["trò chuyện, kết giao, tố giác dễ thành hơn (+3)","trò chuyện, kết giao, tố giác +6 · lỡ lời: mỗi thiệt hại bớt 1","Tâm cơ +1 · trò chuyện, kết giao, tố giác +9","trò chuyện, kết giao, tố giác +12 · lỡ lời: mỗi thiệt hại bớt 2","Danh +4 · trò chuyện, kết giao, tố giác +15"],
  hanh:["Đức +3","Đức +3, Thái hậu +3","Đức +3 · mỗi tháng Đức +1 (đến 80)","Đức +3, Thái hậu +3, Hoàng hậu +5","Đức +3, Danh +4"]};
@@ -114,7 +114,11 @@ function lessonVir(k,mode){if(!S||S.dead||Q.length||S.mg)return;vNorm(S);const l
  else{if(!can(2)||S.bac<cost)return;apply({suc:-10,bac:-cost});spend(2);const g=2+R(2);addVir(S,k,g);log(`Học ${V.n} với ma ma giáo tập. Tiến bộ +${g}.`)}
  save();render()}
 window.lessonVir=lessonVir;
-function charity(){const C=BAL.charity;if(!S||S.dead||Q.length||!can(C.khac)||S.bac<C.bac||S.charM===S.turn)return;S.charM=S.turn;withDeed("phát bạc cứu giúp cung nhân nghèo",()=>apply({bac:-C.bac,duc:C.duc,danh:C.danh}));spend(C.khac);save();render()}
+/* ONE act, two doors (danh-p1, owner P1 16/11): Tài nghệ · Tứ đức button (here) and the Hành sự card (jact adCharityCard);
+   one lock S.charM (once a month), one effect body charityFx; numbers BAL.charity */
+function charityLocked(){return !S||S.charM===S.turn||S.bac<BAL.charity.bac}
+function charityFx(){const C=BAL.charity;S.charM=S.turn;withDeed("phát bạc cứu giúp cung nhân nghèo",()=>apply({bac:-C.bac,duc:C.duc,danh:C.danh}))}
+function charity(){const C=BAL.charity;if(!S||S.dead||Q.length||!can(C.khac)||charityLocked())return;charityFx();spend(C.khac);save();render()}
 window.charity=charity;
 try{wrapR("lessonVir",(k,m)=>`${m==="self"?"Tự học":"Học"} ${(VIR.find(x=>x.k===k)||{}).n||""}`);wrapR("charity",()=>"Phát bạc cứu giúp cung nhân")}catch(e){}
 document.addEventListener("click",e=>{const b=e.target.closest("[data-vlearn],[data-charity],[data-v85tab]");if(!b||b.disabled)return;e.stopPropagation();

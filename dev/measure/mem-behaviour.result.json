@@ -1,0 +1,205 @@
+{
+ "before": {
+  "cases": {
+   "M1_target_her": {
+    "none": 0.045,
+    "rumourRemembered": 0.136
+   },
+   "M2_band_after_poison": {
+    "month0": 2,
+    "month24": 1,
+    "oan24": 46,
+    "mem24": 25
+   },
+   "M3_rumor_share": {
+    "none": 0.189,
+    "remembered": 0.189
+   },
+   "M4_help_to_her": {
+    "none": {
+     "toHer": 86,
+     "helps": 86
+    },
+    "pardoned": {
+     "toHer": 90,
+     "helps": 90
+    }
+   },
+   "M5_rumour_left_12mo": [
+    [
+     "Hiền lành",
+     1
+    ],
+    [
+     "Tham vọng+Cả nể",
+     1
+    ],
+    [
+     "Kiêu ngạo+Trọng nghĩa",
+     1
+    ],
+    [
+     "Kiêu ngạo+Mê tín",
+     1
+    ],
+    [
+     "Đa nghi+Hiếu thảo",
+     1
+    ],
+    [
+     "Hiền lành+Thù dai",
+     1
+    ],
+    [
+     "Đa nghi+Khéo léo",
+     1
+    ],
+    [
+     "Nhu mì+Ghen tuông",
+     1
+    ]
+   ],
+   "M6_band_oan70": {
+    "none": 2,
+    "pardoned": 2
+   }
+  },
+  "natural": {
+   "memories": 0,
+   "byHolder": {},
+   "lifelong": 0
+  },
+  "errs": []
+ },
+ "after": {
+  "cases": {
+   "M1_target_her": {
+    "none": 0.047,
+    "rumourRemembered": 0.152
+   },
+   "M2_band_after_poison": {
+    "month0": 2,
+    "month24": 2,
+    "oan24": 46,
+    "mem24": 70
+   },
+   "M3_rumor_share": {
+    "none": 0.268,
+    "remembered": 0.423
+   },
+   "M4_help_to_her": {
+    "none": {
+     "toHer": 88,
+     "helps": 88
+    },
+    "pardoned": {
+     "toHer": 403,
+     "helps": 403
+    }
+   },
+   "M5_rumour_left_12mo": [
+    [
+     "Hiền lành",
+     0
+    ],
+    [
+     "Nhu mì+Mê tín",
+     0
+    ],
+    [
+     "Nhu mì+Tham tiền",
+     0
+    ],
+    [
+     "Tham vọng+Cả nể",
+     0
+    ],
+    [
+     "Đa nghi+Cả nể",
+     2.2
+    ],
+    [
+     "Hiểm độc+Thù dai",
+     21.4
+    ],
+    [
+     "Hiểm độc+Khéo léo",
+     14.2
+    ],
+    [
+     "Kiêu ngạo+Mê tín",
+     9.4
+    ]
+   ],
+   "M6_band_oan70": {
+    "none": 2,
+    "pardoned": 0
+   }
+  },
+  "natural": {
+   "memories": 98,
+   "byHolder": {
+    "her": 31,
+    "emp": 1,
+    "consort": 66
+   },
+   "lifelong": 24,
+   "causes": 292,
+   "causeByAct": {
+    "gift": 25,
+    "punish": 48,
+    "rumor": 21,
+    "spy": 42,
+    "mediate": 4,
+    "event": 12,
+    "talk": 24,
+    "trinhth": 14,
+    "muachuoc": 8,
+    "block": 3,
+    "rash": 4,
+    "provoke": 13,
+    "ally": 14,
+    "accuse": 10,
+    "apologise": 1,
+    "frame": 15,
+    "plant": 4,
+    "trip": 2,
+    "humiliate": 4,
+    "bribe": 5,
+    "warn": 2,
+    "huydung": 4,
+    "help": 5,
+    "drop": 1,
+    "banphe": 3,
+    "musk": 1,
+    "poison": 1,
+    "feign": 1,
+    "trinhhh": 1
+   },
+   "causeWhy": {
+    "net": 57,
+    "toi": 48,
+    "nong": 13,
+    "ghen": 43,
+    "su": 12,
+    "chon": 25,
+    "tra": 63,
+    "ghet": 13,
+    "oan": 9,
+    "than": 9
+   },
+   "withoutReason": 0,
+   "sample": [
+    "T5/3 hạ tuần · Kiều Diễm Thu tặng Lý Ngưng Sương Áo lụa thêu hoa nhỏ (vì nết hiền lành)",
+    "T5/3 hạ tuần · Hoàng thượng phạt Hạ Băng Tâm cấm túc (vì bị cung nữ tố giác mưu kế)",
+    "T5/3 hạ tuần · Hoàng thượng phạt Diệp Yên Nhiên cấm túc (vì bị cung nữ tố giác mưu kế)",
+    "T5/3 hạ tuần · Hoàng thượng phạt Từ Ngọc Hành cấm túc (vì bị cung nữ tố giác mưu kế)",
+    "T6/3 thượng tuần · Mộ Dung Thanh Liên tung tin đồn bẩn về ngươi (vì nóng giận nhất thời) nhưng không thành",
+    "T6/3 thượng tuần · Từ Ngọc Hành tung tin đồn bẩn về ngươi (vì nóng giận nhất thời) nhưng không thành",
+    "T6/3 thượng tuần · Hoàng thượng phạt Lý Ngưng Sương cấm túc (vì hậu cung can chính)",
+    "T5/3 hạ tuần · Mộ Dung Thanh Liên sai người dò la Kiều Diễm Thu (vì nóng giận nhất thời)"
+   ]
+  },
+  "errs": []
+ }
+}

@@ -19,7 +19,11 @@ const KBK_ART={cover:"img/book-cover.webp",left:"img/book-left.webp",right:"img/
    title has a picture here draws it in the label (art cover only); any other title keeps the text. */
 const KBK_TITLE_IMG={"Tuần lục":KBK_ART.title};
 const KBK_HAVE={};
-(function(){for(const [k,u] of Object.entries(KBK_ART)){try{const im=new Image();im.onload=()=>{KBK_HAVE[k]=true;document.querySelectorAll(".kbk").forEach(r=>{r.classList.add("art-"+k);if(r.__kbk)r.__kbk.relayout()})};im.src=u}catch(e){}}})();
+/* lag-play (owner 16/11 15:05Z): ONE coalesced book re-layout. Every picture that arrived (book art, each figure's size/head measure)
+   re-paginated every open book at once — 1-20 s per picture on a slow phone while a new life's figures stream in. */
+function kitBookRelayoutSoon(ms){clearTimeout(kitBookRelayoutSoon.t);kitBookRelayoutSoon.t=setTimeout(()=>document.querySelectorAll(".kbk").forEach(r=>{try{r.__kbk&&r.__kbk.relayout()}catch(e){}}),ms==null?120:ms)}
+window.kitBookRelayoutSoon=kitBookRelayoutSoon;
+(function(){for(const [k,u] of Object.entries(KBK_ART)){try{const im=new Image();im.onload=()=>{KBK_HAVE[k]=true;document.querySelectorAll(".kbk").forEach(r=>{r.classList.add("art-"+k)});kitBookRelayoutSoon()};im.src=u}catch(e){}}})();
 
 function kbkSfx(){try{if(typeof auOk!=="function"||!auOk())return;const C=window.__bellCtx||(window.__bellCtx=new (window.AudioContext||window.webkitAudioContext)());const t=C.currentTime,n=Math.floor(C.sampleRate*.28);
  const buf=C.createBuffer(1,n,C.sampleRate),d=buf.getChannelData(0);for(let i=0;i<n;i++){const e=i/n;d[i]=(Math.random()*2-1)*Math.pow(1-e,2)*(e<.08?e/.08:1)}

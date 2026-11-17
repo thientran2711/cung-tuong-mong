@@ -21,7 +21,11 @@ function ilP(k){if(k==="me")return S;try{return typeof RV==="function"?RV(k):nul
 function ilAlive(p){return !!p&&(p===S?!S.dead:p.alive!==false)}
 /* co-op (jcoopworld): the friend's proxy entry (coop:true) is HER game's chest, kept by her own ledger; NPC pieces are world state:
    each side routes only the removals its own acts make (world functions run on the host only), and no side "nets" an NPC piece
-   (the other side may have moved it) — reviewer r1 */
+   (the other side may have moved it) — reviewer r1.
+   item-ledger-solo (owner 17/11 02:05Z: no co-op patching): pieces travel between the two games ONLY on the live co-op path (jcoopworld
+   res.items → her "Quà tặng" dialog, res.fam ops). The ledger does not carry pieces itself: it only RECORDS what that path delivers —
+   a piece of mine that lands in her entry is logged "sang hảo hữu" (never also put in my box: one gift = one item), a piece the live
+   path takes out of my chest (res.fam "rm") is logged "hảo hữu lấy" and not netted. Co-op transport of jil parked at 7aba5de9. */
 function ilCoop(){try{return !!(window.COOPW&&COOPW.on)}catch(e){return false}}
 function ilGuest(){return ilCoop()&&COOPW.seat!=="a"}
 function ilPeople(){const L=[S];try{for(const v of rivals||[])if(v&&!v.coop&&L.indexOf(v)<0)L.push(v)}catch(e){}return L}
@@ -60,7 +64,7 @@ function ilLog(e,f,t,how){const I=ilS();I.log.push([typeof wk==="function"?wk():
 function ilRng(a){return a[0]+R(a[1]-a[0]+1)}
 /* ---- the ONE rule: where a piece goes when it leaves p's hands ---- */
 const IL_HOW={sell:"bán",pawn:"cầm cố quá hạn",conf:"bị tịch thu",evid:"tang vật",fix:"đem sửa",burn:"cháy, đem sửa",pil:"kẻ hầu bớt xén",lost:"thất lạc",maid:"tặng cung nữ",emp:"dâng Hoàng thượng",th:"dâng Thái hậu",dead:"di vật",kho:"trả Nội vụ phủ",net:"Nội vụ phủ nhặt được"};
-function ilGone(p,e,how,o){if(!e||typeof e!=="object"||!e.k)return null;if(ilAt(e))return null;o=o||{};const I=ilS();const B=BAL.il;const own=o.own||ilKey(p);
+function ilGone(p,e,how,o){if(!e||typeof e!=="object"||!e.k)return null;if(ilAt(e))return null;{const f=ilToFriend(e);if(f){ilSent(e,f);return null}}o=o||{};const I=ilS();const B=BAL.il;const own=o.own||ilKey(p);
  if(how!=="sell"&&how!=="pawn"&&!ilDur(e))return null;if((how==="sell"||how==="pawn")&&e.wk&&e.wk.p!=null)return null;
  if(how==="lost"&&p&&ilAlive(p)&&typeof loLoseE==="function"){const c=loLoseE(p,e,o.cause);if(c){ilUid(e);ilLog(e,own,"lo"+c.id,"thất lạc");return c}}
  for(const f of ["w","h","lo","gh","by"])if(how!=="lost")delete e[f];
@@ -187,9 +191,24 @@ window.ilGone=ilGone;window.ilAudit=ilAudit;window.ilCensus=ilCensus;window.ilWh
 /* inline removals (filter a chest) go through the same rule */
 function ilFilter(p,keep,how){const out=(p.inv||[]).filter(e=>!keep(e));p.inv=(p.inv||[]).filter(keep);for(const e of out)ilGone(p,e,how);return p.inv}
 window.ilFilter=ilFilter;
-/* co-op (jcoopworld): a gift to her entry leaves my world for her game; the ledger keeps the line, the census does not miss it */
-function ilSent(e,t){const I=ilS();ilUid(e);ilLog(e,"me","coop:"+((t&&t.id)||""),"tặng hảo hữu");if(I.at)delete I.at[e.iu]}
-function ilGot(e,f){ilUid(e);ilLog(e,"coop:"+((f&&f.id)||""),"me","hảo hữu tặng")}
+/* co-op, RECORD ONLY (item-ledger-solo): the live path (jcoopworld) carries the piece; the ledger writes the line and the census does not net it */
+function ilFriends(){if(!ilCoop())return[];try{return (rivals||[]).filter(v=>v&&v.coop)}catch(e){return[]}}
+/* the friend's entry that now holds this piece (same object, or the live path's copy carrying its id: Cài đồ) */
+function ilToFriend(e){if(!e||!ilCoop())return null;for(const f of ilFriends())if(ilSlots(f).some(a=>a===e||(!!e.iu&&a.iu===e.iu)))return f;return null}
+const IL_SENT=new WeakSet();
+function ilSent(e,f){if(IL_SENT.has(e))return;IL_SENT.add(e);const I=ilS();ilUid(e);ilLog(e,"me","coop:"+((f&&f.id)||""),"sang hảo hữu");if(I.at)delete I.at[e.iu]}
+/* my acts on her entry: whatever left my hands and now sits in her entry goes to her game on the live path (gift, Cài đồ, a work given) */
+(function(){if(typeof runAct!=="function")return;const f0=runAct;runAct=function(a,t){if(!ilCoop()||a!==S||!t||!t.coop)return f0.apply(this,arguments);
+ let L0=[];try{L0=ilSlots(S).slice();L0.forEach(e=>ilUid(e,S))}catch(e){}const r=f0.apply(this,arguments);
+ try{for(const e of L0)if(!ilHas(S,e)&&!ilAt(e)&&ilToFriend(e))ilSent(e,t)}catch(e){console.error("ilSent",e)}return r}})();
+/* her acts on me reach me as a "res" (jcoopworld onRes → famApply): a piece its "rm" op took out of my chest is in HER game now
+   (stolen → her chest, burnt, handed over); the ledger records it and the census does not net it (one piece, one place) */
+function ilCoopRes(m){try{if(!ilCoop()||!m||m.from===COOPW.seat||!S||S.dead||!Array.isArray(m.fam))return;const I=ilS();if(!I.at)return;
+ const now=new Set();for(const e of ilSlots(S))if(e.iu)now.add(e.iu);const RM={lost:"hảo hữu lấy (thất lạc)",burn:"hảo hữu đốt",taken:"nộp cho hảo hữu",gone:"hảo hữu lấy"};
+ for(const o of m.fam){if(!o||o.op!=="rm"||!o.k)continue;
+  for(const id in I.at){const [k,h]=I.at[id];if(h!=="me"||k!==o.k||now.has(+id)||ilWhere({k,iu:+id}))continue;
+   const e0={k,iu:+id};ilLog(e0,"me","coop:"+(m.from||""),RM[o.how]||RM.gone);delete I.at[id];break}}}catch(e){console.error("ilCoopRes",e)}}
+setTimeout(()=>{try{if(typeof COOP==="object"&&COOP&&typeof COOP.on==="function")COOP.on("res",m=>Promise.resolve().then(()=>ilCoopRes(m)))}catch(e){}},0);
 /* cướp y phục (jty): the robe goes to whoever sent the robber (kept in her chest: a lost case, found by tra xét / recognised when worn);
    an unknown thug → a lost case (it turns up in someone's chest, or hidden) — never into thin air */
 function ilRob(p,e,by){if(!e||!ilDur(e)||!p)return null;ilUid(e);
