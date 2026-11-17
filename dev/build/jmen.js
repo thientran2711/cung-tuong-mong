@@ -107,7 +107,7 @@ const MEN_NT={box:{x:.445,y:.805,w:.11,h:.12}};
 /* the outer court: the NORMAL map label + a small lock mark (owner 11/15: no grey overlay on closed places); a tap opens a kit card with the
    reason and the options. The lock mark is .kmlock so the shared kit label (integrator, review/book-release) can take it over when it lands. */
 (function(){const h0=mapHTML;mapHTML=function(){let h=h0.apply(this,arguments);try{if(menRoad())h=h.replace(/<div class="mspot sm off empty" title="Ngoại triều: ([^"]*)" style="([^"]*)"><span class="mlab">Ngoại triều<\/span><\/div>/,(a,why,st)=>`<button class="mspot sm kmen-nt" data-mennt="1" title="Ngoại triều: ${why}" style="${st}"><span class="mlab"><span class="kmlock" aria-label="cấm vào">🔒</span> Ngoại triều</span><span class="mmeta"><em>${why}</em></span></button>`)}catch(e){}return h}})();
-function menNtCard(){if(!S||S.dead||Q.length)return;const T=(typeof trS==="function"&&typeof tdOn==="function"&&tdOn())?trS():null;const left=Math.max(0,4-used);
+function menNtCard(){if(!S||S.dead||Q.length)return;const T=(typeof trS==="function"&&typeof tdOn==="function"&&tdOn())?trS():null;const left=Math.max(0,BAL.time.khac-used);
  const opts=[];if(T&&left>=1)opts.push({n:"Hỏi thái giám tin ngoại triều",fx:{bac:-5},x:"Chắc chắn · tốn: 1 khắc",go:()=>{spend(1);const L=Object.keys(S.minW||{}).map(c=>T.H[c]&&`${TDOFF[c]||"Quan"} ${T.H[c].name} (${S.minW[c]==="thu"?"vào chầu ở Ngự thư phòng":"dự yến ở Ngự hoa viên"})`).filter(Boolean);
   log(L.length?`Thái giám kể: buổi này ${L.join("; ")}.`:"Thái giám kể: buổi này không có vị quan nào vào chầu.")}});
  opts.push({n:"Thôi",fx:{},x:""});
@@ -137,7 +137,7 @@ function menWatch(k,from){if(!menRoad()||S.dead)return;const Y=S.menWhy||{};S.me
   const sees=menEye(S)>=(y.hide||0);menStat(sees?"recog":"blur");menCard(m,sees?v:null,Object.assign({},y,{p:on?1:0,hv:!sees&&v?v.id:null}),0);break}}
 (function(){const s0=spend;spend=function(c){const r=s0.apply(this,arguments);try{if(menRoad()&&!S.dead&&S.place&&S.menArr&&S.menArr.k===S.place&&!Q.length)menWatch(S.place,null)}catch(e){}return r}})();
 /* the buổi ends with her still there: she was there through the last khắc too */
-(function(){const n0=nextBuoi;nextBuoi=function(){try{if(menRoad()&&!S.dead&&!Q.length&&S.place&&S.menArr&&S.menArr.k===S.place){const u=used;used=4;try{menWatch(S.place,null)}finally{used=u}if(Q.length){if(!window.__bot)showModal();return}}}catch(e){}return n0.apply(this,arguments)}})();
+(function(){const n0=nextBuoi;nextBuoi=function(){try{if(menRoad()&&!S.dead&&!Q.length&&S.place&&S.menArr&&S.menArr.k===S.place){const u=used;used=BAL.time.khac;try{menWatch(S.place,null)}finally{used=u}if(Q.length){if(!window.__bot)showModal();return}}}catch(e){}return n0.apply(this,arguments)}})();
 
 function menSeeLine(m,v,y){const at=(y.p?"lối đi gần ":"")+placeName(y.k);const t=BUOI[S.buoi||0].toLowerCase();
  if(v&&y.r==="tryst")return `${menCap(t)} ở ${at}, ngươi bắt gặp ${menNmFull(m)} đứng sát bên ${menVT(v)} sau hòn giả sơn; thấy động, hai người vội buông tay nhau.`;
@@ -179,7 +179,7 @@ function menArt(k){try{const P=placeOf(k);const f=SCIMG[P.sc];return f?{src:`img
 function menCard(m,v,y,heard){try{k61Know(m,"",true,1);if(v)k61Know(v,"",true,1)}catch(e){}const d=mkP("menEnc",{m:m.id,v:v?v.id:null,k:y.k,r:y.r,p:y.p||0,why:y.why||null,lv:y.likeV!=null?y.likeV:null,hv:y.hv!=null?y.hv:null,h:heard?1:0});if(!d)return;
  Q.push({t:heard?"Nghe lén sau hòn giả sơn":"Nam nhân nơi cấm địa",h:d.t,opts:d.o,stage:d.stage,headArt:d.headArt,optLayout:"rows",pid:d.pid,pp:d.pp});if(!window.__bot)showModal()}
 (function(){const d0=deserQ;deserQ=function(L){const out=d0.apply(this,arguments);try{out.forEach(q=>{if(q.pid==="menEnc"){const d=mkP("menEnc",q.pp);if(d){q.stage=d.stage;q.headArt=d.headArt;q.optLayout="rows"}}})}catch(e){}return out}})();
-function menKh(n){const c=Math.max(0,Math.min(n,4-used));if(c)spend(c)}
+function menKh(n){const c=Math.max(0,Math.min(n,BAL.time.khac-used));if(c)spend(c)}
 
 /* ---------- 4. the shared outcomes (the player and NPC consorts use the same ones) ---------- */
 /* by reports m (and the companion c) at the scene (formal=0) or to the Cung Chính ti (formal=1) */

@@ -201,7 +201,7 @@ try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§6.2",title:"Th�
    text), long text → the tall 3:4 picture (kitOptFit, jk4) */
 try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§6.2b",title:"Thẻ lựa chọn: chữ ngắn thì tranh vuông, chữ dài thì tranh đứng (không chừa khoảng trống)",html:()=>
  `<div class="opts kitpg-opts">`+
- [["Tiếp","thân +3"],["Xin về tảo mộ tổ tiên","tốn: Sức -10 · được: Đức +3, cha mẹ vui lòng"],["Dâng lễ vật xin Hoàng hậu bỏ qua cho lần này","tốn: Bạc -20, 1 khắc · được: Hoàng hậu thiện cảm +4, Danh +2 · mất: Thái hậu thiện cảm -1 · cần: Bạc ≥ 20"]]
+ [["Tiếp","thân +3"],["Xin về tảo mộ tổ tiên",`tốn: Sức -${BAL.kitpage.demo.tomb.suc} · được: Đức +${BAL.kitpage.demo.tomb.duc}, cha mẹ vui lòng`],["Dâng lễ vật xin Hoàng hậu bỏ qua cho lần này",`tốn: Bạc -${BAL.kitpage.demo.gift.bac}, ${BAL.kitpage.demo.k} khắc · được: Hoàng hậu thiện cảm +${BAL.kitpage.demo.gift.hh}, Danh +${BAL.kitpage.demo.gift.danh} · mất: Thái hậu thiện cảm -${BAL.kitpage.demo.gift.th} · cần: Bạc ≥ ${BAL.kitpage.demo.gift.bac}`]]
   .map(([n,x],i)=>`<button class="opt" data-ksample="${i}">${n}<small>${typeof kitParse==="function"?kitParse(x):x}</small></button>`).join("")+`</div>`})}catch(e){}
 /* kit sample page (§6.3, review/pcard-actrow): the acts of a person card = the same long row, one per line (pop-up / tab / any width) */
 try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§6.3",title:"Việc trên thẻ người: hàng dài, mỗi việc một dòng",html:()=>

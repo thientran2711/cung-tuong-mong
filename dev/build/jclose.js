@@ -15,7 +15,7 @@ function cbGreetTodo(k){try{if(!S||S.dead||!k||S.place!==k||S.out||S.confined)re
  /* came by invitation / an accepted request this buổi: no greeting is owed (the skip mark tells "walked in without greeting") */
  if(C.invite&&accHas(S,k)&&!((S.acSkip||{})[k]===bk))return null;return h}catch(e){return null}}
 function cbGreetMark(k){S.acGreet=S.acGreet||{};S.acGreet[k]=bkey()}
-function cbGreetCard(k){const h=cbGreetTodo(k);if(!h)return false;const C=ACC_ETQ,nm=accName(k),hn=`${accRkName(h)} ${h.name}`,sh=h.name.split(" ").pop(),left=Math.max(0,4-used);
+function cbGreetCard(k){const h=cbGreetTodo(k);if(!h)return false;const C=ACC_ETQ,nm=accName(k),hn=`${accRkName(h)} ${h.name}`,sh=h.name.split(" ").pop(),left=Math.max(0,BAL.time.khac-used);
  const L=[`<p>${hn} là chủ vị ${nm}, đang ở cung. Ngươi đang ở đây mà chưa bái kiến trong ${String(BUOI[S.buoi||0]).toLowerCase()}.</p>`];const opts=[];
  if(j77Kh(C.khac))opts.push({n:`Bái kiến ${accRkName(h)}`,fx:{},x:`Chắc chắn · tốn: ${C.khac} khắc · thành: ${sh}: ${typeof pvRel==="function"?pvRel(h,C.okAff):"quý ngươi +"+C.okAff}`,go:()=>setTimeout(()=>cbGreetGo(k),0)});
  else L.push(`<p class="past">Bái kiến: ${j77Bound(C.khac)}.</p>`);
@@ -94,8 +94,8 @@ window.kitLine=kitLine;
 /* ---------- 5. ONE Sức NEED PER CARD (owner 17:12Z: "Múa trong yến tiệc": "cần Sức trên 20 (có 17)" AND "Sức ≥5 (có 17)") ----------
    The Cần row read the floor (Sức ≥5) while the card's real gate (j76) is "more Sức than the card costs". One need, the real one:
    cost c > floor → "Sức trên c"; else the floor "Sức ≥5"; rest cards (they restore Sức) and 1-khắc acts need no Sức. */
-(function(){if(typeof kaTimeNeeds!=="function")return;kaTimeNeeds=function(c,bacCost){const L=[];const left=4-used;L.push(j76need(c,window.__cbCard));
- const fl=typeof SUC_FLOOR!=="undefined"?SUC_FLOOR:5;const A=window.__cbCard;const cs=A&&A.c&&A.c.suc<0?-A.c.suc:0;const rest=!!(A&&typeof j76isRest==="function"&&j76isRest(A));
+(function(){if(typeof kaTimeNeeds!=="function")return;kaTimeNeeds=function(c,bacCost){const L=[];const left=BAL.time.khac-used;L.push(j76need(c,window.__cbCard));
+ const fl=BAL.time.sucMin;const A=window.__cbCard;const cs=A&&A.c&&A.c.suc<0?-A.c.suc:0;const rest=!!(A&&typeof j76isRest==="function"&&j76isRest(A));
  if(c>1&&!rest){if(cs>0&&cs+1>fl)L.push({t:`Sức trên ${cs} (có ${S.suc})`,ok:S.suc>cs});else L.push({t:`Sức ≥${fl} (có ${S.suc})`,ok:S.suc>=fl})}
  if(bacCost>0)L.push({t:`Bạc ${bacCost} (có ${S.bac})`,ok:S.bac>=bacCost});return L}})();
 /* the card being drawn, for kaTimeNeeds (j63 builds the Cần row after the j76 wrapper has already returned) */
@@ -109,9 +109,9 @@ window.kitLine=kitLine;
 /* ---------- 7. WEATHER NEVER ADDS WALKING KHẮC (owner 15/11 06:40Z, found again by the khắc-gate scan) ----------
    "KHÔNG thêm khắc đi đường (đã có Sức hồi chậm, không phạt 2 lần)": a far walk is 2 khắc in every weather (was 3 when wet).
    Bad weather keeps its real costs elsewhere (Sức recovery, outdoor acts' own Mất lines). */
-travel=function(a,b){if(a===b)return 0;{const W=window.__walkSpill;if(W&&S&&(S.buoi||0)===W.b&&a===W.from&&b===W.k)return W.rest}const [r1,c1]=mapPos(a||"home"),[r2,c2]=mapPos(b);return Math.abs(r1-r2)+Math.abs(c1-c2)>1?2:1};
+travel=function(a,b){if(a===b)return 0;{const W=window.__walkSpill;if(W&&S&&(S.buoi||0)===W.b&&a===W.from&&b===W.k)return W.rest}const [r1,c1]=mapPos(a||"home"),[r2,c2]=mapPos(b);return Math.abs(r1-r2)+Math.abs(c1-c2)>1?BAL.walk.far:BAL.walk.near};
 (function(){if(typeof kitWxEffects!=="function")return;const e0=kitWxEffects;kitWxEffects=function(){return e0.apply(this,arguments).filter(x=>!/^Đi đến nơi xa tốn/.test(x[1]))}})();
 /* the gate's own words match the Cần chip, so the card shows ONE Sức line (kaNorm1 merges equal needs): "cần Sức trên 20 (có 17)" /
    "cần Sức ≥5 (có 3)" — was "kiệt sức (Sức 3, cần 5) — nghỉ ngơi trước" beside the chip "Sức ≥5 (có 3)" */
-if(typeof j76sucWhy==="function"){j76sucWhy=function(c){if(!S||S.dead||c<=1||window.__j76rest||window.__j76trip)return"";const cs=window.__j76cs||0;const fl=typeof SUC_FLOOR!=="undefined"?SUC_FLOOR:5;
+if(typeof j76sucWhy==="function"){j76sucWhy=function(c){if(!S||S.dead||c<=1||window.__j76rest||window.__j76trip)return"";const cs=window.__j76cs||0;const fl=BAL.time.sucMin;
  if(cs&&S.suc+cs<=0&&-cs+1>fl)return `cần Sức trên ${-cs} (có ${S.suc})`;return S.suc<fl?`cần Sức ≥${fl} (có ${S.suc})`:(cs&&S.suc+cs<=0?`cần Sức trên ${-cs} (có ${S.suc})`:"")}}
