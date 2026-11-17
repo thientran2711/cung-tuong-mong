@@ -38,16 +38,18 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
  /* 5 gates */
  const r5=await p.evaluate(()=>{const [v]=__T.R();const out=[];const L=BAL.ea.npc.bar.out;
   const me=(k,bar)=>{__T.clr(S);emoSet(S,k,80,"thử");mkSync(S);const d=bar-S.mood.v;mkBar(d,"thử bar","x:test");mkSync(S);return {k,bar:S.mood.v,g:eaMine().g,cards:eaCards().map(c=>c.ea)}};
-  out.push(me("vui",-70));out.push(me("gian",-70));out.push(me("buon",-70));out.push(me("gian",0));out.push(me("vui",70));
+  out.push(me("vui",-70));out.push(me("gian",-70));out.push(me("buon",-70));out.push(me("gian",0));out.push(me("vui",70));out.push(me("khoc",-70));out.push(me("hon",-70));
   __T.clr(v);emoSet(v,"gian",100,"thử");emoSet(v,"gian",100,"thử 2");emoSet(v,"gian",100,"thử 3");const b1=moodBar(v),okOut=eaBarOk(v,"gian",L),okVui=eaBarOk(v,"vui",BAL.ea.npc.bar.act);
   __T.clr(v);emoSet(v,"gian",80,"thử");const b2=moodBar(v),weak=eaBarOk(v,"gian",L);
   return {out,b1,okOut,okVui,b2,weak,L}});
- const [lowVui,lowGian,lowBuon,calmGian,highVui]=r5.out;
+ const [lowVui,lowGian,lowBuon,calmGian,highVui,lowKhoc,lowHon]=r5.out;
  ok(lowVui.g===null&&lowVui.cards.length===0,'her: low bar + dominant Vui → no emotion act (feeling must match)',lowVui);
  ok(lowGian.g==="gian"&&lowGian.cards.includes("dapdo"),'her: low bar + Giận → Đập đồ',lowGian);
  ok(lowBuon.g==="buon"&&lowBuon.cards.includes("khoc"),'her: low bar + Buồn → Khóc thầm',lowBuon);
  ok(calmGian.g===null,'her: Giận but the bar not past its line → no act',calmGian);
  ok(highVui.g==="vui",'her: high bar + Vui → joyful act',highVui);
+ ok(lowKhoc.g==="buon"&&lowKhoc.cards.includes("khoc"),'her: low bar + Khóc seal → buồn acts (reviewer r1: khóc must not block them)',lowKhoc);
+ ok(lowHon.g==="gian",'her: low bar + Hờn seal → giận group',lowHon);
  ok(r5.okOut&&!r5.okVui&&!r5.weak,'NPC: outburst gate = bar past out.v on the feeling\'s side; one feeling alone below the line → none',r5);
  /* 3 runtime probe */
  const r3=await p.evaluate(async D=>{const bad=[],good={n:0};const hook=v=>{let val=v.ghen||0;Object.defineProperty(v,"ghen",{configurable:true,enumerable:true,get(){return val},set(x){if(x>val){const st=new Error().stack||"";if(/ghenUp/.test(st))good.n++;else bad.push(st.split("\n").slice(2,4).join(" | ").slice(0,200))}val=x}})};
