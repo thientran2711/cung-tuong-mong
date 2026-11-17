@@ -7,18 +7,31 @@
    Limits (reported): a write to an object made by the code itself and written through its own local reference before it is reached
    through S/rivals is not seen; identity: Array indexOf/includes/lastIndexOf and Set/Map keys see through the Proxies. */
 (function(){
-const RAW=new WeakMap(),PX=new WeakMap();const CNT=new Map();let total=0,raw=0,sRep=0,rRep=0,on=false;const byRoot={};
+/* review r1: PER PART. Every write is also given the migration part that owns it (audit §3), from the OUTERMOST engine entry on the stack
+   (the call the UI / socket made): life B · world C · dialogs D · buổi + night E · her acts F1–F5 · week end + her month G · sync layer C/H.
+   endTurn / nextBuoi split by root: W.* / R.* / Rarr → C (world loops), S.* → G (week end) / E (buổi). No entry found → "?" (F6: the tripwire names it). */
+try{Error.stackTraceLimit=Math.max(Error.stackTraceLimit||10,120)}catch(e){}
+const ENTRY=[[/^(start|nlRun|nlBegin|nlReroll)$/,"B"],[/^(chooseM|onAct|onRes|famApply|petApply|showRes)$/,"D"],
+ [/^(flip|resolveTonight|nightScene|rivalsBuoi)$/,"E"],[/^(runAct|act|cardH|talk|directActs)$/,"F1"],[/^(goTo|placeGo|enterPlace)$/,"F2"],
+ [/^(buy|useItem|wear|sell|gift)$/,"F3"],[/^(startContest|kitGameResult|mgEnd)$/,"F5"],
+ [/^(attach|sendMe|onBuoi|pullFriend|pushFriend|reshowQ|tryEnd)$/,"C/H"]];
+function part(st,root){let hit=null;for(const l of st){const m=l.trim().match(/^at (?:Object\.|Proxy\.|Array\.|window\.)?([^ (]+)/);const n=m?m[1]:"";if(!n)continue;
+  if(n==="endTurn"||n==="monthTick")hit=/^S\./.test(root)?"G":"C";else if(n==="nextBuoi")hit=/^S\./.test(root)?"E":"C";else for(const [rx,pt] of ENTRY)if(rx.test(n)){hit=pt;break}}
+ return hit||"?"}
+const RAW=new WeakMap(),PX=new WeakMap();const CNT=new Map();let total=0,raw=0,sRep=0,rRep=0,on=false;const byRoot={},byPart={},PCNT=new Map();
 const unw=x=>(x&&typeof x==="object"&&RAW.has(x))?RAW.get(x):x;
 for(const m of ["indexOf","includes","lastIndexOf"]){const f=Array.prototype[m];Array.prototype[m]=function(x,...a){return f.call(unw(this),unw(x),...a)}}
 for(const C of [Set,Map])for(const m of ["has","get","delete","add","set"]){const f=C.prototype[m];if(!f)continue;C.prototype[m]=function(k,...a){return f.call(this,unw(k),...a)}}
 const plainP=o=>{const p=Object.getPrototypeOf(o);return p===Object.prototype||p===Array.prototype||p===null};
-function who(){const st=(new Error().stack||"").split("\n").slice(2);for(const l of st){const m=l.trim().match(/^at (?:Object\.|Proxy\.|Array\.)?([^ (]+)/);const n=m?m[1]:"";
+function who(st){st=st||(new Error().stack||"").split("\n").slice(2);for(const l of st){const m=l.trim().match(/^at (?:Object\.|Proxy\.|Array\.)?([^ (]+)/);const n=m?m[1]:"";
   if(!n||/^(__trip|set|deleteProperty|defineProperty|Reflect\.|new|eval|<anonymous>)/.test(n)||/coop-thin-trip|\(<anonymous>\)|\(native\)/.test(l))continue;
   return /^https?:/.test(n)?"anon@"+(n.match(/:(\d+):\d+$/)||[])[1]:n}return "(top)"}
 /* only a write that CHANGES something counts (x.k = the same value is not a guest computation); `raw` counts every write */
 function hit(meta,key,same){const C=window.COOPW;if(!on||(C&&C.inFC)||(C&&C.ctx))return;raw++;if(same)return;total++;
  const root=meta.r==="S"&&meta.t===undefined?(WK().includes(key)?"W."+key:"S."+key):meta.r==="S"?(WK().includes(meta.t)?"W."+meta.t:"S."+meta.t):meta.r==="R"?(meta.t===undefined?"Rarr":"R."+(meta.t2||key)):meta.r;
- const k=who()+"|"+root.replace(/\..*$/,m=>m.split(".").slice(0,2).join("."));CNT.set(k,(CNT.get(k)||0)+1);const rk=root.split(".")[0];byRoot[rk]=(byRoot[rk]||0)+1}
+ const st=(new Error().stack||"").split("\n").slice(2);const w=who(st),pt=part(st,root);
+ const k=w+"|"+root.replace(/\..*$/,m=>m.split(".").slice(0,2).join("."));CNT.set(k,(CNT.get(k)||0)+1);const rk=root.split(".")[0];byRoot[rk]=(byRoot[rk]||0)+1;
+ byPart[pt]=(byPart[pt]||0)+1;const pk=pt+"|"+k;PCNT.set(pk,(PCNT.get(pk)||0)+1)}
 let WKc=null;const WK=()=>WKc||(WKc=(window.COOPW&&COOPW.X&&COOPW.X.W_KEYS)||[]);
 function px(o,meta){if(!o||typeof o!=="object"||RAW.has(o))return o;if(!plainP(o))return o;let p=PX.get(o);if(p)return p;
  p=new Proxy(o,{get(t,k,rc){const v=Reflect.get(t,k);if(!v||typeof v!=="object"||typeof k==="symbol")return v;
@@ -34,5 +47,6 @@ function check(){const C=window.COOPW;if(!C||!C.on||C.seat!=="b"||C.inFC)return;
  if(!on){on=true;C.afterFC=()=>{wrap()};wrap();return}
  try{if(S&&!RAW.has(S)){sRep++;wrap()}if(rivals&&!RAW.has(rivals)){rRep++;wrap()}}catch(e){}}
 setInterval(check,150);
-window.__trip=function(){const top=[...CNT.entries()].sort((a,b)=>b[1]-a[1]).map(([k,n])=>{const [f,r]=k.split("|");return [f,r,n]});return {total,raw,byRoot,top:top.slice(0,40),pairs:top.length,sReplaced:sRep,rReplaced:rRep}};
+window.__trip=function(){const top=[...CNT.entries()].sort((a,b)=>b[1]-a[1]).map(([k,n])=>{const [f,r]=k.split("|");return [f,r,n]});const parts={};for(const [k,n] of PCNT){const [pt,f,r]=k.split("|");(parts[pt]=parts[pt]||[]).push([f,r,n])}for(const pt in parts)parts[pt]=parts[pt].sort((a,b)=>b[2]-a[2]).slice(0,15);
+ return {total,raw,byRoot,byPart,parts,top:top.slice(0,40),pairs:top.length,sReplaced:sRep,rReplaced:rRep}};
 })();

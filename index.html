@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"7abaf07a+","t":"2026-11-17T01:39Z","c":"batch-0132: CHANGE line + rebuild site","b":"6383295076df","h":[{"s":"babc9b4a","t":"2026-11-17T01:39Z","c":"Chơi chung không còn treo máy vì tên bạn lặp chữ; số bóng người trên dư đồ khớp đúng người đang ở đó; việc có hạn giờ hiện đồng hồ ngay dướ…"},{"s":"92685210+","t":"2026-11-17T00:53Z","c":"Khung việc và khung sự kiện bốn cỡ, tranh lấp đầy khung, việc nhắc tên ai hiện chân dung người ấy; phẩm của món đồ nằm ngay trên viền khung…"},{"s":"6f513340","t":"2026-11-16T23:24Z","c":"Vào game mới không còn bật ngay màn lật thẻ, lật thẻ chỉ khi vào buổi tối; dư đồ nhãn giấy mới; việc dài lấn sang buổi sau; lời trong cung …"},{"s":"7a18d957","t":"2026-11-16T22:44Z","c":"review-diemtrang-fx-r1 report"},{"s":"afe2bcbc","t":"2026-11-16T22:25Z","c":"review r1: KIT 84.1a note + report"},{"s":"dea1d445+","t":"2026-11-16T21:32Z","c":"golive lag-play-2: CHANGE line + site rebuilt"},{"s":"674f3af4","t":"2026-11-16T21:21Z","c":"Chơi cùng bạn: bạn chơi chung chưa gặp mặt nay hiện tên gọi chung “Hảo hữu của ta” ở mọi nơi, không còn ẩn thành dấu hỏi."},{"s":"923567d5+","t":"2026-11-16T21:03Z","c":"Hình nhân vật: hết vệt xám ở cổ và viền tối quanh người."},{"s":"59812a63+","t":"2026-11-16T20:41Z","c":"Khung chung: khoảng cách đều nhau ở sổ tuần và thẻ thân phận; hàng sổ gọn, thẻ lật không đè chữ."},{"s":"ab12d6fc","t":"2026-11-16T20:53Z","c":"Tuyết và đom đóm mới, mượt hơn; nền tranh không còn vẽ lại mỗi khung hình."}]};
+window.CTM_BI={"s":"85611392+","t":"2026-11-17T02:34Z","c":"coop-e2e: COOP_SWAP=1 swaps the roles (iPad hosts, Fold joins)","b":"7d0be0db8750","h":[{"s":"babc9b4a","t":"2026-11-17T01:39Z","c":"Chơi chung không còn treo máy vì tên bạn lặp chữ; số bóng người trên dư đồ khớp đúng người đang ở đó; việc có hạn giờ hiện đồng hồ ngay dướ…"},{"s":"92685210+","t":"2026-11-17T00:53Z","c":"Khung việc và khung sự kiện bốn cỡ, tranh lấp đầy khung, việc nhắc tên ai hiện chân dung người ấy; phẩm của món đồ nằm ngay trên viền khung…"},{"s":"6f513340","t":"2026-11-16T23:24Z","c":"Vào game mới không còn bật ngay màn lật thẻ, lật thẻ chỉ khi vào buổi tối; dư đồ nhãn giấy mới; việc dài lấn sang buổi sau; lời trong cung …"},{"s":"7a18d957","t":"2026-11-16T22:44Z","c":"review-diemtrang-fx-r1 report"},{"s":"afe2bcbc","t":"2026-11-16T22:25Z","c":"review r1: KIT 84.1a note + report"},{"s":"dea1d445+","t":"2026-11-16T21:32Z","c":"golive lag-play-2: CHANGE line + site rebuilt"},{"s":"674f3af4","t":"2026-11-16T21:21Z","c":"Chơi cùng bạn: bạn chơi chung chưa gặp mặt nay hiện tên gọi chung “Hảo hữu của ta” ở mọi nơi, không còn ẩn thành dấu hỏi."},{"s":"923567d5+","t":"2026-11-16T21:03Z","c":"Hình nhân vật: hết vệt xám ở cổ và viền tối quanh người."},{"s":"59812a63+","t":"2026-11-16T20:41Z","c":"Khung chung: khoảng cách đều nhau ở sổ tuần và thẻ thân phận; hàng sổ gọn, thẻ lật không đè chữ."},{"s":"ab12d6fc","t":"2026-11-16T20:53Z","c":"Tuyết và đom đóm mới, mượt hơn; nền tranh không còn vẽ lại mỗi khung hình."}]};
 /* KBOOT — BOOT COVER (owner 15/11 "Khi vừa bấm vào game, có chừng ít hơn 1 giây hiện khung này"; KIT §14.1).
    Before: while the 4 MB page parsed, the browser painted the bare static markup of p1.html (HUD box, a vertical stat label list, empty
    panels, the old 11-tab bar) for ~1 s on a warm open and many seconds on a cold one, before any kit CSS/JS existed.
@@ -38154,7 +38154,7 @@ function resHTML(o,d){const tp=o.turned?byId(o.turned):null,fp=o.pick?byId(o.pic
  return chip(tp,o.turned==="me"?"Thẻ bài của ngươi được lật":`Hoàng thượng lật thẻ ${tn}`,`${why}${fin?" "+fin:""}`)}
 
 /* ---------- wiring: the week's flip (outermost wrapper; j93 piece 1 is retired while this runs) ---------- */
-let inFlip=false,stoleFrom=null;
+let inFlip=false,stoleFrom=null;(window.THIN_REG=window.THIN_REG||[]).push(["inFlip",()=>inFlip,v=>{inFlip=v}],["stoleFrom",()=>stoleFrom,v=>{stoleFrom=v}]);/* per-player state for the co-op host (jcoopthin TH.reg) */
 /* life token + the scene on screen: a new life / loaded slot / title (j93 kmReset) voids every waiting go() and closes the scene (review/flip-newlife) */
 let life=0,cur=null;
 try{if(typeof kmOnReset==="function")kmOnReset(()=>{life++;try{cur&&cur.close&&cur.close()}catch(e){}cur=null})}catch(e){}
@@ -40529,7 +40529,7 @@ function addGains(p,o,keys){if(!o||typeof o!=="object")return o;let c=null;for(c
 /* liking from consorts: affAdd (j9, every thiện cảm change); x (her or a consort) likes y (the wearer) more */
 (function(){if(typeof affAdd!=="function")return;const a0=affAdd;affAdd=function(x,y,n){try{if(n>0&&x&&y&&x!==y&&(x===S||(typeof rivals==="object"&&rivals.includes(x)))){const d=dhB(y,"gHau");if(d)n=n+fr(n,d)}}catch(e){}return a0.call(this,x,y,n)}})();
 /* LUCK (Phúc khí): lotB (j13, the one odds modifier of every rolled act, hers and NPCs'); never conception; the Quẻ tag stays the quẻ only */
-let NOLUCK=0;
+let NOLUCK=0;(window.THIN_REG=window.THIN_REG||[]).push(["NOLUCK",()=>NOLUCK,v=>{NOLUCK=v}]);/* per-player state for the co-op host (jcoopthin TH.reg) */
 (function(){if(typeof lotB!=="function")return;const l0=lotB;lotB=function(p,dom){const r=l0.apply(this,arguments);try{if(!NOLUCK&&dom!=="Con cái")return r+dhB(p,"phuc")}catch(e){}return r};
  if(typeof lotTag==="function"){const t0=lotTag;lotTag=function(){NOLUCK++;try{return t0.apply(this,arguments)}finally{NOLUCK--}}}})();
 /* conception: conceiveCh (the final chance, after every multiplier) +v points, only when a chance exists */
@@ -40739,7 +40739,7 @@ function confTick(p){const c=p.dhConf;if(!c)return;if(!c.open){if(confOpenOK(p))
  if(p.out||(p.confined||0)>0)return;const st=confState(p);if(!st.done)return;
  if(p===S){if((c.ask|0)>wk()||Q.length)return;c.ask=wk()+3;pushDil(mkP("dhatone"),"Dâng biểu sám hối")}else window.dhRestore(p)}
 /* ---------- 5. LOSS / THEFT (jlost case for that piece) ---------- */
-let FORCE=null;
+let FORCE=null;(window.THIN_REG=window.THIN_REG||[]).push(["FORCE",()=>FORCE,v=>{FORCE=v}]);/* per-player state for the co-op host (jcoopthin TH.reg) */
 (function(){if(typeof loOk!=="function")return;const o0=loOk;loOk=function(e){if(FORCE)return e===FORCE;if(isDh(e))return false;return o0.apply(this,arguments)}})();
 function dhLose(p,e){if(typeof loLose!=="function"||!p||!e)return null;let c=null;FORCE=e;const cd=p.loCd;
  const q0=Q.length;try{const cause=Object.assign({},typeof loCause==="function"?loCause(p):{cause:"mis"});if(cause.cause==="riv"&&roll(LO.keepP))cause.keep=1;c=loLose(p,cause)}finally{FORCE=null}
@@ -47130,7 +47130,8 @@ COOP.on("thin",m=>{const was=TH.lvl;TH.lvl=m&&m.lvl|0;if(TH.lvl&&!was&&host())se
 
 /* ---------- 2. per-player module state ---------- */
 const REG=[];
-TH.reg=function(name,get,set){try{get()}catch(e){return false}/* not a global of this build */if(REG.some(r=>r[0]===name))return true;
+TH.REGBAD=[];
+TH.reg=function(name,get,set){try{get()}catch(e){TH.REGBAD.push(name);return false}/* not reachable from here (e.g. inside a module's IIFE): listed in TH.REGBAD */if(REG.some(r=>r[0]===name))return true;
  let d;try{d=J(get())}catch(e){d=null}REG.push([name,get,set,d]);TH.REG.push(name);return true};
 /* core (j1.js:64): S is handled apart (its world keys are shared); tab/quiet/rid are UI / room-wide */
 TH.reg("used",()=>used,v=>{used=v});TH.reg("deck",()=>deck,v=>{deck=v});TH.reg("Q",()=>Q,v=>{Q=v});
@@ -47140,8 +47141,13 @@ TH.reg("popIdx",()=>popIdx,v=>{popIdx=v});TH.reg("popMsg",()=>popMsg,v=>{popMsg=
    reached from here: those modules register themselves when their part moves (the tripwire names them). */
 TH.reg("ACTX",()=>ACTX,v=>{ACTX=v});TH.reg("EVHOLD",()=>EVHOLD,v=>{EVHOLD=v});TH.reg("EVLAST",()=>EVLAST,v=>{EVLAST=v});
 TH.reg("wkPend",()=>wkPend,v=>{wkPend=v});TH.reg("jointScheme0",()=>jointScheme0,v=>{jointScheme0=v});TH.reg("SUCC_NPC",()=>SUCC_NPC,v=>{SUCC_NPC=v});
-TH.reg("NOLUCK",()=>NOLUCK,v=>{NOLUCK=v});TH.reg("FORCE",()=>FORCE,v=>{FORCE=v});TH.reg("EIT_PIL",()=>EIT_PIL,v=>{EIT_PIL=v});
-TH.reg("EVB_ART",()=>EVB_ART,v=>{EVB_ART=v});TH.reg("inFlip",()=>inFlip,v=>{inFlip=v});TH.reg("stoleFrom",()=>stoleFrom,v=>{stoleFrom=v});
+TH.reg("EIT_PIL",()=>EIT_PIL,v=>{EIT_PIL=v});
+TH.reg("EVB_ART",()=>EVB_ART,v=>{EVB_ART=v});
+/* state inside a module's IIFE (review/coop-thin-a-r1): that module queues [name,get,set] on window.THIN_REG from its own file (every module
+   loads BEFORE this one, so COOPW.thin does not exist yet there); the queue is drained here, and later pushes register at once.
+   Queued today: NOLUCK (jdh) FORCE (jdh2) inFlip stoleFrom (jflip). */
+{const q=Array.isArray(window.THIN_REG)?window.THIN_REG:[];for(const r of q)try{TH.reg(r[0],r[1],r[2])}catch(e){}
+ window.THIN_REG={push(){for(const r of arguments)try{TH.reg(r[0],r[1],r[2])}catch(e){}return REG.length}}}
 TH.reg("NLP",()=>NLP,v=>{NLP=v});TH.reg("NLR",()=>NLR,v=>{NLR=v});TH.reg("DEED85",()=>DEED85,v=>{DEED85=v});TH.reg("DT85",()=>DT85,v=>{DT85=v});
 TH.reg("TR_DEED",()=>TR_DEED,v=>{TR_DEED=v});TH.reg("K61PASS",()=>K61PASS,v=>{K61PASS=v});
 
@@ -47316,7 +47322,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="6383295076df";window.CTM_BUILD=BUILD;
+const BUILD="7d0be0db8750";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

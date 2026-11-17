@@ -36,6 +36,8 @@ const until=async(o,fn,arg,ms=40000)=>{try{await o.p.waitForFunction(fn,arg,{tim
  await sleep(1500);
  const both=async f=>[await H.p.evaluate(f),await G.p.evaluate(f)];
  ok((await both(()=>!!(COOPW.thin&&COOPW.X)))+''==='true,true','thin module loaded on both seats');
+ /* review r1: every name the module claims is really registered (IIFE state comes through window.THIN_REG); none failed silently */
+ {const R=await H.p.evaluate(()=>({bad:COOPW.thin.REGBAD,reg:COOPW.thin.REG}));ok(!R.bad.length&&['NOLUCK','FORCE','inFlip','stoleFrom','ACTX','K61PASS'].every(n=>R.reg.includes(n)),'registry: no silent registration failure, IIFE state (NOLUCK FORCE inFlip stoleFrom) registered',R)}
  if(!LVL){const L=await both(()=>COOPW.thin.lvl);ok(L[0]===0&&L[1]===0,'flag off: room level 0 on both',L);
   const W=await both(()=>__tx.filter(t=>t==='snap'||t==='delta'||t==='do'||t==='snapreq').length);ok(W[0]===0&&W[1]===0,'flag off: no snap/delta/do sent',W)}
  /* withSeat round trip on the host */

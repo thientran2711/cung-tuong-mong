@@ -38,7 +38,8 @@ COOP.on("thin",m=>{const was=TH.lvl;TH.lvl=m&&m.lvl|0;if(TH.lvl&&!was&&host())se
 
 /* ---------- 2. per-player module state ---------- */
 const REG=[];
-TH.reg=function(name,get,set){try{get()}catch(e){return false}/* not a global of this build */if(REG.some(r=>r[0]===name))return true;
+TH.REGBAD=[];
+TH.reg=function(name,get,set){try{get()}catch(e){TH.REGBAD.push(name);return false}/* not reachable from here (e.g. inside a module's IIFE): listed in TH.REGBAD */if(REG.some(r=>r[0]===name))return true;
  let d;try{d=J(get())}catch(e){d=null}REG.push([name,get,set,d]);TH.REG.push(name);return true};
 /* core (j1.js:64): S is handled apart (its world keys are shared); tab/quiet/rid are UI / room-wide */
 TH.reg("used",()=>used,v=>{used=v});TH.reg("deck",()=>deck,v=>{deck=v});TH.reg("Q",()=>Q,v=>{Q=v});
@@ -48,8 +49,13 @@ TH.reg("popIdx",()=>popIdx,v=>{popIdx=v});TH.reg("popMsg",()=>popMsg,v=>{popMsg=
    reached from here: those modules register themselves when their part moves (the tripwire names them). */
 TH.reg("ACTX",()=>ACTX,v=>{ACTX=v});TH.reg("EVHOLD",()=>EVHOLD,v=>{EVHOLD=v});TH.reg("EVLAST",()=>EVLAST,v=>{EVLAST=v});
 TH.reg("wkPend",()=>wkPend,v=>{wkPend=v});TH.reg("jointScheme0",()=>jointScheme0,v=>{jointScheme0=v});TH.reg("SUCC_NPC",()=>SUCC_NPC,v=>{SUCC_NPC=v});
-TH.reg("NOLUCK",()=>NOLUCK,v=>{NOLUCK=v});TH.reg("FORCE",()=>FORCE,v=>{FORCE=v});TH.reg("EIT_PIL",()=>EIT_PIL,v=>{EIT_PIL=v});
-TH.reg("EVB_ART",()=>EVB_ART,v=>{EVB_ART=v});TH.reg("inFlip",()=>inFlip,v=>{inFlip=v});TH.reg("stoleFrom",()=>stoleFrom,v=>{stoleFrom=v});
+TH.reg("EIT_PIL",()=>EIT_PIL,v=>{EIT_PIL=v});
+TH.reg("EVB_ART",()=>EVB_ART,v=>{EVB_ART=v});
+/* state inside a module's IIFE (review/coop-thin-a-r1): that module queues [name,get,set] on window.THIN_REG from its own file (every module
+   loads BEFORE this one, so COOPW.thin does not exist yet there); the queue is drained here, and later pushes register at once.
+   Queued today: NOLUCK (jdh) FORCE (jdh2) inFlip stoleFrom (jflip). */
+{const q=Array.isArray(window.THIN_REG)?window.THIN_REG:[];for(const r of q)try{TH.reg(r[0],r[1],r[2])}catch(e){}
+ window.THIN_REG={push(){for(const r of arguments)try{TH.reg(r[0],r[1],r[2])}catch(e){}return REG.length}}}
 TH.reg("NLP",()=>NLP,v=>{NLP=v});TH.reg("NLR",()=>NLR,v=>{NLR=v});TH.reg("DEED85",()=>DEED85,v=>{DEED85=v});TH.reg("DT85",()=>DT85,v=>{DT85=v});
 TH.reg("TR_DEED",()=>TR_DEED,v=>{TR_DEED=v});TH.reg("K61PASS",()=>K61PASS,v=>{K61PASS=v});
 
