@@ -387,14 +387,14 @@ BAL.dh={n0:[1,5,10],step:2,artLv:[3,4,5],
 BAL.start={
  tt:  {sac:[45,70],tai:[35,50],tamco:[20,30],duc:40,danh:33,sung:8,bac:210,suc:75,mat:1,th:5,hh:-15,art:{cam:22,thi:18,hoa:14,ky:10},vir:{dung:12,ngon:12}},
  dtq: {sac:[45,70],tai:[15,30],tamco:[10,20],duc:30,danh:23,sung:8,bac:140,suc:100,mat:0,th:0,hh:0,art:{vu:22,ky:8,y:6},vir:{}},
- muoi:{sac:[50,75],tai:[20,35],tamco:[20,30],duc:25,danh:8,sung:8,bac:380,suc:80,mat:1,th:-5,hh:0,art:{cam:12,nau:16,theu:10},vir:{cong:12}},
+ muoi:{sac:[50,75],tai:[20,35],tamco:[20,30],duc:30,danh:8,sung:8,bac:380,suc:80,mat:1,th:-5,hh:0,art:{cam:12,nau:16,theu:10},vir:{cong:12}},
  cn:  {sac:[55,80],tai:[10,25],tamco:[30,40],duc:30,danh:14,sung:28,bac:70,suc:90,mat:3,th:5,hh:0,art:{y:16,nau:16,theu:14},vir:{cong:12,ngon:10}},
  nc:  {sac:[55,80],tai:[20,35],tamco:[15,25],duc:30,danh:38,sung:8,bac:180,suc:85,mat:0,th:-15,hh:0,art:{vu:24,y:16,cam:10},vir:{}},
  bd:  {sac:[50,75],tai:[10,20],tamco:[15,25],duc:30,danh:23,sung:8,bac:150,suc:100,mat:0,th:-20,hh:0,art:{vu:22,nau:10,y:8},vir:{}},
  td:  {sac:[45,70],tai:[30,45],tamco:[30,40],duc:30,danh:14,sung:18,bac:130,suc:75,mat:2,th:0,hh:0,art:{thi:18,cam:12,theu:12},vir:{}},
  ch:  {sac:[45,70],tai:[25,40],tamco:[20,30],duc:40,danh:28,sung:8,bac:160,suc:80,mat:1,th:40,hh:-5,art:{hoa:16,cam:12,theu:10},vir:{dung:12,hanh:10}},
  thd: {sac:[45,70],tai:[40,55],tamco:[15,25],duc:45,danh:8,sung:8,bac:80,suc:75,mat:0,th:0,hh:5,art:{thi:26,ky:16,hoa:10,theu:8,nau:8},vir:{hanh:12}},
- cnv: {sac:[45,70],tai:[10,25],tamco:[15,25],duc:30,danh:2,sung:0,bac:8,suc:85,mat:0,th:0,hh:0,art:{theu:12,nau:12},vir:{cong:12}},
+ cnv: {sac:[45,70],tai:[10,25],tamco:[25,35],duc:30,danh:2,sung:0,bac:8,suc:85,mat:0,th:0,hh:0,art:{theu:12,nau:12},vir:{cong:12}},
  quan:{sac:[45,75],tai:[25,40],tamco:[15,30],duc:40,danh:12,sung:8,bac:90,suc:80,mat:0,th:0,hh:0,art:{cam:14,thi:12,theu:12,hoa:8},vir:{dung:10}},
  npcW:{quan:40,tt:8,dtq:8,muoi:10,cn:6,ch:3,thd:10,td:3,nc:1,bd:1,cnv:0},
  npc:{danh:8,bac:20,art:4,mal:6,duc:10,study:60,focus:4}  /* per NPC rank: Danh +8, Bạc +20, art points +4 to her two best courses; malice moves Tâm cơ ±(malice−40)/mal and Đức ∓(malice−40)/2, duc = Đức of her years of palace conduct (keeps NPC Đức ≈ the old mean 48);
@@ -417,7 +417,7 @@ BAL.art={tier:[0,10,25,45,70,100],nm:["Chưa thạo","Nhập môn","Thuần th�
    Sủng / Danh are NOT on the curve (they gate promotion; owner proposal first, see the report): adding "sung" to keys is the whole change. */
 /* the odds word ladder (VANPHONG; word() in j1 reads it): floors of Khó, Năm ăn năm thua, Khá chắc, Chắc, Rất chắc, Nắm chắc (below the first: Liều) */
 BAL.lad=[31,46,56,66,81,91];
-BAL.grow={keys:["sac","tai","tamco"],band:[40,60,80],mul:[1,.5,.25,.1]};
+BAL.grow={keys:["sac","tai","tamco"],band:[40,60,80],mul:[1,.5,.25,.1],back:1 /* regaining a lost value (poison, scar, illness, age) below her own peak: × back (owner note r1 #7: a loss heals, only new heights are slow) */};
 /* NIGHT CHOICES after the card flip (owner 22:45Z / 22:50Z / 23:05Z). Odds of each choice = b + Σ w[stat]×stat + art + trait fit + Emperor mood
    (window.nfOdds in jnf reads these through oSteal(a,mode) / oKeep(p)). No khắc, no Sức, no Đức is paid: only gain / loss (cost 0).
    feign = Tranh sủng: favour pulls him (Sủng), safer, small loss, small extra prize. road = Chặn ngự giá: beauty + art on his path, bolder:
@@ -433,8 +433,8 @@ BAL.grow={keys:["sac","tai","tamco"],band:[40,60,80],mul:[1,.5,.25,.1]};
    Tranh sủng ≈ 66 % / Chặn ngự giá ≈ 25 %; b 14 → 36 % / 60 %; b 12 chosen (≈ half and half). Chặn ngự giá is best for most nights when her best art is his
    favoured one, for few when it is the disfavoured one. */
 BAL.steal.cost={feign:{duc:0},road:{suc:0}};
-BAL.steal.m={feign:{b:34,w:{sung:.35,sac:.05},art:.5,win:{},lose:{sung:-3,duc:-1},rel:10,hh:0,ghen:15},
-    road:{b:12,w:{sac:.35,sung:.05},art:1.5,win:{sung:6,danh:2},lose:{sung:-5,danh:-2},rel:25,hh:4,ghen:30}};
+BAL.steal.m={feign:{b:22,w:{sung:.4,sac:.05},art:.5,win:{sung:2},lose:{sung:-4,duc:-1},rel:10,hh:0,ghen:15},
+    road:{b:12,w:{sac:.3,sung:.05},art:1.25,win:{sung:6,danh:3},lose:{sung:-5,danh:-2},rel:12,hh:3,ghen:20}};
 BAL.steal.art={fav:1,dis:.75,neu:0};
 BAL.steal.keep={base:35,sung:.3,sac:.1,art:1,rung:1,gain:2,oan:1.5,npcP:.85};/* names agreed with night-final (jnf nfOdds "keep"): odds = base + Sủng×sung + Sắc×sac + best art×art + mood; gain = Sủng when nobody took her night; oan = × of the robbed hit; npcP = chance a flipped NPC presses it, costs nothing (night-final value) */
 BAL.steal.ea={mat:5,r0:5,rMat:4,disc:35};

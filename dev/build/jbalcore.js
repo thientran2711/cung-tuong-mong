@@ -58,13 +58,14 @@ function crsMigrate(p){if(!p||p.crsV)return;const f=(lv,pt)=>{if(!lv||!pt)return
 (function(){const r0=rstats;rstats=function(v,rank){try{if(v&&v.sac==null&&!v.org){const rk=rank==null?(v.queen?7:v.rank):rank;origSet(v,origPickNpc(),{rank:rk,malice:v.malice})}}catch(e){console.error("origSet npc",e)}return r0.apply(this,arguments)}})();
 /* ---- growth curve: Sắc / Tài / Tâm cơ (BAL.grow), her and NPCs alike ---- */
 function growMul(v){const G=BAL.grow;let i=0;for(const b of G.band)if(v>=b)i++;return G.mul[Math.min(i,G.mul.length-1)]}
-function growScale(p,o){if(!o||typeof o!=="object"||!p)return o;let c=null;
- for(const k of BAL.grow.keys){const v=o[k];if(!(v>0))continue;let cur=p[k]||0,left=v,got=0;
-  for(let i=0;i<v;i++){const m=growMul(cur+got);got+=m}  /* each point of gain at the mul of the value it lands on */
+function growScale(p,o){if(!o||typeof o!=="object"||!p)return o;let c=null;const pk=p.pk=p.pk||{};
+ for(const k of BAL.grow.keys){const v=o[k];if(!(v>0))continue;let cur=p[k]||0,left=v,got=0;const top=Math.max(pk[k]||0,cur);
+  for(let i=0;i<v;i++){const m=cur+got<top?BAL.grow.back:growMul(cur+got);got+=m}  /* each point of gain at the mul of the value it lands on; below her own peak (a loss being regained) at grow.back */
   const n=Math.floor(got)+(Math.random()<got-Math.floor(got)?1:0);if(n!==v){c=c||Object.assign({},o);c[k]=n}}
  return c||o}
-(function(){const a0=apply;apply=function(o){try{if(S&&!S.dead&&!window.__noGrow)o=growScale(S,o)}catch(e){}return a0.apply(this,[o].concat([].slice.call(arguments,1)))}})();
-(function(){const a0=ap;ap=function(p,o){try{if(p&&p!==S&&!window.__noGrow)o=growScale(p,o)}catch(e){}return a0.apply(this,arguments.length>2?[p,o].concat([].slice.call(arguments,2)):[p,o])}})();
+function growPeak(p){if(!p)return;const pk=p.pk=p.pk||{};for(const k of BAL.grow.keys)if((p[k]||0)>(pk[k]||0))pk[k]=p[k]||0}
+(function(){const a0=apply;apply=function(o){try{growPeak(S);if(S&&!S.dead&&!window.__noGrow)o=growScale(S,o)}catch(e){}return a0.apply(this,[o].concat([].slice.call(arguments,1)))}})();
+(function(){const a0=ap;ap=function(p,o){try{growPeak(p);if(p&&p!==S&&!window.__noGrow)o=growScale(p,o)}catch(e){}return a0.apply(this,arguments.length>2?[p,o].concat([].slice.call(arguments,2)):[p,o])}})();
 /* ---- the Emperor's month art (owner 23:05Z) ---- */
 function empArtMonth(){if(!S||S.dead||!S.emp)return"";const E=S.emp;if(E.ea&&E.ea.m===S.turn)return"";
  const W=ARTS.map(a=>{let w=1;try{if((["cam","ky","thi","hoa"].includes(a.k)&&has("trongtai"))||(a.k==="vu"&&has("mesac")))w=2}catch(e){}return [a.k,w]});
@@ -87,6 +88,10 @@ function stBestArt(p){const ea=empArt();let b=null;for(const a of ARTS){const v=
   if(v>0&&(!b||v>b.v||(v===b.v&&pr>b.pr)))b={k:a.k,v,l:((p.arts||{})[a.k])||0,pr}}return b}
 function stealArtB(p,mode){const M=mode==="keep"?BAL.steal.keep:(BAL.steal.m[mode]||{}),b=stBestArt(p);if(!b)return 0;const ea=empArt(),A=BAL.steal.art;
  const f=ea?(b.k===ea.f?A.fav:b.k===ea.d?-A.dis:A.neu):A.neu;return Math.round(BAL.art.odds[b.l]*f*(M.art==null?1:M.art))}
+/* the odds a person SEES (owner note r1 #6): without the month-art part when she does not know his month art (eaKnows); the roll uses the true odds */
+function stealArtN(p,mode){const M=mode==="keep"?BAL.steal.keep:(BAL.steal.m[mode]||{}),b=stBestArt(p);if(!b)return 0;return Math.round(BAL.art.odds[b.l]*BAL.steal.art.neu*(M.art==null?1:M.art))}
+function stealShown(a,mode){const t=mode==="keep"?oKeep(a):oSteal(a,mode==="road"?"road":"feign");if(!empArt()||eaKnows(a))return t;
+ const m=mode==="keep"?"keep":mode==="road"?"road":"feign";return Math.max(5,Math.min(95,t-stealArtB(a,m)+stealArtN(a,m)))}
 function stealBase(a,mode){const M=BAL.steal.m[mode];let o=M.b;for(const k in M.w){const v=k==="sac"?effSac(a):(a[k]||0);o+=v*M.w[k]}return o+stealArtB(a,mode)}
 function oKeep(p){const K=BAL.steal.keep;return odA(p,K.base+(p.sung||0)*K.sung+effSac(p)*K.sac+stealArtB(p,"keep")+stealFit(p)+mm())}
 /* a failed Tranh sủng / Chặn ngự giá: the loss of that choice (BAL.steal.m[mode].lose); returns the line */
