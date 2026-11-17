@@ -124,7 +124,7 @@ function sgTruyen(box,env){const R=sgRM();const C=kg82Canvas(box,.9,420),{g,W,H}
 const SG_TEMP=[["tham bạc",-.12],["nhát gan",.1],["thật thà",.04],["khôn lỏi",-.04]];
 const SG_TR={tham:0,nhat:1,trung:2,lanh:3,chuyen:3};
 function sgTemper(m){if(m&&qv(SG_TR,m)!=null)return SG_TEMP[qv(SG_TR,m)];const s=String(m&&m.name||"");let h=7;for(const c of s)h=(h*31+c.charCodeAt(0))%9973;return SG_TEMP[h%SG_TEMP.length]}
-function sgLoyW(l){return l>=70?"rất trung":l>=50?"trung":l>=30?"vừa phải":"lỏng"}
+function sgLoyW(l){return l>=BAL.loy.trust?"rất trung":l>=BAL.loy.mid?"trung":l>=BAL.loy.out?"vừa phải":"lỏng"}
 function sgThr(v){const m=v&&v.maid||{};const loy=m.loyal==null?50:m.loyal;return cl(.3+loy/220+sgTemper(m)[1]+(Math.random()-.5)*.1,.18,.86)}
 const SG_GIA=["Ít ỏi","Nhẹ tay","Vừa phải","Hậu","Rất hậu"];
 function sgGiaW(x){return SG_GIA[Math.min(4,Math.floor(x*5))]}
@@ -193,10 +193,10 @@ function sgThoiCo(box,env){const R=sgRM();const C=kg82Canvas(box,.6,300),{g,W,H}
 
 /* ---------- odds ladder: a game moves the odds by ONE step of Liều / Khó / Năm ăn năm thua / Khá chắc / Chắc / Rất chắc / Nắm chắc ----------
    raw 7–10 = up one step, 4–6 = unchanged, 0–3 = down one step. The number keeps its place inside the new step (word() boundaries). */
-const SG_LO=[5,31,46,56,66,81,91],SG_HI=[30,45,55,65,80,90,95];
-function sgLv(o){return o>=91?6:o>=81?5:o>=66?4:o>=56?3:o>=46?2:o>=31?1:0}
+const SG_LO=[BAL.odds.lo,...BAL.odds.cut],SG_HI=[...BAL.odds.cut.map(c=>c-1),BAL.odds.hi];
+function sgLv(o){return oddsLv(o)}
 function sgShift(o,d){if(!d)return o;const l=sgLv(o),l2=cl(l+d,0,6);if(l2===l)return o;const f=cl((o-SG_LO[l])/Math.max(1,SG_HI[l]-SG_LO[l]),0,1);return Math.round(SG_LO[l2]+f*(SG_HI[l2]-SG_LO[l2]))}
-function sgStep(raw){return raw>=7?1:raw<=3?-1:0}
+function sgStep(raw){return raw>=BAL.cut.sgStep.up?1:raw<=BAL.cut.sgStep.down?-1:0}
 
 /* ---------- the act table ---------- */
 const SG_HUD=t=>[["score","Phần","0/10"],["round","Hồi","1/3"],["time","Còn",t]];
@@ -244,7 +244,7 @@ function sgJob(p){if(!p||typeof S==="undefined"||!S)return null;if(!p.j)p.j="act
   else{J.pay=sgPopPay(p.pi,BAL.actK);J.run=m=>{SG.mod=m&&m.step?m:null;let r="";try{r=runAct(S,v,k)||""}finally{SG.mod=null}if(r)log(`${a.n}: ${r}`);render()}}
   return J}
  if(p.j==="over"){const G=SG.K.over,b=40+S.mat*6;
-  return{gk:"over",G,t:G.t,v:{},name:"",art:"Nghe lén",ask:G.ask(),cost:"không tốn bạc",p0:()=>od(b),line:w=>`Nghe lén câu chuyện · ${w} · biết 1 điều thật về nàng · chứng cứ +1 · tốn: không tốn bạc`,pay:sgPopPay(p.pi,1),
+  return{gk:"over",G,t:G.t,v:{},name:"",art:"Nghe lén",ask:G.ask(),cost:"không tốn bạc",p0:()=>od(b),line:w=>`Nghe lén câu chuyện · ${w} · biết 1 điều thật về nàng · chứng cứ ${balSg(BAL.eff.j78.evTop)} · tốn: không tốn bạc`,pay:sgPopPay(p.pi,1),
    run:m=>{SG.mod=m&&m.step?m:null;let r="";try{r=overhear(S.place)||""}finally{SG.mod=null}if(r)log(`Nghe lén câu chuyện: ${r}`);render()}}}
  if(p.j==="serv"){const s=servById(p.sid),G=SG.K.serv;if(!s)return null;const o=ownerOf(s),c=sgServCost(s);if(!o||o===S)return null;
   return{gk:"serv",G,t:G.t,v:{maid:s},name:s.name,art:"Mua chuộc",ask:`Mua chuộc ${s.name}, người hầu của ${NM(o)}: tự mặc cả, hay giao cho người làm?`,cost:`${c} bạc`,p0:()=>sgServOdds(s),

@@ -117,7 +117,7 @@ const AS_DO={
   asOut(s,"hh");try{(v.staff=v.staff||[]).push(s);s.out=0}catch(e){}return asSee(m,v)?`${s.name}, người hầu của ${NM(m)}, tố chủ trước Hoàng hậu; ${NM(m)} bị xét tội. `:""},
  chat(s,m,o,ok){const x=o.t;s.af=s.af||{};s.af[x.sid]=cl((s.af[x.sid]||0)+(ok?SRVA.chat.af:SRVA.chat.afL),-100,100);if(ok){x.af=x.af||{};x.af[s.sid]=cl((x.af[s.sid]||0)+SRVA.chat.af/2,-100,100)}
   /* the friend tell (was j10 servMonth roll): what she says of her palace's schemes this week reaches her friend's master */
-  if(ok&&(m.schemes||0)>(m.schLast||0)&&(s.af[x.sid]||0)>=20){const o2=ownerOf(x);if(o2&&o2!==m&&evA(o2,m,1)&&o2===S)return `${x.name} nghe bạn là ${s.name} kể chuyện cung ${NM(m)}: chứng cứ +1. `}return""},
+  if(ok&&(m.schemes||0)>(m.schLast||0)&&(s.af[x.sid]||0)>=20){const o2=ownerOf(x);if(o2&&o2!==m&&evA(o2,m,BAL.eff.j10.evServMonth_2)&&o2===S)return `${x.name} nghe bạn là ${s.name} kể chuyện cung ${NM(m)}: chứng cứ ${balSg(BAL.eff.j10.evServMonth_2)}. `}/* one number with j10 servMonth (the old path) */return""},
  gift(s,m,o){const x=o.t;s.af=s.af||{};s.af[x.sid]=cl((s.af[x.sid]||0)+SRVA.gift.af/2,-100,100);x.af=x.af||{};x.af[s.sid]=cl((x.af[s.sid]||0)+SRVA.gift.af,-100,100);return""},
  ask(s,m,o){const L=liveRivals(true).filter(x=>x!==m);if(L.length){s.intel=(s.intel||[]).concat([L[R(L.length)].id]).slice(-3)}return""},
  frame(s,m,o,ok){const x=o.t;s.af=s.af||{};x.af=x.af||{};if(ok){x.loyal=cl((x.loyal||0)+SRVA.frame.loy,0,100);x.trouble=wk();x.af[s.sid]=cl((x.af[s.sid]||0)+SRVA.frame.af,-100,100);

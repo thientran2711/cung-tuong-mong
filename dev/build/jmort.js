@@ -43,7 +43,7 @@ function nm(p){return p===S.emp?"Hoàng thượng":p===S.thO?"Thái hậu":p.nam
 function assign(p,K,oldSave){if(!p||typeof p!=="object"||p.tho>0||p.nb)return;const a=ageOf(p);if(!(a>=0))return;const g=grpOf(p,K);
  let fl=g==="me"?M.life.floorMe:g==="emp"?M.life.floorEmp:p.lyF&&M.ly?M.ly.floor:0;if(oldSave&&(g==="me"||g==="emp"))fl=Math.max(fl,M.oldFloor);
  p.tho=mortRoll(g,a,fl);p.thoM=1+R(12);if((p.tho-a)*12+(p.thoM-(S.month||1))<M.life.minMo)p.tho=a+1;p.thoO=Math.random()*100<M.sudden?0:M.omen[0]+R(M.omen[1]-M.omen[0]+1);
- if(p===S&&M.life.show){const w=p.tho<40?"yểu mệnh":p.tho<60?"trung thọ":p.tho<75?"thượng thọ":"hạc thọ";
+ if(p===S&&M.life.show){const w=p.tho<BAL.cut.tho[0]?"yểu mệnh":p.tho<BAL.cut.tho[1]?"trung thọ":p.tho<BAL.cut.tho[2]?"thượng thọ":"hạc thọ";
   log(`Thầy tướng xem tay ngươi, phán: số ${w}${M.life.show>=2?`, thọ chừng ${p.tho} tuổi`:""}.`)}}
 function worldPeople(){const L=[S.emp];if(!S.thDead&&S.thO)L.push(S.thO);(rivals||[]).forEach(v=>{if(v.alive&&!v.coop)L.push(v);(v.kids||[]).forEach(k=>k.alive&&L.push(k));(v.staff||[]).forEach(s=>!s.coop&&L.push(s))});
  const C=S.court||{};for(const k in C)L.push(C[k]);(S.men||[]).forEach(m=>m.alive!==false&&L.push(m));

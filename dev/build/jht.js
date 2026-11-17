@@ -222,13 +222,13 @@ function kinOrd(k){try{kvStamp()}catch(e){}const L=allKids().map(([x])=>x).filte
 function kinRaise(k,v){const bm=k.bm&&k.bm.n?`; mẹ đẻ: ${k.bm.n}`:"";
  if(!v.alive)return `nhũ mẫu và cung nhân trông nom (mẹ đã mất)${bm}`;if(v.out)return `nhũ mẫu và cung nhân trông nom (mẹ ở lãnh cung)${bm}`;
  return `${bm?"nuôi dưới gối ":""}${momLab(v)} · ${palName(palaceOf(v))}${bm}`}
-function kinHealth(k){return k.hp<35?"đang ốm nặng, thái y ra vào":k.hp<60?"hay đau ốm":"khỏe mạnh"}
+function kinHealth(k){return k.hp<BAL.cut.kidHp[0]?"đang ốm nặng, thái y ra vào":k.hp<BAL.cut.kidHp[1]?"hay đau ốm":"khỏe mạnh"}
 function kinCard(x){const k=x.k,v=x.v;const o=k.sex==="m"?kvOrder():[];const i=o.findIndex(z=>z.k===k);const met=kidMet(k);
  const title=k.heir?"Thái tử":k.sex==="m"?"Hoàng tử":"Công chúa";
  const L=[`Mẹ: <b>${momLab(v)}</b>${momNote(v)}`,tcLine(k,false),hien(k),thuong(k)];
  /* the right pane = what the whole palace knows (owner 11/15): mother (face by the stranger rule), age, birth order, title, honours, illness, who raises */
  const R=[["Tuổi",`${k.age} tuổi`],["Thứ bậc",`${k.sex==="m"?"hoàng tử":"công chúa"} thứ ${kinOrd(k)} của Hoàng thượng`],["Tước vị",title+(i>=0?` · kế vị thứ ${i+1}`:"")],
-  ["Nuôi dạy",kinRaise(k,v)],["Sức khỏe",kinHealth(k),k.hp<35?"r":"n"]];
+  ["Nuôi dạy",kinRaise(k,v)],["Sức khỏe",kinHealth(k),k.hp<BAL.cut.kidHp[0]?"r":"n"]];
  if(k.age>=6)R.push(["Học",`Thượng thư phòng · ${TUT[k.tut||0]}${k.vt?" · có thầy võ":""}`]);
  try{const lt=ktLast(k);if(lt)R.push(["Khảo hạch",lt+(k.lt&&k.lt.r==="ex"?" · được Hoàng thượng khen":""),k.lt&&k.lt.r==="ex"?"g":k.lt&&k.lt.r==="poor"?"r":"n"])}catch(e){}
  if(k.sex==="f"){try{h54Init(k);R.push(["Hôn sự",h54State(k)])}catch(e){}}else if(k.age>=BAL.age.matchShow||k.pB||k.pW)R.push(["Hôn sự",pkState(k)]);
