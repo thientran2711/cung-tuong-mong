@@ -5,14 +5,15 @@
    usage: node dev/test/road-rare.js <url> [roads comma list] */
 const {chromium}=require('playwright');const [,,URL,ONLY]=process.argv;
 (async()=>{const b=await chromium.launch();const errs=[];let fail=0;const chk=(n,c,x)=>{console.log((c?'PASS ':'FAIL ')+n+(c?'':' '+JSON.stringify(x).slice(0,600)));if(!c)fail++};
- const p=await (await b.newContext({viewport:{width:755,height:1000},serviceWorkers:'block'})).newPage();p.setDefaultTimeout(0);
+ let p;/* boot(): a fresh context = a fresh world (the world and its children carry over from life to life in one storage) */
+ const boot=async()=>{if(p)await p.context().close();p=await (await b.newContext({viewport:{width:755,height:1000},serviceWorkers:'block'})).newPage();p.setDefaultTimeout(0);
  p.on('pageerror',e=>errs.push(e.message.slice(0,300)));await p.goto(URL,{waitUntil:'domcontentloaded',timeout:0});
- await p.waitForFunction(()=>typeof start==='function'&&typeof ROAD14==='object'&&window.RARE97,null,{timeout:0});await p.waitForTimeout(1500);
+ await p.waitForFunction(()=>typeof start==='function'&&typeof ROAD14==='object'&&window.RARE97,null,{timeout:0});await p.waitForTimeout(1500);};await boot();
  const roads=(await p.evaluate(()=>RD97L.map(d=>ARC67[d.a]&&ARC67[d.a].road).filter(Boolean))).filter(r=>!ONLY||ONLY.split(',').includes(r));
- for(const rd of roads){const R=await p.evaluate(async rd=>{document.getElementById('title').hidden=true;quiet=true;const k=rd.split('_')[0];
+ for(const rd of roads){let R;for(let t=0;t<8;t++){R=await p.evaluate(async rd=>{document.getElementById('title').hidden=true;quiet=true;const k=rd.split('_')[0];
    const others=Object.keys(ARC67).filter(id=>ARC67[id].o===k&&id!==rd);localStorage.setItem('ctm-arcs',JSON.stringify({[k]:others}));window.__forceOrigin=k;start();
    await new Promise(r=>{let n=0;const t=()=>{if((typeof S!=='undefined'&&S&&S.origin&&S.st&&S.st.f14)||++n>150)r();else setTimeout(t,100)};t()});
-   const out={rd:S.st.f14.rd,road:S.st.f14.road};const id11=ROAD14[rd][BAL.road.last],d=RARE97.defs[id11],E=ARC67[id11].E.r97;
+   const out={rd:S.st.f14.rd,road:S.st.f14.road,gate:arcOk67(ARC67[rd])};/* gate: the premise can be rolled in this life (thd_hoc needs a pupil, road-b3-fix2) */const id11=ROAD14[rd][BAL.road.last],d=RARE97.defs[id11],E=ARC67[id11].E.r97;
    out.e97=!!E&&E.k===1&&E.tag==="✦ "+d.tag&&E.t===d.t;
    /* (b) a path option in a .5–.10 chapter */
    let hit=null;for(let n=BAL.road.first;n<BAL.road.last&&!hit;n++){const id=ROAD14[rd][n];for(const[bk,bb]of Object.entries(ARC67[id].B)){const O=typeof bb.o==='function'?[]:bb.o;
@@ -26,7 +27,7 @@ const {chromium}=require('playwright');const [,,URL,ONLY]=process.argv;
    end67(A,"r97");out.tag=A.tag;out.end=A.end;out.r97=(S.r97||[]).map(x=>x.a+':'+x.ti).join('|');out.fin=S.st.ch.fin||'';out.rare=d.tag;
    /* (d) mid-chapter recast told */
    const B=newThread67(ROAD14[rd][BAL.road.first+1],"s");const v=rv67(B,"v");if(v){B.i=2;v.alive=false;const ok=castRv67(B,"v");out.rq=ok?JSON.stringify(B.rq||null):'nocast';v.alive=true}else out.rq='no v';
-   quiet=false;return out},rd);
+   quiet=false;return out},rd);if(R.rd===rd||R.gate)break;console.log(`note ${rd}: premise not rollable in this world (ok() false), a fresh world`);await boot()}
   chk(`${rd}: life on the road`,R.rd===rd,R);chk(`${rd}: road threads open (cast)`,!R.nocast,R);if(R.nocast)continue;chk(`${rd}: E.r97 = rare ending`,R.e97,R);
   if(R.hit){chk(`${rd}: path choice in a road chapter counted (${R.hit.id} «${R.hit.n}»)`,R.iok&&/"p":1/.test(R.q),R);chk(`${rd}: .11 starts from the road tally`,R.q11===R.q,R)}
   else console.log(`note ${rd}: path names only .11 options (j97 counts them on the .11 itself)`);
