@@ -26,8 +26,17 @@ if(typeof flip!=="function"||typeof endTurn!=="function"||typeof nightScene!=="f
 const day=()=>typeof wk==="function"?wk():(S.turn*3+(S.tuan||0));
 const B4=()=>typeof B4L==="number"?B4L:2;
 const B=()=>BAL.steal;
+/* ⛔ CO-OP PARKED — THE ONE GATE (Foreman D #8, 17/11, fix F1 of review-night-final-r1; owner 17/11 02:05Z: no co-op patching, co-op goes to
+   Foreman B's coop-thin rebuild). The new night flow runs SOLO only: while a co-op room is on, nfOn() is false and EVERY jnf entry point falls
+   back to the live path — flip (jfe.js start-of-tối flip), nightScene, endTurn (live commit), visRoll, the click guard, step, render rerun,
+   resolveTonight / rivalNight wrappers, the relay (send / ask / act listener), stealPass (jsteal's own), the two Tranh sủng / Chặn ngự giá acts
+   (deck j2, person menu RVGRP, NPC BANDS, ACT.ok) and jflip's pending seal. A life that joins or leaves a room mid-week switches at once:
+   a tablet still waiting (S.nfP) is turned by jfe at tối; a co-op flip already made (S.nfF / nightWhy) is never turned again by jnf.
+   coop-thin E: enable the co-op night by making nfParked() return false (this function) and deleting jfe.js from assemble.py. */
+function nfParked(){try{return !!(window.COOPW&&COOPW.on)}catch(e){return false}}
+window.nfParked=nfParked;
 /* the palace night only (servant route j42 and the home route jkc keep their own week: the flip there is unchanged) */
-function nfOn(){try{return !!(S&&!S.dead&&!(typeof isSrv==="function"&&isSrv())&&!(typeof isKc==="function"&&isKc()))}catch(e){return false}}
+function nfOn(){try{return !!(S&&!S.dead&&!nfParked()&&!(typeof isSrv==="function"&&isSrv())&&!(typeof isKc==="function"&&isKc()))}catch(e){return false}}
 window.nfOn=nfOn;
 const CO=()=>{try{return window.COOPW&&COOPW.on&&typeof COOP==="object"?COOPW:null}catch(e){return null}};
 const host=()=>{if(typeof window.worldOn==="function")return !!window.worldOn();const c=CO();return !c||c.seat==="a"};
@@ -44,9 +53,14 @@ let REAL=0,IN=0,SW=0,CUR=null,RR=null;
    her Hành sự deck (j2 deal: the two cards are deleted there), the person menu group "Hại nặng" (j15 RVGRP), the NPC harm bands (j24 BANDS:
    NPC agents pick their acts there), the weekly social act (j28 SOC.steal, already off in jsteal). ACT.steal / ACT.road stay defined (old
    callers) but can never be offered: ok() = false. */
-try{for(const g of (typeof RVGRP!=="undefined"?RVGRP:[]))for(const k of ["steal","road"]){const i=g[1].indexOf(k);if(i>=0)g[1].splice(i,1)}}catch(e){}
-try{for(const g of (typeof BANDS!=="undefined"?BANDS:[]))for(const k of ["steal","road"]){const i=(g[2]||[]).indexOf(k);if(i>=0)g[2].splice(i,1)}}catch(e){}
-try{for(const k of ["steal","road"])if(typeof ACT==="object"&&ACT[k])ACT[k].ok=()=>false}catch(e){}
+/* co-op parked (nfParked): the live lists come back while a room is on — each removed key is put back at its own place (nfActs, on render) */
+const ACTS=[];
+try{for(const g of (typeof RVGRP!=="undefined"?RVGRP:[]))for(const k of ["steal","road"]){const i=g[1].indexOf(k);if(i>=0)ACTS.push({g,f:1,k,i})}}catch(e){}
+try{for(const g of (typeof BANDS!=="undefined"?BANDS:[]))for(const k of ["steal","road"]){const i=(g[2]||[]).indexOf(k);if(i>=0)ACTS.push({g,f:2,k,i})}}catch(e){}
+function nfActs(){const live=nfParked();for(const z of ACTS.slice().reverse()){const L=z.g[z.f];if(!L)continue;const i=L.indexOf(z.k);if(!live&&i>=0)L.splice(i,1)}
+ if(live)for(const z of ACTS){const L=z.g[z.f];if(L&&!L.includes(z.k))L.splice(Math.min(z.i,L.length),0,z.k)}}
+nfActs();
+try{for(const k of ["steal","road"])if(typeof ACT==="object"&&ACT[k]){const ok0=ACT[k].ok;ACT[k].ok=function(){return nfParked()&&typeof ok0==="function"?ok0.apply(this,arguments):false}}}catch(e){}
 try{if(typeof SOC==="object"&&SOC.steal)SOC.steal.ok=()=>false}catch(e){}
 
 /* ---------- ONE odds function (owner 22:45Z (4) + 22:50Z: Giữ chân also rolls) ---------- */
@@ -125,7 +139,7 @@ function stealPassNF(t,opt){opt=opt||{};const live=opt.live!==false;const out0={
  if(guest()&&t!==S)return out0;
  const L=npcAttackers(t).map(x=>{const v=entOf(x.w);tryMark(v);return{a:v,mode:x.mode,o:nfOdds(v,x.mode)}}).filter(x=>x.a);
  return nfResolve(t,L,live,"pass")}
-if(typeof window.stealPass==="function")window.stealPass=stealPassNF;
+if(typeof window.stealPass==="function"){const sp0=window.stealPass;window.stealPass=function(){return nfParked()?sp0.apply(this,arguments):stealPassNF.apply(this,arguments)}}   /* co-op parked: jsteal's own pass (live) */
 window.nfResolve=nfResolve;window.nfSeedPick=seedPick;
 
 /* HER win: the summons, then the night at once (the day ends after it, jnight) */
@@ -249,7 +263,7 @@ function rerun(){if(RR!==day()||!S||S.dead||Q.length||S.mg||(S.buoi||0)<B4()||(g
  RR=null;
  setTimeout(()=>{try{if(!S||S.dead||Q.length||S.mg||(S.buoi||0)<B4())return;
   if(CO()){if(COOPW.pend)return;COOPW.allowN=true;try{nextBuoi()}finally{COOPW.allowN=false}}else nextBuoi()}catch(e){console.error(e)}},300)}
-const rd0=render;render=function(){const r=rd0.apply(this,arguments);try{rerun()}catch(e){}return r};
+const rd0=render;render=function(){try{nfActs()}catch(e){}const r=rd0.apply(this,arguments);try{if(nfOn())rerun()}catch(e){}return r};
 function hold(){S.buoi=B4();RR=day();try{if(used>=4)used=3}catch(e){}/* no j6 auto "Sang ngày mới" while the choice / a dialog is open */try{render()}catch(e){}showSoon()}
 function herNight(){S.buoi=B4();if(CO())RR=day();try{if(used>=4)used=3}catch(e){}/* no auto "Sang ngày mới" (j6 used>=4) between her night dialogs; jnight spends the day after nightFx */try{if(S.ntk&&S.ntk.w===day()&&S.ntk.who==="me")S.ntk=null}catch(e){}
  IN=1;try{nightScene()}finally{IN=0}try{render()}catch(e){}showSoon()}
@@ -265,10 +279,10 @@ const et0=endTurn;endTurn=function(){if(!S||S.dead||Q.length||S.mg||!nfOn())retu
  return et0.apply(this,arguments)};
 /* each seat commits only its own night; an NPC's night is the host's (co-op) */
 const rt0=resolveTonight;resolveTonight=function(){const t=S&&S.tonight;
- if(CO()&&t&&t!=="me"&&(t.coop||guest())){S.tonight=null;return ""}return rt0.apply(this,arguments)};
+ if(nfOn()&&CO()&&t&&t!=="me"&&(t.coop||guest())){S.tonight=null;return ""}return rt0.apply(this,arguments)};
 /* the record line names how he got there: a thief's card was never turned */
 if(typeof rivalNight==="function"){const rn0=rivalNight;rivalNight=function(v){let r=rn0.apply(this,arguments);
- try{const w=S.nightWhy;if(typeof r==="string"&&v&&w&&w.wk===day()&&w.flip0!=null&&w.flip0!==v.id)r=r.replace(`thẻ bài của ${v.name} được lật`,`Hoàng thượng được mời sang cung ${v.name}`)}catch(e){}return r}}
+ try{const w=S.nightWhy;if(nfOn()&&typeof r==="string"&&v&&w&&w.wk===day()&&w.flip0!=null&&w.flip0!==v.id)r=r.replace(`thẻ bài của ${v.name} được lật`,`Hoàng thượng được mời sang cung ${v.name}`)}catch(e){}return r}}
 
 /* ---------- 4. co-op relay (host-authoritative) ---------- */
 const NK="ctm-nf";let LAST=null;
@@ -278,11 +292,11 @@ const mapId=id=>id==="me"?{k:"p",v:myPid()}:(friend()&&id===friend().id)?{k:"p",
 const unId=x=>!x?null:x.k==="p"?(x.v===myPid()?"me":x.v):x.v;
 function nwOut(){const w=S.nightWhy;if(!w||w.wk!==day())return null;return{pick:w.pick!=null?mapId(w.pick):null,flip0:w.flip0!=null?mapId(w.flip0):null,cause:w.cause,day:w.day,mood:w.mood,
  rows:(w.rows||[]).map(z=>Object.assign({},z,{id:mapId(z.id),name:z.id==="me"?S.name:z.name}))}}
-function send(ph){const c=CO();if(!c||!S)return;try{const x=X();const m={t:"act",k:NK,mode:host()?"h":"g",ph:ph||null,d:day(),week:COOP.state.week,hold:enc(S.tonight),
+function send(ph){const c=CO();if(!c||!S||!nfOn())return;try{const x=X();const m={t:"act",k:NK,mode:host()?"h":"g",ph:ph||null,d:day(),week:COOP.state.week,hold:enc(S.tonight),
   ntk:S.ntk&&S.ntk.w===day()?mapId(S.ntk.who):null,fin:host()&&S.nfFin===day()?1:0,open:host()&&x&&x.st!=="wait"?1:0,nw:host()?nwOut():null,
   ch:ph==="ch"&&x?{v:x.me}:null,gres:host()&&S.nfG&&S.nfG.d===day()?S.nfG.L:null,gdef:host()&&S.nfG&&S.nfG.d===day()?S.nfG.def:null,
   id:NK+Date.now().toString(36)+Math.random().toString(36).slice(2,6)};if(host())LAST=m;COOP.send(m)}catch(e){console.error(e)}}
-function ask(){const c=CO();if(!c)return;try{COOP.send({t:"act",k:NK,mode:"ask",d:day(),week:COOP.state.week,id:NK+"a"+Date.now().toString(36)})}catch(e){}}
+function ask(){const c=CO();if(!c||!nfOn())return;try{COOP.send({t:"act",k:NK,mode:"ask",d:day(),week:COOP.state.week,id:NK+"a"+Date.now().toString(36)})}catch(e){}}
 /* the guest applies the host's word: the holder, the flip (scene + her own choice), the result */
 function apply(m){if(!S||S.dead||m.d!==day())return;
  const t=dec(m.hold);S.tonight=t;
@@ -315,14 +329,14 @@ function apply(m){if(!S||S.dead||m.d!==day())return;
   if(w0&&!Q.length&&(S.buoi||0)>=B4()){try{COOPW.allowN=true;nextBuoi()}catch(e){console.error(e)}finally{COOPW.allowN=false}}}
  try{if(!window.__bot&&Q.length)showModal();render()}catch(e){}}
 try{if(typeof COOP==="object"&&COOP.on){
- COOP.on("act",m=>{try{const c=CO();if(!m||m.k!==NK||!c||m.from===c.seat)return;
+ COOP.on("act",m=>{try{const c=CO();if(!m||m.k!==NK||!c||m.from===c.seat||!nfOn())return;
   if(m.mode==="ask"){if(host()&&LAST&&LAST.d===day())send(LAST.ph);return}
   if(m.mode==="h"&&guest())apply(m);
   else if(m.mode==="g"&&host()&&S&&m.d===day()){
    if(m.ph==="ch"){const x=X();if(x&&x.st==="open"&&x.fr===undefined){x.fr=m.ch?VALID(m.ch.v):null;step()}return}
    if(S.nfFin===day())return;
    apply(m);send()}}catch(e){console.error(e)}});
- const re=()=>setTimeout(()=>{try{if(!CO())return;if(host()&&LAST&&LAST.d===day())send(LAST.ph);else if(guest()&&S&&(S.buoi||0)>=B4()&&S.nfFin!==day())ask()}catch(e){}},400);
+ const re=()=>setTimeout(()=>{try{if(!CO()||!nfOn())return;if(host()&&LAST&&LAST.d===day())send(LAST.ph);else if(guest()&&S&&(S.buoi||0)>=B4()&&S.nfFin!==day())ask()}catch(e){}},400);
  COOP.on("room",re);COOP.on("peer",on=>{if(on)re()})}}catch(e){}
 window.nfSend=()=>send();/* test hook: relay the holder now */
 window.nfStep=step;
