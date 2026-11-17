@@ -924,7 +924,8 @@
 | MOOD-MEM #2 (opus): memory 2 layers (b) on 8e2ac171 + step0 test runs | review/mood-mem | C-AG | session_01UV1Szigr35QvLkVSd2Vb9L | RUNNING | 17/11 19:17Z |
 | batch s36a-1 LIVE 579e8976 (main d4a850ce → 579e8976; ROLLBACK d4a850ce): kit-figure-mood-r2 + kit-fx-register-r1 | review/batch-s32a | MAIN s36 | session_01UV1SzgWoEmnjTTEv7UgBNP | LIVE | 17/11 19:19Z |
 | FEELINGS-18 #2 (opus): owner 20:15–20:45Z rulings + finish | review/feelings-18 | C-AG | session_01UV1Szhqo1wUz89vE6kRkkU | RUNNING | 17/11 19:34Z |
-| CONSORT-TY REPAINT resume (32 consorts, 572 keys missing; owner 17/11 19:40Z; transparent-bg repaint of old designs; sonnet W2c opened by lead #7) | review/fig-cutout-clean | C | session_011xDdVPTZMoPrGxgDoi5gZL | RUNNING | 17/11 19:40Z |
+| CONSORT-TY REPAINT resume (32 consorts, 572 keys missing; owner 17/11 19:40Z; transparent-bg repaint of old designs; sonnet W2c opened by lead #7) | review/fig-cutout-clean | C | session_011xDdVPTZMoPrGxgDoi5gZL | ROLLED OVER 17/11 20:19Z -> W2d session_011xDdVSFebEJbrw8z3ZeoVU | 17/11 19:40Z |
 | MAID->CONSORT TIER SAMPLE sheet (maid-like outfits at consort tiers; sample only, nothing live; sonnet W10 opened by lead #7) | review/fig-cutout-clean | C | session_011xDdVQzeuta29DT66RfH38 | RUNNING | 17/11 19:40Z |
 | RECOLOUR sample c01 a18 t1-t8 (owner 20:10Z: same outfits, 8 colours per person; sample only, nothing live; sonnet W11 opened by lead #7) | review/fig-cutout-clean | C | session_011xDdVPf1CXpFmoFrRYmPBm | RUNNING | 17/11 20:10Z |
 | REVIEW mood-mem r2 (memory layers) 1b4f4967 + MOODKNOW landing merge (opus BIG) | review/mood-mem-r1, review/mood-mem-r2 | C-AG | session_01UV1SzhYFatoThxPEGCiErj | RUNNING | 17/11 20:14Z |
+| CONSORT-TY REPAINT W2d (successor of W2c; resume at consort-c17-ty8-a36, 236 keys left: a36 76 + a51 160; clean forehead + hand-pose diversity rules; sonnet opened by lead #7) | review/fig-cutout-clean | C | session_011xDdVSFebEJbrw8z3ZeoVU | RUNNING | 17/11 20:20Z |
