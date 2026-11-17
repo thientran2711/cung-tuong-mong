@@ -183,8 +183,8 @@ function ktEnvy(v,t){if(!t||t===v||!S)return 1;const ks=(t===S?S.kids:(t.kids||[
 function ktLast(k){const t=k.lt;if(!t)return "";const RW={ex:"xuất sắc",ok:"khá",poor:"kém",skip:"ở nhà"};return `${t.n} năm ${t.y}: ${t.top?"đứng đầu, ":""}${RW[t.r]}`}
 function ktBtns(k){if(!k.alive)return[];ktSync(k);const B=[],t2=whyTime(2),t1=whyTime(1),young=k.age<3?"con còn quá nhỏ (cần 3 tuổi)":"";
  const gv=ktTeachG(k,S,"tv"),gd=ktTeachG(k,S,"td");
- B.push(pbtn(`data-kt53="tv" data-kn="${k.name}"`,"Dạy chữ",`Chắc chắn · tốn: 2 khắc, Sức -5 · thành: Văn ${k.name} +${ktG(gv)} (mỗi mùa dạy một lần)`,t2||young||(k.mtv===ktSea()?"mùa này đã dạy chữ":S.suc<5?"Sức dưới 5":"")));
- B.push(pbtn(`data-kt53="td" data-kn="${k.name}"`,"Dạy lễ nghi",`Chắc chắn · tốn: 2 khắc, Sức -5 · thành: Đức ${k.name} +${ktG(gd)} (mỗi mùa dạy một lần)`,t2||young||(k.mtd===ktSea()?"mùa này đã dạy lễ nghi":S.suc<5?"Sức dưới 5":"")));
+ B.push(pbtn(`data-kt53="tv" data-kn="${k.name}"`,"Dạy chữ",`Chắc chắn · tốn: 2 khắc, Sức -5 · thành: Văn ${k.name} +${ktG(gv)} (mỗi mùa dạy một lần)`,t2||young||(k.mtv===ktSea()?"mùa này đã dạy chữ":S.suc<BAL.sucNeed.kid?"Sức dưới "+BAL.sucNeed.kid:"")));
+ B.push(pbtn(`data-kt53="td" data-kn="${k.name}"`,"Dạy lễ nghi",`Chắc chắn · tốn: 2 khắc, Sức -5 · thành: Đức ${k.name} +${ktG(gd)} (mỗi mùa dạy một lần)`,t2||young||(k.mtd===ktSea()?"mùa này đã dạy lễ nghi":S.suc<BAL.sucNeed.kid?"Sức dưới "+BAL.sucNeed.kid:"")));
  const small=k.age<6?"con chưa đủ 6 tuổi vào Thượng thư phòng":"";
  if(small){B.push(pbtn(`data-kt53="none"`,"Mời thầy riêng",`Chắc chắn · tốn: Bạc -${KT.fee[1]} đến -${KT.fee[3]} mỗi tháng · thành: Văn, Đức, Võ tăng nhanh hơn học chung`,small));return B}
  for(let t=0;t<4;t++){const r=ktRates(Object.assign({},k,{tut:t,age:Math.max(6,k.age)}),true);const cur=k.tut===t&&(t<3||!k.fav);
@@ -199,7 +199,7 @@ function ktBtns(k){if(!k.alive)return[];ktSync(k);const B=[],t2=whyTime(2),t1=wh
   :pbtn(`data-kt53="vo" data-t="1" data-kn="${k.name}"`,"Mời thầy cưỡi ngựa bắn cung",`Chắc chắn · tốn: 1 khắc, Bạc -${KT.feeVo} mỗi tháng · thành: Võ khoảng +${ktYear(k,"tw",vr)}/năm${v0?"":" (không thầy: con gái không học võ)"}`,small||t1||(S.bac<KT.feeVo*2?`thiếu bạc (cần ${KT.feeVo*2})`:"")));
  return B}
 function ktAct(a,name,t){const k=S&&S.kids.find(x=>x.name===name&&x.alive);if(!k||S.dead||Q.length)return;ktSync(k);const b=rsnap();let title="Việc học của con",ok="sure";
- if(a==="tv"||a==="td"){if(!can(2)||k.age<3||S.suc<5||k[a==="tv"?"mtv":"mtd"]===ktSea())return;spend(2);apply({suc:-5});const g=ktTeach(k,S,a);title=a==="tv"?"Dạy chữ":"Dạy lễ nghi";
+ if(a==="tv"||a==="td"){if(!can(2)||k.age<3||S.suc<BAL.sucNeed.kid||k[a==="tv"?"mtv":"mtd"]===ktSea())return;spend(2);apply({suc:-5});const g=ktTeach(k,S,a);title=a==="tv"?"Dạy chữ":"Dạy lễ nghi";
   log(`Tự tay ${a==="tv"?"dạy":"dạy lễ nghi cho"} ${k.name}${a==="tv"?" học chữ":""}: ${a==="tv"?"Văn":"Đức"} con +${ktG(g)}. ${roll(25)?ktReveal(k,"Dạy con, ngươi thấy"):""}`)}
  else if(a==="tut"){t=+t;if(k.age<6||!can(1)||(t&&S.bac<KT.fee[t]*2)||(k.tut===t&&(t<3||!k.fav)))return;if(t)spend(1);k.tut=t;k.fav=0;title=t?`Mời ${TUT[t]}`:"Cho con học chung";
   log(t?`Mời ${TUTD[t]} dạy ${k.name}: học phí Bạc ${KT.fee[t]} mỗi tháng, trả cùng bổng lộc.`:`${k.name} về học lớp chung của Thượng thư phòng, không tốn học phí.`)}

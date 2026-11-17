@@ -19,10 +19,12 @@ const MEAS=`(()=>{const M=document.getElementById('modal');let d;const vis=e=>e&
   if(F.length){let head=1e9,feet=-1e9,full=true;F.forEach(im=>{const r=R(im);const b=(window.__KITFB||{})[im.getAttribute('src')];const v=b&&b.v||{t:0,b:1};head=Math.min(head,r.top+v.t*r.height);const f=r.top+v.b*r.height;feet=Math.max(feet,f);if(f>C.bottom+1)full=false});
    const caps=[...col.querySelectorAll('.kpsn')].filter(vis).map(c=>R(c).top);const top=caps.length?Math.min(head,...caps):head;
    Object.assign(out,{gapTop:Math.round(top-lt),gapBot:Math.round(lb-Math.min(feet,C.bottom)),full,n:F.length,figH:Math.round(Math.min(feet,C.bottom)-head)})}}
+ out.subj=!!(d.querySelector('.kpsubj,.kszfig')||d.classList.contains('kszf')||d.classList.contains('kdper'));
+ const OW=b=>{let n=0;b.querySelectorAll('.krv,.klead,.kan,.kah').forEach(e=>{const w=(e.textContent||'').trim().split(/\s+/).filter(Boolean).length;if(w<4)return;const r=document.createRange();r.selectNodeContents(e);const T=new Set([...r.getClientRects()].filter(q=>q.width>0).map(q=>Math.round(q.top/3)));if(T.size>=w-1)n++});return n};
  out.opts=[...d.querySelectorAll('button.ka.kart')].filter(b=>b.offsetParent).map(b=>{const a=b.querySelector(':scope > .kaart'),t=b.querySelector(':scope > .kabody');if(!a||!t)return null;
   const A=R(a),T=R(t),B=R(b),cs=getComputedStyle(b);if(getComputedStyle(a).display==='none'||A.width>112)return null;const cb=B.bottom-(parseFloat(cs.paddingBottom)||0)-(parseFloat(cs.borderBottomWidth)||0);
   const sq=Math.abs(A.width-A.height)<2;const lo=Math.round(((window.KIT_OPT_SQ||{}).min||.45)*(b.closest('.kpanec,.pc>.pcr')&&A.width<=72?72:84));
-  return{t:(t.querySelector('.kan')||t).textContent.trim().slice(0,28),pic:Math.round(A.width)+'x'+Math.round(A.height),form:sq?'sq':'tall',text:Math.round(T.height),empty:Math.max(0,Math.round(cb-T.bottom)),atMin:sq&&A.width<=lo+1}}).filter(Boolean);
+  return{t:(t.querySelector('.kan')||t).textContent.trim().slice(0,28),pic:Math.round(A.width)+'x'+Math.round(A.height),form:sq?'sq':'tall',text:Math.round(T.height),empty:Math.max(0,Math.round(cb-T.bottom)),atMin:sq&&A.width<=lo+1,ch:Math.round(B.height),ow:OW(b)}}).filter(Boolean);
  return out})()`;
 (async()=>{const px=process.env.HTTPS_PROXY;const b=await chromium.launch(px?{proxy:{server:px,bypass:'127.0.0.1,localhost'}}:{});const ALL=[];let bad=0;
  for(const sz of (SIZES||'755x1000,1180x820').split(',')){const [W,H]=sz.split('x').map(Number);
@@ -59,7 +61,7 @@ const MEAS=`(()=>{const M=document.getElementById('modal');let d;const vis=e=>e&
    await p.evaluate(()=>Promise.all([...document.querySelectorAll('#modal img')].map(i=>i.complete?0:new Promise(r=>{i.onload=i.onerror=r;setTimeout(r,15000)}))));await sleep(1800);
    const r=await p.evaluate(MEAS);r.k=k;if(process.env.DBG){const g=await p.evaluate(()=>{const a=kitFrameGaps();const c=document.querySelector('#mb .kpsubj.kes');const h=c&&c.clientHeight;const cls=document.querySelector('#modal .dlg').className;kitDpFit();return{a,h,cls,b:kitFrameGaps(),h2:c&&c.clientHeight,mb:document.getElementById('mb').clientHeight}});console.log('DBG',k,JSON.stringify(g))}
    const v=[];if(r.gapTop!=null&&r.full){if(Math.abs(r.gapTop-r.gapBot)>2)v.push(`gaps ${r.gapTop}/${r.gapBot} unequal`);if(Math.min(r.gapTop,r.gapBot)<14)v.push(`gap < 14`)}
-   (r.opts||[]).forEach(o=>{if(o.empty>2&&!o.atMin)v.push(`opt "${o.t}" empty ${o.empty}px (${o.form} ${o.pic}, text ${o.text})`)});r.viol=v;bad+=v.length;rows.push(r);
+   (r.opts||[]).forEach(o=>{if(o.empty>2&&!o.atMin&&!r.subj)v.push(`opt "${o.t}" empty ${o.empty}px (${o.form} ${o.pic}, text ${o.text})`)});(r.opts||[]).forEach(o=>{if(o.ow)v.push(`ONE WORD PER LINE in card "${o.t}" (${o.ow} cells)`)});if(r.subj&&(r.opts||[]).length>1){const hs=new Set((r.opts||[]).map(o=>o.ch));if(hs.size>1&&Math.max(...hs)-Math.min(...hs)>1)v.push('PERSON DIALOG cards not one size: '+[...hs].join(' / '));if((r.opts||[]).some(o=>o.form==='sq'))v.push('PERSON DIALOG card picture is square (must be the tall rectangle)')}{const pz=new Set((r.opts||[]).map(o=>o.pic));if(pz.size>1)v.push('UNEQUAL option pictures: '+[...pz].join(' / '));r.unequal=pz.size>1?1:0}r.viol=v;bad+=v.length;rows.push(r);
    if(SHOTS==='all'||(SHOTS||'').split(',').includes(k))await p.screenshot({path:`${OUT}/${TAG}-${k}-${sz}.jpg`,type:'jpeg',quality:70});
    await p.evaluate(()=>{Q.length=0;const md=document.getElementById('modal');md.hidden=true;try{kitCoachOff();kitTipOff()}catch(e){}});}
   ALL.push({sz,rows,errs});await ctx.close()}
