@@ -114,6 +114,20 @@ DONE on review/one-core-dup:
 - F3 move: 326 typed effect amounts in 42 modules → BAL.eff (dev/build/jbaleff.js, after jbal.js); proof dev/measure/one-core-eff-same.js (AST identical with the values put back). j10 / j29 amounts left for review/staff-root (same files).
 - coregates G1: the "frozen list grew" check now compares only the kinds the live list counts (new kinds amt/sw/sc/k/ladder are a new count, not growth).
 
+- AGE BANDS (owner OD:L567 18–25/26–35/36–50/51+): band4 (j35), kcBand (jkc), pidBand (j66) typed 26/36/51 → BAL.ageBand [26,36,51] + ageBandIx(). Behaviour change: none (same cuts, NaN → 0 / pidBand null kept).
+
+## 4. STATE @ 648461b5 (review/one-core-dup) — SẴN SÀNG KIỂM for this part
+Gates: one-core-guard PASS 0 fails, no --allow-grow (baseline frozen with new kinds, then shrunk); coregates PASS (G1 · rules-one-source · kit-conform · coop-one-world hook); coop-e2e 60/60 (LIVE Worker); coop-one-world PASS; quickcheck: see §5 line; one-core-dup-same PASS (4399 live functions identical, 12 dead fallbacks listed); one-core-eff-same PASS (326 refs, 42 modules, AST identical). Solo untouched (no rule value changed); old save loads (quickcheck). No UI touched → KIT FIRST n/a.
+Commits: 83ac823b guard kinds+detectors · bb72e2e6 dead fallbacks · 16d4925f dead duplicate functions + baseline · (F3) BAL.eff · 648461b5 odds + age bands + coregates.
+
+## 5. HANDOVER (worker rolls over at ~29 % context; Foreman B opens the successor)
+START_CTX ≈4 %. Successor base = review/one-core-dup 648461b5. Left to do (owner-visible wording changes → owner ruling or live-wins pick per place; list in §3b):
+1. Concept table §3b section A disagreements: thiện cảm word ladder (j21 affW −60/−30/−10/10/30/60 with banned words vs VANPHONG:69 jhc quyW/jts tsQuy — VANPHONG wins: route j21/j24/jk2b through quyW), Sủng word ladder 5 cut sets (no BAL key; ask owner or one BAL.sungW), Đức tiers (ducWord 80/60/40/20 vs Thang Đức page 80/60/50/20), NPC Tâm cơ tiers 30 vs 35 / 15 vs 12 (j40/j43/j51/j70), maid Lòng thresholds (~35 copies; BAL.mood.maidHi / mort.maidLoy partial), Thái hậu drift twice (j3:109 + j85:145 — a double effect: check which is meant), age bands that DIFFER (j3 eunBand 28/40/52, j28 ageBandOf 3 bands, jimg MEBANDS nearest — art; tell Foreman C), night tone 6/3 ×3 vs BAL.nightEnd, child age bands 12 vs 11/16, mama age 45 meaning (retire vs looks old).
+2. Same-value copies with no BAL key (section B, ~30): move each to one BAL key (mechanical, no behaviour change), e.g. hire price 20 ×7 (staff → ask staff-root), AGE_MIN 18.
+3. j67.js:1779 finale tiers 3/1/−1 typed → BAL.road.finTier (worker 3 / F2 arcs scope; told in brief? add it).
+4. OWNED ELSEWHERE: servants per rank + fillStaff + j10/j29 amounts → review/staff-root; seats BAL.seat vs OD:1538 and harem CAPC 16 (j27:53) vs OD:1545 cap 20 → Foreman D review/residence-seats.
+5. Texts that type the moved F3 amounts ("nàng quý ngươi +10" j9) → print BAL.eff (legacy t.stat kind, frozen list).
+
 ### 3b. CONCEPT TABLE (whole-game scan, 119 ladders + 29 shadow pairs + BAL-copy tables; agent pass, file:line on main 4719d424)
 OPEN DISAGREEMENTS for Foreman B (two live copies with different numbers; unifying changes what the player sees — each needs the owner ruling named or a "live wins" pick per place):
 # ONE CORE duplicate-rule hunt: concepts with more than one number source
