@@ -51,3 +51,9 @@ START_CTX low; no rollover needed. Finished.
 ## Round 7: headdress per owner ~20:35Z (t6-t8 grand crowns back; t4/t5 richer pins)
 - Only the headdress changed on t4-t8 (pose, hem, outfit kept via the round-6 creation as ref 2): t4 CqzAfrJEEy/jUBXlgkLD0 small gold crown-comb + 2-3 pins short dangles; t5 gOt8lRoSXO/w4vhO4g7EI larger gold comb + phoenix pin; t6 nVLxnkpYQD/8a6NmuEIrU, t7 SymISIPUb8/EbnzFr6uuO, t8 aFAZaTofSh/aFA2E1gfSh with the round-1 grand crowns (refs 3z5q1rVREY / yiEfqMlPW9 / s78BvYEl8e). t1-t3 unchanged. 5 gens + 5 cuts (ladder total 22 gens, 20 cuts).
 - Overwrote my own m09_t4..t8_ladder.png + m09_ladder_check.jpg.
+
+## Round 9: owner "same style/ref" order via ROOT-10 (t1-t3 different cuts, t3 pins > t1, t4/t5 redrawn in the t1-t3 style, t6-t8 same style)
+- Style ref on every gen = the m09 base-look Magnific creation KLM2ApKkqp (= source of img/hd/fig-maid-m09-a18.webp; no old-file upload), ladder creations as design refs. Prompt prefix "soft watercolour-like rendering ... exactly matching reference 1".
+- Gens / cuts: t1 8a6NkupIrU/LwoBnclswO (wrap-front, narrow collar, 1 shawl, 1 flower + 1 pin), t2 CqzGgjbEEy/cpglF5s0eP (chest-wrapped ruqun + open-front straight-collar jacket, 2 pearl pins), t3 kspDN3h16B/ovN9LwI829 (wide crossed lapel + cape-sleeve, gold comb + pins), t4 xSXdZvIjfW/s78oYpNl8e (first try lJI8Aokgv9 had too few pins), t5 ovN91Lo829/79avMtRJAL, t6 1lep3aor4r/kspDZpj16B, t7 Bh94xIvoQR/3z5btKaREY, t8 yiECp67PW9/Xm4PxNeBfo. t4 outer robe to floor, no jutting pins, every hand grips its item or clothing.
+- Face/hair "near-3D, no contour line" order (ROOT-10 20:45Z) arrived after these: test on t1/t2 only (ovN9lIy829 cut P3uEoP842C, p8OJro2ehw cut N2HFmiP6D9) = m09_t1_face3d_test.png, m09_t2_face3d_test.png; slightly softer, less contour than the ladder files. Remaining 6 NOT redone pending ROOT-10 go.
+- Ladder total so far: 41 gens, 40 cuts (this round 11 gens + 10 cuts).
