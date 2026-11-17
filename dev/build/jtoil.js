@@ -725,11 +725,11 @@ function toilColText(c){c=toilColFix(c);return ["mat","ma","son","may"].map(k=>t
    vụng = lip colour smeared past the lip line + uneven smudged blush, brows NEVER drawn or touched; mặt mộc = no layer */
 const TOIL_MKS={
  /* bl = blush strength, blr = blush size (x the eye distance), sk = skin-light lift, hl = soft luminous cheekbone (round, never a streak), dabs = white powder dabs, gloss = natural sheen INSIDE the lip. Every skin-side layer is clipped to the skin mask (toilMkDraw). */
- vung:{lip:.5,eye:.4,eyeH:.5,brow:0,wing:0,low:0,vung:1,bl:.3,blr:.7,sk:.06,dabs:6},
- vua:{lip:.3,eye:.24,eyeH:.4,brow:.36,wing:0,low:0,bl:.12,blr:.78,sk:.08},
- dep:{lip:.74,eye:.85,eyeH:.74,brow:.6,wing:.24,low:.32,bl:.42,blr:1,sk:.14},
- tuyet:{lip:.66,eye:.8,eyeH:.78,brow:.7,wing:.28,low:.3,shim:.42,gloss:.7,bl:.27,blr:.95,sk:.36,hl:1},
- diem:{lip:.86,eye:.95,eyeH:.9,brow:.78,wing:.32,low:.55,shim:.45,gloss:.2,bl:.55,blr:1.1,sk:.3}};
+ vung:{lip:.5,eye:.4,eyeH:.5,brow:0,wing:0,low:0,vung:1,bl:.3,blr:.75,sk:.06,dabs:6},
+ vua:{lip:.3,eye:.24,eyeH:.4,brow:.36,wing:0,low:0,bl:.12,blr:.8,sk:.08},
+ dep:{lip:.66,eye:.68,eyeH:.68,brow:.55,wing:.2,low:.25,bl:.34,blr:1,sk:.12},
+ tuyet:{lip:.74,eye:.92,eyeH:.82,brow:.72,wing:.32,low:.36,shim:.5,gloss:.65,bl:.5,blr:1.05,sk:.36,hl:1},
+ diem:{lip:.86,eye:.95,eyeH:.9,brow:.78,wing:.32,low:.55,shim:.45,gloss:.2,bl:.62,blr:1.3,sk:.3}};
 const MK_FIT={g:{},ld:{},face(f){const m=/^(?:por|fig)-([a-z]+-[a-z]*\d+)-/.exec(String(f||""));return m?m[1]:null},
  get(f){const g=this.face(f);if(!g)return null;const t=this.g[g];if(t)return t[f]||null;this.load(g);return null},
  load(g){if(this.ld[g])return;this.ld[g]=1;try{fetch("img/mk-fit/"+g+".json").then(r=>r.ok?r.json():null).then(j=>{if(j){MK_FIT.g[g]=j;try{if(typeof S!=="undefined"&&S&&!Q.length&&!TOIL.st)render();else if(TOIL.st&&TOIL.prev&&TOIL.prevUI)TOIL.prevUI()}catch(e){}}}).catch(()=>{})}catch(e){}}};
@@ -748,6 +748,18 @@ function toilMkPaint(file,v,look,col,e,key){const im=new Image();im.crossOrigin=
 /* soft-edged fill (canvas shadow: works where ctx.filter does not) */
 function toilSoft(g,path,blur,alpha,K){const OFF=4000;g.save();g.shadowColor=`rgba(0,0,0,${alpha})`;g.shadowBlur=Math.max(.5,blur*K);g.shadowOffsetX=OFF*K;g.translate(-OFF,0);g.beginPath();path(g);g.fillStyle="#000";g.fill("evenodd");g.restore()}
 function toilSmooth(g,P){/* closed smooth curve through the midpoints */const n=P.length;const m=i=>[(P[i%n][0]+P[(i+1)%n][0])/2,(P[i%n][1]+P[(i+1)%n][1])/2];const s=m(n-1);g.moveTo(s[0],s[1]);for(let i=0;i<n;i++){const q=m(i);g.quadraticCurveTo(P[i][0],P[i][1],q[0],q[1])}g.closePath()}
+/* per-face geometry from the mesh points (px): eye span, eye-to-mouth, the face outline oval, the cheek ovals (feathered, swept up toward the temple), fitted into the outline.
+   The mesh has no jaw points: the outline oval is built from the eye span + eye-to-mouth (width 1.5x the outer-eye span, down to the chin ~0.85 u under the mouth). */
+function toilMkGeom(P,T){const av=a=>a.reduce((q,p)=>[q[0]+p[0]/a.length,q[1]+p[1]/a.length],[0,0]);const ca=av(P.slice(20,30)),cb=av(P.slice(30,40)),lc=av(P.slice(0,12));
+ const u=Math.hypot(ca[0]-cb[0],ca[1]-cb[1])||20,mid=[(ca[0]+cb[0])/2,(ca[1]+cb[1])/2],ang=Math.atan2(cb[1]-ca[1],cb[0]-ca[0]),eyeY=mid[1],mY=lc[1];
+ const ex=P.slice(20,40).map(p=>p[0]),span=Math.max(...ex)-Math.min(...ex),eyeBot=Math.max(...P.slice(20,40).map(p=>p[1]));
+ const ocx=(Math.max(...ex)+Math.min(...ex))/2,ol={cx:ocx,cy:eyeY+(mY-eyeY)*.55+u*.05,rx:span*.78,ry:(mY-eyeY)+u*1.25,ang};
+ const inOl=(x,y)=>{const dx=x-ol.cx,dy=y-ol.cy,c=Math.cos(-ang),s=Math.sin(-ang),X=dx*c-dy*s,Y=dx*s+dy*c;return(X*X)/(ol.rx*ol.rx)+(Y*Y)/(ol.ry*ol.ry)<=1};
+ const bs=(T.blr||1)*u;const cheeks=[ca,cb].map(e=>{const sg=e[0]>=mid[0]?1:-1,cx=e[0]+(e[0]-mid[0])*.04+sg*bs*.05,cy=e[1]+(mY-eyeY)*.56-bs*.03;let k=1,rx=bs*.4,ry=bs*.27;const rot=ang-sg*.3;
+  const fits=k=>{for(let t=0;t<8;t++){const a=t*Math.PI/4,x=Math.cos(a)*rx*k,y=Math.sin(a)*ry*k,c=Math.cos(rot),s=Math.sin(rot),px=cx+x*c-y*s,py=cy+x*s+y*c;if(!inOl(px,py)||py<eyeBot+u*.07)return false}return true};
+  while(k>.15&&!fits(k))k-=.05;if(!fits(k))k=.01;/* a cheek that cannot fit (far side of a strongly turned face) gets no blush */return{x:cx,y:cy,rx:rx*k,ry:ry*k,rot,fit:k}});
+ return{u,mid,ang,eyeY,mY,cheeks,ol,inOl,eyeBot,ca,cb,lc}}
+window.toilMkGeom=toilMkGeom;
 function toilMkDraw(im,v,look,col,box){const W=im.naturalWidth,H=im.naturalHeight,T=TOIL_MKS[look];
  const bx=box[0]/100*W,by=box[1]/100*H,bw=box[2]/100*W,bh=box[3]/100*H;const K=Math.max(1,Math.min(3,160/bw));/* small figure faces are worked at ≥160 px */
  const cw=Math.max(2,Math.round(bw*K)),chh=Math.max(2,Math.round(bh*K));const mk=()=>{const c=document.createElement("canvas");c.width=cw;c.height=chh;const g=c.getContext("2d");g.setTransform(cw/bw,0,0,chh/bh,-bx*cw/bw,-by*chh/bh);return[c,g]};
@@ -757,7 +769,7 @@ function toilMkDraw(im,v,look,col,box){const W=im.naturalWidth,H=im.naturalHeigh
  const R=toilRnd((col.seed|0)+11),VU=!!T.vung;const lc=P.slice(0,12).reduce((a,p)=>[a[0]+p[0]/12,a[1]+p[1]/12],[0,0]);
  /* vụng: the lip colour goes past the lip line (bigger, shifted outline), patchy */
  const lipO=VU?(()=>{const sx=1.1+.07*R(),sy=1.32+.14*R(),dx=(R()-.5)*u*.1,dy=(R()-.15)*u*.05;return P.slice(0,12).map(([x,y])=>[lc[0]+(x-lc[0])*sx+dx,lc[1]+(y-lc[1])*sy+dy])})():P.slice(0,12);
- const [cl,gl]=mk();toilSoft(gl,g=>{toilSmooth(g,lipO);toilSmooth(g,P.slice(12,20))},u*(VU?.06:.05),1,K);
+ const [cl,gl]=mk();toilSoft(gl,g=>{toilSmooth(g,lipO);toilSmooth(g,P.slice(12,20))},u*(VU?.075:.052+.04*T.lip),1,K);/* owner 17/11 13:25Z: no visible lip outline; the darker the lip, the softer the edge */
  /* eyelids: soft layers from the lash line up toward the brow, stronger at the lash line, a small wing at the outer corner; the eye itself stays clear */
  const [ce,ge]=mk();const lerp=(a,b,t)=>[a[0]+(b[0]-a[0])*t,a[1]+(b[1]-a[1])*t];
 const eh=VU?[.6+.55*R(),.3+.35*R()]:[1,1];let en=0;
@@ -776,19 +788,21 @@ const eh=VU?[.6+.55*R(),.3+.35*R()]:[1,1];let en=0;
  /* gloss = a soft sheen on the LOWER lip, inside the lip shape (it is multiplied by the lip mask below): never a white bar that reads as teeth */
  const [cgl,ggl]=mk();if(T.gloss){const ib=Math.max(...P.slice(12,20).map(q=>q[1])),ob=Math.max(...P.slice(0,12).map(q=>q[1])),gy=ib+(ob-ib)*.42;
   toilSoft(ggl,g=>{g.ellipse(lc[0],gy,u*.085,u*.013,0,0,7)},u*.018,T.gloss,K)}
- /* SKIN pass (owner 17/11 13:08Z): skin light, blush, luminous cheekbones, powder dabs. Painted in real colour, then clipped to the SKIN MASK in the loop
-    (a colour close to her own cheek skin, never the eyes / iris, hair or background) */
- const [cs,gs]=mk();const eyeAv=(c)=>c;const ang=Math.atan2(cb[1]-ca[1],cb[0]-ca[0]),mid=[(ca[0]+cb[0])/2,(ca[1]+cb[1])/2],eyeY=mid[1],mY=lc[1];
- const cheeks=[ca,cb].map(e=>{const k=(e[0]-mid[0])*.02,yy=e[1]+(mY-eyeY)*.56;return[e[0]+k,yy]});
+ /* SKIN pass (owner 17/11 13:08Z, 13:28Z): skin light, blush, luminous cheekbones, powder patches. Painted in real colour, clipped in the loop to
+    FACE OUTLINE (an oval built from THIS face's own mesh: eye span, eye-to-mouth) ∩ SKIN colour − EYE polygons. Blush size comes from toilMkGeom (scaled to the face, shrunk until it fits the outline). */
+ const [cs,gs]=mk();const G=toilMkGeom(P,T);const {ang,mid,eyeY,mY,cheeks,ol}=G;
  const mc=toilColRGB("ma",col.ma);const sp=(x,y)=>[(x-bx)*cw/bw,(y-by)*chh/bh];
- const blob=(g,cx,cy,rx,ry,rot,rgb,al)=>{g.save();g.translate(cx,cy);g.rotate(rot);g.scale(rx,ry);const gr=g.createRadialGradient(0,0,0,0,0,1);gr.addColorStop(0,`rgba(${rgb[0]},${rgb[1]},${rgb[2]},${al})`);gr.addColorStop(.3,`rgba(${rgb[0]},${rgb[1]},${rgb[2]},${al*.78})`);gr.addColorStop(.65,`rgba(${rgb[0]},${rgb[1]},${rgb[2]},${al*.28})`);gr.addColorStop(1,`rgba(${rgb[0]},${rgb[1]},${rgb[2]},0)`);g.fillStyle=gr;g.beginPath();g.arc(0,0,1,0,7);g.fill();g.restore()};
- const cmx=(mid[0]),cmy=eyeY+(mY-eyeY)*.5;
- if(T.sk)blob(gs,cmx,cmy,u*1.22,u*1.6,0,[255,249,240],T.sk);
- if(T.hl)cheeks.forEach(c=>blob(gs,c[0],c[1]-u*.2,u*.17,u*.14,0,[255,244,226],.22));/* tuyệt: two ROUND soft lights on the cheekbones (a wide blur, never a horizontal streak) */
- cheeks.forEach((c,i)=>{const j=VU?[.8+.6*R(),.7+.6*R(),(R()-.5)*u*.1,(R()-.5)*u*.08,.65+.6*R()]:[1,1,0,0,1];const bs=T.blr*u;
-  blob(gs,c[0]+j[2],c[1]+j[3],bs*.34*j[0],bs*.22*j[1],ang+(VU?(R()-.5)*.9:0),mc,Math.min(.9,T.bl*j[4]));
-  if(VU){/* a few small blotches next to the cheek: uneven, small */for(let k=0;k<2;k++)blob(gs,c[0]+(R()-.5)*u*.45,c[1]+(R()-.5)*u*.3,u*(.07+.06*R()),u*(.05+.05*R()),R()*3,mc,.26+.2*R())}});
- if(T.dabs)cheeks.forEach((c,i)=>{for(let k=0;k<Math.ceil(T.dabs/2);k++)blob(gs,c[0]+(R()-.5)*u*.62,c[1]+(R()-.5)*u*.4,u*(.035+.045*R()),u*(.03+.035*R()),R()*3,[255,251,247],.38+.3*R())});
+ /* soft gaussian-like fall-off (a feathered oval, never a disc with an edge) */
+ const blob=(g,cx,cy,rx,ry,rot,rgb,al,flat)=>{g.save();g.translate(cx,cy);g.rotate(rot);g.scale(rx,ry);const gr=g.createRadialGradient(0,0,0,0,0,1);const st=flat?[[0,1],[.55,.92],[.8,.45],[1,0]]:[[0,1],[.2,.9],[.4,.66],[.6,.36],[.8,.12],[1,0]];st.forEach(([t,f])=>gr.addColorStop(t,`rgba(${rgb[0]},${rgb[1]},${rgb[2]},${(al*f).toFixed(3)})`));g.fillStyle=gr;g.beginPath();g.arc(0,0,1,0,7);g.fill();g.restore()};
+ const cmx=mid[0],cmy=eyeY+(mY-eyeY)*.5;
+ if(T.sk)blob(gs,cmx,cmy,u*1.22,u*1.6,ang,[255,249,240],T.sk);
+ if(T.hl)cheeks.forEach(c=>blob(gs,c.x,c.y-u*.16,u*.2,u*.15,0,[255,244,226],.2));/* tuyệt: soft round lights on the cheekbones (wide fall-off), never a streak */
+ cheeks.forEach((c,i)=>{const j=VU?[.8+.5*R(),.8+.5*R(),(R()-.5)*u*.08,(R()-.5)*u*.06,.7+.5*R()]:[1,1,0,0,1];
+  blob(gs,c.x+j[2],c.y+j[3],c.rx*j[0],c.ry*j[1],c.rot+(VU?(R()-.5)*.5:0),mc,Math.min(.9,T.bl*j[4]));
+  if(VU){/* small uneven blotches beside the cheek */for(let k=0;k<2;k++)blob(gs,c.x+(R()-.5)*c.rx*1.1,c.y+(R()-.5)*c.ry*1.2,u*(.06+.05*R()),u*(.04+.04*R()),R()*3,mc,.24+.16*R())}});
+ /* vụng: powder PATCHES and streaks (irregular, a little cakey), not dots: long thin or lumpy, random turn, flat top */
+ if(T.dabs)cheeks.forEach(c=>{for(let k=0;k<Math.ceil(T.dabs/2);k++){const long=R()<.5,rr=u*(long?.085+.06*R():.05+.035*R());blob(gs,c.x+(R()-.5)*c.rx*1.3,c.y+(R()-.5)*c.ry*1.4,rr,rr*(long?.22+.1*R():.5+.2*R()),R()*3.1,[255,251,247],.34+.26*R(),1)}});
+ const [cfo,gfo]=mk();toilSoft(gfo,g=>{g.save();g.translate(ol.cx,ol.cy);g.rotate(ol.ang);g.scale(ol.rx,ol.ry);g.arc(0,0,1,0,7);g.restore()},u*.06,1,K);/* the face outline oval (soft edge) */
  /* the eyes (dilated) are cut out of the skin pass */
  const [cx2,gx]=mk();[[20,27,27,30],[30,37,37,40]].forEach(([a,b,c2,d])=>{const poly=P.slice(a,b).concat(P.slice(c2,d));const ec=poly.reduce((q,p)=>[q[0]+p[0]/poly.length,q[1]+p[1]/poly.length],[0,0]);const gp=poly.map(p=>[ec[0]+(p[0]-ec[0])*1.45,ec[1]+(p[1]-ec[1])*1.6]);toilSoft(gx,g=>{g.moveTo(gp[0][0],gp[0][1]);gp.forEach(p=>g.lineTo(p[0],p[1]));g.closePath()},u*.05,1,K)});
  /* brows */
@@ -798,12 +812,12 @@ const eh=VU?[.6+.55*R(),.3+.35*R()]:[1,1];let en=0;
   const Bu=[P.slice(40,45),P.slice(50,55)],Bl=[P.slice(45,50),P.slice(55,60)];/* upper edge outer→inner, lower edge inner→outer */
   const line=(L,w,a,blur)=>{gi.save();gi.globalAlpha=a;gi.lineWidth=w;gi.shadowColor="#000";gi.shadowBlur=blur*K;gi.beginPath();L.forEach((p,i)=>i?gi.lineTo(p[0],p[1]):gi.moveTo(p[0],p[1]));gi.stroke();gi.restore()};
   /* owner 17/11 04:15Z: vụng stays PRETTY — no drawn / thick brows, no ink: only soft faults (uneven blush + a caked powder patch in the SVG layer, lip line a little off, soft uneven lids) */}
- const D=g0.getImageData(0,0,cw,chh),mI=gi.getImageData(0,0,cw,chh).data,mL=gl.getImageData(0,0,cw,chh).data,mE=ge.getImageData(0,0,cw,chh).data,mB=gb.getImageData(0,0,cw,chh).data,mSh=gsh.getImageData(0,0,cw,chh).data,mGl=ggl.getImageData(0,0,cw,chh).data,mS=gs.getImageData(0,0,cw,chh).data,mX=gx.getImageData(0,0,cw,chh).data,o=D.data;
+ const D=g0.getImageData(0,0,cw,chh),mI=gi.getImageData(0,0,cw,chh).data,mL=gl.getImageData(0,0,cw,chh).data,mE=ge.getImageData(0,0,cw,chh).data,mB=gb.getImageData(0,0,cw,chh).data,mSh=gsh.getImageData(0,0,cw,chh).data,mGl=ggl.getImageData(0,0,cw,chh).data,mS=gs.getImageData(0,0,cw,chh).data,mX=gx.getImageData(0,0,cw,chh).data,mO=gfo.getImageData(0,0,cw,chh).data,o=D.data;
  const Lum=i=>.299*o[i]+.587*o[i+1]+.114*o[i+2];let sl=0,nl=0,se=0,ne=0;
  for(let i=0;i<o.length;i+=4){const l=Lum(i);if(mL[i+3]>140){sl+=l;nl++}if(mE[i+3]>60&&l>110){se+=l;ne++}}
  const Ll=nl?sl/nl:150,Le=ne?se/ne:205;
  /* her cheek skin colour (median of small windows on the cheeks, taken from the picture itself) */
- const skc=(()=>{const ch=[[],[],[]];cheeks.forEach(c=>{const [px,py]=sp(c[0],c[1]),rr=Math.max(2,Math.round(u*.06*cw/bw));for(let y=-rr;y<=rr;y+=1)for(let x=-rr;x<=rr;x+=1){const X=Math.round(px+x),Y=Math.round(py+y);if(X<0||Y<0||X>=cw||Y>=chh)continue;const j=(Y*cw+X)*4;if(o[j+3]>0){ch[0].push(o[j]);ch[1].push(o[j+1]);ch[2].push(o[j+2])}}});const med=a=>{a.sort((x,y)=>x-y);return a.length?a[a.length>>1]:200};return[med(ch[0]),med(ch[1]),med(ch[2])]})();
+ const skc=(()=>{const ch=[[],[],[]];cheeks.forEach(c=>{const [px,py]=sp(c.x,c.y),rr=Math.max(2,Math.round(u*.06*cw/bw));for(let y=-rr;y<=rr;y+=1)for(let x=-rr;x<=rr;x+=1){const X=Math.round(px+x),Y=Math.round(py+y);if(X<0||Y<0||X>=cw||Y>=chh)continue;const j=(Y*cw+X)*4;if(o[j+3]>0){ch[0].push(o[j]);ch[1].push(o[j+1]);ch[2].push(o[j+2])}}});const med=a=>{a.sort((x,y)=>x-y);return a.length?a[a.length>>1]:200};return[med(ch[0]),med(ch[1]),med(ch[2])]})();
  const skinM=(i,lo,hi)=>{const dr=o[i]-skc[0],dg=o[i+1]-skc[1],db=o[i+2]-skc[2],d=Math.sqrt(dr*dr*.6+dg*dg+db*db);return d<=lo?1:d>=hi?0:1-(d-lo)/(hi-lo)};const tl=toilColRGB("son",col.son),te=toilColRGB("mat",col.mat),tb=toilColRGB("may",col.may);
  const Ltb=Math.max(20,.299*tb[0]+.587*tb[1]+.114*tb[2]);const cl3=(x,a,b)=>x<a?a:x>b?b:x;
  /* vụng patchiness: smooth value noise in face units (same blotches on portrait and figure) */
@@ -813,13 +827,13 @@ const eh=VU?[.6+.55*R(),.3+.35*R()]:[1,1];let en=0;
  for(let i=0;i<o.length;i+=4){const ab=mB[i+3]/255,ae=mE[i+3]/255,al=mL[i+3]/255,ai=VU?mI[i+3]/255:0,as=mSh[i+3]/255,ag=mGl[i+3]/255,ak=mS[i+3]/255;if(!(ab||ae||al||ai||as||ag||ak)){o[i+3]=0;continue}
   const pn=VU?.6+.55*nz(bx+((i>>2)%cw)*bw/cw,by+Math.floor((i>>2)/cw)*bh/chh):1;
   const r0=o[i],g1=o[i+1],b0=o[i+2],l=Lum(i);let r=r0,g=g1,b=b0,keep=1;
-  if(ak){const a=ak*skinM(i,26,56)*(1-mX[i+3]/255);if(a>.002){r+=(mS[i]-r)*a;g+=(mS[i+1]-g)*a;b+=(mS[i+2]-b)*a;keep*=1-a}}
+  if(ak){const a=ak*skinM(i,26,56)*(1-mX[i+3]/255)*(mO[i+3]/255);if(a>.002){r+=(mS[i]-r)*a;g+=(mS[i+1]-g)*a;b+=(mS[i+2]-b)*a;keep*=1-a}}
   if(ab){/* only the brow hairs (darker than the skin) take the colour, with their own light */const dk=cl3((Le-l)/(Le*.42),0,1);const a=ab*T.brow*dk;
    if(a>0){const k=Math.min(2.4,l/Ltb)*(look==="diem"?.9:1);r+=(tb[0]*k-r)*a;g+=(tb[1]*k-g)*a;b+=(tb[2]*k-b)*a;keep*=1-a}}
-  if(ae){const a=Math.min(1,ae*T.eye*pn)*skinM(i,46,92);const k=cl3(l/Le,.35,1.12);r+=(te[0]*k-r)*a;g+=(te[1]*k-g)*a;b+=(te[2]*k-b)*a;keep*=1-a}
-  if(al){let a=Math.min(1,al*T.lip*pn);const q=l/Ll;const k=VU?cl3(Math.pow(q,1.25),.8,1.02):cl3(Math.pow(q,1.35),.45,1.25);/* highlights on the lip keep some of their shine; vụng: the smear past the line is as dark as the lip itself (readable at stage size) */if(!VU&&q>1.22)a*=Math.max(.45,1-(q-1.22)*1.6);
+  if(ae){const a=Math.min(1,ae*T.eye*pn)*skinM(i,46,92)*Math.min(1,mO[i+3]/200+.0);const k=cl3(l/Le,.35,1.12);r+=(te[0]*k-r)*a;g+=(te[1]*k-g)*a;b+=(te[2]*k-b)*a;keep*=1-a}
+  if(al){let a=Math.min(1,al*T.lip*pn);const q=l/Ll;const k=VU?cl3(Math.pow(q,1.25),.8,1.02):cl3(Math.pow(q,1.15),.66,1.2);/* highlights on the lip keep some of their shine; vụng: the smear past the line is as dark as the lip itself (readable at stage size) */if(!VU&&q>1.22)a*=Math.max(.45,1-(q-1.22)*1.6);
    r+=(tl[0]*k-r)*a;g+=(tl[1]*k-g)*a;b+=(tl[2]*k-b)*a;keep*=1-a}
-  if(as){const a=Math.min(.9,as)*skinM(i,46,92);r+=(Math.min(255,te[0]*.35+235)-r)*a;g+=(Math.min(255,te[1]*.35+215)-g)*a;b+=(Math.min(255,te[2]*.35+170)-b)*a;keep*=1-a}
+  if(as){const a=Math.min(.9,as)*skinM(i,46,92)*(mO[i+3]/255);r+=(Math.min(255,te[0]*.35+235)-r)*a;g+=(Math.min(255,te[1]*.35+215)-g)*a;b+=(Math.min(255,te[2]*.35+170)-b)*a;keep*=1-a}
   if(ag){const a=Math.min(.8,ag)*(al>.35?1:0);r+=(255-r)*a*.8;g+=(236-g)*a*.8;b+=(230-b)*a*.8;keep*=1-a*.8}
   if(ai){const a=Math.min(1,ai*pn);const k=.85;r+=(tb[0]*k-r)*a;g+=(tb[1]*k-g)*a;b+=(tb[2]*k-b)*a;keep*=1-a}
   const A=1-keep;if(A<.004){o[i+3]=0;continue}/* overlay pixel so that mix(original, it, A) = the painted pixel */
