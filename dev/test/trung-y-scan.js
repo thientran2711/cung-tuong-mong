@@ -1,5 +1,5 @@
 /* trung y (jty) scan: while her Y phục slot is empty, EVERY picture of her (stage, header, her own card, dialogs, Hậu cung / Tư trang tabs,
-   Tuần lục) must be the trung y art of her tier; the makeup layer (jtoil kmk) must still be drawn on the trung y figure; the one thiếu lễ
+   Tuần lục) must be the trung y art of her tier; the makeup layer (jtoil kmkl) must still be drawn on the trung y figure; the one thiếu lễ
    (jaudit/jtoil leAttire) adds no Danh/Đức on top of the robe rule.
    usage: node dev/test/trung-y-scan.js <site url> <W>x<H>@dpr <outdir> <tag> */
 const {chromium}=require('playwright');const [,,URL,SZ,OUT,TAG]=process.argv;const [WH,DPR]=SZ.split('@');const [W,H]=WH.split('x').map(Number);
@@ -25,8 +25,8 @@ const {chromium}=require('playwright');const [,,URL,SZ,OUT,TAG]=process.argv;con
   S.place='home';S.visit={k:'home',people:homePeople(),talked:false,tk:{}};S.buoi=0;used=0;tab='act';
   const w=wdOf(S);w.y=null;S.toilette={day:wk()*10,wk:wk(),score:80,makeup:true,style:'fit',dv:'hoppham',F:1,occ:['th'],look:'dep'};render();return{fid:figPick(S),ty:tyOn(S),tier:tyTier(S)}});
  await clear();await p.waitForTimeout(3500);
- await p.waitForFunction(()=>{const f=document.getElementById('mefig');return f&&f.complete&&f.naturalWidth>0&&[...document.querySelectorAll('.kmk')].every(i=>i.complete)},null,{timeout:60000}).catch(()=>{});await p.waitForTimeout(800);
- R.stage=await mine();R.mk=await p.evaluate(()=>{const f=document.getElementById('mefig');const box=f&&f.parentElement;const m=box&&box.querySelector('.kmk');return{fig:f&&f.getAttribute('src').split('/').pop(),kmk:!!m,kmkSrcLen:m?m.getAttribute('src').length:0}});
+ await p.waitForFunction(()=>{const f=document.getElementById('mefig');return f&&f.complete&&f.naturalWidth>0&&[...document.querySelectorAll('.kmkl')].every(i=>i.complete)},null,{timeout:60000}).catch(()=>{});await p.waitForTimeout(800);
+ R.stage=await mine();R.mk=await p.evaluate(()=>{const f=document.getElementById('mefig');const box=f&&f.parentElement;const m=box&&box.querySelector('.kmkl');return{fig:f&&f.getAttribute('src').split('/').pop(),kmk:!!m,kmkSrcLen:m?m.getAttribute('src').length:0}});
  await shot('1-stage');
  /* her stage figure up close: makeup layer over the trung y face */
  try{const el=await p.$('#mefig');if(el){const bb=await el.boundingBox();await p.screenshot({path:`${OUT}/${TAG}-1b-face.jpg`,type:'jpeg',quality:80,clip:{x:bb.x+bb.width*.2,y:bb.y,width:bb.width*.6,height:Math.min(bb.height*.25,bb.width*.6)}})}}catch(e){}

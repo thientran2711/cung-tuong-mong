@@ -9,7 +9,7 @@ const {chromium}=require('playwright');const [,,URL]=process.argv;
  for(const how of ["steal","road","ksp","morning","stale"]){
   R[how]=await p.evaluate(async how=>{for(const id of ['kload','kroul']){const x=document.getElementById(id);if(x)x.remove()}try{localStorage.clear()}catch(e){}SLOT=3;window.__nlInner=1;document.getElementById('title').hidden=true;
    for(let i=0;i<60;i++){start();if(!isSrv())break}Q.length=0;const m=document.getElementById('modal');if(m)m.hidden=true;S.preg=0;
-   S.buoi=how==="morning"?0:B4L;used=2;/* "morning": a night won at buổi sáng spends that day only (the next day starts fresh) */S.tonight=null;try{NT&&(NT.d={})}catch(e){}render();const before={buoi:S.buoi,turn:S.turn,used,day:(typeof wk==="function"?wk():0)};
+   S.nfF=wk();S.cyb={lie:wk(),rk:wk(),rv:"lui"};/* flip-entry: the day's tablet counts as turned (jfe: it waits for buổi tối) and it is not her cycle tuần */S.buoi=how==="morning"?0:B4L;used=2;/* "morning": a night won at buổi sáng spends that day only (the next day starts fresh) */S.tonight=null;try{NT&&(NT.d={})}catch(e){}render();const before={buoi:S.buoi,turn:S.turn,used,day:(typeof wk==="function"?wk():0)};
    const v=liveRivals(false)[0];const n0=S.nights||0;
    if(how==="ksp"){S.tonight="me";pushDil?pushDil(mkP("ksp"),"Kính sự phòng báo tin"):Q.push({t:"Kính sự phòng",h:"",opts:mkP("ksp").o});showModal()}
    else{stealWin(S,v,how==="road"?"road":"feign");showModal()}

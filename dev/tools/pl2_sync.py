@@ -16,8 +16,10 @@ J=R+'img/pl2/hotspots.json';D=json.load(open(J,encoding='utf-8'))
 have={}
 for f in sorted(glob.glob(R+'img/pl2/*.webp')):
   n=os.path.basename(f)[:-5]
-  m=re.match(r'^((?:nhat|nhi|tam)-.+?)-((?:xuan|ha|thu|dong|newyear|giaothua|nguyentieu|thanhminh|doanngo|thattich|trungthu|trungcuu|dongchi|phoenix)-(?:sang|trua|chieu|toi))$',n)
+  m=re.match(r'^((?:nhat|nhi|tam)-.+?)-((?:xuan|ha|thu|dong|newyear|giaothua|nguyentieu|thanhminh|doanngo|thattich|trungthu|trungcuu|dongchi|phoenix|vulan|vantho|lapbat|thanhtho|tang)-(?:sang|trua|chieu|toi))$',n)
   if m:have.setdefault(m.group(1),[]).append(m.group(2))
+# owner 11/16: a courtyard picture exists only for places with >=2 halls; single-hall dirs stay on the CDN but are not referenced
+have={d:v for d,v in have.items() if len(D.get('spots',{}).get(d,{}))>=2}
 D['have']=have
 D.pop('rooms',None)  # room pictures: jres.js residenceArt (one source)
 json.dump(D,open(J,'w',encoding='utf-8'),ensure_ascii=False,indent=1)

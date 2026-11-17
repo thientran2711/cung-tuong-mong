@@ -44,7 +44,11 @@ if(typeof BAL==="object")BAL.cyc={
     by the month's end → mừng hụt rumSung/rumDanh, the same as a rival's forged "không báo"). Both lies: flipped during the cycle → the
     Kính sự phòng mama checks: passes with lieO + loyalty/lieLoyal + Tâm cơ/lieTc, caught = Sủng -lieSung, Danh -lieDanh, night lost, S.ksKnows;
     and the false line is FORGERY EVIDENCE: at the month's end each foe reading the book (npcRead) gets chứng cứ +1 on her. */
- rep:{luiDuc:2,luiNext:.5,luiCover:3,somDuc:3,giauGhen:4,lieO:50,lieLoyal:4,lieTc:5,lieSung:6,lieDanh:4}};
+ rep:{luiDuc:2,luiNext:.5,luiCover:3,somDuc:3,giauGhen:4,lieO:50,lieLoyal:4,lieTc:5,lieSung:6,lieDanh:4},
+ /* FERTILE WINDOW (owner 16/11 s9, D57 review/preg-rate, option 4 = 1+3): conception per night × by where the night falls in HER TRUE cycle
+    (not what she reported): peak = the tuần after her cycle tuần (≈ 10–17 days after it starts), low = the tuần before it, cyc = her cycle
+    tuần itself (a tryst / stolen night). No cycle (age ≥ 50, pregnant) → × 1. The base itself was doubled in BAL.conc (jbal.js). */
+ fert:{peak:1.6,low:.5,cyc:.1}};
 const B=()=>(typeof BAL==="object"&&BAL.cyc)||{};
 const cl_=(x,a,b)=>Math.max(a,Math.min(b,x));
 function cyH(s){s=String(s==null?"":s);let h=2166136261>>>0;for(let i=0;i<s.length;i++){h^=s.charCodeAt(i);h=Math.imul(h,16777619)>>>0}return h>>>0}
@@ -105,6 +109,15 @@ const fl0=flip;flip=function(){const r=fl0.apply(this,arguments);try{if(!S||S.de
   if(cycOn(S)&&c.nt!==wk()){c.nt=wk();const k=c.rk===wk()?c.rv:"";log(k==="som"||k==="giau"?"Kỳ nguyệt sự đã đến, mà sổ Kính sự phòng ghi khác: thẻ bài của ngươi vẫn nằm trên khay.":"Kỳ nguyệt sự đã đến: tuần này Kính sự phòng tạm cất thẻ bài của ngươi.")}
   else if(cyPreg(S)&&S.pregUnk&&(S.tuan||0)===cyBase(S).t&&cycleLate(S)>=1&&c.lt!==wk()){c.lt=wk();log("Tuần này đáng lẽ tới kỳ nguyệt sự, mà chưa thấy.")}
  }catch(e){console.error(e)}return r};
+/* ---------- 7. FERTILE WINDOW (D57): conceiveCh × BAL.cyc.fert by her cycle phase this tuần; one notice when her peak tuần starts ---------- */
+function cyPhase(p){try{p=p||S;if(!S||!p||!cyHas(p,cyCur()))return"";const d=(((S.tuan||0)-cyBase(p).t)%3+3)%3;return d===1?"peak":d===0?"cyc":"low"}catch(e){return""}}
+window.cyPhase=cyPhase;
+const cc0=conceiveCh;conceiveCh=function(p){const c=cc0.apply(this,arguments);try{const h=cyPhase(p||S),F=B().fert||{};if(h&&F[h]!=null)return Math.round(c*F[h])}catch(e){}return c};
+/* a tryst / affair (trystCh, jbal): the BAL.trystC floor/cap bound the chance BEFORE the cycle factor, so her cycle tuần stays near nil and the peak still rises */
+trystCh=function(p){p=p||S;const T=BAL.trystC,v=cl_(cc0(p),T[0],T[1]);try{const h=cyPhase(p),F=B().fert||{};if(h&&F[h]!=null)return Math.min(T[1],Math.round(v*F[h]))}catch(e){}return v};
+const flF=flip;flip=function(){const r=flF.apply(this,arguments);try{if(!S||S.dead||(typeof isSrv==="function"&&isSrv()))return r;const c=cyb();
+  if(!S.preg&&cyPhase(S)==="peak"&&c.ft!==wk()){c.ft=wk();let w="";try{w=chanceLvl(conceiveCh(S))}catch(e){}log(`Ma ma dặn nhỏ: qua kỳ nguyệt sự chừng mươi ngày, tuần này là lúc dễ đậu thai nhất${w?` (có thai mỗi lần thị tẩm: ${w})`:""}.`)}
+ }catch(e){console.error(e)}return r};
 /* Tranh sủng / Chặn ngự giá deck cards (j75 getters): closed with the reason during her cycle */
 const dl0=deal;deal=function(){const r=dl0.apply(this,arguments);try{if(!S||!Array.isArray(deck))return r;
   for(const a of deck){if(!a||!(a.n==="Tranh sủng"||a.n==="Chặn ngự giá")||a.__cyc)continue;a.__cyc=1;
@@ -121,7 +134,7 @@ function cyAsk(){if(!S||S.dead||S.out||(typeof isSrv==="function"&&isSrv())||!S.
  if(Array.isArray(Q)&&Q.some(m=>m&&m.t==="Nhập cung")){c.rk=wk();c.rv="dung";return false}
  c.df=wk();pushDil(mkP("cyrep"),"Kỳ nguyệt sự");return true}
 PEND.cyrep=()=>{if(!S||!S.maid||!cycOn(S))return null;const R=B().rep,c=cyb(),loyal=S.maid.loyal||50,po=cyLieO(),
-  lo=cl_(od(B().backO+Math.round((S.tamco||0)/B().backTc)+Math.round(loyal/5)),5,95),xg=S.rank>=7?"Hoàng hậu nương nương":S.rank>=3?"nương nương":"tiểu chủ";
+  lo=cl_(od(B().backO+Math.round((S.tamco||0)/B().backTc)+Math.round(loyal/5)),5,95),xg=kSay({srv:"f"},S,"{goi}")/* one address core (jvoice) */;
  const done=k=>{c.rk=wk();c.rv=k;try{cyNoFriend(flip)}catch(e){console.error(e)}try{render()}catch(e){}};
  const mk=(n,s,k,pre)=>{const o=c6(n,s);const g=o.go;o.go=()=>{try{if(pre)pre()}catch(e){console.error(e)}g();done(k)};return o};
  const risk=`được lật thẻ mà bị ma ma soát ra (${chanceW(100-po)}): mất đêm ấy, Sủng -${R.lieSung} Danh -${R.lieDanh}`,evi="kẻ thù tra sổ có thể nắm chứng cứ";
@@ -138,10 +151,14 @@ PEND.cyrep=()=>{if(!S||!S.maid||!cycOn(S))return null;const R=B().rep,c=cyb(),lo
   mk("Báo lùi vài hôm",{c:{duc:-R.luiDuc},p:lo,wt:[G6("nếu sắp có thai: ngày khớp đêm thị tẩm"),G6("người ngoài muộn một tháng mới đoán ra")],l:{danh:-B().backDanh},lt:[R6("Tổng quản biết chuyện của ngươi")],
     k:["thẻ bài tạm cất tuần này và khó được lật tuần sau","thái y cũng muộn nhận ra tin vui"],ok:()=>{c.back=wk();return "Ma ma báo lùi vài hôm; sổ ghi kỳ của ngươi muộn hơn thật."},no:()=>{S.ksKnows=1;return "Tổng quản thấy ngày ma ma báo lệch với tháng trước; hắn biết chuyện của ngươi."}},"lui"),
   mk("Báo sớm, nói đã sạch kỳ",{c:{duc:-R.somDuc},wt:[G6("thẻ bài vẫn nằm trên khay")],k:[risk,evi],wl:"Ma ma báo kỳ của ngươi đã qua; thẻ bài vẫn nằm trên khay."},"som",lie("som")),
-  mk("Giấu, không báo",{wt:[G6("thẻ bài vẫn nằm trên khay")],k:[`cả cung đồn có tin vui: phi tần ghen +${R.giauGhen}`,`cuối tháng chưa có thai thì mừng hụt: Sủng -${B().rumSung} Danh -${B().rumDanh}`,risk,evi],
+  mk("Giấu, không báo",{wt:[G6("thẻ bài vẫn nằm trên khay")],k:[`cả cung đồn có tin vui: phi tần ghen +${ghenN(R.giauGhen)}`,`cuối tháng chưa có thai thì mừng hụt: Sủng -${B().rumSung} Danh -${B().rumDanh}`,risk,evi],
     wl:"Ma ma không lên Kính sự phòng báo kỳ; trong cung bắt đầu xì xào ngươi có tin vui."},"giau",lie("giau"))];
  O.forEach((o,i)=>{o.hint=H[i][0];o.risk=H[i][1]});
- return{who:pMaid(),t:`<p>${S.maid.name} khẽ thưa: “Kỳ nguyệt sự của ${xg} đã tới (${dName(cyDaysM(S,cyCur()))}). Nô tỳ lên Kính sự phòng báo thế nào ạ?”</p><p class="past">Kính sự phòng ghi sổ theo lời ma ma các cung báo lên; ai đang kỳ thì thẻ bài tạm cất.</p>`,o:O}};
+ return{who:pMaid(),t:`<p>${S.maid.name} khẽ thưa: ${kLine("cycle:ask",CY_ASK,{sp:{srv:"f"},ls:S}).replace("{d}",dName(cyDaysM(S,cyCur())))}</p><p class="past">Kính sự phòng ghi sổ theo lời ma ma các cung báo lên; ai đang kỳ thì thẻ bài tạm cất.</p>`,o:O}};
+/* palace voice: the monthly question is a pool (jvoice kLine, no repeat within BAL.voice.noRepeat tuần); {d} = the days */
+const CY_ASK=["“Kỳ nguyệt sự của {goi} đã tới ({d}). Nô tỳ lên Kính sự phòng báo thế nào ạ?”","“Bẩm {goi}, tháng này nguyệt sự đến ({d}). Thẻ bài có cần tạm cất không ạ?”",
+ "“{Goi}, ma ma Kính sự phòng vừa sai người sang hỏi. Kỳ này ({d}), nô tỳ nên thưa thế nào?”","“Nguyệt sự của {goi} lại tới rồi ({d}). Nô tỳ đã chuẩn bị nước gừng; còn bên Kính sự phòng, xin {goi} định liệu.”",
+ "“{Goi} giữ ấm bụng mấy hôm nay ({d}). Nô tỳ báo Kính sự phòng cất thẻ, hay cứ để như thường?”"];
 /* co-op (review r3): the deferred flip runs outside endTurn's withoutFriend (jcoopworld), so take the friend entry out here too:
    otherwise the Emperor could "pick" the other player's card in MY world (rivalNight would then write Sủng/thai deltas into her row) */
 function cyNoFriend(f){if(!(window.COOPW&&COOPW.on)||COOPW.tnShared/* reviewer r2: jcoopworld B2 (one host-drawn night, friend in the host deck, guest draws nothing) */||!Array.isArray(rivals))return f();const out=[];for(let i=rivals.length-1;i>=0;i--)if(rivals[i]&&rivals[i].coop)out.push([i,rivals.splice(i,1)[0]]);
@@ -207,7 +224,7 @@ function cyDeck(){if(!S||S.dead||S.out||(typeof isSrv==="function"&&isSrv()))ret
  if(cyPreg(S)&&S.hidden&&!S.pregUnk&&c.hide!==S.pregWk&&S.preg<=3){const pw=S.pregWk;
   deck.unshift({n:"Sửa sổ nguyệt sự",t:"Đút lót Kính sự phòng ghi tháng nào ngươi cũng báo, để không ai đoán ra tin vui.",c:{bac:-B().hide[r]},o:od(B().hideO),w:{},l:{},x:"sổ ghi ngươi vẫn báo đều, giữ kín được thai · hỏng: Tổng quản biết chuyện của ngươi",dom:"Mưu kế",go:()=>{c.hide=pw},fail:()=>{S.ksKnows=1}});
   const o2=od(B().hideMaidO+Math.round(loyal/B().hideMaid));
-  deck.unshift({n:"Dặn ma ma báo ngày giả",t:`Dặn ${S.maid&&S.maid.name?"ma ma "+S.maid.name:"ma ma trong cung"} cứ đúng kỳ lên Kính sự phòng báo như thường.`,c:{duc:-B().hideDuc},o:o2,w:{},l:{},x:"sổ ghi ngươi vẫn báo đều, giữ kín được thai · hỏng: ma ma lỡ lời, cả cung biết ngươi có thai",dom:"Mưu kế",go:()=>{c.hide=pw},fail:()=>{S.hidden=false;try{ghenAll(6)}catch(e){}log("Ma ma lỡ lời ở Kính sự phòng: cả cung biết ngươi có thai.")}})}
+  deck.unshift({n:"Dặn ma ma báo ngày giả",t:`Dặn ${S.maid&&S.maid.name?"ma ma "+S.maid.name:"ma ma trong cung"} cứ đúng kỳ lên Kính sự phòng báo như thường.`,c:{duc:-B().hideDuc},o:o2,w:{},l:{},x:"sổ ghi ngươi vẫn báo đều, giữ kín được thai · hỏng: ma ma lỡ lời, cả cung biết ngươi có thai",dom:"Mưu kế",go:()=>{c.hide=pw},fail:()=>{S.hidden=false;try{ghenAll(BAL.ghen.preg)}catch(e){}log("Ma ma lỡ lời ở Kính sự phòng: cả cung biết ngươi có thai.")}})}
  /* the non-bạc twin of j22 "Hối lộ Kính sự phòng sửa sổ": move her last reported cycle so the conception falls after a real night */
  if(S.preg&&S.pregMismatch&&!S.out&&(S.nightLog||[]).some(w=>S.pregWk-w>=2&&S.pregWk-w<=6)){const o3=od(B().backO+Math.round((S.tamco||0)/B().backTc)+Math.round(loyal/5));
   deck.unshift({n:"Khai lùi ngày nguyệt sự",t:"Nhờ ma ma khai kỳ nguyệt sự tháng trước lùi lại, cho ngày có thai rơi đúng sau một đêm thị tẩm.",c:{duc:-B().backDuc},o:o3,w:{},l:{danh:-B().backDanh},x:"sổ khớp ngày, hết bị nghi · hỏng: Tổng quản biết chuyện của ngươi",dom:"Mưu kế",go:()=>{S.pregMismatch=false},fail:()=>{S.ksKnows=1}})}}

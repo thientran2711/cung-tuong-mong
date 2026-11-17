@@ -616,6 +616,7 @@ button.ka.kdis .kaart>.ksart{filter:grayscale(.7);opacity:.8}
 /* origin picture = a wide band across the top of the card (kitSceneArt), height capped so the choices stay on screen */
 .dlg.kpsc .kpid>.kpidart{width:100%;position:relative}
 .dlg.kpsc .kpid>.kpidart>.ksart{aspect-ratio:auto;height:clamp(84px,calc(19*var(--kvh,1dvh)),190px)}
+/* kv3:.kv1 */:where(.kv1) .dlg.kpsc .kpid>.kpidart>.ksart{height:clamp(84px,calc(14*var(--kvh,1dvh)),190px)}/* r3: the one-page card scrolls in a short area (the pinned choices take most of it): the picture leaves room for the name + age line above the sticky strip */
 .dlg.kpsc .kpid>.kpidart>.ksart>img{object-position:center 45%}
 /* the two choices never leave the screen (owner 11/14: "Đổi thân phận (−100…" was cut at 686x880): the body scrolls under them */
 .modal.kpscene .dlg.kpsc.kfpon>#mb{overflow-y:auto!important;overscroll-behavior:contain}
@@ -636,6 +637,20 @@ const KIT_CARDBACK="img/kit/card-back.webp";
 function kitRare(k){try{if(typeof ow69Rare==="function")return ow69Rare(k)}catch(e){}const w=KIT_OW[k]||10;return w<=6?"Rất hiếm":w<=9?"Hiếm":"Thường gặp"}
 /* ONE origin card face (front): art frame + name + rarity chip pinned to the bottom (kit rule: chips of a row share one baseline) */
 function kitOriginFace(it){return `<div class="kra">${kitSceneArt(it.wide||it.src,"",{shape:"wide",fb:it.src})}</div><span class="krn">${it.name}</span><span class="krr">${typeof kitChip==="function"?kitChip(it.rare,"n"):it.rare}</span>`}
+/* ONE FIT for every origin / identity card grid (owner 16/11 s23: "to ra, trải dài hết cái màn nền"): the cards grow to span the background width
+   (side margin kept, title + moon wheel above, Tiếp / Bỏ qua below), picture + text scale with the card (--krw), ONE gap (--krgap) between cards,
+   rows and the title / buttons. Columns (2..5) and card width are found by measuring: the widest card for which title + rows + buttons fit the screen. */
+const KIT_ROU_MAXW=300,KIT_ROU_MINW=72;
+function kitRouFit(ov){try{const box=ov.querySelector(".krbox"),grid=ov.querySelector(".krgrid");if(!box||!grid)return;const tiles=[...grid.querySelectorAll(".krt")];if(!tiles.length)return;
+ const W=innerWidth,H=innerHeight,side=Math.round(Math.max(14,Math.min(72,W*.05))),G=Math.round(Math.max(10,Math.min(20,Math.min(W,H)*.016))),pad=Math.round(Math.max(8,Math.min(24,H*.02)));
+ ov.style.setProperty("--krside",side+"px");ov.style.setProperty("--krgap",G+"px");ov.style.setProperty("--krpad",pad+"px");
+ const availW=W-2*side,set=(c,w)=>{ov.style.setProperty("--krw",w+"px");grid.style.width=(c*w+(c-1)*G)+"px";tiles.forEach(t=>t.style.height="");const hh=Math.max(...tiles.map(t=>t.offsetHeight));tiles.forEach(t=>t.style.height=hh+"px");return box.offsetHeight};/* equal card heights count in the fit */
+ const opts=[];for(const c of [5,4,3,2]){if(c>2&&c>tiles.length)continue;let hi=Math.min(KIT_ROU_MAXW,Math.floor((availW-(c-1)*G)/c)),lo=KIT_ROU_MINW;if(hi<lo)continue;
+  if(set(c,hi)<=H){opts.push({c,w:hi});continue}
+  if(set(c,lo)>H)continue;while(hi-lo>1){const m=(hi+lo)>>1;if(set(c,m)<=H)lo=m;else hi=m}opts.push({c,w:lo})}
+ if(!opts.length){set(3,KIT_ROU_MINW);return}
+ const th=(typeof kitView==="function"&&kitView().pages===2)?.7:.85,mw=Math.max(...opts.map(x=>x.w)),pick=opts.filter(x=>x.w>=mw*th).reduce((x,y)=>y.c>x.c?y:x);/* fewest rows among the (almost) widest: the title + moon wheel stay visible */set(pick.c,pick.w);
+ ov.dataset.krc=pick.c;ov.dataset.krw=pick.w}catch(e){console.error("kitRouFit",e)}}
 function kitRoulette(o){const done=()=>{try{o.done&&o.done()}catch(e){}};if(!o||!o.items||!o.items.length){done();return}
  const rm=matchMedia("(prefers-reduced-motion: reduce)").matches||(typeof OPT!=="undefined"&&OPT&&OPT.fxon===false);
  const old=$("kroul");if(old)old.remove();const ov=document.createElement("div");ov.id="kroul";ov.className="kroul"+(rm?" krrm":"");const land=kitView().pages===2;
@@ -643,12 +658,12 @@ function kitRoulette(o){const done=()=>{try{o.done&&o.done()}catch(e){}};if(!o||
  ov.innerHTML=`<div class="krbox"><div class="krhead"><b>Luân hồi</b><small class="krsub">Các thân phận trong vòng luân hồi</small></div>
   <div class="krgrid">${items.map((it,i)=>`<div class="krt" data-i="${i}" data-k="${it.k}"><div class="krc"><div class="krf">${kitOriginFace(it)}</div><div class="krb" aria-hidden="true"></div></div></div>`).join("")}</div>
   <div class="krbar"><button class="kbtn krgo" type="button">Tiếp</button><button class="kbtn alt krskip" type="button">Bỏ qua</button></div></div>`;
- kitBackdrop(ov,"roulette");document.body.appendChild(ov);
+ kitBackdrop(ov,"roulette");document.body.appendChild(ov);kitRouFit(ov);const rf=()=>{if(document.body.contains(ov)&&!picked)kitRouFit(ov)};addEventListener("resize",rf);try{document.fonts&&document.fonts.ready.then(rf)}catch(e){}
  const grid=ov.querySelector(".krgrid"),sub=ov.querySelector(".krsub"),go=ov.querySelector(".krgo");
  let tiles=[...ov.querySelectorAll(".krt")];let fin=false,timers=[],step=0,picked=null;const T=(f,ms)=>timers.push(setTimeout(f,rm?0:ms));
  const setStep=n=>{step=n;window.__kroulStep=n;ov.dataset.step=n};setStep(0);
  const snd=n=>{try{typeof sfx==="function"&&sfx(n)}catch(e){}};
- const end=()=>{if(fin)return;fin=true;timers.forEach(clearTimeout);ov.classList.add("krout");setTimeout(()=>ov.remove(),rm?0:360);window.__kroulStep=null;done()};
+ const end=()=>{if(fin)return;fin=true;removeEventListener("resize",rf);timers.forEach(clearTimeout);ov.classList.add("krout");setTimeout(()=>ov.remove(),rm?0:360);window.__kroulStep=null;done()};
  ov.querySelector(".krskip").addEventListener("click",e=>{e.stopPropagation();end()});
  /* step 2: face-down + shuffle (FLIP: cards gather to the deck centre, the grid order is re-dealt, cards travel to their new places) */
  const shuffle=()=>{setStep(1);go.hidden=true;sub.textContent="Xáo bài…";tiles.forEach(t=>t.classList.add("down"));snd("sfx-tap");
@@ -694,26 +709,30 @@ function kitRoulette(o){const done=()=>{try{o.done&&o.done()}catch(e){}};if(!o||
   if(window.__kroulKey===key)return r;window.__kroulKey=key;
   const items=ORIGINS.filter(x=>KIT_OW[x.k]!=null||x.k===o.k).map(x=>({k:x.k,src:kitOriginArt(x.k),wide:kitOriginWide(x.k),name:x.n,rare:kitRare(x.k)}));
   kitRoulette({items,target:o.k,toEl:()=>document.querySelector("#modal .kpidart .ksart")||document.querySelector("#modal .kpidart")})}catch(e){console.error("kitRoulette",e)}return r}})();
+/* kit sample page (§28.12b, review/kit-fit-r3): the origin card grid at a fixed card width (--krw); the live fit is kitRouFit */
+try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§28.12b",title:"Thẻ thân phận (Luân hồi): thẻ to trải rộng theo màn nền, một khoảng cách đều giữa các thẻ",html:()=>
+ `<div class="kroul" style="position:relative;inset:auto;z-index:auto;background:none;overflow:visible;--krw:150px;--krgap:12px;--krside:0px;--krpad:6px"><div class="krbox"><div class="krgrid">`+
+ [["tt","Con gái Tể tướng"],["dtq","Con gái Đại tướng quân"],["muoi","Con gái nhà buôn muối"],["nc","Công chúa nước Nam Chiếu hòa thân"]].map(([k,n])=>`<div class="krt" data-k="${k}"><div class="krc"><div class="krf">${kitOriginFace({k,src:typeof kitOriginArt==="function"?kitOriginArt(k):"",wide:typeof kitOriginWide==="function"?kitOriginWide(k):"",name:n,rare:kitRare(k)})}</div></div></div>`).join("")+`</div></div></div>`})}catch(e){}
 (function(){const st=document.createElement("style");st.id="k2b-roulette";st.textContent=`
 .kroul{position:fixed;inset:0;z-index:2147483000;display:flex;align-items:center;justify-content:center;background:#e9dcc8 center/cover no-repeat;transition:opacity .35s;overflow:hidden}
 .kroul.krfade .krt:not(.pick),.kroul.krfade .krhead,.kroul.krfade .krbar{opacity:0;transition:opacity .4s}
 .kroul.krfade .krt.pick{opacity:0;transition:opacity .3s .1s}
 .kroul.krout{opacity:0}
-.kroul .krbox{display:flex;flex-direction:column;align-items:center;gap:10px;padding:14px;max-width:min(96vw,780px);max-height:100dvh;box-sizing:border-box}
+.kroul .krbox{display:flex;flex-direction:column;align-items:center;gap:var(--krgap,12px);padding:var(--krpad,14px) var(--krside,16px);width:100%;box-sizing:border-box}
 .kroul .krhead{display:flex;flex-direction:column;align-items:center;color:#5a2e12;text-shadow:0 1px 6px #fff8;text-align:center}
 .kroul .krhead b{font-family:var(--display);font-size:1.5rem;color:var(--gold)}.kroul .krhead small{font-size:.9rem;min-height:1.3em}
-.kroul .krgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px 14px;align-items:stretch}
-/* kv3:.kv2 */:where(.kv2) .kroul .krgrid{grid-template-columns:repeat(5,minmax(0,1fr))}
+/* ONE origin/identity card grid (kitRouFit): cards as wide as the background allows (side margins kept), columns chosen by the fit; ONE gap for columns and rows */
+.kroul .krgrid{display:flex;flex-wrap:wrap;justify-content:center;gap:var(--krgap,12px);align-items:stretch;max-width:100%}
 /* one origin card: outer .krt moves (shuffle / centre), inner .krc flips; front in flow (gives the size), back laid over it */
-.kroul .krt{position:relative;width:clamp(96px,min(26vw,calc(17*var(--kvh,1dvh))),150px);perspective:900px;transition:transform .5s cubic-bezier(.3,.7,.2,1),opacity .3s,filter .3s;outline:none}
+.kroul .krt{position:relative;width:var(--krw,clamp(96px,min(26vw,calc(17*var(--kvh,1dvh))),150px));flex:none;perspective:900px;transition:transform .5s cubic-bezier(.3,.7,.2,1),opacity .3s,filter .3s;outline:none}
 .kroul .krc{position:relative;height:100%;transform-style:preserve-3d;transition:transform .55s cubic-bezier(.4,.1,.2,1)}
 .kroul .krt.down .krc{transform:rotateY(180deg)}
 .kroul .krf,.kroul .krb{backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:10px;box-sizing:border-box}
-.kroul .krf{height:100%;display:flex;flex-direction:column;align-items:center;gap:3px;padding:6px 6px 8px;background:rgba(255,250,240,.9);border:1px solid var(--k-hair,#e6d3ac);box-shadow:0 2px 8px #5a3a2022}
+.kroul .krf{height:100%;display:flex;flex-direction:column;align-items:center;gap:calc(var(--krw,120px)*.025);padding:calc(var(--krw,120px)*.045) calc(var(--krw,120px)*.045) calc(var(--krw,120px)*.055);background:rgba(255,250,240,.9);border:1px solid var(--k-hair,#e6d3ac);box-shadow:0 2px 8px #5a3a2022}
 .kroul .krb{position:absolute;inset:0;transform:rotateY(180deg);background:#8a3a3a url(${KIT_CARDBACK}) center/100% 100% no-repeat;border:1px solid #c9a46a;box-shadow:0 0 0 2px #fff4dccc inset,0 3px 10px #5a3a2040}
 .kroul .krt .kra{width:100%;position:relative}
-.kroul .krt .krn{font-size:.78rem;font-weight:600;color:var(--ink);text-align:center;line-height:1.2}
-.kroul .krt .krr{margin-top:auto;padding-top:2px}
+.kroul .krt .krn{font-size:min(1.2rem,max(.78rem,calc(var(--krw,120px)*.088)));font-weight:600;color:var(--ink);text-align:center;line-height:1.2}
+.kroul .krt .krr{margin-top:auto;padding-top:2px;font-size:min(1rem,max(.62rem,calc(var(--krw,120px)*.07)));white-space:nowrap}.kroul .krt .krr *{white-space:nowrap}
 .kroul.krpick .krt{cursor:pointer}
 .kroul.krpick .krt:hover,.kroul.krpick .krt:focus-visible{transform:translateY(-4px)}
 .kroul.krpick .krt:hover .krb,.kroul.krpick .krt:focus-visible .krb{box-shadow:0 0 0 2px #fff4dccc inset,0 0 14px 4px #f0d070aa}
