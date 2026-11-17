@@ -4,7 +4,7 @@ let FIGS=[];
 (function(){try{fetch("img/FIGURES.json",{cache:"no-cache"}).then(r=>r.ok?r.json():null).then(j=>{const L=Array.isArray(j)?j:j&&(j.figures||j.files||j.items)||[];FIGS=L.filter(x=>x&&(x.file||x.src));if(FIGS.length&&S)render()}).catch(()=>{})}catch(e){}})();
 const TRK={"Hiểm độc":"hiemdoc","Kiêu ngạo":"kieungao","Hiền lành":"hienlanh","Đa nghi":"danghi","Tham vọng":"thamvong","Nhu mì":"numi"};
 function figRole(p){if(p===S)return"heroine";const k=p&&p.kind;if(k==="emp"||p===S.emp)return"emperor";if(k==="th")return"thaihau";if(k==="man"||(p&&p.ref&&p.ref.rw))return"man";if(k==="ty")return"physician";if(k==="maid"||k==="serv")return(p.ref&&p.ref.role==="eunuch")?"eunuch":"maid";return"consort"}
-function ageBandOf(a){return a>=36?"old":a>=26?"mid":"young"}
+function ageBandOf(a){const B=BAL.ageBand;return a>=B[1]?"old":a>=B[0]?"mid":"young"}
 function norm(x){return String(x==null?"":x).toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g,"").replace(/đ/g,"d").replace(/[^a-z0-9]/g,"")}
 function figFor(p,kind){if(!FIGS.length||!p)return"";const role=figRole(p),who=p.ref||p;const tier=who===S?(S.out?"cold":S.rank):who.queen?7:who.rank;const tr=TRK[who.trait]||norm(who.trait||who.look||"");const ab=ageBandOf(who===S.thO||who.kind==="th"?(S.thAge||55):who.kind==="emp"&&S.emp?S.emp.age:(who.age||20));
  const L=FIGS.filter(f=>norm(f.role)===norm(role)&&(kind!=="por"||/(^|\/)por-/.test(f.file||f.src))&&(kind==="por"||!/(^|\/)por-/.test(f.file||f.src)));if(!L.length)return"";

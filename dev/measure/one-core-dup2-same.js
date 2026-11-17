@@ -2,10 +2,10 @@
    changed since <old-ref>, put the BAL value back in place of each BAL.<ns>… reference of the moved concepts (quyLv, loy, wit, ducLv,
    sungLv, nightEnd.warm/normal, and later keys listed in NS) and compare every top-level statement with the module at <old-ref> (acorn
    AST, positions and raw text ignored). A statement that still differs must be in INTENDED (owner-ruled change, listed in the report).
-   usage: node dev/measure/one-core-dup2-same.js <old-ref>   (exit 1 on any unexpected difference) */
+   usage: node dev/measure/one-core-dup2-same.js <old-ref> [merged-ref]   (exit 1 on any unexpected difference) */
 const fs=require('fs'),cp=require('child_process'),vm=require('vm');
 const acorn=(()=>{try{return require('acorn')}catch(e){return require('/opt/node-tools/node_modules/acorn')}})();
-const REF=process.argv[2];if(!REF){console.log('usage: node dev/measure/one-core-dup2-same.js <old-ref>');process.exit(2)}
+const REF=process.argv[2],REF2=process.argv[3];/* optional REF2 = a branch merged in later (review/one-core-dup-r1/r2): a statement equal to the one there is its change, not ours */if(!REF){console.log('usage: node dev/measure/one-core-dup2-same.js <old-ref>');process.exit(2)}
 const NS=['quyLv','loy','wit','ducLv','sungLv','nightEnd','tinhLv','tinLv','rareLv','sucLv','oanFade','tsDanger','age','srvAge','pet','cut'];
 /* owner-ruled word changes (VANPHONG:69 / OD:L247 thiện cảm words everywhere): */
 const INTENDED={'jhc.js':['window.quyW'],'j21.js':['affW'],'jts.js':['tsQuy'],'j55.js':['ccWord']};
@@ -33,6 +33,9 @@ for(const p of changed){const f=p.split('/').pop();const NEW=fs.readFileSync(p,'
  const a=acorn.parse(back,{ecmaVersion:'latest'}).body,b=acorn.parse(OLD,{ecmaVersion:'latest'}).body.filter(s=>!(s.type==='FunctionDeclaration'&&(REMOVED[f]||[]).includes(s.id.name)));let diff=[];
  if(a.length!==b.length)diff.push('statement count '+b.length+'→'+a.length);else{cur=back;const iife=s=>{const e=s.type==='ExpressionStatement'&&s.expression;const f=e&&e.type==='CallExpression'&&e.callee;return f&&/Function/.test(f.type)&&f.body.body};
   const cmp=(A,Bs)=>A.forEach((s,i)=>{if(strip(s)===strip(Bs[i]))return;const ia=iife(s),ib=iife(Bs[i]);if(ia&&ib&&ia.length===ib.length)cmp(ia,ib);else diff.push(nameOf(s))});cmp(a,b)}
+ let theirs=new Set();if(REF2){try{const T=put(cp.execSync(`git show ${REF2}:${p}`,{encoding:'utf8',maxBuffer:1<<26}),0);const tb=acorn.parse(T,{ecmaVersion:'latest'}).body;const flat=x=>x.flatMap(st=>{const e=st.type==='ExpressionStatement'&&st.expression;const fn=e&&e.type==='CallExpression'&&e.callee;return [st].concat(fn&&/Function/.test(fn.type)?fn.body.body:[])});
+  const keep=new Set(flat(tb).map(strip));const mine=flat(a);cur=back;mine.forEach(st=>{if(keep.has(strip(st)))theirs.add(nameOf(st))});if(acorn.parse(OLD,{ecmaVersion:'latest'}).body.length!==tb.length||a.length===tb.length)theirs.add('statement count '+b.length+'→'+a.length)}catch(e){}}
+ diff=diff.filter(d=>!theirs.has(d)||(INTENDED[f]||[]).includes(d));
  const extra=diff.filter(d=>!(INTENDED[f]||[]).includes(d));if(extra.length)bad.push(f+': differs in '+extra.join(', '));
  rows.push(`| ${f} | ${c} | ${diff.length?'intended: '+diff.join(', '):'identical'} |`)}
 console.log('| module | BAL refs put back | AST vs '+REF.slice(0,8)+' |\n|---|---|---|\n'+rows.join('\n'));
