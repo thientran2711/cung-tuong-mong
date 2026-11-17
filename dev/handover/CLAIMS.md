@@ -918,7 +918,7 @@
 | batch-s32a LIVE d4a850ce (main c114ab9e → d4a850ce; ROLLBACK TARGET c114ab9e; 11 branches, OUT tuanluc-sync/learn-scene-fix-2/pcard-facts-2) | review/batch-s32a | MAIN s36 | session_01UV1SzgWoEmnjTTEv7UgBNP | LIVE | 17/11 19:05Z |
 | UI-FIXES-1: rail blank slot, card art brown box, 412 header under seal, label under flower sprite (sonnet; brief briefs/s36-ui-fixes-1.md) | review/ui-fixes-1 | MAIN s36 | session_01UV1SzjovTp4KY9Xq1JSKvC | READY 7f902a5b (reports/ui-fixes-1.md) | 17/11 19:08Z |
 | toil-looks7: finish toil-looks5 (V2-B smaller, final sheet v17, merge main) (sonnet; brief briefs/s36-toil-looks7.md) | review/toil-looks5 | MAIN s36 | session_01UV1SzknrVcN46ftwSGV7f9 | SẴN SÀNG KIỂM 8fe3f7b7 (v17) | 17/11 19:36Z |
-| REVIEW display-shelf (opus BIG) of e0a86875 | review/display-shelf | C-AG | session_01UV1SzkUH3pxqYSkZMUQX7v | RUNNING | 17/11 19:09Z |
+| REVIEW display-shelf (opus BIG) of e0a86875 | review/display-shelf | C-AG | session_01UV1SzkUH3pxqYSkZMUQX7v | ROLLED OVER → SzmDekH (archived) | 17/11 19:09Z |
 | REVIEW kit-figure-mood r3 of 5758b6e3 (sonnet SMALL; brief briefs/s36-review-kit-figure-mood-r3.md) | review/kit-figure-mood-r3 | MAIN s36 | session_01UV1Szh4nqVY4zaK7Nk1kui | RUNNING | 17/11 19:12Z |
 | odds-cap review r1 (opus BIG) of d3589f39 | review/odds-cap-r1 | D | session_01964izEqMuRVcBrUFRY8F3P | RUNNING | 17/11 19:15Z |
 | REVIEW moodknow final + mood-mem step0 (opus) of 8e2ac171 | review/mood-mem-r1 | C-AG | session_01UV1SzgWE17y4bj2Nh4xG1c | RUNNING | 17/11 19:16Z |
@@ -955,3 +955,4 @@
 | NPC-CHAIN LANDER (opus; one head ag-all-2+MOODKNOW+mood-mem+feelings-18+kit-figure-mood r6 on main; s37 21:17Z) | review/npc-chain-land | C-AG | session_01UV1Szi7UbTAbk3W9QSD6h7 | RUNNING | 17/11 21:26Z |
 | FOREMAN C-AG #7 (opus; successor of #6, opened by MAIN s38) | handover FOREMAN_C_STATUS | MAIN s38 | session_01UV1SzgaEMtM9LvcYPr6tdR | RUNNING | 17/11 21:36Z |
 | toil blush final (owner row 3, OD L1721): BAL.toil dep bl .2304 / tuyet bl .2428 on toil-looks5 v18 → SMALL review → batch (sonnet) | review/toil-looks5 | MAIN s38 | session_01UV1SzhA7otHzXMdiSEqbyd | RUNNING | 17/11 21:37Z |
+| REVIEW display-set-bonus (opus BIG; successor of SzkUH3p) | review/display-set-bonus | C-AG | session_01UV1SzmDekHiFMVcVBmxdRT | RUNNING | 17/11 21:38Z |
