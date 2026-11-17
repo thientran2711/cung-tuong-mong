@@ -14,3 +14,12 @@ Items 1-4 fixed and LOOKED at (Fold + iPad): informer name+role per row (kitName
 
 # r3 re-review — PASS 47a462ca (review/tinbao-ui-r3r = worker r3 84152ddc (= r2 + card title "Tai mắt báo", owner (e)) rebased on NEWEST ag-all-2 986f797a, site rebuilt)
 Title shown, looked at (Fold). tinbao-ui.test 19/19, one-core-guard PASS (fails 0), old save ok. quickcheck G1 one-core-text FAIL still inherited from ag-all-2 (none in jtinbao); perf single run buổi 1845 vs live 1067 is single-run noise (r2 3-run median 1135/1122, no tinbao code on the buổi path). Worker CDN shots wiped.
+
+# r3b review (worker 44500057: "Tai mắt báo" header + kitTaiMatCard + informer kind, ONE adapter, stub) — FAIL
+Rebased on NEWEST ag-all-2 275efe22 (my helper branch review/tinbao-ui-r3br d409b92c: r3b source + KIT §87/87.1 + build; use it as the base for the fix). tinbao-ui.test 22/22. Looked at Fold (Tai mắt card) + iPad (Tin báo card).
+FAIL items:
+1. ONE CORE: one-core-guard FAIL "NEW inline rule number: jtinbao.js [ladder] n>=70?..:n>=40?.." (LOYW). Use BAL.loy.trust (70) and BAL.loy.low (40) (both exist in jbal.js:301). ag-all-2 alone = PASS, so jtinbao adds it.
+2. TRUTH (owner ~15:25Z (4), and her 16:25Z question "có phải thực sự là những tai mắt này không"): the STUB tbTaiMat() invents who her Tai mắt are (her servants by lòng, "đặt ở Ngọc Thanh các") and the card prints it as fact ("một lòng với ta" etc.). If taiMatList is not shipped, the Tai mắt card must NOT list invented people: either do not intercept the tap until taiMatList() exists (old behaviour stays), or show only the true count with no names. tbInformerKind stub from the item's `by` is fine (by is real).
+3. Minor: iPad card button "Để ta tới xem" wraps to two lines next to its picture (narrow option); give the option its normal width or shorten.
+4. Minor: Fold Tai mắt card, 3rd row (the confidant maid) shows the kit placeholder-picture frame (image not loaded at shot time, or her portrait path missing): re-shoot after load and confirm it is her portrait.
+G1 one-core-text (quickcheck) still only the ag-all-2 sites. Worker CDN shots wiped.
