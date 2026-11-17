@@ -69,10 +69,10 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
  ok(r6.planned&&!r6.errs&&!r6.err,'old save without a day plan loads and plans',r6);ok(r6.p95<=r6.budget,'perf: day draw p95 within BAL.ag.perf.p95 ms',r6);
  /* 7 AG-ALL-2: the Emperor's visit / tea are HIS plan (NPC consorts too), bestowal by regard, the player's cards read BAL.ag.cx2 */
  const r7=await p.evaluate(async()=>{const o={};const L=liveRivals(true).filter(v=>v.alive&&!v.out);for(const v of L){v.sung=75;v.an=40;v.preg=0;v.confined=0}S.sung=75;
-  const tea0=BAL.ag.emp3.tea;BAL.ag.emp3.tea=4;/* the mechanism, not the rate: a stronger wish for tea so 14 days surely hold one */const vs0=AG2.stat.visit,te0=AG2.stat.tea;const ks={};let npcNight=0,roll0=0;const vr=visRoll;
+  const tea0=BAL.ag.emp3.tea,des0=BAL.ag.emp3.desire;BAL.ag.emp3.tea=4;BAL.ag.emp3.desire=des0*4;/* the mechanism, not the rate: a stronger wish for tea AND for the evening visit so 14 days surely hold one (review ag-all-2 r2 fix2: his desire is × tsMoodW, which sits at .25 for whole fortnights in a bad mood; measured at sung 75, default BAL: 1–5 visits per 14 days, 6–15 per 42 days, i.e. a 0 in one 14-day window is the real rate, not a fault) */const vs0=AG2.stat.visit,te0=AG2.stat.tea;const ks={};let npcNight=0,roll0=0;const vr=visRoll;
   for(let d=0;d<14;d++){for(let bb=0;bb<4;bb++){placeWhere();agFlush();const D=agDz();const s=D.P.emp&&D.P.emp[S.buoi||0];if(s&&s.k)ks[s.k]=(ks[s.k]||0)+1;
     if(S.visNpc&&S.visNpc.w===wk()&&S.tonight&&S.tonight.id===S.visNpc.id)npcNight++;Q.length=0;S.mg=0;try{nextBuoi()}catch(e){o.nb=e.message}Q.length=0}}
-  BAL.ag.emp3.tea=tea0;o.ks=ks;o.visit=AG2.stat.visit-vs0;o.tea=AG2.stat.tea-te0;o.npcNight=npcNight;o.rollOff=visRoll()==="";
+  BAL.ag.emp3.tea=tea0;BAL.ag.emp3.desire=des0;o.ks=ks;o.visit=AG2.stat.visit-vs0;o.tea=AG2.stat.tea-te0;o.npcNight=npcNight;o.rollOff=visRoll()==="";
   /* bestowal: his regard decides at the site's own %; off → the plain roll */
   const lo=L[0],hi=L[1]||L[0];lo.sung=5;lo.an=0;hi.sung=95;hi.an=80;let a=0,c=0;for(let i=0;i<3000;i++){if(empGive(lo,30,"t"))a++;if(empGive(hi,30,"t"))c++}o.give={lo:a/30,hi:c/30};
   /* the player's card reads the same table */

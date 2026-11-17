@@ -12,7 +12,7 @@ const BTN={/* AG-ALL-2e */follow:"Theo hầu chủ",cut:"Cắt đứt",/* AG-ALL
  grantWed:"Tạ ơn, xuất giá",grantStay:"Xin ở lại",age_out:"Xuất cung",age_mama:"Ở lại làm ma ma",age_keep:"Xin chủ giữ lại"};
 (async()=>{const b=await chromium.launch();const p=await b.newPage({viewport:{width:755,height:1000}});const errs=[];p.on('pageerror',e=>errs.push(e.message));
  await p.goto(URL,{waitUntil:'domcontentloaded'});await p.waitForTimeout(2500);
- const fresh=(maid)=>p.evaluate((maid)=>{localStorage.clear();SLOT=4;document.getElementById('title').hidden=true;window.__nlInner=1;start();window.__nlInner=0;window.__bot=1;quiet=false;Q.length=0;
+ const fresh=(maid)=>p.evaluate((maid)=>{localStorage.clear();SLOT=4;document.getElementById('title').hidden=true;window.__nlInner=1;start();window.__nlInner=0;window.__bot=1;window.__agAll=1;/* review ag-all-2 r2 fix2: this file plays 40 weeks inside ONE evaluate (no frame between buổi); since B5 the staff's buổi pick runs in setTimeout slices, so without the test switch every agent test uses (__agAll: slices run at once) no staff pick ever ran (suite: srv 0–1 acts) */quiet=false;Q.length=0;
   if(maid)srvInit();try{deal()}catch(e){}render();const N=window.__asN;N.maid={};N.srv={};N.n=0;N.ms=0;N.tick=0;N.react={};N.hit={};N.out=0;return{srv:isSrv()}},maid);
  const play=(n)=>p.evaluate((n)=>{const E=[];const ce=console.error;console.error=(...a)=>{E.push(a.map(String).join(" ").slice(0,160));ce.apply(console,a)};
   try{for(let i=0;i<n&&!S.dead;i++){Q.length=0;try{closeAll()}catch(e){}for(let b=0;b<4;b++){try{placeWhere()}catch(e){}if(typeof nextBuoi==="function"&&b<3)try{nextBuoi()}catch(e){}}

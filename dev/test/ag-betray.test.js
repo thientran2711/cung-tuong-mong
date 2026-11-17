@@ -40,7 +40,7 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
  /* 3 failure costs no bạc; success pays the price — her and NPC */
  const r3=await p.evaluate(()=>{const o={};let {v,s}=__rig(50,"Ham lợi",["Cần","Kiệm"]);const cost=nv(s,"bribeCost");
   S.bac=500;__rnd(.999);bribeServ(S,s);__rndOff();o.failBac=S.bac;o.failSpy=s.spyFor;s.spyFor=null;
-  S.bac=500;__rnd(0);const t=bribeServ(S,s);__rndOff();o.okBac=S.bac;o.okSpy=s.spyFor;o.cost=cost;o.okTxt=t;s.spyFor=null;
+  S.bac=500;__rnd(0);const t=bribeServ(S,s);__rndOff();o.okBac=S.bac;o.okSpy=s.spyFor;o.cost=cost;/* review ag-all-2 r2 fix2: a 'muoi' start with her home maid bargains back cmB().muoiBack % of a paid bribe (jcmaid, its own log line); the suite's 491 = 500 − 15 + 6 was that refund */o.back=(typeof cmOff==='function'&&!cmOff()&&S.maid&&S.maid.src==='home'&&S.origin&&S.origin.k==='muoi')?Math.round(cost*cmB().muoiBack/100):0;o.okTxt=t;s.spyFor=null;
   /* NPC briber */const w=liveRivals(true).filter(x=>x!==v&&x.alive&&!x.out)[0];w.bac=500;__rnd(.999);bribeServ(w,s);__rndOff();o.npcFail=w.bac;s.spyFor=null;
   w.bac=500;__rnd(0);bribeServ(w,s);__rndOff();o.npcOk=w.bac;o.npcSpy=s.spyFor===key(w);s.spyFor=null;
   /* Cài tai mắt card (her deck runOpt): the price sits in thành (w), nothing in the cost */
@@ -49,7 +49,7 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
   /* ACT "Mua chuộc cung nữ" on a consort: no bạc on refusal */const u=liveRivals(true).find(x=>x.maid&&x.alive&&!x.out);S.bac=500;__rnd(.999);try{ACT.bribe.f(S,u)}catch(e){o.err3=String(e)}__rndOff();o.actFail=500-S.bac;
   return o});
  ok(r3.failBac===500&&r3.failSpy!=="me",'Mua chuộc refused: no bạc taken',r3);
- ok(r3.okBac===500-r3.cost&&r3.okSpy==="me",'Mua chuộc taken: her price paid',{bac:r3.okBac,cost:r3.cost});
+ ok(r3.okBac===500-r3.cost+r3.back&&r3.okSpy==="me",'Mua chuộc taken: her price paid (less the muoi maid\'s bargain-back)',{bac:r3.okBac,cost:r3.cost,back:r3.back});
  ok(r3.npcFail===500&&r3.npcOk===500-r3.cost&&r3.npcSpy,'NPC briber: the same (no bạc on refusal, price on success)',{fail:r3.npcFail,ok:r3.npcOk});
  ok(!r3.card.c.bac&&r3.card.w.bac<0&&/bại: không mất bạc/.test(r3.card.x),'Cài tai mắt card: price in thành, none in the cost; the card says so',r3.card);
  ok(r3.cardFail===0&&r3.cardOk===r3.cardPrice&&!r3.err&&!r3.err2,'Cài tai mắt: failure 0 bạc, success = her price',{fail:r3.cardFail,ok:r3.cardOk,price:r3.cardPrice,e:r3.err||r3.err2});
