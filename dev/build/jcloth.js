@@ -10,17 +10,18 @@
    so the warped edge never shows a ghost. Numbers: BAL.looks.xoc (nhẹ / vừa / nặng); BAL.looks.xoc.on = 0 keeps the live feature OFF until the owner approves
    (the sample page / tests call clothXocBake directly). Core = pure functions (no game globals): usable from any tool. ================= */
 Object.assign(BAL.looks,{xoc:{on:0,
- /* per level 1..3 (nhẹ / vừa / nặng): crease = dark fold lines, relief = light-and-shade of the folds, hi = highlight on the ridges,
-    dens = fold lines per figure width, diag = strength of waist / sleeve diagonal pulls, warp = hem wave (% of figure width), skew = hem tilt (% of width),
-    collar = lapel / collar drift (% of width) */
- lv:[null,{waist:5,belt:3,elbow:2,hem:4,drag:1,dep:1.2,crease:.2,relief:1.5,hi:.06,warp:1.4,skew:2.5,collar:2},{waist:8,belt:5,elbow:4,hem:7,drag:2,dep:1.45,crease:.2,relief:1.55,hi:.08,warp:2.3,skew:4.5,collar:3.5},{waist:12,belt:8,elbow:6,hem:11,drag:4,dep:1.75,crease:.26,relief:1.85,hi:.1,warp:3.4,skew:7,collar:5}],
- seed:7,light:[-.55,-.8],skin:{de:15,lum:.32,min:.003,max:.02},hair:{de:26,reach:.34},head:.012,item:60}});
+ /* per level 1..3 (nhẹ / vừa / nặng), r3: counts of creases per body place (waist = fan out of the tie, belt = bunched above the sash, elbow = per arm,
+    hem = bunched above the hem, drag = shoulder→waist diagonals), dep = band strength 0..1, sg = band half-width (px at a 900-px figure),
+    dark = how much a full-strength band darkens (multiply), lite = ridge light (screen), warp = hem wave (% of figure width), skew = hem tilt, collar = lapel drift */
+ lv:[null,{waist:3,belt:3,elbow:2,hem:3,drag:0,dep:.75,sg:2.8,dark:.3,lite:.26,warp:.8,skew:1.2,collar:1},{waist:5,belt:6,elbow:4,hem:9,drag:1,dep:.9,sg:3,dark:.38,lite:.32,warp:1.6,skew:2.6,collar:2.2},{waist:8,belt:9,elbow:6,hem:15,drag:2,dep:1,sg:3.2,dark:.46,lite:.4,warp:2.8,skew:4.5,collar:3.6}],
+ /* body anchors as a share of the figure box (waist tie row, elbow bend, shoulder), ridge = offset / width (in band widths) / strength of the lit edge, comp = brightness kept */
+ body:{waist:.34,elbowX:.24,elbowY:.43,shoulder:.17},ridge:{off:1.1,w:.42,k:1,edge:.45},comp:.85,bunchK:3,
+ seed:7,light:[-.55,-.8],skin:{de:15,lum:.32,min:.003,max:.02,fill:.25,asp:2.6},hair:{de:26,reach:.34},head:.012,item:60}});
 /* ---------- tiny deterministic noise ---------- */
 function clothHash(x,y,s){let h=(x*374761393+y*668265263+s*2147483647)|0;h=(h^(h>>>13))*1274126177|0;return((h^(h>>>16))>>>0)/4294967295}
 function clothNoise(x,y,s){const xi=Math.floor(x),yi=Math.floor(y),fx=x-xi,fy=y-yi,u=fx*fx*(3-2*fx),v=fy*fy*(3-2*fy);
  const a=clothHash(xi,yi,s),b=clothHash(xi+1,yi,s),c=clothHash(xi,yi+1,s),d=clothHash(xi+1,yi+1,s);return a+(b-a)*u+(c-a)*v+(a-b-c+d)*u*v}
 function clothFbm(x,y,s,o){let t=0,a=.5,f=1,n=0;for(let i=0;i<(o||3);i++){t+=a*clothNoise(x*f,y*f,s+i*17);n+=a;a*=.5;f*=2.03}return t/n}
-const clothRidge=n=>{const r=1-Math.abs(2*n-1);return r*r}   /* thin bright line where the noise crosses its middle */
 const clothSmooth=(a,b,x)=>{const t=Math.max(0,Math.min(1,(x-a)/(b-a)));return t*t*(3-2*t)};
 function clothBlur(src,W,H,r){/* separable box blur x2, Float32 */const t=new Float32Array(W*H),o=new Float32Array(W*H),k=2*r+1;
  for(let y=0;y<H;y++){let s=0;const b=y*W;for(let x=-r;x<=r;x++)s+=src[b+Math.min(W-1,Math.max(0,x))];for(let x=0;x<W;x++){t[b+x]=s/k;s+=src[b+Math.min(W-1,x+r+1)]-src[b+Math.max(0,x-r)]}}
@@ -43,7 +44,10 @@ function clothMask(d,W,H,face,B){const n=W*H,Lab=new Float32Array(n*3);let y0=H,
   if(Math.sqrt(da*da+db*db)<tol*.62&&dl>-sl*B.skin.lum&&dl<14&&Lab[i*3+1]>sa-4)skin[i]=1}
  /* skin = only real blobs (face, neck, hands, feet); a few robe-trim pixels with a skin-like colour are not skin: drop components smaller than skin.min of the figure area */
  {const seen=new Uint8Array(n),minA=B.skin.min*fw*fh;for(let s=0;s<n;s++){if(!skin[s]||seen[s])continue;const comp=[s],st=[s];seen[s]=1;while(st.length){const i=st.pop(),y=(i/W)|0,x=i-y*W;for(const j of[x>0?i-1:-1,x<W-1?i+1:-1,y>0?i-W:-1,y<H-1?i+W:-1]){if(j>=0&&skin[j]&&!seen[j]){seen[j]=1;st.push(j);comp.push(j)}}}
-  if(comp.length<minA||comp.length>B.skin.max*fw*fh)for(const i of comp)skin[i]=0}}/* too big = a skin-coloured robe, not a hand / neck */
+  let bx0=W,bx1=0,by0=H,by1=0;for(const i of comp){const y=(i/W)|0,x=i-y*W;if(x<bx0)bx0=x;if(x>bx1)bx1=x;if(y<by0)by0=y;if(y>by1)by1=y}const bw=bx1-bx0+1,bh=by1-by0+1;
+  /* real skin blobs (hands, neck, feet) are compact; a long thin strip or a ragged lace of skin colour is robe trim / embroidery (r3) */
+  const fill=comp.length/(bw*bh),asp=bh/Math.max(1,bw);/* tall thin = lapel / trim strip; hands are wide or round */
+  if(comp.length<minA||comp.length>B.skin.max*fw*fh||fill<B.skin.fill||asp>B.skin.asp)for(const i of comp)skin[i]=0}}/* too big = a skin-coloured robe, not a hand / neck */
  /* hair = dark pixels of the head zone's hair colour, grown downwards while the colour stays hair (long hair over the shoulders), limited reach */
  const hair=new Uint8Array(n);let hl=0,ha=0,hb=0,hn=0;const hy1=Math.min(H,face.y+face.h*.2|0);
  for(let y=y0;y<hy1;y++)for(let x=(cx-fw*.30)|0;x<cx+fw*.30;x++){const i=y*W+x;if(d[i*4+3]>240&&Lab[i*3]<30){hl+=Lab[i*3];ha+=Lab[i*3+1];hb+=Lab[i*3+2];hn++}}
@@ -61,47 +65,56 @@ function clothMask(d,W,H,face,B){const n=W*H,Lab=new Float32Array(n*3);let y0=H,
  const prot=clothBlur(clothBlur(pr,W,H,3),W,H,3);for(let i=0;i<n;i++)prot[i]=Math.min(1,prot[i]*4);
  const ps=new Float32Array(n);for(let i=0;i<n;i++)ps[i]=skin[i]||hair[i]?1:0;const protS=clothBlur(clothBlur(ps,W,H,3),W,H,3);for(let i=0;i<n;i++)protS[i]=Math.min(1,protS[i]*4);/* strokes avoid only skin + hair (embroidery is part of the robe); warp also avoids items */
  return{m:clothBlur(m,W,H,1),y0,y1,x0,x1,cx,chin,skin,hair,prot,protS}}
-/* ---------- (b) fold height-field: vertical folds along the fall + diagonal pulls at waist and sleeves ---------- */
+/* ---------- (b) crease map: every crease = a STRAIGHT (or gently tapered) soft gaussian dark band + a thin lighter ridge on its lit side (r3) ----------
+   Painted-fold shading, not a relief / noise texture: no gradient lighting, no swirl, no turbulence (r1/r2 read as glass / zebra). Strokes are placed by
+   the body: a fan of short folds out of the waist tie, bunched horizontal wrinkles just above the belt and above the hem, crumples at the elbow bend,
+   1–2 diagonal drag lines shoulder→waist. dk = darkness 0..1 (multiply in the robe's own hue), lt = ridge light 0..1 (screen). */
 function clothRng(s){let a=(s*2654435761)>>>0;return()=>{a=(a+0x6D2B79F5)>>>0;let t=a;t=Math.imul(t^(t>>>15),t|1);t^=t+Math.imul(t^(t>>>7),t|61);return((t^(t>>>14))>>>0)/4294967296}}
-/* fold height-field built from CREASE STROKES (no iso-contour noise, which reads as marble): every wrinkle is a short tapered valley line with a lit ridge beside it.
-   Directions: vertical along the robe's fall; around the belt knot / hips / elbows they RADIATE from the tension point (pull wrinkles); counts + length per level.
-   h = hills and valleys (light / shade through the gradient), cv = the thin dark line in the valley. */
-function clothField(W,H,mk,L,seed){const n=W*H,h=new Float32Array(n),cv=new Float32Array(n),fh=mk.y1-mk.y0+1,fw=mk.x1-mk.x0+1,cx=mk.cx,waist=mk.y0+fh*.47,R=clothRng(seed*977+13),pr=mk.protS;
- const splat=(x0,y0,ang,len,wd,dep,bend)=>{const dx=Math.cos(ang),dy=Math.sin(ang),nx=-dy,ny=dx,steps=Math.max(4,len|0);
-  for(let k=0;k<=steps;k++){const t=k/steps,tp=Math.pow(Math.sin(Math.PI*Math.min(1,t*.98+.01)),.8),off=bend*len*(t-.5)*(t-.5)*2,px=x0+dx*len*t+nx*off,py=y0+dy*len*t+ny*off,r=wd*3.2;
-   for(let yy=Math.floor(py-r);yy<=py+r;yy++)for(let xx=Math.floor(px-r);xx<=px+r;xx++){if(xx<0||yy<0||xx>=W||yy>=H)continue;const i=yy*W+xx;if(mk.m[i]<.3||pr[i]>.35)continue;
-    const sd=((xx-px)*nx+(yy-py)*ny)/wd,val=Math.exp(-sd*sd),rid=Math.exp(-Math.pow(sd-1.9,2)*.8)*.55;/* soft valley + a light ridge beside it */
-    h[i]+=(-val+rid)*dep*tp*.11;const c=val*val*tp*dep;if(c>cv[i])cv[i]=Math.min(1,c)}}};
- const rowSpan=y=>{let a=-1,b=-1;for(let x=0;x<W;x++)if(mk.m[(y|0)*W+x]>.9){if(a<0)a=x;b=x}return[a,b]};
- const J=()=>R()-.5,D=L.dep;
- /* fan = creases radiating from one point (waist tie, elbow) */
- const fan=(ox,oy,k,len,wd,dep,spread,base)=>{for(let q=0;q<k;q++){const ang=base+(q-(k-1)/2)*spread+J()*.12;splat(ox+Math.cos(ang)*fw*.02,oy+Math.sin(ang)*fw*.02,ang,len*(.75+R()*.5),wd*(.8+R()*.5),dep*(.75+R()*.5),J()*.5)}};
- /* 1. the waist tie: a fan opening down and out, plus a few above the belt (bunched, horizontal) */
- fan(cx,waist+fh*.02,L.waist,fh*.14,3.4,D,.26,Math.PI/2);
- for(let q=0;q<L.belt;q++){const y=waist-fh*(.015+R()*.07),sp=rowSpan(y),span=Math.min(sp[1],cx+fw*.3)-Math.max(sp[0],cx-fw*.3);if(span<20)continue;splat(Math.max(sp[0],cx-fw*.3)+R()*span*.5,y,J()*.18,fw*(.09+R()*.1),3,D*.85,J()*.6)}
- /* 2. elbows / inner sleeve: a small crumple of 3 fanned creases + short horizontal pulls, both arms */
- if(L.elbow>0)for(const sd of[-1,1]){const ex=cx+sd*fw*.3,ey=mk.y0+fh*.5;fan(ex,ey,L.elbow,fh*.09,3.2,D*.9,.35,sd<0?Math.PI*.9:Math.PI*.1);
-  for(let q=0;q<Math.ceil(L.elbow/2);q++)splat(ex-fw*.07+J()*fw*.04,ey+fh*(.03+q*.025),J()*.25,fw*.12,2.8,D*.7,J()*.5)}
- /* 3. the hem: short horizontal bunched wrinkles above the edge */
- for(let q=0;q<L.hem;q++){const y=mk.y1-fh*(.03+R()*.09),sp=rowSpan(y);if(sp[0]<0||sp[1]-sp[0]<fw*.3)continue;splat(sp[0]+(.08+R()*.78)*(sp[1]-sp[0]),y,J()*.22,fw*(.08+R()*.1),3,D*.8,J()*.6)}
- /* 4. drag lines from the shoulder toward the waist knot (a couple of diagonals) */
- for(let q=0;q<L.drag;q++){const sd=q%2?1:-1,sx=cx+sd*fw*(.2+R()*.08),sy=mk.y0+fh*(.13+R()*.03),ang=Math.atan2(waist-sy,cx-sx);splat(sx+Math.cos(ang)*fh*.03,sy+Math.sin(ang)*fh*.03,ang,fh*(.16+R()*.06),3.4,D*.85,sd*.25)}
- return{h,cv}}
+function clothField(W,H,mk,L,seed){const n=W*H,dk=new Float32Array(n),lt=new Float32Array(n),fh=mk.y1-mk.y0+1,fw=mk.x1-mk.x0+1,cx=mk.cx,B=BAL.looks.xoc,
+  waist=mk.y0+fh*B.body.waist,R=clothRng(seed*977+13),pr=mk.protS,u=fh/900;/* u = 1 at the 900-px figure height the picture set is painted at */
+ /* one crease: straight line (x0,y0) → angle, length len; sg = band half-width (px), dep = darkness; the ridge sits on the side facing the light, thinner */
+ const lx=B.light[0],ly=B.light[1];
+ const stroke=(x0,y0,ang,len,sg,dep)=>{const dx=Math.cos(ang),dy=Math.sin(ang);let nx=-dy,ny=dx;if(nx*lx+ny*ly<0){nx=-nx;ny=-ny}/* n points toward the light */
+  const sgw=sg*u,r=sgw*3.5+2,xa=Math.min(x0,x0+dx*len)-r,xb=Math.max(x0,x0+dx*len)+r,ya=Math.min(y0,y0+dy*len)-r,yb=Math.max(y0,y0+dy*len)+r,ro=sgw*B.ridge.off,rw=sgw*B.ridge.w;
+  for(let yy=Math.max(0,ya|0);yy<=Math.min(H-1,yb);yy++)for(let xx=Math.max(0,xa|0);xx<=Math.min(W-1,xb);xx++){const i=yy*W+xx;if(mk.m[i]<.3)continue;
+   const px=xx-x0,py=yy-y0,t=(px*dx+py*dy)/len;if(t<-.05||t>1.05)continue;const tc=Math.max(0,Math.min(1,t));
+   const tp=Math.pow(Math.sin(Math.PI*(.04+tc*.92)),.7)*(t<0?1+t*20:t>1?1-(t-1)*20:1);/* tapered both ends, thickest a little before the middle */
+   const sd=px*nx+py*ny,w=sgw*(.55+.45*tp)*(sd>0?B.ridge.edge:1),g=Math.exp(-.5*(sd/w)*(sd/w))*tp*dep,/* crisp on the lit side, soft fall-off on the shade side */ri=Math.exp(-.5*Math.pow((sd-ro*(.6+.4*tp))/rw,2))*tp*dep*B.ridge.k;
+   const keep=1-Math.min(1,pr[i]*1.6);dk[i]=1-(1-dk[i])*(1-g*keep);lt[i]=Math.max(lt[i],ri*keep)}};
+ const rowSpan=y=>{let a=-1,b=-1;const yy=Math.max(0,Math.min(H-1,y|0));for(let x=0;x<W;x++)if(mk.m[yy*W+x]>.9&&pr[yy*W+x]<.3){if(a<0)a=x;b=x}return[a,b]};
+ const J=()=>R()-.5,D=L.dep,S=L.sg;
+ /* 1. fan of short folds hanging out of the waist tie: start just below the knot, open downward ±35°, longest in the middle */
+ for(let q=0;q<L.waist;q++){const f=L.waist>1?q/(L.waist-1)-.5:0,ang=Math.PI/2-f*1.5+J()*.25,ox=cx+f*fw*.08+J()*fw*.03,oy=waist+fh*(.015+R()*.03);/* splayed out of the knot (against the robe's own vertical pleats, so they read as creases) */
+  stroke(ox,oy,ang,fh*(.045+.04*(1-Math.abs(f))+R()*.04),S*(.7+R()*.6),D*(.55+R()*.55))}
+ /* bunch = a small stack of near-parallel short creases (fabric pushed together): k strokes stepped along the normal by gap, lengths and tilt jittered */
+ const bunch=(x,y,ang,k,len,gap,sg,dep)=>{const nx=-Math.sin(ang),ny=Math.cos(ang);for(let j=0;j<k;j++){const o=(j-(k-1)/2)*gap*(.8+R()*.4),l=len*(.55+R()*.6),sh=(R()-.5)*len*.35;
+  stroke(x+nx*o+Math.cos(ang)*sh-Math.cos(ang)*l/2,y+ny*o+Math.sin(ang)*sh-Math.sin(ang)*l/2,ang+J()*.18,l,sg*(.75+R()*.4),dep*(.7+R()*.4))}};
+ const per=B.bunchK,gp=fh*.011;
+ /* 2. bunched horizontal wrinkles just above the belt (fabric pushed up by the sash) */
+ for(let q=0;q<Math.ceil(L.belt/per);q++){const y=waist-fh*(.02+R()*.03),sp=rowSpan(y);if(sp[0]<0)continue;const a0=Math.max(sp[0],cx-fw*.28),a1=Math.min(sp[1],cx+fw*.28);if(a1-a0<fw*.1)continue;
+  bunch(a0+fw*.06+R()*Math.max(1,a1-a0-fw*.12),y,J()*.25,Math.min(per,L.belt-q*per),fw*.13,gp,S*.85,D)}
+ /* 3. crumples at the inner elbow / sleeve bend: a stack of short diagonal creases on each arm, slanting down toward the body */
+ for(const sd of[-1,1])for(let q=0;q<Math.ceil(L.elbow/per);q++){const ex=cx+sd*fw*(B.body.elbowX+J()*.05),ey=mk.y0+fh*(B.body.elbowY+J()*.04),ang=(sd<0?0:Math.PI)+sd*(.45+R()*.2);
+  bunch(ex,ey,ang,Math.min(per,L.elbow-q*per),fw*.1,gp,S*.75,D*.9)}
+ /* 4. bunched wrinkles above the hem: stacks of short, near-level creases spread across the skirt */
+ for(let q=0;q<Math.ceil(L.hem/per);q++){const y=mk.y1-fh*(.04+R()*.07),sp=rowSpan(y);if(sp[0]<0||sp[1]-sp[0]<fw*.25)continue;
+  bunch(sp[0]+(.12+R()*.76)*(sp[1]-sp[0]),y,J()*.3,Math.min(per,L.hem-q*per),fw*.15,gp*1.1,S,D)}
+ /* 5. drag lines: long, faint, straight diagonals from the shoulder down toward the waist knot */
+ for(let q=0;q<L.drag;q++){const sd=q%2?1:-1,sx=cx+sd*fw*(.27+R()*.05),sy=mk.y0+fh*(B.body.shoulder+.04+R()*.03),tx=cx-sd*fw*.06,ty=waist+fh*.02,ang=Math.atan2(ty-sy,tx-sx);
+  stroke(sx,sy,ang,Math.hypot(tx-sx,ty-sy)*.85,S*1.15,D*.55)}
+ return{dk,lt}}
 /* ---------- the effect: one call = baked ImageData ---------- */
 function clothXocBake(d,W,H,lv,opt){opt=opt||{};const B=BAL.looks.xoc,L=B.lv[cl(lv|0,1,3)],n=W*H,seed=opt.seed==null?B.seed:opt.seed;
  const mk=opt.mask||clothMask(d,W,H,opt.face||null,B),m=mk.m,fh=mk.y1-mk.y0+1,fw=mk.x1-mk.x0+1;
- const F=clothField(W,H,mk,L,seed),h=F.h,cv=clothBlur(F.cv,W,H,2),hs=clothBlur(h,W,H,2);
- /* shading: relief from the gradient toward the light, creases darker where the field peaks (the fold line), small highlights on the lit ridge */
- const sh=new Float32Array(n),dk=new Float32Array(n),hi=new Float32Array(n),lx=B.light[0],ly=B.light[1];
- for(let y=1;y<H-1;y++)for(let x=1;x<W-1;x++){const i=y*W+x;if(m[i]<.02)continue;if(mk.prot[i]>.5){continue}const gx=(hs[i+1]-hs[i-1])*.5,gy=(hs[i+W]-hs[i-W])*.5,s=-(gx*lx+gy*ly)*1.3;
-  sh[i]=Math.max(-1,Math.min(1,s));dk[i]=Math.min(1,cv[i]*.8);hi[i]=Math.max(0,s)*Math.max(0,1-cv[i]*1.4)}
- /* cloth layer = original colours × shading; the lapel / hem / skew warp samples it from displaced positions */
- /* keep the robe's overall brightness: folds only move light around (the mean shade of the mask is put back, 85 %) */
- const A=L.crease,R=L.relief,Hh=L.hi;let ms=0,mc=0;for(let i=0;i<n;i++)if(m[i]>.5){ms+=sh[i]*R*.5-A*dk[i]*.8;mc++}const mean=mc?ms/mc:0;
+ const F=clothField(W,H,mk,L,seed),dk=clothBlur(F.dk,W,H,1),lt=F.lt;
+ /* cloth layer = original colours: crease = multiply toward the robe's OWN hue darkened (a touch more saturated, never grey), ridge = soft screen.
+    Mean brightness kept: the small loss of the creases is spread back over the mask (cp share). */
+ let ms=0,mc=0;for(let i=0;i<n;i++)if(m[i]>.5){ms+=dk[i]*L.dark-lt[i]*L.lite*.6;mc++}const comp=mc?ms/mc*B.comp:0;
  const cloth=new Float32Array(n*4);
- for(let i=0;i<n;i++){const k=m[i];if(k<.01)continue;const lum=(d[i*4]*.3+d[i*4+1]*.59+d[i*4+2]*.11)/255;
-  const mul=1-A*dk[i]*(.6+.4*lum)+R*.5*sh[i]*(.7+.3*lum)-mean*.85,add=Hh*hi[i]*(1-lum*.45),tn=[1,.97,.9];/* shadow is the cloth's own colour darker (warm), never grey */
-  for(let c=0;c<3;c++){const v=d[i*4+c],mm=1-(1-mul)*(c===2?1.12:c===1?1.04:1);cloth[i*4+c]=Math.max(0,Math.min(255,v*mm+(255-v)*add*tn[c]))*k}cloth[i*4+3]=k}
+ for(let i=0;i<n;i++){const k=m[i];if(k<.01)continue;const r=d[i*4],g=d[i*4+1],b=d[i*4+2],lum=(r*.3+g*.59+b*.11)/255,mx=Math.max(r,g,b,1);
+  const a=dk[i]*L.dark*(.75+.35*lum),li=lt[i]*L.lite*(1-lum*.5);
+  for(let c=0;c<3;c++){const v=c===0?r:c===1?g:b,sat=v/mx;/* the channel's share of the colour: dominant channels darken less -> own hue, a bit richer */
+   const sh=v*v/255;let o=(v+(sh-v)*Math.min(1,a*2.6))*(1-a*.35*(1.2-.4*sat))*(1+comp);/* shadow = the colour multiplied by itself (richer own hue, never grey), then a little darker */o=o+(255-o)*li;cloth[i*4+c]=Math.max(0,Math.min(255,o))*k}cloth[i*4+3]=k}
  /* (c) warp ONLY the hem and the collar / lapel edge (uneven hem, askew collar); never hands, face, hair, pendants (protect map) */
  const hem0=mk.y1-fh*.12,col0=mk.y0+fh*.1,col1=mk.y0+fh*.24,hw=L.warp/100*fw,sk=L.skew/100*fw,cw=L.collar/100*fw,out=new Uint8ClampedArray(d.length);
  const dxo=new Float32Array(n),dyo=new Float32Array(n);
@@ -125,7 +138,7 @@ function clothXocBake(d,W,H,lv,opt){opt=opt||{};const B=BAL.looks.xoc,L=B.lv[cl(
     b=cloth[j*4+2]*w0+cloth[(j+1)*4+2]*w1+cloth[(j+W)*4+2]*w2+cloth[(j+W+1)*4+2]*w3;a=cloth[j*4+3]*w0+cloth[(j+1)*4+3]*w1+cloth[(j+W)*4+3]*w2+cloth[(j+W+1)*4+3]*w3}}
   /* cloth over base ("over", premultiplied) */
   const ba=base[i*4+3],oa=a+ba*(1-a);if(oa>0){out[i*4]=(r+base[i*4]*(1-a))/oa;out[i*4+1]=(g+base[i*4+1]*(1-a))/oa;out[i*4+2]=(b+base[i*4+2]*(1-a))/oa;out[i*4+3]=oa*255}}
- return{data:out,mask:mk}}
+ return{data:out,mask:mk,field:F}}
 window.clothXocBake=clothXocBake;window.clothMask=clothMask;
 /* ---------- game wiring (only when the game is there): looks-2 CLOTHES "xoc" -> baked figure layer in the kit fx path ---------- */
 if(typeof KIT_FACEFX!=="undefined"&&typeof lkItem==="function"){
