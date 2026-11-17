@@ -4,7 +4,13 @@
       "Bash(python3 -m http.server:*)",
       "Bash(python3 -m http.server *)",
       "Bash(node dev/test/:*)",
-      "Bash(node dev/test/*)"
+      "Bash(node dev/test/*)",
+      "mcp__Magnific",
+      "mcp__claude-code-remote__send_message",
+      "Bash(python3 dev/site/cdn_sync.py:*)",
+      "Bash(python3 dev/site/cdn_sync.py *)",
+      "Bash(CLOUDFLARE_API_TOKEN=proxy-injected python3 dev/site/cdn_sync.py:*)",
+      "Bash(CLOUDFLARE_API_TOKEN=proxy-injected python3 dev/site/cdn_sync.py *)"
     ]
   }
 }
