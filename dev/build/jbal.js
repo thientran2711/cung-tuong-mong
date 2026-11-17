@@ -119,7 +119,12 @@ Object.assign(BAL,{route:{ /* jroute «Lối riêng» (tư tình / trốn cung /
  frame:{bac:-50,duc:-10} /* cost: have oil dropped in the rival's bowl */,
  alum:{bac:-20,duc:-4} /* cost: slip alum into her own bowl */,
  spy:{suc:-5} /* cost: spy on the accuser's bowl */,
- frameOil:70 /* roll: a rival framing her innocent child uses oil */
+ frameOil:70 /* roll: a rival framing her innocent child uses oil */,
+ heatW:[15,35,60,80] /* Lời ra tiếng vào: the cut points of its words (rtHeatW: Yên ắng < [0] ≤ Có kẻ xì xào < [1] … ≥ [3] Sắp vỡ lở) (review/one-core-arcs) */,
+ seen:{aff:45,rel:5} /* a rival who sees her with the man but likes her (thiện cảm ≥ aff) keeps quiet; thiện cảm +rel */,
+ oan:{report:40,threat:25,ngWin:30,demand:40,frame:50} /* oán the rival takes: reported to Cung Chính ti / threatened / lost the blood test / her false
+   accusation of the rival's child / caught framing the rival */,
+ threatEv:2 /* evidence on the rival gained by threatening her (printed in the choice) */
 }});
 Object.assign(BAL,{orig:{ /* jorigins.js: Bac Dich (bd) origin numbers */
  /* Bac Dich princess origin: start stats o, Thai hau favour th */ bd:{o:{danh:15,suc:90,bac:90},th:-20},

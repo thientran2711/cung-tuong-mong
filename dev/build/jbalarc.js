@@ -42,6 +42,9 @@ Object.assign(BAL,{arc:{
  card:{c:{suc:-5},o:100},
  /* tier = the ending tiers (an arc ending k, a closed milestone chapter, a rare ending counts as a win) */
  tier:{win:1,mid:0,lose:-1},
+ /* alt = the hand-written routes without silver (jstory ALT67, key "arc.beat"), option shape as fx; the old story's witness route (j4 td1)
+    reads the same td_an.c1 [0] */
+ alt:{"td_an.c1":[{c:{suc:-6},o:[40,["kd","maidLoy",3],["mz","mat",4]],sc:1,l:{danh:-3}},{c:{suc:-4},o:[30,["k","artY",9],["dz","tamco",5]],sc:1,l:{}}]},
  r97:{stay:{sung:5}},
  /* the Ngự tứ hairpins a rare ending can grant (j97; the wardrobe j92 may rename them): the wear gain */
  ntItem:{nt_nhuy:{sac:5,danh:3},nt_haiduong:{sac:6,danh:4},nt_dongchau:{sac:7,danh:5}},

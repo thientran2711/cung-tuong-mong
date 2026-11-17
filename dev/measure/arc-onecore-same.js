@@ -33,6 +33,8 @@ function DUMP(){const out={opt:{},end:{},odds:{},go:{},rare:{},err:[]};
   for(const bk of Object.keys(a.B||{}))(Array.isArray(a.B[bk].o)?a.B[bk].o:[]).forEach((o,i)=>walkO(`${id}.${bk}[${i}]`,o));
   for(const ek of Object.keys(a.E||{}))walkO(`${id}.E.${ek}`,a.E[ek]);
   const rest={...a};delete rest.B;delete rest.E;out.opt[id+'.arc']=canon(rest)}
+ try{for(const k of Object.keys(ALT67))ALT67[k].forEach((o,i)=>walkO(`ALT.${k}[${i}]`,o))}catch(e){out.err.push('ALT67 '+e.message)}
+ try{out.rare.__heatW=[...Array(101).keys()].map(h=>rtHeatW(h))}catch(e){out.err.push('heatW '+e.message)}
  for(const bk of Object.keys(GB67))(GB67[bk].o||[]).forEach((o,i)=>walkO(`G.${bk}[${i}]`,o));
  try{for(const id of Object.keys(R97)){const d=R97[id];out.rare[id]=canon(d);const r=[];for(let t=0;t<40;t++){S=life();const A=AA();let v;try{v=d.x&&d.x[0](A)}catch(e){v='ERR '+e.message}r.push(v)}out.rare[id+'.x']=r;
   if(typeof d.go==='function'){const g=[];for(let t=0;t<4;t++){S=life();LOG=[];let v;try{v=d.go(AA())}catch(e){v='ERR '+e.message}g.push([v,LOG])}out.rare[id+'.go']=g}}}catch(e){out.err.push('R97 '+e.message)}
