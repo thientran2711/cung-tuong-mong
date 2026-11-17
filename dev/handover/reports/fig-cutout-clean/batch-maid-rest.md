@@ -9,6 +9,7 @@ START_CTX (worker #1, est.) ~10 %; roll over at ~35 %, never above 60 %. Lead = 
 Outputs live in scratch /tmp/claude-0/w/out/img (NOT in git); upload to CDN (cdn_sync.py) after ~100 passed files.
 ## DONE (name -> gen id / bg-removed id), all looked OK
 fig-maid-m01-a18 xSXPMlnjfW/1leOTEUr4r | m01-cold-a18 3z5VF9VREY/jUB4eovLD0 | m01-kc-a18 Ifiq4BTtvE/mER562ThJQ | m01-ngheo-a18 KLD70bKkqp/w4vZtCv7EI | m01-t1-a18 3z5VF3eREY/kspJVbC16B
+| m01-t2 YMsoLh6WeC/P3unEJl42C | m01-t3 5jMwV9LKxe/Bh9Q4dsoQR | m01-t4 yiEzCMCPW9/fHGrAayCDY | m01-t5 s78NonSl8e/rgdyer7xtc | m01-t6 N2HcqAh6D9/N2Hcqsz6D9 | m01-t7 Xm4u9vYBfo/KLD7pHukqp | m01-t8 p8OfyhQehw/TdUmwWiVNR (no train, hem at feet OK) | m01-tm0 1leOd7Yr4r/4RQYFjy9Aa  (all -a18)
 ## HARD: none
-## CREDITS: 5 files x 83 + 0 retries = 415 (+ the first test bg-removal included)
-## NEXT: m01-t2-a18 onward in shard order (a18 first, then a26/a36/a51 with the NEW a18 as identity ref + old file)
+## CREDITS: 13 files x 83 = 1079 (+3 test) + 0 retries = 415 (+ the first test bg-removal included)
+## NEXT: m01-tm2-a18 onward in shard order (a18 first, then a26/a36/a51 with the NEW a18 as identity ref + old file)
