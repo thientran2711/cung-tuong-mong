@@ -709,7 +709,7 @@
 | one-core-dup3 SẴN SÀNG KIỂM 67430058 (= r1 607887ae + evidence-count text family fixed + gates EV/evn + main 65dcf52f merged; report reports/one-core-dup3.md §r1 FIX) → fresh opus BIG re-review | review/one-core-dup3 | B | session_01N1tNP5gDUwBGqmKgc5zqMJ | SẴN SÀNG KIỂM 67430058 | 17/11 12:20Z |
 | VOICE BY TÍNH TÌNH (sonnet; s30 order 06:06Z; brief briefs/voice-trait.md) | review/voice-trait | C ROOT-5 | session_011xDdVRM5yu7W5UoCp4jMmC | HANDED OVER d5793c7ba → W-A2 (archived) | 17/11 11:38Z |
 | coop-thin-b SẴN SÀNG KIỂM 4609afa6 (r2 seam fix by #4) → re-review r3 (fresh opus BIG; brief briefs/review-coop-thin-b-r3.md) | review/coop-thin-b-r3 | B | session_01N1tNP5hpVGVh45GCMzd9Ah | RUNNING | 17/11 11:40Z |
-| MAID CONSORT-TIER REDRAW W4f (successor of W4e; a36 m22 + a51 m01-m26; opened by lead #7) | review/fig-cutout-clean | C | session_011xDdVSvgMHhWjrFtf6Qv8J | RUNNING | 17/11 11:48Z |
+| MAID CONSORT-TIER REDRAW W4f (successor of W4e; a36 m22 + a51 m01-m26; opened by lead #7) | review/fig-cutout-clean | C | session_011xDdVSvgMHhWjrFtf6Qv8J | STOPPED 17/11 12:22Z (owner order: ty = trung y); restoring its own 10 keys | 17/11 11:48Z |
 | VOICE writers W-B (toil/wd/staff/cycle/ts/HABIT) + W-C (events kSay + voice-rep) (sonnet; brief briefs/voice-trait-writers.md) | review/voice-trait | C ROOT-5 | W-B session_011xDdVNoZ7Yx3TZUQQfZipd + W-C session_011xDdVRjiWzLX321cWLkeV2 | RUNNING | 17/11 12:10Z |
 | VOICE W-A2 final assemble/build/QUICKCHECK/voice-rep/report (sonnet; successor of W-A RM5y archived; handover d5793c7ba) | review/voice-trait | C ROOT-6 | session_011xDdVQHXu4HxrzSdi1Q2h6 | RUNNING | 17/11 12:16Z |
 | BATCH builder s31a (opus): presentation-wiring-r1 bc8461cc → kit-ico-rank-r1 a1c7a37c → fig-headtop-r1 f95f5a92 | review/batch-s31a | MAIN s31 | session_01UV1SziPrputLM5qYtCL6zH | RUNNING | 17/11 12:11Z |
@@ -728,3 +728,4 @@
 | kit-rcol-top #2 (successor; #1 partial fa787165) — gates, kit page, shots | review/kit-rcol-top | MAIN s31 | session_01UV1SzkTmHFW7tFdo9JrjMv | RUNNING | 17/11 12:23Z |
 | REVIEW learn-scene-fix r1 of 41836865 (worker session_01UV1SziySB5E5PWMp5Wc7uX SẴN SÀNG KIỂM) | review/learn-scene-fix-r1 | MAIN s31 | session_01UV1SzkJwiGXxoBvWoVcncV | RUNNING | 17/11 12:23Z |
 | event-art DARK fix (sonnet; owner 17/11 12:19Z/12:22Z; brief briefs/event-art-dark-fix.md) | CDN only (report reports/event-art-dark-fix.md) | C ROOT-6 | session_011xDdVSTVyLVuATNYT3izSd | RUNNING | 17/11 12:24Z |
+| RESTORE maid trung y (ty) keys replaced by consort-tier redraw, 681 keys (sonnet W9; owner order 17/11 12:21Z, ROOT-6 GO 12:23Z; opened by lead #7) | review/fig-cutout-clean | C | session_011xDdVNG1ZBYKd7ZkiyqAJP | RUNNING | 17/11 12:26Z |
