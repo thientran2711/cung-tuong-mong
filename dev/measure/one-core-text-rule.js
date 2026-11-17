@@ -34,10 +34,10 @@ for(const f of ORDER){if(/^jbal/.test(f))continue;const p=path.join(B,f);if(!fs.
   if(n.type==='TemplateLiteral')texts.push({f,line:lineOf(src,n.start),s:n.quasis.map(q=>q.value.cooked||'').join('${…}'),key:par&&par.type==='Property'&&par.value===n?(par.key.name||par.key.value):null});/* the whole template: a stat word in one piece, the number in the next */
   for(const k in n){if(k==='type'||k==='start'||k==='end')continue;const c=n[k];if(Array.isArray(c))c.forEach(x=>walk(x,n));else if(c&&typeof c.type==='string')walk(c,n)}})(ast,null)}
 /* a threshold phrase: «từ 60», «tới 85», «dưới 40», «trên 50», «đủ 70», «quá 80», «ít nhất 30», «60+», «≥ 60» … */
-const PH=/(?:(từ|tới|đến|dưới|trên|đủ|quá|chạm|đạt|cần|ít nhất|hơn|lên|xuống|còn|≥|>=|<|>|≤)\s+(\d{1,3})(?![\d.,%]|\s*(?:tháng|năm|ngày|lượng|lạng|tuổi|người|buổi|lần|việc|đêm|bước|phần))|(\d{1,3})\+)/gi;
+const PH=/(?:(từ|tới|đến|dưới|trên|đủ|quá|chạm|đạt|cần|ít nhất|hơn|lên|xuống|còn|mức|chừng|ngưỡng|≥|>=|<|>|≤)\s+(\d{1,3})(?![\d.,%]|\s*(?:tháng|năm|ngày|lượng|lạng|tuổi|người|buổi|lần|việc|đêm|bước|phần))|(\d{1,3})\+|(\d{1,3})(?=\s+(?:trở lên|trở xuống|thì(?!\s*[+−-]\d))(?:[\s,.;:]|$)))/gi;
 const out=[];
 for(const t of texts){if(!/[à-ỹÀ-Ỹ]/.test(t.s))continue;let m;PH.lastIndex=0;
- while((m=PH.exec(t.s))){const n=+(m[2]||m[3]);if(!n||n>=100)continue;const pre=t.s.slice(Math.max(0,m.index-40),m.index);if(/0\s*[–-]\s*$/.test(pre))continue;if(/từ 0 đến\s*$/i.test(t.s.slice(Math.max(0,m.index-8),m.index+m[0].length-String(n).length)))continue;/* a score range «từ 0 đến 10» */
+ while((m=PH.exec(t.s))){const n=+(m[2]||m[3]||m[4]);if(!n||n>=100)continue;const pre=t.s.slice(Math.max(0,m.index-40),m.index);if(/0\s*[–-]\s*$/.test(pre))continue;if(/từ 0 đến\s*$/i.test(t.s.slice(Math.max(0,m.index-8),m.index+m[0].length-String(n).length)))continue;/* a score range «từ 0 đến 10» */
   let props=null,word=null;for(const [re,ps] of WORDS){const all=[...pre.matchAll(new RegExp(re.source,'gi'))];if(all.length){const at=all[all.length-1].index;if(word===null||at>word.at){word={at,w:all[all.length-1][0]};props=ps}}}
   if(!props&&t.key&&rules[t.key]){props=[t.key];word={w:'('+t.key+')'}}
   if(!props&&t.key)for(const [re,ps] of WORDS)if(re.test(t.key)){props=ps;word={w:'('+t.key+')'};break}/* KIT_GLOSS {"Áp lực hôn sự":"…"} */
