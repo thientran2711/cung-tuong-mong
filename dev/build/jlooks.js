@@ -43,9 +43,9 @@ Object.assign(BAL,{looks:{
     (so portrait, figure, mirror all match); a = strength of that colour. blush/lid run DOWN the cheek (vertical, gravity), tear = grey lash-run lines, lip = colour
     dragged past the line from a mouth corner + a drip under the lower lip, blot = blotchy blush, streak = how much the runs break into separate streaks, cry = least
     tear-run when the cause is crying. */
- smuFx:{blush:{len:[0,.8,1.15,1.65],a:[0,.34,.4,.48],blot:[0,0,.3,.55],wash:[0,0,.3,.42]}/* wash = soft diffuse bleed of the blush into the skin (alpha of a wide feathered halo, spreading down / outward) */,lid:{len:[0,.5,.8,1.05],a:[0,.24,.34,.44]},
+ smuFx:{blush:{len:[0,.8,1.15,1.65],a:[0,.34,.4,.48],blot:[0,0,.3,.55],wash:[0,0,.3,.42],sgain:[0,1,.5,.5]}/* wash = soft diffuse bleed of the blush into the skin (alpha of a wide feathered halo, spreading down / outward) */,lid:{len:[0,.5,.8,1.05],a:[0,.24,.34,.44]},
   tear:{len:[0,.5,1,1.7],a:[0,.24,.42,.55],w:[0,.026,.03,.04],n:[0,1,1,3],pair:[0,0,[.5,1.5],0],fine:[0,0,0,1]}/* fine = nặng runs taper (thick at the lash line, thinning), wander and break; pair = vừa: one eye's run SHORT, the other LONG (which eye is seeded per face) *//* pair = vừa: one eye's run SHORT, the other LONG (not mirrored; which one is seeded per face) */,cry:{len:.8,a:.36,w:.03},
-  lip:{sm:[0,0,.6,1],a:[0,0,.32,.44]},streak:[0,.35,.45,.5]}}});
+  lip:{sm:[0,0,.6,1],a:[0,0,.32,.44]},streak:[0,.35,.3,.3]}}});
 window.LOOKS_ART={};
 const LK_N={smu:["","Phấn son lem nhẹ","Phấn son lem nhem","Phấn son lem nhem nặng"],bui:["","Mặt lấm bụi","Bụi bám đầy mặt","Bụi bám đầy mặt"],
  muoi:["","Mặt lấm muội khói","Mặt lấm muội khói","Mặt đen muội khói"],moho:["","Mồ hôi làm phấn trôi","Mồ hôi làm phấn trôi","Mồ hôi đẫm, phấn trôi hết"],
@@ -229,7 +229,7 @@ function lkSmuDraw(im,v,lv,why,cols,box,seed){const W=im.naturalWidth,H=im.natur
  const along=(P0,P1,st,fn)=>{const n=Math.max(2,Math.round(Math.hypot(P1[0]-P0[0],P1[1]-P0[1])/st)),o=[];for(let i=0;i<=n;i++){const t=i/n;o.push(fn(P0[0]+(P1[0]-P0[0])*t,P0[1]+(P1[1]-P0[1])*t,t))}return o};
  /* 1 blush: the cheek disc dragged down by water, softened; blotchy patches at nặng */
  {let m=new Float32Array(N);cheeks.forEach(([cx,cy])=>{const d=paint(g=>{const gr=g.createRadialGradient(cx,cy,0,cx,cy,rad);gr.addColorStop(0,"rgba(0,0,0,1)");gr.addColorStop(.5,"rgba(0,0,0,.7)");gr.addColorStop(1,"rgba(0,0,0,0)");g.fillStyle=gr;g.fillRect(cx-rad,cy-rad,2*rad,2*rad)});add(m,d)});
-  const sm=smear(m,u*fx(F.blush.len),F.streak[lv],.0),bl=fx(F.blush.blot);
+  let sm=smear(m,u*fx(F.blush.len),F.streak[lv],.0);{const g=F.blush.sgain[lv];for(let i=0;i<N;i++)sm[i]*=g;if(lv>=2)sm=blur(blur(sm,u*.05),u*.03)}/* the pink run: lighter and diffused (wide feather, no band edges) */const bl=fx(F.blush.blot);
   if(bl>0)for(let y=0;y<ch;y++)for(let x=0;x<cw;x++){const i=y*cw+x,n=vn(x,y,u*.2),t=cl3((n-.38)/.3,0,1);sm[i]=Math.max(sm[i],m[i]*bl*t*(.6+.4*vn(x+999,y,u*.5)))}
   const wa=fx(F.blush.wash);if(wa>0){/* a wide feathered halo from each cheek, centre pushed down and outward, heavily blurred: the blush bleeds into the skin, no edge */
    const wm=new Float32Array(N);cheeks.forEach(([cx,cy],ci)=>{const sd=ci?1:-1,wx=cx+sd*rad*.35,wy=cy+rad*.55,R=rad*1.9;add(wm,paint(g=>{const gr=g.createRadialGradient(wx,wy,0,wx,wy,R);gr.addColorStop(0,"rgba(0,0,0,1)");gr.addColorStop(.45,"rgba(0,0,0,.55)");gr.addColorStop(1,"rgba(0,0,0,0)");g.fillStyle=gr;g.fillRect(wx-R,wy-R,2*R,2*R)}))});
@@ -252,15 +252,14 @@ function lkSmuDraw(im,v,lv,why,cols,box,seed){const W=im.naturalWidth,H=im.natur
    layers.push([blur(m,u*(F.tear.fine[lv]?.012:.006)),lash,a*1.25])}}
  /* no hard edges: every mask fades to nothing before the canvas edge (the box is only a bit bigger than the effect) */
  const edge=new Float32Array(N);{const mx=cw*.08,my=ch*.1;for(let y=0;y<ch;y++){const ey=cl3(Math.min(y,ch-1-y)/my,0,1);for(let x=0;x<cw;x++){const ex=cl3(Math.min(x,cw-1-x)/mx,0,1);edge[y*cw+x]=ex*ex*(3-2*ex)*ey*ey*(3-2*ey)}}}
- /* the runs stay ON the skin: the picture's own skin-coloured pixels, blurred so eyes / lips / brows inside the face are bridged and the soft edge sits just inside the real face edge;
-    hair, background, neck below the chin fall outside. Nothing leaks onto hair or background (every level, every figure). */
- const face=new Float32Array(N);{const fcx=(eA[0]+eB[0])/2,chin=lc[1]+.5*u;
-  const bl=blur(blur(sk,u*.16),u*.09);/* wide blur = a feathered mask edge (≈ 2 % of the face width and more), never a cut */
-  for(let y=0;y<ch;y++){const fy=cl3((chin+.04*u-y)/(u*.16),0,1),fyy=fy*fy*(3-2*fy);
-   for(let x=0;x<cw;x++){const v=cl3((bl[y*cw+x]-.5)/.45,0,1),w=cl3((1.7*u-Math.abs(x-fcx))/(u*.5),0,1);face[y*cw+x]=v*v*(3-2*v)*fyy*w}}
-  /* the lips are not skin-coloured: a grown, softened lip zone is allowed too, so the smear around the mouth shows */
-  const lz=blur(paint(g=>{g.fillStyle="#000";g.beginPath();P.slice(0,12).forEach((p,i)=>{const q=[lc[0]+(p[0]-lc[0])*1.7,lc[1]+(p[1]-lc[1])*2.1];i?g.lineTo(q[0],q[1]):g.moveTo(q[0],q[1])});g.closePath();g.fill()}),u*.06);
-  for(let i=0;i<N;i++)face[i]=Math.max(face[i],Math.min(1,lz[i]*1.6))}
+ /* the runs stay INSIDE THE FACE: a face oval built from the face points (outer eye corners at the eyes, the mouth at the lips, narrowing to the chin), inset ≈ 3 % of the face width and feathered —
+    not the pixel skin mask (ears, neck and the jaw shadow are skin too). Same clip for the streaks, the wash and the lip drag; every level, NPC path included. */
+ const face=new Float32Array(N);{const ey=(eA[1]+eB[1])/2,lipY=lc[1],chin=lc[1]+.62*u,xoL=Math.min(...P.slice(20,30).map(p=>p[0]),...P.slice(30,40).map(p=>p[0])),xoR=Math.max(...P.slice(20,30).map(p=>p[0]),...P.slice(30,40).map(p=>p[0]));
+  const O=P.slice(0,12),inset=u*.06,fth=u*.16;
+  const bound=(y)=>{/* [left, right] of the face oval at row y */const t1=cl3((y-ey)/(lipY-ey),0,1),t2=cl3((y-lipY)/(chin-lipY),0,1),eL=xoL-.2*u,eR=xoR+.2*u,cL=lc[0]-.2*u,cR=lc[0]+.2*u,mL=eL+(cL-eL)*.25,mR=eR+(cR-eR)*.25;
+   const sm1=t=>t*t*(3-2*t);let L,R;if(y<=lipY){const t=sm1(t1);L=eL+(mL-eL)*t;R=eR+(mR-eR)*t}else{const t=Math.pow(t2,1.4);L=mL+(cL-mL)*t;R=mR+(cR-mR)*t}return[L+inset,R-inset]};
+  for(let y=0;y<ch;y++){const[L,R]=bound(y),fy=cl3((chin-inset-y)/fth,0,1),fyy=fy*fy*(3-2*fy);
+   for(let x=0;x<cw;x++){const d=cl3(Math.min(x-L,R-x)/fth,0,1);face[y*cw+x]=d*d*(3-2*d)*fyy}}}
  const out=new Uint8ClampedArray(N*4);
  for(let i=0;i<N;i++){let A=0,R=0,G=0,B=0;const k=cl3(Lum(i)/Lref,.74,1.1);
   for(const[m,c,s]of layers){const a=cl3(m[i]*s*edge[i]*face[i],0,1);if(a<.004)continue;const oa=a+A*(1-a);R=(c[0]*k*a+R*A*(1-a))/oa;G=(c[1]*k*a+G*A*(1-a))/oa;B=(c[2]*k*a+B*A*(1-a))/oa;A=oa}

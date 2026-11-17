@@ -43,6 +43,6 @@ const {chromium}=require('playwright');const URL=process.argv[2],OUT=process.arg
    const f=kitFile(CF==="fig"?window.__fig:window.__por),ff=kitFile(window.__fig);const zm=()=>kitFaceZoom(S,f);
    const L=['0 · không lem','1 · nhẹ','2 · vừa','3 · nặng'][lv];
    const html=()=>`<div style="margin-bottom:8px">${L}</div><div class="kfzoom" style="width:388px;margin:0 auto 8px">${zm().replace(/^<div class="kfzoom"[^>]*>/,'').replace(/<\/div>$/,'')}</div><div style="position:relative;width:150px;height:150px;margin:0 auto;overflow:hidden">${kitStageFig(S)||''}</div>`;
-   host.innerHTML=html();await new Promise(r=>setTimeout(r,300));for(let i=0;i<80;i++){const bad=[...host.querySelectorAll('img.klk-smu')].some(x=>x.src.indexOf('data:image/png')!==0);if(!bad)break;await new Promise(r=>setTimeout(r,150))}host.innerHTML=html();await new Promise(r=>setTimeout(r,500))},[lv,process.env.CLOSEUP||'por']);
+   host.innerHTML=html();await new Promise(r=>setTimeout(r,300));for(let i=0;i<80;i++){const bad=[...host.querySelectorAll('img.klk-smu')].some(x=>x.src.indexOf('data:image/png')!==0);if(!bad)break;await new Promise(r=>setTimeout(r,150))}host.innerHTML=html();for(let i=0;i<120;i++){if([...host.querySelectorAll('img')].every(x=>x.complete&&x.naturalWidth>0))break;await new Promise(r=>setTimeout(r,150))}await new Promise(r=>setTimeout(r,500))},[lv,process.env.CLOSEUP||'por']);
    await p.locator('#smu-shot').screenshot({path:`${OUT}/smudge-${lv}.png`})}}
  console.log(JSON.stringify({checks:C,errs}));await b.close()})();
