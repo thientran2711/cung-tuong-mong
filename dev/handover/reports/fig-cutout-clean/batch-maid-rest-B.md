@@ -44,3 +44,12 @@ maid-m29-t2-a18	fHGrpJzCDY	gOtiHxuSXO	ok
 maid-m29-t3-a18	xSXPCz5jfW	IfiqcBNtvE	ok
 maid-m29-t4-a18	N2HcsIH6D9	UPhRbSOwny	ok
 UPLOADED to CDN + --check OK: m27,m28,m29 a18 (40 files; fig+tn+por, no hd). Local uploader copy at dev/site/cdn_sync.py (not committed); files staged under img/ (not committed).
+maid-m29-t5-a18	WDl83gycXe	s78N5gbl8e	ok
+maid-m29-t6-a18	ovNFTir829	ovNFVmG829	ok
+maid-m29-t7-a18	xSXPF8UjfW	nVLBiVqYQD	ok
+maid-m29-t8-a18	DoJaz4Bpcl	iGbTJzP3uK	ok
+maid-m29-tm0-a18	Sym3kfjUb8	VXwhG8HMMU	ok
+maid-m29-tm2-a18	tC3bDGYmZJ	Lwo9b4mswO	ok
+maid-m29-tm3-a18	vQ2kdWRa47	Sym31RDUb8	ok
+maid-m29-tm4-a18	w4vZrFV7EI	vQ2kXxFa47	ok
+UPLOADED+--check OK through maid-m29-tm4-a18 (48 files done, 0 hard). NEXT: maid-m30-a18 (line 49 of a18 list = 'grep a18 maid-rest-B.txt').
