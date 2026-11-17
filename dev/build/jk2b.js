@@ -375,8 +375,8 @@ try{KIT_SCAR.load()}catch(e){}
 /* ---------- 7. VEIL + SCAR OVERLAYS (review/wardrobe j92: KIT_VEIL / KIT_SCAR, placed per picture from img/veil-fit.json / scar-fit.json) ----------
    Layer order everywhere: portrait < scar strokes < veil < frame. The scar shows ONLY when the player knows (KIT_SCAR.on: herself, or j70 knows(p),
    or p.scar.known); a veil is worn in public, so it shows to everyone who sees the face (never on the grey "Người lạ" silhouette).
-   Places: tall frame (.kin > .kfxc clip = photo window; inner box = the por picture 384x506, 9 % lower like .kpor), small frame (.kmini > .kfxc),
-   stage figures (.kfxf box laid exactly over the figure image). A picture without fit data gets nothing (never a guessed position). ---------- */
+   Places: stage figures (.kfxf box laid exactly over the figure image) + the mirror close-up. AVATAR frames (tall, small, kfc, lists, cards) no longer get an
+   overlay at all: they show the photo with the LASTING marks baked in (KIT_LASTING / KIT_BAKE below, owner 17/11 ~18:10Z). A picture without fit data gets nothing (never a guessed position). ---------- */
 kitVeiled=function(){return false};
 function kitVeilOn(p){try{if(!p)return false;if(window.KIT_VEIL&&typeof KIT_VEIL.on==="function"&&KIT_VEIL.on(p))return true;if(typeof scarOf==="function"){const s=scarOf(p);return !!(s&&s.veil)}}catch(e){}return false}
 function kitScarOf(p){try{if(!p||!p.scar||!window.KIT_SCAR)return null;const on=KIT_SCAR.on(p)||!!p.scar.known;if(!on)return null;const sev=Math.max(1,Math.min(3,p.scar.sev|0||1));return{sev,src:KIT_SCAR.src(sev)}}catch(e){return null}}
@@ -384,10 +384,34 @@ const kitFxVars=st=>st.replace(/(^|;)\s*(left|top|width|height|transform|transfo
 function kitFxLayers(p,file){if(!p||!file)return"";let h="";const sc=kitScarOf(p);if(sc&&window.KIT_SCAR){const st=KIT_SCAR.style(file);if(st)h+=`<img class="kscar" src="${sc.src}" alt="" aria-hidden="true" style="${kitFxVars(st)}" onerror="this.remove()">`}
  if(kitVeilOn(p)&&window.KIT_VEIL&&KIT_VEIL.style){const t=KIT_VEIL.tierOf(p);const st=KIT_VEIL.style(file,t);if(st)h+=`<img class="kveil2" src="${KIT_VEIL.src(t)}" alt="" aria-hidden="true" style="${kitFxVars(st)}" onerror="this.remove()">`}return h}
 const kitFile=src=>String(src||"").split("?")[0].split("/").pop();
+/* ---------- AVATAR = ID CARD (owner 17/11 ~18:10Z, OD "Avatar … cái thẻ nhân viên"; review/kit-fx-register) ----------
+   EVERY avatar-class frame (pcp tall, span.md / kmini / kfc, list rows, cards, pickers: everything made by pcPort / mdH) shows the BASE PORTRAIT +
+   LASTING marks only (hủy dung scar; plug-in point KIT_LASTING.add for pox scars etc.). NO makeup, NO temporary marks (slap, rash, pallor, poison, ink…).
+   The lasting marks are BAKED with the photo into ONE image (canvas -> blob URL, cached per picture + marks + size, scaled by the browser like any
+   photo) — there is no overlay box any more, so no registration error is possible. A person without a lasting mark gets the plain photo (no cost).
+   Stage figures + the mirror close-up keep the full look (kitFxLayers / kitFxPut, unchanged). ---------- */
+window.KIT_LASTING={list:[],add:function(d){if(!d||!d.id)return;this.list=this.list.filter(x=>x.id!==d.id);this.list.push(d)},
+ /* layers of person p on picture file: [{id,src,rect:[l,t,w,h,deg],o:[ox,oy]}] (rect = % of the WHOLE picture, the scar-fit / veil-fit rows) */
+ of:function(p,file){const out=[];if(!p||!file)return out;for(const d of this.list){let r=null;try{r=d.layers(p,file)}catch(e){r=null}if(r&&r.length)out.push(...r)}return out}};
+KIT_LASTING.add({id:"scar",layers:(p,file)=>{const sc=kitScarOf(p);if(!sc||!window.KIT_SCAR||!KIT_SCAR.rect)return null;const r=KIT_SCAR.rect(file);if(!r)return null;return[{id:"scar"+sc.sev,src:sc.src,rect:r.slice(0,5),o:[.5,.5],alpha:.85}]}});
+const KIT_BAKE={cache:{},order:[],pend:{},W:{tall:384,sm:192},max:80,
+ key:function(p,file,kind){const L=KIT_LASTING.of(p,file);if(!L.length)return"";return file+"|"+kind+"|"+L.map(l=>l.id+":"+l.rect.join(",")).join(";")},
+ /* the src to print into the avatar <img> + an attribute that lets the finished bake replace it */
+ pick:function(p,url,kind){try{const file=kitFile(url);const k=this.key(p,file,kind||"sm");if(!k)return{src:url,attr:""};const c=this.cache[k];if(c){this.touch(k);return{src:c,attr:` data-kbk="${k.replace(/"/g,"")}"`}}
+   this.make(k,p,url,file,kind||"sm");return{src:url,attr:` data-kbk="${k.replace(/"/g,"")}"`}}catch(e){return{src:url,attr:""}}},
+ touch:function(k){const i=this.order.indexOf(k);if(i>=0)this.order.splice(i,1);this.order.push(k)},
+ make:function(k,p,url,file,kind){if(this.pend[k])return;this.pend[k]=1;const L=KIT_LASTING.of(p,file);const abs=/^(https?:|blob:|data:)/.test(url)?url:(typeof IMG_U==="function"?IMG_U(url):url);
+  const load=src=>new Promise((ok,no)=>{const im=new Image();im.crossOrigin="anonymous";im.decoding="async";im.onload=()=>ok(im);im.onerror=()=>no(0);im.src=src});
+  Promise.all([load(abs),...L.map(l=>load(/^(https?:|blob:|data:)/.test(l.src)?l.src:(typeof IMG_U==="function"?IMG_U(l.src):l.src)))]).then(([ph,...ls])=>{
+   const nw=ph.naturalWidth,nh=ph.naturalHeight,K=Math.min(1,this.W[kind]/nw),W=Math.max(1,Math.round(nw*K)),H=Math.max(1,Math.round(nh*K));const cv=document.createElement("canvas");cv.width=W;cv.height=H;const g=cv.getContext("2d");g.imageSmoothingQuality="high";g.drawImage(ph,0,0,W,H);
+   ls.forEach((im,i)=>{const l=L[i],r=l.rect,x=r[0]/100*W,y=r[1]/100*H,w=r[2]/100*W,h=r[3]/100*H;g.save();g.globalAlpha=l.alpha==null?1:l.alpha;g.translate(x+w*l.o[0],y+h*l.o[1]);g.rotate((r[4]||0)*Math.PI/180);g.drawImage(im,-w*l.o[0],-h*l.o[1],w,h);g.restore()});
+   cv.toBlob(b=>{delete this.pend[k];if(!b)return;const u=URL.createObjectURL(b);this.cache[k]=u;this.touch(k);while(this.order.length>this.max){const o=this.order.shift(),ou=this.cache[o];delete this.cache[o];setTimeout(()=>{try{URL.revokeObjectURL(ou)}catch(e){}},60000)}
+    document.querySelectorAll("img[data-kbk]").forEach(e=>{if(e.getAttribute("data-kbk")===k.replace(/"/g,"")&&e.src!==u)e.src=u})},"image/webp",.92)}).catch(()=>{delete this.pend[k]})}};
+window.KIT_BAKE=KIT_BAKE;
 (function(){const p0=pcPort;pcPort=function(f){let h=p0.apply(this,arguments);try{const p=f&&f.__kp;if(!p||!/class="kpor"/.test(h))return h;const m=/<img class="kpor" src="([^"]+)"/.exec(h);if(!m||/face-|unknown/.test(m[1]))return h;
-  const fx=kitFxLayers(p,kitFile(m[1]));if(fx)h=h.replace(/(<img class="kfr")/,`<span class="kfxc"><span class="kfx">${fx}</span></span>$1`)}catch(e){}return h}})();
-(function(){const m0=mdH;mdH=function(p){let h=m0.apply(this,arguments);try{const q=p&&p.__kp;if(!q)return h;const m=/<img[^>]*src="([^"]*por-[^"]+)"/.exec(h);if(!m)return h;const fx=kitFxLayers(q,kitFile(m[1]));
-  if(fx)h=h.replace(/<i class="kmf"/,`<span class="kfxc kfxm"><span class="kfx">${fx}</span></span><i class="kmf"`)}catch(e){}return h}})();
+  const b=KIT_BAKE.pick(p,m[1],"tall");if(b.attr)h=h.replace(m[0],`<img class="kpor"${b.attr} src="${b.src}"`)}catch(e){}return h}})();
+(function(){const m0=mdH;mdH=function(p){let h=m0.apply(this,arguments);try{const q=p&&p.__kp;if(!q)return h;const m=/<img([^>]*?)src="([^"]*por-[^"]+)"/.exec(h);if(!m)return h;
+  const b=KIT_BAKE.pick(q,m[2],"sm");if(b.attr)h=h.replace(m[0],`<img${m[1]}${b.attr.trim()} src="${b.src}"`)}catch(e){}return h}})();
 /* kitFxPut(img,p,host): lay the face layers of person p over the DRAWN picture img inside host (room stage, podium, any figure) */
 function kitFxPut(img,p,host){{if(!img||!p||(typeof kitIsKnown==="function"&&!kitIsKnown(p)))return;const fx=kitFxLayers(p,kitFile(img.currentSrc||img.src));if(!fx)return;const s=document.createElement("span");s.className="kfxf";s.innerHTML=fx;
   /* lay the box over the DRAWN picture: object-fit contain/cover + object-position, and the image's own transform (kit owner #2: the veil sat beside the face) */
@@ -405,10 +429,6 @@ function kitFigFx(){try{const st=$("stage");if(!st)return;st.querySelectorAll(".
 /* the fit tables load asynchronously: redraw once both are in */
 (function(){let n=0;const chk=()=>{if(window.KIT_VEIL&&KIT_VEIL.fit&&window.KIT_SCAR&&KIT_SCAR.fit){try{if(typeof S!=="undefined"&&S&&!S.dead&&typeof render==="function"&&!Q.length)render()}catch(e){}return}if(++n<40)setTimeout(chk,250)};setTimeout(chk,300)})();
 (function(){const st=document.createElement("style");st.id="k2b-fx";st.textContent=`
-.pcp.kit .kin>.kfxc{position:absolute;left:14.655%;top:20.289%;width:70.691%;height:49.373%;overflow:hidden;pointer-events:none;z-index:1}
-span.md.kmini.kmini>.kfxc{position:absolute;left:9.66%;top:11.75%;width:80.67%;height:80.3%;overflow:hidden;pointer-events:none;z-index:1}
-.kfxc>.kfx{position:absolute;left:0;top:9%;width:100%;height:100%}
-span.md.kmini.kmini>.kfxc>.kfx{top:8.4%}
 .kfx>img,.kfxf>img,.pcp.kit .kin .kfx>img,span.md.kmini.kmini .kfx>img{position:absolute!important;inset:auto!important;display:block!important;left:var(--fleft)!important;top:var(--ftop)!important;width:var(--fwidth)!important;height:var(--fheight)!important;transform:var(--ftf,none)!important;transform-origin:var(--fto,50% 50%)!important;max-width:none!important;max-height:none!important;min-width:0!important;object-fit:fill!important;border-radius:0!important;pointer-events:none;mask-image:none!important;-webkit-mask-image:none!important}
 .kfx>img.kscar,.kfxf>img.kscar{opacity:.85}
 img.figimg.kfxon,#mefig.kfxon{animation:none!important}
@@ -450,7 +470,6 @@ window.KIT_CREST={ar:{"consort-0":.329,"consort-1":.337,"consort-2":.538,"consor
 (function(){const st=document.createElement("style");st.id="k2b-frame";st.textContent=`
 /* C1: tighter portrait in every frame (por art only; old face-* art keeps its oval) */
 .kin>img.kpor:not([src*="face-"]):not([src*="unknown"]),.pcp.kit .kin>img.kpor:not([src*="face-"]):not([src*="unknown"]){left:9.707%!important;top:17.475%!important;width:80.588%!important;height:56.285%!important;clip-path:inset(5% 6.14% 7.28% 6.14%);border-radius:0!important}
-.kfxc>.kfx,span.md .kfxc>.kfx{left:-7%!important;top:-5.7%!important;width:114%!important;height:114%!important}
 /* crest on the top bar */
 .kin>img.kcrest,.pcp.kit .kin>img.kcrest:not(.kfr):not(.kgem):not(.kemb):not(.kpor){position:absolute!important;inset:auto!important;left:var(--cl)!important;top:var(--ct)!important;width:var(--cw)!important;height:var(--ch)!important;max-width:none!important;object-fit:fill!important;border-radius:0!important;z-index:3;pointer-events:none;filter:drop-shadow(0 1px 1px #0004)}
 /* the small frame cell (mdH): same layers as .pcp.kit, cell = the whole canvas y 0–1037 (pendant + tassel whole, owner 15/11 06:35Z) */
@@ -471,7 +490,6 @@ span.md.kfc .kin>img.kpor[src*="face-"],span.md.kfc .kin>img.kpor[src*="unknown"
 span.md.kfc .kin>img.kfr{left:0!important;top:0!important;width:100%!important;height:100%!important;object-fit:fill!important;z-index:2}
 span.md.kfc .kin>img.kgem{left:73.564%!important;top:64.609%!important;width:18.327%!important;height:auto!important;aspect-ratio:1;z-index:3}
 span.md.kfc .kin>img.kemb,span.md.kfc .kin>.klab{display:none!important}
-span.md.kfc .kin>.kfxc{position:absolute;left:14.655%;top:20.289%;width:70.691%;height:49.373%;overflow:hidden;z-index:1}
 span.md.kfc.xs .kin>img.kgem,span.md.kfc.sm .kin>img.kgem{display:none!important}
 `;document.head.appendChild(st)})();
 
