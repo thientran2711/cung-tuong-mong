@@ -960,7 +960,7 @@
 base-body test (m09 body template, edit clothes only) | img/_review/maid-consort-sample | session_011xDdVQzeuta29DT66RfH38 | DONE-DROPPED by owner 01:16Z | 2026-11-17T23:52Z (Foreman C ROOT-12 → ROOT-13)
 | hoa-dien SAMPLES sheet (đẹp vs vụng × 4 designs, in-room; owner OD ~22:12Z) (sonnet) | review/hoa-dien-r2 (read only) | MAIN s38 | session_01UV1SziQZkLLitwkfqjx3Bq | DONE: sheet at CDN img/_review/hoa-dien/hoa-dien-samples.png (report reports/hoa-dien-samples.md) | 17/11 22:40Z |
 | REVIEW ag-all-2 r2 #2 (opus BIG; successor of SzibgyT; 2 reds after main 99f3978d) | review/ag-all-2-r2 | C-AG | session_01UV1SziCw1gnLVkS7bUSAPM | RUNNING | 17/11 22:27Z |
-| REVIEW kit-display-room-r2 f4abade8 code-only (sonnet SMALL; cabinet art pending C) | review/kit-display-room-r2 | MAIN s38 | session_01UV1Szh5CeFAQytd8HYVjFo | RUNNING | 17/11 22:31Z |
+| REVIEW kit-display-room-r2 f4abade8 code-only (sonnet SMALL; cabinet art pending C) | review/kit-display-room-r2 | MAIN s38 | session_01UV1Szh5CeFAQytd8HYVjFo | PASS f4abade8 | 17/11 22:31Z |
 | hoa-dien r3 (position options + sharp layer; OD ~22:40Z) (sonnet; took over from B) | review/hoa-dien-r3 | MAIN s38 | session_01UV1SziQZkLLitwkfqjx3Bq | RUNNING | 17/11 22:31Z |
 hairpin try-on page (figure w/o pins + pin sprites + HTML, reuse Phòng Thử Y Phục) | img/_review/hairpin-tryon | session_011xDdVNmPeSUSmSWanPWpLQ | RUNNING | 2026-11-18T00:58Z (Foreman C ROOT-12 → ROOT-13)
 | balance-2 fix round 2 (opus; r1 FAIL 2 @371e3a22, Danh wall) | review/balance-2 | D | session_01964izFNvwWQ5k8z1K6nAZG | RUNNING | 17/11 22:41Z |
