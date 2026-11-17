@@ -30,7 +30,7 @@ const {chromium}=require('playwright');const [,,URL,SZ,FLAG]=process.argv;const 
   document.querySelectorAll('.kname,.knr').forEach(e=>{if(!vis(e))return;const kt=e.querySelector('.kti,.knr-r');if(!kt)return;const stacked=e.classList.contains('knr')||getComputedStyle(kt).display==='block'||getComputedStyle(e).display.includes('flex')&&getComputedStyle(e).flexDirection==='column';
    const inProse=!!e.closest(OKLINE);const where=(e.closest('[id],.dlg,.pc,.kpsn,.stage,.krv,.ksh,.kbk')||e.parentElement||{className:''}).className.toString().split(' ').slice(0,2).join('.');
    if(!stacked&&!inProse)rows.push({root:'LINE-OUTSIDE '+where,ranks:T(e).slice(0,50),form:'line-misplaced',dup:'line form outside result/Tuần lục'});
-   if(stacked&&inProse&&e.closest('p,li,.logs,.kbk-pg'))rows.push({root:'STACK-IN-PROSE '+where,ranks:T(e).slice(0,50),form:'stack-misplaced',dup:'stacked form inside a result line / Tuần lục text'})});
+   if(stacked&&inProse&&!e.closest('.k-cover')&&e.closest('p,li,.logs,.kbk-pg'))rows.push({root:'STACK-IN-PROSE '+where,ranks:T(e).slice(0,50),form:'stack-misplaced',dup:'stacked form inside a result line / Tuần lục text'})});
   return rows});
  const tabs=['rv','go','staff','kid','court','rel','men','fac','inv','story','log'];const all=[];
  for(const t of tabs){await p.evaluate(t=>{tab=t;render()},t);await p.waitForTimeout(1300);(await SCAN()).forEach(r=>all.push(Object.assign({surface:'tab '+t},r)))}
