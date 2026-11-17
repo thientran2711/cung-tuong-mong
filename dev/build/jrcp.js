@@ -17,7 +17,7 @@
       a favour: her thiện cảm −BAL.rcp.tFavor, no chân tình gift to her for BAL.gift.askW weeks). ================= */
 Object.assign(BAL,{rcp:{likeV:2,neutral:.6,hateV:3,fatW:8,fat:[1,.6,.3,0],bored:{emp:1,th:2,rel:3},hateP:70,alP:35,alSuc:15,
  accP:55,accKnew:30,defB:45,defTy:25,tFeeK:.08,tFeeMin:3,tFavor:4,tRel:25,bookPr:[0,18,30,45],bookAdd:[0,12,20,30],mamaK:.15,mamaMin:12,sheetPr:8,shopN:2,gossipP:25,
- tyFeeK:.05,spyO:60,giftRel:40,giftP:6,thGiftP:4}});
+ tyFeeK:.05,spyO:60,alEv:30,giftRel:40,giftP:6,thGiftP:4}});
 /* sub-styles per kind: [id, name, recipes] — the first is known from the start; every kind has exactly 4 (owner 15/11 ~21:50Z) */
 const RCP_ST={
 mon:[["s1","Cơm canh món mặn",["r01","r02","r05"]],["s2","Bánh trái, chè ngọt",["r03","r06","r08"]],["s3","Hấp, tần bổ dưỡng",["r04","r07","r10"]],["s4","Món chua ngọt",["r09"]]],
@@ -153,7 +153,7 @@ function rcpAllergy(a,r,w,al){const who=rcpWho(r),by=a===S?"ta":`${rkName(a)} ${
   const p=(r==="emp"||r==="th"?BAL.rcp.accP:cl(25+Math.round(hostility(r,S)/2),5,90))+(knew?BAL.rcp.accKnew:0);
   if(roll(cl(p,5,95))){const acc=r&&typeof r==="object"?r:rcpAccuser(r,S);pushDil(mkP("rcpacc",{t:rcpPK(r)==="emp"||rcpPK(r)==="th"?r:"v"+r.id,acc:acc?key(acc):null,wn:w.n,al,knew:knew?1:0}),"Bị tố mưu hại")}
   return t}
- if(r&&typeof r==="object"){if(roll(cl(30+Math.round(hostility(r,a)/2),5,90))){evA(r,a,1);newsAdd(a,"illicit",`${r.name} tố ${a.name} tặng đồ làm nàng phát bệnh.`)}}
+ if(r&&typeof r==="object"){if(roll(cl(BAL.rcp.alEv+Math.round(hostility(r,a)/2),5,90))){evA(r,a,1);newsAdd(a,"illicit",`${r.name} tố ${a.name} tặng đồ làm nàng phát bệnh.`)}}
  else{const q=rcpAccuser(r,a);if(q&&roll(BAL.rcp.accP))evA(q,a,1);newsAdd(a,"illicit",`${who} phát bệnh sau khi dùng đồ ${a.name} dâng.`)}
  return""}
 /* the allergy rash (jrash, the one face condition for everyone) */
@@ -164,7 +164,7 @@ function rcpMeAl(w){try{const P=rcpProf(S);return P&&P.a&&rcpAlOf(w).includes(P.
 function rcpAllergyMe(f,w,al){const by=f?`${rkName(f)} ${f.name}`:"";ap(S,{suc:-BAL.rcp.alSuc});
  let t=`<span class="r">Ta dùng ${w.n}${by?" của "+by:""} thì nổi mẩn, khó thở: ta kiêng ${RCP_ALN[al]}.</span> Sức -${BAL.rcp.alSuc}.`;
  rcpRash(S,al,f);const L=rcpLearn(S,"a","phát bệnh trước mắt");if(L)t+=" "+L;
- if(f&&typeof f==="object"&&f!==S){let h=0;try{h=hostility(S,f)||0}catch(e){}if(roll(cl(30+Math.round(h/2),5,90))){evA(S,f,1);t+=` Ta nắm 1 chứng cứ của ${f.name}.`}}
+ if(f&&typeof f==="object"&&f!==S){let h=0;try{h=hostility(S,f)||0}catch(e){}if(roll(cl(BAL.rcp.alEv+Math.round(h/2),5,90))){evA(S,f,1);t+=` Ta nắm 1 chứng cứ của ${f.name}.`}}
  return t}
 function rcpInWrap(d,p){try{const e=p&&p.e,w=e&&e.wk;if(!d||!d.o||d.rcpMe||!w)return d;const al=rcpMeAl(w);if(!al)return d;d.rcpMe=1;
   const f=p.f!=null?byKey(p.f):null,kn=rcpKn(S,"a");
