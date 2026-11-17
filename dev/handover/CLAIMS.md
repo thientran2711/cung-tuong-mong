@@ -832,5 +832,5 @@
 | REVIEW pcard-facts-2 r1 of 7ec2aa9b (sonnet) | review/pcard-facts-2-r1 | MAIN s33 | session_01UV1SzhQ2iUk4UXLNwCnsgN | RUNNING | 17/11 15:51Z |
 | TINBAO-UI badge+toast+card (sonnet; brief briefs/s33-tinbao-ui.md) | review/tinbao-ui | MAIN s33 | worker (this session) | READY for review e988d2e9 | 17/11 |
 | REVIEW tinbao-ui r1 of e988d2e9 (sonnet; lands after ag-all-2) | review/tinbao-ui-r1 | MAIN s33 | session_01UV1Szjrj8Z1MLukab13oZM | RUNNING | 17/11 15:53Z |
-| GRAND ENDINGS r3 (opus; design only; 4 grand + 2 kỳ ngộ, no normal, option C, branch chart in Sổ luân hồi; MAIN s33 15:30Z, OD ~15:25Z (1)) | review/grand-endings-design | D | (opening) | RUNNING | 17/11 15:58Z |
-| IMAGE SWEEP (sonnet; git images out of main + CDN _review leftovers of finished topics; MAIN s33 15:40Z) | review/image-sweep | D | (opening) | RUNNING | 17/11 15:58Z |
+| GRAND ENDINGS r3 (opus; design only; 4 grand + 2 kỳ ngộ, no normal, option C, branch chart in Sổ luân hồi; MAIN s33 15:30Z, OD ~15:25Z (1)) | review/grand-endings-design | D | session_01964izFEk4tjfDFmF5Rz6mu | RUNNING | 17/11 15:58Z |
+| IMAGE SWEEP (sonnet; git images out of main + CDN _review leftovers of finished topics; MAIN s33 15:40Z) | review/image-sweep | D | session_01964izETC9aNsnh7fPiiwPp | RUNNING | 17/11 15:58Z |
