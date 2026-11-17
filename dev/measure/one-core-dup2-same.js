@@ -13,7 +13,9 @@ const NS=['quyLv','loy','wit','ducLv','sungLv','nightEnd','tinhLv','tinLv','rare
 const INTENDED={'jhc.js':['window.quyW'],'j21.js':['affW'],'jts.js':['tsQuy'],'j55.js':['ccWord'],
  /* review/one-core-dup3: jlost A("laydol") x + AOUT.laydo/laydol: the text said «cung nữ thân tín lòng -10» while the rule (jlost loSteal self / jecon bribel)
     takes BAL.loyalCost = 25 → it now prints BAL.loyalCost (lazy getter / aoLz: jecon loads after jlost) and «Đức ${balSg(LO.act.duc)}» (= -4, same words) */
- 'jlost.js':['ExpressionStatement','TryStatement']};
+ 'jlost.js':['ExpressionStatement','TryStatement'],
+ /* review/one-core-dup3 item 5: j22 «Hẹn gặp riêng» lock text named only «lòng 60+» while the live watcher (jtin) also needs Chủ tin BAL.tinLv.watch: it now says both, as jroute does */
+ 'j22.js':['talkOpts']};
 /* j55 ccWord = side-chance scale (owner OD:L221) */
 const bal=()=>{const c={Math,BAL:{pace:1}};vm.createContext(c);
  const src=fs.readFileSync('dev/build/jbal.js','utf8')+'\n'+fs.readFileSync('dev/build/jbal2.js','utf8');
