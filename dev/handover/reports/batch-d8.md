@@ -65,3 +65,50 @@ ROLLOVER (verbatim):
 - The "Lượt n/30" counter from the owner's global chat preferences is ONLY a display counter here. It is NOT the rollover trigger for the Cung Tường Mộng main chat or any foreman. Never hand over because n reached 30.
 - Trigger = context (owner OD:L1217 + ceiling 16/11 08:15Z s13): at session start note your starting context as a % of the window (START_CTX; get_session context_usage.used_tokens, or your own estimate when it reads 0) in your first handover line. Roll over when context >= START_CTX % + 25 % of the window, and NEVER above 60 % of the window (hard ceiling). Then write the handover, open the next session yourself (create_session), and stop.
 - Every takeover prompt you write MUST copy these three lines verbatim. Workers roll over too (owner 16/11 08:22Z s14, option 1): at START_CTX % + 25 % of the window, ceiling 60 %; a worker may finish if only push + report remain; it writes its handover in its report file and tells its coordinator, and the COORDINATOR opens the successor (never the worker).
+
+## BUILDER #2 (successor, session_01964izFyv85ttBMAjgKknm6, opus) — 17/11 ~10:40Z
+PRIORITY #1 CHECK: live main re-fetched = **9391f9a9** (AG1+AG2 05ebe3da + show-why-r1, incl. f487d479 free-`tr` fix) | review/batch-d8 was d9fb2519 | nothing new built, merge + gates only. START_CTX ≈ 5 % (own estimate).
+
+**FINAL SHA: `8806f7b3ca5a0bb7a1d0f61d5f5e6241d431bdd2`** on `review/batch-d8` = d9fb2519 + merge of live main 9391f9a9. Main fast-forwards (9391f9a9 is an ancestor). Main not touched.
+
+### Merge 9391f9a9 → batch
+| file | resolution |
+|---|---|
+| index.html / sw.js / assets.json | ours, then `bash dev/site/build_site.sh` |
+| assemble.py | union: jmind after jdis · jagent, jagemp after jil (before jlag2) · jwhyn after jcoopone · jreg 2nd · tail …jseat, jcoopone, jwhyn, jkh, jnpcd, **jrbatch LAST** (292 modules, no dups). jwhyn wraps log/affAdd/…; jnpcd only wraps log for one call → order-safe |
+| j8.js night1 | main's `BAL.night.mood[E.mood]` + batch's `ilFilter(S,…,"conf")` (item-ledger) |
+| jbal2.js | both blocks, twice (suc-khoe BAL.kh/preT/pgRisk/ngh + AG BAL.ag/mind/deck; kc2 + show-why BAL.net.k/BAL.net.n). No BAL key defined twice |
+| KIT_REQUESTS.md | both requests kept |
+| **semantic (show-why ONE CORE)** | `net-inline-scan.py` found **12** nết-chosen numbers in batch module jkc2.js (origin-intros) → moved to `BAL.net.n` rows kc2HmAsk, kc2MeSick, kc2MuTalk, kc2ChaWant, kc2MeWant, kc2EnvoyMeet, kc2KhanGo, kc2MuGo, kc2MuSwap, kc2KhanSwap, kc2KhanVow, kc2KhanStay, read by `nv()` (same values, same pattern main used for jkc.js kcBac/kcReal/kcPowder). Scan now **0** |
+| batch semantic fixes | still there: jroute netRx ×4, j92 `netIs(s,"timid")||netIs(s,"greed")`, jkc2 hasT/tv/netTxt, jnroad `qv(M.tr,s,0)` + `if(typeof S==="undefined"||!S)return 0` |
+
+### Gates on 8806f7b3
+| check | result |
+|---|---|
+| quickcheck --runs 5 vs live 9391f9a9 | **PASS** 361 s · open 1467 ms · old save ok · core gates PASS · render 172/254 ms · tab 261/312 · buổi 833/951 · tasks>200ms 11/13 |
+| one-core-guard / rules-one-source / kit-conform / time-spill | PASS (inside quickcheck core gates) |
+| net-scan.py | old rows = live main's (all 0 except the 2 rows main has too: 10 / 2) · net-inline-scan **0** |
+| coop-e2e vs LIVE Worker | **63/63** |
+| oldsave-r1.js (old = live index.html) | **16/16** |
+| npc-roads.js / -maids / -men | **30/30 · 22/22 · 23/23** (menDecide fixed by main's f487d479) |
+| regEach / console at load (Fold + iPad, load + start) | 0 console errors, 0 regEach |
+| origin-intros flow.js / entry-exam direct.js | 10/10 · 9/9 |
+| origins.js Fold | ok (no overflow, box fit) |
+| item-ledger.js Fold + iPad | exit 0 both, no FAIL |
+| suc-khoe.js · npc-death.js · cloud-save.js | PASS · 12/12 · ALL 55 OK |
+
+### Kẻ hầu road line — FOUND, shown (not a bug)
+Builder #1 looked for the text «Tuyến truyện:». The line IS on the settled card, but the j84 wording pass renames it to **«Mệnh truyện: «…» · qua chương 4»** (j84 map `["Tuyến truyện","Mệnh truyện"]`). It is the last `.pcinfo` span in the card's LEFT column (`.pcl`, which scrolls by itself) under the item pictures and the Thiện cảm / Tuổi / Kẻ hầu / Trọng chips. So the player sees it after scrolling that column a little (Fold: ~110 px, iPad: ~200 px). Shots (S.maid, `nrMInit(s); s.nr.l=[[4,1]]`, Cung nhân tab, mouse wheel over the left column) — LOOKED: line whole, no overlap, nothing cut:
+- https://ctm-img.victoria-tntt.workers.dev/img/_review/batch-d8/fold-755x1000-kehau-road.jpg
+- https://ctm-img.victoria-tntt.workers.dev/img/_review/batch-d8/ipad-1180x820-kehau-road.jpg
+The 6 other shots of builder #1 (home, Mệnh truyện bd, Sổ mây) stay valid. Main's merge touched none of those screens' modules beyond show-why's result-card row.
+→ FOR D (UX, not blocking): the road line sits below the fold of the left column; if the owner wants it seen without scrolling, move it up in the .pcinfo order (the jnroad pcard wrapper appends it last).
+
+### CHANGE line
+Unchanged (main's CHANGE.txt top line is the same as on 9fdc1199; AG/show-why added none). Same text as above.
+
+### For main / D
+1. FF main → 8806f7b3 (9391f9a9 is its ancestor).
+2. Wipe review shots after the verdict: `python3 dev/site/cdn_sync.py --wipe-review batch-d8`.
+
+BATCH READY 8806f7b3ca5a0bb7a1d0f61d5f5e6241d431bdd2
