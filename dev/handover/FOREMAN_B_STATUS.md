@@ -1,4 +1,5 @@
 # FOREMAN_B_STATUS (written ONLY by Foreman B)
+ORDER 16/11 applied (workers/reviewers = separate sessions; hourly self-wake; rollover; claims).
 last wake: 11/17/2026 08:34Z (FOREMAN B SESSION 3 session_01N1tNP3Jf9UG8ZtZdVruBg7, depth 2) — context ~23 % (rollover ~29 %).
 FOREMAN B SESSION 3 = session_01N1tNP3Jf9UG8ZtZdVruBg7 (07:35Z); START_CTX ~4 % (estimate; used_tokens reads 0) → rollover at ~29 %, ceiling 60 %; lineage depth 2 (limit 8). Took over HANDOVER 07:35Z; telling every listed B session; hourly self-wake at :32.
 08:34Z WAKE (s3): no new ORDER. RUNNING 8: coop-thin-b #2 (B r1 + D r1 fixes), staff-root (running 5 servant tests), origin-bd-branch, dup2-r4 reviewer, arcs r2b worker, dup2-r3 worker idle, dup2 worker 5YW8y idle (leftovers wave review/one-core-dup3 after arcs PASS: road amt1/e67heir sites, evA/evStory, j96 adj96 heat, maid/kid amounts, jroute rtCard, jlost LO.act), arcs r1 reviewer idle. Free 4; no real B item queued (freeze). PASS for main still waiting: trait-rename-r1 84d47894 (re-check vs trait-pool), makeup-theme-r1 471de81f, one-core-roads-r1 75bc9f05 (after dup2 + arcs), mg-snap-r1 931255b1.
