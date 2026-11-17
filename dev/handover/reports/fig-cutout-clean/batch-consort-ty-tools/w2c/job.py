@@ -15,5 +15,6 @@ if __name__=='__main__':
     n=int(sys.argv[1]); skip=int(sys.argv[2]) if len(sys.argv)>2 else 0
     for i,k in list(q())[skip:skip+n]:
         age=k[-3:]; a=k.replace(age,'a18')
-        pr=subprocess.check_output(['python3',P+'prompt.py',str(i),age,'sheet']).decode().strip()
+        import re;m=re.search(r'c(\d+)-ty(\d)',k);gi=(int(m.group(1))*5+int(m.group(2))*3)%16
+        pr=subprocess.check_output(['python3',P+'prompt.py',str(gi),age,'sheet']).decode().strip()
         print(json.dumps({'key':k,'sheet':sheet[k],'a18':a18.get(a),'prompt':pr}))

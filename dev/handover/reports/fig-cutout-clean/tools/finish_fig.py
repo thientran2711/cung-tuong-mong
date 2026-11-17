@@ -42,6 +42,8 @@ def main(master_p, key, out):
     for sub, H, name in (("hd/", 1800, "hd"), ("tn/", 240, "tn")):
         b = get(f"{sub}fig-{key}.webp")
         if not b and name == "hd" and os.environ.get("FORCE_HD"): b = oldfig_b   # whole-set plan: hd for ALL (maids have none on CDN)
+        if b and name == "hd" and os.environ.get("HD_NATIVE"):   # owner rule: never downscale a master taller than 1800 -> hd canvas grows so the figure keeps its native pixels
+            _, i1 = fit_fig.fit(m, oldfig, 1800); nbh = fit_fig.bbox(m)[3] - fit_fig.bbox(m)[1]; fh1 = i1["old_fig_h_pct"] / 100 * 1800; H = max(1800, round(1800 * nbh / fh1))
         if b: open(f"{out}/_old/{name}-fig-{key}.webp", "wb").write(b); im, _ = fit_fig.fit(m, oldfig, H); save(im, f"{out}/img/{sub}fig-{key}.webp", 90 if H > 300 else 92); info[name] = im.size
     pb = get(f"por-{key}.webp")
     if pb:
