@@ -23,7 +23,7 @@ const MT={'.html':'text/html; charset=utf-8','.js':'text/javascript','.json':'ap
  await p.goto(url+'index.html?khost=0',{waitUntil:'domcontentloaded',timeout:120000});
  await p.waitForFunction(()=>typeof start==='function'&&typeof figFor==='function',null,{timeout:120000});
  await p.evaluate(()=>{try{localStorage.clear()}catch(e){}document.getElementById('title')&&(document.getElementById('title').hidden=true);window.__nlInner=1;start();window.__nlInner=0;Q.length=0});
- await p.waitForFunction(()=>typeof FIGS!=='undefined'&&FIGS.length>0,null,{timeout:60000});
+ await p.waitForFunction(()=>typeof FIGS!=='undefined'&&FIGS.length>0&&f88Keys('consort').length>0&&f88Keys('maid').length>0,null,{timeout:60000});
  const res=await p.evaluate(()=>{
   const TIERS=[-1,1,2,3,4,5,6,7,8],AGES=[18,26,36,51];const out={cells:[],missing:{},errs:[]};
   const parse=f=>{const m=/fig-(\w+)-(\w+?)-(t\w+?|cold)-a(\d+)\./.exec(f||"");return m?{role:m[1],id:m[2],tier:/cold/.test(m[3])?-1:+m[3].slice(1),age:+m[4]}:null};
@@ -52,5 +52,5 @@ const MT={'.html':'text/html; charset=utf-8','.js':'text/javascript','.json':'ap
  const grp={};for(const k of mk){const key=res.missing[k].join(',');(grp[key]=grp[key]||[]).push(k)}for(const g of Object.keys(grp))console.log(' missing tiers ['+g+'] ×'+grp[g].length+': '+grp[g].slice(0,6).join(' ')+(grp[g].length>6?' …':''));
  console.log('OTHERFACE',JSON.stringify(res.cells.filter(c=>c.v==='OTHERFACE')));console.log('page errors',errs.length,errs.slice(0,3),'eval errs',res.errs.slice(0,3));
  if(OUT)fs.writeFileSync(OUT,JSON.stringify({tot,sum,missing:res.missing}));
- await b.close();srv.close();const bad=(tot['npc:LOWER']||0)+(tot['her:LOWER']||0)+(tot['npc:MAIDART']||0)+(tot['her:MAIDART']||0)+(tot['npc:OTHERFACE']||0);
+ await b.close();srv.close();if(!res.cells.length){console.log('FAIL: 0 cells audited (manifests not loaded)');process.exit(2)}const bad=(tot['npc:LOWER']||0)+(tot['her:LOWER']||0)+(tot['npc:MAIDART']||0)+(tot['her:MAIDART']||0)+(tot['npc:OTHERFACE']||0);
  console.log(bad?'FAIL: '+bad+' wrong-dress cells':'PASS: no lower-tier / maid-art / other-face cell');process.exit(bad?1:0)})().catch(e=>{console.error(e);process.exit(2)});
