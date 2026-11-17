@@ -97,7 +97,7 @@ function kpresShow(m){try{if(!m||m.__pres)return;const P=kpresPlan(m);if(!P)retu
    (co-op: nothing sent, nothing awaited); Gọn / reduced motion / bots / no figure on the stage: nothing. Where the person is not on the stage the log line already says it.
    Her own moments (rank, cold palace, pregnancy, birth, death, hit, poison, harm) keep their j93 / j11 scenes; this adds what happens to OTHER people and to her figure.
    Test hook window.KPM_LOG [{m, who, fig, t}]; test dev/test/presentation-people.js. */
-const KPM_LOG=window.KPM_LOG=[];const KPM_LAST={};let KPM_PREV=[],KPM_PL="";const KPM_OUT=new Set();   /* KPM_PREV = the people list the stage was LAST drawn with (the game changes the list before it re-renders) */
+const KPM_LOG=window.KPM_LOG=[];const KPM_LAST={};let KPM_PREV=[],KPM_PL="";const KPM_OUT=new Set();lifeStore("KPM_LOG / KPRES_LOG presentation test-hook logs + KPM stage memory (names of that life)",()=>{KPM_LOG.length=0;KPRES_LOG.length=0;for(const k in KPM_LAST)delete KPM_LAST[k];for(const k in KPRES_LAST)delete KPRES_LAST[k];KPM_PREV=[];KPM_PL="";KPM_OUT.clear()});   /* KPM_PREV = the people list the stage was LAST drawn with (the game changes the list before it re-renders) */
 const kpmKey=w=>w&&(w.ref||(w.kind?w.kind+":"+w.name:w));   /* the stage lists wrappers {kind, ref, name}; homePeople() builds NEW wrappers every render, so identity = ref, else kind:name */
 function kpmOn(){try{return typeof kfOn==="function"&&kfOn()&&typeof S!=="undefined"&&S&&!S.dead&&typeof kitFigMove==="function"}catch(e){return false}}
 function kpmOnce(k,ms){const n=performance.now();if(KPM_LAST[k]&&n-KPM_LAST[k]<ms)return false;KPM_LAST[k]=n;return true}
