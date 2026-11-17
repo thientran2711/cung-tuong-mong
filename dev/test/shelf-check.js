@@ -14,9 +14,19 @@ const sl=t=>new Promise(r=>setTimeout(r,t));
   S.inv.push({k:"chuongngoc",from:"emp"});const ix=S.inv.length-1;const e=S.inv[ix];const r1=shelfPut(S,ix);F(r1.ok,"put failed: "+r1.why);F(!S.inv.includes(e),"displayed entry still in chest");
   F(!kitShopSellable(S).some(x=>x.k==="chuongngoc"),"displayed piece sellable");F(ilSlots(S).includes(e),"ledger lost the displayed piece");
   S.inv.push({k:"chuonggio"});const r2=shelfPut(S,S.inv.length-1);F(r2.ok&&r2.old===itm("chuongngoc").n&&S.inv.includes(e),"same group swap did not return the old piece");
-  /* rank gate (owner (d)): above her rank only a ngự ban piece; imperial pieces never */
-  const rk0=S.rank;S.rank=0;out.T.gate={buyOver:shelfWhyNot(S,{k:"chuongngoc"}),nguOver:shelfWhyNot(S,{k:"chuongngoc",from:"emp"})||"ok",imp:shelfWhyNot(S,{k:"ngocty",from:"emp"})};
-  F(out.T.gate.buyOver!==""&&out.T.gate.nguOver==="ok"&&out.T.gate.imp!=="","rank gate wrong: "+JSON.stringify(out.T.gate));S.rank=rk0;
+  /* NO rank block (owner OD 17/11 ~19:50Z): any owned piece may stand, over rank or not, even an imperial one (a charge is the only consequence) */
+  const rk0=S.rank;S.rank=0;out.T.gate={buyOver:shelfWhyNot(S,{k:"chuongngoc"})||"ok",nguOver:shelfWhyNot(S,{k:"chuongngoc",from:"emp"})||"ok",imp:shelfWhyNot(S,{k:"ngocty"})||"ok",over:shelfOver(S,{k:"chuongngoc"})};
+  F(out.T.gate.buyOver==="ok"&&out.T.gate.nguOver==="ok"&&out.T.gate.imp==="ok"&&out.T.gate.over,"display still blocked by rank: "+JSON.stringify(out.T.gate));S.rank=rk0;
+  /* TASTE: the same room, three eyes — a frugal one, a lover of show, Thái hậu; each by her own line */
+  {const kp=JSON.stringify(shelfOf(S).g),rk=S.rank;S.rank=2;shelfOf(S).g={};for(const k of ["remchau","binhsu","nhuy"]){S.inv.push({k,from:"emp"});shelfPut(S,S.inv.length-1)}
+   const P=liveRivals(true).filter(x=>x.alive).map(x=>[x,shelfTaste(x)]).sort((a,b)=>a[1]-b[1]);const lo=P[0],hi=P[P.length-1];
+   out.T.taste={rule:shelfLux(S).name,frugal:[lo[0].name,+lo[1].toFixed(2),shelfTasteWord(lo[0]),SHELF_LV[shelfLvFor(lo[0],S)]],lover:[hi[0].name,+hi[1].toFixed(2),shelfTasteWord(hi[0]),SHELF_LV[shelfLvFor(hi[0],S)]],th:[+shelfTaste("th").toFixed(2),SHELF_LV[shelfLvFor("th",S)]],
+    spread:P.map(x=>+x[1].toFixed(2)).join(" ")};F(lo[1]<hi[1]&&shelfLvFor(lo[0],S)>=shelfLvFor(hi[0],S),"taste does not change how a room is seen");
+   F(shelfTaste(lo[0])===lo[1],"taste not stable for one person");
+   /* a fake frugal Thái hậu: ngự ban room → rebuke when the talk has reached her */
+   const ot=BAL.shelf.taste.spread,oo=BAL.shelf.th.o;BAL.shelf.th.o=100;const th0=S.th|0,q0=Q.length;const st0=shelfTaste;shelfTaste=p=>p==="th"?-1:st0(p);/* a frugal Thái hậu */lo[0].shn={};shelfLook(lo[0],S,"test",true);out.T.thLv=SHELF_LV[shelfLvFor("th",S)];shelfThRebuke();shelfTaste=st0;BAL.shelf.th.o=oo;
+   const card=Q.slice(q0).find(q=>q.t==="Thái hậu quở");out.T.thRebuke=card?card.h.replace(/<[^>]+>/g,""):"none (thDead "+!!S.thDead+")";F(S.thDead||(card&&(S.th|0)<=th0),"Thái hậu did not rebuke a room too lavish to her");Q.length=q0;
+   shelfOf(S).g=JSON.parse(kp);S.rank=rk}
   S.inv.push({k:"vongngoc",w:1});F(shelfWhyNot(S,S.inv[S.inv.length-1])!=="","worn / non-décor piece accepted");S.inv.pop();
   const tk=shelfTake(S,"chuong");F(tk&&S.inv.some(x=>x.k==="chuonggio"),"take down failed");out.T.lock={put:r1.ok,swap:r2.old,take:tk};
   /* 2 DWELLING TABLE: for each rank, the level word for a set of scores (allowance hidden from the player; numbers for the report only) */
@@ -42,7 +52,10 @@ const sl=t=>new Promise(r=>setTimeout(r,t));
   /* Tố vượt phẩm, the room cause: a ngự ban piece above her rank; proven → back to the chest; none above rank → false charge */
   {const rk1=S.rank;S.rank=0;peer.shn={};peer.shR={};shelfSee(peer,S,"test");out.T.vp={vr:(peer.shn.me||{}).vr|0,ok:!!ACT.vp.ok(peer,S)};F(out.T.vp.vr>0&&out.T.vp.ok,"a visitor did not note a piece above rank");
    const sv=JSON.stringify(shelfOf(S).g);let vr="";for(let i=0;i<30&&!/thành/.test(vr);i++){shelfOf(S).g=JSON.parse(sv);vr=shelfVpAccuse(peer,S)}out.T.vpRes=vr.replace(/<[^>]+>/g,"");
-   F(/thành/.test(vr)&&!shelfList(S).some(e=>shelfOver(S,e)),"proven vượt phẩm did not send the piece back");shelfOf(S).g=JSON.parse(sv);S.rank=rk1}
+   F(/thành/.test(vr)&&!shelfList(S).some(e=>shelfOver(S,e)),"proven vượt phẩm did not send the piece back");
+   /* a BOUGHT piece above rank: proven → confiscated (not in her chest), punished */
+   shelfOf(S).g={};S.inv.push({k:"phanthai"});shelfPut(S,S.inv.length-1);let vb="";for(let i=0;i<30&&!/thành/.test(vb);i++){if(!shelfOf(S).g.su){S.inv=S.inv.filter(e=>e.k!=="phanthai");S.inv.push({k:"phanthai"});shelfPut(S,S.inv.length-1)}vb=shelfVpAccuse(peer,S)}
+   out.T.vpBought=vb.replace(/<[^>]+>/g,"");F(/tịch thu/.test(vb)&&!S.inv.some(e=>e.k==="phanthai")&&!shelfOf(S).g.su,"a bought over-rank piece was not confiscated");shelfOf(S).g=JSON.parse(sv);S.rank=rk1}
   const st0=shelfList(S).length;const res=shelfAccuse(peer,S);out.T.acc={res:res.replace(/<[^>]+>/g,""),left:[st0,shelfList(S).length]};
   shelfOf(S).g={};S.inv.push({k:"remtruc"});shelfPut(S,S.inv.length-1);peer.shn={me:Object.assign(shelfRec(S,"test",true),{lv:3,vr:1})};/* a belief the inquiry will not bear out */const fr=shelfAccuse(peer,S);out.T.accFalse=fr.replace(/<[^>]+>/g,"");F(/không có chuyện đó/.test(fr),"false charge not detected");
   const fv=shelfVpAccuse(peer,S);out.T.vpFalse=fv.replace(/<[^>]+>/g,"");F(/không có chuyện đó/.test(fv),"false vượt phẩm charge not detected");
@@ -71,6 +84,7 @@ const sl=t=>new Promise(r=>setTimeout(r,t));
    F(BAL.shelf.groups.length===12,"not 12 groups");F(K.length===67,"table pieces "+K.length+" (want 67 + 2 handmade + door plaques = 70)");F(!out.T.table.noName.length,"pieces without IT: "+out.T.table.noName);
    F(!SHELF_SRC("n").concat(SHELF_SRC("m")).some(k=>I[k].imp),"an imperial piece has a source");F(BAL.shelf.groups.every(g=>G[g[0]]),"empty group");
    let bad=[];for(const x of liveRivals(true)){delete x.shelf;for(const e of shelfList(x))if(shelfOver(x,e)&&e.from!=="emp")bad.push(x.name+":"+e.k)}F(!bad.length,"NPC seeded above rank: "+bad.join(","));
+   /* NPC arrange: only a lover of show puts a bought piece above her rank */let bold=[];for(const x of liveRivals(true).filter(y=>y.alive&&!y.out&&(rkOf(y)|0)<4)){x.inv=x.inv||[];x.inv.push({k:"phanthai"});shelfArrange(x);const on=shelfOf(x).g.su&&shelfOf(x).g.su.k==="phanthai";bold.push(x.name+" "+shelfTaste(x).toFixed(2)+(on?" bày":" không"));F(!on||shelfTaste(x)>0,"a frugal NPC put a bought over-rank piece up")}out.T.npcBold=bold;
    /* bestow: a décor bestowal may be above her rank (ngự ban) */const rk2=S.rank;S.rank=0;const ob=BAL.shelf.bestO;BAL.shelf.bestO=100;const n0=S.inv.length;const q0=Q.length;bestow(S,"promo");BAL.shelf.bestO=ob;const got=S.inv.slice(n0).map(e=>e.k);Q.length=q0;S.rank=rk2;
    out.T.bestow=got;F(S.inv.slice(n0).some(e=>BAL.shelf.it[e.k]&&e.from==="emp"),"a décor bestowal did not arrive as ngự ban")}
   {const t0=performance.now();for(let i=0;i<10;i++)shelfWeek();out.T.weekMs=+((performance.now()-t0)/10).toFixed(2);for(let i=0;i<3;i++){SHELF_PW.k='';placeWhere()}SHELF_PW.k='';const t1=performance.now();placeWhere();out.T.placeWhereMs=+(performance.now()-t1).toFixed(2);const t2=performance.now();placeWhere();out.T.placeWhereNoShelfMs=+(performance.now()-t2).toFixed(2);out.T.people=liveRivals(true).length}

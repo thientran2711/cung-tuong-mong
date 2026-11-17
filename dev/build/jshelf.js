@@ -21,6 +21,7 @@ Object.assign(BAL,{shelf:{
   ["phong","Bình phong, rèm"],["tay","Đồ Tây dương"],["quat","Quạt"],["chim","Chim cá"],["nhac","Nhạc khí"],["van","Văn phòng, đèn"]],
  /* ONE table of displayable pieces. g group · rk lowest rank (0 Đáp ứng … 7 Hoàng hậu) that may place it; above it only a ngự ban piece (from "emp") may stand
     (owner OD 17/11 ~18:25Z (d)); imp:1 = imperial only (Hoàng thượng / Thái hậu): no consort may ever place it, no source gives it.
+    rk is NOT a block (owner OD 17/11 ~19:50Z, L1682 (d) overwritten): ANY owned piece may be displayed; above rk is only a ground for a vượt phẩm charge.
     New pieces: gr = kit grade (0 Thường … 4 Ngự tứ) + pr = price → luxury by the kit formula luxVal (LUX_V[gr] + pr/10, jinv); existing IT pieces keep their own.
     care: "cay" plants / "nuoi" birds & fish (the jpet care model), hw = tuần untended until it withers; per = tuần it lasts on the shelf (incense burns).
     src: m Nội vụ phủ shop · n ngự ban (bestow, a décor list) · p a consort's gift / her own buying (NPC seeds) · v Nội vụ phủ issue */
@@ -70,12 +71,20 @@ Object.assign(BAL,{shelf:{
  plainF:.15,lv3:1.5,/* sc below plainF × allowance = đơn sơ; above allowance = xa hoa; above lv3 × allowance = quá xa xỉ */
  /* what a visitor's eye does (once per visitor and owner every see.cdW tuần) */
  see:{cdW:4,supAff:[0,0,-4,-8],ghen:[0,0,3,6],npcOanK:.5,fitAff:2,nguGhen:2,witherAff:-2,seenW:12},
+ /* EACH person's own taste for luxury (owner OD 17/11 ~19:50Z: "mỗi người sẽ có một cái độ thích và ghét xa xỉ khác nhau"): taste −1 (hates show) … +1 (loves it)
+    = Σ nết weights (tr, the one trait pool) + trọng weights (jtrong) + a once-per-life personal lean (S.ctxSeed hash, ± spread), clamped.
+    The viewer judges a room against HER OWN line: allowance × (1 + taste × k) — a frugal eye calls a lawful (even ngự ban) room "quá xa xỉ", a lover of show admires
+    what others frown on (likeAff × taste). The inquiry still judges by the rule (true allowance), never by taste. */
+ taste:{tr:{"Kiêu ngạo":.5,"Ham vui":.4,"Tham vọng":.3,"Ham lợi":.3,"Xu nịnh":.2,"Vì mình":.2,"Khiêm nhường":-.5,"Thanh liêm":-.5,"An phận":-.3,"Cương trực":-.3,"Ân cần":-.2,"Thật thà":-.2,"Điềm tĩnh":-.1},
+  trong:{"Kiệm":-.5,"Khiêm":-.3,"Lễ":-.2},spread:.3,k:.5,likeAff:3,npcCapK:.4},
+ /* Thái hậu hears of a room her own taste calls too lavish (someone saw it or the talk reached her) and rebukes the owner: o in 100 a month, th favour, Danh, mood */
+ th:{o:20,thAff:-6,danh:-2,mood:24},
  /* her mood (and every NPC's), weekly, the one jemo bar */
  mood:{fit:22,lux:34,wither:20},
  rum:{lv:2,o:12},   /* a room at or above lv (or with a piece above the owner's rank) spreads: each consort hears it o in 100 a week (roll) (a tip, never proof) */
  rep:1,             /* quá xa xỉ: tiếng xa hoa (jlux p.luxRep) +rep each month */
  /* NPC shelves: seed pieces by rank (0..7) on first look, then they arrange their chest weekly within capF × allowance (proud traits capHi) */
- npc:{seed:[0,1,1,2,2,3,3,4],capF:.9,capHi:1.3,proud:["Kiêu ngạo","Tham vọng"],care:.8},
+ npc:{seed:[0,1,1,2,2,3,3,4],capF:.9,care:.8},/* + taste × taste.npcCapK: a lover of show fills her shelf further, and only she puts a non-gift piece above her rank */
  /* plants + creatures (jpet model): care 0..100, falls (start-wither)/hw a tuần; servants care by default (0 khắc), quality by lòng and traits; her own care = the minigame */
  plant:{start:80,hw:3,wither:35,deadW:3,witherLux:.3,khacSelf:1,/* OWNER DECIDED (OD 17/11 ~18:15Z, option 1): servants care plants + pets at 0 khắc to her; 'Tự tay chăm' = khacSelf khắc; ONE 'Chăm sóc' act */srvBase:.45,srvLoyK:.006,srvMax:1.1,qCut:[.6,.9],/* servant care words: below qCut[0] vụng về, below qCut[1] tạm được, else khéo tay */srvTr:{"Cẩn thận":.2,"Chăm chỉ":.2,"Lười biếng":-.3,"Vụng về":-.2},
   gain:[10,45],word:[.35,.8],/* her care score: below word[0] "chưa khéo", at or above word[1] "rất khéo tay" */game:{rounds:3,steps:10,band:[6,8],ms:[260,170]}},
@@ -84,7 +93,7 @@ Object.assign(BAL,{shelf:{
  seeDeeds:["call","visit","help","apol","provoke","humil","test","mediate","warn"],
  /* Tố xa xỉ / Tố vượt phẩm, the room cause. Nobody knows the scores (owner (d)): a charge rests on what one SAW, a TIP (rumour) or a GUESS; the inquiry settles the truth.
     guessO: a hostile NPC with nothing seen / heard still accuses on a guess guessO in 100 a month (npcO in 100 with something seen / heard); vp*: a ngự ban piece above rank is allowed, so a proven charge only sends it back to the chest */
- acc:{cdA:48,cdT:72,hostMin:50,ghenMin:70,npcO:15,guessO:2,ducT:-2,danhT:-4,repT:2,danhA:2,rel:-10,waveDanhA:-2,falseDanhA:-5,falseDanhT:2,falseRel:-12,vpDanhT:-2}}});
+ acc:{cdA:48,vpConf:1,/* proven vượt phẩm: a ngự ban piece only goes back to the chest (vpDanhT); any other over-rank piece is confiscated + punish(vượt phẩm, vpConf) */cdT:72,hostMin:50,ghenMin:70,npcO:15,guessO:2,ducT:-2,danhT:-4,repT:2,danhA:2,rel:-10,waveDanhA:-2,falseDanhA:-5,falseDanhT:2,falseRel:-12,vpDanhT:-2}}});
 
 /* ---------- new décor pieces (IT, kd "Bày biện"): only earned (bought, given, bestowed); names + one line each (player text, VANPHONG) ---------- */
 (function(){const D={
@@ -125,6 +134,7 @@ Object.assign(BAL,{shelf:{
  cungdang:["Cung đăng lụa","Đèn lụa treo trong điện"],daminh:["Dạ minh châu","Ngọc châu sáng trong đêm"]};
  const P=BAL.shelf.it;for(const k in D){if(IT[k])continue;const s=P[k];IT[k]={n:D[k][0],kd:"Bày biện",d:`${D[k][1]} · bày ở Nơi trưng bày`,pr:s.imp?0:s.pr|0,/* imperial: no price, so no shop / weekly rare item can ever offer it */rk:0,tg:s.dead||s.imp?[]:["rv","th","hh"],gv:3}}})();
 /* Nội vụ phủ tray + ngự ban: décor joins without changing the old lists' balance */
+/* the Nội vụ phủ tray offers only décor within her rank (reviewer r1 fix (1)): a BUYING rule, kept — OD 17/11 ~19:50Z lifts only the DISPLAY block (an over-rank piece she owns, from a gift or bought before a demotion, may still stand) */
 (function(){const P=BAL.shelf.it,has=(k,c)=>!!(P[k]&&!P[k].imp&&!P[k].dead&&(P[k].src||"").includes(c)&&IT[k]);window.SHELF_SRC=c=>Object.keys(P).filter(k=>has(k,c));
  if(typeof restock==="function"){const r0=restock;restock=function(){const r=r0.apply(this,arguments);try{if(S&&Array.isArray(S.shop))for(const k of shuf(SHELF_SRC("m").filter(k=>(P[k].rk|0)<=(rkOf(S)|0))).slice(0,BAL.shelf.shopN))if(!S.shop.includes(k))S.shop.push(k)}catch(e){console.error("shelf restock",e)}return r};window.restock=restock}
  if(typeof bestow==="function"){const b0=bestow;bestow=function(p,why){if(!BEST||why==="son"||!roll(BAL.shelf.bestO))return b0.apply(this,arguments);const w=BEST[why]?why:"night",L0=BEST[w];
@@ -154,10 +164,9 @@ function shelfRk(e){if(!e||e.k==="tp")return 0;const s=BAL.shelf.it[e.k];return 
 function shelfOver(p,e){return shelfRk(e)>(rkOf(p)|0)}
 function shelfOf(p){if(!p)return{g:{}};const z=p.shelf=p.shelf&&typeof p.shelf==="object"?p.shelf:{g:{}};z.g=z.g||{};if(p!==S&&!z.sd){z.sd=1;try{shelfSeed(p)}catch(e){console.error("shelfSeed",e)}}return z}
 function shelfList(p){const z=shelfOf(p);return BAL.shelf.groups.map(x=>z.g[x[0]]).filter(Boolean)}
-/* why a chest entry cannot go on display ("" = it can). Above her rank only a ngự ban piece may stand (owner OD 17/11 ~18:25Z (d)) */
+/* why a chest entry cannot go on display ("" = it can). NO rank block (owner OD 17/11 ~19:50Z): over rank only risks a charge (shelfOver) */
 function shelfWhyNot(p,e){if(!e||!IT[e.k])return"không có món này";const g=shelfGrpE(e);if(!g)return"món này không để bày";if(e.h)return"không có trong rương";
- if(e.w)return"đang mặc, tháo ra trước";if(p.out)return"ở lãnh cung không được bày biện";const s=BAL.shelf.it[e.k];if(s&&s.imp)return"đồ của bậc chí tôn, phi tần không được bày";
- if(shelfOver(p,e)&&e.from!=="emp")return"vượt phẩm: quá phẩm mình chỉ đồ ngự ban mới được bày";return""}
+ if(e.w)return"đang mặc, tháo ra trước";if(p.out)return"ở lãnh cung không được bày biện";return""}
 /* put chest entry ix on display (the piece already in that group goes back to the chest) */
 function shelfPut(p,ix){const e=(p.inv||[])[ix];const why=shelfWhyNot(p,e);if(why)return{ok:false,why};const z=shelfOf(p),g=shelfGrpE(e),old=z.g[g];
  p.inv.splice(ix,1);if(old)p.inv.push(old);if(shelfIsPlant(e)&&e.pc==null){e.pc=BAL.shelf.plant.start;e.pz=0}e.shw=wk();z.g[g]=e;return{ok:true,g,old:old?shelfNm(old):"",n:shelfNm(e)}}
@@ -178,13 +187,25 @@ function shelfSeed(p){const B=BAL.shelf,n=B.npc.seed[Math.max(0,Math.min(7,rkOf(
  for(const k of shuf(pool.slice())){if(Object.keys(z.g).length>=n)break;const g=shelfGrp(k);if(z.g[g])continue;const v=luxPiece(k);if(v>left)continue;
   const e={k,from:"me"};if(B.it[k].care){e.pc=B.plant.start;e.pz=0}e.shw=wk();z.g[g]=e;left-=v}}
 function shelfArrange(p){const B=BAL.shelf,z=shelfOf(p);let bud=1;try{bud=luxAllow(p)*B.allowF}catch(e){}
- let T=[];try{T=traitsOf(p)||[]}catch(e){}const cap=bud*(T.some(t=>B.npc.proud.includes(t))?B.npc.capHi:B.npc.capF);
- for(let i=(p.inv||[]).length-1;i>=0;i--){const e=p.inv[i];if(shelfWhyNot(p,e)||e.t)continue;const g=shelfGrpE(e),cur=z.g[g];
+ const ta=shelfTaste(p),cap=bud*(B.npc.capF+ta*B.taste.npcCapK);
+ for(let i=(p.inv||[]).length-1;i>=0;i--){const e=p.inv[i];if(shelfWhyNot(p,e)||e.t)continue;if(shelfOver(p,e)&&e.from!=="emp"&&ta<=0)continue;const g=shelfGrpE(e),cur=z.g[g];
   const now=shelfLux(p).sc,gain=shelfPiece(e)-(cur?shelfPiece(cur):0);if(gain>0&&now+gain<=cap)shelfPut(p,i)}}
 
+/* ---------- TASTE: each person's own like ↔ dislike of luxury (owner OD 17/11 ~19:50Z), numbers BAL.shelf.taste ---------- */
+function shelfTaste(p){const T=BAL.shelf.taste;if(!p)return 0;let v=0;try{for(const n of (typeof traitsOf==="function"?traitsOf(p==="th"?{kind:"th"}:p):[])||[])v+=T.tr[n]||0}catch(e){}
+ try{if(typeof trongOf==="function")for(const n of trongOf(p)||[])v+=T.trong[n]||0}catch(e){}
+ try{const h=ctxHash(ctxSeed()+"|shelfTaste|"+(p==="th"?"th":ctxKey(p)));v+=[-1,-.5,0,.5,1][h%5]*T.spread}catch(e){}return cl(v,-1,1)}
+window.shelfTaste=shelfTaste;
+const SHELF_TASTE_W=[[-.5,"ghét xa hoa"],[-.15,"chuộng giản dị"],[.15,"không để ý"],[.5,"ưa sang trọng"],[9,"mê xa hoa"]];
+function shelfTasteWord(p){const v=shelfTaste(p);return SHELF_TASTE_W.find(x=>v<x[0])[1]}
+/* the room as ONE viewer sees it: the same sum against her own line (allowance × (1 + taste × k)); the inquiry uses the rule (shelfLux) */
+function shelfLvFor(obs,t){const x=shelfLux(t),B=BAL.shelf;if(!obs||obs===t)return x.lv;const f=Math.max(.2,1+shelfTaste(obs)*B.taste.k);
+ return x.sc<x.bud*B.plainF?0:x.sc<=x.bud*f?1:x.sc<=x.bud*B.lv3*f?2:3}
+window.shelfLvFor=shelfLvFor;
+
 /* ---------- what people SEE of a room (jdress model): same place, Dò la, maid's report; rumours = a tip (belief), never proof ---------- */
-function shelfRec(t,by,pf){const x=shelfLux(t);return{w:wk(),sc:x.sc,bud:x.bud,lv:x.lv,n:x.n,wi:x.wither?1:0,vr:x.vr,sig:shelfSig(t),by:by||"",pf:pf?1:0}}
-function shelfLook(obs,t,by,pf){if(!obs||!t||obs===t||t.alive===false)return null;const r=shelfRec(t,by,pf!==false);obs.shn=obs.shn||{};const k=wdKey(t),o=obs.shn[k];
+function shelfRec(t,by,pf,obs){const x=shelfLux(t);return{w:wk(),lv:shelfLvFor(obs,t),n:x.n,wi:x.wither?1:0,vr:x.vr,sig:shelfSig(t),by:by||"",pf:pf?1:0}}
+function shelfLook(obs,t,by,pf){if(!obs||!t||obs===t||t.alive===false)return null;const r=shelfRec(t,by,pf!==false,obs);obs.shn=obs.shn||{};const k=wdKey(t),o=obs.shn[k];
  /* a rumour never overwrites proof of the same room */if(!r.pf&&o&&o.pf&&o.sig===r.sig&&wk()-o.w<=BAL.shelf.see.seenW)return o;
  /* NPCs keep only what matters (an over-allowance room, a piece above rank, a withered plant): saves stay small */if(obs!==S&&r.lv<2&&!r.wi&&!r.vr){delete obs.shn[k];return r}
  obs.shn[k]=r;return r}
@@ -193,11 +214,12 @@ function shelfNow(obs,t){const r=shelfSeen(obs,t);return r&&r.sig===shelfSig(t)?
 window.shelfLook=shelfLook;window.shelfSeen=shelfSeen;window.shelfNow=shelfNow;
 /* a visitor's eye on the room: her view of the owner (superiors frown on a room above its rank, peers envy, a fitting room is admired) */
 function shelfReact(obs,t){if(!obs||!t||obs===t||obs===S)return"";const B=BAL.shelf.see;obs.shR=obs.shR||{};const k=wdKey(t);if(obs.shR[k]!=null&&wk()-obs.shR[k]<B.cdW)return"";obs.shR[k]=wk();
- const x=shelfLux(t);if(!x.n)return"";const sup=obs.queen||rkOf(obs)>rkOf(t);let m=1;try{m=tv(LUX_TR,obs)||1}catch(e){}
- if(x.lv>=2){if(sup)affAdd(obs,t,B.supAff[x.lv]);else{const n=Math.round(B.ghen[x.lv]*m);if(t===S)obs.ghen=cl((obs.ghen||0)+n,0,100);else oanAdd(obs,t,n*B.npcOanK)}}
- else if(x.lv===1)affAdd(obs,t,B.fitAff);
+ const x=shelfLux(t);if(!x.n)return"";const pl=shelfLvFor(obs,t),ta=shelfTaste(obs);const sup=obs.queen||rkOf(obs)>rkOf(t);let m=1;try{m=tv(LUX_TR,obs)||1}catch(e){}
+ /* by HER OWN eye (taste): too lavish → a superior frowns, a peer envies; to her liking → admired, a lover of show admires more */
+ if(pl>=2){if(sup)affAdd(obs,t,B.supAff[pl]);else{const n=Math.round(B.ghen[pl]*m);if(t===S)obs.ghen=cl((obs.ghen||0)+n,0,100);else oanAdd(obs,t,n*B.npcOanK)}}
+ else if(pl===1)affAdd(obs,t,B.fitAff+Math.round(Math.max(0,ta)*BAL.shelf.taste.likeAff*(x.lv>=2?1:.5)));
  if(!sup&&shelfList(t).some(e=>e.from==="emp"||e.from==="th")){if(t===S)obs.ghen=cl((obs.ghen||0)+B.nguGhen,0,100);else oanAdd(obs,t,B.nguGhen*B.npcOanK)}
- if(x.wither)affAdd(obs,t,B.witherAff);return x.name}
+ if(x.wither)affAdd(obs,t,B.witherAff);return SHELF_LV[pl]}
 window.shelfReact=shelfReact;
 function shelfSee(obs,t,by){const r=shelfLook(obs,t,by,true);if(r)shelfReact(obs,t);return r}
 const SHELF_PW={k:""};/* once per buổi (placeWhere runs many times a buổi: perf) */
@@ -245,12 +267,16 @@ function shelfAccuse(a,t){const B=BAL.shelf.acc;const x=shelfLux(t);let judge=""
  relAdd(a,t,B.rel);ap(a,{danh:B.danhA});const off=shelfStrip(t);ap(t,{duc:B.ducT,danh:B.danhT});try{t.luxRep=Math.min(BAL.lux.repMax,(t.luxRep||0)+B.repT)}catch(e){}
  return `${A0} tố ${T0} bày biện xa xỉ (phòng ${w}): <span class="${t===S?"r":"g"}">thành</span>. ${off?off+" phải cất vào rương. ":""}${NMc(t)} Đức ${B.ducT}, Danh ${B.danhT}. `}
 window.shelfAccuse=shelfAccuse;
-/* a ngự ban piece above rank may stand (owner (d)), so a proven charge only sends it back to the chest with a small loss of Danh: the risk of showing it */
+/* any piece may stand (owner OD 17/11 ~19:50Z); a proven vượt phẩm finding is judged: a ngự ban piece only goes back to the chest (Danh vpDanhT),
+   any other over-rank piece is confiscated (jil "conf", Nội vụ phủ store) and she is punished like a worn vượt phẩm (j8 vpAccuse: punish + BAL.eff.j8.danhVpAccuse) */
 function shelfVpAccuse(a,t){const B=BAL.shelf.acc;let judge="";try{judge=judgeName(t)}catch(e){judge="Hoàng hậu"}const A0=NMc(a),T0=NM(t);shelfInq(a,t);
  const z=shelfOf(t),G=Object.keys(z.g).filter(g=>shelfOver(t,z.g[g]));if(!G.length)return shelfFalse(a,t,"bày đồ vượt phẩm");
- if(!roll(oVP(a))){ap(a,{danh:B.waveDanhA});relAdd(a,t,B.rel);return `${A0} tố ${T0} bày đồ vượt phẩm, ${judge} xét là đồ ngự ban nên bỏ qua. ${a===S?"Danh "+B.waveDanhA+". ":""}`}
- relAdd(a,t,B.rel);ap(a,{danh:B.danhA});const off=G.map(g=>shelfTake(t,g)).filter(Boolean);ap(t,{danh:B.vpDanhT});
- return `${A0} tố ${T0} bày đồ vượt phẩm: <span class="${t===S?"r":"g"}">thành</span>. ${judge} dạy đồ ngự ban quá phẩm thì cất giữ, không bày ra: ${off.join(", ")} phải cất vào rương. ${NMc(t)} Danh ${B.vpDanhT}. `}
+ const ngu=G.filter(g=>z.g[g].from==="emp"),own=G.filter(g=>z.g[g].from!=="emp");
+ if(!roll(oVP(a))){ap(a,{danh:B.waveDanhA});relAdd(a,t,B.rel);return `${A0} tố ${T0} bày đồ vượt phẩm, ${judge} bỏ qua${own.length?"":", vì là đồ ngự ban"}. ${a===S?"Danh "+B.waveDanhA+". ":""}`}
+ relAdd(a,t,B.rel);ap(a,{danh:B.danhA});const back=ngu.map(g=>shelfTake(t,g)).filter(Boolean);let gone=[];
+ if(own.length){const E=own.map(g=>z.g[g]);gone=E.map(shelfNm);for(const g of own)shelfTake(t,g);try{ilFilter(t,e=>!E.includes(e),"conf")}catch(x){t.inv=(t.inv||[]).filter(e=>!E.includes(e))}
+  ap(t,{danh:BAL.eff.j8.danhVpAccuse});try{punish(t,"vượt phẩm",B.vpConf)}catch(x){}}else ap(t,{danh:B.vpDanhT});
+ return `${A0} tố ${T0} bày đồ vượt phẩm: <span class="${t===S?"r":"g"}">thành</span>. ${back.length?`${judge} dạy đồ ngự ban quá phẩm thì cất giữ, không bày ra: ${back.join(", ")} phải cất vào rương. `:""}${gone.length?`${gone.join(", ")} bị tịch thu. `:""}${NMc(t)} Danh ${own.length?balSg(BAL.eff.j8.danhVpAccuse):B.vpDanhT}. `}
 window.shelfVpAccuse=shelfVpAccuse;
 /* hook the two acts (load order free: jdress may be assembled before OR after this file, and its A("xx") replaces ACT.xx) — run now, after every module, and before each week */
 function shelfHook1(id,name,why,run){const X=typeof ACT==="object"?ACT[id]:null;if(X&&X.__sh)return;
@@ -269,6 +295,12 @@ function shelfNpcAccuse(){const B=BAL.shelf.acc;for(const a of liveRivals(true))
    if(kind?!roll(B.npcO):!roll(B.guessO))continue;if(!kind)kind="xx";/* a guess */
    a.shA=wk();t.shT=wk();const txt=kind==="vp"?shelfVpAccuse(a,t):shelfAccuse(a,t);if(t===S)Q.push({t:kind==="vp"?"Bị tố bày đồ vượt phẩm":"Bị tố bày biện xa xỉ",who:typeof pv==="function"?pv(a):null,h:`<p>${txt}</p>`});else try{newsAdd(a,kind,txt,false)}catch(e){}break}}}
 
+/* Thái hậu: her own taste decides; she hears of a room through the palace talk (someone saw it or heard of it) — even ngự ban can be "quá xa xỉ" to her (owner OD 17/11 ~19:50Z) */
+function shelfThRebuke(){if(!S||S.thDead)return;const B=BAL.shelf.th;const P=[S].concat(liveRivals(true)).filter(p=>p&&p.alive!==false&&!p.out);
+ for(const t of P){if(shelfLvFor("th",t)<2)continue;const talk=P.some(o=>o!==t&&shelfSeen(o,t));if(!talk||!roll(B.o))continue;
+  const ngu=shelfList(t).some(e=>e.from==="emp");t.th=cl((t.th||0)+B.thAff,0,100);ap(t,{danh:B.danh});try{if(typeof emoSet==="function")emoSet(t,"buon",B.mood,"bị Thái hậu quở vì phòng ốc xa xỉ")}catch(e){}
+  const h=`Thái hậu nghe nói phòng ${t===S?"ngươi":t.name} bày biện quá xa xỉ${ngu?", đồ ngự ban cũng không nên phô ra như thế":""}, cho gọi đến quở trách. Thái hậu thiện cảm ${B.thAff}, Danh ${B.danh}.`;
+  if(t===S){if(!(typeof tsbBot==="function"&&tsbBot()))Q.push({t:"Thái hậu quở",who:typeof pTH==="function"?pTH():null,h:`<p>${h}</p>`})}else try{newsAdd(t,"xx",h,false)}catch(e){}}}
 /* ---------- the week: plants (decay, servants' care, withered, dead pot), NPC arrange, mood, rumours; the month: reputation, NPC charges ---------- */
 function shelfSrvQ(s){const P=BAL.shelf.plant;if(!s)return 0;let q=P.srvBase+(s.loyal||0)*P.srvLoyK;const T=[].concat(s.traits||[],typeof s.tr==="string"?[s.tr]:[]);for(const t of T)q+=P.srvTr[t]||0;return cl(q,0,P.srvMax)}
 const SHELF_SRVW=["vụng về","tạm được","khéo tay"];
@@ -289,7 +321,7 @@ function shelfPlantWeek(p){const P=BAL.shelf.plant,z=shelfOf(p),me=p===S;const s
   if(w==="dead"){log(`<span class="r">${n0} bày trong phòng bị bỏ bê lâu ngày, ${W0.died}.</span>`);continue}
   const e=z.g[g],W=shelfWord(e),n=shelfNm(e);Q.push({t:`${n} ${W.bad}`,who:typeof pMe==="function"?pMe():null,h:`<p>${n} bày trong phòng ${W.bad}${s?`: ${s.name} chăm chưa khéo`:", không ai chăm"}. Để lâu thì ${W.died}; khách đến thấy cũng chê.</p>`,
    opts:[{n:"Tự tay chăm",fx:{},x:`tốn: ${P.khacSelf} khắc · thành: ${W.fresh}`,go:()=>setTimeout(()=>{try{shelfPlantOpen(g)}catch(e){}},60)},{n:"Để người hầu lo",fx:{},x:s?`${s.name} chăm tiếp, khéo vụng tùy lòng`:`không ai chăm: ${W.bad} thêm`}]})}return out}
-function shelfMood(p){if(typeof emoSet!=="function")return;const x=shelfLux(p),M=BAL.shelf.mood;
+function shelfMood(p){if(typeof emoSet!=="function")return;const x=Object.assign({},shelfLux(p)),M=BAL.shelf.mood;if(p!==S&&shelfTaste(p)<0&&x.lv>=2)x.lv=1;/* a frugal owner takes no joy in show */
  if(x.wither)emoSet(p,"buon",M.wither,"cây cảnh, chim cá trong phòng bỏ bê");else if(x.lv>=2)emoSet(p,"vui",M.lux,"phòng ốc bày biện lộng lẫy");else if(x.lv===1)emoSet(p,"vui",M.fit,"phòng ốc bày biện vừa ý")}
 function shelfRumour(){const B=BAL.shelf.rum;const P=[S].concat(liveRivals(true)).filter(p=>p&&p.alive!==false&&!p.out);let heardMe=0;
  for(const t of P){const x=shelfLux(t);if(x.lv<B.lv&&!x.vr)continue;for(const o of P){if(o===t||shelfSeen(o,t))continue;if(!roll(B.o))continue;shelfLook(o,t,"tin đồn",false);if(t===S)heardMe++;
@@ -300,7 +332,7 @@ function shelfGuest(){try{return typeof worldOn==="function"&&!worldOn()}catch(e
 function shelfWeek(){if(!S||S.dead)return;try{shelfAccHook()}catch(e){}const gu=shelfGuest();const P=(gu?[S]:[S].concat(liveRivals(true))).filter(p=>p&&p.alive!==false);
  for(const p of P){try{if(p.out){if(p.shelf&&p.shelf.g)for(const g in p.shelf.g)shelfTake(p,g);continue}if(p!==S)shelfArrange(p);shelfPlantWeek(p);shelfMood(p)}catch(e){console.error("shelfWeek",e)}}
  if(gu)return;try{shelfRumour()}catch(e){console.error("shelfRumour",e)}
- if(S.shM!==S.turn){S.shM=S.turn;for(const p of P){try{if(shelfLux(p).lv>=3)p.luxRep=Math.min(BAL.lux.repMax,(p.luxRep|0)+BAL.shelf.rep)}catch(e){}}try{shelfNpcAccuse()}catch(e){console.error("shelfNpcAccuse",e)}}}
+ if(S.shM!==S.turn){S.shM=S.turn;for(const p of P){try{if(shelfLux(p).lv>=3)p.luxRep=Math.min(BAL.lux.repMax,(p.luxRep|0)+BAL.shelf.rep)}catch(e){}}try{shelfNpcAccuse()}catch(e){console.error("shelfNpcAccuse",e)}try{shelfThRebuke()}catch(e){console.error("shelfThRebuke",e)}}}
 window.shelfWeek=shelfWeek;
 (function(){if(typeof petWeek!=="function")return;const w0=petWeek;petWeek=function(){const r=w0.apply(this,arguments);try{shelfWeek()}catch(e){console.error("shelfWeek",e)}return r}})();
 
@@ -344,7 +376,7 @@ document.addEventListener("click",ev=>{const b=ev.target.closest&&ev.target.clos
 /* ---------- interim entry points (kit parts only; the shelf screen itself waits for KIT READY) ---------- */
 /* item panel (jinv kinvOpen): an act card "Trưng bày" on every displayable piece */
 (function(){if(typeof kinvOpen!=="function")return;const k0=kinvOpen;kinvOpen=function(x){const r=k0.apply(this,arguments);if(!BAL.shelf.ui)return r;try{const i=x&&x.g?x.g.i:-1,e=S.inv[i];const g=e&&shelfGrpE(e);
-  if(g){const cur=shelfOf(S).g[g];const card=pbtn(`data-shelfput="${i}"`,"Trưng bày",`thành: bày lên kệ nhóm ${shelfGName(g)}${cur?` thay ${shelfNm(cur)}`:""} · kèm: còn bày thì không tặng hay bán được`,shelfWhyNot(S,e));
+  if(g){const cur=shelfOf(S).g[g];const card=pbtn(`data-shelfput="${i}"`,"Trưng bày",`thành: bày lên kệ nhóm ${shelfGName(g)}${cur?` thay ${shelfNm(cur)}`:""} · kèm: còn bày thì không tặng hay bán được${shelfOver(S,e)?", quá phẩm mình: dễ bị tố vượt phẩm":""}`,shelfWhyNot(S,e));
    const acts=document.querySelector("#modal .kinvacts"),body=document.querySelector("#modal .kpb");if(acts)acts.insertAdjacentHTML("beforeend",card);else if(body)body.insertAdjacentHTML("beforeend",`<div class="rbtn kinvacts">${card}</div>`)}}catch(e){console.error("shelf kinvOpen",e)}return r}})();
 document.addEventListener("click",ev=>{const b=ev.target.closest&&ev.target.closest("[data-shelfput],[data-shelftake]");if(!b||b.disabled)return;ev.stopPropagation();
  if(b.dataset.shelfput!=null){const R=shelfPut(S,+b.dataset.shelfput);try{closeModal()}catch(x){}if(R.ok)log(`Ngươi bày ${R.n} ở Nơi trưng bày${R.old?`, cất ${R.old} vào rương`:""}.`);try{render()}catch(x){}return}
