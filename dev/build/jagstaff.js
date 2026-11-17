@@ -51,7 +51,7 @@ function asOdds(s,b){return b>=100?100:odA(s,b)}
 function asPeerOK(s,x){return x&&x!==s&&ownerOf(x)}
 /* one option from one SRVA row: k = the player's button (histogram key), t = target, at = place, run = the shared execution */
 function asOpt(s,k,raw,more){const m=ownerOf(s);const A=SRVA[k];const mp=A.mp||0;
- const o=Object.assign({k,g:asGrp(s),p:asOdds(s,raw),c:srvCa(k,s,m),w:Object.assign({},srvWa(k,s,m),mp?{mp:mp*asB().mpS}:{}),l:A.l||{},at:asHome(m),tag:"staff"},more||{});
+ const o=Object.assign({k:"sv_"+k,sk:k,g:asGrp(s),p:asOdds(s,raw),c:srvCa(k,s,m),w:Object.assign({},srvWa(k,s,m),mp?{mp:mp*asB().mpS}:{}),l:A.l||{},at:asHome(m),tag:"staff"},more||{});
  const pl=o.at;o.at=()=>pl;o.pl=pl;o.run=(p,t)=>asRun(p||s,o);return o}
 function asOpts(s,N){asSt(s);const m=ownerOf(s);if(!m)return[];N=N||asNeeds(s);const L=[],maid=s.role==="maid",home=asMisHome(m),X=x=>x&&L.push(x);
  const strict=home&&(hasT(m,"Kiêu ngạo")||hasT(m,"Xảo quyệt"));
@@ -65,7 +65,7 @@ function asOpts(s,N){asSt(s);const m=ownerOf(s);if(!m)return[];N=N||asNeeds(s);c
   if((s.intel||[]).length)X(asOpt(s,"tellMis",100,{ev:1}));if(s.loyal>=SRVA.askRec.tin&&srk(s)<srkMax(m,s))X(asOpt(s,"askRec",SRVA.askRec.o(s,m),{w:{mp:SRVA.askRec.mpOk*asB().mpS}}))}
  else X(asOpt(s,"beside",SRVA.beside.o(s,m),{at:srvWhere(m)}));
  /* Hoàng thượng where he passes (srvTalk "emp", jagmaid one rule) */
- try{const W=S.where||{};if(maid&&mlAgeOk(s)&&W.emp&&W.emp!=="dtd"&&W.emp!=="home")X({k:"empTea",g:"maid",p:odA(s,amTeaO(s,0)),c:{},w:{sung:amTeaG(s)*qv(BAL.mline.seekTr,s,1)},l:{tin:-BAL.ag.maid.tea.fail},at:()=>W.emp,pl:W.emp,tag:"staff",run:p=>asEmpTea(p||s)})}catch(e){}
+ try{const W=S.where||{};if(maid&&mlAgeOk(s)&&W.emp&&W.emp!=="dtd"&&W.emp!=="home")X({k:"sv_empTea",sk:"empTea",g:"maid",p:odA(s,amTeaO(s,0)),c:{},w:{sung:amTeaG(s)*qv(BAL.mline.seekTr,s,1)},l:{tin:-BAL.ag.maid.tea.fail},at:()=>W.emp,pl:W.emp,tag:"staff",run:p=>asEmpTea(p||s)})}catch(e){}
  /* consorts (srvTalk "rv" / "hh") */
  const hh=typeof queenP==="function"?queenP():null;
  if((s.sec||0)>0){const foe=liveRivals(true).find(v=>v!==m&&(v===hh||hostility(v,m)>=20));if(foe)X(asOpt(s,"betray",100,{t:foe,at:palaceOf(foe)}));
@@ -101,11 +101,10 @@ function asLove(s){const L=[];s.mt=s.mt||{};const B=asB();
 function asRisk(s){const k=asHome(ownerOf(s));const base={vuon:28,thu:34,tyv:20,tn:40,home:18}[k]||26;return cl(Math.round(base+(S.mat||0)-asFriends(s)*4-(s.tamco||0)/10),6,92)}
 /* ---------- the shared execution (the player's card: cost, roll at its odds, gain or loss, công lao, then what the act does) ---------- */
 function asSee(m,t){try{return m===S||t===S||(S.mat||0)>=BAL.mline.seeMat}catch(e){return false}}
-function asRun(s,o){const m=ownerOf(s);if(!m)return"";const A=SRVA[o.k];asC(s,o.k);asAp(s,o.c);const ok=o.p>=100||roll(o.p);
- asAp(s,ok?srvWa(o.k,s,m):(A.l||{}));if(ok&&A.mp)servMerit(s,A.mp);let r="";
- try{r=(AS_DO[o.k]||(()=>""))(s,m,o,ok)||""}catch(e){console.error("jagstaff "+o.k,e)}
- try{if(typeof agLedger==="function")agLedger(s,o.k,o.t,ok)}catch(e){}
- return r}
+function asRun(s,o){const m=ownerOf(s);if(!m)return"";const A=SRVA[o.sk];asC(s,o.sk);asAp(s,o.c);const ok=o.p>=100||roll(o.p);
+ asAp(s,ok?srvWa(o.sk,s,m):(A.l||{}));if(ok&&A.mp)servMerit(s,A.mp);let r="";
+ try{r=(AS_DO[o.sk]||(()=>""))(s,m,o,ok)||""}catch(e){console.error("jagstaff "+o.sk,e)}
+  return r}
 function asOut(s,why){const o=ownerOf(s);if(o&&o.staff){const i=o.staff.indexOf(s);if(i>=0)o.staff.splice(i,1)}s.out=why||1;ASN.out=(ASN.out||0)+1}
 const AS_DO={
  nvp(s){if(roll(SRVA.nvp.bully)){asAp(s,{suc:-5});return""}const L=allServ().filter(x=>x!==s&&ownerOf(x)!==ownerOf(s));if(L.length){const x=L[R(L.length)];s.af=s.af||{};s.af[x.sid]=cl((s.af[x.sid]||0)+5,-100,100)}return""},
@@ -150,7 +149,8 @@ function asPlanDraw(){const D=S.agS={d:wk(),P:{}};const t0=performance.now();let
  ASN.plan=(ASN.plan||0)+1;ASN.planMs=(ASN.planMs||0)+performance.now()-t0;return n}
 function asDo(s,sl){if(!sl||!sl.k)return"";const N=asNeeds(s);const O=asOpts(s,N);const c=O.find(o=>o.k===sl.k&&asSlot(o).t===sl.t)||O.find(o=>o.k===sl.k&&!sl.t);
  if(!c){ASN.miss=(ASN.miss||0)+1;return""}return c.run(s)||""}
-function asTick(){if(!asOn())return"";const key=agKey();if(ASN.key===key)return"";ASN.key=key;ASN.tick++;const t0=performance.now();let ev="";
+function asPlanned(){try{return typeof agDrawReg==="function"&&typeof agDOn==="function"&&agDOn()}catch(e){return false}}
+function asTick(){if(!asOn()||asPlanned())return"";const key=agKey();if(ASN.key===key)return"";ASN.key=key;ASN.tick++;const t0=performance.now();let ev="";
  try{if(!S.agS||S.agS.d!==wk())asPlanDraw();const b=Math.min(3,S.buoi||0);const P=S.agS.P;
   for(const s of asStaff()){let L=P[s.sid];if(!L){L=P[s.sid]=[0,1,2,3].map(()=>asSlot(asDecide(s)))}ev+=asDo(s,L[b])}}catch(e){console.error("jagstaff tick",e)}ASN.ms+=performance.now()-t0;
  if(ev)try{log(ev)}catch(e){}return ev}
@@ -183,6 +183,13 @@ function asHitPick(p){if(p===S)return null;const t=pickTarget(p);if(!t||!(t.staf
 /* ---------- wiring ---------- */
 try{if(typeof agReg==="function"){agReg("maid","staff",(p,N)=>asOpts(p,N));agReg("srv","staff",(p,N)=>asOpts(p,N))}
  if(typeof agRegNeeds==="function"){agRegNeeds("maid",asNeeds);agRegNeeds("srv",asNeeds)}
+ /* part A's day draw (jagday agDrawReg): every staff "s"+sid (ledgerId) draws her 4 slots there; base row = her master's palace (her duties);
+    the planned deed lands through the pend / ledger / witness path (agPlanX → AGRUN "sv_<SRVA key>" → the same option's run) */
+ if(typeof agDrawReg==="function"){agDrawReg(()=>asOn()?asStaff().map(s=>[s,"s"+s.sid,asGrp(s)]):[]);
+  const base=p=>{const m=ownerOf(p);const r=[m?palaceOf(m):"home","go",null,""];return [r,r.slice(),r.slice(),r.slice()]};agBaseReg("maid",base);agBaseReg("srv",base);
+  agDoerReg("s",id=>/^s\d+$/.test(id)?servById(+String(id).slice(1)):null);
+  for(const k of Object.keys(SRVA).concat(["empTea"]))agRunReg("sv_"+k,(d,t,pd)=>{if(!d||d.sid==null||d.out)return"";const O=asOpts(d);const c=O.find(o=>o.k===pd.k&&(!t||o.t===t||o.man===t))||O.find(o=>o.k===pd.k);
+   if(!c){ASN.miss=(ASN.miss||0)+1;return""}return c.run(d)||""})}
  /* a household staff's group by her role (jagday reads .eunuch / .male; staff carry role "maid" / "eunuch") */
  if(typeof agGrp==="function"){const g0=agGrp;agGrp=function(p){if(p&&p.sid!=null&&p.role)return asGrp(p);return g0.apply(this,arguments)}}}catch(e){console.error("jagstaff reg",e)}
 (function(){
