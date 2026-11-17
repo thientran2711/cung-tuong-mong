@@ -665,3 +665,4 @@
 | REVIEW trait-pool-r1 (opus BIG) | review/trait-pool-r1 | C ROOT-2 | session_011xDdVNywSx622xztN465ec | RUNNING | 17/11 06:54Z |
 | REVIEW npc-agent-ag2-r1 (opus BIG) | review/npc-agent-ag2-r1 | C ROOT-2 | session_011xDdVPQSbLtuVm6zoyJHBN | RUNNING | 17/11 06:56Z |
 | one-core-dup2 r1 FAIL (1 item: ~15 texts still type moved cut values; work branch review/one-core-dup2-r1 8e75df35 = dup2 + r2 merged) → fix r2 (same sonnet fix worker; extend one-core-text.js to dup2 keys) | review/one-core-dup2-r2 | B | session_01N1tNP2SKjMzEdsyLuEZtJa | RUNNING | 17/11 06:58Z |
+| one-core-dup r2 re-review FAIL f97a5841 (~34 typed BAL.eff amounts left + one-core-text guard gaps; report reports/review-one-core-dup-r2.md) → folded into the SAME fix branch review/one-core-dup2-r2 (ships as ONE branch replacing dup-r2 + dup2) | review/one-core-dup2-r2 | B | session_01N1tNP2SKjMzEdsyLuEZtJa | RUNNING | 17/11 07:01Z |
