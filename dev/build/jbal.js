@@ -256,3 +256,12 @@ Object.assign(BAL,{st14:{max:14,parts:[[1,3],[4,11],[12,14]],lim:{nhap:6,nhapCnv
    Đáp ứng = nt / div − sub (j42 roll, the Thân phận row, the j67 / jst14 «Từ kẻ hầu thành tiểu chủ» step all read this) */
  ntRise:{at:45,div:2,sub:10}});
 function ntRiseOdds(){return Math.max(0,(S.nt||0)/BAL.ntRise.div-BAL.ntRise.sub)}
+/* ONE CORE odds ladder (review/one-core-dup; VANPHONG odds words Liều … Nắm chắc, words in KIT_ODDS j79): an odds value o reaches word
+   step i when o ≥ cut[i-1]; lo / hi = the lowest / highest odds a chancy option shows. Read by j1 word(), j79 kitOddsLv, jsgame sgLv /
+   SG_LO / SG_HI (before: the cuts were typed in all four). */
+Object.assign(BAL,{odds:{cut:[31,46,56,66,81,91],lo:5,hi:95}});
+function oddsLv(o){let i=0;for(const c of BAL.odds.cut)if(o>=c)i++;return i}
+/* ONE CORE age bands (owner art rule OD:L567: 18–25 / 26–35 / 36–50 / 51+; review/one-core-dup): band i starts at ageBand[i-1].
+   Read by band4 (j35), pidBand (j66), kcBand (jkc) (before: 26/36/51 typed in each). */
+Object.assign(BAL,{ageBand:[26,36,51]});
+function ageBandIx(a){let i=0;for(const c of BAL.ageBand)if(a>=c)i++;return i}

@@ -234,12 +234,12 @@ function rgSwitchOpen(){if(rgCanSwitch()||!rgOn())return;const s=rgSideNow();
  const O=rgJoinOpts(false).map(o=>({n:"Đổi phe: "+o.n.charAt(0).toLowerCase()+o.n.slice(1),fx:{},j67:`tốn: Danh -${BAL.rg.swDanh} · kèm: <span class="r">phe ${rgSideN(s)} thành kẻ thù, phe mới chưa tin ngươi</span>`,go:()=>{const t=rgJoin(o.join,false,1);log(`Phụ tuyến · ${RGT} · Đổi phe: ${t}`);render()}}));
  O.push({n:"Thôi",fx:{}});pushModal({t:`Phụ tuyến · ${RGT} · Đổi phe`,who:pMe(),h:`<p>Ngươi đang ${rgSideTag(s)}. Đổi phe thì phe cũ thành kẻ thù, Danh giảm, phe mới phải lấy lòng lại từ đầu.</p>`,opts:O,act:1});showModal()}
 /* outcome effects on the court (host computes; personal effects per player) */
-function rgAmnesty(){for(const v of rgMembers("quyen"))relAdd(v,S,10);rgQAf(15);return "Bệ hạ ân xá cho nhà Tể tướng."}
-function rgPurge(){let n=0;for(const v of rgMembers("quyen")){if(v.queen||rkOf(v)<=0)continue;v.rank=seatDown(v,v.rank-1);relAdd(v,S,-15);n++}return n?`${n} phi tần nhà Tể tướng bị giáng một bậc.`:""}
+function rgAmnesty(){for(const v of rgMembers("quyen"))relAdd(v,S,BAL.eff.jreign.rgAmnesty);rgQAf(15);return "Bệ hạ ân xá cho nhà Tể tướng."}
+function rgPurge(){let n=0;for(const v of rgMembers("quyen")){if(v.queen||rkOf(v)<=0)continue;v.rank=seatDown(v,v.rank-1);relAdd(v,S,BAL.eff.jreign.rgPurge);n++}return n?`${n} phi tần nhà Tể tướng bị giáng một bậc.`:""}
 function rgDecide(){const W=rgW();if(!W||W.out)return;const p=W.p;W.out=p>=BAL.rg.B?"emp":p<BAL.rg.A?"quyen":"th";if(W.out==="th"&&S.thDead)W.out=p>=(BAL.rg.A+BAL.rg.B)/2?"emp":"quyen";W.at=S.turn;
- const o=W.out;try{if(o==="emp"){tdPowAdd(RGQC,-BAL.rg.loseHouse);tdPowAdd("Hàn lâm",8);tdPowAdd("Lễ bộ",8);if(S.emp)S.emp.mood=Math.max(0,(S.emp.mood||1)-1)}
-  else if(o==="quyen"){tdPowAdd(RGQC,BAL.rg.winHouse);tdPowAdd("Hàn lâm",-10);tdPowAdd("Lễ bộ",-10);if(S.emp)S.emp.mood=Math.min(3,(S.emp.mood||1)+1)}
-  else{tdPowAdd(RGQC,-10);tdPowAdd("Đại tướng quân",10)}}catch(e){}
+ const o=W.out;try{if(o==="emp"){tdPowAdd(RGQC,-BAL.rg.loseHouse);tdPowAdd("Hàn lâm",BAL.eff.jreign.rgDecide);tdPowAdd("Lễ bộ",BAL.eff.jreign.rgDecide_2);if(S.emp)S.emp.mood=Math.max(0,(S.emp.mood||1)-1)}
+  else if(o==="quyen"){tdPowAdd(RGQC,BAL.rg.winHouse);tdPowAdd("Hàn lâm",BAL.eff.jreign.rgDecide_3);tdPowAdd("Lễ bộ",BAL.eff.jreign.rgDecide_4);if(S.emp)S.emp.mood=Math.min(3,(S.emp.mood||1)+1)}
+  else{tdPowAdd(RGQC,BAL.eff.jreign.rgDecide_5);tdPowAdd("Đại tướng quân",BAL.eff.jreign.rgDecide_6)}}catch(e){}
  for(const v of liveRivals(true)){const s=rgSideOf(v);if(!s)continue;v.sung=cl((v.sung||0)+(s===o?BAL.rg.npcWin:-BAL.rg.npcLose),0,100)}
  W.n.unshift(`T${S.month}/${S.year}: ${({emp:"Hoàng thượng thân chính",th:"Thái hậu buông rèm nghe chính",quyen:"Tể tướng nhiếp chính"})[o]}`)}
 /* her result once the court has decided (applied once, before the last beat) */
@@ -250,13 +250,13 @@ function rgMine(){const r=rgMe(),W=rgW();if(!W||!W.out||r.res)return"";const o=W
    const d=S.rank<Bg.rankCap&&typeof promoReward==="function"&&S.sung>=(typeof sungFloor==="function"?sungFloor(S.rank+1):0)+Bg.rankSung?promoReward(S,"emp",{fx:1}):"";
    t=d?`Bệ hạ nhớ công phò tá. ${d}`:"Bệ hạ nhớ công, ban thưởng hậu hĩnh."}
   else if(s==="th"){apply({th:Math.round(Bg.winTh*k),danh:Bg.winDanh});S.shield=Math.max(S.shield||0,Bg.winShield);t=`Thái hậu nhớ công, che chở ngươi ${Bg.winShield} tháng: phi tần khó hại ngươi.`;const d=S.rank<Bg.rankCap&&typeof promoReward==="function"?promoReward(S,"th",{fx:1}):"";if(d)t+=` ${d}`}
-  else{apply({bac:Math.round(b0*k),danh:Bg.winDanh,mat:1});const h=rgFamH();if(h&&rgFam()==="quyen")tdPowAdd(h.c,8);rgQAf(20);t="Nhà Tể tướng nhớ công, đưa bạc vào cung, tai mắt khắp nơi.";const d=S.rank<Bg.rankCap&&typeof promoReward==="function"?promoReward(S,"quyen",{fx:1}):"";if(d)t+=` ${d}`}
+  else{apply({bac:Math.round(b0*k),danh:Bg.winDanh,mat:1});const h=rgFamH();if(h&&rgFam()==="quyen")tdPowAdd(h.c,BAL.eff.jreign.rgMine);rgQAf(20);t="Nhà Tể tướng nhớ công, đưa bạc vào cung, tai mắt khắp nơi.";const d=S.rank<Bg.rankCap&&typeof promoReward==="function"?promoReward(S,"quyen",{fx:1}):"";if(d)t+=` ${d}`}
   rgLead(s,0)}
  else{r.res="lose";
   if(s==="emp"){apply({sung:-Bg.loseSung,th:-Bg.loseTh});t="Phe bệ hạ thua, nhà Tể tướng và Thái hậu đều để ý ngươi."}
   else if(s==="th"){apply({th:-Math.round(Bg.loseTh/2),danh:-Bg.loseDanh,sung:-Math.round(Bg.loseSung/2)});t="Thái hậu thất thế, người theo bà cũng bị gạt ra."}
   else{apply({danh:-Bg.loseDanh,sung:-Bg.loseSung});try{punish(S,"là người của phe Tể tướng",1)}catch(e){}t="Nhà Tể tướng thất thế, ngươi bị liên lụy."}}
- const f=rgFam();if(f&&f!==o){const h=rgFamH();if(h)tdPowAdd(h.c,-8)}
+ const f=rgFam();if(f&&f!==o){const h=rgFamH();if(h)tdPowAdd(h.c,BAL.eff.jreign.rgMine_2)}
  return t}
 (function(){if(typeof exGw!=="function")return;const g0=exGw;exGw=function(e){return e&&e.gw==="rg"?"công phò tá bệ hạ thân chính":g0.apply(this,arguments)}})();
 /* ---------- month (host: the world; everyone: her next beat) ---------- */

@@ -30,7 +30,7 @@ function countAt(k){const W=S.where||{};let n=0;for(const v of rivals)if(v.alive
 /* NPCs who share a place meet: small talk or friction, by the same bars */
 function npcEncounters(){const by={};for(const v of liveRivals(true)){const k=S.where[v.id];(by[k]=by[k]||[]).push(v)}
  for(const k in by){const L=by[k];for(let i=0;i<L.length;i++)for(let j=i+1;j<L.length;j++){const a=L[i],b=L[j];if(!roll(30))continue;
-  if(oan(a,b)+oan(b,a)>40||a.ghen+b.ghen>110){oanAdd(a,b,3);oanAdd(b,a,3);affAdd(a,b,-2);affAdd(b,a,-2)}else{affAdd(a,b,2);affAdd(b,a,2)}}}}
+  if(oan(a,b)+oan(b,a)>40||a.ghen+b.ghen>110){oanAdd(a,b,BAL.eff.j9.npcEncounters);oanAdd(b,a,BAL.eff.j9.npcEncounters_2);affAdd(a,b,BAL.eff.j9.npcEncounters_3);affAdd(b,a,BAL.eff.j9.npcEncounters_4)}else{affAdd(a,b,BAL.eff.j9.npcEncounters_5);affAdd(b,a,BAL.eff.j9.npcEncounters_6)}}}}
 
 /* sending someone instead of going: same act, lower odds, the servant may be caught and confess */
 let ACTX={a:null,pen:0};
@@ -49,15 +49,15 @@ function chatMark(v){S.chat[v.id]=(S.chat[v.id]||0)+1}
 function topicOpts(v){const f=chatF(v),g=n=>Math.max(1,Math.round(n*f)),third=liveRivals(true).filter(x=>x!==v).sort((a,b)=>aff(v,a)-aff(v,b))[0];const A=[];
  const same=sameHouse(S,v);
  A.push({n:"Hỏi han sức khỏe",o:100,x:`nàng quý ngươi +${g(4)}`,run:()=>{affAdd(v,S,g(4));chatMark(v);return `${v.name} cảm động. Nàng quý ngươi +${g(4)}.`}});
- const praise=v.trait==="Kiêu ngạo"||v.trait==="Tham vọng"?8:4;A.push({n:"Khen tài nghệ nàng",o:od(60+S.tai/5),x:`nàng quý ngươi +${g(praise)}`,run:()=>{chatMark(v);if(roll(od(60+S.tai/5))){affAdd(v,S,g(praise));return `${v.name} tươi cười. Nàng quý ngươi +${g(praise)}.`}affAdd(v,S,-2);return `${v.name} cho là ngươi giả lả. Nàng quý ngươi -2.`}});
- if(third)A.push({n:`Bàn tán về ${third.name}`,o:100,x:aff(v,third)<0?`nàng ghét người này, hợp chuyện: nàng quý ngươi +${g(8)}`:"kèm: nàng quý ngươi -3 · nàng có thể mách lại",run:()=>{chatMark(v);if(aff(v,third)<0){affAdd(v,S,g(8));oanAdd(v,third,5);return `Hai người to nhỏ chuyện ${third.name}. Nàng quý ngươi +${g(8)}.`}affAdd(v,S,-3);if(roll(50)){oanAdd(third,S,10);return `${v.name} đem lời ngươi kể lại với ${third.name}. ${third.name} oán ngươi +10.`}return `${v.name} lảng sang chuyện khác. Nàng quý ngươi -3.`}});
+ const praise=v.trait==="Kiêu ngạo"||v.trait==="Tham vọng"?8:4;A.push({n:"Khen tài nghệ nàng",o:od(60+S.tai/5),x:`nàng quý ngươi +${g(praise)}`,run:()=>{chatMark(v);if(roll(od(60+S.tai/5))){affAdd(v,S,g(praise));return `${v.name} tươi cười. Nàng quý ngươi +${g(praise)}.`}affAdd(v,S,BAL.eff.j9.run);return `${v.name} cho là ngươi giả lả. Nàng quý ngươi -2.`}});
+ if(third)A.push({n:`Bàn tán về ${third.name}`,o:100,x:aff(v,third)<0?`nàng ghét người này, hợp chuyện: nàng quý ngươi +${g(8)}`:"kèm: nàng quý ngươi -3 · nàng có thể mách lại",run:()=>{chatMark(v);if(aff(v,third)<0){affAdd(v,S,g(8));oanAdd(v,third,BAL.eff.j9.run_2);return `Hai người to nhỏ chuyện ${third.name}. Nàng quý ngươi +${g(8)}.`}affAdd(v,S,BAL.eff.j9.run_3);if(roll(50)){oanAdd(third,S,BAL.eff.j9.run_4);return `${v.name} đem lời ngươi kể lại với ${third.name}. ${third.name} oán ngươi +10.`}return `${v.name} lảng sang chuyện khác. Nàng quý ngươi -3.`}});
  A.push({n:"Chia sẻ bí mật",o:100,x:`nàng quý ngươi +${g(10)}${v.malice>50?" · nàng có thể nắm thóp ngươi":""}`,run:()=>{chatMark(v);affAdd(v,S,g(10));if(v.malice>50&&roll(50)){evA(v,S,1);return `${v.name} lắng nghe chăm chú, ghi nhớ từng lời. Nàng quý ngươi +${g(10)}.`}return `${v.name} cũng kể chuyện riêng. Nàng quý ngươi +${g(10)}.`}});
- A.push({n:"Nhờ giúp đỡ",o:100,x:aff(v,S)>=30?"nàng thân với ngươi":"nàng chưa đủ quý ngươi (cần 30): nàng quý ngươi -3",run:()=>{chatMark(v);if(aff(v,S)>=30){if(roll(50)&&v.bac>=30){ap(v,{bac:-30});apply({bac:30});return `${v.name} cho ngươi mượn 30 lượng.`}const x=evGuilty(S,liveRivals(true).filter(y=>y!==v));if(x&&evA(S,x,1))return `${v.name} kể cho ngươi một chuyện về ${x.name}: chứng cứ +1.`;}affAdd(v,S,-3);return `${v.name} khéo từ chối. Nàng quý ngươi -3.`}});
+ A.push({n:"Nhờ giúp đỡ",o:100,x:aff(v,S)>=30?"nàng thân với ngươi":"nàng chưa đủ quý ngươi (cần 30): nàng quý ngươi -3",run:()=>{chatMark(v);if(aff(v,S)>=30){if(roll(50)&&v.bac>=30){ap(v,{bac:-30});apply({bac:30});return `${v.name} cho ngươi mượn 30 lượng.`}const x=evGuilty(S,liveRivals(true).filter(y=>y!==v));if(x&&evA(S,x,1))return `${v.name} kể cho ngươi một chuyện về ${x.name}: chứng cứ +1.`;}affAdd(v,S,BAL.eff.j9.run_5);return `${v.name} khéo từ chối. Nàng quý ngươi -3.`}});
  const foe=liveRivals(true).filter(x=>x!==v&&oan(x,v)>=30)[0];
- A.push({n:"Cảnh báo nàng",o:100,x:foe?`có kẻ đang oán nàng: nàng quý ngươi +${g(10)}`:"không có căn cứ: nàng quý ngươi -2",run:()=>{chatMark(v);if(foe){affAdd(v,S,g(10));oanAdd(v,foe,10);return `Ngươi nhắc ${v.name} coi chừng ${foe.name}. Nàng quý ngươi +${g(10)}.`}affAdd(v,S,-2);return `${v.name} nghi ngươi gây chia rẽ. Nàng quý ngươi -2.`}});
- if(oan(v,S)>0){A.push({n:"Tạ lỗi",o:100,c:{danh:-1},x:"oán -15",run:()=>{oanAdd(v,S,-15);chatMark(v);return `Ngươi hạ mình tạ lỗi. ${v.name} oán -15.`}});
-  A.push({n:"Nhún nhường",o:100,c:{danh:-2},x:"oán -8 · nàng quý ngươi +2",run:()=>{oanAdd(v,S,-8);affAdd(v,S,2);chatMark(v);return `Ngươi nhún nhường trước ${v.name}. Oán -8, nàng quý ngươi +2.`}})}
- A.push({n:"Giúp đỡ nàng",c:{bac:-20},o:100,x:"nàng quý ngươi +10 · oán -5",run:()=>{relAdd(S,v,10);oanAdd(v,S,-5);chatMark(v);return `Ngươi giúp ${v.name} việc khó. Nàng quý ngươi +10.`}});
+ A.push({n:"Cảnh báo nàng",o:100,x:foe?`có kẻ đang oán nàng: nàng quý ngươi +${g(10)}`:"không có căn cứ: nàng quý ngươi -2",run:()=>{chatMark(v);if(foe){affAdd(v,S,g(10));oanAdd(v,foe,BAL.eff.j9.run_6);return `Ngươi nhắc ${v.name} coi chừng ${foe.name}. Nàng quý ngươi +${g(10)}.`}affAdd(v,S,BAL.eff.j9.run_7);return `${v.name} nghi ngươi gây chia rẽ. Nàng quý ngươi -2.`}});
+ if(oan(v,S)>0){A.push({n:"Tạ lỗi",o:100,c:{danh:-1},x:"oán -15",run:()=>{oanAdd(v,S,BAL.eff.j9.run_8);chatMark(v);return `Ngươi hạ mình tạ lỗi. ${v.name} oán -15.`}});
+  A.push({n:"Nhún nhường",o:100,c:{danh:-2},x:"oán -8 · nàng quý ngươi +2",run:()=>{oanAdd(v,S,BAL.eff.j9.run_9);affAdd(v,S,BAL.eff.j9.run_10);chatMark(v);return `Ngươi nhún nhường trước ${v.name}. Oán -8, nàng quý ngươi +2.`}})}
+ A.push({n:"Giúp đỡ nàng",c:{bac:-20},o:100,x:"nàng quý ngươi +10 · oán -5",run:()=>{relAdd(S,v,BAL.eff.j9.run_11);oanAdd(v,S,BAL.eff.j9.run_12);chatMark(v);return `Ngươi giúp ${v.name} việc khó. Nàng quý ngươi +10.`}});
  if(same)return A.filter(a=>["Hỏi han sức khỏe","Bàn tán về "+(third?third.name:""),"Tạ lỗi","Nhún nhường"].includes(a.n)).concat([{n:"Cùng cung",o:100,lock:true,t:"không thể lấy lòng hay ra tay",x:""}]);
  return A}
 /* harms that need the place: food served, the lotus pond, her palace while she is away, overhearing */
@@ -71,10 +71,10 @@ function placeHarms(v,k){const H=[];if(sameHouse(S,v))return H;
  act("frame","Vu oan");act("vp","Tố vượt phẩm");act("xx","Tố xa xỉ");
  return H}
 function pushPond(a,t){ap(a,{duc:-12});a.schemes=(a.schemes||0)+1;const c=caught(a,t,false,"đẩy "+NM(t)+" xuống hồ sen");if(c)return c;
- if(roll(odA(a,40+a.tamco/4))){ap(t,{suc:-25});if(t.preg&&!t.fake&&roll(60)){t.preg=0;t.hidden=false}relAdd(a,t,-10);return (t===S?"<span class=\"r\">Ngươi bị đẩy xuống hồ sen</span>":`${t.name} trượt chân rơi xuống hồ sen`)+`, ướt sũng, nhiễm lạnh. Sức -25${t.preg===0?"":""}. `+dieIf(t,"nhiễm lạnh mà mất")}
- ap(a,{danh:-8});relAdd(a,t,-25);punish(a,"xô ngã phi tần",2);return `<span class="r">${NMc(a)} xô ${NM(t)} bị người thấy.</span> `}
-function trip(a,t){ap(a,{duc:-4});if(roll(odA(a,50+a.tamco/5))){ap(t,{danh:-3});let r=`${NMc(t)} vấp ngã giữa chốn đông người. Danh -3. `;if(t.preg&&!t.fake&&roll(25)){t.preg=0;t.hidden=false;ap(t,{suc:-15});r+=`<span class="r">${NMc(t)} động thai.</span> `}relAdd(a,t,-6);return r}
- relAdd(a,t,-12);evA(t,a,1);return `${NMc(t)} thấy rõ ${NM(a)} ngáng chân. `}
+ if(roll(odA(a,40+a.tamco/4))){ap(t,{suc:-25});if(t.preg&&!t.fake&&roll(60)){t.preg=0;t.hidden=false}relAdd(a,t,BAL.eff.j9.pushPond);return (t===S?"<span class=\"r\">Ngươi bị đẩy xuống hồ sen</span>":`${t.name} trượt chân rơi xuống hồ sen`)+`, ướt sũng, nhiễm lạnh. Sức -25${t.preg===0?"":""}. `+dieIf(t,"nhiễm lạnh mà mất")}
+ ap(a,{danh:-8});relAdd(a,t,BAL.eff.j9.pushPond_2);punish(a,"xô ngã phi tần",2);return `<span class="r">${NMc(a)} xô ${NM(t)} bị người thấy.</span> `}
+function trip(a,t){ap(a,{duc:-4});if(roll(odA(a,50+a.tamco/5))){ap(t,{danh:-3});let r=`${NMc(t)} vấp ngã giữa chốn đông người. Danh -3. `;if(t.preg&&!t.fake&&roll(25)){t.preg=0;t.hidden=false;ap(t,{suc:-15});r+=`<span class="r">${NMc(t)} động thai.</span> `}relAdd(a,t,BAL.eff.j9.trip);return r}
+ relAdd(a,t,BAL.eff.j9.trip_2);evA(t,a,1);return `${NMc(t)} thấy rõ ${NM(a)} ngáng chân. `}
 function overhear(k){const here=liveRivals(true).filter(v=>whereOf(v)===k);if(here.length<2)return"";const v=pick(here);if(roll(od(40+S.mat*6))){return evA(S,v,1)?`Ngươi nghe lén ${v.name} nói chuyện: chứng cứ +1.`:`Ngươi nghe lén ${v.name} nói chuyện: không có gì sai trái, chỉ biết ${harmTxt(v)}.`}return "Không nghe được gì."}
 
 /* the palace map */
