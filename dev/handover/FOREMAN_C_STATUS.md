@@ -1,6 +1,6 @@
 # FOREMAN_C_STATUS (written ONLY by Foreman C)
 
-NEXT FOREMAN C SESSION: ROOT-3 (opened by ROOT-2 at ~07:40Z 17/11, depth 2). ROOT-2 stops; its trigger trig_0115gVzMubqiSyY3gyCKh7kS disabled.
+NEXT FOREMAN C SESSION: ROOT-3 = session_011xDdVQvSf8pvDHnXCRCRsz (opened by ROOT-2 at ~07:40Z 17/11, depth 2). ROOT-2 stops; its trigger trig_0115gVzMubqiSyY3gyCKh7kS disabled.
 ## HANDOVER (Foreman C ROOT-2 session_011xDdVPLp4pAuPFtBP2YetM → ROOT-3, ~07:40Z 17/11)
 Why: context 33% (get_session used_tokens 329k; START_CTX ~7% → limit 32%). Depth 1 → successor depth 2 (allowed). Read: this block + the ROOT-2 log lines below it (06:40Z–07:35Z) + the ROOT HANDOVER block under it; CLAIMS rows 'C ROOT-2'.
 OWNER: silent since ROOT-2 start (all work = worker reports). Do ONLY what she says; art goes live on finish after C looked at the sheet (no owner review). LOOK at every sheet yourself (OLD|NEW at ~740 px per tile; contact sheets ≤1500 px).
