@@ -792,7 +792,6 @@ PRIORITY #1 CHECK: OD 0 new (rule = [OD:L545]/[OD:L638] + C-ROOT 17/11 line in a
 | ev-q72-hh-trungcuu | LIGHT | tC3kLUhmZJ | autumn Double Ninth terrace, maples, backs |
 Self-check: all 6 looked at at 1024: no visible face, no fan/hand cover. Note: gpt-2-6 allows max 1 `style` ref → use `image` refs (2 per call). Waiting for Foreman C OK. Nothing live.
 LIVE (Foreman C OK 17/11 06:16Z): img/ev-am-muu, ev-e68-stormnight, ev-e68-poisonedfish, ev-e68-letterhome, ev-e68-snowday uploaded in place (cdn_sync explicit paths, 1024x768 webp). ev-q72-hh-trungcuu redone (no text on banner, nurse strictly from behind): creation gOtZco9SXO, live. Rules from C for all batches: NO written characters/text in any picture; faces fully hidden (back/turned, no near-profile).
-<<<<<<< HEAD
 
 ## Batch 1 (20 keys, staged, NOT live): sheets img/_review/event-art-style2/b1/<key>.jpg (OLD|NEW), NEW <key>-NEW.webp
 | key | class | creation |
@@ -931,6 +930,4 @@ JOB 3 redos LIVE (C OK 08:03Z): img/ev-vlnvp.webp u5YUjJNQLD (silk bolts, no swa
 Review sheets (CDN img/_review/thanhtai/s1,s2,s3) can be wiped with the verdict (cdn_sync.py --wipe-review thanhtai).
 Wiring NOT done by art: game still loads single img/scene-thanhtai.webp (jlevel.js:13); a coder must map ARTS (j1.js:61) + VIR (j85.js:9) keys -> img/scene-thanhtai-<k>.webp (KIT_REQUESTS if a kit part is missing). Acts untouched (OD:L84). Credits: ~19 pictures x 40.
 HANDOVER: none needed (stopped at ~15% context). ~100% art done / ~0% chơi được until wiring.
-=======
->>>>>>> 19ad1764 (reports/one-core-dup: §6 part 2 (review/one-core-dup2 0ffa37bf))
 LIVE dark-fix (Foreman C ROOT-6 OK 12:26Z, INTERIM): 11 dark keys (ev-am-muu, ev-e68-{stormnight,poisonedfish,bordernews,hhsummons,leakroof,rumoremplove,rumorfavor,rumorpreg,rumorth,spoiledfood}) replaced by -FIX (LAB lightness lift to mean 72, chroma x1.3, S-curve; no repaint). Sheet img/_review/event-art-style2/dark-fix/ALL11.jpg. To be REPAINTED later (big foreground figures vs owner's newer back/distant-only rule) by worker session_011xDdVSTVyLVuATNYT3izSd.

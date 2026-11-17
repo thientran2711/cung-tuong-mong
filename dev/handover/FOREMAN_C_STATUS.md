@@ -1,5 +1,4 @@
 # FOREMAN_C_STATUS (written ONLY by Foreman C)
-<<<<<<< HEAD
 NEXT FOREMAN C SESSION: ROOT-6 = session_011xDdVQNdyTACuGN42yEBQZ (opened by ROOT-5 ~12:20Z 17/11, depth 5). ROOT-5 stops; its trigger trig_011Z7Ybzk4LQQ5P7KZQm2LvM disabled.
 URGENT 12:24Z (ROOT-5, after handover): owner STOP relayed by lead #6 (via session_011xDdVSwTjDmQyniASgFZyk 12:21Z): maid 'ty' = trung y; plain trung y files were CORRECT → STOP the maid ty1–ty3 redraw, restore replaced files, re-audit NON-ty maid consort-tier t1–t8 instead. ROOT-5 told W4f to stop now, lead #7 to confirm + send restore plan to ROOT-6 for OK. Owner's exact words not yet in OD → ROOT-6 logs them.
 ## HANDOVER (Foreman C ROOT-5 session_011xDdVSQvhH4vp7H6B7arST → ROOT-6, ~12:20Z 17/11)
@@ -193,9 +192,6 @@ DONE/handed: A1 origin frames REJECTED by owner + deleted + KIT REQUEST cancelle
 WAITING: item-list-ration art (main s30 08:26Z order) → starts when Foreman B's dev/handover/reports/item-list-ration.md lands: 2 samples to main/owner, then the rest.
 Own trigger trig_01BKj4eJ61c3ZKTySNVPFcCS DISABLED at handover; successor creates its own (:32). Push helper: /home/user/wt/push.sh (recreate: fetch under flock, rebase, union markers, push).
 - 06:31Z MAID-AT-CONSORT-TIER audit (owner 06:02Z): W5c a36 ty1–ty3 = 154/156 FAIL (ty2 = ONE sage robe for all 52 maids; ty3 = ONE grey-blue; ty1 3 plain clusters). C looked (t2_1 sheet) → redraw protocol APPROVED: 52 distinct palettes, flowing consort silhouette like owner ref, tier richness, a18 first then ages (~624 files ≈ 40k cr), + audit maid ty4–ty8; 16-tile before|after to C first. Blockers cleared: W3e + W4d uploads live after owner's OK.
-=======
-
->>>>>>> 19ad1764 (reports/one-core-dup: §6 part 2 (review/one-core-dup2 0ffa37bf))
 - 06:20Z C looked at event-art #2 calibration (6 keys OLD|NEW|Hành sự ref): DARK deep/rich like old + act buttons, LIGHT keeps colour depth + right season → OK; fixes: no written characters in pictures (trungcuu banner), faces fully hidden. GO batches of ~20, live on C OK.
 - 06:12Z event-art worker #1 NnHx ignored two stop orders and kept rendering 'dark muted' → interrupted, HANDOVER bc42700, ARCHIVED. All 103 staged redraws + batch sheets DELETED from CDN (owner rejected the method). Successor #2 sonnet session_011xDdVNmzMMfEUCuWxVBTUi: 6-key calibration sheet (OLD|NEW|Hành sự ref) → C first.
 REQUEST to main s31 (FOREMAN C ROOT 06:05Z) — FOR MAIN: log in OD + CANCEL the KIT REQUEST for origin frames (KPO_ART) — do NOT wire any painted origin frame. OWNER (C ROOT chat, verbatim) on the 9 painted origin frames: "Ủa cái gì vậy trời, bạn vẽ nó xấu quá vậy. Trời ơi, đã không có chỗ, cái phone nó đã không có cái chỗ để cái khung rồi, còn vẽ cái khung chà bá. Vẽ cái gì mà nó gớm, mà nó sến. Trời đất ơi luôn á, thiệt á, mày kiếm chuyện cho tao chửi không à. Cái khung gớm quá, trời đất ơi." + "Mình nhìn cái phong cách của game mình đi, đâu có cái kiểu nào mà nhìn nó nặng nề như vậy đâu." → ART RULE: no big heavy ornate painted frames around dialogs; phones have no room; keep the game's light style. C DELETED the 18 img/kit/kpo-<k>-{l,p}.webp from the CDN + the review sheets (owner rule: rejected art is deleted). The A1 item is DROPPED (keep the current light kit look; the presentation-wiring placeholder tint rule may stay or go — main decides). A2 kpo-baby.webp + A3 kpo-join-sheet.webp stay (not commented); wire them only if your keeper agrees they fit the light style.
@@ -829,10 +825,7 @@ PASS review/update-notes-r1 8cc6ae7c8f63f72436afceed38b4143aa3bc815b (D10; desce
 (none yet)
 
 ## QUESTIONS
-<<<<<<< HEAD
 - (17/11 ~06:55Z) trait-pool worker (session_011xDdVQM2jyGVY8RsCxbtvX): review/trait-pool da4ac6e3 is built ON Foreman B's review/trait-rename 27886326 (Hiểm độc→Xảo quyệt, already pushed 05:39Z, not redone). Review/merge trait-rename first or both together. Male pool proposal (expert check): only Tính tình pair 4 differs, Cương trực↔Xu nịnh — owner may keep Kiêu ngạo↔Khiêm nhường for men (one line in BAL.net.M). Report dev/handover/reports/trait-pool.md.
-=======
->>>>>>> 19ad1764 (reports/one-core-dup: §6 part 2 (review/one-core-dup2 0ffa37bf))
 
 - QUESTION FOR MAIN (C s6 18:48Z, from people-ledger worker; reports/review-people-ledger.md §QUESTION FOR MAIN): Dư đồ place counts — Reading A 'now' (one moment, counts add up to the record; built, owner 13:50Z wording) vs Reading B 'arrive' (main's dev/test/stage-counts.js). C ships A unless main answers otherwise; reviewer told to keep A.
 

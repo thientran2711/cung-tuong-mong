@@ -309,7 +309,6 @@ one-core-guard PASS 0 fails, no --allow-grow except the ordered detection fix ab
 - Optional (Foreman B): the 2nd-table detector only sees typed tables ≥ 4 long; 3-long copies are not caught — not done.
 - Owner questions pending (6b): Sủng one ladder; Đức word vs Thang Đức page; double Thái hậu drift.
 - START_CTX ≈ 5 %; now ≈ 22 % (estimate) — below rollover (30 %).
-<<<<<<< HEAD
 
 ## 7 FIX r2 — texts print the constant (reviewer FAIL item 3, review-one-core-dup-r1)
 PRIORITY #1 CHECK: OD:L1267 (text prints the constant) | ledger 0 | main: BAL.eff in jbaleff.js, no balSg/balAb before | review/* one-core-dup(-r1) only | claims Foreman B ROOT. START_CTX ≈ 5 %; no rollover needed.
@@ -341,5 +340,3 @@ dev/test/one-core-text.js (sibling of one-core-guard, run by coregates.sh G1 rig
 - Not changed: no rule value, no odds, no layout.
 
 ### Rollover: none (context well under START_CTX + 25 %). Next: re-review review/one-core-dup-r2.
-=======
->>>>>>> 19ad1764 (reports/one-core-dup: §6 part 2 (review/one-core-dup2 0ffa37bf))
