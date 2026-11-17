@@ -54,8 +54,8 @@ INTENDED['j79.js']=(INTENDED['j79.js']||[]).concat(['VariableDeclaration']);INTE
 /* review/one-core-jkc-2 (price-lock family): j10 staffHTML / j15 staffTabHTML: «Mua chuộc» price + lock print nv(s,"bribeCost") — the price bribeServ charges
    (a greedy servant costs 15, the text said 30) · j25 LACK.block / j70 rvButtons + thrOpts70 / j92 LACK.giahoa / jtsb LACK thathu·phonghoa·thaopet: the lock words print
    actBac(k,S,t) = the price the act really charges (jecon raises a scheme's base by the target's rank / guards; the text said the base) · jecon: + function actBac ·
-   j6 rvButtons: -BAL.tw.reward.bac (= 30, the proof cannot fold a minus of the negative key) · jinv kinvOpen: «tốn: Bạc 10» → «tốn: Bạc -10» (the cost words of every other act) */
-for(const [f,d] of [['j10.js','staffHTML'],['j15.js','staffTabHTML'],['j25.js','VariableDeclaration'],['j6.js','rvButtons'],['j70.js','thrOpts70'],['j70.js','rvButtons'],['j92.js','TryStatement'],['jtsb.js','TryStatement'],['jinv.js','kinvOpen']])(INTENDED[f]=INTENDED[f]||[]).push(d);
+   j6 rvButtons: -BAL.tw.reward.bac (= 30, the proof cannot fold a minus of the negative key) · jinv kinvOpen: «tốn: Bạc 10» → «tốn: Bạc -10» (the cost words of every other act) · jweather wxHit: «Sức −20» (U+2212) → balSg «Sức -20» (reviewer r1: the text prints BAL.eff.jweather.sucSlip) */
+for(const [f,d] of [['j10.js','staffHTML'],['j15.js','staffTabHTML'],['j25.js','VariableDeclaration'],['j6.js','rvButtons'],['j70.js','thrOpts70'],['j70.js','rvButtons'],['j92.js','TryStatement'],['jtsb.js','TryStatement'],['jinv.js','kinvOpen'],['jweather.js','wxHit']])(INTENDED[f]=INTENDED[f]||[]).push(d);
 INTENDED['jpoison.js']=(INTENDED['jpoison.js']||[]).concat(['ExpressionStatement']);INTENDED['jweather.js']=(INTENDED['jweather.js']||[]).concat(['ExpressionStatement','wxRisk']);
 /* j55 ccWord = side-chance scale (owner OD:L221) */
 const bal=()=>{const c={Math,BAL:{pace:1}};vm.createContext(c);
