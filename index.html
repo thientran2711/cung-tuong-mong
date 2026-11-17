@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"7abaf07a+","t":"2026-11-17T01:39Z","c":"batch-0132: CHANGE line + rebuild site","b":"4904a9baf322","h":[{"s":"babc9b4a","t":"2026-11-17T01:39Z","c":"Chơi chung không còn treo máy vì tên bạn lặp chữ; số bóng người trên dư đồ khớp đúng người đang ở đó; việc có hạn giờ hiện đồng hồ ngay dướ…"},{"s":"92685210+","t":"2026-11-17T00:53Z","c":"Khung việc và khung sự kiện bốn cỡ, tranh lấp đầy khung, việc nhắc tên ai hiện chân dung người ấy; phẩm của món đồ nằm ngay trên viền khung…"},{"s":"6f513340","t":"2026-11-16T23:24Z","c":"Vào game mới không còn bật ngay màn lật thẻ, lật thẻ chỉ khi vào buổi tối; dư đồ nhãn giấy mới; việc dài lấn sang buổi sau; lời trong cung …"},{"s":"7a18d957","t":"2026-11-16T22:44Z","c":"review-diemtrang-fx-r1 report"},{"s":"afe2bcbc","t":"2026-11-16T22:25Z","c":"review r1: KIT 84.1a note + report"},{"s":"dea1d445+","t":"2026-11-16T21:32Z","c":"golive lag-play-2: CHANGE line + site rebuilt"},{"s":"674f3af4","t":"2026-11-16T21:21Z","c":"Chơi cùng bạn: bạn chơi chung chưa gặp mặt nay hiện tên gọi chung “Hảo hữu của ta” ở mọi nơi, không còn ẩn thành dấu hỏi."},{"s":"923567d5+","t":"2026-11-16T21:03Z","c":"Hình nhân vật: hết vệt xám ở cổ và viền tối quanh người."},{"s":"59812a63+","t":"2026-11-16T20:41Z","c":"Khung chung: khoảng cách đều nhau ở sổ tuần và thẻ thân phận; hàng sổ gọn, thẻ lật không đè chữ."},{"s":"ab12d6fc","t":"2026-11-16T20:53Z","c":"Tuyết và đom đóm mới, mượt hơn; nền tranh không còn vẽ lại mỗi khung hình."}]};
+window.CTM_BI={"s":"bff82bb8+","t":"2026-11-17T03:57Z","c":"toil-reveal-fix: all-day makeup scan test + report add-on","b":"93b543cb97d9","h":[{"s":"babc9b4a","t":"2026-11-17T01:39Z","c":"Chơi chung không còn treo máy vì tên bạn lặp chữ; số bóng người trên dư đồ khớp đúng người đang ở đó; việc có hạn giờ hiện đồng hồ ngay dướ…"},{"s":"92685210+","t":"2026-11-17T00:53Z","c":"Khung việc và khung sự kiện bốn cỡ, tranh lấp đầy khung, việc nhắc tên ai hiện chân dung người ấy; phẩm của món đồ nằm ngay trên viền khung…"},{"s":"6f513340","t":"2026-11-16T23:24Z","c":"Vào game mới không còn bật ngay màn lật thẻ, lật thẻ chỉ khi vào buổi tối; dư đồ nhãn giấy mới; việc dài lấn sang buổi sau; lời trong cung …"},{"s":"7a18d957","t":"2026-11-16T22:44Z","c":"review-diemtrang-fx-r1 report"},{"s":"afe2bcbc","t":"2026-11-16T22:25Z","c":"review r1: KIT 84.1a note + report"},{"s":"dea1d445+","t":"2026-11-16T21:32Z","c":"golive lag-play-2: CHANGE line + site rebuilt"},{"s":"674f3af4","t":"2026-11-16T21:21Z","c":"Chơi cùng bạn: bạn chơi chung chưa gặp mặt nay hiện tên gọi chung “Hảo hữu của ta” ở mọi nơi, không còn ẩn thành dấu hỏi."},{"s":"923567d5+","t":"2026-11-16T21:03Z","c":"Hình nhân vật: hết vệt xám ở cổ và viền tối quanh người."},{"s":"59812a63+","t":"2026-11-16T20:41Z","c":"Khung chung: khoảng cách đều nhau ở sổ tuần và thẻ thân phận; hàng sổ gọn, thẻ lật không đè chữ."},{"s":"ab12d6fc","t":"2026-11-16T20:53Z","c":"Tuyết và đom đóm mới, mượt hơn; nền tranh không còn vẽ lại mỗi khung hình."}]};
 /* KBOOT — BOOT COVER (owner 15/11 "Khi vừa bấm vào game, có chừng ít hơn 1 giây hiện khung này"; KIT §14.1).
    Before: while the 4 MB page parsed, the browser painted the bare static markup of p1.html (HUD box, a vertical stat label list, empty
    panels, the old 11-tab bar) for ~1 s on a warm open and many seconds on a cold one, before any kit CSS/JS existed.
@@ -21177,14 +21177,23 @@ const kitFile=src=>String(src||"").split("?")[0].split("/").pop();
   if(fx)h=h.replace(/<i class="kmf"/,`<span class="kfxc kfxm"><span class="kfx">${fx}</span></span><i class="kmf"`)}catch(e){}return h}})();
 /* kitFxPut(img,p,host): lay the face layers of person p over the DRAWN picture img inside host (room stage, podium, any figure) */
 function kitFxPut(img,p,host){{if(!img||!p||(typeof kitIsKnown==="function"&&!kitIsKnown(p)))return;const fx=kitFxLayers(p,kitFile(img.currentSrc||img.src));if(!fx)return;const s=document.createElement("span");s.className="kfxf";s.innerHTML=fx;
-  /* lay the box over the DRAWN picture: object-fit contain/cover + object-position, and the image's own transform (kit owner #2: the veil sat beside the face) */
-  const cs=getComputedStyle(img);const L0=img.offsetLeft,T0=img.offsetTop,bw=img.offsetWidth,bh=img.offsetHeight;let L=L0,T=T0,w=bw,h=bh;const nw=img.naturalWidth,nh=img.naturalHeight;
+  s.__img=img;s.style.cssText="position:absolute;pointer-events:none;z-index:2";kfxGeom(s);img.classList.add("kfxon");host.appendChild(s);KFX_L.add(s)}}
+/* ROOT FIX (owner 17/11 03:58Z, toil-reveal-fix): the face layer follows ITS OWN picture, never the stage. It is laid over the DRAWN picture (object-fit contain/cover + object-position,
+   the image's own transform AND its translate / rotate / scale properties: j59 slides the figures with `translate`, the touch kit presses with `scale`) and re-laid every frame while
+   the picture moves (transition / animation / class / style change on the stage); it is hidden whenever its picture is not shown (slot off, another person's place). */
+const KFX_L=new Set();let kfxT=0,kfxRaf=0;
+function kfxGeom(s){const img=s.__img;if(!img||!img.isConnected){s.style.display="none";return}const cs=getComputedStyle(img);if(cs.display==="none"||cs.visibility==="hidden"||!img.offsetParent&&cs.position!=="fixed"||!img.offsetWidth){s.style.display="none";return}
+  s.style.display="";const L0=img.offsetLeft,T0=img.offsetTop,bw=img.offsetWidth,bh=img.offsetHeight;let L=L0,T=T0,w=bw,h=bh;const nw=img.naturalWidth,nh=img.naturalHeight;
   if(nw&&nh&&/contain|cover|scale-down/.test(cs.objectFit)){const k=cs.objectFit==="cover"?Math.max(bw/nw,bh/nh):Math.min(bw/nw,bh/nh,cs.objectFit==="scale-down"?1:99);w=nw*k;h=nh*k;
    const op=(cs.objectPosition||"50% 50%").split(/\s+/);const f=(v,free)=>/%$/.test(v)?free*parseFloat(v)/100:/px$/.test(v)?parseFloat(v):/left|top/.test(v)?0:/right|bottom/.test(v)?free:free/2;
    L+=f(op[0]||"50%",bw-w);T+=f(op[1]||"50%",bh-h)}
   const to=(cs.transformOrigin||"").split(/\s+/).map(parseFloat);const tor=to.length>=2&&!isNaN(to[0])?`${to[0]-(L-L0)}px ${to[1]-(T-T0)}px`:"50% 50%";
-  s.style.cssText=`position:absolute;pointer-events:none;z-index:2;left:${L}px;top:${T}px;width:${w}px;height:${h}px;transform:${cs.transform};transform-origin:${tor}`;img.classList.add("kfxon");host.appendChild(s)}}
-function kitFigFx(){try{const st=$("stage");if(!st)return;st.querySelectorAll(".kfxf").forEach(e=>e.remove());const ppl=typeof curPeople==="function"?curPeople():[];const put=kitFxPut;
+  const st=s.style;st.left=L+"px";st.top=T+"px";st.width=w+"px";st.height=h+"px";st.transform=cs.transform;st.transformOrigin=tor;st.translate=cs.translate||"none";st.rotate=cs.rotate||"none";st.scale=cs.scale||"none";st.opacity=cs.opacity}
+function kfxSyncAll(){KFX_L.forEach(s=>{if(!s.isConnected){KFX_L.delete(s);return}kfxGeom(s)})}
+function kfxKick(){kfxT=performance.now()+900;if(kfxRaf||!KFX_L.size)return;const f=()=>{kfxSyncAll();if(performance.now()<kfxT)kfxRaf=requestAnimationFrame(f);else kfxRaf=0};kfxRaf=requestAnimationFrame(f)}
+["transitionrun","transitionend","animationstart","animationend"].forEach(e=>document.addEventListener(e,kfxKick,true));addEventListener("resize",kfxKick);
+window.kfxKick=kfxKick;window.kfxSyncAll=kfxSyncAll;
+function kitFigFx(){try{const st=$("stage");if(!st)return;st.querySelectorAll(".kfxf").forEach(e=>{KFX_L.delete(e);e.remove()});if(!st.__kfxmo&&window.MutationObserver){st.__kfxmo=new MutationObserver(ms=>{if(ms.some(r=>!r.target.closest(".kfxf")))kfxKick()});st.__kfxmo.observe(st,{attributes:true,subtree:true,attributeFilter:["class","style","hidden"]})}const ppl=typeof curPeople==="function"?curPeople():[];const put=kitFxPut;
  /* the person of a place token: its ref, or (Hoàng thượng, Thái hậu, cung nữ thân tín, thái y) the one KIT_FACEFX person lookup */
  st.querySelectorAll("#tokens .tok").forEach(b=>{const p=ppl[+b.dataset.p];put(b.querySelector("img.figimg"),p&&(p.ref||(window.KIT_FACEFX?KIT_FACEFX.person(p):null)),b)});
  const me=$("mefig");if(me&&typeof S!=="undefined")put(me,S,me.parentElement)}catch(e){}}
@@ -47120,7 +47129,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="4904a9baf322";window.CTM_BUILD=BUILD;
+const BUILD="93b543cb97d9";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

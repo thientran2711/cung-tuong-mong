@@ -390,14 +390,23 @@ const kitFile=src=>String(src||"").split("?")[0].split("/").pop();
   if(fx)h=h.replace(/<i class="kmf"/,`<span class="kfxc kfxm"><span class="kfx">${fx}</span></span><i class="kmf"`)}catch(e){}return h}})();
 /* kitFxPut(img,p,host): lay the face layers of person p over the DRAWN picture img inside host (room stage, podium, any figure) */
 function kitFxPut(img,p,host){{if(!img||!p||(typeof kitIsKnown==="function"&&!kitIsKnown(p)))return;const fx=kitFxLayers(p,kitFile(img.currentSrc||img.src));if(!fx)return;const s=document.createElement("span");s.className="kfxf";s.innerHTML=fx;
-  /* lay the box over the DRAWN picture: object-fit contain/cover + object-position, and the image's own transform (kit owner #2: the veil sat beside the face) */
-  const cs=getComputedStyle(img);const L0=img.offsetLeft,T0=img.offsetTop,bw=img.offsetWidth,bh=img.offsetHeight;let L=L0,T=T0,w=bw,h=bh;const nw=img.naturalWidth,nh=img.naturalHeight;
+  s.__img=img;s.style.cssText="position:absolute;pointer-events:none;z-index:2";kfxGeom(s);img.classList.add("kfxon");host.appendChild(s);KFX_L.add(s)}}
+/* ROOT FIX (owner 17/11 03:58Z, toil-reveal-fix): the face layer follows ITS OWN picture, never the stage. It is laid over the DRAWN picture (object-fit contain/cover + object-position,
+   the image's own transform AND its translate / rotate / scale properties: j59 slides the figures with `translate`, the touch kit presses with `scale`) and re-laid every frame while
+   the picture moves (transition / animation / class / style change on the stage); it is hidden whenever its picture is not shown (slot off, another person's place). */
+const KFX_L=new Set();let kfxT=0,kfxRaf=0;
+function kfxGeom(s){const img=s.__img;if(!img||!img.isConnected){s.style.display="none";return}const cs=getComputedStyle(img);if(cs.display==="none"||cs.visibility==="hidden"||!img.offsetParent&&cs.position!=="fixed"||!img.offsetWidth){s.style.display="none";return}
+  s.style.display="";const L0=img.offsetLeft,T0=img.offsetTop,bw=img.offsetWidth,bh=img.offsetHeight;let L=L0,T=T0,w=bw,h=bh;const nw=img.naturalWidth,nh=img.naturalHeight;
   if(nw&&nh&&/contain|cover|scale-down/.test(cs.objectFit)){const k=cs.objectFit==="cover"?Math.max(bw/nw,bh/nh):Math.min(bw/nw,bh/nh,cs.objectFit==="scale-down"?1:99);w=nw*k;h=nh*k;
    const op=(cs.objectPosition||"50% 50%").split(/\s+/);const f=(v,free)=>/%$/.test(v)?free*parseFloat(v)/100:/px$/.test(v)?parseFloat(v):/left|top/.test(v)?0:/right|bottom/.test(v)?free:free/2;
    L+=f(op[0]||"50%",bw-w);T+=f(op[1]||"50%",bh-h)}
   const to=(cs.transformOrigin||"").split(/\s+/).map(parseFloat);const tor=to.length>=2&&!isNaN(to[0])?`${to[0]-(L-L0)}px ${to[1]-(T-T0)}px`:"50% 50%";
-  s.style.cssText=`position:absolute;pointer-events:none;z-index:2;left:${L}px;top:${T}px;width:${w}px;height:${h}px;transform:${cs.transform};transform-origin:${tor}`;img.classList.add("kfxon");host.appendChild(s)}}
-function kitFigFx(){try{const st=$("stage");if(!st)return;st.querySelectorAll(".kfxf").forEach(e=>e.remove());const ppl=typeof curPeople==="function"?curPeople():[];const put=kitFxPut;
+  const st=s.style;st.left=L+"px";st.top=T+"px";st.width=w+"px";st.height=h+"px";st.transform=cs.transform;st.transformOrigin=tor;st.translate=cs.translate||"none";st.rotate=cs.rotate||"none";st.scale=cs.scale||"none";st.opacity=cs.opacity}
+function kfxSyncAll(){KFX_L.forEach(s=>{if(!s.isConnected){KFX_L.delete(s);return}kfxGeom(s)})}
+function kfxKick(){kfxT=performance.now()+900;if(kfxRaf||!KFX_L.size)return;const f=()=>{kfxSyncAll();if(performance.now()<kfxT)kfxRaf=requestAnimationFrame(f);else kfxRaf=0};kfxRaf=requestAnimationFrame(f)}
+["transitionrun","transitionend","animationstart","animationend"].forEach(e=>document.addEventListener(e,kfxKick,true));addEventListener("resize",kfxKick);
+window.kfxKick=kfxKick;window.kfxSyncAll=kfxSyncAll;
+function kitFigFx(){try{const st=$("stage");if(!st)return;st.querySelectorAll(".kfxf").forEach(e=>{KFX_L.delete(e);e.remove()});if(!st.__kfxmo&&window.MutationObserver){st.__kfxmo=new MutationObserver(ms=>{if(ms.some(r=>!r.target.closest(".kfxf")))kfxKick()});st.__kfxmo.observe(st,{attributes:true,subtree:true,attributeFilter:["class","style","hidden"]})}const ppl=typeof curPeople==="function"?curPeople():[];const put=kitFxPut;
  /* the person of a place token: its ref, or (Hoàng thượng, Thái hậu, cung nữ thân tín, thái y) the one KIT_FACEFX person lookup */
  st.querySelectorAll("#tokens .tok").forEach(b=>{const p=ppl[+b.dataset.p];put(b.querySelector("img.figimg"),p&&(p.ref||(window.KIT_FACEFX?KIT_FACEFX.person(p):null)),b)});
  const me=$("mefig");if(me&&typeof S!=="undefined")put(me,S,me.parentElement)}catch(e){}}
