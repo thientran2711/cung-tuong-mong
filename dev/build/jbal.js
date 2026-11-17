@@ -148,6 +148,8 @@ Object.assign(BAL,{
   thuongBac:10,     /* Thưởng: bạc paid, and bạc needed */
   phatDuc:3,        /* Phạt vô cớ: Đức -N (card text) */
   cheDanh:2,        /* Che chở (servant accused): Danh -N */
+  tra:{base:55,tcDiv:4,loyal:25},   /* Tra khảo a planted spy (a chance, owner 17:00Z): odds he names his master = base + her Tâm cơ/tcDiv − loyal when loyal by nature; hỏng: he holds his tongue, stays */
+  che:{base:45,danhDiv:4,rank:4,failLoy:8}, /* Che chở before Thận Hình ti (a chance): base + her Danh/danhDiv + rank×rank; hỏng: the Danh is spent, he is grateful (lòng +failLoy) */
   lookBac:15,       /* Xem người: bạc paid, and bạc needed */
   upBac:30,         /* Tiến cử: bạc paid, and bạc needed */
   upDanh:2,         /* Tiến cử: Danh -N */
@@ -282,7 +284,11 @@ function ntRiseOdds(){return Math.max(0,(S.nt||0)/BAL.ntRise.div-BAL.ntRise.sub)
    nor (for an act's odds) below lo. softFail = what a formerly-sure act spends when it fails at the cap (owner "chỉ hỏng nhẹ" + 17:10Z (1)
    "không thành công thì sao tốn bạc"): its khắc are spent, and of its cost only the keys in spend (the effort: Sức); the bạc and every other
    cost (Danh, Đức…) are NOT taken; nothing is gained, nothing else lost. */
-Object.assign(BAL,{odds:{cut:[31,46,56,66,81,91],lo:5,hi:95,simN:200,softFail:{spend:["suc"]}}});
+Object.assign(BAL,{confess:{base:70,sungDiv:4,thDiv:5},
+ /* BUTTON ACTS that roll at the odds cap (j63 capAt): k = khắc, suc = Sức each one costs. The handler, its hint and its soft-fail gate read
+    the SAME key (one core); a soft fail spends of it only BAL.odds.softFail.spend (khắc + Sức), never the bạc. */
+ btn:{courtHoi:{k:2},kidTeach:{k:2},kidCare:{k:2},kidGuard:{k:2},cnv:{k:1},h54Thu:{k:1},wkShow:{k:2},h54Day:{k:2,suc:5},kidHeal:{k:2,suc:10},htAsk:{k:1},loSneak:{k:1}},/* Thú tội tư thông (a chance, the Emperor's mercy): base + Sủng/sungDiv + Thái hậu/thDiv; hỏng: bị ban chết */
+ odds:{cut:[31,46,56,66,81,91],lo:5,hi:95,simN:200,softFail:{spend:["suc"]}}});
 function oddsLv(o){let i=0;for(const c of BAL.odds.cut)if(o>=c)i++;return i}
 /* ONE CORE number formatters for player texts (review/one-core-dup r2, OD:L1267 "text prints the constant"): balSg(n) = the signed amount as the
    texts show it ("+4" / "-4"), balAb(n) = the amount without sign ("4"). A text that shows a BAL.eff / BAL.road / BAL.arc amount prints it with these

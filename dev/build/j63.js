@@ -221,14 +221,14 @@ function kitSoftWb(hasBac){return `chỉ uổng công${hasBac&&!BAL.odds.softFai
 function oddsSoft(n,c){apply(oddsSoftCost(c));const t=`<span class="r">bại</span> — người tính không bằng trời tính: ${kitSoftW(c)}.`;window.__oddsSoft=t;log(`${n?n+": ":""}${t}`);return t}
 /* a formerly-sure option of a dialog / button (no o): its hint starts with the cap word and ends with the soft 'hỏng' (ONE line form) */
 function kitCapLine(rest,c){return [capW(),rest,"hỏng: "+kitSoftW(c)].filter(Boolean).join(" · ")}
-/* a formerly-sure BUTTON act (pbtn / kitActMini…): its attrs carry capAt(khắc, cost) = data-cap / data-capsuc, and its hint kitCapLine(…).
+/* a formerly-sure BUTTON act (pbtn / kitActMini…): its attrs carry capAt(BAL key {k,suc}, bạc) = data-cap / data-capsuc / data-capbac, and its hint kitCapLine(…).
    ONE capture listener rolls it at the cap BEFORE its own handler; a failure stops the click and is the one soft failure (oddsSoft):
    the khắc and the Sức it names are spent, nothing else. Bots never click (they call the act functions, which roll themselves). */
-function capAt(k,c){return ` data-cap="${k||0}"${c&&c.suc<0?` data-capsuc="${-c.suc}"`:""}`}
+function capAt(K,bac){K=K||{};return ` data-cap="${K.k||0}"${K.suc>0?` data-capsuc="${K.suc}"`:""}${bac>0?` data-capbac="${bac}"`:""}`}/* K = the act's BAL key {k, suc}; bac = its bạc cost (BAL), so the one BẠI line says no bạc is lost */
 document.addEventListener("click",e=>{const b=e.target&&e.target.closest&&e.target.closest("button[data-cap]");if(!b||b.disabled||typeof S==="undefined"||!S||S.dead)return;
  if(roll(BAL.odds.hi))return;e.stopImmediatePropagation();e.preventDefault();const k=+b.dataset.cap||0;if(k&&can(k))spend(k);
  const kn=b.querySelector(".kan");const n=String(kn?kn.textContent:(b.childNodes[0]&&b.childNodes[0].nodeType===3?b.childNodes[0].textContent:"")).trim();
- let bf=null;try{bf=rsnap()}catch(x){}oddsSoft(n,{suc:-(+b.dataset.capsuc||0)});try{if(bf)resultShow(n,bf,false)}catch(x){}render()},true);
+ let bf=null;try{bf=rsnap()}catch(x){}oddsSoft(n,{suc:-(+b.dataset.capsuc||0),bac:-(+b.dataset.capbac||0)});try{if(bf)resultShow(n,bf,false)}catch(x){}render()},true);
 /* KIT PART kitResultSeal(ok) (KIT 7): the result seal — true → THÀNH (.ok), false → HỎNG (.bad), no roll → "KẾT QUẢ" (.sure, the kit's grey seal, no stamp) */
 function kitResultSeal(ok){return ok===true?{cls:"ok",t:"THÀNH"}:ok===false?{cls:"bad",t:"HỎNG"}:{cls:"sure",t:"KẾT QUẢ"}}
 resultShow=function(title,before,okHint){if(!S||!before||S.dead)return;

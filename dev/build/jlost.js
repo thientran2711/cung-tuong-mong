@@ -178,7 +178,7 @@ setTimeout(()=>{try{IEV_PID.loask=(p)=>{const c=loGet(p&&p.id);const x=c?loEntry
 /* ---------- her side: act cards (full price + odds), Tư trang section, person cards ---------- */
 function loCostTxt(kind){const C=LO.cost[kind];return `tốn: ${C.k} khắc${C.bac?`, Bạc -${C.bac}`:""}`}
 function loWhy(kind){const C=LO.cost[kind];return Q.length?"đang có việc chờ":whyTime(C.k)||(C.bac&&S.bac<C.bac?`cần Bạc ${C.bac}`:"")}
-function loBtn(c,a,n,sm,why){return pbtn(`data-lo="${a}" data-lc="${c.id}"${a==="sneak"?capAt(1):""}`,n,sm,why||"")}/* ODDS CAP: «Lén trả lại» was sure: now rolls at the cap (1 khắc on a soft fail) */
+function loBtn(c,a,n,sm,why){return pbtn(`data-lo="${a}" data-lc="${c.id}"${a==="sneak"?capAt(BAL.btn.loSneak):""}`,n,sm,why||"")}/* ODDS CAP: «Lén trả lại» was sure: now rolls at the cap (1 khắc on a soft fail) */
 /* the acts that fit her place in a case (owner, holder, suspect, a witness) */
 function loActs(c){const B=[];const me=c.own==="me",h=c.at?loP(c.at):null,atMe=c.at==="me",known=me&&c.st==="found"&&h&&!atMe;const thief=atMe&&c.keep&&c.by==="me";
  const tra=()=>{B.push(loBtn(c,"ask","Hỏi cung nhân",`${word(loOdds("ask",S))} · ${loCostTxt("ask")} · thành: thêm ${balAb(BAL.eff.jlost.evLoEvAdd)} chứng cứ, có khi biết món đồ ở đâu · hỏng: không ai biết gì`,loWhy("ask")));
@@ -227,7 +227,7 @@ function loUI(a,id){const c=loGet(id);if(!c||c.st==="done"||!S||S.dead||Q.length
  else if(a==="raise"){const h=loP(c.at);if(!can(LO.raiseK)||!h||c.hear||(c.reT||0)>wk())return;const hi=loHigh(h,S);if(hi&&loEmpEv(c,S,h)<BAL.il.empEv)return;spend(LO.raiseK);loRaise(c,S);r=hi?`Ngươi dâng chứng cứ, tâu Hoàng thượng xin soát ${loPal(h)} tìm ${nm}. Hoàng thượng chuẩn tấu: Cung Chính ti sẽ soát trong ${c.hear-wk()} tuần.`:`Ngươi báo Cung Chính ti thu hồi ${nm} ở ${loPal(h)}; sẽ xét trong ${c.hear-wk()} tuần.`}
  else if(a==="giveback"||a==="handin"){if(!can(1))return;spend(1);const x=loEntry(c);const o=loP(c.own);if(x){lostUnwear(S);const i=S.inv.indexOf(x.e);if(i>=0)S.inv.splice(i,1);lostReturn(x.e,a==="handin"?"nop":"tra")}
   if(a==="giveback"&&o){relAdd(S,o,BAL.eff.jlost.loUI_2);r=`Ngươi sai người trả ${nm} về ${wdNm(o)}. Thân ${balSg(BAL.eff.jlost.loUI_2)}.`}else{apply({danh:BAL.eff.jlost.danhLoUI});r=`Ngươi nộp ${nm} lên Nội vụ phủ trả về chủ. Danh ${balSg(BAL.eff.jlost.danhLoUI)}.`}}
- else if(a==="sneak"){if(!can(1))return;spend(1);const x=loEntry(c);const o=loP(c.own);if(x){lostUnwear(S);const i=S.inv.indexOf(x.e);if(i>=0)S.inv.splice(i,1);lostReturn(x.e,"nop")}c.hear=0;r=`Người của ngươi lặng lẽ đặt ${nm} về rương ${wdNm(o)}. Không ai bị tra.`}
+ else if(a==="sneak"){if(!can(BAL.btn.loSneak.k))return;spend(BAL.btn.loSneak.k);const x=loEntry(c);const o=loP(c.own);if(x){lostUnwear(S);const i=S.inv.indexOf(x.e);if(i>=0)S.inv.splice(i,1);lostReturn(x.e,"nop")}c.hear=0;r=`Người của ngươi lặng lẽ đặt ${nm} về rương ${wdNm(o)}. Không ai bị tra.`}
  else if(a==="tell"){if(!can(1))return;spend(1);const o=loP(c.own),h=loP(c.at);c.told=1;if(o){loKnowAt(c,o,"");relAdd(S,o,BAL.eff.jlost.loUI_3)}if(h)relAdd(S,h,BAL.eff.jlost.loUI_4);r=`Ngươi báo cho ${wdNm(o)} biết ${nm} đang ở ${loPal(h)}. Thân ${balSg(BAL.eff.jlost.loUI_3)}; ${h?h.name:""} thù ${balSg(BAL.eff.jlost.loUI_4)}.`}
  if(r){log(r);Q.push({t:a==="sneak"?"Đồ thất lạc":"Tra xét",who:pMe(),h:`<p>${r}</p>`,btn:"Đã hiểu"});try{showModal()}catch(e){}}try{render()}catch(e){}}
 document.addEventListener("click",ev=>{const b=ev.target.closest&&ev.target.closest("[data-lo]");if(!b||b.disabled)return;ev.stopPropagation();loUI(b.dataset.lo,+b.dataset.lc)},true);
