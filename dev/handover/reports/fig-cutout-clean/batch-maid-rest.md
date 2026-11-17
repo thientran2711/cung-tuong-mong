@@ -64,3 +64,11 @@ maid-m04-tm3-a18	xSXPx28jfW	ok U
 maid-m04-tm4-a18	MB7vMbGDCm	ok U
 maid-m05-a18	Bh9QBsSoQR	ok U
 - W5 #2 STATUS: 40 a18 files done+uploaded (m02-t6..m05-a18). NEXT: maid-m05-cold-a18. Scratch driver (drv.py/up.sh) in session scratchpad, recreate if lost.
+maid-m05-cold-a18	LwoNS3FswO	ok U
+maid-m05-kc-a18	lJIiwGpgv9	ok U
+maid-m05-ngheo-a18	kspOjit16B	ok U
+maid-m05-t1-a18	0eSmDFHTfW	ok U
+maid-m05-t2-a18	UPhZOVZwny	ok U
+maid-m05-t3-a18	u5Ysq9zQLD	ok U
+maid-m05-t4-a18	vQ21EyHa47	ok U
+maid-m05-t5-a18	eIyEogzdqL	ok U
