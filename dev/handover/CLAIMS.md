@@ -781,7 +781,7 @@
 | map-portrait-r2 PASS 68979111 (+ map-me-mark-r1; '???' label fix) → builder s31b next batch s32a; worker + reviewer archived | review/map-portrait-r2 | MAIN s32 | session_01UV1SzhfMi68Cmn88G2Yqze | PASS → BATCH | 17/11 13:58Z |
 | REVIEW morechip-sil r1 of bd3bb284 (SMALL UI) | review/morechip-sil-r1 | MAIN s32 | session_01UV1Szid6ogM8TKZmLSzU7z | RUNNING | 17/11 14:00Z |
 | REVIEW narrow-t3 r1 of aa1a3387 (sonnet kit) | review/narrow-t3-r1 | MAIN s32 | session_01UV1SzjC1Tv9FpCm2Fb4BPj | RUNNING | 17/11 13:59Z |
-| hapmark-size: Dư đồ '!' a little bigger (OD ~14:08Z) on map-portrait-r2 68979111 | review/hapmark-size | MAIN s32 | session_01UV1Szkay8XSKEjk9fKn7BK | RUNNING | 17/11 14:08Z |
+| hapmark-size: Dư đồ '!' a little bigger (OD ~14:08Z) on map-portrait-r2 68979111 | review/hapmark-size | MAIN s32 | session_01UV1Szkay8XSKEjk9fKn7BK | READY 37f43fb2 (waiting main LOOK) | 17/11 14:08Z |
 | coop-thin part C worker #2 (successor at 72d7768c; opus; brief briefs/coop-thin-c-2.md) | review/coop-thin-c | B | session_01N1tNP6EZvNuroq8VSupxw7 | RUNNING | 17/11 14:03Z |
 | person-leftcol-r1 PASS e06e38a1 → builder batch s32a; worker #3 + reviewer archived | review/person-leftcol-r1 | MAIN s32 | session_01UV1SzhfMi68Cmn88G2Yqze | PASS → BATCH | 17/11 14:08Z |
 | tuanluc-sync-r1 PASS 4156a49d0 (TA TUẦN QUA chips + 42 numbers removed) → builder batch s32a; reviewer archived | review/tuanluc-sync-r1 | MAIN s32 | session_01UV1SzhfMi68Cmn88G2Yqze | PASS → BATCH | 17/11 14:13Z |
