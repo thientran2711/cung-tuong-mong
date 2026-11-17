@@ -44,8 +44,8 @@ const cnt=(o,k)=>o.p.evaluate(k=>(S.inv||[]).filter(e=>(k?e.k===k:loOk(e)||e.lo)
 const nOk=o=>o.p.evaluate(()=>(S.inv||[]).filter(e=>loOk(e)).length);
 const fr=o=>o.p.evaluate(()=>{const f=COOPW.friend();return f?{inv:(f.inv||[]).map(e=>e.k).sort(),kids:(f.kids||[]).filter(k=>k.alive!==false).map(k=>k.name).sort(),preg:f.preg||0}:null});
 const own=o=>o.p.evaluate(()=>({inv:(S.inv||[]).map(e=>e.k).sort(),kids:(S.kids||[]).filter(k=>k.alive!==false).map(k=>k.name).sort(),preg:S.hidden?0:(S.preg||0)}));
-const act=(o,k,extra)=>o.p.evaluate(([k,extra])=>{const r0=roll,c0=caught;roll=()=>true;caught=()=>"";/* r1 fix 5: a loyal (trung) runner refuses dirty work on a roll: none of my runners is trung for the forced act */const SV=(S.staff||[]).filter(x=>x.tr==="trung");SV.forEach(x=>x.tr="lanh");try{const f=COOPW.friend();
-  const okk=!!(f&&ACT[k]&&ACT[k].ok(S,f));const r=okk?runAct(S,f,k,extra):"";return{okk,r:String(r).replace(/<[^>]+>/g,'').slice(0,240)}}finally{roll=r0;caught=c0;SV.forEach(x=>x.tr="trung")}},[k,extra]);
+const act=(o,k,extra)=>o.p.evaluate(([k,extra])=>{const r0=roll,c0=caught;roll=()=>true;caught=()=>"";/* r1 fix 5: a loyal (trung) runner refuses dirty work on a roll: none of my runners is trung for the forced act *//* trait pool (owner OD 17/11 ~05:45Z, d296f3cd): loyalty is the pool quality netQ(p,"loyal"), the old .tr field is no longer read */const q0=netQ,SV=new Set(S.staff||[]);netQ=function(p,q){return q==="loyal"&&SV.has(p)?0:q0.apply(this,arguments)};try{const f=COOPW.friend();
+  const okk=!!(f&&ACT[k]&&ACT[k].ok(S,f));const r=okk?runAct(S,f,k,extra):"";return{okk,r:String(r).replace(/<[^>]+>/g,'').slice(0,240)}}finally{roll=r0;caught=c0;netQ=q0}},[k,extra]);
 async function waitFr(o,fn,arg,ms=15000){return until(o,fn,arg,ms)}
 let CW_kid=null;
 const seenTxt=o=>o.p.evaluate(()=>JSON.stringify(Q.map(q=>q.t+' '+(q.h||'')))+((document.getElementById('modal')||{}).textContent||''));
@@ -89,7 +89,7 @@ const seenTxt=o=>o.p.evaluate(()=>JSON.stringify(Q.map(q=>q.t+' '+(q.h||'')))+((
  const npc=(k,pre)=>A.p.evaluate(([k,pre])=>{const f=COOPW.friend();if(!f)return {err:'no friend'};const r0=roll,c0=caught;
    /* deterministic (r1 fix 5): every roll forced; a fresh NPC per act whose runners are not loyal (a trung runner refuses dirty work), the next one if the act did not run */
    window.__usedN=window.__usedN||[];const L=liveRivals(true).filter(r=>!r.coop&&r.alive&&!r.out&&!r.confined&&!window.__usedN.includes(r.id)).sort((a,b)=>rkOf(b)-rkOf(a));let last={err:'no npc'};
-   for(const v of L.slice(0,6)){if(pre==='rank'){v.rank=Math.max(v.rank||0,6)}if(pre==='pet'){v.pets=[]}(v.staff||[]).forEach(x=>{if(x.tr==='trung')x.tr='lanh'});
+   for(const v of L.slice(0,6)){if(pre==='rank'){v.rank=Math.max(v.rank||0,6)}if(pre==='pet'){v.pets=[]}/* trait pool d296f3cd: no loyal runner (netIs 'loyal'), swap the loyal nết for a non-loyal one of the same group */(v.staff||[]).forEach(x=>{if(!netIs(x,'loyal'))return;const n=netOf(x).slice(),P=BAL.net[netSex(x)==='m'?'M':'F'],lq=t=>((BAL.net.T[t]||{}).q||{}).loyal>0;['tt','ld','ch'].forEach((g,i)=>{if(lq(n[i]))n[i]=P[g].find(t=>!lq(t))||n[i]});x.net=n});
     const ok=!!(ACT[k]&&ACT[k].ok(v,f));if(!ok){last={ok,v:v.id};continue}const kids0=(v.kids||[]).length,pets0=(v.pets||[]).length,inv0=(v.inv||[]).length;
     roll=()=>true;caught=()=>"";const j0=window.__j95off;window.__j95off=1;/* main j95 motive gate (schedules3): a forced act by a random NPC has no motive; this suite checks the co-op relay, not motives */let r="";try{r=mindRun(v,f,k,0)}finally{roll=r0;caught=c0;window.__j95off=j0}window.__usedN.push(v.id);
     last={ok,v:v.id,vn:v.name,r:String(r).replace(/<[^>]+>/g,'').slice(0,200),kids:(v.kids||[]).length-kids0,pets:(v.pets||[]).length-pets0,inv:(v.inv||[]).length-inv0,

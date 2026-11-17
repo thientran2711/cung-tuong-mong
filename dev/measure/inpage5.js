@@ -17,13 +17,13 @@ function modalStep(sens){
   if(Q.length){
     const m=Q[0];
     if(m.opts&&m.opts.length){
-      const okIdx=m.opts.map((c,i)=>[c,i]).filter(([c])=>!c.off&&!(c.fx&&c.fx.bac&&S.bac+c.fx.bac<0));
+      const okIdx=m.opts.map((c,i)=>[c,i]).filter(([c])=>!(c.fx&&c.fx.bac&&S.bac+c.fx.bac<0)&&!c.off&&!(typeof c.lk==='function'&&(()=>{try{return c.lk()}catch(e){return false}})())&&!(c.need&&c.need.some&&c.need.some(n=>n&&n.ok===false))&&!(typeof eaLockWhy==='function'&&(()=>{try{return eaLockWhy(c,m)}catch(e){return false}})()));/* review/origin-bd-branch: a locked option (off / lk / need / mood lock) is never picked — chooseM refuses it and the bot stuck in TIMEOUT */
       if(!okIdx.length){closeModal();return true}
       let pickI;
       if(!sens)pickI=rpick(okIdx)[1];
       else{let best=-1e9;pickI=okIdx[0][1];okIdx.forEach(([o,i])=>{const f=o.fx||{};let v=(f.sung||0)*1.5+(f.danh||0)*1.2+(f.hh||0)*.4+(f.th||0)*.4+(f.maid||0)*.1+(f.suc||0)*.2+(f.tamco||0)*.3+(f.bac||0)*.04;
         if((f.duc||0)<0)v+=(f.duc||0)*6;else v+=(f.duc||0)*1.5;if(o.x&&/chứng cứ/.test(o.x))v+=2;if(o.x&&/nhân chứng|rửa oan|lật án|phong tước|giữ được/.test(o.x))v+=4;if(/tú nữ/.test(o.n))v-=.5;v+=Math.random()*.01;if(v>best){best=v;pickI=i}})}
-      note("dilemma");chooseM(pickI);return true}
+      note("dilemma");chooseM(pickI);if(Q[0]===m){for(const [,i] of okIdx){if(i===pickI)continue;chooseM(i);if(Q[0]!==m)break}if(Q[0]===m)Q.shift()}/* still refused: another option, else drop the card */return true}
     closeModal();return true}
   return false}
 function cardOK(a){return !a.done&&!S.dead&&canPay(a)&&!a.lock&&can(cardCost(a))&&!(a.b!=null&&(S.buoi||0)!==a.b)}
