@@ -68,6 +68,7 @@ fs.mkdirSync(DIR,{recursive:true});let fail=0;const ck=(n,c,x)=>{console.log((c?
   if(good){const n=Math.round((pk.ideal-pk.ang)/3);for(let i=0;i<Math.abs(n);i++){if(TOUCH){const bb=await p.$eval(n>0?'#hdr':'#hdl',e=>{const r=e.getBoundingClientRect();return[r.x+r.width/2,r.y+r.height/2]});await p.touchscreen.tap(bb[0],bb[1])}else await p.click(n>0?'#hdr':'#hdl')}}
   const pk2=await p.evaluate(()=>HD.peek());await p.screenshot({path:`${DIR}/hd-${tag}-2-place${good?'':'-miss'}.jpg`,quality:70});
   if(TOUCH){const bb=await p.$eval('#hdok',e=>{const r=e.getBoundingClientRect();return[r.x+r.width/2,r.y+r.height/2]});await p.touchscreen.tap(bb[0],bb[1])}else await p.click('#hdok');
+  await p.waitForTimeout(350);{const c=await p.evaluate(()=>{const k=HD.peek();if(!k)return null;const R=k.ed*1.6;return{x:Math.max(0,k.anchor.x-R),y:Math.max(0,k.anchor.y-R),width:2*R,height:2*R}});if(c)await p.screenshot({path:`${DIR}/hd-${tag}-2b-snap${good?'':'-vung'}.jpg`,quality:85,clip:c})}
   await p.waitForFunction(()=>S.toilette&&S.toilette.wk===toilWk(),null,{timeout:30000});const snap=await p.evaluate(()=>HD.peek());await p.waitForTimeout(1500);
   await p.screenshot({path:`${DIR}/hd-${tag}-3-result${good?'':'-miss'}.jpg`,quality:70});
     for(let i=0;i<6&&await p.$('.ktrv');i++){if(await p.$('.ktrv-ov>.kmend'))await p.click('.ktrv-ov>.kmend').catch(()=>{});else await p.evaluate(()=>{const o=document.querySelector('.ktrv-ov');o&&o.click()});await p.waitForTimeout(900)}
