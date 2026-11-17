@@ -25,6 +25,7 @@ fold.jpg, ipadAir.jpg, ipadPro.jpg, iphone14.jpg (crowded home stage; ipadAir sh
 ## Notes
 - Image files not in git (allowlist); only on CDN: img/kit/unknown-ico-n.webp.
 - Reviewer: check icon grey vs f/m (mine is flatter, slightly less texture; accepted as icon-size).
+<<<<<<< HEAD
 
 ## ROUND 2 (owner feedback ~14:15Z) — sha **aed1c258**
 1. Icon REDRAWN as a GROUP of 3 (man, woman, child), Magnific gpt-2-6, flattened to the unknown-fig grey; `img/kit/unknown-ico-n.webp` 192 px tall x ~145 wide (overwritten on CDN; the old single-figure icon is gone).
@@ -36,3 +37,5 @@ Shots (CDN img/_review/morechip-sil/, old ones wiped): fold.jpg, ipadAir.jpg, ip
 
 ## ROUND 3 — sha **d51137ff**
 Header count "Ngọc Thanh các [plaque: group icon + N]" now sits in the same light kit chip plaque (`.kchip.j59hchip`, background #fff8ee, 2 px border, shadow) as the corner chips, so it reads on dark scenes (every place header, via j59hdrCount). Scan MORECHIP OK at 5 sizes. Shots re-uploaded to img/_review/morechip-sil/ (fold.jpg, ipadAir.jpg, ipadPro.jpg, iphone14.jpg, curl 200).
+=======
+>>>>>>> 61f334cd (review kit-ico-rank-r2 report: PASS aaa1bec1)

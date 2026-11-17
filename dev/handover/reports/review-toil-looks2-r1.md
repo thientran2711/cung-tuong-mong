@@ -49,6 +49,7 @@ Delta: TOIL_MKS numbers only (dep = the v5 tuyet set, new tuyet fuller, diem hea
 Gates on 619edd87: quickcheck PASS (open 1223 ms, old save ok, perf ≈ live), CORE GATES PASS incl. mk-layer-scan 0 bad; toil-tease 25/25; toil-overlay 0 bad; toil-allday 0 missing; mk-reveal 0 errors 755x1000 + 1180x820.
 LOOKED (Fold, 5 levels x c07-t3, c31-ty2, c22-t5, c05-t1; iPad c22-t5): everything stays on the face, eyes clear, lips on the mouth, smudge beside the mouth (not on the chin). Steps clearly distinct; Diêm dúa heavy but pretty.
 LOOK NOTE for main (owner's taste, not a technical fault): the Vụng về white powder patches now read as crisp crossed white strokes / petal shapes on each cheek ("X" marks) in the close-up — show her that close-up explicitly before her OK.
+<<<<<<< HEAD
 
 # r4 — looks3 v8 delta (review/toil-looks2 630eaa63) — VERDICT: PASS 3d70778c
 Branch review/toil-looks2-r4 = r3 619edd87 + merge 630eaa63 + main ce29592e; FF ready. Live waits for the owner's OK on ?v=8.
@@ -58,3 +59,5 @@ Per-day pick (probe in the real page): share B over 1000 seeds 0.504; 5 calls sa
 Gates on 3d70778c: quickcheck PASS (open 1332 ms, old save ok, perf ≈ live), CORE GATES PASS (one-core-guard, mk-layer-scan 0 bad); toil-tease 25/25; toil-overlay 0 bad; toil-allday 0 missing.
 LOOKED (Fold, c07-t3 + c22-t5: vụng A (seed 7), vụng B (seed 1), Đoan trang, Kiều diễm, Khuynh thành, Diêm dúa): on the face, eyes clear, lips on mouth. A = soft round white puffs (no more crossed strokes). LOOK NOTE for the owner: Vụng về B is now visibly HEAVIER than Diêm dúa (B = v7 Diêm dúa, Diêm dúa went back to v6) — fine if intended ("như hề"), but show B beside Diêm dúa.
 Minor: mesh-less faces (SVG fallback) never show B (always A); TOIL_MKS.vungB has no `vung` flag, so B gets no vụng lip smear/jitter (= pure overdone look, as designed); `glam:1` still unused.
+=======
+>>>>>>> 61f334cd (review kit-ico-rank-r2 report: PASS aaa1bec1)

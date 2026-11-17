@@ -58,6 +58,7 @@ PRIORITY #1 CHECK: OD ~14:05Z Vung ve not approved | reused jtoil.js (TOIL_MKS v
 - Khuynh thanh clearly more splendid than Kieu diem: lip 1.0 + sheen .9, eye/lid 1.0, wing .55, lower lash .6, shimmer 1.0, skin light .5, blush .46. Diem dua clearly overdone: blush .78 (clip keeps it off eyes/background), lip 1.0, lid height 1.18, lower lash .85, brow .9, wing .55. Mat moc / Doan trang / Kieu diem unchanged.
 - Gates: mk-layer-scan 12960 0 bad, toil-tease 25/25, toil-overlay 0 bad, quickcheck PASS 143 s.
 - Samples ?v=7: img/_review/toil-looks/toil-looks-1.png, -2.png, -side-1/-2 (v5 over v7), -vung-1/-2 (Vung v4|v5|v7).
+<<<<<<< HEAD
 
 ### looks3 v8 - review/toil-looks2 630eaa633 (owner ~14:40Z verdict on v7)
 PRIORITY #1 CHECK: OD ~14:40Z | reused jtoil.js (TOIL_MKS + toilVungB + BAL.toil.vungB).
@@ -82,3 +83,5 @@ PRIORITY #1 CHECK: OD tail ~15:00Z makeup verdict | main jtoil.js (reused) | rev
 - Tests at a5e7f52f: mk-layer-scan 12960 pictures 0 bad; toil-tease 25/25; toil-react fails [] errs []; toil-overlay checks 33 bad 0; quickcheck PASS 151 s (core gates PASS).
 - Sheet: https://ctm-img.victoria-tntt.workers.dev/img/_review/toil-looks/toil-looks-v9.png (Vung A warm+cool x seeds 7,8 x faces c07,c31; bottom 2 rows = all 6 levels warm c07 / cool c31). Same sheet on v8: .../toil-looks-v8-compare.png (levels identical, only the puffs differ). Delete both after the verdict.
 - Sample-sheet script (not committed): playwright with page.route serving the worktree, as in the toil-looks3 handover.
+=======
+>>>>>>> 61f334cd (review kit-ico-rank-r2 report: PASS aaa1bec1)

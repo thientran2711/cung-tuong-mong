@@ -59,6 +59,9 @@ Shots in /home/user/wt/ocland-tmp (scratch, deleted at the end), none in git, no
 tier.js = BIG (merge touches many modules; foreman's delta review = the merges + the moved numbers). `bash dev/tools/golive.sh 5507baafa` → "checks OK. To go live run again with --yes". Not pushed to main.
 If main moves again before --yes: merge (assemble = main's list + jbaleff/jbalarc after jbal; CHANGE both lines; generated rebuilt) and rerun guard/text/bind.
 Delta for the reviewer: commits 05ab2d01 (numbers), 5b001208 (CHANGE+site), 8acca13b1 (merge d0a839e8 + jstaff BAL.staff.say), 5507baafa (merge 25bfd7cf). New scripts: dev/measure/one-core-land-kc2-move.js, one-core-land-kc2-sw-move.js. Guard change: dev/test/one-core-guard.js (odb / hst / oan kinds, maskBal Object.assign(BAL.x,{…})).
+<<<<<<< HEAD
 
 ## 6. Re-merge after the delta PASS (Foreman B s6, 15:02Z)
 main moved 25bfd7cf → abe056c3 (world-events-r1, + jworld.js) → merged in **ce29592e1**: conflicts assemble.py (main list + jworld, jbaleff/jbalarc after jbal) + generated (rebuilt). guard 5093 = baseline (jworld 0 typed numbers), text PASS, bind PASS; golive.sh ce29592e1 (no --yes) QUICKCHECK PASS 139 s, old save ok, "checks OK". **READY FF ce29592e1.**
+=======
+>>>>>>> 61f334cd (review kit-ico-rank-r2 report: PASS aaa1bec1)
