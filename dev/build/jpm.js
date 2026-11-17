@@ -71,7 +71,7 @@ function kitPalaceMap(o){const slot=o.slot,k=o.k;const A=kpmArt(slot);const nm=k
  const spots=A&&KPM_DATA.spots&&KPM_DATA.spots[A.dir]||{};const why=o.why||"";
  const PARTS=kpmParts(slot,k,nm);
  const chip=(n,h)=>h==="cungnhan"?`<i>${n} cung nhân</i>`:n?`<i>${n} bóng người</i>`:`<i>vắng</i>`;
- const here=h=>!!k&&S.place===k&&kpmHall()&&kpmHall().part===h;
+ const here=h=>(!!k&&S.place===k&&kpmHall()&&kpmHall().part===h)||(S.place==="home"&&kpmMine(slot)===h);
  return `<div class="mapv kpmv" data-kpm="${slot}"><div class="maptools"><span><button class="btn mz kpm-back" data-kpmback="1" aria-label="Về Dư đồ">‹ Dư đồ</button></span><span class="past kpm-t"><b>${nm}</b>${why?` · <em>${why}</em>`:""}</span></div>
  <div class="mapsc"><div class="mapw" style="width:100%">${A?`<img class="mapimg" src="${A.src}" alt="Sân ${nm} nhìn từ trên cao">`:`<img class="mapimg" src="${mapImg()}" alt="${nm}">`}
  ${PARTS.map(([h,hn])=>{const b=spots[h];if(!b||!(KPM_HALLS[A.dir]||[]).includes(h))return"";const s=SP[h]; /* only halls painted in this picture get a hotspot; the others stay in the kit list below */
@@ -87,14 +87,16 @@ function kpmOpen(k){const slot=kpmSlotOf(k);if(slot==null)return false;return kp
 function kpmOpenSlot(slot,k){window.__kpm={slot,k,empty:!k};window.__mapList=false;render();try{const sc=document.querySelector("#panel .kpmv .mapsc");if(sc)sc.scrollTop=0}catch(e){}return true}
 function kpmTapPart(part){const o=window.__kpm;if(!o||!S||S.dead||Q.length)return;kpmEnter(o.slot,part)}
 /* walk into one hall of a slot (from the courtyard rows/hotspots, or straight from the Dư đồ for a single-hall place) */
-function kpmEnter(slot,part){const k=kpmKeyOf(slot);if(!k){window.__kpmGo=1;try{j77Tap(null,kpmName(slot))}finally{window.__kpmGo=0}return}
+/* her own phối điện in a chủ vị's palace (jres resMeHoused, owner 17/11 04:08Z): that hall is her home ("home") */
+function kpmMine(slot){try{const r=typeof resMeHoused==="function"&&resMeHoused();return r&&r.pal===slot?r.part:null}catch(e){return null}}
+function kpmEnter(slot,part){const k=kpmMine(slot)===part?"home":kpmKeyOf(slot);if(!k){window.__kpmGo=1;try{j77Tap(null,kpmName(slot))}finally{window.__kpmGo=0}return}
  S.hall={k,part,t:kpmStamp(),place:part==="chinh"&&(kpmIsPlace(slot)||slot==="kn"||!kpmArt(slot))?1:0};window.__kpmArrive=1;
  if(S.place===k){popIdx=null;window.__fromMap=1;tab="act";render();return}
  window.__kpmGo=1;try{j77Tap(k,"")}finally{window.__kpmGo=0}}
 (function(){if(typeof j77Tap!=="function")return;const t0=j77Tap;
  j77Tap=function(k,empty){try{if(typeof k==="string"&&k.indexOf("kpm:")===0)return kpmTapPart(k.slice(4));
    if(!window.__kpmGo&&empty&&!k&&S&&!S.dead&&!Q.length){const i=PALN.findIndex(n=>n===empty||n.replace(/ cung$/,"")===String(empty).trim());if(i>=0&&kpmArt(i))return kpmOpenSlot(i,null)}
-   if(!window.__kpmGo&&!empty&&k&&S&&!S.dead&&!Q.length&&(k==="kn"||kpmSlotOf(k)!=null)){const sl=kpmSlotOf(k);if(kpmMulti(sl,k)){if(kpmOpen(k))return}else return kpmEnter(sl,"chinh")}}catch(e){console.error(e)}
+   if(!window.__kpmGo&&!empty&&k&&S&&!S.dead&&!Q.length&&(k==="kn"||kpmSlotOf(k)!=null)){const sl=kpmSlotOf(k);if(kpmMulti(sl,k)){if(kpmOpen(k))return}else return kpmEnter(sl,kpmMine(sl)||"chinh")}}catch(e){console.error(e)}
   return t0.apply(this,arguments)}})();
 /* the detail map replaces the plan while open */
 (function(){const m0=mapHTML;mapHTML=function(){const o=window.__kpm;if(!o||!S)return m0.apply(this,arguments);

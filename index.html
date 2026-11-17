@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"ee492cfd","t":"2026-11-17T04:15Z","c":"Hộp Chọn sổ nay rộng rãi, chữ trên nút đọc trọn, không còn ô hình bị cắt; trang Tuần lục hiện trọn dáng người đến tận gót chân, bảng thân s…","b":"645cc9846ae1","h":[{"s":"bad6d59f+","t":"2026-11-17T03:41Z","c":"Chơi chung: chuẩn bị đường truyền gọn nhẹ hơn giữa hai máy; khi chơi chưa có gì thay đổi."},{"s":"babc9b4a","t":"2026-11-17T01:39Z","c":"Chơi chung không còn treo máy vì tên bạn lặp chữ; số bóng người trên dư đồ khớp đúng người đang ở đó; việc có hạn giờ hiện đồng hồ ngay dướ…"},{"s":"92685210+","t":"2026-11-17T00:53Z","c":"Khung việc và khung sự kiện bốn cỡ, tranh lấp đầy khung, việc nhắc tên ai hiện chân dung người ấy; phẩm của món đồ nằm ngay trên viền khung…"},{"s":"6f513340","t":"2026-11-16T23:24Z","c":"Vào game mới không còn bật ngay màn lật thẻ, lật thẻ chỉ khi vào buổi tối; dư đồ nhãn giấy mới; việc dài lấn sang buổi sau; lời trong cung …"},{"s":"7a18d957","t":"2026-11-16T22:44Z","c":"review-diemtrang-fx-r1 report"},{"s":"afe2bcbc","t":"2026-11-16T22:25Z","c":"review r1: KIT 84.1a note + report"},{"s":"dea1d445+","t":"2026-11-16T21:32Z","c":"golive lag-play-2: CHANGE line + site rebuilt"},{"s":"674f3af4","t":"2026-11-16T21:21Z","c":"Chơi cùng bạn: bạn chơi chung chưa gặp mặt nay hiện tên gọi chung “Hảo hữu của ta” ở mọi nơi, không còn ẩn thành dấu hỏi."},{"s":"923567d5+","t":"2026-11-16T21:03Z","c":"Hình nhân vật: hết vệt xám ở cổ và viền tối quanh người."},{"s":"59812a63+","t":"2026-11-16T20:41Z","c":"Khung chung: khoảng cách đều nhau ở sổ tuần và thẻ thân phận; hàng sổ gọn, thẻ lật không đè chữ."}]};
+window.CTM_BI={"s":"4719d424+","t":"2026-11-17T04:16Z","c":"batch-0415: CHANGE line; site rebuilt after the 3 merges","b":"a2ccaffdbfad","h":[{"s":"ee492cfd","t":"2026-11-17T04:15Z","c":"Hộp Chọn sổ nay rộng rãi, chữ trên nút đọc trọn, không còn ô hình bị cắt; trang Tuần lục hiện trọn dáng người đến tận gót chân, bảng thân s…"},{"s":"bad6d59f+","t":"2026-11-17T03:41Z","c":"Chơi chung: chuẩn bị đường truyền gọn nhẹ hơn giữa hai máy; khi chơi chưa có gì thay đổi."},{"s":"babc9b4a","t":"2026-11-17T01:39Z","c":"Chơi chung không còn treo máy vì tên bạn lặp chữ; số bóng người trên dư đồ khớp đúng người đang ở đó; việc có hạn giờ hiện đồng hồ ngay dướ…"},{"s":"92685210+","t":"2026-11-17T00:53Z","c":"Khung việc và khung sự kiện bốn cỡ, tranh lấp đầy khung, việc nhắc tên ai hiện chân dung người ấy; phẩm của món đồ nằm ngay trên viền khung…"},{"s":"6f513340","t":"2026-11-16T23:24Z","c":"Vào game mới không còn bật ngay màn lật thẻ, lật thẻ chỉ khi vào buổi tối; dư đồ nhãn giấy mới; việc dài lấn sang buổi sau; lời trong cung …"},{"s":"7a18d957","t":"2026-11-16T22:44Z","c":"review-diemtrang-fx-r1 report"},{"s":"afe2bcbc","t":"2026-11-16T22:25Z","c":"review r1: KIT 84.1a note + report"},{"s":"dea1d445+","t":"2026-11-16T21:32Z","c":"golive lag-play-2: CHANGE line + site rebuilt"},{"s":"674f3af4","t":"2026-11-16T21:21Z","c":"Chơi cùng bạn: bạn chơi chung chưa gặp mặt nay hiện tên gọi chung “Hảo hữu của ta” ở mọi nơi, không còn ẩn thành dấu hỏi."},{"s":"923567d5+","t":"2026-11-16T21:03Z","c":"Hình nhân vật: hết vệt xám ở cổ và viền tối quanh người."}]};
 /* KBOOT — BOOT COVER (owner 15/11 "Khi vừa bấm vào game, có chừng ít hơn 1 giây hiện khung này"; KIT §14.1).
    Before: while the 4 MB page parsed, the browser painted the bare static markup of p1.html (HUD box, a vertical stat label list, empty
    panels, the old 11-tab bar) for ~1 s on a warm open and many seconds on a cold one, before any kit CSS/JS existed.
@@ -3798,20 +3798,9 @@ function ensureT2(v){if(v&&!v.trait2)v.trait2=pick(TRAIT2);return v}
 (function(){const n0=newRival;newRival=function(){return ensureT2(n0.apply(this,arguments))}})();
 /* a palace head: Tần and above (PAL_HEAD), not the queen (she holds Càn Ninh), not fallen */
 function palHeadOK(p){return !!p&&(p===S?!S.out&&!S.dead:p.alive&&!p.out)&&!p.queen&&rkOf(p)>=PAL_HEAD}
-function palFix(){if(!S||!rivals)return;rivals.forEach(ensureT2);const occ={};const heads=[S].concat(rivals).filter(palHeadOK);
- if(S.pal!=null&&!palHeadOK(S)){log(`Ngươi dời khỏi ${PALN[S.pal]}.`);S.pal=null}
- for(const v of rivals)if(v.pal!=null&&!palHeadOK(v))v.pal=null;
- for(const p of heads)if(p.pal!=null){if(occ[p.pal]!=null)p.pal=null;else occ[p.pal]=key(p)}
- for(const p of heads)if(p.pal==null){const f=PALN.findIndex((_,i)=>occ[i]==null);if(f<0)continue;p.pal=f;occ[f]=key(p);if(p===S){S.palCer=1}}
- /* lower ranks live in a head's side hall (thiên điện); never left without a palace when a head exists */
- /* owner 11/14 (OWNER_DECISIONS, Housing): Hoàng hậu lives ALONE in Càn Ninh cung and the Hoàng quý phi ALONE in hers — never a host,
-    for NPCs and for the player alike (palSolo). Anyone found under them (old saves, a host just promoted) moves out with a log line. */
- const hs=[S].concat(rivals).filter(p=>palHeadOK(p)&&!palSolo(p));
- for(const p of [S].concat(rivals)){if(p!==S&&(!p.alive||p.out))continue;if(rkOf(p)>=PAL_HEAD){p.resHead=null;continue}
-  const h=p.resHead!=null&&byKey(p.resHead);const ok=h&&h!==p&&hs.includes(h)&&(h!==S||palHeadOK(S));
-  if(p===S){if(!ok)S.resHead=null;continue} /* she keeps Ngọc Thanh các until she is a head herself */
-  if(!ok){const was=h&&h!==p&&palSolo(h)&&(h===S||h.alive&&!h.out)?h:null;const L=hs.filter(x=>x!==p&&x!==S);const c=L.filter(x=>[S].concat(rivals).filter(y=>y.resHead===key(x)).length<3);p.resHead=(c.length?pick(c):L.length?pick(L):null);p.resHead=p.resHead?key(p.resHead):null;
-   if(was)try{log(`${p.name} dời khỏi ${was===S?palName("home"):was.queen?"Càn Ninh cung":palName("r"+was.id)} (${was.queen||rkOf(was)>=7?"Hoàng hậu":"Hoàng quý phi"} ở riêng một cung), sang ${houseName(p)}.`)}catch(e){}}}}
+/* palFix: who heads which palace and who lives in whose side hall. ONE body, in jpal.js (it replaces this name at load);
+   the co-resident cap is BAL.res (resCap), the player is housed like every NPC (owner 17/11 04:08Z/04:20Z). */
+function palFix(){}
 /* Hoàng hậu (NPC queen or the player at rank 7) and Hoàng quý phi (rank 6, not the queen) keep a palace to themselves */
 function palSolo(p){return !!p&&(p.queen||rkOf(p)>=6)}
 (function(){const a0=assignHouses;assignHouses=function(){palFix()}})();
@@ -3837,13 +3826,12 @@ function palCeremony(){if(!S||!S.palCer||S.dead)return;S.palCer=0;const occ={};[
  Q.push({ev:1,t:"Ban cung",who:pEmp(),h:`<p>Thánh chỉ: ${RANKS[S.rank].n} ${S.name} được ban <b>${PALN[S.pal]}</b>, làm chủ vị một cung. Cung nhân dọn từ ${HOMEN} sang trong ngày.</p>`,
   opts:[{n:`Nhận ${PALN[S.pal]}`,fx:{},x:"tạ ơn, dọn sang",go:()=>log(`Dọn sang ${PALN[S.pal]}.`)}].concat(free.slice(0,3).map(i=>({n:`Xin ${PALN[i]}`,fx:{},x:"tâu xin cung khác còn trống",go:()=>{S.pal=i;log(`Tâu xin, được dời sang ${PALN[i]}.`)}})))});log(`Được ban ${PALN[S.pal]}.`)}
 (function(){const e0=endTurn;endTurn=function(){const r=e0.apply(this,arguments);try{if(S&&!S.dead){palFix();palCeremony();tuyenTu();if(Q.length&&$("modal").hidden)showModal()}}catch(e){}return r}})();
-/* TUYỂN TÚ: every third spring, 3-5 young consorts enter at Đáp ứng / Thường tại; living consorts capped at 16 */
-const CAPC=16;
-function tuyenTu(){if(!S||S.month!==2||S.tuan!==0||S.ttDone===S.year)return;if(S.year%3!==0&&liveRivals(true).length>=8)return;S.ttDone=S.year;const live=liveRivals(true).length+1;let n=Math.min(3+R(3),CAPC-live);const L=[];
+/* TUYỂN TÚ: every third spring, 3-5 young consorts enter at Đáp ứng / Thường tại; living consorts (her too) capped at BAL.harem.cap */
+function tuyenTu(){if(!S||S.month!==2||S.tuan!==0||S.ttDone===S.year)return;if(S.year%3!==0&&liveRivals(true).length>=8)return;S.ttDone=S.year;const live=liveRivals(true).length+1;let n=Math.min(3+R(3),BAL.harem.cap-live);const L=[];
  while(n-->0&&roomFor("consort")){const v=newRival(roll(60)?0:1);Object.assign(v,drawFace());v.age=18+R(3);rivals.push(v);L.push(v)}palFix();
  if(L.length){log(`Tuyển tú: ${L.map(v=>`${v.name} (${RANKS[v.rank].n})`).join(", ")} vào cung.`);if(!quiet)Q.push({t:"Tuyển tú",h:`<p>Mùa xuân năm thứ ${S.year}, cung tuyển tú nữ. ${L.length} người vào cung:</p>${kitRows(L.map(v=>[`${mdH(pv(v),"xs")}${v.name}`,`${RANKS[v.rank].n} · ${houseName(v)}`,"t"]))}`})}}
 /* the cap applies to every way a consort enters */
-(function(){const r0=roomFor;roomFor=function(role){if(role==="consort"&&S&&rivals&&liveRivals(true).length+1>=CAPC)return false;return r0.apply(this,arguments)}})();
+(function(){const r0=roomFor;roomFor=function(role){if(role==="consort"&&S&&rivals&&liveRivals(true).length+1>=BAL.harem.cap)return false;return r0.apply(this,arguments)}})();
 /* MAP: every palace hotspot shows its plan name and its residents' faces (residence is public); silhouettes count who is there now */
 function mapSpots(){palFix();const L=[];
  for(const k in MAPH.places){if(k==="kn"&&!qOn())continue;if(k==="home"&&S.pal!=null)continue;L.push({k,box:MAPH.places[k].box,n:k==="home"?HOMEN:palName(k),fn:k==="home"?"tẩm cung của ngươi":palFn(k),res:k==="home"||k==="kn"?residents(k):[],small:k==="lc"||k==="home"})}
@@ -4515,10 +4503,16 @@ const BAL={wkFinCap:1,/* Đức from handmade works (kinh, vật cầu phúc): a
    srvAge = servant start (cnv): age she is asked about leaving (ask), age a maid must leave (out), age a ma ma retires (mama).
    age.sac* = once she is older than sacFrom her Sắc falls sacLoss a year, never below sacMin (everyone); age.betroth / wed = a child may be promised /
    is married (princes and princesses alike); matchShow = a child shows in the match lists from this age; matchMax = oldest prince offered as a match; age.reign = the young Emperor rules alone from this age (no regency).
-   seat = seats per rank (7 Hoàng hậu, 6 Hoàng quý phi, 5 Quý phi, 4 Phi, 3 Tần); SEATCAP (j30) is this table.
+   seat = seats per rank (7 Hoàng hậu, 6 Hoàng quý phi, 5 Quý phi, 4 Phi, 3 Tần); SEATCAP (j30) is this table. res / harem: see below.
    night = the least a night with the Emperor gives: Sủng +sung, Ân tình +an (the night's score adds more, j8 nightFx). */
 Object.assign(BAL,{time:{khac:4,sucMin:5},lot:{bac:10,k:1},walk:{near:1,far:2},sneak:{danh:8,heavy:15,seen:2},srvAge:{ask:25,out:30,mama:45},
- age:{sacFrom:25,sacLoss:2,sacMin:10,betroth:16,wed:18,matchShow:14,matchMax:21,reign:16},seat:{7:1,6:1,5:2,4:4,3:6}});
+ age:{sacFrom:25,sacLoss:2,sacMin:10,betroth:16,wed:18,matchShow:14,matchMax:21,reign:16},seat:{7:1,6:1,5:1,4:2,3:3}, /* owner 17/11 04:30Z: halved (was {7:1,6:1,5:2,4:4,3:6}) */
+ /* RESIDENCE (owner 17/11 04:20Z + 04:32Z): every chủ vị (Tần, Phi, Quý phi; the player too) takes at most side co-residents in each
+    of the halls (Đông phối điện, Tây phối điện), one room each; Hoàng hậu and Hoàng quý phi live alone. harem.cap = most consorts alive at once
+    (the player counted); a new game still starts with BAL.ps.harem and grows by tuyển tú and maids raised to rank (roomFor('consort')). */
+ res:{side:1,halls:["dong","tay"]},harem:{cap:20}});
+/* co-residents one chủ vị may take (one core: jpal palFix, j95c cap, jres resSidePart, j27 read this) */
+function resCap(){return BAL.res.side*BAL.res.halls.length}
 /* ONE CORE r2 (review/one-core-land, 16/11): rule numbers of the modules that landed after review/one-core: story roads (jroute),
    origin arcs (jorigins), family house (jhouse), Tu duc lessons (jtds, jtd), small modules. One table per module; texts print the same key. */
 Object.assign(BAL,{route:{ /* jroute «Lối riêng» (tư tình / trốn cung / rời cung / ẩn dật / nghiệm thân): every rule number of that module */
@@ -6303,7 +6297,7 @@ function tdSoMonth(force){const T=trS();if(!force&&(S.turn-T.soT<TD.soGap||!roll
  if(T.praise)opts.push(["praise",6]);
  if(typeof kvDebate==="function"&&S.heir&&S.heir.k&&S.heir.k.alive&&typeof kvOrder==="function"&&typeof kvQueenMom==="function"&&!kvQueenMom(S.heir.v)&&kvOrder().some(x=>x.dich&&!x.k.heir&&x.k.age>=6))opts.push(["dich",3]);
  const imp=tdImpPick();if(imp)opts.push(["imp",4]);
- const ty=CLANS.filter(c=>T.H[c].pow>=65);if(ty.length&&T.tyY!==S.year&&liveRivals(true).length+1<(typeof CAPC==="number"?CAPC:16)-1&&roomFor("consort"))opts.push(["tuyen",2]);
+ const ty=CLANS.filter(c=>T.H[c].pow>=65);if(ty.length&&T.tyY!==S.year&&liveRivals(true).length+1<BAL.harem.cap-1&&roomFor("consort"))opts.push(["tuyen",2]);
  const cc=consorts().filter(p=>(p.cc||0)>=2);if(cc.length)opts.push(["cc",2]);
  const f=force&&opts.find(x=>x[0]===force);let k;if(f)k=f[0];else{if(!opts.length)return"";let r=Math.random()*opts.reduce((s,x)=>s+x[1],0),i=0;while(r>opts[i][1]&&i<opts.length-1){r-=opts[i][1];i++}k=opts[i][0]}
  T.soT=S.turn;let ev="";
@@ -28126,11 +28120,11 @@ if(typeof pdGet==="function")(function(){const o0=over;over=function(h,t,fate){c
  return r}})();
 /* ================= jpal: ai ở cung nào (lệ triều Thanh; sếp sửa 11/14) =================
    - Từ TẦN trở lên làm chủ vị một cung (palHeadOK: bậc >= 3, không phải Hoàng hậu).
-   - Chủ vị có người ở thiên điện: Tần (3), Phi (4), Quý phi (5); mỗi cung tối đa 3 người.
+   - Chủ vị có người ở chung: Tần (3), Phi (4), Quý phi (5); mỗi chủ vị nhận tối đa BAL.res (1 Đông phối điện + 1 Tây phối điện), người chơi cũng vậy.
    - Hoàng quý phi (6) có cung riêng, ở một mình. Hoàng hậu (7) ở một mình tại Càn Ninh (residents("kn") chỉ còn nàng).
    - Quý nhân, Thường tại, Đáp ứng ở thiên điện dưới một chủ vị; hết chỗ thì ở một mình một cung/điện phụ còn trống (PALN), nhường lại khi có chủ vị cần cung.
    - Tần mới phong mà chưa có cung trống: tạm ở thiên điện một chủ vị, có cung trống thì được dời sang, ghi một dòng. Người chơi: lên Tần là được ban cung (S.palCer, lễ dời cung của j27).
-   - Bản đồ có 8 cung phía đông; thêm 5 cung phía tây (các khu viện mái xanh trên bản đồ, cạnh Ngọc Thanh các) cho đủ 6 Tần + 4 Phi + 2 Quý phi + 1 HQP.
+   - Bản đồ có 8 cung phía đông; thêm 5 cung phía tây (các khu viện mái xanh trên bản đồ, cạnh Ngọc Thanh các) cho đủ mọi ghế chủ vị của BAL.seat (Tần + Phi + Quý phi) + 1 HQP.
    - Save cũ: palFix chạy khi nạp; ai đang ở dưới HH/HQP (hay sai chỗ) được dời, ghi "… dời sang …". */
 [["Vĩnh Thọ cung",.303,.222],["Dực Khôn cung",.368,.222],["Trữ Tú cung",.303,.338],["Hàm Phúc cung",.368,.338],["Thái Cực điện",.368,.455]].forEach(([n,x,y],i)=>{
  if(MAPH.rivalSlots.some(s=>s.name===n))return;const s={slot:9+i,name:n,box:{x,y,w:.058,h:.105},anchor:{x:+(x+.029).toFixed(3),y:+(y+.04).toFixed(3)}};MAPH.rivalSlots.push(s);PALN.push(n)});
@@ -28152,17 +28146,36 @@ palFix=function(){if(!S||!rivals)return;rivals.forEach(ensureT2);const all=[S].c
  for(const p of heads.slice().sort((a,b)=>rkOf(b)-rkOf(a)))if(p.pal==null){let f=free();
   if(f<0){const lone=rivals.find(v=>v.palLone&&v.pal!=null);if(lone){f=lone.pal;lone.pal=null;lone.palLone=0;delete occ[f]}}
   if(f<0)continue;p.pal=f;occ[f]=key(p);if(p===S)S.palCer=1;else{if(p.palWait)moved.push(p);p.palWait=0;p.resHead=null}}
- const hs=all.filter(palHostOK);const cnt=h=>all.filter(y=>y!==h&&palLive(y)&&y.resHead===key(h)&&!(rkOf(y)>=3&&y.pal!=null)).length;
+ /* SIDE HALLS (owner 17/11 04:08Z/04:20Z, BAL.res): each chủ vị (Tần/Phi/Quý phi, the player too) takes at most resCap() co-residents,
+    BAL.res.side in each hall of BAL.res.halls (one room each). The player below Tần is housed exactly like an NPC (no more 'she keeps
+    Ngọc Thanh các'); lower ranks go to the chủ vị with the FEWEST co-residents so no palace stands empty while another is full;
+    Ngọc Thanh các (her) / a lone empty palace (an NPC, palLone) only when every chủ vị is full. */
+ const cap=resCap(),HL=BAL.res.halls,sv=typeof isSrv==="function"&&(()=>{try{return isSrv()}catch(e){return false}})();
+ const hs=all.filter(palHostOK);const S0=S.resHead||null;
+ const mates=h=>all.filter(y=>y!==h&&palLive(y)&&!y.queen&&y.resHead===key(h)&&!(rkOf(y)>=3&&y.pal!=null)&&!(y===S&&sv));
+ const cnt=h=>mates(h).length;
+ const hallFix=h=>{const M=mates(h);const n={};for(const x of HL)n[x]=0;const keep=[],redo=[];
+  for(const y of M){if(HL.includes(y.resHall)&&n[y.resHall]<BAL.res.side){n[y.resHall]++;keep.push(y)}else redo.push(y)}
+  for(const y of redo){const f=HL.find(x=>n[x]<BAL.res.side);y.resHall=f||HL[HL.length-1];if(f)n[f]++}};
+ /* a house over the cap (old saves had 3, a promotion placed someone first): the newest NPC extras leave and are housed again below */
+ for(const h of hs){const M=mates(h);if(M.length<=cap)continue;const N=M.filter(y=>y!==S);for(const y of N.slice(-(M.length-cap))){y.resHead=null;y.resHall=null}}
+ const pickHost=p=>{const c=hs.filter(x=>x!==p&&cnt(x)<cap);if(!c.length)return null;const m=Math.min(...c.map(cnt));return pick(c.filter(x=>cnt(x)===m))};
  for(const p of all){if(!palLive(p)||p.queen)continue;const r=rkOf(p);
-  if(r>=3&&p.pal!=null){p.resHead=null;if(p!==S)p.palWait=0;continue}
+  if(r>=3&&p.pal!=null){p.resHead=null;p.resHall=null;if(p!==S)p.palWait=0;continue}
+  if(p===S&&sv){S.resHead=null;continue}
   const h=p.resHead!=null&&byKey(p.resHead);const ok=h&&h!==p&&hs.includes(h);
-  if(p===S){if(!ok)S.resHead=null;continue} /* she keeps Ngọc Thanh các until she has a palace of her own */
+  if(p===S){if(ok||r>=3){if(!ok)S.resHead=null;continue}S.resHead=null;const c=pickHost(S);if(c){S.resHead=key(c);S.resHall=null;hallFix(c)}continue}
   if(r>=3)p.palWait=1;
   if(ok){if(p.palLone){delete occ[p.pal];p.pal=null;p.palLone=0}continue}
-  p.resHead=null;if(p.palLone&&p.pal!=null)continue;
-  const c=hs.filter(x=>x!==p&&x!==S&&cnt(x)<3);
-  if(c.length)p.resHead=key(pick(c));else if(r<3){const f=free();if(f>=0){p.pal=f;p.palLone=1;occ[f]=key(p)}}}
- for(const v of rivals){if(!v.palLone||!palLive(v)||rkOf(v)>=3)continue;const c=hs.filter(x=>x!==v&&x!==S&&cnt(x)<3);if(c.length){delete occ[v.pal];v.pal=null;v.palLone=0;v.resHead=key(pick(c))}}
+  p.resHead=null;p.resHall=null;if(p.palLone&&p.pal!=null)continue;
+  const c=pickHost(p);
+  if(c){p.resHead=key(c);hallFix(c)}else if(r<3){const f=free();if(f>=0){p.pal=f;p.palLone=1;occ[f]=key(p)}}}
+ for(const v of rivals){if(!v.palLone||!palLive(v)||rkOf(v)>=3)continue;const c=pickHost(v);if(c){delete occ[v.pal];v.pal=null;v.palLone=0;v.resHead=key(c);hallFix(c)}}
+ /* spread: a chủ vị with nobody while another is full → the newest NPC of the full house moves over (log line) */
+ for(let g=0;g<12;g++){const E=hs.filter(x=>cnt(x)===0),F=hs.filter(x=>cnt(x)>=cap);if(!E.length||!F.length)break;const f=F[0],e=pick(E);
+  const y=mates(f).filter(x=>x!==S).pop();if(!y)break;y.resHead=key(e);y.resHall=null;hallFix(e);hallFix(f);try{log(`${RANKS[y.rank].n} ${y.name} dời sang ${houseName(y)}.`)}catch(x){}}
+ for(const h of hs)hallFix(h);
+ if(!sv&&palLive(S)&&rkOf(S)<3&&S.resHead!==S0){try{if(S.resHead)log(`Ngươi được xếp ở ${palName("home")}.`);else if(S0)log(`Ngươi dời về ${HOMEN}.`)}catch(x){}}
  for(const p of moved)try{log(`${RANKS[p.rank].n} ${p.name} có cung trống, được dời sang ${PALN[p.pal]}.`)}catch(e){}
  for(const [p,w] of was){if(!palLive(p))continue;try{log(`${p.name} dời khỏi ${w}, dời sang ${houseName(p)}.`)}catch(e){}}};
 /* palaceOf: j27's "lower consort under the queen = Càn Ninh" exception can no longer fire (palFix never puts anyone under the queen),
@@ -28516,7 +28529,7 @@ Object.assign(BAL,{mem:{cap:5,fadeMo:2,keepFloor:.35,modDiv:8,modMax:10,recallMi
    psk.ghen = the jealousy of the other consorts when she is raised by a direct decree or a passed grace exam (jexam exDirectUp / exGraceUp). */
 Object.assign(BAL,{psk:{ghen:10,son1:{hhOan:15,momOan:8},emp:{th:8,oan:10},th:{sung:6,errN:2,errAt:3,errGap:6},
  quyen:{danh:6,after:24,p:6,max:1,hitSung:10,hitDanh:6},seat:{bacM:4,hieuBac:120,danh:6,gifts:2,pow:8,dad:5,ghen:10,oan:6}}});
-/* seat counts per rank (review/seatcap): BAL.seatCap IS j30 SEATCAP (one object, one place): Hoàng hậu 1, Hoàng quý phi 1, Quý phi 2, Phi 4, Tần 6; lower ranks no cap.
+/* seat counts per rank (review/seatcap): BAL.seatCap IS j30 SEATCAP (one object, filled from BAL.seat in jbal.js — the only place the numbers are written); lower ranks no cap.
    Every road that sets a rank asks jseat.js seatHas / seatDown / seatUp; seatSettle is the net after every turn and on load. */
 BAL.seatCap=SEATCAP;
 /* PEOPLE LEDGER (owner core law 16/11 13:40Z: "at mandatory times (e.g. morning court) everyone required is inside"; j95 record).
@@ -36320,12 +36333,14 @@ const RES_VAR={"canh-phuc-cung":"xuan-sang xuan-trua xuan-chieu xuan-toi ha-sang
 const RES_HAVE={};for(const s in RES_VAR)for(const v of RES_VAR[s].split(" "))if(v)RES_HAVE[s+"-"+v]=1;
 function resSeason(){try{return SCN_SEAS[SEASON[(S.month||1)-1]]||"xuan"}catch(e){return"xuan"}}
 function resTime(){try{const four=typeof BUOI!=="undefined"&&BUOI.length>=4;return(four?["sang","trua","chieu","toi"]:["sang","chieu","toi"])[S.buoi||0]||"sang"}catch(e){return"sang"}}
-function resPalIdx(k){if(k==null)return null;if(typeof k==="number")return k>=0&&k<8?k:null;
+function resPalIdx(k){if(k==null)return null;if(typeof k==="number")return k>=0&&k<(typeof PALN!=="undefined"?PALN.length:8)?k:null;
  if(k==="home")return S&&S.pal!=null?S.pal:null;
  if(typeof k==="string"&&k[0]==="r"&&/^r\d+$/.test(k)){const h=RV(+k.slice(1));return h&&h.pal!=null?h.pal:null}
  let i=RES_SLUG.indexOf(String(k).replace(/-cung$/,""));if(i>=0)return i;i=(typeof PALN!=="undefined"?PALN:[]).indexOf(k);return i>=0?i:null}
+/* the 5 west palaces jpal added (index 8–12) have no room paintings yet (ART REQUEST, Foreman C): a stand-in from the 8 painted ones, marked 'tạm' */
+function resTamPal(pal){const i=resPalIdx(pal);return i!=null&&i>=RES_SLUG.length}
 function resBase(pal,part){if(part==="cungnhan")return"cung-nhan";const i=resPalIdx(pal);if(i==null)return null;
- return RES_SLUG[i]+"-cung"+(part==="dong"?"-dong-phoi":part==="tay"?"-tay-phoi":"")}
+ return RES_SLUG[i%RES_SLUG.length]+"-cung"+(part==="dong"?"-dong-phoi":part==="tay"?"-tay-phoi":"")}
 function resPick(base,se,ti){if(!base)return null;se=se||resSeason();ti=ti||resTime();
  const near=(typeof SCN_NEAR!=="undefined"?SCN_NEAR:{})[ti]||[ti];
  for(const s of [se,"xuan"])for(const x of near.concat(ti==="toi"?[]:[])){if(RES_HAVE[`${base}-${s}-${x}`])return`${base}-${s}-${x}`}
@@ -36334,9 +36349,10 @@ function residenceArt(palaceKey,part,season,time){const n=resPick(resBase(palace
 /* who lives where, now */
 function resAlive(p){return !!p&&(p===S?!S.dead:p.alive!==false)}
 function resHeadOf(p){try{const h=byKey(houseOf(p));return h||null}catch(e){return null}}
-function resSidePart(p,h){/* co-residents of head h, stable order: the first two share Đông phối điện, the next ones Tây phối điện */
+function resSidePart(p,h){/* co-residents of head h: the hall palFix gave (p.resHall, BAL.res.halls, one room each); else stable order, BAL.res.side per hall */
+ const HL=BAL.res.halls;if(HL.includes(p.resHall))return p.resHall;
  const L=[S].concat(rivals||[]).filter(x=>x!==h&&resAlive(x)&&!(x!==S&&x.out)&&!x.queen&&rkOf(x)<PAL_HEAD&&resHeadOf(x)===h).sort((a,b)=>String(key(a)).localeCompare(String(key(b)),"en",{numeric:true}));
- const i=L.indexOf(p);return i<2?"dong":"tay"}
+ const i=Math.max(0,L.indexOf(p));return HL[Math.min(HL.length-1,Math.floor(i/BAL.res.side))]}
 function residenceOf(p){const R=(o)=>Object.assign({pal:null,head:null},o);if(!p||!S)return R({part:"ngocthanh"});
  if(p===S){if(S.out)return R({part:"lc"});if(typeof isSrv==="function"&&isSrv())return R({part:"cungnhan",pal:null});
   if(S.pal!=null&&rkOf(S)>=PAL_HEAD)return R({part:"chinh",pal:S.pal,head:S});
@@ -36372,10 +36388,11 @@ function resScene(r){if(!r)return null;if(r.part==="ngocthanh"||r.part==="kn"||r
     const h=RV(+S.place.slice(1));return h?residenceOf(h):null}}catch(e){}return null};
  function resApply(){try{const r=resStageRoom(),n=resScene(r);
    if(S.place==="home")SCIMG.home=n||HOME0;else if(S.place&&/^r\d+$/.test(S.place))SCIMG.rv=n||RV0;
-   S.__resName=r&&n?resRoomName(r):null}catch(e){}}
+   S.__resName=r&&n?resRoomName(r):null;S.__resTam=!!(r&&n&&r.part!=="cungnhan"&&resTamPal(r.pal))}catch(e){}}
  window.resApply=resApply;
  /* every painter of the room (DOM stage, PIXI stage, event art) reads SCIMG: set it first, every time */
- const r0=renderStage;renderStage=function(){resApply();return r0.apply(this,arguments)};
+ const r0=renderStage;renderStage=function(){resApply();const x=r0.apply(this,arguments);try{const st=$("stage");if(st){let t=document.getElementById("restam");
+   const on=!!(S&&S.__resTam&&(S.place==="home"||/^r\d+$/.test(S.place||"")));if(on&&!t){st.insertAdjacentHTML("beforeend",kitTam(true));t=st.lastElementChild;if(t)t.id="restam"}else if(!on&&t)t.remove()}}catch(e){}return x};
  if(typeof pxScene==="function"){const p0=pxScene;pxScene=function(){resApply();return p0.apply(this,arguments)}}
  if(typeof evArt==="function"){const e0=evArt;evArt=function(){resApply();return e0.apply(this,arguments)}}})();
 /* room label on the stage title follows the real room */
@@ -36390,6 +36407,15 @@ function resScene(r){if(!r)return null;if(r.part==="ngocthanh"||r.part==="kn"||r
 (function(){if(typeof homePeople!=="function")return;const h0=homePeople;homePeople=function(){const L=h0.apply(this,arguments);try{const me=residenceOf(S);
   if(me.part==="dong"||me.part==="tay"){const W=S.where||{};for(const v of rivals){if(!v.alive||v.out||v===S)continue;if(L.some(p=>p.ref===v))continue;
    if(resSame(residenceOf(v),me)&&W[v.id]===palaceOf(v))L.push(rp(v))}}}catch(e){}return L}})();
+
+/* ================= HER SIDE HALL (owner 17/11 04:08Z/04:20Z): below Tần the player lives in a chủ vị's Đông / Tây phối điện like any NPC =================
+   jpal palFix houses her (S.resHead, S.resHall). Her own room stays the place key "home" (stage = residenceOf(S): that phối điện);
+   her home's name is the room's name; on the Dư đồ her face stands in that chủ vị's palace (no separate Ngọc Thanh các spot while housed). */
+function resMeHoused(){try{if(!S||S.pal!=null||S.out||S.dead)return null;const r=residenceOf(S);return(r.part==="dong"||r.part==="tay")&&r.pal!=null&&r.head&&r.head!==S?r:null}catch(e){return null}}
+(function(){const n0=palName;palName=function(k){if(k==="home"){const r=resMeHoused();if(r)return resRoomName(r)}return n0.apply(this,arguments)}})();
+(function(){const r0=residents;residents=function(k){const L=r0.apply(this,arguments);try{const r=resMeHoused();if(r&&k!=="home"&&palaceOf(r.head)===k&&!L.includes(S)){L.push(S);L.sort((a,b)=>rkOf(b)-rkOf(a))}}catch(e){}return L}})();
+(function(){const m0=mapSpots;mapSpots=function(){const L=m0.apply(this,arguments);try{const r=resMeHoused();if(!r)return L;const hk=palaceOf(r.head);
+  const out=L.filter(x=>x.k!=="home");const sp=out.find(x=>x.k===hk);if(sp){if(!(sp.res||[]).includes(S))sp.res=(sp.res||[]).concat([S]);sp.fn=`${sp.fn} · ngươi ở ${RES_PART_N[r.part]}`}return out}catch(e){return L}}})();
 /* ================= jseal: kitSeal · ẤN TRÂN NỮ (owner 11/15, review/brand; KIT §39) =================
    Ported from Phượng Lệnh public/choi/js/kit/seal.js (word() glyph builder, the pl-seal-ink filter, the pl-seal-tn carved mask): a square
    cinnabar seal, TRÂN over NỮ cut white into the cinnabar (bạch văn) in Vietnamese seal-script capitals drawn in code (one even stroke on a
@@ -51128,7 +51154,7 @@ function kitPalaceMap(o){const slot=o.slot,k=o.k;const A=kpmArt(slot);const nm=k
  const spots=A&&KPM_DATA.spots&&KPM_DATA.spots[A.dir]||{};const why=o.why||"";
  const PARTS=kpmParts(slot,k,nm);
  const chip=(n,h)=>h==="cungnhan"?`<i>${n} cung nhân</i>`:n?`<i>${n} bóng người</i>`:`<i>vắng</i>`;
- const here=h=>!!k&&S.place===k&&kpmHall()&&kpmHall().part===h;
+ const here=h=>(!!k&&S.place===k&&kpmHall()&&kpmHall().part===h)||(S.place==="home"&&kpmMine(slot)===h);
  return `<div class="mapv kpmv" data-kpm="${slot}"><div class="maptools"><span><button class="btn mz kpm-back" data-kpmback="1" aria-label="Về Dư đồ">‹ Dư đồ</button></span><span class="past kpm-t"><b>${nm}</b>${why?` · <em>${why}</em>`:""}</span></div>
  <div class="mapsc"><div class="mapw" style="width:100%">${A?`<img class="mapimg" src="${A.src}" alt="Sân ${nm} nhìn từ trên cao">`:`<img class="mapimg" src="${mapImg()}" alt="${nm}">`}
  ${PARTS.map(([h,hn])=>{const b=spots[h];if(!b||!(KPM_HALLS[A.dir]||[]).includes(h))return"";const s=SP[h]; /* only halls painted in this picture get a hotspot; the others stay in the kit list below */
@@ -51144,14 +51170,16 @@ function kpmOpen(k){const slot=kpmSlotOf(k);if(slot==null)return false;return kp
 function kpmOpenSlot(slot,k){window.__kpm={slot,k,empty:!k};window.__mapList=false;render();try{const sc=document.querySelector("#panel .kpmv .mapsc");if(sc)sc.scrollTop=0}catch(e){}return true}
 function kpmTapPart(part){const o=window.__kpm;if(!o||!S||S.dead||Q.length)return;kpmEnter(o.slot,part)}
 /* walk into one hall of a slot (from the courtyard rows/hotspots, or straight from the Dư đồ for a single-hall place) */
-function kpmEnter(slot,part){const k=kpmKeyOf(slot);if(!k){window.__kpmGo=1;try{j77Tap(null,kpmName(slot))}finally{window.__kpmGo=0}return}
+/* her own phối điện in a chủ vị's palace (jres resMeHoused, owner 17/11 04:08Z): that hall is her home ("home") */
+function kpmMine(slot){try{const r=typeof resMeHoused==="function"&&resMeHoused();return r&&r.pal===slot?r.part:null}catch(e){return null}}
+function kpmEnter(slot,part){const k=kpmMine(slot)===part?"home":kpmKeyOf(slot);if(!k){window.__kpmGo=1;try{j77Tap(null,kpmName(slot))}finally{window.__kpmGo=0}return}
  S.hall={k,part,t:kpmStamp(),place:part==="chinh"&&(kpmIsPlace(slot)||slot==="kn"||!kpmArt(slot))?1:0};window.__kpmArrive=1;
  if(S.place===k){popIdx=null;window.__fromMap=1;tab="act";render();return}
  window.__kpmGo=1;try{j77Tap(k,"")}finally{window.__kpmGo=0}}
 (function(){if(typeof j77Tap!=="function")return;const t0=j77Tap;
  j77Tap=function(k,empty){try{if(typeof k==="string"&&k.indexOf("kpm:")===0)return kpmTapPart(k.slice(4));
    if(!window.__kpmGo&&empty&&!k&&S&&!S.dead&&!Q.length){const i=PALN.findIndex(n=>n===empty||n.replace(/ cung$/,"")===String(empty).trim());if(i>=0&&kpmArt(i))return kpmOpenSlot(i,null)}
-   if(!window.__kpmGo&&!empty&&k&&S&&!S.dead&&!Q.length&&(k==="kn"||kpmSlotOf(k)!=null)){const sl=kpmSlotOf(k);if(kpmMulti(sl,k)){if(kpmOpen(k))return}else return kpmEnter(sl,"chinh")}}catch(e){console.error(e)}
+   if(!window.__kpmGo&&!empty&&k&&S&&!S.dead&&!Q.length&&(k==="kn"||kpmSlotOf(k)!=null)){const sl=kpmSlotOf(k);if(kpmMulti(sl,k)){if(kpmOpen(k))return}else return kpmEnter(sl,kpmMine(sl)||"chinh")}}catch(e){console.error(e)}
   return t0.apply(this,arguments)}})();
 /* the detail map replaces the plan while open */
 (function(){const m0=mapHTML;mapHTML=function(){const o=window.__kpm;if(!o||!S)return m0.apply(this,arguments);
@@ -53407,11 +53435,11 @@ function j95cDedupe(){let n=0;try{const seen=new Set([S&&S.maid&&S.maid.name].co
 })();
 function j95cVisitFix(){if(!S||S.dead||(typeof isSrv==="function"&&isSrv()))return false;if(S.out&&S.place!=="lc"){coldVisit();return true}if(S.mg)return false;
  if(S.visit&&S.visit.k!==S.place&&S.place==="home"){S.visit={k:"home",people:homePeople(),talked:false,tk:{}};return true}return false}
-/* jpal keeps a resident whose head is still valid even when the house is over its 3 side halls (a girl of the tuyển tú or a promotion
-   placed there before palFix ran): the newest extras leave so palFix finds them another house (the cap the owner set, ≤3) */
+/* jpal keeps a resident whose head is still valid even when the house is over its side-hall cap (a girl of the tuyển tú or a promotion
+   placed there before palFix ran): the newest extras leave so palFix finds them another house (the cap the owner set: BAL.res, resCap) */
 function j95cCap(){const live=p=>p===S?!!S&&!S.out&&!S.dead:!!p&&p.alive&&!p.out;let n=0;
  for(const h of [S].concat(rivals)){if(!live(h))continue;const k=key(h);const L=rivals.filter(y=>y!==h&&live(y)&&y.resHead===k&&!(rkOf(y)>=3&&y.pal!=null));const me=S!==h&&live(S)&&S.resHead===k&&!(rkOf(S)>=3&&S.pal!=null)?1:0;
-  const over=L.length+me-3;if(over>0)for(const y of L.slice(-over)){y.resHead=null;n++}}
+  const over=L.length+me-resCap();if(over>0)for(const y of L.slice(-over)){y.resHead=null;n++}}
  if(n)J95C.stat.cap=(J95C.stat.cap||0)+n;return n}
 /* a turn-of-buổi act placed at the start of the buổi, then overtaken before the news was read (she is confined / banished right
    after): the news line is withdrawn so nothing on screen says she is where the record no longer has her */
@@ -57815,8 +57843,7 @@ window.eaDo=eaDo;window.eaKeyOf=eaKeyOf;window.eaSay=eaSay;window.eaExtNpc=eaExt
 window.eaStat=function(){return JSON.parse(JSON.stringify(EA_N))};
 })();
 /* ================= ONE SEAT RULE (review/seatcap, owner OD:L1224 + OD:L1228 + OD:L1267 ONE CORE) =================
-   The seat counts are j30 SEATCAP = BAL.seatCap (the same object; Hoàng hậu 1, Hoàng quý phi 1, Quý phi 2, Phi 4, Tần 6; Quý nhân and below
-   have no cap). Every road that puts a consort on a rank goes through these three helpers, for her and for every NPC alike:
+   The seat counts are j30 SEATCAP = BAL.seat (copied by jbal; the numbers live only there; Quý nhân and below have no cap). Every road that puts a consort on a rank goes through these three helpers, for her and for every NPC alike:
    - seatHas(p,r): may p sit at rank r (the seat counts everyone else who holds r);
    - seatDown(p,r): a road that DROPS her (demotion, the Hoàng hậu's fall, a pardon out of lãnh cung, co-op merge) lands on the highest rank
      at or under r that has a free seat;
@@ -57836,9 +57863,16 @@ function seatUp(p,r,why){if(seatHas(p,r)){if(r>=7){if(p===S){S.rank=7}else{p.ran
  if(rkOf(p)<r)return seatComp(p)||false;return false}
 function seatGuest(){try{return !!(window.COOPW&&COOPW.on&&COOPW.seat!=="a")}catch(e){return false}}
 window.__seatN=window.__seatN||{settle:0,down:0};
+/* SEATS HALVED (owner 17/11 04:30Z): a save made before BAL.seat was halved keeps every holder on her rank ("nobody is demoted");
+   they are stamped once (S.seatKeep = {key: rank}) and the net skips them while they hold that rank; the full rank still takes nobody
+   new (seatHas counts them) until seats free up. New games are under the cap, so nothing is stamped. */
+function seatKeepStamp(){if(!S||!rivals||S.seatV>=2)return;S.seatV=2;const K={};
+ for(const r of [7,6,5,4,3]){const c=SEATCAP[r];if(c==null)continue;const H=holders(r);if(H.length>c)for(const p of H)if(!seatMine(p))K[key(p)]=r}
+ if(Object.keys(K).length)S.seatKeep=K}
+function seatKept(p){const K=S&&S.seatKeep;if(!K)return false;const k=key(p);if(K[k]==null)return false;if(K[k]===rkOf(p)&&p.alive!==false&&!p.out)return true;delete K[k];return false}
 function seatSettle(){if(!S||S.dead||seatGuest())return"";let ev="";
  for(const r of [7,6,5,4,3]){const c=SEATCAP[r];if(c==null)continue;let H=holders(r),g=0;
-  while(H.length>c&&g++<12){const N=H.filter(p=>!seatMine(p));if(!N.length)break;
+  while(H.length>c&&g++<12){const N=H.filter(p=>!seatMine(p)&&!seatKept(p));if(!N.length)break;
    N.sort((a,b)=>(b.lastPromo||0)-(a.lastPromo||0)||seatPickW(a)-seatPickW(b));const p=N[0];
    const to=seatDown(p,r-1);seatPut(p,to);p.lastPromo=S.turn;window.__seatN.settle++;
    const t=`${p.name}: ghế ${r>=7?"Hoàng hậu":RANKS[r].n} đã đủ người, lui về ${RANKS[to].n}. `;try{log(t)}catch(e){}ev+=t;
@@ -57847,8 +57881,8 @@ function seatSettle(){if(!S||S.dead||seatGuest())return"";let ev="";
 /* outermost turn hook (this module loads last): the cap holds at the end of every turn, so at every month */
 (function(){const e0=endTurn;endTurn=function(){const r=e0.apply(this,arguments);try{if(S&&!S.dead)seatSettle()}catch(e){console.error("seatSettle",e)}return r}})();
 /* a loaded save (old saves already over the cap) and a new life (origin entry) are settled once */
-(function(){if(typeof normAll!=="function")return;const n0=normAll;normAll=function(){const r=n0.apply(this,arguments);try{if(S&&rivals)seatSettle()}catch(e){console.error("seatSettle load",e)}return r}})();
-(function(){const s0=start;start=function(){const r=s0.apply(this,arguments);try{if(S&&rivals)seatSettle()}catch(e){console.error("seatSettle start",e)}return r}})();
+(function(){if(typeof normAll!=="function")return;const n0=normAll;normAll=function(){const r=n0.apply(this,arguments);try{if(S&&rivals){seatKeepStamp();seatSettle()}}catch(e){console.error("seatSettle load",e)}return r}})();
+(function(){const s0=start;start=function(){const r=s0.apply(this,arguments);try{if(S&&rivals){seatKeepStamp();seatSettle()}}catch(e){console.error("seatSettle start",e)}return r}})();
 /* ================= jcoopone: ONE WORLD — the co-op guard table (review/coop-one-world) =================
    Owner co-op rule OD:L96 (one shared world, one truth) + one-core law OD:L1267; audit dev/handover/reports/coop-one-world.md.
    Every shared world fact is computed ONCE, on the host. worldOn() (jcoopworld.js) is false only on the co-op guest seat; there each world
@@ -58139,7 +58173,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="645cc9846ae1";window.CTM_BUILD=BUILD;
+const BUILD="a2ccaffdbfad";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

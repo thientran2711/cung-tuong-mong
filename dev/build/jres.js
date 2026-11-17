@@ -41,12 +41,14 @@ const RES_VAR={"canh-phuc-cung":"xuan-sang xuan-trua xuan-chieu xuan-toi ha-sang
 const RES_HAVE={};for(const s in RES_VAR)for(const v of RES_VAR[s].split(" "))if(v)RES_HAVE[s+"-"+v]=1;
 function resSeason(){try{return SCN_SEAS[SEASON[(S.month||1)-1]]||"xuan"}catch(e){return"xuan"}}
 function resTime(){try{const four=typeof BUOI!=="undefined"&&BUOI.length>=4;return(four?["sang","trua","chieu","toi"]:["sang","chieu","toi"])[S.buoi||0]||"sang"}catch(e){return"sang"}}
-function resPalIdx(k){if(k==null)return null;if(typeof k==="number")return k>=0&&k<8?k:null;
+function resPalIdx(k){if(k==null)return null;if(typeof k==="number")return k>=0&&k<(typeof PALN!=="undefined"?PALN.length:8)?k:null;
  if(k==="home")return S&&S.pal!=null?S.pal:null;
  if(typeof k==="string"&&k[0]==="r"&&/^r\d+$/.test(k)){const h=RV(+k.slice(1));return h&&h.pal!=null?h.pal:null}
  let i=RES_SLUG.indexOf(String(k).replace(/-cung$/,""));if(i>=0)return i;i=(typeof PALN!=="undefined"?PALN:[]).indexOf(k);return i>=0?i:null}
+/* the 5 west palaces jpal added (index 8–12) have no room paintings yet (ART REQUEST, Foreman C): a stand-in from the 8 painted ones, marked 'tạm' */
+function resTamPal(pal){const i=resPalIdx(pal);return i!=null&&i>=RES_SLUG.length}
 function resBase(pal,part){if(part==="cungnhan")return"cung-nhan";const i=resPalIdx(pal);if(i==null)return null;
- return RES_SLUG[i]+"-cung"+(part==="dong"?"-dong-phoi":part==="tay"?"-tay-phoi":"")}
+ return RES_SLUG[i%RES_SLUG.length]+"-cung"+(part==="dong"?"-dong-phoi":part==="tay"?"-tay-phoi":"")}
 function resPick(base,se,ti){if(!base)return null;se=se||resSeason();ti=ti||resTime();
  const near=(typeof SCN_NEAR!=="undefined"?SCN_NEAR:{})[ti]||[ti];
  for(const s of [se,"xuan"])for(const x of near.concat(ti==="toi"?[]:[])){if(RES_HAVE[`${base}-${s}-${x}`])return`${base}-${s}-${x}`}
@@ -55,9 +57,10 @@ function residenceArt(palaceKey,part,season,time){const n=resPick(resBase(palace
 /* who lives where, now */
 function resAlive(p){return !!p&&(p===S?!S.dead:p.alive!==false)}
 function resHeadOf(p){try{const h=byKey(houseOf(p));return h||null}catch(e){return null}}
-function resSidePart(p,h){/* co-residents of head h, stable order: the first two share Đông phối điện, the next ones Tây phối điện */
+function resSidePart(p,h){/* co-residents of head h: the hall palFix gave (p.resHall, BAL.res.halls, one room each); else stable order, BAL.res.side per hall */
+ const HL=BAL.res.halls;if(HL.includes(p.resHall))return p.resHall;
  const L=[S].concat(rivals||[]).filter(x=>x!==h&&resAlive(x)&&!(x!==S&&x.out)&&!x.queen&&rkOf(x)<PAL_HEAD&&resHeadOf(x)===h).sort((a,b)=>String(key(a)).localeCompare(String(key(b)),"en",{numeric:true}));
- const i=L.indexOf(p);return i<2?"dong":"tay"}
+ const i=Math.max(0,L.indexOf(p));return HL[Math.min(HL.length-1,Math.floor(i/BAL.res.side))]}
 function residenceOf(p){const R=(o)=>Object.assign({pal:null,head:null},o);if(!p||!S)return R({part:"ngocthanh"});
  if(p===S){if(S.out)return R({part:"lc"});if(typeof isSrv==="function"&&isSrv())return R({part:"cungnhan",pal:null});
   if(S.pal!=null&&rkOf(S)>=PAL_HEAD)return R({part:"chinh",pal:S.pal,head:S});
@@ -93,10 +96,11 @@ function resScene(r){if(!r)return null;if(r.part==="ngocthanh"||r.part==="kn"||r
     const h=RV(+S.place.slice(1));return h?residenceOf(h):null}}catch(e){}return null};
  function resApply(){try{const r=resStageRoom(),n=resScene(r);
    if(S.place==="home")SCIMG.home=n||HOME0;else if(S.place&&/^r\d+$/.test(S.place))SCIMG.rv=n||RV0;
-   S.__resName=r&&n?resRoomName(r):null}catch(e){}}
+   S.__resName=r&&n?resRoomName(r):null;S.__resTam=!!(r&&n&&r.part!=="cungnhan"&&resTamPal(r.pal))}catch(e){}}
  window.resApply=resApply;
  /* every painter of the room (DOM stage, PIXI stage, event art) reads SCIMG: set it first, every time */
- const r0=renderStage;renderStage=function(){resApply();return r0.apply(this,arguments)};
+ const r0=renderStage;renderStage=function(){resApply();const x=r0.apply(this,arguments);try{const st=$("stage");if(st){let t=document.getElementById("restam");
+   const on=!!(S&&S.__resTam&&(S.place==="home"||/^r\d+$/.test(S.place||"")));if(on&&!t){st.insertAdjacentHTML("beforeend",kitTam(true));t=st.lastElementChild;if(t)t.id="restam"}else if(!on&&t)t.remove()}}catch(e){}return x};
  if(typeof pxScene==="function"){const p0=pxScene;pxScene=function(){resApply();return p0.apply(this,arguments)}}
  if(typeof evArt==="function"){const e0=evArt;evArt=function(){resApply();return e0.apply(this,arguments)}}})();
 /* room label on the stage title follows the real room */
@@ -111,3 +115,12 @@ function resScene(r){if(!r)return null;if(r.part==="ngocthanh"||r.part==="kn"||r
 (function(){if(typeof homePeople!=="function")return;const h0=homePeople;homePeople=function(){const L=h0.apply(this,arguments);try{const me=residenceOf(S);
   if(me.part==="dong"||me.part==="tay"){const W=S.where||{};for(const v of rivals){if(!v.alive||v.out||v===S)continue;if(L.some(p=>p.ref===v))continue;
    if(resSame(residenceOf(v),me)&&W[v.id]===palaceOf(v))L.push(rp(v))}}}catch(e){}return L}})();
+
+/* ================= HER SIDE HALL (owner 17/11 04:08Z/04:20Z): below Tần the player lives in a chủ vị's Đông / Tây phối điện like any NPC =================
+   jpal palFix houses her (S.resHead, S.resHall). Her own room stays the place key "home" (stage = residenceOf(S): that phối điện);
+   her home's name is the room's name; on the Dư đồ her face stands in that chủ vị's palace (no separate Ngọc Thanh các spot while housed). */
+function resMeHoused(){try{if(!S||S.pal!=null||S.out||S.dead)return null;const r=residenceOf(S);return(r.part==="dong"||r.part==="tay")&&r.pal!=null&&r.head&&r.head!==S?r:null}catch(e){return null}}
+(function(){const n0=palName;palName=function(k){if(k==="home"){const r=resMeHoused();if(r)return resRoomName(r)}return n0.apply(this,arguments)}})();
+(function(){const r0=residents;residents=function(k){const L=r0.apply(this,arguments);try{const r=resMeHoused();if(r&&k!=="home"&&palaceOf(r.head)===k&&!L.includes(S)){L.push(S);L.sort((a,b)=>rkOf(b)-rkOf(a))}}catch(e){}return L}})();
+(function(){const m0=mapSpots;mapSpots=function(){const L=m0.apply(this,arguments);try{const r=resMeHoused();if(!r)return L;const hk=palaceOf(r.head);
+  const out=L.filter(x=>x.k!=="home");const sp=out.find(x=>x.k===hk);if(sp){if(!(sp.res||[]).includes(S))sp.res=(sp.res||[]).concat([S]);sp.fn=`${sp.fn} · ngươi ở ${RES_PART_N[r.part]}`}return out}catch(e){return L}}})();
