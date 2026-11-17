@@ -805,3 +805,22 @@ BAL.net.n.meetW={"Ân cần":1.6,"Nhiều chuyện":1.8,"Xu nịnh":1.4,"Nóng n
 /* the person-dialog chat options (j9 topicOpts, j2 Khiêu khích): ONE table read by her options AND by the same options an NPC uses on her (AG-MEET, jgreet:
    mirrored, she is the judge). Gains are × chatF (fewer each repeat). praise odds = od(o + the speaker's Tài / div); foe = oán a third must hold to warn. */
 BAL.talk={health:4,praise:{o:60,div:5},praiseFail:2,secret:10,secretBond:30,gossip:{hit:8,miss:3,oan:5,tell:50,tellOan:10},warn:{hit:10,miss:2,oan:10,foe:30},provoke:{rel:15,ghen:10,danh:1}};
+/* WORLD EVENTS (jworld, review/world-events; owner OD:L1587 rule 4 + OD 17/11 13:48Z): ONE core for every world window. Units: len/cd in
+   tuần (3 a month, 36 a year); p = chance in whole points (roll); place/act = multipliers on the place weights (day plan / placeWhere) and on
+   the jmind TAG weights (mindW) of every NPC while the window is open (0 = closed place); srvAct = the same for servants (maids, eunuchs).
+   maxOpen = windows open at once (Quốc tang always opens); hapB = buổi of the first tuần that show the Dư đồ "!" at the window's place;
+   pull = chance points per point of place multiplier above 1 that an NPC goes to the window's place (fallback until AG-ALL's day plan reads
+   worldPlanW: window.WORLD_PLAN_HOOKED). */
+BAL.world={on:1,maxOpen:2,hapB:2,pull:18,
+ tang:{len:{th:9,queen:9,heir:3},noNight:{th:3,queen:2,heir:1},mood:2,place:{tn:2.5,kn:2,vuon:0},act:{art:.3,social:.6,greet:1.6,harm:.7,scheme:.8},srvAct:{work:1.3},rite:{duc:2,th:3}},
+ away:{len:{te:1,san:2,tuan:4,chinh:5},fol:{te:0,san:2,tuan:3,chinh:0},folSung:3,stayDanh:-1,
+  te:{every:3,month:11},san:{month:9,p:50,bien:45,age:62},tuan:{month:3,p:20,kho:60,bien:55,gapY:5,age:65},chinh:{p:40,bien:35,age:58,gapY:3,win:[35,3,3],winBien:20,loseBien:-10},
+  place:{vuon:1.3,kn:1.3},act:{scheme:1.5,frame:1.4,harm:1.2,spy:1.3,greet:1.2},srvAct:{work:.8}},
+ tuyen:{every:3,n:[2,2],rankMax:1,age:[16,4],sungThin:2,newNight:1.5,newSung:10,welcomeAff:10,ambushRel:-10,cd:24,place:{kn:1.5,vuon:1.2},act:{harm:1.4,scheme:1.3,social:1.2,help:.9},giftBac:20,giftAff:12},
+ hoa:{spread:[12,3],nb:25,mood:2,len:2,cd:72,helpBac:20,helpAff:15,helpDuc:2,place:{nvp:1.5},act:{help:1.4,frame:1.3},srvAct:{work:1.6}},
+ dis:{kho:35,len:3,cd:18,payCut:.2,give:30,giveDanh:3,giveTh:3,stingyBac:200,stingyDanh:-2,thrift:{duc:1},mood:2,place:{vuon:.5,cnh:1.6},act:{help:1.5,bribe:1.3,art:.6,social:.8}},
+ dich:{kho:30,p:35,after:6,len:3,cd:72,ill:"kietly",catch:6,safeMul:.4,safeBac:15,place:{vuon:.3,tyv:2.5},act:{social:.4,help:1.3,flee:1.8,greet:.7},srvAct:{work:1.3}},
+ su:{bien:60,len:1,cd:36,rank:3,mood:0,show:[30,2],showSung:4,showDanh:2,failDanh:-2,place:{thu:2},act:{court:1.5,art:1.4,social:1.3}},
+ tho:{emp:[40,10],th:[60,10],len:1,kho:6,mood:0,big:60,mid:20,sungBig:5,sungMid:2,thBig:5,make:[35,2],makeSuc:10,npcGift:.15,npcSung:[1,4],place:{thu:2,tn:1.5},act:{art:1.5,social:1.3,greet:1.3}},
+ sao:{p:1.2,len:1,cd:36,mood:2,place:{cnh:1.8},act:{greet:1.4,scheme:1.3,art:.6}},
+ xa:{minM:3,npcP:60,kho:5,len:1,cd:36,afterDis:50,act:{help:1.3,harm:.6}}};
