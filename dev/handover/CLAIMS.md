@@ -951,3 +951,4 @@
 | ART hoa-dien-art #2 (opus; successor of R5e4: fig/hd/tn twins, W2c/W12 keys, HD_ANCHOR; POR stays with R5e4) | handover reports/hoa-dien-art.md | C ROOT-10 | session_011xDdVNfSx9r7wqg7ooEXKn | RUNNING | 17/11 21:15Z |
 | REVIEW coop-thin-c reviewer #2 (successor of 4NkEVbfk at f65b5b6c; opus BIG; brief briefs/review-coop-thin-c-2.md) | review/coop-thin-c-r1 | B | session_01N1tNP6cMqcMNhStqaraUuW | RUNNING | 17/11 21:22Z |
 | dudo-blank review r1 (sonnet SMALL) of f59c965a | review/dudo-blank-r1 | D | session_01964izF1pwkGy4nxwo8Q4iK | RUNNING | 17/11 21:20Z |
+| batch s37a LIVE 99f3978d (main 4c8568f5 → 99f3978d; ROLLBACK 4c8568f5): display-shelf-r3rv 41418cd8 (5 per group, ui=0) | review/batch-s37a | MAIN s37 | session_01UV1SzjA6P5mZskv3JKn3BV | LIVE | 17/11 21:27Z |
