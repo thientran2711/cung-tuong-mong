@@ -8,3 +8,6 @@ PASS: kit parts only (no private frame), badge count = tinBaoNew (data-n), blink
 3. Minor: place is printed twice in a row ("Ngự hoa viên: Bẩm chủ tử, Ngự hoa viên đang có chuyện") when the line already names the place; show the place once (header or prefix).
 4. Minor (iPad 1180x820): the count tag "4" touches the "Buổi sáng" text of the bar; give it 2-4 px more air or take the next free spot.
 Shots (scratch, Fold 755x1000@2 + iPad 1180x820@2, direct mode; host mode stuck on the first-run download card in this sandbox) looked at; worker CDN folder wiped with this verdict.
+
+# r2 re-review — PASS 05e82176 (review/tinbao-ui-r2r = worker r2 a0327a6b rebased on NEWEST ag-all-2 72263137; ag-all-2 had grown, built files regenerated)
+Items 1-4 fixed and LOOKED at (Fold + iPad): informer name+role per row (kitName), big figure = the informer (Cung nữ Lạc Mai), place printed once, count tag moved to the left, clear of "Buổi sáng". tinbao-ui.test 19/19, quickcheck PASS (perf render 242/203, tab 331/317, buổi 1135/1122, tasks>200ms 14/14, old save ok). one-core-guard PASS (fails 0). QUICKCHECK G1 one-core-text FAIL is inherited from ag-all-2 head (sites in j2/j9/j10/j42/jpromsv/jagknow "chứng cứ +1"; none in jtinbao): judge in ag-all-2 review. Worker CDN shots wiped.
