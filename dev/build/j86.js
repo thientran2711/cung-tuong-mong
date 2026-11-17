@@ -10,7 +10,7 @@
 function fpOn(){if(typeof faceOn==="function"){try{return !!(NLP&&faceOn())}catch(e){}}try{return !!(NLP&&S&&S.pid&&typeof FIGIX!=="undefined"&&FIGIX.consort&&FIGIX.consort[S.pid])}catch(e){return false}}
 function fpKeys(){const M=FIGIX.consort||{};return pidKeys().filter(k=>M[k]&&M[k].length)}
 /* the portrait she would wear with identity k right now (her rank tier or tier 1 as a maid, her age band) */
-function fpPor(k){const L=(FIGIX.consort||{})[k];if(!L||!L.length)return"";const f=figBest(L,figTierOf(S),figAgeOf(S));return f&&f.por?figPath(f.por):""}
+function fpPor(k){const L=(FIGIX.consort||{})[k];if(!L||!L.length)return"";const f=figBestRank(L,figTierOf(S),figAgeOf(S));return f&&f.por?figPath(f.por):""}
 function fpFace(k){const f=Object.assign({},pMe());f.src=fpPor(k);f.rw="";return f}
 function fpNum(k){return +String(k).replace(/\D/g,"")||0}
 /* the picker = the kit PORTRAIT PICKER (j79 kitPicker); the 84-face pool (facePool(filter), review/face-84) when present, else the 32 consort faces */
@@ -19,7 +19,7 @@ const FP88=()=>typeof facePool==="function"&&typeof faceChoose==="function";
 /* owner 16/11 s23 (face picker, NO tabs): the game picks the face set from her identity, never she: a cung nữ life (isSrv / origin cnv) sees the 52 maid faces only, every phi tần life the whole 84 (32 consort + 52 maid, all have consort dress art) */
 /* review/newgame-ui (owner 15/11 "quá lag"): the item list is built ONCE per (pool, her tier, age, dress, roll) — facePool walked all 84
    identities twice (por + fig) on every pick and every tab (≈ 0.3–1.8 s on a tablet); the cells show the small pre-sized copy (kitTn) */
-const FP_C={};
+const FP_C={};lifeStore("FP_C face-picker items (hold her person copy)",()=>{for(const k in FP_C)delete FP_C[k]});
 function fpKey(){const f=kitFaceScope();let t="",a="",v="";try{t=figTierOf(S);a=figAgeOf(S);v=(typeof isSrv==="function"&&isSrv())?"s":"c"}catch(e){}return [f,t,a,v,(NLP&&NLP.seed)||""].join("|")}
 function fpItems(){const key=fpKey();if(FP_C[key])return FP_C[key];let L=null;
  try{if(FP88()){L=(facePool(kitFaceScope())||[]).map(x=>{const f=Object.assign({},pMe());f.src=(typeof kitTn==="function"&&kitTn(x.por))||x.por||"";f.rw="";f.big=x.por||"";return{k:x.id,face:f,label:`${x.src==="maid"?"Dung mạo cung nữ":"Dung mạo"} ${x.n}`,fig:x.fig||""}})}}catch(e){L=null}
