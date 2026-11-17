@@ -3,7 +3,7 @@ Repo: /home/user/cung-tuong-mong (cwd for scripts: /home/user/cung-tuong-mong/de
 Folder for ALL Magnific calls: folderReference ba4aecfe-efce-47e2-b53f-30d292091886. Face refs (identifiers): N2HYqYa6D9 bxVgMSX5Y2 dtPf4EDXSL eIyaPEVdqL.
 You get a LIST of lines "idx key" (idx = gesture index; key e.g. consort-c02-ty3-a18). Work in batches of 8 files (lead's CONTEXT DIET: 8 images_generate calls in ONE message; if throttled drop to 6). Per batch:
 1. For each key: creations_upload_image url=https://ctm-img.victoria-tntt.workers.dev/img/fig-<key>.webp fileName=fig-<key>.webp folderReference=... -> old-ref id. (all uploads in parallel in one message.)
-2. Prompt = output of `python3 P/prompt.py <idx> <age>` where age = a18/a26/a36/a51 from the key suffix. Paste it verbatim as the prompt.
+2. Prompt = output of `python3 P/prompt.py <idx> <age>` (add a third arg `rich` for keys with -ty2- or -ty3-: python3 P/prompt.py <idx> <age> rich) where age = a18/a26/a36/a51 from the key suffix. Paste it verbatim as the prompt.
 3. images_generate: mode gpt-2-6, width 1024, height 2048, resolution 2k (OWNER 17/11: 2k only, NEVER 4k), folderReference, extraSettings {"transparentBackground": true} (MANDATORY), references (type image):
    - age a18: [oldref, N2HYqYa6D9, bxVgMSX5Y2, dtPf4EDXSL, eIyaPEVdqL]
    - age a26/a36/a51: [oldref(that age), NEW a18 output id of the same look (look up key with a18 in P/progress/ids.tsv: same cNN-tyN), the four faces]
