@@ -32,8 +32,8 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
  const tot=Object.values(r.byG.consort||{}).reduce((a,b)=>a+b,0);ok(tot>0,'consorts choose deeds from their act list',tot);
  /* 3 every chosen key = a player button of that group */
  const r3=await p.evaluate((byG)=>{const P=new Set(Object.keys(TW).concat(["effort"]));for(const k in AGCX)P.add("cx:"+k);["cx:study","cx:thHelp","cx:hhShield","cx:buy","cx:gift","cx:ally"].forEach(k=>P.add(k));
-  for(const k in AGHH)P.add("hh:"+k);const TH=new Set(["th:gift","th:admon","th:release"]);/* Thái hậu is never the player: her acts mirror the Empress's Ban thưởng / Khuyên / Ân xá */
-  const bad=[];for(const g in byG)for(const k in byG[g]){if(g==="th"?!TH.has(k):!(P.has(k)||/^(c|harm|maid|srv):/.test(k)))bad.push(g+":"+k)}return bad},r.byG);
+  for(const k in AGHH)P.add("hh:"+k);const TH=new Set(["th:gift","th:admon","th:release"]);const EMP=new Set(["emp:summon"]);/* the Emperor is never the player: his summons mirrors her Xin hầu cờ / đánh đàn (jgift kmEmpAct) *//* Thái hậu is never the player: her acts mirror the Empress's Ban thưởng / Khuyên / Ân xá */
+  const bad=[];for(const g in byG)for(const k in byG[g]){if(g==="emp"?!EMP.has(k):g==="th"?!TH.has(k):!(P.has(k)||/^(c|harm|maid|srv):/.test(k)))bad.push(g+":"+k)}return bad},r.byG);
  ok(r3.length===0,'no NPC-only hidden act: every chosen deed is a button of the player of that group',r3);
  /* 4 */
  const r4=await p.evaluate(()=>{const v=liveRivals(true).find(x=>!x.out);vNorm(v);const sum=()=>Object.values(v.artp||{}).reduce((a,b)=>a+b,0)+Object.values(v.vir||{}).reduce((a,b)=>a+b,0);
