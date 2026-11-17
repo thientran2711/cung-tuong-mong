@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"babc9b4a","t":"2026-11-17T01:39Z","c":"Chơi chung không còn treo máy vì tên bạn lặp chữ; số bóng người trên dư đồ khớp đúng người đang ở đó; việc có hạn giờ hiện đồng hồ ngay dướ…","b":"dc467b22ef69","h":[{"s":"92685210+","t":"2026-11-17T00:53Z","c":"Khung việc và khung sự kiện bốn cỡ, tranh lấp đầy khung, việc nhắc tên ai hiện chân dung người ấy; phẩm của món đồ nằm ngay trên viền khung…"},{"s":"6f513340","t":"2026-11-16T23:24Z","c":"Vào game mới không còn bật ngay màn lật thẻ, lật thẻ chỉ khi vào buổi tối; dư đồ nhãn giấy mới; việc dài lấn sang buổi sau; lời trong cung …"},{"s":"7a18d957","t":"2026-11-16T22:44Z","c":"review-diemtrang-fx-r1 report"},{"s":"afe2bcbc","t":"2026-11-16T22:25Z","c":"review r1: KIT 84.1a note + report"},{"s":"dea1d445+","t":"2026-11-16T21:32Z","c":"golive lag-play-2: CHANGE line + site rebuilt"},{"s":"674f3af4","t":"2026-11-16T21:21Z","c":"Chơi cùng bạn: bạn chơi chung chưa gặp mặt nay hiện tên gọi chung “Hảo hữu của ta” ở mọi nơi, không còn ẩn thành dấu hỏi."},{"s":"923567d5+","t":"2026-11-16T21:03Z","c":"Hình nhân vật: hết vệt xám ở cổ và viền tối quanh người."},{"s":"59812a63+","t":"2026-11-16T20:41Z","c":"Khung chung: khoảng cách đều nhau ở sổ tuần và thẻ thân phận; hàng sổ gọn, thẻ lật không đè chữ."},{"s":"ab12d6fc","t":"2026-11-16T20:53Z","c":"Tuyết và đom đóm mới, mượt hơn; nền tranh không còn vẽ lại mỗi khung hình."},{"s":"8adfd886+","t":"2026-11-16T20:33Z","c":"Tư trang: các trang đều nhau, ô đồ đeo gọn trên Fold và iPad."}]};
+window.CTM_BI={"s":"b37865b7","t":"2026-11-17T03:40Z","c":"j15 her card: WAGE (removed by main's one-core move to BAL.wage) -> BAL.wage; selfCardHTML threw ReferenceError on live main (found by suc-…","b":"c8aba66cd652","h":[{"s":"babc9b4a","t":"2026-11-17T01:39Z","c":"Chơi chung không còn treo máy vì tên bạn lặp chữ; số bóng người trên dư đồ khớp đúng người đang ở đó; việc có hạn giờ hiện đồng hồ ngay dướ…"},{"s":"92685210+","t":"2026-11-17T00:53Z","c":"Khung việc và khung sự kiện bốn cỡ, tranh lấp đầy khung, việc nhắc tên ai hiện chân dung người ấy; phẩm của món đồ nằm ngay trên viền khung…"},{"s":"6f513340","t":"2026-11-16T23:24Z","c":"Vào game mới không còn bật ngay màn lật thẻ, lật thẻ chỉ khi vào buổi tối; dư đồ nhãn giấy mới; việc dài lấn sang buổi sau; lời trong cung …"},{"s":"7a18d957","t":"2026-11-16T22:44Z","c":"review-diemtrang-fx-r1 report"},{"s":"afe2bcbc","t":"2026-11-16T22:25Z","c":"review r1: KIT 84.1a note + report"},{"s":"dea1d445+","t":"2026-11-16T21:32Z","c":"golive lag-play-2: CHANGE line + site rebuilt"},{"s":"674f3af4","t":"2026-11-16T21:21Z","c":"Chơi cùng bạn: bạn chơi chung chưa gặp mặt nay hiện tên gọi chung “Hảo hữu của ta” ở mọi nơi, không còn ẩn thành dấu hỏi."},{"s":"923567d5+","t":"2026-11-16T21:03Z","c":"Hình nhân vật: hết vệt xám ở cổ và viền tối quanh người."},{"s":"59812a63+","t":"2026-11-16T20:41Z","c":"Khung chung: khoảng cách đều nhau ở sổ tuần và thẻ thân phận; hàng sổ gọn, thẻ lật không đè chữ."},{"s":"ab12d6fc","t":"2026-11-16T20:53Z","c":"Tuyết và đom đóm mới, mượt hơn; nền tranh không còn vẽ lại mỗi khung hình."}]};
 /* KBOOT — BOOT COVER (owner 15/11 "Khi vừa bấm vào game, có chừng ít hơn 1 giây hiện khung này"; KIT §14.1).
    Before: while the 4 MB page parsed, the browser painted the bare static markup of p1.html (HUD box, a vertical stat label list, empty
    panels, the old 11-tab bar) for ~1 s on a warm open and many seconds on a cold one, before any kit CSS/JS existed.
@@ -882,7 +882,7 @@ function apply(o){const pops=[];
   for(const k in o){let v=o[k];if(!v)continue;
     if(k==="maid"){S.maid.loyal=cl(S.maid.loyal+v,0,100);pops.push([k,v]);continue}
     if(k==="sung")v=sg(v);S[k]=(S[k]||0)+v;if(NAMES[k])pops.push([k,v])}
-  for(const k of ["sung","danh","suc","sac","tai","tamco","duc"])S[k]=cl(S[k],0,100);
+  for(const k of ["sung","danh","suc","sac","tai","tamco","duc"])S[k]=cl(S[k],0,100);S.suc=Math.min(S.suc,sucCap(S));
   S.th=cl(S.th,-100,100);S.hh=cl(S.hh,-100,100);S.bac=Math.max(0,S.bac);S.mat=cl(S.mat,0,10);
   if(!quiet)pops.forEach(([k,v],i)=>popNum(k,v,i))}
 function popNum(k,v,i){if(typeof kitStatFx==="function")return kitStatFx([{k,dv:v}],{src:"apply"});/* fallback before jstatfx is loaded */
@@ -1239,7 +1239,7 @@ function makeDil(){const pool=liveRivals(false),L=[];
 function endTurn(){
   if(S.dead||Q.length||S.mg)return;S.buoi=0;const qStart=Q.length;let ev=resolveTonight();const lsB=typeof lsSnap==="function"?lsSnap():null;
   S.sung=cl(S.sung-((has("lanhlung")&&S.tuan===1)||(S.rank>=7&&S.tuan!==0)?0:1),0,100);
-  const rg=harsh()?1:4;S.suc=cl(S.suc+rg,0,100);if(worldOn())liveRivals(true).forEach(v=>v.suc=cl(v.suc+rg,0,100));if(S.tablet)S.tablet--;if(worldOn())liveRivals(true).forEach(v=>{if(v.tablet)v.tablet--});/* NPC ticks: host only (worldOn, jcoopworld) */
+  const rg=harsh()?1:4;S.suc=cl(S.suc+rg,0,sucCap(S));if(worldOn())liveRivals(true).forEach(v=>v.suc=cl(v.suc+rg,0,sucCap(v)));if(S.tablet)S.tablet--;if(worldOn())liveRivals(true).forEach(v=>{if(v.tablet)v.tablet--});/* NPC ticks: host only (worldOn, jcoopworld) */
   if(lsB)lsNote(lsB,{sung:"ân sủng nhạt dần",suc:"nghỉ ngơi qua tuần"},true)/* Sức: dropped again when folded into j76 "Ngủ một đêm: Sức +N", which already counts this +4 */;
   ev+=rivalsTurn();if(S.dead)return;
   if(S.suc<=0)return die("Bệnh nặng, không qua khỏi");
@@ -1695,7 +1695,7 @@ function queenP(){return S.rank>=7?S:(qOn()?rivals[0]:null)}
 function malOf(p){return p===S?Math.max(0,70-S.duc):p.malice}
 function wk(){return S.turn*3+S.tuan}
 function ap(p,o){if(p===S)return apply(o);for(const k in o){const v=o[k];if(!v)continue;if(k==="maid"){p.maid.loyal=cl(p.maid.loyal+v,0,100);continue}p[k]=(p[k]||0)+v}
- for(const k of ["sung","danh","suc","sac","tai","tamco","duc","ghen","an"])if(p[k]!=null)p[k]=cl(p[k],0,100);p.th=cl(p.th||0,-100,100);p.hh=cl(p.hh||0,-100,100);p.bac=Math.max(0,p.bac||0);p.mat=cl(p.mat||0,0,10)}
+ for(const k of ["sung","danh","suc","sac","tai","tamco","duc","ghen","an"])if(p[k]!=null)p[k]=cl(p[k],0,100);if(p.suc!=null)p.suc=Math.min(p.suc,sucCap(p));p.th=cl(p.th||0,-100,100);p.hh=cl(p.hh||0,-100,100);p.bac=Math.max(0,p.bac||0);p.mat=cl(p.mat||0,0,10)}
 function dieIf(p,why){if(p!==S&&p.alive&&p.suc<=0){p.alive=false;if(p.queen)p.queen=false;return `<span class="r">${p.name} ${why}.</span> `}return""}
 /* a rival's full stat block: the same fields the player's formulas read */
 function rstats(v,rank){rank=rank==null?(v.queen?7:v.rank):rank;
@@ -2000,8 +2000,8 @@ function pregMonthP(p){if(!p.preg)return"";p.preg++;const me=p===S;
   if(p.preg>=10){p.preg=0;p.fake=0;if(roll(odA(p,30+p.tamco/2+p.mat*4)))return (me?"Đêm “lâm bồn”, bà đỡ lén đưa vào một hài nhi từ ngoài cung. ":"")+birthP(p,true);if(me){deathSentence("Tráo con bị bắt quả tang, tội khi quân");return""}deathSentence(p,"Tráo con bị bắt quả tang, tội khi quân");return""}
   return""}
  let ev="";if(p.preg===4&&p.hidden){p.hidden=false;if(me)ghenAll(BAL.ghen.preg);ev+=me?"Bụng đã lộ, cả cung biết ngươi có thai. ":`${p.name} có thai đã lộ. `}
- if(p.preg<10){let risk=(p.preg<=3||p.preg>=7?6:2)*(typeof BAL==="object"&&BAL.mort&&BAL.mort.on?BAL.mort.birth.misX:1)+(p.suc<30?8:0);if(p.anthai)risk/=2;
-  if(roll(risk)){p.preg=0;p.hidden=false;ap(p,{suc:-20});p.misN=(p.misN||0)+1;ev+=me?`<span class="r">Ngươi động thai, sảy mất đứa bé.</span> Sức -20. `:`${p.name} động thai, sảy mất đứa bé. `}return ev}
+ if(p.preg<10){let risk=(p.preg<=3||p.preg>=7?6:2)*(typeof BAL==="object"&&BAL.mort&&BAL.mort.on?BAL.mort.birth.misX:1)+(p.suc<BAL.pgRisk.lowSucAt?BAL.pgRisk.lowSuc:0);if(p.anthai)risk/=2;
+  if(roll(risk)){p.preg=0;p.hidden=false;ap(p,{suc:-BAL.pgRisk.misSuc});p.misN=(p.misN||0)+1;ev+=me?`<span class="r">Ngươi động thai, sảy mất đứa bé.</span> Sức -${BAL.pgRisk.misSuc}. `:`${p.name} động thai, sảy mất đứa bé. `}return ev}
  p.preg=0;p.hidden=false;return ev+birthP(p,false)}
 /* childbirth risk: 1 base, +3 if Sức<40, +0.5 per year over 30; physician -2, Y thuật 2+ -1.5, an thai -1; floor 0.5 */
 function birthRisk(p){return cl(1+(p.suc<40?3:0)+Math.max(0,(p.age||20)-30)*.5-(p.doctor?2:0)-(p.arts&&p.arts.y>=2?1.5:0)-(p.anthai?1:0),.5,60)}
@@ -2620,9 +2620,11 @@ function cardH(a,i){const poor=a.c&&a.c.bac&&S.bac+a.c.bac<0,o=a.o==null?100:a.o
 function render(){if(!S)return;renderHUD();renderStage();renderPanel();$("next").disabled=S.dead||Q.length>0||!!S.mg;$("next").textContent=(S.buoi||0)>=B4L?"Sang ngày mới":"Sang buổi";if(!S.dead&&!Q.length&&!S.mg&&used>=BAL.time.khac&&!advLock){advLock=true;setTimeout(()=>{advLock=false;if(used>=BAL.time.khac&&!Q.length&&!S.dead)nextBuoi()},350)}
  document.querySelectorAll("#tabs button").forEach(b=>b.setAttribute("aria-selected",b.dataset.tab===tab));
  if(Q.length&&$("modal").hidden)showModal();save()}
+/* the text a HUD cell shows for a value (one hook for every writer of the cell: renderHUD, hudTween j11, k3Hud jk3); jkh makes Sức read "N/M" */
+function hudFmt(k,v){return v}
 function renderHUD(){if(typeof renderHud2==="function")renderHud2();$("me-n").textContent=S.name;$("me-r").innerHTML=ic(RIMG[S.rank],14)+rkName(S);$("me-d").textContent=`T${S.month}/${S.year} · ${TUAN[S.tuan]} · ${BUOI[S.buoi||0]} · ${S.wx?S.wx.n:""} ${"●".repeat(Math.max(0,BAL.time.khac-used))}${"○".repeat(Math.min(BAL.time.khac,used))}`;
  $("me-p").innerHTML=mdH(pMe(),"sm");
- for(const k of ["bac","suc","sung","danh"]){const e=$("hud-"+k);e.querySelector("span").textContent=S[k];const u=e.querySelector("u");if(u)u.style.width=S[k]+"%"}
+ for(const k of ["bac","suc","sung","danh"]){const e=$("hud-"+k);e.querySelector("span").textContent=hudFmt(k,S[k]);const u=e.querySelector("u");if(u)u.style.width=S[k]+"%"}
  $("emp-p").innerHTML=mdH(pEmp(),"sm");$("emp-n").textContent=S.emp.era;const m=MOODS[S.emp.mood];$("emp-m").innerHTML=`<span class="${m[1]}">${m[0]}</span>`}
 function renderStage(){const P=placeOf(S.place);$("stage").className="stage sc-"+P.sc;$("scimg").style.backgroundImage=SCIMG[P.sc]?`url(https://ctm-img.victoria-tntt.workers.dev/img/${SCIMG[P.sc]}.webp)`:"none";const ppl=curPeople();
  {const raw=S.visit&&S.visit.msg?S.visit.msg:P.d;const btns=(raw.match(/<button[\s\S]*?<\/button>/g)||[]).join("");const txt=raw.replace(/<button[\s\S]*?<\/button>/g,"").replace(/<[^>]+>/g,"");$("sc-t").innerHTML=`<h2><span class="rt1">${P.n}</span><span class="rmsg" title="${txt.replace(/"/g,"")}"> · ${txt}</span></h2>${btns}`}
@@ -2786,8 +2788,8 @@ document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest
 function inkWipe(){if(!OPT.fxon||RM)return;fxOver("inkwipe")}
 function nightFade(){if(!OPT.fxon||RM)return;fxOver("nightf")}
 /* HUD numbers count smoothly */
-const HV={};function hudTween(){for(const k of ["bac","suc","sung","danh"]){const e=$("hud-"+k);if(!e)continue;const sp=e.querySelector("span"),to=S[k];const fr=HV[k]==null?to:HV[k];HV[k]=to;if(fr===to||RM){sp.textContent=to;continue}
- const t0=performance.now();const st=()=>{const f=Math.min(1,(performance.now()-t0)/500);sp.textContent=Math.round(fr+(to-fr)*f);if(f<1)requestAnimationFrame(st)};requestAnimationFrame(st)}}
+const HV={};function hudTween(){for(const k of ["bac","suc","sung","danh"]){const e=$("hud-"+k);if(!e)continue;const sp=e.querySelector("span"),to=S[k];const fr=HV[k]==null?to:HV[k];HV[k]=to;if(fr===to||RM){sp.textContent=hudFmt(k,to);continue}
+ const t0=performance.now();const st=()=>{const f=Math.min(1,(performance.now()-t0)/500);sp.textContent=hudFmt(k,Math.round(fr+(to-fr)*f));if(f<1)requestAnimationFrame(st)};requestAnimationFrame(st)}}
 /* tokens: slide in only for people who just arrived */
 let tokPrev=new Set();function tokAnim(){const now=new Set();document.querySelectorAll("#tokens .tok").forEach(b=>{const n=b.textContent;now.add(n);b.classList.add("bob");if(!tokPrev.has(n)&&!RM)b.classList.add("enter")});tokPrev=now}
 /* ---- PixiJS scene layer behind the people; falls back to the static image ---- */
@@ -3082,7 +3084,7 @@ function popCard(p,i){const opts=talkOpts(p),done=S.visit&&(S.visit.talked===tru
 function empCardHTML(){const E=S.emp;return pcard({f:pEmp(),col:"#f0d070",name:empName(),rank:"Hoàng thượng",lines:[tuoi(E.age),`Tâm trạng: <b>${MOODS[E.mood][0]}</b>`,`Ngài sủng ngươi <b>${S.sung}</b> · Ân tình <b>${S.an||0}</b>`],
  note:E.traits.map(t=>`<b>${ETRAITS[t][0]}</b>: ${ETRAITS[t][1]}`).join("<br>"),groups:[["Điều ngài thích",Object.keys(LIKES).map(k=>[LIKEN[k],E.known[k]?E.likes[k]:"chưa rõ",E.known[k]?"t":"n"])]],empty:""})+`<p class="past">Nói thật lòng với ngài, hoặc hỏi Kính sự phòng, để biết ngài thích gì.</p>`}
 function selfCardHTML(){const ch=[["Sắc",S.sac],["Tài",S.tai],["Tâm cơ",S.tamco],["Đức",S.duc],["Tai mắt",S.mat],["Thái hậu",S.th],["Hoàng hậu",S.hh]];
- return pcard({f:pMe(),col:RCOL[S.rank],name:S.name,rank:`${ic(RIMG[S.rank],16)}${S.rank>=7?"Hoàng hậu":RANKS[S.rank].n}`,lines:[`${S.origin.n}`,ageLine(S),`Bổng lộc: <b>${S.out?BAL.payCold:BAL.pay[Math.min(7,S.rank)]}</b> bạc/tháng · công kẻ hầu -${(S.staff||[]).length*WAGE}`,`Cung nữ ${S.maid.name} · lòng <b>${S.maid.loyal}</b>`],chips:[illOf(S)?chip(illName(S),"hot"):"",S.preg?chip(`${ic("thai",14)}Mang thai tháng ${S.preg}`,"hot"):"",facOf(S)?chip(`Phe ${facOf(S).name}`):""],
+ return pcard({f:pMe(),col:RCOL[S.rank],name:S.name,rank:`${ic(RIMG[S.rank],16)}${S.rank>=7?"Hoàng hậu":RANKS[S.rank].n}`,lines:[`${S.origin.n}`,ageLine(S),`Bổng lộc: <b>${S.out?BAL.payCold:BAL.pay[Math.min(7,S.rank)]}</b> bạc/tháng · công kẻ hầu -${(S.staff||[]).length*BAL.wage}`,`Cung nữ ${S.maid.name} · lòng <b>${S.maid.loyal}</b>`],chips:[illOf(S)?chip(illName(S),"hot"):"",S.preg?chip(`${ic("thai",14)}Mang thai tháng ${S.preg}`,"hot"):"",facOf(S)?chip(`Phe ${facOf(S).name}`):""],
  groups:[["Tư chất",ch.map(([a,b])=>[a,b,"t"])],["Tài nghệ",ARTS.map(a=>[`${ic(AIMG[a.k],14)}${a.n}`,S.arts[a.k],"t"])]].concat(typeof kcuHonorRows==="function"&&kcuHonorRows(1).length?[["Danh hiệu thi tài",kcuHonorRows(5)]]:[])})}
 /* ================= EXPORT / IMPORT A SAVE AS A TEXT CODE (title screen = settings) ================= */
 let XIO={m:"",slot:0,code:"",msg:"",imp:null,to:0,ask:0};
@@ -3478,7 +3480,7 @@ function tryst(m,risk){if(roll(risk)){affairExposed(m,`Đêm ${S.name} hẹn ${m
  return r}
 /* pregnancy that the book cannot cover: her roads, each with its odds and cost */
 (function(){const d0=deal;deal=function(){d0.apply(this,arguments);if(!S||!S.preg||!S.pregMismatch||S.out)return;
- deck.unshift({n:"Hối lộ Kính sự phòng sửa sổ",t:"Nhờ Tổng quản ghi thêm một đêm thị tẩm cho khớp ngày.",c:{bac:-80},o:od(55+((S.court&&S.court.ksp&&S.court.ksp.af.me)||0)/2),w:{},l:{danh:-5},x:"sổ khớp ngày, hết bị nghi · hỏng: Tổng quản biết chuyện của ngươi",dom:"Mưu kế",go:()=>{S.pregMismatch=false},fail:()=>{S.ksKnows=1}});
+ deck.unshift({n:"Hối lộ Kính sự phòng sửa sổ",t:"Nhờ Tổng quản ghi thêm một đêm thị tẩm cho khớp ngày.",c:{bac:-80},o:od(55+((S.court&&S.court.ksp&&S.court.ksp.af.me)||0)/2),w:{},l:{danh:-5},x:"sổ khớp ngày, hết bị nghi · hỏng: Tổng quản biết chuyện của ngươi",dom:"Mưu kế",go:()=>{S.pregMismatch=false;S.khBook=1},fail:()=>{S.ksKnows=1}});
  deck.unshift({n:"Uống thuốc phá thai",t:"Bài thuốc mạnh, hại thân.",c:{bac:-30},o:od(70+S.arts.y*5),w:{},l:{suc:-30},x:`mất đứa bé, Sức -20; hỏng: băng huyết, Sức -30 · kèm khi hỏng: băng huyết mà chết: ${chanceW(25)}`,dom:"Sức khỏe",go:()=>{S.preg=0;S.hidden=false;S.pregMismatch=false;S.trueFather=null;apply({suc:-20})},fail:()=>{S.preg=0;S.hidden=false;S.pregMismatch=false;S.trueFather=null;if(roll(25))die("Uống thuốc phá thai, băng huyết mà chết")}});
  deck.unshift({n:"Thú tội với Hoàng thượng",t:"Quỳ trước Dưỡng Hòa điện, nhận hết tội.",c:{},o:100,w:{},x:"giữ được mạng (vào lãnh cung), hắn bị xử trảm",dom:"Sủng",go:()=>{const m=manById(S.trueFather);if(m){m.alive=false;log(`${m.name} bị xử trảm.`)}S.pregMismatch=false;cold("Thú tội tư thông")}})}})();
 /* each month: the book may be checked; rivals carry on affairs too and can be found out */
@@ -3503,7 +3505,7 @@ function manCard(m){const f=pMan(m);const known=m.seen===bkey();
 /* two-way: a consort with a lover may conceive by him; the Kính sự phòng book can expose her the same way it exposes the player */
 (function(){const a0=affairMonth;affairMonth=function(){let ev=a0.apply(this,arguments);try{if(!S||S.dead)return ev;
  for(const v of liveRivals(false)){const m=v.affair&&manById(v.affair);
-  if(m&&!v.preg&&!(v.lastBirth!=null&&S.turn-v.lastBirth<6)&&roll(trystCh(v))){v.preg=1;v.hidden=true;v.pregWk=wk();v.trueFather=m.id;v.pregMismatch=!(v.nightLog||[]).some(w=>Math.abs(w-wk())<=1)&&roll(70)}
+  if(m&&!v.preg&&!khOcu(v)&&roll(trystCh(v))){v.preg=1;v.hidden=true;v.pregWk=wk();v.trueFather=m.id;v.pregMismatch=!(v.nightLog||[]).some(w=>Math.abs(w-wk())<=1)&&roll(70)}
   if(v.preg&&v.pregMismatch){const foes=others(v).filter(x=>x!==S&&x.alive&&rel(x,v)<-20);if(foes.length&&roll(10)){const x=pick(foes);evA(x,v,3)}
    if(roll(8+(S.mat||0)*5)){/*evok: pregMismatch (deedSync)*/evA(S,v,2);v.pregMismatch=false;noteAdd(v.id,`Tai mắt: ngày ${v.name} có thai không khớp đêm thị tẩm nào trong sổ Kính sự phòng (chứng cứ +2)`);ev+=`Tai mắt báo: ngày ${v.name} có thai không khớp sổ Kính sự phòng. `}}
   if(!v.preg){v.pregMismatch=false;v.trueFather=null}}}catch(e){}return ev}})();
@@ -3520,7 +3522,7 @@ const ARTMS={
  y:["Sắc +2","Nhận ra độc, xạ hương trong đồ","Bệnh tật nhẹ hơn; Sức hồi tốt hơn","Tự bào chế thuốc an thai, chữa bệnh cho con","Danh +6; các con ít bệnh"]};
 /* grade bonuses beyond the base +2 (applied once when the grade is reached) */
 (function(){const a0=addArt;addArt=function(k,g){const l0=S.arts[k];a0.apply(this,arguments);for(let l=l0+1;l<=S.arts[k];l++){const b={ky:{1:{tamco:1},2:{tamco:1},4:{tamco:2},5:{tamco:2}},hoa:{2:{th:3},4:{th:5},5:{th:5}},vu:{4:{sac:2}}}[k];if(b&&b[l]){apply(b[l]);log(`${ARTS.find(a=>a.k===k).n} bậc ${l}: ${fmt(b[l])}.`)}}}})();
-function artMonth(){if(!S||S.out)return;if(S.arts.cam>=1)S.suc=cl(S.suc+1,0,100);if(S.arts.cam>=4)S.kids.filter(k=>k.alive).forEach(k=>k.tal=cl(k.tal+1,0,100))}
+function artMonth(){if(!S||S.out)return;if(S.arts.cam>=1)S.suc=cl(S.suc+1,0,sucCap(S));if(S.arts.cam>=4)S.kids.filter(k=>k.alive).forEach(k=>k.tal=cl(k.tal+1,0,100))}
 (function(){const m0=monthTick;monthTick=function(){const ev=m0.apply(this,arguments);try{if(!S.dead)artMonth()}catch(e){}return ev}})();
 /* three roads */
 /* teacher fee (jrcp: depends on the chosen teacher) and the favour paid when the session starts */
@@ -4241,9 +4243,10 @@ function tuoi(n){return n>0?`Tuổi <b>${n}</b> <span class="past">(${BAND4N[ban
 (function(){const n0=nightCh;nightCh=function(p){const c=n0.apply(this,arguments);if(!c||!has("mesac"))return c;const ag=(p||S)===S?S.age:p.age;return Math.round(c*(ag<=25?1.15:ag>35?.8:1))}})();
 /* illness rises after 50 */
 (function(){const i0=illMonthP;illMonthP=function(p){let ev=i0.apply(this,arguments);try{const ag=p===S?S.age:p.age;if(ag>50&&!illOf(p)&&roll((ag-50)*.5))ev+=catchIll(p,pick(["lao","phonghan"]))||""}catch(e){}return ev}})();
-/* after a birth the body rests: six months of ở cữ and nursing before she can conceive again (everyone alike) */
+/* after a birth the body rests: ở cữ = BAL.kh.ocuMo month(s) before she can conceive again (everyone alike; owner 16/11 18:10Z: 1 month, as history —
+   wet nurses fed the child; the old permanent ×0.7 conception cut is gone, close births cost through the Sức khỏe ceiling, jkh.js) */
 (function(){const b0=birthP;birthP=function(p,fake){if(!fake)p.lastBirth=S.turn;return b0.apply(this,arguments)}})();
-(function(){const c0=conceiveCh;conceiveCh=function(p){p=p||S;if(p.lastBirth!=null&&S.turn-p.lastBirth<6)return 0;return Math.round(c0.apply(this,arguments)*.7)}})();
+(function(){const c0=conceiveCh;conceiveCh=function(p){p=p||S;if(khOcu(p))return 0;return c0.apply(this,arguments)}})();
 /* ================= VOICES: short human sounds on cards, by speaker and moment; one at a time, 6 s cooldown per key ================= */
 const VOK=["f-laugh","f-softlaugh","f-cry","f-angry","f-gasp","f-sigh","old-hmph","m-chuckle","m-grunt","m-sigh","baby-cry","child-giggle","gossip","crowd-gasp"];
 let VOX={};/* key -> [files]; from audio/VOICES.json when present, else audio/vo-<key>-1.mp3 / -2.mp3 */
@@ -5226,8 +5229,8 @@ function srvEndTurn(){if(S.dead||Q.length||S.mg)return;S.buoi=0;const q0=Q.lengt
  srvMisCheck();
  ev+=srvW(()=>resolveTonight()||"");ev+=srvW(()=>rivalsTurn()||"");if(S.dead)return;
  {const lb=typeof lsSnap==="function"?lsSnap():null;/* log-sync r1: the weekly rest gets its reason in the morning line */
- if(S.srv.lau>0){S.suc=cl(S.suc+5,0,100);if(lb)lsNote(lb,{suc:"nghỉ qua tuần (giặt đồ)"},true);S.srv.lau--;if(S.srv.lau<=0)srvFromLaundry()}
- else{S.suc=cl(S.suc+10,0,100);if(lb)lsNote(lb,{suc:"nghỉ qua tuần"},true);try{srvWeek()}catch(e){console.error(e)}}}
+ if(S.srv.lau>0){S.suc=cl(S.suc+5,0,sucCap(S));if(lb)lsNote(lb,{suc:"nghỉ qua tuần (giặt đồ)"},true);S.srv.lau--;if(S.srv.lau<=0)srvFromLaundry()}
+ else{S.suc=cl(S.suc+10,0,sucCap(S));if(lb)lsNote(lb,{suc:"nghỉ qua tuần"},true);try{srvWeek()}catch(e){console.error(e)}}}
  if(S.dead)return;
  if(S.suc<=0)return die(S.srv.lau>0?"Kiệt sức chết giữa đống đồ giặt ở Tân Giả khố":"Lao lực kiệt sức mà chết");
  if(S.tuan===2){ev+=srvMonth();if(S.dead)return}else S.tuan++;
@@ -11348,9 +11351,9 @@ function j76stand(){if(!S||S.dead)return[];const A=[{n:"Nghỉ ngơi một lát"
    Applied before the night is resolved; the morning news shows the whole night's gain in green. */
 function j76sleep(p){let n=(typeof harsh==="function"&&harsh())?8:14;if(p.suc<30)n+=6;if(p===S&&S.doctor)n+=4;return n}
 (function(){const e0=endTurn;endTurn=function(){if(!S||S.dead||Q.length||S.mg||(typeof isSrv==="function"&&isSrv()))return e0.apply(this,arguments);
- const t0=S.turn,tu=S.tuan,s0=S.suc;S.suc=cl(S.suc+j76sleep(S),0,100);try{liveRivals(true).forEach(v=>v.suc=cl(v.suc+j76sleep(v),0,100))}catch(e){}const mid=S.suc;
+ const t0=S.turn,tu=S.tuan,s0=S.suc;S.suc=cl(S.suc+j76sleep(S),0,sucCap(S));try{liveRivals(true).forEach(v=>v.suc=cl(v.suc+j76sleep(v),0,sucCap(v)))}catch(e){}const mid=S.suc;
  const r=e0.apply(this,arguments);
- try{if(S&&!S.dead&&(S.turn!==t0||S.tuan!==tu)){const g=Math.min(100,mid+((typeof harsh==="function"&&harsh())?1:4))-s0;if(g>0){
+ try{if(S&&!S.dead&&(S.turn!==t0||S.tuan!==tu)){const g=Math.min(typeof sucCap==="function"?sucCap(S):100,mid+((typeof harsh==="function"&&harsh())?1:4))-s0;if(g>0){
   log(`<span class="g">Ngủ một đêm: Sức +${g}</span>`);const line=`<p>Ngươi ngủ một đêm: <span class="g">Sức +${g}</span>${S.doctor?" (có thái y tâm phúc)":""}</p>`;
   const m=Q.find(x=>x&&/^Tin trong cung/.test(x.t||"")&&typeof x.h==="string");if(m)m.h+=line;else{try{popNum&&popNum("suc",g)}catch(e){}}}
   if(Q.length&&$("modal").hidden)showModal();render()}}catch(e){}return r}})();
@@ -12796,7 +12799,8 @@ const KIT_GLOSS={
  "Tâm cơ":"Mưu trí, sự khôn khéo. Giúp dò la, bày mưu, nhìn thấu mưu của người khác.",
  "Tai mắt":"Số người ngầm báo tin cho ngươi khắp cung. Nhiều thì biết trước mưu hại, dễ có chứng cứ.",
  "Ân tình":"Tình nghĩa riêng giữa Hoàng thượng và ngươi, tích qua những đêm hầu hạ. Giữ sủng lâu, khó bị bỏ rơi.",
- "Sức":"Sức khỏe. Dưới 20 thì không làm được việc nặng; về 0 là bệnh nặng, nguy đến tính mạng.",
+ "Sức":"Sức lực để làm việc trong ngày. Dưới 20 thì không làm được việc nặng; về 0 là bệnh nặng, nguy đến tính mạng. Sức tối đa do Sức khỏe định.",
+ "Sức khỏe":"Thân thể lâu dài, định Sức tối đa. Tuổi càng cao, sinh nở, bệnh nặng, trúng độc càng hạ; nghỉ ngơi, ở cữ trọn tháng, thuốc bổ chỉ bù lại phần hao tạm, không vượt mức tuổi và vết thương cũ cho phép.",
  "Bạc":"Tiền riêng của ngươi: bổng lộc hằng tháng, ban thưởng. Dùng để mua đồ, đút lót, thưởng kẻ hầu.",
  "Chủ tin":"Chủ nhân tin ngươi bao nhiêu (0–100). Cao thì được thưởng, tiến cử; dưới 10 dễ bị đày Tân Giả khố.",
  "Lòng":"Kẻ hầu trung thành với ngươi bao nhiêu (0–100). Dưới 45 dễ bị người khác mua chuộc.",
@@ -13416,10 +13420,12 @@ function kitInfoArt(title){const k=kitInfoKey(title);const have=KIT_INFOM.have||
 (function(){const b0=kpBuild;kpBuild=function(M,m){b0.apply(this,arguments);try{const dlg=M.querySelector(".dlg");if(!dlg||!/^(rule|info)$/.test(dlg.dataset.kind||""))return;
  const body=M.querySelector("#mb > .kpb");if(!body||body.querySelector(":scope > .kpsubj"))return;const a=kitInfoArt(m.t);
  body.classList.add("kphas","kpinfo");body.insertAdjacentHTML("afterbegin",`<div class="kpsubj kpiart" data-info="${a.key}">${kitArtFrame(a.src,a.label)}</div>`)}catch(e){console.error("kpInfo",e)}}})();
-/* the HUD help panels use the same structured layout as the rule panel: what it is · what you have now */
+/* the HUD help panels use the same structured layout as the rule panel: what it is · what you have now.
+   HXNOW[key]() → kitRows rows for "Ngươi đang có" when the live value needs more than the status chip (Sức: N, tối đa M, Sức khỏe — jkh) */
+const HXNOW={};
 (function(){const s0=showModal;showModal=function(){try{const m=Q[0];if(m&&!m.kit&&!m.opts&&typeof m.h==="string"&&/^<p>[^<]*<\/p>$/.test(m.h)&&typeof HX==="object"){
   const txt=m.h.replace(/<\/?p>/g,"");const k=Object.keys(HX).find(x=>HX[x]===txt);if(k){const lab=kpPlain(m.t);const gl=txt.replace(/^[^:]{1,24}:\s*/,"");const cur=(m.t.match(/(-?\d+)\s*$/)||[])[1];
-   const now=document.querySelector(`#hud2 .hc[data-hx="${k}"] b, #hud2 .hc[data-hx="${k}"] .kodm`);m.kit={kind:"rule",title:lab,sections:[{h:"Là gì",rows:[[lab.replace(/\s*\d+$/,""),gl.charAt(0).toUpperCase()+gl.slice(1),"t"]]}].concat(now?[{h:"Ngươi đang có",html:`<div class="kpnow">${now.outerHTML}</div>`}]:[])};m.t=lab.replace(/\s*-?\d+$/,"")}}}catch(e){}return s0.apply(this,arguments)}})();
+   const now=document.querySelector(`#hud2 .hc[data-hx="${k}"] b, #hud2 .hc[data-hx="${k}"] .kodm`);const nr=typeof HXNOW==="object"&&HXNOW[k]?HXNOW[k]():null;m.kit={kind:"rule",title:lab,sections:[{h:"Là gì",rows:[[lab.replace(/\s*\d+$/,""),gl.charAt(0).toUpperCase()+gl.slice(1),"t"]]}].concat(nr&&nr.length?[{h:"Ngươi đang có",rows:nr}]:now?[{h:"Ngươi đang có",html:`<div class="kpnow">${now.outerHTML}</div>`}]:[])};m.t=lab.replace(/\s*-?\d+$/,"")}}}catch(e){}return s0.apply(this,arguments)}})();
 /* ---- 3. identity card: larger, balanced; tiles beside the portrait; no stale result toast over the buttons ---- */
 (function(){const k0=kpIdentity;kpIdentity=function(M,m){k0.apply(this,arguments);try{const mb=$("mb");const id=mb.querySelector(".kpid"),tl=mb.querySelector(":scope > .kstgrid"),main=id&&id.querySelector(".kpmain");if(main&&tl)main.appendChild(tl);
   const t=$("rtoast");if(t){t.classList.remove("on");t.hidden=true;setTimeout(()=>{t.hidden=false},50)}}catch(e){}try{kpIdFig(M)}catch(e){console.error("kpIdFig",e)}}})();
@@ -18464,6 +18470,46 @@ BAL.dh={n0:[1,5,10],step:2,artLv:[3,4,5],
  hieu:{minRank:3,sung:10,danh:8,gapM:2,p:25,danhG:5},
  conf:{p:{cold:[100,100],giang:[50,35],cam:[0,40]},danh:5,sung:3,wait:3,kinh:3,cong:12,top:100},
  it:{lose:2,lostDanh:8,backW:[4,10]}};
+
+/* review/suc-khoe (jkh.js, owner 16/11 18:05–19:00Z; spec dev/handover/reports/suc-khoe.md §4.1–4.7 with the owner changes):
+   kh  SỨC KHỎE = ONLY the Sức MAX ceiling (owner 18:05Z: "giữ cái trần của cái sức"; Sức regen unchanged, no second cut; jmort `tired` folded in).
+       health khOf(p) = 100 − max(0, age − ageFrom) × agePer − khScar (lasting) − khTmp (heals); floor capMin.  Sức max sucCap(p) = maxBase + maxPer × health (≤ 100).
+       lasting / healing harm per event: birth / hard (extra) / still / mis / close (a birth < closeMo months after the last) / ocuScar (ở cữ broken) / poisonScar (once per poisoning);
+       illSt per illness stage per month, sick per month of p.sick (poison), tmpMax cap of the healing part.  Healing per month (never the lasting part):
+       rec while not ill + recCare per care source (the jmort care sources, BAL.mort.life careSuc / own thái y / Y thuật ≥ careYt); ocu once when the ở cữ month is kept;
+       tonic per thuốc bổ (at most tonicMo a month).  ocuMo = months of ở cữ (no conception; owner 18:10Z: 1 month, the ×0.7 cut removed); a move out of her palace or a card
+       costing ≥ ocuHeavy Sức in that month breaks it → ocuScar + Hậu sản (ILL.hausan) ocuIll %.  oldScar = lasting harm per child already born (old saves, NPCs at load).
+       illLo / illP: health below illLo → an extra illP % a month to catch a seasonal illness.  thyLo: the thái y says "Hơi yếu" below it, thyBad: "Có bệnh" below it (spec 4.6); faceLo: ỐM YẾU face below it.
+   preT  preterm / overdue (pregMonthP, everyone): m8 / m9 % a month at month 8 / 9, + lowSuc (Sức < lowSucAt), + lowKh (health < khLo), + age per year over ageFrom, ×½ an thai;
+       a preterm baby dies in its first month at die8 / die9 %.  od % at the birth month the baby is a month late → birthRisk × odHard, stillbirth + odStill; odOmen % "điềm thánh nhân"
+       (a son: Danh + omenDanh), else ill-omen talk.  'lệch sổ' (the birth does not match the Kính sự phòng book): a true fact of weight lsW in the mother's
+       ledger (jtruth deedSync, so a CLEAN mother can be accused too, owner Q3 18:17Z; dropped once the test is held or the child is past ageMax);
+       rivals with a motive (mot: her own son vs a son, rank gap ≤ rkGap with thiện cảm < aff, thiện cảm ≤ hate, or oán ≥ oan against her) and she
+       (two-way) get evi chứng cứ; anyone with ≥ accEv demands the blood test (BAL.ngh; jroute rtNgSet / rtNgNpcRes) accP % a month while the child is
+       ≤ ageMax years.  recDefend = added to her "nghiệm lại bằng bát nước mới" odds when the child really came early or late AND the thái y mạch án
+       holds the month the pregnancy was found (S.pregDisc at birth).  khRecOff: the book's night lies recMin..recMax tuần before the real conception
+       (recSlack tuần = still the same night).
+       drug = thuốc thúc sinh (owner PARKING_LOT #1): bạc, odds base + Y thuật × perY, Sức lost on success / failure; npcDrug % an NPC in that spot takes it.
+   pgRisk  miscarriage causes (owner 19:15Z), added to the monthly risk while pregnant, capped at cap: khac % per khắc walked beyond freeKhac in the month;
+       rain % per walk in harsh weather; work % per Sức spent on cards beyond freeSuc; lowSuc2 under lowSuc2At Sức; an thai halves it.
+       lowSuc under lowSucAt and misSuc (Sức lost at a miscarriage) are the base pregnancy month's own numbers (j8 pregMonthP reads them too). */
+BAL.kh={on:1,ageFrom:30,agePer:1.2,capMin:30,maxBase:40,maxPer:.6,tmpMax:40,
+ birth:10,birthScar:2,hard:15,hardScar:5,still:10,stillScar:2,mis:6,misScar:1,closeMo:18,close:6,closeScar:1,
+ ocuMo:1,ocuHeavy:10,ocuScar:2,ocuIll:25,ocu:5,illSt:1,sick:3,poisonScar:4,rec:.5,recCare:.5,tonic:3,tonicMo:1,oldScar:2,
+ illLo:50,illP:4,thyLo:80,thyBad:50,faceLo:45};
+BAL.preT={m8:1.5,m9:4,lowSuc:3,lowSucAt:30,lowKh:3,khLo:40,age:.2,ageFrom:35,die8:40,die9:15,od:8,odHard:1.5,odStill:3,odOmen:30,omenDanh:2,
+ evi:2,lsW:3,accEv:3,accP:20,ageMax:3,recDefend:20,recSlack:1,recMin:2,recMax:9,
+ mot:{rkGap:1,aff:0,hate:-30,oan:45},drug:{bac:40,o:60,perY:6,suc:10,sucF:25},npcDrug:60};
+BAL.pgRisk={freeKhac:6,khac:.25,rain:1,freeSuc:40,work:.05,lowSuc2:3,lowSuc2At:50,lowSucAt:30,lowSuc:8,misSuc:20,cap:4};
+/* review/suc-khoe-fix (F4, ONE CORE OD:L1267): THE BLOOD TEST (trích huyết nghiệm thân) — one block read by jroute (her child, her demand on an NPC's
+   child, an NPC mother's child) AND jkh (a rival's demand after a 'lệch sổ' birth). Before this, jkh held a copy of jroute's numbers.
+   alumTc / alumP: a guilty mother slips alum in (Tâm cơ ≥ alumTc, else alumP %) → the blood mixes.  oilTc / oilP: an accuser drops oil
+   (Hiểm / Tâm trait or Tâm cơ ≥ oilTc, then oilP %) → the blood never mixes.  frameAff / frameOil: an NPC who hates the mother below frameAff
+   thiện cảm frames her child (oil frameOil %).  die: % the condemned mother is put to death (else lãnh cung).  Backlash when the blood mixes,
+   the same for her and every NPC accuser: accSung / accDanh, oán accOan, punish level accPun.  needEv: chứng cứ she needs to demand the test
+   on a rival's child (her card; the 'lệch sổ' road uses BAL.preT.accEv, the same bar as NPC accusers).  seeMat / oilMat: Tai mắt she needs
+   to hear of an NPC test / to learn the bowl was oiled. */
+BAL.ngh={alumTc:55,oilTc:60,frameAff:-30,accOan:40,accPun:1,needEv:2,seeMat:2,oilMat:4};
 /* palace voice (jvoice, VANPHONG §2): mood of an address from the real relation (S.sung − sungMid, S.th / S.hh − favMid, aff()):
    ≥ warm → warm words (ái phi, con, muội muội, tỷ tỷ), ≤ cold → "ngươi"; nuong = first rank called "nương nương" / allowed "bổn cung" (Tần);
    noRepeat = tuần before a pooled line may come back; hi / hq = first rank index of the "hi" (Quý phi) / "hq" (Hoàng hậu) rank band of
@@ -18864,7 +18910,7 @@ function kill(p,why,K){let ev="";note(p,why,K);
  if(p===S){S.mort.cause=why;die(why);return ""}
  if(p===S.emp){S.mort.empDue=why||(p.thoO?"Ngài lâm trọng bệnh đã lâu, thuốc thang vô hiệu":"Ngài trúng phong đột ngột giữa đêm");return ""}
  if(p===S.thO){if(!S.thDead){S.thDead=true;S.th=0;S.thIll=null;ev+=`<b>Thái hậu băng hà, thọ ${S.thAge} tuổi.</b> ${why?why+". ":""}`}return ev}
- if(K.has(p)){const mine=(S.kids||[]).includes(p);return kidDie(p,why||(p.nb?"yểu mệnh khi chưa đầy tháng":p.age<BAL.mortx.youngAge?pick(["mất vì đậu mùa","mất vì sốt cao","nhiễm dịch mà mất"]):"lâm bệnh mà mất"),mine)}
+ if(K.has(p)){const mine=(S.kids||[]).includes(p);return kidDie(p,why||p.nbWhy||(p.nb?"yểu mệnh khi chưa đầy tháng":p.age<BAL.mortx.youngAge?pick(["mất vì đậu mùa","mất vì sốt cao","nhiễm dịch mà mất"]):"lâm bệnh mà mất"),mine)}
  if(rivals.includes(p)){p.alive=false;if(p.queen){p.queen=false;if(S.vacSince==null)S.vacSince=S.turn}return `<span class="r">${p.name} ${why||"lâm trọng bệnh qua đời"}, ${p.age} tuổi.</span> `}
  if(p===S.maid){const o=S.maid.name;S.maid=newMaid(pick(MAIDS.filter(x=>x!==o)),M.maidLoy);return `<span class="r">Cung nữ thân cận ${o} ${why||"lâm bệnh qua đời"}.</span> Nội vụ phủ đưa ${S.maid.name} đến hầu thay. `}
  for(const q of [S].concat(rivals))if(q&&q.staff&&q.staff.includes(p)){q.staff.splice(q.staff.indexOf(p),1);try{fillStaff(q,true)}catch(e){}return q===S?`Người hầu ${p.name||""} trong cung ngươi ${why||"qua đời"}. `:""}
@@ -18939,7 +18985,7 @@ function careN(p){return p?(p.suc>=M.life.careSuc?1:0)+(p.doctor?1:0)+(p.arts&&p
 (function(){const p0=illMonthP;illMonthP=function(p){const had=!!illOf(p);const ev=p0.apply(this,arguments);
  try{if(M.on&&M.life.care&&!had&&p&&p.alive!==false&&!(p===S&&S.dead)){const i=illOf(p);if(i&&!i.mort&&roll(M.life.careIll*careN(p))){p.ill=null;return p===S?"Nhờ giữ gìn sức khỏe, ngươi chỉ cảm mệt mấy hôm rồi khỏi. ":""}}}catch(e){}return ev}})();
 /* older → more tired */
-(function(){if(typeof j76sleep!=="function")return;const s0=j76sleep;j76sleep=function(p){const r=s0.apply(this,arguments);if(!M.on||!p)return r;const a=ageOf(p)||20;return a>M.tired.from?Math.max(M.tired.min,r-Math.floor((a-M.tired.from)/M.tired.per)):r}})();
+(function(){if(typeof j76sleep!=="function")return;const s0=j76sleep;j76sleep=function(p){const r=s0.apply(this,arguments);if(!M.on||!p||(typeof khB==="function"&&khB()))return r;/* folded into the Sức khỏe ceiling (jkh, owner 16/11 18:05Z: age acts through Sức max only) */const a=ageOf(p)||20;return a>M.tired.from?Math.max(M.tired.min,r-Math.floor((a-M.tired.from)/M.tired.per)):r}})();
 /* grief: losing her child weighs on her health (illness easier for griefMo months) */
 (function(){const k0=kidDie;kidDie=function(k,why,mine){if(mine&&S)S.mortGrief=M.griefMo;return k0.apply(this,arguments)}})();
 (function(){const p0=illMonthP;illMonthP=function(p){if(p===S&&S.mortGrief>0){S.mortGrief--;if(!illOf(S)&&roll(M.griefIll))return catchIll(S,"tambenh")+p0.apply(this,arguments)}return p0.apply(this,arguments)}})();
@@ -22448,7 +22494,7 @@ KIT_FACEFX.add({id:"ill",z:10,ready:true,                  /* owner approved (pi
   if(i&&i.k!=="docman"&&(i.k!=="longthe"||kd==="emp"))return{lvl:cl(i.st|0,1,3),ill:i};                      /* long thể bất an is the Emperor's own illness */
   if((p.sick||0)>0)return{lvl:2};
   if(kd==="kid"&&typeof p.hp==="number"&&p.hp<FXF.kidHp[0])return{lvl:p.hp<FXF.kidHp[1]?2:1,kid:true};     /* a child worn down (the same hp<35 the Hoàng tự list calls "ốm") */
-  if(typeof p.suc==="number"&&p.suc<FXF.weakSuc&&!(p.pz&&p.pz.until>wk()))return{lvl:1,weak:true};return null},
+  if(typeof p.suc==="number"&&(p.suc<FXF.weakSuc||typeof khB==="function"&&khB()&&khOf(p)<khB().faceLo)&&!(p.pz&&p.pz.until>wk()))return{lvl:1,weak:true};return null},
  seen:(p,st)=>p===S||(st.ill?fxIllSeen(p)&&fxSeen(p):fxSeen(p)),
  sac:(p,st)=>FXF.ill[st.lvl],
  chip:(p,st)=>st.ill?(["consort","player"].includes(KIT_FACEFX.kind(p))?null:[fxIllName(st.ill),"hot"]):[st.weak?"Sắc mặt nhợt nhạt":"Người ốm yếu, xanh xao","hot"],   /* a consort's illness already has its own chip (j13 illName) */
@@ -23261,7 +23307,7 @@ function k3Hud(){try{if(!S)return;const d=$$("me-d");if(d){const t=k3Date();if(d
  k3TopRow();try{window.kitHxRoad&&kitHxRoad()}catch(e){}if(typeof kitStatSet!=="function")return;/* the Đức "!" (lập Hoàng hậu) is a consort goal: never on the cung nữ road or in lãnh cung */const nd=hhNeed(S).duc,hq=S.rank<7&&S.duc<nd&&!(window.kitRoad&&kitRoad()),dw=`Cần Đức ${BAL.hhDuc} mới được lập Hoàng hậu (mẹ Thái tử: ${BAL.hhDucHeir})`;
  [["sac","Sắc"],["tai","Tài"],["tamco","Tâm cơ"],["duc","Đức"]].forEach(([k,l])=>{const c=$$("hud-"+k);if(c)kitStatSet(c,S[k],{title:`${l} ${S[k]}${k==="duc"&&hq?" · "+dw:""} · chạm để xem đủ`,warn:k==="duc"&&hq?dw:""})});
  /* Danh · Sủng · Bạc · Sức: tooltip = name + value + "chạm để xem đủ" (the label line's own text, so the servant road's "Chủ tin" reads right) */
- ["danh","sung","bac","suc"].forEach(k=>{const c=$$("hud-"+k);if(!c)return;const l=T((c.querySelector(".kstl")||c).textContent),v=k3CellKey(k)==="tin"?S.tin:S[k];kitStatSet(c,v,{title:`${l} ${v} · chạm để xem đủ`})})}catch(e){}}
+ ["danh","sung","bac","suc"].forEach(k=>{const c=$$("hud-"+k);if(!c)return;const l=T((c.querySelector(".kstl")||c).textContent),v=k3CellKey(k)==="tin"?S.tin:S[k];kitStatSet(c,hudFmt(k3CellKey(k),v),{title:`${l} ${hudFmt(k3CellKey(k),v)} · chạm để xem đủ`})})}catch(e){}}
 /* the top bar's second row (KIT 31.1): time (buổi, khắc dots, weather, Quẻ tuần) + status chips | her Tư chất. ONE component, every device */
 function k3TopRow(){const hd=document.querySelector("header.hud");let tc=$$("k3tc");if(!tc&&hd){tc=document.createElement("div");tc.id="k3tc";tc.className="k3tc";
  tc.innerHTML=`<span id="k3tt" class="k3tt"></span>`;hd.appendChild(tc);
@@ -27098,7 +27144,9 @@ function rtBookHTML(){const b=rtBook();const ids=Object.keys(RT_END);const met=i
    S.rt.ng = {k: tên con, acc: "emp"|"th"|id phi tần, at: tuần nghiệm, oil: kẻ tố đã bỏ dầu, P:{alum,swap,bribe,spy}} */
 function rtAccN(a){if(a==="emp")return"Hoàng thượng";if(a==="th")return"Thái hậu";const v=RV(a);return v?rtVn(v):"kẻ tố"}
 function rtNgKid(){const T=S.rt;return T&&T.ng?(S.kids||[]).find(k=>k.name===T.ng.k&&k.alive)||null:null}
-function rtNgSet(k,acc,oil){const T=rtS();if(T.ng||!k)return;const v=RV(acc);if(oil==null)oil=!!(v&&(/Hiểm|Tâm/.test(v.trait||"")||(v.tamco||0)>=60)&&roll(BAL.route.oil));
+/* does this accuser drop oil into the bowl? (her own child's test and every NPC accuser: one rule, BAL.ngh) */
+function rtNgOil(v){const N=BAL.ngh;return !!(v&&v!==S&&(/Hiểm|Tâm/.test(v.trait||"")||(v.tamco||0)>=N.oilTc)&&roll(BAL.route.oil))}
+function rtNgSet(k,acc,oil){const T=rtS();if(T.ng||!k)return;const v=RV(acc);if(oil==null)oil=rtNgOil(v);
  T.ng={k:k.name,acc,at:wk()+1,oil:!!oil,P:{}};try{if(!window.__bot)rtMgBowl()}catch(e){}rtStat("ng_set");rtEmo("so",60,"sắp trích huyết nghiệm thân");
  log(`<span class="r">${rtAccN(acc)} truyền: tuần sau trích huyết nghiệm thân cho ${k.name} trước mặt lục cung.</span>`);rtRefresh()}
 function rtNgDue(){const T=S.rt;if(!T||!T.ng||T.ng.held)return;if(!rtNgKid()){T.ng=null;return}if(wk()>=T.ng.at){T.ng.held=1;rtPush("rtNg",{})}}
@@ -27131,7 +27179,7 @@ function rtNgRun(fresh){const T=S.rt,N=T&&T.ng;if(!N)return;const P=N.P,k=rtNgKi
  if(!fresh){const caught=((P.alum||P.swap)&&N.mg===0)||(P.bribe&&roll(BAL.route.cheat));if(caught){rtStat("ng_cheat");log(`<span class="r">Có người tâu: bát nước của ngươi đã bị động tay.</span>`);rtNgLose(false,!k.tf,"gian lận khi nghiệm thân");return}}
  const ok=rtNgShown(fresh);
  rtNgScene(ok,k.name,()=>{if(ok){if(k.tf)rtEnd("tt_hoa");rtNgWin(false)}else{log(`<span class="r">Hai giọt máu tách rời trong bát nước.</span>`);if(!fresh&&!N.re){N.re=1;rtPush("rtNg2",{})}else rtNgLose(false,!k.tf)}rtAfter()})}
-PEND.rtNg2=pp=>{const T=S&&S.rt;const k=rtNgKid();if(!T||!T.ng||!k)return null;const oR=od(38+(S.th||0)/3+(S.doctor?15:0));
+PEND.rtNg2=pp=>{const T=S&&S.rt;const k=rtNgKid();if(!T||!T.ng||!k)return null;const oR=od(38+(S.th||0)/3+(S.doctor?15:0)+(k.dateOff&&!k.tf&&k.thyRec&&typeof BAL==="object"&&BAL.preT?BAL.preT.recDefend:0));/* a real early / late birth AND the thái y mạch án holds the month the pregnancy was found (review/suc-khoe-fix F9) */
  return{ti:"Máu không hòa",t:`<p>Cả điện lặng ngắt. Hai giọt máu nằm riêng hai góc bát. Hoàng thượng chưa nói gì; mọi ánh mắt đổ dồn vào ngươi.</p>`,stage:[k],headArt:{src:RT_ART.bat,label:"Nghiệm thân"},o:[
   rtOpt("Xin thái y nghiệm lại bằng bát nước mới",{},rtX(oR,"nghiệm lại bằng bát sạch: kết quả theo cha thật","Hoàng thượng không cho nghiệm lại · bị xử tội",k.tf?"bát sạch thì máu vẫn không hòa":""),()=>{if(roll(oR))rtNgRun(true);else rtNgLose(false,!k.tf)}),
   rtOpt("Nhận tội",{},rtX(100,"giữ được mạng (lãnh cung)","",`${k.name} bị đưa ra khỏi cung`),()=>rtNgLose(true,!k.tf)),
@@ -27144,21 +27192,26 @@ function rtNgLose(confess,innocent,why){const T=S.rt,N=T.ng,k=rtNgKid();const m=
  if(k){k.alive=false;k.gone=1;log(`<span class="r">${k.name} bị tước danh phận hoàng tự, đưa ra khỏi cung giao người nuôi.</span>`)}T.tt=null;T.bm=null;
  if(confess)cold(innocent?"Nhận tội tư thông (oan)":"Nhận tội tư thông");else if(roll(BAL.route.ngDeath))deathSentence(why?`Bị ban chết vì ${why}`:"Bị ban chết vì con không phải cốt nhục hoàng gia");else cold(why||"Con không phải cốt nhục hoàng gia")}
 /* NPC mothers: the same bowl (alum by the mother, oil by a framer) */
-function rtNgNpcAuto(v,k){const truth=!k.tf;const alum=!truth&&((v.tamco||0)>=55||roll(BAL.route.npcAlum));const foe0=liveRivals(false).find(x=>x!==v&&aff(x,v)<-30&&/Hiểm/.test(x.trait||""));const foe=foe0&&rtGateT(foe0,v,"frame").ok?foe0:null;
- if(truth&&!foe)return"";const oil=!!foe&&roll(BAL.route.npcOil);const shown=alum?true:oil?false:truth;k.tfOk=1;rtStat("npc_ng");const seen=(S.mat||0)>=2;
- if(shown){if(!truth)rtStat("npc_ng_hoa");return seen?`Nghe nói ${rtVn(v)} bị tâu xin nghiệm máu cho ${k.name}; máu hòa, nàng vô sự. `:""}
- k.alive=false;k.gone=1;rtStat(truth?"npc_ng_oan":"npc_ng_lo");const lov=k.tf&&manById(k.tf);if(lov)lov.alive=false;if(roll(BAL.route.ngDeath))deathSentence(v,"con không phải cốt nhục hoàng gia");else v.out=true;
- return `<span class="r">${rtVn(v)}: trích huyết nghiệm thân, máu ${k.name} không hòa. Nàng bị trị tội.</span>${truth&&(S.mat||0)>=4?` Tai mắt báo: bát nước đã bị ${foe.name} nhỏ dầu.`:""} `}
+/* ONE blood test for an NPC mother's child (review/suc-khoe-fix F4): the truth decides; a guilty mother may slip alum in; oil = an accuser's or
+   a framer's drops (the blood never mixes); acc = the NPC who demanded it (backlash when the blood mixes). Read by rtNgNpcAuto and jkh khNgNpc. */
+function rtNgNpcRes(v,k,acc,oil){const N=BAL.ngh,truth=!k.tf;const alum=!truth&&((v.tamco||0)>=N.alumTc||roll(BAL.route.npcAlum));const shown=alum?true:oil?false:truth;k.tfOk=1;
+ if(shown){if(acc){ap(acc,BAL.route.demandFail);oanAdd(v,acc,N.accOan);try{punish(acc,"vu cáo phi tần",N.accPun)}catch(e){}}return{shown,truth,alum}}
+ k.alive=false;k.gone=1;const lov=k.tf&&manById(k.tf);if(lov)lov.alive=false;if(roll(BAL.route.ngDeath))deathSentence(v,"con không phải cốt nhục hoàng gia");else v.out=true;return{shown,truth,alum}}
+function rtNgNpcAuto(v,k){const N=BAL.ngh,truth=!k.tf;const foe0=liveRivals(false).find(x=>x!==v&&aff(x,v)<N.frameAff&&/Hiểm/.test(x.trait||""));const foe=foe0&&rtGateT(foe0,v,"frame").ok?foe0:null;
+ if(truth&&!foe)return"";const oil=!!foe&&roll(BAL.route.npcOil);const r=rtNgNpcRes(v,k,null,oil);rtStat("npc_ng");const seen=(S.mat||0)>=N.seeMat;
+ if(r.shown){if(!truth)rtStat("npc_ng_hoa");return seen?`Nghe nói ${rtVn(v)} bị tâu xin nghiệm máu cho ${k.name}; máu hòa, nàng vô sự. `:""}
+ rtStat(truth?"npc_ng_oan":"npc_ng_lo");
+ return `<span class="r">${rtVn(v)}: trích huyết nghiệm thân, máu ${k.name} không hòa. Nàng bị trị tội.</span>${truth&&(S.mat||0)>=N.oilMat?` Tai mắt báo: bát nước đã bị ${foe.name} nhỏ dầu.`:""} `}
 /* she demands the test on another consort's child (honest, or with oil = a frame-up) */
-function rtNgNpcCards(){const A=[];if(S.out)return A;for(const v of liveRivals(true)){const k=(v.kids||[]).find(x=>x.alive&&!x.tfOk&&(x.age||0)>=1);if(!k)continue;const ev=typeof evG==="function"?evG(S,v):0;if(ev<2&&!v.kidRumor)continue;
-  A.push(rtCard({id:"ngn_"+v.id,n:`Tâu xin nghiệm thân ${k.name}`,t:`Ngươi nắm ${ev} chứng cứ về ${rtVn(v)}.`,art:RT_ART.con,k:1,need:[[`chứng cứ về ${v.name} (có ${ev}/2)`,ev>=2]],x:"mở buổi trích huyết nghiệm thân (chọn cách ở bước sau)",kem:"máu hòa thì ngươi mang tội vu cáo",go:()=>rtPush("rtNgNpc",{v:v.id,k:k.name})}));break}
+function rtNgNpcCards(){const A=[];if(S.out)return A;for(const v of liveRivals(true)){const k=(v.kids||[]).find(x=>x.alive&&!x.tfOk&&(x.age||0)>=1);if(!k)continue;const ev=typeof evG==="function"?evG(S,v):0,ne=BAL.ngh.needEv;if(ev<ne&&!v.kidRumor)continue;
+  A.push(rtCard({id:"ngn_"+v.id,n:`Tâu xin nghiệm thân ${k.name}`,t:`Ngươi nắm ${ev} chứng cứ về ${rtVn(v)}.`,art:RT_ART.con,k:1,need:[[`chứng cứ về ${v.name} (có ${ev}/${ne})`,ev>=ne]],x:"mở buổi trích huyết nghiệm thân (chọn cách ở bước sau)",kem:"máu hòa thì ngươi mang tội vu cáo",go:()=>rtPush("rtNgNpc",{v:v.id,k:k.name})}));break}
  return A}
 PEND.rtNgNpc=pp=>{const v=RV(pp.v);const k=v&&(v.kids||[]).find(x=>x.name===pp.k&&x.alive);if(!v||!k)return null;const oF=rtMgO(4);
- const fin=(shown)=>{k.tfOk=1;if(shown){apply(BAL.route.demandFail);oanAdd(v,S,40);punish(S,"vu cáo phi tần",1);log(`<span class="r">Máu hòa. ${v.name} quỳ khóc kêu oan; ngươi mang tội vu cáo.</span>`)}
+ const N=BAL.ngh;const fin=(shown)=>{k.tfOk=1;if(shown){apply(BAL.route.demandFail);oanAdd(v,S,N.accOan);punish(S,"vu cáo phi tần",N.accPun);log(`<span class="r">Máu hòa. ${v.name} quỳ khóc kêu oan; ngươi mang tội vu cáo.</span>`)}
   else{apply(BAL.route.demandWin);k.alive=false;k.gone=1;const lov=k.tf&&manById(k.tf);if(lov)lov.alive=false;log(`<span class="r">Máu ${k.name} không hòa. ${rtVn(v)} bị trị tội.</span>`);if(roll(BAL.route.ngDeath))deathSentence(v,"con không phải cốt nhục hoàng gia");else v.out=true}};
- const alum=!!k.tf&&((v.tamco||0)>=55||roll(BAL.route.npcAlum));
+ const alum=!!k.tf&&((v.tamco||0)>=N.alumTc||roll(BAL.route.npcAlum));
  return{ti:"Tâu xin nghiệm thân",t:`<p>Ngươi quỳ trước Hoàng thượng, tâu rằng ${k.name} không phải cốt nhục hoàng gia, xin trích huyết nghiệm thân.</p>`,stage:[v,k],headArt:{src:RT_ART.con,label:"Nghiệm thân"},o:[
-  rtOpt("Nghiệm ngay thẳng",{},`${word(cl(35+(typeof evG==="function"?evG(S,v):0)*8,10,80))} · thành: Danh +${BAL.route.demandWin.danh} · máu không hòa · ${v.name} rước họa vào thân · hỏng: máu hòa — ngươi mang tội vu cáo · kèm: nàng cũng có thể động tay vào bát`,()=>{rtStat("ng_demand");const sh=alum?true:!k.tf;rtNgScene(sh,k.name,()=>{fin(sh);rtAfter()})}),
+  rtOpt("Nghiệm ngay thẳng",{},`${word(cl(35+(typeof evG==="function"?evG(S,v):0)*8,10,80))} · thành: Danh +${BAL.route.demandWin.danh} · máu không hòa · ${v.name} rước họa vào thân · hỏng: máu hòa — ngươi mang tội vu cáo (Sủng ${BAL.route.demandFail.sung}, Danh ${BAL.route.demandFail.danh}) · kèm: nàng cũng có thể động tay vào bát`,()=>{rtStat("ng_demand");const sh=alum?true:!k.tf;rtNgScene(sh,k.name,()=>{fin(sh);rtAfter()})}),
   rtOpt("Sai người nhỏ dầu vào bát",{...BAL.route.frame},rtX(oF,`máu không hòa dù ${k.name} là con ai · ${v.name} rước họa vào thân`,"bị bắt quả tang gian lận · ngươi bị trị tội","vu oan người vô tội là ác nghiệp"),()=>{rtStat("ng_frame");rtNgSleight("oil",4,ok=>{if(ok){if(!k.tf)rtEnd("ng_vu");rtNgScene(false,k.name,()=>{fin(false);rtAfter()})}else{k.tfOk=1;oanAdd(v,S,50);fall(S,"gian lận khi trích huyết nghiệm thân");rtAfter()}})}),
   rtOpt("Thôi",{},rtX(100,"không tâu nữa","",""),()=>{})]}};
 RT_END.ng_vu=["tt","Vu oan người khác qua bát nước"];
@@ -27390,7 +27443,8 @@ const TW={xa:"dấu xạ hương",chi:"dấu chì ngấm dần",meo:"khí suyễ
 const TWHERE={xa:"túi thơm, hương trầm",chi:"son phấn",meo:"đệm gấm",bua:"túi thơm, đệm gấm"};
 const PW={tra:"dấu độc ngấm chậm, như từ trà uống hằng ngày",son:"dấu chì, chu sa, như từ son phấn",huong:"dấu hương độc, như từ lò trầm trong phòng",ty:"dấu thuốc lạ trong thang an thai",hh:"dấu hồng hoa trong canh bổ",tsv:"dấu thuốc lạ trong thang an thai",xh:"dấu xạ hương"};
 function sucWord(s){return s>=70?"khí huyết dồi dào":s>=50?"khí huyết điều hòa":s>=30?"khí huyết hơi hư nhược":"khí huyết rất suy nhược"}
-function verdict(lie){const i=illOf(S);const s=S.suc||0;if(i&&!lie)return["Có bệnh","r"];if(s<40||(i&&lie))return["Hơi yếu","n"];return["Khỏe mạnh","g"]}
+/* Sức khỏe (jkh, spec 4.6): ≥ thyLo Khỏe mạnh · thyBad..thyLo Hơi yếu · < thyBad or ill Có bệnh; a bribed physician softens one step */
+function verdict(lie){const i=illOf(S);const s=S.suc||0;const K=typeof khB==="function"?khB():null,kh=K?khOf(S):100;const bad=i||(K&&kh<K.thyBad);if(bad&&!lie)return["Có bệnh","r"];if(s<40||(bad&&lie)||(K&&kh<K.thyLo))return["Hơi yếu","n"];return["Khỏe mạnh","g"]}
 function wksPreg(){return S.preg&&S.pregUnk&&S.pregWk!=null?wk()-S.pregWk:-1}
 function lateHint(){try{return typeof cycleLate==="function"&&cycleLate(S)}catch(e){return false}}
 /* the j75 card finds it (j75 owns the card): bring its day to now */
@@ -27462,7 +27516,7 @@ function req(road,paid){const self=road==="self";if(!paid){if(why(road))return""
   if(S.preg&&S.hidden&&roll(T().seenPreg)){S.hidden=false;noteAdd(v.id,`thấy ngươi sang Thái y viện, đoán ngươi đã có thai`);P.push(`<p class="r">Lúc ra về, ngươi thấy người của ${v.name} đứng nhìn theo.</p>`)}}}
  log(`Mời thái y bắt mạch${self?" (sang Thái y viện)":""}: ${vd}${found?`, thấy ${found} điều đáng ngại`:""}.`);
  Q.push({t:"Thái y bắt mạch",kind:"notice",who:pDoc(),h:P.join("")});try{if($("modal").hidden)showModal()}catch(e){}try{render()}catch(e){}return ""}
-window.thyReq=req;window.thyWhy=why;window.thyCost=cost;
+window.thyReq=req;window.thyWhy=why;window.thyCost=cost;window.thyVerdict=verdict;
 /* deck cards (Hành sự): both roads, side by side, always */
 (function(){if(typeof illCards!=="function")return;const c0=illCards;illCards=function(){const A=c0.apply(this,arguments);try{if(!off()){
   A.push({n:"Mời thái y bắt mạch",t:`Mời ${docName()} đến tận cung xem mạch.`,c:{bac:-cost()},o:100,k:T().khPay,w:{},dom:"Sức khỏe",lock:!!why("pay"),x:xLine("pay"),go:()=>req("pay",true)});
@@ -30163,8 +30217,8 @@ function petWeek(){for(const p of [S].concat(petNpcs())){const L=tsbPets(p);if(!
   const winter=S.month>=10;
   for(let i=L.length-1;i>=0;i--){const P=L[i],T=petT(P);let dc=T.dc||8;if(T.pond&&rkOf(p)<3)dc+=5;if(T.weak&&winter)dc+=6;
    if(me){P.care=(P.care||0)-(tsbMaid(S)?Math.ceil(dc/2):dc)}else{P.care=cl((P.care||0)-dc+((p.bac||0)>=(T.up||0)?dc+2:0)-(roll(4)?30:0),0,100)}
-   if(petOk(P)){if(T.suc){if(me)S.suc=cl(S.suc+T.suc,0,100);else p.suc=cl((p.suc||0)+T.suc,0,100)}}
-   if(T.al&&p.asthma){if(me)S.suc=cl(S.suc-2,0,100);else p.suc=cl((p.suc||0)-2,0,100)}
+   if(petOk(P)){if(T.suc){if(me)S.suc=cl(S.suc+T.suc,0,sucCap(S));else p.suc=cl((p.suc||0)+T.suc,0,sucCap(p))}}
+   if(T.al&&p.asthma){if(me)S.suc=cl(S.suc-2,0,sucCap(S));else p.suc=cl((p.suc||0)-2,0,sucCap(p))}
    if(me&&P.care<30&&!P.warn){P.warn=1;if(tsbOn()&&!petCardQ("tsbPetW"))petCard("tsbPetW",{i},"Thú nuôi biếng ăn")}
    if(P.care<=0){const n=petLose(p,i,/hoami|sao|vet|uyenuong|camke|phuong|thanhlong|hac|thienma/.test(P.t)?"bỏ đi mất vì bỏ bê":"yếu dần vì bỏ bê");if(me&&n)log(`<span class="r">${tsbCap(n)} của ngươi bị bỏ bê lâu ngày, không còn nữa.</span>`)}}}}
 function tsbPetWeek(){return petWeek()}function tsbPetMonth(){return petMonth()}
@@ -30355,8 +30409,8 @@ petWeek=function(){for(const p of [S].concat(typeof petNpcs==="function"?petNpcs
    if(me&&P.maidW&&P.maidW>tsbWk()){const m=BAL.pet.maidEff;P.full=cl(P.full+D.full*2*m,0,100);P.clean=cl(P.clean+D.clean*2*m,0,100);P.joy=cl(P.joy+D.joy*2*m,0,100)}
    if(!me){const can=(p.bac||0)>=(T.up||0);const k=BAL.pet.npcCare*(can?1:.4);P.full=cl(P.full+D.full*1.2*k,0,100);P.clean=cl(P.clean+D.clean*1.2*k,0,100);P.joy=cl(P.joy+D.joy*1.2*k,0,100);P.aff=cl(P.aff+3*k,0,100)}
    petcSync(P);
-   if(petOk(P)&&T.suc){if(me)S.suc=cl(S.suc+T.suc,0,100);else p.suc=cl((p.suc||0)+T.suc,0,100)}
-   if(T.al&&p.asthma){if(me)S.suc=cl(S.suc-2,0,100);else p.suc=cl((p.suc||0)-2,0,100)}
+   if(petOk(P)&&T.suc){if(me)S.suc=cl(S.suc+T.suc,0,sucCap(S));else p.suc=cl((p.suc||0)+T.suc,0,sucCap(p))}
+   if(T.al&&p.asthma){if(me)S.suc=cl(S.suc-2,0,sucCap(S));else p.suc=cl((p.suc||0)-2,0,sucCap(p))}
    if(P.care<BAL.pet.sad){P.bad=(P.bad||0)+1;if(me&&P.bad===1&&tsbOn()&&!tsbBot())Q.push({t:"Thú nuôi biếng ăn",who:typeof pMe==="function"?pMe():null,h:`<p>${T.n} nằm lì một góc, lông xơ, không buồn ăn. Phải chăm ngay kẻo ốm.</p>`})}
    else P.bad=0;
    if(P.bad>=BAL.pet.neglectW||P.care<=0){const n=petLose(p,i,/hoami|sao|vet|uyenuong|phuong|camke|hac|thanhlong/.test(P.t)?"bay mất vì bỏ bê":"bỏ đi vì bỏ bê");
@@ -44478,7 +44532,7 @@ function kcChance(where){const tm=kcTmMan();if(tm&&tm.alive&&S.tm96&&!S.kc.ev.me
 try{if(window.COOPW)COOPW.altTurn=()=>isKc()?kcEndTurn:null}catch(e){}
 function kcEndTurn(){if(S.dead||Q.length||S.mg)return;S.buoi=0;let ev="";
  ev+=kcW(()=>resolveTonight()||"");ev+=kcW(()=>rivalsTurn()||"");if(S.dead)return;
- S.suc=cl(S.suc+14+(S.suc<30?6:0),0,100);try{kcWeek()}catch(e){console.error(e)}if(S.dead)return;
+ S.suc=cl(S.suc+14+(S.suc<30?6:0),0,sucCap(S));try{kcWeek()}catch(e){console.error(e)}if(S.dead)return;
  if(S.tuan===2){kcMonth();if(S.dead)return}else S.tuan++;
  /* r2: the round starts on the first week from the tuyển tú month on once Sơ tuyển is passed (was: only week 0 of that month, so a Sơ tuyển
     answered late never led on); a life past the date that never had its Sơ tuyển gets it now */
@@ -45354,7 +45408,7 @@ function cmMonthMe(){const B=cmB(),m=S.maid;if(!m)return"";
  S.cmaid=S.cmaid||{};let ev="";const T=S.turn||0;S.cmaid=S.cmaid||{};const k=S.origin&&S.origin.k;const cdOk=(S.cmaid.cd||0)<=T;
  const dil=(id,pp)=>{S.cmaid.cd=T+B.dilCd;cmC("dil_"+id);pushDil(mkP(id,pp||{}),"Cung nữ thân tín")};
  /* talent */
- if(cmTalOn(m)&&m.loyal>=B.talLoy){if(m.tal==="theu"){apply({bac:B.talBac});cmC("talBac",B.talBac)}else if(m.tal==="thuoc"){S.suc=cl(S.suc+B.talSuc,0,100);cmC("talSuc",B.talSuc)}else if(m.tal==="nghe"&&roll(B.talSpy))ev+=cmFact(m,"nghe lỏm được chuyện")}
+ if(cmTalOn(m)&&m.loyal>=B.talLoy){if(m.tal==="theu"){apply({bac:B.talBac});cmC("talBac",B.talBac)}else if(m.tal==="thuoc"){S.suc=cl(S.suc+B.talSuc,0,sucCap(S));cmC("talSuc",B.talSuc)}else if(m.tal==="nghe"&&roll(B.talSpy))ev+=cmFact(m,"nghe lỏm được chuyện")}
  /* secret: costs her until known; she confides when she trusts her */
  const s=m.sec;if(s&&!s.done){if(!m.secKn){if(m.loyal>=B.secTrust&&roll(B.secTell)){m.secKn=1;cmC("secTell");if(s.k==="lover"){m.loyal=cl(m.loyal+B.secLoy,0,100);s.done=1;ev+=`${m.name} thú thật với ngươi chuyện đối thực với một thái giám; ngươi giữ kín cho nàng ta (thiện cảm +${B.secLoy}). `}else if(cdOk){dil("cmSec");return ev}}
    else if(roll(B.secOut)){cmC("secOut_"+s.k);if(s.k==="lover"){apply({danh:-B.secDanh});m.loyal=cl(m.loyal-B.secLoy,0,100);m.secKn=1;s.done=1;ev+=`Cung Chính ti bắt được ${m.name} đối thực với một thái giám; người ta cười chê cung ngươi. Danh −${B.secDanh}. `}
@@ -45375,7 +45429,7 @@ function cmMonthMe(){const B=cmB(),m=S.maid;if(!m)return"";
  return ev}
 /* other consorts' maids: the same talents and secrets (host only in co-op: NPC state) */
 function cmMonthNpc(){const B=cmB();let ev="";if(typeof mlGuest==="function"&&mlGuest())return"";for(const p of liveRivals(true)){if(!p||p===S||p.coop||!p.maid)continue;cmInitNpc(p);const m=p.maid;
- if(m.loyal>=B.talLoy){if(m.tal==="theu")p.bac=(p.bac||0)+B.talBac;else if(m.tal==="thuoc")p.suc=cl((p.suc||0)+B.talSuc,0,100);else if(m.tal==="nghe"&&roll(B.talSpy)){const x=evGuilty(p,others(p));if(x)evA(p,x,1)}}
+ if(m.loyal>=B.talLoy){if(m.tal==="theu")p.bac=(p.bac||0)+B.talBac;else if(m.tal==="thuoc")p.suc=cl((p.suc||0)+B.talSuc,0,sucCap(p));else if(m.tal==="nghe"&&roll(B.talSpy)){const x=evGuilty(p,others(p));if(x)evA(p,x,1)}}
  const s=m.sec;if(s&&!m.secKn&&roll(B.secOut)){cmC("npcSecOut");if(s.k==="lover"){p.danh=Math.max(0,(p.danh||0)-B.secDanh);m.secKn=1;if((S.mat||0)>=B.seeMat)ev+=`Cung Chính ti bắt được cung nữ thân tín của ${p.name} đối thực với một thái giám. `}else if(s.k==="debt")p.bac=Math.max(0,(p.bac||0)-B.secBac);else m.loyal=cl(m.loyal-Math.round(B.secLoy/2),0,100)}}
  return ev}
 (function(){const m0=servMonth;servMonth=function(){let r=m0.apply(this,arguments)||"";try{if(!cmOff()){r+=cmMonthMe();r+=cmMonthNpc()}}catch(e){console.error("cmMonth",e)}return r}})();
@@ -47084,6 +47138,173 @@ wrap("endTurn",f=>function(){const o=own;own=0;/* a week end reached from inside
 wrap("nextBuoi",f=>function(){const o=own;own=0;try{return f.apply(this,arguments)}finally{own=o}});
 window.COOP_ONE={ownAct:()=>own,MUTE,ONLY_ME,PERSON:Object.keys(PERSON).concat(["drawLot","cmMonth","fxIllMonth","wdNpcDress"])};
 })();
+/* ================= jkh: SỨC KHỎE (the Sức ceiling) + the pregnancy bundle (owner 16/11 18:05–19:00Z, review/suc-khoe) =================
+   Spec: dev/handover/reports/suc-khoe.md §4.1–4.7 with the owner changes (OD 16/11 18:05Z, 18:08Z, 18:10Z, 18:17Z, 19:00Z):
+   1. Sức khỏe = ONLY the Sức MAX ceiling: khOf(p) (age + lasting scars + a healing part) → sucCap(p). Regen speed unchanged; jmort `tired` is off while this is on.
+      Every Sức clamp in the game reads sucCap (j1 apply, j8 ap, j3/j76 regen, pets, maid talents, servant / khoa cử roads).
+   2. Births, hard births, stillbirths, miscarriages, close births, broken ở cữ, illness, poison lower it; rest, care, a kept ở cữ and thuốc bổ heal
+      only the healing part. Ở cữ = BAL.kh.ocuMo month (khOcu, j35 / j22): no conception; the old ×0.7 cut is gone.
+   3. Preterm (month 8 / 9) and overdue (a month late) in pregMonthP; miscarriage causes (walking, rain, heavy work, low Sức) as one capped table.
+      Childbirth death is untouched (owner 19:00Z: same formula for all, jmort.js); preterm babies and the overdue risk are as specified.
+   4. 'Lệch sổ': a birth that does not match the Kính sự phòng book becomes a public fact; rivals with a motive collect chứng cứ (evA) and demand
+      the existing blood test (jroute rtNgSet for her child, the NPC twin khNgNpc for theirs). The truth decides; danger only if someone rigs the bowl.
+      Two-way: she gets the same fact and may demand the test on an NPC's child (the existing PEND.rtNgNpc dialog).
+   5. Thuốc thúc sinh (owner PARKING_LOT #1): a woman whose affair child was conceived later than the night in the book takes it in the month the
+      book says she is due: the baby is born really early (preterm baby risk), but it looks full-term (no lệch sổ). NPCs in that spot take it too.
+   Same functions for her and every NPC consort (OD:L1386). Co-op: NPC rolls host-only (as jmort); her own health is local saved state.
+   Old saves: khScar missing → oldScar × children already born, no healing part. Every number: BAL.kh / BAL.preT / BAL.pgRisk / BAL.ngh (jbal2.js).
+   review/suc-khoe-fix (reviewer r1 F2 F4–F10): shown as "Sức N/M" in the HUD cell (hudFmt), the Sức help panel rows (HXNOW) and the person card's
+   age line (her number, everyone's "thân thể hao tổn sau …"); the NPC blood test is jroute's rtNgNpcRes (one copy); a 'lệch sổ' birth is a true
+   ledger fact (jtruth deedSync), so a clean mother can be accused up to the blood test; she gets the same chứng cứ and the same bar as NPCs. */
+function khB(){return typeof BAL==="object"&&BAL.kh&&BAL.kh.on?BAL.kh:null}
+function khAge(p){return p===S?S.age:(p&&p.age)||0}
+function khInit(p){const K=khB();if(!K||!p||p.khScar!=null)return;p.khScar=K.oldScar*((p.kids||[]).length);p.khTmp=0;p.khSw={b:p.khScar}}
+/* Sức khỏe 0–100 */
+function khOf(p){const K=khB();if(!K||!p||typeof p!=="object")return 100;khInit(p);
+ return Math.max(K.capMin,Math.round(100-Math.max(0,khAge(p)-K.ageFrom)*K.agePer-(p.khScar||0)-(p.khTmp||0)))}
+/* the Sức ceiling every clamp reads */
+function sucCap(p){const K=khB();if(!K||!p||typeof p!=="object")return 100;return Math.min(100,Math.round(K.maxBase+K.maxPer*khOf(p)))}
+/* ở cữ: no conception for BAL.kh.ocuMo month(s) after a birth (everyone) */
+function khOcu(p){p=p||S;const n=khB()?khB().ocuMo:1;return p.lastBirth!=null&&S.turn-p.lastBirth<n}/* lastBirth = the month the birth fell in; months 0..n-1 after it = n months (review r1: was <=, 2 months) */
+function khFit(p){if(p&&typeof p.suc==="number")p.suc=Math.min(p.suc,sucCap(p))}
+/* why: what left the lasting harm (b sinh nở, d trúng độc, o ở cữ không trọn) — for the person card's words */
+function khHit(p,tmp,scar,why){const K=khB();if(!K||!p)return;khInit(p);if(tmp)p.khTmp=Math.max(0,Math.min(K.tmpMax,(p.khTmp||0)+tmp));if(scar){p.khScar=(p.khScar||0)+scar;if(why){p.khSw=p.khSw||{};p.khSw[why]=(p.khSw[why]||0)+scar}}khFit(p)}
+/* the body in words (thái y scale, spec 4.6): ≥ thyLo Khỏe mạnh · ≥ thyBad Hơi yếu · below or ill Có bệnh */
+function khWord(p){const K=khB();if(!K||!p)return"";const h=khOf(p);return (typeof illOf==="function"&&illOf(p))||h<K.thyBad?"Có bệnh":h<K.thyLo?"Hơi yếu":"Khỏe mạnh"}
+/* "thân thể hao tổn sau sinh nở, …" (public causes only for other people: births) */
+function khWhy(p,me){const K=khB();if(!K||!p)return"";khInit(p);const w=p.khSw||((p.khScar||0)>0&&(p.kids||[]).length?{b:p.khScar}:{});
+ const L=[];if(w.b)L.push("sinh nở");if(me&&w.o)L.push("ở cữ không trọn");if(me&&w.d)L.push("trúng độc");return L.length?`thân thể hao tổn sau ${L.join(", ")}`:""}
+function khTonic(p){const K=khB();if(!K||!p)return;if(p.khTon===S.turn&&(p.khTonN||0)>=K.tonicMo)return;if(p.khTon!==S.turn){p.khTon=S.turn;p.khTonN=0}p.khTonN++;khHit(p,-K.tonic,0)}
+/* care sources = the jmort ones (one core: BAL.mort.life) */
+function khCareN(p){const L=BAL.mort&&BAL.mort.life;if(!L||!p)return 0;return (p.suc>=L.careSuc?1:0)+(p.doctor?1:0)+(p.arts&&p.arts.y>=L.careYt?1:0)}
+function khGuest(){return !!(window.COOPW&&COOPW.on&&COOPW.seat!=="a")}
+/* months by which the book's night lies before the real conception (an affair the book was made to fit by an earlier night) */
+function khRecOff(p){const P=BAL.preT;if(!p||!p.preg||p.fake||!p.trueFather||p.pregMismatch||p.khBook)return 0;const L=p.nightLog||[],w0=p.pregWk||0;
+ if(L.some(w=>Math.abs(w-w0)<=P.recSlack))return 0;let best=null;for(const w of L){const d=w0-w;if(d>=P.recMin&&d<=P.recMax&&(best==null||d<best))best=d}return best==null?0:Math.floor(best/TUAN.length)}
+/* miscarriage causes this month (owner 19:15Z) → [extra %, cause words] */
+function khPgRisk(p){const G=BAL.pgRisk;if(!G||!p)return[0,""];const why=[];let r=0;
+ const k=Math.max(0,(p.pgK||0)-G.freeKhac)*G.khac;if(k>0){r+=k;why.push("đi lại nhiều quá")}
+ const w=(p.pgR||0)*G.rain;if(w>0){r+=w;why.push("ra ngoài giữa mưa gió")}
+ const s=Math.max(0,(p.pgS||0)-G.freeSuc)*G.work;if(s>0){r+=s;why.push("lao lực")}
+ if((p.suc||0)<G.lowSuc2At&&(p.suc||0)>=G.lowSucAt){r+=G.lowSuc2;why.push("thân thể suy kiệt")}
+ r=Math.min(G.cap,r);if(p.anthai)r/=2;return[r,why.join(", ")]}
+function khStat(k){try{(window.__khN=window.__khN||{})[k]=(window.__khN[k]||0)+1}catch(e){}if(typeof rtStat==="function"&&/^ng_/.test(k))rtStat(k)}
+/* is this NPC driven to use a 'lệch sổ' birth against the mother? (self-interest: her own son vs a son, a rival for the same rank, deep dislike) */
+function khMotive(v,m,k){if(!v||!m||v===m)return false;const M=BAL.preT.mot;const vs=(v===S?S.kids:v.kids||[]).some(x=>x.alive&&x.sex==="m");
+ return (vs&&k.sex==="m")||(Math.abs(rkOf(v)-rkOf(m))<=M.rkGap&&aff(v,m)<M.aff)||aff(v,m)<=M.hate||(v.oan||0)>=M.oan&&m===S}
+/* a birth that does not fit the book becomes a public fact */
+function khLech(m,k,pre){k.dateOff=pre?"pre":"od";khStat("lech");const P=BAL.preT,w=pre?"sinh non":"sinh quá ngày";
+ if(m!==S){k.dateKnown=1;try{noteAdd(m.id,`${k.name} ${w}, ngày sinh lệch với đêm thị tẩm ghi trong sổ Kính sự phòng`)}catch(e){}if(!S.dead&&!S.out)evA(S,m,P.evi)}
+ if(!khGuest())for(const v of liveRivals(true))if(v!==m&&v.alive&&!v.out&&khMotive(v,m,k))evA(v,m,P.evi);
+ return m===S?`Trong cung xì xào: ${k.name} ${w}, ngày tháng lệch với sổ Kính sự phòng. `:((S.mat||0)>=1?`Trong cung xì xào: ${k.name} của ${m.name} ${w}, lệch ngày trong sổ Kính sự phòng. `:"")}
+/* the NPC twin of the blood test when the child is an NPC's (accuser = an NPC): same truth rule, same bowl tricks */
+function khNgNpc(a,m,k){const N=BAL.ngh;const r=rtNgNpcRes(m,k,a,rtNgOil(a));khStat("lech_set");khStat("ng_set");const seen=(S.mat||0)>=N.seeMat;
+ if(r.shown){khStat("lech_mix");return seen?`${a.name} tâu xin nghiệm máu cho ${k.name} của ${m.name}; máu hòa, ${a.name} mang tội vu cáo. `:""}
+ khStat(r.truth?"lech_oan":"lech_lo");if(r.truth)khStat("ng_oan");
+ return `<span class="r">${m.name}: trích huyết nghiệm thân, máu ${k.name} không hòa. Nàng bị trị tội.</span>${r.truth&&(S.mat||0)>=N.oilMat?` Tai mắt báo: bát nước đã bị ${a.name} nhỏ dầu.`:""} `}
+/* F5 (owner Q3 18:17Z): a 'lệch sổ' birth is a TRUE fact in the mother's ledger (weight BAL.preT.lsW), for her and every NPC, so evidence on it can
+   reach the accuse bar even against a clean mother; it leaves the ledger once the blood test was held or the child is past ageMax (held proof then
+   turns into rumour through jtruth's sweep). */
+function khDeed(p){const P=BAL.preT;if(!p||!S||typeof deedAdd!=="function")return;for(const k of (p===S?S.kids:p.kids)||[]){if(!k||!k.dateOff)continue;
+ const id="ls:"+k.name,live=k.alive!==false&&!k.tfOk&&(k.age||0)<=P.ageMax;p.dkeys=p.dkeys||[];const d=(p.wrongs||[]).find(x=>x.ls===k.name);
+ if(live&&!p.dkeys.includes(id)){p.dkeys.push(id);const nd=deedAdd(p,"ls",null,P.lsW,`${k.name} ${k.dateOff==="pre"?"sinh non":"sinh quá ngày"}, lệch ngày trong sổ Kính sự phòng`);if(nd)nd.ls=k.name}
+ else if(!live&&d)deedUndo(p,d)}}
+(function(){if(!khB())return;const K=BAL.kh,P=BAL.preT;
+/* ---- pregnancy month: preterm / overdue / miscarriage causes / thuốc thúc sinh, then the birth's cost to health ---- */
+const p0=pregMonthP;pregMonthP=function(p){if(!p||!p.preg||p.fake||(p!==S&&khGuest()))return p0.apply(this,arguments);
+ const me=p===S;let ev="";const c=p.preg;let realM=0;
+ /* the drug taken last month: the birth comes now, really early, looking full-term */
+ if(p.khInd){p.khInd=0;if(c<9){realM=c+1;p.preg=9;p.khPreM=realM;khStat("drug_birth")}}
+ else if((c===7||c===8)&&!p.khOd){let r=(c===7?P.m8:P.m9)+((p.suc||0)<P.lowSucAt?P.lowSuc:0)+(khOf(p)<P.khLo?P.lowKh:0)+Math.max(0,khAge(p)-P.ageFrom)*P.age;if(p.anthai)r/=2;
+  if(roll(r)){realM=c+1;p.preg=9;p.khPreM=realM;khStat("pre"+realM);ev+=me?`<span class="r">Mới ${realM===8?"tám":"chín"} tháng, ngươi đã trở dạ (sinh non).</span> `:`${p.name} trở dạ sớm (sinh non). `}}
+ else if(c===9&&!p.khOd&&roll(P.od)){p.khOd=1;khStat("od");p.pgK=p.pgR=p.pgS=0;return me?"Đã qua chín tháng mười ngày mà ngươi vẫn chưa trở dạ; bà đỡ bảo cứ chờ thêm. ":""}
+ /* miscarriage causes (a month that is not the birth month) */
+ if(p.preg+1<10){const [x,why]=khPgRisk(p);p.pgK=p.pgR=p.pgS=0;if(x>0&&roll(x)){const G=BAL.pgRisk;p.preg=0;p.hidden=false;ap(p,{suc:-G.misSuc});p.misN=(p.misN||0)+1;khStat("mis_cause");khHit(p,K.mis,K.misScar,"b");p.khBook=0;
+  return ev+(me?`<span class="r">Ngươi ${why}, động thai, sảy mất đứa bé.</span> Sức -${G.misSuc}. `:`${p.name} động thai, sảy mất đứa bé. `)}}
+ p.pgK=p.pgR=p.pgS=0;
+ const birth=p.preg+1>=10;const off=birth?khRecOff(p):0,mism=!!p.pregMismatch,od=!!p.khOd;
+ const n0=(p.kids||[]).length,s0=p.stillN||0,h0=p.hardN||0,m0=p.misN||0,ch0=p.choiceN||0;
+ const disc=me&&S.thy?S.pregDisc:null;/* F9: the thái y mạch án holds the month the pregnancy was found */
+ const br0=birthRisk,st0=BAL.mort&&BAL.mort.birth?BAL.mort.birth.stillP:0;
+ if(birth&&od){birthRisk=function(){return br0.apply(this,arguments)*P.odHard};if(BAL.mort&&BAL.mort.birth)BAL.mort.birth.stillP=st0+P.odStill}
+ let r;try{r=p0.apply(this,arguments)}finally{birthRisk=br0;if(BAL.mort&&BAL.mort.birth)BAL.mort.birth.stillP=st0}
+ ev+=r||"";if(p.preg)return ev;
+ /* the pregnancy ended this month: what did it cost? */
+ p.khOd=0;p.khPreM=0;p.khBook=0;if((me&&S.dead)||p.alive===false)return ev;
+ if((p.misN||0)>m0){khHit(p,K.mis,K.misScar,"b");return ev}
+ if(!birth)return ev;
+ const close=p.khLastB!=null&&S.turn-p.khLastB<K.closeMo;p.khLastB=S.turn;
+ if((p.stillN||0)>s0||((p.choiceN||0)>ch0&&(p.kids||[]).length===n0))khHit(p,K.still,K.stillScar,"b");
+ else khHit(p,K.birth+((p.hardN||0)>h0?K.hard:0),K.birthScar+((p.hardN||0)>h0?K.hardScar:0),"b");
+ if(close)khHit(p,K.close,K.closeScar,"b");
+ p.khOcuT=S.turn;p.khOcuX=0;if(me)ev+=`Thái y dặn: ở cữ ${K.ocuMo} tháng, chớ ra khỏi cung, chớ làm việc nặng. `;
+ const nk=(p.kids||[]).slice(n0);realM=realM||(od?11:10);
+ for(const k of nk){if(disc!=null)k.thyRec=disc;if(realM<10){k.pre=realM;if(roll(realM<=8?P.die8:P.die9)){k.tho=0;k.thoM=((S.month||1)%12)+1;k.thoO=0;k.nb=1;k.nbWhy="sinh non yếu ớt, không qua khỏi";khStat("pre_die")}}
+  if(od&&k.alive!==false){if(roll(P.odOmen)){if(k.sex==="m")ap(p,{danh:P.omenDanh});ev+=me||(S.mat||0)>=1?`Thai quá ngày mới sinh; trong cung đồn ${k.name} là điềm thánh nhân giáng thế. `:""}
+   else ev+=me?`Thai quá ngày mới sinh; có kẻ rỉ tai đó là điềm chẳng lành. `:""}
+  if(!mism&&realM+off!==10&&!k.gone)ev+=khLech(p,k,realM+off<10)}
+ return ev};
+/* ---- each month, per person: illness / poison / healing / the ở cữ month (her and NPCs; NPC rolls on the host) ---- */
+const i0=illMonthP;illMonthP=function(p){let ev=i0.apply(this,arguments);try{if(!p||p.alive===false||(p===S&&S.dead)||(p!==S&&khGuest()))return ev;khInit(p);
+ const i=illOf(p);if(i)khHit(p,K.illSt*(i.st||1),0);
+ if((p.sick||0)>0){khHit(p,K.sick,p.khPois?0:K.poisonScar,"d");p.khPois=1}else p.khPois=0;
+ if(!i&&!(p.sick>0)&&p.khTmp>0)khHit(p,-(K.rec+K.recCare*khCareN(p)),0);
+ if(p.khOcuT!=null&&S.turn-p.khOcuT>=K.ocuMo){const broke=p.khOcuX;p.khOcuT=null;p.khOcuX=0;
+  if(broke){khHit(p,0,K.ocuScar,"o");khStat("ocu_broken");if(roll(K.ocuIll))ev+=catchIll(p,"hausan")||"";else if(p===S)ev+="Ở cữ không trọn, thân thể ngươi hao tổn. "}
+  else{khHit(p,-K.ocu,0);khStat("ocu_kept");if(p===S)ev+="Ở cữ trọn tháng, thân thể ngươi hồi lại phần nào. "}}
+ if(!illOf(p)&&khOf(p)<K.illLo&&roll(K.illP)){const sea=SEASON[S.month-1];const L=Object.entries(ILL).filter(([k,d])=>d.sea&&d.sea.includes(sea));ev+=catchIll(p,L.length?pick(L)[0]:"phonghan")||""}
+ khFit(p)}catch(e){console.error(e)}return ev};
+/* ---- her moves: walking while pregnant (khắc, rain) and the ở cữ month ---- */
+const g0=goTo;goTo=function(k){const from=S&&S.place;let tc=0;try{tc=from&&k!==from?travel(from,k):0}catch(e){}const r=g0.apply(this,arguments);
+ try{if(S&&from!==S.place&&S.place===k){if(S.preg&&!S.fake){S.pgK=(S.pgK||0)+tc;if(harsh())S.pgR=(S.pgR||0)+1}
+  if(S.khOcuT!=null&&k!=="home"&&!S.khOcuX){S.khOcuX=1;log("Đang ở cữ mà ra khỏi cung, gió độc dễ nhập vào người.")}}}catch(e){}return r};
+/* ---- her cards: Sức spent (pregnancy work, ở cữ), thuốc bổ heals ---- */
+const a0=act;act=function(i){const a=deck&&deck[i];const was=a&&a.done;const r=a0.apply(this,arguments);
+ try{if(a&&!was&&a.done&&S&&!S.dead){const s=a.c&&typeof a.c==="object"?-(a.c.suc||0):0;
+  if(s>0){if(S.preg&&!S.fake)S.pgS=(S.pgS||0)+s;if(S.khOcuT!=null&&s>=K.ocuHeavy&&!S.khOcuX){S.khOcuX=1;log("Đang ở cữ mà làm việc nặng, thân thể dễ sinh bệnh hậu sản.")}}
+  if(/thuốc bổ/i.test((a.n||"")+" "+(a.t||"")))khTonic(S)}}catch(e){console.error(e)}return r};
+/* ---- thuốc bổ chosen in an event / dialog (j68e "Để thái y kê thuốc bổ", j42 "Xin thuốc bổ", spec 4.3): the same tonic ---- */
+if(typeof chooseM==="function"){const c0=chooseM;chooseM=function(i){const m=Q&&Q[0],c=m&&m.opts&&m.opts[i];const r=c0.apply(this,arguments);
+ try{/* chosen = the dialog left the queue (a choice it could not pay for stays) */if(c&&Q[0]!==m&&S&&!S.dead&&/thuốc bổ|bồi bổ/i.test(String(c.n||"")))khTonic(S)}catch(e){}return r}}
+/* ---- the world each month: rivals with chứng cứ demand the blood test on a 'lệch sổ' child; NPCs take the drug in that spot ---- */
+window.khWorld=function(){let ev="";if(!S||S.dead||khGuest())return ev;
+ for(const v of liveRivals(true))if(v.preg&&!v.fake&&!v.khInd){const o=khRecOff(v);if(o>=1&&v.preg===9-o&&roll(P.npcDrug)){v.khInd=1;khStat("drug_npc")}}
+ const moms=[S].concat(liveRivals(true));
+ for(const m of moms){if(m!==S&&(!m.alive||m.out))continue;if(m===S&&S.out)continue;for(const k of (m===S?S.kids:m.kids)||[]){if(!k.alive||!k.dateOff||k.tfOk||(k.age||0)>P.ageMax)continue;
+  if(m===S&&S.rt&&S.rt.ng)break;
+  const acc=liveRivals(true).find(v=>v!==m&&v.alive&&!v.out&&khMotive(v,m,k)&&evG(v,m)>=P.accEv&&(typeof rtGateT!=="function"||rtGateT(v,m,"accuse").ok));
+  if(!acc||!roll(P.accP))continue;
+  if(m===S){khStat("lech_set");if(typeof rtNgSet==="function"){rtNgSet(k,acc.id);ev+=`${acc.name} cầm chuyện ${k.name} lệch ngày trong sổ Kính sự phòng, tâu xin trích huyết nghiệm thân. `}}
+  else ev+=khNgNpc(acc,m,k);break}}return ev};
+const m0=monthTick;monthTick=function(){let ev=m0.apply(this,arguments);try{ev+=khWorld()}catch(e){console.error(e)}return ev};
+window.monthTick=monthTick;
+/* ---- her cards: thuốc thúc sinh; the blood test on an NPC's 'lệch sổ' child (kit card rtCard, the existing PEND.rtNgNpc dialog) ---- */
+const d0=deal;deal=function(){d0.apply(this,arguments);try{if(!S||S.out||S.dead||!S.preg||S.fake||S.khInd)return;const o=khRecOff(S);if(o<1||S.preg<9-o||S.preg>8)return;const D=P.drug;
+ deck.unshift({n:"Uống thuốc thúc sinh",t:"Bài thuốc giục sinh, cho đứa bé ra đời đúng ngày sổ Kính sự phòng ghi.",c:{bac:-D.bac},o:od(D.o+(S.arts.y||0)*D.perY),w:{},l:{suc:-D.sucF},
+  x:`tháng tới trở dạ, đúng ngày trong sổ · đứa bé thật ra sinh non, dễ yếu · hỏng: Sức -${D.sucF}`,dom:"Sức khỏe",go:()=>{S.khInd=1;apply({suc:-D.suc});khStat("drug_me")}})}catch(e){console.error(e)}};
+if(typeof rtCards==="function"){const r0=rtCards;rtCards=function(){let A=r0.apply(this,arguments);try{if(!rtRoad()||S.out||(window.__bot&&!window.__rtGo))return A;
+ for(const v of liveRivals(true)){const k=(v.kids||[]).find(x=>x.alive&&x.dateOff&&x.dateKnown&&!x.tfOk&&(x.age||0)<=P.ageMax);if(!k)continue;if(A.some(c=>c.rtId==="ngn_"+v.id))continue;
+  const ev=typeof evG==="function"?evG(S,v):0;
+  A.push(rtCard({id:"ngl_"+v.id,n:`Tâu xin nghiệm thân ${k.name}`,t:`${k.name} của ${v.name} ${k.dateOff==="pre"?"sinh non":"sinh quá ngày"}, lệch ngày trong sổ Kính sự phòng.`,art:RT_ART.con,k:1,need:[[`chứng cứ về ${v.name} (có ${ev}/${P.accEv})`,ev>=P.accEv]],
+   x:"mở buổi trích huyết nghiệm thân (chọn cách ở bước sau)",kem:"máu hòa thì ngươi mang tội vu cáo",go:()=>{khStat("lech_me");rtPush("rtNgNpc",{v:v.id,k:k.name})}}));break}}catch(e){console.error(e)}return A}}
+/* ---- shown (spec 4.6, review r1 F2): the HUD Sức cell reads "N/M" (every writer of the cell goes through hudFmt); the Sức help panel lists
+   Sức · Sức tối đa · Sức khỏe in kit rows (HXNOW); the person card's age line (her card, consorts' cards) carries the body in words ---- */
+{const h0=hudFmt;hudFmt=function(k,v){return k==="suc"&&S&&typeof v==="number"?`${v}/${sucCap(S)}`:h0.apply(this,arguments)}}
+if(typeof HXNOW==="object")HXNOW.suc=()=>{if(!S)return null;const w=khWhy(S,true);return[["Sức",`${S.suc}`],["Sức tối đa",`${sucCap(S)}`],["Sức khỏe",khWord(S)+(w?` · ${w}`:"")]]};
+/* person cards (her card, the stage popup card, the Hậu cung consort card): the info row gets "Sức tối đa: M" (hers, when below 100; the kit
+   popup turns it into a chip like Tuổi) and the body in words for everyone ("Thân thể hao tổn sau sinh nở"), each its own row (KIT §9: one fact per row) */
+function khInfo(p){if(!p||!khB()||p.alive===false||(p!==S&&p.out))return[];const me=p===S,w=khWhy(p,me),c=sucCap(p);
+ return [me&&c<100?`Sức tối đa: <b>${c}</b>`:"",w?w.charAt(0).toUpperCase()+w.slice(1):""].filter(Boolean)}
+if(typeof pcard==="function"){const p0=pcard;pcard=function(o){try{if(S&&o&&o.name&&!o.__kh){const p=o.name===S.name?S:(rivals||[]).find(v=>v&&v.name===o.name);
+ const L=p?khInfo(p):[];if(L.length)o=Object.assign({},o,{__kh:1,lines:(o.lines||[]).concat(L)})}}catch(e){}return p0.call(this,o)}}
+/* the Hậu cung consort card rebuilds its info row after pcard (only Đức · Danh + stats): the words go in front of its stats (as j24's danger word) */
+if(typeof rvCard==="function"){const r0=rvCard;rvCard=function(v){let h=r0.apply(this,arguments);try{const L=v?khInfo(v):[];for(const x of L.slice().reverse())if(!h.includes(x))h=h.includes('<div class="kpstats">')?h.replace('<div class="kpstats">',`<span>${x}</span><div class="kpstats">`):h.replace('<div class="pcinfo">',`<div class="pcinfo"><span>${x}</span>`)}catch(e){}return h}}
+/* a new game / an old save: health set once */
+const s0=start;start=function(){const r=s0.apply(this,arguments);try{if(S){khInit(S);(rivals||[]).forEach(khInit)}}catch(e){}return r};
+const z0=deser;deser=function(){const r=z0.apply(this,arguments);try{if(S){khInit(S);(rivals||[]).forEach(v=>{khInit(v);khFit(v)});khFit(S)}}catch(e){}return r};
+/* F5: the 'lệch sổ' fact in every ledger sync (her and NPCs) */
+if(typeof deedSync==="function"){const ds0=deedSync;deedSync=function(p){ds0.apply(this,arguments);try{khDeed(p)}catch(e){}}}
+})();
 
 window.__ctmBuilt=1;
 </script>
@@ -47112,7 +47333,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="dc467b22ef69";window.CTM_BUILD=BUILD;
+const BUILD="c8aba66cd652";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
