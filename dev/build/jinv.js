@@ -181,7 +181,6 @@ setTimeout(()=>{if(typeof showModal!=="function")return;const s0=showModal;showM
 #modal .dlg.kitslot .kslhead>.kpsubj.kpitem{position:static!important;width:64px;margin:0;padding:0;top:auto}
 #modal .dlg.kitslot .kslhead>.kpsubj.kpitem>.kitem{--isz:64px!important;width:64px!important}
 #modal .dlg.kitslot .kslhead>.kpsubj.kpitem .kitg{display:none}
-#modal .dlg.kitslot .kslhead>.kpsubj.kpitem .kitx{font-size:.62rem;padding:1px 4px}
 #modal .dlg.kitslot .kslinfo{min-width:0}
 #modal .dlg.kitslot .kslinfo>.kinvrows{margin:0}
 #modal .dlg.kitslot .kslinfo>p{margin:4px 0 0}

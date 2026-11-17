@@ -1,0 +1,9 @@
+/* kit-size8-lux.js — the Xa xỉ box is ONE master in container units (KIT §84 (5)): renders kitItem at every size (sm/md/lg/xl/slot) with lux 33 and a 2-digit number, measures the box rect / frame rect.
+   Expected (XL master 150 px frame: box 34 at 4/4): size .227, top/right offset .027 (min box 14 px under a 62 px frame). usage: node dev/test/kit-size8-lux.js <url> [out.png outside the repo] */
+const {chromium}=require('playwright');const [,,URL,OUT='-']=process.argv;
+(async()=>{const b=await chromium.launch();const p=await (await b.newContext({viewport:{width:900,height:400},serviceWorkers:'block'})).newPage();const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,160)));
+ await p.goto(URL+'?khost=0',{waitUntil:'domcontentloaded'});await p.waitForFunction(()=>typeof kitItem==='function',null,{timeout:60000});await p.waitForTimeout(1500);
+ const R=await p.evaluate(()=>{const h=document.createElement('div');h.id='lx';h.style.cssText='position:fixed;left:0;top:0;z-index:99999;background:#f4ead6;padding:10px;display:flex;gap:14px;align-items:flex-start;width:880px';document.body.appendChild(h);
+  const sz=[['sm',52],['md',72],['lg',104],['xl',150],['slot',58]];h.innerHTML=sz.map(([s])=>`<div style="width:${s==='xl'?150:s==='lg'?104:s==='md'?72:s==='sm'?52:58}px">${kitItem({src:'img/item/tramngoc.webp',name:'',grade:3,lux:33,size:s})}</div>`).join('');
+  return [...h.querySelectorAll('.kitem')].map((e,i)=>{const f=e.querySelector('.kitb').getBoundingClientRect(),x=e.querySelector('.kitx').getBoundingClientRect(),w=e.querySelector('.kxw');return{size:sz[i][0],frame:Math.round(f.width),box:+(x.width/f.width).toFixed(3),right:+((f.right-x.right)/f.width).toFixed(3),top:+((x.top-f.top)/f.width).toFixed(3),word:!!w&&getComputedStyle(w).display!=='none'}})});
+ console.log(JSON.stringify(R));if(OUT!=='-')await p.locator('#lx').screenshot({path:OUT});console.log('errs',errs.length);await b.close()})();
