@@ -267,3 +267,24 @@ Rule after AG-ALL: '!' at place k this buổi ⇔ some agent's plan has a witnes
 | C schemes/harm + AG-HAP | helper 2 | ACT harm table (bribe, block, musk, catswap, ksab, kpoison, pond, kframe, takeaway, vp, plant, steal/road, gift) + jpoison/jsteal as consort options inside the motive gate (remove j8.js:398-399 4 % gate, j8:489 steal roll); agHap '!' from planned deeds; jact strollP/hapP removed; tests | A interface |
 Test (all parts): dev/test/ag-all.test — per group, histogram of chosen acts over N days (bot), no NPC-only hidden act (every chosen k maps to a player button), old save loads, perf p95 ≤ BAL.ag.perf.p95.
 
+
+## 11. LIFE IDEAS (Foreman C 13:30Z: owner wants NPCs as alive as possible; her 13:40Z day plan was a question — kept because sound)
+Every idea = the same act lists as the player, numbers in BAL.ag (jbal2). "exists" = reuse, no rebuild.
+| # | idea | reuse / status | part |
+|---|---|---|---|
+| L1 | habits / favourite places and times | exists: j95hab (per-person habits) is the "no goal" weight base of each plan slot | A (done, ca94ddd4) |
+| L2 | memory of who helped / hurt her drives visits and grudges | exists: jmem memAdd → aff / oan / hostility, read by AGSOC target picks (agSpite, aff) | A (reuse) |
+| L3 | the day's feeling shapes the plan | jemo p.emo leans needs at plan time: BAL.ag.day.mood (sad → stays in / rests, angry / jealous → spite, afraid → safety, happy → company) | A (built) |
+| L4 | NPC↔NPC friendships / feuds that grow | exists: AGSOC help/visit/follow/provoke/humil aim at NPCs by aff / spite; jgreet NPC↔NPC meet | A (reuse) |
+| L5 | rumours spreading person to person | gossip deed (TW gossip) → next holder re-tells by her own plan (gossip chain) | C |
+| L6 | small talk / visits between NPCs | exists: AGSOC visit + j95dist neighbour visits; jgreet NPC↔NPC | A (reuse) |
+| L7 | plans broken by weather / illness / summons | re-plan triggers: rain on a garden slot, falling ill (always re-plan), touched (player's deed, failed deed), need change (BAL.ag.day.replan); summons = TH/HH deeds that call someone | A (built: weather, illness; summons next) |
+| L8 | long goals (rank, child, revenge) steer daily choices | road weights BAL.ag.road + needs (kid, spite); rank gap need to add | A (next) |
+| L9 | the Emperor's own day: visits palaces (also NPC consorts), stroll, tea, summons for đàn/cờ | jvisit/j24/jts rolls → his plan deeds | A (next) |
+| L10 | maids' and eunuchs' own lives (love, feuds, errands, ageing out) | j42/jmline/j10 rolls → choices | B |
+| L11 | world windows (tang, tuyển tú, fire, flood…) change everyone's plan | worldPlanW(p) read by the planner (agreed with review/world-events) | A (hook done) + world-events worker |
+
+## 12. STATUS (review/ag-all)
+- 4520fdf1 core jagday (day plan, registry); 377231a9 part A acts (HH hhAct one function for her buttons + NPC Empress, TH needs/acts, consort cx cards, old rolls guarded); ca94ddd4 agDrawReg/agBaseReg/agPlanned/world pull.
+- Flat rolls REMOVED while BAL.ag.day.on (before → after): j8 HH judge roll(35·mindW) → hh:judge option; j8 TH gift roll(8) → th:gift; j8 HH conf roll(10) / reward roll(6) → hh:conf / hh:reward; j20 payCuts roll(20) + queenRewards → hh:cutpay / hh:reward; j75 admon roll(30) → admon (HH) / th:admon; j14 TH release roll(10) → th:release; j8 npcMonthly art roll(30) / shop roll(25) / gift roll(15) / Sủng roll(30) / ally roll(10) / rv-gift roll(10) → cx:study / cx:buy / cx:gift / effort / cx:ally / (C: rv item); j85 npcStudy roll(40·nết) / charity roll(5) → cx:study / cx:alms; j95 surprise dice J95.SUR inside the day plan → re-plans.
+- Checks: agent_check 16/16, agemp 20/20, agmaid 23/23, greet 13/13 (one run of 3 had 1 FAIL in the greeting table — flaky, under watch); probe 4–8 days 0 errors, day draw 2–4.4 ms.
