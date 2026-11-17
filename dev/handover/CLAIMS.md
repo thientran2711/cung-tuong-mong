@@ -838,3 +838,4 @@
 >>>>>>> 61f334cd (review kit-ico-rank-r2 report: PASS aaa1bec1)
 | loading-words: every loading/wait line literary cổ trang (OD ~15:25Z (7)), whole family | review/loading-words | MAIN s33 | session_01UV1SzkaNQaeHGcLrqFrzzQ | RUNNING | 17/11 15:28Z |
 | REVIEW morechip-sil r2 PASS 4821b39d (count math + name plaque fixed) — waits for round 4 icon gaps, then icon-delta re-check → batch | review/morechip-sil-r2 | MAIN s33 | session_01UV1SzmEh1P3ynxAm3BMz7L | PASS (icon delta pending) | 17/11 15:27Z |
+| tinbao-ui: TIN BÁO top-bar badge + gold toast + kit card on C-AG API (OD ~14:50Z (2)) | review/tinbao-ui | MAIN s33 | (opening) | RUNNING | 17/11 15:35Z |
