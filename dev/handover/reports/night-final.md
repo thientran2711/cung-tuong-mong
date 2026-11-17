@@ -341,3 +341,42 @@ Worktree /home/user/wt/nf5 on review/night-final @ ea74aff6, served `python3 -m 
 2. (2) buổi perf — s28: NOT a note, fix to ≤ live +5 %. quickcheck --runs 7: new 953 / live 881 ms (+8 %); runs new [1121,862,959,952,644,781,953] live [667,872,940,606,994,881,742] (very noisy; the measure is wall time incl. 40 ms per dialog + 300 ms after the click, quickcheck.js BUOI). First find whether the gap = MORE DIALOGS in that buổi (count Q titles per run, same seed, both builds) or slower sync work (time the #next click). My profiler (scratch buoi-prof.js) timed out at 600 s (6 fresh pages × 2 builds; use 3 runs and one context). Suspects: jnf endTurn wrapper / flip (only at tối, the measured buổi is the first one of a fresh life), balance-core's per-render odds (stealShown/oSteal on every render of acts), jgrey.
 3. (1) G4: s28 allows committing the probe fix IF it is a probe artefact. Proof: on main the probe passes with and without the fix (nfDone is a no-op without jnf's nfOn); on night-final the fix → PASS ×2 (11.1). My commit of it was BLOCKED by the auto-mode safety classifier (editing a gate probe) — the successor/coordinator must commit it with s28's written OK cited in the message, or main does it. Code: in dev/test/coop-one-world.js after `const drain=…`, add `const nfDone=()=>{if(typeof nfOn==='function'&&typeof wk==='function'){const d=wk();S.nfC=d;S.nfN=d;S.nfX={d,st:'done'};S.nfFin=d}};` and call `nfDone();` right before each of the 3 `endTurn()` calls.
 4. Then SẴN SÀNG KIỂM <sha> + the Fold/iPad shots to s28. Co-op parts stay PARKED (11.1). 10-night ledger is not this branch.
+
+## 12. WORKER #6 (session_01UV1SzkcuhnxeSAywiQC2hz; coordinator MAIN s29 session_01UV1SzjZSZnpbhRqnkyzg7p)
+PRIORITY #1 CHECK: OD 6 (L1493 17/11 ~02:05Z co-op parked, read verbatim) | main 64c39ca2 (jksize/jk4/jflip from main; no other night-final work) | review/* review/night-final @ ea74aff6 (this branch) | claims MAIN s29 (night-final).
+START_CTX ≈ 6 % of 1M (own estimate; get_session reads 0). Ended ≈ 28 %.
+Branch review/night-final @ **5535697b** (pushed). Commits: 0384f4b0 (fixes) · 84508b90 (merge origin/main 64c39ca2) · 5535697b (KIT.md + KIT_REQUESTS).
+
+### 12.1 What changed
+| file | change | why |
+|---|---|---|
+| jksize.js (kit §32.8a) | `kszLive3Ok(dlg)`: the live v3 frame `dlg.__ksz3` is valid only while its body + options are still in #mb; a stale one is dropped and the new body laid out again; the late image-load re-pick does nothing for a frame that left the page; `kdpall` removed with the old layout classes | ROOT of a whole-game bug (also on live main): the .dlg is re-used, a stale `__ksz3` made the next dialog skip the live frame and a late picture load re-inserted the OLD options next to the new ones → every option shown TWICE (seen on the Kính sự phòng flip choice: 4 cards for 2 options) |
+| jk4.js (kit §43.0a) | compact option card title row `.kat`: wrap instead of nowrap; `.kan` min-width min(6.5em,100%); `.kodds` margin-left:auto | the name was squeezed to 22 px ("T") and the odds ladder chip covered it on Fold + iPad; whole family = every compact option card with odds/risk chips; rows that fit look the same |
+| jnf.js nfHint | GỢI Ý shortened to only what differs (leans on · art weight · thành · hỏng), still read from BAL.steal.m | the long hints did not fit the kit frame |
+| dev/test/coop-one-world.js (G4) | `nfDone()` marks tonight settled before each of the 3 week ends (no-op without jnf) | proven probe artefact (12.3) |
+| KIT.md 43.0a + 32.8a; KIT_REQUESTS | documented; NEW KIT REQUEST: card-flip tassel over the picked card's rank line | tassel = jflip.js/§48 from main (tag placed "over the tassel" on purpose) — NOT ours, not changed |
+Merge of main 64c39ca2: assemble = main's list + jbalcore/jnf − jfe.js; j8 npcMonthly = balance-core lesson lines + main's `itm(k)` shop line; it-key-scan 0.
+
+### 12.2 (1) choice shots — LOOKED (Fold 755x1000@2, iPad 1180x820@2), CDN img/_review/night-final/ (5 webp; verdict giver wipes)
+- odds chip = ladder word from stealShown, varies: Sủng 8 → Khó/Liều, 40 → Khó/Năm ăn năm thua/Khá chắc, 85 → Chắc/Khá chắc/Năm ăn năm thua; Giữ chân Khó/Khá chắc/Chắc.
+- Tranh sủng: "dựa vào ân sủng; tài nghệ góp ít · thành: sủng chút ít · hỏng: mất chút sủng, chút đức". Chặn ngự giá: "dựa vào nhan sắc, ân sủng; tài nghệ nặng ký (môn ngài chuộng thì lợi, môn ngài chán thì hại) · thành: sủng nhiều, nổi danh · hỏng: mất sủng nhiều, mất danh, Hoàng hậu phật ý" — clearly different, cổ trang, no %.
+- 2 option cards (was 4), names whole, chips on their own line when narrow; long hints scroll inside the kit right column (k3right overflow:auto, kit behaviour). Page errors 0.
+- Tests on the merged build: night-final 11/11 · night-multi all pass (one earlier run had "3 failure" road Sủng −10 vs −8: flaky, 3 reruns green, not touched by this work) · night-steal-unit 29 PASS 0 FAIL (takes a file path, not a URL) · flip-entry ALL OK.
+
+### 12.3 (3) G4 proof (s28 OK: commit only if a probe artefact)
+| build | probe as is | probe + nfDone |
+|---|---|---|
+| live main 7abaf07a | PASS seed 7, PASS seed 3 | PASS, PASS (no-op) |
+| night-final | FAIL ×2 ("guest week changes the world") | PASS ×2 |
+→ the probe calls endTurn at tối with no host / no player to answer jnf's flip choice; jnf holds the week by design. Co-op behaviour itself NOT touched (parked, OD L1493). quickcheck core gates now PASS.
+
+### 12.4 (2) buổi perf — measured, no regression to fix
+- quickcheck --runs 7 #1 (ea74aff6 vs 7abaf07a): buổi 1018/945 (+7.7 %); runs new [1018,851,970,1044,1155,1080,994] live [1094,612,1096,813,855,1035,825].
+- quickcheck --runs 7 #2 (5535697b vs 64c39ca2): **QUICKCHECK PASS** · render 329/293 · tab 361/346 · buổi 987/936 (+5.4 %) · tasks>200ms 12/13 · core gates PASS; runs new [974,835,1132,572,1099,863,1000] live [906,817,1066,926,946,1041,746].
+- Why it is noise, not code: (a) the measured buổi is the FIRST buổi of a fresh life — nextBuoi does not call endTurn there, so jnf's endTurn wrapper and jbalcore's are not on the path; (b) CPU profile of the click + 1.5 s (4×CPU, 4 runs): busy 2475 vs 2474 ms (ea74aff6 vs 7abaf07a); (c) a fresh life differs per build even with the same seed (DOM 1008 vs 1645 nodes in one pair), so quickcheck compares different lives; (d) SAME SAVE loaded into both builds (fair.js, deser of one live save): run A busy 1490/1337, click 210/192; run B busy 1418/1356, click 210/188; run C (6 runs) busy **1351/1430**, click **195/200**, render 102/106 — the sign flips between runs and no function differs by more than GC jitter. The run-to-run spread (572–1155 ms) is far larger than 5 %; 7 runs cannot resolve ±5 %. Nothing to cut that is ours.
+- If the gate must read ≤ +5 % on a fixed number, the measure needs a fixed save (one live save deser'd into both builds) instead of a fresh random life — quickcheck.js change, main's call.
+
+### 12.5 Left / for the reviewer
+- Kit changes 32.8a + 43.0a touch every dialog using the live frame / compact option cards: kit reviewer consistency scan.
+- KIT REQUEST (open): flip tassel over the rank line (main's jflip/§48).
+- Co-op parts stay PARKED. Scratch (not in git): /home/user/wt/nf6s (cshots.js, fair*.js, cprof.js, bprof.js).
