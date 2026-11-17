@@ -28,3 +28,9 @@ START_CTX ~5 % (estimate).
 | shots looked at | chip sheet 60 frames, bag Fold + iPad, wear pick Fold, item card Fold, shop Fold, gift tiles Fold, reveal/sm/lg synthetic Fold |
 
 Re-review after the fix: only jgpick.js + the `.kshc>.kshpic` rule + a gift tile Fold/iPad shot.
+
+## R2 re-check (code 526e1bc8 / build 0295fa45) — VERDICT: **PASS 0295fa45** (ancestor = current origin/main 08725411 included)
+1. Gift pick tile: grade word gone (kip tiles: 4 chips, wordsBelow []); Fold shot looked at: chip, then name, then use line, no duplicate.
+2. Chip/name gap: kit-size9-gap iPad 0 touches; my overlap scan shop / pet shop / gift tiles Fold + iPad = 0; kit-size9-gap Fold dupWord 0.
+Other checks: kit-size9-chip 60/60 bad 0; quickcheck PASS 147 s (old save ok); coop-e2e 59/59.
+Nit (not blocking): on the kit SAMPLE page at Fold, the XL "Ngự tứ" chip of the last item-frame sample hangs over the next section heading "§8.2b · Thẻ nơi chốn" (the sample has no bottom margin; docs page only, not a game screen). Also one sub-pixel touch (-0.6 px) "Tiến bộ" in a kinvg sample, did not reproduce on a second scan. Suggest a margin-bottom under the XL sample row at the next kit touch.
