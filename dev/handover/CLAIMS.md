@@ -862,3 +862,5 @@
 | harm-acts-expert: drama/history list of harm acts nhẹ/vừa/nặng with visible filters + minigame fit (OD 16:40Z; OD:L1327) (sonnet; brief briefs/s34-harm-acts-expert.md) | review/harm-acts-design | MAIN s34 | session_01UV1SzhJvtkPFYjL1ee1Y1P | DESIGN READY e6e36106 | 17/11 16:40Z |
 | REVIEW world-ret-phong r1 (opus BIG) of 54cb809f | review/world-ret-phong-r1 | C-AG | session_01UV1Szgs7rrynEBwLodvmU5 | RUNNING | 17/11 16:41Z |
 | REVIEW one-core-jkc-2 da026fc87 (opus BIG; brief briefs/review-one-core-jkc-2.md) | review/one-core-jkc-2-r1 | B | session_01N1tNP2MBRBHV2KnMWfTMRx | RUNNING | 17/11 16:55Z |
+| REVIEW one-core-jkc-2 da026fc87 (opus BIG; brief briefs/review-one-core-jkc-2.md) | review/one-core-jkc-2-r1 | B | (opening) | RUNNING | 17/11 16:55Z |
+| DAY-KHẮC AUDIT: every feasibility check uses total khắc left in the DAY, never the buổi (OD 16:45Z + L852/L1473) — scan + fix whole family | review/day-khac-audit | D | (D opens) | ORDERED | 17/11 16:45Z |
