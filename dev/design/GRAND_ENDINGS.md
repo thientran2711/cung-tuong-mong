@@ -1,13 +1,13 @@
 PRIORITY #1 CHECK ('đại kết cục|grand ending|GRAND_ENDINGS|kết hiếm|RARE_ENDINGS|danh hiệu|Bảng vàng|Sổ luân hồi'): OD 2 direct (L1601, L1613) + 9 related (L644, L1072, L1243, L1252, L1306–L1324 titles, L1327, L1386, L1402, L1403) | ledger 0 | main: j97.js + dev/RARE_ENDINGS.md (rare endings), j67.js ARC67 (premise arcs, s_*, st_*), jroad.js + jrd_<origin>.js (roads .5–.11, RD97L rare finale), jend14.js (ch12–14), jdh.js/jdh2.js + jtitle.js (titles, KIT §82), j90.js kitPodium «Bảng vàng», j32.js Sổ luân hồi, jagent.js (NPC agent loop) | review/* none for grand endings (review/story-rare = j97, live) | claims: this worker only (D STATUS L360–L362)
 
 # GRAND ENDINGS (Đại kết cục) — SKELETON DESIGN
-Status: DESIGN ONLY (feature freeze OD:L1402 — build after current work). No code, no BAL edits. Author: opus design worker for Foreman D #9 (brief dev/handover/briefs/D9-grand-endings-design.md). Expert research (step 1): dev/handover/reports/grand-endings-expert.md (docs branch).
+Status: REVISION 2 (owner correction 17/11 ~14:55Z, OD:L1613 rule (1) overwritten + L1618: no destined ending per life → fixed set + narrowing funnel + FAIL endings; definitions §2.0; game survey §2.0b). DESIGN ONLY (feature freeze OD:L1402 — build after current work). No code, no BAL edits. Author: opus design worker for Foreman D #9 (brief dev/handover/briefs/D9-grand-endings-design.md). Expert research (step 1): dev/handover/reports/grand-endings-expert.md (docs branch).
 Owner words: READ VERBATIM in dev/OWNER_DECISIONS.md — "(17/11 ~14:30Z real, s32 chat) OWNER DESIGN grand endings" (L1613) and "(17/11 ~14:45Z real, s31 chat) OWNER IDEA" (L1601) point (3)–(5); plus L644, L1072, L1243, L1252 (NPC roads / side quests), L1306–L1324 (titles, name tag), L1327 (expert first), L1386 + L1403 (NPCs same rules, two-way). This doc never replaces her words.
 Language: English; every player-visible string is Vietnamese per dev/kit/VANPHONG.md (cổ trang, no %, odds only as the ladder words).
 
 ---
-## 0. One-paragraph summary
-Every life, the machine secretly draws ONE **Thiên mệnh** (destined grand ending) from the 4 grand endings of her identity branch (10 identities × 4 roads = **40 branches × 4 = 160 grand endings**). Nobody — not she, not any NPC — is told. Her own choices across the road quietly gather or break it, and at the end of the life's story one hồi — **Hồi Thiên mệnh** — asks the **last two choices** (where: stay / take power / leave / follow someone; how: mercy / force / let go). If her choices match the destiny and its one condition holds, the **Đại kết cục** fires: a big event with its own painted scene, a very large reward and a unique **title**. If not: «Cuộc đời ngươi vẫn tiếp tục như thế.» — nothing else, never forced. The grand-ending title is the ONLY thing that carries to the next life (worn above the name, reusing the title plate). A per-life **Bảng Thiên mệnh** (reusing the «Bảng vàng» podium) lists everyone of that life who reached theirs. NPCs live by the same rules. Per branch the counts are fixed: **4 grand · 2 kỳ ngộ (rare) · 3 normal** — the 2 rare and 3 normal already exist on main.
+## 0. One-paragraph summary (REVISED after the owner's correction 17/11 ~14:55Z, OD:L1613 rule (1) overwritten + L1618)
+There is **no destined ending per life**. Every identity branch (10 identities × 4 roads = **40 branches**) has a **fixed set of endings: 4 grand · 2 kỳ ngộ · 3 normal**, and at the start of a life **every one of them is still reachable**. Her choices, chapter by chapter, **pull** her toward some endings and **close** others for good — a **narrowing funnel** — so by the end only a few remain; one choice can even leave only the **FAIL ending of grand ending A** (A's road is still open but can no longer be won). At the very end, one hồi — **Hồi kết nhánh** — asks the **last two choices** (where: stay / take power / leave / follow someone; how: mercy / force / let go). If that pair points to a grand ending still open, its odds (built from her pull + one real condition) decide **the grand ending** (big event, own scene, very large reward, unique title) or **its fail ending** (a real loss). If it points to nothing still open, the existing kỳ ngộ / normal endings stand and «Cuộc đời ngươi vẫn tiếp tục như thế.» — nothing forced. The grand-ending title is the ONLY thing that carries to the next life. A per-life **Bảng Thiên mệnh** (reusing the «Bảng vàng» podium) lists who reached which grand ending. NPCs follow the same set and funnel with their own choices.
 
 ## 1. AUDIT — what exists today (origin/main, read 17/11)
 ### 1.1 Life frame (ROAD_MAP §2, jst14/jroad/jend14)
@@ -42,32 +42,57 @@ jagent (AG1) — consorts act like players each buổi; jdh titles for NPC conso
 
 ---
 ## 2. THE SKELETON
+### 2.0 The three kinds of endings — what makes them different (owner asked, L1618)
+| | **Kết cục thường** (normal) | **Kết cục kỳ ngộ** (rare) | **Đại kết cục** (grand) |
+|---|---|---|---|
+| What it is | The ordinary close of a road: how its conflict came out (win / mid / lose at .11) | A lucky encounter that opens a hidden door off the road | The destination of the whole branch: who she became |
+| Count per branch | 3 | 2 | 4 (each with its FAIL ending) |
+| How it is reached | Always one of them: the chapter result of .11 | A hidden chain of the right choices AND luck (one roll, ~one life in eight when the chain is met); a "✦" option appears | Her choices over the whole life steer toward it (pull) and keep it open (no closing choice), then the last two choices point to it and its odds hold |
+| Can she steer it? | Yes, by playing the chapter well | Only half: choices make it possible, luck decides | Fully by choices; the last roll's odds come from how strongly she followed its road |
+| When | End of chapter 11 (and .4 for the first rare) | At .4 or .11 when the hidden chain + luck hit | Hồi kết nhánh, after chapter 14 |
+| Reward | The normal chapter reward | Large: stat jump + one Ngự tứ + a title for this life | Very large: big event + own painted scene + rank / stats / everyone's attitude + Kim sách + **the title that carries to the next life** |
+| Failure | The lose ending IS a normal ending | Missing it = nothing happens | Pointing at it and failing = its own FAIL ending (real loss: Danh, favour, a person, a seat) |
+| Exists today | Yes (36 roads) | Yes (j97 + RD97L) | No — this design |
+
+### 2.0b How other games do endings (expert survey, full table in reports/grand-endings-expert.md §3 + §3b)
+- **Otome routes** (Mystic Messenger, Code: Realize, Amnesia): per route a fixed set — 1 true / good / normal / bad; route locked at a midpoint choice; bad endings are real failures of the route you chose. → our fixed set + fail twin.
+- **Fire Emblem: Three Houses**: four endings all open at the start; one mid-game choice (which house / whether to follow Edelgard) closes the others for the rest of the run. → our closing choices.
+- **The Witcher 3 (Ciri's fate)**: the ending is decided by a handful of scattered choices counted at the end (3 of 5 "good" moments → good ending) — the player never sees the tally. → our pull from Chuỗi choices.
+- **Detroit: Become Human**: a flowchart after each chapter shows which branches she opened and which stayed locked (names hidden until found); endings narrow chapter by chapter. → our funnel (and decision D6 on showing it).
+- **Mass Effect 2 (suicide mission)**: survival of each companion is decided by earlier preparation + final orders; a wrong final order with good preparation still fails. → our last two choices + odds from earlier pull.
+- **Princess Maker 2 / Orange Light palace VNs**: many named endings (queen, general, nun, dark lord / Hoàng hậu, Thái hậu, xuất cung, lãnh cung…), decided by profile + key events; evil endings equal; an ending gallery collected across plays. → named endings, evil allowed, Bảng + Sổ luân hồi as the gallery.
+- **NieR:Automata / Undertale**: the best ending needs the uncomfortable choice (sacrifice, mercy, giving up). → some grand endings need leaving, cruelty or letting go.
+
 ### 2.1 Fixed counts per branch (identity × road) — OWNER DECISION D1
 | Kind | Count | Source | Who sees it coming |
 |---|---|---|---|
-| **Đại kết cục** (grand) | **4 written, 1 destined per life** | NEW (this doc) | nobody; unlocked only by her choices |
+| **Đại kết cục** (grand) | **4 written, all open at the start of every life**, each with its FAIL ending | NEW (this doc) | her choices pull toward and close them (funnel §2.3); the last two choices + odds decide |
 | **Kết cục kỳ ngộ** (rare) | **2** | EXISTS: j97 rare at .4 + RD97L rare at .11 | the "✦" option appears when its hidden chain + luck hit (unchanged) |
 | **Kết cục thường** (normal) | **3** | EXISTS: .11 win / mid / lose (cn_chu: 4, keep) | normal chapter result |
-Matches the owner's "4 đại kết cục và 2 kết cục cực kỳ hiếm" (L1601) with the normal endings already written. Totals: 40 × 4 = **160 grand endings**, 80 rare (72 exist + 8 for bd), 120 normal (108 exist + 12 for bd).
+Matches the owner's "4 đại kết cục và 2 kết cục cực kỳ hiếm" (L1601) and her fixed-set rule (L1613 (1), L1618) with the normal endings already written. Totals: 40 × 4 = **160 grand endings**, 80 rare (72 exist + 8 for bd), 120 normal (108 exist + 12 for bd).
 
 ### 2.2 The 10 theme groups (expert report §4)
 1 Quyền lực · 2 Chính trị · 3 Tình yêu · 4 Tình bạn / Tỷ muội · 5 Báo thù · 6 Con cái · 7 Gia tộc · 8 Tự do / Xuất cung · 9 Tài nghệ / Sự nghiệp · 10 Thiên hạ / Gia quốc. Each group has a thiện and an ác reading (nữ đế hiền / bạo; Thái hậu được kính / bị oán; báo thù bằng công lý / tận diệt …). Evil roads are first-class (owner: "không ép … con đường thiện").
 
-### 2.3 Thiên mệnh — the hidden destiny (per life)
-- **Draw** at đầu thai, right after the road is rolled (j67/jst14, the same moment `ctm-arcs` is consulted): one of the branch's 4 grand endings, weights `BAL.ge.draw.w` (equal by default), avoiding the last `BAL.ge.draw.hist` destinies of that branch (new localStorage `ctm-ge-hist`, same pattern as `ctm-arcs`). Stored as `S.ge = {b:<road>, g:<0..3>}`.
-- **Hidden**: no UI, no omen, no hint text, not in Mệnh truyện, not in any NPC's knowledge (OD:L1613 rule 1). Co-op: personal key like S.dh (no co-op patching now — note only).
-- **Lean (Mệnh khí)** — reuse the j97 hidden-chain pattern (np / Phá): each grand ending lists **Chuỗi** option names taken from her road chapters .4–.11 (+ ch12–14, + shared lines that ran this life) and **Phá** option names. Lean = (Chuỗi taken) − `BAL.ge.lean.pha` × (Phá taken); it must reach `BAL.ge.lean.np` (OWNER DECISION D7: Phá lowers lean, recommended; vs. one Phá breaks it for the life). No dice: unlocking is decided by her choices, not luck (owner: "dựa vào sự lựa chọn của mình").
-- **One condition** (điều kiện thêm) per grand ending: a real state check (a stat floor, a relation, a living person, a son, a seat free), numbers in `BAL.ge.gate.<id>`.
-- **Seat lock**: summits that exist once per world — NDE (nữ đế), THH (Thái hậu buông rèm), HH (Hoàng hậu seat), TM (mẹ của vua) — can be held by one person per life; whoever unlocks first holds it; anyone else destined to the same seat simply misses ("life goes on"). `BAL.ge.seat`.
+### 2.3 The funnel — all endings open at start, choices pull and close
+- **Start of life**: the branch's 4 grand endings are all **open** (state per ending: open / fail-only / closed). Nothing is drawn, nothing is hidden-by-fate. Stored as `S.ge = {b:<road>, st:[o|f|x ×4], pull:[n ×4]}`.
+- **Pull (lực kéo)** — reuse the j97 hidden-chain pattern: each grand ending lists **Chuỗi** options (names from road chapters .4–.11, ch12–14, and shared lines that ran this life). Each Chuỗi taken adds `BAL.ge.pull.step` to that ending. One option may pull two endings and push a third.
+- **Closing choices (Khóa)** — each grand ending lists the options that **close it for good** (the old "Phá" list, now final as the owner wants). Every road chapter .5–.11 has at least one real fork whose options close at least one grand ending (e.g. following the Vương gia closes every stay ending; burning dad's letters closes the clan-throne ending), so the funnel narrows: target `BAL.ge.funnel` ≈ 4 open at .4 → 2–3 by .8 → 1–2 by .11 for a player with a consistent style.
+- **Fail-only (chỉ còn đường thua)**: an ending becomes fail-only when its condition can no longer be met while its road is still taken (the person it needs died, the seat it needs was taken by someone else, or a listed "doom" option was chosen). Its odds become nil: pointing at it at the end gives its FAIL ending. This is the owner's "chỉ còn kết cục thua" case.
+- **Seat lock**: NDE (nữ đế), THH (Thái hậu buông rèm), HH (Hoàng hậu), TM (mẹ của vua) are one per world; when someone (her or an NPC) takes one, every other person's ending needing that seat turns fail-only.
+- **Kỳ ngộ and normal endings are unchanged** (j97 / RD97L / .11), and stay independent of the funnel: a life can end with a normal ending + a rare + a grand, or just a normal ending.
 
-### 2.4 Hồi Thiên mệnh — "the last two choices"
-- **When**: one extra hồi right after ch14 (ke14) closes — the end of the life's written story (OWNER DECISION D3; alternative: at the road finale .11). A life that ended earlier (death, a rare exit that closes the life) never reaches it → no grand ending that life.
-- **Same for everyone, every life** (no leak): two choices in the kit event frame.
-  - **Ngã rẽ 1 · Đi hay ở**: «Ở lại, giữ trọn phận mình» · «Ở lại, nắm lấy quyền bính» · «Rời khỏi cung cấm» · «Theo người ấy đi» (người ấy = the man/woman with the strongest bond of her real life — S.men, a Vương gia, an old love; if nobody qualifies the option is shown greyed "chưa có ai", which reads her state, not her destiny).
+### 2.4 Hồi kết nhánh — "the last two choices"
+- **When**: one extra hồi right after ch14 (ke14) — the end of the life's written story (OWNER DECISION D3; alt: at .11). A life that ended earlier (death, a rare exit that closes the life) never reaches it.
+- **Same two questions every life** (kit event frame):
+  - **Ngã rẽ 1 · Đi hay ở**: «Ở lại, giữ trọn phận mình» · «Ở lại, nắm lấy quyền bính» · «Rời khỏi cung cấm» · «Theo người ấy đi» (người ấy = the strongest real bond of her life; greyed «chưa có ai» if none — it reads her state).
   - **Ngã rẽ 2 · Đối đãi thế nào**: «Lấy ân mà đối đãi» · «Lấy uy mà trị» · «Buông bỏ tất cả».
-  - No costs, no odds, no gating on these two: she is never forced and never told which is "right".
-- **Unlock check** (deterministic): Ngã rẽ 1 = destiny's direction AND Ngã rẽ 2 = destiny's manner AND lean ≥ np AND condition holds AND seat free → **Đại kết cục**.
-- **Miss**: one kit notice card: «Cuộc đời ngươi vẫn tiếp tục như thế.» — no reward, no penalty, nothing changes (her choice at the crossroads does not move her: choosing «Rời khỏi cung cấm» when it is not her destiny does not throw her out of the palace). OWNER DECISION D6: after the life ends, Sổ luân hồi may show «Thiên mệnh kiếp ấy: …» (recommended — the drama "hindsight"; never during the life).
+  - No costs, no gating: never forced.
+- **Resolve**: each grand ending of the branch owns exactly one pair (catalogue §3; 4 different pairs per branch). The chosen pair →
+  - an **open** ending → odds from its pull + its one condition (`BAL.ge.odds`), rolled once: success = **Đại kết cục**; failure = its **FAIL ending** (`thua`: real loss sized `BAL.ge.fail.<id>`, a short event, no title);
+  - a **fail-only** ending → its FAIL ending;
+  - a **closed** ending or a pair owned by none → no grand ending: notice «Cuộc đời ngươi vẫn tiếp tục như thế.», no reward, no penalty; her choice does not move her (choosing «Rời khỏi cung cấm» here does not throw her out).
+- Odds are NOT shown on these two choices (like the j97 "✦" option: no ladder word), so the pair she picks is her own reading of her life. (OWNER DECISION D7 alt: show the ladder word.)
 
 ### 2.5 Unlocking = big event + scene + very large reward + title
 1. **Event**: full kit event frame (kitEventDp) titled «Đại kết cục · <tên>», the ending's own painted scene (one per grand ending, §6), 3–5 lines of narration, button «Tạ ơn». A world-wide news line to every NPC (world events = centre pop-up, OD 17/11 14:05–14:30Z) — "everyone knows".
@@ -84,10 +109,10 @@ Matches the owner's "4 đại kết cục và 2 kết cục cực kỳ hiếm" (
 Reuse j90 kitPodium («Bảng vàng» look, kit-ico-rank icon, KIT): a tab «Thiên mệnh» beside the Danh hiệu tab of NHIỆM VỤ (OD 13:00Z: titles live there) listing every person of THIS life who reached a grand ending: figure · rank · title plate · name · thân phận · when. Her row first; NPC rows in order reached. Sổ luân hồi line per life: «Đại kết cục: <title>» or nothing. Co-op: each friend's own row (state only).
 
 ### 2.8 NPC parity (OD:L1386 / L1403, owner L1601 (4))
-- NPC women draw an identity by the ORIGINS odds (j69 OW69), one of its 4 roads (NPC roads OD:L1243 — not built yet), and a hidden Thiên mệnh from the same 4 grand endings, the same way.
-- Their lean comes from THEIR road choices (jagent scores options by needs/traits — no flat roll); their Hồi Thiên mệnh comes at the end of their own road; jagent picks Ngã rẽ 1/2 from her nature (e.g. Ân cần / Khiêm nhường → «Lấy ân»; Tham vọng / Kiêu ngạo / Xảo quyệt → «Lấy uy»; Kín đáo → «Buông»; strongest bond → «Theo người ấy»). Same unlock rule, same seat locks.
+- NPC women draw an identity by the ORIGINS odds (j69 OW69) and one of its 4 roads (NPC roads OD:L1243 — not built yet); their branch has the SAME fixed set of endings, all open at their start, and the same funnel.
+- Their pull and closing choices come from THEIR road choices (jagent scores options by needs/traits — no flat roll); their Hồi kết nhánh comes at the end of their own road; jagent picks Ngã rẽ 1/2 from her nature (e.g. Ân cần / Khiêm nhường → «Lấy ân»; Tham vọng / Kiêu ngạo / Xảo quyệt → «Lấy uy»; Kín đáo → «Buông»; strongest bond → «Theo người ấy»). Same resolve rule (open → odds → grand or FAIL; closed → life goes on), same seat locks.
 - On unlock: world news, their title over their name (3-line tag, OD 13:00Z), their row on the Bảng, the summit applies to the world (an NPC can become Hoàng hậu / Thái hậu / leave the palace).
-- Helping: her side quest = one hồi from that NPC's road (OD:L1243/L1252); she does not know the NPC's destiny either; if the NPC unlocks after her help → big reward to her (`BAL.ge.help.rw`); failure → none; she may also sabotage (two-way law), and the NPC may strike back (L1601 (4)). Asking NPCs for help on HER road follows L1601 (5) (their traits / liking decide how well they help) — separate design.
+- Helping: her side quest = one hồi from that NPC's road (OD:L1243/L1252); her help pulls the NPC toward an ending or keeps one open (and sabotage can close one); if the NPC unlocks after her help → big reward to her (`BAL.ge.help.rw`); failure → none; she may also sabotage (two-way law), and the NPC may strike back (L1601 (4)). Asking NPCs for help on HER road follows L1601 (5) (their traits / liking decide how well they help) — separate design.
 - Men (Emperor, Vương gia, officials) have no grand endings in this pass (they appear as levers / "người ấy").
 
 ### 2.9 Variety guard (machine-checked)
@@ -95,7 +120,7 @@ Rules (data + checker: dev/design/ge_guard/cat.py + check.py + gen.py on this br
 
 ### 2.10 What the 8 common + 3 mid-life lines become
 - **s_* (8 shared arcs)**: stay fillers (only when a road chapter cannot run) — they own **no grand ending**. Their j97 rares stay as kỳ ngộ outside the branch count. Their option names may sit in a grand ending's Chuỗi / Phá lists (e.g. s_ban feeds Tình bạn endings, s_tinh feeds Theo-người endings, s_dich feeds Thiên hạ relief endings).
-- **st_the / st_con / st_dong (+ noi14, hau14, ke14)**: stay as ch12–14 for everyone; no grand ending of their own; they are the main **conditions** for power/children summits (st_the win → POWER/QP gates; st_dong / ke14 → TM / THH gates; hau14 → HH gates) and Hồi Thiên mệnh comes right after ke14.
+- **st_the / st_con / st_dong (+ noi14, hau14, ke14)**: stay as ch12–14 for everyone; no grand ending of their own; they are the main **conditions** for power/children summits (st_the win → POWER/QP gates; st_dong / ke14 → TM / THH gates; hau14 → HH gates) and Hồi kết nhánh comes right after ke14.
 
 ### 2.11 Bắc Địch gets its own 4 roads (40 branches) — OWNER DECISION D2
 Her 17/11 words count "10 thân phận × 4 nhánh = 40" (L1601), and main's ADD (D STATUS L361) orders 4 bd roads. This touches OD:L1213/L1215 (16/11: hòa thân is ONE origin with country branches; "no new structure"). Both readings are offered: (a) **recommended** — bd stays a country branch of hòa thân (no 10th origin, same jkc2 / KC2LAND frame) but its branch gets **4 roads of its own** (premises below, built by Foreman B like any road: .4 arc + .5–.11 + 2 rares), so the grand-ending table has 40 branches; (b) bd keeps nc's 4 roads (land words only) and gets only its own 4 grand-ending sets (36 road bodies, 40 grand sets). bd roads (a):
@@ -108,10 +133,10 @@ Her 17/11 words count "10 thân phận × 4 nhánh = 40" (L1601), and main's ADD
 Distinct from nc's roads (mật lệnh, sứ đoàn, người ngoại tộc, ngai vàng cố quốc). Story-only NPCs (uncle, brother, betrothed) need rows in ROAD_MAP §5.4 before writing (Foreman B).
 
 ### 2.12 BAL keys (names only — ONE CORE; no edits now)
-`BAL.ge.n` {grand:4, rare:2, norm:3} · `BAL.ge.draw` {w, hist} · `BAL.ge.lean` {np, pha} · `BAL.ge.gate.<id>` · `BAL.ge.seat` {NDE, THH, HH, TM} · `BAL.ge.when` (hồi after ke14) · `BAL.ge.rw.size` · `BAL.ge.rw.mul` · `BAL.ge.rw.<id>` {rank, danh, sung, bac, mat, duc, rel, seat, kimsach} · `BAL.ge.pt` (leaderboard points) · `BAL.ge.title` {tier, fx:none, carry:"prev"} · `BAL.ge.help.rw` (her reward when an NPC she helped unlocks) · `BAL.ge.npc` {on} · `BAL.ge.target` {inChar, random} (measured unlock-rate bands for the sim: a bot that plays one consistent style ≈ one life in three or four reaches it; a random bot rarely does — numbers set by measurement, D57 style).
+`BAL.ge.n` {grand:4, rare:2, norm:3} · `BAL.ge.pull` {step} · `BAL.ge.funnel` (target open counts by chapter, measured) · `BAL.ge.odds` (pull + condition → odds) · `BAL.ge.gate.<id>` · `BAL.ge.fail.<id>` (FAIL-ending loss) · `BAL.ge.seat` {NDE, THH, HH, TM} · `BAL.ge.when` (hồi after ke14) · `BAL.ge.rw.size` · `BAL.ge.rw.mul` · `BAL.ge.rw.<id>` {rank, danh, sung, bac, mat, duc, rel, seat, kimsach} · `BAL.ge.pt` (leaderboard points) · `BAL.ge.title` {tier, fx:none, carry:"prev"} · `BAL.ge.help.rw` (her reward when an NPC she helped unlocks) · `BAL.ge.npc` {on} · `BAL.ge.target` {inChar, random} (measured bands for the sim: a bot that follows one ending's road from early on reaches a grand ending in roughly one life of two or three; a random bot rarely does; the funnel leaves 1–2 open by .11 — numbers set by measurement, D57 style).
 
 ---
-## 3. CATALOGUE — the 160 grand endings (skeleton: name = title; Ngã rẽ pair = the destiny's two last choices)
+## 3. CATALOGUE — the 160 grand endings (skeleton: name = title; Ngã rẽ pair = the two last choices that point to it)
 Kind: thiện / giữa / ác. Ngã rẽ 1: Ở · giữ phận / Ở · nắm quyền / Rời cung / Theo người. Ngã rẽ 2: Lấy ân / Lấy uy / Buông. Summit codes: NDE nữ đế · THH Thái hậu buông rèm · HH Hoàng hậu · TM mẹ của vua · QP quyền phi (hiệp lý lục cung) · NV nữ vương nơi cố quốc · KING lập vua · ADV hiền thần / cố vấn · OFFICE nữ quan · ART/TEACHER tài nghệ lưu danh · CLAN gia tộc · SIS tỷ muội · TK tri kỷ đế vương · JUST/MERCY/REV/PURGE công lý / tha / báo thù / diệt thân · POWER/SPY quyền trong bóng tối · PEACE/RELIEF/LOYAL/FAME/SCHOOL thiên hạ · FREE/NUN/REUNION tự do / xuất gia / đoàn tụ · FOLLOW theo người · CHILD/TM con cái · BETRAY phản bạn · WAR/ANNEX chiến tranh / thôn tính · TRADE thương nghiệp · GENERAL nữ tướng. Chuỗi / Phá lists are written per branch by the road writers (pattern: §4); the 3 worked samples below are complete.
 
 #### tt — Con gái Tể tướng
@@ -315,91 +340,104 @@ Kind: thiện / giữa / ác. Ngã rẽ 1: Ở · giữ phận / Ở · nắm qu
 |  | ge4 | **Phụng Thánh phu nhân** | 6 Con cái | giữa | Ở · giữ phận | Lấy ân | CHILD · wet nurse |
 
 ---
-## 4. WORKED SAMPLES (complete: draw → lean → condition → Ngã rẽ → event → reward → title)
-Chuỗi / Phá use the REAL option names on main (jrd_tt.js, jrd_cnv.js) — chapter in brackets. np, pha and every number = BAL.ge keys (values set by measurement; the "start" values are design starting points, not shipped numbers).
+## 4. WORKED SAMPLES (complete: pull → closing choices → condition → last two choices → odds → grand or FAIL → reward → title)
+Chuỗi (pull) / Khóa (closes it) use the REAL option names on main (jrd_tt.js, jrd_cnv.js) — chapter in brackets. Every number = BAL.ge keys, set by measurement. All 4 endings are open when the life starts; the Khóa lists are what narrows the funnel.
 
 ### 4.1 `tt_co` · Con gái Tể tướng · Quân cờ trong tay cha
 Road arc: her father's letters are orders (.4) → his protégés (.5) → the maid who copies letters (.6) → censors impeach dad (.7) → the Emperor tests her (.8) → her own people (.9) → the night before court (.10) → «Kết ván cờ» (.11). Existing: 3 normal (Người cầm quân cờ / Cha về quê, nhà yên / Phủ Tể tướng sa sút) + 2 rare (Người cầm ấn phủ Tể tướng / Cha truyền sổ môn sinh).
 
+Funnel in this road (all 4 open at .4): .8 «Thiếp đứng bên Hoàng thượng» closes ge1; «Mở xem, báo cha» closes ge2 and ge3; .10 «Hứa giữ cha» closes ge4; .11 «Bỏ bàn cờ» closes ge1 and ge4 — a player usually reaches Hồi kết nhánh with 1–2 still open.
+
 **ge1 · Ngai vàng họ ngoại** — 1 Quyền lực · ác · Ngã rẽ «Ở lại, nắm lấy quyền bính» + «Lấy uy mà trị» · seat NDE · closes the life (epilogue)
-- Chuỗi (np start 6): «Báo cha diệt kẻ hai lòng» (.5) · «Bắt hắn khai ai đứng sau» (.5) · «Tha cho nàng, bắt nàng làm hai mang» (.6) · «Cho thị vệ phục sẵn» (.6) · «Đáp lại sắc bén» (.7) · «Mở xem, báo cha» (.8) · «Tự gây dựng, bắt đầu từ thái giám giữ ấn» (.9) · «Đốt thư cha trước khi vua đến» (.10) · «Bắt kẻ rình» (.10) · «Xin cha giao sổ» (.11) · «Làm người đánh cờ» (.11) · st_the win.
-- Phá: «Xin Hoàng thượng đừng giao cho thiếp» (.8) · «Bỏ bàn cờ» (.11) · «Thôi viết thư nhà» (.6) · «Quỳ xin Hoàng thượng đừng hỏi» (.7).
+- Chuỗi (pull): «Báo cha diệt kẻ hai lòng» (.5) · «Bắt hắn khai ai đứng sau» (.5) · «Tha cho nàng, bắt nàng làm hai mang» (.6) · «Cho thị vệ phục sẵn» (.6) · «Đáp lại sắc bén» (.7) · «Mở xem, báo cha» (.8) · «Tự gây dựng, bắt đầu từ thái giám giữ ấn» (.9) · «Đốt thư cha trước khi vua đến» (.10) · «Bắt kẻ rình» (.10) · «Xin cha giao sổ» (.11) · «Làm người đánh cờ» (.11) · st_the win.
+- Khóa (closes it): «Xin Hoàng thượng đừng giao cho thiếp» (.8) · «Bỏ bàn cờ» (.11) · «Thôi viết thư nhà» (.6) · «Quỳ xin Hoàng thượng đừng hỏi» (.7).
 - Condition: Tai mắt ≥ `BAL.ge.gate.tt_co_1.mat` and the môn sinh book is hers (.11 win or rare) and seat NDE free.
 - Scene: Thái Hòa điện at dawn, she in imperial yellow on the dragon throne, officials kneeling, her father's protégés in front; nobody looks up.
 - Event text: «Tiên đế băng hà, Thái tử còn bế ngửa. Môn sinh của phủ Tể tướng quỳ kín điện Thái Hòa, dâng biểu xin ngươi lâm triều. Ngươi không nhường. Từ hôm ấy, chiếu chỉ mang ấn của ngươi; kẻ nào cãi lời, cả nhà ra pháp trường. Thiên hạ khiếp sợ mà phục, sử quan chép tên ngươi bằng mực đỏ.»
 - Reward: epilogue + `BAL.ge.pt` + Kim sách «Ngai vàng họ ngoại»; title «Ngai vàng họ ngoại». Info: «Đạt được khi lên ngôi nữ đế nhờ thế lực phủ Tể tướng, lấy uy mà trị thiên hạ.»
+- FAIL ending «Ngai đổ họ tan» (fail-only once the môn sinh book is lost or seat NDE is taken): the protégés turn on her, the clan is purged, she is shut in her palace; loss `BAL.ge.fail.tt_co_1` (rank −, Danh −, father lost).
 
 **ge2 · Hiền tướng hậu cung** — 2 Chính trị · thiện · «Ở lại, giữ trọn phận mình» + «Lấy ân mà đối đãi» · continues the life
-- Chuỗi (np 6): «Trả lễ, bảo hắn tự lập công» (.5) · «Thử tài hắn bằng một việc nhỏ» (.5) · «Không nói, để Hoàng thượng tự chọn» (.5) · «Cho bạc nuôi mẹ nàng, giữ nàng ở lại» (.6) · «Tâu thật, xin xử công bằng cho cha» (.7) · «Thưa thật: thiếp không muốn ngài nghi» (.8) · «Giữ nguyên niêm, trả lại sau ba ngày» (.8) · «Lo cho mẹ hắn chữa bệnh» (.9) · «Tiến cử hắn với Hoàng thượng» (.9) · «Nhắn ông đứng về phía Hoàng thượng» (.10) · «Xin để Hoàng thượng chọn người hiền» (.11).
-- Phá: «Mở xem, báo cha» (.8) · «Bỏ bạc lo cho hắn thoát» (.5) · «Biếu Ngự sử chút lễ» (.7).
+- Chuỗi (pull): «Trả lễ, bảo hắn tự lập công» (.5) · «Thử tài hắn bằng một việc nhỏ» (.5) · «Không nói, để Hoàng thượng tự chọn» (.5) · «Cho bạc nuôi mẹ nàng, giữ nàng ở lại» (.6) · «Tâu thật, xin xử công bằng cho cha» (.7) · «Thưa thật: thiếp không muốn ngài nghi» (.8) · «Giữ nguyên niêm, trả lại sau ba ngày» (.8) · «Lo cho mẹ hắn chữa bệnh» (.9) · «Tiến cử hắn với Hoàng thượng» (.9) · «Nhắn ông đứng về phía Hoàng thượng» (.10) · «Xin để Hoàng thượng chọn người hiền» (.11).
+- Khóa (closes it): «Mở xem, báo cha» (.8) · «Bỏ bạc lo cho hắn thoát» (.5) · «Biếu Ngự sử chút lễ» (.7).
 - Condition: Đức ≥ `gate.tt_co_2.duc` and Hoàng thượng → ngươi ≥ `gate.tt_co_2.emp`.
 - Scene: Dưỡng Tâm điện by lamplight, the Emperor and she over memorials, a young Hàn lâm kneeling with a scroll.
 - Text: «Hoàng thượng đặt tấu chương trước mặt ngươi: “Trẫm muốn nghe nàng nói.” Người ngươi tiến cử năm nào nay giữ Lại bộ, không một đồng bạc lót tay. Cả triều biết trong hậu cung có một người không vì nhà mình mà vì xã tắc.»
 - Reward (continues): rank +`rw.tt_co_2.rank` (never above the seat rules) · Danh · Hoàng thượng → ngươi · every consort's thiện cảm + · Kim sách; title «Hiền tướng hậu cung».
+- FAIL ending «Lời ngay trái tai»: the Emperor hears her advice as meddling; Sủng −, Hoàng thượng → ngươi −.
 
 **ge3 · Buông cờ về núi** — 8 Tự do · thiện · «Rời khỏi cung cấm» + «Buông bỏ tất cả» · closes the life
-- Chuỗi: «Thôi viết thư nhà» (.6) · «Đáp cha: con không hỏi được» (.8) · «Xin Hoàng thượng đừng giao cho thiếp» (.8) · «Xin cha tự lui một bước» (.7) · «Khuyên cha lui một bước» (.10) · «Khuyên cha đốt sổ» (.11) · «Bỏ bàn cờ» (.11) · «Đóng cửa cung, chép kinh» (.7).
-- Phá: «Làm người đánh cờ» (.11) · «Tự gây dựng, bắt đầu từ thái giám giữ ấn» (.9) · «Báo cha diệt kẻ hai lòng» (.5).
+- Chuỗi (pull): «Thôi viết thư nhà» (.6) · «Đáp cha: con không hỏi được» (.8) · «Xin Hoàng thượng đừng giao cho thiếp» (.8) · «Xin cha tự lui một bước» (.7) · «Khuyên cha lui một bước» (.10) · «Khuyên cha đốt sổ» (.11) · «Bỏ bàn cờ» (.11) · «Đóng cửa cung, chép kinh» (.7).
+- Khóa (closes it): «Làm người đánh cờ» (.11) · «Tự gây dựng, bắt đầu từ thái giám giữ ấn» (.9) · «Báo cha diệt kẻ hai lòng» (.5).
 - Condition: her father is alive.
 - Scene: a mountain villa in autumn, she in plain robes pouring tea for her white-haired father, a chessboard with the pieces swept into the box.
 - Text: «Ngươi dâng biểu xin về phụng dưỡng cha già. Hoàng thượng lặng thinh rất lâu, rồi phê một chữ “Chuẩn”. Biệt viện dưới chân núi Tây Sơn không có môn sinh, không có thư từ, chỉ có tiếng cờ gõ mỗi chiều. Cha thua ngươi ván nào cũng cười.»
 - Reward: epilogue + points + Kim sách; title «Buông cờ về núi».
+- FAIL ending «Biểu xin về bị bác» (fail-only if her father died): the request is refused and read as disloyalty; Sủng −, Danh −.
 
 **ge4 · Đại nghĩa diệt thân** — 7 Gia tộc · ác · «Ở lại, giữ trọn phận mình» + «Lấy uy mà trị» · continues the life
-- Chuỗi: «Chối thẳng, để luật xử hắn» (.5) · «Giao Thận hình ty xử» (.6) · «Không nhận, để giữ mình» (.7) · «Thiếp đứng bên Hoàng thượng» (.8) · «Đáp: con đi đường con» (.9) · «Đưa thư cha cho Hoàng thượng xem» (.10) · «Chặn trước, nói với Hoàng thượng» (.11).
-- Phá: «Hứa giữ cha» (.10) · «Xin giữ cha ở lại» (.11) · «Xin Thái hậu nói giúp cha» (.10) · «Nhận, để giữ cha» (.7).
+- Chuỗi (pull): «Chối thẳng, để luật xử hắn» (.5) · «Giao Thận hình ty xử» (.6) · «Không nhận, để giữ mình» (.7) · «Thiếp đứng bên Hoàng thượng» (.8) · «Đáp: con đi đường con» (.9) · «Đưa thư cha cho Hoàng thượng xem» (.10) · «Chặn trước, nói với Hoàng thượng» (.11).
+- Khóa (closes it): «Hứa giữ cha» (.10) · «Xin giữ cha ở lại» (.11) · «Xin Thái hậu nói giúp cha» (.10) · «Nhận, để giữ cha» (.7).
 - Condition: Hoàng thượng → ngươi ≥ `gate.tt_co_4.emp` and Tâm cơ ≥ `gate.tt_co_4.tamco`.
 - Scene: the Hình bộ hall; she stands beside the Emperor's screen while her father, stripped of his cap, is led away.
 - Text: «Chính tay ngươi dâng lên sổ môn sinh và những bức thư cha viết. Phủ Tể tướng bị niêm phong trong một đêm. Hoàng thượng nói với cả triều: “Đại nghĩa diệt thân, trẫm có được mấy người như thế?” Từ đó không ai dám coi ngươi là con gái của ai nữa.»
 - Reward: Sủng · rank · Danh; her family's oán + (dad, brother) — the dark price; title «Đại nghĩa diệt thân».
+- FAIL ending «Bất hiếu bất trung»: the court calls it betrayal of her own blood; Danh −, Đức −, the clan's oán stays.
 
 ### 4.2 `bd_soi` · Công chúa hòa thân · Bắc Địch · Sói đầu đàn (NEW road, outline for Foreman B)
 Cast (story-only, ROAD_MAP §5.4 rows needed): Phụ hãn ({dad}), Khả đôn ({mom}), thúc phụ Hô Diên Liệt (uncle), em trai Ô Lặc (brother), {emp}, {v}.
 .4 Sói đầu đàn — Phụ hãn falls from his horse; the uncle's envoy asks the Emperor to recognise him; the Emperor asks her (win/mid/lose; j97 rare «Phụ hãn tỉnh lại»). .5 Hai phong thư — uncle and brother both write; the uncle asks for the border map. .6 Sứ giả mang dao — an assassin in the uncle's embassy. .7 Chợ ngựa đóng cửa — the uncle shuts the horse market; hawks at court want war. .8 Khả đôn vào kinh — her mother flees to the capital; sheltering her risks war. .9 Hội đua ngựa mùa hạ — the succession contest on the steppe; a champion or herself. .10 Đêm tuyết Âm Sơn — Đại Hy troops at the border: send, hold, or bargain. .11 Kim trướng chủ nhân — who sits in the golden tent. Normal: Em trai lên ngôi hãn / Thảo nguyên chia đôi / Thúc phụ thắng, mối hòa lung lay; RD97L rare «Kim trướng gọi ngươi là Khả đôn».
-Grand endings (Chuỗi/Phá below are the INTENT each chapter's options must carry; the road writer names them):
-- **ge1 · Nữ Khả hãn** — 1 Quyền lực · giữa · «Rời khỏi cung cấm» + «Lấy uy mà trị» · seat: none in Đại Hy (NV abroad) · closes the life. Chuỗi: keep the map (.5), take the assassin alive and turn him (.6), refuse the market deal (.7), arm the Khả đôn's guard (.8), ride the contest herself (.9), bargain troops for the tribes' oath (.10). Phá: hand the map to either side; send the Khả đôn back. Condition: Sức ≥ `gate`, the brother dead or failed (.11 mid/lose). Scene: snow plain, a hundred tribal banners, she in fur and gold before the golden tent, the tribes kneeling. Text: «Không ai trên thảo nguyên từng quỳ trước một nữ nhân. Đêm ấy, mười hai bộ lạc cắm cờ quanh kim trướng và gọi ngươi là Khả hãn. Ngươi gửi về Đại Hy một con tuấn mã trắng kèm một câu: “Biên ải yên ổn chừng nào thiếp còn sống.”» Title «Nữ Khả hãn».
-- **ge2 · Lập em làm hãn** — 2 Chính trị · thiện · «Ở lại, giữ trọn phận mình» + «Lấy ân mà đối đãi» · continues. Chuỗi: answer both letters honestly to the Emperor (.5), spare the assassin and send him home with a message (.6), plead for the market to reopen (.7), shelter the Khả đôn openly (.8), send a champion for the brother (.9), ask only for envoys, no troops (.10). Phá: steal the map; poison the uncle. Condition: Hoàng thượng → ngươi ≥ `gate`, brother alive. Scene: the Emperor's hall, her brother in a wolf-fur cap kneeling to receive the Đại Hy seal while she stands at the Emperor's side. Reward: Danh · Sủng · horse-market silver every year (`rw.bd_soi_2.bac`) · Kim sách. Title «Lập em làm hãn».
-- **ge3 · Sói già phải chết** — 5 Báo thù · ác · «Ở lại, nắm lấy quyền bính» + «Lấy uy mà trị» · continues. Chuỗi: let the uncle read a false map (.5), kill the assassin and send back his head (.6), push the court to war (.7), use the Khả đôn as bait (.8), bribe the contest judges (.9), ask for the whole army (.10). Phá: any peace offer to the uncle. Condition: Tai mắt ≥ `gate`, st_the win. Scene: Âm Sơn at night, burning tents, she on the city wall watching the uncle's banner fall. Reward: Danh (feared) · Sủng · every NPC's oán + small · Kim sách. Title «Sói già phải chết».
-- **ge4 · Con trai hai cõi** — 6 Con cái · giữa · «Ở lại, nắm lấy quyền bính» + «Lấy ân mà đối đãi» · seat TM · closes the life (epilogue: her son reigns over both). Chuỗi: keep the steppe tongue alive for her son (any chapter's "teach the child" option), shelter the Khả đôn (.8), win the contest through her son's name (.9), bargain the brother's oath to her son (.10). Phá: give the son to another consort to raise. Condition: a living son; seat TM free. Scene: a young emperor in dragon robes with a wolf-fur trim, both courts kneeling. Title «Con trai hai cõi».
+Funnel example: by .7 a player who pushed the court to war (Chuỗi of ge3) has usually closed ge2 (any war push closes it); sheltering the Khả đôn openly (.8) keeps ge2/ge4 and pulls them.
+Grand endings (Chuỗi/Khóa below are the INTENT each chapter's options must carry; the road writer names them):
+- **ge1 · Nữ Khả hãn** — 1 Quyền lực · giữa · «Rời khỏi cung cấm» + «Lấy uy mà trị» · seat: none in Đại Hy (NV abroad) · closes the life. Chuỗi: keep the map (.5), take the assassin alive and turn him (.6), refuse the market deal (.7), arm the Khả đôn's guard (.8), ride the contest herself (.9), bargain troops for the tribes' oath (.10). Khóa: hand the map to either side; send the Khả đôn back. Condition: Sức ≥ `gate`, the brother dead or failed (.11 mid/lose). Scene: snow plain, a hundred tribal banners, she in fur and gold before the golden tent, the tribes kneeling. Text: «Không ai trên thảo nguyên từng quỳ trước một nữ nhân. Đêm ấy, mười hai bộ lạc cắm cờ quanh kim trướng và gọi ngươi là Khả hãn. Ngươi gửi về Đại Hy một con tuấn mã trắng kèm một câu: “Biên ải yên ổn chừng nào thiếp còn sống.”» Title «Nữ Khả hãn». FAIL «Kim trướng không nhận»: the tribes refuse a woman; she returns in disgrace, Danh −, Sủng −.
+- **ge2 · Lập em làm hãn** — 2 Chính trị · thiện · «Ở lại, giữ trọn phận mình» + «Lấy ân mà đối đãi» · continues. Chuỗi: answer both letters honestly to the Emperor (.5), spare the assassin and send him home with a message (.6), plead for the market to reopen (.7), shelter the Khả đôn openly (.8), send a champion for the brother (.9), ask only for envoys, no troops (.10). Khóa: steal the map; poison the uncle. Condition: Hoàng thượng → ngươi ≥ `gate`, brother alive. Scene: the Emperor's hall, her brother in a wolf-fur cap kneeling to receive the Đại Hy seal while she stands at the Emperor's side. Reward: Danh · Sủng · horse-market silver every year (`rw.bd_soi_2.bac`) · Kim sách. Title «Lập em làm hãn». FAIL «Em ngã ngựa» (fail-only if the brother dies): the brother falls; mối hòa lung lay, Danh −.
+- **ge3 · Sói già phải chết** — 5 Báo thù · ác · «Ở lại, nắm lấy quyền bính» + «Lấy uy mà trị» · continues. Chuỗi: let the uncle read a false map (.5), kill the assassin and send back his head (.6), push the court to war (.7), use the Khả đôn as bait (.8), bribe the contest judges (.9), ask for the whole army (.10). Khóa: any peace offer to the uncle. Condition: Tai mắt ≥ `gate`, st_the win. Scene: Âm Sơn at night, burning tents, she on the city wall watching the uncle's banner fall. Reward: Danh (feared) · Sủng · every NPC's oán + small · Kim sách. Title «Sói già phải chết». FAIL «Lửa cháy ngược»: the war goes badly and is blamed on her; Sủng −, Danh −, Đại Hy's border loses.
+- **ge4 · Con trai hai cõi** — 6 Con cái · giữa · «Ở lại, nắm lấy quyền bính» + «Lấy ân mà đối đãi» · seat TM · closes the life (epilogue: her son reigns over both). Chuỗi: keep the steppe tongue alive for her son (any chapter's "teach the child" option), shelter the Khả đôn (.8), win the contest through her son's name (.9), bargain the brother's oath to her son (.10). Khóa: give the son to another consort to raise. Condition: a living son; seat TM free. Scene: a young emperor in dragon robes with a wolf-fur trim, both courts kneeling. Title «Con trai hai cõi». FAIL «Hai cõi nghi con» (fail-only if seat TM is taken): both courts distrust her son; his succession weight −.
 
 ### 4.3 `cnv_mat` · Cung nữ tuyển vào cung · Ánh mắt nơi hành lang
 Road arc: the Emperor's glance in the corridor → the mistress is jealous (.5) → avoid or meet (.6) → Kính sự phòng writes her name (.7) → the first night (.8) → from servant to mistress (.9) → the seduction rumour (.10) → «Ánh mắt ấy» (.11). Existing: normal (Ánh mắt thành ân tình / Được nhìn mà bị ghét / Ánh mắt khép lại) + rares (Phá lệ phong Quý nhân / Chủ cũ thành tỷ muội).
 
+Funnel in this road: .7 «Đưa bạc cho thái giám…» closes ge1 and ge3; .9 «Bắt tay {v} chèn {mis}» closes ge1, ge3 and ge4 (leaving ge2 only); .11 «Xin ơn cho {mis}» closes ge2; if {mis} dies, ge4 turns fail-only.
+
 **ge1 · Chiếc ô chiều mưa** — 3 Tình yêu · thiện · «Ở lại, giữ trọn phận mình» + «Buông bỏ tất cả» · summit TK · continues
-- Chuỗi (np 6): «Hát khẽ bài dân ca bên giếng» (.5) · «Gửi lại cành mai, không đến» (.6) · «Thưa: muốn, nhưng không dám» (.6) · «Không đưa, chờ ngài tự lật» (.7) · «Tin vào lời ngài đã nói» (.7) · «Kể chuyện mùa gặt» (.8) · «Nói một câu thật lòng» (.8) · «Không xin gì, chỉ cúi đầu» (.8) · «Đứng chờ dưới mái hiên cũ» (.11) · «Xin ngài đừng quên chiều mưa ấy» (.11) · «Đứng yên, để ngài bước đến» (.11).
-- Phá: «Đưa bạc cho thái giám, trước kỳ lật thẻ» (.7) · «Trả bạc cao hơn {v}» (.7) · «Bắt tay {v} chèn {mis}» (.9).
+- Chuỗi (pull): «Hát khẽ bài dân ca bên giếng» (.5) · «Gửi lại cành mai, không đến» (.6) · «Thưa: muốn, nhưng không dám» (.6) · «Không đưa, chờ ngài tự lật» (.7) · «Tin vào lời ngài đã nói» (.7) · «Kể chuyện mùa gặt» (.8) · «Nói một câu thật lòng» (.8) · «Không xin gì, chỉ cúi đầu» (.8) · «Đứng chờ dưới mái hiên cũ» (.11) · «Xin ngài đừng quên chiều mưa ấy» (.11) · «Đứng yên, để ngài bước đến» (.11).
+- Khóa (closes it): «Đưa bạc cho thái giám, trước kỳ lật thẻ» (.7) · «Trả bạc cao hơn {v}» (.7) · «Bắt tay {v} chèn {mis}» (.9).
 - Condition: Hoàng thượng → ngươi ≥ `gate.cnv_mat_1.emp`.
 - Scene: a covered corridor in rain, the Emperor holding an old oil-paper umbrella over her, no attendants.
 - Text: «Mưa rơi đúng như chiều năm ấy. Hoàng thượng đứng dưới mái hiên cũ, tay cầm chiếc ô ngươi gửi trả, nói khẽ: “Cả lục cung xin trẫm đủ thứ. Chỉ có nàng chưa từng xin gì.” Từ đó, mỗi lần mưa, ngài đều đến cung ngươi.»
 - Reward: Sủng to near its cap · Hoàng thượng → ngươi · rank + · Kim sách; title «Chiếc ô chiều mưa».
+- FAIL ending «Ô gãy giữa mưa»: the Emperor does not come; the palace laughs; Sủng −, Danh −.
 
 **ge2 · Tỳ nữ lên phượng** — 1 Quyền lực · ác · «Ở lại, nắm lấy quyền bính» + «Lấy uy mà trị» · seat HH · continues as Hoàng hậu
-- Chuỗi: «Lặng lẽ cho người thấy tay {mis} hất» (.5) · «Kể lại một chuyện cũ của {mis}» (.5) · «Nhận lời {v}» (.5) · «Đưa {v} tin vặt, giữ lại tin thật» (.5) · «Đưa bạc cho thái giám, trước kỳ lật thẻ» (.7) · «Trả bạc cao hơn {v}» (.7) · «Đổi chỗ với {mis} mà không nói» (.9) · «Bắt tay {v} chèn {mis}» (.9) · «Đem chuyện gói bùa ra nói lại» (.11) · «Bước đến che ô cho ngài» (.11).
-- Phá: «Quỳ nhận lỗi về mình» (.5) · «Xin ơn cho {mis}» (.11) · «Quỳ lạy {mis} một lạy» (.11) · «Thôi ngóng, sống ngày của mình» (.11).
+- Chuỗi (pull): «Lặng lẽ cho người thấy tay {mis} hất» (.5) · «Kể lại một chuyện cũ của {mis}» (.5) · «Nhận lời {v}» (.5) · «Đưa {v} tin vặt, giữ lại tin thật» (.5) · «Đưa bạc cho thái giám, trước kỳ lật thẻ» (.7) · «Trả bạc cao hơn {v}» (.7) · «Đổi chỗ với {mis} mà không nói» (.9) · «Bắt tay {v} chèn {mis}» (.9) · «Đem chuyện gói bùa ra nói lại» (.11) · «Bước đến che ô cho ngài» (.11).
+- Khóa (closes it): «Quỳ nhận lỗi về mình» (.5) · «Xin ơn cho {mis}» (.11) · «Quỳ lạy {mis} một lạy» (.11) · «Thôi ngóng, sống ngày của mình» (.11).
 - Condition: Sủng ≥ `gate.cnv_mat_2.sung`, Tâm cơ ≥ `gate.cnv_mat_2.tamco`, seat HH free (the lập hậu rules j8/j34 are what crown her).
 - Scene: the investiture: phoenix crown, kneeling consorts, her former mistress among them, eyes down.
 - Text: «Ngày đội mũ phượng, người quỳ ở hàng đầu lục cung là chủ cũ của ngươi. Ngươi không bảo nàng đứng dậy. Cung nhân truyền tai nhau: từ giếng nước lên ngôi Trung cung chỉ cần một đời, và đừng bao giờ đứng chắn đường nàng.»
 - Reward: Hoàng hậu seat (existing rules) · Danh · every consort's oán + (dark price) · Kim sách; title «Tỳ nữ lên phượng».
+- FAIL ending «Ngã từ bậc phượng» (fail-only once seat HH is taken): her schemes are exposed; rank −, Danh −, {mis}'s oán.
 
 **ge3 · Gác ô ra đi** — 8 Tự do · thiện · «Rời khỏi cung cấm» + «Lấy ân mà đối đãi» · closes the life
-- Chuỗi: «Gửi lại cành mai, không đến» (.6) · «Cảm ơn mà từ chối» (.6) · «Xin rút thẻ một kỳ» (.7) · «Cáo ốm ở lại» (.6) · «Thôi ngóng, sống ngày của mình» (.11) · «Gửi lại ô, kèm một lời» (.11) · «Cúi đầu, lui vào trong» (.11) · «Xin ơn cho {mis}» (.11).
-- Phá: «Bước đến che ô cho ngài» (.11) · «Bắt tay {v} chèn {mis}» (.9).
+- Chuỗi (pull): «Gửi lại cành mai, không đến» (.6) · «Cảm ơn mà từ chối» (.6) · «Xin rút thẻ một kỳ» (.7) · «Cáo ốm ở lại» (.6) · «Thôi ngóng, sống ngày của mình» (.11) · «Gửi lại ô, kèm một lời» (.11) · «Cúi đầu, lui vào trong» (.11) · «Xin ơn cho {mis}» (.11).
+- Khóa (closes it): «Bước đến che ô cho ngài» (.11) · «Bắt tay {v} chèn {mis}» (.9).
 - Condition: Đức ≥ `gate.cnv_mat_3.duc`, lòng cung nữ ≥ `gate.cnv_mat_3.maid`.
 - Scene: the Thần Vũ gate at morning, she in plain clothes with a small bundle and the umbrella, her maids waving.
 - Text: «Ngươi xin Hoàng thượng cho mình và mấy cung nữ theo hầu được xuất cung. Ngài trả lại chiếc ô: “Mang theo, đừng để ướt.” Ngoài cổng Thần Vũ, kinh thành đang họp chợ sớm. Mấy năm sau, tiệm thêu nhỏ bên sông của ngươi nổi tiếng khắp kinh thành, và chẳng ai biết bà chủ từng được Hoàng thượng che ô.»
 - Reward: epilogue + points + Kim sách; title «Gác ô ra đi».
+- FAIL ending «Cổng Thần Vũ đóng»: the request is refused; she stays, marked as wanting to leave; Sủng −.
 
 **ge4 · Tỷ muội cùng hầu** — 4 Tình bạn · thiện · «Ở lại, giữ trọn phận mình» + «Lấy ân mà đối đãi» · continues
-- Chuỗi: «Thưa thật với chủ: nô tỳ không dám quên ơn» (.5) · «Khuyên Hoàng thượng đến cung {mis}» (.5) · «Từ chối, báo {mis}» (.5) · «Báo cho {mis} biết {v} đang dụ ngươi» (.6) · «Quỳ tạ, rồi tạ {mis}» (.7) · «Ra chào {mis} trước khi đi» (.8) · «Xin ngài nhớ đến {mis}» (.8) · «Xin ngồi sau {mis}» (.9) · «Đến xin {mis} nói giúp» (.10) · «Thưa: là tỷ muội» (.11) · «Xin ơn cho {mis}» (.11).
-- Phá: «Bắt tay {v} chèn {mis}» (.9) · «Kể lại một chuyện cũ của {mis}» (.5) · «Lặng lẽ cho người thấy tay {mis} hất» (.5).
+- Chuỗi (pull): «Thưa thật với chủ: nô tỳ không dám quên ơn» (.5) · «Khuyên Hoàng thượng đến cung {mis}» (.5) · «Từ chối, báo {mis}» (.5) · «Báo cho {mis} biết {v} đang dụ ngươi» (.6) · «Quỳ tạ, rồi tạ {mis}» (.7) · «Ra chào {mis} trước khi đi» (.8) · «Xin ngài nhớ đến {mis}» (.8) · «Xin ngồi sau {mis}» (.9) · «Đến xin {mis} nói giúp» (.10) · «Thưa: là tỷ muội» (.11) · «Xin ơn cho {mis}» (.11).
+- Khóa (closes it): «Bắt tay {v} chèn {mis}» (.9) · «Kể lại một chuyện cũ của {mis}» (.5) · «Lặng lẽ cho người thấy tay {mis} hất» (.5).
 - Condition: {mis} alive and {mis} → ngươi ≥ `gate.cnv_mat_4.mis`.
 - Scene: two consorts side by side on one long bench, sharing a single embroidery frame, the Emperor looking on.
 - Text: «Lục cung chờ xem chủ tớ năm xưa trở mặt. Nhưng mỗi buổi thỉnh an, hai người vẫn đi cùng nhau. Hoàng thượng phong cho cả hai một bậc trong cùng một đạo chỉ, và ban chung một tấm biển: “Đồng tâm”.»
 - Reward: rank + for her AND for {mis} (real NPC) · their mutual thiện cảm + · Kim sách; title «Tỷ muội cùng hầu».
+- FAIL ending «Một người lên, một người xuống» (fail-only if {mis} died or was demoted): only one of them rises and the other resents it; {mis} → ngươi −.
 
 ---
 ## 5. Player-visible strings (VANPHONG; final wording by the writers)
-Hồi title «Hồi Thiên mệnh» · Ngã rẽ texts (§2.4) · miss notice «Cuộc đời ngươi vẫn tiếp tục như thế.» · event header «Đại kết cục · <tên>» · button «Tạ ơn» · news «Thiên hạ truyền tai: <tên người> đã thành “<danh hiệu>”.» · Bảng tab «Thiên mệnh» · Sổ luân hồi «Đại kết cục: <danh hiệu>» / after death (D6) «Thiên mệnh kiếp ấy: <danh hiệu>» · title info «Đạt được khi …». No %, no numbers in prose beyond the kit's rules.
+Hồi title «Hồi kết nhánh» · Ngã rẽ texts (§2.4) · miss notice «Cuộc đời ngươi vẫn tiếp tục như thế.» · event header «Đại kết cục · <tên>» · button «Tạ ơn» · news «Thiên hạ truyền tai: <tên người> đã thành “<danh hiệu>”.» · Bảng tab «Thiên mệnh» · FAIL header «Kết cục · <tên thua>» · Sổ luân hồi «Đại kết cục: <danh hiệu>» (or the FAIL ending's name) · title info «Đạt được khi …». No %, no numbers in prose beyond the kit's rules.
 
 ## 6. Art needs (for Foreman C LATER — nothing ordered now)
 - **160 scene paintings**, one per grand ending (landscape, kitEventDp right-top picture; the heroine's face shown; same style anchors). Pilot first: the 12 of §4.
@@ -409,17 +447,17 @@ Hồi title «Hồi Thiên mệnh» · Ngã rẽ texts (§2.4) · miss notice «
 - Leaderboard reuses j90 podium figures — no new art.
 
 ## 7. Build order (after the freeze lifts; owner "take time")
-1. **Engine + 3 pilot branches** (tt_co, cnv_mat, + one nc road): draw, lean, conditions, Hồi Thiên mệnh, notice, event, reward, Kim sách, jdh "Thiên mệnh" group, `ctm-ge` carry, Bảng tab, Sổ luân hồi line, variety-guard test in dev/test. Measure unlock rates (`BAL.ge.target`).
-2. **Writers, identity by identity**: Chuỗi/Phá/condition/text for the other 33 existing branches (catalogue §3 fixes names + pairs; changes to a name/pair go through this doc's owner, canon overwrite).
+1. **Engine + 3 pilot branches** (tt_co, cnv_mat, + one nc road): funnel state (open / fail-only / closed), pull, closing choices, conditions, Hồi kết nhánh + odds + FAIL endings, notice, event, reward, Kim sách, jdh "Thiên mệnh" group, `ctm-ge` carry, Bảng tab, Sổ luân hồi line, variety-guard test in dev/test. Measure unlock rates (`BAL.ge.target`).
+2. **Writers, identity by identity**: Chuỗi/Khóa/condition/FAIL ending/text for the other 33 existing branches (catalogue §3 fixes names + pairs; changes to a name/pair go through this doc's owner, canon overwrite).
 3. **Bắc Địch 4 roads** (if D2 = a) by Foreman B (28 chapters + 4 arcs + 8 rares + 12 normal), then their 16 grand endings.
 4. **NPC parity** with NPC roads (OD:L1243, unit D): NPC draw + jagent crossroads + world news + help/sabotage side quest.
 5. Art waves (§6) follow each writer wave.
 
 ## 8. OWNER DECISIONS (listed with a recommendation)
-- **D1 counts**: 4 grand (1 destined per life) · 2 kỳ ngộ · 3 normal per branch — **recommended** (her L1601 numbers, rares/normals already exist) · alt: 2 grand per branch (half the writing and 80 paintings instead of 160).
-- **D2 Bắc Địch**: own 4 roads inside the hòa thân origin (40 branches) — **recommended** · alt: shares nc's roads, own grand endings only (OD:L1213/L1215 reading).
-- **D3 where the last two choices sit**: Hồi Thiên mệnh right after ch14 — **recommended** (power / Thái hậu / children summits need the endgame) · alt: at the road finale .11 (earlier, more lives reach it, but summits feel premature).
-- **D4 after unlocking**: stay-endings continue the life with the reward; leave/throne/realm endings close it with an epilogue — **recommended** · alt A: every grand ending closes the life · alt B: every one continues.
+- **D1 counts**: 4 grand (each with a FAIL ending) · 2 kỳ ngộ · 3 normal per branch, all open at the start — **recommended** (her L1601 numbers + L1613 (1) fixed set; rares/normals already exist) · alt: 2 grand per branch (half the writing, 80 paintings).
+- **D2 Bắc Địch**: own 4 roads inside the hòa thân origin (40 branches) — **recommended** · alt: shares nc's roads, own ending set only (OD:L1213/L1215 reading).
+- **D3 where the last two choices sit**: Hồi kết nhánh right after ch14 — **recommended** (power / Thái hậu / children endings need the endgame) · alt: at the road finale .11.
+- **D4 after a grand ending**: stay-endings continue the life with the reward; leave/throne/realm endings close it with an epilogue — **recommended** · alt A: every grand ending closes the life · alt B: every one continues.
 - **D5 carried title**: only the previous life's grand title, cosmetic — **recommended** · alts: any grand title ever earned; or one modest jdh bonus while worn.
-- **D6 hindsight reveal**: after the life ends, Sổ luân hồi shows what the destiny was — **recommended** · alt: never shown.
-- **D7 Phá choices**: lower the lean — **recommended** · alt: one Phá breaks that destiny for the life.
+- **D6 showing the funnel**: a quiet line in Mệnh truyện «Còn hai ngả lớn chưa khép» (count only, no names; Detroit-style feedback that choices matter) — **recommended** · alt A: nothing shown · alt B: names shown once an ending has been reached in any earlier life (gallery style).
+- **D7 odds on the last two choices**: hidden (like the "✦" rare option) — **recommended** · alt: show the odds ladder word (Liều … Nắm chắc) on the pair that points to an open ending (would reveal which pairs are live).

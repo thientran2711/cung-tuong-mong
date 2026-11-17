@@ -72,6 +72,17 @@ Sources: Princess Maker 2 (Gainax 1993; ~70 endings); Long Live the Queen (Hanak
 
 **What a carried title looks like elsewhere**: short, proud, 2–4 words ("Kingslayer", "Thiên hậu"), a tier colour + sparkle for the rarest, a tooltip "how earned", shown on leaderboards and to every other player. Game-to-game: never a stat that breaks the new run (Hades/Rogue Legacy keep power gains small; MMOs keep title stats modest). → our rule OD 13:50Z–13:55Z (one worn title, one modest bonus) already fits; the grand-ending title should follow the same rule (owner decides whether it carries a bonus into the next life — see design §open questions).
 
+### 3b. Narrowing funnels and fail endings (added after the owner's correction 17/11 ~14:55Z: fixed set, choices close endings)
+Sources: Fire Emblem: Three Houses (Intelligent Systems 2019); The Witcher 3: Wild Hunt (CD Projekt Red 2015, Ciri's ending); Detroit: Become Human (Quantic Dream 2018); Mass Effect 2 (BioWare 2010, the suicide mission); Mystic Messenger (Cheritz 2016).
+| Game | How the set narrows | Fail endings | Takeaway |
+|---|---|---|---|
+| **Fire Emblem: Three Houses** | 4 routes all possible at start; one mid-game choice (house; follow Edelgard or not) closes the rest for the run | — | One fork can close several endings at once. |
+| **The Witcher 3** | Ciri's 3 endings decided by ~5 scattered choices tallied at the end; the player never sees the tally | the "bad" Ciri ending is the failure of the same road | Pull from many small choices, hidden. |
+| **Detroit: Become Human** | Per-chapter flowchart shows opened/locked branches (names hidden until found); endings narrow chapter by chapter | characters can die/fail on their own road | Showing *that* paths closed (not which) makes choices feel weighty. |
+| **Mass Effect 2** | Survival decided by earlier preparation + final orders | wrong final order or weak preparation = deaths | Last choices + earlier preparation = final odds. |
+| **Mystic Messenger / otome** | Route locked by an early-day choice; inside the route good / normal / bad | bad endings are the failure of the chosen route | Every route's destination has its own failure twin. |
+Definitions used in the design (GRAND_ENDINGS §2.0): **normal** = the ordinary close of the road (always one); **kỳ ngộ** = hidden chain + luck, an unexpected door; **grand** = the branch's destination, steered by choices over the whole life, open at the start, narrowed by closing choices, decided by the last two choices + odds, with its own FAIL ending.
+
 ## 4. Ten theme groups (for the skeleton)
 Drawn from §1–§3; each has a GOOD and a DARK variant so evil roads are allowed (OD 14:30Z "không ép … con đường thiện").
 
@@ -89,7 +100,7 @@ Drawn from §1–§3; each has a GOOD and a DARK variant so evil roads are allow
 | 10 | **Thiên hạ / Gia quốc** | Chiêu Quân, Văn Thành, Huyền Trân, Ỷ Lan (relief) | Hòa thân giữ yên biên ải, cứu dân | Mở cửa cho ngoại bang, gián điệp hai mang |
 
 ## 5. Rules the history/drama/game evidence supports (feed into the design)
-1. **One destined ending per life, hidden**: dramas reveal destiny only in hindsight; Reigns-style hidden objectives. ✔ owner rule.
+1. **(Revised 17/11 ~14:55Z)** No destined ending per life: a fixed set per branch, all open at the start, narrowed by choices (Three Houses, Detroit, Witcher 3 — §3b); each grand ending has a failure twin (otome bad endings).
 2. **The unlocking choice is often the uncomfortable one** (leave the palace, give up love, be cruel): Võ Tắc Thiên, Chân Hoàn, Hiếu Trang, NieR/Undertale. ✔ owner's examples (stay vs leave vs follow a Vương gia; evil empress).
 3. **Same summit, different kind**: hiền vs bạo empress, revered vs hated Thái hậu — real (Hiếu Trang vs Lữ hậu) and in games (Long Live the Queen). ✔ variety guard.
 4. **Milestone, then life goes on**: CK3 / real lives (Thái hậu lived decades after). Supports "event + scene + reward, life continues".

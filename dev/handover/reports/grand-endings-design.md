@@ -11,27 +11,31 @@ Files: expert research `dev/handover/reports/grand-endings-expert.md` (step 1, p
 - **Bắc Địch has no roads of its own**: it plays the 4 Nam Chiếu roads with its own land words.
 - NPC roads are not built yet → NPC grand endings must ship with them.
 
+## REVISION 2 (owner correction 17/11 ~14:55Z, OD:L1613 rule (1) overwritten + L1618) — supersedes the first version below it
+Reported to Foreman D #10 (session_01964izDpDf5BCzpbaaQ1Sxq).
+
 ## The design in brief
-1. **Counts per branch**: 4 grand endings (1 secretly destined per life) · 2 kỳ ngộ rare (already exist) · 3 normal (already exist). 40 branches → 160 grand endings, each with its own name = its title (≤ 4 chữ), all listed in the doc.
-2. **10 theme groups** (Quyền lực, Chính trị, Tình yêu, Tình bạn, Báo thù, Con cái, Gia tộc, Tự do, Tài nghệ, Thiên hạ), each with a good and an evil reading — e.g. 4 nữ đế (2 hiền, 2 bạo), 3 Thái hậu (2 revered, 1 hated); 47 of 160 endings are evil roads.
-3. **Hidden destiny**: drawn at birth from the branch's 4, never shown to her or any NPC, no hints. Her road choices quietly build or break it (reusing the j97 "hidden chain" pattern); one real condition per ending (a stat, a person alive, a son, a free seat). No dice.
-4. **The last two choices**: one hồi after the final chapter, the same for every life: *Đi hay ở* (stay humbly / stay and take power / leave the palace / follow someone) and *Đối đãi thế nào* (mercy / force / let go). Match + conditions → **Đại kết cục**: big event, own painted scene, very large reward (rank, stats, everyone's attitude, a "Kim sách Thiên mệnh" treasure), unique title. No match → «Cuộc đời ngươi vẫn tiếp tục như thế.» Nothing forced: choosing "leave" when it is not her destiny does not throw her out.
-5. **Title = the only carry-over**, worn above the name with the existing title plate. **Bảng Thiên mệnh** per life reuses the «Bảng vàng» podium. **NPCs** get the same: own hidden destiny, own choices, title on their name, news to everyone; helping one is a side quest with a big reward (none on failure); sabotage is possible.
-6. **Variety guard** checked by script: per branch ≥3 groups, ≥1 evil, ≥1 stay + ≥1 leave, 4 different choice pairs; across all 160 no repeated name or shape → 0 errors.
-7. **Fully worked samples**: Con gái Tể tướng · Quân cờ trong tay cha; Bắc Địch · Sói đầu đàn (new road); Cung nữ · Ánh mắt nơi hành lang — each with real choice names, condition, scene, Vietnamese event text, reward, title.
-8. The 8 shared + 3 mid-life lines own no grand ending: they stay fillers / chapters 12–14 and act as conditions (power, children, Hoàng hậu seat).
-9. Numbers only as BAL key names (BAL.ge.*), set later by measurement. Art: 160 scenes + 1 special title plate + 1 item icon, for Foreman C later (nothing ordered). Build after the freeze: engine + 3 pilot branches first.
+1. **No destined ending.** Each branch has a **fixed set**: 4 grand endings (each with its own FAIL ending) · 2 kỳ ngộ rare (already exist) · 3 normal (already exist). 40 branches → 160 grand endings, each with its own name = its title (≤ 4 chữ), all listed.
+2. **All open at the start, narrowing as she plays**: her choices **pull** toward some grand endings and **close** others for good (each road chapter has a fork that closes at least one); typically 1–2 remain by the end. A choice — or losing the person/seat an ending needs — can leave only that ending's **FAIL** ending.
+3. **The last two choices** (one hồi after chapter 14, same every life): *Đi hay ở* (stay humbly / take power / leave the palace / follow someone) and *Đối đãi thế nào* (mercy / force / let go). Each grand ending owns one pair. Pair → open ending: odds from her pull + one real condition decide **the grand ending** (big event, own scene, very large reward, title) or **its FAIL ending** (real loss). Pair → closed or no ending: «Cuộc đời ngươi vẫn tiếp tục như thế.», nothing forced.
+4. **Three kinds defined** (doc §2.0): *normal* = the ordinary close of the road, always one; *kỳ ngộ* = a hidden chain of choices + luck, an unexpected door, title for this life; *grand* = the branch's destination, steered across the whole life, with a failure twin and the only title that carries to the next life.
+5. **How other games do it** (doc §2.0b + expert report §3b): otome routes (good/normal/bad), Fire Emblem Three Houses (one fork closes routes), Witcher 3 (hidden tally of scattered choices), Detroit (chapter flowchart of closed paths), Mass Effect 2 (preparation + final orders), Princess Maker / Orange Light palace VNs (named endings, evil allowed).
+6. **10 theme groups**, good and evil readings (4 nữ đế: 2 hiền, 2 bạo; 3 Thái hậu; 47 of 160 evil). Variety guard by script: 0 errors.
+7. **Title = only carry-over**; **Bảng Thiên mệnh** per life (reuses Bảng vàng); **NPCs** get the same set and funnel with their own choices; her help/sabotage pulls or closes their endings.
+8. **3 fully worked branches** (Tể tướng · Quân cờ; Bắc Địch · Sói đầu đàn, new road; Cung nữ · Ánh mắt) now show the funnel step by step and each ending's FAIL twin.
+9. Numbers as BAL key names only (BAL.ge.*); art (160 scenes + plate + icon) for Foreman C later; build after the freeze.
 
 ## Decisions for HER (options; recommendation first)
-- **D1 Counts**: 4 grand · 2 rare · 3 normal per branch (**recommended**, her own "4 đại kết cục, 2 cực hiếm") — or 2 grand (half the writing, 80 paintings).
-- **D2 Bắc Địch**: its own 4 roads inside the hòa thân identity, making 40 branches (**recommended**, her 17/11 "10 × 4 = 40") — or keep sharing Nam Chiếu's roads with its own grand endings only (her 16/11 rule "one identity, country branches, no new structure", OD:L1213/L1215). These two owner lines pull apart; she should pick.
-- **D3 Where the last two choices sit**: right after chapter 14 (**recommended**) — or at the road finale (chapter 11).
-- **D4 After unlocking**: stay-endings continue the life with the reward; leaving / throne / foreign-crown endings close the life with an epilogue (**recommended**) — or all close — or all continue.
-- **D5 Carried title**: only the last life's grand title, looks only (**recommended**) — or any grand title ever earned — or a small bonus while worn.
-- **D6 After death**: Sổ luân hồi reveals what that life's destiny was (**recommended**) — or never.
-- **D7 "Wrong" choices**: lower the destiny's pull (**recommended**) — or one wrong choice breaks it for that life.
+- **D1 Counts**: 4 grand (+ fail twins) · 2 rare · 3 normal, all open at start (**recommended**) — or 2 grand per branch.
+- **D2 Bắc Địch**: its own 4 roads inside hòa thân → 40 branches (**recommended**, her "10 × 4 = 40") — or share Nam Chiếu's roads (her 16/11 rule OD:L1213/L1215). These two lines pull apart; she should pick.
+- **D3 Last two choices**: right after chapter 14 (**recommended**) — or at chapter 11.
+- **D4 After a grand ending**: stay-endings continue the life; leaving / throne / foreign-crown endings close it with an epilogue (**recommended**) — or all close — or all continue.
+- **D5 Carried title**: only the last life's, looks only (**recommended**) — or any ever earned — or a small bonus.
+- **D6 Show the funnel?** a quiet count «Còn hai ngả lớn chưa khép» without names (**recommended**) — or nothing — or names of endings already reached in earlier lives.
+- **D7 Odds on the last two choices**: hidden (**recommended**) — or show the odds word (would reveal which pairs are live).
 
 Gates: design only — no code, no BAL, no game file touched; one-core / quickcheck / shots not applicable. Conflict markers on this branch: 0.
 
-DESIGN READY 6580bfaeaec06ff2f64e7ff0003970daec2c177d
-SẴN SÀNG KIỂM 6580bfaeaec06ff2f64e7ff0003970daec2c177d
+(r1 was 6580bfae, superseded)
+DESIGN READY 96b6f18b0b5309b61be11959ad206bf3f6ce3dde
+SẴN SÀNG KIỂM 96b6f18b0b5309b61be11959ad206bf3f6ce3dde
