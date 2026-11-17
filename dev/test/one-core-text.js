@@ -31,7 +31,7 @@ function scan(B){
  const refOf=n=>{const p=[];let c=n;while(c.type==='MemberExpression'){const k=c.computed?(c.property.type==='Literal'?c.property.value:null):c.property.name;if(k==null)return null;p.unshift(k);c=c.object}
   return c.type==='Identifier'&&c.name==='BAL'?p:null};
  const valOf=p=>{try{let o=BAL;for(const k of p){if(o==null)return undefined;o=o[k]}return o}catch(e){return undefined}};
- const sites=[];
+ const sites=[],early=[];const home={eff:'jbaleff.js',road:'jbalroad.js',arc:'jbalroad.js'};
  for(const f of ORDER){const src=fs.readFileSync(path.join(B,f),'utf8');if(!/BAL\.(?:eff|road|arc)/.test(src))continue;
   const ast=acorn.parse(src,{ecmaVersion:'latest',locations:true});
   const strs=[],refs=[];
@@ -41,6 +41,9 @@ function scan(B){
    else if(n.type==='MemberExpression'&&!(par&&par.type==='MemberExpression'&&par.object===n)){
     const p=refOf(n);if(p&&p.length>=2&&NS.has(p[0])){const v=valOf(p);if(isNum(v))refs.push({n,p,v,stack:stack.slice()})}}
    stack.push(n);for(const k in n){if(k==='type'||k==='start'||k==='end'||k==='loc')continue;const c=n[k];if(Array.isArray(c))c.forEach(x=>walk(x,stack));else if(c&&typeof c.type==='string')walk(c,stack)}stack.pop()})(ast,[]);
+  /* a BAL.eff / road / arc read outside every function (it runs while the script loads) in a module that loads BEFORE the file that sets it = TDZ crash
+     ("Cannot access 'BAL' before initialization"): read it lazily (inside the function, or a `get x(){…}` for a text) */
+  for(const r of refs)if(!r.stack.some(x=>/Function/.test(x.type))&&ORDER.indexOf(f)<ORDER.indexOf(home[r.p[0]]))early.push({f,line:r.n.loc.start.line,key:r.p.join('.')});
   /* per typed number: every ref it could copy */
   const byTok=new Map();
   for(const r of refs){
@@ -57,13 +60,15 @@ function scan(B){
    sites.push({f,line:e.t.line,t:e.t,idx:e.idx,sg:e.sg,abs:e.abs,inv:e.inv,cands:uniq.map(x=>({key:x.p.join('.'),v:x.v,ref:src.slice(x.n.start,x.n.end)})),amb:uniq.length>1,
     text:e.t.s.slice(Math.max(0,e.idx-24),e.idx+e.abs.length+14).replace(/\s+/g,' ')})}}
  sites.sort((x,y)=>ORDER.indexOf(x.f)-ORDER.indexOf(y.f)||x.line-y.line);
- return sites}
+ sites.early=early;return sites}
 module.exports={scan,loadBAL};
 if(require.main===module){
  const B=process.env.OC_BUILD||path.join(ROOT,'dev','build');
  const sites=scan(B);const per={};sites.forEach(s=>per[s.f]=(per[s.f]||0)+1);
  const row=s=>`${s.f}:${s.line} ${s.cands.map(c=>c.key+'='+c.v).join(' | ')}  «…${s.text}…»`;
+ const early=sites.early.map(e=>`${e.f}:${e.line} reads BAL.${e.key} at load, before the file that sets it`);
  if(process.argv.includes('--list')){sites.forEach(s=>console.log(row(s)));console.log(JSON.stringify({sites:sites.length,per}));process.exit(0)}
- console.log(JSON.stringify({sites:sites.length,per}));
+ console.log(JSON.stringify({sites:sites.length,early:early.length,per}));
+ if(early.length){console.log('FAIL: a BAL.eff / road / arc read at load time in a module that loads before it (TDZ): read it lazily\n  '+early.join('\n  '));process.exit(1)}
  if(sites.length){console.log('FAIL: a player text types an amount that is a BAL.eff / BAL.road / BAL.arc value read beside it (print the constant: ${balSg(BAL…)} / ${balAb(BAL…)})\n  '+sites.slice(0,+(process.env.OCG_MAX||60)).map(row).join('\n  '));process.exit(1)}
  console.log('PASS: no player text types an amount that lives in BAL.eff / BAL.road / BAL.arc')}

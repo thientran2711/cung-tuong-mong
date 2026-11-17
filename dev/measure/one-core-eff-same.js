@@ -11,6 +11,7 @@ const EFF=Function('const BAL={};'+fs.readFileSync('dev/build/jbaleff.js','utf8'
 const REFRE='BAL\\.eff\\.([\\w$]+)(?:\\.([\\w$]+)|\\["([^"]+)"\\])(?:\\[([01])\\])?';
 const printed=src=>src.replace(new RegExp('\\$\\{bal(Sg|Ab)\\('+REFRE+'\\)\\}','g'),(m,fn,md,k1,k2,i)=>{let v=EFF[md][k1||k2];if(i!=null)v=v[+i];return fn==='Sg'?(v>0?'+':v<0?'-':'')+Math.abs(v):String(Math.abs(v))});
 const strip=n=>JSON.stringify(n,(k,v)=>{if(k==='start'||k==='end'||k==='raw')return undefined;
+ if(v&&v.type==='Property'&&v.kind==='get'&&v.value&&v.value.body&&v.value.body.body.length===1&&v.value.body.body[0].type==='ReturnStatement')return{type:'Property',method:false,shorthand:false,computed:v.computed,key:v.key,value:v.value.body.body[0].argument,kind:'init'};/* get x(){return `…`} ≡ x:`…` (a text that must be read lazily, review/one-core-dup r2) */
  if(v&&v.type==='TemplateLiteral'&&v.expressions.length===0&&v.quasis.length===1)return{S:v.quasis[0].value.cooked};
  if(v&&v.type==='Literal'&&typeof v.value==='string')return{S:v.value};return v});
 const lit=v=>v<0?`(-${-v})`:String(v);

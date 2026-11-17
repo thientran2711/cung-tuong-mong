@@ -17,6 +17,7 @@ const sg=n=>(n>0?'+':n<0?'-':'')+Math.abs(n);
 const printed=src=>src.replace(new RegExp('\\$\\{bal(Sg|Ab)\\('+REFRE.source+'\\)\\}','g'),(m,fn,md,k1,k2,i)=>{const v=refVal(md,k1,k2,i);return fn==='Sg'?sg(v):String(Math.abs(v))});
 const back=src=>src.replace(new RegExp(REFRE.source,'g'),(m,md,k1,k2,i)=>lit(refVal(md,k1,k2,i)));
 const norm=ast=>JSON.stringify(ast,(k,v)=>{if(k==='start'||k==='end'||k==='raw')return undefined;
+ if(v&&v.type==='Property'&&v.kind==='get'&&v.value&&v.value.body&&v.value.body.body.length===1&&v.value.body.body[0].type==='ReturnStatement')return{type:'Property',method:false,shorthand:false,computed:v.computed,key:v.key,value:v.value.body.body[0].argument,kind:'init'};/* get x(){return `…`} ≡ x:`…` (a text that must be read lazily, review/one-core-dup r2) */
  if(v&&v.type==='TemplateLiteral'&&v.expressions.length===0&&v.quasis.length===1)return{S:v.quasis[0].value.cooked};
  if(v&&v.type==='Literal'&&typeof v.value==='string')return{S:v.value};return v});
 const changed=cp.execSync(`git diff --name-only ${REF} -- dev/build`,{encoding:'utf8'}).split('\n').filter(f=>/^dev\/build\/j[\w]*\.js$/.test(f)&&!/jbal\.js$/.test(f));
