@@ -849,3 +849,4 @@ RUNNING / WAITING:
 - Foreman B: silent since 18:14Z; hoa-dien anchor order 21:03Z pending. Check; owner may need to open ROOT B.
 KIT QUEUE (main): large portrait full current look + seal for every known person (OD 20:25Z/20:35Z) — check whether kit-figure-mood r6 + KIT_BAKE already cover it before ordering; SHARP-VIEW kit worker after C gives the sharp URL pattern (OD 21:30Z).
 LESSONS s37: run prio1.sh on EVERY order incl. predecessor's queued jobs (xa xỉ→words withdrawn; FACE-FIT broke OD 04:05Z). Foremen must not FF main (hourly batch rule).
+- (17/11 21:36Z) s37 FINAL: successor MAIN s38 = session_01UV1SzjyZ9i1PBVPwsxig6F (depth 1). s37 wake trigger already fired (one-shot); s37 stops. s37 stays reachable only as relay if the owner keeps typing here.
