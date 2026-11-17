@@ -968,3 +968,4 @@ looks-2 overlay art (fx-stain-tra/uot, smudge, ink, pox, scars, messy hair) | im
 | batch s38a LIVE c7375c0c (main 99f3978d → c7375c0c; ROLLBACK 99f3978d): D dudo-blank-r1 2270c4c5 (Fold Dư đồ blank map, owner bug) | review/batch-s38a | MAIN s38 | session_01UV1SzjA6P5mZskv3JKn3BV | LIVE | 17/11 22:43Z |
 | REVIEW makeup-lux r2 rebuild 4497634ab (sonnet SMALL; brief briefs/review-makeup-lux-r2.md) | review/makeup-lux-r2v | B | session_01N1tNP4tD2jgqySY4WND4fY | RUNNING | 17/11 22:52Z |
 | cloth-xoc SAMPLE: code crease/sloppy filter on outfit (owner OD ~23:20Z), wired to looks-2 xoc behind BAL switch (sonnet) | review/cloth-xoc | MAIN s38 | session_01UV1SzgpiW9BQi7g48amRNv | RUNNING | 17/11 22:50Z |
+| smudge-code: makeup lem nhem as CODE on makeup layer (owner OD ~23:30Z), 4 level samples (sonnet) | review/smudge-code | MAIN s38 | session_01UV1SzmAt4rDX1DnaUjKTh1 | RUNNING | 17/11 22:52Z |
