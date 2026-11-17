@@ -1,5 +1,5 @@
 /* ================= BALANCE KNOBS (measured with the sensible / random bots; see the report) ================= */
-const BAL={wkFinCap:1,/* Đức from handmade works (kinh, vật cầu phúc): at most this many per month (j83 wkFinLeft) */ oanLv:[5,20,45,75],/* oán word ladder (VANPHONG): <5 Không oán · <20 Chút oán · <45 Oán · <75 Oán sâu · else Oán hận */
+const BAL={allyRel:35,/* the "người quen cũ" ally of a new life: her Thiện cảm toward the player at the start (j2 allyBond; co-op part B rebase) */ghenNew:15,/* a new face: an NPC's Ghen toward her starts at R(ghenNew) (j1 newRival, j1 ghenNew0; co-op part B rebase) */wkFinCap:1,/* Đức from handmade works (kinh, vật cầu phúc): at most this many per month (j83 wkFinLeft) */ oanLv:[5,20,45,75],/* oán word ladder (VANPHONG): <5 Không oán · <20 Chút oán · <45 Oán · <75 Oán sâu · else Oán hận */
  /* outQ = % an empty Hoàng hậu seat goes to an outsider girl (one-core: was 85 here and 60 in jbal2; 60 is the measured v12 value) */outQ:60,hz:3.2,conc:.5,/* conception per night × (D57 owner 16/11: doubled from .25 for everyone; the cycle peak/low is BAL.cyc.fert in jcycle.js) */trystC:[5,60],/* a tryst / affair conception = trystCh(p) = conceiveCh(p) kept within [lo,hi] (her Hẹn gặp riêng j22, Tư thông jroute, an NPC consort's affair month j22) */later:6,hhTh:60,/* diff-remeasure 16/11: 55 → 60 (Vừa HH 45 % → ~32 % with the fixed bot; 65 measured 26 %) */birthAdd:2,
  /* ONE SOURCE for every promotion threshold the player sees (checks in promoReqP/candOK and every text read these) */
  hhThNoSon:80,hhThNoSonHieu:70,hhDuc:50,hhDucHeir:40,qBlockHh:-40,qBlockTh:50,hiOppHh:-30,hiOppTh:30,hiOppFac:180,
@@ -30,7 +30,7 @@ const BAL={wkFinCap:1,/* Đức from handmade works (kinh, vật cầu phúc): a
   askAf:30,askBase:40,               /* Hỏi chuyện with the physician: thiện cảm needed for him to tell a rival's mạch án / base odds (+ thiện cảm/2) */
   nausea:45},                        /* weekly % of a nausea hint from the 2nd week of an unfound pregnancy */
  /* PALACE START (owner 16/11 "game starts right after the accession" + amendment "about 4 small children"; review/palace-start; NEW games only, flag S.ps):
-    j1 psSeedKids / psOpenText, j2 start, j51 kvW. harem = [rank, queen] of the consorts at the start (young and small: 10, was 12);
+    j1 psSeedKids / psOpenText, j51 kvW (j2 start = BAL.allyRel). harem = [rank, queen] of the consorts at the start (young and small: 10, was 12);
     consAge = [min, spread, +years for the queen and Phi+]; kidN = weights for 0,1,2,3,4,5 children in the whole palace; kidAge = [min,max] age;
     sonP = chance a seeded child is a prince; sonMom / dauMom = mother's rank range (7 = the Hoàng hậu: daughters only, never a son = no đích tử);
     empAge = [min, spread]; power0 = the throne's grip on the court (0–100, hook for the Emperor's side story and the side road, D5);
@@ -323,6 +323,23 @@ Object.assign(BAL,{tinhLv:{known:10,warm:30,prince:40,close:50,ally:60,love:70},
    progress / tier 1 / tier 2 (j85) · wkQ = handmade work quality → tier (j85) · tho = lifespan words (jmort) · succEnd = succession
    ending (j99succ) · veil = veil craft quality tiers (jveil) · lost = lost-item grade by price (jlost) · kidHp = kin health words (jht) · exTier = exam tier by target rank (jexam) · luxRep = luxury reputation tick (jlux) ·
    rgTrust = reign faction trust words (jreign) · summon = summon gain steps (jts) · sgStep = minigame raw → odds step (jsgame). */
+/* review/one-core-jkc PART 2 (ONE CORE OD:L1267 + LUẬT SỬA CẢ NHÓM, dev/measure/one-core-text-rule.js): cuts whose number a help / gloss / tip text
+   ALSO typed (the tiểu thư fault family): the rule and the text now read the same key. */
+Object.assign(BAL,{
+ accNeedEv:[2,4],          /* chứng cứ needed to accuse (Tố giác): [anyone, Hoàng hậu (rank 7+)] — j8 accNeed + the act text */
+ coldEvNeed:2,             /* chứng cứ that clear her name from lãnh cung (j14 «Tìm chứng cứ minh oan») */
+ ngocboiSung:15,           /* the Ngọc bội ngự ban keeps its owner's Sủng from falling below this (j8; item text, jinv) */
+ sinhThanSung:50,          /* her birthday is bestowed only when Sủng is at least this (j20; ban thưởng list) */
+ m30:{tocaoEv:1,exposeEv:2,xinhhAff:40},     /* j30: chứng cứ for «Tố tội thật» / «Bóc chuyện tư tình»; Hoàng hậu thiện cảm for «Xin Hoàng hậu giáng» */
+ srvx:{tinOut:10,keepTin:60,secNeed:2,friendAf:30}, /* cung nữ road (j42): Chủ tin below tinOut = sent to Tân Giả khố; from keepTin the chủ keeps her past
+                           the age; secNeed = secrets of the chủ she must know to betray; friendAf = quý from which a colleague counts as a friend */
+ virx:{hanhCap:80,camSung:40},               /* j85: Hạnh bậc 3 monthly Đức +1 stops at hanhCap; Cầm bậc 5 cheers the Emperor when Sủng is at least camSung */
+ tsx:{empSung:30,denSung:20},                /* jts: at a birth the Emperor bestows when Sủng is at least empSung; he sees the lake lantern from denSung */
+ sucNeed:{self:25,wk:15,rcp:10,kid:5,yKid:15}, /* Sức an act needs (the lock, its «Sức dưới N» word and the act's own check read the same key): self = «Tự học»
+                           (j23 / j85 / jtabs / j83 deck card); wk = «Tự học, làm tác phẩm» (j83 / jtabs Tác phẩm tab); rcp = master / teacher lessons (jrcp);
+                           kid = teaching a child chữ / lễ nghi / nghệ (j53 / j54); yKid = Y thuật care of a sick child (jact) */
+ facJoinAff:30,             /* a consort with no faction joins hers when her thiện cảm with the player is at least this (j10 «lập phe») */
+});
 /* evWipe: the chứng cứ amount that clears every piece one person holds against another (evA(a,t,BAL.evWipe): a pardon, a death, a plot undone); review/one-core-dup3 */
 Object.assign(BAL,{evWipe:-99});
 Object.assign(BAL,{cut:{nightPrep:[1,2] /* night preparation q (j8 night1: Để mộc 1, Tắm 2, Tập 1+bậc) → why word sơ sài ≤[0] / chu đáo ≥[1] (jwhyn) */,rhythm:[8,13],facRel:20,tuanDays:[10,20],clanRel:25,form:[35,50,65],virCong:[2,3,5],wkQ:[25,45,65,85],

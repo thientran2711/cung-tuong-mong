@@ -79,20 +79,23 @@ function j59sel(st,tk,me){let pi=null;try{pi=typeof popIdx==="number"?popIdx:nul
      corners (the name row), so they never cover a figure or a name.
    - the head count is ONE number (kitHereCount): the stage title, the page chips and the Dư đồ label of the place she stands in. */
 function j59person(p){return !!p&&p.kind!=="chest"&&p.kind!=="task"&&!(p.kind==="srv"&&p.sk==="task")}
-function j59chips(st,R,P){/* KIT 33.9 swipe stage: P: {pg, pages, before, after, xl, xr}. NO arrow buttons — two "+N" chips in the top corners of the backdrop: LEFT = people already passed (left of the view), RIGHT = people still to come; hidden at 0. Pure kit chip, not tappable (the row is swiped) */
+function j59chips(st,R,P,again){/* morechip-fix: placed once now and once more on the next frame, after the side column (k3Stage) has its full height */if(!again)requestAnimationFrame(()=>{try{if(st.isConnected)j59chips(st,R,P,1)}catch(e){}});/* KIT 33.9 swipe stage: P: {pg, pages, before, after, xl, xr}. NO arrow buttons — two "+N" chips in the top corners of the backdrop: LEFT = people already passed (left of the view), RIGHT = people still to come; hidden at 0. Pure kit chip, not tappable (the row is swiped) */
  for(const side of ["l","r"]){let c=st.querySelector(".j59more.j59m"+side);const n=P&&P.pages>1?(side==="r"?P.after:P.before):0;
   if(!(n>0)){if(c)c.remove();continue}
   if(!c){c=document.createElement("div");c.className="kchip n j59more j59m"+side;st.appendChild(c)}
   const txt="+"+n;if(c.textContent!==txt)c.textContent=txt;
   const lab=side==="r"?`${n} người ở bên phải · vuốt sang trái`:`${n} người ở bên trái · vuốt sang phải`;c.setAttribute("aria-label",lab);c.title=lab;
-  c.style.left=c.style.right="";if(side==="l")c.style.left=(P.xl+4).toFixed(0)+"px";else c.style.right=(P.xr+4).toFixed(0)+"px";
-  /* r6: the chips stand in the TOP corners ABOVE the heads (never on a figure): left = under the place title and the left rail buttons,
-     right = under the side column when it is reserved (room) or under the "‹ Dư đồ" button (place painting); 44 % only if that has no room */
-  let top=null;try{const R0=st.getBoundingClientRect();const bot=sel=>{let b=0;st.querySelectorAll(sel).forEach(e=>{if(!e.offsetParent||e.hidden)return;const q=e.getBoundingClientRect();if(q.width>2&&q.height>2&&q.top<R0.top+R0.height*.5&&(side==="l"?q.left<R0.left+R0.width*.3:q.right>R0.right-R0.width*.3))b=Math.max(b,q.bottom-R0.top)});return b};
-   const b=side==="l"?Math.max(bot("#sc-t"),bot(".krailb,#kshL")):Math.max(bot("#sc-t"),bot("#kshR,#tomap"));const ht=c.offsetHeight||26;const kR=document.getElementById("kshR");const underCol=side==="r"&&kR&&!kR.hidden&&kR.offsetHeight>0;if(b+6+ht<=(underCol&&P.floor?P.floor:R0.height*.45))top=b+6}catch(e){}
-  c.style.top=top!=null?top.toFixed(0)+"px":"";
-  /* under the reserved side column the right chip moves into that column's own (people-free) zone */
-  if(side==="r"&&top!=null){const kR=document.getElementById("kshR");if(kR&&!kR.hidden&&kR.offsetHeight)c.style.right="8px"}}}
+  /* morechip-corners (owner 17/11 13:02Z): the chip is BIG (kit chip size .kbig) and stands in the stage's BOTTOM corner of its own side: LEFT chip = people off the left side (bottom-left),
+     RIGHT chip = people off the right side (bottom-right). Never on a side column / rail (it steps beside it), never on a figure's name chip (it steps up above the name row, then beside) */
+  c.style.left=c.style.right=c.style.top=c.style.bottom="";c.style.bottom="6px";
+  if(side==="l")c.style.left=((P.xl||0)+6).toFixed(0)+"px";else c.style.right=((P.xr||0)+6).toFixed(0)+"px";
+  try{const R0=st.getBoundingClientRect();
+   const hit=(a,q)=>a.left<q.right-1&&a.right>q.left+1&&a.top<q.bottom-1&&a.bottom>q.top+1;
+   for(const e of st.querySelectorAll(side==="r"?"#kshR":"#kshL,.krailb")){if(!e.offsetParent||e.hidden||!e.offsetHeight)continue;const q=e.getBoundingClientRect(),cr=c.getBoundingClientRect();
+    if(hit(cr,q)){if(side==="r"){c.style.right=(R0.right-q.left+6).toFixed(0)+"px"}else{c.style.left=(q.right-R0.left+6).toFixed(0)+"px"}}}
+   const tags=[...st.querySelectorAll(".tok .tag,#j59metag .tag")].filter(g=>g.offsetParent&&g.getBoundingClientRect().width>2);
+   let cr=c.getBoundingClientRect();const over=tags.filter(g=>hit(cr,g.getBoundingClientRect()));
+   if(over.length){const top=Math.min(...over.map(g=>g.getBoundingClientRect().top));c.style.bottom=(R0.bottom-top+4).toFixed(0)+"px"}}catch(e){}}}
 /* KIT 33.9 SWIPE: drag the row of people left/right (touch or mouse); it follows the finger (translate var --j59dx on the figures, pets, name chips), and on release slides out and the next view slides in
    (transform only, 220 ms; reduced-motion = instant). A drag over 12 px never opens a person's pop-up (click swallowed). */
 const J59SW={ms:220,min:56,tap:12};
@@ -173,7 +176,8 @@ function j59lay(){const st=document.getElementById("stage");if(!st||!S)return;co
  const F=E.filter(x=>!x.nf);const nfW=Math.max(0,...E.filter(x=>x.nf).map(x=>x.tok.offsetWidth));
  const KA=st.__kfa;/* KIT_FLOOR anchor (jk2b kitFloorFit): feet on the painted floor line while the figure keeps its kit height */
  let capOn=(()=>{try{return kitView().pages===2}catch(e){return true}})();/* KIT §33 (canon): the maxPx cap applies to iPad-wide layouts only; Fold / phones keep the full .79 of their taller stage *//* KIT §0: the left page in the spread and the one-page room are the same page */
- const size=()=>{const fo=kitSlotFloor(sH);/* KIT 33.12 fixed slot table: ONE floor line per stage height (no name-chip or painted-floor shift), so a person snaps to the same x AND y on every stage / place / room */CAP=sH-fo-topR;return{fo,H:Math.max(sH*.2,Math.min(KF.h*sH,CAP,(KF.maxPx&&capOn)?KF.maxPx:1e9))}};
+ let FOX=0;/* fig-tag-chip: floor band the wrapped name tags need (phones: a long rank/plate/name wraps to 4-5 lines) */
+ const size=()=>{const fo=Math.max(kitSlotFloor(sH),FOX);/* KIT 33.12 fixed slot table: ONE floor line per stage height (no name-chip or painted-floor shift), so a person snaps to the same x AND y on every stage / place / room */CAP=sH-fo-topR;return{fo,H:Math.max(sH*.2,Math.min(KF.h*sH,CAP,(KF.maxPx&&capOn)?KF.maxPx:1e9))}};
  const maxF=Math.max(1,...F.map(x=>x.f));
  const widthFor=(z)=>{let rr=rightR;try{const kR=document.getElementById("kshR");const head=sH-z.fo-Math.min(z.H*maxF,sH-z.fo-topR);/* the right plaque column (court chips, maid, Ân sủng) is reserved when it reaches down to the heads: no face or name is ever under it
     (coordinator 11/15, supersedes "may stand under it"); a column that ends above the heads leaves the full width. Compact stages
@@ -204,6 +208,7 @@ function j59lay(){const st=document.getElementById("stage");if(!st||!S)return;co
  /* the name chips are at most one slot wide (they wrap, never cut); measure them at that width, then size the floor band for them */
  st.style.setProperty("--j59sw",Math.max(60,G.sw-8).toFixed(0)+"px");
  G=geo(N,Z);
+ {const th=Math.max(0,mt&&mt.firstChild&&!mt.classList.contains("j59off")?mt.firstChild.offsetHeight:0,...E.map(x=>x.tag&&x.tok.style.display!=="none"?x.tag.offsetHeight:0));/* fig-tag-chip: tag top = floor+3, so band >= tag height + 3 + 2 air; only grows past the fixed band when a tag wraps */if(th+5>Z.fo){FOX=Math.ceil(th+5);Z=size();G=geo(N,Z)}}
  const {fo,H}=Z;CAP=sH-fo-topR;
  st.dataset.j59dbg=[N,H.toFixed(0),G.sw.toFixed(0),mxW(H).toFixed(0),mePet?pEx(mePet,H).toFixed(0):0,...F.map(x=>(coreW(x,H)).toFixed(0)+"+"+(x.pet?pEx(x.pet,H).toFixed(0):0))].join(" ");
  /* pages: page 1 = her (slot 1) + N−1 others, then N others per page */
@@ -258,7 +263,9 @@ const css=document.createElement("style");css.textContent=`
 .stage.j59 .tok.fig .figimg.j59sz{max-height:none!important;max-width:none!important}
 .stage.j59 .tok.fig .tag{position:absolute;top:100%;left:50%;margin:3px 0 0 0;transform:translateX(-50%);width:max-content;text-align:center;z-index:2}
 .stage.j59.j59wait #tokens .tok,.stage.j59.j59wait #mefig,.stage.j59.j59wait #j59metag,.stage.j59.j59wait .kspet{visibility:hidden}
-.stage.j59 .j59more{position:absolute;z-index:4;top:44%;pointer-events:none;font-weight:700;white-space:nowrap}
+.stage.j59 .j59more{position:absolute;z-index:4;pointer-events:none;font-weight:700;white-space:nowrap}
+/* morechip-corners: the big kit chip (KIT 33.9): readable at Fold 755 */
+.kchip.j59more{font-size:1.05rem;line-height:1.2;padding:5px 15px;border-radius:16px;border-width:2px;margin:0;box-shadow:0 2px 6px rgba(60,30,10,.28);background:#fff8ee}
 .stage.j59 #mefig,.stage.j59 #j59metag,.stage.j59 #tokens,.stage.j59 .kspet{translate:var(--j59dx,0px) 0;transition:var(--j59tr,none);will-change:translate}
 .stage.j59{touch-action:pan-y}
 .stage.j59 #mefig,.stage.j59 #tokens img{-webkit-user-drag:none;user-select:none}
@@ -306,7 +313,7 @@ html body #stage.j59slot #tokens>.tok .tag,html body #stage.j59slot #j59metag .t
 html body #stage.j59slot #tokens>.tok.fig .tag{top:100%!important;margin-top:3px!important}
 html body #stage.j59slot #j59metag{translate:none!important}
 html body #stage.j59ph #kshR{top:var(--j59kt,44px)!important;left:6px!important;right:6px!important;width:auto!important;max-width:none!important;min-width:0!important;flex-direction:row;flex-wrap:wrap;justify-content:flex-end;align-items:center;gap:3px}
-html body #stage.j59ph #kshR .k3cs{flex-direction:row;flex-wrap:wrap;justify-content:flex-end;gap:3px}
+html body #stage.j59ph #kshR .k3cs{display:flex;flex-direction:row;flex-wrap:wrap;justify-content:flex-end;gap:3px}
 html body #stage.j59ph #kshR .k3c{width:auto;padding:1px 6px;gap:3px}
 html body #stage.j59ph #kshR .k3c .md{display:none}
 html body #stage.j59ph #kshR .k3c .k3ct{flex-direction:row;align-items:baseline;gap:4px;white-space:nowrap}

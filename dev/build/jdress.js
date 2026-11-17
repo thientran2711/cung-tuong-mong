@@ -3,7 +3,7 @@
    · "Tố vượt phẩm" (ACT.vp, j92 wdAccuse, unchanged act): an item ABOVE the wearer's rank. Now also the visible jewellery rule
      (IT.rk above her rank, jwdinv vpItems) counts as a cause once SEEN, and the inquiry judges it (before: a jewellery breach could
      never be accused — wdCause/wdStatus only looked at the two WD slots).
-   · "Tố xa xỉ" (ACT.xx, NEW): dressed too lavishly EVEN WITHIN her rank = the ONE luxury score luxOf(t) (jinv + jwdinv + jpet: every worn
+   · "Tố xa xỉ" (ACT.xx, NEW): dressed too lavishly EVEN WITHIN her rank = the ONE luxury score luxOf(t) = luxTotal (jinv + jwdinv + jpet + jtoil makeup, makeup-lux: every worn
      piece incl. the WD slots and the follow pet) above her rank allowance luxAllow(t) (now read from BAL.lux.allow, OD:L1267).
    EVIDENCE (owner: "only evidence lets her accuse"): p.dsn[wdKey(t)] = {w, sig, sc, bud, vj, by} — what p SAW of t's dress:
      · being at the SAME PLACE in the same buổi (j9 placeWhere → everyone; j2 goTo → her new place) — Xa xỉ is easy to see;
@@ -28,6 +28,8 @@ Object.assign(BAL.lux,{xx:{
 /* ---------- what people see of a dress ---------- */
 function dsVj(p){try{const r=rkOf(p);return (p.inv||[]).filter(e=>e&&e.w&&!e.h&&IT[e.k]&&itm(e.k).sl&&itm(e.k).rk>r).map(e=>e.k)}catch(e){return[]}}
 function dsSig(p){let L=[];try{L=luxWorn(p).slice()}catch(e){}try{const P=p.petOn!=null&&typeof tsbPets==="function"?tsbPets(p)[p.petOn]:null;if(P)L.push("pet:"+P.t)}catch(e){}
+ /* makeup-lux: the face of the day is part of the look seen (its xa xỉ is in the ONE total luxOf = luxTotal); a new face = a new look */
+ try{const r=typeof toilMkRec==="function"?toilMkRec(p):null;if(r&&r.makeup)L.push("mk:"+toilMk(r))}catch(e){}
  return L.sort().join("|")}
 function dressRec(t,by){let x;try{x=luxOf(t)}catch(e){return null}return{w:wk(),sig:dsSig(t),sc:x.sc,bud:x.bud,vj:dsVj(t),by:by||""}}
 function dressLook(obs,t,by,pre){if(!obs||!t||obs===t||t.alive===false)return null;const rec=pre?Object.assign({},pre,{vj:pre.vj.slice()}):dressRec(t,by);if(!rec)return null;const x=rec,vj=rec.vj;
@@ -70,9 +72,10 @@ function dsSpyX(A){return Array.isArray(A)?A.map(o=>o&&o.n==="Sai đi dò la"&&o
  const judge=judgeName(t),A0=wdNmC(a),T0=wdNm(t);for(const o of consorts()){try{dressLook(o,t,judge)}catch(e){}}
  const nm=J.map(k=>itm(k).n).join(", ");
  try{a.vpA92=wk();t.vpT92=wk()}catch(e){}
- if(!roll(oVP(a))){ap(a,{danh:-2});relAdd(a,t,-10);return `${A0} tố ${T0} vượt phẩm (${nm}), ${judge} bỏ qua, chỉ dặn lần sau giữ ý. ${a===S?"Danh -2. ":""}`}
- relAdd(a,t,-10);ap(a,{danh:2});dropJ();ap(t,{danh:-6});punish(t,"ăn mặc vượt phẩm",1);
- return `${A0} tố ${T0} vượt phẩm: <span class="${t===S?"r":"g"}">thành</span>. ${nm} bị tịch thu. ${wdNmC(t)} Danh -6. `};window.wdAccuse=wdAccuse})();
+ const E92=BAL.eff.j92;/* the SAME keys as a Vượt phẩm outfit (j92 wdAccuse; makeup-lux one-core fix) */
+ if(!roll(oVP(a))){ap(a,{danh:E92.wdWaveDanhA});relAdd(a,t,E92.wdAccuse_2);return `${A0} tố ${T0} vượt phẩm (${nm}), ${judge} bỏ qua, chỉ dặn lần sau giữ ý. ${a===S?`Danh ${E92.wdWaveDanhA}. `:""}`}
+ relAdd(a,t,E92.wdAccuse_3);ap(a,{danh:E92.wdDanhA});dropJ();ap(t,{danh:E92.wdOverDanhT});punish(t,"ăn mặc vượt phẩm",1);
+ return `${A0} tố ${T0} vượt phẩm: <span class="${t===S?"r":"g"}">thành</span>. ${nm} bị tịch thu. ${wdNmC(t)} Danh ${E92.wdOverDanhT}. `};window.wdAccuse=wdAccuse})();
 
 /* ---------- TỐ XA XỈ (act xx) ---------- */
 function xxCause(obs,t){if(!obs||!t||obs===t)return null;const r=dressNow(obs,t);return r&&r.sc>r.bud?r:null}
