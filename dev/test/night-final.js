@@ -8,6 +8,7 @@ const {chromium}=require('playwright');const [,,URL]=process.argv;
  const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,200)));p.setDefaultTimeout(0);
  await p.goto(URL,{waitUntil:'domcontentloaded',timeout:0});await p.waitForFunction(()=>typeof start==='function'&&typeof deser==='function'&&typeof nfOn==='function'&&typeof nfOdds==='function',null,{timeout:0});await p.waitForTimeout(2000);
  await p.evaluate(()=>{window.T={ch:"Thôi",seen:[]};
+  /* his own visit (jvisit, from main) is not what these cases test: off (cap 0); night-final case 8 tests its order */T.vcap=BAL.visit.cap;BAL.visit.cap=0;
   T.fresh=()=>{for(const id of ['kload','kroul']){const x=document.getElementById(id);if(x)x.remove()}try{localStorage.clear()}catch(e){}SLOT=3;window.__nlInner=1;window.__bot=1;document.getElementById('title').hidden=true;
    for(let i=0;i<60;i++){start();if(!isSrv()&&!(typeof isKc==="function"&&isKc())&&!(window.cycOn&&cycOn(S)))break}Q.length=0;S.preg=0;S.pregUnk=0;S.cyc=null;T.ch="Thôi";T.seen=[];
    const L=liveRivals(false).filter(v=>nightCh(v)>0);L.forEach(v=>{v.preg=0});return L};
@@ -70,5 +71,20 @@ const {chromium}=require('playwright');const [,,URL]=process.argv;
   await new Promise(z=>setTimeout(z,700));const a={mb:(()=>{const h=($("mb")||{}).innerHTML;const i=h.indexOf("nfcd");return i<0?"NO nfcd; "+h.replace(/<[^>]+>/g," ").replace(/\s+/g," ").slice(0,400):h.slice(i-50,i+500)})(),cc:typeof kitCoopClock,dawn:a0.dawn,cf:(window.__cfdbg||[]).slice(-5).join(","),busy:typeof cfBusy==="function"&&cfBusy(),kmov:[...document.querySelectorAll(".kmov")].map(e=>e.className).join("|"),scene:a0.scene,qBefore:a0.qBefore,dlg:!$("modal").hidden&&Q[0]&&Q[0].pid==="nfch",chip:!!document.querySelector("#mb .kchips.kctm .kchip"),txt:(document.querySelector("#mb .kchips.kctm")||{}).textContent};await new Promise(z=>setTimeout(z,600));a.txt2=(document.querySelector("#mb .kchips.kctm")||{}).textContent;
   await new Promise(z=>setTimeout(z,1300));a.me=S.nfX&&S.nfX.me;a.gone=!Q.some(m=>m.pid==="nfch");a.st=S.nfX&&S.nfX.st;BAL.steal.choice.ms=ms;window.__bot=1;un();return a});
  ok("7 the scene first, then the choice; 10 s countdown (kit §69 chip), timeout = Thôi",r.scene&&!r.qBefore&&r.dlg&&r.chip&&/giây/.test(r.txt||"")&&r.txt!==r.txt2&&r.me===null&&r.gone&&r.st==="done",r);
+ /* 8. his own visit (jvisit, main) rolls AFTER the choice is resolved, never between the flip and the choice (night-final #4) */
+ r=await p.evaluate(()=>{const L=T.fresh();const un=T.noNpc();T.toEvening();const V=BAL.visit;BAL.visit.cap=100;const k=[V.base,V.gap];V.base=1000;S.visW=null;if(S.emp)S.emp.visit=null;S.sung=60;
+  const ord=[];const vr=window.visRoll;window.visRoll=function(){ord.push("visit:"+(S.nfX&&S.nfX.st));return vr.apply(this,arguments)};
+  const u2=T.only(L[0]);const d=wk();S.toMorning=0;used=4;S.buoi=B4L;nextBuoi();u2();const a={choiceFirst:Q.findIndex(m=>m.pid==="nfch")===0,visQ0:Q.some(m=>m.pid==="empnight")};
+  T.ch="Thôi";const sn=T.drain();a.seen=sn.indexOf("empnight")>sn.indexOf("nfch");a.ord=ord.slice();/* "visit:wait" = the call inside the flip, only marked (S.nfVd); the roll itself runs at "done" */window.visRoll=vr;V.base=k[0];BAL.visit.cap=0;un();return a});
+ ok("8 his visit rolls after the choice is resolved",r.choiceFirst&&!r.visQ0&&r.ord.includes("visit:done")&&r.seen,r);
+ /* 9. the "THỊ TẨM" seal: not in the flip scene (the choice is still to come); stamped after the resolve when she keeps the night (main s26 23:39Z) */
+ r=await p.evaluate(async()=>{const L=T.fresh();try{kmReset()}catch(e){}const un=T.noNpc();T.toEvening();window.__bot=0;const ms=BAL.steal.choice.ms;BAL.steal.choice.ms=60000;
+  const a={};T.flipTo(S);const dw=document.getElementById('dawn');if(dw){dw.classList.remove('on');dw.hidden=true}try{kmPump()}catch(e){}
+  for(let i=0;i<40;i++){await new Promise(z=>setTimeout(z,250));const e=document.querySelector(".kmov.kcf .kmend");if(e){a.scene=true;a.sealInScene=!!document.querySelector(".kmov.kcf .kcf-seal,.kcf-seal");a.res=(document.querySelector(".kmov.kcf .kmres")||{}).textContent;a.end=e.textContent;e.click();break}}
+  for(let i=0;i<20&&!(Q[0]&&Q[0].pid==="nfch");i++)await new Promise(z=>setTimeout(z,250));a.choice=!!(Q[0]&&Q[0].pid==="nfch");
+  const j=Q[0]?Q[0].opts.findIndex(o=>o.n==="Thôi"):-1;if(j>=0)chooseM(j);
+  for(let i=0;i<40;i++){await new Promise(z=>setTimeout(z,250));if(document.querySelector(".kcf-seal")){a.sealAfter=true;const e=document.querySelector(".kmov.kcf .kmend");a.end2=e&&e.textContent;a.res2=(document.querySelector(".kmov.kcf .kmres")||{}).textContent;if(e)e.click();break}}
+  BAL.steal.choice.ms=ms;window.__bot=1;un();try{kmReset()}catch(e){}return a});
+ ok("9 THỊ TẨM seal only after the resolve (she kept it)",r.scene&&!r.sealInScene&&/Thẻ bài của (ngươi|ta) được lật/.test(r.res||"")&&r.choice&&r.sealAfter&&/Chuẩn bị thị tẩm/.test(r.end2||"")&&/thị tẩm/.test(r.res2||""),r);
  const pass=Object.values(R).every(x=>x.pass);
  console.log(JSON.stringify({pass,R,errs},null,1));await b.close();process.exit(pass&&!errs.length?0:1)})();

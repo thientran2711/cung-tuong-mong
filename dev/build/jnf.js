@@ -68,6 +68,10 @@ flip=function(){if(!S||REAL||!nfOn())return f0.apply(this,arguments);
  if(S.nfC===day())return;                                      /* the choice is running / done: tonight stays */
  S.tonight=null;S.nfP=day()};                                  /* the tablet waits for the end of tối */
 
+/* his own visit (jvisit visRoll, "after the tablet flip") rolls AFTER the choice is resolved, never between the flip and the choice: no dialog
+   may cover the flip choice (night-final #4, coop-steal family); the roll inside realFlip is only marked (S.nfVd) and run by finish() */
+if(typeof window.visRoll==="function"){const vr0=window.visRoll;window.visRoll=function(){if(REAL&&nfOn()){S.nfVd=day();return""}return vr0.apply(this,arguments)}}
+function visLate(){if(!S||S.nfVd!==day())return;S.nfVd=null;if(!host())return;try{window.visRoll()}catch(e){console.error("visit",e)}}
 /* ---------- 2. the night itself plays only after the choice ---------- */
 const sw0=stealWin;stealWin=function(){SW++;try{return sw0.apply(this,arguments)}finally{SW--}};
 const ns0=nightScene;nightScene=function(){if(IN||!S||!nfOn())return ns0.apply(this,arguments);
@@ -125,7 +129,9 @@ if(typeof window.stealPass==="function")window.stealPass=stealPassNF;
 window.nfResolve=nfResolve;window.nfSeedPick=seedPick;
 
 /* HER win: the summons, then the night at once (the day ends after it, jnight) */
-function herWin(){if(!S||S.dead)return;const d=day();if(S.nfN===d)return;S.nfN=d;S.tonight="me";S.ntk={w:d,who:"me",nm:"ngươi"};if(CO())RR=d;
+/* the painted "THỊ TẨM" seal on her card only once the choice is resolved and the night is hers (main s26 23:39Z; jflip cfSeal, once a day) */
+const sealMe=()=>{try{if(typeof window.cfSeal==="function")window.cfSeal()}catch(e){console.error(e)}};
+function herWin(){if(!S||S.dead)return;const d=day();if(S.nfN===d)return;S.nfN=d;sealMe();S.tonight="me";S.ntk={w:d,who:"me",nm:"ngươi"};if(CO())RR=d;
  try{if(used>=4)used=3}catch(e){}
  for(let i=Q.length-1;i>=0;i--)if(Q[i].pid==="ksp")Q.splice(i,1);
  const P=PEND.nfsum();Q.unshift({t:"Kính sự phòng báo tin",h:P.t,opts:P.o,who:P.who,pid:"nfsum",pp:{nd:d},art:"img/ev-ksp.webp"});
@@ -144,6 +150,12 @@ const VALID=v=>v==="feign"||v==="road"||v==="keep"?v:null;
 /* S.nfX: st "wait" (flip done, other dialogs first) → "open" (choices running) → "done" */
 function X(){const x=S&&S.nfX;return x&&x.d===day()?x:null}
 const scene=()=>{try{return (typeof window.cfBusy==="function"&&window.cfBusy())||!!document.querySelector(".kmov.kcf")}catch(e){return false}};
+/* no dialog may cover the flip choice (night-final #4, coop-steal family): while the card-flip scene or the choice is on screen, a tap on a
+   look-up opener (mood seal → "Tâm trạng · X" jevb/jpcf, servant look j29) does nothing — the scene / the choice owns the screen; the seal's
+   own popover (jemo emoTip) is a tooltip, not a dialog, and is not what is stopped here: the whole tap is. Window capture = before every other listener. */
+const LOOKUP="img.kemo[data-emo],[data-emo-open],[data-svlook]";
+window.addEventListener("click",e=>{try{const t=e.target;if(!t||!t.closest||!t.closest(LOOKUP)||!S||!nfOn())return;const x=X();
+ if(!(scene()||(x&&x.st==="open"&&Q[0]&&Q[0].pid==="nfch")))return;e.stopPropagation();e.preventDefault()}catch(z){}},true);
 let WT=null;
 function wake(){step();if(!WT&&!window.__bot)WT=setInterval(step,250)}
 function sleep(){if(WT){clearInterval(WT);WT=null}}
@@ -209,13 +221,14 @@ function resolveAll(){const x=X();if(!x||x.st!=="open")return;x.st="done";sleep(
   if(!won){const n=t!==f?keepNoSteal(t):B().keep.gain;if(t===S&&n)log(`Đêm nay không ai giành được Hoàng thượng khỏi ngươi. Sủng +${n}.`);x.def.gain=n}
   else{const w=entOf(won.w);if(w)keepRobbed(t,w,won.mode);x.def.oan=B().keep.oan}}
  gres(out,t===f?x.def:null);
+ if(t===S&&!won)sealMe();   /* she kept her own flipped night */
  if(S.tonight==="me"&&!won&&x.ksp&&S.nfN!==day()&&!Q.some(m=>m.pid==="ksp")){try{pushDil(mkP("ksp"),"Kính sự phòng báo tin")}catch(e){console.error(e)}}
  finish()}
 /* co-op: the friend's own result goes back to her seat (she applies her own Sủng and plays her own night) */
 function gres(o,def){try{const f=friend();if(!f)return;const r=o&&o.res&&o.res.find(z=>z.w===f.id);
  S.nfG={d:day(),L:r?[{k:"flip",won:r.won,mode:r.mode,lost:r.lost,txt:r.txt}]:[],def:def||null}}catch(e){}}
 /* the choice is over: tell the guest, then the day goes on (the night, or the next morning) */
-function finish(){S.nfFin=day();send("fin");RR=day();try{render()}catch(e){}showSoon()}
+function finish(){S.nfFin=day();visLate();send("fin");RR=day();try{render()}catch(e){}showSoon()}
 
 /* ---------- 3. the commit at "Sang ngày mới" (the end of tối's 4th khắc) ---------- */
 const showSoon=()=>{if(window.__bot)return;setTimeout(()=>{try{if(S&&Q.length&&$("modal").hidden)showModal()}catch(e){}},0)};
@@ -286,7 +299,8 @@ function apply(m){if(!S||S.dead||m.d!==day())return;
    if(gd.gain){keepNoSteal(S);log(`Đêm nay không ai giành được Hoàng thượng khỏi ngươi. Sủng +${gd.gain}.`)}}
   if(hadMe&&t!=="me"&&!won){for(let i=Q.length-1;i>=0;i--)if(Q[i].pid==="ksp"||Q[i].pid==="prep")Q.splice(i,1);
    Q.push({t:"Kính sự phòng",h:`<p>Thẻ bài của ngươi đã được lật, nhưng giữa đường, Hoàng thượng bị mời sang cung khác.</p>`})}
-  else if(t==="me"&&!won&&!m.ntk&&S.nfN!==day()&&!Q.some(z=>z.pid==="ksp")&&typeof pushDil==="function"&&typeof mkP==="function")pushDil(mkP("ksp"),"Kính sự phòng báo tin");
+  if(t==="me"&&!won)sealMe();
+  if(t==="me"&&!won&&!m.ntk&&S.nfN!==day()&&!Q.some(z=>z.pid==="ksp")&&typeof pushDil==="function"&&typeof mkP==="function")pushDil(mkP("ksp"),"Kính sự phòng báo tin");
   const w0=S.nfW===day();S.nfFin=day();RR=day();
   if(w0&&!Q.length&&(S.buoi||0)>=B4()){try{COOPW.allowN=true;nextBuoi()}catch(e){console.error(e)}finally{COOPW.allowN=false}}}
  try{if(!window.__bot&&Q.length)showModal();render()}catch(e){}}

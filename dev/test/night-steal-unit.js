@@ -6,7 +6,7 @@ const {chromium}=require('playwright');const path=require('path');
  await p.goto('file://'+path.resolve(process.argv[2]),{waitUntil:'domcontentloaded'});await p.waitForTimeout(2500);
  const R=await p.evaluate(()=>{const out=[];const ok=(n,c,x)=>out.push([c?"PASS":"FAIL",n,x==null?"":JSON.stringify(x)]);
   window.__bot=1;document.getElementById('title').hidden=true;window.render=function(){};
-  for(let i=0;i<60;i++){start();if(!isSrv())break}Q.length=0;S.mg=0;S.rank=Math.max(S.rank,2);S.sung=40;S.duc=60;S.suc=70;
+  BAL.visit.cap=0;/* his own visit (jvisit) is not what these cases test */for(let i=0;i<60;i++){start();if(!isSrv())break}Q.length=0;S.mg=0;S.rank=Math.max(S.rank,2);S.sung=40;S.duc=60;S.suc=70;
   const R0=liveRivals(true).filter(v=>!v.coop);/* r2: the same list stealPass draws from, so reset() covers every possible thief */const keep=JSON.stringify(BAL.steal);
   const reset=()=>{S.ntk=null;S.ntTry=null;Q.length=0;for(const v of R0){v.preg=0;v.confined=0;v.block=0;v.out=0;v.suc=70;v.duc=60;v.ill=null}S.cyb={};if(window.cyBase)S.tuan=(cyBase(S).t+1)%3};  /* r2: her cycle (jcycle, by tuần) is never on during a test try; forced tries use odds 100 / .001 (still wanted, never won) so the unit run is not a coin flip */
   const force=()=>{BAL.steal.k=1e6;BAL.steal.pMax=1;BAL.steal.maxTry=1};const o0=oSteal;
