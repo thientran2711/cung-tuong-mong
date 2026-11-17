@@ -16,3 +16,6 @@ Deviations: button reads "Để ta tới xem" (kit prints "không được mất
 - 412x1058 bar is already crammed (seal hides "Buổi sáng"); badge sits on the seal there.
 - Natural items in the shots are planted into S.tb; real flow checked with knBao -> tinBaoOn -> toast.
 - If ag-all-2 changes the API: rebase.
+
+## r2 (fix of review r1 FAIL) review/tinbao-ui-r2 a0327a6b
+Done: (1) each row = informer name+role (kitName), (2) big figure = informer of the first row with a person (spec.subject), (3) place printed once (only when the line lacks it), (4) count tag moved to the badge LEFT corner + free-spot margin 8 px. tinbao-ui.test 19/19, site rebuilt. Shots (LOOKED, Fold+iPad @2) CDN img/_review/tinbao-ui/ (wipe with verdict).
