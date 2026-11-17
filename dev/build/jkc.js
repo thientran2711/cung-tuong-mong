@@ -619,8 +619,9 @@ function kcFamHTML(){const nha=kcFamList("nha"),ban=kcFamList("ban");const rest=
 function kcMapHTML(){const B=(k)=>{const P=KCPL[k];const w=kcGoWhy(k);const ppl=kcHere(k).map(m=>m.t.toLowerCase());const tmh=S.kc.at.ftm===k&&kcTmMan()?["người ấy"]:[];const who=ppl.concat(tmh);
   return pbtn(`class="opt" data-kcgo="${k}" title="${P[3].replace(/"/g,"")}"`,P[0],[kcCity(k)?"tốn: 1 khắc":"",who.length?"người ở đây: "+who.join(" và "):"không gặp ai"].filter(Boolean).join(" · "),w||"")};
  const inH=Object.keys(KCPL).filter(k=>KCPL[k][2]),out=Object.keys(KCPL).filter(k=>!KCPL[k][2]);
- const T=kitSubTabs("kcgo",[{k:"phu",label:"Trong phủ",n:inH.length},{k:"kinh",label:"Kinh thành",n:out.length}]);
- return T.html+(T.cur==="kinh"?`<p class="kpnote">${kitInfo("Ra phố","Ra phố cần tỳ nữ đi cùng; buổi tối không ra ngoài")}</p>`:"")+`<div class="opts kcmap">${(T.cur==="kinh"?out:inH).map(B).join("")}</div>`}
+ const L0=[{k:"phu",label:"Trong phủ",n:inH.length},{k:"kinh",label:"Kinh thành",n:out.length}];/* reviewer kit-rcol-top-r1: no info band under tabs (owner 17/11 07:55Z) → the Ra phố ⓘ sits in the tab bar's trailing slot */
+ const T=kitSubTabs("kcgo",L0,ktSubGet("kcgo",L0)==="kinh"?kitInfo("Ra phố","Ra phố cần tỳ nữ đi cùng; buổi tối không ra ngoài"):"");
+ return T.html+`<div class="opts kcmap">${(T.cur==="kinh"?out:inH).map(B).join("")}</div>`}
 try{KIT_GLOSS["Ra phố"]="Ra phố tốn một khắc mỗi chiều đi, phải có tỳ nữ đi cùng; buổi tối khuê nữ không ra ngoài. Chốn đông người dễ sinh lời đồn."}catch(e){}
 document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-kcgo]");if(!b||!isKc())return;e.stopPropagation();e.preventDefault();if(b.disabled)return;if(kcGo(b.dataset.kcgo)){tab="act";render()}},true);
 /* Mệnh truyện ngoài cung: one kit skill card per thread (chapter label "Chương · Hồi", owner 15/11 20:30Z), then the facts table */
