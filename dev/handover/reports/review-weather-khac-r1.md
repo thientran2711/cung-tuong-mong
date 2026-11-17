@@ -4,7 +4,7 @@ PRIORITY #1 CHECK ('weather-khac|currentWeather|wxDay'): OD 0 for the API names;
 
 START_CTX ~5 % of the window.
 
-VERDICT: **HOLD — base reviewed, PASS withheld until the WEATHER-KHAC-2 delta is re-checked on top** (C-AG #3 order 17:18Z after owner OD 17/11 ~17:40Z (3): rain-only scope is not enough). The base itself would PASS with my two fixes below; nothing in it has to be undone.
+VERDICT (final, after the delta): **PASS 03a776e4** (see 'Re-check of the delta' at the end). Earlier interim: HOLD (C-AG #3 order 17:18Z after owner OD 17/11 ~17:40Z (3): rain-only scope is not enough). The base itself would PASS with my two fixes below; nothing in it has to be undone.
 
 Reviewer branch: `review/weather-khac-r1` = e1d540cf rebased onto origin/main e9bbc4d6 (only conflicts: generated index.html / sw.js → main's copy, site rebuilt) + 2 reviewer fixes. Tip **11948a5f** (fast-forward of origin/main e9bbc4d6 at push time).
 
@@ -41,3 +41,25 @@ Re-check plan: on the delta sha → rebase onto origin/main, rerun wx-khac / cb-
 
 ## Handover
 Waiting for the WEATHER-KHAC-2 sha (worker session_01UV1SzhyGUZ4FTxi1y3XNvr). Worktree /home/user/wt/wxr1 (branch review/weather-khac-r1), scratch /home/user/wt/wxr1-scr (probe.js, shots.js). ~22 % context.
+
+## Re-check of the delta (WEATHER-KHAC-2 fd829d49) — FINAL: **PASS 03a776e4**
+Head `review/weather-khac-r1` = **03a776e4** = fd829d49 (built on my 11948a5f, my 2 fixes kept) rebased onto origin/main **d5ea786d** (only generated index.html / sw.js conflicted → main's copy, site rebuilt) + 1 reviewer fix. Fast-forward of origin/main d5ea786d at push time. (e8fd5b2d on review/weather-khac superseded; a parallel reviewer variant of the level display was dropped in favour of the worker's jfx rows.)
+
+Delta checked: every WX kind per khắc + wind (gió lớn / gió bấc) and fog (sương mù) day states, each with a level nhẹ/vừa/nặng (BAL.wx.day.lv/kd/lvB/lvKeepOf), natural flow by buổi (heat peaks at noon, fog in the morning, wind gusts); currentWeather(k) adds kd/kl/klN (lv API unchanged); level-only changes fire the looks hook (lvOnly) with no log line; fog lowers the witness roll j8 oSee by BAL.wx.fx.fog.see[kl], clamped to BAL.odds.lo/hi; frost lowers jmgt mgTier ease for đàn/thêu (floor BAL.mgTier.easeMin); the level SHOWS: KF_WX rows drizzle/rain2/rainh, wind1/wind/wind3, mist1/mist/mist3, snow/snowh (existing sprites only, storm keeps thunder). Storm walking khắc correctly NOT built (owner 15/11 06:40Z).
+
+Reviewer fix (owner 17/11 ~18:05Z via C-AG #4: "weather never closes or greys a place"; NOT yet in OD on the handover branch at review time — main must log it). Whole family, before → after:
+| site | before | after |
+|---|---|---|
+| jwxk accessOf wrapper (delta) | giông tố: Ngự hoa viên closed for everyone, map grey "giông tố, đóng cửa", no sneak / ask | removed: garden open, no grey reason |
+| jwxk wxkSweepW in placeWhere + every turn change (delta) | every NPC in the garden forced home | each NPC leaves by ITS OWN odds BAL.wx.fx.storm.leave (70, clamped BAL.odds), rolled at the turn change + once per buổi |
+| jwxk j95view wrapper (delta) | rewrote the view each render (forced) | removed |
+| jgift kmEmpWhy "walk" (main, pre-existing) | "Mời ngài dạo ngự hoa viên" greyed in giông tố / tuyết dày | open; Hoàng thượng answers by odds, − BAL.wx.fx.storm.walk (20) in storm / heavy snow, clamped |
+| log clause / kit weather popup (delta) | "Ngự hoa viên đóng cửa tránh giông." / "… không ai vào được." | "Người trong vườn lục tục tìm chỗ trú." / "Giông tố: ít ai ở lại ngoài vườn; Hoàng thượng khó nhận lời dạo vườn." |
+| j9 placeWhere garden weight ×.25 wet, j95 j95seaV ×.25 wet, j95 "trời đổ mưa, quay về cung" | NPC odds / random pick (their choice) | unchanged (already odds) |
+| j77 accessOf / j41 accState / jgrey / Dư đồ | no weather input | unchanged |
+Test wx-khac2 §8 now: storm → garden open, she can go, no grey reason, walk invite open with fewer odds (24 → 5), NPC leave share 0.5–0.9 (odds), one turn line, no "đóng cửa".
+
+Tests on 03a776e4: wx-khac §1–§6 ALL OK · wx-khac2 §1–§10 ALL OK · wx-gear ALL OK · weather-port PASS · cb-wx 112 rows badAfter 0, nothing lost · 0 page errors · QUICKCHECK --cpu 4 PASS (core gates incl. one-core-guard + coop-one-world, time-spill guard, open 1692 ms, old save ok; perf median new/live render 208/188, tab 301/284, buổi 800/869 ms, tasks>200ms 13/11 = noise).
+Shots (scratch only): Fold 755x1000 + iPad 1180x820, Ngự hoa viên, mưa rào nhẹ / vừa / nặng + giông tố: layer drizzle(20) → rain2(44) → rainh(80) → storm(80 + thunder); 0 errors, no overflow. The rise is visible but modest on a sunny buổi painting: KIT §56.2 (one scene grade) forces the .light wash off on .kown paintings, so the lightTick level wash does not show there → KIT_REQUESTS row filed (weather grade by level, or Foreman C rain / fog garden paintings). Not a FAIL (kit rule, no private wash added).
+Odds (OD ~17:00Z / ~17:35Z): every new weather number that touches an outcome is clamped by BAL.odds.lo/hi (oSee, NPC leave, walk) or the minigame floor; no sure act added → nothing for Foreman D's soft-fail list.
+Open for others: Foreman B — looks by kind/level via wxkHook (kd/kl/lvOnly); kit keeper / Foreman C — weather grade or paintings (KIT_REQUESTS); main — log the ~18:05Z owner rule in OD.
