@@ -100,4 +100,10 @@ agRunReg("th:release",(th,p)=>{if(!p||!p.out||S.thDead)return"";if(p===S){restor
 try{for(const k in AGCX)ACT95["ag_cx:"+k]=AGCX[k].act;Object.assign(ACT95,{"ag_cx:study":"tự học","ag_cx:thHelp":"xin Thái hậu đỡ lời","ag_cx:hhShield":"xin Hoàng hậu che chở",
  "ag_cx:buy":"mua đồ ở Nội vụ phủ","ag_cx:gift":"đem quà đi tặng","ag_cx:ally":"sang kết giao","ag_admon":"khuyên Hoàng thượng mưa móc đều khắp","ag_th:gift":"ban thưởng","ag_th:admon":"khuyên Hoàng thượng","ag_th:release":"xét tha người ở lãnh cung"});
  for(const k in AGHH)ACT95["ag_hh:"+k]=AGHH[k].act}catch(e){}
+/* ---------------- 4. THE EMPEROR's day: he calls someone to play đàn / cờ / du hồ with him (was jts weekly roll 14 × mood) ---------------- */
+agRegNeeds("emp",()=>{const E=BAL.ag.emp2;let m=1;try{m=tsMoodW()}catch(e){}let busy="";try{busy=empBusy()}catch(e){}return{company:E.company*m*(busy?E.busyF:1),rest:busy?E.rest:0}});
+agReg("emp","summon",(E,N,need)=>{if(need&&need!=="company")return[];if(S.dead||(typeof isSrv==="function"&&isSrv()))return[];const b=AG.cB!=null?AG.cB:agDayB();if(!BAL.ag.emp2.buoi.includes(j95c(b)))return[];
+ const C=consorts().filter(p=>(p===S?!S.out&&!S.confined&&!(S.preg>=8):p.alive!==false&&!p.out&&!p.confined&&!(p.preg>=8)));if(!C.length)return[];
+ const t=mindPickBy(C,x=>tsSummonW(x),E);if(!t)return[];return[{k:"emp:summon",t,u:N.company||0,tag:"social",act:"triệu người hầu đàn, đánh cờ",at:()=>"dtd"}]});
+agRunReg("emp:summon",(E,t)=>{if(!t||S.dead)return"";if(t===S){if(S.out||S.confined)return"";tsSummonGo(S);return""}if(!t.alive||t.out||t.confined)return"";tsSummonGo(t);return""});
 window.hhAct=hhAct;

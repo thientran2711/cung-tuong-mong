@@ -826,3 +826,6 @@ Object.assign(BAL.ag,{cx:{face:{c:{bac:-30},o:92,w:{sac:3},need:{sung:2}},arts:{
 BAL.ag.day.worldPull=2;/* weight of a world window place against her own "no goal" place, per × above 1 (worldPlanW place) */
 /* LIFE: the day's feeling (jemo, strength ≥ min) leans her needs when she plans: × per need, _ = × on keeping her schedule (sad / afraid: stays in) */
 BAL.ag.day.mood={min:30,k:{vui:{ally:1.4,sung:1.2,_:.8},buon:{rest:1.6,ally:1.2,_:1.4},gian:{spite:1.6,_:.9},so:{safe:1.8,_:1.5},ghen:{spite:1.5,sung:1.3},lo:{safe:1.4,kid:1.2},dau:{rest:1.8,_:1.6},muu:{spite:1.2,danh:1.2,sung:1.2,_:.8}}};
+/* AG-ALL the Emperor's day (jagacts §4): company = his wish for company per buổi (× his mood tsMoodW; the old weekly roll 14 × mood ≈ this over the
+   4 buổi of a day against BAL.ag.routine), busyF = × when busy (ill / Chăm chính / court crisis), rest = his rest need then, buoi = the buổi (j95c) he summons in */
+BAL.ag.emp2={company:.38,busyF:.4,rest:.5,buoi:[1,2]};
