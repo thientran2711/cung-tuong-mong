@@ -2,7 +2,7 @@
 Worker session_01UV1SzmJYgJQJkt1RUTV1wK (opus), foreman C-AG #5 session_01UV1SzkwHkU5MoXKRsprFyU, order MAIN s36. Branch review/feelings-18.
 PRIORITY #1 CHECK ('faceKeyFor|feelings-18|intent'): OD 9 | ledger 2 | claims 8 | main 15 | review/* 0 (+ s36 order: main jemo.js EMO table, jemoact.js, jbaleff.js | review/ag-moodknow-r1 a2a1f6b5, review/mood-mem | claims MOOD-MEM C-AG). Reused, not rebuilt: jemo p.emo/emoSet/emoEv/EMO_* tables, jmoodknow causes p.mk (khắc timers, summed seal, moodCauseKnown), jmood her bar + kitWhyHtml row pattern, jemoact ONE reaction table R_ (EA_REACT) + eaDo/eaPick/eaTemper/eaSay, MOOD-MEM moodBar (NPC signed bar) when present, j79 kitActCat (act category), jagknow knHit (hashed draws). START_CTX ≈ 6 % (1M window).
 
-STATUS: #2 (session_01UV1Szhqo1wUz89vE6kRkkU, START_CTX ≈ 5 % of 1M) — owner overrides 20:15Z/20:20Z, 20:25Z/20:35Z, 20:45Z DONE; see "#2 WORK" at the end.
+STATUS: READY FOR REVIEW (#2 session_01UV1Szhqo1wUz89vE6kRkkU, START_CTX ≈ 5 % of 1M). Base review/mood-mem-r2 1b4f4967. Owner overrides 20:15Z/20:20Z, 20:25Z/20:35Z, 20:45Z done; see "#2 WORK" at the end.
 
 ## Owner law (verbatim key words, OD 19:10Z / 19:25Z)
 "Cả bộ này thì ok rồi đó" · "Khóc là một hành động, không phải cảm xúc" · "khi mà cái thanh tâm trạng mà nó xuống quá thấp cộng với một cái cảm xúc ... buồn ... nhân vật nó bộc phát cái hành động là khóc" · "Đúng vậy, giao làm theo cách này với một dấu vẻ mặt".
@@ -51,15 +51,16 @@ API sent to main's kit-figure-mood r4 worker (session_01UV1Szm15TBGXbyca7ucqMq):
 MOOD-MEM #2 (session_01UV1Szigr35QvLkVSd2Vb9L) told before the shared jemo.js edit (emoKnown + emoBadge only).
 
 ### Tests (head)
-| test | head | base 6cadd5c3 (review/mood-mem) |
+| test | head | base 1b4f4967 (review/mood-mem-r2) |
 |---|---|---|
 | feelings18.test.js | 33/33 PASS (new: intent never on face/card, act-<feeling> faces + fallback chain + old-save act face, 17 acts one per feeling all fire, gate heavy AND bar, khắc timer + cooldown, her ≤ meWk, Emperor parity, co-op guest writes no NPC act, known seal always / Người lạ none / cause still scouted) | — |
 | ag-moodknow.test.js | 33/33 | — |
 | moodknow-step0.test.js | 17/17 | — |
 | mood-mem.test.js | 16/16 | — |
+| moodknow-step0 (r2 version) | 19/19 | — |
 | one-core-guard | PASS | — |
-| emotion-acts.js (755x1000) | PASS 2/2 runs ('out' rewritten to the owner's act rule; 'lock' pins her traits — it was flaky on base too) | FAIL out, gen, lock |
-| emotion-acts-2.js (755x1000) | FAIL hoitimid only | FAIL plock, hoitimid → hoitimid is a base issue (not this branch) |
+| emotion-acts.js (755x1000) | PASS ('out' runs the owner's act rule: jfeel feelActTick, her nết pinned) | PASS (old weekly path) |
+| emotion-acts-2.js (755x1000) | FAIL hoitimid only | FAIL hoitimid (base issue, not this branch) |
 
 ### Acts rate (dev/measure/feelings18-acts-rate.js, bot, 2 runs × 20 tuần = 40 tuần, per 100 tuần)
 | | head | base |
@@ -82,4 +83,11 @@ MOOD-MEM #2 (session_01UV1Szigr35QvLkVSd2Vb9L) told before the shared jemo.js ed
 - No UI built (KIT FIRST): the tap card lines + seal wiring are main's kit-figure-mood r4 worker (API sent).
 - Act art emo-act-<k> × 3 sets = Foreman C; until painted the chain shows the feeling's seal.
 - Intent scouting surface: only feelIntentOf(p) exists; no player-visible scouting line was built (needs an owner/main decision + kit part).
-- emotion-acts-2 hoitimid fails on base 6cadd5c3 too (not this branch).
+- emotion-acts-2 hoitimid fails on base 1b4f4967 too (not this branch).
+- QUICKCHECK: open / old save / perf PASS; core gate G1 one-core-bind FAILS on j25.js:11 + j78.js:127 (BAL.eff.j9/j2 print-vs-read) and "frozen list grew 3843 -> 5093" — both identical on the base (this branch does not touch j25/j78 or the baseline). Co-op one-world probe PASS (seeds 7, 3).
+
+### Rebase + reviewer notes (foreman 20:06Z / 20:07Z)
+- Rebased onto review/mood-mem-r2 1b4f4967 (step0 PASS content + memory layers). eaGrpK merged: reviewer's khoc/dau → buồn, hon → giận kept + feelGrp for the new kinds.
+- Reviewer note "heavy level + bar line, swap your level check into eaSealG / eaMine / eaNpcWeek": jemoact eaLvOk(p, w) with BAL.feel.gate {card:2, force:3}: her emotion act cards + NPC act cards need the dominant feeling at vừa; what the feeling FORCES (the "Nhịn" lock, extreme consequences eaExtMe / eaExtNpc) needs nặng; jfeel acts (outbursts) need nặng + the bar line (unchanged). A feeling written straight into p.emo (legacy writers) counts by its own strength.
+- Seal fog (jemo kitEmotion known:false "chưa rõ") removed: done in 8621658a/a1bc912d (emoKnown = kitIsKnown).
+- jfeel's added reactions sit in groups "f-<feeling>" so jemoact's own group picker never draws them (emotion-acts-2 'kinds' caught c:so:tron with no stat move).
