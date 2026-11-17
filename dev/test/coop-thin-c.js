@@ -143,7 +143,7 @@ async function week(A,B,tag){for(let i=0;i<3;i++){await clear(A);await clear(B)}
  {const [ho,go]=await both(()=>COOPW.oldRun||{});const n=o=>Object.values(o).reduce((a,b)=>a+b,0);
   ok(LVL>=3?n(ho)+n(go)===0:true,'C8 one switch: no old guest state guard ran in a C room (COOPW.oldRun, both seats)',{host:ho,guest:go})}
  ok(!H.errs.length&&!G.errs.length,'no page errors',{h:H.errs.slice(0,4),g:G.errs.slice(0,4)});
- if(process.env.SHOTS){fs.mkdirSync(process.env.SHOTS,{recursive:true});for(const o of [H,G]){await clear(o);await o.p.evaluate(()=>{try{closeModal()}catch(e){}try{render()}catch(e){}});await sleep(800);
+ if(process.env.SHOTS){fs.mkdirSync(process.env.SHOTS,{recursive:true});for(const o of [H,G]){await clear(o);for(let i=0;i<8;i++){if(!await tapText(o,/^(Bỏ qua|Đóng|Lui|Đã hiểu)$/,800))break;await sleep(400)}await o.p.evaluate(()=>{try{closeModal()}catch(e){}try{render()}catch(e){}});await sleep(800);
    const vp=o.p.viewportSize();await o.p.screenshot({path:path.join(process.env.SHOTS,`L${LVL}-${o.name}-${vp.width}x${vp.height}.jpg`),type:'jpeg',quality:70})}}
  if(process.env.OUT){fs.mkdirSync(process.env.OUT,{recursive:true});fs.writeFileSync(path.join(process.env.OUT,`acts-L${LVL}-s${SWAP}.json`),JSON.stringify(table,null,1))}
  console.log('ACT table:');for(const x of table)console.log(' ',JSON.stringify(x).slice(0,220));
