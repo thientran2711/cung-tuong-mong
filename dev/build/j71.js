@@ -68,7 +68,7 @@ const FBIG7=["newyear","trungthu","vantho","thanhtho","giaothua"];
 const WT7={ngua:["ngựa Xích Thố","ngựa Ô Truy","ngựa Bạch Long","ngựa Hoàng Phiêu"],rong:["rồng cửa Đông Hoa","rồng cửa Tây Hoa","rồng cửa Thần Vũ","rồng Ngọ Môn"],dieu:["diều phượng","diều rồng","diều hạc","diều bướm"],
  thuyen:["đội Thanh Long","đội Bạch Hổ","đội Chu Tước","đội Huyền Vũ"],thuyen2:["thuyền Ngự thiện phòng","thuyền Nội vụ phủ","thuyền Kính sự phòng","thuyền Ngự mã giám"],thuyen3:["thuyền đèn sen","thuyền đèn cá chép","thuyền đèn rồng","thuyền đèn thỏ ngọc"],
  xa:["thị vệ họ Lý","thị vệ họ Mạnh","thị vệ họ Đoàn","thị vệ họ Tô"],bang:["đội Kiện Duệ","đội Hộ Quân","đội Tiền Phong","đội Cấm Vệ"],phao:["pháo Càn Thanh cung","pháo Ngự thiện phòng","pháo Nội vụ phủ","pháo Ngự hoa viên"]};
-function form7(s){return s>=65?"phong độ rất tốt":s>=50?"phong độ tốt":s>=35?"phong độ thường":"phong độ kém"}
+function form7(s){return s>=BAL.cut.form[2]?"phong độ rất tốt":s>=BAL.cut.form[1]?"phong độ tốt":s>=BAL.cut.form[0]?"phong độ thường":"phong độ kém"}
 function prize7(k){return FBIG7.includes(k)?{sung:3,danh:3}:{sung:2,danh:2}}
 function pz7(o){return Object.entries(o).map(([k,v])=>`${NAMES[k]} +${v}`).join(", ")}
 /* pick a variant: unused this life first, then least seen in the last five lives */

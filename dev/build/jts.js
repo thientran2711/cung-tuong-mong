@@ -223,7 +223,7 @@ function tsSummonW(p){return Math.pow(Math.max(1,(p.sung||0)),1.4)*(1+((p===S?S.
 /* what he asks for: by her gifts and the season (du hồ only in the warm months) */
 function tsSummonKind(p){const a=p.arts||{};const warm=S.month>=4&&S.month<=9;const L=[["dan",1+(a.cam||0)*2],["co",1+(a.ky||0)*2]];if(warm)L.push(["duho",2.5]);let t=L.reduce((s,x)=>s+x[1],0)*Math.random();for(const x of L){t-=x[1];if(t<=0)return x[0]}return L[0][0]}
 function tsSummonOdds(p,k){const a=p.arts||{};return k==="dan"?40+(a.cam||0)*9+(p.tai||0)/6:k==="co"?40+(a.ky||0)*9+(p.tamco||0)/5:45+effSac(p)/5+(p.tai||0)/8}
-function tsSummonGain(raw){return{sung:raw>=8?4:raw>=5?3:raw>=3?2:1,an:raw>=8?3:raw>=5?2:1}}
+function tsSummonGain(raw){return{sung:raw>=BAL.cut.summon[2]?4:raw>=BAL.cut.summon[1]?3:raw>=BAL.cut.summon[0]?2:1,an:raw>=BAL.cut.summon[2]?3:raw>=BAL.cut.summon[1]?2:1}}
 function tsSummonWeek(){if(!S||S.dead||S.out||(typeof isSrv==="function"&&isSrv()))return;if(!roll(14*tsMoodW()))return;
  const C=consorts().filter(p=>p.alive!==false&&!p.out&&!p.confined&&!(p.preg>=8));if(!C.length)return;
  const w=C.map(tsSummonW);let r=Math.random()*w.reduce((a,b)=>a+b,0),i=0;while(r>w[i]&&i<w.length-1){r-=w[i];i++}const p=C[i];const k=tsSummonKind(p);

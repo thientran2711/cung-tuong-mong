@@ -196,7 +196,7 @@ function sgThoiCo(box,env){const R=sgRM();const C=kg82Canvas(box,.6,300),{g,W,H}
 const SG_LO=[BAL.odds.lo,...BAL.odds.cut],SG_HI=[...BAL.odds.cut.map(c=>c-1),BAL.odds.hi];
 function sgLv(o){return oddsLv(o)}
 function sgShift(o,d){if(!d)return o;const l=sgLv(o),l2=cl(l+d,0,6);if(l2===l)return o;const f=cl((o-SG_LO[l])/Math.max(1,SG_HI[l]-SG_LO[l]),0,1);return Math.round(SG_LO[l2]+f*(SG_HI[l2]-SG_LO[l2]))}
-function sgStep(raw){return raw>=7?1:raw<=3?-1:0}
+function sgStep(raw){return raw>=BAL.cut.sgStep.up?1:raw<=BAL.cut.sgStep.down?-1:0}
 
 /* ---------- the act table ---------- */
 const SG_HUD=t=>[["score","Phần","0/10"],["round","Hồi","1/3"],["time","Còn",t]];

@@ -26,7 +26,7 @@ function rtS(){if(!S.rt)S.rt={v:1,heat:0,tt:null,tc:null,hl:{},ad:null,dn:{},bm:
 function rtDf(){const k=typeof diffOf==="function"?diffOf():"vua";return ({de:{h:.8,o:5},vua:{h:1,o:0},kho:{h:1.25,o:-6}})[k]||{h:1,o:0}}
 function rtDuc(){return S.duc>BAL.route.ducFree?Math.round((S.duc-BAL.route.ducFree)/4):0}
 function rtHeat(n){const T=rtS();T.heat=cl(Math.round(T.heat+(n>0?n*rtDf().h:n)),0,100);return T.heat}
-function rtHeatW(h){return h<15?"Yên ắng":h<35?"Có kẻ xì xào":h<60?"Nhiều người bàn tán":h<80?"Lời đồn đã lan":"Sắp vỡ lở"}
+function rtHeatW(h){return h<BAL.cut.heat[0]?"Yên ắng":h<BAL.cut.heat[1]?"Có kẻ xì xào":h<BAL.cut.heat[2]?"Nhiều người bàn tán":h<BAL.cut.heat[3]?"Lời đồn đã lan":"Sắp vỡ lở"}
 function rtEmo(k,v,why){try{if(typeof emoSet==="function")emoSet(S,k,v,why)}catch(e){}}
 function rtMan(){const T=S.rt&&S.rt.tt;return T&&T.mid?manById(T.mid):null}
 function rtMnm(m){try{return menNmFull(m)}catch(e){return m?m.name:""}}

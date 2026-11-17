@@ -83,4 +83,34 @@ def apply():
  print('replaced',tot,'in',len(files),'files');
  if bad:print('CHECK\n '+'\n '.join(bad));sys.exit(1)
 R[:]=PART2 if '--part2' in sys.argv else R
-apply()
+if '--part3' not in sys.argv:apply()
+# --- part 3: single-copy ladders → BAL.cut.<name> (exact text, count) — run: python3 dev/measure/one-core-dup2-move.py --part3
+P3=[('j5.js','end(hits>=13?3:hits>=8?2:1)','end(hits>=BAL.cut.rhythm[1]?3:hits>=BAL.cut.rhythm[0]?2:1)',1),
+('j10.js','${st>=20?"thân":st<=-20?"thù"','${st>=BAL.cut.facRel?"thân":st<=-BAL.cut.facRel?"thù"',1),
+('j10.js','st<=-20?"hot":st>=20?"ok"','st<=-BAL.cut.facRel?"hot":st>=BAL.cut.facRel?"ok"',1),
+('j31.js','d<=10?0:d<=20?1:2','d<=BAL.cut.tuanDays[0]?0:d<=BAL.cut.tuanDays[1]?1:2',None),
+('j55.js','function tdRelW(v){return v>=25?"Đồng minh"','function tdRelW(v){return v>=BAL.cut.clanRel?"Đồng minh"',1),
+('j55.js','v<=-25?"Đối đầu"','v<=-BAL.cut.clanRel?"Đối đầu"',1),
+('j71.js','function form7(s){return s>=65?"phong độ rất tốt":s>=50?"phong độ tốt":s>=35?','function form7(s){return s>=BAL.cut.form[2]?"phong độ rất tốt":s>=BAL.cut.form[1]?"phong độ tốt":s>=BAL.cut.form[0]?',1),
+('j85.js','b.tier=lv>=5?2:lv>=3?1:0;b.prog=lv>=2?1:0','b.tier=lv>=BAL.cut.virCong[2]?2:lv>=BAL.cut.virCong[1]?1:0;b.prog=lv>=BAL.cut.virCong[0]?1:0',1),
+('j85.js','let tier=q<25?1:q<45?2:q<65?3:q<85?4:5;','let tier=q<BAL.cut.wkQ[0]?1:q<BAL.cut.wkQ[1]?2:q<BAL.cut.wkQ[2]?3:q<BAL.cut.wkQ[3]?4:5;',1),
+('jmort.js','const w=p.tho<40?"yểu mệnh":p.tho<60?"trung thọ":p.tho<75?','const w=p.tho<BAL.cut.tho[0]?"yểu mệnh":p.tho<BAL.cut.tho[1]?"trung thọ":p.tho<BAL.cut.tho[2]?',1),
+('j99succ.js','end:()=>E.an>=5?"c_bad":E.q>=6?"c_ok":"c_abd"','end:()=>E.an>=BAL.cut.succEnd.an?"c_bad":E.q>=BAL.cut.succEnd.q?"c_ok":"c_abd"',1),
+('jveil.js','const i=q>=14?3:q>=10?2:q>=6?1:0;','const i=q>=BAL.cut.veil[2]?3:q>=BAL.cut.veil[1]?2:q>=BAL.cut.veil[0]?1:0;',1),
+('jlost.js','pr>=200?3:pr>=100?2:pr>=40?1:0','pr>=BAL.cut.lost[2]?3:pr>=BAL.cut.lost[1]?2:pr>=BAL.cut.lost[0]?1:0',1),
+('jroute.js','function rtHeatW(h){return h<15?"Yên ắng":h<35?"Có kẻ xì xào":h<60?"Nhiều người bàn tán":h<80?','function rtHeatW(h){return h<BAL.cut.heat[0]?"Yên ắng":h<BAL.cut.heat[1]?"Có kẻ xì xào":h<BAL.cut.heat[2]?"Nhiều người bàn tán":h<BAL.cut.heat[3]?',1),
+('jht.js','function kinHealth(k){return k.hp<35?"đang ốm nặng, thái y ra vào":k.hp<60?','function kinHealth(k){return k.hp<BAL.cut.kidHp[0]?"đang ốm nặng, thái y ra vào":k.hp<BAL.cut.kidHp[1]?',1),
+('jht.js','kinHealth(k),k.hp<35?"r"','kinHealth(k),k.hp<BAL.cut.kidHp[0]?"r"',1),
+('jexam.js','function exTier(to){return to<=3?0:to<=5?1:2}','function exTier(to){return to<=BAL.cut.exTier[0]?0:to<=BAL.cut.exTier[1]?1:2}',1),
+('jlux.js','const add=(x.lv>=3?2:x.lv>=2?1:0)','const add=(x.lv>=BAL.cut.luxRep[1]?2:x.lv>=BAL.cut.luxRep[0]?1:0)',1),
+('jreign.js','r.tr>=60?"rất tin":r.tr>=35?"tin":r.tr>=15?','r.tr>=BAL.cut.rgTrust[2]?"rất tin":r.tr>=BAL.cut.rgTrust[1]?"tin":r.tr>=BAL.cut.rgTrust[0]?',1),
+('jts.js','{sung:raw>=8?4:raw>=5?3:raw>=3?2:1,an:raw>=8?3:raw>=5?2:1}','{sung:raw>=BAL.cut.summon[2]?4:raw>=BAL.cut.summon[1]?3:raw>=BAL.cut.summon[0]?2:1,an:raw>=BAL.cut.summon[2]?3:raw>=BAL.cut.summon[1]?2:1}',1),
+('jsgame.js','function sgStep(raw){return raw>=7?1:raw<=3?-1:0}','function sgStep(raw){return raw>=BAL.cut.sgStep.up?1:raw<=BAL.cut.sgStep.down?-1:0}',1)]
+if '--part3' in sys.argv:
+ bad=[]
+ for f,o,n,c in P3:
+  p=os.path.join(D,f);s=open(p,encoding='utf-8').read();k=s.count(o)
+  if k==0 or (c is not None and k!=c):bad.append('%s %d× %s'%(f,k,o[:40]));continue
+  open(p,'w',encoding='utf-8').write(s.replace(o,n))
+ print('part3',len(P3)-len(bad),'rules');
+ if bad:print('CHECK\n '+'\n '.join(bad));sys.exit(1)

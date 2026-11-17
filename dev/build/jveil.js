@@ -99,7 +99,7 @@ const VL_MATN=["vải sa, chỉ thêu","dây bạc, trai, lưu ly","kim tuyến,
 function vlArt(){try{return ARTS.some(a=>a.k==="theu")?"theu":"hoa"}catch(e){return "hoa"}}
 function vlLv(p){const a=vlArt();try{return typeof wkLv==="function"?wkLv(p,a):((p.arts||{})[a]||0)}catch(e){return 0}}
 function vlQ(p,m,raw){let c=0;try{if(typeof wkCongPh==="function")c=wkCongPh(p)}catch(e){}return raw+vlLv(p)+m+c}
-function vlCraftOut(p,m,raw){const q=vlQ(p,m,raw);const i=q>=14?3:q>=10?2:q>=6?1:0;const [P,g]=VL_CRAFT[m][i];return vlKey(P,g)}
+function vlCraftOut(p,m,raw){const q=vlQ(p,m,raw);const i=q>=BAL.cut.veil[2]?3:q>=BAL.cut.veil[1]?2:q>=BAL.cut.veil[0]?1:0;const [P,g]=VL_CRAFT[m][i];return vlKey(P,g)}
 function vlCraft(p,m,raw){const k=vlCraftOut(p,m,raw);if(VL.mat[m])ap(p,{bac:-VL.mat[m]});vlGain(p,k,{from:"tay",giver:""});return k}
 /* (owner 14:50Z, paid tiers) the card shows the same concrete facts as every j83 material card: what 5 phần makes, its worth in bạc,
    the play score each better band needs, and what this material can never reach */

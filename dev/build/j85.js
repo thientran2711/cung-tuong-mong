@@ -48,13 +48,13 @@ function vNormAll(){try{if(!S)return;vNorm(S);(rivals||[]).forEach(vNorm)}catch(
 function artLv(p,k){return ((p&&p.arts)||{})[k]||0}
 function virLv(p,k){return ((p&&p.vir)||{})[k]||0}
 function virtueBonus(p,k){const lv=virLv(p,k);const b={lv};
- if(k==="cong"){b.q=lv*4;b.tier=lv>=5?2:lv>=3?1:0;b.prog=lv>=2?1:0}
+ if(k==="cong"){b.q=lv*4;b.tier=lv>=BAL.cut.virCong[2]?2:lv>=BAL.cut.virCong[1]?1:0;b.prog=lv>=BAL.cut.virCong[0]?1:0}
  if(k==="dung"){b.odds=lv*3;b.sac=(lv>=1?2:0)+(lv>=3?2:0)+(lv>=5?2:0)}
  if(k==="ngon"){b.odds=lv*3;b.slip=lv>=4?2:lv>=2?1:0}
  if(k==="hanh"){b.duc=lv*3;b.month=lv>=3?1:0}
  return b}
 function artBonus(p,k){const lv=artLv(p,k),cg=virtueBonus(p,"cong");const q=cl(Math.round(lv*14+((p&&p.tai)||0)/10+cg.q),0,100);
- let tier=q<25?1:q<45?2:q<65?3:q<85?4:5;tier=Math.min(5,tier+cg.tier);
+ let tier=q<BAL.cut.wkQ[0]?1:q<BAL.cut.wkQ[1]?2:q<BAL.cut.wkQ[2]?3:q<BAL.cut.wkQ[3]?4:5;tier=Math.min(5,tier+cg.tier);
  return{lv,q,tier,odds:lv*4,gift:k==="hoa"?lv*10:k==="theu"?lv*8:0,scheme:k==="ky"?lv*2:0,detect:k==="y"&&lv>=2?20:0,night:k==="vu"?lv*2:k==="y"?lv*1.5:0}}
 function productTier(p,k){return artBonus(p,k).tier}
 function ducOf(p){if(!p)return 50;if(p===S)return S.duc||0;return p.duc==null?50:p.duc}

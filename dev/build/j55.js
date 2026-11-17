@@ -17,7 +17,7 @@ function trS(){if(!S)return null;if(S.trieu&&S.trieu.H)return S.trieu;
  return T}
 function tdRel(a,b){const T=trS();if(!a||!b||a===b)return 0;return T.rel[[a,b].sort().join("|")]||0}
 function tdRelAdd(a,b,n){const T=trS();if(!a||!b||a===b)return;const kk=[a,b].sort().join("|");T.rel[kk]=cl((T.rel[kk]||0)+n,-100,100)}
-function tdRelW(v){return v>=25?"Đồng minh":v<=-25?"Đối đầu":"Bình thường"}
+function tdRelW(v){return v>=BAL.cut.clanRel?"Đồng minh":v<=-BAL.cut.clanRel?"Đối đầu":"Bình thường"}
 /* the house behind a consort (null when her family is not one of the five) */
 function tdHouse(p){if(!p)return null;let c="";try{c=clanOf(p)}catch(e){}return CLANS.includes(c)?c:null}
 function tdHead(c){const T=trS();return c&&T?T.H[c]:null}

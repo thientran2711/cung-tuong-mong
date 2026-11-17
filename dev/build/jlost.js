@@ -39,7 +39,7 @@ function loP(k){return byKey(k)}
 function loAlive(p){return !!p&&(p===S?!S.dead:p.alive&&!p.out)}
 function loPal(p){if(!p)return"";if(p===S)return"cung ngươi";let k=true;try{if(typeof kitKnownName==="function")k=kitKnownName(p)}catch(e){}try{const n=palName(palaceOf(p));if(n)return k?`${n}, chỗ ${p.name}`:n}catch(e){}return k?`cung ${p.name}`:"một cung khác"}
 function loPrice(e){const w=typeof wdItem==="function"?wdItem(e):null;return w?(w.pr||0):((IT[e.k]&&itm(e.k).pr)||0)}
-function loGrade(e){const w=typeof wdItem==="function"?wdItem(e):null;if(w)return w.g|0;const pr=loPrice(e);return (IT[e.k]&&itm(e.k).nt)?4:pr>=200?3:pr>=100?2:pr>=40?1:0}
+function loGrade(e){const w=typeof wdItem==="function"?wdItem(e):null;if(w)return w.g|0;const pr=loPrice(e);return (IT[e.k]&&itm(e.k).nt)?4:pr>=BAL.cut.lost[2]?3:pr>=BAL.cut.lost[1]?2:pr>=BAL.cut.lost[0]?1:0}
 function loPic(e,sz){const w=typeof wdItem==="function"?wdItem(e):null;return typeof kitItem==="function"?kitItem({src:kitItemSrc(e.k,w?w.icon:""),name:loNm(e.k),grade:loGrade(e),size:sz||"md"}):""}
 /* the item in a notice: the §64.1 item frame (kitItemTag), kept by ievPlace (kiev-own) and floated right of the text */
 function loTag(e){try{if(typeof kitItemTag==="function"&&typeof kitItemInfo==="function")return kitItemTag(kitItemInfo(e)).replace('class="kiev"','class="kiev kiev-own kiev-txt"')}catch(x){}return loPic(e,"md")}
