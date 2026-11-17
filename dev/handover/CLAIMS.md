@@ -849,7 +849,7 @@
 | toil-looks5: Vụng A ?v=10 (OD 16:20Z (a)) on 97f57862 (sonnet; brief briefs/s34-toil-looks5.md) | review/toil-looks5 | MAIN s34 | session_01UV1SzjoLym3Q8XoYNGrcgt | SẴN SÀNG KIỂM 27ff57d3 ?v=10 | 17/11 16:30Z |
 | kit-rank-name: stacked title/rank/name vs one line (OD 16:20Z (b)), whole family (sonnet; brief briefs/s34-kit-rank-name.md) | review/kit-rank-name | MAIN s34 | session_01UV1SzhABncWo5Voyf4aTrz | r0 9f54a9a1 pushed; core fix done, site-list sweep + 3 viewports remain (~35%) | 17/11 16:30Z |
 | FACE TOKEN 404 (sonnet, owner-bug lane; img/@W<n>.webp × 33 on live, j25.js:88 CW; whole token family) | review/face-w404 | D | session_01964izC859jzWy9Hygkf3UJ | DONE SẴN SÀNG KIỂM df8b57bc (archived) | 17/11 17:08Z |
-| WEATHER per khắc by season + currentWeather(k) API (opus; owner OD ~16:20Z (g); main s34 16:23Z; brief briefs/weather-khac.md) | review/weather-khac | C-AG | session_01UV1SzhiC88PsoqSrcX1TAr | RUNNING | 17/11 16:28Z |
+| WEATHER per khắc by season + currentWeather(k) API (opus; owner OD ~16:20Z (g); main s34 16:23Z; brief briefs/weather-khac.md) | review/weather-khac | C-AG | session_01UV1SzhiC88PsoqSrcX1TAr | LIVE 03a776e4 18:17Z | 17/11 16:28Z |
 | balance-2 review r1 (opus BIG) of de993ca8 | review/balance-2-r1 | D | session_01964izCu8Je1GMvrc1moQH6 | RUNNING | 17/11 16:30Z |
 | loading-words-2-r1 PASS 64e303045 → builder batch s32a (replaces d4318833); worker + reviewer archived | review/loading-words-2-r1 | MAIN s34 | session_01UV1SzgWoEmnjTTEv7UgBNP | PASS → BATCH | 17/11 16:26Z |
 | tinbao-ui-r2r PASS 05e82176 (lands after ag-all-2) → r3 "Tai mắt báo" + Tai mắt list (OD 16:20Z (e), 16:25Z) | review/tinbao-ui-r3 | MAIN s34 | session_01UV1Szjhrq5VUWD5Haiagxz | RUNNING | 17/11 16:26Z |
@@ -873,12 +873,12 @@
 | kit-thanh-bai: THÀNH/BẠI two-block act cards + HỎNG→BẠI (OD 17:10Z (2)); successor of kit-option-rows (sonnet; brief briefs/s34-kit-thanh-bai.md) | review/kit-thanh-bai | MAIN s34 | session_01UV1SzhiWiAzVtxCHuZo9Zy | READY FOR REVIEW e3c1583f (on r2 f422a570) | 17/11 17:08Z |
 | tinbao-ui-r6r PASS 220359da (supersedes 47a462ca; lands after ag-all-2 by C-AG #3) | review/tinbao-ui-r6r | MAIN s34 | - | PASS → C-AG land | 17/11 17:08Z |
 | face-w404 review r1 (sonnet) of df8b57bc | review/face-w404-r1 | D | session_01964izEvirrwGUKDneEGtXa | DONE FAIL 1 @51857175 (FAV=0 all pools: CDN prefix vs index keys) | 17/11 17:08Z |
-| REVIEW weather-khac r1 (opus BIG) of e1d540cf | review/weather-khac-r1 | C-AG | session_01UV1Szhk5EGru6rSkDekM6s | RUNNING | 17/11 17:10Z |
+| REVIEW weather-khac r1 (opus BIG) of e1d540cf | review/weather-khac-r1 | C-AG | session_01UV1Szhk5EGru6rSkDekM6s | LIVE 03a776e4 18:17Z | 17/11 17:10Z |
 | REVIEW learn-scene-fix-2 r1 of 8c30a85d (opus BIG; brief briefs/s34-review-learn-scene-fix-2.md) | review/learn-scene-fix-2-r1 | MAIN s34 | session_01UV1SziXvWUAbjGtoEq234J | DONE PASS f8ac2f08 | 17/11 17:12Z |
 | day-khac-audit review r1 (opus BIG) of 4408ef0a | review/day-khac-audit-r1 | D | session_01964izE2ap49KwCk9DAQtjP | DONE FAIL 3 @319df260 (reviewer kept idle for r2) | 17/11 17:12Z |
 | REVIEW looks-2 040ce3440 (opus BIG; brief briefs/review-looks-2.md) | review/looks-2-r1 | B | session_01N1tNP4D3L5wFB1qrZAfoHp | FAIL part 1 (1 item: a harm mark put on the co-op friend by a real act (tea/ink/slap…) never reaches her; repro dev/test/coop-looks-act.js 20/21 on review/looks-2-r1 4d9fcd648; report reports/review-looks-2.md) | 17/11 18:05Z |
 | kit-figure-mood: mood seal beside the head of every interactable full-body figure (OD 17:40Z (2)) (sonnet; brief briefs/s34-kit-figure-mood.md) | review/kit-figure-mood | MAIN s34 | session_01UV1SzjLSjT2E1w24wsPwS5 (kit-figure-mood worker) | READY | 17/11 17:40Z |
-| WEATHER-KHAC-2 delta: every j12 kind per khắc + levels + world effects (opus; owner OD L1665 ~17:40Z (3); main s34) | review/weather-khac | C-AG | session_01UV1SzhyGUZ4FTxi1y3XNvr | RUNNING | 17/11 17:18Z |
+| WEATHER-KHAC-2 delta: every j12 kind per khắc + levels + world effects (opus; owner OD L1665 ~17:40Z (3); main s34) | review/weather-khac | C-AG | session_01UV1SzhyGUZ4FTxi1y3XNvr | LIVE 03a776e4 18:17Z | 17/11 17:18Z |
 | face-w404 fix round 2 (sonnet; CDN prefix vs index key; seeded same-face proof) | review/face-w404 | D | session_01964izEN55ZZFTgoSkJ3BVj | DONE SẴN SÀNG KIỂM c81fd72c (archived) → r1 reviewer re-reviews | 17/11 17:22Z |
 | coop-thin-b-r3 LIVE b5d109fe0 (main e9bbc4d6 → b5d109fe; rollback e9bbc4d6) | review/land-coop-thin-b-r3 | B | session_01N1tNP34QePRanPQevmttcs | LIVE | 17/11 17:25Z |
 | kit-rank-name r1 successor (continues 9f54a9a1; report HANDOVER) | review/kit-rank-name | MAIN s35 | session_01UV1SzgiSj7gRNYszv9YgxE | SẴN SÀNG KIỂM a4ccfc74 on review/kit-rank-name-r1 | 17/11 17:26Z |
