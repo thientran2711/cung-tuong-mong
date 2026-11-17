@@ -16,9 +16,40 @@ player-look1-t1-a36 8a6HNjlIrU | look2-t1-a36 rgdyeY6xtc | look3-t1-a36 u5YLnOCQ
 ## TODO (order): player-look*-t1-a51 (4), player-look*-t3-a18 (4, +a26? check list), emperor a26/a36/a51 -1/-2 (6), physician, official, tutor, steward, fallen (remaining), then man, mama, eunuch, kid. Remaining list = shard minus the done above.
 ## Gesture rotation used: a18 look1 branch, look2 handkerchief, look3 fan, look4 hairpin; a26 teacup/fan/scroll/jade; a36 branch/handkerchief/fan/lantern. Age lines: a26 'about 28', a36 'about 38 poised mature, subtle maturity', a51 'about 53, dignified, silver touches in hair' (not yet used).
 
-## LEAD UPDATES received after my handover (17/11 01:30-01:37Z) — these OVERRIDE my TODO order above; re-read BATCH_BRIEF.md
-- 2k ONLY for all new generations (1024x2048, resolution 2k, 65 cr). The 16 files above stay at 4k.
-- PRIORITY: ALL a18 files of the shard first (hero first), only then a26, a36, a51 (so the TODO "player a51 first" is obsolete).
-- Transparency: use extraSettings transparentBackground=true + "FULLY TRANSPARENT BACKGROUND (real alpha channel...)" prompt, verify alpha extrema; else images_remove_background (+3 cr) fallback.
-- hd twin only where the CDN already has it; fig + tn (if exists) + por always.
-- Throughput: short prompt <=110 words, 8 generations per message, one creations_wait, one bash per batch (download+alpha+finish+qa+ONE contact sheet), look <=2 images/batch, TSV line per file in this file; target >=40 files/session.
+## SUCCESSOR S2 (17/11 ~01:40Z) — 2k, START_CTX ~3% (roll at ~28%). transparentBackground:true works (real alpha) -> no bg-removal step. Driver: scratch drv.py (download+alpha+finish_fig+qa+sheet).
+TSV key	creation	status (2k, uploaded to CDN fig+por, no hd: CDN has none)
+player-look1-t3-a18	N2Hcbb96D9	ok
+player-look2-t3-a18	VXwhJyBMMU	ok
+player-look3-t3-a18	rgdyBmTxtc	ok
+player-look4-t3-a18	6Aq05LTiJO	ok
+physician-p2-a18	CqzxYpmEEy	ok
+physician-p3-a18	VXwhJRaMMU	ok
+tutor-ttp1-a18	eIyC4zwdqL	ok
+steward-tgk1-a18	4RQYHl49Aa	ok
+fallen-ly1-a18	u5YLV10QLD	ok
+official-o2-a18	DoJa9m6pcl	ok
+official-o3-a18	MB7v4mTDCm	ok
+official-o4-a18	tC3bGbUmZJ	ok
+official-o5-a18	gOtifR9SXO	ok
+official-o6-a18	4RQY50d9Aa	ok
+man-bacdich-1-a18	8a6H2KqIrU	ok
+man-congtu-1-a18	ovNFZKC829	ok
+## NOTE: all hero a18 now done (pilot 8 + these). Credits S2: 16x65=1040. Next: man a18 (rest), mama k02-k08 a18, eunuch a18 (120), kid.
+man-congtu-10-a18	KLD7IAPkqp	ok
+man-congtu-2-a18	Lwo9f0ZswO	ok
+man-congtu-3-a18	cpgIPKR0eP	ok
+man-congtu-4-a18	Lwo9fM7swO	ok
+man-congtu-5-a18	jUB4aMRLD0	ok
+man-congtu-6-a18	DoJaigdpcl	ok
+man-congtu-8-a18	3z5VsHkREY	ok (uploaded)
+man-congtu-7-a18	5jMw8cUKxe	FAILED service 520 -> resubmit (ref old-congtu-7 id 79a2qiOJAL)
+## reused pilot 2k masters (looked, ok, uploaded): man-huynh-1 3z5T87dREY | man-quytu-3 DoJvbzipcl | man-suthan-1 WDloEZKcXe | man-thaiy-1 Lwo4GkOswO | mama-k01 bxVSNT35Y2 | mama-k05 TdUtFUPVNR | eunuch-u01 TdUtFCqVNR | eunuch-u05-r2 0eSIQC0TfW   (still to reuse: eunuch-u09-r3 s789zGil8e; kids are a14/a9 pilot ids in pilot-misc.md)
+man-congtu-7-a18	DoJa27dpcl	ok
+man-congtu-9-a18	Ifiq035tvE	ok
+man-hoasu-1-a18	kspJad916B	ok
+man-huynh-2-a18	lJI6HvJgv9	ok
+man-nhacsu-1-a18	MB7vZ4bDCm	ok
+man-quytu-1-a18	iGbTSxH3uK	ok
+man-quytu-2-a18	fHGreThCDY	ok
+man-quytu-4-a18	Lwo9QCeswO	ok (all uploaded; S2 total so far 39 files uploaded, 31 new gens x65 = 2015 cr)
+## man a18 still to do: quytu-5..9, suthan-2, thive-1..4, vuonggia-1..2 (12); then mama k02-k04,k06-k08; eunuch u09-r3 reuse s789zGil8e + rest
