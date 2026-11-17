@@ -164,6 +164,6 @@ PEND.adStroll=()=>{const K=S.emp.known,L=S.emp.likes,tt=has("trongtai")?2:1;cons
 /* KIT §78 (owner 17/11 ~13:32Z): the "!" is a BRIGHT FRESH YELLOW badge (--khy) with a soft glow; every ~5 s it gives a little shake + hop (transform only, 3 phases so the marks do not move together); reduced motion = the static glow */
 @keyframes khapNudge{0%,72%,100%{transform:none}76%{transform:translateY(-3px) rotate(-14deg)}80%{transform:translateY(0) rotate(12deg)}84%{transform:translateY(-2px) rotate(-9deg)}88%{transform:rotate(6deg)}92%{transform:none}}
 @media (prefers-reduced-motion:no-preference){.khap{animation:khapNudge 5.2s ease-in-out infinite}.mspot:nth-child(3n+1) .khap{animation-delay:-1.7s}.mspot:nth-child(3n+2) .khap{animation-delay:-3.4s}}
-.mspot.sm .khap{width:16px;height:16px;line-height:16px;font-size:.72rem}`;document.head.appendChild(st)})();
+/* .sm uses the same size: the old .mspot.sm .khap rule (13 px) never applied (lost to .mspot .mlab i.khap), so one size everywhere */`;document.head.appendChild(st)})();
 /* kit page samples */
 try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§78",title:"kitPlaceIcon + kitHapMark: tên nơi chốn có biểu tượng công dụng, dấu ! có chuyện",html:()=>Object.keys(KIT_PLACE_IC).map(k=>`<span class="mspot" style="position:static;transform:none;display:inline-flex;margin:4px 8px"><span class="mlab">${kitPlaceIcon(k)}${PLNAME[k]?PLNAME[k][0]:({home:"Cung của ta"}[k]||k)}${k==="vuon"?`<i class="khap" role="img" aria-label="Có chuyện buổi này">!</i>`:""}</span></span>`).join("")})}catch(e){}

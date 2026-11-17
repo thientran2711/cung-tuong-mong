@@ -6,7 +6,7 @@
 const {chromium}=require('playwright');const fs=require('fs');const CDN='https://ctm-img.victoria-tntt.workers.dev/';const CACHE=(process.env.MFK_CACHE||'/home/user/wt/mfk-cache')+'/';fs.mkdirSync(CACHE,{recursive:true});
 const [,,PAGEURL,DIR,SIZES]=process.argv;const sleep=t=>new Promise(r=>setTimeout(r,t));
 const WX=[['rain',{n:'mưa phùn',k:'rain',f:1},0],['sun',{n:'nắng vàng',k:'sun',f:0},0],['snowh',{n:'tuyết dày',k:'snowh',f:4},0],['dust night',{n:'trời quang',k:'dust',f:0},3]];
-(async()=>{const b=await chromium.launch({proxy:process.env.HTTPS_PROXY?{server:process.env.HTTPS_PROXY}:undefined});let bad=0;
+(async()=>{const b=await chromium.launch({proxy:process.env.HTTPS_PROXY?{server:process.env.HTTPS_PROXY,bypass:'localhost,127.0.0.1'}:undefined});let bad=0;
  for(const sz of (SIZES||'755x1000,412x1058,390x844,1180x820,1366x1024').split(',')){const [W,H]=sz.split('x').map(Number);const errs=[];
   const ctx=await b.newContext({viewport:{width:W,height:H},deviceScaleFactor:1,hasTouch:true,isMobile:W<1100,serviceWorkers:'block',reducedMotion:'reduce',ignoreHTTPSErrors:true});
   await ctx.route(u=>u.href.startsWith(CDN),async r=>{const u=new URL(r.request().url()),c=CACHE+u.pathname.slice(1).replace(/\//g,'__');const ct=u.pathname.endsWith('.json')?'application/json':u.pathname.endsWith('.webp')?'image/webp':'application/octet-stream';
