@@ -97,10 +97,10 @@ try{PLNAME.nvp=["Nội vụ phủ","mua sắm, đồ dùng"];if(typeof MAPH==="o
 /* the weekly rare item: one per tuần, only at the place, stock 1, its normal price */
 function adRare(){if(!S||adSrv())return null;const w=wk();if(S.adRare&&S.adRare.w===w)return S.adRare.sold?null:S.adRare;
  let L=[];try{L=Object.keys(IT).filter(k=>{const it=IT[k];if(!it||!(it.pr>0)||it.il||it.keep||it.k==="tp")return false;const a=typeof itemArt==="function"?itemArt(k):null;return a&&(a.grade|0)>=AD.rareMinGrade&&!(S.shop||[]).includes(k)})}catch(e){}
- if(!L.length){try{L=SHOP_ALL.filter(k=>IT[k]&&!(S.shop||[]).includes(k)).sort((a,b)=>IT[b].pr-IT[a].pr).slice(0,4)}catch(e){}}
+ if(!L.length){try{L=SHOP_ALL.filter(k=>IT[k]&&!(S.shop||[]).includes(k)).sort((a,b)=>itm(b).pr-itm(a).pr).slice(0,4)}catch(e){}}
  S.adRare={w,k:L.length?pick(L):null,sold:0};return S.adRare.k?S.adRare:null}
 if(typeof kitShop==="function"){const ks0=kitShop;kitShop=function(o){try{const R=o&&o.key==="nvp"&&S&&S.place==="nvp"?adRare():null;
-  if(R&&Array.isArray(o.items)&&!o.items.some(x=>x.k===R.k)&&IT[R.k]){const k=R.k,it=IT[k];const a=typeof itemArt==="function"?itemArt(k):null;
+  if(R&&Array.isArray(o.items)&&!o.items.some(x=>x.k===R.k)&&IT[R.k]){const k=R.k,it=itm(k);const a=typeof itemArt==="function"?itemArt(k):null;
    o.items.unshift({k,src:kitItemSrc(k,""),src512:a&&a.src512||"",name:it.n,sub:`Hàng hiếm tuần này · ${it.kd||""}`,grade:a?a.grade|0:0,lux:it.sl||it.dr?luxVal(k):0,price:it.pr||0,mark:["hàng hiếm","g"],/* kitItem corner tag on the tile (KIT §28.13) */
     eff:kitShopEff(k),rows:kitItemRows(k),stock:1,have:()=>S.inv.filter(e=>e.k===k&&!e.h).length,
     onBuy:(x,q)=>{if(!S.adRare||S.adRare.sold)return;apply({bac:-x.price});S.inv.push({k});S.adRare.sold=1;x.stock=0;x.why="Đã mua; tuần sau có món khác";log(`Mua ${it.n} (hàng hiếm). Bạc -${x.price}`)}})}}catch(e){console.error("jact rare",e)}
