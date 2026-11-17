@@ -169,3 +169,12 @@ Reading: about 3 tuần in 4 have no window at all; hardship covers ~1 tuần in
 - kframe (j8 "Vu con nàng trù ẻo") does not call framed(), so it does not open a vu cổ window yet (one-line follow-up if wanted).
 
 SẴN SÀNG KIỂM 22a0ae32 (review/world-events-2).
+
+### 8.6 Rebased onto main abe056c3 (part 1 r1 PASS) — new sha ee9f5396
+- Cherry-picked the 4 code commits onto abe056c3; the r1 fixes kept (startCard "Chắc chắn · " prefix now covers the 17 batch-2 cards too; obey / winClamp / ghenDiv / npcW / poorW / pullMax).
+- r1 rules applied to batch 2: "không được mất gì" (10 lines); every NPC weight, default and threshold of jworld2 moved to BAL.world (day.npcW/coldOan, lap.npcGift/sonHarm, thb.npcW, thi.dflt/hanlam, vuong.mood/sungDiv, ret.maidCatch/maidSuc, trung reuses dis.npcW + xaP, hon.npcAff, ngoai.illSt/keepPow).
+- Foreman asks: (b) kframe → vu cổ: ONE cause function `vucoCause(p,by)` called from framed() and from ACT.kframe.f (j8 "Vu con nàng trù ẻo", which digs a hình nhân without framed()); test added. (a) buổi perf: `worldWin` (read by nightCh / mindW / festToday / stipend / placeWhere many times a buổi) is memoised per (save, record, length, tuần), returns a copy; world_check2 made robust to random starts (maid start, a second window from a random real cause, a random clan already ≥ 85).
+- Tests on ee9f5396: world_check2 PASS 40/40 (5 runs in a row before the rebase, 1 after), world_check PASS 25/25.
+- QUICKCHECK ee9f5396 (median of 5): PASS · old save ok · render 181/186 ms, tab 402/343, buổi 920/864 (+6 %, was +16 % at 22a0ae32 with median of 3), tasks>200ms 12/14 · core gates PASS. The tab number moves ±15 % between runs on this box (part 1 alone measured 345/334); no tab code was touched.
+
+SẴN SÀNG KIỂM ee9f5396 (review/world-events-2).
