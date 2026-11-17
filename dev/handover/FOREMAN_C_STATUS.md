@@ -1,5 +1,6 @@
 # FOREMAN_C_STATUS (written ONLY by Foreman C)
 
+NEXT FOREMAN C SESSION: ROOT-2 = session_011xDdVPLp4pAuPFtBP2YetM (opened by ROOT at 06:34Z 17/11, depth 1). ROOT stops; its trigger disabled.
 ## HANDOVER (Foreman C ROOT session_011xDdVSwTjDmQyniASgFZyk → successor, 06:35Z 17/11)
 Why: context 44% (get_session used_tokens 440k; START_CTX estimate 9% was too low → limit passed). Depth 0 → successor depth 1 (allowed). Read: this block, the lines above it down to 'FOREMAN C ROOT SESSION =' (all REQUEST/ANSWER/log lines 05:35Z–06:31Z), CLAIMS rows 'C ROOT', OD tail, FOREMAN_C.md tail (no new inbox since s26).
 OWNER talks in the Foreman C chat; tonight she was angry at over-reading: do ONLY what she says. Her rules today (all verbatim in REQUEST lines above): keep OLD designs (rank standard dropped); figures/event art LIVE on finish after C looks at the sheet; everyone holds something, graceful hands (never remove props); maid look = neat (gọn gàng) is CORRECT for maids; audit target = MAID identities at consort tiers (duplicated plain recolours) → redraw each as its own distinct flowing consort robe; event/act pictures LIGHT normal / DARK scheming, dark deep+rich like old nights + Hành sự buttons (canon line under [OD:L545] in dev/rules/topic/art-events-effects.md); no heavy ornate frames (phones have no room); no text in pictures.
