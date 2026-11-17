@@ -3283,6 +3283,7 @@ round avatar, stage figure, person dialogs, Tuần lục — every place `kitFxL
   đen tuyền · thanh đại · nâu nhạt · khói). Defaults = the approved "đẹp" blush + lip colours.
 - **Save**: `p.toilette.col = {mat, ma, son, may}` (only when made up). Old saves / bots: no `col` → `toilColFix` gives the defaults; unknown keys
   fall back too. The look rules are unchanged: a layer only for "đẹp" (score ≥ tier[1]) and "diêm dúa"; diêm dúa = the SAME picks, stronger
+  NAMES (makeup-theme, owner 17/11 OD:L1553-1554): the screen never prints these ids or "đẹp/tuyệt/vừa/vụng"; it reads ONE source `TOIL_MK` (VANPHONG §1 makeup table): `moc` Mặt mộc · `vung` Vụng về · `vua` Đoan trang · `dep` Kiều diễm · `tuyet` Khuynh thành · `diem` Diêm dúa (overdone). Preset rows: `TOIL_STY` "Kiểu thanh nhã" / "Kiểu cầu kỳ"; a preset shows only its name, never its tone (OD:L1515).
   (`TOIL_MKS`: lip .86 vs .62, lid colour .70 vs .50 and higher toward the brow, outer wing, lower lash line, deeper brows, the round strong blush).
 - **`kitSwatches({key, rows:[{k,label,sel,items:[{k,name,short,col:[r,g,b]}]}], onPick(rowK,itemK)})`**: one row per part — label (display
   font) + the picked full name (dim), then round colour swatches (30 px, a soft sheen) with the short name under each; picked = gold ring + gold
@@ -3465,7 +3466,7 @@ mood (liked / did not like) and the rewards; sound + light by mood; a new-day pi
   (`kitFlyItem`). It REPLACES the night's result toast ("Đêm thị tẩm") and the pillow-talk option's toast; the bestow tray (`kitReward`) is
   held during her night and shown on this card instead (no double reveal).
 - **Tier rule** = `BAL.nightEnd` (jne): points = the night's own score `s` (j8 night1: prep + talk fit + his mood + luck, −2 confiscation)
-  + toilette today (jtoil makeup tuyệt/đẹp +1, vụng/diêm dúa −1) − 2 if the pillow talk lost her Sủng or Ân tình − 2 if she is ill;
+  + toilette today (jtoil makeup `tuyet` Khuynh thành / `dep` Kiều diễm +1, `vung` Vụng về / `diem` Diêm dúa −1) − 2 if the pillow talk lost her Sủng or Ân tình − 2 if she is ill;
   ≥ 6 mặn nồng, ≥ 3 êm đềm, else lạnh nhạt. His mood after: warm one step better, cold one step worse (never to giận dữ), normal unchanged.
   `window.kneLast` = {tier, pts, why[], m0, m1, items} for tests.
 - **kitNewDay({host, night, day, wx, then})** — plays inside the week panel `#dawn` BEFORE the Tuần lục book (j87) when she had NO bedding

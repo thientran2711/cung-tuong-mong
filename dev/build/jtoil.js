@@ -35,8 +35,13 @@ Object.assign(BAL,{toil:{khac:1,
  /* the look on HER face: TOIL_LOOKS / TOIL_MKS; how the look is earned: the diemtrang-score block below (freehand parts, heaviness) */
  }});
 const TOIL_DV={hopdip:"hợp dịp",hoppham:"hợp phẩm",giandi:"quá giản dị",photruong:"quá phô trương",vuot:"vượt phẩm",tang:"phạm tang"};
-const TOIL_MK={moc:"mặt mộc",vung:"vụng",vua:"vừa",dep:"đẹp",tuyet:"tuyệt",diem:"diêm dúa"};
-const TOIL_HK={strict:"trọng lễ",frugal:"chuộng giản dị",jealous:"hay ghen",normal:"",nha:"thích thanh nhã",lay:"thích lộng lẫy",doan:"thích đoan trang"};
+/* makeup-theme (owner 17/11 05:03Z/05:16Z, OD:L1553-1554): the ONLY player-visible names of the six result levels (ids unchanged; VANPHONG §1).
+   Every place that prints a level reads TOIL_MK (a title / chip / row) or toilMkW (inside a sentence). */
+const TOIL_MK={moc:"Mặt mộc",vung:"Vụng về",vua:"Đoan trang",dep:"Kiều diễm",tuyet:"Khuynh thành",diem:"Diêm dúa"};
+/* the two preset groups the player picks from (owner 17/11 03:38Z: the bold group is elaborate, not negative; "Diêm dúa" is only the overdone RESULT) */
+const TOIL_STY={dep:"Kiểu thanh nhã",diem:"Kiểu cầu kỳ"};
+function toilMkW(k){const n=TOIL_MK[k]||TOIL_MK.moc;return k==="moc"||!TOIL_MK[k]?n[0].toLowerCase()+n.slice(1):n}/* a level name keeps its capital inside a sentence (it is a name); "mặt mộc" reads as plain words */
+const TOIL_HK={strict:"trọng lễ",frugal:"chuộng giản dị",jealous:"hay ghen",normal:"",nha:"thích y phục thanh nhã",lay:"thích y phục lộng lẫy",doan:"thích y phục đoan trang"};
 /* Hoàng thượng's taste in dress: one more of his likes (j1 LIKES; learnt like the others through "Nói thật lòng" → discover) */
 try{LIKES.dress=["y phục thanh nhã","y phục lộng lẫy","y phục đoan trang"];LIKEN.dress="Y phục"}catch(e){}
 const TOIL_EMPK={"y phục thanh nhã":"nha","y phục lộng lẫy":"lay","y phục đoan trang":"doan"};
@@ -135,8 +140,10 @@ function toilHeavy(col,want,style,over){const B=BAL.toil;let h=0;const t=new Set
  for(const k of ["mat","ma","son","may"]){h+=(B.heavy[k]||{})[col[k]]||0;const x=(B.tone[k]||{})[col[k]];if(x)t.add(x)}
  if(t.size>1)h+=B.mixH;if(want==="diem")h+=B.presetDiem;if(style==="showy")h+=B.showyH;let c=0;for(const [s,n] of B.cakeH)if((over||0)>=s)c=n;return h+c}
 /* what the day allows: the strictest of today's occasions (mourning allows almost nothing) */
-function toilAllow(occ){const A=BAL.toil.allow;let tang=false;try{tang=typeof wdTang==="function"&&wdTang()}catch(e){}if(tang)return A.tang;
- let a=99;for(const k of occ||[]){a=Math.min(a,k==="th"||k==="hh"?A.thinhan:k==="fest"?A.fest:k==="night"?A.night:A.thuong)}return a===99?A.thuong:a}
+function toilAllow(occ,rk){const A=BAL.toil.allow;let tang=false;try{tang=typeof wdTang==="function"&&wdTang()}catch(e){}if(tang)return A.tang;
+ let a=99;for(const k of occ||[]){a=Math.min(a,k==="th"||k==="hh"?A.thinhan:k==="fest"?A.fest:k==="night"?A.night:A.thuong)}if(a===99)a=A.thuong;
+ /* makeup-theme (OD:L1516): overdoing beyond her RANK too — a low rank allows less, a high rank a little more (BAL.toil.allowRk [from rank, shift]) */
+ let d=0;if(rk!=null)for(const [r0,n] of BAL.toil.allowRk||[])if((rk|0)>=r0)d=n;return a+d}
 /* the look from parts + score + heaviness: vụng (with the part that went wrong) · diêm dúa (seeded roll on the excess) · else by score.
    seed = a whole number fixed for this person and day, so the same sitting always reads the same (co-op: the same on both seats) */
 function toilLookOf(P,score,H,allow,seed){const B=BAL.toil;const parts=[["brow",P.brow],["powder",P.powder],["son",P.son]].filter(x=>typeof x[1]==="number");
@@ -150,10 +157,10 @@ function toilNpcOcc(){const L=[];try{if(!S.thDead)L.push("th");if(typeof festTod
 function toilMkPre(){try{MK_FIT.get(String(toilPor().src||"").split("?")[0].split("/").pop())}catch(e){}}
 function toilMk(rec){return rec&&rec.makeup?(rec.look==="diem"?"diem":rec.look==="vung"?"vung":toilTier(rec.score|0)):"moc"}
 /* NPCs and the bot: the same parts, score and look from skill (hash of person + day: no Math.random, both co-op seats agree) */
-function toilNpcPlay(sk,h,col,want,style,occ){const N=BAL.toil.play,B=BAL.toil;const r=i=>(wdHash(h+":"+i)%1000)/1000;
+function toilNpcPlay(sk,h,col,want,style,occ,rk){const N=BAL.toil.play,B=BAL.toil;const r=i=>(wdHash(h+":"+i)%1000)/1000;
  const q=i=>Math.max(0,Math.min(1,N.q0+N.qSk*sk+(r(i)+r(i+5)-1)*N.spread));const P={brow:q(0),powder:q(1),son:q(2)};
  const raw=Math.round(100*(.4*P.brow+.3*P.powder+.3*P.son));const score=Math.max(0,Math.min(100,Math.round(raw*(100-B.skillShare)/100)+Math.round(B.skillShare*sk)));
- const over=r(3)<N.cake?N.cakeOver:0;const H=toilHeavy(col,want,style,over);return Object.assign({score,parts:P},toilLookOf(P,score,H,toilAllow(occ),wdHash(String(h)+":diem")))}
+ const over=r(3)<N.cake?N.cakeOver:0;const H=toilHeavy(col,want,style,over);return Object.assign({score,parts:P},toilLookOf(P,score,H,toilAllow(occ,rk),wdHash(String(h)+":diem")))}
 /* ---------- the dress verdict (her clothes NOW, for formality F) ---------- */
 function toilDress(p,F){let st="ok";try{st=wdStatus(p)}catch(e){}if(st==="tang")return{v:"tang",style:"showy"};
  let vp=0;try{vp=(vpItems(p)||[]).length}catch(e){}if(st==="over"||vp)return{v:"vuot",style:"showy"};
@@ -168,7 +175,7 @@ function toilNpc(v){const N=BAL.toil.npc,h=wdHash(wdKey(v)+":"+toilWk()),r1=(h%1
  const style=dv==="giandi"?"plain":dv==="photruong"?"showy":"fit";let hoa=0;try{hoa=kg82Lv(v,"hoa")||0}catch(e){}const sk=Math.max(0,Math.min(1,(v.sac||50)/BAL.toil.sacDiv+hoa/BAL.toil.hoaDiv));
  /* her colours: a showy day → a diêm dúa preset, a plain day → a thanh nhã one, else either (BAL.toil.play.diemPre) */
  const want=style==="showy"||(style!=="plain"&&((h>>>4)%1000)/1000<BAL.toil.play.diemPre)?"diem":"";const L=TOIL_PRE.filter(x=>(x[2]==="diem")===(want==="diem"));const col=Object.assign({},L[(h>>>12)%L.length][4]);
- const R=toilNpcPlay(sk,h,col,want,style,toilNpcOcc());
+ const R=toilNpcPlay(sk,h,col,want,style,toilNpcOcc(),v.rank);
  return{wk:toilWk(),dv,style,makeup,score:R.score,look:R.look,slip:R.slip,col:Object.assign(col,want?{want}:{}),npc:1}}
 
 /* ---------- the reaction of one host ---------- */
@@ -189,7 +196,7 @@ function toilFx(p,host,F,baseState){if(!toilOn(p))return null;if(p===S&&toilSeen
  const hk=toilHostKind(host),R=BAL.toil.react[hk]||BAL.toil.react.normal;const C=BAL.toil.cap;
  const a1=dr?(R[dr.v]||0):0,a2=R[mk]||0;const aff=Math.max(C[0],Math.min(C[1],a1+a2));
  const danh=hk==="strict"&&dr&&dr.v==="giandi"&&F>=1?BAL.toil.strictPlainDanh:0;if(!aff&&!danh)return null;
- const why=[];if(dr&&a1)why.push([`y phục ${TOIL_DV[dr.v]}`,a1]);if(a2)why.push([mk==="moc"?"mặt mộc":`trang điểm ${TOIL_MK[mk]}`,a2]);
+ const why=[];if(dr&&a1)why.push([`y phục ${TOIL_DV[dr.v]}`,a1]);if(a2)why.push([`dung nhan ${toilMkW(mk)}`,a2]);
  return{aff,danh,duc:0,why,hk,dress:dr&&dr.v,mk}}
 /* the words for a host ("Thái hậu trọng lễ") — the nết is shown only when she knows it */
 function toilWho(host){return host==="th"?"Thái hậu":host==="emp"?"Hoàng thượng":host&&host.queen?"Hoàng hậu":host&&host.name?host.name:"chủ nhà"}
@@ -230,12 +237,12 @@ function toilGhenOf(v,L){const B=BAL.toil;let g=(L.showy?B.ghenShowy:0)+(L.mk===
 function toilRival(v,doIt){if(!v||!toilOn(S)||toilSeen(v))return null;const L=toilLook(),B=BAL.toil;const T=traitsOf(v);const frugal=T.some(t=>t==="Ân cần"||t==="Khiêm nhường");
  const g=Math.round(toilGhenOf(v,L));let aff=0,txt="";
  if(frugal&&(L.plain||L.mk==="moc")){aff=B.praisePlain;txt=`nàng ta chuộng giản dị: quý ta +${aff}`}else if(frugal&&L.showy){aff=B.frownShowy;txt=`ta ăn vận phô trương: nàng ta quý ta ${aff}`}
- if((L.mk==="diem"||L.mk==="vung")&&!txt){const n=BAL.toil.teaseGhen;txt=`nàng ta che miệng cười ${L.mk==="diem"?"lớp phấn son diêm dúa":"gương mặt điểm trang vụng về"} của ta: bớt ghen ${n}`;if(doIt){v.ghen=cl((v.ghen||0)-n,0,100);toilMark(v)}return{txt,aff:0,g:0}}
- if(g)txt=[txt,`${L.showy?"ta ăn vận phô trương":"dung nhan ta tuyệt mỹ"}: nàng ta ghen +${g}`].filter(Boolean).join(" · ");if(!txt)return null;
+ if((L.mk==="diem"||L.mk==="vung")&&!txt){const n=BAL.toil.teaseGhen;txt=`nàng ta che miệng cười ${L.mk==="diem"?`lớp phấn son ${toilMkW("diem")}`:`gương mặt điểm trang ${toilMkW("vung")}`} của ta: bớt ghen ${n}`;if(doIt){v.ghen=cl((v.ghen||0)-n,0,100);toilMark(v)}return{txt,aff:0,g:0}}
+ if(g)txt=[txt,`${L.showy?"ta ăn vận phô trương":`dung nhan ta ${toilMkW("tuyet")}`}: nàng ta ghen +${g}`].filter(Boolean).join(" · ");if(!txt)return null;
  if(doIt){if(aff)affAdd(v,S,aff);if(g)v.ghen=cl((v.ghen||0)+g,0,100);toilMark(v)}return{txt,aff,g}}
 function toilCrowd(doIt){const L=toilLook();if(!L.showy&&L.mk!=="tuyet")return{n:0};if(toilSeen("crowd"))return{n:0};let n=0;const R=liveRivals(false).filter(v=>!v.queen&&!v.out);
  for(const v of R){const g=Math.round(toilGhenOf(v,L)*BAL.toil.crowd);if(g){n=Math.max(n,g);if(doIt)v.ghen=cl((v.ghen||0)+g,0,100)}}if(doIt)toilMark("crowd");
- return{n,why:L.showy?"ăn vận phô trương":"dung nhan tuyệt mỹ"}}
+ return{n,why:L.showy?"ăn vận phô trương":`dung nhan ${toilMkW("tuyet")}`}}
 /* NPCs: the same rule when they wait on Thái hậu (jaudit applies thiếu lễ; this adds the look of the day) */
 (function(){try{if(typeof SOC==="object"&&SOC.serveTH){const r0=SOC.serveTH.run;SOC.serveTH.run=function(v){const r=r0.apply(this,arguments);try{let st="ok";try{st=aaThieuLe(v)?"plain":"ok"}catch(e){}
   const t=toilFx(v,"th",toilFOf("th"),st);if(t){v.th=cl((v.th||0)+t.aff,-100,100);if(t.danh)ap(v,{danh:t.danh})}}catch(e){}return r}}}catch(e){}})();
@@ -244,14 +251,14 @@ function toilCrowd(doIt){const L=toilLook();if(!L.showy&&L.mk!=="tuyet")return{n
 function toilCanStart(){return toilOn(S)&&(S.buoi||0)===0&&!toilToday(S)&&!Q.length}
 function toilCard(){const occ=toilOcc().map(o=>o.n.toLowerCase()).join(", ");
  return{n:"Điểm trang",t:"Ngồi trước gương: chọn y phục theo dịp hôm nay, kẻ mày, đánh phấn, chấm son.",k:BAL.toil.khac,c:{},o:100,w:{},b:0,toil:1,
-  x:`hôm nay ${occ}: người gặp ta xét y phục và dung nhan · kèm: phô trương dễ bị ghen, mặt mộc bị chê (bỏ qua: mặc như hôm qua)`,
+  x:`hôm nay ${occ}: người gặp ta xét y phục và dung nhan · kèm: phô trương dễ bị ghen, ${toilMkW("moc")} bị chê (bỏ qua: mặc như hôm qua)`,
   go:()=>setTimeout(toilOpen,0)}}
 (function(){const d0=deal;deal=function(){const r=d0.apply(this,arguments);try{if(Array.isArray(deck)&&toilOn(S)&&(S.buoi||0)===0&&!toilToday(S)&&!deck.some(a=>a.toil))deck.unshift(toilCard())}catch(e){console.error(e)}return r}})();
 /* the chip "Hôm nay: y phục hợp dịp · trang điểm đẹp" (k3 top bar row, from #hud2) */
 function toilChip(){if(!toilOn(S))return null;const rec=toilToday(S);
- if(!rec)return(S.buoi||0)===0?{t:"Chưa điểm trang",full:"Hôm nay: chưa điểm trang",c:""}:{t:"Hôm nay mặt mộc",full:"Hôm nay: mặt mộc",c:""};
+ if(!rec)return(S.buoi||0)===0?{t:"Chưa điểm trang",full:"Hôm nay: chưa điểm trang",c:""}:{t:`Hôm nay ${toilMkW("moc")}`,full:`Hôm nay: ${toilMkW("moc")}`,c:""};
  const bad=rec.dv==="giandi"||rec.dv==="photruong"||rec.dv==="vuot"||rec.dv==="tang"||!rec.makeup||toilMk(rec)==="vung";
- const mk=toilMk(rec);const dv=TOIL_DV[rec.dv]||"như hôm qua";return{t:`Y phục ${dv} · ${rec.makeup?"trang điểm "+TOIL_MK[mk]:"mặt mộc"}`,full:`Hôm nay: y phục ${dv} · ${rec.makeup?"trang điểm "+TOIL_MK[mk]:"mặt mộc"}`,c:bad||mk==="diem"?"hot":"ok"}}
+ const mk=toilMk(rec);const dv=TOIL_DV[rec.dv]||"như hôm qua";return{t:`Y phục ${dv} · ${toilMkW(mk)}`,full:`Hôm nay: y phục ${dv} · dung nhan ${toilMkW(mk)}`,c:bad||mk==="diem"?"hot":"ok"}}
 /* the k3 top row (jk3 k3Stage) rebuilds #k3tt from #hud2's state chips (K3_STATE is private to jk3): the chip joins line 1 after each rebuild */
 function toilChipPaint(){try{const tt=document.getElementById("k3tt");if(!tt)return;const l1=tt.querySelector(".k3l1");const c=S&&toilChip();const old=tt.querySelector('[data-k3="toil"]');
  if(!c||!l1){if(old)old.remove();return}const h=k3row("toil",String(c.t).replace(/[&<>"]/g,""),"",c.c);/* the kit's top-bar row builder (jk3 k3row), never own markup */
@@ -261,8 +268,8 @@ function toilChipPaint(){try{const tt=document.getElementById("k3tt");if(!tt)ret
 /* on window (capture): jk3's own top-row click handler is a document capture listener registered earlier */
 window.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest('[data-k3="toil"],[data-hx="toil"]');if(!b)return;e.stopImmediatePropagation();e.preventDefault();
  if(toilCanStart()){const i=Array.isArray(deck)?deck.findIndex(a=>a&&a.toil&&!a.done):-1;if(i>=0){act(i);return}if(!can(BAL.toil.khac))return;spend(BAL.toil.khac);toilOpen();return}
- const rec=toilToday(S);try{kpPop(b,rec?`<p>Sáng nay ta điểm trang: y phục ${TOIL_DV[rec.dv]}, ${rec.makeup?"trang điểm "+TOIL_MK[toilMk(rec)]+" ("+rec.score+" phần)":"để mặt mộc"}.</p><p class="past">Người gặp ta hôm nay nhìn theo nết mình; thẻ việc ghi trước.</p>`
-  :`<p>Hôm nay ta chưa điểm trang: mặc như hôm qua, mặt mộc.</p><p class="past">Mỗi buổi sáng có việc “Điểm trang” trong Hành sự (1 khắc).</p>`)}catch(x){}},true);
+ const rec=toilToday(S);try{kpPop(b,rec?`<p>Sáng nay ta điểm trang: y phục ${TOIL_DV[rec.dv]}, ${rec.makeup?"dung nhan "+toilMkW(toilMk(rec))+" ("+rec.score+" phần)":"để "+toilMkW("moc")}.</p><p class="past">Người gặp ta hôm nay nhìn theo nết mình; thẻ việc ghi trước.</p>`
+  :`<p>Hôm nay ta chưa điểm trang: mặc như hôm qua, ${toilMkW("moc")}.</p><p class="past">Mỗi buổi sáng có việc “Điểm trang” trong Hành sự (1 khắc).</p>`)}catch(x){}},true);
 
 /* ---------- the mini-games ---------- */
 const TOIL={st:null,geo:null};window.TOIL=TOIL;
@@ -271,7 +278,7 @@ function toilSkill(){const B=BAL.toil;let h=0;try{h=kg82Lv(S,"hoa")||0}catch(e){
 function toilHUD(o){{const d=document.getElementById("kg82");if(d)d.classList.remove("kg-idle")}for(const k in o)kg82Set(k,o[k])}
 /* bots (dev/measure inpage4, window.__bot) cannot play the overlay: an average sitting — keep the clothes, a face drawn from skill + chance */
 function toilAuto(){const occ=toilOcc(),F=Math.max(...occ.map(o=>o.F)),d=toilDress(S,F),sk=toilSkill();/* the same table as the NPCs (toilNpcPlay), seeded: no Math.random */
- const col=toilColFix(S.toilette&&S.toilette.col);const R=toilNpcPlay(sk.sk,wdHash(String(S.name||"")+":"+toilWk()),col,col.want||"",d.style,occ.map(o=>o.k));
+ const col=toilColFix(S.toilette&&S.toilette.col);const R=toilNpcPlay(sk.sk,wdHash(String(S.name||"")+":"+toilWk()),col,col.want||"",d.style,occ.map(o=>o.k),S.rank);
  S.toilette={day:toilWk()*10,wk:toilWk(),score:R.score,makeup:true,style:d.style,dv:d.v,F,occ:occ.map(o=>o.k),look:R.look,slip:R.slip,parts:R.parts,col,auto:1}}
 function toilOpen(){if(!S||S.dead)return;if(window.__bot){toilAuto();return}KG82.ctx="hoc";const occ=toilOcc();
  const d=kg82Open({art:"Điểm trang",title:"Trước gương đồng",how:"Hồi 1: chọn y phục theo dịp hôm nay. Hồi 2–4: tự tay kẻ mày lên đúng chân mày, đánh phấn hồng lên hai gò má, chấm son đúng chỗ khi vòng khép vừa môi. Không có đường chỉ: tay vụng thì mặt vụng."});
@@ -292,7 +299,7 @@ function toilDressUI(){const box=kg82Box();if(!box)return;box.hidden=false;const
  const por=toilPor();const me=pMe();
  const mama=toilSkill().mama;
  box.innerHTML=`<div class="toilw toil1">`+
-  (mama?`<p class="past toilmama">${mama.name} khẽ nhắc: “Dịp ${st.F===2?"yến lễ phải lộng lẫy mà không vượt phẩm":st.F===1?"thỉnh an nên đoan trang, đủ phẩm":"thường ngày nên nhã nhặn, đừng phô trương"}.”</p>`:"")+
+  (mama?`<p class="past toilmama">${mama.name} khẽ nhắc: “Dịp ${st.F===2?"yến lễ phải lộng lẫy mà không vượt phẩm":st.F===1?"thỉnh an nên chỉnh tề, đủ phẩm":"thường ngày nên nhã nhặn, đừng phô trương"}.”</p>`:"")+
   `<div class="toilinv">${kitInvGrid({key:"toil",tabs,items,minRows:2,minSlots:12,onPick:toilPick,side:kitEquipSlots({key:"toil",title:"Đang mặc",slots,sum,onPick:toilSlotPick,col:true}),sum})}`+
   `<div class="toildet">${toilDetHTML(sel)}</div></div></div>`+
   `<div class="kg82act"><button class="${kg82Btn()}" id="toilok">Mặc bộ này</button><button class="${kg82Btn(true)}" id="toilkeep">Giữ đồ hôm qua<small>mặc như cũ</small></button></div>`;
@@ -328,7 +335,7 @@ function toilDressDone(keep){const st=TOIL.st;if(keep&&st.start!==wdCur(S)){/* "
  const why={hopdip:"Vừa phẩm, vừa dịp: người trọng lễ ưng ý.",hoppham:"Đúng phẩm, chưa thật hợp dịp hôm nay.",giandi:st.F?"Quá giản dị cho dịp gặp bề trên: người trọng lễ coi là thiếu tôn trọng; người chuộng giản dị lại khen.":"Quá giản dị.",
   photruong:"Quá phô trương: phi tần dễ ghen, người chuộng giản dị chê.",vuot:"Có món trên phẩm của ta: dễ bị hặc, bị thu.",tang:"Màu đỏ, vàng trong quốc tang: phạm tang."}[dr.v];
  const box=kg82Box();box.innerHTML=`<div class="kgr">${kitRows([["Y phục",`<span class="ef ${good?"g":"r"}"><b>${TOIL_DV[dr.v][0].toUpperCase()+TOIL_DV[dr.v].slice(1)}</b></span>`],["Ghi chú",[why,`đo theo dịp: ${st.occ.slice().sort((a,b)=>b.F-a.F)[0].n.toLowerCase()}`],"n"]])}</div>`+
-  `<div class="kg82act"><button class="${kg82Btn()}" id="toilmk">Trang điểm<small>kẻ mày, đánh phấn, chấm son</small></button><button class="${kg82Btn(true)}" id="toilmoc">Để mặt mộc</button></div>`;
+  `<div class="kg82act"><button class="${kg82Btn()}" id="toilmk">Trang điểm<small>kẻ mày, đánh phấn, chấm son</small></button><button class="${kg82Btn(true)}" id="toilmoc">Để ${toilMkW("moc")}</button></div>`;
  $("toilmk").onclick=()=>toilColUI();$("toilmoc").onclick=()=>toilFinish(false)}
 
 /* (b) TRANG ĐIỂM — three hồi on her face in the mirror */
@@ -418,15 +425,15 @@ function toilFinish(made){const st=TOIL.st;if(!st)return;try{if(KG82.run&&KG82.r
  /* diemtrang-score: vụng = a part that went wrong (or a low total); diêm dúa = her choices heavier than the day allows (seeded per person + day + play,
     revealed only here); else by the total */
  const P0=st.parts,col0=toilColFix(st.col),occK=st.occ.map(o=>o.k);
- const L=made?toilLookOf({brow:P0.brow||0,powder:P0.powder||0,son:P0.son||0},score,toilHeavy(col0,col0.want||"",st.style,P0.over||0),toilAllow(occK),
+ const L=made?toilLookOf({brow:P0.brow||0,powder:P0.powder||0,son:P0.son||0},score,toilHeavy(col0,col0.want||"",st.style,P0.over||0),toilAllow(occK,S.rank),
   wdHash([S.name||"",toilWk(),Math.round(100*(P0.brow||0)),Math.round(100*(P0.powder||0)),Math.round(100*(P0.son||0))].join(":"))):{look:null};const look=L.look;
  S.toilette={day:toilWk()*10,wk:toilWk(),score,makeup:!!made,style:st.style,dv:st.dv,F:st.F,occ:occK,look};if(L.slip)S.toilette.slip=L.slip;if(made){S.toilette.col=toilColFix(st.col);S.toilette.col.seed=toilWk()}TOIL.prev=null;
  const mk=toilMk(S.toilette);const good=mk==="dep"||mk==="tuyet";const tOk=made&&good?true:made&&(mk==="vung"||mk==="diem")?false:null;if(tOk===null)try{kitSfx("mirror")}catch(e){}/* win / lose: kg82ShowRes(html,tOk) below plays it once */
- log(`Sáng nay ta điểm trang: y phục ${TOIL_DV[st.dv]}, ${made?`trang điểm ${TOIL_MK[mk]} (${score} phần)`:"để mặt mộc"}.`);
+ log(`Sáng nay ta điểm trang: y phục ${TOIL_DV[st.dv]}, ${made?`dung nhan ${toilMkW(mk)} (${score} phần)`:`để ${toilMkW("moc")}`}.`);
  const rows=[["Y phục",`<span class="ef ${st.style==="fit"?"g":"r"}"><b>${TOIL_DV[st.dv]}</b></span>`]];
  if(made){const P=st.parts;rows.push(["Kẻ mày",`<span class="ef t">${Math.round(100*(P.brow||0))}/100</span>`],["Đánh phấn",`<span class="ef t">${Math.round(100*(P.powder||0))}/100</span>`],["Chấm son",`<span class="ef t">${Math.round(100*(P.son||0))}/100</span>`],
   ["Phần chơi",`<span class="ef t">${Math.round(raw*(100-BAL.toil.skillShare)/100)}</span>`],[`Tay nghề (Họa bậc ${sk.hoa}, Sắc ${S.sac|0}${sk.mama?", "+sk.mama.name+" giúp":""})`,kitChip("cộng",bonus,"g")],["Dung nhan",`<span class="ef ${good?"g":mk==="vung"?"r":"t"}"><b>${TOIL_MK[mk]} · ${score} phần</b></span>`])}
- else rows.push(["Dung nhan",`<span class="ef n">mặt mộc</span>`]);
+ else rows.push(["Dung nhan",`<span class="ef n">${TOIL_MK.moc}</span>`]);
  /* what today's look does to the people she will meet (the real numbers; the nết shows only once known) */
  const eff=[];try{for(const h of ["th",qOn()?rivals[0]:null,"emp"].filter(Boolean)){if(h==="th"&&S.thDead)continue;const r=leAttire(S,"",h);const t=r.toil;if(!t||!t.aff)continue;
   eff.push(`${toilWho(h)}: ${h==="emp"?(t.aff>0?"Sủng +1":"Sủng -1"):`thiện cảm ${t.aff>0?"+":""}${t.aff}`} khi gặp hôm nay`)}}catch(e){}
@@ -691,8 +698,8 @@ const TOIL_PRE=[
  ["kimtuoc","Kim tước","diem","warm",{mat:"kimsa",ma:"rangchieu",son:"camdao",may:"nautram"}]];
 window.TOIL_PRE=TOIL_PRE;
 function toilPreOf(c){const p=TOIL_PRE.find(x=>(x[2]==="diem")===(c.want==="diem")&&["mat","ma","son","may"].every(k=>x[4][k]===c[k]));return p?p[0]:""}
-function toilPreRows(c){const cur=toilPreOf(c);return [["dep","Kiểu thanh nhã"],["diem","Kiểu diêm dúa"]].map(([lk,label])=>({k:"pre-"+lk,label,sel:cur,
- items:TOIL_PRE.filter(x=>x[2]===lk).map(x=>({k:x[0],name:`${x[1]} (${x[3]==="cool"?"sắc lạnh":"sắc ấm"})`,short:x[1],cols:["mat","ma","son","may"].map(k=>toilColRGB(k,x[4][k]))}))}))}
+function toilPreRows(c){const cur=toilPreOf(c);return [["dep",TOIL_STY.dep],["diem",TOIL_STY.diem]].map(([lk,label])=>({k:"pre-"+lk,label,sel:cur,
+ items:TOIL_PRE.filter(x=>x[2]===lk).map(x=>({k:x[0],name:x[1],short:x[1],cols:["mat","ma","son","may"].map(k=>toilColRGB(k,x[4][k]))}))}))}
 function toilColDef(){const o={};for(const k in TOIL_COL)o[k]=TOIL_COL[k].def;return o}
 function toilColE(part,k){const P=TOIL_COL[part];return P.L.find(x=>x[0]===k)||P.L.find(x=>x[0]===P.def)}
 function toilColRGB(part,k){return toilColE(part,k)[3].slice()}
@@ -812,9 +819,9 @@ try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§60",title:"kitSw
 /* (b0) CHỌN MÀU — before the three hồi: her portrait wears the picks live (the same layers as all day, at the "đẹp" strength) */
 function toilColUI(){const st=TOIL.st,box=kg82Box();if(!box||!st)return;box.hidden=false;st.col=toilColFix(st.col||(S.toilette&&S.toilette.col));
  TOIL.prev={look:st.col.want==="diem"?"diem":"dep",col:st.col};TOIL.prevUI=toilColUI;const por=toilPor(),me=pMe();
- box.innerHTML=`<div class="toilw"><div class="toilfig"><p class="past">Gương đồng soi trước: điểm trang khéo thì dung nhan mang đúng những màu này. Kiểu diêm dúa (hay phấn đánh quá dày) thì màu đậm hẳn, người trọng lễ dễ chê.</p></div>`+
+ box.innerHTML=`<div class="toilw"><div class="toilfig"><p class="past">Gương đồng soi trước: điểm trang khéo thì dung nhan mang đúng những màu này. ${TOIL_STY.diem} hợp dịp lớn; đậm quá dịp, quá phẩm (hay phấn đánh quá dày) thì thành ${toilMkW("diem")}, người ta chê phô trương.${toilTasteNote()}</p></div>`+
   `<div>${kitSwatches({key:"toilcol",rows:toilPreRows(st.col).concat(toilColRows(st.col)),onPick:(r,k)=>{if(/^pre-/.test(r)){const x=TOIL_PRE.find(y=>y[0]===k&&"pre-"+y[2]===r);if(x){st.col=Object.assign({},x[4]);if(x[2]==="diem")st.col.want="diem"}}else st.col[r]=k;toilColUI()}})}</div></div>`+
-  `<div class="kg82act"><button class="${kg82Btn()}" id="toilgo">Trang điểm<small>kẻ mày, đánh phấn, chấm son</small></button><button class="${kg82Btn(true)}" id="toilmoc2">Để mặt mộc</button></div>`;
+  `<div class="kg82act"><button class="${kg82Btn()}" id="toilgo">Trang điểm<small>kẻ mày, đánh phấn, chấm son</small></button><button class="${kg82Btn(true)}" id="toilmoc2">Để ${toilMkW("moc")}</button></div>`;
  try{kitGameFigRefresh()}catch(e){}
  $("toilgo").onclick=()=>{TOIL.prev=null;TOIL.prevUI=null;toilMakeup()};$("toilmoc2").onclick=()=>{TOIL.prev=null;TOIL.prevUI=null;toilFinish(false)}}
 window.toilColUI=toilColUI;window.kitSwatches=kitSwatches;
@@ -827,10 +834,11 @@ window.toilColUI=toilColUI;window.kitSwatches=kitSwatches;
    vụng ink + wobble + embarrassed sound, mặt mộc / vừa plain daylight), then a smooth ZOOM lands her face in the round bronze-mirror frame
    (kitFaceZoom) held ~2.5 s, then the close card (kit rows: tier, preset, hint). Tap = skip to the zoom, tap again = close. Gọn / reduced motion: no
    motion, the zoom + card at once. Co-op: nothing is sent. Costs: plate ≈ 121 KB once (on demand), effects from the kit (§68 files on demand). */
-const TOIL_HINT={moc:"Mặt mộc: người trọng lễ dễ chê, kẻ ưa giản dị lại thấy thuận mắt.",vung:"Phấn son lem nhem, người gặp hôm nay dễ cười chê.",
- vua:"Dung nhan vừa mắt, chẳng ai để ý nhiều.",dep:"Thanh nhã đoan trang, người trọng lễ dễ khen.",tuyet:"Dung nhan rạng rỡ, ai gặp cũng ngoái nhìn.",
- diem:"Son phấn đậm: kẻ ưa phô trương khen, người trọng lễ dễ chê."};
-function toilPreName(col,look){if(!col)return"";const k=toilPreOf(Object.assign({},col,{want:look==="diem"?"diem":""}));const p=TOIL_PRE.find(x=>x[0]===k&&(x[2]==="diem")===(look==="diem"));return p?`${p[1]} (${p[3]==="cool"?"sắc lạnh":"sắc ấm"})`:"màu tự chọn"}
+/* the card line under the level name (never repeats another level's name: owner 17/11 names) */
+const TOIL_HINT={moc:"Gương mặt mộc: người trọng lễ dễ chê, kẻ ưa giản dị lại thấy thuận mắt.",vung:"Phấn son lem nhem, người gặp hôm nay dễ cười chê.",
+ vua:"Vừa mắt, đúng mực, chẳng ai để ý nhiều; dịp lớn thì chưa đủ.",dep:"Tươi tắn mặn mà: người trọng lễ dễ khen, dịp lớn cũng xứng.",tuyet:"Rạng rỡ lung linh, ai gặp cũng ngoái nhìn; kẻ hay ghen thêm ghen.",
+ diem:"Đậm quá dịp, quá phẩm: người ta chê phô trương, kẻ ưa phô trương lại khen."};
+function toilPreName(col,look){if(!col)return"";const k=toilPreOf(Object.assign({},col,{want:look==="diem"?"diem":""}));const p=TOIL_PRE.find(x=>x[0]===k&&(x[2]==="diem")===(look==="diem"));return p?p[1]:"màu tự chọn"}
 function toilFigAt(){let P=0;try{const it=wdItem(wdOf(S).y);P=it?it.P:0}catch(e){}const rank=P>=1?Math.min(7,P-1):S.rank;const f0=figTierOf;try{figTierOf=function(w){return w===S?rank:f0.apply(this,arguments)};return figFor(S,"")}catch(e){return""}finally{figTierOf=f0}}
 function toilReveal(o,done){let fin=false;const end=()=>{if(fin)return;fin=true;try{done()}catch(e){console.error(e)}};
  try{if(typeof kmStage!=="function"||!kmOn()||!S||!TOIL_FIT.fit)return end();const fig=toilFigAt(),por=toilPor();if(!fig||!por.src)return end();
