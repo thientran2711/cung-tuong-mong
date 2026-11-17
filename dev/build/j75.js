@@ -155,7 +155,7 @@ const nm0=npcMonthly;npcMonthly=function(v){const a0=ap,fi0=v.fakeIll;let seen="
  let r;try{r=nm0.apply(this,arguments)}finally{ap=a0;odA=od0}return (r||"")+seen};
 /* (c) the same weekly decay for everyone (her rule from endTurn: -1, none for Hoàng hậu after the first tuần, none in tuần 2 if he is lạnh lùng) */
 /* NPCs work for Sủng as she does: the same acts as her deck cards (art ≥3: dance, zither, chess; else a small gift), same costs and odds shape */
-const EFF={"Tham vọng":.35,"Ghen tuông":.25,"Kiêu ngạo":.25,"Hiền lành":.1,"Nhu mì":.1};
+const EFF={"Tham vọng":.35,"Nóng nảy":.25,"Kiêu ngạo":.25,"Ân cần":.1,"Khiêm nhường":.1};
 /* the act she would do now (her best art, else a small gift) — read by the weekly pass below and by the NPC agent loop (jagent, AG1) */
 /* ONE table (BAL.deck, jbal2) and ONE odds formula for her cards (j2 artActs) and the NPC's same act (r1 fault 7) */
 function deckOdds(p,k){const D=BAL.deck[k];const l=typeof artW2==="function"&&p&&p.arts?artW2(p,k):(p.arts&&p.arts[k]||0);return D.o[0]+l*D.o[1]+(D.st?(+p[D.st[0]]||0)/D.st[1]:0)+mm()}
@@ -169,7 +169,7 @@ function npcEffortKind(v){if(v.confined||v.out||illOf(v)||(v.preg||0)>=7)return 
  return null}
 window.deckOdds=deckOdds;window.deckGain=deckGain;window.deckLoss=deckLoss;
 /* force = the agent loop chose it (no weekly trait frequency) */
-function npcEffort(v,force){const K=npcEffortKind(v);if(!K)return "";const pt=EFF[v.trait]!=null?EFF[v.trait]:.18;if(!force&&Math.random()>pt*FAIRN.eff)return "";
+function npcEffort(v,force){const K=npcEffortKind(v);if(!K)return "";const pt=tv(EFF,v)!=null?tv(EFF,v):.18;if(!force&&Math.random()>pt*FAIRN.eff)return "";
  const {kd,n,c,o,w,lose}=K;
  ap(v,c);const b=v.sung;const ok=roll(o);ap(v,ok?w:K.l);try{if(typeof empMet==="function")empMet(v,kd,ok)}catch(e){}/* AG2: he remembers it (her runOpt: jagemp) */
  /* two-way (owner 16/11 s21): her Kinh hồng vũ card also stirs the others (ghen +10, liking −5); an NPC dance does the same */

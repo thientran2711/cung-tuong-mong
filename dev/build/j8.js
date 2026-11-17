@@ -53,7 +53,7 @@ function accNeed(t){return rkOf(t)>=7?4:2}
 function accOK(a,t){return evG(a,t)>=accNeed(t)&&(rkOf(t)<7||rkOf(a)>=3)}
 function oAccuse(a,t){return odA(a,40-(rkOf(t)>=7?30:0)+evG(a,t)*15+a.danh/10+a.tai/10+(DG()?5:0)+5*(facN(a)-1))}
 function oBribe(a,t){return odA(a,40+a.tamco/3-t.maid.loyal/3)}
-function stealFit(a){const st=a===S?(S.staff||[]):(a.staff||[]);return (has("mesac")?effSac(a)/10:0)+(has("trongtai")?(a.tai||0)/10:0)+(has("datinh")?4:0)-(has("lanhlung")?4:0)+(st.some(s=>s.tr==="lanh")?6:0)+((a===S?S.maid:a.maid)&&(a===S?S.maid:a.maid).loyal>=70?3:0)}
+function stealFit(a){const st=a===S?(S.staff||[]):(a.staff||[]);return (has("mesac")?effSac(a)/10:0)+(has("trongtai")?(a.tai||0)/10:0)+(has("datinh")?4:0)-(has("lanhlung")?4:0)+(st.some(s=>netIs(s,"sharp"))?6:0)+((a===S?S.maid:a.maid)&&(a===S?S.maid:a.maid).loyal>=70?3:0)}
 function oSteal(a,m){return m==="road"?odA(a,30+effSac(a)/5+((a.arts&&a.arts.vu)||0)*5+stealFit(a)+mm()):odA(a,34+a.sung/3+effSac(a)/10+stealFit(a)+mm())}
 function oRumor(a){return odA(a,50+a.tamco/4+a.mat*3)}
 function oBlock(a){return odA(a,50+a.tamco/5+a.mat*3)}
@@ -235,7 +235,7 @@ function giveTo(a,r,ix){const e=a.inv[ix];if(!e||e.h)return"";window.__giftTaint
  const ent={k:e.k,from:key(a)};if(e.t){ent.t=e.t;ent.by=e.by}
  if(r===S){pushDil(mkP("giftin",{f:key(a),e:ent}),"Quà tặng");return `${a.name} sai người mang ${it.n} sang tặng ngươi. `}
  r.inv.push(ent);if(e.t&&roll(oSee(r,true))){r.inv.pop();/*evok: tainted gift (taint = scheme)*/evA(r,a,2);relAdd(a,r,-25);return `${r.name} nhận ${it.n} của ${NM(a)} nhưng người của nàng phát hiện đồ có vấn đề: nàng nắm 2 chứng cứ. `}
- if(itm(e.k).sl&&(IT[e.k]||{}).rk>rkOf(r)&&(r.trait==="Kiêu ngạo"||r.trait==="Tham vọng"||roll(25)))wear(r,r.inv.length-1);
+ if(itm(e.k).sl&&(IT[e.k]||{}).rk>rkOf(r)&&(hasT(r,"Kiêu ngạo")||hasT(r,"Tham vọng")||roll(25)))wear(r,r.inv.length-1);
  return `${NMc(a)} tặng ${it.n} cho ${r.name}: thiện cảm +${g+3}. `}
 function plantItem(a,t,ix){const e=a.inv[ix];if(!e||e.h)return"";a.inv.splice(ix,1);e.w=0;a.schemes=(a.schemes||0)+1;
  if(!roll(oPlant(a,t))){/*evok: plant act (runAct deed)*/evA(t,a,2);relAdd(a,t,-20);return `<span class="r">Kẻ lẻn vào cung ${NM(t)} cài ${iname(e)} bị bắt, khai ra ${NM(a)}.</span> ${NMc(t)} nắm 2 chứng cứ. `}
@@ -417,7 +417,7 @@ function npcMonthly(v){let ev="";const cost=k=>5+v.arts[k]*5;
  if(qOn()&&!v.queen&&roll(20))twDo(v,queenP(),"thHH");
  if(roll(10)){const fr=others(v).filter(t=>rel(v,t)>10&&(t===S||t.alive));if(fr.length&&v.bac>=30){const t=pick(fr);const s=ACT.ally.f(v,t);if(t===S)ev+=s}}
  if(roll(10)&&v.inv.some(e=>!e.h&&(itm(e.k).tg||[]).includes("rv"))){const t=pick(others(v));const i=v.inv.findIndex(e=>!e.h&&(itm(e.k).tg||[]).includes("rv"));if(rel(v,t)>0||t===S&&v.rel>5)ev+=seenNPC(v,t,giveTo(v,t,i))}
- /* an NPC may hold a piece that is not an IT item (a dress piece of WD_ITEMS, a co-op merged piece): skip it, never crash the month (co-op week stalled: coop-e2e) */v.inv.forEach((e,i)=>{const it=e&&IT[e.k];if(it&&it.sl&&!e.w&&!e.h&&(it.rk<=rkOf(v)||v.trait==="Kiêu ngạo"))wear(v,i)});
+ /* an NPC may hold a piece that is not an IT item (a dress piece of WD_ITEMS, a co-op merged piece): skip it, never crash the month (co-op week stalled: coop-e2e) */v.inv.forEach((e,i)=>{const it=e&&IT[e.k];if(it&&it.sl&&!e.w&&!e.h&&(it.rk<=rkOf(v)||hasT(v,"Kiêu ngạo")))wear(v,i)});
  const ui=v.inv.findIndex(e=>!e.h&&(IT[e.k]||{}).use&&!e.t&&(v.suc<60||(itm(e.k).ant&&v.preg)));if(ui>=0)useItem(v,ui);
  const ci=v.inv.findIndex(e=>!e.h&&(IT[e.k]||{}).dr&&(IT[e.k]||{}).rk<=rkOf(v));if(ci>=0&&!(v.dress&&v.dress.until>S.turn))useItem(v,ci);
  if(roll(20))inspect(v);if(!v.fakeIll&&!illOf(v)&&v.tamco>=45&&roll(3))twDo(v,null,"fakeIll");

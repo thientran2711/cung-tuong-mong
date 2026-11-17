@@ -77,7 +77,7 @@ function j95bGate(role,a,t,kind,ctx){t=t||S;ctx=ctx||{};
  if(role.n!=null)return{ok:true,why:"trung lập: "+role.n};
  if(!a)return role.opt?{ok:true,why:"không có ai"}:{ok:false,why:"không có người"};
  if(a.rel==null||a===S){/* not a consort: servants / court eunuchs */
-  if(kind==="svthief"){const s=a;if(s.tr==="tham")return{ok:true,why:"tính tham của"};if(s.spyFor&&s.spyFor!=="me")return{ok:true,why:"làm tai mắt cho người khác"};if((s.loyal||50)<35)return{ok:true,why:`lòng với chủ thấp (${s.loyal})`};return{ok:false,why:"kẻ hầu không có lý do lấy đồ"}}
+  if(kind==="svthief"){const s=a;if(netIs(s,"greed"))return{ok:true,why:"tính tham của"};if(s.spyFor&&s.spyFor!=="me")return{ok:true,why:"làm tai mắt cho người khác"};if((s.loyal||50)<35)return{ok:true,why:`lòng với chủ thấp (${s.loyal})`};return{ok:false,why:"kẻ hầu không có lý do lấy đồ"}}
   if(kind==="squeeze"){if(S.rank<=2)return{ok:true,why:`thái giám khinh cung phẩm thấp (phẩm ${S.rank}), đòi lệ phí`};return{ok:false,why:"phẩm cao, thái giám không dám làm khó"}}
   return{ok:true,why:role.h?"kẻ dưới làm theo lệ":"kẻ dưới lấy lòng"}}
  if(role.h&&a===t)return{ok:false,why:"không ai tự hại mình"};
@@ -201,7 +201,7 @@ function j95bClaim(y){/* true if she really harmed y (her own acts), else the sp
  let L=RUMF95B.slice();if((y.sung||0)<20)L=["xui Hoàng thượng lạnh nhạt với nàng","mua chuộc Kính sự phòng giấu thẻ bài của nàng"];return{txt:L[Math.floor(Math.random()*L.length)],truth:false}}
 function j95bSeed(x,y,how,claim){/* x spreads to y that SHE harmed y. x = rival or null (unknown) */if(!y||!y.alive||y.out||y===x||y===S)return null;const z=j95bZ();
  if(y.j95rum&&y.j95rum[key(S)]&&wk()-y.j95rum[key(S)].w<=J95B.RUMW)return null;
- const c=claim||j95bClaim(y);const pers=x?Math.max(0,aff(y,x))/4+(x.tai||40)/10:5;const credo=cl(Math.round(45+pers-Math.max(0,aff(y,S))/3+(y.trait==="Đa nghi"?15:0)+(c.truth?20:0)),5,90);
+ const c=claim||j95bClaim(y);const pers=x?Math.max(0,aff(y,x))/4+(x.tai||40)/10:5;const credo=cl(Math.round(45+pers-Math.max(0,aff(y,S))/3+(hasT(y,"Kín đáo")?15:0)+(c.truth?20:0)),5,90);
  if(!j95dice(credo))return null;
  const oa=Math.round(18+pers),af=12;oanAdd(y,S,oa);affAdd(y,S,-af);const src=x?x.name:"không rõ";
  y.j95rum=y.j95rum||{};y.j95rum[key(S)]={txt:"ngươi "+c.txt,src,w:wk()};
@@ -223,7 +223,7 @@ function j95bRumOpts(r,y,x){const oc=j95bClearOdds(r),ot=cl(35+(S.mat||0)*8+(S.t
   {n:"Mặc kệ",fx:{},x:`Nắm chắc · kèm: ${y.name} vẫn tin lời đồn, sẽ tìm dịp ra tay với ngươi`,go:()=>log(`Ngươi bỏ ngoài tai lời đồn về ${y.name}.`)}]}
 function j95bRumOf(y){const z=j95bZ();for(let i=z.rum.length-1;i>=0;i--){const r=z.rum[i];if(r.y===y.id&&!r.cleared&&wk()-r.w<=J95B.RUMW+4)return r}return null}
 function j95bClearOdds(r){const y=RV(r.y),x=r.x!=null?RV(r.x):null;if(!y)return 5;if(r.truth)return cl(Math.round(12+(S.duc||0)/8),5,30);
- return cl(Math.round(40+(S.tai||0)/5+(S.duc||0)/6+(r.traced?20:0)+(x&&evG(S,x)>=1?15:0)-(y.trait==="Đa nghi"?12:0)),5,90)}
+ return cl(Math.round(40+(S.tai||0)/5+(S.duc||0)/6+(r.traced?20:0)+(x&&evG(S,x)>=1?15:0)-(hasT(y,"Kín đáo")?12:0)),5,90)}
 function j95bClear(u,how,face){const z=j95bZ();const r=z.rum.find(x=>x.u===u);if(!r)return"";const y=RV(r.y);if(!y||!y.alive)return"";if(!face&&typeof can==="function"&&can(BAL.m95b.k))spend(BAL.m95b.k);
  J95B.stat.clear++;const o=j95bClearOdds(r);const x=r.x!=null?RV(r.x):null;let msg;
  if(j95dice(o)){r.cleared=1;J95B.stat.clearOk++;if(y.j95rum)delete y.j95rum[key(S)];
@@ -244,7 +244,7 @@ function j95bWeek(){if(!j95bOn()||S.dead||(typeof isSrv==="function"&&isSrv()))r
  for(const x of liveRivals(true)){if(x.confined)continue;
   /* evidence in hand (j78): someone holding proof of her real harm tells the victim */
   if(evG(x,S)>=1){for(const yid in z.harm){const y=RV(+yid);if(!y||y===x||!y.alive||y.out)continue;if(!motiveOK(x,S,"expose").ok)break;if(j95dice(12)){const g=motiveOK(x,S,"expose");j95bAct("v"+x.id,"expose","me",g,"rumor:j78");j95bSeed(x,y,"j78")}break}}
-  /* a lie from someone with a motive */const g=motiveOK(x,S,"rumor");if(!g.ok)continue;const tr=x.trait;const p=(tr==="Nhiều chuyện"||tr==="Hiểm độc"?5:tr==="Ghen tuông"||tr==="Đa nghi"?3:1.5)+(x.malice||0)/40;
+  /* a lie from someone with a motive */const g=motiveOK(x,S,"rumor");if(!g.ok)continue;const p=(hasT(x,"Nhiều chuyện")||hasT(x,"Xảo quyệt")?5:hasT(x,"Nóng nảy")||hasT(x,"Kín đáo")?3:1.5)+(x.malice||0)/40;
   if(j95dice(p)){const y=j95bListener(x);if(y){j95bAct("v"+x.id,"rumor","me",g,"rumor:tick");j95bSeed(x,y,"tick")}}}
  /* those who believe retaliate (the gate sees the rumour as their reason) */
  for(const r of z.rum){if(r.cleared||wk()-r.w>J95B.RUMW)continue;const y=RV(r.y);if(!y||!y.alive||y.out||y.confined)continue;if(!j95dice(30))continue;let t="";try{t=npcAct(y,S)}catch(e){}

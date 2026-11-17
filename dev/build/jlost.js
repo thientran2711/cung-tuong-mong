@@ -48,7 +48,7 @@ function loMotive(v,t){try{if(typeof motiveOK==="function")return !!motiveOK(v,t
 /* hidden cause, chosen by the existing motive system */
 function loCause(p){let R0=[];try{R0=liveRivals(true).filter(v=>v!==p&&bandOf(danger(v,p))>=2&&loMotive(v,p)&&(v.bac||0)>=LO.act.bac)}catch(e){}/* two-way law: a rival's theft costs what her Act 'Sai người lấy trộm đồ' costs: bạc LO.act.bac + Đức -4 */
  if(R0.length&&roll(LO.rivP)){const v=mindPickBy(R0,x=>BAL.mind.pick.lost1.base+danger(x,p)*mindW(x,"scheme"),null);/* npc-mind: was ARGMAX */ap(v,{bac:-LO.act.bac,duc:LO.act.duc});return{cause:"riv",by:key(v)}}
- const st=[p.maid].concat(p.staff||[]).filter(Boolean);const sv=st.find(s=>s.tr==="nhat");
+ const st=[p.maid].concat(p.staff||[]).filter(Boolean);const sv=st.find(s=>netIs(s,"timid"));
  if(roll(sv?LO.srvP[1]:LO.srvP[0])){const s=sv||pick(st);return{cause:"srv",sv:s?s.name:""}}return{cause:"mis"}}
 /* the same function for everyone: an item leaves its owner's chest */
 function loLose(p,force){if(!loAlive(p))return null;const L=(p.inv||[]).filter(loOk);if(!L.length)return null;
