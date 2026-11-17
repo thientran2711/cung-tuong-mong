@@ -122,6 +122,11 @@ Object.assign(BAL,{route:{ /* jroute «Lối riêng» (tư tình / trốn cung /
  frameOil:70 /* roll: a rival framing her innocent child uses oil */
 }});
 Object.assign(BAL,{orig:{ /* jorigins.js: Bac Dich (bd) origin numbers */
+ /* j69 origin roulette weights (approved 11/14 table, OD:L19). Hòa thân (nc) is ONE origin: its weight is the whole hòa thân slot, its country
+    branches split it by br.nc (owner OD:L1213–L1219; set from the bd bot measure, review/origin-bd-branch report). ow2 = the frozen table of
+    lives pre-rolled while bd was a separate card (ow=2 marks): they keep the origin they were shown. */ ow:{nc:6,thd:9,cn:13,dtq:17,muoi:17,ch:13,td:9,tt:8,cnv:8},
+ ow2:{nc:6,bd:7,thd:9,cn:13,dtq:17,muoi:17,ch:13,td:9,tt:8,cnv:8},
+ /* country-branch share inside an origin: {origin:{branch:weight}} (hard branch = rare, OD:L1216) */ br:{nc:{nc:1,bd:1}},
  /* Bac Dich princess origin: start stats o, Thai hau favour th */ bd:{o:{danh:15,suc:90,bac:90},th:-20},
  /* QUEST67.bd chapter-end rewards [both nations / forgiven hostage / still a hostage] */ quest:[{danh:10,th:8},{th:4},{tamco:3}],
  /* arc bd_hoa (ten-year treaty): per option <node><a|b|c> c=cost w=win l=loss; win/win2/mid/lose = ending fx */ hoa:{s1a:{c:{bac:-20},w:{danh:3,sung:2}},s1b:{w:{sung:3},l:{danh:-3}},s2a:{c:{bac:-10},w:{duc:2}},s2b:{w:{th:2}},c1a:{c:{suc:-3},w:{danh:5,sung:3},l:{danh:-4}},c1b:{c:{bac:-30},w:{sung:4},l:{danh:-3}},c2a:{c:{bac:-50},w:{duc:4},l:{sung:-6}},c2b:{c:{bac:-20},w:{duc:3}},t1a:{c:{suc:-4},l:{danh:-3}},t1b:{c:{bac:-20},w:{sung:2}},x1a:{c:{suc:-5}},x1b:{c:{suc:-3}},x1c:{c:{bac:-60},w:{danh:2}},win:{danh:12,sung:6},win2:{sung:10,th:4},mid:{danh:3},lose:{sung:-8,danh:-6}},

@@ -1,10 +1,12 @@
-/* ================= jorigins: XUẤT THÂN NGOẠI QUỐC (D18, review/origins) =================
-   - bd = "Công chúa Bắc Địch hòa thân": the second foreign-princess origin beside nc (Nam Chiếu). Harder than nc (rank Quý nhân, Thái hậu
-     ưa -20, no silver cushion), own story line (QUEST67.bd + 4 arcs), own family letter (j72 fam_bd), weight in OW69 (j69), home money in BAL.home (jecon).
+/* ================= jorigins: XUẤT THÂN NGOẠI QUỐC (D18, review/origins; branch form review/origin-bd-branch) =================
+   - bd = "Công chúa Bắc Địch hòa thân": the second COUNTRY BRANCH of the one hòa thân origin (nc; Nam Chiếu is the first). Harder than Nam Chiếu
+     (rank Quý nhân, Thái hậu ưa -20, no silver cushion), own story road (QUEST67.bd + 4 arcs), own family letter (j72 fam_bd), branch share of the
+     hòa thân roll in BAL.orig.br (j69), home money in BAL.home (jecon).
    - ORIGIN_LORE: for EVERY origin a short backstory + how the court treats her; shown under the identity card text (kpIdentity), no new UI part:
      the same .kpidt text slot the card already uses.
    Pictures: img/origin-wide-bd.webp (16:9) and img/bg-origin-bd.webp (3:4), CDN. Missing kit part: emblem img/kit/origin-bd.webp (KIT REQUEST). */
-ORIGINS.splice(Math.max(0,ORIGINS.findIndex(o=>o.k==="nc"))+1,0,{k:"bd",n:"Công chúa Bắc Địch hòa thân",r:2,o:BAL.orig.bd.o,hh:0,th:BAL.orig.bd.th,art:{vu:1},t:"Con gái Khả hãn Bắc Địch, gả sang làm tin cho hòa ước mười năm."});
+/* Bắc Địch is a COUNTRY BRANCH of the hòa thân origin nc (owner OD:L1213–L1216; j1 ORIGIN_BR), never a 10th origin: no roulette card of its own */
+ORIGIN_BR.bd={par:"nc",k:"bd",land:"Bắc Địch",n:"Công chúa Bắc Địch hòa thân",r:2,o:BAL.orig.bd.o,hh:0,th:BAL.orig.bd.th,art:{vu:1},t:"Con gái Khả hãn Bắc Địch, gả sang làm tin cho hòa ước mười năm."};
 
 /* v1 story slot (every origin needs one: the chapter line j67 lives in QUEST67/ARC67 below) */
 STORY.bd={t:"Hòa thân Bắc Địch",n:3,goal:"Ngươi là tờ hòa ước còn sống. Giữ cho hai nước yên, và giữ cho mình khỏi bị coi là con tin.",

@@ -633,7 +633,7 @@ button.ka.kdis .kaart>.ksart{filter:grayscale(.7);opacity:.8}
    4) "Tiếp" → the revealed picture flies into the identity card's art frame while the card slides in. "Bỏ qua" (always there) ends at once.
    prefers-reduced-motion / Cảnh động off: same steps, no motion (instant flips, no shuffle travel). API:
    kitRoulette({items:[{k,src,wide,name,rare}], target:k, toEl:()=>element, done:fn}). Test state: window.__kroulStep (0 up · 1 shuffling · 2 pick · 3 shown). ---------- */
-const KIT_OW=(typeof OW69!=="undefined")?OW69:{nc:6,bd:7,thd:9,cn:13,dtq:17,muoi:17,ch:13,td:9,tt:8,cnv:8};
+const KIT_OW=BAL.orig.ow;/* ONE CORE: the j69 roulette weights (no private copy) */
 const KIT_CARDBACK="img/kit/card-back.webp";
 function kitRare(k){try{if(typeof ow69Rare==="function")return ow69Rare(k)}catch(e){}const w=KIT_OW[k]||10;return w<=6?"Rất hiếm":w<=9?"Hiếm":"Thường gặp"}
 /* ONE origin card face (front): art frame + name + rarity chip pinned to the bottom (kit rule: chips of a row share one baseline) */
@@ -708,12 +708,14 @@ function kitRoulette(o){const done=()=>{try{o.done&&o.done()}catch(e){}};if(!o||
  urls.forEach(u=>{const im=new Image();im.decoding="async";const ok=()=>{n++;if(n>=urls.length)(im.decode?im.decode().catch(()=>{}):Promise.resolve()).then(go)};im.onload=ok;im.onerror=ok;im.src=u})}})();
 (function(){if(typeof nlCard!=="function")return;const c0=nlCard;nlCard=function(){const r=c0.apply(this,arguments);try{const o=S&&S.origin;if(!o)return r;const key=(S.name||"")+"|"+o.k+"|"+(typeof NLP!=="undefined"&&NLP?NLP.seed:"");
   if(window.__kroulKey===key)return r;window.__kroulKey=key;
-  const items=ORIGINS.filter(x=>KIT_OW[x.k]!=null||x.k===o.k).map(x=>({k:x.k,src:kitOriginArt(x.k),wide:kitOriginWide(x.k),name:x.n,rare:kitRare(x.k)}));
-  kitRoulette({items,target:o.k,toEl:()=>document.querySelector("#modal .kpidart .ksart")||document.querySelector("#modal .kpidart")})}catch(e){console.error("kitRoulette",e)}return r}})();
+  /* ONE card per origin: a country branch (hòa thân · Bắc Địch) lands on its origin's card, named by the origin (on) */
+  const ok=typeof originRoot==="function"?originRoot(o.k):o.k;
+  const items=ORIGINS.filter(x=>KIT_OW[x.k]!=null||x.k===ok).map(x=>({k:x.k,src:kitOriginArt(x.k),wide:kitOriginWide(x.k),name:x.on||x.n,rare:kitRare(x.k)}));
+  kitRoulette({items,target:ok,toEl:()=>document.querySelector("#modal .kpidart .ksart")||document.querySelector("#modal .kpidart")})}catch(e){console.error("kitRoulette",e)}return r}})();
 /* kit sample page (§28.12b, review/kit-fit-r3): the origin card grid at a fixed card width (--krw); the live fit is kitRouFit */
 try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§28.12b",title:"Thẻ thân phận (Luân hồi): thẻ to trải rộng theo màn nền, một khoảng cách đều giữa các thẻ",html:()=>
  `<div class="kroul" style="position:relative;inset:auto;z-index:auto;background:none;overflow:visible;--krw:150px;--krgap:12px;--krside:0px;--krpad:6px"><div class="krbox"><div class="krgrid">`+
- [["tt","Con gái Tể tướng"],["dtq","Con gái Đại tướng quân"],["muoi","Con gái nhà buôn muối"],["nc","Công chúa nước Nam Chiếu hòa thân"]].map(([k,n])=>`<div class="krt" data-k="${k}"><div class="krc"><div class="krf">${kitOriginFace({k,src:typeof kitOriginArt==="function"?kitOriginArt(k):"",wide:typeof kitOriginWide==="function"?kitOriginWide(k):"",name:n,rare:kitRare(k)})}</div></div></div>`).join("")+`</div></div></div>`})}catch(e){}
+ [["tt","Con gái Tể tướng"],["dtq","Con gái Đại tướng quân"],["muoi","Con gái nhà buôn muối"],["nc","Công chúa hòa thân"]].map(([k,n])=>`<div class="krt" data-k="${k}"><div class="krc"><div class="krf">${kitOriginFace({k,src:typeof kitOriginArt==="function"?kitOriginArt(k):"",wide:typeof kitOriginWide==="function"?kitOriginWide(k):"",name:n,rare:kitRare(k)})}</div></div></div>`).join("")+`</div></div></div>`})}catch(e){}
 (function(){const st=document.createElement("style");st.id="k2b-roulette";st.textContent=`
 .kroul{position:fixed;inset:0;z-index:2147483000;display:flex;align-items:center;justify-content:center;background:#e9dcc8 center/cover no-repeat;transition:opacity .35s;overflow:hidden}
 .kroul.krfade .krt:not(.pick),.kroul.krfade .krhead,.kroul.krfade .krbar{opacity:0;transition:opacity .4s}
