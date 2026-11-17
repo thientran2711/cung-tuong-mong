@@ -898,7 +898,7 @@
 | DISPLAY SHELF (Nơi trưng bày) + room xa xỉ + NPCs visit her room + info channels/tố xa xỉ + plant care (OD 18:30Z (A) + OD ~18:00Z s35) — whole job | review/display-shelf | C-AG | expert session_01UV1SzkTnXQm9bJonRJHkXs (sonnet) + builder session_01UV1SzjhM5kL1Mi3jpBfjY6 (opus) | RUNNING | 17/11 18:06Z |
 | mirror-center: makeup mirror face off-centre left (owner bug OD ~18:00Z s35) — whole family of round/mirror face frames | review/mirror-center | MAIN s35 | session_01UV1SzkWgty5ackK6juMHCE | SẴN SÀNG KIỂM ea709be7 (r2 after FAIL ad226ed0) | 17/11 19:30Z |
 | toil-looks6 successor: v13 sample fix + AVATAR ID-CARD bake (kit-fx-register) | review/kit-fx-register | MAIN s35 | session_01UV1SzkpQ27MXeaU77haA2o | RUNNING | 17/11 18:12Z |
-| REVIEW makeup-lux 7c6ef2fda (opus BIG; brief briefs/review-makeup-lux.md) | review/makeup-lux-r1 | B | session_01N1tNP2jpShYBDZTqRuh3Gk | RUNNING | 17/11 18:20Z |
+| REVIEW makeup-lux 7c6ef2fda (opus BIG; brief briefs/review-makeup-lux.md) | review/makeup-lux-r1 | B | session_01N1tNP2jpShYBDZTqRuh3Gk | PASS review/makeup-lux-r1 052384f1 (contains main 03a776e4; waits r5 — land AFTER toil-looks2-r5; report reports/review-makeup-lux.md) | 17/11 19:40Z |
 | kit-rank-name r1 PASS a4ccfc74 (+scan fix 188f63c9) → rebase → builder batch; reviewer archived | review/kit-rank-name-land | MAIN s35 | session_01UV1SzgiSj7gRNYszv9YgxE | PASS → BATCH | 17/11 18:20Z |
 | REVIEW mirror-center r1 of ad226ed0 (sonnet SMALL) | review/mirror-center-r1 | MAIN s35 | session_01UV1SziReys4L5kSo9SXu1s | PASS 0f0954fb (r2) | 17/11 18:25Z |
 | MOOD-MEM memory 2 layers + ghen feeling label (opus; OD L1678 (b)(g); after ag-moodknow) | review/mood-mem | C-AG | session_01UV1SzgwGeesPrLKFMeBNdz | RUNNING | 17/11 18:27Z |
