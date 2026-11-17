@@ -290,7 +290,7 @@ function agTell(R,pl,kh,why,who,interest){const B=BAL.ag.kh2.rd;let n=0;
  for(const id in R.P){if(!/^s\d+$/.test(id))continue;const e=R.P[id][kh];if(!e||e[0]!==pl)continue;const s=servById(+id.slice(1));if(!s||s.out)continue;const m=ownerOf(s);
   if(!m||m===S||m===who||!m.alive||m.out)continue;const it=interest?interest(m):1;if(!(it>0))continue;
   const c=mindPick([["tell",B.tell*cl((s.loyal||0)/100,0,1)*it],["quiet",B.quiet]],s);if(c!=="tell")continue;
-  let kg=kh+B.see;while(kg<J95.KH&&R.P[id][kg]&&!agKhFree(R,id,kg))kg++;/* busy with her own deed (or not hers): she goes when free, never over a deed row (ag-kh2 G9) */const due=kg+B.go;/* OD L1638: she sees at once, reacts the NEXT khắc (her khắc spent going to her master), he hears at the start of the khắc after */
+  let kg=kh+B.see;while(kg<J95.KH&&R.P[id][kg]&&(/^ag_(?!tell$)/.test(R.P[id][kg][1]||"")||AG_NOTFREE.has(R.P[id][kg][1])))kg++;/* busy with her own deed (or not hers): she goes when free, never over a deed row (ag-kh2 G9) */const due=kg+B.go;/* OD L1638: she sees at once, reacts the NEXT khắc (her khắc spent going to her master), he hears at the start of the khắc after */
   if(kg<J95.KH&&R.P[id][kg]&&R.P[id][kg][1]!=="tryst"&&R.P[id][kg][1]!=="meet"){let mp=null;try{mp=R.P["v"+m.id]&&R.P["v"+m.id][kg]?R.P["v"+m.id][kg][0]:palaceOf(m)}catch(e){}R.P[id][kg]=[mp||palaceOf(m),"ag_tell",ledgerId(m),why]}
   agRdLog(R,id,kh,"ag:tell",ledgerId(m),why,pl);n++;AGD.stat.tell=(AGD.stat.tell||0)+1;
   const z=agZ();z.rq=z.rq||[];z.rq.push({key:R.key,due,kg,sid:id,m:ledgerId(m),pl,who:who===S?"me":who&&typeof who==="object"?ledgerId(who):null,why,by:ledgerId(s),kh});if(z.rq.length>B.qMax)z.rq.shift()}
