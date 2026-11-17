@@ -468,3 +468,30 @@ START_CTX ≈ 3 % (estimate; get_session reads 0), limit 28 %, ceiling 60 %.
 | QUICKCHECK | PASS on 54bd9b56 (core gates PASS after one fix: G1 one-core-bind, player Tố lỗi fail now reads BAL.eff.j42.cnvFrame, the key its text prints) · open 1973 ms · old save ok · perf new/live render 185/198, tab 340/306, buổi 867/1113 ms |
 - Tip: review/ag-all 54bd9b56 (pushed). AG-ALL-2 / PART 2b rebases review/ag-all-2 on it; F1 (remaining acts) stays theirs.
 - Not done / notes: favour '!' needs the player's own regard (by design); the ag-all.test perf line is box noise (same spread on 8f7bdd329).
+
+## 19.4 AG-ALL-2 PART 2c2 — NO LIES + 2c leftovers (worker session_01UV1SzhfokEWfWFiRbetFJT, review/ag-all-2 aa92bbf9 on 4b82a0ca)
+PRIORITY #1 CHECK ('nói dối|lie|tin giả|bịa|spyFor|knTell|scout'): OD 3 (L1620, L1627 (4), j43 rule 5 note) | ledger 0 | claims 0 | main: j43 rule 5 "withholds, never lies", j68e/j68h grounding rule | review/* 0. Reused: knTell rule (tell/keep/sell by lòng + nết via mindPick), knBao, kSay/kLine, spyWho, intelLearn, evA, AS_DO, asRun ok flag. START_CTX ≈ 3 % (1M window, context_usage read 0; estimate); rollover at 28 %.
+Owner law: OD 17/11 ~15:25Z point (4) VERBATIM: "Bất kỳ một thông tin nào tới tay tôi đều phải là thông tin thật ... làm cho có ok, bán đứng ok, nhưng mà không được nói dối ... thà là nó không nói ... nếu như mà họ không thành công ... báo cho tôi biết rằng là nô tài có đi dò la nhưng mà không được".
+### Built (jagknow.js; numbers BAL.ag.know)
+| item | what | code |
+|---|---|---|
+| no lies | an errand's finding reaches the master only as the truth. The servant chooses (mindPick by lòng + nết, BAL.ag.know.tell incl. new `late`) to report NOW, report a buổi LATE (S.knQ, lands when the buổi turns, line "chuyện buổi trước…"), SLACK ("làm cho có": no report and the master gains nothing — no chứng cứ, no intel) or SELL it to whoever bought her (the buyer hears the true errand; a scouted buyer learns she is watched: oán). Nothing is ever invented. | knErrPick / knErr / knErrGive / knErrSell / knFlush |
+| failure reported | a failed listen → "có đi nghe ngóng một vòng nhưng chưa nghe được chuyện gì đáng bẩm"; a failed scouting is CAUGHT (BAL.ag.know.scout.caught = 50 %: target oán, "bị bắt gặp") or BACK EMPTY ("có đi dò la X nhưng không dò được gì") — both told as they are (or slacked / late / sold by the same rule). Before, a listen could not fail (ok ignored) and every failed scouting was "caught". Player maid card "Tự đi dò la cho chủ" fails the same two ways. | knListenDo(ok) / knScoutDo / srvCards fail |
+| two-way | the same functions for every master (NPC consorts' servants): loyal → the master gets the chứng cứ; disloyal → nothing. Her own bought spy in a rival palace may sell her that rival's errand ("X vừa sai nô tỳ đi dò la tiểu chủ"). | same |
+| rate (§19.3 item 2) | servant errands were ≈ 30–45 % of servant deeds (6-day bot); now serve .25 (was 1), base .01 (was .1) → 15–17 % (watch / scout / listen), band BAL.ag.know.share [5,20] checked by the test | BAL.ag.know |
+### Checks (aa92bbf9)
+- NEW dev/test/ag-truth.test.js 10/10 PASS (3 of 4 runs; one run failed an over-tight count, loosened): loyal → failure reported as failure naming the real target; failed listen reported; slack → no report / no chứng cứ (40 tries at lòng 0: keep 35, late 3, tell 2, sell 0); late lands next buổi with the same true finding; sell → buyer hears the truth; NPC master same rule (evA count = tell count exactly); 6-day bot: every TIN BÁO item is a real happening / real people, no broken line; every errand finding is about a real living consort; share in band; no page / agent errors.
+- ag-know.test 21/21 PASS; ag-kh2 PASS; one-core-guard PASS; ag-all.test: only "Empress one function" FAIL — the 2b G12 line that already fails on 45d1433e (§19.2), not this part.
+- PERF CPU×4 (scratch harness: same page boot as the tests, CPU throttle ×4, click Qua buổi → 2 rAF, 20 buổi after 2 warm, seeded Math.random; 4 runs per build, seeds 7/11/13/17):
+  | build | buổi median (4 runs) | p95 (4 runs) | mean of medians / p95 |
+  |---|---|---|---|
+  | review/ag-all 8f7bdd32 (r1 base) | 1599 / 1388 / 893 / 1439 | 2221 / 1877 / 1794 / 2065 | 1330 / 1989 |
+  | review/ag-all-2 + 2c2, knowledge ON | 1050 / 1534 / 1331 / 1390 | 1937 / 2223 / 2603 / 1944 | 1326 / 2177 |
+  | same build, knowledge OFF (__knOff) | 1355 / 1690 / 1405 / 1152 | 2108 / 2353 / 2362 / 1910 | 1400 / 2183 |
+  → the knowledge layer costs nothing measurable (ON = OFF in the same build); medians equal to the r1 base; the p95 spread (1794–2603) is box noise and the same with the layer OFF (so any p95 difference vs base is 2b's part or noise, not 2c). No trim needed; the in-page cost stays ≈ +1 ms / buổi (§19.2).
+### NOT changed — for Foreman (owner's "Bất kỳ một thông tin nào" may reach further than servants; brief scoped it to news/informers)
+1. jthaiy.js: a BRIBED physician lies about her pulse (BAL.thy.lie 35 % / lieSelf 20 %) — information reaching her that is false. If OD (4) covers him, the fix is: the bribed physician keeps silent / says "mạch tượng chưa rõ" instead of a false verdict.
+2. j68f / j68h rumour events (rumorPreg, rumorEmpLove, rumorEvidence, rumorSpy, rumorTH, rumorFavor): a named NPC source may spread a FALSE rumour (labelled "Lời đồn", checking reveals the truth). This is a schemer's lie, not a servant's report; kept unless the owner rules otherwise.
+3. Servant "frame" (jagstaff, maid feud): a servant may frame a peer — a scheme between servants, kept.
+### Handover
+Done; nothing left of 2c. Branch tip review/ag-all-2 aa92bbf9 (2b assembles + builds site). Scratch: /home/user/wt/scratch2c2/cpu4.js (CPU×4 harness), rate.js (errand share).
