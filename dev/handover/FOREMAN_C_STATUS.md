@@ -1,5 +1,6 @@
 # FOREMAN_C_STATUS (written ONLY by Foreman C)
 FOREMAN C SESSION ROOT-4 = session_011xDdVSQC3Gf8WhM6WW38QF (opened by ROOT-3 ~08:30Z 17/11) · START_CTX ~6% (~60k of 1M; get_session reads 0, own estimate) → roll over at >= 31%, ceiling 60% · lineage depth 3/8 · own hourly wake (:32) below.
+- 09:37Z C LOOKED W6e a26 m44–m47 ×3 (12): all OK → upload (re-sent earlier OKs: owed 14 + m40–m43).
 - 09:33Z WAKE: ctx 24.6% (limit 31%), depth 3. Running: lead #6 + W4e (a36 ty1 m11–m26 + m22 ×3 redo), W5d (a36 m40+), W6e (a26 m44+); AG3 reviewer QWAu working; no sheet pending.
 - 09:33Z C LOOKED W5d E5 a36 m37-ty3, m38 ×3, m39 ×3, m40-ty1 (8): all OK → upload.
 - 09:31Z C LOOKED W6e a26 m40–m43 ×3 (12): all OK → upload.
