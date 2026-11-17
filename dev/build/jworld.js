@@ -105,7 +105,7 @@ EVD.away={place:w=>"thu",
  tick(w){if(w.x.sub==="chinh"&&now()<w.t1-1){try{log(`Tin quân báo về: ngự giá ${pick(["đã tới biên ải","đóng quân bên sông","giao chiến với giặc","chờ lương thảo"])}.`)}catch(e){}}},
  end(w){const b=B().away,F=(w.x.f||[]).map(byPid).filter(p=>p&&(p===S||p.alive));for(const p of F)ap(p,{sung:b.folSung});let r=`${wName(w)} xong, ngự giá hồi cung.${F.length?` Người theo hầu được thêm ân sủng: ${nmList(F)}.`:""}`;
   if(w.x.sub==="chinh"){const T=T_();if(T){const DT=T.H["Đại tướng quân"];const c=b.chinh.win;const o=cl(Math.round(c[0]+(DT?DT.pow/c[1]+DT.sk/c[2]:0)),b.chinh.winClamp[0],b.chinh.winClamp[1]);
-    if(roll(o)){T.bien=cl(T.bien+b.chinh.winBien,0,100);moodSet(0);r+=` Đại thắng trở về, Biên cương +${b.chinh.winBien}.`;w.x.won=1}
+    if(roll(agOdd(o))){T.bien=cl(T.bien+b.chinh.winBien,0,100);moodSet(0);r+=` Đại thắng trở về, Biên cương +${b.chinh.winBien}.`;w.x.won=1}
     else{T.bien=cl(T.bien+b.chinh.loseBien,0,100);moodSet(3);r+=` Thua trận trở về, Biên cương ${b.chinh.loseBien}; ngài giận dữ.`}}}
   if(w.x.won)worldStart("xa","Thắng trận trở về, ban ân xá");return r},
  card(w){const me=(w.x.f||[]).includes("me");if(!me)return{t:wName(w),who:pEmp(),h:`<p>${w.cause}.</p><p>${w.txt||""}</p>`};
@@ -180,7 +180,7 @@ EVD.su={place:w=>"thu",
  card(w){return{t:"Sứ đoàn vào triều",who:pEmp(),h:`<p>${w.cause}.</p><p>${w.txt||""}</p>`}},
  scene(w){const b=B().su;const ok=meCons()&&rkOf(S)>=b.rank;const o=od(b.show[0]+(S.tai||0)/b.show[1]);
   return{t:"Yến tiếp sứ",who:pEmp(),h:`<p>Sứ thần dâng lễ vật lạ, bá quan ngồi kín hai bên.</p>${ok?"":`<p class="past">Phẩm của ngươi chưa được dự yến; chỉ đứng xa mà xem.</p>`}`,
-   opts:ok?[{n:"Dâng một khúc đàn trong yến",fx:{},x:`${word(o)} · thành: Sủng +${b.showSung}, Danh +${b.showDanh} · hỏng: Danh ${b.failDanh}`,go:()=>{if(roll(o))apply({sung:b.showSung,danh:b.showDanh});else apply({danh:b.failDanh})}},
+   opts:ok?[{n:"Dâng một khúc đàn trong yến",fx:{},x:`${word(o)} · thành: Sủng +${b.showSung}, Danh +${b.showDanh} · hỏng: Danh ${b.failDanh}`,go:()=>{if(roll(agOdd(o)))apply({sung:b.showSung,danh:b.showDanh});else apply({danh:b.failDanh})}},
     {n:"Ngồi yên giữ lễ",fx:{},x:"không được mất gì"}]:[{n:"Đứng xem rồi về",fx:{},x:"không được mất gì"}]}},
  night(w,p){return false}};
 /* 8 ĐẠI THỌ (row 3): the Emperor's 40/50/60… or Thái hậu's 60/70/80 birthday (j71 Tiết Vạn thọ / Thánh thọ days). Reuses FEST days,
@@ -194,7 +194,7 @@ EVD.tho={place:w=>w.x.who==="th"?"tn":"thu",
   return{t:wName(w),who:pEmp(),h:`<p>${w.cause}.</p><p>${w.txt||""}</p>`,opts:meCons()?[
    {n:"Dâng lễ vật quý",fx:{bac:-b.big},x:`thành: Sủng +${b.sungBig}${th?`, Thái hậu +${b.thBig}`:""}`,go:()=>apply(th?{sung:b.sungBig,th:b.thBig}:{sung:b.sungBig})},
    {n:"Dâng lễ vật vừa phải",fx:{bac:-b.mid},x:`thành: Sủng +${b.sungMid}`,go:()=>apply({sung:b.sungMid})},
-   {n:"Tự tay làm lễ vật",fx:{suc:-b.makeSuc},x:`${word(o)} · thành: Sủng +${b.sungBig} · hỏng: không ai để ý`,go:()=>{if(roll(o))apply({sung:b.sungBig})}}]:undefined}},
+   {n:"Tự tay làm lễ vật",fx:{suc:-b.makeSuc},x:`${word(o)} · thành: Sủng +${b.sungBig} · hỏng: không ai để ý`,go:()=>{if(roll(agOdd(o)))apply({sung:b.sungBig})}}]:undefined}},
  night(w,p){return false}};
 /* 9 THIÊN TƯỢNG (row 7): eclipse / comet read by Khâm Thiên giám. Reuses the j7 comet card (it names her or a rival) — it leaves the weekly
    random pool and comes only with this window (LUẬT SỬA CẢ NHÓM); j3 mood; no feasts for the window. */
@@ -271,7 +271,7 @@ function wCourt(){const T=T_(),M=S.wMM;if(!T||!M||M.done)return;M.done=1;const b
  if(M.k==="cong"&&T.bien>=b.su.bien)worldStart("su","Sứ thần các nước vào triều cống");
  if((M.k==="lut"||M.k==="han")&&M.fail&&T.kho<b.dis.kho)worldStart("dis",`${M.k==="lut"?"Lũ lụt ở Giang Nam":"Hạn hán miền bắc"}, cứu tế chậm trễ, kho lúa cạn`,{x:{sub:M.k}});
  if(M.k==="giac"&&M.fail&&T.bien<b.away.chinh.bien){const c=b.away.chinh;const z=wZ();const ok=(S.emp.age||0)<=c.age&&!(S.emp.ill&&S.emp.ill.st>=2)&&(z.last.away_chinh==null||now()-z.last.away_chinh>=c.gapY*36);
-  if(ok&&roll(c.p)&&worldStart("away","Giặc phá biên ải, Hoàng thượng quyết thân chinh",{len:b.away.len.chinh,x:{sub:"chinh"}}))z.last.away_chinh=now()}
+  if(ok&&roll(agCap(c.p))&&worldStart("away","Giặc phá biên ải, Hoàng thượng quyết thân chinh",{len:b.away.len.chinh,x:{sub:"chinh"}}))z.last.away_chinh=now()}
  const d=wZ().H&&wZ().H.find(h=>h.k==="dis");if(T.kho<b.dich.kho&&(worldWin("dis")||(d&&now()-d.t1<b.dich.after))&&roll(b.dich.p))worldStart("dich","Đói kém kéo dài, dịch bệnh nổi lên");}
 function wCalendar(){const b=B(),T=T_(),z=wZ(),y=S.year,m=S.month,t=S.tuan||0,E=S.emp||{};const ill=!!(E.ill&&E.ill.st>=2);
  /* tuyển tú: the KC.ty clock, every 3 years after the player's own (her home road ends at KC.ty) */
@@ -279,10 +279,10 @@ function wCalendar(){const b=B(),T=T_(),z=wZ(),y=S.year,m=S.month,t=S.tuan||0,E=
  /* tế Giao every 3 years before Đông chí */
  if(m===b.away.te.month&&t===0&&y%b.away.te.every===0&&!ill)worldStart("away","Hoàng thượng ra đàn Nam Giao tế trời",{len:b.away.len.te,x:{sub:"te"},cd:0});
  /* thu săn: autumn, peace at the border, he is well; decided the tuần before (the jpet hunt gifts at the month's start read z.sanY) */
- {const c=b.away.san;const pm=c.month===1?12:c.month-1;if(m===pm&&t===2)z.sanY=!ill&&(!T||T.bien>=c.bien)&&(E.age||0)<=c.age&&roll(c.p)?(c.month===1?y+1:y):0;
+ {const c=b.away.san;const pm=c.month===1?12:c.month-1;if(m===pm&&t===2)z.sanY=!ill&&(!T||T.bien>=c.bien)&&(E.age||0)<=c.age&&roll(agCap(c.p))?(c.month===1?y+1:y):0;
   if(m===c.month&&t===0&&z.sanY===y)worldStart("away","Mùa thu, Hoàng thượng đi săn ở Mộc Lan",{len:b.away.len.san,x:{sub:"san"},cd:0})}
  /* tuần du: spring of a good year */
- {const c=b.away.tuan;if(m===c.month&&t===0&&!ill&&T&&T.kho>=c.kho&&T.bien>=c.bien&&(E.age||0)<=c.age&&(z.last.away_tuan==null||now()-z.last.away_tuan>=c.gapY*36)&&roll(c.p)){
+ {const c=b.away.tuan;if(m===c.month&&t===0&&!ill&&T&&T.kho>=c.kho&&T.bien>=c.bien&&(E.age||0)<=c.age&&(z.last.away_tuan==null||now()-z.last.away_tuan>=c.gapY*36)&&roll(agCap(c.p))){
   if(worldStart("away","Bốn bề yên ổn, Hoàng thượng tuần du phương nam",{len:b.away.len.tuan,x:{sub:"tuan"},cd:0}))z.last.away_tuan=now()}}
  /* đại thọ: milestone birthdays on the existing Vạn thọ / Thánh thọ days */
  {const c=b.tho;const f=(typeof FEST!=="undefined")?FEST:{};const vt=f.vantho,tt=f.thanhtho;

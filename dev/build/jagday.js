@@ -98,7 +98,7 @@ function agDayList(){const L=[];if(S.emp)L.push([S.emp,"emp","emp"]);if(!S.thDea
  for(const f of AGDRAW){try{for(const x of (f()||[]))L.push(x)}catch(e){agdErr("drawReg",e)}}return L}
 function agIntentOf(id){const D=agDz();const I=D.I&&D.I[id];return I&&I.g||[]}
 function agIntent(p,id){const D=agDz();D.I=D.I||{};let N;try{N=agNeedsG(p)}catch(e){N={}}const MF=agMoodF(p);const L=[];for(const n in N)if(N[n]>0)L.push([n,N[n]*(MF[n]||1)]);
- const g=[];if(L.length){const a=agPw(L);g.push(a);const L2=L.filter(x=>x[0]!==a);if(L2.length&&roll(BAL.ag.day.two))g.push(agPw(L2))}
+ const g=[];if(L.length){const a=agPw(L);g.push(a);const L2=L.filter(x=>x[0]!==a);if(L2.length&&roll(agCap(BAL.ag.day.two)))g.push(agPw(L2))}
  D.I[id]={g,why:g.map(n=>AGWHY[n]||n).join(", ")};try{D.T[id]=agTop(N)}catch(e){}return D.I[id]}
 function agDayDraw(){const t0=performance.now();const D=agDz();D.d=wk();D.P={};D.T={};D.I={};D.rb=null;AGD.stat.draw++;const b0=agDayB();
  const L=agDayList();for(const [p,id,kind] of L){try{agIntent(p,id);agDrawPerson(p,id,b0,kind,b0)}catch(e){agdErr("draw0",e)}}D.rb=wk()+"-"+b0;
@@ -112,7 +112,7 @@ function agReplanB(){const D=agDz();if(D.d!==wk())return;const b=agDayB();if(D.r
   if(kind==="consort"&&D.I&&D.I[id]){const v=p;let ill=false;try{ill=!!illOf(v)}catch(e){}const prev=D.P[id]&&D.P[id][b-1];
    /* LIFE: plans broken by rain on a garden plan, or by falling ill: she always re-thinks her day then */
    if((rain&&prev&&prev.pl==="vuon")||(ill&&!(D.ill||{})[id])){(D.ill=D.ill||{})[id]=ill?1:0;agIntent(v,id);AGD.stat.replan++}
-   else{let ch=0;try{ch=agTop(agNeedsG(v))!==D.T[id]?R.need:0}catch(e){}if(T[id])ch=Math.max(ch,R.touch);if(ch&&roll(ch)){agIntent(v,id);AGD.stat.replan++}else AGD.stat.keep++}}
+   else{let ch=0;try{ch=agTop(agNeedsG(v))!==D.T[id]?R.need:0}catch(e){}if(T[id])ch=Math.max(ch,R.touch);if(ch&&roll(agCap(ch))){agIntent(v,id);AGD.stat.replan++}else AGD.stat.keep++}}
   else if(!D.I||!D.I[id])agIntent(p,id);
   agDrawPerson(p,id,b,kind,b)}catch(e){agdErr("buoi",e)}}
  z.rp={};const ms=performance.now()-t0;AGD.ms.push(ms);if(AGD.ms.length>60)AGD.ms.shift()}
@@ -243,7 +243,7 @@ function agSeeNpc(p,doer){if(!agKhOn()||!BAL.ag.kh2.see.on)return;const R=agRec(
   if(hostile&&t&&t!==S&&typeof t==="object"&&TW.mediate&&aff(w,t)>=BAL.ag.goal.friend&&(!TW.mediate.req||TW.mediate.req(w,t))&&twCanPay(w,"mediate"))O.push(["mediate",A.w.mediate*agMW(w,"help")]);
   AGD.stat.seeN=(AGD.stat.seeN||0)+1;const c=mindPick(O.filter(x=>x[1]>0),w);if(!c||c==="ignore")continue;
   let r="";AG.inTick++;try{
-   if(c==="hear"){if(roll(agHearOf(w))){if(hostile&&dv)evA(w,dv,A.ev);r=`${w.name} nghe lén được ${dv?dv.name:""} ${p.act}`}else{if(dv)affAdd(dv,w,-B.caught)}}
+   if(c==="hear"){if(roll(agOdd(agHearOf(w)))){if(hostile&&dv)evA(w,dv,A.ev);r=`${w.name} nghe lén được ${dv?dv.name:""} ${p.act}`}else{if(dv)affAdd(dv,w,-B.caught)}}
    else if(c==="join")r=twDo(w,p.k==="thHH"?queenP():t,p.k)||"";
    else if(c==="mediate")r=twDo(w,t,"mediate")||""}catch(e){agdErr("seeNpc",e)}finally{AG.inTick--}
   row[kh]=[p.pl,"ag_see:"+c,p.id,p.act||""];AG.stat.witNpc++;const SS=AGD.stat.see=AGD.stat.see||{};SS[c]=(SS[c]||0)+1;

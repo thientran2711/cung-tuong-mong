@@ -6,7 +6,7 @@ It merges each kind into BAL.ag.mg2.cal.k in dev/build/jbal2.js (a kind already 
 Rebuild after: python3 dev/build/assemble.py (and the site build)."""
 import re, sys, json, os
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-P = os.path.join(ROOT, 'dev/build/jbal2.js')
+P = os.environ.get('MGCAL_BAL') or os.path.join(ROOT, 'dev/build/jbal2.js')  # MGCAL_BAL: a copy (tests)
 def main():
     if len(sys.argv) < 2 or not sys.argv[1].strip().startswith('CTM-CAL'):
         sys.exit(__doc__)

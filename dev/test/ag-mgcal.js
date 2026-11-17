@@ -44,13 +44,14 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
   for(let i=0;i<5;i++){await sleep(150);o.tiers.push(KG82.tier&&KG82.tier.word);const g=document.getElementById("kg82go");if(!g){o.noGo=i;break}g.click();await sleep(150);document.getElementById("kg82ok").click()}
   await sleep(200);const txt=(document.getElementById("kg82")||{}).textContent||"";o.res=/Mức tay của người/.test(txt);o.code=/CTM-CAL dan:/.test(txt);
   const R=JSON.parse(localStorage.getItem("ctm-mgcal")||"{}");o.rec=R.dan&&R.dan.raws;o.b=R.dan&&R.dan.b;o.shared=mgCalBand("dan").sig===BAL.ag.mg2.hand.lo+"/"+BAL.ag.mg2.hand.hi;
-  o.pct=/%/.test(txt);document.getElementById("kg82ok").click();await sleep(150);o.back=document.querySelectorAll("[data-mgcal-k]").length;kg82Close();try{kg82Play=k0}catch(e){}return o});
+  o.only=mgCalCode().split(" ").length===2;o.pct=/%/.test(txt);document.getElementById("kg82ok").click();await sleep(150);o.back=document.querySelectorAll("[data-mgcal-k]").length;{const t2=(document.getElementById("kg82")||{}).textContent||"";o.rows=/Đã thử 1\/\d+ môn/.test(t2)&&/Chưa thử/.test(t2)}kg82Close();try{kg82Play=k0}catch(e){}return o});
  console.log(JSON.stringify(u));
  ok(u.frame&&u.btns===u.kinds.length&&u.kinds.length>=10,'5 the kit game frame opens with one button per mini-game kind',{btns:u.btns,kinds:u.kinds.length});
  ok(u.tiers.length===5&&u.tiers[0]==="Dễ"&&u.tiers[4]==="Khó","5 five rounds, easy → hard",u.tiers);
  ok(u.res&&u.code&&u.rec&&u.rec.join()==="9,8,7,6,5"&&u.b!=null&&!u.pct,'5 result rows + «CTM-CAL» code; record kept on her device; no %',{rec:u.rec,b:u.b});
  ok(u.shared,'5 her device does not change the shared band (one core: only BAL.ag.mg2.cal.k)',u.shared);
- ok(u.back===u.btns,'5 «Thử môn khác» returns to the kind list',u.back);
+ ok(u.back===u.btns&&u.rows,'5 «Thử môn khác» returns to the kind list; kit rows Đã thử 1/N · Chưa thử',{back:u.back,rows:u.rows});
+ ok(u.only,'5 one kind at a time: the code carries only the kinds done',u.only);
  /* 5b every kind's real board starts from the test (1.2 s each), no errors */
  const e0=errs.length;const sm=await p.evaluate(async()=>{const sleep=t=>new Promise(r=>setTimeout(r,t));const bad=[];for(const k of mgCalKinds()){try{mgCalRun(k);await sleep(120);
    const g=document.getElementById("kg82go");if(!g){bad.push(k+":nogo");continue}g.click();await sleep(1200);if(!KG82.run&&KG82.phase!=="result")bad.push(k+":norun");kg82Close()}catch(e){bad.push(k+":"+e.message)}}return bad});

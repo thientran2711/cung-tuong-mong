@@ -41,7 +41,8 @@ function stat(k){const L=rec()[k],c=C().k||{};const a=L?`đã thử, tay ${mgWor
 function pick(){const ks=mgCalKinds();if(typeof kg82Open!=="function")return;
  const d=kg82Open({art:"Thử tay",title:"Tài nghệ các môn",how:`Mỗi môn ${C().d.length} hồi, hồi sau khó hơn hồi trước. Phần của người thành mức chuẩn cho tay nghề của mọi người trong cung.`,round:"Môn",roundV:`${ks.length}`});
  if(!d)return;const box=kg82Box();const r=rec();
- box.innerHTML=`<h4 class="kpst">Chọn môn</h4>`+
+ const dn=ks.filter(k=>r[k]),nd=ks.filter(k=>!r[k]);/* s34 MUST: one kind at a time, any order; đã thử / chưa thử in kit rows */
+ box.innerHTML=`<h4 class="kpst">Đã thử ${dn.length}/${ks.length} môn</h4>`+kg82Rows([["Đã thử",dn.length?dn.map(k=>`${nm(k)} (${mgWord(r[k].b)})`).join(", "):"chưa môn nào","t"],["Chưa thử",nd.length?nd.map(nm).join(", "):"đã thử đủ","n"]])+`<h4 class="kpst">Chọn môn</h4>`+
   `<div class="kg82act">${ks.map(k=>`<button class="${kg82Btn(!!r[k])}" data-mgcal-k="${k}">${nm(k)}<small>${stat(k)}</small></button>`).join("")}</div>`+
   (Object.keys(r).length?`<h4 class="kpst">Mã kết quả</h4>`+kg82Rows([["Mã",mgCalCode(r),"n"]])+`<div class="kg82act"><button class="${kg82Btn(true)}" id="mgcal-copy">Chép mã</button></div>`:"")+
   `<div class="kg82act"><button class="${kg82Btn(true)}" id="mgcal-x">Thôi</button></div>`;

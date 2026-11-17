@@ -101,7 +101,7 @@ function asLove(s){const L=[];s.mt=s.mt||{};const B=asB();
 function asRisk(s){return srvRiskOf(asHome(ownerOf(s)),S.mat||0,asFriends(s),s.tamco)}/* one table with the player maid (j42 srvRiskOf, BAL.srvRisk) */
 /* ---------- the shared execution (the player's card: cost, roll at its odds, gain or loss, công lao, then what the act does) ---------- */
 function asSee(m,t){try{return m===S||t===S||(S.mat||0)>=BAL.mline.seeMat}catch(e){return false}}
-function asRun(s,o){const m=ownerOf(s);if(!m)return"";const A=SRVA[o.sk];asC(s,o.sk);asAp(s,o.c);const ok=o.p>=100||roll(o.p);
+function asRun(s,o){const m=ownerOf(s);if(!m)return"";const A=SRVA[o.sk];asC(s,o.sk);asAp(s,o.c);const ok=o.p>=100||roll(agOdd(o.p));
  asAp(s,ok?srvWa(o.sk,s,m):(A.l||{}));if(ok&&A.mp)servMerit(s,A.mp);let r="";
  try{r=(AS_DO[o.sk]||(()=>""))(s,m,o,ok)||""}catch(e){console.error("jagstaff "+o.sk,e)}
   return r}
@@ -127,8 +127,8 @@ const AS_DO={
   x.af[s.sid]=cl((x.af[s.sid]||0)+SRVA.frame.afL,-100,100);return""},
  learn(s,m,o,ok){return""},
  hail(s,m,o){s.mt[o.man.id]=(s.mt[o.man.id]||0)+SRVA.hail.af/2;return""},
- flirt(s,m,o,ok){if(ok)s.mt[o.man.id]=(s.mt[o.man.id]||0)+SRVA.flirt.tinh;if(roll(asRisk(s)/SRVA.flirt.seen))s.rumor=(s.rumor||0)+1;return""},
- token(s,m,o,ok){if(ok)s.mt[o.man.id]=(s.mt[o.man.id]||0)+SRVA.token.tinh;if(roll(asRisk(s)/SRVA.token.seen))s.rumor=(s.rumor||0)+1;return""},
+ flirt(s,m,o,ok){if(ok)s.mt[o.man.id]=(s.mt[o.man.id]||0)+SRVA.flirt.tinh;if(roll(agCap(asRisk(s)/SRVA.flirt.seen)))s.rumor=(s.rumor||0)+1;return""},
+ token(s,m,o,ok){if(ok)s.mt[o.man.id]=(s.mt[o.man.id]||0)+SRVA.token.tinh;if(roll(agCap(asRisk(s)/SRVA.token.seen)))s.rumor=(s.rumor||0)+1;return""},
  tryst(s,m,o,ok){const man=o.man;if(ok){s.mt[man.id]=(s.mt[man.id]||0)+SRVA.tryst.tinh;s.manLove=man.id;return""}return asCaught(s,m,man)},
  vow(s,m,o,ok){if(!ok)return"";if(o.man){s.vow=o.man.id;s.manLove=o.man.id;return""}const x=o.t;if(x&&!x.lover){s.lover=x.sid;x.lover=s.sid}return""}};
 /* "Hẹn gặp riêng" caught: the player maid's own road for an NPC maid (was maidLoveMonth roll 4: expelled 30 / Tân Giả khố; the man exiled 35) */
@@ -161,7 +161,7 @@ function asMonth(){if(!asOn())return"";let ev="";const B=asB();
  for(const p of consorts()){if(!p||!p.staff)continue;const sch=(p.schemes||0)>(p.schLast||0);
   for(const s of p.staff.slice()){if(s.sid==null)continue;asSt(s);asAp(s,{bac:CNV_WAGE[Math.min(CNV_WAGE.length-1,srk(s))]||1,suc:B.monthSuc});
    if(sch&&roll(B.secSee))s.sec=(s.sec||0)+1;/* she sees her master's schemes at home (the player maid's "Biết chuyện của chủ") */
-   if(s.betray&&roll(nv(p,"betrayFind"))){s.betray=null;if(roll(SRVA.betray.kill)){asOut(s,"dead");if(asSee(p))ev+=`${p===S?"Ngươi":p.name} biết ${s.name} mật báo chuyện trong cung, sai đánh chết. `}else{asOut(s,"tgk");if(asSee(p))ev+=`${p===S?"Ngươi":p.name} biết ${s.name} mật báo, đày xuống Tân Giả khố. `}continue}
+   if(s.betray&&roll(agCap(nv(p,"betrayFind")))){s.betray=null;if(roll(SRVA.betray.kill)){asOut(s,"dead");if(asSee(p))ev+=`${p===S?"Ngươi":p.name} biết ${s.name} mật báo chuyện trong cung, sai đánh chết. `}else{asOut(s,"tgk");if(asSee(p))ev+=`${p===S?"Ngươi":p.name} biết ${s.name} mật báo, đày xuống Tân Giả khố. `}continue}
    /* Ban gả (j42 cnvGrant: the same trigger as the player maid's), then her own choice: Tạ ơn, xuất giá / Xin ở lại */
    if(s.role==="maid"&&(s.age||20)>=18&&(s.loyal>=BAL.srvGrant.tin)&&srk(s)>=1&&roll(BAL.srvGrant.base+(s.vow?BAL.srvGrant.bond:0))){const N=asNeeds(s);const c=mindPick([["stay",BAL.ag.routine/BAL.ag.unit],["wed",(N.love+(s.vow?B.vowW:0))*BAL.ag.needW]],s);asC(s,c==="wed"?"grantWed":"grantStay");
     if(c==="wed"){s.wed=1;asOut(s,"wed");const man=s.vow&&manById(s.vow);if(asSee(p))ev+=`${s.name}, cung nữ của ${NM(p)}, được chủ ban gả${man?" cho "+man.name:""}. `;continue}else s.loyal=cl(s.loyal-BAL.srvGrant.stayLoy,0,100)}

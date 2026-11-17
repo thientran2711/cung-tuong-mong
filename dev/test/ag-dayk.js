@@ -35,6 +35,7 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
   T.K["t:end"]={id:"t:end",k:"deed",place:"vuon",b:S.buoi||0,k0:0,k1:-1,who:[],line:"Tai mắt báo: ở Ngự hoa viên Lan quý nhân đang ngắm hoa.",by:"mat",seen:0,ended:0};
   const L=tinBaoList();const a=L.find(x=>x.id==="t:run"),e=L.find(x=>x.id==="t:end");o.tb={run:a&&{ended:a.ended,line:a.line},end:e&&{ended:e.ended,line:e.line}};
   const h={k:"vuon",id:"deed",x:{pid:"nope",vid:1},w0:[0,1]};o.win=knWin(h);
+  o.odds=[agOdd(120),agOdd(-3),agOdd(50),agCap(1.5),agCap(140)];o.lohi=[BAL.odds.lo,BAL.odds.hi];
   return o});
  console.log(JSON.stringify(r));
  ok(r.g.b0[0]&&r.g.b0[1]&&!r.g.b0[2]&&!r.g.b0[3]&&!r.g.off,'1 NPC day gate: a late deed may run on into the next buổi (not past it, not starting after the buổi); spill 0 = this buổi only',r.g);
@@ -45,5 +46,6 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
  ok(!r.her.eCan&&/khắc/.test(r.her.eLock||""),'3 her side: evening, same → locked, the reason in words',{eCan:r.her.eCan,eLock:r.her.eLock});
  ok(r.tb.run&&r.tb.run.ended===0&&/đang/.test(r.tb.run.line)&&r.tb.end&&r.tb.end.ended===1&&/vừa/.test(r.tb.end.line)&&/đã xong|đã qua/.test(r.tb.end.line)&&!/%/.test(r.tb.end.line),'4 TIN BÁO: an item about an ended happening stays, ended = 1, past-tense line + "đã xong"; a running one ended 0',r.tb);
  ok(r.win&&r.win[0]===0&&r.win[1]===1,'4 a landed deed keeps its window (knWin), not "now"',r.win);
+ ok(r.odds[0]===r.lohi[1]&&r.odds[1]===r.lohi[0]&&r.odds[2]===50&&r.odds[3]===1.5&&r.odds[4]===r.lohi[1],'6 nothing is ever 100 % (owner 17/11 ~17:00Z): act odds agOdd clamp to BAL.odds lo..hi; chance rolls agCap only capped (a rare event stays rare)',{odds:r.odds,lohi:r.lohi});
  ok(!errs.length,'5 no page errors',errs.slice(0,5));
  await b.close();process.exit(res.every(x=>x)?0:1)})().catch(e=>{console.error(e);process.exit(1)});

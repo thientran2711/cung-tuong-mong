@@ -27,6 +27,11 @@ function agErr(w,e){try{AG.errs.push(w+": "+(e&&e.message||e));if(AG.errs.length
 function agGuest(){try{return !!(window.COOPW&&COOPW.on&&COOPW.seat!=="a")}catch(e){return false}}
 function agOn(){try{return !!(typeof S!=="undefined"&&S&&!S.dead&&BAL.ag&&BAL.ag.on&&!window.__agOff&&!agGuest())}catch(e){return false}}
 function agOwn(k){return !!(BAL.ag&&BAL.ag.own.includes(k))}
+/* AG-ALL-2d2 · NOTHING IS EVER 100 % (owner 17/11 ~17:00Z, global): every odds of an act (her or an NPC: success, being caught, persuading) is clamped
+   to BAL.odds.lo..hi (the j13 ladI pattern); a chance / frequency roll (a rare gift, a re-plan, an illness) is only capped at BAL.odds.hi (never sure;
+   its floor is not raised, so a rare event stays rare). Every AG-ALL-2 roll of a computed number goes through one of these two. */
+function agOdd(o){return cl(Math.round(+o||0),BAL.odds.lo,BAL.odds.hi)}
+function agCap(o){return Math.min(+o||0,BAL.odds.hi)}
 function agZ(){const z=S.ag=S.ag||{};z.pend=z.pend||[];z.log=z.log||[];return z}
 function agKey(){return wk()+"-"+(S.buoi||0)}
 function agRec(){try{return j95on()&&S.roster&&S.roster.key===j95key()?S.roster:null}catch(e){return null}}
@@ -222,7 +227,7 @@ function agKhLock(){const k=BAL.ag.kh;return typeof can==="function"&&!can(k)?(t
 function agSpendKh(){const k=BAL.ag.kh;if(!can(k))return false;spend(k);return true}
 function agReact(p,v,t){const O=[];const B=BAL.ag.wit;const harm=AGHOST.has(p.k)||p.k==="fakeIll"||p.k==="fakePreg";const o=agHearO();const kh=BAL.ag.kh;const lock=agKhLock();
  O.push({n:"Nghe lén",r:"hear",fx:{},x:`${word(o)} · tốn: ${kh} khắc · thành: biết rõ nàng ${p.act} vì đâu${harm?` · chứng cứ về nàng ${balSg(BAL.eff.jagent.evGo)}`:""} · hỏng: nàng bắt gặp, nàng quý ngươi -${B.caught}`,
-  go:()=>{if(!agSpendKh()){agLand(p);return}if(roll(o)){noteAdd(v.id,`nghe lén: nàng ${p.act} — ${p.why}`);if(harm)evA(S,v,BAL.eff.jagent.evGo);log(`Ngươi nghe lén: ${v.name} ${p.act}, vì ${p.why}.${harm?` Chứng cứ về nàng ${balSg(BAL.eff.jagent.evGo)}.`:""}`)}
+  go:()=>{if(!agSpendKh()){agLand(p);return}if(roll(agOdd(o))){noteAdd(v.id,`nghe lén: nàng ${p.act} — ${p.why}`);if(harm)evA(S,v,BAL.eff.jagent.evGo);log(`Ngươi nghe lén: ${v.name} ${p.act}, vì ${p.why}.${harm?` Chứng cứ về nàng ${balSg(BAL.eff.jagent.evGo)}.`:""}`)}
    else{affAdd(v,S,-B.caught);log(`${v.name} bắt gặp ngươi đứng nghe lén.`)}agLand(p)}});
  const D=TW[p.k],J=AGJOIN[p.k];if(D&&J&&!(typeof isSrv==="function"&&isSrv())&&(!D.req||D.req(S,p.k==="thHH"?queenP():t))&&twCanPay(S,p.k)&&!(p.k==="thHH"&&queenP()===S)){const oj=D.o?D.o(S,t):100;const c=twCost(p.k);
   const ct=Object.keys(c).map(f=>`${(typeof NAMES==="object"&&NAMES[f])||(typeof HXN==="object"&&HXN[f])||f} ${c[f]}`).join(", ");
@@ -245,7 +250,7 @@ function agSeeHer(k,t,joined){if(!agOn())return;const H=agHereKh();if(!H)return;
   const c=mindPick([["ignore",B.w.ignore],["hear",hu],["join",ju*B.w.join]],v);AG.stat.witNpc++;
   const why=c==="join"?"thấy ngươi làm nên cũng làm theo":c==="hear"?`để ý ngươi (thù ghét ${Math.round(ho)})`:"";
   if(c!=="ignore")agUse(v);/* the reaction IS her deed of this buổi (same rule as the player's khắc) */
-  if(c==="hear"){const o=odA(v,B.hear);const zz=j95z();if(roll(o)){zz.meK[v.id]={k:H.k,c:j95c(),w:wk()};noteAdd(v.id,"nàng để ý chỗ ngươi hay lui tới")}else{affAdd(S,v,-B.caught);log(`Ngươi bắt gặp ${v.name} đứng nghe ngóng.`)}}
+  if(c==="hear"){const o=odA(v,B.hear);const zz=j95z();if(roll(agOdd(o))){zz.meK[v.id]={k:H.k,c:j95c(),w:wk()};noteAdd(v.id,"nàng để ý chỗ ngươi hay lui tới")}else{affAdd(S,v,-B.caught);log(`Ngươi bắt gặp ${v.name} đứng nghe ngóng.`)}}
   else if(c==="join"){AG.inTick++;let r="";try{r=twDo(v,k==="thHH"?queenP():t,k)||""}finally{AG.inTick--}if(r)log(`${r}.`)}
   if(c!=="ignore"){const L={w:wk(),b:S.buoi||0,kh:H.kh,id:"v"+v.id,k:"see:"+c,t:"me",pl:H.k,why};z.log.push(L);if(z.log.length>60)z.log.shift();
    try{const A=H.R.acts=H.R.acts||[];A.push({id:"v"+v.id,kh:H.kh,k:"ag:see:"+c,t:"me",why,ok:1,ag:1});if(A.length>60)A.shift()}catch(x){}}}}

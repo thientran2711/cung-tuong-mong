@@ -28,7 +28,7 @@ const P3C={
     const who=typeof j78Who==="function"?j78Who(t):t.name;if(p===S)log(`${who} bị Thái hậu quở trách, mất sủng.`);return `${p.name} kể tội ${t.name} với Thái hậu; ${t.name} bị quở trách, mất sủng`}}},
  treat:p=>({n:"Xin chữa bệnh",c:{...BAL.ag.par3.treat.c},o:100,x:illName(p),run:()=>treat(p,"ty")})};
 /* run one card for an NPC: the player's runOpt order (cost, odds, gain or loss, then go / run) */
-function p3Run(v,C,why){if(!C||C.lock)return"";if(!agcCan(v,C.c))return"";agcPay(v,C.c);const o=C.o==null?100:C.o;const ok=o>=100||roll(o);p3Ap(v,ok?C.w:C.l);let r="";
+function p3Run(v,C,why){if(!C||C.lock)return"";if(!agcCan(v,C.c))return"";agcPay(v,C.c);const o=C.o==null?100:C.o;const ok=o>=100||roll(agOdd(o));p3Ap(v,ok?C.w:C.l);let r="";
  try{if(ok&&C.go)r=C.go()||"";if(C.run)r=C.run()||r}catch(e){agdErr("par3:"+why,e)}AG3.stat.land++;AG3.stat.by[why]=(AG3.stat.by[why]||0)+1;
  return r?String(r).replace(/<[^>]+>/g,"").replace(/\.\s*$/,""):`${v.name} ${C.n.charAt(0).toLowerCase()+C.n.slice(1)}${ok?"":" nhưng không thành"}`}
 function p3Kc(C){try{return Math.max(1,cardCost(C))}catch(e){return 1}}
@@ -116,15 +116,15 @@ const P3T={
  health:(p,v)=>{const T=BAL.talk,f=p3ChatF(p,v),n=Math.max(1,Math.round(T.health*f));return{n:"Hỏi han sức khỏe",o:100,x:`nàng quý ngươi +${n}`,
   run:()=>{affAdd(v,p,n);p3ChatMark(p,v);return p===S?`${v.name} cảm động. Nàng quý ngươi +${n}.`:`${p.name} hỏi han sức khỏe ${p3Who(v)}; ${p3Who(v)} quý ${p.name} +${n}`}}},
  praise:(p,v)=>{const T=BAL.talk,f=p3ChatF(p,v),n=Math.max(1,Math.round(nv(v,"praise")*f)),o=talkPraiseO(p);return{n:"Khen tài nghệ nàng",o,x:`nàng quý ngươi +${n}`,
-  run:()=>{p3ChatMark(p,v);if(roll(o)){affAdd(v,p,n);return p===S?`${v.name} tươi cười. Nàng quý ngươi +${n}.`:`${p.name} khen tài nghệ ${p3Who(v)}; ${p3Who(v)} quý ${p.name} +${n}`}
+  run:()=>{p3ChatMark(p,v);if(roll(agOdd(o))){affAdd(v,p,n);return p===S?`${v.name} tươi cười. Nàng quý ngươi +${n}.`:`${p.name} khen tài nghệ ${p3Who(v)}; ${p3Who(v)} quý ${p.name} +${n}`}
    affAdd(v,p,-T.praiseFail);return p===S?`${v.name} cho là ngươi giả lả. Nàng quý ngươi -${T.praiseFail}.`:`${p.name} khen tài nghệ ${p3Who(v)}, bị cho là giả lả`}}},
  gossip:(p,v,third)=>{const T=BAL.talk,G=T.gossip,f=p3ChatF(p,v),n=Math.max(1,Math.round(G.hit*f));return{n:`Bàn tán về ${third.name}`,o:100,
   x:aff(v,third)<0?`nàng ghét người này, hợp chuyện: nàng quý ngươi +${n}`:`kèm: nàng quý ngươi -${G.miss} · nàng có thể mách lại`,
   run:()=>{p3ChatMark(p,v);if(aff(v,third)<0){affAdd(v,p,n);oanAdd(v,third,G.oan);return p===S?`Hai người to nhỏ chuyện ${third.name}. Nàng quý ngươi +${n}.`:`${p.name} và ${p3Who(v)} to nhỏ chuyện ${p3Who(third)}`}
-   affAdd(v,p,-G.miss);if(roll(G.tell)){oanAdd(third,p,G.tellOan);return p===S?`${v.name} đem lời ngươi kể lại với ${third.name}. ${third.name} oán ngươi +${G.tellOan}.`:`${p3Who(v)} đem lời ${p.name} bàn tán kể lại với ${p3Who(third)}`}
+   affAdd(v,p,-G.miss);if(roll(agCap(G.tell))){oanAdd(third,p,G.tellOan);return p===S?`${v.name} đem lời ngươi kể lại với ${third.name}. ${third.name} oán ngươi +${G.tellOan}.`:`${p3Who(v)} đem lời ${p.name} bàn tán kể lại với ${p3Who(third)}`}
    return p===S?`${v.name} lảng sang chuyện khác. Nàng quý ngươi -${G.miss}.`:`${p.name} bàn tán về ${p3Who(third)}, ${p3Who(v)} lảng sang chuyện khác`}}},
  secret:(p,v)=>{const T=BAL.talk,f=p3ChatF(p,v),n=Math.max(1,Math.round(T.secret*f));return{n:"Chia sẻ bí mật",o:100,x:`nàng quý ngươi +${n}${v.malice>BAL.talk.secretMal?" · nàng có thể nắm thóp ngươi":""}`,
-  run:()=>{p3ChatMark(p,v);affAdd(v,p,n);if(v.malice>BAL.talk.secretMal&&roll(BAL.talk.secretGrab)){evA(v,p,BAL.ag.ev.one);return p===S?`${v.name} lắng nghe chăm chú, ghi nhớ từng lời. Nàng quý ngươi +${n}.`:`${p.name} chia sẻ bí mật với ${p3Who(v)}; ${p3Who(v)} ghi nhớ từng lời`}
+  run:()=>{p3ChatMark(p,v);affAdd(v,p,n);if(v.malice>BAL.talk.secretMal&&roll(agCap(BAL.talk.secretGrab))){evA(v,p,BAL.ag.ev.one);return p===S?`${v.name} lắng nghe chăm chú, ghi nhớ từng lời. Nàng quý ngươi +${n}.`:`${p.name} chia sẻ bí mật với ${p3Who(v)}; ${p3Who(v)} ghi nhớ từng lời`}
    return p===S?`${v.name} cũng kể chuyện riêng. Nàng quý ngươi +${n}.`:`${p.name} và ${p3Who(v)} kể chuyện riêng cho nhau`}}}};
 function p3Third(p,v){return liveRivals(true).filter(x=>x!==v&&x!==p).sort((a,b)=>aff(v,a)-aff(v,b))[0]||null}
 Object.assign(AGC3BTN,{talkHealth:"Hỏi han sức khỏe",talkPraise:"Khen tài nghệ nàng",talkGossip:"Bàn tán về",talkSecret:"Chia sẻ bí mật",invoke:"Nhắc lại ân xưa"});

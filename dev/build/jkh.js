@@ -76,10 +76,10 @@ const p0=pregMonthP;pregMonthP=function(p){if(!p||!p.preg||p.fake||(p!==S&&khGue
  /* the drug taken last month: the birth comes now, really early, looking full-term */
  if(p.khInd){p.khInd=0;if(c<9){realM=c+1;p.preg=9;p.khPreM=realM;khStat("drug_birth")}}
  else if((c===7||c===8)&&!p.khOd){let r=(c===7?P.m8:P.m9)+((p.suc||0)<P.lowSucAt?P.lowSuc:0)+(khOf(p)<P.khLo?P.lowKh:0)+Math.max(0,khAge(p)-P.ageFrom)*P.age;if(p.anthai)r/=2;
-  if(roll(r)){realM=c+1;p.preg=9;p.khPreM=realM;khStat("pre"+realM);ev+=me?`<span class="r">Mới ${realM===8?"tám":"chín"} tháng, ngươi đã trở dạ (sinh non).</span> `:`${p.name} trở dạ sớm (sinh non). `}}
+  if(roll(agCap(r))){realM=c+1;p.preg=9;p.khPreM=realM;khStat("pre"+realM);ev+=me?`<span class="r">Mới ${realM===8?"tám":"chín"} tháng, ngươi đã trở dạ (sinh non).</span> `:`${p.name} trở dạ sớm (sinh non). `}}
  else if(c===9&&!p.khOd&&roll(P.od)){p.khOd=1;khStat("od");p.pgK=p.pgR=p.pgS=0;return me?"Đã qua chín tháng mười ngày mà ngươi vẫn chưa trở dạ; bà đỡ bảo cứ chờ thêm. ":""}
  /* miscarriage causes (a month that is not the birth month) */
- if(p.preg+1<10){const [x,why]=khPgRisk(p);p.pgK=p.pgR=p.pgS=0;if(x>0&&roll(x)){const G=BAL.pgRisk;p.preg=0;p.hidden=false;ap(p,{suc:-G.misSuc});p.misN=(p.misN||0)+1;khStat("mis_cause");khHit(p,K.mis,K.misScar,"b");p.khBook=0;
+ if(p.preg+1<10){const [x,why]=khPgRisk(p);p.pgK=p.pgR=p.pgS=0;if(x>0&&roll(agCap(x))){const G=BAL.pgRisk;p.preg=0;p.hidden=false;ap(p,{suc:-G.misSuc});p.misN=(p.misN||0)+1;khStat("mis_cause");khHit(p,K.mis,K.misScar,"b");p.khBook=0;
   return ev+(me?`<span class="r">Ngươi ${why}, động thai, sảy mất đứa bé.</span> Sức -${G.misSuc}. `:`${p.name} động thai, sảy mất đứa bé. `)}}
  p.pgK=p.pgR=p.pgS=0;
  const birth=p.preg+1>=10;const off=birth?khRecOff(p):0,mism=!!p.pregMismatch,od=!!p.khOd;

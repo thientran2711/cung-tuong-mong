@@ -25,7 +25,7 @@ function empWhyZ(){const w=wk();if(!S.empWhy||S.empWhy.wk!==w)S.empWhy={wk:w};re
 function empDuty(){let f=1;try{for(const t of S.emp.traits||[])f*=empD().duty[t]||1}catch(e){}return f}
 /* 1 SUMMON: busy (ill / Chăm chính / court crisis) or calm */
 function empBusy(){try{if(illOf(S.emp))return"ill"}catch(e){}if(has("chamchinh"))return"duty";try{if(tdOn()&&tdCrisis())return"court"}catch(e){}return""}
-function empSummon(){const b=empBusy();const o=empD().summon[b?1:0];const ok=roll(o);const z=empWhyZ();z.k=ok?"call":"rest";z.busy=b;return ok}
+function empSummon(){const b=empBusy();const o=empD().summon[b?1:0];const ok=roll(agOdd(o));const z=empWhyZ();z.k=ok?"call":"rest";z.busy=b;return ok}
 /* 2 WHO: his memory of each person's deeds near him */
 /* AG3: a staff maid is remembered by her own key "s"+sid (jagmaid), everyone else by key() */
 function empK(p){return p&&p!==S&&p.role==="maid"&&p.sid!=null?"s"+p.sid:key(p)}
@@ -47,7 +47,7 @@ function empCustom(q,cur,base){const D=empD();const nq=Math.max(1,nightCh(q)),nc
  const z=empWhyZ();z.cust={keep,want:+want.toFixed(2),df:+df.toFixed(2),why:keep?"":has("datinh")?"datinh":has("mesac")?"mesac":want>1?"want":""};return keep}
 /* 4 SEAT: when he decides to fill the vacant Hoàng hậu seat, and whom */
 function empSeat(){const D=empD().seat;const m=S.turn-(S.vacSince==null?S.turn:S.vacSince);if(m<D.mourn)return false;
- let c=cl(D.b+D.m*(m-D.mourn),D.lo,D.hi)*empDuty()*(S.thDead?1:D.th);return roll(cl(c,0,100))}
+ let c=cl(D.b+D.m*(m-D.mourn),D.lo,D.hi)*empDuty()*(S.thDead?1:D.th);return roll(agOdd(c))}
 function empSeatPick(C,wt){return mindPick(C.map(p=>[p,wt(p)]),S.emp)||C[0]}
 /* nightWhy words (VANPHONG: cổ trang, no numbers of odds) */
 const EMPREST={ill:"Long thể bất an, ngài nghỉ sớm ở Dưỡng Hòa điện.",duty:"Ngài chăm lo chính sự, phê tấu chương đến khuya.",court:"Triều chính rối ren, ngài ở lại Ngự thư phòng bàn việc với các đại thần.","":"Ngài muốn nghỉ một mình ở Dưỡng Hòa điện."};
@@ -65,7 +65,7 @@ function empDeckK(a){if(!a||!a.n)return"";if(EMPDECK[a.n])return EMPDECK[a.n];tr
 Object.assign(window,{empOn,empSummon,empPick,empCustom,empSeat,empSeatPick,empMet,empMemF,empMemN,empWhyTxt,empBusy});
 /* PILLOW SLANDER (two-way row 24): ONE deed for her (j8 night2 option) and an NPC on her night (j75 rivalNight), BAL.tw.g.pillow */
 function pillowO(a,s){const G=BAL.tw.g.pillow.o;return G[0]+(a.an||0)/G[1]+(s||0)*G[2]-(DG()?G[3]:0)}
-function pillowDo(a,t,o){const G=BAL.tw.g.pillow;const fx=(p,d)=>p===S?apply(d):ap(p,d);if(roll(o)){const b=t.sung;fx(t,{sung:-G.hit});relAdd(a,t,-G.rel);return{ok:1,b,n:t.sung}}
+function pillowDo(a,t,o){const G=BAL.tw.g.pillow;const fx=(p,d)=>p===S?apply(d):ap(p,d);if(roll(agOdd(o))){const b=t.sung;fx(t,{sung:-G.hit});relAdd(a,t,-G.rel);return{ok:1,b,n:t.sung}}
  fx(a,DG()?{sung:-G.dg[0],danh:-G.dg[1]}:{sung:-G.fail});return{ok:0}}
 /* the NPC on her night: keep quiet (BAL.ag.routine, as when she keeps her schedule) or speak against the one she resents most (her spite need,
    agSpite = hostility less what she already vented), mindPick with jmind's slip; the deed's own cost/odds as hers */

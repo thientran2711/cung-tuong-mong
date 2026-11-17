@@ -70,12 +70,12 @@ function ag2Res(v,k,ok,txt){AG2.stat.land++;AG2.stat.by[k]=(AG2.stat.by[k]||0)+1
 /* the card of a deed with odds: cost → roll odA(cx2O) → w or l (the player's go / fail effects after) */
 function ag2Roll(v,k,c){const X=BAL.ag.cx2[k];if(!ag2Pay(v,c||X.c))return null;const ok=roll(odA(v,cx2O(v,k)));ap(v,ok?X.w||{}:X.l||{});return ok}
 agRunReg("cx2:flat",v=>{const ok=ag2Roll(v,"flat");if(ok==null)return"";return ag2Res(v,"flat",ok,ok?`${v.name} khéo lời tâng bốc, Hoàng thượng vui vẻ`:`${v.name} tâng bốc vụng về, Hoàng thượng nhíu mày`)});
-agRunReg("cx2:true",v=>{const ok=ag2Roll(v,"true");if(ok==null)return"";if(ok&&roll(BAL.ag.cx2.true.disc)){const u=Object.keys(LIKES).filter(k=>!(v.eK||{})[k]);if(u.length)(v.eK=v.eK||{})[pick(u)]=1}
+agRunReg("cx2:true",v=>{const ok=ag2Roll(v,"true");if(ok==null)return"";if(ok&&roll(agCap(BAL.ag.cx2.true.disc))){const u=Object.keys(LIKES).filter(k=>!(v.eK||{})[k]);if(u.length)(v.eK=v.eK||{})[pick(u)]=1}
  return ag2Res(v,"true",ok,ok?`${v.name} thưa chuyện thật lòng, được Hoàng thượng để tâm`:`${v.name} nói thật lòng, Hoàng thượng không vui`)});
 agRunReg("cx2:show",v=>{const X=BAL.ag.cx2.show;if(!ag2Pay(v,X.c))return"";const ok=roll(odA(v,cx2O(v,"show")));let lv=0;for(const a in v.arts||{})lv=Math.max(lv,v.arts[a]||0);
  ap(v,ok?{"sung":X.w.sung+lv,"danh":X.w.danh}:X.l);return ag2Res(v,"show",ok,ok?`${v.name} phô tài trước Hoàng thượng, được ngài khen`:`${v.name} phô tài trước Hoàng thượng nhưng vụng về`)});
 agRunReg("cx2:favor",v=>{const X=BAL.ag.cx2.favor;if((v.sung||0)<X.min)return"";const ok=ag2Roll(v,"favor",{});if(ok==null)return"";
- if(!ok&&S.emp&&S.emp.mood===3&&roll(X.angry))punish(v,"làm phiền lúc thánh thượng nổi giận",1);return ag2Res(v,"favor",ok,ok?`${v.name} xin được ân điển của Hoàng thượng`:`${v.name} xin ân điển, bị Hoàng thượng gạt đi`)});
+ if(!ok&&S.emp&&S.emp.mood===3&&roll(agCap(X.angry)))punish(v,"làm phiền lúc thánh thượng nổi giận",1);return ag2Res(v,"favor",ok,ok?`${v.name} xin được ân điển của Hoàng thượng`:`${v.name} xin ân điển, bị Hoàng thượng gạt đi`)});
 agRunReg("cx2:court",v=>{const ok=ag2Roll(v,"court");if(ok==null)return"";return ag2Res(v,"court",ok,ok?`${v.name} bàn chuyện triều chính, Hoàng thượng tán thưởng`:`${v.name} bàn chuyện triều chính, Hoàng thượng không vừa ý`)});
 agRunReg("cx2:nurse",v=>{if(!(S.emp&&S.emp.ill))return"";const ok=ag2Roll(v,"nurse");if(ok==null)return"";if(ok&&empGive(v,BAL.ag.cx2.nurse.best,"nurse"))bestow(v,"nurse");
  return ag2Res(v,"nurse",ok,ok?`${v.name} sang Dưỡng Hòa điện sắc thuốc, hầu bên giường Hoàng thượng`:`${v.name} hầu thuốc Hoàng thượng đến kiệt sức`)});
@@ -94,7 +94,7 @@ agRunReg("cx2:vent",(v,t)=>{const X=BAL.ag.cx2.vent;if(!t||(t.pg||0)<X.pg||!ag2P
 agRunReg("cx2:chest",(v,t)=>{const X=BAL.ag.cx2.chest;if(!t)return"";if(roll(odA(v,cx2O(v,"chest")))){const r=evA(v,t,BAL.ag.ev.one);return ag2Res(v,"chest",1,r?`${v.name} lén lục rương của ${agcNm(t)}, tìm được thư từ`:`${v.name} lén lục rương của ${agcNm(t)}, chẳng thấy gì`)}
  relAdd(t,v,-X.rel);punish(v,"lục lọi cung phi tần",1);return ag2Res(v,"chest",0,`${v.name} lục rương của ${agcNm(t)}, bị cung nhân bắt gặp`)});
 agRunReg("cx2:help",(v,t)=>{const X=BAL.ag.cx2.help;if(!t||t===S)return"";if(aff(t,v)<X.aff){affAdd(t,v,-X.fail);return ag2Res(v,"help",0,`${t.name} khéo từ chối lời nhờ của ${v.name}`)}
- if(roll(X.p)&&(t.bac||0)>=X.bac){ap(t,{"bac":-X.bac});ap(v,{"bac":X.bac});return ag2Res(v,"help",1,`${t.name} cho ${v.name} mượn ${X.bac} lượng`)}
+ if(roll(agCap(X.p))&&(t.bac||0)>=X.bac){ap(t,{"bac":-X.bac});ap(v,{"bac":X.bac});return ag2Res(v,"help",1,`${t.name} cho ${v.name} mượn ${X.bac} lượng`)}
  const x=evGuilty(v,others(v).filter(y=>y&&y!==v&&y!==t&&(y===S||y.alive)));if(x&&evA(v,x,BAL.ag.ev.one))return ag2Res(v,"help",1,`${t.name} kể cho ${v.name} một chuyện về ${agcNm(x)}`);
  return ag2Res(v,"help",1,`${t.name} tiếp ${v.name} ân cần`)});
 /* ---------------- 2. THE EMPEROR: his evening visit (Ngự giá lâm cung) and his tea, from his own day plan ---------------- */
@@ -118,9 +118,9 @@ function ag2Reg(p){const G=BAL.ag.give;const sg=(p===S?S.sung:p.sung)||0,an=(p==
  try{r*=empMemF(p)}catch(e){}try{r*=tsMoodW()}catch(e){}try{for(const t of S.emp.traits||[])r*=G.tr[t]||1}catch(e){}return r}
 (function(){const e0=empGive,t0=thGive;
  empGive=function(p,pct,why){if(!p||!(typeof agOn==="function"&&agOn())||!S.emp)return e0.apply(this,arguments);const w=cl(pct*ag2Reg(p),0,100);
-  const g=roll(w);/* his inclination = the site's % × his regard; a straight weighted draw (jmind slip would bend a rare gift's rate) */AG2.stat[g?"give":"giveNo"]++;return g};
+  const g=roll(agCap(w));/* his inclination = the site's % × his regard; a straight weighted draw (jmind slip would bend a rare gift's rate) */AG2.stat[g?"give":"giveNo"]++;return g};
  thGive=function(p,pct,why){if(!p||!(typeof agOn==="function"&&agOn())||S.thDead)return t0.apply(this,arguments);const G=BAL.ag.give.th;const w=cl(pct*cl(1+(((p===S?S.th:p.th)||0)-G.ref)/G.div,G.lo,G.hi),0,100);
-  return roll(w)};})();
+  return roll(agCap(w))};})();
 /* ledger labels of the new deeds */
 try{for(const k in AGC2)ACT95["ag_cx2:"+k]=AGC2[k].act;Object.assign(ACT95,{"ag_cx2:vent":"trút giận","ag_cx2:chest":"lén lục rương","ag_cx2:help":"sang nhờ giúp đỡ","ag_cx2:maidTalk":"tâm sự với cung nữ thân tín","ag_cx2:maidSpy":"sai cung nữ đi dò la","ag_cx2:bribeSrv":"mua chuộc kẻ hầu cung khác","ag_cx2:plantSrv":"cài người vào cung khác","ag_emp:visit":"ngự giá lâm cung","ag_emp:tea":"ghé uống chén trà"})}catch(e){}
 Object.assign(window,{AG2,AGC2,AGC2BTN,ag2Reg});

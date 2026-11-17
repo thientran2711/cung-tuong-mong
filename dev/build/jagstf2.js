@@ -19,7 +19,7 @@ function stf2Pick(a,O,kind){O=(O||[]).filter(o=>o&&!o.lock);if(!O.length)return 
  const W=O.map(o=>{let u=asG(N,o.fx||{});if(o.o!=null){const p=Math.min(100,o.o)/100;u+=p*asG(N,o.w||{})+(1-p)*asG(N,o.l||{})}
   return [o,Math.max(BAL.mind.pickMin,(K.base+u/BAL.ag.unit)*stf2Tr(a,o.tag))]});
  const c=mindPick(W,a)||O[0];stf2C((kind||"pick")+"_"+c.id);return c}
-function stf2Do(a,c){if(!c)return{ok:true,r:""};stfAp(a,c.fx);let ok=true;if(c.o!=null){ok=roll(c.o);stfAp(a,ok?c.w:c.l)}const r=c.go?c.go(ok)||"":"";return{ok,r}}
+function stf2Do(a,c){if(!c)return{ok:true,r:""};stfAp(a,c.fx);let ok=true;if(c.o!=null){ok=roll(agOdd(c.o));stfAp(a,ok?c.w:c.l)}const r=c.go?c.go(ok)||"":"";return{ok,r}}
 /* framed: x = the framed staff, acc = the accuser (an NPC staff, or S on the maid road), m = their master → {id, ok, stands, r} */
 function stf2Framed(x,acc,m){if(!stf2On()||!x||x===S||!m)return null;const O=cnvFrameOpts(x,acc,m);const c=stf2Pick(x,O,"frame");const d=stf2Do(x,c);
  if(c.id==="pay")stfAp(acc,{bac:-(c.fx.bac||0)});/* the bạc goes to the accuser */
