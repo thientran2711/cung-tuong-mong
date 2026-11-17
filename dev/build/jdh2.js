@@ -90,7 +90,7 @@ function dhConfiscate(p,kind,why){if(!p||!alive(p))return null;const P=(C().p||{
  c.at=S.turn;c.kind=kind;c.why=why||KIND[kind];delete c.open;delete c.kn;delete c.d0;delete c.ask;
  const fx={danh:-C().danh,sung:-C().sung};ap(p,fx);
  const tn=out.title&&window.DH_CAT&&DH_CAT[out.title]?DH_CAT[out.title].n:"";
- const what=[out.hieu?`hiệu «${out.hieu}»`:"",out.items.length?out.items.map(e=>IT[e.k].n).join(", "):"",tn?`danh hiệu «${tn}»`:""].filter(Boolean).join(", ");
+ const what=[out.hieu?`hiệu «${out.hieu}»`:"",out.items.length?out.items.map(e=>itm(e.k).n).join(", "):"",tn?`danh hiệu «${tn}»`:""].filter(Boolean).join(", ");
  if(p===S){log(`<span class="r">Ngươi ${c.why}: bị thu ${what}. Danh -${C().danh}, Sủng -${C().sung}.</span>`);
   if(typeof kitPanel==="function")kitPanel({kind:"notice",title:"Bị thu hiệu ban",subject:typeof pEunCourt==="function"?pEunCourt("ped"):null,
    sections:[{h:"",html:out.items.map(itTag).join("")},{h:"",rows:[["Vì sao",esc(c.why)],["Bị thu",esc(what)],["Mất",`Danh -${C().danh} · Sủng -${C().sung}`],
@@ -123,7 +123,7 @@ function confOpen(p){const c=p.dhConf;c.open=1;c.kn=kinhN(p);c.d0=p.danh|0;
     ["Xem tiến độ","Nhiệm vụ › Danh hiệu"]]}],btn:"Đã hiểu"})}}
 function dhRestore(p,how){const c=p.dhConf;if(!c)return null;const got=[];
  if(c.hieu){if(!p.hieu&&!(rivals||[]).some(v=>v&&v!==p&&v.hieu===c.hieu)&&!(p!==S&&S.hieu===c.hieu))p.hieu=c.hieu;got.push(`hiệu «${c.hieu}»`)
-  for(const x of box().slice())if(isDh(x.e)&&x.e.own===pk(p)&&x.why==="conf"){fromStore(x,p,"sám hối xin lại");got.push(IT[x.e.k].n)}
+  for(const x of box().slice())if(isDh(x.e)&&x.e.own===pk(p)&&x.why==="conf"){fromStore(x,p,"sám hối xin lại");got.push(itm(x.e.k).n)}
   if(p.hieu)giveItems(p,p.hieu,true)}
  for(const k of c.titles||[])if(p.dh&&p.dh[k]){delete p.dh[k].conf;if(window.DH_CAT&&DH_CAT[k])got.push(`danh hiệu «${DH_CAT[k].n}»`)}
  delete p.dhConf;
@@ -146,7 +146,7 @@ function dhLose(p,e){if(typeof loLose!=="function"||!p||!e)return null;let c=nul
  if(c){p.loCd=cd;c.dh=1;lgr(e,pk(p),"lo"+c.id,c.cause==="riv"?"bị trộm":"thất lạc");
   if(p===S){if(Q.length>q0&&Q[Q.length-1]&&Q[Q.length-1].t==="Đồ thất lạc")Q.pop();pushDil(mkP("dhlost",{id:c.id}),"Ấn tín thất lạc")}}return c}
 window.dhLose=dhLose;
-PEND.dhlost=pp=>{const c=typeof loGet==="function"?loGet(pp.id):null;if(!c||c.st==="done"||c.own!=="me")return null;const nm=IT[c.k]?IT[c.k].n:"món đồ";const L=LO.cost;
+PEND.dhlost=pp=>{const c=typeof loGet==="function"?loGet(pp.id):null;if(!c||c.st==="done"||c.own!=="me")return null;const nm=IT[c.k]?itm(c.k).n:"món đồ";const L=LO.cost;
  const O=[];const add=(kind,n,x)=>{const C0=L[kind]||{};if((C0.k&&typeof can==="function"&&!can(C0.k))||(C0.bac&&S.bac<C0.bac))return;O.push({n,fx:{},j67:`${typeof loCostTxt==="function"?loCostTxt(kind):""} · ${x}`,
   go:()=>{try{if(typeof spend==="function"&&C0.k)spend(C0.k);const r=loDo(kind,S,c);if(r){log(r);Q.push({t:"Tra xét",who:typeof pMe==="function"?pMe():null,h:`<p>${r}</p>`,btn:"Đã hiểu"})}}catch(e){console.error(e)}}})};
  add("cct","Báo Cung Chính ti tra xét","chứng cứ thật mới thành án; báo lên thì ai cũng biết");add("ask","Lặng lẽ hỏi cung nhân","kín đáo, có khi dò ra dấu vết");
@@ -156,8 +156,8 @@ function lostTick(){for(const p of people()){if(!alive(p))continue;if(p!==S&&!np
 /* a case closed and the piece not back with its owner → Danh −lostDanh once (the piece still sits somewhere: conservation) */
 function lostPenalty(){for(const c of S.lost||[]){if(!c||!c.dh||c.st!=="done"||c.dhPen)continue;const o=byK(c.own);c.dhPen=1;if(!o||!alive(o))continue;
  const back=slots(o).some(e=>isDh(e)&&e.dhid===c.e.dhid);if(back)continue;const d=I().lostDanh;ap(o,{danh:-d});
- if(o===S)log(`<span class="r">${IT[c.k].n} ngự ban thất lạc không tìm lại được: bị trách giữ gìn không cẩn thận. Danh -${d}.</span>`);
- else{const t=`${o.name} làm mất ${IT[c.k].n} ngự ban, bị trách.`;try{newsAdd(o,"lo",t)}catch(e){}}}}
+ if(o===S)log(`<span class="r">${itm(c.k).n} ngự ban thất lạc không tìm lại được: bị trách giữ gìn không cẩn thận. Danh -${d}.</span>`);
+ else{const t=`${o.name} làm mất ${itm(c.k).n} ngự ban, bị trách.`;try{newsAdd(o,"lo",t)}catch(e){}}}}
 /* ---------- 6. CENSUS: one book + one seal for every hiệu (held or confiscated), never two, never none ---------- */
 function census(){/* never two: one piece per owner and kind, wherever they sit (a copied entry, an old duplicate) */
  const seen={};const drop=(q,e)=>{const i=(q.inv||[]).indexOf(e);if(i>=0)q.inv.splice(i,1)};
@@ -169,7 +169,7 @@ function census(){/* never two: one piece per owner and kind, wherever they sit 
   for(const y of L.slice(1)){if(y.p){const i=y.p.inv.indexOf(y.e);if(i>=0)y.p.inv.splice(i,1)}else if(y.x){const b=box(),i=b.indexOf(y.x);if(i>=0)b.splice(i,1)}}}}
  /* a piece the Nội vụ phủ found goes home after it.backW weeks (owner alive, nothing confiscated) */
  for(const x of box().slice()){if(!isDh(x.e)||x.why!=="net"||!x.back||wk()<x.back)continue;const o=byK(x.e.own);if(!o||!alive(o)||o.dhConf||o.out)continue;
-  if(fromStore(x,o,"Nội vụ phủ trả về")&&o===S){Q.push({t:"Ấn tín trở về",who:typeof pEunCourt==="function"?pEunCourt("ped"):null,h:`${itTag(x.e)}<p>Nội vụ phủ tìm thấy <b>${IT[x.e.k].n}</b> của ngươi, sai người đem trả về rương.</p>`,btn:"Đã hiểu"});log(`Nội vụ phủ trả lại ${IT[x.e.k].n}.`)}}}
+  if(fromStore(x,o,"Nội vụ phủ trả về")&&o===S){Q.push({t:"Ấn tín trở về",who:typeof pEunCourt==="function"?pEunCourt("ped"):null,h:`${itTag(x.e)}<p>Nội vụ phủ tìm thấy <b>${itm(x.e.k).n}</b> của ngươi, sai người đem trả về rương.</p>`,btn:"Đã hiểu"});log(`Nội vụ phủ trả lại ${itm(x.e.k).n}.`)}}}
 window.dhCensus=census;
 /* ---------- old saves: a hiệu from before phase 2 gets its book + seal once; snapshots start quietly ---------- */
 function seed(){for(const p of people()){if(p.hieu&&!p.dhSeed){p.dhSeed=1;giveItems(p,p.hieu,true)}if(!Array.isArray(p.dhSn))p.dhSn=snap(p)}}
@@ -183,7 +183,7 @@ window.dhMonth=dhMonth;window.dhWeek=dhWeek;
 setTimeout(()=>{try{if(typeof S!=="undefined"&&S&&!S.dead)seed()}catch(e){}},0);
 /* ---------- never given away (sale: IT keep → econNo "kỷ vật: không bán"; NPC sellItem refuses too) ---------- */
 (function(){if(typeof giveTo==="function"){const g0=giveTo;giveTo=function(a,r,ix){try{if(a&&a.inv&&isDh(a.inv[ix]))return""}catch(e){}return g0.apply(this,arguments)}}
- if(typeof sellItem==="function"){const s0=sellItem;sellItem=function(p,ix){try{const e=p&&p.inv&&p.inv[ix];if(e&&IT[e.k]&&IT[e.k].keep)return""}catch(x){}return s0.apply(this,arguments)}}
+ if(typeof sellItem==="function"){const s0=sellItem;sellItem=function(p,ix){try{const e=p&&p.inv&&p.inv[ix];if(e&&IT[e.k]&&itm(e.k).keep)return""}catch(x){}return s0.apply(this,arguments)}}
  if(typeof giftBagFor==="function"){const b0=giftBagFor;giftBagFor=function(){const L=b0.apply(this,arguments);try{return (L||[]).filter(x=>!isDh(x&&x.e))}catch(e){return L}}}})();
 /* ---------- NHIỆM VỤ › Danh hiệu: the hiệu section + the atonement quest (kit rows; jdh calls dh2Secs) ---------- */
 window.dh2Secs=function(){if(!S)return[];const out=[],ok=dhHieuOK(S);const rows=[];
@@ -191,7 +191,7 @@ window.dh2Secs=function(){if(!S)return[];const out=[],ok=dhHieuOK(S);const rows=
  else if(!(S.dhConf&&S.dhConf.hieu)){const N=ok.need||dhHieuNeed(S);rows.push(["Hiệu ban","chưa có"],["Cách có",`từ ${N.rk} trở lên, Sủng ${N.sung}, Danh ${N.danh}, giữ phẩm ${N.gap} tháng; Hoàng thượng để ý thì ban`]);
   if(ok.why.length)rows.push(["Còn thiếu",esc(ok.why.join(" · "))])}
  const mine=DK.map(k=>findAll("me",k)[0]).filter(Boolean);
- for(const y of mine){const at=y.p===S?"trong rương":y.x?"Nội vụ phủ giữ":y.c?"thất lạc, đang tra xét":"ở nơi khác";rows.push([IT[y.e.k].n,at])}
+ for(const y of mine){const at=y.p===S?"trong rương":y.x?"Nội vụ phủ giữ":y.c?"thất lạc, đang tra xét":"ở nơi khác";rows.push([itm(y.e.k).n,at])}
  if(rows.length)out.push({h:"Hiệu Hoàng thượng ban",rows});
  const c=S.dhConf;if(c){const st=confState(S);const R2=[["Vì sao",esc(c.why||"")],["Bị thu",esc([c.hieu?`hiệu «${c.hieu}», Sắc phong, Ngọc ấn`:"",(c.titles||[]).map(k=>window.DH_CAT&&DH_CAT[k]?`«${DH_CAT[k].n}»`:"").filter(Boolean).join(", ")].filter(Boolean).join(" · "))]];
   if(!st.open)R2.push(["Chờ",st.blocked?`${st.blocked}: hết phạt mới tính`:st.left?`còn ${st.left} tháng mới được sám hối`:"tháng sau mở đường sám hối"]);

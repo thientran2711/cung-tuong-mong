@@ -104,7 +104,7 @@ let busy=false,changed=0;
    name keep theirs ("vòng ngọc Hòa Điền"). One rule for every log / news / Tuần lục / card line (old saves too): names from IT + WD_ITEMS. */
 let ITRX=null,ITN=-1,ITT=0;
 function itRx(){const now=Date.now();if(ITRX!==null&&now-ITT<4000)return ITRX;ITT=now;const L=[];
-  try{for(const k in IT){const n=IT[k]&&IT[k].n;if(n)L.push(n)}}catch(e){}
+  try{for(const k in IT){const n=IT[k]&&itm(k).n;if(n)L.push(n)}}catch(e){}
   try{if(typeof WD_ITEMS==="object")for(const k in WD_ITEMS){const n=WD_ITEMS[k]&&WD_ITEMS[k].n;if(n)L.push(n)}}catch(e){}
   if(L.length===ITN&&ITRX)return ITRX;ITN=L.length;const U=[...new Set(L.filter(n=>n.length>=3&&/^\p{Lu}\p{Ll}/u.test(n)&&/ /.test(n)||/^(A giao|Xạ hương|Yến sào)$/.test(n)))].sort((a,b)=>b.length-a.length);
   ITRX=U.length?new RegExp("(?<![\\p{L}\\p{M}\\d])(?:"+U.map(x=>x.replace(/[.*+?^${}()|[\]\\]/g,"\\$&")).join("|")+")(?![\\p{L}\\p{M}\\d])","gu"):false;return ITRX}

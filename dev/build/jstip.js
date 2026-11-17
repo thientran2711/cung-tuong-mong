@@ -92,7 +92,7 @@ function stipSkim(p,base,cut){try{if(!p||p.out||p.dead||rkOf(p)>=7||p.queen||(p=
 function stipItemN(p,C){const N=(BAL.eit&&BAL.eit.skimN)||{base:1,many:1,lowSung:1,lowRank:1,lowRankMax:1,highRank:5};const r=rkOf(p);
  return Math.max(1,N.base+((C||[]).length>=2?N.many:0)+((p.sung||0)<BAL.stip.lowSung?N.lowSung:0)+(r<=N.lowRankMax?N.lowRank:0)-(r>=N.highRank?1:0))}
 function stipPickLines(L,n){const D=BAL.stip.down;const ix=L.map((x,i)=>i).filter(i=>L[i][0] in D);
- const pr=k=>(k==="thanbac"||k==="bangda")?1e6:((IT[k]&&IT[k].pr)||0);ix.sort((a,b)=>pr(L[b][0])-pr(L[a][0]));return new Set(ix.slice(0,Math.max(0,n|0)))}
+ const pr=k=>(k==="thanbac"||k==="bangda")?1e6:((IT[k]&&itm(k).pr)||0);ix.sort((a,b)=>pr(L[b][0])-pr(L[a][0]));return new Set(ix.slice(0,Math.max(0,n|0)))}
 /* the goods: one entry per piece in p.inv (from:"noivu"); skimmed → one step worse / missing */
 function stipGoods(p,SK){const G=[];try{if(!p||p.dead||(p===S&&typeof isSrv==="function"&&isSrv()))return G;p.inv=p.inv||[];
  const L=stipList(rkOf(p),!!p.out,stipWinter(),stipSummer());const D=BAL.stip.down;const hit=SK&&SK.items?stipPickLines(L,SK.items===true?99:SK.items):new Set();
@@ -103,7 +103,7 @@ function stipGoods(p,SK){const G=[];try{if(!p||p.dead||(p===S&&typeof isSrv==="f
  }catch(e){console.error("stipGoods",e)}return G}
 function stipGoodsTxt(G){return (G||[]).map(g=>g.lost?`thiếu ${stipNm(g.k0,g.n0).replace(/^\d+ \S+ /,"")}`:stipNm(g.k,g.n)).join(" · ")}
 /* Nội vụ phủ buys its own issue back cheaply */
-(function(){if(typeof econPrice!=="function")return;const p0=econPrice;econPrice=function(p,e){const v=p0.apply(this,arguments);try{if(e&&e.from==="noivu"&&!e.wk)return Math.max(e.k&&IT[e.k]&&IT[e.k].pr?1:0,Math.floor(v*BAL.stip.resell/100))}catch(x){}return v};window.econPrice=econPrice})();
+(function(){if(typeof econPrice!=="function")return;const p0=econPrice;econPrice=function(p,e){const v=p0.apply(this,arguments);try{if(e&&e.from==="noivu"&&!e.wk)return Math.max(e.k&&IT[e.k]&&itm(e.k).pr?1:0,Math.floor(v*BAL.stip.resell/100))}catch(x){}return v};window.econPrice=econPrice})();
 /* ---------- one way to give goods + the reveal (kitReward of j93; game-feel's kitGain/kitReward keep the same call) ---------- */
 function stipRevItem(k){const it=IT[k]||{};let tier=0;try{const a=itemArt(k);tier=a?a.grade|0:(typeof kmTierOf==="function"?kmTierOf(k):0)}catch(e){}
  return{k,n:it.n||k,d:it.d||"",img:typeof kmItemImg==="function"?kmItemImg(k):"",tier}}
@@ -114,7 +114,7 @@ const STIP_FROM={emp:["royal","Ngự tứ","Hoàng thượng ban"],th:["tray","M
 function goodsGive(p,keys,o){o=o||{};p=p||S;const L=(Array.isArray(keys)?keys:[keys]).filter(k=>IT[k]);if(!L.length||!p)return"";p.inv=p.inv||[];
  const from=o.from||"story";const E=L.map(k=>{const e={k,from,d:S.turn};if(o.who)e.giver=o.who;p.inv.push(e);return e});
  if(p===S){const F=STIP_FROM[from]||STIP_FROM.story;stipReveal(E,{kind:o.kind||F[0],title:o.title||F[1],sub:o.sub||F[2]||(o.who?`${o.who} tặng`:"")})}
- const cnt={};L.forEach(k=>cnt[k]=(cnt[k]||0)+1);return Object.keys(cnt).map(k=>`${IT[k].n}${cnt[k]>1?" ×"+cnt[k]:""}`).join(", ")}
+ const cnt={};L.forEach(k=>cnt[k]=(cnt[k]||0)+1);return Object.keys(cnt).map(k=>`${itm(k).n}${cnt[k]>1?" ×"+cnt[k]:""}`).join(", ")}
 window.goodsGive=goodsGive;
 /* ---------- her payout: the chest, then the skimming event ---------- */
 function stipShow(G,net,SK){const E=[];(G||[]).forEach(g=>E.push(...g.E));const base=(()=>{try{return BAL.pay[Math.min(7,rkOf(S))]}catch(e){return 0}})();
@@ -126,7 +126,7 @@ function stipRestore(p,G,full){let n=0;for(const g of G||[]){if(!g.kem)continue;
 function stipReportTo(SK){const q=queenP();const hhBehind=q&&q!==S&&SK.sup===q;const thOk=!S.thDead;
  if(q&&q!==S&&!hhBehind&&rel(q,S)>-30)return{k:"hh",n:"Hoàng hậu",v:q};if(thOk)return{k:"th",n:"Thái hậu",v:null};return q&&q!==S?{k:"hh",n:"Hoàng hậu",v:q,risky:1}:null}
 function stipEvent(G,SK){const B=BAL.stip,r=rkOf(S),st=stipSt(S),W=stipW();const tip=B.tip[Math.min(7,r)];const eun=stipEunName();
- const lc=k=>{const n=(IT[k]?IT[k].n:k).replace(/ \(hàng kém\)$/,"");return n[0].toLowerCase()+n.slice(1)};
+ const lc=k=>{const n=(IT[k]?itm(k).n:k).replace(/ \(hàng kém\)$/,"");return n[0].toLowerCase()+n.slice(1)};
  const kem=G.filter(g=>g.kem&&!g.lost).map(g=>`${lc(g.k)} thay ${lc(g.k0)}`),lost=G.filter(g=>g.lost).map(g=>lc(g.k0));
  const rows=[];if(SK.bac)rows.push(["Thiếu bạc",`Bạc −${SK.bac}`,"r"]);if(SK.cut)rows.push(["Khất bổng",`theo ý ${rkName(SK.sup||queenP())}: bớt 3 phần 10 bạc`,"r"]);if(kem.length)rows.push(["Hàng kém",kem.join(" · "),"r"]);if(lost.length)rows.push(["Thiếu đồ",lost.join(" · "),"r"]);
  rows.push(["Gợi ý",`<span class="ef i">Vì ${SK.why}.</span>`]);const h=`<p>${eun} đưa bổng lộc tới, mắt không dám nhìn thẳng.</p>${kitRows(rows)}`;
@@ -165,8 +165,8 @@ function stipEvItem(id,X){try{const s=E68I[id];const V=s.v||[""];const t=V[((X.p
 window.stipEvItem=stipEvItem;
 (function(){if(typeof e68Build!=="function")return;const b0=e68Build;e68Build=function(s,p){const d=b0.apply(this,arguments);try{if(!d||!d.o)return d;const X={p,vi:p.vi||0};
   const m=stipEvItem(s.id,X);if(m){const [,,k,fr,no]=m;let who="";try{const A=e68X(s,p);who=fr==="A"&&A&&A.A?A.A.n||"":""}catch(e){}
-   d.o.forEach((o,i)=>{if(no.includes(i)||!o.go)return;const g0=o.go;o.go=function(){const r=g0.apply(this,arguments);try{const n=goodsGive(S,k,{from:fr==="A"?"story":fr,who});if(n)log(`${n} vào rương.`)}catch(e){console.error(e)}return r};o.x=(o.x?o.x+" · ":"")+`kèm: ${IT[k].n} vào rương`})}
-  if(s.fam==="visit"&&(s.a||[])[0]==="rv"){const ti=stipTeaIx();let A=null;try{A=e68X(s,p)}catch(e){}if(ti>=0&&A&&A.A){const k=S.inv[ti].k,it=IT[k],n=it.host||0;
+   d.o.forEach((o,i)=>{if(no.includes(i)||!o.go)return;const g0=o.go;o.go=function(){const r=g0.apply(this,arguments);try{const n=goodsGive(S,k,{from:fr==="A"?"story":fr,who});if(n)log(`${n} vào rương.`)}catch(e){console.error(e)}return r};o.x=(o.x?o.x+" · ":"")+`kèm: ${itm(k).n} vào rương`})}
+  if(s.fam==="visit"&&(s.a||[])[0]==="rv"){const ti=stipTeaIx();let A=null;try{A=e68X(s,p)}catch(e){}if(ti>=0&&A&&A.A){const k=S.inv[ti].k,it=itm(k),n=it.host||0;
    d.o.push({n:`Pha ${it.n.replace(/ \(hàng kém\)$/,"")} mời khách`,fx:{},x:n>=0?`thành: ${A.A.n||"nàng"} thiện cảm +${n} · kèm: dùng 1 ${STIP_UNIT[k]||"gói"} trà`:`hỏng: trà mốc, ${A.A.n||"nàng"} chê (thiện cảm ${n}) · kèm: dùng 1 gói trà`,
     go:()=>{const j=stipTeaIx();if(j>=0)S.inv.splice(j,1);relDo(A.A,n);log(n>=0?`Ngươi pha ${it.n} mời ${A.A.n||"khách"}; nàng khen trà thơm.`:`<span class="r">Trà mốc, ${A.A.n||"khách"} nhấp một ngụm rồi đặt xuống.</span>`)}})}}
  }catch(e){console.error("stip e68",e)}return d}})();

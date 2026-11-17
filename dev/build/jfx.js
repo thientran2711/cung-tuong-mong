@@ -420,7 +420,7 @@ const KF_LOSEW=[[/tịch thu|thu hồi|sung công/i,"Bị tịch thu"],[/cướp
 function kfTexts(lg){const L=[];try{const n=Math.max(0,Math.min(40,(S.logSeq||0)-lg));for(let i=0;i<n;i++)L.push(S.logs[i]);for(const q of (typeof Q!=="undefined"?Q:[]))if(q&&typeof q.h==="string")L.push(q.h);
   const t=document.getElementById("rtoast");if(t&&t.classList.contains("on"))L.push(t.innerHTML)}catch(e){}
  return L.map(h=>String(h||"").replace(/<span class="ld">[^<]*<\/span>/g,"").replace(/<[^>]+>/g," ").replace(/\s+/g," ").trim()).filter(Boolean)}
-function kfLoseWhy(e,T){const tag=KFX.lt.get(e);const I=kitItemInfo(e);const nm=I.name,base=(IT[e.k]&&IT[e.k].n)||nm;
+function kfLoseWhy(e,T){const tag=KFX.lt.get(e);const I=kitItemInfo(e);const nm=I.name,base=(IT[e.k]&&itm(e.k).n)||nm;
  let line="";for(const h of T){const ss=h.replace(/([.!?:])\s+/g,"$1\n").split("\n");const s=ss.find(x=>x.includes(nm)||x.includes(base));if(s){line=s.trim();break}}
  if(line.length>170)line=line.slice(0,167).replace(/\s+\S*$/,"")+"…";
  if(tag)return{why:tag.why,to:tag.to,title:tag.title||"",text:line};

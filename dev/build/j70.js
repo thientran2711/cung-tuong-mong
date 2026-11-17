@@ -203,7 +203,7 @@ function exec70(p,opp){const a=pa70(p),t=pt70(p),M=pm70(p);const O=OPP70[opp]||O
  else{window.__j70exec=1;try{
    if(M.k==="joint"){const f=facOf(a);r=f&&jointScheme0?jointScheme0(f,t):""}
    else if(a===S){S.__err=err;try{r=runAct(S,t,M.k)}finally{S.__err=0}}
-   else if(M.k==="plant"){const ix=(a.inv||[]).findIndex(e=>e.t||(IT[e.k]&&IT[e.k].il));if(ix<0){p.end="miss";return ""}a.__err=err;try{r=runAct(a,t,"plant",ix)}finally{a.__err=0}}
+   else if(M.k==="plant"){const ix=(a.inv||[]).findIndex(e=>e.t||(IT[e.k]&&itm(e.k).il));if(ix<0){p.end="miss";return ""}a.__err=err;try{r=runAct(a,t,"plant",ix)}finally{a.__err=0}}
    else r=mindRun(a,t,M.k,err)}catch(e){console.error(e)}finally{window.__j70exec=0}
   if(a!==S&&t!==S&&!p.kn)r=seenNPC(a,t,r)||"";}
  p.res=String(r||"").replace(/<br>/g," ").replace(/<[^>]+>/g,"").slice(0,400);p.resH=String(r||"").slice(0,1500);

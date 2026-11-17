@@ -27,7 +27,7 @@ function wxSev(){if(!S||!S.wx)return 0;const f=S.wx.f,n=S.wx.n;if(f===3)return 3
 function wxKind(){const n=(S&&S.wx&&S.wx.n)||"";return /tuyết|sương giá/.test(n)?"băng tuyết":/giông/.test(n)?"giông tố":"mưa"}
 function wxPal(p,k){if(!k)return"";if(k==="home")return palaceOf(p);if(k[0]==="r"){const v=rivals.find(x=>"r"+x.id===k);return v?palaceOf(v):k}return k}
 function wxOutdoor(p,a,b){if(!a||!b||a===b)return false;return wxPal(p,a)!==wxPal(p,b)}
-function wxHasGear(p,g){return (p.inv||[]).some(e=>e&&!e.h&&IT[e.k]&&IT[e.k].wxg===g)}
+function wxHasGear(p,g){return (p.inv||[]).some(e=>e&&!e.h&&IT[e.k]&&itm(e.k).wxg===g)}
 function wxHelper(p){return (p===S?[S.maid].concat(S.staff||[]):[p.maid].concat(p.staff||[])).find(s=>s&&!s.spyFor&&(s.loyal||0)>=BAL.wx.helpLoyal)||null}
 function wxKieuOk(p){return rkOf(p)>=BAL.wx.kieuRank&&!p.out&&(p.bac||0)>=BAL.wx.kieuBac}
 /* the odds of one outdoor walk for p: {sev, cold, slip, why:[...], kieu} (percent, rounded) */

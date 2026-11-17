@@ -35,11 +35,11 @@ function kidKind(R){const it=R.it||{};if(R.work){const A=typeof ARTS!=="undefine
  const sl=it.sl?({hair:"cài tóc",wrist:"đeo tay",waist:"đeo eo",scent:"đeo bên mình"}[it.sl]||""):it.dr?"may áo":"";return(it.kd||"Đồ vật")+(sl?" · "+sl:"")}
 /* theme tags (Hội phối đồ đề, jts TS_THEME + any item's own `th` list) */
 function kidThemes(k){const L=[];try{if(typeof TS_THEME==="object")for(const t in TS_THEME)if((TS_THEME[t].tags||[]).includes(k))L.push(TS_THEME[t].n)}catch(e){}
- try{const own=(IT[k]&&IT[k].th)||(typeof WD_ITEMS==="object"&&WD_ITEMS[k]&&WD_ITEMS[k].th)||[];for(const t of [].concat(own))if(t&&!L.includes(t))L.push(t)}catch(e){}return L}
+ try{const own=(IT[k]&&itm(k).th)||(typeof WD_ITEMS==="object"&&WD_ITEMS[k]&&WD_ITEMS[k].th)||[];for(const t of [].concat(own))if(t&&!L.includes(t))L.push(t)}catch(e){}return L}
 /* Xa xỉ: this piece · what she wears now → after wearing it · her rank's allowance (BAL.itd.allow) — wearables of the player only */
 function kidLux(R,o){if(R.who||R.work||R.veil)return null;const B=(typeof BAL==="object"&&BAL.itd)||{};let lux=0,cur=0;
  try{if(R.wd){const w=WD_ITEMS[R.k];lux=wdLux(R.k);const c=wdOf(S)[w.sl];cur=c&&WD_ITEMS[c.k]?wdLux(c.k):0}
-  else if(R.it&&R.it.sl){lux=luxVal(R.k);const c=(S.inv||[]).find(x=>x&&x.w&&!x.h&&IT[x.k]&&IT[x.k].sl===R.it.sl);cur=c?luxVal(c.k):0}
+  else if(R.it&&R.it.sl){lux=luxVal(R.k);const c=(S.inv||[]).find(x=>x&&x.w&&!x.h&&IT[x.k]&&itm(x.k).sl===R.it.sl);cur=c?luxVal(c.k):0}
   else if(R.it&&R.it.dr){lux=luxVal(R.k);return{vals:[`món này ${lux}`],over:false}}
   else return null;
   if(o&&o.luxItem)return{vals:[`món này ${lux}`],over:false};/* a board that is not worn (Hội phối đồ): the piece only, no "Bên mình" change */

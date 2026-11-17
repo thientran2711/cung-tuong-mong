@@ -273,7 +273,7 @@ function liveStats(m){const f=friendEntry();if(!f||!m.st||(m.name&&m.name!==f.na
  return ch}
 /* her bag / kids / pregnancy / festival entries / pets onto her entry (inline pos of an old client, or the ctm-fam relay) */
 function famIn(f,fm,pets){let ch=false;
- if(fm&&Array.isArray(fm.bag)){if(JSON.stringify(fm.bag)!==JSON.stringify(f.inv||[])){f.inv=fm.bag.map(o=>Object.assign({},o));ch=true}
+ if(fm&&Array.isArray(fm.bag)){if(JSON.stringify(fm.bag)!==JSON.stringify(f.inv||[])){f.inv=fm.bag.map(o=>o&&typeof o==="object"?Object.assign({},o):o);if(typeof itCleanL==="function")itCleanL(f.inv);ch=true}
   if(JSON.stringify(fm.kids||[])!==JSON.stringify(f.kids||[])){f.kids=(fm.kids||[]).map(o=>Object.assign({},o));ch=true}
   if((fm.preg||0)!==(f.preg||0)){f.preg=fm.preg||0;f.fake=fm.fake||0;ch=true}f.fx7=fm.fx7||null}
  if(pets&&Array.isArray(pets.L)){const L=pets.L.map(o=>Object.assign({},o));if(JSON.stringify(L)!==JSON.stringify(f.pets||[])){f.pets=L;f.petOn=pets.on;f.petB=pets.b;f.petBn=pets.bn;ch=true}}
