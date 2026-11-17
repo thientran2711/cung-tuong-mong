@@ -53,7 +53,7 @@ Finding behind it: a36 ty2 = one pale sage hanfu, ty3 = one pale grey-blue hanfu
 | m36 | peach | aqua | cranes in clouds | feather pin | scroll |
 | m37 | peach | mauve | round medallions | low chignon with a carved comb | flower branch |
 | m38 | peach | champagne | key-fret border | flower cluster at the temple | silk handkerchief |
-| m39 | peach | deep plum (silver thread) | coin pattern | high bun with pearl pins | jade pendant |
+| m39 | peach | deep peacock green-teal (silver thread) | coin pattern | high bun with pearl pins | jade pendant |
 | m40 | coral | indigo blue | water ripple | half-up with a silk ribbon | book |
 | m41 | gold | apricot gold | feather | butterfly hairpin | folded fan |
 | m42 | peach | burgundy wine | dragonfly | double loop buns with ribbon | small lantern |
