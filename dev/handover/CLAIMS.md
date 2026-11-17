@@ -787,5 +787,5 @@
 | tuanluc-sync-r1 PASS 4156a49d0 (TA TUẦN QUA chips + 42 numbers removed) → builder batch s32a; reviewer archived | review/tuanluc-sync-r1 | MAIN s32 | session_01UV1SzhfMi68Cmn88G2Yqze | PASS → BATCH | 17/11 14:13Z |
 | REVIEW world-events r1 (opus BIG) of 34520347 | review/world-events-r1 | C-AG | session_01UV1SzghsExH1c11ENnDH6Q | RUNNING | 17/11 14:22Z |
 | WORLD EVENTS part 2 — 18 events of world-events-2.md (opus) | review/world-events-2 | C-AG | session_01UV1Szm9sHk4A9qggdUgHhF | RUNNING | 17/11 14:22Z |
-| REVIEW one-core-dup3-land delta (3213abc8 → 5507baafa; opus; brief briefs/review-one-core-dup3-land.md) | review/one-core-dup3-land-r1 | B | (opening) | RUNNING | 17/11 14:28Z |
+| REVIEW one-core-dup3-land delta (3213abc8 → 5507baafa; opus; brief briefs/review-one-core-dup3-land.md) | review/one-core-dup3-land-r1 | B | session_01N1tNP4w2TLPYNZz2SH8hxL | RUNNING | 17/11 14:28Z |
 | REVIEW ag-all r1 (opus BIG) of 8f7bdd329 | review/ag-all-r1 | C-AG | (opening) | RUNNING | 17/11 14:27Z |
