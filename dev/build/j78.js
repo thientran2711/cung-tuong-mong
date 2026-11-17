@@ -118,7 +118,7 @@ function j78maidSpy(ag){const x=j78maidT();if(!x)return"";const M=ag||S.maid;
    if(i>=0&&pk&&pk.alive&&!pk.out&&!pk.queen&&(pk.ev||0)>0){const t=pk;{const C=P3C.tell(S,t),g0=C.go;A[i]=Object.assign({},A[i],C,{go:()=>{g0();S.ktPick=null}})}}}
  }catch(e){}return A}})();
 overhear=function(k){const here=liveRivals(true).filter(v=>whereOf(v)===k);if(here.length<2)return"";const v=pick(here);
- if(roll(od(40+S.mat*6))){const facts=intelLearn(v,1,{by:"Ngươi",how:"Nghe lén câu chuyện"});J78.ctx={how:"Ngươi nghe lén câu chuyện"};evA(S,v,BAL.eff.j78.evTop);J78.ctx=null;return `Ngươi nghe lén ${j78who(v)} nói chuyện: ${facts} ${J78_WHERE}`}return "Không nghe được gì."};
+ if(roll(od(40+eyes(S)*6))){const facts=intelLearn(v,1,{by:"Ngươi",how:"Nghe lén câu chuyện"});J78.ctx={how:"Ngươi nghe lén câu chuyện"};evA(S,v,BAL.eff.j78.evTop);J78.ctx=null;return `Ngươi nghe lén ${j78who(v)} nói chuyện: ${facts} ${J78_WHERE}`}return "Không nghe được gì."};
 /* the Dò la act (player): one fact besides the piece of evidence */
 (function(){const d0=doAct;doAct=function(i,k){const v=rivals[i];if(!v||k!=="spy")return d0.apply(this,arguments);const e0=v.ev||0;const n0=S.logSeq||0;J78.ctx={how:"Ngươi sai người dò la"};let r;try{r=d0.apply(this,arguments)}finally{J78.ctx=null}
   try{if((v.ev||0)>e0){const m=v.affair&&manById(v.affair);const L=(S.evd||{})[v.id]||[];if(m&&S.logs.slice(0,(S.logSeq||0)-n0).some(x=>x.includes("lén gặp"))){L.slice(-2).forEach(e=>{e.proves=`${j78Who(v)} lén lút tư thông với ${m.name}`;e.ref="affair";e.how="Tai mắt bắt gặp tận mắt"})}

@@ -132,7 +132,7 @@ const K61WHY="Chưa biết người này là ai";
 function k61Dis(b){if(!b||!/^<button/.test(b)||/data-(see|scout|visit|k61|pct|pg)=/.test(b))return b;if(/data-o=/.test(b))return b;
  let h=b.replace(/^<button([^>]*?)( disabled)?>/,"<button$1 disabled>");
  if(/<span class="kwhy">/.test(h))h=h.replace(/<span class="kwhy">[\s\S]*?<\/span>/,`<span class="kwhy">${K61WHY}</span>`);else if(/<small>/.test(h))h=h.replace("<small>",`<small><span class="kwhy">${K61WHY}</span> `);else h=h.replace(/<\/button>$/,`<small><span class="kwhy">${K61WHY}</span></small></button>`);return h}
-function k61AskBtn(e){const k=kOf61(e);const o=od(45+(S.mat||0)*8+((S.maid&&S.maid.loyal)||40)/5);
+function k61AskBtn(e){const k=kOf61(e);const o=od(45+eyes(S)*8+((S.maid&&S.maid.loyal)||40)/5);
  return pbtn(`data-k61="ask" data-kk="${k}"`,"Hỏi người hầu: đó là ai?",`${word(o)} · tốn: 1 khắc · thành: biết người này là ai (lời thật) · hỏng: người hầu cũng không biết`,whyTime(1))}
 /* owner 11/15 08:00Z: no "3/3" — a plain level word, tap = what raises it and what it opens (KIT_GLOSS "Quen biết", jhc) */
 const K61STW=["Người lạ","Mới thấy mặt","Biết tên","Đã quen"];
@@ -162,7 +162,7 @@ let K61RAW=false;(function(){const d0=directActs;directActs=function(){K61RAW=tr
    else{k61Meet(e,k==="emp"?"Nam nhân áo vàng chính là Hoàng thượng; ngươi vội quỳ xuống.":"Người ấy xưng danh.",2);popMsg=`<span class="g">Ngươi đã biết: đó là ${k61Title(e)}.</span>`}render()}return}
   const e=p&&k61VisEnt(p);const st0=e?k61St(e):3;const r=t0.apply(this,arguments);if(e&&st0===2&&S.visit&&(S.visit.tk||{})[popIdx])k61Know(e,"Trò chuyện thêm, ngươi hiểu người ấy hơn.",false,3);return r}}catch(x){console.error(x)}return t0.apply(this,arguments)}})();
 /* asking a servant (true answers only) */
-function k61Ask(k){const e=k61Ent(k);if(!e||!S||S.dead||Q.length||k61Named(e)||!can(1))return;spend(1);const o=od(45+(S.mat||0)*8+((S.maid&&S.maid.loyal)||40)/5);
+function k61Ask(k){const e=k61Ent(k);if(!e||!S||S.dead||Q.length||k61Named(e)||!can(1))return;spend(1);const o=od(45+eyes(S)*8+((S.maid&&S.maid.loyal)||40)/5);
  if(roll(o))k61Know(e,`${S.maid.name} thưa: "Đó là ${k61Title(e)}."`);else log(`${S.maid.name} cũng không biết ${k61Desc(e)} ấy là ai.`);render()}
 document.addEventListener("click",e=>{const b=e.target.closest("[data-k61]");if(!b||b.disabled)return;e.preventDefault();e.stopPropagation();if(b.dataset.k61==="ask")k61Ask(b.dataset.kk)},true);
 /* acts on a stranger need knowing her first */

@@ -21,8 +21,10 @@ const P3C={
     a refusal may be told to her master (r2 tmRefuse); cost = that person's bribe price (nv bribeCost, as Mua chuộc) */
  eyes:p=>{const X=BAL.ag.par3.eyes;const s=typeof tmBest==="function"?tmBest(p):null;
   if(!s)return{n:"Cài tai mắt",t:"Các cung khác chưa có ai để ngỏ lời.",c:{},o:0,w:{},l:{},lock:1};
-  return{n:"Cài tai mắt",t:`Ngỏ lời với ${tmWho(s)}; nhận hay không là ở người ấy.`,c:{bac:-nv(s,"bribeCost")},o:tmOdds(p,s),w:{},l:{...X.l},
-   x:`thành: ${s.name} làm tai mắt cho ${p===S?"ngươi":p.name} · hỏng: người ấy có thể mách chủ`,go:()=>tmTake(p,s),fail:()=>tmNo(p,s)}},
+  /* 2f3 (OD 17/11 ~17:10Z): her price is paid ONLY on success (w), a refusal costs no bạc (l keeps the other consequences + the sent servant's fear) */
+  const pr=nv(s,"bribeCost");if((p.bac||0)<pr)return{n:"Cài tai mắt",t:`Không đủ ${pr} bạc để ngỏ lời với ${tmWho(s)}.`,c:{},o:0,w:{},l:{},lock:1};
+  return{n:"Cài tai mắt",t:`Ngỏ lời với ${tmWho(s)}; nhận hay không là ở người ấy.`,c:{},o:tmOdds(p,s),w:{bac:-pr},l:{...X.l},
+   x:`thành: ${s.name} làm tai mắt cho ${p===S?"ngươi":p.name}, tốn ${pr} bạc · bại: không mất bạc; người ấy có thể mách chủ, kẻ đi đưa lời sợ liên lụy`,go:()=>tmTake(p,s),fail:()=>tmNo(p,s)}},
  anthai:p=>{const X=BAL.ag.par3.anthai;const x="tháng này nguy cơ sảy thai giảm một nửa";
   return ((p.arts&&p.arts.y)||0)>=X.self.y?{n:"Tự bào chế thuốc an thai",t:p===S?"Ngươi tự sắc thuốc, không ai nhúng tay được.":"Tự sắc thuốc an thai.",c:{...X.self.c},o:100,w:{},x,go:()=>{p.anthai=1}}
    :{n:"An thai",t:"Nằm nghỉ, uống thuốc an thai.",c:{...X.buy.c},o:100,w:{...X.buy.w},x,go:()=>{p.anthai=1}}},
@@ -33,7 +35,8 @@ const P3C={
     const who=typeof j78Who==="function"?j78Who(t):t.name;if(p===S)log(`${who} bị Thái hậu quở trách, mất sủng.`);return `${p.name} kể tội ${t.name} với Thái hậu; ${t.name} bị quở trách, mất sủng`}}},
  treat:p=>({n:"Xin chữa bệnh",c:{...BAL.ag.par3.treat.c},o:100,x:illName(p),run:()=>treat(p,"ty")})};
 /* run one card for an NPC: the player's runOpt order (cost, odds, gain or loss, then go / run) */
-function p3Run(v,C,why){if(!C||C.lock)return"";if(!agcCan(v,C.c))return"";agcPay(v,C.c);const o=C.o==null?100:C.o;const ok=o>=100||agTry(o),sf=!ok&&agSoft(o);p3Ap(v,ok?C.w:sf?null:C.l);let r="";
+/* 2f3: ONE card-odds rule with her deck (j2 runOpt): o + her quẻ luck for the card's domain (lotB), then the cap (agTry) */
+function p3Run(v,C,why){if(!C||C.lock)return"";if(!agcCan(v,C.c))return"";agcPay(v,C.c);const o=C.o==null?100:C.o;const ok=o>=100||agTry(o+lotB(v,C.dom)),sf=!ok&&agSoft(o);p3Ap(v,ok?C.w:sf?null:C.l);let r="";
  try{if(ok&&C.go)r=C.go()||"";if(!ok&&!sf&&C.fail)r=C.fail()||"";if(C.run&&!sf)r=C.run()||r}catch(e){agdErr("par3:"+why,e)}if(sf)r=agSoftTxt(v);AG3.stat.land++;AG3.stat.by[why]=(AG3.stat.by[why]||0)+1;
  return r?String(r).replace(/<[^>]+>/g,"").replace(/\.\s*$/,""):`${v.name} ${C.n.charAt(0).toLowerCase()+C.n.slice(1)}${ok?"":" nhưng không thành"}`}
 function p3Kc(C){try{return Math.max(1,cardCost(C))}catch(e){return 1}}
@@ -106,7 +109,7 @@ function p3Cold(v){const X=BAL.ag.par3.cold;let N;try{N=agNeeds(v)}catch(e){N={}
   else if(free)u=agcU(v,N,C.o==null?100:C.o,X.gFree,C.c||{},"self");
   else{const g={};for(const k in C.w||{})g[k==="suc"?"rest":k]=(C.w[k]||0)*(X.gStay[k==="suc"?"rest":k]||0);u=agcU(v,N,C.o==null?100:C.o,g,C.c||{},"self")}
   if(u>0)W.push([C,u])}
- if(!W.length)return"";const C=mindPick(W,v);if(!C)return"";const r=p3Run(v,C,"cold:"+C.n);const seen=(S.mat||0)>=BAL.mline.seeMat||!!v.p3Freed;v.p3Freed=null;return seen&&r?r+". ":""}
+ if(!W.length)return"";const C=mindPick(W,v);if(!C)return"";const r=p3Run(v,C,"cold:"+C.n);const seen=eyes(S)>=BAL.mline.seeMat||!!v.p3Freed;v.p3Freed=null;return seen&&r?r+". ":""}
 /* ledger labels */
 try{for(const k in AGC3ACT)ACT95["ag_cx3:"+k]=AGC3ACT[k]}catch(e){}
 Object.assign(window,{p3Cold,p3Free,p3Nun,AG3,P3C,AGC3BTN,AGC3ACT,p3On,p3Run,servDo});

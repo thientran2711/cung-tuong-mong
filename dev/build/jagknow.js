@@ -324,7 +324,28 @@ function tmWant(a,s){const W=tmB().want,o=ownerOf(s);if(!o)return["",0];const L=
  let foe=false;try{foe=aff(a,o)<0||aff(o,a)<0}catch(e){}if(s.grudge&&foe)L.push(["revenge",W.revenge]);
  return L.sort((x,y)=>y[1]-x[1])[0]||["",0]}
 const tmOdds0=typeof bribeOdds==="function"?bribeOdds:null;
-function tmOdds(a,s){const b=tmOdds0?tmOdds0(a,s):odA(a,35);if(!tmOn())return b;const w=tmWant(a,s)[1];return cl(Math.round((b+w)*((s.loyal||0)>=BAL.loy.top?tmB().loyalMul:1)),tmB().lo,tmB().hi)}
+/* 2f3: tmOdds = the ONE core (btTerms "tm": nết base ± lòng band ± chữ trọng (static + what her master offended / honoured) ± today's mood) + what the
+   recruiter can give (tmWant) + her Tâm cơ; odA (her act context: weak body, luck lotB, spy knowledge) then agOdd (BAL.odds.lo..hi, never 0 / 100) */
+function tmOdds(a,s){if(!tmOn())return tmOdds0?tmOdds0(a,s):odA(a,35);const B=btB();const raw=btRaw(s,ownerOf(s),"tm")+tmWant(a,s)[1]+Math.round(((a&&a.tamco||0)-B.tamcoMid)/B.tamcoDiv);return agOdd(odA(a,raw))}
+/* ===== AG-ALL-2f3 — ONE betray / sell / recruit odds core (owner OD 17/11 ~17:20Z verbatim in dev/OWNER_DECISIONS.md; numbers BAL.ag.bt) =====
+   terms (each [label, points]): nết base (qv codes: tham / lanh / chuyen / nhat / trung, else _) · trait words (Thanh liêm) · lòng band to the master ·
+   each virtue the person holds (static lean: Trung / Nghĩa … make betrayal harder) · each virtue the master OFFENDED (+off × seen deeds, up to offMax:
+   a LOYAL person may still sell / betray) or HONOURED (−hon …) — jmind mindTr record · today's mood toward the master (giận +, vừa được thưởng −).
+   kind "tm" (become someone's Tai mắt: bribe, recruit, threat, betray an order) / "sell" (sell the master's news; raw ≤ 0 = does not offer). */
+function btB(){return BAL.ag.bt}
+function btTerms(s,m,kind){const B=btB(),K=B[kind];const F=[];if(!s||!K)return F;
+ F.push(["nết",qv(K.base,s,K.base._)]);
+ try{for(const t of traitsOf(s)){const d=K.tr&&K.tr[t];if(d)F.push([t,d])}}catch(e){}
+ const lo=cl(s.loyal||0,0,100);const band=K.loy.find(b=>lo<b[0]);if(band&&band[1])F.push(["lòng "+lo,band[1]]);
+ let tr=[];try{tr=trongOf(s)}catch(e){}for(const v of tr){const d=K.v[v]||0;if(d)F.push(["trọng "+v,d])}
+ if(m&&typeof mindTr==="function"){const T=mindTr(s,m);for(const [v,n] of T.off)F.push(["chủ phạm chữ "+v,Math.round(B.off*Math.min(B.offMax,n))]);for(const [v,n] of T.hon)F.push(["chủ giữ chữ "+v,-Math.round(B.hon*Math.min(B.honMax,n))])}
+ const md=m&&typeof mindMood==="function"?mindMood(s,m):"";if(md&&B.mood[md])F.push([md==="gian"?"đang giận chủ":"vừa được chủ thưởng",B.mood[md]]);
+ return F}
+function btRaw(s,m,kind){return btTerms(s,m,kind).reduce((a,f)=>a+f[1],0)}
+function btOdds(s,m,kind){return agOdd(btRaw(s,m,kind))}
+/* a failed approach: the servant SHE (or the NPC) sent with the offer is afraid of being dragged in → lòng −fear (more for a timid one); 17:00Z */
+function tmFear(p,quietLog){try{const sv=typeof bestSent==="function"?bestSent(p):null;if(!sv)return"";const B=btB();const d=Math.round(B.fear*(netIs(sv,"timid")?B.fearTimid:1));
+ sv.loyal=cl((sv.loyal||0)-d,0,100);KN.stat.tmFear=(KN.stat.tmFear||0)+1;const r=`${sv.name} đi đưa lời, sợ bị liên lụy: lòng ${balSg(-d)}`;if(p===S&&!quiet&&!quietLog)try{log(r+".")}catch(e){}return r}catch(e){return""}}
 if(tmOdds0)bribeOdds=tmOdds;
 /* who could be asked: a servant of another living palace, nobody's spy yet */
 function tmCands(p){return tmSrv().filter(/* 2f2: live list */s=>{if(s.spyFor!=null)return false;const o=ownerOf(s);return !!o&&o!==p&&(o===S||(o.alive&&!o.out))})}
@@ -367,9 +388,9 @@ function tmPlace(p,n){n=Math.max(0,Math.round(+n||0));let have=matN(p);if(have>n
 /* the most willing real person for an approach (deterministic: a card re-picks the same one at run time) */
 function tmBest(p){let b=null,bo=-1;for(const s of tmCands(p)){const o=tmOdds(p,s);if(o>bo||(o===bo&&s.sid<b.sid)){b=s;bo=o}}return b}
 function tmTake(p,s){if(!p||!s)return"";s.spyFor=key(p);KN.stat.tmOk=(KN.stat.tmOk||0)+1;const r=`${tmWho(s)} nhận làm tai mắt cho ${p===S?"ngươi":p.name}.`;if(p===S&&!quiet)try{log(r)}catch(e){}return r}
-function tmNo(p,s,t){t=t==null?tmRefuse(p,s):t;const r=`${tmWho(s)} không nhận làm tai mắt cho ${p===S?"ngươi":p.name}${t?", còn bẩm lại với chủ":""}.`;if(p===S&&!quiet)try{log(r)}catch(e){}return r}
+function tmNo(p,s,t){t=t==null?tmRefuse(p,s):t;const f=tmFear(p,1);const r=`${tmWho(s)} không nhận làm tai mắt cho ${p===S?"ngươi":p.name}${t?", còn bẩm lại với chủ":""}.${f?" "+f+".":""}`;if(p===S&&!quiet)try{log(r)}catch(e){}return r}
 /* one approach to a given person (her odds = tmOdds, + bonus for a threat) → the person decides */
-function tmAsk(p,s,bonus){KN.stat.tmTry=(KN.stat.tmTry||0)+1;return roll(cl(tmOdds(p,s)+(bonus||0),tmB().lo,tmB().hi))?tmTake(p,s):(tmNo(p,s),"")}
+function tmAsk(p,s,bonus){KN.stat.tmTry=(KN.stat.tmTry||0)+1;return roll(agOdd(tmOdds(p,s)+(bonus||0)))?tmTake(p,s):(tmNo(p,s),"")}
 /* the j7 volunteer: a real servant of another palace whose own odds for her reach vol.min */
 function tmVol(){const s=tmBest(S);return s&&tmOdds(S,s)>=tmB().vol.min?s:null}
 /* ================= AG-ALL-2g — INFO SELLERS (owner OD 17/11 ~16:50Z (2), verbatim in dev/OWNER_DECISIONS.md: "Có những người bán tin ... nô tài có một
@@ -388,7 +409,9 @@ function tmVol(){const s=tmBest(S);return s&&tmOdds(S,s)>=tmB().vol.min?s:null}
 function knSB(){return BAL.ag.sell}
 function knSellVal(k){return knSB().val[String(k).split(":")[0]]||0}
 function knSellPrice(val,s){const P=knSB();return Math.max(1,Math.round(P.price*val/100*(1+qv(P.ask,s,0))))}
-function knSellW(s){const P=knSB();const lo=cl(s.loyal||0,0,100);if(lo>=P.loy)return 0;try{if(traitsOf(s).some(t=>P.never.includes(t)))return 0}catch(e){}/* Thanh liêm: "không bán tin" (BAL.net.T) */return Math.max(0,qv(P.q,s,0))*(1-lo/100)}
+/* 2f3: the seller's will = the ONE core btRaw(s, her master, "sell") (nết + lòng band + chữ trọng incl. what her master offended + mood); ≤ 0 = never
+   offers (a loyal, unoffended person; Thanh liêm) — by the numbers in BAL.ag.bt.sell, no separate filter */
+function knSellW(s){return Math.max(0,btRaw(s,ownerOf(s),"sell"))/100}
 /* the khắc stamp: a refusal holds for this khắc only */
 function knKhK(){let b="";try{b=agKey()}catch(e){}return b+":"+agKh()}
 function knNo(){const T=knTb();if(!T.no||T.no.k!==knKhK())T.no={k:knKhK(),ids:{}};return T.no.ids}
@@ -448,4 +471,4 @@ function knSellArc(A,ok){if(!ok||!knOn())return"";const r=knSellPick(S);if(!r)re
  if(typeof j95sync==="function"){const s0=j95sync;j95sync=function(){const r=s0.apply(this,arguments);try{knSellTick()}catch(e){agErr("knSellTick",e)}return r}}
  try{if(typeof GB67==="object"&&GB67.spy&&GB67.spy.o){for(const i of [0,1]){const op=GB67.spy.o[i];if(!op)continue;const g0=op.go;op.go=function(A,ok){let a="";try{a=g0?g0.apply(this,arguments)||"":""}catch(e){}return [a,knSellArc(A,ok)].filter(Boolean).join(" ")}}}}catch(e){}
 })();
-Object.assign(window,{knSellNews,knSellPick,knSellGive,knSellCard,knSellNpcBuy,knSellTick,knSellPrice,knSellArc});
+Object.assign(window,{btTerms,btRaw,btOdds,tmFear,knSellNews,knSellPick,knSellGive,knSellCard,knSellNpcBuy,knSellTick,knSellPrice,knSellArc});

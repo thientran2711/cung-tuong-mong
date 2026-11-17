@@ -54,7 +54,7 @@ function eitPilfer(p,G){if(p===S)EIT_PIL=null;try{if(!p||p.dead||p.out||!G||!G.l
  const i=p.inv.indexOf(best.e);if(i>=0)p.inv.splice(i,1);best.g.E.splice(best.g.E.indexOf(best.e),1);best.g.n=Math.max(0,best.g.n-1);if(!best.g.n)best.g.lost=true;best.g.pil=1;
  hit.pilN=(hit.pilN||0)+1;const X={p,s:hit,k:best.e.k,g:best.g};if(window.agOn&&agOn()&&hit!==p.maid){const v=best.v;X.sold=()=>eitPilSell(hit,v)}/* AG-ALL-2 G6: she sells it, as the maid player does (when unnoticed, or let off with it) */
  if(p!==S){eitPilNpc(X);return X}
- const P=BAL.eit.pil;const see=cl(P.see+(S.mat||0)*P.seeMat+(S.maid&&S.maid!==hit&&(S.maid.loyal||0)>=BAL.loy.trust?P.seeMaid:0),5,95);
+ const P=BAL.eit.pil;const see=cl(P.see+eyes(S)*P.seeMat+(S.maid&&S.maid!==hit&&(S.maid.loyal||0)>=BAL.loy.trust?P.seeMaid:0),5,95);
  if(roll(see))EIT_PIL=X;else if(X.sold)X.sold();return X}catch(e){console.error("eitPilfer",e);return null}}
 function eitPilBack(X){const p=X.p||S;const e={k:X.k,from:"noivu",d:S.turn};p.inv=p.inv||[];p.inv.push(e);if(X.g){X.g.E.push(e);X.g.n++;X.g.lost=false}}
 function eitIsMaid(s){return s===S.maid}
@@ -117,7 +117,7 @@ function eitReWk(p){const g=eitRegard(p);return 1+(roll(100-g)?1:0)+(roll(100-g)
 (function(){if(typeof tyLost!=="function")return;const l0=tyLost;tyLost=function(p,why){const r=l0.apply(this,arguments);try{if(p)p.tyNvp=wk()+eitReWk(p)}catch(e){}return r};window.tyLost=tyLost})();
 function eitReNeed(){try{return !!(S&&!S.dead&&!S.out&&typeof tyOn==="function"&&tyOn(S)&&!(typeof isSrv==="function"&&isSrv()))}catch(e){return false}}
 function eitReOdds(){const R=BAL.eit.re,r=Math.max(0,Math.min(7,rkOf(S)|0));const bribe=cl(R.base+r*R.rk+Math.round((S.sung||0)/R.sungDiv),5,95);
- const m=S.maid&&!S.maid.spyFor?S.maid:null;const alt=eitAlt(R.tip[r],r);const maid=m?cl(bribe-alt.pen+cl(Math.round(((m.loyal||0)-50)/10)+Math.floor((S.mat||0)/2),-R.maidAdj,R.maidAdj),5,95):0;
+ const m=S.maid&&!S.maid.spyFor?S.maid:null;const alt=eitAlt(R.tip[r],r);const maid=m?cl(bribe-alt.pen+cl(Math.round(((m.loyal||0)-50)/10)+Math.floor(eyes(S)/2),-R.maidAdj,R.maidAdj),5,95):0;
  const home=S.origin&&BAL.home?(BAL.home[S.origin.k]||0):0;const fam=S.origin?cl((home>0?R.famOk:R.famPoor)-(S.homeCut?R.famCut:0),5,95):0;
  return{bribe,maid,fam,tip:R.tip[r],m,suc:alt.suc}}
 /* the road without silver is priced like the silver at her rank (balance-pass rule: jstory altCost / BAL.bacTuan / BAL.altK when present,

@@ -21,7 +21,7 @@ function affW(v){return quyW(v)}/* ONE CORE: the VANPHONG "quý" word (jhc quyW,
 function fbar(v,lo,hi,good){const pc=cl((v-lo)/(hi-lo)*100,0,100);return `<span class="fbar"><u class="${good?"g":"r"}" style="width:${pc}%"></u></span>`}
 function feel(a,o){return a==null?`<span class="ef n">chưa rõ</span>`:`<span class="ef ${a>BAL.quyLv[2]?"g":a<BAL.quyLv[1]?"r":"n"}">${affW(a)} · ${a>0?"+":""}${a}</span>${fbar(a,-100,100,a>=0)} <span class="ef ${o>=30?"r":o>10?"r":"n"}">${oanW(o)} · ${Math.round(o)}</span>${fbar(o,0,100,false)}`}
 function pron(p){return p==="emp"?"ngài":p==="th"?"người":"nàng"}
-function knows(v){kn();return v===S||S.met[v.id]!=null||sameHouse(S,v)||(v.ev||0)>0||(S.mat||0)>=4}
+function knows(v){kn();return v===S||S.met[v.id]!=null||sameHouse(S,v)||(v.ev||0)>0||eyes(S)>=4}
 function relLines(v){return [`<span class="rlab">Ngươi với ${pron(v)}:</span> ${feel(aff(S,v),oan(S,v))}`,`<span class="rlab">${pron(v)[0].toUpperCase()+pron(v).slice(1)} với ngươi:</span> ${knows(v)?feel(aff(v,S),oan(v,S)):feel(null)}`]}
 function favLine(v){kn();const k=S.kf[v.id];return k?`${ic("sung",14)}Sủng ${k.s} <span class="past">(biết ${agoW(k.w)})</span>`:`${ic("sung",14)}Sủng: <span class="past">chưa rõ (xem sổ thị tẩm)</span>`}
 function notesLine(v){kn();const L=S.notes[v.id]||[];return L.length?`<span class="past">Đã biết: ${L.slice(0,2).join(" · ")}</span>`:""}
@@ -52,9 +52,9 @@ function seeBtn(v){if(!v||v===S||!v.alive||v.out||together(S,v)||!locKnown(v))re
  return pbtn(`data-see="${v.id}" class="seeb"`,`Đến gặp ${v.name.split(" ").pop()}`,walkLate(k,tc)?`Chắc chắn · tốn: ${tc} khắc · thành: đến nơi buổi sau, có khi nàng đã đi chỗ khác`:`Chắc chắn · tốn: ${tc} khắc · thành: gặp mặt, mọi việc làm tại chỗ, dễ hơn sai người`,why)}
 document.addEventListener("click",e=>{const s=e.target.closest("[data-see]");if(s&&!s.disabled){e.preventDefault();e.stopPropagation();goSee(+s.dataset.see);return}const f=e.target.closest("[data-follow]");if(f){e.preventDefault();e.stopPropagation();goSee(+f.dataset.follow)}},true);
 /* finding someone: send her eyes (1 khắc), or invite her over */
-function scoutBtn(v){if(!v||!v.alive||v.out||locKnown(v)||together(S,v))return"";const o=od(50+(S.mat||0)*8+S.tamco/10);return pbtn(`data-scout="${v.id}"`,"Sai tai mắt dò nơi ở",`${word(o)} · tốn: 1 khắc · thành: biết nàng ở đâu buổi này · hỏng: không dò ra`,whyTime(1))}
+function scoutBtn(v){if(!v||!v.alive||v.out||locKnown(v)||together(S,v))return"";const o=od(50+eyes(S)*8+S.tamco/10);return pbtn(`data-scout="${v.id}"`,"Sai tai mắt dò nơi ở",`${word(o)} · tốn: 1 khắc · thành: biết nàng ở đâu buổi này · hỏng: không dò ra`,whyTime(1))}
 function inviteBtn(v){/* previews: placeWhere (the invite is answered there, relAdd BAL.eff.j21.top) */if(!v||!v.alive||v.out||sameHouse(S,v))return"";const pend=S.invite&&S.invite.id===v.id;const o=inviteO(S,v);return pbtn(`data-invite="${v.id}"`,"Mời đến cung ta",`${word(o)} · tốn: 1 khắc · thành: buổi sau nàng sang cung ngươi · hỏng: nàng từ chối, thiện cảm ${balSg(BAL.eff.j21.top)}`,pend?"đã mời, chờ buổi sau":whyTime(1)||(aff(v,S)<BAL.invite.hate?"nàng ghét ngươi, sẽ không đến":""))}
-function scout(id){const v=rivals.find(x=>x.id===id);if(!v||!can(1)||S.dead||Q.length)return;spend(1);const o=od(50+(S.mat||0)*8+S.tamco/10);if(roll(o)){seeLoc(v);log(`Tai mắt báo: ${v.name} đang ở ${placeName(whereOf(v))} buổi này.`)}else log(`Tai mắt không dò ra ${v.name} ở đâu.`);render()}
+function scout(id){const v=rivals.find(x=>x.id===id);if(!v||!can(1)||S.dead||Q.length)return;spend(1);const o=od(50+eyes(S)*8+S.tamco/10);if(roll(o)){seeLoc(v);log(`Tai mắt báo: ${v.name} đang ở ${placeName(whereOf(v))} buổi này.`)}else log(`Tai mắt không dò ra ${v.name} ở đâu.`);render()}
 /* ONE rule for every invitation (her button and an NPC host, AG-ALL-2e3 cx3:invite): the guest's odds of coming */
 function inviteO(h,g){const I=BAL.invite;return od(I.base+aff(g,h)/I.affD+(rkOf(h)-rkOf(g))*I.rk)}
 function invite(id){const v=rivals.find(x=>x.id===id);if(!v||!can(1)||S.dead||Q.length)return;spend(1);S.invite={id:v.id,o:inviteO(S,v)};log(`Ngươi sai người mời ${v.name} buổi sau sang cung.`);render()}

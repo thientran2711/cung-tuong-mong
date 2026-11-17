@@ -45,7 +45,7 @@ function tsbSev(){const x=Math.random();return x<TSB_THU_W[0]?1:x<TSB_THU_W[0]+T
 
 /* ---------------- defences shared by every planned harm (one rule for everyone) ---------------- */
 function tsbGuard(t){if(!t)return 0;let g=0;const w=tsbWk();if((t.tsbGuard||0)>=w)g+=25;g+=petGuard(t);if(t===S?tsbMaid(S):(t.maid&&(t.maid.loyal||0)>=BAL.loy.trust))g+=8;return g}
-function tsbThuO(a,t){return cl(Math.round(odA(a,44+(a.tamco||0)/5+(a.mat||0)*3)-tsbGuard(t)),5,90)}
+function tsbThuO(a,t){return cl(Math.round(odA(a,44+(a.tamco||0)/5+eyes(a)*3)-tsbGuard(t)),5,90)}
 function tsbFireO(a,t){return cl(Math.round(odA(a,46+(a.tamco||0)/5)-tsbGuard(t)),5,90)}
 
 /* ---------------- 1. Thả thú dữ (Hại nặng) ---------------- */

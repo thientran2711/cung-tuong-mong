@@ -643,7 +643,7 @@ BAL.ag.staff={st:{duc:[10,40],tamco:[10,40],danh:[0,10],suc:[60,90],bac:[0,20]},
              j96 (accuser: base + ghen / ghen − rel), lost1 / lost2 (jlost), tin (informant: max(floor, score)^pow), wd (jwd92b), ag (jagent SOC target)
    men       menDecide (a stray man seen): report [base, hostility per], hide [Tham vọng, else], listen [Đa nghi, else],
              ignore [Hiền lành / Nhu mì, else, floor, hostility per], keep = weight added to the old fixed answer */
-Object.assign(BAL,{mind:{like:3,likeSung:1,herMood:30,learnTalk:20,spyPri:50,disN:[1,2],slip:12,temp:1,strW:1.6,abW:.012,abMid:40,trW:.35,wMin:.05,odds:4,kidTal:55,bacPer:3,pickMin:.01,
+Object.assign(BAL,{mind:{seen:{cap:3,fade:.85}/* 2f3: a servant's record of her master's deeds per virtue (jmind mindSeen): ±1 per deed, cap, ×fade per tuần */,like:3,likeSung:1,herMood:30,learnTalk:20,spyPri:50,disN:[1,2],slip:12,temp:1,strW:1.6,abW:.012,abMid:40,trW:.35,wMin:.05,odds:4,kidTal:55,bacPer:3,pickMin:.01,
  pick:{j10fr:{base:1},j28up:{base:1,aff:10},j28soc:{base:4,aff:4,oan:4},j34:{base:2},j4:{top:30,floor:1},j40:{base:1,host:5},j55:{host:20},j8buy:{top:10,floor:1},
   j8ev:{ev:2,rel:5},j83:{base:1},j96:{base:40,ghen:2,floor:1},lost1:{base:1},lost2:{base:2},tin:{floor:1,pow:2},wd:{base:1},ag:{base:1}},
  men:{report:[1,25],hide:[2,.6],listen:[2,.5],ignore:[2.5,1.2,.3,80],keep:4}}});
@@ -1107,3 +1107,15 @@ BAL.talk.secretMal=50;BAL.talk.secretGrab=50;
 BAL.ag.know.tm={cap:10,lo:3,hi:95,want:{bac:15,protect:15,post:10,revenge:20},post:3,loyalMul:.35,tell:50,oan:6,
  /* 2f2: threat = fear bonus on tmOdds for Dọa tố (threatServ); vol = the j7 volunteer comes only when her odds for him reach min, she pays bac */
  threat:20,vol:{min:55,bac:30}};
+/* AG-ALL-2f3 — ONE betray / sell / recruit odds core (owner OD 17/11 ~17:20Z: "tính cách tham lam ... 60% ... lòng ... dưới 25 ... cộng thêm 10% ... trọng
+   cái chữ nghĩa ... trừ đi 10% ... cộng thêm 5% nếu mà giận chủ, hoặc là trừ đi 5% nếu mà đang vui mới được chủ thưởng"; ~17:00Z nothing 100 %).
+   jagknow btTerms(servant, master, kind): base by nết (qv codes) + trait words + lòng band to the master + each held virtue (static lean) + each virtue
+   the master OFFENDED (+off per seen deed, up to offMax) / HONOURED (−hon …) (jmind mindSeen record) + today's mood toward the master; the roll =
+   agOdd (BAL.odds.lo..hi). kind tm = becoming someone's Tai mắt (bribe / recruit / threat / betray an order); sell = selling the master's news
+   (raw ≤ 0 → never offers: a loyal, unoffended person does not sell). want / tamco: what the recruiter offers and her cunning (tm only).
+   fear = lòng her SENT servant (bestSent) loses when an approach fails (×timid for a timid one); 17:00Z "lòng của cung nữ đó còn trừ". */
+/* 2f3 balance: one real Tai mắt = w points of the old 0–10 eyes stat in every formula / gate that reads it (j1 eyes); cap = the old cap */
+BAL.ag.eye={w:3,cap:10};
+BAL.ag.bt={off:15,offMax:3,hon:5,honMax:3,mood:{gian:5,thuong:-5},fear:4,fearTimid:1.5,tamcoMid:50,tamcoDiv:5,
+ tm:{base:{tham:55,lanh:35,chuyen:30,nhat:15,trung:5,_:30},tr:{"Thanh liêm":-15},loy:[[25,10],[50,0],[70,-10],[85,-25],[101,-45]],v:{"Trung":-10,"Nghĩa":-5,"Liêm":-10}},
+ sell:{base:{tham:60,lanh:25,chuyen:20,nhat:0,trung:-20,_:5},tr:{"Thanh liêm":-40},loy:[[25,10],[50,0],[70,-20],[101,-60]],v:{"Nghĩa":-10,"Trung":-10,"Tín":-10,"Liêm":-5}}};

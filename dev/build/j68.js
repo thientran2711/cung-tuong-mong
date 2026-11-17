@@ -48,7 +48,7 @@ function relTok(a,n){if(!a||!n)return"";const nm=a.k==="th"?"Thái hậu với n
 function relDo(a,n){if(!a||!n)return;try{
  if(a.k==="rv")relAdd(S,a.o,n);else if(a.k==="sv"||a.k==="maid")a.o.loyal=cl((a.o.loyal||0)+n,0,100);else if(a.k==="kid")a.o.fond=cl((a.o.fond||0)+n,0,100);
  else if(a.k==="man")a.o.af=(a.o.af||0)+Math.round(n/2);else if(a.k==="th")apply({th:n});else if(a.k==="emp")apply({sung:n});else if((a.k==="doc"||a.k==="eun")&&a.o){a.o.af=a.o.af||{};if(typeof a.o.af==="object")a.o.af.me=(a.o.af.me||0)+n}}catch(x){}}
-function fx6(o){return Object.entries(o||{}).filter(([k,v])=>v&&(NAMES[k]||k==="an")).map(([k,v])=>{const n=k==="an"?"Ân tình":NAMES[k];const vv=k==="sung"?sg(v):v;return (vv>0?G6:R6)(`${n} ${vv>0?"+":""}${vv}`)})}
+function fx6(o){return Object.entries(o||{}).filter(([k,v])=>v&&(NAMES[k]||k==="an")).map(([k,v])=>{const n=k==="an"?"Ân tình":NAMES[k];const vv=k==="sung"?sg(v):v;return (vv>0?G6:R6)(statTxt(k,vv,n))})}
 function ap6(o){o=Object.assign({},o||{});if(o.an){S.an=cl((S.an||0)+o.an,0,100);delete o.an}apply(o)}
 /* one choice. s: {c immediate fx, p odds, w/l fx on success/fail, r/lr [[actor,n]] relation on success/fail, wt/lt/k extra tokens, ok/no callbacks, wl/ll log lines} */
 function c6(n,s){s=s||{};const wt=fx6(s.w).concat((s.r||[]).map(([a,v])=>relTok(a,v)),s.wt||[]).filter(Boolean),lt=fx6(s.l).concat((s.lr||[]).map(([a,v])=>relTok(a,v)),s.lt||[]).filter(Boolean);

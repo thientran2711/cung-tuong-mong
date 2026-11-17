@@ -49,7 +49,7 @@ wrap("wdNpcDress",f=>function(v){if(npcOff(v))return;return f.apply(this,argumen
 /* fortune lots: an NPC's lot stays the host's */
 wrap("drawLot",f=>function(p){if(npcOff(p))return p.lot||{i:0,lv:0,dom:""};return f.apply(this,arguments)});
 /* Thái hậu / Hoàng hậu mood (S.cm, a world key): the host rolls it; the guest keeps only her own spy line and resets her own offence count */
-wrap("cmMonth",f=>function(){if(guest()){try{if(!S||S.dead)return;const C=cmSt();C.thDrop=0;C.hhDrop=0;if((S.mat||0)>=3)C.spy=wk()}catch(e){}return}return f.apply(this,arguments)});
+wrap("cmMonth",f=>function(){if(guest()){try{if(!S||S.dead)return;const C=cmSt();C.thDrop=0;C.hhDrop=0;if(eyes(S)>=3)C.spy=wk()}catch(e){}return}return f.apply(this,arguments)});
 /* the safety net's snapshots (jcoopworld guestNet) around the outermost endTurn, so every module's week-end work counts as her roll */
 wrap("endTurn",f=>function(){const o=own;own=0;/* a week end reached from inside an act is a world loop again */try{if(window.COOPW&&COOPW.netWrap)return COOPW.netWrap(f,this,arguments);return f.apply(this,arguments)}finally{own=o}});
 wrap("nextBuoi",f=>function(){const o=own;own=0;try{return f.apply(this,arguments)}finally{own=o}});

@@ -49,7 +49,7 @@ function ccStep(a){a.cc=(a.cc||0)+1;a.ccT=S.turn;if(!roll(ccRisk(a)))return"";a.
 /* ---------- the four court acts (one function per act, for her and for every NPC) ---------- */
 function giftO(a,h){return odA(a,45+(nv(h,"giftO"))+rkOf(a)*3+(tdHouse(a)===h.c?15:0)+(h.af[key(a)]||0)/5)}
 function askO(a){return odA(a,30+tdPow(tdHouse(a))/2+mm()/2)}
-function probeO(a){return odA(a,35+(a.mat||0)*6+(a.tamco||0)/5)}
+function probeO(a){return odA(a,35+eyes(a)*6+(a.tamco||0)/5)}
 function leakO(a,t){return odA(a,30+deG(a,t)*15+(tdPow(tdHouse(a))-tdPow(tdHouse(t)))/4+(S.emp.mood>=2?8:0))}
 function traceO(a){return cl(Math.round(35-(a.tamco||0)/4),10,40)}
 function tdGift(a,h){if(!h||a.bac<40)return"";ap(a,{bac:-40});const k=key(a);let r;

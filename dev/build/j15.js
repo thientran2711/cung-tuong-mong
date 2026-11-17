@@ -67,7 +67,7 @@ function staffTabHTML(){const [cm,ce]=capOf(S),nm=S.staff.filter(s=>s.role==="ma
   if(e.t==="thh"){const s=e.s;return pcard({f:e.f,name:s.name,rank:`${srkName(s)} · Thái hậu`,lines:sinfo(s),chips:schip(s),groups:typeof elderGroups==="function"?elderGroups(s):[]})}
   const s=e.s,v=e.v;const known=s.lover&&(S.knowDT||[]).includes(s.sid);
   return pcard({f:e.f,name:s.name,rank:`${s.role==="maid"?"Cung nữ":"Thái giám"} · cung ${v.name}`,lines:sinfo(s),chips:schip(s),note:s.spyFor==="me"?"Người này đã là tai mắt của ngươi.":"",
-   groups:(s.eid&&typeof elderGroups==="function"?elderGroups(s):[]).concat(s.spyFor==="me"?[]:[["Mưu kế",[pbtn(`data-sv="mua" data-sid="${s.sid}"`,"Mua chuộc",`Bạc -30 · ${word(typeof bribeOdds==="function"?bribeOdds(S,s):odA(S,35+nq(s,"greed",BAL.net.k.bribeGreed)-s.loyal/3+S.tamco/5))}`,t2||(S.bac<30?"cần 30 bạc":"")),known?pbtn(`data-sv="doa" data-sid="${s.sid}"`,"Dọa tố đối thực","2 khắc",t2):""].concat(typeof mlHitBtns==="function"?mlHitBtns(s,v,t2):[])]])})};
+   groups:(s.eid&&typeof elderGroups==="function"?elderGroups(s):[]).concat(s.spyFor==="me"?[]:[["Mưu kế",[pbtn(`data-sv="mua" data-sid="${s.sid}"`,"Mua chuộc",`thành: Bạc -${nv(s,"bribeCost")} · ${word(bribeOdds(S,s))}`,t2||(S.bac<nv(s,"bribeCost")?`cần ${nv(s,"bribeCost")} bạc`:"")),known?pbtn(`data-sv="doa" data-sid="${s.sid}"`,"Dọa tố đối thực","2 khắc",t2):""].concat(typeof mlHitBtns==="function"?mlHitBtns(s,v,t2):[])]])})};
  return `<div class="pgwrap">`+pager("staff",L,mk)+`</div>`}
 
 /* ---- people met in a place (stage pop) ---- */

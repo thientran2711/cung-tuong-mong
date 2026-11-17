@@ -98,7 +98,7 @@ const WD_ITEMS={};
   /* register in the chest's IT table; keep old fields of the three old hair items (tramngoc, boodieu, tramphuong) but hide their rank hint */
   IT[k]=Object.assign(IT[k]||{tg:sl==="tram"?["hh","rv"]:["rv"]},{n,kd:sl==="tram"?"Trâm cài":"Y phục",d,pr:it.pr,wsl:sl,wd:1});if(it.nt){IT[k].keep=1;IT[k].tg=[]}
   if(itm(k).sl==="hair")delete IT[k].sl}})();
-function plainFx(o){return Object.entries(o||{}).filter(([k,v])=>v&&NAMES[k]).map(([k,v])=>`${NAMES[k]} ${v>0?"+":""}${v}`).join(", ")}
+function plainFx(o){return Object.entries(o||{}).filter(([k,v])=>v&&NAMES[k]).map(([k,v])=>statTxt(k,v)).join(", ")}
 /* old ngự-ban things are ngự tứ too */
 ["ngocboi","bienngu"].forEach(k=>{if(IT[k]){IT[k].nt=1}});
 function wdIsNt(e){return !!(e&&((WD_ITEMS[e.k]&&WD_ITEMS[e.k].nt)||e.nt||(IT[e.k]&&itm(e.k).nt)))}
@@ -262,7 +262,7 @@ function wdRemark(p,st){const r=wdRemarker(p);if(!r)return"";const view=r.sure?s
   under:`${R0} cười khẽ: ${fill(kLine("wd:under",kTP("wd:under")||WD_SAY.under,VO))}`,
   tang:`${R0} thấy ${wdNm(p)} mặc ${nm} giữa quốc tang.`}[view];
  /* who hears it: p always; others by chance; the player also through her tai mắt */
- for(const o of consorts()){if(o===p)continue;if(o===S?(roll(30+(S.mat||0)*8)):roll(45))wdSee(o,p,view,r.name,r.sure)}
+ for(const o of consorts()){if(o===p)continue;if(o===S?(roll(30+eyes(S)*8)):roll(45))wdSee(o,p,view,r.name,r.sure)}
  if(r.v)wdSee(r.v,p,view,r.name,r.sure);
  let fx="";
  /* being looked down on only costs Danh when she really is too plain (a wrong sneer falls flat) */
@@ -275,7 +275,7 @@ function wdRemark(p,st){const r=wdRemarker(p);if(!r)return"";const view=r.sure?s
   try{intelAdd(p,{k:"wd",kind:"wd",txt:t},{by:r.name,how:"nghe nhận xét về y phục"})}catch(e){}log(t+fx)}}
  return ""}
 /* tai mắt: a loyal servant finds out the TRUE phẩm of one unknown item a known consort wears (Nội vụ phủ ledgers) */
-function wdTaimat(){const w=watcher();if(!w||!roll(WD.taimat+(S.mat||0)*3))return"";
+function wdTaimat(){const w=watcher();if(!w||!roll(WD.taimat+eyes(S)*3))return"";
  const C=liveRivals(true).filter(v=>(typeof knows!=="function"||knows(v)));const cand=[];for(const v of C){const ww=wdOf(v);for(const sl of ["tram","y"]){const e=ww[sl];if(e&&!wdKnowsE(e))cand.push([v,e])}}
  if(!cand.length)return"";const [v,e]=pick(cand);const t=wdReveal(e.k,`${w.name} dò được ở Nội vụ phủ`);const ks=wdKnownStatus(v);let more="";
  if(ks){wdSee(S,v,ks,w.name,true);more=` Vậy ${wdNm(v)} đang ăn vận ${WD_ST_WORD[ks]}.`}
@@ -308,7 +308,7 @@ function wdFrame(a,t){ap(a,{bac:-40});a.schemes=(a.schemes||0)+1;if(typeof ducAd
  if(F.take){const i=a.inv.indexOf(F.take);if(i>=0)a.inv.splice(i,1)}
  /* item conservation (jil): the very piece is planted (same id) */t.inv=t.inv||[];const P0={k:F.k,h:1,by:key(a),gh:key(a)};if(F.take&&F.take.iu)P0.iu=F.take.iu;t.inv.push(P0);
  if(t===S){S.wdFrame={by:key(a),k:F.k,due:wk()+1+R(2)};
-  if(roll(WD.warnBase+(S.mat||0)*6+(watcher()?15:0))){const w=watcher();const named=roll(WD.traceBase+(S.mat||0)*WD.traceMat);if(named){S.wdFrame.traced=1;evA(S,a,BAL.eff.j92.evWdFrame_2)}
+  if(roll(WD.warnBase+eyes(S)*6+(watcher()?15:0))){const w=watcher();const named=roll(WD.traceBase+eyes(S)*WD.traceMat);if(named){S.wdFrame.traced=1;evA(S,a,BAL.eff.j92.evWdFrame_2)}
    Q.push({t:"Tai mắt báo tin",who:pMe(),h:`<p>${w?w.name:"Người hầu"} thấy ${named?"người của "+wdNm(a):"một kẻ lạ"} lén vào phòng ngươi lúc vắng người.</p><p class="past">Nên kiểm tra đồ trong rương.${named?` Đã ghi vào Sổ ghi (chứng cứ về ${a.name} ${balSg(BAL.eff.j92.evWdFrame_2)}).`:""}</p>`});
    log(`${w?w.name:"Người hầu"} thấy ${named?"người của "+wdNm(a):"một kẻ lạ"} lén vào phòng ngươi.`)}
   return ""}
@@ -330,7 +330,7 @@ function wdFrameResolve(a,t){if(typeof lostUnwear==="function")lostUnwear(t,a);c
  const lo=!!e.lo,cu=wdFrameCulprit(a,e);
  if(t!==S&&roll(25)){if(lo){wdFrameTake(t,i);return `${wdNmC(t)} cho người soát phòng trước, thấy ${nm} của ${wdNm(a)} lẫn trong rương, sai người đem trả. `}const f=inspect(t);if(f.length)return `${wdNmC(t)} cho người soát phòng trước, tìm ra ${f.join("; ")}. Mưu giá họa của ${wdNm(a)} không thành. `}
  if(t===S){pushDil(mkP("wdframe",{a:key(a),k:e.k,lo:e.lo||0}),lo?"Đồ thất lạc":"Bị tố ăn cắp");return ""}
- const o=cl(WD.clearBase+(t.mat||0)*WD.clearMat+wdFrameEv(t,a,e)*10,5,95);
+ const o=cl(WD.clearBase+eyes(t)*WD.clearMat+wdFrameEv(t,a,e)*10,5,95);
  if(roll(o)){wdFrameTake(t,i);
   if(cu){evA(t,cu,BAL.eff.j92.evWdFrameResolve);ap(cu,{danh:-10});punish(cu,"giá họa vu oan",2);return `${wdNmC(a)} tố ${wdNm(t)} ${lo?"giữ":"ăn trộm"} ${nm}; ${wdNm(t)} minh oan được, tra ra ${wdNm(cu)} giá họa. ${wdNmC(cu)} Danh -10, bị phạt. `}
   return `${wdNmC(a)} báo ${nm} thất lạc ở chỗ ${wdNm(t)}; ${wdNm(t)} minh oan được: món đồ chỉ thất lạc, không ai lấy trộm. ${nm} về lại với ${wdNm(a)}. `}
@@ -338,7 +338,7 @@ function wdFrameResolve(a,t){if(typeof lostUnwear==="function")lostUnwear(t,a);c
 /* her side of it: choices show only their cost; the result card tells the truth after */
 PEND.wdframe=pp=>{const a=byKey(pp.a);if(!a)return null;const nm=wdFrameNm(pp.k);const tr=!!pp.tr;const lo=!!pp.lo;
  const cur=()=>{if(typeof lostUnwear==="function")lostUnwear(S,a);const i=wdFrameIx(a,S);return{i,e:S.inv[i]||null}};const E0=cur().e;const cu=wdFrameCulprit(a,E0);const ev=E0?wdFrameEv(S,a,E0):(a.ev||0);
- const o1=cl(WD.clearBase+25+(S.mat||0)*WD.clearMat,5,95),o2=cl(WD.clearBase+(S.mat||0)*WD.clearMat+(tr?15:0)+(lo?ev*10:0),5,95);
+ const o1=cl(WD.clearBase+25+eyes(S)*WD.clearMat,5,95),o2=cl(WD.clearBase+eyes(S)*WD.clearMat+(tr?15:0)+(lo?ev*10:0),5,95);
  const clear=how=>{const x=cur();if(x.i>=0)wdFrameTake(S,x.i);
   if(!cu){Q.push({t:"Minh oan",who:pMe(),h:`<p>${how} Tra ra ${nm} chỉ thất lạc, không ai lấy trộm. Món đồ về lại với ${wdNm(a)}.</p>`});log(`Ngươi minh oan được: ${nm} chỉ thất lạc, đã trả về ${wdNm(a)}.`);return}
   ap(cu,{danh:-10});relAdd(cu,S,BAL.eff.j92.clear);punish(cu,"giá họa vu oan",2);
@@ -386,7 +386,7 @@ function wdNtMonth(p){const H=wdNtHeld(p);if(!H.length)return"";const clumsy=[p.
  if(p===S){pushDil(mkP("wdnt",{k:x.e.k,how,by:clumsy?clumsy.name:""}),"Đồ ngự tứ");return""}
  wdNtRemove(p,x.e,how);if(roll(55)){ap(p,{sung:-6});punish(p,"làm mất đồ ngự tứ, tội bất kính",1);try{newsAdd(p,"wd",`${wdNmC(p)} để ${it.n} ngự tứ ${how}, mang tội bất kính.`)}catch(e){}}return""}
 PEND.wdnt=pp=>{const it=WD_ITEMS[pp.k];if(!it)return null;const find=()=>wdNtHeld(S).find(x=>x.e.k===pp.k);
- const o=cl(50+(S.mat||0)*5,5,95);
+ const o=cl(50+eyes(S)*5,5,95);
  return{t:`<p><b>${it.n}</b>${/ngự tứ/.test(it.n)?"":" (ngự tứ)"} ${pp.how}${pp.by?`; ${pp.by} run rẩy quỳ xin tội`:""}.</p><p class="past">Làm mất hay làm hỏng đồ ngự tứ là tội bất kính.</p>`,who:pMe(),o:[
   {n:"Tự thú với Hoàng thượng",fx:{},j67:"tốn: không tốn gì",go:()=>{const x=find();if(x)wdNtRemove(S,x.e,pp.how);apply({sung:-6,danh:-3});Q.push({t:"Tự thú",who:pEmp(),h:`<p>Hoàng thượng phật ý nhưng niệm tình ngươi thành thật, không phạt nặng. Sủng -6, Danh -3.</p>`})}},
   {n:pp.how==="bị mất"?"Sai người lùng tìm":"Sai thợ lén sửa",fx:{bac:-40},j67:"tốn: Bạc -40",go:()=>{if(roll(o)){Q.push({t:"Đồ ngự tứ",who:pMe(),h:`<p>${pp.how==="bị mất"?"Tìm lại được":"Thợ sửa khéo, không ai nhận ra"} ${it.n}.</p>`});log(`${it.n} ngự tứ đã ${pp.how==="bị mất"?"tìm lại được":"sửa xong"}.`)}

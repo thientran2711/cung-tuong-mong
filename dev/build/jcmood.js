@@ -30,7 +30,7 @@ function cmMonth(){if(!S||S.dead)return;const C=cmSt();const q=typeof queenP==="
   else if(roll(15)){lv=roll(50)?0:2;why=lv?"mệt vì việc lục cung":"thư thái"}
   C.qk=(q.kids||[]).length;cmSet("hh",lv,why)}
  /* tai mắt: news of both every month at 3+ */
- if((S.mat||0)>=3){C.spy=wk()}}
+ if(eyes(S)>=3){C.spy=wk()}}
 function cmKnown(k){const C=cmSt();const s=C.seen[k];return (s!=null&&wk()-s<3)||(C.spy!=null&&wk()-C.spy<3)}
 function cmSee(){if(!S||S.dead)return;const C=cmSt();if(S.place==="tn"&&!S.thDead)C.seen.th=wk();if(S.place==="kn")C.seen.hh=wk()}
 (function(){const m0=monthTick;monthTick=function(){const r=m0.apply(this,arguments);try{cmMonth()}catch(e){console.error(e)}return r}})();

@@ -79,7 +79,7 @@ function spyFind(a,t,verb){verb=verb||"dò la";const d0=deedFor(a,t);const n=evA
  spyKnow(a,t);const h=harmTxt(t);return `${NMc(a)} ${verb} ${NM(t)}: không tìm ra điều gì sai trái; chỉ biết ${h}. `}
 
 /* ---------- 3. frames: the victim's defence ---------- */
-function frameDef(p,a){const T=BAL.truth;const base=T.clearBase+(p.mat||0)*T.clearMat;const C=[];const W=p===S?"ngươi":"nàng";
+function frameDef(p,a){const T=BAL.truth;const base=T.clearBase+eyes(p)*T.clearMat;const C=[];const W=p===S?"ngươi":"nàng";
  /* one road, the best she has: the player also picks ONE road in PEND.vuoan (reviewer r1: NPC bonuses used to stack to 85 every time) */
  if((p.nightLog||[]).some(w=>wk()-w<=T.ksW))C.push({o:base+T.ksB,how:`sổ Kính sự phòng ghi đêm ấy ${W} hầu Hoàng thượng`});
  else C.push({o:base-10,how:"Cung Chính ti tra hỏi người ra vào"});
@@ -99,7 +99,7 @@ let FRAME_LAST="";try{lifeStore("FRAME_LAST",()=>{FRAME_LAST=""})}catch(e){}/* p
  return f0.apply(this,arguments)}})();
 /* the player's side: she picks a defence; each card shows its cost and its odds word (reviewer r1: the roads differ only in odds, so the
    VANPHONG ladder word is what makes the choice readable); the result card tells the truth */
-PEND.vuoan=pp=>{const a=byKey(pp.a);if(!a||!S)return null;const T=BAL.truth;const why=pp.why||"bị vu dùng bùa ngải";const base=T.clearBase+(S.mat||0)*T.clearMat;
+PEND.vuoan=pp=>{const a=byKey(pp.a);if(!a||!S)return null;const T=BAL.truth;const why=pp.why||"bị vu dùng bùa ngải";const base=T.clearBase+eyes(S)*T.clearMat;
  const ks=(S.nightLog||[]).some(w=>wk()-w<=T.ksW);const wit=S.maid&&(S.maid.loyal||0)>=T.witLoy;const ty=S.doctor||((S.arts&&S.arts.y)||0)>=T.tyArts;const ev=evG(S,a);
  const clamp=x=>cl(Math.round(x),T.clearMin,T.clearMax);
  const clear=how=>{try{window.__framesMe=(window.__framesMe||0)+1;window.__framesMeClear=(window.__framesMeClear||0)+1}catch(e){}const t=frameExpose(a,S,how);

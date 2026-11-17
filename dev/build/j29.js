@@ -15,7 +15,9 @@ function sentPen(s){if(!s)return 20;const d=ACTK&&DIRTY.includes(ACTK),ru=ACTK==
 function confessRisk(s){if(!s)return 25;return cl(20+nq(s,"timid",BAL.net.k.confTimid)-nq(s,"loyal",BAL.net.k.confLoyal)+nq(s,"greed",BAL.net.k.confGreed)-Math.round(s.loyal/10),3,60)}
 /* bribing: a greedy one is cheap to turn (15 silver), a timid one is too afraid to scheme against his mistress */
 function bribeOdds(a,s){return odA(a,35+nq(s,"greed",BAL.net.k.bribeGreed)-nq(s,"timid",BAL.net.k.bribeTimid)-nq(s,"loyal",BAL.net.k.bribeLoyal)-s.loyal/3+a.tamco/5)}
-function bribeServ(a,s){const o=ownerOf(s);const cost=nv(s,"bribeCost");if(!o||o===a||a.bac<cost)return"";ap(a,{bac:-cost});const odds=bribeOdds(a,s);
+/* AG-ALL-2f3 (owner OD 17/11 ~17:10Z "thành công á thì tốn 30 bạc, còn nếu mà không thành công á thì sao tốn 30 bạc được"): the bạc is paid ONLY when the
+   servant takes it (bribeServ wrapper below); a refusal costs no bạc but keeps its consequences (she may tell her master; the sent servant's fear, tmFear) */
+function bribeServ(a,s){const o=ownerOf(s);const cost=nv(s,"bribeCost");if(!o||o===a||a.bac<cost)return"";const odds=bribeOdds(a,s);
  /* AG-ALL-2 G10: with the loop on the servant CHOOSES among the player maid's own "Bạc lạ" options (j42 cnvBribeOpts: Nhận bạc / Từ chối, bẩm chủ /
     Từ chối, im lặng) — take weighs as these odds, the refusal splits by her lòng (jagstf2 stf2Bribe); off → the old roll */
  if(typeof stf2Bribe==="function"){const r=stf2Bribe(a,s,o,odds,cost);if(r!=null)return r}
@@ -74,3 +76,7 @@ function servTraitMonth(){let ev="";for(const p of consorts()){for(const s of (p
 /* for the measure only: a bot policy (window.__servPolicy = 'fire' looks at every servant and fires greedy and timid ones; 'keep' never fires) */
 function servPolicy(){const pol=window.__servPolicy;if(pol!=="fire")return;for(const s of (S.staff||[]).slice()){if(!s.kn&&S.bac>=15){apply({bac:-15});s.kn=1}if(s.kn&&(netIs(s,"greed")||netIs(s,"timid"))&&S.bac>=20){fireServ(S,s);S.firedN=(S.firedN||0)+1}}}
 (function(){const c0=servCauses;servCauses=function(){const r=c0.apply(this,arguments);try{for(const s of (S.staff||[]))if(s.cause&&s.cause.w===wk()&&roll(50))servLearn(s,`Việc ${s.cause.txt}`)}catch(e){}return r}})();
+
+/* AG-ALL-2f3: pay on success only (her and NPCs alike); a failed approach frightens the servant who carried the offer (jagknow tmFear) */
+(function(){const b0=bribeServ;bribeServ=function(a,s){const cost=nv(s,"bribeCost");const was=s&&s.spyFor;const r=b0.apply(this,arguments);if(!r)return r;
+ try{if(s.spyFor===key(a)&&was!==key(a)){ap(a,{bac:-cost});return r.replace(/\s*$/,"")+` (bạc ${balSg(-cost)}) `}const f=typeof tmFear==="function"?tmFear(a,1):"";return f?r.replace(/\s*$/,"")+` ${f}. `:r}catch(e){return r}}})();

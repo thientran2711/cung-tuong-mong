@@ -70,7 +70,7 @@ const WT7={ngua:["ngựa Xích Thố","ngựa Ô Truy","ngựa Bạch Long","ng�
  xa:["thị vệ họ Lý","thị vệ họ Mạnh","thị vệ họ Đoàn","thị vệ họ Tô"],bang:["đội Kiện Duệ","đội Hộ Quân","đội Tiền Phong","đội Cấm Vệ"],phao:["pháo Càn Thanh cung","pháo Ngự thiện phòng","pháo Nội vụ phủ","pháo Ngự hoa viên"]};
 function form7(s){return s>=BAL.cut.form[2]?"phong độ rất tốt":s>=BAL.cut.form[1]?"phong độ tốt":s>=BAL.cut.form[0]?"phong độ thường":"phong độ kém"}
 function prize7(k){return FBIG7.includes(k)?{sung:3,danh:3}:{sung:2,danh:2}}
-function pz7(o){return Object.entries(o).map(([k,v])=>`${NAMES[k]} +${v}`).join(", ")}
+function pz7(o){return Object.entries(o).map(([k,v])=>statTxt(k,v)).join(", ")}
 /* pick a variant: unused this life first, then least seen in the last five lives */
 function fvPick(k,noC){const j=j7s(),L=FV7[k]||[];const ok=i=>{const t=L[i][0];if(noC&&t==="C")return false;if(S.thDead&&(L[i][1]==="th"||/Thái hậu/.test(L[i][2])))return false;if(t==="G"&&!liveRivals(true).some(v=>present7(v)&&(v.bac||0)>=25))return false;return true};
  let idx=[...L.keys()].filter(ok);const used=j.vu["f:"+k]||[];let pool=idx.filter(i=>!used.includes(i));if(!pool.length){j.vu["f:"+k]=[];pool=idx}
@@ -244,7 +244,7 @@ MF("thamo",{t:"Lập công · Bắt kẻ tham ô",cd:30,w:()=>1,who:()=>pMaid(),
  fill:(s)=>s.replace(/\{M\}/g,S.maid?S.maid.name:"Cung nữ thân tín"),
  pp:()=>({}),
  o:X=>{const E0=evActor("eun"),E=E0&&E0.o?E0:null;const B={dai:1,back:["Hộ bộ",4]};
-  return [CH7("Âm thầm gom chứng cứ rồi tâu",{c:{suc:-6},p:od(30+(S.mat||0)*6+(S.tamco||0)/3),w:{danh:4,sung:3,bac:30},wt:bonus7(B),l:{danh:-2},lr:E?[[E,-6]]:[],ok:()=>`Kẻ tham ô bị bắt; Nội vụ phủ trả lại phần bạc của cung ngươi.${bonusDo7(B,"bắt kẻ tham ô")}`,ll:"Chứng cứ bị phi tang; Tổng quản cho rằng ngươi bới chuyện."}),
+  return [CH7("Âm thầm gom chứng cứ rồi tâu",{c:{suc:-6},p:od(30+eyes(S)*6+(S.tamco||0)/3),w:{danh:4,sung:3,bac:30},wt:bonus7(B),l:{danh:-2},lr:E?[[E,-6]]:[],ok:()=>`Kẻ tham ô bị bắt; Nội vụ phủ trả lại phần bạc của cung ngươi.${bonusDo7(B,"bắt kẻ tham ô")}`,ll:"Chứng cứ bị phi tang; Tổng quản cho rằng ngươi bới chuyện."}),
    CH7("Nhận bạc bịt miệng",{c:{duc:-4},w:{bac:40},k:["mỗi tháng có thể bị lộ: Danh -5"],ok:()=>{j7s().brb=S.turn;return "Ngươi nhận bạc, im lặng."}}),
    CH7("Mặc kệ",{wt:["không được không mất"],wl:"Ngươi không muốn dính vào chuyện Nội vụ phủ."})]}});
 MF("tiencu",{t:"Lập công · Tiến cử hiền tài",cd:30,w:()=>1,who:()=>pEmp(),

@@ -35,19 +35,19 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
  ok(r2.refused>0||r2.got===40,'some approached people refuse (their own choice)',r2);
  /* 3 loyal servant refuses + tells */
  const r3=await p.evaluate(()=>{for(const s of allServ())s.spyFor=null;const v=liveRivals(true).find(v=>(v.staff||[]).length);const s=v.staff[0];const k0=s.net;
-  s.net="trung";s.loyal=100;s.grudge=0;let take=0,tell=0,quiet=0;const e0=evG(v,S);
+  /* 2f3: nết is the pool array now (a string code was ignored): a loyal Lòng dạ */netOf(s);s.net=s.net.slice();s.net[1]="Trọng nghĩa";s.loyal=100;s.grudge=0;let take=0,tell=0,quiet=0;const e0=evG(v,S);
   for(let i=0;i<200;i++){s.spyFor=null;s.loyal=100;S.bac=9999;const r=bribeServ(S,s);if(s.spyFor==="me")take++;else if(/mách/.test(r))tell++;else quiet++}
   const e1=evG(v,S);const lo=bribeOdds(S,s);s.net=k0;
   /* the deck card: a real person, odds = the person's own */
   for(const x of allServ())x.spyFor=null;const C=P3C.eyes(S);const bs=tmBest(S);
-  return{take,tell,quiet,lo,ev:[e0,e1],card:{t:C.t,o:C.o,named:!!bs&&C.t.includes(bs.name),same:bs?C.o===bribeOdds(S,bs):false,cost:C.c}}});
+  return{take,tell,quiet,lo,ev:[e0,e1],card:{t:C.t,o:C.o,named:!!bs&&C.t.includes(bs.name),same:bs?C.o===bribeOdds(S,bs):false,cost:C.c,win:C.w}}});
  ok(r3.take<70&&r3.tell>r3.quiet&&r3.tell>60,'a loyal servant of another consort mostly refuses and tells her master',r3);
  ok(r3.ev[1]>r3.ev[0],'the master gains evidence against her when told',r3.ev);
- ok(r3.card.named&&r3.card.same&&r3.card.cost.bac<0,'"Cài tai mắt" names a real person; its odds = that person\'s bribeOdds; cost = her bribe price',r3.card);
+ ok(r3.card.named&&r3.card.same&&!r3.card.cost.bac&&r3.card.win.bac<0,'"Cài tai mắt" names a real person; its odds = that person\'s bribeOdds; her bribe price paid only on success (2f3, OD 17:10Z)',r3.card);
  /* 4 want */
  const r4=await p.evaluate(()=>{const v=liveRivals(true).find(v=>(v.staff||[]).length&&!v.queen&&(v.rank||0)<5);const s=v.staff[0];const g0=s.grudge,l0=s.loyal,rk0=S.rank,af0=aff,b0=S.bac;
-  S.rank=6;S.bac=0;aff=()=>-10;s.loyal=60;s.grudge=0;const a=bribeOdds(S,s);s.grudge=1;const b=bribeOdds(S,s);s.grudge=0;s.loyal=BAL.loy.low-5;const c=bribeOdds(S,s);const w=tmWant(S,s);
-  s.grudge=g0;s.loyal=l0;S.rank=rk0;S.bac=b0;aff=af0;return{a,b,c,w}});
+  /* 2f3: a mid nết so the floor (BAL.odds.lo) does not hide the want */const n0=s.net;netOf(s);s.net=s.net.slice();s.net[1]="Thực dụng";S.rank=6;S.bac=0;aff=()=>-10;s.loyal=60;s.grudge=0;const a=bribeOdds(S,s);s.grudge=1;const b=bribeOdds(S,s);s.grudge=0;s.loyal=BAL.loy.low-5;const c=bribeOdds(S,s);const w=tmWant(S,s);
+  s.net=n0;s.grudge=g0;s.loyal=l0;S.rank=rk0;S.bac=b0;aff=af0;return{a,b,c,w}});
  ok(r4.b>r4.a&&r4.c>r4.a,'what the person wants (revenge, protection) raises the odds',r4);
  /* 5 NPC parity */
  const r5=await p.evaluate(()=>{for(const s of allServ())s.spyFor=null;const v=liveRivals(true).find(v=>v.alive&&!v.out);v.bac=9999;let bad=0;

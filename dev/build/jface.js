@@ -116,7 +116,7 @@ function pzGive(p,sev,how,by,weeks){if(!p||!fxLive(p))return;sev=cl(sev|0,1,2);c
  p.pz={sev,until:u,how:how||"",by:fxKey(by),at:wk(),dx:0,nt:0}}
 function pzOf(p){if(!p||!fxLive(p))return null;if(p.pz&&p.pz.until>wk())return p.pz;const i=typeof illOf==="function"?illOf(p):null;if(i&&i.k==="docman")return{sev:i.st>=2?2:1,ill:1};return null}
 function fxTogether(p){try{return typeof together!=="function"||!!together(S,p)}catch(e){return false}}
-function fxObservant(){try{return (S.mat||0)>=3||((S.arts&&S.arts.y)||0)>=2||!!S.doctor}catch(e){return false}}
+function fxObservant(){try{return eyes(S)>=3||((S.arts&&S.arts.y)||0)>=2||!!S.doctor}catch(e){return false}}
 KIT_FACEFX.add({id:"doc",z:12,ready:true,                  /* owner approved (pilot 2) */
  state:p=>pzOf(p),
  seen:(p,st)=>fxSeen(p),                                /* the face itself shows to anyone who sees her; what it MEANS needs an eye (chip) */

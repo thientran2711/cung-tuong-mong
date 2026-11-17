@@ -9,7 +9,7 @@ const hasStaff6=n=>(S.staff||[]).length>=(n||1);
 EV6("gossipTea","day",{a:["rv"],pp:()=>{const a=rv6(fr6,v=>5+aff(v,S)/5);return a==null?null:{a0:a}},w:C=>2,
  v:["{A} ghé uống trà, kể nhỏ chuyện cung nọ cung kia, rồi hỏi ngươi nghĩ gì về Hoàng hậu.","Chiều {S}, {A} mang hộp mứt sang, ngồi bên hiên than thở chuyện bị cung nhân khinh nhờn, muốn nghe ngươi khuyên.","{A} sang chơi cờ, giữa ván buột miệng kể một chuyện cũ của phi tần đã khuất.","{A} rủ ngươi ngồi bên cửa sổ thêu hoa, vừa thêu vừa dò xem ngươi có định tranh ghế trống không.","Trời {W}, {A} đội áo tơi sang cung ngươi tránh mưa, nán lại kể chuyện vặt đến tối."],
  o:X=>[c6("Nghe và giữ kín",{c:{suc:-3},r:[[X.A,6]],k:[R6("mất nửa buổi chiều")]}),
-  c6("Gợi chuyện để dò tin",{p:od(40+S.tamco/3),w:{mat:1},r:[[X.A,2]],lr:[[X.A,-6]],lt:[R6("nàng thấy ngươi tò mò quá")],ok:()=>`${X.A.n} buột miệng kể vài chuyện có ích. Tai mắt +1.`}),
+  c6("Gợi chuyện để dò tin",{p:od(40+S.tamco/3),w:{mat:1},r:[[X.A,2]],lr:[[X.A,-6]],lt:[R6("nàng thấy ngươi tò mò quá")],ok:()=>`${X.A.n} buột miệng kể vài chuyện có ích. ${statTxt("mat",1)}.`}),
   c6("Khéo cáo mệt",{w:{suc:4},r:[[X.A,-3]]})]});
 EV6("giftArrive","day",{a:["rv"],pp:()=>{const a=rv6(v=>aff(v,S)>-20);return a==null?null:{a0:a}},w:C=>1.6,
  v:["Cung nữ của {A} mang sang một hộp gỗ đàn hương, trong có hai lọ hương liệu, nói là quà đáp lễ.","{A} sai người gửi tặng một xấp lụa Hàng Châu, kèm lời nhắn 'chút lòng thành'.","Một hộp điểm tâm hoa quế đề tên {A} được đưa tới, còn ấm.","{A} gửi sang một chậu lan quý, nói hoa nở đúng lúc nhớ đến ngươi."],
@@ -18,7 +18,7 @@ EV6("giftArrive","day",{a:["rv"],pp:()=>{const a=rv6(v=>aff(v,S)>-20);return a==
   c6("Khéo trả lại",{w:{duc:1},r:[[X.A,-6]]})]});
 EV6("lostItem","day",{a:["maid"],pp:()=>S.maid?{a0:0,it:R(4)}:null,w:C=>1.4,
  v:["Sáng ra {M} tái mặt: chiếc trâm bạc ngươi hay cài không thấy đâu, hộp trang sức vẫn khóa.","{M} báo: chuỗi hạt trầm Thái hậu ban đêm qua đứt dây, lạc mất mấy hạt dưới gầm sập.","Chiếc quạt lụa ngươi đề thơ để quên ở đình nghỉ, cung nhân đi tìm về tay không.","Đôi hoa tai ngọc trai mất một chiếc sau buổi tắm hoa ở hậu viện."],
- o:X=>[c6("Lục soát kỹ cả cung",{c:{suc:-6},p:od(55+S.mat*4),w:{tamco:1},wt:[G6("tìm lại được")],lr:[[X.A,-4]],l:{danh:-1},lt:[R6("cung nhân bất bình vì bị nghi")],ok:()=>"Món đồ rơi trong kẽ ván sàn; tìm lại được."}),
+ o:X=>[c6("Lục soát kỹ cả cung",{c:{suc:-6},p:od(55+eyes(S)*4),w:{tamco:1},wt:[G6("tìm lại được")],lr:[[X.A,-4]],l:{danh:-1},lt:[R6("cung nhân bất bình vì bị nghi")],ok:()=>"Món đồ rơi trong kẽ ván sàn; tìm lại được."}),
   c6("Thưởng ai tìm được",{c:{bac:-10},p:80,w:{danh:1},wt:[G6("tìm lại được")],l:{bac:-5},lt:[R6("món đồ mất hẳn")],ok:()=>"Một tiểu thái giám nhặt được, mang trả lấy thưởng."}),
   c6("Thôi, bỏ qua",{w:{duc:1},wt:[G6("cung nhân yên lòng")],k:[R6("mất món đồ")]})]});
 EV6("sickServant","serv",{a:["sv"],pp:()=>{const a=sv6();return a==null?null:{a0:a}},w:C=>(C.sea==="Đông"||C.sea==="Hạ"?2:1),
@@ -61,7 +61,7 @@ EV6("eunuchSqueeze","day",{a:["eun"],pp:()=>({a0:0}),w:C=>C.rank<=3?2:.4,
  v:["Thái giám phát bổng lộc tháng này đưa thiếu, cười nhạt: 'Lệ ở đây phải có chút trà nước.'","Người của {A} úp mở: muốn thẻ tên ngươi nằm trên cùng mâm thẻ bài thì nên biết điều.","Thái giám coi kho cố tình đưa vải cũ thay vải mới, chờ ngươi nhét bạc.","Tiểu thái giám truyền chỉ đứng mãi không đi, rõ ràng chờ tiền thưởng."],
  o:X=>[c6("Đưa bạc cho xong",{c:{bac:-15},w:{suc:2},wt:[G6("được việc, hắn nể mặt")]}),
   c6("Mắng thẳng mặt",{p:od(35+S.rank*8+S.danh/3),w:{danh:2},l:{danh:-1,sung:-1},lt:[R6("hắn thù, rỉ tai bên trên")]}),
-  c6("Ghi lại, mách Tổng quản",{c:{suc:-2},p:od(40+S.mat*5),w:{mat:1},wt:[G6("hắn bị đổi đi")],lt:[R6("Tổng quản bao che")],l:{danh:-1}})]});
+  c6("Ghi lại, mách Tổng quản",{c:{suc:-2},p:od(40+eyes(S)*5),w:{mat:1},wt:[G6("hắn bị đổi đi")],lt:[R6("Tổng quản bao che")],l:{danh:-1}})]});
 EV6("embroidery","day",{a:["rv"],pp:()=>{const a=rv6();return a==null?null:{a0:a}},w:C=>1,
  v:["Cục Thượng y nhờ các cung thêu góp một vạt cho bức bình phong mừng thọ; {A} đã thêu xong phần mình, đẹp lạ.","{A} khoe chiếc túi thơm thêu uyên ương, hỏi ngươi có muốn đổi mẫu thêu không.","Cung nữ đồn {A} thêu áo tặng Hoàng thượng; ngươi có nên thêu một chiếc khác?","Ngươi được giao thêu đôi gối mừng một vị thân vương; {A} cùng được giao, ai nhanh hơn sẽ được khen."],
  o:X=>[c6("Thêu thật kỹ, thức khuya",{c:{suc:-10},p:od(30+S.tai/2+S.sac/4),w:{danh:3,sung:1},l:{danh:-1},lt:[R6("mũi thêu vội, bị chê")]}),

@@ -242,10 +242,10 @@ const mp0=monthPay;monthPay=function(){let ev=mp0.apply(this,arguments)||"";try{
   const F=foes();
   /* a foe reads the book: her hidden pregnancy guessed */
   if(cyPreg(S)&&S.hidden&&(cyLateSeen(S)>=1||c.giauM===mi-1)&&!cyHideOf(S))for(const v of F){if(v.cyKnowMe===S.pregWk||!roll(B().npcRead))continue;v.cyKnowMe=S.pregWk;
-   if((S.mat||0)>=1){const t=`Tai mắt báo: ${v.name} cho người tra sổ nguyệt sự ở Kính sự phòng, đã đoán ra ngươi có tin vui.`;log(t);ev+=t+" "}break}
+   if(eyes(S)>=1){const t=`Tai mắt báo: ${v.name} cho người tra sổ nguyệt sự ở Kính sự phòng, đã đoán ra ngươi có tin vui.`;log(t);ev+=t+" "}break}
   /* her own false line last month (báo sớm / giấu) is forgery evidence for a foe who reads the book */
   if(c.lieM===mi-1&&!c.lieEv){c.lieEv=1;cyDeed(S,"cyl:"+c.lieM,"cylie","khai man ngày nguyệt sự với Kính sự phòng");for(const v of F){if(!roll(B().npcRead))continue;if(!evA(v,S,BAL.eff.jcycle.evTop))continue;
-    if((S.mat||0)>=1){const t=`Tai mắt báo: ${v.name} tra sổ nguyệt sự, thấy ngày ma ma ngươi báo không khớp: nàng ta nắm chứng cứ ngươi khai man.`;log(t);ev+=t+" "}}}
+    if(eyes(S)>=1){const t=`Tai mắt báo: ${v.name} tra sổ nguyệt sự, thấy ngày ma ma ngươi báo không khớp: nàng ta nắm chứng cứ ngươi khai man.`;log(t);ev+=t+" "}}}
   /* a foe forges a "không báo" against her (this month) */
   if(!cyPreg(S)&&cyAge(S)<50&&!(c.rum&&c.rum.m===mi)){const v=F.find(x=>(x.bac||0)>=B().forgeBac);if(v&&roll(B().npcForge)){ap(v,{bac:-B().forgeBac});c.rum={by:v.id,m:mi};cyDeed(v,"cyfo:"+mi,"cyforge","đút lót Kính sự phòng ghi sai sổ nguyệt sự của người khác");
     const t="Trong cung xì xào: sổ Kính sự phòng ghi ngươi tháng này không báo nguyệt sự.";log(t);ev+=t+" "}}

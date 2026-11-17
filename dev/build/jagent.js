@@ -225,7 +225,7 @@ const AGJOIN={thTH:{n:"Thỉnh an Thái hậu",x:()=>{const g=BAL.tw.g.thTH;retu
  thHH:{n:"Thỉnh an Hoàng hậu",x:()=>{const g=BAL.tw.g.thHH;return `thành: Hoàng hậu +${g[0]} · Danh +${g[1]} · Đức +${g[2]} · hỏng: Hoàng hậu ${g[3]}`}},
  pray:{n:"Cầu tự",x:()=>"thành: lòng thành cầu tự, dễ có thai hơn"},ksp:{n:"Đút lót Kính sự phòng",x:()=>"thành: thẻ bài của ngươi dễ được lật hơn"}};
 /* the odds to overhear a deed: ONE function for her and every NPC who stands there (G9 agSeeNpc) */
-function agHearOf(a){return odA(a,BAL.ag.wit.hear+((a===S?S.mat:a.mat)||0)*BAL.ag.wit.mat)}
+function agHearOf(a){return odA(a,BAL.ag.wit.hear+eyes(a)*BAL.ag.wit.mat)}
 function agHearO(){return agHearOf(S)}
 /* the last khắc of a deed (G9): planned deeds carry k1; older ones (saves before AG-ALL-2) last one khắc */
 function agK1(p){return p&&p.k1!=null?p.k1:p?p.kh:0}

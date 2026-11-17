@@ -31,7 +31,7 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
   o.trivia=N.some(n=>/^(where|sung|hate|ally|trait)/.test(n.k));o.preg=N.find(n=>n.k==="preg");
   /* add an affair → more valuable first */
   v.evm=v.evm||{};v.evm.me=2;{const N2=knSellNews(S,s);o.first=N2[0]&&N2[0].k;o.pAff=knSellPrice(N2[0].val,s);o.pPreg=knSellPrice(N2.find(n=>n.k==="preg").val,s)}v.evm.me=0;
-  o.scale=[knSellPrice(100,S),knSellPrice(70,S),BAL.ag.sell.price];o.scaleOk=o.scale[0]===o.scale[2]&&o.scale[1]===Math.round(o.scale[2]*.7);
+  o.scale=[knSellPrice(100,S),knSellPrice(70,S),BAL.ag.sell.price];{const f=1+qv(BAL.ag.sell.ask,S,0);/* 2f3: the ask factor of whoever is passed (S has a random nết: was a flake) */o.scaleOk=o.scale[0]===Math.round(o.scale[2]*f)&&o.scale[1]===Math.round(o.scale[2]*.7*f)}
   /* buy */
   Q.length=0;S.bac=500;const b0=S.bac,u0=used;const n=knSellNews(S,s)[0];const c=knSellCard(s,n);Q.push(c);showModal();chooseM(0);
   o.paid=b0-S.bac;o.price=c.sell.price;o.kh=used-u0;o.intel=(S.intel[v.id]||[]).some(x=>x.k===n.k&&x.txt===n.txt&&x.how==="Mua tin");o.result=Q.some(m=>m.t==="Tin mua được"&&m.h.includes(n.txt));

@@ -71,7 +71,7 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
   for(const s of allServ())if(s.spyFor==="me")s.spyFor=null;tmSync(S);o.zero=S.mat===0&&taiMatList().length===0;
   apply({mat:2});o.after={mat:S.mat,list:taiMatList().length,all:taiMatList().every(x=>x.p.spyFor==="me")};
   /* loyal servants mostly refuse: odds of a top-loyal, non-greedy servant vs a disloyal greedy one */
-  const cand=tmCands(S);const s=cand[0];const L0=s.loyal,G0=s.grudge;s.loyal=95;s.grudge=0;const loyO=tmOdds(S,s);s.loyal=10;const disO=tmOdds(S,s);s.loyal=L0;s.grudge=G0;o.odds={loyal:loyO,disloyal:disO};
+  const cand=tmCands(S);const s=cand[0];const L0=s.loyal,G0=s.grudge;/* 2f3: same nết both ways (a loyal-nết one floors at BAL.odds.lo either way) */netOf(s);const N0=s.net;s.net=s.net.slice();s.net[1]="Ham lợi";s.loyal=95;s.grudge=0;const loyO=tmOdds(S,s);s.loyal=10;const disO=tmOdds(S,s);s.loyal=L0;s.grudge=G0;s.net=N0;o.odds={loyal:loyO,disloyal:disO};
   /* a loyal servant of hers refuses an NPC and tells her (true TIN BÁO); the NPC loses her regard */
   const v=liveRivals(true).find(x=>x.alive&&!x.out);const mine=(S.staff||[]).find(x=>x.sid!=null);let tell=null;
   if(v&&mine){mine.loyal=90;mine.spyFor=null;const a0=aff(S,v);const n0=knTb().R.length;seq([0]);const t=tmRefuse(v,mine);Math.random=R0;const it=knTb().R[knTb().R.length-1];

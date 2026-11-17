@@ -136,7 +136,7 @@ function j95week(){const z=j95z();if(z.itWk===wk())return;z.itWk=wk();if(z.mo!==
  for(const id in z.meK){const m=z.meK[id];if(!z.me[m.c+":"+m.k]||z.me[m.c+":"+m.k]<1.5)delete z.meK[id]}
  z.it={};z.sec=[];const cs=j95cs();z.mood={};for(const v of rivals)z.mood[v.id]=+(0.4+Math.random()*1.5).toFixed(2);z.nb={};for(const v of liveRivals(true)){const L=liveRivals(true).filter(x=>x!==v&&!sameHouse(v,x));z.nb[v.id]=L.sort(()=>Math.random()-.5).slice(0,2).map(x=>x.id)}
  for(const v of liveRivals(true)){if(v.confined)continue;j95hab(v);
-  if(pat&&!z.meK[v.id]&&hostility(v,S)>=45){let sp=false;try{sp=spyIn70(v,S)}catch(e){}if(j95dice(15+(v.mat||0)*12+(sp?30:0))){const [c,k]=pat[0].split(":");z.meK[v.id]={c:+c,k,w:wk()}}}
+  if(pat&&!z.meK[v.id]&&hostility(v,S)>=45){let sp=false;try{sp=spyIn70(v,S)}catch(e){}if(j95dice(15+eyes(v)*12+(sp?30:0))){const [c,k]=pat[0].split(":");z.meK[v.id]={c:+c,k,w:wk()}}}
   const it=j95intent(v,cs);if(it)z.it[v.id]=it;
   /* lovers meet in hidden corners, mostly at night */
   const m=v.affair&&manById(v.affair);if(m&&!j95men()){const n=j95dice(35)?2:1;
@@ -392,7 +392,7 @@ function j95obs(v,c,k,by){const z=j95z();const O=z.obs[v.id]=z.obs[v.id]||{};con
 
 /* ---------------- 7. CATCHING A SECRET MEETING (two-way) ---------------- */
 function j95ctx(c,f){if(typeof J78==="undefined")return f();const p=J78.ctx;J78.ctx=c;try{return f()}finally{J78.ctx=p}}
-function j95catchRoll(o,v){const mat=o===S?(S.mat||0):(o.mat||0);let tc=0;try{tc=tc70(v)}catch(e){tc=v===S?S.tamco||0:v.tamco||0}const night=j95c()===3;
+function j95catchRoll(o,v){const mat=eyes(o);let tc=0;try{tc=tc70(v)}catch(e){tc=v===S?S.tamco||0:v.tamco||0}const night=j95c()===3;
  const rev=cl(Math.round(12+tc/10-mat*2),5,30),full=cl(Math.round(35+mat*6-(night?10:0)-tc/6),10,60),one=20;let r=Math.random()*100;
  if(r<rev)return"rev";r-=rev;if(r<full)return"full";r-=full;if(r<one)return"one";return"flee"}
 function j95caught(s){const v=RV(+s.a.slice(1));if(!v||!v.alive)return;const m=s.kind==="tryst"?manById(s.b):null;const out=j95catchRoll(S,v);const W=s.spot;const z=j95z();

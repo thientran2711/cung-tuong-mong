@@ -506,7 +506,7 @@ function srvMen(){try{menInit()}catch(e){}return (S.men||[]).filter(m=>m.alive&&
 function srvAdult(m){return (S.age||0)>=18&&!!m&&(m.age||0)>=18}
 function srvRiskOf(k,eyes,fr,tc){const T=BAL.srvRisk;const base=T[k]!=null&&k!=="def"?T[k]:T.def;return cl(Math.round(base+eyes-fr*T.fr-(tc||0)/T.tc),T.min,T.max)}
 function srvMpNeed(rk){return ((rk||0)+1)*BAL.srvMp}
-function srvRisk(k){const eyes=liveRivals(true).reduce((s,v)=>s+(v.mat||0),0);return srvRiskOf(k,eyes,srvFriendList().length,S.tamco)}
+function srvRisk(k){const eN=liveRivals(true).reduce((s,v)=>s+eyes(v),0);return srvRiskOf(k,eN,srvFriendList().length,S.tamco)}
 function srvBond(){const L=srvMen().filter(m=>m.tinh>=BAL.tinhLv.close&&m.rw!=="vương gia").sort((a,b)=>(b.tinh+(S.srv.vow===b.id?50:0))-(a.tinh+(S.srv.vow===a.id?50:0)));return L[0]||null}
 function srvSeen(m,n){S.srv.rumor=(S.srv.rumor||0)+n;const L=liveRivals(true).filter(v=>v!==srvM());if(L.length&&roll(50)){S.srv.leak=pick(L).id}log(`Có người thấy ngươi với ${m.name}. Lời ra tiếng vào.`)}
 function srvAffairCaught(m,how){if(!isSrv())return;const mis=srvM();const scheme=m&&rivals.some(v=>v.alive&&v.affair===m.id);

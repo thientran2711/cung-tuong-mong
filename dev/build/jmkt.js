@@ -100,14 +100,14 @@ function tsMkScoutOpts(th,m){const w=tsMkWant(th,m),k=tsMkKnown(w);if(k.tone&&k.
  let mm=null;try{mm=wdMama(S)}catch(e){}
  if(mm){const o=B.mama.o0+(mm.loyal||0)*B.mama.loyal;L.push(tsOpt({n:`Hỏi ${mm.name}`,odds:o,need:[tsNeedBac(B.mama.cost)],duoc:["biết đề chuộng son phấn nào, kiểu nào"],kem:[`Bạc -${B.mama.cost} (lễ tạ)`],
   go:()=>{apply({bac:-B.mama.cost});if(roll(o))got(mm.name,all);else log(`${mm.name} lắc đầu: năm nay chưa nghe ngóng được.`)}}))}
- {const o=B.spy.o0+(S.mat||0)*B.spy.kMat+(S.tamco||0)*B.spy.tamco;L.push(tsOpt({n:"Sai tai mắt dò bên chủ hội",odds:o,need:[tsNeedBac(B.spy.cost),{t:`Tai mắt ≥${B.spy.need} (có ${S.mat||0})`,ok:(S.mat||0)>=B.spy.need}],duoc:["biết đề chuộng son phấn nào, kiểu nào"],kem:[`Bạc -${B.spy.cost}`],
+ {const o=B.spy.o0+eyes(S)*B.spy.kMat+(S.tamco||0)*B.spy.tamco;L.push(tsOpt({n:"Sai tai mắt dò bên chủ hội",odds:o,need:[tsNeedBac(B.spy.cost),{t:`Tai mắt ≥${B.spy.need} (có ${S.mat||0})`,ok:eyes(S)>=B.spy.need}],duoc:["biết đề chuộng son phấn nào, kiểu nào"],kem:[`Bạc -${B.spy.cost}`],
   go:()=>{apply({bac:-B.spy.cost});if(roll(o))got("Tai mắt báo",all);else log("Tai mắt về tay không.")}}))}
  {let f=null;try{f=liveRivals(true).filter(v=>!v.out&&aff(v,S)>=B.ask.need).sort((a,b)=>aff(b,S)-aff(a,S))[0]}catch(e){}
   if(f){const o=B.ask.o0+aff(f,S)*B.ask.aff+(S.tamco||0)*B.ask.tamco;L.push(tsOpt({n:`Hỏi ${f.name} (từng dự hội)`,odds:o,need:[{t:`nàng thân với ngươi (${aff(f,S)}/${B.ask.need})`,ok:aff(f,S)>=B.ask.need}],duoc:["biết đề chuộng son phấn tông nào"],
    go:()=>{if(roll(o))got(f.name,{tone:1});else log(`${f.name} cũng không nhớ rõ.`)}}))}}
  return L}
 /* a rival's contest face: does she know the want (her own scouting), then the same sitting as every NPC (toilNpcPlay, festival allowance, her rank) */
-function tsMkNpcKnow(v){const N=BAL.toil.taste.npc;let p=N.k0+(v.tamco||0)*N.tamco+(v.tai||0)*N.tai+(v.duc||0)*N.duc+(v.mat||0)*N.mat;try{for(const t of traitsOf(v))p+=N.trait[t]||0}catch(e){}return Math.max(0,Math.min(N.cap,p))}
+function tsMkNpcKnow(v){const N=BAL.toil.taste.npc;let p=N.k0+(v.tamco||0)*N.tamco+(v.tai||0)*N.tai+(v.duc||0)*N.duc+eyes(v)*N.mat;try{for(const t of traitsOf(v))p+=N.trait[t]||0}catch(e){}return Math.max(0,Math.min(N.cap,p))}
 function tsMkNpc(v,w,cid){if(v&&v.coop){const r=toilFriendRec(v);if(r&&r.makeup)return r}
  const h=mktH(wdKey(v)+":"+(v.name||"")+":hoi:"+cid);const knows=mktR(h+":k")<tsMkNpcKnow(v);
  const bold=knows?w.bold:mktR(h+":b")<BAL.toil.play.diemPre,tone=knows?w.tone:(mktR(h+":t")<.5?"w":"c");
