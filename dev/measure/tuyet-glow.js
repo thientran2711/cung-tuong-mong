@@ -19,14 +19,14 @@ const SC={x:62,y:223,width:288,height:689},HC={x:112,y:228,width:200,height:150}
   const DUR=6000;const at=async f=>{await p.evaluate(t=>{document.getAnimations().forEach(a=>{if(/^kg/.test(a.animationName||'')){a.pause();a.currentTime=t}})},f*DUR);await p.waitForTimeout(40)};
  const fr=await p.evaluate(()=>{const k=[...document.querySelectorAll('img.kmkc')].find(e=>e.getBoundingClientRect().width>0&&e.closest('#mefig, .kfxf'));const r=k.getBoundingClientRect();return{x:r.x,y:r.y,w:r.width,h:r.height}});
  const fw=fr.w*1.12,FC={x:fr.x+fr.w/2-fw/2,y:fr.y+fr.h*.5-fw*.62,width:fw,height:fw*1.1};/* face fills ~65 % of the frame width */
- const MODE=process.env.MODE||'stage';const clip=MODE==='face'?FC:SC;
+ const MODE=process.env.MODE||'stage';const clip=MODE==='face'?FC:MODE==='full'?undefined:SC;
  const off=async o=>p.evaluate(o=>{let s=document.getElementById('gl-off');if(!s){s=document.createElement('style');s.id='gl-off';document.head.appendChild(s)}s.textContent=o?'.kglw{display:none!important}':''},o);
- await off(true);await p.waitForTimeout(100);fs.writeFileSync(`${OUT}/off.png`,await p.screenshot({clip}));await off(false);
+ await off(true);await p.waitForTimeout(100);fs.writeFileSync(`${OUT}/off.png`,await p.screenshot(clip?{clip}:{}));await off(false);
  /* timeline: SECS long (default 6, FPS 30); BURSTS = start seconds of the twinkle bursts (BAL burstMs long, the burst clock is off in the sampler: auto=false) */
  const SECS=+(process.env.SECS||6),FPS=+(process.env.FPS||30),BU=(process.env.BURSTS||'').split(',').filter(Boolean).map(Number),BMS=await p.evaluate(()=>BAL.toil.glow.burstMs);
  const total=Math.round(SECS*FPS);
  for(let i=0;i<total;i++){const t=i/FPS;const bs=BU.find(b0=>t>=b0&&t<b0+BMS/1000);
   await p.evaluate(([t,bs])=>{const L=[...document.querySelectorAll('i.kglw')];L.forEach(x=>{if(bs!=null){if(!x.classList.contains('on'))toilGlowOn(x)}else x.classList.remove('on')});
    document.getAnimations().forEach(a=>{const n=a.animationName||'';if(/^kgst$/.test(n)){a.pause();a.currentTime=(t-bs)*1000}else if(/^kg/.test(n)){a.pause();a.currentTime=t*1000}})},[t,bs==null?null:bs]);
-  await p.waitForTimeout(30);fs.writeFileSync(`${OUT}/f${String(i).padStart(3,'0')}.png`,await p.screenshot({clip}))}
+  await p.waitForTimeout(30);fs.writeFileSync(`${OUT}/f${String(i).padStart(3,'0')}.png`,await p.screenshot(clip?{clip}:{}))}
  await p.screenshot({path:OUT+'/full.png'});console.log('done',JSON.stringify(errs));await b.close()})();
