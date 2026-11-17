@@ -531,7 +531,7 @@ function kitShopNvp(){const c=S.court&&S.court.ped;let nm=c&&c.name?c.name:"";
    eff:kitShopEff(k),rows:kitItemRows(k),stock:5,have:()=>S.inv.filter(e=>e.k===k&&!e.h).length,
    onBuy:(x,q)=>{apply({bac:-x.price*q});for(let i=0;i<q;i++)S.inv.push({k});log(`Mua ${it.n}${q>1?` ×${q}`:""}. Bạc -${x.price*q}`)}}});
  return kitShop({key:"nvp",title:"Nhờ thái giám mua đồ",carry:9,
-  info:(()=>{const xc=(typeof lowRank==="function"?lowRank():S.rank<3)?"tiểu chủ":"nương nương";return `<p>Thái giám Nội vụ phủ bưng vào một khay đồ mua từ ngoài cung, dâng lên cho ta chọn: “Đồ mới mang vào, xin ${xc} xem qua.”</p>`})(),
+  info:(()=>{const xc=kSay({srv:"m"},S,"{goi}")/* one address core (jvoice) */;return `<p>Thái giám Nội vụ phủ bưng vào một khay đồ mua từ ngoài cung, dâng lên cho ta chọn: “Đồ mới mang vào, xin ${xc} xem qua.”</p>`})(),
   stage:[{__fig:"img/fig-eunuch-ndp-tray.webp",__cap:nm,__role:"Thái giám Nội vụ phủ",age:28,sex:"m"}],items,money:()=>S.bac,
   sell:{items:kitShopSellItems,empty:"Chưa có gì để bán. Đồ thêu, tranh, chữ… làm ra khi luyện tài nghệ (mục Tài nghệ); đồ trong rương Tư trang cũng bán được."}})}
 if(typeof invAct==="function"){const ia0=invAct;invAct=function(a){if(a==="shop"&&S&&!S.dead&&!Q.length&&typeof kitShop==="function"){try{kitShopNvp();render();return}catch(e){console.error("kitShop",e)}}return ia0.apply(this,arguments)}}

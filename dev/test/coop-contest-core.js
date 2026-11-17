@@ -5,10 +5,12 @@ const {chromium}=require('playwright');const fs=require('fs'),path=require('path
 const ROOT=path.resolve(__dirname,'../..');
 const res=[];const ok=(c,m,x)=>{res.push([!!c,m]);console.log((c?'ok  ':'FAIL')+' '+m+(x!==undefined?' '+JSON.stringify(x):''))};
 /* static guard: the numbers moved to BAL.fest are not typed again in the contest code */
-{const bad=[];const pats=[/\{sung:8,danh:3\}/,/Sủng \+8/,/ghenAll\((3|4|8|10)\)/,/\{th:4,danh:1\}/,/\{sung:3,danh:1\}/,/\*\.3\+aw7\([a-zA-Z]+,"hoa"\)\*8/,/bac:-60\}\)\}\)/,/roll\((30|50)\)\)?try\{bestow\(w,"contest"\)/,/oanAdd\(p,w,10\)/,/thắng \(\+10\)/];
+{const bad=[];const pats=[/\{sung:8,danh:3\}/,/Sủng \+8/,/ghenAll\((3|4|8|10)\)/,/\{th:4,danh:1\}/,/\{sung:3,danh:1\}/,/\*\.3\+aw7\([a-zA-Z]+,"hoa"\)\*8/,/bac:-60\}\)\}\)/,/roll\((30|50)\)\)?try\{bestow\(w,"contest"\)/,/oanAdd\(p,w,10\)/,/thắng \(\+10\)/,/BAL\.fest\.\w*Ghen/,/p\.ghen\+10\b/,/ghen \+\$\{BAL\./];
+ /* ONE jealousy core (r3): every contest/festival jealousy = BAL.ghen.* applied by ghenAll() and printed by ghenN(), never a BAL.fest copy */
  /* j8's ghenAll(8/10) are nights, births and decrees (other rules); its festival() is checked by the Sủng +8 / {sung:8,danh:3} patterns */
  for(const f of ['jcoopcontest.js','j71.js','j8.js','j34.js']){const t=fs.readFileSync(path.join(ROOT,'dev/build',f),'utf8');for(const re of pats)if(re.test(t)&&!(f==='j8.js'&&/ghenAll/.test(re.source)))bad.push(f+' '+re)}
  ok(!bad.length,'no typed copy of the BAL.fest numbers',bad)}
+{const t=fs.readFileSync(path.join(ROOT,'dev/build/jbal.js'),'utf8');ok(!/(fxGhen|winGhen|giftGhen|ctGhen)\s*:/.test(t),'one jealousy core: BAL.fest holds no ghen key (BAL.ghen.* only)')}
 (async()=>{const b=await chromium.launch();const ctx=await b.newContext({viewport:{width:755,height:1000},deviceScaleFactor:1,hasTouch:true,isMobile:true});await serve(ctx);
  const p=await ctx.newPage();p.setDefaultTimeout(120000);const errs=[];p.on('pageerror',e=>errs.push(e.message));p.on('console',m=>{if(m.type()==='error'&&!/Failed to load resource|favicon|navigator\.vibrate/.test(m.text()))errs.push('console: '+m.text())});
  await p.goto(BASE,{waitUntil:'domcontentloaded'});await p.waitForFunction(()=>typeof start==='function'&&typeof showModal==='function');await p.waitForTimeout(2000);
@@ -34,13 +36,15 @@ const res=[];const ok=(c,m,x)=>{res.push([!!c,m]);console.log((c?'ok  ':'FAIL')+
   T(()=>{const w=liveRivals(false).filter(x=>present7(x)&&!x.queen)[0],l=liveRivals(false).filter(x=>present7(x)&&!x.queen&&x!==w)[0];for(const x of rivals)if(x.queen){x.queen=false;x.rank=5}w.rank=6;l.rank=6;S.rank=6;
    const oa0=(typeof oanOf==='function')?oanOf(l,w):null;S.contest={r:7,c:['me',w.id,l.id],t0:S.turn,len:1,round:3,sc:{me:[0,0,0],[w.id]:[10,10,10],[l.id]:[1,1,1]},bk:{},pr:{},sab:{},dq:[],hint:0};
    o.ct=contestEnd().replace(/<[^>]+>/g,'');o.ctQ=(Q.find(m=>m.t==='Kết quả tranh ghế')||{}).h||'';o.queen=!!w.queen});
+  o.noFestGhen=['fxGhen','winGhen','giftGhen','ctGhen'].every(k=>!(k in F));o.gk={contest:ghenN(BAL.ghen.contest),praise:ghenN(BAL.ghen.praise),top:ghenN(BAL.ghen.contestTop),rankUp:ghenN(BAL.ghen.rankUp)};
   Q.length=0;return o});
  ok(!r.err.length,'solo: every BAL.fest path runs',r.err);
  ok(r.gift.length===4,'solo: Dâng lễ, all 4 options',r.gift);
- ok(/ghen \+3$/.test(r.giftText)&&r.mine&&r.mine[0]===55&&r.mine[2]===15&&r.richRival===55&&r.poor===15,'solo: gift numbers = BAL.fest.gift (55 / own / 15, ghen +3)',{t:r.giftText,mine:r.mine,rich:r.richRival,poor:r.poor});
+ ok(/ghen \+3$/.test(r.giftText)&&r.mine&&r.mine[0]===55&&r.mine[2]===15&&r.richRival===55&&r.poor===15,'solo: gift numbers = BAL.fest.gift (55 / own / 15), ghen +BAL.ghen.praise',{t:r.giftText,mine:r.mine,rich:r.richRival,poor:r.poor});
  ok(r.fx.sung>=8&&r.fx.danh>=3&&/\(Sủng \+8, Danh \+3\)/.test(r.fx.log),'solo: feast winner paid BAL.fest.fxWin, text prints it',r.fx);
  ok(/Sủng \+8 · Danh \+3\.$/.test(r.fxMe),'solo: her feast win prints "Sủng +8 · Danh +3"',r.fxMe);
  ok(r.j8==='npc won'||/Sủng \+8 · Danh \+3\./.test(r.j8),'solo: j8 festival text from BAL',r.j8);
  ok(r.queen&&/Oán với người thắng \(\+10\)/.test(r.ctQ),'solo: Tranh ghế crowns one, text prints BAL.fest.ctOan',{ct:r.ct,q:r.ctQ.replace(/<[^>]+>/g,'').slice(-80)});
+ ok(r.noFestGhen&&r.gk.praise>0&&r.gk.contest>0&&r.gk.top>0&&r.gk.rankUp>0&&new RegExp('ghen \\+'+r.gk.praise+'$').test(r.giftText),'one jealousy core: BAL.ghen.* via ghenN, gift text prints ghenN(BAL.ghen.praise)',{gk:r.gk,t:r.giftText});
  ok(!errs.length,'no page errors',errs.slice(0,5));
  const bad=res.filter(x=>!x[0]);console.log(`\n${res.length-bad.length}/${res.length} passed`);await b.close();process.exit(bad.length?1:0)})().catch(e=>{console.error(e);process.exit(2)});

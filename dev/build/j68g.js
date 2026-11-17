@@ -93,7 +93,7 @@ EV6("envoyGift","court",{a:["emp"],pp:()=>({a0:0}),w:C=>.8,
  v:["Sứ thần nước ngoài dâng ngọc quý; Hoàng thượng chia cho lục cung mỗi nơi một món.","Cống phẩm phương nam về: vải thiều, long nhãn; ngài sai mang sang cung ngươi trước.","Sứ thần tặng một cây đàn lạ, ngài muốn xem phi tần nào gảy được.","Nước chư hầu dâng hai con công trắng, ngài hỏi cung nào muốn nuôi."],
  o:X=>[c6("Tạ ơn, chia cho người hầu",{w:{maid:6,duc:1},k:[R6("không giữ được gì cho mình")]}),
   c6("Thử tài trước sứ thần",{c:{suc:-5},p:od(30+S.tai/2),w:{danh:3,sung:2},l:{danh:-2},lt:[R6("mất mặt trước người ngoài")]}),
-  c6("Xin giữ làm của riêng",Object.assign({k:[R6("phi tần ghen +3")],ok:()=>{ghenAll(3);return "Ngài ban riêng cho ngươi."}},typeof stipEvItem==="function"&&stipEvItem("envoyGift",X)?{}:{w:{bac:30}}))]});
+  c6("Xin giữ làm của riêng",Object.assign({k:[R6(`phi tần ghen +${ghenN(BAL.ghen.keepGift)}`)],ok:()=>{ghenAll(BAL.ghen.keepGift);return "Ngài ban riêng cho ngươi."}},typeof stipEvItem==="function"&&stipEvItem("envoyGift",X)?{}:{w:{bac:30}}))]});
 /* extra variants for existing templates (more distinct situations per template) */
 [["giftArrive","{A} sai tiểu thái giám mang sang một lồng chim họa mi, nói để ngươi đỡ buồn."],
  ["lostItem","Chiếc khăn tay thêu tên ngươi không thấy đâu; nếu lọt vào tay kẻ xấu thì thành tang vật."],

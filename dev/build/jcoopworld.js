@@ -34,7 +34,7 @@ const HOST_ONLY=["tn","thIll","cm","men","menG2","cfp","cfb","cfa","ctc","ctcRes
 const CM_P=["seen","spy","thDrop","hhDrop"],MEN_P=["tinh","letters","trysts","knowsMe","af","grudge","grudgeN","debt","seen"];
 const REFF=["resHead","spyFor","lover","mid","owner","by","who","tgt","from","to"];   /* fields whose "me" value names the viewer */
 const STAT=["sung","danh","bac","suc","sac","tai","tamco","duc","th","hh","mat","confined","shield","block"];
-const LOOK=["face","fc","fk","fcKeep","fid","pid","age","sac","tai","tamco","duc","arts","pal","resHead","dress","ill","maid","lot","hieu","titleWorn","dh"];  /* hieu + titleWorn + dh: her hiệu and worn title show on the friend too (review/title-sys) */
+const LOOK=["face","fc","fk","fcKeep","fid","pid","age","sac","tai","tamco","duc","arts","pal","resHead","dress","ill","maid","lot","hieu","titleWorn","dh","toilette","wd"];  /* toilette + wd: her look of the day and the clothes she wears (jtoil toilFriendRec / toilDress, diemtrang-coop-look); hieu + titleWorn + dh: her hiệu and worn title show on the friend too (review/title-sys) */
 const J=x=>x==null?x:JSON.parse(JSON.stringify(x));
 const PETK2=["pets","petOn","petB","petBn"];
 const CW=window.COOPW={tr:[],on:false,seat:"",base:null,pend:false,sent:-1,dying:null,attachC:null,news:"",life:0};
@@ -273,12 +273,15 @@ function sendFam(P){if(!CW.on||!S||S.dead)return;P=P||famPack();CW.famSentH=P.h;
 CW.famPack=famPack;
 function sendPos(){if(!CW.on||!CW.p2||!S||S.dead)return;const st={};for(const x of LIVE)st[x]=S[x];
  const P=famPack();if(P.h!==CW.famSentH)sendFam(P);
- const k=[wk(),S.buoi||0,S.place||"home",used,LIVE.map(x=>S[x]).join("/"),!!S.out,S.name,P.h].join(":");if(k===CW.posKey)return;CW.posKey=k;
- COOP.send({t:"pos",place:S.place||"home",khac:used,week:wk(),buoi:S.buoi||0,st,fh:P.h,out:!!S.out,alive:!S.dead,name:S.name,life:CW.life||0})}
+ const tl=S.toilette&&S.toilette.wk===wk()?J(S.toilette):null,wd=S.wd?J(S.wd):null;/* her look of the day + worn clothes, live (diemtrang-coop-look) */
+ const k=[wk(),S.buoi||0,S.place||"home",used,LIVE.map(x=>S[x]).join("/"),!!S.out,S.name,P.h,tl?JSON.stringify(tl):"",wd?JSON.stringify(wd):""].join(":");if(k===CW.posKey)return;CW.posKey=k;
+ COOP.send({t:"pos",place:S.place||"home",khac:used,week:wk(),buoi:S.buoi||0,st,fh:P.h,out:!!S.out,alive:!S.dead,name:S.name,life:CW.life||0,tl,wd})}
 /* her own numbers, live: shown on her entry; the week write-back baseline moves with them so the merge never counts them as mine */
 function liveStats(m){const f=friendEntry();if(!f||!m.st||(m.name&&m.name!==f.name))return false;let ch=false;
  for(const x of LIVE){const v=m.st[x];if(typeof v!=="number")continue;if(x==="rank"&&f.queen)continue;if(f[x]!==v){f[x]=v;ch=true}if(f.__b&&x in f.__b)f.__b[x]=v}
  if(f.__b)f.__b.rank=f.rank;
+ if(m.tl&&typeof m.tl==="object"&&JSON.stringify(m.tl)!==JSON.stringify(f.toilette||null)){f.toilette=J(m.tl);ch=true}/* her look of the day (jtoil toilFriendRec) */
+ if(m.wd&&typeof m.wd==="object"&&JSON.stringify(m.wd)!==JSON.stringify(f.wd||null)){f.wd=J(m.wd);ch=true}/* the clothes she wears (jtoil toilDress) */
  if(famIn(f,m.fam,m.pets))ch=true;
  return ch}
 /* her bag / kids / pregnancy / festival entries / pets onto her entry (inline pos of an old client, or the ctm-fam relay) */
@@ -311,7 +314,7 @@ function bend(){T("bend "+wk()+"."+(S&&S.buoi));if(CW.bend)return;CW.bend=true;C
    Returns the buổi key it ended ("week:buổi") or "" (nothing done: jnight asks again on the next render). */
 CW.nightEnd=function(){if(!CW.on||!S||S.dead||Q.length||S.mg)return"";if(waiting()||frozen()||CW.pend||!CW.base||CW.bend||CW.pendBuoi||needWhere())return"";
  const b=S.buoi||0;if(typeof CW.rbuoi==="number"&&CW.rweek===wk()&&CW.rbuoi!==b)return"";
- const k=bkey();used=4;nextBuoi();return (CW.bend||nReady()||CW.pend||(S.buoi||0)!==b)?k:""};
+ const k=bkey();used=BAL.time.khac;nextBuoi();return (CW.bend||nReady()||CW.pend||(S.buoi||0)!==b)?k:""};
 CW.bkey=bkey;
 COOP.on("buoi",onBuoi);
 /* the room's current buổi (for a reborn life that joins mid-week) */

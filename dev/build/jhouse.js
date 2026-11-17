@@ -29,7 +29,7 @@ function hsvKey(){return hsvList().map(s=>s.sid).join(",")}
    try{if(typeof popIdx==="number"&&popIdx!=null&&!(P[popIdx]&&old[popIdx]&&P[popIdx].name===old[popIdx].name)){popIdx=null;popMsg=""}}catch(e){}}}}catch(e){console.error(e)}return r0.apply(this,arguments)}})();
 /* the acts: the maid's acts with this servant as the agent, then the Cung nhân tab's acts for this servant */
 function hsvDone(lab,bf,ok){try{if(typeof resultShow==="function")setTimeout(()=>{try{resultShow(lab,bf,ok)}catch(e){}},0)}catch(e){}}
-function hsvActs(s){const A=[];if(!s||!(S.staff||[]).includes(s))return A;const nm=s.name,he=s.role==="eunuch"?"hắn":"nàng";
+function hsvActs(s){const A=[],H=BAL.house;if(!s||!(S.staff||[]).includes(s))return A;const nm=s.name,he=s.role==="eunuch"?"hắn":"nàng";
  const c=s.cause,fault=c&&c.fault,merit=c&&!c.fault,tr=s.trouble!=null&&wk()-s.trouble<=4,spy=s.spyFor&&s.spyFor!=="me";
  /* 1. the trusted maid's acts (j2 Tâm sự numbers, jwhy dò la / nghe ngóng with this servant sent) */
  A.push({n:"Tâm sự",dom:"Sai bảo",o:100,x:`lòng ${nm} +6`,run:()=>{s.loyal=cl((s.loyal||0)+6,0,100);return `${nm} được ngươi hỏi han: lòng +6.`}});
@@ -40,24 +40,24 @@ function hsvActs(s){const A=[];if(!s||!(S.staff||[]).includes(s))return A;const 
  /* 2. the Cung nhân tab's acts for this servant (same functions, same costs); on the stage they also take the khắc the card shows
     (1, Hỏi chuyện 2 — j25 opens them without paying, so each pays here once it has run) */
  const pay=n=>{try{S.payOnPick=0;if(n)spend(n)}catch(e){}};
- const J=(n,how,c,x,risk,lock)=>A.push(Object.assign({n,dom:"Thưởng phạt",o:100,c,x},risk?{risk}:{},lock?{lock:true,t:lock}:{},{open:()=>{if(how==="thuong"&&S.bac<10)return;const bf=rsnap();judgeServ(s,how);pay(1);hsvDone(n,bf,true)}}));
- J(merit?`Thưởng vì ${c.txt}`:"Thưởng vô cớ","thuong",{bac:-10},merit?"lòng +15, kẻ hầu khác lòng +2":"lòng +6 (ít hơn thưởng có cớ)","",S.bac<10?"thiếu bạc (cần 10)":"");
- if(spy)A.push({n:"Tra khảo",dom:"Thưởng phạt",o:100,x:`${he} khai là tai mắt của ai · lòng -15`,open:()=>{const bf=rsnap();servAct("phat",s.sid);pay(1);hsvDone("Tra khảo",bf,true)}});
- else J(fault?`Phạt vì ${c.txt}`:"Phạt vô cớ","phat",{},fault?"kỷ cương, kẻ hầu khác lòng +1 · lòng -5":"lòng -25, Đức -3, kẻ hầu khác lòng -5",fault?"":`${he} mang hận; lòng dưới 30 thì mỗi tuần bán mình cho phi tần khác: ${chanceW(15)}`);
+ const J=(n,how,c,x,risk,lock)=>A.push(Object.assign({n,dom:"Thưởng phạt",o:100,c,x},risk?{risk}:{},lock?{lock:true,t:lock}:{},{open:()=>{if(how==="thuong"&&S.bac<H.thuongBac)return;const bf=rsnap();judgeServ(s,how);pay(H.k);hsvDone(n,bf,true)}}));
+ J(merit?`Thưởng vì ${c.txt}`:"Thưởng vô cớ","thuong",{bac:-H.thuongBac},merit?"lòng +15, kẻ hầu khác lòng +2":"lòng +6 (ít hơn thưởng có cớ)","",S.bac<H.thuongBac?`thiếu bạc (cần ${H.thuongBac})`:"");
+ if(spy)A.push({n:"Tra khảo",dom:"Thưởng phạt",o:100,x:`${he} khai là tai mắt của ai · lòng -15`,open:()=>{const bf=rsnap();servAct("phat",s.sid);pay(H.k);hsvDone("Tra khảo",bf,true)}});
+ else J(fault?`Phạt vì ${c.txt}`:"Phạt vô cớ","phat",{},fault?"kỷ cương, kẻ hầu khác lòng +1 · lòng -5":`lòng -25, Đức -${H.phatDuc}, kẻ hầu khác lòng -5`,fault?"":`${he} mang hận; lòng dưới 30 thì mỗi tuần bán mình cho phi tần khác: ${chanceW(15)}`);
  if(fault)J("Tha lỗi","tha",{},"lòng +5 · kẻ hầu khác lòng -1");
- if(tr)A.push({n:"Che chở (đang bị bắt tội)",dom:"Thưởng phạt",o:100,c:{danh:-2},x:"lòng +20",open:()=>{const bf=rsnap();servAct("che",s.sid);pay(1);hsvDone("Che chở",bf,true)}});
+ if(tr)A.push({n:"Che chở (đang bị bắt tội)",dom:"Thưởng phạt",o:100,c:{danh:-H.cheDanh},x:"lòng +20",open:()=>{const bf=rsnap();servAct("che",s.sid);pay(H.k);hsvDone("Che chở",bf,true)}});
  A.push({n:"Hỏi chuyện",dom:"Sai bảo",act:1,o:s.tr==="chuyen"&&s.kn?70:40,x:"chứng cứ +1 nếu quen người cung khác",l:{},open:()=>{S.payOnPick=0;const bf=rsnap();servAct("hoi",s.sid);hsvDone("Hỏi chuyện",bf,true)}});
  if(typeof def70m==="function"&&typeof PEND!=="undefined"){let od=null;try{od=ordOf70(s.sid)}catch(e){}
-  A.push({n:od?"Đổi việc phòng bị":"Giao việc phòng bị",dom:"Sai bảo",o:100,x:od?ordSub70(s.sid):"chọn canh cung, thử độc, theo dõi, giữ sổ sách",open:()=>{pay(1);Q.push(def70m({s:4,sid:s.sid}));showModal()}})}
- if(!s.kn)A.push(Object.assign({n:"Xem người",dom:"Sai bảo",o:100,c:{bac:-15},x:"biết nết thật"},S.bac<15?{lock:true,t:"cần 15 bạc"}:{},{open:()=>{S.payOnPick=0;if(S.bac<15||!can(1))return;const bf=rsnap();apply({bac:-15});spend(1);servLearn(s,"Cho người dò xét lai lịch");hsvDone("Xem người",bf,true)}}));
- A.push(Object.assign({n:"Tiến cử",dom:"Sai bảo",o:100,c:{bac:-30,danh:-2},x:"công lao lên bậc +5"},S.bac<30?{lock:true,t:"cần 30 bạc"}:{},{open:()=>{const bf=rsnap();recommend(s.sid);pay(1);hsvDone("Tiến cử",bf,true)}}));
- A.push(Object.assign({n:"Đổi người",dom:"Sai bảo",o:100,c:{bac:-20,danh:-1},x:`trả ${nm.split(" ").pop()} về, người thay ngẫu nhiên, nết chưa rõ`,risk:`đuổi 2 người trong nửa năm: Danh -3${typeof servSellO==="function"&&servSellO(S,s)>0?` · ${he} đem chuyện của ngươi bán cho kẻ thù: ${chanceW(servSellO(S,s))}`:""}`},S.bac<20?{lock:true,t:"thiếu bạc (cần 20)"}:{},{open:()=>{const bf=rsnap();servAct("doi",s.sid);pay(1);hsvDone("Đổi người",bf,true)}}));
+  A.push({n:od?"Đổi việc phòng bị":"Giao việc phòng bị",dom:"Sai bảo",o:100,x:od?ordSub70(s.sid):"chọn canh cung, thử độc, theo dõi, giữ sổ sách",open:()=>{pay(H.k);Q.push(def70m({s:4,sid:s.sid}));showModal()}})}
+ if(!s.kn)A.push(Object.assign({n:"Xem người",dom:"Sai bảo",o:100,c:{bac:-H.lookBac},x:"biết nết thật"},S.bac<H.lookBac?{lock:true,t:`cần ${H.lookBac} bạc`}:{},{open:()=>{S.payOnPick=0;if(S.bac<H.lookBac||!can(H.k))return;const bf=rsnap();apply({bac:-H.lookBac});spend(H.k);servLearn(s,"Cho người dò xét lai lịch");hsvDone("Xem người",bf,true)}}));
+ A.push(Object.assign({n:"Tiến cử",dom:"Sai bảo",o:100,c:{bac:-H.upBac,danh:-H.upDanh},x:"công lao lên bậc +5"},S.bac<H.upBac?{lock:true,t:`cần ${H.upBac} bạc`}:{},{open:()=>{const bf=rsnap();recommend(s.sid);pay(H.k);hsvDone("Tiến cử",bf,true)}}));
+ A.push(Object.assign({n:"Đổi người",dom:"Sai bảo",o:100,c:{bac:-H.swapBac,danh:-H.swapDanh},x:`trả ${nm.split(" ").pop()} về, người thay ngẫu nhiên, nết chưa rõ`,risk:`đuổi 2 người trong nửa năm: Danh -${H.swapTwiceDanh}${typeof servSellO==="function"&&servSellO(S,s)>0?` · ${he} đem chuyện của ngươi bán cho kẻ thù: ${chanceW(servSellO(S,s))}`:""}`},S.bac<H.swapBac?{lock:true,t:`thiếu bạc (cần ${H.swapBac})`}:{},{open:()=>{const bf=rsnap();servAct("doi",s.sid);pay(H.k);hsvDone("Đổi người",bf,true)}}));
  return A}
 (function(){const t0=talkOpts;talkOpts=function(p){if(p&&p.kind==="serv"&&p.ref){try{return hsvOn()?hsvActs(p.ref):[]}catch(e){console.error(e);return[]}}
   const A=t0.apply(this,arguments);
   /* family fix: her trusted maid's stage card gets the tab's "Giao việc phòng bị" too */
   try{if(p&&p.kind==="maid"&&S.maid&&hsvOn()&&Array.isArray(A)&&typeof def70m==="function"&&!A.some(a=>a&&/việc phòng bị/.test(a.n))){let od=null;try{od=ordOf70("maid")}catch(e){}
-   A.push({n:od?"Đổi việc phòng bị":"Giao việc phòng bị",dom:"Sai bảo",o:100,x:od?ordSub70("maid"):"chọn canh cung, thử độc, theo dõi, giữ sổ sách",open:()=>{try{S.payOnPick=0;spend(1)}catch(e){}Q.push(def70m({s:4,sid:"maid"}));showModal()}})}}catch(e){}
+   A.push({n:od?"Đổi việc phòng bị":"Giao việc phòng bị",dom:"Sai bảo",o:100,x:od?ordSub70("maid"):"chọn canh cung, thử độc, theo dõi, giữ sổ sách",open:()=>{try{S.payOnPick=0;spend(BAL.house.k)}catch(e){}Q.push(def70m({s:4,sid:"maid"}));showModal()}})}}catch(e){}
   return A}})();
 /* family (LUẬT SỬA CẢ NHÓM): in lãnh cung the one servant who stayed with her (j14 cold: S.staff keeps one loyal servant) stands on
    that stage too, with the same card and acts; before, the stage held only the other fallen consorts */

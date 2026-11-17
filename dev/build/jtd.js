@@ -195,7 +195,7 @@ function kgTdAlms(box,env){const lv=tdEase(env.lv);const wrap=document.createEle
 function tdAlmsBestGive(R){let best=-1,bg=null;const give=R.need.map(()=>0);(function rec(i,left){if(i===R.need.length){const s=tdAlmsScore(R.need,give,R.pool);if(s>best){best=s;bg=give.slice()}return}for(let a=0;a<=left;a++){give[i]=a;rec(i+1,left-a)}give[i]=0})(0,R.pool);return bg}
 /* ---------- easy-rules layer (same pattern as review/mg-easy): Gợi ý button, quiet idle hint, first-time example card ---------- */
 const TD_HINT={tdthread:"Viền vàng chỉ sợi chỉ đúng màu, hoặc chấm kế tiếp để kéo kim tới.",tdwalk:"Viền vàng ở nửa khung nên giữ lúc này.",tdtalk:"Viền vàng ở nút Thưa: giữ khi vòng xanh sáng, buông khi tiếng nói vào dải xanh.",tdalms:"Viền vàng ở nút cần chạm tiếp (hoặc nút Phát xong)."};
-const TD_EX={cong:"Chỉ mẫu màu lục thì chạm sợi chỉ lục, rồi kéo kim từ chấm xanh men theo nét chấm.",dung:"Dấu sàn ghi “◀ trái” thì bát sắp nghiêng trái: giữ nửa phải để đỡ lại.",ngon:"Thái hậu vui (bề trên): chờ bà nói xong, vòng xanh sáng thì giữ Thưa, tiếng nói vừa tới dải xanh thấp (nhỏ nhẹ) thì buông.",hanh:"Người ghi cần 2 phần: chạm + hai lần cho người ấy, rồi làm vậy với mọi người, chạm Phát xong."};
+const TD_EX={cong:"Chỉ mẫu màu lục thì chạm sợi chỉ lục, rồi kéo kim từ chấm xanh men theo nét chấm.",dung:"Dấu sàn ghi “◀ trái” thì bát sắp nghiêng trái: giữ nửa phải để đỡ lại.",ngon:"Thái hậu vui (bề trên): chờ bà nói xong, vòng xanh sáng thì giữ Thưa, tiếng nói vừa tới dải xanh thấp (nhỏ nhẹ) thì buông.",hanh:`Người ghi cần ${BAL.td.exNeed} phần: chạm + hai lần cho người ấy, rồi làm vậy với mọi người, chạm Phát xong.`};
 function tdIdle(lv){lv=+lv||0;return lv<=1?6500:lv<=3?10500:0}
 function tdSeen(k,set){try{if(KG82.noDemo||!S)return true;const m=S.mgSeen||(S.mgSeen={});if(set){m["td_"+k]=1;return true}return !!m["td_"+k]}catch(e){return true}}
 function tdRing(pt,ms){const r=document.createElement("div");r.className="tdring ksel";r.style.cssText=`position:fixed;left:${pt.x-26}px;top:${pt.y-26}px;width:52px;height:52px;border-radius:50%;pointer-events:none;z-index:99999`;document.body.appendChild(r);setTimeout(()=>r.remove(),ms||2600);return r}
@@ -225,7 +225,7 @@ function tdQuality(p){try{const a=(p&&p.vpf&&p.vpf.cong)||[];return a.length?Mat
 (function(){const v0=virtueBonus;virtueBonus=function(p,k){const b=v0.apply(this,arguments);try{if(k==="cong"&&b&&b.q!=null&&p===S)b.q+=tdQuality(p)}catch(e){}return b};window.virtueBonus=virtueBonus})();
 const TDS={busy:false};window.TDS=TDS;
 function tdPlay(k,mode){if(!S||S.dead||Q.length||S.mg||TDS.busy)return;vNorm(S);const l=S.vir[k],cost=virCost(l),V=VIR.find(x=>x.k===k);if(!V||l>=5)return;
- if(mode==="self"){if(!can(2)||S.suc<25)return}else if(!can(2)||S.bac<cost)return;
+ if(mode==="self"){if(!can(BAL.td.k)||S.suc<BAL.td.selfMin)return}else if(!can(BAL.td.k)||S.bac<cost)return;
  const kind=TD_OF[k],K=KG82_KIND[kind];if(window.__bot||typeof kg82Open!=="function"){tdFinish(k,mode,5,true);return}
  TDS.busy=true;KG82.ctx="hoc";kg82Preload(kind);mgSet(kind,{occ:"hoc",lv:l});/* mg-balance: board ease from the tier (jmgt) */
  const d=kg82Open({art:`${V.n} · ${V.full}`,title:`${TD_MODE[mode]||"Học"} · ${K.t}`,how:K.how,round:K.e==="tdthread"?"Hồi":K.e==="tdwalk"?"Bước":K.e==="tdalms"?"Lượt":"Câu",roundV:"–",pic:kg82Pic(kind)});
@@ -239,10 +239,10 @@ function tdPlay(k,mode){if(!S||S.dead||Q.length||S.mg||TDS.busy)return;vNorm(S);
  box.innerHTML=`<h4 class="kpst">Cách chơi${first?" · lần đầu":""}</h4>`+kg82Rows(first?TD_RULES[k].map(([n,t])=>[`Bước ${n}`,t,"t"]).concat([["Ví dụ",TD_EX[k],"n"]]):[["Luật",K.how,"t"]])+kg82Rows([["Gợi ý",HOWL[0],"n"]])+`<div class="kg82act"><button class="${kg82Btn()}" id="kg82go">Bắt đầu</button><button class="${kg82Btn(true)}" id="kg82skip">Để trời định<small>tính 5/10</small></button><button class="${kg82Btn(true)}" id="tdcancel">Thôi, để lúc khác<small>không tốn gì</small></button></div>`;
  $("kg82go").onclick=()=>{tdSeen(k,1);kg82Play(kind,raw=>result(raw,false))};$("kg82skip").onclick=()=>result(5,true);$("tdcancel").onclick=cancel}
 function tdFinish(k,mode,raw,skipped){if(!S||S.dead)return;vNorm(S);const l=S.vir[k],cost=virCost(l),V=VIR.find(x=>x.k===k);if(!V||l>=5)return;
- if(mode==="self"){if(!can(2)||S.suc<25)return}else if(!can(2)||S.bac<cost)return;
+ if(mode==="self"){if(!can(BAL.td.k)||S.suc<BAL.td.selfMin)return}else if(!can(BAL.td.k)||S.bac<cost)return;
  const b=typeof rsnap==="function"?rsnap():null,g=tdPoints(mode,raw);
- if(mode==="self"){apply({suc:-15});spend(2);addVir(S,k,g);log(`Tự học ${V.n} (${kg82Word(raw)} ${raw}/10). Tiến bộ +${g}.`)}
- else{apply({suc:-10,bac:-cost});spend(2);addVir(S,k,g);log(`Học ${V.n} với ma ma giáo tập (${kg82Word(raw)} ${raw}/10). Tiến bộ +${g}.`)}
+ if(mode==="self"){apply({suc:-BAL.td.selfSuc});spend(BAL.td.k);addVir(S,k,g);log(`Tự học ${V.n} (${kg82Word(raw)} ${raw}/10). Tiến bộ +${g}.`)}
+ else{apply({suc:-BAL.td.mSuc,bac:-cost});spend(BAL.td.k);addVir(S,k,g);log(`Học ${V.n} với ma ma giáo tập (${kg82Word(raw)} ${raw}/10). Tiến bộ +${g}.`)}
  if(k==="cong"){S.vpf=S.vpf||{};S.vpf.cong=(S.vpf.cong||[]).concat(raw).slice(-3)}
  save();render();try{if(b&&typeof resultShow==="function")resultShow(`${mode==="self"?"Tự học":"Học"} ${V.n}`,b,null)}catch(e){}}
 window.lessonVir=tdPlay;window.tdPlay=tdPlay;
