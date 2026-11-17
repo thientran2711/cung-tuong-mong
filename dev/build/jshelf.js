@@ -42,7 +42,7 @@ Object.assign(BAL,{shelf:{
  /* NPC shelves: seed pieces by rank (0..7) on first look, then they arrange their chest weekly within capF × allowance (proud traits capHi) */
  npc:{seed:[0,1,1,2,2,3,3,4],capF:.9,capHi:1.3,proud:["Kiêu ngạo","Tham vọng"],care:.8},
  /* plants (jpet model): care 0..100, falls decay a tuần; servants care by default (0 khắc), quality by lòng and traits; her own care = the minigame */
- plant:{start:80,decay:12,wither:35,deadW:3,witherLux:.3,khacSelf:1,/* OWNER QUESTION OPEN (OD ~18:00Z (4)): her own care costs khacSelf khắc (0 = free); servants' care never costs her a khắc */srvBase:.45,srvLoyK:.006,srvMax:1.1,qCut:[.6,.9],/* servant care words: below qCut[0] vụng về, below qCut[1] tạm được, else khéo tay */srvTr:{"Cẩn thận":.2,"Chăm chỉ":.2,"Lười biếng":-.3,"Vụng về":-.2},
+ plant:{start:80,decay:12,wither:35,deadW:3,witherLux:.3,khacSelf:1,/* OWNER DECIDED (OD 17/11 ~18:15Z, option 1): servants care plants + pets at 0 khắc to her; 'Tự tay chăm' = khacSelf khắc; ONE 'Chăm sóc' act */srvBase:.45,srvLoyK:.006,srvMax:1.1,qCut:[.6,.9],/* servant care words: below qCut[0] vụng về, below qCut[1] tạm được, else khéo tay */srvTr:{"Cẩn thận":.2,"Chăm chỉ":.2,"Lười biếng":-.3,"Vụng về":-.2},
   gain:[10,45],game:{rounds:3,steps:10,band:[6,8],ms:[260,170]}},
  /* the shared deed "Ghé chơi" (TW call): friendship + a look at the room */
  visit:{rel:3,w:.6,affMin:-15,dayP:12,base:5,herW:15,upW:5},/* dayP: a consort who keeps her schedule this buổi still drops in on someone 1 in N (owner: daily visits); target weight base + liking (+ her, + a superior) *//* anyone not on bad terms may call (owner: NPCs come to her room as she goes to theirs) */
@@ -154,7 +154,9 @@ function shelfAccHook(){const X=typeof ACT==="object"?ACT.xx:null;if(X&&X.__sh)r
  const SX=" · hoặc đã tận mắt thấy (hay dò la ra) phòng nàng bày biện quá mức phẩm mình";
  if(X){const ok0=X.ok,f0=X.f;X.ok=(a,t)=>{let d=false;try{d=!!ok0(a,t)}catch(e){}return d||!!shelfCause(a,t)};X.f=(a,t)=>{let d=false;try{d=!!ok0(a,t)}catch(e){}return d?f0(a,t):shelfAccuse(a,t)};X.x=(X.x||"")+SX;X.__sh=1;return}
  A("xx","Tố xa xỉ",{c:{},ok:(a,t)=>!!shelfCause(a,t),o:a=>oVP(a),x:"cần đã tận mắt thấy (hay dò la ra) phòng nàng bày biện quá mức phẩm mình",f:(a,t)=>shelfAccuse(a,t)});ACT.xx.__sh=1}
+/* load order (jdress may be assembled before OR after this file, and its A("xx") replaces ACT.xx): hook now, again once the page has run every module, and before each week */
 try{shelfAccHook()}catch(e){console.error("shelfAccHook",e)}
+setTimeout(()=>{try{shelfAccHook()}catch(e){console.error("shelfAccHook",e)}},0);
 /* an NPC with proof and a motive brings the charge herself (monthly; same act, same odds oVP, same pacing shape as Tố xa xỉ) */
 function shelfNpcAccuse(){const B=BAL.shelf.acc;for(const a of liveRivals(true)){if(!a.alive||a.out||!a.shn)continue;if(a.shA!=null&&wk()-a.shA<B.cdA)continue;
   for(const k in a.shn){const t=k==="me"?S:RV(+k);if(!t||t===a||t.alive===false||t.out)continue;if(t.shT!=null&&wk()-t.shT<B.cdT)continue;if(!shelfCause(a,t))continue;
@@ -182,7 +184,7 @@ function shelfRumour(){const B=BAL.shelf.rum;const P=[S].concat(liveRivals(true)
  for(const t of P){const x=shelfLux(t);if(x.lv<B.lv)continue;for(const o of P){if(o===t||shelfSeen(o,t))continue;if(!roll(B.o))continue;shelfLook(o,t,"tin đồn",false);if(t===S)heardMe++;
    else if(o===S){try{noteAdd(t.id,`Nghe đồn phòng ${t.name} bày biện ${SHELF_LV[x.lv].toLowerCase()}.`)}catch(e){}}}}
  if(heardMe&&!(typeof tsbBot==="function"&&tsbBot()))log(`Hậu cung xì xào về đồ bày trong phòng ngươi.`)}
-function shelfWeek(){if(!S||S.dead)return;const P=[S].concat(liveRivals(true)).filter(p=>p&&p.alive!==false);
+function shelfWeek(){if(!S||S.dead)return;try{shelfAccHook()}catch(e){}const P=[S].concat(liveRivals(true)).filter(p=>p&&p.alive!==false);
  for(const p of P){try{if(p.out){if(p.shelf&&p.shelf.g)for(const g in p.shelf.g)shelfTake(p,g);continue}if(p!==S)shelfArrange(p);shelfPlantWeek(p);shelfMood(p)}catch(e){console.error("shelfWeek",e)}}
  try{shelfRumour()}catch(e){console.error("shelfRumour",e)}
  if(S.shM!==S.turn){S.shM=S.turn;for(const p of P){try{if(shelfLux(p).lv>=3)p.luxRep=Math.min(BAL.lux.repMax,(p.luxRep|0)+BAL.shelf.rep)}catch(e){}}try{shelfNpcAccuse()}catch(e){console.error("shelfNpcAccuse",e)}}}
