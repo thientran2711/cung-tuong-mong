@@ -805,3 +805,7 @@ BAL.net.n.meetW={"Ân cần":1.6,"Nhiều chuyện":1.8,"Xu nịnh":1.4,"Nóng n
 /* the person-dialog chat options (j9 topicOpts, j2 Khiêu khích): ONE table read by her options AND by the same options an NPC uses on her (AG-MEET, jgreet:
    mirrored, she is the judge). Gains are × chatF (fewer each repeat). praise odds = od(o + the speaker's Tài / div); foe = oán a third must hold to warn. */
 BAL.talk={health:4,praise:{o:60,div:5},praiseFail:2,secret:10,secretBond:30,gossip:{hit:8,miss:3,oan:5,tell:50,tellOan:10},warn:{hit:10,miss:2,oan:10,foe:30},provoke:{rel:15,ghen:10,danh:1}};
+/* AG-ALL day plan (jagday.js; design dev/handover/reports/ag-all.md §10, owner OD 17/11 ~13:40Z): at the start of each day every NPC draws her
+   plan (buổi by buổi: place + deed + goal); replan = % chance to re-draw the rest of her day at a new buổi when her top need changed (need)
+   or something touched her (touch: the player's deed aimed at her, her own deed failed, an event); no change → she keeps her plan */
+BAL.ag.day={on:1,replan:{need:25,touch:40}};
