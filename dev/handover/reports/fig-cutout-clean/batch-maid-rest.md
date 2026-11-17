@@ -107,3 +107,12 @@ maid-m07-t2-a18	LwoNnWYswO	ok U
 maid-m07-t3-a18	SymR0MNUb8	ok U
 maid-m07-t4-a18	fHGxJ4qCDY	ok U
 maid-m07-t5-a18	cpgtFKt0eP	ok U
+maid-m07-t6-a18	0eSm1pJTfW	ok U
+maid-m07-t7-a18	79aABNnJAL	ok U
+maid-m07-t8-a18	vQ214q7a47	ok U
+maid-m07-tm0-a18	bxVwGlf5Y2	ok U
+maid-m07-tm2-a18	WDlIKo7cXe	ok U
+maid-m07-tm3-a18	gOt3pcXSXO	ok U
+maid-m07-tm4-a18	ovNHwl7829	ok U
+maid-m08-a18	vQ214OYa47	ok U
+- W5c: 24 done (m06-t6..m08-a18). NEXT maid-m08-cold-a18 (queue line 25).
