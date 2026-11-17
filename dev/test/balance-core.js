@@ -22,7 +22,7 @@ const {chromium}=require('playwright');const path=require('path');
   /* r1 note 7: a loss below her own peak heals at grow.back (×1), new heights stay slow */S.sac=88;apply({sac:0});S.pk.sac=88;S.sac=78;const s0r=S.sac;for(let i=0;i<5;i++)apply({sac:2});ok("regaining lost Sắc below her peak is not slowed by the curve",S.sac-s0r>=9&&S.sac<=88+1,[s0r,S.sac]);
   /* night odds */S.sung=40;S.sac=60;const f=oSteal(S,"feign"),r=oSteal(S,"road");S.sung=10;S.sac=85;const f2=oSteal(S,"feign"),r2=oSteal(S,"road");
   ok("Tranh sủng rides on Sủng, Chặn ngự giá on Sắc",f>r&&r2>f2,[f,r,f2,r2]);ok("oKeep is a number 5..95",oKeep(S)>=5&&oKeep(S)<=95,oKeep(S));
-  ok("rungDown drops one word rung",ladIdx(rungDown(60,1))===ladIdx(60)-1&&rungDown(20,1)>=5,[rungDown(60,1),rungDown(20,1)]);
+  ok("rungDown drops one word rung",oddsLv(rungDown(60,1))===oddsLv(60)-1&&rungDown(20,1)>=5,[rungDown(60,1),rungDown(20,1)]);
   S.emp.ea=null;empArtMonth();const ea=empArt();ok("Emperor's month art: one favoured, one disfavoured, different",ea&&ea.f!==ea.d&&ARTS.some(a=>a.k===ea.f),ea);
   S.mat=BAL.steal.ea.mat;S.eaK=-1;eaLearn(true);ok("Tai mắt ≥ ea.mat knows it at the month start",eaKnows(S));
   for(const k of ARTS.map(a=>a.k)){S.arts[k]=0;S.artp[k]=0}S.arts[ea.f]=3;const fav=oSteal(S,"road");S.arts[ea.f]=0;S.arts[ea.d]=3;const dis=oSteal(S,"road");S.arts[ea.d]=0;const none=oSteal(S,"road");
