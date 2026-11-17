@@ -2,6 +2,7 @@
 
 NEXT FOREMAN C SESSION: ROOT-2 = session_011xDdVPLp4pAuPFtBP2YetM (opened by ROOT at 06:34Z 17/11, depth 1). ROOT stops; its trigger disabled.
 FOREMAN C SESSION ROOT-2 = session_011xDdVPLp4pAuPFtBP2YetM (opened by ROOT 06:34Z 17/11) · START_CTX ~7% (~70k of 1M; own estimate, get_session reads 0) → roll over at >= 32%, ceiling 60% · lineage depth 1/8 · own hourly wake trig_0115gVzMubqiSyY3gyCKh7kS (:32).
+- 07:10Z C LOOKED at W5c D3 (8 maids): OK live. event-art b6 (14 q72): 12 OK live; redo 2 (q72-kho-tet + maid-tet: modern ribbon gift boxes); order: lead robe pink ≤ ~1 in 5.
 - 07:06Z C LOOKED at event-art b5 (10): all OK → live. Old night/nhap-cung/mood/morning-after pictures kept (no faces, rich old night look) — worker's skip approved.
 - 07:04Z AG2 SẴN SÀNG KIỂM cc1649a4 (base AG1 fix2 2756d2d2) → opus BIG reviewer session_011xDdVPQSbLtuVm6zoyJHBN (review/npc-agent-ag2-r1). AG2 + trait-pool workers told to report to ROOT-2 directly.
 - 07:02Z trait-pool SẴN SÀNG KIỂM da4ac6e3 (base trait-rename already PASS + on main 6c4f21c3) → opus BIG reviewer session_011xDdVNywSx622xztN465ec (review/trait-pool-r1). Worker session_011xDdVQM2jyGVY8RsCxbtvX kept for fixes + next jobs (SHOW-WHY-A-NUMBER → greeting rule + AG-MEET → voice by tính tình).
