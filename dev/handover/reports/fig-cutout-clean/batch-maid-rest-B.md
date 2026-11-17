@@ -175,3 +175,12 @@ maid-m36-tm0-a18	p8OC1FPehw	aFArOr2fSh	ok
 maid-m36-tm2-a18	4RQWBMk9Aa	aFArOxAfSh	ok
 maid-m36-tm3-a18	KLDJZNWkqp	SymRVAwUb8	ok
 ## 159 a18 done (list lines 1-159) through maid-m36-tm3-a18. NEXT = maid-m36-tm4-a18 (line 160). Lookalike list: m32-t5..t8, m33-t5..t8, m36-t7, m36-t8 (+ m36-t4 borderline).
+maid-m36-tm4-a18	tC35OrnmZJ	8a6q76WIrU	ok
+maid-m37-a18	yiEnITqPW9	6AqTa5piJO	ok
+maid-m37-cold-a18	mERKyL6hJQ	gOt3pa4SXO	ok
+maid-m37-kc-a18	w4v2XcV7EI	yiEnIbiPW9	ok
+maid-m37-ngheo-a18	ovNHwxg829	Bh9FUAkoQR	ok
+maid-m37-t1-a18	TdUhrHHVNR	EbnL3gDuuO	ok
+maid-m37-t2-a18	xSX40G4jfW	vQ219sia47	ok
+maid-m37-t3-a18	YMs85QVWeC	nVLo5aVYQD	ok
+## 167 a18 done (list lines 1-167) through maid-m37-t3-a18. NEXT = maid-m37-t4-a18 (line 168). START_CTX 15%->now ~20% (196k/1M).
