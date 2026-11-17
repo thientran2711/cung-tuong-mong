@@ -634,7 +634,7 @@
 | staff-root — capOf duplicates → BAL.promo.cap only, caps DOWN (lowest rank 1 servant), close-maid/ma ma root, old saves graceful (opus; OD 1497, 1549, L1155) | review/staff-root | B | session_01N1tNP3ZSe15ZCwXea7LSMe | RUNNING | 17/11 05:35Z |
 | npc-agent AG2 Emperor agent + nights (opus; reports/npc-agent.md §5 AG2; after AG1 PASS 2756d2d2) | review/npc-agent-ag2 | C ROOT | session_011xDdVRNkhkw9vZBGkZ1mDK | RUNNING | 17/11 05:40Z |
 | ONE TRAIT POOL 3 groups × 8 (24 traits, 2 pools by sex) + BALANCE LAW gain/cost table (opus; main s30 orders 05:46Z/06:12Z/06:21Z) | review/trait-pool | C ROOT | session_011xDdVQM2jyGVY8RsCxbtvX | RUNNING | 17/11 05:40Z |
-| ART A1 nine origin frames + A2 swaddled baby + A3 red-thread JOIN (sonnet art; reports/presentation-wiring.md ART REQUESTS) | CDN img/kit + reports/art-pres-a123.md | C ROOT | session_011xDdVQ93v6b8Bre1hVaJtG | RUNNING | 17/11 05:40Z |
+| ART A1 nine origin frames + A2 swaddled baby + A3 red-thread JOIN (sonnet art; reports/presentation-wiring.md ART REQUESTS) | CDN img/kit + reports/art-pres-a123.md | C ROOT | session_011xDdVQ93v6b8Bre1hVaJtG | DONE LIVE img/kit/kpo-*; C looked; KIT REQUEST for main keeper (archived) | 17/11 05:40Z |
 | night-final review r1 (opus BIG; main s30 04:50Z order) of 5535697b | review/night-final-r1 | D | session_01964izDUxnFjybggNj6Ukev | RUNNING | 17/11 05:36Z |
 | trait-rename review r1 (opus BIG, save migration) of 27886326 | review/trait-rename-r1 | B | session_01N1tNP31pNXiReqkE3LxVdh | RUNNING | 17/11 05:40Z |
 | one-core-roads — ONE CORE F1 roads: go:/sc:/k: amounts → BAL.road.fx, values identical (opus; split of one-core-dup §2b) | review/one-core-roads | B | session_01N1tNP4eyJ4AQGCmA1HpA9c | RUNNING | 17/11 05:41Z |
