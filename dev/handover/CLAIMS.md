@@ -624,7 +624,7 @@
 | consort rank standard v4 (sonnet art; owner 04:50Z+04:55Z: flowing, phi bạch, no qipao/vest/bulk) | handover reports/fig-cutout-clean/rank-standard | C s13 (via lead #6) | session_011xDdVNgD6LSAWCKxGvMzYP | RUNNING | 17/11 04:55Z |
 | npc-agent AG1 r1-fix2 PASS 2756d2d2 (BIG; WAGE live bug fix inside) → main batch | review/npc-agent-r1-fix2 | C s13 | session_011xDdVRyN4EWAMkVGeM4BB3 | PASS | 17/11 05:13Z |
 | fig-headtop r1 PASS f95f5a92 (review/fig-headtop-r1; 4 more layouts moved to kitFigTop; 8 s fetch-fail fallback = 4 % smaller until retry) → next batch after presentation-wiring + kit-ico-rank | review/fig-headtop-r1 | main s30 | session_01UV1Szipn2t9xXY2WubCJ1T | PASS | 17/11 05:23Z |
-| coop-thin B — life creation + rebirth on host (opus co-op; audit §3 part B; wave 2 with D) | review/coop-thin-b | B | (opening) | RUNNING | 17/11 05:30Z |
-| coop-thin D — remote dialogs (cards) on host (opus co-op; audit §3 part D; wave 2 with B) | review/coop-thin-d | B | (opening) | RUNNING | 17/11 05:30Z |
-| one-core-dup — ONE CORE guard extension (go:/sc:/k: amounts) + DUPLICATE-RULE HUNT whole game (owner 17/11 03:00Z) (opus lead) | review/one-core-dup | B | (opening) | RUNNING | 17/11 05:30Z |
+| coop-thin B — life creation + rebirth on host (opus co-op; audit §3 part B; wave 2 with D) | review/coop-thin-b | B | session_01N1tNP6svxoSpRYt6QpgSiS | RUNNING | 17/11 05:30Z |
+| coop-thin D — remote dialogs (cards) on host (opus co-op; audit §3 part D; wave 2 with B) | review/coop-thin-d | B | session_01N1tNP2zKazQevGeQbxzSnq | RUNNING | 17/11 05:30Z |
+| one-core-dup — ONE CORE guard extension (go:/sc:/k: amounts) + DUPLICATE-RULE HUNT whole game (owner 17/11 03:00Z) (opus lead) | review/one-core-dup | B | session_01N1tNP65Hp1rVzsB41r5fFh | RUNNING | 17/11 05:30Z |
 | event-art-style REDO (owner GO 05:25Z; ev/opt 165 → intro 49 → acts ~419; no faces, pastel, soft brush) | img/ev|opt|intro|act (CDN) | C s13 | session_011xDdVNnHxuy2KotX9dH3zb | RUNNING | 17/11 05:26Z |
