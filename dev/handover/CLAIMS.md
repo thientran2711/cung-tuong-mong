@@ -971,4 +971,4 @@ looks-2 overlay art (fx-stain-tra/uot, smudge, ink, pox, scars, messy hair) | im
 | smudge-code: makeup lem nhem as CODE on makeup layer (owner OD ~23:30Z), 4 level samples (sonnet) | review/smudge-code | MAIN s38 | session_01UV1SzmAt4rDX1DnaUjKTh1 | READY | SẴN SÀNG KIỂM r2 73c87f7 17/11 ~23:40Z |
 | batch s38b LIVE b048e495 (main c7375c0c → b048e495; ROLLBACK c7375c0c): kit-display-room-r2 f4abade8 (Đa Bảo Các kit, BAL.shelf.ui=0 hidden) | review/batch-s38b | MAIN s38 | session_01UV1SzjA6P5mZskv3JKn3BV | LIVE | 17/11 22:58Z |
 | ART look-decals: LOOK_DECALS section A (stains, ink, pox, hair strands, vương) Magnific gpt-2-6, opaque on transparent bg (owner exception ~00:05Z) (sonnet) | handover reports/look-decals.md | MAIN s38 | session_01UV1SzkPHQVHUikWN6sxffa | RUNNING | 17/11 22:59Z |
-| coop-thin part E — buổi + night on host (opus BIG, L; brief briefs/coop-thin-e.md; step 0 first) | review/coop-thin-e | B | (opening) | RUNNING | 17/11 23:20Z |
+| coop-thin part E — buổi + night on host (opus BIG, L; brief briefs/coop-thin-e.md; step 0 first) | review/coop-thin-e | B | session_01N1tNP5f2oakg2Jy1DdVpxy | RUNNING | 17/11 23:20Z |
