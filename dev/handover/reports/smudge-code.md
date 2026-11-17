@@ -43,9 +43,14 @@ PRIORITY #1 CHECK: OD 17/11 ~23:30Z (smudge = CODE on the makeup layer, not Magn
 ## r7 (s39: far-cheek straight edge of the wash)
 - Skin mask edge feathered (wider blur, wider ramp, window 1.7u ramp .5u) and the blush wash is multiplied by a deep-skin core (blur .3u) so it fades out well before the face contour; applies to every level and the NPC path (same function). Removes the r6 'known' faint straight edge.
 
+## r8 (owner: wash leaks off the face; pink run lighter + diffuse)
+- ROOT: the clip was the pixel skin mask (ears, neck, jaw shadow count as skin). Now every layer (streaks, wash, lip drag, tears) is multiplied by a FACE OVAL built from the face points: eye-corner extents at the eyes, narrowing through the mouth to the chin, inset .06u (~3 % of face width), feather .16u. Same function for all levels + NPC path. (The old skin-pixel mask is only used by nothing now except the wash core: removed from the clip.)
+- Pink streak run: BAL.looks.smuFx.blush.sgain [0,1,.5,.5] (half opacity at vừa/nặng), streak breakup .3, extra blur .05u+.03u so no band edges; the wide wash (feathered bleed) unchanged. nhẹ untouched.
+- Test harness now waits for the picture to load before the shot.
+
 ## Open items / follow-ups
 - Small figure faces (~40 px): nhẹ barely visible, vừa/nặng read as a tear stain.
 - Shots outside git; built root files not committed.
 
 ## State
-branch review/smudge-code 1c0585f (pushed). Waiting for verdict.
+branch review/smudge-code 52c95a3 (pushed). Waiting for verdict.
