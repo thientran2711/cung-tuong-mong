@@ -28,6 +28,8 @@ function serve(){return new Promise(r=>{const s=http.createServer((q,a)=>{const 
   v.net=["Nóng nảy",v.net[1],v.net[2]];T("kTone rival",kTone(v),"Nóng nảy");
   S.emp.traits=["nongnay"];T("kTone emp nongnay",kTone("emp"),"Nóng nảy");S.emp.traits=["lanhlung"];T("kTone emp lanhlung",kTone("emp"),"Lạnh lùng");
   S.thTrait="Kín đáo";T("kTone th",kTone("th"),"Kín đáo");
+  /* review r1: every Thái hậu archetype trait (TH_ARCH) has a tone (an unmapped one fell to a hashed tone in toil, dflt elsewhere) */
+  for(const tr of ["Ân cần","Thật thà","Kín đáo","Kiêu ngạo","Mê tín"]){S.thTrait=tr;if(!kTone("th"))fail.push("Thái hậu trait without a tone: "+tr)}S.thTrait="Kín đáo";
   T("kTone nameless servant",kTone({srv:"f"}),null);T("kTone null",kTone(null),null);
   {const m={name:"Trần Văn Khải",sex:"m",net:["Cương trực","Thật thà","Tham vọng"]};T("kTone male nết alias (Cương trực)",kTone(m),"Nóng nảy");m.net=["Xu nịnh","Thật thà","Tham vọng"];T("kTone male nết alias (Xu nịnh)",kTone(m),"Khiêm nhường")}
   /* nameless speaker still speaks (default tone), old save: no S.vmem */

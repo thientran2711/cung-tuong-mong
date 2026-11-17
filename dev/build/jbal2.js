@@ -642,7 +642,7 @@ Object.assign(BAL,{voice:{warm:40,cold:-25,sungMid:0,favMid:0,nuong:3,hi:5,hq:7,
     The Emperor (ETRAITS keys) and Thái hậu (S.thTrait) have their own sets: mapped to the nearest tone here. alias = a male-only nết speaks with the
     nearest female tone's lines until its own pool is written. dflt = the tone of a speaker with no named nết (an unnamed servant). */
  tone:{emp:{nongnay:"Nóng nảy",lanhlung:"Lạnh lùng",danghi:"Kín đáo",nhantu:"Ân cần",datinh:"Ân cần",mesac:"Ân cần",chamchinh:"Điềm tĩnh",trongtai:"Điềm tĩnh",hieuthao:"Điềm tĩnh"},
-  th:{"Ân cần":"Ân cần","Kín đáo":"Kín đáo","Kiêu ngạo":"Kiêu ngạo","Vì gia tộc":"Điềm tĩnh"},
+  th:{"Ân cần":"Ân cần","Kín đáo":"Kín đáo","Kiêu ngạo":"Kiêu ngạo","Vì gia tộc":"Điềm tĩnh","Thật thà":"Điềm tĩnh","Mê tín":"Điềm tĩnh"},/* every TH_ARCH trait (jtrong) has a tone: an unmapped one fell to a hashed tone in toil (Nhiều chuyện) but dflt in kOutcome (review voice-trait-r1) */
   alias:{"Cương trực":"Nóng nảy","Xu nịnh":"Khiêm nhường"},dflt:"Điềm tĩnh"}}});
 /* BAL.ghen = "every consort ghen +n" events (ghenAll, j1). ONE CORE (OD:L1267): the rule applies ghenN(n) and every text shows ghenN(n), so with an
    Emperor who is đa tình both read n × datinh. Keys: dance j2 Múa yến tiệc · kinhHong j2 Kinh hồng vũ · preg news of her pregnancy (j2, j75, j8 belly shows,
