@@ -20,3 +20,7 @@ Gen ids: m05-t1-a51 LwoGpiNswO | t2-a36 aFAUzAofSh | t2-a51 MB7qO3iDCm | t3-a36 
 m06 t1-a36 jUBAKD3LD0 | t1-a51 bxVNuTb5Y2 | t2-a36 gOtYgxgSXO | t2-a51 TdUFTTUVNR | t3-a36 bxV6xXF5Y2 | t3-a51 nVLCVPVYQD | t4-a36 UPh0ivdwny | t4-a51 WDluBJUcXe | t5-a36 P3ueWYF42C | t5-a51 u5YylO3QLD
 m07 t1-a36 u5Yy7LgQLD | t1-a51 u5Yy7UJQLD | t2-a36 mERggVjhJQ | t2-a51 xSXAAH1jfW | t3-a36 KLD3ANpkqp | t3-a51 w4vTpVa7EI | t4-a36 3z5ICytREY | t4-a51 0eSF1WyTfW | t5-a36 YMsExUFWeC | t5-a51 mERg6cfhJQ
 Credits batch: ~130 (wasted m05 retries) + 585 + 1300 = ~2,000; total ~3,200. Method now delegated to sub-agents (brief = scratch AGENT_BRIEF.md, prompt in mama-W8 pilot v2 notes).
+
+## LIVE: pilot 8 (W8-1) + m05-m07 29 files (W8-2), 24+87 objects --check clean. 
+## BATCH m08-m10 (29 files) sheets pilot-mama/sheet-m08|m09|m10.jpg, looked OK, NOT uploaded (hold for ROOT-5 OK). Gen ids: m08 t1-a36 w4vTETT7EI t2-a36 79aVuHrJAL t2-a51 yiEp16VPW9 t3-a36 N2HBLcQ6D9 t3-a51 IfisTYytvE t4-a36 lJIYqbNgv9 t4-a51 xSXAqAMjfW t5-a36 s78nKpUl8e t5-a51 cpgQYzh0eP | m09 t1-a36 DoJKiyqpcl t1-a51 s78YSTRl8e t2-a36 eIy1BwBdqL t2-a51 aFA7FvdfSh t3-a36 Lwon7wCswO t3-a51 cpgFonD0eP t4-a36 EbnyxQfuuO t4-a51 8a6s5S8IrU t5-a36 6Aq8MfEiJO t5-a51 Sym0nP4Ub8 | m10 t1-a36 mERSLbchJQ t1-a51 iGbIIKz3uK t2-a36 JNfDD56Oq4 t2-a51 ovNLUAB829 t3-a36 5jM3GaFKxe t3-a51 dtPr7sgXSL t4-a36 VXwblsaMMU t4-a51 gOtcIkcSXO t5-a36 lJIW8jugv9 t5-a51 tC3gAg0mZJ
+## OWED / DENIED #2: m08-t1-a51 (ref upload denied by classifier, not retried).
