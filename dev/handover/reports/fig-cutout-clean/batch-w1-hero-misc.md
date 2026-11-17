@@ -113,3 +113,14 @@ eunuch-u07-r0-a18	IfibADitvE	https://pikaso.cdnpk.net/private/production/6060953
 eunuch-u07-r2-a18	1ley8HLr4r	https://pikaso.cdnpk.net/private/production/6060953681/render.png	ok 2k+hd (W4d-E2)
 eunuch-u07-r3-a18	p8OCN0Dehw	https://pikaso.cdnpk.net/private/production/6060954013/render.png	ok 2k+hd (W4d-E2)
 ## W4d: E2 done (10 eunuch a18 u05-r0/r3,u06x4,u07x4; 650 cr). Remaining eunuch a18 = 92 (batches /tmp list eu_todo minus these); maid-ty a18 resumed first per lead.
+eunuch-u08-a18	gOt3bbLSXO	https://pikaso.cdnpk.net/private/production/6061019698/render.png	ok 2k+hd (W4d-E3)
+eunuch-u08-r0-a18	YMs8N3oWeC	https://pikaso.cdnpk.net/private/production/6061020125/render.png	ok 2k+hd (W4d-E3)
+eunuch-u08-r2-a18	xSX4uq1jfW	https://pikaso.cdnpk.net/private/production/6061020304/render.png	ok 2k+hd (W4d-E3)
+eunuch-u08-r3-a18	iGbVUPg3uK	https://pikaso.cdnpk.net/private/production/6061020772/render.png	ok 2k+hd (W4d-E3)
+eunuch-u09-a18	huZkDIlvqL	https://pikaso.cdnpk.net/private/production/6061020689/render.png	ok 2k+hd (W4d-E3)
+eunuch-u09-r0-a18	4RQWluE9Aa	https://pikaso.cdnpk.net/private/production/6061026287/render.png	ok 2k+hd (W4d-E3)
+eunuch-u09-r2-a18	gOt35tESXO	https://pikaso.cdnpk.net/private/production/6061026379/render.png	ok 2k+hd (W4d-E3)
+eunuch-u09-r3-a18	kspOCd416B	https://pikaso.cdnpk.net/private/production/6061026699/render.png	ok 2k+hd (W4d-E3)
+eunuch-u10-a18	4RQWlbq9Aa	https://pikaso.cdnpk.net/private/production/6061027131/render.png	ok 2k+hd (W4d-E3)
+eunuch-u10-r0-a18	xSX4QtajfW	https://pikaso.cdnpk.net/private/production/6061026968/render.png	ok 2k+hd (W4d-E3)
+## W4d: E3 done (u08 x4, u09 x4, u10, u10-r0; 650 cr). Eunuch a18 left 82 (/tmp/claude-0/w/eub2_01.. ).
