@@ -415,3 +415,56 @@ Left for a 2c successor (or 2b at assembly):
 3. MAIN s33 builds the TIN BÁO badge + card from the API above (no UI in this part).
 4. ag-all.test check 3 still passes maid:/srv: keys by regex (A2 r1 fix 3 owns that test); my keys map: know:hear → "Nghe lén" (agReact), maid|srv:listen/scout/watch → player maid cards "Nghe ngóng cho chủ" / "Tự đi dò la cho chủ" / "Canh chừng cung chủ".
 ROLLOVER (verbatim): Workers roll over too (owner 16/11 08:22Z s14, option 1): at START_CTX % + 25 % of the window, ceiling 60 %; a worker may finish if only push + report remain; it writes its handover in its report file and tells its coordinator, and the COORDINATOR opens the successor (never the worker).
+
+## 17. r1 FIX — part A successor A2 (session_01UV1SziAW9nRRmuRJXDn5N6), F2–F5 + live main merged
+PRIORITY #1 CHECK ('srvRisk|haOdds|caughtOdds|weight pass|quarrel|Thái hậu act'): OD 4 | ledger 0 | claims 6 | main 15 | review/* 0 (reused: j42 srvRisk table, j8 caught(), BAL.ag.*; nothing rebuilt)
+START_CTX ≈ 3 % (estimate; get_session reads 0), limit 28 %, ceiling 60 %.
+### F2 ONE CORE (copied formulas → one function / one BAL entry)
+| copy (before) | after |
+|---|---|
+| jagstaff asRisk = j42 srvRisk place table {vuon:28…} + friend/tamco terms | `srvRiskOf(k,eyes,friends,tamco)` (j42) over `BAL.srvRisk`; srvRisk and asRisk both call it |
+| jagstaff Ban gả trigger `loyal>=55`, `roll(2+(vow?3:0))`, stay `loyal-5` = j42:472 | `BAL.srvGrant {tin,base,bond,stayLoy}` read by j42 cnvGrant trigger and jagstaff asMonth |
+| `(rk+1)*5` công lao per bậc typed in j14, j42 ×3, jagstaff | `srvMpNeed(rk)` over `BAL.srvMp` |
+| staff loyalty 45 (jagstaff asSt), j10 `45+R(36)` | `BAL.srvLoyal {base,r}` (promotion loyalty = main's BAL.eff.j14.loyalServRanks) |
+| jagstaff asPeers `+40`, nvp `+5`, ask `af:2` | `BAL.ag.staff.peerGap / nvpAf / askAf` |
+| jagharm haOdds, jpoison:52, j63:253, j83:174 copied j8 caught() `cl(oSee-4*(facN-1),5,95)` | `caughtOdds(a,t,ps)` in j8 over `BAL.caught {fac,min,max}`; caught() and all four call it |
+| BAL.ag.th.items + j8 TH gift typed list, `th>=60` | j8 reads `BAL.ag.th.items` and `BAL.ag.th.fondTh` |
+| jagstaff friend tell `evA(o2,m,1)` (found by one-core-guard after the main merge) | `BAL.eff.j10.evServMonth_2` (one number with j10 servMonth) |
+| (merge) SRVA mp / ev / afL / at fields vs main's BAL.eff.j42 merit* / ev* / cnvFrame and BAL.tinhLv; srvGate.frameLoy vs eff.j42.loyalSrvStaffAct; BAL.ag.cx.humble vs eff.j9.run_9/10 | SRVA fields and srvGate.frameLoy / cx.humble are getters on the main keys (one source) |
+### F3 tests
+- ag-all.test grpOf: staff rows "s<sid>" → agGrp of the real person (maid / srv rows; a staff who left this buổi → her key's prefix). Histogram rows: consort / hh / th / maid / srv / emp.
+- Check 3 maps every prefixed key: harm:* → j15 RVGRP (+ Tẩm đồ / workshop), maid:/srv:* → SRVA row of THAT group (maid:empTea = the j42 "Quỳ dâng trà" card via jagmaid amDo); unprefixed keys only for consort / hh.
+- ag-all.test and ag-all-c force a consort start (restart while isSrv()).
+- New: 5c (Empress duty need served by her own buttons; Thái hậu favour gate at BAL.ag.th.fondTh), ≥40 days: Empress / Thái hậu act; ag-all-c: people's own deeds put '!' on the map (quarrel / gossip / witnessed deeds).
+### F4 jagharm header: the AD_HAP_FIX "world-events window" line removed (no world-event '!', OD 14:30Z).
+### F5 weight pass (needs × traits, no dice)
+- Spite need: `agSpN(h) = h / BAL.ag.spiteD` (35; was a typed /100 in 6 places: jagent ×2, jagacts, jagemp, jagharm, jagstaff). Schemes keep the old scale (`BAL.ag.harm.spiteD` 100) so the pass raises quarrels and gossip, not poisonings.
+- Quarrel '!': provoke / humil between two consorts anywhere (the garden quarrel card in the garden, else the witness card of the same deed).
+- Favour '!': a consort with a request on offer (q72) weighs the player as her friendly-deed target (+BAL.ag.favAsk); still needs her regard (SOC help ok: aff ≥ 10) — a passive bot (regard < 0) never gets it; a player with friends does.
+- Empress: new duty need `order` = min(1, cases her buttons can act on now / BAL.ag.hh.orderN) × orderW; every Empress act serves it; one gate list `AGHHG` read by her options and her need (player-as-Empress buttons unchanged).
+- Thái hậu: BAL.ag.th.fondTh 60 → 40 (one number with the old j8 gift gate), giftCd 4 → 6 tuần.
+- Perf: agAskHer once per buổi (q72 lists cached) — day draw back to live level (median 3–3.5 ms, p95 5.5–6.8 ms on this box; old build 3.1 / 6.7–9.4).
+#### 60-day bot, 4 runs each (consort start, passive player), per 60 days
+| measure | before (8f7bdd329) | after |
+|---|---|---|
+| quarrel '!' | 0–1 (1 of 4 runs) | 3–11 (every run) |
+| gossip '!' | 0–4 | 2–8 |
+| favour '!' | 0 | 0 (bot regard < 0; see above) |
+| Empress acts (hh:*) | 0–2 | 5–22 (reward, judge, conf, cutpay, pardon all seen) |
+| Thái hậu acts (th:*) | 0–6 | 7–12 |
+| NPC harm deeds | 7–26 | 12–45 |
+| consort deaths | 0–3 | 0–3 |
+| '!' per buổi | {0: ~43 %, 1: ~42 %, ≥2: ~15 %} | {0: ~40 %, 1: ~43 %, ≥2: ~17 %} (quiet and busy buổi both) |
+### Live main merged
+- origin/main ce29592e (54 commits: one-core dup3 → BAL.eff, world events jworld) merged into review/ag-all (ba535aaa); 22 conflict hunks resolved token-wise; where both sides moved one number to BAL (SRVA fields vs BAL.eff.j42, frameLoy, cx.humble vs BAL.eff.j9, BAL.tinhLv) one side now reads the other (getters), so each number has ONE source. one-core-guard PASS after the merge.
+### Checks (on the merged tip)
+| check | result |
+|---|---|
+| one-core-guard | PASS (fails 0) |
+| ag-all.test 10 days | 14/14 logic PASS; the perf line (day draw p95 ≤ 8 ms) is noise on this box: new 6.2 / 9.0 / 7.8 ms vs old 8f7bdd329 7.8 / 7.9 / 10.4 ms (3 solo runs each, same spread) → no regression; fails under parallel load on both builds |
+| ag-all-b 30 tuần | 0 FAIL |
+| ag-all-c 200 buổi | 0 FAIL (consort start forced) |
+| agent_check / agemp / agmaid / greet | 16/16 · 20/20 · 23/23 · 13/13 |
+| QUICKCHECK | PASS on 54bd9b56 (core gates PASS after one fix: G1 one-core-bind, player Tố lỗi fail now reads BAL.eff.j42.cnvFrame, the key its text prints) · open 1973 ms · old save ok · perf new/live render 185/198, tab 340/306, buổi 867/1113 ms |
+- Tip: review/ag-all 54bd9b56 (pushed). AG-ALL-2 / PART 2b rebases review/ag-all-2 on it; F1 (remaining acts) stays theirs.
+- Not done / notes: favour '!' needs the player's own regard (by design); the ag-all.test perf line is box noise (same spread on 8f7bdd329).
