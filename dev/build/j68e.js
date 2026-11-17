@@ -97,7 +97,7 @@ EV6("slyVisit","visit",{a:["rv"],pp:()=>{const a=rv6(v=>T6(v,"Hiểm độc")||T
 EV6("thMama","visit",{a:["th"],pp:()=>S.thDead?null:{a0:0},w:C=>1.2,
  v:["Ma ma thân tín của Thái hậu ghé cung ngươi, đi một vòng nhìn từ bếp đến buồng ngủ.","Ma ma bên Đức Thọ cung mang sang một gói trà, nhắn Thái hậu nhớ đến ngươi.","Ma ma của Thái hậu đến hỏi ngươi có rảnh chép giúp vài trang kinh cho kịp ngày rằm.","Ma ma Đức Thọ cung đến, hỏi nhỏ chuyện các phi tần dạo này có ai hay lui tới Càn Thanh cung."],
  o:X=>[c6("Biếu ma ma chút quà",{c:{bac:-15},w:{th:4}}),
-  c6("Kể thật những gì mình biết",{w:{th:5},k:[R6("người bị kể có thể biết: một phi tần mất thiện cảm -5")],ok:()=>{const v=pick(liveRivals(false));if(v)relAdd(S,v,BAL.eff.j68e.ok);return "Ma ma ghi nhớ, về bẩm Thái hậu."}}),
+  c6("Kể thật những gì mình biết",{w:{th:5},k:[R6(`người bị kể có thể biết: một phi tần mất thiện cảm ${balSg(BAL.eff.j68e.ok)}`)],ok:()=>{const v=pick(liveRivals(false));if(v)relAdd(S,v,BAL.eff.j68e.ok);return "Ma ma ghi nhớ, về bẩm Thái hậu."}}),
   c6("Giữ lễ, không nói nhiều",{w:{duc:1},k:[R6("Thái hậu với ngươi -1")],ok:()=>{apply({th:-1});return "Ma ma về tay không, nhưng không bắt bẻ được gì."}})]});
 EV6("docCheck","visit",{a:["doc"],pp:()=>({a0:0}),w:C=>S.suc<60?2:.8,
  v:["Thái y {A} đến bắt mạch định kỳ, nhíu mày khi chạm cổ tay ngươi.","{A} được Thái y viện cử sang xem bệnh phong hàn mùa {S} trong cung.","{A} tình cờ đi ngang, nghe tiếng ngươi ho liền xin vào bắt mạch.","{A} mang theo đơn thuốc bổ mới, hỏi ngươi có muốn dùng thử."],
