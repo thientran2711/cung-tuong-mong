@@ -85,7 +85,7 @@ function j59ico(){return `<img class="j59ico" src="img/kit/unknown-ico-n.webp" a
 function j59chipIco(n){return j59ico()+`<span class="j59n">+${n}</span>`}
 /* place header (every place with people): "Ở đây còn N người." -> [icon] N (the rest of a longer stage line is kept); "Không gặp ai." stays text */
 function j59hdrCount(){try{const m=document.querySelector("#sc-t .rmsg");if(!m||m.dataset.j59h===m.innerHTML)return;const t=m.innerHTML;const r=/^\s*·?\s*Ở đây (?:có|còn) (\d+) người\.?\s*/.exec(t);if(!r)return;
-  m.innerHTML=` ${j59ico()}<span class="j59n">${r[1]}</span>`+(t.length>r[0].length?" · "+t.slice(r[0].length):"");m.classList.add("j59hc");m.setAttribute("aria-label",`Ở đây còn ${r[1]} người`);m.dataset.j59h=m.innerHTML}catch(e){}}
+  m.innerHTML=` <span class="kchip n j59hchip">${j59ico()}<span class="j59n">${r[1]}</span></span>`+(t.length>r[0].length?" · "+t.slice(r[0].length):"");m.classList.add("j59hc");m.setAttribute("aria-label",`Ở đây còn ${r[1]} người`);m.dataset.j59h=m.innerHTML}catch(e){}}
 function j59chips(st,R,P,again){/* morechip-fix: placed once now and once more on the next frame, after the side column (k3Stage) has its full height */if(!again)requestAnimationFrame(()=>{try{if(st.isConnected)j59chips(st,R,P,1)}catch(e){}});/* KIT 33.9 swipe stage: P: {pg, pages, before, after, xl, xr}. NO arrow buttons — two "+N" chips in the top corners of the backdrop: LEFT = people already passed (left of the view), RIGHT = people still to come; hidden at 0. Pure kit chip, not tappable (the row is swiped) */
  for(const side of ["l","r"]){let c=st.querySelector(".j59more.j59m"+side);const n=P&&P.pages>1?(side==="r"?P.after:P.before):0;
   if(!(n>0)){if(c)c.remove();continue}
@@ -274,7 +274,7 @@ const css=document.createElement("style");css.textContent=`
 /* morechip-corners: the big kit chip (KIT 33.9): readable at Fold 755 */
 .kchip.j59more{display:flex;align-items:center;gap:3px;font-size:1.05rem;line-height:1.2;padding:3px 9px 3px 6px;border-radius:16px;border-width:2px;margin:0;box-shadow:0 2px 6px rgba(60,30,10,.28);background:#fff8ee}
 .kchip.j59more .j59ico{height:1.7rem;width:auto;display:block;flex:none;pointer-events:none;user-select:none}
-.rmsg.j59hc{white-space:nowrap!important}.rmsg.j59hc .j59ico{height:2em;width:auto;display:inline-block;vertical-align:-.5em;margin:0 .15em 0 0}.rmsg.j59hc .j59n{font-weight:700;font-size:1.25em}
+.rmsg.j59hc{white-space:nowrap!important}.kchip.j59hchip{display:inline-flex;align-items:center;gap:3px;padding:1px 9px 1px 6px;border-radius:14px;border-width:2px;margin:0 0 0 4px;vertical-align:middle;font-size:1rem;font-weight:700;line-height:1.2;background:#fff8ee;box-shadow:0 2px 6px rgba(60,30,10,.28);color:var(--ink,#3a2a1a)}.kchip.j59hchip .j59ico{height:1.5rem;width:auto;display:block;flex:none}
 .stage.j59 #mefig,.stage.j59 #j59metag,.stage.j59 #tokens,.stage.j59 .kspet{translate:var(--j59dx,0px) 0;transition:var(--j59tr,none);will-change:translate}
 .stage.j59{touch-action:pan-y}
 .stage.j59 #mefig,.stage.j59 #tokens img{-webkit-user-drag:none;user-select:none}
