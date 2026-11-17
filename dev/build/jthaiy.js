@@ -89,7 +89,7 @@ window.thaiyVisits=function(n){if(!S||off())return[];const f=window.thaiyNextVis
 /* ---------- 2. Mời thái y bắt mạch (two roads) ---------- */
 function findO(self){const o=T().find+(S.arts&&S.arts.y||0)*T().findY+(trusted(S)?T().findTrust:0)+(self?T().findSelf:0);return cl(o,5,95)}
 function why(road){if(!S||S.dead)return"không được";if(S.out)return"ở lãnh cung, Thái y viện không cử người";if(typeof isSrv==="function"&&isSrv())return"phận cung nữ";
- if(road==="pay"){if((S.bac||0)<cost())return `cần ${cost()} bạc`;if(!can(T().khPay))return"hết khắc";return""}
+ if(road==="pay"){if((S.bac||0)<cost())return `cần ${cost()} bạc`;if(!can(T().khPay))return whyTime(T().khPay)||"hết khắc";return""}
  if(S.confined)return"đang bị cấm túc";if(!can(T().khSelf))return `cần ${T().khSelf} khắc`;if((S.suc||0)<20)return"Sức không đủ";return""}
 function xLine(road){const tr=trusted(S);const self=road==="self";
  return `thành: rõ Sức, bệnh và có thai hay chưa · thấy mưu hại ngầm (nếu có): ${word(findO(self))} · kèm: ${self?"người trong cung thấy ngươi ở Thái y viện, thái y khó nói sai":"kín đáo, thái y đến tận cung"}${tr?"":", thái y chưa phải người của ngươi nên lời có khi không thật"}`}

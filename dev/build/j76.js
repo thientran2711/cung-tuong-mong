@@ -11,7 +11,10 @@
    Travel: a trip longer than the khắc left first finishes this buổi (clock turns), then she arrives in the new
    buổi with the rest of the trip already spent, meeting whoever is there in that buổi.
    NPCs never use can/spend, so they are untouched. */
-function j76left(){return !S?0:(BAL.time.khac-used)+BAL.time.khac*(B4L-(S.buoi||0))}
+/* THE ONE DAY-KHẮC FUNCTION (owner OD L852/L886/L1473 + 17/11 16:45Z "tổng số khắc còn lại của một ngày"): the khắc left in the DAY =
+   the rest of buổi b (u khắc used) + every later buổi of the day. Every "is there still time" check reads it (player: can/dayFit/j76need;
+   an NPC deed of n khắc at buổi b, khắc kh of her record row: n <= j76left(b, kh)). Buổi is only a label: an act longer than the buổi spills into the next. */
+function j76left(b,u){if(!S)return 0;if(b==null)b=S.buoi||0;if(u==null)u=used;return Math.max(0,BAL.time.khac-u)+BAL.time.khac*Math.max(0,B4L-b)}
 function j76nextName(){const b=Math.min(B4L,(S.buoi||0)+1);return BUOI[b].replace("Buổi ","buổi ")}
 /* would an act of c khắc started now spill into the next buổi? (only when it is allowed) */
 function j76spills(c){return !!S&&!S.dead&&c>0&&used<BAL.time.khac&&used+c>BAL.time.khac&&!S.j76carry&&!window.__j76win&&(S.buoi||0)<B4L&&c<=j76left()}
@@ -29,6 +32,7 @@ function j76need(c,a,win){if(!S||S.dead||!(c>0))return{t:`${c||0} khắc`,ok:tru
  if(used+c<=BAL.time.khac)return{t:`${c} khắc (còn ${left})`,ok:true};
  const w=win||(a&&a.b!=null)||window.__j76win;
  if(left<=0||S.j76carry)return{t:`hết khắc buổi này (cần ${c})`,ok:false};
+ if(b>=B4L&&c>j76left())return{t:`hết khắc trong ngày (cần ${c}, còn ${j76left()})`,ok:false}; /* buổi tối is the end of the day: say the day */
  if(w)return{t:`không kịp xong trong ${BUOI[b].toLowerCase()} (cần ${c} khắc)`,ok:false};
  if(c>j76left())return{t:`hết khắc trong ngày (cần ${c}, còn ${j76left()})`,ok:false};
  return{t:`${c} khắc (sang ${j76arrive(c)})`,ok:true}}
@@ -61,7 +65,7 @@ function j76carryFix(){try{if(!S||!S.j76carry||!S.j76ck||window.__j76nb)return;c
  try{if(c&&S&&(S.buoi||0)!==b0){if(!S.dead&&(S.buoi||0)>b0){used=Math.min(BAL.time.khac,c);S.j76carry=c>BAL.time.khac?c-BAL.time.khac:0;S.j76ck=S.j76carry?j76key():""}else{S.j76carry=0;S.j76ck=""}if(!S.dead){save();render()}}}catch(e){}return r}})();
 /* why an act cannot be done now, in words */
 (function(){const w0=whyTime;whyTime=function(c){if(!S||S.dead)return"";if(can(c))return"";const sw=j76sucWhy(c);if(sw)return sw;
- if(S.j76carry||used>=BAL.time.khac)return w0.call(this,c)||"hết khắc buổi này";if(used+c>BAL.time.khac&&window.__j76win)return `không kịp xong trong ${BUOI[S.buoi||0].toLowerCase()}`;
+ if(S.j76carry||used>=BAL.time.khac)return w0.call(this,c)||"hết khắc buổi này";if(used+c>BAL.time.khac&&window.__j76win&&!((S.buoi||0)>=B4L&&c>j76left()))return `không kịp xong trong ${BUOI[S.buoi||0].toLowerCase()}`;
  if(used+c>BAL.time.khac)return "hết khắc trong ngày";return w0.call(this,c)}})();
 function j76cap(s){return s?s[0].toUpperCase()+s.slice(1):s}
 /* deck cards: a card bound to a buổi may not spill */

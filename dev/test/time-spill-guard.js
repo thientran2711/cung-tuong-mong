@@ -21,7 +21,9 @@ const PAT={
  used4:/used\s*\+\s*[\w.()]+\s*(<=|>)\s*4\b/g,               /* "fits this buổi" test */
  trunc:/Math\.min\(\s*[\w.]+\s*,\s*4\s*-\s*used\s*\)/g,        /* act cost cut to what is left (no spill) */
  khongkip:/không kịp( xong| gặp nàng| đến)? trong \$\{/g,     /* a per-buổi "too late" reason built from the buổi name */
- kh:/j77Kh\(\s*[^)]*[+][^)]*\)/g                               /* j77Kh(walk + something): an act gated on this buổi only */
+ kh:/j77Kh\(\s*[^)]*[+][^)]*\)/g,                              /* j77Kh(walk + something): an act gated on this buổi only */
+ four:/[^\w.]4\s*-\s*used\b/g,                                 /* day-khắc audit 17/11: a typed 4 for the buổi's khắc (one core: BAL.time.khac / j76left) */
+ ofbuoi:/khắc còn lại của buổi/g                                /* day-khắc audit 17/11: player words must say the DAY ("còn lại trong ngày") */
 };
 /* allowed occurrences: file -> pattern -> count, each with why */
 const ALLOW={
@@ -102,6 +104,18 @@ const srv=http.createServer((q,r)=>{let p=decodeURIComponent(new URL(q.url,'http
   base(CH,3);const far=places().map(x=>x.k).find(k=>{if(k==="home"||travel("home",k)<2)return false;const P=walkSpill(k);return !!(P&&P.ok)});
   if(far){const P0=walkSpill(far);const W0=window.COOPW;window.COOPW=Object.assign({},W0||{},{on:true});let P=null;try{P=walkSpill(far)}finally{window.COOPW=W0}row('co-op walkSpill = solo walkSpill',JSON.stringify(P)===JSON.stringify(P0),{solo:P0,coop:P})}
   else row('a far place open next buổi',false,'none');
+  /* 7. day-khắc audit (owner 17/11 ~16:45Z): the Dư đồ greys a place only when the DAY cannot hold the walk — a walk that spills keeps the plain label */
+  base(CH,3);{const ml=window.__mapList,kp=window.__kpm;window.__mapList=0;window.__kpm=null;let h='';try{h=mapHTML()}finally{window.__mapList=ml;window.__kpm=kp}if(!/data-(go|ak)=/.test(h))row('dudo map rendered',false,h.slice(0,120));let n=0;for(const k of places().map(x=>x.k)){if(k==="home")continue;const P=walkSpill(k);if(!(P&&P.ok))continue;n++;
+   const m=h.match(new RegExp('<(?:button|div) class="mspot([^"]*)"[^>]*data-(?:go|ak)="'+k+'"'));if(m&&/\b(off|awalk|agrey)\b/.test(m[1]))row('dudo '+k+' spills but greyed',false,m[1])}
+   out.rows.push({id:'dudo spill places checked',ok:true,info:n});
+   let g='';try{g=mapHTMLgrid()}catch(e){}for(const k of places().map(x=>x.k)){if(k==="home")continue;const P=walkSpill(k);if(!(P&&P.ok))continue;const m=g.match(new RegExp('<(?:button|div) class="mtile([^"]*)"[^>]*data-(?:go|ak)="'+k+'"'));if(m&&/\b(awalk|agrey)\b/.test(m[1]))row('list '+k+' spills but greyed',false,m[1])}}
+  /* 8. rest (Nghỉ ngơi dưỡng sức, buổi tối only): its khắc = the rest of the DAY; 1 left at tối → refused in day words */
+  {const rd=(pool()||[]).find(a=>a.rest==="ds");if(rd){base(B4,1);restFix(rd);row('rest tối 3 left: k = day left',rd.k===j76left()&&!cardWhy(rd),{k:rd.k,left:j76left(),why:cardWhy(rd)});
+   base(B4,3);restFix(rd);const w=cardWhy(rd)||'';row('rest tối 1 left: refused in day words',/hết khắc trong ngày/i.test(w)&&!/không kịp/.test(w),w)}else out.rows.push({id:'rest card not in pool',ok:true})}
+  /* 9. NPC parity (two-way): an NPC deed reads the SAME function — j76left(buổi, her khắc) — as her act (dayFit) */
+  base(CH,3);row('NPC chiều kh 3, deed 2 khắc: allowed (spills)',2<=j76left(CH,3)&&dayFit(2),{left:j76left(CH,3)});
+  base(B4,3);row('NPC tối kh 3, deed 2 khắc: refused',!(2<=j76left(B4,3))&&!dayFit(2),{left:j76left(B4,3)});
+  row('NPC rows = player rows for every buổi/khắc',[0,1,2,3].every(b=>[0,1,2,3,4].every(u=>{base(Math.min(b,B4),u);return j76left(Math.min(b,B4),u)===j76left()})),'');
   clr();return out});
  for(const r of R.bad)fail('runtime '+r.id+' · '+JSON.stringify(r.info).slice(0,220));
  if(errs.length)fail('page errors: '+errs.slice(0,3).join(' | '));

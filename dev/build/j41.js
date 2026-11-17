@@ -86,7 +86,14 @@ function accDis(html,k){if(!html||!k||!S||S.place===k)return html;const a=access
 (function(){if(typeof seeBtn==="function"){const s0=seeBtn;seeBtn=function(v){const h=s0.apply(this,arguments);try{return accDis(h,whereOf(v))}catch(e){return h}}}
  if(typeof visitBtn==="function"){const v0=visitBtn;visitBtn=function(v){const h=v0.apply(this,arguments);try{return accDis(h,palaceOf(v))}catch(e){return h}}}})();
 /* THE MAP: a place she cannot enter now keeps the kit map label + a lock mark; the reason and the ways in live in the option card (j77Card) */
+/* owner 17/11 ~16:45Z (OD tail, restating OD L852/L1473): "có còn làm được tiếp hay không" = the TOTAL khắc left in the DAY. OD L1418's
+   grey ("nơi nào không có đủ khắc để tới") therefore means: the DAY cannot hold the walk (buổi tối, or closed when she would arrive).
+   An open place whose walk only runs past THIS buổi spills (j9 walkSpill) and keeps the plain label; the tap still opens the kit card
+   with "Đi (đến nơi vào buổi sau)". */
+function accSpillOk(k,st){try{if(!st||!st.walk||typeof walkSpill!=="function")return false;const P=walkSpill(k);return !!(P&&P.ok)}catch(e){return false}}
+function accSpillLab(k,st){let b="";try{b=String(BUOI[walkSpill(k).b]).toLowerCase()}catch(e){}return `${st.tc} khắc${b?` · sang ${b}`:""}`}
 function accSpot(all,cls,k,attrs,inner){const st=accState(k);if(st.here||!st.why)return all;
+ if(accSpillOk(k,st))return all.replace(/class="mspot([^"]*)"/,(m,c)=>`class="mspot${c.replace(/\soff\b/g,"")}"`).replace(/\sdisabled(?=[\s>])/,"").replace(/<em>[^<]*<\/em>/,`<em class="ok">${accSpillLab(k,st)}</em>`);
  attrs=attrs.replace(/\sdisabled/g,"").replace(/title="([^"]*)"/,(m,t)=>`title="${t.replace(/ · (hết khắc|đang cấm túc[^·"]*|đang ở lãnh cung)/,"")} · ${st.why}"`);
  /* KIT map-label rule (owner 11/15 "map grey box"): a locked place wears the SAME label as every place (name + "N bóng") plus a small lock
     mark; no grey box over the map art, no reason line, no buttons on the map — a tap opens the kit option card (j77Card: reason, Xin yết
@@ -105,6 +112,7 @@ const ACC_LOCK=`<svg class="mlock" viewBox="0 0 12 14" width="10" height="12" ar
 /* THE LIST: the same grey tiles */
 (function(){const g0=mapHTMLgrid;mapHTMLgrid=function(){let h=g0.apply(this,arguments);
  try{h=h.replace(/<button class="mtile" data-go="([^"]+)"([^>]*)>([\s\S]*?)<\/button>/g,(all,k,attrs,inner)=>{const st=accState(k);if(st.here)return all.replace('class="mtile"','class="mtile ahere"');if(!st.why)return all;
+   if(accSpillOk(k,st))return all.replace(/<span class="mchip">[^<]*<\/span>/g,"").replace(/\sdisabled(?=[\s>])/,""); /* the walk spills: a plain open tile (day-khắc audit) */
    inner=inner.replace(/<span class="mchip">[^<]*<\/span>/g,"");inner=inner.replace('<span class="mband">',`<span class="mband"><span class="mchip agw">${st.why}</span>`);
    const acts=st.kind?`<span class="tacts">${accMini(k,st,1).replace(/<\/?span class="macts">/g,"")}</span>`:"";
    return `<div class="mtile ${st.walk?"awalk":"agrey"}" data-ak="${k}"${attrs.replace(/\sdisabled/g,"")}>${inner}${acts}</div>`}); /* awalk: open, only farther than the khắc left (walk spill) — not greyed as locked (review/dudo-lock) */

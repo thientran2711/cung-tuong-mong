@@ -2,8 +2,8 @@
    Before: "Nghỉ ngơi dưỡng sức" (1 khắc, Sức +20, "uống thuốc bổ, ngủ sớm") and "Nghỉ ngơi một lát" (1 khắc, Sức +6) cost the same,
    so the second was never worth taking, and the first gave a tonic and a night's sleep for free in any buổi.
    Now each card does what its own text says (numbers: BAL.rest*):
-   - Nghỉ ngơi dưỡng sức = uống thuốc bổ, ngủ sớm: chỉ buổi tối; dùng hết số khắc còn lại của buổi (ít nhất BAL.restDsMinK),
-     tức là hết buổi tối; Sức +BAL.restDsSuc; cần một thang thuốc bổ trong rương (dùng thang rẻ nhất) HOẶC Bạc BAL.restDsBac mua thuốc.
+   - Nghỉ ngơi dưỡng sức = uống thuốc bổ, ngủ sớm: chỉ buổi tối; dùng hết số khắc còn lại trong ngày (ít nhất BAL.restDsMinK; buổi tối là buổi cuối
+     nên đó là hết buổi tối, j76left); Sức +BAL.restDsSuc; cần một thang thuốc bổ trong rương (dùng thang rẻ nhất) HOẶC Bạc BAL.restDsBac mua thuốc.
    - Nghỉ ngơi một lát = mọi buổi, BAL.restLatK khắc, Sức +BAL.restLatSuc, không tốn gì, và bớt nỗi buồn/lo/giận… BAL.restLatEmo
      (jemo, chỉ khi tâm trạng đang xấu; bình thường hay vui thì không đổi — thẻ nói rõ).
    The cards are refreshed from the live state each time they are drawn or played, so Cần/Tốn/Được always match what happens. */
@@ -13,10 +13,10 @@ const REST_BAD=["buon","gian","so","lo","ghen","dau"];
 function restTonic(){if(!S||!Array.isArray(S.inv))return null;let best=-1,pr=1e9;
  S.inv.forEach((e,i)=>{const it=e&&IT[e.k];if(it&&it.kd==="Thuốc bổ"&&!e.h&&!e.w&&(it.pr||0)<pr){pr=it.pr||0;best=i}});return best<0?null:{i:best,e:S.inv[best],it:IT[S.inv[best].k]}}
 function restDsB(){const i=BUOI.indexOf(BAL.restDsBuoi);return i<0?BUOI.length-1:i}
-function restDsK(){return Math.max(BAL.restDsMinK,4-(typeof used==="number"?used:0))}
+function restDsK(){return Math.max(BAL.restDsMinK,typeof j76left==="function"?j76left(restDsB(),(S&&(S.buoi||0)===restDsB())?used:0):BAL.time.khac-(typeof used==="number"?used:0))} /* day-khắc audit: the khắc left in the DAY from buổi tối on (j76left), never a typed 4 */
 function restDs(a){if(!a||a.rest!=="ds")return a;const T=restTonic(),k=restDsK();a.k=k;a.b=restDsB();a.o=100;a.w={suc:BAL.restDsSuc};a.l={};
  a.c=T?{}:{bac:-BAL.restDsBac};
- const B=BUOI[restDsB()].toLowerCase();a.t=`Uống thuốc bổ, ngủ sớm: ${(S.buoi||0)!==restDsB()?`chỉ ${B}, dùng hết số khắc còn lại của buổi.`:BAL.time.khac-used<BAL.restDsMinK?`cần còn ít nhất ${BAL.restDsMinK} khắc; hết ${B}.`:`dùng hết ${k} khắc còn lại, hết ${B}.`}${T?"":" Rương không có thuốc bổ: sai người mua một chén."}`;
+ const B=BUOI[restDsB()].toLowerCase();a.t=`Uống thuốc bổ, ngủ sớm: ${(S.buoi||0)!==restDsB()?`chỉ ${B}, dùng hết số khắc còn lại trong ngày.`:(typeof j76left==="function"?j76left():BAL.time.khac-used)<BAL.restDsMinK?`cần còn ít nhất ${BAL.restDsMinK} khắc; hết ${B}.`:`dùng hết ${k} khắc còn lại trong ngày, hết ${B}.`}${T?"":" Rương không có thuốc bổ: sai người mua một chén."}`;
  a.x="";a.restTon=T?`1 ${T.it.n} trong rương`:""; /* review R6: the tonic is a COST — it goes in the Tốn row (cardH below), not in a.x (a.x is read as Được); the "(thang thuốc bổ rẻ nhất…)" aside ran past the card at 844x390 */
  a.go=()=>{const t=restTonic();if(t&&!(a.c&&a.c.bac)){S.inv.splice(t.i,1);log(`Ngươi sắc ${t.it.n} uống rồi ngủ sớm.`)}else log("Ngươi sai người mua chén thuốc bổ, uống rồi ngủ sớm.")};return a}
 function restLat(a){if(!a||a.rest!=="lat")return a;const e=typeof emoGet==="function"?emoGet(S):{k:"binh",v:0};const bad=REST_BAD.includes(e.k)&&e.v>=15;
