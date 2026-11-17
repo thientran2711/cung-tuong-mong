@@ -840,3 +840,4 @@
 | REVIEW morechip-sil r2 PASS 4821b39d (count math + name plaque fixed) — waits for round 4 icon gaps, then icon-delta re-check → batch | review/morechip-sil-r2 | MAIN s33 | session_01UV1SzmEh1P3ynxAm3BMz7L | PASS (icon delta pending) | 17/11 15:27Z |
 | tinbao-ui: TIN BÁO top-bar badge + gold toast + kit card on C-AG API (OD ~14:50Z (2)) | review/tinbao-ui | MAIN s33 | session_01UV1Szjhrq5VUWD5Haiagxz | RUNNING | 17/11 15:31Z |
 | trait-rename-r1 LIVE bbb3b4ca (main 2de320ac → bbb3b4ca; rollback 2de320ac) | review/land-trait-rename-r1 | B | session_01N1tNP6NHm7FrTkoTUSGnpa | LIVE | 17/11 15:33Z |
+| MAKEUP LEVELS + XA XỈ (ORDER main s33 15:40Z; OD:L1638; opus BIG; brief briefs/makeup-lux.md) | review/makeup-lux | B | (opening) | RUNNING | 17/11 15:45Z |
