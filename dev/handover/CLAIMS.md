@@ -645,3 +645,4 @@
 | STORY FRAME for late-added origins (bd 0 chapters; whole family of load-time registry loops) (opus; story-bot fault 1) | review/story-frame | D | session_01964izFgZ6CTgm1p1mFw3Un | RUNNING | 17/11 05:56Z |
 | one-core-arcs SẴN SÀNG KIỂM c682afe6 → review r1 (opus BIG) | review/one-core-arcs-r1 | B | session_01N1tNP4ZHFJ1oKb2cNK3zov | RUNNING | 17/11 06:04Z |
 | trait-rename r1 PASS 84d47894 (review/trait-rename-r1; FF on main 6c4f21c3; Hiểm độc → Xảo quyệt, old saves map, coop 60/60) → FOR MAIN next batch | review/trait-rename-r1 | B | session_01N1tNP31pNXiReqkE3LxVdh | PASS | 17/11 06:05Z |
+| one-core-roads SẴN SÀNG KIỂM 75bc9f05 → review r1 (opus BIG; trial-merge with one-core-arcs) | review/one-core-roads-r1 | B | session_01N1tNP5phUb758q6HmgPWgY | RUNNING | 17/11 06:05Z |
