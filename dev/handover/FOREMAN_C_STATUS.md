@@ -21,7 +21,7 @@ RUNNING (C's):
 - Art lead #7 session_011xDdVNkgEgTqsZJxUh9Xd8 (sonnet): W9 DONE+archived (keep-copy 2043 verified; restore pipeline RESTORE_TY_REPORT.md waits owner overwrite OK (B)); redraw set = keep NONE (owner); W4g stopped; W8 mama session_011xDdVRWZVWQYAYYva3YuqJ running (m11–m13 sheet next).
 - Dark-fix DONE (31 relight keys live, worker archived). Open: re-class of festivals/q72 gift-visit/wk/tt*/intro panels not done.
 - Rank vân kiên SAMPLE session_011xDdVSeXkZANCvC1jxcTK1: history check + one consort Tần→Hoàng hậu row; sheet to C → C looks → C shows the owner (SendUserFile).
-- VOICE: SẴN SÀNG KIỂM e134694 → opus BIG reviewer session_011xDdVNmiymzf41EueV5zCn (review/voice-trait-r1) running; PASS → FF main (FF-only, head == PASS sha, flock); then archive reviewer + W-A2 session_011xDdVQHXu4HxrzSdi1Q2h6.
+- VOICE LIVE main d0a839e8 (all archived). Leftovers: ty/man/kid outcomes + jrd/j95–97 beats untoned.
 - Idle, not mine to archive: event-art #2 NmzM (ROOT-2's, done), #4 RL7C (ROOT-2's).
 REQUESTS to main pending (in log lines): log owner lines 12:19Z–13:04Z in OD; tell the owner the active Foreman C chat.
 
@@ -41,6 +41,7 @@ Not blocking for main/owner: AG-MEET only consorts approach her (maids/eunuchs/m
 Push: commit in a sparse worktree of the handover branch (/home/user/wt/ho), pull --rebase + push retry.
 
 FOREMAN C SESSION ROOT-6 = session_011xDdVQNdyTACuGN42yEBQZ (opened by ROOT-5 ~12:20Z 17/11) · START_CTX ~8% (~80k of 1M; get_session reads 0, own estimate) → roll over at >= 33%, ceiling 60% · lineage depth 5/8 (at rollover: depth 6 child NOT allowed → handover here + ask main/owner to open Foreman C from claude.ai) · own hourly wake (:32) below.
+- 13:31Z(trigger-time) VOICE BY TÍNH TÌNH PASS d0a839e8 (review-voice-trait-r1.md; QUICKCHECK PASS, coop-e2e 63/63, 6 real cards Fold+iPad) → C fast-forwarded main c29866a6..d0a839e8 (FF-only, flock). Reviewer NmIy + W-A2 QHXu ARCHIVED. Leftovers (not blocking): ty/man/kid outcomes + jrd/j95–97 beats untoned; dead th/emp sub-pools.
 - 13:36Z(wall) Lead #7: W9 DONE + archived — keep-copy 2043 files (681 keys) verified at img/_keep/maid-ty-redraw/; restore pipeline in RESTORE_TY_REPORT.md waits the owner's overwrite OK (no successor until then). Running art: W8 mama only (+ lead). Idle: rank-vankien sample worker session_011xDdVSeXkZANCvC1jxcTK1 (waits 13-rank list), voice reviewer session_011xDdVNmiymzf41EueV5zCn running.
 - 13:32Z(wall) DARK-FIX DONE: 31 keys LIVE, all Magnific relight (lum 62–81; table reports/event-art-dark-fix.md). Not re-classified this round: festivals/q72 gift-visit/wk/tt1-2/vlout/thd1/runner/shop/other intro panels. Worker session_011xDdVSTVyLVuATNYT3izSd ARCHIVED.
 - 13:30Z(wall) Dark-fix: 15 relight LIVE (all of #2's 11 replaced); C LOOKED batch B (9) + batch C sad (7): OK → upload, then the worker STOPS (credits) — archive after its final report. Owner upset about credits ("có mấy triệu credit ... cũng đốt sạch") → no new outfit drawing before an approved 1-person sample; C asked her the list of the 13 ranks.
