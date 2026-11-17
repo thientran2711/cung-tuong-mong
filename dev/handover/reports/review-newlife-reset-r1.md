@@ -1,6 +1,6 @@
 PRIORITY #1 CHECK: worker's report line 1 (dev/handover/reports/newlife-reset.md) | claims: newlife-reset session_01UV1SzgyQP6eCJz2hmcnLrF READY | review/*: review/newlife-reset. Reviewer; build nothing new. Found during review: origin/main already holds the SAME root fix (it-key-guard 7662ae56a/23e53eaa6: S.vmem + j8 itClean) and review/tuanluc-sync a THIRD copy (vmemFix in jvoice) — duplicate work across 3 branches.
 
-# review-newlife-reset r1 — PASS b2da25cc05d9ac74cf51c640ce1f98de0190d64e (branch review/newlife-reset-r1, ancestor = origin/main bad6d59f)
+# review-newlife-reset r1 — PASS 0045ff8efdcb9b9f095facb8218580bb546e886d (branch review/newlife-reset-r1, ancestor = origin/main 64c39ca2) — supersedes b2da25cc
 
 ## Root (verified)
 - Reproduced on main 7abaf07a with the worker's tests: newlife-leak FAIL 13 (healing line + nameless chest entry on start / rebirth / slot load, ECON_AT holds old-life people), newlife-oldsave FAIL 4, sfield-collide 1 pair (vl: jvoice map vs jveil/jrash item). Root = jvoice kLine memory in S.vl (worn-veil field). Real.
@@ -26,3 +26,8 @@ For its worker: drop its vmemFix (jvoice + vlSync call) — main itClean + this 
 
 ## Notes
 - Brief gap: the newlife-reset worker's PRIORITY #1 CHECK said "review/* 0 (no other branch touches S.vl / jvoice memory)" — it-key-guard (then a review branch, now on main) already did. Coordinator: one root, three fixes.
+
+## Update after main s29 decision (17/11 03:28Z: keep it-key-guard's migration, remove newlife-reset's copy)
+KEPT: it-key-guard 02561fca (on main via batch-0232) — j8 itClean: S.vl memory -> S.vmem, keyless chest pieces dropped, memory on a real veil removed. Field name S.vmem.
+REMOVED from newlife-reset: vlFix's own S.vmem move + chest filtering. vlFix now ONLY removes the false healing line (runs before itClean, still sees the old memory); vlSync / vlOff act only on a real veil (vlIs), so a foreign object in the veil slot can never log the line or reach the chest. lifeStore() registry unchanged + reviewer additions.
+Merged origin/main 64c39ca2 (coop-thin-a; generated-file conflicts only, rebuilt). On 0045ff8efdcb9b9f095facb8218580bb546e886d: newlife-leak FAIL 0 (x2), newlife-oldsave FAIL 0 (false line gone, real veil kept), voice-core 0 FAIL, sfield-collide 0, QUICKCHECK PASS (open 1232 ms, old save ok, core gates PASS).
