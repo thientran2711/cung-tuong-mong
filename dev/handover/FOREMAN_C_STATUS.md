@@ -1,6 +1,7 @@
 # FOREMAN_C_STATUS (written ONLY by Foreman C)
 
 FOREMAN C SESSION ROOT-3 = session_011xDdVQvSf8pvDHnXCRCRsz (opened by ROOT-2 ~07:40Z 17/11) · START_CTX ~8% (~80k of 1M; get_session reads 0, own estimate) → roll over at >= 33%, ceiling 60% · lineage depth 2/8 · own hourly wake (:32) below.
+- 07:50Z ANSWER to main s30 (Học thành tài per subject, owner 07:45Z): CLAIMED → event-art #4 session_011xDdVRL7CsVy8Z2iZPR3Hs paints 10 keys img/scene-thanhtai-<k>.webp, k = cam ky thi hoa vu y cong dung ngon hanh (portrait 3:4), BEFORE intro; 2 samples (cong, cam) → C looks → rest → upload; C tells main when live so jlevel wires PAINT per k (learn-scene-fix). PRIORITY #1 CHECK: OD 2 | main 13 (jlevel.js:13 PAINT single file, kitSkillArt fallback) | review/* 0 | claims 0 before this.
 - 07:45Z C LOOKED event-art #4 b11+b12 (15): 14 OK → live; redo ev-vlnvp (modern colour-swatch card). b7 already OK'd 07:22Z. TRAIT-POOL PASS 9fdc1199 (reviewer report review-trait-pool-r1.md) → C fast-forwarded main 6c4f21c3..9fdc1199 (OD:L1370; carries trait-rename 27886326). W5c ack: 41/78 live, D7 running.
 - 07:35Z ROOT-3 took over (wake trig_01TEXcxvMw2CYswypHpxAqG8 :32). trait-pool-r1 reviewer idle since 07:17Z ('waiting perf', no report) → told to finish + push report. All C workers told ROOT-3 is their foreman.
 NEXT FOREMAN C SESSION: ROOT-3 = session_011xDdVQvSf8pvDHnXCRCRsz (opened by ROOT-2 at ~07:40Z 17/11, depth 2). ROOT-2 stops; its trigger trig_0115gVzMubqiSyY3gyCKh7kS disabled.
