@@ -42,3 +42,201 @@ dev/handover/reports/event-art-dark-fix/sample1-OLD-LIVE-NEW.jpg
 | ev-e68-poisonedfish | nVLuIBEYQD | 24 | 73 |
 | ev-toil-hh-scold | mERU1rBhJQ | 36 | 85 |
 gpt-2-6, 4:3 1k, refs act-bat-dau-bay-muu + act-ha-doc-dan. Self-check: warm rose/red interior, moon + lanterns/candles, room fully readable, no faces (all backs), no text. Waiting for Foreman C OK; then remaining ~20 fails in sheets of ~12.
+
+## STEP 1 (UPDATE 2) table: every event/option/intro picture redrawn today (live on CDN at measure time; event-art #2 interim lift for its 11 NOT yet counted)
+| key | class (event text) | OLD lum | LIVE lum | verdict |
+|---|---|---|---|---|
+| ev-am-muu | scheming | 49 | 28 | too dark |
+| ev-ch1 | normal | 155 | 153 | OK |
+| ev-ch2 | normal | 172 | 172 | OK |
+| ev-con-tre | normal | 173 | 155 | OK |
+| ev-cyrep | normal | 151 | 158 | OK |
+| ev-e68-allyoffer | normal | 171 | 163 | OK |
+| ev-e68-autumnmoon | normal | 105 | 157 | OK |
+| ev-e68-bordernews | danger (border war) | 90 | 28 | too dark |
+| ev-e68-borrowdress | normal | 165 | 166 | OK |
+| ev-e68-clanfather | normal | 167 | 162 | OK |
+| ev-e68-doccheck | normal | 146 | 133 | OK |
+| ev-e68-doubtvisit | normal | 167 | 165 | OK |
+| ev-e68-droughtprayer | normal | 162 | 154 | OK |
+| ev-e68-embroidery | normal | 168 | 153 | OK |
+| ev-e68-envoygift | normal | 164 | 164 | OK |
+| ev-e68-eunrequest | normal | 163 | 151 | OK |
+| ev-e68-faminedonate | normal | 179 | 156 | OK |
+| ev-e68-fortunenun | normal | 175 | 155 | OK |
+| ev-e68-giftarrive | normal | 176 | 166 | OK |
+| ev-e68-hhsummons | sinister (Empress summons) | 167 | 31 | too dark |
+| ev-e68-kindvisit | normal | 170 | 146 | OK |
+| ev-e68-leakroof | danger (storm; weather - C to confirm) | 88 | 35 | too dark |
+| ev-e68-letterhome | normal | 193 | 155 | OK |
+| ev-e68-lotusseason | normal | 176 | 169 | OK |
+| ev-e68-musician | normal | 168 | 124 | OK |
+| ev-e68-newgirladvice | normal | 175 | 155 | OK |
+| ev-e68-officialwife | normal | 163 | 149 | OK |
+| ev-e68-painter | normal | 152 | 161 | OK |
+| ev-e68-poisonedfish | sinister (poison) | 181 | 24 | too dark |
+| ev-e68-proudvisit | normal | 167 | 153 | OK |
+| ev-e68-rumoremplove | scheming (rumour) | 179 | 28 | too dark |
+| ev-e68-rumorfavor | scheming (rumour) | 101 | 33 | too dark |
+| ev-e68-rumorpreg | scheming (rumour) | 171 | 42 | too dark |
+| ev-e68-rumorth | scheming (rumour) | 162 | 28 | too dark |
+| ev-e68-servhero | normal | 91 | 156 | OK |
+| ev-e68-servleave | normal | 179 | 162 | OK |
+| ev-e68-sickservant | normal | 155 | 140 | OK |
+| ev-e68-silkallot | normal | 160 | 154 | OK |
+| ev-e68-snowday | normal | 211 | 176 | OK |
+| ev-e68-spoiledfood | sinister (sabotage) | 158 | 30 | too dark |
+| ev-e68-springallergy | normal | 178 | 175 | OK |
+| ev-e68-stormnight | danger (storm; weather - C to confirm) | 133 | 42 | too dark |
+| ev-e68-straycat | normal | 173 | 161 | OK |
+| ev-e68-templerite | normal | 174 | 153 | OK |
+| ev-e68-thmama | normal | 168 | 153 | OK |
+| ev-evpick | normal | 78 | 134 | OK |
+| ev-fest-dongchi | normal | 107 | 163 | OK |
+| ev-fest-dongchi-b | normal | 108 | 144 | OK |
+| ev-fest-giaothua | normal | 77 | 132 | OK |
+| ev-fest-giaothua-b | normal | 80 | 136 | OK |
+| ev-fest-lapbat | normal | 110 | 165 | OK |
+| ev-fest-lapbat-b | normal | 112 | 150 | OK |
+| ev-fest-newyear | normal | 112 | 165 | OK |
+| ev-fest-nguyentieu | normal | 83 | 139 | OK |
+| ev-fest-nguyentieu-b | normal | 78 | 151 | OK |
+| ev-fest-thattich | normal | 83 | 131 | OK |
+| ev-fest-thattich-b | normal | 78 | 146 | OK |
+| ev-fest-trungthu | normal | 80 | 136 | OK |
+| ev-fest-trungthu-b | normal | 83 | 155 | OK |
+| ev-fest-vulan | normal | 80 | 127 | OK |
+| ev-fest-vulan-b | normal | 84 | 147 | OK |
+| ev-giftpick | normal | 108 | 161 | OK |
+| ev-j70thr | normal | 117 | 171 | OK |
+| ev-j71f-doanngo | normal | 111 | 167 | OK |
+| ev-j71f-dongchi | normal | 112 | 175 | OK |
+| ev-j71f-giaothua | normal | 88 | 139 | OK |
+| ev-j71f-lapbat-1 | normal | 108 | 160 | OK |
+| ev-j71f-lapbat-2 | normal | 111 | 158 | OK |
+| ev-j71f-lapbat-3 | normal | 105 | 152 | OK |
+| ev-j71f-newyear | normal | 114 | 159 | OK |
+| ev-j71f-nguyentieu | normal | 84 | 137 | OK |
+| ev-j71f-phoenix | normal | 117 | 178 | OK |
+| ev-j71f-thanhminh | normal | 110 | 165 | OK |
+| ev-j71f-thanhtho-1 | normal | 115 | 166 | OK |
+| ev-j71f-thanhtho-2 | normal | 109 | 157 | OK |
+| ev-j71f-thanhtho-3 | normal | 114 | 167 | OK |
+| ev-j71f-thanhtho-4 | normal | 108 | 152 | OK |
+| ev-j71f-thanhtho-5 | normal | 110 | 163 | OK |
+| ev-j71f-thanhtho-6 | normal | 109 | 159 | OK |
+| ev-j71f-thattich | normal | 70 | 128 | OK |
+| ev-j71f-trungcuu | normal | 109 | 168 | OK |
+| ev-j71f-trungthu | normal | 81 | 149 | OK |
+| ev-j71f-vantho-1 | normal | 94 | 157 | OK |
+| ev-j71f-vantho-2 | normal | 117 | 169 | OK |
+| ev-j71f-vantho-3 | normal | 90 | 148 | OK |
+| ev-j71f-vantho-4 | normal | 121 | 171 | OK |
+| ev-j71f-vulan | normal | 76 | 137 | OK |
+| ev-j71x-sac | normal | 115 | 173 | OK |
+| ev-j71x-tai | normal | 83 | 141 | OK |
+| ev-nc1 | sinister? (C to confirm) | 46 | 45 | too dark |
+| ev-news-tin-trong-cung | scheming (gossip news) | 71 | 43 | too dark |
+| ev-plantpick | scheming (plant) | 85 | 34 | too dark |
+| ev-q72-dich-thu | normal | 101 | 144 | OK |
+| ev-q72-doi-thuoc | normal | 101 | 135 | OK |
+| ev-q72-don-ta | normal | 109 | 163 | OK |
+| ev-q72-emp-co | normal | 102 | 154 | OK |
+| ev-q72-hh-doanngo | normal | 102 | 161 | OK |
+| ev-q72-hh-trungcuu | normal | 194 | 153 | OK |
+| ev-q72-hh-trungthu | normal | 111 | 153 | OK |
+| ev-q72-kho-tet | normal | 108 | 150 | OK |
+| ev-q72-loi-thoi | normal | 108 | 168 | OK |
+| ev-q72-maid-tet | normal | 105 | 155 | OK |
+| ev-q72-mama-nghi | normal | 104 | 153 | OK |
+| ev-q72-mat-tram | normal | 105 | 159 | OK |
+| ev-q72-mat-tram2 | normal | 102 | 151 | OK |
+| ev-q72-ns-doi | normal | 102 | 155 | OK |
+| ev-q72-off-con | normal | 111 | 163 | OK |
+| ev-q72-off-hoa | normal | 109 | 164 | OK |
+| ev-q72-qua-tet | normal | 98 | 139 | OK |
+| ev-q72-quat-rv | normal | 104 | 162 | OK |
+| ev-q72-su-tet | normal | 117 | 171 | OK |
+| ev-q72-th-aodong | normal | 115 | 174 | OK |
+| ev-q72-th-kinh2 | normal | 108 | 158 | OK |
+| ev-q72-th-mai | normal | 104 | 161 | OK |
+| ev-q72-th-thanhminh | normal | 110 | 149 | OK |
+| ev-q72-th-trungcuu | normal | 101 | 145 | OK |
+| ev-q72-tho-te | normal | 112 | 161 | OK |
+| ev-q72-tin-doi | normal | 110 | 167 | OK |
+| ev-q72-tu-nu | normal | 112 | 164 | OK |
+| ev-q72-tv-mua | normal | 108 | 174 | OK |
+| ev-runner | normal | 163 | 168 | OK |
+| ev-shop | normal | 154 | 116 | OK |
+| ev-taintpick | scheming (taint) | 104 | 36 | too dark |
+| ev-td1 | scheming | 64 | 37 | too dark |
+| ev-thd1 | normal | 176 | 169 | OK |
+| ev-toil-crowd-jealous | scheming | 154 | 99 | too bright |
+| ev-toil-emp-dislike | normal | 164 | 158 | OK |
+| ev-toil-emp-like | normal | 187 | 163 | OK |
+| ev-toil-hh-praise | normal | 155 | 179 | OK |
+| ev-toil-hh-scold | sinister (scold) | 149 | 36 | too dark |
+| ev-toil-rival-jealous | scheming | 175 | 42 | too dark |
+| ev-toil-rival-praise | normal | 177 | 165 | OK |
+| ev-toil-rival-tease | scheming | 181 | 41 | too dark |
+| ev-toil-th-praise | normal | 152 | 169 | OK |
+| ev-toil-th-scold | sinister (scold) | 146 | 43 | too dark |
+| ev-tt1 | normal | 165 | 165 | OK |
+| ev-tt2 | normal | 165 | 155 | OK |
+| ev-tt3 | scheming | 90 | 37 | too dark |
+| ev-vlcraft | normal | 169 | 174 | OK |
+| ev-vlnvp | normal | 157 | 139 | OK |
+| ev-vlout | normal | 165 | 171 | OK |
+| ev-vulan | normal | 88 | 110 | too dark (check buổi: night/evening scene?) |
+| ev-wk-cam | normal | 161 | 139 | OK |
+| ev-wk-hoa | normal | 179 | 153 | OK |
+| ev-wk-ky | normal | 167 | 151 | OK |
+| ev-wk-nau | normal | 168 | 147 | OK |
+| ev-wk-phanson | normal | 159 | 158 | OK |
+| ev-wk-phucthien | normal | 159 | 144 | OK |
+| ev-wk-theu | normal | 180 | 146 | OK |
+| ev-wk-thi | normal | 179 | 141 | OK |
+| ev-wk-thuchuc | normal | 166 | 154 | OK |
+| ev-wk-y | normal | 152 | 138 | OK |
+| intro/G2 | normal | 131 | 160 | OK |
+| intro/G4 | normal | 122 | 159 | OK |
+| intro/G5 | normal | 109 | 145 | OK |
+| intro/G7 | normal | 107 | 154 | OK |
+| intro/ch-2 | normal | 82 | 142 | OK |
+| intro/ch-3 | normal | 80 | 141 | OK |
+| intro/ch-4 | normal | 124 | 166 | OK |
+| intro/ch-h3 | normal | 126 | 171 | OK |
+| intro/cn-1 | normal | 102 | 137 | OK |
+| intro/cn-3 | normal | 124 | 160 | OK |
+| intro/cnv-1 | normal | 116 | 159 | OK |
+| intro/cnv-2 | normal | 72 | 123 | OK |
+| intro/cnv-3 | normal | 121 | 165 | OK |
+| intro/cnv-4 | normal | 103 | 153 | OK |
+| intro/cnv-h3 | normal | 115 | 170 | OK |
+| intro/dtq-h3 | normal | 100 | 153 | OK |
+| intro/muoi-1 | normal | 128 | 170 | OK |
+| intro/muoi-2 | normal | 88 | 145 | OK |
+| intro/muoi-4 | normal | 120 | 169 | OK |
+| intro/muoi-h3 | normal | 85 | 133 | OK |
+| intro/td-2 | scheming | 79 | 60 | too dark |
+| intro/td-3 | normal | 65 | 107 | too dark (check buổi: night/evening scene?) |
+| intro/td-h1 | normal | 71 | 115 | OK |
+| intro/td-h3 | normal | 100 | 143 | OK |
+| intro/thd-2 | normal | 93 | 138 | OK |
+| intro/thd-3 | normal | 96 | 144 | OK |
+| intro/thd-4 | normal | 130 | 172 | OK |
+| intro/thd-h3 | normal | 135 | 156 | OK |
+| intro/tt-3 | normal | 74 | 136 | OK |
+| opt-giu-chan-hoang-thuong | scheming (option) | 89 | 47 | too dark |
+
+182 keys, 26 not OK. Normal keys with LIVE>=110 = OK for brightness; wrong-buổi/season check is by eye on the sheets and not automated (festival night scenes nguyentieu/vulan/thattich at 127-165 look like lit evenings).
+
+## STEP 2 (UPDATE 2) samples: same composition, light/mood only (LIVE image + act-bat-dau-bay-muu as refs, gpt-2-6 4:3 1k) — NOT uploaded
+Sheet LIVE | NEW with lum: dev/handover/reports/event-art-dark-fix/sample2-LIVE-NEWrelight.jpg (sample1 = earlier full repaint, superseded)
+| key | creation | LIVE | NEW |
+|---|---|---|---|
+| ev-am-muu | lJIcGlJgv9 | 28 | 72 |
+| ev-e68-poisonedfish | vQ27guza47 | 24 | 77 |
+| ev-toil-hh-scold | 6AqIXYziJO | 36 | 69 |
+| ev-plantpick | TdUbQagVNR | 34 | 62 |
+Self-check: figures/props identical to LIVE, only lit; no faces (backs/far), no text. plantpick 62 slightly under 65 (can re-roll). Waiting for C OK.
