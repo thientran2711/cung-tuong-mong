@@ -8,8 +8,8 @@
    (3) EFFECT-SPRITE layer (optional, painted): img/kit/emo-fx/<k>.webp (smoke puffs, tears, sweat, glint …): ONE sibling img.kemofx per live seal, centred on the seal at KIT_EMOSEAL.fxScale x its size,
        pointer-events none, removed when the seal leaves the screen. No file = no layer. Nothing is drawn in code (no code-drawn tears / smoke).
    KEYS: the seal map holds khoc + hon too (names "Khóc", "Hờn"); the mood logic (jemo EMO) decides when a person is in one — until then they never appear. ===== */
-window.KIT_EMOSEAL=window.KIT_EMOSEAL||{keys:{vui:{m:"sway"},binh:{m:"breathe"},buon:{m:"droop"},gian:{m:"shake"},so:{m:"tremble"},ghen:{m:"flicker"},lo:{m:"bob"},dau:{m:"wince"},muu:{m:"glint"},an:{m:"bob"},khoc:{m:"droop",name:"Khóc"},hon:{m:"flicker",name:"Hờn"}},
- art:["vui","binh","buon","gian","so","ghen","lo","dau","muu","an"],fb:{khoc:"buon",hon:"gian"},have:{},defaultMotion:"breathe",anim:"img/kit/emo-anim/",fx:"img/kit/emo-fx/",fxScale:1.7};
+window.KIT_EMOSEAL=window.KIT_EMOSEAL||{keys:{vui:{m:"sway"},binh:{m:"breathe"},buon:{m:"droop"},gian:{m:"shake"},so:{m:"tremble"},ghen:{m:"flicker"},lo:{m:"bob"},dau:{m:"wince"},muu:{m:"glint"},an:{m:"bob"},khoc:{m:"droop",name:"Khóc"},hon:{m:"flicker",name:"Hờn"},chanh:{m:"flicker"},phanno:{m:"shake"},runso:{m:"tremble"},matngu:{m:"droop"},toantinh:{m:"glint"}},
+ art:["vui","binh","buon","gian","so","ghen","lo","dau","muu","an"],fb:{khoc:"buon",hon:"gian",chanh:"ghen",phanno:"gian",runso:"so",matngu:"buon",toantinh:"muu"},have:{},defaultMotion:"breathe",anim:"img/kit/emo-anim/",fx:"img/kit/emo-fx/",fxScale:1.7};
 const KES_HAVE={};/* url -> true | false | "wait" (probe result) */
 function kesProbe(url,cb){const h=KES_HAVE[url];if(h===true||h===false){cb(h);return}
  if(h&&h.w){h.w.push(cb);return}const e={w:[cb]};KES_HAVE[url]=e;const im=new Image();const done=ok=>{KES_HAVE[url]=ok;e.w.forEach(f=>{try{f(ok)}catch(x){}})};im.onload=()=>done(true);im.onerror=()=>done(false);im.src=url}
