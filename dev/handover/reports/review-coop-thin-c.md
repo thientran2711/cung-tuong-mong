@@ -1,4 +1,4 @@
-# review coop-thin-c r1 — IN PROGRESS (reviewer #1 rolled over; verdict by #2)
+# review coop-thin-c r1 — PASS review/coop-thin-c-r1 eb3675a6 (READY FF; reviewer #2)
 
 PRIORITY #1 CHECK ('coop-thin-c|jcoopthinc|thinW|world read-only'): OD 1 | ledger 0 | claims 8 | main 0 | review/* 2 (review/coop-thin-c 475beba7, this review/coop-thin-c-r1) — plus brief hits OD L1487/L1489/L1493/L1494, OD:L1063.
 
@@ -57,3 +57,42 @@ Shots: Fold 755x1000@2 + iPad 1180x820@2, both seats, L3 and L3 swap (NOACT): lo
 State: branch review/coop-thin-c-r1 @ f65b5b6c pushed (origin/main 60b0e3bf is an ancestor; main may have moved again → merge again, generated files from main + rebuild, KIT_REQUESTS both entries; check j2/jbal/jcoopthinb stay main's: ONE key BAL.allyRel). Worktree /home/user/wt/rvc (sparse), logs /home/user/wt/rvc-out*, scratch shots deleted.
 Left: (1) read /home/user/wt/rvc-out4/fin.txt: thin-a L0 + quickcheck on f65b5b6c (quickcheck: `bash dev/tools/quickcheck.sh`); (2) rerun coop-thin-d-probe L4 (P1 failed once on f65b5b6c; if it repeats, check whether fix 3's showModal changes when her ev card shows mid-week); (3) one more L3 swap if time; (4) wipe worker shots `python3 dev/site/cdn_sync.py --wipe-review coop-thin-c`; (5) set the verdict line + CLAIMS row 869 + send_message Foreman B ROOT session_01N1tNP3WvLNPV6guHYCkC66.
 Verdict as of #1: every brief check 1–8 PASS (see table); 4 reviewer fixes; nothing failing that is C except the one d-probe P1 to recheck.
+
+## REVIEWER #2 (session_01N1tNP6cMqcMNhStqaraUuW, 11/17/2026 21:25Z–23:10Z) — VERDICT: PASS review/coop-thin-c-r1 eb3675a6 (READY FF)
+
+PRIORITY #1 CHECK ('coop-thin-c|jcoopthinc|nohost|stateOn'): OD L1487/L1489/L1493/L1494 + OD:L1063 | main none (C not on main; jcoopthin parts A/B/D) | review/* review/coop-thin-c 475beba7, review/coop-thin-c-r1 (this) | claims B rows 869 (#1, rolled over) + 951 (#2). Started from '## ROLLOVER HANDOVER #1 → #2'; finished checks not redone.
+START_CTX ≈ 8 % (estimate); ends ≈ 45 % (no rollover).
+
+**Verdict sha eb3675a6** = f65b5b6c + merge main 4c8568f5 (93956e3e) + reviewer #2 fix F1b (6b2489a8) + merges main 99f3978d (86e51ae7), c7375c0c (4eac30bc), b048e495 (eb3675a6). origin/main b048e495 is an ancestor. Every merge: only generated files (index.html / sw.js / assets.json, taken from main + site rebuilt) and KIT_REQUESTS.md (both entries kept) conflicted; j2 / jbal / jcoopthinb = main's (ONE key BAL.allyRel). Diff vs main in dev/build = C only (assemble.py, jcoop.js rxWrap, jcoopask.js, jcoopthin.js CAP 4 + doFn, jcoopthinc.js, jcoopworld.js). main moved 4 times during this review (UI batches s36a–s38b: kit, shelf, map frame, display room — no co-op file).
+
+### #1's 4 fixes — whole family?
+| fix | check | result |
+|---|---|---|
+| F1 nohost / nothin resend | the listener returned early unless `gOn()` (C switch on): a "thin" level drop or a build hold (TH.on false) landing BEFORE the Worker's nohost / nothin answer dropped the pack again — the same loss by another door | **fixed (F1b, 6b2489a8)**: the error listener runs on any guest seat (`CW.on && !host()`); the pack goes back in SQ, and send() already waits while `!TH.on(1) || COOP.frozen`. bado still counted for every id. C10 green after (resend 1, applied once) ×6 runs. B / D intents: B retries nohost itself; D and the dead-but-open socket stay note N1 (part H). |
+| F2 kids keyed by name | does any other no-id list carry a `name` with duplicates (merge would fold two members into one)? | inv items are `{k,…}` (no name → whole list, old behaviour); kids names are unique (j1 mkKid). No other no-id named list met in the C2 runs (C2 53/53 kinds compare keyed members both seats). PASS. |
+| O1 showModal after her world step | covers endTurn / nextBuoi / monthTick (render excluded): every world step that can queue cards | PASS; C4 "week merged once" green in all 9 C runs of this review. |
+| C8 stateOn while the lens is installed | the one switch is `stateOn`; the only other user of thinW() is jcoopthinc `on()` itself (git grep) | PASS; C8 {} / {} every run. |
+
+### Runs (Worker ctm-coop.victoria-tntt.workers.dev)
+| test | sha | result |
+|---|---|---|
+| coop-thin-c L3 / swap / L4 (TRIP=1) | 86e51ae7 | 18/18 · 17/17 · 17/17 (C2 53/53, C7 0, C8 {}/{}, C9 0/0, C10 resend 1) |
+| coop-thin-c L3 / swap / L4 | 6b2489a8 | first L3 16/19 and swap 17/21 (C2 kpoison / takeaway / expose / trinhth / rash) were run while I had a second browser running (CPU load); the 5 kinds alone with TRACE 5/5 and full reruns L3 17/17, swap 17/17, L4 17/17 — load, not C (same picture #1 noted: answers later than the 15 s read) |
+| coop-thin-c L3 swap (TRIP=1) | eb3675a6 | 17/17 |
+| coop-thin-d-probe L4 | 6b2489a8 | 34/34 (#1's P1 33/34 did not repeat) |
+| coop-thin-a L0 / L1 | 6b2489a8 | 19/19 / 24/24 |
+| coop-thin-b L4 | 6b2489a8 | 135/136: only fail = console CORS on ctm-rank.victoria-tntt.workers.dev/life (rank Worker, test origin; infra) |
+| coop-thin-b-r1 | 6b2489a8 | 39/39 (one earlier run: page.goto 60 s timeout, infra) |
+| coop-thin-b-r3 (DFLAG=1, L2) | 6b2489a8 vs main 4c8568f5 | branch 23/25 once (R10 'inv deferred'), then 25/25 ×3; main 25/25 ×2 and **23/25 once with the SAME R10 fails** → main's flaky R10 (level 2: C does not run), not C |
+| coop-e2e | 6b2489a8 / 86e51ae7 | 63/63 / 63/63 |
+| coop-p2 | 6b2489a8 | 46/46 (7a: the B1 bribe card check green) |
+| coop-b1 | 6b2489a8 | 43/43 (7b: C adds nothing) |
+| coop-guest-maid | 6b2489a8 | 37/37 |
+| coop-one-world seeds 1–10 | 6b2489a8 | 10/10 PASS (S.wwin clean); seed 9 again on 86e51ae7 PASS |
+| one-core-guard | 6b2489a8 / 86e51ae7 | PASS / PASS |
+| quickcheck | 6b2489a8 | PASS (render 163/158, tab 349/324, buổi 893/985 ms vs live) |
+| golive.sh dry run | eb3675a6 | **checks OK** (quickcheck PASS: render 168/149, tab 283/274, buổi 830/807 ms, tasks>200ms 11/11, core gates PASS) — "To go live run again with --yes" |
+
+Shots (Fold 755x1000@2 + iPad 1180x820@2, host + guest, L3 and L3 swap, NOACT): looked at, scratch only, deleted. Fold host "Nhập cung" figure card clean; Fold guest "Phẩm phục Tần" item card (10 items) clean; iPad guest 22 items = N3 (kit, KIT REQUEST already on this branch), not C. No CDN review folder used by #2 (#1's wiped).
+
+Open notes carried (not blocking): N1 (dead-but-open socket, part H), N2 (child face identity rolled lazily, part G), N3 (kitRevealHTML many items, kit keeper), coop-thin-b-r3 R10 flaky on main (Foreman B: one B worker look).
