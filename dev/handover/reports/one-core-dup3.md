@@ -62,3 +62,97 @@ KIT FIRST: no UI part touched (only numbers inside existing texts / kit rows). N
 - Typed texts beside NON-moved numbers stay in the frozen list (e.g. «Lòng cung nữ +8» = apply({maid:8}) fx, j24 «Đức -3», «nàng nắm 2 chứng cứ» from caught()). Not this wave.
 - SWAP pass only judges texts with a recognizable branch (AOUT pairs, wt / lt) and reads under a roll / ok / no; anything else is «no verdict» (listed as a limit, not silent PASS).
 - §2.2 adds «Chủ tin 60+» to the j22 lock text — a wording change for the reviewer to accept or reject.
+
+## r1 FIX (review-one-core-dup3-r1 FAIL: evidence-count text family + gate gap)
+
+PRIORITY #1 CHECK ('evidence count text'): OD 0 new (ONE CORE OD:L1267, START_CORE) | ledger 0 | claims B one-core-dup3 fix = this session | main moved 7e264081 → 65dcf52f (greet-meet) during the fix: merged | review/* review/one-core-dup3-r1 607887ae = base (no other branch touches these texts).
+START_CTX ≈ 4 % of 1M (get_session reads 0; own estimate) → rollover ≈ 29 %, ceiling 60 %. Finished below it; no successor needed.
+
+Branch **review/one-core-dup3 @ 67430058** = 607887ae (review/one-core-dup3-r1, fast-forwarded) + d171d5f2 (code / gates) + f4030cbd (site) + b1d72314 (merge origin/main 65dcf52f) + 67430058 (site). Merge, leftovers 1–5, wording, SWAP of r1: untouched.
+
+**Merge main 65dcf52f (greet-meet)** — conflicts j2 / j9 / j24 / assemble.py (+ generated). Main moved the person-dialog chat amounts into ONE table **BAL.talk** (read by her options AND the NPC mirror in jgreet) while the stack had moved the same sites into BAL.eff.j9.run…run_7 / BAL.eff.j2.go_2. Line-level 3-way: where only one side changed, that side; where both changed (j2 Khiêu khích; j9 Khen tài nghệ, Bàn tán, Chia sẻ bí mật, Cảnh báo): **main's BAL.talk wins** (one key per rule, no second key), the stack's now-dead keys removed from jbaleff (j9 run, run_2, run_3, run_4, run_6, run_7; j2 go_2); kept the stack's moves main did not make (Chia sẻ bí mật evA → BAL.eff.j9.evRun; Nhờ giúp đỡ run_5 / evRun_2; Tạ lỗi / Nhún nhường / Giúp đỡ run_8–12). j24 hostile visit: main's apHostOpts() + the stack's BAL.eff.j24.go_5 inside it. j25 «Bàn tán» wrapper printed the dead j9.run_3 / run_4 → now BAL.talk.gossip.miss / tellOan and chanceW(BAL.talk.gossip.tell) (was typed 50). assemble = main's (+ jgreet) + jbaleff + jbalarc. Baseline 4714 → 4708 (main's own moves). Proof vs f4030cbd + main: only j2 / j25 talkOpts (the merge lines above) + jgreet new file.
+
+### 1. Whole-family scan
+Scan = every dev/build/j*.js (not jbal*), case-insensitive: «N chứng cứ», «chứng cứ ±N», «chứng cứ <name / về X> ±N», «nắm thêm N»; then the new gate (§2) on the old tree as a second scan. Old tree 607887ae: **82 typed counts caught by the gate** + the ones it cannot link (listed). The reviewer's 76-line list was a subset: the gate found 8 more («chứng cứ về X +1»: j70 ×4, j72, jroute, j95, j95b) and the case-insensitive grep 7 more («Chứng cứ -1 / -2» cost rows in j78 evidenceActs, j68f/j68g results).
+
+**Root cause found on the way:** dev/measure/one-core-dup3-ev-move.js took the LAST argument of evA / evStory as the amount, so every `evStory(t,N,"why")` (14 sites: j3 ×2, j4 ×2, j67 ×2, j68f, j68g, j7 ×6) and `evA(f,p,1+(…?1:0))` (j29) stayed typed — and the guard's amt pattern cannot see them (the number is not right before ")"). Fixed the mover (amount = 2nd arg of evStory, 3rd of evA; never reuse an existing key), moved those 14 to BAL.eff (no value changed, proof SAME), j29 by hand → BAL.eff.j29.evFireServ / evFireServ_2, and a new guard kind (§2).
+
+### 2. Before / after (text → printed key = the key its rule reads)
+| site (@607887ae) | before | after prints | rule |
+|---|---|---|---|
+| j17:66 CAUGHT (→ actLine of every ACAUGHT act; j63 / j79 match it) | «nàng nắm 2 chứng cứ» | caughtW(): balAb(BAL.eff.j8.evCaught) | j8 caught() |
+| j63:253 kaCaughtTxt · j79:1010 fallback · j83:175 wkPoison · jpoison:70 · jlost:242, 243 | «nắm 2 chứng cứ» | BAL.eff.j8.evCaught | caught() (poison / loSteal call it) |
+| j17:70 spy · jaudit:87 · j70:427 | «chứng cứ +1» | BAL.eff.jtruth.evN | spyFind |
+| j17:70 rumor · jaudit:89 | «nắm 1» | BAL.eff.j8.evF | A("rumor") |
+| jaudit:90 frame | «nắm 1» | BAL.eff.j8.evF_2 | A("frame") |
+| j17:72 bribe | «(chứng cứ +2)», «nắm 1» | j8.evF_3, j8.evF_4 (aoLz pair) | A("bribe") |
+| j17:72 block | «nắm 1» | j8.evF_5 | A("block") |
+| j17:75 plant · j8:475 | «nắm 2» | j8.evPlantItem | plantItem |
+| j2:148 · j78:114 · jsgame:247 (overhear) | «chứng cứ +1» | j78.evTop | overhear (j78's live copy) |
+| j21:17 spy note | «thêm 1 chứng cứ» | ${v.ev-e0} (the real gain) | doAct spy |
+| j22:25 | «nắm 1» | j22.evGo | flirt go |
+| j25:11 | «nắm 1» | j9.evRun | j9 «Chia sẻ bí mật» |
+| j29:47 fireServ | «chứng cứ +1» (rule gave 1 or 2) | balSg(g), g = evFireServ(+evFireServ_2) | fireServ (DISAGREEMENT fixed) |
+| j3:70, 77 · j4:65, 122 · j67:367, 714 · j68f:65 (×2) · j68g:76 · j7:18, 31, 35, 90, 155, 173 | «+2 / +1 / nắm 2» | the new BAL.eff.<m>.ev* of the same go | evStory (moved now) |
+| j15:65 · jhouse:49 «Hỏi chuyện» | «chứng cứ +1» | j10.evServAct_2 | j10 servAct hoi |
+| j42:268 | «chủ nắm 1» | j42.evN | srvDoOrder spy |
+| j70:229 · 231 · 250 · 256 | «+1 / +2 / +1 / nắm thêm 1» | j70.evExec70 · evExec70_2 · evNewPlot70 ×2 | exec70 (foil / trap) · newPlot70 |
+| j72:104 | «+1» | j72.evQ72End | q72End |
+| j78:113 · 115 · 127 | «chứng cứ +1» | j78.evN · j78.evN_2 · j2.evRun | j78maidSpy · fallen talk · chest run |
+| j78:185, 187, 188, 189 evidenceActs costs + j78:167 actLineRaw `use` table | «Chứng cứ -1 / -1 / -2 / -1», table 1/1/2/1 | j30.evF · j78.evF · evF_2 · evF_3 (table reads -key) | tocao · trinhth · trinhhh · uyhiep |
+| j78:189 · jaudit:35 (sent servant confesses) | «nắm 1» | j9.evN | runAct |
+| j83:225, 226, 227, 239, 245 | «2 / 1 / 2 / 1 / 1» | j83.evIllBuy_2 / _3 / _4 / evIllBuy ×2 | illBuy |
+| j92:348 | «tốn: 1 … đã tra xét» / «tốn: 1 … về» | jlost.evLostEvUse (new, -1) / j92.evSpendEv | lostEvUse / spendEv |
+| j92:353 | «nắm 2» | j92.evWdFrame | giahoa |
+| jlost:175, 176, 177, 186 | «thêm 1» | jlost.evLoEvAdd | loEvAdd (its c.cev counter now reads it too) |
+| jcoopworld:801 | «nắm 1» | jcoopworld.evBriber | P2H.briber |
+| jecon:159 bribel | «1», «nắm 1» | jecon.evF, evF_2 | A("bribel") |
+| jgift:28 | «nắm 2 …, quý ngươi -25» | j8.evGiveTo, j8.giveTo | giveTo |
+| jpet:28 · 184 · 212 | «1» | jpet.evPetMonthOf · evGo · evF | petMonthOf · mangift · thaopet |
+| jpoison:85, 86 | «ngươi nắm 2» | jpoison.evFound | found |
+| jthaiy:166 | «nắm thêm 1» | jthaiy.evNpcMonth | npc month |
+| jtruth:117 | «tốn: 1» | jtruth.evGo | Trình chứng cứ |
+| jtsb:57 · 78 · 125 (+ result line) · 139 · 146 | 1 | jtsb.evF · evF_2 · evGo · evGo_2 · evGo_3 | thathu · phonghoa · soát · giao · đáp trả |
+| jwhy:68, 74 · jhouse:38 (maid spy) | «chứng cứ +1» | j78.evN | j78maidSpy (the live path of spyMaidRun) |
+| jroute:90 · j95:415 · j95b:222 | «+2 / +1 / +1» | jroute.evRtSeen[1] · j95.evJ95hold · j95b.evJ95bTrace | rtSeen · j95hold · trace |
+| j8:175 item chungcu | «chứng cứ +2» (beside evi:2) | getter prints this.evi | item table |
+| jdress:60 | replace("chứng cứ +1 ·") | regex on the printed number | (spy text) |
+
+**Not a copy (left typed, with reason):**
+- thresholds «cần N chứng cứ» / «N chứng cứ về nàng (có …)» / «Gom 3»: j6:26 · j8:97 · j15:33 · j30:24, 25 · j79:720, 721 · j4:60 (requirement lines; the rule's `evG(...)>=N` is a typed threshold — guard family, not an ev amount).
+- quest / tham-ô counters typed in their OWN rule (no ev amount): j14:11 (S.coldEv+1, «/2»), j4:24 (st.proof++), j4:120 (S.caseEv-1), j55:65, 73, 176, 204 (deA tham-ô ledger ±1). → follow-up wave: move these counters into BAL (one-core-guard owns typed rules).
+- kit sample page demos: jgrey:37, jksize:171, jopic:212 (example rows; no rule).
+- comments: jcycle:13, 14, 46 · jwhy:51 · j79:90 · j87:439.
+- word numbers («một / hai / ba chứng cứ»: j4:65, j67:887, j72:361, j78:143, jchap:29, 32, jecon:159 spyk, jk2b:244, jrd_muoi:429, jrd_td:169, 970, jrd_thd:644, jrd_tt:411, jtruth:77): the digit rule does not reach them; changing «một» → a printed digit is a wording change → for Foreman B / VANPHONG.
+- Seen, not this family: jwhy:68 «Lòng ${m.name} -5» + `l:{maid:-5}` (loyal, not evidence).
+
+### 3. Gates changed
+- **one-core-text** new EV pass (scanEv): a typed count in a player text (templates read whole, ${} = {}) — signed after «chứng cứ» (a name / «về X» between allowed) or unsigned before it after nắm / thêm / tốn / dùng / trả lại / ( / : — FAILS when it equals an ev amount (BAL.eff.<m>.ev*) read in its module, its linked acts (BIND.linkMods) or the functions its option's callbacks call (go / run / open / ok / fail …, not the property holding the text); a caught / confession sentence also vs BAL.eff.j8.evCaught and j9.evN. Skips thresholds and a counter rule beside it (same number, no ev read). Old tree: 82 sites; plant j22:25 «nắm 1 chứng cứ» → **CAUGHT**; plants j17 caughtW «nắm 2» and j78:189 «nắm 1» → CAUGHT; restored → 0. LIMIT (no verdict): a preview with no code link to its rule (j15:65 data-sv button → j10 servAct; jgift preview → j8 giveTo): both fixed by hand above.
+- **one-core-guard** new frozen kind **evn** (evStory 2nd-arg amount, evA expression amount starting with a number; 0 = a mark, not counted): 0 sites; plant old j7 → NEW evn ×6 FAIL. Baseline 4716 → **4714** (j3 / j4 «chứng cứ Hoàng hậu +2 / +1» counted as t.stat).
+- **one-core-bind**: table handlers (P2H.briber=…) indexed by name for «previews:» comments; a helper whose roll is the other side's (`/* roll-side: catch */` in j8 caught()) gives no win / lose branch (jlost AOUT lose text «bị bắt: nàng nắm N» printed caught()'s key and was a false SWAP). Cross-function previews declare their rule with the existing `/* previews: fn */` comment (bind checks fn reads the key): caught, illBuy, q72End, exec70, newPlot70, spyFind, briber, petMonthOf, giveTo, j78maidSpy, runAct.
+- dev/measure/one-core-dup3-ev-move.js: amount argument fix + no key reuse. one-core-dup2-same: r1 INTENDED shape changes listed (below).
+
+### 4. Gates @ 67430058
+| gate | result |
+|---|---|
+| proof one-core-dup2-same HEAD(607887ae) @ d171d5f2 | **SAME** 39 modules (r1 INTENDED: j17 caughtW / AOUT / actLine, j21 doAct, j29 fireServ, j63 rvGroups, j78 actLineRaw, j79 / jdress IfStatement, j8 IT / jpet PET getters, jlost lostEvUse) |
+| proof 190bcf1e + main @ 67430058 | 78 modules, **459 refs** (436 + 23 new), fails only j2 / j25 talkOpts (merge, above) + jagmaid / jgreet new files (main's) |
+| one-core-guard | PASS, 4708 = baseline; evn frozen at 0; plant old j7 → NEW evn ×6 |
+| one-core-text | PASS 0 sites (old tree: 82); plants j22:25, j17 caughtW, j78:189 → CAUGHT |
+| one-core-bind | PASS 820 prints, 0 mismatches; SWAP plant AOUT.ally f_2↔f_3 → CAUGHT ×2 |
+| quickcheck @ 67430058 | PASS 280 s: core gates PASS, open 1292 ms 0 errors, old save loads + plays a buổi, perf new/live render 255/259 · tab 341/335 · buổi 1090/887 ms |
+| greet_check (main's) | ALL 13 PASS |
+| coop-e2e | 62/62 |
+| coop-one-world | PASS |
+| road-rare | ALL PASS |
+| road-end | 50/51: the 1 FAIL is «no page errors: r.updateLocalTransform is not a function» (Pixi) — **the same on the base 607887ae** (50/51, same error, run here); one earlier rerun also hit a random thd/son L1 ke14 roll (passed on the other runs) |
+| Fold 755x1000@2 · iPad 1180x820@2 | load 0 page errors, no h-overflow; caughtW / AOUT.bribe / laydol / IT.chungcu / actLine("rumor") print the same words as before («nàng nắm 2 chứng cứ» …) |
+
+KIT FIRST: no UI part touched (only the digit inside existing texts becomes the key). No rule value changed (proof); player-visible changes only where the text was WRONG: j29 «chứng cứ +1» now shows +2 when the rule gives 2; j21 note shows the real gain.
+
+### 5. Open / for Foreman B
+- Follow-up ONE CORE wave: quest / tham-ô counters typed in their own rules (j14 S.coldEv, j4 st.proof / S.caseEv, j55 deA ±1) and the evidence thresholds «cần N chứng cứ» (evG(...)>=N typed in j6 / j8 / j15 / j30 / j79).
+- Word numbers «một / hai / ba chứng cứ» (14 lines, §2) — wording decision (VANPHONG) before printing a digit.
+- road-end Pixi page error «r.updateLocalTransform» exists on main's stack already (not this branch).
+- Gate LIMIT: a preview with no code link to its rule (data-sv button, gift preview) is no verdict in the EV pass; both such texts fixed by hand.
+
