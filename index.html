@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"1f2761f7+","t":"2026-11-17T02:51Z","c":"kit-ico-wire: placeholder sets by orientation/size (kitPhPick/kitPhFit), rail ico-cal/ico-goal, status icons ico-download/ico-update (C42, …","b":"68d9506d7e23","h":[{"s":"babc9b4a","t":"2026-11-17T01:39Z","c":"Chơi chung không còn treo máy vì tên bạn lặp chữ; số bóng người trên dư đồ khớp đúng người đang ở đó; việc có hạn giờ hiện đồng hồ ngay dướ…"},{"s":"92685210+","t":"2026-11-17T00:53Z","c":"Khung việc và khung sự kiện bốn cỡ, tranh lấp đầy khung, việc nhắc tên ai hiện chân dung người ấy; phẩm của món đồ nằm ngay trên viền khung…"},{"s":"6f513340","t":"2026-11-16T23:24Z","c":"Vào game mới không còn bật ngay màn lật thẻ, lật thẻ chỉ khi vào buổi tối; dư đồ nhãn giấy mới; việc dài lấn sang buổi sau; lời trong cung …"},{"s":"7a18d957","t":"2026-11-16T22:44Z","c":"review-diemtrang-fx-r1 report"},{"s":"afe2bcbc","t":"2026-11-16T22:25Z","c":"review r1: KIT 84.1a note + report"},{"s":"dea1d445+","t":"2026-11-16T21:32Z","c":"golive lag-play-2: CHANGE line + site rebuilt"},{"s":"674f3af4","t":"2026-11-16T21:21Z","c":"Chơi cùng bạn: bạn chơi chung chưa gặp mặt nay hiện tên gọi chung “Hảo hữu của ta” ở mọi nơi, không còn ẩn thành dấu hỏi."},{"s":"923567d5+","t":"2026-11-16T21:03Z","c":"Hình nhân vật: hết vệt xám ở cổ và viền tối quanh người."},{"s":"59812a63+","t":"2026-11-16T20:41Z","c":"Khung chung: khoảng cách đều nhau ở sổ tuần và thẻ thân phận; hàng sổ gọn, thẻ lật không đè chữ."},{"s":"ab12d6fc","t":"2026-11-16T20:53Z","c":"Tuyết và đom đóm mới, mượt hơn; nền tranh không còn vẽ lại mỗi khung hình."}]};
+window.CTM_BI={"s":"0ef325f6+","t":"2026-11-17T03:23Z","c":"kit-ico-wire: placeholder sets by orientation/size (kitPhPick/kitPhFit), rail ico-cal/ico-goal, status icons ico-download/ico-update (C42, …","b":"9fe6070ec325","h":[{"s":"babc9b4a","t":"2026-11-17T01:39Z","c":"Chơi chung không còn treo máy vì tên bạn lặp chữ; số bóng người trên dư đồ khớp đúng người đang ở đó; việc có hạn giờ hiện đồng hồ ngay dướ…"},{"s":"92685210+","t":"2026-11-17T00:53Z","c":"Khung việc và khung sự kiện bốn cỡ, tranh lấp đầy khung, việc nhắc tên ai hiện chân dung người ấy; phẩm của món đồ nằm ngay trên viền khung…"},{"s":"6f513340","t":"2026-11-16T23:24Z","c":"Vào game mới không còn bật ngay màn lật thẻ, lật thẻ chỉ khi vào buổi tối; dư đồ nhãn giấy mới; việc dài lấn sang buổi sau; lời trong cung …"},{"s":"7a18d957","t":"2026-11-16T22:44Z","c":"review-diemtrang-fx-r1 report"},{"s":"afe2bcbc","t":"2026-11-16T22:25Z","c":"review r1: KIT 84.1a note + report"},{"s":"dea1d445+","t":"2026-11-16T21:32Z","c":"golive lag-play-2: CHANGE line + site rebuilt"},{"s":"674f3af4","t":"2026-11-16T21:21Z","c":"Chơi cùng bạn: bạn chơi chung chưa gặp mặt nay hiện tên gọi chung “Hảo hữu của ta” ở mọi nơi, không còn ẩn thành dấu hỏi."},{"s":"923567d5+","t":"2026-11-16T21:03Z","c":"Hình nhân vật: hết vệt xám ở cổ và viền tối quanh người."},{"s":"59812a63+","t":"2026-11-16T20:41Z","c":"Khung chung: khoảng cách đều nhau ở sổ tuần và thẻ thân phận; hàng sổ gọn, thẻ lật không đè chữ."},{"s":"ab12d6fc","t":"2026-11-16T20:53Z","c":"Tuyết và đom đóm mới, mượt hơn; nền tranh không còn vẽ lại mỗi khung hình."}]};
 /* KBOOT — BOOT COVER (owner 15/11 "Khi vừa bấm vào game, có chừng ít hơn 1 giây hiện khung này"; KIT §14.1).
    Before: while the 4 MB page parsed, the browser painted the bare static markup of p1.html (HUD box, a vertical stat label list, empty
    panels, the old 11-tab bar) for ~1 s on a warm open and many seconds on a cold one, before any kit CSS/JS existed.
@@ -4143,7 +4143,7 @@ function over(h,t,fate,alive){if(S.dead)return"";const live=overAlive(fate,alive
  /* kit sections + kit rows (KIT 9: h4.kpst + kitRows), no boxed panels (owner 15/11). Chain lines "Nhãn: lời" become labelled rows. */
  const chR=ch.map(x=>{const m=String(x).match(/^([^:.]{2,26}):\s*(.+)$/);return m?[m[1],m[2],"t"]:["Nguyên do",x,"t"]});
  const maxR=Math.max(S.rank,S.maxRank||0);
- Q=[{t:"Kiếp này",cls:"end",who:pMe(),h:`<h3>${h}</h3><p>${t}</p>${chR.length?`<div class="kpsec kend-why">${kitRows(chR)}</div>`:""}
+ Q=[{t:"Kiếp này",cls:"end",art:endArt(h,t,fate,live),who:pMe(),h:`<h3>${h}</h3><p>${t}</p>${chR.length?`<div class="kpsec kend-why">${kitRows(chR)}</div>`:""}
   <div class="kpsec kend-life"><h4 class="kpst">Kiếp này</h4>${kitRows([["Thân phận",`${S.name} · ${S.origin.n}`,"t"],["Sống trong cung",`${S.year} năm · ${S.age} tuổi`,"t"],["Phẩm cao nhất",maxR>=7?"Hoàng hậu":RANKS[maxR].n,"t"],["Con cái",`${ms} hoàng tử, ${md} công chúa`,"t"],[live?"Kết cục":"Chết vì",fate,"t"]])}</div>
   <p class="past">${live?"Kiếp này khép lại.":"Chết là hết."} Kiếp sau bắt đầu lại từ đầu, chỉ còn tên trong Sổ luân hồi.</p>`,btn:"Chuyển kiếp",onClose:start}];
  showModal();render();return""}
@@ -38384,7 +38384,7 @@ function score(L){const R=RULES,mr=I(L.mr,-1),sr=I(L.sr,-1),e=txt(L.endk,40);
  return{score:s,parts:parts.filter(p=>p[1]),partial:dd}}
 return{RULES,check,score,phamName,partial,txt}})();
 if(typeof globalThis!=="undefined")globalThis.CTM_RANK=CTM_RANK;
-/* ================= jkrank: kitRankList / kitRankRow / kitRankHead / kitRankFoot — KIT §86 (kit keeper, review/kit-ico-rank) =================
+/* ================= jkrank: kitRankList / kitRankRow / kitRankHead / kitRankFoot — KIT §87 (kit keeper, review/kit-ico-rank) =================
    KIT REQUEST A + B of review/rank-port-r2 (sweep S3-41 / S3-84): the ONE ranked-list part. A ranking (Bảng vàng "Kiếp" / "Người chơi", any later list
    "place · face · name · numbers · score") is NEVER built from private rows; it is this frame + these rows.
    kitRankRow({rank, face, name, you, sub, cols:[a,b], line, score, unit, mine, cls})
@@ -38396,7 +38396,7 @@ if(typeof globalThis!=="undefined")globalThis.CTM_RANK=CTM_RANK;
    kitRankFoot({label, row, note, btns})        = the own-life strip under a list: small label line ("Ta trên bảng · hạng N trên M"), ONE kitRankRow (mine),
                                                   a small queue note, then a button row (kit .kbtn, wraps; on kv1 the buttons share the width)
    Layout reads html.kv1 (one page: columns folded into the second line, header hidden) / html.kv2 (spread: all columns). No @media (KIT §0).
-   Sample: kit page §86. Used by: jrank (Bảng vàng). */
+   Sample: kit page §87. Used by: jrank (Bảng vàng). */
 const krlEsc=s=>String(s==null?"":s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 function kitRankRow(o){o=o||{};const c=o.cols||[];
  const nm=`<b class="krl-pn">${o.nameH||krlEsc(o.name)}${o.mine&&o.you?` ${kitChip(o.you,"n")}`:""}</b>`;
@@ -38434,7 +38434,7 @@ window.kitRankRow=kitRankRow;window.kitRankHead=kitRankHead;window.kitRankList=k
 :where(.kv1) .krl-row>.krl-c{display:none}:where(.kv1) .krl-row>.krl-pe{display:block;grid-area:pe;font-size:.76rem;color:var(--ink);min-width:0;overflow-wrap:anywhere}
 :where(.kv1) .krl-hd{display:none}:where(.kv1) .krl-btns .kbtn{flex:1 1 0}
 `;document.head.appendChild(st)})();
-try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§86",title:"kitRankList · kitRankRow · kitRankFoot (bảng xếp hạng: hạng · mặt · tên · hai cột · điểm; hàng của ta; dải chân)",html:()=>{
+try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§87",title:"kitRankList · kitRankRow · kitRankFoot (bảng xếp hạng: hạng · mặt · tên · hai cột · điểm; hàng của ta; dải chân)",html:()=>{
  const f=n=>`<span class="md" style="display:block;width:36px;height:36px;border-radius:6px;background:#e6d3ac;text-align:center;line-height:36px">${n}</span>`;
  const R=[{rank:1,face:f("L"),name:"Lan Quý nhân",sub:"Hoàng hậu · Tô Uyển Như",cols:["Hoàng hậu","Thọ chung"],line:"Hoàng hậu · Thọ chung",score:412,unit:"Công danh"},
   {rank:2,face:f("M"),name:"Mai Tần",sub:"Quý phi",cols:["Quý phi","Xuất gia"],line:"Quý phi · Xuất gia",score:356,unit:"Công danh",mine:true,you:"Ta"},
@@ -38551,7 +38551,7 @@ function rkRowO(x,tab,o){o=o||{};const L=tab==="players"?(x.best||{}):x;const mi
  const c1=tab==="players"?[L.n?`${rkEsc(L.p)}`:"",`${x.k} kiếp`]:[rkEsc(L.p),rkEsc(rkEnd(L))];
  const pe=tab==="players"?`${L.n?rkEsc(L.p)+" · ":""}${x.k} kiếp · tổng ${x.t}`:`${rkEsc(L.p)} · ${rkEsc(rkEnd(L))}`;
  return{rank:x.r||"",face:mdH(rkFace(L),"sm"),name:x.pn,you:RK_T.me,mine,cls:o.cls,sub:L.n?`${rkEsc(L.n)} · ${rkEsc(L.o)}`:"Chưa có kiếp nào được ghi",cols:c1.map(v=>v||"—"),line:pe,score:x.s,unit:RK_T.unit.toLowerCase()}}
-/* the ranked list = the kit parts kitRankRow / kitRankHead / kitRankList / kitRankFoot (KIT §86, jkrank.js) */
+/* the ranked list = the kit parts kitRankRow / kitRankHead / kitRankList / kitRankFoot (KIT §87, jkrank.js) */
 function rkRowH(x,tab,o){return kitRankRow(rkRowO(x,tab,o))}
 function rkHeadH(tab){const l=tab==="players"?["Kiếp tốt nhất","Số kiếp"]:["Phẩm cao nhất","Kết cục"];return kitRankHead({name:tab==="players"?"Tên hiệu":"Tên hiệu · thân phận",cols:l,unit:RK_T.unit})}
 /* "Cách tính": a kit card over the board (owner 15/11) — what Công danh is, the points table read from the ONE rule table
@@ -47507,7 +47507,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="68d9506d7e23";window.CTM_BUILD=BUILD;
+const BUILD="9fe6070ec325";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

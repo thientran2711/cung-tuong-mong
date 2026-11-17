@@ -108,7 +108,7 @@ function rkRowO(x,tab,o){o=o||{};const L=tab==="players"?(x.best||{}):x;const mi
  const c1=tab==="players"?[L.n?`${rkEsc(L.p)}`:"",`${x.k} kiếp`]:[rkEsc(L.p),rkEsc(rkEnd(L))];
  const pe=tab==="players"?`${L.n?rkEsc(L.p)+" · ":""}${x.k} kiếp · tổng ${x.t}`:`${rkEsc(L.p)} · ${rkEsc(rkEnd(L))}`;
  return{rank:x.r||"",face:mdH(rkFace(L),"sm"),name:x.pn,you:RK_T.me,mine,cls:o.cls,sub:L.n?`${rkEsc(L.n)} · ${rkEsc(L.o)}`:"Chưa có kiếp nào được ghi",cols:c1.map(v=>v||"—"),line:pe,score:x.s,unit:RK_T.unit.toLowerCase()}}
-/* the ranked list = the kit parts kitRankRow / kitRankHead / kitRankList / kitRankFoot (KIT §86, jkrank.js) */
+/* the ranked list = the kit parts kitRankRow / kitRankHead / kitRankList / kitRankFoot (KIT §87, jkrank.js) */
 function rkRowH(x,tab,o){return kitRankRow(rkRowO(x,tab,o))}
 function rkHeadH(tab){const l=tab==="players"?["Kiếp tốt nhất","Số kiếp"]:["Phẩm cao nhất","Kết cục"];return kitRankHead({name:tab==="players"?"Tên hiệu":"Tên hiệu · thân phận",cols:l,unit:RK_T.unit})}
 /* "Cách tính": a kit card over the board (owner 15/11) — what Công danh is, the points table read from the ONE rule table

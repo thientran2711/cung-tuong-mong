@@ -1,4 +1,4 @@
-/* ================= jkrank: kitRankList / kitRankRow / kitRankHead / kitRankFoot — KIT §86 (kit keeper, review/kit-ico-rank) =================
+/* ================= jkrank: kitRankList / kitRankRow / kitRankHead / kitRankFoot — KIT §87 (kit keeper, review/kit-ico-rank) =================
    KIT REQUEST A + B of review/rank-port-r2 (sweep S3-41 / S3-84): the ONE ranked-list part. A ranking (Bảng vàng "Kiếp" / "Người chơi", any later list
    "place · face · name · numbers · score") is NEVER built from private rows; it is this frame + these rows.
    kitRankRow({rank, face, name, you, sub, cols:[a,b], line, score, unit, mine, cls})
@@ -10,7 +10,7 @@
    kitRankFoot({label, row, note, btns})        = the own-life strip under a list: small label line ("Ta trên bảng · hạng N trên M"), ONE kitRankRow (mine),
                                                   a small queue note, then a button row (kit .kbtn, wraps; on kv1 the buttons share the width)
    Layout reads html.kv1 (one page: columns folded into the second line, header hidden) / html.kv2 (spread: all columns). No @media (KIT §0).
-   Sample: kit page §86. Used by: jrank (Bảng vàng). */
+   Sample: kit page §87. Used by: jrank (Bảng vàng). */
 const krlEsc=s=>String(s==null?"":s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 function kitRankRow(o){o=o||{};const c=o.cols||[];
  const nm=`<b class="krl-pn">${o.nameH||krlEsc(o.name)}${o.mine&&o.you?` ${kitChip(o.you,"n")}`:""}</b>`;
@@ -48,7 +48,7 @@ window.kitRankRow=kitRankRow;window.kitRankHead=kitRankHead;window.kitRankList=k
 :where(.kv1) .krl-row>.krl-c{display:none}:where(.kv1) .krl-row>.krl-pe{display:block;grid-area:pe;font-size:.76rem;color:var(--ink);min-width:0;overflow-wrap:anywhere}
 :where(.kv1) .krl-hd{display:none}:where(.kv1) .krl-btns .kbtn{flex:1 1 0}
 `;document.head.appendChild(st)})();
-try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§86",title:"kitRankList · kitRankRow · kitRankFoot (bảng xếp hạng: hạng · mặt · tên · hai cột · điểm; hàng của ta; dải chân)",html:()=>{
+try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§87",title:"kitRankList · kitRankRow · kitRankFoot (bảng xếp hạng: hạng · mặt · tên · hai cột · điểm; hàng của ta; dải chân)",html:()=>{
  const f=n=>`<span class="md" style="display:block;width:36px;height:36px;border-radius:6px;background:#e6d3ac;text-align:center;line-height:36px">${n}</span>`;
  const R=[{rank:1,face:f("L"),name:"Lan Quý nhân",sub:"Hoàng hậu · Tô Uyển Như",cols:["Hoàng hậu","Thọ chung"],line:"Hoàng hậu · Thọ chung",score:412,unit:"Công danh"},
   {rank:2,face:f("M"),name:"Mai Tần",sub:"Quý phi",cols:["Quý phi","Xuất gia"],line:"Quý phi · Xuất gia",score:356,unit:"Công danh",mine:true,you:"Ta"},

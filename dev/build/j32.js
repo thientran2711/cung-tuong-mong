@@ -33,7 +33,7 @@ function over(h,t,fate,alive){if(S.dead)return"";const live=overAlive(fate,alive
  /* kit sections + kit rows (KIT 9: h4.kpst + kitRows), no boxed panels (owner 15/11). Chain lines "Nhãn: lời" become labelled rows. */
  const chR=ch.map(x=>{const m=String(x).match(/^([^:.]{2,26}):\s*(.+)$/);return m?[m[1],m[2],"t"]:["Nguyên do",x,"t"]});
  const maxR=Math.max(S.rank,S.maxRank||0);
- Q=[{t:"Kiếp này",cls:"end",who:pMe(),h:`<h3>${h}</h3><p>${t}</p>${chR.length?`<div class="kpsec kend-why">${kitRows(chR)}</div>`:""}
+ Q=[{t:"Kiếp này",cls:"end",art:endArt(h,t,fate,live),who:pMe(),h:`<h3>${h}</h3><p>${t}</p>${chR.length?`<div class="kpsec kend-why">${kitRows(chR)}</div>`:""}
   <div class="kpsec kend-life"><h4 class="kpst">Kiếp này</h4>${kitRows([["Thân phận",`${S.name} · ${S.origin.n}`,"t"],["Sống trong cung",`${S.year} năm · ${S.age} tuổi`,"t"],["Phẩm cao nhất",maxR>=7?"Hoàng hậu":RANKS[maxR].n,"t"],["Con cái",`${ms} hoàng tử, ${md} công chúa`,"t"],[live?"Kết cục":"Chết vì",fate,"t"]])}</div>
   <p class="past">${live?"Kiếp này khép lại.":"Chết là hết."} Kiếp sau bắt đầu lại từ đầu, chỉ còn tên trong Sổ luân hồi.</p>`,btn:"Chuyển kiếp",onClose:start}];
  showModal();render();return""}
