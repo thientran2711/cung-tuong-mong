@@ -139,7 +139,7 @@ function knHearRun(v,t,pd){const z=agZ();KN.stat.hear++;if(!t)return"";const tid
  const e=(z.log||[]).find(x=>x.id===tid&&x.w===wk()&&x.b===(S.buoi||0)&&x.pl===pd.pl&&x.k!=="know:hear");if(!e)return"";/* she came too late: nothing there */
  /* her khắc there is taken by this reaction (part 2b agSeeNpc reads it: no second reaction of hers to the same deed) */
  try{const R=agRec();const row=R&&R.P["v"+v.id];if(row&&row[pd.kh])row[pd.kh]=[pd.pl,"ag_see:hear",e.id,"nghe lén"]}catch(x){}
- const harm=knHarmK(e.k);if(roll(knHearO(v))){KN.stat.hearOk++;if(harm)evA(v,t,1);try{noteAdd(t.id,`${v.name} để ý chuyện nàng làm ở ${agPlaceTxt(pd.pl)}`)}catch(x){}return t===S?`${v.name} nghe lén chuyện ngươi làm ở ${agPlaceTxt(pd.pl)}`:""}
+ const harm=knHarmK(e.k);if(roll(knHearO(v))){KN.stat.hearOk++;if(harm)evA(v,t,BAL.ag.ev.one);try{noteAdd(t.id,`${v.name} để ý chuyện nàng làm ở ${agPlaceTxt(pd.pl)}`)}catch(x){}return t===S?`${v.name} nghe lén chuyện ngươi làm ở ${agPlaceTxt(pd.pl)}`:""}
  affAdd(t,v,-BAL.ag.wit.caught);return t===S?`Ngươi bắt gặp ${v.name} đứng nghe lén`:""}
 /* the news reaches them after the buổi's deciders have chosen (the deeds exist only then): a consort still free this buổi (she kept her schedule)
    weighs going to listen against keeping it — the owner's option 1 (OD 17/11 ~15:00Z): re-decide when news comes, not every khắc */
@@ -174,7 +174,7 @@ function knErrWhat(k,t){const w=t?spyWho(t):"";return k==="listen"?`đi nghe ng�
 /* the master hears it (now or late): the gain lands only now */
 function knErrGive(s,m,k,t,late){if(!m||(m!==S&&(!m.alive||m.out)))return;let f="";
  if(k==="listen"&&t){if(s.sid!=null)s.intel=(s.intel||[]).concat([t.id]).slice(-3);if(m===S)try{f=typeof intelLearn==="function"?intelLearn(t,1,{by:s.name,how:"Nghe ngóng"}):""}catch(e){}}
- if(k==="scout"&&t){const n=evA(m,t,1);if(s.sid!=null)s.intel=(s.intel||[]).concat([t.id]).slice(-3);if(m===S){let ff="";try{ff=typeof intelLearn==="function"?intelLearn(t,2,{by:s.name,how:"Tự đi dò la"}):""}catch(e){}f=(n?", nắm được chứng cứ":"")+(ff?": "+ff:"")}}
+ if(k==="scout"&&t){const n=evA(m,t,BAL.ag.ev.one);if(s.sid!=null)s.intel=(s.intel||[]).concat([t.id]).slice(-3);if(m===S){let ff="";try{ff=typeof intelLearn==="function"?intelLearn(t,2,{by:s.name,how:"Tự đi dò la"}):""}catch(e){}f=(n?", nắm được chứng cứ":"")+(ff?": "+ff:"")}}
  if(m===S)knBao(s,m,knErrWhat(k,t)+(k==="listen"&&f?": "+f:k==="scout"&&f?f:""),t?palaceOf(t):null,late)}
 /* she sells it: the one who bought her hears the truth about her master's errand (the scouted consort learns she is watched) */
 function knErrSell(s,m,k,t){const b=byKey(s.spyFor);if(!b)return;KN.stat.sold=(KN.stat.sold||0)+1;
@@ -194,7 +194,7 @@ if(typeof AS_DO==="object"){AS_DO.listen=(s,m,o,ok)=>knListenDo(s,m,ok);AS_DO.sc
 function knWatchLand(p){if(!knOn()||!p||!knHarmK(p.k)||p.vid==null)return;const doer=RV(p.vid);if(!doer)return;const hid="land:"+agKey()+":"+p.vid+":"+p.k+":"+p.kh;const h={k:p.pl,id:"deed"};
  for(const m of consorts()){if(!m||m===doer||(m!==S&&(!m.alive||m.out)))continue;if(palaceOf(m)!==p.pl)continue;
   for(const s of knStaff(m)){const kk=knSlotK(s);const here=/:watch$/.test(kk)||knAt("s"+s.sid,p.kh)===p.pl;if(!here)continue;
-   const c=knTell(s,m,hid);if(c!=="tell")continue;evA(m,doer,1);if(m===S)knBao(s,m,`thấy người của ${doer.name} lén lút ở cung ${m===S?"ta":NM(m)}: ${p.act||"giở trò"}`,p.pl);break}}
+   const c=knTell(s,m,hid);if(c!=="tell")continue;evA(m,doer,BAL.ag.ev.one);if(m===S)knBao(s,m,`thấy người của ${doer.name} lén lút ở cung ${m===S?"ta":NM(m)}: ${p.act||"giở trò"}`,p.pl);break}}
  /* the player maid keeping watch at her master's palace */
  try{if(typeof isSrv==="function"&&isSrv()&&S.srv&&S.srv.watch===agKey()){const m=srvM();if(m&&m!==doer&&palaceOf(m)===p.pl){S.srv.intel=(S.srv.intel||[]).concat([doer.id]).slice(-3);log(`Ngươi canh cửa cung ${m.name}, thấy người của ${doer.name} lén lút: ${p.act||"giở trò"}.`)}}}catch(e){}}
 /* the player maid's cards (same rows, same run) */
@@ -205,7 +205,7 @@ function knSrvCards(m){if(!m||!knOn())return[];const X=[];const once=k=>typeof i
   go:()=>{const v=knListenPick(m);KN.stat.listen++;if(v){S.srv.intel=(S.srv.intel||[]).concat([v.id]).slice(-3);log(`Ngươi nghe ngóng được chuyện về ${v.name}, chờ dịp bẩm ${m.name}.`)}srvMerit(SRVA.listen.mp)}});
  const t=knScoutT(m);if(t&&!once("scout"))X.push({n:"Tự đi dò la cho chủ",t:`Lén dò la ${t.name}, người đang có chuyện với ${m.name}.`,k:SRVA.scout.k,c:{},o:spyO(m,t,knMeAg()),w:SRVA.scout.w,l:SRVA.scout.l,
   x:`thành: ${m.name} nắm chứng cứ về ${t.name} +1 nếu nàng từng làm điều sai · hỏng: nàng đoán ra, oán ${m.name}`,once:"scout",
-  go:()=>{KN.stat.scout++;KN.stat.scoutOk++;evA(m,t,1);S.srv.intel=(S.srv.intel||[]).concat([t.id]).slice(-3);srvMerit(SRVA.scout.mp)},fail:()=>{KN.stat.scout++;if(roll(knB().scout.caught)){affAdd(t,m,-knB().scout.oan);log(`${t.name} bắt gặp ngươi lén dò la, e rằng nàng đã đoán ra.`)}else log(`Ngươi có đi dò la ${t.name} nhưng không dò được gì.`)}});
+  go:()=>{KN.stat.scout++;KN.stat.scoutOk++;evA(m,t,BAL.ag.ev.one);S.srv.intel=(S.srv.intel||[]).concat([t.id]).slice(-3);srvMerit(SRVA.scout.mp)},fail:()=>{KN.stat.scout++;if(roll(knB().scout.caught)){affAdd(t,m,-knB().scout.oan);log(`${t.name} bắt gặp ngươi lén dò la, e rằng nàng đã đoán ra.`)}else log(`Ngươi có đi dò la ${t.name} nhưng không dò được gì.`)}});
  if(!once("watch"))X.push({n:"Canh chừng cung chủ",t:`Ở lại canh cửa cung ${m.name} suốt buổi này.`,k:SRVA.watch.k,c:{},o:100,w:SRVA.watch.w,x:"kẻ nào đến giở trò ở cung chủ buổi này, ngươi đều thấy",once:"watch",
   go:()=>{KN.stat.watch++;S.srv.watch=agKey();srvMerit(SRVA.watch.mp)}});
  return X}

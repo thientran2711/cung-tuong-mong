@@ -344,14 +344,14 @@ function cnvOrdOpts(a,m,t,obey){const mal=m.malice||40;const q=queenP();const wh
   {id:"refuse",n:"Từ chối",tag:"help",fx:{tin:mal>=60?-15:-10},x:`kèm: bị phạt quỳ đá vụn, Sức -20: ${chanceW(mal/2)}`,go:()=>{if(!roll(mal/2))return"";stfAp(a,{suc:-20});
     if(a===S){log(`${m.name} sai người phạt ngươi quỳ trên đá vụn. Sức -20.`);if(S.suc<=0)die("Quỳ phạt đến kiệt sức mà chết");return""}if((a.suc||0)<=0&&typeof asOut==="function")asOut(a,"dead");return""}},
   {id:"tell",n:`Mật báo cho ${who.queen?"Hoàng hậu":who.name}`,tag:"flee",fx:{bac:20,danh:2},x:`${who.name} nắm 2 chứng cứ của ${m.name} · chủ biết thì ngươi bị đánh chết hoặc đày Tân Giả khố`,
-   go:()=>{/*evok: mistress schemed (sec>0)*/const d=evA(who,m,2);if(a===S){S.srv.betray={by:who.id};return `Ngươi lén báo cho ${who.name} mưu của ${m.name}.`}a.betray={by:key(who)};return who===S&&d?`${a.name}, người hầu của ${m.name}, lén đến mật báo mưu của chủ: chứng cứ +${d}.`:""}}]}
+   go:()=>{/*evok: mistress schemed (sec>0)*/const d=evA(who,m,BAL.ag.ev.two);if(a===S){S.srv.betray={by:who.id};return `Ngươi lén báo cho ${who.name} mưu của ${m.name}.`}a.betray={by:key(who)};return who===S&&d?`${a.name}, người hầu của ${m.name}, lén đến mật báo mưu của chủ: chứng cứ +${d}.`:""}}]}
 /* reviewer r2 (review/coop-b1b5-r2, ONE CORE OD:L1267): the tai mắt terms, one text for every bribe card (solo j42 + co-op jcoopworld); pay / Chủ tin from BAL.coopBribe */
 function cnvSpyX(m,noPay){return `${noPay?"":"mỗi tháng Bạc +8 · kèm: "}mỗi tháng chủ phát hiện: ${chanceW(nv(m,"spyFind"))}; khi ấy bị đánh chết: ${chanceW(30)}, không thì Tân Giả khố 10 tuần`}
 PEND.cnvBribe=pp=>{const m=srvM(),v=RV(pp.r);if(!isSrv()||!m||!v||!v.alive)return null;
  return{t:`<p>Một thái giám của ${v.name} chặn ngươi ở hành lang, dúi vào tay ngươi một túi bạc: “Chủ tử nhà ta muốn biết chuyện trong cung ${m.name}.”</p>`,who:pv(v),o:cnvPend(S,cnvBribeOpts(S,v,m,BAL.coopBribe.pay))}};
 function cnvBribeOpts(a,v,m,pay){return [
   {id:"take",n:"Nhận bạc, làm tai mắt",tag:"bribe",fx:{bac:pay},x:a===S?cnvSpyX(m):"",go:()=>{if(a===S){ap(v,{bac:-pay});deedAdd(v,"sbribe",null,1,`mua chuộc người hầu của ${m.name}`);S.srv.spyFor=v.id}else a.spyFor=key(v);return""}},
-  {id:"tell",n:"Từ chối, bẩm chủ",tag:"help",fx:{tin:BAL.coopBribe.tin},x:`${m.name} nắm 1 chứng cứ của ${v.name}`,go:()=>{if(a===S)deedAdd(v,"sbribe",null,1,`mua chuộc người hầu của ${m.name}`);/*evok: bribe deed written just before (bribeServ: jtruth)*/evA(m,v,1);relAdd(m,v,-5);return""}},
+  {id:"tell",n:"Từ chối, bẩm chủ",tag:"help",fx:{tin:BAL.coopBribe.tin},x:`${m.name} nắm 1 chứng cứ của ${v.name}`,go:()=>{if(a===S)deedAdd(v,"sbribe",null,1,`mua chuộc người hầu của ${m.name}`);/*evok: bribe deed written just before (bribeServ: jtruth)*/evA(m,v,BAL.ag.ev.one);relAdd(m,v,-BAL.ag.ev.rel);return""}},
   {id:"quiet",n:"Từ chối, im lặng",tag:"work",fx:{},x:""}]}
 PEND.cnvFrame=pp=>{const s=servById(pp.sid),m=srvM();if(!isSrv()||!s||!m)return null;const fr=srvFriendList().length;const item=pick(["cây trâm vàng","chiếc vòng ngọc","hộp phấn ngự ban","túi hương thêu chỉ vàng"]);
  return{t:`<p>${s.name} (${srkName(s)}) tố với ${m.name} rằng ngươi lấy trộm ${item}.</p>${fr?`<p class="past">${fr} người bạn sẽ làm chứng cho ngươi.</p>`:""}`,who:pServ(s),o:cnvPend(S,cnvFrameOpts(S,s,m))}};

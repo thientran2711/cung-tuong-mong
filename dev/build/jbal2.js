@@ -1021,3 +1021,6 @@ BAL.world={on:1,maxOpen:2,pull:18,pullMax:80,
  tho:{emp:[40,10],th:[60,10],len:1,kho:6,mood:0,big:60,mid:20,sungBig:5,sungMid:2,thBig:5,make:[35,2],makeSuc:10,npcGift:.15,npcSung:[1,4],place:{thu:2,tn:1.5},act:{art:1.5,social:1.3,greet:1.3},force:[{b:1,pl:"$",deed:"gift",why:"Dự yến mừng thọ",g:["consort","queen"]}]},
  sao:{p:1.2,len:1,cd:36,mood:2,place:{cnh:1.8},act:{greet:1.4,scheme:1.3,art:.6}},
  xa:{minM:3,npcP:60,kho:5,len:1,cd:36,afterDis:50,act:{help:1.3,harm:.6}}};
+/* AG-ALL-2b merge (ONE CORE): evidence a deed gives / clears where the player and NPC share one code path (j2 cx2 cards, j9 help, j10 servants,
+   j42 dilemma builders, jcmaid, jpromsv, jeitem): one = 1 piece, two = 2 pieces (a Mật báo), all = clear every piece; rel = liking lost by a bribe told to the master */
+Object.assign(BAL.ag,{ev:{one:1,two:2,all:-99,rel:5}});

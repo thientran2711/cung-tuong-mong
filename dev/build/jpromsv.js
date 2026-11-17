@@ -56,7 +56,7 @@ function spLeaveOpts(o,s){const B=BAL.sp,x=spLvS(s),v=spGoTo(o,x);const me=o===S
     if(s===S){apply({bac:keep});return `${o.name} tăng tiền thưởng giữ ngươi lại: Bạc +${keep}, Chủ tin +${B.keepGain}.`}s.bac=(s.bac||0)+keep;s.proud=Math.max(s.proud||0,S.turn)+B.keepMo;return me?`Ngươi tăng tiền thưởng giữ ${s.name} lại.`:""}},
   {id:"demote",n:"Giáng một bậc, giữ kỷ cương",tag:"punish",v,lock:rk<1,go:()=>{others.forEach(y=>y.loyal=cl(y.loyal+B.demoteOthers,0,100));spLvLoy(s,-B.demoteLoy);
     if(s===S){S.srv.rk=Math.max(0,S.srv.rk-1);return `${o.name} không cho đi, giáng ngươi xuống ${SRK.maid[S.srv.rk]}. Chủ tin -${B.demoteLoy}.`}s.rk=rk-1;s.proud=0;return me?`Ngươi giáng ${s.name} xuống ${srkName(s)}.`:""}},
-  {id:"let",n:"Cho đi",tag:"work",v,go:()=>{others.forEach(y=>y.loyal=cl(y.loyal+B.letOthers,0,100));if(v&&typeof evA==="function")evA(v,o,1);
+  {id:"let",n:"Cho đi",tag:"work",v,go:()=>{others.forEach(y=>y.loyal=cl(y.loyal+B.letOthers,0,100));if(v&&typeof evA==="function")evA(v,o,BAL.ag.ev.one);
     if(s===S){srvReassign(`${o.name} cho ngươi đi${v?"":"; Nội vụ phủ chia ngươi về cung khác"}.`,v||undefined);return""}spMove(o,s,v);return me?`${s.name} rời cung ngươi${v?`, sang hầu ${tsNm(v)}`:", về Nội vụ phủ"}.`:""}}]}
 /* s asks o: o = the player → her card; an NPC master → her own choice (loop on), else the old move (a higher palace with room, else nothing) */
 function spAsk(o,s){if(!o||!s)return"";if(s===S)S.srv.lvCd=S.turn+BAL.ag.stf2.leave.cd;else s.lvCd=S.turn+BAL.ag.stf2.leave.cd;
