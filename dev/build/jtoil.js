@@ -280,11 +280,11 @@ function toilOpen(){if(!S||S.dead)return;if(window.__bot){toilAuto();return}KG82
 /* (a) CHỌN Y PHỤC — the bag (kitInvGrid, the same items as Tư trang) + the worn slots + her portrait in the chosen dress */
 const TOIL_SL=[["tram","Cài tóc","tramngoc"],["y","Y phục","luahang"],["wrist","Đeo tay","vongngoc"],["waist","Đeo eo","ngocboi"],["scent","Túi thơm","tuithom"]];
 function toilWorn(sl){if(sl==="tram"||sl==="y"){const e=wdOf(S)[sl],w=wdItem(e);return w?{src:w.icon,name:w.n,grade:w.g|0,lux:wdLux(w.k),tip:w.n}:null}
- const e=(S.inv||[]).find(x=>x&&x.w&&!x.h&&IT[x.k]&&IT[x.k].sl===sl);if(!e)return null;let a=null;try{a=itemArt(e.k)}catch(x){}return{src:a?a.src:keqArt(e.k),name:IT[e.k].n,grade:a?a.grade|0:0,lux:luxVal(e.k),tip:IT[e.k].n}}
+ const e=(S.inv||[]).find(x=>x&&x.w&&!x.h&&IT[x.k]&&itm(x.k).sl===sl);if(!e)return null;let a=null;try{a=itemArt(e.k)}catch(x){}return{src:a?a.src:keqArt(e.k),name:itm(e.k).n,grade:a?a.grade|0:0,lux:luxVal(e.k),tip:itm(e.k).n}}
 function toilPorAt(rank){const f0=figTierOf;try{figTierOf=function(w){return w===S?rank:f0.apply(this,arguments)};return figFor(S,"por")}catch(e){return""}finally{figTierOf=f0}}
 function toilPor(){let P=0;try{const it=wdItem(wdOf(S).y);P=it?it.P:0}catch(e){}const rank=P>=1?Math.min(7,P-1):S.rank;const me=pMe();const src=toilPorAt(rank)||me.src;return{src,rank}}
 function toilDressUI(){const box=kg82Box();if(!box)return;box.hidden=false;const st=TOIL.st;toilMkPre();
- const items=kinvItems().filter(x=>x&&x.g&&(WD_ITEMS[x.g.k]?x.g.wdPawn==null:(IT[x.g.k]&&["wrist","waist","scent"].includes(IT[x.g.k].sl)))).map(x=>Object.assign({},x,{cat:WD_ITEMS[x.g.k]?(WD_ITEMS[x.g.k].sl==="tram"?"tram":"y"):"trang"}));
+ const items=kinvItems().filter(x=>x&&x.g&&(WD_ITEMS[x.g.k]?x.g.wdPawn==null:(IT[x.g.k]&&["wrist","waist","scent"].includes(itm(x.g.k).sl)))).map(x=>Object.assign({},x,{cat:WD_ITEMS[x.g.k]?(WD_ITEMS[x.g.k].sl==="tram"?"tram":"y"):"trang"}));
  const sel=toilSelFind(items);items.forEach(x=>{x.sel=!!(sel&&sel.x===x)});
  const tabs=[{k:"tram",label:"Trâm cài"},{k:"y",label:"Y phục"},{k:"trang",label:"Trang sức"}];
  const slots=TOIL_SL.map(([k,label,gk])=>({k,label,item:toilWorn(k),ghost:keqArt(gk)||"",sel:!!(sel&&sel.sl===k)}));const x=luxOf(S),wb=wearBonus(S);
@@ -308,7 +308,7 @@ function toilSelFind(items){const s=TOIL.st&&TOIL.st.sel;if(!s)return null;
  if(s.sl){const it=toilWorn(s.sl);return it?{sl:s.sl}:null}
  const x=items.find(y=>y.g&&y.g.k===s.k&&!!y.g.wdSlot===!!s.wdSlot&&(s.wdSlot||!!y.g.w===!!s.w))||null;return x?{x}:null}
 function toilRefOfSel(sel){if(!sel)return null;if(sel.x)return{g:sel.x.g};const sl=sel.sl;if(sl==="tram"||sl==="y")return{wdSlot:sl};
- const i=(S.inv||[]).findIndex(e=>e&&e.w&&!e.h&&IT[e.k]&&IT[e.k].sl===sl);return i>=0?{ix:i}:null}
+ const i=(S.inv||[]).findIndex(e=>e&&e.w&&!e.h&&IT[e.k]&&itm(e.k).sl===sl);return i>=0?{ix:i}:null}
 function toilDetHTML(sel){const ref=toilRefOfSel(sel);if(!ref)return `<p class="past">Chạm một món trong rương hay một ô đang mặc để xem món ấy; mặc, cài hay tháo bằng nút dưới thông tin. Thay đồ ở đây không tốn thêm khắc.</p>`;
  const R=kitItemRef(ref);if(!R)return"";const sl=toilSlotOf(R.k);const slN=TOIL_SL.find(z=>z[0]===(sl==="hair"?"tram":sl));const fx=R.wd?plainFx(WD_ITEMS[R.k].w):kinvPlain(R.it&&R.it.w);
  let b;if(R.worn){b=sl==="y"?pbtn(`data-toilact="off"`,"Tháo","thành: cất vào rương","y phục chỉ thay: chọn bộ khác trong rương rồi chạm Mặc"):pbtn(`data-toilact="off"`,"Tháo",`thành: cất vào rương, ô ${slN?slN[1]:""} để trống`,"")}

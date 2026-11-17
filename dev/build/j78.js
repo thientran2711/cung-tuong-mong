@@ -34,7 +34,7 @@ function j78facts(v){const F=[];const W=j78Who(v);
  const me=(v.evm&&v.evm.me)||0;if(me>0)F.push({k:"evme",kind:"evme",pri:90,txt:`${W} đang nắm ${me} chứng cứ về ngươi${me>=accNeed(S)?", đủ để tố giác ngươi":""}.`});
  try{const m=v.affair&&manById(v.affair);if(m)F.push({k:"affair",kind:"secret",pri:85,txt:`${W} lén lút tư thông với ${m.name}.`})}catch(e){}
  if(v.preg&&v.hidden)F.push({k:"preg",kind:"secret",pri:80,txt:`${W} đang giấu thai, đã được ${v.preg} tháng.`});
- const bad=(v.inv||[]).filter(e=>e.t||(IT[e.k]&&(IT[e.k].il||IT[e.k].mat)));if(bad.length)F.push({k:"items",kind:"secret",pri:75,txt:`Trong rương ${j78who(v)} có ${bad.map(e=>iname(e)+(e.t&&TAINT[e.t]?` (${TAINT[e.t].n})`:"")).join(", ")}.`});
+ const bad=(v.inv||[]).filter(e=>e.t||(IT[e.k]&&(itm(e.k).il||itm(e.k).mat)));if(bad.length)F.push({k:"items",kind:"secret",pri:75,txt:`Trong rương ${j78who(v)} có ${bad.map(e=>iname(e)+(e.t&&TAINT[e.t]?` (${TAINT[e.t].n})`:"")).join(", ")}.`});
  S.intel=S.intel||{};const known=new Set((S.intel[v.id]||[]).map(x=>x.k));
  const dd=j78deeds(v).filter(d=>!known.has("deed:"+d.w+":"+d.k+":"+d.t));if(dd.length){const d=dd[0];F.push({k:"deed:"+d.w+":"+d.k+":"+d.t,kind:"deed",pri:d.t==="me"?78:70,txt:j78deedTxt(v,d)+"."})}
  const O=others(v).filter(x=>x===S||x.alive&&!x.out);
@@ -64,8 +64,8 @@ function j78proof(v){/* what a new piece proves: the most telling real thing not
  if(fresh)return mk(fresh);
  try{const m=v.affair&&manById(v.affair);if(m&&!have.has("affair"))return{proves:`${j78Who(v)} lén lút tư thông với ${m.name}`,ref:"affair"}}catch(e){}
  if(v.plan&&ACT[v.plan.k]&&!have.has("plan:"+v.plan.due)){const t=byKey(v.plan.t);if(t)return{proves:`${j78Who(v)} chuẩn bị ${j78act(v.plan.k,t)}`,ref:"plan:"+v.plan.due,aim:v.plan.t}}
- const bad=(v.inv||[]).filter(e=>e.t||(IT[e.k]&&(IT[e.k].il||IT[e.k].mat)));if(bad.length&&!have.has("items"))return{proves:`${j78Who(v)} giấu trong rương ${bad.map(iname).join(", ")}`,ref:"items"};
- const vp=vpItems(v);if(vp.length&&!have.has("vp"))return{proves:`${j78Who(v)} dùng đồ quá phẩm: ${vp.map(e=>IT[e.k].n).join(", ")}`,ref:"vp"};
+ const bad=(v.inv||[]).filter(e=>e.t||(IT[e.k]&&(itm(e.k).il||itm(e.k).mat)));if(bad.length&&!have.has("items"))return{proves:`${j78Who(v)} giấu trong rương ${bad.map(iname).join(", ")}`,ref:"items"};
+ const vp=vpItems(v);if(vp.length&&!have.has("vp"))return{proves:`${j78Who(v)} dùng đồ quá phẩm: ${vp.map(e=>itm(e.k).n).join(", ")}`,ref:"vp"};
  if(dd.length)return mk(dd[0]);
  const O=others(v).filter(x=>x===S||x.alive&&!x.out).map(x=>[x,hostility(v,x)]).filter(x=>x[1]>0).sort((a,b)=>b[1]-a[1]);
  const h=O.find(x=>!have.has("talk:"+key(x[0])));if(h)return{proves:`lời ${j78who(v)} nói xấu ${j78who(h[0])} sau lưng`,ref:"talk:"+key(h[0]),aim:key(h[0])};
