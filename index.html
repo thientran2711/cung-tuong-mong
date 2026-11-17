@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"5c0e8493+","t":"2026-11-17T00:15Z","c":"balance-core: measuring scripts into the repo (probe, fast NPC loop, ladder sim, sens-bot summary) for the successor","b":"e467f182b5eb","h":[{"s":"7a18d957","t":"2026-11-16T22:44Z","c":"review-diemtrang-fx-r1 report"},{"s":"afe2bcbc","t":"2026-11-16T22:25Z","c":"review r1: KIT 84.1a note + report"},{"s":"dea1d445+","t":"2026-11-16T21:32Z","c":"golive lag-play-2: CHANGE line + site rebuilt"},{"s":"674f3af4","t":"2026-11-16T21:21Z","c":"Chơi cùng bạn: bạn chơi chung chưa gặp mặt nay hiện tên gọi chung “Hảo hữu của ta” ở mọi nơi, không còn ẩn thành dấu hỏi."},{"s":"923567d5+","t":"2026-11-16T21:03Z","c":"Hình nhân vật: hết vệt xám ở cổ và viền tối quanh người."},{"s":"59812a63+","t":"2026-11-16T20:41Z","c":"Khung chung: khoảng cách đều nhau ở sổ tuần và thẻ thân phận; hàng sổ gọn, thẻ lật không đè chữ."},{"s":"ab12d6fc","t":"2026-11-16T20:53Z","c":"Tuyết và đom đóm mới, mượt hơn; nền tranh không còn vẽ lại mỗi khung hình."},{"s":"8adfd886+","t":"2026-11-16T20:33Z","c":"Tư trang: các trang đều nhau, ô đồ đeo gọn trên Fold và iPad."},{"s":"b77d3250+","t":"2026-11-16T20:20Z","c":"Chơi cùng bạn: lời đáp Kỳ nguyệt sự của bạn đến kịp trước khi rút thẻ đêm; ghế đã đủ người báo gọn một lần."},{"s":"4a43ded3","t":"2026-11-16T20:23Z","c":"Tranh sủng đêm: NPC giành đêm theo luật chung, cả khi chơi chung."}]};
+window.CTM_BI={"s":"c4f4480c+","t":"2026-11-17T00:20Z","c":"balance-core r2: F2 test (NPC uses her own best art), F5 whole bậc×N family to artO/artOE/BAL, F8 rule text prints BAL.art.emp/flipX, F9 Tô…","b":"92c64131ee2e","h":[{"s":"7a18d957","t":"2026-11-16T22:44Z","c":"review-diemtrang-fx-r1 report"},{"s":"afe2bcbc","t":"2026-11-16T22:25Z","c":"review r1: KIT 84.1a note + report"},{"s":"dea1d445+","t":"2026-11-16T21:32Z","c":"golive lag-play-2: CHANGE line + site rebuilt"},{"s":"674f3af4","t":"2026-11-16T21:21Z","c":"Chơi cùng bạn: bạn chơi chung chưa gặp mặt nay hiện tên gọi chung “Hảo hữu của ta” ở mọi nơi, không còn ẩn thành dấu hỏi."},{"s":"923567d5+","t":"2026-11-16T21:03Z","c":"Hình nhân vật: hết vệt xám ở cổ và viền tối quanh người."},{"s":"59812a63+","t":"2026-11-16T20:41Z","c":"Khung chung: khoảng cách đều nhau ở sổ tuần và thẻ thân phận; hàng sổ gọn, thẻ lật không đè chữ."},{"s":"ab12d6fc","t":"2026-11-16T20:53Z","c":"Tuyết và đom đóm mới, mượt hơn; nền tranh không còn vẽ lại mỗi khung hình."},{"s":"8adfd886+","t":"2026-11-16T20:33Z","c":"Tư trang: các trang đều nhau, ô đồ đeo gọn trên Fold và iPad."},{"s":"b77d3250+","t":"2026-11-16T20:20Z","c":"Chơi cùng bạn: lời đáp Kỳ nguyệt sự của bạn đến kịp trước khi rút thẻ đêm; ghế đã đủ người báo gọn một lần."},{"s":"4a43ded3","t":"2026-11-16T20:23Z","c":"Tranh sủng đêm: NPC giành đêm theo luật chung, cả khi chơi chung."}]};
 /* KBOOT — BOOT COVER (owner 15/11 "Khi vừa bấm vào game, có chừng ít hơn 1 giây hiện khung này"; KIT §14.1).
    Before: while the 4 MB page parsed, the browser painted the bare static markup of p1.html (HUD box, a vertical stat label list, empty
    panels, the old 11-tab bar) for ~1 s on a warm open and many seconds on a cold one, before any kit CSS/JS existed.
@@ -1032,8 +1032,8 @@ function deal(){
  if(ed.length){const k=ed[0],g=4+Math.round(S.tai/20);X.push({n:`Dạy dỗ ${k.sex==="m"?"hoàng tử":"công chúa"}`,t:`Tự tay dạy ${k.name} chữ nghĩa, lễ nghi.`,c:{suc:-10},o:100,w:{},x:`Tài ${k.name} +${g}`,go:()=>{k.tal=cl(k.tal+g,0,100)}})}
  if(live.length){const k=live.slice().sort((a,b)=>a.fond-b.fond)[0];X.push({n:"Đưa con đến thỉnh an Hoàng thượng",t:`Dắt ${k.name} đến Dưỡng Hòa điện.`,c:{suc:-5},o:od(70+S.sung/10+mm()),w:{sung:2},l:{},x:`Hoàng thượng thương ${k.name} +8`,go:()=>{k.fond=cl(k.fond+8,0,100)}})}
  const sick=live.filter(k=>k.hp<70).sort((a,b)=>a.hp-b.hp)[0];
- if(sick&&S.arts.y>=4)X.push({n:"Chữa bệnh cho con",t:`${sick.name} đang yếu, ngươi tự bốc thuốc.`,c:{suc:-10},o:100,w:{},x:`Sức khỏe ${sick.name} +30`,go:()=>{sick.hp=Math.min(100,sick.hp+30)}});
- if(S.preg&&!S.fake)X.push(S.arts.y>=4?{n:"Tự bào chế thuốc an thai",t:"Ngươi tự sắc thuốc, không ai nhúng tay được.",c:{suc:-5},o:100,w:{},x:"tháng này nguy cơ sảy thai giảm một nửa",go:()=>S.anthai=1}
+ if(sick&&S.arts.y>=BAL.art.gate.yCure)X.push({n:"Chữa bệnh cho con",t:`${sick.name} đang yếu, ngươi tự bốc thuốc.`,c:{suc:-10},o:100,w:{},x:`Sức khỏe ${sick.name} +30`,go:()=>{sick.hp=Math.min(100,sick.hp+30)}});
+ if(S.preg&&!S.fake)X.push(S.arts.y>=BAL.art.gate.yCure?{n:"Tự bào chế thuốc an thai",t:"Ngươi tự sắc thuốc, không ai nhúng tay được.",c:{suc:-5},o:100,w:{},x:"tháng này nguy cơ sảy thai giảm một nửa",go:()=>S.anthai=1}
    :{n:"An thai",t:"Nằm nghỉ, uống thuốc an thai.",c:{bac:-20},o:100,w:{suc:10},x:"tháng này nguy cơ sảy thai giảm một nửa",go:()=>S.anthai=1});
  if(S.preg&&S.hidden&&S.preg<=3)X.push({n:"Báo tin có thai",t:"Đang giấu thai. Báo tin thì được sủng ái, nhưng kẻ ác cũng biết.",c:{},o:100,w:{sung:BAL.tw.g.ann[0],th:BAL.tw.g.ann[1]},x:`kèm: mọi phi tần ghen +${BAL.tw.g.ann[2]}, ai cũng biết ngươi mang thai`,go:()=>{S.hidden=false;ghenAll(BAL.tw.g.ann[2])}});
  const s=STORY[S.origin.k];if(!S.st.done&&s.acts)X.push(...s.acts());
@@ -1379,7 +1379,7 @@ thd:{t:"Tài nữ nhà nho",n:3,goal:"Thơ ngươi sẽ làm rạng danh cha. Đ
  init(){S.st.stu="Hàn lâm "+pick(SURN)+" "+pick(MALEN);S.st.frames=0;S.st.title=0},
  hint:()=>["Luyện Thi tới bậc 2 hoặc Tài 60","Dự thi Tài nữ (Thi bậc 3 hoặc Tài 70)","Xin khắc in sách của cha (Danh 40)"][S.st.step]||"",
  month(){const st=S.st;
-  if(st.step===0&&(S.arts.thi>=2||S.tai>=60)){st.step=1;apply({danh:3});return `Thơ ngươi truyền ra ngoài cung. ${st.stu}, học trò cũ của cha ngươi, đem bình khắp kinh thành. Danh +3. `}
+  if(st.step===0&&(S.arts.thi>=BAL.art.gate.thiFame||S.tai>=60)){st.step=1;apply({danh:3});return `Thơ ngươi truyền ra ngoài cung. ${st.stu}, học trò cũ của cha ngươi, đem bình khắp kinh thành. Danh +3. `}
   if(st.step>=1&&roll(10)){const p=liveRivals(false);if(p.length){const v=pick(p),o1=od(30+S.tai/2+artOE(S,"thi")),o2=od(60);
    return setDil(mkP("thd1",{v:v.id,o1,o2}))}}
   return""},
@@ -18235,6 +18235,7 @@ BAL.art={tier:[0,10,25,45,70,100],nm:["Chưa thạo","Nhập môn","Thuần th�
  flipX:2 /* Mê sắc: × of Sắc and Vũ in the card-flip chance (j8 nightCh) */,
  score:2.5 /* contest score per odds point (khuê các festival kcFest: score ≥ 60 first, ≥ 40 praised) */,
  fee:[5,5] /* teacher fee = fee[0] + bậc × fee[1] Bạc (artFee) */,
+ gate:{yCure:3,thiFame:3} /* course gates moved with the slower ladder (report §F6 table): self-made medicine for a child / an thai at Tinh thông (was bậc 4, ~10 lessons; Xuất chúng now ≥ 1 year); "Thơ ngươi truyền ra ngoài cung" at Tinh thông (Thuần thục = a thầy đồ's daughter at entry) */,
  fx:{q:.7,cong:.2,hanh:3,gift:{hoa:.5,theu:.4}} /* per POINT of a course: handmade quality q × points (+ Công × cong), gift bonus × points; hanh = Đức per bậc of Hạnh (monthly) */};
 /* growth of the trained abilities (Sắc, Tài, Tâm cơ): every gain is × mul[band] where band = how many of band[] the value has passed
    (0–39 ×1 · 40–59 ×.5 · 60–79 ×.25 · 80+ ×.1); the same for her and every NPC; fractions roll (expected value).
@@ -43285,10 +43286,10 @@ const AD_ACTNAME={"Bỏ độc vào trà nàng":"poison","Bỏ xạ hương vào
  const u0=typeof used!=="undefined"?used:0,l0=S?S.logSeq||0:0;const r=t0.apply(this,arguments);
  try{if(p&&a&&!a.open){const n=adDoorOfPop(p.kind,a.n);if(n&&((typeof used!=="undefined"&&used!==u0)||(S.logSeq||0)!==l0))adDoorMark(n)}}catch(e){}return r}})();
 /* ---------- 3. Hoàng tự: "Chữa bệnh cho con" moved from Hành sự (Y thuật ≥4, Sức -10, Sức khỏe con +30) ---------- */
-if(typeof kidActs==="function"){const k0=kidActs;kidActs=function(k){const L=k0.apply(this,arguments);try{if(k&&k.alive&&S.arts&&S.arts.y>=4&&k.hp<70&&!adSrv()){const t2=whyTime(2);
+if(typeof kidActs==="function"){const k0=kidActs;kidActs=function(k){const L=k0.apply(this,arguments);try{if(k&&k.alive&&S.arts&&S.arts.y>=BAL.art.gate.yCure&&k.hp<70&&!adSrv()){const t2=whyTime(2);
   L.push(pbtn(`data-kid="heal" data-kn="${k.name}"`,"Tự bốc thuốc cho con",`Chắc chắn · tốn: 2 khắc, Sức -10 · thành: Sức khỏe con +30 (Y thuật của ngươi)`,t2||(S.suc<15?"thiếu Sức":"")))}}catch(e){}return L}}
 if(typeof kidAct==="function"){const k0=kidAct;kidAct=function(a,name){if(a!=="heal")return k0.apply(this,arguments);const k=S.kids.find(x=>x.name===name&&x.alive);
- if(!k||S.dead||Q.length||!can(2)||S.suc<15||!(S.arts.y>=4))return;const b=rsnap();spend(2);apply({suc:-10});k.hp=Math.min(100,k.hp+30);log(`Ngươi tự bốc thuốc cho ${k.name}: Sức khỏe con +30.`);resultShow("Việc của con",b,"sure");render()}}
+ if(!k||S.dead||Q.length||!can(2)||S.suc<15||!(S.arts.y>=BAL.art.gate.yCure))return;const b=rsnap();spend(2);apply({suc:-10});k.hp=Math.min(100,k.hp+30);log(`Ngươi tự bốc thuốc cho ${k.name}: Sức khỏe con +30.`);resultShow("Việc của con",b,"sure");render()}}
 /* ---------- 4. grey card tap = the reason (kit popover). A disabled button gets no click: open on pointerup, and keep the
    click that follows (on touch it can come later) from closing the popover at once. ---------- */
 window.addEventListener("click",e=>{const R=window.__adGreyR;if(R&&Date.now()-(window.__adGreyT||0)<1500&&e.clientX>=R.left&&e.clientX<=R.right&&e.clientY>=R.top&&e.clientY<=R.bottom){e.stopPropagation();e.preventDefault()}},true);
@@ -45479,6 +45480,10 @@ function rungDown(o,n){const F=[0].concat(BAL.lad),top=100;let i=0;for(let j=0;j
   if(k==="vu"&&l===2)s=s.replace(/Múa trong yến tiệc \(mỗi bậc \+\d+\), Chặn ngự giá \(mỗi bậc \+\d+\) dễ thành hơn/,`Múa trong yến tiệc dễ thành hơn (+${O[l]})`);
   s=s.replace(/\(mỗi bậc \+[\d,]+\)/g,()=>`(+${(SIDE[k]||[]).includes(l)?String(side(O[l])).replace(".",","):O[l]})`);
   arr[i]=s})}/* in place: ARTMS (j82) holds the same arrays */
+ /* course gates (BAL.art.gate) and per-point quality (BAL.art.fx) in the same texts */
+ {const Y=ARTFX.y,cure="tự bào chế thuốc an thai; chữa bệnh cho con: Sức khỏe con +30",gi=BAL.art.gate.yCure-1;const at=Y.findIndex(t=>t.includes(cure));
+  if(at>=0&&at!==gi&&Y[gi]){Y[at]=Y[at].replace(" · "+cure,"");Y[gi]+=" · "+cure}}
+ for(const k of ["theu","nau"])if(ARTFX[k])ARTFX[k][0]=ARTFX[k][0].replace(/phẩm \+\d+ mỗi bậc \(thang 100\)/,`phẩm theo điểm môn, Tông sư +${Math.round(100*BAL.art.fx.q)} (thang 100)`);
  for(const k of ["dung","ngon"])if(VIRFX[k])VIRFX[k].forEach((s,i,arr)=>arr[i]=s.replace(/(\(|thỉnh an |tố giác )\+(3|6|9|12|15)(?!\d)/,(m,a)=>`${a}+${O[i+1]}`));
 }catch(e){console.error("artfx text",e)}})();
 /* ================= jcoopone: ONE WORLD — the co-op guard table (review/coop-one-world) =================
@@ -45558,7 +45563,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="e467f182b5eb";window.CTM_BUILD=BUILD;
+const BUILD="92c64131ee2e";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
