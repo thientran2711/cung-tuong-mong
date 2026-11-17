@@ -713,7 +713,7 @@
 | VOICE writers W-B (toil/wd/staff/cycle/ts/HABIT) + W-C (events kSay + voice-rep) (sonnet; brief briefs/voice-trait-writers.md) | review/voice-trait | C ROOT-5 | W-B session_011xDdVNoZ7Yx3TZUQQfZipd + W-C session_011xDdVRjiWzLX321cWLkeV2 | RUNNING | 17/11 12:10Z |
 | VOICE W-A2 final assemble/build/QUICKCHECK/voice-rep/report (sonnet; successor of W-A RM5y archived; handover d5793c7ba) | review/voice-trait | C ROOT-6 | session_011xDdVQHXu4HxrzSdi1Q2h6 | RUNNING | 17/11 12:16Z |
 | BATCH builder s31a (opus): presentation-wiring-r1 bc8461cc → kit-ico-rank-r1 a1c7a37c → fig-headtop-r1 f95f5a92 | review/batch-s31a | MAIN s31 | session_01UV1SziPrputLM5qYtCL6zH | RUNNING | 17/11 12:11Z |
-| REVIEW morechip-fix r1 of eba25768 | review/morechip-fix-r1 | MAIN s31 | session_01UV1SzjcQv25a9UKRDjK9Jp | RUNNING | 17/11 12:11Z |
+| REVIEW morechip-fix r1 of eba25768 | review/morechip-fix-r1 | MAIN s31 | session_01UV1SzjcQv25a9UKRDjK9Jp | DONE PASS 3bed78e3 | 17/11 12:11Z |
 | REVIEW fig-tag-chip r1 of d50c8e22f | review/fig-tag-chip-r1 | MAIN s31 | session_01UV1SzjqANMrcHtn9Sy4tx4 | RUNNING | 17/11 12:11Z |
 | opt-card kit #2: person cards tall rect + được/mất wrap + VIỆC T3 (on opt-pic-same 5f651f96) | review/opt-pic-same | MAIN s31 | session_01UV1Szicpw4t6yqzafQ5w1c | RUNNING | 17/11 12:11Z |
 | learn-scene-fix | review/learn-scene-fix | MAIN s31 | session_01UV1SziySB5E5PWMp5Wc7uX | RUNNING | 17/11 12:11Z |
