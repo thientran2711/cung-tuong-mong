@@ -13,4 +13,17 @@ Thợ báo "KIT REQUEST" trong báo cáo → điều phối ghi vào đây → g
 
 ## 16/11 s19 — closed by review/kit-marks: "KIT REQUEST — cloud-del" items 1–2 built as KIT §83.9 (`.kbtn.kdanger`, `kitConfirm`); KIT number clash §72 verified resolved (KIT_NUMBERS.md).
 
+## 16/11 — npc-agent r1-fix (Foreman C worker): dialog option LOCKED state (register, no new look)
+| 16/11 | npc-agent r1 (fault 2a) | A Q-dialog option with `lock:true` + `why:"<reason>"` renders as the EXISTING kit locked-option form of `pbtn` (j15): `disabled` + `<span class="kwhy">reason</span>` in `<small>` → j63 kaNorm turns it into the §6 `.kdis` card with its Cần ✗ row. One line in j3 showModal (before: only "poor" options were disabled). Used by the AG1b reactions "Nghe lén" / join when no khắc is left (BAL.ag.kh). Kit keeper: please record it in KIT.md §6.2 (dialog options) / §8 | AG1b witness card (jagent agReact); any dialog option with a lock | npc-agent r1 | built (j3), chờ kit keeper ghi KIT.md |
 ## 17/11 kit-size-10 — closed: night-final KIT REQUEST "A dialog with a COUNTDOWN (§69 chip) must show the clock + the question WITHOUT scrolling on Fold 755x1000" built as KIT §32.5c + §69.4 (root cause: `.kdpall` + `.kdpbanner` grid rows, jk4 `#kit-dp-all`; every banner event dialog, with or without a clock). Test `dev/test/timed-choice-fit.js`; sample kit page §8 "VIỆC CÓ ĐỒNG HỒ". Callers (night-final jnf) put `kitCoopClock` in the text only; no private CSS.
+
+## 17/11 show-why — KIT REQUEST (REGISTER only, no new part built): result card row "Vì sao" (owner OD 17/11 05:45Z SHOW WHY A NUMBER)
+- What: one more row of the result card's kit `.kb` grid (KIT §7), label "Vì sao", items = one sentence per person/number
+  ("Hoàng hậu X: tính Ân cần, trọng Lễ: hợp ý → thiện cảm +6" / generic "… : theo tính nết và điều nàng trọng → thiện cảm +6").
+- Markup = the existing "Ghi chú" row exactly (`.kr.kr-note` > `.krl` + `.krv` > `.kitem` > `.ef.n`), plus the marker class `.kr-vi`
+  (no CSS on it); placed before the Kèm row; also in `kaLastResult.rows` as `{k:"vi",label:"Vì sao"}`. Builder `kitWhyRowHTML(T)` in
+  dev/build/jwhyn.js. Sổ ghi lines get the same sentence as `<span class="past kwl">Vì sao: …</span>` (existing `.past` style).
+- Also: the 24 nết words and the 13 trọng words are KIT §12 glossary terms (kitGloss, tap = kpPop): KIT_GLOSS gets netTip(t) /
+  VIRT_GL[v] (data only, added in jwhyn.js like jdiff/jexam add theirs) — replaces native `title` tooltips (touch).
+- Ask: kit keeper registers the row in KIT.md §7 + the kit sample page (or tells show-why to change it); work did not stop because
+  no new display part was made.

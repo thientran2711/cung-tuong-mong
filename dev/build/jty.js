@@ -86,7 +86,7 @@ function tyCharge(k){try{if(!tyOn(S)||!S.visit)return;const key=`${wk()}.${S.buo
   return{state:"plain",delta:{danh:0,duc:0,aff:Math.round(B.aff*(st?B.strict:1))},why:["mặc trung y"],occasion:occasion||"",host,ty:1}};window.leAttire=leAttire})();
 (function(){if(typeof aaThieuLe0!=="function")return;const a0=aaThieuLe0;aaThieuLe0=function(p){if(tyOn(p))return false;return a0.apply(this,arguments)}})();
 /* ---------- robbery on the road (cướp / giật y phục) ---------- */
-function tyEnemies(p){try{return liveRivals(true).filter(v=>v!==p&&!v.out&&typeof rel==="function"&&rel(v,p)<=BAL.ty.plotRel&&/Hiểm độc|Kiêu ngạo|Tham vọng|Thù dai/.test(`${v.trait||""} ${v.trait2||""}`))}catch(e){return[]}}
+function tyEnemies(p){try{return liveRivals(true).filter(v=>v!==p&&!v.out&&typeof rel==="function"&&rel(v,p)<=BAL.ty.plotRel&&netRx(v,/Xảo quyệt|Kiêu ngạo|Tham vọng|Thù dai/))}catch(e){return[]}}
 /* n = people at that place (default: who is with her now; the map shows the destination's count, countAt) */
 function tyRobOdds(k,n){const T=BAL.ty;let o=0;const night=(S.buoi||0)>=(typeof B4L==="number"?B4L:3);const lonely=(n!=null?n:(curPeople()||[]).length)<=1;
  const plot=S.tyOmen&&S.tyOmen.until>=wk()&&RV(S.tyOmen.by);

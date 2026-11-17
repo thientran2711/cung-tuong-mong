@@ -15,7 +15,7 @@ function tScore(p,art,mini){const g=(p.arts||{})[art]||0;const base=Math.min(10,
 const DILEMMAS=[["Hai cung nữ cãi nhau, một người làm vỡ chén ngọc của Thái hậu rồi đổ cho người kia. Ngươi xử thế nào?",[["nhan","Tha cả hai, tự bỏ bạc đền chén"],["le","Phạt đúng người, giữ phép cung"],["tri","Lặng lẽ tra hỏi cho ra kẻ nói dối"]]],
  ["Một phi tần ốm nặng mà Hoàng thượng triệu ngươi thị tẩm. Ngươi làm gì?",[["nhan","Xin nhường đêm ấy, sang thăm nàng"],["le","Vâng chỉ, rồi sai người mang thuốc sang"],["tri","Tâu xin Hoàng thượng ghé thăm nàng trước"]]],
  ["Nhà mẹ đẻ xin ngươi nói giúp một chức quan. Ngươi đáp sao?",[["le","Từ chối, hậu cung không bàn chính sự"],["nhan","Gửi bạc riêng giúp nhà, không xin chức"],["tri","Chỉ người có tài thì mới tiến cử"]]]];
-function judgeVirtue(){const th=traitsOf("th")[0];const e=S.emp.traits;if(e.includes("nhantu")||e.includes("hieuthao")||th==="Hiền lành")return"nhan";if(e.includes("danghi")||e.includes("chamchinh")||th==="Đa nghi")return"tri";return"le"}
+function judgeVirtue(){const th=traitsOf("th")[0];const e=S.emp.traits;if(e.includes("nhantu")||e.includes("hieuthao")||th==="Ân cần")return"nhan";if(e.includes("danghi")||e.includes("chamchinh")||th==="Kín đáo")return"tri";return"le"}
 function dScore(p,v){const b=judgeVirtue();const m=v===b?6:3;return cl(Math.round(m+(p.duc||0)/25+(p.tamco||0)/30),0,10)}
 function backers(p){const L=[];const q=queenP();if(q&&q!==p&&aff(q,p)>=30)L.push("Hoàng hậu");if((p.th||0)>=50&&!S.thDead)L.push("Thái hậu");const f=facOf(p);if(f)L.push(`phe ${f.name} (${facMembers(f).length})`);if((p.dad||(p===S?S.origin.dad:0)||40)>=60)L.push("nhà mẹ đẻ quyền thế");for(const x of (ct().bk[key(p)]||[]))L.push(x);return L}
 function fScore(p){const L=backers(p);let n=0;for(const b of L)n+=/^phe/.test(b)?Math.min(4,1+(+(b.match(/\d+/)||[1])[0])/2):2;return cl(Math.round(n),0,10)}
@@ -23,7 +23,7 @@ function fScore(p){const L=backers(p);let n=0;for(const b of L)n+=/^phe/.test(b)
 function npcContestAct(p){const c=ct();const R2=c.c.map(byKey).filter(x=>x&&x!==p&&!c.dq.includes(key(x)));const k=key(p);
  const w={pr:2,lo:2,sc:R2.length?.6*persW(p,"poison")*persW(p,"frame"):0};const tot=w.pr+w.lo+w.sc;let r=Math.random()*tot;
  if((r-=w.pr)<0){c.pr[k]=(c.pr[k]||0)+1;return}if((r-=w.lo)<0){if(p.bac>=30&&roll(55)){ap(p,{bac:-30});(c.bk[k]=c.bk[k]||[]).push(pick(["một vị thượng thư","Tổng quản thái giám","một vị vương phi"]))}return}
- const t=R2.sort((a,b)=>(a===S?-1:0)-(b===S?-1:0))[0];sabotage(p,t)}
+ const t=mindPickBy(R2,x=>BAL.mind.pick.j34.base+Math.max(0,hostility(p,x)),p);sabotage(p,t)/* npc-mind: was FIRST (always her) */}
 function sabotage(a,t){const c=ct();const o=cl(40+(a.tamco||0)/4-(t===S&&S.maid&&S.maid.loyal>=70?10:0),5,90);persCount(a,"contest:scheme");
  if(roll(o)){c.sab[key(t)]=(c.sab[key(t)]||0)+1;const m=t===S?`Đàn của ngươi bị cắt dây trước buổi diễn (vòng sau -2).`:`${a===S?"Ngươi":a.name} phá ${t.name}: vòng sau nàng -2.`;if(t===S||a===S)log(m);return m}
  if(roll(BAL.rk.caught)){c.dq.push(key(a));ap(a,{danh:-6,sung:-8});const m=`${a===S?"Ngươi":a.name} ra tay với ${NM(t)} bị bắt quả tang: bị loại khỏi cuộc tranh ghế, Danh -6, Sủng -8.`;log(m);return m}return `${a===S?"Ngươi":a.name} định ra tay nhưng không thành.`}
