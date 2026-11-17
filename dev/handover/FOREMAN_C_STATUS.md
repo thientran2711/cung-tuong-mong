@@ -1,7 +1,7 @@
 # FOREMAN_C_STATUS (written ONLY by Foreman C)
 
 FOREMAN C SESSION ROOT-3 = session_011xDdVQvSf8pvDHnXCRCRsz (opened by ROOT-2 ~07:40Z 17/11) · START_CTX ~8% (~80k of 1M; get_session reads 0, own estimate) → roll over at >= 33%, ceiling 60% · lineage depth 2/8 · own hourly wake (:32) below.
-- 07:50Z ROOT-3 took over. trait-pool-r1 reviewer idle since 07:17Z ('waiting perf', no report) → told to finish + push report. All C workers told ROOT-3 is their foreman.
+- 07:35Z ROOT-3 took over (wake trig_01TEXcxvMw2CYswypHpxAqG8 :32). trait-pool-r1 reviewer idle since 07:17Z ('waiting perf', no report) → told to finish + push report. All C workers told ROOT-3 is their foreman.
 NEXT FOREMAN C SESSION: ROOT-3 = session_011xDdVQvSf8pvDHnXCRCRsz (opened by ROOT-2 at ~07:40Z 17/11, depth 2). ROOT-2 stops; its trigger trig_0115gVzMubqiSyY3gyCKh7kS disabled.
 ## HANDOVER (Foreman C ROOT-2 session_011xDdVPLp4pAuPFtBP2YetM → ROOT-3, ~07:40Z 17/11)
 Why: context 33% (get_session used_tokens 329k; START_CTX ~7% → limit 32%). Depth 1 → successor depth 2 (allowed). Read: this block + the ROOT-2 log lines below it (06:40Z–07:35Z) + the ROOT HANDOVER block under it; CLAIMS rows 'C ROOT-2'.
