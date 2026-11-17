@@ -41,3 +41,9 @@ Measured face height / figure height: Emperor .097; previous live p03 .081; v4 .
 - Old man p03-a51: base Emperor, face crop of the old man as identity, outfit from previous live figure, prompt says head as big as the Emperor's: face .091-.095 (Emperor .097, previous live .081). Candidate G (.095) chosen: oldman-p03-v5.jpg. Not uploaded.
 - por for a18/a26: must be re-cut from the new figures (6 more busts) after C OKs the figures; the por on CDN for those 6 are currently the dark-colour ones.
 - 2K: all gens used the default 2K output.
+
+## 17/11 ~02:20Z FIXED + LIVE (after C's 01:35Z/01:44Z corrections) — AGE BANDS + AGE COLOURS + OLD MAN
+LIVE on CDN now (verified md5): fig-thaihau-h{1,2,3}-a18, -a26 (6, young: black hair, young face, young colours peach-orange / pink / pale green, c01-a26 body), fig-thaihau-h1-a36 (black hair, mature), fig-thaihau-h2-a51 (grey-streaked, older), fig-kid-p03-a51 (old man, head enlarged: face .095 vs Emperor .097, previous .081), and 8 por-thaihau (h*-a18, h*-a26, h1-a36, h2-a51) re-cut from them.
+Age ladder now correct for every set: a18 young -> a26 young woman -> a36 mature dark hair -> a51 grey/older (h1: a51 grey; h2: a51 grey-streaked; h3: a51 grey). Unchanged (already right): h2-a36, h3-a36, h1-a51, h3-a51, fig-thaihau-1/2/3 + their por. Body: mama build for a36/a51, c01-a26 build for a18/a26. No train. 2K.
+Sheets: thaihau-all15-dark.jpg, thaihau-all15-light.jpg (7+8 figs on dark/light), thaihau-por-changed8-dark.jpg, young-thaihau-a18.jpg, young-thaihau-a26-dark.jpg, oldman-p03-v5.jpg. Backups: old-backup-thaihau/ (old live + DARKVERSION-* = the wrong dark a18/a26 that were live 01:2x-02:1x).
+NEXT: roll out old men (p-series, Emperor base + old face crop + previous costume) and old women (f-series, c01 base) from audit-list.txt per the same rule; sheets to C first.
