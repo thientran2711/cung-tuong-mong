@@ -1119,8 +1119,7 @@ html body .pc.kpwide[data-k2]>.pcl>.pcp.kit.kit{width:var(--kpcw)!important;marg
 .pc[data-k2] .kpstick .pcf .kpsec{margin:0 0 2px;display:grid;grid-template-columns:4.4rem minmax(0,1fr);column-gap:6px;align-items:start}
 .pc[data-k2] .kpstick .pcf .kpst{margin:2px 0 0;font-size:.66rem;line-height:1.2;border:0;padding:0}
 .pc[data-k2] .kpstick .pcf .kpsec>:not(.kpst){grid-column:2;min-width:0}
-.pc[data-k2] .kpstick .pcf .pcf-i .krv{-webkit-line-clamp:1}
-.pc[data-k2] .kpstick .pcf .krv{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.pc[data-k2] .kpstick .pcf .krv{overflow-wrap:anywhere}/* pcard-facts: the fact is shown whole, never cut with "…" (details sit behind the tap) */
 .kpgrid{display:flex;flex-direction:column;gap:4px;margin:4px 0 6px}
 .kpgr{display:flex;flex-wrap:wrap;gap:4px}
 .kst-chip{display:inline-flex;align-items:center;gap:4px;padding:2px 7px;border:1px solid var(--k-hair,#e6d3ac);border-radius:7px;background:var(--k-card,#fffaf0);font-size:.76rem;line-height:1.25;white-space:nowrap;cursor:help}

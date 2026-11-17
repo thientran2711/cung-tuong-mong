@@ -60,6 +60,14 @@ function kitRows(rows){return `<span class="kb kpkb">`+(rows||[]).filter(r=>r&&r
 /* KIT §51 kitRowsJoin(kitRows(a), kitRows(b), …) -> ONE table: kit tables written one after another (price rows + the item's rows)
    are merged into a single grid, so their values line up too. Pass only kitRows / kitItemRows output (or ""). */
 function kitRowsJoin(){return [...arguments].filter(Boolean).join("").replace(/(<\/span><\/span>)<\/span>\s*<span class="kb kpkb">/g,"$1")}
+/* KIT §73b kitFactRows([{l:label, f:fact(html), d:{src,how,when}|null}]) — owner 17/11 ~14:15Z + ~14:40Z (review/pcard-facts): a known-fact row shows the FACT first, short
+   ("Thích Cầm"); when / how / who found it open in a kit pop-up on tapping the fact (kit dotted underline, tip style). No prefix, no "…" cut-off.
+   kitFactTap(factHtml, detail) = ONE fact (several facts in one row: pass the array as the row value). Detail missing -> plain text, nothing to open. */
+function kitFactDetail(d){if(!d)return"";if(typeof d==="string")return d;const R=[["Khi nào",d.when&&typeof kpDateText==="function"?kpDateText(String(d.when)):d.when],["Cách biết",d.how],["Nguồn",d.src&&typeof d.src==="object"?d.src.name:d.src]].filter(r=>r[1]);
+ return R.map(r=>`<div class="kpopx"><b>${r[0]}:</b> ${r[1]}</div>`).join("")}
+function kitFactTap(f,d){const det=kitFactDetail(d);return det?`<span class="kgl kfx" tabindex="0" data-kfx="${kpEsc(det)}">${f}</span>`:f}
+function kitFactTipHtml(el){return `<div class="kpopt">${el.innerHTML}</div>${el.dataset.kfx}`}
+function kitFactRows(items){return kitRows((items||[]).filter(x=>x&&x.f).map(x=>[x.l||"",Array.isArray(x.f)?x.f:kitFactTap(x.f,x.d),x.c||"t"]))}
 /* KIT §51 kitReqRows([[ok, "Sủng 8 (cần 15)"], ...]) -> a requirement list as ONE kit table: label = what is needed, value = ✓/✗ + the
    numbers (green met / red unmet). "Sủng 8 (cần 15)" -> Sủng | ✗ 8 (cần 15); "Ghế Phi: còn chỗ" -> Ghế Phi | ✓ còn chỗ;
    "Hoàng hậu không chặn (Hoàng hậu -5, …)" -> Hoàng hậu không chặn | ✗ Hoàng hậu -5, …; a bare sentence -> sentence | ✓ đủ / ✗ chưa đủ. */
@@ -274,7 +282,7 @@ function kpPop(anchor,html,o){o=o||{};let p=document.getElementById("kpop");if(!
  if(o.inside){const vt=Math.max(r.top,8),vb=Math.min(r.bottom,innerHeight-8);/* the visible part of the card */let y=vt+Math.max(4,(vb-vt-h)/2);if(h>r.height-8)y=r.top+4;p.style.top=Math.max(4,y)+"px";return}
  let y=r.bottom+6;if(y+h>innerHeight-8)y=Math.max(8,r.top-h-6);p.style.top=y+"px"}
 document.addEventListener("click",e=>{const p=document.getElementById("kpop");const od=e.target.closest(".kodm"),gl=e.target.closest(".kgl");
- if(od||gl){e.stopPropagation();e.preventDefault();if(od)kpPop(od,kitOddsLadder(+od.dataset.kodds));else kpPop(gl,`<div class="kpopt">${gl.dataset.kgl}</div><div class="kpopx">${kitGlossText(gl.dataset.kgl)}</div>`);return}
+ if(od||gl){e.stopPropagation();e.preventDefault();if(od)kpPop(od,kitOddsLadder(+od.dataset.kodds));else if(gl.dataset.kfx!=null)kpPop(gl,kitFactTipHtml(gl));else kpPop(gl,`<div class="kpopt">${gl.dataset.kgl}</div><div class="kpopx">${kitGlossText(gl.dataset.kgl)}</div>`);return}
  if(p&&!p.hidden)p.hidden=true},true);
 /* the HUD standing chances (Có thai, Lật thẻ) read on the chance scale Rất thấp…Rất cao (j64 + chanceLvl in j1), never the act ladder */
 
@@ -468,7 +476,7 @@ button.ka .kodds .kodm{flex-direction:row}
 .kpopt{font-family:var(--display);font-weight:700;color:var(--gold);border-bottom:1px solid var(--k-hair);padding-bottom:3px;margin-bottom:4px}
 .kpopx{line-height:1.4}
 .kpopr{display:grid;grid-template-columns:auto auto minmax(0,1fr);gap:6px;align-items:center;padding:3px 4px;border-radius:5px}.kpopr.on{background:#f0d07055;box-shadow:inset 0 0 0 1px var(--gold)}.kpopr b{font-size:.78rem;white-space:nowrap}.kpopr small{color:var(--dim);font-size:.72rem}
-.kgl{text-decoration:underline dotted #b9a27a;text-underline-offset:2px;cursor:help}
+.kgl{text-decoration:underline dotted #b9a27a;text-underline-offset:2px;cursor:help}.kfx{cursor:pointer}.kfxm{color:#8a7a62;font-size:.92em}
 /* Cần row (act card, j63 .kr-why): status chips */
 button.ka .kr-why .krv{display:flex;flex-wrap:wrap;gap:3px;align-items:flex-start}
 button.ka .kr-why .kwhy{display:inline-block!important;font-size:.7rem;line-height:1.3;font-weight:600;padding:0 6px;border-radius:10px;border:1px solid #e3a497;background:#fcefeb;color:var(--bad)!important;white-space:normal;overflow-wrap:anywhere}
