@@ -229,6 +229,7 @@ def anchor_check(uploaded):
     """owner 17/11 (toil-reveal-fix): after a face picture upload (por-/fig- of the consort faces / player looks) the face-mesh anchor check runs by itself
     (dev/art/mkfit/verify.py --names, report only; needs mediapipe + the model, else a loud notice). Fix: bash dev/art/mkfit/on-upload.sh"""
     import re, subprocess
+    uploaded = [u[0] if isinstance(u, (tuple, list)) else u for u in uploaded]
     names = sorted(k.split("/")[-1] for k in uploaded if re.match(r"img/(por|fig)-(consort|player)-.*\.webp$", k))
     if not names: return
     print(f"anchor check: {len(names)} face pictures uploaded -> dev/art/mkfit/verify.py (face-mesh points must sit on the painted face)")
