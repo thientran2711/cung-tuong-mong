@@ -13,18 +13,20 @@ const {chromium}=require('playwright');const [,,U0]=process.argv;const URL=/^(ht
 const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+m+(x!==undefined?' '+JSON.stringify(x):''))};
 (async()=>{const b=await chromium.launch();const p=await b.newPage({viewport:{width:1180,height:820}});const errs=[];p.on('pageerror',e=>errs.push(e.message));
  await p.goto(URL,{waitUntil:'domcontentloaded'});await p.waitForTimeout(2500);
- const fresh=()=>p.evaluate(()=>{for(let i=0;i<12;i++){localStorage.clear();SLOT=4;document.getElementById('title').hidden=true;window.__nlInner=1;start();window.__nlInner=0;if(!(typeof isSrv==='function'&&isSrv())&&!S.out)break}/* a consort life (a maid start has no consort options) */window.__bot=1;quiet=true;Q.length=0;try{deal()}catch(e){}
-  for(const v of rivals)v.preg=0;S.preg=0;S.sung=Math.max(S.sung,60);S.bac=Math.max(S.bac,500);BAL.world.maxOpen=9;S.wwin={L:[],last:{},n:{},seq:0};worldTick();S.wwin.L=[];S.wwin.q=[];return 1});
+ const fresh=()=>p.evaluate(()=>{window.__wcFresh=()=>{for(let i=0;i<12;i++){localStorage.clear();SLOT=4;document.getElementById('title').hidden=true;window.__nlInner=1;start();window.__nlInner=0;if(!(typeof isSrv==='function'&&isSrv())&&!S.out)break}/* a consort life (a maid start has no consort options) */window.__bot=1;quiet=true;Q.length=0;try{deal()}catch(e){}
+  for(const v of rivals)v.preg=0;S.preg=0;S.sung=Math.max(S.sung,60);S.bac=Math.max(S.bac,500);BAL.world.maxOpen=9;S.wwin={L:[],last:{},n:{},seq:0};worldTick();S.wwin.L=[];S.wwin.q=[]};window.__wcFresh();return 1});
  /* 1 */
  await fresh();
  const K=["day","lap","hau","thb","thi","vuong","ret","trung","vuco","cam","trom","phong","hon","ngoai","phat","benh","tinh"];
- const r1=await p.evaluate((K)=>{const out={};const kid=allKids()[0];const v=liveRivals(true)[0];
-  const X={day:{kid:"Hoàng tử Thử",sex:"m",who:v.id},lap:{kid:"Hoàng tử Thử",who:v.id},hau:{from:null,to:v.id,sub:"lap"},hon:{kid:"Công chúa Thử",who:v.id},ngoai:{c:"Tể tướng"},vuco:{tgt:v.id,tn:v.name,by:null,why:"long thể bất an"}};
-  for(const k of K){S.wwin.L=[];S.wwin.q=[];S.wwin.last={};S.wwin.H=[];Q.length=0;S.mg=0;const n0=(S.logs||[]).length;worldQueue(k,"thử",{x:X[k]||{}});
+ const r1=await p.evaluate((K)=>{const out={};let kid,v,X;const mkX=()=>{kid=allKids()[0];v=liveRivals(true)[0];
+  X={day:{kid:"Hoàng tử Thử",sex:"m",who:v.id},lap:{kid:"Hoàng tử Thử",who:v.id},hau:{from:null,to:v.id,sub:"lap"},hon:{kid:"Công chúa Thử",who:v.id},ngoai:{c:"Tể tướng"},vuco:{tgt:v.id,tn:v.name,by:null,why:"long thể bất an"}};
+};mkX();
+  /* she can die while 17 kinds play out (~2/30 runs: that kind and every later one failed, worldStart needs !S.dead): a kind she died in is played again on a new life (fresh()), at most 3 tries */
+  for(const k of K)for(let tr=0;tr<3;tr++){if(S.dead||S.over){window.__wcFresh();mkX()}S.wwin.L=[];S.wwin.q=[];S.wwin.last={};S.wwin.H=[];Q.length=0;S.mg=0;const n0=(S.logs||[]).length;worldQueue(k,"thử",{x:X[k]||{}});
    let e=null;try{const t=wk();endTurn()}catch(x){e=x.message}const w=worldWin(k);const c=Q.find(m=>m&&m.t===worldName(w||{k}));
    const lg=(S.logs||[]).slice(0,8).some(l=>/thử/.test(l));const hap=(()=>{try{S.adHap=null;return adHapNow().some(x=>x.id==="world")}catch(x){return false}})();
    const len=w?w.t1-w.t0:0;let end=false;for(let i=0;i<len+1&&!end;i++){Q.length=0;S.mg=0;try{endTurn()}catch(x){e=x.message}end=Q.some(m=>m&&m.t===worldName(w||{k}))&&!worldWin(k)}
-   out[k]={open:!!w,card:!!c,opts:c&&c.opts?c.opts.length:0,log:lg,hap,end,e}}
+   out[k]={open:!!w,card:!!c,opts:c&&c.opts?c.opts.length:0,log:lg,hap,end,e};if(!S.dead&&!S.over)break}
   return{out,err:WW.err}},K);
  for(const k of K){const o=r1.out[k];ok(o.open&&o.card&&o.log&&o.end&&!o.hap&&!o.e,`${k}: opens, center pop-up at start + end, Tuần lục line, no Dư đồ "!"`,o)}
  ok(r1.out.day.opts>0&&r1.out.thb.opts>0&&r1.out.benh.opts>0&&r1.out.vuco.opts>0&&r1.out.trom.opts>0,'her own options on the start pop-up',Object.fromEntries(K.map(k=>[k,r1.out[k].opts])));
