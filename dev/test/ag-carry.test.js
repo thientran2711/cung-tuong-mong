@@ -7,7 +7,7 @@
    4 already known in the buổi → not carried again
    5 bot: N days of real NPC deeds — carried items appear (KN.stat.carry > 0), every carried item is ended, no caught errors, no page errors */
 const {chromium}=require('playwright');const URL0=process.argv[2]||'dev/index.html';const URL=/^(https?|file):/.test(URL0)?URL0:'file://'+require('path').resolve(URL0);
-const DAYS=+(process.argv[3]||4);
+const DAYS=+(process.argv[3]||8);
 const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+m+(x!==undefined?' '+JSON.stringify(x):''))};
 (async()=>{const b=await chromium.launch();const p=await b.newPage({viewport:{width:755,height:1000}});const errs=[];p.on('pageerror',e=>errs.push(e.message));
  await p.goto(URL,{waitUntil:'domcontentloaded'});await p.waitForTimeout(2500);
@@ -22,18 +22,21 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
   knFor=function(x,h){if(fake.includes(h)){if(x!==S||h===hH)return null;if(h===hK)return{by:"here",how:"here"};return agKh()>=J95.KH-1+knRelay()?{by:"s"+(spy.sid||0),how:"here",s:spy}:null}return F0.apply(this,arguments)};
   used=J95.KH-1;try{tinBaoList()}catch(e){}const T0=knTb();T0.K[knHid(hK)]={id:knHid(hK),k:"deed",place:"vuon",b:S.buoi,k0:3,k1:3,who:[],line:"đã biết",by:"here",seen:1,ended:0};
   o.nowL=knFor(S,hL);let cb=[];const off=tinBaoOn(it=>cb.push(it.id));const id0=knHid(hL)+":c",idH=knHid(hH)+":c",idE=knHid(hE)+":c",idK=knHid(hK)+":c";
-  const c0=KN.stat.carry||0;used=0;step();adHapNow=A0;knFor=F0;off();
-  const L=tinBaoList();const it=L.find(x=>x.id===id0);o.it=it&&{ended:it.ended,line:it.line,place:it.place,inf:it.infName,seen:it.seen,b:it.b,carry:it.carry};o.buoi=S.buoi;
+  const c0=KN.stat.carry||0;used=0;step();adHapNow=A0;knFor=F0;
+  /* AG-ALL-2d4 (OD 17/11 ~17:55Z (3)): it lands when the bearer arrives — this fake bearer needs the longest walk (knRelay) → khắc (KH-1 + D − KH) */
+  used=0;o.at0=!!tinBaoList().find(x=>x.id===id0);used=Math.min(J95.KH-1,J95.KH-1+o.D-J95.KH);
+  const L=tinBaoList();off();const it=L.find(x=>x.id===id0);o.it=it&&{ended:it.ended,line:it.line,place:it.place,inf:it.infName,seen:it.seen,b:it.b,carry:it.carry};o.buoi=S.buoi;
   o.cb=cb.includes(id0);o.hid=!!L.find(x=>x.id===idH);o.early=!!L.find(x=>x.id===idE);o.known=!!L.find(x=>x.id===idK);o.spy=spy.name;o.n=(KN.stat.carry||0)-c0;
   /* 5 bot */
   const e0=AG.errs.length,k0=KN.stat.carry||0;let seenC=0,badC=0;
-  for(let d=0;d<DAYS*4;d++){step();try{for(const x of tinBaoList())if(x.carry){seenC++;if(x.ended!==1)badC++}}catch(e){}}
+  for(let d=0;d<DAYS*4;d++){step();try{used=J95.KH-1;/* every carried bearer has arrived by the last khắc */for(const x of tinBaoList())if(x.carry){seenC++;if(x.ended!==1)badC++}}catch(e){}used=0}
   o.bot={carry:(KN.stat.carry||0)-k0,seenC,badC,errs:AG.errs.slice(e0).filter(e=>/knCarry|knScan|know/.test(e)).slice(0,3)};
   return o},DAYS);
  console.log(JSON.stringify({D:r.D,KH:r.KH}));
  ok(r.D>0&&r.nowL===null,'1 setup: the chain delays it (knRelay > 0), she does not know it in the last khắc',{D:r.D,now:r.nowL});
  ok(r.it&&r.it.ended===1&&/vừa|đã/.test(r.it.line)&&/đã xong|đã qua/.test(r.it.line)&&!/%/.test(r.it.line)&&r.it.place==="vuon"&&r.it.inf===r.spy&&r.it.seen===0&&r.it.b===r.buoi,'1 next buổi: carried as an ENDED TIN BÁO item (past tense + "đã xong", same place, same informer, new)',r.it);
  ok(r.cb,'1 tinBaoOn fires for the carried item');
+ ok(r.D<=1||r.at0===false,'1 (2d4 walk) not before its bearer arrives: a far bearer is not there at khắc 1 of the next buổi',{at0:r.at0,D:r.D});
  ok(!r.hid,'2 news nobody would bring stays hidden (same knFor rule)');
  ok(!r.early,'3 a happening whose news came inside the buổi is not carried');
  ok(!r.known,'4 already known → not carried again');

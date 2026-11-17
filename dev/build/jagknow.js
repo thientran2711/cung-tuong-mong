@@ -35,10 +35,16 @@ function knH(s){let h=2166136261;s=String(s);for(let i=0;i<s.length;i++){h^=s.ch
 function knSeed(){S.tb=S.tb||{};if(S.tb.seed==null)S.tb.seed=Math.floor(Math.random()*1e9);return S.tb.seed}
 function knHit(tag,p){return knH(knSeed()+"|"+tag)<p}
 function knMemo(){const k=agKey();if(!KN.m||KN.m.key!==k)KN.m={key:k,x:{},t:{},at:{},kh:-1};let kh=0;try{kh=agKh()}catch(e){}if(KN.m.kh!==kh){KN.m.kh=kh;KN.m.x={}}/* AG-ALL-2d: who knows is re-read each khắc (news travels khắc by khắc); the tell / keep choices (t) stay for the buổi */return KN.m}
-/* AG-ALL-2d per-khắc chain (owner OD 17/11 ~15:45Z L1638): news carried by someone (a servant, her Tai mắt, a friend sending word) reaches the master at the
-   START of the khắc after the bearer's trip: seen at khắc q → the bearer reacts the next khắc (BAL.ag.kh2.rd.see) and spends it going (… .go) → known
-   from q + see + go. Seeing it oneself (presence), one's own deed and the calendar are known at once; a friend met face to face passes on what she knows. */
-function knRelay(){try{const B=BAL.ag.kh2.rd;return agRdOn()?(B.see||0)+(B.go||0):0}catch(e){return 0}}
+/* per-khắc chain (owner OD 17/11 ~15:45Z L1638; timing overwritten by OD 17/11 ~17:55Z (3) "theo đường đi thật, gần thì khắc 2, xa thì khắc 3 trở đi"):
+   news carried by someone (a servant, her Tai mắt, a friend sending word) reaches the master after the bearer's REAL Dư đồ walk from where she saw
+   it to where the master stands (agWalk = travel(): near → known the next khắc, far → two khắc later). Seeing it oneself (presence), one's own deed
+   and the calendar are known at once; a friend met face to face passes on what she knows. */
+/* AG-ALL-2d4 (owner OD 17/11 ~17:55Z (3) "theo đường đi thật"): the delay is the bearer's REAL Dư đồ walk (agWalk = travel(): near 1 / far 2) from
+   where she saw it to where her master stands — knWalkTo. knRelay = the LONGEST such walk (BAL.walk.far; 0 = relay off), used only to bound the
+   buổi-end carry. */
+function knRelay(){try{const B=BAL.ag.kh2.rd;return agRdOn()&&((B.see||0)+(B.go||0))?Math.max(BAL.walk.near||1,BAL.walk.far||1):0}catch(e){return 0}}
+function knWalkTo(from,id,kh){if(!knRelay())return 0;let to=null;try{to=knAt(id,Math.max(0,Math.min(kh,J95.KH-1)))}catch(e){}return agWalk(from,to||"home")}
+function knSrvFrom(s,how,h){if(how==="listen"){const k=s&&s.sid!=null?knSlotK(s):"";const pl=String(k||"").split(":")[0];if(pl&&pl!=="listen")return pl}return h.k}
 function knFirst(id,h,w){for(let kh=w[0];kh<=w[1];kh++)if(knAt(id,kh)===h.k)return kh;return -1}
 function knId(x){return x===S?"me":x&&x.sid!=null?"s"+x.sid:x&&x.id!=null?"v"+x.id:""}
 /* a servant's key: her sid, or "cm<master>" for a confidant maid (S.maid / v.maid carry no sid) */
@@ -81,13 +87,15 @@ function knFor(x,h,noFriend){if(!x)return null;const hid=knHid(h);const M=knMemo
  else if(knThere(id,h,w))r={by:"here",how:"here"};
  else{const wh=knWho(h);if(wh[0]===id)r={by:"here",how:"self"};}/* the doer knows her own deed */
  const now=agKh(),D=knRelay();
- if(!r){for(const s of knStaff(x)){const how=knSrvKnows(s,x,h,w,hid);if(!how)continue;const q=how==="here"&&s.sid!=null?knFirst("s"+s.sid,h,w):w[0];if(Math.max(q,w[0])+D>now){KN.stat.wait=(KN.stat.wait||0)+1;continue}/* still on her way to tell */if(knTell(s,x,hid)==="tell"){r={by:"s"+knSid(s,x),how,s};break}}}
- if(!r&&w[0]+D<=now){let o=0;try{o=oSee(x,false)*knB().eye/100}catch(e){}if(knHit("e"+id+"|"+hid,o))r=knEye(x,h,hid)}
+ if(!r){for(const s of knStaff(x)){const how=knSrvKnows(s,x,h,w,hid);if(!how)continue;const q=Math.max(how==="here"&&s.sid!=null?knFirst("s"+s.sid,h,w):w[0],w[0]);
+   /* the confidant maid walks with her mistress (one khắc to step aside and tell); any other servant walks from where she saw / heard it */
+   const at=q+(s.sid==null?Math.min(1,D):knWalkTo(knSrvFrom(s,how,h),id,q));if(at>now){KN.stat.wait=(KN.stat.wait||0)+1;continue}/* still on her way to tell */if(knTell(s,x,hid)==="tell"){r={by:"s"+knSid(s,x),how,s,at};break}}}
+ if(!r){let o=0;try{o=oSee(x,false)*knB().eye/100}catch(e){}if(knHit("e"+id+"|"+hid,o)){const at=w[0]+knWalkTo(h.k,id,w[0]);/* her Tai mắt / a passer-by walks from the place to her */if(at<=now){r=knEye(x,h,hid);if(r)r.at=at}}}
  if(!r&&!noFriend){const F=knB().friend;for(const v of liveRivals(true)){if(v===x||!v.alive||v.out)continue;const a=aff(v,x);if(a<F)continue;/* the news travels when they meet (same place this khắc), or a close friend sends word (aff ≥ close) */const meet=(()=>{const nw=agKh();return knAt(id,nw)!=null&&knAt("v"+v.id,nw)===knAt(id,nw)})();if(a<knB().close&&!meet)continue;const k=knFor(v,h,true);if(!k||k.by==="le"||k.how==="self")continue;
-   if(!meet&&D>0){const ka=M.at["v"+v.id+"|"+hid+"|n"];if(ka==null||ka+BAL.ag.kh2.rd.go>now)continue}/* sending word: one trip after she knew (AG-ALL-2d) */
+   let fa=now;if(!meet&&D>0){const ka=M.at["v"+v.id+"|"+hid+"|n"];if(ka==null)continue;fa=ka+knWalkTo(knAt("v"+v.id,ka),id,ka);if(fa>now)continue}/* sending word: her messenger's real walk from where she was when she knew to x (AG-ALL-2d4) */
    /* she passes it on or keeps it to herself: her choice by how much she likes x (the servant's rule, thiện cảm for lòng) */
    const kk="f"+v.id+">"+id+"|"+hid;if(M.t[kk]==null){const T=knB().tell,lo=cl(a,0,100)/100;let c="keep";try{c=mindPick([["tell",Math.max(.01,lo*T.tell)],["keep",Math.max(.01,(1-lo)*T.keep)]],v)||"keep"}catch(e){}M.t[kk]=c}
-   if(M.t[kk]==="tell"){r={by:"v"+v.id,how:"friend",v};break}}}
+   if(M.t[kk]==="tell"){r={by:"v"+v.id,how:"friend",v,at:fa};break}}}
  if(r&&M.at[mk]==null)M.at[mk]=now;/* the first khắc she knew it (a friend's word travels from then) */
  return M.x[mk]=r}
 /* ---------- the informer's line (jvoice: address by speaker and listener, mood by lòng / thiện cảm) ---------- */
@@ -115,7 +123,7 @@ function knLine(r,h){const W=agPlaceTxt(h.k),what=knWhat(h);const fill=t=>String
   const P=KN_POOL[r.how==="self"?"here":r.by]||KN_POOL.mat;let t=fill(kLine("tinbao:"+r.by,P,{m:"cool"}));
   if(r.e){const o=ownerOf(r.e);t=t.replace(/\{N\}/g,r.e.name).replace(/\{P\}/g,o?(o===S?"ta":NM(o)):"khác")}return t}catch(e){return `Ở ${W} ${what}.`}}
 /* ---------- her TIN BÁO list ---------- */
-function knTb(){let b="";try{b=bkey()}catch(e){}S.tb=S.tb||{};if(S.tb.b!==b){S.tb.b=b;S.tb.K={};knCarryIn(S.tb)}if(!S.tb.R||S.tb.d!==wk()){S.tb.d=wk();S.tb.R=[]}S.tb.K=S.tb.K||{};return S.tb}
+function knTb(){let b="";try{b=bkey()}catch(e){}S.tb=S.tb||{};if(S.tb.b!==b){S.tb.b=b;S.tb.K={};knCarryIn(S.tb)}else if(S.tb.W&&S.tb.W.length)knCarryTick(S.tb);if(!S.tb.R||S.tb.d!==wk()){S.tb.d=wk();S.tb.R=[]}S.tb.K=S.tb.K||{};return S.tb}
 function knRaw(){return KN.raw||[]}
 function knScan(L){if(!S||S.dead||S.out)return[];try{knFlush()}catch(e){agErr("knFlush",e)}const T=knTb();KN.stat.scan++;const out=[];const now=agKh();
  for(const h of L){if(h.done)continue;const hid=knHid(h);const w=knWin(h);const ended=w[1]<now&&!knFixed(h)?1:0;/* AG-ALL-2d2: an ENDED happening still reaches her (late news down the khắc chain), flagged ended */
@@ -138,11 +146,15 @@ function tinBaoList(){if(!knOn()||!S||S.dead||S.out)return[];let L=[];try{L=adHa
    its list already (agSpan carry). */
 function knCarryOut(){if(!knOn()||!S||S.dead||S.out)return 0;const D=knRelay();if(!D)return 0;let L=[];try{adHapNow();L=KN.raw||[]}catch(e){return 0}
  const T=knTb();const KH=J95.KH,real=agKh;const C=[];
- for(const h of L){if(!h||h.done||knFixed(h))continue;const hid=knHid(h);if(T.K[hid])continue;const w=knWin(h);if(!w||w[1]+D<KH||w[1]>=KH)continue;/* runs on: in the next buổi list already *//* its news could not come inside this buổi */
+ for(const h of L){if(!h||h.done||knFixed(h))continue;const hid=knHid(h);if(T.K[hid]||C.some(x=>x.id===hid+":c"))continue;const w=knWin(h);if(!w||w[1]+D<KH||w[1]>=KH)continue;/* runs on: in the next buổi list already *//* its news could not come inside this buổi */
   let r=null;agKh=()=>Math.max(real(),w[1])+D;try{r=knFor(S,h)}catch(e){agErr("knCarry",e)}finally{agKh=real}
-  if(!r)continue;const it={id:hid+":c",k:h.id,place:h.k,k0:0,k1:0,who:knWho(h),line:knLine(r,h),by:r.by,inf:knInf(r),infName:knInfName(r),seen:0,ended:0,carry:1};C.push(it)}
+  if(!r)continue;/* AG-ALL-2d4: the same walk — it reaches her in the next buổi at khắc (arrival − KH): a far informer comes later than a near one */
+  const due=Math.max(0,(r.at!=null?r.at:w[1]+D)-KH);const it={id:hid+":c",k:h.id,place:h.k,k0:0,k1:0,who:knWho(h),line:knLine(r,h),by:r.by,inf:knInf(r),infName:knInfName(r),seen:0,ended:0,carry:1,due};C.push(it)}
  S.tb.C=C;KN.stat.carry=(KN.stat.carry||0)+C.length;return C.length}
-function knCarryIn(T){const C=T.C||[];T.C=[];for(const it of C){it.b=S.buoi||0;knEnd(it);T.K[it.id]=it;for(const f of KN.cb)try{f(Object.assign({},it))}catch(e){console.error("tinBao cb",e)}}}
+function knCarryIn(T){T.W=(T.C||[]).slice();T.C=[];knCarryTick(T)}
+/* a carried item lands when its bearer arrives (its khắc in this buổi), not all at the buổi's start */
+function knCarryTick(T){if(!T.W||!T.W.length)return;let now=0;try{now=agKh()}catch(e){}const keep=[];
+ for(const it of T.W){if((it.due||0)>now){keep.push(it);continue}delete it.due;it.b=S.buoi||0;knEnd(it);T.K[it.id]=it;for(const f of KN.cb)try{f(Object.assign({},it))}catch(e){console.error("tinBao cb",e)}}T.W=keep}
 (function(){const n0=nextBuoi;nextBuoi=function(){try{knCarryOut()}catch(e){agErr("knCarry",e)}return n0.apply(this,arguments)}})();
 function tinBaoNew(){return tinBaoList().filter(x=>!x.seen).length}
 function tinBaoOn(fn){if(typeof fn==="function")KN.cb.push(fn);return ()=>{const i=KN.cb.indexOf(fn);if(i>=0)KN.cb.splice(i,1)}}
