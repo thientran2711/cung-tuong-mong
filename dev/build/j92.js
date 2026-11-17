@@ -288,10 +288,10 @@ function wdAccuse(a,t){const c=wdCause(a,t);const truth=wdStatus(t);const judge=
  for(const o of consorts())wdSee(o,t,truth,judge,true);
  if(truth==="ok"){ap(a,{danh:-5});ap(t,{danh:2});relAdd(a,t,BAL.eff.j92.wdAccuse);
   return `${A0} hặc ${T0} ${c?WD_ST_WORD[c.st]:"ăn mặc sai phẩm"}; <span class="${a===S?"r":"g"}">tra xét ra ${T0} ăn vận đúng phẩm</span>, ${a===S?"ngươi":wdNm(a)} bị quở vì hặc bừa. Danh -5, ${T0} Danh +2. `}
- if(!roll(oVP(a))){ap(a,{danh:-2});relAdd(a,t,BAL.eff.j92.wdAccuse_2);return `${A0} hặc ${T0} ${WD_ST_WORD[truth]}, ${judge} bỏ qua, chỉ dặn lần sau giữ ý. ${a===S?"Danh -2. ":""}`}
- relAdd(a,t,BAL.eff.j92.wdAccuse_3);ap(a,{danh:2});const w=wdOf(t);
+ const E92=BAL.eff.j92;if(!roll(oVP(a))){ap(a,{danh:E92.wdWaveDanhA});relAdd(a,t,E92.wdAccuse_2);return `${A0} hặc ${T0} ${WD_ST_WORD[truth]}, ${judge} bỏ qua, chỉ dặn lần sau giữ ý. ${a===S?`Danh ${E92.wdWaveDanhA}. `:""}`}
+ relAdd(a,t,E92.wdAccuse_3);ap(a,{danh:E92.wdDanhA});const w=wdOf(t);
  if(truth==="over"){const gone=[];for(const sl of ["tram","y"]){const e=w[sl],it=wdItem(e);if(it&&wdP(e,t)>wdPOf(t)&&!(it.nt&&e.own===wdKey(t))){gone.push(it.n);w[sl]=null;const k=wdDefault(t,sl);if(k)w[sl]={k,from:"base"}}}
-  ap(t,{danh:-6});punish(t,"ăn mặc vượt phẩm",1);return `${A0} hặc ${T0} vượt phẩm: <span class="${t===S?"r":"g"}">thành</span>. ${gone.length?gone.join(", ")+" bị tịch thu. ":""}${wdNmC(t)} Danh -6. `}
+  ap(t,{danh:E92.wdOverDanhT});punish(t,"ăn mặc vượt phẩm",1);return `${A0} hặc ${T0} vượt phẩm: <span class="${t===S?"r":"g"}">thành</span>. ${gone.length?gone.join(", ")+" bị tịch thu. ":""}${wdNmC(t)} Danh ${E92.wdOverDanhT}. `}
  if(truth==="under"){ap(t,{danh:-4});return `${A0} hặc ${T0} ăn vận quá giản dị, làm mất thể diện hoàng gia: <span class="${t===S?"r":"g"}">thành</span>. ${wdNmC(t)} bị quở, Danh -4. `}
  ap(t,{danh:-8,sung:-5});punish(t,"mặc đồ đỏ vàng giữa quốc tang",2);return `${A0} hặc ${T0} mặc đồ đỏ vàng giữa quốc tang: <span class="${t===S?"r":"g"}">thành</span>. ${wdNmC(t)} Danh -8, Sủng -5. `}
 A("vp","Hặc ăn mặc sai phẩm",{c:{},ok:(a,t)=>!!wdCause(a,t),o:a=>oWd(a),x:"cần nguyên cớ: đã nghe người nhận xét, hoặc tai mắt báo nàng mặc sai phẩm",f:(a,t)=>wdAccuse(a,t)});

@@ -44,7 +44,7 @@ Object.assign(BAL,{eff:{
  j83:{evIllBuy:1,evIllBuy_2:2,evIllBuy_3:1,evIllBuy_4:2,loyalIllBuy:10},
  j85:{hpV85Month:2},
  j9:{npcEncounters:3,npcEncounters_2:3,npcEncounters_3:-2,npcEncounters_4:-2,npcEncounters_5:2,npcEncounters_6:2,run_5:-3,run_8:-15,run_9:-8,run_10:2,run_11:10,run_12:-5,pushPond:-10,pushPond_2:-25,trip:-6,trip_2:-12,evN:1,evRun:1,evRun_2:1,evTrip:1,evOverhear:1},
- j92:{wdAccuse:-12,wdAccuse_2:-10,wdAccuse_3:-10,wdFrame:-20,wdFrameResolve:-10,clear:-15,evWdFrame:2,evWdFrame_2:1,evWdFrameResolve:1,evSpendEv:-1},
+ j92:{wdAccuse:-12,wdAccuse_2:-10,wdAccuse_3:-10,wdWaveDanhA:-2,wdDanhA:2,wdOverDanhT:-6,wdFrame:-20,wdFrameResolve:-10,clear:-15,evWdFrame:2,evWdFrame_2:1,evWdFrameResolve:1,evSpendEv:-1},
  j95:{j95caught:25,j95caught_2:-15,go:10,j95bribeTake:6,j95silent:15,j95silent_2:12,j95silent_3:-10,evJ95secApply:[1,2],evJ95watch:1,evJ95caught:1,evJ95hold:1,evJ95npcCatch:1,evJ95npcCatch_2:1,evJ95npcCatch_3:2},
  j95b:{j95bClear:12,j95bClear_2:-8,j95bClear_3:4,evJ95bTrace:1},
  j96:{evGo:1,evGo_2:2,loyalGo:8,tinGo:10,loyalGo_2:12},
