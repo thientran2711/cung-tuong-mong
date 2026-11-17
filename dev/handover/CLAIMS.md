@@ -577,7 +577,7 @@
 | npc-roads-fx FINISH (opus): F1–F6 scan, merge main, suites → SẴN SÀNG KIỂM, then BIG reviewer | review/npc-roads-fx | D | session_01964izFdMcMY1NA9hQZVoJw | DONE SẴN SÀNG KIỂM e34393b1 (archived) | 17/11 03:35Z |
 | item-ledger SOLO landing (opus): from PASS 7aba5de9, branch co-op transport removed (live giftin only), co-op part parked | review/item-ledger-solo | D | session_01964izCwq2JLHTHaaBox66W | DONE SẴN SÀNG KIỂM ac939102 (archived) | 17/11 03:35Z |
 | npc-death re-wire (opus): jnpcd/jly into j95 place-people record (Lý Trường Môn viện, dead off lists, Thái y viện new name) | review/npc-death-wire | D | session_01964izBuQu8dWabKyYB69JE | DONE SẴN SÀNG KIỂM de166c3f (archived) | 17/11 03:35Z |
-| suc-khoe review r2 (opus BIG) of da50857d | review/suc-khoe-r2 | D | session_01964izEdQ4cDsTpuGgdScHp | RUNNING | 17/11 03:35Z |
+| suc-khoe review r2 (opus BIG) of da50857d | review/suc-khoe-r2 | D | session_01964izEdQ4cDsTpuGgdScHp | PASS 7e1f42ca (archived) → FOR MAIN batch | 17/11 03:35Z |
 | C44 cloud-del 'Xóa sổ trên mây' (sonnet UI, KIT §83.9) | review/cloud-del | D | session_01964izCcuExvScNgYEs1xN6 | DONE SẴN SÀNG KIỂM e12ef99a (archived) | 17/11 03:35Z |
 | P5 STORY BOT balance (opus, report only, ch1–4 first) | review/story-bot | D | session_01964izEJdhucE8HEDCzfJ25 | RUNNING | 17/11 03:35Z |
 | scenes-3 r1 PASS 92b6c60f (review/scenes-3-r1) → builder batch-0232 (or next batch); worker + reviewer archived | review/scenes-3-r1 | main s29 | session_01UV1Szkquo1hWfgug5N5F9Q | PASS | 17/11 03:37Z |
