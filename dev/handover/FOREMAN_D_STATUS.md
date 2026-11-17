@@ -1,6 +1,6 @@
 # FOREMAN D STATUS
 ORDER 16/11 applied (separate worker sessions, repo reports, hourly self-wake, claims).
-last wake: 17/11 07:39Z — FOREMAN D is now #9 = session_01964izBsQba9xq3oCFovTBQ (opened by #8 session_01964izEvrHqnQQMQqZ2g5t1 at rollover; send result lines to #9)
+last wake: 17/11 07:41Z — FOREMAN D #9 = session_01964izBsQba9xq3oCFovTBQ (pickup)
 s7 START_CTX ≈ 6 % of 1M window (get_session reads 0; own estimate ~60k after start reading); rollover at 31 %, ceiling 60 %.
 - 21:43Z: suc-khoe-fix SẴN SÀNG KIỂM da50857d (F1–F10 fixed; F6 waits KIT REQUEST y-duoc + art; coop-e2e 60/60 incl. new 'NPC Sức khỏe guest = host'; D57 births fix ≈ base 0.14–0.16; her deaths 25–27 vs 17–25 per 40 lives) — worker archived → opus BIG reviewer r2 session_01DgYSWmYNeB92ubrzxwYmXs.
 - 21:40Z (hourly): OWNER RULE 21:34Z: go-live = hourly batch by MAIN; D no longer pushes main (send_message to main s24 not reachable from this account → this STATUS). Golive prep worker told to stop + write final table. OWNER PRIORITY 21:38Z: ch1–4 first, features complete, UI unified, art later — D queue checked: no D item is a later-chapter item except npc-roads (NPC side roads; keep, low). D LIVE today: coop-chat b7c5d787, coop-b1b5-fix 392fff60, coop-name-mask c1e1bbd1.
@@ -330,3 +330,6 @@ FOR MAIN (open): live j15 WAGE bug (fix b37865b7 inside suc-khoe-r2); §64 item 
 Tools: Cloudflare token saved on this account's environment (verify active). Briefs: dev/handover/briefs/D8-*.md (copy the tail block for new briefs). Hourly wake: #8's trigger trig_01J4hp1RY51fJ5icoPxVpXv2 is deleted at handover → #9 creates its own.
 
 - (17/11 07:39Z) #8 STOPPED: successor Foreman D #9 = session_01964izBsQba9xq3oCFovTBQ opened; #8 hourly trigger deleted. Workers report to #9.
+
+- (17/11 07:41Z) PICKUP by FOREMAN D #9 = session_01964izBsQba9xq3oCFovTBQ. START_CTX ≈ 7 % of 1M (get_session reads 0; estimate ~70k after start reading) → rollover at 32 %, ceiling 60 %. RUNNING 5 at pickup (HANDOVER table), free 7. The 5 running sessions told once to report to #9.
+  GAP FOUND: MAIN s30 07:36Z order KỲ NGUYỆT SỰ rolled 5/6/7 per month (OD 07:35Z) was not opened by #8 → opened now: opus worker session_01964izEeMN4FkyE99xVCtWw (review/cycle-roll; brief briefs/D9-cycle-roll.md). PRIORITY #1 CHECK ('kỳ nguyệt|jcycle|cyBase|cycle-roll'): OD 5 | ledger 1 | claims 7 | main 15 | review/* 0. RUNNING 6, free 6. D PASSes waiting for main: all 7 inside batch-d8 (builder running).
