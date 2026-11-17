@@ -18,7 +18,10 @@ const ENTRY=[[/^(start|nlRun|nlBegin|nlReroll)$/,"B"],[/^(chooseM|onAct|onRes|fa
 function part(st,root){let hit=null;for(const l of st){const m=l.trim().match(/^at (?:Object\.|Proxy\.|Array\.|window\.)?([^ (]+)/);const n=m?m[1]:"";if(!n)continue;
   if(n==="endTurn"||n==="monthTick")hit=/^S\./.test(root)?"G":"C";else if(n==="nextBuoi")hit=/^S\./.test(root)?"E":"C";else for(const [rx,pt] of ENTRY)if(rx.test(n)){hit=pt;break}}
  return hit||"?"}
-const RAW=new WeakMap(),PX=new WeakMap();const CNT=new Map();let total=0,raw=0,sRep=0,rRep=0,on=false;const byRoot={},byPart={},PCNT=new Map();
+const RAW=new WeakMap(),PX=new WeakMap();const CNT=new Map();let total=0,raw=0,sRep=0,rRep=0,on=false,state=0;const byRoot={},byPart={},statePart={},PCNT=new Map();
+/* review r1: keys "__x" are private markers, not game state (jwdinv wdOf sets p.__wdmig=1 and deletes it in its finally = a re-entry guard,
+   ~half of all counted writes; R.__b = the friend bridge baseline). `state` / `statePart` = the meter without them (the number to report). */
+const priv=(root,key)=>/^__/.test(String(key))||/^[A-Za-z]+\.__/.test(root);
 const unw=x=>(x&&typeof x==="object"&&RAW.has(x))?RAW.get(x):x;
 for(const m of ["indexOf","includes","lastIndexOf"]){const f=Array.prototype[m];Array.prototype[m]=function(x,...a){return f.call(unw(this),unw(x),...a)}}
 for(const C of [Set,Map])for(const m of ["has","get","delete","add","set"]){const f=C.prototype[m];if(!f)continue;C.prototype[m]=function(k,...a){return f.call(this,unw(k),...a)}}
@@ -31,7 +34,7 @@ function hit(meta,key,same){const C=window.COOPW;if(!on||(C&&C.inFC)||(C&&C.ctx)
  const root=meta.r==="S"&&meta.t===undefined?(WK().includes(key)?"W."+key:"S."+key):meta.r==="S"?(WK().includes(meta.t)?"W."+meta.t:"S."+meta.t):meta.r==="R"?(meta.t===undefined?"Rarr":"R."+(meta.t2||key)):meta.r;
  const st=(new Error().stack||"").split("\n").slice(2);const w=who(st),pt=part(st,root);
  const k=w+"|"+root.replace(/\..*$/,m=>m.split(".").slice(0,2).join("."));CNT.set(k,(CNT.get(k)||0)+1);const rk=root.split(".")[0];byRoot[rk]=(byRoot[rk]||0)+1;
- byPart[pt]=(byPart[pt]||0)+1;const pk=pt+"|"+k;PCNT.set(pk,(PCNT.get(pk)||0)+1)}
+ byPart[pt]=(byPart[pt]||0)+1;const pk=pt+"|"+k;PCNT.set(pk,(PCNT.get(pk)||0)+1);if(!priv(root,key)){state++;statePart[pt]=(statePart[pt]||0)+1}}
 let WKc=null;const WK=()=>WKc||(WKc=(window.COOPW&&COOPW.X&&COOPW.X.W_KEYS)||[]);
 function px(o,meta){if(!o||typeof o!=="object"||RAW.has(o))return o;if(!plainP(o))return o;let p=PX.get(o);if(p)return p;
  p=new Proxy(o,{get(t,k,rc){const v=Reflect.get(t,k);if(!v||typeof v!=="object"||typeof k==="symbol")return v;
@@ -48,5 +51,5 @@ function check(){const C=window.COOPW;if(!C||!C.on||C.seat!=="b"||C.inFC)return;
  try{if(S&&!RAW.has(S)){sRep++;wrap()}if(rivals&&!RAW.has(rivals)){rRep++;wrap()}}catch(e){}}
 setInterval(check,150);
 window.__trip=function(){const top=[...CNT.entries()].sort((a,b)=>b[1]-a[1]).map(([k,n])=>{const [f,r]=k.split("|");return [f,r,n]});const parts={};for(const [k,n] of PCNT){const [pt,f,r]=k.split("|");(parts[pt]=parts[pt]||[]).push([f,r,n])}for(const pt in parts)parts[pt]=parts[pt].sort((a,b)=>b[2]-a[2]).slice(0,15);
- return {total,raw,byRoot,byPart,parts,top:top.slice(0,40),pairs:top.length,sReplaced:sRep,rReplaced:rRep}};
+ return {total,raw,state,statePart,byRoot,byPart,parts,top:top.slice(0,40),pairs:top.length,sReplaced:sRep,rReplaced:rRep}};
 })();
