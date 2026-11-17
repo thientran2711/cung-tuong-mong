@@ -129,8 +129,8 @@ function petNpcs(){try{if(window.COOPW&&COOPW.on&&COOPW.seat!=="a")return []}cat
 function petMonth(){if(!S||S.dead)return;const on=tsbOn()&&!(typeof isSrv==="function"&&isSrv())&&!S.out,me=[S].concat(petNpcs());
  const empPick=sg=>sg>=80?pick(["phuong","ngoctho","thienma"]):sg>=65?pick(["linhmieu","lyngu","vet","meo"]):pick(["meo","sao","uyenuong","cachep","hoami"]);
  for(const p of me){if(p.out)continue;const card=p===S;if(card&&(!on||Q.length>2))continue;
-  if((p.sung||0)>=55&&roll(4)){const t=empPick(p.sung||0);if(card){if(!petCardQ("tsbPetGift"))petCard("tsbPetGift",{src:"emp",t},"Ngự ban")}else petGive(p,t,PET_SRCN.emp,"emp");continue}
-  if((p.th||0)>=60&&roll(2.5)){const t=(p.th||0)>=85&&rkOf(p)>=4&&roll(15)?"kylan":"hac";if(tsbPets(p).some(P=>P.t===t))continue;if(card){if(!petCardQ("tsbPetGift"))petCard("tsbPetGift",{src:"th",t},"Thái hậu ban")}else petGive(p,t,PET_SRCN.th,"th");continue}
+  if((p.sung||0)>=55&&empGive(p,4,"pet")){const t=empPick(p.sung||0);if(card){if(!petCardQ("tsbPetGift"))petCard("tsbPetGift",{src:"emp",t},"Ngự ban")}else petGive(p,t,PET_SRCN.emp,"emp");continue}
+  if((p.th||0)>=60&&thGive(p,2.5,"pet")){const t=(p.th||0)>=85&&rkOf(p)>=4&&roll(15)?"kylan":"hac";if(tsbPets(p).some(P=>P.t===t))continue;if(card){if(!petCardQ("tsbPetGift"))petCard("tsbPetGift",{src:"th",t},"Thái hậu ban")}else petGive(p,t,PET_SRCN.th,"th");continue}
   if(!p.queen&&rkOf(p)<7&&(p.hh||0)>=60&&queenP()&&queenP()!==p&&roll(2.5)){const t=pick(["sutu","linhmieu"]);if(card){if(!petCardQ("tsbPetGift"))petCard("tsbPetGift",{src:"hh",t},"Hoàng hậu ban")}else petGive(p,t,PET_SRCN.hh,"hh");continue}}
  /* a man who cares for her sends a small animal (her only) */
  if(on&&!petCardQ("tsbPetGift")&&(S.men||[]).some(m=>m.alive&&(m.tinh||0)>=50)&&roll(5)){const m=(S.men||[]).filter(m=>m.alive&&(m.tinh||0)>=50).sort((x,y)=>y.tinh-x.tinh)[0];petCard("tsbPetGift",{src:"man",m:m.id,t:pick(["hoami","uyenuong","meo","sao","tho"])},"Quà gửi lén")}

@@ -145,7 +145,7 @@ rivalNight=function(v){v.nights++;v.nightLog.push(wk());
   else if(v.rel<-20&&roll(20)){const o=odA(v,30+v.an/2);if(roll(o)){const b=S.sung;apply({sung:-4});x={t:S,ok:1,b}}else if(DG()){ap(v,{sung:-6})}}
   if(x&&x.t===S&&x.ok&&S.mat>=2)r+=`Tai mắt nghe được: gối đầu, ${v.name} nói xấu ngươi.${x.b!==S.sung?` Sủng của ta ${x.b} → ${S.sung}.`:""} `}
  if(typeof amOn==="function"&&amOn()?amSendQ(v):roll(3)){r+=sendMaid(v)}/* AG3: her own choice (jagmaid) */
- if(roll(10+sc*4))bestow(v,"night");return r};
+ if(empGive(v,10+sc*4,"night"))bestow(v,"night");return r};
 /* (b) the quiet favour is a world act with a cost */
 const QF=["dâng canh sâm lên Dưỡng Hòa điện","chép bài thơ dâng lên ngự thư phòng","thêu túi thơm dâng Hoàng thượng","đứng đợi ngự giá ở ngự hoa viên, dâng một khúc đàn"];
 const nm0=npcMonthly;npcMonthly=function(v){const a0=ap,fi0=v.fakeIll;let seen="";let armed=false;
@@ -165,7 +165,7 @@ const DECKN={vu:"múa Kinh hồng vũ trong yến tiệc",cam:"đàn khúc Phư�
 function npcEffortKind(v){if(v.confined||v.out||illOf(v)||(v.preg||0)>=7)return null;
  const A=v.arts||{},B=BAL.deck;let kd="";for(const k of ["vu","cam","ky"])if((A[k]||0)>=B[k].lv&&v.suc>=B[k].sucMin){kd=k;break}
  if(kd){const l=deckLoss(kd);return{kd,n:DECKN[kd],c:Object.assign({},B[kd].c),o:odA(v,deckOdds(v,kd)),w:deckGain(kd),lose:-(l.sung||0),l}}
- if((v.bac||0)>=B.qf.bac)return{kd:"qf",n:pick(QF),c:{bac:-B.qf.bac},o:odA(v,B.qf.o),w:{sung:B.qf.w},lose:0,l:{}};
+ if((v.bac||0)>=B.qf.bac){const kn=!!(v.eK&&v.eK.flower);/* AG-ALL-2: she asked Kính sự phòng what he likes (cx2:likes) — the player's known-flower rule */return{kd:"qf",n:pick(QF),c:{bac:-B.qf.bac},o:kn?100:odA(v,B.qf.o),w:{sung:kn?B.qf.wKnown:B.qf.w},lose:0,l:{}}}
  return null}
 window.deckOdds=deckOdds;window.deckGain=deckGain;window.deckLoss=deckLoss;
 /* force = the agent loop chose it (no weekly trait frequency) */

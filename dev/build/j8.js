@@ -34,6 +34,21 @@ function evA(h,t,n){if(!h||!t||h===t)return 0;const g=evG(h,t);let d=n;if(n>0){c
  if(h===/*evok: evA itself*/S)t.ev=Math.max(0,(t.ev||0)+d);else{h.evm=h.evm||{};const k=key(t);h.evm[k]=Math.max(0,(h.evm[k]||0)+d)}if(n>0&&d<n&&typeof evMiss==="function")evMiss(h,t,n-d);return d}
 /* the shared formulas */
 function od(b){return odA(S,b)}
+/* AG-ALL-2 ONE CORE: the base odds of the consort cards an NPC also plays (Emperor talk, Lục rương, Hỏi chuyện cũ, Đưa con thỉnh an, Hầu thuốc), BAL.ag.cx2;
+   the player's cards (j2 / j20) and the NPC options (jagacts2) read this one function; odA / od adds the doer's own state on top */
+function cx2O(p,k){const X=BAL.ag.cx2[k],M=S.emp?mm():0;const A=p.arts||{};
+ if(k==="flat"||k==="favor")return X.o+(p.sung||0)/X.sd+M;
+ if(k==="true")return X.o+(p.duc||0)/X.dd+M+(has("nhantu")?X.nt:0);
+ if(k==="show"){let w=0;if(p===S)w=bestArt().w;else for(const a in A)w=Math.max(w,artW2(p,a));return X.o+w*X.k+M}
+ if(k==="court")return X.o+(p.tamco||0)/X.td+(A.thi||0)*X.thi+M;
+ if(k==="chest")return X.o+(p.mat||0)*X.mat;
+ if(k==="old")return X.o+(p.tamco||0)/X.td;
+ if(k==="kidGreet")return X.o+(p.sung||0)/X.sd+M;
+ if(k==="nurse")return X.o+(A.y||0)*X.y;
+ return X.o||100}
+/* AG-ALL-2: the Emperor's (and Thái hậu's) bestowal = his choice from his regard of that person (jagacts2 overrides while the loop is on) */
+function empGive(p,pct,why){return roll(pct)}
+function thGive(p,pct,why){return roll(pct)}
 function effSac(p){return cl(p.sac+wearBonus(p).sac,0,130)}
 function conceiveCh(p=S){return cl(Math.round(lotB(p,"Con cái")+10+p.sung/4+effSac(p)/8+(p.pray?15:0)+(p.fert?20:0)-(p.age>28?(p.age-28)*3:0)),2,85)}
 function nightCh(p=S){if(p.preg||p.block||p.confined||p.out)return 0;const m=has("mesac")?2:1;
@@ -95,7 +110,7 @@ A("poison","Hạ độc",{c:{duc:-10},ok:()=>true,o:a=>oPoison(a),x:"lộ: ban c
    const d=strong?120:35+R(30);if(t===S){apply({suc:-d});return `<span class="r">Ngươi trúng độc, nôn ra máu.</span> Sức -${d}. `}ap(t,{suc:-d});return dieIf(t,"chết sau một bát yến sào")||`<span class="r">${t.name} trúng độc, thập tử nhất sinh.</span> `}
   const r=`<span class="r">Thuốc độc nhắm vào ${NM(t)} bị phát hiện, tra ra người của ${NM(a)}.</span> `;deathSentence(a,`Bị ban rượu độc vì mưu hại ${NM(t)}`);return r}});
 A("accuse","Tố giác",{c:{},ok:(a,t)=>accOK(a,t),o:(a,t)=>oAccuse(a,t),x:"cần 2 chứng cứ (Hoàng hậu: 4 chứng cứ và phẩm Tần trở lên; tố hụt Hoàng hậu là phạm thượng)",f:(a,t)=>{const o=oAccuse(a,t);evA(a,t,-99);
-  if(roll(o)){const r=`${NMc(a)} tố giác ${NM(t)} trước ${judgeName(t)}: <span class="${t===S?"r":"g"}">thành</span>. `;ap(a,{danh:6});if(roll(BAL.tw.accBestow))bestow(a,"accuse");if(rkOf(t)>=7)a.seatBan=S.turn+12;fall(t,"bị tố giác, chứng cứ rành rành");return r}
+  if(roll(o)){const r=`${NMc(a)} tố giác ${NM(t)} trước ${judgeName(t)}: <span class="${t===S?"r":"g"}">thành</span>. `;ap(a,{danh:6});if(empGive(a,BAL.tw.accBestow,"accuse"))bestow(a,"accuse");if(rkOf(t)>=7)a.seatBan=S.turn+12;fall(t,"bị tố giác, chứng cứ rành rành");return r}
   ap(a,{danh:-8});relAdd(a,t,-20);if(rkOf(t)>=7)punish(a,"tố hụt Hoàng hậu, phạm thượng",2);return `${NMc(a)} tố giác ${NM(t)} không thành; chứng cứ bị hủy. `}});
 A("bribe","Mua chuộc cung nữ",{c:{bac:-40},ok:(a,t)=>a.bac>=40,o:(a,t)=>oBribe(a,t),f:(a,t)=>{ap(a,{bac:-40});
   if(roll(oBribe(a,t))){if(t.schemes>0){/*evok: schemes>0*/evA(a,t,2);return `Cung nữ ${t.maid.name} của ${NM(t)} bị ${NM(a)} mua chuộc, khai ra mưu kế của chủ: ${NM(a)} nắm 2 chứng cứ. `}const g=Math.min(30,t.bac);ap(t,{bac:-g});ap(a,{bac:g});t.maid.loyal=cl(t.maid.loyal-10,0,100);return `Cung nữ ${t.maid.name} của ${NM(t)} bị ${NM(a)} mua chuộc, lấy trộm ${g} lượng. `}
@@ -306,7 +321,7 @@ function nx(b,note,p){const m=[1,0,-1,-2][S.emp.mood];const v=b+m;const w=v>=3?"
  const hi=nightGain(q+v+2),lo=nightGain(q+v-(p&&p.vp?2:0));return `${w} · thành: đêm vui, Sủng +${hi.sung}, Ân tình +${hi.an} · hỏng: đêm nhạt, Sủng +${lo.sung}, Ân tình +${lo.an}${note?" · "+note:""}${vpItems(S).length?` · kèm: đồ vượt phẩm bị thu, Danh -4 (nếu đang đeo): ${chanceW(40)}`:""}`}
 function nightFx(s){const BN=BAL.night;S.tablet=0;S.nights++;S.nightLog.push(wk());const NG=nightGain(s),g=NG.sung;apply({sung:g});S.an=cl(S.an+NG.an,0,100);ghenAll(BN.ghen);
  if(giuBlocked(S))pushFront(mkP("giu"),"Giữ hay không giữ");else night(S);
- if(roll(BN.bestow+s*BN.bestowS))bestow(S,"night");log(`Thị tẩm. Sủng +${g} · Ân tình +${NG.an}.`)}
+ if(empGive(S,BN.bestow+s*BN.bestowS,"night"))bestow(S,"night");log(`Thị tẩm. Sủng +${g} · Ân tình +${NG.an}.`)}
 PEND.night2=p=>{const s=p.s,v=liveRivals(false).slice().sort((a,b)=>a.rel-b.rel)[0],son=mySons()[0],o1=od(30+S.an/2+s*4),o2=od(pillowO(S,s)),o3=od(40+S.an/2+s*3);
  const txt=s>=6?"Ngài khẽ cười, kéo ngươi lại gần. Tấm rèm thêu uyên ương buông xuống; ngọn nến đỏ chập chờn rồi lụi, chỉ còn tiếng mưa xuân trên mái ngói.":s>=3?"Hương trầm vấn vít. Ngài nắm tay ngươi rất lâu, rồi màn the khép lại.":"Ngài có vẻ xa cách. Đêm trôi qua lặng lẽ sau tấm màn vàng.";
  const go=f=>()=>{nightFx(s);f()};
@@ -326,7 +341,7 @@ function rivalNight(v){v.nights++;v.nightLog.push(wk());const q=Math.round(effSa
  if(giuBlocked(v)){if(v.bac>=40&&roll(odA(v,45+v.tamco/3))){ap(v,{bac:-40});night(v)}}else night(v);
  if(v.rel<-20&&roll(20)){const o=odA(v,30+v.an/2);if(roll(o)){apply({sung:-4});if(S.mat>=2)r+=`Tai mắt nghe được: gối đầu, ${v.name} nói xấu ngươi. Sủng -4. `}else if(DG()){ap(v,{sung:-6});}}
  if(typeof amOn==="function"&&amOn()?amSendQ(v):roll(3)){r+=sendMaid(v)}/* AG3: her own choice (jagmaid) */
- if(roll(8))bestow(v,"night");return r}
+ if(empGive(v,8,"night"))bestow(v,"night");return r}
 function sendMaid(a){const m=a.maid;const rise=roll(30);a.maid=a===S?newMaid(pick(MAIDS.filter(x=>x!==m.name)),45):{name:pick(MAIDS.filter(x=>x!==m.name)),loyal:45};if(a===S)S.tonight=null;
  if(rise&&roomFor("consort")){const n=newRival(0);Object.assign(n,drawFace());n.name=freshName();n.rel=0;relAdd(a,n,m.loyal>=60?30:-25);rivals.push(n);return `Cung nữ ${m.name} của ${NM(a)} hầu thay, được sủng hạnh, phong ${RANKS[0].n} ${n.name}${m.loyal>=60?" và vẫn nhớ ơn chủ cũ":" và trở mặt với chủ cũ"}. `}
  return `Cung nữ ${m.name} của ${NM(a)} hầu thay một đêm rồi được thả ra cung với chút bạc. `}
@@ -374,9 +389,9 @@ function seatRivals(p){const L=liveRivals(false).filter(v=>v!==p&&v.rank>=5&&!v.
 function promoteP(p){if(rkOf(p)>=7||!promoReqP(p).every(x=>x[0]))return"";const me=p===S;p.lastPromo=S.turn;
  if(rkOf(p)===6)return"";
  if(false){const R2=seatRivals(p);if(R2.length){const tot=R2.reduce((s,v)=>s+seatW(v),seatW(p));if(!roll(100*seatW(p)/tot)){const w=R2.sort((a,b)=>seatW(b)-seatW(a))[0];if(S.rank>=7)return"";if(w===S){S.rank=7;S.justCrowned=1;S.lastPromo=S.turn;ghenAll(BAL.ghen.rankUp);if(qOn())rivals[0].queen=false;return `<b class="g">Thánh chỉ: lập ${S.name} làm Hoàng hậu, chủ trì lục cung.</b> `}w.rank=6;w.queen=true;rivals.splice(rivals.indexOf(w),1);rivals.unshift(w);return `<b>Thánh chỉ: lập ${w.name} làm Hoàng hậu</b>${me?"; ngươi lỡ ngôi trung cung":""}. `}}}
- if(me){S.rank++;ghenAll(BAL.ghen.rankUp);fx("gold");if(roll(35))bestow(S,"promo");if(S.rank===7){if(qOn())rivals[0].queen=false;return `<b class="g">Thánh chỉ: lập ${S.name} làm Hoàng hậu, chủ trì lục cung.</b> `}return `<b class="g">Thánh chỉ: tấn phong ${S.name} làm ${RANKS[S.rank].n}.</b> `}
+ if(me){S.rank++;ghenAll(BAL.ghen.rankUp);fx("gold");if(empGive(S,35,"promo"))bestow(S,"promo");if(S.rank===7){if(qOn())rivals[0].queen=false;return `<b class="g">Thánh chỉ: lập ${S.name} làm Hoàng hậu, chủ trì lục cung.</b> `}return `<b class="g">Thánh chỉ: tấn phong ${S.name} làm ${RANKS[S.rank].n}.</b> `}
  if(p.rank+1>=7){if(S.rank>=7)return"";p.rank=6;p.queen=true;const i=rivals.indexOf(p);rivals.splice(i,1);rivals.unshift(p);return `<b>Thánh chỉ: lập ${p.name} làm Hoàng hậu.</b> `}
- p.rank++;if(roll(35))bestow(p,"promo");return `${p.name} được tấn phong ${RANKS[p.rank].n}. `}
+ p.rank++;if(empGive(p,35,"promo"))bestow(p,"promo");return `${p.name} được tấn phong ${RANKS[p.rank].n}. `}
 function promote(){return promoteP(S)}
 function birth(fake){return birthP(S,fake)}
 function pregMonth(){return pregMonthP(S)}
@@ -459,7 +474,7 @@ function rivalsMonth(){let ev="";
  return ev}
 function festival(title,k,lbl){const C=consorts();if(C.length<2)return"";const art=p=>k==="sac"?artW2(p,"vu")*6:(artW2(p,"cam")+artW2(p,"thi"))*3;
  const sc=C.map(p=>(k==="sac"?effSac(p):p[k])+art(p)+R(wet()?40:30)+(wet()&&k==="sac"?-artW2(p,"vu")*3:0));const wi=sc.indexOf(Math.max(...sc)),w=C[wi];
- ap(w,{sung:8,danh:3});if(roll(50))bestow(w,"contest");
+ ap(w,{sung:8,danh:3});if(empGive(w,50,"contest"))bestow(w,"contest");
  if(w===S){ghenAll(BAL.ghen.festival);return `<span class="g">${title}: ${lbl} của ngươi át cả hậu cung, Hoàng thượng ban thưởng.</span> Sủng +8 · Danh +3. `}
  apply({danh:-2});return `<span class="r">${title}: ${w.name} chiếm hết phong quang, ngươi lu mờ.</span> Danh -2. `}
 function artW2(p,k){const l=p.arts[k];return l*(((["cam","ky","thi","hoa"].includes(k)&&has("trongtai"))||(k==="vu"&&has("mesac")))?2:1)}

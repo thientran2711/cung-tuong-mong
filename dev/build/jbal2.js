@@ -875,3 +875,23 @@ BAL.ag.harm={needs:["spite","sung","kid","safe","danh","ally"],
  hap:{wit:["provoke","humil","gossip","flaunt","effort","mediate","ksp","pray","harm:trip","harm:pushp","harm:rumor","harm:pond","harm:accuse","harm:vp","harm:xx","harm:takeaway"],pub:{effort:["vuon"],flaunt:["vuon"]}}};
 /* AG-ALL HYBRID day: intentW = × on the weight of a need that is part of her day intent when she picks her buổi; two = % she sets a second goal for the day */
 Object.assign(BAL.ag.day,{intentW:3,two:40});
+/* AG-ALL-2 (jagacts2.js; design dev/handover/reports/ag-all.md §16): the consort cards an NPC lacked + the Emperor's own visit / tea / bestowal.
+   cx2     the player's cards read the SAME entries (j2 talkOpts / deck, j9 topicOpts, j20) through cx2O (j8): o base odds, sd / dd / td / thi / mat / y = the
+           stat divisors / multipliers of the old literals, w gain, l loss, c cost; g = the need points an NPC's deed serves (BAL.ag.unit = one whole need).
+           flat Tâng bốc, true Nói thật lòng (nt = + if he is Nhân từ, disc = % he lets slip what he likes), show Phô tài (k × best art weight), favor Xin ân điển
+           (min Sủng, angry = % punished when he is furious), court Bàn chuyện triều chính, vent Trút giận (pg = her womb gauge, rel), chest Lục rương, fert Bài
+           thuốc dễ thụ thai (m tháng), doctor Mời thái y tâm phúc, kidMed Xin thuốc cho con (hp below, up), likes Hỏi sở thích Hoàng thượng, old Hỏi chuyện cũ (lãnh
+           cung), nurse Hầu thuốc Hoàng thượng (best = % he bestows), help Nhờ giúp đỡ (aff needed, p % she lends bac, fail = quý lost), kidGreet Đưa con thỉnh an
+           (fond), kidHeal Chữa bệnh cho con (y = Y thuật needed, hp, up); bac = the silver need of a consort (goal, weight), kidCare = the need of a mother with a sick child.
+   emp3    the Emperor's own evening visit (Ngự giá lâm cung) and day tea: desire × Σ visCh/100 = his wish to visit tonight (5 keeps HER old daily rate: her share
+           of his choice ≈ visCh(her) as before), visB = the buổi (j95c) of the visit, tea = his wish to drop by for tea, teaB, teaGap days per person.
+   give    his bestowal = his choice from his regard (was a flat roll of the same %): × cl(b + (Sủng − ref)/div + Ân tình/anDiv, lo, hi) × his memory (jagemp) ×
+           his mood × trait tr; th = the Thái hậu's (regard = her Thái hậu value) */
+BAL.ag.cx2={flat:{o:55,sd:5,w:{"sung":3},l:{"sung":-1},disc:25,g:{"sung":3}},true:{o:45,dd:3,nt:10,w:{"sung":2,"danh":2},l:{"sung":-2},disc:50,g:{"sung":2,"danh":2}},
+ show:{c:{"suc":-5},o:30,k:10,w:{"sung":4,"danh":1},l:{"danh":-2},g:{"sung":4,"danh":1}},favor:{min:30,o:35,sd:3,w:{"bac":60},l:{"sung":-4},angry:40,g:{bac:6}},
+ court:{o:40,td:2,thi:3,w:{"sung":4,"danh":3},l:{"sung":-2},g:{"sung":4,"danh":3}},vent:{pg:50,c:{"duc":-3},rel:20,g:{spite:5}},chest:{o:45,mat:5,rel:15,g:{spite:3,safe:3}},
+ fert:{c:{"bac":-40},m:3,g:{kid:4}},doctor:{c:{"bac":-50},g:{safe:2,kid:3}},kidMed:{c:{"bac":-30},hp:80,up:25,g:{kid:4}},likes:{c:{"bac":-15},o:80,g:{"sung":2}},
+ old:{o:50,td:5,g:{spite:3,safe:2}},nurse:{c:{"suc":-10},o:65,y:5,w:{"sung":4,"an":2},l:{"suc":-5},best:40,g:{"sung":5}},help:{aff:30,p:50,bac:30,fail:3,g:{bac:4,safe:2}},
+ kidGreet:{c:{"suc":-5},o:70,sd:10,w:{"sung":2},fond:8,g:{"sung":2,kid:2}},kidHeal:{c:{"suc":-10},y:4,hp:70,up:30,g:{kid:5}},bac:{goal:120,w:.6},kidCare:.8};
+BAL.ag.emp3={desire:5,visB:[3],tea:.4,teaB:[1,2],teaGap:6};
+BAL.ag.give={b:1,ref:40,div:60,anDiv:200,lo:.4,hi:2,tr:{datinh:1.2,lanhlung:.7},th:{ref:40,div:60,lo:.4,hi:2}};

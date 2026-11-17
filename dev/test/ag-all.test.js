@@ -15,7 +15,7 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
  /* make one NPC the Empress so her acts can be chosen (the seat may be empty at the start) */
  await p.evaluate(()=>{if(!queenP()){const v=liveRivals(true).find(x=>!x.out);v.queen=true;v.rank=7}});
  const r=await p.evaluate(async(DAYS)=>{const out={draws:[],follow:0,diff:0,by:{},byG:{consort:{},hh:{},th:{}},days:0};const by0=Object.assign({},AG.stat.by);
-  const grpOf=id=>id==="th"?"th":id==="emp"?"emp":(()=>{const v=RV(+id.slice(1));return v&&v.queen?"hh":"consort"})();
+  const grpOf=id=>id==="th"?"th":id==="emp"?"emp":/^s/.test(id)?"staff":(()=>{const v=RV(+id.slice(1));return v&&v.queen?"hh":"consort"})();
   for(let d=0;d<DAYS;d++){const d0=AGD.stat.draw;
    for(let bb=0;bb<4;bb++){placeWhere();agFlush();const R=S.roster;const D=agDz();
     for(const id in D.P){const s=D.P[id][S.buoi||0];if(!s)continue;if(s.k){const g=grpOf(id);out.byG[g]=out.byG[g]||{};out.byG[g][s.k]=(out.byG[g][s.k]||0)+1}
@@ -31,8 +31,8 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
  console.log('LANDED deeds: '+JSON.stringify(r.by));
  const tot=Object.values(r.byG.consort||{}).reduce((a,b)=>a+b,0);ok(tot>0,'consorts choose deeds from their act list',tot);
  /* 3 every chosen key = a player button of that group */
- const r3=await p.evaluate((byG)=>{const P=new Set(Object.keys(TW).concat(["effort"]));for(const k in AGCX)P.add("cx:"+k);["cx:study","cx:thHelp","cx:hhShield","cx:buy","cx:gift","cx:ally","cx:portrait","cx:humble"].forEach(k=>P.add(k));
-  for(const k in AGHH)P.add("hh:"+k);const TH=new Set(["th:gift","th:admon","th:release"]);const EMP=new Set(["emp:summon"]);/* the Emperor is never the player: his summons mirrors her Xin hầu cờ / đánh đàn (jgift kmEmpAct) *//* Thái hậu is never the player: her acts mirror the Empress's Ban thưởng / Khuyên / Ân xá */
+ const r3=await p.evaluate((byG)=>{const P=new Set(Object.keys(TW).concat(["effort"]));for(const k in AGCX)P.add("cx:"+k);["cx:study","cx:thHelp","cx:hhShield","cx:buy","cx:gift","cx:ally","cx:portrait","cx:humble"].forEach(k=>P.add(k));/* AG-ALL-2: a cx2 deed counts only if its player button label is really in the game's code */const SRC=[...document.scripts].map(x=>x.textContent).join("\n");for(const k in AGC2BTN)if(SRC.includes('n:"'+AGC2BTN[k])||SRC.includes('n:`'+AGC2BTN[k]))P.add("cx2:"+k);
+  for(const k in AGHH)P.add("hh:"+k);const TH=new Set(["th:gift","th:admon","th:release"]);const EMP=new Set(["emp:summon","emp:visit","emp:tea"]);/* AG-ALL-2: his visit mirrors her Ngự giá lâm cung night (the same visGo), his tea her "Hoàng thượng ghé cung uống chén trà" card (empTeaCard) *//* the Emperor is never the player: his summons mirrors her Xin hầu cờ / đánh đàn (jgift kmEmpAct) *//* Thái hậu is never the player: her acts mirror the Empress's Ban thưởng / Khuyên / Ân xá */
   const bad=[];for(const g in byG)for(const k in byG[g]){if(g==="emp"?!EMP.has(k):g==="th"?!TH.has(k):!(P.has(k)||/^(c|harm|maid|srv):/.test(k)))bad.push(g+":"+k)}return bad},r.byG);
  ok(r3.length===0,'no NPC-only hidden act: every chosen deed is a button of the player of that group',r3);
  /* 4 */
@@ -52,5 +52,24 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
  const r6=await p.evaluate(()=>{delete S.ag.day;const e=AGD.errs.length;try{placeWhere();agFlush()}catch(x){return{err:x.message}}const D=agDz();
   const L=AGD.ms.slice().sort((a,b)=>a-b);return{planned:D.d===wk()&&Object.keys(D.P).length>2,errs:AGD.errs.length-e,p95:L[Math.min(L.length-1,Math.floor(.95*L.length))],budget:BAL.ag.perf.p95}});
  ok(r6.planned&&!r6.errs&&!r6.err,'old save without a day plan loads and plans',r6);ok(r6.p95<=r6.budget,'perf: day draw p95 within BAL.ag.perf.p95 ms',r6);
+ /* 7 AG-ALL-2: the Emperor's visit / tea are HIS plan (NPC consorts too), bestowal by regard, the player's cards read BAL.ag.cx2 */
+ const r7=await p.evaluate(async()=>{const o={};const L=liveRivals(true).filter(v=>v.alive&&!v.out);for(const v of L){v.sung=75;v.an=40;v.preg=0;v.confined=0}S.sung=75;
+  const vs0=AG2.stat.visit,te0=AG2.stat.tea;const ks={};let npcNight=0,roll0=0;const vr=visRoll;
+  for(let d=0;d<14;d++){for(let bb=0;bb<4;bb++){placeWhere();agFlush();const D=agDz();const s=D.P.emp&&D.P.emp[S.buoi||0];if(s&&s.k)ks[s.k]=(ks[s.k]||0)+1;
+    if(S.visNpc&&S.visNpc.w===wk()&&S.tonight&&S.tonight.id===S.visNpc.id)npcNight++;Q.length=0;S.mg=0;try{nextBuoi()}catch(e){o.nb=e.message}Q.length=0}}
+  o.ks=ks;o.visit=AG2.stat.visit-vs0;o.tea=AG2.stat.tea-te0;o.npcNight=npcNight;o.rollOff=visRoll()==="";
+  /* bestowal: his regard decides at the site's own %; off → the plain roll */
+  const lo=L[0],hi=L[1]||L[0];lo.sung=5;lo.an=0;hi.sung=95;hi.an=80;let a=0,c=0;for(let i=0;i<3000;i++){if(empGive(lo,30,"t"))a++;if(empGive(hi,30,"t"))c++}o.give={lo:a/30,hi:c/30};
+  /* the player's card reads the same table */
+  const A=talkOpts({kind:"emp"});const f=A.find(x=>x.n==="Tâng bốc");o.card=f&&f.w.sung===BAL.ag.cx2.flat.w.sung&&f.o===od(cx2O(S,"flat"));
+  o.npcO=L.map(v=>AGREG.consort.cx2(v,agNeedsC(v),null).map(x=>x.k)).flat();return o});
+ console.log('AG-ALL-2 Emperor plan slots over 14 days: '+JSON.stringify(r7.ks)+' visits '+r7.visit+' (NPC nights '+r7.npcNight+') tea '+r7.tea);
+ ok(r7.visit>0&&(r7.ks["emp:visit"]||0)>0,'AG-ALL-2: Ngự giá lâm cung is the Emperor\'s own evening plan (NPC consorts too)',{v:r7.visit,ks:r7.ks});
+ ok(r7.npcNight>0,'AG-ALL-2: his visit to an NPC consort gives her the night (tablet path)',r7.npcNight);
+ ok(r7.tea>0,'AG-ALL-2: his tea drop-by is his own day plan',r7.tea);
+ ok(r7.rollOff,'AG-ALL-2: the daily visit roll is off while the plan runs',r7.rollOff);
+ ok(r7.give.hi>r7.give.lo,'AG-ALL-2: bestowal = his choice from regard (high regard more often at the same site %)',r7.give);
+ ok(r7.card,'AG-ALL-2: the player\'s Emperor card reads BAL.ag.cx2 through cx2O (ONE CORE)',r7.card);
+ ok(r7.npcO.some(k=>/^cx2:/.test(k)),'AG-ALL-2: consorts get the missing cards as options',[...new Set(r7.npcO)]);
  ok(errs.length===0&&(r.errs||[]).length===0,'no page errors / agent errors',{page:errs.slice(0,3),ag:r.errs});
  await b.close();const f=res.filter(x=>!x).length;console.log(f?`${f} FAIL`:`AG-ALL: ALL ${res.length} PASS`);process.exit(f?1:0)})();
