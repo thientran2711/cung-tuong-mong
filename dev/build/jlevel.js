@@ -23,7 +23,7 @@ function kitLearnHTML(o){const I=info(o.kind,o.k,o.from,o.to);if(!I)return"";
  /* the same frame as kitPersonReveal (§65.2): header, the centre (here the painting), card with the info lines + ONE button */
  return `<div class="kprev klearn"><div class="kmrew-h kprev-h"><b>Học thành tài</b><small>${esc(I.levelWord)}</small></div>
   <div class="kprev-fig klearn-fig"><img class="klearn-pic" src="${PAINT}" alt="" draggable="false" decoding="async" ${I.img?`onerror="this.onerror=null;this.src='${I.img}'"`:`onerror="this.remove()"`}></div>
-  <div class="kprev-card klearn-card">${typeof kitSteps==="function"?kitSteps(o.to,5,"","Bậc"):""}<div class="kinvrows klearn-rows">${rows}</div><button type="button" class="kbtn kmtake" data-km-close>Tiếp theo</button></div></div>`}
+  <div class="kprev-card klearn-card">${typeof kitSteps==="function"?kitSteps(o.to,0,"","Bậc"):""}<div class="kinvrows klearn-rows">${rows}</div><button type="button" class="kbtn kmtake" data-km-close>Tiếp theo</button></div></div>`}
 function kitLearn(o){if(!o||typeof kmPush!=="function"||!kmOn())return;kmPush(done=>{const st=kmStage("km-reward km-prev km-learn",kitLearnHTML(o),{manual:true,dur:60000,onEnd:done});st.ov.id="klearnov";
   try{if(typeof sfx==="function")sfx("sfx-open")}catch(e){}
   try{if(typeof kitFxBurst==="function"){const f=st.ov.querySelector(".klearn-fig");if(f){kitFxBurst("glowburst",f);kitFxBurst("spark",f,10)}}}catch(e){}})}
