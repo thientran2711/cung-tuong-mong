@@ -112,3 +112,49 @@ Unchanged (main's CHANGE.txt top line is the same as on 9fdc1199; AG/show-why ad
 2. Wipe review shots after the verdict: `python3 dev/site/cdn_sync.py --wipe-review batch-d8`.
 
 BATCH READY 8806f7b3ca5a0bb7a1d0f61d5f5e6241d431bdd2
+
+## BUILDER #3 (session_01964izDXBECKNTXdyNVmcBc, opus) — 17/11 ~12:40Z
+PRIORITY #1 CHECK: claims = this job only (D9 brief D9-batch-d8-remerge3.md) | review/batch-d8 was 8806f7b3 | live main moved 9391f9a9 → 7e264081 (npc-agent-ag3-r1) → **65dcf52f** (greet-meet-r1) during the run | nothing new built, merge + gates only. START_CTX ≈ 8 % (own estimate); now ≈ 35 %.
+
+**FINAL SHA: `6ca041487a6ae0aa240d3a1a7976303530d23ced`** on `review/batch-d8` = 8806f7b3 + merge 7e264081 (466c3906) + merge 65dcf52f (6ca04148). Main fast-forwards (65dcf52f is an ancestor). Main not touched.
+
+### Merge 7e264081 (AG3) → 466c3906
+| file | resolution |
+|---|---|
+| index.html / sw.js / assets.json | ours, then `bash dev/site/build_site.sh` |
+| assemble.py | batch order kept (jreg 2nd, …jkh, jnpcd, **jrbatch LAST**) + AG3's new **jagmaid.js after jagemp** (as on main) → 293 modules, no dups |
+| j3.js endTurn | both meanings: main's `const rg=nightRg()` + batch's (suc-khoe) `sucCap(S)` / `sucCap(v)` clamps |
+| **semantic** j42.js (AG3 srvEndTurn, NPC consorts rest in a maid life) | clamped to `100` → `sucCap(v)` (jkh rule: every Sức clamp reads sucCap). Whole-family scan `\.suc=cl(…,0,100)` in dev/build: the only merge-born one was this; j80 / jnroad:79 are pre-existing on the batch (jnroad goes through `ap` → sucCap), all*.js are old archives |
+### Merge 65dcf52f (greet-meet) → 6ca04148
+| assemble.py | + **jgreet.js between jcoopone and jwhyn** (as on main) → 294 modules, jreg 2nd, jrbatch LAST |
+| jbal2.js | both appended blocks (batch BAL.net.n kc2* + greet BAL.greet / BAL.net.n.greetName / meetW / BAL.talk); one-core: no key set twice |
+
+### Gates
+| check | 466c3906 | 6ca04148 (final) |
+|---|---|---|
+| quickcheck --runs 3 vs live | **PASS** vs 7e264081 · render 180/314 · tab 375/360 (+4 %) · buổi 960/1368 · old save ok · core gates PASS | **PASS** vs 65dcf52f · open 1441 ms · render 156/262 · tab 305/362 · buổi 781/1134 · tasks>200ms 12/13 · old save ok · core gates PASS |
+| one-core-guard | fails 0 (inline 6625 ≤ 6691) | fails 0 |
+| net-scan old rows / net-inline-scan | = live main (10 / 2, rest 0) · 0 | same · 0 |
+| coop-e2e vs LIVE Worker | **63/63** | **63/63** |
+| oldsave-r1 (old = live 7e264081 index.html) | **16/16** | — (brief: only quickcheck + coop-e2e after the 2nd merge; quickcheck's old-save step passed) |
+| agmaid_check.js (AG3's own) | 23/23, no page errors | — |
+| agent_check.js | exit 0, no FAIL | — |
+| greet_check.js (greet's own) | — | 13 ok, 0 FAIL |
+| console / regEach at load+start, Fold 755x1000 + iPad 1180x820 | 0 game errors, **0 regEach** | — |
+| npc-roads.js | 28/30 (see below) | — |
+| npc-roads-maids.js | 21/22 (see below) | — |
+| npc-roads-men.js | 22/23 (see below) | — |
+
+**Not-a-bug notes (please check, D):**
+1. The local `python3 -m http.server` was **blocked by this session's permission classifier**, so the npc-roads suites, agmaid/agent and the console check ran on `file://…/index.html`. Under file:// the only console error is `Fetch API cannot load file:///…/audio/VOICES.json. URL scheme "file" is not supported` (a scheme limit, not a game error) → it is the whole content of the 'no page errors' FAIL in all 3 npc-roads suites (npc-roads 1, maids 1, men 1). Builder #2 served over http and got 30/30 · 22/22 · 23/23. A reviewer with http may re-run them.
+2. npc-roads 'at most one help hồi per NPC' FAIL once (life 3, rival id 10, offers `nr_bac:8` + `nr_emp:8`, her own record `hs:1`): **test-key collision**, not a game bug. The test groups offered q72 cards by `c.ri` only, but maid (jnroad nrMOffer) and men (jnroadm nrMenOffer) offers go into the same queue with their own `rk` (servant / man) and `ri`; the game dedupes per (rk, ri) via `nrSameA`. A maid or man with id 10 at their chapter 8 = second entry under consort 10. Random life (bot not seeded); neither merge touched jnroad. → small test fix for whoever owns npc-roads: key `offers` by `c.rk+':'+c.ri` and keep only rk 'rv'/'hh'.
+3. First npc-roads-men run crashed the browser tab (`Target crashed`) when 3 long-bot suites ran at once (memory); re-run alone = 22/23 as above.
+
+### CHANGE line
+Unchanged (main's CHANGE.txt top line did not change with AG3 / greet-meet).
+
+### For main / D
+1. FF main → 6ca04148 (65dcf52f is its ancestor).
+2. Wipe review shots after the verdict: `python3 dev/site/cdn_sync.py --wipe-review batch-d8`.
+
+BATCH READY 6ca041487a6ae0aa240d3a1a7976303530d23ced
