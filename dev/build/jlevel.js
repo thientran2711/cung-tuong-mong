@@ -5,32 +5,28 @@
    Ngôn Hạnh, j85) — when HER level rises, kitLearn plays after the work that raised it (kmPush queue, behind any edict). NPC consorts: no scene (data only, as always).
    What she gained = the effect table's own lines (ARTFX / VIRFX, the same text as her skill card, ONE source) + the recipes the level opens (Tứ đức, RCP_ST via
    tdsOpenN). No number here.
-   PAINTING (owner 17/11 07:45Z): ONE painting PER SUBJECT, img/scene-thanhtai-<k>.webp (k = cam ky thi hoa vu y cong dung ngon hanh, Foreman C, 3:4). kitLearnPic(k) returns it
-   only when the CDN index (img/_index.json, KIT_CDNHAVE, jevban) lists it; otherwise (or while the index is not loaded) the skill's own painting (kitSkillArt, the one on her skill
-   card) shows AT ONCE — a missing file is never requested, the scene is never black. The picture is warmed when the scene is queued (kmPush pre), the scene waits up to 1.5 s for it.
-   ORDER (owner 07:28Z): the made item's result dialog first, then this scene (afterModals), then the buổi transition (jbuoi through the queue), then the next VIỆC (jorder gate).
+   PAINTING: img/scene-thanhtai.webp (ART REQUEST to Foreman C, dev/handover/FOREMAN_C_STATUS.md). Until it lands the scene shows the skill's own painting
+   (kitSkillArt, the one on her skill card) — an <img> onerror swap, no 404 loop.
    kitLearn({kind:"art"|"vir", k, from, to}) — the scene only; kitLearnHTML(o) = its HTML (kit sample page §86). Reduced motion / Hiệu ứng Gọn: final frame at once. */
 (function(){
 const esc=s=>typeof kmEsc==="function"?kmEsc(s):String(s==null?"":s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
-function kitLearnPic(k){const f=`img/scene-thanhtai-${k}.webp`;try{return typeof KIT_CDNHAVE!=="undefined"&&KIT_CDNHAVE&&KIT_CDNHAVE.has(f.replace(/^.*?(?=img\/scene-)/,""))?f:""}catch(e){return""}}  /* build rewrites img/ to the CDN url; the index keys are img/… (as kitEvBanner) */
+const PAINT="img/scene-thanhtai.webp";
 function info(kind,k,from,to){const V=kind==="vir",T=V?VIR.find(x=>x.k===k):ARTS.find(x=>x.k===k);if(!T)return null;
  const fx=(V?VIRFX:ARTFX)[k]||[];const L=[];for(let l=from+1;l<=to;l++)if(fx[l-1])L.push([`Bậc ${l}`,fx[l-1]]);
  let rec=[];if(V&&typeof RCP_ST==="object"&&typeof TDS_KIND==="object"&&typeof tdsOpenN==="function"){const kd=TDS_KIND[k],st=kd&&RCP_ST[kd];
   if(st)rec=st.slice(tdsOpenN(from),tdsOpenN(to)).map(s=>s[1]).filter(Boolean)}
  if(rec.length)L.push(["Mở thêm",`lối mới: ${rec.join(", ")}`]);
  const name=V?`${T.n} (${T.full})`:T.n;let img="";try{img=V?kitSkillArt("vir",k,T.n):(kitSkillArt("art",k,T.n)||(typeof AIMG==="object"&&AIMG[k]?AIMG[k]:""))}catch(e){}
- return{name,rows:L,img,pic:kitLearnPic(k)||img,levelWord:`${name} lên bậc ${to}`}}
+ return{name,rows:L,img,levelWord:`${name} lên bậc ${to}`}}
 function kitLearnHTML(o){const I=info(o.kind,o.k,o.from,o.to);if(!I)return"";
  const rows=typeof kitRows==="function"?kitRows(I.rows.map(([a,b])=>[a,esc(b)])):I.rows.map(([a,b])=>`<p><b>${esc(a)}</b> ${esc(b)}</p>`).join("");
  /* the same frame as kitPersonReveal (§65.2): header, the centre (here the painting), card with the info lines + ONE button */
  return `<div class="kprev klearn"><div class="kmrew-h kprev-h"><b>Học thành tài</b><small>${esc(I.levelWord)}</small></div>
-  <div class="kprev-fig klearn-fig"><img class="klearn-pic" src="${I.pic}" alt="" draggable="false" decoding="async" ${I.pic&&I.img&&I.pic!==I.img?`onerror="this.onerror=null;this.src='${I.img}'"`:`onerror="this.remove()"`}></div>
+  <div class="kprev-fig klearn-fig"><img class="klearn-pic" src="${PAINT}" alt="" draggable="false" decoding="async" ${I.img?`onerror="this.onerror=null;this.src='${I.img}'"`:`onerror="this.remove()"`}></div>
   <div class="kprev-card klearn-card">${typeof kitSteps==="function"?kitSteps(o.to,0,"","Bậc"):""}<div class="kinvrows klearn-rows">${rows}</div><button type="button" class="kbtn kmtake" data-km-close>Tiếp theo</button></div></div>`}
-function kitLearn(o){if(!o||typeof kmPush!=="function"||!kmOn())return;const I0=info(o.kind,o.k,o.from,o.to);
- /* deferred one tick: the road that raised the level pushes its result dialog / reward in the same call, after addArt; the scene is queued BEHIND them (afterModals) */
- setTimeout(()=>{if(!kmOn())return;kmPush(done=>{const st=kmStage("km-reward km-prev km-learn",kitLearnHTML(o),{manual:true,dur:60000,onEnd:done});st.ov.id="klearnov";
+function kitLearn(o){if(!o||typeof kmPush!=="function"||!kmOn())return;kmPush(done=>{const st=kmStage("km-reward km-prev km-learn",kitLearnHTML(o),{manual:true,dur:60000,onEnd:done});st.ov.id="klearnov";
   try{if(typeof sfx==="function")sfx("sfx-open")}catch(e){}
-  try{if(typeof kitFxBurst==="function"){const f=st.ov.querySelector(".klearn-fig");if(f){kitFxBurst("glowburst",f);kitFxBurst("spark",f,10)}}}catch(e){}},{pre:I0?[I0.pic]:[],afterModals:true})},0)}
+  try{if(typeof kitFxBurst==="function"){const f=st.ov.querySelector(".klearn-fig");if(f){kitFxBurst("glowburst",f);kitFxBurst("spark",f,10)}}}catch(e){}})}
 window.kitLearn=kitLearn;window.kitLearnHTML=kitLearnHTML;
 /* ---------- the hook: her level rose ---------- */
 /* addArt / addVir are global function declarations: reassign the binding other code calls by name */
