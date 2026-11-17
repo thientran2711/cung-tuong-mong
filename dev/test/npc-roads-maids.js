@@ -19,7 +19,7 @@ const [,,URL,NL,NM]=process.argv;const NLIV=+NL||2,MON=+NM||120;
     for(;mon<mons;mon++){if(S.dead||S.out){S.dead=false;S.out=0;S.suc=60}
      const t=S.turn;for(let g=0;g<40&&S.turn===t;g++){Q.length=0;used=0;try{nextBuoi()}catch(e){err=err||('buoi '+e.message);break}}Q.length=0;
      for(const s of nrMaidL()){if(!s.nr)continue;const z=seen.get(s)||{l:0,mis:nrMis(s)};seen.set(s,z);if(s.nr.l.length>z.l){z.l=s.nr.l.length;
-       const c=s.nr.c;if(c!=null){const r=nrMaidL().find(x=>(x===S.maid?'pm':x.sid)===c);if(r&&nrMis(r)===nrMis(s))bad.push([s.name,'rival same house'])}}}}
+       /* r2: a maid can change house between chapters (transfer, mistress gone); the rival is checked as the next chapter reads it (nrMRival recasts a stale one) */if(s.nr.c!=null&&!s.nr.x){const r=nrMRival(s);if(r&&nrMis(r)===nrMis(s))bad.push([s.name,'rival same house'])}}}}
     const M=[...seen.keys()].map(s=>({name:s.name,o:s.nr.o,r:s.nr.r,l:s.nr.l,x:s.nr.x,own:nrMis(s)===S,valid:!!ARC67[s.nr.r]&&ARC67[s.nr.r].o==='cnv',chs:[4,5,6,7,8,9,10,11].filter(n=>nrCh(s.nr.r,n))}));
     const raised=rivals.filter(v=>v.nr&&v.nr.pr).map(v=>({name:v.name,o:v.nr.o,r:v.nr.r,pr:v.nr.pr,l:v.nr.l,ok:ARC67[v.nr.r]&&ARC67[v.nr.r].o==='cn'}));
     const logs=S.logs.filter(l=>/Tin trong cung · [^·]*người hầu/.test(l)).length;
