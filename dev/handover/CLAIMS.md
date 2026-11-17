@@ -679,3 +679,4 @@
 | night-final review r2 (opus BIG) of f7c54202 | review/night-final-r2 | D | session_01964izCMFu6Vj4oECszvM5j | RUNNING | 17/11 07:38Z |
 | one-core-dup2-r2 r3 FAIL 711e637d (15 wrong bindings + j17 AOUT + guard gaps) → opus fix r3 (brief briefs/one-core-dup2-r3.md; sonnet fix worker archived) | review/one-core-dup2-r2 | B | session_01N1tNP5Muf9zF38i81jtdgj | RUNNING | 17/11 07:41Z |
 | KỲ NGUYỆT SỰ length rolled 5/6/7 per (woman, month) (opus; MAIN s30 07:36Z, OD 07:35Z) | review/cycle-roll | D | session_01964izEeMN4FkyE99xVCtWw | RUNNING | 17/11 07:41Z |
+| one-core-arcs r1 FAIL c682afe6 (66 one-arg go amounts + guard amt regex) → fix r2 by the arcs worker (opus) on review/one-core-arcs | review/one-core-arcs | B | session_01N1tNP5MRPzxmbFfWjw6LuT | RUNNING | 17/11 07:45Z |
