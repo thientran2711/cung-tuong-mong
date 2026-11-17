@@ -195,7 +195,7 @@ function rcpBookRows(k){const b=rcpBk(k),a=itemArt(k),gr=KIT_GRADE[a?a.grade|0:0
  const kn=rcpKnows(S,b.kind,b.sid);const B=[pbtn(`data-rcpread="${i}"`,"Đọc, học lối này",`tốn: 1 khắc · thành: học ${rcpStN(b.kind,b.sid)}`,kn?"đã học lối này":whyTime(1)),
   pbtn(`data-kinvact="gift" data-ix="${i}"`,"Tặng","tốn: 2 khắc · thành: chọn người nhận",whyTime(2)),pbtn(`data-kinvact="sell" data-ix="${i}"`,"Bán",`thành: Bạc +${Math.floor((it.pr||0)/2)}`,"")];
  const F=[];if(g.n>1)F.push(`Trong rương: ${g.n} món.`);const fr=kinvFrom(g.from);if(fr)F.push(fr+".");
- kitModal({kind:"info",title:it.n,sub:`${it.kd} · ${KIT_GRADE[x.grade|0].n}`,itemPic:kitItem({src:x.src512||x.src,name:"",grade:x.grade,size:"lg",qty:g.n}).replace('<span class="kitn"></span>',''),
+ kitModal({kind:"info",title:it.n,sub:it.kd,itemPic:kitItem({src:x.src512||x.src,name:"",grade:x.grade,size:"lg",qty:g.n}).replace('<span class="kitn"></span>',''),
   html:`<div class="kinvrows">${rcpBookRows(g.k)}</div>${F.length?kitFacts(F):""}<div class="rbtn kinvacts">${B.join("")}</div>`})}})();
 document.addEventListener("click",ev=>{const b=ev.target.closest&&ev.target.closest("[data-rcpread]");if(!b||b.disabled)return;ev.stopPropagation();const ix=+b.dataset.rcpread;
  try{if(typeof kitModalClose==="function")kitModalClose()}catch(e){}if(Q.length&&!Q[0].opts)closeModal();rcpRead(ix)},true);
@@ -207,7 +207,7 @@ wkrTile=function(kind,r,l){const gr=rcpHasR(S,kind,r.id),ok=gr||r.lv<=l,a=ARTS.f
  const eff=(s?`Lối ${s[1]}`:"")+(r.st?" · "+r.st.map(x=>x[0]).join(", "):"");
  const why=!ok?`Cần ${a.n} bậc ${r.lv}`:!kn&&!tch?`Chưa học lối «${s[1]}»: học với thầy, hoặc đọc ${RCP_BK[kind].toLowerCase()} «${s[1]}»`:"";const A=`data-kwr="${kind}" data-kwri="${r.id}"`;
  return `<div class="kshc kshpick${can2?"":" kshno"}" ${A}>`+
-  `<span class="kshpic">${kitItem({src:wkrPic(kind,r,0),name:r.n,grade:0,size:"slot",tip:r.n})}</span>`+
+  `<span class="kshpic">${kitItem({src:wkrPic(kind,r,0),name:r.n,size:"slot",tip:r.n})}</span>`+
   `<span class="kshn" title="${r.n}">${r.n}</span><span class="kshe" title="${eff}">${eff}</span>`+
   `<span class="kshp">${gr&&(r.lv>l||!rcpKnows(S,kind,s[0]))?"đã học món này":r.lv?`${a.n} bậc ${r.lv}`:"mọi bậc"}</span>`+
   `<button type="button" class="kbtn kshgo" ${A} data-kwrgo="1"${can2?"":` disabled title="${why}"`}>${!ok?"Chưa mở":tch?"Học lối này":kn?"Làm":"Chưa học"}</button></div>`};
@@ -286,7 +286,7 @@ function rcpSpyO(){return cl(Math.round(BAL.rcp.spyO+((S.maid&&S.maid.loyal)||0)
 if(typeof ev==="function")ev("rcpMama",()=>S.rank>=0&&!S.out&&["mon","huong","theu","ao"].some(k=>RCP_ST[k].some(s=>!rcpKnows(S,k,s[0]))),
  ()=>{const k=pick(["mon","huong","theu","ao"].filter(k=>RCP_ST[k].some(s=>!rcpKnows(S,k,s[0]))));const s=pick(RCP_ST[k].filter(s=>!rcpKnows(S,k,s[0])));return{k,s:s[0]}},
  p=>{const s=rcpSt(p.k,p.s);if(!s)return null;const fee=Math.max(BAL.rcp.mamaMin,Math.round((BAL.pay?BAL.pay[Math.min(7,S.rank|0)]:40)*BAL.rcp.mamaK)),nm=p.k==="mon"?"Thượng thực cục":"Thượng công cục";return{
- t:`Một ma ma già ở ${nm} sang thỉnh an, kể rằng thuở trẻ từng hầu một vị nương nương rất giỏi ${rcpStN(p.k,p.s)}, còn nhớ cả phổ.<br>“Nếu ${(typeof lowRank==="function"?lowRank():S.rank<3)?"tiểu chủ":"nương nương"} muốn, nô tỳ chép lại cho.”`,o:[
+ t:`Một ma ma già ở ${nm} sang thỉnh an, kể rằng thuở trẻ từng hầu một vị nương nương rất giỏi ${rcpStN(p.k,p.s)}, còn nhớ cả phổ.<br>“Nếu ${kSay({srv:"f"},S,"{goi}")} muốn, nô tỳ chép lại cho.”`,o:[
  {n:"Biếu ma ma ít bạc, xin chép phổ",fx:{bac:-fee},x:`thành: có ${IT[rcpBookK(p.k,p.s,1)].n}`,go:()=>{S.inv.push({k:rcpBookK(p.k,p.s,1),from:"me"});log(`Ma ma chép lại ${IT[rcpBookK(p.k,p.s,1)].n}, ta cất vào rương.`)}},
  {n:"Phụ ma ma một buổi bếp núc, học tận tay",fx:{suc:-15},x:`thành: học ngay ${rcpStN(p.k,p.s)}`,go:()=>{const t=rcpGrant(p.k,p.s,"ma ma dạy tận tay");if(t)log(t)}},
  {n:"Cảm tạ, không cần",fx:{}}]}});

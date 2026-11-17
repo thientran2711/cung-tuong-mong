@@ -80,9 +80,9 @@ function tickFlush(label,n){if(!TICK.size||!S)return false;const g=[];for(const 
    /* its "Sức +N" already holds the weekly rest */const g2=g.filter(x=>!/^nghỉ ngơi qua tuần:/.test(x));if(!g2.length){S.logs[i]=h.replace(/^(<span class="ld">[^<]*<\/span>)?/,m=>m+MK("t"));return i+1}g.length=0;g.push(...g2);
    S.logs[i]=h.replace(/^(<span class="ld">[^<]*<\/span>)?/,m=>m+MK("t")).replace(/[.\s]*$/,"")+` · ${g.join(" · ")}.`;return i+1}}
  log(`${MK("t")}${String(label||lab||"Sang tuần mới").replace(/[.:\s]+$/,"")}: ${g.join(" · ")}.`);return 1}
-function reset(){LG=S?{s:S,v:lsSnap(),seq:S.logSeq||0}:null;ATT={};pm0=typeof popMsg==="string"?popMsg:""}
+function reset(){LG=S?{s:S,v:lsSnap(),seq:S.logSeq||0}:null;ATT={};pm0=typeof popMsg==="string"?(typeof kShort==="function"?kShort(popMsg):popMsg):""}
 /* a change no reason was given for: the pop card's own sentence of this action, if it wrote one */
-function popWhy(){try{const p=typeof popMsg==="string"?popMsg:"";if(!p||p===pm0)return"";const t=plain(p).replace(/\s+/g," ").trim().split(/(?<=[.!?])\s/)[0].replace(/[.!?]+$/,"");return t.length>2&&t.length<=90?t:""}catch(e){return""}}
+function popWhy(){try{const p=typeof popMsg==="string"?(typeof kShort==="function"?kShort(popMsg):popMsg):"";if(!p||p===pm0)return"";const t=plain(p).replace(/\s+/g," ").trim().split(/(?<=[.!?])\s/)[0].replace(/[.!?]+$/,"");return t.length>2&&t.length<=90?t:""}catch(e){return""}}
 function lsSync(label,why){try{if(!S||!Array.isArray(S.logs))return;if(!LG||LG.s!==S){reset();return}if(fold)return;
   const w=Object.assign({},ATT);if(why)for(const k in why)if(why[k])(w[k]=w[k]||[]).push(why[k]);
   if(quiet){TICK=new Map();reset();return}/* a death's last act still gets its line (its cost) */

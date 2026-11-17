@@ -36,7 +36,7 @@ function $q(s,r){return (r||document).querySelector(s)}
 function srv(){try{return typeof isSrv==="function"&&isSrv()}catch(e){return false}}
 function coop(){try{return !!(window.COOP&&COOP.state&&COOP.state.playing)}catch(e){return false}}
 /* how the ma ma speaks to her (VANPHONG §2) */
-function X(cap){let w=srv()?"ngươi":(S&&S.rank>=3&&!S.out?"nương nương":"tiểu chủ");return cap?w.charAt(0).toUpperCase()+w.slice(1):w}
+function X(cap){/* one address core (jvoice kAddr, VANPHONG §2) */let w=srv()?"ngươi":kSay({srv:"f"},S,"{goi}");return cap?w.charAt(0).toUpperCase()+w.slice(1):w}
 function ME(cap){const w=srv()?"ta":"nô tỳ";return cap?w.charAt(0).toUpperCase()+w.slice(1):w}
 function say(s){return String(s).replace(/\{X\}/g,X(true)).replace(/\{x\}/g,X(false)).replace(/\{M\}/g,ME(true)).replace(/\{m\}/g,ME(false))}
 /* the screen is busy: a dialog, the title / menu, a motion moment, the week book, a mini game, the loading screen, the co-op wait card */

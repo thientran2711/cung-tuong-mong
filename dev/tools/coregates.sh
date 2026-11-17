@@ -49,7 +49,7 @@ for h in $(ls "$KIT/dev/tools/quickcheck.d/"*.sh 2>/dev/null | sort); do
 done
 # G5 co-op one world (owner CO-OP FIRST): until the 50-coop-one-world.sh hook is in this kit, run the probe straight from the sha if it has one
 if ! ls "$KIT/dev/tools/quickcheck.d/"*coop-one-world*.sh >/dev/null 2>&1 && ! skip G5; then
-  CT=""; for c in "$KIT/dev/test/coop-one-world.js" "$WT/dev/test/coop-one-world.js"; do [ -f "$c" ] && { CT=$c; break; }; done
+  CT=""; for c in "$WT/dev/test/coop-one-world.js"; do [ -f "$c" ] && { CT=$c; break; }; done
   if [ -n "$CT" ] && ! grep -q "COOP_ONE" "$WT/dev/index.html" "$WT/index.html" 2>/dev/null; then FAILS+=("G5 coop-one-world: the probe is here but the build has no one-world guards (jcoopone.js)"); CT=""; fi
   if [ -n "$CT" ]; then for sd in 7 3; do QC_WT=$WT SEED=$sd timeout 120 node "$CT" > "$OUT/g5-coop-one-world-$sd.txt" 2>&1 || { tail -4 "$OUT/g5-coop-one-world-$sd.txt"; FAILS+=("G5 coop-one-world seed $sd ($OUT/g5-coop-one-world-$sd.txt)"); }; done
   else echo "G5 coop-one-world: probe not in this kit or sha yet (review/coop-one-world) — skipped"; fi

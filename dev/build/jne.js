@@ -91,7 +91,7 @@ function kitNightEnd(o){o=o||{};const T0=TIER[o.tier]||TIER.normal;const T=Objec
  const [mv,mc]=moodRow(o.m0,o.m1,o.tier);
  const rows=[["Hoàng thượng",mv,mc]];if(G.length)rows.push(["Được",G,"g"]);if(B.length)rows.push(["Mất",B,"r"]);
  let tb=kitRows(rows);try{const kem=kitKemRow(K);if(kem)tb=tb.replace(/<\/span>$/,kem+"</span>")}catch(e){}
- const items=(o.items||[]).map(e=>{let I={};try{I=kitItemInfo(e)}catch(x){}return `<div class="kmrow kne-it">${typeof kitItem==="function"?kitItem({src:I.src,name:"",grade:I.grade||0,size:"sm",tip:I.name}).replace('<span class="kitn"></span>',""):""}${typeof kitGradeChip==="function"?kitGradeChip(I.grade||0,{size:"sm"}):""}<b>${esc(I.name||"")}</b><small>Hoàng thượng ban</small></div>`}).join("");
+ const items=(o.items||[]).map(e=>{let I={};try{I=kitItemInfo(e)}catch(x){}return `<div class="kmrow kne-it">${typeof kitItem==="function"?kitItem({src:I.src,name:"",grade:I.grade||0,size:"sm",gname:I.gname,tip:I.name}).replace('<span class="kitn"></span>',""):""}<b>${esc(I.name||"")}</b><small>Hoàng thượng ban</small></div>`}).join("");
  const html=`<div class="kne kne-${o.tier}">${picHTML(DIR+T.pic+".webp",o.tier)}<div class="kne-side"><div class="kne-cap"><b>${T.t}</b>${o.line?`<small>${esc(o.line)}</small>`:""}</div>
   <div class="kmlist">${tb}${items}</div><button class="kbtn kmtake kne-take" data-km-close>${items?"Nhận":"Tiếp tục"}</button></div></div>`;
  const keys=(o.items||[]).map(e=>e.k);
@@ -133,7 +133,9 @@ const rs0=resultShow;resultShow=function(title,before){if(title!=="Đêm thị t
   const V=variantOf(T.tier);
   const line=V.line||(T.tier==="warm"?"Nến đỏ cháy suốt canh khuya, tiếng đàn còn vương bên gối.":T.tier==="cold"?"Ngọn nến lụi dần, trăng lạnh soi qua song cửa.":"Côn trùng rỉ rả ngoài hiên, ngọn nến lặng lẽ cháy tới sáng.");
   window.kneLast.pic=V.pic;
-  N=null;window.__kneMute=1;setTimeout(()=>{window.__kneMute=0},600);kitNightEnd({tier:T.tier,m0,m1,before,items,line,pic:V.pic});return}catch(e){console.error(e)}}
+  /* the night's own caption may come from the road that led to it (jvisit: the Emperor stayed in HER palace) — one hook, same card */
+  let line2=line;try{if(typeof window.kneLineHook==="function"){const x=window.kneLineHook(T.tier);if(x)line2=String(x)}}catch(e){}
+  N=null;window.__kneMute=1;setTimeout(()=>{window.__kneMute=0},600);kitNightEnd({tier:T.tier,m0,m1,before,items,line:line2,pic:V.pic});return}catch(e){console.error(e)}}
  return rs0.apply(this,arguments)};
 const cm0=chooseM;chooseM=function(){const r=cm0.apply(this,arguments);if(window.__kneHold)release();return r};
 
@@ -202,7 +204,7 @@ function morningAfter(){const M=S&&S.neMorn;if(!M||S.dead)return;if(M.d===wk())r
    opts:[{n:"Tiếp tục",fx:{},hideOut:true,hint:"không đổi gì thêm",risk:"an toàn",go:()=>{}}]});return}
  if(M.tier==="cold"){apply({danh:A.coldDanh});if(!ui)return;const m=mockerOf();const v=m&&m.v;const named=v&&m.known;
   const nm=named?whoOf(v.id,v.name):"một vị phi tần ngươi chưa quen";let who;try{who=named&&typeof pv==="function"?pv(v):undefined}catch(e){}
-  Q.push({t:"Lời ra tiếng vào",who,art:"img/ev-toil-rival-tease.webp",hideOut:true,h:`<p>${nm.charAt(0).toUpperCase()+nm.slice(1)} che miệng cười khi gặp ngươi lúc thỉnh an: “Nghe nói đêm qua muội muội hầu giá, mà Hoàng thượng chẳng mấy vui lòng?”</p><p>Mấy phi tần khác liếc nhau, khẽ cười.</p><p class="past">Danh ${A.coldDanh}.</p>`,
+  Q.push({t:"Lời ra tiếng vào",who,art:"img/ev-toil-rival-tease.webp",hideOut:true,h:`<p>${nm.charAt(0).toUpperCase()+nm.slice(1)} che miệng cười khi gặp ngươi lúc thỉnh an: “Nghe nói đêm qua ${v?kSay(v,S,"{goi}",{m:"cool"}):"muội muội"} hầu giá, mà Hoàng thượng chẳng mấy vui lòng?”</p><p>Mấy phi tần khác liếc nhau, khẽ cười.</p><p class="past">Danh ${A.coldDanh}.</p>`,
    opts:[{n:"Nhẫn nhịn",fx:{duc:A.bearDuc,danh:A.bearDanh},hideOut:true,hint:"giữ tiếng hiền đức, nhưng người ta cho là ngươi yếu thế",risk:"an toàn",go:()=>{log("Ta nhẫn nhịn, không đáp một lời.")}},
     {n:"Cười trừ",fx:{},hideOut:true,hint:"cho qua, không đổi gì",risk:"an toàn",go:()=>{log("Ta cười trừ cho qua.")}},
     {n:"Đáp lại",fx:{suc:A.replySuc},hideOut:true,hint:"đáp khéo thì thêm danh tiếng, thành bại khó đoán, hỏng thì nàng ta càng ghét",risk:"có rủi ro",

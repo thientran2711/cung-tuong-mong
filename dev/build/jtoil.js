@@ -29,12 +29,11 @@ Object.assign(BAL,{toil:{khac:1,
  /* other consorts who see her (a rival she meets, everyone at Thỉnh an Hoàng hậu): ghen / quý by nết */
  ghenShowy:2,ghenTuyet:1,ghenMul:{"Kiêu ngạo":1.5,"Tham vọng":1.5,"Hiểm độc":1.2,"Hiền lành":.5,"Nhu mì":.5},crowd:.5,praisePlain:1,frownShowy:-1,
  /* NPC data: chance of a showy / plain day by nết, chance of no makeup, face score = base + Sắc × k ± spread */
- npc:{showy:{"Kiêu ngạo":.35,"Tham vọng":.3},plain:{"Hiền lành":.4,"Nhu mì":.35},showy0:.08,plain0:.1,moc:.1,base:30,sac:.5,spread:40},
+ npc:{showy:{"Kiêu ngạo":.35,"Tham vọng":.3},plain:{"Hiền lành":.4,"Nhu mì":.35},showy0:.08,plain0:.1,moc:.1},
  /* skill: Sắc / sacDiv + Họa / hoaDiv + ma ma tinh ý (0..1) — widens tolerance, adds up to `skillShare` of the final share */
  sacDiv:250,hoaDiv:8,mama:.1,skillShare:20,
- /* the look on HER face all day (owner 15/11): "dep" (score ≥ tier[1]) = rosy cheeks, light lip tint, brighter skin; "diem" (diêm dúa: half the
-    powder points caked) = round strong blush, heavy red lips, powdery white face; anything else = the painting as it is */
- diemThick:.4}});
+ /* the look on HER face: TOIL_LOOKS / TOIL_MKS; how the look is earned: the diemtrang-score block below (freehand parts, heaviness) */
+ }});
 const TOIL_DV={hopdip:"hợp dịp",hoppham:"hợp phẩm",giandi:"quá giản dị",photruong:"quá phô trương",vuot:"vượt phẩm",tang:"phạm tang"};
 const TOIL_MK={moc:"mặt mộc",vung:"vụng",vua:"vừa",dep:"đẹp",tuyet:"tuyệt",diem:"diêm dúa"};
 const TOIL_HK={strict:"trọng lễ",frugal:"chuộng giản dị",jealous:"hay ghen",normal:"",nha:"thích thanh nhã",lay:"thích lộng lẫy",doan:"thích đoan trang"};
@@ -60,6 +59,101 @@ function toilMaxF(){return Math.max(0,...toilOcc().map(o=>o.F))}
 /* F of a meeting: thỉnh an / Hoàng thượng = 1, raised to 2 on a festival day; a rival met in passing = 0 (festival 2) */
 function toilFOf(host){let fest=false;try{fest=!!(typeof festToday==="function"&&festToday())}catch(e){}if(host==="th"||host==="emp"||(host&&host.queen))return fest?2:1;return fest?2:0}
 
+/* ---------- DIEMTRANG-SCORE (owner 16/11 ~22:30Z, OD "answer to the diemtrang-score proposal"): freehand drawing on HER face, strict
+   scoring against a hidden ideal taken from the face itself, no guide lines; diêm dúa earned by choices and revealed only in the result;
+   vụng earned by a part that went wrong. ONE CORE: every number here; NPCs and the bot use the same table (toilNpcPlay). ---------- */
+Object.assign(BAL.toil,{skillShare:10,
+ /* brow: tolerance = brow length × (tol + tolSk × skill); a stroke counts for the nearer brow; over = stroke beyond the brow ends;
+    messy = spread of the strokes across the line above the brow's own thickness; sym = the two brows at different heights */
+ brow:{tol:.11,tolSk:.04,overK:1.2,messyK:.6,symK:.35,smear:30,near:3,slack:.3,end:.6,thk:.6},
+ /* blush: the hidden spot on each cheekbone (from the eyes and the mouth of THIS face); r × eye distance; dose window as before */
+ cheek:{r:.26,dx:.06,dy:.55,puff:.5,step:.45,spill:.8,bal:.5,margin:1.7,ring:1.3,edMin:.4,doseLo:1,doseLoSk:.3,doseHi:2.2,doseHiSk:.6,cake:4.2},
+ /* lips: the three dots on THIS mouth; position tolerance × the dot radius, timing tolerance as before */
+ lip:{tol:1.1,tolSk:.4,ttol:1.2,ttolSk:.8,dx:.22,dy:-.12,dyLow:.22,rMin:7,rK:.05},
+ /* a part this bad shows on her face (vụng), whatever the total: brow / powder / son */
+ fail:.3,
+ /* NO fallback targets (review r1 / owner 22:38Z): the board waits for THIS face's points (meshWait ms, brush off, "đang soi gương");
+    if they never come the sitting is played for her from skill (toilNpcPlay), never scored against a guessed face */
+ meshWait:8000,
+ /* time for brows / powder (ms, from her first touch); lip ring period = ring[0] + ring[1] × skill (ms) */
+ lim:[14000,10000],ring:[1150,500],
+ /* popup words on the board: brow good / fair, powder good / fair, "dày" / "lem" share, lip good / fair */
+ pop:{brow:[.8,.5],powder:[.8,.6],over:.3,spill:.3,lip:[.75,.4]},
+ /* diêm dúa: heaviness of her choices against what the day allows (never shown before the result: owner 16/11) */
+ heavy:{mat:{hoadao:0,hongmai:1,rangchieu:1,kimsa:1,nautram:0,tuvi:1,hophach:1},ma:{hongphan:0,hoadao:0,haiduong:1,yenchi:2,rangchieu:1,hongsen:0,camquyt:1},
+  son:{haiduong:1,dotham:2,hongdao:0,chusa:1,manchin:2,sanho:0,camdao:1,hophach:2},may:{nau:0,den:1,thanhdai:0,naunhat:0,khoi:0}},
+ tone:{mat:{hoadao:"w",hongmai:"c",rangchieu:"w",kimsa:"w",tuvi:"c",hophach:"w"},ma:{hongphan:"c",hoadao:"w",haiduong:"c",yenchi:"c",rangchieu:"w",hongsen:"c",camquyt:"w"},
+  son:{haiduong:"c",dotham:"c",chusa:"w",manchin:"c",sanho:"w",camdao:"w",hophach:"w"}},
+ teaseGhen:2,presetDiem:2,mixH:1,showyH:1,cakeH:[[.3,1],[.55,2]],
+ allow:{thuong:4,thinhan:3,night:5,fest:6,tang:1},diemOdds:[0,.3,.55,.8,.95],
+ /* NPCs and the bot: how well each part goes, by skill (same skill formula), spread per part */
+ play:{q0:.53,qSk:.15,spread:.44,cake:.12,cakeOver:.35,diemPre:.3}});
+function toilDense(P,n){const L=[0];for(let i=1;i<P.length;i++)L.push(L[i-1]+Math.hypot(P[i][0]-P[i-1][0],P[i][1]-P[i-1][1]));const T=L[L.length-1]||1,o=[];
+ for(let k=0;k<=n;k++){const t=k/n*T;let i=1;while(i<P.length-1&&L[i]<t)i++;const f=(t-L[i-1])/((L[i]-L[i-1])||1);o.push([P[i-1][0]+(P[i][0]-P[i-1][0])*f,P[i-1][1]+(P[i][1]-P[i-1][1])*f])}return o}
+function toilSegD(p,a,b){const dx=b[0]-a[0],dy=b[1]-a[1],l=dx*dx+dy*dy||1;let t=((p[0]-a[0])*dx+(p[1]-a[1])*dy)/l;const o=t<0?-1:t>1?1:0;t=Math.max(0,Math.min(1,t));
+ const x=a[0]+dx*t,y=a[1]+dy*t;return{d:Math.hypot(p[0]-x,p[1]-y),out:o,sy:p[1]-y}}
+function toilLineD(p,L){let best=null;for(let i=1;i<L.length;i++){const r=toilSegD(p,L[i-1],L[i]);if(!best||r.d<best.d)best=r;}
+ /* beyond an end only when the nearest segment is the first / last one */const r0=toilSegD(p,L[0],L[1]),r1=toilSegD(p,L[L.length-2],L[L.length-1]);
+ best.end=(r0.out<0&&r0.d<=best.d+1e-6)||(r1.out>0&&r1.d<=best.d+1e-6);return best}
+/* the hidden ideal on THIS face: v = face points (img/mk-fit, 1/4000 of the picture) or null; img = where the picture is drawn {x,y,w,h};
+   T(u,v) + fws = the face-box mapping (fallback) */
+function toilIdeal(v,img,fws){const B=BAL.toil;if(!v||v.length<120)return null;const P=i=>[img.x+v[2*i]/4000*img.w,img.y+v[2*i+1]/4000*img.h];
+ const brows=[40,50].map(s=>{const up=[0,1,2,3,4].map(i=>P(s+i)),lo=[4,3,2,1,0].map(i=>P(s+5+i));const c=up.map((p,i)=>[(p[0]+lo[i][0])/2,(p[1]+lo[i][1])/2]);
+  return{c:toilDense(c.sort((a,b)=>a[0]-b[0]),18),th:up.reduce((a,p,i)=>a+Math.hypot(p[0]-lo[i][0],p[1]-lo[i][1]),0)/5}});
+ const eyes=[20,30].map(s=>{let x=0,y=0;for(let i=0;i<10;i++){const p=P(s+i);x+=p[0]/10;y+=p[1]/10}return[x,y]});
+ const LO=[];for(let i=0;i<12;i++)LO.push(P(i));const lc=[LO.reduce((a,p)=>a+p[0],0)/12,LO.reduce((a,p)=>a+p[1],0)/12];
+ const lw=Math.max(...LO.map(p=>p[0]))-Math.min(...LO.map(p=>p[0])),lh=Math.max(...LO.map(p=>p[1]))-Math.min(...LO.map(p=>p[1]));
+ brows.sort((a,b)=>a.c[0][0]-b.c[0][0]);eyes.sort((a,b)=>a[0]-b[0]);const ed=Math.hypot(eyes[1][0]-eyes[0][0],eyes[1][1]-eyes[0][1])||fws*B.cheek.edMin,mx=(eyes[0][0]+eyes[1][0])/2;
+ const cheeks=eyes.map(e=>{const s=e[0]<mx?-1:1;return{x:e[0]+s*B.cheek.dx*ed,y:e[1]+(lc[1]-e[1])*B.cheek.dy,r:B.cheek.r*ed}});
+ const L=B.lip,lips=[[lc[0]-L.dx*lw,lc[1]+L.dy*lh],[lc[0]+L.dx*lw,lc[1]+L.dy*lh],[lc[0],lc[1]+L.dyLow*lh]];
+ brows.forEach(b=>{let s=0;for(let i=1;i<b.c.length;i++)s+=Math.hypot(b.c[i][0]-b.c[i-1][0],b.c[i][1]-b.c[i-1][1]);b.len=s});
+ return{brows,cheeks,lips,lr:Math.max(L.rMin,fws*L.rK),ed,mesh:true}}
+/* brow quality 0..1 (+ which brow failed): strokes = [[x,y]…] lists */
+function toilBrowQ(strokes,I,sk){const B=BAL.toil.brow,all=strokes.flat();const len=(I.brows[0].len+I.brows[1].len)/2,tol=len*(B.tol+B.tolSk*sk);
+ const per=I.brows.map(()=>({pts:[]}));let smear=0;
+ for(const p of all){const d=I.brows.map(b=>toilLineD(p,b.c));const k=d[0].d<=d[1].d?0:1;if(d[k].d>tol*B.near){smear++;continue}per[k].pts.push([p,d[k]])}
+ const q=I.brows.map((b,k)=>{const P=per[k].pts;if(!P.length)return{q:0,off:0};
+  let hit=0;for(const c of b.c)if(P.some(([p])=>Math.hypot(p[0]-c[0],p[1]-c[1])<=tol))hit++;const cov=hit/b.c.length;
+  const inn=P.filter(x=>!x[1].end),dm=inn.length?inn.reduce((a,x)=>a+x[1].d,0)/inn.length:tol*B.near;const pos=Math.max(0,Math.min(1,1-(dm-tol*B.slack)/tol));
+  const over=P.filter(x=>x[1].end&&x[1].d>tol*B.end).length/P.length;
+  const off=inn.length?inn.reduce((a,x)=>a+x[1].sy,0)/inn.length:0;const sd=inn.length?Math.sqrt(inn.reduce((a,x)=>a+(x[1].sy-off)**2,0)/inn.length):0;
+  const messy=Math.max(0,1-B.messyK*Math.max(0,sd-b.th*B.thk)/tol);
+  return{q:cov*pos*Math.max(0,1-B.overK*over)*messy,off}});
+ const sym=Math.max(0,1-B.symK*Math.abs(q[0].off-q[1].off)/tol);const tot=(q[0].q+q[1].q)/2*sym*Math.max(0,1-smear/B.smear);
+ return{q:tot,each:q.map(x=>x.q),tol}}
+/* powder quality: G = grid points {x,y,c} (c = dose); returns q, over (share of the cheek spots over the dose), thick */
+function toilPowderQ(G,I,sk){const B=BAL.toil.cheek,lo=B.doseLo-B.doseLoSk*sk,hi=B.doseHi+B.doseHiSk*sk;let tot=0,out=0;const ins=I.cheeks.map(()=>[]);
+ for(const p of G){tot+=p.c;let k=-1;I.cheeks.forEach((c,i)=>{if(Math.hypot(p.x-c.x,p.y-c.y)<=c.r)k=i});if(k>=0)ins[k].push(p);else if(!I.cheeks.some(c=>Math.hypot(p.x-c.x,p.y-c.y)<=c.r*B.ring))out+=p.c}
+ const v=c=>c<.3?0:c<lo?(c-.3)/(lo-.3):c<=hi?1:c>=B.cake?0:1-(c-hi)/(B.cake-hi);
+ const cq=ins.map(L=>L.length?L.reduce((a,p)=>a+v(p.c),0)/L.length:0),m=ins.map(L=>L.length?L.reduce((a,p)=>a+p.c,0)/L.length:0);
+ const spill=tot>0?out/tot:0,bal=Math.max(0,1-B.bal*Math.abs(m[0]-m[1])/(Math.max(m[0],m[1])||1));const all=ins.flat();
+ return{q:(cq[0]+cq[1])/2*Math.max(0,1-B.spill*spill)*bal,over:all.length?all.filter(p=>p.c>hi).length/all.length:0,thick:all.length?all.filter(p=>p.c>hi+.8).length/all.length:0,spill}}
+/* one lip dot: timing error dt (ms, ring period per) and distance d from the dot */
+function toilLipQ(dtR,d,lr,sk){const B=BAL.toil.lip;const qt=Math.max(0,1-Math.abs(dtR)/(B.ttol+B.ttolSk*sk)),qp=Math.max(0,1-d/(lr*(B.tol+B.tolSk*sk)));return qt*qp}
+/* heaviness of her choices today (colours, a diêm dúa preset, warm + cool together, a showy dress, caked powder) */
+function toilHeavy(col,want,style,over){const B=BAL.toil;let h=0;const t=new Set();col=col||{};
+ for(const k of ["mat","ma","son","may"]){h+=(B.heavy[k]||{})[col[k]]||0;const x=(B.tone[k]||{})[col[k]];if(x)t.add(x)}
+ if(t.size>1)h+=B.mixH;if(want==="diem")h+=B.presetDiem;if(style==="showy")h+=B.showyH;let c=0;for(const [s,n] of B.cakeH)if((over||0)>=s)c=n;return h+c}
+/* what the day allows: the strictest of today's occasions (mourning allows almost nothing) */
+function toilAllow(occ){const A=BAL.toil.allow;let tang=false;try{tang=typeof wdTang==="function"&&wdTang()}catch(e){}if(tang)return A.tang;
+ let a=99;for(const k of occ||[]){a=Math.min(a,k==="th"||k==="hh"?A.thinhan:k==="fest"?A.fest:k==="night"?A.night:A.thuong)}return a===99?A.thuong:a}
+/* the look from parts + score + heaviness: vụng (with the part that went wrong) · diêm dúa (seeded roll on the excess) · else by score.
+   seed = a whole number fixed for this person and day, so the same sitting always reads the same (co-op: the same on both seats) */
+function toilLookOf(P,score,H,allow,seed){const B=BAL.toil;const parts=[["brow",P.brow],["powder",P.powder],["son",P.son]].filter(x=>typeof x[1]==="number");
+ const worst=parts.reduce((a,x)=>!a||x[1]<a[1]?x:a,null);if(score<B.tier[0]||(worst&&worst[1]<B.fail))return{look:"vung",slip:worst?worst[0]:"brow"};
+ const e=Math.max(0,Math.min(B.diemOdds.length-1,H-allow));const r=((seed>>>0)%1000)/1000;if(r<B.diemOdds[e])return{look:"diem"};
+ return{look:score>=B.tier[1]?"dep":null}}
+/* an NPC's day from WORLD facts only (Thái hậu alive, a festival; mourning inside toilAllow) — never this seat's own rank / place / night:
+   both co-op seats read the same allowance for the same consort (review r1, CO-OP FIRST) */
+function toilNpcOcc(){const L=[];try{if(!S.thDead)L.push("th");if(typeof festToday==="function"&&festToday())L.push("fest")}catch(e){}return L.length?L:["thuong"]}
+/* hồi 1: start loading THIS face's points (the portrait follows the dress she tries on) so the board never waits long */
+function toilMkPre(){try{MK_FIT.get(String(toilPor().src||"").split("?")[0].split("/").pop())}catch(e){}}
+function toilMk(rec){return rec&&rec.makeup?(rec.look==="diem"?"diem":rec.look==="vung"?"vung":toilTier(rec.score|0)):"moc"}
+/* NPCs and the bot: the same parts, score and look from skill (hash of person + day: no Math.random, both co-op seats agree) */
+function toilNpcPlay(sk,h,col,want,style,occ){const N=BAL.toil.play,B=BAL.toil;const r=i=>(wdHash(h+":"+i)%1000)/1000;
+ const q=i=>Math.max(0,Math.min(1,N.q0+N.qSk*sk+(r(i)+r(i+5)-1)*N.spread));const P={brow:q(0),powder:q(1),son:q(2)};
+ const raw=Math.round(100*(.4*P.brow+.3*P.powder+.3*P.son));const score=Math.max(0,Math.min(100,Math.round(raw*(100-B.skillShare)/100)+Math.round(B.skillShare*sk)));
+ const over=r(3)<N.cake?N.cakeOver:0;const H=toilHeavy(col,want,style,over);return Object.assign({score,parts:P},toilLookOf(P,score,H,toilAllow(occ),wdHash(String(h)+":diem")))}
 /* ---------- the dress verdict (her clothes NOW, for formality F) ---------- */
 function toilDress(p,F){let st="ok";try{st=wdStatus(p)}catch(e){}if(st==="tang")return{v:"tang",style:"showy"};
  let vp=0;try{vp=(vpItems(p)||[]).length}catch(e){}if(st==="over"||vp)return{v:"vuot",style:"showy"};
@@ -71,7 +165,11 @@ function toilDress(p,F){let st="ok";try{st=wdStatus(p)}catch(e){}if(st==="tang")
 function toilNpc(v){const N=BAL.toil.npc,h=wdHash(wdKey(v)+":"+toilWk()),r1=(h%1000)/1000,r2=((h>>>10)%1000)/1000,r3=((h>>>20)%1000)/1000;const T=traitsOf(v);
  const sp=Math.max(N.showy0,...T.map(t=>N.showy[t]||0)),pp=Math.max(N.plain0,...T.map(t=>N.plain[t]||0));
  const dv=r1<sp?"photruong":r1<sp+pp?"giandi":r1<.8?"hopdip":"hoppham";const makeup=r2>=N.moc;
- const score=Math.round(cl(N.base+(v.sac||50)*N.sac+(r3-.5)*N.spread,0,100));return{wk:toilWk(),dv,style:dv==="giandi"?"plain":dv==="photruong"?"showy":"fit",makeup,score,npc:1}}
+ const style=dv==="giandi"?"plain":dv==="photruong"?"showy":"fit";let hoa=0;try{hoa=kg82Lv(v,"hoa")||0}catch(e){}const sk=Math.max(0,Math.min(1,(v.sac||50)/BAL.toil.sacDiv+hoa/BAL.toil.hoaDiv));
+ /* her colours: a showy day → a diêm dúa preset, a plain day → a thanh nhã one, else either (BAL.toil.play.diemPre) */
+ const want=style==="showy"||(style!=="plain"&&((h>>>4)%1000)/1000<BAL.toil.play.diemPre)?"diem":"";const L=TOIL_PRE.filter(x=>(x[2]==="diem")===(want==="diem"));const col=Object.assign({},L[(h>>>12)%L.length][4]);
+ const R=toilNpcPlay(sk,h,col,want,style,toilNpcOcc());
+ return{wk:toilWk(),dv,style,makeup,score:R.score,look:R.look,slip:R.slip,col:Object.assign(col,want?{want}:{}),npc:1}}
 
 /* ---------- the reaction of one host ---------- */
 function toilHostKind(host){if(host==="emp")return toilEmpTaste();let k="normal";try{k=leHostKind(host)}catch(e){}
@@ -79,10 +177,15 @@ function toilHostKind(host){if(host==="emp")return toilEmpTaste();let k="normal"
 function toilHostKey(host){return host==="th"?"th":host==="emp"?"emp":host&&host.id!=null?"v"+host.id:"x"}
 function toilSeen(host){const s=S.toilSeen;return !!(s&&s.wk===toilWk()&&s.h&&s.h[toilHostKey(host)])}
 function toilMark(host){if(!S.toilSeen||S.toilSeen.wk!==toilWk())S.toilSeen={wk:toilWk(),h:{}};S.toilSeen.h[toilHostKey(host)]=1}
+/* CO-OP (diemtrang-coop-look, CO-OP FIRST OD 16/11 ~20:32Z): the friend (a rival entry with coop:true) is judged by the look SHE made
+   today (her S.toilette, carried by jcoopworld LOOK at the week merge and live by her pos relay), never by the toilNpc roll. No sitting
+   today = mặt mộc; her dress verdict is toilDress on her real clothes (wd), as on her own seat. Both seats therefore read the same look. */
+function toilFriendRec(p){if(!p||!p.coop)return null;const t=p.toilette;if(t&&t.wk===toilWk())return t;let d={v:"hoppham",style:"fit"};try{d=toilDress(p,toilMaxF())}catch(e){}
+ return{wk:toilWk(),makeup:false,score:0,dv:d.v,style:d.style,coop:1}}
 /* {aff, danh, duc, why:[[text,n]…], words} or null — baseState: jaudit's own verdict (luxury / thiếu lễ); the dress part only when that is "ok" */
 function toilFx(p,host,F,baseState){if(!toilOn(p))return null;if(p===S&&toilSeen(host))return null;
- const rec=p===S?toilToday(S):toilNpc(p);const mk=rec&&rec.makeup?(rec.look==="diem"?"diem":toilTier(rec.score|0)):"moc";
- const dr=baseState&&baseState!=="ok"?null:p===S?toilDress(S,F):{v:rec.dv};
+ const rec=p===S?toilToday(S):toilFriendRec(p)||toilNpc(p);const mk=toilMk(rec);
+ const dr=baseState&&baseState!=="ok"?null:p===S||p.coop?toilDress(p,F):{v:rec.dv};/* the friend: her real clothes (wd live via jcoopworld pos), the same call as on her seat */
  const hk=toilHostKind(host),R=BAL.toil.react[hk]||BAL.toil.react.normal;const C=BAL.toil.cap;
  const a1=dr?(R[dr.v]||0):0,a2=R[mk]||0;const aff=Math.max(C[0],Math.min(C[1],a1+a2));
  const danh=hk==="strict"&&dr&&dr.v==="giandi"&&F>=1?BAL.toil.strictPlainDanh:0;if(!aff&&!danh)return null;
@@ -122,12 +225,12 @@ if(typeof leAttire==="function"){const la0=leAttire;
    return A.map(a=>{if(!a)return a;const o=Object.assign({},a,{risk:[a.risk,e.txt].filter(Boolean).join(" · ")});const r0=o.run,g0=o.go,f0=o.fail;
     if(r0)o.run=function(){toilRival(v,true);return r0.apply(this,arguments)};else{o.go=function(){toilRival(v,true);return g0?g0.apply(this,arguments):undefined};o.fail=function(){toilRival(v,true);return f0?f0.apply(this,arguments):undefined}}return o})}
  }catch(e){console.error("toil talkOpts",e)}return A}})();
-function toilLook(){const rec=toilToday(S);const mk=rec&&rec.makeup?(rec.look==="diem"?"diem":toilTier(rec.score|0)):"moc";const dr=toilDress(S,toilFOf(null));return{mk,dv:dr.v,showy:dr.style==="showy",plain:dr.style==="plain"}}
+function toilLook(){const rec=toilToday(S);const mk=toilMk(rec);const dr=toilDress(S,toilFOf(null));return{mk,dv:dr.v,showy:dr.style==="showy",plain:dr.style==="plain"}}
 function toilGhenOf(v,L){const B=BAL.toil;let g=(L.showy?B.ghenShowy:0)+(L.mk==="tuyet"?B.ghenTuyet:0);if(!g)return 0;for(const t of traitsOf(v))if(B.ghenMul[t])g*=B.ghenMul[t];return g}
 function toilRival(v,doIt){if(!v||!toilOn(S)||toilSeen(v))return null;const L=toilLook(),B=BAL.toil;const T=traitsOf(v);const frugal=T.some(t=>t==="Hiền lành"||t==="Nhu mì");
  const g=Math.round(toilGhenOf(v,L));let aff=0,txt="";
  if(frugal&&(L.plain||L.mk==="moc")){aff=B.praisePlain;txt=`nàng ta chuộng giản dị: quý ta +${aff}`}else if(frugal&&L.showy){aff=B.frownShowy;txt=`ta ăn vận phô trương: nàng ta quý ta ${aff}`}
- if(L.mk==="diem"&&!txt){txt="nàng ta che miệng cười lớp phấn son diêm dúa của ta: bớt ghen 2";if(doIt){v.ghen=cl((v.ghen||0)-2,0,100);toilMark(v)}return{txt,aff:0,g:0}}
+ if((L.mk==="diem"||L.mk==="vung")&&!txt){const n=BAL.toil.teaseGhen;txt=`nàng ta che miệng cười ${L.mk==="diem"?"lớp phấn son diêm dúa":"gương mặt điểm trang vụng về"} của ta: bớt ghen ${n}`;if(doIt){v.ghen=cl((v.ghen||0)-n,0,100);toilMark(v)}return{txt,aff:0,g:0}}
  if(g)txt=[txt,`${L.showy?"ta ăn vận phô trương":"dung nhan ta tuyệt mỹ"}: nàng ta ghen +${g}`].filter(Boolean).join(" · ");if(!txt)return null;
  if(doIt){if(aff)affAdd(v,S,aff);if(g)v.ghen=cl((v.ghen||0)+g,0,100);toilMark(v)}return{txt,aff,g}}
 function toilCrowd(doIt){const L=toilLook();if(!L.showy&&L.mk!=="tuyet")return{n:0};if(toilSeen("crowd"))return{n:0};let n=0;const R=liveRivals(false).filter(v=>!v.queen&&!v.out);
@@ -147,8 +250,8 @@ function toilCard(){const occ=toilOcc().map(o=>o.n.toLowerCase()).join(", ");
 /* the chip "Hôm nay: y phục hợp dịp · trang điểm đẹp" (k3 top bar row, from #hud2) */
 function toilChip(){if(!toilOn(S))return null;const rec=toilToday(S);
  if(!rec)return(S.buoi||0)===0?{t:"Chưa điểm trang",full:"Hôm nay: chưa điểm trang",c:""}:{t:"Hôm nay mặt mộc",full:"Hôm nay: mặt mộc",c:""};
- const bad=rec.dv==="giandi"||rec.dv==="photruong"||rec.dv==="vuot"||rec.dv==="tang"||!rec.makeup||toilTier(rec.score)==="vung";
- const mk=rec.makeup?(rec.look==="diem"?"diem":toilTier(rec.score)):"moc";const dv=TOIL_DV[rec.dv]||"như hôm qua";return{t:`Y phục ${dv} · ${rec.makeup?"trang điểm "+TOIL_MK[mk]:"mặt mộc"}`,full:`Hôm nay: y phục ${dv} · ${rec.makeup?"trang điểm "+TOIL_MK[mk]:"mặt mộc"}`,c:bad||mk==="diem"?"hot":"ok"}}
+ const bad=rec.dv==="giandi"||rec.dv==="photruong"||rec.dv==="vuot"||rec.dv==="tang"||!rec.makeup||toilMk(rec)==="vung";
+ const mk=toilMk(rec);const dv=TOIL_DV[rec.dv]||"như hôm qua";return{t:`Y phục ${dv} · ${rec.makeup?"trang điểm "+TOIL_MK[mk]:"mặt mộc"}`,full:`Hôm nay: y phục ${dv} · ${rec.makeup?"trang điểm "+TOIL_MK[mk]:"mặt mộc"}`,c:bad||mk==="diem"?"hot":"ok"}}
 /* the k3 top row (jk3 k3Stage) rebuilds #k3tt from #hud2's state chips (K3_STATE is private to jk3): the chip joins line 1 after each rebuild */
 function toilChipPaint(){try{const tt=document.getElementById("k3tt");if(!tt)return;const l1=tt.querySelector(".k3l1");const c=S&&toilChip();const old=tt.querySelector('[data-k3="toil"]');
  if(!c||!l1){if(old)old.remove();return}const h=k3row("toil",String(c.t).replace(/[&<>"]/g,""),"",c.c);/* the kit's top-bar row builder (jk3 k3row), never own markup */
@@ -158,7 +261,7 @@ function toilChipPaint(){try{const tt=document.getElementById("k3tt");if(!tt)ret
 /* on window (capture): jk3's own top-row click handler is a document capture listener registered earlier */
 window.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest('[data-k3="toil"],[data-hx="toil"]');if(!b)return;e.stopImmediatePropagation();e.preventDefault();
  if(toilCanStart()){const i=Array.isArray(deck)?deck.findIndex(a=>a&&a.toil&&!a.done):-1;if(i>=0){act(i);return}if(!can(BAL.toil.khac))return;spend(BAL.toil.khac);toilOpen();return}
- const rec=toilToday(S);try{kpPop(b,rec?`<p>Sáng nay ta điểm trang: y phục ${TOIL_DV[rec.dv]}, ${rec.makeup?"trang điểm "+TOIL_MK[toilTier(rec.score)]+" ("+rec.score+" phần)":"để mặt mộc"}.</p><p class="past">Người gặp ta hôm nay nhìn theo nết mình; thẻ việc ghi trước.</p>`
+ const rec=toilToday(S);try{kpPop(b,rec?`<p>Sáng nay ta điểm trang: y phục ${TOIL_DV[rec.dv]}, ${rec.makeup?"trang điểm "+TOIL_MK[toilMk(rec)]+" ("+rec.score+" phần)":"để mặt mộc"}.</p><p class="past">Người gặp ta hôm nay nhìn theo nết mình; thẻ việc ghi trước.</p>`
   :`<p>Hôm nay ta chưa điểm trang: mặc như hôm qua, mặt mộc.</p><p class="past">Mỗi buổi sáng có việc “Điểm trang” trong Hành sự (1 khắc).</p>`)}catch(x){}},true);
 
 /* ---------- the mini-games ---------- */
@@ -167,33 +270,35 @@ function toilSkill(){const B=BAL.toil;let h=0;try{h=kg82Lv(S,"hoa")||0}catch(e){
  return{sk:Math.max(0,Math.min(1,(S.sac||0)/B.sacDiv+h/B.hoaDiv+(m?B.mama:0))),hoa:h,mama:m}}
 function toilHUD(o){{const d=document.getElementById("kg82");if(d)d.classList.remove("kg-idle")}for(const k in o)kg82Set(k,o[k])}
 /* bots (dev/measure inpage4, window.__bot) cannot play the overlay: an average sitting — keep the clothes, a face drawn from skill + chance */
-function toilAuto(){const occ=toilOcc(),F=Math.max(...occ.map(o=>o.F)),d=toilDress(S,F),sk=toilSkill();const score=Math.round(cl(30+45*sk.sk+(Math.random()-.5)*40,0,100));
- S.toilette={day:toilWk()*10,wk:toilWk(),score,makeup:true,style:d.style,dv:d.v,F,occ:occ.map(o=>o.k),look:score>=BAL.toil.tier[1]?"dep":null,auto:1}}
+function toilAuto(){const occ=toilOcc(),F=Math.max(...occ.map(o=>o.F)),d=toilDress(S,F),sk=toilSkill();/* the same table as the NPCs (toilNpcPlay), seeded: no Math.random */
+ const col=toilColFix(S.toilette&&S.toilette.col);const R=toilNpcPlay(sk.sk,wdHash(String(S.name||"")+":"+toilWk()),col,col.want||"",d.style,occ.map(o=>o.k));
+ S.toilette={day:toilWk()*10,wk:toilWk(),score:R.score,makeup:true,style:d.style,dv:d.v,F,occ:occ.map(o=>o.k),look:R.look,slip:R.slip,parts:R.parts,col,auto:1}}
 function toilOpen(){if(!S||S.dead)return;if(window.__bot){toilAuto();return}KG82.ctx="hoc";const occ=toilOcc();
- const d=kg82Open({art:"Điểm trang",pic:"img/kit/mg-chai-bg.webp",title:"Trước gương đồng",how:"Hồi 1: chọn y phục theo dịp hôm nay. Hồi 2–4: kẻ mày theo đường chỉ, đánh phấn đều hai má, chấm son đúng chỗ khi vòng khép vừa môi."});
+ const d=kg82Open({art:"Điểm trang",title:"Trước gương đồng",how:"Hồi 1: chọn y phục theo dịp hôm nay. Hồi 2–4: tự tay kẻ mày lên đúng chân mày, đánh phấn hồng lên hai gò má, chấm son đúng chỗ khi vòng khép vừa môi. Không có đường chỉ: tay vụng thì mặt vụng."});
  if(!d)return;["chai-bg","chai-brow","chai-puff","chai-rouge"].forEach(n=>{try{kg82Img(n)}catch(e){}});try{KIT_VEIL.load()}catch(e){}
- TOIL.st={occ,F:Math.max(...occ.map(o=>o.F)),parts:{},dv:null,start:wdCur(S)};toilHUD({score:"–",round:"1/4",time:"không hạn"});toilDressUI()}
+ TOIL.st={occ,F:Math.max(...occ.map(o=>o.F)),parts:{},dv:null,start:wdCur(S)};toilMkPre();toilHUD({score:"–",round:"1/4",time:"không hạn"});toilDressUI()}
 /* (a) CHỌN Y PHỤC — the bag (kitInvGrid, the same items as Tư trang) + the worn slots + her portrait in the chosen dress */
 const TOIL_SL=[["tram","Cài tóc","tramngoc"],["y","Y phục","luahang"],["wrist","Đeo tay","vongngoc"],["waist","Đeo eo","ngocboi"],["scent","Túi thơm","tuithom"]];
 function toilWorn(sl){if(sl==="tram"||sl==="y"){const e=wdOf(S)[sl],w=wdItem(e);return w?{src:w.icon,name:w.n,grade:w.g|0,lux:wdLux(w.k),tip:w.n}:null}
  const e=(S.inv||[]).find(x=>x&&x.w&&!x.h&&IT[x.k]&&IT[x.k].sl===sl);if(!e)return null;let a=null;try{a=itemArt(e.k)}catch(x){}return{src:a?a.src:keqArt(e.k),name:IT[e.k].n,grade:a?a.grade|0:0,lux:luxVal(e.k),tip:IT[e.k].n}}
 function toilPorAt(rank){const f0=figTierOf;try{figTierOf=function(w){return w===S?rank:f0.apply(this,arguments)};return figFor(S,"por")}catch(e){return""}finally{figTierOf=f0}}
 function toilPor(){let P=0;try{const it=wdItem(wdOf(S).y);P=it?it.P:0}catch(e){}const rank=P>=1?Math.min(7,P-1):S.rank;const me=pMe();const src=toilPorAt(rank)||me.src;return{src,rank}}
-function toilDressUI(){const box=kg82Box();if(!box)return;box.hidden=false;const st=TOIL.st;
+function toilDressUI(){const box=kg82Box();if(!box)return;box.hidden=false;const st=TOIL.st;toilMkPre();
  const items=kinvItems().filter(x=>x&&x.g&&(WD_ITEMS[x.g.k]?x.g.wdPawn==null:(IT[x.g.k]&&["wrist","waist","scent"].includes(IT[x.g.k].sl)))).map(x=>Object.assign({},x,{cat:WD_ITEMS[x.g.k]?(WD_ITEMS[x.g.k].sl==="tram"?"tram":"y"):"trang"}));
  const sel=toilSelFind(items);items.forEach(x=>{x.sel=!!(sel&&sel.x===x)});
  const tabs=[{k:"tram",label:"Trâm cài"},{k:"y",label:"Y phục"},{k:"trang",label:"Trang sức"}];
  const slots=TOIL_SL.map(([k,label,gk])=>({k,label,item:toilWorn(k),ghost:keqArt(gk)||"",sel:!!(sel&&sel.sl===k)}));const x=luxOf(S),wb=wearBonus(S);
  const sum=kitChips([wb.sac?["Sắc",wb.sac]:null,wb.danh?["Danh",wb.danh]:null].filter(Boolean))+kitLuxChip(x);
  const por=toilPor();const me=pMe();
- const occ=kitFacts(st.occ.map(o=>`${o.n}${o.F===2?" (trang trọng nhất)":o.F===1?" (gặp bề trên)":""}`));
+ const occ=kitFacts(st.occ.map(o=>kitAgendaFact(o,`${o.n}${o.F===2?" (trang trọng nhất)":o.F===1?" (gặp bề trên)":""}`)),{group:false});/* every row with its picture (owner 16/11 21:18Z, KIT §84 agenda rows) */
  const mama=toilSkill().mama;
- box.innerHTML=`<div class="toilw"><div class="toilfig">${pcPort(Object.assign({},me,{src:por.src}),me.col)}<h4 class="kpst">Hôm nay</h4>${occ}`+
+ box.innerHTML=`<div class="toilw"><div class="toilfig"><h4 class="kpst">Hôm nay</h4>${occ}`+
   (mama?`<p class="past">${mama.name} khẽ nhắc: “Dịp ${st.F===2?"yến lễ phải lộng lẫy mà không vượt phẩm":st.F===1?"thỉnh an nên đoan trang, đủ phẩm":"thường ngày nên nhã nhặn, đừng phô trương"}.”</p>`:"")+`</div>`+
   `<div class="toilinv">${kitInvGrid({key:"toil",tabs,items,minRows:2,minSlots:12,onPick:toilPick,side:kitEquipSlots({key:"toil",title:"Đang mặc",slots,sum,onPick:toilSlotPick,col:true}),sum})}`+
   `<div class="toildet">${toilDetHTML(sel)}</div></div></div>`+
   `<div class="kg82act"><button class="${kg82Btn()}" id="toilok">Mặc bộ này</button><button class="${kg82Btn(true)}" id="toilkeep">Giữ đồ hôm qua<small>mặc như cũ</small></button></div>`;
  try{kitInvFit()}catch(e){}
+ try{kitGameFigRefresh()}catch(e){}
  $("toilok").onclick=()=>toilDressDone(false);$("toilkeep").onclick=()=>toilDressDone(true)}
 document.addEventListener("click",e=>{const t=e.target.closest&&e.target.closest('[data-kinvkey="toil"][data-kinvtab]');if(t)setTimeout(()=>{if(TOIL.st&&!TOIL.st.dv)toilDressUI()},0)},true);
 /* owner 15/11 "Khi bấm vào món đồ không thấy hiện thông tin món đồ": a tap SELECTS the cell (gold ring, KIT §70) and shows its kitItemDetail
@@ -240,76 +345,84 @@ function toilGeom(W,H,src){const ky=H*.94/(TOIL_MIR.ry*2*1024),k=Math.min(ky,W/(
 function toilQuad(a,c,b,n){const L=[];for(let i=0;i<=n;i++){const t=i/n;L.push([(1-t)*(1-t)*a[0]+2*(1-t)*t*c[0]+t*t*b[0],(1-t)*(1-t)*a[1]+2*(1-t)*t*c[1]+t*t*b[1]])}return L}
 function toilMakeup(){const st=TOIL.st,box=kg82Box();box.innerHTML="";box.hidden=false;const C=kg82Canvas(box,.86,620),{g,W,H}=C;C.cv.style.touchAction="none";
  const por=toilPor();const face=new Image();face.decoding="async";face.src=typeof IMG_U==="function"?IMG_U(por.src):por.src;const G=toilGeom(W,H,por.src);const sk=toilSkill();st.sk=sk;
- const brows=[toilQuad(G.T(.07,-.08),G.T(.23,-.17),G.T(.39,-.07),18),toilQuad(G.T(.53,-.07),G.T(.69,-.17),G.T(.85,-.08),18)];
- const cheeks=[G.T(.19,.32),G.T(.73,.32)],cr=G.fws*.14;const cpts=[];cheeks.forEach(([x,y])=>{cpts.push({x,y,c:0});for(let i=0;i<6;i++){const a=i*Math.PI/3;cpts.push({x:x+Math.cos(a)*cr*.55,y:y+Math.sin(a)*cr*.55,c:0})}});
- const lip=G.T(.46,.49),lr=Math.max(7,G.fws*.05);const lips=[[lip[0]-G.fws*.07,lip[1]-lr*.2],[lip[0]+G.fws*.07,lip[1]-lr*.2],[lip[0],lip[1]+lr*.55]];
+ /* diemtrang-score (owner 16/11): NO guide lines. The hidden ideal is THIS face's own brows / cheekbones / mouth (img/mk-fit face points;
+    a picture without points uses the measured average, BAL.toil.fb) — anchored per portrait, so the brow target is the painted brow itself */
+ const file=String(por.src||"").split("?")[0].split("/").pop();let I,brows,cheeks,lips,lr,puffR,cpts;
+ function anchor(){const J=toilIdeal(MK_FIT.get(file),G.img,G.fws);if(!J)return false;I=J;brows=I.brows.map(b=>b.c);cheeks=I.cheeks;lips=I.lips;lr=I.lr;puffR=cheeks[0].r*BAL.toil.cheek.puff;
+  const m=BAL.toil.cheek.margin,stp=puffR*BAL.toil.cheek.step,x0=Math.min(...cheeks.map(c=>c.x-c.r*m)),x1=Math.max(...cheeks.map(c=>c.x+c.r*m)),y0=Math.min(...cheeks.map(c=>c.y-c.r*m)),y1=Math.max(...cheeks.map(c=>c.y+c.r*m));
+  cpts=[];for(let x=x0;x<=x1;x+=stp)for(let y=y0;y<=y1;y+=stp)cpts.push({x,y,c:0});pdirty=true;st.mesh=true;return true}
+ /* the board waits (brush off, "đang soi gương") until THIS face's points are in; never a guessed face (review r1) */
+ let pdirty=true;let ready=anchor();const wait0=performance.now();
  /* her picked colours (§60) on the tools */const pc=toilColFix(st.col),CM=toilColRGB("ma",pc.ma).join(","),CB=toilColRGB("may",pc.may).join(","),CS=toilColRGB("son",pc.son).join(",");
- const tol=G.rx*(.035+.045*sk.sk),puffR=cr*.5,ideal=[1-.3*sk.sk,2.2+.6*sk.sk];
+ const B=BAL.toil.cheek,hi=B.doseHi+B.doseHiSk*sk.sk,PB=BAL.toil.pop;
  let phase=0,stop=false,raf=0,t0=0,strokes=[],cur=null,dots=[],li=0,ring0=performance.now();const pops=[];let ptr=null;
- const CK=TOIL.clock||1;/* test hook: a slow machine plays at clock× time */const LIM=[14000*CK,10000*CK,0];/* each hồi's clock starts at her first touch */const per=(1150+500*sk.sk)*CK;
+ const CK=TOIL.clock||1;/* test hook: a slow machine plays at clock× time */const LIM=[BAL.toil.lim[0]*CK,BAL.toil.lim[1]*CK,0];/* each hồi's clock starts at her first touch */const per=(BAL.toil.ring[0]+BAL.toil.ring[1]*sk.sk)*CK;
  try{C.cv.scrollIntoView({block:"center"})}catch(e){}
- TOIL.geo={phase:()=>phase,brows:()=>brows.map(L=>L.map(([x,y])=>C.client(x,y))),cheeks:()=>cpts.map(p=>C.client(p.x,p.y)),lip:()=>lips[li]?Object.assign(C.client(lips[li][0],lips[li][1]),{ring:ringR()/lr}):null,puffR,cr,lr};
+ TOIL.geo={phase:()=>phase,ready:()=>ready,brows:()=>(brows||[]).map(L=>L.map(([x,y])=>C.client(x,y))),cheeks:()=>(cheeks||[]).flatMap(c=>[[c.x,c.y]].concat([0,1,2,3,4,5].map(i=>[c.x+Math.cos(i*Math.PI/3)*c.r*.5,c.y+Math.sin(i*Math.PI/3)*c.r*.5]))).map(([x,y])=>C.client(x,y)),
+  lip:()=>ready&&lips[li]?Object.assign(C.client(lips[li][0],lips[li][1]),{ring:ringR()/lr}):null,get puffR(){return puffR},get lr(){return lr}};
  function ringR(){const t=((performance.now()-ring0)%per)/per;return lr*(4.2-3.8*t)}
- function browScore(){let tot=0;const all=strokes.flat();for(const L of brows){let hit=0;for(const [x,y] of L)if(all.some(p=>Math.hypot(p[0]-x,p[1]-y)<=tol))hit++;const cov=hit/L.length;
-   const near=all.filter(p=>L.some(q=>Math.hypot(p[0]-q[0],p[1]-q[1])<tol*3));let dev=0;if(near.length){dev=near.reduce((a,p)=>a+Math.min(...L.map(q=>Math.hypot(p[0]-q[0],p[1]-q[1]))),0)/near.length}
-   const smear=all.filter(p=>!brows.some(B=>B.some(q=>Math.hypot(p[0]-q[0],p[1]-q[1])<tol*3))).length;
-   tot+=cov*Math.max(0,Math.min(1,1-(dev-tol*.4)/(tol*1.6)))*Math.max(0,1-smear/40)}return tot/2}
- function powderScore(){return cpts.reduce((a,p)=>{const c=p.c;const v=c<.3?0:c<ideal[0]?(c-.3)/(ideal[0]-.3):c<=ideal[1]?1:c>=4.2?0:1-(c-ideal[1])/(4.2-ideal[1]);return a+v},0)/cpts.length}
- function sonScore(){return dots.reduce((a,d)=>a+d.q,0)/3}
+ const browQ=()=>toilBrowQ(strokes,I,sk.sk).q,powQ=()=>toilPowderQ(cpts,I,sk.sk),sonQ=()=>dots.reduce((a,d)=>a+d.q,0)/3;
  /* the board painting + her face in the glass are drawn once into an offscreen layer (re-made when a picture arrives) */
  let base=null,baseK="";function baseLayer(){const bg=kg82Img("chai-bg");const k=(bg.complete&&bg.naturalWidth?1:0)+","+(face.complete&&face.naturalWidth?1:0);if(base&&k===baseK)return base;baseK=k;
   const c=document.createElement("canvas"),r=Math.min(2,window.devicePixelRatio||1);c.width=Math.round(W*r);c.height=Math.round(H*r);const x=c.getContext("2d");x.setTransform(r,0,0,r,0,0);
   x.fillStyle="#efe0c6";x.fillRect(0,0,W,H);if(bg.complete&&bg.naturalWidth)x.drawImage(bg,G.bg.x,G.bg.y,G.bg.s,G.bg.s);
   x.save();x.beginPath();x.ellipse(G.mx,G.my,G.rx,G.ry,0,0,Math.PI*2);x.clip();x.fillStyle="#d9c7a3";x.fillRect(G.mx-G.rx,G.my-G.ry,G.rx*2,G.ry*2);
   if(face.complete&&face.naturalWidth)x.drawImage(face,G.img.x,G.img.y,G.img.w,G.img.h);x.restore();return base=c}
+ /* the powder she has put on, wherever she rubbed (one offscreen layer, redrawn only when the dose changed); too much turns chalky */
+ let pl=null;function powderLayer(){if(pl&&!pdirty)return pl;pdirty=false;if(!pl){pl=document.createElement("canvas");pl.width=W;pl.height=H}const x=pl.getContext("2d");x.clearRect(0,0,W,H);
+  const rr=puffR*.8;for(const p of cpts){if(p.c<=0)continue;const over=p.c>hi;x.globalAlpha=over?Math.min(.55,.18+.1*(p.c-hi)):Math.min(.2,.07*p.c);x.fillStyle=over?"#fff":`rgb(${CM})`;x.beginPath();x.arc(p.x,p.y,rr,0,Math.PI*2);x.fill()}
+  x.globalAlpha=1;return pl}
  function draw(now){g.drawImage(baseLayer(),0,0,W,H);
   g.save();g.beginPath();g.ellipse(G.mx,G.my,G.rx,G.ry,0,0,Math.PI*2);g.clip();
-  /* powder: soft pink-white per point; too much turns chalky */
-  cpts.forEach(p=>{if(p.c<=0)return;const a=Math.min(1,p.c/ideal[1]);const rg=g.createRadialGradient(p.x,p.y,0,p.x,p.y,puffR);const over=p.c>ideal[1];
-   rg.addColorStop(0,over?`rgba(255,255,255,${Math.min(.75,.3+.15*(p.c-ideal[1]))})`:`rgba(${CM},${.28*a})`);rg.addColorStop(1,`rgba(${CM},0)`);g.fillStyle=rg;g.beginPath();g.arc(p.x,p.y,puffR,0,Math.PI*2);g.fill()});
+  g.drawImage(powderLayer(),0,0,W,H);
   /* brow ink */
   g.strokeStyle=`rgba(${CB},.78)`;g.lineWidth=Math.max(2,G.fws*.018);g.lineCap="round";g.lineJoin="round";for(const L of strokes.concat(cur?[cur]:[])){if(L.length<2)continue;g.beginPath();g.moveTo(L[0][0],L[0][1]);L.forEach(p=>g.lineTo(p[0],p[1]));g.stroke()}
   dots.forEach(d=>{const rg=g.createRadialGradient(d.x,d.y,0,d.x,d.y,lr*.9);rg.addColorStop(0,`rgba(${CS},.85)`);rg.addColorStop(1,`rgba(${CS},0)`);g.fillStyle=rg;g.beginPath();g.arc(d.x,d.y,lr*.9,0,Math.PI*2);g.fill()});
   g.fillStyle="rgba(255,236,200,.08)";g.fillRect(G.mx-G.rx,G.my-G.ry,G.rx*2,G.ry*2);g.restore();
-  /* guides (live marks) */
-  g.save();if(phase===0){g.setLineDash([4,5]);g.strokeStyle="rgba(201,162,39,.95)";g.lineWidth=2;for(const L of brows){g.beginPath();g.moveTo(L[0][0],L[0][1]);L.forEach(p=>g.lineTo(p[0],p[1]));g.stroke();g.fillStyle="#c9a227";g.beginPath();g.arc(L[0][0],L[0][1],3.5,0,7);g.fill()}}
-  if(phase===1){g.setLineDash([3,4]);g.strokeStyle="rgba(201,162,39,.9)";g.lineWidth=1.6;cheeks.forEach(([x,y])=>{g.beginPath();g.arc(x,y,cr,0,Math.PI*2);g.stroke()})}
-  if(phase===2&&lips[li]){const [x,y]=lips[li];g.setLineDash([]);g.strokeStyle="rgba(201,162,39,.95)";g.lineWidth=1.5;g.beginPath();g.arc(x,y,lr,0,7);g.stroke();g.strokeStyle="rgba(160,20,30,.9)";g.lineWidth=2;g.beginPath();g.arc(x,y,ringR(),0,7);g.stroke()}
-  g.restore();
+  /* the lip ring is the only live mark (timing); brows and cheeks have none */
+  if(phase===2&&lips[li]){const [x,y]=lips[li];g.save();g.strokeStyle="rgba(160,20,30,.9)";g.lineWidth=2;g.beginPath();g.arc(x,y,ringR(),0,7);g.stroke();g.restore()}
   /* the tool follows the finger */
   if(ptr){if(phase===0)kg82Spr(g,"chai-brow",ptr[0],ptr[1],null,G.fws*.55,{ax:.95,ay:.02});else if(phase===1)kg82Spr(g,"chai-puff",ptr[0],ptr[1],puffR*2.2,null,{alpha:.92})}
   if(phase===2)kg82Spr(g,"chai-rouge",W-Math.min(70,W*.12),H-Math.min(60,H*.13),Math.min(96,W*.16),null,{});
-  g.font=`700 15px ${kg82Col("--display","serif")}`;g.textAlign="center";g.fillStyle=kg82Col("--ink","#2a1a12");kg82Lbl(g,["Kẻ mày theo đường chỉ vàng","Đánh phấn đều trong hai vòng má","Chạm khi vòng đỏ khép vừa môi"][phase]||"",W/2,22,W-20);
+  g.font=`700 15px ${kg82Col("--display","serif")}`;g.textAlign="center";g.fillStyle=kg82Col("--ink","#2a1a12");kg82Lbl(g,["Tự tay kẻ mày lên đúng chân mày","Đánh phấn hồng lên hai gò má","Chạm khi vòng đỏ khép vừa môi"][phase]||"",W/2,22,W-20);
   kg82DrawPops(g,pops,now)}
- function next(){if(phase===0){st.parts.brow=browScore();kg82Pop(pops,W/2,H*.2,st.parts.brow>=.8?"Mày cong như liễu!":st.parts.brow>=.5?"Mày tạm đều":"Nét mày lệch",st.parts.brow>=.5?kg82Col("--good","#2d7a52"):kg82Col("--red","#c23b22"))}
-  else if(phase===1){st.parts.powder=powderScore();st.parts.thick=cpts.filter(p=>p.c>ideal[1]+.8).length/cpts.length;const thick=cpts.filter(p=>p.c>ideal[1]).length,thin=cpts.filter(p=>p.c<ideal[0]).length;kg82Pop(pops,W/2,H*.2,st.parts.powder>=.8?"Phấn mịn đều!":thick>thin?"Phấn dày quá":"Phấn chưa đều",st.parts.powder>=.6?kg82Col("--good","#2d7a52"):kg82Col("--red","#c23b22"))}
+ function next(){if(!ready||stop)return;/* review r2: nothing finishes before THIS face is anchored */if(phase===0){st.parts.brow=browQ();kg82Pop(pops,W/2,H*.2,st.parts.brow>=PB.brow[0]?"Mày cong như liễu!":st.parts.brow>=PB.brow[1]?"Mày tạm đều":"Nét mày lệch",st.parts.brow>=PB.brow[1]?kg82Col("--good","#2d7a52"):kg82Col("--red","#c23b22"))}
+  else if(phase===1){const r=powQ();st.parts.powder=r.q;st.parts.over=r.over;st.parts.thick=r.thick;kg82Pop(pops,W/2,H*.2,r.q>=PB.powder[0]?"Phấn mịn đều!":r.over>PB.over?"Phấn dày quá":r.spill>PB.spill?"Phấn lem ra ngoài":"Phấn chưa đều",r.q>=PB.powder[1]?kg82Col("--good","#2d7a52"):kg82Col("--red","#c23b22"))}
   phase++;t0=0;ring0=performance.now();cur=null;ptr=null;
-  if(phase>=3){st.parts.son=sonScore();stop=true;draw(performance.now());setTimeout(()=>toilFinish(true),650);return}
+  if(phase>=3){st.parts.son=sonQ();stop=true;draw(performance.now());setTimeout(()=>toilFinish(true),650);return}
   toilHUD({round:`${phase+2}/4`});setBtn()}
- function setBtn(){const a=box.querySelector(".kg82act");const h=phase<2?`<div class="kg82act"><button class="${kg82Btn()}" id="toilnx">${phase===0?"Kẻ xong":"Đánh xong"}</button></div>`:"";if(a)a.remove();if(h){box.insertAdjacentHTML("beforeend",h);$("toilnx").onclick=()=>{if(!stop)next()}}}
- function pdown(e){if(stop)return;e.preventDefault();C.__down=true;if(!t0)t0=performance.now();const p=C.at(e);ptr=p;if(phase===0){cur=[p]}else if(phase===2)tapLip(p);else if(phase===1){try{kitSfx("mgPuff")}catch(x){}}try{C.cv.setPointerCapture(e.pointerId)}catch(x){}}
- function pmove(e){if(stop)return;const p=C.at(e);if(e.pointerType==="mouse"&&!e.buttons&&phase!==2){ptr=p;return}ptr=p;if(phase===0&&cur)cur.push(p)}
- let bs=0;function pup(e){C.__down=false;if(phase===0&&cur){if(cur.length>1)strokes.push(cur);cur=null;bs=browScore();try{kitSfx("mgBrush")}catch(x){}}if(e.pointerType!=="mouse")ptr=null}
- function tapLip(p){const t=lips[li];if(!t)return;const r=ringR();const qt=Math.max(0,1-Math.abs(r-lr)/(lr*(1.2+.8*sk.sk))),qp=Math.max(0,1-Math.hypot(p[0]-t[0],p[1]-t[1])/(lr*(2+sk.sk)));
-  const q=qt*qp;dots.push({x:p[0],y:p[1],q});kg82Pop(pops,t[0],t[1]-lr*2.4,q>=.75?"Vừa khéo!":q>=.4?"Hơi lệch":"Lem son",q>=.4?kg82Col("--good","#2d7a52"):kg82Col("--red","#c23b22"));
+ function setBtn(){const a=box.querySelector(".kg82act");const h=phase<2?`<div class="kg82act"><button class="${kg82Btn()}" id="toilnx"${ready?"":" disabled"}>${phase===0?"Kẻ xong":"Đánh xong"}</button></div>`:"";if(a)a.remove();if(h){box.insertAdjacentHTML("beforeend",h);$("toilnx").onclick=()=>{if(!stop&&ready)next()}}}
+ function pdown(e){if(stop||!ready)return;e.preventDefault();C.__down=true;if(!t0)t0=performance.now();const p=C.at(e);ptr=p;if(phase===0){cur=[p]}else if(phase===2)tapLip(p);else if(phase===1){try{kitSfx("mgPuff")}catch(x){}}try{C.cv.setPointerCapture(e.pointerId)}catch(x){}}
+ function pmove(e){if(stop||!ready)return;const p=C.at(e);if(e.pointerType==="mouse"&&!e.buttons&&phase!==2){ptr=p;return}ptr=p;if(phase===0&&cur)cur.push(p)}
+ let bs=0,pq=0,pqT=0;function pup(e){C.__down=false;if(phase===0&&cur){if(cur.length>1)strokes.push(cur);cur=null;bs=browQ();try{kitSfx("mgBrush")}catch(x){}}if(e.pointerType!=="mouse")ptr=null}
+ function tapLip(p){const t=lips[li];if(!t)return;const q=toilLipQ((ringR()-lr)/lr,Math.hypot(p[0]-t[0],p[1]-t[1]),lr,sk.sk);
+  dots.push({x:p[0],y:p[1],q});kg82Pop(pops,t[0],t[1]-lr*2.4,q>=PB.lip[0]?"Vừa khéo!":q>=PB.lip[1]?"Hơi lệch":"Lem son",q>=PB.lip[1]?kg82Col("--good","#2d7a52"):kg82Col("--red","#c23b22"));
   li++;ring0=performance.now();if(li>=3)next()}
  C.cv.addEventListener("pointerdown",pdown);C.cv.addEventListener("pointermove",pmove);C.cv.addEventListener("pointerup",pup);C.cv.addEventListener("pointercancel",pup);
  let last=performance.now();
  function frame(now){if(stop)return;const dt=Math.min(250,now-last);last=now;
-  if(phase===1&&ptr&&C.__down)cpts.forEach(p=>{if(Math.hypot(p.x-ptr[0],p.y-ptr[1])<=puffR)p.c+=dt/(400*CK)});
+  /* the face points may still be on their way: hold the board; if they never come, her hand is played from skill (the NPC table) */
+  if(!ready){if(anchor()){ready=true;t0=0;setBtn()}else if(now-wait0>BAL.toil.meshWait){const R=toilNpcPlay(sk.sk,wdHash(String(S.name||"")+":"+toilWk()),toilColFix(st.col),(st.col&&st.col.want)||"",st.style,st.occ.map(o=>o.k));
+   Object.assign(st.parts,R.parts);st.auto=1;stop=true;setTimeout(()=>toilFinish(true),0);return}else{g.drawImage(baseLayer(),0,0,W,H);g.font=`700 15px ${kg82Col("--display","serif")}`;g.textAlign="center";g.fillStyle=kg82Col("--ink","#2a1a12");kg82Lbl(g,"Đang soi gương…",W/2,22,W-20);raf=requestAnimationFrame(frame);return}}
+  if(phase===1&&ptr&&C.__down){for(const p of cpts)if(Math.hypot(p.x-ptr[0],p.y-ptr[1])<=puffR){p.c+=dt/(400*CK);pdirty=true}}
   if(phase===2&&lips[li]&&now-ring0>per*3){dots.push({x:lips[li][0]+lr*3,y:lips[li][1],q:0});li++;ring0=now;if(li>=3)next()}
   const lim=LIM[phase];const left=lim?Math.max(0,lim-(t0?now-t0:0)):0;
-  const sc=Math.round(100*(.4*(phase>0?st.parts.brow||0:bs)+.3*(phase>1?st.parts.powder||0:phase===1?powderScore():0)+.3*(phase===2?sonScore():0)));
+  if(phase===1&&now-pqT>250){pqT=now;pq=powQ().q}
+  const sc=Math.round(100*(.4*(phase>0?st.parts.brow||0:bs)+.3*(phase>1?st.parts.powder||0:phase===1?pq:0)+.3*(phase===2?sonQ():0)));
   toilHUD({score:`${sc}/100`,time:lim?`${Math.ceil(left/1000)} giây`:"theo nhịp"});if(lim&&left<=0){next();if(stop)return}
   draw(now);raf=requestAnimationFrame(frame)}
  toilHUD({round:"2/4"});setBtn();raf=requestAnimationFrame(frame);KG82.run={stop:()=>{stop=true;cancelAnimationFrame(raf)}};
- TOIL.test={brows,cpts,lips,next,browScore,powderScore,sonScore,setPowder:v=>cpts.forEach(p=>p.c=v),strokes,dots,lr,tol}}
+ TOIL.test={get I(){return I},get brows(){return brows},get cpts(){return cpts},get lips(){return lips},next,browQ,powQ,sonQ,setPowder:v=>{cpts.forEach(p=>p.c=cheeks.some(c=>Math.hypot(p.x-c.x,p.y-c.y)<=c.r)?v:0);pdirty=true},strokes,dots,get lr(){return lr}}}
 function toilFinish(made){const st=TOIL.st;if(!st)return;try{if(KG82.run&&KG82.run.stop)KG82.run.stop()}catch(e){}KG82.run=null;
  const sk=toilSkill();let score=0,raw=0,bonus=0;if(made){const P=st.parts;raw=Math.round(100*(.4*(P.brow||0)+.3*(P.powder||0)+.3*(P.son||0)));bonus=Math.round(BAL.toil.skillShare*sk.sk);score=Math.max(0,Math.min(100,Math.round(raw*(100-BAL.toil.skillShare)/100)+bonus))}
  if(!st.dv){const d=toilDress(S,st.F);st.dv=d.v;st.style=d.style}
- const over=made&&(st.parts.thick||0)>=BAL.toil.diemThick;const want=made&&st.col&&st.col.want==="diem"&&score>=BAL.toil.tier[1];const look=!made?null:over||want?"diem":score>=BAL.toil.tier[1]?"dep":score<BAL.toil.tier[0]?"vung":null;
- S.toilette={day:toilWk()*10,wk:toilWk(),score,makeup:!!made,style:st.style,dv:st.dv,F:st.F,occ:st.occ.map(o=>o.k),look};if(made){S.toilette.col=toilColFix(st.col);S.toilette.col.seed=toilWk()}TOIL.prev=null;
- const mk=made?(look==="diem"?"diem":toilTier(score)):"moc";const good=mk==="dep"||mk==="tuyet";const tOk=made&&good?true:made&&(mk==="vung"||mk==="diem")?false:null;if(tOk===null)try{kitSfx("mirror")}catch(e){}/* win / lose: kg82ShowRes(html,tOk) below plays it once */
+ /* diemtrang-score: vụng = a part that went wrong (or a low total); diêm dúa = her choices heavier than the day allows (seeded per person + day + play,
+    revealed only here); else by the total */
+ const P0=st.parts,col0=toilColFix(st.col),occK=st.occ.map(o=>o.k);
+ const L=made?toilLookOf({brow:P0.brow||0,powder:P0.powder||0,son:P0.son||0},score,toilHeavy(col0,col0.want||"",st.style,P0.over||0),toilAllow(occK),
+  wdHash([S.name||"",toilWk(),Math.round(100*(P0.brow||0)),Math.round(100*(P0.powder||0)),Math.round(100*(P0.son||0))].join(":"))):{look:null};const look=L.look;
+ S.toilette={day:toilWk()*10,wk:toilWk(),score,makeup:!!made,style:st.style,dv:st.dv,F:st.F,occ:occK,look};if(L.slip)S.toilette.slip=L.slip;if(made){S.toilette.col=toilColFix(st.col);S.toilette.col.seed=toilWk()}TOIL.prev=null;
+ const mk=toilMk(S.toilette);const good=mk==="dep"||mk==="tuyet";const tOk=made&&good?true:made&&(mk==="vung"||mk==="diem")?false:null;if(tOk===null)try{kitSfx("mirror")}catch(e){}/* win / lose: kg82ShowRes(html,tOk) below plays it once */
  log(`Sáng nay ta điểm trang: y phục ${TOIL_DV[st.dv]}, ${made?`trang điểm ${TOIL_MK[mk]} (${score} phần)`:"để mặt mộc"}.`);
  const rows=[["Y phục",`<span class="ef ${st.style==="fit"?"g":"r"}"><b>${TOIL_DV[st.dv]}</b></span>`]];
  if(made){const P=st.parts;rows.push(["Kẻ mày",`<span class="ef t">${Math.round(100*(P.brow||0))}/100</span>`],["Đánh phấn",`<span class="ef t">${Math.round(100*(P.powder||0))}/100</span>`],["Chấm son",`<span class="ef t">${Math.round(100*(P.son||0))}/100</span>`],
@@ -327,7 +440,7 @@ function toilFinish(made){const st=TOIL.st;if(!st)return;try{if(KG82.run&&KG82.r
 #kg82 .toilw .toilfig .pcp{max-width:220px;margin:0 auto 6px}
 #kg82 .toilw .kinv .kinvg{grid-template-columns:repeat(auto-fill,minmax(54px,1fr))}
 #kg82 .toilw .toildet{margin-top:8px}#kg82 .toilw .toildet>.past{margin:4px 0}
-/* kv3:.kv1 */:where(.kv1) #kg82 .toilw{grid-template-columns:1fr}:where(.kv1) #kg82 .toilw .toilfig{display:grid;grid-template-columns:110px 1fr;gap:4px 10px;align-items:start}:where(.kv1) #kg82 .toilw .toilfig .pcp{grid-row:span 3;max-width:110px;margin:0}`;document.head.appendChild(st)})();
+/* kv3:.kv1 */:where(.kv1) #kg82 .toilw{grid-template-columns:1fr}:where(.kv1) #kg82 .toilw .toilfig{display:block}`;document.head.appendChild(st)})();
 
 /* ---------- REACTIONS POP UP (owner 15/11): every reaction to her look is an event dialog with the person, never only a log line ----------
    Kit event-with-person layout (KIT 32.7: `who` → the person full-body on the left; kitEventDp when kit-fig2 lands). Event choices show the
@@ -339,24 +452,140 @@ const TOIL_EV={"th-scold":"Thái hậu chê dung nhan","th-praise":"Thái hậu 
  "rival-praise":"Phi tần khen giản dị","crowd-jealous":"Cả hậu cung để ý"};
 window.TOIL_EV=TOIL_EV;
 const TOIL_POP=[];let TOIL_POPT=0;
+/* palace voice (owner 16/11 19:38Z, VANPHONG §2): every reaction is a POOL of lines by look and mood, addressed through the one core
+   (jvoice kAddr: {goi} = how the speaker calls her, {xung} = the speaker's self word) and never repeated within BAL.voice.noRepeat tuần (kLine) */
+const TOIL_SAY={
+ "th-scold":{
+  moc:["“Mặt mộc mà đến thỉnh an ai gia sao? Thật chẳng ra thể thống.”","“Người trong cung mà để mặt trơn như cung nữ quét sân, {goi} không thấy thẹn ư?”","“Thỉnh an ai gia cũng là lễ. Lễ mà sơ sài thì lòng cũng sơ sài.”","“Mặt chẳng điểm chút son, {goi} đến để ai gia xót hay để ai gia giận?”","“Người không biết trọng mình thì ai trọng cho. Về trang điểm lại rồi hãy đến.”","“Hôm nay {goi} đến vội quá, đến cả thể diện cũng bỏ quên ở cung rồi.”"],
+  vung:["“Phấn son lem nhem thế kia, cung nữ hầu {goi} không biết việc sao?”","“Son phấn chỗ đậm chỗ nhạt, nhìn như bức tranh vẽ dở. Về bảo người hầu học lại đi.”","“Trang điểm vụng về thế này, ra ngoài người ta cười cả cung của {goi}.”","“Lông mày kẻ lệch, phấn đánh chẳng đều. Người hầu bên {goi} nên đổi đi thôi.”","“Trang điểm thế này, ai gia nhìn còn mỏi mắt, huống hồ là Hoàng đế.”","“Vụng tay thì học, chứ đừng đem cái vụng ra trước mặt ai gia.”"],
+  diem:["“Son phấn đậm quá, trông chẳng giống con nhà nề nếp.”","“Đỏ thắm thế này, {goi} định đi thỉnh an hay đi hát tuồng?”","“Hoa diễm quá thì mau tàn. Người trong cung nên biết giữ chừng mực.”","[lo,mid]“Phấn dày như tường vôi. {Goi} vào cung để hầu hạ, đâu phải để lên đài hát.”","“Ai gia già rồi, mắt kém, mà vẫn thấy chói vì son phấn của {goi}.”","“Người đoan trang không cần nhiều phấn. {Goi} nhớ lấy.”"],
+  plain:["“Ăn vận sơ sài như vậy mà dám đến trước mặt ai gia?”","“Áo vải mộc mạc đến thỉnh an, người ngoài lại tưởng ai gia bạc đãi {goi}.”","“Giản dị là đức, sơ sài là thất lễ. {Goi} phân không ra hai chữ ấy sao?”","“Tiết kiệm là đức, nhưng thỉnh an ai gia mà mặc thế này thì là coi thường.”","“Phẩm phục để đâu mà không mặc? Hay Nội vụ phủ quên phần của {goi}?”","“Áo xống thế kia, người ngoài nhìn vào lại nói hậu cung thiếu thốn.”"],
+  showy:["[lo,mid,hi]“Lộng lẫy thế này, {goi} quên mất ai mới là chủ lục cung rồi chăng?”","“Châu ngọc đầy người, đi một bước kêu ba tiếng. Ai gia nghe mà nhức đầu.”","“Cây cao thì đón gió. {Goi} khoe ra như vậy, chẳng sợ gió to sao?”","“Ai gia còn chưa cài nhiều trâm như thế. {Goi} định so với ai?”","“Lộng lẫy quá hóa lố. Nhớ lấy phận mình.”","“Vàng bạc trên đầu nặng, chỉ e cái đầu chẳng gánh nổi.”"]},
+ "th-praise":{
+  plain:["“Giản dị thế này mới phải đạo, ai gia thích.”","“Không châu ngọc mà vẫn sáng sủa, ấy là biết giữ mình.”","“{Goi} ăn vận nhã nhặn, chẳng tranh chẳng giành, ai gia nhìn cũng thấy yên lòng.”","“Mộc mạc mà đoan chính, đúng là người hiểu phép tiết kiệm của tổ tông.”","“Mộc mạc mà sạch sẽ, nhìn {goi} ai gia lại nhớ những ngày còn ở nhà.”","“Biết tiết kiệm là biết giữ phúc. {Goi} cứ thế mà làm.”"],
+  neat:["“Hôm nay ăn vận đoan trang, thật vừa mắt ai gia.”","“Đúng mực, đúng phẩm. Người trong cung nên như {goi} vậy.”","“Y phục chỉnh tề, dung nhan thanh tú. {Goi} có lòng, ai gia biết.”","“Đoan trang mà không phô trương, mới ra dáng người của hoàng gia.”","“Phẩm phục chỉn chu, cử chỉ khoan thai. Tốt, tốt lắm.”"]},
+ "hh-scold":{
+  moc:["“{Goi} đến thỉnh an {xung} mà mặt mộc thế này ư?”","“Lục cung đều trang điểm chỉnh tề, chỉ mình {goi} để mặt trơn. Là coi nhẹ lễ hay coi nhẹ {xung}?”","“Mặt mộc thì thanh, nhưng thỉnh an không phải chỗ để thanh.”","“Mặt mộc mà ra ngoài, người ta lại bảo Càn Ninh cung không có phép tắc.”","“{Goi} ốm sao? Nếu không thì lần sau chớ để {xung} thấy cảnh này.”","“Không trang điểm thì cũng phải chỉnh tề. Lễ không thể thiếu.”"],
+  diem:["“Son phấn của {goi} hôm nay… có phần quá tay.”","“Đậm thế này, khéo người ta tưởng hôm nay có yến lớn.”","“Môi đỏ như son, {goi} định để ai ngắm đây?”","“Thỉnh an mà như dự yến, {goi} vội vàng muốn người ta nhìn thấy mình quá.”","“Son đỏ quá, người ta nhìn {goi} mà quên mất mình đang ở đâu.”","“Đậm đà thì hợp đêm hội. Sáng thỉnh an, {goi} nên nhã hơn.”"],
+  plain:["“Y phục sơ sài quá, người ngoài nhìn vào lại bảo {xung} không dạy dỗ.”","“Giản dị là tốt, nhưng thể diện của lục cung cũng là thể diện của {xung}.”","“Áo này mặc ở cung mình thì được, đến Càn Ninh cung thì kém quá.”","“Áo cũ thế này, người ta lại tưởng {xung} cắt xén bổng lộc của {goi}.”","“Giản dị thì {xung} quý, nhưng đến mức này là thiếu lễ rồi.”","“Lần sau {goi} nhớ mặc phẩm phục cho đúng. Lục cung đều nhìn cả đấy.”"],
+  showy:["“{Goi} ăn vận lộng lẫy như vậy, định át cả {xung} sao?”","“{Goi} hôm nay rực rỡ quá, hoa nở rộ thì e chẳng bền đâu.”","“Trâm vàng cài kín tóc. Phẩm của {goi} cài được bấy nhiêu thật ư?”","“Ánh vàng chói cả mắt {xung}. {Goi} có ý gì chăng?”","“Đẹp thì đẹp, nhưng đẹp lấn cả người trên thì chẳng phải là đẹp.”","“Lục cung nhìn {goi}, rồi nhìn {xung}. {Goi} hiểu ý {xung} chứ?”"]},
+ "hh-praise":{
+  plain:["“Giản dị mà thanh nhã, {xung} rất thích.”","“Không phô trương mà vẫn có thần thái. {Goi} khéo lắm.”","“Lục cung mà ai cũng biết tiết kiệm như {goi} thì {xung} đỡ lo biết bao.”","“Thanh đạm thế này, mới thấy {goi} là người biết điều.”","“Không cần châu ngọc mà vẫn sáng sủa, {xung} khen thật lòng.”","“{Goi} giữ được sự giản dị giữa chốn phồn hoa, hiếm có lắm.”"],
+  neat:["“{Goi} hôm nay thật chỉn chu, đúng là biết lễ.”","“Phẩm phục ngay ngắn, trang điểm vừa phải. Đáng làm gương cho các cung.”","“Thấy {goi} chu đáo thế này, {xung} cũng yên tâm.”","“Biết lễ thì người kính. {Goi} cứ giữ như vậy.”","“Y phục đúng phẩm, cử chỉ đúng lễ. {Xung} chẳng có gì phải nhắc.”","“Hôm nay {goi} thật ra dáng người trong cung.”"]},
+ "emp-like":{
+  fair:["“Hôm nay {goi} tươi tắn quá.”","“Đẹp như hoa đầu xuân.”","“Hôm nay {xung} chỉ thấy {goi}.”","“{Goi} hôm nay khác hẳn.”","“Hoa trong ngự uyển cũng chẳng bằng.”","“Nhìn {goi}, {xung} hết mệt.”"],
+  any:["“Ăn vận như vậy rất hợp ý {xung}.”","“Nhã nhặn mà có duyên. {Goi} hiểu {xung}.”","“Thế này là vừa, {xung} thích.”","“Dễ nhìn. {Xung} ngồi thêm chút.”","“{Goi} khéo chọn y phục.”","“Giản dị mà tinh tế, đúng ý {xung}.”"]},
+ "emp-dislike":{
+  moc:["“Sao hôm nay trông nhợt nhạt thế?”","“{Goi} ốm sao? Mặt nhợt quá.”","“Trông {goi} chẳng vui chút nào.”","“Sao chẳng điểm chút son? {Goi} không vui sao?”","“Như vừa ốm dậy vậy.”","“Trông {goi} mệt quá.”"],
+  diem:["“Son phấn đậm quá, {xung} không quen.”","“Rửa bớt phấn đi.”","“Hoa lệ quá, lại không giống {goi} nữa.”","“Đậm quá, chẳng thấy {goi} đâu.”","“{Xung} nhìn không quen mắt.”","“Phấn dày quá, khi cười e rơi mất.”"],
+  plain:["“Sao ăn vận sơ sài vậy?”","“Nội vụ phủ bớt xén của {goi} sao?”","“Giản dị thì tốt, nhưng {xung} đến cơ mà.”","“Người hầu của {goi} lơ là quá.”","“{Xung} đến mà {goi} chẳng chút chăm chút sao?”","[lo,mid,hi]“Chẳng giống phi tần của {xung}.”"],
+  showy:["“{Xung} thích thanh nhã hơn.”","“Vàng ngọc đầy đầu, nặng lắm.”","“Đẹp thì đẹp, mà phô trương quá.”","“Nhiều trâm quá, chẳng thấy mặt {goi}.”","“Đeo cả kho báu làm gì?”","“Lộng lẫy như vậy, {xung} lại thấy xa cách.”"]},
+ "rival-jealous":{
+  showy:["“Phô trương đến thế, {goi} không sợ người ta dị nghị sao?”","“{Goi} hôm nay châu ngọc đầy người, chắc là được ban thưởng nhiều lắm nhỉ?”","[lo,mid,hi]“Đẹp quá, đẹp đến mức đứng cạnh Hoàng hậu cũng chẳng kém. Thật đáng nể.”","“Trâm này đẹp thật, {xung} chưa thấy bao giờ. Ai ban cho {goi} vậy?”","“{Goi} rực rỡ thế, đứng cạnh {goi} ai cũng thành lá xanh mất.”","“Hôm nay {goi} tính đi yến ở đâu mà rực rỡ thế?”"],
+  any:["“{Goi} hôm nay đẹp quá, khéo Hoàng thượng chẳng rời mắt được.”","“Dung nhan thế này, chẳng trách có người ngày đêm nhắc đến {goi}.”","“{Xung} nhìn {goi} mà ghen tị. Phải chăng có bí quyết gì?”","“Hoa đẹp thì người hái nhiều, {goi} giữ mình cho khéo.”","“{Goi} dạo này càng lúc càng đẹp, chẳng trách được để mắt tới.”","“Nhan sắc của {goi}, {xung} có học cả đời cũng chẳng được.”"]},
+ "rival-tease":{any:["[lo,mid,hi]“Ôi chao, phấn son của {goi} hôm nay… đậm đà thật đấy.” Nàng ta che miệng cười khúc khích.","[lo,mid,hi]“{Goi} trang điểm thế này là để mừng lễ gì vậy?” Nàng ta liếc mắt cười nhạt.","[lo,mid,hi]“Đậm như thế, đứng xa trăm bước cũng nhận ra {goi}.” Mấy người quanh đó cười khẽ.","[lo,mid,hi]“Phấn dày thế, gió thổi qua chắc bay mất một lớp.” Nàng ta phẩy quạt, giọng mát mẻ.","[lo,mid,hi]“Hôm nay {goi} như hoa mẫu đơn vậy, đỏ rực cả sân.” Nàng ta cười, mắt chẳng hề cười.","[lo,mid,hi]“{Xung} cứ tưởng có đoàn hát vào cung.” Nàng ta nói rồi quay đi."]},
+ "rival-praise":{any:["“{Goi} ăn vận nhã nhặn, {xung} thích.”","“Thanh đạm mà dễ nhìn, {goi} khéo chọn quá.”","“Giữa một sân son phấn, chỉ {goi} là thanh tao.”","“Không tranh không giành mà vẫn nổi bật, {xung} phục {goi}.”","“{Goi} chọn màu áo khéo quá, nhìn mà mát mắt.”","“Nhã nhặn thế này, {xung} cũng muốn học theo.”"]},
+ "crowd-jealous":{showy:["Lúc thỉnh an, mấy phi tần cứ liếc nhìn y phục của ta rồi thì thầm với nhau.","Ta vừa bước vào, tiếng trò chuyện chợt ngưng; mấy đôi mắt dán lên trâm ngọc trên tóc ta.","Lúc cáo lui, sau lưng ta có tiếng cười khẽ: “Phô trương như thế, xem được mấy hôm.”","Mấy phi tần đứng gần ta khẽ dịch ra, như sợ đứng cạnh thì bị lu mờ.","Có người buột miệng khen trâm của ta, rồi vội im khi bị người bên cạnh huých tay.","Lúc thỉnh an, mấy chiếc quạt cùng che miệng; tiếng xì xào theo ta ra tận cửa."],
+  any:["Lúc thỉnh an, ánh mắt các phi tần cứ dừng trên dung nhan của ta.","Suốt buổi thỉnh an, có người nhìn ta rồi nhìn xuống tay áo mình, khẽ thở dài.","Ra khỏi điện, ta nghe phía sau có người khẽ hỏi: “Nàng ta dùng phấn của cung nào vậy?”","Lúc ta ngồi xuống, mấy phi tần khẽ đưa mắt nhìn nhau.","Có người hỏi ta dùng phấn gì, giọng ngọt mà ánh mắt chẳng ngọt chút nào.","Sau buổi thỉnh an, có người cố ý đi chậm lại, để khỏi phải đi cạnh ta."]}};
+/* RANK BAND lines (owner 16/11 ~21:05Z: "lỡ như đây là một người quý phi cũng dùng cái câu chuẩn này luôn"): per reaction, lines that only fit
+   one band of the listener — lo = tiểu chủ (Đáp ứng … Quý nhân), mid = chủ một cung (Tần, Phi), hi = Quý phi / Hoàng quý phi, hq = Hoàng hậu.
+   Merged as tagged lines into every look-pool of the reaction; jvoice kLine says a tagged line only to its band (kBand). */
+const TOIL_BAND={
+ "th-scold":{lo:["“Mới vào cung được mấy hôm mà đã sơ suất thế này, sau này còn ra sao?”","“Phẩm còn thấp thì càng phải giữ lễ, {goi} hiểu chưa?”","“Muốn ai gia nhớ mặt thì đừng để ai gia nhớ vì cái sai.”"],
+  mid:["“Đã là chủ một cung mà dung nhan còn để người ta chê sao?”","“{Ten} có cung riêng, người dưới đều nhìn {goi} mà học. Thế này thì dạy ai?”","“Ngồi ghế chủ vị thì phải giữ được thể diện của chủ vị.”"],
+  hi:["“Ở vị trí {ten}, lục cung đều trông vào, mà để ai gia phải nhắc chuyện này sao?”","“Lục cung đều nhìn {goi} mà theo. {Goi} sơ suất một, bọn họ sơ suất mười.”","“Phẩm cao thì lỗi cũng cao. Ai gia không muốn nói lần thứ hai.”"],
+  hq:["“Mẫu nghi thiên hạ mà thế này, lục cung lấy ai làm gương?”","“Người ngồi Trung cung phải đoan trang hơn tất cả. Hôm nay thì chưa.”","“Ai gia giao lục cung cho Hoàng hậu, không phải để người ta cười.”"]},
+ "th-praise":{lo:["“Mới vào cung mà đã hiểu lễ như vậy, {goi} có tiền đồ.”","“Nhìn {goi} hôm nay, ai gia lại nhớ thời mình mới vào cung.”","“Phận còn nhỏ mà biết giữ mình, ai gia ghi nhớ.”"],
+  mid:["“Đã là chủ một cung, ăn vận thế này mới xứng.”","“{Ten} biết giữ thể diện cho cung mình, ai gia vui lòng.”","“Người dưới nhìn chủ như {goi}, ắt cũng biết lễ.”"],
+  hi:["“Đứng đầu các phi mà vẫn giữ được chừng mực, khó có lắm.”","“{Ten} làm gương cho lục cung như vậy, ai gia yên tâm.”","“Phẩm cao mà không kiêu, {goi} giữ được phúc lâu dài.”"],
+  hq:["“Mẫu nghi thiên hạ phải như vậy. Ai gia không nhìn lầm người.”","“Trung cung đoan trang thì lục cung yên ổn. Tốt lắm.”","“Hoàng hậu như thế, ai gia có thể yên lòng lo việc Phật.”"]},
+ "hh-scold":{lo:["“Mới vào cung chưa lâu mà đã quên lời ma ma dạy rồi sao?”","“{Goi} phẩm vị còn thấp, càng phải cẩn thận từng chút.”"],
+  mid:["“{Ten} đã là chủ một cung, lẽ nào còn để {xung} phải nhắc?”","“Chủ vị mà sơ suất, người ngoài sẽ cười cả cung của {goi}.”"],
+  hi:["“{Ten} phẩm vị chỉ dưới {xung}, càng phải biết giữ lễ.”","“Vị trí cao thì gió lớn. {Goi} chớ để người ta có cớ.”"]},
+ "hh-praise":{lo:["“Mới vào cung mà chu toàn như vậy, {xung} rất mừng.”","“{Goi} phẩm vị còn nhỏ mà biết lễ, sau này ắt có phúc.”"],
+  mid:["“Chủ một cung mà chỉn chu thế này, người dưới cũng được nhờ.”","“Cung của {goi} nề nếp, nhìn chủ là biết.”"],
+  hi:["“Có {goi} làm gương, {xung} đỡ được bao lời răn.”","“{Ten} đoan trang như vậy, lục cung ai dám không theo.”"]},
+ "emp-like":{lo:["“{Xung} sao giờ mới thấy {goi}?”","“Lần sau {xung} đến sớm hơn.”"],mid:["“Cung của {goi}, {xung} sẽ ghé thường hơn.”","“{Goi} càng ngày càng hợp ý {xung}.”"],
+  hi:["“Lục cung, {xung} vẫn nhớ {goi} nhất.”","“Bao năm rồi, {goi} vẫn thế.”"],hq:["“Trung cung có {goi}, {xung} yên lòng.”","“{Goi} vẫn đẹp như ngày đại hôn.”"]},
+ "emp-dislike":{lo:["“Mới vào cung, chưa quen sao?”","“Người hầu chưa biết việc à?”"],mid:["“Chủ một cung mà thế này sao?”","“{Goi} dạo này lơ là quá.”"],
+  hi:["“{Goi} xưa nay đâu có thế.”","“Lục cung đang nhìn {goi} đấy.”"],hq:["“Trung cung mà thế này sao?”","“{Goi} dạo này mệt lắm à?”"]},
+ "rival-jealous":{lo:["“Mới vào cung đã được để mắt, {goi} thật có phúc.”","“Phẩm vị chưa cao mà khéo ăn vận thế, sau này {goi} còn hơn nữa.”"],
+  mid:["“Chủ một cung có khác, {xung} nhìn mà thèm.”","“{Ten} dạo này phong quang quá, cả cung ai cũng nói.”"],
+  hi:["“Phẩm cao thì đẹp cũng cao, {xung} sao dám sánh.”","“{Ten} phẩm cao vị trọng, ăn vận thế này cũng phải.”"],
+  hq:["“{Goi} hôm nay rực rỡ quá, lục cung đều lu mờ.”","“Mẫu nghi thiên hạ có khác, {xung} chỉ biết cúi đầu.”","“Phượng quan trên đầu {goi}, ai nhìn mà chẳng ngước lên.”","“{Xung} đứng cạnh {goi} hôm nay, thấy mình như cành cỏ.”","“Châu ngọc ấy, cả hậu cung chỉ {goi} đeo mới hợp.”","“{Goi} đẹp thế này, Hoàng thượng chẳng muốn rời Trung cung mất.”"]},
+ "rival-tease":{hq:["“{Goi} hôm nay thật… khác thường.” Nàng ta cúi đầu, khóe miệng khẽ nhếch.","“Son của {goi} thắm quá, {xung} suýt không nhận ra.” Nàng ta cười, mắt nhìn đi chỗ khác.","“Trung cung hôm nay rực rỡ, chắc có tin vui?” Giọng nàng ta ngọt như mật pha giấm.","“{Xung} nào dám bàn dung nhan của {goi}.” Nàng ta nói, rồi khẽ liếc người bên cạnh.","“{Goi} trang điểm thế, hẳn là để Hoàng thượng nhìn cho rõ.” Nàng ta cúi chào, cười khẽ.","“Đậm đà thế này, cả điện đều thấy.” Nàng ta che quạt, giọng nhỏ mà ai cũng nghe."]},
+ "rival-praise":{lo:["“Mới vào cung mà đã biết chọn y phục, {xung} phục thật.”","“{Goi} ăn vận thế này, ma ma giáo tập ắt khen.”"],mid:["“Chủ một cung mà giản dị thế, {xung} kính phục.”","“Cung của {goi} hẳn ai cũng nề nếp.”"],
+  hi:["“Phẩm cao mà không phô trương, hiếm có lắm.”","“{Ten} thanh nhã thế này, lục cung nên học theo.”"],hq:["“Mẫu nghi thiên hạ mà giản dị thế này, là phúc của lục cung.”","“{Goi} tiết kiệm làm gương, {xung} xin học theo.”"]},
+ "crowd-jealous":{lo:["Mấy người cùng phẩm khẽ kéo nhau đứng xa ta, như sợ bị đem ra so.","Có người thì thầm sau lưng ta: “Mới vào cung mà đã diện thế, cây cao đón gió.”"],
+  mid:["Người các cung nhỏ đứng sau lưng ta xì xào: chủ vị có khác.","Mấy vị nương nương cùng phẩm liếc nhau, cười mà chẳng nói."],
+  hi:["Ta bước vào, cả điện dịu tiếng; ai cũng liếc nhìn rồi cúi xuống.","Phi tần phẩm thấp chẳng dám nhìn thẳng, chỉ len lén đưa mắt theo y phục của ta."],
+  hq:["Các phi tần vào thỉnh an ta, mắt cứ dừng trên mũ phượng.","Lúc các cung lui ra, có người khẽ nói: “Trung cung hôm nay rực rỡ quá.”"]}};
+/* PERSONALITY lines (phase D): a consort reacts in the voice of her trait (TRAITS j1); merged into her pool (key per trait) — the open
+   jabs never go to the Empress herself ([lo,mid,hi]) */
+const TOIL_TRAIT={
+ "rival-jealous":{"Hiểm độc":["[lo,mid,hi]“Đẹp thế này, giữ được bao lâu thì hay bấy lâu.”","“{Goi} cẩn thận, hoa đẹp hay bị người ta bẻ.”"],
+  "Kiêu ngạo":["[lo,mid,hi]“Chút châu ngọc ấy, cung {xung} chất đầy rương.”","[lo,mid,hi]“Được ban thưởng một lần đã tưởng mình là ai.”"],
+  "Hiền lành":["“{Goi} đẹp quá, {xung} nhìn mà vui lây.”","“Ước gì {xung} cũng khéo ăn vận như {goi}.”"],
+  "Đa nghi":["“Trâm ấy ở đâu ra vậy? {Xung} chưa thấy Nội vụ phủ phát.”","[lo,mid,hi]“{Goi} diện thế này, hẳn có hẹn với ai?”"],
+  "Tham vọng":["“Hôm nay {goi} đi trước một bước, ngày mai chưa biết ai hơn ai.”","“Hoàng thượng thích kiểu này sao? {Xung} ghi nhớ.”"],
+  "Nhu mì":["“{Xung}… {xung} chẳng bao giờ dám diện như {goi}.”","“{Goi} đẹp quá, {xung} đứng cạnh mà ngượng.”"]},
+ "rival-tease":{"Hiểm độc":["[lo,mid,hi]“Phấn son đậm thế, che được mặt chứ che sao được lòng.” Nàng ta cười rất dịu."],
+  "Kiêu ngạo":["[lo,mid,hi]“Trang điểm thế này, {xung} còn tưởng cung nữ nào đi lạc.” Nàng ta cười lớn."],
+  "Hiền lành":["[lo,mid,hi]“Phấn hơi đậm một chút thôi, {goi} đừng để bụng.” Nàng ta nói khẽ."],
+  "Đa nghi":["[lo,mid,hi]“Trang điểm kỹ thế, chắc biết trước có người đến?” Nàng ta nheo mắt."],
+  "Tham vọng":["[lo,mid,hi]“Đậm đà thế, chắc định giành chỗ đứng gần ngự giá?” Nàng ta cười nhạt."],
+  "Nhu mì":["[lo,mid,hi]“Son của {goi}… hơi thắm thì phải.” Nàng ta nói nhỏ rồi cúi đầu."]},
+ "rival-praise":{"Hiểm độc":["“{Goi} giản dị thế, ai nhìn cũng tưởng hiền lành.”"],"Kiêu ngạo":["“Cũng tạm được. Giản dị hợp với {goi}.”"],
+  "Hiền lành":["“{Goi} ăn vận thế này, {xung} nhìn cũng thấy lòng nhẹ.”"],"Đa nghi":["“Giản dị quá… {goi} đang tính điều gì chăng?”"],
+  "Tham vọng":["“Giản dị mà vẫn được để mắt, {xung} phải học {goi} mới được.”"],"Nhu mì":["“{Goi} chọn màu khéo quá, {xung} muốn học mà chẳng dám hỏi.”"]}};
+window.TOIL_TRAIT=TOIL_TRAIT;
+for(const [k,B] of Object.entries(TOIL_BAND)){const P=TOIL_SAY[k];if(!P)continue;const T=[];for(const [b,L] of Object.entries(B))for(const x of L)T.push(`[${b}]${x}`);for(const sub of Object.keys(P))P[sub]=P[sub].concat(T)}
+window.TOIL_SAY=TOIL_SAY;
+/* diemtrang-score: the funny line for a vụng face names the part that went wrong (S.toilette.slip); diêm dúa gets its own */
+const TOIL_SLIP={th:{brow:"“Đôi mày này một bên lên núi, một bên xuống sông à?”",powder:"“Má bên đỏ bên trắng thế kia, ngươi định ra hát tuồng sao?”",son:"“Son lem ra tận cằm, ngươi vừa ăn vụng mứt đỏ của ai thế?”"},
+ hh:{brow:"“Muội kẻ mày lúc trời chưa sáng hay sao, bên cao bên thấp thế kia?”",powder:"“Phấn của muội… hình như chỉ chịu nằm một bên má.”",son:"“Son của muội hôm nay muốn đi dạo ra ngoài môi rồi.”"},
+ emp:{brow:"“Hôm nay ái phi nhướn một bên mày với trẫm đấy à?”",powder:"“Một bên má ửng hồng, một bên trắng bệch: nàng đang thẹn một nửa sao?”",son:"“Son của ái phi chấm lạc chỗ rồi, để trẫm lau cho.”"},
+ rival:{brow:"“Mày của muội hôm nay như hai con sâu cãi nhau.” Nàng ta che miệng cười khúc khích.",powder:"“Muội đánh phấn hay vừa ngã vào thúng bột thế?” Nàng ta che miệng cười.",son:"“Son của muội lem cả ra ngoài kìa.” Nàng ta che miệng cười khúc khích."},
+ diem:{th:"“Son phấn dày thế này, ai gia tưởng gánh hát vào cung.”",hh:"“Muội định đi hội đèn hay đến thỉnh an bổn cung vậy?”",emp:"“Trẫm suýt tưởng hoa mẫu đơn biết đi.”",rival:"“Ôi chao, phấn son của muội hôm nay… đậm đà thật đấy.” Nàng ta che miệng cười khúc khích."}};
+function toilSlipSay(who,mk){try{if(mk==="diem")return TOIL_SLIP.diem[who]||"";if(mk!=="vung")return"";const sl=(toilToday(S)||{}).slip;return sl&&TOIL_SLIP[who]&&TOIL_SLIP[who][sl]||""}catch(e){return""}}
 function toilSay(k,ctx){const mk=ctx.mk,dv=ctx.dress;const plain=dv==="giandi",showy=dv==="photruong"||dv==="vuot"||dv==="tang";
- switch(k){
-  case"th-scold":return mk==="moc"?"“Mặt mộc mà đến thỉnh an ai gia sao? Thật chẳng ra thể thống.”":mk==="vung"?"“Phấn son lem nhem thế kia, cung nữ của ngươi không biết hầu hạ sao?”":mk==="diem"?"“Son phấn đậm quá, trông chẳng giống con nhà nề nếp.”":plain?"“Ăn vận sơ sài như vậy mà dám đến trước mặt ai gia?”":"“Ăn vận phô trương quá, chẳng hợp lễ chút nào.”";
-  case"th-praise":return plain||mk==="moc"?"“Giản dị thế này mới phải đạo, ai gia thích.”":"“Hôm nay ăn vận đoan trang, thật vừa mắt ai gia.”";
-  case"hh-scold":return mk==="moc"?"“Muội đến thỉnh an bổn cung mà mặt mộc thế này ư?”":mk==="diem"?"“Son phấn của muội hôm nay… có phần quá tay.”":plain?"“Y phục sơ sài quá, người ngoài nhìn vào lại bảo bổn cung không dạy dỗ.”":"“Muội ăn vận lộng lẫy như vậy, định át cả bổn cung sao?”";
-  case"hh-praise":return plain||mk==="moc"?"“Giản dị mà thanh nhã, bổn cung rất thích.”":"“Muội hôm nay thật chỉn chu, đúng là biết lễ.”";
-  case"emp-like":return mk==="tuyet"||mk==="dep"?"“Hôm nay ái phi trông thật tươi tắn, trẫm nhìn mãi không chán.”":"“Ăn vận như vậy rất hợp ý trẫm.”";
-  case"emp-dislike":return mk==="moc"?"“Sao hôm nay trông nhợt nhạt thế?”":mk==="diem"?"“Son phấn đậm quá, trẫm không quen.”":plain?"“Sao ăn vận sơ sài vậy?”":"“Lộng lẫy quá, trẫm lại thích vẻ thanh nhã hơn.”";
-  case"rival-jealous":return showy?"“Phô trương đến thế, muội không sợ người ta dị nghị sao?”":"“Muội muội hôm nay đẹp quá, khéo Hoàng thượng chẳng rời mắt được.”";
-  case"rival-tease":return"“Ôi chao, phấn son của muội hôm nay… đậm đà thật đấy.” Nàng ta che miệng cười khúc khích.";
-  case"rival-praise":return"“Muội ăn vận nhã nhặn, tỷ thích.”";
-  case"crowd-jealous":return showy?"Lúc thỉnh an, mấy phi tần cứ liếc nhìn y phục của ta rồi thì thầm với nhau.":"Lúc thỉnh an, ánh mắt các phi tần cứ dừng trên dung nhan của ta.";}return""}
+ const fun={"th-scold":"th","hh-scold":"hh","emp-dislike":"emp","rival-tease":"rival"}[k];const f=fun&&toilSlipSay(fun,mk);if(f)return f;/* diemtrang-score: the part that went wrong / diêm dúa, before the pools */
+ const P=TOIL_SAY[k];if(!P)return"";const host=ctx.host;
+ const sp=host==="th"?"th":host==="emp"?"emp":host&&host.queen?"hh":host&&typeof host==="object"?host:null;
+ let sub;switch(k){
+  case"th-scold":case"hh-scold":sub=mk==="moc"?"moc":mk==="vung"&&P.vung?"vung":mk==="diem"?"diem":plain?"plain":"showy";break;
+  case"th-praise":case"hh-praise":sub=plain||mk==="moc"?"plain":"neat";break;
+  case"emp-like":sub=mk==="tuyet"||mk==="dep"?"fair":"any";break;
+  case"emp-dislike":sub=mk==="moc"?"moc":mk==="diem"?"diem":plain?"plain":"showy";break;
+  case"rival-jealous":case"crowd-jealous":sub=showy?"showy":"any";break;
+  default:sub="any"}
+ /* a scolding never uses the warm words (no "con" / "ái phi" while she is being told off); praise follows the real relation */
+ const bad=/scold|dislike|jealous|tease/.test(k);let m;try{m=sp?kAddr(sp,S).m:"cool"}catch(e){m="cool"}if(bad&&m==="warm")m="cool";if(!bad&&m==="cold")m="cool";
+ let L=P[sub]||P.any,key="toil:"+k+":"+sub;const TT=TOIL_TRAIT[k]&&sp&&sp.trait&&TOIL_TRAIT[k][sp.trait];if(TT){L=L.concat(TT);key+=":"+sp.trait}
+ const said=kLine(key,L,{sp,ls:S,m});
+ /* her signature habit (jvoice kHabit), long form only, when the line has no gesture of its own */
+ const hb=sp&&typeof sp==="object"&&!/^crowd/.test(k)&&/”$/.test(said)?kHabit(sp):"";/* a crowd reaction is many voices: no one consort's habit (reviewer r1) */return hb?`${said} ${hb}.`:said}
+/* gain / loss line in the palace voice (VANPHONG §2.5): a gesture of the person (pool, no repeat) — then the plain why + numbers, unchanged */
+const TOIL_GEST={
+ "th+":["Thái hậu khẽ gật đầu, tràng hạt trong tay lần chậm lại","Khóe môi Thái hậu thoáng một nét cười","Thái hậu cho ta ngồi gần hơn thường lệ","Ánh mắt Thái hậu dịu đi đôi phần","Thái hậu sai ma ma rót thêm cho ta chén trà nóng"],
+ "th-":["Thái hậu đặt chén trà xuống, tiếng sứ chạm bàn khô khốc","Thái hậu nhìn ta một lượt rồi quay đi, chẳng nói thêm","Cả điện lặng đi khi Thái hậu khẽ nhíu mày","Tràng hạt trong tay Thái hậu dừng lại giữa chừng","Ma ma đứng hầu cúi gằm mặt, chẳng dám nhìn ta"],
+ "hh+":["Hoàng hậu mỉm cười, giọng ôn tồn hẳn","Hoàng hậu khẽ vỗ tay ta, ra chiều hài lòng","Hoàng hậu gọi ta ngồi bên phải, chỗ của người được nể","Ánh mắt Hoàng hậu lướt qua ta, có phần tán thưởng","Hoàng hậu sai người dâng thêm cho ta một đĩa điểm tâm"],
+ "hh-":["Hoàng hậu vẫn cười, nhưng ý cười chẳng tới đáy mắt","Hoàng hậu phẩy nhẹ khăn tay, chuyển sang chuyện khác","Các phi tần đưa mắt nhìn nhau khi Hoàng hậu lên tiếng","Hoàng hậu chẳng nói nặng lời, mà lời nào cũng như kim","Hoàng hậu khẽ hắng giọng, các cung lặng cả đi"],
+ "emp+":["Hoàng thượng nhìn ta lâu hơn thường lệ","Hoàng thượng bật cười, bao mệt mỏi như tan đi","Hoàng thượng nắm lấy tay ta, chẳng vội buông","Ánh nến lay lay, ánh mắt Hoàng thượng chẳng rời ta","Hoàng thượng bảo người thắp thêm đèn, ngồi lâu hơn"],
+ "emp-":["Hoàng thượng khẽ nhíu mày rồi cầm tấu chương lên","Hoàng thượng ngồi chưa ấm chỗ đã gọi người hầu trà","Hoàng thượng chỉ ừ một tiếng, chẳng hỏi han gì thêm","Ánh mắt Hoàng thượng lướt qua ta rồi dừng ở nơi khác","Hoàng thượng đứng dậy sớm hơn thường lệ"],
+ "v+":["Nàng ta nắm tay ta, giọng thân mật hẳn","Nàng ta ghé lại gần, cười như chị em lâu ngày","Nàng ta khen ta trước mặt mọi người","Nàng ta cười tươi, kéo ta đi cùng một đoạn","Nàng ta khẽ gật đầu với ta, vẻ thân thiện"],
+ "v-":["Nàng ta cười, nhưng tay vò nát chiếc khăn lụa","Nàng ta liếc ta một cái, sắc như dao","Nàng ta quay sang thì thầm với người bên cạnh","Nàng ta phe phẩy quạt, giọng mát như nước giếng","Nàng ta cười khẩy, quay mặt đi"]};
+function toilGest(r){if(r.g!=null)return r.g;const host=r.host;const k=(host==="th"?"th":host==="emp"?"emp":host&&host.queen?"hh":"v")+(r.n>0?"+":"-");
+ return r.g=TOIL_GEST[k]?kLine("toil-gest:"+k,TOIL_GEST[k]):""}
+function toilLit(r){const g=toilGest(r);return (g?g+" — ":"")+r.line+"."}
 /* r = {k, who (face), host ("th" | "emp" | consort), n (signed change shown in words), line (numbers), ctx} */
-function toilReact(r){TOIL_POP.push(r);clearTimeout(TOIL_POPT);TOIL_POPT=setTimeout(toilFlush,0)}
+/* the gesture is drawn once: the event panel shows it (long form) and the Sổ ghi line of the reaction gets it too (jvoice kLitLog, long form);
+   the result card keeps the short facts (kShort) */
+function toilReact(r){try{toilGest(r);if(r.s0!=null)kLitLog(r.s0,r.g)}catch(e){}TOIL_POP.push(r);clearTimeout(TOIL_POPT);TOIL_POPT=setTimeout(toilFlush,0)}
 function toilBack(host,n){if(!n)return;if(host==="th")apply({th:n});else if(host==="emp")apply({sung:n>0?1:-1});else if(host&&host!==S)affAdd(host,S,n)}
 function toilFlush(){if(!TOIL_POP.length||!S||S.dead)return;const L=TOIL_POP.splice(0).sort((a,b)=>Math.abs(b.n)-Math.abs(a.n));const top=L.slice(0,BAL.toil.popMax),rest=L.slice(BAL.toil.popMax);
  top.forEach((r,i)=>{const bad=r.n<0;const who=toilWho(r.host==null?null:r.host)||"";const more=i===top.length-1&&rest.length?`<p class="past">Còn: ${rest.map(x=>`${x.name||toilWho(x.host)} — ${x.line}`).join(" · ")}.</p>`:"";
-  const h=`<p>${toilSay(r.k,r.ctx)}</p><p class="past">${r.line}.</p>${more}`;
+  const h=`<p>${toilSay(r.k,Object.assign({host:r.host},r.ctx))}</p><p class="past">${toilLit(r)}</p>${more}`;
   const back=Math.ceil(Math.abs(r.n)*BAL.toil.sorryBack);
   /* cost mode (KIT 28.6 / §53 kitHint): the options' fx are empty (the change happens in go), so each says its own true hint */
   const nm=r.name||who,boss=r.host==="th"||r.host==="emp"||(r.host&&r.host.queen),them=lv=>lv?nm:boss?"bề trên":"nàng ta";
@@ -368,14 +597,14 @@ function toilFlush(){if(!TOIL_POP.length||!S||S.dead)return;const L=TOIL_POP.spl
   Q.push({t:TOIL_EV[r.k]||"Dung nhan",who:r.who,h,opts,hideOut:true,toilEv:r.k,art:`img/ev-toil-${r.k}.webp`/* banner by ab06, 640×480 */})});
  try{render()}catch(e){}}
 /* hook the three places that apply a reaction */
-(function(){const ap1=aaThieuLeApply;aaThieuLeApply=function(host,f0){const L=leAttire(S,"",host);const r=ap1.apply(this,arguments);try{const t=L.toil;const f=f0||L.delta;const n=f.aff||0;
+(function(){const ap1=aaThieuLeApply;aaThieuLeApply=function(host,f0){const L=leAttire(S,"",host);const s0=S.logSeq||0;const r=ap1.apply(this,arguments);try{const t=L.toil;const f=f0||L.delta;const n=f.aff||0;
   if(t&&n){const k=host==="th"?(n>0?"th-praise":"th-scold"):host==="emp"?(n>0?"emp-like":"emp-dislike"):host&&host.queen?(n>0?"hh-praise":"hh-scold"):null;
    if(k){const who=host==="th"?pTH():host==="emp"?pEmp():pv(host);const nm=host==="emp"?"Sủng":`${toilWho(host)} thiện cảm`;
-    toilReact({k,who,host,n,name:toilWho(host),line:`${t.why.map(w=>w[0]).join(", ")}: ${host==="emp"?(n>0?"Sủng +1":"Sủng -1"):`${nm} ${n>0?"+":""}${n}`}${f.danh?`, Danh ${f.danh}`:""}`,ctx:{mk:t.mk,dress:t.dress}})}}}catch(e){console.error(e)}return r}})();
-(function(){const r0=toilRival;toilRival=function(v,doIt){const e=r0.apply(this,arguments);try{if(doIt&&e){const L=toilLook();const k=L.mk==="diem"&&!e.aff&&!e.g?"rival-tease":e.g?"rival-jealous":e.aff>0?"rival-praise":"rival-jealous";
-  toilReact({k,who:pv(v),host:v,v,n:e.g?-e.g:(e.aff||-1),name:v.name,line:e.txt,ctx:{mk:L.mk,dress:L.dv}})}}catch(x){}return e}})();
-(function(){const c0=toilCrowd;toilCrowd=function(doIt){const R0=doIt?liveRivals(false).filter(v=>!v.queen&&!v.out).map(v=>[v,v.ghen||0]):[];const e=c0.apply(this,arguments);try{if(doIt&&e&&e.n){
-  const top=R0.map(([v,g])=>[v,(v.ghen||0)-g]).sort((a,b)=>b[1]-a[1])[0];const L=toilLook();if(top)toilReact({k:"crowd-jealous",who:pv(top[0]),host:top[0],v:top[0],n:-e.n,name:top[0].name,line:`phi tần thấy ta ${e.why}: ghen +${e.n}`,ctx:{mk:L.mk,dress:L.dv}})}}catch(x){}return e}})();
+    toilReact({k,who,host,n,s0,name:toilWho(host),line:`${t.why.map(w=>w[0]).join(", ")}: ${host==="emp"?(n>0?"Sủng +1":"Sủng -1"):`${nm} ${n>0?"+":""}${n}`}${f.danh?`, Danh ${f.danh}`:""}`,ctx:{mk:t.mk,dress:t.dress}})}}}catch(e){console.error(e)}return r}})();
+(function(){const r0=toilRival;toilRival=function(v,doIt){const s0=S&&S.logSeq||0;const e=r0.apply(this,arguments);try{if(doIt&&e){const L=toilLook();const k=(L.mk==="diem"||L.mk==="vung")&&!e.aff&&!e.g?"rival-tease":e.g?"rival-jealous":e.aff>0?"rival-praise":"rival-jealous";
+  toilReact({k,who:pv(v),host:v,v,s0,n:e.g?-e.g:(e.aff||-1),name:v.name,line:e.txt,ctx:{mk:L.mk,dress:L.dv}})}}catch(x){}return e}})();
+(function(){const c0=toilCrowd;toilCrowd=function(doIt){const s0=S&&S.logSeq||0;const R0=doIt?liveRivals(false).filter(v=>!v.queen&&!v.out).map(v=>[v,v.ghen||0]):[];const e=c0.apply(this,arguments);try{if(doIt&&e&&e.n){
+  const top=R0.map(([v,g])=>[v,(v.ghen||0)-g]).sort((a,b)=>b[1]-a[1])[0];const L=toilLook();if(top)toilReact({k:"crowd-jealous",who:pv(top[0]),host:top[0],v:top[0],s0,n:-e.n,name:top[0].name,line:`phi tần thấy ta ${e.why}: ghen +${e.n}`,ctx:{mk:L.mk,dress:L.dv}})}}catch(x){}return e}})();
 
 window.toilOpen=toilOpen;window.toilDress=toilDress;window.toilFx=toilFx;window.toilNpc=toilNpc;window.toilOcc=toilOcc;
 
@@ -391,7 +620,7 @@ const TOIL_LOOKS={
  /* owner 15/11 22:xxZ: "vụng" = deliberate clumsy makeup in her colours: uneven blotchy blush, a powder patch (the colour layer adds lips past the line, smudged lids, crooked brows, smeared ink) */
  vung:{skin:[255,252,248,.08,.6],blush:[236,112,130,.30,.17,0],lip:[206,60,80,.4,.08,.036],powder:0,vung:1},
  diem:{skin:[255,252,248,.24,.64],blush:[236,104,124,.40,.20,0],lip:[198,40,64,.56,.084,.038],powder:0}};
-function toilLookOfP(p){try{if(p!==S||!S)return null;if(TOIL.prev)return TOIL.prev.look;const r=toilToday(S);return r&&r.makeup&&r.look?r.look:null}catch(e){return null}}
+function toilLookOfP(p){try{if(!S)return null;if(p&&p!==S&&p.coop){const r=toilFriendRec(p);return r&&r.makeup&&r.look?r.look:null}if(p!==S)return null;if(TOIL.prev)return TOIL.prev.look;const r=toilToday(S);return r&&r.makeup&&r.look?r.look:null}catch(e){return null}}
 const TOIL_SVGC={};
 function toilRnd(seed){let a=(seed*2654435761)>>>0||1;return()=>{a=(a+0x6D2B79F5)>>>0;let t=a;t=Math.imul(t^t>>>15,t|1);t^=t+Math.imul(t^t>>>7,t|61);return((t^t>>>14)>>>0)/4294967296}}
 /* col = her picks (toilColOf): the blush disc and the fallback lip oval take HER colours; noLip = the lips come from the colour layer (§60) */
@@ -463,7 +692,7 @@ function toilColDef(){const o={};for(const k in TOIL_COL)o[k]=TOIL_COL[k].def;re
 function toilColE(part,k){const P=TOIL_COL[part];return P.L.find(x=>x[0]===k)||P.L.find(x=>x[0]===P.def)}
 function toilColRGB(part,k){return toilColE(part,k)[3].slice()}
 function toilColFix(c){const o=toilColDef();if(c&&typeof c==="object"){for(const k in o)if(TOIL_COL[k].L.some(x=>x[0]===c[k]))o[k]=c[k];if(c.want==="diem")o.want="diem";if(c.seed!=null&&isFinite(c.seed))o.seed=c.seed|0}return o}
-function toilColOfP(p){if(TOIL.prev)return TOIL.prev.col;const r=p===S?toilToday(S):null;return toilColFix(r&&r.col)}
+function toilColOfP(p){if(p&&p!==S&&p.coop){const r=toilFriendRec(p);return toilColFix(r&&r.col)}if(TOIL.prev)return TOIL.prev.col;const r=p===S?toilToday(S):null;return toilColFix(r&&r.col)}
 function toilColText(c){c=toilColFix(c);return ["mat","ma","son","may"].map(k=>toilColE(k,c[k])[1]).join(", ")}
 /* strength by look: lip / eyelid colour share, eyelid height (share of the lid→brow gap), brow tint, outer wing, lower lash line */
 const TOIL_MKS={vung:{lip:.62,eye:.5,eyeH:.62,brow:.5,wing:0,low:0,vung:1},dep:{lip:.54,eye:.5,eyeH:.5,brow:.45,wing:.08,low:0},diem:{lip:.86,eye:.7,eyeH:.68,brow:.68,wing:.22,low:.4}};
@@ -571,16 +800,17 @@ window.kitFaceZoom=kitFaceZoom;
 .kfzoom-i{position:absolute}
 .kfzoom-i>img{position:absolute;left:0;top:0;width:100%;height:100%;max-width:none}
 .kfzoom-i>.kfxf{position:absolute;left:0;top:0;width:100%;height:100%;pointer-events:none}
-/* kv3:.kv1 */:where(.kv1) #kg82 .toilw .toilfig .kfzoom{grid-row:span 3;width:110px;margin:0}`;document.head.appendChild(st)})();
+/* kv3:.kv1 */`;document.head.appendChild(st)})();
 function toilColRows(c){return ["mat","ma","son","may"].map(k=>({k,label:TOIL_COL[k].label,sel:c[k],items:TOIL_COL[k].L.map(x=>({k:x[0],name:x[1],short:x[2],col:x[3]}))}))}
 try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§60",title:"kitSwatches · màu trang điểm (phấn mắt, phấn má, son môi, màu mày)",html:()=>{let z="";try{if(typeof S!=="undefined"&&S){const f=kitFile(toilPor().src);TOIL.prev={look:"dep",col:toilColDef()};try{z=kitFaceZoom(S,f)}finally{TOIL.prev=null}}}catch(e){}return `<div style="display:grid;grid-template-columns:minmax(110px,200px) 1fr;gap:10px;align-items:start">${z||"<span></span>"}${kitSwatches({key:"kitpage",rows:toilColRows(toilColDef())})}</div>`}})}catch(e){}
 
 /* (b0) CHỌN MÀU — before the three hồi: her portrait wears the picks live (the same layers as all day, at the "đẹp" strength) */
 function toilColUI(){const st=TOIL.st,box=kg82Box();if(!box||!st)return;box.hidden=false;st.col=toilColFix(st.col||(S.toilette&&S.toilette.col));
  TOIL.prev={look:st.col.want==="diem"?"diem":"dep",col:st.col};TOIL.prevUI=toilColUI;const por=toilPor(),me=pMe();
- box.innerHTML=`<div class="toilw"><div class="toilfig">${kitFaceZoom(S,kitFile(por.src))||pcPort(Object.assign({},me,{src:por.src}),me.col)}<p class="past">Gương đồng soi trước: điểm trang khéo thì dung nhan mang đúng những màu này. Kiểu diêm dúa (hay phấn đánh quá dày) thì màu đậm hẳn, người trọng lễ dễ chê.</p></div>`+
+ box.innerHTML=`<div class="toilw"><div class="toilfig"><p class="past">Gương đồng soi trước: điểm trang khéo thì dung nhan mang đúng những màu này. Kiểu diêm dúa (hay phấn đánh quá dày) thì màu đậm hẳn, người trọng lễ dễ chê.</p></div>`+
   `<div>${kitSwatches({key:"toilcol",rows:toilPreRows(st.col).concat(toilColRows(st.col)),onPick:(r,k)=>{if(/^pre-/.test(r)){const x=TOIL_PRE.find(y=>y[0]===k&&"pre-"+y[2]===r);if(x){st.col=Object.assign({},x[4]);if(x[2]==="diem")st.col.want="diem"}}else st.col[r]=k;toilColUI()}})}</div></div>`+
   `<div class="kg82act"><button class="${kg82Btn()}" id="toilgo">Trang điểm<small>kẻ mày, đánh phấn, chấm son</small></button><button class="${kg82Btn(true)}" id="toilmoc2">Để mặt mộc</button></div>`;
+ try{kitGameFigRefresh()}catch(e){}
  $("toilgo").onclick=()=>{TOIL.prev=null;TOIL.prevUI=null;toilMakeup()};$("toilmoc2").onclick=()=>{TOIL.prev=null;TOIL.prevUI=null;toilFinish(false)}}
 window.toilColUI=toilColUI;window.kitSwatches=kitSwatches;
 /* leaving the mirror any way (✕, Esc) ends the colour preview */

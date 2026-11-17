@@ -33,17 +33,25 @@ wrap("fxServants",f=>function(){const L=f.apply(this,arguments);return solo?L.fi
 function onlyMe(f,self,args){solo++;try{return f.apply(self,args)}finally{solo--}}
 for(const n of ONLY_ME)wrap(n,f=>function(){if(guest())return onlyMe(f,this,arguments);return f.apply(this,arguments)});
 /* the rest of the monthly world (stipends, illness, kids growth) is per person: PERSON below + inline checks in j8/j13 */
+/* HER OWN ACT (review/coop-main-faults): the guards below stop the guest's WORLD LOOPS (week end, month) from rolling for NPCs; they must
+   never stop what she does herself. Her act on the friend or an NPC (runAct with her as the actor: Sai người lấy trộm đồ → loLose on the
+   target, …) runs in full on her side, and its result reaches the other seat as before (res.fam ops for the friend, the merged week for NPCs).
+   Before, loLose(friend) returned null on the guest: "Rương … không còn món nào đáng lấy" though the chest was full (dev/test/coop-b1.js 8). */
+let own=0;
+wrap("runAct",f=>function(a){if(a===S&&guest()){own++;try{return f.apply(this,arguments)}finally{own--}}return f.apply(this,arguments)});
+const npcOff=p=>guest()&&!own&&p!==S;
 /* PERSON: any of these called for an NPC (from any loop) does nothing on the guest */
 const PERSON={stipend:"",illMonthP:"",fireServ:"",npcStudy:undefined,loLose:null,ktGrow:undefined};
-for(const n in PERSON)wrap(n,f=>function(p){if(guest()&&p!==S&&n!=="ktGrow")return PERSON[n];if(guest()&&n==="ktGrow"&&arguments[1]!==S)return;return f.apply(this,arguments)});
+for(const n in PERSON)wrap(n,f=>function(p){if(n!=="ktGrow"&&npcOff(p))return PERSON[n];if(n==="ktGrow"&&npcOff(arguments[1]))return;return f.apply(this,arguments)});
 /* illness of servants / children / court people, NPC dress: only her own people on the guest */
-wrap("fxIllMonth",f=>function(p){if(guest()&&!mine(p))return;return f.apply(this,arguments)});
-wrap("wdNpcDress",f=>function(v){if(guest()&&v!==S)return;return f.apply(this,arguments)});
+wrap("fxIllMonth",f=>function(p){if(guest()&&!own&&!mine(p))return;return f.apply(this,arguments)});
+wrap("wdNpcDress",f=>function(v){if(npcOff(v))return;return f.apply(this,arguments)});
 /* fortune lots: an NPC's lot stays the host's */
-wrap("drawLot",f=>function(p){if(guest()&&p!==S)return p.lot||{i:0,lv:0,dom:""};return f.apply(this,arguments)});
+wrap("drawLot",f=>function(p){if(npcOff(p))return p.lot||{i:0,lv:0,dom:""};return f.apply(this,arguments)});
 /* Thái hậu / Hoàng hậu mood (S.cm, a world key): the host rolls it; the guest keeps only her own spy line and resets her own offence count */
 wrap("cmMonth",f=>function(){if(guest()){try{if(!S||S.dead)return;const C=cmSt();C.thDrop=0;C.hhDrop=0;if((S.mat||0)>=3)C.spy=wk()}catch(e){}return}return f.apply(this,arguments)});
 /* the safety net's snapshots (jcoopworld guestNet) around the outermost endTurn, so every module's week-end work counts as her roll */
-wrap("endTurn",f=>function(){if(window.COOPW&&COOPW.netWrap)return COOPW.netWrap(f,this,arguments);return f.apply(this,arguments)});
-window.COOP_ONE={MUTE,ONLY_ME,PERSON:Object.keys(PERSON).concat(["drawLot","cmMonth","fxIllMonth","wdNpcDress"])};
+wrap("endTurn",f=>function(){const o=own;own=0;/* a week end reached from inside an act is a world loop again */try{if(window.COOPW&&COOPW.netWrap)return COOPW.netWrap(f,this,arguments);return f.apply(this,arguments)}finally{own=o}});
+wrap("nextBuoi",f=>function(){const o=own;own=0;try{return f.apply(this,arguments)}finally{own=o}});
+window.COOP_ONE={ownAct:()=>own,MUTE,ONLY_ME,PERSON:Object.keys(PERSON).concat(["drawLot","cmMonth","fxIllMonth","wdNpcDress"])};
 })();

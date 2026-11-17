@@ -176,7 +176,7 @@ function petTake(t,from,src){if(!petHasFree(S)){const j=petWorst(S);if(j<0)retur
    the autumn hunt (Đi săn group), caring for a pet (act-cham-thu-nuoi) */
 function petArtOf(t,label,g){try{if(g){const id="cat:"+g;const src=typeof evArtOf==="function"?evArtOf(id,0):"";if(src)return{src,label:typeof evArtTitle==="function"?evArtTitle(id):""}}
  return{src:"img/act-cham-thu-nuoi.webp",label:label||"Thú nuôi"}}catch(e){return undefined}}
-function petPicK(t,lead){t=petK(t);const T=PET[t];return{facts:lead?[String(lead).replace(/<[^>]+>/g,"")]:undefined,itemPic:kitItem({src:petSrc(t,1,typeof petcStageSrc==="function"?"-non":""),name:"",grade:T.tr,size:"lg",lux:petLux(t)}).replace('<span class="kitn"></span>','').replace(`<span class="kitg">${KIT_GRADE[T.tr].n}</span>`,`<span class="kitg">${PET_TIER[T.tr]}</span>`)}}
+function petPicK(t,lead){t=petK(t);const T=PET[t];return{facts:lead?[String(lead).replace(/<[^>]+>/g,"")]:undefined,itemPic:kitItem({src:petSrc(t,1,typeof petcStageSrc==="function"?"-non":""),name:"",grade:T.tr,gname:PET_TIER[T.tr],size:"lg",lux:petLux(t)}).replace('<span class="kitn"></span>','')}}
 function petCard(pid,pp,title){const d=mkP(pid,pp);if(!d)return false;if(d.kit&&!d.kit.facts)d.kit.facts=[String(d.t||"").replace(/<[^>]+>/g,"")];Q.push({t:title||d.title,h:d.t,opts:d.o,headArt:d.headArt,kit:d.kit,optLayout:"rows",showOut:true,pid:d.pid,pp:d.pp});tsbShow();return true}
 (function(){const d0=deserQ;deserQ=function(L){const out=d0.apply(this,arguments);try{out.forEach(q=>{if(q.pid&&/^tsbPet/.test(q.pid)){const d=mkP(q.pid,q.pp);if(d){q.kit=d.kit;if(q.kit&&!q.kit.facts)q.kit.facts=[String(d.t||"").replace(/<[^>]+>/g,"")];q.stage=undefined}}})}catch(e){}return out}})();
 PEND.tsbPetGift=pp=>{if(!S)return null;pp.t=petK(pp.t);const T=PET[pp.t];if(!T)return null;const O=[];
@@ -215,10 +215,9 @@ try{ACTDOM.thaopet="Mưu kế"}catch(e){}
 (function(){if(typeof mindMenu!=="function")return;const m0=mindMenu;mindMenu=function(v,t){const O=m0.apply(this,arguments);try{if(Array.isArray(O)){const j=petTarget(t);if(j>=0){const tr=petT(tsbPets(t)[j]).tr;O.forEach(x=>{if(x[0]==="thaopet")x[1]*=1+tr*.5})}}}catch(e){}return O}})();
 
 /* ---------------- Tư trang: ô thú nuôi (kitEquipSlots, cùng kit với Đang mang) ---------------- */
-function petTile(P,i,big){const T=petT(P);const h=kitItem({src:petPSrc(P,big),name:big?"":T.n,grade:T.tr,lux:petLux(P.t),size:big?"lg":"slot",on:!big&&S.petOn===i,onText:"Theo hầu",tip:`${T.n} · ${PET_TIER[T.tr]} · Xa xỉ ${petLux(P.t)}`});
- /* same tile as items: grade frame + colour, Ngự seal on Ngự tứ */
- const h2=h.replace(`<span class="kitg">${KIT_GRADE[T.tr].n}</span>`,`<span class="kitg">${PET_TIER[T.tr]}</span>`);
- return h2}
+function petTile(P,i,big){const T=petT(P);const h=kitItem({src:petPSrc(P,big),name:big?"":T.n,grade:T.tr,gname:PET_TIER[T.tr],lux:petLux(P.t),size:big?"lg":"slot",on:!big&&S.petOn===i,onText:"Theo hầu",tip:`${T.n} · ${PET_TIER[T.tr]} · Xa xỉ ${petLux(P.t)}`});
+ /* same tile as items: grade frame + colour, Ngự seal on Ngự tứ; the chip on the frame reads the pet tier (gname) */
+ return h}
 function petCareW(P){const c=P.care||0;return c>=70?["Khỏe","g"]:c>=30?["Cần chăm","n"]:["Biếng ăn","r"]}
 /* LEFT COLUMN pet box (owner 16/11 16:55Z): directly under Y phục, same column width, slot = wear-slot size; name / age / effect as small lines.
    Shows the pet that follows her (else the first); 0 pets = one empty slot + "Chưa nuôi con nào". Tap = the Thú cưng sub-tab of Tư trang. */
@@ -270,7 +269,7 @@ function petShopItems(){const sfx=typeof petcStageSrc==="function"?"-non":"";
    onBuy:(x,q)=>{for(let i=0;i<q;i++)if(!petBuyOne(k))break}}})}
 function petShop(){const c=S.court&&S.court.ped;let nm=c&&c.name?c.name:"";try{if(nm&&typeof k61Named==="function"&&!k61Named(c))nm="???"}catch(e){}/* same seller + naming as kitShopNvp */
  return kitShop({key:"pet",title:"Nhờ thái giám tìm thú nuôi",carry:Math.max(0,petMax(S)-tsbPets(S).length),
-  info:`<p>Thái giám Nội vụ phủ khom lưng: “Thú nhỏ ngoài cung, nô tài tìm được mấy loài này, xin nương nương chọn.” Còn ${petMax(S)-tsbPets(S).length} ô; con quý hiếm không mua được: Hoàng thượng, Thái hậu, Hoàng hậu ban, Thu săn tháng chín, cống phẩm tháng giêng.</p>`,
+  info:`<p>Thái giám Nội vụ phủ khom lưng: “Thú nhỏ ngoài cung, nô tài tìm được mấy loài này, xin ${kSay({srv:"m"},S,"{goi}")} chọn.” Còn ${petMax(S)-tsbPets(S).length} ô; con quý hiếm không mua được: Hoàng thượng, Thái hậu, Hoàng hậu ban, Thu săn tháng chín, cống phẩm tháng giêng.</p>`,
   stage:[{__fig:"img/fig-eunuch-ndp-tray.webp",__cap:nm,__role:"Thái giám Nội vụ phủ",age:28,sex:"m"}],items:petShopItems(),money:()=>S.bac})}
 function petBuyO(k){const T=PET[k];return cl(Math.round([78,62,38][T.tr]+(S.mat||0)*[3,4,5][T.tr]),5,95)}
 function petDo(k,b){if(!S||S.dead||Q.length)return;const i=+b.dataset.i;
