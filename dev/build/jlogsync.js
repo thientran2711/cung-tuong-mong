@@ -133,7 +133,7 @@ document.addEventListener("click",e=>{try{const b=e.target.closest&&e.target.clo
 {const s0=start;start=function(){const r=s0.apply(this,arguments);reset();return r}}
 
 /* one wording for the monthly Thái hậu / Hoàng hậu drift by Đức (j3 monthTick + j85 v85Month write into the same group) */
-function lsDucWhy(){return S&&S.duc>=60?"Đức cao, được quý hơn":"Đức thấp, bị coi nhẹ"}window.lsDucWhy=lsDucWhy;
+function lsDucWhy(){return S&&S.duc>=BAL.ducLv.up?"Đức cao, được quý hơn":"Đức thấp, bị coi nhẹ"}window.lsDucWhy=lsDucWhy;
 /* the turn change writes its tick line once, at its end */
 {const e0=endTurn;endTurn=function(){const r=e0.apply(this,arguments);if(!depth&&!fold)lsSync("Sang tuần mới");return r}}
 /* ---- week card (dawn / Tuần lục): bookkeeping lines are left out — they only restate numbers the card already sums ---- */
