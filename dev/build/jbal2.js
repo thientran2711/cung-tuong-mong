@@ -375,6 +375,30 @@ BAL.slap={nm:["","nhẹ","vừa","nặng"],def:1,sac:[0,2,3,5],wk:[0,2,4,7],wkX:
  npc:[[0,60,32,8],[0,45,38,17],[0,30,42,28]]};
 /* slap occasions in the ONE tier table (jmgt mgTier): tat = her slap, stakes by HER rank; ne = dodging, rank = the attacker's rank */
 Object.assign(BAL.mgTier.occ,{tat:[.5,.5],ne:[.5,.5]});
+/* reviewer entry-exam-r1 (OD 07:25Z "mức vừa"): mgTier occ tuyen 1.5 → 1, so a new girl (art level 0) reads "Vừa", not "Khó", at her
+   entry exam (ease 1.2 between the measured 0.8 / 1.6 boards; skilled marks 9.0–10 at both, so the rank table is unchanged). */
+Object.assign(BAL.mgTier.occ,{tuyen:[1,0]});
+/* ENTRY SELECTION EXAM (review/entry-exam, owner OD:L1244 / L1250 / 07:20Z no word games / 07:25Z medium; read by jentry entScore, jkc2):
+   ONE score rule for every entry road (dir = "Vào cung ngay", dan = cung nữ home road, nc = hòa thân home road):
+   score = Σ w[stat]·stat + w.raw·(mini-game 0..10) + w.art·(her level in that art) + road extras + base + noise (−noise..+noise, even).
+   cut = [one step under the ceiling, the ceiling]: below cut[0] = two steps under (never below Đáp ứng; cung nữ: Tân Giả khố first).
+   fx[tier] = what the result itself gives or takes on top of the rank (gain and loss on every path, also when the ceiling is Đáp ứng);
+   stepSung = Sủng lost per step under the ceiling. word = mini-game kinds that are word games (never offered; drop a key when its
+   non-word replacement lands, review/nw-*). The tier of the board is mgTier occ "tuyen" (BAL.mgTier). Measured: dev/measure/entry-bots.js. */
+Object.assign(BAL,{entry:{word:["tho","doi","doden","le","tc","xa","thq"],noise:4,cut:[37,53],stepSung:5,
+ w:{dir:{sac:.15,duc:.15,tai:.1,raw:3,art:1.5,th:1/6,base:8},
+  dan:{sac:.15,duc:.15,suc:.05,raw:3,art:0,kim:[3.5,1.5],le:2.5,kgt:1/8,kld:-1/3,ly:3,self:-3,base:0},
+  nc:{sac:.15,tai:.15,duc:.1,raw:3,art:2,th:1/5,le:2.5,kgt:1/6,sx:3,base:0}},
+ fx:[{danh:-3,sung:-2},{},{danh:3,sung:4}]}});
+/* review/origin-intros (OD:L1244 "reason on the result card", OD:L1267 ONE CORE):
+   w.kc = the tiểu thư Điện tuyển score (jkc kcScore) — the same numbers jkc typed by hand, moved here unchanged (danhCap: Danh counted up to;
+   raw0 / pow0: the value used when the card has none).
+   why.ref = what an ordinary new girl brings (Sắc 40+R55 ≈ 65, Tài 30+R50 ≈ 55, Đức 30, mini-game mark 5, art level 1, Thái hậu 0, Danh 20):
+   the reason line names the part of HER score that sits furthest above (or below) these, weighted by the road's own w. Text only, never a rule. */
+Object.assign(BAL.entry.w,{kc:{sac:.28,tai:.16,duc:.12,danh:.45,danhCap:40,arts:3,raw:1.6,raw0:5,le:2,pow:1/8,pow0:40,th:1/6,ld:-1/3,
+ /* reviewer origin-intros-r1: the extras jkc kcMyScore typed by hand (same values): way = Tài/Đức added by "Đối đáp lanh lợi" / "Đáp lời khiêm nhường", chTh = Thái hậu added for Cháu gái Thái hậu, rW = per origin rank r, vh / tdFall = sớ tiến cử / td fall */
+ way:6,chTh:15,rW:4,vh:6,tdFall:-6}});
+Object.assign(BAL.entry,{why:{ref:{sac:65,tai:55,duc:30,raw:5,art:1,th:0,danh:20,home:0}}});
 /* DANH HIỆU (jdh, owner 16/11 13:00Z/13:15Z/13:20Z/13:25Z D, 13:55Z s17, 14:10Z; FOREMAN_C 14:15Z/14:35Z/14:45Z s17; review/title-sys): achievement titles.
    n0 = the counts that open the 3 steps of a title (1 / 5 / 10 times = the same name, a higher colour tier); step = tiers added per step (tier = b + i*step, max 8).
    T[id] = per title: b base tier, n own counts, st own step, ch = the bonus TYPES this title may give (the PLAYER picks ONE while it is worn; NPCs pick by need).
