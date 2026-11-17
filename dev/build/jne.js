@@ -13,7 +13,7 @@
    Save state: only S.neMorn (the morning-after follow-up, §4 below; absent in old saves → nothing). */
 Object.assign(BAL,{nightEnd:{
  /* tier points = s (the night's own score from j8 night1: prep q + talk fit + his mood [+1,0,−1,−2] + luck 0..2, −2 if an over-rank
-    piece was confiscated) + her toilette today (jtoil makeup: tuyệt/đẹp +1, vụng/diêm dúa −1) + talk (−2 when the pillow talk lost her
+    piece was confiscated) + her toilette today (jtoil makeup: tuyet Khuynh thành / dep Kiều diễm +1, vung Vụng về / diem Diêm dúa −1; names TOIL_MK) + talk (−2 when the pillow talk lost her
     Sủng or Ân tình) + illness (−2 when she is ill). warm ≥ warm, normal ≥ normal, else cold. */
  warm:6,normal:3,toil:{tuyet:1,dep:1,vua:0,moc:0,vung:-1,diem:-1},talkBad:-2,ill:-2,
  /* his mood after the night (S.emp.mood 0 vui … 3 giận dữ): warm → one step better; cold → one step worse (never to giận dữ) */
