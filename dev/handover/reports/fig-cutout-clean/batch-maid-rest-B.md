@@ -89,3 +89,28 @@ maid-m31-t2-a18	kspOr3B16B	rgdPjF6xtc	ok
 maid-m31-t3-a18	s786gnIl8e	WDlI0ZicXe	ok
 maid-m31-t4-a18	u5YsFPzQLD	aFArCIYfSh	ok
 ## 80 a18 done through maid-m31-tm4-a18. NEXT = line 81 of grep a18 lists/shards/maid-rest-B.txt (maid-m32-a18).
+maid-m32-a18	dtPumkNXSL	SymRPKxUb8	ok
+maid-m32-cold-a18	kspOlRp16B	Cqzjb82EEy	ok
+maid-m32-kc-a18	JNfG6DjOq4	WDlIpZPcXe	ok
+maid-m32-ngheo-a18	79aANDgJAL	MB7aoWQDCm	ok
+maid-m32-t1-a18	P3uYRBL42C	cpgtezY0eP	ok
+maid-m32-t2-a18	JNfG6dlOq4	EbnL5fBuuO	ok
+maid-m32-t3-a18	P3uYR8l42C	jUB9wjeLD0	ok
+maid-m32-t4-a18	LwoN7TxswO	nVLoDcdYQD	ok
+maid-m32-t5-a18	O6CziMhynm	rgdPSCwxtc	ok
+maid-m32-t6-a18	s786Jndl8e	LwoN7HwswO	ok
+maid-m32-t7-a18	kspOlZt16B	1leyguor4r	ok
+maid-m32-t8-a18	rgdPSGhxtc	79aANLpJAL	ok
+maid-m32-tm0-a18	IfibCSntvE	0eSmdG2TfW	ok
+maid-m32-tm2-a18	Xm4Qhs6Bfo	P3uYR7D42C	ok
+maid-m32-tm3-a18	s786JVUl8e	dtPumpHXSL	ok
+maid-m32-tm4-a18	3z5MnCVREY	fHGxqatCDY	ok
+maid-m33-a18	jUB9wAELD0	LwoN7F2swO	ok
+maid-m33-cold-a18	JNfG6MxOq4	lJIiObugv9	ok
+maid-m33-kc-a18	LwoN7n5swO	UPhZ4rawny	ok
+maid-m33-ngheo-a18	3z5MnhWREY	LwoN7KyswO	ok
+maid-m33-t1-a18	iGbVzmi3uK	1leygqmr4r	ok
+maid-m33-t2-a18	UPhZ4pZwny	79aANSBJAL	ok
+maid-m33-t3-a18	iGbVzaZ3uK	lJIiOsOgv9	ok
+maid-m33-t4-a18	UPhZ4dAwny	s786Og9l8e	ok
+## 104 a18 done through maid-m33-t4-a18. NEXT = line 105 (maid-m33-t5-a18).
