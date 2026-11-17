@@ -790,4 +790,4 @@
 | REVIEW one-core-dup3-land delta (3213abc8 → 5507baafa; opus; brief briefs/review-one-core-dup3-land.md) | review/one-core-dup3-land-r1 | B | session_01N1tNP4w2TLPYNZz2SH8hxL | RUNNING | 17/11 14:28Z |
 | REVIEW ag-all r1 (opus BIG) of 8f7bdd329 | review/ag-all-r1 | C-AG | session_01UV1SzjBGppSaBv9NaJqrr3 | RUNNING | 17/11 14:27Z |
 | AG-ALL-2 remaining NPC acts (opus; brief briefs/ag-all-2.md) | review/ag-all-2 | C-AG | session_01UV1Szhs6A6KH6MfsDpei7t | RUNNING | 17/11 14:28Z |
-| staff-root fix #1 (returned maid cut by capTrim; opus; brief briefs/staff-root-fix-1.md) | review/staff-root-fix-1 | B | (opening) | RUNNING | 17/11 14:40Z |
+| staff-root fix #1 (returned maid cut by capTrim; opus; brief briefs/staff-root-fix-1.md) | review/staff-root-fix-1 | B | session_01N1tNP4tMiPQEh5DXeZP29x | RUNNING | 17/11 14:40Z |
