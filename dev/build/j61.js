@@ -238,7 +238,7 @@ function k61Table(){if(!S||!S.known)return null;const now=Date.now();const rn=(r
  for(const e of ents){const kn=k61Named(e);for(const v of k61Vars(e)){if(kn){prot.add(v);M[v]=null}else if(!(v in M))M[v]=kOf61(e)}}
  for(const v of prot)M[v]=null;const keys=Object.keys(M).filter(v=>M[v]||prot.has(v));if(!keys.some(v=>M[v])){K61RX=false;return false}
  keys.sort((a,b)=>b.length-a.length);K61MAP=M;const esc=s=>s.replace(/[.*+?^${}()|[\]\\]/g,"\\$&");
- K61RX=new RegExp(`(?<![\\p{L}\\p{M}])${K61T}(${keys.map(esc).join("|")})(?![\\p{L}\\p{M}])`,"gu");return K61RX}
+ K61RX=kRx(`(?<![\\p{L}\\p{M}])${K61T}(${keys.map(esc).join("|")})(?![\\p{L}\\p{M}])`,"gu");return K61RX}
 /* the mask for a name she does not know: "<title> ???" (title = what the dress shows), never a descriptor sentence */
 function k61MaskT(e){const k=k61Kind(e);if(k==="consort")return e.out?"Phế phi":e.queen?"Hoàng hậu":RANKS[cl(e.rank||0,0,7)].n;if(k==="emp")return"Hoàng thượng";if(k==="th")return"Thái hậu";
  if(k==="tq")return"Tổng quản thái giám";if(k==="eun")return"thái giám";if(k==="phys")return"thái y";if(k==="maid")return"cung nữ";if(k==="mama")return"ma ma";
@@ -264,7 +264,7 @@ function k61Scrub(s,lead,prev,ann,plain){const rx=k61Table();if(!rx||!s)return s
   const capit=/^(\s|<[^>]+>)*$/.test(str.slice(0,off))?lead:/[.!?:(“"]\s*$/.test(str.slice(0,off));return capit?k61Cap(d):d})}
 function k61PrevText(n){let x=n;for(let i=0;i<6&&x;i++){let p=x.previousSibling;while(p){const t=p.textContent;if(t&&t.trim())return t;p=p.previousSibling}x=x.parentNode;if(!x||/^(DIV|P|LI|BUTTON|H\d|FIGCAPTION|SECTION|TD)$/.test(x.nodeName))return""}return""}
 /* the title-screen pages (Chọn sổ, Sổ luân hồi, Thiết lập: .kpt-mount) and every .kslot card show OTHER lives (a saved sổ, a co-op room, the cloud copy): their names are real, never masked by the knowledge of the life now loaded (owner 17/11 "Kiếp Đáp ứng Hạ Thị vệ ???": a slot's own name matched a palace person the loaded life does not know yet) */
-const K61SKIP="[data-k61skip],.kpt-mount,.kslot";
+const K61SKIP="[data-k61skip],.kpt-mount,.kslot,.mspot .mlab,.mtile>b";/* Dư đồ place names (map spots + tiles): a place called like an unknown servant ("Vĩnh Thọ") must never read "Thái giám ???" (map-portrait-r2) */
 function k61Node(n){if(n.nodeType===3){const t=n.nodeValue;if(!t||t.length<4)return;const p=n.parentNode;if(!p||/^(SCRIPT|STYLE|TEXTAREA|INPUT)$/.test(p.nodeName))return;if(p.closest&&p.closest(K61SKIP))return;/* co-op chat Thư từ (KIT §76): real players' names are shown as they are */
   const pv=k61PrevText(n);const lead=!pv.trim()||/[.!?:]\s*$/.test(pv);const blk=p.closest&&p.closest(".kft,.kitem,.logs > div,p,li,.rt,.spkt,.krv,.tag,figcaption");
   const s=k61Scrub(t,lead,pv,blk?blk.textContent:t);if(s!==t)n.nodeValue=s;return}

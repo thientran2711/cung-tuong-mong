@@ -698,12 +698,12 @@ function kitRoulette(o){const done=()=>{try{o.done&&o.done()}catch(e){}};if(!o||
  go.addEventListener("click",e=>{e.stopPropagation();if(step===0)shuffle();else if(step===3)fly()});
  try{go.focus({preventScroll:true})}catch(e){}}
 /* owner 11/15 (review): the cards are never shown blank — the origin pictures (wide + fallback) and the card back are fetched first.
-   Cached pictures: no wait at all. Otherwise, after 150 ms, a kit wait on the roulette backdrop ("Đang bày các thân phận…"); at most 8 s. */
+   Cached pictures: no wait at all. Otherwise, after 150 ms, a kit wait on the roulette backdrop ("Tranh luân hồi đang trải các thân phận…"); at most 8 s. */
 (function(){const r0=kitRoulette;kitRoulette=function(o){if(!o||!o.items||!o.items.length)return r0.apply(this,arguments);const args=arguments,self=this;
  const urls=[...new Set(o.items.map(it=>it.wide||it.src).concat([KIT_CARDBACK]).filter(Boolean))];let fired=false,w=null;
  const go=()=>{if(fired)return;fired=true;clearTimeout(tw);clearTimeout(tm);if(w)w.remove();r0.apply(self,args)};
  const tw=setTimeout(()=>{if(fired)return;w=document.createElement("div");w.id="kroulw";w.className="kroul";try{kitBackdrop(w,"roulette")}catch(e){}
-  w.innerHTML=`<div class="krbox"><div class="krhead"><b>Luân hồi</b><small class="krsub">Đang bày các thân phận…</small></div></div>`;document.body.appendChild(w)},150);
+  w.innerHTML=`<div class="krbox"><div class="krhead"><b>Luân hồi</b><small class="krsub">${CTM_WAIT.rebirth}</small></div></div>`;document.body.appendChild(w)},150);
  const tm=setTimeout(go,8000);let n=0;
  urls.forEach(u=>{const im=new Image();im.decoding="async";const ok=()=>{n++;if(n>=urls.length)(im.decode?im.decode().catch(()=>{}):Promise.resolve()).then(go)};im.onload=ok;im.onerror=ok;im.src=u})}})();
 (function(){if(typeof nlCard!=="function")return;const c0=nlCard;nlCard=function(){const r=c0.apply(this,arguments);try{const o=S&&S.origin;if(!o)return r;const key=(S.name||"")+"|"+o.k+"|"+(typeof NLP!=="undefined"&&NLP?NLP.seed:"");
@@ -908,7 +908,7 @@ kitPcFix=function(pc){try{if(!pc||pc.dataset.k2==="1")return;const L=pc.querySel
   Rr.querySelectorAll(".pcb button.ka").forEach(b=>{if(b.querySelector(".kr-note"))return;const kb=b.querySelector(".kb");if(kb&&/sai|nhờ|gửi/i.test(b.textContent))kb.insertAdjacentHTML("beforeend",`<span class="kr kr-note"><span class="krl">Ghi chú</span><span class="krv"><span class="ef n">${tx}</span></span></span>`)});nt.remove()}}
  /* right: one opaque sticky block = (info) + note + act-group tabs */
  const stick=document.createElement("div");stick.className="kpstick";
- const note=Rr.querySelector(":scope > .pcn");if(note&&!note.classList.contains("kpres"))stick.appendChild(note);const tabs=Rr.querySelector(":scope > .pctabs");if(tabs)stick.appendChild(tabs);
+ const note=Rr.querySelector(":scope > .pcn");if(note&&!note.classList.contains("kpres"))stick.appendChild(note);const pcfx=Rr.querySelector(":scope > .pcf:not(.pcm2)");if(pcfx)stick.appendChild(pcfx);const tabs=Rr.querySelector(":scope > .pctabs");if(tabs)stick.appendChild(tabs);
  if(stick.children.length)Rr.prepend(stick);if(note&&note.classList.contains("kpres")){if(stick.parentNode)stick.after(note);else Rr.prepend(note)}
  /* wear slots (K1) under the portrait */
  try{const p=kitPersonByName(name);pc.querySelectorAll(".chip").forEach(c=>{if(/^(Trâm|Y phục):/.test(c.textContent.trim())||(p&&typeof wdSlots==="function"&&/^(Đúng phẩm|Vượt phẩm|Quá giản dị|Phạm tang)$/.test(c.textContent.trim())))c.remove()});
@@ -920,7 +920,7 @@ document.addEventListener("click",e=>{const pp=e.target.closest&&e.target.closes
  try{const pc=pp.closest(".pc");const nm=(pc.querySelector(".pcname")||{}).textContent||"";const parts=[...pc.querySelectorAll(":scope > .pcl > .kwear, :scope > .pcl > .kpfacts")].map(x=>x.outerHTML).join("");
   Q.unshift({t:nm,h:`<div class="kpsheetb">${parts}</div>`});showModal()}catch(x){console.error(x)}},true);
 function kitPcWide(pc){const c=(pc&&pc.closest&&pc.closest("#panel,#stage,#modal .dlg"))||document.getElementById("panel");/* tassel-fix: width without the scrollbar's share, so a card that grows tall enough to scroll keeps the same portrait size (no-shrink rule) */
- let w=c&&c.clientWidth;try{if(w){const cs=getComputedStyle(c);const sb=c.offsetWidth-c.clientWidth-(parseFloat(cs.borderLeftWidth)||0)-(parseFloat(cs.borderRightWidth)||0);if(sb>0)w+=sb}}catch(e){}if(pc&&w)pc.style.setProperty("--kpcw",Math.round(Math.max(150,Math.min(240,w*.36)))+"px");
+ let w=c&&c.clientWidth;try{if(w){const cs=getComputedStyle(c);const sb=c.offsetWidth-c.clientWidth-(parseFloat(cs.borderLeftWidth)||0)-(parseFloat(cs.borderRightWidth)||0);if(sb>0)w+=sb}}catch(e){}if(pc&&w){const kw=Math.round(Math.max(150,Math.min(240,w*.36)));pc.dataset.kpcw0=kw;pc.style.setProperty("--kpcw",kw+"px");pc.style.setProperty("--kpcl",Math.max(kw,172)+"px")}
  /* KIT §0: no short-landscape card any more — every screen shows the 1180x820 spread or the 590x820 page (design-scale p3) */
  return w?w>=440:true}/* owner 11/14: Fold uses EXACTLY the iPad card (one component) */
 addEventListener("resize",()=>{const w=kitPcWide();if(window.__kpcW!==undefined&&window.__kpcW!==w){try{render()}catch(e){}}window.__kpcW=w});window.__kpcW=kitPcWide();
@@ -944,7 +944,7 @@ function kitPcSize(){try{const P=$("panel");if(!P)return;const cs=getComputedSty
      the room from the strip's bottom to the panel's bottom */
   const strip=P.querySelector(".pstrip");const stripH=strip&&strip.offsetParent?strip.getBoundingClientRect().height+6:0;
   const h=narrow?full-stripH:(rest<Math.min(320,full)?full:rest);
-  pc.style.setProperty("--kpcmax",Math.max(200,Math.round(h))+"px");pc.classList.toggle("kpcfull",h===full);
+  pc.style.setProperty("--kpcmax",Math.max(200,Math.round(h))+"px");pc.classList.toggle("kpcfull",h===full);try{kitPcKeyFit(pc)}catch(e){}
   const nm=(pc.querySelector(".pcname")||{}).textContent||"";if(P.__kpcN!==nm||narrow||!P.__kpcUser){const fresh=P.__kpcN!==nm;P.__kpcN=nm;if(!fresh&&P.__kpcUser)return;const fit=()=>{try{const q=P.querySelector(".pc[data-k2]");if(!q)return;const a=P.getBoundingClientRect(),c=q.getBoundingClientRect();const sub2=P.querySelector(".ksub");
    const kb2=P.querySelector(":scope>.kpbar");const sb=kb2&&kb2.offsetParent?kb2.getBoundingClientRect().bottom+(parseFloat(getComputedStyle(kb2).marginBottom)||0):sub2&&sub2.offsetParent?sub2.getBoundingClientRect().bottom:a.top+pt;
    if(narrow){const st2=P.querySelector(".pstrip");const tgt=st2&&st2.offsetParent?st2.getBoundingClientRect().top:c.top;const d=tgt-sb;if(Math.abs(d)>1)P.scrollTop+=d}
@@ -1038,6 +1038,30 @@ html body #panel .ksub{top:0!important;z-index:7!important;box-shadow:0 -9px 0 0
    (kit `.kpgrid > .kpgr > .kpc`), next to the portrait on the Fold/phones and under it on iPad. Rows: relation (Thiện cảm N ▮ · Oán N ▮ ·
    Nàng với ngươi · Ghen) · stats (Sủng · Danh · Đức · Sắc · Tài · Tâm cơ) · small facts (Tuổi · Tính nết · Muốn hại ngươi · status chips).
    Unknown = "?" (dim); the long wording ("chưa rõ (xem sổ thị tẩm)", "Bình thường") lives in the chip's tooltip (tap = kpPop). ---------- */
+/* ---------- 20a. PERSON CARD KEY BLOCK (owner 17/11 ~04:26Z + ~04:40Z, option 1 compact; review/person-leftcol) ----------
+   The LEFT column keeps the live key info under the portrait, always in view while the acts scroll: the acquaintance chip (k61StChip,
+   moved here from the chips), the compact two-way relation block (jpcf pcfKey: kitRelTable compact) and the Thích / Ghét lines once
+   they are known (moved from the right info panel, unknown ones are dropped). No Tâm trạng chip (the mood is on the portrait frame).
+   kitPcKeyFit gives the portrait back as much height as the key block needs (the one place that sizes the figure: the portrait is shrunk
+   only when the card is too short for portrait + key block, never below 112 px wide). */
+function kitPcKey(pc){const L=pc&&pc.querySelector(":scope > .pcl"),key=L&&L.querySelector(":scope > .kpkey");if(!key||key.dataset.k==="1")return;key.dataset.k="1";
+ const T=e=>String(e||"").replace(/\s+/g," ").trim();
+ const W=typeof K61STW!=="undefined"?K61STW:["Người lạ","Mới thấy mặt","Biết tên","Đã quen"];
+ const ch=[...L.querySelectorAll(".chips .chip")].find(c=>W.some(w=>T(c.textContent).replace(/ⓘ/g,"").trim()===w));
+ if(ch){const w=document.createElement("div");w.className="kpk-st";w.appendChild(ch);key.prepend(w)}
+ const lines=[];pc.querySelectorAll(":scope > .pcr .pcf .kr").forEach(r=>{const l=T((r.querySelector(".krl")||{}).textContent);const m=/^(?:Nàng |Ngài |Hắn )?(thích|ghét)$/i.exec(l);if(!m)return;
+  const v=r.querySelector(".krv .ef"),kv=r.querySelector(".krv");if(v&&v.classList.contains("t"))lines.push([m[1][0].toUpperCase()+m[1].slice(1).toLowerCase(),kv.innerHTML]);/* pcard-facts: keep every fact + its tap (kitFactTap), not the first item's plain text */r.remove()});
+ /* an empty "Sở trọng" panel section loses its heading */
+ pc.querySelectorAll(":scope > .pcr .pcf .kpsec").forEach(sec=>{if(sec.querySelector(".kpst")&&!sec.querySelector(".kr,.kpnote,.kchips,button"))sec.remove()});
+ if(lines.length){const d=document.createElement("div");d.className="kpkl";d.innerHTML=lines.map(([a,b])=>`<div><span class="kpkl-l">${a}</span> ${b}</div>`).join("");key.appendChild(d)}}
+function kitPcKeyFit(pc){try{const L=pc.querySelector(":scope > .pcl"),key=L&&L.querySelector(":scope > .kpkey"),pcp=L&&L.querySelector(":scope > .pcp");if(!key||!pcp||!pc.classList.contains("kpwide"))return;
+ const max=parseFloat(pc.style.getPropertyValue("--kpcmax"))||0,nat=+pc.dataset.kpcw0||0;if(!max||!nat)return;
+ for(let i=0;i<4;i++){const cw=parseFloat(pc.style.getPropertyValue("--kpcw"))||nat;const gap=6;
+  const wear=L.querySelector(":scope > .kwear"),wh=wear&&wear.offsetHeight?wear.offsetHeight+gap:0; /* r1: the outfit thumbnail row sits under the key block, it must not be pushed out of view either (Fold) — counted only while the figure stays >= 160 px wide */
+  const mk=x=>{const need=pcp.offsetTop+pcp.offsetHeight+gap+key.offsetHeight+8+x,over=need-max;return{over,w:Math.max(112,Math.min(nat,Math.floor((pcp.offsetHeight-over)*550/1037)))}};
+  let r=mk(wh);if(wh&&r.w<160)r=mk(0);const over=r.over,w=r.w;
+  if(Math.abs(over)<2||(over<0&&cw>=nat))break;
+  if(Math.abs(w-cw)<1)break;pc.style.setProperty("--kpcw",w+"px")}}catch(e){}}
 function kitPcGrid(pc){try{if(!pc||pc.querySelector(".kpgrid"))return;const L=pc.querySelector(":scope > .pcl");if(!L)return;
  const T=e=>String(e||"").replace(/\s+/g," ").trim();const unk=v=>/^(chưa rõ|\?|không rõ)/i.test(v);
  const chip=(lab,val,full,extra)=>{lab=String(lab||"");lab=lab.charAt(0).toUpperCase()+lab.slice(1);const u=unk(val);const w=document.createElement("span");
@@ -1070,7 +1094,7 @@ function kitPcGrid(pc){try{if(!pc||pc.querySelector(".kpgrid"))return;const L=pc
    [[SJ+" quý ngươi","Quý"],[SJ+" oán ngươi","Oán"],["Ngươi quý "+OB,"Quý"],["Ngươi oán "+OB,"Oán"],["Ghen","Ghen"]].forEach(([l,g])=>{if(!have(l))rowA.push(chip(RG(g,l),"?",l+": chưa rõ"))})}}catch(e){}
  const ORD=[SJ+" quý ngươi",SJ+" oán ngươi","Ngươi quý "+OB,"Ngươi oán "+OB,"Ghen"],oi=c=>{const l=(c.querySelector("small")||{}).textContent||"";const i=ORD.indexOf(l.trim());return i<0?99:i};rowA.sort((x,y)=>oi(x)-oi(y));
  const SORD=["Sủng","Đức","Danh","Sắc","Tài","Tâm cơ"],si=c=>{const l=((c.querySelector("small")||{}).textContent||"").trim().toLowerCase();const i=SORD.findIndex(x=>x.toLowerCase()===l);return i<0?99:i};rowB.sort((x,y)=>si(x)-si(y));
- const g=document.createElement("div");g.className="kpgrid";[rowA,rowB,rowC].forEach((R,i)=>{if(!R.length)return;const d=document.createElement("div");d.className="kpgr kpgr"+i;R.forEach(c=>d.appendChild(c));g.appendChild(d)});
+ const g=document.createElement("div");g.className="kpgrid";[pc.querySelector(":scope > .pcl > .kpkey")?[]:rowA,rowB,rowC].forEach((R,i)=>{if(!R.length)return;const d=document.createElement("div");d.className="kpgr kpgr"+i;R.forEach(c=>d.appendChild(c));g.appendChild(d)});
  if(!g.children.length)return;
  if(bars){bars.replaceWith(g)}else{const pp=L.querySelector(":scope > .kwear")||L.querySelector(":scope > .pcp");if(pp)pp.after(g);else L.appendChild(g)}
  if(tiles)tiles.remove();pc.querySelectorAll(".kpfacts").forEach(f=>{if(info&&!info.children.length)info.remove();if(!T(f.textContent)&&!f.querySelector("button,img"))f.remove()});
@@ -1079,9 +1103,25 @@ function kitPcGrid(pc){try{if(!pc||pc.querySelector(".kpgrid"))return;const L=pc
  }catch(e){console.error("kitPcGrid",e)}}
 /* the ONE person-info component: every person card / sheet on every device goes through kitPcFix → kitPersonChips */
 window.kitPersonChips=kitPcGrid;
-(function(){const f0=kitPcFix;kitPcFix=function(pc){const r=f0.apply(this,arguments);try{kitPcGrid(pc)}catch(e){}try{kitPcSize()}catch(e){}return r}})();
+(function(){const f0=kitPcFix;kitPcFix=function(pc){const r=f0.apply(this,arguments);try{kitPcKey(pc)}catch(e){console.error("kitPcKey",e)}try{kitPcGrid(pc)}catch(e){}try{kitPcSize()}catch(e){}return r}})();
 document.addEventListener("click",e=>{const c=e.target.closest&&e.target.closest(".kpgrid .kst-chip");if(!c||e.target.closest("button"))return;try{if(typeof kpPop==="function"){kpPop(c,`<div class="kpopt">${c.title}</div>`);e.stopPropagation()}}catch(x){}},true);
 (function(){const st=document.createElement("style");st.id="k2b-pcgrid";st.textContent=`
+/* KIT 20a person card key block (left column): sits right under the portrait, before the wear slots and stat chips */
+.pc .kpkey{display:flex;flex-direction:column;gap:4px;margin:0 0 6px;font-size:.78rem;min-width:0}
+.pc .kpkey .kpk-st{display:flex;flex-wrap:wrap;gap:4px}
+.pc .kpkl{display:flex;flex-direction:column;gap:1px;line-height:1.3;color:var(--ink)}.pc .kpkl-l{font-weight:700;color:var(--k-lab,#8a7350)}
+.pc.kpwide[data-k2]{grid-template-columns:var(--kpcl,var(--kpcw)) minmax(0,1fr)!important}
+html body .pc.kpwide[data-k2]>.pcl>.pcp.kit.kit{width:var(--kpcw)!important;margin-left:auto!important;margin-right:auto!important}/* beats jk3 (width 100%): the figure is --kpcw wide, kitPcKeyFit may shrink it so the key block fits */
+.pc.kpwide[data-k2]>.pcl>.kpkey{order:1!important}
+.pc.kpwide[data-k2]>.pcl>.kwear,.pc.kpwide[data-k2]>.pcl>.kpgrid,.pc.kpwide[data-k2]>.pcl>.kpfacts{order:2!important}
+.pc.kpwide[data-k2]>.pcl>.kwear{width:auto}
+.pc.kpnar[data-k2]>.pcl>.kpkey{grid-area:key;margin:6px 0 0;flex-direction:row;flex-wrap:wrap;align-items:center;gap:4px 12px}
+.pc.kpnar[data-k2]>.pcl>.kpkey .kr2-cp{flex:1 1 220px}
+.pc[data-k2] .kpstick .pcf{margin:0 0 5px;max-height:calc(34*var(--kvh));overflow-y:auto;overscroll-behavior:contain}
+.pc[data-k2] .kpstick .pcf .kpsec{margin:0 0 2px;display:grid;grid-template-columns:4.4rem minmax(0,1fr);column-gap:6px;align-items:start}
+.pc[data-k2] .kpstick .pcf .kpst{margin:2px 0 0;font-size:.66rem;line-height:1.2;border:0;padding:0}
+.pc[data-k2] .kpstick .pcf .kpsec>:not(.kpst){grid-column:2;min-width:0}
+.pc[data-k2] .kpstick .pcf .krv{overflow-wrap:anywhere}/* pcard-facts: the fact is shown whole, never cut with "…" (details sit behind the tap) */
 .kpgrid{display:flex;flex-direction:column;gap:4px;margin:4px 0 6px}
 .kpgr{display:flex;flex-wrap:wrap;gap:4px}
 .kst-chip{display:inline-flex;align-items:center;gap:4px;padding:2px 7px;border:1px solid var(--k-hair,#e6d3ac);border-radius:7px;background:var(--k-card,#fffaf0);font-size:.76rem;line-height:1.25;white-space:nowrap;cursor:help}
