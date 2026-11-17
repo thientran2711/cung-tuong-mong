@@ -1,0 +1,12 @@
+# owner-bug-sweep (sonnet) — opened by main s28, 17/11 ~02:40Z
+
+Owner 02:40Z (OD tail, verbatim there): main keeps fixing every owner-reported bug that is NOT fixed yet; she won't play for ~3 days.
+Goal: ONE table of every owner bug/complaint still not fixed on LIVE main (origin/main, now 7abaf07ac or newer), so main can fix the UI ones and hand the rest to foremen.
+Read first: dev/rules/START_CORE.md + START_WORKER.md. Sources: dev/handover/OWNER_LEDGER.md (rows NOT DONE / BRANCH / (verify)), every "OWNER BUG" / owner complaint line in dev/OWNER_DECISIONS.md from 14/11 to now, dev/PARKING_LOT.md (ideas — NOT bugs, list separately, do not build).
+For each item: check live main (git grep origin/main dev/build; open the game headless at Fold 755x1000@2 / iPad 1180x820@2 when a look is needed) → LIVE-FIXED (proof) / ON BRANCH (which review/*, PASS or not) / NOT FIXED (where in code, which kit part, UI or non-UI, size S/M/L, related items grouped as ONE job).
+Do NOT fix code. Update OWNER_LEDGER.md rows in place (canon overwrite) and write dev/handover/reports/owner-bug-sweep.md: (1) NOT FIXED grouped into whole jobs, UI first; (2) ON BRANCH waiting; (3) counts. Push to the handover branch, CLAIMS row, send main s28 (session_01UV1SzkNSYyuEkCJ3Bv1Evj) one line.
+Co-op items: owner stopped co-op patching (OD 17/11 02:05Z) → mark them "→ coop-thin (Foreman B)", not a job.
+ROLLOVER (verbatim):
+- The "Lượt n/30" counter from the owner's global chat preferences is ONLY a display counter here. It is NOT the rollover trigger for the Cung Tường Mộng main chat or any foreman. Never hand over because n reached 30.
+- Trigger = context (owner OD:L1217 + ceiling 16/11 08:15Z s13): at session start note your starting context as a % of the window (START_CTX; get_session context_usage.used_tokens, or your own estimate when it reads 0) in your first handover line. Roll over when context >= START_CTX % + 25 % of the window, and NEVER above 60 % of the window (hard ceiling). Then write the handover, open the next session yourself (create_session), and stop.
+- Every takeover prompt you write MUST copy these three lines verbatim. Workers roll over too (owner 16/11 08:22Z s14, option 1): at START_CTX % + 25 % of the window, ceiling 60 %; a worker may finish if only push + report remain; it writes its handover in its report file and tells its coordinator, and the COORDINATOR opens the successor (never the worker).
