@@ -29,7 +29,7 @@ const CNT4W=()=>["win","r97"].includes(CNT4()),CNT4F=()=>["mid","r97"].includes(
    person; if she is gone the role is not handed to a random consort (rdCast recasts only through this filter, which allows nobody) */
 const CN_NORECAST={keep:["v"]};
 /* cn_ban .8: a jewellery item she owns and is not wearing in the hair slot (index in S.inv, −1 = none); selling it removes it */
-const CN_JEWEL=()=>{try{const w=typeof wdOf==="function"?wdOf(S):null;const wk=w&&w.tram?w.tram.k:null;return (S.inv||[]).findIndex(e=>e&&!e.h&&IT[e.k]&&IT[e.k].kd==="Trang sức"&&e.k!==wk)}catch(e){return -1}};
+const CN_JEWEL=()=>{try{const w=typeof wdOf==="function"?wdOf(S):null;const wk=w&&w.tram?w.tram.k:null;return (S.inv||[]).findIndex(e=>e&&!e.h&&itm(e.k).kd==="Trang sức"&&e.k!==wk)}catch(e){return -1}};
 const CN_QI=c=>{const w=({hh:"bản cung",th:"ai gia",emp:"trẫm"})[CN_QK()];return c?w[0].toUpperCase()+w.slice(1):w},CN_QY=c=>{const w=({hh:"muội",th:"con",emp:"ái phi"})[CN_QK()];return c?w[0].toUpperCase()+w.slice(1):w};
 /* ---------- cn_chu · Chủ cũ ---------- */
 /* The rival {v} is her old mistress (cast in .4, marked v.oldmis). Rank comparisons read S.rank and the rival's own rank field, never a typed name. */
@@ -612,7 +612,7 @@ rdDef("cn_ban",8,{t:"Tố Nga lâm bệnh",w:"doc",sj:"cơn bệnh của Tố Ng
   {n:"Tự bốc thuốc theo sách",sc:1,wx:"đỡ được cơn ho",lx:"sai một vị, nàng nặng thêm",rt:"Thuốc của ngươi làm Tố Nga thở được.",rf:"Tố Nga nôn hết thuốc."}]},
  c1:{h:"Sâm trăm năm",w:"doc",t:()=>`Thái y nói: phải có sâm trăm năm, uống đủ ${CNB_ILL()} tháng. Kho Nội vụ phủ có, mà giá cao.`,o:[
   {n:"Bỏ bạc mua sâm",sc:1,f:"ginseng",wx:"Tố Nga có thuốc tốt",lx:"bạc cạn, tháng sau khó xoay",rt:"Củ sâm được gói trong lụa đỏ, mang đến lúc nửa đêm."},
-  {n:"Bán trang sức đổi sâm",if:()=>CN_JEWEL()>=0,sc:1,f:"ginseng",wx:"có sâm mà không động bạc, mất một món trang sức",lx:"bị thấy cầm đồ, mất mặt",go:(A,ok)=>{if(ok){const i=CN_JEWEL();if(i>=0){const e=S.inv.splice(i,1)[0];return `Ngươi mất ${IT[e.k].n}.`}}},rt:"Một món trang sức của ngươi đổi được nửa củ sâm.",rf:"Đồ cầm bị nhận ra, sâm vẫn chưa có."},
+  {n:"Bán trang sức đổi sâm",if:()=>CN_JEWEL()>=0,sc:1,f:"ginseng",wx:"có sâm mà không động bạc, mất một món trang sức",lx:"bị thấy cầm đồ, mất mặt",go:(A,ok)=>{if(ok){const i=CN_JEWEL();if(i>=0){const e=S.inv.splice(i,1)[0];return `Ngươi mất ${itm(e.k).n}.`}}},rt:"Một món trang sức của ngươi đổi được nửa củ sâm.",rf:"Đồ cầm bị nhận ra, sâm vẫn chưa có."},
   {n:"Xin Hoàng thượng ban sâm",need:["nsrv"],sc:1,f:"ginseng",wx:"sâm ngự ban",lx:"Hoàng thượng thấy ngươi xin cho tội nô",rt:"Hoàng thượng phẩy tay: “Cho nàng một củ.”",rf:"Hoàng thượng hỏi: “Tội nô ấy là gì của nàng?”"}]},
  c2:{h:"Thuốc bị tráo",w:"maid",need:["v"],t:"Thang thuốc thứ ba của Tố Nga có vị lạ. Người sắc thuốc khai được một cung nữ cung {v} cho bạc.",o:[
   {n:"Bắt người sắc thuốc khai trước Tổng quản",sc:1,f:"swap",wx:"thêm một tội cho {v}",lx:"người ấy chối, ngươi bị chê làm lớn",go:(A,ok)=>{if(ok)rdOan(A,"v",8)},rt:"Lời khai được ghi, có điểm chỉ.",rf:"Người ấy nói nhầm thuốc, không ai cho bạc."},

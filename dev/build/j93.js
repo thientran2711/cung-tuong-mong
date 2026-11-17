@@ -250,13 +250,13 @@ function kmDiff(){if(!kmOn()){return}if(KMS!==S||!KMSNAP){KMS=S;KMSNAP=kmSnap();
  if(b.kids>a.kids){const k=S.kids[S.kids.length-1];kitBloom({title:k&&k.sex==="m"?"Hạ sinh hoàng tử":"Hạ sinh công chúa",sub:k&&k.name?`${k.name} chào đời, mẹ tròn con vuông.`:"Mẹ tròn con vuông."})}
  const added=b.inv.filter(x=>!a.inv.includes(x));if(added.length&&added.length<=4){const gifts=added.filter(x=>x.from&&x.from!=="emp"&&x.from!=="me");const bought=added.filter(x=>!x.from);
   if(gifts.length){const g=gifts[0];const who=g.from==="th"?"Thái hậu ban":g.from==="hh"?"Hoàng hậu ban":(()=>{const v=typeof byKey==="function"?byKey(g.from):null;const r=v||(typeof rivals!=="undefined"?rivals.find(x=>x.id===g.from):null);return r&&r.name?`${r.name} tặng`:"Có người tặng"})();
-   kitReward({kind:g.from==="th"||g.from==="hh"?"tray":"gift",title:g.from==="th"||g.from==="hh"?"Mâm thưởng":"Hộp gấm",from:who,items:gifts.map(x=>({n:IT[x.k]?IT[x.k].n:x.k,d:IT[x.k]?IT[x.k].d:"",img:kmItemImg(x.k),tier:kmTierOf(x.k)}))})}
+   kitReward({kind:g.from==="th"||g.from==="hh"?"tray":"gift",title:g.from==="th"||g.from==="hh"?"Mâm thưởng":"Hộp gấm",from:who,items:gifts.map(x=>({n:itm(x.k).n,d:IT[x.k]?itm(x.k).d:"",img:kmItemImg(x.k),tier:kmTierOf(x.k)}))})}
   bought.forEach(x=>kitFlyItem(x.k))}}
 (function(){const W=(n,f)=>{const o=window[n];if(typeof o!=="function")return;window[n]=f(o)};
  /* ban thưởng (all of j20 bestow: night, contest, births, promotion, story, accuse, birthday, nursing) */
  W("bestow",o=>function(p,why){const n0=p&&p.inv?p.inv.length:0,b0=p&&p.bac;const r=o.apply(this,arguments);try{if(p===S&&kmOn()&&S.inv.length>n0){const x=S.inv[S.inv.length-1];
    const royal=why==="son"||why==="sinhthan";const kind=royal?"royal":why==="night"?"tray":"chest";KMSNAP&&KMSNAP.inv.push(x);
-   kitReward({kind,title:royal?"Ngự tứ":why==="night"?"Mâm thưởng":"Rương bảo vật",from:`Hoàng thượng ban · ${(typeof BWHY==="object"&&BWHY[why])||""}`.replace(/ · $/,""),items:[{n:IT[x.k].n,d:IT[x.k].d,img:kmItemImg(x.k),tier:kmTierOf(x.k,royal)}],bac:Math.max(0,(S.bac||0)-(b0||0))})}}catch(e){console.error(e)}return r});
+   kitReward({kind,title:royal?"Ngự tứ":why==="night"?"Mâm thưởng":"Rương bảo vật",from:`Hoàng thượng ban · ${(typeof BWHY==="object"&&BWHY[why])||""}`.replace(/ · $/,""),items:[{n:itm(x.k).n,d:itm(x.k).d,img:kmItemImg(x.k),tier:kmTierOf(x.k,royal)}],bac:Math.max(0,(S.bac||0)-(b0||0))})}}catch(e){console.error(e)}return r});
  /* thị tẩm: the week's tablet (after the week panel closes) */
  W("flip",o=>function(){const r=o.apply(this,arguments);try{if(kmOn()&&!S.dead&&S.tonight){const t=S.tonight==="me"?S:S.tonight;if(t===S)kitFlipTablet(t,{me:true});else kitFlipNote(t)}}catch(e){console.error(e)}return r});
  /* result card */

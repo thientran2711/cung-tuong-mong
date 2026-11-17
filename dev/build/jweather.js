@@ -27,14 +27,14 @@ function wxSev(){if(!S||!S.wx)return 0;const f=S.wx.f,n=S.wx.n;if(f===3)return 3
 function wxKind(){const n=(S&&S.wx&&S.wx.n)||"";return /tuyết|sương giá/.test(n)?"băng tuyết":/giông/.test(n)?"giông tố":"mưa"}
 function wxPal(p,k){if(!k)return"";if(k==="home")return palaceOf(p);if(k[0]==="r"){const v=rivals.find(x=>"r"+x.id===k);return v?palaceOf(v):k}return k}
 function wxOutdoor(p,a,b){if(!a||!b||a===b)return false;return wxPal(p,a)!==wxPal(p,b)}
-function wxHasGear(p,g){return (p.inv||[]).some(e=>e&&!e.h&&IT[e.k]&&IT[e.k].wxg===g&&wxGearLeft(e)>0)}
+function wxHasGear(p,g){return (p.inv||[]).some(e=>e&&!e.h&&itm(e.k).wxg===g&&wxGearLeft(e)>0)}
 /* Q14 (owner via main s16 12:55Z): rain gear wears out — one season (BAL.wx.gearMo months), then she (or an NPC) must buy again; the kiệu
    stays per trip. Clock = S.turn (months). Each gear entry carries e.wxe = the S.turn it wears out at, stamped when it is first seen
    (bought, given, or an old save: a fresh season). Worn-out gear leaves the chest at the next week end; the item card shows "còn N tháng". */
-function wxGearLeft(e){if(!e||!IT[e.k]||!IT[e.k].wxg)return 0;const t=(S&&S.turn)|0;return e.wxe==null?BAL.wx.gearMo:Math.max(0,e.wxe-t)}
-function wxGearStamp(p){const t=(S&&S.turn)|0;for(const e of (p&&p.inv)||[])if(e&&IT[e.k]&&IT[e.k].wxg&&e.wxe==null)e.wxe=t+BAL.wx.gearMo}
+function wxGearLeft(e){if(!e||!itm(e.k).wxg)return 0;const t=(S&&S.turn)|0;return e.wxe==null?BAL.wx.gearMo:Math.max(0,e.wxe-t)}
+function wxGearStamp(p){const t=(S&&S.turn)|0;for(const e of (p&&p.inv)||[])if(e&&itm(e.k).wxg&&e.wxe==null)e.wxe=t+BAL.wx.gearMo}
 function wxGearSweep(p){if(!p||!p.inv)return;wxGearStamp(p);const t=(S&&S.turn)|0,gone=[];
- p.inv=p.inv.filter(e=>{if(e&&IT[e.k]&&IT[e.k].wxg&&e.wxe!=null&&e.wxe<=t){gone.push(IT[e.k].n);return false}return true});
+ p.inv=p.inv.filter(e=>{if(e&&itm(e.k).wxg&&e.wxe!=null&&e.wxe<=t){gone.push(itm(e.k).n);return false}return true});
  if(gone.length&&p===S)log(`<span class="r">${gone.join(", ")} dùng đã hết mùa, sờn rách nên bỏ đi.</span> Gặp mưa tuyết muốn che chắn thì phải mua cái mới.`)}
 function wxGearAll(){try{if(!S)return;wxGearSweep(S);const CW=window.COOPW;if(CW&&CW.on&&CW.seat!=="a")return;/* co-op: NPC world rolls stay on the host */
  for(const v of (typeof rivals!=="undefined"&&rivals)||[])if(v&&v.inv)wxGearSweep(v)}catch(e){console.error("wx gear",e)}}
