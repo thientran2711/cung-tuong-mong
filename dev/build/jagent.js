@@ -257,8 +257,13 @@ function agSeeHer(k,t,joined){if(!agOn())return;const H=agHereKh();if(!H)return;
   const c=mindPick([["ignore",B.w.ignore],["hear",hu],["join",ju*B.w.join]],v);AG.stat.witNpc++;
   const why=c==="join"?"thấy ngươi làm nên cũng làm theo":c==="hear"?`để ý ngươi (thù ghét ${Math.round(ho)})`:"";
   if(c!=="ignore")agUse(v);/* the reaction IS her deed of this buổi (same rule as the player's khắc) */
-  if(c==="hear"){const o=odA(v,B.hear);const zz=j95z();if(agTry(o)){zz.meK[v.id]={k:H.k,c:j95c(),w:wk()};noteAdd(v.id,"nàng để ý chỗ ngươi hay lui tới")}else if(!agSoft(o)){affAdd(S,v,-B.caught);log(`Ngươi bắt gặp ${v.name} đứng nghe ngóng.`)}}
-  else if(c==="join"){AG.inTick++;let r="";try{r=twDo(v,k==="thHH"?queenP():t,k)||""}finally{AG.inTick--}if(r)log(`${r}.`)}
+  /* review ag-all-2 r2 B2 (owner ~15:45Z "people present see her at once (react next khắc)"): she chooses now; the reaction is her deed of the
+     NEXT khắc at this place (agSeePlan, the one day gate), landing through the ledger like any deed (AGRUN "see:hearMe" / "see:joinMe") */
+  if(!(typeof agKhOn==="function"&&agKhOn())){/* the one-deed-per-buổi world (BAL.ag.kh2.on 0): the old inline reaction */
+   if(c==="hear"){const o=odA(v,B.hear);const zz=j95z();if(agTry(o)){zz.meK[v.id]={k:H.k,c:j95c(),w:wk()};noteAdd(v.id,"nàng để ý chỗ ngươi hay lui tới")}else if(!agSoft(o)){affAdd(S,v,-B.caught);log(`Ngươi bắt gặp ${v.name} đứng nghe ngóng.`)}}
+   else if(c==="join"){AG.inTick++;let r="";try{r=twDo(v,k==="thHH"?queenP():t,k)||""}finally{AG.inTick--}if(r)log(`${r}.`)}}
+  else if(c==="hear"&&typeof agSeePlan==="function")agSeePlan(v,H.R,H.kh+1,H.k,"see:hearMe","",null,"để ý ngươi",why);
+  else if(c==="join"&&typeof agSeePlan==="function")agSeePlan(v,H.R,H.kh+1,H.k,"see:joinMe",k,k==="thHH"?null:(t&&t!==S?ledgerId(t):null),"cũng làm theo",why);
   if(c!=="ignore"){const L={w:wk(),b:S.buoi||0,kh:H.kh,id:"v"+v.id,k:"see:"+c,t:"me",pl:H.k,why};z.log.push(L);if(z.log.length>60)z.log.shift();
    try{const A=H.R.acts=H.R.acts||[];A.push({id:"v"+v.id,kh:H.kh,k:"ag:see:"+c,t:"me",why,ok:1,ag:1});if(A.length>60)A.shift()}catch(x){}}}}
 

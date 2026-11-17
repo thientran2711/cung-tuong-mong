@@ -46,5 +46,18 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
  ok(r.cost.talkSrc&&r.cost.harmSrc,'player talk / harm khắc read BAL.time.cost (one source with the NPC side)',r.cost);
  ok(r.g12&&r.g12.npc&&r.g12.me&&r.g12.npc.hh===r.g12.me.hh&&r.g12.npc.hh===r.g12.exp,'G12 Empress reward: the target regard for the Empress moves by the same BAL number, NPC or player Empress (liking: the same relAdd; the player-only mood bar may add to liking of her)',r.g12);
  ok(r.offMulti===0,'off switch BAL.ag.kh2.on=0 → one deed per buổi',r.offMulti);
+ /* review ag-all-2 r2 B2: a present NPC sees in khắc k and reacts in k+1 (a deed through the ledger), never in the same khắc; same for her */
+ const rb2=await p.evaluate(()=>{const o={};placeWhere();agFlush();const R=agRec();const kh=0;const L=liveRivals(true).filter(v=>v.alive&&!v.out&&!v.confined&&R.P["v"+v.id]&&!agBound("v"+v.id,0,R.key)&&!agBound("v"+v.id,1,R.key));const d=L[0],w=L[1],w2=L[2];if(!w2)return{skip:1};
+  const z=agZ();const clr=v=>{z.pend=z.pend.filter(x=>x.vid!==v.id);if(z.did)delete z.did[v.id]};[d,w,w2].forEach(clr);const pl="vuon";
+  for(const v of [d,w,w2]){const row=R.P["v"+v.id];row[kh]=[pl,"go",null,""];row[kh+1]=[pl,"go",null,""]}
+  const mp=window.mindPick;window.mindPick=()=>"hear";try{
+   const pd={key:R.key,id:"v"+d.id,vid:d.id,k:"chat",kd:"",t:null,kh,pl,act:"trò chuyện",why:"thử"};const ev0=JSON.stringify(w.evm||{});agSeeNpc(pd,d);
+   const q=z.pend.find(x=>x.vid===w.id&&x.k==="see:hear");o.npc={pend:!!q,kh:q&&q.kh,rowK:R.P["v"+w.id][kh][1],rowK1:R.P["v"+w.id][kh+1][1],noNow:JSON.stringify(w.evm||{})===ev0};
+   /* her: she stands there in khắc kh */const me0=R.P.me[kh];R.P.me[kh]=[pl,"go",null,""];const k0=agKh;agKh=()=>kh;clr(w2);R.P["v"+w2.id][kh+1]=[pl,"go",null,""];try{agSeeHer("chat",null,false)}finally{agKh=k0;R.P.me[kh]=me0}
+   const q2=z.pend.find(x=>x.vid===w2.id&&x.k==="see:hearMe");o.her={pend:!!q2,kh:q2&&q2.kh,rowK1:R.P["v"+w2.id][kh+1][1]};
+   /* the last khắc of the day cannot hold a next-khắc reaction: no deed (agFitDay) */
+  }finally{window.mindPick=mp}return o});
+ ok(rb2.skip||(rb2.npc.pend&&rb2.npc.kh===1&&rb2.npc.rowK==="go"&&rb2.npc.rowK1==="ag_see:hear"&&rb2.npc.noNow),'B2 a present NPC sees at khắc k and reacts at k+1 (deed in the ledger, nothing applied in k)',rb2.npc);
+ ok(rb2.skip||(rb2.her.pend&&rb2.her.kh===1&&rb2.her.rowK1==="ag_see:hearMe"),'B2 seeing HER: the reaction is a deed of the next khắc too',rb2.her);
  ok(!errs.length&&!r.errs.length,'no page / agent errors',errs.concat(r.errs).slice(0,6));
  await b.close();process.exit(res.every(x=>x)?0:1)})().catch(e=>{console.error(e);process.exit(1)});

@@ -38,13 +38,18 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
    agRdTick=rt0;Object.assign(BAL.ag.kh2.rd,{keep:sv.keep,quiet:sv.quiet,on:sv.on});BAL.mind.slip=sv.slip;
    const deed=agZ().pend.find(x=>x.id===aid)||null;return{mode,DIST,T,got,deed:deed?{k:deed.k,kh:deed.kh,pl:deed.pl,t:deed.t}:null,near}};
   for(let i=0;i<RUNS;i++)out.runs.push(one("go"));out.far=[];for(let i=0;i<2;i++)out.far.push(one("go",2));out.quiet=one("quiet");out.off=one("off");
+  /* B3 (review ag-all-2 r2): far news heard at the LAST khắc of an early buổi (her walk ends past the record) is kept: she re-plans next buổi (agTouch) */
+  out.late=(()=>{fresh();placeWhere();agFlush();const z=agZ();const bo=S.buoi;const L=liveRivals(true).filter(v=>v.alive&&!v.out&&!v.confined&&agRec().P["v"+v.id]);const mp=window.mindPick;
+   for(const v of L){z.rp={};let pick=null;window.mindPick=(W)=>{const x=W.find(e=>typeof e[0]==="object"&&e[0].at);if(x){pick=x[0];x[0].at=()=>"vuon";return x[0]}return "keep"};
+    let r;try{r=agHeard(v,{pl:"vuon",kh:J95.KH-1,why:"thử"})}finally{window.mindPick=mp}if(!pick)continue;return{r,touched:!!(z.rp||{})["v"+v.id],buoi:bo}}
+   return{err:"no option"}})();
   /* 2 shared act with her */
   const sh=(ans)=>{fresh();placeWhere();agFlush();const R=agRec();const kh=agKh(),me=R.P.me[kh][0];
    for(const v of liveRivals(true).filter(v=>v.alive&&!v.out&&!v.confined&&!sameHouse(S,v)&&R.P["v"+v.id])){let N;try{N=agNeedsC(v)}catch(e){continue}const O=agOptsG(v,N,null).filter(o=>o.t===S&&!/^harm:/.test(o.k));/* a harm deed is covert (jagharm: no "comes to her" popup) */if(!O.length)continue;
     const o=O.slice().sort((a,b)=>agKhC(b,v)-agKhC(a,v))[0];/* prefer a deed of several khắc: still one khắc for the talk */const id="v"+v.id;const z=agZ();z.pend=z.pend.filter(x=>x.id!==id);agPlan(v,o,N,kh,me);const pd=z.pend[z.pend.length-1];agSpan(pd,o,v);
     Q.length=0;const k0=agKh();agWatch();const card=Q.find(x=>x.t==="Có người tìm đến");if(!card)return{err:"no popup",k:o.k,me};
     const names=(card.opts||[]).map(x=>x.n);const c=card.opts.find(x=>x.n===ans);c.go();Q.length=0;
-    return{k:o.k,k0,k1:agK1(pd),after:agKh(),names,inPend:agZ().pend.includes(pd),drop:!!pd.drop,row:agRec().P[id][pd.kh][1]}}
+    return{k:o.k,k0,k1:agK1(pd),after:agKh(),names,inPend:agZ().pend.includes(pd),drop:!!pd.drop,row:agRec().P[id][pd.kh][1],later:agRec().P[id].slice(agK1(pd)+1).filter(e=>e&&e[1]==="ag_"+o.k).length,lateD:agRec().P[id].slice(pd.kh+1).filter(e=>e&&e[1]==="ag_"+o.k).length}}
    return{err:"no NPC deed aimed at her"}};
   out.shRec=sh("Tiếp chuyện");out.shDec=sh("Không tiếp");
   /* 3 NPC ↔ NPC */
@@ -65,13 +70,15 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
  const at=(x,k)=>x.T.find(t=>t.k===k&&t.lab!=="start");
  /* A re-decides when she has a deed aimed at her she can pay for (else she keeps her plan, as the player would) */const W=G.filter(x=>x.T.some(t=>t.rd>0));
  ok(W.length>=1&&W.every(x=>{const a1=at(x,1),t=at(x,2);return a1&&a1.me==="vuon"&&a1.rd===0&&t&&t.told>=1&&t.rd>=1&&/\/go$/.test(t.A)}),/* rd ≥ 1: two of her people may tell A in the same khắc */'NEAR k2: she is in the garden, the maid sees her and walks to A (A not yet); k3: A hears at the start of k3, decides and walks (row "go")',G.map(x=>[at(x,1),at(x,2)]));
- ok(W.every(x=>{const t=at(x,3);return t&&t.A.split("/")[0]==="vuon"&&t.Awhere==="vuon"&&t.cnt>=1&&/^vuon\/ag_/.test(t.A)&&(!x.deed||x.deed.kh===3&&x.deed.t==="me")}),'NEAR k4: A is in Ngự hoa viên (row, whereOf, Dư đồ count) with a deed aimed at her',G.map(x=>[at(x,3),x.deed]));
+ ok(W.every(x=>{const t=at(x,3);return t&&t.A.split("/")[0]==="vuon"&&t.Awhere==="vuon"&&t.cnt>=1&&/^vuon\/(ag_|here$)/.test(t.A)/* an invite to her (cx3:invite2) shows her own "here" row once it meets her */&&(!x.deed||x.deed.kh===3&&x.deed.t==="me")}),'NEAR k4: A is in Ngự hoa viên (row, whereOf, Dư đồ count) with a deed aimed at her',G.map(x=>[at(x,3),x.deed]));
  const F=(r.far||[]).filter(x=>!x.err&&!x.got);console.log('FAR TIMELINE: '+(F[0]?F[0].T.map(t=>`k${t.k+1}[${t.lab}] maid=${t.maid} A=${t.A} told=${t.told} rd=${t.rd}`).join(' | '):JSON.stringify(r.far)));
  ok(F.length>=1&&F.every(x=>{const t=at(x,2);return t&&t.told>=1&&t.maid==="ag_tell"&&t.rd===0&&t.hr===0}),'FAR k3: the maid is still on the road to A (row "ag_tell"); A has not re-decided',F.map(x=>at(x,2)));
  ok(F.length>=1&&F.every(x=>{const t=at(x,3);return t&&t.hr>=1}),'FAR k4: A hears at the start of k4 (never before) and decides (her walk then must still fit the day: agFitDay)',F.map(x=>at(x,3)));
  ok(r.quiet&&!r.quiet.err&&r.quiet.T.every(t=>t.told===0&&t.rd===0),'a maid who keeps quiet → A never knows, keeps her plan',r.quiet&&(r.quiet.err||r.quiet.T));
  ok(r.off&&!r.off.err&&r.off.T.every(t=>t.rd===0),'switch off (BAL.ag.kh2.rd.on=0) → no re-decide',r.off&&(r.off.err||r.off.T));
  ok(r.shRec&&!r.shRec.err&&r.shRec.names.join()==="Tiếp chuyện,Không tiếp"&&r.shRec.after===r.shRec.k0+1&&!r.shRec.inPend,'shared act: Tiếp chuyện → the deed lands; the whole talk costs her exactly ONE khắc and both move to k+1 together',r.shRec);
+ ok(r.late&&(r.late.err||r.late.buoi>=3||(r.late.r===0&&r.late.touched)),'B3 far news at the last khắc that fits the DAY is not dropped: she re-plans next buổi (agTouch)',r.late);
+ ok(r.shRec&&!r.shRec.err&&r.shRec.later===0&&r.shDec&&!r.shDec.err&&r.shDec.lateD===0,'B7 a cut (Tiếp chuyện) or dropped (Không tiếp) deed leaves no later khắc painted with it',{rec:r.shRec&&r.shRec.later,dec:r.shDec&&r.shDec.lateD});
  ok(r.shDec&&!r.shDec.err&&r.shDec.after===r.shDec.k0&&r.shDec.drop&&/^ag_/.test(r.shDec.row||""),'shared act: Không tiếp → her khắc kept, the deed does not happen, the NPC\'s row keeps the khắc she spent coming',r.shDec);
  ok(r.npc&&!r.npc.err&&r.npc.rec==="ag_with"&&r.npc.away.drop,'NPC ↔ NPC: the met one, free there, holds the shared act (ag_with); away → the meeting deed drops',r.npc);
  ok(!errs.length&&!r.errs.length,'no page / agent errors',errs.concat(r.errs).slice(0,5));

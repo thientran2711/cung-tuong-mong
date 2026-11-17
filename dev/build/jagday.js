@@ -262,12 +262,24 @@ function agSeeNpc(p,doer){if(!agKhOn()||!BAL.ag.kh2.see.on)return;const R=agRec(
    O.push(["join",A.w.join*agU(w,N,D.o?D.o(w,t):100,gl,twCost(p.k),AS?AS.tag:"social")])}
   if(hostile&&t&&t!==S&&typeof t==="object"&&TW.mediate&&aff(w,t)>=BAL.ag.goal.friend&&(!TW.mediate.req||TW.mediate.req(w,t))&&twCanPay(w,"mediate"))O.push(["mediate",A.w.mediate*agMW(w,"help")]);
   AGD.stat.seeN=(AGD.stat.seeN||0)+1;const c=mindPick(O.filter(x=>x[1]>0),w);if(!c||c==="ignore")continue;
-  let r="";AG.inTick++;try{
-   if(c==="hear"){const ho=agHearOf(w);if(agTry(ho)){if(hostile&&dv)evA(w,dv,A.ev);r=`${w.name} nghe lén được ${dv?dv.name:""} ${p.act}`}else if(!agSoft(ho)){if(dv)affAdd(dv,w,-B.caught)}}
-   else if(c==="join")r=twDo(w,p.k==="thHH"?queenP():t,p.k)||"";
-   else if(c==="mediate")r=twDo(w,t,"mediate")||""}catch(e){agdErr("seeNpc",e)}finally{AG.inTick--}
-  row[kh]=[p.pl,"ag_see:"+c,p.id,p.act||""];AG.stat.witNpc++;const SS=AGD.stat.see=AGD.stat.see||{};SS[c]=(SS[c]||0)+1;
-  try{const L=R.acts=R.acts||[];L.push({id,kh,k:"ag:see:"+c,t:p.id,why:p.act||"",ok:r?1:0,ag:1,pl:p.pl});if(L.length>60)L.shift()}catch(e){}}}
+  /* review ag-all-2 r2 B2: present ones see it in khắc kh and react the NEXT khắc (owner ~15:45Z), as a deed through the ledger (one day gate) */
+  const tid=c==="hear"?(dv?ledgerId(dv):null):(t&&t!==S&&typeof t==="object"?ledgerId(t):t===S?"me":null);
+  if(!agSeePlan(w,R,kh+1,p.pl,"see:"+c,c==="join"?p.k:(hostile?"h":""),tid,c==="hear"?(p.act||""):c==="mediate"?"đứng ra hòa giải":"cũng làm theo",p.act||""))continue;
+  AG.stat.witNpc++;const SS=AGD.stat.see=AGD.stat.see||{};SS[c]=(SS[c]||0)+1}}
+/* the reaction deed: kh = the khắc after she saw it, at that place; it must fit the DAY (agFitDay) and her khắc must be free, else she lets it go
+   (agTouch: she re-thinks next buổi). Row "ag_see:<c>" = the khắc she spends on it. p.seen / p.sh: a reaction is not a new scene or meeting. */
+function agSeePlan(v,R,kh,pl,k,kd,tid,act,why){if(!v||!R)return false;const id=ledgerId(v);if(!id||!R.P[id])return false;
+ if(!agFitDay(kh,1)||kh>=J95.KH){agTouch(v);return false}const e=R.P[id][kh];if(e&&(e[1]==="tryst"||e[1]==="meet"||e[1]==="offduty"||e[1]==="laundry"||/^ag_/.test(e[1]||""))||agBound(id,kh,R.key))return false;
+ const z=agZ();const p={key:R.key,id,vid:v.id,k,kd:kd||"",t:tid||null,kh,pl,act:act||"",why:why||"",seen:1,sh:1};z.pend.push(p);R.P[id][kh]=[pl,"ag_"+k,tid||null,why||""];
+ try{const L=R.acts=R.acts||[];L.push({id,kh,k:"ag:"+k,t:tid||null,why:why||"",ok:1,ag:1,pl});if(L.length>60)L.shift()}catch(x){}
+ try{const L={w:wk(),b:S.buoi||0,kh,id,k,t:tid||null,pl,why:why||""};z.log.push(L);if(z.log.length>60)z.log.shift()}catch(x){}return true}
+agRunReg("see:hearMe",(v,t,p)=>{const B=BAL.ag.wit;const o=odA(v,B.hear);if(agTry(o)){const zz=j95z();zz.meK[v.id]={k:p.pl,c:j95c(),w:wk()};noteAdd(v.id,"nàng để ý chỗ ngươi hay lui tới");return""}
+ if(!agSoft(o)){affAdd(S,v,-B.caught);log(`Ngươi bắt gặp ${v.name} đứng nghe ngóng.`)}return""});
+agRunReg("see:joinMe",(v,t,p)=>{if(!p.kd||!TW[p.kd]||!twCanPay(v,p.kd))return"";return twDo(v,p.kd==="thHH"?queenP():t,p.kd)||""});
+agRunReg("see:hear",(v,t,p)=>{const A=BAL.ag.kh2.see,B=BAL.ag.wit;const dv=typeof t==="object"&&t&&t.id!=null?t:null;const ho=agHearOf(v);
+ if(agTry(ho)){if(p.kd==="h"&&dv)evA(v,dv,A.ev);return `${v.name} nghe lén được ${dv?dv.name:""} ${p.act}`}if(!agSoft(ho)&&dv)affAdd(dv,v,-B.caught);return""});
+agRunReg("see:join",(v,t,p)=>{if(!p.kd||!TW[p.kd]||!twCanPay(v,p.kd))return"";return twDo(v,p.kd==="thHH"?queenP():t,p.kd)||""});
+agRunReg("see:mediate",(v,t,p)=>{if(!t||!TW.mediate||!twCanPay(v,"mediate"))return"";return twDo(v,t,"mediate")||""});
 (function(){
  const l0=agLand;agLand=function(p,seen){const pk=Object.assign({},p);const d=(()=>{try{return agDoer(p)}catch(e){return null}})();const r=l0.apply(this,arguments);
   try{if(r&&agKhOn()&&!pk.gone&&!pk.drop)agSeeNpc(pk,d)}catch(e){agdErr("see",e)}return r};
@@ -368,10 +380,13 @@ Object.assign(window,{agHeard,agTell,agRdTick,agRdDeliver});
 function agShOn(){try{return agKhOn()&&BAL.ag.kh2.sh&&BAL.ag.kh2.sh.on}catch(e){return false}}
 function agShKh(p){return BAL.ag.kh2.sh.kh}/* owner (OD ~16:00Z ONE SHARED CLOCK, sub-line): staying to talk costs exactly ONE khắc in all — her answers inside add none */
 function agShOpts(p,v){const n=agShKh(p);const lock=agWhyDay(n);/* the DAY gate (OD L852) */const O=[];
- O.push({n:"Tiếp chuyện",r:"rec",fx:{},x:`Nắm chắc · tốn: ${n} khắc · thành: cùng ${v.name} trải qua khắc này`,go:()=>{if(!agCanDay(n)){agShDecl(p,v);return}try{const k=agKh();p.k1=Math.min(agK1(p),k+n-1)}catch(e){}/* the comer's act ends with hers: both move to the next khắc together */spend(n);AGD.stat.shMe=(AGD.stat.shMe||0)+1;const r=agLand(p,true);if(r)log(`${r}.`)}});
+ O.push({n:"Tiếp chuyện",r:"rec",fx:{},x:`Nắm chắc · tốn: ${n} khắc · thành: cùng ${v.name} trải qua khắc này`,go:()=>{if(!agCanDay(n)){agShDecl(p,v);return}try{const k=agKh(),old=agK1(p);p.k1=Math.min(old,k+n-1);agShClear(p,p.k1+1,old)}catch(e){}/* the comer's act ends with hers: both move to the next khắc together */spend(n);AGD.stat.shMe=(AGD.stat.shMe||0)+1;const r=agLand(p,true);if(r)log(`${r}.`)}});
  O.push({n:"Không tiếp",r:"dec",fx:{},x:`Nắm chắc · thành: ${v.name} ra về, khắc của ngươi còn nguyên`,go:()=>agShDecl(p,v)});
  if(lock)kitOff(O[0],lock,"");return O}
-function agShDecl(p,v){const z=agZ();const i=z.pend.indexOf(p);if(i>=0)z.pend.splice(i,1);p.drop=1;AG.stat.drop++;AGD.stat.shNo=(AGD.stat.shNo||0)+1;/* her row in the record keeps the khắc she spent coming */log(`Ngươi không tiếp ${v.name}.`)}
+/* review ag-all-2 r2 B7: the khắc a cut / dropped deed no longer holds show the NPC's row of the khắc before (she goes back to what she was doing) */
+function agShClear(p,from,to){try{const R=agRec();if(!R||p.key!==R.key)return;const row=R.P[p.id];if(!row)return;const b4=p.kh>0&&row[p.kh-1]?row[p.kh-1]:null;const prev=[b4&&!/^ag_/.test(b4[1]||"")?b4[0]:p.pl,b4&&!/^ag_/.test(b4[1]||"")?b4[1]:"go",null,""];
+ for(let q=Math.max(0,from);q<=Math.min(J95.KH-1,to);q++)if(row[q]&&row[q][1]==="ag_"+p.k)row[q]=prev.slice();if(!AG.syQ){AG.syQ=1;setTimeout(agSyncNow,0)}}catch(e){agdErr("shClear",e)}}
+function agShDecl(p,v){const z=agZ();const i=z.pend.indexOf(p);if(i>=0)z.pend.splice(i,1);p.drop=1;try{agShClear(p,agKh()+1,agK1(p))}catch(e){}/* she spent khắc k coming; the later rows of the dropped deed are cleared */AG.stat.drop++;AGD.stat.shNo=(AGD.stat.shNo||0)+1;/* her row in the record keeps the khắc she spent coming */log(`Ngươi không tiếp ${v.name}.`)}
 /* NPC ↔ NPC: before the deed lands */
 function agShNpc(p,d){if(!agShOn()||!p||p.vid==null||!p.t||p.t[0]!=="v")return 1;const R=agRec();if(!R||p.key!==R.key)return 1;const t=agTgt(p.t);if(!t||t===S||typeof t!=="object"||t===d)return 1;
  const id="v"+t.id,row=R.P[id];if(!row)return 1;const A=BAL.ag.kh2.sh;let here=true;const k1=Math.min(J95.KH-1,agK1(p));
