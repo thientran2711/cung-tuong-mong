@@ -57,15 +57,15 @@ TWD("fakePreg",{n:"Giả mang thai",req:a=>!a.preg&&(a.tamco||0)>=50,o:a=>odA(a,
  a.preg=1;a.fake=1;a.hidden=false;a.pregWk=wk();twAp(a,{sung:g[0],th:g[1]});return `${twNm(a)} báo tin có thai`}});
 TWD("announce",{n:"Báo tin có thai",req:a=>a.preg&&a.hidden,run:a=>{const g=G().ann;a.hidden=false;twAp(a,{sung:g[0],th:g[1]});
  /* the same jealousy she raises when she announces (ghenAll): every other consort's ghen; when an NPC announces, the player has no ghen bar → resentment */
- liveRivals(true).forEach(x=>{if(x!==a)x.ghen=cl((x.ghen||0)+g[2],0,100)});return `${twNm(a)} báo tin có thai`}});
-TWD("provoke",{n:"Khiêu khích",req:(a,t)=>!!t,run:(a,t)=>{const g=G().provoke;twAp(a,{danh:g[0]});relAdd(a,t,g[1]);if(t!==S)t.ghen=cl((t.ghen||0)+g[2],0,100);else oanAdd(S,a,g[3]);return `${twNm(a)} buông lời khiêu khích ${NM(t)}`}});
+ liveRivals(true).forEach(x=>{if(x!==a)ghenUp(x,g[2],`nghe ${twNm(a)} báo tin có thai`,a)});return `${twNm(a)} báo tin có thai`}});
+TWD("provoke",{n:"Khiêu khích",req:(a,t)=>!!t,run:(a,t)=>{const g=G().provoke;twAp(a,{danh:g[0]});relAdd(a,t,g[1]);if(t!==S)ghenUp(t,g[2],`bị ${twNm(a)} khiêu khích`,a);else oanAdd(S,a,g[3]);return `${twNm(a)} buông lời khiêu khích ${NM(t)}`}});
 TWD("warn",{n:"Cảnh báo nàng",req:(a,t)=>!!t,run:(a,t)=>{const x=liveRivals(true).find(x=>x!==a&&x!==t&&(oan(x,t)>=30||bandOf(danger(x,t))>=2));if(!x){affAdd(t,a,BAL.eff.jtwoway.run);return `${twNm(a)} nhắc ${NM(t)} đề phòng, nhưng không có căn cứ`}
  affAdd(t,a,G().warn);oanAdd(t,x,G().warn);if(t===S){S.dKnown=S.dKnown||{};S.dKnown[x.id]=wk();noteAdd(x.id,`${a.name} báo: nàng có ý hại ngươi`)}else t.shield=Math.max(t.shield||0,1);return `${twNm(a)} lén báo ${NM(t)} đề phòng ${x===S?"ngươi":x.name}`}});
 /* --- deeds only NPCs had: now one deed for both (player option added below) --- */
 TWD("visit",{n:"Thăm lúc ốm mệt",req:(a,t)=>!!t&&((t.suc||0)<50||!!t.preg),run:(a,t)=>{const g=G().visit;relAdd(a,t,g[0]);twAp(t,{suc:g[1]});return `${twNm(a)} sang thăm ${NM(t)} lúc ốm mệt`}});
 TWD("mediate",{n:"Hòa giải",req:(a,t)=>!!t&&!!twFoeOf(a,t),run:(a,t)=>{const x=twFoeOf(a,t);oanAdd(t,x,-G().mediate);return `${twNm(a)} đứng ra hòa giải giữa ${NM(t)} và ${x===S?"ngươi":x.name}`}});
 TWD("humil",{n:"Hạ nhục",req:(a,t)=>!!t&&rkOf(a)>=rkOf(t),run:(a,t)=>{const g=G().humil;oanAdd(t,a,g[0]);twAp(t,{danh:-g[1]});return `${twNm(a)} hạ nhục ${NM(t)} trước mặt cung nhân`}});
-TWD("flaunt",{n:"Khoe quà ngự ban",req:a=>(a.sung||0)>=40,run:a=>{liveRivals(true).forEach(x=>{if(x!==a)x.ghen=cl((x.ghen||0)+G().flaunt,0,100)});return `${twNm(a)} đi khắp cung khoe quà ngự ban`}});
+TWD("flaunt",{n:"Khoe quà ngự ban",req:a=>(a.sung||0)>=40,run:a=>{liveRivals(true).forEach(x=>{if(x!==a)ghenUp(x,G().flaunt,`thấy ${twNm(a)} khoe quà ngự ban`,a)});return `${twNm(a)} đi khắp cung khoe quà ngự ban`}});
 TWD("test",{n:"Thử lòng",req:(a,t)=>!!t&&aff(a,t)>=0,o:()=>G().test[2],run:(a,t,ok)=>{affAdd(a,t,ok?G().test[0]:G().test[1]);return `${twNm(a)} thử lòng ${NM(t)}: ${ok?"tin thêm một chút":"càng ngờ vực"}`}});
 TWD("drop",{n:"Lạnh nhạt",req:(a,t)=>!!t&&aff(a,t)>=30&&((t.sung||0)<25||!!t.confined),run:(a,t)=>{affAdd(a,t,-G().drop);return `${twNm(a)} lạnh nhạt với ${NM(t)} lúc sa cơ`}});
 TWD("follow",{n:"Nương theo",req:(a,t)=>!!t&&rkOf(t)>rkOf(a)+1,run:(a,t)=>{relAdd(a,t,G().follow);return `${twNm(a)} nép theo ${NM(t)}`}});

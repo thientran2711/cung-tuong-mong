@@ -186,7 +186,7 @@ function tsLeHost(p,to){const me=p===S;if(me){const G=tsGuests(S).filter(x=>x!==
   tsPanel({t:`Lễ tấn phong · ${RANKS[to].n}`,who:pMe(),h:`<p>Thánh chỉ vừa tuyên, ${n} vị phi tần sang cung ngươi dự lễ chúc mừng.</p>${tsFacts(lines)}${gl.length?tsRows([["Quà mừng",gl.join(" · "),"g"]]):""}<p class="past">Theo lệ, chủ lễ phát lì xì cho khách. Phát hậu thì lòng người êm; không phát dễ mang tiếng keo kiệt.</p>`,
    opts:[tsOpt({n:"Phát lì xì hậu",fx:{bac:-hi},need:[tsNeedBac(hi)],duoc:[`${n} vị khách bớt ghen 6`,"khách: thiện cảm +4","Danh +1"],go:()=>{G.forEach(v=>{v.ghen=cl((v.ghen||0)-6,0,100);tsAff(v,4)});apply({danh:1});log(`Lễ tấn phong: ngươi phát lì xì hậu cho ${n} vị khách.`)}}),
     tsOpt({n:"Phát lì xì vừa phải",fx:{bac:-lo},need:[tsNeedBac(lo)],duoc:[`${n} vị khách bớt ghen 3`,"khách: thiện cảm +2"],go:()=>{G.forEach(v=>{v.ghen=cl((v.ghen||0)-3,0,100);tsAff(v,2)});log(`Lễ tấn phong: ngươi phát lì xì cho ${n} vị khách.`)}}),
-    tsOpt({n:"Không phát",mat:["Danh -2","người đang ghen: ghen +3 (chê keo kiệt)"],go:()=>{apply({danh:-2});G.forEach(v=>{if((v.ghen||0)>=40)v.ghen=cl(v.ghen+3,0,100)});log("Lễ tấn phong: ngươi không phát lì xì; có người xì xào chê keo kiệt.")}})]});
+    tsOpt({n:"Không phát",mat:["Danh -2","người đang ghen: ghen +3 (chê keo kiệt)"],go:()=>{apply({danh:-2});G.forEach(v=>{if((v.ghen||0)>=40)ghenUp(v,3,"chê ngươi keo kiệt ngày tấn phong",S)});log("Lễ tấn phong: ngươi không phát lì xì; có người xì xào chê keo kiệt.")}})]});
   return}
  /* an NPC host: the same rite, she is a guest */
  if(!tsOn()||S.out||S.confined)return;const s=tsS();if(s.leWk===wk())return;s.leWk=wk();const [k]=tsWish(S,p);

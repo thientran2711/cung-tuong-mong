@@ -114,7 +114,7 @@ function wkSell(p,ix){const e=p.inv[ix];if(!e||!e.wk)return"";const w=e.wk;p.inv
  if(roll(wkSellO(p))){ap(p,{bac:wkSellVal(w)});return `${nm} nhờ người mang ${w.n} ra cửa Thần Vũ bán. Bạc +${wkSellVal(w)}. `}
  ap(p,{danh:-3});if(p!==S)newsAdd(p,"sell",`${nm} lén bán đồ tự làm ra ngoài cung, bị bắt gặp.`,false);return `<span class="r">${nm} lén bán ${w.n} ra ngoài cung thì bị thị vệ cửa Thần Vũ bắt gặp, đồ bị tịch thu.</span> Danh -3. `}
 /* show at a banquet: Danh by tier, once per work, the work stays */
-function wkShow(ix){const e=S.inv[ix];if(!e||!e.wk||e.wk.show||!can(2))return;spend(2);e.wk.show=1;const w=e.wk;const f={danh:WSHOW[w.ti]};apply(f);if(w.ti===3)ghenAll(BAL.ghen.showTreasure);
+function wkShow(ix){const e=S.inv[ix];if(!e||!e.wk||e.wk.show||!can(2))return;spend(2);e.wk.show=1;const w=e.wk;const f={danh:WSHOW[w.ti]};apply(f);if(w.ti===3)ghenAll(BAL.ghen.showTreasure,"ngươi khoe bảo vật");
  log(`Bày ${w.n} (${WTIER[w.ti]}) ở yến tiệc, cả điện truyền tay nhau xem. ${fmt(f)}${w.ti===3?` · phi tần ghen +${ghenN(BAL.ghen.showTreasure)}`:""}`);render()}
 /* contest (Tranh ghế, vòng Tài nghệ): a Tinh xảo / Tuyệt phẩm of that art in the chest adds to the score */
 function wkContestB(p,art){let b=0;for(const e of (p.inv||[]))if(e.wk&&e.wk.a===art&&e.wk.ti>=2)b=Math.max(b,e.wk.ti-1);return b}

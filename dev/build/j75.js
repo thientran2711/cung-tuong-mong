@@ -85,7 +85,7 @@ function pregFind(){if(!S||S.dead)return;if(!S.preg){S.pregUnk=0;return}if(!S.pr
  const h=`<p>Mấy hôm nay ${S.maid?`cung nữ ${S.maid.name}`:"cung nữ"} thấy ngươi biếng ăn, hay buồn nôn, liền mời thái y.</p><p><b class="g">Thái y bắt mạch: ngươi đã có thai, đang tháng thứ ${m}.</b></p>${canHide?`<p class="past">Ngươi có thể giấu thai đến hết tháng thứ 3, hoặc báo tin để được sủng ái.</p>`:""}`;
  const card={ev:1,t:"Thái y bắt mạch",who:pDoc(),h};/* ev: keep secret / announce is an EVENT choice (KIT 28.6; reviewer r7: its opts are set after the literal, so it slipped) */
  if(canHide)card.opts=[{n:"Giữ kín, dặn thái y không nói",fx:{},x:"giấu thai đến hết tháng thứ 3 · phi tần chưa biết để nhắm vào thai",go:()=>{S.hidden=true;log("Ngươi giữ kín tin có thai.")}},
-  {n:"Báo tin cho Hoàng thượng",fx:{sung:6,th:5},x:`các phi tần ghen +${ghenN(BAL.ghen.preg)} · kẻ ác có thể nhắm vào thai`,go:()=>{S.hidden=false;ghenAll(BAL.ghen.preg);log("Ngươi báo tin có thai.")}}];
+  {n:"Báo tin cho Hoàng thượng",fx:{sung:6,th:5},x:`các phi tần ghen +${ghenN(BAL.ghen.preg)} · kẻ ác có thể nhắm vào thai`,go:()=>{S.hidden=false;ghenAll(BAL.ghen.preg,"ngươi mang long thai");log("Ngươi báo tin có thai.")}}];
  else card.btn="Đã hiểu";
  log(`<span class="g">Thái y bắt mạch: ngươi đã có thai, đang tháng thứ ${m}.</span>`);Q.push(card)}
 window.pregFind=pregFind;
@@ -173,7 +173,7 @@ function npcEffort(v,force){const K=npcEffortKind(v);if(!K)return "";const pt=tv
  const {kd,n,c,o,w,lose}=K;
  ap(v,c);const b=v.sung;const ok=roll(o);ap(v,ok?w:K.l);try{if(typeof empMet==="function")empMet(v,kd,ok)}catch(e){}/* AG2: he remembers it (her runOpt: jagemp) */
  /* two-way (owner 16/11 s21): her Kinh hồng vũ card also stirs the others (ghen +10, liking −5); an NPC dance does the same */
- if(kd==="vu"){liveRivals(true).forEach(x=>{if(x!==v){x.ghen=cl((x.ghen||0)+BAL.tw.g.vu[0],0,100);affAdd(x,v,-BAL.tw.g.vu[1])}});affAdd(S,v,-BAL.tw.g.vu[1])}
+ if(kd==="vu"){liveRivals(true).forEach(x=>{if(x!==v){ghenUp(x,BAL.tw.g.vu[0],`thấy ${v===S?"ngươi":v.name} múa Kinh hồng vũ được ngài khen`,v);affAdd(x,v,-BAL.tw.g.vu[1])}});affAdd(S,v,-BAL.tw.g.vu[1])}
  /* the change names whose Sủng it is; a line with no change says nothing about numbers (owner 11/15: "Sủng nàng 45 → 45") */
  return roll(20+S.mat*10)?`Tai mắt kể: ${v.name} ${n}: ${ok?"Hoàng thượng vui lòng":"ngài không để ý"}.${b!==v.sung?` Sủng của ${v.name} ${b} → ${v.sung}.`:""} `:""}
 window.npcEffort=npcEffort;window.npcEffortKind=npcEffortKind;
@@ -184,7 +184,7 @@ const rt0=rivalsTurn;rivalsTurn=function(){let ev=rt0.apply(this,arguments)||"";
 function nightsIn(p,n){const w0=wk();return (p.nightLog||[]).filter(w=>w0-w>=0&&w0-w<n).length}
 function favNow(){let best=null,bn=0;for(const p of consorts()){if(p!==S&&(!p.alive||p.out))continue;const n=nightsIn(p,6);if(n>bn){bn=n;best=p}}return bn>=FAIRN.fav?{p:best,n:bn}:null}
 function monopoly(){const f=favNow();if(!f)return"";const p=f.p,me=p===S,nm=me?"ngươi":p.name;let ev="";
- for(const v of liveRivals(true)){if(v===p||!v.alive||v.out)continue;if(me)v.ghen=cl((v.ghen||0)+2,0,100);else if((v.malice||0)>=40)oanAdd(v,p,BAL.eff.j75.monopoly)}
+ for(const v of liveRivals(true)){if(v===p||!v.alive||v.out)continue;if(me)ghenUp(v,2,"thấy Hoàng thượng chỉ lật thẻ bài của ngươi",S);else if((v.malice||0)>=40)oanAdd(v,p,BAL.eff.j75.monopoly)}
  if(!(p.admonWk!=null&&wk()-p.admonWk<BAL.tw.g.admonCd)&&!(window.agDOn&&agDOn())&&roll(30)){const q=queenP();const who=q&&q!==p&&q!==S?`Hoàng hậu ${q.name}`:q===S&&!me?"ngươi (Hoàng hậu)":(!S.thDead?"Thái hậu":null);
   if(who&&!(q===S&&!me)){const b=p.sung;ap(p,{sung:-BAL.tw.g.admon});p.admonWk=wk();
    const t=`${who} khuyên Hoàng thượng “mưa móc đều khắp”, đừng chỉ sủng ${me?"ngươi":p.name} (${f.n} trong sáu đêm gần đây). ${b!==p.sung?`Sủng của ${me?"ta":p.name} ${b} → ${p.sung}; h`:"H"}ai tuần tới ngài để ý đến người khác.`;/* owner 11/15: name whose Sủng; no "30 → 30" */

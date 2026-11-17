@@ -12,11 +12,11 @@ function p3On(){try{return !!(agOn()&&BAL.ag.par3&&BAL.ag.par3.on)}catch(e){retu
 function p3Nm(p){return p===S?"ngươi":p&&p.name||""}
 function p3Ap(p,x){if(!x||!Object.keys(x).length)return;if(p===S)apply(x);else ap(p,x)}
 /* every other consort's jealousy rises when someone dances before the whole harem (her card: ghenAll; an NPC dancer: the others, her included in ghen of NPCs only) */
-function p3GhenAll(p,n){if(p===S)return ghenAll(n);const d=ghenN(n);liveRivals(true).forEach(v=>{if(v!==p)v.ghen=cl((v.ghen||0)+d,0,100)})}
+function p3GhenAll(p,n,why){if(p===S)return ghenAll(n,why);const d=ghenN(n);liveRivals(true).forEach(v=>{if(v!==p)ghenUp(v,d,why||`thấy ${p.name} nổi bật hơn người`,p)})}
 /* ---------------- the player cards, built once ---------------- */
 const P3C={
  dance:p=>{const X=BAL.ag.par3.dance;return{n:"Múa trong yến tiệc",t:"Cả hậu cung nhìn vào.",c:{...X.c},o:odA(p,X.o+(p.sac||0)/X.sacD*(p===S&&has("mesac")?X.mesac:1)+((p.arts&&p.arts.vu)||0)*X.vu),
-  w:{...X.w},l:{...X.l},x:`phi tần ghen +${ghenN(BAL.ghen.dance)}`,go:()=>p3GhenAll(p,BAL.ghen.dance)}},
+  w:{...X.w},l:{...X.l},x:`phi tần ghen +${ghenN(BAL.ghen.dance)}`,go:()=>p3GhenAll(p,BAL.ghen.dance,`${p===S?"ngươi":p.name} múa được Hoàng thượng khen`)}},
  /* 2f2: a REAL person (the most willing servant of another palace, tmBest); the roll IS her choice (tmOdds: traits, lòng, what she wants);
     a refusal may be told to her master (r2 tmRefuse); cost = that person's bribe price (nv bribeCost, as Mua chuộc) */
  eyes:p=>{const X=BAL.ag.par3.eyes;const s=typeof tmBest==="function"?tmBest(p):null;

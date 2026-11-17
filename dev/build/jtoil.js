@@ -249,9 +249,9 @@ function toilRival(v,doIt){if(!v||!toilOn(S)||toilSeen(v))return null;const L=to
  const g=e.g,aff=e.aff;let txt=e.k==="praise"?`nàng ta chuộng giản dị: quý ta +${aff}`:e.k==="frown"?`ta ăn vận phô trương: nàng ta quý ta ${aff}`:"";
  if(e.k==="tease"){const n=e.n;txt=`nàng ta che miệng cười ${L.mk==="diem"?`lớp phấn son ${toilMkW("diem")}`:`gương mặt điểm trang ${toilMkW("vung")}`} của ta: bớt ghen ${n}`;if(doIt){v.ghen=cl((v.ghen||0)-n,0,100);toilMark(v)}return{txt,aff:0,g:0}}
  if(g)txt=[txt,`${L.showy?"ta ăn vận phô trương":`dung nhan ta ${toilMkW("tuyet")}`}: nàng ta ghen +${g}`].filter(Boolean).join(" · ");if(!txt)return null;
- if(doIt){if(aff)affAdd(v,S,aff);if(g)v.ghen=cl((v.ghen||0)+g,0,100);toilMark(v)}return{txt,aff,g}}
+ if(doIt){if(aff)affAdd(v,S,aff);if(g)ghenUp(v,g,"thấy ngươi điểm trang lộng lẫy",S);toilMark(v)}return{txt,aff,g}}
 function toilCrowd(doIt){const L=toilLook();if(!L.showy&&L.mk!=="tuyet")return{n:0};if(toilSeen("crowd"))return{n:0};let n=0;const R=liveRivals(false).filter(v=>!v.queen&&!v.out);
- for(const v of R){const g=Math.round(toilGhenOf(v,L)*BAL.toil.crowd);if(g){n=Math.max(n,g);if(doIt)v.ghen=cl((v.ghen||0)+g,0,100)}}if(doIt)toilMark("crowd");
+ for(const v of R){const g=Math.round(toilGhenOf(v,L)*BAL.toil.crowd);if(g){n=Math.max(n,g);if(doIt)ghenUp(v,g,"thấy ngươi điểm trang lộng lẫy",S)}}if(doIt)toilMark("crowd");
  return{n,why:L.showy?"ăn vận phô trương":`dung nhan ${toilMkW("tuyet")}`}}
 /* NPCs: the same rule when they wait on Thái hậu (jaudit applies thiếu lễ; this adds the look of the day) */
 /* ONE judgement for an NPC v before a host ("th" | "emp" | a consort, e.g. Hoàng hậu): toilFx, once per host per day (toilSeen/toilMark on v),
@@ -615,7 +615,7 @@ function toilBack(host,n,p){if(!n)return;if(p&&p!==S){if(host==="th")p.th=cl((p.
    r = {host, n, v (the consort who reacted)}; → true / false for a reply that went well / badly, null otherwise. Her Sức for "Đáp lại" is the option's fx. */
 function toilAns(p,r,c){const B=BAL.toil;if(c==="sorry"){toilBack(r.host,Math.ceil(Math.abs(r.n)*B.sorryBack),p);return null}if(c!=="reply")return null;
  const me=!p||p===S;if(!me)ap(p,{suc:-B.replySuc});if(roll(B.replyWin)){if(me)apply({danh:B.replyDanh});else ap(p,{danh:B.replyDanh});return true}
- toilBack(r.host,-B.replyLose,p);if(r.v){if(me)r.v.ghen=cl((r.v.ghen||0)+B.replyGhen,0,100);else affAdd(r.v,p,-B.replyGhen)}return false}
+ toilBack(r.host,-B.replyLose,p);if(r.v){if(me)ghenUp(r.v,B.replyGhen,"bị ngươi đáp lời không nể",S);else affAdd(r.v,p,-B.replyGhen)}return false}
 function toilFlush(){if(!TOIL_POP.length||!S||S.dead)return;const L=TOIL_POP.splice(0).sort((a,b)=>Math.abs(b.n)-Math.abs(a.n));const top=L.slice(0,BAL.toil.popMax),rest=L.slice(BAL.toil.popMax);
  top.forEach((r,i)=>{const bad=r.n<0;const who=toilWho(r.host==null?null:r.host)||"";const more=i===top.length-1&&rest.length?`<p class="past">Còn: ${rest.map(x=>`${x.name||toilWho(x.host)} — ${x.line}`).join(" · ")}.</p>`:"";
   const h=`<p>${toilSay(r.k,Object.assign({host:r.host},r.ctx))}</p><p class="past">${toilLit(r)}</p>${more}`;

@@ -418,7 +418,7 @@ PEND.cnvFest=pp=>{if(!isSrv())return null;const m=srvM();
 /* ---------- rising: she joins the consort game ---------- */
 function srvRise(why){if(!S||(S.age||0)<18)return;const m=srvM();const tin=S.tin;S.srv.risen=1;S.srv.wasMis=m?m.id:null;S.srv.sent=null;S.rank=0;S.sung=15+Math.round(S.nt/5);S.lastPromo=S.turn;apply({danh:5,bac:20});
  S.maid=newMaid(pick(MAIDS),50);S.staff=[];try{fillStaff(S,true)}catch(e){}
- if(m&&m.alive){relAdd(S,m,tin>=60?BAL.eff.j42.srvRise[0]:BAL.eff.j42.srvRise[1]);m.ghen=cl((m.ghen||0)+(tin>=60?5:25),0,100)}
+ if(m&&m.alive){relAdd(S,m,tin>=60?BAL.eff.j42.srvRise[0]:BAL.eff.j42.srvRise[1]);ghenUp(m,tin>=60?5:25,"thấy cung nữ cũ của mình được nâng lên làm phi tần",S)}
  try{palFix()}catch(e){}S.place="home";S.visit={k:"home",people:homePeople(),talked:false,tk:{}};tab="act";
  log(`<b class="g">${why}: ngươi được phong ${RANKS[0].n}.</b>`);
  Q.push({t:"Thánh chỉ",cls:"end",who:pEmp(),h:`<p>${why}. Thánh chỉ: cung nữ ${S.name} được phong <b>${RANKS[0].n}</b>, ở ${palName("home")}.</p><p>${m?`${m.name} ${tin>=60?"vẫn coi ngươi như người nhà.":"nhìn ngươi bằng ánh mắt lạnh như băng."}`:""}</p><p class="past">Từ nay ngươi theo luật của phi tần: Sủng, thị tẩm, phẩm vị.</p>`,btn:"Tạ ơn"});

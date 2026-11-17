@@ -45,7 +45,7 @@ window.visGo=function(p){const w=day();
   S.visN=(S.visN||0)+1;if(p===S){showFor();return"me"}S.visW=w;log(`Đêm nay Hoàng thượng ngự giá đến cung ${p.name}, nghỉ lại đến sáng.`);return"friend"}
  /* an NPC consort: the tablet's night is hers (the one flip / resolveTonight → rivalNight path), plus the visit's own Sủng / Danh (BAL.visit, as hers) */
  const V=B();const lost=S.tonight&&S.tonight!=="me"&&S.tonight!==p?S.tonight:null;if(S.tonight==="me")return"";p.visW=w;S.tonight=p;S.visNpc={w,id:p.id};ap(p,{sung:V.sung,danh:V.danh});
- if(lost&&lost.alive){lost.ghen=cl((lost.ghen||0)+V.lostGhen,0,100);relAdd(p,lost,-V.lostRel)}
+ if(lost&&lost.alive){ghenUp(lost,V.lostGhen,`mất đêm thẻ bài vì Hoàng thượng ngự giá đến cung ${p.name}`,p);relAdd(p,lost,-V.lostRel)}
  log(`Đêm nay Hoàng thượng ngự giá đến cung ${p.name}, nghỉ lại đến sáng.`);return"npc"};
 window.visRoll=function(){if(!host()||!empOk())return"";if(window.agDOn&&agDOn())return"";const L=[];if(meOk())L.push(S);
  if(cw()){const f=(rivals||[]).find(v=>v&&v.coop&&v.alive!==false&&!v.out);if(f)L.push(f)}
@@ -85,7 +85,7 @@ PEND.vnight=function(p){const d=PEND.night1({q:(p&&p.q)||B().q,vp:0});if(!d)retu
  if(vis)try{S.visNight=null;visAfter()}catch(e){console.error("visit after",e)}return r}})();
 function visAfter(){const V=B();const L=[`Sủng +${V.sung}`,`Danh +${V.danh}`];apply({sung:V.sung,danh:V.danh});ghenAll(V.ghen);const P=[`Hậu cung hay tin ngài nghỉ lại cung ngươi: phi tần ghen +${ghenN(V.ghen)}.`];
  const lost=S.visLost!=null?(rivals||[]).find(x=>x&&x.id===S.visLost&&x.alive):null;S.visLost=null;
- if(lost){lost.ghen=cl((lost.ghen||0)+V.lostGhen,0,100);relAdd(S,lost,-V.lostRel);P.push(`${lost.name} mất đêm thẻ bài đã lật: ghen +${V.lostGhen}, quý ngươi -${V.lostRel}.`)}
+ if(lost){ghenUp(lost,V.lostGhen,"mất đêm thẻ bài vì Hoàng thượng ngự giá đến cung ngươi",S);relAdd(S,lost,-V.lostRel);P.push(`${lost.name} mất đêm thẻ bài đã lật: ghen +${V.lostGhen}, quý ngươi -${V.lostRel}.`)}
  if(S.visQ){S.visQ=0;apply({hh:-V.hh});P.push(`Hoàng hậu phật ý: quý ngươi -${V.hh}.`)}
  const T=thDispl();if(T.p&&roll(T.p)){apply({th:-T.loss});P.push(`Thái hậu nghe tin, phật ý vì ngài bỏ lệ Kính sự phòng: Thái hậu quý ngươi -${T.loss}.`);try{trongLearn("th",DEED.empvisit,"Ngự giá lâm cung")}catch(e){}}
  else if(T.p)P.push("Thái hậu nghe tin, không nói gì.");

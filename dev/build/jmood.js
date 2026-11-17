@@ -63,7 +63,7 @@ window.mbS=mbS;window.mbBand=mbBand;window.mbOdPts=mbOdPts;window.mbAdd=mbAdd;wi
  ghenN=function(n){return n0(mk(n))};ghenAll=function(n){try{const n2=mk(n);if(n2!==n)MOOD_N.ghen+=n2-n}catch(e){}return g0.apply(this,arguments)}})();
 /* ---------- inputs ---------- */
 /* every feeling that lands on her moves the bar (even when a stronger feeling keeps the seal) */
-(function(){if(typeof emoSet!=="function")return;const s0=emoSet;emoSet=function(p,k,v,why){try{if(mbOn()&&p&&(p===S||(typeof emoRes==="function"&&emoRes(p)===S))&&v>0&&typeof emoOn==="function"&&emoOn()){const c=B().emo[k]||0;
+(function(){if(typeof emoSet!=="function")return;const s0=emoSet;emoSet=function(p,k,v,why){try{if(mbOn()&&!(typeof mkOn==="function"&&mkOn())&&p&&(p===S||(typeof emoRes==="function"&&emoRes(p)===S))&&v>0&&typeof emoOn==="function"&&emoOn()){const c=B().emo[k]||0;
   if(c)mbAdd(c*v,why||(typeof EMO==="object"&&EMO[k])||"","e:"+(why||k))}}catch(e){}return s0.apply(this,arguments)}})();
 /* her own acts with a real roll: deck cards and talk options */
 (function(){if(typeof runOpt!=="function")return;const r0=runOpt;runOpt=function(a){const rolled=!!(a&&a.o!=null&&a.o<100&&!a.exam);const r=r0.apply(this,arguments);

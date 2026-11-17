@@ -21,7 +21,7 @@ const BBAC={night:0,contest:20,son:30,dau:15,promo:20,accuse:10,story:10,birthda
 BEST.dau=["tuithom","sonphan","luahang"];BEST.sinhthan=["tramngoc","vongngoc","gamto"];BEST.nurse=["nhansam","yensao","agiao"];
 BWHY.dau="mừng công chúa ra đời";BWHY.sinhthan="nhân sinh thần của ngươi";BWHY.nurse="vì hầu thuốc chu đáo";
 (function(){const b0=bestow;bestow=function(p,why){const n0=(p&&p.inv||[]).length,q0=Q.length;b0(p,why);if(!p||!p.inv||p.inv.length===n0)return;const k=p.inv[p.inv.length-1].k,bac=BBAC[why]||0;if(bac)ap(p,{bac});
- if(p===S){ghenAll(BAL.ghen.bestow);S.awards=(S.awards||[]);S.awards.unshift({d:`T${S.month}/${S.year}`,why:BWHY[why]||why,it:itm(k).n,bac});if(S.awards.length>60)S.awards.length=60;
+ if(p===S){ghenAll(BAL.ghen.bestow,"ngươi được ban thưởng");S.awards=(S.awards||[]);S.awards.unshift({d:`T${S.month}/${S.year}`,why:BWHY[why]||why,it:itm(k).n,bac});if(S.awards.length>60)S.awards.length=60;
   const m=Q[Q.length-1];if(Q.length>q0&&m&&m.t==="Thánh thượng ban thưởng")m.h+=`<p>${kitParse(`Chắc chắn · thành: ${itm(k).n}${bac?`, Bạc +${bac}`:""} · phi tần ghen +${ghenN(BAL.ghen.bestow)}`)}</p>`;log(`Ân thưởng ${BWHY[why]||""}: ${itm(k).n}${bac?`, Bạc +${bac}`:""}; phi tần ghen +${ghenN(BAL.ghen.bestow)}.`)}
  else{S.pg=0;p.pg=cl((p.pg||0)+3,0,100)}}})();
 const AREASON=[["Đêm thị tẩm vui","night"],["Thắng ở yến tiệc, thi tài","contest"],["Sinh hoàng tử","son"],["Sinh công chúa","dau"],["Được tấn phong","promo"],["Tố giác kẻ gian thành","accuse"],["Tuyến truyện thành","story"],["Tiết Vạn thọ (tháng 8, người được sủng nhất)","birthday"],["Sinh thần của ngươi (Sủng từ 50)","sinhthan"],["Hầu thuốc Hoàng thượng khi ngài bệnh","nurse"]];

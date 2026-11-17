@@ -51,9 +51,9 @@ function mkMigrate(p){p.mk=[];const KD=mkKD(),now=mkNow();MK.stat.mig++;
  for(const h of p.emoH||[]){if(!h||!EMO[h.k]||!h.why)continue;const k0=(h.w||0)*KD,k1=k0+mkDur(h.e,h.k);if(k1>now)p.mk.push({kd:"e:"+h.why,k:h.k,s:h.v||0,why:h.why,e:h.e,c:h.c,a:h.a,k0,k1,w:h.w||0,n:1})}
  const e=p.emo;if(e&&EMO[e.k]&&e.v>0&&!e.mk){const d=mkDur(e.e,e.k),k0=Math.max((e.w||0)*KD,now-Math.floor(d/2));const kd="e:"+(e.why||e.k);const x=p.mk.find(m=>m.kd===kd);
   if(x){x.s=Math.max(x.s,e.v);x.k1=Math.max(x.k1,k0+d);x.t=e.t}else p.mk.push({kd,k:e.k,s:e.v,why:e.why||"",e:e.e,c:e.c,t:e.t,k0,k1:k0+d,w:e.w||0,n:1})}
- if(p===S&&S.mood&&typeof S.mood.v==="number"&&!S.mood.mk){const M=S.mood;M.mk=1;for(const l of M.log||[]){if(!l||!l.d)continue;const k0=(l.w||0)*KD,k1=k0+mkDur(null,null,l.k);if(k1<=now)continue;
+ if(p===S&&S.mood&&typeof S.mood.v==="number"&&!S.mood.mk){const M=S.mood;M.mk=1;for(const l of M.log||[]){if(!l||!l.d||/^e:/.test(String(l.k||"")))continue;/* a feeling's old push: the feeling cause itself now carries it (signed sum) */const k0=(l.w||0)*KD,k1=k0+mkDur(null,null,l.k);if(k1<=now)continue;
    const kd=l.k&&String(l.k).indexOf("e:")===0?l.k:l.k||"x";const x=p.mk.find(m=>m.kd===kd);if(x)x.d=(x.d||0)+l.d;else p.mk.push({kd,k:null,s:0,d:l.d,why:l.why||"",k0,k1,w:l.w||0,n:l.n||1})}
-  const sum=p.mk.reduce((a,m)=>a+(m.d||0),0),rest=Math.round(M.v-sum);if(rest)p.mk.push({kd:"carry",k:null,s:0,d:rest,why:mkB().carryWhy,k0:now,k1:now+mkB().carry,w:emoW(),n:1})}}
+  const sum=p.mk.reduce((a,m)=>a+mkBarOne(m),0),rest=Math.round(M.v-sum);if(rest)p.mk.push({kd:"carry",k:null,s:0,d:rest,why:mkB().carryWhy,k0:now,k1:now+mkB().carry,w:emoW(),n:1})}}
 function mkSync(p){if(!mkOn()||!p)return;if(!Array.isArray(p.mk))mkMigrate(p);const now=mkNow();
  /* someone else changed the feeling: read it back */
  const L=p.__mkL,e=p.emo;
@@ -61,13 +61,24 @@ function mkSync(p){if(!mkOn()||!p)return;if(!Array.isArray(p.mk))mkMigrate(p);co
  else if(L&&L.k){if(!e){for(const m of p.mk)if(m.k===L.k){m.k1=now;MK.stat.drop++}}
   else if(e.mk&&e.k===L.k&&e.v<L.v&&L.v>0){const r=e.v/L.v;for(const m of p.mk)if(m.k===L.k&&m.k1>now)m.s=Math.round(m.s*r);MK.stat.scale++}}
  const n0=p.mk.length;p.mk=p.mk.filter(m=>m.k1>now);MK.stat.end+=n0-p.mk.length;
- const sum={},top={};let bar=0;for(const m of p.mk){bar+=m.d||0;if(!m.k||!EMO[m.k]||!(m.s>0))continue;sum[m.k]=(sum[m.k]||0)+m.s;if(!top[m.k]||m.s>top[m.k].s)top[m.k]=m}
+ const sum={},top={};let bar=0;for(const m of p.mk){bar+=mkBarOne(m);if(!m.k||!EMO[m.k]||!(m.s>0))continue;sum[m.k]=(sum[m.k]||0)+m.s;if(!top[m.k]||m.s>top[m.k].s)top[m.k]=m}
  let bk=null;for(const k in sum)if(!bk||sum[k]>sum[bk])bk=k;
  if(bk){const t=top[bk];p.emo={k:bk,v:Math.min(100,Math.round(sum[bk])),why:t.why,t:t.t==null?null:t.t,e:t.e,c:t.c,w:t.w,mk:1};p.__mkL={k:bk,v:p.emo.v}}else{p.emo=null;p.__mkL=null}
  if(p===S&&S.mood&&typeof S.mood==="object"){const M=S.mood;M.mk=1;M.v=Math.max(-100,Math.min(100,Math.round(bar)));
   M.log=p.mk.filter(m=>m.d).sort((a,b)=>b.k0-a.k0).map(m=>({w:m.w,k:m.kd,d:Math.round(m.d),why:String(m.why||"").slice(0,80),n:m.n||1,left:m.k1-now}))}
  p.__mkAt=now;try{emoSync(p)}catch(x){}}
 /* her bar pushes (jmood mbAdd) → causes; returns the real move of the bar */
+/* MOOD BAR = SIGNED SUM of every active cause (owner OD 17/11 ~18:33Z (1)): a bar push d + a feeling's BAL.mood.emo[k] × strength (good +, bad −) */
+function mkBarOne(m){return (m.d||0)+(m.k&&m.s>0?((BAL.mood.emo||{})[m.k]||0)*m.s:0)}
+function moodBar(p){try{const q=emoRes(p);if(!q)return 0;if(!mkOn()){if(q===S&&S.mood)return S.mood.v||0;const e=emoGet(q);return Math.round(((BAL.mood.emo||{})[e.k]||0)*(e.v||0))}
+ mkSync(q);if(q===S&&S.mood)return S.mood.v;let b=0;for(const m of q.mk||[])b+=mkBarOne(m);return Math.max(-100,Math.min(100,Math.round(b)))}catch(e){return 0}}
+window.moodBar=moodBar;
+/* GHEN (owner s35 Lượt 41; name OD 17/11 ~18:38Z): j1 ghenUp raised the SCORE v.ghen by d → a short CHẠNH LÒNG feeling cause (EMO.ghen) on v, true why,
+   aimed at the one who caused it (by), timer BAL.mood2.dur.e.ghenUp, strength d × BAL.mood2.ghen.k clamped [min, max]. NPC feelings on the host only. */
+function ghenFeel(v,d,why,by){if(typeof emoOn!=="function"||!emoOn()||!v||!(d>0))return;if(v!==S&&!mckWorld())return;const B=BAL.mood2.ghen;
+ const s=cl(Math.round(d*B.k),B.min,B.max),t=by==null?null:emoKey(by);const o=MCK.ev;MCK.ev="ghenUp";
+ try{emoSet(v,"ghen",s,String(why||"").slice(0,80)||"lòng ghen dâng lên",t)}finally{MCK.ev=o}MCK.stat.ghenUp=(MCK.stat.ghenUp||0)+1}
+window.ghenFeel=ghenFeel;
 function mkBar(d,why,kind){if(!mkOn()||!S||!d)return 0;mkSync(S);const v0=S.mood.v;const kd=kind||why||"x";mkAdd(S,{kd,k:null,d,why:String(why||"").slice(0,80)},mkDur(null,null,kd));S.__mkL=S.emo?{k:S.emo.k,v:S.emo.v}:null;mkSync(S);return S.mood.v-v0}
 function mkAll(){const L=[];const add=x=>{if(x&&typeof x==="object"&&(x.mk||x.emo))L.push(x)};try{for(const p of [S].concat(rivals||[])){add(p);for(const s of p.staff||[])add(s);for(const k of p.kids||[])add(k)}}catch(e){}
  add(S.emp);add(S.thO);add(S.maid);try{for(const m of S.men||[])add(m)}catch(e){}try{if(S.court)for(const c in S.court)add(S.court[c])}catch(e){}return L}

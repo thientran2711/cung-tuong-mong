@@ -286,7 +286,7 @@ function luxOf(p){const L=luxWorn(p);const sc=L.reduce((s,k)=>s+luxVal(k),0);con
 /* owner 11/15: only the worn TOTAL, neutral — never the allowance, never a level word or colour; she learns the limit from what happens */
 function kitLuxChip(x){return `<span class="kchip n kluxc">Xa xỉ <b>${x.sc}</b></span>`}
 function luxMonth(p){try{if(!p||p.out||p.alive===false)return"";const x=luxOf(p);let r="";const me=p===S;
- if(x.lv>=2){const n=x.lv===3?3:1;liveRivals(true).forEach(v=>{if(v===p)return;const m=tv(LUX_TR,v)||1;v.ghen=cl((v.ghen||0)+Math.max(1,Math.round(n*m*(me?1:.5))),0,100)});
+ if(x.lv>=2){const n=x.lv===3?3:1;liveRivals(true).forEach(v=>{if(v===p)return;const m=tv(LUX_TR,v)||1;ghenUp(v,Math.max(1,Math.round(n*m*(me?1:.5))),`thấy ${me?"ngươi":p.name} dùng đồ xa xỉ`,p)});
   if(me&&x.lv===3)r+="Hậu cung xì xào ngươi ăn mặc quá xa xỉ, nhiều người ghen. "}
  if(x.lv===3&&roll(cl(50-(p.duc|0)/2,10,50))){if(me){apply({th:-3});r+="Thái hậu chê ngươi phô trương. Thái hậu -3. "}else ap(p,{danh:-2})}
  if(x.lv===3&&roll(25)){if(me){apply({danh:-1});r+="Lời đồn ngươi phung phí lan khắp cung. Danh -1. "}else ap(p,{danh:-1})}

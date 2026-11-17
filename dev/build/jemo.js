@@ -9,7 +9,9 @@
    when present: "vì đang giận …"). Fog: her own always shown; others only when she has seen them lately / has tai mắt; else "chưa rõ".
    Badge: the painted seal img/kit/emo-<k>.webp drawn by pcPort on every frame size (KIT.md 31). Off switch for measuring: window.__emoOff=1.
    ===================================================================================================================== */
-const EMO={vui:"Vui",binh:"Bình thường",buon:"Buồn",gian:"Giận",so:"Sợ",ghen:"Ghen",lo:"Lo âu",dau:"Đau khổ",muu:"Toan tính"};
+/* the short jealous FEELING has its own name (owner OD 17/11 ~18:38Z "Dùng từ chạnh lòng được á"); the long-term SCORE v.ghen keeps "Ghen". Rename = this one line (VANPHONG). */
+const EMO_GHEN="Chạnh lòng";
+const EMO={vui:"Vui",binh:"Bình thường",buon:"Buồn",gian:"Giận",so:"Sợ",ghen:EMO_GHEN,lo:"Lo âu",dau:"Đau khổ",muu:"Toan tính"};
 /* default reaction of an event: [emotion, strength]; null = no feeling */
 const EMO_EV={selfUp:["vui",60],selfDown:["buon",55],rivalUp:["ghen",30],friendUp:["vui",20],foeDown:["vui",20],gift:["vui",18],slight:["gian",35],
  kidBorn:["vui",70],kidDie:["dau",95],otherKid:["ghen",25],punished:["so",50],cold:["dau",85],night:["vui",35],neglect:["buon",30],ill:["lo",35],

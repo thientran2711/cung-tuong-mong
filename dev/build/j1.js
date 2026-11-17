@@ -139,7 +139,12 @@ function kidDie(k,why,mine){k.alive=false;const wasH=k.heir;if(wasH){k.heir=fals
   return `<span class="r">${k.name} ${why}.</span>${mine?" Ngươi đau đớn khôn nguôi.":""}${wasH?" Ngôi Đông cung bỏ trống.":""} `}
 /* ghenN(n) = the jealousy one "every consort ghen +n" really adds (Hoàng thượng đa tình ×BAL.ghen.datinh). ONE CORE (OD:L1267): ghenAll applies it and every text that shows that gain prints ghenN(n). */
 function ghenN(n){let k=1;try{if(has("datinh"))k=BAL.ghen.datinh}catch(e){}return Math.round(n*k)}
-function ghenAll(n){const d=ghenN(n);liveRivals(true).forEach(v=>v.ghen=cl(v.ghen+d,0,100))}
+/* MOODKNOW step 0 (owner s35 Lượt 41 + OD 17/11 ~18:38Z): ONE way to RAISE the jealousy SCORE v.ghen. It adds n (clamped 0–100) and, for the real
+   rise, a short Chạnh lòng FEELING cause (jmoodknow ghenFeel: true why, aimed at the one who caused it 'by', khắc timer BAL.mood2.dur.e.ghenUp).
+   Lowering stays a plain write; the feeling ending never touches the score. Returns the real rise. */
+function ghenUp(v,n,why,by){if(!v||typeof v!=="object"||!(n>0))return 0;const g0=+v.ghen||0;v.ghen=cl(g0+n,0,100);const d=v.ghen-g0;
+ if(d>0&&typeof ghenFeel==="function")try{ghenFeel(v,d,why,by===undefined?S:by)}catch(e){}return d}
+function ghenAll(n,why){const d=ghenN(n);liveRivals(true).forEach(v=>ghenUp(v,d,why||"thấy ngươi nổi bật hơn người",S))}
 function namesInUse(){const a=[];if(S){a.push(S.name);if(S.maid)a.push(S.maid.name);if(S.foe)a.push(S.foe);if(S.st){if(S.st.guard)a.push(S.st.guard);if(S.st.stu)a.push(S.st.stu)}}(rivals||[]).forEach(v=>a.push(v.name));allKids().forEach(([k])=>a.push(k.name));return a}
 function freshName(){const used=namesInUse();const sur=used.map(n=>SURN.find(x=>n.startsWith(x+" "))).filter(Boolean);
   let ss=SURN.filter(x=>!sur.includes(x));if(!ss.length)ss=SURN;

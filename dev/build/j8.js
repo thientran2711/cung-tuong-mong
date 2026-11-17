@@ -147,7 +147,7 @@ A("plant","Cài đồ vào rương",{c:{},ok:(a,t)=>a.inv.some(e=>!e.h),o:(a,t)=
 A("steal","Tranh sủng",{c:{}/* cost = BAL.steal.cost via jsteal getter */,ok:(a,t)=>tonightOf()===t,o:a=>oSteal(a),f:(a,t)=>stealNight(a,t,"feign")});
 A("road","Chặn ngự giá",{c:{}/* cost = BAL.steal.cost via jsteal getter */,ok:(a,t)=>tonightOf()===t,o:a=>oSteal(a,"road"),f:(a,t)=>stealNight(a,t,"road")});
 A("gift","Tặng quà",{c:{},ok:(a,t)=>a.inv.some(e=>!e.h),o:()=>null,f:(a,t,ix)=>giveTo(a,t,ix)});
-function stealWin(a,t,mode){relAdd(a,t,-BAL.steal.rel);if(t!==S)t.ghen=cl(t.ghen+BAL.steal.ghen,0,100);if(a===S){S.tonight="me";nightScene()}else S.tonight=a;
+function stealWin(a,t,mode){relAdd(a,t,-BAL.steal.rel);if(t!==S)ghenUp(t,BAL.steal.ghen,`bị ${a===S?"ngươi":a.name} giành mất đêm thị tẩm`,a);if(a===S){S.tonight="me";nightScene()}else S.tonight=a;
  return `${NMc(a)} ${mode==="road"?"chặn ngự giá giữa đường":"sai người báo đau tim"}, Hoàng thượng sang cung ${NM(a)} thay vì ${NM(t)}. `}
 function tKid(t){const L=kidsOf(t).filter(k=>k.age>=3||k.heir);return L.sort((a,b)=>((+b.heir)-(+a.heir))||((b.sex==="m")-(a.sex==="m"))||(b.fond-a.fond))[0]||null}
 function targetKid(v){return tKid(v)}
@@ -359,7 +359,7 @@ function pregMonthP(p){if(!p.preg)return"";p.preg++;const me=p===S;
   if(roll((p.doctor?1.5:3)+(noRec?4:0))){const why=noRec?"Sổ Kính sự phòng không ghi đêm thị tẩm nào trước khi có 'thai', giả mang thai bị lật tẩy, tội khi quân":"Giả mang thai bị thái y khác bắt mạch phát hiện, tội khi quân";if(me){deathSentence(why);return""}deathSentence(p,why);return `${p.name} giả mang thai bị lật tẩy. `}
   if(p.preg>=10){p.preg=0;p.fake=0;if(roll(odA(p,30+p.tamco/2+p.mat*4)))return (me?"Đêm “lâm bồn”, bà đỡ lén đưa vào một hài nhi từ ngoài cung. ":"")+birthP(p,true);if(me){deathSentence("Tráo con bị bắt quả tang, tội khi quân");return""}deathSentence(p,"Tráo con bị bắt quả tang, tội khi quân");return""}
   return""}
- let ev="";if(p.preg===4&&p.hidden){p.hidden=false;if(me)ghenAll(BAL.ghen.preg);ev+=me?"Bụng đã lộ, cả cung biết ngươi có thai. ":`${p.name} có thai đã lộ. `}
+ let ev="";if(p.preg===4&&p.hidden){p.hidden=false;if(me)ghenAll(BAL.ghen.preg,"ngươi mang long thai");ev+=me?"Bụng đã lộ, cả cung biết ngươi có thai. ":`${p.name} có thai đã lộ. `}
  if(p.preg<10){let risk=(p.preg<=3||p.preg>=7?6:2)*(typeof BAL==="object"&&BAL.mort&&BAL.mort.on?BAL.mort.birth.misX:1)+(p.suc<BAL.pgRisk.lowSucAt?BAL.pgRisk.lowSuc:0);if(p.anthai)risk/=2;
   if(roll(risk)){p.preg=0;p.hidden=false;ap(p,{suc:-BAL.pgRisk.misSuc});p.misN=(p.misN||0)+1;ev+=me?`<span class="r">Ngươi động thai, sảy mất đứa bé.</span> Sức -${BAL.pgRisk.misSuc}. `:`${p.name} động thai, sảy mất đứa bé. `}return ev}
  p.preg=0;p.hidden=false;return ev+birthP(p,false)}
@@ -373,8 +373,8 @@ function birthP(p,fake){const me=p===S;
    else{ap(p,{danh:-10,sung:-10});punish(p,"bị đồn sinh ra yêu vật",2);return ev+(me?`<span class="r">Ngươi tỉnh lại thì bên cạnh là một con mèo chết lột da. Cả cung đồn ngươi sinh ra yêu vật.</span> Danh -10 · Sủng -10. Đứa trẻ không rõ tung tích. `:`<span class="r">${p.name} lâm bồn, bên cạnh chỉ có một con mèo chết lột da; cả cung đồn nàng sinh yêu vật.</span> `)}}}
  const n=!fake&&roll(4)?2:1;if(n===2)ev+=me?`<b class="g">Song thai!</b> `:`${p.name} sinh đôi. `;let up=false;
  for(let i=0;i<n;i++){const k=mkKid(R(2)?"m":"f",0);p.kids.push(k);
-  if(k.sex==="m"){ev+=me?`<b class="g">Ngươi sinh hạ ${k.name}.</b> `:`${p.name} sinh hạ ${k.name}. `;if(me)ghenAll(BAL.ghen.son);if(!up&&rkOf(p)<6){up=true;if(typeof promoReward==="function")ev+=promoReward(p,p.kids.filter(x=>x.sex==="m").length===1?"son1":"son");else{if(me)S.rank++;else p.rank++;p.lastPromo=S.turn;ev+=`${me?"Được":p.name+" được"} tấn phong ${rkName(p)}. `}}ap(p,{sung:10,danh:10,th:15});S.emp.mood=0;p.bonusPay=(p.bonusPay||0)+20;if(roll(50))bestow(p,"son")}
-  else{ev+=me?`Ngươi sinh hạ ${k.name}. `:`${p.name} sinh hạ ${k.name}. `;if(me)ghenAll(BAL.ghen.girl);if(!up&&rkOf(p)<6&&typeof promoReward==="function"&&!(n===2&&i===0)){up=true;ev+=promoReward(p,"dau")}ap(p,{sung:5,danh:4});p.bonusPay=(p.bonusPay||0)+10;if(roll(50))bestow(p,"dau")}}
+  if(k.sex==="m"){ev+=me?`<b class="g">Ngươi sinh hạ ${k.name}.</b> `:`${p.name} sinh hạ ${k.name}. `;if(me)ghenAll(BAL.ghen.son,"ngươi sinh hoàng tử");if(!up&&rkOf(p)<6){up=true;if(typeof promoReward==="function")ev+=promoReward(p,p.kids.filter(x=>x.sex==="m").length===1?"son1":"son");else{if(me)S.rank++;else p.rank++;p.lastPromo=S.turn;ev+=`${me?"Được":p.name+" được"} tấn phong ${rkName(p)}. `}}ap(p,{sung:10,danh:10,th:15});S.emp.mood=0;p.bonusPay=(p.bonusPay||0)+20;if(roll(50))bestow(p,"son")}
+  else{ev+=me?`Ngươi sinh hạ ${k.name}. `:`${p.name} sinh hạ ${k.name}. `;if(me)ghenAll(BAL.ghen.girl,"ngươi sinh công chúa");if(!up&&rkOf(p)<6&&typeof promoReward==="function"&&!(n===2&&i===0)){up=true;ev+=promoReward(p,"dau")}ap(p,{sung:5,danh:4});p.bonusPay=(p.bonusPay||0)+10;if(roll(50))bestow(p,"dau")}}
  return ev}
 /* months between decrees grow with rank: 3 up to Tần, then 5, 7, 9 */
 function promoGap(r){return r<3?3:3+(r-2)*2}
@@ -393,8 +393,8 @@ function seatW(p){const dad=p.dad||40;return 30+Math.min(3,sonsOf(p).length)*15+
 function seatRivals(p){const L=liveRivals(false).filter(v=>v!==p&&v.rank>=5&&!v.confined&&!v.out);if(p!==S&&S.rank>=5&&!S.confined&&!S.out&&promoReqP(S).every(x=>x[0]||/Cách lần/.test(x[1])))L.push(S);return L}
 function promoteP(p){if(rkOf(p)>=7||!promoReqP(p).every(x=>x[0]))return"";const me=p===S;p.lastPromo=S.turn;
  if(rkOf(p)===6)return"";
- if(false){const R2=seatRivals(p);if(R2.length){const tot=R2.reduce((s,v)=>s+seatW(v),seatW(p));if(!roll(100*seatW(p)/tot)){const w=R2.sort((a,b)=>seatW(b)-seatW(a))[0];if(S.rank>=7)return"";if(w===S){S.rank=7;S.justCrowned=1;S.lastPromo=S.turn;ghenAll(BAL.ghen.rankUp);if(qOn())rivals[0].queen=false;return `<b class="g">Thánh chỉ: lập ${S.name} làm Hoàng hậu, chủ trì lục cung.</b> `}w.rank=6;w.queen=true;rivals.splice(rivals.indexOf(w),1);rivals.unshift(w);return `<b>Thánh chỉ: lập ${w.name} làm Hoàng hậu</b>${me?"; ngươi lỡ ngôi trung cung":""}. `}}}
- if(me){S.rank++;ghenAll(BAL.ghen.rankUp);fx("gold");if(empGive(S,35,"promo"))bestow(S,"promo");if(S.rank===7){if(qOn())rivals[0].queen=false;return `<b class="g">Thánh chỉ: lập ${S.name} làm Hoàng hậu, chủ trì lục cung.</b> `}return `<b class="g">Thánh chỉ: tấn phong ${S.name} làm ${RANKS[S.rank].n}.</b> `}
+ if(false){const R2=seatRivals(p);if(R2.length){const tot=R2.reduce((s,v)=>s+seatW(v),seatW(p));if(!roll(100*seatW(p)/tot)){const w=R2.sort((a,b)=>seatW(b)-seatW(a))[0];if(S.rank>=7)return"";if(w===S){S.rank=7;S.justCrowned=1;S.lastPromo=S.turn;ghenAll(BAL.ghen.rankUp,"ngươi được tấn phong");if(qOn())rivals[0].queen=false;return `<b class="g">Thánh chỉ: lập ${S.name} làm Hoàng hậu, chủ trì lục cung.</b> `}w.rank=6;w.queen=true;rivals.splice(rivals.indexOf(w),1);rivals.unshift(w);return `<b>Thánh chỉ: lập ${w.name} làm Hoàng hậu</b>${me?"; ngươi lỡ ngôi trung cung":""}. `}}}
+ if(me){S.rank++;ghenAll(BAL.ghen.rankUp,"ngươi được tấn phong");fx("gold");if(empGive(S,35,"promo"))bestow(S,"promo");if(S.rank===7){if(qOn())rivals[0].queen=false;return `<b class="g">Thánh chỉ: lập ${S.name} làm Hoàng hậu, chủ trì lục cung.</b> `}return `<b class="g">Thánh chỉ: tấn phong ${S.name} làm ${RANKS[S.rank].n}.</b> `}
  if(p.rank+1>=7){if(S.rank>=7)return"";p.rank=6;p.queen=true;const i=rivals.indexOf(p);rivals.splice(i,1);rivals.unshift(p);return `<b>Thánh chỉ: lập ${p.name} làm Hoàng hậu.</b> `}
  p.rank++;if(empGive(p,35,"promo"))bestow(p,"promo");return `${p.name} được tấn phong ${RANKS[p.rank].n}. `}
 function promote(){return promoteP(S)}
@@ -440,7 +440,7 @@ function npcMonthly(v){let ev="";const cost=k=>5+v.arts[k]*5;const agd=window.ag
 function rivalsTurn(){const live=liveRivals(true);let ev="";
  for(const v of live){if(!v.alive||v.out)continue;v.sung=cl(v.sung+R(3)-1,0,100);if(v.block)v.block--;
   if(S.sung>v.sung-10&&!v.queen&&roll(33))v.rel-=1;if(v.queen&&S.rank>=4&&roll(50))v.rel-=1;
-  if(S.sac>75)v.ghen=cl(v.ghen+1,0,100);v.ghen=cl(v.ghen-(v.rel>20?3:1),0,100);v.pg=Math.max(0,v.pg-1);
+  if(S.sac>75)ghenUp(v,1,"thấy nhan sắc ngươi hơn người",S);v.ghen=cl(v.ghen-(v.rel>20?3:1),0,100);v.pg=Math.max(0,v.pg-1);
   if(v.queen&&!(window.agDOn&&agDOn())){const g=mindPickBy(others(v).filter(p=>evG(v,p)>=2&&rel(v,p)<0),p=>evG(v,p)*BAL.mind.pick.j8ev.ev-rel(v,p)/BAL.mind.pick.j8ev.rel,v);if(g&&roll(35*mindW(v,"punish")))/* npc-mind: was FIRST + flat 35 */{ev+=seenNPC(v,g,judge(v,g));if(S.dead)return ev;continue}}
   const t=pickTarget(v);if(!t)continue;
   let want=((v.malice/100)*(rel(v,t)<0?1:.25)+hostility(v,t)/200)*(rkOf(t)>=rkOf(v)-1||(t===S&&v.ghen>=60)?1:.4);if(t.shield)want*=.5;
@@ -455,7 +455,7 @@ if(queenP())S.vacSince=null;
   if(S.vacSince==null)S.vacSince=S.turn;const OUT={outsider:1};if(roomFor("consort")&&S.turn-S.vacSince>=18)C.push(OUT);const wt=p=>p===OUT?100:seatW(p);
   if(C.length){let w=C[0];if(typeof empOn==="function"&&empOn())w=empSeatPick(C,wt);else{const tot=C.reduce((s,p)=>s+wt(p),0);let r=Math.random()*tot;for(const p of C){r-=wt(p);if(r<=0){w=p;break}}}
    if(w===OUT){const n=newRival(7,true);Object.assign(n,drawFace());n.rank=6;n.queen=true;n.dad=80;rivals.unshift(n);ev+=`<b>Thánh chỉ: rước ${n.name}, con gái danh môn, vào cung lập làm Hoàng hậu.</b>${C.includes(S)?" Ngươi lỡ ngôi trung cung.":""} `}else
-   if(w===S){S.rank=7;S.justCrowned=1;S.lastPromo=S.turn;ghenAll(BAL.ghen.rankUp);ev+=`<b class="g">Thánh chỉ: lập ${S.name} làm Hoàng hậu, chủ trì lục cung.</b> `}else{w.rank=6;w.queen=true;rivals.splice(rivals.indexOf(w),1);rivals.unshift(w);ev+=`<b>Thánh chỉ: lập ${w.name} làm Hoàng hậu, chủ trì lục cung.</b>${C.includes(S)?" Ngươi lỡ ngôi trung cung.":""} `}}}
+   if(w===S){S.rank=7;S.justCrowned=1;S.lastPromo=S.turn;ghenAll(BAL.ghen.rankUp,"ngươi được tấn phong");ev+=`<b class="g">Thánh chỉ: lập ${S.name} làm Hoàng hậu, chủ trì lục cung.</b> `}else{w.rank=6;w.queen=true;rivals.splice(rivals.indexOf(w),1);rivals.unshift(w);ev+=`<b>Thánh chỉ: lập ${w.name} làm Hoàng hậu, chủ trì lục cung.</b>${C.includes(S)?" Ngươi lỡ ngôi trung cung.":""} `}}}
  if(liveRivals(true).length<4&&R(12)===0&&roomFor("consort")){const n=newRival(R(3));Object.assign(n,drawFace());rivals.push(n);ev+=`Đợt tuyển tú mới: ${n.name} vào cung, phong ${RANKS[n.rank].n}. `}
  return ev}
 function rivalsMonth(){let ev="";
@@ -473,7 +473,7 @@ function rivalsMonth(){let ev="";
 function festival(title,k,lbl){const C=consorts();if(C.length<2)return"";const art=p=>k==="sac"?artW2(p,"vu")*6:(artW2(p,"cam")+artW2(p,"thi"))*3;
  const sc=C.map(p=>(k==="sac"?effSac(p):p[k])+art(p)+R(wet()?40:30)+(wet()&&k==="sac"?-artW2(p,"vu")*3:0));const wi=sc.indexOf(Math.max(...sc)),w=C[wi];
  ap(w,{sung:8,danh:3});if(empGive(w,50,"contest"))bestow(w,"contest");
- if(w===S){ghenAll(BAL.ghen.festival);return `<span class="g">${title}: ${lbl} của ngươi át cả hậu cung, Hoàng thượng ban thưởng.</span> Sủng +8 · Danh +3. `}
+ if(w===S){ghenAll(BAL.ghen.festival,"ngươi nổi bật trong ngày hội");return `<span class="g">${title}: ${lbl} của ngươi át cả hậu cung, Hoàng thượng ban thưởng.</span> Sủng +8 · Danh +3. `}
  apply({danh:-2});return `<span class="r">${title}: ${w.name} chiếm hết phong quang, ngươi lu mờ.</span> Danh -2. `}
 function artW2(p,k){const l=p.arts[k];return l*(((["cam","ky","thi","hoa"].includes(k)&&has("trongtai"))||(k==="vu"&&has("mesac")))?2:1)}
 

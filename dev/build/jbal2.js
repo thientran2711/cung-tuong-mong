@@ -1133,3 +1133,8 @@ BAL.mood2={def:8,max:16,carry:24,kd:16,carryWhy:"chuyện cũ còn vương",
    friendDie:160,foeDie:16,night:16,neglect:24,ill:32,mistressUp:8,mistressDown:16,motherDie:320,motherCold:96,clanUp:32,clanDown:32,slap:6},
   k:{vui:8,binh:4,buon:12,gian:8,so:6,ghen:12,lo:10,dau:48,muu:16,khoc:4,hon:8},
   bar:{ok:6,fail:6,rest:8,comfort:12,w:16,ea:6}}};
+/* MOOD BAR = SIGNED SUM (owner OD 17/11 ~18:33Z (1)): the bar of anyone = Σ bar pushes d + Σ BAL.mood.emo[feeling] × strength of every ACTIVE cause
+   (good +, bad −), clamped ±100; khóc / hờn weigh like đau khổ / giận. Emotion acts and outbursts need BOTH that bar past its line (her and NPCs:
+   BAL.mood.band, BAL.ea.out.v) AND the matching dominant feeling (the seal). GHEN: every raise of the SCORE v.ghen (ghenUp, j1) also adds a short
+   Chạnh lòng FEELING cause: strength = raise × ghen.k clamped [ghen.min, ghen.max], timer dur.e.ghenUp khắc, aimed at the one who caused it. */
+Object.assign(BAL.mood.emo,{khoc:-.4,hon:-.2});BAL.mood2.dur.e.ghenUp=10;BAL.mood2.ghen={k:2,min:16,max:50};

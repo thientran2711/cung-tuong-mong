@@ -38,7 +38,7 @@ ev("ghost",()=>SEASON[S.month-1]==="Thu"||SEASON[S.month-1]==="Đông",()=>({v:(
 ev("pact",()=>qOn()&&liveRivals(false).length,()=>({v:rvTop((a,b)=>b.rel-a.rel).id}),p=>{const v=RV(p.v),q=rivals[0];if(!v)return null;return{who:pv(v),
  t:`${v.name} hẹn ngươi ở đình Thiên Thu: “Hoàng hậu ${q.name} đè đầu cả hậu cung đã lâu.<br>Hai ta chung một thuyền, được chăng?”`,o:[
  {n:"Kết minh",fx:{hh:-5},x:`${v.name} thiện cảm +25 · nàng kể chuyện sai trái của Hoàng hậu, nếu có: chứng cứ ${balSg(BAL.eff.j7.evGo)}`,go:()=>{v.rel+=25;/*evok: capped; preview says "nếu có"*/evA(S,q,BAL.eff.j7.evGo)}},
- {n:"Mật báo Hoàng hậu",fx:{hh:12},x:`${v.name} thù -30`,go:()=>{v.rel-=30;v.ghen=cl(v.ghen+10,0,100)}},
+ {n:"Mật báo Hoàng hậu",fx:{hh:12},x:`${v.name} thù -30`,go:()=>{v.rel-=30;ghenUp(v,10,"bị ngươi mật báo với Hoàng hậu",S)}},
  {n:"Từ chối khéo",fx:{duc:1}}]}});
 /* 2f2 (owner OD 17/11 ~16:50Z): the volunteer is a REAL servant of another palace who wants something from her (tmVol: her tmOdds for that person
    reach BAL.ag.know.tm.vol.min) — he chose to come; she decides. No nameless "Tai mắt +1". */
@@ -73,7 +73,7 @@ ev("newgirl",()=>liveRivals(true).length<9&&roomFor("consort"),null,()=>({
  t:"Con gái Thượng thư Lễ bộ được tuyển vào cung, nghe nói dung mạo khuynh thành.<br>Hôm nay nàng đến các cung bái kiến.",o:[
  {n:"Tặng trâm, kết thân",fx:{bac:-20},x:"tân nhân thiện cảm +20",go:()=>{const n=newGirl(20);log(`${n.name} vào cung, phong ${RANKS[n.rank].n}; nàng mến ngươi.`)}},
  {n:"Tiếp đãi lạnh nhạt",fx:{},x:"tân nhân thiện cảm -10",go:()=>{const n=newGirl(-10);log(`${n.name} vào cung, phong ${RANKS[n.rank].n}.`)}},
- {n:"Dằn mặt ngay buổi đầu",fx:{duc:-4,tamco:1},x:"tân nhân sợ, thù -25",go:()=>{const n=newGirl(-25);n.ghen=cl(n.ghen+15,0,100);log(`${n.name} vào cung, khóc suốt đêm sau buổi bái kiến.`)}}]}));
+ {n:"Dằn mặt ngay buổi đầu",fx:{duc:-4,tamco:1},x:"tân nhân sợ, thù -25",go:()=>{const n=newGirl(-25);ghenUp(n,15,"bị ngươi dằn mặt ngày đầu vào cung",S);log(`${n.name} vào cung, khóc suốt đêm sau buổi bái kiến.`)}}]}));
 /* children */
 ev("princefever",()=>S.kids.some(k=>k.alive&&k.age<10)&&(mon(1)||mon(8)),()=>({k:pick(S.kids.filter(k=>k.alive&&k.age<10)).name,o:od(40+S.arts.y*12)}),p=>{const k=KID(p.k);if(!k)return null;return{
  t:`Đêm yến tiệc, ${k.name} sốt cao co giật. Tiếng nhạc bên Thái Hòa điện vẫn vọng sang.`,o:[
@@ -107,7 +107,7 @@ ev("comet",()=>S.year>=2,()=>{const me=roll(40)||!liveRivals(false).length;retur
 ev("phoenix",()=>S.rank>=3&&S.rank<7,null,()=>({
  t:"Thầy tướng ở chùa Bảo Hoa phán: trong hậu cung có một người mệnh phượng hoàng, và chỉ vào cung ngươi.",o:[
  {n:"Khiêm nhường chối từ",fx:{duc:3,hh:5}},
- {n:"Để lời đồn lan xa",fx:{danh:8,hh:-15},x:`cả hậu cung ghen +${ghenN(BAL.ghen.rumor)}`,go:()=>ghenAll(BAL.ghen.rumor)},
+ {n:"Để lời đồn lan xa",fx:{danh:8,hh:-15},x:`cả hậu cung ghen +${ghenN(BAL.ghen.rumor)}`,go:()=>ghenAll(BAL.ghen.rumor,"lời đồn về ngươi lan khắp cung")},
  {n:"Bịt miệng thầy tướng",fx:{bac:-30,tamco:1}}]}));
 /* festivals */
 ev("doanngo",()=>mon(5),null,()=>({
@@ -156,7 +156,7 @@ ev("taster",()=>S.rank>=2&&liveRivals(false).length,()=>({v:rvTop((a,b)=>b.malic
  t:"Tiểu thái giám nếm canh ngự ban cho ngươi bỗng ôm bụng ngã gục, môi tím tái.",o:[
  {n:"Truy đến cùng Ngự thiện phòng",fx:{suc:-10},x:`${word(p.o)} · thành: chứng cứ ${v.name} ${balSg(BAL.eff.j7.evGo_7)}`,go:()=>{if(roll(p.o)){evStory(v,BAL.eff.j7.evGo_7,"sai người bỏ thuốc vào đồ ăn của ngươi");log(`Đầu bếp khai ra người của ${v.name}.`)}else v.rel-=10}},
  {n:"Đổi người nấu, giấu chuyện",fx:{bac:-30},x:"2 tháng phi tần khó hại ngươi",go:()=>{S.shield=Math.max(S.shield,2)}},
- {n:"Khóc kể với Hoàng thượng",fx:{sung:3},x:`cả hậu cung bị tra, ai cũng ghen +${ghenN(BAL.ghen.cry)}`,go:()=>ghenAll(BAL.ghen.cry)}]}});
+ {n:"Khóc kể với Hoàng thượng",fx:{sung:3},x:`cả hậu cung bị tra, ai cũng ghen +${ghenN(BAL.ghen.cry)}`,go:()=>ghenAll(BAL.ghen.cry,"ngươi khóc kể khiến cả hậu cung bị tra")}]}});
 ev("letterhome",()=>S.turn>=3,()=>({o:od(30+S.sung/3)}),p=>({
  t:`Thư nhà giấu trong giỏ trái cây: ${S.origin.k==="td"?"vú nuôi năm xưa":S.kc&&S.kc.fam&&!S.kc.fam.some(m=>m.r==="me")?"tổ mẫu":"mẹ già"} lâm bệnh nặng, chỉ mong gặp mặt ngươi lần cuối.`,o:[
  {n:"Gửi 50 lượng chữa bệnh",fx:{bac:-50,duc:3}},
@@ -186,5 +186,5 @@ ev("rvmusk",()=>liveRivals(false).length>=2,()=>{const t=two();if(!t)return null
 ev("rvbribe",()=>liveRivals(false).length>=2,two,p=>{const a=RV(p.a),b=RV(p.b);if(!a||!b)return null;return{who:pEunCourt("ksp"),
  t:`${a.name} đút lót Kính sự phòng giấu thẻ bài của ${b.name}. Tổng quản thái giám đánh tiếng: ngươi muốn chen một chân không?`,o:[
  {n:"Góp bạc, giấu cả thẻ nàng",fx:{bac:-30},x:"tuần này và tuần sau dễ được thị tẩm",go:()=>{S.tablet=2;b.sung=cl(b.sung-5,0,100)}},
- {n:`Mách ${b.name}`,fx:{},x:`${b.name} thiện cảm +20 · ${a.name} ghen +10`,go:()=>{b.rel+=20;a.ghen=cl(a.ghen+10,0,100)}},
+ {n:`Mách ${b.name}`,fx:{},x:`${b.name} thiện cảm +20 · ${a.name} ghen +10`,go:()=>{b.rel+=20;ghenUp(a,10,`bị ngươi mách với ${b.name}`,S)}},
  {n:"Không dính vào",fx:{}}]}});
