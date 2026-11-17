@@ -34,49 +34,61 @@ const gradeOf=k=>{try{const a=typeof itemArt==="function"?itemArt(k):null;return
 const nameOf=k=>{try{return itm(k).n||k}catch(e){return k}};
 const srcOf=k=>{try{return typeof kitItemSrc==="function"?kitItemSrc(k,""):""}catch(e){return""}};
 const imperial=e=>!!e&&(e.from==="emp"||e.from==="th"||e.ngu===1);
-/* ---------- data layer: real API or fixtures ---------- */
-function mkFix(){/* a believable chest: 2 real pieces per group, 5 groups already on the shelf; one piece above her rank to show the warning */
- const keys=[];try{for(const k of Object.keys(IT)){if(k&&srcOf(k)&&!/^wd-/.test(k))keys.push(k);if(keys.length>=26)break}}catch(e){}
- const G=GFIX,inv=[],placed={};
- keys.forEach((k,i)=>{const g=G[i%G.length][0];const e={k,g,over:i===3?1:0};if(i===5)e.from="emp";if(i<5)placed[g]=e;else inv.push(e)});
+/* ---------- data layer: real API or fixtures (review/display-shelf-r3: UP TO BAL.shelf.per pieces per group, slots "<g>", "<g>~1".."<g>~(per-1)") ---------- */
+const FIXON=()=>KDR.fixture||!real();
+const perN=()=>FIXON()?5:Math.max(1,(BAL.shelf.per|0)||1);
+const slotsOf=g=>{if(!FIXON()&&typeof shelfSlots==="function")return shelfSlots(g);const L=[g];for(let i=1;i<perN();i++)L.push(g+"~"+i);return L};
+const grpOfE=e=>{try{if(FIXON())return e.g;return typeof shelfGrpE==="function"?shelfGrpE(e):shelfGrp(e.k)}catch(x){return null}};
+function mkFix(){/* a believable chest: 2 real pieces per group; 5 groups already on the shelf, two of them holding 2-3 pieces; one piece above her rank to show the warning */
+ const keys=[];try{for(const k of Object.keys(IT)){if(k&&srcOf(k)&&!/^wd-/.test(k))keys.push(k);if(keys.length>=30)break}}catch(e){}
+ const G=GFIX,inv=[],placed={},used={};
+ keys.forEach((k,i)=>{const g=G[i%G.length][0];const e={k,g,over:i===3?1:0};if(i===5)e.from="emp";
+  if(i<5||i===15||i===16||i===27){const n=used[g]=(used[g]||0);used[g]++;placed[n?g+"~"+n:g]=e}else inv.push(e)});
  return{inv,placed}}
 const fixOf=()=>KDR.fix||(KDR.fix=mkFix());
-function placedOf(g){if(KDR.fixture||!real()){return KDR.p===S||!KDR.p?fixOf().placed[g]||null:null}
- try{return shelfOf(KDR.p).g[g]||null}catch(e){return null}}
+function placedOf(g){/* [[slot, entry]] of one group in slot order (a piece keeps its spot) */
+ if(FIXON()){if(KDR.p!==S&&KDR.p)return[];const F=fixOf();return slotsOf(g).filter(s=>F.placed[s]).map(s=>[s,F.placed[s]])}
+ try{const z=shelfOf(KDR.p).g;return slotsOf(g).filter(s=>z[s]).map(s=>[s,z[s]])}catch(e){return[]}}
 function ownedOf(g){/* [{e, ix}] owned pieces of this group, in chest order (her room only) */
- if(KDR.fixture||!real())return fixOf().inv.map((e,ix)=>({e,ix})).filter(x=>x.e.g===g);
- const out=[];(S.inv||[]).forEach((e,ix)=>{try{if(e&&!e.h&&shelfGrp(e.k)===g)out.push({e,ix})}catch(x){}});return out}
-const whyNot=e=>{if(KDR.fixture||!real())return"";try{return shelfWhyNot(S,e)||""}catch(x){return""}};
-function doPut(ix){if(KDR.fixture||!real()){const F=fixOf(),e=F.inv[ix];if(!e)return{ok:false};const old=F.placed[e.g];F.inv.splice(ix,1);if(old)F.inv.push(old);F.placed[e.g]=e;return{ok:true,g:e.g,n:nameOf(e.k)}}
+ if(FIXON())return fixOf().inv.map((e,ix)=>({e,ix})).filter(x=>x.e.g===g);
+ const out=[];(S.inv||[]).forEach((e,ix)=>{try{if(e&&!e.h&&grpOfE(e)===g)out.push({e,ix})}catch(x){}});return out}
+const whyNot=e=>{if(FIXON())return"";try{return shelfWhyNot(S,e)||""}catch(x){return""}};
+function doPut(ix){if(FIXON()){const F=fixOf(),e=F.inv[ix];if(!e)return{ok:false};const S0=slotsOf(e.g);let s=S0.find(x=>!F.placed[x]);let old=null;if(!s){s=S0[S0.length-1];old=F.placed[s]}
+  F.inv.splice(ix,1);if(old)F.inv.push(old);F.placed[s]=e;return{ok:true,g:e.g,n:nameOf(e.k)}}
  return shelfPut(S,ix)}
-function doTake(g){if(KDR.fixture||!real()){const F=fixOf(),e=F.placed[g];if(!e)return"";delete F.placed[g];F.inv.push(e);return nameOf(e.k)}
- return shelfTake(S,g)}
+function doTake(slot){if(FIXON()){const F=fixOf(),e=F.placed[slot];if(!e)return"";delete F.placed[slot];F.inv.push(e);return nameOf(e.k)}
+ return shelfTake(S,slot)}
 /* a piece as the view needs it */
 function pc(e){if(!e)return null;const k=e.k;const over=e.over!=null?!!e.over:(()=>{try{return itm(k).rk>rk()}catch(x){return false}})();
  return{k,e,name:nameOf(k),src:srcOf(k),grade:gradeOf(k),lux:lux(k),over,ngu:imperial(e),wither:!!(e.pc!=null&&typeof BAL!=="undefined"&&BAL.shelf&&BAL.shelf.plant&&(e.pc|0)<BAL.shelf.plant.wither)}}
 /* ---------- markup (pure) ---------- */
-function shelfHTML(g,e,o){const P=pc(e),ro=!!o.ro,s=o.slot;
+/* spot x (fraction of the picture) of the i-th of n pieces of a compartment: slot.spots (measured, reports/display-bg.md) or n evenly spaced points across the compartment (stub) */
+const spotX=(s,i,n)=>s.spots&&s.spots[i]!=null?s.spots[i]:s.cx-s.w/2+s.w*(i+.5)/n;
+function shelfHTML(g,list,o){const ro=!!o.ro,s=o.slot,n=o.per||5;list=list||[];
+ const Ps=list.map(([sl,e],i)=>({sl,P:pc(e),i}));
  const lab=`<span class="kdr-lab kchip n">${esc(gName(g))}</span>`;
- const tags=P&&!ro?`${P.over?`<span class="kdr-tag kchip r">Vượt phẩm</span>`:""}${P.wither?`<span class="kdr-tag kchip r">Héo</span>`:""}`:"";
- const stand=P?`<img class="kdr-it${P.wither?" kdr-wither":""}" src="${esc(P.src)}" alt="" draggable="false" onerror="this.style.visibility='hidden'">`:`<i class="kdr-empty">${ro&&!o.known?"Chưa thấy":"Còn trống"}</i>`;
- const lbl=`${gName(g)}: ${P?P.name:"còn trống"}`;
+ const over=!ro&&Ps.some(x=>x.P.over),wi=!ro&&Ps.some(x=>x.P.wither);
+ const tags=`${over?`<span class="kdr-tag kchip r">Vượt phẩm</span>`:""}${wi?`<span class="kdr-tag kchip r">Héo</span>`:""}`;
+ const si=sl=>{const k=String(sl).split("~");return k.length>1?+k[1]:0};
+ const stand=Ps.length?Ps.map(x=>{const sx=spotX(s,si(x.sl),n),left=((sx-(s.cx-s.w/2))/s.w*100).toFixed(2);return `<img class="kdr-it${x.P.wither?" kdr-wither":""}" data-kdrp="${esc(x.sl)}" style="left:${left}%;max-width:${(92/n).toFixed(1)}%" src="${esc(x.P.src)}" alt="" draggable="false" onerror="this.style.visibility='hidden'">`}).join(""):`<i class="kdr-empty">${ro&&!o.known?"Chưa thấy":"Còn trống"}</i>`;
+ const lbl=`${gName(g)}: ${Ps.length?Ps.map(x=>x.P.name).join(", "):"còn trống"}`;
  const box=`left:${((s.cx-s.w/2)*100).toFixed(3)}%;top:${((s.fy-s.h)*100).toFixed(3)}%;width:${(s.w*100).toFixed(3)}%;height:${(s.h*100).toFixed(3)}%`;
- return `<button type="button" class="kdr-sh${P?" has":""}" data-kdrg="${esc(g)}" aria-label="${esc(lbl)}" title="${esc(lbl)}" style="${box}">${lab}${tags}${stand}<span class="kdr-plank" aria-hidden="true"></span></button>`}
-function kitDisplayRoomHTML(m){m=m||{};const G=m.groups||groups(),ro=!!m.ro;const n=G.filter(x=>m.placed&&m.placed[x[0]]).length;
+ return `<button type="button" class="kdr-sh${Ps.length?" has":""}" data-kdrg="${esc(g)}" aria-label="${esc(lbl)}" title="${esc(lbl)}" style="${box}">${lab}${tags}${stand}<span class="kdr-plank" aria-hidden="true"></span></button>`}
+function kitDisplayRoomHTML(m){m=m||{};const G=m.groups||groups(),ro=!!m.ro;const n=G.reduce((a,x)=>a+((m.placed&&m.placed[x[0]])||[]).length,0);
  const title=m.title||"Nơi trưng bày";const P=(m.land!=null?m.land:kv2())?KDR_PIC.land:KDR_PIC.port;let gi=0;
  const segs=P.segs.map(sg=>`<div class="kdr-seg" style="--ar:${sg.ar}"><img class="kdr-bgi" src="${esc(sg.src)}" alt="" draggable="false" onload="this.parentNode.classList.remove('kdr-nopic')" onerror="this.remove()">`+
-  sg.slots.map(sl=>{const x=G[gi++];return x?shelfHTML(x[0],m.placed&&m.placed[x[0]],{ro,known:m.known!==false,slot:sl}):""}).join("")+`</div>`).join("");
- return `<div class="kdr-hd"><span class="kdr-cart">${esc(title)}</span><span class="kdr-cnt">${ro&&!m.known?"":`Đã bày ${n}/${G.length} món`}</span>${typeof kitXHTML==="function"?kitXHTML('data-kdrx="1"',"Đóng"):'<button type="button" class="kit-x" data-kdrx="1" aria-label="Đóng">✕</button>'}</div>`+
+  sg.slots.map(sl=>{const x=G[gi++];return x?shelfHTML(x[0],m.placed&&m.placed[x[0]],{ro,known:m.known!==false,slot:sl,per:m.per||5}):""}).join("")+`</div>`).join("");
+ return `<div class="kdr-hd"><span class="kdr-cart">${esc(title)}</span><span class="kdr-cnt">${ro&&!m.known?"":`Đã bày ${n} món`}</span>${typeof kitXHTML==="function"?kitXHTML('data-kdrx="1"',"Đóng"):'<button type="button" class="kit-x" data-kdrx="1" aria-label="Đóng">✕</button>'}</div>`+
   `<div class="kdr-sc"><div class="kdr-cab">${segs}</div></div>`}
 function tileHTML(x,g){const P=pc(x.e),why=whyNot(x.e);
  return kitItem({src:P.src,name:P.name,grade:P.grade,lux:P.lux,mark:P.over?["Vượt phẩm","r"]:(P.ngu?["Ngự tứ","n"]:null),size:"slot",tip:`${P.name}${P.over?" · vượt phẩm":""}${why?" · "+why:""}`,
   data:`data-kdrix="${x.ix}" data-kdrk="${esc(P.k)}" role="button" tabindex="0"${why?' aria-disabled="true"':""}`})}
-function drawerHTML(g){const cur=placedOf(g),L=ownedOf(g),P=pc(cur);
- const head=`<div class="kdr-dh"><b>${esc(gName(g))}</b><small>${cur?"Chọn món khác để thay":"Chọn một món trong tư trang"}</small>${typeof kitXHTML==="function"?kitXHTML('data-kdrdx="1"',"Đóng"):'<button type="button" class="kit-x" data-kdrdx="1">✕</button>'}</div>`;
- const on=P?`<div class="kdr-on"><span class="kdr-onl">Đang bày</span>${kitItem({src:P.src,name:P.name,grade:P.grade,lux:P.lux,mark:P.over?["Vượt phẩm","r"]:null,size:"slot",tip:P.name,data:`data-kdron="${esc(g)}" role="button" tabindex="0"`})}<span class="kdr-onn">${esc(P.name)}</span></div>`:"";
+function drawerHTML(g){const cur=placedOf(g),L=ownedOf(g),n=perN();
+ const head=`<div class="kdr-dh"><b>${esc(gName(g))}</b><small>${cur.length>=n?`Đã đủ ${n} món, bày thêm thì thay món kém nhất`:"Chọn một món trong tư trang"}</small>${typeof kitXHTML==="function"?kitXHTML('data-kdrdx="1"',"Đóng"):'<button type="button" class="kit-x" data-kdrdx="1">✕</button>'}</div>`;
+ const on=cur.length?`<div class="kdr-on"><span class="kdr-onl">Đang bày ${cur.length}/${n}</span>${cur.map(([sl,e])=>{const P=pc(e);return kitItem({src:P.src,name:P.name,grade:P.grade,lux:P.lux,mark:P.over?["Vượt phẩm","r"]:null,size:"slot",tip:P.name,data:`data-kdron="${esc(sl)}" role="button" tabindex="0"`})}).join("")}</div>`:"";
  const tiles=L.map(x=>tileHTML(x,g)).join("");
  const body=L.length?`<div class="kinv kdr-inv" data-min="1"><div class="kinvbody"><div class="kinvmain"><div class="kinvg" data-n="${L.length}">${tiles}</div></div></div></div>`
-  :`<p class="kdr-none">Tư trang chưa có món nào thuộc nhóm này${typeof kitInvEmpty==="function"?"":"."}</p>`;
+  :`<p class="kdr-none">Tư trang chưa có món nào thuộc nhóm này.</p>`;
  return head+on+`<div class="kdr-db">${body}</div>`}
 /* ---------- the view ---------- */
 const $k=()=>document.getElementById("kdr");
@@ -84,7 +96,7 @@ function box(){/* the area between the top bar and the bottom bar, inside the ga
  const gm=document.getElementById("game"),h=gm&&gm.querySelector("header.hud"),b=gm&&gm.querySelector("nav.bar");if(!gm||!h||!b)return null;
  const g=gm.getBoundingClientRect(),a=h.getBoundingClientRect(),c=b.getBoundingClientRect();return{l:g.left,r:innerWidth-g.right,t:Math.round(a.bottom+4),b:Math.round(innerHeight-c.top+4)}}
 function place(){const el=$k();if(!el)return;const x=box();if(!x)return;el.style.left=x.l+"px";el.style.right=x.r+"px";el.style.top=x.t+"px";el.style.bottom=x.b+"px"}
-function model(){const m={ro:KDR.ro,known:KDR.known,groups:groups(),placed:{},title:KDR.ro&&KDR.p&&KDR.p!==S?`Nơi trưng bày của ${esc((KDR.p&&KDR.p.name)||"")}`:"Nơi trưng bày"};for(const x of m.groups)m.placed[x[0]]=KDR.known?placedOf(x[0]):null;return m}
+function model(){const m={ro:KDR.ro,known:KDR.known,groups:groups(),placed:{},title:KDR.ro&&KDR.p&&KDR.p!==S?`Nơi trưng bày của ${esc((KDR.p&&KDR.p.name)||"")}`:"Nơi trưng bày"};m.per=perN();for(const x of m.groups)m.placed[x[0]]=KDR.known?placedOf(x[0]):[];return m}
 function paint(){const el=$k();if(!el)return;const keep=el.querySelector(".kdr-sc"),st=keep?keep.scrollTop:0;el.innerHTML=kitDisplayRoomHTML(model())+`<div class="kdr-drw" id="kdrdrw" hidden></div>`;
  const s2=el.querySelector(".kdr-sc");if(s2)s2.scrollTop=st;if(KDR.drawer)drawer(KDR.drawer,true);place()}
 function kitDisplayRoomOpen(p,o){o=o||{};kitDisplayRoomClose(true);KDR.p=p||S;KDR.ro=!!o.ro||(KDR.p!==S);KDR.fixture=!!o.fixture||!real();KDR.known=o.known!==false;try{if(KDR.ro&&real()&&o.known==null&&typeof shelfView==='function')KDR.known=!!shelfView(KDR.p).known}catch(e){}KDR.drawer=null;
@@ -104,14 +116,14 @@ document.addEventListener("click",ev=>{const el=$k();if(!el)return;const t=ev.ta
  if(t.closest("[data-kdrdx]")){ev.stopPropagation();ev.preventDefault();drawerClose();return}
  const sh=t.closest(".kdr-sh");
  if(sh){ev.stopPropagation();ev.preventDefault();const g=sh.dataset.kdrg;
-  if(KDR.ro){const e=placedOf(g);if(e)try{kitItemCard({k:e.k})}catch(x){console.error(x)}return}
+  if(KDR.ro){const pe=t.closest("[data-kdrp]"),L=placedOf(g),hit=(pe&&L.find(x=>x[0]===pe.dataset.kdrp))||L[0];if(hit)try{kitItemCard({k:hit[1].k})}catch(x){console.error(x)}return}
   drawer(g);return}
  const on=t.closest("[data-kdron]");
- if(on){ev.stopPropagation();ev.preventDefault();const g=on.dataset.kdron,e=placedOf(g);if(!e)return;
-  kitItemCard({k:e.k},{acts:[{id:"take",n:"Cất xuống",sub:"thành: món về lại tư trang · kèm: nhóm này để trống",go:()=>{const n=doTake(g);note(n?`Đã cất ${n} xuống.`:"Đã cất xuống.");drawerClose();paint()}}]});return}
+ if(on){ev.stopPropagation();ev.preventDefault();const sl=on.dataset.kdron,e=placedOf(KDR.drawer).find(x=>x[0]===sl);if(!e)return;
+  kitItemCard({k:e[1].k},{acts:[{id:"take",n:"Cất xuống",sub:"thành: món về lại tư trang · kèm: chỗ này để trống",go:()=>{const n=doTake(sl);note(n?`Đã cất ${n} xuống.`:"Đã cất xuống.");drawerClose();paint()}}]});return}
  const tile=t.closest("[data-kdrix]");
  if(tile){ev.stopPropagation();ev.preventDefault();const ix=+tile.dataset.kdrix,g=KDR.drawer;const row=ownedOf(g).find(x=>x.ix===ix);if(!row)return;const why=whyNot(row.e);const P=pc(row.e);
-  const sub=`thành: bày lên kệ ${gName(g).toLowerCase()}${placedOf(g)?`, món đang bày về lại tư trang`:""} · kèm: còn bày thì không tặng hay bán được${P.over?" · kèm: vượt phẩm, dễ bị tố":""}`;
+  const sub=`thành: bày lên kệ ${gName(g).toLowerCase()}${placedOf(g).length>=perN()?`, đã đủ ${perN()} món nên món kém nhất về lại tư trang`:""} · kèm: còn bày thì không tặng hay bán được${P.over?" · kèm: vượt phẩm, dễ bị tố":""}`;
   kitItemCard({k:row.e.k},{acts:[{id:"put",n:"Trưng bày",sub,why,go:()=>{const R=doPut(ix);if(R&&R.ok){note(`Đã bày ${R.n}.`);drawerClose();paint()}}}]});return}
 },true);
 document.addEventListener("keydown",ev=>{const el=$k();if(!el)return;if(ev.key==="Escape"&&!document.getElementById("kidfl")){const m=document.getElementById("modal");if(m&&!m.hidden)return;ev.stopPropagation();if(KDR.drawer)drawerClose();else kitDisplayRoomClose()}},true);
