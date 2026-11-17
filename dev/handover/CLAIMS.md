@@ -948,7 +948,7 @@
 | REVIEW face-fit 7068619d (sonnet SMALL; live CDN fit stale, repo right) | review/face-fit | MAIN s37 | session_01UV1SzgZrXwRJ3PMdetbaaf | RUNNING | 17/11 21:08Z |
 | toil-looks9: blush-step sheet IN ROOM (full figure, outfit; rows today / middle / very light; repo fit) (sonnet; owner OD 21:15Z) | review/toil-looks5 | MAIN s37 | session_01UV1SzivMP4MnTx1SiyB2oo | RUNNING | 17/11 21:11Z |
 | DISPLAY SET BONUS build (opus; OD 21:15Z approved, s37 order 21:16Z) | review/display-set-bonus | C-AG | session_01UV1SzjpfceWSitedZq3R6g | RUNNING | 17/11 21:11Z |
-| odds-cap fix round 2 (opus; r1 FAIL 5 @bc58dd46) | review/odds-cap | D | session_01964izBuoCyMCGvstmPMb5T | RUNNING | 17/11 21:15Z |
+| odds-cap fix round 2 (opus; r1 FAIL 5 @bc58dd46) | review/odds-cap | D | session_01964izBuoCyMCGvstmPMb5T | DONE SẴN SÀNG KIỂM fcefca42 (archived) | 17/11 21:15Z |
 | ART hoa-dien-art #2 (opus; successor of R5e4: fig/hd/tn twins, W2c/W12 keys, HD_ANCHOR; POR stays with R5e4) | handover reports/hoa-dien-art.md | C ROOT-10 | session_011xDdVNfSx9r7wqg7ooEXKn | RUNNING | 17/11 21:15Z |
 | REVIEW coop-thin-c reviewer #2 (successor of 4NkEVbfk at f65b5b6c; opus BIG; brief briefs/review-coop-thin-c-2.md) | review/coop-thin-c-r1 | B | session_01N1tNP6cMqcMNhStqaraUuW | PASS review/coop-thin-c-r1 eb3675a6 (READY FF; golive dry run checks OK; report reports/review-coop-thin-c.md ## REVIEWER #2) | 17/11 23:10Z |
 | dudo-blank review r1 (sonnet SMALL) of f59c965a | review/dudo-blank-r1 | D | session_01964izF1pwkGy4nxwo8Q4iK | DONE PASS 2270c4c5 → FOR MAIN (builder lands; archived) | 17/11 21:20Z |
@@ -976,3 +976,4 @@ looks-2 overlay art (fx-stain-tra/uot, smudge, ink, pox, scars, messy hair) | im
 | coop-thin part E #2 (opus BIG; handover reports/coop-thin-e.md '#1 → #2' items 1–7) | review/coop-thin-e | B | session_01N1tNP6mL68mhj11smPZoTL | RUNNING | 17/11 23:31Z |
 | cloth-xoc r3 (crease look redo + stain-decal layer; opus: hard rendering root cause after 2 FAILs) | review/cloth-xoc | MAIN s39 | session_01UV1SzkYmApqhLJ8fozxZi3 | ROLLED OVER @57afd8a (crease look improved, lv1/2 weak; stain not started; handover in reports/cloth-xoc.md r3) | 17/11 23:12Z |
 | cloth-xoc r4 (crease lv1/lv2 + stain-decal layer; sonnet) | review/cloth-xoc | MAIN s39 | session_01UV1SzjnD2foC6FyKie4bD3 | RUNNING | 17/11 23:23Z |
+| odds-cap review ROUND 2 (opus BIG) of fcefca42 | review/odds-cap-r1 | D | session_01964izFgd4LMUTiKvpBrSVD | RUNNING | 17/11 23:38Z |
