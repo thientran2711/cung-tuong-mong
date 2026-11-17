@@ -17,7 +17,7 @@ const KDR={fix:null,p:null,ro:false,fixture:false,known:true,drawer:null,raf:0};
 const KDR_BG="img/kit/bg-default.webp";
 const GFIX=[["cay","Cây cảnh"],["chuong","Chuông gió"],["rem","Rèm, mành"],["phong","Bình phong"],["su","Đồ sứ"],["tranh","Tranh, thư pháp"],["van","Văn phòng tứ bảo"],["nhac","Nhạc khí"],["ngoc","Ngọc khí"],["huong","Lư hương"],["den","Đèn, lồng"],["tham","Thảm, gối tựa"]];
 const esc=s=>String(s==null?"":s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
-const real=()=>typeof shelfOf==="function"&&typeof shelfPut==="function"&&typeof shelfTake==="function"&&typeof BAL!=="undefined"&&!!BAL.shelf&&Array.isArray(BAL.shelf.groups);
+const real=()=>typeof shelfOf==="function"&&typeof shelfPut==="function"&&typeof shelfTake==="function"&&typeof BAL!=="undefined"&&!!BAL.shelf&&!!BAL.shelf.ui&&Array.isArray(BAL.shelf.groups);/* batch s36a: one switch BAL.shelf.ui (jshelf) opens both entries; 0 = room hidden */
 const groups=()=>KDR.fixture||!real()?GFIX:BAL.shelf.groups;
 const gName=g=>{const x=groups().find(z=>z[0]===g);return x?x[1]:g};
 const rk=()=>{try{return rkOf(S)|0}catch(e){return 0}};
