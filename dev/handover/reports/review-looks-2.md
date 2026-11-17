@@ -41,3 +41,36 @@ For the successor (task text = Foreman B ROOT msg 18:50Z):
 2. FAIL-1 check: dev/test/coop-looks-act.js (on review/looks-2-r1 4d9fcd648 and, per Foreman B, folded into cfd4a6813) must pass on both seats (23/23 ×3). The r1 root causes are listed in item 1 above: sendRes reset of __b.fx; tuần marks only at the week write-back; f.toilette.lk overwritten by liveStats. Also try slap and rash through runAct, not just tea.
 3. Trial merges that were clean in r1: review/makeup-lux (no source conflict), review/coop-thin-c (one jcoopworld buildFriend `v.__b` conflict: keep hhSafe + fxSnap; sendRes next to the thin-D resTo; coop-thin-c.js L3 needs about 15 min → run it in the background). Re-check both on the new sha.
 4. Tools that worked in r1: serve the worktree root (`python3 -m http.server`) and run looks-2.js / facefx-scan / one-core-*.js against <url>/index.html; coop-*.js take [outdir] (NOT a url; a url makes an "http:" folder inside the repo); quickcheck `bash dev/tools/quickcheck.sh` (~6 min); to get past the 'Luân hồi' intro cover in custom shots, wait about 9 s and remove that fixed overlay.
+
+## Round 2 — review/looks-2-2 cfd4a6813 → PASS review/looks-2-r2 fc7c649f7c93efcdd150f4f6baa56664c803d906
+
+PRIORITY #1 CHECK: OD '(17/11 ~16:20Z real' (g), ~16:35Z, ~16:40Z, ~17:40Z (1)(3), ~17:55Z (2), ~18:10Z AVATAR = ID CARD (read verbatim) | main 579e8976 (jwxk currentWeather {lv, kd, kl}, jk2b KIT_LASTING / KIT_BAKE avatar rule, j70 SCAR70 + heal70 + ngocdungcao, jslap slapGame / slapNpcTier) | review/* looks-2-2 cfd4a6813, looks-2-r1 4d9fcd648, makeup-lux 7c6ef2fda | claims looks-2 worker session_01N1tNP5NugSQQVChrBKbF4p; this reviewer session_01N1tNP45Tvkk65nx19mgPyQ.
+Reviewer: opus, session_01N1tNP45Tvkk65nx19mgPyQ · coordinator Foreman B ROOT session_01N1tNP3WvLNPV6guHYCkC66. START_CTX ≈ 8 %.
+Branch review/looks-2-r2 = cfd4a6813 + merge main c114ab9e (337fc519) + reviewer fixes (49cc0139) + merge main 579e8976 (c975f067; assemble.py conflict: main's list + jlooks.js kept LAST, after jfigseal/jemoseal, so its kitFxLayers wrap stays outermost) + scan update (fc7c649f). golive.sh dry run on fc7c649f: checks OK (FF-only, quickcheck PASS, core gates PASS).
+
+### Reviewer fixes (small, on review/looks-2-r2)
+1. jlooks lkWxNow read only `.lv` (wet intensity) and rolled its own level for dry kinds (BAL.looks.wxLv + windUp). Main now gives C-AG's per-kind level `kl` for EVERY state (FOREMAN_B_STATUS 18:14Z; jwxk "gió lớn" [0,6,4] = never nhẹ). So "gió lớn · nặng" shown to her was a nhẹ look 70 % of the time (two levels for one weather = one-core break). Now: lv → kl → BAL fallback (old saves only). looks-2.js check `cagKl` (gió lớn kl 3 → level 3; nắng gắt kl 1 → 1).
+2. dev/test/coop-looks-act.js 23 → 28 checks: A → B direction (real runAct "nuoc" + "ink" on the friend → reach B live, both seats agree) and one whole tuần for both seats (rash — unless its own time ran out — + scar the friend put on her survive the week write-back / liveStats, B still sees them).
+3. dev/test/looks-2.js layer scan follows the owner AVATAR = ID CARD rule (OD 17/11 ~18:10Z, main kit-fx-register): portrait / avatar rows must show NO makeup and NO temporary mark; stage + mirror must keep makeup under every mark. (After the main merge the old scan read 18/36 — correct behaviour, stale test.)
+4. dev/kit/KIT_REQUESTS.md: request (2) EMOTION PORTRAIT SWAP marked WITHDRAWN (owner 17:40Z (1) dropped emotion faces).
+
+### Brief checks
+| # | check | result |
+|---|---|---|
+| 1 | FAIL-1: real acts on the co-op friend reach her seat and survive | coop-looks-act 23/23 ×3 on 337fc519; extended 28/28 ×3 + ×1 on c975f067 (tea, slap, rash, hủy dung B→A; water + ink A→B; marks survive a tuần turn). One run 26/28 = test bug (rash nhẹ lasts 1 tuần → expired by rule), fixed in the test. Root causes a/b/c gone (sendRes `fxl` before the baseline refresh; resApply lkMergeIn on her seat; live pos carries it back). |
+| 2 | every weather kind + env causes vs the A/B table | BAL.looks.wx covers every WX / WX_KH kind (petal, rain, mist, sun = nắng gắt only, storm, leaf, wind, snow, snowh, frost, snowp; dust / cloud quiet). Smudge 3 levels (cat.smu, LK_N nhẹ/nhem/nặng). Umbrella lowers odds (rain ×0.4 → 72–88/200), useless in wind/mist, kiệu ×0.05. Gió lớn: now C-AG kl (fix 1). Env: cành cây (garden), bùn (rain earlier today, wxDayAny), khói bếp (cooking acts), fall → bùn + tóc; storm fear (jemo Sợ), say nắng Sức − (prints BAL). looks-2.js 30/30 checks true. |
+| 3 | tea / water / ink minigames on the slap/dodge kit | A("nuoc"/"tea"/"ink") → her throw = slapGame bar (skip = nhẹ); an NPC's throw on her = slapNpcTier (calibrated rank table) + "Né" card (BAL.slap.dodgeOdds, tsOpt) → one level less, nhẹ = miss. Looked at Fold 755x1000 + iPad 1180x820: kit panel "TÀI NGHỆ · Hắt: Hắt trà", rows Vùng đỏ/vàng/Ngoài vùng, no overflow, 0 page errors. |
+| 4 | đậu mùa scar via the hủy dung path | ILL.daumua.scar 0; on recovery (j13 illMonthP, the only place the old −8 was applied) lkPoxScar sets p.scar (how "daumua", SCAR70 by st) → heal70 weekly, Ngọc dung cao / Tuyết liên (bought) set cure → no permanent loss; no new system. Avatar: kitScarOf returns the pox-scar picture only when delivered (never the slash art) → KIT_LASTING bakes it then. |
+| 5 | no emotion faces | looksEmoFace / ~vui swap gone (grep 0); test emoGone true; KIT request withdrawn (fix 4). |
+| 6 | one core, kit, VANPHONG | one-core-guard PASS (inline 3843 = baseline), one-core-text / text-rule / bind PASS, rules-one-source + kit-conform PASS (core gates). Chips "Phấn son lem nhem nặng · Mặt lem mực", "Tóc rối, trâm lệch", "Áo ướt sũng" through KIT_FACEFX chip → pcard; no %, numbers printed from BAL. |
+| 7 | layer law | wrap re-sorts every kitFxLayers output (img.kmkl first); scan 36/36 with the ID-card rule (fix 3). |
+| — | makeup-lux 7c6ef2fda trial merge | conflicts assemble.py, j92, jbaleff, jdress, jts, index.html, sw.js = EXACTLY the set makeup-lux has against main alone (its own main merge is due); looks-2 adds none. Either order: whoever lands second keeps 'jlooks.js' LAST in the assemble list. |
+| — | suites | quickcheck PASS ×2 (337fc519; fc7c649f inside golive: render 145/151 ms, buổi 946/744 ms, old save ok); coop-looks 21/21 ×3; coop-e2e 63/63 ×3 (one run on c975f067 failed with a co-op server WebSocket 502 → rerun 63/63). |
+
+### Notes (not FAIL; for Foreman B / later)
+- NPC → NPC throws use `1+(roll(npcUp)?1:0)` (never nặng); NPC → her uses the calibrated slapNpcTier. Existing slap NPC → NPC uses BAL.slap.def, so not a new family break; align when HARM_ACTS.md lands.
+- Co-op: a throw by the FRIEND on her gives her no "Né" card (an NPC's throw does). Same on both seats, so parity holds; consider the dodge card for friend throws later (two-way law OD:L1403).
+- "ve kêu râm ran" is sun f=0 → no heat look (A/B table lumped it with nắng gắt); follows C-AG's heat flag. Fine unless the owner wants it.
+- Minigame panel reuses the slap difficulty word "giáng tay" for throws — wording nit for VANPHONG.
+- dev/design/HARM_ACTS.md still to fold in; hair/clothes pictures wait for the body-fit KIT REQUEST; every picture slot empty until Foreman C delivers (correct).
+- No shots uploaded (none in img/_review); scratch shots deleted.
