@@ -507,3 +507,8 @@
 | kit-size #10 timed-choice clock chip off screen (sonnet keeper; night-final KIT REQUEST) | review/kit-size-10 | main s27 | session_01UV1SziEvZm2cX5xAAQe8Yq | SẴN SÀNG KIỂM 8ab00ede (report reports/kit-size-10.md) | 17/11 |
 | kit-size-10 review r1 (sonnet SMALL) of 8ab00ede | review/kit-size-10-r1 | main s27 | session_01UV1SzgfA2Gewct93258BYu | RUNNING | 17/11 01:23Z |
 | FP princess art SUCCESSOR #3 (sonnet art): owner 01:25Z — Nam Chiếu v23 rejected (ugly + bad cut-out) → REDRAW NC; Bắc Địch v23 OK → continue BD ranks; per HANDOVER #2 in reports/foreign-princess-art.md | review/foreign-princess-samples + reports on handover | C | session_011xDdVRGMybYsNNUxJnhbZd | RUNNING | 17/11 01:25Z |
+| WHOLE FIGURE REPAINT batch W1 hero+misc 1063 (sonnet art, 4k, owner GO 01:25Z; opened by lead #5) | review/fig-cutout-clean | C | session_011xDdVRYdmt6MG3RFnxBLQe | RUNNING | 17/11 01:27Z |
+| WHOLE FIGURE REPAINT batch W2 consort-ty 1024 (sonnet art, 4k, owner GO 01:25Z; opened by lead #5) | review/fig-cutout-clean | C | session_011xDdVRJKYSAaQP1Z2rspXD | RUNNING | 17/11 01:27Z |
+| WHOLE FIGURE REPAINT batch W3 consort-rest 1952 (redo trains) (sonnet art, 4k, owner GO 01:25Z; opened by lead #5) | review/fig-cutout-clean | C | session_011xDdVPExb84G58Xb3DibW8 | RUNNING | 17/11 01:27Z |
+| WHOLE FIGURE REPAINT batch W4 maid-ty 1664 (sonnet art, 4k, owner GO 01:25Z; opened by lead #5) | review/fig-cutout-clean | C | session_011xDdVRqzYRpSYpnCiVfu8x | RUNNING | 17/11 01:27Z |
+| WHOLE FIGURE REPAINT batch W5 maid-rest 3172 (sonnet art, 4k, owner GO 01:25Z; opened by lead #5) | review/fig-cutout-clean | C | session_011xDdVS4qxqgqPBzQgYwVYi | RUNNING | 17/11 01:27Z |
