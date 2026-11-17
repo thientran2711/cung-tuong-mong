@@ -61,6 +61,15 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
  const r6=await p.evaluate(()=>{const v0=S.vacSince,t=S.turn;const r0=roll;let o=[];roll=x=>{o.push(x);return false};const L=[];
   for(const m of [1,3,5,8,15]){S.vacSince=t-m;o=[];const d=empSeat();L.push([m,o[0]==null?"mourn":+o[0].toFixed(1)])}roll=r0;S.vacSince=v0;return L});
  ok(r6[0][1]==="mourn"&&r6[1][1]<r6[2][1]&&r6[2][1]<r6[3][1]&&r6[4][1]<=100,'seat: mourning first, then his duty grows with the months vacant',r6);
+ /* 8 pillow slander (two-way row 24): one deed both ways, BAL.tw.g.pillow; NPC chooses by her spite need */
+ const r8=await p.evaluate(()=>{const G=BAL.tw.g.pillow;const v=liveRivals(true).find(x=>!x.queen)||liveRivals(true)[0];const r0=roll,mp=mindPick;const out={};
+  try{roll=()=>true;S.sung=50;const b=S.sung;pillowDo(v,S,100);out.hit=b-S.sung;out.want=G.hit;
+   S.an=20;out.o=pillowO(S,4);out.oWant=G.o[0]+20/G.o[1]+4*G.o[2]-(DG()?G.o[3]:0);
+   /* no spite → she keeps quiet (no deed) */const h0=hostility;hostility=()=>0;const r1=pillowNpc(v,5);out.quiet=r1===""&&S.sung===b-G.hit;hostility=h0;
+   /* a night2 option reads the deed */const m=PEND.night2({s:4,ex:""});const op=m.o.find(o=>/nói xấu/.test(o.n));out.txt=op?op.x:"";
+  }finally{roll=r0;mindPick=mp}return out});
+ ok(r8.hit===r8.want&&Math.abs(r8.o-r8.oWant)<1e-9,'pillow: one deed (BAL.tw.g.pillow) — gain and odds',r8);ok(r8.quiet,'pillow: no spite → the NPC keeps quiet',r8);
+ ok(!r8.txt||new RegExp('Sủng -'+r8.want).test(r8.txt),'pillow: her night option text prints the deed numbers',r8);
  /* 7 guest, old save, 30 tuần */
  const r7=await p.evaluate(()=>{const g=window.COOPW;const was=g&&{on:g.on,seat:g.seat};let guest=null;if(g){g.on=true;g.seat="b";guest=empOn();g.on=was.on;g.seat=was.seat}
   delete S.emp.met;S.empWhy=null;let e=0;try{S.tonight=null;S.nfF=null;S.nightWhy=null;flip()}catch(x){e++}

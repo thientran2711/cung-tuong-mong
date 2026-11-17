@@ -58,3 +58,16 @@ const EMPDECK={"Đàn khúc Phượng cầu hoàng":"cam","Kinh hồng vũ":"vu"
 function empDeckK(a){if(!a||!a.n)return"";if(EMPDECK[a.n])return EMPDECK[a.n];try{if(/^Dâng /.test(a.n)&&a.c&&a.c.bac===-BAL.deck.qf.bac&&a.w&&a.w.sung!=null)return"qf"}catch(e){}return""}
 (function(){if(typeof runOpt!=="function")return;const ro=runOpt;runOpt=function(a){const r=ro.apply(this,arguments);try{if(r!=null&&a){const k=empDeckK(a);if(k)empMet(S,k,r)}}catch(e){}return r}})();
 Object.assign(window,{empOn,empSummon,empPick,empCustom,empSeat,empSeatPick,empMet,empMemF,empMemN,empWhyTxt,empBusy});
+/* PILLOW SLANDER (two-way row 24): ONE deed for her (j8 night2 option) and an NPC on her night (j75 rivalNight), BAL.tw.g.pillow */
+function pillowO(a,s){const G=BAL.tw.g.pillow.o;return G[0]+(a.an||0)/G[1]+(s||0)*G[2]-(DG()?G[3]:0)}
+function pillowDo(a,t,o){const G=BAL.tw.g.pillow;const fx=(p,d)=>p===S?apply(d):ap(p,d);if(roll(o)){const b=t.sung;fx(t,{sung:-G.hit});relAdd(a,t,-G.rel);return{ok:1,b,n:t.sung}}
+ fx(a,DG()?{sung:-G.dg[0],danh:-G.dg[1]}:{sung:-G.fail});return{ok:0}}
+/* the NPC on her night: keep quiet (BAL.ag.routine, as when she keeps her schedule) or speak against the one she resents most (her spite need,
+   agSpite = hostility less what she already vented), mindPick with jmind's slip; the deed's own cost/odds as hers */
+function pillowNpc(v,sc){try{const N=agNeedsC(v);const T=others(v).filter(x=>x&&x!==v&&x.alive!==false&&!(x.out&&x!==S)&&agSpite(v,x)>0&&motiveOK(v,x,"provoke").ok);if(!T.length)return"";
+  const t=mindPickBy(T,x=>agSpite(v,x),v);if(!t)return"";const o=odA(v,pillowO(v,sc));const W=BAL.ag.road[agOrg(v)]||BAL.ag.road._;
+  const sp=cl(agSpite(v,t)/100,0,1)*W.spite;const G=BAL.tw.g.pillow;const u=sp*(G.hit/BAL.ag.unit)*(o/100)*agMW(v,"scheme");
+  if(mindPick([["quiet",BAL.ag.routine/BAL.ag.unit],["say",u*BAL.ag.needW]],v)!=="say")return"";
+  const r=pillowDo(v,t,o);AG.stat.by.pillow=(AG.stat.by.pillow||0)+1;try{agVent(v,t,"provoke")}catch(e){}
+  if(t===S&&r.ok&&S.mat>=2)return `Tai mắt nghe được: gối đầu, ${v.name} nói xấu ngươi.${r.b!==S.sung?` Sủng của ta ${r.b} → ${S.sung}.`:""} `;return""}catch(e){agErr("pillow",e);return""}}
+Object.assign(window,{pillowO,pillowDo,pillowNpc});
