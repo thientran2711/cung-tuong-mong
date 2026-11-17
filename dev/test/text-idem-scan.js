@@ -19,7 +19,7 @@ const [,,BASE,NM]=process.argv;const N=+NM||12;
    for(const el of document.querySelectorAll('[title],[aria-label]'))for(const a of ['title','aria-label']){const v=el.getAttribute(a);if(v&&v.length>3)out.push(v)}
    for(const l of (S.log||[]).slice(-40))out.push(String(l&&l.t||l));return out});
  for(let i=0;i<N;i++){
-  await p.evaluate(i=>{const clear=()=>{let n=0;while(Q.length&&n++<20){const m=Q[0];if(m.opts&&m.opts.length){try{chooseM(m.opts.length-1)}catch(e){Q.shift()}}else{try{closeModal()}catch(e){Q.shift()}}}showModal()};clear();
+  await p.evaluate(i=>{const clear=()=>{let n=0;while(Q.length&&n++<20){const m=Q[0];if(m.opts&&m.opts.length){try{chooseM((L=>L.length?L[L.length-1]:0)(m.opts.map((c,i)=>c.off?-1:i).filter(i=>i>=0)))}catch(e){Q.shift()}}else{try{closeModal()}catch(e){Q.shift()}}}showModal()};clear();
    const T=["act","go","ppl","me","inv","log"];if(i%3===2){try{nextBuoi()}catch(e){}}else{const L=places().map(x=>x.k).filter(k=>k!==S.place&&accessOf(S,k).ok);if(L.length)try{goTo(L[i%L.length])}catch(e){}}
    clear();tab=T[i%T.length];try{render()}catch(e){}},i);await p.waitForTimeout(500);
   for(const t of await grab())corpus.add(t)}

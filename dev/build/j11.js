@@ -83,8 +83,8 @@ document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest
 function inkWipe(){if(!OPT.fxon||RM)return;fxOver("inkwipe")}
 function nightFade(){if(!OPT.fxon||RM)return;fxOver("nightf")}
 /* HUD numbers count smoothly */
-const HV={};function hudTween(){for(const k of ["bac","suc","sung","danh"]){const e=$("hud-"+k);if(!e)continue;const sp=e.querySelector("span"),to=S[k];const fr=HV[k]==null?to:HV[k];HV[k]=to;if(fr===to||RM){sp.textContent=to;continue}
- const t0=performance.now();const st=()=>{const f=Math.min(1,(performance.now()-t0)/500);sp.textContent=Math.round(fr+(to-fr)*f);if(f<1)requestAnimationFrame(st)};requestAnimationFrame(st)}}
+const HV={};function hudTween(){for(const k of ["bac","suc","sung","danh"]){const e=$("hud-"+k);if(!e)continue;const sp=e.querySelector("span"),to=S[k];const fr=HV[k]==null?to:HV[k];HV[k]=to;if(fr===to||RM){sp.textContent=hudFmt(k,to);continue}
+ const t0=performance.now();const st=()=>{const f=Math.min(1,(performance.now()-t0)/500);sp.textContent=hudFmt(k,Math.round(fr+(to-fr)*f));if(f<1)requestAnimationFrame(st)};requestAnimationFrame(st)}}
 /* tokens: slide in only for people who just arrived */
 let tokPrev=new Set();function tokAnim(){const now=new Set();document.querySelectorAll("#tokens .tok").forEach(b=>{const n=b.textContent;now.add(n);b.classList.add("bob");if(!tokPrev.has(n)&&!RM)b.classList.add("enter")});tokPrev=now}
 /* ---- PixiJS scene layer behind the people; falls back to the static image ---- */

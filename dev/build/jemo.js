@@ -125,7 +125,7 @@ function emoWeek(){if(!emoOn())return;const W=emoW();S.emoSnap=S.emoSnap||{};con
    f = share of the emotional harm boost that turns into harm acts. High Đức: 0 (anger turns into withdrawing / confronting words), mid: ½, low: 1,
    low Đức + Xảo quyệt / Tham vọng: 1.5. A severe grudge (oán ≥ 60 toward the target) keeps at least ½ even at high Đức. Same rule for everyone. */
 const EMO_BRAKE={hi:70,mid:40,fHi:0,fMid:.5,fLo:1,fBad:1.5,soft:{"Ân cần":15,"Khiêm nhường":8,"Trọng nghĩa":8,"Vì gia tộc":5,"Xảo quyệt":-10,"Tham vọng":-5,"Thù dai":-5}};
-function emoDuc(p){if(!p)return 50;if(p===S)return S.duc||0;let d=p.duc;if(d==null)d=netIs(p,"loyal")?60:netIs(p,"greed")?30:45;for(const t of emoTraits(p))d+=EMO_BRAKE.soft[t]||0;return d}
+function emoDuc(p){if(!p)return 50;if(p===S)return S.duc||0;let d=p.duc;if(d==null)d=nv(p,"ducDef");for(const t of emoTraits(p))d+=EMO_BRAKE.soft[t]||0;return d}
 function emoBrake(p,t){const d=emoDuc(p),B=EMO_BRAKE;let f=d>=B.hi?B.fHi:d>=B.mid?B.fMid:B.fLo;const T=emoTraits(p);if(d<B.mid&&(T.includes("Xảo quyệt")||T.includes("Tham vọng")))f=B.fBad;
  if(t&&f<.5){try{if(oan(p,t)>=60)f=.5}catch(e){}}return f}
 function emoMul(p,act){const e=emoGet(p);if(e.k==="binh")return 1;const T=EMO_W[e.k];if(!T)return 1;const harm=EMO_HARM.includes(act);let m=T[act];if(m==null)m=harm?T.harm:EMO_KIND.includes(act)?T.kind:null;if(m==null)return 1;
@@ -162,7 +162,7 @@ try{emoGateWrap()}catch(e){}
 function emoSee(){if(!emoOn())return;const W=emoW();S.emoSeen=S.emoSeen||{};try{for(const x of curPeople()){const p=emoRes(x);if(p)S.emoSeen[emoKey(p)]=W}}catch(e){}}
 function emoKnown(p){p=emoRes(p);if(!p)return false;if(p===S)return true;try{if(typeof kitIsKnown==="function"&&!kitIsKnown(p))return false}catch(e){}
  const W=emoW(),k=emoKey(p),s=(S.emoSeen||{})[k];if(s!=null&&W-s<=2)return true;
- if((S.staff||[]).includes(p)||p===S.maid||(S.kids||[]).includes(p))return true;
+ if(typeof k61Own==="function"?k61Own(p):((S.staff||[]).includes(p)||p===S.maid||(S.kids||[]).includes(p)))return true;/* her own people: ONE list (j61 k61Own; home family included) */
  try{if(p===S.thO&&typeof cmKnown==="function")return cmKnown("th");const q=typeof queenP==="function"?queenP():null;if(p===q&&typeof cmKnown==="function"&&cmKnown("hh"))return true}catch(e){}
  if((S.mat||0)>=3&&(rivals||[]).includes(p))return true;
  if(p===S.emp&&(S.nightLog||[]).some(w=>W-w<=2))return true;return false}

@@ -65,7 +65,7 @@ function trongKnown(p){if(trRes(p)===S)return true;S.tgK=S.tgK||{};return !!S.tg
 function trongLearn(p,tags,why){if(!S||trongKnown(p))return;const H=trongHit(p,tags);if(!H.length||!roll(BAL.trong.learn))return;S.tgK[trKey(p)]=1;const q=trRes(p);
  const nm=q==="th"?"Thái hậu":q===S.emp?"Hoàng thượng":q&&q.queen?"Hoàng hậu":q&&q.name||"";const t=`${why||"Qua lời qua lại"}: biết ${nm} trọng ${trongOf(p).join(", ")}`;
  try{if(q&&q.id!=null&&q!==S.emp)noteAdd(q.id,t)}catch(e){}log(`<span class="past">${t}.</span>`)}
-function trongLine(p){return `Trọng: ${trongKnown(p)?trongOf(p).map(v=>`<b title="${VIRT_GL[v]}">${v}</b>`).join(" · "):"chưa rõ"}`}
+function trongLine(p){return `Trọng: ${trongKnown(p)?trongOf(p).map(v=>`<b>${kitGloss(v)}</b>`).join(" · "):"chưa rõ"}`}
 
 /* ---------- ONE greeting rule ---------- */
 const TR_MH={vui:1.3,binh:1,buon:.8,lo:.8,so:1,gian:.4,ghen:.7,muu:.7,dau:.6},TR_MW={vui:1.1,buon:.85,dau:.8,gian:.75,lo:.9};
@@ -123,7 +123,7 @@ function trSnowGreet(){try{return Math.max(1,trGreet(S,"th",{base:5,tags:DEED.sn
 (function(){const p0=pcard;pcard=function(o){try{if(o&&S&&!o.__tr){o=Object.assign({},o,{__tr:1});const L=(o.lines||[]).slice();let who=null;
   if(o.name===S.name||o.me)who=S;else if(o.rank==="Thái hậu")who="th";else if(o.rank==="Hoàng thượng")who=S.emp;else if(S.maid&&o.name===S.maid.name)who=S.maid;
   else if(typeof kitPersonByName==="function")who=kitPersonByName(o.name);
-  if(who){if(who===S&&!L.some(x=>/Tính nết/.test(x)))L.push(`Tính nết: ${traitsOf(S).map(t=>`<b title="${netTip(t)}">${t}</b>`).join(" · ")}`);
+  if(who){if(who===S&&!L.some(x=>/Tính nết/.test(x)))L.push(`Tính nết: ${traitsOf(S).map(t=>`<b>${kitGloss(t)}</b>`).join(" · ")}`);
    if(who==="th"&&!L.some(x=>/Tính nết/.test(x)))L.push(`Tính nết: ${S.thO&&S.thO.archK?`<b>${thArch().n}</b>`:"chưa rõ"}`);
    if(who==="th"||who===S||who===S.emp||who===S.maid||(typeof rivals!=="undefined"&&rivals.includes(who)))L.push(trongLine(who));o.lines=L}}}catch(e){console.error(e)}return p0.call(this,o)}})();
 /* LUẬT SỬA CẢ NHÓM: every other deck act that raises Thái hậu regard (gifts, portrait, sutra…) follows the same family rule:

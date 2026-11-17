@@ -89,7 +89,7 @@ function menMakePlans(t){const add=P=>{P.id=(S.menPS=(S.menPS||0)+1);P.w=t;S.men
  for(const m of S.men){const o=menOrder(m,t);if(!m.alive||!o||o.v==null||!MEN_ROVE.some(t=>hasT(m,t)))continue;const v=RV(o.v);if(!v||v.queen||!((v.sung||0)<40||m.likeV===v.id))continue;
   add({m:m.id,v:v.id,r:"overstay",job:m.rw,b:o.b,h:4,k:o.k,from:o.k,hide:10})}
  /* 4. an admirer: every 12 tuần by his nature (đa tình 9), the first buổi he is inside while she stands in the hậu cung */
- for(const m of S.men){if(!m.alive||m.likeV==null||!MEN_FANCY.some(t=>hasT(m,t))||(t+menH(m.id))%(hasT(m,"Ham vui")?9:12))continue;add({m:m.id,v:m.likeV,r:"seek",opp:1,h:2,hide:15})}}
+ for(const m of S.men){if(!m.alive||m.likeV==null||!MEN_FANCY.some(t=>hasT(m,t))||(t+menH(m.id))%(nv(m,"menGap")))continue;add({m:m.id,v:m.likeV,r:"seek",opp:1,h:2,hide:15})}}
 /* tai mắt: she hears of a plan a tuần ahead when her eyes reach deep enough (Tai mắt, Tâm cơ) — true, partial */
 function menEye(p){return p===S?(S.mat||0)*8+(S.tamco||0)/3:(p.mat||0)*8+(p.tamco||0)/3}
 function menTip(P){try{if(!menRoad()||P.opp)return;if(menEye(S)<P.hide+40)return;P.tip=1;const t=P.w-wk();const when=`${t<=0?"tuần này":"tuần tới"}, ${BUOI[P.b].toLowerCase()}`;
@@ -226,8 +226,8 @@ function menChoose(m,v,y,a){const at=placeName(y.k);menStat("ch_"+a);if(a==="ngh
 /* ---------- 5. NPC consorts see the same strays and choose by their nature ---------- */
 /* NPC choice by nature and feeling, no dice: same rules for every consort */
 function menDecide(w,c){const h=c?hostility(w,c):0;
- if(c){if(tr==="Xảo quyệt"||tr==="Kiêu ngạo"||h>45)return"report";if(tr==="Tham vọng")return"hide";if(tr==="Kín đáo")return"listen";if(tr==="Ân cần"||tr==="Khiêm nhường")return h>25?"hide":"ignore";return h>30?"report":"ignore"}
- if(tr==="Kiêu ngạo"||tr==="Kín đáo")return"report";if(tr==="Tham vọng")return"hide";return"ignore"}
+ if(c){if(hasT(w,"Xảo quyệt")||hasT(w,"Kiêu ngạo")||h>45)return"report";if(hasT(w,"Tham vọng"))return"hide";if(hasT(w,"Kín đáo"))return"listen";if(hasT(w,"Ân cần")||hasT(w,"Khiêm nhường"))return h>25?"hide":"ignore";return h>30?"report":"ignore"}
+ if(hasT(w,"Kiêu ngạo")||hasT(w,"Kín đáo"))return"report";if(hasT(w,"Tham vọng"))return"hide";return"ignore"}
 function menNpcAct(w,m,c,y){const d=menDecide(w,c);menStat("npc_"+d);
  if(d==="report"){menReport(w,m,c,y,(w.tamco||0)>=50?1:0);return d}
  if(d==="hide"){menHide(w,m,c,y,menEyes(y.k,c));if(c===S||menEye(S)>=(y.hide||0)+25){try{intelAdd(w,{k:"menhide:"+m.id,kind:"secret",txt:`${rkName(w)} ${w.name} đã che giấu ${m.name} lẻn vào ${placeName(y.k)}${c&&c!==S?` cùng ${rkName(c)} ${c.name}`:""}.`},{by:"tai mắt",how:"tai mắt"})}catch(e){}}return d}
@@ -244,7 +244,7 @@ function menNpcSee(m,y){if(!m||!y)return;const c=y.v!=null?RV(y.v):null;for(cons
 
 /* ---------- 6. the secret is leverage: "Uy hiếp hắn" on his card; grudges come back as rumours ---------- */
 (function(){const t0=talkOpts;talkOpts=function(p){const A=t0.apply(this,arguments);try{if(p&&p.kind==="man"&&p.ref&&menRoad()){const m=p.ref;const s=(S.menSec||{})[m.id];
-  if(s&&!s.used){const o=od(45+(S.tamco||0)/3+(s.hid?10:0)-(hasT(m,"Kín đáo")?10:0));
+  if(s&&!s.used){const o=od(45+(S.tamco||0)/3+(s.hid?10:0)-(nv(m,"menHide")));
    A.push({n:"Uy hiếp hắn",o,x:`hắn nộp bạc hay khai tin để giữ kín chuyện ${MEN_RT[s.r]||"cũ"} · hỏng: hắn ôm hận`,run:()=>{s.used=1;menStat("threat");
     if(roll(o)){const T=liveRivals(true).filter(v=>v.affair||(v.preg&&v.hidden)||(v.plan));if(T.length){const v=T.slice().sort((a,b)=>menH(a.id)-menH(b.id))[0];const F=j78facts(v).filter(f=>f.kind==="secret"||f.kind==="plan");const f=F[0];
       if(f){intelAdd(v,f,{by:m.name,how:"uy hiếp "+m.name});return `Hắn run sợ, khai: ${f.txt}`}}

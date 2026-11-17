@@ -27,7 +27,7 @@
 const LO={rate:8,cd:6,minPr:30,findW:[2,7],
  home:{mis:55,srv:15,riv:0},away:{mis:20,srv:65,riv:75},   /* % back home / turns up in another palace; the rest: never found */
  rivP:40,srvP:[20,45],                                       /* cause: a rival (when one's motive allows), a servant (careless servant) */
- tipW:[1,3],hearW:[1,2],recog:{own:15,fr:4,me:8},keepWear:25,expire:54,keepP:35,hearCd:6,
+ tipW:[1,3],hearW:[1,2],raiseK:1,thief:{danh:-10,sung:-5},recog:{own:15,fr:4,me:8},keepWear:25,expire:54,keepP:35,hearCd:6,
  act:{bac:30,duc:-4},
  cost:{ask:{k:1},cct:{k:1,bac:20},book:{k:1,bac:10},soat:{k:2}}};
 function loL(){S.lost=S.lost||[];return S.lost}
@@ -47,12 +47,12 @@ function loOk(e){return !!e&&!e.h&&!e.t&&!e.lo&&!e.w&&!e.keep&&!(typeof wdIsNt==
 function loMotive(v,t){try{if(typeof motiveOK==="function")return !!motiveOK(v,t,"plant").ok}catch(e){}return true}
 /* hidden cause, chosen by the existing motive system */
 function loCause(p){let R0=[];try{R0=liveRivals(true).filter(v=>v!==p&&bandOf(danger(v,p))>=2&&loMotive(v,p)&&(v.bac||0)>=LO.act.bac)}catch(e){}/* two-way law: a rival's theft costs what her Act 'Sai người lấy trộm đồ' costs: bạc LO.act.bac + Đức -4 */
- if(R0.length&&roll(LO.rivP)){const v=R0.sort((a,b)=>danger(b,p)-danger(a,p))[0];ap(v,{bac:-LO.act.bac,duc:LO.act.duc});return{cause:"riv",by:key(v)}}
+ if(R0.length&&roll(LO.rivP)){const v=mindPickBy(R0,x=>BAL.mind.pick.lost1.base+danger(x,p)*mindW(x,"scheme"),null);/* npc-mind: was ARGMAX */ap(v,{bac:-LO.act.bac,duc:LO.act.duc});return{cause:"riv",by:key(v)}}
  const st=[p.maid].concat(p.staff||[]).filter(Boolean);const sv=st.find(s=>netIs(s,"timid"));
  if(roll(sv?LO.srvP[1]:LO.srvP[0])){const s=sv||pick(st);return{cause:"srv",sv:s?s.name:""}}return{cause:"mis"}}
 /* the same function for everyone: an item leaves its owner's chest */
 function loLose(p,force){if(!loAlive(p))return null;const L=(p.inv||[]).filter(loOk);if(!L.length)return null;
- L.sort((a,b)=>loPrice(b)-loPrice(a));const e=pick(L.slice(0,3));p.inv.splice(p.inv.indexOf(e),1);
+ L.sort((a,b)=>loPrice(b)-loPrice(a));const e=pick(L.slice(0,3));if(typeof ilUid==="function")ilUid(e);p.inv.splice(p.inv.indexOf(e),1);
  S.loSeq=(S.loSeq||0)+1;const c=Object.assign({id:S.loSeq,k:e.k,e,own:key(p),w:wk(),due:wk()+LO.findW[0]+R(LO.findW[1]-LO.findW[0]+1),st:"lost",at:null,open:0,cev:0,kn:{},hear:0,acc:null,d:(typeof wdWhen==="function"?String(wdWhen()).replace(/^./,x=>x.toLowerCase()):"")},force||loCause(p));
  loL().push(c);p.loCd=S.turn+LO.cd;const nm=loNm(e.k);
  /* a rival's doing: she may keep it herself (steal and keep) instead of planting it on someone (forced by the act, else LO.keepP) */
@@ -61,10 +61,15 @@ function loLose(p,force){if(!loAlive(p))return null;const L=(p.inv||[]).filter(l
   try{if(typeof tsbLedger==="function")tsbLedger({what:nm,how:"thất lạc",lo:c.id})}catch(x){}}
  else{const txt=`${wdNmC(p)} báo mất ${nm}.`;try{newsAdd(p,"lo",txt);if(S.news&&S.news[0]&&S.news[0].t===txt){c.heard=1;log(txt)}}catch(x){}}
  return c}
+function loLoseE(p,e,cause){if(!loAlive(p)||!e)return null;if(typeof ilUid==="function")ilUid(e);S.loSeq=(S.loSeq||0)+1;const c={id:S.loSeq,k:e.k,e,own:key(p),w:wk(),due:wk()+LO.findW[0]+R(LO.findW[1]-LO.findW[0]+1),st:"lost",at:null,open:0,cev:0,kn:{},hear:0,acc:null,cause:cause||"srv",d:(typeof wdWhen==="function"?String(wdWhen()).replace(/^./,x=>x.toLowerCase()):"")};
+ loL().push(c);if(p===S){try{if(typeof tsbLedger==="function")tsbLedger({what:loNm(e.k),how:"thất lạc",lo:c.id})}catch(x){}}return c}
 function loClean(e){const x=Object.assign({},e);for(const f of ["lo","gh","by","h","w"])delete x[f];return x}
 function loLedgerBack(c){try{if(c&&c.own==="me")for(const x of S.tsbLog||[])if(x&&x.lo===c.id)x.back=1}catch(e){}}
 /* the item goes back to its owner (j92 verdict, a quiet return, a search) */
-function lostReturn(e,how){const c=e&&e.lo?loGet(e.lo):null;if(!c||c.st==="done")return;const o=loP(c.own);if(o&&loAlive(o)){o.inv=o.inv||[];o.inv.push(loClean(c.e||e))}
+function lostReturn(e,how){const c=e&&e.lo?loGet(e.lo):null;
+ /* item conservation (jil): a piece whose case is closed or whose owner is gone still goes somewhere real */
+ if(!c||c.st==="done"){if(e){const o=e.gh?loP(e.gh):null;const x=loClean(e);if(o&&loAlive(o)){o.inv=o.inv||[];o.inv.push(x)}else if(typeof ilGone==="function")ilGone(o||S,x,"dead",{own:e.gh||""})}return}
+ const o=loP(c.own);if(o&&loAlive(o)){o.inv=o.inv||[];o.inv.push(loClean(c.e||e))}else if(typeof ilGone==="function")ilGone(o||S,loClean(c.e||e),"dead",{own:c.own})
  c.st="done";c.end=wk();c.how=how||"tra";loLedgerBack(c);if(o===S)log(`${loNm(c.k)} đã về lại rương ngươi.`)}
 /* take a worn missing item off before a search (wardrobe slot or j8 worn flag) */
 function lostUnwear(t,a){if(!t)return;try{const w=typeof wdOf==="function"?wdOf(t):null;if(w)for(const sl of ["tram","y"]){const e=w[sl];if(e&&e.lo&&(!a||e.gh===key(a))){const k=sl==="y"?wdDefault(t,"y"):null;w[sl]=k?{k,from:"base"}:null;try{wdOf(t)}catch(x){}t.inv=t.inv||[];t.inv.push(e)}}}catch(x){}
@@ -74,17 +79,18 @@ function loEntryAt(h,c){if(!h)return null;let w=null;try{w=typeof wdOf==="functi
 /* where the item is now; it may have moved (planted with "Cài đồ vào rương"): then the case follows it */
 function loEntry(c){const h=loP(c.at);const x=loEntryAt(h,c);if(x||!c.at)return x;for(const p of [S].concat(consorts())){if(p===h||!loAlive(p))continue;const y=loEntryAt(p,c);if(y){c.at=key(p);return y}}return null}
 function loHolder(c){const o=loP(c.own),cu=c.by?loP(c.by):null;const L=consorts().filter(x=>x!==o&&x!==cu&&loAlive(x));if(!L.length)return null;
- if(cu)return L.sort((a,b)=>danger(cu,b)+R(20)-danger(cu,a)-R(20))[0];return pick(L)}
+ if(cu)return mindPickBy(L,x=>BAL.mind.pick.lost2.base+danger(cu,x),cu);/* npc-mind: was ARGMAX+noise */return pick(L)}
 function loHonest(h){const tr=typeof traitsOf==="function"?traitsOf(h).join(" "):(h.trait||"");return (h.malice||0)<50&&!/Tham vọng|Kiêu ngạo/.test(tr)}
 /* where it turns up */
-function loFind(c){const r=R(100);const o=loP(c.own);if(!o||!loAlive(o)){c.st="done";c.how="mat";return}
+function loFind(c){const r=R(100);const o=loP(c.own);if(!o||!loAlive(o)){c.st="done";c.how="mat";loGoneOwner(c,o);return}
  if(r<LO.home[c.cause]){o.inv=o.inv||[];o.inv.push(loClean(c.e));c.st="done";c.end=wk();c.how="nha";
   loLedgerBack(c);if(o===S){Q.push({t:"Tìm thấy đồ thất lạc",who:pMe(),h:`${loTag(c.e)}<p>Cung nhân tìm thấy <b>${loNm(c.k)}</b> ngay trong cung ngươi${c.cause==="srv"&&c.sv?`: ${c.sv} cất nhầm chỗ`:""}.</p>`,btn:"Đã hiểu"});log(`${loNm(c.k)} thất lạc nay tìm thấy trong cung.`)}return}
- if(r>=LO.home[c.cause]+LO.away[c.cause]){c.nf=1;return}
- const h=loHolder(c);if(!h){c.nf=1;return}const e=Object.assign({},c.e,{lo:c.id,gh:c.own});delete e.from;delete e.giver;if(c.cause==="riv"){e.h=1;e.by=c.by;c.tip=wk()+LO.tipW[0]+R(LO.tipW[1]-LO.tipW[0]+1)}else c.open=1;
+ const quiet=r>=LO.home[c.cause]+LO.away[c.cause];
+ const h=loHolder(c);if(!h){c.st="done";c.end=wk();c.how="nvp";if(typeof ilGone==="function")ilGone(o,c.e,"fix");return}const e=Object.assign({},c.e,{lo:c.id,gh:c.own});delete e.from;delete e.giver;if(c.cause==="riv"){e.h=1;e.by=c.by;c.tip=wk()+LO.tipW[0]+R(LO.tipW[1]-LO.tipW[0]+1)}else if(quiet){e.h=1;c.nf=1}else c.open=1;
  h.inv=h.inv||[];h.inv.push(e);c.st="held";c.at=key(h);
  if(h===S&&c.open){Q.push({t:"Đồ lạ trong rương",who:pMe(),h:`${loTag(e)}<p>Cung nhân thấy trong rương ngươi có <b>${loNm(c.k)}</b>, không rõ của ai.</p><p class="past">Vào Tư trang › Việc › Đồ thất lạc: đối chiếu sổ Nội vụ phủ để biết chủ, rồi trả về hay nộp lên.</p>`,btn:"Đã hiểu"});log(`Trong rương có ${loNm(c.k)} không rõ của ai.`)}
  else if(h!==S&&c.open&&loHonest(h))c.ret=wk()+1+R(3)}
+function loGoneOwner(c,o){if(c.st!=="done"||loEntry(c)||!c.e)return;if(typeof ilGone==="function")ilGone(o||S,c.e,"dead",{own:c.own})}
 /* the owner learns where it is (a tip, an investigation, a recognised item) */
 function loKnowAt(c,p,how){if(!p||c.st==="done"||!c.at)return;c.kn[key(p)]=1;if(key(p)===c.own&&c.st==="held")c.st="found";
  if(p===S&&how){const h=loP(c.at);if(c.own==="me")Q.push({t:"Đồ thất lạc",who:h&&h!==S?pv(h):pMe(),h:`${loTag(c.e)}<p>${how}: <b>${loNm(c.k)}</b> của ngươi đang ở ${loPal(h)}.</p><p class="past">Đòi lại êm thấm, hay báo Cung Chính ti thu hồi (Tư trang › Việc › Đồ thất lạc, hoặc thẻ người của nàng).</p>`,btn:"Đã hiểu"});
@@ -92,7 +98,10 @@ function loKnowAt(c,p,how){if(!p||c.st==="done"||!c.at)return;c.kn[key(p)]=1;if(
 /* the owner decides: ask for it quietly, or raise it at Cung Chính ti (NPC owners; her own choice is an act card) */
 function loOwnerMove(c){const o=loP(c.own),h=loP(c.at);if(!o||o===S||!h||c.hear||c.asked||(c.reT||0)>wk())return;c.asked=1;
  if(aff(o,h)>=20||roll(40)){if(h===S){pushDil(mkP("loask",{id:c.id}),"Đồ thất lạc");return}if(roll(loAskOdds(h,o,c))){const x=loEntry(c);if(x){lostUnwear(h,o);const i=h.inv.indexOf(x.e);if(i>=0)h.inv.splice(i,1);lostReturn(x.e,"tra")}return}}
- loRaise(c,o)}
+ if(loHigh(h,o)&&loEmpEv(c,o,h)<BAL.il.empEv){c.asked=0;c.reT=wk()+LO.hearCd;return}loRaise(c,o)}
+/* a higher-rank holder (owner 16/11 13:30Z (3)): no search without the Emperor's decree; asking him needs REAL evidence = this case's evidence + evidence on the holder */
+function loHigh(h,a){return !!h&&!!a&&h!==a&&rkOf(h)>rkOf(a)}
+function loEmpEv(c,a,h){return (lostEv(c.id)|0)+((typeof evG==="function"?evG(a,h):0)|0)}
 function loRaise(c,o){c.hear=wk()+LO.hearW[0]+R(LO.hearW[1]-LO.hearW[0]+1);c.acc=key(o);const h=loP(c.at);
  if(h===S){Q.push({t:"Đồ thất lạc",who:pv(o),h:`<p>${wdNmC(o)} báo Cung Chính ti: ${loNm(c.k)} của nàng thất lạc, nay thấy ở cung ngươi. Cung Chính ti sẽ xét trong ${c.hear-wk()} tuần.</p><p class="past">${c.keep&&c.at==="me"?"Lén trả lại trước khi xét thì êm chuyện: Tư trang › Việc › Đồ thất lạc.":"Tra xét trước để minh oan: Tư trang › Việc › Đồ thất lạc."}</p>`,btn:"Đã hiểu"});log(`${wdNmC(o)} báo Cung Chính ti: ${loNm(c.k)} thấy ở cung ngươi.`)}}
 function loAskOdds(h,o,c){return cl(Math.round(40+aff(h,o)/2+(loHonest(h)?20:-10)-(c&&c.keep&&c.by===key(h)?20:0)),5,95)}
@@ -100,9 +109,9 @@ function loAskOdds(h,o,c){return cl(Math.round(40+aff(h,o)/2+(loHonest(h)?20:-10
 function loKeepOdds(c,a,h){return cl(Math.round(40+lostEv(c.id)*10+evG(a,h)*10+((a.danh||0)-(h.danh||0))/10-(h.mat||0)*3),5,95)}
 function loKeepHear(c,a,h){const nm=loNm(c.k);const o=loKeepOdds(c,a,h);
  if(roll(o)){const x=loEntry(c);if(x){lostUnwear(x.h,a);const i=x.h.inv.indexOf(x.e);if(i>=0)x.h.inv.splice(i,1);lostReturn(x.e,"xet")}
-  if(evG(a,h)>0)evA(a,h,-1);ap(h,{danh:-10,sung:-5});punish(h,"lấy trộm đồ",1);relAdd(h,a,-6);
-  return h===S?`<span class="r">Cung Chính ti soát cung ngươi, thấy ${nm} của ${wdNm(a)}.</span> Ngươi mang tội lấy trộm: Danh -10, Sủng -5, bị phạt. Món đồ về lại với chủ.`
-   :`Cung Chính ti soát ${loPal(h)}, thấy ${nm} của ${wdNm(a)}. ${wdNmC(h)} mang tội lấy trộm: Danh -10, Sủng -5, bị phạt. Món đồ về lại với ${wdNm(a)}.`}
+  if(evG(a,h)>0)evA(a,h,-1);ap(h,LO.thief);punish(h,"lấy trộm đồ",1);relAdd(h,a,-6);
+  return h===S?`<span class="r">Cung Chính ti soát cung ngươi, thấy ${nm} của ${wdNm(a)}.</span> Ngươi mang tội lấy trộm: Danh ${LO.thief.danh}, Sủng ${LO.thief.sung}, bị phạt. Món đồ về lại với chủ.`
+   :`Cung Chính ti soát ${loPal(h)}, thấy ${nm} của ${wdNm(a)}. ${wdNmC(h)} mang tội lấy trộm: Danh ${LO.thief.danh}, Sủng ${LO.thief.sung}, bị phạt. Món đồ về lại với ${wdNm(a)}.`}
  c.asked=0;c.reT=wk()+LO.hearCd;relAdd(h,a,-6);
  return h===S?`Cung Chính ti soát cung ngươi, không thấy ${nm}. ${wdNmC(a)} chưa đủ chứng cứ; việc tạm gác.`
   :`Cung Chính ti soát ${loPal(h)}, không thấy ${nm}. Chưa đủ chứng cứ: việc tạm gác, ${LO.hearCd} tuần sau mới báo lại được.`}
@@ -138,7 +147,7 @@ function loHolderMove(c){const x=loEntry(c);if(!x||x.h===S)return;const h=x.h;
  if(!c.ret&&!x.worn&&!c.wo&&roll(LO.keepWear)){c.wo=1;c.lied=1;const i=h.inv.indexOf(x.e);if(i<0)return;try{if(typeof wdItem==="function"&&wdItem(x.e))wdWear(h,i);else if(IT[x.e.k]&&itm(x.e.k).sl)wear(h,i)}catch(e){}}}
 /* ---------- weekly / monthly ---------- */
 function loWeek(){if(!S||S.dead)return;for(const c of loL()){if(c.st==="done")continue;try{
-  const o=loP(c.own);if(!o||!loAlive(o)){c.st="done";c.how="mat";continue}
+  const o=loP(c.own);if(!o||!loAlive(o)){c.st="done";c.how="mat";loGoneOwner(c,o);continue}
   if(c.st==="lost"){if(!c.nf&&wk()>=c.due)loFind(c);else if(o!==S&&roll(20))loNpcTry(o,c)}
   if(c.st==="held"||c.st==="found"){const x=loEntry(c);if(!x){c.st="done";c.how="matdau";continue}
    if(x.h===S&&x.worn&&c.own!=="me")c.lied=1;
@@ -148,7 +157,7 @@ function loWeek(){if(!S||S.dead)return;for(const c of loL()){if(c.st==="done")co
    if(c.st==="found"&&o!==S)loOwnerMove(c);
    if(c.hear){const h=loP(c.at);if(h&&h!==S&&roll(50))loNpcTry(h,c);
     if(wk()>=c.hear){c.hear=0;const a=loP(c.acc);if(a&&h){const r=c.keep&&c.by===c.at?loKeepHear(c,a,h):(!c.by&&!c.lied)?loQuietHear(c,a,h):wdFrameResolve(a,h);if(r&&h===S&&a!==S)Q.push({t:"Cung Chính ti xét xử",who:pv(a),h:`<p>${r}</p>`,btn:"Đã hiểu"});if(r&&(a===S||h===S||c.heard))log(r);if(r&&a===S)Q.push({t:"Cung Chính ti xét xử",who:pv(h),h:`<p>${r}</p>`,btn:"Đã hiểu"});if(c.st!=="done"&&!loEntry(c)){c.st="done";c.how="xet"}}}}}
-  if(c.st!=="done"&&wk()-c.w>LO.expire){c.st="done";c.how="mat";const x=c.at?loEntry(c):null;if(x&&c.keep){for(const f of ["lo","gh","by"])delete x.e[f]}else if(x&&!x.worn&&x.e.h){const i=x.h.inv.indexOf(x.e);if(i>=0)x.h.inv.splice(i,1)}}}catch(e){console.error(e)}}
+  if(c.st!=="done"&&wk()-c.w>LO.expire){c.st="done";c.how="mat";const x=c.at?loEntry(c):null;if(x){for(const f of ["lo","by","h"])delete x.e[f];try{if(typeof ilLog==="function")ilLog(x.e,c.own,key(x.h),"giữ luôn")}catch(z){}}else loGoneOwner(c,null)}}catch(e){console.error(e)}}
  S.lost=loL().filter(c=>c.st!=="done"||wk()-(c.end||c.w)<=12).slice(-40)}
 function loMonth(){if(!S||S.dead)return;for(const p of consorts()){if(!loAlive(p)||(p.loCd||0)>S.turn)continue;if(loL().some(c=>c.own===key(p)&&c.st!=="done"))continue;if(roll(LO.rate))loLose(p)}
  for(const c of loL())if(c.st==="held"||c.st==="found")loRecog(c)}
@@ -179,7 +188,8 @@ function loActs(c){const B=[];const me=c.own==="me",h=c.at?loP(c.at):null,atMe=c
  if(me&&!known&&c.st!=="done"){tra();return B}
  if(known){const x=loEntry(c);const o=x?cl(WD.clearBase+(h.mat||0)*WD.clearMat+wdFrameEv(h,S,x.e)*10,5,95):50;
   B.push(loBtn(c,"askback","Đòi lại êm thấm",`${word(loAskOdds(h,S,c))} · tốn: 1 khắc · thành: nàng trả lại món đồ · hỏng: nàng chối, thân -4`,c.hear?"đã báo Cung Chính ti":whyTime(1)));
-  B.push(loBtn(c,"raise","Báo Cung Chính ti thu hồi",`tốn: 1 khắc · thành: Cung Chính ti xét trong 1–2 tuần, soát cung nàng; thấy món đồ thì về lại rương · kèm: ai có lỗi thật (giữ đồ người khác, chối) thì bị phạt, Danh -10; người vô can được minh oan · hỏng: không thấy, ${LO.hearCd} tuần sau mới báo lại được`,c.hear?"đã báo, đang chờ xét":(c.reT||0)>wk()?`vừa xét xong, chờ ${c.reT-wk()} tuần`:whyTime(1)));
+  if(loHigh(h,S)){const ev=loEmpEv(c,S,h),need=BAL.il.empEv;B.push(loBtn(c,"raise","Tâu Hoàng thượng xin soát cung",`tốn: ${LO.raiseK} khắc · cần: ${need} chứng cứ thật (đang có ${ev}) · thành: Hoàng thượng hạ chỉ cho Cung Chính ti soát cung nàng trong ${LO.hearW[0]}–${LO.hearW[1]} tuần; thấy món đồ thì về lại rương · kèm: ai có lỗi thật thì bị phạt, Danh ${LO.thief.danh}; người vô can được minh oan · hỏng: không thấy, ${LO.hearCd} tuần sau mới tâu lại được`,c.hear?"đã tâu, đang chờ xét":(c.reT||0)>wk()?`vừa xét xong, chờ ${c.reT-wk()} tuần`:ev<need?`${wdNm(h)} phẩm cao hơn: cần ${need} chứng cứ thật (hỏi cung nhân, Cung Chính ti, sổ Nội vụ phủ)`:whyTime(LO.raiseK)))}
+  else B.push(loBtn(c,"raise","Báo Cung Chính ti thu hồi",`tốn: ${LO.raiseK} khắc · thành: Cung Chính ti xét trong ${LO.hearW[0]}–${LO.hearW[1]} tuần, soát cung nàng; thấy món đồ thì về lại rương · kèm: ai có lỗi thật (giữ đồ người khác, chối) thì bị phạt, Danh ${LO.thief.danh}; người vô can được minh oan · hỏng: không thấy, ${LO.hearCd} tuần sau mới báo lại được`,c.hear?"đã báo, đang chờ xét":(c.reT||0)>wk()?`vừa xét xong, chờ ${c.reT-wk()} tuần`:whyTime(LO.raiseK)));
   tra();return B}
  if(atMe&&(c.open||c.hear)){const ownK=c.kn["ome"]||c.hear;
   if(c.hear)tra();
@@ -214,7 +224,7 @@ function loInvHTML(){if(!S||S.dead)return"";const L=loMine();const D=loL().filte
 function loUI(a,id){const c=loGet(id);if(!c||c.st==="done"||!S||S.dead||Q.length)return;const nm=loNm(c.k);let r="";
  if(["ask","cct","book"].includes(a)){const C=LO.cost[a];if(!can(C.k)||(C.bac&&S.bac<C.bac))return;spend(C.k);r=loDo(a,S,c)}
  else if(a==="askback"){const h=loP(c.at);if(!can(1)||!h)return;spend(1);if(roll(loAskOdds(h,S,c))){const x=loEntry(c);if(x){lostUnwear(h,S);const i=h.inv.indexOf(x.e);if(i>=0)h.inv.splice(i,1);lostReturn(x.e,"tra")}r=`${wdNmC(h)} trả lại ${nm}.`}else{relAdd(S,h,-4);r=`${wdNmC(h)} chối không thấy ${nm}. Thân -4.`}}
- else if(a==="raise"){const h=loP(c.at);if(!can(1)||!h||c.hear||(c.reT||0)>wk())return;spend(1);loRaise(c,S);r=`Ngươi báo Cung Chính ti thu hồi ${nm} ở ${loPal(h)}; sẽ xét trong ${c.hear-wk()} tuần.`}
+ else if(a==="raise"){const h=loP(c.at);if(!can(LO.raiseK)||!h||c.hear||(c.reT||0)>wk())return;const hi=loHigh(h,S);if(hi&&loEmpEv(c,S,h)<BAL.il.empEv)return;spend(LO.raiseK);loRaise(c,S);r=hi?`Ngươi dâng chứng cứ, tâu Hoàng thượng xin soát ${loPal(h)} tìm ${nm}. Hoàng thượng chuẩn tấu: Cung Chính ti sẽ soát trong ${c.hear-wk()} tuần.`:`Ngươi báo Cung Chính ti thu hồi ${nm} ở ${loPal(h)}; sẽ xét trong ${c.hear-wk()} tuần.`}
  else if(a==="giveback"||a==="handin"){if(!can(1))return;spend(1);const x=loEntry(c);const o=loP(c.own);if(x){lostUnwear(S);const i=S.inv.indexOf(x.e);if(i>=0)S.inv.splice(i,1);lostReturn(x.e,a==="handin"?"nop":"tra")}
   if(a==="giveback"&&o){relAdd(S,o,4);r=`Ngươi sai người trả ${nm} về ${wdNm(o)}. Thân +4.`}else{apply({danh:1});r=`Ngươi nộp ${nm} lên Nội vụ phủ trả về chủ. Danh +1.`}}
  else if(a==="sneak"){if(!can(1))return;spend(1);const x=loEntry(c);const o=loP(c.own);if(x){lostUnwear(S);const i=S.inv.indexOf(x.e);if(i>=0)S.inv.splice(i,1);lostReturn(x.e,"nop")}c.hear=0;r=`Người của ngươi lặng lẽ đặt ${nm} về rương ${wdNm(o)}. Không ai bị tra.`}

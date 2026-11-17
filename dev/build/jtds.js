@@ -46,9 +46,7 @@ Object.assign(RCP_BK,{kimchi:"Mẫu kim chỉ",phanson:"Phương phấn son",thu
 /* phấn son: pollen in jasmine / osmanthus / rose; nothing else new */
 Object.assign(RCP_AL,{phanson:{r02:["phan"],r03:["phan"],r10:["phan"]}});
 /* jrcp's load-time steps for the new kinds: first recipe of each lối open at bậc 0; books + hand-copied sheets as real items */
-for(const kind of tdsKinds()){for(const s of RCP_ST[kind]){const r=wkrOf(kind,s[2][0]);if(r)r.lv=0}
- RCP_ST[kind].forEach((s,i)=>{if(!i)return;for(const copy of [0,1]){const k=rcpBookK(kind,s[0],copy);
-  IT[k]={n:copy?`Bản chép tay ${RCP_BK[kind].toLowerCase()} «${s[1]}»`:`${RCP_BK[kind]} «${s[1]}»`,kd:"Sách phổ",d:`Đọc: học ${rcpStN(kind,s[0])}`,pr:copy?BAL.rcp.sheetPr:BAL.rcp.bookPr[Math.min(3,i)],rk:0,tg:["rv"],bk:{kind,sid:s[0]}}}})}
+/* first recipe at bậc 0 + the sách phổ items of these kinds: jrcp's two passes run on every RCP_ST kind (jreg regEach), no copy here */
 /* ---- a course is named like an art wherever a work's maker art is looked up (ARTS.find(x=>x.k===w.a)) ---- */
 const TDS_VA=VIR.map(v=>({k:v.k,n:v.n,st:"tai",vir:1}));
 (function(){const f0=Array.prototype.find;ARTS.find=function(fn,t){const r=f0.call(this,fn,t);return r!==undefined?r:f0.call(TDS_VA,fn,t)}})();

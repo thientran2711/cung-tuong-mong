@@ -101,7 +101,7 @@ async function weekBoth(A,B,w){const n=await A.p.evaluate(()=>typeof B4N==='numb
   ok(a.kc&&a.fam>0,`week ${w+1}: A still at home with her family`,a);ok(String(a.d)===String(c.d),`week ${w+1}: same date`,[a.d,c.d]);ok(!c.fr,`week ${w+1}: B still has no entry for A`,c.fr);ok(a.fr===c.name,`week ${w+1}: A sees B`,[a.fr,c.name])}
  await shot(A,'07-home-after3');
  /* 4 A passes the tuyển tú (entry forced) → next merged week B sees her */
- const ent=await A.p.evaluate(()=>{if(!isKc())return{skip:S.kc&&S.kc.end};for(let i=0;i<20&&Q.length&&!S.dead;i++){const m=Q[0];if(m.opts&&m.opts.length)chooseM(0);else closeModal()}if(!isKc())return{skip:'ended'};S.kc.soOk=1;S.kc.tt={early:false,raw:5};kcEnter(1);return{kc:isKc(),rank:S.rank,name:S.name}});
+ const ent=await A.p.evaluate(()=>{if(!isKc())return{skip:S.kc&&S.kc.end};for(let i=0;i<20&&Q.length&&!S.dead;i++){const m=Q[0];if(m.opts&&m.opts.length)chooseM(Math.max(0,m.opts.findIndex(c=>!c.off)));else closeModal()}if(!isKc())return{skip:'ended'};S.kc.soOk=1;S.kc.tt={early:false,raw:5};kcEnter(1);return{kc:isKc(),rank:S.rank,name:S.name}});
  if(!ent.skip){ok(!ent.kc&&ent.rank===1,'A entered the palace',ent);await clear(A);
   await B.p.evaluate(()=>{window.__notes=[];const pm=pushModal;pushModal=function(m){try{__notes.push(m&&m.t)}catch(e){}return pm.apply(this,arguments)}});
   const wk=(await C(A)).week;await weekBoth(A,B,9);for(const o of [A,B])ok(await untilC(o,x=>__co().week===x+1,wk,90000),'entry week: '+o.name+' advanced');
