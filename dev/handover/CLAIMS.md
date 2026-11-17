@@ -779,3 +779,4 @@
 | coop-thin-b SẴN SÀNG KIỂM 4609afa6 (r2 seam fix by #4) → re-review r3 (fresh opus BIG; brief briefs/review-coop-thin-b-r3.md) | review/coop-thin-b-r3 | B | session_01N1tNP5hpVGVh45GCMzd9Ah | RUNNING | 17/11 11:40Z |
 | MAID CONSORT-TIER REDRAW W4f (successor of W4e; a36 m22 + a51 m01-m26; opened by lead #7) | review/fig-cutout-clean | C | session_011xDdVSvgMHhWjrFtf6Qv8J | RUNNING | 17/11 11:48Z |
 >>>>>>> 942503ed (report voice-trait part 1 (engine + 5 situations, split proposal))
+| REVIEW voice-trait-r1 (opus BIG) of e134694 | review/voice-trait-r1 | C ROOT-6 | session_011xDdVNmiymzf41EueV5zCn | RUNNING | 17/11 12:41Z |
