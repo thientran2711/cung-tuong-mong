@@ -32,3 +32,8 @@ START_CTX low; no rollover needed. Finished.
 - Backgrounds removed with Magnific images_remove_background (3 credits each) on the 6 clean-forehead lineup gens, then split per figure by alpha column runs (stray neighbour fragments dropped), tight crop. Checked on dark bg: clean edges, no parchment, foreheads clean (no local fill needed: regenerated clean).
 - Files (PNG, RGBA) in img/_review/maid-consort-sample/: <mNN>_<t1|t3|t5>_proposal.png (~320x745 = native size of the 1344x752 gens; not downscaled, not upscaled) and <mNN>_<t1|t3|t5>_current.png (live fig 900 px high, converted from webp).
 - Superseded older files in the same folder (jpg/webp proposals, contact sheet) remain: wipe the folder when done.
+
+## Round 4: m09 8-rank ladder (owner ~20:05Z "vẽ đủ 8 bậc", via ROOT-9)
+- t1 (sky-blue, anchor), t3 (rose-coral), t5 (emerald) kept from round 2 (clean-forehead cutouts, native ~320x745). NEW at gpt-2-6 2k, single figure 2:3, refs = m09 base look + approved lineup rgdpn7Qxtc, each cut with images_remove_background: t2 pale lilac EbnGWUCuuO, t4 honey-amber 5jMTpizKxe, t6 crimson 3z5q1rVREY, t7 midnight indigo (redo: first try vQ2Rz05a47 had a high stand collar = rejected) yiEfqMlPW9, t8 imperial yellow + phoenix crown s78BvYEl8e. 6 gens + 5 cuts.
+- Files: img/_review/maid-consort-sample/m09_t1..t8_ladder.png (+ m09_ladder_check.jpg for the foreman only).
+- Caveats: t1/t3/t5 are ~745 px high while t2/t4/t6/t7/t8 are ~3000 px (2048x3072 gens); t6 has a long trailing hem (wider canvas); t6 V neckline is fairly deep; colour ladder blue, lilac, rose, amber, green, crimson, indigo, yellow (t3 rose vs t6 crimson are the closest pair). If approved, redo t1/t3/t5 at 2k for the same size.
