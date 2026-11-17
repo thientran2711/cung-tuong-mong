@@ -4,7 +4,7 @@ const {chromium}=require('playwright');const D=require('./lib/device');const out
 const SUBJ=[["art","cam"],["art","ky"],["art","thi"],["art","hoa"],["art","vu"],["art","y"],["vir","cong"],["vir","dung"],["vir","ngon"],["vir","hanh"]];
 (async()=>{const srv=await D.serveRoot();const b=await chromium.launch({proxy:process.env.HTTPS_PROXY?{server:process.env.HTTPS_PROXY,bypass:'localhost,127.0.0.1'}:undefined});const R={};let fail=0;const ok=(c,m)=>{if(!c){fail++;console.log("FAIL",m)}};
  for(const dev of ['fold','ipadAir']){const ctx=await D.newDeviceContext(b,dev);const p=await ctx.newPage();const errs=[],bad=[],reqs=[];p.on('pageerror',e=>errs.push(String(e).slice(0,200)));
-  p.on('request',q=>{if(/scene-thanhtai/.test(q.url()))reqs.push(q.url().replace(/^.*img\//,'img/'))});p.on('response',r=>{if(r.status()>=400&&/\.(webp|png|jpg)/.test(r.url()))bad.push(r.status()+' '+r.url().slice(-60))});
+  p.on('request',q=>{if(/scene-thanhtai/.test(q.url()))reqs.push(q.url().replace(/^.*img\//,'img/'))});p.on('response',r=>{if(r.status()>=400&&/\.(webp|png|jpg)/.test(r.url())&&/img\/(scene-|art-|act-cat|mo-)/.test(r.url()))/* only the pictures this scene family shows; other 404s (img/@W<n>.webp, face-man-<n>) come from main code outside this test */bad.push(r.status()+' '+r.url().slice(-60))});
   const g=await D.openHost(p,srv.url);await p.waitForTimeout(2500);const r={};
   await g.evaluate(()=>{SLOT=3;document.getElementById('title').hidden=true;start();try{NLP=null}catch(e){}Q.length=0;const k=document.getElementById('kload');if(k)k.hidden=true;const m=document.getElementById('modal');if(m)m.hidden=true;render();if(S.rank<3)S.rank=3});
   try{await g.waitForSelector('#kroul',{timeout:20000});await p.waitForTimeout(1500);await g.evaluate(()=>{const b=[...document.querySelectorAll('#kroul button')].find(x=>/Bỏ qua/.test(x.textContent));b&&b.click()});await g.waitForSelector('#kroul',{state:'detached',timeout:20000})}catch(e){}
@@ -15,7 +15,7 @@ const SUBJ=[["art","cam"],["art","ky"],["art","thi"],["art","hoa"],["art","vu"],
   r.subj=[];
   for(const [kind,k] of SUBJ){await clean();
    await g.evaluate(([kind,k])=>{if(kind==="art"){S.arts[k]=1;S.artp[k]=0;addArt(k,5)}else{vNorm(S);S.vir[k]=0;S.virp[k]=0;addVir(S,k,3)}},[kind,k]);
-   await g.waitForSelector('#klearnov .klearn-pic',{timeout:8000});await p.waitForTimeout(700);
+   await g.waitForSelector('#klearnov .klearn-pic',{timeout:8000});await g.waitForFunction(()=>{const i=document.querySelector('#klearnov .klearn-pic');return i&&i.complete&&i.naturalWidth>0},null,{timeout:8000}).catch(()=>{});await p.waitForTimeout(300);
    const o=await g.evaluate(()=>{const i=document.querySelector('#klearnov .klearn-pic');return{src:i.getAttribute('src'),w:i.naturalWidth,cx:i.currentSrc.slice(-40)}});
    r.subj.push([k,o.src,o.w]);ok(o.src.endsWith(`img/scene-thanhtai-${k}.webp`),`subject ${k}: src ${o.src}`);ok(o.w>0,`subject ${k}: not loaded`);
    if(k==="cong"||k==="cam")await p.screenshot({path:`${out}/${dev}-learn-${k}.png`})}
