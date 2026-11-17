@@ -140,3 +140,24 @@ Found, not patched (reported):
 - Probe P5: Thiện cảm rows of one NPC differ between the seats before and after a merge (guest 0 / host 14 at the start of one run) — pre-existing two-copy drift (one-world for NPC rows is part C/H); the proof row (plain count) agrees on both seats.
 - Notes N1/N2 of the r1 review (patch counter on host storage loss; ctm-thin-d keys never deleted): not in the FAIL list, unchanged.
 Rollover: not needed (≈ 22 % est. < START_CTX 3 % + 25 %).
+
+## ROLLOVER HANDOVER #2 (worker session_01N1tNP3op5jQGEdK2Sf7aVD, 11/17/2026 ~08:40Z) — for the successor that does "B r1 FIX"
+Why: context ≈ 24 % est. (START ≈ 3 %; rollover at START + 25 %); the B r1 order (6 items + main merge) will not fit, so the worker stops here and the
+COORDINATOR (Foreman B s3 session_01N1tNP3Jf9UG8ZtZdVruBg7) opens the successor.
+State: review/coop-thin-b @ a0342238 = B + D + FIX D r1 (section above, all gates green). Nothing uncommitted.
+Next task (Foreman B s3 order 08:16Z, verbatim summary): read dev/handover/reports/review-coop-thin-b-r1.md in full; take the probe dev/test/coop-thin-b-r1.js
+from review/coop-thin-b-r1 674b5fa9 (DFLAG=1 = D on) into review/coop-thin-b; fix: (1) wait card draws her DEAD old person (nlcard reads S) + its ✕ runs the
+old local accept → render from the new life data, ✕ through the host path; (2) SEAM B‖D: life roll/accept inside withSeat also runs D takeQ + whole-life
+patch when D is on → duplicate 'Nhập cung' cards, stale S.thq, rkName page errors 1/3, host-leave mid-roll stuck → ONE life-change path when D is on
+(before CAP=4); (3) TB.hold never released if she leaves before accept → release on leave/timeout, her store must not keep the unaccepted life; (4) stale
+re-roll uses re=0 → the real counter; (5) one-core: relAdd 35 (j2) and ghen R(15) (j1) re-typed → back to the BAL keys; (6) old-path Hoàng hậu drift: fix
+at the root buildFriend (whole family) + test. Merge latest origin/main (9fdc1199 or newer). Gates: as in the D r1 list above + coop-thin-b-r1 probe green
+with DFLAG=0 and 1 + coop-thin-d 52/52. Report '## r1 FIX' here, then ONE SẴN SÀNG KIỂM <sha> for B+D to Foreman B s3.
+Hints for item 2 from FIX D r1 (already on the branch): her cards come ONLY from the host store (seatOf, LS per room) and myBlob drops thq (so no stale thq via
+blobs); withSeat skips the D row tracking when TH.curDo==="life" (now call-scoped). Still open: D.takeQ + the person patch (pDiff p0→ss) DO run inside life
+intents → likely set D.noPatch / skip takeQ for curDo "life" (B answers with its own q/P) — check against the r1 probe.
+Setup: worktree /home/user/wt/thinb (sparse, at a0342238, hooks installed); test output /home/user/wt/thinb-out (outside git); handover worktree
+/home/user/wt/hoD (sparse dev/handover/reports; on the handover branch force-updates use `fetch +ref`, then reset + cherry-pick, never rebase in the shallow clone).
+Commands (LIVE Worker https://ctm-coop.victoria-tntt.workers.dev): python3 dev/build/assemble.py; node dev/test/coop-thin-d.js <W> 2 [1]; node dev/test/coop-thin-d-probe.js <W> 2 [1];
+node dev/test/coop-thin-b.js <W> 2 [1]; node dev/test/coop-thin-a.js <W> 0|1; node dev/test/coop-e2e.js <out> (COOP_SWAP=1); node dev/test/coop-p2.js <out>;
+node dev/test/one-core-guard.js; bash dev/site/build_site.sh + commit index.html/sw.js/assets.json, then bash dev/tools/quickcheck.sh. Shots: SHOTS=<dir outside git>.
