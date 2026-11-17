@@ -79,11 +79,14 @@ function j59sel(st,tk,me){let pi=null;try{pi=typeof popIdx==="number"?popIdx:nul
      corners (the name row), so they never cover a figure or a name.
    - the head count is ONE number (kitHereCount): the stage title, the page chips and the Dư đồ label of the place she stands in. */
 function j59person(p){return !!p&&p.kind!=="chest"&&p.kind!=="task"&&!(p.kind==="srv"&&p.sk==="task")}
+/* KIT 33.9 chip content: [grey neutral full-body icon img/kit/unknown-ico-n.webp (192 px tall, drawn ~27 px; ONE file, no srcset so the jcdn CDN fallback works)] + the number. The icon is decorative (alt ""), the chip carries the aria-label. */
+function j59chipIco(n){return `<img class="j59ico" src="img/kit/unknown-ico-n.webp" alt="" draggable="false"><span class="j59n">${n}</span>`}
 function j59chips(st,R,P,again){/* morechip-fix: placed once now and once more on the next frame, after the side column (k3Stage) has its full height */if(!again)requestAnimationFrame(()=>{try{if(st.isConnected)j59chips(st,R,P,1)}catch(e){}});/* KIT 33.9 swipe stage: P: {pg, pages, before, after, xl, xr}. NO arrow buttons — two "+N" chips in the top corners of the backdrop: LEFT = people already passed (left of the view), RIGHT = people still to come; hidden at 0. Pure kit chip, not tappable (the row is swiped) */
  for(const side of ["l","r"]){let c=st.querySelector(".j59more.j59m"+side);const n=P&&P.pages>1?(side==="r"?P.after:P.before):0;
   if(!(n>0)){if(c)c.remove();continue}
   if(!c){c=document.createElement("div");c.className="kchip n j59more j59m"+side;st.appendChild(c)}
-  const txt="+"+n;if(c.textContent!==txt)c.textContent=txt;
+  /* morechip-sil (owner 17/11 ~14:05Z): the kit chip shows the grey gender-neutral figure icon + the number (no "+") — ONE kit function j59chipIco(n) for every chip, both corners, all sizes */
+  if(c.dataset.n!==String(n)){c.dataset.n=String(n);c.innerHTML=j59chipIco(n)}
   const lab=side==="r"?`${n} người ở bên phải · vuốt sang trái`:`${n} người ở bên trái · vuốt sang phải`;c.setAttribute("aria-label",lab);c.title=lab;
   /* morechip-corners (owner 17/11 13:02Z): the chip is BIG (kit chip size .kbig) and stands in the stage's BOTTOM corner of its own side: LEFT chip = people off the left side (bottom-left),
      RIGHT chip = people off the right side (bottom-right). Never on a side column / rail (it steps beside it), never on a figure's name chip (it steps up above the name row, then beside) */
@@ -263,7 +266,8 @@ const css=document.createElement("style");css.textContent=`
 .stage.j59.j59wait #tokens .tok,.stage.j59.j59wait #mefig,.stage.j59.j59wait #j59metag,.stage.j59.j59wait .kspet{visibility:hidden}
 .stage.j59 .j59more{position:absolute;z-index:4;pointer-events:none;font-weight:700;white-space:nowrap}
 /* morechip-corners: the big kit chip (KIT 33.9): readable at Fold 755 */
-.kchip.j59more{font-size:1.05rem;line-height:1.2;padding:5px 15px;border-radius:16px;border-width:2px;margin:0;box-shadow:0 2px 6px rgba(60,30,10,.28);background:#fff8ee}
+.kchip.j59more{display:flex;align-items:center;gap:5px;font-size:1.05rem;line-height:1.2;padding:3px 13px 3px 10px;border-radius:16px;border-width:2px;margin:0;box-shadow:0 2px 6px rgba(60,30,10,.28);background:#fff8ee}
+.kchip.j59more .j59ico{height:1.7rem;width:auto;display:block;flex:none;pointer-events:none;user-select:none}
 .stage.j59 #mefig,.stage.j59 #j59metag,.stage.j59 #tokens,.stage.j59 .kspet{translate:var(--j59dx,0px) 0;transition:var(--j59tr,none);will-change:translate}
 .stage.j59{touch-action:pan-y}
 .stage.j59 #mefig,.stage.j59 #tokens img{-webkit-user-drag:none;user-select:none}
