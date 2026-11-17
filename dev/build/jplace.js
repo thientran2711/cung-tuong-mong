@@ -55,7 +55,7 @@ function kitOptCramped(g){return [...g.querySelectorAll(":scope > button.ka:not(
 (function(){const c0=k3OptCols;k3OptCols=function(){try{document.querySelectorAll("#modal .opts:has(> button.ka), #modal .kpscopts").forEach(g=>{const dl=g.closest(".dlg");if(dl&&dl.querySelector(".kpid"))return;
   const B=[...g.querySelectorAll(":scope > button.ka")];const R=kitOptLayout(B);g.classList.toggle("kbackrow",R.mode==="rows"&&B.some(b=>b.classList.contains("kback")))})}catch(e){}
  const r=c0.apply(this,arguments);
- try{document.querySelectorAll("#modal .opts.k3grid, #modal .kpscopts.k3grid").forEach(g=>{if(!g.classList.contains("kbackrow")&&!kitOptCramped(g))return;g.classList.remove("k3grid","k3g3");g.classList.add("k3rows");
+ try{document.querySelectorAll("#modal .opts.k3grid, #modal .kpscopts.k3grid").forEach(g=>{if(!g.classList.contains("kbackrow")&&g.clientWidth>=540&&!kitOptCramped(g))return;g.classList.remove("k3grid","k3g3");g.classList.add("k3rows");
    g.querySelectorAll(":scope > button.ka").forEach(b=>b.classList.remove("k3long","k3odd"))})}catch(e){}return r}})();
 (function(){const s0=showModal;showModal=function(){const r=s0.apply(this,arguments);try{kitPlaceSil();requestAnimationFrame(()=>{kitPlaceSil();try{kitDlgFit()}catch(e){}})}catch(e){}return r}})();
 (function(){const st=document.createElement("style");st.id="k-place";st.textContent=`
