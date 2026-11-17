@@ -579,7 +579,7 @@
 | npc-death re-wire (opus): jnpcd/jly into j95 place-people record (Lý Trường Môn viện, dead off lists, Thái y viện new name) | review/npc-death-wire | D | session_01964izBuQu8dWabKyYB69JE | DONE SẴN SÀNG KIỂM de166c3f (archived) | 17/11 03:35Z |
 | suc-khoe review r2 (opus BIG) of da50857d | review/suc-khoe-r2 | D | session_01964izEdQ4cDsTpuGgdScHp | PASS 7e1f42ca (archived) → FOR MAIN batch | 17/11 03:35Z |
 | C44 cloud-del 'Xóa sổ trên mây' (sonnet UI, KIT §83.9) | review/cloud-del | D | session_01964izCcuExvScNgYEs1xN6 | DONE SẴN SÀNG KIỂM e12ef99a (archived) | 17/11 03:35Z |
-| P5 STORY BOT balance (opus, report only, ch1–4 first) | review/story-bot | D | session_01964izEJdhucE8HEDCzfJ25 | RUNNING | 17/11 03:35Z |
+| P5 STORY BOT balance (opus, report only, ch1–4 first) | review/story-bot | D | session_01964izEJdhucE8HEDCzfJ25 | DONE REPORT READY 0e8f8ff8 (archived) | 17/11 03:35Z |
 | scenes-3 r1 PASS 92b6c60f (review/scenes-3-r1) → builder batch-0232 (or next batch); worker + reviewer archived | review/scenes-3-r1 | main s29 | session_01UV1Szkquo1hWfgug5N5F9Q | PASS | 17/11 03:37Z |
 | ART event-art-style (sonnet art): OWNER 03:42Z event pictures off-style (faces / colour / brushwork) → audit every event/act/opt/intro picture vs anchor, 4 samples → C, then redo (brief briefs/event-art-style.md) | handover reports/event-art-style.md | C | session_011xDdVNnHxuy2KotX9dH3zb | RUNNING | 17/11 03:40Z |
 | fig-rank-match-r2 review PASS 2558a2f1 (review/fig-rank-match-r2-r1); manifests safe-first both. UPLOAD BLOCKED: s29's cdn_sync push of img/FIGURES*.json was denied by the auto-mode classifier → waiting on the owner's OK. Rebuilt files verified (guard PASS, 1296/2112) in s29 scratch; live backups 656/240 kept. Code → next batch. | review/fig-rank-match-r2-r1 | main s29 | session_01UV1SzgpLfyJgZdu2ie2XYZ | PASS | 17/11 03:43Z |
@@ -642,3 +642,4 @@
 | OI branch review r1 (opus BIG) of de6a876b (origin-intros + entry-exam + kc-roads fix2 + render-cost) | review/batch-0032-oi-r1 | D | session_01964izCyrKPEnt2GpVBazHD | RUNNING | 17/11 05:50Z |
 | one-core-dup part 1 SẴN SÀNG KIỂM 648461b5 → review r1 (opus BIG) | review/one-core-dup-r1 | B | session_01N1tNP6WJifjTnmrtNwmBm4 | RUNNING | 17/11 05:53Z |
 | one-core-dup2 — successor (rolled over): dup hunt round 2 (§5 disagreements + ~30 single-copy concepts), owns guard (opus) | review/one-core-dup2 | B | session_01N1tNP5YW8yGvX2ZkQozRyk | RUNNING | 17/11 05:53Z |
+| STORY FRAME for late-added origins (bd 0 chapters; whole family of load-time registry loops) (opus; story-bot fault 1) | review/story-frame | D | session_01964izFgZ6CTgm1p1mFw3Un | RUNNING | 17/11 05:56Z |
