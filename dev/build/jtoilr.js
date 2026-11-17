@@ -48,7 +48,7 @@ function toilRxOpts(r){const R=toilRx(),L=[];const h=r.host,cons=h&&h!=="th"&&h!
    go:()=>{if(!item)return;const i=(S.inv||[]).findIndex(e=>e&&IT[e.k]&&itm(e.k).n===item.n&&!e.h&&!e.w&&!e.t&&!e.wk&&!econNo(S,e)&&!econGiver(e)&&econPrice(S,e)===item.pr);if(i<0)return;S.inv.splice(i,1);done(item.n)}},!!item,kitWhyItem("món đồ đáng giá ngang chút bạc kia"),kitWhenItem()))}
  /* Hỏi bí quyết */
  if(cons&&!h.queen&&!toilTipOn()){let np=null;try{np=toilNpc(h)}catch(e){}const mine=toilToday(S),my=mine&&mine.makeup?(mine.score|0):0;
-  if(np&&np.makeup&&np.score>=my+R.askGap){const T=traitsOf(h)||[];const odds=cl(Math.round(R.askBase+aff(h,S)/R.askAffDiv-(h.ghen||0)/R.askGhenDiv-(T.some(t=>t==="Kiêu ngạo"||t==="Hiểm độc")?R.askProud:0)),10,90);
+  if(np&&np.makeup&&np.score>=my+R.askGap){const T=traitsOf(h)||[];const odds=cl(Math.round(R.askBase+aff(h,S)/R.askAffDiv-(h.ghen||0)/R.askGhenDiv-(T.some(t=>t==="Kiêu ngạo"||t==="Xảo quyệt")?R.askProud:0)),10,90);
    L.push({n:"Hỏi bí quyết",fx:{},hideOut:true,odds,hint:lv=>lv?`hỏi ${nm} cách trang điểm cho khéo; ${toilOddsW(odds)}, nàng ta bớt quý ta dù có chịu chỉ hay không`:`học được cách trang điểm; hỏi xin thì bị coi thấp một chút`,risk:"có rủi ro",
     go:()=>{affAdd(h,S,R.askAff);if(roll(odds)){S.toilTip={wk:toilWk(),until:toilWk()+R.tipDays,from:nm};log(`${nm} chỉ cho ta cách kẻ mày, đánh phấn; tay ta nhờ đó khéo hơn mấy hôm.`)}else log(`${nm} cười nhạt, không chịu chỉ bảo; ta mất mặt một chút.`)}})}}
  return L}

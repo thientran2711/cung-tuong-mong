@@ -35,7 +35,7 @@ function q72Pick(sp,not,ff){not=not||[];const nk0=a=>a&&!not.includes(q72Key(a))
   if(sp==="fallen")L=L.filter(v=>v.out);else L=L.filter(v=>!v.out);
   if(sp==="hh")L=L.filter(v=>v.queen);else if(sp!=="fallen")L=L.filter(v=>!v.queen);
   if(sp!=="rvc"&&sp!=="fallen")L=L.filter(v=>!v.confined);
-  if(sp==="rv+")L=L.filter(v=>aff(v,S)>=10);if(sp==="rvk")L=L.filter(v=>tr(v).some(t=>t==="Hiền lành"||t==="Nhu mì"));if(sp==="rva")L=L.filter(v=>tr(v).some(t=>t==="Tham vọng"||t==="Kiêu ngạo"));
+  if(sp==="rv+")L=L.filter(v=>aff(v,S)>=10);if(sp==="rvk")L=L.filter(v=>tr(v).some(t=>t==="Ân cần"||t==="Khiêm nhường"));if(sp==="rva")L=L.filter(v=>tr(v).some(t=>t==="Tham vọng"||t==="Kiêu ngạo"));
   if(sp==="rvp")L=L.filter(v=>v.preg);if(sp==="rvc")L=L.filter(v=>v.confined);
   L=L.filter(v=>aff(v,S)>-30&&!(typeof sameHouse==="function"&&sameHouse(S,v)&&sp!=="rv"&&sp!=="rv+"));
   const v=wpick(L.filter(v=>nk({k:sp==="hh"?"hh":sp==="fallen"?"fallen":"rv",id:v.id})),v=>1+Math.max(0,aff(v,S))/15);return v?q72A(sp==="hh"?"hh":sp==="fallen"?"fallen":"rv",v.id):null}
@@ -209,7 +209,7 @@ function q72Date(){try{if(window.VP&&typeof VP.date==="function")return VP.date(
 function q72Npc(){const q=q72();if(!q72On())return"";const L=liveRivals(true).filter(v=>!v.confined);if(L.length<2)return"";let ev="";
  for(let t=0;t<2;t++){if(!roll(Q72CFG.npc*100))continue;const a=pick(L);const others=L.filter(v=>v!==a);
   const w=others.map(v=>Math.max(.1,10+aff(a,v)));let r=Math.random()*w.reduce((x,y)=>x+y),i=0;while(r>w[i]&&i<others.length-1){r-=w[i];i++}const b=others[i];
-  const tr=(()=>{try{return traitsOf(b)}catch(e){return[b.trait]}})();const p=cl(40+aff(b,a)/2+(tr.includes("Hiền lành")?20:0)+(tr.includes("Nhu mì")?10:0)-(tr.includes("Kiêu ngạo")?15:0)-(tr.includes("Hiểm độc")?10:0),5,95);
+  const tr=(()=>{try{return traitsOf(b)}catch(e){return[b.trait]}})();const p=cl(40+aff(b,a)/2+(tr.includes("Ân cần")?20:0)+(tr.includes("Khiêm nhường")?10:0)-(tr.includes("Kiêu ngạo")?15:0)-(tr.includes("Xảo quyệt")?10:0),5,95);
   const what=pick(NPCQ72);const ok=roll(p);relAdd(a,b,ok?6:-4);const k=[a.id,b.id].join(">");q.nd=q.nd||{};if(ok)q.nd[k]=(q.nd[k]||0)+1;
   const txt=ok?`${a.name} nhờ ${b.name} ${what}; ${b.name} giúp, hai người thân hơn.`:`${a.name} nhờ ${b.name} ${what}; ${b.name} từ chối, hai người sinh hiềm khích.`;
   q.np.unshift({w:q72Date(),t:txt,a:a.id,b:b.id});if(q.np.length>8)q.np.length=8;try{const s=seenNPC(b,a,txt+" ");if(s)ev+=s}catch(e){}}
@@ -369,7 +369,7 @@ window.q72Bot=function(){if(!S||S.dead||Q.length||!q72On())return false;const q=
   s:[G("home","Viết thư khuyên giải hai nhà","tai",50,2),W("Đợi hồi âm",1)],ok:{r:10,cc:1,fn:X=>{tdRelAdd(X.A.id,X.p.c,12);return `Nhà ${X.A.id} và nhà ${X.p.c} bớt đối đầu (+12).`},x:"hai nhà bớt đối đầu (+12)"},no:{r:-4}});
 
  /* ===== real thieves, spies and leaks (fixed truths) ===== */
- T7("mat_tram","inv",{r:"rv",rf:v=>(v.staff||[]).some(s=>s.tr==="tham"),p:X=>{const s=(X.A.o.staff||[]).find(s=>s.tr==="tham");return{cul:s.sid,cn:s.name}},t:"Tìm món trang sức {A} bị mất",
+ T7("mat_tram","inv",{r:"rv",rf:v=>(v.staff||[]).some(s=>netIs(s,"greed")),p:X=>{const s=(X.A.o.staff||[]).find(s=>netIs(s,"greed"));return{cul:s.sid,cn:s.name}},t:"Tìm món trang sức {A} bị mất",
   h:"“Đôi hoa tai ngọc mẫu thân {xung} để lại biến mất mấy hôm nay. {Xung} không dám làm to chuyện. {Goi} tinh ý, giúp {xung} tìm.”",dl:5,
   s:[G("A","Hỏi chuyện người hầu cung {A}","mat",45,2),C(X=>`Ngươi biết sự thật: ${X.p.cn}, người hầu tham lam của {A}, lấy trộm`,
    O("Báo {A} tất cả",{r:6,fn:X=>{const s=servById(X.p.cul);if(s)s.loyal=cl((s.loyal||0)-15,0,100);return `${X.p.cn} bị chủ phạt, lòng với chủ -15.`}}),O(X=>`Lặng lẽ bảo ${X.p.cn} trả lại, giữ kín tên`,{w:{duc:3},fn:X=>{const s=servById(X.p.cul);if(s){s.af=s.af||{};s.af[key(S)]=(s.af[key(S)]||0)+15}return `${X.p.cn} trả lại đồ, mang ơn ngươi.`}}))],ok:{r:10,ch:"mat_tram2"},no:{r:-5}});
@@ -380,16 +380,16 @@ window.q72Bot=function(){if(!S||S.dead||Q.length||!q72On())return false;const q=
   s:[G("home","Dò xét kẻ hầu","mat",45,2),C(X=>X.p.sid!=null?`Ngươi biết sự thật: ${X.p.sn} làm tai mắt cho ${(()=>{const v=byKey(X.p.who);return v&&v!==S?v.name:"người ngoài"})()}`:"Ngươi biết sự thật: kẻ hầu của ngươi không ai làm tai mắt; chuyện lọt ra từ chỗ khác",
    O(X=>X.p.sid!=null?`Gọi ${X.p.sn} ra răn đe, bắt thôi`:"Khen {A} cẩn thận",{fn:X=>{if(X.p.sid==null){S.maid.loyal=cl(S.maid.loyal+4,0,100);return `Lòng ${S.maid.name} +4.`}const s=servById(X.p.sid);if(s&&ownerOf(s)===S){s.spyFor=null;s.loyal=cl((s.loyal||0)-10,0,100);return `${s.name} thôi làm tai mắt, lòng với ngươi -10.`}return""}}),
    O(X=>X.p.sid!=null?`Giữ ${X.p.sn} lại, giữ miệng trước mặt hắn`:"Để yên",{w:{tamco:1}}))],ok:{r:8},no:{r:-3}});
- T7("bac_mat","inv",{r:"sv",rf:s=>(S.staff||[]).some(z=>z.tr==="tham"&&z!==s),p:X=>{const s=(S.staff||[]).find(z=>z.tr==="tham"&&z.sid!==X.A.id);return{cul:s.sid,cn:s.name}},t:"Tìm số bạc lương {A} bị mất",
+ T7("bac_mat","inv",{r:"sv",rf:s=>(S.staff||[]).some(z=>netIs(z,"greed")&&z!==s),p:X=>{const s=(S.staff||[]).find(z=>netIs(z,"greed")&&z.sid!==X.A.id);return{cul:s.sid,cn:s.name}},t:"Tìm số bạc lương {A} bị mất",
   h:"“Số bạc dành dụm cả năm của nô tỳ để dưới gối, giờ mất sạch. {Nc} làm chủ cho nô tỳ.”",dl:4,
   s:[G("home","Tra hỏi trong cung","mat",50,2),C(X=>`Ngươi biết sự thật: ${X.p.cn} lấy bạc`,
    O(X=>`Bắt ${X.p.cn} trả lại, phạt nhẹ`,{fn:X=>{const s=servById(X.p.cul);if(s&&ownerOf(s)===S){s.loyal=cl((s.loyal||0)-8,0,100);return `${s.name} trả bạc, lòng với ngươi -8.`}return""}}),
    O("Bù bạc cho {A} từ tiền riêng, nhắc khéo kẻ lấy",{c:{bac:-20},r:6,w:{duc:2}}))],ok:{r:10},no:{r:-5}});
- T7("hang_lau","risk",{r:"sve",rf:s=>s.tr==="tham",t:"Giấu hàng {A} mang lậu vào cung",h:"“Nô tài tham chút lời, mang ít lụa lậu vào bán. Xin {N} cho cất tạm trong kho cung mình mấy hôm.”",dl:3,
+ T7("hang_lau","risk",{r:"sve",rf:s=>netIs(s,"greed"),t:"Giấu hàng {A} mang lậu vào cung",h:"“Nô tài tham chút lời, mang ít lụa lậu vào bán. Xin {N} cho cất tạm trong kho cung mình mấy hôm.”",dl:3,
   s:[W("Cất hàng trong kho",1),C("Hàng lậu",O("Để hắn bán xong, chia ít lời",{p:65,w:{bac:20},lto:"bad"}),O("Bắt mang đi, răn đe",{r:-6,w:{duc:2},to:"ok"}))],ok:{r:10},no:{r:-4},bad:{fx:{danh:-4,bac:-20},pun:"chứa hàng lậu trong cung"},badT:"Nội vụ phủ khám kho, thấy hàng lậu."});
- T7("chuoc_sv","craft",{r:"sve",rf:s=>s.tr==="tham"||s.tr==="nhat",t:"Chuộc lại gia bảo {A} đem cầm",h:"“Nô tài túng quá, lỡ đem cầm chiếc vòng mẹ để lại, giờ hiệu cầm đồ sắp bán mất. {Nc} cho nô tài vay ít bạc chuộc về.”",dl:5,
+ T7("chuoc_sv","craft",{r:"sve",rf:s=>netIs(s,"greed")||netIs(s,"timid"),t:"Chuộc lại gia bảo {A} đem cầm",h:"“Nô tài túng quá, lỡ đem cầm chiếc vòng mẹ để lại, giờ hiệu cầm đồ sắp bán mất. {Nc} cho nô tài vay ít bạc chuộc về.”",dl:5,
   s:[C("Chuộc vòng",O("Bỏ 30 bạc chuộc giúp",{c:{bac:-30}}),O("Sai người mặc cả, chuộc rẻ hơn",{c:{bac:-15},p:50,sk:"tamco",lto:"fail"})),G("home","Trao lại vòng cho {A}","",100,1)],ok:{r:18},no:{r:-5}});
- T7("doi_thuoc","inv",{r:"doc",b:"rsv",bf:s=>s.tr==="tham",p:X=>({cn:X.B.n,own:X.B.own.name}),t:"Tra ai lấy trộm nhân sâm ở Thái y viện",h:"“Nhân sâm trong kho hụt hẳn mấy cân. Thần không dám báo khi chưa rõ. {Nc} tra giúp thần.”",dl:4,
+ T7("doi_thuoc","inv",{r:"doc",b:"rsv",bf:s=>netIs(s,"greed"),p:X=>({cn:X.B.n,own:X.B.own.name}),t:"Tra ai lấy trộm nhân sâm ở Thái y viện",h:"“Nhân sâm trong kho hụt hẳn mấy cân. Thần không dám báo khi chưa rõ. {Nc} tra giúp thần.”",dl:4,
   s:[G("tyv","Đối chiếu sổ thuốc, hỏi người ra vào","mat",50,2),C(X=>`Ngươi biết sự thật: ${X.p.cn}, người hầu của ${X.p.own}, lấy trộm`,O("Báo thái y đúng như vậy",{fn:X=>{relAdd(S,X.B.own,-4);if(X.B.o)X.B.o.loyal=cl((X.B.o.loyal||0)-10,0,100);return `${X.p.own} mất mặt (-4); ${X.p.cn} bị phạt.`}}),O(X=>`Bảo ${X.p.cn} lén trả lại`,{w:{duc:2},rb:10}))],ok:{r:10,fx:{mat:1}},no:{r:-4}});
  T7("dem_chung","risk",{r:"rsv",rf:s=>(s.loyal||50)<40,b:"rv",bf:(o,z,A)=>o===A.own&&aff(o,S)<0,t:"Gặp {A} giờ Tý ở vườn ngự",h:X=>`“Nô tỳ hầu ${X.A.own.name} đã chán cảnh bị hành hạ. Nàng ấy làm nhiều chuyện sau lưng {N}. Giờ Tý, ở hòn non bộ vườn ngự, nô tỳ trao vật chứng.”`,dl:3,
   tr:"Nàng ấy quả ghét ngươi, và người hầu này quả bất mãn với chủ.",s:[G("vuon","Ra vườn giờ Tý (chỉ buổi tối)","tamco",55,1,{},"b",{bu:B4L})],ok:{r:8,d:0,fn:X=>{evA(S,X.B.o,1);return `Chứng cứ về ${X.B.n} +1.`},x:"Chứng cứ về {B} +1"},no:{},bad:{fx:{danh:-4},ev:"B"},badT:"Người của {B} rình được ngươi đêm khuya ngoài vườn."});
@@ -500,7 +500,7 @@ window.q72Bot=function(){if(!S||S.dead||Q.length||!q72On())return false;const q=
   s:[C("Hồi môn",O("Tặng 30 bạc",{c:{bac:-30}}),O("Thêu cho nàng đôi gối uyên ương",{p:60,sk:"tai",k:2,lto:"stay"}))],ok:{r:20,fx:{duc:2}},no:{r:-4}});
  T7("dong_tam","love",{r:"svm",rf:s=>!!loverOf(s)||!!fiM(s),w:fest(7),t:"Thắt nút đồng tâm Thất tịch cùng {A}",h:"“Đêm Thất tịch, nô tỳ muốn thắt nút đồng tâm gửi người thương mà thiếu chỉ đỏ. {Nc} cho nô tỳ xin ít.”",dl:2,
   s:[G("home","Mua chỉ đỏ","",100,1,{bac:-8}),G("home","Thắt nút cùng {A}","tai",75,1)],ok:{r:10},no:{r:-2}});
- T7("giau_cn","pro",{r:"rsv",rf:(s,z)=>(s.loyal||50)<45&&trs(z.own).some(t=>t==="Hiểm độc"||t==="Kiêu ngạo"),t:"Cứu {A} khỏi chủ cũ",
+ T7("giau_cn","pro",{r:"rsv",rf:(s,z)=>(s.loyal||50)<45&&trs(z.own).some(t=>t==="Xảo quyệt"||t==="Kiêu ngạo"),t:"Cứu {A} khỏi chủ cũ",
   h:X=>`“{Nc} cứu nô tỳ! ${X.A.own.name} hễ giận là đánh, lưng nô tỳ chưa lành vết cũ. Cho nô tỳ trốn tạm vài hôm.”`,dl:5,
   s:[W("Giấu {A} trong cung",1),C("Đưa {A} đi đâu",O("Xin Tổng quản cho nàng về hầu cung ngươi",{t:()=>capOk(),tw:"cung ngươi đã đủ người hầu",c:{bac:-20},p:55,sk:"danh",lto:"bad",fn:(X,x,ok)=>{if(!ok)return"";const s=X.A.o,ow=X.A.own;const i=(ow.staff||[]).indexOf(s);if(i>=0)ow.staff.splice(i,1);s.spyFor=null;s.loyal=60;S.staff.push(s);relAdd(S,ow,-6);return `${s.name} về hầu cung ngươi (lòng 60); ${ow.name} mất thiện cảm -6.`}}),
    O("Trả về chủ cũ, xin chủ nương tay",{p:60,sk:"danh",lto:"fail",fn:X=>{relAdd(S,X.A.own,-3);X.A.o.loyal=cl((X.A.o.loyal||40)+10,0,100);return `${X.A.own.name} nương tay; lòng ${X.A.n} với chủ +10.`}}))],

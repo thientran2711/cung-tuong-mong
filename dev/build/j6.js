@@ -60,7 +60,7 @@ function ser(){const rs=new Set(rivals),ks=new Set(allKids().map(x=>x[0]));
   if(Array.isArray(o))return o.map(x=>walk(x,false));const r={};
   for(const k in o){const v=o[k];if(typeof v==="function"||k==="origin")continue;r[k]=(k==="kids"&&Array.isArray(v))?v.map(x=>walk(x,true)):walk(v,false)}return r};
  return{v:6,b4:1,buoi:S.buoi||0,ok:S.origin.k,S:walk(S,true),R:rivals.map(x=>walk(x,true)),rid,tab,used,P:serQ(),at:Date.now()}}
-function deser(d){rivals=d.R;rid=d.rid;S=d.S;S.origin=originByKey(d.ok);/* a country branch (old "bd" saves: Bắc Địch branch of hòa thân) resolves too */
+function deser(d){trMigrate(d);rivals=d.R;rid=d.rid;S=d.S;S.origin=originByKey(d.ok);/* a country branch (old "bd" saves: Bắc Địch branch of hòa thân) resolves too */
  const kid=n=>allKids().map(x=>x[0]).find(k=>k.name===n)||null;
  const fix=o=>{if(!o||typeof o!=="object")return o;if(o.$r!=null&&Object.keys(o).length===1)return rivals.find(v=>v.id===o.$r)||null;if(o.$k!=null&&Object.keys(o).length===1)return kid(o.$k);
   for(const k in o)o[k]=fix(o[k]);return o};

@@ -6,11 +6,11 @@ function tagBand(x){const s=String(x==null?"":x).toLowerCase();const m=s.match(/
 /* faces stay for life: once drawn, kept across promotions and ageing (children still grow) */
 (function(){const ff=faceFor;faceFor=function(o,kind,age){if(o&&o.fc&&o.fcKeep)return;const r=ff.apply(this,arguments);if(o&&o.fc)o.fcKeep=1;return r}})();
 /* figures: each person gets one identity and keeps it; no two people in one game ever share one (a dead woman's identity is not reused until a new game) */
-const LOOKFOR={"Hiểm độc":["hienlanh","gentle","diu","numi"],"Kiêu ngạo":["kieungao","proud"],"Hiền lành":["hienlanh","gentle"],"Đa nghi":["danghi","cool"],"Tham vọng":["thamvong","bold"],"Nhu mì":["numi","soft","hienlanh"]};
+const LOOKFOR={"Xảo quyệt":["hienlanh","gentle","diu","numi"],"Kiêu ngạo":["kieungao","proud"],"Ân cần":["hienlanh","gentle"],"Kín đáo":["danghi","cool"],"Tham vọng":["thamvong","bold"],"Khiêm nhường":["numi","soft","hienlanh"]};
 function idsFor(role){const m={};for(const f of FIGS)if(norm(f.role)===norm(role)&&f.identity!=null)m[f.identity]=m[f.identity]||[],m[f.identity].push(f);return m}
 function identityOf(p,role){const who=p.ref||p;if(who.idn!=null)return who.idn;const M=idsFor(role);const ids=Object.keys(M);if(!ids.length)return null;
  const used=new Set([S].concat(rivals||[]).filter(x=>x&&x!==who&&(x===S||x.alive)&&x.idn!=null).map(x=>String(x.idn)));if(S.emp&&S.emp.idn!=null)used.add(String(S.emp.idn));
- S.idUsed=S.idUsed||{};const U=S.idUsed[role]=S.idUsed[role]||[];let free=ids.filter(i=>!used.has(String(i))&&!U.includes(String(i)));if(!free.length)return null;const want=LOOKFOR[who.trait]||[];const fit=free.filter(i=>M[i].some(f=>want.includes(norm(f.look))));if(fit.length)free=fit;who.idn=pick(free);U.push(String(who.idn));return who.idn}
+ S.idUsed=S.idUsed||{};const U=S.idUsed[role]=S.idUsed[role]||[];let free=ids.filter(i=>!used.has(String(i))&&!U.includes(String(i)));if(!free.length)return null;const want=tv(LOOKFOR,who)||[];const fit=free.filter(i=>M[i].some(f=>want.includes(norm(f.look))));if(fit.length)free=fit;who.idn=pick(free);U.push(String(who.idn));return who.idn}
 (function(){const f0=figFor;figFor=function(p,kind){if(!FIGS.length||!p)return"";const role=figRole(p);let who=p.ref||p;
  /* the Thái hậu / Emperor arrive as {kind:"th"} / {kind:"emp"} stubs: use the real records, so the identity sticks and the age band is
     their REAL age (owner 11/15: Thái hậu showed the a18 picture because the stub had no age) */
