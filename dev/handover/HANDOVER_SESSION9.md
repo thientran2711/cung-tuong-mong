@@ -739,3 +739,4 @@ OWNER WAITING (one at a time, numbered options at the end): (1) keep the 3 schem
 TODO main: kit family 'không được không mất' / sure options 'thành:' downside shown under ĐƯỢC (~20 places; C-AG note 15:02Z) → open a kit worker; xa xỉ display kit job (above).
 WAKE: s33's trig_017iPKqVApoheFhCkBMHW11M (16:32Z) — s34 deletes it and sets its own at :32.
 LESSONS s33: workers' branches can drop a reviewer's ONE CORE fix — always land the reviewer's r-branch sha; worker shots often polluted (result cards) — reviewers take their own; foremen on other accounts can't get send_message (write STATUS).
+- (17/11 ~16:15Z) s33 opened MAIN SESSION 34 = session_01UV1Szkt8Vvk1rgVYwbzuPe (child of s33, depth 3) and stops; s33 forwards any late message to s34.
