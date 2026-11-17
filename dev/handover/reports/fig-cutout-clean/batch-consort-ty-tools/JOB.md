@@ -1,13 +1,13 @@
-# JOB for a generation sub-agent (consort-ty batch, 4k figure repaint). Follow EXACTLY. Be terse; do not talk to the owner.
+# JOB for a generation sub-agent (consort-ty batch, 2k figure repaint). Follow EXACTLY. Be terse; do not talk to the owner.
 Repo: /home/user/cung-tuong-mong (cwd for scripts: /home/user/cung-tuong-mong/dev/handover/reports/fig-cutout-clean = R). Tools dir R/batch-consort-ty-tools (= P): prompt.py, proc.sh, sheet.py, progress/. Needs Magnific MCP tools: images_generate, creations_upload_image, creations_wait (load via ToolSearch select:... if deferred).
 Folder for ALL Magnific calls: folderReference ba4aecfe-efce-47e2-b53f-30d292091886. Face refs (identifiers): N2HYqYa6D9 bxVgMSX5Y2 dtPf4EDXSL eIyaPEVdqL.
 You get a LIST of lines "idx key" (idx = gesture index; key e.g. consort-c02-ty3-a18). Work in batches of 4 files in parallel (max 4 images_generate calls at once, never more). Per batch:
 1. For each key: creations_upload_image url=https://ctm-img.victoria-tntt.workers.dev/img/fig-<key>.webp fileName=fig-<key>.webp folderReference=... -> old-ref id. (4 uploads in parallel in one message.)
 2. Prompt = output of `python3 P/prompt.py <idx> <age>` where age = a18/a26/a36/a51 from the key suffix. Paste it verbatim as the prompt.
-3. images_generate: mode gpt-2-6, width 2048, height 4096, resolution 4k, folderReference, extraSettings {"transparentBackground": true} (MANDATORY), references (type image):
+3. images_generate: mode gpt-2-6, width 1024, height 2048, resolution 2k (OWNER 17/11: 2k only, NEVER 4k), folderReference, extraSettings {"transparentBackground": true} (MANDATORY), references (type image):
    - age a18: [oldref, N2HYqYa6D9, bxVgMSX5Y2, dtPf4EDXSL, eIyaPEVdqL]
    - age a26/a36/a51: [oldref(that age), NEW a18 output id of the same look (look up key with a18 in P/progress/ids.tsv: same cNN-tyN), the four faces]
-   Send the 4 generate calls in ONE message (parallel). 80 credits each.
+   Send the 4 generate calls in ONE message (parallel). 65 credits each.
 4. creations_wait on the 4 identifiers (repeat until allTerminal).
 5. For each completed one run (in parallel in one bash, with &, then wait): `P/proc.sh <key> "<result url>"` (run from R). It prints MASTER ... ALPHA_OK/ALPHA_BAD, match score, and QA line. ALPHA_BAD = regenerate (transparent flag missing). QA FAIL "holes: N pinholes" with small N is OK (ignore). Any other FAIL (edge, halo, height) = regenerate. match must be >=0.9 else regenerate.
 6. LOOK: `python3 P/sheet.py /tmp/<agentname>-<n>.jpg key1 key2 key3 key4` then Read the jpg (per file: fitted fig light, dark, face crop). Judge: calm frontal/slightly angled face toward viewer (never back-turned), 5 fingers/hands right, shoes visible, HEM ENDS AT THE FEET (no long trailing train/fish-tail), nothing cut by canvas, tiny huadian (flower/leaf/butterfly: not a teardrop/dot, not big), face beautiful, soft round-almond warm eyes (not slanted, not teary), fair porcelain skin, same outfit colours as old, age matches the key's age. Fail -> regenerate that file only (max 2 retries, then mark HARD; credits still logged).
