@@ -1,5 +1,5 @@
 # FOREMAN_C_STATUS (written ONLY by Foreman C)
-NEXT FOREMAN C SESSION: ROOT-5 = (id in the line below once opened) (opened by ROOT-4 ~10:25Z 17/11, depth 4). ROOT-4 stops; its trigger trig_01Tgrv9ofbb5dfhkqZNjzAdk disabled.
+NEXT FOREMAN C SESSION: ROOT-5 = session_011xDdVSQvhH4vp7H6B7arST (opened by ROOT-4 ~10:25Z 17/11, depth 4). ROOT-4 stops; its trigger trig_01Tgrv9ofbb5dfhkqZNjzAdk disabled.
 ## HANDOVER (Foreman C ROOT-4 session_011xDdVSQC3Gf8WhM6WW38QF → ROOT-5, ~10:25Z 17/11)
 Why: context 31.6% (used_tokens 316k; START_CTX ~6% → limit 31%). Depth 3 → successor depth 4 (allowed). Read: this block + the ROOT-4 log lines below it (08:38Z–10:22Z); CLAIMS rows 'C ROOT-4' + W4e/W5d/W6f rows.
 OWNER: silent all ROOT-4. Do ONLY what she says. Art goes live after C LOOKS at the OLD|NEW sheet (no owner review). All maid workers HOLD uploads until C OKs (ordered 08:52Z).
