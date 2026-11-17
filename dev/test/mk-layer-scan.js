@@ -17,10 +17,9 @@ const [,,URL,ROOT0]=process.argv;const ROOT=ROOT0||process.cwd();
     if(!lips.every(q=>q[0]>=B[0]&&q[0]<=B[0]+B[2]&&q[1]>=B[1]&&q[1]<=B[1]+B[3]))why.push('lip outside layer box');
     const eyeY=P.slice(20,40).reduce((a,q)=>a+q[1]/20,0),allY=P.map(q=>q[1]);const chinY=Math.max(...allY);if(!(lc[1]>eyeY+1&&lc[1]<chinY))why.push('lip centroid not between eyes and chin');
     for(const [lk,n] of [['vua',3],['dep',3],['tuyet',5],['diem',5],['vung',5]]){const u=toilMakeupSvg(key,lk,col,false);if(!u)continue;const svg=decodeURIComponent(u.split(',')[1]);const k=(svg.match(/<ellipse/g)||[]).length;if(k!==n)why.push(lk+' svg ellipses '+k+' (want '+n+': a lip oval is drawn?)')}
-    /* looks3 (owner 13:28Z): the cheek ovals of every level lie inside the face outline oval and below the eyes (geometry from the mesh points) */
-    for(const lk of ['vung','vua','dep','tuyet','diem']){const A=(row[8]||1.3),Pp=P.map(q=>[q[0],q[1]*A]);const G=toilMkGeom(Pp,TOIL_MKS[lk]);
-     for(const c of G.cheeks){if(c.fit<=.011)continue;let ok=true;for(let t=0;t<8;t++){const a=t*Math.PI/4,x=Math.cos(a)*c.rx,y=Math.sin(a)*c.ry,cs=Math.cos(c.rot),sn=Math.sin(c.rot),px=c.x+x*cs-y*sn,py=c.y+x*sn+y*cs;if(!G.inOl(px,py)||py<G.eyeBot+G.u*.07-.001)ok=false}
-      if(!ok)why.push(lk+' blush outside outline/eyes')}}
+    /* looks3 (owner 13:28Z / 13:48Z): the blush is never shrunk; the clip is the face outline oval (built from the mesh) x skin x no eyes. Check the geometry for every face: both cheek centres (fit row) lie inside the outline oval and below the eyes */
+    {const A=(row[8]||1.3),Pp=P.map(q=>[q[0],q[1]*A]);const G=toilMkGeom(Pp,TOIL_MKS.dep);
+     [[row[2],row[3]],[row[4],row[5]]].forEach(([cx,cy],i)=>{const x=cx,y=cy*A;if(!G.inOl(x,y))why.push('cheek '+i+' centre outside the outline');else if(y<G.eyeBot+G.u*.07)why.push('cheek '+i+' centre not below the eyes')})}
     out.push([key,why])}
    return out},[g,j]);
   for(const [k,w] of r){keys++;if(w.length)bad.push(k+': '+w.join('; '))}}
