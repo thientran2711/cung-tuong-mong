@@ -1208,17 +1208,11 @@ function kitBranchFx(src){const out={sure:[],gain:[],risk:[]};const fxOf=t=>{con
 /* asset names: set when review/wardrobe lands its pearl-string veil (the old img/veil*.png was rejected by the owner); empty = nothing drawn */
 window.KIT_VEIL=window.KIT_VEIL||{por:"",fig:""};
 function kitVeiled(p){if(!(window.KIT_VEIL&&(KIT_VEIL.por||KIT_VEIL.fig)))return false;try{if(!p||typeof scarOf!=="function")return false;const s=scarOf(p);return !!(s&&s.veil)}catch(e){return false}}
-(function(){const p0=pcPort;pcPort=function(f,col,status){let h=p0.apply(this,arguments);try{if(f&&f.__kp&&kitVeiled(f.__kp))h=h.replace(/(<img class="kfr")/,`${KIT_VEIL.por?`<img class="kveil" src="${KIT_VEIL.por}" alt="" aria-hidden="true" onerror="this.remove()">`:""}$1`)}catch(e){}return h}})();
-(function(){const m0=mdH;mdH=function(p,cls){let h=m0.apply(this,arguments);try{if(p&&p.__kp&&kitVeiled(p.__kp))h=h.replace(/<i class="kmf"/,`${KIT_VEIL.por?`<img class="kveil" src="${KIT_VEIL.por}" alt="" aria-hidden="true" onerror="this.remove()">`:""}<i class="kmf"`)}catch(e){}return h}})();
 (function(){if(typeof renderStage!=="function")return;const r0=renderStage;renderStage=function(){const r=r0.apply(this,arguments);try{const ppl=curPeople();document.querySelectorAll("#tokens .tok").forEach(b=>{const p=ppl[+b.dataset.p];const who=p&&(p.ref||null);const old=b.querySelector(".kveilf");
   if(!who||!kitVeiled(who)){if(old)old.remove();return}const fi=b.querySelector("img.figimg");if(!fi||old||!KIT_VEIL.fig)return;const v=document.createElement("img");v.className="kveilf";v.alt="";v.src=KIT_VEIL.fig;v.onerror=()=>v.remove();b.appendChild(v);
   const place=()=>{try{const bb=(window.J59BB&&J59BB[fi.currentSrc||fi.src])||{t:0,b:1,l:0,r:1};const R=fi.getBoundingClientRect(),B=b.getBoundingClientRect();const H=R.height*(bb.b-bb.t),W=R.width*(bb.r-bb.l);
    v.style.cssText=`position:absolute;pointer-events:none;z-index:2;left:${R.left-B.left+R.width*bb.l+W*.3}px;width:${W*.4}px;top:${R.top-B.top+R.height*bb.t+H*.04}px;height:${H*.11}px;object-fit:contain`}catch(e){}};
   if(fi.complete)place();else fi.addEventListener("load",place,{once:true})})}catch(e){}return r}})();
-(function(){const st=document.createElement("style");st.id="kit2-veil";st.textContent=`
-.pcp.kit .kin>img.kveil{position:absolute!important;inset:auto!important;left:14.655%!important;top:20.289%!important;width:70.691%!important;height:49.373%!important;object-fit:fill!important;z-index:1;pointer-events:none;border-radius:0!important}
-span.md.kmini.kmini>img.kveil{left:9.66%!important;top:11.75%!important;width:80.67%!important;height:80.3%!important;object-fit:fill!important;z-index:1}
-`;document.head.appendChild(st)})();
 /* ================= KIT 48.3 · kitRankPaint — rank title + name in RANK COLOUR everywhere (owner 15/11, session 8: "Phẩm bậc trong mấy ô
    chọn này chưa theo màu phẩm, màu phẩm xuất hiện mới nơi có tên và phẩm của người.") ==========
    ONE rule: wherever a person's rank / role title stands right before that person's name ("Quý phi Tần Kiều Nguyệt", "Cung nữ thân tín
