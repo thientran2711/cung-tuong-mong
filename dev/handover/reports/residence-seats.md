@@ -78,3 +78,6 @@ Remaining for the successor (coordinator opens it):
 3. Update §3 table; if Tần/QP pace drop holds, flag it to the owner (seat halving effect).
 
 SẴN SÀNG KIỂM 020890d156548a6417c4c60e6be4a4c33752cc42
+
+## WIP — successor #2 (17/11 10:05Z, START_CTX ≈ 4 %)
+Bot-page crash fixed (runner served no images → every <img> pending forever kept detached dialog trees alive, 3.5 M nodes); stuck lives fixed (bot tapped a kitOff option forever); fast bot mode. Commits f807c3c7, 7692fac2 on review/residence-seats. Mid-run (85 before / 81 after lives, ≤120 months each): Tần reach 94 → 98 /100 (the old 38/100 was an artefact of stuck short lives), harem max 18 → 20 (= cap), co-residents >2: 11 448 → 0, perf per buổi +1.4 %. Full run to 150/side running; final tables + quickcheck follow.
