@@ -529,3 +529,4 @@
 | fig-feet-crop-2 (sonnet kit keeper; OWNER BUG 17/11 ~02:00Z: VIỆC timed dialog figures lose feet Fold+iPad, whole family of figure dialogs; earlier fix 8fb59e05 kitDpFit did not cover it) | review/fig-feet-crop-2 | main s28 | session_01UV1SzhmYHAXz9FfRkTLF6Z | RUNNING | 17/11 01:55Z |
 | WHOLE FIGURE REPAINT lead #6 (sonnet art; replaces lead #5 session_011xDdVRBW26agruDT2Bm65K archived; LEAD HANDOVER #5->#6 in BATCH_PLAN.md) | review/fig-cutout-clean | C | session_011xDdVS87fDNLJMJGzeiVWL | RUNNING | 17/11 01:58Z |
 | WHOLE FIGURE REPAINT batch W5b maid-rest-A (successor of W5, 2K) | review/fig-cutout-clean | C | session_011xDdVRUq5KAtiVYtgqEjkS | RUNNING | 17/11 01:58Z |
+| old-people proportion ROLLOUT #2 (sonnet art, 2K): ~85 p/f-series by age/sex base + mk-fit thaihau check (successor of session_011xDdVRzEtFchdNQKaMfih7) | reports/fig-proportion-redo on handover | C | session_011xDdVSy3ERmyVnLWqMYT6p | RUNNING | 17/11 01:59Z |

@@ -116,6 +116,7 @@ Always create worker sessions WITH source_url (a session without it cannot get t
 - 01:57Z old-people LIVE: 15 Thái hậu by age (a18/a26 young black hair + young colours on c01 build; a36 mature; a51 silver; mama build for older) + 8 por + old man p03-a51 head = Emperor ratio. C looked at thaihau-all15 → OK; a18 head enlarge (≈.10) still to apply. Next: p/f-series old people rollout.
 - 01:58Z lead #5 rolled over (~28%) → archived; lead #6 sonnet session_011xDdVS87fDNLJMJGzeiVWL (tells W1b/W2/W3b/W4b/W5b/W6/W7 new lead id; C note: maid HD twins must be uploaded too). W5 → W5b session_011xDdVRUq5KAtiVYtgqEjkS.
 - 02:00Z Thái hậu a18 head fix LIVE (lower-body squeeze 0.84, face .103–.107 ≈ c01 .104) → C looked: natural, OK. Old-people rollout (~85 p/f-series) approved: base by age/sex (c01 / mama / Emperor / p03 v5), first batch sheet to C then upload per QA.
+- 02:00Z old-people worker rolled over → archived; rollout #2 sonnet session_011xDdVSy3ERmyVnLWqMYT6p (~85 p/f-series + mk-fit thaihau anchors check). Lead #6 up, told all 7 workers; checking maid HD.
 - Waiting owner: FP NC v24 pick; origin intro samples; por-vacant-hh.
 
 ## SESSION 9 LOG
