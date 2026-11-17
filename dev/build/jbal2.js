@@ -1002,6 +1002,13 @@ Object.assign(BAL.ag,{mg2:{on:1,med:[[-2,8.9],[0,7.5],[2,5.8]],w:8,tat:{e:[0,2,5
 /* skew (owner ~16:20Z (f): strong NPC hands RARE, weak hands clearly WORSE than her): hand = lo + (hi − lo)·b^skew, b = mean of 2 draws — median hand ≈ 5
    (plays ≈ 3 on a matching board vs the skilled human 7.5), about 2 % of hands reach 8.5+. Interim mg-bots bands until the owner-only calibration writes them. */
 BAL.ag.mg2.hand={on:1,lo:3,hi:9.5,w:4,skew:1.6};
+/* AG-ALL-2d2 OWNER CALIBRATION (owner OD 17/11 ~16:20Z (f) + ~16:40Z option 1: "chỉ có tôi test và cái số của tôi dùng chung cho mọi người"; jmgcal):
+   d  = the board gaps of the test rounds, easy → hard (one round each; 5 rounds, rising difficulty)
+   up / dn = how far above / below HER play the best / clumsiest NPC hand plays on a matching board (hand band hi = b + w/2 + up, lo = b + w/2 − dn);
+   min / max = hand floor / ceiling (max = the interim hand hi: never a perfect player)
+   k  = her calibrated base per mini-game kind {b: her graded play on a matching board, n: rounds, at: mm/dd/yyyy}, written from her «CTM-CAL …» code by
+        dev/tools/mgcal_apply.py — ONE base for every player; a kind not in k keeps the default band above */
+BAL.ag.mg2.cal={on:1,d:[-2,-1,0,1,2],up:1,dn:4,min:1,max:9.5,k:{}};
 /* j71 odds words under mg2: the same draw (mgNpcRaw, seeded by the plan) for every entrant, her included, on this contest's board (j71 mgX7) */
 (function(){if(typeof cOdds7!=="function"||typeof fxOdds7!=="function")return;const c0=cOdds7,f0=fxOdds7;
  const win=(E,base,kindAt,mi,r)=>{let w=0;const N=500;for(let t=0;t<N;t++){let b=-1,bi=-1;for(let i=0;i<E.length;i++){const x=base[i]+mgNpcRaw(kindAt(i),E[i],{rnd:r})/10*J71.luck;if(x>b){b=x;bi=i}}if(bi===mi)w++}return cl(Math.round(100*w/N),3,97)};

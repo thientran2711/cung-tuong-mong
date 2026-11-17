@@ -22,7 +22,7 @@ function mgRankOf(p){try{p=p||S;if(typeof rkOf==="function")return cl(+rkOf(p)||
 function mgTier(kind,o){o=o||{};const B=BAL.mgTier;const occ=B.occ[o.occ]?o.occ:"hoc";const [b0,pr]=B.occ[occ];
  const rank=o.rank!=null?cl(+o.rank||0,0,7):mgRankOf(o.p);
  let lv=o.lv;if(lv==null){try{lv=kg82LvFor(o.p||S,kind)}catch(e){lv=0}}lv=cl(+lv||0,0,5);
- const stake=cl(b0+pr*rank+(o.big?B.big:0),0,B.stakeMax);const d=stake-lv;
+ const stake=cl(b0+pr*rank+(o.big?B.big:0),0,B.stakeMax);const d=o.d!=null&&isFinite(+o.d)?+o.d:stake-lv;/* o.d: a fixed gap (jmgcal rounds) */
  const ease=cl(B.mid-B.slope*d+((B.kAdj||{})[kind]||0),B.easeMin,5);
  const tier=d<=-B.band?0:d>=B.band?2:1;
  return{occ,occName:MGT_OCCN[occ],rank,stake,lv,d,tier,word:["Dễ","Vừa","Khó"][tier],ease:Math.round(ease*10)/10}}
@@ -84,8 +84,11 @@ function mgNpcRaw(kind,p,o){o=Object.assign({},MGX.o||{},o||{});const r=o.rnd||M
    rolls below its ceiling most of the time. Saved on the person (p.mgH[kind]); the draw is hashed on the person + kind, so an old save (no p.mgH) and a
    co-op guest roll the very same hand lazily. Off: BAL.ag.mg2.hand.on = 0 (one skilled-bot curve for everyone, as part 2b). */
 function mgHashU(str){let h=2166136261;for(let i=0;i<str.length;i++){h^=str.charCodeAt(i);h=Math.imul(h,16777619)}h^=h>>>13;h=Math.imul(h,0x5bd1e995);h^=h>>>15;return (h>>>0)/4294967296}
-function mgHand(kind,p){const H=BAL.ag.mg2.hand;if(!p||typeof p!=="object")return H.lo+(H.hi-H.lo)*Math.pow(.5,H.skew||1);let M=p.mgH;if(!M||typeof M!=="object")M=p.mgH={};
- if(M[kind]==null){const id=(p.name||"")+"|"+(p.id!=null?p.id:p.sid!=null?"s"+p.sid:"")+"|"+kind;const b=(mgHashU(id+"|a")+mgHashU(id+"|b"))/2;M[kind]=Math.round((H.lo+(H.hi-H.lo)*Math.pow(b,H.skew||1))*100)/100;MGX.hand=(MGX.hand||0)+1}
+function mgHand(kind,p){const H=BAL.ag.mg2.hand;if(!p||typeof p!=="object"){const Bd=typeof mgCalBand==="function"?mgCalBand(kind):H;return Bd.lo+(Bd.hi-Bd.lo)*Math.pow(.5,H.skew||1)}let M=p.mgH;if(!M||typeof M!=="object")M=p.mgH={};
+ /* AG-ALL-2d2: the band per kind comes from the owner's calibration (jmgcal mgCalBand: BAL.ag.mg2.cal.k) or the BAL default; p.mgHv[kind] = the band it was
+    rolled in — a changed band re-rolls the SAME hash draw inside the new band (old saves without p.mgHv re-roll identically under the default band) */
+ const Bd=typeof mgCalBand==="function"?mgCalBand(kind):{lo:H.lo,hi:H.hi,sig:H.lo+"/"+H.hi};let V=p.mgHv;if(!V||typeof V!=="object")V=p.mgHv={};
+ if(M[kind]==null||V[kind]!==Bd.sig){const id=(p.name||"")+"|"+(p.id!=null?p.id:p.sid!=null?"s"+p.sid:"")+"|"+kind;const b=(mgHashU(id+"|a")+mgHashU(id+"|b"))/2;M[kind]=Math.round((Bd.lo+(Bd.hi-Bd.lo)*Math.pow(b,H.skew||1))*100)/100;V[kind]=Bd.sig;MGX.hand=(MGX.hand||0)+1}
  return M[kind]}
 window.mgHand=mgHand;
 function mgSkipRaw(t){return cl(Math.round(mgMedD(t&&t.d!=null?t.d:0)),0,10)}

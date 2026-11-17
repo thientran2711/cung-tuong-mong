@@ -131,7 +131,7 @@ function slapNpcDraw(a){const T=BAL.ag.mg2.tat,E=T.e,e=cl(mgTier("tat",{occ:"tat
  const f=(e-E[i])/(E[i+1]-E[i]),w=T.w[i].map((x,j)=>x+(T.w[i+1][j]-x)*f);
  /* AG-ALL-2d hand ceiling (OD L1640, jmgt mgHand): the table is the skilled human bot = the best hand; a weaker hand lands the heavy blow less (what
     she misses falls to nhẹ) — q = where her "tat" hand sits between BAL.ag.mg2.hand.lo and .hi */
- {const H=BAL.ag.mg2.hand;if(H&&H.on&&a&&a!==S&&typeof mgHand==="function"){const q=cl((mgHand("tat",a)-H.lo)/(H.hi-H.lo),0,1);w[0]+=w[2]*(1-q);w[2]*=q}}
+ {const H=BAL.ag.mg2.hand;if(H&&H.on&&a&&a!==S&&typeof mgHand==="function"){const Bd=typeof mgCalBand==="function"?mgCalBand("tat"):H;/* AG-ALL-2d2: the band of the owner calibration when set */const q=cl((mgHand("tat",a)-Bd.lo)/Math.max(.01,Bd.hi-Bd.lo),0,1);w[0]+=w[2]*(1-q);w[2]*=q}}
  let r=Math.random()*(w[0]+w[1]+w[2]);for(let j=0;j<3;j++){if(r<w[j])return j+1;r-=w[j]}return 1}
 function slapNeOdds(t,a){const D=BAL.slap.dodgeOdds;return D[mgTier("ne",{occ:"ne",p:t,rank:typeof rkOf==="function"?rkOf(a):0}).tier]}
 window.slapNpcDraw=slapNpcDraw;window.slapNeOdds=slapNeOdds;
