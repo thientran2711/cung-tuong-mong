@@ -768,3 +768,4 @@
 | WORLD EVENTS: window layer + all 11 (opus; owner OD 13:48Z via main s31; brief briefs/world-events.md) | review/world-events | C-AG | session_01UV1SzgiXvVVqaBb1b4oYFK | RUNNING | 17/11 13:22Z |
 | WORLD EVENTS research batch 2 (sonnet expert, OD:L1327) | dev/research/world-events-2.md | C-AG | session_01UV1SzgePPmEtCBw9hECcZR | RUNNING | 17/11 13:22Z |
 | narrow-T3 kit: 412/390 T3 narrow mode + 1-col cards + dup option list (from opt-pic-same-r2 review item 1) | review/narrow-t3 | MAIN s31 | session_01UV1SzgsQDt2y7LHaYSDb8g | RUNNING | 17/11 13:22Z |
+| BATCH s31a builder (opus): presentation-wiring-r1 + fig-headtop-r1 IN; kit-ico-rank HELD (co-op rebirth 61/63); report reports/batch-s31a.md; ROLLED OVER | review/batch-s31a | MAIN s31 | session_01UV1SziPrputLM5qYtCL6zH | BATCH READY c29866a6 | 17/11 14:30Z |
