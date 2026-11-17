@@ -93,9 +93,13 @@ window.sealKeyFor=sealKeyFor;window.mkCauses=mkCauses;window.mkStat=()=>Object.a
    MCK.last=mkAdd(q,{kd:"e:"+(why||k),k,s:Math.round(cl(v,0,100)),why:why||"",e:ev,c,t:t==null?null:t,a},mkDur(ev,k));mkSync(q)}}catch(x){}return r}})();
 /* ---------- the rule ---------- */
 function mckStore(x){if(x===S){S.mck=S.mck||{};return S.mck}x.mck=x.mck||{};return x.mck}
-function mckHas(x,k,sig){const M=(x===S?S.mck:x&&x.mck)||{};return !!(M[k]&&M[k].includes(sig))}
-function mckLearn(x,p,by,sig){if(!x||!p||!sig)return;const M=mckStore(x),k=emoKey(p);const L=M[k]=(M[k]||[]).filter(s=>s!==sig);L.unshift(sig);if(L.length>mckB().keep)L.length=mckB().keep;MCK.stat[by]=(MCK.stat[by]||0)+1}
-function mckPubHas(k,sig){const P=S.mckPub||{};return !!(P[k]&&P[k].includes(sig))}
+/* a known cause stays known under every feeling it brings (the đau and the khóc of one loss; review r1) */
+function mckWhyOf(sig){const i=String(sig).indexOf("|");return i<0?sig:sig.slice(i)}
+function mckHas(x,k,sig){const M=(x===S?S.mck:x&&x.mck)||{};const w=mckWhyOf(sig);return !!(M[k]&&M[k].some(s=>s===sig||mckWhyOf(s)===w))}
+/* co-op ONE WORLD (OD:L96): an NPC's knowledge (x.mck) is a world fact, written on the host only (review r1: coop-one-world FAIL R.mck) */
+function mckWorld(){try{return typeof worldOn!=="function"||!!worldOn()}catch(e){return true}}
+function mckLearn(x,p,by,sig){if(!x||!p||!sig)return;if(x!==S&&!mckWorld())return;const M=mckStore(x),k=emoKey(p);const L=M[k]=(M[k]||[]).filter(s=>s!==sig);L.unshift(sig);if(L.length>mckB().keep)L.length=mckB().keep;MCK.stat[by]=(MCK.stat[by]||0)+1}
+function mckPubHas(k,sig){const P=S.mckPub||{};const w=mckWhyOf(sig);return !!(P[k]&&P[k].some(s=>s===sig||mckWhyOf(s)===w))}
 function mckOwn(x,p){try{if(x===S)return typeof k61Own==="function"?!!k61Own(p):false;return (x.staff||[]).includes(p)||x.maid===p||(x.kids||[]).includes(p)}catch(e){return false}}
 /* the cause involves the knower: aimed at her (t), or names her ("ngươi" / her name in her own cause words) */
 function mckIn(x,c){const kx=emoKey(x);if(c.t!=null&&String(c.t)===kx)return true;const w=String(c.why||"");if(x===S)return /ngươi/.test(w)||(!!S.name&&w.includes(S.name));return !!(x.name&&w.includes(x.name))}
@@ -120,7 +124,7 @@ function mckLeak(){const B=mckB().pub,W=emoW(),out=[];S.mckPub=S.mckPub||{};
   const L=S.mckPub[k]=(S.mckPub[k]||[]);L.unshift(sig);if(L.length>mckB().keep)L.length=mckB().keep;MCK.stat.leak++;
   if(!mckIn(S,e)&&p!==S)out.push(`Trong cung truyền tai nhau: ${mckWho(p)} đang ${EMO[e.k].toLowerCase()}, vì ${e.why}.`)}
  return out}
-function mckEyes(){const W=emoW(),P=mckPeople();const K=[S];try{for(const v of liveRivals(true))if(v&&v.alive&&!v.out)K.push(v)}catch(e){}
+function mckEyes(){const W=emoW(),P=mckPeople();const K=[S];try{if(mckWorld())for(const v of liveRivals(true))if(v&&v.alive&&!v.out)K.push(v)}catch(e){}
  for(const x of K){let o=0;try{o=oSee(x,false)*mckB().eye/100}catch(e){}if(!(o>0))continue;const kx=emoKey(x);
   for(const p of P){if(p===x)continue;const e=emoGet(p);if(e.k==="binh"||!e.why)continue;const sig=mckSig(e.k,e.why);if(mckKnows(x,p,e))continue;
    if(mckHit("eye|"+kx+"|"+emoKey(p)+"|"+sig+"|"+W,o))mckLearn(x,p,"eye",sig)}}}
@@ -128,7 +132,7 @@ function mckEyes(){const W=emoW(),P=mckPeople();const K=[S];try{for(const v of l
 function mckPrune(M){if(!M)return;for(const k of Object.keys(M)){const p=emoByKey(k);if(!p){if(!/^(me|emp|th|\d+|s\d+)$/.test(k))continue;delete M[k];continue}
   const ok=new Set();const e=p.emo;if(e&&e.why)ok.add(mckSig(e.k,e.why));for(const h of p.emoH||[])ok.add(mckSig(h.k,h.why));for(const m of p.mk||[])if(m.k)ok.add(mckSig(m.k,m.why));M[k]=M[k].filter(s=>ok.has(s));if(!M[k].length)delete M[k]}}
 function mckMorning(){if(!mckOn()||!S||S.dead)return;let L=[];try{L=mckLeak()}catch(e){console.error("mckLeak",e)}try{mckEyes()}catch(e){console.error("mckEyes",e)}
- try{mckPrune(S.mck);mckPrune(S.mckPub);for(const v of rivals||[])if(v&&v.mck)mckPrune(v.mck)}catch(e){}
+ try{mckPrune(S.mck);mckPrune(S.mckPub);if(mckWorld())for(const v of rivals||[])if(v&&v.mck)mckPrune(v.mck)}catch(e){}
  if(!L.length)return;const line=L.join(" ");try{log(line)}catch(e){}
  try{const m=Q.find(x=>x&&/^Tin trong cung/.test(x.t||"")&&typeof x.h==="string");if(m)m.h+=`<p>${line}</p>`;else Q.push({t:"Tin trong cung buổi này",kind:"news",h:`<p class="past">${when()}</p><p>${line}</p>`})}catch(e){}}
 (function(){if(typeof endTurn!=="function")return;const e0=endTurn;endTurn=function(){const r=e0.apply(this,arguments);try{mckMorning()}catch(e){console.error(e)}return r}})();
@@ -165,9 +169,11 @@ function emo2On(){try{return !!BAL.emo2&&!window.__emo2Off}catch(e){return false
 function emo2Tr(p,T){let d=0;try{for(const t of emoTraits(p))d+=T[t]||0}catch(e){}return d}
 function emo2Close(p,t){try{if(!t||t===p)return false;if(t===S.emp)return p!==S.emp&&!(p.sid!=null);const o=p.sid!=null||p===S.maid?ownerOf(p)||(p===S.maid?S:null):null;if(o&&o===t)return true;return aff(p,t)>=BAL.emo2.hon.aff}catch(e){return false}}
 function emo2Who(p,ev,t){try{if(t!=null){const x=emoByKey(String(t));if(x)return x}if(ev==="neglect"&&p!==S.emp)return S.emp;if(p.sid!=null||p===S.maid)return ownerOf(p)||(p===S.maid?S:null);if(ev==="punished")return S.emp}catch(e){}return null}
+/* old path (__mkOff): the mood box history row of this cause follows the turned feeling (review r1) */
+function emo2Row(q,e,k0){try{const w=String(e.why||"").slice(0,90);const h=(q.emoH||[]).find(x=>x.why===w&&x.k===k0);if(h)h.k=e.k}catch(x){}}
 function emo2Turn(q,e,ev,t){if(!emo2On()||!q||!e)return;const B=BAL.emo2;const val=e.s!=null?e.s:e.v;const ml=!!e.kd;
  /* moodlets: the tears / the sulk are a short cause of their own on top of the sad / hurt one (seal shows them while they last); old path: the feeling turns */
- const turn=(k,tg)=>{if(ml){mkAdd(q,{kd:k+":"+e.kd,k,s:Math.min(100,val+1),why:e.why,e:e.e,c:e.c,t:tg!=null?tg:e.t,a:e.a},mkDur(null,k));q.__mkL=null;mkSync(q)}else{e.k=k;if(tg!=null)e.t=tg}};
+ const turn=(k,tg)=>{if(ml){mkAdd(q,{kd:k+":"+e.kd,k,s:val+1/* one above the cause it rides on, also at 100 (seal shows it; emo.v stays capped) */,why:e.why,e:e.e,c:e.c,t:tg!=null?tg:e.t,a:e.a},mkDur(null,k));q.__mkL=null;mkSync(q)}else{const k0=e.k;e.k=k;if(tg!=null)e.t=tg;emo2Row(q,e,k0)}};
  if(B.hon.ev.includes(ev)&&["gian","buon","so"].includes(e.k)){const w=emo2Who(q,ev,t);if(w&&emo2Close(q,w)&&roll(mckOdds(B.hon.o+emo2Tr(q,B.hon.tr)))){turn("hon",emoKey(w));EMO2.n.hon++;return}}
  if(B.khoc.ev.includes(ev)&&["buon","dau","so"].includes(e.k)&&val>=B.khoc.v&&roll(mckOdds(B.khoc.o+emo2Tr(q,B.khoc.tr)))){turn("khoc",null);EMO2.n.khoc++}}
 /* a slap brings tears (her too); the mark on the face is seen by all → the cause is PUBLIC */
@@ -182,3 +188,6 @@ function emo2Turn(q,e,ev,t){if(!emo2On()||!q||!e)return;const B=BAL.emo2;const v
    if(h&&typeof F95!=="undefined"&&F95.has(kind))return{ok:false,why:`đang hờn ${emoName(t)} (${h.why})`}}catch(x){}return g}};
  try{wrap()}catch(e){}if(typeof render==="function"){const r0=render;render=function(){try{wrap()}catch(e){}return r0.apply(this,arguments)}}})();
 window.emo2Stat=()=>Object.assign({},EMO2.n);
+/* review r1: the card's "Đã biết" mood fact ("… đang buồn, vì …") is marked "nay đã khác" (kit current:false) once that cause is no longer on the person */
+(function(){if(typeof intelOf!=="function")return;const i0=intelOf;intelOf=function(p){const L=i0.apply(this,arguments);try{if(!p||!mckOn())return L;const W=[];const e=emoGet(p);if(e&&e.why)W.push(e.why);
+  const now=mkOn()?mkNow():0;for(const m of p.mk||[])if(m.k&&m.why&&m.k1>now)W.push(m.why);for(const x of L)if(x.kind==="mood")x.current=W.some(w=>String(x.fact||"").includes("vì "+w))}catch(x){}return L};window.intelOf=intelOf})();
