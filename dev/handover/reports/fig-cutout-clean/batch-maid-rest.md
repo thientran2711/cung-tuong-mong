@@ -202,3 +202,12 @@ maid-m09-t2-a18	Lwo6OdgswO	redo ok U
 maid-m09-t3-a18	rgd4wDyxtc	redo ok U
 maid-m09-t4-a18	UPh2NIYwny	redo ok U
 maid-m09-t5-a18	fHGj5ZNCDY	redo ok U
+maid-m09-t6-a18	rgd4yPcxtc	redo ok U
+maid-m09-t7-a18	JNfzAGfOq4	redo ok U DRIFT (pink + gold phoenix crown like t6; originals already alike)
+maid-m09-t8-a18	iGbMTVj3uK	redo ok U DRIFT (same)
+maid-m09-tm0-a18	CqzLxjBEEy	redo ok U
+maid-m09-tm2-a18	UPh2RZLwny	redo ok U
+maid-m09-tm3-a18	fHGjrjHCDY	redo ok U
+maid-m09-tm4-a18	DoJCaCHpcl	redo ok U
+maid-m10-a18	Ifi5q5JtvE	redo ok U
+- W5c REPAINT of the 56 plain-prompt maids DONE (R1-R7, own original look, in place, fig+hd+tn+por, fragments W5c-redo-R1..R7.json). Before|after sheet: rank-sample/maid-rest-A-redo.jpg. Drift: m08-t7, m08-t8, m09-t7, m09-t8 (originals already alike). New maids PAUSED; resume at maid-m10-cold-a18. Total this session: 48 original-prompt/plain new + 8 + 56 repaints.
