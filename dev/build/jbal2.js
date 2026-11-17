@@ -809,3 +809,17 @@ BAL.talk={health:4,praise:{o:60,div:5},praiseFail:2,secret:10,secretBond:30,goss
    plan (buổi by buổi: place + deed + goal); replan = % chance to re-draw the rest of her day at a new buổi when her top need changed (need)
    or something touched her (touch: the player's deed aimed at her, her own deed failed, an event); no change → she keeps her plan */
 BAL.ag.day={on:1,replan:{need:25,touch:40}};
+/* AG-ALL part A acts (jagacts.js): cx = the consort cards of j2 the loop lacked — c cost, o odds, w gain (the player's card reads the SAME
+   entry), need = what the act serves in BAL.ag.unit points (the agent's utility); maidR.below = her maid's lòng under which a reward is worth it;
+   study = Sức for a lesson, g = points; thHelp / hhShield = Xin Thái hậu đỡ lời / Xin Hoàng hậu che chở (odds o + regard / div, gate min);
+   buy.keep = bạc she keeps after a purchase; gift.g / ally.g = points of a gift / Kết giao (ally: cost bạc, friendship rel above).
+   hh = the Empress's acts (Xử tội, Tịch thu, Ban thưởng, Ân xá, Khất bổng lộc, Khuyên mưa móc): g = points per act, gates = the old roll's
+   gates (confHh, rewardHh, cutRelMax), cutRel relation lost, pardonAff / pardonRel / pardonDuc.
+   th = Thái hậu: w = need weights (order: one consort holds his nights; fond: consorts she favours, th ≥ fondTh, not gifted for giftCd tuần;
+   mercy: a favoured consort in lãnh cung, th ≥ mercyTh), g = utility per need, items = what she gives (the old j8 list) */
+Object.assign(BAL.ag,{cx:{face:{c:{bac:-30},o:92,w:{sac:3},need:{sung:2}},arts:{c:{suc:-10},o:100,w:{tai:2},need:{danh:2}},book:{c:{suc:-5},o:100,w:{tamco:2},need:{safe:2}},
+  alms:{c:{bac:-40},o:85,w:{danh:7,mat:1,duc:3},need:{danh:5,duc:3}},sutra:{c:{bac:-10},o:100,w:{duc:3},need:{duc:3}},maidR:{c:{bac:-20},o:100,w:{maid:20},need:{safe:3},below:60},
+  rest:{c:{},o:100,w:{suc:20},need:{rest:6}},study:{suc:10,g:3},thHelp:{o:45,div:3,min:30,w:{danh:4,hh:5},l:{th:-5}},hhShield:{o:45,div:3,min:20,g:6,w:{hh:3},l:{hh:-5},sh:2},
+  buy:{keep:20,g:2},gift:{g:4},ally:{bac:30,rel:10,g:4}},
+ hh:{g:{judge:6,conf:4,reward:4,pardon:4,cutpay:3,admon:5},confHh:-40,rewardHh:50,cutRelMax:-30,cutRel:15,pardonAff:20,pardonRel:30,pardonDuc:2},
+ th:{w:{order:1,fond:.6,mercy:.8},g:{order:10,fond:6,mercy:8},fondTh:60,giftCd:4,mercyTh:50,items:["nhansam","yensao","vongngoc","huongtram"]}});

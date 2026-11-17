@@ -56,7 +56,7 @@ function agDrawB(p,id,b,base,W){const c=j95c(b);const slot={pl:base[0],a:base[1]
  if(W&&W.force){const f=W.force.find(x=>x.b===b||x.b===-1);if(f){AGD.stat.world++;return Object.assign(slot,{pl:f.pl,a:"ag_"+(f.deed||"duty"),k:null,need:"world",why:f.why||W.why||"",world:1})}}
  if(W&&W.place&&W.place[slot.pl]===0)slot.pl=p===S.emp?"dtd":p==="th"?"tn":palaceOf(p);
  let N;try{N=agNeedsG(p)}catch(e){return slot}
- const rt=BAL.ag.routine*(1+BAL.ag.restW*(N.rest||0));const NL=[[null,rt]];for(const n in N)if(n!=="rest"&&N[n]>0)NL.push([n,N[n]*BAL.ag.needW]);
+ const rt=BAL.ag.routine;const NL=[[null,rt]];for(const n in N)if(N[n]>0)NL.push([n,N[n]*BAL.ag.needW]);/* rest is a need (the rest card) */
  const need=agPw(NL);if(!need)return slot;
  let O=agOptsG(p,N,need);
  if(W)O=O.map(o=>{const m=(W.deed&&W.deed[o.k]!=null?W.deed[o.k]:1);return m===1?o:Object.assign({},o,{u:o.u*m})}).filter(o=>o.u>0);
@@ -101,6 +101,31 @@ function agDecideDay(v){const s=agDaySlot("v"+v.id);if(!s)return null;if(!s.k)re
  o.need=s.need;const at=(kh,vv,tt)=>{let k=null;try{k=o.at(kh,vv,tt)}catch(e){}return k===s.pl?k:null};
  let sl=agSlot(v,at,o.t);if(!sl)sl=agSlot(v,o.at,o.t);if(!sl){AGD.stat.miss++;(AGD.why=AGD.why||{})['slot:'+s.k]=((AGD.why||{})['slot:'+s.k]||0)+1;return 0}
  agPlan(v,o,N,sl[0],sl[1]);AGD.stat.land++;return 1}
+/* ---------------- ANY GROUP'S DEED: run, doer, plan, tick (AG-ALL part A plumbing) ---------------- */
+/* AGRUN[k](doer, target, pend) = the player's own act function for a deed that is not a TW deed (twDo) or the Sủng deck (npcEffort) */
+const AGRUN={};const AGDOER={};
+function agRunReg(k,fn){AGRUN[k]=fn}
+function agDoerReg(prefix,fn){AGDOER[prefix]=fn}
+function agDoer(p){if(p.vid!=null)return RV(p.vid);if(p.id==="emp")return S.emp||null;if(p.id==="th")return S.thDead?null:"th";
+ for(const k in AGDOER)if(String(p.id).indexOf(k)===0)try{return AGDOER[k](p.id)}catch(e){return null}return null}
+function agTgt(id){if(!id)return null;const a=agPerson(id);if(a)return a;if(id==="emp")return S.emp;if(id==="th")return"th";for(const k in AGDOER)if(String(id).indexOf(k)===0)try{return AGDOER[k](id)}catch(e){}return null}
+/* a deed of someone who is not a consort (Emperor, Thái hậu, maids, servants) planned at place/khắc: the same pend / ledger path */
+function agPlanX(id,s,kh){const z=agZ(),R=agRec();const p={key:agKey(),id,vid:null,k:s.k,kd:"",t:s.t||null,kh,pl:s.pl,act:s.act||s.k,why:s.why||""};z.pend.push(p);
+ if(R&&R.P[id]){R.P[id][kh]=[s.pl,"ag_"+s.k,s.t||null,p.why];try{const A=R.acts=R.acts||[];A.push({id,kh,k:"ag:"+s.k,t:s.t||null,why:p.why,ok:1,ag:1});if(A.length>60)A.shift()}catch(e){}}
+ AG.stat.by[s.k]=(AG.stat.by[s.k]||0)+1;const L={w:wk(),b:S.buoi||0,kh,id,k:s.k,t:s.t||null,pl:s.pl,why:p.why};z.log.push(L);if(z.log.length>60)z.log.shift();return p}
+function agTickX(){if(!agDOn())return;const D=agDz();if(D.d!==wk())return;const z=agZ(),key=agKey();const k0=agKh();
+ for(const id in D.P){if(/^v\d/.test(id))continue;const s=agDaySlot(id);if(!s||!s.k||!AGRUN[s.k])continue;if(z.pend.some(p=>p.id===id&&p.key===key)||(z.didX&&z.didX[id]===key))continue;
+  (z.didX=z.didX||{})[id]=key;const kh=k0+Math.floor(Math.random()*Math.max(1,J95.KH-k0));agPlanX(id,s,Math.min(J95.KH-1,kh));AGD.stat.land++}
+ if(!agRec()){for(const p of z.pend.slice())if(p.key===key&&p.vid==null)agLand(p)}}
+(function(){
+ const l0=agLand0;agLand0=function(p,seen){const f=AGRUN[p.k];if(!f)return l0.apply(this,arguments);
+  const z=agZ();const i=z.pend.indexOf(p);if(i>=0)z.pend.splice(i,1);const v=agDoer(p);
+  if(!v||S.dead||p.gone||p.drop||(typeof v==="object"&&(v.alive===false||(v.out&&p.pl!=="lc")))){AG.stat.drop++;return""}
+  const t=agTgt(p.t);let r="";AG.inTick++;try{r=f(v,t,p)||""}catch(e){agErr("land:"+p.k,e)}finally{AG.inTick--}
+  AG.stat.land++;if(typeof v==="object"&&v.id!=null){AG.na=AG.na||{};AG.na[v.id]=(AG.na[v.id]||0)+1}else if(!r)agTouch(v);
+  try{if(r&&!seen){const me=t===S;if(typeof v==="object"&&v.id!=null&&RV(v.id)===v)newsAdd(v,p.k,r,me);if(me)log(`${r}.`)}}catch(e){}
+  return r};
+})();
 /* ---------------- WIRING ---------------- */
 (function(){
  AGD0.rv=j95planRival;AGD0.emp=j95planEmp;AGD0.th=j95planTH;
@@ -110,9 +135,9 @@ function agDecideDay(v){const s=agDaySlot("v"+v.id);if(!s)return null;if(!s.k)re
  /* the buổi's deed = the planned one (AG1's fresh choice per buổi stays as the fallback with no plan) */
  const d0=agDecide0;agDecide0=function(v){if(agDOn()){try{agDayEnsure();const r=agDecideDay(v);if(r!==null)return r}catch(e){agdErr("decide",e)}}return d0.apply(this,arguments)};
  /* co-op host (no record): the plan's place replaces placeWhere's table */
- const pw0=placeWhere;placeWhere=function(){const r=pw0.apply(this,arguments);try{if(agDOn()&&!j95on()){agDayEnsure();const W=S.where||{};
+ const pw0=placeWhere;placeWhere=function(){const r=pw0.apply(this,arguments);try{agTickX()}catch(e){agdErr("tickX",e)}try{if(agDOn()&&!j95on()){agDayEnsure();const W=S.where||{};
    for(const v of liveRivals(true)){if(!v.alive||v.out||v.confined)continue;const s=agDaySlot("v"+v.id);if(s)W[v.id]=s.pl}const e=agDaySlot("emp");if(e)W.emp=e.pl;S.where=W}}catch(e){agdErr("pw",e)}return r};
  /* touched: the player's deed aimed at her; a deed of hers that failed */
  const tw0=twDo;twDo=function(a,t,k){const r=tw0.apply(this,arguments);try{if(a===S&&t&&t!==S&&t.id!=null)agTouch(t);if(a&&a!==S&&AG.inTick&&!r)agTouch(a)}catch(e){}return r};
 })();
-Object.assign(window,{agReg,agRegNeeds,agGrp,agNeedsG,agOptsG,agDayDraw,agDayEnsure,agDaySlot,agTouch,AGD,AGREG});
+Object.assign(window,{agRunReg,agDoerReg,agPlanX,agTickX,AGRUN,agReg,agRegNeeds,agGrp,agNeedsG,agOptsG,agDayDraw,agDayEnsure,agDaySlot,agTouch,AGD,AGREG});
