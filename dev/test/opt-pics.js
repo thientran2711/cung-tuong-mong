@@ -5,7 +5,7 @@
       <outdir>/opt-pics-table.md (before/after by source and by meaning group; the titles still on the placeholder).
    2. LAYOUT at each size (design sizes 1180x820 and 755x1000 by default): approachOne visits, every festival (FESTEV), a person picker
       (evpick), an item picker (giftpick), the toilette Kính sự phòng (ksp), Thái hậu's birthday — FAIL when an option has no picture slot,
-      the slot is not 84x112 (3:4) or not LEFT of the text, a card is wider than its box, the page overflows, an option keeps a tiny portrait in its
+      the slot is not 76x76 (KIT_ACT_ART) or not LEFT of the text, a card is wider than its box, the page overflows, an option keeps a tiny portrait in its
       title, or there is a page error. Screenshot per dialog kind (<outdir>/optpic-<kind>-<WxH>.jpg).
    3. ZOOM: a tap on the picture opens #kpzoom and does NOT choose the option (the dialog stays). */
 const {chromium}=require('playwright');const fs=require('fs');const path=require('path');
@@ -50,7 +50,7 @@ async function boot(b,W,H){const ctx=await b.newContext({viewport:{width:W,heigh
    if(!r)return;if(r.err){R.fails.push([sz,kind,"ERR",r.err]);return}out.push(Object.assign({kind},r));
    if(r.ovf)R.fails.push([sz,kind,"page overflow"]);
    for(const o of r.o){if(/^(Thôi|Lui|Đóng)$/.test(o.n)&&!o.art)continue;
-    if(!o.art)R.fails.push([sz,kind,o.n,"no picture slot"]);else{if(Math.abs(o.art[0]-84)>1||Math.abs(o.art[1]-112)>1)R.fails.push([sz,kind,o.n,"picture box not 84x112",o.art.join("x")]);if(!o.left)R.fails.push([sz,kind,o.n,"picture not left of the info"])}
+    if(!o.art)R.fails.push([sz,kind,o.n,"no picture slot"]);else{if(Math.abs(o.art[0]-76)>1||Math.abs(o.art[1]-76)>1)R.fails.push([sz,kind,o.n,"picture box not 76x76 (KIT_ACT_ART)",o.art.join("x")]);if(!o.left)R.fails.push([sz,kind,o.n,"picture not left of the info"])}
     if(o.wide&&W>H)R.fails.push([sz,kind,o.n,"wider than its box"]);if(o.artOut)R.fails.push([sz,kind,o.n,"picture sticks out below its card"]);
     /* r1: two cards must never overlap (the person-dialog min-height:max-content squeezed the rows at 844x390 / 755x1000) */
     for(const q of r.o)if(q!==o&&q.tb&&o.tb&&q.tb[1]>o.tb[1]&&q.tb[1]<o.tb[3]-1&&q.tb[0]<o.tb[2]-1&&q.tb[2]>o.tb[0]+1)R.fails.push([sz,kind,o.n,"overlaps the next card",q.n]);if(o.mini)R.fails.push([sz,kind,o.n,"tiny portrait still in the title"])}

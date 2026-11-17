@@ -671,11 +671,11 @@ Grid rows: every card in a row has the row's height (fitted to content, `grid-au
 
 ## 6.2 OPTION CARD = SMALL ACT CARD WITH ITS PICTURE LEFT (owner 15/11 "Hình minh họa cho từng hành động bên trái. Bên phải là thông tin. Tôi nói hoài vậy."; review/opt-pics) — `dev/build/jopic.js` (after jph) + jk4 `kitCompactCSS`
 Markup: dev/handover/refs/owner-option-picture-left.jpg (docs branch). Owner rulings 15/11: keep BOTH act-card forms — the big Hành sự card
-(§6 / §6.1) unchanged; the SMALL card (§43) gets a 3:4 PORTRAIT RECTANGLE picture when its text is at least as tall as that picture, else the SQUARE form (§6.2b, owner 16/11 s21); every dialog option card is that small card.
+(§6 / §6.1) unchanged; the SMALL card (§43) gets ONE picture box for the whole game: a SQUARE of `KIT_ACT_ART` = 76 px (§6.2b, owner 17/11 ~15:25Z, review/pcard-facts-2); every dialog option card is that small card.
 - WHERE: every option of every dialog — `#modal .opts > button.ka` (events, dilemmas, nights, reactions, servant matters, festivals, co-op,
   pickers) and kit choice panels `.kpscopts > button.ka`. Not: the identity card's approved pinned pair (`.nlopts`). ONE place: the outermost
   `kaNorm1` wrapper calls `kpOptArt(b)` after the j63 frame (and kitHideOut / kitHint) built the card. Nobody adds pictures by hand.
-- LAYOUT: `.kaart` (kitArtFrame picture, 84x112, cover-cropped, category edge colour `--kcc0`) LEFT · `.kabody` (title + risk chip / odds,
+- LAYOUT: `.kaart` (kitArtFrame picture, 76x76 = `KIT_ACT_ART`, cover-cropped, category edge colour `--kcc0`) LEFT · `.kabody` (title + risk chip / odds,
   Cần / Tốn / Được / Mất / Gợi ý rows as §6 / §28.6) RIGHT. CSS = the §43 small-card rule set `kitCompactCSS(B,w,h)` (jk4, ONE string, used for
   `.kpane` act cards with B=`button.ka.kart` and for options with B=`button.ka.kart.kopt`). Options: one card per row, full width
   (overrides 31.16 `k3grid` when the cards have pictures; owner L109), card min-height = picture + padding, so the usual cards are all the
@@ -700,20 +700,14 @@ Markup: dev/handover/refs/owner-option-picture-left.jpg (docs branch). Owner rul
   in a polite bow before a seated superior), `opt-buong-tay` (letting a jade pendant go by a lake), `opt-rinh-cho` (dark: watching from behind
   a lattice for the moment), `opt-canh-giu` (barring and locking the palace door, casket moved), `opt-hoang-so` (alarm, toppled cup).
 - Kit sample page §47: "§6.2" (the three options of the owner's markup "Hoàng hậu triệu kiến" through kaNorm → kpOptArt).
-- Tests: `dev/test/opt-pics.js` (every option kind → its picture source; layout at the design sizes: picture left 84x112, nothing wider than
+- Tests: `dev/test/opt-pics.js` (every option kind → its picture source; layout at the design sizes: picture left 76x76, nothing wider than
   its box, zoom opens and does not choose). Scan of every option title (static + bot): dev/test/opt-pics-table.md (before/after).
 
-### 6.2b PICTURE FORM BY CONTENT — tall or square, never empty space under the text (owner 16/11 s21, VIỆC "Tiết Thanh minh", Fold; refs/owner-viec-thanhminh.jpg; review/kit-fit) — `kitOptFit` / `kitOptFitAll` / `KIT_OPT_SQ` (jk4, beside `kitCompactCSS`)
-Owner rule (verbatim): "Bất kỳ khi nào mà mày cho thợ ráp nút vào á, mà mày thấy có một cái khoảng trống ở dưới thì phải lập tức đổi hình liền, đổi cái hình đại diện liền đó."
-- ONE rule for EVERY compact act card (`button.ka.kart` in the kitCompactCSS form: dialog options `.kopt`, person-card act rows §6.3, narrow-pane act
-  cards §43, the kit page). The card picks its picture form from its own content each time it is laid out:
-  TALL 3:4 (84x112, 72x96 in a pane < 420 px) when the text block `.kabody` is at least as tall as the tall picture;
-  SQUARE when the text is shorter: side = the text height, clamped to [`KIT_OPT_SQ.min` × w, w] (84 → 38..84 px, 72 → 32..72 px), so the card is as
-  tall as its text. Same meaning picture (kitOptPic §6.2), cover-cropped; class `kasq`, `data-kapic="tall|sq"`.
-- Re-measured automatically: after every kaNorm pass, after showModal, and by a ResizeObserver on each card + its text (dialog fit, fonts, rotation).
-  No screen sets a picture size by hand. The big Hành sự card (§6) is not touched (its picture is wider than 112 px).
-- Residual: a text block shorter than the minimum square (one title line, no rows) keeps (min − text) px; reported as "at min" by the test.
-- Test: `node dev/test/kit-fit.js <url> <outdir> <tag> [WxH,..] [shots]` — empty px under the text of every option card in every frame kind (rule ≤ 2 px).
+### 6.2b ONE PICTURE BOX SIZE FOR EVERY COMPACT ACT CARD — `KIT_ACT_ART` = 76 (owner 17/11 ~15:25Z: "hộp hình rỗng, hai cỡ khác nhau" → one kit size + real picture; review/pcard-facts-2; REVERSES owner 16/11 s21 "square when the text is short" / tall-or-square by content) — `dev/build/jk4.js`
+- EVERY compact act card (`button.ka.kart` in the kitCompactCSS form: dialog options `.kopt`, person-card act rows §6.3, narrow-pane act cards §43, the stage pop-up, the kit page) has the SAME picture box: a 76x76 square (`KIT_ACT_ART`), the picture cover-cropped to it (tall art is cut to the square), category edge colour `--kcc0`. No tall 84x112 / 72x96 form, no square sized by the text: the by-content switch (`kitOptFit`, `KIT_OPT_SQ`) is OFF (the 1.15w test no longer matches). Empty space under short text is accepted by the owner.
+- The box is never empty: act pictures load `eager` (no lazy blank) and the placeholder `.ksart-ph` shows under the picture until it paints. An act with no own art shows the kit placeholder (§59), never a group picture.
+- The big Hành sự card (§6) is not touched (its picture is wider than 76 px).
+- Test: `node dev/test/pcard-fill.js` metric `actBoxes` (['76x76'] at every size); `node dev/test/opt-pics.js` (every option box 76x76). `dev/test/kit-fit.js` still measures the old empty-under-text rule: its VIOL lines are expected now, read its `forms` only.
 
 ## 6.3 PERSON-CARD ACT ROWS — every act a person card offers is the LONG HORIZONTAL ROW (owner 16/11, iPad 755x1000 shot of Tiểu Hoa's card; review/pcard-actrow) — `dev/build/jk4.js` (after the §43 compact block)
 Owner: "this button does not follow the shared kit; if the text is long we HAVE a kit part for that, the long horizontal option row — why not use it?"
@@ -2762,8 +2756,7 @@ container `kpane` under 640 px every act card is compact: the act's OWN picture 
 left, title + odds on one line, one-line description, Cần/Tốn/Được chips; no own picture → no thumbnail (`.kanoart`), never a category / skill
 picture as stand-in. Containers: person card `.pc > .pcr` (kit-fig2) and — tabs-kit r7 extension — any `.kpanec` (skill-card act cells,
 Việc nhờ act area, Nợ ân rows). `kitActCompactOn(root)` runs after `render()` and (jtabs) after `renderPanel()`.
-- (review/opt-pics, owner override 15/11) the small card's picture is a 3:4 PORTRAIT RECTANGLE, 84x112 (72x96 in a pane under 420 px), never a
-  square crop; the rule set is ONE string `kitCompactCSS(B,w,h)` (jk4), also used by every dialog option card (§6.2). The big Hành sự card is untouched.
+- (review/opt-pics, owner override 15/11) (superseded 17/11 by §6.2b) the small card's picture is the ONE kit square `KIT_ACT_ART` 76x76; the rule set is ONE string `kitCompactCSS(B,w,h)` (jk4), also used by every dialog option card (§6.2). The big Hành sự card is untouched.
 - r8 (owner 11/15 14:30Z "no group images"): the rule is now EVERY act card, not only panes: `kitActArt` returns no `act-cat-*` src and
   `kpActArt` marks a card without its own picture `.kanoart` (no picture slot, text full width) — Hành sự deck, person cards, Ân oán.
 - Fix that came with it (main bug): jk3's sort helper was also named `kitActKey(b)` and, in the one concatenated script, replaced j79's
@@ -2771,7 +2764,7 @@ Việc nhờ act area, Nợ ân rows). `kitActCompactOn(root)` runs after `rende
   (j79 kitActArt wrapper, j87 news pictures). jk3's helper is now `kitActSortKey`.
 
 ### 43.1 SMALL ACT CARD: PORTRAIT PICTURE, TAP = DETAIL, ⓘ MARK (owner 16/11, review/actcard-small; `dev/build/jk4.js`)
-The big Hành sự card is unchanged. The small card (§43 compact form) shows the act picture as a 3:4 PORTRAIT rectangle (84x112 px; 72x96 under 420 px), no longer a square.
+The big Hành sự card is unchanged. The small card (§43 compact form) shows the act picture in the ONE kit box `KIT_ACT_ART` 76x76 (§6.2b).
 Tapping the picture, or the info mark ⓘ (`span.kainfo.ktinfo` = the §46 kit info glyph, no private style; a gold "!" means warning in the kit; shown only on a small card WITHOUT an odds label `.kodm`), calls `kitActZoom(btn)` = ONE kit pop-up
 `kitModal({kind:"info"})` (section 8 frame, `.kbtn` "Đã rõ"): the act picture in `kitArtFrame` (the 3:4 kit picture frame, 28.19), the odds label, the full description,
 the Cần/Tốn/Được rows, and the "why" text of `kitWhyHtml` when there is an odds label. Tapping the odds label itself still opens the why popover (jwhy). No private overlay frame.
