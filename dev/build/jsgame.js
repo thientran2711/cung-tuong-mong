@@ -228,7 +228,7 @@ SG_THOI.forEach(k=>{if(!ACT[k]||!ACT[k].o||SG.K[k])return;
    job = {gk (SG.K key), t (game title), v (target, for the game), name, p0() (odds now), line(word) (card text), ask, cost (silver text), pay()→bool (take the time/silver), run(m) (act under the step), art} */
 function sgOdds(v,k){const a=ACT[k];const o=a&&a.o?a.o(S,v):50;return cl(Math.round(o+(typeof lotB==="function"?lotB(S,ACTDOM[k]):0)),5,95)}
 function sgLine(v,k,w,c){const prev=typeof J78!=="undefined"?J78.cardV:null;try{if(typeof J78!=="undefined")J78.cardV=v;return actLineRaw(k,w,c)}finally{if(typeof J78!=="undefined")J78.cardV=prev}}
-function sgCan(i,k){const v=rivals[i],a=ACT[k];if(!v||!a||!SG.K[k]||typeof S==="undefined"||!S||S.dead||Q.length||!v.alive||v.out||!can(2)||!a.ok(S,v))return false;
+function sgCan(i,k){const v=rivals[i],a=ACT[k];if(!v||!a||!SG.K[k]||typeof S==="undefined"||!S||S.dead||Q.length||!v.alive||v.out||!can(BAL.actK)||!a.ok(S,v))return false;
  if(typeof k61Named==="function"&&!k61Named(v))return false;if(S.confined&&typeof CRIME!=="undefined"&&CRIME.includes(k))return false;if(k==="bribe"&&!v.maid)return false;return true}
 function sgTitle(k){return SG.K[k]&&SG.K[k].hide?"Thời cơ":ACT[k].n}
 SG.K.over={g:"nghe",t:"Nghe ngóng",eng:sgNghe,dur:"30 giây",how:SG.K.spy.how,hud:SG.K.spy.hud,steps:SG.K.spy.steps,ask:()=>"Nghe lén câu chuyện ở đây: tự mình nép sau bình phong nghe ngóng, hay nghe qua loa?"};
@@ -241,7 +241,7 @@ function sgJob(p){if(!p||typeof S==="undefined"||!S)return null;if(!p.j)p.j="act
  if(p.j==="act"||p.j==="place"){const v=RV(p.v),k=p.k,a=ACT[k],G=SG.K[k];if(!v||!a||!G)return null;
   const J={gk:k,G,t:G.t,v,name:NM(v),art:G.hide?NM(v):a.n,ask:G.ask(v),cost:fmt(a.c)||"không tốn bạc",p0:()=>sgOdds(v,k),line:w=>sgLine(v,k,w,fmt(a.c)||"không tốn bạc")};
   if(p.j==="act"){J.pay=()=>true;J.run=m=>sgRun(v.id,k,m)}
-  else{J.pay=sgPopPay(p.pi,2);J.run=m=>{SG.mod=m&&m.step?m:null;let r="";try{r=runAct(S,v,k)||""}finally{SG.mod=null}if(r)log(`${a.n}: ${r}`);render()}}
+  else{J.pay=sgPopPay(p.pi,BAL.actK);J.run=m=>{SG.mod=m&&m.step?m:null;let r="";try{r=runAct(S,v,k)||""}finally{SG.mod=null}if(r)log(`${a.n}: ${r}`);render()}}
   return J}
  if(p.j==="over"){const G=SG.K.over,b=40+S.mat*6;
   return{gk:"over",G,t:G.t,v:{},name:"",art:"Nghe lén",ask:G.ask(),cost:"không tốn bạc",p0:()=>od(b),line:w=>`Nghe lén câu chuyện · ${w} · biết 1 điều thật về nàng · chứng cứ +1 · tốn: không tốn bạc`,pay:sgPopPay(p.pi,1),
@@ -249,7 +249,7 @@ function sgJob(p){if(!p||typeof S==="undefined"||!S)return null;if(!p.j)p.j="act
  if(p.j==="serv"){const s=servById(p.sid),G=SG.K.serv;if(!s)return null;const o=ownerOf(s),c=sgServCost(s);if(!o||o===S)return null;
   return{gk:"serv",G,t:G.t,v:{maid:s},name:s.name,art:"Mua chuộc",ask:`Mua chuộc ${s.name}, người hầu của ${NM(o)}: tự mặc cả, hay giao cho người làm?`,cost:`${c} bạc`,p0:()=>sgServOdds(s),
    line:w=>`Mua chuộc ${s.name} · ${w} · thành: thành tai mắt của ngươi · tốn: ${c} bạc · thất bại: nàng mách chủ`,
-   pay:()=>{if(S.bac<c||!can(2))return false;spend(2);return true},run:m=>{SG.mod=m&&m.step?m:null;let r="";try{r=bribeServ(S,s)||""}finally{SG.mod=null}if(r)log(r);render()}}}
+   pay:()=>{if(S.bac<c||!can(BAL.servK))return false;spend(BAL.servK);return true},run:m=>{SG.mod=m&&m.step?m:null;let r="";try{r=bribeServ(S,s)||""}finally{SG.mod=null}if(r)log(r);render()}}}
  return null}
 
 /* ---------- the choice: Tự ra tay (game) · Giao cho người làm (plain odds) · Thôi ---------- */
@@ -264,7 +264,7 @@ document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest
  const i=+b.dataset.r;if(!sgCan(i,k))return;e.stopPropagation();e.preventDefault();sgAsk({j:"act",v:rivals[i].id,k},sgTitle(k))},true);
 /* the servant card / list «Mua chuộc» (j10 list + j15 person card, data-sv="mua"): the same Mặc cả; spending (2 khắc + silver) happens when she chooses */
 document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest('button[data-sv="mua"]');if(!b||b.disabled)return;if(typeof S==="undefined"||!S||S.dead||Q.length)return;
- const s=servById(+b.dataset.sid);if(!s||!ownerOf(s)||ownerOf(s)===S||S.bac<sgServCost(s)||!can(2))return;e.stopPropagation();e.preventDefault();sgAsk({j:"serv",sid:s.sid},"Mua chuộc")},true);
+ const s=servById(+b.dataset.sid);if(!s||!ownerOf(s)||ownerOf(s)===S||S.bac<sgServCost(s)||!can(BAL.servK))return;e.stopPropagation();e.preventDefault();sgAsk({j:"serv",sid:s.sid},"Mua chuộc")},true);
 /* the place popup (j2 talkOpts): Nghe lén câu chuyện + the place's scheme acts open the same choice (a.open, free to cancel) */
 (function(){const t0=talkOpts;talkOpts=function(p){const A=t0.apply(this,arguments);try{if(!p||p.kind!=="rival"||!p.ref||!Array.isArray(A))return A;const v=p.ref;
  A.forEach((a,i)=>{if(!a||a.lock||a.open)return;let q=null;

@@ -13,7 +13,7 @@
       Hại thú (thaopet, jpet) as before; Trộm thú (petsteal) — odds fall with the pet's stage (BAL.pet.stealO), bites (Sức −), alarm, caught
       (Danh, oán, chứng cứ); a stolen pet keeps its stage with tình cảm BAL.pet.stolenAff. NPCs use the same acts on her (and each other).
    4. NPCs: same stages and stats (data only, they feed when they have the bạc). Old saves: stage from the time already owned, stats from khí lực. */
-Object.assign(BAL,{pet:{stages:["Non","Thiếu niên","Trưởng thành","Linh thú"],ageW:[0,8,20,40],affNeed:[0,25,50,80],mul:[0,.6,1,1.4],
+Object.assign(BAL,{pet:{freeHiSung:3,/* Sủng lost when she sends back a pet the Emperor gave (jpet free) */stages:["Non","Thiếu niên","Trưởng thành","Linh thú"],ageW:[0,8,20,40],affNeed:[0,25,50,80],mul:[0,.6,1,1.4],
  decay:{full:14,clean:9,joy:11,aff:2},khac:1,gain:{feed:[12,40],bath:[10,40],play:[8,36]},affGain:[2,6],maidEff:.5,maidW:4,sad:30,sick:15,neglectW:3,
  helpRel:6,helpGain:25,stealO:[55,38,22,8],stealBite:[6,10,16,24],stealSuc:8,stealCaughtDanh:6,stolenAff:5,npcCare:.8}});
 const PETC_FOOD={meo:"cá",cho:"xương",chim:"hạt kê",tho:"cà rốt",ca:"mồi bánh",ho:"thịt",lan:"quả linh",phuong:"hạt ngô đồng",long:"ngọc châu",loc:"cỏ linh chi",hac:"cá nhỏ"};
