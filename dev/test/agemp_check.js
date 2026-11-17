@@ -63,13 +63,17 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
  ok(r6[0][1]==="mourn"&&r6[1][1]<r6[2][1]&&r6[2][1]<r6[3][1]&&r6[4][1]<=100,'seat: mourning first, then his duty grows with the months vacant',r6);
  /* 8 pillow slander (two-way row 24): one deed both ways, BAL.tw.g.pillow; NPC chooses by her spite need */
  const r8=await p.evaluate(()=>{const G=BAL.tw.g.pillow;const v=liveRivals(true).find(x=>!x.queen)||liveRivals(true)[0];const r0=roll,mp=mindPick;const out={};
-  try{roll=()=>true;S.sung=50;const b=S.sung;pillowDo(v,S,100);out.hit=b-S.sung;out.want=G.hit;
+  try{roll=()=>true;const t2=liveRivals(true).find(x=>x!==v);t2.sung=50;pillowDo(v,t2,100);out.hit=50-t2.sung;out.want=G.hit;
    S.an=20;out.o=pillowO(S,4);out.oWant=G.o[0]+20/G.o[1]+4*G.o[2]-(DG()?G.o[3]:0);
-   /* no spite → she keeps quiet (no deed) */const h0=hostility;hostility=()=>0;const r1=pillowNpc(v,5);out.quiet=r1===null&&S.sung===b-G.hit;hostility=h0;
+   /* no spite → she keeps quiet (no deed) */const h0=hostility;hostility=()=>0;const sb=S.sung;const r1=pillowNpc(v,5);out.quiet=r1===null&&S.sung===sb;hostility=h0;
    /* a night2 option reads the deed */const m=PEND.night2({s:4,ex:""});const op=m.o.find(o=>/nói xấu/.test(o.n));out.txt=op?op.x:"";
   }finally{roll=r0;mindPick=mp}return out});
  ok(r8.hit===r8.want&&Math.abs(r8.o-r8.oWant)<1e-9,'pillow: one deed (BAL.tw.g.pillow) — gain and odds',r8);ok(r8.quiet,'pillow: no spite → the NPC keeps quiet',r8);
  ok(!r8.txt||new RegExp('Sủng -'+r8.want).test(r8.txt),'pillow: her night option text prints the deed numbers',r8);
+ /* 9 co-op: the friend's card on the HOST's tray carries her own client's memory (buildFriend → emet), weighed like the host's own */
+ const r9=await p.evaluate(()=>{const X=COOPW.X;if(!X||!X.buildFriend)return{skip:1};const fs=JSON.parse(JSON.stringify(S));fs.emp=fs.emp||{};fs.emp.met={me:[[wk(),"vu",1]]};
+  let v=null;try{v=X.buildFriend({S:fs,name:"Bạn",pid:"p9"},S)}catch(e){return{err:String(e)}}return{emet:!!(v&&v.emet),F:v?empMemF(v):0}});
+ ok(r9.skip||r9.emet&&r9.F>1,'co-op: the friend entry carries her memory; the host weighs it',r9);
  /* 7 guest, old save, 30 tuần */
  const r7=await p.evaluate(()=>{const g=window.COOPW;const was=g&&{on:g.on,seat:g.seat};let guest=null;if(g){g.on=true;g.seat="b";guest=empOn();g.on=was.on;g.seat=was.seat}
   delete S.emp.met;S.empWhy=null;let e=0;try{S.tonight=null;S.nfF=null;S.nightWhy=null;flip()}catch(x){e++}
