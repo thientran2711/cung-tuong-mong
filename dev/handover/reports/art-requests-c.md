@@ -40,3 +40,13 @@ New samples (gpt-2-6, 2k 16:9, resized 1280x720; looked at each myself; no faces
 - dtq-4 dawn: she (back) in brocade to a red sedan, riding boots by the door, groom + horse: .../dtq-4.webp (+ -full, -banner3x1)
 - nc-1 Nhĩ Hải lake, three pagodas, camellias, no people: .../nc-1.webp (+ -full, -banner3x1)
 All in img/_review/origin-intros/ (NOT on the live img/intro/ keys; upload after approval).
+
+## ART WORKER s11 (17/11 ~03:00Z) — origin intros + night-choice sample (all in img/_review, NOT live)
+START_CTX ≈ 8 %. Magnific gpt-2-6 only, 2k 16:9 → 1280x720 WebP ≤250 KB; each looked at by me; redone: muoi-4 (car on sedan), dtq-3 (envelope → bamboo-slip dispatch), muoi-2 (big central man), bd-3 (bare shoulder).
+Base: https://ctm-img.victoria-tntt.workers.dev/img/_review/origin-intros/<key>.webp ; contact sheets sheet-01..05.jpg beside them.
+- Wave 1 (ch1–4): dtq-1,2,3, muoi-1..4, cn-1,3,4, nc-2,3,4, bd-1..4, td-1..4, ch-1..4, thd-1..4, cnv-1..4 (+ samples cn-2, dtq-4, nc-1 from before). Sheets 01–03.
+- Wave 2 (home): dtq-h3, muoi-h3, nc-h3, bd-h3, td-h1/h2/h3, ch-h3, thd-h3, cnv-h3. Sheet 04.
+- G2–G7 entry pictures: sheet-05. (G1 + tt-1..4 + tt-h3 already live.)
+Live key when C OKs: img/intro/<key>.webp (copy of the review file). Known soft spots: ch-3 wax-style seal on the note, nc-4 small Emperor-like figure.
+Night choice "Giữ chân Hoàng thượng" sample (3:4, 768x1024): .../img/_review/art-requests-c/opt-giu-chan-hoang-thuong.webp — her room at night, candle rim light, she gently holds his sleeve, bodies not overlapping, fully clothed. Awaiting C → main.
+por-vacant-hh: still NOT live; upload img/_review/art-requests-c/por-vacant-hh.webp → img/por-vacant-hh.webp on C's OK.
