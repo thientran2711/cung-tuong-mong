@@ -20,7 +20,7 @@ Cells = 84 identities × {cold,t1..t8} × 4 age bands, for an NPC consort and fo
 | | exact | above (art missing) | none (no art → placeholder) | **LOWER tier** | **maid art on consort** |
 |---|---|---|---|---|---|
 | BEFORE (main f53bdade) | 1008 | 124 | 0 | **1008** | **3536** |
-| AFTER (69b5df20) | 1008 | 124 (all = cold→t1) | 4770 | **0** | **0** |
+| AFTER (69b5df20) | 1008 | 124 (all = cold→t1) | 4544 | **0** | **0** |
 Mismatches → 0 except the listed missing art. Per tier after: t1–t4 exact (consort ids only); t5–t8 = none for all 84; maid ids = none for every tier; cold = t1 (nearest above).
 Visible effect until art lands: ranks 5–8 (Quý phi, Hoàng quý phi… **Hoàng hậu**) and promoted maids show the placeholder/old face instead of a wrong dress. Per the brief ("zero lower-tier fallbacks"). If the owner prefers the t4 dress back temporarily, it is a one-line revert in figBestRank — NOT done.
 
