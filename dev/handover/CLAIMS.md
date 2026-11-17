@@ -706,10 +706,11 @@
 | BATCH-D8 re-merge #3 (opus) on main 7e264081 | review/batch-d8 | D | session_01964izDXBECKNTXdyNVmcBc | RUNNING | 17/11 10:46Z |
 | REVIEW greet-meet-r1 (opus BIG; brief briefs/review-greet-meet-r1.md) | review/greet-meet-r1 | C ROOT-5 | session_011xDdVR96B2JxbaT3UMSFAk | PASS 65dcf52f → main 11:36Z (archived) | 17/11 11:02Z |
 | one-core-dup3 r1 FAIL b9f8d5cf (text family: ~76 typed evidence counts + one-core-text gate gap) → fix worker (opus; brief briefs/one-core-dup3-fix.md; base review/one-core-dup3-r1 607887ae) | review/one-core-dup3 | B | session_01N1tNP5gDUwBGqmKgc5zqMJ | RUNNING | 17/11 11:00Z |
-| VOICE BY TÍNH TÌNH (sonnet; s30 order 06:06Z; brief briefs/voice-trait.md) | review/voice-trait | C ROOT-5 | session_011xDdVRM5yu7W5UoCp4jMmC | RUNNING | 17/11 11:38Z |
+| VOICE BY TÍNH TÌNH (sonnet; s30 order 06:06Z; brief briefs/voice-trait.md) | review/voice-trait | C ROOT-5 | session_011xDdVRM5yu7W5UoCp4jMmC | HANDED OVER d5793c7ba → W-A2 (archived) | 17/11 11:38Z |
 | coop-thin-b SẴN SÀNG KIỂM 4609afa6 (r2 seam fix by #4) → re-review r3 (fresh opus BIG; brief briefs/review-coop-thin-b-r3.md) | review/coop-thin-b-r3 | B | session_01N1tNP5hpVGVh45GCMzd9Ah | RUNNING | 17/11 11:40Z |
 | MAID CONSORT-TIER REDRAW W4f (successor of W4e; a36 m22 + a51 m01-m26; opened by lead #7) | review/fig-cutout-clean | C | session_011xDdVSvgMHhWjrFtf6Qv8J | RUNNING | 17/11 11:48Z |
 | VOICE writers W-B (toil/wd/staff/cycle/ts/HABIT) + W-C (events kSay + voice-rep) (sonnet; brief briefs/voice-trait-writers.md) | review/voice-trait | C ROOT-5 | W-B session_011xDdVNoZ7Yx3TZUQQfZipd + W-C session_011xDdVRjiWzLX321cWLkeV2 | RUNNING | 17/11 12:10Z |
+| VOICE W-A2 final assemble/build/QUICKCHECK/voice-rep/report (sonnet; successor of W-A RM5y archived; handover d5793c7ba) | review/voice-trait | C ROOT-6 | session_011xDdVQHXu4HxrzSdi1Q2h6 | RUNNING | 17/11 12:16Z |
 | BATCH builder s31a (opus): presentation-wiring-r1 bc8461cc → kit-ico-rank-r1 a1c7a37c → fig-headtop-r1 f95f5a92 | review/batch-s31a | MAIN s31 | session_01UV1SziPrputLM5qYtCL6zH | RUNNING | 17/11 12:11Z |
 | REVIEW morechip-fix r1 of eba25768 | review/morechip-fix-r1 | MAIN s31 | session_01UV1SzjcQv25a9UKRDjK9Jp | RUNNING | 17/11 12:11Z |
 | REVIEW fig-tag-chip r1 of d50c8e22f | review/fig-tag-chip-r1 | MAIN s31 | session_01UV1SzjqANMrcHtn9Sy4tx4 | RUNNING | 17/11 12:11Z |

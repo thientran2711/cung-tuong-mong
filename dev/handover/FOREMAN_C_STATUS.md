@@ -14,6 +14,7 @@ Not blocking for main/owner: AG-MEET only consorts approach her (maids/eunuchs/m
 Push: commit in a sparse worktree of the handover branch (/home/user/wt/ho), pull --rebase + push retry.
 
 FOREMAN C SESSION ROOT-6 = session_011xDdVQNdyTACuGN42yEBQZ (opened by ROOT-5 ~12:20Z 17/11) · START_CTX ~8% (~80k of 1M; get_session reads 0, own estimate) → roll over at >= 33%, ceiling 60% · lineage depth 5/8 (at rollover: depth 6 child NOT allowed → handover here + ask main/owner to open Foreman C from claude.ai) · own hourly wake (:32) below.
+- 12:16Z(wall) W-A HANDOVER DONE d5793c7ba (review/voice-trait @ 5c3ea679a) → C opened W-A2 session_011xDdVQHXu4HxrzSdi1Q2h6 (sonnet, source_url, branch review/voice-trait; final assemble/build/QUICKCHECK/voice-rep/report); W-A RM5y ARCHIVED; W-B/W-C told to report DONE to W-A2 + C.
 - 12:16Z(wall) W8 ack: live 66/520, m11–m13 generating (sheet next). W-C partial 50bd7eb (quests j72 asker voice 240 lines; tests PASS); C ruled bespoke event beats = ONE tone-keyed lead-in pool for named-speaker beats, hand-written narration kept.
 - 12:25Z(wall) ROOT-6 took over (own wake trig_017VztNAuLezGyK58FczkjRw :32); told lead #7, W4f, W8, W-A, W-B, W-C that ROOT-6 is their foreman (delivered). Waiting: W-A HANDOVER DONE → open W-A2.
 
