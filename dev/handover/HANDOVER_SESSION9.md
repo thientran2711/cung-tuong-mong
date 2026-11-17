@@ -676,3 +676,4 @@ LESSONS s30: depth limit 8 kills a chained main — owner opens mains/foremen as
 - (17/11 ~12:13Z) s31 opened 11: builder s31a, reviewers morechip-fix + fig-tag-chip, workers opt-card #2, learn-scene-fix, map-me-mark (+ owner 12:12Z 'Dư đồ zoom gần quá'), kit-rcol-top, person-leftcol #2, stage-caption, toil-looks #N, tuanluc-sync #3 (ids in CLAIMS).
 =======
 >>>>>>> 19ad1764 (reports/one-core-dup: §6 part 2 (review/one-core-dup2 0ffa37bf))
+- (17/11 ~12:36Z) WAKE 12:32Z — LOAD: main running 11 (builder s31a; reviewers learn-scene, stage-caption, kit-rcol-top; workers opt-card #2, map-me-mark #2, person-leftcol #2, toil-looks #N, tuanluc #3) | B 4 running free 8 (freeze) | C ROOT-5 art + voice-trait | D 2 running free 10 | moved: none. LIVE main = 6ca04148 (batch-d8 FF by s31). Next wake trig_01JTnGV1PctZAgc17DqzwntS 13:32Z.
