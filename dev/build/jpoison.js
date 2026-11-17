@@ -103,7 +103,7 @@ try{ACTDOM.pgift="Mưu kế";J78VERB.pgift="tặng {t} quà ăn có độc";cons
  LACK.pgift=()=>!pgHeld(S).length?"cần một thứ độc (đồ cấm)":!(S.inv||[]).some(pgFood)?"cần một món ăn, túi hương hay đồ bổ để tặng":""}catch(e){}
 (function(){if(typeof mindMenu!=="function")return;const m0=mindMenu;mindMenu=function(v,t){const O=m0.apply(this,arguments);try{if(Array.isArray(O)&&v!==S&&bandOf(danger(v,t))>=3&&ACT.pgift.ok(v,t)){const w=2*persW(v,"pgift");if(w>0)O.push(["pgift",w])}}catch(e){}return O}})();
 /* NPCs cook too: a malicious NPC holding poison keeps a dish at hand (same rule as her: works come from practice) */
-(function(){if(typeof npcMonthly!=="function")return;const m0=npcMonthly;npcMonthly=function(v){const r=m0.apply(this,arguments);try{if(v&&v.alive&&pgHeld(v).length&&!(v.inv||[]).some(pgFood)&&roll(30)){v.inv.push(wkMake(v,"mon",0,4))}}catch(e){}return r}})();
+(function(){if(typeof npcMonthly!=="function")return;const m0=npcMonthly;npcMonthly=function(v){const r=m0.apply(this,arguments);try{if(v&&v.alive&&pgHeld(v).length&&!(v.inv||[]).some(pgFood)&&!(typeof haOn==="function"&&haOn())&&roll(30))/* AG-ALL C: her deed (jagharm §2) while the loop is on */{v.inv.push(wkMake(v,"mon",0,4))}}catch(e){}return r}})();
 /* ---------- CHÂN TÌNH: a visible cause ---------- */
 function gfFor(a,w,r){try{if(r==="emp")return wkEmpMatch(w).length>0;if(r==="th")return ["kinh","tranh","theu"].includes(w.kind);if(r&&typeof r==="object")return wkBestArt(r)===w.a}catch(e){}return false}
 function gfBond(a,r){if(r==="emp")return[(a.an||0)|0,BAL.gift.an,"Ân tình"];if(r==="th")return[(a.th||0)|0,BAL.gift.th,"Thái hậu quý ngươi"];return[(rel(r,a)||0)|0,BAL.gift.rel,`${r.name} quý ngươi`]}

@@ -832,3 +832,20 @@ BAL.ag.emp2={company:.38,busyF:.4,rest:.5,buoi:[1,2]};
 /* AG-ALL consort cards (jagacts "more"; the player's j2 / j9 cards read the same): portrait = Vẽ chân dung tặng Thái hậu (Họa ≥ hoa, odds o + artW × k);
    humble = Nhún nhường (cost, oán −oanDown, quý +aff; an NPC does it before someone whose oán toward her ≥ oan; g = safety points) */
 Object.assign(BAL.ag.cx,{portrait:{hoa:3,c:{suc:-10,bac:-10},o:50,k:8,w:{th:10},l:{th:-1}},humble:{c:{danh:-2},oanDown:8,aff:2,oan:20,g:4}});
+/* AG-ALL part C (jagharm.js; design dev/handover/reports/ag-all.md §1d/§8/§9/§10): the player's scheme / harm acts as every consort's own options.
+   needs   the needs a scheme can serve (her pick of WHAT she wants this buổi comes first, jagent agDecide)
+   g       per act key (ACT, j8 + modules): g = need points it closes when it works (BAL.ag.unit points = one whole need), l = points lost when it fails,
+           f = her fear of being caught (× the target's watch oSee, × her road's safe weight): a sure cost in her choice; "_" = an act not listed
+   tw      target pick for need sung (× Sủng of the rival) / kid (per child of the target)
+   fail    what she learnt: a failed act again × (1 + fool × fails) for Tâm cơ < 35, × wise^fails otherwise (j40 mindMenu rule)
+   pat/due a big scheme (j40 BIG) is prepared first; it falls due due + (1 at Tâm cơ ≥ pat[0], 2 at ≥ pat[1]) buổi later (was 1 + R(2) + pat)
+   steal   no = the weight of letting tonight be against her wish to try (stealWant u), mindPick; 1/no ≈ the old k (BAL.steal.k .25)
+   prep    spite points of the preparation deeds: taint (Tẩm đồ on a sachet), cook (a dish for a poisoner, jpoison)
+   hap     AG-HAP: wit = the deed keys a passer-by can witness ('!' on the map); pub = the only places a show deed is seen (a garden show) */
+BAL.ag.harm={needs:["spite","sung","kid","safe","danh","ally"],
+ g:{_:{g:{spite:4},f:2},spy:{g:{safe:3}},rumor:{g:{spite:4},f:2},trip:{g:{spite:5},f:2},pushp:{g:{spite:9},f:6},frame:{g:{spite:8,danh:1},l:{danh:4},f:5},
+  plant:{g:{spite:7},f:4},block:{g:{sung:4,spite:3},f:2},bribe:{g:{spite:3,safe:2},f:1},accuse:{g:{spite:10,safe:5,danh:2},l:{danh:3}},vp:{g:{spite:5,danh:1},l:{danh:2}},
+  xx:{g:{spite:5,danh:1},l:{danh:2}},ksab:{g:{spite:5},f:4},takeaway:{g:{kid:10}},poison:{g:{spite:12,safe:3},f:12},kpoison:{g:{spite:10},f:12},pond:{g:{spite:10},f:8},
+  musk:{g:{spite:10,sung:2},f:6},catswap:{g:{spite:8,sung:2},f:6},kframe:{g:{spite:10},f:12},pgift:{g:{spite:10},f:8},petsteal:{g:{spite:4},f:2}},
+ tw:{sung:.3,kid:10},fail:{fool:.6,wise:.5},pat:[35,60],due:1,steal:{no:4},prep:{taint:3,cook:3},
+ hap:{wit:["provoke","humil","gossip","flaunt","effort","mediate","h_trip","h_pushp","h_rumor","h_pond","h_accuse","h_vp","h_xx","h_takeaway"],pub:{effort:["vuon"],flaunt:["vuon"]}}};

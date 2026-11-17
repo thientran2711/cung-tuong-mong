@@ -410,7 +410,7 @@ function seenNPC(v,t,txt){const bad=seenBad(txt);window.__giftTaint=0;if(!txt)re
 function npcMonthly(v){let ev="";const cost=k=>5+v.arts[k]*5;const agd=window.agDOn&&agDOn();/* AG-ALL: study / shop / gifts / ally / favour are the day plan's choices (jagacts) */
  if(!agd&&roll(30)){const k=pick(Object.keys(v.arts));if(v.arts[k]<5&&(v.bac>=cost(k)||v.suc>=40)){if(v.bac>=cost(k)){ap(v,{bac:-cost(k),suc:-10});v.artp[k]+=1+R(3)}else{ap(v,{suc:-15});v.artp[k]+=1};while(v.arts[k]<5&&v.artp[k]>=v.arts[k]+2){v.artp[k]-=v.arts[k]+2;v.arts[k]++}}}
  if(!agd&&roll(25)&&S.shop.length){const k=pick(S.shop);if(IT[k]&&v.bac>=itm(k).pr+20&&(!itm(k).il||v.malice>60))buy(v,k)}
- if(v.malice>60&&roll(8)&&v.bac>=45&&!v.inv.some(e=>e.t)){buy(v,"tuithom");taintItem(v,v.inv.length-1,v.inv.some(e=>e.k==="xahuong")?"xa":"bua")}
+ if(!(typeof haOn==="function"&&haOn())&&v.malice>60&&roll(8)&&v.bac>=45&&!v.inv.some(e=>e.t)){buy(v,"tuithom");taintItem(v,v.inv.length-1,v.inv.some(e=>e.k==="xahuong")?"xa":"bua")}
  npcCourt(v);if(!agd&&roll(15)){const i=v.inv.findIndex(e=>e&&IT[e.k]&&itm(e.k).gv&&!e.t);if(i>=0)giveTo(v,roll(50)?"emp":"th",i)}
  if(!agd&&roll(30)&&roll(odA(v,55+v.sung/5+mm())))ap(v,{sung:3});
  if(!S.thDead&&roll(25))twDo(v,null,"thTH");
