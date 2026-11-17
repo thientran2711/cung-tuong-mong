@@ -184,3 +184,12 @@ maid-m37-t1-a18	TdUhrHHVNR	EbnL3gDuuO	ok
 maid-m37-t2-a18	xSX40G4jfW	vQ219sia47	ok
 maid-m37-t3-a18	YMs85QVWeC	nVLo5aVYQD	ok
 ## 167 a18 done (list lines 1-167) through maid-m37-t3-a18. NEXT = maid-m37-t4-a18 (line 168). START_CTX 15%->now ~20% (196k/1M).
+maid-m37-t4-a18	w4v2IsL7EI	rgdPDiOxtc	ok
+maid-m37-t5-a18	TdUhsYAVNR	SymR8n1Ub8	ok
+maid-m37-t6-a18	eIyEwMAdqL	3z5MH8KREY	ok
+maid-m37-t7-a18	79aAtw4JAL	Bh9FyxToQR	ok
+maid-m37-t8-a18	ovNHyBo829	tC35NSWmZJ	ok
+maid-m37-tm0-a18	rgdPMrqxtc	kspOMPS16B	ok
+maid-m37-tm2-a18	kspOVrq16B	O6CzaWOynm	ok
+maid-m37-tm3-a18	kspOVxC16B	mERKijJhJQ	ok
+## 175 a18 done (list lines 1-175) through maid-m37-tm3-a18. NEXT = maid-m37-tm4-a18 (line 176).
