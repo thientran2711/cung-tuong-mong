@@ -467,7 +467,7 @@ Object.assign(window,{kszItemTile3,kszItemsSheet3,kszItemsSheet3Show,kszWearRow3
    Size = the smallest of S/M/L/XL whose presentation holds the content (kitFrameFitsLive3); XL: more text scrolls inside the info column.
    NOT converted (pages, not event frames): identity card .kpid, person card (pcm), scene panels without a kind, and bodies holding a page part
    (KSZ_LIVE_SKIP: calendars, pickers, inventories, shops, relation tables, stat grids, tables, exam / card-flip pages). */
-const KSZ_LIVE_SKIP=".kpid,.kmc,.kpick,.kpicks,.kinv,.kshg,.kshop,.kreltab,.krelt,.kstgrid,.kip,table,.kexam,.kflip,.kpl,.kmlist,.kslot,.kpets,.kgift,.kpkgrid";
+const KSZ_LIVE_SKIP=".kpt-mount,.kpid,.kmc,.kpick,.kpicks,.kinv,.kshg,.kshop,.kreltab,.krelt,.kstgrid,.kip,table,.kexam,.kflip,.kpl,.kmlist,.kslot,.kpets,.kgift,.kpkgrid";
 KIT_SIZE.v3.office={ksp:"Kính sự phòng"};KIT_SIZE.v3.live={maxOpts:7,maxSecs:4};/* (s22) the ĐÊM narrator's tag names his office, not the bare "Thái giám" */
 (function(){const r0=kszRankName;kszRankName=function(p){const R=r0(p);try{if(p&&S&&S.court&&p===S.court.ksp&&KIT_SIZE.v3.office.ksp)R[0]=KIT_SIZE.v3.office.ksp}catch(e){}return R};window.kszRankName=kszRankName})();
 function kszLiveSrc3(m,mb,kind){let src="";const im=mb.querySelector(":scope > .kdlgart img, :scope > .kpb > .kpsubj.kpev img, :scope > .kpb > .kpsubj.kpiart img");if(im)src=im.getAttribute("src")||"";
