@@ -106,7 +106,7 @@ function stipGoodsTxt(G){return (G||[]).map(g=>g.lost?`thiếu ${stipNm(g.k0,g.n
 (function(){if(typeof econPrice!=="function")return;const p0=econPrice;econPrice=function(p,e){const v=p0.apply(this,arguments);try{if(e&&e.from==="noivu"&&!e.wk)return Math.max(e.k&&IT[e.k]&&itm(e.k).pr?1:0,Math.floor(v*BAL.stip.resell/100))}catch(x){}return v};window.econPrice=econPrice})();
 /* ---------- one way to give goods + the reveal (kitReward of j93; game-feel's kitGain/kitReward keep the same call) ---------- */
 function stipRevItem(k){const it=IT[k]||{};let tier=0;try{const a=itemArt(k);tier=a?a.grade|0:(typeof kmTierOf==="function"?kmTierOf(k):0)}catch(e){}
- return{k,n:it.n||k,d:it.d||"",img:typeof kmItemImg==="function"?kmItemImg(k):"",tier}}
+ return{k,n:itm(k).n,d:it.d||"",img:typeof kmItemImg==="function"?kmItemImg(k):"",tier}}
 function stipReveal(entries,o){try{if(window.__bot||(typeof quiet!=="undefined"&&quiet)||typeof kitReward!=="function")return;
  try{if(typeof KMSNAP!=="undefined"&&KMSNAP&&KMSNAP.inv)entries.forEach(e=>KMSNAP.inv.push(e))}catch(e){}
  if(typeof kmOn==="function"&&!kmOn())return;kitReward({kind:o.kind||"gift",title:o.title||"Hộp gấm",from:o.sub||"",items:entries.map(e=>stipRevItem(e.k)),bac:o.bac||0})}catch(e){console.error("stipReveal",e)}}
@@ -126,7 +126,7 @@ function stipRestore(p,G,full){let n=0;for(const g of G||[]){if(!g.kem)continue;
 function stipReportTo(SK){const q=queenP();const hhBehind=q&&q!==S&&SK.sup===q;const thOk=!S.thDead;
  if(q&&q!==S&&!hhBehind&&rel(q,S)>-30)return{k:"hh",n:"Hoàng hậu",v:q};if(thOk)return{k:"th",n:"Thái hậu",v:null};return q&&q!==S?{k:"hh",n:"Hoàng hậu",v:q,risky:1}:null}
 function stipEvent(G,SK){const B=BAL.stip,r=rkOf(S),st=stipSt(S),W=stipW();const tip=B.tip[Math.min(7,r)];const eun=stipEunName();
- const lc=k=>{const n=(IT[k]?itm(k).n:k).replace(/ \(hàng kém\)$/,"");return n[0].toLowerCase()+n.slice(1)};
+ const lc=k=>{const n=(itm(k).n).replace(/ \(hàng kém\)$/,"");return n[0].toLowerCase()+n.slice(1)};
  const kem=G.filter(g=>g.kem&&!g.lost).map(g=>`${lc(g.k)} thay ${lc(g.k0)}`),lost=G.filter(g=>g.lost).map(g=>lc(g.k0));
  const rows=[];if(SK.bac)rows.push(["Thiếu bạc",`Bạc −${SK.bac}`,"r"]);if(SK.cut)rows.push(["Khất bổng",`theo ý ${rkName(SK.sup||queenP())}: bớt 3 phần 10 bạc`,"r"]);if(kem.length)rows.push(["Hàng kém",kem.join(" · "),"r"]);if(lost.length)rows.push(["Thiếu đồ",lost.join(" · "),"r"]);
  rows.push(["Gợi ý",`<span class="ef i">Vì ${SK.why}.</span>`]);const h=`<p>${eun} đưa bổng lộc tới, mắt không dám nhìn thẳng.</p>${kitRows(rows)}`;

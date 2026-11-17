@@ -47,7 +47,7 @@ function dressLookPlace(){try{if(!S||S.dead||!S.where)return;const by={};
 
 /* ---------- Dò la (both ways) also reports the dress: Xa xỉ, jewellery above rank, and the true phẩm of the worn robe / hairpin ---------- */
 function dressSpyTxt(a,t,by){const rec=dressLook(a,t,by);if(!rec)return"";try{if(typeof wdKnowAll==="function")wdKnowAll(a,t);if(typeof wdSee==="function"&&typeof wdStatus==="function")wdSee(a,t,wdStatus(t),by,true)}catch(e){}
- if(a!==S)return"";let vp=[];try{vp=(vpItems(t)||[]).map(e=>IT[e.k]?itm(e.k).n:e.k)}catch(e){}
+ if(a!==S)return"";let vp=[];try{vp=(vpItems(t)||[]).map(e=>itm(e.k).n)}catch(e){}
  const lux=`Xa xỉ ${rec.sc}${BAL.lux.xx.showBud?` (mức của nàng ${rec.bud})`:""}`;
  return `Y phục của ${wdNm(t)}: ${lux}${vp.length?`; vượt phẩm: ${vp.join(", ")}`:"; không có món nào vượt phẩm"}. `}
 (function(){if(typeof spyFind!=="function")return;const s0=spyFind;spyFind=function(a,t){const r=s0.apply(this,arguments);let add="";try{add=dressSpyTxt(a,t,a===S?"dò la":(a.name||""))}catch(e){}return (r||"")+add}})();

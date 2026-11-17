@@ -191,6 +191,7 @@ function itClean(){let n=0;try{const P=[S].concat(typeof rivals!=="undefined"&&A
   for(const p of P){if(!p||typeof p!=="object")continue;if(p.inv!=null&&!Array.isArray(p.inv))p.inv=[];n+=itCleanL(p.inv);
    /* p.vl is the worn veil (jveil, a piece with a key); jvoice kept its line memory in S.vl until this fix: move it out, never wear/chest it */
    if(p.vl!=null&&(typeof p.vl!=="object"||typeof p.vl.k!=="string")){if(p===S&&typeof p.vl==="object"&&!Array.isArray(p.vl))S.vmem=Object.assign({},p.vl,S.vmem||{});p.vl=null;n++}
+   else if(p.vl&&typeof p.vl==="object")for(const x of Object.keys(p.vl)){const y=p.vl[x];if(y&&typeof y==="object"&&!Array.isArray(y)&&"__b" in y){if(p===S){S.vmem=S.vmem||{};if(!S.vmem[x])S.vmem[x]=y}delete p.vl[x];n++}}/* jvoice memory written ONTO a worn veil */
    if(Array.isArray(p.wdPawn))for(const x of p.wdPawn)if(x&&x.e&&IT_ALIAS[x.e.k])x.e.k=IT_ALIAS[x.e.k];
    if(p.dress&&p.dress.k&&IT_ALIAS[p.dress.k])p.dress.k=IT_ALIAS[p.dress.k]}
   if(S&&Array.isArray(S.shop))S.shop=S.shop.map(k=>IT_ALIAS[k]||k).filter(k=>Object.prototype.hasOwnProperty.call(IT,k))}catch(e){console.error("itClean",e)}return n}

@@ -68,7 +68,7 @@ const cm0=chooseM;chooseM=function(i){try{const m=Q[0];const o=m&&m.opts&&m.opts
 const nf0=nightFx;nightFx=function(s){const b={sung:S.sung,an:S.an||0,inv:S.inv.length,g:{}};for(const v of liveRivals(true))b.g[v.id]=v.ghen||0;
  const L0=log;log=function(h){if(/^Thị tẩm\. Sủng/.test(String(h)))return;return L0.apply(this,arguments)};let r;
  try{r=nf0.apply(this,arguments)}finally{log=L0}
- try{const got=S.inv.slice(b.inv).filter(e=>e&&e.from==="emp").map(e=>IT[e.k]?itm(e.k).n:e.k);
+ try{const got=S.inv.slice(b.inv).filter(e=>e&&e.from==="emp").map(e=>itm(e.k).n);
   const gh=liveRivals(true).filter(v=>knows(v)&&b.g[v.id]!=null&&(v.ghen||0)!==b.g[v.id]).map(v=>`${v.name.split(" ").pop()} ghen ${b.g[v.id]} → ${v.ghen}`);
   const unk=liveRivals(true).some(v=>!knows(v)&&b.g[v.id]!=null&&(v.ghen||0)!==b.g[v.id]);
   window.__ntSeq=S.logSeq||0;

@@ -3,7 +3,7 @@
 Counts, per game file dev/build/j*.js, reads of the item table that throw when the key is not an IT item:
   IT[x].p / IT[x][p]   (direct property read on a raw lookup)
 Writes (IT[x]=, IT[x].p=, delete IT[x].p), existence checks (IT[x]&&, if(IT[x])) and safe forms ((IT[x]||{}).p, itm(x).p) are not counted.
-Part 2: piece-vs-map field clashes (S.vl veil vs jvoice memory).
+Part 2: piece-vs-map field clashes (S.vl veil vs jvoice memory). Part 3: raw key as a name fallback (IT[k]?..n:k, (IT[k]||{}).n||k, it.n||k).
 usage: python3 dev/test/it-key-scan.py [--git <ref>] [--list]     exit 1 when any unguarded read is left."""
 import re,sys,subprocess,glob,os
 args=sys.argv[1:];ref=None;lst='--list' in args
@@ -60,4 +60,13 @@ for name,src in files():
 cl=[(k,sorted(piece[k]),sorted(mapf[k])) for k in piece if k in mapf and k not in ('inv','wd')]
 print(f"piece-vs-map field clashes: {len(cl)}")
 for k,a,b in cl: print(f"  {k}: piece in {a[:6]} / map in {b[:6]}")
-sys.exit(1 if tot or cl else 0)
+# part 3: raw item key shown to the player (review-it-key-guard-r1 FAIL 1): a name read with the key itself as the fallback
+X=r'([A-Za-z_$][\w$.]*)';raw=[]
+for name,src in files():
+    n=len(re.findall(r'IT\['+X+r'\]\?(?:itm\(\1\)|IT\[\1\])\.n:\1\b(?![\w.(])',src))+len(re.findall(r'\(IT\['+X+r'\]\|\|\{\}\)\.n\|\|\1\b(?![\w.(])',src))
+    for m in re.finditer(r'(?<![\w$.])([A-Za-z_$][\w$]*)=(?:\(typeof IT==="object"&&)?IT\['+X+r'\]\)?',src):
+        v,K=m.group(1),m.group(2);seg=src[m.end():m.end()+400]
+        if re.search(r'\b%s\.n\|\|(?:String\()?%s\b'%(re.escape(v),re.escape(K)),seg) or re.search(r'\b%s\?%s\.n:%s\b(?![\w.(])'%((re.escape(v),)*2+(re.escape(K),)),seg): n+=1
+    if n: raw.append((name,n))
+print(f"raw-key name fallbacks: {sum(n for _,n in raw)}"+("  "+" ".join(f"{a} {b}" for a,b in raw) if raw else ""))
+sys.exit(1 if tot or cl or raw else 0)

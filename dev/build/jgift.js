@@ -9,7 +9,7 @@
    Dialogs with no picture of their own no longer fall back to "Triều chính" (jk2b kitEvArt default): an unmapped id uses the act category
    picture of its title (giving → Giao thiệp) and lists itself in window.KIT_PICFALL for the picture audit (dev/tools/pic_usage.js). ===== */
 function giftArt(e){try{const a=typeof itemArt==="function"?itemArt(e&&e.wk?e:e&&e.k):null;if(a)return a}catch(x){}return{src:"",src512:"",grade:0,gradeName:"Thường"}}
-function giftName(e){if(!e)return"";if(e.wk)return e.wk.n;return IT[e.k]?itm(e.k).n:e.k}
+function giftName(e){if(!e)return"";if(e.wk)return e.wk.n;return itm(e.k).n}
 function giftE(s){return String(s==null?"":s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]))}
 /* every possible recipient: [group, id, target, label]; groups: ct Chí tôn · pt Phi tần · nn Nam nhân · cn Cung nhân */
 function giftPeople(e){const L=[];L.push(["ct","emp","emp","Hoàng thượng"]);if(!S.thDead)L.push(["ct","th","th","Thái hậu"]);

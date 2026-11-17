@@ -80,7 +80,7 @@ function econPrice(p,e){if(!e)return 0;if(e.wk)return Math.max(1,Math.round(wkSe
  const it=IT[e.k];return it&&it.pr?Math.floor(it.pr*BAL.sellPct/100):0}
 function econSellable(p){p=p||S;return (p.inv||[]).map((e,ix)=>{if(!e||e.h)return null;const it=IT[e.k];let grade=0,src="";
   try{if(e.wk){grade=econWkGrade(e.wk);const a=itemArt(e);src=a?a.src:""}else if(window.WD_ITEMS&&WD_ITEMS[e.k]){grade=WD_ITEMS[e.k].g|0;src=WD_ITEMS[e.k].icon}else{const a=itemArt(e.k);grade=a?a.grade|0:0;src=a?a.src:""}}catch(x){}
-  return{ix,k:e.k,name:e.wk?e.wk.n:it?it.n:e.k,grade,src,price:econPrice(p,e),via:e.wk||!(window.WD_ITEMS&&WD_ITEMS[e.k])?"noivu":"agent",risk:econRisk(p,e),no:econNo(p,e)}}).filter(Boolean)}
+  return{ix,k:e.k,name:e.wk?e.wk.n:itm(e.k).n,grade,src,price:econPrice(p,e),via:e.wk||!(window.WD_ITEMS&&WD_ITEMS[e.k])?"noivu":"agent",risk:econRisk(p,e),no:econNo(p,e)}}).filter(Boolean)}
 function econSell(p,ix){const e=p.inv&&p.inv[ix];if(!e)return"";const no=econNo(p,e);if(no)return"";
  if(typeof wdItem==="function"&&wdItem(e))return wdSell(p,ix);
  const pr=econPrice(p,e),R=econRisk(p,e),nm=e.wk?e.wk.n:itm(e.k).n,who=p===S?"Ngươi":`${rkName(p)} ${p.name}`;p.inv.splice(ix,1);ap(p,{bac:pr});

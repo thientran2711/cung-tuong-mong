@@ -24,7 +24,7 @@ function kitItemRef(r){try{if(r==null||r==="")return null;if(r.k!=null&&r.I&&r.k
  else if(r.e){e=r.e;k=e.k}
  else if(kidIsEntry(r))e=r;
  if(!k)return null;const it=(typeof IT==="object"&&IT[k])||null;if(!it&&!WD[k])return null;
- const I=typeof kitItemInfo==="function"?kitItemInfo(e||{k}):{k,name:it?it.n:k,src:"",grade:0,gname:"Thường",col:"#9a8a78",sub:""};
+ const I=typeof kitItemInfo==="function"?kitItemInfo(e||{k}):{k,name:itm(k).n,src:"",grade:0,gname:"Thường",col:"#9a8a78",sub:""};
  const wd=!!WD[k],work=!!(e&&e.wk),veil=!!(it&&it.vl);
  let worn=false;try{if(wd){const W=wdOf(who||S);worn=!!(g&&g.wdSlot)||!!(e&&(W.tram===e||W.y===e))||!!r.wdSlot}else if(veil){worn=!!(e&&(who||S).vl===e)}else worn=!!(e&&e.w)}catch(x){}
  return{kidR:1,k,e,g,I,wd,it,work,veil,worn,who:who&&who!==S?who:null,qty:(g&&g.n)||r.qty||1}}catch(err){console.error("kitItemRef",err);return null}}

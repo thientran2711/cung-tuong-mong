@@ -29,7 +29,7 @@ function deedSync(p){if(!p||!S)return;try{
  else{if(p.scandal)deedOnce(p,"sc","tryst",2,"tư thông");if(p.affair){let m=null;try{m=manById(p.affair)}catch(e){}deedOnce(p,"af:"+p.affair,"tryst",2,`tư thông${m?" với "+m.name:""}`)}}
  if(p.pregMismatch)deedOnce(p,"pm:"+((p.kids||[]).length),"pm",2,"có thai không khớp đêm thị tẩm nào trong sổ Kính sự phòng");
  for(const e of (p.inv||[])){if(!e||!IT[e.k])continue;const planted=(e.by&&e.by!==key(p))||e.gh;if(planted)continue;if(itm(e.k).il)deedOnce(p,"il:"+e.k,"il",1,`giấu đồ cấm (${(IT[e.k]||{}).n}) trong rương`)}
- if(typeof vpItems==="function")for(const e of vpItems(p))deedOnce(p,"vp:"+e.k,"vp",1,`dùng đồ vượt phẩm (${IT[e.k]?itm(e.k).n:e.k})`);
+ if(typeof vpItems==="function")for(const e of vpItems(p))deedOnce(p,"vp:"+e.k,"vp",1,`dùng đồ vượt phẩm (${itm(e.k).n})`);
  if(p!==S&&p.plan&&p.plan.k){const t=byKey(p.plan.t);deedOnce(p,p.plan.j70?"pl:j70:"+p.plan.j70:"pl:"+p.plan.k+":"+p.plan.t+":"+p.plan.due,"plot",1,`bày mưu ${deedTxt(p.plan.k,t)}`)}
 }catch(e){}}
 /* how much true evidence can exist against p (each holder separately) */
