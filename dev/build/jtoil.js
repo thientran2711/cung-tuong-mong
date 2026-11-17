@@ -733,7 +733,7 @@ const TOIL_MKS={
  vung:{lip:.5,eye:.4,eyeH:.5,brow:0,wing:0,low:0,vung:1,bl:.3,r:.17,sk:.08,dabs:2},/* A: 'không biết trang điểm' */
  vua:{lip:.44,eye:.5,eyeH:.5,brow:.45,wing:.08,low:0,bl:.21,r:.165,sk:.13},/* = the ?v=2 Đoan trang (approved by the owner 17/11 13:48Z) */
  dep:{lip:.74,eye:.9,eyeH:.8,brow:.7,wing:.3,low:.34,shim:.5,gloss:.65,bl:.31,r:.2,sk:.3,hl:1},/* Kiều diễm = the ?v=5 Khuynh thành look, moved down one step (owner 17/11 ~14:00Z) */
- tuyet:{lip:.88,eye:.96,eyeH:.9,brow:.78,wing:.42,low:.47,shim:.75,gloss:.78,bl:.38,r:.21,sk:.4,hl:1,glam:1},/* Khuynh thành: splendid, between Kiều diễm and the heavy v7 (owner 14:40Z) */
+ tuyet:{lip:.95,eye:.96,eyeH:1.1,brow:.78,wing:.55,low:.47,shim:.75,gloss:1,bl:.38,r:.21,sk:.5,hl:1,glam:1},/* Khuynh thành: splendid, between Kiều diễm and the heavy v7 (owner 14:40Z) */
  diem:{lip:.92,eye:1,eyeH:.95,brow:.82,wing:.36,low:.6,shim:.5,gloss:.2,bl:.56,r:.24,sk:.32,diff:1},/* Diêm dúa = the v6 look, blush more diffuse (loang, lower centre) */
  vungB:{lip:1,eye:1,eyeH:1.18,brow:.9,wing:.55,low:.85,shim:.6,gloss:.2,bl:.78,r:.23,sk:.36}};/* Vụng về B "đánh quá tay, như hề" = the v7 Diêm dúa look; A = TOIL_MKS.vung */
 function toilVungB(col){const sd=((col&&col.seed)|0);if(!sd)return false;let h=Math.imul(sd^(sd>>>15),2246822519);h=Math.imul(h^(h>>>13),3266489917);h^=h>>>16;return((h>>>0)/4294967296)<(BAL.toil.vungB||0)}
