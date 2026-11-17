@@ -1,4 +1,21 @@
 # FOREMAN_C_STATUS (written ONLY by Foreman C)
+NEXT FOREMAN C SESSION: ROOT-4 = session_011xDdVSQC3Gf8WhM6WW38QF (opened by ROOT-3 at ~08:30Z 17/11, depth 3). ROOT-3 stops; its trigger trig_01TEXcxvMw2CYswypHpxAqG8 disabled.
+## HANDOVER (Foreman C ROOT-3 session_011xDdVQvSf8pvDHnXCRCRsz → ROOT-4, ~08:32Z 17/11)
+Why: context 33.5% (get_session used_tokens 335k; START_CTX ~8% → limit 33%). Depth 2 → successor depth 3 (allowed). Read: this block + the ROOT-3 log lines below it (07:35Z–08:30Z); CLAIMS rows 'C ROOT-3' + rows edited today (W4e, W5d, W6d).
+OWNER: silent all ROOT-3 (no chat). Do ONLY what she says. Art goes live after C looks at the sheet (no owner review).
+RUNNING C sessions (tell each you are their foreman):
+- Lead #6 session_011xDdVS87fDNLJMJGzeiVWL — maid consort-tier redraw; ONE colour table rank-sample/maid-consort-tier-design-table.md (all overrides folded in; m49 = misty rose-beige 08:20Z). Workers:
+  · W4e session_011xDdVPcfZBTUBL5um1QC4E: a18 m01–m26 (ty1 done exc. none; CT6 ty2 15 OK, redo m10-ty2 → mint; CT7 = ty2 m15–m26 + ty3 m01–m04 generating) → a36 → a51 m01–m26.
+  · W5d session_011xDdVS67MZHvG6dfdxn9we: a18 m27–m52 all live except D13 running (m49 ×3 rose-beige redo + m48-ty2/ty3 via creation-id ref w4vnYsZ7EI; upload of a live ref file was classifier-denied — do not route around) → a36 m27–m52.
+  · W6d session_011xDdVS2kCMHXsNUr55WFy2: a26 redos first (m24-ty2/ty3 → ivory, m26 ×3 → warm dove/taupe grey, m21 ×3 → turquoise-cyan, m22 ×3 → blue periwinkle ≠ m11; m49 follow table) → a26 m27–m52 → a51 m27–m52.
+  · W2c (lead opens; consort-ty older ages from index line 202, batch-consort-ty.md). W3e / W7b paused.
+- SHOW-WHY: worker session_011xDdVNGZYsTXYyDqCqjnQg (SẴN SÀNG KIỂM 94ac121d) waits; REVIEWER opus BIG session_011xDdVRVL5MdC5V5iSZRy5P (review/show-why-r1; must rebase onto main 05ebe3da). PASS → C fast-forwards main (FF-only, head == PASS sha, under flock). KIT REQUEST (register 'Vì sao' row) sent to main.
+- AG3 maids opus worker session_011xDdVNfbt3vPg31Vfr7ihc (review/npc-agent-ag3) → on SẴN SÀNG KIỂM open an opus BIG reviewer. After AG3: greeting name rule → AG-MEET → voice by tính tình (main s30 orders, each own worker + reviewer).
+DONE today by ROOT-3: trait-pool LIVE 9fdc1199; AG2 (+AG1) LIVE 05ebe3da; event art b7–b13 + intro 26 + 4 redos LIVE; Học thành tài 10 keys img/scene-thanhtai-<k>.webp LIVE (main must wire jlevel per k — ANSWER line below); art #5 archived. ACTS 419 out of scope (OD:L84).
+Not my children (owner/ROOT-2 may archive): trait-pool worker QM2j, trait-pool reviewer NywS, AG2 worker RNkh, AG2 reviewer PQSb, event-art #4 RL7C.
+Idle waiting owner: FP #5 QLLo, tiers ShLv. WAITING: item-list-ration art when Foreman B's reports/item-list-ration.md lands (2 samples → main, then rest).
+Own trigger trig_01TEXcxvMw2CYswypHpxAqG8 DISABLED at handover; successor makes its own (:32). Push helper /home/user/wt/push.sh.
+
 
 FOREMAN C SESSION ROOT-3 = session_011xDdVQvSf8pvDHnXCRCRsz (opened by ROOT-2 ~07:40Z 17/11) · START_CTX ~8% (~80k of 1M; get_session reads 0, own estimate) → roll over at >= 33%, ceiling 60% · lineage depth 2/8 · own hourly wake (:32) below.
 - 08:22Z C LOOKED: W4e CT6 (16): 15 OK upload, redo m10-ty2 (moss ≈ m07 → mint like her ty1). W5d D11: m50 ×3 OK; m49 ×3 redo (3 greens in a row m47–m49 → lead sets non-green in table). W5d m48-ty2/ty3: classifier denied uploading her live ref file → told to use the m48-ty1 Magnific creation id instead, else park. W6d session_011xDdVS2kCMHXsNUr55WFy2 got the a26 redo list.
