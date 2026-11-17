@@ -9,10 +9,14 @@
    3. EFFECTS per kind per level (numbers BAL.feel): odds of acts by the act's kit category (kitActCat) for her deck cards and every runAct (NPCs too),
       act weights (jemo EMO_W shape), the Emperor's tablet (tinhtu), thiện cảm gains (vui), a sulk's drift (hon). Her bar push per feeling (BAL.mood.emo).
    4. INTENT (ý đồ, hidden): born from Chạnh lòng / Giận / Hờn dỗi at a high level + a low bar + traits, aimed at the person who caused it; lasts until
-      acted on (a harm act at that person), exposed (punished), or faded (the feeling gone + BAL.feel.intent.fade khắc). It shows on the face as
-      "Toan tính" only by odds against Tâm cơ (one hashed draw per viewer per day). A clue, NEVER evidence: nothing here writes chứng cứ.
-   5. API for the kit seal (main's kit-figure-mood wires it; this piece draws NO UI): faceKeyFor(pid, viewer) → {kind:'act'|'intent'|'feel', key,
-      level, fb (existing art key while the new seal art is missing), name, lines:[card lines]} with priority act > visible intent > feeling.
+      acted on (a harm act at that person), exposed (punished), or faded (the feeling gone + BAL.feel.intent.fade khắc). NEVER shown on the face seal
+      or the tap card (owner OD 17/11 ~20:15Z "thôi đừng có hiện cái mặt ý đồ" + ~20:20Z: an intent is skipped, the seal shows the next row). It only
+      steers acts (weights, danger); scouting modules may read feelIntentOf(p). Nothing here writes chứng cứ.
+   5. ACTS (owner OD ~20:45Z): 17 acts, ONE per feeling (Bình thản none), BAL.feel.act.main; each fires at that feeling's heavy level + the bar past
+      the line, own khắc timer + cooldown (BAL), its OWN face key "act-<feeling key>" (3 sets; fallback = that feeling's seal). NPC parity: every
+      person fires by the same rule; NPCs who are not consorts act out their role's reaction of the group, with the same act face.
+   6. API for the kit seal (main's kit-figure-mood wires it; this piece draws NO UI): faceKeyFor(pid) → {kind:'act'|'feel', key, level, fb, set,
+      art, name, lines:[card lines]} with priority active ACT > strongest FEELING.
    NPC parity: every rule reads p.mk / p.emo of anyone (her, consorts, servants, Emperor, Thái hậu, men, court, kids). Co-op: intents (p.fi) and acts
    (p.fa) of NPCs are world facts → written on the host only (feelWorld). Off switch for measuring: window.__feelOff = 1.
    ===================================================================================================================== */
@@ -67,36 +71,41 @@ Object.assign(BAL,{feel:{
  life:{o:30,v:22,by:{"Ân cần":["tinhnghich","chơi đùa với cung nữ trong vườn"],"Kín đáo":["chuyentam","chép kinh trọn một quyển"],"Khiêm nhường":["chuyentam","thêu xong bức hoa"],
   "Kiêu ngạo":["tutin","được khen dung mạo trong buổi thỉnh an"],"Tham vọng":["hanghai","lo liệu việc cung đâu ra đấy"],"Trọng nghĩa":["vui","được bạn cũ gửi thư"],
   "Mê tín":["lo","nằm mộng thấy điềm lạ"],"Nóng nảy":["khochiu","trời oi bức khó ngủ"],"Ham lợi":["vui","được nhà gửi bạc vào"],def:["hungkhoi","ngắm hoa trong vườn"]}},
- /* INTENT (ý đồ). from = min level of a source kind; bar = the person's bar at or under this; o = odds a buổi (+ trait points tr), clamped BAL.odds;
-    the bar must be past the NPC act line (BAL.ea.npc.bar.act, MOOD-MEM: one source); dur = khắc it lasts, renewed while the source holds; fade = khắc after the source is gone; show: face odds = o − Tâm cơ × tc (clamped BAL.odds,
-    one hashed draw per viewer per day); w = act weights while it lasts (the old Toan tính weights), danger = added to danger toward the target */
+ /* INTENT (ý đồ, never on the face: owner 20:15Z). from = min level of a source kind; o = odds a buổi (+ trait points tr), clamped BAL.odds;
+    the bar must be past the NPC act line (BAL.ea.npc.bar.act, MOOD-MEM: one source); dur = khắc it lasts, renewed while the source holds; fade = khắc
+    after the source is gone; w = act weights while it lasts (the old Toan tính weights), danger = added to danger toward the target */
  intent:{from:{ghen:2,gian:2,hon:2},o:25,
   tr:{"Xảo quyệt":20,"Tham vọng":15,"Thù dai":15,"Kiêu ngạo":5,"Nóng nảy":5,"Ân cần":-25,"Khiêm nhường":-15,"Trọng nghĩa":-15,"Thật thà":-10,"Rộng lượng":-20},
-  dur:48,fade:16,show:{o:70,tc:.6},w:{frame:1.5,plant:1.5,ally:1.3,bribe:1.5,bribeksp:1.5,feign:1.6,rumor:1.3,provoke:.8},danger:8}
+  dur:48,fade:16,w:{frame:1.5,plant:1.5,ally:1.3,bribe:1.5,bribeksp:1.5,feign:1.6,rumor:1.3,provoke:.8},danger:8}
 ,
- /* ACTS (outbursts, owner 19:25Z): fire when ONE kind is at the heavy level AND the bar is past the line on its side (hers: |S.mood.v| ≥ BAL.ea.out.v;
-    others: their moodBar past BAL.ea.npc.bar.out — the jemoact lines, one source), odds o % a buổi × temper (BAL.ea.out.t), cooldown cd khắc per
-    group, at most meWk of hers a tuần. g = feeling → reaction group of the ONE reaction table (jemoact R_, EA_REACT); kh = khắc an act lasts (the face shows
-    it), by reaction key, "buoi" = to the end of the buổi, def = any other; face = seal art key of an act (else the feeling's). fx = the new reactions' gain / loss. */
+ /* ACTS (owner 19:25Z + 20:45Z "mỗi một hành động tương ứng với mỗi một cảm xúc"): ONE act per feeling (main; Bình thản none). It fires when that kind
+    is the person's strongest at the heavy level AND the bar is past the line on its side (hers: |S.mood.v| ≥ BAL.ea.out.v; others: their moodBar past
+    BAL.ea.npc.bar.out — the jemoact lines, one source), odds o % a buổi × temper (BAL.ea.out.t), cooldown cd khắc per feeling, at most meWk of hers a
+    tuần. kh = khắc the act lasts (the face shows it), by act key, "buoi" = to the end of the buổi, def = any other. Face key = "act-<feeling key>".
+    fx = the gains / losses of the acts jfeel runs itself (the others run in jemoact eaDo: khoc, dapdo, matngu, thuong; use = an eaDo reaction reused). */
  act:{o:35,meWk:2,def:2,
-  /* the owner's own pairs (OD 18:33Z: "giận thì đập đồ ... buồn thì ... khóc"): the main act of a kind is taken with odds mainP % when the person's nết allows it, else the nết picks */
-  main:{buon:"khoc",gian:"dapdo",lo:"matngu",so:"tron",hothen:"caobenh",chan:"bodo",hon:"bove",vui:"thuong",tinhtu:"moi"},mainP:60,cd:{def:24,buon:24,gian:24,so:36,tron:36,hothen:48,chan:24,hon:24,ghen:24,vui:48,tinhtu:72},
-  g:{buon:"buon",gian:"gian",lo:"so",so:"tron",hothen:"hothen",chan:"chan",hon:"hon",ghen:"ghen",vui:"vui",tinhtu:"tinhtu"},
+  main:{buon:"khoc",gian:"dapdo",khochiu:"caugat",so:"tron",hothen:"caobenh",lo:"matngu",chan:"bodo",choang:"ngoithu",hon:"bove",ghen:"noimoc",
+   vui:"thuong",tutin:"khoetai",tinhtu:"moi",tinhnghich:"treo",hanghai:"mach",chuyentam:"quengio",hungkhoi:"sangtac"},
+  cd:{def:24,so:36,hothen:48,choang:36,vui:48,tutin:48,tinhtu:72,tinhnghich:36,hanghai:36,chuyentam:36,hungkhoi:48},
+  /* a person of another role (Emperor, Thái hậu, servants, men, court, children) acts out the reaction of this group of the ONE table (jemoact R_) */
+  g:{buon:"buon",gian:"gian",khochiu:"gian",so:"so",hothen:"buon",lo:"so",chan:"buon",choang:"so",hon:"ghen",ghen:"ghen",
+   vui:"vui",tutin:"vui",tinhtu:"vui",tinhnghich:"vui",hanghai:"vui",chuyentam:"vui",hungkhoi:"vui"},
   kh:{khoc:1,tui:1,sk:1,dapdo:1,mang:1,danh:1,khac:1,pham:1,noi:1,quo:1,boan:4,thu:1,matngu:"buoi",emat:"buoi",soat:2,cau:2,cham:1,thuong:1,khoe:1,tiec:2,hat:2,ban:1,eyen:2,
-   tron:"buoi",caobenh:"buoi",bodo:2,bove:2,moi:2,okhoc:1,kquay:1,kbo:2},
-  face:{khoc:"khoc",tui:"khoc",okhoc:"khoc",kquay:"khoc",dapdo:"phanno",mang:"phanno",danh:"phanno",khac:"phanno",pham:"phanno",noi:"phanno",quo:"phanno",cai:"phanno",
-   qgian:"phanno",matngu:"matngu",emat:"matngu",tron:"runso",soat:"runso"},
-  fx:{tron:{vent:12,danh:1},caobenh:{vent:12,danh:1},bodo:{vent:10,tai:1},bove:{vent:12,rel:5},moi:{vent:8,sung:2,ghen:2,oan:2}}}}});
+   tron:"buoi",caobenh:"buoi",bodo:2,bove:2,moi:2,okhoc:1,kquay:1,kbo:2,caugat:1,ngoithu:2,noimoc:1,khoetai:1,treo:1,mach:"buoi",quengio:"buoi",sangtac:2},
+  fx:{tron:{vent:12,danh:1},caobenh:{vent:12,danh:1},bodo:{vent:10,tai:1},bove:{vent:12,rel:5},moi:{vent:8,sung:2,ghen:2,oan:2},
+   caugat:{vent:10,loy:3},ngoithu:{vent:8},noimoc:{use:"cham"},khoetai:{vent:8,danh:1,ghen:2,oan:1},treo:{vent:10,rel:2,loy:1},
+   mach:{vent:8,tai:1,suc:3},quengio:{vent:8,tai:2,suc:2},sangtac:{vent:8,tai:1,danh:1}}}}});
 const FEEL_KEY_CHANH="ghen";/* MOOD-MEM keeps the feeling key "ghen", named EMO_GHEN ("Chạnh lòng", jemo); the score v.ghen stays "Ghen" */
 /* VANPHONG names (player words): light / middle name, heavy-level name, level words */
 const FEEL_N={vui:"Vui",tutin:"Tự tin",hanghai:"Hăng hái",tinhtu:"Tình tứ",chuyentam:"Chuyên tâm",hungkhoi:"Hứng khởi",tinhnghich:"Tinh nghịch",binh:"Bình thản",
  buon:"Buồn",gian:"Giận",lo:"Lo âu",so:"Sợ",hothen:"Hổ thẹn",chan:"Chán chường",khochiu:"Khó chịu",choang:"Choáng váng",hon:"Hờn dỗi",ghen:(typeof EMO_GHEN==="string"?EMO_GHEN:"Chạnh lòng")};
 const FEEL_HEAVY={vui:"Hân hoan",buon:"Đau khổ",gian:"Phẫn nộ",lo:"Bấn loạn",so:"Khiếp đảm",hothen:"Nhục nhã"};
 const FEEL_LVN=["","nhẹ","vừa","nặng"];
-const FEEL_INTENT_N="Toan tính";
 /* seal art keys while the new paintings are missing (Foreman C ROOT-8 order 19:26Z): new key → an existing seal (never drawn here) */
 const FEEL_FB={tutin:"vui",hanghai:"vui",tinhtu:"vui",chuyentam:"binh",hungkhoi:"vui",tinhnghich:"vui",hothen:"buon",chan:"buon",khochiu:"lo",choang:"lo",
- hon:"gian",khoc:"dau",phanno:"gian",runso:"so",matngu:"lo",toantinh:"muu"};
+ hon:"gian"};
+/* an act face "act-<feeling key>" not painted yet → that feeling's seal (then the feeling's own fallback) */
+function feelFb(key){if(key&&key.slice(0,4)==="act-")return key.slice(4);return FEEL_FB[key]||null}
 /* ONE group map for every older table keyed by the old 9 kinds (EMO_* shapes, reaction groups, colours, flavours, trong/why factors):
    a new kind reads the table entry of its nearest old kind. feelGrp(k) → that key; feelIn(T,k) → k when T has it, else its group key. */
 const FEEL_G={tutin:"vui",hanghai:"vui",tinhtu:"vui",hungkhoi:"vui",tinhnghich:"vui",chuyentam:"binh",hothen:"buon",chan:"buon",khochiu:"gian",choang:"so",hon:"gian",ghen:"ghen"};
@@ -179,7 +188,6 @@ function feelEv(p,ev,why,t){try{if(feelOn()&&typeof emoEv==="function"){FEEL.sta
 function feelLife(){if(!feelOn()||!feelWorld())return;const L=fB().life;for(const v of (typeof liveRivals==="function"?liveRivals(true):[])){if(!v||!v.alive||v.out||v.coop)continue;
   if(!roll(L.o))continue;const T=emoTraits(v);let d=null;for(const t of T)if(L.by[t]){d=L.by[t];break}d=d||L.by.def;emoSet(v,d[0],L.v,d[1]);FEEL.stat.life++}}
 /* ---------- 4. INTENT (ý đồ) ---------- */
-function feelTc(p){try{if(p===S)return S.tamco||0;return p.tamco!=null?p.tamco:typeof nv==="function"?nv(p,"tamco")||0:0}catch(e){return 0}}
 function feelIntentOn(p){const f=p&&p.fi;if(!f)return null;const now=mkNow();if(f.k1<=now){feelIntentEnd(p,"faded");return null}return f}
 function feelIntentEnd(p,why){if(!p||!p.fi)return;FEEL.stat.fiEnd[why]=(FEEL.stat.fiEnd[why]||0)+1;p.fi=null}
 /* a buổi: is an intent born / renewed / fading? NPCs only (her schemes are the player's own choices) */
@@ -198,10 +206,9 @@ function feelActed(a,t,k){if(!a||!a.fi||!t)return;if(typeof EMO_HARM!=="undefine
 /* while it lasts: the old scheming weights and danger toward the target */
 (function(){if(typeof persW!=="function")return;const w0=persW;persW=function(p,act){const w=w0.apply(this,arguments);try{if(feelOn()&&p&&p!==S&&feelIntentOn(p)){const m=fB().intent.w[act];if(m)return w*m}}catch(e){}return w}})();
 (function(){if(typeof danger!=="function")return;const d0=danger;danger=function(v,t){const d=d0.apply(this,arguments);try{if(feelOn()&&v&&t){const f=feelIntentOn(v);if(f&&f.t===emoKey(t))return d+fB().intent.danger}}catch(e){}return d}})();
-/* does viewer x see it on p's face? odds vs p's Tâm cơ, one hashed draw per viewer per intent per day */
-function feelIntentSeen(p,x){const f=feelIntentOn(p);if(!f)return false;x=x||S;if(x===p)return true;const B=fB().intent.show;const o=Math.max(BAL.odds.lo,Math.min(BAL.odds.hi,Math.round(B.o-feelTc(p)*B.tc)));
- let hit=false;try{hit=knHit("fi|"+emoKey(x)+"|"+emoKey(p)+"|"+f.id+"|"+emoW(),o)}catch(e){hit=roll(o)}if(hit)FEEL.stat.fiSeen++;return hit}
-window.feelIntentSeen=feelIntentSeen;
+/* the live intent of p (hidden: never on the face or the card, owner 20:15Z) — for scouting / clue modules only */
+function feelIntentOf(p){try{return feelIntentOn(emoRes(p))}catch(e){return null}}
+window.feelIntentOf=feelIntentOf;
 /* ---------- the clock: a buổi tick (intents, sulks) and a tuần tick (quiet life) ---------- */
 function feelPeople(){try{return typeof mkAll==="function"?mkAll():[]}catch(e){return[]}}
 function feelBuoi(){if(!feelOn()||S.dead)return;try{feelActTick(S)}catch(e){console.error(e)}if(!feelWorld())return;for(const p of feelPeople()){if(p!==S)try{feelActTick(p)}catch(e){}try{feelIntentTick(p)}catch(e){}
@@ -209,16 +216,22 @@ function feelBuoi(){if(!feelOn()||S.dead)return;try{feelActTick(S)}catch(e){cons
 /* one tick a buổi (render sees the buổi change; host / single player only) and the quiet life once a tuần */
 (function(){if(typeof render!=="function")return;const r0=render;render=function(){try{if(feelOn()&&!S.dead){const w=emoW(),b=w*10+(S.buoi||0);if(FEEL.b==null)FEEL.b=b;else if(FEEL.b!==b){const wOld=Math.floor(FEEL.b/10);FEEL.b=b;feelBuoi();if(w!==wOld)feelLife()}}}catch(e){console.error("jfeel",e)}return r0.apply(this,arguments)}})();
 /* ---------- ACTS: heavy level + bar past the line → one act from the ONE reaction table; a short khắc timer (the face shows it) + cooldown ---------- */
-(function(){try{const R=window.EA_REACT;if(!Array.isArray(R))return;const has=k=>R.some(r=>r.k===k&&r.who==="c");
- if(!has("tron"))R.push({k:"tron",g:"tron",who:"c",n:"Trốn trong phòng",art:"xa-huong",ok:()=>true,w:()=>1},{k:"caobenh",g:"hothen",who:"c",n:"Cáo bệnh không dự",art:"xa-huong",ok:()=>true,w:()=>1},
-  {k:"bodo",g:"chan",who:"c",n:"Bỏ dở việc đang làm",art:"xa-huong",ok:()=>true,w:()=>1},{k:"bove",g:"hon",who:"c",n:"Bỏ về, không tiếp",art:"dap-tra-mia-h",ok:p=>!!feelHonT(p),w:()=>1},
-  {k:"moi",g:"tinhtu",who:"c",n:"Mời Hoàng thượng ghé cung",art:"dang-tra",ok:p=>!!S.emp&&!(p===S?S.confined:p.confined),w:()=>1})}catch(e){}})();
+(function(){try{const R=window.EA_REACT;if(!Array.isArray(R))return;const has=k=>R.some(r=>r.k===k&&r.who==="c");const T=(k,g,n,art,ok)=>{if(!has(k))R.push({k,g,who:"c",n,art,ok:ok||(()=>true),w:()=>1})};
+ T("tron","so","Trốn trong phòng","xa-huong");T("caobenh","hothen","Cáo bệnh không dự","xa-huong");T("bodo","chan","Bỏ dở việc đang làm","xa-huong");
+ T("bove","hon","Không tiếp, bỏ về","dap-tra-mia-h",p=>!!feelHonT(p));T("moi","tinhtu","Chủ động mời Hoàng thượng","dang-tra",p=>!!S.emp&&!(p===S?S.confined:p.confined));
+ T("caugat","khochiu","Cáu gắt với người hầu","phat-vo-co-h",p=>eaH().staffOf(p).length>0);T("ngoithu","choang","Ngồi thừ người","xa-huong");
+ T("noimoc","ghen","Nói móc đối thủ","dap-tra-mia-h",p=>!!eaH().rival(p));T("khoetai","tutin","Khoe tài trước đông người","dan-dem-trang");
+ T("treo","tinhnghich","Bày trò trêu người","dang-tra");T("mach","hanghai","Làm một mạch không nghỉ","xa-huong");
+ T("quengio","chuyentam","Chìm vào việc, quên giờ","xa-huong");T("sangtac","hungkhoi","Sáng tác ngay tại chỗ","dan-dem-trang")}catch(e){}})();
+const eaH=()=>window.EA_H||{staffOf:()=>[],maidOf:()=>[],rival:()=>null,ventMe:()=>0,ventNpc:()=>0,loyAdd:()=>{}};
 function feelHonT(p){try{const now=mkNow();const m=(p.mk||[]).filter(x=>x.k==="hon"&&x.t!=null&&x.k1>now).sort((a,b)=>b.s-a.s)[0];const t=m&&emoByKey(String(m.t));return t&&t!==p?t:null}catch(e){return null}}
 function feelLine(p,good){const L=p===S?(BAL.ea.out.v||45):((BAL.ea.npc&&BAL.ea.npc.bar&&BAL.ea.npc.bar.out)||25);return good?L:-L}
-function feelActDur(k,g){const A=fB().act,now=mkNow();let d=A.kh[k];if(d==null)d=A.def;if(d==="buoi"){const KH=J95.KH;return KH-(now%KH)}return d}
+function feelActDur(k){const A=fB().act,now=mkNow();let d=A.kh[k];if(d==null)d=A.def;if(d==="buoi"){const KH=J95.KH;return KH-(now%KH)}return d}
 /* the gains / losses of the new reactions (the old ones: jemoact eaDo) */
 function feelDo(p,r){const me=p===S,F=fB().act.fx[r.k];if(!F)return window.eaDo(p,r);const res=[];let h="",target=null;const add=t=>res.push(t);
+ if(F.use){const b=window.EA_REACT.find(x=>x.k===F.use&&x.who==="c");if(!b)return null;return window.eaDo(p,Object.assign({},b,{k:F.use,n:r.n}))}
  const pay=o=>{if(me)apply(o);else ap(p,o);for(const k in o){const lb={danh:"Danh",tai:"Tài",sung:"Sủng",bac:"Bạc",suc:"Sức"}[k];if(o[k]&&lb)add(me?`${lb} ${o[k]>0?"+":"−"}${Math.abs(o[k])}`:"")}};
+ const Nm2=x=>x===S.emp?"Hoàng thượng":emoName(x);
  switch(r.k){
  case"tron":pay({danh:-F.danh});h=me?"Lòng sợ hãi chưa yên, ngươi đóng cửa tẩm cung, cả buổi không dám bước ra.":`${emoName(p)} đóng cửa trốn trong phòng cả buổi.`;break;
  case"caobenh":pay({danh:-F.danh});h=me?"Xấu hổ chẳng dám nhìn ai, ngươi sai người báo bệnh, không đến thỉnh an.":`${emoName(p)} cáo bệnh, không đến thỉnh an.`;break;
@@ -226,18 +239,31 @@ function feelDo(p,r){const me=p===S,F=fB().act.fx[r.k];if(!F)return window.eaDo(
  case"bove":{const t=feelHonT(p);if(!t)return null;target=t;try{relAdd(p,t,-F.rel)}catch(e){}if(me)add(`${t===S.emp?"Hoàng thượng":emoName(t)} thiện cảm −${F.rel}`);
   h=me?`Còn hờn ${t===S.emp?"Hoàng thượng":emoName(t)}, ngươi bỏ về, không muốn tiếp.`:`${emoName(p)} còn hờn ${t===S?"ngươi":emoName(t)}, bỏ về không tiếp.`;break}
  case"moi":pay({sung:F.sung});if(me){try{ghenAll(F.ghen)}catch(e){}add("các phi tần ganh ghét thêm")}else{try{for(const x of liveRivals(true))if(x!==p&&x.alive)oanAdd(x,p,F.oan)}catch(e){}}
-  h=me?"Lòng xao xuyến, ngươi sai người dâng trà mời Hoàng thượng ghé cung.":`${emoName(p)} sai người mời Hoàng thượng ghé cung.`;break}
- try{if(me)ventMe((S.mood&&S.mood.v>0?-1:1)*F.vent,r.n);else ventNpc(p,F.vent)}catch(e){}
+  h=me?"Lòng xao xuyến, ngươi sai người dâng trà mời Hoàng thượng ghé cung.":`${emoName(p)} sai người mời Hoàng thượng ghé cung.`;break;
+ case"caugat":{const L=eaH().staffOf(p);if(!L.length)return null;const m=L[Math.floor(Math.random()*L.length)];eaH().loyAdd(m,-F.loy);if(me)add(`lòng ${m.name||"cung nhân"} −${F.loy}`);try{emoEv(m,"loyalDown","bị chủ nhân cáu gắt")}catch(e){}
+  h=me?`Trong lòng bực bội, chuyện nhỏ cũng khiến ngươi cáu gắt với ${m.name||"cung nhân"}.`:`${emoName(p)} cáu gắt với người hầu.`;break}
+ case"ngoithu":h=me?"Chuyện vừa qua làm ngươi choáng váng, cứ ngồi thừ người, ai gọi cũng chẳng nghe.":`${emoName(p)} ngồi thừ người, ai gọi cũng chẳng nghe.`;break;
+ case"khoetai":pay({danh:F.danh});try{if(me)ghenAll(F.ghen);else for(const x of liveRivals(true))if(x!==p&&x.alive)oanAdd(x,p,F.oan)}catch(e){}if(me)add(`kẻ ganh ghen +${F.ghen}`);
+  h=me?"Tự tin đầy lòng, ngươi đàn một khúc trước các phi tần; tiếng khen lẫn tiếng xì xào đều có.":`${emoName(p)} khoe tài trước các phi tần.`;break;
+ case"treo":{const t=eaH().rival(p);if(t){target=t;try{affAdd(t,p,-F.rel)}catch(e){}if(me)add(`${Nm2(t)} thiện cảm −${F.rel}`)}
+  else{for(const m of eaH().staffOf(p))eaH().loyAdd(m,F.loy);if(me&&eaH().staffOf(p).length)add(`lòng cung nhân +${F.loy}`)}
+  h=me?(t?`Lòng tinh nghịch, ngươi bày trò trêu ${Nm2(t)}; người kia đỏ mặt, không vui.`:"Lòng tinh nghịch, ngươi bày trò trêu đám cung nhân; cả cung cười ồ."):`${emoName(p)} bày trò trêu ${t?(t===S?"ngươi":Nm2(t)):"người hầu"}.`;break}
+ case"mach":pay({tai:F.tai,suc:-F.suc});h=me?"Hăng hái trong lòng, ngươi làm một mạch không nghỉ, xong việc thì người rã rời.":`${emoName(p)} làm một mạch không nghỉ.`;break;
+ case"quengio":pay({tai:F.tai,suc:-F.suc});h=me?"Ngươi chìm vào việc đang làm, quên cả giờ ăn giờ ngủ.":`${emoName(p)} chìm vào việc, quên cả giờ giấc.`;break;
+ case"sangtac":pay({tai:F.tai,danh:F.danh});h=me?"Hứng khởi dâng trào, ngươi sáng tác ngay tại chỗ; bài mới truyền tay khắp cung.":`${emoName(p)} hứng khởi sáng tác ngay tại chỗ.`;break}
+ try{if(me)eaH().ventMe((S.mood&&S.mood.v>0?-1:1)*F.vent,r.n);else eaH().ventNpc(p,F.vent)}catch(e){}
  return{h,res:res.filter(Boolean),target}}
 function feelActTick(p){const A=fB().act;if(!p||feelActNow(p))return;const me=p===S;if(!me&&!feelWorld())return;
- const o=feelSums(p);let k=null;for(const x in A.g)if(feelLvOf(o[x]||0)>=3&&(!k||o[x]>o[k]))k=x;if(!k)return;
+ const o=feelSums(p);let k=null;for(const x in A.main)if(feelLvOf(o[x]||0)>=3&&(!k||o[x]>o[k]))k=x;if(!k)return;
  const good=feelGood(k),bar=feelBar(p),L=feelLine(p,good);if(good?bar<L:bar>L)return;
- const g=A.g[k],now=mkNow();p.fcd=p.fcd||{};if((p.fcd[g]||-1)>now)return;
+ const now=mkNow();p.fcd=p.fcd||{};if((p.fcd[k]||-1)>now)return;
  if(me){const E=eaS2(),w=emoW();if(E.w!==w){E.w=w;E.n=0}if(E.n>=A.meWk)return;if(typeof isSrv==="function"&&isSrv())return}
  let T={k:"even"};try{T=eaTemper(p)}catch(e){}if(!roll(A.o*((BAL.ea.out.t||{})[T.k]||1)))return;
- let P=null;try{const mk=A.main[k];const mr=mk&&window.EA_REACT.find(r=>r.k===mk&&r.g===g&&r.who===eaKind(p)&&r.ok(p,T));if(mr&&roll(A.mainP))P={r:mr,T}}catch(e){}try{P=P||eaPick(p,g)||(g!==feelGrp(k)?eaPick(p,feelGrp(k)):null)||eaPick(p,{tron:"so",hothen:"buon",chan:"buon",hon:"ghen",tinhtu:"vui"}[g]||g)}catch(e){}if(!P)return;
+ /* a consort (her too): the ONE act of this feeling; any other role: its own reaction of the group (jemoact R_), the same act face */
+ const kd=eaKind(p);let P=null;try{if(kd==="c"){const r=window.EA_REACT.find(x=>x.k===A.main[k]&&x.who==="c"&&(x.k!=="khoc"||x.g==="buon"));if(r&&r.ok(p,T))P={r,T}}
+  else P=eaPick(p,A.g[k])}catch(e){}if(!P)return;
  const r=P.r;let out=null;try{out=feelDo(p,r)}catch(e){console.error("feelDo",e)}if(!out)return;
- p.fa={k:r.k,n:r.n,g,face:A.face[r.k]||null,k0:now,k1:now+feelActDur(r.k,g)};p.fcd[g]=now+(A.cd[g]||A.cd.def);FEEL.stat.act=FEEL.stat.act||{};FEEL.stat.act[r.k]=(FEEL.stat.act[r.k]||0)+1;
+ p.fa={k:r.k,n:r.n,f:k,face:"act-"+k,k0:now,k1:now+feelActDur(r.k)};p.fcd[k]=now+(A.cd[k]||A.cd.def);FEEL.stat.act=FEEL.stat.act||{};FEEL.stat.act[k]=(FEEL.stat.act[k]||0)+1;
  if(me){eaS2().n++;feelMeShow(r,out,k)}else try{eaSay(p,out.h,out.target===S)}catch(e){}}
 function eaS2(){S.fa2=S.fa2||{w:-1,n:0};return S.fa2}
 /* her act: the kit event frame (the same shape as every jemoact outburst) with only "Tiếp tục" */
@@ -245,16 +271,17 @@ function feelMeShow(r,o,k){try{log(`${r.n}: ${o.h}${o.res.length?` (${o.res.join
  Q.push({t:r.n,art:`img/act-${r.art||"xa-huong"}.webp`,hideOut:true,h:`<p>${o.h}</p><p>Vì ${feelName(k,3).toLowerCase()} quá nên lòng không giữ được; muốn tránh thì nên giữ lòng bình thản từ sớm.</p>${o.res.length?`<p class="past">${o.res.join(" · ")}</p>`:""}`,
   opts:[{n:"Tiếp tục",fx:{},hideOut:true,hint:"không đổi gì thêm",risk:"an toàn",go:()=>{}}]})}
 window.feelActTick=feelActTick;
-/* ---------- 5. VẺ MẶT: the ONE seal key (act > visible intent > feeling) + the tap-card lines ---------- */
+/* ---------- 6. VẺ MẶT: the ONE seal key (active act > strongest feeling; an intent is never shown, owner 20:15Z / 20:20Z) + the tap-card lines ---------- */
 function feelActNow(p){const a=p&&p.fa;if(!a)return null;try{if(a.k1<=mkNow()){p.fa=null;return null}}catch(e){return null}return a}
-function faceKeyFor(pid,viewer){try{if(!S)return null;const p=typeof mckRes==="function"?mckRes(pid):emoRes(pid);if(!p)return null;const x=viewer||S;
- const e=emoGet(p);const k=e&&e.k||"binh";const lv=k==="binh"?0:feelLv(p,k);const lines=[];
- const act=feelActNow(p),fi=p!==S&&feelIntentSeen(p,x);
- if(act)lines.push(`Đang: ${act.n}`);if(k!=="binh"&&lv)lines.push(`Cảm xúc: ${feelName(k,lv)} (${FEEL_LVN[lv]})`);if(fi)lines.push(`Vẻ mặt: ${FEEL_INTENT_N}`);
- let r;if(act)r={kind:"act",key:act.face||k,level:lv,name:act.n};else if(fi)r={kind:"intent",key:"toantinh",level:0,name:FEEL_INTENT_N};else r={kind:"feel",key:k,level:lv,name:k==="binh"?FEEL_N.binh:feelName(k,lv)};
- r.fb=FEEL_FB[r.key]||null;try{r.set=typeof emoArtSet==="function"?emoArtSet(p):"";r.art=feelArt(r.key,r.set)}catch(e){r.art=r.key}r.lines=lines;FEEL.stat.lvl[lv]++;return r}catch(er){return null}}
-/* the seal art key to draw for set ("" women, "m-", "mo-") : the key when its painting is on the CDN (img/_index.json, kitPhOnCdn), else its fallback */
-function feelArt(key,set){const fb=FEEL_FB[key];if(!fb)return key;try{if(typeof kitPhOnCdn==="function"&&!kitPhOnCdn(`img/kit/emo-${set||""}${key}.webp`))return fb}catch(e){}return key}
-window.feelArt=feelArt;
+/* old saves: an act stored with the old face keys (khoc / phanno / runso / matngu) carries no feeling key → the face of its feeling by its act key */
+function feelActFace(a){if(a.face&&a.face.slice(0,4)==="act-")return a.face;const M=fB().act.main;for(const k in M)if(M[k]===a.k)return"act-"+k;return null}
+function faceKeyFor(pid){try{if(!S)return null;const p=typeof mckRes==="function"?mckRes(pid):emoRes(pid);if(!p)return null;
+ const e=emoGet(p);const k=e&&e.k||"binh";const lv=k==="binh"?0:feelLv(p,k);const lines=[];const act=feelActNow(p);
+ if(act)lines.push(`Đang: ${act.n}`);if(k!=="binh"&&lv)lines.push(`Cảm xúc: ${feelName(k,lv)} (${FEEL_LVN[lv]})`);
+ const af=act&&feelActFace(act);let r;if(act&&af)r={kind:"act",key:af,level:act.f?feelLv(p,act.f):lv,name:act.n};else r={kind:"feel",key:k,level:lv,name:k==="binh"?FEEL_N.binh:feelName(k,lv)};
+ r.fb=feelFb(r.key);try{r.set=typeof emoArtSet==="function"?emoArtSet(p):"";r.art=feelArt(r.key,r.set)}catch(e){r.art=r.key}r.lines=lines;FEEL.stat.lvl[lv]++;return r}catch(er){return null}}
+/* the seal art key to draw for set ("" women, "m-", "mo-"): the key when its painting is on the CDN (img/_index.json, kitPhOnCdn), else down its fallback chain */
+function feelArt(key,set){for(let i=0;i<3&&key;i++){const fb=feelFb(key);if(!fb)return key;try{if(typeof kitPhOnCdn==="function"&&!kitPhOnCdn(`img/kit/emo-${set||""}${key}.webp`)){key=fb;continue}}catch(e){}return key}return key}
+window.feelArt=feelArt;window.feelFb=feelFb;
 window.faceKeyFor=faceKeyFor;window.FEEL_N=FEEL_N;window.FEEL_FB=FEEL_FB;
 window.feelStat=()=>JSON.parse(JSON.stringify(FEEL.stat));

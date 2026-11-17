@@ -60,7 +60,7 @@ function emoBoxArt(p,m,L){const k=m.known?m.k:"an";const c=m.known?(L.find(x=>x.
  /* FEELINGS-18: a new kind shows the picture of its nearest painted kind (FEEL_FB) */const pk=typeof FEEL_FB!=="undefined"&&FEEL_FB[k]?FEEL_FB[k]:k;
  const src=own||`img/ev-mood-${EMO[k]||k==="an"?pk:"binh"}${w%2?"-2":""}.webp`;
  const cap=c?String(c.why).replace(/\s*«[^»]*»/g,"").replace(/[,.]\s*$/,"").trim():m.known?(EMO[k]||""):"Chưa rõ lòng người";
- return{src,label:cap,mark:`img/kit/emo-${set}${typeof feelArt==="function"?feelArt(k,set):k}.webp`,markAlt:`Tâm trạng: ${m.known?m.name:"chưa rõ"}`}}
+ return{src,label:cap,mark:`img/kit/emo-${set}${(()=>{try{if(m.known&&typeof faceKeyFor==="function"){const f=faceKeyFor(p);if(f&&f.art)return f.art}}catch(e){}return typeof feelArt==="function"?feelArt(k,set):k})()}.webp`,markAlt:`Tâm trạng: ${m.known?m.name:"chưa rõ"}`}}
 function emoBox(k){const p=emoByKey(k);if(!p||!S||S.dead)return;const m=window.kitEmotion(p);if(!m)return;let nm=p===S?"Ngươi":emoName(p);/* rank + name always together (owner 15/11, OD L820-821): same plain title+name as Đã biết về X */try{if(p!==S&&typeof kitName==="function"&&typeof kpPlain==="function"){const t=kpPlain(kitName(p)).trim();if(t)nm=t}}catch(e){}
  const cls=x=>typeof feelGood==="function"?(feelGood(x)?"g":feelBad(x)?"r":""):x==="vui"?"g":["gian","buon","so","lo","ghen"].includes(x)?"r":"";const W=emoW();const ago=w=>W-w<=0?"tuần này":`${W-w} tuần trước`;
  const L=m.known?emoCauses(p):[];

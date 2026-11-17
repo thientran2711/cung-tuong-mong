@@ -269,6 +269,8 @@ const R_=[
  {k:"kbo",g:"so",who:"k",n:"Gặp ác mộng, sốt nhẹ",ok:()=>true,w:()=>1},{k:"khon",g:"ghen",who:"k",n:"Hờn dỗi huynh đệ",ok:()=>true,w:()=>1},
  {k:"kvui",g:"vui",who:"k",n:"Nô đùa làm Hoàng thượng cười",ok:()=>true,w:()=>1}];
 window.EA_REACT=R_;
+/* FEELINGS-18 (jfeel acts) reuses these helpers of the ONE reaction code (they live inside this closure) */
+window.EA_H={staffOf:p=>staffOf(p),maidOf:p=>maidOf(p),rival:p=>eaRival(p),ventMe:(n,w,e)=>ventMe(n,w,e),ventNpc:(p,n)=>ventNpc(p,n),loyAdd:(m,n)=>loyAdd(m,n)};
 function eaKhoOk(){try{const T=S.trieu,N=BAL.ea.nk.e;return !(T&&T.kho!=null)||T.kho-N.kho>=N.khoMin}catch(e){return true}}
 /* who the person is: c consort (her too), e Emperor, t Thái hậu, s servant, m man of the palace, o court eunuch / Thái y viện, q minister, k child */
 function eaKind(p){if(p===S)return"c";if(S.emp&&p===S.emp)return"e";if(p===S.thO)return"t";if((rivals||[]).includes(p))return"c";if(p&&(p.role==="maid"||p.role==="eunuch"||p.sid!=null||p===S.maid))return"s";

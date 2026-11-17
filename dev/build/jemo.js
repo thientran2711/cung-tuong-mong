@@ -165,12 +165,9 @@ function emoGateWrap(){if(window.__emoGate||typeof motiveOK!=="function")return;
 try{emoGateWrap()}catch(e){}
 /* ---------- fog of knowledge ---------- */
 function emoSee(){if(!emoOn())return;const W=emoW();S.emoSeen=S.emoSeen||{};try{for(const x of curPeople()){const p=emoRes(x);if(p)S.emoSeen[emoKey(p)]=W}}catch(e){}}
-function emoKnown(p){p=emoRes(p);if(!p)return false;if(p===S)return true;try{if(typeof kitIsKnown==="function"&&!kitIsKnown(p))return false}catch(e){}
- const W=emoW(),k=emoKey(p),s=(S.emoSeen||{})[k];if(s!=null&&W-s<=2)return true;
- if(typeof k61Own==="function"?k61Own(p):((S.staff||[]).includes(p)||p===S.maid||(S.kids||[]).includes(p)))return true;/* her own people: ONE list (j61 k61Own; home family included) */
- try{if(p===S.thO&&typeof cmKnown==="function")return cmKnown("th");const q=typeof queenP==="function"?queenP():null;if(p===q&&typeof cmKnown==="function"&&cmKnown("hh"))return true}catch(e){}
- if((S.mat||0)>=3&&(rivals||[]).includes(p))return true;
- if(p===S.emp&&(S.nightLog||[]).some(w=>W-w<=2))return true;return false}
+/* owner OD 17/11 ~20:25Z + ~20:35Z: the face (seal) of ANYONE she knows is always shown, updated each khắc (no grey "chưa rõ" seal); a Người lạ (j60
+   kitIsKnown false: the unknown silhouette) shows none. Only the CAUSE needs scouting (jmoodknow moodCauseKnown). emoSee keeps S.emoSeen as a record. */
+function emoKnown(p){p=emoRes(p);if(!p)return false;if(p===S)return true;try{if(typeof kitIsKnown==="function"&&!kitIsKnown(p))return false}catch(e){}return true}
 /* public API — the ONE source of emotion display (owner 22:50Z: no code-drawn face expressions): null = no badge (stranger); known false = "chưa rõ" */
 window.kitEmotion=function(p){try{if(!S)return null;const q=emoRes(p);if(!q)return null;try{if(q!==S&&typeof kitIsKnown==="function"&&!kitIsKnown(q))return null}catch(e){}
  const kn=q===S.emp||emoKnown(q);if(!kn)return{k:"an",name:"Chưa rõ",known:false};let e=emoGet(q);
@@ -185,10 +182,10 @@ function emoArtSet(p){try{if(p&&p.__kp)p=p.__kp;const q=emoRes(p)||p;if(!q||q===
 function emoBadge(p){const m=window.kitEmotion(p);if(!m)return"";const t=m.known?`Tâm trạng: ${m.name}${m.why&&m.k!=="binh"?" ("+m.why+")":""}`:"Tâm trạng: chưa rõ";
  const E=x=>String(x==null?"":x).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
  /* owner 11/15: no visible label; TAP the seal = the kit popover (kpPop, j79) with the mood word + one-line cause; any other tap closes it */
- /* FEELINGS-18: the art key is the "vẻ mặt" key (faceKeyFor: act > visible intent > feeling); a seal not painted yet falls back to its FEEL_FB art, then goes */
- let ak=m.k,fb="";try{if(m.known&&typeof faceKeyFor==="function"){const f=faceKeyFor(p);if(f){ak=f.key;fb=f.fb||""}}else if(typeof FEEL_FB!=="undefined")fb=FEEL_FB[ak]||""}catch(e){}const set=emoArtSet(p);
+ /* FEELINGS-18: the art key is the "vẻ mặt" key (faceKeyFor: act > strongest feeling; intent never); a seal not painted yet falls back to its FEEL_FB art, then goes */
+ let ak=m.k,src=m.k,fb="";try{if(m.known&&typeof faceKeyFor==="function"){const f=faceKeyFor(p);if(f){ak=f.key;src=f.art||f.key;fb=(typeof feelFb==="function"&&feelFb(src))||""}}else if(typeof feelFb==="function")fb=feelFb(ak)||""}catch(e){}const set=emoArtSet(p);
  const oe=fb?`if(!this.dataset.fb){this.dataset.fb=1;this.src='img/kit/emo-${set}${fb}.webp'}else this.remove()`:"this.remove()";
- return `<img class="kemo kemo-${ak}" src="img/kit/emo-${set}${ak}.webp" alt="${E(t)}" data-kemo="${E(m.known?m.name:"Chưa rõ")}" data-kemow="${E(m.known&&m.k!=="binh"?m.why:"")}" role="button" tabindex="0" onerror="${oe}">`}
+ return `<img class="kemo kemo-${ak}" src="img/kit/emo-${set}${src}.webp" alt="${E(t)}" data-kemo="${E(m.known?m.name:"Chưa rõ")}" data-kemow="${E(m.known&&m.k!=="binh"?m.why:"")}" role="button" tabindex="0" onerror="${oe}">`}
 /* tap on any seal (hers or an NPC's, any frame size): kit popover; capture phase so the tap never also opens the card/portrait under it */
 function emoTipHTML(el){const n=el.dataset.kemo||"",w=el.dataset.kemow||"";const E=x=>String(x).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
  return n==="Chưa rõ"?`<div class="kpopt">Tâm trạng chưa rõ</div><div class="kpopx">Lâu rồi chưa gặp, chưa biết lòng người này ra sao.</div>`:`<div class="kpopt">${E(n)}${w?": "+E(w):""}</div>`}
@@ -206,7 +203,7 @@ span.md.kfc.sm .kin>img.kemo{width:30%!important;left:5%!important;top:16%!impor
 span.md.kfc.xs .kin>img.kemo{width:38%!important;left:2%!important;top:14%!important}
 .kin>img.kemo.kemo-an{opacity:.85!important}
 .kin>img.kemo{cursor:pointer;-webkit-tap-highlight-color:transparent}
-@media (prefers-reduced-motion:no-preference){.kin>img.kemo.kemo-gian,.kin>img.kemo.kemo-phanno,.kin>img.kemo.kemo-khoc{animation:kemoPulse 2.4s ease-in-out infinite!important}}
+@media (prefers-reduced-motion:no-preference){.kin>img.kemo.kemo-gian,.kin>img.kemo.kemo-act-gian,.kin>img.kemo.kemo-act-buon{animation:kemoPulse 2.4s ease-in-out infinite!important}}
 @keyframes kemoPulse{0%,100%{filter:drop-shadow(0 1px 1.5px #000a)}50%{filter:drop-shadow(0 0 4px #ffcf8a) drop-shadow(0 1px 1.5px #000a)}}
 `;document.head.appendChild(st)})();
 /* measurement hook */
