@@ -63,6 +63,9 @@ KIT FIRST: the worker draws nothing. Data is ready in jshelf.js `shelfView(p)` �
 | 17/11 | display-shelf | (4) PER-ITEM CUT-OUT ART for every displayable piece: the 67 keys of BAL.shelf.it (12 groups, dev/research/display-shelf-items.md) + the dead states caykho / longtrong; her handmade tranh / tho / bhoa use the existing j83 bậc paintings; a withered / listless variant for the living pieces (care cay / nuoi) → Foreman C (Magnific gpt-2-6). | art | Foreman C | mở |
 | 17/11 | display-shelf r1 (reviewer) | (5) ONE "Chăm sóc" ACT (owner OD 17/11 ~18:15Z option 1: one act covers plants + pets): when BAL.shelf.ui = 1, the pet entry "Chăm thú nuôi" (jpet petDo care) and the plant cards open ONE list = jshelf `shelfCareOpen()` (pets → petcOpen, plants → shelfPlantOpen); never two entries. | act entry | kit keeper (with the shelf screen) | mở |
 
+## 17/11 — review coop-thin-c r1 (Foreman B reviewer): item reveal card with many items overlaps its list (kit keeper)
+| 17/11 | review-coop-thin-c-r1 | kitRevealHTML item card (seen: a new life's "Phẩm phục Tần" card, 22 items, guest iPad 1180x820@2): the item-icon spotlight rows (9 + 9 + 4) are taller than the space above the list, the last row lands on the first list lines and the fixed Nhận button covers list text. Not co-op specific (no kit file differs from main). Ask: cap the icon rows (+N chip) or move the list below the icons, button outside the scroll. |
+
 ## 17/11 kit-display-room — ART REQUESTS (Foreman C) + status
 | Date | Who | Part | Used in | Given to | Status |
 |---|---|---|---|---|---|
