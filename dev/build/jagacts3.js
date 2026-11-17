@@ -316,7 +316,7 @@ function maidTalkDo(p){const X=BAL.ag.cx2.maidTalk,m=p===S?S.maid:p.maid;if(!m)r
 try{AGC2BTN.maidTalk="Trò chuyện với cung nữ"}catch(e){}
 agRunReg("cx2:maidTalk",v=>{const r=maidTalkDo(v);return r?ag2Res(v,"maidTalk",1,r):""});
 function maidSpyT(v){const L=others(v).filter(t=>t&&t!==v&&(t===S||t.alive)&&!t.out&&!sameHouse(v,t));return L.length?mindPickBy(L,t=>BAL.mind.pick.ag.base+Math.max(0,agSpite(v,t))+Math.max(0,danger(t,v))/10,v):null}
-agRunReg("cx2:maidSpy",(v,t)=>{const m=v.maid;t=t||maidSpyT(v);if(!m||!t)return"";if(!roll(spyRoll(v,t,m))){m.loyal=cl((m.loyal||0)-BAL.eff.jwhy.loyalSpyMaidRun,0,100);oanAdd(t,v,BAL.eff.j78.j78maidFail);
+agRunReg("cx2:maidSpy",(v,t)=>{const m=v.maid;t=t||maidSpyT(v);if(!m||!t)return"";const so=spyRoll(v,t,m);if(!agTry(so)){if(agSoft(so))return ag2Res(v,"maidSpy",0,agSoftTxt(v));m.loyal=cl((m.loyal||0)-BAL.eff.jwhy.loyalSpyMaidRun,0,100);oanAdd(t,v,BAL.eff.j78.j78maidFail);
   return ag2Res(v,"maidSpy",0,`${m.name} nấp nghe ngoài cửa sổ cung ${agcNm(t)} thì bị bắt gặp; ${agcNm(t)} đoán ra ${v.name}`)}
  const ok=!!evA(v,t,BAL.eff.j78.evN);return ag2Res(v,"maidSpy",ok,ok?`${m.name} nghe lén được chuyện của ${agcNm(t)} cho ${v.name}`:`${m.name} dò la ${agcNm(t)} cho ${v.name}, chẳng thấy điều gì sai trái`)});
 /* jgreet: an NPC who comes to her runs her own talk / TW buttons with herself as the speaker */
