@@ -45,7 +45,7 @@ assemble.py rewrites every "img/ literal to the CDN base, so built faceUrl() ret
 |---|---|---|
 | j17 FPOOL probe (was ix.has(u)) | url from faceUrl (CDN-prefixed in build) | FIXED: cdnKey(u) |
 | j17 CDN_INDEX build | stripped | now via cdnKey (same behaviour) |
-| j82 kg82Pic KIT_CDNHAVE.has(s) (s = built-in , rewritten to CDN url by assemble.py: same bug, on live every mini-game picture is dropped as "not on CDN") | CDN-prefixed | FIXED: has(cdnKey(s)). VISIBLE EFFECT on live: mini-game (mg) backgrounds present on the CDN now show (the code's intent). Outside the face topic: D may revert this single hunk if unwanted. |
+| j82 kg82Pic KIT_CDNHAVE.has(s) (s = the built-in img/kit/mg-*.webp literal, rewritten to CDN url by assemble.py: same bug, on live every mini-game picture is dropped as "not on CDN") | CDN-prefixed | FIXED: has(cdnKey(s)). VISIBLE EFFECT on live: mini-game (mg) backgrounds present on the CDN now show (the code's intent). Outside the face topic: D may revert this single hunk if unwanted. |
 | jevban kitEvBanner, jevb:56, jph kitPhOnCdn | already stripped | OK, unchanged |
 No other site builds a face token url by hand (grep faceUrl/fsrc clean).
 
