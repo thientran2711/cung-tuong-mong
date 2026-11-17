@@ -24,7 +24,7 @@ function spFav(o,s){const B=BAL.sp,pay=BAL.pay;const r=Math.min(7,Math.max(0,rkO
  const ok=o===S?val>=n:val>=n+B.favKeep;return{ok,n,k,lbl,how,val,q}}
 function spPayFav(o,fv){if(o===S){apply({[fv.k]:-fv.n});return}if(fv.q)affAdd(fv.q,o,-fv.n);else o.th=cl((o.th||0)-fv.n,-100,100)}
 function spHead(s){return srk(s)>=BAL.sp.head[s.role]}
-function spProudCh(s,shown){const B=BAL.sp;const b=shown&&!s.kn?B.proudAvg:(B.proud[s.tr]||B.proudAvg);return cl(Math.round(b-((s.loyal||50)-50)/5),3,70)}
+function spProudCh(s,shown){const B=BAL.sp;const b=shown&&!s.kn?B.proudAvg:qv(B.proud,s,B.proudAvg);return cl(Math.round(b-((s.loyal||50)-50)/5),3,70)}
 function spProud(s){return !!(s&&s.proud&&s.proud>S.turn)}
 function spSenior(o,s,r0){const L=(o.staff||[]).filter(x=>x!==s&&x.role===s.role&&srk(x)>=r0);L.sort((a,b)=>srk(b)-srk(a)||(b.age||0)-(a.age||0));return L[0]||null}
 /* the Kèm part of the Đề bạt card (jaudit button) */

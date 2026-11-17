@@ -199,7 +199,7 @@ Object.assign(BAL,{coopBribe:{pay:20,tin:5}});
 Object.assign(BAL,{visit:{minSung:20,base:.3,slope:.07,anK:.01,cap:8,datinh:1.5,lanhlung:.5,gap:9,illSt:2,q:2,
  sung:3,danh:3,ghen:6,lostGhen:15,lostRel:8,hh:3,thP:25,thNeg:15,thLoss:4,adviseDuc:3,adviseSung:1,adviseTh:2,
  show:{o:40,w:8,suc:5,sung:6,danh:2},tea:{minSung:60,p:50,sung:2,an:2}},
- night:{sung:3,an:2,ghen:8,bestow:10,bestowS:4,stealS:3}});
+ night:{sung:3,an:2,ghen:8,bestow:10,bestowS:4,stealS:3,mood:[1,0,-1,-2] /* his mood 0..3 (vui, thường, buồn, giận) → night score add-on (j8 night1; jwhyn reads it) */}});
 /* ACTIVE MAID LINE (jmline.js, review/servant-system, owner 16/11): % per month unless named. eye[rank] = the Emperor's eye by servant rank
    (thô sử, cung nữ, đại cung nữ, chưởng sự, nữ quan; was 0/0/1.2/1.2/1.2), eyeSung = ×(1 + master Sủng/100 × eyeSung), eyeAge = ages that can rise;
    seekStart (× nết: tham 2, lanh 1.5, trung/nhát 0.3) for seekMonths months, maids up to seekAge, seekMul on the eye while seeking;
@@ -213,7 +213,7 @@ Object.assign(BAL,{mline:{eye:[.1,.25,.6,1,1.2],eyeSung:.5,eyeAge:[16,29],seekSt
     non-poison feuds that are a frame (else a fight), fightLoy = lòng +N to both fighters; poisonLv = pzGive level; evN = chứng cứ per piece;
     hitBribeBac / hitBribe = a consort with Bạc ≥ N bribes (%), else a cruel one beats (hitBeat %), else frames; beatLoy = the beaten maid lòng +N;
     ageDef = age when unknown; offRank / offEye = the old rule behind the off switch (rank ≥ offRank at offEye %). */
- seekTr:{tham:2,lanh:1.5,chuyen:1,trung:.3,nhat:.3},feudFrame:50,fightLoy:2,poisonLv:1,evN:1,hitBribeBac:60,hitBribe:40,hitBeat:55,beatLoy:3,ageDef:20,offRank:2,offEye:1.2,
+ seekTr:{tham:2,lanh:1.5,chuyen:1,trung:.3,nhat:.3}/* servant-quality codes, read by qv() (BAL.net.qCode) */,feudFrame:50,fightLoy:2,poisonLv:1,evN:1,hitBribeBac:60,hitBribe:40,hitBeat:55,beatLoy:3,ageDef:20,offRank:2,offEye:1.2,
  /* review/servant-mline-r2 (gain and loss, measured: dev/measure/sim_maidline_r2.js): ONE caught key per harmful act, % per act:
     frameCatch = a maid's frame of another palace's maid is traced; poisonCatch = Thái y traces a maid's poison (the poisoner goes to
     Thận hình ti); hitCatch = a consort's frame of another palace's maid is traced (a beating is always seen: deed + hitEv % proof).
@@ -311,9 +311,7 @@ Object.assign(BAL,{mem:{cap:5,fadeMo:2,keepFloor:.35,modDiv:8,modMax:10,recallMi
   help:10,visit:10,warn:15,mediate:12,humiliate:20,drop:15,nightsteal:12,threat:20,demote:60,confine:30,srvreward:10,srvpunish:15,srvshield:45,rescue:70},
  holderCap:16,life:["poison","musk","kidharm","pardon","frame","takeaway","gifttaint","demote","srvshield","rescue"],lifeMin:60,lifeCap:3,lifeRel:30,
  fadeJit:.25,fadeMinK:.1,
- fadeT:{"Hiểm độc":[1.3,.5],"Kiêu ngạo":[1.3,.6],"Hiền lành":[.8,1.8],"Đa nghi":[1.2,.7],"Tham vọng":[1.6,1],"Nhu mì":[.9,1.3],"Hiếu thảo":[.8,1],"Ghen tuông":[1,.7],
-  "Tham tiền":[1.5,1],"Trọng nghĩa":[.4,1],"Nhiều chuyện":[1.5,1.5],"Thù dai":[1,.25],"Cả nể":[.9,1.4],"Thẳng thắn":[1,1.2],"Mê tín":[1,1],"Khéo léo":[1.2,1.1],
-  trung:[.5,1.2],tham:[1.6,1],nhat:[1,.8],lanh:[1.2,1],chuyen:[1.4,1.4],
+ fadeT:{/* pool nết rows come from THE trait table BAL.net.T[t].fade (jnet.js); the Emperor's keys: */
   nongnay:[1.3,.6],nhantu:[.8,1.8],datinh:[1.6,1.3],lanhlung:[.6,.6],chamchinh:[1,1],danghi:[1,.6],mesac:[1.3,1],trongtai:[1,1],hieuthao:[1,1]},
  memDanger:.5,lifeDanger:.9,dangerMax:85,goodGate:40,goodOver:1,mirrorDiv:25,socDiv:20,socK:40,srvLoy:1.5},
  hook:{useOan:15,strikeCh:25,lostCh:20,fadeCh:4,pressBase:50,max:40,useStep:5,failRel:10,tcDiv:4,czMax:24,czClose:20,czRash:3,czTv:30,czGhenDiv:3,czDeadMax:8}});
@@ -413,6 +411,88 @@ BAL.dh={n0:[1,5,10],step:2,artLv:[3,4,5],
  hieu:{minRank:3,sung:10,danh:8,gapM:2,p:25,danhG:5},
  conf:{p:{cold:[100,100],giang:[50,35],cam:[0,40]},danh:5,sung:3,wait:3,kinh:3,cong:12,top:100},
  it:{lose:2,lostDanh:8,backW:[4,10]}};
+
+/* NPC AGENT LOOP (jagent, Foreman C AG1 + AG1b; owner OD:L1386 "every NPC plays the game like a player"; design dev/handover/reports/npc-agent.md §3).
+   ONE CORE: every number of jagent.js. The deeds' own costs / odds / gains stay in BAL.tw (jtwoway) and j75 (npcEffortKind); here only the
+   agent's WHEN and WHY: what each person needs, how much a deed is worth to her, and what she may do when she sees someone act.
+   on      1 = the loop runs (host only); 0 = the old drips run as before (measuring switch; window.__agOff=1 does the same for one page)
+   own     the deeds whose WHEN belongs to the loop: the weekly / monthly dice that used to fire them (npcMonthly, the SOC menu, npcEffort)
+           are muted for NPC doers while the loop is on (one path per deed). Her own use of the same deeds is unchanged.
+   routine weight of keeping her schedule this buổi (the j95 activity), × (1 + restW × need rest); needW = weight of each need against it
+           (step 1 of her choice: WHAT she wants this buổi; step 2: which deed serves it, by utility)
+   unit    gain points that close one whole need; goal = the level each need aims at (gap = (goal − now) / goal, 0..1)
+           friend = thiện cảm that counts as a friend for the 'ally' need; kidAge = she still hopes for a child below this age
+   road    need weights per origin road (8 noble origins of j1 ORIGINS; "_" = no road yet). Origin = v.nr.o (npc-roads, Foreman D) when
+           present, else v.ag.o seeded once from her house by `org` (same rule as BAL.nroad.org; that table wins when it is loaded)
+   uniq    origins one father holds alone (the player's own father): no NPC takes them
+   val     how much an indirect effect is worth to the doer, in gain points (her belief, not an outcome): tablet = a bribed tablet (Sủng),
+           kid = a prayer for a child (kid need), check = searching gifts (safety), drop = dropping a fallen friend (safety)
+   costW   how much a cost weighs against what she holds (bạc / Sức); costCap = most of her holding a cost can weigh; costMin = floor of the factor
+   kh      khắc a deed takes (the player's talk / deck act: 1)
+   wit     witness (AG1b): hear/mat = odds base and per Tai mắt level of "Nghe lén" (the player's Nghe lén câu chuyện, j2/j9);
+           caught = thiện cảm lost toward the listener when a listener is caught; hoD = hostility that makes an NPC as keen to listen as w.hear; w = NPC reaction weights {hear, join, ignore}
+   vent    r1 fault 8: a spite deed (provoke / humil / gossip / flaunt) closes her spite need by its own gain (BAL.tw.g spite points, unit
+           points = one whole need) toward that target ("*" = everyone); fade = points of that memory lost per tuần (1: a provoke, 15
+           points, keeps her spite toward that person closed ~5 tuần and back in full after 15)
+   perf    p95 budget in ms per slice of the buổi tick (one frame's work, Fold 755x1000), n = how many slices the counter keeps,
+           slice = ms of deciding in one frame before the other consorts wait for the next frame / resync of the same buổi */
+Object.assign(BAL,{ag:{on:1,
+ own:["thTH","thHH","pray","ksp","fakeIll","fakePreg","announce","flaunt","check","help","apol","visit","mediate","follow","provoke","humil","warn","test","drop","gossip","effort"],
+ routine:5,restW:1.5,needW:1,unit:10,
+ goal:{sung:80,th:60,hh:40,danh:50,duc:40,rest:45,friend:30,ally:2,kidAge:38},
+ road:{_:{sung:1,th:.6,hh:.5,danh:.6,duc:.4,kid:.8,ally:.6,spite:.5,safe:.6},
+  tt:{sung:1,th:.5,hh:.3,danh:1.2,duc:.4,kid:1,ally:.7,spite:.8,safe:.6},dtq:{sung:1,th:.4,hh:.4,danh:1,duc:.3,kid:.9,ally:.5,spite:.7,safe:.5},
+  muoi:{sung:1.1,th:.6,hh:.6,danh:.8,duc:.3,kid:.8,ally:1,spite:.4,safe:.6},cn:{sung:1.3,th:.6,hh:.6,danh:.5,duc:.4,kid:1,ally:.9,spite:.4,safe:.7},
+  nc:{sung:1,th:1,hh:.5,danh:.8,duc:.4,kid:.8,ally:.7,spite:.5,safe:.8},td:{sung:.9,th:.4,hh:.4,danh:.6,duc:.2,kid:.6,ally:.6,spite:1.3,safe:.8},
+  ch:{sung:.9,th:1.3,hh:.4,danh:.8,duc:.6,kid:.9,ally:.6,spite:.5,safe:.5},thd:{sung:.9,th:.6,hh:.6,danh:1.1,duc:.8,kid:.8,ally:.6,spite:.3,safe:.6}},
+ org:{"Tể tướng":[["tt",1]],"Đại tướng quân":[["dtq",1]],"Thái hậu":[["ch",1]],"Hàn lâm":[["thd",3],["td",1]],"Lễ bộ":[["thd",1],["td",1],["muoi",1]],"Hộ bộ":[["muoi",3],["td",1]],"":[["muoi",1],["thd",1],["td",1]]},
+ uniq:["tt","dtq"],
+ val:{tablet:2,kid:10,check:4,drop:3},
+ costW:1,costCap:.9,costMin:.05,kh:1,
+ wit:{hear:40,mat:6,caught:5,hoD:50,w:{hear:1,join:1,ignore:3}},
+ vent:{fade:1},
+ perf:{p95:8,n:200,slice:3},
+ /* AG2 the Emperor as an agent (jagemp.js; design reports/npc-agent.md §3.2):
+    summon  [calm, busy] % that he calls someone to his bed tonight — the owner's rule (OD 16/11 18:10Z): 90, 65 when busy with court
+            (trait Chăm chính sự, or the court in crisis = j55 tdCrisis, which was an extra 30 % cancel: 90 × 70 % ≈ 65, now one rule)
+            or he is ill; else he rests / reads memorials alone
+    custom  [mùng 1, rằm] weight of the custom (lệ: the night at Hoàng hậu's palace) against his wish for the card he turned (100 − x);
+            the old j75 FAIRN.custom roll, moved here (ONE CORE)
+    duty    × on the custom's / the seat's weight per trait of his (dutiful up, amorous down)
+    want    [floor, cap] of his wish for the turned card against the Empress (nightCh ratio, square root) when he weighs the custom
+    met     his memory of what each person did near him: w = × per remembered deed on her night weight, miss = a failed deed counts this much,
+            keep = tuần he remembers, cap = deeds counted at most, n = deeds kept per person
+    seat    a vacant Hoàng hậu seat: % per tuần that he decides = b + m × (months vacant − mourn), [lo, hi], × duty, × th when Thái hậu lives
+            (was the flat j8 roll 12) */
+ emp:{summon:[90,65],custom:[40,20],duty:{chamchinh:1.25,hieuthao:1.25,datinh:.75,mesac:.75},want:[.5,2],
+  met:{w:.15,miss:.5,keep:2,cap:3,n:4},seat:{b:6,m:3,lo:6,hi:40,mourn:3,th:1.2}}}});
+
+/* BAL.mind — jmind (one mind for every person, review/npc-mind; moved here from jmind.js, r1 fault 3 ONE CORE)
+   like      regard gained on top when a gift is one the receiver likes (jdis BAL.dis.aff is the one dislike penalty)
+   likeSung, herMood, learnTalk (% a talk reveals a like), spyPri (intel priority), disN = [min,max] dislikes drawn for people jdis does not cover
+   slip      % of NPC choices that misjudge (a random option);  temp = weight power of mindPick
+   strW / abW / abMid / trW / wMin  mindW: × when the act uses her strength; per point of ability above abMid; × per honoured / offended virtue; floor
+   odds      odds shift (%) on an act that uses her strength;  kidTal = a child's talent from which a strength is an art;  bacPer = bạc per ability point
+   pickMin   least weight of a target in mindPickBy
+   pick.<site>  the target weights of every mindPickBy call site (base + x / divisor …): j10fr (friend to warn), j28up (the higher-ranked to court),
+             j28soc (social target), j34 (sabotage target), j4 (who is framed: top - rel), j40 (harm target: base + rank² + hostility / host),
+             j55 (leak target), j8buy (who buys: top - rel), j8ev (Hoàng hậu evidence case: evG × ev − rel / rel), j83 (gift framer),
+             j96 (accuser: base + ghen / ghen − rel), lost1 / lost2 (jlost), tin (informant: max(floor, score)^pow), wd (jwd92b), ag (jagent SOC target)
+   men       menDecide (a stray man seen): report [base, hostility per], hide [Tham vọng, else], listen [Đa nghi, else],
+             ignore [Hiền lành / Nhu mì, else, floor, hostility per], keep = weight added to the old fixed answer */
+Object.assign(BAL,{mind:{like:3,likeSung:1,herMood:30,learnTalk:20,spyPri:50,disN:[1,2],slip:12,temp:1,strW:1.6,abW:.012,abMid:40,trW:.35,wMin:.05,odds:4,kidTal:55,bacPer:3,pickMin:.01,
+ pick:{j10fr:{base:1},j28up:{base:1,aff:10},j28soc:{base:4,aff:4,oan:4},j34:{base:2},j4:{top:30,floor:1},j40:{base:1,host:5},j55:{host:20},j8buy:{top:10,floor:1},
+  j8ev:{ev:2,rel:5},j83:{base:1},j96:{base:40,ghen:2,floor:1},lost1:{base:1},lost2:{base:2},tin:{floor:1,pow:2},wd:{base:1},ag:{base:1}},
+ men:{report:[1,25],hide:[2,.6],listen:[2,.5],ignore:[2.5,1.2,.3,80],keep:4}}});
+/* BAL.deck — the Sủng deck acts, ONE table for her cards (j2 artActs + the Emperor talk "Dâng một cành hoa") and an NPC's same deed
+   (j75 npcEffortKind, the agent loop). r1 fault 7 (OD:L1386 "same odds" + ONE CORE). Odds = deckOdds(p,k): base + artW2(p,k) × per + stat / div + mood
+   (od for her, odA for an NPC). lv = art level the card needs; sucMin = Sức an NPC keeps before she spends on it (her card: the khắc / Sức rule);
+   c / w / l = cost / gain / loss (vu's loss and side effects: BAL.tw.g.vu; ky's Danh / Tâm cơ: BAL.tw.g.ky).
+   qf = a small gift to the Emperor (her "Dâng một cành hoa"): bac cost, o odds when his flower is not known, w gain (wKnown when it is) */
+Object.assign(BAL,{deck:{vu:{lv:3,sucMin:40,c:{suc:-20},o:[40,8],st:["sac",5],w:{sung:15,danh:3}},
+ cam:{lv:3,sucMin:30,c:{suc:-10},o:[40,8],st:["tai",5],w:{sung:12},l:{sung:-2}},
+ ky:{lv:3,sucMin:25,c:{suc:-5},o:[45,8],st:null,w:{sung:5},l:{sung:-1}},
+ qf:{bac:5,o:50,w:2,wKnown:6}}});
 /* palace voice (jvoice, VANPHONG §2): mood of an address from the real relation (S.sung − sungMid, S.th / S.hh − favMid, aff()):
    ≥ warm → warm words (ái phi, con, muội muội, tỷ tỷ), ≤ cold → "ngươi"; nuong = first rank called "nương nương" / allowed "bổn cung" (Tần);
    noRepeat = tuần before a pooled line may come back; hi / hq = first rank index of the "hi" (Quý phi) / "hq" (Hoàng hậu) rank band of
@@ -425,3 +505,135 @@ Object.assign(BAL,{voice:{warm:40,cold:-25,sungMid:0,favMid:0,nuong:3,hi:5,hq:7,
    showTreasure j83/jecon (tier-3 piece shown at a banquet). Other ghenAll gains already live in BAL.night.ghen, BAL.visit.ghen, BAL.psk.ghen, jcycle rep.giauGhen. */
 Object.assign(BAL,{ghen:{datinh:1.5,dance:4,kinhHong:10,preg:6,rumor:12,cry:5,son:15,girl:8,rankUp:10,festival:8,bestow:3,ally:3,kidTop:2,
  flowerParty:2,follower:2,boast:4,keepGift:3,contest:4,praise:3,contestTop:8,showTreasure:2}});
+
+/* ===== ONE TRAIT POOL (owner 17/11 05:45Z/05:50Z/05:58Z/06:20Z, review/trait-pool) — THE trait table (one core) =====
+   Everyone except the Emperor (ETRAITS) and Thái hậu (TH_ARCH archetypes) draws exactly 3 nết: one per group
+   tt TÍNH TÌNH · ld LÒNG DẠ · ch CHÍ HƯỚNG; the 8 nết of a group = 4 symmetric pairs and exclude each other.
+   Two pools by sex, SAME formulas: female F (consorts, maids, ma ma, female NPCs, the player) / male M (men, officials,
+   eunuchs, physicians, male NPCs). Only pair 4 of Tính tình differs (Kiêu ngạo↔Khiêm nhường / Cương trực↔Xu nịnh).
+   Row: g group · p pair · s sex (b both, f, m) · tend (player-visible, "Hay:") · gain / cost (player-visible, BALANCE LAW:
+   every nết has a usable good side AND a cost, both wired to existing acts) · PERS fields used by persW/persF:
+   w act weights (×, product over the 3 nết) · dang danger offset (+) · mal malice base (+) · slight/forgive/trust/gift/ghen (×) ·
+   harmGate (max: no harm act until the grievance reaches it) · lavish/riseGift (×) · fade [good,bad] memory fade (BAL.mem.fadeT) ·
+   q servant/agent qualities (sum, clamp qClamp; 1 = the strength of the old servant-only nết): loyal (che chủ, giữ lời, khó mua),
+   greed (ăn cắp, bán tin, mua rẻ), timid (bị ép thì khai, không dám phản), sharp (dò tin, tìm manh mối, muốn trèo cao),
+   talk (mang tin về, cũng làm lộ tin), hide (giấu ý: dấu hiệu báo trước một đòn hại khó thấy, j43 mindTell), study (tự học tài nghệ năng hơn, j85 npcStudy). */
+BAL.net={qClamp:[-1,1.5],qOn:.8,malBase:30,k:{hide:8,study:.25},
+ groups:{tt:"Tính tình",ld:"Lòng dạ",ch:"Chí hướng"},
+ F:{tt:["Ân cần","Lạnh lùng","Nóng nảy","Điềm tĩnh","Nhiều chuyện","Kín đáo","Kiêu ngạo","Khiêm nhường"],
+    ld:["Thật thà","Xảo quyệt","Thanh liêm","Ham lợi","Rộng lượng","Thù dai","Trọng nghĩa","Thực dụng"],
+    ch:["Tham vọng","An phận","Ham học","Ham vui","Mê tín","Thực tế","Vì gia tộc","Vì mình"]},
+ M:{tt:["Ân cần","Lạnh lùng","Nóng nảy","Điềm tĩnh","Nhiều chuyện","Kín đáo","Cương trực","Xu nịnh"],
+    ld:["Thật thà","Xảo quyệt","Thanh liêm","Ham lợi","Rộng lượng","Thù dai","Trọng nghĩa","Thực dụng"],
+    ch:["Tham vọng","An phận","Ham học","Ham vui","Mê tín","Thực tế","Vì gia tộc","Vì mình"]},
+ /* old saves / old code words → pool nết (each old one lands in its group; the missing groups are drawn) */
+ old:{"Hiểm độc":"Xảo quyệt","Xảo quyệt":"Xảo quyệt","Kiêu ngạo":"Kiêu ngạo","Hiền lành":"Ân cần","Đa nghi":"Kín đáo","Tham vọng":"Tham vọng","Nhu mì":"Khiêm nhường",
+  "Hiếu thảo":"Vì gia tộc","Ghen tuông":"Nóng nảy","Tham tiền":"Ham lợi","Trọng nghĩa":"Trọng nghĩa","Nhiều chuyện":"Nhiều chuyện","Thù dai":"Thù dai","Cả nể":"Rộng lượng",
+  "Thẳng thắn":"Thật thà","Mê tín":"Mê tín","Khéo léo":"Thực dụng",trung:"Trọng nghĩa",tham:"Ham lợi",nhat:"Khiêm nhường",lanh:"Tham vọng",chuyen:"Nhiều chuyện",
+  "phong lưu":"Ham vui","đa tình":"Ham vui","trung hậu":"Thật thà","tham vọng":"Tham vọng","cẩn trọng":"Kín đáo",
+  "Cẩn trọng":"Kín đáo","Tham lam":"Ham lợi","Trung hậu":"Thật thà","Cương trực":"Cương trực"},
+ /* servant-quality codes kept as keys of a few old tables (seekTr, proud, SG_TR, IMPR, SCAUSE…): qv() reads the strongest quality */
+ qCode:{trung:"loyal",tham:"greed",nhat:"timid",lanh:"sharp",chuyen:"talk"},
+ /* a female-only nết met in the male pool (old saves, old servant codes) */
+ toM:{"Kiêu ngạo":"Cương trực","Khiêm nhường":"Xu nịnh"},toF:{"Cương trực":"Kiêu ngạo","Xu nịnh":"Khiêm nhường"},
+ T:{
+ /* ---- TÍNH TÌNH ---- */
+ "Ân cần":{g:"tt",p:"Lạnh lùng",s:"b",tend:"hay thăm hỏi, giúp đỡ, can ngăn",gain:"dễ kết thân; hay giúp, hay báo tin cho người mình quý",cost:"mềm lòng: dễ bị bạn mạnh xui làm, quà mọn cũng làm nàng nể",
+  w:{help:2.2,visit:2.2,warn:1.8,mediate:2,apologise:1.8,provoke:.35,humiliate:.25,poison:.35,kpoison:.35,frame:.45,plant:.45,musk:.35,pushp:.35,follow:1.6},dang:-8,mal:-15,slight:.8,forgive:1.4,trust:1.2,gift:1.2,harmGate:60,fade:[.8,1.4],q:{loyal:.3,talk:.2}},
+ "Lạnh lùng":{g:"tt",p:"Ân cần",s:"b",tend:"ít nói, khó gần; đã quý thì quý lâu",gain:"đã thân thì bền: khó bỏ đồng minh, khó bị mua, ít lộ chuyện",cost:"khó lấy lòng: quà và lời ngọt nhẹ ký, chậm tin người",
+  w:{help:.6,visit:.5,mediate:.6,gossip:.5,rumor:.7,drop:.35,ally:.8},mal:4,slight:1,forgive:.8,trust:.6,gift:.6,fade:[.6,1],q:{loyal:.5,talk:-.4,hide:.5}},
+ "Nóng nảy":{g:"tt",p:"Điềm tĩnh",s:"b",tend:"dễ nổi giận, nói thẳng mặt; giận mau, nguôi mau",gain:"không giấu mưu: ý đồ dễ đoán, giận mau nguôi",cost:"dễ gây sự, dễ bị khích, ghen ra mặt",
+  w:{provoke:2.2,humiliate:1.5,trip:1.4,warn:1.3,feign:.3,plant:.6,frame:.7,follow:1.3},dang:3,mal:8,slight:1.5,forgive:1.4,ghen:1.3,fade:[1,1.4],q:{hide:-.8,talk:.3}},
+ "Điềm tĩnh":{g:"tt",p:"Nóng nảy",s:"b",tend:"bình thản, nhẫn được; khó bị khích",gain:"khó bị khích hay bị xui; hay can ngăn",cost:"nhẫn nại chờ thời: ý đồ khó thấy, hận ngầm lâu",
+  w:{provoke:.4,humiliate:.5,trip:.6,mediate:1.6,feign:1.3,follow:.5},dang:-2,mal:-3,slight:.7,forgive:1,ghen:.8,fade:[1,.8],q:{hide:.8,timid:-.5}},
+ "Nhiều chuyện":{ban:["Tín"],g:"tt",p:"Kín đáo",s:"b",tend:"buôn chuyện, tin gì cũng lan",gain:"mang nhiều tin về: tai mắt, chuyện các cung",cost:"chuyện của chủ, của bạn cũng lan ra ngoài",
+  w:{rumor:2,gossip:3,spy:1.3},q:{talk:1}},
+ "Kín đáo":{g:"tt",p:"Nhiều chuyện",s:"b",tend:"giữ kín chuyện, để ý người quanh mình",gain:"giữ kín bí mật; dễ nhận ra tai mắt cài vào",cost:"ít khi kể tin cho ai; chậm tin người",
+  w:{gossip:.4,rumor:.5,spy:1.8,check:1.8,test:1.5},trust:.8,q:{talk:-.7,hide:.6,sharp:.4}},
+ "Kiêu ngạo":{ban:["Khiêm"],g:"tt",p:"Khiêm nhường",s:"f",tend:"khoe ân sủng, hạ nhục người dưới, không chịu xin lỗi",gain:"trọng thể diện: lễ hậu, quà lớn được đáp mạnh; khó bị ép hay bị xui",cost:"quà mọn chẳng thèm nhìn; hay khiêu khích, hạ nhục",
+  w:{steal:1.4,provoke:2.4,humiliate:2.4,flaunt:2.4,rumor:1.3,trip:1.3,help:.6,mediate:.4,apologise:.15,follow:.4},mal:12,slight:1.5,forgive:.7,gift:.6,lavish:60,fade:[1.2,.7],q:{timid:-.5}},
+ "Khiêm nhường":{g:"tt",p:"Kiêu ngạo",s:"f",tend:"nhún nhường, tránh va chạm, theo người cầm đầu",gain:"dễ hòa, dễ xin lỗi; không dám phản chủ",cost:"theo người mạnh, dễ bị xui làm; bị ép thì khai",
+  w:{steal:.5,follow:4.4,apologise:2,help:1.2,provoke:.3,humiliate:.2,flaunt:.3,poison:.4,frame:.5},dang:-4,mal:-10,slight:.8,forgive:1.3,trust:1.1,gift:1.1,q:{timid:1}},
+ "Cương trực":{g:"tt",p:"Xu nịnh",s:"m",tend:"thẳng lưng, nói thẳng điều sai trái",gain:"không mua được để nói dối; lời chứng đáng tin, hay báo việc sai",cost:"thẳng miệng mích lòng người trên; không nhận việc mờ ám",
+  w:{feign:.2,plant:.4,frame:.5,warn:1.8,provoke:1.3,accuse:1.4},mal:-2,slight:1.2,gift:.8,q:{loyal:.4,greed:-.6,timid:-.5}},
+ "Xu nịnh":{g:"tt",p:"Cương trực",s:"m",tend:"lựa lời ngọt, bám người có thế",gain:"dễ lấy lòng bằng lời ngọt, quà cáp; ngươi lên thì hắn theo",cost:"người sa cơ là bỏ; bên mạnh hơn mua là đổi phe, bị ép thì khai",
+  w:{ally:2,serveTH:1.6,follow:2.52,drop:2,flaunt:1.2},mal:5,gift:1.4,riseGift:1.6,q:{greed:.4,timid:.6}},
+ /* ---- LÒNG DẠ ---- */
+ "Thật thà":{v:"Tín",g:"ld",p:"Xảo quyệt",s:"b",tend:"nói thật, ghét mưu ngầm",gain:"đáng tin: lời nàng báo là thật, không làm việc ám muội",cost:"dễ lỡ lời lộ bí mật; dễ tin người",
+  w:{feign:.2,plant:.4,frame:.5,warn:1.5,rumor:.7},dang:-3,mal:-8,trust:1.2,q:{talk:.3,timid:.4,greed:-.3}},
+ "Xảo quyệt":{v:"Trí",ban:["Nhân","Tín"],g:"ld",p:"Thật thà",s:"b",tend:"tính trước tính sau, ngoài mặt thân thiện",gain:"đồng minh sắc trong mưu kế; tai mắt giỏi, dò tin giỏi",cost:"có lợi hơn là trở mặt; nhẫn nại giăng bẫy kẻ cản đường",
+  w:{feign:2.5,plant:1.8,frame:1.8,kframe:1.8,spy:1.6,poison:1.5,kpoison:1.5,musk:1.5,catswap:1.5,pushp:1.3,ally:1.5,drop:1.6,warn:.6,help:.8,mediate:.5},dang:5,mal:25,forgive:.8,trust:.8,fade:[1.3,.6],q:{sharp:.6,hide:.5}},
+ "Thanh liêm":{v:"Liêm",g:"ld",p:"Ham lợi",s:"b",tend:"không tham của, không nhận quà riêng",gain:"không bán tin, không ăn cắp; lời chứng không mua được",cost:"bạc không mua được nàng; quà hậu nàng chê",
+  w:{bribe:.2,bribeksp:.2,flaunt:.6,steal:.2},mal:-5,gift:.7,q:{greed:-1}},
+ "Ham lợi":{v:"Cần",ban:["Liêm","Kiệm"],g:"ld",p:"Thanh liêm",s:"b",tend:"mê bạc vàng, việc gì cũng tính lời lỗ",gain:"mua được bằng bạc (tin tức, giúp việc) và giá rẻ hơn; quà nào cũng ấm lòng",cost:"bán tin cho người trả cao hơn; ăn cắp vặt",
+  w:{bribe:1.6,steal:2,flaunt:1.2},mal:5,gift:1.6,q:{greed:1}},
+ "Rộng lượng":{v:"Nhân",g:"ld",p:"Thù dai",s:"b",tend:"dễ bỏ qua, hay làm hòa",gain:"oán mau nguôi, làm hòa được",cost:"ơn cũng mau quên; dễ bị người lợi dụng",
+  w:{help:1.4,mediate:1.6,provoke:.6,follow:1.4},dang:-6,mal:-12,slight:.7,forgive:1.8,fade:[1.4,1.8],q:{loyal:.2}},
+ "Thù dai":{v:"Sỉ",g:"ld",p:"Rộng lượng",s:"b",tend:"nhớ oán rất lâu, nhớ ơn cũng lâu",gain:"không quên ơn: người từng giúp nàng được nàng giúp lại lâu dài",cost:"không quên oán: kẻ làm nàng mất mặt bị nhớ mãi",
+  w:{provoke:1.2,drop:.4},dang:4,mal:12,slight:1.4,forgive:.3,trust:.9,gift:.9,fade:[.5,.3],q:{loyal:.3}},
+ "Trọng nghĩa":{v:"Nghĩa",g:"ld",p:"Thực dụng",s:"b",tend:"giữ lời, không bỏ bạn lúc hoạn nạn",gain:"che chắn cho chủ, cho bạn; giữ lời hứa, khó bị mua",cost:"không làm việc thất đức cho ai, còn quỳ can; theo nghĩa chứ không theo lợi",
+  w:{steal:.6,help:1.6,warn:1.8,drop:.1},dang:-3,mal:-8,trust:1.2,fade:[.6,1],q:{loyal:1}},
+ "Thực dụng":{v:"Kiệm",g:"ld",p:"Trọng nghĩa",s:"b",tend:"khéo lấy lòng người trên, theo lợi",gain:"dễ kết minh khi đôi bên cùng có lợi; ngươi lên thì nàng xích lại",cost:"đồng minh sa cơ là bỏ; lợi lớn hơn thì đổi phe",
+  w:{ally:2,drop:2.2,serveTH:1.4,bribe:1.2,help:.8},mal:5,gift:1.2,riseGift:1.6,q:{greed:.3,sharp:.3}},
+ /* ---- CHÍ HƯỚNG ---- */
+ "Tham vọng":{g:"ch",p:"An phận",s:"b",tend:"bám người mạnh, cướp đêm thị tẩm, muốn trèo cao",gain:"lanh lợi, bám người đang lên: ngươi lên thì nàng theo",cost:"tranh đêm thị tẩm, đút lót Kính sự phòng; muốn trèo cao, bỏ kẻ sa cơ",
+  w:{ally:2,steal:2.2,bribeksp:2.2,drop:1.8,block:1.8,accuse:1.4,bribe:1.3},mal:12,ghen:1.2,riseGift:2,fade:[1.4,1],q:{sharp:1}},
+ "An phận":{g:"ch",p:"Tham vọng",s:"b",tend:"không tranh sủng, yên với phận mình",gain:"không tranh đêm, ít ghen; ở lâu, không bỏ chủ",cost:"ít chịu liều vì người khác; khó kéo vào phe",
+  w:{steal:.4,bribeksp:.3,block:.4,accuse:.5,ally:.7,help:.8,follow:1.3},dang:-3,mal:-8,ghen:.7,q:{timid:.5,loyal:.3}},
+ "Ham học":{g:"ch",p:"Ham vui",s:"b",tend:"chăm đèn sách, tài nghệ",gain:"học nhanh, lanh trí: dò ra manh mối",cost:"ít giao du, ít đến thăm; khó kết thân bằng yến tiệc",
+  w:{visit:.7,gossip:.6,ally:.85,pray:.7},q:{sharp:.8,study:1}},
+ "Ham vui":{g:"ch",p:"Ham học",s:"b",tend:"thích yến tiệc, trò vui, chuyện phong tình",gain:"dễ kết thân: quà nhỏ, cuộc vui là đủ",cost:"lơ là việc, hay sơ suất; tình ý thay đổi",
+  w:{visit:1.5,gossip:1.5,rumor:1.2,pray:.6},gift:1.3,q:{talk:.5,study:-.5,greed:.3}},
+ "Mê tín":{g:"ch",p:"Thực tế",s:"b",tend:"tin điềm báo, sợ bùa ngải",gain:"hay lên chùa cầu khấn, soát quà kỹ vì sợ bùa ngải: quà có độc khó lọt",cost:"lo cúng bái hơn giao du: ít đến thăm, ít giúp, ít kết minh",
+  w:{check:1.5,pray:3,follow:1.2,help:.8,visit:.8,ally:.8}},
+ "Thực tế":{g:"ch",p:"Mê tín",s:"b",tend:"chỉ tin điều tận mắt thấy",gain:"soát việc kỹ, thử lòng người: quà có độc, kẻ gian khó qua mắt",cost:"chậm tin người; lời ngọt và quà cáp nhẹ ký",
+  w:{pray:.3,check:1.3,test:1.2},trust:.9,gift:.9,q:{sharp:.2}},
+ "Vì gia tộc":{g:"ch",p:"Vì mình",s:"b",tend:"kính bề trên, giữ nề nếp, lo cho nhà",gain:"kính Thái hậu, giữ nề nếp; giữ lời vì danh nhà",cost:"nhà bảo gì nghe nấy, có khi bỏ bạn vì nhà",
+  w:{serveTH:2.2,ally:1.2,provoke:.7,follow:1.3,drop:1.3},dang:-2,mal:-3,trust:1.1,q:{loyal:.3}},
+ "Vì mình":{g:"ch",p:"Vì gia tộc",s:"b",tend:"lo cho mình trước hết",gain:"dễ mua bằng lợi riêng; phe phái khó kéo",cost:"không hy sinh cho ai; lúc nguy là bỏ",
+  w:{steal:1.4,block:1.4,drop:1.6,help:.7,warn:.7,accuse:1.2,follow:.3},mal:8,gift:1.2,q:{greed:.5}}
+ }};
+
+/* ONE CORE (owner OD:L1267; review/show-why, from review-trait-pool-r1 follow-up): every number chosen by a nết test lives here.
+   BAL.net.k: quality-keyed sizes for nq(p,quality,n) / netIs (servant + agent qualities). BAL.net.n: nết-keyed tables read by
+   nv(p,key) (jnet.js): keys are nết names or "q:<quality>" (netIs), tested IN ORDER, first match wins (= the old a?x:b?y:z chains),
+   "_" = the value when none matches. Scan: python3 dev/tools/net-inline-scan.py → 0. */
+Object.assign(BAL.net.k,{spySharp:15,askSharp:15,sentSharp:8,confTimid:20,confLoyal:15,confGreed:5,bribeGreed:25,bribeTimid:25,bribeLoyal:10,poachSharp:10,
+ firmLoyal:30,firmGreed:-20,lean:{greed:[-10,3],loyal:[12,-6],timid:[6,-4],talk:[-12,2]}/* sentPen: [dirty act or rumor, otherwise] */});
+BAL.net.n={
+ tellRoll:{"q:talk":25,"_":10},
+ askTalk:{"q:talk":70,"_":40},
+ flirtTinh:{"Ham vui":6,"_":0},
+ danger:{"Xảo quyệt":10,"Ân cần":-15,"Khiêm nhường":-10,"_":0},
+ staffLoyMonth:{"Xảo quyệt":-2,"Kiêu ngạo":-2,"Ân cần":1,"Khiêm nhường":1,"_":0},
+ bribeCost:{"q:greed":15,"_":30},
+ misAdj:{"Ân cần":10,"Khiêm nhường":10,"Kiêu ngạo":-8,"Xảo quyệt":-8,"_":0},
+ misJealTin:{"Xảo quyệt":8,"Kiêu ngạo":8,"_":4},
+ betrayFind:{"Kín đáo":25,"_":10},
+ spyFind:{"Kín đáo":25,"_":8},
+ srvBad:{"Xảo quyệt":.12,"Kiêu ngạo":.12,"_":0},
+ srvGood:{"Ân cần":.2,"Khiêm nhường":.2,"_":0},
+ affairRumor:{"Kín đáo":3,"_":0},
+ agentW:{"q:sharp":3,"q:talk":3,"q:loyal":2,"_":1},
+ tutorWant:{"Tham vọng":3,"Kiêu ngạo":3,"Xảo quyệt":3,"Kín đáo":2,"_":1},
+ h54P:{"Tham vọng":.6,"Kiêu ngạo":.6,"Xảo quyệt":.6,"_":.4},
+ corrupt:{"Ham lợi":25,"Cương trực":-15,"_":0},
+ dadT:{"Ham lợi":20,"Cương trực":-15,"_":0},
+ giftO:{"Ham lợi":25,"Cương trực":-25,"_":0},
+ feudW:{"Cương trực":2,"Tham vọng":2,"Kín đáo":.5,"_":1},
+ afFade:{"Thật thà":1,"_":2},
+ praise:{"Kiêu ngạo":8,"Tham vọng":8,"_":4},
+ agentLeak:{"q:talk":15,"_":0},
+ motive:{"Xảo quyệt":10,"_":0},
+ empW:{"Tham vọng":2.5,"Kiêu ngạo":2.5,"_":1},
+ coverUp:{"Kín đáo":15,"_":0},
+ traceHide:{"Kín đáo":12,"_":0},
+ rumorP:{"Nhiều chuyện":5,"Xảo quyệt":5,"Nóng nảy":3,"Kín đáo":3,"_":1.5},
+ ducDef:{"q:loyal":60,"q:greed":30,"_":45},
+ kcBac:{"Ham vui":1.2,"_":.5},
+ kcReal:{"Xảo quyệt":75,"_":45},
+ kcPowder:{"Xảo quyệt":30,"_":0},
+ menGap:{"Ham vui":9,"_":12},
+ menHide:{"Kín đáo":10,"_":0},
+ thyEv:{"Xảo quyệt":6,"Tham vọng":6,"_":0},
+ tsCare:{"Kín đáo":70,"Kiêu ngạo":15,"_":40}};
