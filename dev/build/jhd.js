@@ -33,8 +33,8 @@ Object.assign(BAL,{hd:{
  find:4,               /* % per month her people find one */
  pop:[.8],             /* q ≥ [0] "ngay ngắn"; below BAL.toil.fail = "dán vụng" (the same cut that makes any makeup part vụng); between: "hơi lệch" */
  vungA:9,              /* r2 (owner OD 17/11 ~21:03Z): the SHOWN hoa điền always sits at the forehead anchor; a vụng one (q < BAL.toil.fail) shows this fixed tilt */
- edFw:.42,
- npcShow:0}});         /* r3 (MAIN s38 22:15Z): NPCs' hoa điền layer OFF until Foreman C's per-face HD_ANCHOR lands (stale meshes put it off the forehead on some figures); her own (and the co-op friend's) stays ON */          /* eye distance / face width (fallback when a picture has no face-width row) */
+ edFw:.42,             /* eye distance / face width (fallback when a picture has no face-width row) */
+ npcShow:0}});         /* r3 (MAIN s38 22:15Z): NPCs' hoa điền layer OFF until Foreman C's per-face HD_ANCHOR lands (stale meshes put it off the forehead on some figures); her own (and the co-op friend's) stays ON */
 /* board ease → tolerance (mgLev reads BAL.mgTier.lev[kind][name]: ease 0 → [0], ease 5 → [1]) */
 try{BAL.mgTier.lev=BAL.mgTier.lev||{};BAL.mgTier.lev.hoadien={tol:[.7,1.2]}}catch(e){}
 
