@@ -11,7 +11,7 @@
    Test hook: window.KPRES_LOG [{cat,grp,sfx,mus,vo,fx,story}]; test dev/test/presentation.js. =================================================== */
 /* group → default presentation. sfx = SFXN moment · mus = bgm file · vo = voice key (fallback) · fx = {kit}|{px:[sprite,n]}|{edge} */
 const KPG={
- "trieu-chinh":{sfx:"edict",mus:"bgm-day"},
+ "trieu-chinh":{sfx:"edict",mus:"bgm-day",ent:"scroll"},
  "sung-ai":    {sfx:"favour",mus:"bgm-night",fx:{px:["petal-peach",7]}},
  "trung-phat": {sfx:"gloom",mus:"bgm-tension",fx:{kit:"ink"}},
  "le-nghi":    {sfx:"rite",mus:"bgm-festival"},
@@ -38,7 +38,7 @@ const KPC={
  "le-xuan":{sfx:"festival",mus:"bgm-festival",fx:{px:["petal-plum",8]}},"le-ha":{sfx:"festival",mus:"bgm-festival",fx:{px:["petal-lotus",6]}},
  "le-thu":{sfx:"festival",mus:"bgm-festival",fx:{px:["leaf",6]}},"le-dong":{sfx:"festival",mus:"bgm-festival",fx:{px:["snow",8]}},
  "te-le":{sfx:"rite",mus:"bgm-sorrow"},"yen-tiec":{sfx:"banquet",mus:"bgm-festival",vo:"crowd-gossip"},
- "tan-phong":{sfx:"edict",fx:{px:["petal-peach",8]}},"tuyen-tu":{sfx:"visitor",mus:"bgm-day"},"thinh-an":{sfx:"kneel",mus:"bgm-day"},"hh-viec":{sfx:"rite",mus:"bgm-day"},
+ "tan-phong":{sfx:"edict",fx:{px:["petal-peach",8]},ent:"scroll"},"tuyen-tu":{sfx:"visitor",mus:"bgm-day"},"thinh-an":{sfx:"kneel",mus:"bgm-day"},"hh-viec":{sfx:"rite",mus:"bgm-day"},
  /* chăm con */
  "sinh-no":{sfx:"bloom",fx:{px:["petal-lotus",6]}},"con-tre":{sfx:"bloom",vo:"child-laugh"},
  /* giao thiệp */
@@ -54,6 +54,10 @@ const KPC={
  "am-muu":{sfx:"schemeOk"},"vu-oan":{sfx:"expose",fx:{kit:"ink"}},"hoi-lo":{sfx:"coin",fx:{kit:"coin"}},
  /* hại người */
  "dau-doc":{sfx:"poison",fx:{edge:"poison"}},"hai-thai":{sfx:"gloom",fx:{edge:"blood"},mus:"bgm-sorrow"}};
+/* S3-152 / S3-181 ORIGIN FRAME PLACEHOLDER (ART REQUEST A1 = 9 painted frames, one per origin; until they land a main-story card gets a double rule in the origin's colour so it reads as main story at a glance).
+   When the painted frame of an origin exists, KPO_ART[k] = its url and the rule is dropped (data-kpres-art). Colours: tt gold · dtq crimson · muoi salt-blue · cn rose · nc teal · td ash · ch amber · thd moss · cnv (maid start, the 9th) + srv jade. */
+const KPO={tt:"#c9952a",dtq:"#a8321f",muoi:"#6f95a8",cn:"#c4708a",nc:"#3f8a74",td:"#6d6779",ch:"#b8742f",thd:"#6c8a4f",srv:"#5a9a86",cnv:"#5a9a86"},KPO_ART={};
+(function(){const st=document.createElement("style");st.id="kpres-css";st.textContent=`.dlg[data-kpres-story="main"][data-kpres-origin]:not([data-kpres-art]){box-shadow:inset 0 0 0 2px var(--kpo),inset 0 0 0 4px transparent,inset 0 0 0 5px var(--kpo)}`;document.head.appendChild(st)})();
 const KPFEST={sfx:"festival",mus:"bgm-festival",fx:{kit:"lantern"}};
 const KPRES_LOG=window.KPRES_LOG=[];const KPRES_LAST={};
 /* the picture category of a card (null = not an event card): same sources as the picture itself (jk2b kitEvArt chain) */
@@ -66,7 +70,8 @@ function kpresGrp(c){try{return c&&(/^fest/.test(c)?"le-nghi":(typeof KIT_EVCAT=
 function kpresStory(m){const t=String(m&&m.t||"").replace(/<[^>]+>/g,"");return /^\s*Chính tuyến/.test(t)?"main":/^\s*Phụ tuyến/.test(t)?"side":""}
 function kpresPlan(m){const c=kpresCat(m),story=kpresStory(m);if(!c&&!story)return null;const g=kpresGrp(c);
  const P=Object.assign({},KPG[g]||{},/^fest/.test(c||"")?KPFEST:{},KPC[c]||{});
- if(!c&&story){/* story card with no event picture: main line = grave (court), side = plain */ Object.assign(P,story==="main"?{sfx:"edict",mus:"bgm-day"}:{sfx:"notice"})}
+ if(!c&&story){/* story card with no event picture: main line = grave (court), side = plain */ Object.assign(P,story==="main"?{sfx:"edict",mus:"bgm-day",ent:"scroll"}:{sfx:"notice"})}
+ if(story==="main")P.ent=P.ent||"scroll"
  return Object.assign(P,{cat:c||"",grp:g||(story?"story":""),story})}
 function kpresFx(f,el){if(!f)return"";try{
  if(f.kit&&typeof kitFx==="function"){if(!KPRES_LAST[f.kit]||performance.now()-KPRES_LAST[f.kit]>6000){KPRES_LAST[f.kit]=performance.now();kitFx(f.kit,{el})}return"kit:"+f.kit}
@@ -74,14 +79,15 @@ function kpresFx(f,el){if(!f)return"";try{
  if(f.edge&&typeof kitFxEdge==="function"){kitFxEdge(f.edge,{in:500,hold:900,out:1100,opacity:.7});return"edge:"+f.edge}}catch(e){}return""}
 function kpresShow(m){try{if(!m||m.__pres)return;const P=kpresPlan(m);if(!P)return;m.__pres=P;
  const md=document.getElementById("modal"),dlg=md&&md.querySelector(".dlg");
- if(dlg){dlg.dataset.kpresGrp=P.grp;dlg.dataset.kpresCat=P.cat;if(P.story){dlg.dataset.kpresStory=P.story;try{if(P.story==="main"&&S&&S.origin)dlg.dataset.kpresOrigin=S.origin.k}catch(e){}}}
+ if(dlg){dlg.dataset.kpresGrp=P.grp;dlg.dataset.kpresCat=P.cat;if(P.story){dlg.dataset.kpresStory=P.story;try{if(P.story==="main"){const ok=S&&S.origin?S.origin.k:(S&&S.srv?"srv":"");if(ok){dlg.dataset.kpresOrigin=ok;if(KPO_ART[ok])dlg.dataset.kpresArt=KPO_ART[ok];dlg.style.setProperty("--kpo",KPO[ok]||KPO.srv)}}}catch(e){}}}
  if(typeof S!=="undefined"&&S&&!S.dead&&P.mus)m.__presMus=P.mus;
  let sfx="",vo="",fx="";
  const kw=typeof ksfxText==="function"?ksfxText((m.t||"")+" "+(m.h||"")):null;
  if(P.sfx&&!kw&&typeof kitSfx==="function"&&kitSfx(P.sfx,{at:140}))sfx=P.sfx;
  try{if(P.vo&&typeof voKind==="function"&&!voKind(m)&&typeof voice==="function"){voice(P.vo);vo=P.vo}}catch(e){}
  fx=kpresFx(P.fx,dlg||null);
- KPRES_LOG.push({cat:P.cat,grp:P.grp,sfx,mus:P.mus||"",vo,fx,story:P.story||""});if(KPRES_LOG.length>80)KPRES_LOG.shift()}catch(e){console.error("kpres",e)}}
+ let ent="";if(P.ent&&dlg&&typeof kitEdictOpen==="function"&&kitEdictOpen(dlg,{kind:P.ent}))ent=P.ent;   /* S3-152: the card opens like an edict unrolling (KIT §68.9) */
+ KPRES_LOG.push({cat:P.cat,grp:P.grp,sfx,mus:P.mus||"",vo,fx,ent,story:P.story||""});if(KPRES_LOG.length>80)KPRES_LOG.shift()}catch(e){console.error("kpres",e)}}
 (function(){const W=(n,f)=>{const o=window[n];if(typeof o!=="function"||o.__kpres)return;const w=f(o);w.__kpres=1;window[n]=w;try{(0,eval)(n+"=window."+n)}catch(e){}};
  W("showModal",o=>function(){const r=o.apply(this,arguments);try{kpresShow(typeof Q!=="undefined"&&Q[0])}catch(e){}return r});
  W("musicCtx",o=>function(){try{const m=typeof Q!=="undefined"&&Q[0];if(m&&m.__presMus&&S&&!S.dead&&S.place!=="lc"&&(m.pid||m.evId))return m.__presMus}catch(e){}return o.apply(this,arguments)})})();
@@ -110,6 +116,7 @@ const KPM={
  rise:(p)=>{const f=kitFigMove("glow",p,{tone:"glow-gold",r:18});const e=kfkFigEl(p);if(e&&!e.snap)kitFxBurst("petal-peach",e,6);return !!f},          /* promoted: gold rim + petals */
  fall:(p)=>{return !!kitFigMove("grey",p)},                                                                                                          /* demoted / cold palace: figure greys */
  favour:(p)=>{const e=kfkFigEl(p);if(e&&!e.snap)kitFxBurst("petal-peach",e,9);return !!kitFigMove("glow",p,{tone:"candle",r:12})},                       /* favoured: petals fall round her */
+ seal:(el)=>{if(!kpmOnce("seal",1500))return false;kitFx("seal",{el:el&&el.nodeType===1&&el!==document.body?el:null});return true},                 /* a verdict is stamped (contest result, promotion exam): the seal slam + ink blot (kitFx seal) at the stamp */
  join:(p,q)=>kpmThread(p,q,true),betray:(p,q)=>kpmThread(p,q,false)};                                                                                /* alliance: a red thread joins two people; betrayal: it snaps */
 function kpmThread(p,q,join){try{const a=kfkFigEl(p),b=kfkFigEl(q);if(!a||!b||a.snap||b.snap||a===b){const e=a||b;if(e&&!e.snap)kitFxBurst("petal-peach",e,5);return false}
  const ra=a.getBoundingClientRect(),rb=b.getBoundingClientRect(),x=(ra.left+ra.width/2+rb.left+rb.width/2)/2,y=(ra.top+ra.height*.45+rb.top+rb.height*.45)/2,w=Math.max(120,Math.min(innerWidth*.6,Math.abs(ra.left+ra.width/2-(rb.left+rb.width/2))*1.1));
@@ -134,6 +141,9 @@ const KPM_ACT={tat:{m:"slap",ok:/./},phatquy:{m:"slap",ok:/./},
  W("slapGive",o=>function(p){const r=o.apply(this,arguments);try{if(p&&typeof p==="object")kpmGo("slap",p)}catch(e){}return r});
  /* a birth that lives: soft light + lotus petals round the mother (NPC; hers = the j93 bloom scene) */
  W("birthP",o=>function(p,fake){const r=o.apply(this,arguments);try{if(p&&p!==S&&p.alive!==false&&!fake)kpmGo("birth",p)}catch(e){}return r});
+ /* seal (S3-205): the contest result card ("Kết quả tranh ghế") and the promotion exam verdict (exDone, hers) are stamped; the stamp is the card title / the result toast seal */
+ W("showModal",o=>function(){const r=o.apply(this,arguments);try{const m=typeof Q!=="undefined"&&Q[0];if(m&&m.t==="Kết quả tranh ghế"&&!m.__seal){m.__seal=1;setTimeout(()=>{const md=document.getElementById("modal");kpmGo("seal",md&&!md.hidden&&md.querySelector("#mt:not([hidden]), .dlg")||document.body)},typeof kitPace==="function"?kitPace(420):420)}}catch(e){}return r});
+ W("exDone",o=>function(p){const r=o.apply(this,arguments);try{if(p===S)setTimeout(()=>{const t=document.querySelector("#rtoast.on .seal")||document.querySelector("#modal:not([hidden]) .dlg");kpmGo("seal",t||document.body)},typeof kitPace==="function"?kitPace(700):700)}catch(e){}return r});
  /* people leave the stage: the figure fades out (the old pictures are snapshot before the stage re-renders) */
  W("renderStage",o=>function(){let snap=[];try{if(kpmOn()&&KPM_PREV.length){document.querySelectorAll("#tokens .tok.fig").forEach(t=>{const e=t.querySelector("img.figimg"),w=KPM_PREV[+t.dataset.p],sn=e&&w&&kfkSnap(e);if(sn)snap.push([w,sn])})}}catch(e){}
   const r=o.apply(this,arguments);try{const cur=typeof curPeople==="function"?curPeople():[];const pl=(S&&S.place)+"|"+(S&&S.visit&&S.visit.k),same=pl===KPM_PL;KPM_PL=pl;
@@ -147,5 +157,5 @@ const KPM_SNAP=new WeakMap();
 function kpmScan(){if(!kpmOn()||typeof curPeople!=="function")return;for(const w of curPeople()){const p=w&&w.ref||w;if(!p||p===S||typeof p!=="object"||p.alive===false||typeof p.rank!=="number")continue;
   const now={pg:!!(p.preg&&!p.hidden&&!p.fake),rk:typeof rkOf==="function"?rkOf(p):p.rank,out:!!p.out},old=KPM_SNAP.get(p);KPM_SNAP.set(p,now);if(!old)continue;
   if(!old.pg&&now.pg)kpmGo("preg",p);else if(now.out&&!old.out)kpmGo("fall",p);else if(now.rk>old.rk&&!now.out)kpmGo("rise",p);else if(now.rk<old.rk&&!now.out)kpmGo("fall",p)}}
-window.kpmScan=kpmScan;
+window.kpmScan=kpmScan;window.KPO=KPO;window.KPO_ART=KPO_ART;
 window.kpresPlan=kpresPlan;window.kpresCat=kpresCat;window.KPC=KPC;window.KPG=KPG;

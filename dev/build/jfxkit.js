@@ -257,6 +257,20 @@ function kitFigMove(kind,who,o){o=o||{};const D=KFK_FIG[kind];if(!D||!kfOn())ret
   setTimeout(()=>g&&g.__h.stop(),ms+80)}
  return h}
 Object.assign(window,{kitFigMove,kfkFigEl,kfkSnap,KFK_FIG});
+/* ---------- §68.9 ENTRANCE · kitEdictOpen(dlg, o) — an event card opens like an imperial edict unrolling (owner 15/11 ~18:15Z, OD:L528; S3-152; review/presentation-wiring) ----------
+   dlg = the dialog element (#modal .dlg). The painted rolled edict (img/kit/mo-edict-closed.webp, the same picture as j93 kitEdict) shows at the card's centre and fades while the card's
+   own paper opens from its middle line to full height (clip-path, no drawn shapes). One call per card, fire-and-forget; o.ms = duration (x BAL.pace); o.kind "scroll" (the only kind today).
+   Gọn / reduced motion / bots / a card too small to read: nothing (the card just pops as before). Co-op: local only. Returns {stop()} or null. Log: KFK.log "edict:open". */
+const KFK_EO={scroll:1200};
+function kitEdictOpen(dlg,o){o=o||{};try{if(!dlg||!kfOn()||kfStill())return null;const r=dlg.getBoundingClientRect();if(r.width<120||r.height<80)return null;
+ const ms=kitPace(o.ms||KFK_EO[o.kind||"scroll"]||KFK_EO.scroll);kfkLog("edict:open");const A=[];
+ try{A.push(dlg.animate([{clipPath:"inset(50% 0 50% 0 round 10px)",opacity:1},{clipPath:"inset(0% 0 0% 0 round 10px)",opacity:1}],{duration:ms,easing:"cubic-bezier(.3,.1,.25,1)",fill:"backwards"}))}catch(x){}
+ const g=document.createElement("img");g.className="kfxk-g";g.setAttribute("aria-hidden","true");g.draggable=false;g.src="img/kit/mo-edict-closed.webp";const w=Math.min(r.width*.7,380),h=w*448/1000;
+ g.style.cssText+=`;left:${r.left+r.width/2-w/2}px;top:${r.top+r.height/2-h/2}px;width:${w}px;height:${h}px`;document.body.appendChild(g);KFK.live.add(g);
+ const stop=()=>{A.forEach(a=>{try{a.cancel()}catch(x){}});KFK.live.delete(g);g.remove()};g.__h={stop};
+ try{g.animate([{opacity:0,scale:".82"},{opacity:1,scale:"1",offset:.22},{opacity:1,scale:"1.04",offset:.5},{opacity:0,scale:"1.1"}],{duration:ms,easing:"ease-out",fill:"forwards"})}catch(x){}
+ setTimeout(stop,ms+120);return{stop,dlg}}catch(x){return null}}
+window.kitEdictOpen=kitEdictOpen;window.KFK_EO=KFK_EO;
 Object.assign(window,{kitFxRim,kfkPersons,KFK_PERSON,kitFxSprite,kitFxBurst,kitFxLight,kitFxSheet,kitFxEdge,kitFxObj,kitFxGift,kitFxGiftCarry,kitFxLetter,kitFxPreload,kitFxClear,KFK_SP,KFK_LIGHT,KFK_SHEET,KFK_EDGE});
 (function(){const st=document.createElement("style");st.textContent=`
 .kfxk{position:fixed;z-index:9445;pointer-events:none;opacity:0;transition:opacity .45s ease;background-repeat:no-repeat;background-position:center;background-size:contain}
@@ -273,6 +287,8 @@ Object.assign(window,{kitFxRim,kfkPersons,KFK_PERSON,kitFxSprite,kitFxBurst,kitF
 /* §68.8 kit page sample: a demo picture + a button per kitFigMove kind (the kinds act on the picture itself) */
 try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§68.8",title:"kitFigMove · hoạt ảnh trên người (flush · poison · grey · die · drag · out · in · glow)",
  html:()=>`<div class="kitpg-row kfxk-pgr kfxk-pgd"><img id="kfxk-demo" src="img/kit/unknown-fig-f.webp" alt="" style="height:150px;width:auto">${Object.keys(KFK_FIG).map(k=>`<button type="button" class="kbtn alt" onclick="kitFigMove('${k}',document.getElementById('kfxk-demo'),{dir:1})">fig ${k}</button>`).join("")}</div>`})}catch(e){}
+try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§68.9",title:"kitEdictOpen · thẻ sự kiện mở như thánh chỉ trải ra",
+ html:()=>`<div class="kitpg-row kfxk-pgr kfxk-pgd"><div id="kfxk-eo" style="background:linear-gradient(var(--panel2),var(--panel));border:1px solid var(--gold);border-radius:10px;padding:12px;width:260px;color:var(--ink,#eee)"><b>Thánh chỉ</b><br>Tấn phong lên Quý phi.</div><button type="button" class="kbtn alt" onclick="kitEdictOpen(document.getElementById('kfxk-eo'))">edict open</button></div>`})}catch(e){}
 /* §47 kit page sample: every painted kind, every light, every sheet (tap to play) */
 try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§68",title:"painted-fx · kitFxBurst · kitFxLight · kitFxSheet (hiệu ứng vẽ tay)",
  html:()=>`<div class="kitpg-row kfxk-pgr">${Object.keys(KFK_SP).map(n=>`<button type="button" class="kbtn alt" onclick="kitFxBurst('${n}',this,14)"><img class="kfxk-pgi" src="${kfkU(n+".webp")}" alt=""> ${n}</button>`).join("")}</div>`+
