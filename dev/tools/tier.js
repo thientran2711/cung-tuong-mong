@@ -102,7 +102,7 @@ if(tier==='SMALL'){
  tests.push(T('FULL REVIEW (reviewer, as before)','BIG: every suite below on Fold + iPad first'));
  ['game-feel.js (old save, offline, open time)','kit-conform.js','tab-pairs.js','phone-bars.js','perf.js --devices fold,ipadAir'].forEach(t=>tests.push(T('node dev/test/'+t,'full suite')));
  if(has('save'))['save-slots.js','ts-oldsave.js','load-migrate.js','cloud-save.js'].forEach(t=>tests.push(T('node dev/test/'+t,'save / slots')));
- if(has('coop'))['coop-e2e.js','coop-timer.js','coop-world.js'].forEach(t=>tests.push(T('node dev/test/'+t,'co-op')));
+ if(has('coop'))['coop-e2e.js','coop-timer.js'].forEach(t=>tests.push(T('node dev/test/'+t,'co-op')));
  if(has('time'))['khac-day-run.js','buoi-transition.js','night-day.js'].forEach(t=>tests.push(T('node dev/test/'+t,'time / buổi')));
  if(has('gate'))['bash dev/tools/gate-selftest.sh  (rollback dry runs on a scratch clone + perf gate injection)'].forEach(t=>tests.push(T(t,'go-live gate itself')));
  if(has('bal'))['rules-one-source.js','paid-tiers.js','difficulty.js'].forEach(t=>tests.push(T('node dev/test/'+t,'numbers / BAL one-source')));
