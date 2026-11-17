@@ -791,3 +791,4 @@ PRIORITY #1 CHECK: OD 0 new (rule = [OD:L545]/[OD:L638] + C-ROOT 17/11 line in a
 | ev-e68-snowday | LIGHT | fHGLUJbCDY | snow, no blossoms, 4 ladies far/back |
 | ev-q72-hh-trungcuu | LIGHT | tC3kLUhmZJ | autumn Double Ninth terrace, maples, backs |
 Self-check: all 6 looked at at 1024: no visible face, no fan/hand cover. Note: gpt-2-6 allows max 1 `style` ref → use `image` refs (2 per call). Waiting for Foreman C OK. Nothing live.
+LIVE (Foreman C OK 17/11 06:16Z): img/ev-am-muu, ev-e68-stormnight, ev-e68-poisonedfish, ev-e68-letterhome, ev-e68-snowday uploaded in place (cdn_sync explicit paths, 1024x768 webp). ev-q72-hh-trungcuu redone (no text on banner, nurse strictly from behind): creation gOtZco9SXO, live. Rules from C for all batches: NO written characters/text in any picture; faces fully hidden (back/turned, no near-profile).
