@@ -969,3 +969,4 @@ looks-2 overlay art (fx-stain-tra/uot, smudge, ink, pox, scars, messy hair) | im
 | REVIEW makeup-lux r2 rebuild 4497634ab (sonnet SMALL; brief briefs/review-makeup-lux-r2.md) | review/makeup-lux-r2v | B | session_01N1tNP4tD2jgqySY4WND4fY | RUNNING | 17/11 22:52Z |
 | cloth-xoc SAMPLE: code crease/sloppy filter on outfit (owner OD ~23:20Z), wired to looks-2 xoc behind BAL switch (sonnet) | review/cloth-xoc | MAIN s38 | session_01UV1SzgpiW9BQi7g48amRNv | RUNNING | 17/11 22:50Z |
 | smudge-code: makeup lem nhem as CODE on makeup layer (owner OD ~23:30Z), 4 level samples (sonnet) | review/smudge-code | MAIN s38 | session_01UV1SzmAt4rDX1DnaUjKTh1 | RUNNING | 17/11 22:52Z |
+| batch s38b LIVE b048e495 (main c7375c0c → b048e495; ROLLBACK c7375c0c): kit-display-room-r2 f4abade8 (Đa Bảo Các kit, BAL.shelf.ui=0 hidden) | review/batch-s38b | MAIN s38 | session_01UV1SzjA6P5mZskv3JKn3BV | LIVE | 17/11 22:58Z |
