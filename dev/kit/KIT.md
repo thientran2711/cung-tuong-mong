@@ -2840,6 +2840,15 @@ Test: `node dev/test/name-rank.js <url> <outdir> <tag> [sizes]` + `dev/test/fig-
 
 **48.1h THE ONE RULE: glow on paintings, plain on paper (owner 11/16 13:50Z + 13:55Z; 15/11 22:25Z)**: on paper / frame backgrounds (pop-up captions, cards, lists, name boxes, Tuần lục, dialogs) rank text = the vivid tone as PLAIN text, no stroke, no shadow, no glow; on paintings everybody glows (48.1d/e). The stage tag and the 3-line title tag (§82) use this one rule. Legibility on paper = tone floor ≥ 3.6:1 (`kitToneOf`).
 
+### 48.6 TWO FORMS ONLY · `kitRankName(who, o)` — `dev/build/jk4.js` (owner 17/11 ~16:20Z, review/kit-rank-name; OD "RANK + NAME KIT RULE")
+Owner: "hiện đang thấy hai chữ quý phi" — the kit showed rank + name in many ways, and a person card printed the rank 3 times (header tag, name line, frame pendant). Now EXACTLY TWO FORMS:
+- **STACKED** (default) = `[title plate] / rank / name`, top to bottom: every avatar, portrait frame caption, figure-foot label, person card header, dialog column tag. Markup `.knr` (+ `.kt3` with the title plate); built by `kitNameRank(rank,name,col,me,small)`.
+- **ONE LINE** (`o.form:"line"`) = `rank name`: ONLY result lines, logs, toasts and Tuần lục / week-book prose. Markup `b.kname` (+ `.krl` when built from parts); built by `kitName(p)`.
+- `kitRankName(person | null, {form, parts:{rank,name,col,me,title}, col, me, small})` is the one entry that picks the form; kitName / kitNameRank stay as the two implementations (do not call a third way).
+- **The rank is never printed twice**: `kitDedupRank(rank,name)` drops the rank/title words a plain-text name already starts with ("Hoàng hậu Lý Ngưng Sương" under "Hoàng hậu" → "Lý Ngưng Sương"; only multi-word ranks or title words, so the surnames Tần / Phi are safe). A person whose name IS the title (Hoàng thượng, Thái hậu) prints it once.
+- **Person card header** (`pcHead`, j15): rank line (`.pcrk`) over the bare name (`.pcname`, `data-krn-skip`); the frame pendant `.klab` is hidden inside `.pc>.pcl` (the header above it already names the frame). The rank-name paint (jaudit `kitRankNamePaint`, KRN_SKIP now `.knr .krl .pcname .pcrk`) never re-adds a title there; its sibling-label check no longer ignores a `.pcrk` that carries the small rank icon (`img.ic`) — that was the root of "Hoàng hậu / Hoàng hậu Lý…".
+- Scan: `node dev/measure/rank-name-scan.js <url> <W>x<H> --table` (every tab + person dialogs + book: a rank printed twice in one card/frame = FAIL; stacked form inside prose / line form outside result lines = flagged); `sh dev/measure/rank-name-sites.sh` (every source site by form + the home-made `rkName(..) name` concatenations still to move). Kit page sample §48.6.
+
 ### 48.1 RANK TITLE · `kitRankTone` + `.krt` / `.krn` (owner, ref. shot of another game: a title floating above the name) — `dev/build/jk4.js`
 The rank / role line above every name is a TITLE, the name under it is plain ink. One look everywhere a rank sits over a name:
 - TITLE: serif `var(--display)` (Noto Serif) bold, letter-spacing .03em, in the rank's OWN colour (`--rt` = `kitRankTone(title)`), VIVID
