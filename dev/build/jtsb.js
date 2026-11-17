@@ -45,14 +45,14 @@ function tsbSev(){const x=Math.random();return x<TSB_THU_W[0]?1:x<TSB_THU_W[0]+T
 
 /* ---------------- defences shared by every planned harm (one rule for everyone) ---------------- */
 function tsbGuard(t){if(!t)return 0;let g=0;const w=tsbWk();if((t.tsbGuard||0)>=w)g+=25;g+=petGuard(t);if(t===S?tsbMaid(S):(t.maid&&(t.maid.loyal||0)>=BAL.loy.trust))g+=8;return g}
-function tsbThuO(a,t){return cl(Math.round(odA(a,44+(a.tamco||0)/5+(a.mat||0)*3)-tsbGuard(t)),5,90)}
+function tsbThuO(a,t){return cl(Math.round(odA(a,44+(a.tamco||0)/5+eyes(a)*3)-tsbGuard(t)),5,90)}
 function tsbFireO(a,t){return cl(Math.round(odA(a,46+(a.tamco||0)/5)-tsbGuard(t)),5,90)}
 
 /* ---------------- 1. Thả thú dữ (Hại nặng) ---------------- */
 A("thathu","Thả thú dữ làm hại dung nhan",{c:{bac:-BAL.actBac.thathu,duc:-6},ok:(a,t)=>(a.bac||0)>=BAL.actBac.thathu&&!t.scar&&!t.out,o:(a,t)=>tsbThuO(a,t),x:"Sắc nàng giảm mạnh tới khi lành, Sủng và Danh giảm",
- f:(a,t)=>{ap(a,{bac:-BAL.actBac.thathu,duc:-6});a.schemes=(a.schemes||0)+1;const c=caught(a,t,false,"mua chuộc người giữ thú thả thú dữ vào cung "+NM(t));if(c)return c;
+ f:(a,t)=>{ap(a,{duc:-6});/* review ag-all-2 r2 A5: the keeper's bạc only when the beast is loosed (econPayWin below) */a.schemes=(a.schemes||0)+1;const c=caught(a,t,false,"mua chuộc người giữ thú thả thú dữ vào cung "+NM(t));if(c)return c;
   if(!roll(tsbThuO(a,t))){const e=roll(50);if(e)/*evok: thathu act*/evA(t,a,BAL.eff.jtsb.evF);return `Con thú dữ lọt vào cung ${NM(t)} bị người canh chặn kịp, đuổi đi trước khi kịp gây chuyện${e?`; kẻ thả thú bị bắt, khai là người của ${NM(a)} (chứng cứ ${balSg(BAL.eff.jtsb.evF)})`:""}. `}
-  const sev=tsbSev();const L=tsbScar(t,sev,a);if(t===S){try{feedback("hit")}catch(e){}}
+  econPayWin(a,"thathu",t,BAL.actBac.thathu);const sev=tsbSev();const L=tsbScar(t,sev,a);if(t===S){try{feedback("hit")}catch(e){}}
   return `<span class="r">Một con thú dữ không rõ từ đâu lọt vào cung ${NM(t)}, làm tổn dung nhan ${NM(t)} (hủy dung ${L.n}): Sắc -${L.d} tới khi lành, Sủng -${L.sung}, Danh -${L.danh}.</span> `}});
 AOUT.thathu=["nàng bị hủy dung (vết cào 1 đến 3 nét), Sắc giảm tới khi lành",`thú bị đuổi đi; nàng có thể nắm ${balAb(BAL.eff.jtsb.evF)} chứng cứ`];
 try{ACTDOM.thathu="Mưu kế";if(typeof ACAUGHT!=="undefined")ACAUGHT.push("thathu")}catch(e){}
@@ -116,7 +116,7 @@ function tsbThWeek(){const L=S.tsbTh||[];const w=tsbWk();const keep=[];for(const
    if(t===S&&r){Q.push({t:th.k==="thathu"?"Hung tin trong cung":"Hỏa hoạn",h:`<p>${r}</p>`,headArt:th.k==="phonghoa"?tsbArt("ev-hoa-hoan","Hỏa hoạn"):undefined});log(r);tsbShow()}
    else if(r&&typeof knows==="function"&&knows(t)&&roll(50))log(r);continue}
   keep.push(th)}S.tsbTh=keep}
-PEND.tsbOmen=pp=>{if(!S)return null;const a=byKey(pp.a);if(!a)return null;const fire=pp.k==="phonghoa";const mm=tsbMaid(S);const see=S.mat||0;
+PEND.tsbOmen=pp=>{if(!S)return null;const a=byKey(pp.a);if(!a)return null;const fire=pp.k==="phonghoa";const mm=tsbMaid(S);const see=eyes(S);
  const named=see>=3||(S.tsbTh||[]).some(x=>x.a===pp.a&&x.seen&&evG(S,a)>0);
  const sign=fire?`Mấy đêm nay có bóng người lạ quanh kho chứa đồ của ngươi; cửa kho sáng ra thấy khép hờ.`:`Người giữ thú ở Ngự thú viên bị thấy lảng vảng gần cửa sau cung ngươi; đêm qua có tiếng thú lạ ngoài tường.`;
  const who=named?`Tai mắt nói kẻ ấy hay ra vào ${typeof houseName==="function"?houseName(a):"cung"} của ${tsbNm(a)}.`:`Chưa rõ ai đứng sau.`;

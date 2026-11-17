@@ -20,7 +20,7 @@ const [,,BASE,OUT,EXTRA]=process.argv;const extra=EXTRA?fs.readFileSync(EXTRA,'u
   const harvest=st=>document.querySelectorAll('button.ka.kcard .kan, .pc>.pcr button.ka .kan, .kpanec button.ka .kan').forEach(k=>{try{add(kpActName(k),st)}catch(e){}});
   const fresh=()=>{SLOT=3;document.getElementById('title').hidden=true;for(let i=0;i<60;i++){try{store.set(NL_KEY,null)}catch(e){}start();if(!(typeof isSrv==='function'&&isSrv()))break}
    Q.length=0;const m=document.getElementById('modal');if(m)m.hidden=true;document.querySelectorAll('.kroul,#kroul,#kroulw').forEach(e=>e.remove())};
-  const setup={fresh:()=>{},cao:()=>{S.rank=5;S.sung=65;S.danh=60;S.th=55;S.tamco=55;S.mat=3;S.duc=60;try{fillStaff(S,true)}catch(e){}},
+  const setup={fresh:()=>{},cao:()=>{S.rank=5;S.sung=65;S.danh=60;S.th=55;S.tamco=55;tmPlace(S,3);S.duc=60;try{fillStaff(S,true)}catch(e){}},
    con:()=>{try{S.kids.push(mkKid("m",4));S.kids.push(mkKid("f",2))}catch(e){}S.preg=0},
    hh:()=>{S.rank=7;try{const q=rivals.find(v=>v.queen);if(q){q.queen=false;q.rank=6}}catch(e){}S.sung=70;S.danh=70;try{fillStaff(S,true)}catch(e){}},
    om:()=>{S.suc=10;try{S.ill={k:"phong",d:3}}catch(e){}}};

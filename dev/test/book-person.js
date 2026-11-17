@@ -19,7 +19,7 @@ let SIZES=args.slice(1).filter((a,i,A)=>a!=='--shots'&&A[i-1]!=='--shots');if(!S
   await p.goto(URL,{waitUntil:'domcontentloaded',timeout:0});await p.waitForFunction(()=>typeof start==='function'&&typeof dawn==='function',null,{timeout:0});await p.waitForTimeout(2500);
   const setup=await p.evaluate(()=>{for(const id of ['kload','kroul']){const x=document.getElementById(id);if(x)x.remove()}try{localStorage.clear()}catch(e){}SLOT=3;window.__nlInner=1;document.getElementById('title').hidden=true;
    Math.random=(()=>{let s=12345;return()=>{s=(s*16807)%2147483647;return s/2147483647}})();
-   for(let i=0;i<60;i++){start();if(!isSrv())break}Q.length=0;const m=document.getElementById('modal');if(m)m.hidden=true;render();window.__bot=true;S.mat=12;
+   for(let i=0;i<60;i++){start();if(!isSrv())break}Q.length=0;const m=document.getElementById('modal');if(m)m.hidden=true;render();window.__bot=true;tmPlace(S,12);
    S.wkSnap=wkSnap();let n=0;while(n<9&&!S.dead){Q.length=0;S.mg=null;used=4;try{nextBuoi()}catch(e){}n++}Q.length=0;
    const L=liveRivals(false);const [a,c,e]=[L[0],L[1],L[2]||L[0]];kn();for(const v of L)S.met[v.id]=wk();
    /* a seen plain gift (j8 giveTo through seenNPC): news, never evidence */

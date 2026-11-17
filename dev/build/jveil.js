@@ -206,6 +206,6 @@ function vlFriendGift(t){if(!t||!vlNeed(t)||t.vl||vlChest(t).length)return;const
 /* healed faces put the veil back in the chest (weekly, after j70 heal70) */
 (function(){const e0=endTurn;endTurn=function(){const r=e0.apply(this,arguments);try{if(S&&!S.dead)for(const p of vlPeople())if(p&&p.vl&&!vlNeed(p))vlSync(p)}catch(e){}return r}})();
 /* the Emperor's bestowal on a scarred, unveiled consort may add a veil of her phẩm (Trân phẩm) */
-(function(){if(typeof bestow!=="function")return;const b0=bestow;bestow=function(p,why){const r=b0.apply(this,arguments);try{if(p&&vlNeed(p)&&!p.vl&&!vlChest(p).length&&roll(VL.empP)){const k=vlKey(Math.min(8,wdPOf(p)),2);vlGain(p,k,{from:"emp",giver:"Hoàng thượng",known:"Hoàng thượng ban theo phẩm"});
+(function(){if(typeof bestow!=="function")return;const b0=bestow;bestow=function(p,why){const r=b0.apply(this,arguments);try{if(p&&vlNeed(p)&&!p.vl&&!vlChest(p).length&&empGive(p,VL.empP,"veil")){const k=vlKey(Math.min(8,wdPOf(p)),2);vlGain(p,k,{from:"emp",giver:"Hoàng thượng",known:"Hoàng thượng ban theo phẩm"});
   if(p===S){Q.push({t:"Thánh thượng ban thưởng",who:pEmp(),h:`<p style="text-align:center">${kitItem({src:vlSrc(k),name:itm(k).n,grade:2,size:"lg"})}</p><p>Hoàng thượng thương ngươi bị thương trên mặt, ban thêm <b>${itm(k).n}</b> (Trân phẩm).</p>`,btn:"Tạ ơn"});log(`Được Hoàng thượng ban ${itm(k).n}.`)}}}catch(e){console.error(e)}return r}})();
 window.vlWear=vlWear;window.vlOff=vlOff;window.vlFix=vlFix;window.vlCraft=vlCraft;window.vlBuyNvp=vlBuyNvp;window.vlBuyOut=vlBuyOut;window.vlAsk=vlAsk;window.VL=VL;

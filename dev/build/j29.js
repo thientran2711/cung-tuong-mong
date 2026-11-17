@@ -3,7 +3,9 @@ const DIRTY=["poison","kpoison","frame","kframe","plant","musk","catswap","pushp
 let ACTK=null;
 (function(){const r0=runAct;runAct=function(a,t,k){const p=ACTK;ACTK=k;try{
   /* trung thành refuses (or begs against) a dishonourable order: the act does not happen */
-  if(a&&k&&DIRTY.includes(k)&&!together(a,t)){const sv=bestSent(a);if(sv&&netIs(sv,"loyal")&&roll(30)){sv.kn=a===S?1:sv.kn;const m=`${sv.name} quỳ xin ${a===S?"nương nương":NM(a)} đừng làm việc thất đức; việc không thành. `;if(a===S)servLearn(sv,"Từ chối việc bẩn");return a===S?m:""}}
+  if(a&&k&&DIRTY.includes(k)&&!together(a,t)){const sv=bestSent(a);/* AG-ALL-2 G10: with the loop on the sent servant CHOOSES among the player maid's own "Lệnh của chủ" options (j42 cnvOrdOpts: Vâng lệnh / Từ chối / Mật báo) by her lòng and nết (jagstf2 stf2Ord); off → the old trung thành roll */
+   const oc=sv&&typeof stf2Ord==="function"?stf2Ord(a,sv,t,k):null;if(oc&&oc!=="obey"){sv.kn=a===S?1:sv.kn;if(a===S&&oc==="refuse")servLearn(sv,"Từ chối việc bẩn");return a===S?(oc==="refuse"?`${sv.name} quỳ xin nương nương đừng làm việc thất đức; việc không thành. `:`${sv.name} viện cớ thoái thác; việc không thành. `):""}
+   if(!oc&&sv&&netIs(sv,"loyal")&&roll(30)){sv.kn=a===S?1:sv.kn;const m=`${sv.name} quỳ xin ${a===S?"nương nương":NM(a)} đừng làm việc thất đức; việc không thành. `;if(a===S)servLearn(sv,"Từ chối việc bẩn");return a===S?m:""}}
   const r=r0.apply(this,arguments);
   /* nhát gan: rivals' spies never notice him; a trail he leaves is lost */
   if(a&&k&&!together(a,t)){const sv=bestSent(a);if(sv&&netIs(sv,"timid")&&roll(35)&&t!==S&&t.evm&&t.evm[key(a)]>0)t.evm[key(a)]--}
@@ -12,7 +14,13 @@ function sentPen(s){if(!s)return 20;const d=ACTK&&DIRTY.includes(ACTK),ru=ACTK==
  const L=BAL.net.k.lean;if(netIs(s,"sharp"))p-=BAL.net.k.sentSharp;if(netIs(s,"greed"))p+=L.greed[d?0:1];if(netIs(s,"loyal"))p+=L.loyal[d?0:1];if(netIs(s,"timid"))p+=L.timid[d?0:1];if(netIs(s,"talk"))p+=L.talk[ru?0:1];return cl(p,0,30)}
 function confessRisk(s){if(!s)return 25;return cl(20+nq(s,"timid",BAL.net.k.confTimid)-nq(s,"loyal",BAL.net.k.confLoyal)+nq(s,"greed",BAL.net.k.confGreed)-Math.round(s.loyal/10),3,60)}
 /* bribing: a greedy one is cheap to turn (15 silver), a timid one is too afraid to scheme against his mistress */
-function bribeServ(a,s){const o=ownerOf(s);const cost=nv(s,"bribeCost");if(!o||o===a||a.bac<cost)return"";ap(a,{bac:-cost});const odds=odA(a,35+nq(s,"greed",BAL.net.k.bribeGreed)-nq(s,"timid",BAL.net.k.bribeTimid)-nq(s,"loyal",BAL.net.k.bribeLoyal)-s.loyal/3+a.tamco/5);
+function bribeOdds(a,s){return odA(a,35+nq(s,"greed",BAL.net.k.bribeGreed)-nq(s,"timid",BAL.net.k.bribeTimid)-nq(s,"loyal",BAL.net.k.bribeLoyal)-s.loyal/3+a.tamco/5)}
+/* AG-ALL-2f3 (owner OD 17/11 ~17:10Z "thành công á thì tốn 30 bạc, còn nếu mà không thành công á thì sao tốn 30 bạc được"): the bạc is paid ONLY when the
+   servant takes it (bribeServ wrapper below); a refusal costs no bạc but keeps its consequences (she may tell her master; the sent servant's fear, tmFear) */
+function bribeServ(a,s){const o=ownerOf(s);const cost=nv(s,"bribeCost");if(!o||o===a||a.bac<cost)return"";const odds=bribeOdds(a,s);
+ /* AG-ALL-2 G10: with the loop on the servant CHOOSES among the player maid's own "Bạc lạ" options (j42 cnvBribeOpts: Nhận bạc / Từ chối, bẩm chủ /
+    Từ chối, im lặng) — take weighs as these odds, the refusal splits by her lòng (jagstf2 stf2Bribe); off → the old roll */
+ if(typeof stf2Bribe==="function"){const r=stf2Bribe(a,s,o,odds,cost);if(r!=null)return r}
  if(roll(odds)){s.spyFor=key(a);return `${s.name} (người hầu của ${NM(o)}) nhận bạc của ${NM(a)}, thành tai mắt. `}s.loyal=cl(s.loyal+BAL.eff.j29.loyalBribeServ,0,100);evA(o,a,BAL.eff.j29.evBribeServ);relAdd(a,o,-5);return `${s.name} từ chối bạc của ${NM(a)} và mách chủ. `}
 /* what one sees of a servant: hidden trait until learned; at hire only age, origin and a vague impression */
 const ORIGINS_S=["con nhà nông ở Giang Nam","gia đình bao y kỳ tịch","con nhà buôn ở kinh thành","mồ côi, được Nội vụ phủ nuôi","con nhà thợ thêu Tô Châu","quê miền núi phía Bắc"];
@@ -33,7 +41,7 @@ function fillStaff(p,free){const [cm,ce]=capOf(p);let [m,e]=hhHas(p);
  while(e<ce&&roomFor("eunuch")&&(free||p.bac>=BAL.house.hireBac)){const s=get("eunuch");if(!s)break;p.staff.push(s);e++;if(!free)ap(p,{bac:-BAL.house.hireBac})}}
 /* hiring: she picks among this month's candidates (age, origin, impression only) */
 function hireCard(role){const P=npool()[role];if(!P.length){Q.push({t:"Nội vụ phủ",h:`<p>Tháng này Nội vụ phủ không còn ${role==="maid"?"cung nữ":"thái giám"} nào. Tháng sau sẽ có người mới.</p>`});showModal();return}
- Q.push({act:1,t:"Nội vụ phủ đưa người",h:`<p>Người hiện có (chỉ biết tuổi, xuất thân và dáng vẻ; nết thật phải ở lâu mới biết):</p>`,opts:P.map(s=>({n:`${s.name}, ${s.age} tuổi`,fx:{bac:BAL.eff.j29.bacFx},x:`${s.org} · trông ${s.imp}`,go:()=>{const i=P.indexOf(s);if(i>=0)P.splice(i,1);S.staff.push(s);log(`Nhận ${s.name} từ Nội vụ phủ. Bạc ${balSg(BAL.eff.j29.bacFx)}.`)}})).concat([{n:"Thôi",fx:{},x:"không nhận ai"}])});showModal()}
+ Q.push({act:1,t:"Nội vụ phủ đưa người",h:`<p>Người hiện có (chỉ biết tuổi, xuất thân và dáng vẻ; nết thật phải ở lâu mới biết):</p>`,opts:P.map(s=>({n:`${s.name}, ${s.age} tuổi`,fx:{bac:BAL.eff.j29.bacFx},x:`${s.org} · trông ${s.imp}`,go:()=>{hireTake(S,role,s,true);log(`Nhận ${s.name} từ Nội vụ phủ. Bạc ${balSg(BAL.eff.j29.bacFx)}.`)}})).concat([{n:"Thôi",fx:{},x:"không nhận ai"}])});showModal()}
 document.addEventListener("click",e=>{const b=e.target.closest("[data-hire]");if(!b||b.disabled)return;e.stopPropagation();e.preventDefault();if(!S||S.dead||Q.length||S.bac<BAL.house.hireBac)return;const [cm,ce]=capOf(S),[nm,ne]=hhHas(S);const role=b.dataset.hire;if(role==="maid"?nm>=cm:ne>=ce)return;hireCard(role)},true);
 /* 'Xem người': a costly look (Bạc -15, 1 khắc) reveals the trait */
 document.addEventListener("click",e=>{const b=e.target.closest("[data-svlook]");if(!b||b.disabled)return;e.stopPropagation();const s=servById(+b.dataset.svlook);if(!s||S.bac<BAL.house.lookBac||!can(1)||Q.length)return;apply({bac:-BAL.house.lookBac});spend(1);servLearn(s,"Cho người dò xét lai lịch");render()},true);
@@ -68,3 +76,7 @@ function servTraitMonth(){let ev="";for(const p of consorts()){for(const s of (p
 /* for the measure only: a bot policy (window.__servPolicy = 'fire' looks at every servant and fires greedy and timid ones; 'keep' never fires) */
 function servPolicy(){const pol=window.__servPolicy;if(pol!=="fire")return;for(const s of (S.staff||[]).slice()){if(!s.kn&&S.bac>=BAL.house.lookBac){apply({bac:-BAL.house.lookBac});s.kn=1}if(s.kn&&(netIs(s,"greed")||netIs(s,"timid"))&&S.bac>=BAL.house.swapBac){fireServ(S,s);S.firedN=(S.firedN||0)+1}}}
 (function(){const c0=servCauses;servCauses=function(){const r=c0.apply(this,arguments);try{for(const s of (S.staff||[]))if(s.cause&&s.cause.w===wk()&&roll(50))servLearn(s,`Việc ${s.cause.txt}`)}catch(e){}return r}})();
+
+/* AG-ALL-2f3: pay on success only (her and NPCs alike); a failed approach frightens the servant who carried the offer (jagknow tmFear) */
+(function(){const b0=bribeServ;bribeServ=function(a,s){const cost=nv(s,"bribeCost");const was=s&&s.spyFor;const r=b0.apply(this,arguments);if(!r)return r;
+ try{if(s.spyFor===key(a)&&was!==key(a)){ap(a,{bac:-cost});return r.replace(/\s*$/,"")+` (bạc ${balSg(-cost)}) `}const f=typeof tmFear==="function"?tmFear(a,1):"";return f?r.replace(/\s*$/,"")+` ${f}. `:r}catch(e){return r}}})();

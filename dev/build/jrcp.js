@@ -177,7 +177,7 @@ for(const k of ["giftin","pgin"])(function(k){const g0=PEND[k];if(!g0)return;PEN
 function rcpTgt(t){return t==="emp"||t==="th"?t:RV(+String(t).replace(/^v/,""))}
 function rcpPayTy(){return Math.max(BAL.rcp.tFeeMin,Math.round((BAL.pay?BAL.pay[Math.min(7,S.rank|0)]:40)*BAL.rcp.tyFeeK))}
 PEND.rcpacc=pp=>{const r=rcpTgt(pp.t);if(!r)return null;const acc=pp.acc!=null?byKey(pp.acc):null;const who=rcpWho(r),A=RCP_ALN[pp.al]||"";
- const big=r==="emp"||r==="th",sev=big?2:1;const base=BAL.rcp.defB+Math.round((S.duc||0)/3)+(S.mat||0)*4-(pp.knew?35:0);
+ const big=r==="emp"||r==="th",sev=big?2:1;const base=BAL.rcp.defB+Math.round((S.duc||0)/3)+eyes(S)*4-(pp.knew?35:0);
  const o1=od(base),o2=od(base+BAL.rcp.defTy),fee=rcpPayTy();const accN=acc?(acc===S?"":`${rkName(acc)} ${acc.name}`):"";
  const fail=`bị phạt vì mưu hại ${who}, Danh -4${acc&&acc!==r?`, ${accN} nắm ${balAb(BAL.eff.jrcp.evLose)} chứng cứ của ta`:""}`;
  const lose=()=>{apply({danh:-4});if(acc&&acc!==S)evA(acc,S,BAL.eff.jrcp.evLose);punish(S,`dâng đồ làm ${who} phát bệnh`,sev)};

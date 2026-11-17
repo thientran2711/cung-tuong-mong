@@ -87,7 +87,7 @@ if(typeof renderPanel==="function"){const r0=renderPanel;renderPanel=function(){
 const KINV_CATS=[["trang","Trang sức",["Trang sức"]],["vai","Vải vóc",["Vải vóc"]],["thuoc","Thuốc men",["Thuốc bổ","Thuốc","Độc dược"]],
  ["huong","Hương liệu",["Hương liệu"]],["le","Lễ vật",["Lễ vật","Kỷ vật"]],["thu","Thư từ",["Thư từ"]]];
 function kinvCat(kd){const c=KINV_CATS.find(c=>c[2].includes(kd));return c?c[0]:"tap"}
-function kinvPlain(o){const N=typeof NAMES==="object"?NAMES:{};return Object.entries(o||{}).filter(([k,v])=>N[k]&&v).map(([k,v])=>`${N[k]} ${v>0?"+":""}${v}`).join(", ")}
+function kinvPlain(o){const N=typeof NAMES==="object"?NAMES:{};return Object.entries(o||{}).filter(([k,v])=>N[k]&&v).map(([k,v])=>statTxt(k,v,N[k])).join(", ")}
 function kinvFrom(f){if(!f||f==="me")return"";if(f==="th")return"Thái hậu ban";if(f==="hh")return"Hoàng hậu ban";if(f==="emp")return"Hoàng thượng ban";
  try{const v=typeof RV==="function"?RV(f):null;if(v&&v.name)return v.name+" tặng"}catch(e){}return""}
 function kinvGroups(){const vis=S.inv.map((e,i)=>[e,i]).filter(([e])=>!e.h&&IT[e.k]);const G=[];
@@ -286,7 +286,7 @@ function luxOf(p){const L=luxWorn(p);const sc=L.reduce((s,k)=>s+luxVal(k),0);con
 /* owner 11/15: only the worn TOTAL, neutral — never the allowance, never a level word or colour; she learns the limit from what happens */
 function kitLuxChip(x){return `<span class="kchip n kluxc">Xa xỉ <b>${x.sc}</b></span>`}
 function luxMonth(p){try{if(!p||p.out||p.alive===false)return"";const x=luxOf(p);let r="";const me=p===S;
- if(x.lv>=2){const n=x.lv===3?3:1;liveRivals(true).forEach(v=>{if(v===p)return;const m=tv(LUX_TR,v)||1;v.ghen=cl((v.ghen||0)+Math.max(1,Math.round(n*m*(me?1:.5))),0,100)});
+ if(x.lv>=2){const n=x.lv===3?3:1;liveRivals(true).forEach(v=>{if(v===p)return;const m=tv(LUX_TR,v)||1;ghenUp(v,Math.max(1,Math.round(n*m*(me?1:.5))),`thấy ${me?"ngươi":p.name} dùng đồ xa xỉ`,p)});
   if(me&&x.lv===3)r+="Hậu cung xì xào ngươi ăn mặc quá xa xỉ, nhiều người ghen. "}
  if(x.lv===3&&roll(cl(50-(p.duc|0)/2,10,50))){if(me){apply({th:BAL.eff.jinv.thLuxMonth});r+=`Thái hậu chê ngươi phô trương. Thái hậu ${balSg(BAL.eff.jinv.thLuxMonth)}. `}else ap(p,{danh:-2})}
  if(x.lv===3&&roll(25)){if(me){apply({danh:BAL.eff.jinv.danhLuxMonth});r+=`Lời đồn ngươi phung phí lan khắp cung. Danh ${balSg(BAL.eff.jinv.danhLuxMonth)}. `}else ap(p,{danh:-1})}

@@ -38,14 +38,14 @@ function trName(v){try{return (traitsOf(v)[0])||"?"}catch(e){return "?"}}
 function stealPass(t,opt){opt=opt||{};const live=opt.live!==false;const out={holder:t,lines:[],tries:0};if(!t||S.dead)return out;
  if(guestSeat()&&t!==S)return out;
  const L=liveRivals(true).filter(v=>stEligible(v,t));for(let i=L.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[L[i],L[j]]=[L[j],L[i]]}
- for(const v of L){if(out.tries>=B().maxTry)break;const w=stealWant(v,t);if(!w.mode||!(Math.random()<w.p))continue;
+ for(const v of L){if(out.tries>=B().maxTry)break;const w=stealWant(v,t);if(!w.mode||!(typeof haStealTry==="function"?haStealTry(v,t,w):Math.random()<w.p))continue;/* AG-ALL C: her choice (mindPick) while the loop is on, jagharm §3 */
   const s=stealNight(v,t,w.mode);if(!s)continue;out.tries++;const won=tonightOf()===v;
   ST.push({w:wk(),me:t===S,tr:trName(v),mode:w.mode,ok:won,live});if(ST.length>5000)ST.splice(0,1000);
   const txt=String(s).trim();try{if(typeof newsAdd==="function")newsAdd(v,"steal",txt.replace(/\.\s*$/,""),t===S)}catch(e){}
   if(!live){out.lines.push(txt);if(won){out.holder=v;break}continue}
   if(won){out.holder=v;
    if(t===S){for(let i=Q.length-1;i>=0;i--)if(Q[i].pid==="ksp")Q.splice(i,1);Q.push({t:"Kính sự phòng",h:`<p>Thẻ bài của ngươi đã được lật, nhưng ${txt}</p>`})}
-   else if(S.mat>=BAL.stealx.hearMat)log(txt);
+   else if(eyes(S)>=BAL.stealx.hearMat)log(txt);
    try{const d=S.nightWhy;if(d&&d.wk===wk()){d.pick=v.id;d.cause="stolen"}}catch(e){}
    break}
   if(t===S)log(txt)}

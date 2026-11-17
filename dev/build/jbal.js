@@ -48,7 +48,7 @@ const BAL={allyRel:35,/* the "người quen cũ" ally of a new life: her Thiện
    is married (princes and princesses alike); matchShow = a child shows in the match lists from this age; matchMax = oldest prince offered as a match; age.reign = the young Emperor rules alone from this age (no regency).
    seat = seats per rank (7 Hoàng hậu, 6 Hoàng quý phi, 5 Quý phi, 4 Phi, 3 Tần); SEATCAP (j30) is this table.
    night = the least a night with the Emperor gives: Sủng +sung, Ân tình +an (the night's score adds more, j8 nightFx). */
-Object.assign(BAL,{time:{khac:4,sucMin:5},lot:{bac:10,k:1},walk:{near:1,far:2},sneak:{danh:8,heavy:15,seen:2},srvAge:{ask:25,out:30,mama:45,old:45},
+Object.assign(BAL,{time:{khac:4,sucMin:5,/* khắc a deed costs, ONE source for the player and every NPC (AG-ALL-2 G8): talk option (j2 talk), talk that is an act, a harm act (j8 doAct) */cost:{talk:1,talkAct:2,harm:2}},lot:{bac:10,k:1},walk:{near:1,far:2},sneak:{danh:8,heavy:15,seen:2},srvAge:{ask:25,out:30,mama:45,old:45},
  age:{sacFrom:25,sacLoss:2,sacMin:10,betroth:16,wed:18,matchShow:14,matchMax:21,reign:16},seat:{7:1,6:1,5:2,4:4,3:6}});
 /* ONE CORE r2 (review/one-core-land, 16/11): rule numbers of the modules that landed after review/one-core: story roads (jroute),
    origin arcs (jorigins), family house (jhouse), Tu duc lessons (jtds, jtd), small modules. One table per module; texts print the same key. */
@@ -284,6 +284,8 @@ function oddsLv(o){let i=0;for(const c of BAL.odds.cut)if(o>=c)i++;return i}
    texts show it ("+4" / "-4"), balAb(n) = the amount without sign ("4"). A text that shows a BAL.eff / BAL.road / BAL.arc amount prints it with these
    (dev/test/one-core-text.js fails a typed copy). */
 function balSg(n){return(n>0?"+":n<0?"-":"")+Math.abs(n)}
+/* AG-ALL-2f (one-core text G1): THE ONE evidence-count text — "chứng cứ +1" always prints the BAL amount (default BAL.ag.ev.one); cap = "Chứng cứ" */
+function evSg(n,cap){return (cap?"Chứng cứ ":"chứng cứ ")+balSg(n==null?BAL.ag.ev.one:n)}
 function balAb(n){return String(Math.abs(n))}
 /* a printed count as a word («một chứng cứ»): balWord(balAb(BAL…)) — the number word of VP.num (j84, loads later; called only when the text is built) */
 function balWord(n){try{return window.VP&&VP.num?VP.num(+n):String(n)}catch(e){return String(n)}}
