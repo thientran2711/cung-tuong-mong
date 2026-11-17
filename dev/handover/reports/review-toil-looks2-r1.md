@@ -61,3 +61,9 @@ LOOKED (Fold, c07-t3 + c22-t5: vụng A (seed 7), vụng B (seed 1), Đoan trang
 Minor: mesh-less faces (SVG fallback) never show B (always A); TOIL_MKS.vungB has no `vung` flag, so B gets no vụng lip smear/jitter (= pure overdone look, as designed); `glam:1` still unused.
 =======
 >>>>>>> 61f334cd (review kit-ico-rank-r2 report: PASS aaa1bec1)
+
+# r5 — looks4 v9 delta (review/toil-looks2 a5e7f52f) — VERDICT: PASS 97f57862
+Branch review/toil-looks2-r5 = r4 3d70778c + merge a5e7f52f + main bbb3b4ca; FF ready. LAND THIS SHA (a5e7f52f again rewrote the BAL.toil line; resolved by hand: harshGhen/replyGhen + vungB + vungPuff all kept). Ship waits for the owner's OK on ?v=9.
+Delta: only the vụng A powder-puff branch (T.dabs: only TOIL_MKS.vung has it; vungB and every other level have none) -> other levels value-identical (TOIL_MKS unchanged, main rng R draws unchanged: the new size pick uses its own rng RZ = toilRnd(seed+23)). New numbers in BAL.toil.vungPuff {big 1.7, small .75, prof} — no typed copies.
+Gates on 97f57862: quickcheck PASS (open 1294 ms, old save ok, perf ≈ live), CORE GATES PASS (one-core-guard, mk-layer-scan 0 bad); toil-tease 25/25; toil-allday 0 missing.
+LOOKED (Fold, vụng A, c07-t3 / c22-t5 / c31-ty2 x seeds 7, 8): puffs soft-edged, one big + one small, inside the cheek, eyes clear, no hard white marks.

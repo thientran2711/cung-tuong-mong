@@ -763,7 +763,7 @@
 | REVIEW voice-trait-r1 (opus BIG) of e134694 | review/voice-trait-r1 | C ROOT-6 | session_011xDdVNmiymzf41EueV5zCn | PASS d0a839e8 → main (archived) | 17/11 12:41Z |
 | REVIEW map-me-mark r1 of b62bd85f | review/map-me-mark-r1 | MAIN s31 | session_01UV1SzkrhfnKSSwFEpGBcVS | PASS a86ea58c | 17/11 12:52Z |
 <<<<<<< HEAD
-| REVIEW toil-looks2 r1-r4 (opus BIG) of 43b9a8b64 + looks3 v5/v7/v8 | review/toil-looks2-r4 | MAIN s32 | session_01UV1Szhz851NPoNbAv8MGF7 | PASS 3d70778c (FF; land THIS sha, not review/toil-looks2; CDN mk-fit c01-c32 + player-look1-4 + toil-fit2.json before live; owner OK on ?v=8 pending) | 17/11 15:45Z |
+| REVIEW toil-looks2 r1-r5 (opus BIG) of 43b9a8b64 + looks3/4 v5-v9 | review/toil-looks2-r5 | MAIN s33 | session_01UV1Szhz851NPoNbAv8MGF7 | PASS 97f57862 (FF; land THIS sha, not review/toil-looks2; CDN mk-fit c01-c32 + player-look1-4 + toil-fit2.json before live; owner OK on ?v=9 pending) | 17/11 15:50Z |
 =======
 | REVIEW toil-looks2 r1+r2+r3 (opus BIG) of 43b9a8b64 + looks3 v5/v7 | review/toil-looks2-r3 | MAIN s32 | session_01UV1Szhz851NPoNbAv8MGF7 | PASS 619edd87 (FF; contains makeup-theme-r1; CDN mk-fit c01-c32 + player-look1-4 + toil-fit2.json before live; owner OK on ?v=7 pending) | 17/11 15:05Z |
 >>>>>>> 61f334cd (review kit-ico-rank-r2 report: PASS aaa1bec1)
