@@ -12,7 +12,7 @@ const {chromium}=require('playwright');const URL=process.argv[2],OUT=process.arg
  const C=await p.evaluate(async()=>{Q.length=0;document.getElementById('modal').hidden=true;const C={};
   try{toilAuto()}catch(e){}const T=S.toilette;T.makeup=true;T.look='dep';T.col=Object.assign(toilColDef(),{seed:5});
   /* a FIXED face whose face points are good (a few pictures' img/mk-fit points sit off the painted face: the makeup colour layer is off there too, not this effect's business) */
-  const por='por-consort-c17-tcold-a18.webp',fig='fig-consort-c17-tcold-a18.webp';
+  const por='por-consort-c19-kc-a18.webp',fig='fig-consort-c19-kc-a18.webp';
   const kf0=kitFace,kg0=kitFigOf;kitFace=function(q){const f=kf0.apply(this,arguments);if(q===S&&f&&f.src){const g=Object.assign({},f,{src:String(f.src).replace(/[^/]*$/,por)});if(f.__kp)g.__kp=f.__kp;return g}return f};kitFigOf=function(q){const s=kg0.apply(this,arguments);return q===S?String(s).replace(/[^/?]*(\?.*)?$/,fig):s};
   for(let i=0;i<60&&!(MK_FIT.get(por)&&MK_FIT.get(fig));i++)await new Promise(r=>setTimeout(r,250));/* her REAL portrait + figure (no swap): the picture and its face points must belong together */
   window.__por=por;window.__fig=fig;
@@ -28,8 +28,10 @@ const {chromium}=require('playwright');const URL=process.argv[2],OUT=process.arg
   C.masses=masses;C.growing=masses[1]>0&&masses[2]>masses[1]&&masses[3]>masses[2];
   clear();S.toilette=Object.assign({},T,{makeup:false});C.noMakeupNone=lkSmudge(S,2,'mua')===''&&!(kitFxLayers(S,fileOf())||'').includes('klk-smu');S.toilette=T;
   clear();lkSmudge(S,2,'mua');C.stage=(kitStageFig(S)||'').includes('klk-smu');
-  const v=rivals.find(x=>x.alive!==false&&(()=>{try{return personRoleRank(x).sex==='f'}catch(e){return false}})());
-  if(v){lkSmudge(v,2,'mua');let f=null;try{f=kitFile((/src="([^"]*(?:por|fig)-[^"]*)"/.exec(kitStageFig(v)||'')||[])[1]||'')}catch(e){}C.npcFile=f;C.npc=!!f&&(kitFxLayers(v,f)||'').includes('klk-smu')||'nofile'}
+  /* NPC woman: a rival (any woman) whose own portrait has face points; colours are sampled from the picture */
+  C.npc='no woman with face points';for(const v of rivals){if(v.alive===false)continue;let f=null;try{if(personRoleRank(v).sex!=='f')continue;f=kitFile(kitFace(v).src)}catch(e){continue}
+   for(let i=0;i<24&&!MK_FIT.get(f);i++)await new Promise(r=>setTimeout(r,250));if(!MK_FIT.get(f))continue;
+   const sn0=KIT_FACEFX.seen;KIT_FACEFX.seen=()=>true;/* she has not scouted this woman yet: the seen rule (OD scouting) is lifted for this check only */v.lk=null;lkSmudge(v,2,'mua');const h=kitFxLayers(v,f)||'';await new Promise(r=>setTimeout(r,200));await wait();const im=h.includes('klk-smu');KIT_FACEFX.seen=sn0;v.lk=null;C.npc=im;C.npcFile=f;break}
   C.noPts=(()=>{try{return lkSmuImg(S,'zz-none-1.png',{lv:2})===''}catch(e){return false}})();
   C.balOnly=!!(BAL.looks.smuFx&&BAL.looks.smuFx.blush&&BAL.looks.smuFx.tear);
   clear();host.remove();return C});
