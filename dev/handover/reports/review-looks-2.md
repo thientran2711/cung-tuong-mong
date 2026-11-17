@@ -74,3 +74,6 @@ Branch review/looks-2-r2 = cfd4a6813 + merge main c114ab9e (337fc519) + reviewer
 - Minigame panel reuses the slap difficulty word "giáng tay" for throws — wording nit for VANPHONG.
 - dev/design/HARM_ACTS.md still to fold in; hair/clothes pictures wait for the body-fit KIT REQUEST; every picture slot empty until Foreman C delivers (correct).
 - No shots uploaded (none in img/_review); scratch shots deleted.
+
+### Round 2 addendum (Foreman B 19:48Z: main moved to 03f97e15e, wx-anim) → PASS review/looks-2-r2 3ac036d533c7e5d12a564a0ec9b6854df2210a65
+Merge origin/main 03f97e15e: main changed only jwxk (fxLv / fxLvK animation rows), jfx, j11 — currentWeather {lv, kd, kl} unchanged, so jlooks reads the same. Conflicts: KIT_REQUESTS.md (both rows kept), index.html / sw.js (rebuilt). Reruns on 3ac036d5: looks-2 scan 36/36 + 30/30 checks, coop-looks-act 28/28, coop-e2e 63/63, golive.sh dry run checks OK (quickcheck PASS: render 155/157 ms, buổi 708/870 ms, old save ok; core gates PASS). Supersedes fc7c649f.
