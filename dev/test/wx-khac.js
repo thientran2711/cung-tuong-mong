@@ -18,13 +18,14 @@ const sleep=t=>new Promise(r=>setTimeout(r,t));
   for(let i=0;i<400;i++){start();if(!isSrv())break}Q.length=0;document.getElementById('modal').hidden=true;try{NLP=null}catch(e){}render();
   const o={};const K=BAL.time.khac,N=wxkN();o.N=N;
   /* §1 */
-  const off=[],stat={days:0,chg:0,burst:0,arcDays:0,arcHit:0};const y0=S.year;
+  const off=[],stat={days:0,chg:0,burst:0,arcDays:0,arcHit:0},sea4={};const y0=S.year;
   for(let m=1;m<=12;m++)for(let d=0;d<60;d++){S.month=m;S.year=y0+d;S.tuan=d%3;rollWx();const D=S.wxDay,sea=SEASON[m-1];const ok=new Set(wxStates(sea).map(w=>w[0]));
    if(!D||D.s.length!==N){off.push([m,d,"no day"]);continue}
    for(const n of D.s){if(!ok.has(n))off.push([m,sea,n]);if(sea!=="Đông"&&/tuyết|sương giá/.test(n))off.push([m,sea,n,"snow"]);if(sea==="Đông"&&/nắng|ve kêu|đom đóm/.test(n))off.push([m,sea,n,"heat"])}
+   const z=sea4[sea]=sea4[sea]||{k:0,wet:0,lv:[0,0,0,0]};for(let i=0;i<N;i++){z.k++;const w=currentWeather(i);if([1,3,4].includes(w.f)){z.wet++;z.lv[w.lv]++;if(!(w.lv>=1&&w.lv<=3))off.push([m,sea,w.b,'no lv'])}else if(w.lv)off.push([m,sea,w.b,'dry lv'])}
    stat.days++;for(let i=1;i<N;i++)if(D.s[i]!==D.s[i-1])stat.chg++;stat.burst+=(D.u||[]).length;
    if(sea==="Hạ"&&D.s[0]==="nắng gắt"){stat.arcDays++;const a=D.s.indexOf("trời âm u");if(a>0&&D.s.slice(a).some(n=>n==="mưa rào"||n==="giông tố"))stat.arcHit++}}
-  o.off=off.slice(0,10);o.offN=off.length;o.stat=stat;
+  o.sea4=sea4;o.off=off.slice(0,10);o.offN=off.length;o.stat=stat;
   /* §2 */
   S.month=5;S.year=y0;S.tuan=1;S.buoi=0;used=0;S.dead=false;rollWx();wxSync();const D=S.wxDay,copy=D.s.slice();const seq=[];let mono=true;
   for(let b=0;b<=B4L;b++){S.buoi=b;used=0;wxSync();for(let u=0;u<K;u++){const k=wxkNow();if(S.wx.b!==copy[k])mono=false;seq.push(S.wx.b);if(u<K-1){spend(1)}}}
@@ -50,6 +51,7 @@ const sleep=t=>new Promise(r=>setTimeout(r,t));
   ok4=r.old.built&&r.old.head&&r.old.lines===0&&r.old.wx==="tuyết nhẹ",ok5=r.guest.every(Boolean);
  console.log(JSON.stringify(r,null,1));
  console.log("§1 season",ok1?"OK":"FAIL","§2 monotone",ok2?"OK":"FAIL","§3 garden",ok3?"OK":"FAIL","§4 old save",ok4?"OK":"FAIL","§5 guest",ok5?"OK":"FAIL");
+ for(const [s,z] of Object.entries(r.sea4))console.log(`${s}: wet khắc ${Math.round(100*z.wet/z.k)}/100 · nhẹ ${z.lv[1]} vừa ${z.lv[2]} nặng ${z.lv[3]}`);
  console.log(`days ${r.stat.days} · changes/day ${(r.stat.chg/r.stat.days).toFixed(2)} · downpours/day ${(r.stat.burst/r.stat.days).toFixed(2)} · summer nắng→âm u→mưa ${r.stat.arcHit}/${r.stat.arcDays}`);
  bad=[ok1,ok2,ok3,ok4,ok5].filter(x=>!x).length;console.log('pageerrors',errs.length,errs.slice(0,3));if(errs.length)bad++;
  await b.close();console.log(bad?`FAIL ${bad}`:"ALL OK");process.exit(bad?1:0)})();
