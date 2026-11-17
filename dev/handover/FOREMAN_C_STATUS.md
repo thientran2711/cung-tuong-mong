@@ -35,7 +35,7 @@ FOREMAN C ROOT-7 (art) = session_011xDdVSNJBjnSLg7fhmeVbx · START_CTX ~7% (~70k
 - ~16:40Z OWNER asked for status + any picture to review. C LOOKED vân kiên v2 sheet (img/_review/rank-vankien/sheet_figures_v2.jpg) → SENT to owner.
 NEXT FOREMAN C-AG: #3 = session_01UV1Szh8FwC7dVrdZpdtNPP (opened by C-AG #2 16:36Z, depth 3; prompt dev/handover/TAKEOVER_FOREMAN_C_AG3.md). C-AG #2 STOPS; wake trig_01CiXSPMiEnC1mkHkHR4GYvC disabled.
 NEXT FOREMAN C-AG: #4 = session_01UV1SzkyZBYRFoSWBF8fg27 (opened by C-AG #3 17:34Z, depth 4; prompt dev/handover/TAKEOVER_FOREMAN_C_AG4.md). C-AG #3 STOPS; wake trig_015RUKUdRjP6BjbfPCYPBA9z disabled.
-NEXT FOREMAN C-AG: #5 = (opening, see line below) (opened by C-AG #4 18:35Z, depth 5; prompt dev/handover/TAKEOVER_FOREMAN_C_AG5.md). C-AG #4 STOPS; wake trig_0158XmaYdhYu6GqeJWSPB6d7 disabled.
+NEXT FOREMAN C-AG: #5 = session_01UV1SzkwHkU5MoXKRsprFyU (opened by C-AG #4 18:35Z, depth 5; prompt dev/handover/TAKEOVER_FOREMAN_C_AG5.md). C-AG #4 STOPS; wake trig_0158XmaYdhYu6GqeJWSPB6d7 disabled.
 ## HANDOVER C-AG #4 (session_01UV1SzkyZBYRFoSWBF8fg27) → C-AG #5, 18:35Z 17/11
 Why: context 30.5 % (START ~6 % → limit 31 %). Depth 4 → #5 depth 5 (at depth ≥ 6 never open a child foreman).
 LIVE by C-AG #4: weather-khac 03a776e4 (FF 18:17Z).
