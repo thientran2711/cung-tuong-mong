@@ -17,5 +17,8 @@ for(const lv of[1,2,3]){const o=clothXocBake(d,W,H,lv,{mask:mk,seed:3}),F=o.fiel
  for(let i=0;i<W*H;i++){sum[lv]+=F.dk[i];if(F.dk[i]>.02&&(mk.m[i]<.3||mk.protS[i]>.95))bad++}
  t(bad===0,"lv"+lv+" crease outside cloth / on protect map: "+bad);
  for(let y=386;y<424;y++)for(let x=128;x<162;x++){const i=(y*W+x)*4;if(Math.abs(o.data[i]-d[i])>3||Math.abs(o.data[i+3]-d[i+3])>3){t(false,"hand pixel changed lv"+lv);y=999;break}}}
+{/* pixels far from any crease / warp are byte-identical to the picture (r4: no blur, no brightness shift) */
+ const o=clothXocBake(d,W,H,3,{mask:mk,seed:3}),F=o.field;let same=0,tot=0;const fh=mk.y1-mk.y0+1;for(let i=0;i<W*H;i++){const y=(i/W)|0;if(y>mk.y1-fh*.16||(y>mk.y0+fh*.06&&y<mk.y0+fh*.3))continue;/* the hem + lapel bands are warped on purpose */if(F.dk[i]<.002&&o.field.lt[i]<.002){tot++;if(o.data[i*4]===d[i*4]&&o.data[i*4+1]===d[i*4+1]&&o.data[i*4+2]===d[i*4+2]&&o.data[i*4+3]===d[i*4+3])same++}}
+ t(tot>W*H*.5&&same/tot>.97,"untouched pixels identical: "+same+"/"+tot)}
 t(sum[3]>sum[2]&&sum[2]>sum[1]&&sum[1]>0,"levels increase "+sum.slice(1).map(v=>v.toFixed(0)));
 console.log(ok?"cloth-xoc OK":"cloth-xoc FAILED");process.exit(ok?0:1)
