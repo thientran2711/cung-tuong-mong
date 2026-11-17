@@ -833,7 +833,7 @@
 | TINBAO-UI badge+toast+card (sonnet; brief briefs/s33-tinbao-ui.md) | review/tinbao-ui | MAIN s33 | worker (this session) | READY for review e988d2e9 | 17/11 |
 | REVIEW tinbao-ui r1 of e988d2e9 (sonnet; lands after ag-all-2) | review/tinbao-ui-r1 | MAIN s33 | session_01UV1Szjrj8Z1MLukab13oZM | RUNNING | 17/11 15:53Z |
 | GRAND ENDINGS r3 (opus; design only; 4 grand + 2 kỳ ngộ, no normal, option C, branch chart in Sổ luân hồi; MAIN s33 15:30Z, OD ~15:25Z (1)) | review/grand-endings-design | D | session_01964izFEk4tjfDFmF5Rz6mu | DONE DESIGN READY r3 52cdc078 (archived) → FOR MAIN s33 | 17/11 16:08Z |
-| IMAGE SWEEP (sonnet; git images out of main + CDN _review leftovers of finished topics; MAIN s33 15:40Z) | review/image-sweep | D | session_01964izETC9aNsnh7fPiiwPp | RUNNING | 17/11 15:58Z |
+| IMAGE SWEEP (sonnet; git images out of main + CDN _review leftovers of finished topics; MAIN s33 15:40Z) | review/image-sweep | D | session_01964izETC9aNsnh7fPiiwPp | main part DONE (review/image-sweep = main, 0 changes; CDN 9 topics 72 objects wiped) → PART 2 handover-branch images RUNNING | 17/11 16:25Z |
 | REVIEW one-core-jkc r1 84129fa23 (opus BIG; brief briefs/review-one-core-jkc.md) | review/one-core-jkc-r1 | B | session_01N1tNP2T3QBr5EHz4r5RAmd | RUNNING | 17/11 16:00Z |
 | one-core-jkc #2 (locks + fx amounts + game-wide odb; opus; brief briefs/one-core-jkc-2.md) | review/one-core-jkc-2 | B | session_01N1tNP6ZrnHFQKY5RtJnzfE | RUNNING | 17/11 16:00Z |
 | loading-words-r1 PASS d4318833 → builder batch s32a; reviewer archived | review/loading-words-r1 | MAIN s33 | session_01UV1SzhfMi68Cmn88G2Yqze | PASS → BATCH | 17/11 16:03Z |
@@ -848,3 +848,4 @@
 | WORLD link đại hàn → đại phóng cung nhân (opus small; main s34 16:20Z (c); brief briefs/world-ret-phong.md) | review/world-ret-phong | C-AG | session_01UV1SzkMv4WH519U2wy8sQ2 | RUNNING | 17/11 16:25Z |
 | toil-looks5: Vụng A ?v=10 (OD 16:20Z (a)) on 97f57862 (sonnet; brief briefs/s34-toil-looks5.md) | review/toil-looks5 | MAIN s34 | (opening) | RUNNING | 17/11 16:30Z |
 | kit-rank-name: stacked title/rank/name vs one line (OD 16:20Z (b)), whole family (sonnet; brief briefs/s34-kit-rank-name.md) | review/kit-rank-name | MAIN s34 | (opening) | RUNNING | 17/11 16:30Z |
+| FACE TOKEN 404 (sonnet, owner-bug lane; img/@W<n>.webp × 33 on live, j25.js:88 CW; whole token family) | review/face-w404 | D | (opening) | RUNNING | 17/11 16:25Z |
