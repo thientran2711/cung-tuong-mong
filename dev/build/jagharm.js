@@ -63,7 +63,12 @@ function haPenW(v){return v&&v.pen&&v.pen.until>wk()?haB().pen:1}
 function haScoreT(v,x,need){return haScoreT0(v,x,need)*haSeatW(v,x)*haGuardW(x)}
 function haScoreT0(v,x,need){const B=haB().tw;if(need==="sung")return BAL.mind.pick.ag.base+(x.sung||0)*B.sung+agSpite(v,x);if(need==="kid")return BAL.mind.pick.ag.base+kidsOf(x).length*B.kid;
  if(need==="safe")return BAL.mind.pick.ag.base+danger(x,v);return BAL.mind.pick.ag.base+agSpite(v,x)}
-function haOpts(v,N,need){const O=[];if(!haOn()||v===S||v.coop||v.confined)return O;const H=haB();if(need&&!H.needs.includes(need))return O;
+/* perf (budget BAL.ag.perf): her scheme options are weighed once per day, need and what she did since (like jagent agSocT); the day draw asks
+   for every buổi of her plan, the landing asks again */
+function haOpts(v,N,need){if(!v||v===S)return[];const C=HA.oc=HA.oc||{};const k=v.id+":"+(need||"")+":"+wk()+":"+(((AG.na||{})[v.id])||0)+":"+(v.plan?1:0);
+ const c=C[k];if(c&&c.b===(S.buoi||0)>>8)return c.O.filter(o=>!o.t||o.t===S||o.t.alive!==false&&!o.t.out);const O=haOpts0(v,N,need);C[k]={b:0,O};
+ if(Object.keys(C).length>400)HA.oc={};return O}
+function haOpts0(v,N,need){const O=[];if(!haOn()||v===S||v.coop||v.confined)return O;const H=haB();if(need&&!H.needs.includes(need))return O;
  const road=BAL.ag.road[agOrg(v)]||BAL.ag.road._;
  /* her scheme on one person (she waits for a big scheme already in hand: v.plan) */
  const C=v.plan?[]:haTargets(v).filter(x=>bandOf(danger(v,x))>=1);const t=C.length?mindPickBy(C,x=>haScoreT(v,x,need),v):null;const g=t?motiveOK(v,t,"frame"):{ok:false};
