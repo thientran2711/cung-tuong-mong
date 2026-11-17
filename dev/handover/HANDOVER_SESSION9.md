@@ -891,3 +891,4 @@ LESSONS s38: never send one tall sheet (owner angry) — crop per option; look a
 - (17/11 23:16Z) tuyet-glow v5b (calm→burst→calm 16 s; stars cheeks/forehead/eye corners + eye catchlights, no lips) LOOK OK → A/B/C + B-room sent to owner (s39 Lượt 10); waits her pick, then build everywhere.
 - (17/11 23:18Z) OWNER: lip off the mouth (smudge-0). Cause = mk-fit points; freeze OD 04:05Z/21:20Z → asked her keep-freeze vs fit-now (Lượt 13).
 - (17/11 23:21Z) OWNER approved glow (full face, fewer stars) → tuyet-glow worker: v6 video then build everywhere → SẴN SÀNG KIỂM.
+- (17/11 23:24Z) cloth-xoc r3 rolled over @57afd8a (lv3 reads as creases; lv1/2 weak; stain not started) → archived; r4 sonnet session_01UV1SzjnD2foC6FyKie4bD3. toil-looks5 kk/hue sheets FAIL rule (tiny faces) → redo as face close-ups on the glow face. smudge re-shoot on glow face (owner 23:22Z).
