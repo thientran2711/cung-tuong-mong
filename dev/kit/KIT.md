@@ -1084,8 +1084,13 @@ so stage blocks may stand beside a head or between figures, never over the paint
 - Layer order everywhere: portrait < scar strokes (`img.kscar`) < veil (`img.kveil2`) < frame. Placed per picture from `KIT_SCAR.fit` /
   `KIT_VEIL.fit` (`style(file,tier)`); the por-* boxes were re-derived from the fig-* boxes through the porcrop geometry (the por pictures were
   re-cut after the fit was measured). No fit data → nothing drawn (never a guessed place).
-- Tall frame and small frame: `.kfxc` (clip = photo window) > `.kfx` (box of the por picture, same 1.14x cut as the portrait); stage figures:
-  `.kfxf` box laid over the figure image (idle animation off on that figure).
+- **AVATAR = ID CARD (owner 17/11 ~18:10Z; review/kit-fx-register, jk2b.js `KIT_LASTING` / `KIT_BAKE`)**: every avatar-class frame (pcp tall, span.md / kmini / kfc,
+  lists, cards, pickers: everything built by `pcPort` / `mdH`) shows the BASE PORTRAIT + LASTING marks only (today: the hủy dung scar; pox scars etc. plug in with
+  `KIT_LASTING.add({id,layers:(p,file)=>[{id,src,rect:[l,t,w,h,deg],o:[ox,oy],alpha}]})`). NO makeup, NO temporary mark (slap, rash, pallor, poison, ink, veil: the veil is worn, never on an avatar, kept on stage figures) on any avatar, hers included. The lasting marks are BAKED with the photo into ONE image (canvas -> blob URL, cached per picture + marks + size
+  bucket tall 384 px / small 192 px, LRU 80, revoked 60 s after eviction) and the avatar `<img>` simply gets that src (`data-kbk` marks it until the bake is ready,
+  then it is swapped). There is NO `.kfxc` / `.kfx` overlay box in avatar frames any more (the old box mis-registered by 5.5 %: lips on the chin, scar beside the cheek).
+  A person without a lasting mark gets the plain photo: no canvas, no cost. Do NOT add per-frame overlay boxes; add a layer to `KIT_LASTING` instead.
+  Stage figures (`kitFxPut`, `.kfxf` box laid over the figure image, idle animation off on that figure) and the mirror close-up keep the FULL look (unchanged).
 - Scar only when the player knows (`KIT_SCAR.on`: herself or j70 `knows(p)`, or `p.scar.known`); a veil is public; never on the grey silhouette.
 ### 28.8b FACE FX REGISTRY — `kitFaceFx` / `KIT_FACEFX` (review/appearance-port, dev/build/jface.js) — ONE layer for every face condition
 - Every condition that changes how a face looks registers ONE entry; nobody adds their own hook on `kitFxLayers`, `effSac` or `pcard`:
