@@ -77,3 +77,25 @@ live main 744b80e7 — conflicts in j34 / j71 / j8. Successor's task (from s27):
 6. Tests: core gates (quickcheck), coop-contest (72; known flakes "3 guest Sủng +3" week drift, a section-5 week stall seen 2x on r2 — watch),
    coop-contest-dc 26, coop-contest-core, coop-contest-solo 6, coop-p2 (B1 = PRE-EXISTING main bug: run a scratch copy with the B1 block `if(false)`,
    never commit it), coop-e2e (1–2 random fails known), coop-one-world, quickcheck. Then SẴN SÀNG KIỂM <sha> to s27 + reviewer session_01UV1SziJoyYJ3o5iLXG8BuP.
+
+## r3 (successor worker, 11/17/2026) — SẴN SÀNG KIỂM 1ce276b7 · START_CTX ~6 %
+Branch `review/coop-contest-fix-r1` @ 1ce276b7 = db92d8de + merge live main 744b80e7 (a1296a15) + 1ce276b7.
+1. ONE jealousy core = main's `BAL.ghen.*` applied by `ghenAll()` (j1: ghenN inside) and printed by `ghenN()`. Dropped
+   `BAL.fest.fxGhen/winGhen/giftGhen/ctGhen` (jbal comment updated). Map: j71 contest win (cRun7, cFin7, C/MG option texts) -> `ghen.contest`;
+   j71 feast FX7 (fxFin7, j71x invite, fxInvite7 texts) -> `ghen.contestTop`; j71 Dâng lễ -> `ghen.praise`; j8 festival() -> `ghen.festival`;
+   j34 crown -> `ghen.rankUp`, loser ghen when she wins `ghenN(BAL.ghen.rankUp)`; jcoopcontest the same keys, texts `ghen +${ghenN(...)}`.
+2. j34 contestEnd = main's seatHas/seatComp/seatUp version; Oán reads `BAL.fest.ctOan` (text prints it). Co-op crown: host path runs main's
+   contestEnd (seatHas first), the jcoopcontest wrapper only records a real rank/queen change; guest crown (line 222) now also requires
+   `seatHas(S,7)`; jcoopworld write-back queen->rank 7 only follows a host crown that passed seatHas. No second Hoàng hậu path.
+3. Core gate fix (one-core-guard flagged jcoopcontest typed Danh ±1): whole family moved to `BAL.fest.place {danh:1}` / `BAL.fest.last {danh:-1}`
+   in j71 + jcoopcontest (applies + every "hạng nhì hoặc ba / đứng chót" text via pzd7). Tea/gift-guest Danh +1 left (other rules, frozen list).
+4. r2 fixes kept (rowsH7 played row names its player, applyRes mg, j82 mg sub, kpPeople wrapper, fEnt). assemble = main list + jcoopcontest
+   before jlag2; site rebuilt.
+Tests on 1ce276b7: quickcheck PASS (core gates PASS, open 1035 ms, old save ok, perf new/live render 256/271, tab 288/302, buổi 914/998) ·
+coop-contest-core 11/11 (new: no BAL.fest ghen key, gift text = ghenN(BAL.ghen.praise)) · solo 6/6 · dc 26/26 · p2 B1 skipped (scratch, not
+committed) 35/35 · e2e 59/59 · coop-one-world PASS.
+coop-contest.js: 6 runs, NONE clean — 2x 71/72 (`3 guest Sủng +3`, known week-drift flake); 3x the buổi stall `buổi 2:0 advanced for both`
+(host "Chờ hảo hữu…" bend=true; guest #next disabled "Sẵn sàng", Q:2, bend=false) cascading into section 5; 1x `both see the friend entry`
+checked right after join with no wait (fEntry not yet built) cascading into section 5. The stall is the known "section-5 week stall" but now
+3/6 vs 2 sightings on r2 — it may be made more frequent by main's new modules (guest has 2 queued dialogs at the stall). Not investigated
+(rollover budget); reviewer: please judge, or assign a probe of the guest Q at the stall.
