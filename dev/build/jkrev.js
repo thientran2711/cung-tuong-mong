@@ -15,9 +15,9 @@
         kitCoins("out"|"in", n, {x,y}) → silver coins fly out of / into the Bạc cell (#hud-bac). kitLose({bac:n}) = kitCoins("out", n).
         Wiring: ONE place, jfx kmDiff (every render compares S.inv / S.bac with the last snapshot). Test: dev/test/item-lose.js.
    Off switches as the rest of the FX kit: "Cảnh động" off / reduced motion → no flight, the card still shows; bots / quiet → nothing. */
-function kitItemInfo(x){const e=x&&typeof x==="object"?x:{k:x};const k=e.k;const it=(typeof IT==="object"&&IT[k])||{};
+function kitItemInfo(x){const e=x&&typeof x==="object"?x:{k:x};const k=e.k;const it=itm(k);
  const KG=typeof KIT_GRADE!=="undefined"?KIT_GRADE:[{n:"Thường",c:"#9a8a78"}];
- let name=it.n||String(k||""),src="",src512="",g=0,gn="",sub=it.kd||"";
+ let name=itm(k).n,src="",src512="",g=0,gn="",sub=it.kd||"";
  try{
   if(e.wk){const a=typeof itemArt==="function"?itemArt(e):null;const ti=Math.max(0,Math.min(3,e.wk.ti|0));name=e.wk.n||name;g=ti;gn=typeof WTIER!=="undefined"?WTIER[ti]:"";
    src=a?a.src:"";src512=a?a.src512:"";sub="Tác phẩm tự tay"}

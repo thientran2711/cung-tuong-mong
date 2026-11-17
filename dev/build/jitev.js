@@ -64,7 +64,7 @@ function ievVerb(n){const s=ievTxt(n);for(const [re,a] of IEV_OPT)if(re.test(s))
 function ievNoun(txt){const s=ievTxt(txt);let best=null,at=1e9;
  for(const [re,k] of IEV_NOUN){const m=re.exec(s);if(m&&m.index<at){at=m.index;best=k}}
  /* an IT name in bold (gift / goods texts) beats the generic nouns */
- try{const B=[...String(txt||"").matchAll(/<b>([^<]{2,40})<\/b>/g)].map(x=>x[1]);for(const b of B){const k=Object.keys(IT).find(k=>IT[k]&&IT[k].n===b&&k!=="tp");if(k)return k}}catch(e){}
+ try{const B=[...String(txt||"").matchAll(/<b>([^<]{2,40})<\/b>/g)].map(x=>x[1]);for(const b of B){const k=Object.keys(IT).find(k=>IT[k]&&itm(k).n===b&&k!=="tp");if(k)return k}}catch(e){}
  return best}
 /* explicit resolvers per saved-dialog id (pid + pp survive a reload, so old saves resolve the same way) */
 const IEV_PID={
@@ -199,7 +199,7 @@ try{Object.assign(KF_KINDS,{embers:["ember"],ashfall:["ash"],scraps:["paper"],du
      if(!got.length&&R.own)act="use";/* the dialog's own logic decided (a poisoned dish eaten / thrown away): nothing goes to the bag */
      else if(!got.length&&!S.dead){const e=R.e?Object.assign({},R.e):{k:R.key};e.from=e.from||(R.who&&typeof R.who==="string"?R.who:"story");e.d=S.turn;delete e.h;S.inv.push(e);got=[e]}
      got.forEach(x=>{IEV.claim.add(x);try{if(KMSNAP&&KMSNAP.inv&&!KMSNAP.inv.includes(x))KMSNAP.inv.push(x);kfSeen.add(x)}catch(e){}})}
-    else if(IT[R.key]&&IT[R.key].story&&!R.e){/* a story item she kept earlier (letter, token…) that this choice sends back / destroys leaves Tư trang for real */
+    else if(IT[R.key]&&itm(R.key).story&&!R.e){/* a story item she kept earlier (letter, token…) that this choice sends back / destroys leaves Tư trang for real */
      const gone=inv0.some(x=>x&&x.k===R.key&&!(S.inv||[]).includes(x));const j=(S.inv||[]).findIndex(x=>x&&x.k===R.key&&!x.h);
      if(!gone&&j>=0){const x=S.inv.splice(j,1)[0];try{KFX.lt.set(x,{why:"use"})}catch(e){}render()}}
     IEV.last={act,name:R.I.name,key:R.key,opt:m.opts[i].n,to:!!(to&&(act==="back"||act==="give"))};kitItemFx(act,R.I,{from,to:act==="back"||act==="give"?to:null});
