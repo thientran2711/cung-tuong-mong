@@ -698,12 +698,12 @@ function kitRoulette(o){const done=()=>{try{o.done&&o.done()}catch(e){}};if(!o||
  go.addEventListener("click",e=>{e.stopPropagation();if(step===0)shuffle();else if(step===3)fly()});
  try{go.focus({preventScroll:true})}catch(e){}}
 /* owner 11/15 (review): the cards are never shown blank — the origin pictures (wide + fallback) and the card back are fetched first.
-   Cached pictures: no wait at all. Otherwise, after 150 ms, a kit wait on the roulette backdrop ("Đang bày các thân phận…"); at most 8 s. */
+   Cached pictures: no wait at all. Otherwise, after 150 ms, a kit wait on the roulette backdrop ("Tranh luân hồi đang trải các thân phận…"); at most 8 s. */
 (function(){const r0=kitRoulette;kitRoulette=function(o){if(!o||!o.items||!o.items.length)return r0.apply(this,arguments);const args=arguments,self=this;
  const urls=[...new Set(o.items.map(it=>it.wide||it.src).concat([KIT_CARDBACK]).filter(Boolean))];let fired=false,w=null;
  const go=()=>{if(fired)return;fired=true;clearTimeout(tw);clearTimeout(tm);if(w)w.remove();r0.apply(self,args)};
  const tw=setTimeout(()=>{if(fired)return;w=document.createElement("div");w.id="kroulw";w.className="kroul";try{kitBackdrop(w,"roulette")}catch(e){}
-  w.innerHTML=`<div class="krbox"><div class="krhead"><b>Luân hồi</b><small class="krsub">Đang bày các thân phận…</small></div></div>`;document.body.appendChild(w)},150);
+  w.innerHTML=`<div class="krbox"><div class="krhead"><b>Luân hồi</b><small class="krsub">${CTM_WAIT.rebirth}</small></div></div>`;document.body.appendChild(w)},150);
  const tm=setTimeout(go,8000);let n=0;
  urls.forEach(u=>{const im=new Image();im.decoding="async";const ok=()=>{n++;if(n>=urls.length)(im.decode?im.decode().catch(()=>{}):Promise.resolve()).then(go)};im.onload=ok;im.onerror=ok;im.src=u})}})();
 (function(){if(typeof nlCard!=="function")return;const c0=nlCard;nlCard=function(){const r=c0.apply(this,arguments);try{const o=S&&S.origin;if(!o)return r;const key=(S.name||"")+"|"+o.k+"|"+(typeof NLP!=="undefined"&&NLP?NLP.seed:"");

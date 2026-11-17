@@ -16,6 +16,8 @@
 const KLOAD=window.KLOAD={phase:"idle",core:{have:0,total:0,files:0,left:0},fig:{have:0,total:0,files:0,left:0},paused:false,err:""};
 if(!("caches" in window)||!window.fetch||!/^https?:$/.test(location.protocol)||window.__bot)return;
 const AC="ctm-assets",LS="ctm-bgpause";
+/* how much has arrived, in words (never MB / %): the number beside the kit bar and the panel row */
+const dlPortion=g=>{const r=g.total?g.have/g.total:0,P=CTM_WAIT.dlPart;return r>=1?P[4]:r>=.9?P[3]:r>=.5?P[2]:r>=.25?P[1]:P[0]};
 const mb=n=>(n/1e6<10?(Math.round(n/1e5)/10):Math.round(n/1e6)).toLocaleString("vi-VN");
 /* pictures (img/…) come from Cloudflare (jcdn.js IMG_BASE, dev/art/CDN.md): their key is IMG_BASE+'img/…?h=<md5/16>'; a CDN download is
    marked with &ctmload=1 instead of the x-ctm-load header (a custom header would cost a CORS preflight per file) */
@@ -45,9 +47,9 @@ try{KLOAD.paused=localStorage.getItem(LS)==="1"}catch(e){}
 /* kv3:.kv1 */:where(.kv1) .kload .klb{padding:8px 10px 2px}:where(.kv1) .kload .kpopts{padding:2px 10px 10px}
 `;document.head.appendChild(st)})();
 
-/* ---------- the bar (kit 35): label above, track + "a / b MB" beside, sub line under ---------- */
+/* ---------- the bar (kit 35): label above, track + how much has come (words, KWAIT dlPart) beside, sub line under ---------- */
 function kitProgress(o){const v=o.total?Math.min(100,o.have/o.total*100):0;
- return `<div class="kprog">${o.label?`<h4 class="kpst">${o.label}</h4>`:""}<div class="kprog-r"><span class="kprog-t" role="progressbar" aria-valuemin="0" aria-valuemax="${Math.round(o.total/1e6)}" aria-valuenow="${Math.round(o.have/1e6)}"><u style="--v:${v.toFixed(1)}%"></u></span><b class="kprog-n">${mb(o.have)} / ${mb(o.total)} MB</b></div><small class="kprog-s">${o.sub||""}</small></div>`}
+ return `<div class="kprog">${o.label?`<h4 class="kpst">${o.label}</h4>`:""}<div class="kprog-r"><span class="kprog-t" role="progressbar" aria-valuemin="0" aria-valuemax="${Math.round(o.total/1e6)}" aria-valuenow="${Math.round(o.have/1e6)}"><u style="--v:${v.toFixed(1)}%"></u></span><b class="kprog-n">${dlPortion(o)}</b></div><small class="kprog-s">${o.sub||""}</small></div>`}
 window.kitProgress=kitProgress;
 
 const IOS=/iP(ad|hone|od)/.test(navigator.userAgent)||(navigator.platform==="MacIntel"&&navigator.maxTouchPoints>1);
@@ -73,19 +75,19 @@ function paintAsk(){const b=el.querySelector(".klb"),o=el.querySelector(".kpopts
  if(askMode==="guide"){head("Thêm vào màn hình chính");
   b.innerHTML=`<div class="kpnote">1. Chạm nút Chia sẻ (ô vuông có mũi tên chỉ lên) trên thanh của Safari.</div><div class="kpnote">2. Kéo xuống, chọn “Thêm vào MH chính” (Thêm vào Màn hình chính), rồi chạm “Thêm”.</div><div class="kpnote">3. Đóng Safari, mở Cung Tường Mộng từ biểu tượng mới trên màn hình chính. Ở đó mới thỉnh tranh vẽ, tiếng nhạc, chỉ một lần.</div>`+
    (hasSave()?`<div class="kpnote">Sổ đang cất trong Safari không tự sang ứng dụng. Muốn mang theo, chọn “Mở sổ mây trước” bên dưới.</div>`:"");
-  o.innerHTML=`<button class="kbtn alt" data-kl="back">Quay lại</button><button class="kbtn alt" data-kl="web">Chơi luôn trên trình duyệt</button>`+(hasSave()?`<button class="kbtn alt" data-kl="peek">Mở sổ mây trước (chưa thỉnh tranh)</button>`:"");return}
+  o.innerHTML=`<button class="kbtn alt" data-kl="back">Quay lại</button><button class="kbtn alt" data-kl="web">${CTM_WAIT.dlHere}</button>`+(hasSave()?`<button class="kbtn alt" data-kl="peek">Mở sổ mây trước (chưa thỉnh tranh)</button>`:"");return}
  head("Chọn nơi chơi trước khi thỉnh tranh");
- b.innerHTML=`<div class="kpnote">Trên iPad, iPhone, Safari và ứng dụng ở màn hình chính cất tranh riêng, không dùng chung. Thỉnh tranh ở Safari (${left} MB) rồi mở bằng màn hình chính là phải thỉnh lại một lần nữa.</div><div class="kpnote">Nên thêm Cung Tường Mộng vào màn hình chính trước, rồi mở từ đó: chỉ thỉnh một lần.</div>`+
+ b.innerHTML=`<div class="kpnote">${CTM_WAIT.dlAskNote}</div><div class="kpnote">Nên thêm Cung Tường Mộng vào màn hình chính trước, rồi mở từ đó: chỉ thỉnh một lần.</div>`+
   (hasSave()?`<div class="kpnote">Sổ đang cất trong Safari không tự sang ứng dụng. Trước khi chuyển, vào Chọn sổ › Một mình › Sổ mây › Giữ sổ trên mây; ở ứng dụng chọn Nối sổ.</div>`:"");
- o.innerHTML=`<button class="kbtn" data-kl="a2hs">Thêm vào màn hình chính (khuyên)</button><button class="kbtn alt" data-kl="web">Chơi luôn trên trình duyệt</button>`+(hasSave()?`<button class="kbtn alt" data-kl="peek">Mở sổ mây trước (chưa thỉnh tranh)</button>`:"")}
+ o.innerHTML=`<button class="kbtn" data-kl="a2hs">Thêm vào màn hình chính (khuyên)</button><button class="kbtn alt" data-kl="web">${CTM_WAIT.dlHere}</button>`+(hasSave()?`<button class="kbtn alt" data-kl="peek">Mở sổ mây trước (chưa thỉnh tranh)</button>`:"")}
 function paint(msg){if(!el)return;if(KLOAD.phase==="ask"){paintAsk();return}
  const c=KLOAD.core,b=el.querySelector(".klb"),o=el.querySelector(".kpopts");
- if(IOSB&&KLOAD.phase==="check"&&!MAN){b.innerHTML=`<div class="kpnote">Đang soát tranh đã cất trong máy</div>`;o.innerHTML="";return}
+ if(IOSB&&KLOAD.phase==="check"&&!MAN){b.innerHTML=`<div class="kpnote">${CTM_WAIT.dlCheck}</div>`;o.innerHTML="";return}
  o.className="kpopts";
- const sub=msg||(KLOAD.phase==="check"?"Đang soát tranh đã cất trong máy":eta(c.total-c.have));
+ const sub=msg||(KLOAD.phase==="check"?CTM_WAIT.dlCheck:eta(c.total-c.have));
  b.innerHTML=kitProgress({label:"Tranh cảnh · đồ vật · tiếng nhạc",have:c.have,total:c.total,sub})+
-  `<div class="kpnote">Chỉ thỉnh một lần. Từ lần sau vào cung ngay, không cần mạng; bản mới chỉ thỉnh phần tranh đổi khác.</div>`+
-  (KLOAD.fig.total?`<div class="kpnote">Tranh nhân vật (${mb(KLOAD.fig.total-KLOAD.fig.have)} MB) thỉnh dần sau khi ngươi đã vào cung.</div>`:"")+
+  `<div class="kpnote">${CTM_WAIT.dlOnce}</div>`+
+  (KLOAD.fig.total?`<div class="kpnote">${CTM_WAIT.dlFig}</div>`:"")+
   (IOSB?`<div class="kpnote">Safari và ứng dụng ở màn hình chính cất tranh riêng: nếu sau này ngươi thêm vào màn hình chính, ứng dụng sẽ thỉnh lại một lần nữa.</div>`:"");
  const stuck=KLOAD.err&&KLOAD.phase!=="done";
  o.innerHTML=stuck?`<button class="kbtn alt" data-kl="go">Vào cung ngay</button>${navigator.onLine!==false?`<button class="kbtn" data-kl="retry">Thỉnh tiếp</button>`:""}`:"";}
@@ -146,7 +148,7 @@ async function runCore(){if(!coreList.length){KLOAD.phase="done";close();startBg
  try{await pool(coreList,6,"core");coreList=[];KLOAD.phase="done";paint("Đã thỉnh đủ · mời nhập cung");setTimeout(()=>{close();startBg()},700)}
  catch(e){await new Promise(ok=>setTimeout(ok,300));await refresh("core");
   paint(KLOAD.err==="quota"?"Máy không còn chỗ cất tranh. Có thể vào cung ngay; tranh sẽ thỉnh khi cần.":
-   KLOAD.err==="offline"?"Mạng đứt. Có mạng lại sẽ thỉnh tiếp phần còn thiếu.":"Mạng chập chờn. Thỉnh tiếp, hoặc vào cung ngay.")}}
+   KLOAD.err==="offline"?CTM_WAIT.dlOffline:CTM_WAIT.dlFlaky)}}
 /* after a cut: re-read the cache so the next run only asks for what is still missing */
 async function refresh(grp){const c=await caches.open(AC);HAVE=new Set((await c.keys()).map(q=>q.url));const G=KLOAD[grp];G.have=0;G.files=0;G.left=0;
  const l=[];for(const f of MAN.files){if(f[3]==="fx"||f[3]==="lazy"||(f[3]==="core")!==(grp==="core"))continue;if(HAVE.has(keyOf(f))){G.have+=f[2];G.files++}else{l.push(f);G.left++}}
@@ -157,12 +159,12 @@ addEventListener("online",()=>{if(KLOAD.err==="offline"){KLOAD.err="";if(KLOAD.p
    a calm bobbing arrow while it runs, tap → kit info panel with the details + "Tạm ngưng / Thỉnh tiếp") ---------- */
 let bgOn=false,bgRun=false,dlDoneAt=0;
 const dlState=()=>{const g=KLOAD.fig,done=!g.left;return{g,done,paused:!!KLOAD.paused&&!done,err:!done&&!KLOAD.paused&&!!KLOAD.err}};
-const dlWords=s=>s.done?"Đã thỉnh đủ tranh nhân vật":s.paused?"Tạm ngưng thỉnh tranh · chạm để thỉnh tiếp":KLOAD.err==="quota"?"Máy hết chỗ cất tranh":KLOAD.err?"Mạng đứt · tranh thỉnh tiếp khi có mạng":"Đang thỉnh tranh nhân vật";
+const dlWords=s=>s.done?"Đã thỉnh đủ tranh nhân vật":s.paused?"Tạm ngưng thỉnh tranh · chạm để thỉnh tiếp":KLOAD.err==="quota"?"Máy hết chỗ cất tranh":KLOAD.err?CTM_WAIT.dlErrChip:"Đang thỉnh tranh nhân vật";
 function dlPanel(){const s=dlState(),g=s.g;
- const o=[];if(!s.done&&KLOAD.err!=="quota")o.push({n:s.paused?"Thỉnh tiếp":"Tạm ngưng",x:s.paused?"Cho tranh tiếp tục về máy lúc rảnh.":"Dừng việc tải ngầm; muốn thì thỉnh tiếp sau.",fx:{},go:()=>{KLOAD.paused=!KLOAD.paused;try{localStorage.setItem(LS,KLOAD.paused?"1":"0")}catch(x){}paintChip();if(!KLOAD.paused)runBg()}});
+ const o=[];if(!s.done&&KLOAD.err!=="quota")o.push({n:s.paused?"Thỉnh tiếp":"Tạm ngưng",x:s.paused?"Cho tranh tiếp tục về máy lúc rảnh.":CTM_WAIT.dlPauseX,fx:{},go:()=>{KLOAD.paused=!KLOAD.paused;try{localStorage.setItem(LS,KLOAD.paused?"1":"0")}catch(x){}paintChip();if(!KLOAD.paused)runBg()}});
  return{kind:"info",look:1,title:"Thỉnh tranh nhân vật",sub:dlWords(s),sections:[
   {h:"Tiến độ",html:kitProgress({have:g.have,total:g.total,sub:s.done?"Đã về đủ, không còn gì phải đợi.":"Tranh về ngầm lúc rảnh, chơi cứ như thường."})},
-  {h:"Chi tiết",rows:[["Đang thỉnh","tranh vẽ các nhân vật trong cung"],["Đã về",`${mb(g.have)} / ${mb(g.total)} MB`],["Còn lại",s.done?"không còn":`${g.left} tệp`]]}],opts:o}}
+  {h:"Chi tiết",rows:[["Đang thỉnh","tranh vẽ các nhân vật trong cung"],[CTM_WAIT.dlGot,dlPortion(g)],[CTM_WAIT.dlLeft,s.done?CTM_WAIT.dlNone:CTM_WAIT.dlLeftN.replace("{n}",g.left)]]}],opts:o}}
 function paintChip(){const g=KLOAD.fig;if(!bgOn||!g.total||typeof kitStatusIcon==="undefined")return;
  const s=dlState();if(s.done&&!dlDoneAt)dlDoneAt=Date.now();
  kitStatusIcon.set("dl",{title:"Thỉnh tranh nhân vật",order:40,glyph:()=>dlState().done?"✓":"↓",

@@ -658,7 +658,7 @@ Grid rows: every card in a row has the row's height (fitted to content, `grid-au
 - Host page (rot.js design canvas): the same cover in the design box until the frame has painted its own.
 - Let go by `kbootDone()` (last `<script>`, assemble.py) only when the game script ran to its end (`window.__ctmBuilt`).
 - WATCHDOG (owner iPad 15/11 "Bị gì đây mới vào game"): script not finished (`data-why=broken`) → failure card "Cửa cung chưa mở được"
-  with "Tải lại" and "Xóa bộ nhớ đệm rồi tải lại" (drops shell caches + service worker; keeps pictures and saves; reloads the whole page, query
+  with "Mở lại" and "Quét lối cũ rồi mở lại" (drops shell caches + service worker; keeps pictures and saves; reloads the whole page, query
   such as `?room=` kept) and the last error, small. A SLOW open is not a failure (review r1): 15 s → the cover keeps its bar and says
   "Đường xa, cung đang dựng dần…"; 30 s → the same card with the slow text (`data-why=slow`), and it still lets go the moment the game is ready.
   Boot errors are kept in localStorage `ctm-boot-err` (last 8).
@@ -2546,7 +2546,7 @@ Owner 11/14: images + sounds are downloaded to the device on first entry with a 
   iPad/iPhone Safari: see 35.1). Buttons `.kpopts` only when the line is cut/stalls:
   `.kbtn.alt` "Vào cung ngay" + `.kbtn` "Thỉnh tiếp". Fades out (0.45 s) when the essential set is in; z 9600.
 - `kitProgress({label,have,total,sub})` → `.kprog`: `h4.kpst` label · track `.kprog-t` (12 px, `--line` border, `--k-card2` ground, fill
-  lacquer red → amber `#b0402c → #c98a2a` like the kit slider) · number `.kprog-n` "26 / 83 MB" (display font, `--gold`) · sub line `.kprog-s`
+  lacquer red → amber `#b0402c → #c98a2a` like the kit slider) · number `.kprog-n` in WORDS (mới chút ít / một phần tư / quá nửa / gần đủ / đủ cả, from CTM_WAIT.dlPart; never MB or %) (display font, `--gold`) · sub line `.kprog-s`
   (time left in words: "còn chừng nửa phút / một phút / N phút", "sắp xong"). Never "%" (VANPHONG); MB is the only unit.
 - Background indicator = the status icon `dl` (§36.6 / §77.1, no chip): tap → info panel with `kitProgress` + "Tạm ngưng / Thỉnh tiếp" (remembered); still ✓ then gone when done.
 - Wording: "thỉnh" (bring in) for downloading; no tải/dữ liệu/phiên bản (VANPHONG §3).
@@ -4083,3 +4083,7 @@ Replaces §34.1b (kitLeather frame on the Dư đồ), §34.1d chip look of `.msp
 
 ## 86. kitLearn · HỌC THÀNH TÀI level-up scene (review/scenes-3, owner OD:L712) — `dev/build/jlevel.js`
 `kitLearn({kind:"art"|"vir", k, from, to})` — the scene for HER tài nghệ (Cầm, Kỳ, Thi, Họa, Vũ, Y…) or Công Dung Ngôn Hạnh reaching a new bậc (hook = addArt / addVir, every road; NPCs: no scene). Built on kmStage + the §65.2 frame (header «Học thành tài» + «<tên> lên bậc N», the painting in `.kprev-fig.klearn-fig`, card: kitSteps «Bậc n/5», kit rows of what she gained = the skill card's own effect lines ARTFX / VIRFX + the recipes the level opens (Tứ đức, RCP_ST), ONE button «Tiếp theo» (KM_END `km-learn`)). `kitLearnHTML(o)` = its HTML. Painting `img/scene-thanhtai.webp` (ART REQUEST to Foreman C); until it lands the skill's own painting (kitSkillArt, as on the skill card) shows by `onerror` swap. Sparks = kitFxBurst glowburst + spark. Reduced motion / Gọn: final frame. Sample page: §86.
+
+
+## §KWAIT — one table for every loading / waiting line (review/loading-words, 11/17)
+`dev/site/kwait.js` = `window.CTM_WAIT`: boot cover, Thỉnh tranh, Sổ mây, co-op wait/reconnect, new-build lines, Luân hồi wait, ghi sổ failure. Code reads `CTM_WAIT.key`, never types such a line. Literary cổ trang, no %, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt); the long road to the server is "đường xa". Scan: `python3 dev/test/wait-words-scan.py` (must print 0 BAD outside story prose).

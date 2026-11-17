@@ -1,0 +1,61 @@
+/* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
+   mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
+   no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
+   Readers: dev/site/kboot.js (boot cover), swreg.js (new-build lines), dev/build/jload.js (Thỉnh tranh), jcloud.js (Sổ mây), jcooplobby.js,
+   jcoopworld.js, jcooptimer.js (co-op), jk2b.js (Luân hồi), j16.js (ghi sổ). Inlined at the top of <head> (build_site.sh) and at the start of the
+   game script (assemble.py): `window.CTM_WAIT||` keeps the first copy. A new waiting line is added HERE and read as CTM_WAIT.key; scan: dev/test/wait-words-scan.py. */
+window.CTM_WAIT=window.CTM_WAIT||{
+ /* boot cover (kboot.js) */
+ bootOpen:"Cửa cung đang mở",
+ bootSlow:"Đường xa, cung đang dựng dần…",
+ bootFail:"Cửa cung chưa mở được",
+ bootFailSlow:"Đường xa, cung chưa dựng xong. Có thể đợi thêm, hoặc mở lại.",
+ bootFailBroken:"Cửa cung ở máy này chưa mở được. Xin mở lại; nếu vẫn vậy, quét sạch lối cũ rồi mở lại (sổ đã ghi vẫn giữ nguyên).",
+ bootRe:"Mở lại",
+ bootClr:"Quét lối cũ rồi mở lại",
+ /* Thỉnh tranh (jload.js) */
+ dlCheck:"Đang soát tranh đã cất trong máy",
+ dlOnce:"Chỉ thỉnh một lần. Từ lần sau vào cung ngay, không cần đợi đường xa; bản mới chỉ thỉnh phần tranh đổi khác.",
+ dlFig:"Tranh nhân vật thỉnh dần sau khi ngươi đã vào cung.",
+ dlHere:"Chơi luôn ở đây",
+ dlAskNote:"Trên iPad, iPhone, Safari và ứng dụng ở màn hình chính cất tranh riêng, không dùng chung. Thỉnh tranh ở Safari rồi mở bằng màn hình chính là phải thỉnh lại một lần nữa.",
+ dlOffline:"Đường xa đứt. Thông lại sẽ thỉnh tiếp phần còn thiếu.",
+ dlFlaky:"Đường xa chập chờn. Thỉnh tiếp, hoặc vào cung ngay.",
+ dlErrChip:"Đường xa đứt · tranh thỉnh tiếp khi thông lại",
+ dlPauseX:"Cho tranh nghỉ chân; muốn thì thỉnh tiếp sau.",
+ dlGot:"Đã về",
+ dlPart:["mới chút ít","một phần tư","quá nửa","gần đủ","đủ cả"],
+ dlLeft:"Còn lại",
+ dlLeftN:"còn {n} món",
+ dlNone:"không còn",
+ /* Sổ mây (jcloud.js) */
+ cloudNet:"Chưa với tới mây; đường xa thông là tự gửi lại.",
+ cloudBusy:"Đang gửi sổ đi, lấy sổ về…",
+ cloudLink:"Đang nối sổ với mây…",
+ cloudList:"Đang tìm các bản đã giữ…",
+ cloudKeep:"Đang giữ bản đã chọn…",
+ cloudBack:"Đang lấy lại…",
+ cloudOld:"Sổ này do một lần mở cung khác ghi, máy này chưa đọc được.",
+ cloudSyncAt:" · khớp lúc ",
+ cloudSyncBtn:"Khớp sổ ngay",
+ /* co-op (jcooplobby.js, jcoopworld.js, jcooptimer.js) */
+ coopJoining:"Đang vào phòng {code}…",
+ coopJoinErr:"Chưa vào được phòng. Xem lại đường xa rồi thử lại.",
+ coopCutMe:"Đường xa của ngươi vừa đứt. Đang tự nối lại, không mất gì.",
+ coopAway:"đang vắng hay đứt đường xa · hảo hữu mở lại là tự vào lại",
+ coopWaitPeer:"Chờ hảo hữu…",
+ coopWaitPeer2:"Đợi hảo hữu",
+ coopWaitBuild:"Đợi cùng bản mới",
+ coopMoved:"Ở máy khác",
+ coopRelink:"Đang nối lại…",
+ coopLinking:"Đang nối…",
+ coopAbsent:"Hảo hữu đang vắng",
+ /* new build (swreg.js) */
+ newOpened:"Đã mở bản mới",
+ newOpenedRoom:"Đã mở bản mới · vào lại phòng",
+ newTogether:"Hai người cùng mở bản mới, đang vào lại phòng",
+ /* Luân hồi (jk2b.js) */
+ rebirth:"Tranh luân hồi đang trải các thân phận…",
+ /* ghi sổ (j16.js) */
+ saveBlocked:"Không ghi được sổ (chỗ cất trong máy bị chặn hoặc đã đầy)."
+};
