@@ -72,14 +72,14 @@ C.raw=unl;
 
 /* the world keys of S: accessors over a lens of the host's value (the guest's S is her person; these keys are the world's) */
 let WB=null;   /* raw values of the world keys (the host's, in her perspective, with her own parts) */
-let WS=null;   /* the S whose world keys are lensed (a second call for the same S only adds keys it lacks) */
-function lensW(){if(!gOn()||!S)return;const s=S[RAW]||S;if(s!==WS||!WB){WB={};WS=s}
- for(const k of X.W_KEYS){if(!(k in s))continue;const d=Object.getOwnPropertyDescriptor(s,k);if(d&&d.get&&d.get.__lens)continue;WB[k]=s[k];
+/* fresh = a new S (fromCanon / relens): the backing values start from its own keys; else (the host's world in) only keys it lacks get an accessor */
+function lensW(fresh){if(!gOn()||!S)return;const s=S;if(fresh||!WB)WB={};
+ for(const k of X.W_KEYS){const d=Object.getOwnPropertyDescriptor(s,k);if(d&&d.get&&d.get.__lens)continue;if(d)WB[k]=s[k];else if(!(k in WB))continue;
   const key=k;const g=function(){const F=topW(key);const v=F?F.v:WB[key];if(v===undefined&&key==="emp"&&!C.dbgE){C.dbgE=String(new Error().stack).slice(0,900)+" F="+!!F+" WB="+Object.keys(WB||{}).join(",")}return plain(v)?lp(v,"W."+key,[]):v};g.__lens=1;
   const st=function(v){v=unl(v);if(sync()){WB[key]=v;return}let F=FR[FR.length-1];if(!F)F=open("act",true);F.w[key]={v};F.roots.add("W."+key);C.stat.ops++};st.__lens=1;
   Object.defineProperty(s,k,{get:g,set:st,enumerable:true,configurable:true})}}
 function topW(k){for(let i=FR.length-1;i>=0;i--)if(k in FR[i].w)return FR[i].w[k];return null}
-CW.lensW=lensW;
+CW.lensW=()=>lensW(true);
 /* the NPC list for deser (jcoopworld fromCanon0): raw array, every NPC a lens; the friend entry (the other player's person) is not the world */
 CW.lensR=function(R){if(!gOn()||!Array.isArray(R))return R;C.Rraw=R;return lp(R,"R",[])};
 C.isLens=x=>!!(x&&x[LENS]);
@@ -163,7 +163,7 @@ C.apply=function(o){if(!gOn()||!o||!S||!C.Rraw||CW.inLife)return false;const hs=
   const R=C.Rraw,byId=new Map();for(const v of R)if(plain(v)&&!v.coop)byId.set(v.id,v);const seen=new Set();
   for(const r of o.R){if(!plain(r)||r.coop||r.id==null)continue;const n=npcMine(r);seen.add(n.id);const t=byId.get(n.id);if(t)into(t,n);else{R.push(n);C.stat.addN++}}
   for(let i=R.length-1;i>=0;i--){const v=R[i];if(plain(v)&&!v.coop&&!seen.has(v.id))R.splice(i,1)}
-  for(const k of X.W_KEYS){if(!WB)break;if(k in hs){WB[k]=keepMine(k,wMine(k,hs[k]),WB[k]);if(!Object.getOwnPropertyDescriptor(S[RAW]||S,k))lensW()}}
+  for(const k of X.W_KEYS){if(!WB)break;if(k in hs){WB[k]=keepMine(k,wMine(k,hs[k]),WB[k]);}}lensW(false)
   if(typeof o.rid==="number")rid=Math.max(rid,o.rid);
   C.stat.world++;C.seen={v:TH.view&&TH.view.v,n:o.R.length}}finally{C.inApply=0;CW.inFC--}
  try{if(!Q.length)render()}catch(e){}return true};
@@ -171,7 +171,7 @@ COOP.on("thinview",V=>{try{if(gOn()&&V&&V.o)C.apply(V.o)}catch(e){console.error(
 /* the room level changes while she plays (both seats got the build): her game is rebuilt once from itself, with or without the lens
    (deser re-resolves every NPC ref and rebuilds her cards on the new list, so a card never holds an object outside the lens) */
 function relens(){if(!CW.on||host()||!S||S.dead||CW.inLife)return;const want=gOn(),has=!!(C.Rraw&&rivals&&rivals[LENS]);if(want===has)return;
- C.flush();CW.inFC=(CW.inFC||0)+1;const q=quiet;quiet=true;try{const d=ser();if(want)d.R=CW.lensR(d.R);else C.Rraw=null;const keepTab=tab,u=used;deser(d);tab=keepTab;used=u;if(want)lensW();else{WB=null;WS=null}lg(["relens",want])}
+ C.flush();CW.inFC=(CW.inFC||0)+1;const q=quiet;quiet=true;try{const d=ser();if(want)d.R=CW.lensR(d.R);else C.Rraw=null;const keepTab=tab,u=used;deser(d);tab=keepTab;used=u;if(want)lensW(true);else WB=null;lg(["relens",want])}
  catch(e){console.error("relens",e)}finally{quiet=q;CW.inFC--}try{render()}catch(e){}}
 C.relens=relens;COOP.on("thin",()=>setTimeout(relens,0));
 
