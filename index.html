@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"7abaf07a+","t":"2026-11-17T01:39Z","c":"batch-0132: CHANGE line + rebuild site","b":"3106644c6565","h":[{"s":"babc9b4a","t":"2026-11-17T01:39Z","c":"Chơi chung không còn treo máy vì tên bạn lặp chữ; số bóng người trên dư đồ khớp đúng người đang ở đó; việc có hạn giờ hiện đồng hồ ngay dướ…"},{"s":"92685210+","t":"2026-11-17T00:53Z","c":"Khung việc và khung sự kiện bốn cỡ, tranh lấp đầy khung, việc nhắc tên ai hiện chân dung người ấy; phẩm của món đồ nằm ngay trên viền khung…"},{"s":"6f513340","t":"2026-11-16T23:24Z","c":"Vào game mới không còn bật ngay màn lật thẻ, lật thẻ chỉ khi vào buổi tối; dư đồ nhãn giấy mới; việc dài lấn sang buổi sau; lời trong cung …"},{"s":"7a18d957","t":"2026-11-16T22:44Z","c":"review-diemtrang-fx-r1 report"},{"s":"afe2bcbc","t":"2026-11-16T22:25Z","c":"review r1: KIT 84.1a note + report"},{"s":"dea1d445+","t":"2026-11-16T21:32Z","c":"golive lag-play-2: CHANGE line + site rebuilt"},{"s":"674f3af4","t":"2026-11-16T21:21Z","c":"Chơi cùng bạn: bạn chơi chung chưa gặp mặt nay hiện tên gọi chung “Hảo hữu của ta” ở mọi nơi, không còn ẩn thành dấu hỏi."},{"s":"923567d5+","t":"2026-11-16T21:03Z","c":"Hình nhân vật: hết vệt xám ở cổ và viền tối quanh người."},{"s":"59812a63+","t":"2026-11-16T20:41Z","c":"Khung chung: khoảng cách đều nhau ở sổ tuần và thẻ thân phận; hàng sổ gọn, thẻ lật không đè chữ."},{"s":"ab12d6fc","t":"2026-11-16T20:53Z","c":"Tuyết và đom đóm mới, mượt hơn; nền tranh không còn vẽ lại mỗi khung hình."}]};
+window.CTM_BI={"s":"851a0523+","t":"2026-11-17T03:28Z","c":"tuanluc-sync: one-time lines kept once, BÁO during play, who of every log line","b":"3e1661009418","h":[{"s":"babc9b4a","t":"2026-11-17T01:39Z","c":"Chơi chung không còn treo máy vì tên bạn lặp chữ; số bóng người trên dư đồ khớp đúng người đang ở đó; việc có hạn giờ hiện đồng hồ ngay dướ…"},{"s":"92685210+","t":"2026-11-17T00:53Z","c":"Khung việc và khung sự kiện bốn cỡ, tranh lấp đầy khung, việc nhắc tên ai hiện chân dung người ấy; phẩm của món đồ nằm ngay trên viền khung…"},{"s":"6f513340","t":"2026-11-16T23:24Z","c":"Vào game mới không còn bật ngay màn lật thẻ, lật thẻ chỉ khi vào buổi tối; dư đồ nhãn giấy mới; việc dài lấn sang buổi sau; lời trong cung …"},{"s":"7a18d957","t":"2026-11-16T22:44Z","c":"review-diemtrang-fx-r1 report"},{"s":"afe2bcbc","t":"2026-11-16T22:25Z","c":"review r1: KIT 84.1a note + report"},{"s":"dea1d445+","t":"2026-11-16T21:32Z","c":"golive lag-play-2: CHANGE line + site rebuilt"},{"s":"674f3af4","t":"2026-11-16T21:21Z","c":"Chơi cùng bạn: bạn chơi chung chưa gặp mặt nay hiện tên gọi chung “Hảo hữu của ta” ở mọi nơi, không còn ẩn thành dấu hỏi."},{"s":"923567d5+","t":"2026-11-16T21:03Z","c":"Hình nhân vật: hết vệt xám ở cổ và viền tối quanh người."},{"s":"59812a63+","t":"2026-11-16T20:41Z","c":"Khung chung: khoảng cách đều nhau ở sổ tuần và thẻ thân phận; hàng sổ gọn, thẻ lật không đè chữ."},{"s":"ab12d6fc","t":"2026-11-16T20:53Z","c":"Tuyết và đom đóm mới, mượt hơn; nền tranh không còn vẽ lại mỗi khung hình."}]};
 /* KBOOT — BOOT COVER (owner 15/11 "Khi vừa bấm vào game, có chừng ít hơn 1 giây hiện khung này"; KIT §14.1).
    Before: while the 4 MB page parsed, the browser painted the bare static markup of p1.html (HUD box, a vertical stat label list, empty
    panels, the old 11-tab bar) for ~1 s on a warm open and many seconds on a cold one, before any kit CSS/JS existed.
@@ -47146,14 +47146,16 @@ function lbTidy(h){let o=String(h||"");
  return o}
 function lbPlain(h){return String(h||"").replace(/<[^>]+>/g," ").replace(/\s+/g," ").trim()}
 function lbClass(h){const t=lbPlain(h);if(!t||LOGBAO_NOT.test(t))return null;for(const [k,re] of LOGBAO)if(re.test(t))return k;return null}
+/* people list cached for a moment (one buổi writes many lines; kpPeople sorts the whole court each call) */
+let LBP=null,LBPt=0;function lbPeople(){const n=Date.now();if(!LBP||n-LBPt>400){LBP=typeof kpPeople==="function"?kpPeople():[];LBPt=n}return LBP}
 /* the person a RAW line is about: the first person named (outside brackets), never her; staff elders by their call ("Tống ma ma") */
 function lbWho(h){try{const t=lbPlain(h).replace(/\([^)]*\)/g," ");let best=null,at=1e9;
-  const L=(typeof kpPeople==="function"?kpPeople():[]).slice();/* an elder (Tống ma ma…) owns a line only when SHE speaks or tells it ("Tống ma ma: “…”", "Tống ma ma dặn thêm"), not when a chapter goal names her */
+  const L=lbPeople();/* an elder (Tống ma ma…) owns a line only when SHE speaks or tells it ("Tống ma ma: “…”", "Tống ma ma dặn thêm"), not when a chapter goal names her */
   try{if(typeof elders==="function")for(const s of elders())for(const n of [s.call,s.name])if(n&&(t.startsWith(n)||t.includes(n+":")||t.includes(n+" dặn thêm"))){const i=t.startsWith(n)?0:t.indexOf(n);if(i<at){at=i;best=n}}}catch(e){}
   for(const [n,p] of L){if(!n||p===S||n.length<3)continue;const i=t.indexOf(n);if(i>=0&&i<at){at=i;best=n}}
   /* "Ngươi …" / "Ta …" at the very start = her own line */
   if(best&&/^(Ngươi|Ta)\b/.test(t)&&at>0)return null;return best}catch(e){return null}}
-function lbFind(name){if(!name)return null;try{const L=(typeof kpPeople==="function"?kpPeople():[]);const x=L.find(([n])=>n===name);if(x)return x[1];
+function lbFind(name){if(!name)return null;try{const L=lbPeople();const x=L.find(([n])=>n===name);if(x)return x[1];
   if(typeof elders==="function"){const s=elders().find(s=>s.call===name||s.name===name);if(s)return s}}catch(e){}return null}
 window.lbFind=lbFind;
 /* the notice queue: lines of class (a) wait in S.lbQ (kept in the save) until no dialog is open; ONE notice per buổi (S.lbAt) */
@@ -47208,7 +47210,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="3106644c6565";window.CTM_BUILD=BUILD;
+const BUILD="3e1661009418";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

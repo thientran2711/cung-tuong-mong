@@ -36,14 +36,16 @@ function lbTidy(h){let o=String(h||"");
  return o}
 function lbPlain(h){return String(h||"").replace(/<[^>]+>/g," ").replace(/\s+/g," ").trim()}
 function lbClass(h){const t=lbPlain(h);if(!t||LOGBAO_NOT.test(t))return null;for(const [k,re] of LOGBAO)if(re.test(t))return k;return null}
+/* people list cached for a moment (one buổi writes many lines; kpPeople sorts the whole court each call) */
+let LBP=null,LBPt=0;function lbPeople(){const n=Date.now();if(!LBP||n-LBPt>400){LBP=typeof kpPeople==="function"?kpPeople():[];LBPt=n}return LBP}
 /* the person a RAW line is about: the first person named (outside brackets), never her; staff elders by their call ("Tống ma ma") */
 function lbWho(h){try{const t=lbPlain(h).replace(/\([^)]*\)/g," ");let best=null,at=1e9;
-  const L=(typeof kpPeople==="function"?kpPeople():[]).slice();/* an elder (Tống ma ma…) owns a line only when SHE speaks or tells it ("Tống ma ma: “…”", "Tống ma ma dặn thêm"), not when a chapter goal names her */
+  const L=lbPeople();/* an elder (Tống ma ma…) owns a line only when SHE speaks or tells it ("Tống ma ma: “…”", "Tống ma ma dặn thêm"), not when a chapter goal names her */
   try{if(typeof elders==="function")for(const s of elders())for(const n of [s.call,s.name])if(n&&(t.startsWith(n)||t.includes(n+":")||t.includes(n+" dặn thêm"))){const i=t.startsWith(n)?0:t.indexOf(n);if(i<at){at=i;best=n}}}catch(e){}
   for(const [n,p] of L){if(!n||p===S||n.length<3)continue;const i=t.indexOf(n);if(i>=0&&i<at){at=i;best=n}}
   /* "Ngươi …" / "Ta …" at the very start = her own line */
   if(best&&/^(Ngươi|Ta)\b/.test(t)&&at>0)return null;return best}catch(e){return null}}
-function lbFind(name){if(!name)return null;try{const L=(typeof kpPeople==="function"?kpPeople():[]);const x=L.find(([n])=>n===name);if(x)return x[1];
+function lbFind(name){if(!name)return null;try{const L=lbPeople();const x=L.find(([n])=>n===name);if(x)return x[1];
   if(typeof elders==="function"){const s=elders().find(s=>s.call===name||s.name===name);if(s)return s}}catch(e){}return null}
 window.lbFind=lbFind;
 /* the notice queue: lines of class (a) wait in S.lbQ (kept in the save) until no dialog is open; ONE notice per buổi (S.lbAt) */
