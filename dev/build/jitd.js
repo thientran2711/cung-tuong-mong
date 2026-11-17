@@ -30,7 +30,7 @@ function kitItemRef(r){try{if(r==null||r==="")return null;if(r.k!=null&&r.I&&r.k
  return{kidR:1,k,e,g,I,wd,it,work,veil,worn,who:who&&who!==S?who:null,qty:(g&&g.n)||r.qty||1}}catch(err){console.error("kitItemRef",err);return null}}
 /* kind · slot: "Trâm cài · cài tóc", "Trang sức · đeo tay", "Tác phẩm tự tay · Thêu" */
 function kidKind(R){const it=R.it||{};if(R.work){const A=typeof ARTS!=="undefined"?ARTS.find(a=>a.k===R.e.wk.a):null;return"Tác phẩm tự tay"+(A?" · "+A.n:"")}
- if(R.wd){const w=WD_ITEMS[R.k];return w.sl==="tram"?"Trâm cài · cài tóc":"Y phục · mặc"}
+ if(R.wd){const w=WD_ITEMS[R.k];return w.sl==="tram"?"Trâm cài · cài tóc":w.sl==="hd"?"Hoa điền · dán trán khi điểm trang":"Y phục · mặc"}
  if(R.veil)return(it.kd||"Mạng che mặt")+" · che mặt";
  const sl=it.sl?({hair:"cài tóc",wrist:"đeo tay",waist:"đeo eo",scent:"đeo bên mình"}[it.sl]||""):it.dr?"may áo":"";return(it.kd||"Đồ vật")+(sl?" · "+sl:"")}
 /* theme tags (Hội phối đồ đề, jts TS_THEME + any item's own `th` list) */
@@ -104,7 +104,7 @@ document.addEventListener("click",ev=>{const t=ev.target;if(!t||!t.closest)retur
  const pick=c.dataset.kidpick;kitItemCard(e?{e}:who&&c.dataset.kidsl?{wdSlot:c.dataset.kidsl,who}:{k:c.dataset.kid,who},pick&&e?{acts:kidPickActs(e,ix,pick),closeModal:true}:{})},true);
 /* a pick tile inside a slot panel (Bên mình: "Chạm một món để cài / đeo / may áo") → the card with the ONE act (no blind wear) */
 function kidPickActs(e,ix,pick){const W=typeof WD_ITEMS==="object"?WD_ITEMS:{};const it=IT[e.k]||{};
- try{if(W[e.k]){const w=W[e.k];return[pbtn(`data-wd="wear" data-ix="${ix}"`,w.sl==="tram"?"Cài":"Mặc",`tốn: 1 khắc · thành: vào ô ${w.sl==="tram"?"Cài tóc":"Y phục"}, ${plainFx(w.w)||"giản dị"}`,typeof whyTime==="function"?whyTime(1):"")]}
+ try{if(W[e.k]){const w=W[e.k];if(w.sl==="hd")return[];return[pbtn(`data-wd="wear" data-ix="${ix}"`,wdSlN(w.sl,1),`tốn: 1 khắc · thành: vào ô ${wdSlN(w.sl,2)}, ${plainFx(w.w)||"giản dị"}`,typeof whyTime==="function"?whyTime(1):"")]}
   if(pick==="use"||it.dr){const g=typeof wdFabOf==="function"?wdFabOf(e.k):null;return[pbtn(`data-kinvact="use" data-ix="${ix}"`,"May áo",g&&W[g]?`thành: ${W[g].n} vào ô Y phục, ${plainFx(W[g].w)||"giản dị"} · kèm: áo đang mặc cất vào rương`:`thành: Sắc +${it.dr} trong 3 tháng`,"")]}
   const over=it.rk&&it.rk>S.rank;return[pbtn(`data-kinvact="wear" data-ix="${ix}"`,"Đeo",`thành: ${kinvPlain(it.w)}${over?" · kèm: vượt phẩm, dễ bị tố":""}`,"")]}catch(err){return[]}}
 document.addEventListener("keydown",ev=>{const f=document.getElementById("kidfl");if(f&&ev.key==="Escape"){ev.stopPropagation();ev.preventDefault();kitItemCardClose();return}

@@ -57,7 +57,7 @@ window.luxPiece=luxPiece;
 function luxTotal(p,o){try{return luxOf(p||S,o).sc|0}catch(e){return 0}}
 function luxParts(p){p=p||S;const o={y:0,trang:0,mk:0,pet:0,total:0};try{for(const k of luxWorn(p)){const v=luxVal(k);/* what luxOf sums (jinv), so the parts add up to the total */const w=typeof WD_ITEMS==="object"?WD_ITEMS[k]:null;
   if((w&&w.sl==="y")||(p.dress&&p.dress.k===k&&!w))o.y+=v;else o.trang+=v}}catch(e){}
- try{o.pet=typeof petLuxOf==="function"?petLuxOf(p):0}catch(e){}try{o.mk=typeof toilMkLux==="function"?toilMkLux(p):0}catch(e){}
+ try{o.pet=typeof petLuxOf==="function"?petLuxOf(p):0}catch(e){}try{o.mk=typeof toilMkLux==="function"?toilMkLux(p):0}catch(e){}/* hoa-dien: o.hd = the hoa điền part OF mk (already inside mk and the total) */try{const r=typeof toilMkRec==="function"?toilMkRec(p):null;o.hd=r&&r.makeup&&r.hd&&typeof hdLux==="function"?hdLux(r.hd):0}catch(e){}
  o.total=luxTotal(p);return o}
 window.luxTotal=luxTotal;window.luxParts=luxParts;
 let LUX_LAST=null;

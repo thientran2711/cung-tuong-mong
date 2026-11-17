@@ -21,7 +21,7 @@ function kitItemInfo(x){const e=x&&typeof x==="object"?x:{k:x};const k=e.k;const
  try{
   if(e.wk){const a=typeof itemArt==="function"?itemArt(e):null;const ti=Math.max(0,Math.min(3,e.wk.ti|0));name=e.wk.n||name;g=ti;gn=typeof WTIER!=="undefined"?WTIER[ti]:"";
    src=a?a.src:"";src512=a?a.src512:"";sub="Tác phẩm tự tay"}
-  else if(typeof WD_ITEMS==="object"&&WD_ITEMS[k]){const w=WD_ITEMS[k];name=w.n||name;src=w.icon||"";g=w.g|0;sub=w.sl==="tram"?"Trâm cài":"Y phục"}
+  else if(typeof WD_ITEMS==="object"&&WD_ITEMS[k]){const w=WD_ITEMS[k];name=w.n||name;src=w.icon||"";g=w.g|0;sub=wdSlN(w.sl,0)}
   else if(it.vl){src=typeof vlSrc==="function"?vlSrc(k):"";g=typeof vlG==="function"?vlG(e):0;sub=it.kd||"Mạng che mặt"}
   else{const a=typeof itemArt==="function"?itemArt(k):null;if(a){src=a.src;src512=a.src512;g=a.grade|0}else if(typeof ITIMG==="object"&&ITIMG[k])src=`img/item-${ITIMG[k]}.webp`}
  }catch(err){}

@@ -73,7 +73,9 @@ const WD_LIST=[
  ["tram_dao","tram","Trâm gỗ đào",0,0,"nau",{sac:1}],["tram_dong","tram","Trâm đồng mai hoa",0,0,"vang",{sac:1}],
  ["tramngoc","tram","Trâm ngọc bích",1,0,"xanh",{sac:2}],["tram_hoalua","tram","Trâm hoa lụa",1,0,"hong",{sac:2}],
  ["tram_ngoclan","tram","Trâm bạc ngọc lan",2,1,"trang",{sac:2}],["thoa_diep","tram","Thoa bạc song điệp",2,1,"trang",{sac:3}],
- ["tram_hong","tram","Trâm thạch anh hồng",3,1,"hong",{sac:3}],["hoadien_bac","tram","Hoa điền bạc khảm lưu ly",3,2,"lam",{sac:3,danh:1}],
+ ["tram_hong","tram","Trâm thạch anh hồng",3,1,"hong",{sac:3}],["hd_mai","hd","Hoa điền mai trắng",1,0,"trang",{}],["hd_dao","hd","Hoa điền hoa đào",2,0,"hong",{}],["hoadien_bac","hd","Hoa điền bạc khảm lưu ly",3,2,"lam",{}],
+ ["hd_diep","hd","Hoa điền hồ điệp",4,2,"lam",{}],["hd_lan","hd","Hoa điền lá lan phỉ thúy",5,2,"xanh",{}],["hd_sen","hd","Hoa điền liên hoa hồng ngọc",6,2,"hong",{}],
+ ["hd_maudon","hd","Hoa điền mẫu đơn điểm thúy",7,3,"do",{}],["hd_phuong","hd","Hoa điền kim phượng",8,3,"vang",{}],
  ["thoa_vang","tram","Thoa vàng hồ điệp",4,2,"vang",{sac:4,danh:1}],["tram_phithuy","tram","Trâm phỉ thúy hải đường",4,1,"xanh",{sac:4,danh:1}],
  ["boodieu","tram","Bộ diêu vàng",5,2,"vang",{sac:5,danh:2}],["dientu_thuy","tram","Điền tử điểm thúy",5,2,"lam",{sac:5,danh:2}],
  ["bd_phuong","tram","Bộ diêu kim phượng ngậm châu",6,3,"vang",{sac:6,danh:3}],["tram_maudon","tram","Trâm hồng ngọc mẫu đơn",6,2,"do",{sac:6,danh:2}],
@@ -93,10 +95,14 @@ const WD_LIST=[
  ["nt_longchon","y","Áo lông chồn ngự tứ",5,4,"nau",{sac:5,danh:3}],["nt_bachhoa","y","Cát phục «Bách hoa» ngự tứ",6,4,"hong",{sac:6,danh:4}],["nt_hocuu","y","Hồ cừu trắng ngự tứ",7,4,"trang",{sac:7,danh:5}],
  ["y_tang","y","Áo tang vải trắng",0,0,"trang",{},"mặc trong quốc tang"]];
 const WD_ITEMS={};
+/* hoa-dien (OD 17/11 ~17:30Z/~17:45Z real): ONE item table, three kinds. sl "hd" = a hoa điền (forehead ornament): never worn through the wardrobe,
+   it is PLACED during makeup (jhd). WD_SLN[sl] = [kind name, wear verb, slot name, verb lower] for every display that names a WD slot. */
+const WD_SLN={tram:["Trâm cài","Cài","Cài tóc","cài"],y:["Y phục","Mặc","Y phục","mặc"],hd:["Hoa điền","Dán","Trán","dán khi điểm trang"]};
+function wdSlN(sl,i){return (WD_SLN[sl]||WD_SLN.y)[i|0]}
 (function(){for(const [k,sl,n,P,g,col,w,note] of WD_LIST){const it={k,sl,n,P,g,col,w,nt:g===4?1:0,pr:g===4?0:WD_PR[P],icon:`img/wd-${k.replace(/_/g,"-")}.webp`,note:note||""};WD_ITEMS[k]=it;
-  const d=`${sl==="tram"?"Cài tóc":"Mặc"}: ${Object.keys(w).length?plainFx(w):"giản dị"} · ${WD_GRADE[g]}${it.nt?" · chỉ có khi được ban, không bán, không tặng":""}${note?" · "+note:""}`;
+  const d=`${sl==="hd"?"Dán trán khi điểm trang: đặt khéo thì dung nhan thêm phần":`${sl==="tram"?"Cài tóc":"Mặc"}: ${Object.keys(w).length?plainFx(w):"giản dị"}`} · ${WD_GRADE[g]}${it.nt?" · chỉ có khi được ban, không bán, không tặng":""}${note?" · "+note:""}`;
   /* register in the chest's IT table; keep old fields of the three old hair items (tramngoc, boodieu, tramphuong) but hide their rank hint */
-  IT[k]=Object.assign(IT[k]||{tg:sl==="tram"?["hh","rv"]:["rv"]},{n,kd:sl==="tram"?"Trâm cài":"Y phục",d,pr:it.pr,wsl:sl,wd:1});if(it.nt){IT[k].keep=1;IT[k].tg=[]}
+  IT[k]=Object.assign(IT[k]||{tg:sl==="y"?["rv"]:["hh","rv"]},{n,kd:wdSlN(sl,0),d,pr:it.pr,wsl:sl,wd:1});if(it.nt){IT[k].keep=1;IT[k].tg=[]}
   if(itm(k).sl==="hair")delete IT[k].sl}})();
 function plainFx(o){return Object.entries(o||{}).filter(([k,v])=>v&&NAMES[k]).map(([k,v])=>`${NAMES[k]} ${v>0?"+":""}${v}`).join(", ")}
 /* old ngự-ban things are ngự tứ too */
@@ -145,9 +151,9 @@ function wdSlots(p){const w=wdOf(p);const lab=wdKnownStatus(p);return ["tram","y
 window.wdSlots=wdSlots;window.WD=WD;window.WD_ITEMS=WD_ITEMS;
 
 /* ---------- putting things on: the same rules for everyone ---------- */
-function wdWearEntry(p,e){const it=wdItem(e);if(!it)return"";const w=wdOf(p);const old=w[it.sl];if(old&&old.from!=="base"){p.inv=p.inv||[];p.inv.push(old)}w[it.sl]=e;return it.n}
+function wdWearEntry(p,e){const it=wdItem(e);if(!it||it.sl==="hd")return"";const w=wdOf(p);const old=w[it.sl];if(old&&old.from!=="base"){p.inv=p.inv||[];p.inv.push(old)}w[it.sl]=e;return it.n}
 function wdTakeOff(p,sl){const w=wdOf(p);const e=w[sl];if(!e)return;if(e.from!=="base"){p.inv=p.inv||[];p.inv.push(e)}w[sl]=null}
-function wdWear(p,ix){const e=p.inv&&p.inv[ix];if(!e||e.h||!wdItem(e))return"";p.inv.splice(ix,1);delete e.w;return wdWearEntry(p,e)}
+function wdWear(p,ix){const e=p.inv&&p.inv[ix];if(!e||e.h||!wdItem(e)||wdItem(e).sl==="hd")return"";p.inv.splice(ix,1);delete e.w;return wdWearEntry(p,e)}
 /* what someone BELIEVES an item's P is: true if known, else a fixed hidden noise per item kind (per person) */
 function wdBelP(p,k){const it=WD_ITEMS[k];if(!it)return 0;if(p===S?wdKnowsItem(k):((p.wdk||{})[k]))return it.P;
  const n=WD.autoErr[wdHash(wdKey(p)+k)%WD.autoErr.length];return it.P+n}
