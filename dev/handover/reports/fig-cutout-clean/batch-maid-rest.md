@@ -99,3 +99,11 @@ maid-m06-tm2-a18	P3uYMc842C	ok U
 maid-m06-tm3-a18	LwoN232swO	ok U LOOKALIKE (layered outer robe) redo after anchor
 maid-m06-tm4-a18	TdUhuCkVNR	ok U
 maid-m07-a18	LwoN2ZGswO	ok U
+maid-m07-cold-a18	YMs8uCpWeC	ok U
+maid-m07-kc-a18	SymR0cNUb8	ok U
+maid-m07-ngheo-a18	SymR00PUb8	ok U
+maid-m07-t1-a18	nVLoEutYQD	ok U
+maid-m07-t2-a18	LwoNnWYswO	ok U
+maid-m07-t3-a18	SymR0MNUb8	ok U
+maid-m07-t4-a18	fHGxJ4qCDY	ok U
+maid-m07-t5-a18	cpgtFKt0eP	ok U
