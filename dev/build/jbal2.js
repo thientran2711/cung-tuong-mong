@@ -399,6 +399,9 @@ BAL.dh={n0:[1,5,10],step:2,artLv:[3,4,5],
    kh      khắc a deed takes (the player's talk / deck act: 1)
    wit     witness (AG1b): hear/mat = odds base and per Tai mắt level of "Nghe lén" (the player's Nghe lén câu chuyện, j2/j9);
            caught = thiện cảm lost toward the listener when a listener is caught; hoD = hostility that makes an NPC as keen to listen as w.hear; w = NPC reaction weights {hear, join, ignore}
+   vent    r1 fault 8: a spite deed (provoke / humil / gossip / flaunt) closes her spite need by its own gain (BAL.tw.g spite points, unit
+           points = one whole need) toward that target ("*" = everyone); fade = points of that memory lost per tuần (1: a provoke, 15
+           points, keeps her spite toward that person closed ~5 tuần and back in full after 15)
    perf    p95 budget in ms per slice of the buổi tick (one frame's work, Fold 755x1000), n = how many slices the counter keeps,
            slice = ms of deciding in one frame before the other consorts wait for the next frame / resync of the same buổi */
 Object.assign(BAL,{ag:{on:1,
@@ -415,6 +418,7 @@ Object.assign(BAL,{ag:{on:1,
  val:{tablet:2,kid:10,check:4,drop:3},
  costW:1,costCap:.9,costMin:.05,kh:1,
  wit:{hear:40,mat:6,caught:5,hoD:50,w:{hear:1,join:1,ignore:3}},
+ vent:{fade:1},
  perf:{p95:8,n:200,slice:3}}});
 
 /* BAL.mind — jmind (one mind for every person, review/npc-mind; moved here from jmind.js, r1 fault 3 ONE CORE)
