@@ -709,11 +709,8 @@
 | one-core-arcs r2 PASS review/one-core-arcs-r2v 6b2ab41b (= 2831e112 + reviewer: 6 typed merit amounts in j67 → BAL.arc g, stronger proof stubs, nomut check, stray _old.html removed) → FOR MAIN after dup2-r2 (then roads-r1); report reports/review-one-core-arcs-r2.md | review/one-core-arcs-r2v | B | session_01N1tNP5234t4p9HE1eAvTYL | PASS | 17/11 09:27Z |
 | one-core-arcs r2 PASS review/one-core-arcs-r2v 6b2ab41b → FOR MAIN (after dup2-r2 069188d7; before roads-r1 75bc9f05) | review/one-core-arcs-r2v | B | session_01N1tNP5234t4p9HE1eAvTYL | PASS (archived) | 17/11 09:29Z |
 | one-core-dup3 LEFTOVERS wave (opus; typed amounts the guard froze: road e67heir/amt sites, evA/evStory, j96 adj96 heat, maid/kid amounts, jroute rtCard khắc, jlost LO.act, jkc, e67merit/e67srvUp/srvMerit kinds, bind same-option swap) | review/one-core-dup3 | B | session_01N1tNP4sLwCuvMxzEYnptps | SẴN SÀNG KIỂM b9f8d5cf | 17/11 09:29Z |
-<<<<<<< HEAD
 | origin-bd-branch SẴN SÀNG KIỂM 24c23752 → review r1 (opus BIG; brief briefs/review-origin-bd-branch-r1.md) | review/origin-bd-branch-r1 | B | session_01N1tNP3r4Wz5SfLPnQXnXnJ | PASS 4e50e6ea | 17/11 09:50Z |
-=======
 | origin-bd-branch SẴN SÀNG KIỂM 24c23752 → review r1 (opus BIG; brief briefs/review-origin-bd-branch-r1.md) | review/origin-bd-branch-r1 | B | session_01N1tNP3r4Wz5SfLPnQXnXnJ | RUNNING | 17/11 09:50Z |
->>>>>>> 61f334cd (review kit-ico-rank-r2 report: PASS aaa1bec1)
 | staff-root r1 PASS review/staff-root-r1 1abbf075 → FOR MAIN | review/staff-root-r1 | B | session_01N1tNP5HB9qHe8rHrMv1JDw | PASS (archived) | 17/11 10:04Z |
 | one-core-dup3 SẴN SÀNG KIỂM b9f8d5cf (= main 9391f9a9 + dup2-r2 + arcs-r2v + roads-r1 + leftovers; ONE landing branch) → review r1 (opus BIG; brief briefs/review-one-core-dup3-r1.md) | review/one-core-dup3-r1 | B | session_01N1tNP3isvTeoV44r7whdk6 | FAIL 2 (evidence-count texts still typed ×~76 + one-core-text gap; merge/leftovers/wording/SWAP PASS; base for the fix = review/one-core-dup3-r1 607887ae, main 7e264081 merged) — reports/review-one-core-dup3-r1.md | 17/11 10:56Z |
 | coop-thin-b r2 FAIL be599e1e (1 item: B‖D seam, D work on HELD rolled store; probe R7/R7c on review/coop-thin-b-r2 e7c7f16b; CAP 4 = no until fixed) → fix worker #4 (opus; brief briefs/coop-thin-b-4.md) | review/coop-thin-b | B | session_01N1tNP3jpUPBE4NGtW7DxC2 | SẴN SÀNG KIỂM 4609afa6 (R7 9/9 DFLAG=1, 5/5 CAP=4 L4; report coop-thin-b.md ## r2 FIX) | 17/11 10:22Z |
@@ -762,35 +759,25 @@
 | MAID CONSORT-TIER REDRAW W4f (successor of W4e; a36 m22 + a51 m01-m26; opened by lead #7) | review/fig-cutout-clean | C | session_011xDdVSvgMHhWjrFtf6Qv8J | RUNNING | 17/11 11:48Z |
 | REVIEW voice-trait-r1 (opus BIG) of e134694 | review/voice-trait-r1 | C ROOT-6 | session_011xDdVNmiymzf41EueV5zCn | PASS d0a839e8 → main (archived) | 17/11 12:41Z |
 | REVIEW map-me-mark r1 of b62bd85f | review/map-me-mark-r1 | MAIN s31 | session_01UV1SzkrhfnKSSwFEpGBcVS | PASS a86ea58c | 17/11 12:52Z |
-<<<<<<< HEAD
 | REVIEW toil-looks2 r1-r5 (opus BIG) of 43b9a8b64 + looks3/4 v5-v9 | review/toil-looks2-r5 | MAIN s33 | session_01UV1Szhz851NPoNbAv8MGF7 | PASS 97f57862 (FF; land THIS sha, not review/toil-looks2; CDN mk-fit c01-c32 + player-look1-4 + toil-fit2.json before live; owner OK on ?v=9 pending) | 17/11 15:50Z |
-=======
 | REVIEW toil-looks2 r1+r2+r3 (opus BIG) of 43b9a8b64 + looks3 v5/v7 | review/toil-looks2-r3 | MAIN s32 | session_01UV1Szhz851NPoNbAv8MGF7 | PASS 619edd87 (FF; contains makeup-theme-r1; CDN mk-fit c01-c32 + player-look1-4 + toil-fit2.json before live; owner OK on ?v=7 pending) | 17/11 15:05Z |
->>>>>>> 61f334cd (review kit-ico-rank-r2 report: PASS aaa1bec1)
 | morechip-corners: '+N' chip bigger, bottom-left/right (owner 13:02Z) on top of morechip-fix-r1 3bed78e3 | review/morechip-corners | MAIN s31 | session_01UV1SzgitG1nAF1r7wZK2wd | PASS a66f274c (review r1) | 17/11 12:55Z |
 | toil-looks3: Khuynh thành redraw, streaks→Vụng về, Đoan trang≠Kiều diễm, Diêm dúa lips (owner 13:05Z) on review/toil-looks2 | review/toil-looks2 | MAIN s31 | session_01UV1Szgv5xtMpkNRXeojDX5 | RUNNING | 17/11 12:59Z |
 | REVIEW opt-pic-same r2 of 42d52109 (+ 412/390 tall person cards) | review/opt-pic-same-r2 | MAIN s31 | session_01UV1SzioDmB4Xjzd2Wg26k4 | FAIL 9b2f7821 (412/390 narrow T3: new kit job; 755/1180/1366 PASS) | 17/11 13:01Z |
 | map-portrait: portrait Dư đồ cards row above/below, map zoomed, weather sky (owner 13:12Z) on top of map-me-mark-r1 a86ea58c (HELD from batch) | review/map-portrait | MAIN s31 | session_01UV1SzgdgEdCimFsVYDscwL | SẴN SÀNG KIỂM 6fce1585 | 17/11 13:04Z |
-<<<<<<< HEAD
 | one-core-dup3 LAND (opus; PASS 3213abc8 + merge main 6ca04148+ (trial cd2810ff) + move batch-d8's 70 typed numbers into BAL + go-live prep; brief briefs/one-core-dup3-land.md) | review/one-core-dup3-land | B | session_01N1tNP33c2NR3dwmam25S4X | READY FF ce29592e1 (5507baafa delta PASS + main abe056c3 merged; 70 batch-d8 numbers + jkc2 extra finds + jstaff into BAL; guard 4708→4693 + kinds odb/hst/oan; all gates PASS; golive.sh without --yes OK; report reports/one-core-dup3-land.md) | 17/11 13:15Z |
 | AG-ALL (opus; main s31 13:21Z, replaces AG4/AG5/AG6 + folds AG-HAP 13:16Z): every NPC group picks from the SAME full act list as the player of that group; step 1 = reports/ag-all.md gap table | review/ag-all | C-AG | A session_01UV1SzjsTYMFvr4Rvhpd1tt + B session_01UV1Szio6ph5nMv1N4uX7FT + C session_01UV1SzjnrxRYSHsNC5qitMs | RUNNING | 17/11 13:14Z |
 | WORLD EVENTS: window layer + all 11 (opus; owner OD 13:48Z via main s31; brief briefs/world-events.md) | review/world-events | C-AG | session_01UV1SzgiXvVVqaBb1b4oYFK | LIVE main abe056c3 (archived) | 17/11 13:22Z |
-=======
 | one-core-dup3 LAND (opus; PASS 3213abc8 + merge main 6ca04148+ (trial cd2810ff) + move batch-d8's 70 typed numbers into BAL + go-live prep; brief briefs/one-core-dup3-land.md) | review/one-core-dup3-land | B | session_01N1tNP33c2NR3dwmam25S4X | READY FF 5507baafa (main 25bfd7cf merged; 70 batch-d8 numbers + jkc2 extra finds + jstaff into BAL; guard 4708→4693 + kinds odb/hst/oan; all gates PASS; golive.sh without --yes OK; report reports/one-core-dup3-land.md) | 17/11 13:15Z |
-| AG-ALL (opus; main s31 13:21Z, replaces AG4/AG5/AG6 + folds AG-HAP 13:16Z): every NPC group picks from the SAME full act list as the player of that group; step 1 = reports/ag-all.md gap table | review/ag-all | C-AG | A session_01UV1SzjsTYMFvr4Rvhpd1tt + B session_01UV1Szio6ph5nMv1N4uX7FT + C session_01UV1SzjnrxRYSHsNC5qitMs | RUNNING | 17/11 13:14Z |
 | WORLD EVENTS: window layer + all 11 (opus; owner OD 13:48Z via main s31; brief briefs/world-events.md) | review/world-events | C-AG | session_01UV1SzgiXvVVqaBb1b4oYFK | RUNNING | 17/11 13:22Z |
->>>>>>> 61f334cd (review kit-ico-rank-r2 report: PASS aaa1bec1)
 | WORLD EVENTS research batch 2 (sonnet expert, OD:L1327) | dev/research/world-events-2.md | C-AG | session_01UV1SzgePPmEtCBw9hECcZR | RUNNING | 17/11 13:22Z |
 | narrow-T3 kit: 412/390 T3 narrow mode + 1-col cards + dup option list (from opt-pic-same-r2 review item 1) | review/narrow-t3 | MAIN s31 | session_01UV1SzgsQDt2y7LHaYSDb8g | SẴN SÀNG KIỂM aa1a3387 (report reports/narrow-t3.md) | 17/11 13:22Z |
 | BATCH s31a builder (opus): presentation-wiring-r1 + fig-headtop-r1 IN; kit-ico-rank HELD (co-op rebirth 61/63); report reports/batch-s31a.md; ROLLED OVER | review/batch-s31a | MAIN s31 | session_01UV1SziPrputLM5qYtCL6zH | BATCH READY c29866a6 | 17/11 14:30Z |
 | BATCH s31a LIVE: main = c29866a6 (FF from 6ca04148 by MAIN s31 after LOOK; presentation-wiring-r1 + fig-headtop-r1; kit-ico-rank HELD co-op rebirth) | main | MAIN s31 | session_01UV1SzhZw2hHEAf6bi644Jn | LIVE | 17/11 13:27Z |
 | BATCH builder s31b (opus): fig-tag-chip-r1, morechip-fix-r1, kit-rcol-top-r1, stage-caption-r1, learn-scene-fix, opt-pic-same-r2 (+morechip-corners-r1 on PASS) + KPM_LOG clear | review/batch-s31b | MAIN s31 | session_01UV1SzhfMi68Cmn88G2Yqze | RUNNING | 17/11 13:24Z |
 | kit-ico-rank r2: co-op end card goes straight to rebirth (no Xem Bảng vàng in co-op; mode coop fix) → SẴN SÀNG KIỂM d0840f4e; coop-e2e LIVE 63/63 ×2 | review/kit-ico-rank-r2 | MAIN s32 | session_01UV1Szi6oANLyE5bWQnjMQv | READY | 17/11 14:20Z |
-<<<<<<< HEAD
 | morechip-sil: '+N' chip = grey neutral silhouette icon + number (OD 14:05Z; main draws) on top of morechip-corners-r1 a66f274c | review/morechip-sil | MAIN s32 | session_01UV1Szi57hvzWiNmX4GRXYk | SẴN SÀNG KIỂM c4cff1fc (r4; report dev/handover/reports/morechip-sil.md) | 17/11 14:20Z |
-=======
 | morechip-sil: '+N' chip = grey neutral silhouette icon + number (OD 14:05Z; main draws) on top of morechip-corners-r1 a66f274c | review/morechip-sil | MAIN s32 | session_01UV1Szi57hvzWiNmX4GRXYk | SẴN SÀNG KIỂM bd3bb284 (report dev/handover/reports/morechip-sil.md) | 17/11 14:20Z |
->>>>>>> 61f334cd (review kit-ico-rank-r2 report: PASS aaa1bec1)
 | REVIEW map-portrait r1 of c34e99e3 (SMALL UI; '!' bright-yellow check) | review/map-portrait-r1 | MAIN s32 | session_01UV1SzjXidWjrysZBq2qz2c | RUNNING | 17/11 13:31Z |
 | REVIEW tuanluc-sync r1 of c70fb3973 (opus BIG; + remove TA TUẦN QUA chips per OD L1458(3)) | review/tuanluc-sync-r1 | MAIN s32 | session_01UV1Szm7QwzuJJuvFXUbJdi | PASS 4156a49d0 (report reports/review-tuanluc-sync-r1.md; TA TUẦN QUA chips + whole number family removed) | 17/11 ~15:30Z |
 | person-leftcol #3 (rebuilt from spec: iPad fit + sizes; ksz3/kdper left for main to decide) | review/person-leftcol | MAIN s32 | session_01UV1SzgmaEVQSFzUscM5dKD | READY FOR REVIEW (see report) | 17/11 |
@@ -803,7 +790,6 @@
 | coop-thin part C worker #2 (successor at 72d7768c; opus; brief briefs/coop-thin-c-2.md) | review/coop-thin-c | B | session_01N1tNP6EZvNuroq8VSupxw7 | RUNNING | 17/11 14:03Z |
 | person-leftcol-r1 PASS e06e38a1 → builder batch s32a; worker #3 + reviewer archived | review/person-leftcol-r1 | MAIN s32 | session_01UV1SzhfMi68Cmn88G2Yqze | PASS → BATCH | 17/11 14:08Z |
 | tuanluc-sync-r1 PASS 4156a49d0 (TA TUẦN QUA chips + 42 numbers removed) → builder batch s32a; reviewer archived | review/tuanluc-sync-r1 | MAIN s32 | session_01UV1SzhfMi68Cmn88G2Yqze | PASS → BATCH | 17/11 14:13Z |
-<<<<<<< HEAD
 | REVIEW world-events r1 (opus BIG) of 34520347 | review/world-events-r1 | C-AG | session_01UV1SzghsExH1c11ENnDH6Q | PASS abe056c3 → LIVE main 15:00Z (archived) | 17/11 14:22Z |
 | WORLD EVENTS part 2 — 18 events of world-events-2.md (opus) | review/world-events-2 | C-AG | session_01UV1Szm9sHk4A9qggdUgHhF | RUNNING | 17/11 14:22Z |
 | REVIEW one-core-dup3-land delta (3213abc8 → 5507baafa; opus; brief briefs/review-one-core-dup3-land.md) | review/one-core-dup3-land-r1 | B | session_01N1tNP4w2TLPYNZz2SH8hxL | PASS review/one-core-dup3-land 5507baafa (no fix; merge token-checked, moved numbers value-identical, guard odb/hst/oan only shrink, all gates green; FINDING jkc kap help 60/85 vs rules 40/90 → follow-up wave; report reports/review-one-core-dup3-land.md) | 17/11 14:55Z |
@@ -828,14 +814,11 @@
 | pcard-facts-r1 PASS d5f1abb2 → builder batch s32a; reviewer archived (main LOOKED Fold popup + iPad) | review/pcard-facts-r1 | MAIN s33 | session_01UV1SzhfMi68Cmn88G2Yqze | PASS → BATCH | 17/11 15:24Z |
 | pcard-facts-2: Thích/Ghét popup date via kpDateText + iPad left block Ghét clip (reviewer notes) on d5f1abb2 | review/pcard-facts-2 | MAIN s33 | session_01UV1Szh5bDFLJ7XCmCJoDvp | RUNNING | 17/11 15:24Z |
 | mg-snap-r1 LIVE 2de320ac (main ce29592e → 2de320ac; rollback ce29592e) | review/land-mg-snap-r1 | B | session_01N1tNP6NHm7FrTkoTUSGnpa | LIVE | 17/11 15:24Z |
-=======
 | REVIEW world-events r1 (opus BIG) of 34520347 | review/world-events-r1 | C-AG | session_01UV1SzghsExH1c11ENnDH6Q | RUNNING | 17/11 14:22Z |
-| WORLD EVENTS part 2 — 18 events of world-events-2.md (opus) | review/world-events-2 | C-AG | session_01UV1Szm9sHk4A9qggdUgHhF | RUNNING | 17/11 14:22Z |
 | REVIEW one-core-dup3-land delta (3213abc8 → 5507baafa; opus; brief briefs/review-one-core-dup3-land.md) | review/one-core-dup3-land-r1 | B | session_01N1tNP4w2TLPYNZz2SH8hxL | RUNNING | 17/11 14:28Z |
 | REVIEW ag-all r1 (opus BIG) of 8f7bdd329 | review/ag-all-r1 | C-AG | session_01UV1SzjBGppSaBv9NaJqrr3 | RUNNING | 17/11 14:27Z |
 | AG-ALL-2 remaining NPC acts (opus; brief briefs/ag-all-2.md) | review/ag-all-2 | C-AG | session_01UV1Szhs6A6KH6MfsDpei7t | RUNNING | 17/11 14:28Z |
 | staff-root fix #1 (returned maid cut by capTrim; opus; brief briefs/staff-root-fix-1.md) | review/staff-root-fix-1 | B | session_01N1tNP4tMiPQEh5DXeZP29x | RUNNING | 17/11 14:40Z |
->>>>>>> 61f334cd (review kit-ico-rank-r2 report: PASS aaa1bec1)
 | loading-words: every loading/wait line literary cổ trang (OD ~15:25Z (7)), whole family | review/loading-words | MAIN s33 | session_01UV1SzkaNQaeHGcLrqFrzzQ | READY 0b9829a8f (quickcheck PASS; report reports/loading-words.md) | 17/11 15:28Z |
 | REVIEW morechip-sil r2 PASS 4821b39d (count math + name plaque fixed) — waits for round 4 icon gaps, then icon-delta re-check → batch | review/morechip-sil-r2 | MAIN s33 | session_01UV1SzmEh1P3ynxAm3BMz7L | PASS (icon delta pending) | 17/11 15:27Z |
 | tinbao-ui: TIN BÁO top-bar badge + gold toast + kit card on C-AG API (OD ~14:50Z (2)) | review/tinbao-ui | MAIN s33 | session_01UV1Szjhrq5VUWD5Haiagxz | RUNNING | 17/11 15:31Z |

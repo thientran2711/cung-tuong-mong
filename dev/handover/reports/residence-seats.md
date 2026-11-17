@@ -81,7 +81,6 @@ SẴN SÀNG KIỂM 020890d156548a6417c4c60e6be4a4c33752cc42
 
 ## WIP — successor #2 (17/11 10:05Z, START_CTX ≈ 4 %)
 Bot-page crash fixed (runner served no images → every <img> pending forever kept detached dialog trees alive, 3.5 M nodes); stuck lives fixed (bot tapped a kitOff option forever); fast bot mode. Commits f807c3c7, 7692fac2 on review/residence-seats. Mid-run (85 before / 81 after lives, ≤120 months each): Tần reach 94 → 98 /100 (the old 38/100 was an artefact of stuck short lives), harem max 18 → 20 (= cap), co-residents >2: 11 448 → 0, perf per buổi +1.4 %. Full run to 150/side running; final tables + quickcheck follow.
-<<<<<<< HEAD
 
 ## FINAL — successor #2 (17/11 14:55Z)
 
@@ -165,5 +164,3 @@ Confirmation run on f759ba30 (80 lives, ≤120 months, with a tracer that logs a
 - residence-seats.js (R1–R9b): PASS. residence-oldsave: PASS. seatcap-sim: no over-cap. one-core-guard: 0 fails.
 
 SẴN SÀNG KIỂM d88883dfcf9fc29700a4d2e45029a5146eb19801
-=======
->>>>>>> 61f334cd (review kit-ico-rank-r2 report: PASS aaa1bec1)

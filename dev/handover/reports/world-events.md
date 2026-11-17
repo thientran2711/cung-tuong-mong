@@ -101,7 +101,6 @@ SẴN SÀNG KIỂM 34520347 (review/world-events). Handover (if a successor is n
 
 ## 7. Interface for AG-ALL (sent 17/11 by send_message)
 `worldWin(k)`, `worldPlanW(p) → {place:{key:mult}, act:{TAG:mult}, force:[{b,pl,deed,why}], why}` (0 = closed place; AG-ALL accepted, ca94ddd4 on review/ag-all, sets WORLD_PLAN_HOOKED in jagday); mindW already multiplied; set `window.WORLD_PLAN_HOOKED=1` when the day plan multiplies its place weights by worldPlanW (my fallback pull then stops); Emperor away: `worldWin("away")`, followers `x.f` (ids, "me").
-<<<<<<< HEAD
 
 ## 8. PART 2 — batch 2 (dev/research/world-events-2.md, 18 events) on the same window layer
 
@@ -179,5 +178,3 @@ SẴN SÀNG KIỂM 22a0ae32 (review/world-events-2).
 - QUICKCHECK ee9f5396 (median of 5): PASS · old save ok · render 181/186 ms, tab 402/343, buổi 920/864 (+6 %, was +16 % at 22a0ae32 with median of 3), tasks>200ms 12/14 · core gates PASS. The tab number moves ±15 % between runs on this box (part 1 alone measured 345/334); no tab code was touched.
 
 SẴN SÀNG KIỂM ee9f5396 (review/world-events-2).
-=======
->>>>>>> 61f334cd (review kit-ico-rank-r2 report: PASS aaa1bec1)
