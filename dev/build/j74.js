@@ -39,8 +39,8 @@ st.textContent=`
 .kslot .kb>.kr>.krl{flex:0 0 auto}
 .kslot .kb .krv{min-width:0;overflow-wrap:normal;word-break:normal;text-wrap:pretty}
 .kslot>.kslot-a{grid-column:2}
-.kslot-a{display:flex;gap:8px;flex-wrap:nowrap;justify-content:stretch}
-.kslot-a .kbtn{flex:1 1 0;min-width:0;min-height:30px;padding:2px 10px;font-size:.84rem;white-space:normal}
+.kslot-a{display:flex;gap:6px 8px;flex-wrap:wrap;justify-content:stretch}
+.kslot-a .kbtn{flex:1 1 auto;min-width:min-content;min-height:30px;padding:2px 10px;font-size:.84rem;white-space:normal}
 .kslot-a .kbtn small{display:block;font-family:var(--body);font-weight:400;font-size:.7rem}
 /* Thiết lập: kit controls (KIT.md 28) */
 .optwrap .optbox.kctls{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:0 18px;justify-content:stretch;align-items:stretch;font-size:inherit;margin:0 0 6px}
