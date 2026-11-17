@@ -14,7 +14,7 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
  const r=await p.evaluate(async(NB)=>{const out={per:{},over:0,spanBad:0,spanN:0,rowBad:0,early:0,hapOver:0,see:{},more0:AGD.stat.more||0,kcHist:{},errs:[]};
   const lastLand={};const l0=agLand0;agLand0=function(pp){const k=agKh();if(pp.k1!=null&&k<=pp.k1&&!arguments[1]&&!pp.gone&&!pp.drop&&agRec()&&agRec().key===pp.key)out.early++;return l0.apply(this,arguments)};
   for(let i=0;i<NB;i++){placeWhere();agFlush();const R=agRec();const z=agZ();const key=agKey();const C={};
-   for(const pp of z.pend){if(pp.key!==key)continue;C[pp.id]=(C[pp.id]||0)+(pp.kc||1);out.kcHist[pp.kc||1]=(out.kcHist[pp.kc||1]||0)+1;
+   for(const pp of z.pend){if(pp.key!==key)continue;C[pp.id]=(C[pp.id]||0)+(pp.k1!=null?pp.k1-pp.kh+1:(pp.kc||1));/* 2d3: the khắc it holds IN this buổi (a deed that runs on holds the rest in the next one) */out.kcHist[pp.kc||1]=(out.kcHist[pp.kc||1]||0)+1;
     if(pp.k1!=null){out.spanN++;const want=Math.min(J95.KH-1,pp.kh+(pp.kc!=null?pp.kc:agKhC({k:pp.k},agDoer(pp)))-1);if(pp.k1>want)out.spanBad++;
      if(R&&R.P[pp.id])for(let q=pp.kh;q<=pp.k1;q++)if(!R.P[pp.id][q]||R.P[pp.id][q][0]!==pp.pl)out.rowBad++}}
    const nd={};for(const pp of z.pend)if(pp.key===key)nd[pp.id]=(nd[pp.id]||0)+1;for(const id in nd){const n=nd[id];out.per[n]=(out.per[n]||0)+1}
@@ -22,12 +22,14 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
    /* walk her clock through the buổi: the '!' list never holds a deed that is over */
    for(let k=0;k<J95.KH;k++){try{const L=haHapDeeds();for(const {p:pp} of L)if(agK1(pp)<agKh())out.hapOver++}catch(e){}if(k<J95.KH-1){try{spend(1);j95sync()}catch(e){}}}
    Q.length=0;S.mg=0;try{nextBuoi()}catch(e){out.nb=e.message}Q.length=0}
+  /* 2d3: a reaction is rare by design (~2 % of presences): keep living buổi until one is seen (bounded), so G9 is not a coin toss */
+  for(let i=0;i<400&&!Object.keys(AGD.stat.see||{}).length;i++){placeWhere();agFlush();for(let k=0;k<J95.KH-1;k++){try{spend(1);j95sync()}catch(e){}}Q.length=0;S.mg=0;try{nextBuoi()}catch(e){}Q.length=0}
   for(const a of (agRec()&&agRec().acts)||[])if(/^ag:see:/.test(a.k))out.see[a.k]=(out.see[a.k]||0)+1;
   out.more=(AGD.stat.more||0)-out.more0;out.seeS=AGD.stat.see||{};out.seeN=AGD.stat.seeN||0;out.witNpc=AG.stat.witNpc;
   /* 4 one source */
   out.cost={talk:BAL.time.cost.talk,harm:BAL.time.cost.harm,};
   /* 5 G12 */
-  try{const L=liveRivals(true).filter(x=>x.alive&&!x.out);const q=L[0],v=L[1];q.bac=999;S.bac=999;let hv=v.hh||0;const st=[];Object.defineProperty(v,"hh",{get(){return hv},set(x){st.push([x-hv,new Error().stack.split("\n").slice(2,4).join("|").slice(0,300)]);hv=x},configurable:true,enumerable:true});const h0=v.hh||0,a0=aff(v,q);hhAct(q,v,"reward");out.g12st=st.slice();const dN={hh:(v.hh||0)-h0,aff:aff(v,q)-a0};
+  try{const L=liveRivals(true).filter(x=>x.alive&&!x.out);const q=L[0],v=L[1];q.bac=999;S.bac=999;let hv=50;/* 2d3: away from the 0..100 clamp (a v near 100 made G12 a coin toss) */const st=[];Object.defineProperty(v,"hh",{get(){return hv},set(x){st.push([x-hv,new Error().stack.split("\n").slice(2,4).join("|").slice(0,300)]);hv=x},configurable:true,enumerable:true});const h0=v.hh||0,a0=aff(v,q);hhAct(q,v,"reward");out.g12st=st.slice();const dN={hh:(v.hh||0)-h0,aff:aff(v,q)-a0};
    const h1=v.hh||0,a1=aff(v,S);hhAct(S,v,"reward");const dP={hh:(v.hh||0)-h1,aff:aff(v,S)-a1};out.g12={npc:dN,me:dP,exp:BAL.tw.g.reward[1]}}catch(e){out.g12={e:e.message}}
   /* 6 off switch */
   BAL.ag.kh2.on=0;let multi=0;for(let i=0;i<4;i++){placeWhere();agFlush();const z=agZ(),key=agKey();const nd={};for(const pp of z.pend)if(pp.key===key&&pp.vid!=null)nd[pp.id]=(nd[pp.id]||0)+1;for(const id in nd)if(nd[id]>1)multi++;Q.length=0;S.mg=0;try{nextBuoi()}catch(e){}Q.length=0}

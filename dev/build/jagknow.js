@@ -46,7 +46,7 @@ function knSid(s,m){return s.sid!=null?String(s.sid):"cm"+knId(m)}
 /* ---------- a happening: id, window, people ---------- */
 function knHid(h){let b="";try{b=bkey()}catch(e){}return b+":"+h.k+":"+h.id+":"+(h.x&&h.x.pid||"")}
 function knPend(h){try{return h.x&&h.x.pid&&typeof haPend==="function"?haPend(h.x):null}catch(e){return null}}
-function knWin(h){const kh=agKh(),KH=J95.KH;const p=knPend(h);if(p)return (h.w0=[p.kh,p.k1!=null?p.k1:p.kh]);
+function knWin(h){const kh=agKh(),KH=J95.KH;const p=knPend(h);if(p)return (h.w0=[p.kh,(p.k1!=null?p.k1:p.kh)+(p.sp>0?p.sp:0)]);/* runs on into the next buổi: its real end (day-khắc audit) */
  if(h.id==="emp"){try{const R=agRec();if(R&&R.P.emp){let a=-1,b=-1;for(let k=kh;k<KH;k++)if(R.P.emp[k]&&R.P.emp[k][0]==="vuon"){if(a<0)a=k;b=k}if(a>=0)return (h.w0=[h.w0?Math.min(h.w0[0],a):a,b])}}catch(e){}}
  /* AG-ALL-2d2: a deed that has landed (no pending row any more) / the Emperor gone from the garden keeps the window it had: it is OVER, not "now" */
  if(h.w0&&!knFixed(h))return h.w0;
@@ -138,7 +138,7 @@ function tinBaoList(){if(!knOn()||!S||S.dead||S.out)return[];let L=[];try{L=adHa
    its list already (agSpan carry). */
 function knCarryOut(){if(!knOn()||!S||S.dead||S.out)return 0;const D=knRelay();if(!D)return 0;let L=[];try{adHapNow();L=KN.raw||[]}catch(e){return 0}
  const T=knTb();const KH=J95.KH,real=agKh;const C=[];
- for(const h of L){if(!h||h.done||knFixed(h))continue;const hid=knHid(h);if(T.K[hid])continue;const w=knWin(h);if(!w||w[1]+D<KH)continue;/* its news could not come inside this buổi */
+ for(const h of L){if(!h||h.done||knFixed(h))continue;const hid=knHid(h);if(T.K[hid])continue;const w=knWin(h);if(!w||w[1]+D<KH||w[1]>=KH)continue;/* runs on: in the next buổi list already *//* its news could not come inside this buổi */
   let r=null;agKh=()=>Math.max(real(),w[1])+D;try{r=knFor(S,h)}catch(e){agErr("knCarry",e)}finally{agKh=real}
   if(!r)continue;const it={id:hid+":c",k:h.id,place:h.k,k0:0,k1:0,who:knWho(h),line:knLine(r,h),by:r.by,inf:knInf(r),infName:knInfName(r),seen:0,ended:0,carry:1};C.push(it)}
  S.tb.C=C;KN.stat.carry=(KN.stat.carry||0)+C.length;return C.length}

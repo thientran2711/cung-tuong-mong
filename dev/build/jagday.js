@@ -267,7 +267,7 @@ function agRdOn(){try{return agKhOn()&&BAL.ag.kh2.rd&&BAL.ag.kh2.rd.on}catch(e){
 function agRdLog(R,id,kh,k,t,why,pl){try{const L=R.acts=R.acts||[];L.push({id,kh,k,t,why,ok:1,ag:1,pl});if(L.length>60)L.shift()}catch(e){}}
 /* she heard: info = {pl, kh, who (the person it is about), why, by (the servant who told her)} */
 function agHeard(v,info){if(!agRdOn()||!v||v===S||typeof v!=="object"||!v.alive||v.out||v.confined||!info)return 0;const R=agRec();const id="v"+v.id;if(!R||!R.P[id])return 0;
- const B=BAL.ag.kh2.rd;const k0=info.kh!=null?info.kh:agKh();if(k0>=J95.KH-1)return 0;AGD.rdC=AGD.rdC||{};AGD.rdC[R.key+":"+k0]=(AGD.rdC[R.key+":"+k0]||0)+1;let N;try{N=agNeedsC(v)}catch(e){return 0}
+ const B=BAL.ag.kh2.rd;const k0=info.kh!=null?info.kh:agKh();if(j76left(S.buoi||0,k0+1)<1)return 0;/* the day has no khắc left (a deed must still START inside this buổi: agFitDay) */AGD.rdC=AGD.rdC||{};AGD.rdC[R.key+":"+k0]=(AGD.rdC[R.key+":"+k0]||0)+1;let N;try{N=agNeedsC(v)}catch(e){return 0}
  let O=[];try{O=agOptsG(v,N,null).filter(o=>!info.who||o.t===info.who)}catch(e){agdErr("rdOpts",e)}
  AGD.stat.rdN=(AGD.stat.rdN||0)+1;
  const c=mindPick([["keep",B.keep*BAL.ag.routine]].concat(O.map(o=>[o,o.u])),v);
@@ -290,7 +290,7 @@ function agTell(R,pl,kh,why,who,interest){const B=BAL.ag.kh2.rd;let n=0;
  for(const id in R.P){if(!/^s\d+$/.test(id))continue;const e=R.P[id][kh];if(!e||e[0]!==pl)continue;const s=servById(+id.slice(1));if(!s||s.out)continue;const m=ownerOf(s);
   if(!m||m===S||m===who||!m.alive||m.out)continue;const it=interest?interest(m):1;if(!(it>0))continue;
   const c=mindPick([["tell",B.tell*cl((s.loyal||0)/100,0,1)*it],["quiet",B.quiet]],s);if(c!=="tell")continue;
-  const kg=kh+B.see,due=kg+B.go;/* OD L1638: she sees at once, reacts the NEXT khắc (her khắc spent going to her master), he hears at the start of the khắc after */
+  let kg=kh+B.see;while(kg<J95.KH&&R.P[id][kg]&&!agKhFree(R,id,kg))kg++;/* busy with her own deed (or not hers): she goes when free, never over a deed row (ag-kh2 G9) */const due=kg+B.go;/* OD L1638: she sees at once, reacts the NEXT khắc (her khắc spent going to her master), he hears at the start of the khắc after */
   if(kg<J95.KH&&R.P[id][kg]&&R.P[id][kg][1]!=="tryst"&&R.P[id][kg][1]!=="meet"){let mp=null;try{mp=R.P["v"+m.id]&&R.P["v"+m.id][kg]?R.P["v"+m.id][kg][0]:palaceOf(m)}catch(e){}R.P[id][kg]=[mp||palaceOf(m),"ag_tell",ledgerId(m),why]}
   agRdLog(R,id,kh,"ag:tell",ledgerId(m),why,pl);n++;AGD.stat.tell=(AGD.stat.tell||0)+1;
   const z=agZ();z.rq=z.rq||[];z.rq.push({key:R.key,due,kg,sid:id,m:ledgerId(m),pl,who:who===S?"me":who&&typeof who==="object"?ledgerId(who):null,why,by:ledgerId(s),kh});if(z.rq.length>B.qMax)z.rq.shift()}
@@ -301,8 +301,9 @@ function agTell(R,pl,kh,why,who,interest){const B=BAL.ag.kh2.rd;let n=0;
 function agRdDeliver(R,kh){const z=agZ();if(!z.rq||!z.rq.length)return 0;const B=BAL.ag.kh2.rd;let n=0;const keep=[];AGD.rdC=AGD.rdC||{};
  /* the record is rebuilt from the plans on a resync: the tellers' walk rows of this buổi come back */
  for(const q of z.rq)if(q.key===R.key&&q.sid&&R.P[q.sid]&&q.kg<J95.KH){const e=R.P[q.sid][q.kg];if(e&&e[1]!=="tryst"&&e[1]!=="meet"&&e[1]!=="ag_tell"){let mp=null;try{const m=agTgt(q.m);mp=m&&R.P["v"+m.id]&&R.P["v"+m.id][q.kg]?R.P["v"+m.id][q.kg][0]:palaceOf(m)}catch(x){}R.P[q.sid][q.kg]=[mp||e[0],"ag_tell",q.m,q.why]}}
- for(const q of z.rq){if(q.key!==R.key){if(q.key.split("-")[0]===R.key.split("-")[0]||q.due>=J95.KH){const m=agTgt(q.m);if(m&&typeof m==="object")agTouch(m);AGD.stat.rdLate=(AGD.stat.rdLate||0)+1}continue}
-  if(q.due>kh||q.due>=J95.KH){if(q.due>=J95.KH){const m=agTgt(q.m);if(m&&typeof m==="object"){agTouch(m);AGD.stat.rdLate=(AGD.stat.rdLate||0)+1}continue}keep.push(q);continue}
+ for(const q of z.rq){if(q.key!==R.key&&q.nx!=null&&q.key.split("-")[0]===R.key.split("-")[0]){q.key=R.key;q.due=q.nx;delete q.nx}/* carried news: same clock into this buổi */
+  if(q.key!==R.key){if(q.key.split("-")[0]===R.key.split("-")[0]||q.due>=J95.KH){const m=agTgt(q.m);if(m&&typeof m==="object")agTouch(m);AGD.stat.rdLate=(AGD.stat.rdLate||0)+1}continue}
+  if(q.due>kh||q.due>=J95.KH){if(q.due>=J95.KH){if(q.nx!=null||(S.buoi||0)<B4L){if(q.nx==null)q.nx=q.due-J95.KH;keep.push(q);continue}const m=agTgt(q.m);if(m&&typeof m==="object"){agTouch(m);AGD.stat.rdLate=(AGD.stat.rdLate||0)+1}continue}keep.push(q);continue}
   const ck=R.key+":"+q.due;if((AGD.rdC[ck]||0)>=B.cap){q.due++;AGD.stat.rdCap=(AGD.stat.rdCap||0)+1;if(q.due<J95.KH)keep.push(q);else{const m=agTgt(q.m);if(m&&typeof m==="object")agTouch(m)}continue}
   const m=agTgt(q.m);if(!m||typeof m!=="object")continue;n+=agHeard(m,{pl:q.pl,kh:q.due,who:q.who?agTgt(q.who):null,why:q.why,by:agTgt(q.by)})}
  z.rq=keep;return n}
@@ -317,7 +318,14 @@ function agRdTick(){if(!agRdOn()||AG.inRd)return;const R=agRec();if(!R)return;AG
   for(const p of agZ().pend){if(p.key!==R.key||p.st||p.kh>kh||p.drop||p.gone)continue;p.st=1;const d=agTgt(p.id),t=agTgt(p.t);
    agTell(R,p.pl,kh,`nghe tin ${d&&d.name?d.name:""} ${p.act} ở ${agPlaceTxt(p.pl)}`,t&&t!==S?t:d,m=>{const a=typeof d==="object"&&d&&d!==m?Math.abs(aff(m,d)):0,b=typeof t==="object"&&t&&t!==m?Math.abs(aff(m,t)):0;return (a+b)/100})}}
  catch(e){agdErr("rd",e)}finally{AG.inRd=0}}
-(function(){const sy0=j95sync;j95sync=function(){const r=sy0.apply(this,arguments);try{agRdTick()}catch(e){agdErr("rdSync",e)}return r}})();
+/* 2d3 (ag-kh2 G9 red on base): a servant sent to rest / punished in the middle of a buổi (j95 jplx list → her row "offduty" / "laundry" from now)
+   is not free any more: her deeds not over yet on those khắc drop (the agSlot rule: an off-duty khắc is not hers), so no deed claims a row it
+   does not hold. */
+const AG_NOTFREE=new Set(["offduty","laundry","confined","cold"]);/* rows the j95 lists force (rest, Tân Giả khố, cấm túc, lãnh cung) */
+function agPendOff(){const R=agRec();if(!R)return;const z=agZ();const kh=agKh();for(const p of z.pend.slice()){if(p.key!==R.key||p.drop||p.gone)continue;const row=R.P[p.id];if(!row)continue;
+ for(let q=Math.max(p.kh,kh);q<=Math.min(J95.KH-1,agK1(p));q++){const e=row[q];if(e&&AG_NOTFREE.has(e[1])){p.drop=1;const i=z.pend.indexOf(p);if(i>=0)z.pend.splice(i,1);AG.stat.drop++;break}}}}
+(function(){const f0=agFlush;agFlush=function(){const r=f0.apply(this,arguments);try{agPendOff()}catch(e){agdErr("pendOff",e)}return r}})();
+(function(){const sy0=j95sync;j95sync=function(){const r=sy0.apply(this,arguments);try{agPendOff()}catch(e){agdErr("pendOff",e)}try{agRdTick()}catch(e){agdErr("rdSync",e)}return r}})();
 try{ACT95["ag_go"]=ACT95["ag_go"]||"đang trên đường tới";ACT95["ag_tell"]=ACT95["ag_tell"]||"đi bẩm tin cho chủ";ACT95["ag_with"]=ACT95["ag_with"]||"đang tiếp người tới"}catch(e){}
 Object.assign(window,{agHeard,agTell,agRdTick,agRdDeliver});
 /* ================= ONE SHARED CLOCK (AG-ALL-2d; owner OD 17/11 ~16:00Z L1641, verbatim key words: "tất cả mọi người đều phải make sure là cùng phải
@@ -350,21 +358,23 @@ Object.assign(window,{agShOn,agShOpts,agShNpc});
    "can it still be done" = the khắc left in the DAY, never the buổi: an act longer than this buổi runs on into the next one.
    Her side: agCanDay(n) / agWhyDay(n) = the ONE gate on main (j76 dayFit / dayWhy; spend() carries the rest into the next buổi, j76) + the player's Sức rule
    of can(); used by every AG popup (agent agKhLock / agSpendKh, the shared-act Tiếp chuyện, the Empress's acts).
-   NPC side: agFitDay(kh, kc) = the deed starts inside this buổi and its end fits this buổi + the next one of the same day (BAL.ag.kh2.spill = 1;
-   the record holds one buổi, so at most one buổi of run-on, like her walk-spill); agSpan marks p.sp = the khắc it runs on; when the buổi turns, the
-   deed is not landed but carried (agSpill): same deed, new buổi key, khắc 0 … sp−1 at the same place in the new record, and it lands at its real end. */
-function agDayRoom(){try{return BAL.ag.kh2.spill&&(S.buoi||0)<BUOI.length-1?J95.KH:0}catch(e){return 0}}
-function agFitDay(kh,kc){return kh<J95.KH&&kh+Math.max(1,kc)-1<J95.KH+agDayRoom()}
+   NPC side (2d3, Foreman D day-khắc audit): agFitDay(kh, kc) = the deed starts inside this buổi (her record row) and its length fits THE ONE day
+   function j76left(buổi, kh) (the khắc left in the DAY, same as the player's can/dayFit; BAL.ag.kh2.spill = 0 → this buổi only); agSpan marks
+   p.sp = the khắc it runs on; when the buổi turns, the deed is not landed but carried (agSpill): same deed, new buổi key, khắc 0 … at the same
+   place in the new record, again for as many buổi as it needs, and it lands at its real end. News due after the buổi rides the same clock
+   (agRdDeliver q.nx). */
+function agFitDay(kh,kc){const n=Math.max(1,kc);if(!(kh>=0&&kh<J95.KH))return false;/* starts inside this buổi (her record row); its length = THE day function */
+ return BAL.ag.kh2.spill?n<=j76left(S.buoi||0,kh):kh+n<=J95.KH}
 function agCanDay(n){if(typeof dayFit!=="function")return typeof can==="function"&&can(n);return dayFit(n)&&(n<=1||S.suc>=BAL.time.sucMin)}
 function agWhyDay(n){if(agCanDay(n))return"";const w=typeof dayWhy==="function"?dayWhy(n):"";return w||(typeof whyTime==="function"&&whyTime(n))||"hết khắc trong ngày"}
-function agSpill(p){try{if(!p||!(p.sp>0)||p.cont||p.drop||p.gone)return false;const R=agRec();if(!R||!R.P[p.id]||p.key===R.key)return false;
+function agSpill(p){try{if(!p||!(p.sp>0)||p.drop||p.gone)return false;const R=agRec();if(!R||!R.P[p.id]||p.key===R.key)return false;
   const [w0,b0]=String(p.key).split("-"),[w1,b1]=String(R.key).split("-");if(w0!==w1||+b0+1!==+b1)return false;/* only into the very next buổi of the same day */
-  const row=R.P[p.id];const k1=Math.min(J95.KH-1,p.sp-1);for(let q=0;q<=k1;q++){const e=row[q];if(!e||e[1]==="tryst"||e[1]==="meet"||agBound(p.id,q,R.key))return false}
-  p.key=R.key;p.kh=0;p.k1=k1;p.cont=1;delete p.sp;p.seen=0;for(let q=0;q<=k1;q++)row[q]=[p.pl,"ag_"+p.k,p.t||null,p.why||""];
+  const row=R.P[p.id];const k1=Math.min(J95.KH-1,p.sp-1);for(let q=0;q<=k1;q++){const e=row[q];if(!e||e[1]==="tryst"||e[1]==="meet"||AG_NOTFREE.has(e[1])||agBound(p.id,q,R.key))return false}
+  p.key=R.key;p.kh=0;p.k1=k1;p.cont=1;{const rest=p.sp-J95.KH;if(rest>0)p.sp=rest;else delete p.sp}/* longer than a buổi: runs on again (the day function allowed it) */p.seen=0;for(let q=0;q<=k1;q++)row[q]=[p.pl,"ag_"+p.k,p.t||null,p.why||""];
   AGD.stat.spill=(AGD.stat.spill||0)+1;return true}catch(e){agdErr("spill",e);return false}}
 (function(){const l0=agLand;agLand=function(p){if(agKhOn()&&agSpill(p))return"";return l0.apply(this,arguments)};
  /* her side: the AG popups ask the day gate (was can(n) = this buổi only) */
  agKhLock=function(){const k=BAL.ag.kh;return agWhyDay(k)};
  agSpendKh=function(){const k=BAL.ag.kh;if(!agCanDay(k))return false;spend(k);return true};
 })();
-Object.assign(window,{agFitDay,agCanDay,agWhyDay,agSpill,agDayRoom});
+Object.assign(window,{agFitDay,agCanDay,agWhyDay,agSpill});

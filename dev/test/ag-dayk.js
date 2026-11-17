@@ -17,7 +17,7 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
   while((S.buoi||0)!==0)step();step();while((S.buoi||0)!==0)step();/* a fresh morning with a record */
   try{placeWhere();agFlush()}catch(e){}
   /* 1 */
-  o.g={b0:[agFitDay(3,1),agFitDay(3,2),agFitDay(3,6),agFitDay(4,1)]};const sp=BAL.ag.kh2.spill;BAL.ag.kh2.spill=0;o.g.off=agFitDay(3,2);BAL.ag.kh2.spill=sp;
+  o.g={b0:[agFitDay(3,1),agFitDay(3,2),agFitDay(3,6),agFitDay(4,1),agFitDay(3,14)]};const sp=BAL.ag.kh2.spill;BAL.ag.kh2.spill=0;o.g.off=agFitDay(3,2);BAL.ag.kh2.spill=sp;
   /* 3 her side (morning) */
   used=BAL.time.khac-1;S.suc=100;o.her={mCan:agCanDay(2),mLock:agWhyDay(2),buoiCan:can(2)};used=0;
   /* 2 carry */
@@ -28,7 +28,7 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
   step();const R1=agRec();o.carry={key:pd.key===agKey(),kh:pd.kh,k1:pd.k1,cont:pd.cont,inPend:z.pend.includes(pd),row:R1&&R1.P[id]?R1.P[id].slice(0,3).map(e=>e&&e[1]):null};
   step();o.landed=!z.pend.includes(pd);
   /* 3 her side (evening) */
-  while((S.buoi||0)!==3)step();used=BAL.time.khac-1;S.suc=100;o.her.eCan=agCanDay(2);o.her.eLock=agWhyDay(2);used=0;
+  while((S.buoi||0)!==3)step();o.g.ev=[agFitDay(3,1),agFitDay(3,2)];used=BAL.time.khac-1;S.suc=100;o.her.eCan=agCanDay(2);o.her.eLock=agWhyDay(2);used=0;
   /* 4 TIN BÁO ended */
   while((S.buoi||0)!==3)step();const T=knTb();const now=agKh();
   T.K["t:run"]={id:"t:run",k:"deed",place:"vuon",b:S.buoi||0,k0:now,k1:3,who:[],line:"Tai mắt báo: ở Ngự hoa viên Lan quý nhân đang ngắm hoa.",by:"mat",seen:0,ended:0};
@@ -38,7 +38,7 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
   o.odds=[agOdd(120),agOdd(-3),agOdd(50),agCap(1.5),agCap(140)];o.lohi=[BAL.odds.lo,BAL.odds.hi];
   return o});
  console.log(JSON.stringify(r));
- ok(r.g.b0[0]&&r.g.b0[1]&&!r.g.b0[2]&&!r.g.b0[3]&&!r.g.off,'1 NPC day gate: a late deed may run on into the next buổi (not past it, not starting after the buổi); spill 0 = this buổi only',r.g);
+ ok(r.g.b0[0]&&r.g.b0[1]&&r.g.b0[2]&&!r.g.b0[3]&&!r.g.b0[4]&&!r.g.off&&r.g.ev&&r.g.ev[0]&&!r.g.ev[1],'1 NPC day gate = j76left (khắc left in the DAY): a late morning deed may run on over several buổi, never past the day, never starting after the buổi; evening: only what the day holds; spill 0 = this buổi only',r.g);
  ok(r.span.k1===3&&r.span.sp===2,'2 a 3-khắc deed at khắc 3 holds khắc 3 here and marks 2 khắc to run on',r.span);
  ok(r.carry.key&&r.carry.inPend&&r.carry.kh===0&&r.carry.k1===1&&r.carry.cont===1&&r.carry.row&&r.carry.row[0]==="ag_effort"&&r.carry.row[1]==="ag_effort",'2 the buổi turns: the deed is carried (khắc 0–1 of the new buổi, same place), not landed',r.carry);
  ok(r.landed,'2 it lands at its real end (a buổi later)',r.landed);
