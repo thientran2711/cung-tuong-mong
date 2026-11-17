@@ -1,0 +1,9 @@
+PRIORITY #1 CHECK: OD 12:12Z/12:20Z/12:25Z/12:30Z/13:12Z/13:32Z read | main none (map-full live) | review/* map-me-mark-r1 PASS, map-portrait c34e99e3 | claims worker session_01UV1SzgdgEdCimFsVYDscwL
+
+# review map-portrait-r1 - result 1d583ae5 (merged onto latest origin/main d0a839e8, generated files rebuilt)
+Verdict: PASS after one fix by reviewer.
+FAIL found and fixed: owner 13:32Z '!' (kitHapMark) was NOT implemented by the worker (small grey disc). Root cause: jmapc.js '.mspot .mlab i{background:none!important}' stripped the .khap background. Fix (kit part only): jmapc rule now ':not(.khap)'; jact.js .khap = 18 px bright yellow radial gradient + glow, one shake/bounce every ~3.4 s (keyframes khapBob), static under prefers-reduced-motion. Same kit class everywhere (place map, tiles, kit sample §78).
+Checked: portrait rows (4 people cards above / Ân sủng + Nguy hiểm below, same kit cards), zoomed map, sky per weather, 'Ta + N bóng · còn K khắc', iPad landscape side column unchanged (959x535, column kept).
+Tests (host build, file://): map-portrait.js PASS 755x1000, 412x1058, 390x844, 1024x1366, 1180x820, 1366x1024; map-frame-kit PASS 755/1180; map-full PASS 5 sizes; media-check 0; img-allowlist OK; page errors 0. quickcheck needs a local server (http page load blocked by proxy 405 here): not run.
+Looked at shots 755x1000 and 1180x820: '!' yellow + glow, easy to spot.
+Open items (judged, NOT fixed, list for main): (1) courtyard .kpmv / place-view stage keep old right column (different family: bottom .kpm-list conflict) - needs owner ok; (2) 390x844 shows only 5 labels of 29 at 13 px (8 in the worker's measure before merge): lower portrait label floor if owner wants more; (3) 390 header text overlaps the seal top-right (pre-existing, not this change); (4) sky only visible in the thin bands, as expected when map is zoomed; painted skies = art request in map-portrait report.
