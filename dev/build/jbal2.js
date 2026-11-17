@@ -342,6 +342,50 @@ Object.assign(BAL,{psk:{ghen:10,son1:{hhOan:15,momOan:8},emp:{th:8,oan:10},th:{s
    ownerless pieces outside beyond mktCap are bought back by Nội vụ phủ and handed out to a consort as allotment. */
 Object.assign(BAL,{il:{shopP:12,retW:[6,12],ransomPct:120,againW:[4,8],confW:8,confSuc:8,npcConfP:30,fixW:[2,4],resaleP:15,
  npcBackP:20,npcBuyP:8,empEv:2,logCap:600,srvW:12,cctW:48,heldCap:30,mktCap:60}});
+/* NPC ROADS (Foreman D, review/npc-roads; ROAD_MAP §0 'NPC roads', reports/npc-roads.md) — ONE CORE: every number of jnroad.js */
+Object.assign(BAL,{nroad:{
+ /* months from her arrival (or the game start) to her chapter .4; months between two chapters [min, max] */
+ d0:[2,6],gap:[4,7],
+ /* her chapter odds = odA(her, base + her test stat / div + sc after a won chapter + help when the player helped) */
+ base:30,div:3,sc:8,help:15,
+ /* real gains and losses of a chapter end (her own fields; pow = her house's power, j55). U4 balance (npc-roads-bal.js): her odds give more
+    won than lost chapters (≈ 50 : 37), so a win pays less than a loss costs — the expected Danh/Sủng of a chapter is about zero and NPC
+    roads do not inflate the harem (first numbers 4/3 vs −4/−3 doubled the lives with an NPC Hoàng hậu, 17.5 % → 42.5 %) */
+ fx:{win:{danh:3,sung:2,suc:-4,pow:2},mid:{suc:-2,danh:-1},lose:{danh:-4,sung:-3,suc:-2,pow:-2}},
+ /* the loser's grudge toward the winner (oán), and the player's share when SHE is the NPC's rival */
+ oan:{win:8,lose:5},onMe:{win:{danh:-2,sung:-2},lose:{danh:1}},
+ /* the help hồi: the chapter index range it may fall on (one per road per life), the bond or shared side she needs to ask,
+    the deadline (weeks), the costs of the two roads (bạc road vs Sức road of equal weight), the bond she gives back */
+ helpN:[5,10],askRel:20,dl:6,bac:[30,45,70,100],suc:8,rel:6,relBad:-12,relB:8,no:4,
+ /* help options (r1, ONE CORE): odds of the Sức road / bạc road / dò la / che chở / tự sắc thuốc, the loss sizes l2/l3 on a failed try,
+    the Đức a betrayal costs, the bond the dò-la target loses */
+ op:{pS:55,pB:75,pDo:70,pChe:60,pY:50,l2:2,l3:3,betray:3,rbDo:4},
+ /* rank thresholds of the bạc cost: index = how many of these ranks her rank reaches (RANKS index) */
+ bacRk:[2,4,6],
+ /* palace news lines a month (NPC chapter ends), at most */
+ newsMo:2,
+ /* fix (ONE CORE): the test stat of someone who lacks it, the loyalty a man starts from, how many of the coldest people a rival is
+    drawn from (people / houses) */
+ st0:40,loy0:50,rvTop:3,offTop:2,
+ /* origin of an NPC consort from her house (clan): [origin key, weight] */
+ org:{"Tể tướng":[["tt",1]],"Đại tướng quân":[["dtq",1]],"Thái hậu":[["ch",1]],"Hàn lâm":[["thd",3],["td",1]],"Lễ bộ":[["thd",1],["td",1],["muoi",1]],"Hộ bộ":[["muoi",3],["td",1]],"":[["muoi",1],["thd",1],["td",1]]},
+ /* one father = one record: these origins are never given to an NPC when the player has them */
+ uniq:["tt","dtq"],
+ /* at most this many NPC roads have the player as their rival at one time */
+ meMax:3,
+ /* U2 maids (cnv roads): her test stat = st + her trait (j10 STR keys) + rk per servant rank (srk); her chapter end on her own fields
+    (mp = merit toward the next servant rank, j14; loyal = to her mistress: a maid who wins her own fight leans a little less on her
+    mistress), her mistress's share (Danh), the grudge (af) between her and the rival maid, the loyalty her own maid needs to ask */
+ m:{st:40,tr:{lanh:15,trung:8,tham:5,nhat:-5,chuyen:0},rk:5,
+  fx:{win:{mp:4,loyal:-2},mid:{mp:1,loyal:-1},lose:{mp:-2,loyal:-4}},mis:{win:{danh:1},lose:{danh:-1}},af:8,askLoy:60},
+ /* U3 men (jnroadm.js; staff eunuchs use m above): st = test stat of a man with none (court men); kidAge = a son of an NPC consort gets
+    his road from this age; S.men loyal (jmen bribe odds) and the rival man's share; court men lean (af) toward their patron consort
+    and away from the other side, a lost chapter costs the patron Danh; house heads pow (j55) + the rival house's share + the house
+    relation (rel: enmity of every fight, ally: the marriage road binds or splits); princes fond/tal/hp + the rival prince's fond;
+    the bond a man / court man / allied house needs to ask the player */
+ men:{st:40,kidAge:15,men:{fx:{win:{loyal:3},mid:{loyal:-1},lose:{loyal:-4}},rv:{win:-2,lose:1}},court:{af:4,danh:1},
+  off:{pow:{win:2,lose:-2},rv:{win:-1,lose:1},rel:3,ally:5},hz:{fx:{win:{fond:3,tal:2,hp:-2},mid:{tal:1,hp:-1},lose:{fond:-3,hp:-1}},rv:{win:-1,lose:1}},
+  askTinh:30,askAf:10,askRel:25}}});
 /* seat counts per rank (review/seatcap): BAL.seatCap IS j30 SEATCAP (one object, one place): Hoàng hậu 1, Hoàng quý phi 1, Quý phi 2, Phi 4, Tần 6; lower ranks no cap.
    Every road that sets a rank asks jseat.js seatHas / seatDown / seatUp; seatSettle is the net after every turn and on load. */
 BAL.seatCap=SEATCAP;
