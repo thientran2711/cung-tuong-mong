@@ -60,7 +60,12 @@ async function rx(ev){lastRx=Date.now();let m;
  else if(m.t==="week")set({C:m.state,week:m.week,ended:{a:false,b:false}});
  else if(m.t==="error"){if(m.code==="full"||m.code==="noroom"||m.code==="nopid"){want=false;LS.del("ctm-coop-room");if(pend){pend.rej({code:m.code,message:m.msg});pend=null}}}
  emit(m.t,m)}
-function connect(code){clearTimeout(tmr);if(ws){try{ws.onclose=null;ws.close()}catch(e){}ws=null}
+/* review/coop-stable: a socket dropped here while still CONNECTING can still reach the Worker AFTER its successor (slow proxy / network):
+   the Worker then "replaces" the live one with that abandoned twin (4001) and this device sat on "Ở máy khác" (guest: double join from
+   the ?room= link + "Vào phòng"; any reconnect while one was in flight). A 4001 within 30 s of abandoning our own socket is our twin:
+   reconnect once instead of giving the seat up. */
+let abandonAt=0;
+function connect(code){clearTimeout(tmr);if(ws){try{ws.onclose=null;ws.close()}catch(e){}ws=null;abandonAt=Date.now()}
  want=true;both=false;set({status:tries?"retry":"connecting",room:code});
  let s;try{s=new WebSocket(wsURL(code))}catch(e){return drop()}
  s.binaryType="arraybuffer";ws=s;
@@ -68,7 +73,7 @@ function connect(code){clearTimeout(tmr);if(ws){try{ws.onclose=null;ws.close()}c
  s.onmessage=rx;
  /* 4001 "replaced": the same seat (same pid, Sổ mây) was opened on another device / tab. Do not take it back (the two would steal the
     seat from each other and the stale one would write an old week copy): stop here; "Về màn đầu" › Trở lại phòng takes it back. */
- s.onclose=e=>{if(ws===s){ws=null;if(e&&e.code===4001){want=false;clearInterval(pinger);pinger=0;both=false;set({status:"moved"});emit("moved",{});return}drop()}};
+ s.onclose=e=>{if(ws===s){ws=null;if(e&&e.code===4001&&abandonAt&&Date.now()-abandonAt<30000){abandonAt=0;tries=0;connect(st.room);return}if(e&&e.code===4001){want=false;clearInterval(pinger);pinger=0;both=false;set({status:"moved"});emit("moved",{});return}drop()}};
  s.onerror=()=>{}}
 function drop(){clearInterval(pinger);pinger=0;both=false;
  if(!want){set({status:"closed"});return}
