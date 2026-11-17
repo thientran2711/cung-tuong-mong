@@ -13,7 +13,15 @@ const sl=t=>new Promise(r=>setTimeout(r,t));
   /* 1 LOCK */
   S.inv.push({k:"chuongngoc",from:"emp"});const ix=S.inv.length-1;const e=S.inv[ix];const r1=shelfPut(S,ix);F(r1.ok,"put failed: "+r1.why);F(!S.inv.includes(e),"displayed entry still in chest");
   F(!kitShopSellable(S).some(x=>x.k==="chuongngoc"),"displayed piece sellable");F(ilSlots(S).includes(e),"ledger lost the displayed piece");
-  S.inv.push({k:"chuonggio"});const r2=shelfPut(S,S.inv.length-1);F(r2.ok&&r2.old===itm("chuongngoc").n&&S.inv.includes(e),"same group swap did not return the old piece");
+  /* UP TO per pieces a group (owner OD 17/11 ~22:05Z): 4 more fill free slots; the 6th replaces the group's least piece, which goes back to the chest */
+  const add=["chuonggio","chuongso","thietma","chuongpl"];const fill=add.map(k=>{S.inv.push({k,from:"emp"});return shelfPut(S,S.inv.length-1)});F(fill.every(r=>r.ok&&!r.old)&&shelfIn(S,"chuong").length===BAL.shelf.per,"group does not hold "+BAL.shelf.per+" pieces");
+  S.inv.push({k:"chuongso"});const r2=shelfPut(S,S.inv.length-1);F(r2.ok&&r2.old===itm("chuongso").n&&shelfIn(S,"chuong").length===BAL.shelf.per&&S.inv.includes(e)===false,"a full group did not swap out its least piece");
+  out.T.per={slots:shelfIn(S,"chuong").map(x=>x[0]+":"+x[1].k),swapOut:r2.old};
+  /* 5-PIECE LUX CURVE: best full + falling shares; 5 cheap never beat 1 fine; adding never lowers the room, never more than best × Σwt */
+  {const kp=JSON.stringify(shelfOf(S).g);const cur=[];shelfOf(S).g={};for(let i=0;i<BAL.shelf.per;i++){S.inv.push({k:"chuongso"});shelfPut(S,S.inv.length-1);cur.push(shelfLux(S).sc)}
+   shelfOf(S).g={};S.inv.push({k:"chuongpl",from:"emp"});shelfPut(S,S.inv.length-1);const fine=shelfLux(S).sc;const sw=BAL.shelf.wt.reduce((a,b)=>a+b,0);
+   out.T.luxCurve={cheap5:cur.join(" → "),fine1:fine,cap:"best × "+sw};F(cur[cur.length-1]<fine,"5 cheap pieces beat 1 fine one");F(cur.every((v,i)=>!i||v>=cur[i-1]),"adding a piece lowered the room");F(cur[cur.length-1]<=Math.round(luxPiece("chuongso")*sw)+1,"group above best × Σwt");
+   shelfOf(S).g=JSON.parse(kp)}
   /* NO rank block (owner OD 17/11 ~19:50Z): any owned piece may stand, over rank or not, even an imperial one (a charge is the only consequence) */
   const rk0=S.rank;S.rank=0;out.T.gate={buyOver:shelfWhyNot(S,{k:"chuongngoc"})||"ok",nguOver:shelfWhyNot(S,{k:"chuongngoc",from:"emp"})||"ok",imp:shelfWhyNot(S,{k:"ngocty"})||"ok",over:shelfOver(S,{k:"chuongngoc"})};
   F(out.T.gate.buyOver==="ok"&&out.T.gate.nguOver==="ok"&&out.T.gate.imp==="ok"&&out.T.gate.over,"display still blocked by rank: "+JSON.stringify(out.T.gate));S.rank=rk0;
@@ -28,7 +36,7 @@ const sl=t=>new Promise(r=>setTimeout(r,t));
    const card=Q.slice(q0).find(q=>q.t==="Thái hậu quở");out.T.thRebuke=card?card.h.replace(/<[^>]+>/g,""):"none (thDead "+!!S.thDead+")";out.T.thRb=[th0,S.th];F(S.thDead||(card&&(S.th|0)<=th0),"Thái hậu did not rebuke a room too lavish to her");Q.length=q0;
    shelfOf(S).g=JSON.parse(kp);S.rank=rk}
   S.inv.push({k:"vongngoc",w:1});F(shelfWhyNot(S,S.inv[S.inv.length-1])!=="","worn / non-décor piece accepted");S.inv.pop();
-  const tk=shelfTake(S,"chuong");F(tk&&S.inv.some(x=>x.k==="chuonggio"),"take down failed");out.T.lock={put:r1.ok,swap:r2.old,take:tk};
+  const tk=shelfTake(S,"chuong");F(tk===itm("chuongngoc").n&&S.inv.some(x=>x.k==="chuongngoc"),"take down failed");out.T.lock={put:r1.ok,swap:r2.old,take:tk};
   /* 2 DWELLING TABLE: for each rank, the level word for a set of scores (allowance hidden from the player; numbers for the report only) */
   const FULL=["remchau","nhuy","chuongngoc","binhsu","caytung","tuminh"];const keep={rank:S.rank,g:JSON.stringify(shelfOf(S).g)};out.T.lux=[];
   for(const rk of [0,2,4,7]){S.rank=rk;const row={rank:rk,bud:shelfLux(S).bud,lv:{}};for(const set of [[],["remtruc"],["remchau","binhsu"],FULL]){shelfOf(S).g={};for(const k of set){S.inv.push({k,from:"emp"});shelfPut(S,S.inv.length-1)}const x=shelfLux(S);row.lv[set.join("+")||"(none)"]=x.sc+" "+x.name}out.T.lux.push(row)}
@@ -85,7 +93,7 @@ const sl=t=>new Promise(r=>setTimeout(r,t));
    F(BAL.shelf.groups.length===12,"not 12 groups");F(K.length===67,"table pieces "+K.length+" (want 67 + 2 handmade + door plaques = 70)");F(!out.T.table.noName.length,"pieces without IT: "+out.T.table.noName);
    F(!SHELF_SRC("n").concat(SHELF_SRC("m")).some(k=>I[k].imp),"an imperial piece has a source");F(BAL.shelf.groups.every(g=>G[g[0]]),"empty group");
    let bad=[];for(const x of liveRivals(true)){delete x.shelf;for(const e of shelfList(x))if(shelfOver(x,e)&&e.from!=="emp")bad.push(x.name+":"+e.k)}F(!bad.length,"NPC seeded above rank: "+bad.join(","));
-   /* NPC arrange: only a lover of show puts a bought piece above her rank */let bold=[];for(const x of liveRivals(true).filter(y=>y.alive&&!y.out&&(rkOf(y)|0)<4)){x.inv=x.inv||[];x.inv.push({k:"phanthai"});shelfArrange(x);const on=shelfOf(x).g.su&&shelfOf(x).g.su.k==="phanthai";bold.push(x.name+" "+shelfTaste(x).toFixed(2)+(on?" bày":" không"));F(!on||shelfTaste(x)>0,"a frugal NPC put a bought over-rank piece up")}out.T.npcBold=bold;
+   /* NPC arrange: only a lover of show puts a bought piece above her rank */let bold=[];for(const x of liveRivals(true).filter(y=>y.alive&&!y.out&&(rkOf(y)|0)<4)){x.inv=x.inv||[];x.inv.push({k:"phanthai"});shelfArrange(x);const on=shelfIn(x,"su").some(y=>y[1].k==="phanthai");bold.push(x.name+" "+shelfTaste(x).toFixed(2)+(on?" bày":" không"));F(!on||shelfTaste(x)>0,"a frugal NPC put a bought over-rank piece up")}out.T.npcBold=bold;
    /* bestow: a décor bestowal may be above her rank (ngự ban) */const rk2=S.rank;S.rank=0;const ob=BAL.shelf.bestO;BAL.shelf.bestO=100;const n0=S.inv.length;const q0=Q.length;bestow(S,"promo");BAL.shelf.bestO=ob;const got=S.inv.slice(n0).map(e=>e.k);Q.length=q0;S.rank=rk2;
    out.T.bestow=got;F(S.inv.slice(n0).some(e=>BAL.shelf.it[e.k]&&e.from==="emp"),"a décor bestowal did not arrive as ngự ban")}
   {const t0=performance.now();for(let i=0;i<10;i++)shelfWeek();out.T.weekMs=+((performance.now()-t0)/10).toFixed(2);for(let i=0;i<3;i++){SHELF_PW.k='';placeWhere()}SHELF_PW.k='';const t1=performance.now();placeWhere();out.T.placeWhereMs=+(performance.now()-t1).toFixed(2);const t2=performance.now();placeWhere();out.T.placeWhereNoShelfMs=+(performance.now()-t2).toFixed(2);out.T.people=liveRivals(true).length}
