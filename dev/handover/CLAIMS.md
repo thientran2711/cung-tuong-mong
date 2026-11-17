@@ -639,7 +639,7 @@
 | trait-rename review r1 (opus BIG, save migration) of 27886326 | review/trait-rename-r1 | B | session_01N1tNP31pNXiReqkE3LxVdh | RUNNING | 17/11 05:40Z |
 | one-core-roads — ONE CORE F1 roads: go:/sc:/k: amounts → BAL.road.fx, values identical (opus; split of one-core-dup §2b) | review/one-core-roads | B | session_01N1tNP4eyJ4AQGCmA1HpA9c | RUNNING | 17/11 05:41Z |
 | one-core-arcs — ONE CORE F2 arcs: ARC67/j97/j96/jorigins/jroute/jstory → BAL.arc.fx, values identical (opus; split of one-core-dup §2b) | review/one-core-arcs | B | session_01N1tNP5MRPzxmbFfWjw6LuT | RUNNING | 17/11 05:41Z |
-| OI branch review r1 (opus BIG) of de6a876b (origin-intros + entry-exam + kc-roads fix2 + render-cost) | review/batch-0032-oi-r1 | D | session_01964izCyrKPEnt2GpVBazHD | RUNNING | 17/11 05:50Z |
+| OI branch review r1 (opus BIG) of de6a876b (origin-intros + entry-exam + kc-roads fix2 + render-cost) | review/batch-0032-oi-r1 | D | session_01964izCyrKPEnt2GpVBazHD | PASS 36f86d3a (archived) → FOR MAIN batch | 17/11 05:50Z |
 | one-core-dup part 1 SẴN SÀNG KIỂM 648461b5 → review r1 (opus BIG) | review/one-core-dup-r1 | B | session_01N1tNP6WJifjTnmrtNwmBm4 | RUNNING | 17/11 05:53Z |
 | one-core-dup2 — successor (rolled over): dup hunt round 2 (§5 disagreements + ~30 single-copy concepts), owns guard (opus) | review/one-core-dup2 | B | session_01N1tNP5YW8yGvX2ZkQozRyk | RUNNING | 17/11 05:53Z |
 | STORY FRAME for late-added origins (bd 0 chapters; whole family of load-time registry loops) (opus; story-bot fault 1) | review/story-frame | D | session_01964izFgZ6CTgm1p1mFw3Un | DONE SẴN SÀNG KIỂM 7be4cdc6 (archived) | 17/11 05:56Z |
