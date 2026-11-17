@@ -558,3 +558,4 @@
 | newlife-reset (opus; OWNER BUG 03:22Z: healed-wound/veil line on a brand-new life → previous-life state leaks; whole-family per-life reset registry) | review/newlife-reset | main s28 | session_01UV1SzgyQP6eCJz2hmcnLrF | RUNNING | 17/11 03:01Z |
 | fig-rank-match (sonnet; OWNER BUG 03:31Z Hoàng hậu shown in a lower-rank dress; exact dress tier = rank for everyone, audit + ART REQUEST list to C) | review/fig-rank-match | main s28 | session_01UV1SzjZ3ki1nnfEWtJvRjW | RUNNING | 17/11 03:05Z |
 | save-dlg-fix (kit keeper): Chọn sổ frame/columns/buttons/??? root fixes | review/save-dlg-fix | main s28 | session_01UV1SzhRZF6zDmg7pUydbUm | READY 668e4692 | 17/11 |
+| WHOLE FIGURE REPAINT batch W2b consort-ty (successor of W2 session_011xDdVRJKYSAaQP1Z2rspXD, archived; ty4-8 a26/a36/a51 then ty1-3 redo after owner GO; W1b remainder → W4c) | review/fig-cutout-clean | C | session_011xDdVQTSTRntm216FbxCJ2 | RUNNING | 17/11 03:12Z |
