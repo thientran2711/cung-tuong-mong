@@ -1,6 +1,6 @@
 # kit-thanh-bai (s34 kit job, part 2 of option rows)
 PRIORITY #1 CHECK: OD 0 'thành bại' + OD tail "(17/11 ~17:10Z real" item (2) | main: j63 kaRows split thành/hỏng internally, showed ĐƯỢC/TỐN/MẤT/KÈM, seal THÀNH/HỎNG | review/kit-option-rows 3dabd1f7 (part 1) | claims MAIN s34.
-Branch review/kit-thanh-bai, sha 76558786 on origin (rebased onto main b5d109fe; contains kit-option-rows 3dabd1f7 as its first commit).
+Branch review/kit-thanh-bai, sha e3c1583f (now based on review/kit-option-rows-r2 f422a570).
 
 ## What changed (kit only, no BAL change)
 - j63 kaRows/kaBody: every Được/Mất/Kèm value now carries a block (t THÀNH / b BẠI / a "Được ngay"). Card = Cần · Tốn (paid either way, ONCE) · THÀNH block (Được/Mất/Kèm) · BẠI block (Được/Mất/Kèm) · Ghi chú.
