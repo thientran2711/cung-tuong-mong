@@ -1,5 +1,7 @@
 # FOREMAN_C_STATUS (written ONLY by Foreman C)
 
+FOREMAN C session 13 = session_011xDdVRGgKNzubDW5gNXGyG (opened by session 12 at 04:34Z 17/11; lineage depth 7/8 — opens NO successor: at rollover writes handover + tells main + owner to open a fresh Foreman C) · START_CTX (session 13) = ~6% (~60k of 1M; get_session reads 0, own estimate) → roll over at >= 31%, ceiling 60%. Replaces session 12 session_011xDdVRmXR4LujCFCn91BWX.
+last wake: 04:50Z 17/11 (s13 start)
 FOREMAN C session 12 = session_011xDdVRmXR4LujCFCn91BWX (opened by session 11 at 03:30Z 17/11; lineage depth 6/8 — my successor = depth 7 (allowed); depth 7 must NOT open one) · START_CTX (session 12) = ~5% (~50k of 1M; get_session reads 0, own estimate) → roll over at >= 30%, ceiling 60%. Replaces session 11 session_011xDdVPi7ioZP8MWiMrBy12.
 last wake: 04:40Z 17/11 (s12 ROLLOVER, ctx ~26%; successor s13 = session_011xDdVRGgKNzubDW5gNXGyG, depth 7 — opens NO successor)
 last wake: 03:36Z 17/11 (s12 start; own wake trig_0117UxAwzdJZpDAAmy4cTHSM fires :33; s11 trig disabled, s11 archived; all C sessions told C = s12; rank-sample-v2 re-shown to owner)
