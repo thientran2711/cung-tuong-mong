@@ -277,7 +277,7 @@ function x2Tick(){if(!S||S.dead)return;const b=B(),z=wZ(),t=now(),y=S.year,m=S.m
  if(m===b.trom.month&&tu===b.trom.t&&allServ().some(greedy)&&roll(b.trom.p))ws("trom","Kiểm kê ngự khố cuối năm thấy thiếu hụt",{len:b.trom.len});
  if(m===b.phong.month&&tu===0)phongOpen(b.phong.p,"Cung nữ mãn hạn, theo lệ cho xuất cung",{len:b.phong.len});
  /* the weather: heavy snow (rollWx f 4) in `run` of the last run+1 tuần */
- z.snowL=(z.snowL||[]).concat(S.wx&&S.wx.f===4?1:0).slice(-(b.ret.run+1));z.snowR=z.snowL.reduce((a,c)=>a+c,0);if(S.wx&&S.wx.f===4&&z.snowR>=b.ret.run)ws("ret","Tuyết lớn nhiều tuần liền, than sưởi không đủ",{len:b.ret.len});
+ z.snowL=(z.snowL||[]).concat(wxDayAny(4)?1:0).slice(-(b.ret.run+1));z.snowR=z.snowL.reduce((a,c)=>a+c,0);if(wxDayAny(4)&&z.snowR>=b.ret.run)ws("ret","Tuyết lớn nhiều tuần liền, than sưởi không đủ",{len:b.ret.len});
  /* the court: a house too strong (monthly) */
  if(tu===0){const T=T_();if(T&&typeof CLANS!=="undefined"){const E=S.emp||{};const weak=(E.age||b.ngoai.young)<b.ngoai.young||!!(E.ill&&E.ill.st>=b.ngoai.illSt);const q=liveR().find(v=>v.queen);const qh=q?houseOf2(q):(S.rank>=7?houseOf2(S):null);
    const c=CLANS.filter(c=>T.H[c]&&T.H[c].pow>=b.ngoai.pow&&(weak||c===qh)).sort((a,c2)=>T.H[c2].pow-T.H[a].pow)[0];if(c)ws("ngoai",`Nhà ${c} chuyên quyền`,{len:b.ngoai.len,x:{c}})}}
