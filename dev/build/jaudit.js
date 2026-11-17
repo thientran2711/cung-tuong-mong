@@ -101,7 +101,7 @@ try{wrapR("k61Ask",()=>"Hỏi người hầu: đó là ai?");wrapR("invAct",a=>a
 /* 8. NO DO-NOTHING BUTTON (owner 07:30Z). "Hỏi han sức khỏe" now has a purpose that fits its meaning: a small "quý ta" by her
    temperament (affAdd, so persF trust applies; the second time in a month only +1) and, if she is unwell, she may tell what ails
    her (chance by her liking for you; Đa nghi hides it more). Costs 1 khắc like every talk. */
-function aaHealthO(v){return cl(Math.round(45+aff(v,S)/2-((typeof traitsOf==="function"&&traitsOf(v).includes("Đa nghi"))?15:0)),5,95)}
+function aaHealthO(v){return cl(Math.round(45+aff(v,S)/2-((typeof traitsOf==="function"&&traitsOf(v).includes("Kín đáo"))?15:0)),5,95)}
 (function(){const t0=talkOpts;talkOpts=function(p){const A=t0.apply(this,arguments);try{const v=p&&p.ref;if(!v||!(p.kind==="rival"||p.kind==="hh"))return A;
  const i=A.findIndex(a=>a&&a.n==="Hỏi han sức khỏe");if(i<0)return A;const n=(S.chat&&S.chat[v.id])?1:2;const ill=illOf(v)&&!illKnown(v);
  A[i]=Object.assign({},A[i],{x:`${pvQuy(v,n)}${ill?` · nàng có thể kể bệnh của mình: ${word(aaHealthO(v))}`:" · biết nàng khỏe hay yếu"}`,run:()=>{chatMark(v);affAdd(v,S,n);
@@ -183,14 +183,14 @@ window.kitThey=kitThey;
 
 /* 16. THIẾU LỄ (owner): at formal moments (thỉnh an Thái hậu / Hoàng hậu, gặp Hoàng thượng) a consort who wears nothing proper for
    her rank (nothing worn, or what she wears is clearly below her rank: worn luxury < BAL.thieuLe.frac × her rank's allowance)
-   loses Danh/Đức and the host likes her a little less; a strict host (Thái hậu Đa nghi/Kiêu ngạo, Hoàng hậu Kiêu ngạo/Ghen tuông)
+   loses Danh/Đức and the host likes her a little less; a strict host (Thái hậu Đa nghi/Kiêu ngạo, Hoàng hậu Kiêu ngạo/Nóng nảy)
    reacts more. A bestowed rank set (review/gift-chest: p.rankSet === her rank, worn) always satisfies it. Vượt phẩm stays its own
    rule (jinv luxMonth). Same rule for NPCs (j28 serveTH). The card shows it in advance in Kèm; "Vì sao" names it. */
 Object.assign(BAL,{thieuLe:{danh:-2,duc:-1,aff:-3,strict:1.5,frac:.35}});
 function aaThieuLe0(p){try{if(!p||p.out)return false;if(p.rankSet!=null&&p.rankSet===rkOf(p)&&p.rankSetWorn)return false;if(typeof luxOf!=="function")return false;const x=luxOf(p);if(x.sc>0)return x.sc<x.bud*BAL.thieuLe.frac;
  /* nothing worn: thiếu lễ only when she could have dressed (a bestowed rank set, or wearable things in her chest) — nobody is blamed for clothes she does not own */
  return p.rankSet!=null||(p.inv||[]).some(e=>!e.h&&IT[e.k]&&itm(e.k).sl)}catch(e){return false}}
-function aaHostStrict(host){try{if(host==="th"){const t=traitsOf({kind:"th"});return t.includes("Đa nghi")||t.includes("Kiêu ngạo")}if(host&&host.queen)return traitsOf(host).some(t=>t==="Kiêu ngạo"||t==="Ghen tuông")}catch(e){}return false}
+function aaHostStrict(host){try{if(host==="th"){const t=traitsOf({kind:"th"});return t.includes("Kín đáo")||t.includes("Kiêu ngạo")}if(host&&host.queen)return traitsOf(host).some(t=>t==="Kiêu ngạo"||t==="Nóng nảy")}catch(e){}return false}
 function aaThieuLeFx(host){const B=BAL.thieuLe,m=aaHostStrict(host)?B.strict:1;return{danh:B.danh,duc:B.duc,aff:Math.round(B.aff*m)}}
 function aaThieuLeTxt(host,f0){const f=f0||aaThieuLeFx(host);const who=host==="th"?"Thái hậu":host==="emp"?"Hoàng thượng":host&&host.queen?"Hoàng hậu":"chủ nhà";
  return `thiếu lễ (y phục dưới phẩm): Danh ${f.danh}, Đức ${f.duc}, ${host==="emp"?`Sủng ${f.aff>0?"+":""}${Math.round(f.aff/3)||-1}`:`${who} thiện cảm ${f.aff}`}`}
@@ -215,11 +215,11 @@ function aaThieuLeWhy(host){try{const L=leAttire(S,"thỉnh an",host),who=host==
 /* 17. leAttire(p, occasion, host) — ONE judgement of how someone is dressed for a formal moment (owner 11/15), used by Thiếu lễ and
    by review/toilette (the morning dress-up + makeup game writes p.toilette = {wk: wk() day key, score 0–100, makeup: bool}).
    Returns {state:"ok"|"plain"|"showy"|"overRank", delta:{danh,duc,aff}, why:[…]}. Host reaction by nết:
-   etiquette-minded hosts (Thái hậu Đa nghi/Kiêu ngạo, Hoàng hậu Kiêu ngạo/Ghen tuông) punish "plain" ×BAL.thieuLe.strict;
-   a frugal host (Thái hậu Hiền lành, Hoàng hậu Hiền lành/Nhu mì) approves plain dress (small +). Showy/overRank stay the
+   etiquette-minded hosts (Thái hậu Đa nghi/Kiêu ngạo, Hoàng hậu Kiêu ngạo/Nóng nảy) punish "plain" ×BAL.thieuLe.strict;
+   a frugal host (Thái hậu Hiền lành, Hoàng hậu Hiền lành/Khiêm nhường) approves plain dress (small +). Showy/overRank stay the
    luxury rules (jinv luxMonth / vượt phẩm) — here they only cost a little host favour with a frugal host. */
 function leHostKind(host){try{const T=host==="th"?traitsOf({kind:"th"}):host&&host!=="emp"?traitsOf(host):[];
- if(T.some(t=>t==="Hiền lành"||t==="Nhu mì"))return"frugal";if(host==="th"?T.some(t=>t==="Đa nghi"||t==="Kiêu ngạo"):T.some(t=>t==="Kiêu ngạo"||t==="Ghen tuông"))return"strict";}catch(e){}return"normal"}
+ if(T.some(t=>t==="Ân cần"||t==="Khiêm nhường"))return"frugal";if(host==="th"?T.some(t=>t==="Kín đáo"||t==="Kiêu ngạo"):T.some(t=>t==="Kiêu ngạo"||t==="Nóng nảy"))return"strict";}catch(e){}return"normal"}
 function leAttire(p,occasion,host){p=p||S;const why=[];let state="ok";try{
  const x=typeof luxOf==="function"?luxOf(p):{lv:1,sc:1,bud:1};const tl=p.toilette&&p.toilette.wk!=null&&p.toilette.wk===(typeof wk==="function"?wk():-1)?p.toilette:null;/* one look per DAY (wk(): S.turn is the month, so turn*10+buoi never matched) */
  if(x.lv>=3){state="overRank";why.push("y phục vượt phẩm")}else if(x.lv===2){state="showy";why.push("y phục quá xa hoa")}

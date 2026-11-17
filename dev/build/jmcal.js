@@ -86,7 +86,7 @@ function mcWxNext(){try{const n=mcNow();let m=n.m,y=n.y,t=n.t+1;if(t>2){t=0;m++;
 (function(){if(typeof rollWx!=="function")return;const r0=rollWx;rollWx=function(){let L=null;try{L=WX[SEASON[S.month-1]]}catch(e){}if(!L)return r0.apply(this,arguments);
  const i=mcWxIdx(S.year,S.month,S.tuan,L.length),mr=Math.random;let once=false;Math.random=function(){if(!once){once=true;return (i+.5)/L.length}return mr.apply(Math,arguments)};
  try{return r0.apply(this,arguments)}finally{Math.random=mr}}})();
-function mcWxSeer(){if(mcSrv()||(S&&S.out))return null;const L=(S&&S.staff)||[];return L.find(s=>s&&!s.coop&&(+s.age||0)>=40)||L.find(s=>s&&!s.coop&&s.tr==="lanh")||null}
+function mcWxSeer(){if(mcSrv()||(S&&S.out))return null;const L=(S&&S.staff)||[];return L.find(s=>s&&!s.coop&&(+s.age||0)>=40)||L.find(s=>s&&!s.coop&&netIs(s,"sharp"))||null}
 /* quẻ of a tuần: current = S.lot; earlier = her log line "Xin xăm: quẻ X · dom" (the last re-draw wins) */
 function mcLogsOf(m,y,t){const pre=`T${m}/${y} ${TUAN[t]}`;const out=[];try{for(const h of S.logs||[]){const p=String(h);const k=p.indexOf("</span>");const head=p.slice(0,k).replace(/<[^>]+>/g,"");if(head.trim()!==pre)continue;out.push(p.slice(k+7).replace(/<[^>]+>/g,"").replace(/\s+/g," ").trim())}}catch(e){}return out}
 function mcQue(o,t){const n=mcNow();if(o>0||(o===0&&t>n.t))return null;if(o===0&&t===n.t&&S.lot)return{lv:+S.lot.lv,dom:S.lot.dom};
