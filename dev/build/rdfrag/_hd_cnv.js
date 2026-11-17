@@ -65,3 +65,6 @@ function CNV_QFIX(road){
   for(const bk in a.B||{}){const b=a.B[bk];fix(b,["t","h","l","w"]);if(Array.isArray(b.o))for(const o of b.o)fix(o,["n","rt","rf","lx","wx","c","w","l"])}
   for(const ek in a.E||{})fix(a.E[ek],["t","tag","fx","w"])}
  for(const r of (typeof RD97L!=="undefined"?RD97L:[]))if(r&&String(r.a).indexOf(road+"_")===0)fix(r,["t","tag","ti","n","fx","w"])}
+/* named counts the odds terms in BAL.road.fx read (rdOdds "k" / "kd" / "q", review/road-onecore pattern); BAN_* / CHU_* / MATR / LMMR live in the road fragments */
+RDQ.cnvQv=()=>CNV_QV();RDQ.chuE=()=>CHU_E();RDQ.banE=()=>BAN_E();RDQ.tin0=()=>S.tin||0;RDQ.lmmR=()=>LMMR();
+RDQ.banRS=()=>BAN_R()?S.sung/BAL.road.cnv_ban.eDiv:(S.tin||0)/BAL.road.cnv_ban.eDiv;RDQ.matTin=()=>MATR()?0:S.tin/BAL.road.cnv_mat.tinDiv;
