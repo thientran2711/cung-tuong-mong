@@ -200,3 +200,15 @@ KEPT until parts E / G (they decide WHO ROLLS a world event, the host rolls it o
 ### Notes for the reviewer
 - Implicit frames (display code writing NPC fields lazily: wdOf migration, item iu, tsbPets normalisation) still send small ops; with prune they are a few hundred chars. Kept on purpose: dropping them would also drop her taps that write an NPC outside runAct / chooseM. Counted in C.stat.implicit.
 - Worker DOMAX 20 000 stays; a single changed array over 17 000 chars (never seen: largest NPC field in the runs 2 943 chars, 1.cz) would still be refused — counted (C.stat.big), asserted 0.
+
+### For part E (Foreman B s6 order, MAIN s34 ~16:22Z SCOPE LINE; OD:L1493)
+- world-events-2 (live e8b1906f): world windows' end() effects on a GUEST's own household (vu cổ / trộm / phóng cung; her choice in S.wwMe) must run HOST-SIDE for her seat, thin-guest pattern, no patch → part E (week end / world rolls). Not built in C.
+
+## ROLLOVER HANDOVER #2 → #3 (worker #2 session_01N1tNP6EZvNuroq8VSupxw7, 11/17/2026 16:50Z)
+Why: context ≥ START_CTX ≈ 4 % + 25 % (owner OD:L1217 / 16/11 08:22Z s14). Branch review/coop-thin-c @ 475beba7 pushed; nothing uncommitted; worktrees removed.
+Open (Foreman B s6 16:33Z): origin/main is 17 commits past the merged 7e0250ec (086f1d60, incl. world-events-2 e8b1906f, one-core-jkc).
+1. Worktree: `git worktree add /home/user/wt/thinc review/coop-thin-c` (sparse as in PREAMBLE, hooks install); `git merge origin/main`; generated files (index.html, sw.js, assets.json): take theirs, then `python3 dev/build/assemble.py && bash dev/site/build_site.sh`; one-core-guard.
+2. Check the lens does not break world-events-2 on the guest: S.wwMe (her choice) is her person (not a W key? check jcoopworld W_KEYS; if world-events-2 added W keys, they get the lens accessor automatically); her end() household effects must still reach her (today via the merged week) — run coop-thin-c L3 (NOACT=1 is enough for the week path) + the world-events-2 co-op test if one exists (grep dev/test for wwMe / world-events).
+3. Rerun post-merge: coop-thin-c L3 (full) + L4, coop-e2e (+COOP_SWAP=1), coop-thin-b L4, coop-thin-d L4, d-probe L4, quickcheck (after committing the build). Runner pattern: a bash script with pairs in parallel, summary lines only (see #2 gates table).
+4. Update '## #2' sha / gates rows, CLAIMS row 785 'SẴN SÀNG KIỂM <new sha>', send_message Foreman B s6 session_01N1tNP6aS1jVsCvD9kpxdH1.
+Tools: `TRIP=1 OUT=<dir> node dev/test/coop-thin-c.js <W> 3 [swap]` (KINDS=a,b filter, DBG=1 skip diagnostics, SHOTS=<dir> device shots); bot `TRIP=1 THIN=3 node dev/test/coop-bot.js 4 <out>`. Shots for review are on CDN img/_review/coop-thin-c/ (verdict giver wipes them).
