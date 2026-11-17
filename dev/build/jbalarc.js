@@ -45,6 +45,10 @@ Object.assign(BAL,{arc:{
  /* alt = the hand-written routes without silver (jstory ALT67, key "arc.beat"), option shape as fx; the old story's witness route (j4 td1)
     reads the same td_an.c1 [0] */
  alt:{"td_an.c1":[{c:{suc:-6},o:[40,["kd","maidLoy",3],["mz","mat",4]],sc:1,l:{danh:-3}},{c:{suc:-4},o:[30,["k","artY",9],["dz","tamco",5]],sc:1,l:{}}]},
+ /* t96 = the tư tình man's month (j96 tm96Month): fade = his heart cools (her heat h < h, his tình > tinh: p in 100 to lose d); amb = an ambitious
+    man cools (tình > tinh: p, −d); note = a man deep in love sends a note (tình ≥ tinh, h ≥ h: p); cool = suspicion settles (p, −d);
+    wed = she marries him off (c_wed): his tình becomes tinh, the Thái hậu's favour fx */
+ t96:{fade:{h:35,tinh:20,p:30,d:1},amb:{tinh:30,p:8,d:2},note:{tinh:72,h:50,p:4},cool:{p:25,d:1},wed:{tinh:15,fx:{th:4}}},
  r97:{stay:{sung:5}},
  /* the Ngự tứ hairpins a rare ending can grant (j97; the wardrobe j92 may rename them): the wear gain */
  ntItem:{nt_nhuy:{sac:5,danh:3},nt_haiduong:{sac:6,danh:4},nt_dongchau:{sac:7,danh:5}},

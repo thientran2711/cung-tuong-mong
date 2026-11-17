@@ -221,7 +221,7 @@ ARC67.tm96c=arcFx("tm96c",{o:"tm",ok:ok96,t:"Thanh mai trúc mã: Lựa chọn c
   {n:"✦ Giả chết, theo chàng rời cung",rare:1,if:()=>rare96()&&A96has("thuoc"),o:A=>20+(A.sc||0)*7+(T96().k==="td"?15:0)+S.tamco/6-(T96().sus||0)/3,e:["c_tron","c_lo"],rt:"Thuốc ngấm. Ngươi nghe tiếng {maid} khóc như từ rất xa.",rf:"Thái y bắt mạch lần thứ hai và nhận ra mạch vẫn còn."}]}},
  E:{c_lang:{tag:"Lỡ làng",w:"lv",t:"Ngươi để năm tháng trôi qua mà không chọn. {lvn} cuối cùng cũng thôi chờ, xin đi trấn nhậm xa, chỉ còn là một cái tên trong sổ triều.",go:()=>{const m=man96();if(m){m.tinh=10;m.haunts=["thu"]}T96().endC="c_lang";return ""}},
   c_ally:{tag:"Tình cũ thành đồng minh trên triều",w:"lv",t:"Ngươi chôn chặt tình cũ. {lvn} lên cao, thành {lvup}; mỗi lời chàng nói trên triều đều nghiêng về phía ngươi. Không ai biết vì sao, ngoài hai người.",go:()=>{const m=man96(),V=V96();if(m&&V){m.role=V.up;m.tinh=Math.min(m.tinh,35);m.ally96=1}T96().endC="c_ally";T96().ally=1;return m?`${m.name} nay là ${V.up}, đồng minh của ngươi trên triều.`:""}},
-  c_wed:{tag:"Tác thành cho người xưa",w:"lv",t:"{lvn} cưới {lvbride}. Ngày ấy ngươi gửi một đôi gối thêu uyên ương. Chàng hướng về hậu cung vái ba vái, rồi bước vào kiệu hoa của người khác.",go:()=>{const m=man96(),V=V96();if(m&&V){m.wed=V.bride;m.tinh=15}try{if(!S.thDead)apply({th:4})}catch(e){}T96().endC="c_wed";return ""}},
+  c_wed:{tag:"Tác thành cho người xưa",w:"lv",t:"{lvn} cưới {lvbride}. Ngày ấy ngươi gửi một đôi gối thêu uyên ương. Chàng hướng về hậu cung vái ba vái, rồi bước vào kiệu hoa của người khác.",go:()=>{const m=man96(),V=V96();if(m&&V){m.wed=V.bride;m.tinh=BAL.arc.t96.wed.tinh}try{if(!S.thDead)apply(BAL.arc.t96.wed.fx)}catch(e){}T96().endC="c_wed";return ""}},
   c_dead:{tag:"Chàng chết vì ngươi",w:"lv",t:"{lvn} nhận hết tội, chết trong ngục, đến cuối cùng không nhắc tên ngươi. Người ta trả về cho ngươi {lvtok}, dính một vệt máu khô.",go:A=>{const m=man96();if(m)m.alive=false;T96().endC="c_dead";const v=rv67(A,"v");return (m?`${m.name} đã chết. `:"")+(v?`Ngươi biết ai đã dồn chàng vào chỗ chết: ${v.name}.`:"")}},
   c_lo:{tag:"Tư thông bại lộ",w:"emp",t:"Chuyện của ngươi và {lvn} bị phơi bày trước Hoàng thượng. Lần này không còn đường chối.",go:()=>{const m=man96();T96().endC="c_lo";if(m&&m.alive){affairExposed(m,`Chuyện của ${S.name} và ${m.name} bị phơi bày.`);return `${m.name} bị xử trảm.`}return ""}},
   c_bimat:{tag:"Một đêm, rồi thôi",w:"lv",t:"Một đêm duy nhất, rồi đèn tắt và chuyện cũ khép lại mãi mãi. Sáng hôm sau, ngươi lại là phi tần đoan trang của hậu cung.",go:()=>{const m=man96();let r="";try{if(m)r=tryst(m,0)}catch(e){}if(m)m.tinh=Math.min(m.tinh,40);T96().endC="c_bimat";return r}},
@@ -236,10 +236,11 @@ function A96has(f){const t=T96();return !!(t&&t.f&&t.f[f])}
 (function(){const o0=opts67;opts67=function(A,b){const L=o0.apply(this,arguments);if(!A||!/^tm96/.test(A.a))return L;return L.map(o=>typeof o.c==="function"?Object.assign({},o,{c:o.c(A)}):o)}})();
 /* two-way, month by month: his heart follows hers; a man in love reaches out by himself (true news, real evidence) */
 function tm96Month(){const t=T96(),m=man96();if(!t||!m||!m.alive||S.dead||t.endC)return"";let ev="";
- if((t.h||0)<35&&m.tinh>20&&roll(30))m.tinh=cl(m.tinh-1,0,100);
- if(m.trait==="tham vọng"&&m.tinh>30&&roll(8))m.tinh=cl(m.tinh-2,0,100);
- if(m.tinh>=72&&(t.h||0)>=50&&roll(4)){adj96({lt:1});ev+=`Có người lén đưa đến cho ngươi một mảnh giấy của ${m.name}: chàng vẫn nhớ. `}
- if(t.sus>0&&roll(25))t.sus=Math.max(0,t.sus-1);
+ const M=BAL.arc.t96;
+ if((t.h||0)<M.fade.h&&m.tinh>M.fade.tinh&&roll(M.fade.p))m.tinh=cl(m.tinh-M.fade.d,0,100);
+ if(m.trait==="tham vọng"&&m.tinh>M.amb.tinh&&roll(M.amb.p))m.tinh=cl(m.tinh-M.amb.d,0,100);
+ if(m.tinh>=M.note.tinh&&(t.h||0)>=M.note.h&&roll(M.note.p)){adj96({lt:1});ev+=`Có người lén đưa đến cho ngươi một mảnh giấy của ${m.name}: chàng vẫn nhớ. `}
+ if(t.sus>0&&roll(M.cool.p))t.sus=Math.max(0,t.sus-M.cool.d);
  return ev}
 (function(){const m0=monthTick;monthTick=function(){let ev=m0.apply(this,arguments);try{if(S&&!S.dead)ev+=tm96Month()}catch(e){console.error(e)}return ev}})();
 /* dev/test hook (no UI): jump the plan to one of the three chapters */
