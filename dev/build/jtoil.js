@@ -735,7 +735,7 @@ const TOIL_MKS={
  dep:{lip:.7,eye:.9,eyeH:.8,brow:.7,wing:.3,low:.34,shim:.5,gloss:.65,bl:.31,r:.2,sk:.3,hl:1},/* Kiều diễm = the ?v=5 Khuynh thành look, moved down one step (owner 17/11 ~14:00Z) */
  tuyet:{lip:.76,eye:.96,eyeH:.9,brow:.78,wing:.42,low:.3,shim:.75,gloss:.78,bl:.35,r:.21,sk:.4,hl:1,glam:1},/* Khuynh thành: splendid, between Kiều diễm and the heavy v7 (owner 14:40Z) */
  diem:{lip:.92,eye:1,eyeH:.95,brow:.82,wing:.36,low:.6,shim:.5,gloss:.2,bl:.56,r:.24,sk:.32,diff:1},/* Diêm dúa = the v6 look, blush more diffuse (loang, lower centre) */
- vungB:{lip:1,eye:1,eyeH:1.18,brow:.9,wing:.55,low:.85,shim:.6,gloss:.2,bl:.78,r:.23,sk:.36}};/* Vụng về B "đánh quá tay, như hề" = the v7 Diêm dúa look; A = TOIL_MKS.vung */
+ vungB:{lip:1,eye:1,eyeH:1.18,brow:.9,wing:.55,low:.85,shim:.6,gloss:.2,bl:.78,r:.18,bp:"soft",sk:.36}};/* v18 (owner 17/11 19:55Z): blush SIZE = Đoan trang .165 / Kiều diễm .2 (was .23), outer edge blurred (BLP.soft); colour strength kept. Vụng về B "đánh quá tay, như hề" = the v7 Diêm dúa look; A = TOIL_MKS.vung */
 function toilVungB(col){const sd=((col&&col.seed)|0);if(!sd)return false;let h=Math.imul(sd^(sd>>>15),2246822519);h=Math.imul(h^(h>>>13),3266489917);h^=h>>>16;return((h>>>0)/4294967296)<(BAL.toil.vungB||0)}
 const MK_FIT={g:{},ld:{},face(f){const m=/^(?:por|fig)-([a-z]+-[a-z]*\d+)-/.exec(String(f||""));return m?m[1]:null},
  get(f){const g=this.face(f);if(!g)return null;const t=this.g[g];if(t)return t[f]||null;this.load(g);return null},
@@ -813,14 +813,14 @@ const eh=VU?[.6+.55*R(),.3+.35*R()]:[1,1];let en=0;
  if(row&&row.length>=7){const Wp=W/100,Hp=H/100,rf=T.r||.17,rr=row[6]*Wp*rf;[[row[2],row[3]],[row[4],row[5]]].forEach((q,i)=>{Object.assign(cheeks[i],{x:q[0]*Wp,y:q[1]*Hp,rx:rr,ry:rr,rot:0,fit:1})})}
  const mc=toilColRGB("ma",col.ma);const sp=(x,y)=>[(x-bx)*cw/bw,(y-by)*chh/bh];
  /* soft gaussian-like fall-off (a feathered oval, never a disc with an edge) */
- const BLP={puff:[[0,1],[.4,.86],[.78,.34],[1,0]],diff:[[0,.62],[.3,.52],[.65,.25],[1,0]],patch:[[0,1],[.45,.88],[.78,.4],[1,0]],v2:[[0,1],[.35,.55],[1,0]],wide:[[0,.8],[.3,.62],[.62,.27],[1,0]]};
+ const BLP={puff:[[0,1],[.4,.86],[.78,.34],[1,0]],diff:[[0,.62],[.3,.52],[.65,.25],[1,0]],patch:[[0,1],[.45,.88],[.78,.4],[1,0]],v2:[[0,1],[.35,.55],[1,0]],wide:[[0,.8],[.3,.62],[.62,.27],[1,0]],soft:[[0,.82],[.25,.6],[.5,.3],[.75,.09],[1,0]]};
  const blob=(g,cx,cy,rx,ry,rot,rgb,al,flat,prof)=>{g.save();g.translate(cx,cy);g.rotate(rot);g.scale(rx,ry);const gr=g.createRadialGradient(0,0,0,0,0,1);const st=prof||(flat?[[0,1],[.55,.92],[.8,.45],[1,0]]:[[0,1],[.2,.9],[.4,.66],[.6,.36],[.8,.12],[1,0]]);st.forEach(([t,f])=>gr.addColorStop(t,`rgba(${rgb[0]},${rgb[1]},${rgb[2]},${(al*f).toFixed(3)})`));g.fillStyle=gr;g.beginPath();g.arc(0,0,1,0,7);g.fill();g.restore()};
  const cmx=mid[0],cmy=eyeY+(mY-eyeY)*.5;
 
  if(T.sk)blob(gs,cmx,cmy,u*1.22,u*1.6,ang,[255,249,240],T.sk);
  if(T.hl)cheeks.forEach(c=>blob(gs,c.x,c.y-u*.16,u*.2,u*.15,0,[255,244,226],.2));/* tuyệt: soft round lights on the cheekbones (wide fall-off), never a streak */
  cheeks.forEach((c,i)=>{const j=VU?[.7+.7*R(),.7+.7*R(),(R()-.5)*u*.12,(R()-.5)*u*.09,.55+.8*R()]:[1,1,0,0,1];
-  blob(gs,c.x+j[2],c.y+j[3],c.rx*j[0],c.ry*j[1],c.rot+(VU?(R()-.5)*.5:0),mc,Math.min(.9,T.bl*j[4]),0,look==='vua'?BLP.v2:T.diff?BLP.diff:BLP.wide);
+  blob(gs,c.x+j[2],c.y+j[3],c.rx*j[0],c.ry*j[1],c.rot+(VU?(R()-.5)*.5:0),mc,Math.min(.9,T.bl*j[4]),0,look==='vua'?BLP.v2:T.bp?BLP[T.bp]:T.diff?BLP.diff:BLP.wide);
   if(VU){/* small uneven blotches beside the cheek */for(let k=0;k<2;k++)blob(gs,c.x+(R()-.5)*c.rx*1.1,c.y+(R()-.5)*c.ry*1.2,u*(.09+.06*R()),u*(.06+.05*R()),R()*3,mc,.18+.12*R(),0,BLP.wide)}});
  /* vụng: powder PATCHES and streaks (irregular, a little cakey), not dots: long thin or lumpy, random turn, flat top */
  const PZ=BAL.toil.vungPuff,RZ=toilRnd((col.seed|0)+23),bigI=RZ()<.5?0:1;/* own rng: the other draws keep their v8 values; per day one cheek gets the big puff, the other the small one */
