@@ -262,3 +262,5 @@ No new bar, gate or roll; old saves without `v.ag.vent` load (two-way-oldsave ok
 agent_check 16/16 · npcmind-check (main 08725411 → branch) ERRS [] · likes-family ok · two-way-oldsave (08725411 save, 30 weeks) ok, 0 errors ·
 coop-one-world PASS · coop-e2e 61/61 · onecore-pick TOTAL 0 · agent_probe CPU ×4 Fold 755x1000 160 steps: slices 130, p50 2.8, p95 5.3,
 max 9.6 (one ksp landing), sync p95 0.8, 0 page errors.
+
+**SẴN SÀNG KIỂM d4796840** (fault 8 + faults 1–7 on review/npc-agent-r1)
