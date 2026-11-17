@@ -311,34 +311,46 @@ const ORD70={
  giuchung:{n:"Giữ sổ sách, làm chứng",d:"ghi chép giờ giấc, giữ đồ đạc: vu oan, cài đồ, tung tin, tố giác nhắm vào ngươi khó thành hơn",bac:5,lo:0,acts:["frame","plant","kframe","rumor","accuse","vp"]}};
 function ords70(){const z=j70();if(!z)return[];if(!z.ord)z.ord=[];
  for(let i=z.ord.length-1;i>=0;i--)if(!sv70(z.ord[i].sid))z.ord.splice(i,1);return z.ord}
-function sv70(sid){if(sid==="maid")return S.maid||null;return(S.staff||[]).find(s=>s.sid===sid)||null}
+function sv70(sid,p){if(p&&p!==S)return(p.staff||[]).find(s=>s.sid===sid)||null;if(sid==="maid")return S.maid||null;return(S.staff||[]).find(s=>s.sid===sid)||null}
+/* an NPC consort's standing orders (AG-ALL-2e3 parity: her Phòng bị button, the NPC side = cx3:defOrd in jagacts3): the same ORD70 orders, kept on p.ord70 */
+function tid70(x){return x===S?"me":x&&x.id}
+function ords70Of(p){if(!p||p===S)return ords70();const L=p.ord70||[];for(let i=L.length-1;i>=0;i--)if(!sv70(L[i].sid,p))L.splice(i,1);return L}
 function svN70(sid){const s=sv70(sid);return s?s.name:"kẻ hầu"}
 function ordOf70(sid){return ords70().find(o=>o.sid===sid)||null}
 function traitor70(s){return !!(s&&s.spyFor&&s.spyFor!=="me")}
 /* the protection an order really gives (zero if that servant secretly serves someone else) */
-function canhB70(o){const s=sv70(o.sid);if(!s||traitor70(s))return 0;return cl(Math.round(4+(s.loyal||0)/10),4,14)}
+function canhB70(o,p){const s=sv70(o.sid,p);if(!s||traitor70(s))return 0;return cl(Math.round(4+(s.loyal||0)/10),4,14)}
 function ordFor70(k,a){return ords70().filter(o=>{const O=ORD70[o.k];if(!O)return false;if(o.k==="theodoi")return a&&o.tgt===a.id;return O.acts&&O.acts.includes(k)})}
 function title70(p){if(!p||p===S)return"ngươi";try{const t=(typeof kitTitle==="function"&&kitTitle(p))||rkName(p);return `${t} ${p.name}`}catch(e){return p.name}}
 /* her detection: the head maid's old built-in +10 now comes only from an explicit guard order */
 (function(){const o0=oSee;oSee=function(t,p){let r=o0.apply(this,arguments);try{if((t||S)===S&&S&&!window.__j70off){if(S.maid&&S.maid.loyal>=BAL.loy.trust)r-=10;
   for(const o of ords70()){if(o.k==="canh")r+=canhB70(o);if(o.k==="thudoc"&&p&&!traitor70(sv70(o.sid)))r+=20;if(o.k==="theodoi"&&window.__j70A&&o.tgt===window.__j70A.id&&!traitor70(sv70(o.sid)))r+=12}
   r+=(window.__j70self||0);
-  r=cl(Math.round(r),5,95)}}catch(e){}return r}})();
+  r=cl(Math.round(r),5,95)}
+  else if(t&&t!==S&&t.ord70&&t.ord70.length&&!window.__j70off){for(const o of ords70Of(t)){if(traitor70(sv70(o.sid,t)))continue;if(o.k==="canh")r+=canhB70(o,t);if(o.k==="thudoc"&&p)r+=20;if(o.k==="theodoi"&&window.__j70A&&o.tgt===tid70(window.__j70A))r+=12}r=cl(Math.round(r),5,95)}}catch(e){}return r}})();
 (function(){const c0=caught;caught=function(a){const p0=window.__j70A;window.__j70A=a;try{return c0.apply(this,arguments)}finally{window.__j70A=p0}}})();
 /* her ordered servants are busy: she cannot send them on her own errands */
-(function(){const b0=bestSent;bestSent=function(p){if(p===S&&S&&!window.__j70off){const busy=ords70().map(o=>o.sid);const L=(S.staff||[]).filter(s=>!s.spyFor&&!busy.includes(s.sid));if(!L.length)return null;return L.slice().sort((a,b)=>(b.loyal+nq(b,"sharp",BAL.net.k.spySharp))-(a.loyal+nq(a,"sharp",BAL.net.k.spySharp)))[0]}return b0.apply(this,arguments)}})();
+(function(){const b0=bestSent;bestSent=function(p){if(p&&p!==S&&p.ord70&&p.ord70.length&&!window.__j70off){const r=b0.apply(this,arguments);const busy=p.ord70.map(o=>o.sid);if(!r||!busy.includes(r.sid))return r;const L=(p.staff||[]).filter(s=>!s.spyFor&&!busy.includes(s.sid));if(!L.length)return null;return L.slice().sort((a,b)=>(b.loyal+nq(b,"sharp",BAL.net.k.spySharp))-(a.loyal+nq(a,"sharp",BAL.net.k.spySharp)))[0]}if(p===S&&S&&!window.__j70off){const busy=ords70().map(o=>o.sid);const L=(S.staff||[]).filter(s=>!s.spyFor&&!busy.includes(s.sid));if(!L.length)return null;return L.slice().sort((a,b)=>(b.loyal+nq(b,"sharp",BAL.net.k.spySharp))-(a.loyal+nq(a,"sharp",BAL.net.k.spySharp)))[0]}return b0.apply(this,arguments)}})();
 /* plots by someone she has a watcher on, or with a guard posted, are seen earlier; a traitor watcher feeds the plotter instead */
 (function(){const s0=seeP70;seeP70=function(p,step){let c=s0.apply(this,arguments);try{const a=pa70(p);if(a&&a!==S){if(S.maid&&S.maid.loyal>=BAL.loy.trust&&p.t==="me"){c-=10;if(roll(selfP70maid()))c+=10}for(const o of ords70()){if(o.k==="theodoi"&&o.tgt===a.id&&!traitor70(sv70(o.sid)))c+=30;if(o.k==="canh"&&p.t==="me")c+=canhB70(o)}
-  const z=j70();if(z.allyW&&z.allyW.until>=wk()&&p.t==="me"&&z.allyW.id!==a.id)c+=15}}catch(e){}return cl(Math.round(c),3,90)}})();
+  const z=j70();if(z.allyW&&z.allyW.until>=wk()&&p.t==="me"&&z.allyW.id!==a.id)c+=15}
+  const t=pt70(p);if(t&&t!==S&&t.ord70&&t.ord70.length)for(const o of ords70Of(t)){if(traitor70(sv70(o.sid,t)))continue;if(o.k==="theodoi"&&a&&o.tgt===tid70(a))c+=30;if(o.k==="canh")c+=canhB70(o,t)}}catch(e){}return cl(Math.round(c),3,90)}})();
 /* monthly: prices, lòng, the watcher's evidence and risk */
-(function(){const m0=monthTick;monthTick=function(){const r=m0.apply(this,arguments);try{if(S&&!S.dead&&!window.__j70off)ordMonth70()}catch(e){console.error(e)}return r}})();
+(function(){const m0=monthTick;monthTick=function(){const r=m0.apply(this,arguments);try{if(S&&!S.dead&&!window.__j70off){ordMonth70();for(const v of liveRivals(true))if(v.ord70&&v.ord70.length)ordMonth70npc(v)}}catch(e){console.error(e)}return r}})();
 function ordMonth70(){const L=ords70();for(const o of L.slice()){const O=ORD70[o.k],s=sv70(o.sid);if(!O||!s)continue;
   if(O.bac){if(S.bac>=O.bac)apply({bac:-O.bac});else{L.splice(L.indexOf(o),1);log(`Không đủ ${O.bac} lượng bạc, lệnh ${O.n.toLowerCase()} của ${s.name} phải bãi.`);continue}}
   if(O.lo)s.loyal=cl((s.loyal||0)+O.lo,0,100);
   if(o.k==="theodoi"){const v=RV(o.tgt);if(!v||!v.alive||v.out){L.splice(L.indexOf(o),1);continue}
    if(traitor70(s)){if(s.spyFor===key(v)&&roll(30))log(`${s.name} theo dõi ${title70(v)} nhưng chẳng mang về tin gì.`);continue}
-   if(roll(12)){oanAdd(v,S,BAL.eff.j70.ordMonth70);s.loyal=cl((s.loyal||0)-BAL.eff.j70.loyalOrdMonth70,0,100);log(`${R70("Bị lộ:")} ${s.name} bám theo ${title70(v)} bị người bên ấy bắt gặp. ${v.name} oán ngươi ${balSg(BAL.eff.j70.ordMonth70)}, lòng ${s.name} -${balAb(BAL.eff.j70.loyalOrdMonth70)}.`)}
-   else if(roll(30)){evA(S,v,BAL.eff.j70.evOrdMonth70);noteAdd(v.id,`${s.name} theo dõi, lấy được ${balAb(BAL.eff.j70.evOrdMonth70)} chứng cứ (nay ${evG(S,v)})`);log(`${s.name} theo dõi ${title70(v)}: thêm ${balAb(BAL.eff.j70.evOrdMonth70)} chứng cứ (nay ${evG(S,v)}).`)}}}}
+   if(roll(BAL.def70.caught)){oanAdd(v,S,BAL.eff.j70.ordMonth70);s.loyal=cl((s.loyal||0)-BAL.eff.j70.loyalOrdMonth70,0,100);log(`${R70("Bị lộ:")} ${s.name} bám theo ${title70(v)} bị người bên ấy bắt gặp. ${v.name} oán ngươi ${balSg(BAL.eff.j70.ordMonth70)}, lòng ${s.name} -${balAb(BAL.eff.j70.loyalOrdMonth70)}.`)}
+   else if(roll(BAL.def70.ev)){evA(S,v,BAL.eff.j70.evOrdMonth70);noteAdd(v.id,`${s.name} theo dõi, lấy được ${balAb(BAL.eff.j70.evOrdMonth70)} chứng cứ (nay ${evG(S,v)})`);log(`${s.name} theo dõi ${title70(v)}: thêm ${balAb(BAL.eff.j70.evOrdMonth70)} chứng cứ (nay ${evG(S,v)}).`)}}}}
+/* the same monthly price / lòng / watcher evidence for an NPC consort's orders (she pays bạc, the servant's lòng moves, a watcher may be caught or bring evidence) */
+function ordMonth70npc(p){const L=ords70Of(p);for(const o of L.slice()){const O=ORD70[o.k],s=sv70(o.sid,p);if(!O||!s)continue;
+  if(O.bac){if((p.bac||0)>=O.bac)ap(p,{bac:-O.bac});else{L.splice(L.indexOf(o),1);continue}}
+  if(O.lo)s.loyal=cl((s.loyal||0)+O.lo,0,100);
+  if(o.k==="theodoi"){const v=o.tgt==="me"?S:RV(o.tgt);if(!v||v.alive===false||v.out){L.splice(L.indexOf(o),1);continue}if(traitor70(s))continue;
+   if(roll(BAL.def70.caught)){oanAdd(v,p,BAL.eff.j70.ordMonth70);s.loyal=cl((s.loyal||0)-BAL.eff.j70.loyalOrdMonth70,0,100);if(v===S)log(`${s.name}, người của ${title70(p)}, bám theo ngươi bị bắt gặp.`)}
+   else if(roll(BAL.def70.ev))evA(p,v,BAL.eff.j70.evOrdMonth70)}}}
 /* (a) people close to her protect her unasked: chance from lòng / affection / nature; each one who acts is named in the notice */
 function selfP70maid(){return S.maid?cl(Math.round((S.maid.loyal-50)*4),0,95):0}
 function self70(a){const out=[];const busy=ords70().map(o=>o.sid);
@@ -353,7 +365,7 @@ function self70(a){const out=[];const busy=ords70().map(o=>o.sid);
   const snap={danh:S.danh,sung:S.sung,suc:S.suc,duc:S.duc,bac:S.bac,rank:S.rank,preg:S.preg||0,kids:(S.kids||[]).filter(x=>x.alive).length,cold:!!S.out,scar:!!S.scar};const e0=evG(S,a);const mo=motNow70(a);
   const used=[];let pre="";
   const tq=ordFor70(k,a).find(o=>o.k==="thudoc"&&!traitor70(sv70(o.sid)));
-  if(tq&&roll(30)){const s=sv70(tq.sid);evA(S,a,BAL.eff.j70.evTop_2);const died=k!=="huydung"&&roll(40);if(died&&tq.sid!=="maid"){S.staff.splice(S.staff.indexOf(s),1)}else s.loyal=cl((s.loyal||0)+BAL.eff.j70.loyalTop,0,100);try{if(k!=="huydung"&&!(died&&tq.sid!=="maid")&&typeof pzGive==="function"){pzGive(s,1,"nếm độc thay chủ",a,2);if(s.pz)s.pz.dx=1}}catch(e){}
+  if(tq&&roll(BAL.def70.taste)){const s=sv70(tq.sid);evA(S,a,BAL.eff.j70.evTop_2);const died=k!=="huydung"&&roll(BAL.def70.die);if(died&&tq.sid!=="maid"){S.staff.splice(S.staff.indexOf(s),1)}else s.loyal=cl((s.loyal||0)+BAL.eff.j70.loyalTop,0,100);try{if(k!=="huydung"&&!(died&&tq.sid!=="maid")&&typeof pzGive==="function"){pzGive(s,1,"nếm độc thay chủ",a,2);if(s.pz)s.pz.dx=1}}catch(e){}
    const n=note70({a,k,ok:false,mo,by:[`lệnh ${ORD70.thudoc.n.toLowerCase()} (${s.name})`],gain:evG(S,a)-e0,snap,body:k==="huydung"?`${s.name} thử hộp phấn trên tay trước, tay sưng phồng; phấn độc không chạm mặt ngươi.`:`${s.name} nếm trước bát thuốc, ${died&&tq.sid!=="maid"?"ngã gục, không qua khỏi":"đau bụng mấy ngày nhưng qua được"}; độc không đến miệng ngươi.`,known:true});return n}
   const gc=ordFor70(k,a).filter(o=>o.k==="giuchung"&&!traitor70(sv70(o.sid)));const e1=a.__err||0;if(gc.length)a.__err=e1+15;
   const SP=["ally","gift","spy"].includes(k)?[]:self70(a);const w0=window.__j70self;window.__j70self=SP.reduce((x,y)=>x+y.b,0);

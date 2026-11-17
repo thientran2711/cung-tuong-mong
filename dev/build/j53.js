@@ -103,7 +103,7 @@ function ktNpcTutor(k,v){if(!ktLive(v))return;let want=nv(v,"tutorWant")+R(2);
 function ktMonth(){let ev="";if(!S||S.dead)return ev;
  for(const [k,v] of allKids()){if(!k.alive)continue;ktSync(k);const p=v||S;
   if(!ktLive(p)){if(k.tut||k.vt){k.tut=0;k.vt=0;k.fav=0}}/* mẹ mất hay vào lãnh cung: không ai trả học phí */
-  if(v&&ktLive(v)&&k.age>=3&&S.turn%3===0){const P=ktPT(v);if(roll(P[0]*100))ktTeach(k,v,"tv");if(roll(P[1]*100))ktTeach(k,v,"td")}
+  if(v&&ktLive(v)&&k.age>=3&&S.turn%3===0&&!(typeof p3On==="function"&&p3On())){/* par3 on: the NPC mother chooses Dạy chữ / Dạy lễ nghi herself (jagacts3 cx3:teach*) */const P=ktPT(v);if(roll(P[0]*100))ktTeach(k,v,"tv");if(roll(P[1]*100))ktTeach(k,v,"td")}
   if(k.age>=6&&!k.enr){k.enr=1;if(v)ktNpcTutor(k,v);else{tcSeeOwn(k,"thầy dạy",BAL.tc.nzOwn);ev+=`${k.name} tròn 6 tuổi, vào Thượng thư phòng học chung; thầy dạy thưa: tư chất con ${tcWord(k.tcO.v)}. Có thể mời thầy riêng ở thẻ con. `}}
   if(!v&&k.age>=BAL.tc.nurseAge&&!k.tcO){if(k.age>=6){tcSeeOwn(k,"thầy dạy",BAL.tc.nzOwn);ev+=`Thầy dạy thưa: tư chất ${k.name} ${tcWord(k.tcO.v)}. `}/* reviewer: old saves / children already at school — the teacher speaks, not the nurse */
    else{tcSeeOwn(k,"nhũ mẫu",BAL.tc.nzNurse);ev+=`Nhũ mẫu thưa: ${k.name} ${tcWord(k.tcO.v)==="chậm hiểu"?(k.age<3?"chậm biết nói, chậm biết đi":"chậm hiểu lời"):"lanh lợi"}, tư chất ${tcWord(k.tcO.v)}. `}}
@@ -199,7 +199,7 @@ function ktBtns(k){if(!k.alive)return[];ktSync(k);const B=[],t2=whyTime(2),t1=wh
   :pbtn(`data-kt53="vo" data-t="1" data-kn="${k.name}"`,"Mời thầy cưỡi ngựa bắn cung",`Chắc chắn · tốn: 1 khắc, Bạc -${KT.feeVo} mỗi tháng · thành: Võ khoảng +${ktYear(k,"tw",vr)}/năm${v0?"":" (không thầy: con gái không học võ)"}`,small||t1||(S.bac<KT.feeVo*2?`thiếu bạc (cần ${KT.feeVo*2})`:"")));
  return B}
 function ktAct(a,name,t){const k=S&&S.kids.find(x=>x.name===name&&x.alive);if(!k||S.dead||Q.length)return;ktSync(k);const b=rsnap();let title="Việc học của con",ok="sure";
- if(a==="tv"||a==="td"){if(!can(2)||k.age<3||S.suc<5||k[a==="tv"?"mtv":"mtd"]===ktSea())return;spend(2);apply({suc:-5});const g=ktTeach(k,S,a);title=a==="tv"?"Dạy chữ":"Dạy lễ nghi";
+ if(a==="tv"||a==="td"){if(!can(BAL.kidTeach.k)||k.age<BAL.kidTeach.age||S.suc<BAL.kidTeach.suc||k[a==="tv"?"mtv":"mtd"]===ktSea())return;spend(BAL.kidTeach.k);apply({suc:-BAL.kidTeach.suc});const g=ktTeach(k,S,a);title=a==="tv"?"Dạy chữ":"Dạy lễ nghi";
   log(`Tự tay ${a==="tv"?"dạy":"dạy lễ nghi cho"} ${k.name}${a==="tv"?" học chữ":""}: ${a==="tv"?"Văn":"Đức"} con +${ktG(g)}. ${roll(25)?ktReveal(k,"Dạy con, ngươi thấy"):""}`)}
  else if(a==="tut"){t=+t;if(k.age<6||!can(1)||(t&&S.bac<KT.fee[t]*2)||(k.tut===t&&(t<3||!k.fav)))return;if(t)spend(1);k.tut=t;k.fav=0;title=t?`Mời ${TUT[t]}`:"Cho con học chung";
   log(t?`Mời ${TUTD[t]} dạy ${k.name}: học phí Bạc ${KT.fee[t]} mỗi tháng, trả cùng bổng lộc.`:`${k.name} về học lớp chung của Thượng thư phòng, không tốn học phí.`)}
@@ -213,7 +213,7 @@ document.addEventListener("click",e=>{const b=e.target.closest("[data-kt53]");if
 /* thẻ bài "Dạy dỗ" trong bộ việc: đổi thành Dạy chữ cho đứa yếu chữ nhất chưa được dạy tháng này */
 (function(){const d0=deal;deal=function(){d0.apply(this,arguments);try{if(!S||!Array.isArray(deck))return;const i=deck.findIndex(a=>/^Dạy dỗ/.test(a.n||""));if(i<0)return;
   const L=S.kids.filter(k=>k.alive&&k.age>=3&&k.mtv!==ktSea());L.forEach(ktSync);const k=L.sort((a,b)=>a.tv-b.tv)[0];if(!k){deck.splice(i,1);return}const g=ktTeachG(k,S,"tv");
-  deck[i]=Object.assign({},deck[i],{n:`Dạy ${k.sex==="m"?"hoàng tử":"công chúa"} học chữ`,t:`Tự tay dạy ${k.name} chữ nghĩa.`,c:{suc:-5},x:`Văn ${k.name} +${ktG(g)}`,go:()=>{ktTeach(k,S,"tv")}})}catch(e){}}})();
+  deck[i]=Object.assign({},deck[i],{n:`Dạy ${k.sex==="m"?"hoàng tử":"công chúa"} học chữ`,t:`Tự tay dạy ${k.name} chữ nghĩa.`,c:{suc:-BAL.kidTeach.suc},x:`Văn ${k.name} +${ktG(g)}`,go:()=>{ktTeach(k,S,"tv")}})}catch(e){}}})();
 /* ---- giao diện: thẻ con, dòng tin ở tẩm cung, bảng Thượng thư phòng ---- */
 (function(){if(typeof kidActs!=="function")return;const a0=kidActs;kidActs=function(k){return a0.apply(this,arguments).filter(h=>!/data-kid="teach"/.test(h))}})();
 function tcLine(k,mine){const s=tcSeen(k,mine);const t=typeof kitGloss==="function"?kitGloss("Tư chất hoàng tự","Tư chất"):"Tư chất";

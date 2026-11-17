@@ -1071,8 +1071,18 @@ BAL.ag.par3={on:1,
  /* phe phái (j10 facAct for her, cx3:fac* for an NPC): khắc of her button; friend bar to found; worth per deed */
  fac:{k:2,frAff:35,clanAff:15,sharedOan:30,foeOan:25,gFound:{"ally":3},gJoin:{"ally":2,"safe":1},gLeave:{"safe":1},gSell:{"hh":1,"safe":1},gDiv:{"spite":3}},
  /* Uống thuốc thúc sinh (P3C.drug): worth = the book-mismatch danger she escapes */
- drug:{g:{"safe":4,"kid":2}}};
+ drug:{g:{"safe":4,"kid":2}},
+ /* 2e3: Mời đến cung ta (cx3:invite, worth = the liking she would win), Phòng bị (cx3:def_<order>, worth per order; spite bar for the theo dõi target) */
+ invite:{g:{"ally":2},minAff:20},petBuy:{g:{"danh":1,"safe":1},keep:40},petcare:{g:{"ally":2}},teach:{g:{"kid":2}},
+ /* 2e3 toilette answers of an NPC (jtoilr toilRx*: Ghi hận / Mách Hoàng hậu after a slight, Cảm tạ / Tặng lại after praise, Hỏi bí quyết): weight b + traits, picked by mindPick with Xin lỗi / Cười trừ / Đáp lại */
+ toil:{ans:{grudge:{b:.6,tr:{"Kiêu ngạo":1,"Xảo quyệt":1.5,"Tham vọng":.8}},tell:{b:.4,tr:{"Tham vọng":1,"Xảo quyệt":.8}}},praise:{thank:{b:2,tr:{"Kín đáo":1,"Kiêu ngạo":1}},give:{b:1,tr:{"Ân cần":1.5,"Khiêm nhường":1}}},ask:{ask:{b:1,tr:{"Khiêm nhường":1.5,"Ân cần":1}},no:{b:1.5,tr:{"Kiêu ngạo":2,"Tham vọng":1}}}},def:{g:{canh:{"safe":2},thudoc:{"safe":3},theodoi:{"safe":2,"spite":1},giuchung:{"safe":1.5}},foe:20}};
 /* Chia sẻ bí mật (P3T.secret, her talk and NPC↔NPC): a listener with malice above secretMal may keep it against the speaker, odds secretGrab */
+/* Mời đến cung ta (j21 inviteO, her button and an NPC host): odds = base + guest's liking of the host / affD + rank gap × rk; below hate the button says she will not come */
+/* Phòng bị · Thử độc đồ ăn (j70, her order and an NPC's): odds the taster tastes first, odds the taster dies of it */
+/* Dạy con học chữ / lễ nghi (j53 ktAct, her deck card and an NPC mother cx3:teach*): Sức and khắc of one lesson */
+BAL.kidTeach={suc:5,k:2,age:3};
+BAL.def70={taste:30,die:40,caught:12,ev:30};/* + Theo dõi một người, monthly: odds the watcher is caught / brings evidence */
+BAL.invite={base:40,affD:2,rk:5,hate:-30};
 BAL.talk.secretMal=50;BAL.talk.secretGrab=50;
 /* AG-ALL-2f r2 — TAI MẮT MUST BE EARNED (owner OD 17/11 ~16:50Z): becoming someone's Tai mắt is the PERSON's choice (jagknow tmOdds = bribeOdds + what
    she wants from the recruiter; loyal servants mostly refuse and may tell their master). want = bonus when the recruiter can give it: bac (a greedy one,

@@ -199,3 +199,73 @@ function p3DrugOk(v){if(!v.preg||v.fake||v.khInd||v.out)return false;let o=0;try
 AGC3BTN.drug="Uống thuốc thúc sinh";AGC3ACT.drug="uống thuốc thúc sinh";
 agReg("consort","par3preg",(v,N,need)=>{const O=[];if(!p3On()||v===S||!v.alive)return O;const X=BAL.ag.par3;try{if(p3DrugOk(v)&&(!need||X.drug.g[need]!=null)){const x=p3O(v,"drug",P3C.drug(v),N,X.drug.g,"self");if(x)O.push(x)}}catch(e){agdErr("par3preg",e)}return O});
 agRunReg("cx3:drug",v=>p3DrugOk(v)?p3Run(v,P3C.drug(v),"drug"):"");
+/* ================= 2e3 (AG-ALL-2e3): Mời đến cung ta (j21) · Phòng bị (j70) ================= */
+/* ---------------- Mời đến cung ta: the NPC host sends the same invitation; the guest answers when the next buổi's places are drawn (j21 placeWhere → p3InvLand), odds inviteO(host, guest) ----------------
+   guest = another consort: on yes she is at the host's palace that buổi (S.where), on no the host's liking of her drops BAL.eff.j21.top (her refusal rule);
+   guest = HER: the host is at home and sends word (the old 4 % flat roll is off while par3 is on) — she chooses whether to go */
+function p3InvQ(){return(S.invQ=S.invQ||[])}
+function p3InvLand(){const Q=p3InvQ();if(!Q.length)return;S.invQ=[];for(const q of Q){const h=RV(q.h);if(!h||!h.alive||h.out||h.confined)continue;const k=palaceOf(h);
+ if(q.g==="me"){S.where[h.id]=k;seeLoc(h,k);log(`${h.name} sai người mời ngươi sang cung nàng chơi buổi này.`);continue}
+ const g=RV(q.g);if(!g||!g.alive||g.out||g.confined)continue;if(roll(inviteO(h,g))){S.where[g.id]=k;S.where[h.id]=k}else affAdd(h,g,BAL.eff.j21.top)}}
+AGC3BTN.invite2="Mời đến cung ta";AGC3ACT.invite2="sai người đi mời khách";
+agReg("consort","par3inv",(v,N,need)=>{const O=[];if(!p3On()||v===S||v.out||v.confined||!v.alive||(need&&need!=="ally"))return O;const X=BAL.ag.par3.invite;
+ try{if(p3InvQ().some(q=>q.h===v.id))return O;const L=others(v).filter(x=>x&&x.alive!==false&&!x.out&&!x.confined&&!sameHouse(v,x)&&aff(v,x)>=X.minAff&&aff(x,v)>=BAL.invite.hate);if(!L.length)return O;
+  const t=mindPickBy(L,x=>BAL.mind.pick.ag.base+Math.max(0,aff(v,x)),v);if(!t)return O;
+  const x=p3O(v,"invite2",{n:"Mời đến cung ta",c:{},o:t===S?100:inviteO(v,t),k:1},N,X.g,"social",null,t);if(x)O.push(x)}catch(e){agdErr("par3inv",e)}return O});
+agRunReg("cx3:invite2",(v,t)=>{if(!t||p3InvQ().some(q=>q.h===v.id))return"";p3InvQ().push({h:v.id,g:t===S?"me":t.id});return p3Res("invite2",`${v.name} sai người mời ${p3Who(t)} buổi sau sang cung`)});
+/* ---------------- Phòng bị: an NPC consort gives the same standing orders (ORD70: canh / thudoc / theodoi / giuchung) to one free servant; j70 now reads them for her
+   (oSee / seeP70 bonuses, the monthly price and watcher evidence ordMonth70npc, the busy servant in bestSent) and the food taster below ---------------- */
+function p3DefFree(v){const busy=(v.ord70||[]).map(o=>o.sid);return(v.staff||[]).filter(s=>s&&!s.out&&!s.spyFor&&!busy.includes(s.sid))}
+function p3DefFoe(v){const L=others(v).filter(x=>x&&x.alive!==false&&!x.out&&agSpite(x,v)>=BAL.ag.par3.def.foe);return L.length?mindPickBy(L,x=>agSpite(x,v),v):null}
+for(const k in ORD70){AGC3BTN["def_"+k]="Phòng bị";AGC3ACT["def_"+k]="giao việc "+ORD70[k].n.toLowerCase()}
+agReg("consort","par3def",(v,N,need)=>{const O=[];if(!p3On()||v===S||v.out||!v.alive||v.p3DefM===S.turn||(need&&need!=="safe"&&need!=="spite"))return O;const D=BAL.ag.par3.def;
+ try{if(!p3DefFree(v).length)return O;const have=(v.ord70||[]).map(o=>o.k);
+  for(const k in ORD70){if(have.includes(k)&&k!=="theodoi")continue;const Od=ORD70[k];let t=null;if(Od.tgt){t=p3DefFoe(v);if(!t||(v.ord70||[]).some(o=>o.k===k&&o.tgt===tid70(t)))continue}
+   const x=p3O(v,"def_"+k,{n:"Phòng bị",c:Od.bac?{bac:-Od.bac}:{},o:100,k:1},N,D.g[k],"self",null,t);if(x)O.push(x)}}catch(e){agdErr("par3def",e)}return O});
+for(const k in ORD70)agRunReg("cx3:def_"+k,(v,t)=>{const L=p3DefFree(v);if(!L.length||(ORD70[k].tgt&&!t))return"";const s=L.slice().sort((a,b)=>(b.loyal||0)-(a.loyal||0))[0];
+ (v.ord70=v.ord70||[]).push({k,sid:s.sid,tgt:t?tid70(t):null,since:wk()});v.p3DefM=S.turn;return p3Res("def_"+k,`${v.name} giao cho ${s.name} việc ${ORD70[k].n.toLowerCase()}${t?` (${p3Who(t)})`:""}`)});
+/* the food taster of an NPC consort: her runAct rule (j70) for any target with a Thử độc order — tastes first (BAL.def70.taste), may die of it (BAL.def70.die), the target gains evidence */
+(function(){const r0=runAct;runAct=function(a,t,k,extra){if(!t||t===S||!a||!ACT[k]||!t.ord70||!t.ord70.length||window.__j70off||!p3On())return r0.apply(this,arguments);
+  const o=ords70Of(t).find(o=>o.k==="thudoc"&&ORD70.thudoc.acts.includes(k)&&!traitor70(sv70(o.sid,t)));if(!o||!roll(BAL.def70.taste))return r0.apply(this,arguments);
+  const s=sv70(o.sid,t);evA(t,a,BAL.eff.j70.evTop_2);const died=k!=="huydung"&&roll(BAL.def70.die);if(died){t.staff.splice(t.staff.indexOf(s),1)}else s.loyal=cl((s.loyal||0)+BAL.eff.j70.loyalTop,0,100);
+  AG3.stat.by.taste=(AG3.stat.by.taste||0)+1;return `${s.name} nếm trước thay ${t.name}, ${died?"ngã gục, không qua khỏi":"đau bụng mấy ngày nhưng qua được"}; độc không đến miệng chủ.`}})();
+Object.assign(window,{p3InvLand,p3InvQ});
+/* ---------------- Nhờ thái giám tìm thú nuôi (jpet petBuyOne(t,p): the same price / odds as her shop; the NPC picks the pet by mindPick over what she can pay, keeping BAL.ag.par3.petBuy.keep bạc;
+   the old 3 % flat buy is off while par3 is on) · Giúp chăm thú nuôi của nàng (ACT.petcare through runAct, the same act as her button; a friend with pets) ---------------- */
+Object.assign(AGC3BTN,{petBuy:"Nhờ thái giám tìm thú nuôi",petcare:"Giúp chăm thú nuôi của nàng",teachV:"học chữ",teachD:"Dạy lễ nghi"});
+Object.assign(AGC3ACT,{petBuy:"nhờ thái giám tìm thú nuôi",petcare:"sang giúp chăm thú nuôi",teachV:"tự tay dạy con học chữ",teachD:"tự tay dạy con lễ nghi"});
+function p3PetL(v){const X=BAL.ag.par3.petBuy;if(typeof PETK==="undefined"||!petHasFree(v))return[];return PETK.filter(k=>PET[k].pr&&(v.bac||0)-PET[k].pr>=X.keep&&!tsbPets(v).some(P=>P.t===k))}
+function p3PetFr(v){if(!ACT.petcare)return[];return others(v).filter(t=>t&&t!==S&&t.alive!==false&&!t.out&&tsbPets(t).length&&ACT.petcare.ok(v,t))}
+function p3KidT(v,f){const s=ktSea();return kidsOf(v).filter(k=>k&&k.alive&&k.age>=BAL.kidTeach.age&&k[f==="tv"?"mtv":"mtd"]!==s)}
+agReg("consort","par3life",(v,N,need)=>{const O=[];if(!p3On()||v===S||v.out||!v.alive)return O;const X=BAL.ag.par3;const nd=g=>!need||g[need]!=null;const P=x=>x&&O.push(x);
+ try{if(nd(X.petBuy.g)&&typeof petBuyOne==="function"){const L=p3PetL(v);if(L.length){const k=mindPickBy(L,k=>BAL.mind.pick.ag.base+PET[k].tr+1,v);P(p3O(v,"petBuy",{n:AGC3BTN.petBuy,c:{bac:-PET[k].pr},o:petBuyO(k,v),k:1},N,X.petBuy.g,"self"));if(O.length)O[O.length-1].pk=k}}
+  if(nd(X.petcare.g)){const L=p3PetFr(v);if(L.length){const t=mindPickBy(L,x=>BAL.mind.pick.ag.base+Math.max(0,aff(v,x)),v);P(p3O(v,"petcare",{n:AGC3BTN.petcare,c:{},o:100,k:BAL.time.cost.harm||1},N,X.petcare.g,"social",(kh)=>agAt(t,kh),t))}}
+  if(nd(X.teach.g)&&(v.suc||0)>=BAL.kidTeach.suc)for(const f of ["tv","td"])if(p3KidT(v,f).length)P(p3O(v,f==="tv"?"teachV":"teachD",{n:"Dạy con",c:{suc:-BAL.kidTeach.suc},o:100,k:BAL.kidTeach.k},N,X.teach.g,"self"));
+ }catch(e){agdErr("par3life",e)}return O});
+agRunReg("cx3:petBuy",v=>{const L=p3PetL(v);if(!L.length)return"";const k=mindPickBy(L,k=>BAL.mind.pick.ag.base+PET[k].tr+1,v);const ok=petBuyOne(k,v);
+ return p3Res("petBuy",ok?`Thái giám tìm về cho ${v.name} ${PET[k].n.replace(/^./,c=>c.toLowerCase())}`:`${v.name} nhờ thái giám tìm thú nuôi, mua phải con ốm`)});
+agRunReg("cx3:petcare",(v,t)=>t&&tsbPets(t).length&&ACT.petcare.ok(v,t)?p3Res("petcare",String(runAct(v,t,"petcare")||"").replace(/<[^>]+>/g,"").trim()):"");
+for(const f of ["tv","td"]){const K=f==="tv"?"teachV":"teachD";agRunReg("cx3:"+K,v=>{const L=p3KidT(v,f);if(!L.length||(v.suc||0)<BAL.kidTeach.suc)return"";L.forEach(ktSync);const k=L.sort((a,b)=>a[f]-b[f])[0];
+ ap(v,{suc:-BAL.kidTeach.suc});const g=ktTeach(k,v,f);return p3Res(K,`${v.name} tự tay dạy ${k.name}${f==="tv"?" học chữ":" lễ nghi"} (${f==="tv"?"Văn":"Đức"} +${ktG(g)})`)})}
+/* ---------------- toilette answers of an NPC consort (jtoilr: the same functions as her answer buttons, toilRxGrudge / toilRxTell / toilRxGive / toilRxAsk; jagtoil tl2See calls p3ToilAns)
+   slight: Xin lỗi / Cười trừ / Đáp lại (jagtoil) + Ghi hận / Mách Hoàng hậu (when the teaser is a consort; Mách needs a Hoàng hậu who is not the teaser) — one mindPick over all five
+   praise: Cảm tạ (changes nothing, as hers) / Tặng lại (bạc toilGiveCost, the praiser's liking toilBack) · Hỏi bí quyết: she sees a better face (askGap) and may ask (toilAskO) ---------------- */
+(function(){if(typeof tl2AnsPick!=="function")return;const a0=tl2AnsPick;tl2AnsPick=function(w,x){if(!p3On()||!x||x===S||x==="th"||x==="emp")return a0.apply(this,arguments);
+ try{const A=BAL.ag.toil2.ans,P=BAL.ag.par3.toil.ans,O=[];const T=traitsOf(w)||[];const wt=c=>{let n=c.b;for(const t of T)n+=c.tr[t]||0;return n};
+  for(const c in A)O.push([c,wt(A[c])]);O.push(["grudge",wt(P.grudge)]);if(!x.queen&&toilHhOk()&&queenP()&&queenP()!==w)O.push(["tell",wt(P.tell)]);
+  return mindPick(O,w)||"smile"}catch(e){agdErr("par3:toilPick",e);return a0.apply(this,arguments)}}})();
+function p3ToilAns(w,x,c){if(c==="grudge"){toilRxGrudge(w,x,x.name);return"grudge"}if(c==="tell")return toilRxTell(w,x,x.name);return null}
+try{Object.assign(TL2_ANS,{grudge:"nàng mím môi ghi hận",tellOk:"nàng đem chuyện mách Hoàng hậu, kẻ chê bị răn vài câu",tellFail:"nàng mách Hoàng hậu, bị chê hay chấp vặt",give:"nàng gửi chút bạc đáp lễ",thank:"nàng cảm tạ",askOk:"nàng hỏi bí quyết điểm trang, được chỉ cho",askNo:"nàng hỏi bí quyết điểm trang, bị cười nhạt"})}catch(e){}
+function p3ToilPick(w,B){const T=traitsOf(w)||[];return mindPick(Object.keys(B).map(c=>{let n=B[c].b;for(const t of T)n+=B[c].tr[t]||0;return[c,n]}),w)}
+(function(){if(typeof tl2See!=="function")return;const s0=tl2See;tl2See=function(x,w,L){if(!p3On()||!x||!w||x===S||w===S)return s0.apply(this,arguments);let e=null,ask=false;
+  try{if(!toilSeen(x,w)){e=toilSeeRule(x,L);const R=toilRx();const nx=toilNpc(x),nw=toilNpc(w);ask=!x.queen&&!toilTipOn(w)&&nx&&nx.makeup&&nw&&(nx.score|0)>=(nw.score|0)+R.askGap}}catch(er){e=null}
+  const r=s0.apply(this,arguments);if(r||!e&&!ask)return r;const out=[];
+  try{const X=BAL.ag.par3.toil;TL2.stat.ans=TL2.stat.ans||{};
+   if(e&&e.k==="praise"&&e.aff>0){let c=p3ToilPick(w,X.praise);const cost=toilGiveCost(w);if(c==="give"&&(w.bac||0)<cost)c="thank";
+    if(c==="give"){ap(w,{bac:-cost});toilRxGive(w,x,x.name,e.aff>=2?toilRx().giveAffBig:toilRx().giveAff,"chút bạc")}TL2.stat.ans[c]=(TL2.stat.ans[c]||0)+1;
+    if(c==="give")out.push(`${x.name} khen ${w.name} ăn vận giản dị; ${TL2_ANS.give}`)}
+   if(ask&&p3ToilPick(w,X.ask)==="ask"){const a=toilRxAsk(w,x,x.name);TL2.stat.ans[a]=(TL2.stat.ans[a]||0)+1;out.push(`${w.name} thấy ${x.name} điểm trang khéo; ${TL2_ANS[a]}`)}
+  }catch(er){agdErr("par3:toilSee",er)}return out.join(". ")}})();
+(function(){if(typeof toilNpcSk!=="function")return;const k0=toilNpcSk;toilNpcSk=function(v){const r=k0.apply(this,arguments);try{if(v&&v!==S&&toilTipOn(v))return Math.min(1,r+toilRx().tipBonus)}catch(e){}return r}})();
+Object.assign(AGC3BTN,{toilGrudge:"Ghi hận",toilTell:"Mách Hoàng hậu",toilGive:"Tặng lại",toilAsk:"Hỏi bí quyết",toilThank:"Cảm tạ"});
+Object.assign(window,{p3ToilAns});

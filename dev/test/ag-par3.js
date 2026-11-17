@@ -90,5 +90,30 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
  ok(Object.values(r6.spy).every(x=>x>=1),'household deeds run her buttons’ own functions',r6.spy);
  ok(r6.fac.includes("cx3:facFound")&&r6.facMade,'phe phái: NPC founds a faction through found() (the same as Lập phe cùng)',{fac:r6.fac,run:r6.facRun});
  ok(r6.drug.same,'Uống thuốc thúc sinh: one builder P3C.drug for her and the NPC',r6.drug);
+ /* 2e3 (AG-ALL-2e3): Mời đến cung ta · Phòng bị · thú nuôi · dạy con · điểm trang answers */
+ const r7=await p.evaluate(()=>{const out={};const L=liveRivals(true).filter(x=>!x.out&&!x.queen&&x.alive&&!x.confined);const v=L[0],t=L.find(x=>x!==v&&!sameHouse(v,x));vNorm(v);vNorm(t);
+  const N=Object.assign({},agNeeds(v),{ally:1,spite:1,safe:1,kid:1,danh:1});v.rl[t.id]=60;t.rl[v.id]=40;S.invQ=[];
+  /* invite: one odds function for her button and the NPC host */
+  let n=0;const f0=inviteO;inviteO=function(){n++;return f0.apply(this,arguments)};try{inviteBtn(t)}finally{inviteO=f0}out.herInv=n;
+  const I=AGREG.consort.par3inv(v,N,null);out.inv=I.map(o=>o.k);if(I[0]){AGRUN[I[0].k](v,I[0].t);out.q=S.invQ.length;const r0=roll;roll=()=>true;try{S.where=S.where||{};p3InvLand()}finally{roll=r0}out.came=S.where[I[0].t.id]===palaceOf(v)}
+  /* defence orders */
+  v.staff=(v.staff||[]).filter(s=>!s.spyFor);if(v.staff.length<2)v.staff.push({sid:9e6+21,name:"Thử F",role:"maid",loyal:60,af:{}},{sid:9e6+22,name:"Thử G",role:"eunuch",loyal:60,af:{}});
+  v.ord70=[];v.p3DefM=-1;v.bac=500;const h0=hostility;hostility=(a,b)=>a===t&&b===v?90:h0(a,b);
+  try{const D=AGREG.consort.par3def(v,N,null);out.def=D.map(o=>o.k);const s0=oSee(v,1);const o1=D.find(o=>o.k==="cx3:def_canh")||D[0];if(o1)AGRUN[o1.k](v,o1.t);out.ord=(v.ord70||[]).length;out.see=[s0,oSee(v,1)];
+   const b0=v.bac;ordMonth70npc(v);out.paid=v.bac<=b0}finally{hostility=h0}
+  /* pets + teaching */
+  v.bac=500;v.mat=3;const sp={petBuyOne:0,runAct:0,ktTeach:0};const W={};for(const k in sp){W[k]=window[k];window[k]=function(){if(arguments[0]===v||arguments[1]===v)sp[k]++;return W[k].apply(this,arguments)}}
+  try{t.pets=t.pets||[];if(!tsbPets(t).length)petAdd(t,"meo","test","buy");v.rl[t.id]=60;
+   const kid={name:"Thử Nhi",sex:"m",age:7,alive:true,tv:10,td:10,tal:20};(v.kids=v.kids||[]).push(kid);v.suc=80;
+   const Lf=AGREG.consort.par3life(v,N,null);out.life=Lf.map(o=>o.k);for(const o of Lf)AGRUN[o.k](v,o.t);v.kids.splice(v.kids.indexOf(kid),1)}finally{for(const k in W)window[k]=W[k]}out.spy=sp;
+  /* toilette answers: her Ghi hận / Mách / Tặng lại / Hỏi bí quyết go() and the NPC answer run the same functions */
+  const tc={toilRxGrudge:0,toilRxTell:0};const T0={};for(const k in tc){T0[k]=window[k];window[k]=function(){if(arguments[0]===v)tc[k]++;return T0[k].apply(this,arguments)}}
+  try{for(let i=0;i<40;i++){const c=tl2AnsPick(v,t);if(c==="grudge"||c==="tell")p3ToilAns(v,t,c)}}finally{for(const k in T0)window[k]=T0[k]}out.toil=tc;
+  const H={};for(let i=0;i<200;i++){const c=tl2AnsPick(v,t);H[c]=(H[c]||0)+1}out.toilH=H;
+  return out});
+ ok(r7.herInv>=1&&r7.inv.includes("cx3:invite2")&&r7.q===1&&r7.came,'Mời đến cung ta: her odds = inviteO; NPC host invites, the guest comes next buổi by the same odds',r7);
+ ok(r7.def.length>=3&&r7.ord===1&&r7.see[1]>r7.see[0]&&r7.paid,'Phòng bị: NPC gives the same ORD70 orders; j70 reads them (oSee up, monthly price)',{def:r7.def,see:r7.see});
+ ok(r7.life.includes("cx3:petBuy")&&r7.life.includes("cx3:petcare")&&r7.life.includes("cx3:teachV")&&r7.spy.petBuyOne>=1&&r7.spy.runAct>=1&&r7.spy.ktTeach>=1,'pets / dạy con: NPC options run petBuyOne / runAct petcare / ktTeach',{life:r7.life,spy:r7.spy});
+ ok(Object.keys(r7.toilH).length>=4&&(r7.toil.toilRxGrudge+r7.toil.toilRxTell)>=1,'toilette slight: NPC picks among 5 answers (mindPick) and runs her toilRx functions',{H:r7.toilH,run:r7.toil});
  ok(errs.length===0,'no page errors',errs.slice(0,3));
  await b.close();const f=res.filter(x=>!x).length;console.log(f?`${f} FAIL`:'ALL PASS');process.exit(f?1:0)})();

@@ -55,7 +55,7 @@ const TL2_ANS={sorry:"nàng cúi đầu nhận lỗi",smile:"nàng cười trừ
 function tl2See(x,w,L){if(toilSeen(x,w))return"";const e=toilSeeRule(x,L);toilMark(x,w);if(!e)return"";
  if(e.aff)affAdd(x,w,e.aff);if(e.g)affAdd(x,w,-e.g);
  if(e.k!=="tease")return"";TL2.stat.tease++;const ease=Math.min(e.n,Math.max(0,-aff(x,w)));if(ease)affAdd(x,w,ease);
- const c=tl2AnsPick(w);const r=toilAns(w,{host:x,n:-BAL.toil.teaseN,v:x},c);const a=c==="reply"?(r?"win":"lose"):c;TL2.stat.ans[a]=(TL2.stat.ans[a]||0)+1;
+ const c=tl2AnsPick(w,x);let a=typeof p3ToilAns==="function"?p3ToilAns(w,x,c):null;if(!a){const r=toilAns(w,{host:x,n:-BAL.toil.teaseN,v:x},c);a=c==="reply"?(r?"win":"lose"):c}TL2.stat.ans[a]=(TL2.stat.ans[a]||0)+1;
  return `${x.name} che miệng cười ${L.mk==="diem"?`lớp phấn son ${toilMkW("diem")}`:`gương mặt điểm trang ${toilMkW("vung")}`} của ${w.name}; ${TL2_ANS[a]}`}
 function tl2Meet(){if(!tl2On()||!agOn()||typeof gmPlaces!=="function")return;const key=agKey();if(S.tl2m===key)return;S.tl2m=key;const t0=performance.now();
  try{const q=typeof qOn==="function"&&qOn()?rivals[0]:null;
