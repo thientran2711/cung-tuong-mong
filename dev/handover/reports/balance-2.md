@@ -33,3 +33,9 @@ LEFT (exact next steps):
  c. bot-proof: compare bp_old_hint vs bp_old_rand vs bp_new_*: if hint − rand gap grows with ctxTaste 18 / ctxCap 30, ship it in jevb BAL (owner OD:L478); else report.
  d. §7 Sủng table for the owner (via main): Sủng m12/24/36 + rank + HH with BAL.grow.keys + "sung" (arm 'sung') vs after; write the VANPHONG table (no %, ladder words) — do NOT ship.
  e. Gates: quickcheck.sh, dev/test/balance-core.js, old saves, coop-e2e not worse; rebuild site (bash dev/site/build_site.sh) and commit; final report + "SẴN SÀNG KIỂM <sha>"; send_message Foreman D #9 session_01964izBsQba9xq3oCFovTBQ.
+
+## WORKER #2 (session_01964izGWnkaGFspe7wY97fw, opus) — took over from #1 at a2ce31a3
+START_CTX ≈ 4 % of the 1M window (estimate). Rollover at 29 %, ceiling 60 %.
+- (17/11 ~09:50Z) MERGED live main 9391f9a into review/balance-2 → **5434696b** (pushed). 8 source conflicts, resolved keeping both sides: j2/j75 deck acts keep main's BAL.deck table but its odds use balance-core's art curve (deckOdds → artOE, her and NPCs alike); main's trait renames (netRx/netIs, Xảo quyệt, Ân cần|Khiêm nhường) applied onto balance-core's npcStudy, stealFit, tyEnemies; H54.sad + BAL.rk.vpTake kept; jbalcore.js kept in assemble.py; site rebuilt. Scan: no line added by balance-core/balance-2 still tests an old trait name. Smoke: 2 bot lives, 0 page errors. one-core-guard PASS (fails 0, inline 6588 < 6691).
+- Main turned the NPC agent loop on (jagent, BAL.agent on:1) → pre-merge numbers (incl. #1's queue) are relative only; headline HH numbers are re-measured on the merged build.
+- RUNNING (this container): merged build, Vừa, 8-y cap, 152 lives each: mB = merged branch as is; mH = HH-gate lever (BAL.hhThNoSon 80→70, hhThNoSonHieu 70→62, BAL.outQ 60→30, RANKS Hoàng hậu Danh 78→70). ETA ~15:00Z.
