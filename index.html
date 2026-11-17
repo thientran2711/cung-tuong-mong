@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"847215e9+","t":"2026-11-17T03:29Z","c":"review kit-ico-rank-r1: kitRank renumbered KIT §86 -> §87 (clash with review/scenes-3 kitLearn); end card keeps main's endArt picture (lost…","b":"4d6a525742fa","h":[{"s":"babc9b4a","t":"2026-11-17T01:39Z","c":"Chơi chung không còn treo máy vì tên bạn lặp chữ; số bóng người trên dư đồ khớp đúng người đang ở đó; việc có hạn giờ hiện đồng hồ ngay dướ…"},{"s":"92685210+","t":"2026-11-17T00:53Z","c":"Khung việc và khung sự kiện bốn cỡ, tranh lấp đầy khung, việc nhắc tên ai hiện chân dung người ấy; phẩm của món đồ nằm ngay trên viền khung…"},{"s":"6f513340","t":"2026-11-16T23:24Z","c":"Vào game mới không còn bật ngay màn lật thẻ, lật thẻ chỉ khi vào buổi tối; dư đồ nhãn giấy mới; việc dài lấn sang buổi sau; lời trong cung …"},{"s":"7a18d957","t":"2026-11-16T22:44Z","c":"review-diemtrang-fx-r1 report"},{"s":"afe2bcbc","t":"2026-11-16T22:25Z","c":"review r1: KIT 84.1a note + report"},{"s":"dea1d445+","t":"2026-11-16T21:32Z","c":"golive lag-play-2: CHANGE line + site rebuilt"},{"s":"674f3af4","t":"2026-11-16T21:21Z","c":"Chơi cùng bạn: bạn chơi chung chưa gặp mặt nay hiện tên gọi chung “Hảo hữu của ta” ở mọi nơi, không còn ẩn thành dấu hỏi."},{"s":"923567d5+","t":"2026-11-16T21:03Z","c":"Hình nhân vật: hết vệt xám ở cổ và viền tối quanh người."},{"s":"59812a63+","t":"2026-11-16T20:41Z","c":"Khung chung: khoảng cách đều nhau ở sổ tuần và thẻ thân phận; hàng sổ gọn, thẻ lật không đè chữ."},{"s":"ab12d6fc","t":"2026-11-16T20:53Z","c":"Tuyết và đom đóm mới, mượt hơn; nền tranh không còn vẽ lại mỗi khung hình."}]};
+window.CTM_BI={"s":"86e227a5+","t":"2026-11-17T03:51Z","c":"review kit-ico-rank-r1: KIT §84 live frame is laid again when the same item is re-shown (end card lost its v3 frame after the Bảng vàng lin…","b":"1dfe5353d48b","h":[{"s":"babc9b4a","t":"2026-11-17T01:39Z","c":"Chơi chung không còn treo máy vì tên bạn lặp chữ; số bóng người trên dư đồ khớp đúng người đang ở đó; việc có hạn giờ hiện đồng hồ ngay dướ…"},{"s":"92685210+","t":"2026-11-17T00:53Z","c":"Khung việc và khung sự kiện bốn cỡ, tranh lấp đầy khung, việc nhắc tên ai hiện chân dung người ấy; phẩm của món đồ nằm ngay trên viền khung…"},{"s":"6f513340","t":"2026-11-16T23:24Z","c":"Vào game mới không còn bật ngay màn lật thẻ, lật thẻ chỉ khi vào buổi tối; dư đồ nhãn giấy mới; việc dài lấn sang buổi sau; lời trong cung …"},{"s":"7a18d957","t":"2026-11-16T22:44Z","c":"review-diemtrang-fx-r1 report"},{"s":"afe2bcbc","t":"2026-11-16T22:25Z","c":"review r1: KIT 84.1a note + report"},{"s":"dea1d445+","t":"2026-11-16T21:32Z","c":"golive lag-play-2: CHANGE line + site rebuilt"},{"s":"674f3af4","t":"2026-11-16T21:21Z","c":"Chơi cùng bạn: bạn chơi chung chưa gặp mặt nay hiện tên gọi chung “Hảo hữu của ta” ở mọi nơi, không còn ẩn thành dấu hỏi."},{"s":"923567d5+","t":"2026-11-16T21:03Z","c":"Hình nhân vật: hết vệt xám ở cổ và viền tối quanh người."},{"s":"59812a63+","t":"2026-11-16T20:41Z","c":"Khung chung: khoảng cách đều nhau ở sổ tuần và thẻ thân phận; hàng sổ gọn, thẻ lật không đè chữ."},{"s":"ab12d6fc","t":"2026-11-16T20:53Z","c":"Tuyết và đom đóm mới, mượt hơn; nền tranh không còn vẽ lại mỗi khung hình."}]};
 /* KBOOT — BOOT COVER (owner 15/11 "Khi vừa bấm vào game, có chừng ít hơn 1 giây hiện khung này"; KIT §14.1).
    Before: while the 4 MB page parsed, the browser painted the bare static markup of p1.html (HUD box, a vertical stat label list, empty
    panels, the old 11-tab bar) for ~1 s on a warm open and many seconds on a cold one, before any kit CSS/JS existed.
@@ -38483,7 +38483,8 @@ function rkSummary(endk,fate){const k=S.rk||{};const kids=S.kids||[];const y=Mat
  const mr=rkSrvNever()?-1:Math.max(S.rank|0,S.maxRank|0,k.mr==null?-1:k.mr);const sr=S.srv?Math.max(S.srv.rk|0,k.sr==null?-1:k.sr):-1;
  let fig="",por="";try{fig=typeof figFor==="function"?figFor(S)||"":""}catch(e){}try{por=typeof figFor==="function"?figFor(S,"por")||"":""}catch(e){}
  if(!por)try{por=fsrc(S.fc,"")}catch(e){}
- const cut=s=>{s=String(s||"");const i=s.indexOf("https://ctm-img.victoria-tntt.workers.dev/img/");return i>0?s.slice(i):s};
+ /* the server keeps only "https://ctm-img.victoria-tntt.workers.dev/img/<file>.webp": strip the CDN base (assemble.py turns every quoted "https://ctm-img.victoria-tntt.workers.dev/img/…" literal into IMG_BASE+"https://ctm-img.victoria-tntt.workers.dev/img/…", so no quoted img/ here) */
+ const cut=s=>{const m=String(s||"").match(/(?:^|\/)(img\/[^?#]+)$/);return m?m[1]:""};
  let alive=false;try{alive=typeof overAlive==="function"?!!overAlive(fate):false}catch(e){}
  return{n:S.name,o:S.origin&&S.origin.k||"",on:S.origin&&S.origin.n||"",mr,sr,mama:!!(k.mama||(S.srv&&S.srv.mama)),out:!!S.out,endk,fate:String(fate||"").slice(0,140),
   alive:alive||/Thái hậu|Thái phi/.test(endk),rare:!!(S.rareEnd||S.rare||/Cơ duyên hiếm/.test(String(fate||""))),y,age:S.age|0,age0:Math.max(12,Math.min(40,(S.age|0)-y)),
@@ -38538,13 +38539,14 @@ const RK={tab:"lives",data:{},busy:0,err:0,view:"list",lid:"",ends:{},msg:""};
 /* the kit frame of the highest standing of that life (KIT 4.3): consort rank 0–7 → frame-consort-N, servant title → frame-maid-N, Ma ma → frame-mama */
 function rkRole(ph){const R=CTM_RANK.RULES;ph=String(ph||"");let i=R.consortN.indexOf(ph);if(i>=0)return{role:"consort",rank:i};
  if(ph==="Ma ma")return{role:"mama",rank:3};i=R.servantN.indexOf(ph);if(i>=0)return{role:"maid",rank:i};return ph?{role:"maid",rank:1}:{role:"other"}}
-function rkFace(row){const r=rkRole(row.p);return{src:row.por||"",ini:String(row.n||row.pn||"?").trim().charAt(0)||"?",col:"#b08a5a",
+const rkImg=v=>v&&typeof IMG_U==="function"?IMG_U(v):v||"";/* stored "https://ctm-img.victoria-tntt.workers.dev/img/…" → the picture CDN */
+function rkFace(row){const r=rkRole(row.p);return{src:rkImg(row.por),ini:String(row.n||row.pn||"?").trim().charAt(0)||"?",col:"#b08a5a",
  __kr:Object.assign({origin:null,sex:"f",kid:false},r)}}
-function rkFig(row){return row.fig||KIT_DIR+"unknown-fig-f.webp"}
+function rkFig(row){return rkImg(row.fig)||KIT_DIR+"unknown-fig-f.webp"}
 function rkMine(row){const d=rkIdGet();return !!(d.pid&&row&&row.pid===d.pid)}
 function rkEnd(row){return row.e||""}
 function rkPodList(rows,tab){return rows.slice(0,3).map(x=>{const L=tab==="players"?(x.best||{}):x;const mine=rkMine(x);
- return{who:{name:x.pn},place:x.r,fig:L.fig?L.fig:rkFig({}),face:rkFace(L),mine,you:RK_T.me,
+ return{who:{name:x.pn},place:x.r,fig:rkFig(L),face:rkFace(L),mine,you:RK_T.me,
   nameH:`<b class="kname" style="--rc:#8a5a12">${rkEsc(x.pn)}</b>`,
   sub:L.n?`${rkEsc(L.p)} ${rkEsc(L.n)}`:"Chưa có kiếp nào",score:`${RK_T.unit} ${x.s}`,prize:L.e?`<span class="kpod-fx2">${rkEsc(L.e)}</span>`:null}})}
 function rkRowO(x,tab,o){o=o||{};const L=tab==="players"?(x.best||{}):x;const mine=rkMine(x)||o.mine;
@@ -47507,7 +47509,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="4d6a525742fa";window.CTM_BUILD=BUILD;
+const BUILD="1dfe5353d48b";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

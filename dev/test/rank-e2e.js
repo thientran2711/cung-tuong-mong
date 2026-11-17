@@ -38,7 +38,7 @@ const fails=[];const ok=(c,m)=>{console.log((c?'ok   ':'FAIL ')+m);if(!c)fails.p
  const shot=async(p,n,scene)=>{await p.waitForTimeout(400);await p.evaluate(()=>{const r=document.querySelector('.kpod.krk');if(r)r.classList.add('kpod-skip')});await p.waitForTimeout(150);await p.screenshot({path:`${OUT}/${n}-${scene}-${tag}.png`})};
  const board=p=>p.evaluate(()=>{const R=[...document.querySelectorAll('#krkov .krl .krl-row:not(.krl-hd)')].map(r=>({rk:+r.querySelector('.krl-rk').textContent,s:+r.querySelector('.krl-s b').textContent,pn:r.querySelector('.krl-pn').textContent.replace(/\s*(Ngươi|Ta)$/,''),mine:r.classList.contains('krl-mine')}));
   const me=document.querySelector('#krkov .krl-me');return{rows:R,me:me&&me.textContent,meRow:!!(me&&me.querySelector('.krl-row')),pod:[...document.querySelectorAll('#krkov .kpod-col')].map(c=>c.className.match(/kpod-p\d/)[0]+':'+c.querySelector('.kname').textContent),
-   figs:[...document.querySelectorAll('#krkov .kpod-img')].map(i=>i.complete&&i.naturalWidth>0),tab:(document.querySelector('#krkov .ksubb.on')||{}).textContent}});
+   figs:[...document.querySelectorAll('#krkov .kpod-img')].map(i=>i.complete&&i.naturalWidth>0&&!/unknown-fig/.test(i.currentSrc)),/* review r1: the life's own painted figure (not the unknown silhouette) */faces:[...document.querySelectorAll('#krkov .krl .krl-row:not(.krl-hd) .krl-fc img')].filter(i=>i.complete&&i.naturalWidth>0).length,tab:(document.querySelector('#krkov .ksubb.on')||{}).textContent}});
  const openBoard=async(p,tab)=>{await p.evaluate(()=>{const k=document.getElementById('kload');if(k)k.remove()});/* first-run download card is not under test */await p.evaluate(t=>rkOpen(t),tab||'lives');await p.waitForFunction(()=>document.querySelector('#krkov .krk-list')||/Chưa có/.test((document.querySelector('#krkov .krk-body')||{}).textContent||''));await p.waitForTimeout(600)};
  const sorted=rows=>rows.every((r,i)=>!i||rows[i-1].s>=r.s)&&rows.every((r,i)=>r.rk===i+1);
 
@@ -66,7 +66,7 @@ const fails=[];const ok=(c,m)=>{console.log((c?'ok   ':'FAIL ')+m);if(!c)fails.p
  await C.p.waitForFunction(()=>{const f=[...document.querySelectorAll('#krkov .kpod-fig img, #krkov .kpod-col img')];return !f.length||f.every(i=>i.complete)},null,{timeout:30000}).catch(()=>{});await C.p.waitForTimeout(600);
  let bd=await board(C.p);ok(bd.rows.length===4&&sorted(bd.rows),'Kiếp board: 4 rows in order '+bd.rows.map(r=>r.s).join(' > '));
  ok(bd.rows[3].mine&&bd.rows.filter(r=>r.mine).length===1,'C: own life marked');ok(bd.meRow&&/Kiếp vừa rồi/.test(bd.me),'C: own row at the bottom');
- ok(bd.pod.length===3&&bd.pod[1].startsWith('kpod-p1')&&bd.figs.every(Boolean),'podium: three places, Nhất centre, figures loaded '+bd.pod.join(' | '));
+ ok(bd.pod.length===3&&bd.pod[1].startsWith('kpod-p1')&&bd.figs.every(Boolean),'podium: three places, Nhất centre, own figures loaded '+bd.pod.join(' | ')+' '+JSON.stringify(bd.figs));ok(bd.faces>=bd.rows.length,'list: every row shows its painted face '+bd.faces+'/'+bd.rows.length);
  await shot(C.p,3,'board-lives');
  /* owner 15/11: ONE title "Bảng vàng" + kit ✕ (no seal, no Lui); podium = figures big, plaque is the step, medal at the plaque's top-right; row frame = highest phẩm */
  const ui=await C.p.evaluate(()=>{const r=document.querySelector('#krkov .kpod.krk');const st=r.querySelector('.krk-stage').getBoundingClientRect();

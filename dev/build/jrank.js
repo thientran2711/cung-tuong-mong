@@ -40,7 +40,8 @@ function rkSummary(endk,fate){const k=S.rk||{};const kids=S.kids||[];const y=Mat
  const mr=rkSrvNever()?-1:Math.max(S.rank|0,S.maxRank|0,k.mr==null?-1:k.mr);const sr=S.srv?Math.max(S.srv.rk|0,k.sr==null?-1:k.sr):-1;
  let fig="",por="";try{fig=typeof figFor==="function"?figFor(S)||"":""}catch(e){}try{por=typeof figFor==="function"?figFor(S,"por")||"":""}catch(e){}
  if(!por)try{por=fsrc(S.fc,"")}catch(e){}
- const cut=s=>{s=String(s||"");const i=s.indexOf("img/");return i>0?s.slice(i):s};
+ /* the server keeps only "img/<file>.webp": strip the CDN base (assemble.py turns every quoted "img/…" literal into IMG_BASE+"img/…", so no quoted img/ here) */
+ const cut=s=>{const m=String(s||"").match(/(?:^|\/)(img\/[^?#]+)$/);return m?m[1]:""};
  let alive=false;try{alive=typeof overAlive==="function"?!!overAlive(fate):false}catch(e){}
  return{n:S.name,o:S.origin&&S.origin.k||"",on:S.origin&&S.origin.n||"",mr,sr,mama:!!(k.mama||(S.srv&&S.srv.mama)),out:!!S.out,endk,fate:String(fate||"").slice(0,140),
   alive:alive||/Thái hậu|Thái phi/.test(endk),rare:!!(S.rareEnd||S.rare||/Cơ duyên hiếm/.test(String(fate||""))),y,age:S.age|0,age0:Math.max(12,Math.min(40,(S.age|0)-y)),
@@ -95,13 +96,14 @@ const RK={tab:"lives",data:{},busy:0,err:0,view:"list",lid:"",ends:{},msg:""};
 /* the kit frame of the highest standing of that life (KIT 4.3): consort rank 0–7 → frame-consort-N, servant title → frame-maid-N, Ma ma → frame-mama */
 function rkRole(ph){const R=CTM_RANK.RULES;ph=String(ph||"");let i=R.consortN.indexOf(ph);if(i>=0)return{role:"consort",rank:i};
  if(ph==="Ma ma")return{role:"mama",rank:3};i=R.servantN.indexOf(ph);if(i>=0)return{role:"maid",rank:i};return ph?{role:"maid",rank:1}:{role:"other"}}
-function rkFace(row){const r=rkRole(row.p);return{src:row.por||"",ini:String(row.n||row.pn||"?").trim().charAt(0)||"?",col:"#b08a5a",
+const rkImg=v=>v&&typeof IMG_U==="function"?IMG_U(v):v||"";/* stored "img/…" → the picture CDN */
+function rkFace(row){const r=rkRole(row.p);return{src:rkImg(row.por),ini:String(row.n||row.pn||"?").trim().charAt(0)||"?",col:"#b08a5a",
  __kr:Object.assign({origin:null,sex:"f",kid:false},r)}}
-function rkFig(row){return row.fig||KIT_DIR+"unknown-fig-f.webp"}
+function rkFig(row){return rkImg(row.fig)||KIT_DIR+"unknown-fig-f.webp"}
 function rkMine(row){const d=rkIdGet();return !!(d.pid&&row&&row.pid===d.pid)}
 function rkEnd(row){return row.e||""}
 function rkPodList(rows,tab){return rows.slice(0,3).map(x=>{const L=tab==="players"?(x.best||{}):x;const mine=rkMine(x);
- return{who:{name:x.pn},place:x.r,fig:L.fig?L.fig:rkFig({}),face:rkFace(L),mine,you:RK_T.me,
+ return{who:{name:x.pn},place:x.r,fig:rkFig(L),face:rkFace(L),mine,you:RK_T.me,
   nameH:`<b class="kname" style="--rc:#8a5a12">${rkEsc(x.pn)}</b>`,
   sub:L.n?`${rkEsc(L.p)} ${rkEsc(L.n)}`:"Chưa có kiếp nào",score:`${RK_T.unit} ${x.s}`,prize:L.e?`<span class="kpod-fx2">${rkEsc(L.e)}</span>`:null}})}
 function rkRowO(x,tab,o){o=o||{};const L=tab==="players"?(x.best||{}):x;const mine=rkMine(x)||o.mine;
