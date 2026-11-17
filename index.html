@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"fa42f8c4","t":"2026-11-17T04:50Z","c":"Bước sang kiếp mới nay sạch sẽ như trang giấy trắng: không còn vết thương, khăn che mặt hay đồ vật không tên sót lại từ kiếp trước; các trò…","b":"1307e44a7998","h":[{"s":"ee492cfd","t":"2026-11-17T04:15Z","c":"Hộp Chọn sổ nay rộng rãi, chữ trên nút đọc trọn, không còn ô hình bị cắt; trang Tuần lục hiện trọn dáng người đến tận gót chân, bảng thân s…"},{"s":"bad6d59f+","t":"2026-11-17T03:41Z","c":"Chơi chung: chuẩn bị đường truyền gọn nhẹ hơn giữa hai máy; khi chơi chưa có gì thay đổi."},{"s":"babc9b4a","t":"2026-11-17T01:39Z","c":"Chơi chung không còn treo máy vì tên bạn lặp chữ; số bóng người trên dư đồ khớp đúng người đang ở đó; việc có hạn giờ hiện đồng hồ ngay dướ…"},{"s":"92685210+","t":"2026-11-17T00:53Z","c":"Khung việc và khung sự kiện bốn cỡ, tranh lấp đầy khung, việc nhắc tên ai hiện chân dung người ấy; phẩm của món đồ nằm ngay trên viền khung…"},{"s":"6f513340","t":"2026-11-16T23:24Z","c":"Vào game mới không còn bật ngay màn lật thẻ, lật thẻ chỉ khi vào buổi tối; dư đồ nhãn giấy mới; việc dài lấn sang buổi sau; lời trong cung …"},{"s":"7a18d957","t":"2026-11-16T22:44Z","c":"review-diemtrang-fx-r1 report"},{"s":"afe2bcbc","t":"2026-11-16T22:25Z","c":"review r1: KIT 84.1a note + report"},{"s":"dea1d445+","t":"2026-11-16T21:32Z","c":"golive lag-play-2: CHANGE line + site rebuilt"},{"s":"674f3af4","t":"2026-11-16T21:21Z","c":"Chơi cùng bạn: bạn chơi chung chưa gặp mặt nay hiện tên gọi chung “Hảo hữu của ta” ở mọi nơi, không còn ẩn thành dấu hỏi."},{"s":"923567d5+","t":"2026-11-16T21:03Z","c":"Hình nhân vật: hết vệt xám ở cổ và viền tối quanh người."}]};
+window.CTM_BI={"s":"e73210f1","t":"2026-11-17T06:07Z","c":"story-frame WIP: jreg regEach/regSweep - every load-time registry pass also covers entries later modules add (STORY wrap+acts, ARC67 halve …","b":"5ca2e76f2289","h":[{"s":"fa42f8c4","t":"2026-11-17T04:50Z","c":"Bước sang kiếp mới nay sạch sẽ như trang giấy trắng: không còn vết thương, khăn che mặt hay đồ vật không tên sót lại từ kiếp trước; các trò…"},{"s":"ee492cfd","t":"2026-11-17T04:15Z","c":"Hộp Chọn sổ nay rộng rãi, chữ trên nút đọc trọn, không còn ô hình bị cắt; trang Tuần lục hiện trọn dáng người đến tận gót chân, bảng thân s…"},{"s":"bad6d59f+","t":"2026-11-17T03:41Z","c":"Chơi chung: chuẩn bị đường truyền gọn nhẹ hơn giữa hai máy; khi chơi chưa có gì thay đổi."},{"s":"babc9b4a","t":"2026-11-17T01:39Z","c":"Chơi chung không còn treo máy vì tên bạn lặp chữ; số bóng người trên dư đồ khớp đúng người đang ở đó; việc có hạn giờ hiện đồng hồ ngay dướ…"},{"s":"92685210+","t":"2026-11-17T00:53Z","c":"Khung việc và khung sự kiện bốn cỡ, tranh lấp đầy khung, việc nhắc tên ai hiện chân dung người ấy; phẩm của món đồ nằm ngay trên viền khung…"},{"s":"6f513340","t":"2026-11-16T23:24Z","c":"Vào game mới không còn bật ngay màn lật thẻ, lật thẻ chỉ khi vào buổi tối; dư đồ nhãn giấy mới; việc dài lấn sang buổi sau; lời trong cung …"},{"s":"7a18d957","t":"2026-11-16T22:44Z","c":"review-diemtrang-fx-r1 report"},{"s":"afe2bcbc","t":"2026-11-16T22:25Z","c":"review r1: KIT 84.1a note + report"},{"s":"dea1d445+","t":"2026-11-16T21:32Z","c":"golive lag-play-2: CHANGE line + site rebuilt"},{"s":"674f3af4","t":"2026-11-16T21:21Z","c":"Chơi cùng bạn: bạn chơi chung chưa gặp mặt nay hiện tên gọi chung “Hảo hữu của ta” ở mọi nơi, không còn ẩn thành dấu hỏi."}]};
 /* KBOOT — BOOT COVER (owner 15/11 "Khi vừa bấm vào game, có chừng ít hơn 1 giây hiện khung này"; KIT §14.1).
    Before: while the 4 MB page parsed, the browser painted the bare static markup of p1.html (HUD box, a vertical stat label list, empty
    panels, the old 11-tab bar) for ~1 s on a warm open and many seconds on a cold one, before any kit CSS/JS existed.
@@ -746,6 +746,19 @@ document.addEventListener("error",e=>{const el=e.target;if(!el||el.tagName!=="IM
  if(!el.__cdnTry){el.__cdnTry=1;e.stopImmediatePropagation();K.retries++;setTimeout(()=>{el.src=s+(s.includes("?")?"&":"?")+"r=1"},1500);return}
  if(!el.onerror&&!el.hasAttribute("onerror")){K.hidden++;el.style.visibility="hidden"}},true);
 })();
+/* jreg (review/story-frame, story bot fault 1): ONE rule for every load-time pass over a shared registry (STORY, ARC67, ACT, IT, T72, FPOOL…).
+   The game is one script of modules in assemble order; a module that loops over a registry while it loads sees only the entries of the
+   modules before it. Entries added by later modules (jorigins bd, jrd_* roads, jpoison items, jtsb acts…) were skipped silently: bd had no
+   story frame in 28/28 bot lives. regEach(obj, fn, name) runs fn(key, value, late) on every entry now AND on every entry added (or replaced)
+   later: regSweep() runs at the end of the game script (assemble.py), once more after the load timers (setTimeout 0) and at every life start
+   (j67 story wrapper init). fn runs once per key + value (a replaced value runs again), so it must be safe to run on a fresh value only.
+   late = 1 when the entry came after the pass was registered. Scan: dev/measure/regscan.py + regscan.js (no load-time loop may miss later keys). */
+const REG_EACH=[];
+function regEach(obj,fn,name){const seen=new Map();
+ const run=late=>{if(!obj)return 0;let n=0;for(const k of Object.keys(obj)){const v=obj[k];if(seen.has(k)&&seen.get(k)===v)continue;
+  try{fn(k,v,late?1:0)}catch(e){console.error("regEach "+(name||""),k,e)}seen.set(k,obj[k]);n++}return n};
+ const R={name:name||"",obj,run,n0:run(0)};REG_EACH.push(R);return R}
+function regSweep(){let n=0;for(const R of REG_EACH)n+=R.run(1);return n}
 /* kRx(src, flags) — a RegExp that may use LOOKBEHIND (?<= (?<! and still runs on older iPad/iPhone Safari (< 16.4), which cannot even PARSE
    a lookbehind (owner iPad 15/11 "Bị gì đây mới vào game": one lookbehind literal anywhere in the one game <script> = the whole game dead,
    the raw skeleton stays). RULE: never write a lookbehind as a /literal/ — write kRx("…","flags") (dev/test/webkit-syntax.js FAILs a literal).
@@ -3190,7 +3203,8 @@ function bandKeys(kind,age){if(kind==="consort")return age<=35?["consort","womid
  if(kind==="official"||kind==="man")return age>50&&kind==="man"?["manold","off2","off1","off0"]:near("off",age<=35?0:age<=50?1:2,3);
  return [kind]}
 const FAV={};
-(function probe(){const all=[].concat(...Object.values(FPOOL));for(const f of all){try{const im=new Image();im.onload=()=>{FAV[f]=1};im.onerror=()=>{FAV[f]=0};im.src="https://ctm-img.victoria-tntt.workers.dev/img/"+f+".webp"}catch(e){}}})();
+/* jreg: pools added by later modules (man, ct1–5…) are probed too */
+regEach(FPOOL,(k,L)=>{for(const f of (L||[])){try{const im=new Image();im.onload=()=>{FAV[f]=1};im.onerror=()=>{FAV[f]=0};im.src="https://ctm-img.victoria-tntt.workers.dev/img/"+f+".webp"}catch(e){}}},"FPOOL probe");
 function fsrc(fc,fb){if(!fc||FAV[fc]===0)return fb||"";return "https://ctm-img.victoria-tntt.workers.dev/img/"+fc+".webp"}
 function poolOf(role){const pre={eunuch:"eun",emperor:"emp",thaihau:"th",official:"off"}[role];return pre?Object.keys(FPOOL).filter(k=>k.startsWith(pre)&&/\d$/.test(k)).flatMap(k=>FPOOL[k]):FPOOL[role]||[]}
 function facesPresent(){const U=new Set();if(!S)return U;const add=o=>{if(o&&o.fc)U.add(o.fc)};add(S);add(S.maid);add(S.emp);if(S.thF)U.add(S.thF);(S.men||[]).forEach(m=>{if(m.alive)add(m)});
@@ -7508,9 +7522,11 @@ function hint67(A){if(!A)return"";if(A.done)return A.tag;const b=A.cur?beatDef67
  if(A.cur)return `Đang chờ ngươi quyết: ${fill67(b.h||"",A)}`;const dm=Math.max(0,A.due-S.turn);
  return `Sắp tới: ${fill67(b.h||"",A)}${dm?` (khoảng ${dm} tháng nữa)`:" (tháng này hoặc tháng sau)"}`}
 /* wrap67(k) = story67Wrap(k) (both names kept, batch-0232: road-b2 calls wrap67 from jroad.js at load end, tut-followups calls story67Wrap from jorigins) */
-/* wrap one origin's v1 story slot into the chapter frame; idempotent. An origin registered by a module that loads after j67
-   (jorigins bd) calls story67Wrap itself (fix tut-followups: bd had no frame, so no chapters 1–3) */
-function story67Wrap(k){const old=STORY[k];if(!old||old.__old)return;const W={};
+/* wrap one origin's v1 story slot into the chapter frame; idempotent. Every STORY entry is wrapped, also one a module after j67 adds
+   (jorigins bd): regEach (jreg) runs the wrap again at the script end and at every life start (review/story-frame, story bot fault 1;
+   before, bd had no frame in 28/28 lives and jorigins had to call the wrap by hand). late = the entry came after j67 loaded (old saves of
+   such an origin may hold a life with no frame: f67Mig below starts it on load). */
+function story67Wrap(k,late){const old=STORY[k];if(!old||old.__old)return;const W={};if(late)W.__late=1;
  const d=(n,f)=>Object.defineProperty(W,n,{get:f,enumerable:true,configurable:true});
  d("t",()=>v267()&&S.st.ch?(QUEST67[k]||QUEST67.tt).t:old.t);
  d("goal",()=>{if(!v267()||!S.st.ch)return old.goal;const m=S.st.ms,M=S.st.M,c=S.st.ch;if(m){const d0=MS67[m.id];return `Chương ${c.n}: ${d0.t()}. ${d0.g()}`}return M?`Chương ${M.chap||1}: ${ARC67[M.a].t}. ${fill67(ARC67[M.a].g,M)}`:obj67()});
@@ -7519,9 +7535,9 @@ function story67Wrap(k){const old=STORY[k];if(!old||old.__old)return;const W={};
  d("hint",()=>v267()?(()=>obj67()):old.hint);
  d("month",()=>v267()?a67Month:old.month);
  d("acts",()=>v267()?(()=>[]):old.acts);
- W.init=function(){if(k==="td"&&old.init)old.init();a67init(k)};
+ W.init=function(){try{regSweep()}catch(e){}if(k==="td"&&old.init)old.init();a67init(k)};
  W.__old=old;STORY[k]=W;try{story67Acts(k)}catch(e){}}
-Object.keys(STORY).forEach(story67Wrap);
+regEach(STORY,(k,v,late)=>story67Wrap(k,late),"STORY wrap");
 function wrap67(k){return story67Wrap(k)}
 (function(){const s0=storyMonth;storyMonth=function(){if(v267())return a67Month()||"";return s0.apply(this,arguments)}})();
 if(typeof srvMonth==="function")(function(){const m0=srvMonth;srvMonth=function(){const r=m0.apply(this,arguments)||"";if(S&&!S.dead&&v267())return r+(a67Month()||"");return r}})();
@@ -8943,10 +8959,13 @@ ARC67.s_ban={o:"*",ok:nsrv67,t:"Kẻ thù hóa tri kỷ",w:"v",sj:"mối thù v�
   win2:{k:1,tag:"Đổi phe đúng lúc",t:"Ngươi đứng về phe thắng. Nhưng {v} sẽ không bao giờ quên.",fx:{tamco:3,danh:3},go:A=>[e67ally(rv67(A,"v2"),20),e67foe(rv67(A,"v"),20)].join(" ")},
   mid:{k:0,tag:"Ai lo phận nấy",t:"Mỗi người tự lo. Không thêm tri kỷ, không thêm thù.",fx:{duc:1}},
   lose:{k:-1,tag:"Liên minh đổ vỡ",t:"Liên minh đổ vỡ, cả hai cùng bị phạt. {v2} đắc ý.",fx:{danh:-6,sung:-4},go:A=>e67foe(rv67(A,"v2"),12)}}};
-/* balance (measured): story choices must not wear her health down; Sức costs/losses of story options are halved */
-(function(){const h=o=>{for(const k of ["c","l"])if(o[k]){if(o[k].suc<0)o[k].suc=Math.min(-1,Math.round(o[k].suc/2));if(o[k].hh<0)o[k].hh=Math.min(-1,Math.round(o[k].hh/2))}};
- Object.values(ARC67).forEach(a=>Object.values(a.E).forEach(E=>{if(E.fx&&E.fx.hh<0)E.fx.hh=Math.round(E.fx.hh/2)}));
- const walk=b=>{if(b&&Array.isArray(b.o))b.o.forEach(h)};Object.values(GB67).forEach(walk);Object.values(ARC67).forEach(a=>Object.values(a.B).forEach(walk))})();
+/* balance (measured): story choices must not wear her health down; Sức costs/losses of story options are halved.
+   jreg: every hand-typed arc, also those of modules after j67 (jorigins bd_*, jst14 st_*, j96…). Road chapters (o:"rd", jroad rdDef) are
+   NOT halved: their numbers are read from BAL.road (jbalroad, one core) and already set at their final value. */
+(function(){const H=new WeakSet();/* each option / ending object is halved once, even when two arcs share it */
+ const h=o=>{if(!o||H.has(o))return;H.add(o);for(const k of ["c","l"])if(o[k]){if(o[k].suc<0)o[k].suc=Math.min(-1,Math.round(o[k].suc/2));if(o[k].hh<0)o[k].hh=Math.min(-1,Math.round(o[k].hh/2))}};
+ const walk=b=>{if(b&&Array.isArray(b.o))b.o.forEach(h)};Object.values(GB67).forEach(walk);
+ regEach(ARC67,(id,a)=>{if(!a||a.o==="rd"||H.has(a))return;H.add(a);Object.values(a.E||{}).forEach(E=>{if(!E||H.has(E))return;H.add(E);if(E.fx&&E.fx.hh<0)E.fx.hh=Math.round(E.fx.hh/2)});Object.values(a.B||{}).forEach(walk)},"ARC67 halve")})();
 
 /* one-line objective of the main quest on the Hành sự tab */
 (function(){const p0=renderPanel0;renderPanel0=function(){const r=p0.apply(this,arguments);try{if(tab==="act"&&v267()&&S.st.ch&&!window.kitStageRail){/* owner 16/11: the goal lives in the stage rail icon (§77), no strip here */const el=$("panel");if(el&&!el.querySelector(".obj67")){const o=obj67();/* KIT §72 (owner 16/11 "Không bấm xem được"): the line is the kit goal strip, tap → chapter detail (jgoal) */const g=typeof kitGoalStrip==="function"?kitGoalStrip():"";if(g)el.insertAdjacentHTML("afterbegin",`<div class="obj67">${g}</div>`);else if(o)el.insertAdjacentHTML("afterbegin",`<div class="srvhead obj67"><span><b>Mệnh truyện</b> · ${o}</span></div>`)}}}catch(e){console.error(e)}return r}})();
@@ -9116,7 +9135,8 @@ function msCheck67(){const m=S.st.ms,c=S.st.ch;if(!m||!c||!msDone67(m))return;co
 function storyActs67(){if(!v267()||S.dead||S.out)return[];const A=S.st.M;if(!A||A.done||A.cur||!A.nb||S.turn<A.due||isSrv67()||Q.some(m=>m.pid==="j67"))return[];const b=beatDef67(A,A.nb);if(!b)return[];
  return [{n:`Mệnh truyện: ${fill67(b.h||"",A)}`,t:`${lab67(A)} «${ARC67[A.a].t}» · còn ${Math.max(0,A.dl-S.turn)} tháng tới hạn.`,c:{suc:-5},o:100,w:{},x:"mở hồi kế tiếp của chương, giữ Lợi thế, gần phần thưởng",dom:"Giao thiệp",j67:1,go:()=>{fireBeat67(A);try{showModal()}catch(e){}}}]}
 function story67Acts(k){Object.defineProperty(STORY[k],"acts",{get:()=>v267()?storyActs67:(STORY[k].__old||{}).acts,configurable:true,enumerable:true})}
-Object.keys(STORY).forEach(story67Acts);
+/* jreg: every STORY entry (story67Wrap also sets it; idempotent) */
+regEach(STORY,k=>{if(STORY[k]&&STORY[k].__old)story67Acts(k)},"STORY acts");
 (function(){const d0=deal;deal=function(){const r=d0.apply(this,arguments);try{if(v267()&&S.st.done&&deck)deck.push(...storyActs67())}catch(e){}return r}})();
 function a67Month(){if(!v267()||S.dead)return"";const st=S.st;try{msCheck67()}catch(e){console.error(e)}
  const A=st.M;if(A&&!A.done&&A.dl!=null&&!A.cur){
@@ -9260,6 +9280,24 @@ function f14Info(){if(!f14())return null;const c=S.st.ch,n=Math.max(1,c.n||1),pi
  const rows=F14.parts.map((p,i)=>{const st=c.all||i<pi?"đã qua":i===pi?`đang ở chương ${n}`:"chưa tới";return[`Phần ${["đầu","giữa","cuối"][i]}`,`Chương ${p.a}–${p.b} · ${p.t}${i===1&&road?` «${road}»`:""} · ${st}`,i===pi&&!c.all?"g":""]});
  return {n,max:F14.max,part:P.t,partNo:pi,left:c.all?0:F14.max-n,road,rows}}
 window.f14Info=f14Info;
+/* OLD SAVES (review/story-frame, story bot fault 1): a life of an origin whose STORY entry came after j67 (jorigins bd: wrapped by the jreg
+   sweep, W.__late) could be saved with NO chapter frame (S.st without v2). On load the frame starts at the chapter that life has reached:
+   tutorial chapters whose months are already over close «Lỡ dịp» (no reward, exactly what their time limit would have done), the running
+   one keeps only the months it has left, then the story goes on as in a new life. Runs once (afterwards v267() is true): no double chapter.
+   The save holds no palace-entry month: a life that began in the palace entered at month 0; at home (f14Home) the tutorial just waits. */
+function f67Mig(){try{if(!S||S.dead||!S.origin||!S.st||v267())return 0;const k=S.origin.k,W=STORY[k];if(!W||!W.__late||!W.__old)return 0;
+ const q0=quiet;quiet=true;let closed=0;
+ try{a67init(k);const c=S.st.ch;if(!c)return 0;const el=Math.max(0,S.turn||0);let used=0;
+  for(let g=0;g<6&&S.st.ms&&F14T.test(S.st.ms.id)&&!f14Home();g++){const m=S.st.ms,d=MS67[m.id],L=d&&d.lim?d.lim():0;if(!L)break;
+   if(el>=used+L){c.past.push({ms:m.id,t:d.t(),tag:"Lỡ dịp",k:0,n:c.n,late:1,mig:1});S.st.ms=null;used+=L;closed++;chAdvance67(null);continue}
+   m.t0=S.turn-(el-used);break}}
+ finally{quiet=q0}
+ const c=S.st.ch,m=S.st.ms;const now=m&&MS67[m.id]?MS67[m.id].t():S.st.M&&ARC67[S.st.M.a]?ARC67[S.st.M.a].t:"";
+ log(`<b>Mệnh truyện mở lại.</b> Đời này đang ở chương ${c.n}${now?` «${now}»`:""}${closed?`; ${closed} chương đầu đã qua hạn, khép lại không thưởng`:""}.`);
+ syncMain67();return 1}catch(e){console.error("f67Mig",e);return 0}}
+window.f67Mig=f67Mig;
+/* after a save loads (normAll); a new life is already framed by then (STORY init runs right after normAll), so this is a no-op there */
+(function(){const n0=normAll;normAll=function(){const r=n0.apply(this,arguments);try{setTimeout(()=>{if(f67Mig())try{render()}catch(e){}},0)}catch(e){}return r}})();
 /* the servant road panel (panel67, j67): same words for the 14-chapter frame */
 (function(){const p0=panel67;panel67=function(){let h=p0.apply(this,arguments);try{const F=f14Info();if(!F)return h;
  const pn=F14.parts.map(p=>f14Nv(p.b-p.a+1));
@@ -22962,7 +23000,8 @@ const KIT_GLOSS={
  "Tân Giả khố":"Nơi đày cung nữ, thái giám có tội làm việc nặng.",
  "Thai":"Khả năng có thai mỗi lần thị tẩm.",
  "Cơ hội":"Thang 7 bậc: Liều < Khó < Năm ăn năm thua < Khá chắc < Chắc < Rất chắc < Nắm chắc."};
-const KP_GLRE=new RegExp("^("+Object.keys(KIT_GLOSS).sort((a,b)=>b.length-a.length).map(k=>k.replace(/[.*+?^${}()|[\]\\]/g,"\\$&")).join("|")+")$");
+/* jreg: built on first use, so glossary words of later modules are in it (was built at load: 27 later words missed) */
+let KP_GLRE0=null,KP_GLN=-1;const KP_GLREf=()=>{const n=Object.keys(KIT_GLOSS).length;if(!KP_GLRE0||n!==KP_GLN){KP_GLN=n;KP_GLRE0=new RegExp("^("+Object.keys(KIT_GLOSS).sort((a,b)=>b.length-a.length).map(k=>k.replace(/[.*+?^${}()|[\]\\]/g,"\\$&")).join("|")+")$")}return KP_GLRE0};
 /* kitGloss("Tâm cơ") -> the term with a dotted underline; tap shows its meaning. Unknown terms come back as plain text. */
 function kitGloss(term,label){const t=String(term||"").trim();const k=Object.keys(KIT_GLOSS).find(x=>x.toLowerCase()===t.toLowerCase());return k?`<span class="kgl" data-kgl="${kpEsc(k)}">${label||t}</span>`:(label||t)}
 /* HUD help texts read the glossary too (one source) */
@@ -26514,7 +26553,8 @@ KG82_KIND.theu.how="Mũi thêu hiện trên khung rồi khuất. Chạm lại đ
 /* lessons (Tài nghệ tab): every art plays its own contest game (cam→đàn, ky→cờ, thi→thơ, hoa→vẽ, vu→múa, y→điều hương, theu→thêu, nau→nấu ăn) */
 Object.assign(KG82_MGL,{cam:["Cầm: tấu khúc","dan"],ky:["Kỳ: ăn quân","co"],thi:["Thi: điền câu lục bát","tho"],hoa:["Họa: đồ nét bút","ve"],vu:["Vũ: theo bước múa","mua"],
  y:["Y thuật & điều hương: pha hương","huong"],theu:["Thêu: nhớ mẫu thêu","theu"],nau:["Nấu nướng: canh lửa nấu món","banh"]});
-window.K91={engines:Object.keys(KG82_ENG),kinds:()=>Object.fromEntries(Object.entries(KG82_KIND).map(([k,v])=>[k,v.e]))};
+/* jreg: engines is read when asked, so engines of later modules (jnwp, jwkg…) are listed */
+window.K91={get engines(){return Object.keys(KG82_ENG)},kinds:()=>Object.fromEntries(Object.entries(KG82_KIND).map(([k,v])=>[k,v.e]))};
 /* ================= jmgt: MINIGAME DIFFICULTY TIERS (owner 16/11 07:10Z "lên chơi càng cao thì nó khó hơn", 07:25Z "mức vừa", ONE CORE) =================
    ONE function for every minigame family (j82 / j91 / jts / jwkg engines and the no-word replacements of review/nw-*):
      mgTier(kind, o) -> {occ, stake, lv, d, tier 0|1|2, word "Dễ"|"Vừa"|"Khó", ease −2..5, occName}
@@ -26746,7 +26786,7 @@ KG82_KIND.tho={e:"calli",n:"Thơ",t:"Thư pháp đồ nét",how:"Đặt ngón ta
 KG82_KIND.doi={e:"doiline",n:"Câu đối",t:"Đối nét bút",how:"Bức liễn bên trái có các nét bút. Kéo nét trong khay vào ô bên phải, ngang hàng với nét trái: nét phải là hình lật gương của nét trái. Đặt sai thì nét tự quay về. Có nút Gợi ý. 3 câu đối. Làm nhanh thì được trọn phần."};
 KG82_SPR.tho=["tho-slip","ve-brush","ve-inkstone"];KG82_SPR.doi=["tho-slip"];
 KG82_MGL.thi=["Thi: thư pháp đồ nét","tho"];
-try{if(window.K91)window.K91.engines=Object.keys(KG82_ENG)}catch(e){}
+/* K91.engines is a live getter (j91, jreg): nothing to refresh here */
 /* ================= j90 KIT PODIUM: bục vinh danh (owner 11/14, kit owner) =================
    Screen 1 of every ranking result: a stand-alone honour stage. The top three stand on a lacquered three-step dais as FULL-BODY
    figures (fig-*.webp for the right dress tier and age; kids from FIGURES-kids; strangers as the kit's grey silhouette):
@@ -27149,7 +27189,8 @@ if(typeof wrapR==="function")wrapR("wkPoisonPick",()=>"Bỏ độc vào món");
 /* ================= ĐỒ CẤM: reliable but risky ways to get poison, same rules for every consort =================
    effect and how traceable each poison is, shown on the chest card */
 const WILL={hacdinh:{eff:"chết",tr:"dễ lần ra: thái y nhận ra ngay, tra được người mua"},xahuong:{eff:"sảy thai (trộn vào túi thơm, hương trầm)",tr:"khó lần ra: mùi lẫn trong hương"},botngua:{eff:"ngứa, mất thể diện, Danh -5",tr:"vừa: áo dính bột còn để lại dấu"}};
-for(const k in WILL)if(IT[k]&&!/Hiệu quả:/.test(itm(k).d))IT[k].d+=` · Hiệu quả: ${WILL[k].eff} · Dấu vết: ${WILL[k].tr}`;
+/* jreg: forbidden goods added later (jpoison docngam/phanhuy/meduoc) get the same Hiệu quả / Dấu vết line */
+regEach(WILL,k=>{if(IT[k]&&!/Hiệu quả:/.test(itm(k).d))IT[k].d+=` · Hiệu quả: ${WILL[k].eff} · Dấu vết: ${WILL[k].tr}`},"WILL desc");
 /* who ends up holding evidence when a buyer is exposed: the Empress, else the most hostile consort */
 function illWitness(p){const q=queenP();if(q&&q!==p)return q;const L=consorts().filter(x=>x!==p&&x.alive&&!x.out);if(!L.length)return null;return L.sort((x,y)=>hostility(y,p)-hostility(x,p))[0]}
 function illAllies(p){return consorts().filter(v=>v!==p&&v.alive&&!v.out&&aff(v,p)>=40&&(v.inv||[]).some(e=>WILL[e.k]&&!e.h&&!e.t))}
@@ -27255,7 +27296,8 @@ function ducLow(s){return String(s||"").replace(/<[^>]+>/g,"").replace(/^./,c=>c
 (function(){const a0=ap;ap=function(p,o){const d=o&&o.duc;if(p===S||!d||!p)return a0.apply(this,arguments);const b=p.duc||0;const r=a0.apply(this,arguments);try{const dd=(p.duc||0)-b;if(dd)deedRec(p,dd,DEED85||"việc khuất tất")}catch(e){}return r}})();
 function ducAdd(p,n,why){if(!p||!n)return 0;return withDeed(why||"việc vừa làm",()=>{if(p===S){apply({duc:n})}else ap(p,{duc:n});return n})}
 /* every rulebook act (also when another module calls ACT[k].f directly) names itself */
-(function(){for(const k in ACT){const A2=ACT[k];if(!A2||A2.__j85||typeof A2.f!=="function")continue;const f0=A2.f;A2.f=function(a,t){return withDeed(A2.n,()=>f0.apply(this,arguments))};A2.__j85=1}})();
+/* jreg: acts added by later modules (giahoa, tat, phatquy, laydo, spyk…) name themselves too */
+regEach(ACT,k=>{const A2=ACT[k];if(!A2||A2.__j85||typeof A2.f!=="function")return;const f0=A2.f;A2.f=function(a,t){return withDeed(A2.n,()=>f0.apply(this,arguments))};A2.__j85=1},"ACT deed");
 (function(){const r0=runOpt;runOpt=function(a){return withDeed(a&&a.n,()=>r0.apply(this,arguments))}})();
 (function(){const c0=chooseM;chooseM=function(i){const m=Q[0],c=m&&m.opts&&m.opts[i];return withDeed(c?c.n:null,()=>c0.apply(this,arguments))}})();
 /* ---- what she knows: Đức (true nature) only once she knows the person; Danh is what the palace says ---- */
@@ -30100,8 +30142,9 @@ const R97L=[
 ];
 R97L.forEach(d=>{R97[d.a]=d});
 /* the rare ending becomes a real ending of the arc (k:1, a win for the chapter chain and the origin finale) */
-Object.keys(R97).forEach(id=>{const a=ARC67[id],d=R97[id];if(!a||!a.E||a.E.r97)return;
- a.E.r97={k:1,tag:"✦ "+d.tag,w:d.w,t:d.t,fx:d.fx,go:A=>r97After(A,d)}});
+/* jreg: rare endings registered later (jroad RD97L via RARE97.defs) get their E.r97 the same way */
+regEach(R97,id=>{const a=ARC67[id],d=R97[id];if(!a||!a.E||a.E.r97)return;
+ a.E.r97={k:1,tag:"✦ "+d.tag,w:d.w,t:d.t,fx:d.fx,go:A=>r97After(A,d)}},"R97 ending");
 /* ---------- condition, roll, offer ---------- */
 function r97Cond(A,d){const q=A.q97||{p:0,b:0};if(q.b)return false;if((q.p||0)<(d.np||2))return false;if((A.sc||0)<(d.sc||0))return false;
  if(d.need==="kid"&&!r97son())return false;if(d.need==="hh"&&!qOn())return false;if(d.need==="th"&&S.thDead)return false;
@@ -32092,7 +32135,8 @@ function itemArt(key,tier){try{
   if(!(k in ITEM_ART_G))return null;const g=ITEM_ART_G[k];
   return {key:k,src:`https://ctm-img.victoria-tntt.workers.dev/img/item-${k}.webp`,src512:`https://ctm-img.victoria-tntt.workers.dev/img/item512/item-${k}.webp`,grade:g,gradeName:ITEM_GRADE[g]}}catch(e){return null}}
 /* existing small icons (j8 iic → "item-"+ITIMG[k]) now point at the new paintings, one file per key */
-try{if(typeof ITIMG==="object"&&ITIMG)for(const k in ITEM_ART_G)ITIMG[k]=k}catch(e){}
+/* jreg: paintings registered by later modules (jpoison, jitev…) too; jeitem/jkc/jstip/jweather also set it themselves (same value) */
+if(typeof ITIMG==="object"&&ITIMG)regEach(ITEM_ART_G,k=>{ITIMG[k]=k},"ITIMG");
 /* ================= j99succ KẾ VỊ · BA ĐƯỜNG (owner 11/14 22:00Z) — design: dev/SUCCESSION_PLAN.md =================
    Hoàng thượng băng hà, con ngươi nối ngôi (hoặc ngươi là Hoàng hậu, đích mẫu, giữ quyền kế vị): ngươi CHỌN
    (a) Con làm vua → Hoàng thái hậu · (b) Buông rèm nhiếp chính · (c) Tự làm vua → Nữ đế. Không phải gieo hiếm: là lựa chọn thật,
@@ -34595,14 +34639,16 @@ if(typeof invAct==="function"){const ia0=invAct;invAct=function(a){if(a==="shop"
      Tự chọn): its level is never shown, only what someone said or what she learnt. */
 (function(){if(typeof WD_ITEMS!=="object")return;
  /* 1. remaining hair items (j97 ngự tứ hairpins…) become WD trâm */
- for(const k in IT){const it=IT[k];if(!it||it.sl!=="hair"||WD_ITEMS[k])continue;let a=null;try{a=typeof itemArt==="function"?itemArt(k):null}catch(e){}
+ /* jreg: hair items of later modules too */
+ regEach(IT,k=>{const it=IT[k];if(!it||it.sl!=="hair"||WD_ITEMS[k])return;let a=null;try{a=typeof itemArt==="function"?itemArt(k):null}catch(e){}
   WD_ITEMS[k]={k,sl:"tram",n:it.n,P:it.nt?8:Math.min(8,(it.rk|0)+1),g:it.nt?4:(a?a.grade|0:0),col:"vang",w:Object.assign({},it.w||{}),nt:it.nt?1:0,pr:it.nt?0:(it.pr||0),
    icon:a&&a.src?a.src:(typeof ITIMG==="object"&&ITIMG[k]?`https://ctm-img.victoria-tntt.workers.dev/img/item-${ITIMG[k]}.webp`:""),note:""};
-  it.wsl="tram";it.wd=1;it.kd="Trâm cài";delete it.sl}})();
+  it.wsl="tram";it.wd=1;it.kd="Trâm cài";delete it.sl},"WD hair")})();
 /* 2. fabric → the garment it is sewn into (same names as the j92 store) */
 const WD_FAB={luahang:"y_vanthuy",gamto:"y_maudon",gamvang:"y_minhhoang"};
 function wdFabOf(k){const it=IT[k];if(!it||!it.dr)return null;if(WD_FAB[k]&&WD_ITEMS[WD_FAB[k]])return WD_FAB[k];return wdPickAt(Math.min(8,(it.rk|0)+1),"y",0)}
-try{for(const k in IT){const g=IT[k]&&itm(k).dr?wdFabOf(k):null;if(g&&WD_ITEMS[g]){const w=WD_ITEMS[g];IT[k].d=`May áo: ${w.n} (Y phục, ${plainFx(w.w)||"giản dị"})`}}}catch(e){}
+/* jreg: fabrics of later modules (jstip vaibong, aolong) read the same «May áo» line (their old «May áo thường: Sắc +1» text was wrong: sewing gives a garment) */
+regEach(IT,k=>{const g=IT[k]&&itm(k).dr?wdFabOf(k):null;if(g&&WD_ITEMS[g]){const w=WD_ITEMS[g];IT[k].d=`May áo: ${w.n} (Y phục, ${plainFx(w.w)||"giản dị"})`}},"WD fabric desc");
 function wdSew(p,fk){const g=wdFabOf(fk);if(!g)return null;const e={k:g,src:"may",fab:fk,d:wdWhen()};
  /* the tailors know the cloth: the garment's phẩm is known to its owner */
  if(p===S){S.wdk=S.wdk||{};S.wdk[g]=1}else{p.wdk=p.wdk||{};p.wdk[g]=1}wdWearEntry(p,e);return e}
@@ -46090,10 +46136,11 @@ function alt72(s,n){const bac=s.c&&s.c.bac,p0=Math.min(s.p!=null?s.p:(s.b==null?
  Object.defineProperty(o,"p",{get:()=>p0-altCost(bac,rk(),6,BAL.alt72Pen).pen,enumerable:true,configurable:true});
  Object.defineProperty(o,"k",{get:()=>k0+Math.round(bacK(bac,rk())*BAL.altK.k72),enumerable:true,configurable:true});
  Object.defineProperty(o,"c",{get:()=>({suc:-altCost(bac,rk(),6,BAL.alt72Pen).suc}),enumerable:true,configurable:true});return o}
-(function(){try{if(typeof T72==="undefined")return;for(const T of T72)for(const st of T.s||[]){if(st.w!=null&&!st.n)continue;
+/* jreg: quest lines registered later (jreign) get the cheaper second way too */
+(function(){try{if(typeof T72==="undefined")return;regEach(T72,(i,T)=>{if(T)for(const st of T.s||[]){if(st.w!=null&&!st.n)continue;
  if(!st.ch&&st.c&&st.c.bac<0){const o0={n:st.n,p:st.b<100?st.b:null,sk:st.sk,k:st.k,c:st.c,w:st.w,r:st.r,rb:st.rb,l:st.l,lr:st.lr,lrb:st.lrb,fn:st.fn,ok:st.ok,no:st.no,lto:st.f};
   st.ch=[o0,alt72(Object.assign({},st,{p:st.b}),st.n)]}
- else if(st.ch&&st.ch.length&&!st.ch.some(o=>o.alt72)&&st.ch.every(o=>o.c&&o.c.bac<0))st.ch.push(alt72(st.ch[0],st.ch[0].n))}}catch(e){console.error("jstory j72",e)}})();
+ else if(st.ch&&st.ch.length&&!st.ch.some(o=>o.alt72)&&st.ch.every(o=>o.c&&o.c.bac<0))st.ch.push(alt72(st.ch[0],st.ch[0].n))} },"T72 alt")}catch(e){console.error("jstory j72",e)}})();
 /* ================= jreign: TÂN QUÂN LẬP UY — the Emperor's side story + her faction road (owner 16/11, D5) =================
    New games only (S.ps + S.reign, review/palace-start). Old saves never see any of this.
    (1) WORLD (shared court, co-op: lives in S.trieu.rg, a W_KEYS world key → host-authoritative; numbers merge as deltas):
@@ -49533,7 +49580,8 @@ function patchTabs(){document.querySelectorAll("#tabs button[data-tab]").forEach
 try{if(typeof SRVTABS==="object"&&SRVTABS){if(SRVTABS.act==="Việc")SRVTABS.act="Phận sự";if(SRVTABS.story==="Thân phận")SRVTABS.story="Thân phận"}}catch(e){}
 try{if(typeof HX==="object"){HX.hh="Lòng Hoàng hậu đối với ngươi. Càng cao càng được che chở; thấp quá sẽ bị làm khó, chặn đường thăng phẩm.";
   HX.date="Ngày tháng trong cung. Mỗi tháng ba tuần (thượng, trung, hạ tuần), mỗi tuần bốn buổi.";
-  for(const k in HX)HX[k]=fix(HX[k])}}catch(e){}
+  /* jreg: help texts added by later modules get the same wording fix */
+  regEach(HX,k=>{if(typeof HX[k]==="string")HX[k]=fix(HX[k])},"HX wording")}}catch(e){}
 patchTabs();
 const mo=new MutationObserver(ms=>{if(busy)return;busy=true;try{for(const m of ms){if(m.type==="characterData")fixText(m.target);else if(m.type==="attributes")fixAttr(m.target,m.attributeName);else m.addedNodes.forEach(fixEl)}}finally{busy=false}});
 function boot(){fixEl(document.body);mo.observe(document.body,{subtree:true,childList:true,characterData:true,attributes:true,attributeFilter:ATTR})}
@@ -50261,7 +50309,8 @@ function rcpKnows(p,kind,sid){return p===S?rcpKnown()[kind].includes(sid):rcpNpc
 function rcpGrant(kind,sid,how){const L=rcpKnown()[kind];if(!L||L.includes(sid)||!rcpSt(kind,sid))return"";L.push(sid);const s=rcpSt(kind,sid);
  const n=s[2].map(r=>wkrOf(kind,r)).filter(Boolean).map(r=>r.n).join(", ");return `Học được ${rcpStN(kind,sid)}${how?" ("+how+")":""}: ${n}.`}
 /* each sub-style's first recipe is open at bậc 0, so a teacher can open any sub-style from the start; the rest keep their level */
-for(const kind in RCP_ST)for(const s of RCP_ST[kind]){const r=wkrOf(kind,s[2][0]);if(r)r.lv=0}
+/* jreg: also the kinds later modules add (jtds kimchi/phanson/thuchuc/phucthien; it no longer copies this pass) */
+regEach(RCP_ST,kind=>{for(const s of RCP_ST[kind]){const r=wkrOf(kind,s[2][0]);if(r)r.lv=0}},"RCP first recipe");
 /* recipes she can make: art level AND a learnt sub-style */
 (function(){const o0=wkrOpen;wkrOpen=function(p,kind){const L=o0.apply(this,arguments);if(!RCP_ST[kind])return L;return (WKR[kind]||[]).filter(r=>rcpOpenR(p,kind,r))}})();
 /* ---------- art level-up: one new recipe of that art (owner 15/11 ~21:20Z), the same for every person ----------
@@ -50372,8 +50421,9 @@ PEND.rcpacc=pp=>{const r=rcpTgt(pp.t);if(!r)return null;const acc=pp.acc!=null?b
   t:`<p>${who} dùng ${pp.wn} ta ${big?"dâng":"tặng"} thì nổi mẩn đỏ, khó thở; thái y nói ${rcpThey(r)} vốn kiêng ${A}.</p><p>${acc===r?`${who} cho rằng ta cố ý mưu hại nàng ta`:`${accN?accN+" tâu":"Có kẻ tâu"} rằng ta cố ý mưu hại ${who}`}.</p>${pp.knew?`<p class="past">Ta vốn biết ${rcpThey(r)} kiêng ${A}: khó chối.</p>`:""}`,o:O}};
 /* ---------- books and hand-copied sheets (real items) ---------- */
 function rcpBookK(kind,sid,copy){return `${copy?"wkp":"wkb"}_${kind}_${sid}`}
-for(const kind in RCP_ST)RCP_ST[kind].forEach((s,i)=>{if(!i)return;for(const copy of [0,1]){const k=rcpBookK(kind,s[0],copy);
- IT[k]={n:copy?`Bản chép tay ${RCP_BK[kind].toLowerCase()} «${s[1]}»`:`${RCP_BK[kind]} «${s[1]}»`,kd:"Sách phổ",d:`Đọc: học ${rcpStN(kind,s[0])}`,pr:copy?BAL.rcp.sheetPr:BAL.rcp.bookPr[Math.min(3,i)],rk:0,tg:["rv"],bk:{kind,sid:s[0]}}}});
+/* jreg: books of the kinds later modules add (jtds) too */
+regEach(RCP_ST,kind=>RCP_ST[kind].forEach((s,i)=>{if(!i)return;for(const copy of [0,1]){const k=rcpBookK(kind,s[0],copy);
+ IT[k]={n:copy?`Bản chép tay ${RCP_BK[kind].toLowerCase()} «${s[1]}»`:`${RCP_BK[kind]} «${s[1]}»`,kd:"Sách phổ",d:`Đọc: học ${rcpStN(kind,s[0])}`,pr:copy?BAL.rcp.sheetPr:BAL.rcp.bookPr[Math.min(3,i)],rk:0,tg:["rv"],bk:{kind,sid:s[0]}}}}),"RCP books");
 /* book price follows her bổng (owner balance rule 15/11 20:30Z): the palace teacher's fee + a step per sub-style (BAL.rcp.bookAdd) */
 function rcpBookPr(i){return tchFeeOf(S)+BAL.rcp.bookAdd[Math.min(3,i)]}
 function rcpBookPrices(){if(!S)return;for(const kind in RCP_ST)RCP_ST[kind].forEach((s,i)=>{if(i){const it=IT[rcpBookK(kind,s[0],0)];if(it)it.pr=rcpBookPr(i)}})}
@@ -53953,9 +54003,7 @@ Object.assign(RCP_BK,{kimchi:"Mẫu kim chỉ",phanson:"Phương phấn son",thu
 /* phấn son: pollen in jasmine / osmanthus / rose; nothing else new */
 Object.assign(RCP_AL,{phanson:{r02:["phan"],r03:["phan"],r10:["phan"]}});
 /* jrcp's load-time steps for the new kinds: first recipe of each lối open at bậc 0; books + hand-copied sheets as real items */
-for(const kind of tdsKinds()){for(const s of RCP_ST[kind]){const r=wkrOf(kind,s[2][0]);if(r)r.lv=0}
- RCP_ST[kind].forEach((s,i)=>{if(!i)return;for(const copy of [0,1]){const k=rcpBookK(kind,s[0],copy);
-  IT[k]={n:copy?`Bản chép tay ${RCP_BK[kind].toLowerCase()} «${s[1]}»`:`${RCP_BK[kind]} «${s[1]}»`,kd:"Sách phổ",d:`Đọc: học ${rcpStN(kind,s[0])}`,pr:copy?BAL.rcp.sheetPr:BAL.rcp.bookPr[Math.min(3,i)],rk:0,tg:["rv"],bk:{kind,sid:s[0]}}}})}
+/* first recipe at bậc 0 + the sách phổ items of these kinds: jrcp's two passes run on every RCP_ST kind (jreg regEach), no copy here */
 /* ---- a course is named like an art wherever a work's maker art is looked up (ARTS.find(x=>x.k===w.a)) ---- */
 const TDS_VA=VIR.map(v=>({k:v.k,n:v.n,st:"tai",vir:1}));
 (function(){const f0=Array.prototype.find;ARTS.find=function(fn,t){const r=f0.call(this,fn,t);return r!==undefined?r:f0.call(TDS_VA,fn,t)}})();
@@ -56263,9 +56311,7 @@ ORIGINS.splice(Math.max(0,ORIGINS.findIndex(o=>o.k==="nc"))+1,0,{k:"bd",n:"Công
 /* v1 story slot (every origin needs one: the chapter line j67 lives in QUEST67/ARC67 below) */
 STORY.bd={t:"Hòa thân Bắc Địch",n:3,goal:"Ngươi là tờ hòa ước còn sống. Giữ cho hai nước yên, và giữ cho mình khỏi bị coi là con tin.",
  init(){S.st.m=0},hint:()=>"Theo từng chương của Mệnh truyện",month(){return""}};
-/* jorigins loads after j67: wrap the slot into the 14-chapter frame like every other origin (tut-followups: without it bd started with no
-   chapter 1–3 and no tutorial quests) */
-if(typeof story67Wrap==="function")story67Wrap("bd");
+/* the 14-chapter frame wraps this slot by itself (j67 regEach over STORY, jreg sweep at the script end): no hand call here */
 
 QUEST67.bd={t:"Tờ hòa ước còn sống",e:[["Công chúa của hai nước",BAL.orig.quest[0],"Bắc Địch và Đại Hy đều gọi tên ngươi khi nhắc đến hòa bình."],["Con tin được tha thứ",BAL.orig.quest[1],"Ngươi đứng được ở Đại Hy, dù chẳng ai quên ngươi từ đâu đến."],["Mãi là con tin",BAL.orig.quest[2],"Hai bên đều coi ngươi là quân cờ; ngươi chỉ còn dựa vào chính mình."]]};
 Object.assign(RTHEME67,{bd_hoa:"emp",bd_ngua:"emp",bd_tuc:"court",bd_hoang:"emp"});
@@ -58159,6 +58205,8 @@ COOP.on("do",m=>{if(!host()||!m||!TH.on(1))return;const fn=DO[m.op];let r=null;
 TH.onDo("probe",()=>({name:S.name,used,ctx:CW.ctx,host:(rivals.find(v=>v.coop)||{}).id||null}));
 }catch(e){console.error("jcoopthin",e)}})();
 
+try{regSweep();setTimeout(regSweep,0)}catch(e){console.error(e)}
+
 window.__ctmBuilt=1;
 </script>
 <script>try{kbootDone()}catch(e){}</script>
@@ -58186,7 +58234,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="1307e44a7998";window.CTM_BUILD=BUILD;
+const BUILD="5ca2e76f2289";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
