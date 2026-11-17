@@ -1,6 +1,7 @@
-/* review/pcard-fill (owner 15/11 "khung bên phải nó đang bị trống"): every person card's right side carries the kit info blocks (jpcf).
+/* (17/11 review/person-leftcol: Lòng người tab + Tâm trạng card are gone; key = left .kpkey, info panel = .pcf inside .kpstick)
+   review/pcard-fill (owner 15/11 "khung bên phải nó đang bị trống"): every person card's right side carries the kit info blocks (jpcf).
    usage: node dev/test/pcard-fill.js <build url> <outdir> [WxH@dpr,...]   → JSON per size + shots <outdir>/<WxH>-<case>.jpg
-   cases: rv0 (Hoàng hậu card, tabs → "Lòng người" tab), rv1 (phi tần), court0 (Hoàng thượng), court1 (Thái hậu), pop (stage pop-up, acts + blocks stacked),
+   cases: rv0 (Hoàng hậu card: left key block + right info panel in the sticky), rv1 (phi tần), court0 (Hoàng thượng), court1 (Thái hậu), pop (stage pop-up, acts + blocks stacked),
           popdone (pop-up after the visit's one talk: Việc nhanh act cards), stranger (Người lạ: no fill), me (her own card: no fill) */
 const {chromium}=require('playwright');const fs=require('fs');const [,,URL,OUT,SIZES]=process.argv;fs.mkdirSync(OUT,{recursive:true});const sleep=t=>new Promise(r=>setTimeout(r,t));
 (async()=>{const b=await chromium.launch();const R={};
@@ -16,10 +17,13 @@ const {chromium}=require('playwright');const fs=require('fs');const [,,URL,OUT,S
    S.logs.unshift(`<span class="ld">T${S.month}/${S.year} ${TUAN[S.tuan]}</span>Ngươi dâng quà cho ${rivals[0].name}.`);
    Q.length=0;m.hidden=true;const w=document.getElementById('dawn');if(w){w.hidden=true;w.innerHTML='';w.classList.remove('on')}document.body.classList.remove('kbk-open');render()});
   await sleep(1500);
-  const go=async(nm,fn,arg)=>{await p.evaluate(fn,arg);await sleep(3500);await p.evaluate(()=>{const t=[...document.querySelectorAll('.pctabs .pct')].find(t=>/Lòng người/.test(t.textContent));if(t)t.click()});await sleep(400);
+  const go=async(nm,fn,arg)=>{await p.evaluate(fn,arg);await sleep(3500);await sleep(400);
    const m=await p.evaluate(()=>{const pc=[...document.querySelectorAll('.pc')].filter(e=>e.offsetParent).pop();const pf=pc&&pc.querySelector('.pcf');const pcr=pc&&pc.querySelector('.pcr');const vis=e=>{if(!e)return null;const r=e.getBoundingClientRect();return[Math.round(r.left),Math.round(r.top),Math.round(r.width),Math.round(r.height)]};
-    const tab=pc&&[...pc.querySelectorAll('.pct')].find(t=>/Lòng người/.test(t.textContent));
-    return{card:!!pc,fill:!!pf,fillRect:vis(pf),sections:pf?[...pf.querySelectorAll('.kpst')].map(h=>h.textContent):[],mood:!!(pf&&pf.querySelector('.pcf-mood .kskill')),rel:!!(pf&&pf.querySelector('.krt')),tab:!!tab,tabText:tab&&tab.textContent,
+    const tab=pc&&[...pc.querySelectorAll('.pct')].find(t=>/Lòng người/.test(t.textContent));const key=pc&&pc.querySelector(':scope > .pcl > .kpkey');const pcp=pc&&pc.querySelector(':scope > .pcl > .pcp');const stick=pc&&pc.querySelector('.kpstick');
+    const kr=key?key.getBoundingClientRect():null,pr=pc?pc.getBoundingClientRect():null;
+    return{card:!!pc,info:!!pf,infoInSticky:!!(pf&&stick&&stick.contains(pf)),sections:pf?[...pf.querySelectorAll('.kpst')].map(h=>h.textContent):[],noMood:!(pc&&pc.querySelector('.pcf-mood')),noLongNguoiTab:!tab,
+     key:!!key,keyCompactRel:!!(key&&key.querySelector('.kr2-cp .kr2cl')),keyChip:!!(key&&key.querySelector('.kpk-st .chip')),keyLines:key?[...key.querySelectorAll('.kpkl > div')].map(d=>d.textContent.trim()):[],
+     keyVisible:kr&&pr?kr.bottom<=pr.bottom+1&&kr.top>=pr.top:null,figW:pcp?Math.round(pcp.getBoundingClientRect().width):null,
      quick:pf?pf.querySelectorAll('.kskacts button').length:0,hscroll:document.documentElement.scrollWidth>innerWidth+1,fillOverflowX:pf&&pcr?[...pf.querySelectorAll('*')].some(e=>e.getBoundingClientRect().right>pcr.getBoundingClientRect().right+1):null}});
    res[nm]=m;await p.screenshot({path:`${OUT}/${wh}-${nm}.jpg`,type:'jpeg',quality:60})};
   const openTab=([t,k,i])=>{Q.length=0;document.getElementById('modal').hidden=true;tab=t;try{K3SH.home=false}catch(e){};PG[k]=i;render();try{k3Shell()}catch(e){}};
