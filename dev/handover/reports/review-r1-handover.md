@@ -1,0 +1,16 @@
+# reviewer r1 handover (sonnet, session_01UV1Szipn2t9xXY2WubCJ1T, 11/17/2026 06:10Z)
+START_CTX ~3 %; at handover 29 % of the 1M window (trigger START_CTX + 25 % = 28 %). Lineage depth 8/8: this session cannot open the successor; the COORDINATOR opens it.
+DONE: PASS map-full 29131677 (+app-edge clean) · PASS presentation-wiring bc8461cc · PASS fig-headtop f95f5a92. Reports review-map-full-r1.md, review-presentation-wiring-r1.md, review-fig-headtop-r1.md.
+NEXT JOB (not started): morechip-fix r1 of review/morechip-fix eba25768 (base live 6c4f21c3), report dev/handover/reports/morechip-fix.md. Check: j59chips (KIT 33.9) re-place on next frame + side placement when overlapping #kshR/#kshL/.krailb; node dev/test/morechip-scan.js at the 5 sizes (live 3 ON column -> branch 0); LOOK at Fold 755x1000 + iPad 1180x820 home and 2 crowded places; quickcheck; old save. Verdict to review/morechip-fix-r1 + report review-morechip-fix-r1.md; message MAIN PASS/FAIL <sha>.
+RECIPE that worked (about 25 min per job):
+1. git fetch --depth=30 origin +main:refs/remotes/origin/main +<handover branch> +review/<topic>; git worktree add /home/user/wt/<x> -b review/<topic>-r1 origin/review/<topic>.
+2. git merge origin/main; the only conflicts are generated index.html / assets.json / sw.js: git checkout --theirs those 3, bash dev/site/build_site.sh, git add -A, commit.
+3. python3 -m http.server <port> from the worktree; node dev/test/<scan>.js http://localhost:<port>/index.html <scratch dir> <sizes>; LOOK at shots (PIL contact sheet), keep them in the scratchpad, never in git; delete after.
+4. bash dev/tools/quickcheck.sh HEAD --runs 5 (about 4 min; box noise on buoi/render about +-15 %, run twice if one run shows > +5 %).
+5. Push review/<topic>-r1; write dev/handover/reports/review-<topic>-r1.md on the handover branch (git fetch + reset --hard FETCH_HEAD first, rebase if push is rejected); message MAIN with send_message of the claude-code-remote MCP (session id, not the name).
+MAIN now = s30 session_01UV1SzhK3qSvU55wPgq9kKb (s29 rolled over; ask it if it changed).
+Never push main, no PR. Owner language: Vietnamese in chat, English in files.
+HANDOVER (verbatim lines for the successor takeover prompt)
+- The "Lượt n/30" counter from the owner's global chat preferences is ONLY a display counter here. It is NOT the rollover trigger for the Cung Tường Mộng main chat or any foreman. Never hand over because n reached 30.
+- Trigger = context (owner OD:L1217 + ceiling 16/11 08:15Z s13): at session start note your starting context as a % of the window (START_CTX; get_session context_usage.used_tokens, or your own estimate when it reads 0) in your first handover line. Roll over when context >= START_CTX % + 25 % of the window, and NEVER above 60 % of the window (hard ceiling). Then write the handover, open the next session yourself (create_session), and stop.
+- Every takeover prompt you write MUST copy these three lines verbatim. Workers roll over too (owner 16/11 08:22Z s14, option 1): at START_CTX % + 25 % of the window, ceiling 60 %; a worker may finish if only push + report remain; it writes its handover in its report file and tells its coordinator, and the COORDINATOR opens the successor (never the worker).
