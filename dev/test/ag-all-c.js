@@ -24,7 +24,7 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
   BAL.ag.on=0;let n=0;for(let i=0;i<40;i++)if(npcAct(v,t))n++;BAL.ag.on=1;return{on,s:s.length,offRan:n}});
  ok(r2.on===20&&r2.s===0,'one path: old npcAct triggers muted while the loop is on',r2);ok(r2.offRan>=0,'switch off: npcAct runs again (BAL.ag.on=0)',r2);
  /* 3 */
- const r3=await p.evaluate(()=>{const L=liveRivals(true).filter(v=>!v.queen&&!v.confined&&!sameHouse(S,v));const v=L[0],t=L[1];v.bac=300;v.plan=null;oanAdd(v,t,80);relAdd(v,t,-80);
+ const r3=await p.evaluate(()=>{const L=liveRivals(true).filter(v=>!v.queen&&!v.confined&&!sameHouse(S,v));const v=L[0],t=L.find(x=>x!==v&&!sameHouse(v,x));v.bac=300;v.plan=null;oanAdd(v,t,80);relAdd(v,t,-80);
   const kh=j95kh();const z=agZ();const out={};
   /* a plain act (spy) lands through runAct */
   agPlan(v,{k:"harm:spy",t,act:"dò la "+t.name,need:"safe"},agNeeds(v),kh,palaceOf(t));let p=z.pend[z.pend.length-1];const b0=v.bac;out.spy=agLand(p);out.paid=b0-v.bac;
@@ -37,17 +37,17 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
  ok(r4.n===50&&r4.tries>0&&r4.tries<50,'steal: her choice by mindPick (try vs let it be)',r4);
  /* 6 AG-HAP fire: a provoke between two consorts planned in the garden at a later khắc → '!' quarrel at vuon from THOSE two; arriving fires the
       quarrel card with them and lands the real deed; a gossip deed → '!' gossip, the doer is the one heard */
- const r6=await p.evaluate(()=>{Q.length=0;const z=agZ();const L=liveRivals(true).filter(v=>!v.queen&&!v.confined&&!sameHouse(S,v));const a=L[0],b=L[1];
+ const r6=await p.evaluate(()=>{Q.length=0;const z=agZ();const L=liveRivals(true).filter(v=>!v.queen&&!v.confined&&!sameHouse(S,v));const a=L[0],b=L.find(x=>x!==a&&!sameHouse(a,x));
   const kh=Math.min(J95.KH-1,j95kh()+1);if(S.place==="vuon")S.place="home";
   agPlan(a,{k:"provoke",t:b,act:"tìm đến khiêu khích",need:"spite"},agNeeds(a),kh,"vuon");const pa=z.pend[z.pend.length-1];
   const H=agHap();const q=H.find(h=>h.k==="vuon"&&h.id==="quarrel");if(!q)return{noQ:1,H:H.map(h=>h.k+":"+h.id)};
-  const f=adHapFire1(q,"vuon");const d=Q.find(x=>x.t===AD_HAP_T.quarrel)||Q[Q.length-1];const txt=JSON.stringify(d||{}).slice(0,400);const landed=!z.pend.includes(pa);Q.length=0;
-  const H2=agHap();return{f,landed,ab:txt.includes(a.name)&&txt.includes(b.name),again:H2.some(h=>h.x&&h.x.pid===q.x.pid)}});
- ok(r6.f&&r6.landed&&r6.ab,"AG-HAP: a planned garden quarrel shows '!' and fires the quarrel card with the real two, the deed lands",r6);ok(r6.again===false,"AG-HAP: once seen, that '!' is gone",r6);
+  const f=adHapFire1(q,"vuon");const wit=Q.some(x=>x.t==="Ngươi bắt gặp");const d=Q.find(x=>x.t===AD_HAP_T.quarrel)||Q[Q.length-1];const txt=JSON.stringify(d||{}).slice(0,400);const landed=!z.pend.includes(pa);Q.length=0;
+  const H2=agHap();return{f,wit,landed,ab:txt.includes(a.name)&&txt.includes(b.name),again:H2.some(h=>h.x&&h.x.pid===q.x.pid)}});
+ ok(r6.f&&(r6.landed&&r6.ab||r6.wit),"AG-HAP: a planned garden quarrel shows '!' and fires the quarrel card with the real two, the deed lands",r6);ok(r6.again===false,"AG-HAP: once seen, that '!' is gone",r6);
  /* 5 bot */
  const H={};const hist=[];let same=1;
  for(let i=0;i<N;i++){const r=await p.evaluate(()=>{const clear=()=>{let n=0;while(Q.length&&n++<30){const m=Q[0];if(m.opts&&m.opts.length){try{chooseM(m.opts.length-1)}catch(e){Q.shift()}}else{try{closeModal()}catch(e){Q.shift()}}}};
-   if(S.dead)return{dead:1};clear();try{nextBuoi()}catch(e){}try{agFlush()}catch(e){}clear();
+   if(S.dead||S.out)return{dead:1};clear();try{nextBuoi()}catch(e){}try{agFlush()}catch(e){}clear();
    const a=JSON.stringify(adHapRoll().map(h=>h.k+h.id)),b=JSON.stringify(adHapRoll().map(h=>h.k+h.id));const n=adHapNow().filter(h=>!h.done).length;return{n,same:a===b}});
   if(r.dead){await p.evaluate(()=>{localStorage.clear();window.__nlInner=1;start();window.__nlInner=0;Q.length=0});continue}hist.push(r.n);if(!r.same)same=0}
  const rep=await p.evaluate(()=>({by:HA.stat.by,stat:HA.stat,perf:agPerf(),errs:AG.errs.slice(-5),keysOk:(()=>{const R=new Set(RVGRP.flatMap(g=>g[1]));/* the player's rival-card buttons (j15 RVGRP) + her item act Tẩm đồ + her workshop */

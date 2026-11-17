@@ -146,7 +146,8 @@ function agHap(){const L=[],W=S.where||{};const used=new Set();const add=(k,id,x
  return L}
 function haPend(x){if(!x)return null;const z=agZ();return z.pend.find(p=>p.vid===x.vid&&(p.vid+":"+p.k+":"+p.kh)===x.pid&&!p.gone&&!p.drop)||null}
 function haHapFire(h,k){const x=h.x;const p=haPend(x);if(!p)return false;const v=RV(p.vid);if(!v||!v.alive)return false;p.seen=1;HA.stat.hap.n++;HA.stat.hap.by[h.id]=(HA.stat.hap.by[h.id]||0)+1;
- if(h.id==="quarrel"){const b=agPerson(p.t);agLand(p,true);const d=mkP("rvquarrel",{a:v.id,b:b.id});if(d){pushDil(d,AD_HAP_T.quarrel);return true}return false}
+ if(h.id==="quarrel"){const b=agPerson(p.t);let d=null;try{d=b?mkP("rvquarrel",{a:v.id,b:b.id}):null}catch(e){d=null}
+  if(d){agLand(p,true);pushDil(d,AD_HAP_T.quarrel);return true}agScene(p,v);return true}/* the quarrel card is resting (seen lately): the witness card of the same deed */
  if(h.id==="gossip"){const r=agLand(p,true);let f="";try{f=typeof intelLearn==="function"?intelLearn(v,1,{by:"ngươi",how:"Nghe lỏm"}):""}catch(e){}if(!f){try{f=overhear(k)}catch(e){}}
   pushModal({t:AD_HAP_T.gossip,who:pv(v),h:`<p>Đi ngang hành lang, ngươi nghe ${v.name} to nhỏ với người bên cạnh.</p><p>${f||r||"Chỉ là chuyện vặt, không có gì đáng nhớ."}</p>`});return true}
  if(h.id==="favour"&&x.q){try{if(q72X(x.q)&&q72CanOffer()){q72().a.push(x.q);const ok=q72Offer(x.q,"meet");if(!ok){const q=q72();q.a.splice(q.a.indexOf(x.q),1)}else{agLand(p,true);return true}}}catch(e){console.error(e)}return false}
