@@ -71,8 +71,8 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
  const r5=await p.evaluate(()=>{const o={};const {v,s}=__rig();const x=liveRivals(true).find(q=>q!==v&&q.alive&&!q.out);
   v.evm=v.evm||{};v.evm.me=2;const w=liveRivals(true).find(q=>q!==v&&q!==x&&q.alive)||S;S.deeds=S.deeds||[];S.deeds.unshift({a:v.id,t:key(w),k:"frame",w:wk(),when:j78when(),ok:true});v.schemes=(v.schemes||0)+3;
   const N=knSellNews(x,s);o.kinds=N.map(n=>n.k);o.noEvme=!N.some(n=>n.k==="evme");const n=N.find(q=>/^deed/.test(q.k))||N[0];v.evm.me=0;
-  x.bac=1000;const e0=evG(x,v);let buys=0,tries=0;for(let i=0;i<30;i++){x.knB={};x.bac=1000;tries++;if(knSellNpcBuy(x,s,n))buys++}
-  o.buys=buys;o.paid=1000-x.bac;o.price=knSellPrice(n.val,s);o.ev=evG(x,v)>e0;x.bac=0;o.poor=knSellNpcBuy(x,s,n)===false;
+  x.bac=1000;const e0=evG(x,v);let buys=0,tries=0;let paid=null;for(let i=0;i<30;i++){x.knB={};x.bac=1000;tries++;if(knSellNpcBuy(x,s,n)){buys++;if(paid==null)paid=1000-x.bac}}
+  /* review ag-all-2 r2 fix2: the price paid is read on a try that bought (was: on the 30th try, which declines ~1 run in 6 → paid 0) */o.buys=buys;o.paid=paid;o.price=knSellPrice(n.val,s);o.ev=evG(x,v)>e0;x.bac=0;o.poor=knSellNpcBuy(x,s,n)===false;
   x.knB={};x.knB[n.k]={t:n.txt};o.knownSkip=!knSellNews(x,s).some(q=>q.k===n.k);return o});
  ok(r5.buys>0&&r5.paid===r5.price&&r5.ev&&r5.poor,'NPC buyer: same price, buys by worth vs price, a proof fact gives evidence, cannot buy without bạc',r5);
  ok(r5.noEvme&&r5.knownSkip,'NPC buyer: news already known to her is not sold again; "evidence on the player" not sold to NPCs',r5);

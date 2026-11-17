@@ -54,11 +54,11 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
   /* the player AS the Empress (queenP() = S while S.rank ≥ 7): v.hh is then HER regard (j24 hhBind: "Hoàng hậu với X" = the Empress's own aff) */const rk0=S.rank;S.rank=7;S.bac=500;v.hh=0;const h1=v.hh||0,d1=v.danh;hhAct(S,v,"reward");const me=[(v.hh||0)-h1,v.danh-d1];S.rank=rk0;return{npc,me,want:[g[1],g[2]]}});
  ok(r5.me[0]>=r5.want[0]&&r5.me[1]===r5.want[1]&&r5.npc[1]===r5.want[1]&&r5.npc[0]>=r5.want[0],'Empress: one function for her button and the NPC Empress (same numbers, BAL.tw)',r5);
  /* 5b the Empress's and Thái hậu's acts are offered when their gates hold */
- const r5b=await p.evaluate(()=>{const q=queenP();const v=liveRivals(true).find(x=>x!==q&&!x.out);v.hh=60;q.bac=500;const O=AGREG.hh.acts(q,agNeedsC(q),null).map(o=>o.k);
+ const r5b=await p.evaluate(()=>{const q=queenP();const v=liveRivals(true).find(x=>x!==q&&!x.out);(q.rl=q.rl||{})[v.id]=60;/* review ag-all-2 r2 fix2: v.hh IS aff(Empress, v) and its setter goes through affAdd, which her 'slow to warm' trait shrinks (j28 persF trust: 60 → 49 < rewardHh 50, the C-run red); set her regard itself */q.bac=500;const O=AGREG.hh.acts(q,agNeedsC(q),null).map(o=>o.k);
   const f=liveRivals(true).find(x=>!x.out&&x!==q)||v;f.th=80;f.thGiftWk=null;const N=agNeedsG("th");const T=AGREG.th.acts("th",N,null).map(o=>o.k+">"+(o.t===S?"me":o.t&&o.t.name));return{O,T,N}});
  ok(r5b.O.includes('hh:reward'),'Empress: Ban thưởng is her option when the gate holds',r5b.O);ok(r5b.T.some(x=>/^th:gift/.test(x)),'Thái hậu: Ban thưởng is her option for a consort she favours',r5b);
  /* 5c F5 weight pass: the Empress has a duty need (order) her buttons serve; the Thái hậu's favour gate is reachable (BAL.ag.th.fondTh) */
- const r5c=await p.evaluate(()=>{const q=queenP();const v=liveRivals(true).find(x=>x!==q&&!x.out);v.hh=BAL.ag.hh.rewardHh;q.bac=500;const N=agNeedsG(q);
+ const r5c=await p.evaluate(()=>{const q=queenP();const v=liveRivals(true).find(x=>x!==q&&!x.out);(q.rl=q.rl||{})[v.id]=BAL.ag.hh.rewardHh;/* fix2: her regard itself (see 5b) */q.bac=500;const N=agNeedsG(q);
   const O=agOptsG(q,N,"order").map(o=>o.k);v.th=BAL.ag.th.fondTh;v.thGiftWk=null;const T=agNeedsG("th");return{order:N.order,O:[...new Set(O)],fond:T.fond,fondTh:BAL.ag.th.fondTh}});
  ok(r5c.order>0&&r5c.O.some(k=>/^hh:/.test(k)),'F5: the Empress\'s duty need (order) is served by her own buttons',r5c);ok(r5c.fond>0&&r5c.fondTh<60,'F5: the Thái hậu favours a consort at BAL.ag.th.fondTh',r5c);
  const hhN=Object.values(r.byG.hh||{}).reduce((a,b)=>a+b,0),thN=Object.values(r.byG.th||{}).reduce((a,b)=>a+b,0);console.log('Empress / Thái hậu planned deeds over '+r.days+' days: hh '+JSON.stringify(r.byG.hh)+' th '+JSON.stringify(r.byG.th));
