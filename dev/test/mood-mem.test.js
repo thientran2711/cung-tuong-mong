@@ -5,7 +5,8 @@
    4 monthly cap: no more than BAL.memWake.cap wakes a month per person; per-memory pause BAL.memWake.cd
    5 NPC parity: a consort's memory of another wakes the same way; the woken cause is secret to her, known to the remembered one (moodCauseKnown)
    6 old save: memories without pl / ww, people without mwc → no throw, first look wakes nothing
-   7 bot days: no page errors
+   7 ghen family: her own score v.pg rises only via pgUp and adds her Chạnh lòng feeling aimed at that consort; the feeling ending never lowers it
+   8 bot days: no page errors
    usage: node dev/test/mood-mem.test.js [dev/index.html] [days] → exit 1 on any FAIL or page error */
 const {chromium}=require('playwright');const URL0=process.argv[2]||'dev/index.html';const URL=/^(https?|file):/.test(URL0)?URL0:'file://'+require('path').resolve(URL0);const DAYS=+process.argv[3]||4;
 const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+m+(x!==undefined?' '+JSON.stringify(x):''))};
@@ -58,7 +59,14 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
  const r6=await p.evaluate(()=>{__T.reset();const [v]=__T.R();S.place="kn";__T.where(v,"kn");const m=memAdd(S,v,"gift",{g:40,x:"quạt"});delete m.pl;delete m.ww;delete S.mwc;
   __MW.loc={};__MW.tog={};let err=null;try{__T.tick();render()}catch(e){err=e.message}return {err,n:__T.causes(S).length}});
  ok(!r6.err&&r6.n===0,'old save: no pl / ww / mwc → no throw, first look wakes nothing',r6);
- /* 7 bot days */
+ /* 7 ghen family: her v.pg */
+ const r7=await p.evaluate(()=>{__T.reset();const [v]=__T.R();S.mk=[];mkSync(S);const g0=v.pg||0;const d=pgUp(v,8,"thử");const c0=(S.mk||[]).find(m=>m.k==="ghen");
+  const c=c0&&{why:c0.why,t:c0.t,left:c0.k1-c0.k0};const g1=v.pg;for(const m of S.mk)m.k1=mkNow();mkSync(S);const g2=v.pg;
+  S.mk=[];mkSync(S);rivalNight(v);const n=(S.mk||[]).find(m=>m.k==="ghen");return {d,g0,g1,g2,c,vk:emoKey(v),dur:BAL.mood2.dur.e.ghenUp,night:n&&n.why,pg3:v.pg,step:BAL.mood2.ghen.pgNight}});
+ ok(r7.d===8&&r7.g1===r7.g0+8&&r7.c&&r7.c.t===r7.vk&&r7.c.left===r7.dur,'ghen family: pgUp raises her score v.pg and adds her Chạnh lòng feeling aimed at that consort',r7);
+ ok(r7.g1===r7.g2,'ghen family: her feeling ending never lowers v.pg',{g1:r7.g1,g2:r7.g2});
+ ok(r7.night&&/thị tẩm/.test(r7.night),'ghen family: a consort night (rivalNight) raises v.pg through pgUp with its true why',{night:r7.night});
+ /* 8 bot days */
  const r8=await p.evaluate(async D=>{let n=0;for(let i=0;i<D*16&&!S.dead;i++){try{if(Q.length){Q.length=0}endTurn();render();n++}catch(e){return {err:e.message,n}}}return {n,stat:mwStat()}},DAYS);
  ok(!r8.err,'bot turns run with MOOD-MEM on',r8);
  ok(errs.length===0,'no page errors',errs.slice(0,3));
