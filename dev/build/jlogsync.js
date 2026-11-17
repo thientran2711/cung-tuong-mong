@@ -28,7 +28,7 @@ const esc=s=>s.replace(/[.*+?^${}()|[\]\\]/g,"\\$&");
 const REL=w=>`${w}(?: → (?:ta|ngươi):| quý (?:ngươi|ta)| với (?:ngươi|ta):?)?(?: thiện cảm)?`;
 const LAB={th:REL("Thái hậu"),hh:REL("Hoàng hậu")};
 const N="(-?\\d+)",FULL="(?:đã đầy|chạm đáy)";
-const RX={};for(const [k,l] of LK)RX[k]=new RegExp(`(?<![\\p{L}\\d])(?:${LAB[k]||esc(l)})(?: (?:của )?(?:ngươi|ta))?:?\\s+(?:${N}\\s*→\\s*${N}(?:\\s*\\(${FULL}\\))?|([+\\-−])(\\d+)(?:\\s*\\(${FULL}\\s*${N}?\\))?|${FULL}\\s+${N})`,"gu");
+const RX={};for(const [k,l] of LK)RX[k]=kRx(`(?<![\\p{L}\\d])(?:${LAB[k]||esc(l)})(?: (?:của )?(?:ngươi|ta))?:?\\s+(?:${N}\\s*→\\s*${N}(?:\\s*\\(${FULL}\\))?|([+\\-−])(\\d+)(?:\\s*\\(${FULL}\\s*${N}?\\))?|${FULL}\\s+${N})`,"gu");
 /* the bổng lộc line's total "… = +23 bạc" (its items "+35 bạc · −9 bạc" are parts of it, not counted) */
 const RXB=/=\s*([+\-−])(\d+)\s*bạc/gu;
 const plain=h=>String(h==null?"":h).replace(/^<span class="ld">[^<]*<\/span>/,"").replace(/<[^>]+>/g,"").replace(/&nbsp;/g," ");
@@ -82,7 +82,7 @@ function tickFlush(label,n){if(!TICK.size||!S)return false;const g=[];for(const 
  log(`${MK("t")}${String(label||lab||"Sang tuần mới").replace(/[.:\s]+$/,"")}: ${g.join(" · ")}.`);return 1}
 function reset(){LG=S?{s:S,v:lsSnap(),seq:S.logSeq||0}:null;ATT={};pm0=typeof popMsg==="string"?(typeof kShort==="function"?kShort(popMsg):popMsg):""}
 /* a change no reason was given for: the pop card's own sentence of this action, if it wrote one */
-function popWhy(){try{const p=typeof popMsg==="string"?(typeof kShort==="function"?kShort(popMsg):popMsg):"";if(!p||p===pm0)return"";const t=plain(p).replace(/\s+/g," ").trim().split(/(?<=[.!?])\s/)[0].replace(/[.!?]+$/,"");return t.length>2&&t.length<=90?t:""}catch(e){return""}}
+function popWhy(){try{const p=typeof popMsg==="string"?(typeof kShort==="function"?kShort(popMsg):popMsg):"";if(!p||p===pm0)return"";const t=plain(p).replace(/\s+/g," ").trim().split(kRx("(?<=[.!?])\\s",""))[0].replace(/[.!?]+$/,"");return t.length>2&&t.length<=90?t:""}catch(e){return""}}
 function lsSync(label,why){try{if(!S||!Array.isArray(S.logs))return;if(!LG||LG.s!==S){reset();return}if(fold)return;
   const w=Object.assign({},ATT);if(why)for(const k in why)if(why[k])(w[k]=w[k]||[]).push(why[k]);
   if(quiet){TICK=new Map();reset();return}/* a death's last act still gets its line (its cost) */
