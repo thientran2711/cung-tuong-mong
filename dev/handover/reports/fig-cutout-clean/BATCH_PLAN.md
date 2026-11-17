@@ -15,3 +15,6 @@ Pilot masters are NOT reused unless the owner OKs the pilot; pilot files (a18) c
 one skin (4 praised faces 01/05/12/18); lively hands + props; huadian flower/leaf only, 0.085 x face width; never back-turned; transparent bg; full body incl. feet; nothing touching canvas edge; fit_fig height = old; no low res; men never pink/purple.
 ## Per-batch QA
 qa_fig.py every file + forehead-crop contact sheet + hands/feet look on dark+light; fail -> regenerate max 2, then 'hard' list. Credits tracked per worker in its report.
+
+## CREDITS (re-estimate 17/11 after owner: 2k only)
+~8,800 files x 65 cr = ~572k + ~8% retries = ~620k (balance ~1.27M).
