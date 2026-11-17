@@ -7,6 +7,8 @@ OWNER (verbatim, 17/11 ~21:12Z): "Đúng rồi, cái hình mẫu này tức là 
 OWNER (verbatim, ~21:15Z): "Bây giờ cần phải coi lại bất kỳ một cái hình nào mà vẽ, nói chung là coi lại đi, lấy cái hình mẫu này nếu mà không đúng thì phải vẽ lại hết."
 OWNER (~21:00Z): "...trang phục ở cái bộ cung nữ bạn vẽ rất là thước tha mềm mại, nhưng mà cái trang phục ở cái bậc mà ở C01 á, bạn vẽ là cái nét này là cái nét manga anime đó, tức là cái nét mà vẽ trên cái tranh, cái tờ giấy."
 
+OWNER (verbatim, 17/11 ~21:20Z): "Không, bạn người nhắm mắt nha, những người nào nhắm mắt rồi không là phải bạn lại hết." → every figure with CLOSED EYES = REDRAW (separate column in the table: key list of closed-eye figures, every family, every age; example seen: fig-consort-c14-t4-a18).
+
 THE ONE REFERENCE: https://ctm-img.victoria-tntt.workers.dev/img/hd/fig-maid-m09-a18.webp (rendering, skin, fabric: matte textured soft silk, natural shading, light line, realistic painterly).
 
 TASK (audit only, NO generation, NO uploads to live paths):
