@@ -956,3 +956,4 @@
 | FOREMAN C-AG #7 (opus; successor of #6, opened by MAIN s38) | handover FOREMAN_C_STATUS | MAIN s38 | session_01UV1SzgaEMtM9LvcYPr6tdR | RUNNING | 17/11 21:36Z |
 | toil blush final (owner row 3, OD L1721): BAL.toil dep bl .2304 / tuyet bl .2428 on toil-looks5 v18 → SMALL review → batch (sonnet) | review/toil-looks5 | MAIN s38 | session_01UV1SzhA7otHzXMdiSEqbyd | RUNNING | 17/11 21:37Z |
 | REVIEW display-set-bonus (opus BIG; successor of SzkUH3p) | review/display-set-bonus | C-AG | session_01UV1SzmDekHiFMVcVBmxdRT | RUNNING | 17/11 21:38Z |
+| tuyet-glow SAMPLE (Khuynh thành glossy glowing skin + moving light streak; owner OD ~21:55Z; sample first) (sonnet) | review/tuyet-glow | MAIN s38 | session_01UV1SzjKnHbwdNpGhhNLbnS | RUNNING | 17/11 21:53Z |
