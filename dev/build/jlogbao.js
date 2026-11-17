@@ -80,7 +80,7 @@ window.LOGBAO=LOGBAO;window.lbTidy=lbTidy;window.lbClass=lbClass;window.logOnce=
    happened, between the log lines. Kept OUT of S.logs on purpose: the cards restate numbers ("Sức 91→100") that the Sổ ghi replay (jlogsync) and
    the Tuần lục (j87) already count once. Markup = the card's own kit parts (seal + title, .kb kit rows, kitKemRow) — no new frame or CSS. */
 const LBCARDS=60;
-function lbCardKeep(h,key){try{if(!S||!h)return;S.cards=S.cards||[];const k=lbKey()+"|"+key;if(S.cards.some(c=>c.k===k))return;if(S.cards[0]&&S.cards[0].h===String(h).slice(0,4000)&&String(S.cards[0].k).startsWith(lbKey()+"|"))return;/* the same card twice in a row (two hooks a tick apart, a log between them) = one */
+function lbCardKeep(h,key){try{if(!S||!h)return;S.cards=S.cards||[];const k=lbKey()+"|"+key;if(S.cards.some(c=>c.k===k))return;const h4=String(h).slice(0,4000);const kt=String(key).split("|").slice(0,2).join("|")+"|";if(S.cards.slice(0,3).some(c=>c.h===h4&&String(c.k).includes("|"+kt)))return;/* the very same card (same rows, same numbers) caught by two hooks a tick apart = one */
   let d="";try{d=`T${S.month}/${S.year} ${TUAN[S.tuan]}`}catch(e){}
   S.cards.unshift({q:S.logSeq||0,k,d,h:String(h).slice(0,4000)});if(S.cards.length>LBCARDS)S.cards.length=LBCARDS}catch(e){}}
 const lbStrip=h=>String(h||"").replace(/<(img|video|audio|canvas|svg|button|figure|picture)\b[\s\S]*?(<\/\1>|\/?>)/gi,"").replace(/<(script|style)\b[\s\S]*?<\/\1>/gi,"")
@@ -88,7 +88,7 @@ const lbStrip=h=>String(h||"").replace(/<(img|video|audio|canvas|svg|button|figu
 /* the KẾT QUẢ card: what the toast really showed, after every wrapper (j63 resultShow calls lbCardRes a tick after it fills #rtoast) */
 /* same title + same log moment but other rows (two acts with one name in a buổi) = another card: the key carries the text hash */
 const lbHash=t=>{let h=0;for(let i=0;i<t.length;i++)h=(h*31+t.charCodeAt(i))|0;return (h>>>0).toString(36)};
-function lbCardRes(title,any){try{const t2=document.getElementById("rtoast");const rt=t2&&(any||t2.classList.contains("on"))&&t2.querySelector(".rt");if(rt)lbCardKeep(`<span class="klk">${lbStrip(rt.innerHTML)}</span>`,"kq|"+lbPlain(String(title||"")).slice(0,60)+"|"+(S.logSeq||0)+"|"+lbHash(lbPlain(rt.innerHTML)))}catch(e){}}
+function lbCardRes(title,any){try{const t2=document.getElementById("rtoast");const rt=t2&&(any||t2.classList.contains("on"))&&t2.querySelector(".rt");if(rt)lbCardKeep(`<span class="klk">${lbStrip(rt.innerHTML)}</span>`,"kq|"+lbPlain(String(title||"")).slice(0,60)+"|"+lbHash(lbPlain(rt.innerHTML)))/* no log counter in the key: the two hooks a tick apart (a log between them) keep ONE card */}catch(e){}}
 window.lbCardRes=lbCardRes;
 /* … and any other path that fills the result card (outermost wrapper: a card some wrapper builds itself) */
 (function(){if(typeof resultShow!=="function")return;const r0=resultShow;resultShow=function(title){if(window.__tsNoRes)return r0.apply(this,arguments);/* jts holds this card back (shown later under its own title) */const tt=document.getElementById("rtoast");const h0=tt?tt.innerHTML:"";const r=r0.apply(this,arguments);
