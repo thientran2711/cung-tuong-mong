@@ -18,12 +18,12 @@ const CU_KHOI={dan:"Cầm khôi",hat:"Ca khôi",co:"Kỳ khôi",dauho:"Đầu h�
 const CU_PLACE=["Quán quân","Á quân","Giải ba"];
 /* one prize table per contest: the pool follows HER rank (what bạc is worth to her), so Nhất > Nhì > Tam whoever stands where */
 function cuBudget(p,i,big){const r=Math.max(0,Math.min(7,rkOf(S)|0));return Math.round((BL[r]||30)*(big?BAL.cp.months.big:BAL.cp.months.small)*BAL.cp.share[i])}
-function cuItem(kind,p,i,P){const pool=(CU_POOL[kind]||["tuithom"]).filter(k=>IT[k]&&(!IT[k].rk||IT[k].rk<=rkOf(p)));if(!pool.length)return null;const cap=P*BAL.cp.item[i];
- const fit=pool.filter(k=>IT[k].pr<=cap).sort((a,b)=>IT[b].pr-IT[a].pr);if(fit.length)return fit[0];
- const cheap=pool.slice().sort((a,b)=>IT[a].pr-IT[b].pr)[0];return IT[cheap].pr<=cap*1.35?cheap:null}
-function cuPrize(kind,i,p,big){const P=cuBudget(p,i,big);const k=cuItem(kind,p,i,P);const ip=k?IT[k].pr:0;const bac=Math.max(BAL.cp.minBac,Math.round((P-ip)/5)*5);return{k,bac,pool:P}}
+function cuItem(kind,p,i,P){const pool=(CU_POOL[kind]||["tuithom"]).filter(k=>IT[k]&&(!itm(k).rk||itm(k).rk<=rkOf(p)));if(!pool.length)return null;const cap=P*BAL.cp.item[i];
+ const fit=pool.filter(k=>itm(k).pr<=cap).sort((a,b)=>itm(b).pr-itm(a).pr);if(fit.length)return fit[0];
+ const cheap=pool.slice().sort((a,b)=>itm(a).pr-itm(b).pr)[0];return itm(cheap).pr<=cap*1.35?cheap:null}
+function cuPrize(kind,i,p,big){const P=cuBudget(p,i,big);const k=cuItem(kind,p,i,P);const ip=k?itm(k).pr:0;const bac=Math.max(BAL.cp.minBac,Math.round((P-ip)/5)*5);return{k,bac,pool:P}}
 function cuMeet(list){try{if(typeof k61Meet!=="function")return;(list||[]).forEach(p=>{if(p&&p!==S&&typeof p==="object"&&(rivals||[]).includes(p)&&!p.out)k61Meet(p,"Cùng dự hội thi",2)})}catch(e){console.error(e)}}
-function cuItemChip(k){return kitChip(IT[k].n,"g")}
+function cuItemChip(k){return kitChip(itm(k).n,"g")}
 function cuAward(o,ord,place,of,kind){o=o||{};const big=!!o.big,res={mine:null,html:"",places:[]};CU.did=true;CU.last=res;
  const title=o.title||"Hội thi";
  ord.slice(0,3).forEach((x,i)=>{const p=x.p||null;if(!p||typeof p!=="object"){res.places.push({prize:[]});return}
@@ -45,7 +45,7 @@ function cuAward(o,ord,place,of,kind){o=o||{};const big=!!o.big,res={mine:null,h
  const r=s0.call(this,o);return r};window.startContest=startContest})();
 /* the chest reveal for HER prize (kit §65 kitReward), after the podium */
 function cuChest(){try{const c=CU.last;if(!c||!c.mine||c.chest)return;c.chest=1;const m=c.mine;const it=[];
-  if(m.k){const I=typeof kitItemInfo==="function"?kitItemInfo(m.k):{};it.push({n:IT[m.k].n,d:IT[m.k].d,img:kmItemImg(m.k),tier:kmTierOf(m.k),gn:I.gname||"",k:m.k})}
+  if(m.k){const I=typeof kitItemInfo==="function"?kitItemInfo(m.k):{};it.push({n:itm(m.k).n,d:itm(m.k).d,img:kmItemImg(m.k),tier:kmTierOf(m.k),gn:I.gname||"",k:m.k})}
   if(typeof kitReward==="function")kitReward({kind:m.place===1?"chest":"tray",title:"Ban thưởng hội thi",from:m.title,items:it,bac:m.bac})}catch(e){console.error(e)}}
 /* origin line of a prize item in the bag */
 (function(){if(typeof kinvFrom!=="function")return;const f0=kinvFrom;kinvFrom=function(f){return f==="thi"?"Thưởng hội thi":f0.apply(this,arguments)}})();

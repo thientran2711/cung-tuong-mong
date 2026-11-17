@@ -25,7 +25,7 @@ function r97allies(n){try{return liveRivals(true).filter(v=>(v.rel||0)>=n).lengt
 function r97art(k){return (S.arts&&S.arts[k])||0}
 function r97srv(){return typeof isSrv==="function"&&isSrv()}
 function r97son(){try{return son67()}catch(e){return null}}
-function r97give(k,giver){if(!IT[k])return"";S.inv=S.inv||[];S.inv.push({k,from:"rare",own:"me",giver:giver||"Hoàng thượng",d:S.turn,nt:1});return IT[k].n}
+function r97give(k,giver){if(!IT[k])return"";S.inv=S.inv||[];S.inv.push({k,from:"rare",own:"me",giver:giver||"Hoàng thượng",d:S.turn,nt:1});return itm(k).n}
 function r97srvRk(n){try{if(S.srv&&!S.srv.risen){const old=S.srv.rk||0;S.srv.rk=Math.max(old,Math.min(4,n));if(S.srv.rk>old)return `Ngươi được thăng ${SRK.maid[S.srv.rk]}.`}}catch(e){}return""}
 function r97rise(why){try{if(S.srv&&!S.srv.risen&&typeof srvRise==="function"){srvRise(why);return "Ngươi được phong Đáp ứng."}}catch(e){console.error(e)}return""}
 /* ---------- the catalogue: one rare ending per arc ----------

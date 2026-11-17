@@ -189,7 +189,7 @@ window.kitThey=kitThey;
 Object.assign(BAL,{thieuLe:{danh:-2,duc:-1,aff:-3,strict:1.5,frac:.35}});
 function aaThieuLe0(p){try{if(!p||p.out)return false;if(p.rankSet!=null&&p.rankSet===rkOf(p)&&p.rankSetWorn)return false;if(typeof luxOf!=="function")return false;const x=luxOf(p);if(x.sc>0)return x.sc<x.bud*BAL.thieuLe.frac;
  /* nothing worn: thiếu lễ only when she could have dressed (a bestowed rank set, or wearable things in her chest) — nobody is blamed for clothes she does not own */
- return p.rankSet!=null||(p.inv||[]).some(e=>!e.h&&IT[e.k]&&IT[e.k].sl)}catch(e){return false}}
+ return p.rankSet!=null||(p.inv||[]).some(e=>!e.h&&IT[e.k]&&itm(e.k).sl)}catch(e){return false}}
 function aaHostStrict(host){try{if(host==="th"){const t=traitsOf({kind:"th"});return t.includes("Đa nghi")||t.includes("Kiêu ngạo")}if(host&&host.queen)return traitsOf(host).some(t=>t==="Kiêu ngạo"||t==="Ghen tuông")}catch(e){}return false}
 function aaThieuLeFx(host){const B=BAL.thieuLe,m=aaHostStrict(host)?B.strict:1;return{danh:B.danh,duc:B.duc,aff:Math.round(B.aff*m)}}
 function aaThieuLeTxt(host,f0){const f=f0||aaThieuLeFx(host);const who=host==="th"?"Thái hậu":host==="emp"?"Hoàng thượng":host&&host.queen?"Hoàng hậu":"chủ nhà";
