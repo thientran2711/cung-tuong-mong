@@ -1,6 +1,7 @@
 # FOREMAN_C_STATUS (written ONLY by Foreman C)
 
 FOREMAN C SESSION ROOT-3 = session_011xDdVQvSf8pvDHnXCRCRsz (opened by ROOT-2 ~07:40Z 17/11) · START_CTX ~8% (~80k of 1M; get_session reads 0, own estimate) → roll over at >= 33%, ceiling 60% · lineage depth 2/8 · own hourly wake (:32) below.
+- 08:04Z W4d rolled over → lead #6 opened W4e session_011xDdVPcfZBTUBL5um1QC4E (a18 m01–m26 rest ty1 m19/m21 redo + ty2/ty3 → a36 → a51). Colour decisions folded into ONE table maid-consort-tier-design-table.md (lead). W4d archive = lead's (not my child).
 - 08:02Z C LOOKED Học thành tài sheet2: OK live cong(already) + cam ky hoa vu y dung hanh (8/10); redo thi (script strokes on scroll) + ngon (listeners' faces + hand at mouth). W5c D9 OK (49/78). W4d 13 live. Lead #6 asked to fold all colour decisions into the ONE design table.
 - 08:00Z C LOOKED: art #5 Học thành tài samples: cong OK (upload), cam redo (season mix; vary robe colours, pink ≤2/10). W4d CT4+CT5: 13 OK live (5 redos + m17 m18 m20 m22–m26), redo m19 (cornflower) + m21 (turquoise azure) ≈ m18. m09 a18 ty1 stays (no redo).
 - 07:55Z C LOOKED: W5c D7 (4 live) OK; m39 → peacock teal APPROVED (≠ m37 plum), table to be updated. W6c a26 batch3 (m08–m16) OK live except m14 ty1/ty3 (olive ≈ m10) → redo bright pea-green. Table: m09 copper-bronze, m15 deep indigo-navy (W4d told for CT5). W2b at context limit → lead opens W2c. Art #4 uploaded b7–b13 OK'd keys itself; #5 starts Học thành tài.
