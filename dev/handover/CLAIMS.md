@@ -935,7 +935,7 @@
 | ART fig-style-audit (sonnet; owner 21:15Z audit every figure vs ONE ref img/hd/fig-maid-m09-a18.webp; audit only) | handover reports/fig-style-audit.md | C ROOT-10 | session_011xDdVRTtGbCTfvUtqh2Ekf | RUNNING | 17/11 20:45Z |
 | ART restore maid trung y (W12 sonnet; owner 17/11 ~21:25Z 'vẽ sai rồi, bỏ hết ... cứ để trong kho'; 681 keys, keep-copy img/_keep/maid-ty-redraw) | handover reports/fig-cutout-clean/RESTORE_TY_REPORT.md | C ROOT-10 | session_011xDdVNfbdbZPTtegkYCYtp | RUNNING | 17/11 20:42Z |
 | SHELF SET BONUS table expert (sonnet; OD 20:42Z, s37 order 20:43Z) | dev/research/display-set-bonus.md | C-AG | session_01UV1SzjAuVz8TUhDrk8vhpx | DONE 500faf22 (archived; owner yes/no via s37) | 17/11 20:51Z |
-| FOLD DƯ ĐỒ BLANK MAP (sonnet; MAIN s37 order 20:24Z; whole map/canvas family + title under −/+) | review/dudo-blank | D | session_01964izE1CDG7cgHhhYhzVKC | RUNNING | 17/11 20:55Z |
+| FOLD DƯ ĐỒ BLANK MAP (sonnet; MAIN s37 order 20:24Z; whole map/canvas family + title under −/+) | review/dudo-blank | D | session_01964izE1CDG7cgHhhYhzVKC | DONE SẴN SÀNG KIỂM f59c965a (archived) | 17/11 20:55Z |
 | CONSORT-TY REPAINT W2e (successor of W2d; resume consort-c25-ty8-a36, 196 keys left: a36 36 + a51 160; m09 style ref + face sentence rules; sonnet opened by lead #7) | review/fig-cutout-clean | C | session_011xDdVNiPZPXTnXV8mKbypr | RUNNING | 17/11 20:53Z |
 | RESTORE maid trung y (owner GO ~21:25Z via ROOT-10; opened by ROOT-10, not by lead) | review/fig-cutout-clean | C | session_011xDdVNfbdbZPTtegkYCYtp | RUNNING | 17/11 20:50Z |
 | batch s36a LIVE 4c8568f5 (main 60b0e3bf → 4c8568f5; ROLLBACK 60b0e3bf): kit-rank-name-land, kit-display-room-r1, mirror-center-r2, ui-fixes-1-r6, kit-figure-mood-r4-r5, kit-thanh-bai-r4c | review/batch-s36a | MAIN s37 | session_01UV1SzhpLx156n52Xk9v9WR | LIVE | 17/11 21:01Z |
@@ -949,3 +949,4 @@
 | odds-cap fix round 2 (opus; r1 FAIL 5 @bc58dd46) | review/odds-cap | D | session_01964izBuoCyMCGvstmPMb5T | RUNNING | 17/11 21:15Z |
 | ART hoa-dien-art #2 (opus; successor of R5e4: fig/hd/tn twins, W2c/W12 keys, HD_ANCHOR; POR stays with R5e4) | handover reports/hoa-dien-art.md | C ROOT-10 | session_011xDdVNfSx9r7wqg7ooEXKn | RUNNING | 17/11 21:15Z |
 | REVIEW coop-thin-c reviewer #2 (successor of 4NkEVbfk at f65b5b6c; opus BIG; brief briefs/review-coop-thin-c-2.md) | review/coop-thin-c-r1 | B | session_01N1tNP6cMqcMNhStqaraUuW | RUNNING | 17/11 21:22Z |
+| dudo-blank review r1 (sonnet SMALL) of f59c965a | review/dudo-blank-r1 | D | session_01964izF1pwkGy4nxwo8Q4iK | RUNNING | 17/11 21:20Z |
