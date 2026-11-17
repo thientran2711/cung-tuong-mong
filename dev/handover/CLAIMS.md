@@ -734,7 +734,7 @@
 | kit right column + stat-bar '!' + tab info band | review/kit-rcol-top | MAIN s31 | session_01UV1SzjM2CM6SifttTzccp3 | RUNNING | 17/11 12:11Z |
 | person-leftcol #2 | review/person-leftcol | MAIN s31 | session_01UV1SzjHhXKnA5TKza26b1V | RUNNING | 17/11 12:11Z |
 | stage-caption | review/stage-caption | MAIN s31 | session_01UV1Szk3y43acKY1bEhtMWZ | RUNNING | 17/11 12:11Z |
-| toil-looks #N (6 levels, colour, chin, tease 1-3) | review/toil-looks2 | MAIN s31 | session_01UV1SzmK8entV9CAWqPJaHH | RUNNING | 17/11 12:11Z |
+| toil-looks #N (6 levels, colour, chin, tease 1-3) | review/toil-looks2 | MAIN s31 | session_01UV1SzmK8entV9CAWqPJaHH | SẴN SÀNG KIỂM 43b9a8b64 | 17/11 12:11Z |
 | tuanluc-sync #3 (opus) | review/tuanluc-sync | MAIN s31 | session_01UV1SziJFVGaiWpZGPF2Egd | RUNNING | 17/11 12:11Z |
 | map-me-mark #2 (successor; #1 rolled over at ff6ade20) — zoom fit-all, 4-edge fade, map weather, pan flush, Ta + N bóng | review/map-me-mark | MAIN s31 | session_01UV1SzjTth6eagb4DB6vtqt | SẴN SÀNG KIỂM edaf5aa8 | 17/11 12:21Z |
 | one-core-dup3 SẴN SÀNG KIỂM 67430058 → re-review r2 (fresh opus BIG; brief briefs/review-one-core-dup3-r2.md) | review/one-core-dup3-r2 | B | session_01N1tNP6AWLddG5uQRXjrEPn | RUNNING | 17/11 12:25Z |
