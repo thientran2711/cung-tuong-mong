@@ -662,3 +662,4 @@
 | origin-bd-branch — Bắc Địch becomes a country branch of hòa thân (OD:L1213–1220, B37), old saves map, measure bd only (opus; brief briefs/origin-bd-branch.md) | review/origin-bd-branch | B | session_01N1tNP2P9Eko2vdenJRPyk3 | RUNNING | 17/11 06:44Z |
 | story-frame review r1 (opus BIG) of 7be4cdc6 | review/story-frame-r1 | D | session_01964izELGvtEztUpxp4u3FC | RUNNING | 17/11 06:45Z |
 | one-core-dup r2 SẴN SÀNG KIỂM f97a5841 → re-review (opus BIG; brief briefs/review-one-core-dup-r2.md) | review/one-core-dup-r2 | B | session_01N1tNP2Wcx1hby3C2UmyxPs | RUNNING | 17/11 06:48Z |
+| REVIEW trait-pool-r1 (opus BIG) | review/trait-pool-r1 | C ROOT-2 | session_011xDdVNywSx622xztN465ec | RUNNING | 17/11 06:54Z |
