@@ -1075,6 +1075,8 @@ BAL.ag.par3={on:1,
  /* 2e3: Mời đến cung ta (cx3:invite, worth = the liking she would win), Phòng bị (cx3:def_<order>, worth per order; spite bar for the theo dõi target) */
  invite:{g:{"ally":2},minAff:20},petBuy:{g:{"danh":1,"safe":1},keep:40},petcare:{g:{"ally":2}},teach:{g:{"kid":2}},
  /* 2e3 toilette answers of an NPC (jtoilr toilRx*: Ghi hận / Mách Hoàng hậu after a slight, Cảm tạ / Tặng lại after praise, Hỏi bí quyết): weight b + traits, picked by mindPick with Xin lỗi / Cười trừ / Đáp lại */
+ /* 2e3 an NPC maid summoned (jagmaid amNight): Tắm gội chờ giá vs Cáo bệnh — weights: go = b + rise (a seat free), decline = b + her master's jealousy odds (amJealP) / jD, × nết */
+ sum:{go:{b:3,rise:3},no:{b:.3,jD:40,tr:{"Kín đáo":.5,"Khiêm nhường":.4}}},
  toil:{ans:{grudge:{b:.6,tr:{"Kiêu ngạo":1,"Xảo quyệt":1.5,"Tham vọng":.8}},tell:{b:.4,tr:{"Tham vọng":1,"Xảo quyệt":.8}}},praise:{thank:{b:2,tr:{"Kín đáo":1,"Kiêu ngạo":1}},give:{b:1,tr:{"Ân cần":1.5,"Khiêm nhường":1}}},ask:{ask:{b:1,tr:{"Khiêm nhường":1.5,"Ân cần":1}},no:{b:1.5,tr:{"Kiêu ngạo":2,"Tham vọng":1}}}},def:{g:{canh:{"safe":2},thudoc:{"safe":3},theodoi:{"safe":2,"spite":1},giuchung:{"safe":1.5}},foe:20}};
 /* Chia sẻ bí mật (P3T.secret, her talk and NPC↔NPC): a listener with malice above secretMal may keep it against the speaker, odds secretGrab */
 /* Mời đến cung ta (j21 inviteO, her button and an NPC host): odds = base + guest's liking of the host / affD + rank gap × rk; below hate the button says she will not come */

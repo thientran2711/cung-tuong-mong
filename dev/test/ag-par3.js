@@ -69,7 +69,7 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
   try{topicOpts(t)}finally{for(const k in W)P3T[k]=W[k]}out.herTalk=n;
   /* NPC↔NPC talk */
   v.rl=v.rl||{};v.rl[t.id]=60;t.rl=t.rl||{};t.rl[u.id]=-40;t.rl[v.id]=0;const N=Object.assign({},agNeeds(v),{ally:1,spite:1,safe:1,danh:1,hh:1,kid:1});
-  const O=AGREG.consort.par3talk(v,N,null);out.talkOpt=O.map(o=>o.k);const a0=aff(t,v);const o1=O.find(o=>o.k==="cx3:talkHealth");out.talkRun=o1?AGRUN[o1.k](v,o1.t):"";out.talkMoved=aff(t,v)!==a0;
+  const O=AGREG.consort.par3talk(v,N,null);out.talkOpt=O.map(o=>o.k);const o1=O.find(o=>o.k==="cx3:talkHealth");const lt=o1&&o1.t||t;const a0=(lt.rl||{})[v.id]||0;out.talkRun=o1?AGRUN[o1.k](v,o1.t):"";out.talkMoved=((lt.rl||{})[v.id]||0)!==a0;/* the listener the NPC picked (mindPick), raw liking step */
   /* household */
   const spy={};const sp=nm=>{const f=window[nm];spy[nm]=0;window[nm]=function(){if(arguments[0]===v||arguments[1]===v)spy[nm]++;return f.apply(this,arguments)};return()=>window[nm]=f};
   const U=["itemTest","hireTake","staffTam","recommend","searchMaids","threatServ"].map(sp);
@@ -115,5 +115,9 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
  ok(r7.def.length>=3&&r7.ord===1&&r7.see[1]>r7.see[0]&&r7.paid,'Phòng bị: NPC gives the same ORD70 orders; j70 reads them (oSee up, monthly price)',{def:r7.def,see:r7.see});
  ok(r7.life.includes("cx3:petBuy")&&r7.life.includes("cx3:petcare")&&r7.life.includes("cx3:teachV")&&r7.spy.petBuyOne>=1&&r7.spy.runAct>=1&&r7.spy.ktTeach>=1,'pets / dạy con: NPC options run petBuyOne / runAct petcare / ktTeach',{life:r7.life,spy:r7.spy});
  ok(Object.keys(r7.toilH).length>=4&&(r7.toil.toilRxGrudge+r7.toil.toilRxTell)>=1,'toilette slight: NPC picks among 5 answers (mindPick) and runs her toilRx functions',{H:r7.toilH,run:r7.toil});
+ const r8=await p.evaluate(()=>{const o=liveRivals(true).find(x=>(x.staff||[]).some(s=>s.role==="maid"));if(!o)return{skip:1};const m=o.staff.find(s=>s.role==="maid");const H={go:0,no:0};
+  const n0=window.__amN.decline;const keep=JSON.stringify(m);const R0=roomFor;roomFor=()=>false;try{for(let i=0;i<60;i++){const r=amNight(m,o,"pick");if(/cáo bệnh/.test(String(r||"")))H.no++;else H.go++;Object.assign(m,JSON.parse(keep))}}finally{roomFor=R0}
+  return{H,dec:window.__amN.decline-n0}});
+ ok(r8.skip||r8.H.go>0&&r8.H.no>0&&r8.dec===r8.H.no,'gọi thị tẩm: an NPC maid weighs Tắm gội chờ giá / Cáo bệnh (both happen)',r8);
  ok(errs.length===0,'no page errors',errs.slice(0,3));
  await b.close();const f=res.filter(x=>!x).length;console.log(f?`${f} FAIL`:'ALL PASS');process.exit(f?1:0)})();

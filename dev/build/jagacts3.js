@@ -269,3 +269,10 @@ function p3ToilPick(w,B){const T=traitsOf(w)||[];return mindPick(Object.keys(B).
 (function(){if(typeof toilNpcSk!=="function")return;const k0=toilNpcSk;toilNpcSk=function(v){const r=k0.apply(this,arguments);try{if(v&&v!==S&&toilTipOn(v))return Math.min(1,r+toilRx().tipBonus)}catch(e){}return r}})();
 Object.assign(AGC3BTN,{toilGrudge:"Ghi hận",toilTell:"Mách Hoàng hậu",toilGive:"Tặng lại",toilAsk:"Hỏi bí quyết",toilThank:"Cảm tạ"});
 Object.assign(window,{p3ToilAns});
+/* ---------------- maid dilemma: gọi thị tẩm (jagmaid PEND.amNight for her: Tắm gội chờ giá / Cáo bệnh). An NPC maid used to always go (amNight); now she weighs
+   the same two answers (mindPick): go = the night (amNight, her amMeNight twin), decline = the Emperor's regard -BAL.ag.maid.decline (amAdd, as her fx), AMN.decline ---------------- */
+(function(){if(typeof amNight!=="function")return;const n0=amNight;amNight=function(m,o,via){if(!p3On()||!m||m===S)return n0.apply(this,arguments);
+ try{const X=BAL.ag.par3.sum;const J=o&&o!==S?amJealP(o):0;let nd=X.no.b+J/X.no.jD;for(const t of (typeof traitsOf==="function"&&m.tr?traitsOf(m):[]))nd+=X.no.tr[t]||0;
+  const c=mindPick([["go",X.go.b+(roomFor("consort")?X.go.rise:0)],["no",nd]],m);AG3.stat.by["sum_"+c]=(AG3.stat.by["sum_"+c]||0)+1;
+  if(c==="no"){amAdd(m,-amD().decline);AMN.decline++;return `${m.name} cáo bệnh, nhường đêm thị tẩm. `}}catch(e){agdErr("par3:sum",e)}return n0.apply(this,arguments)}})();
+AGC3BTN.sumNo="Cáo bệnh";AGC3BTN.sumGo="Tắm gội chờ giá";
