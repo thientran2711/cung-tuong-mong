@@ -36,7 +36,7 @@ function mk(post,i,age){const nm=post.names[i%post.names.length];if(typeof sidN!
 const elderCallOf=m=>{const st=(m.staff||[]).find(s=>s.eid);return st?st.call:"ma ma"};
 /* keep the household rule: a master over her cap sends an ordinary maid back to Nội vụ phủ (never a named one, a spy of hers, a lover) */
 function fitCap(m){try{if(!m||!m.staff||m===S.thO)return;const cap=capOf(m)[0];let n=hhHas(m)[0];
- while(n>cap){const L=m.staff.filter(s=>s.role==="maid"&&!s.eid&&s.spyFor!=="me"&&!s.lover);const x=L[L.length-1]||m.staff.find(s=>s.role==="maid"&&!s.eid);if(!x)break;
+ while(n>cap){/* a servant coming home (j10 srvHome mark, staff-root-fix-1) is never the one sent away here either */const L=m.staff.filter(s=>s.role==="maid"&&!s.eid&&!s.home&&s.spyFor!=="me"&&!s.lover);const x=L[L.length-1]||m.staff.find(s=>s.role==="maid"&&!s.eid&&!s.home);if(!x)break;
   m.staff.splice(m.staff.indexOf(x),1);try{if(x.fid){const U=figUsed();const i=U.indexOf(x.fid);if(i>=0)U.splice(i,1)}}catch(e){}n--;if(m===S)log(`Nội vụ phủ điều ${x.name} sang cung khác để ${elderCallOf(m)} về hầu.`)}}catch(e){}}
 /* every post filled, each woman in the right household; her rank within the master's cap (srkMax) */
 function place(st){const post=postOf(st.eid);if(!post)return;const m=masterFor(post);if(!m)return;if(!m.staff)m.staff=[];

@@ -65,5 +65,26 @@ ok(!hits.length,'one table: no private capOf table / wrapper / +1 count outside 
   const W0=window.COOPW;window.COOPW=Object.assign({},W0||{},{on:true,seat:"b"});S.rank=1;let a,va;try{capSweep();a=hhHas(S);va=v?hhHas(v):null}finally{window.COOPW=W0}
   return{a,c:capOf(S),vb,va}});
  ok(gq.a[0]<=gq.c[0]&&gq.a[1]<=gq.c[1]&&JSON.stringify(gq.vb)===JSON.stringify(gq.va),'co-op guest: her own household trimmed on her seat; NPC households left to the host',JSON.stringify(gq));
+
+ /* (8) staff-root-fix-1 (Foreman B rule): HER OWN servant coming home (srvHome mark) is never the one Nội vụ phủ sends away; another goes,
+    or she stays over the table; the mark is honoured once. Host seat and guest seat behave the same. */
+ for(const seat of ["a","b"]){
+  await newGame('tt');const hm=await p.evaluate(seat=>{Q.length=0;S.logs=[];const W0=window.COOPW;window.COOPW=Object.assign({},W0||{},{on:seat==="b",seat});let r={};try{
+   /* past the first month: the Giáo tập ma ma (a named woman, never sent away) has left her room */S.turn=20;S.rank=1;const c=capOf(S);const x=mkServ("maid");x.loyal=30;const back=srvHome(mkServ("maid"));back.loyal=5;S.staff=[x,back];
+   capSweep();r.cap=c;r.backStays=S.staff.includes(back);r.otherGone=!S.staff.includes(x);r.markCleared=!back.home;r.log=(S.logs||[]).some(l=>String(l).includes(x.name));
+   /* only she could go: she stays over the table (no loss of the returning servant), on every later sweep too */
+   const e=srvHome(mkServ("eunuch"));S.staff=[back,e];capSweep();capSweep();render();capSweep();r.aloneStays=S.staff.includes(e)&&!!e.home;
+   /* once within the table she is an ordinary servant again (least trusted first: she goes before the others) */
+   const y=mkServ("maid");y.loyal=60;const z=mkServ("maid");z.loyal=70;S.staff=[back,y,z];capSweep();r.ordinary=!S.staff.includes(back)&&S.staff.includes(z)}finally{window.COOPW=W0}return r},seat);
+  ok(hm.backStays&&hm.otherGone&&hm.markCleared&&hm.log&&hm.aloneStays&&hm.ordinary,`servant coming home (seat ${seat}): never the one sent away; another goes with the log line; alone she stays over the table (every sweep); once within the table she is ordinary again`,JSON.stringify(hm))}
+ /* (9) co-op settle(): refused seat ('np' with her maid) and refused 'srv' both hand the servant back with the mark; the next trim keeps them */
+ await newGame('tt');const st=await p.evaluate(()=>{Q.length=0;S.logs=[];const CW=window.COOPW;const W={on:CW.on,seat:CW.seat,base:CW.base,inLife:CW.inLife};let r={};try{
+  CW.on=true;CW.seat="b";S.turn=20;S.rank=0;while(S.rank<8&&capOf(S)[0]<3)S.rank++;const c=capOf(S);const x=mkServ("maid");x.loyal=20;const m=mkServ("maid");m.loyal=1;const sv=mkServ("maid");sv.loyal=2;sv.spyFor=null;
+  CW.base={P:{a:{S:{askDone:{"t:np":[0,1],"t:srv":[0,1]}}}}};
+  const w=mkServ("maid");w.loyal=25;const d={S:{staff:[x,w],coopAsk:[{id:"t:np",k:"np",t:99901,maid:m},{id:"t:srv",k:"srv",to:1,s:sv}]},R:[]};
+  CW.askSettle(d);r.back=[d.S.staff.includes(m),d.S.staff.includes(sv)];r.marked=!!(m.home&&sv.home);r.note=(d.S.askNote||[]).some(l=>/trở về hầu ngươi như cũ/.test(l));
+  S.staff=d.S.staff;capSweep();r.cap=c;r.has=hhHas(S);r.keptBoth=S.staff.includes(m)&&S.staff.includes(sv);r.otherGone=!S.staff.includes(x)&&!S.staff.includes(w);r.cleared=!m.home&&!sv.home}
+  finally{Object.assign(CW,W)}return r});
+ ok(st.back[0]&&st.back[1]&&st.marked&&st.note&&st.keptBoth&&st.otherGone&&st.cleared,"co-op settle: refused seat and refused 'srv' hand the servant back marked; the trim sends another, keeps both; the 'trở về hầu ngươi như cũ' line",JSON.stringify(st));
  ok(!errs.length,'no page errors',errs.join(' | '));
  for(const t of T)console.log(t.join(' | '));const n=T.filter(t=>t[0]==='FAIL').length;console.log(n?`FAIL ${n}/${T.length}`:`PASS ${T.length}/${T.length}`);await b.close();process.exit(n?1:0)})();

@@ -25,12 +25,21 @@ function fillStaff(p,free){const [cm,ce]=capOf(p);let [m,e]=hhHas(p);
    NPCs: data only. The host decides (co-op guest skips: the household is a world key). */
 function capTrim(p,stay){const gone=[];try{if(!p||!Array.isArray(p.staff)||p.coop||(S&&p===S.thO))return gone;const c=capOf(p),h=hhHas(p);
  const keep=s=>(s.spyFor==="me"?1000:0)+(s.lover?200:0)+(s.loyal||0);
- [["maid",0],["eunuch",1]].forEach(([role,i])=>{while(h[i]>c[i]){const L=p.staff.filter(s=>s&&s!==stay&&s.role===role&&!s.eid&&!s.coop).sort((a,b)=>keep(a)-keep(b));if(!L.length)break;
+ /* HER OWN servant coming home (staff-root-fix-1, Foreman B rule): a servant marked by srvHome() is treated exactly like `stay` at the
+    trim after she comes back (never the one sent away; another goes, or she stays over the table), and the mark is cleared as soon
+    as that side of the household is within the table again (then she is an ordinary servant for later trims) */
+ const home=s=>s===stay||!!(s&&s.home);
+ [["maid",0],["eunuch",1]].forEach(([role,i])=>{while(h[i]>c[i]){const L=p.staff.filter(s=>s&&!home(s)&&s.role===role&&!s.eid&&!s.coop).sort((a,b)=>keep(a)-keep(b));if(!L.length)break;
   const x=L[0];p.staff.splice(p.staff.indexOf(x),1);h[i]--;x.spyFor=x.spyFor==="me"?null:x.spyFor;gone.push(x);
   try{if(x.fid&&typeof figUsed==="function"&&!(window.COOPW&&COOPW.on&&COOPW.seat==="b")){const U=figUsed();const k=U.indexOf(x.fid);if(k>=0)U.splice(k,1)}}catch(e){}}});
  if(p===S&&gone.length){const T=gone.filter(s=>(s.loyal||0)>=BAL.promo.trimTrust),O=gone.filter(s=>!T.includes(s));
   if(O.length)log(`Nội vụ phủ định lại kẻ hầu theo phẩm vị: ${O.map(s=>s.name).join(", ")} được điều sang hầu nơi khác.`);
-  for(const s of T)Q.push({t:"Nội vụ phủ điều người",who:pServ(s),h:`<p>Nội vụ phủ định lại số kẻ hầu theo phẩm vị của ngươi. ${s.name} phải sang hầu nơi khác.</p><p>${s.name} quỳ lạy từ biệt: “Nô tỳ đi rồi, xin chủ tử giữ gìn. Có việc gì, chủ tử cứ sai người gọi, nô tỳ vẫn nhớ ơn.”</p>`,btn:"Đành vậy"})}}catch(e){console.error("capTrim",e)}return gone}
+  for(const s of T)Q.push({t:"Nội vụ phủ điều người",who:pServ(s),h:`<p>Nội vụ phủ định lại số kẻ hầu theo phẩm vị của ngươi. ${s.name} phải sang hầu nơi khác.</p><p>${s.name} quỳ lạy từ biệt: “Nô tỳ đi rồi, xin chủ tử giữ gìn. Có việc gì, chủ tử cứ sai người gọi, nô tỳ vẫn nhớ ơn.”</p>`,btn:"Đành vậy"})}
+ /* the mark goes once her side of the household is back within the table (another left); while only she could go, she keeps it and stays */
+ for(const s of p.staff){const i=s&&s.role==="maid"?0:1;if(s&&s.home&&h[i]<=c[i])delete s.home}}catch(e){console.error("capTrim",e)}return gone}
+/* the one shared mark for a servant handed back to her own mistress (co-op settle: refused seat / refused 'srv'; any later return path):
+   honoured by capTrim until her side of the household is within the table, then cleared */
+function srvHome(s){if(s&&typeof s==="object")s.home=1;return s}
 /* co-op guest (review/staff-root-r1): her own household is a PERSONAL key (jcoopworld W_KEYS has no staff), so the guest trims HER OWN
    household itself (old save, demotion, cold palace); the NPC households and the face list (fidUsed, a world key) stay the host's */
 function capSweep(){try{if(!S)return;if(window.COOPW&&COOPW.on&&COOPW.seat==="b"){capTrim(S);return}for(const p of [S].concat(typeof rivals!=="undefined"?rivals:[]))if(p&&(p===S||p.alive!==false))capTrim(p)}catch(e){}}
