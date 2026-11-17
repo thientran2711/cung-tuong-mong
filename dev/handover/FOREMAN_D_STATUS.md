@@ -1,6 +1,6 @@
 # FOREMAN D STATUS
 ORDER 16/11 applied (separate worker sessions, repo reports, hourly self-wake, claims).
-last wake: 17/11 07:37Z (FOREMAN D #8 = session_01964izEvrHqnQQMQqZ2g5t1 — NEW ACCOUNT; send result lines here)
+last wake: 17/11 07:39Z — FOREMAN D is now #9 = session_01964izBsQba9xq3oCFovTBQ (opened by #8 session_01964izEvrHqnQQMQqZ2g5t1 at rollover; send result lines to #9)
 s7 START_CTX ≈ 6 % of 1M window (get_session reads 0; own estimate ~60k after start reading); rollover at 31 %, ceiling 60 %.
 - 21:43Z: suc-khoe-fix SẴN SÀNG KIỂM da50857d (F1–F10 fixed; F6 waits KIT REQUEST y-duoc + art; coop-e2e 60/60 incl. new 'NPC Sức khỏe guest = host'; D57 births fix ≈ base 0.14–0.16; her deaths 25–27 vs 17–25 per 40 lives) — worker archived → opus BIG reviewer r2 session_01DgYSWmYNeB92ubrzxwYmXs.
 - 21:40Z (hourly): OWNER RULE 21:34Z: go-live = hourly batch by MAIN; D no longer pushes main (send_message to main s24 not reachable from this account → this STATUS). Golive prep worker told to stop + write final table. OWNER PRIORITY 21:38Z: ch1–4 first, features complete, UI unified, art later — D queue checked: no D item is a later-chapter item except npc-roads (NPC side roads; keep, low). D LIVE today: coop-chat b7c5d787, coop-b1b5-fix 392fff60, coop-name-mask c1e1bbd1.
@@ -328,3 +328,5 @@ WAITING: balance-core-r2 baff0824 PASS (r2b stands) — ships when the owner OKs
 PARKED: item-ledger co-op transport (5 faults → B coop-thin); night-final co-op flow (enable in coop-thin E: nfParked() false + drop jfe.js).
 FOR MAIN (open): live j15 WAGE bug (fix b37865b7 inside suc-khoe-r2); §64 item tag missing on 'Quà tặng' (kit keeper); story14-frame.js crash at home-road step on live; KIT REQUESTS (kitConfirm vs title screen; 390x844 v3 frame column); j70scar console error jrash/jveil. FOR B: jtsb typed Bạc gates + j67 typed /2 (one-core hunt). FOR C: ART REQUEST 5 west palaces' rooms (reports/residence-seats.md).
 Tools: Cloudflare token saved on this account's environment (verify active). Briefs: dev/handover/briefs/D8-*.md (copy the tail block for new briefs). Hourly wake: #8's trigger trig_01J4hp1RY51fJ5icoPxVpXv2 is deleted at handover → #9 creates its own.
+
+- (17/11 07:39Z) #8 STOPPED: successor Foreman D #9 = session_01964izBsQba9xq3oCFovTBQ opened; #8 hourly trigger deleted. Workers report to #9.
