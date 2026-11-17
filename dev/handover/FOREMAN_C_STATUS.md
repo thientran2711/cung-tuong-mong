@@ -120,6 +120,7 @@ Always create worker sessions WITH source_url (a session without it cannot get t
 - 02:00Z old-people worker rolled over → archived; rollout #2 sonnet session_011xDdVSy3ERmyVnLWqMYT6p (~85 p/f-series + mk-fit thaihau anchors check). Lead #6 up, told all 7 workers; checking maid HD.
 - 02:01Z maid HD: game reads hd via CDN manifest img/FIGURES-hd.json (1598 entries, none for maids/new 2k files) → lead #6: every fig gets an 1800 hd twin (maids too, live maids retro-fitted); C ordered SINGLE-WRITER manifest merge (workers write fragments, lead merges) to avoid lost entries.
 - 02:03Z OWNER asked about missing Nữ đế / Hoàng thái hậu figure tiers → confirmed (tiers cap at t8); art worker sonnet session_011xDdVShLvZ7X2KBzWPp6Aj (history check + 6 samples t9/t10 → owner; then 256 figs); wiring REQUEST to main (top line). Thái hậu GỐC vs MỚI sheets sent to owner on her request.
+- 02:05Z OWNER (s10 chat) — FOR MAIN: log in OD (verbatim): "Cái ảnh Thái Hậu bạn vẽ nó làm sao sao á. Giống như là bạn copy cái trang phục, thứ nhất copy trang phục từ ảnh mẫu, thứ hai là cái hình, cái trang phục nó cũng không có được được đẹp á. Không biết nữa cái ảnh mẫu, cái ảnh gốc như thế nào, cho tôi cái ảnh gốc của Thái Hậu tôi coi." → C sent GỐC vs MỚI sheets; ordered rollout #2: restore ORIGINAL Thái hậu pictures, fix proportion by geometry only (no costume/pose copying); same lesson for p/f rollout.
 - Waiting owner: FP NC v24 pick; origin intro samples; por-vacant-hh.
 
 ## SESSION 9 LOG
