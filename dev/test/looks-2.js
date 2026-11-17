@@ -27,7 +27,10 @@ const {chromium}=require('playwright');const URL=process.argv[2];const SCAN_ONLY
   if(NEW)Object.assign(marks,{pox:()=>{S.ill={k:'thuydau',st:2,known:true}},smudge:()=>{lkSmudge(S,2,'mua')},ink:()=>{lkInk(S)}});
   const clear=()=>{S.ill=null;S.pz=null;S.rash=null;S.slap=null;S.scar=null;S.sc70=null;S.toilette=T;if(T)delete T.lk;S.lk=null;S.stain=null};
   const row=(place,mark)=>{const h=places[place]();const mk=[...h.matchAll(/class="kmkl/g)].map(m=>m.index);const mm=[...h.matchAll(MARK)].map(m=>m.index);
-   return{place,mark,mk:mk.length>0,marks:mm.length,below:mk.length>0&&mm.every(i=>i>Math.max(...mk))}};
+   /* AVATAR = ID CARD (owner 17/11 ~18:10Z, main kit-fx-register): portrait + avatar frames show the base photo (+ lasting marks BAKED into it), never makeup
+      nor a temporary mark → ok = no makeup tag and no mark tag; stage + mirror keep the full look → ok = makeup present and under every mark */
+   const idc=place==='portrait'||place==='avatar',below=mk.length>0&&mm.every(i=>i>Math.max(...mk));
+   return{place,mark,mk:mk.length>0,marks:mm.length,below,idCard:idc,ok:idc?!mk.length&&!mm.length:mk.length>0&&below}};
   const scan=[];for(const pl in places){for(const m in marks){clear();marks[m]();scan.push(row(pl,m))}clear();for(const m in marks)marks[m]();scan.push(row(pl,'ALL'));clear()}
   if(SCAN_ONLY||!NEW)return{scan,por,fig,toilette:!!(T&&T.makeup),T:JSON.stringify(T).slice(0,200)};
   /* ---- logic checks (part 2: catalog, 3 levels, every weather kind, minigame acts, pox scar) ---- */
