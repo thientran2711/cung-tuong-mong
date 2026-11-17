@@ -33,3 +33,4 @@ W4c: 76 done (a18 through m10-ty4); m10-ty5 HARD redo in batch G; F batch was du
 W4c: 100 done (a18 through m13-ty4), frag W4c-3.json (24). Batches J/K/L in flight = k[100..123] (next after: sed -n 125,..p of a18 list).
 W4c: 124 done (a18 through m16-ty4), frag W4c-4.json. Batches M/N/O in flight = a18 list lines 125-148 (next: 149+).
 W4c: 148 done (a18 through m19-ty4), frag W4c-5.json. P/Q/R in flight = a18 list lines 149-172 (next: 173+).
+W4c: 172 done (a18 through m22-ty4), frag W4c-6.json. S/T/U in flight = a18 list lines 173-196 (next: 197+).
