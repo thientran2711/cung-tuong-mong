@@ -40,7 +40,7 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
   KN.m=null;S.mat=0;S.tamco=0;const st0=S.staff,md0=S.maid;S.staff=[];S.maid=null;fr.rel=-50;for(const v of L)v.rel=Math.min(v.rel||0,0);
   /* her own eyes: a draw at her watch odds oSee, once per happening (40 happenings) */let lo=0,hi=0;for(let i=0;i<40;i++){const hh=Object.assign({},h,{x:Object.assign({},h.x,{pid:h.x.pid+"#"+i})});KN.m=null;S.mat=0;S.tamco=0;if(knFor(S,hh))lo++;KN.m=null;S.mat=40;S.tamco=100;if(knFor(S,hh))hi++}
   S.mat=0;S.tamco=0;o.lowMe={n:lo,odds:oSee(S,false)};o.highMe={n:hi,odds:(S.mat=40,S.tamco=100,oSee(S,false))};S.mat=0;S.tamco=0;
-  /* the same rule for an NPC */KN.m=null;x.mat=40;x.tamco=100;o.npcHigh=knFor(x,h);KN.m=null;x.mat=0;x.tamco=0;o.npcLow=(x.staff||[]).length?"skip":knFor(x,h);x.mat=40;x.tamco=100;o.doer=knFor(a,h);
+  /* the same rule for an NPC (r2: the informer is forced — every roll lands — so a page with nothing to report cannot fail it) */const R0=Math.random;const sure=f=>{Math.random=()=>0.001;try{return f()}finally{Math.random=R0}};KN.m=null;x.mat=40;x.tamco=100;o.npcHigh=sure(()=>knFor(x,h));KN.m=null;x.mat=0;x.tamco=0;o.npcLow=(x.staff||[]).length?"skip":knFor(x,h);x.mat=40;x.tamco=100;o.doer=knFor(a,h);
   /* a friend passes it on */KN.m=null;S.mat=0;S.tamco=0;fr.rel=90;fr.mat=40;fr.tamco=100;let fb=null;for(let i=0;i<30&&!fb;i++){KN.m=null;S.tb=null;const f=knFor(S,h);if(f&&f.how==="friend")fb=f.by}o.friend=fb;fr.rel=0;
   /* her servant tells her (loyal) — and the line is in her voice */
   KN.m=null;S.maid=Object.assign({},md0||{name:"Thử"},{loyal:100,name:(md0&&md0.name)||"Thử"});S.maid.sid=undefined;let told=0,line="";for(let i=0;i<40&&!told;i++){S.tb=null;KN.m=null;const r=knFor(S,h);if(r&&r.s===S.maid){told=1;line=knLine(r,h)}}o.told=told;o.line=line;
@@ -48,8 +48,8 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
   const s={sid:99901,name:"Thử Bán",role:"maid",loyal:0,spyFor:key(x)};let sold=0;for(let i=0;i<60&&!sold;i++){KN.m=null;knTell(s,S,"hid"+i);const M=knMemo();if(M.x["v"+x.id+"|hid"+i])sold=1}o.sold=sold;
   S.maid=md0;S.staff=st0;
   /* 4 TIN BÁO API */
-  KN.m=null;S.tb=null;S.mat=40;S.tamco=100;let n=0;const off=tinBaoOn(()=>n++);S.adHapD=null;const T=tinBaoList();const it=T.find(i=>i.place==="vuon"&&i.k==="gossip");o.item=it||null;
-  const T2=tinBaoList();o.cbOnce=n>=1&&tinBaoList().length===T2.length;const n1=n;tinBaoList();o.noRefire=n===n1;o.new0=tinBaoNew();tinBaoSeen();o.new1=tinBaoNew();off();
+  KN.m=null;S.tb=null;S.mat=40;S.tamco=100;let n=0;const off=tinBaoOn(()=>n++);S.adHapD=null;/* r2: the known happening at the watched garden is learnt for sure (forced informer roll) */const T=sure(()=>tinBaoList());const it=T.find(i=>i.place==="vuon"&&i.k==="gossip");o.item=it||null;
+  const T2=sure(()=>tinBaoList());o.cbOnce=n>=1&&sure(()=>tinBaoList()).length===T2.length;const n1=n;sure(()=>tinBaoList());o.noRefire=n===n1;o.new0=sure(()=>tinBaoNew());sure(()=>tinBaoSeen());o.new1=sure(()=>tinBaoNew());off();
   /* 6 the NPC who knows it may go and listen: same key / button / odds function */
   KN.m=null;const O=knOpts(x,agNeedsC(x),null);o.hearOpt=O.map(q=>q.k);o.sameOdds=agHearO()===knHearO(S)&&knHearO(x)===agHearOf(x);o.btn=agReact(pd,a,null).some(q=>q.n==="Nghe lén");
   const e0=KN.stat.hear;AGRUN["know:hear"](x,a,{pl:"vuon"});o.hearRan=KN.stat.hear===e0+1;
@@ -95,5 +95,14 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
  /* 9 (owner ~16:20Z (d)): the three scheme lies STAY (NO-LIES is only about what HER servants / Tai mắt report to her): the bribed physician's lie,
     NPC false rumours (j68f), the servant frame-up dilemma */
  const r9=await p.evaluate(()=>{const SRC=[...document.scripts].map(x=>x.textContent).join("\n");return{thy:BAL.thy&&BAL.thy.lie>0&&/roll\(T\(\)\.lie\)/.test(SRC),rumour:/j68f/.test(SRC)&&/Nghe đồn/.test(SRC),frame:typeof cnvFrameOpts==="function"}});
+ /* 9b BEHAVIOUR (review ag-all-2 r2 A2): a bribed, untrusted physician really lies some of the time; an NPC rumour (true or not) is shown labelled "Lời đồn" */
+ const r9b=await p.evaluate(()=>{const o={};const v=liveRivals(true).find(x=>x.alive&&!x.out);S.court=S.court||{};S.court.ty=S.court.ty||{name:"Thử",af:{}};const c=S.court.ty;c.af=c.af||{};
+  const af0=JSON.stringify(c.af),d0=S.doctor,ill0=S.ill,suc0=S.suc,gh0=v.ghen;c.af.me=0;for(const x of liveRivals(true))c.af[x.id]=0;c.af[v.id]=100;v.ghen=100;S.doctor=null;
+  const op=talkOpts({kind:"ty"}).find(a=>a.n==="Xin bắt mạch");o.has=!!op;let lie=0,tru=0;const N=200;
+  for(let i=0;i<N&&op;i++){Q.length=0;S.suc=90;S.ill={k:Object.keys(ILL)[0]};op.run();const q=Q[Q.length-1];const t=q?String(q.h||q.t||""):"";if(/Có bệnh/.test(t))tru++;else if(/Hơi yếu|Khỏe mạnh/.test(t))lie++}
+  o.lie=lie;o.tru=tru;o.N=N;Q.length=0;c.af=JSON.parse(af0);S.doctor=d0;S.ill=ill0;S.suc=suc0;v.ghen=gh0;
+  const E=E68I.rumorEmpLove;let rum=0,n=0;for(let i=0;i<10;i++){const pp=E.pp();if(!pp)continue;pp.tru=0;const C=PEND["e68rumorEmpLove"](pp);if(C){n++;if(/Lời đồn/.test(String(C.t||"")))rum++}}o.rum=rum;o.rn=n;return o});
+ ok(r9b.has&&r9b.lie>=1&&r9b.tru>=1,'9b bribed physician: the lie lands at least once in N pulse checks (and not always)',r9b);
+ ok(r9b.rn>0&&r9b.rum===r9b.rn,'9b an NPC rumour (tru 0) is shown labelled "Lời đồn"',{n:r9b.rn,rum:r9b.rum});
  ok(r9.thy&&r9.rumour&&r9.frame,'9 scheme lies stay: bribed Thái y lie (BAL.thy.lie), false rumours (j68f), servant frame-up (cnvFrameOpts)',r9);
  await b.close();const f=res.filter(x=>!x).length;console.log(f?`${f} FAIL`:`AG-KNOW: ALL ${res.length} PASS`);process.exit(f?1:0)})();
