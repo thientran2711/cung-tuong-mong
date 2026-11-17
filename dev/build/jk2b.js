@@ -579,7 +579,7 @@ function kitOriginWide(k){return `img/origin-wide-${k}.webp`}
 function kitSceneArt(src,label,o){o=o||{};const sh=o.shape==="tall"?"tall":"wide";const fb=o.fb?String(o.fb).replace(/'/g,""):"";
  const err=fb?`if(this.dataset.fb!=='1'){this.dataset.fb='1';this.src='${fb}'}else this.remove()`:"this.remove()";const lab=label?String(label).replace(/"/g,"&quot;"):"";
  return `<figure class="ksart ksart-${sh}${o.size==="thumb"?" ksart-thumb":""}${o.col?" ksart-cat":""}${o.cls?" "+o.cls:""}"${lab?` title="${lab}"`:""}${o.col?` style="--kcc:${o.col}"`:""}>`+
-  (lab?`<span class="ksart-ph">${label}</span>`:"")+(src?`<img src="${src}" alt="" loading="lazy" onerror="${err}">`:"")+
+  (lab?`<span class="ksart-ph">${label}</span>`:"")+(src?`<img src="${src}" alt="" loading="${sh==="tall"&&o.col?"eager":"lazy"}" onerror="${err}">`:"")+
   (label&&o.cap!==false?(o.col?`<em class="ksart-chip">${label}</em>`:`<figcaption>${label}</figcaption>`):"")+
   (o.mark?`<i class="ksart-mark" role="img" aria-label="${o.markAlt?String(o.markAlt).replace(/"/g,"&quot;"):""}" style="background-image:url('${String(o.mark).replace(/["'()]/g,"")}')"></i>`:"")+`</figure>`}
 (function(){const st=document.createElement("style");st.id="k-sceneart";st.textContent=`
@@ -1115,7 +1115,7 @@ html body .pc.kpwide[data-k2]>.pcl>.pcp.kit.kit{width:var(--kpcw)!important;marg
 .pc.kpwide[data-k2]>.pcl>.kwear{width:auto}
 .pc.kpnar[data-k2]>.pcl>.kpkey{grid-area:key;margin:6px 0 0;flex-direction:row;flex-wrap:wrap;align-items:center;gap:4px 12px}
 .pc.kpnar[data-k2]>.pcl>.kpkey .kr2-cp{flex:1 1 220px}
-.pc[data-k2] .kpstick .pcf{margin:0 0 5px;max-height:calc(34*var(--kvh));overflow-y:auto;overscroll-behavior:contain}
+.pc[data-k2] .kpstick .pcf{margin:0 0 5px;max-height:calc(24*var(--kvh));overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin;scrollbar-color:#b08a4a transparent;border:1px solid #d9c18a;border-radius:6px;padding:4px 6px;background:#fffaf0aa;box-sizing:border-box}/* pcard-facts-2: the top block grows long -> it scrolls INSIDE its own frame */
 .pc[data-k2] .kpstick .pcf .kpsec{margin:0 0 2px;display:grid;grid-template-columns:4.4rem minmax(0,1fr);column-gap:6px;align-items:start}
 .pc[data-k2] .kpstick .pcf .kpst{margin:2px 0 0;font-size:.66rem;line-height:1.2;border:0;padding:0}
 .pc[data-k2] .kpstick .pcf .kpsec>:not(.kpst){grid-column:2;min-width:0}

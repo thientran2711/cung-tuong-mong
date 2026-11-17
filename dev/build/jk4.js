@@ -948,11 +948,14 @@ window.addEventListener("click",e=>{try{const t=e.target;if(!t||!t.closest)retur
 /* KIT §43 + §6.2 (review/opt-pics): the compact card rules are ONE string (kitCompactCSS(B)) used twice: inside a narrow kpane, and ALWAYS for a
    dialog option card (B = button.ka.kart.kopt, jopic) — the one compact act-card form game-wide. w × h = picture box: owner override 15/11 — the small card's picture is a 3:4 PORTRAIT RECTANGLE (84x112;
    72x96 in a pane under 420 px), the act art's own aspect, never a square crop; the big Hành sự card is untouched. */
+/* pcard-facts-2 (owner 17/11 ~15:25Z: "hộp hình rỗng, hai cỡ khác nhau"): ONE picture box size for every compact act card in the game = a square, KIT_ACT_ART px; the tall/square-by-content switch (6.2b) is off */
+var KIT_ACT_ART=76;
 function kitCompactCSS(B,w,h){w=w||84;h=h||w;return `
  ${B}{--kaw:${w}px!important;--kah:${h}px!important;display:flex!important;flex-direction:row!important;align-items:flex-start!important;gap:10px!important;width:100%!important;min-width:0!important;max-width:none!important;padding:8px 10px!important}
  ${B}>.kaart{flex:0 0 ${w}px!important;width:${w}px!important;height:${h}px!important;border-radius:6px!important;overflow:hidden!important;box-shadow:0 0 0 2px var(--kcc0,#b08a4a)!important;background:#efe4cc!important}
  ${B}>.kaart>.ksart{width:100%!important;height:100%!important;margin:0!important;padding:0!important;border:0!important;background:none!important;box-shadow:none!important}
- ${B}>.kaart>.ksart>:not(img){display:none!important}
+ ${B}>.kaart>.ksart>:is(figcaption,.ksart-chip,i){display:none!important}
+ ${B}>.kaart>.ksart>.ksart-ph{inset:0!important;font-size:.62rem!important;padding:3px!important;border-radius:0!important}
  ${B}>.kaart>.ksart>img{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;object-fit:cover!important;border:0!important;border-radius:0!important;margin:0!important}
  ${B}>.kabody{flex:1 1 auto!important;min-width:0!important;gap:3px!important}
  ${B} .kat{flex-wrap:nowrap!important;align-items:flex-start!important;gap:6px!important}
@@ -1006,11 +1009,11 @@ button.ka.kanoart>.kaart{display:none!important}
 @container kpane (max-width:640px){
  button.ka.kanoart>.kaart{display:none!important}
  .pcb:has(> button.ka.kart),.cards:has(> button.ka.kart){display:flex!important;flex-direction:column!important;gap:8px!important;grid-template-columns:none!important}
-${kitCompactCSS("button.ka.kart",84,112)}
+${kitCompactCSS("button.ka.kart",KIT_ACT_ART,KIT_ACT_ART)}
 }
 @container kpane (max-width:420px){
- button.ka.kart{--kaw:72px!important;--kah:96px!important}
- button.ka.kart>.kaart{flex-basis:72px!important;width:72px!important;height:96px!important}
+ button.ka.kart{--kaw:${KIT_ACT_ART}px!important;--kah:${KIT_ACT_ART}px!important}
+ button.ka.kart>.kaart{flex-basis:${KIT_ACT_ART}px!important;width:${KIT_ACT_ART}px!important;height:${KIT_ACT_ART}px!important}
 }
 `;document.head.appendChild(st)})();
 /* ================= KIT §6.3 · PERSON-CARD ACT ROWS (owner 16/11, iPad shot: Tâm sự / Sai đi dò la / Nghe ngóng chung drawn as tall boxes in a 2-column
@@ -1025,10 +1028,10 @@ ${kitCompactCSS("button.ka.kart",84,112)}
 .pc>.pcr .pcb:has(> button.ka),.pc>.pcr .rbtn:has(> button.ka){display:flex!important;flex-direction:column!important;flex-wrap:nowrap!important;gap:8px!important;grid-template-columns:none!important;align-items:stretch!important}
 .pc>.pcr .pcb>button.ka,.pc>.pcr .rbtn>button.ka{width:100%!important;min-width:0!important;max-width:none!important;height:auto!important;min-height:0!important;flex:0 0 auto!important;box-sizing:border-box}
 .pc>.pcr button.ka.kanoart>.kaart{display:none!important}
-${kitCompactCSS(".pc>.pcr button.ka.kart",84,112)}
+${kitCompactCSS(".pc>.pcr button.ka.kart",KIT_ACT_ART,KIT_ACT_ART)}
 @container kpane (max-width:420px){
- .pc>.pcr button.ka.kart{--kaw:72px!important;--kah:96px!important}
- .pc>.pcr button.ka.kart>.kaart{flex-basis:72px!important;width:72px!important;height:96px!important}
+ .pc>.pcr button.ka.kart{--kaw:${KIT_ACT_ART}px!important;--kah:${KIT_ACT_ART}px!important}
+ .pc>.pcr button.ka.kart>.kaart{flex-basis:${KIT_ACT_ART}px!important;width:${KIT_ACT_ART}px!important;height:${KIT_ACT_ART}px!important}
 }
 `;document.head.appendChild(st)})();
 (function(){if(typeof kaNorm!=="function")return;const k0=kaNorm;kaNorm=function(root){const r=k0.apply(this,arguments);try{kitActCompactOn(root&&root.querySelectorAll?root:document)}catch(e){}

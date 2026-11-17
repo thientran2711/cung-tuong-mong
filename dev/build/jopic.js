@@ -178,7 +178,7 @@ document.addEventListener("click",e=>{try{const a=e.target&&e.target.closest&&e.
 #kpzoom .kpzf{width:min(78vw,calc(calc(82*var(--kvh,1vh)) * 3 / 4),506px)}
 button.ka.kopt>.kaart[data-kzoom]{cursor:zoom-in}
 button.ka.kopt>.kaart .ksart.kopface>img{object-position:50% 12%}
-${typeof kitCompactCSS==="function"?kitCompactCSS("button.ka.kart.kopt",84,112):""}
+${typeof kitCompactCSS==="function"?kitCompactCSS("button.ka.kart.kopt",KIT_ACT_ART,KIT_ACT_ART):""}
 /* one option card per row, full width (owner L109: horizontal option cards, no 2-col gaps; with the picture a half-width cell left the
    rows a thin column). Overrides jk3 31.16 k3grid and the person-dialog 2-column rules (jk4 32.7 / KIT 50 kdpo2, jplace): :is(#mb,*) +
    the repeated class only lift the specificity above theirs (2 ids, 5 classes). */
