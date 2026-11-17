@@ -55,14 +55,31 @@ Owner (verbatim): "Mình có biểu tượng cảm xúc khóc chưa ta? ... khó
 Built in jmoodknow.js (same piece, reuse jemo; numbers BAL.emo2 in jbal2.js; off switch __emo2Off). State keys for the seals: **`khoc`** (name "Khóc") and **`hon`** (name "Hờn") in EMO → p.emo.k; art keys img/kit/emo-khoc / emo-hon (+ emo-m- / emo-mo-) = kit-figure-mood's part (sent).
 | mood | trigger (one rule for her, consorts, servants, Emperor) | odds / strength | duration / effects |
 |---|---|---|---|
-| khoc | a strong buồn / đau khổ / sợ (v ≥ BAL.emo2.khoc.v) from the events khoc.ev (làm nhục, phạt, giáng, lãnh cung, mất con, bạn mất, mẹ mất, bị hắt hủi, lạnh nhạt) turns into tears | khoc.o + trait points tr, clamped BAL.odds | decay 20 / tuần (fast); act weights like grief (harm .6, kind .7, idle 1.5); vent group "buồn" |
+| khoc | a strong buồn / đau khổ / sợ (v ≥ BAL.emo2.khoc.v) from the events khoc.ev (làm nhục, phạt, giáng, lãnh cung, mất con, bạn mất, mẹ mất, bị hắt hủi, lạnh nhạt) turns into tears | khoc.o + trait points tr, clamped BAL.odds | short timer BAL.mood2.dur.k.khoc (4 khắc); act weights like grief (harm .6, kind .7, idle 1.5); vent group "buồn" |
 | khoc | a SLAP (jface slapGive) | khoc.slap[sev] 35/55/75, strength slapV | cause "bị X tát" = PUBLIC (the mark shows), event key "slap" leaks at 55 |
-| hon | a slight / scolding / punishment / neglect from someone CLOSE (thiện cảm ≥ hon.aff 30; a servant's own master; Hoàng thượng for a consort) → sulks AT that person (emo.t) | hon.o + tr, clamped | decay 10 / tuần; friendly acts (F95) toward that person refused while it lasts (motive gate "đang hờn X (cause)"); servants' Lòng −2 a month |
+| hon | a slight / scolding / punishment / neglect from someone CLOSE (thiện cảm ≥ hon.aff 30; a servant's own master; Hoàng thượng for a consort) → sulks AT that person (emo.t) | hon.o + tr, clamped | timer BAL.mood2.dur.k.hon (8 khắc); friendly acts (F95) toward that person refused while it lasts (motive gate "đang hờn X (cause)"); servants' Lòng −2 a month |
 Cause = the true event (why) → moodCauseKnown works unchanged (sulking at her involves her → she knows why). Old mood ladders read them (emoLv: level 2; eaGrpK: khoc→buồn, hon→giận).
 KIT REQUEST (seal art + animation, kit-figure-mood / Foreman C art, not this worker): img/kit/emo-khoc.webp, emo-hon.webp, emo-m-khoc.webp, emo-m-hon.webp, emo-mo-khoc.webp, emo-mo-hon.webp (KIT §38 seal set); until they exist the badge img removes itself (onerror).
 Not changed: the red/green word colour lists in jemo.js:210 / jevb.js:64 (colour only; khoc/hon show neutral) — kit worker's call.
 Tests: ag-moodknow.test now 23/23 PASS (3 runs): khóc by odds high/low, slap → khóc public and known to the slapper, her servant sulks at her (known), NPC sulks at a close friend who knows why, motive gate refuses the friendly act, khóc decay + words.
 ag-all.test perf p95 (day draw) fails its 8 ms budget on this box for BOTH builds: base (no jmoodknow) 14 / 16.1 ms vs this branch 15.5 / 17.8 ms — box noise, not this part.
+
+## FOLLOW-UP — MOOD = THE SIMS MODEL (owner OD L1675 '(17/11 ~18:10Z, s35 chat'; order C-AG #4)
+Owner (verbatim key words): "Mấy cái thời gian phai á, mình đừng có tính trong ngày, mình có thể tính trong khắc mà. Có những việc nó phai nhanh vài khắc cái là hết rồi ... có những cái sự việc 8 khắc, 9 khắc là nó phai ... tự động nó trừ theo ... cái đồng hồ giờ của tôi. Ok, quyết định làm theo đồ sim đi."
+PRIORITY #1 CHECK ('mood.*decay|emoH|S.mood.log|moodKeep|khắc'): OD L1675 + L600 (Sims bar) | main: jmood S.mood.log (bar causes, day stamps, "nguôi dần … mỗi tuần" BAL.mood.decay .2), jevb emoH (feeling causes, "N tuần trước"), jemo EMO_DECAY weekly decay | review/* none. CONVERTED those lists, no new system.
+| what | before | after (jmoodknow.js MOODLETS block, numbers BAL.mood2) |
+|---|---|---|
+| cause list | jevb emoH (6 feelings, day stamp) + jmood S.mood.log (bar pushes, day stamp) | one list per person p.mk: {kind key, feeling k, strength s, bar push d (her), why, event, class, aimed at, picture, k0/k1 khắc} — written by jemo emoSet (everyone) and jmood mbAdd (her bar) |
+| timer | none (weekly decay); emoH kept BAL.moodKeep weeks | each cause ends at k1 = start + BAL.mood2.dur (by event → feeling → bar kind → def), counted on her clock mkNow() = day × (BUOI × J95.KH) + buổi × J95.KH + khắc |
+| decay | jemo EMO_DECAY per tuần; jmood bar −20 % a tuần | GONE (EMO_DECAY → nothing; jmood drift only on the old path __mkOff) |
+| seal | one feeling, stronger replaces | p.emo = the strongest SUMMED feeling among live causes (one source; every old reader of p.emo / emoGet unchanged); sealKeyFor(pid) → key |
+| her bar | v += push, drift | S.mood.v = sum of live pushes (saturation kept at push time); S.mood.log derived with khắc left |
+| tap list | "· tuần này / N tuần trước" | "· còn N khắc" (mood box rows jevb emoBox, bar rows jmood mbSecs; unknown causes "Nguyên do chưa rõ") |
+| others lowering / clearing p.emo (venting acts jemoact ventNpc, Emperor / Thái hậu legacy bars) | edited p.emo | read back at sync: lowered → that feeling's causes scaled; cleared → they end; a foreign feeling → imported as a cause |
+| khóc / hờn | turned the feeling | a short cause of their own on top of the hurt one (seal shows them while they last); hờn gate reads any live hờn cause at that person |
+| old saves | — | emoH / S.mood.log day stamps → k0 = day × khắc a day (old ones already over); the current feeling keeps ≥ half its time; leftover of the old bar = one "chuyện cũ còn vương" cause (BAL.mood2.carry) |
+API for the kit: sealKeyFor(pid) → mood key ("binh" = none; seen on sight, no fog), mkCauses(pid) → live causes [{k, v, why, left (khắc)}], plus moodCauseKnown(pid). Sent to kit-figure-mood and s35.
+Tests: ag-moodknow.test 32/32 PASS (2 runs): timer table (selfDown 64, slight 8, kidDie 320, night 16, gift 6, ill 32 khắc — alive one khắc before, gone at the end), summed seal (buồn 30+30 > giận 50, tap list 3 causes with khắc left; a cause ends → seal follows), no decay (a tuần passes, feeling unchanged), her bar = sum of live pushes and a push ends by its khắc, NPC parity (same timer), old save (day → khắc, bar −30 kept via carry), mood box "còn N khắc". ag-know 23/23 (one of 4 runs failed two TIN BÁO callback lines; 3 reruns + base PASS → random), ag-truth 10/10, one-core-guard PASS. Perf ag-all day-draw p95: base 20.3 / branch 18.2 ms (box noise, both over the 8 ms budget as before).
 
 ## Handover
 Done except review. Worktree /home/user/wt/moodknow (sparse). START_CTX ≈ 5 %.

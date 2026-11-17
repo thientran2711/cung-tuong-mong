@@ -1116,12 +1116,20 @@ BAL.mck={pub:{def:35,max:3,o:{selfUp:60,selfDown:60,cold:75,kidBorn:75,kidDie:70
  spy:85,eye:40,pri:45,keep:6,npcErr:{scout:100,listen:50}};
 BAL.ag.sell.val.mood=70;
 /* AG-MOODKNOW KHÓC + HỜN (owner OD 17/11 ~18:00Z): two more jemo moods. khoc: from events ev when buồn/đau khổ/sợ ≥ v, odds o + trait points tr; a slap:
-   odds slap[sev], strength slapV[sev]. hon: from events ev aimed by someone close (thiện cảm ≥ aff, own master, Hoàng thượng), odds o + tr. decay = points per tuần;
+   odds slap[sev], strength slapV[sev]. hon: from events ev aimed by someone close (thiện cảm ≥ aff, own master, Hoàng thượng), odds o + tr. (timers: BAL.mood2.dur.k);
    w = act weights (jemo EMO_W shape), od = odds points at v 100, loy = servants' Lòng a month, lv = old mood ladder level (0 vui … 3 giận). Odds clamped BAL.odds. */
 BAL.emo2={khoc:{ev:["slight","punished","selfDown","cold","kidDie","friendDie","motherDie","motherCold","loyalDown","neglect"],v:45,o:40,
   tr:{"Khiêm nhường":15,"Ân cần":10,"Mê tín":5,"Kiêu ngạo":-30,"Kín đáo":-20,"Xảo quyệt":-20,"Tham vọng":-15,"Thù dai":-10,nhat:20,trung:5,lanh:-10},
   slap:[0,35,55,75],slapV:[0,40,60,80]},
  hon:{ev:["slight","loyalDown","punished","neglect"],aff:30,o:35,
   tr:{"Kiêu ngạo":15,"Nóng nảy":15,"Thật thà":10,"Ân cần":-15,"Khiêm nhường":-15,"Xảo quyệt":-20,"Kín đáo":-10,lanh:10,nhat:-10}},
- decay:{khoc:20,hon:10},w:{khoc:{harm:.6,kind:.7,idle:1.5,visit:.6},hon:{harm:.9,kind:.6,visit:.5,idle:1.2}},od:{khoc:-1,hon:0},loy:{khoc:-1,hon:-2},lv:{khoc:2,hon:2}};
+ w:{khoc:{harm:.6,kind:.7,idle:1.5,visit:.6},hon:{harm:.9,kind:.6,visit:.5,idle:1.2}},od:{khoc:-1,hon:0},loy:{khoc:-1,hon:-2},lv:{khoc:2,hon:2}};
 BAL.mck.pubEv.push("slap");BAL.mck.pub.o.slap=55;BAL.mck.pubRe+="|tát";
+/* AG-MOODKNOW THE SIMS MODEL (owner OD 17/11 ~18:10Z): every mood cause has a timer in KHẮC (a day ≈ 16 khắc). dur.e = by cause event (jemo EMO_EV keys
+   + slap), dur.k = by feeling when no event, dur.bar = her bar pushes by kind (ok / fail acts, rest, comfort, w: = the day's needs / people / weather,
+   e: = a feeling's push, ea: = venting acts), def = any other; max = causes kept per person; carry = khắc the old-save leftover lasts; kd = khắc a day fallback. */
+BAL.mood2={def:8,max:16,carry:24,kd:16,carryWhy:"chuyện cũ còn vương",
+ dur:{e:{slight:8,gift:6,loyalUp:12,loyalDown:12,punished:24,selfUp:48,selfDown:64,cold:160,kidBorn:64,kidDie:320,otherKid:24,rivalUp:16,friendUp:12,foeDown:12,
+   friendDie:160,foeDie:16,night:16,neglect:24,ill:32,mistressUp:8,mistressDown:16,motherDie:320,motherCold:96,clanUp:32,clanDown:32,slap:6},
+  k:{vui:8,binh:4,buon:12,gian:8,so:6,ghen:12,lo:10,dau:48,muu:16,khoc:4,hon:8},
+  bar:{ok:6,fail:6,rest:8,comfort:12,w:16,ea:6}}};

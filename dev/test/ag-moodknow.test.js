@@ -13,9 +13,9 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
  await p.evaluate(()=>{localStorage.clear();SLOT=4;document.getElementById('title').hidden=true;window.__nlInner=1;let g=0;do{start();g++}while(isSrv()&&g<30);window.__nlInner=0;window.__bot=1;window.__agAll=1;quiet=false;Q.length=0;try{deal()}catch(e){}render()});
  await p.evaluate(()=>{window.kitKnown=()=>true;/* strangers have no seal at all (kitIsKnown); the test looks at known people */window.__M={
   R(){return liveRivals(true).filter(v=>v.alive&&!v.out&&!k61Own(v))},
-  clean(){S.mck={};S.mckPub={};for(const v of rivals)v.mck={};tmPlace(S,0);for(const s of tmSrv())s.spyFor=null;S.mat=0},
-  sec(v,y,tag){v.emo=null;emoEv(v,"slight",`bị ${y.name} làm nhục${tag||""}`,emoKey(y),1.5);return v.emo},
-  pub(v,tag){v.emo=null;emoEv(v,"selfDown",`bị giáng phẩm${tag||""}`);return v.emo}}});
+  clean(){for(const v of rivals){v.mk=[];v.mk=[];v.__mkL=null;v.emo=null;v.__mkL=null}S.mck={};S.mckPub={};for(const v of rivals)v.mck={};tmPlace(S,0);for(const s of tmSrv())s.spyFor=null;S.mat=0},
+  sec(v,y,tag){v.mk=[];v.mk=[];v.__mkL=null;v.emo=null;v.__mkL=null;emoEv(v,"slight",`bị ${y.name} làm nhục${tag||""}`,emoKey(y),1.5);return v.emo},
+  pub(v,tag){v.mk=[];v.mk=[];v.__mkL=null;v.emo=null;v.__mkL=null;emoEv(v,"selfDown",`bị giáng phẩm${tag||""}`);return v.emo}}});
  /* 1 secret unknown */
  const r1=await p.evaluate(()=>{__M.clean();const [v,y]=__M.R();const e=__M.sec(v,y);S.emoSeen=S.emoSeen||{};S.emoSeen[emoKey(v)]=emoW();
   const m=kitEmotion(v);const C=emoCauses(v);return {c:e&&e.c,why:e&&e.why,k:moodCauseKnown(v),kit:m&&{known:m.known,why:m.why,ck:m.causeKnown},rows:C.map(x=>x.why),art:emoCauseArt(C[0]||null)}});
@@ -59,26 +59,59 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
  ok(!r5.err&&r5.k===null&&r5.cls==="pub"&&r5.pub,'old save: no store / unstamped cause → no throw, classified by its words',r5);
  /* 7 KHÓC + HỜN (owner OD 17/11 ~18:00Z) */
  const r7=await p.evaluate(()=>{const B=BAL.emo2,o0=B.khoc.o,h0=B.hon.o,s0=B.khoc.slap.slice();const V=__M.R();const out={};
-  B.khoc.o=200;let kc=0,el=0;V.forEach((v,i)=>{v.emo=null;emoEv(v,"selfDown","bị giáng phẩm (k"+i+")");if(v.emo&&["khoc","buon","dau","so"].includes(v.emo.k)&&v.emo.v>=B.khoc.v){el++;if(v.emo.k==="khoc")kc++}});out.khocHi=[kc,el];
-  B.khoc.o=0;kc=0;V.forEach((v,i)=>{v.emo=null;emoEv(v,"selfDown","bị giáng phẩm (n"+i+")");if(v.emo&&v.emo.k==="khoc")kc++});out.khocLo=[kc,V.length];B.khoc.o=o0;
-  let v=V[0];B.khoc.slap=[100,100,100,100];for(let i=0;i<V.length*3;i++){v=V[i%V.length];v.emo=null;v.slap=null;if(slapGive(v,S,"thử",3)&&v.emo&&v.emo.k==="khoc")break}out.slap=v.emo&&{k:v.emo.k,why:v.emo.why,c:v.emo.c,known:moodCauseKnown(v)};B.khoc.slap=s0;
+  B.khoc.o=200;let kc=0,el=0;V.forEach((v,i)=>{v.mk=[];v.__mkL=null;v.emo=null;emoEv(v,"selfDown","bị giáng phẩm (k"+i+")");if(v.emo&&["khoc","buon","dau","so"].includes(v.emo.k)&&v.emo.v>=B.khoc.v){el++;if(v.emo.k==="khoc")kc++}});out.khocHi=[kc,el];
+  B.khoc.o=0;kc=0;V.forEach((v,i)=>{v.mk=[];v.__mkL=null;v.emo=null;emoEv(v,"selfDown","bị giáng phẩm (n"+i+")");if(v.emo&&v.emo.k==="khoc")kc++});out.khocLo=[kc,V.length];B.khoc.o=o0;
+  let v=V[0];B.khoc.slap=[100,100,100,100];for(let i=0;i<V.length*3;i++){v=V[i%V.length];v.mk=[];v.__mkL=null;v.emo=null;v.slap=null;if(slapGive(v,S,"thử",3)&&v.emo&&v.emo.k==="khoc")break}out.slap=v.emo&&{k:v.emo.k,why:v.emo.why,c:v.emo.c,known:moodCauseKnown(v)};B.khoc.slap=s0;
   /* hờn: her own servant scolded by her */
-  B.hon.o=200;const s=(S.staff||[]).find(x=>x&&x.sid!=null&&!x.out);if(s){for(let i=0;i<6&&!(s.emo&&s.emo.k==="hon");i++){s.emo=null;emoEv(s,"loyalDown","bị chủ nhân quát mắng"+(i?" ("+i+")":""))}out.srv=s.emo&&{k:s.emo.k,t:s.emo.t,known:moodCauseKnown(s)}}
+  B.hon.o=200;const s=(S.staff||[]).find(x=>x&&x.sid!=null&&!x.out);if(s){for(let i=0;i<6&&!(s.emo&&s.emo.k==="hon");i++){s.mk=[];s.__mkL=null;s.emo=null;emoEv(s,"loyalDown","bị chủ nhân quát mắng"+(i?" ("+i+")":""))}out.srv=s.emo&&{k:s.emo.k,t:s.emo.t,known:moodCauseKnown(s)}}
   /* NPC parity: a consort slighted by a close friend sulks at HER, not at a stranger */
   const [a,b2,c]=V;const af=(x,y,n)=>{try{x.aff=x.aff||{};}catch(e){}};let ab=0;try{ab=aff(a,b2)}catch(e){}
-  try{affAdd(a,b2,60-ab)}catch(e){}for(let i=0;i<6&&!(a.emo&&a.emo.k==="hon");i++){a.emo=null;emoEv(a,"slight",`bị ${b2.name} làm nhục (${i})`,emoKey(b2))}out.npc=a.emo&&{k:a.emo.k,t:a.emo.t,b:emoKey(b2),aff:aff(a,b2),byB:moodCauseKnownBy(b2,a)};
+  try{affAdd(a,b2,60-ab)}catch(e){}for(let i=0;i<6&&!(a.emo&&a.emo.k==="hon");i++){a.mk=[];a.__mkL=null;a.emo=null;emoEv(a,"slight",`bị ${b2.name} làm nhục (${i})`,emoKey(b2))}out.npc=a.emo&&{k:a.emo.k,t:a.emo.t,b:emoKey(b2),aff:aff(a,b2),byB:moodCauseKnownBy(b2,a)};
   /* sulking blocks friendly acts toward that person (motive gate) */
   try{render()}catch(e){}a.emo={k:"hon",v:60,why:"thử",t:emoKey(b2),w:emoW()};const g=motiveOK(a,b2,"visit");out.gate={ok:g.ok,why:g.why,f95:typeof F95!=="undefined"&&F95.has("visit")};
   B.hon.o=h0;
-  /* decay: tears dry fast */
-  a.emo={k:"khoc",v:60,why:"thử",t:null,w:emoW()};const v0=a.emo.v;emoWeek();out.decay=[v0,a.emo?a.emo.v:0,B.decay.khoc];
+  /* tears dry fast: the khóc cause has the shortest timer */
+  a.mk=[];a.__mkL=null;a.emo=null;emoSet(a,"khoc",60,"thử khóc");const m=a.mk.find(x=>x.k==="khoc");out.decay=[m.k1-m.k0,BAL.mood2.dur.k.khoc];
   out.names=[EMO.khoc,EMO.hon];return out});
  ok(r7.khocHi[0]>=r7.khocHi[1]*.7&&r7.khocLo[0]<=r7.khocLo[1]*.3,'KHÓC: strong sadness turns into tears by BAL odds (clamped)',r7);
  ok(r7.slap&&r7.slap.k==="khoc"&&/tát/.test(r7.slap.why)&&r7.slap.c==="pub"&&r7.slap.known,'KHÓC: a slap brings tears; cause "bị … tát" is public, she (the slapper) knows it',r7.slap);
  ok(!r7.srv||(r7.srv.k==="hon"&&r7.srv.t==="me"&&r7.srv.known),'HỜN: her servant scolded by her sulks AT her; she knows why',r7.srv);
  ok(r7.npc&&r7.npc.k==="hon"&&r7.npc.t===r7.npc.b&&r7.npc.byB,'HỜN NPC: a consort slighted by a close friend sulks at that friend (who knows why)',r7.npc);
  ok(!r7.gate.f95||(r7.gate.ok===false&&/hờn/.test(r7.gate.why)),'HỜN: friendly acts toward that person refused while sulking',r7.gate);
- ok(r7.decay[1]<=r7.decay[0]-r7.decay[2]+1&&r7.names[0]==="Khóc"&&r7.names[1]==="Hờn",'KHÓC fades by BAL decay; words Khóc / Hờn',{d:r7.decay,n:r7.names});
+ ok(r7.decay[0]===r7.decay[1]&&r7.names[0]==="Khóc"&&r7.names[1]==="Hờn",'KHÓC lasts BAL.mood2.dur.k.khoc khắc; words Khóc / Hờn',{d:r7.decay,n:r7.names});
+ /* 8–13 THE SIMS MODEL (owner OD 17/11 ~18:10Z) */
+ const r8=await p.evaluate(()=>{const V=__M.R();const D=BAL.mood2.dur;const out={tab:[]};const go=(p,n)=>{for(const m of p.mk||[]){m.k0-=n;m.k1-=n}p.__mkAt=-1;mkSync(p)};
+  /* per-cause timer table */
+  const E=[["selfDown","bị giáng phẩm"],["slight","bị ai đó làm nhục"],["kidDie","mất con"],["night","được Hoàng thượng lật thẻ"],["gift","được tặng quà"],["ill","sức khỏe sa sút"]];
+  for(const [ev,why] of E){const v=V[1];v.mk=[];v.__mkL=null;v.emo=null;const o=BAL.emo2.khoc.o,h=BAL.emo2.hon.o;BAL.emo2.khoc.o=-999;BAL.emo2.hon.o=-999;emoEv(v,ev,why);BAL.emo2.khoc.o=o;BAL.emo2.hon.o=h;
+   const m=(v.mk||[]).find(x=>x.e===ev);if(!m){out.tab.push([ev,"(trait shrug)"]);continue}const d=m.k1-m.k0;go(v,d-1);const live=!!(v.emo&&v.mk.length);go(v,1);out.tab.push([ev,d,D.e[ev],live,!v.emo])}
+  /* summed seal */
+  const v=V[2];v.mk=[];v.__mkL=null;v.emo=null;emoSet(v,"buon",30,"chuyện A");emoSet(v,"buon",30,"chuyện B");emoSet(v,"gian",50,"chuyện C");out.sum={k:v.emo.k,v:v.emo.v,seal:sealKeyFor(v),list:mkCauses(v).map(x=>[x.k,x.v,x.left])};
+  /* the strongest single cause ends → the seal follows the sum that is left */
+  const c=v.mk.find(m=>m.why==="chuyện A");c.k1=mkNow();v.__mkAt=-1;mkSync(v);out.after={k:v.emo.k,v:v.emo.v};
+  /* decay gone: a week passes for jemo, the feeling stays; her bar = sum of live pushes, a push ends by its khắc */
+  out.decayK=Object.values(EMO_DECAY).every(x=>x===Number.MIN_VALUE);const v0=v.emo.v;try{emoWeek()}catch(e){}out.week=[v0,v.emo&&v.emo.v];
+  S.mk=[];S.__mkL=null;S.emo=null;mkSync(S);const b0=S.mood.v;const real=mbAdd(20,"thử việc thành","ok");const b1=S.mood.v;const sum=Math.round(S.mk.reduce((a,m)=>a+(m.d||0),0));
+  const okm=S.mk.find(m=>m.kd==="ok");go(S,okm.k1-okm.k0);out.bar={b0,real,b1,sum,end:S.mood.v,durOk:okm?D.bar.ok:null,log:S.mood.log.length};
+  /* NPC parity: the same event lands with the same timer on her and on a consort */
+  S.mk=[];v.mk=[];emoEv(S,"selfUp","được tấn phong");emoEv(v,"selfUp","được tấn phong");const ms=S.mk.find(m=>m.e==="selfUp"),mv=v.mk.find(m=>m.e==="selfUp");out.par=[ms&&ms.k1-ms.k0,mv&&mv.k1-mv.k0,D.e.selfUp];
+  return out});
+ const tabOk=r8.tab.every(r=>r[1]==="(trait shrug)"||(r[1]===r[2]&&r[3]&&r[4]));
+ ok(tabOk&&r8.tab.some(r=>r[1]!=="(trait shrug)"),'timer table: each cause lasts its BAL.mood2.dur khắc, alive one khắc before, gone at the end',r8.tab);
+ ok(r8.sum.k==="buon"&&r8.sum.v===60&&r8.sum.seal==="buon"&&r8.sum.list.length===3&&r8.sum.list.every(x=>x[2]>0),'summed seal: buồn 30+30 beats giận 50; tap list = 3 causes with khắc left',r8.sum);
+ ok(r8.after.k==="gian"&&r8.after.v===50,'a cause ends → the seal follows what is left',r8.after);
+ ok(r8.decayK&&r8.week[0]===r8.week[1],'no whole-bar decay: a tuần passes, the feeling stays until its khắc end',{k:r8.decayK,w:r8.week});
+ ok(r8.bar.b1-r8.bar.b0===r8.bar.real&&r8.bar.real>0&&r8.bar.b1===r8.bar.sum&&r8.bar.end===r8.bar.b0,'her bar = sum of live pushes; a push ends by its khắc (no drift)',r8.bar);
+ ok(r8.par[0]===r8.par[1]&&r8.par[0]===r8.par[2],'NPC parity: same event, same khắc timer for her and a consort',r8.par);
+ const r9=await p.evaluate(()=>{const [v]=__M.R();const W=emoW();v.mk=undefined;delete v.mk;v.__mkL=null;v.emoH=[{k:"buon",v:40,why:"chuyện cũ hôm nay",w:W},{k:"lo",v:30,why:"chuyện cũ lâu rồi",w:W-30}];v.emo={k:"gian",v:50,why:"giận từ hôm qua",w:W-1};
+  let err="";let r={};try{const k=sealKeyFor(v);r={k,mk:(v.mk||[]).map(m=>[m.k,m.why,m.k1>mkNow()])};
+   delete S.mk;S.__mkL=null;S.emo=null;S.mood={v:-30,log:[{w:W,k:"ok",d:5,why:"việc thành",n:1}]};mkSync(S);r.bar=S.mood.v;r.carry=!!S.mk.find(m=>m.kd==="carry");r.left=S.mood.log.map(x=>x.left)}catch(e){err=String(e)}
+  /* the mood box rows say "còn N khắc" */
+  let rows="";try{const km=kitModal;kitModal=o=>{window.__spec=o};S.emoSeen[emoKey(v)]=W;window.mckStat&&0;emoBox(emoKey(v));kitModal=km;rows=JSON.stringify(window.__spec.sections)}catch(e){err+=String(e)}
+  return Object.assign(r,{err,rows})});
+ ok(!r9.err&&r9.mk.some(x=>x[1]==="giận từ hôm qua"&&x[2])&&r9.mk.some(x=>x[1]==="chuyện cũ hôm nay")&&!r9.mk.some(x=>x[1]==="chuyện cũ lâu rồi"),'old save: day-stamped causes → khắc timers (old ones already over); the current feeling kept',r9);
+ ok(!r9.err&&r9.bar===-30&&r9.carry,'old save: her old bar is kept (leftover = one "chuyện cũ còn vương" cause)',{bar:r9.bar,carry:r9.carry});
+ ok(/còn \d+ khắc/.test(r9.rows),'mood box rows show "còn N khắc"',r9.rows.slice(0,200));
  /* 6 bot days: all known causes true */
  const r6=await p.evaluate(async DAYS=>{const bad=[];let known=0;for(let d=0;d<DAYS;d++){for(let bb=0;bb<4;bb++){Q.length=0;S.mg=0;try{nextBuoi()}catch(e){}Q.length=0}
    for(const v of rivals){const k=moodCauseKnown(v);if(k==null)continue;known++;if(!v.emo||k!==v.emo.why)bad.push([v.name,k])}}
