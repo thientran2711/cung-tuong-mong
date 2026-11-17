@@ -33,8 +33,21 @@ Also (non-blocking, pre-existing): kit row label small-caps makes "Sổ trên m�
 - Ask: kit keeper registers the row in KIT.md §7 + the kit sample page (or tells show-why to change it); work did not stop because
   no new display part was made.
 
+## 17/11 coop-thin-b r2 fix — KIT REQUEST (seen, not built): two option tiles with art on a "Việc" card squeeze to one syllable per line on Fold 755x1000
+- Seen on the part-D invite card "Hảo hữu tìm đến" (thInv, options Nhận / Từ chối, each with its option art + "an toàn" chip + GỢI Ý line):
+  at 755x1000@2 the two tiles sit side by side, the art takes most of each tile, the name is cut under the chip ("N an toàn") and the GỢI Ý
+  text wraps one syllable per line. At 1180x820@2 the same card is fine. Shot: CDN img/_review/coop-thin-b-r2fix/r7-guest-755x1000.png.
+- Not from the r2 fix (the card is the native kit dilemma, rendered by D's stand-in = same fields); likely every 2-option card with option
+  art at Fold width. Ask: kit keeper checks the option-tile grid at 755 (stack the tiles or shrink the art) in the kit part, whole family.
+- r3 reviewer (17/11): confirmed kit-level, not co-op: a SOLO game on this branch (no kit file changed vs main) at native 755x1000 renders the same thInv card with two 174 px tiles (304 px right after open, squeezed ~1 s later when the option art lays out); same family as the npc-agent-ag3 entry below (short `data-kbs="S"` options get 1-of-2 cells). Also seen: on the squeezed Fold tile a real tap on the option ART did not choose it (a tap on the option name did).
+
 ## 17/11 — npc-agent AG3 (Foreman C worker): short option cell too narrow in a narrow dialog (observation, kit keeper)
 | 17/11 | npc-agent-ag3 | jksize §kit-size option grid: in a dialog that the kit sizes to ~560 px on iPad 1180x820 (e.g. the new "Hoàng thượng cho gọi" = same kit Q dialog as "Kính sự phòng báo tin"), a SHORT option ("Cáo bệnh", `data-kbs="S"`) gets a 1-of-2 cell of 177 px and its GỢI Ý line wraps one syllable per line; the long option spans 2 cells. Same short option in the 860 px "Kính sự phòng báo tin" dialog is fine. AG3 uses the kit as is (no private layout); asks the kit keeper whether a cell under ~220 px should fall back to one column. | Q dialogs with 1 long + 1 short option on iPad | kit-size | mở |
 
 ## 17/11 — AG-ALL-2d4 (C-AG worker): pay-on-success price under THÀNH (owner OD 17/11 ~17:10Z (1)+(2))
 | 17/11 | ag-all-2d4 | Option / ACT card THÀNH · BẠI two-block rows (kit-option-rows, j63 kaRows; main kit worker): an act whose bạc is paid ONLY on success (econPayWin: Mua chuộc cung nữ, Rút thẻ bài, Xin Hoàng hậu giáng; j70 accomplice / bribe routes; Cài tai mắt) must show "Bạc -N" inside the THÀNH block and "không mất bạc" in BẠI, not in the up-front cost row (today: ACT c row / j70 kèm line "Bạc -N chỉ khi người ấy nhận" as a stop-gap) | every ACT card + j70 "Bày mưu" card + Cài tai mắt card | ag-all-2d4 | open |
+
+## 17/11 — weather-khac (C-AG #2 worker): two weather-chip icons (art → Foreman C)
+| 17/11 | weather-khac | j93 weather chip (KM_WX, mo-wx-*.webp): the new in-season day states (j12 WX_KH) "trời âm u" / "chiều âm u" / "đêm u ám" and "mưa rào" / "mưa thu" have no painted icon. Today they REUSE the nearest painted ones (âm u → mo-wx-suongsom, mưa rào / mưa thu → mo-wx-muaphun) via jclose WX_BUOI, so nothing is code-drawn and nothing is private. Ask: Foreman C paints mo-wx-amu + mo-wx-muarao (same set/size as mo-wx-*), then one line each in jclose WX_BUOI. |
+| 17/11 | weather-khac-2 | j93 weather chip: new day states (j12 WX_KH) "gió lớn" / "gió bấc" (+ "đêm gió …") and "sương mù" (+ "chiều / đêm sương mù") have no painted icon; they reuse gioheomay / suongsom (jclose WX_BUOI). Ask: mo-wx-giolon (wind gust), mo-wx-suongmu (thick fog), same set and size as the other mo-wx-* (Foreman C). |
+| 17/11 | weather-khac r1 (reviewer) | KIT §56.2 ONE SCENE GRADE: on a buổi painting (.kown) the .light wash is forced to none (dry) / ivory (wet) by jsl, so j12 lightTick's level wash (BAL.wx.day.wash/washOwn) does not show there; a heavy fog (sương mù nặng) reads only through the jfx mist3 sprites over a sunny painting. Ask the kit keeper: a weather grade in KIT_SCENE.grade by level (fog / heavy rain), or Foreman C rain/fog variants of the garden paintings. | weather stage look | kit-scene | mở |

@@ -73,12 +73,12 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
   /* household */
   const spy={};const sp=nm=>{const f=window[nm];spy[nm]=0;window[nm]=function(){if(arguments[0]===v||arguments[1]===v)spy[nm]++;return f.apply(this,arguments)};return()=>window[nm]=f};
   const U=["itemTest","hireTake","staffTam","recommend","searchMaids","threatServ"].map(sp);
-  try{v.bac=500;const k0=Object.keys(IT).find(k=>IT[k].pr>0&&!IT[k].sl);v.inv=[{k:k0,from:key(t),d:S.turn}];
+  const rk0=v.rank;try{v.rank=6;/* merge r2: main's household table (BAL.promo.cap) gives low ranks no eunuch — test at a rank with room */v.bac=500;const k0=Object.keys(IT).find(k=>IT[k].pr>0&&!IT[k].sl);v.inv=[{k:k0,from:key(t),d:S.turn}];
    v.staff=[{sid:9e6+1,name:"Thử A",role:"maid",loyal:20,af:{},rk:3},{sid:9e6+2,name:"Thử B",role:"maid",loyal:90,af:{}}];
    S.npool=S.npool||{maid:[],eunuch:[]};S.npool.eunuch.push({sid:9e6+3,name:"Thử C",role:"eunuch",loyal:50,af:{},age:16,org:"dân",imp:"hiền"});
    const ts=(t.staff||[])[0]||(t.staff=[{sid:9e6+4,name:"Thử D",role:"maid",loyal:50,af:{}}])[0];ts.lover=9e6+5;ts.spyFor=null;v.knowDT=[ts.sid];const h0=hostility;hostility=(a,b)=>a===v&&b===t?90:h0(a,b);
    try{const H=AGREG.consort.par3house(v,N,null);out.house=H.map(o=>o.k);out.houseRun={};for(const o of H)out.houseRun[o.k]=String(AGRUN[o.k](v,o.t)||"").slice(0,60)}finally{hostility=h0}
-  }finally{U.forEach(f=>f())}out.spy=spy;
+  }finally{v.rank=rk0;U.forEach(f=>f())}out.spy=spy;
   /* phe phái */
   const F0=(S.facs||[]).slice();try{S.facs=[];v.p3FacM=-1;v.rl[t.id]=60;const F=AGREG.consort.par3fac(v,N,null);out.fac=F.map(o=>o.k);const of=F.find(o=>o.k==="cx3:facFound");out.facRun=of?AGRUN[of.k](v,of.t):"";out.facMade=!!facOf(v)}finally{S.facs=F0}
   /* thuốc thúc sinh: her card = P3C.drug(S); the NPC builder gives the same odds */

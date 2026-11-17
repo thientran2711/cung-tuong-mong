@@ -69,10 +69,10 @@ agReg("consort","par3",(v,N,need)=>{const O=[];if(!p3On()||v===S||v.out||v.confi
   if(v.charM!==S.turn&&nd(X.charity.g)){const C=BAL.charity;P(p3O(v,"charity",{n:"Phát bạc cứu giúp cung nhân nghèo",c:{bac:-C.bac},o:100,k:C.khac},N,X.charity.g,"help"))}
   if(nd(X.use.g)&&p3UseIx(v)>=0)P(p3O(v,"use",{n:"Dùng",c:{},o:100},N,X.use.g,"self"));
   if((need==="bac"||!need)&&(v.bac||0)<X.sell.bacBelow&&p3SellIx(v)>=0)P(p3O(v,"sell",{n:"Bán",c:{},o:100},N,X.sell.g,"self"));
-  if(nd(X.tyGift.g)&&S.court&&S.court.ty&&(v.bac||0)>=BAL.court.gift.bac&&others(v).some(t=>t&&t!==v&&agSpite(v,t)>0))P(p3O(v,"tyGift",{n:"Biếu",c:{bac:-BAL.court.gift.bac},o:100},N,X.tyGift.g,"bribe"));
+  if(nd(X.tyGift.g)&&S.court&&S.court.ty&&(v.bac||0)>=BAL.bacFee.court&&others(v).some(t=>t&&t!==v&&agSpite(v,t)>0))P(p3O(v,"tyGift",{n:"Biếu",c:{bac:-BAL.bacFee.court},o:100},N,X.tyGift.g,"bribe"));
   if(nd(X.work.g)&&typeof wkMake==="function"){const a=p3WorkArt(v);if(a)P(p3O(v,"work",{n:"Tự học",c:{},o:100,k:2},N,X.work.g,"art"))}
   const S3=X.staff;for(const a of ["thuong","phat","doi","che","hoi"]){const g=a==="hoi"?S3.gHoi:S3.g;if(!nd(g))continue;const s=p3Staff(v,a);if(!s)continue;
-   const c=a==="thuong"?{bac:-S3.thuong.bac}:a==="che"?{danh:-S3.che.danh}:{};const k="staff"+a.charAt(0).toUpperCase()+a.slice(1);P(p3O(v,k,{n:AGC3BTN[k],c,o:100,k:a==="hoi"?2:1},N,g,"staff"))}
+   const c=a==="thuong"?{bac:-BAL.house.thuongBac}:a==="che"?{danh:BAL.eff.j10.danhServAct}:{};const k="staff"+a.charAt(0).toUpperCase()+a.slice(1);P(p3O(v,k,{n:AGC3BTN[k],c,o:100,k:a==="hoi"?2:1},N,g,"staff"))}
  }catch(e){agdErr("par3",e)}return O});
 function p3WorkArt(v){let b=null,l=0;for(const a in WDEF){const x=(v.arts&&v.arts[a])||0;if(x>l){l=x;b=a}}return b}
 /* ---------------- what each deed does (the same functions as her buttons) ---------------- */
@@ -153,17 +153,18 @@ Object.assign(window,{P3T,p3ChatF,p3ChatMark});
 /* ---------------- household: the same functions as her Cung nhân tab (j8 itemTest, j14 recommend / searchMaids, j29 hireTake, j10 threatServ, staffTam) ---------------- */
 function staffTam(m,s){s.loyal=cl((s.loyal||0)+BAL.eff.jhouse.loyalRun,0,100);return m===S?`${s.name} được ngươi hỏi han: lòng ${balSg(BAL.eff.jhouse.loyalRun)}.`:`${m.name} tâm sự với ${s.name}`}
 /* Nội vụ phủ hands a candidate over (her hireCard choice / an NPC's pick); paid = her option already took the bạc */
-function hireTake(m,role,s,paid){const P=npool()[role];const i=P.indexOf(s);if(i>=0)P.splice(i,1);if(!paid)ap(m,{bac:-BAL.ag.par3.hire.bac});(m.staff=m.staff||[]).push(s);return m===S?"":`${m.name} nhận ${s.name} từ Nội vụ phủ`}
-function p3HireRole(v){if((v.bac||0)<BAL.ag.par3.hire.bac)return null;const [cm,ce]=capOf(v);const n=r=>(v.staff||[]).filter(s=>s.role===r&&!s.out).length;
- let P;try{P=npool()}catch(e){return null}if(n("maid")<cm&&(P.maid||[]).length)return"maid";if(n("eunuch")<ce&&(P.eunuch||[]).length)return"eunuch";return null}
+function hireTake(m,role,s,paid){const P=npool()[role];const i=P.indexOf(s);if(i>=0)P.splice(i,1);if(!paid)ap(m,{bac:-BAL.house.hireBac});(m.staff=m.staff||[]).push(s);return m===S?"":`${m.name} nhận ${s.name} từ Nội vụ phủ`}
+/* merge r2: room counted by main's household rule (staff-root: hhHas = maids incl. the close maid, eunuchs; BAL.promo.cap) */
+function p3HireRole(v){if((v.bac||0)<BAL.house.hireBac)return null;const [cm,ce]=capOf(v),[nm,ne]=hhHas(v);
+ let P;try{P=npool()}catch(e){return null}if(nm<cm&&(P.maid||[]).length)return"maid";if(ne<ce&&(P.eunuch||[]).length)return"eunuch";return null}
 function p3TestIx(v){return p3Inv(v,(e,it)=>e.from&&e.from!==key(v)&&e.from!=="emp"&&e.from!=="th"&&!e.tested?1:null)}
 function p3ThreatT(v){const K=v.knowDT||[];if(!K.length)return null;const L=allServ().filter(s=>s.lover&&K.includes(s.sid)&&!s.spyFor&&ownerOf(s)&&ownerOf(s)!==v&&ownerOf(s)!==S&&agSpite(v,ownerOf(s))>0);
  return L.length?mindPickBy(L,s=>agSpite(v,ownerOf(s)),v):null}
 Object.assign(AGC3BTN,{test:"Nghiệm độc",hire:"Thêm cung nữ",staffTam:"Tâm sự",staffUp:"Tiến cử",search:"Chưởng sự tra xét cung nữ",threat:"Dọa tố"});
 Object.assign(AGC3ACT,{test:"đem quà được tặng đi nghiệm độc",hire:"xin Nội vụ phủ thêm người",staffTam:"tâm sự với kẻ hầu",staffUp:"tiến cử kẻ hầu",search:"cho chưởng sự tra xét cung nữ",threat:"dọa tố chuyện đối thực"});
 agReg("consort","par3house",(v,N,need)=>{const O=[];if(!p3On()||v===S||v.out||!v.alive)return O;const X=BAL.ag.par3,H=X.house;const nd=g=>!need||g[need]!=null;const P=x=>x&&O.push(x);
- try{if(nd(X.test.g)&&(v.bac||0)>=X.test.bac&&p3TestIx(v)>=0)P(p3O(v,"test",{n:"Nghiệm độc",c:{bac:-X.test.bac},o:100},N,X.test.g,"self",()=>"tyv"));
-  if(nd(X.hire.g)&&p3HireRole(v))P(p3O(v,"hire",{n:"Thêm cung nữ",c:{bac:-X.hire.bac},o:100},N,X.hire.g,"staff"));
+ try{if(nd(X.test.g)&&(v.bac||0)>=BAL.bacFee.itTest&&p3TestIx(v)>=0)P(p3O(v,"test",{n:"Nghiệm độc",c:{bac:-BAL.bacFee.itTest},o:100},N,X.test.g,"self",()=>"tyv"));
+  if(nd(X.hire.g)&&p3HireRole(v))P(p3O(v,"hire",{n:"Thêm cung nữ",c:{bac:-BAL.house.hireBac},o:100},N,X.hire.g,"staff"));
   const st=(v.staff||[]).filter(s=>s&&!s.out);
   if(nd(H.gTam)&&st.some(s=>(s.loyal||0)<H.tamBelow))P(p3O(v,"staffTam",{n:"Tâm sự",c:{},o:100},N,H.gTam,"staff"));
   if(nd(H.gUp)&&(v.bac||0)>=BAL.house.upBac&&st.some(s=>(s.loyal||0)>=H.upLoyal))P(p3O(v,"staffUp",{n:"Tiến cử",c:{bac:-BAL.house.upBac,danh:-BAL.house.upDanh},o:100},N,H.gUp,"staff"));

@@ -55,7 +55,7 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
  ok(r3.cardFail===0&&r3.cardOk===r3.cardPrice&&!r3.err&&!r3.err2,'Cài tai mắt: failure 0 bạc, success = her price',{fail:r3.cardFail,ok:r3.cardOk,price:r3.cardPrice,e:r3.err||r3.err2});
  ok(r3.actFail===0&&!r3.err3,'ACT Mua chuộc cung nữ (consort\'s maid): refusal costs no bạc',{d:r3.actFail,e:r3.err3});
  /* 4 the sent servant's fear */
- const r4=await p.evaluate(()=>{const o={};let {v,s}=__rig(50,"Ham lợi",["Cần","Kiệm"]);S.bac=500;const sum=L=>L.reduce((a,x)=>a+(x.loyal||0),0);const m=bestSent(S);o.has=!!m;if(m){/* the drop lands on whoever is sent: measure the whole staff */const L=S.staff.filter(x=>!x.spyFor);L.forEach(x=>x.loyal=60);__rnd(.999);bribeServ(S,s);__rndOff();o.her=60*L.length-sum(L)}
+ const r4=await p.evaluate(()=>{const o={};let {v,s}=__rig(50,"Ham lợi",["Cần","Kiệm"]);S.bac=500;/* merge r2: main's household table (staff-root, BAL.promo.cap) gives a low-rank start no staff beside the close maid — give her one */if(!(S.staff||[]).length)S.staff=[mkServ("maid")];const sum=L=>L.reduce((a,x)=>a+(x.loyal||0),0);const m=bestSent(S);o.has=!!m;if(m){/* the drop lands on whoever is sent: measure the whole staff */const L=S.staff.filter(x=>!x.spyFor);L.forEach(x=>x.loyal=60);__rnd(.999);bribeServ(S,s);__rndOff();o.her=60*L.length-sum(L)}
   s.spyFor=null;const w=liveRivals(true).filter(x=>x!==v&&x.alive&&!x.out&&(x.staff||[]).length)[0];const n=bestSent(w);o.hasN=!!n;if(n){const L=w.staff.filter(x=>!x.spyFor);L.forEach(x=>x.loyal=60);w.bac=500;__rnd(.999);bribeServ(w,s);__rndOff();o.npc=60*L.length-sum(L)}
   o.fear=BAL.ag.bt.fear;o.timid=BAL.ag.bt.fearTimid;return o});
  const fe=r4.fear,ft=Math.round(r4.fear*r4.timid);
@@ -63,7 +63,7 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
  ok(r4.hasN&&(r4.npc===fe||r4.npc===ft),'NPC parity: the NPC\'s sent servant loses lòng the same',r4);
  /* 5 parity of the record / mood + one card-odds rule */
  const r5=await p.evaluate(()=>{const o={};const {v,s}=__rig(50,"Ham lợi",["Nhân","Cần"]);const s2=v.staff[1];servDo(v,"thuong",s2);o.npcMood=mindMood(s2,v);v.bac=999;servDo(v,"phat",s2);o.npcMood2=mindMood(s2,v);
-  const my=(S.staff||[])[0];if(my){S.bac=999;servDo(S,"thuong",my);o.herMood=mindMood(my,S)}
+  if(!(S.staff||[]).length)S.staff=[mkServ("maid")];/* merge r2: see r4 */const my=(S.staff||[])[0];if(my){S.bac=999;servDo(S,"thuong",my);o.herMood=mindMood(my,S)}
   my&&(my.trong=["Nhân","Lễ"],my.trM=null);mindSeen(S,"harm");o.herRec=my?mindTr(my,S).off:null;
   o.p3=String(p3Run).includes("lotB(")&&/agOdd\(|agTry\(/.test(String(p3Run));o.run=true;/* runOpt is wrapped by later modules; its j2 body reads agOdd(o0+lotB) */return o});
  ok(r5.npcMood==="thuong"&&r5.npcMood2==="gian"&&r5.herMood==="thuong",'Thưởng / Phạt set today\'s mood toward the master (NPC and her)',r5);

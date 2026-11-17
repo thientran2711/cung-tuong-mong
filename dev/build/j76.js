@@ -111,7 +111,7 @@ try{HX.buoi="Mỗi buổi có "+(BAL.time.khac)+" khắc, ngày có "+(B4N)+" bu
    A card already done shows the true reason ("Đã làm hôm nay — mai chia bài mới"); it is a per-day deck. */
 function j76stand(){if(!S||S.dead)return[];const A=[{n:"Nghỉ ngơi một lát",t:"Nằm nghỉ trong tẩm cung, uống chén trà sen.",k:1,c:{},o:100,w:{suc:6},dom:"Sức khỏe",j76:1,rep:1}];
  if(!S.out&&S.maid)A.push({n:"Trò chuyện với cung nữ",t:`Ngồi nghe ${S.maid.name} kể chuyện trong cung.`,k:1,c:{},o:100,w:{maid:3},x:"có khi nghe được tin",dom:"Giao thiệp",j76:1,go:()=>{if(roll(15)){const t=liveRivals(true);if(t.length){const v=pick(t);seeLoc&&seeLoc(v);log(`${S.maid.name} kể: ${v.name} đang ở ${placeName(whereOf(v))} buổi này.`)}}}});
- A.push({n:"Đọc sách giải khuây",t:"Mở một cuốn sử, đọc vài trang bên cửa sổ.",k:1,c:{},o:100,w:{suc:2},x:"có khi Tâm cơ +1",dom:"Tài nghệ",j76:1,go:()=>{if(roll(20))apply({tamco:1})}});
+ A.push({n:"Đọc sách giải khuây",t:"Mở một cuốn sử, đọc vài trang bên cửa sổ.",k:1,c:{},o:100,w:{suc:2},x:`có khi Tâm cơ ${balSg(BAL.eff.j76.tamcoGo)}`,dom:"Tài nghệ",j76:1,go:()=>{if(roll(20))apply({tamco:BAL.eff.j76.tamcoGo})}});
  return A}
 (function(){const d0=deal;deal=function(){const r=d0.apply(this,arguments);try{if(S&&!S.dead&&!(typeof isSrv==="function"&&isSrv())&&Array.isArray(deck)&&!deck.some(a=>a.j76))deck.unshift(...j76stand())}catch(e){}return r}})();
 /* resting can be repeated as long as khắc remain (it is never the last thing greyed) */
