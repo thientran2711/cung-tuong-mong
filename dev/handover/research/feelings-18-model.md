@@ -38,3 +38,8 @@ Born from Chạnh lòng / Giận / Hờn dỗi at high level + low bar + traits.
 Priority: active ACT > dominant FEELING (intent never shown, owner 20:15Z). When the top one ends, the seal falls to the next. Tap card: "Đang: <act>" / "Cảm xúc: <name> (<bậc>)" lines (only those present), then the cause list (order rule OD 18:25Z (a)); cause text only if known, else "Nguyên do chưa rõ".
 API for the kit: faceKeyFor(pid) → {kind:'act'|'feel', key, level} + card lines.
 ## Art (Foreman C): seal keys per set (women / young men / mature men): the new feelings, act faces emo-khoc, emo-phanno, emo-runso, emo-matngu; fallback to nearest existing seal while missing.
+
+## ACT LIST + FACES (owner 20:45Z, overrides any grouping)
+17 acts, one per feeling (Bình thản none), each with its OWN face key emo-act-<feelingkey> (3 sets):
+buon→khóc · gian→đập đồ · khochiu→cáu gắt với người hầu · so→trốn trong phòng · hothen→cáo bệnh không dự · lo→mất ngủ · chan→bỏ dở việc · choang→ngồi thừ người · hon→không tiếp, bỏ về · ghen(Chạnh lòng)→nói móc đối thủ · vui→ban thưởng người hầu · tutin→khoe tài trước đông người · tinhtu→chủ động mời Hoàng thượng · tinhnghich→bày trò trêu người · hanghai→làm một mạch không nghỉ · chuyentam→chìm vào việc, quên giờ · hungkhoi→sáng tác ngay tại chỗ.
+Fires at heavy level + bar threshold (bad ≤ −, good ≥ +), own khắc duration + cooldown (BAL). Seal = act face while active, else feeling face. Intent never shown.
