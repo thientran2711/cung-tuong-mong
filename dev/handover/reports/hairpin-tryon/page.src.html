@@ -59,9 +59,9 @@ textarea{width:100%;box-sizing:border-box;height:70px;font:11px/1.4 ui-monospace
     <fieldset>
       <div class="row"><label for="rot">Xoay</label><input type="range" id="rot" min="-180" max="180" step="1"><span class="num" id="rotN"></span></div>
       <div class="row"><label for="scl">Cỡ</label><input type="range" id="scl" min="0.3" max="1.4" step="0.01"><span class="num" id="sclN"></span></div>
-      <div class="row"><label for="lift">Nâng ra</label><input type="range" id="lift" min="-60" max="280" step="1"><span class="num" id="liftN"></span></div>
+      <div class="row"><label for="lift">Cắm / nâng</label><input type="range" id="lift" min="-150" max="260" step="1"><span class="num" id="liftN"></span></div>
       <div class="row"><label for="cov">Tóc phủ</label><input type="range" id="cov" min="30" max="220" step="1"><span class="num" id="covN"></span></div>
-      <p class="hint">Nâng ra: số nhỏ thì hoa nằm sát tóc, số lớn thì lộ nhiều cán. Tóc phủ: vùng quanh chấm mà tóc đè lên cán trâm.</p>
+      <p class="hint">Cắm / nâng: 0 là cán trâm cắm hết, hoa sát mép tóc. Số âm đẩy hoa chìm vào tóc, số dương kéo trâm ra. Tóc phủ: vùng tóc đè lên cán trâm (tự rộng theo độ dài cán).</p>
     </fieldset>
     <div class="btns"><button id="rm">Gỡ cây này</button><button id="rmAll">Gỡ hết</button></div>
     <fieldset>
@@ -104,37 +104,43 @@ const toPx=(x,y)=>{const v=VIEWS[view];return [(x-v.x)*S,(y-v.y)*S];};
 const toFig=(px,py)=>{const v=VIEWS[view];return [px/S+v.x,py/S+v.y];};
 function drawImg(c,im,o,sc){ if(!im) return; c.drawImage(im,(o.x-VIEWS[view].x)*S,(o.y-VIEWS[view].y)*S,im.naturalWidth/o.k*S*1,im.naturalHeight/o.k*S*1); }
 
+const INSET=16, FLUSH=4; // shaft enters INSET px inside the hair edge; lift 0 puts the ornament base FLUSH px inside the edge
+const geo=(p,a)=>{const th=p.angle*Math.PI/180,u=[Math.sin(th),-Math.cos(th)];
+  const d=p.lift+FLUSH;                                   // ornament base, measured outward from the anchor
+  return {u,B:[a.x+u[0]*d,a.y+u[1]*d],len:Math.max(d+INSET,0)}; };  // len = visible shaft length down to the cut inside the hair
 function drawPinPart(c,p,a,part){
   const m=pins.find(q=>q.id===p.pin),im=img["pin"+p.pin]; if(!m||!im) return;
-  const u=[Math.sin(p.angle*Math.PI/180),-Math.cos(p.angle*Math.PI/180)];
-  const B=[a.x+u[0]*p.lift,a.y+u[1]*p.lift];
-  const [bx,by]=toPx(B[0],B[1]); const k=p.scale*S;
-  c.save();c.translate(bx,by);c.rotate(p.angle*Math.PI/180);c.scale(k,k);
-  const pivX=m.tip[0],pivY=m.ob;
-  const lim=Math.max(p.lift,0)+3;
+  const g=geo(p,a),[bx,by]=toPx(g.B[0],g.B[1]); const k=p.scale*S;
+  if(part==="dang"&&m.ob-m.hb<4) return;
+  c.save();c.translate(bx,by);
+  if(part!=="dang") c.rotate(p.angle*Math.PI/180);   // tassels and pearl strings always hang straight down
+  c.scale(k,k);
   c.beginPath();
-  if(part==="shaft") c.rect(-400,-2,800,lim/p.scale+2+0);          // shaft: from below the ornament down to the cut at the anchor
-  else if(part==="orn") c.rect(-400,-2000,800,2000+2);               // ornament: everything above the base line
-  else c.rect(-400,-2000,800,2000+Math.max(p.lift,0)/p.scale+3);     // whole pin, cut at the anchor
-  c.clip();
+  if(part==="shaft") c.rect(-400,-2,800,g.len/p.scale+2);                 // below the cap, down to the cut inside the hair
+  else if(part==="orn") c.rect(-400,-2000,800,2000+2);                    // cap only, always on top
+  else if(part==="dang"){                                                  // hanging strings: not the rod itself
+    c.rect(-400,-2,800,(m.ob-m.hb)+4);
+    if(m.thin){c.rect(-8,-2,16,(m.ob-m.hb)+4);}
+  }
+  else c.rect(-400,-2000,800,2000+g.len/p.scale);
+  c.clip(part==="dang"&&m.thin?"evenodd":"nonzero");
   c.shadowColor="rgba(50,25,15,.35)";c.shadowBlur=5*S;c.shadowOffsetY=2*S;
-  c.drawImage(im,-pivX,-pivY);
+  c.drawImage(im,-m.tip[0],-m.hb);
   c.restore();
 }
 function drawHairFront(c,p,a){
-  const hf=img.hair; if(!hf) return;
+  const hf=img.hair; if(!hf) return; const g=geo(p,a);
   tx.setTransform(1,0,0,1,0,0);tx.clearRect(0,0,tmp.width,tmp.height);
-  drawImg(tx,hf,HEAD);                                     // all hair, then keep only the cover zone
-  const [ax,ay]=toPx(a.x,a.y),R=p.R*S;
+  drawImg(tx,hf,HEAD);                                     // all hair, then keep only the cover zone around the whole shaft line
+  const cxp=a.x+(g.u[0]*(g.len-INSET-FLUSH)/2)-g.u[0]*0, cyp=a.y+(g.u[1]*(g.len-INSET-FLUSH)/2);
+  const [ax,ay]=toPx(cxp,cyp),R=Math.max(p.R,g.len/2+70)*S;
   tx.globalCompositeOperation="destination-in";
-  let g=tx.createRadialGradient(ax,ay,R*.55,ax,ay,R);g.addColorStop(0,"#000");g.addColorStop(1,"rgba(0,0,0,0)");
-  tx.fillStyle=g;tx.fillRect(0,0,tmp.width,tmp.height);
-  // half-plane: only the side of the ornament base facing the head
-  const th=p.angle*Math.PI/180,u=[Math.sin(th),-Math.cos(th)];
-  const bx=ax+u[0]*p.lift*S,by=ay+u[1]*p.lift*S, f=8*S;
-  g=tx.createLinearGradient(bx-u[0]*f*0,by-u[1]*f*0,bx+u[0]*(-f*2.5),by+u[1]*(-f*2.5));
-  g.addColorStop(0,"rgba(0,0,0,0)");g.addColorStop(1,"#000");
-  tx.fillStyle=g;tx.fillRect(0,0,tmp.width,tmp.height);
+  let gr=tx.createRadialGradient(ax,ay,R*.7,ax,ay,R);gr.addColorStop(0,"#000");gr.addColorStop(1,"rgba(0,0,0,0)");
+  tx.fillStyle=gr;tx.fillRect(0,0,tmp.width,tmp.height);
+  const [bx,by]=toPx(g.B[0],g.B[1]),f=8*S;                 // only the head side of the ornament base
+  gr=tx.createLinearGradient(bx,by,bx-g.u[0]*f*2.5,by-g.u[1]*f*2.5);
+  gr.addColorStop(0,"rgba(0,0,0,0)");gr.addColorStop(1,"#000");
+  tx.fillStyle=gr;tx.fillRect(0,0,tmp.width,tmp.height);
   tx.globalCompositeOperation="source-over";
   c.drawImage(tmp,0,0);
 }
@@ -144,7 +150,7 @@ function draw(){
   const naive=$("naive").checked;
   for(const a of anchors){const p=placed[a.id]; if(!p) continue;
     if(naive){drawPinPart(cx,p,{...a},"all");continue;}
-    drawPinPart(cx,p,a,"shaft"); drawHairFront(cx,p,a); drawPinPart(cx,p,a,"orn");
+    drawPinPart(cx,p,a,"shaft"); drawHairFront(cx,p,a); drawPinPart(cx,p,a,"orn"); drawPinPart(cx,p,a,"dang");
   }
   if(ghost&&trayPick){const m=pins.find(q=>q.id===trayPick);const im=img["pin"+trayPick];
     if(im){cx.save();cx.globalAlpha=.85;const [gx,gy]=toPx(ghost.x,ghost.y);cx.translate(gx,gy);const k=.7*S;cx.scale(k,k);cx.drawImage(im,-m.tip[0],-m.ob*1.0);cx.restore();}}
@@ -219,7 +225,7 @@ buildTray();
   size();
   await Promise.all([L("head","figure_head.webp"),L("full","figure_full.webp"),L("hair","hair_front.webp"),...pins.map(m=>L("pin"+m.id,m.file))]);
   // opening state: a few example pins already placed so the effect is visible
-  place("top",1);placed.top.lift=70;place("ll",4);place("lr",2);place("lo",8);place("ro",3);placed.ll.scale=.62;placed.lr.scale=.62;placed.lo.scale=.6;placed.ro.scale=.6;
+  place("top",1);place("ll",4);place("lr",2);place("lo",8);place("ro",3);placed.ll.scale=.62;placed.lr.scale=.62;placed.lo.scale=.6;placed.ro.scale=.6;
   sel=null;draw();
 })();
 </script>

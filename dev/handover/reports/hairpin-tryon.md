@@ -24,3 +24,10 @@ NOTE: the artifact frame blocks remote images (CSP), so the page ships the same 
 Source (no images): this folder (build.py, pins.py, page.src.html, anchors.json, pins_meta.json).
 
 ~25% xong / ~0% chơi được (sample only, nothing live).
+
+## V2 (owner 02:10Z via Foreman C ROOT-12: "cho trâm cắm sát tóc, có cây chỉ được cắm nửa cây")
+Cause: pins 1, 5, 7 had `ob` at the END of the dangles, so the whole dangle length (255-390 sprite px) counted as ornament and stayed in the air above the hair. Fixes (code only, 0 credits):
+- New per-pin `hb` (cap base): 1=150, 5=170, 7=150, others = ob. Pivot and shaft start at `hb`; dangles (hb..ob) are drawn separately and always hang straight down (gravity), the thin centre rod is masked out (pins 5, 7).
+- Lift 0 = ornament base FLUSH 4 px inside the hair edge; slider now -150..260 (negative sinks the cap into the hair). Default lift 0 for all 9 anchors.
+- Shaft enters INSET 16 px inside the hair mass; hair_front cover zone is centred on the shaft line and its radius follows shaft length (max(R, len/2+70)).
+- Checked: all 8 pins on 4 anchors (top, 2 upper sides, mid side) at 1180x820, screenshot on CDN img/_review/hairpin-tryon/flush_8pins.webp. Pearl/tassel strings of 1, 5, 7 can overlap the forehead at the side anchors (they hang straight down); owner can lower cỡ or move the pin.
