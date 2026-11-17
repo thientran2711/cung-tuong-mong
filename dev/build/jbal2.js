@@ -1024,3 +1024,18 @@ BAL.world={on:1,maxOpen:2,pull:18,pullMax:80,
 /* AG-ALL-2b merge (ONE CORE): evidence a deed gives / clears where the player and NPC share one code path (j2 cx2 cards, j9 help, j10 servants,
    j42 dilemma builders, jcmaid, jpromsv, jeitem): one = 1 piece, two = 2 pieces (a Mật báo), all = clear every piece; rel = liking lost by a bribe told to the master */
 Object.assign(BAL.ag,{ev:{one:1,two:2,all:-99,rel:5}});
+/* AG-ALL-2e PARITY (jagacts3.js; report dev/handover/reports/ag-all-parity.md "2e"): the player's buttons that had no NPC side. Each card is built ONCE
+   (P3C.<k>(p), used by her deck / talk card AND an NPC consort's cx3:<k> option); g = the needs the deed serves (agcU), as BAL.ag.cx2. on = 0 → no NPC option.
+   dance  Múa trong yến tiệc (o + Sắc/sacD × mesac + múa lv × vu)   eyes Cài tai mắt   anthai An thai (buy) / Tự bào chế (self, Y ≥ y)
+   tell   Kể tội {X} with the Thái hậu (o + evidence × ev + Thái hậu regard / thD; the target loses rel / sung)   treat Xin chữa bệnh (Thái y viện)
+   staff  her own-staff buttons (j10 servDo): thuong bac; hoi af (a friend), dt (đối thực rumour odds); che danh; NPC master: below = lòng under which she acts
+   use / sell (inventory Dùng / Bán), charity (j85 charityFx), restLat (Nghỉ ngơi một lát), tyGift (Biếu Thái y, courtGive), work (Tự học nghề: tác phẩm, wkMake) */
+BAL.ag.par3={on:1,
+ dance:{c:{"suc":-20,"bac":-10},o:30,sacD:2,mesac:1.3,vu:4,w:{"sung":12,"danh":4},l:{"danh":-6},g:{"sung":12,"danh":4}},
+ eyes:{c:{"bac":-25},o:80,w:{"mat":2},l:{"danh":-3},g:{"safe":2,"spite":1},max:6},
+ anthai:{self:{c:{"suc":-5},y:4},buy:{c:{"bac":-20},w:{"suc":10}},g:{"kid":3}},
+ tell:{o:40,ev:10,thD:5,w:{"th":2,"duc":-2},l:{"th":-4},rel:15,sung:10,g:{"spite":4,"th":1}},
+ treat:{c:{"bac":-30},g:{"rest":4}},
+ staff:{thuong:{bac:10,below:55},phat:{below:30},doi:{below:15},che:{danh:2},hoi:{af:20,dt:30},g:{"safe":2},gHoi:{"spite":2,"safe":1}},
+ use:{sucBelow:60,g:{"rest":2}},sell:{bacBelow:40,g:{"bac":2}},
+ cutRisk:30,charity:{g:{"duc":3,"danh":2}},restLat:{sucBelow:50,g:{"rest":2}},tyGift:{g:{"spite":1,"safe":1}},work:{g:{"danh":2,"ally":1}}};

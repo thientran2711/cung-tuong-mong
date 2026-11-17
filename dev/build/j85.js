@@ -118,7 +118,8 @@ window.lessonVir=lessonVir;
 /* ONE act, two doors (danh-p1, owner P1 16/11): Tài nghệ · Tứ đức button (here) and the Hành sự card (jact adCharityCard);
    one lock S.charM (once a month), one effect body charityFx; numbers BAL.charity */
 function charityLocked(){return !S||S.charM===S.turn||S.bac<BAL.charity.bac}
-function charityFx(){const C=BAL.charity;S.charM=S.turn;withDeed("phát bạc cứu giúp cung nhân nghèo",()=>apply({bac:-C.bac,duc:C.duc,danh:C.danh}))}
+/* ONE function for her button and an NPC consort's choice (AG-ALL-2e cx3:charity, jagacts3) */
+function charityFx(p){p=p||S;const C=BAL.charity;p.charM=S.turn;const fx={bac:-C.bac,duc:C.duc,danh:C.danh};if(p===S)withDeed("phát bạc cứu giúp cung nhân nghèo",()=>apply(fx));else ap(p,fx)}
 function charity(){const C=BAL.charity;if(!S||S.dead||Q.length||!can(C.khac)||charityLocked())return;charityFx();spend(C.khac);save();render()}
 window.charity=charity;
 try{wrapR("lessonVir",(k,m)=>`${m==="self"?"Tự học":"Học"} ${(VIR.find(x=>x.k===k)||{}).n||""}`);wrapR("charity",()=>"Phát bạc cứu giúp cung nhân")}catch(e){}

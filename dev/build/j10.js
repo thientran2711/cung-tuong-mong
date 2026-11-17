@@ -37,15 +37,19 @@ function servMonth(){let ev="";for(const p of consorts()){if(!p.staff)p.staff=[]
   if(p!==S&&!G)fillStaff(p,false)}
  return ev}
 function servAct(a,id){const s=servById(id);if(!s||S.dead||Q.length)return;const o=ownerOf(s);let r="";
- if(o===S){if(a==="thuong"){if(S.bac<10)return;apply({bac:-10});s.loyal=cl(s.loyal+BAL.eff.j10.loyalServAct,0,100);r=`Thưởng ${s.name}: lòng ${balSg(BAL.eff.j10.loyalServAct)}.`}
-  else if(a==="phat"){s.loyal=cl(s.loyal-BAL.eff.j10.loyalServAct_2,0,100);if(s.spyFor){const m=byKey(s.spyFor);r=`Tra khảo ${s.name}: khai là tai mắt của ${m?NM(m):"kẻ khác"}. Đuổi khỏi cung.`;S.staff.splice(S.staff.indexOf(s),1);if(m&&m!==S)evA(S,m,BAL.eff.j10.evServAct)}else r=`Phạt ${s.name}: lòng -${balAb(BAL.eff.j10.loyalServAct_2)}.`}
-  else if(a==="hoi"){if(!can(2))return;spend(2);const f=Object.keys(s.af).map(x=>servById(+x)).find(x=>x&&s.af[x.sid]>=20);const o2=f&&ownerOf(f);
-   if(o2&&o2!==S&&roll(nv(s,"askTalk"))){r=evA(S,o2,BAL.eff.j10.evServAct_2)?`${s.name} kể chuyện nghe từ ${f.name} bên cung ${o2.name}: chứng cứ ${balSg(BAL.eff.j10.evServAct_2)}.`:`${s.name} kể chuyện nghe từ ${f.name} bên cung ${o2.name}: không có gì sai trái, chỉ biết ${harmTxt(o2)}.`}else r=`${s.name} không biết gì mới.`;
-   const dt=allServ().find(x=>x.lover&&!(S.knowDT||[]).includes(x.sid)&&ownerOf(x)!==S);if(dt&&roll(30)){S.knowDT=(S.knowDT||[]).concat([dt.sid,dt.lover]);r+=` Lại nghe đồn ${dt.name} và ${(servById(dt.lover)||{}).name} đối thực.`}}
-  else if(a==="doi"){S.staff.splice(S.staff.indexOf(s),1);r=`Trả ${s.name} về Nội vụ phủ.`}
-  else if(a==="che"){s.loyal=cl(s.loyal+BAL.eff.j10.loyalServAct_3,0,100);apply({danh:-2});r=`Che chở ${s.name} trước Thận Hình ti: lòng ${balSg(BAL.eff.j10.loyalServAct_3)}, Danh -2.`}}
+ if(o===S){if(a==="thuong"&&S.bac<BAL.ag.par3.staff.thuong.bac)return;if(a==="hoi"){if(!can(2))return;spend(2)}r=servDo(S,a,s)}
  else if(o){if(!can(2))return;if(a==="mua"){spend(2);r=bribeServ(S,s)}else if(a==="doa"){spend(2);r=threatServ(S,s)}}
  if(r)log(r);render()}
+/* ONE function for her own-staff buttons (Thưởng / Phạt / Hỏi chuyện / Đổi người / Che chở) and an NPC master's choice (AG-ALL-2e cx3:staff, jagacts3); m = the master */
+function servDo(m,a,s){const me=m===S,P=BAL.ag.par3.staff;let r="";if(!m||!s||!(m.staff||[]).includes(s))return"";const pay=x=>me?apply(x):ap(m,x);
+ if(a==="thuong"){if((m.bac||0)<P.thuong.bac)return"";pay({bac:-P.thuong.bac});s.loyal=cl(s.loyal+BAL.eff.j10.loyalServAct,0,100);r=`Thưởng ${s.name}: lòng ${balSg(BAL.eff.j10.loyalServAct)}.`}
+ else if(a==="phat"){s.loyal=cl(s.loyal-BAL.eff.j10.loyalServAct_2,0,100);if(s.spyFor){const sp=byKey(s.spyFor);r=`Tra khảo ${s.name}: khai là tai mắt của ${sp?NM(sp):"kẻ khác"}. Đuổi khỏi cung.`;m.staff.splice(m.staff.indexOf(s),1);if(sp&&sp!==m)evA(m,sp,BAL.eff.j10.evServAct)}else r=`Phạt ${s.name}: lòng -${balAb(BAL.eff.j10.loyalServAct_2)}.`}
+ else if(a==="hoi"){const f=Object.keys(s.af||{}).map(x=>servById(+x)).find(x=>x&&s.af[x.sid]>=P.hoi.af);const o2=f&&ownerOf(f);
+  if(o2&&o2!==m&&roll(nv(s,"askTalk"))){r=evA(m,o2,BAL.eff.j10.evServAct_2)?`${s.name} kể chuyện nghe từ ${f.name} bên cung ${o2.name}: chứng cứ ${balSg(BAL.eff.j10.evServAct_2)}.`:`${s.name} kể chuyện nghe từ ${f.name} bên cung ${o2.name}: không có gì sai trái, chỉ biết ${harmTxt(o2)}.`}else r=`${s.name} không biết gì mới.`;
+  if(me){const dt=allServ().find(x=>x.lover&&!(S.knowDT||[]).includes(x.sid)&&ownerOf(x)!==S);if(dt&&roll(P.hoi.dt)){S.knowDT=(S.knowDT||[]).concat([dt.sid,dt.lover]);r+=` Lại nghe đồn ${dt.name} và ${(servById(dt.lover)||{}).name} đối thực.`}}}
+ else if(a==="doi"){m.staff.splice(m.staff.indexOf(s),1);r=`Trả ${s.name} về Nội vụ phủ.`}
+ else if(a==="che"){s.loyal=cl(s.loyal+BAL.eff.j10.loyalServAct_3,0,100);pay({danh:-P.che.danh});r=`Che chở ${s.name} trước Thận Hình ti: lòng ${balSg(BAL.eff.j10.loyalServAct_3)}, Danh -${P.che.danh}.`}
+ return me?r:r?`${m.name}: ${r}`:""}
 function courtAct(a,k){const c=S.court[k];if(!c||S.dead||Q.length)return;let r="";
  if(a==="thuong"){if(S.bac<BAL.court.gift.bac)return;r=courtGive(S,k)}
  if(a==="hoi"){if(!can(2))return;spend(2);c.af.me=(c.af.me||0)+BAL.eff.j10.meCourtAct_2;if(k==="tq"&&roll(40+(c.af.me||0)/2)){discover();r=`${c.name} hé lộ một sở thích của Hoàng thượng.`}else if(k==="ksp")r="Sổ thị tẩm: "+kitNameList(liveRivals(true),x=>`${x.name} ${x.nights}`)+`; ngươi ${S.nights}.`;else r=`${c.name} chỉ cười, không nói gì.`}

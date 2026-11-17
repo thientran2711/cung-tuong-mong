@@ -23,7 +23,9 @@ function restLat(a){if(!a||a.rest!=="lat")return a;const e=typeof emoGet==="func
  a.k=BAL.restLatK;a.c={};a.o=100;a.w={suc:BAL.restLatSuc};a.l={};
  a.t=`Nằm nghỉ trong tẩm cung, uống chén trà sen.${bad?"":` Tâm trạng đang ${typeof EMO==="object"&&EMO[e.k]?EMO[e.k].toLowerCase():"bình thường"}: không đổi.`}`;
  a.x=bad?`được: bớt ${EMO[e.k]} ${Math.min(BAL.restLatEmo,e.v)} (${e.v} → ${Math.max(0,e.v-BAL.restLatEmo)})`:"";
- a.go=()=>{try{const m=S.emo;if(m&&REST_BAD.includes(m.k)&&m.v>=15){const v0=m.v;m.v=Math.max(0,m.v-BAL.restLatEmo);emoSync(S);log(`Nghỉ một lát, lòng nhẹ đi: bớt ${EMO[m.k]} ${v0-m.v}.`)}}catch(x){}};return a}
+ a.go=()=>{const d=restLatEmo(S);if(d)log(`Nghỉ một lát, lòng nhẹ đi: bớt ${EMO[d[0]]} ${d[1]}.`)};return a}
+/* ONE function (her card and an NPC's cx3:restLat, jagacts3): a bad feeling ≥ 15 eases by BAL.restLatEmo; returns [feeling, points eased] */
+function restLatEmo(p){try{const m=p.emo;if(m&&REST_BAD.includes(m.k)&&m.v>=15){const v0=m.v;m.v=Math.max(0,m.v-BAL.restLatEmo);if(p===S)emoSync(S);return[m.k,v0-m.v]}}catch(x){}return null}
 function restFix(a){return a&&a.rest==="ds"?restDs(a):a&&a.rest==="lat"?restLat(a):a}
 /* mark the two cards wherever they are dealt */
 (function(){const p0=pool;pool=function(){const A=p0.apply(this,arguments);try{for(const a of A)if(a&&a.n==="Nghỉ ngơi dưỡng sức"){a.rest="ds";restDs(a)}}catch(e){}return A}})();
