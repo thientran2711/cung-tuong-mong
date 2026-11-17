@@ -802,3 +802,4 @@
 | one-core-dup3-land delta PASS 5507baafa → re-merge on main abe056c3 → Foreman B push | review/one-core-dup3-land | B | session_01N1tNP4w2TLPYNZz2SH8hxL | PASS | 17/11 15:05Z |
 | REVIEW staff-root-fix-1 1f383795 (opus BIG; brief briefs/review-staff-root-fix-1.md) | review/staff-root-fix-1-r1 | B | session_01N1tNP6QsncpxxS2jeBjMi5 | RUNNING | 17/11 15:08Z |
 | REVIEW morechip-sil r2 of d51137ff (sonnet SMALL UI; + count math + dark-scene name) | review/morechip-sil-r2 | MAIN s33 | session_01UV1SzmEh1P3ynxAm3BMz7L | RUNNING | 17/11 15:04Z |
+| REVIEW pcard-facts r1 of 87c73de4 (sonnet SMALL UI) | review/pcard-facts-r1 | MAIN s33 | (opening) | RUNNING | 17/11 15:08Z |
