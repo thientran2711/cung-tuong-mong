@@ -65,8 +65,8 @@ function empDeckK(a){if(!a||!a.n)return"";if(EMPDECK[a.n])return EMPDECK[a.n];tr
 Object.assign(window,{empOn,empSummon,empPick,empCustom,empSeat,empSeatPick,empMet,empMemF,empMemN,empWhyTxt,empBusy});
 /* PILLOW SLANDER (two-way row 24): ONE deed for her (j8 night2 option) and an NPC on her night (j75 rivalNight), BAL.tw.g.pillow */
 function pillowO(a,s){const G=BAL.tw.g.pillow.o;return G[0]+(a.an||0)/G[1]+(s||0)*G[2]-(DG()?G[3]:0)}
-function pillowDo(a,t,o){const G=BAL.tw.g.pillow;const fx=(p,d)=>p===S?apply(d):ap(p,d);if(roll(agOdd(o))){const b=t.sung;fx(t,{sung:-G.hit});relAdd(a,t,-G.rel);return{ok:1,b,n:t.sung}}
- fx(a,DG()?{sung:-G.dg[0],danh:-G.dg[1]}:{sung:-G.fail});return{ok:0}}
+function pillowDo(a,t,o){const G=BAL.tw.g.pillow;const fx=(p,d)=>p===S?apply(d):ap(p,d);if(agTry(o)){const b=t.sung;fx(t,{sung:-G.hit});relAdd(a,t,-G.rel);return{ok:1,b,n:t.sung}}
+ if(agSoft(o)){if(a===S)log(agSoftTxt(S));return{ok:0,soft:1}}fx(a,DG()?{sung:-G.dg[0],danh:-G.dg[1]}:{sung:-G.fail});return{ok:0}}
 /* the NPC on her night: keep quiet (BAL.ag.routine, as when she keeps her schedule) or speak against the one she resents most (her spite need,
    agSpite = hostility less what she already vented), mindPick with jmind's slip; the deed's own cost/odds as hers */
 function pillowNpc(v,sc){try{const T=others(v).filter(x=>x&&x!==v&&x.alive!==false&&!(x.out&&x!==S)&&agSpite(v,x)>0&&motiveOK(v,x,"provoke").ok);if(!T.length)return null;

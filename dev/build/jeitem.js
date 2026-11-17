@@ -54,7 +54,7 @@ function eitPilfer(p,G){if(p===S)EIT_PIL=null;try{if(!p||p.dead||p.out||!G||!G.l
  const i=p.inv.indexOf(best.e);if(i>=0)p.inv.splice(i,1);best.g.E.splice(best.g.E.indexOf(best.e),1);best.g.n=Math.max(0,best.g.n-1);if(!best.g.n)best.g.lost=true;best.g.pil=1;
  hit.pilN=(hit.pilN||0)+1;const X={p,s:hit,k:best.e.k,g:best.g};if(window.agOn&&agOn()&&hit!==p.maid){const v=best.v;X.sold=()=>eitPilSell(hit,v)}/* AG-ALL-2 G6: she sells it, as the maid player does (when unnoticed, or let off with it) */
  if(p!==S){eitPilNpc(X);return X}
- const P=BAL.eit.pil;const see=cl(P.see+(S.mat||0)*P.seeMat+(S.maid&&S.maid!==hit&&(S.maid.loyal||0)>=BAL.loy.trust?P.seeMaid:0),5,95);
+ const P=BAL.eit.pil;const see=cl(P.see+eyes(S)*P.seeMat+(S.maid&&S.maid!==hit&&(S.maid.loyal||0)>=BAL.loy.trust?P.seeMaid:0),5,95);
  if(roll(see))EIT_PIL=X;else if(X.sold)X.sold();return X}catch(e){console.error("eitPilfer",e);return null}}
 function eitPilBack(X){const p=X.p||S;const e={k:X.k,from:"noivu",d:S.turn};p.inv=p.inv||[];p.inv.push(e);if(X.g){X.g.E.push(e);X.g.n++;X.g.lost=false}}
 function eitIsMaid(s){return s===S.maid}
@@ -113,11 +113,11 @@ function eitPilTake(ok){const m=srvM();const b=eitPilPick(m);if(!m||!b)return"";
    an untipped greedy eunuch, a disloyal maid) down. Weeks = 1 + two rolls against (100 − regard): good standing / a bribe → nearer 1, disliked → nearer 3. */
 function eitRegard(p){const G=BAL.eit.reG,B=BAL.stip;let g=G.base+rkOf(p)*G.rk+((p.sung||0)-30)*G.sung;
  try{const st=stipSt(p),f0=st.fault;if(st.tip!=null&&S.turn-st.tip<B.tipM)g+=G.tip;g-=stipCauses(p,false).C.length*G.cause;st.fault=f0}catch(e){}return cl(Math.round(g),0,100)}
-function eitReWk(p){const g=eitRegard(p);return 1+(roll(100-g)?1:0)+(roll(100-g)?1:0)}
+function eitReWk(p){const g=eitRegard(p);return 1+(roll(BAL.odb.jeitem.rbEitReWk-g)?1:0)+(roll(BAL.odb.jeitem.rbEitReWk-g)?1:0)}
 (function(){if(typeof tyLost!=="function")return;const l0=tyLost;tyLost=function(p,why){const r=l0.apply(this,arguments);try{if(p)p.tyNvp=wk()+eitReWk(p)}catch(e){}return r};window.tyLost=tyLost})();
 function eitReNeed(){try{return !!(S&&!S.dead&&!S.out&&typeof tyOn==="function"&&tyOn(S)&&!(typeof isSrv==="function"&&isSrv()))}catch(e){return false}}
 function eitReOdds(){const R=BAL.eit.re,r=Math.max(0,Math.min(7,rkOf(S)|0));const bribe=cl(R.base+r*R.rk+Math.round((S.sung||0)/R.sungDiv),5,95);
- const m=S.maid&&!S.maid.spyFor?S.maid:null;const alt=eitAlt(R.tip[r],r);const maid=m?cl(bribe-alt.pen+cl(Math.round(((m.loyal||0)-50)/10)+Math.floor((S.mat||0)/2),-R.maidAdj,R.maidAdj),5,95):0;
+ const m=S.maid&&!S.maid.spyFor?S.maid:null;const alt=eitAlt(R.tip[r],r);const maid=m?cl(bribe-alt.pen+cl(Math.round(((m.loyal||0)-50)/10)+Math.floor(eyes(S)/2),-R.maidAdj,R.maidAdj),5,95):0;
  const home=S.origin&&BAL.home?(BAL.home[S.origin.k]||0):0;const fam=S.origin?cl((home>0?R.famOk:R.famPoor)-(S.homeCut?R.famCut:0),5,95):0;
  return{bribe,maid,fam,tip:R.tip[r],m,suc:alt.suc}}
 /* the road without silver is priced like the silver at her rank (balance-pass rule: jstory altCost / BAL.bacTuan / BAL.altK when present,
@@ -130,8 +130,8 @@ function eitIssue(src,giver){const k=typeof earnPlainY==="function"?earnPlainY(S
  try{if(typeof kitReward==="function"&&!window.__bot)kitReward({kind:"gift",title:src==="nha"?"Nhà gửi y phục":"Nội vụ phủ cấp y phục",from:giver,items:[{n:WD_ITEMS[k].n,d:"Y phục · đã mặc",img:WD_ITEMS[k].icon,tier:WD_ITEMS[k].g|0}]})}catch(x){}
  return WD_ITEMS[k].n}
 function eitReOpts(withWait){const R=BAL.eit.re,o=eitReOdds();const O=[];const wkL=Math.max(0,(S.tyNvp!=null?S.tyNvp:wk()+eitReWk(S))-wk());
- O.push({n:"Lót tay Nội vụ phủ cấp ngay",fx:{bac:-o.tip},x:`${word(o.bribe)} · tốn: Bạc -${o.tip} · thành: có y phục mặc ngay · hỏng: mất bạc, vẫn phải đợi`,
-  go:()=>{if(roll(o.bribe)){const n=eitIssue("nvp","Nội vụ phủ");log(n?`Thái giám Nội vụ phủ nhận bạc, mang ${n} tới ngay.`:"Nội vụ phủ không còn áo đúng phẩm.")}else log(`<span class="r">Thái giám Nội vụ phủ nhận bạc rồi khất lần, bảo đợi kho.</span>`)}});
+ O.push(kitOffIf({n:"Lót tay Nội vụ phủ cấp ngay",fx:{},x:`${word(o.bribe)} · thành: có y phục mặc ngay, Bạc -${o.tip} · hỏng: không mất bạc, vẫn phải đợi`,/* review ag-all-2 r2 A5: bạc only when the thái giám takes it */
+  go:()=>{if(roll(o.bribe)){const n=eitIssue("nvp","Nội vụ phủ");if(n)apply({bac:-o.tip});log(n?`Thái giám Nội vụ phủ nhận bạc, mang ${n} tới ngay.`:"Nội vụ phủ không còn áo đúng phẩm.")}else log(`<span class="r">Thái giám Nội vụ phủ không dám nhận bạc, bảo đợi kho.</span>`)}},(S.bac||0)>=o.tip,`cần ${o.tip} bạc`));
  if(o.m)O.push({n:`Sai ${o.m.name} đến Nội vụ phủ xin`,fx:{suc:-o.suc},x:`${word(o.maid)} · tốn: Sức -${o.suc} · thành: có y phục mặc ngay · hỏng: ${o.m.name} bị mắng đuổi về, thiện cảm của ${o.m.name} với ngươi -${R.maidFail}, vẫn phải đợi`,
   go:()=>{if(roll(o.maid)){const n=eitIssue("nvp","Nội vụ phủ");log(n?`${o.m.name} khéo nói, Nội vụ phủ đưa ${n} về.`:"Nội vụ phủ không còn áo đúng phẩm.")}else{o.m.loyal=cl((o.m.loyal||0)-R.maidFail,0,100);log(`<span class="r">${o.m.name} bị thái giám Nội vụ phủ mắng đuổi về.</span> Thiện cảm của ${o.m.name} với ngươi -${R.maidFail}.`)}}});
  if(S.origin&&!S.tyFam)O.push({n:"Viết thư xin nhà gửi áo",fx:{suc:-R.famSuc},x:`${word(o.fam)} · tốn: Sức -${R.famSuc} · thành: ${R.famWk} tuần nữa nhà gửi y phục vào · hỏng: nhà không gửi được`,

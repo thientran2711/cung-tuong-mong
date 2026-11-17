@@ -68,7 +68,7 @@ function kitDecor(f){f=f||{};let r=f.__kr||(f.__kp?personRoleRank(f.__kp):null);
  const metal=(KIT_ROLES[role]||{}).metal||(rank>=4?"#d9b25f":rank>=2?"#c9ccd2":"#b08a5a");
  const sex=r.kid?"k":r.sex==="m"?"m":"f";
  return{role,realRole:r.role,rank,origin:r.origin,known,frame:KIT_DIR+frame+".webp",bg:KIT_DIR+bg+".webp",badge:badge&&KIT_DIR+badge+".webp",emb:emb&&KIT_DIR+emb+".webp",col,metal,
-  tint,embName:r.origin&&typeof ORIGINS!=="undefined"?((ORIGINS.find(o=>o.k===r.origin)||{}).n||""):"",unknownSrc:KIT_DIR+`unknown-${sex}.webp`,label:known?"":"Người lạ"}}
+  tint,embName:r.origin&&typeof ORIGINS!=="undefined"?((originByKey(r.origin)||{}).n||""):"",unknownSrc:KIT_DIR+`unknown-${sex}.webp`,label:known?"":"Người lạ"}}
 /* attach the person to every face object the constructors build */
 (function(){const W=(name,who,hint)=>{const f0=window[name];if(typeof f0!=="function")return;window[name]=function(){const r=f0.apply(this,arguments);try{if(r&&typeof r==="object"){const p=who.apply(this,arguments);if(p&&!r.__kp)r.__kp=p;if(!r.__kr)r.__kr=personRoleRank(p,hint)}}catch(e){}return r}};
  W("pv",v=>v);W("pMe",()=>S);W("pEmp",()=>S.emp,"emp");W("pTH",()=>S.thO||{kind:"th"},"thaihau");W("pMaid",()=>S.maid,"maid");W("pDoc",()=>(S.court&&S.court.ty)||null,"physician");

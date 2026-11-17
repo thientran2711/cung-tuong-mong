@@ -51,8 +51,8 @@ const cnt=(o,k)=>o.p.evaluate(k=>(S.inv||[]).filter(e=>(k?e.k===k:loOk(e)||e.lo)
 const nOk=o=>o.p.evaluate(()=>(S.inv||[]).filter(e=>loOk(e)).length);
 const fr=o=>o.p.evaluate(()=>{const f=COOPW.friend();return f?{inv:(f.inv||[]).map(e=>e.k).sort(),kids:(f.kids||[]).filter(k=>k.alive!==false).map(k=>k.name).sort(),preg:f.preg||0}:null});
 const own=o=>o.p.evaluate(()=>({inv:(S.inv||[]).map(e=>e.k).sort(),kids:(S.kids||[]).filter(k=>k.alive!==false).map(k=>k.name).sort(),preg:S.hidden?0:(S.preg||0)}));
-const act=(o,k,extra)=>o.p.evaluate(([k,extra])=>{const r0=roll,c0=caught;roll=()=>true;caught=()=>"";/* reviewer fix-r1 (as coop-b1 r1 fix 5): a loyal (trung) runner refuses dirty work on a roll: none is trung for the forced act */const SV=(S.staff||[]).filter(x=>x.tr==="trung");SV.forEach(x=>x.tr="lanh");try{const f=COOPW.friend();
-  const okk=!!(f&&ACT[k]&&ACT[k].ok(S,f));const r=okk?runAct(S,f,k,extra):"";return{okk,r:String(r).replace(/<[^>]+>/g,'').slice(0,240)}}finally{SV.forEach(x=>x.tr="trung");roll=r0;caught=c0}},[k,extra]);
+const act=(o,k,extra)=>o.p.evaluate(([k,extra])=>{const r0=roll,c0=caught;roll=()=>true;caught=()=>"";/* reviewer fix-r1 (as coop-b1 r1 fix 5): a loyal (trung) runner refuses dirty work on a roll: none is trung for the forced act *//* trait pool (owner OD 17/11 ~05:45Z, d296f3cd): loyalty is the pool quality netQ(p,"loyal"), the old .tr field is no longer read */const q0=netQ,SV=new Set(S.staff||[]);netQ=function(p,q){return q==="loyal"&&SV.has(p)?0:q0.apply(this,arguments)};try{const f=COOPW.friend();
+  const okk=!!(f&&ACT[k]&&ACT[k].ok(S,f));const r=okk?runAct(S,f,k,extra):"";return{okk,r:String(r).replace(/<[^>]+>/g,'').slice(0,240)}}finally{netQ=q0;roll=r0;caught=c0}},[k,extra]);
 async function waitFr(o,fn,arg,ms=15000){return until(o,fn,arg,ms)}
 const seenTxt=o=>o.p.evaluate(()=>JSON.stringify(Q.map(q=>q.t+' '+(q.h||'')))+((document.getElementById('modal')||{}).textContent||''));
 

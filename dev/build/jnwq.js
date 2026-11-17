@@ -187,7 +187,7 @@ function nwqClue(box,env){const B=BAL.nwq,tier=nwqTier(env),C=kg82Canvas(box,1.2
  function hint(auto){if(phase!=="play"||(dm&&dm.on))return;const w=live().filter(q=>!q.cul);if(!w.length)return;const q=w[Math.floor(Math.random()*w.length)];q.gone=true;P.cost+=auto?B.auto:B.hint;tAct=performance.now();
   P.tip={t:auto?"Ma ma khẽ nhắc: người này chưa khớp.":"Người này chưa khớp vật chứng, bỏ đi.",c:K91C.gold(),until:performance.now()+2600};if(!live().filter(q=>!q.cul).length)hb.querySelector("#nwqhint").disabled=true}
  hb.querySelector("#nwqhint").onclick=()=>hint(false);
- function end(ok){phase="judge";P.S.forEach(q=>{q.res=q.cul?"ok":q.res});if(ok)pts+=Math.max(.4,2-P.cost-P.miss*B.xaMiss)*mgPace(env,"xa",performance.now()-t0,LIM);/* review/mg-tune: time part */
+ function end(ok){phase="judge";P.S.forEach(q=>{q.res=q.cul?"ok":q.res});if(ok)pts+=Math.max(B.xaFloor,2-P.cost-P.miss*B.xaMiss)*mgPace(env,"xa",performance.now()-t0,LIM);/* review/mg-tune: time part */
   P.say=[ok?(P.miss||P.cost?"Đúng người rồi!":"Khớp vật chứng, đúng người!"):"Hết giờ, người khớp vật chứng đã hiện",ok?K91C.good():K91C.red()];hb.querySelector("#nwqhint").disabled=true;setTimeout(next,1700)}
  function accuse(q){if(phase!=="play"||q.gone)return;tAct=performance.now();if(q.cul){kg82Pluck(3,true);end(true)}else{q.gone=true;q.res="bad";P.miss++;kg82Pluck(0,false);P.tip={t:"Người này chưa khớp, thử người khác.",c:K91C.red(),until:performance.now()+2200};if(live().length<=1&&live()[0]&&live()[0].cul){P.tip={t:"Chỉ còn một người, chạm người ấy.",c:K91C.gold(),until:performance.now()+2600}}}}
  const lab=(c)=>c[0],thN=t=>t[1];

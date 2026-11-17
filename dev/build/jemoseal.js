@@ -58,6 +58,7 @@ img.kemo.kemo-live.kemo-m-wince{animation:kemoWince 2.6s ease-in-out infinite}
 img.kemo.kemo-live.kemo-m-glint{animation:kemoGlint 3.4s ease-in-out infinite}
 img.kemofx{animation:kemoFx 2.4s ease-in-out infinite}
 }
+
 @keyframes kemoSway{0%,100%{transform:rotate(-3deg);filter:drop-shadow(0 1px 1.5px #000a)}50%{transform:rotate(3deg);filter:drop-shadow(0 0 4px #ffe9a0) drop-shadow(0 1px 1.5px #000a)}}
 @keyframes kemoBreathe{0%,100%{transform:scale(1)}50%{transform:scale(1.045)}}
 @keyframes kemoDroop{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(7%) rotate(-3deg)}}

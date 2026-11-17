@@ -35,10 +35,16 @@ function knH(s){let h=2166136261;s=String(s);for(let i=0;i<s.length;i++){h^=s.ch
 function knSeed(){S.tb=S.tb||{};if(S.tb.seed==null)S.tb.seed=Math.floor(Math.random()*1e9);return S.tb.seed}
 function knHit(tag,p){return knH(knSeed()+"|"+tag)<p}
 function knMemo(){const k=agKey();if(!KN.m||KN.m.key!==k)KN.m={key:k,x:{},t:{},at:{},kh:-1};let kh=0;try{kh=agKh()}catch(e){}if(KN.m.kh!==kh){KN.m.kh=kh;KN.m.x={}}/* AG-ALL-2d: who knows is re-read each khắc (news travels khắc by khắc); the tell / keep choices (t) stay for the buổi */return KN.m}
-/* AG-ALL-2d per-khắc chain (owner OD 17/11 ~15:45Z L1638): news carried by someone (a servant, her Tai mắt, a friend sending word) reaches the master at the
-   START of the khắc after the bearer's trip: seen at khắc q → the bearer reacts the next khắc (BAL.ag.kh2.rd.see) and spends it going (… .go) → known
-   from q + see + go. Seeing it oneself (presence), one's own deed and the calendar are known at once; a friend met face to face passes on what she knows. */
-function knRelay(){try{const B=BAL.ag.kh2.rd;return agRdOn()?(B.see||0)+(B.go||0):0}catch(e){return 0}}
+/* per-khắc chain (owner OD 17/11 ~15:45Z L1638; timing overwritten by OD 17/11 ~17:55Z (3) "theo đường đi thật, gần thì khắc 2, xa thì khắc 3 trở đi"):
+   news carried by someone (a servant, her Tai mắt, a friend sending word) reaches the master after the bearer's REAL Dư đồ walk from where she saw
+   it to where the master stands (agWalk = travel(): near → known the next khắc, far → two khắc later). Seeing it oneself (presence), one's own deed
+   and the calendar are known at once; a friend met face to face passes on what she knows. */
+/* AG-ALL-2d4 (owner OD 17/11 ~17:55Z (3) "theo đường đi thật"): the delay is the bearer's REAL Dư đồ walk (agWalk = travel(): near 1 / far 2) from
+   where she saw it to where her master stands — knWalkTo. knRelay = the LONGEST such walk (BAL.walk.far; 0 = relay off), used only to bound the
+   buổi-end carry. */
+function knRelay(){try{const B=BAL.ag.kh2.rd;return agRdOn()&&((B.see||0)+(B.go||0))?Math.max(BAL.walk.near||1,BAL.walk.far||1):0}catch(e){return 0}}
+function knWalkTo(from,id,kh){if(!knRelay())return 0;let to=null;try{to=knAt(id,Math.max(0,Math.min(kh,J95.KH-1)))}catch(e){}return agWalk(from,to||"home")}
+function knSrvFrom(s,how,h){if(how==="listen"){const k=s&&s.sid!=null?knSlotK(s):"";const pl=String(k||"").split(":")[0];if(pl&&pl!=="listen")return pl}return h.k}
 function knFirst(id,h,w){for(let kh=w[0];kh<=w[1];kh++)if(knAt(id,kh)===h.k)return kh;return -1}
 function knId(x){return x===S?"me":x&&x.sid!=null?"s"+x.sid:x&&x.id!=null?"v"+x.id:""}
 /* a servant's key: her sid, or "cm<master>" for a confidant maid (S.maid / v.maid carry no sid) */
@@ -46,7 +52,7 @@ function knSid(s,m){return s.sid!=null?String(s.sid):"cm"+knId(m)}
 /* ---------- a happening: id, window, people ---------- */
 function knHid(h){let b="";try{b=bkey()}catch(e){}return b+":"+h.k+":"+h.id+":"+(h.x&&h.x.pid||"")}
 function knPend(h){try{return h.x&&h.x.pid&&typeof haPend==="function"?haPend(h.x):null}catch(e){return null}}
-function knWin(h){const kh=agKh(),KH=J95.KH;const p=knPend(h);if(p)return (h.w0=[p.kh,p.k1!=null?p.k1:p.kh]);
+function knWin(h){const kh=agKh(),KH=J95.KH;const p=knPend(h);if(p)return (h.w0=[p.kh,(p.k1!=null?p.k1:p.kh)+(p.sp>0?p.sp:0)]);/* runs on into the next buổi: its real end (day-khắc audit) */
  if(h.id==="emp"){try{const R=agRec();if(R&&R.P.emp){let a=-1,b=-1;for(let k=kh;k<KH;k++)if(R.P.emp[k]&&R.P.emp[k][0]==="vuon"){if(a<0)a=k;b=k}if(a>=0)return (h.w0=[h.w0?Math.min(h.w0[0],a):a,b])}}catch(e){}}
  /* AG-ALL-2d2: a deed that has landed (no pending row any more) / the Emperor gone from the garden keeps the window it had: it is OVER, not "now" */
  if(h.w0&&!knFixed(h))return h.w0;
@@ -81,13 +87,15 @@ function knFor(x,h,noFriend){if(!x)return null;const hid=knHid(h);const M=knMemo
  else if(knThere(id,h,w))r={by:"here",how:"here"};
  else{const wh=knWho(h);if(wh[0]===id)r={by:"here",how:"self"};}/* the doer knows her own deed */
  const now=agKh(),D=knRelay();
- if(!r){for(const s of knStaff(x)){const how=knSrvKnows(s,x,h,w,hid);if(!how)continue;const q=how==="here"&&s.sid!=null?knFirst("s"+s.sid,h,w):w[0];if(Math.max(q,w[0])+D>now){KN.stat.wait=(KN.stat.wait||0)+1;continue}/* still on her way to tell */if(knTell(s,x,hid)==="tell"){r={by:"s"+knSid(s,x),how,s};break}}}
- if(!r&&w[0]+D<=now){let o=0;try{o=oSee(x,false)*knB().eye/100}catch(e){}if(knHit("e"+id+"|"+hid,o))r=knEye(x,h,hid)}
+ if(!r){for(const s of knStaff(x)){const how=knSrvKnows(s,x,h,w,hid);if(!how)continue;const q=Math.max(how==="here"&&s.sid!=null?knFirst("s"+s.sid,h,w):w[0],w[0]);
+   /* the confidant maid walks with her mistress (one khắc to step aside and tell); any other servant walks from where she saw / heard it */
+   const at=q+(s.sid==null?Math.min(1,D):knWalkTo(knSrvFrom(s,how,h),id,q));if(at>now){KN.stat.wait=(KN.stat.wait||0)+1;continue}/* still on her way to tell */if(knTell(s,x,hid)==="tell"){r={by:"s"+knSid(s,x),how,s,at};break}}}
+ if(!r){let o=0;try{o=oSee(x,false)*knB().eye/100}catch(e){}if(knHit("e"+id+"|"+hid,o)){const at=w[0]+knWalkTo(h.k,id,w[0]);/* her Tai mắt / a passer-by walks from the place to her */if(at<=now){r=knEye(x,h,hid);if(r)r.at=at}}}
  if(!r&&!noFriend){const F=knB().friend;for(const v of liveRivals(true)){if(v===x||!v.alive||v.out)continue;const a=aff(v,x);if(a<F)continue;/* the news travels when they meet (same place this khắc), or a close friend sends word (aff ≥ close) */const meet=(()=>{const nw=agKh();return knAt(id,nw)!=null&&knAt("v"+v.id,nw)===knAt(id,nw)})();if(a<knB().close&&!meet)continue;const k=knFor(v,h,true);if(!k||k.by==="le"||k.how==="self")continue;
-   if(!meet&&D>0){const ka=M.at["v"+v.id+"|"+hid+"|n"];if(ka==null||ka+BAL.ag.kh2.rd.go>now)continue}/* sending word: one trip after she knew (AG-ALL-2d) */
+   let fa=now;if(!meet&&D>0){const ka=M.at["v"+v.id+"|"+hid+"|n"];if(ka==null)continue;fa=ka+knWalkTo(knAt("v"+v.id,ka),id,ka);if(fa>now)continue}/* sending word: her messenger's real walk from where she was when she knew to x (AG-ALL-2d4) */
    /* she passes it on or keeps it to herself: her choice by how much she likes x (the servant's rule, thiện cảm for lòng) */
    const kk="f"+v.id+">"+id+"|"+hid;if(M.t[kk]==null){const T=knB().tell,lo=cl(a,0,100)/100;let c="keep";try{c=mindPick([["tell",Math.max(.01,lo*T.tell)],["keep",Math.max(.01,(1-lo)*T.keep)]],v)||"keep"}catch(e){}M.t[kk]=c}
-   if(M.t[kk]==="tell"){r={by:"v"+v.id,how:"friend",v};break}}}
+   if(M.t[kk]==="tell"){r={by:"v"+v.id,how:"friend",v,at:fa};break}}}
  if(r&&M.at[mk]==null)M.at[mk]=now;/* the first khắc she knew it (a friend's word travels from then) */
  return M.x[mk]=r}
 /* ---------- the informer's line (jvoice: address by speaker and listener, mood by lòng / thiện cảm) ---------- */
@@ -115,7 +123,7 @@ function knLine(r,h){const W=agPlaceTxt(h.k),what=knWhat(h);const fill=t=>String
   const P=KN_POOL[r.how==="self"?"here":r.by]||KN_POOL.mat;let t=fill(kLine("tinbao:"+r.by,P,{m:"cool"}));
   if(r.e){const o=ownerOf(r.e);t=t.replace(/\{N\}/g,r.e.name).replace(/\{P\}/g,o?(o===S?"ta":NM(o)):"khác")}return t}catch(e){return `Ở ${W} ${what}.`}}
 /* ---------- her TIN BÁO list ---------- */
-function knTb(){let b="";try{b=bkey()}catch(e){}S.tb=S.tb||{};if(S.tb.b!==b){S.tb.b=b;S.tb.K={}}if(!S.tb.R||S.tb.d!==wk()){S.tb.d=wk();S.tb.R=[]}S.tb.K=S.tb.K||{};return S.tb}
+function knTb(){let b="";try{b=bkey()}catch(e){}S.tb=S.tb||{};if(S.tb.b!==b){S.tb.b=b;S.tb.K={};knCarryIn(S.tb)}else if(S.tb.W&&S.tb.W.length)knCarryTick(S.tb);if(!S.tb.R||S.tb.d!==wk()){S.tb.d=wk();S.tb.R=[]}S.tb.K=S.tb.K||{};return S.tb}
 function knRaw(){return KN.raw||[]}
 function knScan(L){if(!S||S.dead||S.out)return[];try{knFlush()}catch(e){agErr("knFlush",e)}const T=knTb();KN.stat.scan++;const out=[];const now=agKh();
  for(const h of L){if(h.done)continue;const hid=knHid(h);const w=knWin(h);const ended=w[1]<now&&!knFixed(h)?1:0;/* AG-ALL-2d2: an ENDED happening still reaches her (late news down the khắc chain), flagged ended */
@@ -130,6 +138,24 @@ function knEnd(it){if(!it||it.ended)return it;it.ended=1;try{const e=kLine("tinb
 function tinBaoList(){if(!knOn()||!S||S.dead||S.out)return[];let L=[];try{L=adHapNow()}catch(e){}const T=knTb();const now=agKh();
  for(const it of Object.values(T.K))if(it.k1<now&&it.k!=="fest"&&it.k!=="cold"&&!it.ended)knEnd(it);
  const A=Object.values(T.K).filter(it=>it.k1>=now||it.ended||it.k==="fest"||it.k==="cold");const R=(T.R||[]).filter(it=>it.b===(S.buoi||0));return A.concat(R).map(x=>Object.assign({},x))}
+/* AG-ALL-2d3 (design gap §23.5): a deed in the LAST khắc of a buổi reaches her only after the buổi (the khắc chain: seen → the bearer walks →
+   known, knRelay khắc) and the hap list is per buổi, so that news was lost. At the buổi turn (before it turns: the records of the ending buổi are
+   still there) every happening of the ending buổi she has not learned yet is asked once more with THE SAME rule (knFor) at the khắc its news can
+   arrive (last khắc of the buổi + knRelay); what would reach her is carried into the next buổi as an ENDED TIN BÁO item (knEnd: "vừa …" + "đã
+   xong"), with the same informer. Hidden news stays hidden; fixed happenings (lễ) are known anyway; deeds that run on into the next buổi are in
+   its list already (agSpan carry). */
+function knCarryOut(){if(!knOn()||!S||S.dead||S.out)return 0;const D=knRelay();if(!D)return 0;let L=[];try{adHapNow();L=KN.raw||[]}catch(e){return 0}
+ const T=knTb();const KH=J95.KH,real=agKh;const C=[];
+ for(const h of L){if(!h||h.done||knFixed(h))continue;const hid=knHid(h);if(T.K[hid]||C.some(x=>x.id===hid+":c"))continue;const w=knWin(h);if(!w||w[1]+D<KH||w[1]>=KH)continue;/* runs on: in the next buổi list already *//* its news could not come inside this buổi */
+  let r=null;agKh=()=>Math.max(real(),w[1])+D;try{r=knFor(S,h)}catch(e){agErr("knCarry",e)}finally{agKh=real}
+  if(!r)continue;/* AG-ALL-2d4: the same walk — it reaches her in the next buổi at khắc (arrival − KH): a far informer comes later than a near one */
+  const due=Math.max(0,(r.at!=null?r.at:w[1]+D)-KH);const it={id:hid+":c",k:h.id,place:h.k,k0:-1,k1:-1,/* its window lay in the buổi before: over before khắc 0 of this one */who:knWho(h),line:knLine(r,h),by:r.by,inf:knInf(r),infName:knInfName(r),seen:0,ended:0,carry:1,due};C.push(it)}
+ S.tb.C=C;KN.stat.carry=(KN.stat.carry||0)+C.length;return C.length}
+function knCarryIn(T){T.W=(T.C||[]).slice();T.C=[];knCarryTick(T)}
+/* a carried item lands when its bearer arrives (its khắc in this buổi), not all at the buổi's start */
+function knCarryTick(T){if(!T.W||!T.W.length)return;let now=0;try{now=agKh()}catch(e){}const keep=[];
+ for(const it of T.W){if((it.due||0)>now){keep.push(it);continue}delete it.due;it.b=S.buoi||0;knEnd(it);T.K[it.id]=it;for(const f of KN.cb)try{f(Object.assign({},it))}catch(e){console.error("tinBao cb",e)}}T.W=keep}
+(function(){const n0=nextBuoi;nextBuoi=function(){try{knCarryOut()}catch(e){agErr("knCarry",e)}return n0.apply(this,arguments)}})();
 function tinBaoNew(){return tinBaoList().filter(x=>!x.seen).length}
 function tinBaoOn(fn){if(typeof fn==="function")KN.cb.push(fn);return ()=>{const i=KN.cb.indexOf(fn);if(i>=0)KN.cb.splice(i,1)}}
 function tinBaoSeen(id){const T=knTb();for(const it of Object.values(T.K).concat(T.R||[]))if(id==null||it.id===id)it.seen=1}
@@ -156,14 +182,14 @@ function knHearRun(v,t,pd){const z=agZ();KN.stat.hear++;if(!t)return"";const tid
  const e=(z.log||[]).find(x=>x.id===tid&&x.w===wk()&&x.b===(S.buoi||0)&&x.pl===pd.pl&&x.k!=="know:hear");if(!e)return"";/* she came too late: nothing there */
  /* her khắc there is taken by this reaction (part 2b agSeeNpc reads it: no second reaction of hers to the same deed) */
  try{const R=agRec();const row=R&&R.P["v"+v.id];if(row&&row[pd.kh])row[pd.kh]=[pd.pl,"ag_see:hear",e.id,"nghe lén"]}catch(x){}
- const harm=knHarmK(e.k);if(roll(agOdd(knHearO(v)))){KN.stat.hearOk++;if(harm)evA(v,t,BAL.ag.ev.one);try{noteAdd(t.id,`${v.name} để ý chuyện nàng làm ở ${agPlaceTxt(pd.pl)}`)}catch(x){}return t===S?`${v.name} nghe lén chuyện ngươi làm ở ${agPlaceTxt(pd.pl)}`:""}
- affAdd(t,v,-BAL.ag.wit.caught);return t===S?`Ngươi bắt gặp ${v.name} đứng nghe lén`:""}
+ const harm=knHarmK(e.k),ho=knHearO(v);if(agTry(ho)){KN.stat.hearOk++;if(harm)evA(v,t,BAL.ag.ev.one);try{noteAdd(t.id,`${v.name} để ý chuyện nàng làm ở ${agPlaceTxt(pd.pl)}`)}catch(x){}return t===S?`${v.name} nghe lén chuyện ngươi làm ở ${agPlaceTxt(pd.pl)}`:""}
+ if(agSoft(ho))return"";affAdd(t,v,-BAL.ag.wit.caught);return t===S?`Ngươi bắt gặp ${v.name} đứng nghe lén`:""}
 /* the news reaches them after the buổi's deciders have chosen (the deeds exist only then): a consort still free this buổi (she kept her schedule)
    weighs going to listen against keeping it — the owner's option 1 (OD 17/11 ~15:00Z): re-decide when news comes, not every khắc */
 function knReact(){const key=agKey();if(KN.rk===key)return;KN.rk=key;if(!knDeedHaps().length)return;const t0=performance.now();
  for(const v of liveRivals(true)){if(!v.alive||v.out||v.confined)continue;try{if(agUsed(v))continue;let any=false;for(const h of knDeedHaps())if(knFor(v,h)){any=true;break}if(!any)continue;
   const N=agNeedsC(v);const O=knOpts(v,N);if(!O.length)continue;const c=mindPick([[null,BAL.ag.routine]].concat(O.map(o=>[o,o.u])),v);if(!c)continue;
-  const sl=agSlot(v,c.at,c.t);if(!sl)continue;agPlan(v,c,N,sl[0],sl[1]);KN.stat.react=(KN.stat.react||0)+1}catch(e){agErr("knReact1",e)}}
+  const sl=agSlot(v,c.at,c.t,c);if(!sl)continue;agPlan(v,c,N,sl[0],sl[1]);KN.stat.react=(KN.stat.react||0)+1}catch(e){agErr("knReact1",e)}}
  if(AG.now){AG.now=0;setTimeout(()=>{try{agSyncNow()}catch(e){}},0)}KN.ms=(KN.ms||0)+performance.now()-t0}
 /* ---------- §4 servants' own errands ---------- */
 function knDanger(m){const M=knMemo();M.dg=M.dg||{};const k=knId(m);if(M.dg[k]!=null)return M.dg[k];let d=0;try{for(const v of liveRivals(true))if(v!==m&&v.alive)d=Math.max(d,danger(v,m))}catch(e){}return M.dg[k]=d}
@@ -269,7 +295,7 @@ function knEye(x,h,hid){const doer=knWho(h)[0],pl=h.k,nw=agKh();const at=s=>{con
  const own=knStaff(x);const A=knAllSrv().filter(s=>!own.includes(s)&&ownerOf(s)!==x);const B=A.filter(at);const e=knPickH(B.length?B:A,"ep"+knId(x)+"|"+hid);
  return e?{by:"pass",how:"pass",e}:null}
 function knPal(o){try{return palaceOf(o)}catch(e){return null}}
-function knLoyK(p,s){return p===S&&s&&s.kn?cl(s.loyal||0,0,100):null}
+function knLoyK(p,s){if(!(p===S&&s&&s.kn))return null;const o=ownerOf(s);return o===S||s===S.maid?cl(s.loyal||0,0,100):tmOdds(S,s)}/* a Tai mắt's firmness for HER = her will (tmOdds), never lòng to her own master (review ag-all-2 r2 C2) */
 function taiMatList(p){p=p||S;if(!p)return[];const N=p===S&&S.tmN||{};return taiMatRaw(p).map(s=>{const o=ownerOf(s);return{id:"s"+s.sid,sid:s.sid,name:s.name,role:s.role,
  placedAt:o?knPal(o):null,placedWith:o?knId(o):null,placedName:o?o.name:"",loyaltyKnown:knLoyK(p,s),reports:N[s.sid]||0,
  /* the tinbao-ui adapter shape (main s34 / tinbao worker): p, place, loy, loyalWord, sold */
@@ -310,7 +336,28 @@ function tmWant(a,s){const W=tmB().want,o=ownerOf(s);if(!o)return["",0];const L=
  let foe=false;try{foe=aff(a,o)<0||aff(o,a)<0}catch(e){}if(s.grudge&&foe)L.push(["revenge",W.revenge]);
  return L.sort((x,y)=>y[1]-x[1])[0]||["",0]}
 const tmOdds0=typeof bribeOdds==="function"?bribeOdds:null;
-function tmOdds(a,s){const b=tmOdds0?tmOdds0(a,s):odA(a,35);if(!tmOn())return b;const w=tmWant(a,s)[1];return cl(Math.round((b+w)*((s.loyal||0)>=BAL.loy.top?tmB().loyalMul:1)),tmB().lo,tmB().hi)}
+/* 2f3: tmOdds = the ONE core (btTerms "tm": nết base ± lòng band ± chữ trọng (static + what her master offended / honoured) ± today's mood) + what the
+   recruiter can give (tmWant) + her Tâm cơ; odA (her act context: weak body, luck lotB, spy knowledge) then agOdd (BAL.odds.lo..hi, never 0 / 100) */
+function tmOdds(a,s){if(!tmOn())return tmOdds0?tmOdds0(a,s):odA(a,35);const B=btB();const raw=btRaw(s,ownerOf(s),"tm")+tmWant(a,s)[1]+Math.round(((a&&a.tamco||0)-B.tamcoMid)/B.tamcoDiv);return agOdd(odA(a,raw))}
+/* ===== AG-ALL-2f3 — ONE betray / sell / recruit odds core (owner OD 17/11 ~17:20Z verbatim in dev/OWNER_DECISIONS.md; numbers BAL.ag.bt) =====
+   terms (each [label, points]): nết base (qv codes: tham / lanh / chuyen / nhat / trung, else _) · trait words (Thanh liêm) · lòng band to the master ·
+   each virtue the person holds (static lean: Trung / Nghĩa … make betrayal harder) · each virtue the master OFFENDED (+off × seen deeds, up to offMax:
+   a LOYAL person may still sell / betray) or HONOURED (−hon …) — jmind mindTr record · today's mood toward the master (giận +, vừa được thưởng −).
+   kind "tm" (become someone's Tai mắt: bribe, recruit, threat, betray an order) / "sell" (sell the master's news; raw ≤ 0 = does not offer). */
+function btB(){return BAL.ag.bt}
+function btTerms(s,m,kind){const B=btB(),K=B[kind];const F=[];if(!s||!K)return F;
+ F.push(["nết",qv(K.base,s,K.base._)]);
+ try{for(const t of traitsOf(s)){const d=K.tr&&K.tr[t];if(d)F.push([t,d])}}catch(e){}
+ const lo=cl(s.loyal||0,0,100);const band=K.loy.find(b=>lo<b[0]);if(band&&band[1])F.push(["lòng "+lo,band[1]]);
+ let tr=[];try{tr=trongOf(s)}catch(e){}for(const v of tr){const d=K.v[v]||0;if(d)F.push(["trọng "+v,d])}
+ if(m&&typeof mindTr==="function"){const T=mindTr(s,m);for(const [v,n] of T.off)F.push(["chủ phạm chữ "+v,Math.round(B.off*Math.min(B.offMax,n))]);for(const [v,n] of T.hon)F.push(["chủ giữ chữ "+v,-Math.round(B.hon*Math.min(B.honMax,n))])}
+ const md=m&&typeof mindMood==="function"?mindMood(s,m):"";if(md&&B.mood[md])F.push([md==="gian"?"đang giận chủ":"vừa được chủ thưởng",B.mood[md]]);
+ return F}
+function btRaw(s,m,kind){return btTerms(s,m,kind).reduce((a,f)=>a+f[1],0)}
+function btOdds(s,m,kind){return agOdd(btRaw(s,m,kind))}
+/* a failed approach: the servant SHE (or the NPC) sent with the offer is afraid of being dragged in → lòng −fear (more for a timid one); 17:00Z */
+function tmFear(p,quietLog){try{const sv=typeof bestSent==="function"?bestSent(p):null;if(!sv)return"";const B=btB();const d=Math.round(B.fear*(netIs(sv,"timid")?B.fearTimid:1));
+ sv.loyal=cl((sv.loyal||0)-d,0,100);KN.stat.tmFear=(KN.stat.tmFear||0)+1;const r=`${sv.name} đi đưa lời, sợ bị liên lụy: lòng ${balSg(-d)}`;if(p===S&&!quiet&&!quietLog)try{log(r+".")}catch(e){}return r}catch(e){return""}}
 if(tmOdds0)bribeOdds=tmOdds;
 /* who could be asked: a servant of another living palace, nobody's spy yet */
 function tmCands(p){return tmSrv().filter(/* 2f2: live list */s=>{if(s.spyFor!=null)return false;const o=ownerOf(s);return !!o&&o!==p&&(o===S||(o.alive&&!o.out))})}
@@ -318,7 +365,8 @@ function tmRefuse(p,s){const o=ownerOf(s);if(!o||(s.loyal||0)<BAL.loy.mid||!roll
  if(o===S&&p!==S)knBao(s,S,`${p.name} vừa sai người tới mua chuộc {xung} làm tai mắt, {xung} không nhận`,knPal(p));return"tell"}
 /* one try: the recruiter turns to the most promising person (by the same odds); that person decides */
 function tmTry(p,why){const C=tmCands(p);if(!C.length)return null;let best=null,bo=-1;for(const s of C){const o=tmOdds(p,s);if(o>bo){bo=o;best=s}}
- KN.stat.tmTry=(KN.stat.tmTry||0)+1;if(roll(agOdd(bo))){best.spyFor=key(p);KN.stat.tmOk=(KN.stat.tmOk||0)+1;if(p===S&&!quiet)try{log(`${best.name} (người hầu cung ${NM(ownerOf(best))}) nhận lời làm tai mắt cho ngươi.`)}catch(e){}return best}
+ KN.stat.tmTry=(KN.stat.tmTry||0)+1;if(agTry(bo)){best.spyFor=key(p);KN.stat.tmOk=(KN.stat.tmOk||0)+1;if(p===S&&!quiet)try{log(`${best.name} (người hầu cung ${NM(ownerOf(best))}) nhận lời làm tai mắt cho ngươi.`)}catch(e){}return best}
+ if(agSoft(bo)){if(p===S&&!quiet)try{log(agSoftTxt(S))}catch(e){}return null}
  const t=tmRefuse(p,best);if(p===S&&!quiet)try{log(`Ngỏ ý với ${best.name} (người hầu cung ${NM(ownerOf(best))}), nàng không nhận${t?" và còn bẩm lại với chủ":""}.`)}catch(e){}return null}
 function tmLose(p,n){const L=taiMatRaw(p).sort((a,b)=>tmOdds(p,a)-tmOdds(p,b));for(let i=0;i<n&&i<L.length;i++)L[i].spyFor=null}
 function tmSync(p){if(!p||!tmOn())return;const c=Math.min(tmB().cap,taiMatRaw(p).length);
@@ -344,17 +392,17 @@ function matN(p){return p?taiMatRaw(p).length:0}
 function tmWho(s){const o=ownerOf(s);return `${s.name} (${s.role==="eunuch"?"thái giám":"cung nữ"} cung ${o?NM(o):"khác"})`}
 function tmInstall(p){if(!p||typeof p!=="object")return p;const d=Object.getOwnPropertyDescriptor(p,"mat");if(d&&d.get)return p;const n=p===S&&d?Math.round(+d.value||0):0;if(d)delete p.mat;
  Object.defineProperty(p,"mat",{get(){return window.__tmOff?(this.__matT||0):matN(this)},set(v){if(window.__tmOff)Object.defineProperty(this,"__matT",{value:v,writable:true,configurable:true,enumerable:false});else KN.stat.tmDrop=(KN.stat.tmDrop||0)+1},enumerable:false,configurable:true});
- if(n>0){const h=matN(S);const got=tmPlace(S,n);KN.stat.tmMig={want:n,had:h,got}}return p}
+ if(n>0){const h=matN(S);const got=tmPlace(S,n,tmB().vol.min);KN.stat.tmMig={want:n,had:h,got}}return p}
 /* set p's real Tai mắt to n where real people exist (most willing first; extra ones let go, r2 tmLose) → the real count. Used by the old-save
    migration (people who had already accepted in that save) and by tests to stage a count; never by an act (acts go through tmOdds) */
-function tmPlace(p,n){n=Math.max(0,Math.round(+n||0));let have=matN(p);if(have>n){tmLose(p,have-n);return matN(p)}
- const L=tmCands(p).sort((x,y)=>tmOdds(p,y)-tmOdds(p,x)||x.sid-y.sid);const k=key(p);for(const s of L){if(have>=n)break;s.spyFor=k;have++}return have}
+function tmPlace(p,n,min){n=Math.max(0,Math.round(+n||0));let have=matN(p);if(have>n){tmLose(p,have-n);return matN(p)}
+ const L=tmCands(p).filter(s=>min==null||tmOdds(p,s)>=min)/* old save: only people willing by their own odds (OD ~16:50Z; review ag-all-2 r2 C3) */.sort((x,y)=>tmOdds(p,y)-tmOdds(p,x)||x.sid-y.sid);const k=key(p);for(const s of L){if(have>=n)break;s.spyFor=k;have++}return have}
 /* the most willing real person for an approach (deterministic: a card re-picks the same one at run time) */
 function tmBest(p){let b=null,bo=-1;for(const s of tmCands(p)){const o=tmOdds(p,s);if(o>bo||(o===bo&&s.sid<b.sid)){b=s;bo=o}}return b}
 function tmTake(p,s){if(!p||!s)return"";s.spyFor=key(p);KN.stat.tmOk=(KN.stat.tmOk||0)+1;const r=`${tmWho(s)} nhận làm tai mắt cho ${p===S?"ngươi":p.name}.`;if(p===S&&!quiet)try{log(r)}catch(e){}return r}
-function tmNo(p,s,t){t=t==null?tmRefuse(p,s):t;const r=`${tmWho(s)} không nhận làm tai mắt cho ${p===S?"ngươi":p.name}${t?", còn bẩm lại với chủ":""}.`;if(p===S&&!quiet)try{log(r)}catch(e){}return r}
+function tmNo(p,s,t){t=t==null?tmRefuse(p,s):t;const f=tmFear(p,1);const r=`${tmWho(s)} không nhận làm tai mắt cho ${p===S?"ngươi":p.name}${t?", còn bẩm lại với chủ":""}.${f?" "+f+".":""}`;if(p===S&&!quiet)try{log(r)}catch(e){}return r}
 /* one approach to a given person (her odds = tmOdds, + bonus for a threat) → the person decides */
-function tmAsk(p,s,bonus){KN.stat.tmTry=(KN.stat.tmTry||0)+1;return roll(cl(tmOdds(p,s)+(bonus||0),tmB().lo,tmB().hi))?tmTake(p,s):(tmNo(p,s),"")}
+function tmAsk(p,s,bonus){KN.stat.tmTry=(KN.stat.tmTry||0)+1;const o=tmOdds(p,s)+(bonus||0);if(agTry(o))return tmTake(p,s);/* OD ~17:35Z: a capped near-sure miss is soft (no report, no fear) */if(agSoft(o)){if(p===S&&!quiet)try{log(agSoftTxt(S))}catch(e){}return""}tmNo(p,s);return""}
 /* the j7 volunteer: a real servant of another palace whose own odds for her reach vol.min */
 function tmVol(){const s=tmBest(S);return s&&tmOdds(S,s)>=tmB().vol.min?s:null}
 /* ================= AG-ALL-2g — INFO SELLERS (owner OD 17/11 ~16:50Z (2), verbatim in dev/OWNER_DECISIONS.md: "Có những người bán tin ... nô tài có một
@@ -373,7 +421,9 @@ function tmVol(){const s=tmBest(S);return s&&tmOdds(S,s)>=tmB().vol.min?s:null}
 function knSB(){return BAL.ag.sell}
 function knSellVal(k){return knSB().val[String(k).split(":")[0]]||0}
 function knSellPrice(val,s){const P=knSB();return Math.max(1,Math.round(P.price*val/100*(1+qv(P.ask,s,0))))}
-function knSellW(s){const P=knSB();const lo=cl(s.loyal||0,0,100);if(lo>=P.loy)return 0;try{if(traitsOf(s).some(t=>P.never.includes(t)))return 0}catch(e){}/* Thanh liêm: "không bán tin" (BAL.net.T) */return Math.max(0,qv(P.q,s,0))*(1-lo/100)}
+/* 2f3: the seller's will = the ONE core btRaw(s, her master, "sell") (nết + lòng band + chữ trọng incl. what her master offended + mood); ≤ 0 = never
+   offers (a loyal, unoffended person; Thanh liêm) — by the numbers in BAL.ag.bt.sell, no separate filter */
+function knSellW(s){return Math.max(0,btRaw(s,ownerOf(s),"sell"))/100}
 /* the khắc stamp: a refusal holds for this khắc only */
 function knKhK(){let b="";try{b=agKey()}catch(e){}return b+":"+agKh()}
 function knNo(){const T=knTb();if(!T.no||T.no.k!==knKhK())T.no={k:knKhK(),ids:{}};return T.no.ids}
@@ -433,4 +483,4 @@ function knSellArc(A,ok){if(!ok||!knOn())return"";const r=knSellPick(S);if(!r)re
  if(typeof j95sync==="function"){const s0=j95sync;j95sync=function(){const r=s0.apply(this,arguments);try{knSellTick()}catch(e){agErr("knSellTick",e)}return r}}
  try{if(typeof GB67==="object"&&GB67.spy&&GB67.spy.o){for(const i of [0,1]){const op=GB67.spy.o[i];if(!op)continue;const g0=op.go;op.go=function(A,ok){let a="";try{a=g0?g0.apply(this,arguments)||"":""}catch(e){}return [a,knSellArc(A,ok)].filter(Boolean).join(" ")}}}}catch(e){}
 })();
-Object.assign(window,{knSellNews,knSellPick,knSellGive,knSellCard,knSellNpcBuy,knSellTick,knSellPrice,knSellArc});
+Object.assign(window,{btTerms,btRaw,btOdds,tmFear,knSellNews,knSellPick,knSellGive,knSellCard,knSellNpcBuy,knSellTick,knSellPrice,knSellArc});

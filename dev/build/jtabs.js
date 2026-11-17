@@ -18,8 +18,11 @@ function ktEsc(s){return String(s==null?"":s).replace(/[&<>"]/g,c=>({"&":"&amp;"
 const KTSUB={};
 function ktSubGet(key,list){let v=KTSUB[key];if(v==null){try{v=localStorage.getItem("ctm-ktsub-"+key)}catch(e){}}
  if(!list.some(x=>x.k===v)){const d=list.find(x=>x.doable>0)||list[0];v=d?d.k:""}return v}
-function kitSubTabs(key,list){const cur=ktSubGet(key,list);
- return{cur,html:`<div class="pctabs kcattabs ktsub" role="tablist" data-ktsub="${key}">${kitTabRowHTML(list.map(x=>({k:x.k,label:x.label,n:x.total!=null?`${x.doable}/${x.total}`:x.n,tip:x.total!=null?`làm được ${x.doable} trên ${x.total} việc`:""})),cur,`data-ktsv`)}</div>`}}
+/* kitSubTabs(key,list,info): the kit tab bar. `info` = the ONE trailing info slot at the RIGHT END of the bar (owner 17/11 07:55Z: no info band under the tabs; "ⓘ Cách học" etc. live here) */
+function kitSubTabs(key,list,info){const cur=ktSubGet(key,list);
+ return{cur,html:`<div class="pctabs kcattabs ktsub" role="tablist" data-ktsub="${key}">${kitTabRowHTML(list.map(x=>({k:x.k,label:x.label,n:x.total!=null?`${x.doable}/${x.total}`:x.n,tip:x.total!=null?`làm được ${x.doable} trên ${x.total} việc`:""})),cur,`data-ktsv`)}${info?`<span class="pctinfo">${info}</span>`:""}</div>`}}
+/* kitSecHead(left,right): a section header row (title/ⓘ left, chips + ⓘ right) — info that belongs to ONE section sits in its header, not in a band under the tabs */
+function kitSecHead(left,right){return `<div class="ksech"><span class="ksechl">${left||""}</span><span class="ksechr">${right||""}</span></div>`}
 document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-ktsv]");if(!b)return;const row=b.closest("[data-ktsub]");if(!row)return;e.stopPropagation();
  const key=row.dataset.ktsub;KTSUB[key]=b.dataset.ktsv;try{localStorage.setItem("ctm-ktsub-"+key,b.dataset.ktsv)}catch(x){}const P=$("panel");if(P)P.scrollTop=0;renderPanel()},true);
 /* ---- parts (kitSteps, kitBar, kitSkillCard, kitEmpty live in the kit: j79 §21) ---- */
@@ -30,12 +33,12 @@ const ktTotal=h=>(String(h).match(/<button[^>]*data-(learn|vlearn|charity|wkprac
 /* ---------- TÀI NGHỆ ---------- */
 function ktArtSkills(){const t2=whyTime(2);const out=[];
  for(const V of (typeof VIR!=="undefined"?VIR:[])){const l=S.vir[V.k],cost=virCost(l);const B=l>=5?[]:[
-   pbtn(`data-vlearn="${V.k}" data-mode="self"`,"Tự học",`Chắc chắn · tốn: 2 khắc, Sức -15 · chơi một trò nhỏ · thành: tiến bộ một hai phần`,t2||(S.suc<25?"Sức dưới 25":"")),
+   pbtn(`data-vlearn="${V.k}" data-mode="self"`,"Tự học",`Chắc chắn · tốn: 2 khắc, Sức -15 · chơi một trò nhỏ · thành: tiến bộ một hai phần`,t2||(S.suc<BAL.sucNeed.self?"Sức dưới "+BAL.sucNeed.self:"")),
    pbtn(`data-vlearn="${V.k}" data-mode="master"`,"Học với ma ma",`Chắc chắn · tốn: 2 khắc, Bạc -${cost}, Sức -10 · chơi một trò nhỏ · thành: tiến bộ hai ba phần`,t2||(S.bac<cost?`thiếu bạc (cần ${cost})`:""))];
   if(V.k==="hanh")B.push(pbtn(`data-charity="1"`,"Phát bạc cứu giúp cung nhân nghèo",`Chắc chắn · tốn: ${BAL.charity.khac} khắc, Bạc -${BAL.charity.bac} · thành: Đức +${BAL.charity.duc}, Danh +${BAL.charity.danh} (mỗi tháng một lần)`,whyTime(BAL.charity.khac)||(S.bac<BAL.charity.bac?`thiếu bạc (cần ${BAL.charity.bac})`:S.charM===S.turn?"tháng này đã làm":"")));
   const fx=(typeof VIRFX==="object"&&VIRFX[V.k])||[];out.push({g:"duc",kind:"vir",k:V.k,name:`${V.n} · ${V.full}`,level:l,prog:S.virp[V.k],need:l+2,desc:V.d,next:fx[l]?fxItems(fx[l],"n").join(" "):"",acts:B,img:kitSkillArt("vir",V.k,V.n),stepsAttr:`data-v85tab="${V.k}"`})}
  for(const a of ARTS){const l=S.arts[a.k],cost=5+l*5;const img=kitSkillArt("art",a.k,a.n)||(typeof AIMG==="object"&&AIMG[a.k]?AIMG[a.k]:"");
-  const B=l>=5?[]:[pbtn(`data-learn="${a.k}" data-mode="self"`,"Tự học",`Chắc chắn · tốn: 2 khắc, Sức -15 · thành: tiến bộ một hai phần`,t2||(S.suc<25?"Sức dưới 25":"")),
+  const B=l>=5?[]:[pbtn(`data-learn="${a.k}" data-mode="self"`,"Tự học",`Chắc chắn · tốn: 2 khắc, Sức -15 · thành: tiến bộ một hai phần`,t2||(S.suc<BAL.sucNeed.self?"Sức dưới "+BAL.sucNeed.self:"")),
    pbtn(`data-learn="${a.k}" data-mode="teacher"`,"Học với thầy",`Chắc chắn · tốn: 2 khắc, Bạc -${cost}, Sức -10 · thành: tiến bộ hai ba phần, luôn hơn tự học 1, có khi nghe chuyện`,t2||(S.bac<cost?`thiếu bạc (cần ${cost})`:"")),
    S.thDead?"":pbtn(`data-learn="${a.k}" data-mode="th"`,"Học với Thái hậu",`Chắc chắn · tốn: 2 khắc, Sức -10 · thành: tiến bộ một đến ba phần, Thái hậu +3`,t2||(S.th<40?"cần Thái hậu thương 40":(S.buoi||0)!==0?"chỉ buổi sáng":""))].filter(Boolean);
   const extra=(a.k==="theu"||a.k==="nau")&&typeof artBonus==="function"?` · phẩm đồ tự làm ${artBonus(S,a.k).q}/100`:"";const fx=(typeof ARTFX==="object"&&ARTFX[a.k])||[];
@@ -45,14 +48,15 @@ function ktArtHTML(){try{vNormAll()}catch(e){}const SK=ktArtSkills();const G=[["
  let works="";try{works=ktWorksHTML()}catch(e){works=""}
  const list=G.map(([k,label])=>{const L=SK.filter(s=>s.g===k);const h=L.map(s=>s.acts.join("")).join("");return{k,label,doable:ktDoable(h),total:ktTotal(h)}});
  if(works&&works.replace(/<[^>]+>/g,"").trim())list.push({k:"wk",label:"Tác phẩm",doable:ktDoable(works),total:ktTotal(works)||null,n:null});
- const sub=kitSubTabs("art",list);let h=sub.html+`<div class="ktop">${kitInfo("Cách học")}${sub.cur==="duc"?` ${kitInfo("Tứ đức")} <span class="kchip n">Đức <b>${S.duc}</b></span> <button class="lnk ladi" data-v85tab="duc">ⓘ luật Đức</button>`:""}${S.master?` <span class="kchip g">Danh sư còn dạy ${S.master} tháng</span>`:""}</div>`;
- if(sub.cur==="wk")return h.replace(`${kitInfo("Cách học")}`,`${kitInfo("Tác phẩm")}`)+`<div class="kskills">${works}</div>`;
+ /* owner 17/11 07:55Z: NO info band under the tabs. "ⓘ Cách học" (or "ⓘ Tác phẩm") = the tab bar's trailing slot; Tứ đức · Đức chip · ⓘ luật Đức = the Tứ đức section header; only a real status chip (Danh sư) keeps a one-line row */
+ const cur0=ktSubGet("art",list);const sub=kitSubTabs("art",list,kitInfo(cur0==="wk"?"Tác phẩm":"Cách học"));let h=sub.html+(S.master?`<div class="ktop"><span class="kchip g">Danh sư còn dạy ${S.master} tháng</span></div>`:"")+(sub.cur==="duc"?kitSecHead(kitInfo("Tứ đức"),`<span class="kchip n">Đức <b>${S.duc}</b></span> <button class="lnk ladi" data-v85tab="duc">ⓘ luật Đức</button>`):"");
+ if(sub.cur==="wk")return h+`<div class="kskills">${works}</div>`;
  const L=SK.filter(s=>s.g===sub.cur).map(s=>Object.assign(s,{can:s.acts.some(a=>!/\sdisabled[\s>]/.test(a.slice(0,a.indexOf(">")+1)))}));
  L.sort((a,b)=>(b.can-a.can)||((a.level>=5)-(b.level>=5)));
  return h+`<div class="kskills">${L.map(kitSkillCard).join("")}</div>`}
 /* Tác phẩm (j83 works): one skill head per art that makes works = picture, bậc, what it makes as chips, the quality ladder;
    "Tự học, làm tác phẩm" (mastered only) as a compact act. Rules behind the ⓘ "Tác phẩm" gloss (was a paragraph + bare divs). */
-function ktWorksHTML(){if(typeof wkKindsOf!=="function"||typeof WK!=="object")return"";const why=whyTime(2)||(S.suc<15?"Sức dưới 15":"");
+function ktWorksHTML(){if(typeof wkKindsOf!=="function"||typeof WK!=="object")return"";const why=whyTime(2)||(S.suc<BAL.sucNeed.wk?"Sức dưới "+BAL.sucNeed.wk:"");
  const L=ARTS.map(a=>{const l=S.arts[a.k],ks=wkKindsOf(a.k);if(!ks.length)return null;const img=kitSkillArt("art",a.k,a.n)||(typeof AIMG==="object"&&AIMG[a.k]?AIMG[a.k]:"");
   const acts=l>=5?[pbtn(`data-wk="prac" data-art="${a.k}"`,"Tự học, làm tác phẩm",`Chắc chắn · tốn: Sức -10, 2 khắc · thành: một tác phẩm, ${wkOddsTxt(S,ks[0],0)}`,why)]:[];
   const kinds=ks.map(k=>`<span class="kchip n">${WK[k].w}${WK[k].per?" · để 1 tuần":""}</span>`).join(" ");
@@ -64,7 +68,7 @@ artTabHTML=function(){return ktArtHTML()};
 function ktStoryHTML(){const c=S.st.ch,M=S.st.M,m=S.st.ms,Q0=(typeof QUEST67==="object"&&(QUEST67[S.origin.k]||QUEST67.tt))||{t:""};
  const past=c&&c.past?c.past:[];const rare=(S.r97||[]);
  const list=[{k:"now",label:"Chương này",n:""},{k:"rank",label:"Sắc phong",n:""},{k:"past",label:"Đã qua",n:String(past.length+rare.length)}];
- const sub=kitSubTabs("story",list);let h=sub.html;
+ const sub=kitSubTabs("story",list,kitInfo("Luật chương"));let h=sub.html;/* "ⓘ Luật chương" = the tab bar's trailing slot (owner 17/11 07:55Z) */
  const art=typeof kitOriginArt==="function"?kitOriginArt(S.origin.k):"";
  if(sub.cur==="now"){let card="";/* KIT §51.1: "Kết cục xuất thân" joins the chapter rows (one block = one label column), not a 2nd table under the checklist */
   const fin=c&&c.done?["Kết cục xuất thân",c.fin,S.st.tag&&c.fin?"g":""]:null;let finIn=false;
@@ -79,7 +83,7 @@ function ktStoryHTML(){const c=S.st.ch,M=S.st.M,m=S.st.ms,Q0=(typeof QUEST67==="
   else card=kitEmpty("Mệnh truyện","Chưa mở chương nào. Mở bằng thẻ «Mệnh truyện» ở Hành sự.");
   const F=typeof f14Info==="function"?f14Info():null;/* the 14-chapter frame (jst14): part chip + exact chapters left */
   const nx=F?F.left:c?c.plan.slice(c.i+1).filter(x=>x!=="fin").length:0;
-  h+=`<div class="ktop"><span class="kchip n" data-chap="1">${ktEsc(Q0.t)}</span>${F?` <span class="kchip n" data-chap="1">Chương ${F.n}/${F.max} · ${ktEsc(F.part)}</span>`:""}${nx?` <span class="kchip n" data-chap="1">còn ${F?"":"khoảng "}${nx} chương</span>`:""} ${kitInfo("Luật chương")}</div>`+card;
+  h+=`<div class="ktop"><span class="kchip n" data-chap="1">${ktEsc(Q0.t)}</span>${F?` <span class="kchip n" data-chap="1">Chương ${F.n}/${F.max} · ${ktEsc(F.part)}</span>`:""}${nx?` <span class="kchip n" data-chap="1">còn ${F?"":"khoảng "}${nx} chương</span>`:""}</div>`+card;
   try{if(typeof chapModel==="function"){const CM=chapModel();h+=chapInline(CM,CM&&CM.mode==="ms")}}catch(e){console.error(e)}
   if(fin&&!finIn)h+=rows67([fin])}
  else if(sub.cur==="rank"){
@@ -105,8 +109,8 @@ function ktQ72HTML(){const q=q72();const mo=q.mo[S.turn]||0;const D=q72Debtors()
   return{a,n,k,btn:pbtn(`data-q72c="${k}"`,`Nhờ ${q72Short(a)} trả ân`,`tốn: 1 khắc, ${R72(`nợ ân của ${q72Short(a)} -1`)} · thành: ${r.t}, ${tk.join(", ")}`,S.dead?"đã hết kiếp":Q.length?"đang có việc chờ":cd>0?`vừa nhờ, đợi ${cd} tuần`:!can(1)?"hết khắc":"")}});
  const callH=calls.map(x=>x.btn).join("");
  const list=[{k:"now",label:"Đang làm",doable:ktDoable(ask),total:null,n:`${q.a.length}/${Q72CFG.max}`},{k:"debt",label:"Nợ ân",doable:ktDoable(callH),total:null,n:String(D.length+owe.length)},{k:"news",label:"Trong cung",n:String(q.np.length)}];
- const sub=kitSubTabs("q72",list);
- let h=sub.html+`<div class="ktop"><span class="kchip n">Đang làm <b>${q.a.length}/${Q72CFG.max}</b></span> <span class="kchip n">Lời nhờ tháng này <b>${mo}/${Q72CFG.mo}</b></span> <span class="kchip g">Xong <b>${q.n.ok||0}</b></span> <span class="kchip r">Hỏng <b>${(q.n.fail||0)+(q.n.bad||0)}</b></span> <span class="kchip n">Từ chối <b>${q.n.dec||0}</b></span> ${kitInfo("Việc nhờ")}</div>`;
+ const sub=kitSubTabs("q72",list,kitInfo("Việc nhờ"));
+ let h=sub.html+`<div class="ktop"><span class="kchip n">Đang làm <b>${q.a.length}/${Q72CFG.max}</b></span> <span class="kchip n">Lời nhờ tháng này <b>${mo}/${Q72CFG.mo}</b></span> <span class="kchip g">Xong <b>${q.n.ok||0}</b></span> <span class="kchip r">Hỏng <b>${(q.n.fail||0)+(q.n.bad||0)}</b></span> <span class="kchip n">Từ chối <b>${q.n.dec||0}</b></span></div>`;
  if(sub.cur==="now"){h+=`<div class="pcb ktacts"><div class="kpanec">${ask}</div></div>`;
   const items=q.a.map((x,i)=>{const X=q72X(x);return{f:X?X.A.f:{ini:"?",col:"#888"},name:X?q72PgN(X.A):"",sep:i===0?"Đang làm":""}}).concat(q.h.slice(0,8).map((z,i)=>({f:z.f||{ini:"?",col:"#888"},name:z.pn||shortN(z.n||"?"),dim:true,sep:i===0?"Đã qua":""})));
   h+=items.length?`<div class="pgwrap">`+pager("q72",items,i=>i<q.a.length?q72Card(q.a[i]):q72HCard(q.h[i-q.a.length]))+`</div>`:kitEmpty("Việc nhờ","Chưa ai nhờ ngươi việc gì.")}
@@ -122,6 +126,11 @@ function ktPersonK(k,name,what){let v=null;try{const m=/^r(\d+)$/.exec(k)||/^(\d
 if(typeof q72HTML==="function")q72HTML=function(){return ktQ72HTML()};
 (function(){const st=document.createElement("style");st.id="kit-tabs";st.textContent=`
 .ktop{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin:0 0 10px}
+/* the tab bar's trailing info slot: pinned to the RIGHT END of the bar (stays visible while the tabs scroll) */
+.pctabs>.pctinfo{flex:0 0 auto;margin-left:auto;align-self:center;position:sticky;right:0;padding:0 2px 0 10px;background:var(--panel);white-space:nowrap}
+.pctabs>.pctinfo .kgl{font-size:.82rem}
+/* a section header row: title left, chips + ⓘ right, one line */
+.ksech{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:4px 10px;margin:0 0 8px}.ksech .ksechr{display:inline-flex;align-items:center;gap:6px;flex-wrap:wrap}
 .ktinfo .kgl{font-size:.82rem;color:var(--gold,#8a5a12);font-weight:600;cursor:pointer;border-bottom:1px dotted currentColor}
 .kchecks{display:flex;flex-direction:column;gap:5px;margin:8px 0}
 .kchk{display:flex;align-items:flex-start;gap:8px;font-size:.88rem;line-height:1.35}.kchk .kchm{flex:0 0 auto;width:1.2em;display:inline-flex;justify-content:center;font-size:1.05rem;line-height:1.2}.kchk .kchm.g{color:var(--good,#2d7a52)}.kchk .kchm.r{color:var(--bad,#c23b22)}.kchk .kchm .kmk{margin:0}

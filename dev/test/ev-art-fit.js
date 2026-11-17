@@ -56,7 +56,7 @@ const HOOK=()=>{window.__dlg=window.__dlg||[];const P=s=>String(s||"").replace(/
  /* group by (title, picture group, why) */
  const M=new Map();for(const d of all){if(d.look||d.shop)continue;const k=[d.t,d.grp||d.src,d.why,d.kind].join("|");const e=M.get(k)||Object.assign({n:0},d);e.n++;M.set(k,e)}
  const rows=[...M.values()].sort((a,b)=>a.t.localeCompare(b.t));
- const ph=rows.filter(r=>/ph-event/.test(r.src)),vis=rows.filter(r=>r.grp==="khach-den"&&!/visit|gift|khach/.test(r.why));
+ const ph=rows.filter(r=>/\/ph-(?:event|[lw]-)/.test(r.src)),vis=rows.filter(r=>r.grp==="khach-den"&&!/visit|gift|khach/.test(r.why));
  fs.writeFileSync(OUT,JSON.stringify({total:all.length,distinct:rows.length,placeholder:ph.length,visitorMismatch:vis.length,rows,errs:[...new Set(errs)].slice(0,10)},null,1));
  console.log(JSON.stringify({total:all.length,distinct:rows.length,placeholder:ph.length,visitorMismatch:vis.length,noPic:rows.filter(r=>!r.src).length,errs:[...new Set(errs)].slice(0,3)}));
  process.exit(ph.length||vis.length?1:0)})().catch(e=>{console.error(e);process.exit(2)});

@@ -11,7 +11,7 @@
    (the call the UI / socket made): life B · world C · dialogs D · buổi + night E · her acts F1–F5 · week end + her month G · sync layer C/H.
    endTurn / nextBuoi split by root: W.* / R.* / Rarr → C (world loops), S.* → G (week end) / E (buổi). No entry found → "?" (F6: the tripwire names it). */
 try{Error.stackTraceLimit=Math.max(Error.stackTraceLimit||10,120)}catch(e){}
-const ENTRY=[[/^(start|nlRun|nlBegin|nlReroll)$/,"B"],[/^(chooseM|onAct|onRes|famApply|petApply|showRes)$/,"D"],
+const ENTRY=[[/^(start|nlRun|nlBegin|nlReroll)$/,"B"],[/^(chooseM|onAct|onRes|famApply|petApply|showRes)$/,"D"],[/^(gSync|pApply)$/,"D·patch"],/* part D: the host's results copied onto her person (until G) */
  [/^(flip|resolveTonight|nightScene|rivalsBuoi)$/,"E"],[/^(runAct|act|cardH|talk|directActs)$/,"F1"],[/^(goTo|placeGo|enterPlace)$/,"F2"],
  [/^(buy|useItem|wear|sell|gift)$/,"F3"],[/^(startContest|kitGameResult|mgEnd)$/,"F5"],
  [/^(attach|sendMe|onBuoi|pullFriend|pushFriend|reshowQ|tryEnd)$/,"C/H"]];

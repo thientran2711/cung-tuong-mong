@@ -36,7 +36,7 @@ function hsvActs(s){const A=[],H=BAL.house;if(!s||!(S.staff||[]).includes(s))ret
  try{whyMaidInit(s);const t=spyTarget();
   if(!t)A.push({n:"Sai đi dò la",dom:"Mưu kế",lock:true,t:"không còn phi tần nào để dò",o:0});
   else A.push({n:"Sai đi dò la",dom:"Mưu kế",o:spyO(S,t,s),x:`nhắm: ${spyWho(t)} (chạm để chọn người khác) · biết 2 điều thật về nàng · chứng cứ ${balSg(BAL.eff.j78.evN)}`,/* previews: j78maidSpy */l:{},risk:`${nm} bị bắt gặp thì sợ hãi (lòng -${balAb(BAL.eff.jwhy.loyalSpyMaidRun)}) · nàng đoán ra: ${typeof pvOan==="function"?pvOan(t,5):"oán ta +5"}`,why:()=>spyFactors(S,t,s),act:1,open:()=>spyPick(2,s)});
-  A.push({n:"Nghe ngóng chung",dom:"Mưu kế",o:100,x:`${nm} đi nghe ngóng: biết 1 điều thật trong cung (hay về người đang gây chuyện, người ${nm} quen bên ấy)${(S.mat||0)>=3?" · Tai mắt nhiều: thêm 1 điều":""}`,run:()=>spyNews(s)})}catch(e){console.error(e)}
+  A.push({n:"Nghe ngóng chung",dom:"Mưu kế",o:100,x:`${nm} đi nghe ngóng: biết 1 điều thật trong cung (hay về người đang gây chuyện, người ${nm} quen bên ấy)${eyes(S)>=3?" · Tai mắt nhiều: thêm 1 điều":""}`,run:()=>spyNews(s)})}catch(e){console.error(e)}
  /* 2. the Cung nhân tab's acts for this servant (same functions, same costs); on the stage they also take the khắc the card shows
     (1, Hỏi chuyện 2 — j25 opens them without paying, so each pays here once it has run) */
  const pay=n=>{try{S.payOnPick=0;if(n)spend(n)}catch(e){}};

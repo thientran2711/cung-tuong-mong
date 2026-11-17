@@ -1,5 +1,5 @@
 /* Build line in the game menu (go-live kit, owner OD:L1370 (d)): title > Thiết lập row shows "mã <sha> · <time>"; its sub-screen
-   "Thông tin cập nhật" starts with "Lần cập nhật đang chơi" (Mã / Lúc / Điều mới) + "Các lần trước" (≤ 10), kit rows only.
+   "Sổ đổi mới" starts with "Bản đang chơi" (Mã / Lúc / Điều mới) + "Các lần trước" (≤ 10), kit rows only.
    Real device profiles (dev/test/lib/device.js), HOST mode = the built root index.html exactly as players get it.
    usage: bash dev/site/build_site.sh && node dev/test/build-line.js [outdir] [device ...]   (default fold ipadAir = 755x1000, 1180x820; exit 1 on any FAIL) */
 const {chromium}=require('playwright');const D=require('./lib/device');const fs=require('fs');

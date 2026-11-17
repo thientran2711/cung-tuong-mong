@@ -32,6 +32,13 @@ function agOwn(k){return !!(BAL.ag&&BAL.ag.own.includes(k))}
    its floor is not raised, so a rare event stays rare). Every AG-ALL-2 roll of a computed number goes through one of these two. */
 function agOdd(o){return cl(Math.round(+o||0),BAL.odds.lo,BAL.odds.hi)}
 function agCap(o){return Math.min(+o||0,BAL.odds.hi)}
+/* SOFT FAIL — ONE path for every ag-all-2 roll (owner OD 17/11 ~17:35Z): agTry(o) = the capped roll; agSoft(o) = a failure at this RAW o is soft
+   (o reached the cap = the act was sure before it): cost already spent, nothing gained, the failure branch (punishment, lòng / thiện cảm loss,
+   caught, refusal) is skipped; agSoftTxt(p) = the ONE BẠI line (BAL.odds.softFail). AGSOFT.n counts soft fails (tests / bot stats). */
+const AGSOFT={n:0};
+function agSoft(o){return(+o||0)>=BAL.odds.hi}
+function agTry(o){const ok=roll(agOdd(o));if(!ok&&agSoft(o))AGSOFT.n++;return ok}
+function agSoftTxt(p){const F=BAL.odds.softFail;return p===S?F.me:F.npc.replace("{n}",p&&p.name||"")}
 function agZ(){const z=S.ag=S.ag||{};z.pend=z.pend||[];z.log=z.log||[];return z}
 function agKey(){return wk()+"-"+(S.buoi||0)}
 function agRec(){try{return j95on()&&S.roster&&S.roster.key===j95key()?S.roster:null}catch(e){return null}}
@@ -105,7 +112,7 @@ function agMW(v,tag){const C=AG.mwc=AG.mwc||{};const k=(v===S?"me":v.id)+":"+tag
 /* the khắc she can do it: from now to the end of the buổi, at a place she may enter, not while she keeps a secret meeting */
 /* a khắc the words of a card or a told deed already put her somewhere (j95b bind / turn-of-buổi act) is hers to keep: the loop never overwrites it */
 function agBound(id,kh,key){try{return typeof J95B!=="undefined"&&J95B.bind.some(b=>b.id===id&&b.kh===kh&&b.key===key)}catch(e){return false}}
-function agSlot(v,at,t){const R=agRec(),k0=agKh(),id="v"+v.id,L=[];for(let kh=k0;kh<J95.KH;kh++){const k=at(kh,v,t);if(!k||k==="thu"&&(S.buoi||0)===0)continue;
+function agSlot(v,at,t,c){const R=agRec(),k0=agKh(),id="v"+v.id,L=[];for(let kh=k0;kh<J95.KH;kh++){if(c&&typeof agFitDay==="function"&&typeof agKhC==="function"&&!agFitDay(kh,agKhC(c,v)))continue;/* the DAY must hold the whole deed (review ag-all-2 r2 B3) */const k=at(kh,v,t);if(!k||k==="thu"&&(S.buoi||0)===0)continue;
   if(v.confined&&k!==palaceOf(v))continue;if(!j95acc(v,k)&&k!=="home"&&k!==palaceOf(v))continue;if(R&&R.P[id]&&R.P[id][kh]&&(R.P[id][kh][1]==="tryst"||R.P[id][kh][1]==="meet"))continue;if(R&&agBound(id,kh,R.key))continue;L.push([kh,k])}
  return L.length?L[Math.floor(Math.random()*L.length)]:null}
 /* the people a SOC deed could aim at: kept per tuần and per what she did since (perf §4 "cache SOC target lists"); the living are re-checked */
@@ -144,7 +151,7 @@ function agDecide0(v){let N;const tn0=performance.now();try{N=agNeedsC(v)}catch(
  const need=agPw(NL);if(!need)return 0;/* her slip (jmind) is in the second step, once */
  const ta=performance.now();const O=agOpts(v,N,need);AG.tm.opts+=performance.now()-ta;if(!O.length)return 0;
  const c=mindPick(O.map(o=>[o,o.u]),v);if(!c)return 0;c.need=need;
- const sl=agSlot(v,c.at,c.t);if(!sl)return 0;agPlan(v,c,N,sl[0],sl[1]);return 1}
+ const sl=agSlot(v,c.at,c.t,c);if(!sl)return 0;agPlan(v,c,N,sl[0],sl[1]);return 1}
 function agSlice(first){const Q=AG.q;if(!Q||AG.inSlice)return;const key=agKey();if(Q.key!==key){if(Q.L.length)AG.stat.qdrop+=Q.L.length;AG.q=null;return}
  AG.inSlice=1;const t0=performance.now();const tm0=Object.assign({},AG.tm);const z=agZ();let acts=0;AG.now=0;AG.mwc={};
  const B=BAL.ag.perf.slice;
@@ -218,7 +225,7 @@ const AGJOIN={thTH:{n:"Thỉnh an Thái hậu",x:()=>{const g=BAL.tw.g.thTH;retu
  thHH:{n:"Thỉnh an Hoàng hậu",x:()=>{const g=BAL.tw.g.thHH;return `thành: Hoàng hậu +${g[0]} · Danh +${g[1]} · Đức +${g[2]} · hỏng: Hoàng hậu ${g[3]}`}},
  pray:{n:"Cầu tự",x:()=>"thành: lòng thành cầu tự, dễ có thai hơn"},ksp:{n:"Đút lót Kính sự phòng",x:()=>"thành: thẻ bài của ngươi dễ được lật hơn"}};
 /* the odds to overhear a deed: ONE function for her and every NPC who stands there (G9 agSeeNpc) */
-function agHearOf(a){return odA(a,BAL.ag.wit.hear+((a===S?S.mat:a.mat)||0)*BAL.ag.wit.mat)}
+function agHearOf(a){return odA(a,BAL.ag.wit.hear+eyes(a)*BAL.ag.wit.mat)}
 function agHearO(){return agHearOf(S)}
 /* the last khắc of a deed (G9): planned deeds carry k1; older ones (saves before AG-ALL-2) last one khắc */
 function agK1(p){return p&&p.k1!=null?p.k1:p?p.kh:0}
@@ -227,8 +234,8 @@ function agKhLock(){const k=BAL.ag.kh;return typeof can==="function"&&!can(k)?(t
 function agSpendKh(){const k=BAL.ag.kh;if(!can(k))return false;spend(k);return true}
 function agReact(p,v,t){const O=[];const B=BAL.ag.wit;const harm=AGHOST.has(p.k)||p.k==="fakeIll"||p.k==="fakePreg";const o=agHearO();const kh=BAL.ag.kh;const lock=agKhLock();
  O.push({n:"Nghe lén",r:"hear",fx:{},x:`${word(o)} · tốn: ${kh} khắc · thành: biết rõ nàng ${p.act} vì đâu${harm?` · chứng cứ về nàng ${balSg(BAL.eff.jagent.evGo)}`:""} · hỏng: nàng bắt gặp, nàng quý ngươi -${B.caught}`,
-  go:()=>{if(!agSpendKh()){agLand(p);return}if(roll(agOdd(o))){noteAdd(v.id,`nghe lén: nàng ${p.act} — ${p.why}`);if(harm)evA(S,v,BAL.eff.jagent.evGo);log(`Ngươi nghe lén: ${v.name} ${p.act}, vì ${p.why}.${harm?` Chứng cứ về nàng ${balSg(BAL.eff.jagent.evGo)}.`:""}`)}
-   else{affAdd(v,S,-B.caught);log(`${v.name} bắt gặp ngươi đứng nghe lén.`)}agLand(p)}});
+  go:()=>{if(!agSpendKh()){agLand(p);return}if(agTry(o)){noteAdd(v.id,`nghe lén: nàng ${p.act} — ${p.why}`);if(harm)evA(S,v,BAL.eff.jagent.evGo);log(`Ngươi nghe lén: ${v.name} ${p.act}, vì ${p.why}.${harm?` Chứng cứ về nàng ${balSg(BAL.eff.jagent.evGo)}.`:""}`)}
+   else if(agSoft(o))log(agSoftTxt(S));else{affAdd(v,S,-B.caught);log(`${v.name} bắt gặp ngươi đứng nghe lén.`)}agLand(p)}});
  const D=TW[p.k],J=AGJOIN[p.k];if(D&&J&&!(typeof isSrv==="function"&&isSrv())&&(!D.req||D.req(S,p.k==="thHH"?queenP():t))&&twCanPay(S,p.k)&&!(p.k==="thHH"&&queenP()===S)){const oj=D.o?D.o(S,t):100;const c=twCost(p.k);
   const ct=Object.keys(c).map(f=>`${(typeof NAMES==="object"&&NAMES[f])||(typeof HXN==="object"&&HXN[f])||f} ${c[f]}`).join(", ");
   O.push({n:J.n,r:"join",fx:{},x:`${word(oj)} · tốn: ${ct?ct+", ":""}${kh} khắc · cùng nàng · ${J.x()}`,go:()=>{if(!agSpendKh()){agLand(p);return}const r=twDo(S,p.k==="thHH"?queenP():t,p.k);if(r)log(`${r}.`);agLand(p)}})}/* her deed: the twDo wrapper lets the others there see it */
@@ -250,8 +257,13 @@ function agSeeHer(k,t,joined){if(!agOn())return;const H=agHereKh();if(!H)return;
   const c=mindPick([["ignore",B.w.ignore],["hear",hu],["join",ju*B.w.join]],v);AG.stat.witNpc++;
   const why=c==="join"?"thấy ngươi làm nên cũng làm theo":c==="hear"?`để ý ngươi (thù ghét ${Math.round(ho)})`:"";
   if(c!=="ignore")agUse(v);/* the reaction IS her deed of this buổi (same rule as the player's khắc) */
-  if(c==="hear"){const o=odA(v,B.hear);const zz=j95z();if(roll(agOdd(o))){zz.meK[v.id]={k:H.k,c:j95c(),w:wk()};noteAdd(v.id,"nàng để ý chỗ ngươi hay lui tới")}else{affAdd(S,v,-B.caught);log(`Ngươi bắt gặp ${v.name} đứng nghe ngóng.`)}}
-  else if(c==="join"){AG.inTick++;let r="";try{r=twDo(v,k==="thHH"?queenP():t,k)||""}finally{AG.inTick--}if(r)log(`${r}.`)}
+  /* review ag-all-2 r2 B2 (owner ~15:45Z "people present see her at once (react next khắc)"): she chooses now; the reaction is her deed of the
+     NEXT khắc at this place (agSeePlan, the one day gate), landing through the ledger like any deed (AGRUN "see:hearMe" / "see:joinMe") */
+  if(!(typeof agKhOn==="function"&&agKhOn())){/* the one-deed-per-buổi world (BAL.ag.kh2.on 0): the old inline reaction */
+   if(c==="hear"){const o=odA(v,B.hear);const zz=j95z();if(agTry(o)){zz.meK[v.id]={k:H.k,c:j95c(),w:wk()};noteAdd(v.id,"nàng để ý chỗ ngươi hay lui tới")}else if(!agSoft(o)){affAdd(S,v,-B.caught);log(`Ngươi bắt gặp ${v.name} đứng nghe ngóng.`)}}
+   else if(c==="join"){AG.inTick++;let r="";try{r=twDo(v,k==="thHH"?queenP():t,k)||""}finally{AG.inTick--}if(r)log(`${r}.`)}}
+  else if(c==="hear"&&typeof agSeePlan==="function")agSeePlan(v,H.R,H.kh+1,H.k,"see:hearMe","",null,"để ý ngươi",why);
+  else if(c==="join"&&typeof agSeePlan==="function")agSeePlan(v,H.R,H.kh+1,H.k,"see:joinMe",k,k==="thHH"?null:(t&&t!==S?ledgerId(t):null),"cũng làm theo",why);
   if(c!=="ignore"){const L={w:wk(),b:S.buoi||0,kh:H.kh,id:"v"+v.id,k:"see:"+c,t:"me",pl:H.k,why};z.log.push(L);if(z.log.length>60)z.log.shift();
    try{const A=H.R.acts=H.R.acts||[];A.push({id:"v"+v.id,kh:H.kh,k:"ag:see:"+c,t:"me",why,ok:1,ag:1});if(A.length>60)A.shift()}catch(x){}}}}
 

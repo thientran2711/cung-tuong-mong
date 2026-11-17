@@ -24,6 +24,13 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
   let picks={},n=0;for(let i=0;i<40;i++){const r=knSellPick(S);if(r){n++;picks[r.s.sid]=(picks[r.s.sid]||0)+1;o.ownSel=o.ownSel||(own&&r.s===own)}}o.picks=picks;o.n=n;o.sid=s.sid;
   s.spyFor="me";o.tmSel=!!knSellPick(S);s.spyFor=null;return o});
  ok(r1.wGreedy>0&&r1.wLoyal===0&&r1.wClean===0,'who: Ham lợi + low lòng sells; lòng ≥ BAL.ag.sell.loy or Thanh liêm never',r1);
+ /* 1b non-greedy (review ag-all-2 r2 C6, OD ~17:00Z (3)): low lòng alone never makes an offer; only her master offending a chữ she holds does */
+ const r1b=await p.evaluate(()=>{const {v,s}=__rig();const o={w:{}};s.loyal=10;s.trM=null;s.mdM=null;s.emo=null;
+  for(const ld of ["Thật thà","Nhiều chuyện","Tham vọng","Khiêm nhường","Trọng nghĩa","Thực dụng"]){__setNet(s,ld);o.w[ld]=knSellW(s)}
+  __setNet(s,"Nhiều chuyện");const tr0=s.trong;s.trong=["Nghĩa","Cần"];/* after __setNet (netOf re-derives trong) */s.trM=null;for(let i=0;i<3;i++)mindSeen(v,"flee");/* flee offends Nghĩa (jmind, as ag-betray) */o.off=mindTr(s,v).off.length;o.wOff=knSellW(s);
+  s.trong=tr0;__setNet(s,"Ham lợi");s.trM=null;s.mdM=null;s.emo=null;return o});
+ ok(Object.values(r1b.w).every(x=>x===0),'who: a non-greedy servant, unoffended, lòng 10 never offers (knSellW 0)',r1b.w);
+ ok(r1b.off>0&&r1b.wOff>0,'who: the same servant offers once her master offended a chữ she holds (off)',{off:r1b.off,w:r1b.wOff});
  ok(r1.n===40&&Object.keys(r1.picks).length===1&&r1.picks[r1.sid]===40&&!r1.ownSel,'pick: the only greedy disloyal servant of another palace with news is the seller; never her own staff',{n:r1.n,p:r1.picks,own:r1.ownSel});
  ok(!r1.tmSel,'her own Tai mắt does not sell to her (she reports)',r1.tmSel);
  /* 2 what + 3 price + buying */
@@ -31,7 +38,7 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
   o.trivia=N.some(n=>/^(where|sung|hate|ally|trait)/.test(n.k));o.preg=N.find(n=>n.k==="preg");
   /* add an affair → more valuable first */
   v.evm=v.evm||{};v.evm.me=2;{const N2=knSellNews(S,s);o.first=N2[0]&&N2[0].k;o.pAff=knSellPrice(N2[0].val,s);o.pPreg=knSellPrice(N2.find(n=>n.k==="preg").val,s)}v.evm.me=0;
-  o.scale=[knSellPrice(100,S),knSellPrice(70,S),BAL.ag.sell.price];o.scaleOk=o.scale[0]===o.scale[2]&&o.scale[1]===Math.round(o.scale[2]*.7);
+  o.scale=[knSellPrice(100,S),knSellPrice(70,S),BAL.ag.sell.price];{const f=1+qv(BAL.ag.sell.ask,S,0);/* 2f3: the ask factor of whoever is passed (S has a random nết: was a flake) */o.scaleOk=o.scale[0]===Math.round(o.scale[2]*f)&&o.scale[1]===Math.round(o.scale[2]*.7*f)}
   /* buy */
   Q.length=0;S.bac=500;const b0=S.bac,u0=used;const n=knSellNews(S,s)[0];const c=knSellCard(s,n);Q.push(c);showModal();chooseM(0);
   o.paid=b0-S.bac;o.price=c.sell.price;o.kh=used-u0;o.intel=(S.intel[v.id]||[]).some(x=>x.k===n.k&&x.txt===n.txt&&x.how==="Mua tin");o.result=Q.some(m=>m.t==="Tin mua được"&&m.h.includes(n.txt));

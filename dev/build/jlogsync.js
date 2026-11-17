@@ -28,7 +28,7 @@ const esc=s=>s.replace(/[.*+?^${}()|[\]\\]/g,"\\$&");
 const REL=w=>`${w}(?: → (?:ta|ngươi):| quý (?:ngươi|ta)| với (?:ngươi|ta):?)?(?: thiện cảm)?`;
 const LAB={th:REL("Thái hậu"),hh:REL("Hoàng hậu")};
 const N="(-?\\d+)",FULL="(?:đã đầy|chạm đáy)";
-const RX={};for(const [k,l] of LK)RX[k]=new RegExp(`(?<![\\p{L}\\d])(?:${LAB[k]||esc(l)})(?: (?:của )?(?:ngươi|ta))?:?\\s+(?:${N}\\s*→\\s*${N}(?:\\s*\\(${FULL}\\))?|([+\\-−])(\\d+)(?:\\s*\\(${FULL}\\s*${N}?\\))?|${FULL}\\s+${N})`,"gu");
+const RX={};for(const [k,l] of LK)RX[k]=kRx(`(?<![\\p{L}\\d])(?:${LAB[k]||esc(l)})(?: (?:của )?(?:ngươi|ta))?:?\\s+(?:${N}\\s*→\\s*${N}(?:\\s*\\(${FULL}\\))?|([+\\-−])(\\d+)(?:\\s*\\(${FULL}\\s*${N}?\\))?|${FULL}\\s+${N})`,"gu");
 /* the bổng lộc line's total "… = +23 bạc" (its items "+35 bạc · −9 bạc" are parts of it, not counted) */
 const RXB=/=\s*([+\-−])(\d+)\s*bạc/gu;
 const plain=h=>String(h==null?"":h).replace(/^<span class="ld">[^<]*<\/span>/,"").replace(/<[^>]+>/g,"").replace(/&nbsp;/g," ");
@@ -82,7 +82,7 @@ function tickFlush(label,n){if(!TICK.size||!S)return false;const g=[];for(const 
  log(`${MK("t")}${String(label||lab||"Sang tuần mới").replace(/[.:\s]+$/,"")}: ${g.join(" · ")}.`);return 1}
 function reset(){LG=S?{s:S,v:lsSnap(),seq:S.logSeq||0}:null;ATT={};pm0=typeof popMsg==="string"?(typeof kShort==="function"?kShort(popMsg):popMsg):""}
 /* a change no reason was given for: the pop card's own sentence of this action, if it wrote one */
-function popWhy(){try{const p=typeof popMsg==="string"?(typeof kShort==="function"?kShort(popMsg):popMsg):"";if(!p||p===pm0)return"";const t=plain(p).replace(/\s+/g," ").trim().split(/(?<=[.!?])\s/)[0].replace(/[.!?]+$/,"");return t.length>2&&t.length<=90?t:""}catch(e){return""}}
+function popWhy(){try{const p=typeof popMsg==="string"?(typeof kShort==="function"?kShort(popMsg):popMsg):"";if(!p||p===pm0)return"";const t=plain(p).replace(/\s+/g," ").trim().split(kRx("(?<=[.!?])\\s",""))[0].replace(/[.!?]+$/,"");return t.length>2&&t.length<=90?t:""}catch(e){return""}}
 function lsSync(label,why){try{if(!S||!Array.isArray(S.logs))return;if(!LG||LG.s!==S){reset();return}if(fold)return;
   const w=Object.assign({},ATT);if(why)for(const k in why)if(why[k])(w[k]=w[k]||[]).push(why[k]);
   if(quiet){TICK=new Map();reset();return}/* a death's last act still gets its line (its cost) */
@@ -130,7 +130,7 @@ if(typeof window.aaPayMG==="function"){const p0=window.aaPayMG;window.aaPayMG=fu
 document.addEventListener("click",e=>{try{const b=e.target.closest&&e.target.closest("button,.opt,[data-a],[data-k]");if(!b)return;const t=cut(b.getAttribute("aria-label")||b.textContent||"");if(t&&t.length>=2){if(depth===0&&!fold)lsSync(lab);clickLab=t;lab=""}}catch(x){}},true);
 {const r0=render;render=function(){if(depth===0&&!fold)lsSync(lab);return r0.apply(this,arguments)}}
 {const d0=deser;deser=function(){const r=d0.apply(this,arguments);reset();return r}}
-{const s0=start;start=function(){const r=s0.apply(this,arguments);reset();return r}}
+{const s0=start;start=function(){const r=s0.apply(this,arguments);if(!(window.COOPW&&COOPW.ctx))reset()/* co-op thin B: the guest's life built on the host (context b) leaves this phone's log sync alone */;return r}}
 
 /* one wording for the monthly Thái hậu / Hoàng hậu drift by Đức (j3 monthTick + j85 v85Month write into the same group) */
 function lsDucWhy(){return S&&S.duc>=BAL.ducLv.up?"Đức cao, được quý hơn":"Đức thấp, bị coi nhẹ"}window.lsDucWhy=lsDucWhy;

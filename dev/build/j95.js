@@ -87,7 +87,7 @@ function motiveOK(a,t,kind){if(!a||!t||a===S||a===t)return{ok:true,why:a===S?"ng
   if(af>=40&&!ex)return{ok:false,why:`thiện cảm ${af} với ${t===S?"ngươi":t.name}`};
   if(mot<30&&!ex)return{ok:false,why:`động cơ yếu (oán ${oa}, ghen ${gh}, thiện cảm ${af})`};
   if(ex)return{ok:true,why:ex,ex:1};
-  const parts=[];if(oa>=20)parts.push(`oán ${oa}`);if(gh>=20)parts.push(`ghen ${gh}`);if(af<=-20)parts.push(`ghét (thiện cảm ${af})`);if(ef)parts.push("khác phe");if(hasT(a,"Xảo quyệt"))parts.push("tính hiểm độc");
+  const parts=[];if(oa>=20)parts.push(`oán ${oa}`);if(gh>=20)parts.push(`ghen ${gh}`);if(af<=-20)parts.push(`ghét (thiện cảm ${af})`);if(ef)parts.push("khác phe");if(hasT(a,"Xảo quyệt"))parts.push("tính xảo quyệt");
   return{ok:true,why:parts.join(", ")||`động cơ ${mot}`}}
  if(F95.has(kind)){let fr=false;try{fr=!!(facOf(a)&&facOf(a)===facOf(t))}catch(e){}if(af<-20&&oa>=40&&!fr)return{ok:false,why:`ghét ${t===S?"ngươi":t.name} (thiện cảm ${af}, oán ${oa})`};
   return{ok:true,why:fr?"cùng phe":af>=10?`thiện cảm ${af}`:"lấy lòng vì lợi"}}
@@ -136,7 +136,7 @@ function j95week(){const z=j95z();if(z.itWk===wk())return;z.itWk=wk();if(z.mo!==
  for(const id in z.meK){const m=z.meK[id];if(!z.me[m.c+":"+m.k]||z.me[m.c+":"+m.k]<1.5)delete z.meK[id]}
  z.it={};z.sec=[];const cs=j95cs();z.mood={};for(const v of rivals)z.mood[v.id]=+(0.4+Math.random()*1.5).toFixed(2);z.nb={};for(const v of liveRivals(true)){const L=liveRivals(true).filter(x=>x!==v&&!sameHouse(v,x));z.nb[v.id]=L.sort(()=>Math.random()-.5).slice(0,2).map(x=>x.id)}
  for(const v of liveRivals(true)){if(v.confined)continue;j95hab(v);
-  if(pat&&!z.meK[v.id]&&hostility(v,S)>=45){let sp=false;try{sp=spyIn70(v,S)}catch(e){}if(j95dice(15+(v.mat||0)*12+(sp?30:0))){const [c,k]=pat[0].split(":");z.meK[v.id]={c:+c,k,w:wk()}}}
+  if(pat&&!z.meK[v.id]&&hostility(v,S)>=45){let sp=false;try{sp=spyIn70(v,S)}catch(e){}if(j95dice(15+eyes(v)*12+(sp?30:0))){const [c,k]=pat[0].split(":");z.meK[v.id]={c:+c,k,w:wk()}}}
   const it=j95intent(v,cs);if(it)z.it[v.id]=it;
   /* lovers meet in hidden corners, mostly at night */
   const m=v.affair&&manById(v.affair);if(m&&!j95men()){const n=j95dice(35)?2:1;
@@ -264,7 +264,7 @@ function j95view(R,kh){const W={};W.emp=R.P.emp?R.P.emp[kh][0]:"dtd";W.th=R.P.th
 function j95vis(id,k){if(!id||!k||k===J95OUT_||id==="me")return false;const c=id[0];
  if(c==="v"){const v=RV(+id.slice(1));return !!(v&&v.alive&&!(k==="home"&&sameHouse(S,v)))}
  if(id==="emp")return k!=="home"&&!(k==="dtd"&&(S.sung||0)<BAL.m95.dtdSung);if(id==="th")return true;
- if(c==="m"&&id[1]!=="m")return true;if(c==="q")return true;if(J95.eld&&J95.eld[id]){/* a named elder counts only where jstaff addStage draws her */const e=J95.eld[id];return e==="kn"?k==="kn":e==="tn"?(k==="tn"&&!S.thDead)||k==="tgk":e==="gt"?k==="home"&&(S.turn||0)<=4&&!S.out:false}if(id==="c:ty"||id==="c:ksp")return true;if(id==="c:ly")return k==="lc";if(id==="c:ped")return k==="nvp"&&j95nvp();/* jplx places draw the servants and children their lists put there (not on the maid road: jplx skips it) */if(typeof isSrv==="function"&&isSrv()&&(id==="c:tgk"||id==="c:ttp"||(c==="s"&&J95.px&&J95.px[id])||(c==="k"&&(k==="ttp"||k==="acs"||k==="dc"))))return false;if(id==="c:tgk"||id==="c:ttp")return true;if(c==="s"&&J95.px&&J95.px[id]===k)return true;if(c==="k"&&(k==="ttp"||k==="acs"||k==="dc"))return true;
+ if(c==="m"&&id[1]!=="m")return true;if(c==="q")return true;if(J95.eld&&J95.eld[id]){/* a named elder counts only where jstaff addStage draws her */const e=J95.eld[id];return e==="kn"?k==="kn":e==="tn"?(k==="tn"&&!S.thDead)||k==="tgk":e==="gt"?k==="home"&&gtAtHome():false}if(id==="c:ty"||id==="c:ksp")return true;if(id==="c:ly")return k==="lc";if(id==="c:ped")return k==="nvp"&&j95nvp();/* jplx places draw the servants and children their lists put there (not on the maid road: jplx skips it) */if(typeof isSrv==="function"&&isSrv()&&(id==="c:tgk"||id==="c:ttp"||(c==="s"&&J95.px&&J95.px[id])||(c==="k"&&(k==="ttp"||k==="acs"||k==="dc"))))return false;if(id==="c:tgk"||id==="c:ttp")return true;if(c==="s"&&J95.px&&J95.px[id]===k)return true;if(c==="k"&&(k==="ttp"||k==="acs"||k==="dc"))return true;
  /* her own household servants: jhouse (main, servant-system) draws them on her room / lãnh cung stage (r1 16/11) */if(c==="s"&&(k==="home"||k==="lc")&&j95hsv(id))return true;
  if(k==="home")return id==="mm:me"||id.indexOf("k:me:")===0;return false}
 function j95nvp(){try{return typeof adSrv==="function"&&!adSrv()&&!!(S&&S.court&&S.court.ped&&S.court.ped.name)}catch(e){return false}}
@@ -279,7 +279,7 @@ const J95OUT_="ngoai";
 function j95arrKh(k){const kh=j95kh();try{if(!k||k===S.place||k==="home")return kh;let from=S.place||"home";
  if(typeof isSrv==="function"&&isSrv()){const m=srvM();if(m&&k===palaceOf(m))return kh;if(from==="home"&&m)from=palaceOf(m)}/* j42 srvGoTo walks from her mistress's palace */
  return Math.min(J95.KH-1,kh+Math.max(0,travel(from,k)||0))}catch(e){return kh}}
-function j95elderK(x){if(x.eid==="kn")return"kn";if(x.eid==="gt"&&(S.turn||0)<=4&&!S.out)return"home";return"tn"}
+function j95elderK(x){if(x.eid==="kn")return"kn";if(x.eid==="gt"&&gtAtHome())return"home";return"tn"}
 function j95counts(R,kh){const C={};for(const id in R.P){const k=R.P[id][kh][0];if(k&&j95vis(id,k))C[k]=(C[k]||0)+1}return C}
 function j95sync(watch,plan){if(!j95on())return;let R=S.roster;if(!R||R.key!==j95key()){if(!plan)return;if(R)j95log(R);R=j95plan();j95secApply(R)}
  const kh=j95kh();const ppl=j95ppl(R);const ids={};
@@ -392,7 +392,7 @@ function j95obs(v,c,k,by){const z=j95z();const O=z.obs[v.id]=z.obs[v.id]||{};con
 
 /* ---------------- 7. CATCHING A SECRET MEETING (two-way) ---------------- */
 function j95ctx(c,f){if(typeof J78==="undefined")return f();const p=J78.ctx;J78.ctx=c;try{return f()}finally{J78.ctx=p}}
-function j95catchRoll(o,v){const mat=o===S?(S.mat||0):(o.mat||0);let tc=0;try{tc=tc70(v)}catch(e){tc=v===S?S.tamco||0:v.tamco||0}const night=j95c()===3;
+function j95catchRoll(o,v){const mat=eyes(o);let tc=0;try{tc=tc70(v)}catch(e){tc=v===S?S.tamco||0:v.tamco||0}const night=j95c()===3;
  const rev=cl(Math.round(12+tc/10-mat*2),5,30),full=cl(Math.round(35+mat*6-(night?10:0)-tc/6),10,60),one=20;let r=Math.random()*100;
  if(r<rev)return"rev";r-=rev;if(r<full)return"full";r-=full;if(r<one)return"one";return"flee"}
 function j95caught(s){const v=RV(+s.a.slice(1));if(!v||!v.alive)return;const m=s.kind==="tryst"?manById(s.b):null;const out=j95catchRoll(S,v);const W=s.spot;const z=j95z();

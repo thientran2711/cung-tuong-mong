@@ -10,6 +10,8 @@ const WURL=process.argv[4]||'https://ctm-coop.victoria-tntt.workers.dev';
 const sleep=ms=>new Promise(r=>setTimeout(r,ms));
 const log=[];const L=s=>{console.log(s);log.push(s)};
 async function mk(b,name,vp){const ctx=await b.newContext({viewport:{width:vp[0],height:vp[1]},deviceScaleFactor:1,reducedMotion:'reduce'});await serve(ctx);
+  /* THIN=n (host's wanted thin level, dev flag) + THINPART=4,… (test-only part flags, contract C1) for a thin-guest run on a Worker with part A */
+  await ctx.addInitScript(([l,pts,host])=>{try{if(l&&host)localStorage.setItem('ctm-thin',l);for(const p of pts)if(p)localStorage.setItem('ctm-thin-part-'+p,'1')}catch(e){}},[process.env.THIN||'',(process.env.THINPART||'').split(','),name==='A']);
   await ctx.addInitScript(u=>{window.COOP_URL=u;
     window.__co=()=>{const c=window.COOP;if(!c)return{};const s=c.state||{};const you=c.seat||s.you||null;const ended=c.ended||s.ended||{};
       const on=typeof c.on==='boolean'?c.on:!!(s.playing||(s.status&&s.status!=='off'));
@@ -24,6 +26,8 @@ const tapText=async(o,re,ms=8000)=>{const t0=Date.now();while(Date.now()-t0<ms){
 const until=async(o,fn,arg,ms=30000)=>{try{await o.p.waitForFunction(fn,arg,{timeout:ms});return true}catch(e){return false}};
 /* one step of the bot inside the page: returns what it did */
 const STEP=()=>{const c=__co();if(c.frozen||c.waiting)return'coop';if(typeof S==='undefined'||!S)return'nos';if(S.mg){try{S.mg=null;render()}catch(e){}return'mg'}
+  /* the Luân hồi roulette (jk2b kitRoulette, shown over every new life's card): skip it, as a player may (review/coop-thin-b) */
+  {const ks=document.querySelector('.kroul .krskip');if(ks&&ks.offsetParent!==null){ks.click();return'roul'}}
   if(S&&S.dead){const b=[...document.querySelectorAll('button')].filter(x=>x.offsetParent!==null&&!x.disabled);const k=b.find(x=>/Đầu thai|Luân hồi|Nhận thân phận|Tiến cung|Vào cung|Ở nhà|Nhập cung/.test(x.textContent))||b.find(x=>x.closest('#modal'));if(k){k.click();return'reborn:'+k.textContent.trim().slice(0,20)}return'dead'}
   const T=document.getElementById('title');if(T&&!T.hidden){const b=[...T.querySelectorAll('button')].filter(x=>x.offsetParent!==null&&!x.disabled);const k=b.find(x=>/Nhận thân phận|Tiến cung|Vào cung|Ở nhà|Lật|Chọn/.test(x.textContent))||b[0];if(k){k.click();return'title'}}
   const ov=[...document.querySelectorAll('button')].find(x=>x.offsetParent!==null&&!x.disabled&&!x.closest('#panel,#tabs,#hud,#modal')&&x.parentElement&&x.closest('[class^=km],[class*=" km"]')&&(x.classList.contains('kmend')||/^(Nhận|Đã hiểu|Tạ ơn|Lĩnh chỉ|Tuân chỉ)$/.test(x.textContent.trim())));if(ov){ov.click();return'overlay'}
@@ -51,7 +55,7 @@ const WORLD=()=>{const kidsOf=v=>(v.kids||[]).map(k=>k.name+(k.alive?'':'†')).
    friend:((rivals.find(v=>v.coop)||rivals.flatMap(v=>v.staff||[]).find(x=>x.coop)||null)||null)&&(({name,rank,alive,queen,sid,id})=>({name,rank:id==null?'srv':queen?7:rank,alive}))((rivals.find(v=>v.coop)||rivals.flatMap(v=>v.staff||[]).find(x=>x.coop)||null)),
    me:{name:S.name,rank:S.srv&&!S.srv.risen?'srv':S.rank,dead:!!S.dead,srv:!!S.srv},mst:{sung:S.sung,danh:S.danh,suc:S.suc},fst:(f=>f&&f.id!=null?{sung:f.sung,danh:f.danh,suc:f.suc}:null)((rivals.find(v=>v.coop)||rivals.flatMap(v=>v.staff||[]).find(x=>x.coop)||null)),where:Object.entries(S.where||{}).filter(([k])=>!(+k>=900)).map(([k,v])=>k+'@'+v).sort().join(),buoi:S.buoi||0}};
 
-(async()=>{const b=await chromium.launch();const A=await mk(b,'A',[755,1000]),B=await mk(b,'B',[1180,820]);
+(async()=>{const b=await chromium.launch(/127\.0\.0\.1|localhost/.test(WURL)?{args:['--disable-features=BlockInsecurePrivateNetworkRequests,PrivateNetworkAccessSendPreflights,PrivateNetworkAccessRespectPreflightResults,LocalNetworkAccessChecks']}:{});/* a local Worker (wrangler dev) */const A=await mk(b,'A',[755,1000]),B=await mk(b,'B',[1180,820]);
  await A.p.goto(BASE);await A.p.waitForTimeout(3000);await tapText(A,/^(Chơi cùng bạn|Cùng hảo hữu)/);await A.p.waitForTimeout(500);await tapText(A,/^(Mời bạn|Mời hảo hữu)/);
  await until(A,()=>__co().code&&__co().seat==='a');const code=(await A.p.evaluate(()=>__co())).code;L('room '+code);
  await B.p.goto(BASE+'?room='+code);await B.p.waitForTimeout(3000);await tapText(B,/^Vào phòng/,4000);

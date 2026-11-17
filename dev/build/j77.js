@@ -198,18 +198,18 @@ visitBtn=function(v){if(!v||!v.alive||v.out||sameHouse(S,v))return"";const k=pal
 seeBtn=function(v){if(!v||v===S||!v.alive||v.out||together(S,v)||!locKnown(v))return"";const k=whereOf(v),tc=travel(S.place,k);
  return accGuestNeed(pbtn(`data-see="${v.id}" class="seeb"`,`Đến gặp ${v.name.split(" ").pop()}`,accGuestLine(k,tc,"gặp mặt, mọi việc làm tại chỗ, dễ hơn sai người")+accLockTag(k),accGuestWhy(k,tc)),k,tc)};
 /* hard-lock extra way in: ask a eunuch to lead her in (bạc), for the Emperor's halls */
-function accLeadO(k){return od(35+(S.danh||0)/8+(typeof mm==="function"?mm():0))}
+function accLeadO(k){return od(BAL.odb.j77.odAccLeadO+(S.danh||0)/8+(typeof mm==="function"?mm():0))}
 function accLeadCost(){return 15}
 function accLead(k){if(!S||S.dead||Q.length||S.out||S.confined)return;const tc=travel(S.place,k);if(!dayFit(tc+1)||S.bac<accLeadCost())return;const nm=accName(k);
- spend(1);apply({bac:-accLeadCost()});if(roll(accLeadO(k))){accGrant(S,k);log(`Nhờ thái giám dẫn vào ${nm}: được dẫn vào (Bạc -${accLeadCost()}).`);j77In(k);if(S.place!==k)render();return}
- log(`Nhờ thái giám dẫn vào ${nm}: hắn nhận bạc rồi từ chối (Bạc -${accLeadCost()}).`);Q.push({t:"Không được dẫn vào",h:`<p>Thái giám nhận bạc, rồi lắc đầu: “Không có khẩu dụ, nô tài không dám.”</p><p class="r">Bạc -${accLeadCost()}</p>`});showModal();render()}
+ spend(1);/* review ag-all-2 r2 A5 (OD 17/11 ~17:10Z (1)): the eunuch's bạc only when he leads her in */if(roll(accLeadO(k))){apply({bac:-accLeadCost()});accGrant(S,k);log(`Nhờ thái giám dẫn vào ${nm}: được dẫn vào (Bạc -${accLeadCost()}).`);j77In(k);if(S.place!==k)render();return}
+ log(`Nhờ thái giám dẫn vào ${nm}: hắn không dám nhận bạc, từ chối.`);Q.push({t:"Không được dẫn vào",h:`<p>Thái giám đẩy gói bạc lại, lắc đầu: “Không có khẩu dụ, nô tài không dám.”</p>`});showModal();render()}
 /* the closed-place card gains the eunuch and the 'chờ được triệu' line */
 (function(){const c0=j77Card;j77Card=function(k,empty){const n0=Q.length;c0.apply(this,arguments);try{if(empty||Q.length===n0)return;const m=Q[Q.length-1];const a=accessOf(S,k);if(!a.lead)return;
   const tc=travel(S.place,k);const left=Math.max(0,BAL.time.khac-used);
   if(!ACC_ETQ.lead){m.h+=`<p class="past">Tự ý vào là tội nặng. Hoặc chờ được triệu.</p>`;showModal();return}
   if(!m.opts)m.opts=[{n:"Thôi",fx:{},x:""}],m.btn=undefined;
   const ok=dayFit(tc+1)&&S.bac>=accLeadCost();
-  if(ok)m.opts.splice(Math.max(0,m.opts.length-1),0,{n:"Nhờ thái giám dẫn vào",fx:{},x:`${word(accLeadO(k))} · tốn: ${tc+1} khắc, Bạc -${accLeadCost()} · thành: được vào buổi này · hỏng: mất bạc`,go:()=>setTimeout(()=>accLead(k),0)});
+  if(ok)m.opts.splice(Math.max(0,m.opts.length-1),0,{n:"Nhờ thái giám dẫn vào",fx:{},x:`${word(accLeadO(k))} · tốn: ${tc+1} khắc · thành: được vào buổi này, Bạc -${accLeadCost()} · hỏng: không mất bạc`,go:()=>setTimeout(()=>accLead(k),0)});
   else m.h+=`<p class="past">Nhờ thái giám dẫn vào: ${!dayFit(tc+1)?j77Bound(tc+1):`cần ${accLeadCost()} bạc (có ${S.bac})`}.</p>`;
   m.h+=`<p class="past">Hoặc chờ được triệu.</p>`;showModal()}catch(e){}}})();
 /* map tiles: a palace whose chủ vị outranks her shows the greeting in its price */
@@ -239,4 +239,4 @@ accInfo=function(){if(!S||Q.length)return;const R=n=>`<b>${n}</b>`;
    S.place): the stage of that place shows who is there in the new buổi, with one line "Sang buổi tối · ngươi vẫn ở Kính sự phòng" */
 (function(){const n0=nextBuoi;nextBuoi=function(){const k=S&&S.place,b=S?(S.buoi||0):0;const r=n0.apply(this,arguments);
  try{if(S&&!S.dead&&!S.out&&k&&k!=="home"&&b<(typeof B4L==="number"?B4L:2)&&(S.buoi||0)===b+1&&S.place===k&&S.visit&&S.visit.k===k){const nm=typeof accName==="function"?accName(k):k;
-  const line=`Sang ${String(BUOI[S.buoi]).toLowerCase()} · ngươi vẫn ở ${nm}.`;if(!(S.visit.msg||"").includes(line)){S.visit.msg=line+(S.visit.msg?" "+S.visit.msg:"");render()}}}catch(e){}return r}})();
+  const line=`Sang ${String(BUOI[S.buoi]).toLowerCase()} · ngươi vẫn ở ${nm}.`;{const stay=/Sang [^·.]+ · ngươi vẫn ở [^.]+\.\s*/g;let m0=(S.visit.msg||"").replace(stay,"");S.visit.msg=line+(m0?" "+m0:"");render()}}}catch(e){}return r}})();

@@ -21,7 +21,7 @@ function mlGuest(){try{return !!(window.COOPW&&COOPW.on&&COOPW.seat!=="a")}catch
 function mlC(k,n){const N=window.__mlN;N[k]=(N[k]||0)+(n==null?1:n)}
 function mlB(){return BAL.mline}
 function mlMine(p){return p===S}
-function mlSee(...P){try{return P.some(p=>p===S)||(S.mat||0)>=mlB().seeMat}catch(e){return false}}
+function mlSee(...P){try{return P.some(p=>p===S)||eyes(S)>=mlB().seeMat}catch(e){return false}}
 /* a face mark on a servant: facefx-all (KIT_FACEFX.live) when present; else the jface giver with a living servant */
 function mlFx(f,s,...a){if(typeof f!=="function"||!s)return;const had=Object.prototype.hasOwnProperty.call(s,"alive");try{if(!had)s.alive=true;f(s,...a)}catch(e){}finally{if(!had)delete s.alive}}
 function mlAgeOk(s){const B=mlB();const a=s.age||B.ageDef;return a>=B.eyeAge[0]&&a<=B.eyeAge[1]}
@@ -34,7 +34,7 @@ function mlRose(p,s){mlC("rose");if(s.seek)mlC("roseSeek");if(s.seek&&s.seek.use
 function mlSeek(p){const B=mlB();let ev="";for(const s of (p.staff||[]).slice()){if(s.role!=="maid"||!mlAgeOk(s))continue;const T=S.turn||0;
   if(s.seek&&s.seek.until<T){s.seek=null;s.seekCd=T+B.seekCd}/* review/servant-mline-r2: a cooldown before the same maid seeks again */
   if(!s.seek){if((typeof asOn==="function"&&asOn()))continue;/* AG-ALL B: she seeks by choosing "Quỳ dâng trà" */if(s.age>B.seekAge||(s.seekCd||0)>T)continue;const m=qv(B.seekTr,s,1);if(!roll(B.seekStart*m))continue;s.seek={from:T,until:T+B.seekMonths,used:0};mlC("seek");
-   if(mlMine(p))ev+=`${s.name} dạo này hay xin đi dâng trà, đứng chờ nơi Hoàng thượng đi qua. `;else if(mlSee(p)&&(S.mat||0)>=B.seeMat)ev+=`Tai mắt báo: ${s.name}, người hầu của ${p.name}, tìm cách lọt vào mắt Hoàng thượng. `;continue}
+   if(mlMine(p))ev+=`${s.name} dạo này hay xin đi dâng trà, đứng chờ nơi Hoàng thượng đi qua. `;else if(mlSee(p)&&eyes(S)>=B.seeMat)ev+=`Tai mắt báo: ${s.name}, người hầu của ${p.name}, tìm cách lọt vào mắt Hoàng thượng. `;continue}
   if(mlMine(p)||s.seek.seen)continue;/* she decides about her own maids herself (her acts); an NPC master reacts once */
   if(!roll(B.seeNotice))continue;s.seek.seen=1;const tr=typeof traitsOf==="function"?traitsOf(p):[p.trait];const harsh=tr.some(x=>x==="Xảo quyệt"||x==="Kiêu ngạo"||x==="Kín đáo");
   const AC=(typeof asOn==="function"&&asOn())?asSeekReact(p,s,harsh):null;/* AG-ALL B: the master's choice */

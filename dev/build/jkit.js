@@ -22,7 +22,7 @@ const KIT_PET={h:{S:.24,M:.30,L:.34},ov:.5,
   hac:"L",thienma:"L",bachloc:"L",kylan:"L",thanhlong:"L"},img:{}};
 window.KIT_PET=KIT_PET;
 /* KIT 33.9 · SWIPE STAGE (owner 16/11 18:22Z, replaces "3 people on one stage"): people NEVER shrink (KIT_FIG). A view holds as many people (+ their pets) as fit side by side at the kit height (j59 `fits`, 33.7 slots; up to 6: Fold portrait ≈ 2, iPad more),
-   the others are reached by SWIPING the row left / right (no arrow buttons; the row follows the finger, then slides out / in, 220 ms, transform only). Two "+N" kit chips in the TOP corners of the backdrop, above the heads (left: under the title / rail buttons; right: under the side column or the back button): LEFT = people already passed, RIGHT = people still to come; hidden at 0. A drag never opens a pop-up; a tap does. 33.10: away from her residence the painting is the whole page (jplfs). */
+   the others are reached by SWIPING the row left / right (no arrow buttons; the row follows the finger, then slides out / in, 220 ms, transform only). Two BIG "+N" kit chips in the BOTTOM corners of the stage (never on a side column / rail or a name chip): LEFT = people off the left side, RIGHT = people off the right side, each its own count; hidden at 0. A drag never opens a pop-up; a tap does. 33.10: away from her residence the painting is the whole page (jplfs). */
 function kitPetClass(k){try{k=typeof petK==="function"?petK(k):k}catch(e){}return KIT_PET.cls[k]||"M"}
 function kitPetOf(who){try{if(!who)return null;for(const w of [typeof figWho==="function"?figWho(who):null,who.ref,who,who.__kp]){if(w&&typeof w==="object"&&Array.isArray(w.pets)&&typeof tsbPetOn==="function"){const P=tsbPetOn(w);if(P)return P}}}catch(e){}return null}
 function kitPetLoad(src,cb){const c=KIT_PET.img;if(c[src]!==undefined)return c[src];c[src]=null;const im=new Image();im.crossOrigin="anonymous";im.onload=()=>{c[src]={ar:im.naturalWidth/Math.max(1,im.naturalHeight)};if(cb)cb()};im.onerror=()=>{c[src]=false;if(cb)cb()};im.src=src;return null}
@@ -96,12 +96,12 @@ function kitSlotCxE(i,k,x0,avail){return x0+avail*(i+.5)/Math.max(1,k)}
    many people there are (1 person = slot 1, not the centre); nobody is shrunk or moved to make room — wide skirts / sleeves may overlap (clothing only).
    page = one page wide view (Fold room, Fold place, iPad room page — the Fold page IS the iPad page scaled, KIT §0) → 2 slots;
    spread = the iPad full-screen place painting over the whole spread → 4 slots (2 per page). Others are reached by swiping (33.9).
-   band = px under the feet reserved for the two-line name chip. pet = the following pet's fixed spot: its visible bottom-centre at slot centre + pet.sx × slot width. */
+   band = px under the feet reserved for the tallest name tag = title plate + rank + name (3 lines, fig-tag-chip), so a plate never pushes the name below the stage. pet = the following pet's fixed spot: its visible bottom-centre at slot centre + pet.sx × slot width. */
 /* stage-figsize (owner 16/11 ~21:20Z "người phải cao hơn và to hơn" + s24: Fold slots a little to the RIGHT, nobody clipped): rail = px kept free on the
    LEFT of every stage view for the left rail (#krail: 44 px buttons at 17 px + 5 px air), always, so the slots never move when the rail appears a moment later
    and no head stands under a rail button; edge = px the visible art (kitFigBody l..r, sleeves included) keeps from the stage edge / side column — a slot
    whose figure would be cut there is pulled in by just that much (kitSlotIn), its pet follows it. */
-const KIT_SLOTS={page:2,spread:4,band:50,rail:66,edge:4,pet:{sx:.3}};
+const KIT_SLOTS={page:2,spread:4,band:64,rail:66,edge:4,pet:{sx:.3}};
 function kitSlotIn(cx,l,r,lo,hi){/* l,r = visible art left/right edge relative to the body centre (l<0<r); returns the centre that keeps [cx+l,cx+r] inside [lo,hi] */
  if(r-l>=hi-lo)return (lo+hi)/2-(l+r)/2;if(cx+l<lo)return lo-l;if(cx+r>hi)return hi-r;return cx}
 function kitSlotsN(st){try{return st&&st.classList.contains("kplfs")&&kitView().pages===2?KIT_SLOTS.spread:KIT_SLOTS.page}catch(e){return KIT_SLOTS.page}}

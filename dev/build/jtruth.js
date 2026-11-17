@@ -79,7 +79,7 @@ function spyFind(a,t,verb){verb=verb||"dò la";const d0=deedFor(a,t);const n=evA
  spyKnow(a,t);const h=harmTxt(t);return `${NMc(a)} ${verb} ${NM(t)}: không tìm ra điều gì sai trái; chỉ biết ${h}. `}
 
 /* ---------- 3. frames: the victim's defence ---------- */
-function frameDef(p,a){const T=BAL.truth;const base=T.clearBase+(p.mat||0)*T.clearMat;const C=[];const W=p===S?"ngươi":"nàng";
+function frameDef(p,a){const T=BAL.truth;const base=T.clearBase+eyes(p)*T.clearMat;const C=[];const W=p===S?"ngươi":"nàng";
  /* one road, the best she has: the player also picks ONE road in PEND.vuoan (reviewer r1: NPC bonuses used to stack to 85 every time) */
  if((p.nightLog||[]).some(w=>wk()-w<=T.ksW))C.push({o:base+T.ksB,how:`sổ Kính sự phòng ghi đêm ấy ${W} hầu Hoàng thượng`});
  else C.push({o:base-10,how:"Cung Chính ti tra hỏi người ra vào"});
@@ -99,13 +99,13 @@ let FRAME_LAST="";try{lifeStore("FRAME_LAST",()=>{FRAME_LAST=""})}catch(e){}/* p
  return f0.apply(this,arguments)}})();
 /* the player's side: she picks a defence; each card shows its cost and its odds word (reviewer r1: the roads differ only in odds, so the
    VANPHONG ladder word is what makes the choice readable); the result card tells the truth */
-PEND.vuoan=pp=>{const a=byKey(pp.a);if(!a||!S)return null;const T=BAL.truth;const why=pp.why||"bị vu dùng bùa ngải";const base=T.clearBase+(S.mat||0)*T.clearMat;
+PEND.vuoan=pp=>{const a=byKey(pp.a);if(!a||!S)return null;const T=BAL.truth;const why=pp.why||"bị vu dùng bùa ngải";const base=T.clearBase+eyes(S)*T.clearMat;
  const ks=(S.nightLog||[]).some(w=>wk()-w<=T.ksW);const wit=S.maid&&(S.maid.loyal||0)>=T.witLoy;const ty=S.doctor||((S.arts&&S.arts.y)||0)>=T.tyArts;const ev=evG(S,a);
  const clamp=x=>cl(Math.round(x),T.clearMin,T.clearMax);
  const clear=how=>{try{window.__framesMe=(window.__framesMe||0)+1;window.__framesMeClear=(window.__framesMeClear||0)+1}catch(e){}const t=frameExpose(a,S,how);
   Q.push({t:"Minh oan",who:pMe(),h:`<p>${t}</p>`});log(t)};
  const guilty=light=>{try{window.__framesMe=(window.__framesMe||0)+1}catch(e){}S.framedBy=pp.a;
-  if(light){apply({danh:-6});const t="Ngươi nhận tội, xin khoan hồng: Danh -6. Kẻ vu oan vẫn chưa lộ mặt.";log(t);Q.push({t:"Nhận tội",who:pMe(),h:`<p>${t}</p>`});return}
+  if(light){apply({danh:BAL.eff.jtruth.danhGuilty});const t=`Ngươi nhận tội, xin khoan hồng: Danh ${balSg(BAL.eff.jtruth.danhGuilty)}. Kẻ vu oan vẫn chưa lộ mặt.`;log(t);Q.push({t:"Nhận tội",who:pMe(),h:`<p>${t}</p>`});return}
   const A0=ACTX.a;ACTX.a=a;let d=0;window.__truthAuto=1;try{d=framed(S,why)}finally{window.__truthAuto=0;ACTX.a=A0}
   const t=`Không minh oan được: ngươi mang tội ${why.replace(/^bị /,"")}. Danh -${d}, Sủng -10, bị phạt.`;log(t);Q.push({t:"Mang tội",who:pMe(),h:`<p class="r">${t}</p>`});};
  const go=(o,how)=>()=>{if(roll(clamp(o)))clear(how);else guilty(false)};
@@ -113,7 +113,7 @@ PEND.vuoan=pp=>{const a=byKey(pp.a);if(!a||!S)return null;const T=BAL.truth;cons
  const O=[];
  O.push({n:"Xin tra sổ Kính sự phòng",fx:{},hint:`${word(clamp(base+(ks?T.ksB:-10)))} · ${H}`,risk:RK,j67:"tốn: không tốn gì",go:go(base+(ks?T.ksB:-10),ks?"sổ Kính sự phòng ghi đêm ấy ngươi hầu Hoàng thượng":"sổ Kính sự phòng và người gác cửa xác nhận ngươi không rời cung")});
  O.push(kitOffIf({n:S.maid?`Gọi ${S.maid.name} làm chứng`:"Gọi cung nữ tâm phúc làm chứng",fx:{},hint:`${word(clamp(base+T.wB))} · ${H}`,risk:RK,j67:"tốn: không tốn gì",go:go(base+T.wB,`cung nữ ${S.maid.name} làm chứng ngươi không rời cung`)},!!wit,S.maid?`lòng ${S.maid.name} chưa tới ${T.witLoy} (có ${S.maid.loyal||0})`:"thiếu cung nữ thân cận",kitWhenWit()));
- O.push(kitOffIf({n:"Mời Thái y nghiệm hình nhân",fx:{bac:-10},hint:`${word(clamp(base+T.tyB))} · ${H}`,risk:RK,j67:"tốn: Bạc -10",go:go(base+T.tyB,"Thái y nghiệm ra hình nhân còn mới, kim chỉ không phải của cung ngươi")},!!ty,`thiếu thái y tâm phúc hoặc y thuật ${T.tyArts} trở lên`,kitWhenTy()));
+ O.push(kitOffIf({n:"Mời Thái y nghiệm hình nhân",fx:{bac:BAL.eff.jtruth.bacFx},hint:`${word(clamp(base+T.tyB))} · ${H}`,risk:RK,j67:`tốn: Bạc ${balSg(BAL.eff.jtruth.bacFx)}`,go:go(base+T.tyB,"Thái y nghiệm ra hình nhân còn mới, kim chỉ không phải của cung ngươi")},!!ty,`thiếu thái y tâm phúc hoặc y thuật ${T.tyArts} trở lên`,kitWhenTy()));
  O.push(kitOffIf({n:`Trình chứng cứ về ${a.name}`,fx:{},hint:`${word(clamp(base+T.evB*2+10))} · ${H}`,risk:RK,j67:`tốn: ${balAb(BAL.eff.jtruth.evGo)} chứng cứ về ${a.name}`,go:()=>{evA(S,a,BAL.eff.jtruth.evGo);if(roll(clamp(base+T.evB*2+10)))clear(`ngươi trình chứng cứ về ${a.name}`);else guilty(false)}},ev>=1,kitWhyEv(a,1),kitWhenEv()));
  O.push({n:"Nhận tội, xin khoan hồng",fx:{},hint:"chịu tiếng nhẹ: Danh -6; kẻ vu oan không bị lộ",risk:"an toàn",j67:"tốn: không tốn gì",go:()=>guilty(true)});
  return{t:`<p>Cung Chính ti khám tẩm cung ngươi, tìm thấy hình nhân bùa ngải. Có kẻ tố ngươi ${why.replace(/^bị vu /,"")}.</p><p class="past">Ngươi không làm việc ấy. Chọn cách minh oan.</p>`,o:O,who:pv(a)}};

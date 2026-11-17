@@ -47,16 +47,16 @@ function dbNeed(o,s){const L=[];const mx=srkMax(o,s);L.push({ok:srk(s)<mx,t:srk(
  L.push({ok:(s.loyal||0)>=BAL.dbLoyal,t:`Lòng ${s.loyal} (cần ${BAL.dbLoyal})`});L.push({ok:(s.mp||0)>=BAL.dbMerit,t:`Công lao ${s.mp||0} (cần ${BAL.dbMerit})`});return L}
 function dbDo(o,s,road,paid){const c=dbCost(s);const fav=road==="fav";/* D41: two roads of equal worth — bạc (lót tay) or favour (spFav, jpromsv) */
  const fv=fav&&typeof spFav==="function"?spFav(o,s):null;if(!paid&&(fav?!fv||!fv.ok:(o.bac||0)<c))return null;if(!dbNeed(o,s).every(x=>x.ok))return null;
- if(!paid){if(fav)spPayFav(o,fv);else ap(o,{bac:-c})}const ok=roll(dbOdds(o,s));const nm=s.name;const r0=srk(s);
+ if(!paid&&fav)spPayFav(o,fv);/* review ag-all-2 r2 A5: the lót tay bạc only when Nội vụ phủ approves (OD 17/11 ~17:10Z (1)); she must hold it (the gate above / tsNeedBac) */const ok=roll(dbOdds(o,s));if(ok&&!fav)ap(o,{bac:-Math.min(c,Math.max(0,o.bac||0))});const nm=s.name;const r0=srk(s);
  const others=(o.staff||[]).filter(x=>x!==s);
  if(ok){s.rk=srk(s)+1;s.mp=0;s.loyal=cl(s.loyal+BAL.dbGain,0,100);others.forEach(x=>x.loyal=cl(x.loyal-BAL.dbEnvy,0,100));
   if(o===S)log(`Ngươi đề bạt ${nm} lên ${srkName(s)}${fav&&fv?` (${fv.how})`:""}: lòng +${BAL.dbGain}; kẻ hầu khác ghen tị (lòng -${BAL.dbEnvy}).`);try{if(typeof spAfter==="function")spAfter(o,s,r0)}catch(e){console.error(e)}return true}
- s.loyal=cl(s.loyal-BAL.dbFail,0,100);if(o===S)log(`Nội vụ phủ chưa duyệt việc đề bạt ${nm}: ${fav?"lời xin đã mất":"tiền lót tay mất"}, ${nm} hơi thất vọng (lòng -${BAL.dbFail}).`);return false}
+ s.loyal=cl(s.loyal-BAL.dbFail,0,100);if(o===S)log(`Nội vụ phủ chưa duyệt việc đề bạt ${nm}: ${fav?"lời xin đã mất":"Nội vụ phủ không nhận bạc"}, ${nm} hơi thất vọng (lòng -${BAL.dbFail}).`);return false}
 (function(){if(typeof servJudgeBtns!=="function")return;const j0=servJudgeBtns;servJudgeBtns=function(s){const B=j0.apply(this,arguments);try{if(ownerOf(s)!==S)return B;
  const mx=srkMax(S,s),nx=SRK[s.role][srk(s)+1];if(!nx)return B;const c=dbCost(s);const N=dbNeed(S,s);const t2=whyTime(1);
  const un=N.filter(x=>!x.ok).map(x=>x.t);const fv=typeof spFav==="function"?spFav(S,s):null;const why=t2||(un.length?un[0]:"")||(S.bac<c&&!(fv&&fv.ok)?`thiếu bạc (cần ${c})${fv?` hoặc ${fv.lbl} ${fv.n}`:""}`:"");
  const eff=s.role==="maid"?(srk(s)+1>=3?"mở việc Chưởng sự tra xét cung nữ":"sai việc dễ hơn"):(srk(s)+1>=3?"đêm được chọn dễ hơn chút, sai việc dễ hơn":"sai việc dễ hơn");
- const btn=pbtn(`data-dbsv="${s.sid}"`,`Đề bạt lên ${nx}`,`${word(dbOdds(S,s))} · tốn: 1 khắc, chọn một đường: Bạc -${c} (lót tay Nội vụ phủ)${fv?` hoặc ${fv.lbl} -${fv.n} (${fv.how})`:""} · thành: thăng bậc, lòng +${BAL.dbGain}, ${eff} · hỏng: mất ${fv?"bạc hoặc lời xin":"bạc"}, lòng -${BAL.dbFail} · kèm: kẻ hầu khác ghen tị (lòng -${BAL.dbEnvy})${typeof spKemTxt==="function"?spKemTxt(S,s):""}${srk(s)+1>=2?` · (từ bậc này, thưởng tháng Bạc -${Math.floor((srk(s)+1)/2)})`:""}`,why);
+ const btn=pbtn(`data-dbsv="${s.sid}"`,`Đề bạt lên ${nx}`,`${word(dbOdds(S,s))} · tốn: 1 khắc, chọn một đường: lót tay Nội vụ phủ (cần ${c} bạc)${fv?` hoặc ${fv.lbl} -${fv.n} (${fv.how})`:""} · thành: thăng bậc, lòng +${BAL.dbGain}, ${eff}, lót tay thì Bạc -${c} · hỏng: ${fv?"lời xin thì mất, lót tay thì không mất bạc":"không mất bạc"}, lòng -${BAL.dbFail} · kèm: kẻ hầu khác ghen tị (lòng -${BAL.dbEnvy})${typeof spKemTxt==="function"?spKemTxt(S,s):""}${srk(s)+1>=2?` · (từ bậc này, thưởng tháng Bạc -${Math.floor((srk(s)+1)/2)})`:""}`,why);
  return B.concat([btn.replace("<button ",`<button data-kneed="${encodeURIComponent(JSON.stringify(N))}" `)])}catch(e){console.error(e);return B}}})();
 document.addEventListener("click",e=>{const b=e.target.closest("[data-dbsv]");if(!b||b.disabled||!S||S.dead||Q.length)return;e.stopPropagation();const s=servById(+b.dataset.dbsv);if(!s||!can(1))return;
  if(typeof spOpen==="function"){spOpen(s);return}/* D41: the two-road card (jpromsv) */
@@ -249,7 +249,7 @@ aaThieuLeApply=function(host,f0){const L=leAttire(S,"",host),f=f0||L.delta;if(!f
 odT=function(a,base){return odA(a,base+(a.tamco||0)/4)};
 (function(){const card=(k,raw)=>(a,t)=>{const v=raw(a,t);if(v==null)return v;const o=odA(a,v);if(a!==S||!t||ACTX.a)return o;const p=typeof sentPenNow==="function"?sentPenNow(a,t,k):0;return p?cl(o-p,5,95):o};
  const X=ACT.xinhh;if(X){const raw=(a,t)=>{const q=queenP();return q?30+aff(q,a)/2-aff(q,t)/2:null};X.o=card("xinhh",raw);
-  X.f=(a,t)=>{ap(a,{bac:-30});const q=queenP();const o=odA(a,raw(a,t));if(roll(o))return `Hoàng hậu nghe lời ${NM(a)}, tâu xin giáng ${NM(t)}. `+demote(t,"bị Hoàng hậu tâu giáng");affAdd(q,a,BAL.eff.jaudit.f);return `Hoàng hậu gạt lời ${NM(a)} đi. `}}
+  X.f=(a,t)=>{/* AG-ALL-2d4 (OD 17/11 ~17:10Z (1)): the gift is taken only when the Empress agrees; refused → returned */const q=queenP();const o=odA(a,raw(a,t));if(roll(o)){econPayWin(a,"xinhh",t,BAL.actBac.xinhh);return `Hoàng hậu nghe lời ${NM(a)}, tâu xin giáng ${NM(t)}. `+demote(t,"bị Hoàng hậu tâu giáng")}affAdd(q,a,BAL.eff.jaudit.f);return `Hoàng hậu gạt lời ${NM(a)} đi, lễ vật trả lại. `}}
  const T=ACT.trinhhh;if(T){const raw=(a,t)=>{const q=queenP();return q?35+aff(q,a)/2+evG(a,t)*8:null};T.o=card("trinhhh",raw);
   T.f=(a,t)=>{const q=queenP();const o=odA(a,raw(a,t));evA(a,t,BAL.eff.jaudit.evF);if(roll(o)){punish(t,"bị Hoàng hậu xét tội theo chứng cứ",1);affAdd(t,a,BAL.eff.jaudit.f_2);return `${j78Who(a)} trình chứng cứ lên Hoàng hậu: ${j78who(t)} bị xét tội. `}affAdd(q,a,BAL.eff.jaudit.f_3);return `Hoàng hậu bác chứng cứ ${j78who(a)} trình về ${j78who(t)}. `}}})();
 
@@ -344,7 +344,7 @@ function krnT(p){if(!KRN_TM)return kitTitle(p);if(KRN_TM.has(p))return KRN_TM.ge
 function krnTable(){if(KRN_C&&KRN_C.rn!=null&&KRN_C.rn===window.__rendN&&KRN_C.S===S)return KRN_C;const t=krnTable0();if(t){t.rn=window.__rendN;t.S=S}return t}
 function krnTable0(){let L=[];try{L=kpPeople().filter(([n,p])=>p&&p!==S&&n.split(" ").length>=2&&krnT(p))}catch(e){return null}if(!L.length)return null;
  const k=L.map(x=>x[0]).join("|");if(KRN_C.k===k)return KRN_C;const esc=s=>s.replace(/[.*+?^${}()|[\]\\]/g,"\\$&");
- KRN_C={k,m:new Map(L),rx:new RegExp(`(?<![\\p{L}\\p{M}])(${L.map(x=>esc(x[0])).join("|")})(?![\\p{L}\\p{M}])`,"gu")};return KRN_C}
+ KRN_C={k,m:new Map(L),rx:kRx(`(?<![\\p{L}\\p{M}])(${L.map(x=>esc(x[0])).join("|")})(?![\\p{L}\\p{M}])`,"gu")};return KRN_C}
 function krnPrevText(n){try{return typeof k61PrevText==="function"?k61PrevText(n):""}catch(e){return""}}
 function krnTitled(before,t,nm,blkPre){const b=String(before||"");if(t&&(kpTitleTail(b,t)||kpTitleTail(b.trimEnd()+" ",t)))return true;
  if(KP_TITLE_RX.test(b.slice(-40)))return true;/* any title word just before ("Phi Ôn Mạn Châu" with a stale rank is still a titled name) */

@@ -127,7 +127,7 @@ const LEX95B=[[/ngự hoa viên|vườn ngự|hòn non bộ|thái dịch trì|th
 const NOW95B=/lời đồn|đồn |đồn:|rỉ tai|nghe nói|bóng gió|\bhay |thường|từng |hôm nọ|hôm qua|đêm qua|năm xưa|trước đây|\bsẽ |ngày mai|tối mai|đêm nay|tối nay|\bsắp |\bmuốn |(?:^|\s)định |\bnếu |\(sai |sai người|\bhứa|mơ thấy|vọng sang|có thể|nghi |\bmời .* ra |ngày rằm/;
 const AGENT95B=/(người của|người bên|cung nữ của|cung nữ bên|thái giám của|thái giám bên|kẻ hầu của|người hầu của|con của|cung|tặng|cho|của|về|nhắm vào|hại|vu|bắt|thăm|giúp|tố|với)\s*$/;
 function j95bStrip(h){return String(h||"").replace(/<br\s*\/?>/gi,". ").replace(/<\/p>/gi,". ").replace(/<[^>]+>/g," ").replace(/&nbsp;/g," ").replace(/\s+/g," ")}
-function j95bScan(h){/* → [{id,k,why}] who the words place where, now */const out=[];const txt=j95bStrip(h);const sents=txt.split(/(?<=[.!?…][)"”']?)\s+|\s*;\s*/);
+function j95bScan(h){/* → [{id,k,why}] who the words place where, now */const out=[];const txt=j95bStrip(h);const sents=txt.split(/\s*;\s*/).flatMap(x=>x.split(kRx("(?<=[.!?…][)\"”']?)\\s+","")));
  const L=liveRivals(true).concat(rivals.filter(v=>v.alive&&v.out)).map(v=>[v,v.name]).filter(x=>x[1]).sort((a,b)=>b[1].length-a[1].length);
  for(const s0 of sents){const s=s0.trim();if(!s)continue;const lo=s.toLowerCase().replace(/phe (càn ninh|đức thọ|từ ninh|dưỡng hòa|cần chính)\S*/g,"").replace(/sổ (sách )?kính sự phòng/g,"sổ");const lo2=j95bNoTitles(lo);if(NOW95B.test(lo2))continue;const k=j95bLexNow(lo2);if(!k)continue;
   const used=[];for(const [v,nm] of L){let i=s.indexOf(nm);while(i>=0){if(!used.some(u=>i>=u[0]&&i<u[1])){used.push([i,i+nm.length]);const pre=s.slice(Math.max(0,i-18),i).toLowerCase();
@@ -170,7 +170,7 @@ function j95bLexNow(lo){for(const [re,c] of LEX95B){const g=new RegExp(re.source
 function j95bLexOf(t){const lo=String(t||"").toLowerCase();for(const [re,c] of LEX95B)if(re.test(lo))return c;return null}
 
 function j95bPastText(r,src){/* bind every "X ... at <place>" sentence of a turn report to the buổi just ended; drop false ones */
- const parts=String(r).split(/(?<=[.!?][)"”']?)\s+/);const keep=[];
+ const parts=String(r).split(kRx("(?<=[.!?][)\"”']?)\\s+",""));const keep=[];
  for(const sen of parts){const L=j95bScan(sen);let drop=false;for(const x of L){if(x.id[0]!=="v")continue;const v=RV(+x.id.slice(1));if(!v)continue;
    if((v.out&&x.k!=="lc")||(v.confined&&x.k!==palaceOf(v))){drop=true;break}if(j95bPutPast(x.id,x.k,"here",x.why,src)==="seen"){drop=true;break}}if(!drop)keep.push(sen)}
  return keep.join(" ")}
@@ -209,7 +209,7 @@ function j95bSeed(x,y,how,claim){/* x spreads to y that SHE harmed y. x = rival 
  j95bAct("v"+y.id,"misbelief","me",{ok:true,ex:1,why:`tin đồn: ngươi ${c.txt}, nguồn: ${src} (${c.truth?"chuyện có thật":"bịa đặt"}; qua ${how})`},"rumor:"+how);
  if(x)j95bAct("v"+x.id,"rumor","v"+y.id,{ok:true,why:`rỉ tai ${y.name} rằng ngươi ${c.txt}`},"rumor:"+how);
  J95B.stat.rum++;if(c.truth)J95B.stat.rumTrue++;J95B.rumLog.push({w:wk(),y:y.id,x:x?x.id:null,how,truth:c.truth?1:0});if(J95B.rumLog.length>200)J95B.rumLog.splice(0,50);
- /* she hears of it only as hearsay */const hear=cl(15+(S.mat||0)*12+(spyOther95b(y)?25:0),5,80);if(j95dice(hear))j95bHear(r);return r}
+ /* she hears of it only as hearsay */const hear=cl(15+eyes(S)*12+(spyOther95b(y)?25:0),5,80);if(j95dice(hear))j95bHear(r);return r}
 function spyOther95b(y){try{return typeof spyIn70==="function"&&spyIn70(S,y)}catch(e){return false}}
 function j95bHear(r){const y=RV(r.y);if(!y||!y.alive)return;r.known=1;J95B.stat.heard++;const x=r.x!=null?RV(r.x):null;
  const src=x?`người bên cung ${x.name}`:"có kẻ";const txt=`Nghe đồn ${src} đã rỉ tai ${y.name} rằng ngươi ${r.txt}. Dạo này ${y.name} nhìn ngươi lạnh hẳn đi.`;
@@ -217,7 +217,7 @@ function j95bHear(r){const y=RV(r.y);if(!y||!y.alive)return;r.known=1;J95B.stat.
  Q.push({t:"Nghe đồn",who:pv(y),opt:1,h:`<p>${txt}</p><p><i>(Lời đồn; ngươi chưa thể chắc ai đã nói gì.)</i></p>`,rum95:r.u,
   opts:j95bRumOpts(r,y,x)})}
 /* port 16/11 (owner 11/15 07:15Z): whole Tốn / Được / Mất + odds word on every option */
-function j95bRumOpts(r,y,x){const oc=j95bClearOdds(r),ot=cl(35+(S.mat||0)*8+(S.tamco||0)/4,5,90);
+function j95bRumOpts(r,y,x){const oc=j95bClearOdds(r),ot=cl(35+eyes(S)*8+(S.tamco||0)/4,5,90);
  return[{n:`Sang gặp ${y.name} giải bày`,fx:{},x:`${word(oc)} · tốn: ${BAL.m95b.k} khắc · thành: hết hiểu lầm, ${y.name} bớt oán ngươi · hỏng: ${y.name} chưa tin, oán ngươi ${balSg(BAL.eff.j95b.j95bClear_3)} · (chuyện có thật thì khó giải, chỉ nguôi một nửa)`,go:()=>j95bClear(r.u,"card")},
   {n:"Cho người tra xem ai tung tin",fx:{...BAL.m95b.trace},x:`${word(ot)} · tốn: ${BAL.m95b.k} khắc · Bạc ${BAL.m95b.trace.bac} · thành: biết kẻ tung tin, chứng cứ về kẻ ấy ${balSg(BAL.eff.j95b.evJ95bTrace)} · giải bày về sau dễ hơn · hỏng: không lần ra ai`,go:()=>j95bTrace(r.u)},
   {n:"Mặc kệ",fx:{},x:`Nắm chắc · kèm: ${y.name} vẫn tin lời đồn, sẽ tìm dịp ra tay với ngươi`,go:()=>log(`Ngươi bỏ ngoài tai lời đồn về ${y.name}.`)}]}
@@ -233,7 +233,7 @@ function j95bClear(u,how,face){const z=j95bZ();const r=z.rum.find(x=>x.u===u);if
  else{oanAdd(y,S,BAL.eff.j95b.j95bClear_3);msg=r.truth?`${y.name} không nghe: chuyện ấy có thật.`:`${y.name} chưa tin lời ngươi.`}
  log(msg);if(!face)Q.push({t:"Giải bày",who:pv(y),h:`<p>${msg}</p>`});return msg}
 function j95bTrace(u){const z=j95bZ();const r=z.rum.find(x=>x.u===u);if(!r)return"";if(typeof can==="function"&&can(BAL.m95b.k))spend(BAL.m95b.k);J95B.stat.trace++;const x=r.x!=null?RV(r.x):null;const y=RV(r.y);
- let msg;if(x&&x.alive&&j95dice(cl(35+(S.mat||0)*8+(S.tamco||0)/4,5,90))){r.traced=1;evA(S,x,BAL.eff.j95b.evJ95bTrace);try{noteAdd(x.id,`tra ra: người của nàng đã rỉ tai ${y?y.name:"một phi tần"} để gây hiểu lầm với ngươi`)}catch(e){}
+ let msg;if(x&&x.alive&&j95dice(cl(35+eyes(S)*8+(S.tamco||0)/4,5,90))){r.traced=1;evA(S,x,BAL.eff.j95b.evJ95bTrace);try{noteAdd(x.id,`tra ra: người của nàng đã rỉ tai ${y?y.name:"một phi tần"} để gây hiểu lầm với ngươi`)}catch(e){}
   msg=`Tra ra: chính người bên cung ${x.name} đã rỉ tai ${y?y.name:"nàng ấy"}. Chứng cứ về ${x.name} ${balSg(BAL.eff.j95b.evJ95bTrace)}.`}
  else msg=x?"Lần theo mãi vẫn không ra kẻ tung tin.":"Lời đồn không rõ từ đâu ra, không lần được.";
  log(msg);Q.push({t:"Tra tin đồn",h:`<p>${msg}</p>`});return msg}

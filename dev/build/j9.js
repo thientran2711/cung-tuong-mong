@@ -10,12 +10,12 @@ function relAdd(x,y,n){if(!x||!y||x===y)return;affAdd(x,y,n);affAdd(y,x,n);const
 function hostility(v,t){return oan(v,t)+Math.max(0,-aff(v,t))/2+(t===S?v.ghen/2:Math.max(0,(t.sung-v.sung)/3))+(rkOf(t)>=rkOf(v)?8:0)}
 
 /* houses: Phi and above head a palace; lower consorts live under a head. Same house: cannot harm or win over each other */
-function houseOf(p){return rkOf(p)>=PAL_HEAD?key(p):(p.resHead!=null&&byKey(p.resHead)&&(byKey(p.resHead)===S?S.rank>=PAL_HEAD:byKey(p.resHead).alive&&!byKey(p.resHead).out&&rkOf(byKey(p.resHead))>=PAL_HEAD)?p.resHead:key(p))}
+function houseOf(p){if(rkOf(p)>=PAL_HEAD)return key(p);const h=p.resHead!=null?byKey(p.resHead):null;/* one lookup (perf, review ag-all-2 r2 B5) */return h&&(h===S?S.rank>=PAL_HEAD:h.alive&&!h.out&&rkOf(h)>=PAL_HEAD)?p.resHead:key(p)}
 function sameHouse(a,b){return a!==b&&houseOf(a)===houseOf(b)}
 function assignHouses(){const heads=consorts().filter(p=>rkOf(p)>=PAL_HEAD);for(const p of consorts()){if(rkOf(p)>=PAL_HEAD){p.resHead=null;continue}if(houseOf(p)!==key(p))continue;p.resHead=heads.length&&roll(70)?key(pick(heads.filter(h=>h!==p))||p):null}}
 
 /* where everyone is this tuần: by role, trait, season and time of month */
-function palaceOf(p){if(p===S)return"home";if(p.queen)return"kn";const h=byKey(houseOf(p));return h===S?"home":"r"+h.id}
+function palaceOf(p){if(p===S)return"home";if(p.queen)return"kn";const h=byKey(houseOf(p));return h===S?"home":"r"+(h?h.id:p.id)}/* 2d3: the house head gone (died / out) → her own palace, never a crash (knStaff flake in agent_check / ag-rd) */
 function placeWhere(){const W={},sea=SEASON[S.month-1],spring=sea==="Xuân"||sea==="Thu";
  const b=S.buoi||0;const e=b===1?b4EmpNoon():b===B4L?pick(["dtd","dtd","dtd",has("datinh")?"vuon":"dtd"]):has("chamchinh")?pick(["thu","thu","thu",spring?"vuon":"thu"]):b===0?pick(["thu","thu","dtd"]):pick([spring?"vuon":"dtd","thu","vuon"]);W.emp=wet()&&e==="vuon"?"thu":e;W.th=S.thDead?null:"tn";
  for(const v of rivals){if(!v.alive){continue}if(v.out){W[v.id]="lc";continue}if(v.confined){W[v.id]=palaceOf(v);continue}
@@ -73,9 +73,9 @@ function placeHarms(v,k){const H=[];if(sameHouse(S,v))return H;
 function pushPond(a,t){ap(a,{duc:-12});a.schemes=(a.schemes||0)+1;const c=caught(a,t,false,"đẩy "+NM(t)+" xuống hồ sen");if(c)return c;
  if(roll(odA(a,40+a.tamco/4))){ap(t,{suc:-25});if(t.preg&&!t.fake&&roll(60)){t.preg=0;t.hidden=false}relAdd(a,t,BAL.eff.j9.pushPond);return (t===S?"<span class=\"r\">Ngươi bị đẩy xuống hồ sen</span>":`${t.name} trượt chân rơi xuống hồ sen`)+`, ướt sũng, nhiễm lạnh. Sức ${balSg(BAL.eff.j9.pushPond_2)}${t.preg===0?"":""}. `+dieIf(t,"nhiễm lạnh mà mất")}
  ap(a,{danh:-8});relAdd(a,t,BAL.eff.j9.pushPond_2);punish(a,"xô ngã phi tần",2);return `<span class="r">${NMc(a)} xô ${NM(t)} bị người thấy.</span> `}
-function trip(a,t){ap(a,{duc:-4});if(roll(odA(a,50+a.tamco/5))){ap(t,{danh:-3});let r=`${NMc(t)} vấp ngã giữa chốn đông người. Danh -3. `;if(t.preg&&!t.fake&&roll(25)){t.preg=0;t.hidden=false;ap(t,{suc:-15});r+=`<span class="r">${NMc(t)} động thai.</span> `}relAdd(a,t,BAL.eff.j9.trip);return r}
+function trip(a,t){ap(a,{duc:-4});if(roll(odA(a,50+a.tamco/5))){ap(t,{danh:BAL.eff.j9.danhTrip});let r=`${NMc(t)} vấp ngã giữa chốn đông người. Danh ${balSg(BAL.eff.j9.danhTrip)}. `;if(t.preg&&!t.fake&&roll(25)){t.preg=0;t.hidden=false;ap(t,{suc:-15});r+=`<span class="r">${NMc(t)} động thai.</span> `}relAdd(a,t,BAL.eff.j9.trip);return r}
  relAdd(a,t,BAL.eff.j9.trip_2);evA(t,a,BAL.eff.j9.evTrip);return `${NMc(t)} thấy rõ ${NM(a)} ngáng chân. `}
-function overhear(k){const here=liveRivals(true).filter(v=>whereOf(v)===k);if(here.length<2)return"";const v=pick(here);if(roll(od(BAL.ag.wit.hear+S.mat*BAL.ag.wit.mat))){return evA(S,v,BAL.eff.j9.evOverhear)?`Ngươi nghe lén ${v.name} nói chuyện: chứng cứ ${balSg(BAL.eff.j9.evOverhear)}.`:`Ngươi nghe lén ${v.name} nói chuyện: không có gì sai trái, chỉ biết ${harmTxt(v)}.`}return "Không nghe được gì."}
+function overhear(k){const here=liveRivals(true).filter(v=>whereOf(v)===k);if(here.length<2)return"";const v=pick(here);if(roll(od(BAL.ag.wit.hear+eyes(S)*BAL.ag.wit.mat))){return evA(S,v,BAL.eff.j9.evOverhear)?`Ngươi nghe lén ${v.name} nói chuyện: chứng cứ ${balSg(BAL.eff.j9.evOverhear)}.`:`Ngươi nghe lén ${v.name} nói chuyện: không có gì sai trái, chỉ biết ${harmTxt(v)}.`}return "Không nghe được gì."}
 
 /* the palace map */
 const MAPL=[["thu","dtd","tn"],["kn","vuon","ksp"],["tyv","lc","home"]];

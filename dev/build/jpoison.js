@@ -20,7 +20,7 @@
    5. ÂN TÌNH: gloss (how it is earned, what it does, the existing monthly fade j8 anMonth); the Emperor card shows Sủng and Ân tình as kit
       person-card chips (Ân tình with its bar). The top bar stays the header-danh layout (owner ≈17:50Z: left Sắc·Tài·Tâm cơ·Đức·Danh·Sủng,
       right Bạc·Sức): no extra cell; Ân tình also shows in the stage "Ân sủng" panel (owner-approved 17:55Z). */
-Object.assign(BAL,{pg:{base:42,grade:6,doctor:15,needle:30,maid:12,duc:6,hhEv:1},gift:{an:30,rel:40,th:40,askW:2}});
+Object.assign(BAL,{pg:{base:42,grade:6,doctor:15,needle:30,maid:12,duc:6,hhEv:1,weakSuc:30/* review/one-core-jkc: Sức below this = she is weak (the odds line names the cut) */},gift:{an:30,rel:40,th:40,askW:2}});
 /* ---------- poisons ---------- */
 IT.docngam=IT.docngam||{n:"Độc ngấm dần",kd:"Độc dược",d:"Bỏ vào đồ ăn: Sức -25, ốm ba tháng · bị khám ra là có tội",pr:60,il:1,tg:[]};
 IT.phanhuy=IT.phanhuy||{n:"Phấn hủy nhan",kd:"Độc dược",d:"Trộn vào đồ ăn, phấn sáp: Sắc -8 · bị khám ra là có tội",pr:45,il:1,tg:[]};
@@ -48,14 +48,14 @@ function pgGuard(t){const L=[];const v=Math.round(oSee(t,true)/3);L.push([`${pgN
 function pgOdds(a,t,e){const G=pgGuard(t);const tr=Math.round((rel(t,a)||0)/4),tc=Math.round((a.tamco||0)/4),gr=pgGrade(e)*BAL.pg.grade;
  const raw=BAL.pg.base+tc+tr+gr+G.reduce((s,x)=>s+x[1],0);const o=cl(Math.round(odA(a,raw)),3,92);
  const F=[[`Tâm cơ ${pgNm(a)} ${a.tamco|0}`,tc],[`${pgNm(t,1)} ${tr>=0?"tin":"ngờ"} ${pgNm(a)}`,tr],
-  [e&&e.wk?`Món ${WTIER[e.wk.ti|0]} che vị`:`${e&&IT[e.k]?itm(e.k).n:"Món"} che vị`,gr]].concat(G);if((a.suc||0)<30)F.push([`Sức ${pgNm(a)} dưới 30`,-15]);
+  [e&&e.wk?`Món ${WTIER[e.wk.ti|0]} che vị`:`${e&&IT[e.k]?itm(e.k).n:"Món"} che vị`,gr]].concat(G);if((a.suc||0)<BAL.pg.weakSuc)F.push([`Sức ${pgNm(a)} dưới ${BAL.pg.weakSuc}`,-15]);
  const cp=caughtOdds(a,t,true);return{o,F,cp}}
 function pgEffect(a,t,pk){const nm=t===S?"Ngươi":`${rkName(t)} ${t.name}`;
  if(pk==="hacdinh"){if(t===S){die("Trúng độc, không qua khỏi");return `<span class="r">Ngươi trúng độc.</span> `}ap(t,{suc:-120});try{dieIf(t,"Trúng độc, không qua khỏi")}catch(e){}return `<span class="r">${nm} trúng độc nặng.</span> `}
- if(pk==="docngam"){ap(t,{suc:-25});t.sick=Math.max(t.sick||0,3);return `${nm} ăn xong thì người mệt dần, thái y bảo trúng hàn khí (Sức -25, ốm ba tháng). `}
- if(pk==="phanhuy"){ap(t,{sac:-8});return `${nm} nổi mẩn khắp mặt (Sắc -8). `}
- if(pk==="xahuong"){if(t.preg&&!t.fake){t.preg=0;t.hidden=false;ap(t,{suc:-25});return `<span class="r">${nm} động thai, sảy mất đứa bé (Sức -25).</span> `}return `${nm} dùng xong không sao. `}
- if(pk==="meduoc"){ap(t,{suc:-10});t.block=Math.max(t.block||0,1);return `${nm} ngủ li bì cả ngày, lỡ thẻ bài tuần này (Sức -10). `}return""}
+ if(pk==="docngam"){ap(t,{suc:BAL.eff.jpoison.sucPgEffect});t.sick=Math.max(t.sick||0,3);return `${nm} ăn xong thì người mệt dần, thái y bảo trúng hàn khí (Sức ${balSg(BAL.eff.jpoison.sucPgEffect)}, ốm ba tháng). `}
+ if(pk==="phanhuy"){ap(t,{sac:BAL.eff.jpoison.sacPgEffect});return `${nm} nổi mẩn khắp mặt (Sắc ${balSg(BAL.eff.jpoison.sacPgEffect)}). `}
+ if(pk==="xahuong"){if(t.preg&&!t.fake){t.preg=0;t.hidden=false;ap(t,{suc:BAL.eff.jpoison.sucPgEffect_2});return `<span class="r">${nm} động thai, sảy mất đứa bé (Sức ${balSg(BAL.eff.jpoison.sucPgEffect_2)}).</span> `}return `${nm} dùng xong không sao. `}
+ if(pk==="meduoc"){ap(t,{suc:BAL.eff.jpoison.sucPgEffect_3});t.block=Math.max(t.block||0,1);return `${nm} ngủ li bì cả ngày, lỡ thẻ bài tuần này (Sức ${balSg(BAL.eff.jpoison.sucPgEffect_3)}). `}return""}
 /* the one act: same function for her and every NPC */
 function pgGive(a,t,ix,pk){const e=a.inv[ix];if(!e||!pgFood(e)||!PGX[pk])return"";const pi=a.inv.findIndex(x=>x&&x.k===pk&&!x.h);if(pi<0)return"";
  const by=a===S?"Ngươi":`${rkName(a)} ${a.name}`,dn=e.wk?e.wk.n:itm(e.k).n;const O=pgOdds(a,t,e);

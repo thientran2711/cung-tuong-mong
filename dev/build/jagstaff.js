@@ -98,12 +98,12 @@ function asLove(s){const L=[];s.mt=s.mt||{};const B=asB();
  if(!s.lover){const x=allServ().find(y=>y.role==="maid"&&!y.lover&&ownerOf(y)!==ownerOf(s)&&(s.af||{})[y.sid]>=B.dt&&((y.af||{})[s.sid]||0)>=B.dt);
   if(x)L.push(asOpt(s,"vow",SRVA.vow.o(s,null,{tinh:s.af[x.sid]}),{t:x,w:{tinh:B.vowTinh}}))}
  return L}
-function asRisk(s){return srvRiskOf(asHome(ownerOf(s)),S.mat||0,asFriends(s),s.tamco)}/* one table with the player maid (j42 srvRiskOf, BAL.srvRisk) */
+function asRisk(s){return srvRiskOf(asHome(ownerOf(s)),eyes(S),asFriends(s),s.tamco)}/* one table with the player maid (j42 srvRiskOf, BAL.srvRisk) */
 /* ---------- the shared execution (the player's card: cost, roll at its odds, gain or loss, công lao, then what the act does) ---------- */
-function asSee(m,t){try{return m===S||t===S||(S.mat||0)>=BAL.mline.seeMat}catch(e){return false}}
-function asRun(s,o){const m=ownerOf(s);if(!m)return"";const A=SRVA[o.sk];asC(s,o.sk);asAp(s,o.c);const ok=o.p>=100||roll(agOdd(o.p));
- asAp(s,ok?srvWa(o.sk,s,m):(A.l||{}));if(ok&&A.mp)servMerit(s,A.mp);let r="";
- try{r=(AS_DO[o.sk]||(()=>""))(s,m,o,ok)||""}catch(e){console.error("jagstaff "+o.sk,e)}
+function asSee(m,t){try{return m===S||t===S||eyes(S)>=BAL.mline.seeMat}catch(e){return false}}
+function asRun(s,o){const m=ownerOf(s);if(!m)return"";const A=SRVA[o.sk];asC(s,o.sk);asAp(s,o.c);const ok=o.p>=100||agTry(o.p),sf=!ok&&agSoft(o.p);
+ asAp(s,ok?srvWa(o.sk,s,m):sf?{}:(A.l||{}));if(ok&&A.mp)servMerit(s,A.mp);let r="";
+ try{r=sf?agSoftTxt(s):(AS_DO[o.sk]||(()=>""))(s,m,o,ok)||""}catch(e){console.error("jagstaff "+o.sk,e)}
   return r}
 function asOut(s,why){const o=ownerOf(s);if(o&&o.staff){const i=o.staff.indexOf(s);if(i>=0)o.staff.splice(i,1)}s.out=why||1;ASN.out=(ASN.out||0)+1}
 const AS_DO={
@@ -193,7 +193,7 @@ try{if(typeof agReg==="function"){agReg("maid","staff",(p,N)=>asOpts(p,N));agReg
   for(const k of Object.keys(SRVA).concat(["empTea"]))for(const g of ["maid","srv"])agRunReg(g+":"+k,(d,t,pd)=>{if(!d||d.sid==null||d.out)return"";const O=asOpts(d);const c=O.find(o=>o.k===pd.k&&(!t||o.t===t||o.man===t))||O.find(o=>o.k===pd.k);
    if(!c){ASN.miss=(ASN.miss||0)+1;return""}return c.run(d)||""});
   /* the record's row of a household staff ("s"+sid, kind "st") = her plan (the old errand dice j95 :244 give way to it) */
-  if(typeof j95planOther==="function"){const po=j95planOther;j95planOther=function(p,c,P){try{if(p&&p.kind==="st"&&asOn()&&agDOn()){agDayEnsure();const sl=agDaySlot(p.id);if(sl)return agRow(sl)}}catch(e){console.error("jagstaff row",e)}return po.apply(this,arguments)}}}
+  if(typeof j95planOther==="function"){const po=j95planOther;j95planOther=function(p,c,P){try{if(p&&p.kind==="st"&&asOn()&&agDOn()){agDayEnsure();const sl=agDaySlot(p.id);if(sl)return agRow(sl);if(typeof agLzHas==="function"&&agLzHas(p.id)){/* still in the staff slice queue (B5): her base row until drawn */const sv=servById(+String(p.id).slice(1));if(sv)return base(sv)}}}catch(e){console.error("jagstaff row",e)}return po.apply(this,arguments)}}}
  /* a household staff's group by her role (jagday reads .eunuch / .male; staff carry role "maid" / "eunuch") */
  if(typeof agGrp==="function"){const g0=agGrp;agGrp=function(p){if(p&&p.sid!=null&&p.role)return asGrp(p);return g0.apply(this,arguments)}}}catch(e){console.error("jagstaff reg",e)}
 (function(){

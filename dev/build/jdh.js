@@ -64,7 +64,7 @@ function choices(key,i){return (cfg(key).ch||[]).filter(t=>bv(t,i))}
 const BLAB={gSung:"Sủng dễ lên",gDanh:"Danh dễ lên",gBac:"Bạc dư dả",gTren:"Bề trên quý mến",gHau:"Phi tần quý mến",gTrung:"Cung nữ trung thành",
  phuc:"Phúc khí",thai:"Dễ có thai",nghe:"Học mau tiến",thi:"Tài nghệ hội thi",suc:"Ngủ lại sức",don:"Tin đồn khó lan"};
 function bLab(t){return BLAB[t]||`Thêm ${(typeof NAMES==="object"&&NAMES[t])||t}`}
-function bTxt(t,v){if(!v)return "";if(FLAT.includes(t))return `${(typeof NAMES==="object"&&NAMES[t])||t} +${v}`;
+function bTxt(t,v){if(!v)return "";if(FLAT.includes(t))return statTxt(t,v);
  switch(t){case"gSung":return `Sủng được thêm ${ph(v)}`;case"gDanh":return `Danh được thêm ${ph(v)}`;case"gBac":return `Bạc thu vào thêm ${ph(v)}`;
   case"gTren":return `Thái hậu, Hoàng hậu quý ta thêm ${ph(v)}`;case"gHau":return `Phi tần quý ta thêm ${ph(v)}`;case"gTrung":return `Lòng cung nữ thêm ${ph(v)}`;
   case"phuc":return `Phúc khí +${v}: việc may rủi dễ thành hơn`;case"thai":return v<2?"Có thai: dễ hơn một chút":"Có thai: dễ hơn";

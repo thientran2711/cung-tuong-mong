@@ -21,8 +21,10 @@ const P3C={
     a refusal may be told to her master (r2 tmRefuse); cost = that person's bribe price (nv bribeCost, as Mua chuộc) */
  eyes:p=>{const X=BAL.ag.par3.eyes;const s=typeof tmBest==="function"?tmBest(p):null;
   if(!s)return{n:"Cài tai mắt",t:"Các cung khác chưa có ai để ngỏ lời.",c:{},o:0,w:{},l:{},lock:1};
-  return{n:"Cài tai mắt",t:`Ngỏ lời với ${tmWho(s)}; nhận hay không là ở người ấy.`,c:{bac:-nv(s,"bribeCost")},o:tmOdds(p,s),w:{},l:{...X.l},
-   x:`thành: ${s.name} làm tai mắt cho ${p===S?"ngươi":p.name} · hỏng: người ấy có thể mách chủ`,go:()=>tmTake(p,s),fail:()=>tmNo(p,s)}},
+  /* 2f3 (OD 17/11 ~17:10Z): her price is paid ONLY on success (w), a refusal costs no bạc (l keeps the other consequences + the sent servant's fear) */
+  const pr=nv(s,"bribeCost");if((p.bac||0)<pr)return{n:"Cài tai mắt",t:`Không đủ ${pr} bạc để ngỏ lời với ${tmWho(s)}.`,c:{},o:0,w:{},l:{},lock:1};
+  return{n:"Cài tai mắt",t:`Ngỏ lời với ${tmWho(s)}; nhận hay không là ở người ấy.`,c:{},o:tmOdds(p,s),w:{bac:-pr},l:{...X.l},
+   x:`thành: ${s.name} làm tai mắt cho ${p===S?"ngươi":p.name}, tốn ${pr} bạc · bại: không mất bạc; người ấy có thể mách chủ, kẻ đi đưa lời sợ liên lụy`,go:()=>tmTake(p,s),fail:()=>tmNo(p,s)}},
  anthai:p=>{const X=BAL.ag.par3.anthai;const x="tháng này nguy cơ sảy thai giảm một nửa";
   return ((p.arts&&p.arts.y)||0)>=X.self.y?{n:"Tự bào chế thuốc an thai",t:p===S?"Ngươi tự sắc thuốc, không ai nhúng tay được.":"Tự sắc thuốc an thai.",c:{...X.self.c},o:100,w:{},x,go:()=>{p.anthai=1}}
    :{n:"An thai",t:"Nằm nghỉ, uống thuốc an thai.",c:{...X.buy.c},o:100,w:{...X.buy.w},x,go:()=>{p.anthai=1}}},
@@ -33,8 +35,9 @@ const P3C={
     const who=typeof j78Who==="function"?j78Who(t):t.name;if(p===S)log(`${who} bị Thái hậu quở trách, mất sủng.`);return `${p.name} kể tội ${t.name} với Thái hậu; ${t.name} bị quở trách, mất sủng`}}},
  treat:p=>({n:"Xin chữa bệnh",c:{...BAL.ag.par3.treat.c},o:100,x:illName(p),run:()=>treat(p,"ty")})};
 /* run one card for an NPC: the player's runOpt order (cost, odds, gain or loss, then go / run) */
-function p3Run(v,C,why){if(!C||C.lock)return"";if(!agcCan(v,C.c))return"";agcPay(v,C.c);const o=C.o==null?100:C.o;const ok=o>=100||roll(agOdd(o));p3Ap(v,ok?C.w:C.l);let r="";
- try{if(ok&&C.go)r=C.go()||"";if(!ok&&C.fail)r=C.fail()||"";if(C.run)r=C.run()||r}catch(e){agdErr("par3:"+why,e)}AG3.stat.land++;AG3.stat.by[why]=(AG3.stat.by[why]||0)+1;
+/* 2f3: ONE card-odds rule with her deck (j2 runOpt): o + her quẻ luck for the card's domain (lotB), then the cap (agTry) */
+function p3Run(v,C,why){if(!C||C.lock)return"";if(!agcCan(v,C.c))return"";agcPay(v,C.c);const o=C.o==null?100:C.o;const ok=o>=100||agTry(o+lotB(v,C.dom)),sf=!ok&&agSoft(o);p3Ap(v,ok?C.w:sf?null:C.l);let r="";
+ try{if(ok&&C.go)r=C.go()||"";if(!ok&&!sf&&C.fail)r=C.fail()||"";if(C.run&&!sf)r=C.run()||r}catch(e){agdErr("par3:"+why,e)}if(sf)r=agSoftTxt(v);AG3.stat.land++;AG3.stat.by[why]=(AG3.stat.by[why]||0)+1;
  return r?String(r).replace(/<[^>]+>/g,"").replace(/\.\s*$/,""):`${v.name} ${C.n.charAt(0).toLowerCase()+C.n.slice(1)}${ok?"":" nhưng không thành"}`}
 function p3Kc(C){try{return Math.max(1,cardCost(C))}catch(e){return 1}}
 /* the player's button each cx3 deed is (dev/test/ag-all.test.js okK, dev/test/ag-par3.js) */
@@ -66,10 +69,10 @@ agReg("consort","par3",(v,N,need)=>{const O=[];if(!p3On()||v===S||v.out||v.confi
   if(v.charM!==S.turn&&nd(X.charity.g)){const C=BAL.charity;P(p3O(v,"charity",{n:"Phát bạc cứu giúp cung nhân nghèo",c:{bac:-C.bac},o:100,k:C.khac},N,X.charity.g,"help"))}
   if(nd(X.use.g)&&p3UseIx(v)>=0)P(p3O(v,"use",{n:"Dùng",c:{},o:100},N,X.use.g,"self"));
   if((need==="bac"||!need)&&(v.bac||0)<X.sell.bacBelow&&p3SellIx(v)>=0)P(p3O(v,"sell",{n:"Bán",c:{},o:100},N,X.sell.g,"self"));
-  if(nd(X.tyGift.g)&&S.court&&S.court.ty&&(v.bac||0)>=BAL.court.gift.bac&&others(v).some(t=>t&&t!==v&&agSpite(v,t)>0))P(p3O(v,"tyGift",{n:"Biếu",c:{bac:-BAL.court.gift.bac},o:100},N,X.tyGift.g,"bribe"));
+  if(nd(X.tyGift.g)&&S.court&&S.court.ty&&(v.bac||0)>=BAL.bacFee.court&&others(v).some(t=>t&&t!==v&&agSpite(v,t)>0))P(p3O(v,"tyGift",{n:"Biếu",c:{bac:-BAL.bacFee.court},o:100},N,X.tyGift.g,"bribe"));
   if(nd(X.work.g)&&typeof wkMake==="function"){const a=p3WorkArt(v);if(a)P(p3O(v,"work",{n:"Tự học",c:{},o:100,k:2},N,X.work.g,"art"))}
   const S3=X.staff;for(const a of ["thuong","phat","doi","che","hoi"]){const g=a==="hoi"?S3.gHoi:S3.g;if(!nd(g))continue;const s=p3Staff(v,a);if(!s)continue;
-   const c=a==="thuong"?{bac:-S3.thuong.bac}:a==="che"?{danh:-S3.che.danh}:{};const k="staff"+a.charAt(0).toUpperCase()+a.slice(1);P(p3O(v,k,{n:AGC3BTN[k],c,o:100,k:a==="hoi"?2:1},N,g,"staff"))}
+   const c=a==="thuong"?{bac:-BAL.house.thuongBac}:a==="che"?{danh:BAL.eff.j10.danhServAct}:{};const k="staff"+a.charAt(0).toUpperCase()+a.slice(1);P(p3O(v,k,{n:AGC3BTN[k],c,o:100,k:a==="hoi"?2:1},N,g,"staff"))}
  }catch(e){agdErr("par3",e)}return O});
 function p3WorkArt(v){let b=null,l=0;for(const a in WDEF){const x=(v.arts&&v.arts[a])||0;if(x>l){l=x;b=a}}return b}
 /* ---------------- what each deed does (the same functions as her buttons) ---------------- */
@@ -101,12 +104,12 @@ function p3Free(v,why){const X=BAL.ag.par3.cold;v.out=false;v.rank=0;v.lastPromo
  v.p3Freed=why;return `${v.name} được tha khỏi lãnh cung (${why}), phục vị ${RANKS[0].n}`}
 function p3Nun(v){v.alive=false;v.nun=1;return `${v.name} cạo tóc xuất gia, rời lãnh cung`}
 function p3Cold(v){const X=BAL.ag.par3.cold;let N;try{N=agNeeds(v)}catch(e){N={}}const L=coldActsOf(v).filter(C=>!C.lock&&agcCan(v,C.c));const best=Math.max(0,...L.filter(C=>/được tha|phục vị|nhớ chuyện cũ/.test(C.x||"")).map(C=>C.o||0));
- const W=[];for(const C of L){const free=/được tha|phục vị|nhớ chuyện cũ|chứng cứ \+1/.test(C.x||"");let u;
+ const W=[];for(const C of L){const free=(/được tha|phục vị|nhớ chuyện cũ/.test(C.x||"")||String(C.x||"").includes(evSg(BAL.ag.ev.one)))/* the evidence words come from the one helper (evSg), never a typed "+1" */;let u;
   if(C.n==="Xuất gia")u=(v.suc||0)<X.nunSuc&&best<X.nunO?agcU(v,N,100,{rest:BAL.ag.unit},{},"self"):0;
   else if(free)u=agcU(v,N,C.o==null?100:C.o,X.gFree,C.c||{},"self");
   else{const g={};for(const k in C.w||{})g[k==="suc"?"rest":k]=(C.w[k]||0)*(X.gStay[k==="suc"?"rest":k]||0);u=agcU(v,N,C.o==null?100:C.o,g,C.c||{},"self")}
   if(u>0)W.push([C,u])}
- if(!W.length)return"";const C=mindPick(W,v);if(!C)return"";const r=p3Run(v,C,"cold:"+C.n);const seen=(S.mat||0)>=BAL.mline.seeMat||!!v.p3Freed;v.p3Freed=null;return seen&&r?r+". ":""}
+ if(!W.length)return"";const C=mindPick(W,v);if(!C)return"";const r=p3Run(v,C,"cold:"+C.n);const seen=eyes(S)>=BAL.mline.seeMat||!!v.p3Freed;v.p3Freed=null;return seen&&r?r+". ":""}
 /* ledger labels */
 try{for(const k in AGC3ACT)ACT95["ag_cx3:"+k]=AGC3ACT[k]}catch(e){}
 Object.assign(window,{p3Cold,p3Free,p3Nun,AG3,P3C,AGC3BTN,AGC3ACT,p3On,p3Run,servDo});
@@ -121,8 +124,8 @@ const P3T={
  health:(p,v)=>{const T=BAL.talk,f=p3ChatF(p,v),n=Math.max(1,Math.round(T.health*f));return{n:"Hỏi han sức khỏe",o:100,x:`nàng quý ngươi +${n}`,
   run:()=>{affAdd(v,p,n);p3ChatMark(p,v);return p===S?`${v.name} cảm động. Nàng quý ngươi +${n}.`:`${p.name} hỏi han sức khỏe ${p3Who(v)}; ${p3Who(v)} quý ${p.name} +${n}`}}},
  praise:(p,v)=>{const T=BAL.talk,f=p3ChatF(p,v),n=Math.max(1,Math.round(nv(v,"praise")*f)),o=talkPraiseO(p);return{n:"Khen tài nghệ nàng",o,x:`nàng quý ngươi +${n}`,
-  run:()=>{p3ChatMark(p,v);if(roll(agOdd(o))){affAdd(v,p,n);return p===S?`${v.name} tươi cười. Nàng quý ngươi +${n}.`:`${p.name} khen tài nghệ ${p3Who(v)}; ${p3Who(v)} quý ${p.name} +${n}`}
-   affAdd(v,p,-T.praiseFail);return p===S?`${v.name} cho là ngươi giả lả. Nàng quý ngươi -${T.praiseFail}.`:`${p.name} khen tài nghệ ${p3Who(v)}, bị cho là giả lả`}}},
+  run:()=>{p3ChatMark(p,v);if(agTry(o)){affAdd(v,p,n);return p===S?`${v.name} tươi cười. Nàng quý ngươi +${n}.`:`${p.name} khen tài nghệ ${p3Who(v)}; ${p3Who(v)} quý ${p.name} +${n}`}
+   if(agSoft(o))return agSoftTxt(p);affAdd(v,p,-T.praiseFail);return p===S?`${v.name} cho là ngươi giả lả. Nàng quý ngươi -${T.praiseFail}.`:`${p.name} khen tài nghệ ${p3Who(v)}, bị cho là giả lả`}}},
  gossip:(p,v,third)=>{const T=BAL.talk,G=T.gossip,f=p3ChatF(p,v),n=Math.max(1,Math.round(G.hit*f));return{n:`Bàn tán về ${third.name}`,o:100,
   x:aff(v,third)<0?`nàng ghét người này, hợp chuyện: nàng quý ngươi +${n}`:`kèm: nàng quý ngươi -${G.miss} · nàng có thể mách lại`,
   run:()=>{p3ChatMark(p,v);if(aff(v,third)<0){affAdd(v,p,n);oanAdd(v,third,G.oan);return p===S?`Hai người to nhỏ chuyện ${third.name}. Nàng quý ngươi +${n}.`:`${p.name} và ${p3Who(v)} to nhỏ chuyện ${p3Who(third)}`}
@@ -150,17 +153,18 @@ Object.assign(window,{P3T,p3ChatF,p3ChatMark});
 /* ---------------- household: the same functions as her Cung nhân tab (j8 itemTest, j14 recommend / searchMaids, j29 hireTake, j10 threatServ, staffTam) ---------------- */
 function staffTam(m,s){s.loyal=cl((s.loyal||0)+BAL.eff.jhouse.loyalRun,0,100);return m===S?`${s.name} được ngươi hỏi han: lòng ${balSg(BAL.eff.jhouse.loyalRun)}.`:`${m.name} tâm sự với ${s.name}`}
 /* Nội vụ phủ hands a candidate over (her hireCard choice / an NPC's pick); paid = her option already took the bạc */
-function hireTake(m,role,s,paid){const P=npool()[role];const i=P.indexOf(s);if(i>=0)P.splice(i,1);if(!paid)ap(m,{bac:-BAL.ag.par3.hire.bac});(m.staff=m.staff||[]).push(s);return m===S?"":`${m.name} nhận ${s.name} từ Nội vụ phủ`}
-function p3HireRole(v){if((v.bac||0)<BAL.ag.par3.hire.bac)return null;const [cm,ce]=capOf(v);const n=r=>(v.staff||[]).filter(s=>s.role===r&&!s.out).length;
- let P;try{P=npool()}catch(e){return null}if(n("maid")<cm&&(P.maid||[]).length)return"maid";if(n("eunuch")<ce&&(P.eunuch||[]).length)return"eunuch";return null}
+function hireTake(m,role,s,paid){const P=npool()[role];const i=P.indexOf(s);if(i>=0)P.splice(i,1);if(!paid)ap(m,{bac:-BAL.house.hireBac});(m.staff=m.staff||[]).push(s);return m===S?"":`${m.name} nhận ${s.name} từ Nội vụ phủ`}
+/* merge r2: room counted by main's household rule (staff-root: hhHas = maids incl. the close maid, eunuchs; BAL.promo.cap) */
+function p3HireRole(v){if((v.bac||0)<BAL.house.hireBac)return null;const [cm,ce]=capOf(v),[nm,ne]=hhHas(v);
+ let P;try{P=npool()}catch(e){return null}if(nm<cm&&(P.maid||[]).length)return"maid";if(ne<ce&&(P.eunuch||[]).length)return"eunuch";return null}
 function p3TestIx(v){return p3Inv(v,(e,it)=>e.from&&e.from!==key(v)&&e.from!=="emp"&&e.from!=="th"&&!e.tested?1:null)}
 function p3ThreatT(v){const K=v.knowDT||[];if(!K.length)return null;const L=allServ().filter(s=>s.lover&&K.includes(s.sid)&&!s.spyFor&&ownerOf(s)&&ownerOf(s)!==v&&ownerOf(s)!==S&&agSpite(v,ownerOf(s))>0);
  return L.length?mindPickBy(L,s=>agSpite(v,ownerOf(s)),v):null}
 Object.assign(AGC3BTN,{test:"Nghiệm độc",hire:"Thêm cung nữ",staffTam:"Tâm sự",staffUp:"Tiến cử",search:"Chưởng sự tra xét cung nữ",threat:"Dọa tố"});
 Object.assign(AGC3ACT,{test:"đem quà được tặng đi nghiệm độc",hire:"xin Nội vụ phủ thêm người",staffTam:"tâm sự với kẻ hầu",staffUp:"tiến cử kẻ hầu",search:"cho chưởng sự tra xét cung nữ",threat:"dọa tố chuyện đối thực"});
 agReg("consort","par3house",(v,N,need)=>{const O=[];if(!p3On()||v===S||v.out||!v.alive)return O;const X=BAL.ag.par3,H=X.house;const nd=g=>!need||g[need]!=null;const P=x=>x&&O.push(x);
- try{if(nd(X.test.g)&&(v.bac||0)>=X.test.bac&&p3TestIx(v)>=0)P(p3O(v,"test",{n:"Nghiệm độc",c:{bac:-X.test.bac},o:100},N,X.test.g,"self",()=>"tyv"));
-  if(nd(X.hire.g)&&p3HireRole(v))P(p3O(v,"hire",{n:"Thêm cung nữ",c:{bac:-X.hire.bac},o:100},N,X.hire.g,"staff"));
+ try{if(nd(X.test.g)&&(v.bac||0)>=BAL.bacFee.itTest&&p3TestIx(v)>=0)P(p3O(v,"test",{n:"Nghiệm độc",c:{bac:-BAL.bacFee.itTest},o:100},N,X.test.g,"self",()=>"tyv"));
+  if(nd(X.hire.g)&&p3HireRole(v))P(p3O(v,"hire",{n:"Thêm cung nữ",c:{bac:-BAL.house.hireBac},o:100},N,X.hire.g,"staff"));
   const st=(v.staff||[]).filter(s=>s&&!s.out);
   if(nd(H.gTam)&&st.some(s=>(s.loyal||0)<H.tamBelow))P(p3O(v,"staffTam",{n:"Tâm sự",c:{},o:100},N,H.gTam,"staff"));
   if(nd(H.gUp)&&(v.bac||0)>=BAL.house.upBac&&st.some(s=>(s.loyal||0)>=H.upLoyal))P(p3O(v,"staffUp",{n:"Tiến cử",c:{bac:-BAL.house.upBac,danh:-BAL.house.upDanh},o:100},N,H.gUp,"staff"));
@@ -211,7 +215,7 @@ agRunReg("cx3:drug",v=>p3DrugOk(v)?p3Run(v,P3C.drug(v),"drug"):"");
 function p3InvQ(){return(S.invQ=S.invQ||[])}
 function p3InvLand(){const Q=p3InvQ();if(!Q.length)return;S.invQ=[];for(const q of Q){const h=RV(q.h);if(!h||!h.alive||h.out||h.confined)continue;const k=palaceOf(h);
  if(q.g==="me"){S.where[h.id]=k;seeLoc(h,k);log(`${h.name} sai người mời ngươi sang cung nàng chơi buổi này.`);continue}
- const g=RV(q.g);if(!g||!g.alive||g.out||g.confined)continue;if(roll(inviteO(h,g))){S.where[g.id]=k;S.where[h.id]=k}else affAdd(h,g,BAL.eff.j21.top)}}
+ const g=RV(q.g);if(!g||!g.alive||g.out||g.confined)continue;const io=inviteO(h,g);if(agTry(io)){S.where[g.id]=k;S.where[h.id]=k}else if(!agSoft(io))affAdd(h,g,BAL.eff.j21.top)}}
 AGC3BTN.invite2="Mời đến cung ta";AGC3ACT.invite2="sai người đi mời khách";
 agReg("consort","par3inv",(v,N,need)=>{const O=[];if(!p3On()||v===S||v.out||v.confined||!v.alive||(need&&need!=="ally"))return O;const X=BAL.ag.par3.invite;
  try{if(p3InvQ().some(q=>q.h===v.id))return O;const L=others(v).filter(x=>x&&x.alive!==false&&!x.out&&!x.confined&&!sameHouse(v,x)&&aff(v,x)>=X.minAff&&aff(x,v)>=BAL.invite.hate);if(!L.length)return O;
@@ -316,7 +320,7 @@ function maidTalkDo(p){const X=BAL.ag.cx2.maidTalk,m=p===S?S.maid:p.maid;if(!m)r
 try{AGC2BTN.maidTalk="Trò chuyện với cung nữ"}catch(e){}
 agRunReg("cx2:maidTalk",v=>{const r=maidTalkDo(v);return r?ag2Res(v,"maidTalk",1,r):""});
 function maidSpyT(v){const L=others(v).filter(t=>t&&t!==v&&(t===S||t.alive)&&!t.out&&!sameHouse(v,t));return L.length?mindPickBy(L,t=>BAL.mind.pick.ag.base+Math.max(0,agSpite(v,t))+Math.max(0,danger(t,v))/10,v):null}
-agRunReg("cx2:maidSpy",(v,t)=>{const m=v.maid;t=t||maidSpyT(v);if(!m||!t)return"";if(!roll(spyRoll(v,t,m))){m.loyal=cl((m.loyal||0)-BAL.eff.jwhy.loyalSpyMaidRun,0,100);oanAdd(t,v,BAL.eff.j78.j78maidFail);
+agRunReg("cx2:maidSpy",(v,t)=>{const m=v.maid;t=t||maidSpyT(v);if(!m||!t)return"";const so=spyRoll(v,t,m);if(!agTry(so)){if(agSoft(so))return ag2Res(v,"maidSpy",0,agSoftTxt(v));m.loyal=cl((m.loyal||0)-BAL.eff.jwhy.loyalSpyMaidRun,0,100);oanAdd(t,v,BAL.eff.j78.j78maidFail);
   return ag2Res(v,"maidSpy",0,`${m.name} nấp nghe ngoài cửa sổ cung ${agcNm(t)} thì bị bắt gặp; ${agcNm(t)} đoán ra ${v.name}`)}
  const ok=!!evA(v,t,BAL.eff.j78.evN);return ag2Res(v,"maidSpy",ok,ok?`${m.name} nghe lén được chuyện của ${agcNm(t)} cho ${v.name}`:`${m.name} dò la ${agcNm(t)} cho ${v.name}, chẳng thấy điều gì sai trái`)});
 /* jgreet: an NPC who comes to her runs her own talk / TW buttons with herself as the speaker */

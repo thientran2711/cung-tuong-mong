@@ -20,7 +20,7 @@ function whyKnows(ag,t){if(!ag||!ag.af||!t||!t.staff)return null;return t.staff.
 /* the agent who goes: herself when together, else the best servant (bestSent) or, for the player at home, her maid */
 function spyAgent(a,t,ag){if(ag!==undefined)return ag;if(together(a,t))return null;return bestSent(a)||false}
 function spyFactors(a,t,ag){const F=[],me=a===S;ag=spyAgent(a,t,ag);
- F.push(["Tai mắt "+(me?"ngươi ":"")+(a.mat||0),(a.mat||0)*BAL.spyMat]);
+ F.push(["Tai mắt "+(me?"ngươi ":"")+(a.mat||0),eyes(a)*BAL.spyMat]);
  F.push(["Tâm cơ "+(me?"ngươi ":"")+(a.tamco||0),(a.tamco||0)/5]);
  F.push(["Tài "+(me?"ngươi ":"")+(a.tai||0),(a.tai||0)/10]);
  if(ag===false)F.push(["Không có kẻ hầu đáng tin để sai đi",-BAL.spyNoAgent]);
@@ -33,7 +33,7 @@ function spyFactors(a,t,ag){const F=[],me=a===S;ag=spyAgent(a,t,ag);
  const tn=whyNm(t);if(t){F.push([`Tâm cơ ${tn}`,-(t.tamco||0)/8]);
   const dn=(typeof traitsOf==="function"?traitsOf(t):[]).includes("Kín đáo");if(dn){const known=t===S||(typeof trKnown==="function"&&trKnown(t).includes("Kín đáo"));F.push([known?`${tn} đa nghi`:`Nết ${tn} (ngươi chưa rõ)`,-8])}
   const eu=(t.staff||[]).filter(s=>s.role==="eunuch").length;if(eu)F.push([`${eu} thái giám canh ${whyPal(t)}`,-3*eu]);
-  if(t.mat)F.push([`Tai mắt ${tn}`,-(t.mat||0)*3])}
+  if(t.mat)F.push([`Tai mắt ${tn}`,-eyes(t)*3])}
  if(DG())F.push(["Hoàng thượng đa nghi",-6]);
  if((a.suc||0)<30)F.push(["Sức "+(me?"ngươi ":"")+(a.suc||0)+" (dưới 30)",-15]);
  return F.filter(x=>x[1]||/Tự tay/.test(x[0]))}
@@ -74,17 +74,17 @@ function spyPick(refund,ag){const m=ag||whyMaidInit(S.maid),L=spyList();const cu
  A[i]={n:"Sai đi dò la",dom:"Mưu kế",o:spyO(S,t,m),x:`nhắm: ${spyWho(t)} (chạm để đổi) · biết 2 điều thật về nàng · chứng cứ ${balSg(BAL.eff.j78.evN)}`,/* previews: j78maidSpy */l:{maid:-5},risk:`nàng đoán ra: ${typeof pvOan==="function"?pvOan(t,BAL.eff.j78.j78maidFail):`oán ta ${balSg(BAL.eff.j78.j78maidFail)}`}`,
   why:()=>spyFactors(S,t,m),act:1,open:()=>spyPick(2)};
  /* (2) "Nghe ngóng chung": no target, 1 khắc, one true piece of palace news; who it is about is weighted by real causes */
- A.splice(i+1,0,{n:"Nghe ngóng chung",o:100,x:`${m.name} đi nghe ngóng: biết 1 điều thật trong cung (về kẻ gây chuyện hoặc người ${m.name} quen)${(S.mat||0)>=3?" · Tai mắt nhiều: thêm 1 điều":""}`,
+ A.splice(i+1,0,{n:"Nghe ngóng chung",o:100,x:`${m.name} đi nghe ngóng: biết 1 điều thật trong cung (về kẻ gây chuyện hoặc người ${m.name} quen)${eyes(S)>=3?" · Tai mắt nhiều: thêm 1 điều":""}`,
   run:()=>{const r=spyNews(m);return r}});return A}})();
 function spyNewsW(v,m){return 1+Math.max(0,danger(v,S))/15+(whyKnows(m,v)?3:0)+((v.sung||0)>=50?1:0)+(v.preg?1:0)+((S.met&&S.met[v.id]!=null)?0:.5)}
 function spyNews(m){const L=spyList();if(!L.length)return`${m.name} đi một vòng, trong cung yên ắng.`;const W=L.map(v=>spyNewsW(v,m));let r=Math.random()*W.reduce((a,b)=>a+b,0),i=0;while(r>W[i]&&i<L.length-1){r-=W[i];i++}
- const v=L[i];const n=(S.mat||0)>=3?2:1;let f="";try{f=typeof intelLearn==="function"?intelLearn(v,n,{by:m.name,how:"Nghe ngóng"}):""}catch(e){}
+ const v=L[i];const n=eyes(S)>=3?2:1;let f="";try{f=typeof intelLearn==="function"?intelLearn(v,n,{by:m.name,how:"Nghe ngóng"}):""}catch(e){}
  const why=whyKnows(m,v)?`${m.name} quen người ${whyPal(v)}`:danger(v,S)>=30?"nàng đang có chuyện với ngươi":(v.sung||0)>=50?"nàng đang được sủng, ai cũng bàn":"chuyện nghe được ngoài hành lang";
  const t=`${m.name} nghe ngóng được về ${spyWho(v)} (${why}): ${f||"nàng dạo này ít ra ngoài, chưa có gì mới."}`;return t}
 /* servant start (j42): the mistress's order "dò la" weighs the target too */
 (function(){if(typeof ordOdds!=="function")return;const o0=ordOdds;ordOdds=function(k,t){if(k!=="spy"||!t)return o0.apply(this,arguments);return cl(Math.round(o0.apply(this,arguments)+BAL.spyCnv+cnvSpyF(t).reduce((s,x)=>s+x[1],0)),5,95)}})();
 function cnvSpyF(t){const F=[];const tn=whyNm(t);F.push([`Tâm cơ ${tn}`,-(t.tamco||0)/8]);if((typeof traitsOf==="function"?traitsOf(t):[]).includes("Kín đáo"))F.push([trKnown(t).includes("Kín đáo")?`${tn} đa nghi`:`Nết ${tn} (ngươi chưa rõ)`,-8]);
- const eu=(t.staff||[]).filter(s=>s.role==="eunuch").length;if(eu)F.push([`${eu} thái giám canh ${whyPal(t)}`,-3*eu]);if(t.mat)F.push([`Tai mắt ${tn}`,-(t.mat||0)*3]);
+ const eu=(t.staff||[]).filter(s=>s.role==="eunuch").length;if(eu)F.push([`${eu} thái giám canh ${whyPal(t)}`,-3*eu]);if(t.mat)F.push([`Tai mắt ${tn}`,-eyes(t)*3]);
  const f=(t.staff||[]).find(s=>S.srv&&(S.srv.af[s.sid]||0)>=30);if(f)F.push([`Ngươi quen ${f.name} ở ${whyPal(t)}`,BAL.spyKnow]);return F}
 (function(){if(typeof srvDoOrder!=="function")return;const d0=srvDoOrder;srvDoOrder=function(k,t){if(k!=="spy")return d0.apply(this,arguments);const o0=ordOdds;ordOdds=kk=>o0(kk,t);try{return d0.apply(this,arguments)}finally{ordOdds=o0}}})();
 

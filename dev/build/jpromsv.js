@@ -38,11 +38,11 @@ function spOpen(s){if(!S||!s||ownerOf(s)!==S)return;const nx=SRK[s.role][srk(s)+
  const kem=[`kẻ hầu khác ghen tị (lòng -${BAL.dbEnvy})`];const both=spKemTxt(S,s).split(" · kèm: ").map(x=>x.trim()).filter(Boolean);/* shared Kèm of both roads: once, above the options (short option cards) */
  const duoc=[`${s.name} lên ${nx}`,`lòng +${BAL.dbGain}`];const go=road=>()=>{spend(BAL.sp.k);dbDo(S,s,road,true)};
  tsPanel({t:`Đề bạt ${s.name}`,who:pServ(s),h:`<p>Muốn ${s.name} lên <b>${nx}</b> thì phải qua Nội vụ phủ. Có hai đường: lót tay bằng bạc, hoặc ${fv.how} (mất chút thể diện với người).</p>${both.length&&typeof tsRows==="function"?tsRows(both.map(x=>["Kèm",x,"r"])):""}`,
-  opts:[tsOpt({n:"Lót tay Nội vụ phủ",odds:od,fx:{bac:-c},need:[tsNeedBac(c)],duoc,mat:[`mất ${c} bạc`,`lòng -${BAL.dbFail}`],kem,go:go("bac")}),
+  opts:[tsOpt({n:"Lót tay Nội vụ phủ",odds:od,fx:{},need:[tsNeedBac(c)],duoc:duoc.concat([`Bạc -${c}`]),mat:["không mất bạc",`lòng -${BAL.dbFail}`],kem,go:go("bac")})/* bạc only when approved (dbDo) */,
    tsOpt({n:fv.k==="hh"?"Xin Hoàng hậu chuẩn":"Xin Thái hậu chuẩn",odds:od,fx:{[fv.k]:-fv.n},need:[{t:`${fv.lbl} ${fv.n} (có ${fv.val})`,ok:fv.ok}],duoc,mat:["lời xin mất",`lòng -${BAL.dbFail}`],kem,go:go("fav")})]});
  showModal()}
 /* moving a servant to another mistress (NPC side and "Cho đi"): a higher palace with room, else back to Nội vụ phủ */
-function spGoTo(o,s){const L=liveRivals(true).filter(v=>v!==o&&rkOf(v)>rkOf(o)&&!v.out&&(()=>{const [cm,ce]=capOf(v);const n=(v.staff||[]).filter(x=>x.role===s.role).length+(s.role==="maid"?1:0);return n<(s.role==="maid"?cm:ce)})());
+function spGoTo(o,s){const L=liveRivals(true).filter(v=>v!==o&&rkOf(v)>rkOf(o)&&!v.out&&(()=>{const c=capOf(v),h=hhHas(v),i=s.role==="maid"?0:1;return h[i]<c[i]})());
  return L.length?L.sort((a,b)=>rkOf(b)-rkOf(a))[0]:null}
 function spMove(o,s,v){const i=(o.staff||[]).indexOf(s);if(i>=0)o.staff.splice(i,1);s.proud=0;if(v){v.staff=v.staff||[];s.rk=Math.min(srk(s),srkMax(v,s));v.staff.push(s)}}
 /* AG-ALL-2 G6 / G10 (ONE CORE): a servant asks her master o to let her go — the three answers, built once: the player consort's card (spLeaveCard),
@@ -68,7 +68,7 @@ function spLeaveCard(s){const B=BAL.sp;const O=spLeaveOpts(S,s);const [K,D,L]=O;
  tsPanel({t:"Kẻ hầu xin đi",who:pServ(s),h:`<p>${s.name} thưa rằng ${v?`bên ${tsNm(v)} muốn có ${s.role==="maid"?"nàng":"hắn"} sang hầu`:"muốn xin về Nội vụ phủ"}, xin ${tsGoi()} cho đi.</p>`,
   opts:[tsOpt({n:K.n,fx:{},need:[tsNeedBac(keep)],duoc:[`lòng +${B.keepGain}`,"giữ người, giữ chức"],mat:[`mất ${keep} bạc`],kem:[`kiêu thêm ${B.keepMo} tháng`],go:()=>{const r=K.go();if(r)log(r)}}),
    tsOpt({n:D.n,duoc:["hết kiêu",`kẻ hầu khác lòng +${B.demoteOthers}`],mat:[`${s.name} xuống ${SRK[s.role][srk(s)-1]}`,`lòng -${B.demoteLoy}`],kem:[`lòng dưới ${BAL.loy.out} thì có khi bán mình cho cung khác`],go:()=>{const r=D.go();if(r)log(r)}}),
-   tsOpt({n:L.n,duoc:[`kẻ hầu khác lòng +${B.letOthers}`,"bớt một miệng ăn"],mat:[`mất ${s.name}`],kem:v?[`${s.name} mang chuyện cung ngươi sang bên ${tsNm(v)} (người ấy nắm thêm 1 chứng cứ)`]:[],go:()=>{const r=L.go();if(r)log(r)}})]})}
+   tsOpt({n:L.n,duoc:[`kẻ hầu khác lòng +${B.letOthers}`,"bớt một miệng ăn"],mat:[`mất ${s.name}`],kem:v?[`${s.name} mang chuyện cung ngươi sang bên ${tsNm(v)} (người ấy nắm thêm ${balAb(BAL.ag.ev.one)} chứng cứ)`]:[],go:()=>{const r=L.go();if(r)log(r)}})]})}
 /* monthly: pride runs its course for every household (hers and the NPCs'), after the merit promotions */
 function spMonth(){let ev="";const B=BAL.sp;for(const o of consorts()){if(!o||o.dead||(o!==S&&!o.alive))continue;for(const s of (o.staff||[]).slice()){if(!s.proud||s.coop)continue;
  if(s.proud<=S.turn){s.proud=0;if(o===S)ev+=`${s.name} đã bớt kiêu. `;continue}

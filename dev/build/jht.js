@@ -119,11 +119,11 @@ PEND.htban=pp=>{const k=S.kids.find(x=>x.name===pp.k&&pkHome(x));if(!k||k.pB)ret
  return{who:kidFace(k),t:`Bàn hôn sự cho ${k.name}, ${k.age} tuổi${k.age<BAL.age.wed?" (hứa hôn trước, cưới khi tròn "+(BAL.age.wed)+")":""}. Các mối hỏi được (tùy phẩm vị ngươi, lòng thương của Hoàng thượng, tài của con${k.heir?", ngôi Thái tử":""}):<div class="h54cl">${rows||'<p class="past">Chưa có mối nào.</p>'}</div>`,o:O}};
 function pkBtn(k){const t2=whyTime(2);if(!k.alive||k.sex!=="m")return"";if(k.pW)return"";const q=k.pB&&qnById(k.pB.q);
  return pbtn(`data-ht="ban" data-kn="${k.name}"`,"Bàn hôn sự",`Chắc chắn · tốn: 2 khắc · thành: xem các mối, xin chỉ ban hôn cho con`,k.pB?`đã hứa hôn với ${q?q.name:"quý nữ"}`:k.age<BAL.age.betroth?"con chưa đủ "+(BAL.age.betroth)+" tuổi":t2||(S.pkBan!=null&&S.turn-S.pkBan<HT.cd?`vừa bàn xong (lại được sau ${HT.cd-(S.turn-S.pkBan)} tháng)`:""))}
-function askBtn(x,kind){if(htKn(x))return"";const t1=whyTime(1);return pbtn(`data-ht="ask" data-hk="${kind}" data-hid="${x.id}"`,"Dò hỏi gia thế",`Chắc chắn · tốn: 1 khắc, Bạc -5 · thành: biết tên, mặt, Sắc, Tài của ${kind==="q"?"nàng":"chàng"}`,t1||(S.bac<5?"thiếu bạc (cần 5)":""))}
+function askBtn(x,kind){if(htKn(x))return"";const t1=whyTime(1);return pbtn(`data-ht="ask" data-hk="${kind}" data-hid="${x.id}"`,"Dò hỏi gia thế",`Chắc chắn · tốn: 1 khắc, Bạc -${BAL.bacFee.htAsk} · thành: biết tên, mặt, Sắc, Tài của ${kind==="q"?"nàng":"chàng"}`,t1||(S.bac<BAL.bacFee.htAsk?"thiếu bạc (cần "+BAL.bacFee.htAsk+")":""))}
 function htAct(a,b){if(!S||S.dead||Q.length)return;const r0=rsnap();
  if(a==="ban"){const k=S.kids.find(x=>x.name===b.dataset.kn&&pkHome(x));if(!k||k.pB||k.age<BAL.age.betroth||!can(2)||(S.pkBan!=null&&S.turn-S.pkBan<HT.cd))return;spend(2);S.pkBan=S.turn;qnPoolUp();
   pushDil(mkP("htban",{k:k.name,c:pkCands(S,k).map(q=>q.id)}),"Bàn hôn sự");render();return}
- if(a==="ask"){const x=b.dataset.hk==="q"?qnById(+b.dataset.hid):h54Son(+b.dataset.hid);if(!x||htKn(x)||!can(1)||S.bac<5)return;spend(1);apply({bac:-5});htKnow(x);
+ if(a==="ask"){const x=b.dataset.hk==="q"?qnById(+b.dataset.hid):h54Son(+b.dataset.hid);if(!x||htKn(x)||!can(1)||S.bac<BAL.bacFee.htAsk)return;spend(1);apply({bac:-BAL.bacFee.htAsk});htKnow(x);
   const n=bestSent&&bestSent(S);log(`${n?n.name+" dò hỏi":"Ngươi dò hỏi"} gia thế: ${b.dataset.hk==="q"?qLine(x):h54SonLine(x)}.`);resultShow("Dò hỏi gia thế",r0,"sure");render();return}
  if(a==="go"){tab=b.dataset.t;if(b.dataset.pi!=null)PG[tab]=+b.dataset.pi;render()}}
 document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-ht]");if(b&&!b.disabled){e.preventDefault();e.stopPropagation();htAct(b.dataset.ht,b)}},true);

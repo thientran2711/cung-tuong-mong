@@ -45,12 +45,13 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
  ok(Object.values(r3.meds).every(m=>Math.abs(m.npc-m.her)<=.75),'summons: NPC median = her median per game (dan / co / duho)',r3.meds);ok(r3.gains.length>=2,'summons: the Sủng gain varies (no fixed best)',r3.gains);
  ok(r3.den>0&&r3.denOcc.every(o=>o==="trieu"),'lanterns: an NPC lantern = one draw of her lantern game',r3);
  /* 4 jexam: consorts and servants */
- const r4=await p.evaluate(()=>{const v=__twin(liveRivals(true)[0]);__mg.length=0;let pass=0;const N=300;for(let i=0;i<N;i++)if(exSim(v).pass)pass++;const ex=__mg.slice();
+ const r4=await p.evaluate(()=>{const v=__twin(liveRivals(true)[0]);__mg.length=0;let pass=0;const N=2500;/* r2 B6: a ~99 % pass rate needs N ≥ 2000 to show a failure */for(let i=0;i<N;i++)if(exSim(v).pass)pass++;const ex=__mg.slice();
+  /* r2 B6: "no sure pass" is about the rule, not one strong NPC: the least prepared rival's twin over N draws */let minP=pass/N;for(const x of liveRivals(true)){const w=__twin(x);let q=0;for(let i=0;i<600;i++)if(exSim(w).pass)q++;minP=Math.min(minP,q/600)}__mg.length=0;
   const P=exPlan(v);const meds=P.rounds.map(k=>({k,npc:__med(ex.filter(x=>x.kind===k).map(x=>x.raw)),her:+mgMedD(mgTier(k,{occ:"exam",rank:P.to,lv:exLv(S,k)}).d).toFixed(2)}));
   const s=(S.staff||[])[0]||{sid:9,rank:1,loyal:50};__mg.length=0;let sp=0;for(let i=0;i<60;i++){s.exCd=0;S.turn=(S.turn||0)+1;if(exSrvNpc(s))sp++}
-  return{calls:ex.length,occ:[...new Set(ex.map(x=>x.occ))],pass:pass/N,meds,srvCalls:__mg.length,srvOcc:[...new Set(__mg.map(x=>x.occ))],srvPass:sp/60}});
+  return{calls:ex.length,occ:[...new Set(ex.map(x=>x.occ))],pass:pass/N,minP,meds,srvCalls:__mg.length,srvOcc:[...new Set(__mg.map(x=>x.occ))],srvPass:sp/60}});
  ok(r4.calls>0&&r4.occ.length===1&&r4.occ[0]==="exam",'exam: NPC consorts sit it through mgNpcRaw on the exam board (target rank)',r4);ok(r4.meds.every(m=>Math.abs(m.npc-m.her)<=.75),'exam: NPC median per subject = hers',r4.meds);
- ok(r4.pass<1,'exam: an NPC can fail (no sure pass)',r4.pass);ok(r4.srvCalls>0&&r4.srvOcc[0]==="exam",'servant exam: NPC servants draw through mgNpcRaw too',{n:r4.srvCalls,pass:r4.srvPass});
+ ok(r4.minP<1,'exam: an NPC can fail (no sure pass; the least prepared rival over N draws)',{first:r4.pass,min:r4.minP});ok(r4.srvCalls>0&&r4.srvOcc[0]==="exam",'servant exam: NPC servants draw through mgNpcRaw too',{n:r4.srvCalls,pass:r4.srvPass});
  /* 5 j83 works */
  const r5=await p.evaluate(()=>{const v=__twin(liveRivals(true)[0]);__mg.length=0;const a=[];for(let i=0;i<600;i++)a.push(wkNpcRaw(v,"tranh"));const b=[];for(let i=0;i<300;i++)b.push(wkNpcRaw());
   return{calls:__mg.length,occ:[...new Set(__mg.map(x=>x.occ))],kinds:[...new Set(__mg.map(x=>x.kind))],med:__med(a),her:+mgMedD(mgTier("ve",{occ:"hoc"}).d).toFixed(2),min:Math.min(...a),max:Math.max(...a),old:__med(b)}});

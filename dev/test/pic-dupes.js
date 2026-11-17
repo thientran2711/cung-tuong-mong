@@ -2,7 +2,7 @@
    Runs the game (Playwright, pictures stubbed) in several states (fresh, high rank + staff, children, Empress, pets, every buổi), collects
    every act name of the deck pools / deal() / rendered act buttons (same harvest as dev/tools/missing_pics.js) plus the names in EXTRA
    (static list, one per line), resolves each with the game's own kitActArt (incl. jph §59 placeholder + CDN check) and groups by picture.
-   A picture shown by 2+ different act names = COLLISION (placeholder ph-act-* counts too: every act on it shares it).
+   A picture shown by 2+ different act names = COLLISION (placeholder ph-p-* counts too: every act on it shares it).
    usage: [ACTS_FILE=patched.json] node dev/test/pic-dupes.js <build url> <out.json> [extra-names.txt] */
 const {chromium}=require('playwright');const fs=require('fs');
 const [,,BASE,OUT,EXTRA]=process.argv;const extra=EXTRA?fs.readFileSync(EXTRA,'utf8').split('\n').map(s=>s.trim()).filter(Boolean):[];

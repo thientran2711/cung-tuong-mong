@@ -56,12 +56,12 @@ function khMotive(v,m,k){if(!v||!m||v===m)return false;const M=BAL.preT.mot;cons
 function khLech(m,k,pre){k.dateOff=pre?"pre":"od";khStat("lech");const P=BAL.preT,w=pre?"sinh non":"sinh quá ngày";
  if(m!==S){k.dateKnown=1;try{noteAdd(m.id,`${k.name} ${w}, ngày sinh lệch với đêm thị tẩm ghi trong sổ Kính sự phòng`)}catch(e){}if(!S.dead&&!S.out)evA(S,m,P.evi)}
  if(!khGuest())for(const v of liveRivals(true))if(v!==m&&v.alive&&!v.out&&khMotive(v,m,k))evA(v,m,P.evi);
- return m===S?`Trong cung xì xào: ${k.name} ${w}, ngày tháng lệch với sổ Kính sự phòng. `:((S.mat||0)>=1?`Trong cung xì xào: ${k.name} của ${m.name} ${w}, lệch ngày trong sổ Kính sự phòng. `:"")}
+ return m===S?`Trong cung xì xào: ${k.name} ${w}, ngày tháng lệch với sổ Kính sự phòng. `:(eyes(S)>=1?`Trong cung xì xào: ${k.name} của ${m.name} ${w}, lệch ngày trong sổ Kính sự phòng. `:"")}
 /* the NPC twin of the blood test when the child is an NPC's (accuser = an NPC): same truth rule, same bowl tricks */
-function khNgNpc(a,m,k){const N=BAL.ngh;const r=rtNgNpcRes(m,k,a,rtNgOil(a));khStat("lech_set");khStat("ng_set");const seen=(S.mat||0)>=N.seeMat;
+function khNgNpc(a,m,k){const N=BAL.ngh;const r=rtNgNpcRes(m,k,a,rtNgOil(a));khStat("lech_set");khStat("ng_set");const seen=eyes(S)>=N.seeMat;
  if(r.shown){khStat("lech_mix");return seen?`${a.name} tâu xin nghiệm máu cho ${k.name} của ${m.name}; máu hòa, ${a.name} mang tội vu cáo. `:""}
  khStat(r.truth?"lech_oan":"lech_lo");if(r.truth)khStat("ng_oan");
- return `<span class="r">${m.name}: trích huyết nghiệm thân, máu ${k.name} không hòa. Nàng bị trị tội.</span>${r.truth&&(S.mat||0)>=N.oilMat?` Tai mắt báo: bát nước đã bị ${a.name} nhỏ dầu.`:""} `}
+ return `<span class="r">${m.name}: trích huyết nghiệm thân, máu ${k.name} không hòa. Nàng bị trị tội.</span>${r.truth&&eyes(S)>=N.oilMat?` Tai mắt báo: bát nước đã bị ${a.name} nhỏ dầu.`:""} `}
 /* F5 (owner Q3 18:17Z): a 'lệch sổ' birth is a TRUE fact in the mother's ledger (weight BAL.preT.lsW), for her and every NPC, so evidence on it can
    reach the accuse bar even against a clean mother; it leaves the ledger once the blood test was held or the child is past ageMax (held proof then
    turns into rumour through jtruth's sweep). */
@@ -100,7 +100,7 @@ const p0=pregMonthP;pregMonthP=function(p){if(!p||!p.preg||p.fake||(p!==S&&khGue
  p.khOcuT=S.turn;p.khOcuX=0;if(me)ev+=`Thái y dặn: ở cữ ${K.ocuMo} tháng, chớ ra khỏi cung, chớ làm việc nặng. `;
  const nk=(p.kids||[]).slice(n0);realM=realM||(od?11:10);
  for(const k of nk){if(disc!=null)k.thyRec=disc;if(realM<10){k.pre=realM;if(roll(realM<=8?P.die8:P.die9)){k.tho=0;k.thoM=((S.month||1)%12)+1;k.thoO=0;k.nb=1;k.nbWhy="sinh non yếu ớt, không qua khỏi";khStat("pre_die")}}
-  if(od&&k.alive!==false){if(roll(P.odOmen)){if(k.sex==="m")ap(p,{danh:P.omenDanh});ev+=me||(S.mat||0)>=1?`Thai quá ngày mới sinh; trong cung đồn ${k.name} là điềm thánh nhân giáng thế. `:""}
+  if(od&&k.alive!==false){if(roll(P.odOmen)){if(k.sex==="m")ap(p,{danh:P.omenDanh});ev+=me||eyes(S)>=1?`Thai quá ngày mới sinh; trong cung đồn ${k.name} là điềm thánh nhân giáng thế. `:""}
    else ev+=me?`Thai quá ngày mới sinh; có kẻ rỉ tai đó là điềm chẳng lành. `:""}
   if(!mism&&realM+off!==10&&!k.gone)ev+=khLech(p,k,realM+off<10)}
  return ev};

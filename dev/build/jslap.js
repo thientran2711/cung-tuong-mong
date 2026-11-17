@@ -77,7 +77,7 @@ KG82_ENG.slapbar=kg82SlapBar;
 function slapGame(o){const kind=o.dodge?"ne":"tat",skipRes={raw:0,skipped:true};
  if(typeof window.__bot!=="undefined"||typeof kg82Open!=="function"){setTimeout(()=>o.onDone(skipRes),0);return}
  KG82.ctx="hoc";const t=slapMg(o.dodge,o.by);KG82.tier=t;KG82.lv=t.ease;KG82.occ=t.occ;const K=KG82_KIND[kind];
- const d=kg82Open({art:o.dodge?"Né":"Tát",title:o.title,how:K.how,pic:typeof kg82Pic==="function"?kg82Pic(kind):""});if(!d){o.onDone(skipRes);return}const box=kg82Box();
+ const d=kg82Open({art:o.art||(o.dodge?"Né":"Tát"),title:o.title,how:K.how,pic:typeof kg82Pic==="function"?kg82Pic(kind):""});if(!d){o.onDone(skipRes);return}const box=kg82Box();
  kg82Preload(kind).then(()=>{try{if(typeof kitPhNote==="function")[kg82BgName(kind)].concat(KG82_SPR[kind]).forEach(n=>{if(!kg82Ok(n))kitPhNote("mg",n,"light",K.t)})}catch(e){}});
  const diff=typeof mgDiffTxt==="function"?mgDiffTxt(t):`${t.word} · ${t.occName}`;
  KG82.phase="intro";box.innerHTML=tsRows([["Độ khó",diff,""]].concat(o.rows))+`<div class="kg82act"><button class="kbtn" id="kg82go">${o.go}</button><button class="kbtn alt" id="kg82skip">${o.skip}<small>${o.skipSub}</small></button></div>`;
