@@ -9,15 +9,21 @@
      §65.1 the reward chest = j93 kitReward kind "chest" (servant road: "pouch"), title «Phẩm phục <rank>» (jmark adds the head mark) → Nhận;
      §65.2 kitPersonReveal: the servant Nội vụ phủ newly assigns stands big, full-body, transparent, in the centre (kitFigOf + kitFigBody
            body fit, KIT_FIG 90 % rule), with one cổ trang line («… Nội vụ phủ phụ cấp thêm …») → Nhận.
-   Staff: HER capOf grows by one servant at every rank (BAL.promo.cap, [maids incl. her own maid, eunuchs]; NPC caps unchanged); on a rank-up
+   Staff: the ONE household table BAL.promo.cap ([maids incl. the personal maid, eunuchs], her and NPCs alike; review/staff-root); on a rank-up that raises it
    Nội vụ phủ assigns the new one FREE (prStaff: pool candidate, new face, or moved from the lowest household — faces stay unique). Servant road ranks get no servant (nobody serves a cung nữ): chest only.
    NPC consorts: the same set + servant, data only (no screens), on the co-op host only (world agency, jcoopworld mute rule).
    Old saves: the rank seen so far is set silently on load (no chest for the past). State S.prSeen = {r: consort rank | null, s: servant rank}.
    Per-rank Đeo eo / Đeo tay / Túi thơm pictures (D45 small-art) are wired: BAL.promo.waist / wrist / scent, items in jinv RANKED_*. */
 window.PROMO_SET=1;
 Object.assign(BAL,{promo:{
- /* [maids incl. her own personal maid, eunuchs] per consort rank 0..7: one more servant at every rank */
- cap:[[1,1],[2,1],[2,2],[3,2],[3,3],[4,3],[4,4],[5,4]],
+ /* THE household table (one core, review/staff-root; owner 17/11 04:48Z "phẩm thấp nhất chỉ có 1 cung nữ hoặc 1 thái giám", OD:L1155 ceiling):
+    [maids incl. the personal (close) maid, eunuchs] per consort rank 0..7, for her AND every NPC consort (j10 capOf / hhHas read it; cold palace = row 0).
+    Đáp ứng 1 · Thường tại 2 · Quý nhân 3 · Tần 3 · Phi 4 · Quý phi 5 · Hoàng quý phi 6 · Hoàng hậu 6. Low ranks keep no eunuch of their own. */
+ cap:[[1,0],[2,0],[2,1],[2,1],[3,1],[3,2],[4,2],[4,2]],
+ /* Thái hậu's household (jstaff: her named women Giáo tập ma ma, Chưởng sự cô cô, Quản sự ma ma while the queen seat is empty) */
+ capTh:[4,2],
+ /* a servant she trusts this much leaves her household (over the table) with a farewell scene, not a log line (j10 capTrim) */
+ trimTrust:70,
  wrist:["vongngoc","vongngoc_r1","vongngoc_r2","vongngoc_r3","vongngoc_r4","vongvang","vongvang","vongvang"],
  waist:["ngocboi_r0","ngocboi_r1","ngocboi_r2","ngocboi_r3","ngocboi_r4","ngocboi_r5","ngocboi_r6","ngocboi_r7"],
  scent:["tuithom","tuithom_r1","tuithom_r2","tuithom_r3","tuithom_r4","tuithom_r5","tuithom_r6","tuithom_r7"],
@@ -33,8 +39,7 @@ Object.assign(BAL,{promo:{
  srv:[[],[["vaibong",1],["banhtrai",1]],[["wd:y_luamoc",1],["wd:tram_dong",1],["vaibong",1],["tragoi",1],["banhtrai",1]],
   [["wd:y_chuongsu",1],["luahang",1],["tragoi",1],["traicay",1],["tuithom",1]],[["wd:y_nuquan",1],["luahang",2],["trahop",1],["traicay",1],["ruoucuc",1]],[["wd:y_mama",1],["luahang",1],["trahop",1],["traicay",1],["ruoucuc",1]]]}});
 /* ---------- staff capacity: one more servant at every rank ---------- */
-/* HER household only: NPC households keep j10's caps, so the palace's servant count (bounded by the unique face pool) stays as it was */
-(function(){if(typeof capOf!=="function")return;const c0=capOf;capOf=function(p){try{const C=BAL.promo&&BAL.promo.cap;if(C&&p===S&&!(typeof isSrv==="function"&&isSrv()))return C[Math.max(0,Math.min(7,rkOf(p)))].slice()}catch(e){}return c0.apply(this,arguments)}})();
+/* (the private capOf wrapper that lived here is gone: j10 capOf reads BAL.promo.cap for everyone — review/staff-root) */
 /* ---------- the set ---------- */
 function prRankName(r){return r>=7?"Hoàng hậu":RANKS[Math.max(0,Math.min(7,r))].n}
 /* [[key, n, "wd"|"it"]] for consort rank r */
@@ -53,7 +58,7 @@ function prGive(p,L){const E=[];p.inv=p.inv||[];for(const [k,n,kind] of L)for(le
    1. this month's Nội vụ phủ candidate (j29 npool), 2. a new person while the face pool has room, 3. (her only) a servant Nội vụ phủ moves
    from the lowest-ranked household that has one to spare. null when nobody can come. */
 function prStaff(p){try{if(!p||typeof mkServ!=="function")return null;p.staff=p.staff||[];const [cm,ce]=capOf(p);
- const m=p.staff.filter(s=>s.role==="maid").length+1,e=p.staff.filter(s=>s.role==="eunuch").length;
+ const [m,e]=hhHas(p);
  const order=m-cm<=e-ce?["maid","eunuch"]:["eunuch","maid"];
  for(const role of order){const under=role==="maid"?m<cm:e<ce;if(!under)continue;let s=null;
   try{s=typeof takeFromPool==="function"?takeFromPool(role):null}catch(x){}

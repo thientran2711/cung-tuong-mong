@@ -310,7 +310,7 @@ window.q72Bot=function(){if(!S||S.dead||Q.length||!q72On())return false;const q=
  const bienLo=v=>{const T=TD_();return !!T&&T.bien<v},khoLo=v=>{const T=TD_();return !!T&&T.kho<v};
  const fest=(...M)=>c=>M.includes(c.m)?1:0;
  const qn=()=>{const q=queenP();return q&&q!==S?q:null};
- const capOk=()=>{try{const [cm,ce]=capOf(S);return (S.staff||[]).filter(s=>s.role==="maid").length+1<cm}catch(e){return false}};
+ const capOk=()=>{try{return hhHas(S)[0]<capOf(S)[0]}catch(e){return false}};
  const fiM=s=>(S.men||[]).find(m=>m.id===s.q72fi&&m.alive!==false);
  const loverOf=s=>s&&s.lover!=null?servById(s.lover):null;
 
