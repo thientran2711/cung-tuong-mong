@@ -125,3 +125,12 @@ maid-m08-t3-a18	EbnL2QNuuO	ok U LOOKALIKE (wide layered sleeves, rich peony) red
 maid-m08-t4-a18	p8OCUXuehw	ok U LOOKALIKE (tiered skirt, rich embroidery) redo after anchor
 maid-m08-t5-a18	SymRoJhUb8	ok U
 - W5c: 32 done. NEXT maid-m08-t6-a18 (queue line 33).
+maid-m08-t6-a18	aFArAS6fSh	ok U
+maid-m08-t7-a18	1leyeRpr4r	ok U
+maid-m08-t8-a18	0eSmSFRTfW	ok U
+maid-m08-tm0-a18	1leye2Ir4r	ok U
+maid-m08-tm2-a18	1leyeAXr4r	ok U
+maid-m08-tm3-a18	jUB9BYTLD0	ok U
+maid-m08-tm4-a18	vQ212O3a47	ok U
+maid-m09-a18	IfibiwktvE	ok U
+- W5c: 40 done. NEXT maid-m09-cold-a18 (queue line 41).
