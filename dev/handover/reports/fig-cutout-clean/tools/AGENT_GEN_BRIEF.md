@@ -12,3 +12,4 @@ Prompt (~100 words, one prop per figure, rotate: folded fan, small lantern, teac
 7. Write dev/handover/reports/fig-cutout-clean/hd-entries/W6b-<AGENTNAME>.json = {"fig-<key>.webp":[width of img/fig file, width of img/hd/fig file],...}.
 8. Final reply (<=12 lines): TSV lines "key<TAB>old-ref id<TAB>gen id<TAB>status(ok/hard)" for all 8 + one-line notes on failures/credits. Nothing else.
 LEAD NOTE (17/11): a maid must not look like a consort at a glance: keep maids PLAIN (fine silk, small trâm, plainer cut/hair); do NOT carry over ornate phoenix crowns / big headdresses from the old ref, simplify them to small hairpins. In your final reply list any file that still looks consort-like as "LOOKALIKE <key>".
+RATE LIMIT (lead 17/11): at most 5 images_generate in flight at once across ALL agents. Send 5 first, creations_wait, then the other 3; on throttle (48/48 slots) wait and retry later; never send a duplicate generation.
