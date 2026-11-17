@@ -62,7 +62,7 @@ function prStaff(p){try{if(!p||typeof mkServ!=="function")return null;p.staff=p.
    const v=H[0];if(v){const L=v.staff.filter(x=>x.role===role&&!x.coop).sort((a,b)=>srk(a)-srk(b));s=L[0];v.staff.splice(v.staff.indexOf(s),1);s.spyFor=null;s.loyal=cl(40+R(21),0,100);s.from=v.id}}
   if(!s)continue;if(s.rk==null)s.rk=1;p.staff.push(s);if(p===S)try{if(typeof k61Know==="function")k61Know(s,"Nội vụ phủ đưa đến hầu",true,2)}catch(x){}return s}}catch(x){console.error("prStaff",x)}return null}
 /* ---------- the two screens ---------- */
-function prItemsOf(E){const M=new Map();for(const e of E){const it=typeof kgItem==="function"?kgItem(e):{n:(IT[e.k]||{}).n||e.k,d:"",img:kmItemImg(e.k),tier:kmTierOf(e.k)};
+function prItemsOf(E){const M=new Map();for(const e of E){const it=typeof kgItem==="function"?kgItem(e):{n:itm(e.k).n,d:"",img:kmItemImg(e.k),tier:kmTierOf(e.k)};
   const key=e.k;if(M.has(key))M.get(key).c++;else M.set(key,Object.assign({c:1},it))}
  return [...M.values()].map(x=>Object.assign({},x,{n:x.c>1?`${x.n} ×${x.c}`:x.n}))}
 function prChest(E,o){if(!E.length||typeof kitReward!=="function"||!(typeof kmOn==="function"&&kmOn()))return;

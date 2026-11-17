@@ -153,7 +153,7 @@ function kcInit(){const k=S.origin.k;const sur=tdSur(S.name);const nm=g=>`${sur}
 function kcChest(){const who=(kcR("me")||kcR("to")||{}).t||"Mẫu thân";const c=girlChest(S,{wear:true,who});S.kc.chest=c.L.map(e=>e.k);return c}
 function kcChestShow(c){if(!c||!c.L.length)return;try{if(typeof kitReward!=="function")return;
  const it=e=>{if(WD_ITEMS[e.k]&&!IT[e.k]){const w=WD_ITEMS[e.k];return{n:w.n,d:w.sl==="y"?"Y phục · đang mặc":"Cài tóc · đang cài",img:w.icon,tier:w.g|0}}
-  try{if(typeof kgItem==="function")return kgItem(e)}catch(x){}const a=itemArt(e.k);return{n:IT[e.k].n,d:IT[e.k].d,img:a?a.src:"",tier:a?a.grade:0}};
+  try{if(typeof kgItem==="function")return kgItem(e)}catch(x){}const a=itemArt(e.k);return{n:itm(e.k).n,d:itm(e.k).d,img:a?a.src:"",tier:a?a.grade:0}};
  kitReward({kind:"chest",title:"Rương đồ khuê các",from:`${c.who} sửa soạn · đồ con gái mang theo người`,items:c.L.map(it)})}catch(e){console.error("kcChestShow",e)}}
 
 /* ---------- who is where (one ledger per buổi; true info) ---------- */

@@ -98,7 +98,9 @@ async function nightGap(A,B){const w0=(await C(A)).week;await clear(A);await cle
  const r=await untilC(A,x=>__co().week===x+1||COOPW.pend||COOPW.sent===x,w0,60000);ok(r,'reconnect: the night goes after the host reconnects (guest ready sent while it was away)',r?undefined:await A.p.evaluate(()=>COOPW.tr.slice(-14)))}
 
 (async()=>{const b=await chromium.launch(/127\.0\.0\.1|localhost/.test(WURL)?{args:['--disable-web-security','--disable-features=PrivateNetworkAccessSendPreflights,PrivateNetworkAccessRespectPreflightResults']}:{});/* a local `wrangler dev` Worker (fix proofs before a deploy) */
- const A=await mk(b,'fold',[686,880,2.2]),B=await mk(b,'ipad',[1180,820,2]);ALL.push(A,B);
+ /* COOP_SWAP=1 (review/coop-thin-a): roles swapped — the iPad hosts (seat a), the Fold joins (seat b) */
+ const FOLD=['fold',[686,880,2.2]],IPAD=['ipad',[1180,820,2]];const [VA,VB]=process.env.COOP_SWAP?[IPAD,FOLD]:[FOLD,IPAD];
+ const A=await mk(b,VA[0],VA[1]),B=await mk(b,VB[0],VB[1]);ALL.push(A,B);
  /* COOP_MLINE: the guest must be a consort with her own maids (a random cung nữ start has none, the mline check would be void) */
  if(+process.env.COOP_MLINE)await B.ctx.addInitScript(()=>{window.__forceOrigin='thd'});
  /* COOP_A_ORIGIN / COOP_B_ORIGIN=<ORIGINS k> (e.g. cn = cung nữ): pin a seat's thân phận (the random draw makes some paths rare) */

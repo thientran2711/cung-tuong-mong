@@ -24,7 +24,7 @@
 /* 2. fabric → the garment it is sewn into (same names as the j92 store) */
 const WD_FAB={luahang:"y_vanthuy",gamto:"y_maudon",gamvang:"y_minhhoang"};
 function wdFabOf(k){const it=IT[k];if(!it||!it.dr)return null;if(WD_FAB[k]&&WD_ITEMS[WD_FAB[k]])return WD_FAB[k];return wdPickAt(Math.min(8,(it.rk|0)+1),"y",0)}
-try{for(const k in IT){const g=IT[k]&&IT[k].dr?wdFabOf(k):null;if(g&&WD_ITEMS[g]){const w=WD_ITEMS[g];IT[k].d=`May áo: ${w.n} (Y phục, ${plainFx(w.w)||"giản dị"})`}}}catch(e){}
+try{for(const k in IT){const g=IT[k]&&itm(k).dr?wdFabOf(k):null;if(g&&WD_ITEMS[g]){const w=WD_ITEMS[g];IT[k].d=`May áo: ${w.n} (Y phục, ${plainFx(w.w)||"giản dị"})`}}}catch(e){}
 function wdSew(p,fk){const g=wdFabOf(fk);if(!g)return null;const e={k:g,src:"may",fab:fk,d:wdWhen()};
  /* the tailors know the cloth: the garment's phẩm is known to its owner */
  if(p===S){S.wdk=S.wdk||{};S.wdk[g]=1}else{p.wdk=p.wdk||{};p.wdk[g]=1}wdWearEntry(p,e);return e}
@@ -33,31 +33,31 @@ function wdSew(p,fk){const g=wdFabOf(fk);if(!g)return null;const e={k:g,src:"may
   return u0.apply(this,arguments)}})();
 /* 3. old saves: a worn hair item (e.w) goes into the Cài tóc slot; a running S.dress becomes its garment in the Y phục slot */
 (function(){const o0=wdOf;wdOf=function(p){if(p&&typeof p==="object"&&!p.__wdmig){p.__wdmig=1;try{
-  const worn=[];if(p.inv)for(let i=p.inv.length-1;i>=0;i--){const e=p.inv[i];if(e&&e.w&&!e.h&&IT[e.k]&&IT[e.k].wsl){p.inv.splice(i,1);delete e.w;worn.push(e)}}
+  const worn=[];if(p.inv)for(let i=p.inv.length-1;i>=0;i--){const e=p.inv[i];if(e&&e.w&&!e.h&&IT[e.k]&&itm(e.k).wsl){p.inv.splice(i,1);delete e.w;worn.push(e)}}
   if(!p.wd)o0.call(this,p);
   for(const e of worn){if(!p.wd.tram||p.wd.tram.from==="base"||p.wd.tram.src==="cap")wdWearEntry(p,e);else{p.inv=p.inv||[];p.inv.push(e)}}
   if(p.dress){const d=p.dress;p.dress=null;if(d.until>((S&&S.turn)|0)&&IT[d.k])wdSew(p,d.k)}}catch(e){console.error("wdmig",e)}finally{delete p.__wdmig}}
   return o0.apply(this,arguments)};window.wdOf=wdOf})();
 /* 4. ONE wearBonus */
 wearBonus=function(p){const b={sac:0,danh:0};if(!p)return b;const r=rkOf(p);
- for(const e of (p.inv||[]))if(e&&e.w&&!e.h&&IT[e.k]&&IT[e.k].w&&IT[e.k].sl){const m=IT[e.k].rk>r?1.5:1;for(const s in IT[e.k].w)b[s]=(b[s]||0)+Math.round(IT[e.k].w[s]*m)}
+ for(const e of (p.inv||[]))if(e&&e.w&&!e.h&&IT[e.k]&&itm(e.k).w&&itm(e.k).sl){const m=itm(e.k).rk>r?1.5:1;for(const s in itm(e.k).w)b[s]=(b[s]||0)+Math.round(itm(e.k).w[s]*m)}
  try{const w=wdOf(p);for(const sl of ["tram","y"]){const it=wdItem(w[sl]);if(it)for(const s in it.w)b[s]=(b[s]||0)+it.w[s]}}catch(e){}
  try{if(veilOn(p)&&veilNeed(p))b.sac+=2}catch(e){}return b};
 /* 5. ONE luxury score */
 function wdLux(k){const w=WD_ITEMS[k];return w?LUX_V[Math.max(0,Math.min(4,w.g|0))]+Math.round((w.pr||0)/10):0}
 luxGrade=function(k){const w=WD_ITEMS[k];if(w)return w.g|0;const a=typeof itemArt==="function"?itemArt(k):null;return a?a.grade|0:0};
-luxWorn=function(p){const L=(p.inv||[]).filter(e=>e&&e.w&&!e.h&&IT[e.k]&&IT[e.k].sl).map(e=>e.k);
+luxWorn=function(p){const L=(p.inv||[]).filter(e=>e&&e.w&&!e.h&&IT[e.k]&&itm(e.k).sl).map(e=>e.k);
  try{if(p.alive!==false&&(p===S||p.wd||p.rank!=null)){const w=wdOf(p);for(const sl of ["tram","y"])if(w[sl]&&WD_ITEMS[w[sl].k])L.push(w[sl].k)}}catch(e){}return L};
 const WD_BASELUX={};function wdBaseLux(P){if(WD_BASELUX[P]!=null)return WD_BASELUX[P];let s=0;
  for(const sl of ["tram","y"]){const L=wdPool(sl,P,true);if(L.length)s+=L.reduce((a,k)=>a+luxVal(k),0)/L.length}return WD_BASELUX[P]=Math.round(s)}
 (function(){const a0=luxAllow;luxAllow=function(p){let b=a0.apply(this,arguments);try{b+=wdBaseLux(Math.min(8,wdPOf(p)))}catch(e){}return b}})();
 /* 6. vượt phẩm: jewellery above her rank (j8, visible rule) + WD items of a Vượt phẩm outfit (j92, hidden) — consequences;
    wdVpSeen = what she can see (jewellery rule, and the WD part only once she knows her outfit's status) */
-vpItems=function(p){const r=rkOf(p);const L=(p.inv||[]).filter(e=>e&&e.w&&!e.h&&IT[e.k]&&IT[e.k].sl&&IT[e.k].rk>r).map(e=>({k:e.k}));
+vpItems=function(p){const r=rkOf(p);const L=(p.inv||[]).filter(e=>e&&e.w&&!e.h&&IT[e.k]&&itm(e.k).sl&&itm(e.k).rk>r).map(e=>({k:e.k}));
  try{if(wdStatus(p)==="over"){const w=wdOf(p);for(const sl of ["tram","y"]){const e=w[sl],it=wdItem(e);if(it&&wdP(e,p)>wdPOf(p))L.push({k:e.k,wd:sl})}}}catch(e){}return L};
-function wdVpSeen(){const r=rkOf(S);const L=(S.inv||[]).filter(e=>e&&e.w&&!e.h&&IT[e.k]&&IT[e.k].sl&&IT[e.k].rk>r).length;let n=0;try{if(wdKnownStatus(S)==="over")n=vpItems(S).filter(x=>x.wd).length}catch(e){}return L+n}
+function wdVpSeen(){const r=rkOf(S);const L=(S.inv||[]).filter(e=>e&&e.w&&!e.h&&IT[e.k]&&itm(e.k).sl&&itm(e.k).rk>r).length;let n=0;try{if(wdKnownStatus(S)==="over")n=vpItems(S).filter(x=>x.wd).length}catch(e){}return L+n}
 /* sources */
-(function(){const s0=wdSrcTxt;wdSrcTxt=function(e){if(e&&e.src==="may")return`may từ ${IT[e.fab]?IT[e.fab].n:"vải"}${e.d?", "+e.d:""}`;return s0.apply(this,arguments)}})();
+(function(){const s0=wdSrcTxt;wdSrcTxt=function(e){if(e&&e.src==="may")return`may từ ${IT[e.fab]?itm(e.fab).n:"vải"}${e.d?", "+e.d:""}`;return s0.apply(this,arguments)}})();
 
 /* 7. the bag: WD items in their tabs, with their painting, grade and Xa xỉ N; worn + pawned ones too */
 try{const t=KINV_CATS.find(c=>c[0]==="trang");if(t&&!t[2].includes("Trâm cài"))t[2].push("Trâm cài");
@@ -95,14 +95,14 @@ function wdOpen(x){const g=x.g,e=wdEntryOf(g),w=wdItem(e);if(!w)return;const B=w
  kitModal({kind:"info",title:w.n,sub:`${w.sl==="tram"?"Trâm cài":"Y phục"} · ${KIT_GRADE[w.g|0].n}`,
   itemPic:kitItem({src:w.icon,name:"",grade:w.g,size:"lg",qty:g.n,lux:wdLux(w.k)}).replace('<span class="kitn"></span>',''),
   html:`<div class="kinvrows">${wdItemRowsE(e,{pawn})}</div>${F.length?kitFacts(F):""}${B.length?`<div class="rbtn kinvacts">${B.join("")}</div>`:""}`,btn:"Lui"})}
-function wdFabOpen(x){const g=x.g,it=IT[g.k],gk=wdFabOf(g.k),w=WD_ITEMS[gk];const B=[];const i=g.i;
+function wdFabOpen(x){const g=x.g,it=itm(g.k),gk=wdFabOf(g.k),w=WD_ITEMS[gk];const B=[];const i=g.i;
  B.push(pbtn(`data-kinvact="use" data-ix="${i}"`,"May áo",`thành: ${w.n} vào ô Y phục, ${plainFx(w.w)||"giản dị"} · kèm: áo đang mặc cất vào rương`,""));
  B.push(pbtn(`data-kinvact="gift" data-ix="${i}"`,"Tặng","tốn: 2 khắc · thành: chọn người nhận",whyTime(2)));
  if(it.pr)B.push(pbtn(`data-kinvact="sell" data-ix="${i}"`,"Bán",`thành: Bạc +${Math.floor(it.pr/2)}`,""));
  const gr=KIT_GRADE[x.grade|0];const rows=kitItemRows(g.k,{e:S.inv[i]});const fr="";/* origin: the Lai lịch row (KIT §70) */
  kitModal({kind:"info",title:it.n,sub:it.kd,itemPic:kitItem({src:x.src512||x.src,name:"",grade:x.grade,size:"lg",qty:g.n}).replace('<span class="kitn"></span>',''),
   html:`<div class="kinvrows">${rows}</div>${g.n>1||fr?kitFacts([g.n>1?`Trong rương: ${g.n} món.`:"",fr?fr+".":""].filter(Boolean)):""}<div class="rbtn kinvacts">${B.join("")}</div>`,btn:"Lui"})}
-(function(){const o0=kinvOpen;kinvOpen=function(x){try{if(x&&x.g&&WD_ITEMS[x.g.k])return wdOpen(x);if(x&&x.g&&IT[x.g.k]&&IT[x.g.k].dr&&wdFabOf(x.g.k))return wdFabOpen(x)}catch(e){console.error("wdOpen",e)}return o0.apply(this,arguments)}})();
+(function(){const o0=kinvOpen;kinvOpen=function(x){try{if(x&&x.g&&WD_ITEMS[x.g.k])return wdOpen(x);if(x&&x.g&&IT[x.g.k]&&itm(x.g.k).dr&&wdFabOf(x.g.k))return wdFabOpen(x)}catch(e){console.error("wdOpen",e)}return o0.apply(this,arguments)}})();
 /* a [data-wd] act inside an item panel closes the panel first (like jinv's [data-kinvact]) */
 addEventListener("click",ev=>{const b=ev.target.closest&&ev.target.closest("[data-wd]");if(!b||b.disabled)return;if(b.closest("#mb,.dlg,.modal")){try{if(Q.length)closeModal()}catch(e){}}},true);
 

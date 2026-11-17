@@ -285,12 +285,12 @@ function rtNpcMeet(){if(!rtRoad()||!rtNight()||Q.length)return;const T=rtS();for
 (function(){const o0=over;over=function(h,t,fate){try{if(S&&!S.dead&&!(S.rt&&S.rt.exposed)&&rtKidsAlive().some(k=>k.tf))rtEnd("tt_kin")}catch(e){}return o0.apply(this,arguments)}})();
 /* ---------- Mệnh truyện: the route chapters; Sổ luân hồi: endings met ---------- */
 function rtRows(L){return typeof rows67==="function"?rows67(L):`<div class="pcb rows">${L.map(r=>`<div class="pcrow"><span>${r[0]}</span><span>${r[1]}</span></div>`).join("")}</div>`}
-function rtStoryHTML(){if(!S||!S.rt||!S.rt.open)return"";const T=S.rt;const ck=(t,ok)=>(ok?"✓ ":"✗ ")+t;let h="";const on=[T.tt&&"Tư tình",T.tc&&"Trốn khỏi cung",T.ad&&T.ad.on&&"Ẩn dật"].filter(Boolean);
+function rtStoryHTML(){if(!S||!S.rt||!S.rt.open)return"";const T=S.rt;const ck=(t,ok)=>[!!ok,t],ckL=L=>typeof kitChecks==="function"?kitChecks(L):L.map(y=>(y[0]?"✓ ":"✗ ")+y[1]).join("<br>");/* kit §46 kitChecks rows (tut-followups: no typed ✓/✗ lines) */let h="";const on=[T.tt&&"Tư tình",T.tc&&"Trốn khỏi cung",T.ad&&T.ad.on&&"Ẩn dật"].filter(Boolean);
  const rows=[["Lối riêng",on.length?on.join(" · "):"đã mở nhóm «Lối riêng» ở Hành sự"],["Lời ra tiếng vào",`${rtHeatW(T.heat)} (${T.heat}/100)`,T.heat>=60?"r":""]];
  const why=rtWeary();if(why.length)rows.push(["Cớ chán cung",why.join("; ")]);
- const m=rtMan();if(T.tt&&m)rows.push([`Tư tình · ${rtMnm(m)}`,[ck("để ý y",1),ck("trao tín vật",T.tt.tok),ck(`hẹn gặp lén (${T.tt.meet||0} lần)`,T.tt.meet>=2),ck("đêm riêng",T.tt.night),ck("y hứa đưa ngươi đi",T.tt.st>=4)].join("<br>")]);
+ const m=rtMan();if(T.tt&&m)rows.push([`Tư tình · ${rtMnm(m)}`,ckL([ck("để ý y",1),ck("trao tín vật",T.tt.tok),ck(`hẹn gặp lén (${T.tt.meet||0} lần)`,T.tt.meet>=2),ck("đêm riêng",T.tt.night),ck("y hứa đưa ngươi đi",T.tt.st>=4)])]);
  if(T.bm){const v=RV(T.bm.v);if(v)rows.push(["Bị uy hiếp",`${rtVn(v)} đòi ${T.bm.n} lượng bạc mỗi tháng`,"r"])}
- if(T.tc){const P=T.tc.prep;rows.push(["Trốn khỏi cung",[ck("đồng lõa gác cổng",P.guard),ck("cung nữ tâm phúc",P.maid),ck("người nhà đón",P.home),ck("dò đường",P.route),ck("yêu bài",P.pass),ck("y phục cung nữ",P.cloth),ck("thuốc giả chết",P.drug)].join("<br>")])}
+ if(T.tc){const P=T.tc.prep;rows.push(["Trốn khỏi cung",ckL([ck("đồng lõa gác cổng",P.guard),ck("cung nữ tâm phúc",P.maid),ck("người nhà đón",P.home),ck("dò đường",P.route),ck("yêu bài",P.pass),ck("y phục cung nữ",P.cloth),ck("thuốc giả chết",P.drug)])])}
  if(T.ad&&T.ad.on)rows.push(["Ẩn dật",`đã ${Math.floor((S.turn-T.ad.since)/12)} năm / 3 năm · Đức ${S.duc}/${BAL.route.anDuc} · ${T.ad.harm?"đã hại người: mất kết an nhiên":"chưa hại ai"}`]);
  const kt=rtKidsAlive().filter(k=>k.tf);if(kt.length)rows.push(["Con riêng",kt.map(k=>k.name).join(", ")+" (chỉ ngươi biết)"]);
  if(T.ends.length)rows.push(["Kết đã gặp kiếp này",T.ends.map(id=>RT_END[id][1]).join(" · "),"g"]);
