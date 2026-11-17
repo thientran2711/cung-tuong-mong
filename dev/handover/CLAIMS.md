@@ -774,7 +774,7 @@
 | kit-ico-rank r2: co-op end card goes straight to rebirth (no Xem Bảng vàng in co-op; mode coop fix) → SẴN SÀNG KIỂM d0840f4e; coop-e2e LIVE 63/63 ×2 | review/kit-ico-rank-r2 | MAIN s32 | session_01UV1Szi6oANLyE5bWQnjMQv | READY | 17/11 14:20Z |
 | morechip-sil: '+N' chip = grey neutral silhouette icon + number (OD 14:05Z; main draws) on top of morechip-corners-r1 a66f274c | review/morechip-sil | MAIN s32 | session_01UV1Szi57hvzWiNmX4GRXYk | SẴN SÀNG KIỂM bd3bb284 (report dev/handover/reports/morechip-sil.md) | 17/11 14:20Z |
 | REVIEW map-portrait r1 of c34e99e3 (SMALL UI; '!' bright-yellow check) | review/map-portrait-r1 | MAIN s32 | session_01UV1SzjXidWjrysZBq2qz2c | RUNNING | 17/11 13:31Z |
-| REVIEW tuanluc-sync r1 of c70fb3973 (opus BIG; + remove TA TUẦN QUA chips per OD L1458(3)) | review/tuanluc-sync-r1 | MAIN s32 | session_01UV1Szm7QwzuJJuvFXUbJdi | RUNNING | 17/11 13:31Z |
+| REVIEW tuanluc-sync r1 of c70fb3973 (opus BIG; + remove TA TUẦN QUA chips per OD L1458(3)) | review/tuanluc-sync-r1 | MAIN s32 | session_01UV1Szm7QwzuJJuvFXUbJdi | PASS 4156a49d0 (report reports/review-tuanluc-sync-r1.md; TA TUẦN QUA chips + whole number family removed) | 17/11 ~15:30Z |
 | person-leftcol #3 (rebuilt from spec: iPad fit + sizes; ksz3/kdper left for main to decide) | review/person-leftcol | MAIN s32 | session_01UV1SzgmaEVQSFzUscM5dKD | READY FOR REVIEW (see report) | 17/11 |
 | REVIEW person-leftcol r1 of 0872eae3 (SMALL UI) | review/person-leftcol-r1 | MAIN s32 | session_01UV1SzkWt4gmsPwYikTQqKQ | RUNNING | 17/11 13:58Z |
 | REVIEW kit-ico-rank r2 of d0840f4e (opus BIG co-op + rank Worker) | review/kit-ico-rank-r2-r1 | MAIN s32 | session_01UV1SzhhPVmkyz4wFoqDuLv | RUNNING | 17/11 13:56Z |
