@@ -919,3 +919,4 @@
 | toil-looks7: finish toil-looks5 (V2-B smaller, final sheet v17, merge main) (sonnet; brief briefs/s36-toil-looks7.md) | review/toil-looks5 | MAIN s36 | session_01UV1SzknrVcN46ftwSGV7f9 | RUNNING | 17/11 19:36Z |
 | REVIEW display-shelf (opus BIG) of e0a86875 | review/display-shelf | C-AG | session_01UV1SzkUH3pxqYSkZMUQX7v | RUNNING | 17/11 19:09Z |
 | REVIEW kit-figure-mood r3 of 5758b6e3 (sonnet SMALL; brief briefs/s36-review-kit-figure-mood-r3.md) | review/kit-figure-mood-r3 | MAIN s36 | session_01UV1Szh4nqVY4zaK7Nk1kui | RUNNING | 17/11 19:12Z |
+| odds-cap review r1 (opus BIG) of d3589f39 | review/odds-cap-r1 | D | session_01964izEqMuRVcBrUFRY8F3P | RUNNING | 17/11 19:15Z |
