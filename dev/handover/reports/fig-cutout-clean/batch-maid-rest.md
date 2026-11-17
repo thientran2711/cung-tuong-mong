@@ -186,3 +186,11 @@ maid-m08-t2-a18	lJIil1Pgv9	redo ok U
 maid-m08-t3-a18	JNfGJloOq4	redo ok U
 maid-m08-t4-a18	rgdPrq8xtc	redo ok U
 maid-m08-t5-a18	EbnLEmIuuO	redo ok U
+maid-m08-t6-a18	Xm4Ft4TBfo	redo ok U
+maid-m08-t7-a18	MB7fXJdDCm	redo ok U DRIFT (peach-gold + phoenix crown like t6; original figures already alike) - lead to confirm, no redo
+maid-m08-t8-a18	79aG4f2JAL	redo ok U DRIFT (same as t7)
+maid-m08-tm0-a18	4RQc3FX9Aa	redo ok U
+maid-m08-tm2-a18	UPh2yvpwny	redo ok U
+maid-m08-tm3-a18	9ZF0RHuNYZ	redo ok U
+maid-m08-tm4-a18	cpgmDSO0eP	redo ok U
+maid-m09-a18	s78iwIbl8e	redo ok U
