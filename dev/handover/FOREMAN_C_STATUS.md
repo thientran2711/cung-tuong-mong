@@ -2,6 +2,7 @@
 
 NEXT FOREMAN C SESSION: ROOT-2 = session_011xDdVPLp4pAuPFtBP2YetM (opened by ROOT at 06:34Z 17/11, depth 1). ROOT stops; its trigger disabled.
 FOREMAN C SESSION ROOT-2 = session_011xDdVPLp4pAuPFtBP2YetM (opened by ROOT 06:34Z 17/11) · START_CTX ~7% (~70k of 1M; own estimate, get_session reads 0) → roll over at >= 32%, ceiling 60% · lineage depth 1/8 · own hourly wake trig_0115gVzMubqiSyY3gyCKh7kS (:32).
+- 07:22Z C LOOKED at replaced b7 (13): all OK → live (+ b8 4). #3b writes HANDOVER #3 and stops; C opens #4 on its message.
 - 07:18Z C LOOKED: W5c D4 (8 incl. 4 redos) OK live (28/78 live). W6c a26 first16: method OK, 14 live; hold m09-ty3 (≈m05 crimson) + m15-ty3 (≈m11 lilac) → hue fix + design table + W4d a18 match.
 - 07:14Z event-art: b4 18 + b5 10 + b6 12 LIVE (40). C LOOKED b8 redo 4: OK live. b7 (13): 4 OK live; 9 redo (pink lead ×9, ribbon gift boxes on qua-tet/su-tet, season clash off-hoa). #3b at ~25% ctx → HANDOVER #3 after these; C opens #4. W6c a26 first16 sheet not pushed yet → asked to push.
 - 07:10Z C LOOKED at W5c D3 (8 maids): OK live. event-art b6 (14 q72): 12 OK live; redo 2 (q72-kho-tet + maid-tet: modern ribbon gift boxes); order: lead robe pink ≤ ~1 in 5.
