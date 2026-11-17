@@ -93,7 +93,7 @@ moodMonth=function(){const E=S.emp,T=trS();if(!T)return"";
  if(m<2&&Math.min(T.bien,T.kho)<25){m=2;t+=" Quốc khố, biên phòng đều nguy, ngài không vui nổi."}
  E.mood=m;if(t&&k!=="yen"&&k!=="hoi")tdNews(t.replace(/<[^>]+>/g,""));return t?`Tháng này: ${t} `:""};
 /* hard times: he comes to the harem less (the night simply passes for everyone) */
-(function(){const f0=flip;flip=function(){try{const T=S&&S.trieu;if(T&&tdOn()&&Math.min(T.bien,T.kho)<30&&roll(30)){S.tonight=null;return}}catch(e){}return f0.apply(this,arguments)}})();
+(function(){const f0=flip;flip=function(){try{const T=S&&S.trieu;if(T&&tdOn()&&!(typeof empOn==="function"&&empOn())/* AG2: the crisis makes him busy (empBusy → BAL.ag.emp.summon) */&&Math.min(T.bien,T.kho)<30&&roll(30)){S.tonight=null;return}}catch(e){}return f0.apply(this,arguments)}})();
 function tdCrisis(){const T=trS();return T&&Math.min(T.bien,T.kho)<30}
 
 /* ---------- seats: a minister who backs a consort adds weight; her own house through her father ---------- */

@@ -453,7 +453,21 @@ Object.assign(BAL,{ag:{on:1,
  costW:1,costCap:.9,costMin:.05,kh:1,
  wit:{hear:40,mat:6,caught:5,hoD:50,w:{hear:1,join:1,ignore:3}},
  vent:{fade:1},
- perf:{p95:8,n:200,slice:3}}});
+ perf:{p95:8,n:200,slice:3},
+ /* AG2 the Emperor as an agent (jagemp.js; design reports/npc-agent.md §3.2):
+    summon  [calm, busy] % that he calls someone to his bed tonight — the owner's rule (OD 16/11 18:10Z): 90, 65 when busy with court
+            (trait Chăm chính sự, or the court in crisis = j55 tdCrisis, which was an extra 30 % cancel: 90 × 70 % ≈ 65, now one rule)
+            or he is ill; else he rests / reads memorials alone
+    custom  [mùng 1, rằm] weight of the custom (lệ: the night at Hoàng hậu's palace) against his wish for the card he turned (100 − x);
+            the old j75 FAIRN.custom roll, moved here (ONE CORE)
+    duty    × on the custom's / the seat's weight per trait of his (dutiful up, amorous down)
+    want    [floor, cap] of his wish for the turned card against the Empress (nightCh ratio, square root) when he weighs the custom
+    met     his memory of what each person did near him: w = × per remembered deed on her night weight, miss = a failed deed counts this much,
+            keep = tuần he remembers, cap = deeds counted at most, n = deeds kept per person
+    seat    a vacant Hoàng hậu seat: % per tuần that he decides = b + m × (months vacant − mourn), [lo, hi], × duty, × th when Thái hậu lives
+            (was the flat j8 roll 12) */
+ emp:{summon:[90,65],custom:[40,20],duty:{chamchinh:1.25,hieuthao:1.25,datinh:.75,mesac:.75},want:[.5,2],
+  met:{w:.15,miss:.5,keep:2,cap:3,n:4},seat:{b:6,m:3,lo:6,hi:40,mourn:3,th:1.2}}}});
 
 /* BAL.mind — jmind (one mind for every person, review/npc-mind; moved here from jmind.js, r1 fault 3 ONE CORE)
    like      regard gained on top when a gift is one the receiver likes (jdis BAL.dis.aff is the one dislike penalty)

@@ -129,7 +129,8 @@ PEND.prep=()=>{const wb=wearBonus(S),vp=vpItems(S).length>0,b=bestArt();const jb
 /* sat = the Emperor wants a change of face: each night a consort already had in the last 6 tuần beyond the first lowers her chance of the tablet by sat (×, floor satMin) and
    her chance to lure him away (Tranh sủng / Chặn ngự giá) by satO points; the same for every consort, shown as a reason in nightWhy */
 /* sat .2 / satO 8 = the measured balance values (BALANCE_REPORT 11/14); one-core: they were 0 / 0 here and set again in jbal2 */
-const FAIRN=window.FAIRN={eff:1,custom:[40,20],fav:4,sat:.2,satMin:.35,satO:8};
+/* custom (mùng 1 / rằm weight) lives in BAL.ag.emp.custom (AG2, ONE CORE) */
+const FAIRN=window.FAIRN={eff:1,fav:4,sat:.2,satMin:.35,satO:8};
 const MOODW=["vui","bình thường","phiền muộn","giận dữ"];
 function talkOpts(p){const E=S.emp;return [has("trongtai")?3:(p.tai||0)>=60?1:0,has("chamchinh")?3:-1,has("datinh")||has("mesac")?3:has("lanhlung")?-1:0,E.mood>=2?2:1]}
 /* (a) an NPC's night: same formula as hers (PEND.prep q, PEND.night1 talk + mood + R(3), nightFx gains and reward) */
@@ -168,7 +169,7 @@ window.deckOdds=deckOdds;window.deckGain=deckGain;window.deckLoss=deckLoss;
 /* force = the agent loop chose it (no weekly trait frequency) */
 function npcEffort(v,force){const K=npcEffortKind(v);if(!K)return "";const pt=EFF[v.trait]!=null?EFF[v.trait]:.18;if(!force&&Math.random()>pt*FAIRN.eff)return "";
  const {kd,n,c,o,w,lose}=K;
- ap(v,c);const b=v.sung;const ok=roll(o);ap(v,ok?w:K.l);
+ ap(v,c);const b=v.sung;const ok=roll(o);ap(v,ok?w:K.l);try{if(typeof empMet==="function")empMet(v,kd,ok)}catch(e){}/* AG2: he remembers it (her runOpt: jagemp) */
  /* two-way (owner 16/11 s21): her Kinh hồng vũ card also stirs the others (ghen +10, liking −5); an NPC dance does the same */
  if(kd==="vu"){liveRivals(true).forEach(x=>{if(x!==v){x.ghen=cl((x.ghen||0)+BAL.tw.g.vu[0],0,100);affAdd(x,v,-BAL.tw.g.vu[1])}});affAdd(S,v,-BAL.tw.g.vu[1])}
  /* the change names whose Sủng it is; a line with no change says nothing about numbers (owner 11/15: "Sủng nàng 45 → 45") */
@@ -195,19 +196,21 @@ function satN(p){return Math.max(0,nightsIn(p,6)-1)}
 /* the admonition is heeded for 2 tuần: a visible cause, shown in the news and in nightWhy */
 const nc0=nightCh;nightCh=function(p){p=p||S;const c=nc0.call(this,p);if(c&&p.admonWk!=null&&wk()-p.admonWk>=0&&wk()-p.admonWk<=2)return Math.max(1,Math.round(c/2));return c};
 /* (d) mùng 1 / rằm: custom sends him to the Hoàng hậu; (f) the data of why */
-function whyRows(){const T=[];for(const p of consorts()){if(p!==S&&(!p.alive||p.out))continue;const w=nightCh(p);const rs=[];
+function whyRows(){const T=[];for(const p of consorts()){if(p!==S&&(!p.alive||p.out))continue;const w=nightCh(p)*(typeof empMemF==="function"?empMemF(p):1);const rs=[];
+  try{if(w>0&&typeof empMemN==="function"&&empOn()&&empMemN(p))rs.push({k:"met",t:`Hoàng thượng còn nhớ việc ${p===S?"ngươi":"nàng"} làm gần đây`,pub:true})}catch(e){}
   if(p.preg&&!(p===S&&S.pregUnk))rs.push({k:"preg",t:"đang có thai",pub:!p.hidden||p===S});if(illOf(p))rs.push({k:"ill",t:illName(p),pub:true});if(p.confined)rs.push({k:"conf",t:"cấm túc",pub:true});if(p.out)rs.push({k:"out",t:"lãnh cung",pub:true});
   if(p.block)rs.push({k:"block",t:"thẻ bài bị giấu",pub:p===S?false:false});if(p.admonWk!=null&&wk()-p.admonWk<=2)rs.push({k:"admon",t:"vừa bị khuyên mưa móc đều khắp",pub:true});if(FAIRN.sat&&satN(p))rs.push({k:"sat",t:`đã được thị tẩm ${nightsIn(p,6)} đêm trong sáu tuần, ngài muốn đổi người`,pub:true});if(p.tablet)rs.push({k:"tablet",t:"đã đút lót Kính sự phòng",pub:p===S});
   T.push({id:p===S?"me":p.id,name:p===S?"Ngươi":p.name,rank:rkName(p),sung:p.sung,w,n6:nightsIn(p,6),reasons:rs})}
  const tot=T.reduce((a,x)=>a+x.w,0)||1;T.forEach(x=>x.share=Math.round(x.w*100/tot));return T.sort((a,b)=>b.w-a.w)}
 const fl0=flip;flip=function(){let rows=null;try{rows=whyRows()}catch(e){}const r=fl0.apply(this,arguments);const t0=S&&S.tonight;let cause=S&&S.tonight?"tablet":"none";
- try{if(S&&!S.dead){const q=queenP();const tq=S.tuan===0?FAIRN.custom[0]:S.tuan===1?FAIRN.custom[1]:0;const cur=tonightOf();
-  if(S.tonight&&q&&tq&&!ntTaken()&&cur!==q&&nightCh(q)>0&&roll(tq)){const lost=cur;
+ try{if(S&&!S.dead){const q=queenP();const CU=BAL.ag.emp.custom,tq=S.tuan===0?CU[0]:S.tuan===1?CU[1]:0;const cur=tonightOf();
+  if(S.tonight&&q&&tq&&!ntTaken()&&cur!==q&&nightCh(q)>0&&(typeof empOn==="function"&&empOn()?empCustom(q,cur,tq):roll(tq))){const lost=cur;
    if(lost===S){for(let i=Q.length-1;i>=0;i--)if(Q[i].pid==="ksp")Q.splice(i,1);Q.push({t:"Kính sự phòng",who:pEunCourt?pEunCourt("ksp"):undefined,h:`<p>Thẻ bài của ngươi đã được lật, nhưng hôm nay là ${S.tuan===0?"mùng một":"rằm"}: theo lệ, Hoàng thượng nghỉ ở cung Hoàng hậu.</p>`})}
    S.tonight=q===S?"me":q;if(q===S)pushDil(mkP("ksp"),"Kính sự phòng báo tin");cause="custom"}
   else if(S.tonight&&ntTaken()&&ntTaken().who!=="me")cause="stolen";
-  const t=tonightOf();S.nightWhy={wk:wk(),pick:t?(t===S?"me":t.id):null,flip0:t0?(t0==="me"?"me":t0.id):null/* the card he turned (KIT §67 card-flip) */,cause,day:S.tuan===0?"mùng một":S.tuan===1?"rằm":"",mood:MOODW[S.emp.mood],rows:rows||[]}}}catch(e){console.error(e)}return r};
+  const t=tonightOf();S.nightWhy={wk:wk(),pick:t?(t===S?"me":t.id):null,flip0:t0?(t0==="me"?"me":t0.id):null/* the card he turned (KIT §67 card-flip) */,cause,day:S.tuan===0?"mùng một":S.tuan===1?"rằm":"",mood:MOODW[S.emp.mood],rows:rows||[],emp:S.empWhy&&S.empWhy.wk===wk()?Object.assign({},S.empWhy):null}}}catch(e){console.error(e)}return r};
 window.nightWhy=function(){const d=S&&S.nightWhy;if(!d||d.wk!==wk())return null;const row=d.rows.find(x=>x.id===d.pick)||null;const tot=d.rows.reduce((a,x)=>a+x.w,0);
  const text=!d.pick?"Đêm nay Hoàng thượng không lật thẻ bài nào.":d.cause==="custom"?`Hôm nay là ${d.day}: theo lệ, Hoàng thượng nghỉ ở cung Hoàng hậu.`:d.cause==="stolen"?"Hoàng thượng bị mời sang cung khác giữa đường.":row?`${row.name}: Sủng ${row.sung} · dịp được lật thẻ: ${typeof chanceLvl==="function"?chanceLvl(row.share):word(row.share)} · ${row.n6} đêm trong sáu tuần gần đây · Hoàng thượng đang ${d.mood}`:"";
- return Object.assign({},d,{row,text})};
+ let tx=text;try{const e=typeof empWhyTxt==="function"?empWhyTxt(d):"";if(e)tx=!d.pick?`${text} ${e}`:`${e} ${text}`}catch(x){}/* AG2: his own reason */
+ return Object.assign({},d,{row,text:tx})};
 })();
