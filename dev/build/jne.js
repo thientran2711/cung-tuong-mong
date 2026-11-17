@@ -222,7 +222,7 @@ window.kneMorningAfter=morningAfter;
             Both warm/tender pictures were drawn by review/pic-dupes (night_gens.txt ksDhGD716B / jUXCWBYLD0).
      night-end card (this file)                 → ne-night-<warm|normal|cold> by the card tier.
    Same thresholds as the j8 text (6 / 3), so picture and words always agree. */
-const NT_TONE=s=>s>=6?"warm":s>=3?"normal":"cold";
+const NT_TONE=s=>s>=BAL.nightEnd.warm?"warm":s>=BAL.nightEnd.normal?"normal":"cold";
 /* pictures drawn by review/pic-dupes (reuse first): warm = he draws her close (ev-night2-warm), normal = hand in hand (ev-night2-tender) */
 const NT_PIC={warm:"ev-night2-warm",normal:"ev-night2-tender"};
 if(typeof kitEvBanner==="function"){const eb0=kitEvBanner;kitEvBanner=function(m){try{if(m&&m.pid==="night2"&&m.pp&&typeof m.pp.s==="number"){const tn=NT_TONE(m.pp.s);

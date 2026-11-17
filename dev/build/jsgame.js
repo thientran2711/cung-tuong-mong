@@ -124,7 +124,7 @@ function sgTruyen(box,env){const R=sgRM();const C=kg82Canvas(box,.9,420),{g,W,H}
 const SG_TEMP=[["tham bạc",-.12],["nhát gan",.1],["thật thà",.04],["khôn lỏi",-.04]];
 const SG_TR={tham:0,nhat:1,trung:2,lanh:3,chuyen:3};
 function sgTemper(m){if(m&&m.tr&&SG_TR[m.tr]!=null)return SG_TEMP[SG_TR[m.tr]];const s=String(m&&m.name||"");let h=7;for(const c of s)h=(h*31+c.charCodeAt(0))%9973;return SG_TEMP[h%SG_TEMP.length]}
-function sgLoyW(l){return l>=70?"rất trung":l>=50?"trung":l>=30?"vừa phải":"lỏng"}
+function sgLoyW(l){return l>=BAL.loy.trust?"rất trung":l>=BAL.loy.mid?"trung":l>=BAL.loy.out?"vừa phải":"lỏng"}
 function sgThr(v){const m=v&&v.maid||{};const loy=m.loyal==null?50:m.loyal;return cl(.3+loy/220+sgTemper(m)[1]+(Math.random()-.5)*.1,.18,.86)}
 const SG_GIA=["Ít ỏi","Nhẹ tay","Vừa phải","Hậu","Rất hậu"];
 function sgGiaW(x){return SG_GIA[Math.min(4,Math.floor(x*5))]}

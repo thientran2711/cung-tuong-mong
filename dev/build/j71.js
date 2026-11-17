@@ -18,7 +18,7 @@ if(typeof FEST!=="undefined"&&!FEST.thanhtho)FEST.thanhtho={name:"Thánh thọ T
 function nm7(p){return p===S?"ngươi":p.name}
 function gn7(p){return p===S?"ngươi":String(p.name).split(" ").pop()}
 function aw7(p,k){try{return artW2(p,k)}catch(e){return (p.arts&&p.arts[k])||0}}
-function help7(p){const m=p.maid?(p.maid.loyal||0)/10:0;const s=(p.staff||[]).filter(x=>(x.loyal||0)>=60).length*2;return Math.min(12,m+s)}
+function help7(p){const m=p.maid?(p.maid.loyal||0)/10:0;const s=(p.staff||[]).filter(x=>(x.loyal||0)>=BAL.loy.close).length*2;return Math.min(12,m+s)}
 function sac7(p){try{return effSac(p)}catch(e){return p.sac||0}}
 function present7(p){return p===S?(!S.out&&!S.confined&&!S.dead):(p.alive&&!p.out&&!p.confined)}
 /* deterministic sampler for the odds (stable between renders and reloads) */

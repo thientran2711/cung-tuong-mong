@@ -143,9 +143,9 @@ function kitStageEdge(){try{const st=$("stage");if(!st)return;const sr=st.getBou
    window.kitCourtKnown(who) -> bool (default: the Emperor's mood is public; Thái hậu / Hoàng hậu moods are "chưa rõ" until a module says). ---------- */
 function kitCourtRows(){const out=[];if(!S||S.dead)return out;const mood=w=>{try{if(typeof window.kitCourtMood==="function"){const r=window.kitCourtMood(w);if(r!=null)return r}}catch(e){}
   if(w==="emp"){const m=MOODS[S.emp&&S.emp.mood];return m?[m[0],m[1]]:null}return null};
- const att=(n)=>typeof affW==="function"?[affW(n),n>10?"g":n<-10?"r":""]:[String(n),""];
+ const att=(n)=>typeof affW==="function"?[affW(n),n>BAL.quyLv[2]?"g":n<BAL.quyLv[1]?"r":""]:[String(n),""];
  const known=w=>{try{if(typeof window.kitCourtKnown==="function"){const r=window.kitCourtKnown(w);if(r!=null)return r}}catch(e){}return true};
- out.push({k:"emp",who:"Hoàng thượng",f:pEmp(),mood:mood("emp"),att:known("emp")?[S.sung>=60?"Sủng ái":S.sung>=30?"Để mắt":S.sung>=10?"Biết mặt":"Chưa để ý",S.sung>=30?"g":""]:null});
+ out.push({k:"emp",who:"Hoàng thượng",f:pEmp(),mood:mood("emp"),att:known("emp")?[S.sung>=BAL.sungLv.card[2]?"Sủng ái":S.sung>=BAL.sungLv.card[1]?"Để mắt":S.sung>=BAL.sungLv.card[0]?"Biết mặt":"Chưa để ý",S.sung>=BAL.sungLv.card[1]?"g":""]:null});
  if(!S.thDead)out.push({k:"th",who:"Thái hậu",f:pTH(),mood:mood("th"),att:known("th")?att(S.th|0):null});
  const q=typeof queenP==="function"?queenP():null;if(q&&q!==S)out.push({k:"hh",who:"Hoàng hậu",f:pv(q),mood:mood("hh"),att:known("hh")?att(S.hh|0):null,ref:q});
  return out}

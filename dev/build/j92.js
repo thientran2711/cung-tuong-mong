@@ -205,9 +205,9 @@ function wdCause(obs,t){if(!obs||!t||obs===t)return null;if(obs===S){const k=wdK
 window.wdCause=wdCause;
 const WD_ST_WORD={over:"vượt phẩm",under:"quá giản dị",tang:"mặc đồ đỏ vàng giữa quốc tang",ok:"đúng phẩm"};
 /* her ma ma (or a maid old enough to be one) who is sharp-eyed: lanh lợi and loyal */
-function wdMama(p){const L=[p.maid].concat(p.staff||[]).filter(Boolean);return L.find(s=>{let m=false;try{m=personRoleRank(s,"maid").role==="mama"||(s.age||0)>=36}catch(e){}return m&&(s.tr==="lanh"||(s.loyal||0)>=80)&&(s.loyal||0)>=60&&!s.spyFor})||null}
+function wdMama(p){const L=[p.maid].concat(p.staff||[]).filter(Boolean);return L.find(s=>{let m=false;try{m=personRoleRank(s,"maid").role==="mama"||(s.age||0)>=36}catch(e){}return m&&(s.tr==="lanh"||(s.loyal||0)>=BAL.loy.top)&&(s.loyal||0)>=BAL.loy.close&&!s.spyFor})||null}
 /* someone to sell or pawn things quietly outside the palace: a ma ma or a eunuch of her own staff (loyal 40+) */
-function wdAgent(p){const L=[p.maid].concat(p.staff||[]).filter(s=>s&&!s.spyFor&&(s.loyal||0)>=40);
+function wdAgent(p){const L=[p.maid].concat(p.staff||[]).filter(s=>s&&!s.spyFor&&(s.loyal||0)>=BAL.loy.low);
  return L.find(s=>s.role==="eunuch")||L.find(s=>{try{return personRoleRank(s,"maid").role==="mama"||(s.age||0)>=36}catch(e){return false}})||null}
 
 /* ---------- getting things: a real item into the chest (rewards, purchases, gifts) ---------- */
@@ -361,7 +361,7 @@ try{ACTDOM.giahoa="Mưu kế";J78VERB.giahoa="giá họa {t} tội ăn trộm";D
 /* ---------- selling quietly, pawning, redeeming ---------- */
 function wdPrice(e){const it=wdItem(e);return it?it.pr:((IT[e.k]&&itm(e.k).pr)||0)}
 function wdSellPct(p,ag){return cl(WD.sellLo+Math.round(((ag?ag.loyal:50)-40)/3),WD.sellLo,WD.sellHi)}
-function wdLeak(p,ag,half){return cl(Math.round((WD.sellRisk+(ag&&ag.tr==="chuyen"?15:0)-(ag&&(ag.loyal||0)>=75?5:0))*(half?.5:1)),2,60)}
+function wdLeak(p,ag,half){return cl(Math.round((WD.sellRisk+(ag&&ag.tr==="chuyen"?15:0)-(ag&&(ag.loyal||0)>=BAL.loy.deep?5:0))*(half?.5:1)),2,60)}
 function wdSell(p,ix){const e=p.inv[ix];if(!e||e.h||!wdItem(e))return"";if(wdIsNt(e))return"";const ag=wdAgent(p);if(!ag)return"";
  p.inv.splice(ix,1);const g=Math.max(1,Math.round(wdPrice(e)*wdSellPct(p,ag)/100));ap(p,{bac:g});let r=`${wdNmC(p)} sai ${ag.name} lén bán ${wdItem(e).n} ra ngoài cung: Bạc +${g}. `;
  if(roll(wdLeak(p,ag))){ap(p,{danh:-WD.sellDanh});r+=`<span class="r">Chuyện lộ ra: cả cung xì xào ${wdNm(p)} túng thiếu phải bán đồ.</span> Danh -${WD.sellDanh}. `;if(p!==S)try{newsAdd(p,"wd",`${wdNmC(p)} túng thiếu, lén bán đồ ra ngoài cung.`)}catch(x){}}

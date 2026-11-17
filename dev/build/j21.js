@@ -16,10 +16,10 @@ function favorBook(full){kn();const P=consorts().filter(p=>!p.out).sort((a,b)=>b
 /* acting on someone means having met her */
 (function(){const d0=doAct;doAct=function(i,k){const v=rivals[i];if(v){kn();S.met[v.id]=wk();if(k==="spy"){const e0=v.ev;const r=d0.apply(this,arguments);if(v.ev>e0)noteAdd(v.id,`dò la được thêm 1 chứng cứ (nay ${v.ev}); Sủng ${v.sung}`);S.kf[v.id]={s:v.sung,n:(v.nightLog||[]).filter(w=>w>=S.turn*3).length,w:wk()};return r}}return d0.apply(this,arguments)}})();
 /* ladder words for feelings */
-function affW(v){return v<=-60?"Thù":v<=-30?"Ghét":v<-10?"Lạnh nhạt":v<=10?"Bình thường":v<30?"Có cảm tình":v<60?"Thân":"Thân thiết"}
+function affW(v){return quyW(v)}/* ONE CORE: the VANPHONG "quý" word (jhc quyW, BAL.quyLv); was its own 7-word ladder with Thù / Lạnh nhạt / Thân */
 function oanW(v){return v<=10?"Không oán":v<30?"Hơi oán":v<60?"Oán":"Thù sâu"}
 function fbar(v,lo,hi,good){const pc=cl((v-lo)/(hi-lo)*100,0,100);return `<span class="fbar"><u class="${good?"g":"r"}" style="width:${pc}%"></u></span>`}
-function feel(a,o){return a==null?`<span class="ef n">chưa rõ</span>`:`<span class="ef ${a>10?"g":a<-10?"r":"n"}">${affW(a)} · ${a>0?"+":""}${a}</span>${fbar(a,-100,100,a>=0)} <span class="ef ${o>=30?"r":o>10?"r":"n"}">${oanW(o)} · ${Math.round(o)}</span>${fbar(o,0,100,false)}`}
+function feel(a,o){return a==null?`<span class="ef n">chưa rõ</span>`:`<span class="ef ${a>BAL.quyLv[2]?"g":a<BAL.quyLv[1]?"r":"n"}">${affW(a)} · ${a>0?"+":""}${a}</span>${fbar(a,-100,100,a>=0)} <span class="ef ${o>=30?"r":o>10?"r":"n"}">${oanW(o)} · ${Math.round(o)}</span>${fbar(o,0,100,false)}`}
 function pron(p){return p==="emp"?"ngài":p==="th"?"người":"nàng"}
 function knows(v){kn();return v===S||S.met[v.id]!=null||sameHouse(S,v)||(v.ev||0)>0||(S.mat||0)>=4}
 function relLines(v){return [`<span class="rlab">Ngươi với ${pron(v)}:</span> ${feel(aff(S,v),oan(S,v))}`,`<span class="rlab">${pron(v)[0].toUpperCase()+pron(v).slice(1)} với ngươi:</span> ${knows(v)?feel(aff(v,S),oan(v,S)):feel(null)}`]}
@@ -73,6 +73,6 @@ function visitPal(id){const v=rivals.find(x=>x.id===id);if(!v||S.dead||Q.length)
 document.addEventListener("click",e=>{const s=e.target.closest("[data-visit]");if(s&&!s.disabled){e.stopPropagation();visitPal(+s.dataset.visit)}},true);
 /* two-way: rivals call at her palace; if she is out, her maid tells or keeps quiet by loyalty */
 (function(){const pw=placeWhere;placeWhere=function(){pw.apply(this,arguments);try{if(!S||S.out||!roll(4))return;const L=liveRivals(true).filter(v=>!v.confined&&!sameHouse(S,v));if(!L.length)return;const v=pick(L);
-  if(S.place==="home"){S.where[v.id]="home";seeLoc(v,"home");log(`${v.name} sang cung ngươi thăm hỏi.`)}else if(S.maid){log(S.maid.loyal>=50?`${v.name} sang cung ngươi thăm, ngươi đi vắng; ${S.maid.name} không nói ngươi đi đâu.`:`${v.name} sang cung ngươi thăm, ngươi đi vắng; ${S.maid.name} lỡ miệng nói ngươi ở ${placeName(S.place)}.`)}}catch(e){}}})();
+  if(S.place==="home"){S.where[v.id]="home";seeLoc(v,"home");log(`${v.name} sang cung ngươi thăm hỏi.`)}else if(S.maid){log(S.maid.loyal>=BAL.loy.mid?`${v.name} sang cung ngươi thăm, ngươi đi vắng; ${S.maid.name} không nói ngươi đi đâu.`:`${v.name} sang cung ngươi thăm, ngươi đi vắng; ${S.maid.name} lỡ miệng nói ngươi ở ${placeName(S.place)}.`)}}catch(e){}}})();
 /* her own palace has its art too (night bedchamber; brighter by day) */
 SCIMG.home="tam-cung-dem";

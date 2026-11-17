@@ -247,7 +247,7 @@ function fxServants(){const L=[];for(const p of [S].concat(rivals||[]))for(const
 function fxHarm(by,t,how){const kind=pick(["tat","rash","doc"]);const bn=fxName(by);
  if(kind==="tat")slapGive(t,by,how);else if(kind==="rash")rashGive(t,1,"phấn lạ",by===S?null:by);else{pzGive(t,1,"độc ngấm dần",by,FXF.docWk[1]);
   if(fxSeen(t)&&fxObservant())log(`${fxName(t)} môi tím tái, sắc mặt xám: có người ra tay.`)}}
-function fxServMonth(){const all=fxServants();for(const s of all){if(!KIT_FACEFX.live(s))continue;const bad=s.grudge||(s.loyal!=null&&s.loyal<30);if(!bad||!roll(8))continue;
+function fxServMonth(){const all=fxServants();for(const s of all){if(!KIT_FACEFX.live(s))continue;const bad=s.grudge||(s.loyal!=null&&s.loyal<BAL.loy.out);if(!bad||!roll(8))continue;
   const o=KIT_FACEFX.owner(s);const mates=all.filter(x=>x!==s&&KIT_FACEFX.owner(x)===o&&KIT_FACEFX.live(x));if(!mates.length)continue;fxHarm(s,pick(mates),"ghen ghét trong cung")}
  for(const v of liveRivals(true)){let hot=0;try{hot=typeof hostility==="function"?hostility(v,S):0}catch(e){}
   if(hot>=40&&roll(6)){const t=pick((S.staff||[]).concat(S.maid&&typeof S.maid==="object"?[S.maid]:[]));if(t&&KIT_FACEFX.live(t)){fxHarm(v,t,"");if(roll(40)){try{evA(S,v,1);if(fxSeen(t))log(`Ngươi lần ra dấu vết: người của ${v.name} ra tay với ${fxName(t)}: Chứng cứ về ${v.name} +1.`)}catch(e){}}}}

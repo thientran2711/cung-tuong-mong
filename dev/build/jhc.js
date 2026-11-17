@@ -10,7 +10,7 @@
 (function(){
 const T=s=>String(s==null?"":s).replace(/<[^>]+>/g,"").replace(/\s+/g," ").trim();
 /* ---------- 3. relation words ---------- */
-window.quyW=function(v){return v<=-30?"Ghét":v<-10?"Không ưa":v<=10?"Bình thường":v<30?"Có cảm tình":v<60?"Quý mến":"Thân thiết"};
+window.quyW=function(v){return ["Ghét","Không ưa","Bình thường","Có cảm tình","Quý mến","Thân thiết"][quyIx(v)]};/* cuts: BAL.quyLv (VANPHONG:69) */
 const sg=n=>(n>0?"+":"")+Math.round(n);
 try{Object.assign(KIT_GLOSS,{
  "Quý":"Người này quý người kia bao nhiêu (từ -100 đến 100; âm là không ưa, ghét). Cao thì giúp đỡ, che chở; thấp thì gây khó dễ.",

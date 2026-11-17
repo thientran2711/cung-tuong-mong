@@ -40,7 +40,7 @@ mindBelief=function(t,v,k){if(!t||t===S||!t.alive||t.out||!v)return;const kv=key
 const M43HARM=new Set(BANDS.slice(1).flatMap(x=>x[2]).concat(PUSHK));
 (function(){const r0=runAct;runAct=function(a,t,k){const r=r0.apply(this,arguments);try{if(a===S&&t&&t!==S&&t.alive&&M43HARM.has(k)&&k!=="accuse"&&k!=="vp"&&k!=="xx"&&k!=="tocao"&&r&&!FAILRX.test(r))mindBelief(t,S,k)}catch(e){}return r}})();
 /* wit: every head can slip; acts on a belief she holds wrongly are counted */
-(function(){const r0=mindRun;mindRun=function(v,t,k,err){err=err||0;try{const tc=witOf(v);if(!err&&roll(tc>=60?12:tc>=30?18:20)){err=10;mindLog(v,"_mistake");mindLog(v,"_slip")}
+(function(){const r0=mindRun;mindRun=function(v,t,k,err){err=err||0;try{const tc=witOf(v);if(!err&&roll(tc>=BAL.wit.hi?12:tc>=BAL.wit.lo?18:20)){err=10;mindLog(v,"_mistake");mindLog(v,"_slip")}
   mindLog(v,"_act");const b=v.bel&&t&&v.bel[key(t)];if(b&&(b.w||b.r))mindLog(v,"_actBelief");if(b&&b.w>0&&b.w>=b.r)mindLog(v,"_actWrong")}catch(e){}
  const r=r0.call(this,v,t,k,err);try{if(r&&FAILRX.test(r))mindLog(v,"_fail")}catch(e){}return r}})();
 /* a bad week: punished, demoted or fallen makes a head rash for about three weeks */
@@ -51,8 +51,8 @@ function m43bad(p){if(p&&typeof p==="object"&&p!==S)p.badWk=bq()}
 (function(){const r0=rashOf;rashOf=function(v){const r=r0.apply(this,arguments);if(r)return r;if(v&&v.badWk!=null&&bq()-v.badWk<=9&&roll(25)){mindLog(v,"_badWeek");return 1}return 0}})();
 /* tells: the same chance as before, now carried by a named servant of hers; a servant who spies for the schemer keeps it back */
 function m43reporter(){const L=[];const seen=new Set();for(const s of [S.maid].concat(S.staff||[])){if(!s||seen.has(s))continue;seen.add(s);L.push(s)}if(!L.length)return null;
- const w=L.map(s=>(s.tr==="lanh"||s.tr==="chuyen"?3:s.tr==="trung"?2:1)*(s.loyal>=60?1.5:1));let r=Math.random()*w.reduce((a,b)=>a+b,0),i=0;while(r>w[i]&&i<w.length-1){r-=w[i];i++}return L[i]}
-mindTell=function(v,t,k){mindLog(v,"_tell");try{if(v.plan&&v.plan.due>bq()+3)v.plan.due=bq()+3}catch(e){}/* a tell comes 1-3 buổi before the blow */const tc=witOf(v);let c=12+(S.mat||0)*7+(S.staff||[]).filter(s=>s.tr==="lanh"||s.tr==="chuyen").length*8+(tc<35?15:0)-(tc>=70?8:0)+(t===S&&S.maid&&S.maid.loyal>=70?10:0);
+ const w=L.map(s=>(s.tr==="lanh"||s.tr==="chuyen"?3:s.tr==="trung"?2:1)*(s.loyal>=BAL.loy.close?1.5:1));let r=Math.random()*w.reduce((a,b)=>a+b,0),i=0;while(r>w[i]&&i<w.length-1){r-=w[i];i++}return L[i]}
+mindTell=function(v,t,k){mindLog(v,"_tell");try{if(v.plan&&v.plan.due>bq()+3)v.plan.due=bq()+3}catch(e){}/* a tell comes 1-3 buổi before the blow */const tc=witOf(v);let c=12+(S.mat||0)*7+(S.staff||[]).filter(s=>s.tr==="lanh"||s.tr==="chuyen").length*8+(tc<BAL.wit.mid?15:0)-(tc>=BAL.wit.top?8:0)+(t===S&&S.maid&&S.maid.loyal>=BAL.loy.trust?10:0);
  if(!roll(cl(c,5,80)))return;const s=m43reporter();
  if(s&&s.spyFor&&s.spyFor!=="me"&&(s.spyFor===key(v)||roll(50))){mindLog(v,"_tellWithheld");return}
  mindLog(v,"_tellSeen");const what=TELLS[k]||"có động tĩnh lạ";const txt=`${s?s.name+" về báo: n":"N"}gười của ${v.name} ${what}`;S.tells=S.tells||{};S.tells[v.id]={k,t:key(t),bq:bq()};

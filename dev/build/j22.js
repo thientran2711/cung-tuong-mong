@@ -13,7 +13,7 @@ function pMan(m){faceFor(m,m.rw==="vương gia"?"royal":"man",m.age);const fb=(A
 function tinhW(t){return t>=70?"si mê ngươi":t>=50?"thầm thương ngươi":t>=30?"để ý ngươi":t>=10?"có thiện cảm":"chưa để ý"}
 /* risk of being seen: place, her watcher's loyalty, rivals' eyes */
 function lộRisk(k){const base={vuon:28,thu:34,tyv:20,tn:40,home:15}[k]||26;const w=watcher();const eyes=liveRivals(true).reduce((s,v)=>s+(v.mat||0),0);return cl(Math.round(base+eyes*2-(w?w.loyal/5:0)-(S.mat||0)*2),6,92)}
-function watcher(){const s=(S.staff||[]).filter(x=>x.loyal>=60).sort((a,b)=>b.loyal-a.loyal)[0];if(s)return{name:s.name,loyal:s.loyal,s};if(S.maid&&S.maid.loyal>=60)return{name:S.maid.name,loyal:S.maid.loyal};return null}
+function watcher(){const s=(S.staff||[]).filter(x=>x.loyal>=BAL.loy.close).sort((a,b)=>b.loyal-a.loyal)[0];if(s)return{name:s.name,loyal:s.loyal,s};if(S.maid&&S.maid.loyal>=BAL.loy.close)return{name:S.maid.name,loyal:S.maid.loyal};return null}
 function whoMayKnow(){const w=watcher();return [w?w.name+" (canh cửa)":"",...liveRivals(true).filter(v=>(v.mat||0)>=3).map(v=>v.name)].filter(Boolean).slice(0,3).join(", ")||"không ai rõ"}
 function affairExposed(m,how){/* full weight: the man dies; she faces death (first-year mercy aside) or lãnh cung */m.alive=false;log(`<span class="r">${how} ${m.name} bị xử trảm.</span>`);if(roll(50))deathSentence(`Bị ban chết vì tư thông với ${m.name}`);else cold(`Tư thông với ${m.name} bị lộ`)}
 /* talk options with a man: every step carries its odds word and its risk */

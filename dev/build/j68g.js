@@ -71,7 +71,7 @@ EV6("rumorTH","rumor",{a:["th"],pp:()=>S.thDead?null:{a0:0},w:C=>1,
   c6("Bỏ ngoài tai",{w:{duc:1},k:[R6("không biết thật hư")]})]});
 EV6("rumorFavor","rumor",{a:["emp"],pp:()=>({a0:0}),w:C=>1,
  v:["Lời đồn khắp lục cung: Hoàng thượng đã chán ngươi.","Người ta xì xào: ngươi sắp được tấn phong.","Cung nữ các cung đồn ngài hay hỏi đến ngươi khi uống rượu.","Có kẻ bảo thẻ bài của ngươi bị Kính sự phòng giấu xuống dưới."],
- o:X=>[c6("Mua tin Kính sự phòng",{c:{bac:-20},p:od(55+S.mat*4),wt:[G6("biết sự thật")],w:{mat:1},lt:[R6("hắn ậm ừ")],l:{bac:-5},ok:()=>`Thái giám Kính sự phòng nói thật: Sủng của ngươi đang ${S.sung>=60?"rất cao":S.sung>=35?"khá":S.sung>=15?"thấp":"rất thấp"}${S.block?"; có người chặn thẻ của ngươi":""}.`}),
+ o:X=>[c6("Mua tin Kính sự phòng",{c:{bac:-20},p:od(55+S.mat*4),wt:[G6("biết sự thật")],w:{mat:1},lt:[R6("hắn ậm ừ")],l:{bac:-5},ok:()=>`Thái giám Kính sự phòng nói thật: Sủng của ngươi đang ${S.sung>=BAL.sungLv.kinh[2]?"rất cao":S.sung>=BAL.sungLv.kinh[1]?"khá":S.sung>=BAL.sungLv.kinh[0]?"thấp":"rất thấp"}${S.block?"; có người chặn thẻ của ngươi":""}.`}),
   c6("Làm như không nghe",{w:{duc:1},k:[R6("không biết thật hư")]}),
   c6("Tìm kẻ tung tin",{c:{suc:-5},p:od(35+S.mat*6),w:{danh:1},wt:[G6("biết ai đứng sau")],l:{suc:-2},lt:[R6("không ra ai")],ok:()=>{const L=liveRivals(true).filter(v=>{try{return bandOf(danger(v,S))>=1}catch(e){return false}});const v=L.length?pick(L):null;if(v){evStory(v,1,"tung tin đồn về ngươi");return `Lời đồn bắt nguồn từ người của ${v.name}. Chứng cứ +1.`}return "Chỉ là lời đồn vô hại của đám cung nhân rảnh việc."}})]});
 EV6("lotusSeason","sea",{a:["rv"],pp:()=>{const a=rv6();return a==null?null:{a0:a}},w:C=>C.sea==="Hạ"&&C.wx.f!==3?1.6:0,

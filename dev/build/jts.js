@@ -108,7 +108,7 @@ function tsQ(v,t){try{const d=danger(v,t),b=bandOf(d);if(!b)return 0;const lo=BA
   const L=others(v);const w=L.map(x=>1+hostility(v,x));const sh=(1+hostility(v,t))/w.reduce((a,b)=>a+b,0);return 1-Math.pow(1-c*sh,9)}catch(e){return 0}}
 function tsNamed(v){try{return typeof k61Named!=="function"||k61Named(v)}catch(e){return true}}
 /* "quý" words (VANPHONG §1) */
-function tsQuy(a){return a<=-30?"Ghét":a<=-11?"Không ưa":a<=10?"Bình thường":a<=29?"Có cảm tình":a<=59?"Quý mến":"Thân thiết"}
+function tsQuy(a){return quyW(a)}/* ONE CORE: VANPHONG "quý" word (BAL.quyLv) */
 function tsDangerOf(t,known){const L=(t===S?liveRivals(true):others(t).filter(x=>x!==S)).filter(v=>v.alive&&!v.out&&v!==t);let p=1;const top=[];let unk=0;
  for(const v of L){const isK=!known||((knows(v)||(S.dKnown&&S.dKnown[v.id]))&&tsNamed(v));if(!isK){unk++;continue}const q=tsQ(v,t);if(q<=0)continue;p*=1-q;top.push({v,q,b:bandOf(danger(v,t))})}
  top.sort((a,b)=>b.q-a.q);return{n:Math.round(100*(1-p)),top,unk}}

@@ -124,9 +124,9 @@ function canNew70(aKey,tKey){if(aKey!=="me"&&cnt70(p=>p.a===aKey))return false;i
 function methFor70(k){const L=Object.keys(M70).filter(m=>M70[m].k===k);return L.length?pick(L):null}
 /* an NPC picks a route by price, wit (the clever avoid loud routes) and who can be bought */
 function pickRoute70(a,t,M){const tc=tc70(a);const L=M.R.filter(r=>{if(a!==S&&r.bac&&(a.bac||0)<r.bac)return false;if(r.acc==="tsv"&&!((t.staff||[]).length))return false;return true});if(!L.length)return null;
- const w=L.map(r=>[r,Math.max(.2,(tc>=60?10-r.vis:5)+(r.acc&&traitsOf(a).includes("Hiểm độc")?3:0))]);let s=Math.random()*w.reduce((x,y)=>x+y[1],0),i=0;while(s>w[i][1]&&i<w.length-1){s-=w[i][1];i++}return w[i][0]}
+ const w=L.map(r=>[r,Math.max(.2,(tc>=BAL.wit.hi?10-r.vis:5)+(r.acc&&traitsOf(a).includes("Hiểm độc")?3:0))]);let s=Math.random()*w.reduce((x,y)=>x+y[1],0),i=0;while(s>w[i][1]&&i<w.length-1){s-=w[i][1];i++}return w[i][0]}
 function newPlot70(a,t,m,rid,mo,opt){const z=j70();const M=M70[m];if(!M)return null;const r=rid?M.R.find(x=>x.id===rid):pickRoute70(a,t,M);if(!r)return null;
- const tc=tc70(a);const p={id:++z.n,a:a===S?"me":a.id,t:t===S?"me":t.id,m,r:r.id,mo:mo||"band",st:"prep",pg:0,need:r.need+(a!==S&&tc>=60?1:0),born:wk(),g:0,kn:0,kt:[],err:(opt&&opt.err)||0,cool:0,wt:0};
+ const tc=tc70(a);const p={id:++z.n,a:a===S?"me":a.id,t:t===S?"me":t.id,m,r:r.id,mo:mo||"band",st:"prep",pg:0,need:r.need+(a!==S&&tc>=BAL.wit.hi?1:0),born:wk(),g:0,kn:0,kt:[],err:(opt&&opt.err)||0,cool:0,wt:0};
  if(opt&&opt.fac)p.fac=1;if(M.k==="kpoison"||M.k==="pond"||M.k==="kframe"||M.k==="ksab"){const k=tKid70(p);if(k)p.kid=k.name}
  if(a!==S&&r.bac)ap(a,{bac:-r.bac});
  z.pl.push(p);z.types[m+":"+r.id]=(z.types[m+":"+r.id]||0)+1;try{if(typeof evHistMark==="function")evHistMark("j70:"+m+":"+r.id)}catch(e){}
@@ -162,11 +162,11 @@ let jointScheme0=null;
 /* ---------- detection (same shape for everyone) ---------- */
 function spyIn70(watcher,a){if(a===S)return(S.staff||[]).some(s=>s.spyFor===key(watcher));return(a.staff||[]).some(s=>s.spyFor===(watcher===S?"me":key(watcher)))}
 function seeP70(p,step){const a=pa70(p),t=pt70(p),r=pr70(p);const tc=tc70(a);let c;
- if(t===S||(a!==S&&t!==S)){/* her eyes */c=10+(S.mat||0)*6+(S.staff||[]).filter(s=>s.tr==="lanh"||s.tr==="chuyen").length*6+(tc<35?12:0)-(tc>=70?8:0)+(r?r.vis:0)+(spyIn70(S,a)?30:0)+(r&&r.pl&&S.place===r.pl?15:0);
-  if(t===S)c+=(S.maid&&S.maid.loyal>=70?10:0);else c*=J70CFG.npcSeen}
+ if(t===S||(a!==S&&t!==S)){/* her eyes */c=10+(S.mat||0)*6+(S.staff||[]).filter(s=>s.tr==="lanh"||s.tr==="chuyen").length*6+(tc<BAL.wit.mid?12:0)-(tc>=BAL.wit.top?8:0)+(r?r.vis:0)+(spyIn70(S,a)?30:0)+(r&&r.pl&&S.place===r.pl?15:0);
+  if(t===S)c+=(S.maid&&S.maid.loyal>=BAL.loy.trust?10:0);else c*=J70CFG.npcSeen}
  return cl(Math.round(c),3,85)}
 /* an NPC target (also when she is the plotter) notices with its own people */
-function npcSee70(p){const a=pa70(p),t=pt70(p),r=pr70(p);if(t===S)return 0;const tc=tc70(a);return cl(Math.round(8+tc70(t)/4+(t.maid&&t.maid.loyal>=70?8:0)+(r?r.vis:0)+(spyIn70(t,a)?30:0)+(tc<35?12:0)-(tc>=70?8:0)),3,80)}
+function npcSee70(p){const a=pa70(p),t=pt70(p),r=pr70(p);if(t===S)return 0;const tc=tc70(a);return cl(Math.round(8+tc70(t)/4+(t.maid&&t.maid.loyal>=BAL.loy.trust?8:0)+(r?r.vis:0)+(spyIn70(t,a)?30:0)+(tc<BAL.wit.mid?12:0)-(tc>=BAL.wit.top?8:0)),3,80)}
 
 /* ---------- the weekly step ---------- */
 function abandon70(p,why){p.end=why||"cool";const a=pa70(p);if(a&&a!==S&&a.plan&&a.plan.j70===p.id)a.plan=null;try{if(a&&a!==S)mindLog(a,"_abandon")}catch(e){}
@@ -182,7 +182,7 @@ function step70(p){const a=pa70(p),t=pt70(p),M=pm70(p);if(!M||!a||!t){p.end="gon
   if(a!==S&&!p.kn&&roll(seeP70(p,i))){p.kn=1;p.kt.push(tellOf70(p,i));p.pend=t===S?"seen":"npc";noteAdd(a.id,`Tai mắt báo: ${tellOf70(p,i)}${where70(p)?` (ở ${where70(p)})`:""}${t===S?" — có lẽ nhắm vào ngươi":` — có lẽ nhắm vào ${t.name}`}`);try{newsAdd(a,M.k,`Người của ${a.name} ${tellOf70(p,i)}`,true)}catch(e){}}
   else if(a!==S&&p.kn&&roll(seeP70(p,i)))p.kt.push(tellOf70(p,i));
   /* the target's own people */
-  if(t!==S&&roll(npcSee70(p))){p.g+=20;if(roll(35))evA(t,a,1);if(a===S&&S.maid&&S.maid.loyal>=60&&roll(50))p.warnOwn=1/* her maid saw their guard go up */}
+  if(t!==S&&roll(npcSee70(p))){p.g+=20;if(roll(35))evA(t,a,1);if(a===S&&S.maid&&S.maid.loyal>=BAL.loy.close&&roll(50))p.warnOwn=1/* her maid saw their guard go up */}
   /* allies warn her of a plot she has not seen */
   if(t===S&&!p.kn){const al=liveRivals(true).filter(x=>x!==a&&aff(x,S)>=40&&!x.confined&&roll(cl(6+tc70(x)/5+(r70vis(p)),3,40)));if(al.length){const w=pick(al);/* an ally whose own people really saw the tell */p.kn=1;p.ally=w.id;p.kt.push(tellOf70(p,i));p.pend="warn";relAdd(S,w,BAL.eff.j70.step70)}}
   /* her first weeks: a murder plot never lands without one warning */
@@ -320,7 +320,7 @@ function canhB70(o){const s=sv70(o.sid);if(!s||traitor70(s))return 0;return cl(M
 function ordFor70(k,a){return ords70().filter(o=>{const O=ORD70[o.k];if(!O)return false;if(o.k==="theodoi")return a&&o.tgt===a.id;return O.acts&&O.acts.includes(k)})}
 function title70(p){if(!p||p===S)return"ngươi";try{const t=(typeof kitTitle==="function"&&kitTitle(p))||rkName(p);return `${t} ${p.name}`}catch(e){return p.name}}
 /* her detection: the head maid's old built-in +10 now comes only from an explicit guard order */
-(function(){const o0=oSee;oSee=function(t,p){let r=o0.apply(this,arguments);try{if((t||S)===S&&S&&!window.__j70off){if(S.maid&&S.maid.loyal>=70)r-=10;
+(function(){const o0=oSee;oSee=function(t,p){let r=o0.apply(this,arguments);try{if((t||S)===S&&S&&!window.__j70off){if(S.maid&&S.maid.loyal>=BAL.loy.trust)r-=10;
   for(const o of ords70()){if(o.k==="canh")r+=canhB70(o);if(o.k==="thudoc"&&p&&!traitor70(sv70(o.sid)))r+=20;if(o.k==="theodoi"&&window.__j70A&&o.tgt===window.__j70A.id&&!traitor70(sv70(o.sid)))r+=12}
   r+=(window.__j70self||0);
   r=cl(Math.round(r),5,95)}}catch(e){}return r}})();
@@ -328,7 +328,7 @@ function title70(p){if(!p||p===S)return"ngươi";try{const t=(typeof kitTitle===
 /* her ordered servants are busy: she cannot send them on her own errands */
 (function(){const b0=bestSent;bestSent=function(p){if(p===S&&S&&!window.__j70off){const busy=ords70().map(o=>o.sid);const L=(S.staff||[]).filter(s=>!s.spyFor&&!busy.includes(s.sid));if(!L.length)return null;return L.slice().sort((a,b)=>(b.loyal+(b.tr==="lanh"?15:0))-(a.loyal+(a.tr==="lanh"?15:0)))[0]}return b0.apply(this,arguments)}})();
 /* plots by someone she has a watcher on, or with a guard posted, are seen earlier; a traitor watcher feeds the plotter instead */
-(function(){const s0=seeP70;seeP70=function(p,step){let c=s0.apply(this,arguments);try{const a=pa70(p);if(a&&a!==S){if(S.maid&&S.maid.loyal>=70&&p.t==="me"){c-=10;if(roll(selfP70maid()))c+=10}for(const o of ords70()){if(o.k==="theodoi"&&o.tgt===a.id&&!traitor70(sv70(o.sid)))c+=30;if(o.k==="canh"&&p.t==="me")c+=canhB70(o)}
+(function(){const s0=seeP70;seeP70=function(p,step){let c=s0.apply(this,arguments);try{const a=pa70(p);if(a&&a!==S){if(S.maid&&S.maid.loyal>=BAL.loy.trust&&p.t==="me"){c-=10;if(roll(selfP70maid()))c+=10}for(const o of ords70()){if(o.k==="theodoi"&&o.tgt===a.id&&!traitor70(sv70(o.sid)))c+=30;if(o.k==="canh"&&p.t==="me")c+=canhB70(o)}
   const z=j70();if(z.allyW&&z.allyW.until>=wk()&&p.t==="me"&&z.allyW.id!==a.id)c+=15}}catch(e){}return cl(Math.round(c),3,90)}})();
 /* monthly: prices, lòng, the watcher's evidence and risk */
 (function(){const m0=monthTick;monthTick=function(){const r=m0.apply(this,arguments);try{if(S&&!S.dead&&!window.__j70off)ordMonth70()}catch(e){console.error(e)}return r}})();
@@ -407,12 +407,12 @@ PEND.j70def=pp=>{if(!S)return null;const L=ords70();const cur=L.length?`<p>Lện
   o.push(ch70("Giữ nguyên",{wt:[G70("không tốn gì thêm")],k:[R70("phòng bị như cũ")],ok:()=>"Ngươi giữ nguyên các lệnh."}));
   return{t:cur+`<p class="past">Mỗi kẻ hầu nhận một việc. Kẻ đã bị người khác mua chuộc thì giữ việc cũng như không, lại đem chuyện kể với chủ của hắn.${free.length?"":" Không còn kẻ hầu nào rảnh."}</p>`,o,who:S.maid?pMaid():null}}
  if(pp.s===2){const O=ORD70[pp.o];if(!O)return null;const o=free.slice(0,5).map(sid=>{const s=sv70(sid);const pw=pp.o==="canh"?cl(Math.round(4+(s.loyal||0)/10),4,14):null;
-   const c=ch70(`${s.name} (lòng ${s.loyal||0})`,{wt:[G70(pw!=null?`giữ được cung: dễ bắt kẻ hại hơn +${pw}`:O.d)],k:[R70(`${s.name} bận việc này`)].concat(O.bac?[R70(`Bạc -${O.bac} mỗi tháng`)]:[]).concat((s.loyal||0)<40?[R70("lòng thấp: dễ bị mua chuộc")]:[])});
+   const c=ch70(`${s.name} (lòng ${s.loyal||0})`,{wt:[G70(pw!=null?`giữ được cung: dễ bắt kẻ hại hơn +${pw}`:O.d)],k:[R70(`${s.name} bận việc này`)].concat(O.bac?[R70(`Bạc -${O.bac} mỗi tháng`)]:[]).concat((s.loyal||0)<BAL.loy.low?[R70("lòng thấp: dễ bị mua chuộc")]:[])});
    c.go=()=>{if(O.tgt){Q.unshift(def70m({s:3,o:pp.o,sid}));return}L.push({k:pp.o,sid,since:wk()});log(`Ngươi giao cho ${s.name} việc ${O.n.toLowerCase()}.`)};return c});
   o.push(ch70("Thôi",{wt:[G70("không tốn gì")],k:[R70("chưa có thêm phòng bị")],ok:()=>"Ngươi gác lại."}));return{t:`<p>Giao cho ai việc <b>${O.n.toLowerCase()}</b>?</p><p class="past">${O.d}.</p>`,o,who:S.maid?pMaid():null}}
  if(pp.s===4){const s=sv70(pp.sid);if(!s)return null;const cur=ordOf70(pp.sid);const o=[];
   for(const k in ORD70){const O=ORD70[k];if(cur&&cur.k===k&&!O.tgt)continue;const pw=k==="canh"?cl(Math.round(4+(s.loyal||0)/10),4,14):null;
-   const c=ch70(`${O.n}`,{wt:[G70(pw!=null?`dễ bắt kẻ hại hơn +${pw}; ${O.d}`:O.d)],k:[R70(`${s.name} bận việc này`)].concat(O.bac?[R70(`Bạc -${O.bac} mỗi tháng`)]:[]).concat(O.lo?[R70(`lòng ${s.name} ${O.lo} mỗi tháng`)]:[]).concat((s.loyal||0)<40?[R70("lòng thấp: dễ bị mua chuộc")]:[])});
+   const c=ch70(`${O.n}`,{wt:[G70(pw!=null?`dễ bắt kẻ hại hơn +${pw}; ${O.d}`:O.d)],k:[R70(`${s.name} bận việc này`)].concat(O.bac?[R70(`Bạc -${O.bac} mỗi tháng`)]:[]).concat(O.lo?[R70(`lòng ${s.name} ${O.lo} mỗi tháng`)]:[]).concat((s.loyal||0)<BAL.loy.low?[R70("lòng thấp: dễ bị mua chuộc")]:[])});
    c.go=()=>{if(cur)L.splice(L.indexOf(cur),1);if(O.tgt){Q.unshift(def70m({s:3,o:k,sid:pp.sid}));return}L.push({k,sid:pp.sid,since:wk()});log(`Ngươi giao cho ${s.name} việc ${O.n.toLowerCase()}.`)};o.push(c)}
   if(cur)o.push(ch70(`Bãi lệnh ${ORD70[cur.k].n.toLowerCase()}`,{wt:[G70(`${s.name} rảnh tay${ORD70[cur.k].bac?`, đỡ ${ORD70[cur.k].bac} lượng mỗi tháng`:""}`)],k:[R70("mất phòng bị này")],ok:()=>{L.splice(L.indexOf(cur),1);return `Ngươi bãi lệnh của ${s.name}.`}}));
   o.push(ch70("Thôi",{wt:[G70("không tốn gì")],k:[R70("giữ như cũ")],ok:()=>"Ngươi giữ như cũ."}));

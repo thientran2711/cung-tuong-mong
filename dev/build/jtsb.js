@@ -17,7 +17,7 @@ function tsbBot(){return !!window.__bot}
 function tsbNm(v){if(!v)return"";if(v===S)return"ngươi";try{return typeof k61Named==="function"&&!k61Named(v)?k61Desc(v):`${rkName(v)} ${v.name}`}catch(e){return v.name}}
 function tsbCap(s){s=String(s||"");return s?s[0].toUpperCase()+s.slice(1):s}
 function tsbWk(){try{return wk()}catch(e){return 0}}
-function tsbMaid(p){p=p||S;const s=(p===S?(S.staff||[]):[]).filter(x=>(x.loyal||0)>=60).sort((a,b)=>b.loyal-a.loyal)[0];if(s)return s;return p.maid&&(p.maid.loyal||0)>=60?p.maid:null}
+function tsbMaid(p){p=p||S;const s=(p===S?(S.staff||[]):[]).filter(x=>(x.loyal||0)>=BAL.loy.close).sort((a,b)=>b.loyal-a.loyal)[0];if(s)return s;return p.maid&&(p.maid.loyal||0)>=BAL.loy.close?p.maid:null}
 function tsbLedger(e){if(!S)return;S.tsbLog=S.tsbLog||[];S.tsbLog.unshift(Object.assign({w:tsbWk(),when:typeof when==="function"?String(when()).replace(/<[^>]+>/g,""):""},e));if(S.tsbLog.length>40)S.tsbLog.length=40}
 function tsbShow(){try{if(!tsbBot()&&$("modal").hidden)showModal()}catch(e){}}
 /* one event card (saveable through PEND): full act-card rows on every option (owner 07:15Z), people on the picture, rows layout */
@@ -44,7 +44,7 @@ const TSB_THU_W=[.6,.32,.08];
 function tsbSev(){const x=Math.random();return x<TSB_THU_W[0]?1:x<TSB_THU_W[0]+TSB_THU_W[1]?2:3}
 
 /* ---------------- defences shared by every planned harm (one rule for everyone) ---------------- */
-function tsbGuard(t){if(!t)return 0;let g=0;const w=tsbWk();if((t.tsbGuard||0)>=w)g+=25;g+=petGuard(t);if(t===S?tsbMaid(S):(t.maid&&(t.maid.loyal||0)>=70))g+=8;return g}
+function tsbGuard(t){if(!t)return 0;let g=0;const w=tsbWk();if((t.tsbGuard||0)>=w)g+=25;g+=petGuard(t);if(t===S?tsbMaid(S):(t.maid&&(t.maid.loyal||0)>=BAL.loy.trust))g+=8;return g}
 function tsbThuO(a,t){return cl(Math.round(odA(a,44+(a.tamco||0)/5+(a.mat||0)*3)-tsbGuard(t)),5,90)}
 function tsbFireO(a,t){return cl(Math.round(odA(a,46+(a.tamco||0)/5)-tsbGuard(t)),5,90)}
 
@@ -175,7 +175,7 @@ PEND.tsbFirst=pp=>{if(!S)return null;const v=RV(pp.v);if(!v||!v.alive)return nul
 
 /* ---------------- 13. lửa do đèn nến / kẻ hầu lơ là: nguyên nhân thật, điềm báo trước ---------------- */
 function tsbFireBase(p){const se=typeof SEASON!=="undefined"?SEASON[S.month-1]:"";const dry=se==="Đông"||(S.wx&&(S.wx.k==="sun"||S.wx.k==="wind"));return dry?2.2:.8}
-function tsbCareless(p){if(p!==S)return (p.maid&&(p.maid.loyal||0)<30)?1:0;const s=(S.staff||[]).find(x=>(x.loyal||0)<35);return s||(S.maid&&(S.maid.loyal||0)<35?S.maid:null)}
+function tsbCareless(p){if(p!==S)return (p.maid&&(p.maid.loyal||0)<BAL.loy.out)?1:0;const s=(S.staff||[]).find(x=>(x.loyal||0)<BAL.loy.bad);return s||(S.maid&&(S.maid.loyal||0)<BAL.loy.bad?S.maid:null)}
 function tsbFireMonth(){const w=tsbWk();
  for(const p of [S].concat(liveRivals(true))){if(p.out||!tsbBurnable(p).length)continue;const W=p.tsbFW;
   if(W){if(w<W.due)continue;p.tsbFW=null;if(roll(W.heed?6:45)){const lost=tsbBurn(p,1,W.cause==="hau"?"kẻ hầu lơ là, quên tắt đèn":"tàn đèn rơi trong mùa hanh khô");

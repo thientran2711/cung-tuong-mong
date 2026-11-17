@@ -30,9 +30,9 @@ G6set("lostItem",{a:["maid"],pp:()=>{if(!S.maid)return null;const th=(S.staff||[
   c6("Lục soát kỹ cả cung",{c:{suc:-6},p:od(50+S.mat*4),w:{tamco:1},wt:[G6(c?"tìm ra kẻ lấy":"tìm lại được")],l:{danh:-1},lt:[R6("cung nhân bất bình vì bị nghi")],ok:()=>{if(c){c.loyal=cl(c.loyal-10,0,100);try{c.cause={txt:"ăn cắp đồ của chủ",fault:true,w:wk()}}catch(e){}return `Món đồ nằm trong tay nải của ${c.name}${c.tr==="tham"?" (vốn tham của)":" (đang làm tai mắt cho người khác)"}. Ngươi có cớ để xử.`}return "Món đồ ngươi mệt quá để quên dưới gối; tìm lại được."}}),
   c6("Thưởng ai tìm được",{c:{bac:-10},p:c?55:85,w:{danh:1},wt:[G6("đồ trở về")],l:{bac:-5},lt:[R6("món đồ mất hẳn")],ok:()=>c?`${c.name} sợ lộ, lén trả lại đồ.`:"Một tiểu thái giám nhặt được, mang trả lấy thưởng."}),
   c6("Thôi, bỏ qua",{w:{duc:1},wt:[G6("cung nhân yên lòng")],k:[R6("mất món đồ"),R6(c?"kẻ lấy quen tay":"")].filter(x=>!/><\/span>/.test(x))})]}});
-G6set("sickServant",{pp:()=>{const weak=s=>(s.age||20)>=45||(s.loyal||50)<30;const a=sv6(s=>harsh()||wet()?true:weak(s));return a==null?null:{a0:a}},w:C=>(harsh()||wet())?2.2:.6});
-G6set("maidQuarrel",{pp:()=>{const L=(S.staff||[]).filter(s=>s.sid!=null);const hot=L.filter(s=>s.tr==="chuyen"||(s.loyal||50)<40);if(L.length<2||!hot.length)return null;const a=pick(hot),b=pick(L.filter(x=>x!==a));return{a0:a.sid,a1:b.sid}}});
-G6set("brokenHeirloom",{pp:()=>{const a=sv6(s=>s.tr==="nhat"||(s.loyal||50)<35);return a==null?null:{a0:a,it:R(4)}},v:E68I.brokenHeirloom.v.map(t=>t.replace("{A}","{A}, vốn hay run tay sợ sệt,"))});
+G6set("sickServant",{pp:()=>{const weak=s=>(s.age||20)>=45||(s.loyal||50)<BAL.loy.out;const a=sv6(s=>harsh()||wet()?true:weak(s));return a==null?null:{a0:a}},w:C=>(harsh()||wet())?2.2:.6});
+G6set("maidQuarrel",{pp:()=>{const L=(S.staff||[]).filter(s=>s.sid!=null);const hot=L.filter(s=>s.tr==="chuyen"||(s.loyal||50)<BAL.loy.low);if(L.length<2||!hot.length)return null;const a=pick(hot),b=pick(L.filter(x=>x!==a));return{a0:a.sid,a1:b.sid}}});
+G6set("brokenHeirloom",{pp:()=>{const a=sv6(s=>s.tr==="nhat"||(s.loyal||50)<BAL.loy.bad);return a==null?null:{a0:a,it:R(4)}},v:E68I.brokenHeirloom.v.map(t=>t.replace("{A}","{A}, vốn hay run tay sợ sệt,"))});
 G6set("servGamble",{pp:()=>{const a=sv6(s=>s.tr==="tham");return a==null?null:{a0:a}}});
 G6set("spoiledFood",{w:C=>(S.rank<=2||S.sung<20)?(C.sea==="Hạ"?2:1.2):0,v:E68I.spoiledFood.v.map(t=>t+" (Cung ít được sủng thì bên dưới hay khinh nhờn.)")});
 G6set("eunuchSqueeze",{w:C=>C.rank<=2?2:0});
@@ -41,7 +41,7 @@ G6set("slyVisit",{pp:()=>{const a=rv6(v=>band6(v)>=1);return a==null?null:{a0:a}
  o:X=>[c6("Tiếp, nhưng cho người canh chừng",{c:{suc:-4},w:{tamco:1},wt:[G6("không lọt chuyện gì ra")],r:[[X.A,2]]}),
   c6("Dò ngược ý nàng",{p:od(35+S.tamco/2),w:{mat:1},wt:[G6(`biết ${X.A.n} có ý gì`)],l:{danh:-1},lt:[R6("nàng biết ngươi đề phòng")],lr:[[X.A,-6]],ok:()=>{const v=X.A.o,b=band6(v);try{S.dKnown=S.dKnown||{};S.dKnown[v.id]=wk();noteAdd(v.id,`Sang dò giờ giấc của ngươi; mức có thể hại: ${BANDS[b][1]}`)}catch(e){}return `Ngươi đọc được ý ${v.name}: có thể hại ngươi mức ${BANDS[b][1]}${v.plan&&v.plan.t===key(S)?"; nàng đang chuẩn bị ra tay":""}.`}}),
   c6("Lạnh nhạt tiễn khách",{w:{suc:2},r:[[X.A,-6]]})]});
-G6set("bribedServ",{pp:()=>{const b=rv6(v=>band6(v)>=1&&(v.bac||0)>=10);const a=sv6(s=>(s.loyal||50)>=50&&!spyOther6(s));return a==null||b==null?null:{a0:a,a1:b}},
+G6set("bribedServ",{pp:()=>{const b=rv6(v=>band6(v)>=1&&(v.bac||0)>=10);const a=sv6(s=>(s.loyal||50)>=BAL.loy.mid&&!spyOther6(s));return a==null||b==null?null:{a0:a,a1:b}},
  v:["{A} lén báo: người của {B} dúi cho hắn mười lượng, hỏi giờ ngươi đi ngủ.","{A} tự khai: {B} hứa cho hắn sang hầu cung nàng, lương gấp đôi, nếu chịu kể chuyện cung ngươi.","{A} mang về một túi bạc, nói người bên {B} ép nhận để đổi lấy tin tức.","{A} kể người của {B} hỏi xem ngươi có giữ thư từ gì của nhà ngoại không."]});
 G6set("newServSus",{pp:()=>{const a=sv6(s=>spyOther6(s)||s.tr==="chuyen");return a==null?null:{a0:a}}});
 G6set("servHero",{pp:()=>{const a=sv6(s=>s.tr==="trung"||s.tr==="lanh");return a==null?null:{a0:a}}});
@@ -58,8 +58,8 @@ G6set("rumorPreg",{a:["rv","rv"],pp:()=>{const a=rv6(v=>v.rank>=1);if(a==null)re
 G6set("rumorEvidence",{pp:()=>{const a=rv6(v=>evG(v,S)>0||band6(v)>=1);return a==null?null:{a0:a}},v:E68I.rumorEvidence.v.map(t=>t+" <i>(Lời đồn.)</i>")});
 G6set("rumorEmpLove",{a:["rv","rv"],pp:()=>{const a=rv6();if(a==null)return null;const b=rv6(v=>v.id!==a);return b==null?null:{a0:a,a1:b}},
  v:["Người bên cung {B} đồn: Hoàng thượng sắp phong {A} lên một bậc. <i>(Lời đồn.)</i>","{B} kể với các cung: Hoàng thượng đã chán {A}, cả tháng không lật thẻ nàng. <i>(Lời đồn.)</i>","Cung nữ của {B} bảo {A} được Thái hậu chấm làm Hoàng hậu tương lai. <i>(Lời đồn.)</i>","Người của {B} rỉ tai: {A} sắp bị đưa ra lãnh cung vì phạm lỗi. <i>(Lời đồn.)</i>"]});
-G6set("rumorSpy",{pp:()=>{const a=sv6(s=>spyOther6(s)||s.tr==="chuyen"||(s.loyal||50)<40);return a==null||!S.maid?null:{a0:a}},v:E68I.rumorSpy.v.map(t=>t+" <i>(Lời đồn; có thể kiểm chứng.)</i>")});
-G6set("rumorFavor",{vf:()=>S.sung<30?[0,3]:S.sung>=55?[1,2]:[0,1,2,3],v:E68I.rumorFavor.v.map(t=>t+" <i>(Lời đồn.)</i>")});
+G6set("rumorSpy",{pp:()=>{const a=sv6(s=>spyOther6(s)||s.tr==="chuyen"||(s.loyal||50)<BAL.loy.low);return a==null||!S.maid?null:{a0:a}},v:E68I.rumorSpy.v.map(t=>t+" <i>(Lời đồn; có thể kiểm chứng.)</i>")});
+G6set("rumorFavor",{vf:()=>S.sung<BAL.sungLv.th[0]?[0,3]:S.sung>=BAL.sungLv.th[1]?[1,2]:[0,1,2,3],v:E68I.rumorFavor.v.map(t=>t+" <i>(Lời đồn.)</i>")});
 G6set("rumorTH",{vf:()=>S.th<10?[0]:S.th>=40?[1,2,3]:[0,1,2,3],v:E68I.rumorTH.v.map(t=>t+" <i>(Lời đồn.)</i>")});
 /* --- children: real health and talent --- */
 G6set("kidSick",{pp:()=>{const a=kid6(k=>k.age<=12&&((k.hp||100)<95||harsh()||wet()));return a==null?null:{a0:a,a1:0}}});

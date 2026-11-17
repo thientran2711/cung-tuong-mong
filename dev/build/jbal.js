@@ -265,3 +265,23 @@ function oddsLv(o){let i=0;for(const c of BAL.odds.cut)if(o>=c)i++;return i}
    Read by band4 (j35), pidBand (j66), kcBand (jkc) (before: 26/36/51 typed in each). */
 Object.assign(BAL,{ageBand:[26,36,51]});
 function ageBandIx(a){let i=0;for(const c of BAL.ageBand)if(a>=c)i++;return i}
+/* ===== ONE CORE duplicate-rule hunt part 2 (review/one-core-dup2): one key per concept that had typed copies in several modules =====
+   quyLv  = the "quý" word ladder (thiện cảm) of VANPHONG:69 / owner OD:L247 (Ghét ≤ q0 · Không ưa < q1 · Bình thường ≤ q2 · Có cảm tình
+            < q3 · Quý mến < q4 · Thân thiết); quyIx(v) = word index 0…5, quyW (jhc) the word. Before: j21 affW (7 words incl. Thù /
+            Lạnh nhạt / Thân, banned by VANPHONG), jhc quyW and jts tsQuy typed their own cuts. Colour: > q2 green, < q1 red.
+   loy    = a servant's Lòng (loyalty) cut points used by the rules (trust 70 = "tin cẩn": she shields, warns, never sells her mistress;
+            close 60; firm 55; mid 50; warn 45 = may leave / shown red; low 40; bad 35; out 30 = betrays / runs; deep 75, top 80 = the
+            rare devoted tiers). Before: ~70 typed copies in 40 modules.
+   wit    = an NPC's Tâm cơ (j40 / j43 / j51 / j70 mind): lo 30 = weighs the odds / makes fewer mistakes, mid 35 = no longer foolish,
+            hi 60 = plans ahead, top 70 = hard to catch. (The "spot" bonus is 15 in j40/j43 and 12 in j70: kept, listed.)
+   ducLv  = Đức tiers: monthly drift of Thái hậu / Hoàng hậu thiện cảm (≥ up +1, < down −1), servants' Lòng drift (staffUp / staffDown),
+            the Đức word ducWord (word cuts thất đức < w0 ≤ bạc đức < w1 ≤ thường < w2 ≤ tử tế < w3 ≤ hiền đức).
+   sungLv = the Sủng word ladders, one per screen (no owner ruling yet; the cut sets differ, each keeps its live value):
+            emp = Hoàng thượng line in the person talk (j24), th = Thái hậu's word and the rumour (j68f / j68h), kinh = Kính sự phòng
+            (j68g), card = Hoàng thượng row of the people strip (jk2b), kc = consort lists (jkc). */
+Object.assign(BAL,{quyLv:[-30,-10,10,30,60],
+ loy:{trust:70,close:60,firm:55,mid:50,warn:45,low:40,bad:35,out:30,deep:75,top:80},
+ wit:{lo:30,mid:35,hi:60,top:70},
+ ducLv:{up:60,down:20,staffUp:70,staffDown:25,word:[20,40,60,80]},
+ sungLv:{emp:[25,45,70],th:[30,55],kinh:[15,35,60],card:[10,30,60],kc:[30,60]}});
+function quyIx(v){const q=BAL.quyLv;return v<=q[0]?0:v<q[1]?1:v<=q[2]?2:v<q[3]?3:v<q[4]?4:5}

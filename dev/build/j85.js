@@ -76,10 +76,10 @@ function ducAdd(p,n,why){if(!p||!n)return 0;return withDeed(why||"việc vừa l
 (function(){const c0=chooseM;chooseM=function(i){const m=Q[0],c=m&&m.opts&&m.opts[i];return withDeed(c?c.n:null,()=>c0.apply(this,arguments))}})();
 /* ---- what she knows: Đức (true nature) only once she knows the person; Danh is what the palace says ---- */
 function ducKnown(v){if(!v||v===S)return true;try{S.kduc=S.kduc||{};return !!S.kduc[v.id]||trKnown(v).length>0||(v.ev||0)>0||(typeof evG==="function"&&evG(v,S)>0)}catch(e){return false}}
-function ducWord(d){return d>=80?"hiền đức":d>=60?"tử tế":d>=40?"thường":d>=20?"bạc đức":"thất đức"}
+function ducWord(d){return d>=BAL.ducLv.word[3]?"hiền đức":d>=BAL.ducLv.word[2]?"tử tế":d>=BAL.ducLv.word[1]?"thường":d>=BAL.ducLv.word[0]?"bạc đức":"thất đức"}
 function ducLine(v){vNorm(v);if(!ducKnown(v))return `Đức: <span class="ef n">chưa rõ</span> · Danh <b>${v.danh||0}</b> <span class="past">(tiếng ngoài)</span>`;
  const bad=v.dlog.filter(x=>x.d<0),good=v.dlog.filter(x=>x.d>0);const cnt=L=>{const m={};L.forEach(x=>{if(x.n)m[x.n]=(m[x.n]||0)+1});return Object.entries(m).map(([n,c])=>`${ducLow(n)}${c>1?` ×${c}`:""}`).join(", ")};
- return `Đức <b class="${v.duc<40?"r":v.duc>=60?"g":""}">${v.duc}</b> (${ducWord(v.duc)}) · Danh <b>${v.danh||0}</b>${bad.length&&cnt(bad)?`<br><span class="ef r">Đã làm: ${cnt(bad)}</span>`:""}${good.length&&cnt(good)?`<br><span class="ef g">Việc thiện: ${cnt(good)}</span>`:""}`}
+ return `Đức <b class="${v.duc<BAL.ducLv.word[1]?"r":v.duc>=BAL.ducLv.up?"g":""}">${v.duc}</b> (${ducWord(v.duc)}) · Danh <b>${v.danh||0}</b>${bad.length&&cnt(bad)?`<br><span class="ef r">Đã làm: ${cnt(bad)}</span>`:""}${good.length&&cnt(good)?`<br><span class="ef g">Việc thiện: ${cnt(good)}</span>`:""}`}
 (function(){const rc=rvCard;rvCard=function(v,i){let h=rc(v,i);try{if(v.alive)h=h.replace('<div class="pcinfo">',`<div class="pcinfo"><span>${ducLine(v)}</span>`)}catch(e){}return h}})();
 /* ---- Đức in the rules everyone shares ---- */
 (function(){const d0=danger;danger=function(v,t){return d0.apply(this,arguments)+ducDanger(v)}})();
@@ -142,9 +142,9 @@ function v85Month(){if(!S||S.dead)return"";let ev="";const season=S.turn%3===0;
   if(Object.keys(f).length){if(me){apply(f);ev+=`Tài nghệ trong tháng: ${fmt(f)}. `}else ap(p,f)}
   /* Đức: Hạnh bậc 3 keeps it rising; it moves Thái hậu / Hoàng hậu and the servants' Lòng */
   if(virtueBonus(p,"hanh").month&&ducOf(p)<80)withDeed("giữ đức hạnh (Hạnh bậc 3)",()=>me?apply({duc:1}):ap(p,{duc:1}));
-  const d=ducOf(p),q=queenP(),tf=d>=60?1:d<20?-1:0;
+  const d=ducOf(p),q=queenP(),tf=d>=BAL.ducLv.up?1:d<BAL.ducLv.down?-1:0;
   if(tf){if(me){S.th=cl(S.th+tf,-100,100);if(q&&q!==S)S.hh=cl(S.hh+tf,-100,100)}else if(q&&q!==p)p.hh=cl((p.hh||0)+tf,-100,100)}
-  const lf=d>=70?1:d<25?-1:0;if(lf){(p.staff||[]).forEach(s=>{if(s.loyal!=null)s.loyal=cl(s.loyal+lf,0,100)});if(p.maid&&p.maid.loyal!=null)p.maid.loyal=cl(p.maid.loyal+lf,0,100)}
+  const lf=d>=BAL.ducLv.staffUp?1:d<BAL.ducLv.staffDown?-1:0;if(lf){(p.staff||[]).forEach(s=>{if(s.loyal!=null)s.loyal=cl(s.loyal+lf,0,100)});if(p.maid&&p.maid.loyal!=null)p.maid.loyal=cl(p.maid.loyal+lf,0,100)}
   /* (her Thái hậu / Hoàng hậu drift by Đức is written once, with numbers, in the turn-change line of jlogsync — log-sync r1) */
   if(me&&lf)ev+=lf>0?`Đức ${d}: kẻ hầu thêm Lòng (+1). `:`Đức ${d}: kẻ hầu bớt Lòng (-1). `;
   if(!me){npcStudy(p);if(d>=60&&d<85&&(p.bac||0)>=BAL.charity.bac*3&&roll(5))withDeed("phát bạc cứu giúp cung nhân nghèo",()=>ap(p,{bac:-BAL.charity.bac,duc:BAL.charity.duc,danh:BAL.charity.danh}))}}
