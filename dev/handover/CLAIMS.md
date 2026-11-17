@@ -873,6 +873,7 @@
 | kit-thanh-bai: THÀNH/BẠI two-block act cards + HỎNG→BẠI (OD 17:10Z (2)); successor of kit-option-rows (sonnet; brief briefs/s34-kit-thanh-bai.md) | review/kit-thanh-bai | MAIN s34 | session_01UV1SzhiWiAzVtxCHuZo9Zy | READY FOR REVIEW e3c1583f (on r2 f422a570) | 17/11 17:08Z |
 | tinbao-ui-r6r PASS 220359da (supersedes 47a462ca; lands after ag-all-2 by C-AG #3) | review/tinbao-ui-r6r | MAIN s34 | - | PASS → C-AG land | 17/11 17:08Z |
 | face-w404 review r1 (sonnet) of df8b57bc | review/face-w404-r1 | D | session_01964izEvirrwGUKDneEGtXa | DONE FAIL 1 @51857175 (FAV=0 all pools: CDN prefix vs index keys) | 17/11 17:08Z |
+| face-w404 review r1 ROUND 2 of c81fd72c | review/face-w404-r1 | D | session_01964izEvirrwGUKDneEGtXa | DONE PASS 51b87607 → FOR MAIN (builder lands; archived) | 17/11 19:03Z |
 | REVIEW weather-khac r1 (opus BIG) of e1d540cf | review/weather-khac-r1 | C-AG | session_01UV1Szhk5EGru6rSkDekM6s | LIVE 03a776e4 18:17Z | 17/11 17:10Z |
 | REVIEW learn-scene-fix-2 r1 of 8c30a85d (opus BIG; brief briefs/s34-review-learn-scene-fix-2.md) | review/learn-scene-fix-2-r1 | MAIN s34 | session_01UV1SziXvWUAbjGtoEq234J | DONE PASS f8ac2f08 | 17/11 17:12Z |
 | day-khac-audit review r1 (opus BIG) of 4408ef0a | review/day-khac-audit-r1 | D | session_01964izE2ap49KwCk9DAQtjP | DONE FAIL 3 @319df260 (reviewer kept idle for r2) | 17/11 17:12Z |
