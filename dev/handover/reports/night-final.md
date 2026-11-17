@@ -229,3 +229,43 @@ Worktree /home/user/wt/nf2 (sparse) on review/night-final @ fa660921; serve with
 3. cardflip.js 755x1000,1180x820 + old save; night-steal-oldsave.js; quickcheck.sh (alone).
 4. Shots (scratch only) Fold 755x1000 + iPad 1180x820: flip scene → choice dialog with clock chip → night.
 5. CLAIMS "SẴN SÀNG KIỂM <sha>" + send_message main s26. HOLD: no go-live until a reviewer passes it.
+
+## 9. WORKER s26 #3 (session_01UV1SzhwBU5vBCvZomnavDM; coordinator MAIN s26 → s27 session_01UV1Szh248gDvHSAH88RvJm)
+START_CTX ≈ 4 % of 1M (own estimate; get_session reads 0). Rolled over at ≈ 28 % (START + 25 %). Rules read: START_CORE, START_WORKER, WORKER_BRIEF, OD 22:10Z / 22:45Z / 22:50Z / 23:05Z verbatim, balance-core.md §3/§5/§6/§9, FOREMAN_D INBOX + night-time.md V3-B.
+Branch review/night-final @ **a7dabd93** (pushed). NOT SẴN SÀNG KIỂM yet: co-op tests not green (9.4).
+
+### 9.1 What changed
+| item | how | file |
+|---|---|---|
+| (1) odds = balance-core API | merged review/balance-core 10fa43d4, then d24b9b03 (r2). nfOdds = `oSteal(a,mode)` / `oKeep(a)`; defence = jbalcore `rungDown(o, n × BAL.steal.keep.rung)` (own RUNG copy deleted); failure = `stealFail(a,t,mode)` (each mode's own loss BAL.steal.m[mode].lose; co-op friend's line via failTxt = same words, no ap); kept = `keepNoSteal` (keep.gain); robbed = `keepRobbed` (keep.oan). Card texts print fmt(stealLose(mode)), keep.rung, keep.gain. My placeholder BAL.steal.keep DELETED; only `BAL.steal.choice={ms,waitMs}` stays mine (jbal2, after the balance-core block); npcP is in balance-core's keep object | jnf.js, jbal2.js |
+| (2) jfe.js deleted | merged review/flip-entry 32749179, `git rm dev/build/jfe.js`, not in assemble. jnf keeps the guarantees (flip only at the END of tối; none on new game / new life / load). flip-entry.js adapted: start of tối = no flip yet (nfP); end of tối = flip (nfF/nfX); walk = ONE synchronous step (the buổi clock auto-ended tối between async checks = false FAIL) | dev/test/flip-entry.js |
+| BUG (whole family) | j79's stealX override ignored the mode: the "Chặn ngự giá" card showed Tranh sủng's prize and trace. Now each mode prints its own BAL.steal.m[mode].win + stealKem(v,mode) (with balance-core's nightG/nightA) | j79.js |
+| tests | night-multi REWRITTEN (7: Sủng tie + seeded order-free · NPC vs NPC at the flip · stealFail per mode · nfOdds = oSteal/oKeep + rungDown · keepNoSteal / keepRobbed · cards print BAL numbers · ledger pass live:false). night-steal-unit: fresh tablet per try, no custom night. coop-steal REWRITTEN for the flip choice on both seats (guest Tranh sủng resolved on host · both attack, Sủng tie · guest flipped + Giữ chân vs host attack), both seats answer concurrently | dev/test/* |
+| KIT REQUEST | Fold 755x1000: the flip-choice dialog puts the question + §69 clock chip AFTER the option cards (body 736 px in a 493 px box, chip at y 965 = off screen); iPad fine. Filed in dev/kit/KIT_REQUESTS.md (17/11, on the branch). No private CSS | KIT_REQUESTS.md |
+
+### 9.2 Tests (a7dabd93 unless said)
+| test | result |
+|---|---|
+| night-final.js | 8/8, 0 errors |
+| night-multi.js | 7/7 (×3 before the r2 merge, ×1 on a7dabd93) |
+| night-steal-unit.js | 29/29 |
+| flip-entry.js 755x1000 | ALL OK (all origins, new life, load) |
+| night-day.js, log-sync-night.js | ok ×2 / PASS (before the r2 merge) |
+| cardflip.js 755x1000 + 1180x820 | 0 errors, no h-scroll, old save ok (before the r2 merge) |
+| night-steal-oldsave.js | new build loads, 0 errors (prints FAIL only because the old build already has BAL.steal — known) |
+| shots (scratch /home/user/wt/nf3-shots, not in git) | flip → choice (attacker + flipped) → summons, Fold + iPad: looked at; clock ticks; Fold clock off screen (KIT REQUEST) |
+| coop-steal.js (live Worker) | NOT GREEN — 9.4 |
+| coop-night, coop-e2e, quickcheck | NOT RUN |
+
+### 9.3 Main s26 decisions (16/11 23:39Z) — NOT built yet
+1. Card-flip scene: keep "Chuẩn bị thị tẩm", but the "THỊ TẨM" seal goes on her only AFTER the choice resolves and she kept the night (robbed → no seal; the winner gets it) — kit §81 part (jflip), whole family.
+2. "Giữ chân Hoàng thượng" option picture: existing kitOptPic stand-in with the 'tạm' marker (main files the ART REQUEST).
+3. Choice after the scene's end button; clock starts when shown; 2×waitMs safety — ALREADY so.
+
+### 9.4 HANDOVER (the coordinator opens the successor)
+Worktree /home/user/wt/nf3 (sparse) on review/night-final @ a7dabd93; serve `python3 -m http.server 8741` from it (night-steal-unit takes `index.html`, the others `http://localhost:8741/index.html`).
+1. coop-steal: both seats reach tối, the host's flip + {open} work (the guest's choice reached the host in one run: x.fr "feign"), but in the last 3 runs both seats sat with the kit modal "Tâm trạng · Ta" (Q[0].t "Tâm trạng · Ngươi", no pid) OVER the card-flip scene (scene hidden, cfBusy true) → the choice never opens; the test's clear(o,1) does not close it. FIRST check by hand whether a player can answer that mood dialog; if not → real bug (a dialog queued by the commit blocks the scene and the choice). Then rerun `node dev/test/coop-steal.js <outdir>`.
+2. coop-night.js (baseline 105/105) + coop-e2e.js (59/59) on the live Worker; quickcheck.sh alone.
+3. Build 9.3 (1) seal after resolve (kit §81, jflip) and (2) kitOptPic 'tạm' for Giữ chân; rerun cardflip + night-final case 7.
+4. Then SẴN SÀNG KIỂM to main s27. HOLD go-live until reviewed.
+5. 10-night LEDGER (FOREMAN_D INBOX, spec reports/night-time.md V3-B) NOT started — best as its own branch review/night-ledger ON TOP of review/night-final. Notes: the spec's "at the START of tối" is superseded by OD 22:45Z → roll the ledger inside jnf realFlip (the commit at the end of tối); played tối = her first day else the first NPC day; the flip choice applies only to the played tối; extra days use `window.stealPass(holder,{live:false})` (lines only); cycle days exist (jcycle cyDaysM) but the length is fixed per person (cyBase l) — OD 19:05Z wants 5/6/7 rolled per woman per MONTH; Empress custom = j75 FAIRN.custom (a % on tuần 0/1 today) → days 1 and 15 by day; conception roll as a FLOAT × BAL.nt.concF (spec 7).
