@@ -710,3 +710,14 @@
 | coop-thin-b SẴN SÀNG KIỂM 4609afa6 (r2 seam fix by #4) → re-review r3 (fresh opus BIG; brief briefs/review-coop-thin-b-r3.md) | review/coop-thin-b-r3 | B | session_01N1tNP5hpVGVh45GCMzd9Ah | RUNNING | 17/11 11:40Z |
 | MAID CONSORT-TIER REDRAW W4f (successor of W4e; a36 m22 + a51 m01-m26; opened by lead #7) | review/fig-cutout-clean | C | session_011xDdVSvgMHhWjrFtf6Qv8J | RUNNING | 17/11 11:48Z |
 | VOICE writers W-B (toil/wd/staff/cycle/ts/HABIT) + W-C (events kSay + voice-rep) (sonnet; brief briefs/voice-trait-writers.md) | review/voice-trait | C ROOT-5 | W-B session_011xDdVNoZ7Yx3TZUQQfZipd + W-C session_011xDdVRjiWzLX321cWLkeV2 | RUNNING | 17/11 12:10Z |
+| BATCH builder s31a (opus): presentation-wiring-r1 bc8461cc → kit-ico-rank-r1 a1c7a37c → fig-headtop-r1 f95f5a92 | review/batch-s31a | MAIN s31 | session_01UV1SziPrputLM5qYtCL6zH | RUNNING | 17/11 12:11Z |
+| REVIEW morechip-fix r1 of eba25768 | review/morechip-fix-r1 | MAIN s31 | session_01UV1SzjcQv25a9UKRDjK9Jp | RUNNING | 17/11 12:11Z |
+| REVIEW fig-tag-chip r1 of d50c8e22f | review/fig-tag-chip-r1 | MAIN s31 | session_01UV1SzjqANMrcHtn9Sy4tx4 | RUNNING | 17/11 12:11Z |
+| opt-card kit #2: person cards tall rect + được/mất wrap + VIỆC T3 (on opt-pic-same 5f651f96) | review/opt-pic-same | MAIN s31 | session_01UV1Szicpw4t6yqzafQ5w1c | RUNNING | 17/11 12:11Z |
+| learn-scene-fix | review/learn-scene-fix | MAIN s31 | session_01UV1SziySB5E5PWMp5Wc7uX | RUNNING | 17/11 12:11Z |
+| map-me-mark + Dư đồ default zoom fit-all (owner 12:12Z) | review/map-me-mark | MAIN s31 | session_01UV1Szi4HMLzZuStZ3yoW1n | RUNNING | 17/11 12:11Z |
+| kit right column + stat-bar '!' + tab info band | review/kit-rcol-top | MAIN s31 | session_01UV1SzjM2CM6SifttTzccp3 | RUNNING | 17/11 12:11Z |
+| person-leftcol #2 | review/person-leftcol | MAIN s31 | session_01UV1SzjHhXKnA5TKza26b1V | RUNNING | 17/11 12:11Z |
+| stage-caption | review/stage-caption | MAIN s31 | session_01UV1Szk3y43acKY1bEhtMWZ | RUNNING | 17/11 12:11Z |
+| toil-looks #N (6 levels, colour, chin, tease 1-3) | review/toil-looks2 | MAIN s31 | session_01UV1SzmK8entV9CAWqPJaHH | RUNNING | 17/11 12:11Z |
+| tuanluc-sync #3 (opus) | review/tuanluc-sync | MAIN s31 | session_01UV1SziJFVGaiWpZGPF2Egd | RUNNING | 17/11 12:11Z |
