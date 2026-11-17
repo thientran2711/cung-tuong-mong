@@ -1,0 +1,6 @@
+PRIORITY #1 CHECK ('person-leftcol'): OD 17/11 ~04:26Z + ~04:40Z (refs/owner-person-leftcol-1117.jpg) | main none | review/* person-leftcol 0872eae3 | claims person-leftcol #3 session_01UV1SzgmaEVQSFzUscM5dKD READY.
+# s32 REVIEW person-leftcol r1 (sonnet, SMALL UI) — read dev/handover/briefs/s32-common.md + START_REVIEWER.md
+Review review/person-leftcol 0872eae3 (rebuilt on main d0a839e8); brief s31-leftcol.md + reports/person-leftcol.md; owner lines OD ~04:26Z/~04:40Z verbatim.
+MAIN LOOK notes (fold-rv1.png): (1) left column on Fold has a big empty band above/below the portrait while the key block sits low — check it is the real layout (CDN art missing in the worker container) and that the portrait/figure fills per kit; (2) the row of small thumbnails at the bottom of the left column is CUT OFF — FAIL if it is cut on the real build. iPad 1180x820: key block fits — confirm 1366/412/390 too.
+ksz3/kdper event dialogs were deferred by the worker as a separate kit task: if the same left-column family is broken there, list it; main files KIT_REQUESTS.
+Kit consistency scan (every person card of this kind), old-save load, quickcheck. Branch review/person-leftcol-r1; report reports/review-person-leftcol-r1.md; send "PASS/FAIL person-leftcol-r1 <sha>" to main s32.
