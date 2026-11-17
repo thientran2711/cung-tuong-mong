@@ -15,7 +15,8 @@
    - when it happens to her: a kit result card at once. NPCs: each buổi an NPC is out of her palace in bad weather, the same odds
      in the garden (her own gear / kiệu / servants); what happens goes into the news. ================= */
 Object.assign(BAL,{wx:{cold:[0,3,5,8],slip:[0,4,5,6],lowSuc:1.5,veryLowSuc:2,preg:1.5,gear:.5,help:.7,helpLoyal:50,
- kieu:.15,kieuRank:3,kieuBac:6,slipSuc:12,slipMisc:25,weakSuc:30,gearMo:3}});
+ kieu:.15,kieuRank:3,kieuBac:6,slipSuc:12,slipMisc:25,weakSuc:30,gearMo:3,
+ lowSucAt:40,veryLowSucAt:20 /* review/one-core-jkc: the Sức cuts of lowSuc / veryLowSuc (printed by the why line) */}});
 /* gear for the shop (low price tier) */
 IT.du={n:"Dù giấy dầu",kd:"Tạp vật",d:`Che mưa tuyết khi ra ngoài: ít cảm lạnh hơn. Dùng được ${BAL.wx.gearMo} tháng thì sờn rách, phải mua cái mới`,pr:15,rk:0,tg:["rv"],wxg:"cold"};
 IT.aotoi={n:"Áo tơi lá",kd:"Tạp vật",d:`Mặc ngoài khi mưa bão: ít cảm lạnh hơn. Dùng được ${BAL.wx.gearMo} tháng thì rách nát, phải mua cái mới`,pr:12,rk:0,tg:["rv"],wxg:"cold"};
@@ -48,7 +49,7 @@ function wxHelper(p){return (p===S?[S.maid].concat(S.staff||[]):[p.maid].concat(
 function wxKieuOk(p){return rkOf(p)>=BAL.wx.kieuRank&&!p.out&&(p.bac||0)>=BAL.wx.kieuBac}
 /* the odds of one outdoor walk for p: {sev, cold, slip, why:[...], kieu} (percent, rounded) */
 function wxRisk(p,o){o=o||{};const sev=wxSev();if(!sev)return{sev:0,cold:0,slip:0,why:[]};const W=BAL.wx;let c=W.cold[sev],s=W.slip[sev];const why=[`trời ${S.wx.n} ${["","nhẹ","nặng","rất nặng"][sev]}`];
- const su=p.suc|0;if(su<20){c*=W.veryLowSuc;s*=W.veryLowSuc;why.push("Sức dưới 20: dễ gấp đôi")}else if(su<40){c*=W.lowSuc;s*=W.lowSuc;why.push("Sức dưới 40: dễ hơn")}
+ const su=p.suc|0;if(su<W.veryLowSucAt){c*=W.veryLowSuc;s*=W.veryLowSuc;why.push(`Sức dưới ${W.veryLowSucAt}: dễ gấp đôi`)}else if(su<W.lowSucAt){c*=W.lowSuc;s*=W.lowSuc;why.push(`Sức dưới ${W.lowSucAt}: dễ hơn`)}
  if(p.preg&&!p.fake){s*=W.preg;why.push("đang mang thai nên dễ trượt hơn")}
  const kieu=o.kieu!=null?o.kieu:wxKieuOk(p);if(kieu){c*=W.kieu;s*=W.kieu;why.push(`đi kiệu hết Bạc −${W.kieuBac}: gần như không sao`)}else{
   if(wxHasGear(p,"cold")){c*=W.gear;why.push("có dù / áo tơi: bớt một nửa cảm lạnh")}
@@ -59,7 +60,7 @@ function wxRiskWord(n){return typeof chanceW==="function"?chanceW(n):"khả năn
 /* what happens: same for her and NPCs; returns a line ("" = nothing) */
 function wxHit(p,R){let r="";const me=p===S,nm=me?"Ngươi":`${rkName(p)} ${p.name}`;
  if(roll(R.slip)){ap(p,{suc:-BAL.wx.slipSuc});r+=`${nm} trượt chân trên đá ${wxKind()==="băng tuyết"?"đóng băng":"ướt"}, ngã đau. Sức −${BAL.wx.slipSuc}. `;
-  if(p.preg&&!p.fake&&roll(BAL.wx.slipMisc)){p.preg=0;p.hidden=false;ap(p,{suc:-20});r+=`<span class="r">${me?"Ngươi":"Nàng"} sảy thai.</span> Sức −20. `}}
+  if(p.preg&&!p.fake&&roll(BAL.wx.slipMisc)){p.preg=0;p.hidden=false;ap(p,{suc:BAL.eff.jweather.sucSlip});r+=`<span class="r">${me?"Ngươi":"Nàng"} sảy thai.</span> Sức ${balSg(BAL.eff.jweather.sucSlip)}. `}}
  if(!illOf(p)&&roll(R.cold)){const t=catchIll(p,"phonghan");if(p.ill&&(p.suc|0)<BAL.wx.weakSuc)p.ill.st=2;r+=me?`Ngươi nhiễm lạnh, mắc phong hàn${p.ill&&p.ill.st>=2?" nặng":""}. `:`${nm} nhiễm lạnh, mắc phong hàn. `}
  return r}
 /* giông tố passes: known buổi it clears */
