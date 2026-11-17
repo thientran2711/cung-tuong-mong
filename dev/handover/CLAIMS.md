@@ -587,3 +587,4 @@
 | wx-fx-size review r1 (sonnet SMALL; perf ≤ live +5 % check) of a36104cfe (worker archived) | review/wx-fx-size-r1 | main s29 | session_01UV1SzjG2KgWJed7eeh8a3d | RUNNING | 17/11 03:45Z |
 | save-dlg-fix r1 PASS 711d018 (review/save-dlg-fix-r1) → builder: next small batch after coop-thin-a | review/save-dlg-fix-r1 | main s29 | session_01UV1SzgbocUETEUWFViBc8f | PASS | 17/11 03:46Z |
 | tuanluc-sync (opus): one-time log lines once, BÁO during play, who of every log line, Tuần lục wording + S.vl veil/voice collision | review/tuanluc-sync | main | session_01UV1Szh89kMUtnfZPTNysLY | READY a1b683cbb | 17/11 04:3xZ |
+| opt-pic-same (sonnet kit; OWNER BUG 03:50Z option cards big/small picture in one dialog, KIT §6.2 whole family) | review/opt-pic-same | main s29 | session_01UV1SzhEnrDEEXPkBwigyNF | RUNNING | 17/11 03:49Z |
