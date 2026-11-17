@@ -24,7 +24,9 @@ const RULES={
  partial:.5,          // kiếp dở dang (under 1 year AND below Quý nhân / Chưởng sự cô cô): everything ×0.5
   max:15000,           // a summary scoring above this is refused
  origins:{tt:"Con gái Tể tướng",dtq:"Con gái Đại tướng quân",muoi:"Con gái nhà buôn muối",cn:"Cung nữ được sủng hạnh",
-  nc:"Công chúa nước Nam Chiếu hòa thân",td:"Con gái tội thần",thd:"Con gái thầy đồ nghèo",ch:"Cháu gái Thái hậu",cnv:"Cung nữ tuyển vào cung"}
+  nc:"Công chúa nước Nam Chiếu hòa thân",td:"Con gái tội thần",thd:"Con gái thầy đồ nghèo",ch:"Cháu gái Thái hậu",cnv:"Cung nữ tuyển vào cung"},
+ /* the worked example life of "Cách tính" on the board when the player has no life of her own yet (not used in scoring) */
+ sample:{n:"Tô Uyển Như",on:"Con gái thầy đồ nghèo",mr:4,sr:-1,y:6,sons:1,daus:1,tz:0,danh:40,duc:30,tg:1,endk:"Xuất gia",rare:false}
 };
 const I=(v,d)=>{v=Number(v);return isFinite(v)?Math.round(v):(d===undefined?NaN:d)};
 const C=(v,a,b)=>Math.max(a,Math.min(b,v));
@@ -62,3 +64,5 @@ function score(L){const R=RULES,mr=I(L.mr,-1),sr=I(L.sr,-1),e=txt(L.endk,40);
  return{score:s,parts:parts.filter(p=>p[1]),partial:dd}}
 return{RULES,check,score,phamName,partial,txt}})();
 if(typeof globalThis!=="undefined")globalThis.CTM_RANK=CTM_RANK;
+/* ONE CORE (OD:L1267, main ruling s29): in the game this table IS the rank part of the rulebook, BAL.rank (same object); the game reads BAL.rank, the Worker reads it here */
+if(typeof BAL!=="undefined"&&BAL)BAL.rank=CTM_RANK.RULES;

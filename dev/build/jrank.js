@@ -94,7 +94,7 @@ rkBase();if(typeof deser==="function")(function(){const d0=deser;deser=function(
 /* ---------- the screen ---------- */
 const RK={tab:"lives",data:{},busy:0,err:0,view:"list",lid:"",ends:{},msg:""};
 /* the kit frame of the highest standing of that life (KIT 4.3): consort rank 0–7 → frame-consort-N, servant title → frame-maid-N, Ma ma → frame-mama */
-function rkRole(ph){const R=CTM_RANK.RULES;ph=String(ph||"");let i=R.consortN.indexOf(ph);if(i>=0)return{role:"consort",rank:i};
+function rkRole(ph){const R=BAL.rank;ph=String(ph||"");let i=R.consortN.indexOf(ph);if(i>=0)return{role:"consort",rank:i};
  if(ph==="Ma ma")return{role:"mama",rank:3};i=R.servantN.indexOf(ph);if(i>=0)return{role:"maid",rank:i};return ph?{role:"maid",rank:1}:{role:"other"}}
 const rkImg=v=>v&&typeof IMG_U==="function"?IMG_U(v):v||"";/* stored "img/…" → the picture CDN */
 function rkFace(row){const r=rkRole(row.p);return{src:rkImg(row.por),ini:String(row.n||row.pn||"?").trim().charAt(0)||"?",col:"#b08a5a",
@@ -115,10 +115,10 @@ function rkRowH(x,tab,o){return kitRankRow(rkRowO(x,tab,o))}
 function rkHeadH(tab){const l=tab==="players"?["Kiếp tốt nhất","Số kiếp"]:["Phẩm cao nhất","Kết cục"];return kitRankHead({name:tab==="players"?"Tên hiệu":"Tên hiệu · thân phận",cols:l,unit:RK_T.unit})}
 /* "Cách tính": a kit card over the board (owner 15/11) — what Công danh is, the points table read from the ONE rule table
    (score.js RULES), and one worked life (her latest life when there is one, else a sample) scored by the same CTM_RANK.score */
-const RK_SAMPLE={n:"Tô Uyển Như",on:"Con gái thầy đồ nghèo",mr:4,sr:-1,y:6,sons:1,daus:1,tz:0,danh:40,duc:30,tg:1,endk:"Xuất gia",rare:false};
-function rkRulesSpec(){const R=CTM_RANK.RULES;const n=v=>`<b>${v}</b>`;
+/* the worked example life of "Cách tính" = BAL.rank.sample (the ONE rank table, score.js) */
+function rkRulesSpec(){const R=BAL.rank;const n=v=>`<b>${v}</b>`;
  const own=(()=>{try{const k=Object.keys(RK.ends);if(k.length)return RK.ends[k[k.length-1]];const q=rkQ();return q.length?q[q.length-1].life:null}catch(e){return null}})();
- const L=own||RK_SAMPLE;const sc=CTM_RANK.score(L);
+ const L=own||BAL.rank.sample;const sc=CTM_RANK.score(L);
  const E=Object.entries(R.end).sort((a,b)=>b[1]-a[1]);
  const who=`${rkEsc(CTM_RANK.phamName(L))} ${rkEsc(L.n)}`;
  const lifeLine=[`${rkEsc(CTM_RANK.phamName(L))}`,`${L.y|0} năm trong cung`,(L.sons|0)||(L.daus|0)?`${L.sons|0} hoàng tử, ${L.daus|0} công chúa`:"không con",
