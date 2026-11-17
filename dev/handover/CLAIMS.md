@@ -497,4 +497,4 @@
 | coop-contest-fix SUCCESSOR #2 (opus co-op): r3 re-merge on 744b80e7, one ghen core (main's), seat rule | review/coop-contest-fix-r1 | main s27 | session_01UV1Szi4hQiZFyPBLG2tQue (#1 session_01UV1SzhdbJ2HHinhwJJQfwi archived) | RUNNING | 17/11 00:36Z |
 | night-final SUCCESSOR #4 (opus BIG): coop-steal 'Tâm trạng' dialog over flip, seal-after-resolve, Giữ chân 'tạm' pic, 10 s from choice shown, 10-night ledger, co-op tests; from a7dabd93 | review/night-final | main s27 | session_01UV1SzjDo8ctqPbXDejtf2u (#3 session_01UV1SzhwBU5vBCvZomnavDM archived) | RUNNING | 17/11 00:39Z |
 | kit-size-10 (sonnet keeper): KIT REQUEST night-final — Fold clock chip off screen in the kit choice dialog, whole family | review/kit-size-10 | main s27 | session_01UV1SziEvZm2cX5xAAQe8Yq | RUNNING | 17/11 00:39Z |
-| road-onecore quick re-review r1 (opus, numbers) of 6a1112d1 (B1 road line) | review/road-onecore-r1 | B | (opening) | RUNNING | 17/11 00:55Z |
+| road-onecore quick re-review r1 (opus, numbers) of 6a1112d1 (B1 road line) | review/road-onecore-r1 | B | session_01N1tNP67hg9cxyW2tQvWpBX | RUNNING | 17/11 00:55Z |
