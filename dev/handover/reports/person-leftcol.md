@@ -15,6 +15,7 @@ Where things are (found, not yet solved):
   part of dev/test/kit-fit.js. Shots at 755x1000@2, 1180x820@2 (+1366x1024, 412x1058, 390x844) must be LOOKED at.
 - Deliver: KIT §52 / new §32.7d text, dev/handover/CLAIMS.md row, dev/handover/reports/person-leftcol.md, assemble + build_site + quickcheck + old-save load, then 'SẴN SÀNG KIỂM <sha>'.
 - Side finding (outside this job): in 2-up option cards at 755 (M frame) the "được/mất" text wraps one letter per line ("thiện cảm" vertical) — kit bug worth its own task.
+<<<<<<< HEAD
 
 ---
 # WORKER #2 report (17/11, sonnet) — HANDOVER, NOT ready for review
@@ -30,3 +31,5 @@ TODO:
 4. Update dev/test/pcard-fill.js (expects old blocks + tab "Lòng người"), KIT.md §32.7d + §52 compact + kit sample §52/§73 (§73 sample updated in jpcf), CLAIMS row, quickcheck, old-save load, shots to CDN img/_review/person-leftcol/.
 Harness: /home/user/wt/leftcol-shots/h.js (scratch, may be gone): `node h.js WxH rv out.png` (boots game, k61Meet rival → Hậu cung page; disables girlChestShow BEFORE start()).
 Side finding kept: 2-up option cards at 755: "được/mất" text wraps one letter per line (separate kit task).
+=======
+>>>>>>> 942503ed (report voice-trait part 1 (engine + 5 situations, split proposal))

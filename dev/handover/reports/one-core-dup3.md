@@ -62,6 +62,7 @@ KIT FIRST: no UI part touched (only numbers inside existing texts / kit rows). N
 - Typed texts beside NON-moved numbers stay in the frozen list (e.g. «Lòng cung nữ +8» = apply({maid:8}) fx, j24 «Đức -3», «nàng nắm 2 chứng cứ» from caught()). Not this wave.
 - SWAP pass only judges texts with a recognizable branch (AOUT pairs, wt / lt) and reads under a roll / ok / no; anything else is «no verdict» (listed as a limit, not silent PASS).
 - §2.2 adds «Chủ tin 60+» to the j22 lock text — a wording change for the reviewer to accept or reject.
+<<<<<<< HEAD
 
 ## r1 FIX (review-one-core-dup3-r1 FAIL: evidence-count text family + gate gap)
 
@@ -156,3 +157,5 @@ KIT FIRST: no UI part touched (only the digit inside existing texts becomes the 
 - road-end Pixi page error «r.updateLocalTransform» exists on main's stack already (not this branch).
 - Gate LIMIT: a preview with no code link to its rule (data-sv button, gift preview) is no verdict in the EV pass; both such texts fixed by hand.
 
+=======
+>>>>>>> 942503ed (report voice-trait part 1 (engine + 5 situations, split proposal))

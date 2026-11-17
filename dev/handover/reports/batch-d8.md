@@ -112,6 +112,7 @@ Unchanged (main's CHANGE.txt top line is the same as on 9fdc1199; AG/show-why ad
 2. Wipe review shots after the verdict: `python3 dev/site/cdn_sync.py --wipe-review batch-d8`.
 
 BATCH READY 8806f7b3ca5a0bb7a1d0f61d5f5e6241d431bdd2
+<<<<<<< HEAD
 
 ## BUILDER #3 (session_01964izDXBECKNTXdyNVmcBc, opus) — 17/11 ~12:40Z
 PRIORITY #1 CHECK: claims = this job only (D9 brief D9-batch-d8-remerge3.md) | review/batch-d8 was 8806f7b3 | live main moved 9391f9a9 → 7e264081 (npc-agent-ag3-r1) → **65dcf52f** (greet-meet-r1) during the run | nothing new built, merge + gates only. START_CTX ≈ 8 % (own estimate); now ≈ 35 %.
@@ -158,3 +159,5 @@ Unchanged (main's CHANGE.txt top line did not change with AG3 / greet-meet).
 2. Wipe review shots after the verdict: `python3 dev/site/cdn_sync.py --wipe-review batch-d8`.
 
 BATCH READY 6ca041487a6ae0aa240d3a1a7976303530d23ced
+=======
+>>>>>>> 942503ed (report voice-trait part 1 (engine + 5 situations, split proposal))
