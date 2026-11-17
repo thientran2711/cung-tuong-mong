@@ -724,4 +724,4 @@
 | toil-looks #N (6 levels, colour, chin, tease 1-3) | review/toil-looks2 | MAIN s31 | session_01UV1SzmK8entV9CAWqPJaHH | RUNNING | 17/11 12:11Z |
 | tuanluc-sync #3 (opus) | review/tuanluc-sync | MAIN s31 | session_01UV1SziJFVGaiWpZGPF2Egd | RUNNING | 17/11 12:11Z |
 | map-me-mark #2 (successor; #1 rolled over at ff6ade20) — zoom fit-all, 4-edge fade, map weather, pan flush, Ta + N bóng | review/map-me-mark | MAIN s31 | session_01UV1SzjTth6eagb4DB6vtqt | RUNNING | 17/11 12:21Z |
-| one-core-dup3 SẴN SÀNG KIỂM 67430058 → re-review r2 (fresh opus BIG; brief briefs/review-one-core-dup3-r2.md) | review/one-core-dup3-r2 | B | (opening) | RUNNING | 17/11 12:25Z |
+| one-core-dup3 SẴN SÀNG KIỂM 67430058 → re-review r2 (fresh opus BIG; brief briefs/review-one-core-dup3-r2.md) | review/one-core-dup3-r2 | B | session_01N1tNP6AWLddG5uQRXjrEPn | RUNNING | 17/11 12:25Z |
