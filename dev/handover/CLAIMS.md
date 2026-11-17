@@ -512,3 +512,4 @@
 | WHOLE FIGURE REPAINT batch W3 consort-rest 1952 (redo trains) (sonnet art, 4k, owner GO 01:25Z; opened by lead #5) | review/fig-cutout-clean | C | session_011xDdVPExb84G58Xb3DibW8 | RUNNING | 17/11 01:27Z |
 | WHOLE FIGURE REPAINT batch W4 maid-ty 1664 (sonnet art, 4k, owner GO 01:25Z; opened by lead #5) | review/fig-cutout-clean | C | session_011xDdVRqzYRpSYpnCiVfu8x | RUNNING | 17/11 01:27Z |
 | WHOLE FIGURE REPAINT batch W5 maid-rest 3172 (sonnet art, 4k, owner GO 01:25Z; opened by lead #5) | review/fig-cutout-clean | C | session_011xDdVS4qxqgqPBzQgYwVYi | RUNNING | 17/11 01:27Z |
+| night-final SUCCESSOR #5 (opus BIG co-op): G4 one-world, coop-steal 14/23→green (guest takes host night), coop-night/e2e/cardflip shots; from 09c0f055 (#4 session_01UV1SzjDo8ctqPbXDejtf2u archived). QUEUED after: night-ledger (own branch review/night-ledger, §10.3 5) | review/night-final | main s27 | session_01UV1SzjKzCNds3XdRTnsRep | RUNNING | 17/11 01:28Z |
