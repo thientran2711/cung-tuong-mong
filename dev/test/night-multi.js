@@ -50,7 +50,7 @@ const {chromium}=require('playwright');const [,,URL]=process.argv;
  ok("2 NPC vs NPC at the flip: thief only, true line",r.pre&&r.B===1&&r.A===0&&r.me===0&&!r.wrong,r);
  /* 3. a failed try = stealFail: the mode's own loss from BAL.steal.m[mode].lose (Chặn ngự giá costs more than Tranh sủng) */
  r=await p.evaluate(()=>{const out={};for(const m of ["feign","road"]){const L=T.setup();const [A]=L;S.tonight=A;S.sung=50;S.danh=50;S.duc=50;const s0={sung:S.sung,danh:S.danh,duc:S.duc};
-   nfResolve(A,[{a:S,mode:m,o:0}],true,"t");const lo=BAL.steal.m[m].lose;out[m]={ok:Object.keys(lo).every(k=>S[k]-s0[k]===lo[k]),lose:lo,got:{sung:S.sung-s0.sung,danh:S.danh-s0.danh,duc:S.duc-s0.duc},holder:S.tonight===A}}T.fin();return out});
+   const sf0=stealFail;let sf=null;stealFail=function(a,tt,md){if(a===S)sf=md;return sf0.apply(this,arguments)};try{nfResolve(A,[{a:S,mode:m,o:0}],true,"t")}finally{stealFail=sf0}const lo=BAL.steal.m[m].lose;out[m]={ok:Object.keys(lo).every(k=>Math.sign(S[k]-s0[k])===Math.sign(lo[k])&&Math.abs(S[k]-s0[k]-lo[k])<=1)/* ap's growth curve may round by 1 */&&sf===m,lose:lo,got:{sung:S.sung-s0.sung,danh:S.danh-s0.danh,duc:S.duc-s0.duc},holder:S.tonight===A}}T.fin();return out});
  ok("3 failure = stealFail (BAL.steal.m[mode].lose)",r.feign.ok&&r.road.ok&&r.feign.holder&&r.road.holder,r);
  /* 4. ONE odds function: nfOdds = oSteal / oKeep (balance-core), a kept defence drops BAL.steal.keep.rung rung(s) via rungDown */
  r=await p.evaluate(()=>{const L=T.setup();const [A,B]=L;const cl=o=>Math.max(1,Math.min(99,Math.round(o)));const mood=mm;mm=()=>0;try{
