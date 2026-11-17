@@ -37,6 +37,9 @@ INTENDED['jtruth.js']=['spyFind'];INTENDED['j78.js'].push('ExpressionStatement')
 /* review/one-core-dup3-land: jentry entExam drops the dead typed fallback copy of BAL.mgTier.word; joi kcDien reads the entry tier S.kc.r (0..2) instead of a typed ladder;
    jkc2 KC2W help words become templates that print BAL.kc2.st.dan.siet / nc.pha (same words) */
 (INTENDED['jentry.js']=INTENDED['jentry.js']||[]).push('entExam');(INTENDED['jstaff.js']=INTENDED['jstaff.js']||[]).push('talkLine');/* jstaff talkLine: the greeting tier is worked out once from BAL.staff.say (was 3 typed ladders) */(INTENDED['joi.js']=INTENDED['joi.js']||[]).push('kcDien');(INTENDED['jkc2.js']=INTENDED['jkc2.js']||[]).push('VariableDeclaration');
+/* review/one-core-jkc PART 1 (OD:L1267, the owner's own example): the tiểu thư help HX.kap (TryStatement Object.assign(HX,…)) and KIT_GLOSS «Áp lực hôn sự»
+   (TryStatement Object.assign(KIT_GLOSS,…)) said «Từ 60 … tới 85» / «Từ 60 … tới 90» while the rules read 40 / 90: both now print BAL.kc2.st.kc.moi / dinh (40 / 90) */
+(INTENDED['jkc.js']=INTENDED['jkc.js']||[]).push('TryStatement');
 /* j55 ccWord = side-chance scale (owner OD:L221) */
 const bal=()=>{const c={Math,BAL:{pace:1}};vm.createContext(c);
  const src=fs.readFileSync('dev/build/jbal.js','utf8')+'\n'+fs.readFileSync('dev/build/jbal2.js','utf8');
