@@ -236,8 +236,9 @@ const R97L=[
 ];
 R97L.forEach(d=>{R97[d.a]=d});
 /* the rare ending becomes a real ending of the arc (k:1, a win for the chapter chain and the origin finale) */
-Object.keys(R97).forEach(id=>{const a=ARC67[id],d=R97[id];if(!a||!a.E||a.E.r97)return;
- a.E.r97={k:1,tag:"✦ "+d.tag,w:d.w,t:d.t,fx:d.fx,go:A=>r97After(A,d)}});
+/* jreg: rare endings registered later (jroad RD97L via RARE97.defs) get their E.r97 the same way */
+regEach(R97,id=>{const a=ARC67[id],d=R97[id];if(!a||!a.E||a.E.r97)return;
+ a.E.r97={k:1,tag:"✦ "+d.tag,w:d.w,t:d.t,fx:d.fx,go:A=>r97After(A,d)}},"R97 ending");
 /* ---------- condition, roll, offer ---------- */
 function r97Cond(A,d){const q=A.q97||{p:0,b:0};if(q.b)return false;if((q.p||0)<(d.np||2))return false;if((A.sc||0)<(d.sc||0))return false;
  if(d.need==="kid"&&!r97son())return false;if(d.need==="hh"&&!qOn())return false;if(d.need==="th"&&S.thDead)return false;

@@ -11,9 +11,7 @@ ORIGIN_BR.bd={par:"nc",k:"bd",land:"Bắc Địch",n:"Công chúa Bắc Địch 
 /* v1 story slot (every origin needs one: the chapter line j67 lives in QUEST67/ARC67 below) */
 STORY.bd={t:"Hòa thân Bắc Địch",n:3,goal:"Ngươi là tờ hòa ước còn sống. Giữ cho hai nước yên, và giữ cho mình khỏi bị coi là con tin.",
  init(){S.st.m=0},hint:()=>"Theo từng chương của Mệnh truyện",month(){return""}};
-/* jorigins loads after j67: wrap the slot into the 14-chapter frame like every other origin (tut-followups: without it bd started with no
-   chapter 1–3 and no tutorial quests) */
-if(typeof story67Wrap==="function")story67Wrap("bd");
+/* the 14-chapter frame wraps this slot by itself (j67 regEach over STORY, jreg sweep at the script end): no hand call here */
 
 QUEST67.bd={t:"Tờ hòa ước còn sống",e:[["Công chúa của hai nước",BAL.orig.quest[0],"Bắc Địch và Đại Hy đều gọi tên ngươi khi nhắc đến hòa bình."],["Con tin được tha thứ",BAL.orig.quest[1],"Ngươi đứng được ở Đại Hy, dù chẳng ai quên ngươi từ đâu đến."],["Mãi là con tin",BAL.orig.quest[2],"Hai bên đều coi ngươi là quân cờ; ngươi chỉ còn dựa vào chính mình."]]};
 Object.assign(RTHEME67,{bd_hoa:"emp",bd_ngua:"emp",bd_tuc:"court",bd_hoang:"emp"});

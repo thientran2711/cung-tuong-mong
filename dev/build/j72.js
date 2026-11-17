@@ -276,7 +276,7 @@ function q72HTML(){const q=q72();const mo=q.mo[S.turn]||0;
  h+=`<h3>Việc nhờ trong cung (ngươi biết)</h3><div class="logs">${q.np.map(z=>{const v=RV(z.a);return `<div>${v?mdH(pv(v),"xs"):""}<span class="ld">${z.w}</span>${z.t}</div>`}).join("")||"<div>Chưa nghe chuyện gì.</div>"}</div>`;
  return h}
 (function(){const r0=renderPanel0;renderPanel0=function(){if(tab!=="q72"||!S)return r0.apply(this,arguments);const el=$("panel");try{faceInit()}catch(e){}const gm=document.querySelector(".game");if(gm)gm.classList.toggle("cardtab",true);
- const same=el.dataset.tab===tab,keep=same?el.scrollTop:0,rc=el.querySelector(".pcr"),rk=same&&rc?rc.scrollTop:0;el.innerHTML=q72HTML();el.dataset.tab=tab;el.dataset.pg=String(PG.q72);el.scrollTop=keep;kitFix(el);const r2=el.querySelector(".pcr");if(r2)r2.scrollTop=rk}})();
+ const same=el.dataset.tab===tab,keep=same?el.scrollTop:0,rc=el.querySelector(".pcr"),rk=same&&rc?rc.scrollTop:0;el.innerHTML=q72HTML();el.dataset.tab=tab;el.dataset.pg=String(PG.q72);kitFix(el);panelScrollKeep(el,keep,rk)}})();
 document.addEventListener("click",e=>{const b=e.target.closest("[data-q72d],[data-q72x],[data-q72a],[data-q72c],[data-q72g]");if(!b||b.disabled)return;e.stopPropagation();try{
  if(b.dataset.q72d!=null)q72Do(+b.dataset.q72d,b.dataset.q72o!=null?+b.dataset.q72o:null);else if(b.dataset.q72x!=null)q72Drop(+b.dataset.q72x);else if(b.dataset.q72a)q72Ask();else if(b.dataset.q72c)q72Call(b.dataset.q72c);
  else if(b.dataset.q72g){const k=b.dataset.q72g;if(k==="home")goTo("home");else{q72Pass(k);goTo(k)}tab="q72";render()}}catch(x){console.error(x)}},true);

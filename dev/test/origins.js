@@ -25,7 +25,7 @@ const {chromium}=require('playwright');const [,,URL,VP,OUT]=process.argv;const [
  await p.evaluate(()=>{window.__forceOrigin='bd';try{store.set(NL_KEY,null)}catch(e){}window.__kroulKey=null;start()});await p.waitForFunction(()=>document.querySelector('#kroul .krt'),null,{timeout:60000});
  await p.evaluate(()=>{document.querySelector('#kroul .krskip').click();try{nlAccept(false)}catch(e){}document.querySelectorAll('#kroul,#kroulw').forEach(e=>e.remove())});await p.waitForTimeout(800);
  const arcs=await p.evaluate(RUNS=>{const out={};a67init('bd');const ids=arcIds67('bd');out.ids=ids;out.v2=v267();out.ch=S.st&&S.st.ch&&{na:S.st.ch.na,pool:S.st.ch.pool.length};
-  const ends={};let thrown=0;for(const id of ids){ends[id]={};for(let n=0;n<RUNS;n++){try{const A=newThread67(id,'m');S.st.M=A;S.st.ms=null;let g=0;while(!A.done&&g++<30){Q.length=0;A.due=0;if(!A.nb)pickNext67(A);if(!A.nb)break;fireBeat67(A);showModal();const m=Q[0];if(!m||!m.opts||!m.opts.length){A.used.push(A.nb);break}chooseM(Math.floor(Math.random()*m.opts.length));S.bac=Math.max(S.bac,300)}
+  const ends={};let thrown=0;for(const id of ids){ends[id]={};for(let n=0;n<RUNS;n++){try{const A=newThread67(id,'m');S.st.M=A;S.st.ms=null;let g=0;while(!A.done&&g++<30){Q.length=0;A.due=0;if(!A.nb)pickNext67(A);if(!A.nb)break;fireBeat67(A);showModal();const m=Q[0];if(!m||!m.opts||!m.opts.length){A.used.push(A.nb);break}chooseM((L=>L.length?L[Math.floor(Math.random()*L.length)]:0)(m.opts.map((c,i)=>c.off?-1:i).filter(i=>i>=0)));S.bac=Math.max(S.bac,300)}
      ends[id][A.end||'?']=(ends[id][A.end||'?']||0)+1}catch(e){thrown++;out.err=String(e.stack||e).slice(0,300)}}}
   out.ends=ends;out.thrown=thrown;
   /* old save from the separate-origin build: ok:'bd' -> hòa thân + Bắc Địch branch */

@@ -16,7 +16,7 @@ const SEEDRNG=`(function(){let s=(window.__seed||1)>>>0;Math.random=function(){s
   await p.evaluate(fs.readFileSync(path.join(__dirname,'inpage6.js'),'utf8').replace('function modalStep(sens){','function modalStep(sens){if(window.__rgHook&&window.__rgHook())return true;'));
   await p.evaluate(side=>{window.__rgb={side,beats:[],sw:0};
    window.__rgHook=function(){const m=Q[0];if(m&&m.pid==='rg'&&m.opts&&m.opts.length&&document.getElementById('ov').hidden){
-     const ok=m.opts.map((c,i)=>[c,i]).filter(([c])=>!(c.fx&&c.fx.bac&&S.bac+c.fx.bac<0)&&!(c.fx&&c.fx.suc&&S.suc+c.fx.suc<15));let want=side;
+     const ok=m.opts.map((c,i)=>[c,i]).filter(([c])=>!c.off&&!(c.fx&&c.fx.bac&&S.bac+c.fx.bac<0)&&!(c.fx&&c.fx.suc&&S.suc+c.fx.suc<15));let want=side;
      if(side==='sw')want=(S.reign.done.c4b||m.pp.b==='c4b')?'quyen':'emp';
      let pick=null;const L=ok.length?ok:m.opts.map((c,i)=>[c,i]);
      if(want==='ngoai'){pick=L.find(([c])=>/đứng ngoài|Đứng ngoài|Cáo bệnh|Đóng cửa|giữ mình/.test(c.n+c.j67))||L[L.length-1]}
