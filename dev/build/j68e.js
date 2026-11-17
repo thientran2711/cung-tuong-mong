@@ -19,7 +19,7 @@ EV6("giftArrive","day",{a:["rv"],pp:()=>{const a=rv6(v=>aff(v,S)>-20);return a==
 EV6("lostItem","day",{a:["maid"],pp:()=>S.maid?{a0:0,it:R(4)}:null,w:C=>1.4,
  v:["Sáng ra {M} tái mặt: chiếc trâm bạc ngươi hay cài không thấy đâu, hộp trang sức vẫn khóa.","{M} báo: chuỗi hạt trầm Thái hậu ban đêm qua đứt dây, lạc mất mấy hạt dưới gầm sập.","Chiếc quạt lụa ngươi đề thơ để quên ở đình nghỉ, cung nhân đi tìm về tay không.","Đôi hoa tai ngọc trai mất một chiếc sau buổi tắm hoa ở hậu viện."],
  o:X=>[c6("Lục soát kỹ cả cung",{c:{suc:-6},p:od(BAL.odb.j68e.odP_2+eyes(S)*4),w:{tamco:1},wt:[G6("tìm lại được")],lr:[[X.A,-4]],l:{danh:-1},lt:[R6("cung nhân bất bình vì bị nghi")],ok:()=>"Món đồ rơi trong kẽ ván sàn; tìm lại được."}),
-  c6("Thưởng ai tìm được",{c:{bac:-10},p:80,w:{danh:1},wt:[G6("tìm lại được")],l:{bac:-5},lt:[R6("món đồ mất hẳn")],ok:()=>"Một tiểu thái giám nhặt được, mang trả lấy thưởng."}),
+  c6("Thưởng ai tìm được",{pw:1,c:{bac:-10},p:80,w:{danh:1},wt:[G6("tìm lại được")],l:{bac:-5},lt:[R6("món đồ mất hẳn")],ok:()=>"Một tiểu thái giám nhặt được, mang trả lấy thưởng."}),
   c6("Thôi, bỏ qua",{w:{duc:1},wt:[G6("cung nhân yên lòng")],k:[R6("mất món đồ")]})]});
 EV6("sickServant","serv",{a:["sv"],pp:()=>{const a=sv6();return a==null?null:{a0:a}},w:C=>(C.sea==="Đông"||C.sea==="Hạ"?2:1),
  v:["{A} sốt cao từ đêm, nằm mê man ở dãy nhà hầu phía sau.","{A} ho ra máu, các cung nhân sợ lây, không ai dám lại gần.","{A} trượt chân ngã ở bậc đá, sưng cả cổ chân, vẫn cố đứng dậy làm việc.","{A} bị trúng nắng khi đi lấy nước, ngất ngay ở giếng."],
@@ -102,7 +102,7 @@ EV6("thMama","visit",{a:["th"],pp:()=>S.thDead?null:{a0:0},w:C=>1.2,
 EV6("docCheck","visit",{a:["doc"],pp:()=>({a0:0}),w:C=>S.suc<60?2:.8,
  v:["Thái y {A} đến bắt mạch định kỳ, nhíu mày khi chạm cổ tay ngươi.","{A} được Thái y viện cử sang xem bệnh phong hàn mùa {S} trong cung.","{A} tình cờ đi ngang, nghe tiếng ngươi ho liền xin vào bắt mạch.","{A} mang theo đơn thuốc bổ mới, hỏi ngươi có muốn dùng thử."],
  o:X=>[c6("Để thái y kê thuốc bổ",{c:{bac:-20},w:{suc:10}}),
-  c6("Hỏi thăm dò chuyện các cung",{c:{bac:-10},p:od(BAL.odb.j68e.odP_17+S.tamco/3),w:{mat:1},wt:[G6("biết cung nào hay gọi thái y")],l:{danh:-1},lt:[R6("thái y kín miệng, còn ngại ngươi")]}),
+  c6("Hỏi thăm dò chuyện các cung",{pw:1,c:{bac:-10},p:od(BAL.odb.j68e.odP_17+S.tamco/3),w:{mat:1},wt:[G6("biết cung nào hay gọi thái y")],l:{danh:-1},lt:[R6("thái y kín miệng, còn ngại ngươi")]}),
   c6("Cảm ơn, không cần",{w:{bac:5},k:[R6("Sức không hồi thêm")],ok:()=>"Ngươi tiễn thái y, giữ lại tiền thuốc."})]});
 EV6("painter","visit",{a:["man"],pp:()=>{const a=man6("họa sư");return a==null?null:{a0:a}},w:C=>1,
  v:["{A} vâng chỉ vẽ tranh chân dung các phi tần, đến cung ngươi trước.","{A} xin vẽ cảnh {S} trong sân cung ngươi để dâng Hoàng thượng.","{A} mang đến mấy bức họa mẫu, mời ngươi chọn thế ngồi.","{A} được Nội vụ phủ cử đến tô lại bức bình phong cũ trong cung."],

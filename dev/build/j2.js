@@ -83,7 +83,11 @@ function directActs(){const A=[],mk=(p,i,n,t)=>{const a=talkOpts(p)[i];if(a)A.pu
  if(qOn())mk({kind:"hh",ref:rivals[0]},Math.max(0,talkOpts({kind:"hh",ref:rivals[0]}).findIndex(a=>a.n==="Thỉnh an")),"Thỉnh an Hoàng hậu",`Sang Càn Ninh cung vấn an Hoàng hậu ${rivals[0].name}.`);A.forEach(a=>{a.lock=false;a.b=0});
  mk({kind:"ksp"},0,"Hối lộ Kính sự phòng","Đút lót Tổng quản thái giám giữ thẻ bài.");
  return A}
-function canPay(a){return !(a.c&&a.c.bac&&S.bac+a.c.bac<0)&&!a.lock}
+/* review ag-all-2 r2 A5 (OD 17/11 ~17:10Z (1), bạc only on success): an option whose bạc buys a person carries it in w (paid when it lands);
+   she must still hold it to try (canPay), and the card's BẠI row says a failure costs no bạc (payWinFail: j17/j19/j25 card lines) */
+function payWinBac(a){return a&&a.w&&a.w.bac<0&&!(a.l&&a.l.bac)?-a.w.bac:0}
+function payWinFail(a,l){return [l,payWinBac(a)?"không mất bạc":""].filter(Boolean).join(", ")}
+function canPay(a){const c=a.c&&a.c.bac<0?a.c.bac:0;return !(c&&S.bac+c<0)&&!(payWinBac(a)&&S.bac+c<payWinBac(a))&&!a.lock}
 function logReal(b){try{const K=typeof RKEYS!=="undefined"?RKEYS:Object.keys(NAMES).map(k=>[k,NAMES[k]]);const out=[];for(const [k,n] of K){if(!(k in b))continue;/* a key the snapshot did not take never shows as "0→N" */const x=b[k]||0,y=S[k]||0;if(x!==y)out.push(`<span class="${(y>x)!==(k==="ghen")?"g":"r"}">${n} ${x}→${y}</span>`)}return out.join(", ")}catch(e){return""}}
 function snapReal(){const b={};/* RKEYS too: logReal lists Ân tình, which NAMES lacks ("Ân tình 0→N" on every act, log-sync) */for(const k of new Set(Object.keys(NAMES).concat(typeof RKEYS!=="undefined"?RKEYS.map(x=>x[0]):[])))b[k]=S[k]||0;return b}
 function runOpt(a){if(!canPay(a))return null;const b0=snapReal(),s0=S.logSeq||0;if(a.c)apply(a.c);const o0=a.o==null?100:a.o,o=o0>=100?100:agOdd(o0+lotB(S,a.dom));/* 2f3: one rule with NPC cards (jagacts3 p3Run): + lotB, cap BAL.odds, soft fail at the cap (agSoft, OD 17/11 ~17:35Z) */const ok=o>=100||agTry(o0+lotB(S,a.dom)),sf=!ok&&agSoft(o0);

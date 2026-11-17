@@ -138,7 +138,7 @@ function econSchemeMul(a,t){if(!a||!t)return 1;/* two-way law (owner 16/11 s21):
 let ECON_AT=[null,null];/* the actor / target of the scheme being priced: per life (review/newlife-reset: it kept the old life's people) */
 try{lifeStore("ECON_AT",()=>{ECON_AT=[null,null]})}catch(e){}
 /* AG-ALL-2f3 (OD 17/11 ~17:10Z): acts whose WHOLE price is paid only on success (the act pays econSchemePrice itself when it lands) */
-const ECON_WIN=["bribe","block","xinhh"];/* AG-ALL-2d4 whole family (OD 17/11 ~17:10Z (1)): every act whose bạc BUYS a person (bribe a maid, bribe Kính sự phòng, the gift to the Empress) */
+const ECON_WIN=["bribe","block","xinhh","thathu"];/* + thathu (mua chuộc người giữ thú), review ag-all-2 r2 A5 *//* AG-ALL-2d4 whole family (OD 17/11 ~17:10Z (1)): every act whose bạc BUYS a person (bribe a maid, bribe Kính sự phòng, the gift to the Empress) */
 /* the act landed: pay its whole price now (her and every NPC) and mark the win for a scheme chain that pays its route bạc on success (j70 exec70) */
 function econPayWin(a,k,t,base){const pr=(typeof econSchemePrice==="function"?econSchemePrice(k,a,t):0)||base||0;if(pr>0)ap(a,{bac:-Math.min(pr,Math.max(0,a.bac||0))});if(a)a.__won=1;return pr}
 /* actBac: the bạc an act really charges actor a against target t (a scheme priced by target: econSchemePrice; else its BAL.actBac cost) — the lock words print it (review/one-core-jkc-2) */

@@ -64,7 +64,7 @@ function ag2BribeS(v,t){const L=(t.staff||[]).filter(s=>s&&s.spyFor!==key(v));re
 agRunReg("cx2:maidTalk",v=>{const m=v.maid;if(!m)return"";m.loyal=cl((m.loyal||0)+BAL.ag.cx2.maidTalk.w.maid,0,100);return ag2Res(v,"maidTalk",1,`${v.name} tâm sự với ${m.name}`)});
 /* cx2:maidSpy runner: jagacts3 (spyRoll, one rule with jwhy "Sai đi dò la"); the old flat-odds copy is gone (review ag-all-2 r2 A1) */
 agRunReg("cx2:bribeSrv",(v,t)=>{if(!t)return"";const s=ag2BribeS(v,t);if(!s)return"";const r=bribeServ(v,s);return ag2Res(v,"bribeSrv",!!r,r?String(r).replace(/\.\s*$/,""):"")});
-agRunReg("cx2:plantSrv",(v,t)=>{if(!t)return"";const r=plantServ(v,t);return ag2Res(v,"plantSrv",!!r,r?String(r).replace(/\.\s*$/,""):"")});
+agRunReg("cx2:plantSrv",(v,t)=>{if(!t)return"";const r=plantServ(v,t);const ok=!!r&&!!PLANT_OK;/* a refusal returns a line too */return ag2Res(v,"plantSrv",ok,r?String(r).replace(/\.\s*$/,""):"")});
 /* ag2Sf = the last ag2Roll failed SOFTLY at the cap (owner OD 17/11 ~17:35Z): its result line is the ONE BẠI line; cleared by ag2Res */
 let ag2Sf=false;
 function ag2Res(v,k,ok,txt){AG2.stat.land++;AG2.stat.by[k]=(AG2.stat.by[k]||0)+1;if(!ok&&ag2Sf)txt=agSoftTxt(v);ag2Sf=false;return txt}

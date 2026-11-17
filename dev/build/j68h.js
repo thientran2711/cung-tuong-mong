@@ -28,7 +28,7 @@ G6set("lostItem",{a:["maid"],pp:()=>{if(!S.maid)return null;const th=(S.staff||[
  vf:p=>p.c!=null?[0,3]:[2],
  o:X=>{const c=X.p.c!=null?servById(X.p.c):null;return[
   c6("Lục soát kỹ cả cung",{c:{suc:-6},p:od(BAL.odb.j68h.odP_2+eyes(S)*4),w:{tamco:1},wt:[G6(c?"tìm ra kẻ lấy":"tìm lại được")],l:{danh:-1},lt:[R6("cung nhân bất bình vì bị nghi")],ok:()=>{if(c){c.loyal=cl(c.loyal-BAL.eff.j68h.loyalOk,0,100);try{c.cause={txt:"ăn cắp đồ của chủ",fault:true,w:wk()}}catch(e){}return `Món đồ nằm trong tay nải của ${c.name}${netIs(c,"greed")?" (vốn tham của)":" (đang làm tai mắt cho người khác)"}. Ngươi có cớ để xử.`}return "Món đồ ngươi mệt quá để quên dưới gối; tìm lại được."}}),
-  c6("Thưởng ai tìm được",{c:{bac:-10},p:c?55:85,w:{danh:1},wt:[G6("đồ trở về")],l:{bac:-5},lt:[R6("món đồ mất hẳn")],ok:()=>c?`${c.name} sợ lộ, lén trả lại đồ.`:"Một tiểu thái giám nhặt được, mang trả lấy thưởng."}),
+  c6("Thưởng ai tìm được",{pw:1,c:{bac:-10},p:c?55:85,w:{danh:1},wt:[G6("đồ trở về")],l:{bac:-5},lt:[R6("món đồ mất hẳn")],ok:()=>c?`${c.name} sợ lộ, lén trả lại đồ.`:"Một tiểu thái giám nhặt được, mang trả lấy thưởng."}),
   c6("Thôi, bỏ qua",{w:{duc:1},wt:[G6("cung nhân yên lòng")],k:[R6("mất món đồ"),R6(c?"kẻ lấy quen tay":"")].filter(x=>!/><\/span>/.test(x))})]}});
 G6set("sickServant",{pp:()=>{const weak=s=>(s.age||20)>=45||(s.loyal||50)<BAL.loy.out;const a=sv6(s=>harsh()||wet()?true:weak(s));return a==null?null:{a0:a}},w:C=>(harsh()||wet())?2.2:.6});
 G6set("maidQuarrel",{pp:()=>{const L=(S.staff||[]).filter(s=>s.sid!=null);const hot=L.filter(s=>netIs(s,"talk")||(s.loyal||50)<BAL.loy.low);if(L.length<2||!hot.length)return null;const a=pick(hot),b=pick(L.filter(x=>x!==a));return{a0:a.sid,a1:b.sid}}});
