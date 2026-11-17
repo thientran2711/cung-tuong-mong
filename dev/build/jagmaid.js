@@ -16,8 +16,8 @@
    4 A MAID'S NIGHT   his regard + rivalNight's night gain; a free consort seat (roomFor) → she is raised Đáp ứng as the SAME person (her
                       name, face, age; f88Carry), with her road "cn", then night() (conception, the same rule as anyone). Seats full → she
                       stays a maid, "đã được sủng hạnh" (m.fav); each month a free seat goes to a favoured maid first (normal seat rule).
-   5 TIẾN CỬ          the consort's "Tiến cử <maid> hầu thay" (j8 sendMaid): her own choice on her night by her need (tired, ill, wants an
-                      ally in his bed) — was roll 3; the maid's night as in 4 — was roll 30 + a fresh name and face / "thả ra cung".
+   5 TIẾN CỬ          the consort's "Tiến cử <maid> hầu thay" (j8 sendMaid): her own choice on her night by her need (tired or ill;
+                      a trusted maid is also an ally in his bed) — was roll 3; the maid's night as in 4 — was roll 30 + a fresh name and face / "thả ra cung".
    6 THE PLAYER MAID  he picks her → the kit dilemma "Hoàng thượng cho gọi" (go: 4 for her: srvRise with a seat, favoured without);
                       srvRise checks the seat (row 10); the mistress's 25 % killing line of "hỏi tên" goes (her harm acts cover it).
    Open (owner question 3, npc-agent §6): the child of a favoured maid with no seat — she conceives only once she holds a rank.
@@ -71,7 +71,7 @@ function amName(m){try{const used=namesInUse();const sur=freshName().split(" ")[
 function amRise(m,o,via){const B=BAL.mline,D=amD();const close=!!(o&&o.maid===m);
  if(close)o.maid=o===S?newMaid(pick(MAIDS.filter(x=>x!==m.name)),45):{name:pick(MAIDS.filter(x=>x!==m.name)),loyal:45};
  else if(o&&o.staff){const i=o.staff.indexOf(m);if(i>=0)o.staff.splice(i,1);try{if(typeof mlRose==="function")mlRose(o,m)}catch(e){}}
- const n=newRival(0);Object.assign(n,drawFace());try{f88Carry(n,m)}catch(e){}n.name=amName(m);if(m.age>=18&&m.age<60)n.age=m.age;
+ const n=newRival(0);Object.assign(n,drawFace());try{f88Carry(n,m)}catch(e){}n.name=amName(m);/* her age: f88Carry */
  n.ag=Object.assign(n.ag||{},{o:"cn"});n.rel=0;n.sung=D.rise.b+Math.round((m.sung||0)/D.rise.d);n.fromMaidOf=o?key(o):null;
  const loy=(m.loyal||0)>=B.riseLoy;if(o)relAdd(o,n,loy?B.riseRel:-B.riseRel);rivals.push(n);
  try{n.nights=(n.nights||0)+1;(n.nightLog=n.nightLog||[]).push(wk());night(n)}catch(e){}
@@ -88,11 +88,14 @@ function amMeNight(){const m=srvM();amNightGain(S);empMet(S,"night",1);const d=a
 PEND.amNight=()=>{if(!isSrv()||(S.age||0)<18)return null;const m=srvM();const room=roomFor("consort");const D=amD();
  const k=empMemK(S);const mem=EMPMEM[k]?`<p class="past">Ngài còn nhớ ${EMPMEM[k]} hôm trước của ngươi.</p>`:"";
  return{t:`<p>Tổng quản Càn Thanh cung đến truyền: đêm nay Hoàng thượng cho gọi ngươi đến Dưỡng Hòa điện hầu.</p>${mem}`,who:pEmp(),o:[
-  {n:"Tắm gội, theo tổng quản đến hầu",fx:{},x:`Nắm chắc · thành: được sủng hạnh${room?`, rồi được phong ${RANKS[0].n}`:"; hậu cung không còn chỗ phong, ngươi vẫn là cung nữ"}${m?` · kèm: chủ ghen, Chủ tin -${amJealHi(m)?D.jeal.hi:D.jeal.lo}: ${chanceW(amJealP(m))}`:""}`,go:()=>amMeNight()},
-  {n:"Cáo bệnh, xin thôi",fx:{},x:`Nắm chắc · Hoàng thượng để ý -${D.decline}`,go:()=>{AMN.decline++;S.sung=Math.max(0,(S.sung||0)-D.decline)}}]}};
+  {n:"Tắm gội chờ giá",fx:{},x:`Nắm chắc · thành: được sủng hạnh${room?`, rồi được phong ${RANKS[0].n}`:"; hậu cung không còn chỗ phong, ngươi vẫn là cung nữ"}${m?` · kèm: chủ ghen, Chủ tin -${amJealHi(m)?D.jeal.hi:D.jeal.lo}: ${chanceW(amJealP(m))}`:""}`,go:()=>amMeNight()},
+  {n:"Cáo bệnh",fx:{nt:-D.decline},x:`nhường đêm; Hoàng thượng để ý -${D.decline}`,go:()=>{AMN.decline++}}]}};
+/* the kit scene of the summons: the Kính sự phòng picture (jevban KIT_DLGMAP, the same as the consort's "ksp") */
+try{if(typeof KIT_DLGMAP==="object"&&KIT_DLGMAP.ksp&&!KIT_DLGMAP.amNight)KIT_DLGMAP.amNight=KIT_DLGMAP.ksp}catch(e){}
 /* ---------- 5 Tiến cử: the consort's own choice on her night ---------- */
-function amSendQ(v){if(!amOn())return roll(3);try{const m=v&&v.maid;if(!m)return false;const N=agNeedsC(v);let ill=0;try{ill=illOf(v)?1:0}catch(e){}
-  const u=(N.rest*BAL.ag.restW+ill+((m.loyal||0)>=BAL.mline.riseLoy?N.ally:0))*BAL.ag.needW*amD().send*agMW(v,"scheme");if(!(u>0))return false;
+function amSendQ(v){if(!amOn())return false;try{const m=v&&v.maid;if(!m)return false;const N=agNeedsC(v);let ill=0;try{ill=illOf(v)?1:0}catch(e){}
+  /* the reason is hers: tired or ill tonight (no reason → no option, so no slip either); a trusted maid (lòng ≥ riseLoy) is also an ally in his bed */
+  const u=(N.rest*BAL.ag.restW+ill)*(1+((m.loyal||0)>=BAL.mline.riseLoy?N.ally:0))*BAL.ag.needW*amD().send*agMW(v,"scheme");if(!(u>0))return false;
   return mindPick([["keep",BAL.ag.routine/BAL.ag.unit],["send",u]],v)==="send"}catch(e){agErr("send",e);return false}}
 function amSendX(){const m=S.maid;if(!m)return"";const B=BAL.mline;
  return `Nắm chắc · thành: ${m.name} hầu thay đêm nay, được sủng hạnh${roomFor("consort")?`, rồi được phong ${RANKS[0].n}, ${(m.loyal||0)>=B.riseLoy?"vẫn là người của ngươi":"trở mặt với ngươi"} · kèm: mất ${m.name}, cung nữ mới lòng 45`:"; hậu cung không còn chỗ phong, nàng vẫn ở lại hầu ngươi"}`}

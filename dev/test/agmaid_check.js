@@ -59,7 +59,7 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
  /* 7 eye + off switch */
  await fresh(false);
  const r7=await p.evaluate(()=>{const L=amMaids();const [s,o]=L[0]||[];const n0=window.__amN.eyeOff;const e=s?mlEye(o,s):false;const a={e,off:window.__amN.eyeOff-n0};
-  BAL.ag.on=0;const v=liveRivals(true).find(x=>x.maid);const seen=[];const r0=roll;roll=function(x){seen.push(x);return false};try{amSendQ(v)}finally{roll=r0;BAL.ag.on=1}return{a,off3:seen.includes(3)}});
+  BAL.ag.on=0;const v=liveRivals(true).find(x=>x.maid&&!x.preg);const seen=[];const r0=roll;roll=function(x){seen.push(x);return false};try{rivalNight(v)}finally{roll=r0;BAL.ag.on=1}return{a,off3:seen.includes(3)}});
  ok(r7.a.e===false&&r7.a.off===1,'jmline: no eye roll while the loop is on',r7);ok(r7.off3,'off switch BAL.ag.on=0: the old roll 3 again',r7);
  /* 8 play */
  const play=(maid)=>p.evaluate(async(maid)=>{const E=[];const ce=console.error;console.error=(...a)=>{E.push(a.map(String).join(" ").slice(0,200));ce.apply(console,a)};
