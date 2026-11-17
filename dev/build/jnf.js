@@ -177,19 +177,30 @@ function openChoice(){const x=X();if(!x)return;x.st="open";x.at=Date.now();
  /* the NPCs choose NOW, the same moment as the players (hidden from her) */
  x.npc=npcAttackers(t);x.nk=t!==S&&!t.coop?Math.random()<B().keep.npcP:false;
  send("open")}
+/* the GỢI Ý line of each flip option (kit option `hint`, KIT §53): the REAL difference between the two attacks, read from BAL.steal
+   (owner OD 16/11 22:50Z: each one a distinct trade-off): what it leans on (its weights), how much her art counts, and the size of the
+   win / the loss compared with the other attack. Words only (VANPHONG), no numbers. */
+function nfHint(mode){try{const M=BAL.steal.m,K=B().keep;
+ const lean=w=>Object.keys(w||{}).sort((a,b)=>w[b]-w[a]).map(k=>({sung:"ân sủng",sac:"nhan sắc",tai:"tài học",danh:"danh tiếng"})[k]).filter(Boolean);
+ if(mode==="keep")return `dựa vào ân sủng${K.sac?", nhan sắc":""} và tài nghệ của ngươi; thành thì kẻ nào tranh đêm của ngươi cũng khó thêm một bậc, không ai giành được thì được để mắt hơn; hỏng thì chẳng mất gì, chỉ là không cản được ai`;
+ const me=M[mode],ot=M[mode==="road"?"feign":"road"];const big=(a,b)=>Math.abs(a||0)>Math.abs(b||0);
+ const artW=me.art>ot.art?"tài nghệ nặng ký, môn Hoàng thượng chuộng tháng này càng lợi, môn ngài chán thì càng hại":"tài nghệ chỉ góp chút ít";
+ const win=big(me.win.sung,ot.win.sung)?`được sủng nhiều${me.win.danh?", nổi danh":""}`:"được sủng chút ít";
+ const lose=big(me.lose.sung,ot.lose.sung)?`mất sủng nhiều${me.lose.danh?", mất danh tiếng":""}${me.hh?", Hoàng hậu phật ý":""}`:`chỉ mất chút sủng${me.lose.duc?", chút tiếng đức":""}`;
+ return `dựa vào ${lean(me.w).join(" và ")}; ${artW}; thành thì Hoàng thượng sang cung ngươi, ${win}; hỏng thì ${lose}`}catch(e){return ""}}
 /* her own choice: one kit dialog (option cards, ✕ = Thôi) with the §69 clock chip; the countdown starts when it is on screen */
 function showChoice(){const x=X();if(!x||x.dlg)return;x.dlg=1;const t=entOf(x.t);
  if(!x.role||!t){mine(null);return}
  const E=B().choice.ms,clk=()=>`<p class="nfcd" id="nfcd">${typeof kitCoopClock==="function"?kitCoopClock({left:E,len:E}):""}</p>`;
  let h,o;
- if(x.role==="def"){const ok=nfOdds(S,"keep");
+ if(x.role==="def"){const ok=typeof stealShown==="function"?stealShown(S,"keep"):nfOdds(S,"keep");
   h=`<p>Thẻ bài của ngươi được lật. Kẻ khác có thể tranh mất đêm nay; ngươi có giữ chân Hoàng thượng không?</p>${clk()}`;
-  o=[{n:"Giữ chân Hoàng thượng",fx:{},x:`${word(ok)} · thành: ai tranh đêm của ngươi cũng khó thêm ${B().keep.rung} bậc; không ai giành được thì Sủng +${B().keep.gain} · hỏng: không mất gì`,go:()=>mine("keep")},
+  o=[{n:"Giữ chân Hoàng thượng",fx:{},showOdds:true,hint:nfHint("keep"),x:`${word(ok)} · thành: ai tranh đêm của ngươi cũng khó thêm ${B().keep.rung} bậc; không ai giành được thì Sủng +${B().keep.gain} · hỏng: không mất gì`,go:()=>mine("keep")},
      {n:"Thôi",fx:{},go:()=>mine(null)}]}
- else{const o1=nfOdds(S,"feign"),o2=nfOdds(S,"road");const gx=r=>{try{return stealX(t,r)}catch(e){return ""}};
+ else{const sh=m=>typeof stealShown==="function"?stealShown(S,m):nfOdds(S,m),o1=sh("feign"),o2=sh("road");/* the word she may know (the month's art unread = neutral, jbalcore) */const gx=r=>{try{return stealX(t,r)}catch(e){return ""}};
   h=`<p>Tối nay thẻ bài của ${NM(t)} được lật. Ngươi có ra tay giành đêm nay không?</p>${clk()}`;
-  o=[{n:"Tranh sủng",fx:{},x:`${word(o1)} · thành: ${gx(0)||"Hoàng thượng sang cung ngươi"} · hỏng: ${fmt(stealLose("feign"))}`,go:()=>mine("feign")},
-     {n:"Chặn ngự giá",fx:{},x:`${word(o2)} · thành: ${gx(1)||"Hoàng thượng sang cung ngươi"} · hỏng: ${fmt(stealLose("road"))}`,go:()=>mine("road")},
+  o=[{n:"Tranh sủng",fx:{},showOdds:true,hint:nfHint("feign"),x:`${word(o1)} · thành: ${gx(0)||"Hoàng thượng sang cung ngươi"} · hỏng: ${fmt(stealLose("feign"))}`,go:()=>mine("feign")},
+     {n:"Chặn ngự giá",fx:{},showOdds:true,hint:nfHint("road"),x:`${word(o2)} · thành: ${gx(1)||"Hoàng thượng sang cung ngươi"} · hỏng: ${fmt(stealLose("road"))}`,go:()=>mine("road")},
      {n:"Thôi",fx:{},go:()=>mine(null)}]}
  Q.push({t:"Kính sự phòng",h,opts:o,who:typeof pEunCourt==="function"?pEunCourt("ksp"):undefined,pid:"nfch",pp:{d:day()}});
  try{render()}catch(e){}if(!window.__bot&&Q[0]&&Q[0].pid==="nfch")try{showModal()}catch(e){}else showSoon()}
