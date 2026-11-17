@@ -24,3 +24,10 @@ Scratch only (/tmp, never CDN, none uploaded -> nothing to wipe). A night-scene 
 
 ## Next
 Worker (kit-thanh-bai successor or new) fixes (1) then I re-run r2 (scan fold x2 seeds, ipad x2). Everything else in 3dabd1f7 is fine to keep.
+
+## r2 re-run (worker fix f422a570, merged with origin/main d5ea786d -> 6a818dea on review/kit-option-rows-r3)
+VERDICT r2: PASS 6a818dea (kit-option-rows part only; kit-thanh-bai reviewed separately).
+- Fold figure-left case fixed: label-over-value (.kszstk) -> values 190 px (was 137). Shots LOOKED (Hội phối đồ · Phú quý, Có người đến): labels CẦN/TỐN/ĐƯỢC/MẤT/KÈM above values, no word-by-word wrap.
+- Scan fold seeds 7/11/23 x25 turns: 13/14/9 modals, 0 flagged; ipadAir seed 7: 8 modals 0 flagged. Quickcheck PASS 168 s (open 1713 ms, old save ok, core gates PASS).
+- Note (minor, not blocking): in Hội phối đồ on Fold the 2nd option card's bottom edge is cut by the frame's inner scroll (text of the shown rows is whole). Same as r1, worker disclosed it. Suggest kit-thanh-bai/next kit round lets that column grow or shows a scroll hint.
+- Scratch shots in /tmp only, nothing on CDN from me (worker's img/_review/kit-option-rows-r2/ must be wiped by main/worker after verdict: python3 dev/site/cdn_sync.py --wipe-review kit-option-rows-r2).
