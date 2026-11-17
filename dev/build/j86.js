@@ -10,7 +10,7 @@
 function fpOn(){if(typeof faceOn==="function"){try{return !!(NLP&&faceOn())}catch(e){}}try{return !!(NLP&&S&&S.pid&&typeof FIGIX!=="undefined"&&FIGIX.consort&&FIGIX.consort[S.pid])}catch(e){return false}}
 function fpKeys(){const M=FIGIX.consort||{};return pidKeys().filter(k=>M[k]&&M[k].length)}
 /* the portrait she would wear with identity k right now (her rank tier or tier 1 as a maid, her age band) */
-function fpPor(k){const L=(FIGIX.consort||{})[k];if(!L||!L.length)return"";const f=figBest(L,figTierOf(S),figAgeOf(S));return f&&f.por?figPath(f.por):""}
+function fpPor(k){const L=(FIGIX.consort||{})[k];if(!L||!L.length)return"";const f=figBestRank(L,figTierOf(S),figAgeOf(S));return f&&f.por?figPath(f.por):""}
 function fpFace(k){const f=Object.assign({},pMe());f.src=fpPor(k);f.rw="";return f}
 function fpNum(k){return +String(k).replace(/\D/g,"")||0}
 /* the picker = the kit PORTRAIT PICKER (j79 kitPicker); the 84-face pool (facePool(filter), review/face-84) when present, else the 32 consort faces */
