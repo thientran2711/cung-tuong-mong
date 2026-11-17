@@ -1863,6 +1863,9 @@ Root cause (found by the family scan, not by the one dialog): the live v3 frame 
 Fix, one place (jksize `kszFeetFit`, called first in `kitFrameApplyLive3`): room = cap − (frame header + button row) − body padding; when the figure column is taller than the room the figure is scaled by just enough (`dlg.__kszShrink`, read by `kszFigFit`, reset on every repick); R's maxHeight follows the new figure height so the options scroll inside the info column. A frame that already fits is untouched (shrink = 1). No per-dialog CSS, no caller change.
 Test (family): `node dev/test/fig-feet-fam.js <url> [WxH,…]` (default 755x1000, 1180x820, 1366x1024, 412x1058, 390x844) opens the timed choice (3 variants), the kit §8 pop-ups, and each person kind with ONE and THREE long options, measures the painted feet of every figure against the lowest clipping edge, exit 1 when any is cut by more than 1.5 px.
 
+### 32.8a LIVE v3 FRAME IS TIED TO ITS OWN BODY (night-final #6, 17/11) — `dev/build/jksize.js`
+- `dlg.__ksz3` (the live 3-part frame) is valid only while its body and options are still in `#mb` (`kszLive3Ok`). The `.dlg` element is re-used: when it is filled again, a stale `__ksz3` is dropped and the new body is laid out again (`kitFrameLive3`), and the late image-load re-pick (`kszLiveRepick3` / `kszLiveLay3`) does nothing for a frame that left the page. Before: a late picture load re-inserted the OLD options next to the new ones (every option shown twice). `kdpall` is removed with the other old layout classes.
+
 ### 48.2 NAME TAG = RANK line 1, NAME line 2, for every figure (fig-feet-crop-2 add-on, owner 17/11 "Kính sự phòng là cái phẩm hả?", OD:L1351)
 `kitTitleOf(p)` (j79) is the ONE rank source of the tag: `kitTitle(p)`, else the title words the name starts with (Thị vệ, Vương gia, Hoàng tử, Công chúa, Phế phi, Quản sự, Sứ thần, Thái y…); `kitTitledName` drops the repeat from line 2. Read by `kszRankName` (v3 frame + pendant) and `kitName` (32.7 column). The office / place (Kính sự phòng…) is the dialog title and never the rank line (the old `KIT_SIZE.v3.office` override is deleted). Test: `node dev/test/tag-rank-scan.js <url> [--table]` (every kind of person; FAIL on an empty / office rank line, a title word starting the name line, or two tag sources disagreeing): before 13 of 48 FAIL, after 0 of 49.
 
@@ -2770,6 +2773,9 @@ Việc nhờ act area, Nợ ân rows). `kitActCompactOn(root)` runs after `rende
 - Fix that came with it (main bug): jk3's sort helper was also named `kitActKey(b)` and, in the one concatenated script, replaced j79's
   `kitActKey(name)` (ACTS.json lookup) — every name lookup threw, so acts matched by prefix / wildcard lost their own picture across the game
   (j79 kitActArt wrapper, j87 news pictures). jk3's helper is now `kitActSortKey`.
+
+### 43.0a TITLE ROW NEVER SQUEEZES THE NAME (night-final #6, 17/11) — `kitCompactCSS` in `dev/build/jk4.js`
+- Every compact option card (`button.ka.kart.kopt`) title row `.kat`: the name `.kan` keeps at least `min(6.5em,100%)`; when name + chips (odds ladder `.kodds`, risk chip) do not fit on one line, the chips WRAP to the next line, right-aligned (`.kodds{margin-left:auto}`). Was `nowrap` + `min-width:0`: the name shrank to one letter and the chips covered it (Kính sự phòng flip choice, Fold + iPad). Cards whose row fits look the same as before.
 
 ### 43.1 SMALL ACT CARD: PORTRAIT PICTURE, TAP = DETAIL, ⓘ MARK (owner 16/11, review/actcard-small; `dev/build/jk4.js`)
 The big Hành sự card is unchanged. The small card (§43 compact form) shows the act picture as a 3:4 PORTRAIT rectangle (84x112 px; 72x96 under 420 px), no longer a square.
