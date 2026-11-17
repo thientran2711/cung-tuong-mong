@@ -57,3 +57,21 @@ PRIORITY #1 CHECK: no neckline rule in OD/canon (per foreman). One try per rank,
 - Hoàng hậu: imperial yellow kept (yellow is reserved for empress/emperor), low neckline framed by red-gold phoenix collar tabs, modest vân kiên, phoenix crown, jade ruyi.
 Caveat: Phi and Quý phi necklines show less chest than Tần/HQP/HH (chest-high skirt hides bust top); can push lower on request.
 Sheets: https://ctm-img.victoria-tntt.workers.dev/img/_review/rank-vankien/sheet_figures_v4.jpg and sheet_shoulders_v4.jpg
+
+## V4 update 17/11 (owner: Quý phi round collar too modern)
+Quý phi redone once: round/U neck dropped → STRAIGHT PARALLEL-LAPEL low collar (zhijin style) with gold-brocade lapels over cream bodice, plum, period look. Other four unchanged (they follow v3 cuts + new rules). sheet_figures_v4.jpg replaced with the new Quý phi.
+
+## LAYER TEST (Tần + new Quý phi), Magnific only — sheet_layers_v4.jpg, sheet_layers_heads_v4.jpg
+Tools: design_auto_layers FAILED ("Page 0 did not complete") on both figures. WORKED: images_segment (SAM 3.1, prompts "hair" / "gold hairpins" / "the … robe and skirt clothing"; two-object prompt like "hair and hairpins" sometimes rejected) + images_remove_background; masks downloaded, layers composed locally (PIL). Cost ≈ 35 credits per mask, 3 per cut-out.
+Layers: (1) base = face+neck+chest+hands, (2) hair+pins, (3) outfit. Swap proof: Tần face/body + Quý phi outfit; Tần outfit + Quý phi hair+pins; Quý phi + Tần hair.
+Honest quality: 
+- Edges are clean enough on dark/light at game size; SAM masks are soft at fine tassels/pearl strands (some clipped).
+- BASE has big HOLES: segmentation only cuts what is visible, so skin under hair (forehead, behind ears), under sleeves/inner robe (neck-line, chest, arms) is empty. A hair swap shows white/transparent patches on the forehead and parting; an outfit swap with a different neckline shows gaps at neck/chest.
+- Held items (fan, handkerchief) get sliced between base and outfit layers (white blobs where hands/sleeves overlapped).
+- Pose/scale are identical so alignment is fine; different hair silhouettes leave stray old-hair pixels.
+=> Pure cut-and-paste is NOT production ready. Needed: generate a bald, fully-nude-neutral... i.e. an inpainted BASE (body in a plain under-garment, face+neck+hands complete, no hair) once per person, and per-outfit/hair layers generated on that same pose. Magnific route: images_retouch (erase/replace with the masks) to inpaint the base, or generate each layer directly as a separate image with the same pose reference. Estimate extra ≈ 135–300 credits per person for the base, then layers ≈ 135 each.
+
+## Scaling note (owner 17/11 ~17:12Z: every person different outfits; same person different outfit per rank)
+- The 5 v4 outfits belong to c01 only. Other consorts get entirely different designs.
+- Method: ONE design-sheet table, rows = person (32 consorts) × rank (8 tiers), columns = main colour, collar type, neckline shape, cut/outer layer, embroidery motif, vân kiên size, hairstyle, hairpin set, held item, palette-clash check. Rules: within a person all ranks differ (colour + collar); within one palace row/screen (people near each other) no two share colour+collar; colour ladder per rank as the owner's rule; motifs per person (flower/leaf/butterfly/phoenix only). Generate from the table row (prompt template + person's face ref + shared pose rule), one try, redo only fails.
+- Credit per outfit: gpt-2-6 2k = 135 credits per image (observed). With ~1.4 tries avg ≈ 190 credits per outfit figure. 32 persons × 8 ranks = 256 figures ≈ 35–50k credits (single age a18; ×4 ages if all). Layered variant adds ≈ 105 (3 masks) + 3 per figure, plus a one-time inpainted base per person.
