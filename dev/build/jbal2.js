@@ -199,7 +199,7 @@ Object.assign(BAL,{coopBribe:{pay:20,tin:5}});
 Object.assign(BAL,{visit:{minSung:20,base:.3,slope:.07,anK:.01,cap:8,datinh:1.5,lanhlung:.5,gap:9,illSt:2,q:2,
  sung:3,danh:3,ghen:6,lostGhen:15,lostRel:8,hh:3,thP:25,thNeg:15,thLoss:4,adviseDuc:3,adviseSung:1,adviseTh:2,
  show:{o:40,w:8,suc:5,sung:6,danh:2},tea:{minSung:60,p:50,sung:2,an:2}},
- night:{sung:3,an:2,ghen:8,bestow:10,bestowS:4,stealS:3}});
+ night:{sung:3,an:2,ghen:8,bestow:10,bestowS:4,stealS:3,mood:[1,0,-1,-2] /* his mood 0..3 (vui, thường, buồn, giận) → night score add-on (j8 night1; jwhyn reads it) */}});
 /* ACTIVE MAID LINE (jmline.js, review/servant-system, owner 16/11): % per month unless named. eye[rank] = the Emperor's eye by servant rank
    (thô sử, cung nữ, đại cung nữ, chưởng sự, nữ quan; was 0/0/1.2/1.2/1.2), eyeSung = ×(1 + master Sủng/100 × eyeSung), eyeAge = ages that can rise;
    seekStart (× nết: tham 2, lanh 1.5, trung/nhát 0.3) for seekMonths months, maids up to seekAge, seekMul on the eye while seeking;
@@ -593,3 +593,47 @@ BAL.net={qClamp:[-1,1.5],qOn:.8,malBase:30,k:{hide:8,study:.25},
  "Vì mình":{g:"ch",p:"Vì gia tộc",s:"b",tend:"lo cho mình trước hết",gain:"dễ mua bằng lợi riêng; phe phái khó kéo",cost:"không hy sinh cho ai; lúc nguy là bỏ",
   w:{steal:1.4,block:1.4,drop:1.6,help:.7,warn:.7,accuse:1.2,follow:.3},mal:8,gift:1.2,q:{greed:.5}}
  }};
+
+/* ONE CORE (owner OD:L1267; review/show-why, from review-trait-pool-r1 follow-up): every number chosen by a nết test lives here.
+   BAL.net.k: quality-keyed sizes for nq(p,quality,n) / netIs (servant + agent qualities). BAL.net.n: nết-keyed tables read by
+   nv(p,key) (jnet.js): keys are nết names or "q:<quality>" (netIs), tested IN ORDER, first match wins (= the old a?x:b?y:z chains),
+   "_" = the value when none matches. Scan: python3 dev/tools/net-inline-scan.py → 0. */
+Object.assign(BAL.net.k,{spySharp:15,askSharp:15,sentSharp:8,confTimid:20,confLoyal:15,confGreed:5,bribeGreed:25,bribeTimid:25,bribeLoyal:10,poachSharp:10,
+ firmLoyal:30,firmGreed:-20,lean:{greed:[-10,3],loyal:[12,-6],timid:[6,-4],talk:[-12,2]}/* sentPen: [dirty act or rumor, otherwise] */});
+BAL.net.n={
+ tellRoll:{"q:talk":25,"_":10},
+ askTalk:{"q:talk":70,"_":40},
+ flirtTinh:{"Ham vui":6,"_":0},
+ danger:{"Xảo quyệt":10,"Ân cần":-15,"Khiêm nhường":-10,"_":0},
+ staffLoyMonth:{"Xảo quyệt":-2,"Kiêu ngạo":-2,"Ân cần":1,"Khiêm nhường":1,"_":0},
+ bribeCost:{"q:greed":15,"_":30},
+ misAdj:{"Ân cần":10,"Khiêm nhường":10,"Kiêu ngạo":-8,"Xảo quyệt":-8,"_":0},
+ misJealTin:{"Xảo quyệt":8,"Kiêu ngạo":8,"_":4},
+ betrayFind:{"Kín đáo":25,"_":10},
+ spyFind:{"Kín đáo":25,"_":8},
+ srvBad:{"Xảo quyệt":.12,"Kiêu ngạo":.12,"_":0},
+ srvGood:{"Ân cần":.2,"Khiêm nhường":.2,"_":0},
+ affairRumor:{"Kín đáo":3,"_":0},
+ agentW:{"q:sharp":3,"q:talk":3,"q:loyal":2,"_":1},
+ tutorWant:{"Tham vọng":3,"Kiêu ngạo":3,"Xảo quyệt":3,"Kín đáo":2,"_":1},
+ h54P:{"Tham vọng":.6,"Kiêu ngạo":.6,"Xảo quyệt":.6,"_":.4},
+ corrupt:{"Ham lợi":25,"Cương trực":-15,"_":0},
+ dadT:{"Ham lợi":20,"Cương trực":-15,"_":0},
+ giftO:{"Ham lợi":25,"Cương trực":-25,"_":0},
+ feudW:{"Cương trực":2,"Tham vọng":2,"Kín đáo":.5,"_":1},
+ afFade:{"Thật thà":1,"_":2},
+ praise:{"Kiêu ngạo":8,"Tham vọng":8,"_":4},
+ agentLeak:{"q:talk":15,"_":0},
+ motive:{"Xảo quyệt":10,"_":0},
+ empW:{"Tham vọng":2.5,"Kiêu ngạo":2.5,"_":1},
+ coverUp:{"Kín đáo":15,"_":0},
+ traceHide:{"Kín đáo":12,"_":0},
+ rumorP:{"Nhiều chuyện":5,"Xảo quyệt":5,"Nóng nảy":3,"Kín đáo":3,"_":1.5},
+ ducDef:{"q:loyal":60,"q:greed":30,"_":45},
+ kcBac:{"Ham vui":1.2,"_":.5},
+ kcReal:{"Xảo quyệt":75,"_":45},
+ kcPowder:{"Xảo quyệt":30,"_":0},
+ menGap:{"Ham vui":9,"_":12},
+ menHide:{"Kín đáo":10,"_":0},
+ thyEv:{"Xảo quyệt":6,"Tham vọng":6,"_":0},
+ tsCare:{"Kín đáo":70,"Kiêu ngạo":15,"_":40}};

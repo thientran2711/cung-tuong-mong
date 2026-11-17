@@ -75,7 +75,7 @@ function h54Grow(k,p){if(!h54Home(k)||k.age<5)return;const h=k.hp>=60?1:k.hp>=35
  const a0=pick(H54A)[0];A[a0]=Math.min(100,A[a0]+H54.nat*3*h);
  if(k.hP&&h54Live(p))A[k.hP]=Math.min(100,A[k.hP]+H54.tut*h);
  if(k.tv!=null){A.thi=Math.min(100,A.thi+k.tv/250);A.ky=Math.min(100,A.ky+k.tv/250)}}
-function h54NpcArts(k,v){if(!h54Live(v)||!h54Home(k)||k.age<5)return;const P=netRx(v,/Tham vọng|Kiêu ngạo|Xảo quyệt/)?.6:.4;
+function h54NpcArts(k,v){if(!h54Live(v)||!h54Home(k)||k.age<5)return;const P=nv(v,"h54P");
  if(!k.hP&&k.age>=6&&(v.bac||0)>=H54.fee*6&&roll(P*30)){const best=H54A.map(([a])=>a).sort((a,b)=>k.hA[b]-k.hA[a])[0];k.hP=R(3)?best:pick(H54A)[0]}
  const T=H54A.map(([a])=>a).filter(a=>h54CanTeach(v,k,a));if(T.length&&roll(P*60)){const a=pick(T);k.hA[a]=Math.min(100,k.hA[a]+h54TeachG(v,k,a));k.hM=cl(k.hM+2,0,100)}}
 (function(){const s0=stipend;stipend=function(p){let line=s0.apply(this,arguments);try{const ks=(p.kids||[]).filter(k=>h54Home(k)&&k.hP);let fee=ks.length*H54.fee;const quit=[];
