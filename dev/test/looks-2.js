@@ -57,5 +57,7 @@ const {chromium}=require('playwright');const URL=process.argv[2];const SCAN_ONLY
   const old=JSON.parse(JSON.stringify(rivals[0]));old.stain={k:'tra',w:wk(),at:0};old.lk={w:wk(),smu:{sev:2}};C.part1Save=lkStainOf(old)===null&&lkSmuOf(old)===null;
   C.emoGone=typeof looksEmoFace==='undefined';
   {const c=typeof currentWeather==='function'?currentWeather():null,w=lkWxNow();C.cagApi=typeof currentWeather==='function'&&(!c||!c.k||(w&&w.k===c.k));}
+  /* review r2: a dry kind's level is C-AG's own kl (gió lớn nặng → level 3; nắng gắt nhẹ → 1), BAL.looks.wxLv only when C-AG gives none */
+  {const cw=window.currentWeather;window.currentWeather=()=>({n:'gió lớn',k:'wind',f:0,lv:0,kl:3});const w=lkWxNow();window.currentWeather=()=>({n:'nắng gắt',k:'sun',f:2,lv:0,kl:1});const s=lkWxNow();window.currentWeather=cw;C.cagKl=!!w&&w.lv===3&&!!s&&s.lv===1;}
   kitFace=kf0;kitFigOf=kg0;return{scan,por,fig,checks:C}},SCAN_ONLY);
  console.log(JSON.stringify(Object.assign(out,{errs})));await b.close()})().catch(e=>{console.error(e);process.exit(1)});

@@ -117,5 +117,15 @@ async function weekBoth(A,B,w){const n=await A.p.evaluate(()=>typeof B4N==='numb
    try{for(const k of ["tat","rash","huydung"]){f.slap=null;f.rash=null;f.scar=null;try{out[k]=String(runAct(S,f,k)||"").slice(0,80)}catch(e){out[k]="ERR "+e.message}}}finally{roll=r0;caught=c0}render();return out});console.log('B family acts',JSON.stringify(fam));
  let fr={};for(let i=0;i<40;i++){fr=await ev(A,()=>({slap:!!S.slap,rash:!!S.rash,scar:!!S.scar}));if(fr.slap&&fr.rash&&fr.scar)break;await sleep(300)}
  ok(fr.slap&&fr.rash&&fr.scar,'slap / rash / scar acts on the friend reach her live',fr);
+ /* review looks-2 r2: the other direction — A's seat throws water and fans ink on B's entry (real runAct), B gets them live */
+ const fa=await ev(A,()=>{const f=rivals.find(v=>v.coop);const r0=roll,c0=caught;roll=()=>true;caught=()=>"";const out={};try{for(const k of ["nuoc","ink"]){try{out[k]=String(runAct(S,f,k)||"").slice(0,80)}catch(e){out[k]="ERR "+e.message}}}finally{roll=r0;caught=c0}render();return out});console.log('A acts',JSON.stringify(fa));
+ let fb={};for(let i=0;i<40;i++){fb=await ev(B,()=>({uot:!!lkItem(S,'uot'),muc:!!lkItem(S,'muc')}));if(fb.uot&&fb.muc)break;await sleep(300)}
+ ok(fb.uot&&fb.muc,'A → B: water + ink acts on the friend reach her live',fb);
+ await sameM('after A → B acts (both seats agree)');
+ /* review looks-2 r2: lasting marks survive the week write-back + liveStats (one whole tuần for both seats) */
+ const wk0=await ev(A,()=>__co().week),ru=await ev(A,()=>S.rash?S.rash.until:0);for(let i=0;i<6;i++){if(await ev(A,()=>__co().week)!==wk0)break;if(!await buoiBoth(A,B))break}
+ await sleep(1500);let sv={};for(let i=0;i<40;i++){sv=await ev(A,([w,ru])=>({wk:__co().week,turned:__co().week!==w,rash:!!S.rash||ru<=wk(),scar:!!S.scar}),[wk0,ru]);if(sv.turned&&sv.rash&&sv.scar)break;await clear(A);await clear(B);await sleep(300)}
+ ok(sv.turned&&sv.rash&&sv.scar,'after the week turns: rash (unless its own time ran out) + scar the friend put on her stay (week write-back / liveStats do not undo them)',sv);
+ const sv2=await ev(B,ru=>{const f=rivals.find(v=>v.coop);return{rash:!!(f&&f.rash)||!(ru>wk()),scar:!!(f&&f.scar)}},ru);ok(sv2.rash&&sv2.scar,'after the week turns: B still sees them on A',sv2);
  for(const o of [A,B]){ok(!o.errs.length,o.name+' no page errors',o.errs.slice(0,4))}
  const bad=res.filter(r=>!r[0]);console.log(`\n${res.length-bad.length}/${res.length} passed`);await b.close();process.exit(bad.length?1:0)})().catch(e=>{console.error(e);process.exit(1)});

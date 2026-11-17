@@ -27,7 +27,7 @@ Object.assign(BAL,{looks:{
   sun:[["moho",[0,0,60,80],1]],mist:[["tocam",[0,40,40,40],1]],
   snow:[["uot",[0,40,40,40],1],["lanh",[0,60,60,60],1],["vuong",[0,30,30,30],1]],snowh:[["uot",[0,80,80,80],2],["lanh",[0,80,80,80],2],["vuong",[0,30,30,30],1]],
   frost:[["lanh",[0,50,50,50],1]],petal:[["vuong",[0,40,40,40],1]],leaf:[["vuong",[0,40,40,40],1]],snowp:[["vuong",[0,40,40,40],1]]},
- /* the level of a kind when C-AG gives none (lv 0); windUp = chance a windy spell is gió lớn (vừa) */
+ /* fallback level of a kind only when C-AG gives neither lv nor kl (old saves without S.wxDay); windUp = chance a windy spell is gió lớn (vừa) */
  wxLv:{rain:1,storm:3,wind:1,sun:2,mist:1,snow:1,snowh:2,frost:1,petal:1,leaf:1,snowp:1},windUp:30,
  /* cover: kiệu almost nothing; dù / lọng / áo tơi = × du[kind] (1 = useless: wind, mist; storm nearly useless); a servant holding it = at most help */
  cover:{kieu:.05,help:.6,du:{rain:.4,storm:.85,wind:1,sun:.5,mist:1,snow:.5,snowh:.6,frost:1,petal:1,leaf:1,snowp:1}},
@@ -83,7 +83,8 @@ function lkInkOf(p){return lkItem(p,"muc")}
 function lkStainOf(p){const L=lkItems(p,LK_CLOTH);return L.length?Object.assign({k:L[0][0]},L[0][1]):null}
 /* ---------- weather of the moment (C-AG jwxk currentWeather when present) ---------- */
 function lkWxNow(){try{let c=typeof currentWeather==="function"?currentWeather():null;if(!c&&S&&S.wx)c=S.wx;if(!c||!c.k)return null;const k=c.k;
- let lv=c.lv|0;if(!lv){lv=lkB().wxLv[k]||0;if(k==="wind"&&roll(lkB().windUp))lv=2}if(k==="sun"&&c.f!==2)lv=0;return{k,lv:cl(lv,0,3)}}catch(e){return null}}
+ let lv=c.lv|0;if(!lv&&c.kl)lv=c.kl|0;   /* dry kinds (wind, heat, fog, frost…): C-AG's own level of that kind (weather-khac-2 kl), the same one she is shown */
+ if(!lv){lv=lkB().wxLv[k]||0;if(k==="wind"&&roll(lkB().windUp))lv=2}if(k==="sun"&&c.f!==2)lv=0;return{k,lv:cl(lv,0,3)}}catch(e){return null}}
 function lkCover(p){try{if(typeof wxKieuOk==="function"&&wxKieuOk(p))return"kieu";if(typeof wxHasGear==="function"&&wxHasGear(p,"cold"))return"du";if(typeof wxHelper==="function"&&wxHelper(p))return"help"}catch(e){}return""}
 function lkCoverX(p,k){const C=lkB().cover,c=lkCover(p),d=C.du[k]==null?1:C.du[k];return c==="kieu"?C.kieu:c==="du"?d:c==="help"?Math.max(C.help,d):1}
 /* one person outdoors for a while: roll the weather's looks + the B effects; returns the line for her */
