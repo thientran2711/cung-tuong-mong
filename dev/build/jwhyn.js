@@ -72,6 +72,7 @@ function whyText(e,d){const p=e.who;let kn=[],tk=false;try{kn=p==="th"||p==="emp
  for(const f of e.F){if(f.k==="net"){if(kn.includes(f.t)){const s=`tính ${f.t}${f.x?` (${f.x})`:""}`;if(!parts.includes(s))parts.push(s)}else if(!U.includes("tính nết"))U.push("tính nết")}
   else if(f.k==="trong"){if(tk){const s=`trọng ${f.v}: ${f.s>0?"hợp ý":"trái ý"}`;if(!parts.includes(s))parts.push(s)}else{const s=`điều ${whyPron(p)} trọng`;if(!U.includes(s))U.push(s)}}
   else if(f.t&&!parts.includes(f.t))parts.push(f.t)}
+ {const Ns=parts.filter(x=>/^tính /.test(x));if(Ns.length>1){const i=parts.indexOf(Ns[0]);for(const x of Ns.slice(1))parts.splice(parts.indexOf(x),1);parts[i]="tính "+Ns.map(x=>x.slice(5)).join(", ")}}
  if(U.length){if(parts.some(x=>/^tính /.test(x)))U[U.indexOf("tính nết")]="nết khác chưa rõ";parts.push("theo "+U.filter(Boolean).join(" và "))}
  if(!parts.length)return"";const n=d!=null?d:e.d;if(!n)return"";
  return `${whyWho(p)}: ${parts.join(", ")} → ${WHY_STAT[e.stat]||e.stat} ${WHY_OWN[e.stat]?(n>0?"thêm ":"bớt "):(n>0?"+":"−")}${Math.abs(n)}`}
