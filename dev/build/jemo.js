@@ -180,13 +180,13 @@ window.kitEmotion=function(p){try{if(!S)return null;const q=emoRes(p);if(!q)retu
 function emoArtSet(p){try{if(p&&p.__kp)p=p.__kp;const q=emoRes(p)||p;if(!q||q===S)return"";const r=personRoleRank(p.kind&&!p.name?p:q);const male=r.sex==="m"||(r.kid&&q.sex==="m");if(!male)return"";
  if(r.role==="emp"||r.role==="heir"||r.role==="prince"||r.role==="eunuch"||r.role==="guard")return"m-";
  return r.role==="official"||r.role==="physician"||(q.age||0)>=45?"mo-":"m-"}catch(e){return""}}
-/* ONE source of the seal's picture key (owner 17/11 ~18:40Z: no two-source seal): sealKeyFor(p,m) -> the key drawn. Today = the mood state; the ruling (mood-bar band + the feeling that pushed it) is a one-line change HERE; a new event's feeling is shown by kitEmoSealPop(p,key), never by a second source. */
-function sealKeyFor(p,m){return m.k}
+/* ONE source of the seal's picture key (owner 17/11 ~18:40Z: no two-source seal): emoSealKey(p,m) = the key drawn. The Sims model (AG-MOODKNOW, window.sealKeyFor(pid) = strongest summed feeling among live causes) decides it for a person she SEES; an unknown mood stays "an". Never a second source: a new event shows through the causes list, not a pop. */
+function emoSealKey(p,m){try{if(m&&m.known&&typeof window.sealKeyFor==="function"){const k=window.sealKeyFor(p);if(k&&window.KIT_EMOSEAL&&window.KIT_EMOSEAL.keys[k])return k}}catch(e){}return m.k}
+window.emoSealKey=emoSealKey;
 /* KIT FALLBACK (main s35): khoc shows the buon picture and hon the gian picture (all three sets) until img/kit/emo-<set>khoc|hon.webp exist on the CDN; jemoseal probes the real file once and swaps automatically */
 function emoSealSrc(set,k){const K=window.KIT_EMOSEAL,fb=K&&K.fb&&K.fb[k];const real=`img/kit/emo-${set}${k}.webp`;return fb&&!(K.have&&K.have[real])?`img/kit/emo-${set}${fb}.webp`:real}
 window.emoSealSrc=emoSealSrc;
-window.sealKeyFor=sealKeyFor;
-function emoBadge(p){const m=window.kitEmotion(p);if(!m)return"";const sk=sealKeyFor(p,m);const t=m.known?`Tâm trạng: ${m.name}${m.why&&m.k!=="binh"?" ("+m.why+")":""}`:"Tâm trạng: chưa rõ";
+function emoBadge(p){let m=window.kitEmotion(p);if(!m)return"";const sk=emoSealKey(p,m);if(m.known&&window.KIT_EMOLABEL&&window.KIT_EMOLABEL[sk])m=Object.assign({},m,{name:window.KIT_EMOLABEL[sk]});/* display name from the ONE kit label table (jemocause) */const t=m.known?`Tâm trạng: ${m.name}${m.why&&m.k!=="binh"?" ("+m.why+")":""}`:"Tâm trạng: chưa rõ";
  const E=x=>String(x==null?"":x).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
  /* owner 11/15: no visible label; TAP the seal = the kit popover (kpPop, j79) with the mood word + one-line cause; any other tap closes it */
  return `<img class="kemo kemo-${sk}" data-kemop="${E(emoKey(emoRes(p)))}" src="${emoSealSrc(emoArtSet(p),sk)}" alt="${E(t)}" data-kemo="${E(m.known?m.name:"Chưa rõ")}" data-kemow="${E(m.known&&m.k!=="binh"?m.why:"")}" data-kemoc="${m.causeKnown===false?"0":"1"}" role="button" tabindex="0" onerror="this.remove()">`}

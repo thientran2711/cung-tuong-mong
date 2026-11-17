@@ -21,7 +21,7 @@ function kesFxOff(el){const f=el.__fx;if(f){f.remove();el.__fx=null}}
 function kesFxSync(el){const f=el.__fx;if(!f||!el.isConnected)return;const w=el.offsetWidth,h=el.offsetHeight,W=w*KIT_EMOSEAL.fxScale,H=h*KIT_EMOSEAL.fxScale;
  f.style.cssText=`left:${(el.offsetLeft+w/2-W/2).toFixed(1)}px;top:${(el.offsetTop+h/2-H/2).toFixed(1)}px;width:${W.toFixed(1)}px;height:${H.toFixed(1)}px`}
 function kesReal(el){/* khoc / hon: the real still replaces the fallback picture once it exists */const k=kesKey(el),fb=KIT_EMOSEAL.fb[k];if(!fb||el.__real)return;el.__real=1;const set=kesSet(el,k),real=`img/kit/emo-${set}${k}.webp`;
- kesProbe(real,ok=>{if(!ok)return;KIT_EMOSEAL.have[real]=true;if(el.isConnected&&!el.__pop){el.dataset.kemos=real;if(!/emo-anim/.test(el.getAttribute("src")||""))el.setAttribute("src",real)}})}
+ kesProbe(real,ok=>{if(!ok)return;KIT_EMOSEAL.have[real]=true;if(el.isConnected){el.dataset.kemos=real;if(!/emo-anim/.test(el.getAttribute("src")||""))el.setAttribute("src",real)}})}
 function kesLive(el,on){if(!el.isConnected)return;kesReal(el);
  if(!el.dataset.kemos){el.dataset.kemos=el.getAttribute("src")||""}
  el.classList.toggle("kemo-live",on&&kesMotionOK());const k=kesKey(el),spec=KIT_EMOSEAL.keys[k];if(spec)el.classList.add("kemo-m-"+spec.m);
@@ -42,11 +42,7 @@ addEventListener("resize",()=>document.querySelectorAll("img.kemo.kemo-live").fo
 kesScan();
 /* r2 reviewer fix: Cảnh động / Gọn switched in Settings applies to the seals already on screen at once (saveOpt does not re-render) */
 (function(){if(typeof saveOpt!=="function")return;const o=saveOpt;saveOpt=function(){const r=o.apply(this,arguments);try{document.querySelectorAll("img.kemo").forEach(el=>{if(!el.__kes)return;const b=el.getBoundingClientRect();kesLive(el,b.width>2&&b.bottom>0&&b.top<innerHeight&&b.right>0&&b.left<innerWidth)})}catch(e){}return r}})();
-/* kitEmoSealPop(p,key,ms): a NEW event's feeling plays over the person's seal(s) for ms (default 2500) and the seal goes back to its bar state; same asset set, same motion table. Never a second persistent source. */
-function kesPop(p,key,ms){try{if(!KIT_EMOSEAL.keys[key])return;const id=emoKey(emoRes(p));document.querySelectorAll('img.kemo[data-kemop="'+id+'"]').forEach(el=>{if(el.__pop)return;const set=kesSet(el),still=el.dataset.kemos||el.getAttribute("src"),k0=kesKey(el),sp=KIT_EMOSEAL.keys[key];
-  const ns=emoSealSrc(set,key);el.__pop=1;el.classList.remove("kemo-"+k0);[...el.classList].filter(c=>/^kemo-m-/.test(c)).forEach(c=>el.classList.remove(c));el.classList.add("kemo-"+key,"kemo-m-"+sp.m,"kemo-pop");el.dataset.kemos=ns;el.setAttribute("src",ns);
-  setTimeout(()=>{el.__pop=0;if(!el.isConnected)return;el.classList.remove("kemo-"+key,"kemo-pop");[...el.classList].filter(c=>/^kemo-m-/.test(c)).forEach(c=>el.classList.remove(c));el.classList.add("kemo-"+k0);el.dataset.kemos=still;el.setAttribute("src",still);kesLive(el,el.classList.contains("kemo-live"))},ms||2500)})}catch(e){}}
-window.kitEmoSeal={scan:kesScan,live:kesLive,probe:kesProbe,pop:kesPop};
+window.kitEmoSeal={scan:kesScan,live:kesLive,probe:kesProbe};/* no pop: owner 17/11 ~18:10Z (Sims model), the seal has ONE source (jemo emoSealKey) */
 (function(){const st=document.createElement("style");st.id="kemoseal-css";st.textContent=`
 img.kemo{transform-origin:50% 60%;will-change:auto}
 img.kemofx{position:absolute!important;pointer-events:none;z-index:8;object-fit:contain;max-width:none;max-height:none;margin:0;border-radius:0}
@@ -62,7 +58,6 @@ img.kemo.kemo-live.kemo-m-wince{animation:kemoWince 2.6s ease-in-out infinite}
 img.kemo.kemo-live.kemo-m-glint{animation:kemoGlint 3.4s ease-in-out infinite}
 img.kemofx{animation:kemoFx 2.4s ease-in-out infinite}
 }
-img.kemo.kemo-pop{filter:drop-shadow(0 0 6px #ffe9a0) drop-shadow(0 1px 1.5px #000a)}
 @keyframes kemoSway{0%,100%{transform:rotate(-3deg);filter:drop-shadow(0 1px 1.5px #000a)}50%{transform:rotate(3deg);filter:drop-shadow(0 0 4px #ffe9a0) drop-shadow(0 1px 1.5px #000a)}}
 @keyframes kemoBreathe{0%,100%{transform:scale(1)}50%{transform:scale(1.045)}}
 @keyframes kemoDroop{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(7%) rotate(-3deg)}}
