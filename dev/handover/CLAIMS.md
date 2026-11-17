@@ -663,7 +663,7 @@
 | story-frame review r1 (opus BIG) of 7be4cdc6 | review/story-frame-r1 | D | session_01964izELGvtEztUpxp4u3FC | PASS 7be4cdc6 (archived) → FOR MAIN batch | 17/11 06:45Z |
 | one-core-dup r2 re-review FAIL f97a5841: ~34 typed BAL.eff amounts left (10 same-rule texts, AOUT/evidence previews j78/jtsb/jlost/j92, relAdd-derived oán); guard one-core-text misses them; gates/merge/wording PASS; report reports/review-one-core-dup-r2.md | review/one-core-dup-r2 | B | session_01N1tNP2Wcx1hby3C2UmyxPs | FAIL | 17/11 07:45Z |
 | REVIEW trait-pool-r1 (opus BIG) | review/trait-pool-r1 | C ROOT-2 | session_011xDdVNywSx622xztN465ec | DONE PASS 9fdc1199 LIVE on main 07:45Z | 17/11 06:54Z |
-| REVIEW npc-agent-ag2-r1 (opus BIG) | review/npc-agent-ag2-r1 | C ROOT-2 | session_011xDdVPQSbLtuVm6zoyJHBN | RUNNING | 17/11 06:56Z |
+| REVIEW npc-agent-ag2-r1 (opus BIG) | review/npc-agent-ag2-r1 | C ROOT-2 | session_011xDdVPQSbLtuVm6zoyJHBN | DONE PASS r2 05ebe3da LIVE on main 08:10Z | 17/11 06:56Z |
 | one-core-dup2 r1 FAIL (1 item: ~15 texts still type moved cut values; work branch review/one-core-dup2-r1 8e75df35 = dup2 + r2 merged) → fix r2 (same sonnet fix worker; extend one-core-text.js to dup2 keys) | review/one-core-dup2-r2 | B | session_01N1tNP2SKjMzEdsyLuEZtJa | RUNNING | 17/11 06:58Z |
 | one-core-dup r2 re-review FAIL f97a5841 (~34 typed BAL.eff amounts left + one-core-text guard gaps; report reports/review-one-core-dup-r2.md) → folded into the SAME fix branch review/one-core-dup2-r2 (ships as ONE branch replacing dup-r2 + dup2) | review/one-core-dup2-r2 | B | session_01N1tNP2SKjMzEdsyLuEZtJa | RUNNING | 17/11 07:01Z |
 | night-final fix F1 (opus): jnf solo-only while COOPW.on (co-op keeps live path until coop-thin E) | review/night-final-fix | D | session_01964izGWAYU1GWVeqgVeUUc | DONE SẴN SÀNG KIỂM f7c54202 (archived) | 17/11 07:08Z |
@@ -681,3 +681,4 @@
 | KỲ NGUYỆT SỰ length rolled 5/6/7 per (woman, month) (opus; MAIN s30 07:36Z, OD 07:35Z) | review/cycle-roll | D | session_01964izEeMN4FkyE99xVCtWw | RUNNING | 17/11 07:41Z |
 | one-core-arcs r1 FAIL c682afe6 (66 one-arg go amounts + guard amt regex) → fix r2 by the arcs worker (opus) on review/one-core-arcs | review/one-core-arcs | B | session_01N1tNP5MRPzxmbFfWjw6LuT | RUNNING | 17/11 07:45Z |
 | 10-NIGHT LEDGER (opus; V3-B) on top of night-final-r2 52d5092d | review/night-ledger | D | session_01964izDibL8KfyVNtRh4GfU | RUNNING | 17/11 08:08Z |
+| npc-agent AG3 maids (opus; AG train §5 npc-agent.md) | review/npc-agent-ag3 | C ROOT-3 | session_011xDdVNfbt3vPg31Vfr7ihc | RUNNING | 17/11 08:10Z |
