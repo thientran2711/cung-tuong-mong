@@ -21,7 +21,7 @@
       and letting it be (BAL.ag.harm.steal.no) — the 1 − e^(−k·want) try roll is gone while the loop is on.
    4. AG-HAP. agHap() replaces adHapRoll: the '!' of a place this buổi = a WITNESSABLE deed some agent planned there for a khắc still to come (a quarrel =
       provoke / humil whose target is a consort, gossip, a favour aimed at her (q72, the doer is the requester), a public scheme or show in a public place,
-      the Emperor's garden walk from HIS record) + the fixed / world entries (AD_HAP_FIX: festival, the cold palace at night, the world-events window).
+      the Emperor's garden walk from HIS record) + the fixed entries (AD_HAP_FIX: festival, the cold palace at night). No world-event '!' (owner OD 17/11 14:30Z): world events act through worldPlanW, not the map mark.
       No floor, no cap, no dice: a quiet buổi has none; a happening is still there next buổi only if the doer's plan keeps her there.
    Numbers: BAL.ag.harm (jbal2). No new UI: the '!' mark and the witness card are the existing kit (jact kitHapMark, jagent agScene / agReact).
    ============================================================================================================================================ */
@@ -50,7 +50,7 @@ function haPlace(k,v,t,kh,prep){let w=prep?(HA_PREP[k]||"own"):(HA_AT[k]||HA_AT.
 function haPlantIx(v){return (v.inv||[]).findIndex(e=>e&&!e.h&&(e.t||(IT[e.k]&&itm(e.k).il)))}
 /* her guess of the act's chance: its own odds (ACT.o, null = no roll) × not being caught (the target's watch oSee) */
 function haOdds(v,t,k){const A=ACT[k];let o=null;try{o=A.o?A.o(v,t):null}catch(e){o=null}if(o==null)o=100;let pc=0;
- if(HA_CAUGHT[k]!=null){try{pc=cl(oSee(t,!!HA_CAUGHT[k])-4*(facN(v)-1),5,95)/100}catch(e){pc=0}}return{o:o*(1-pc),pc}}
+ if(HA_CAUGHT[k]!=null){try{pc=caughtOdds(v,t,!!HA_CAUGHT[k])/100}catch(e){pc=0}}return{o:o*(1-pc),pc}}
 function haCost(k){const c=ACT[k]&&ACT[k].c;return c&&typeof c==="object"?c:{}}
 function haFail(v,k){const f=(v.fails||{})[k]||0;if(!f)return 1;return witOf(v)<35?1+haB().fail.fool*f:Math.pow(haB().fail.wise,f)}
 /* ---------- the options (agent provider "consort"/"harm") ---------- */

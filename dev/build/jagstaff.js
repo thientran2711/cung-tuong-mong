@@ -23,7 +23,7 @@ function asGrp(s){return s&&s.role==="maid"?"maid":"srv"}
 function asC(s,k){const G=ASN[asGrp(s)];G[k]=(G[k]||0)+1;ASN.n++}
 /* ---------- 2 her data (lazy; old saves load) ---------- */
 function asSt(s){if(s.duc==null){const T=asB().st;const ri=a=>a[0]+R(a[1]-a[0]+1);try{amSt(s)}catch(e){s.sac=s.sac||30;s.tai=s.tai||10}
-  s.duc=ri(T.duc);s.tamco=ri(T.tamco);s.danh=ri(T.danh);s.suc=ri(T.suc);s.bac=ri(T.bac)}if(s.mp==null)s.mp=0;if(s.loyal==null)s.loyal=45;return s}
+  s.duc=ri(T.duc);s.tamco=ri(T.tamco);s.danh=ri(T.danh);s.suc=ri(T.suc);s.bac=ri(T.bac)}if(s.mp==null)s.mp=0;if(s.loyal==null)s.loyal=BAL.srvLoyal.base;return s}
 function asAp(s,fx){for(const k in fx||{}){const v=fx[k];if(!v)continue;if(k==="tin")s.loyal=cl((s.loyal||0)+v,0,100);else if(k==="bac")s.bac=Math.max(0,(s.bac||0)+v);
   else if(k==="sung")s.sung=cl((s.sung||0)+v,0,100);else s[k]=cl((s[k]||0)+v,0,100)}}
 function asTxt(o,s,t){return t}
@@ -32,7 +32,7 @@ function asGap(g,x){return g>0?cl((g-(x||0))/g,0,1):0}
 function asFriends(s){let n=0;for(const k in s.af||{})if(s.af[k]>=SRVA.ask.af&&servById(+k))n++;return n}
 function asNeeds(s){asSt(s);const G=asB().goal,W=asB().nw,m=ownerOf(s);const N={};
  N.tin=asGap(G.tin,s.loyal)*W.tin;
- N.mp=m&&srk(s)<srkMax(m,s)?asGap((srk(s)+1)*5,s.mp)*W.mp:0;
+ N.mp=m&&srk(s)<srkMax(m,s)?asGap(srvMpNeed(srk(s)),s.mp)*W.mp:0;
  N.suc=asGap(G.suc,s.suc)*W.suc;N.bac=asGap(G.bac,s.bac)*W.bac*(s.spyFor?asB().greed:1);
  N.self=(asGap(G.sac,s.sac)+asGap(G.tai,s.tai)+asGap(G.duc,s.duc))/3*W.self;
  N.ally=asGap(G.friend,asFriends(s))*W.ally;
@@ -74,7 +74,7 @@ function asOpts(s,N){asSt(s);const m=ownerOf(s);if(!m)return[];N=N||asNeeds(s);c
  /* Đồng liêu (srvStaffAct) */
  const P=asPeers(s);if(P.f)X(asOpt(s,"chat",SRVA.chat.o(s),{t:P.f,w:{af:SRVA.chat.af},l:{af:SRVA.chat.afL}}));
  if(P.f&&s.bac>=-SRVA.gift.c.bac)X(asOpt(s,"gift",100,{t:P.f,w:{af:SRVA.gift.af}}));
- if(P.fr)X(asOpt(s,"ask",100,{t:P.fr,w:{af:2}}));
+ if(P.fr)X(asOpt(s,"ask",100,{t:P.fr,w:{af:BAL.ag.staff.askAf}}));
  if(P.foe)X(asOpt(s,"frame",SRVA.frame.o(s),{t:P.foe,w:Object.assign({spite:-SRVA.frame.af},SRVA.frame.w)}));
  /* Thái y viện */
  if(s.bac>=-SRVA.tonic.c.bac&&s.suc<SRVA.med.at+20)X(asOpt(s,"tonic",100,{at:"tyv"}));X(asOpt(s,"learn",SRVA.learn.o(s),{at:"tyv"}));
@@ -84,7 +84,7 @@ function asOpts(s,N){asSt(s);const m=ownerOf(s);if(!m)return[];N=N||asNeeds(s);c
 function asBig(m){const L=liveRivals(true).filter(v=>v!==m&&rkOf(v)>rkOf(m));return L.length?L[R(L.length)]:null}
 /* her colleague to befriend (the warmest not yet a close friend, else one she met), a friend to ask, a same-palace colleague she dislikes */
 function asPeers(s){const all=allServ().filter(x=>x!==s);if(!all.length)return{};s.af=s.af||{};let f=null,fr=null,foe=null,fa=-1e9,fo=0;const m=ownerOf(s);
- for(const x of all){const a=s.af[x.sid]||0;if(a>=SRVA.ask.af&&ownerOf(x)!==m&&!fr)fr=x;if(a<SRVA.ask.af+40&&a>fa&&a>=0){fa=a;f=x}if(a<fo&&ownerOf(x)===m){fo=a;foe=x}}
+ for(const x of all){const a=s.af[x.sid]||0;if(a>=SRVA.ask.af&&ownerOf(x)!==m&&!fr)fr=x;if(a<SRVA.ask.af+BAL.ag.staff.peerGap&&a>fa&&a>=0){fa=a;f=x}if(a<fo&&ownerOf(x)===m){fo=a;foe=x}}
  if(!f)f=all[R(all.length)];return{f,fr,foe}}
 function asMenFor(s){try{return srvMen().filter(x=>x.rw!=="vương gia")}catch(e){return[]}}
 function asLove(s){const L=[];s.mt=s.mt||{};const B=asB();
@@ -98,7 +98,7 @@ function asLove(s){const L=[];s.mt=s.mt||{};const B=asB();
  if(!s.lover){const x=allServ().find(y=>y.role==="maid"&&!y.lover&&ownerOf(y)!==ownerOf(s)&&(s.af||{})[y.sid]>=B.dt&&((y.af||{})[s.sid]||0)>=B.dt);
   if(x)L.push(asOpt(s,"vow",SRVA.vow.o(s,null,{tinh:s.af[x.sid]}),{t:x,w:{tinh:B.vowTinh}}))}
  return L}
-function asRisk(s){const k=asHome(ownerOf(s));const base={vuon:28,thu:34,tyv:20,tn:40,home:18}[k]||26;return cl(Math.round(base+(S.mat||0)-asFriends(s)*4-(s.tamco||0)/10),6,92)}
+function asRisk(s){return srvRiskOf(asHome(ownerOf(s)),S.mat||0,asFriends(s),s.tamco)}/* one table with the player maid (j42 srvRiskOf, BAL.srvRisk) */
 /* ---------- the shared execution (the player's card: cost, roll at its odds, gain or loss, công lao, then what the act does) ---------- */
 function asSee(m,t){try{return m===S||t===S||(S.mat||0)>=BAL.mline.seeMat}catch(e){return false}}
 function asRun(s,o){const m=ownerOf(s);if(!m)return"";const A=SRVA[o.sk];asC(s,o.sk);asAp(s,o.c);const ok=o.p>=100||roll(o.p);
@@ -107,7 +107,7 @@ function asRun(s,o){const m=ownerOf(s);if(!m)return"";const A=SRVA[o.sk];asC(s,o
   return r}
 function asOut(s,why){const o=ownerOf(s);if(o&&o.staff){const i=o.staff.indexOf(s);if(i>=0)o.staff.splice(i,1)}s.out=why||1;ASN.out=(ASN.out||0)+1}
 const AS_DO={
- nvp(s){if(roll(SRVA.nvp.bully)){asAp(s,SRVA.nvp.bullyC);return""}const L=allServ().filter(x=>x!==s&&ownerOf(x)!==ownerOf(s));if(L.length){const x=L[R(L.length)];s.af=s.af||{};s.af[x.sid]=cl((s.af[x.sid]||0)+5,-100,100)}return""},
+ nvp(s){if(roll(SRVA.nvp.bully)){asAp(s,SRVA.nvp.bullyC);return""}const L=allServ().filter(x=>x!==s&&ownerOf(x)!==ownerOf(s));if(L.length){const x=L[R(L.length)];s.af=s.af||{};s.af[x.sid]=cl((s.af[x.sid]||0)+BAL.ag.staff.nvpAf,-100,100)}return""},
  spy(s,m,o,ok){const v=o.t;if(ok){/*evok: capped (the player's own "Lén báo tin")*/evA(v,m,SRVA.spy.ev);return v===S?`Tai mắt ${s.name} trong cung ${m.name} lén báo tin: chứng cứ +${SRVA.spy.ev}. `:""}
   if(roll(SRVA.spy.out)){asOut(s,"tgk");return asSee(m,v)?`${m===S?"Ngươi":m.name} bắt gặp ${s.name} lén lút với người của ${NM(v)}, đày xuống Tân Giả khố. `:""}return""},
  tellMis(s,m){const iv=(s.intel||[]).map(RV).filter(v=>v&&v.alive&&v!==m)[0];s.intel=(s.intel||[]).slice(1);if(iv){/*evok: servant intel, capped*/evA(m,iv,SRVA.tellMis.ev);if(m===S)return `${s.name} bẩm tin dò được về ${iv.name}: chứng cứ +${SRVA.tellMis.ev}. `}return""},
@@ -161,8 +161,8 @@ function asMonth(){if(!asOn())return"";let ev="";const B=asB();
    if(sch&&roll(B.secSee))s.sec=(s.sec||0)+1;/* she sees her master's schemes at home (the player maid's "Biết chuyện của chủ") */
    if(s.betray&&roll(nv(p,"betrayFind"))){s.betray=null;if(roll(SRVA.betray.kill)){asOut(s,"dead");if(asSee(p))ev+=`${p===S?"Ngươi":p.name} biết ${s.name} mật báo chuyện trong cung, sai đánh chết. `}else{asOut(s,"tgk");if(asSee(p))ev+=`${p===S?"Ngươi":p.name} biết ${s.name} mật báo, đày xuống Tân Giả khố. `}continue}
    /* Ban gả (j42 cnvGrant: the same trigger as the player maid's), then her own choice: Tạ ơn, xuất giá / Xin ở lại */
-   if(s.role==="maid"&&(s.age||20)>=18&&(s.loyal>=55)&&srk(s)>=1&&roll(2+(s.vow?3:0))){const N=asNeeds(s);const c=mindPick([["stay",BAL.ag.routine/BAL.ag.unit],["wed",(N.love+(s.vow?B.vowW:0))*BAL.ag.needW]],s);asC(s,c==="wed"?"grantWed":"grantStay");
-    if(c==="wed"){s.wed=1;asOut(s,"wed");const man=s.vow&&manById(s.vow);if(asSee(p))ev+=`${s.name}, cung nữ của ${NM(p)}, được chủ ban gả${man?" cho "+man.name:""}. `;continue}else s.loyal=cl(s.loyal-5,0,100)}
+   if(s.role==="maid"&&(s.age||20)>=18&&(s.loyal>=BAL.srvGrant.tin)&&srk(s)>=1&&roll(BAL.srvGrant.base+(s.vow?BAL.srvGrant.bond:0))){const N=asNeeds(s);const c=mindPick([["stay",BAL.ag.routine/BAL.ag.unit],["wed",(N.love+(s.vow?B.vowW:0))*BAL.ag.needW]],s);asC(s,c==="wed"?"grantWed":"grantStay");
+    if(c==="wed"){s.wed=1;asOut(s,"wed");const man=s.vow&&manById(s.vow);if(asSee(p))ev+=`${s.name}, cung nữ của ${NM(p)}, được chủ ban gả${man?" cho "+man.name:""}. `;continue}else s.loyal=cl(s.loyal-BAL.srvGrant.stayLoy,0,100)}
    /* Tuổi (j42 cnvAge, BAL.srvAge): Xuất cung / Ở lại làm ma ma (chưởng sự) / Xin chủ giữ lại */
    if(s.role==="maid"&&(s.age||0)>=BAL.srvAge.ask&&!s.ageDone){s.ageDone=1;const N=asNeeds(s);const O=[["out",(N.love+(s.vow?B.vowW:0)+B.outW)*BAL.ag.needW],["keep",s.loyal/100*BAL.ag.routine/BAL.ag.unit]];if(srk(s)>=3)O.push(["mama",(N.mp+N.bac+B.outW)*BAL.ag.needW]);
     const c=mindPick(O,s);asC(s,"age_"+c);if(c==="out"){asOut(s,"age");continue}if(c==="mama")s.mama=1}

@@ -49,7 +49,7 @@ function pgOdds(a,t,e){const G=pgGuard(t);const tr=Math.round((rel(t,a)||0)/4),t
  const raw=BAL.pg.base+tc+tr+gr+G.reduce((s,x)=>s+x[1],0);const o=cl(Math.round(odA(a,raw)),3,92);
  const F=[[`Tâm cơ ${pgNm(a)} ${a.tamco|0}`,tc],[`${pgNm(t,1)} ${tr>=0?"tin":"ngờ"} ${pgNm(a)}`,tr],
   [e&&e.wk?`Món ${WTIER[e.wk.ti|0]} che vị`:`${e&&IT[e.k]?itm(e.k).n:"Món"} che vị`,gr]].concat(G);if((a.suc||0)<30)F.push([`Sức ${pgNm(a)} dưới 30`,-15]);
- const cp=cl(oSee(t,true)-4*(facN(a)-1),5,95);return{o,F,cp}}
+ const cp=caughtOdds(a,t,true);return{o,F,cp}}
 function pgEffect(a,t,pk){const nm=t===S?"Ngươi":`${rkName(t)} ${t.name}`;
  if(pk==="hacdinh"){if(t===S){die("Trúng độc, không qua khỏi");return `<span class="r">Ngươi trúng độc.</span> `}ap(t,{suc:-120});try{dieIf(t,"Trúng độc, không qua khỏi")}catch(e){}return `<span class="r">${nm} trúng độc nặng.</span> `}
  if(pk==="docngam"){ap(t,{suc:-25});t.sick=Math.max(t.sick||0,3);return `${nm} ăn xong thì người mệt dần, thái y bảo trúng hàn khí (Sức -25, ốm ba tháng). `}
