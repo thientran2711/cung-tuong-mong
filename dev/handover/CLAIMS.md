@@ -760,3 +760,4 @@
 | REVIEW map-me-mark r1 of b62bd85f | review/map-me-mark-r1 | MAIN s31 | session_01UV1SzkrhfnKSSwFEpGBcVS | RUNNING | 17/11 12:52Z |
 | REVIEW toil-looks2 r1 (opus BIG) of 43b9a8b64 (after makeup-theme-r1 471de81f) | review/toil-looks2-r1 | MAIN s31 | session_01UV1Szhz851NPoNbAv8MGF7 | RUNNING | 17/11 12:54Z |
 | morechip-corners: '+N' chip bigger, bottom-left/right (owner 13:02Z) on top of morechip-fix-r1 3bed78e3 | review/morechip-corners | MAIN s31 | session_01UV1SzgitG1nAF1r7wZK2wd | RUNNING | 17/11 12:55Z |
+| toil-looks3: Khuynh thành redraw, streaks→Vụng về, Đoan trang≠Kiều diễm, Diêm dúa lips (owner 13:05Z) on review/toil-looks2 | review/toil-looks2 | MAIN s31 | session_01UV1Szgv5xtMpkNRXeojDX5 | RUNNING | 17/11 12:59Z |
