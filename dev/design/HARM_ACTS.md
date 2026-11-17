@@ -3,7 +3,7 @@ Author: harm-acts-expert (research worker for MAIN s34). Owner rules: OD 17/11 ~
 PRIORITY #1 CHECK: OD tail 16:20Z+16:40Z read | main: jface (tat, phat, ill, doc), jrash (rash), j70 (huydung, SCAR70, Ngọc dung cao), j92 (KIT_SCAR/KIT_VEIL), j13 (epidemic) | review/* none | claims none.
 
 ## TÓM TẮT CHO SẾP (tiếng Việt)
-- Em liệt kê 30 việc: 17 hành vi hại/làm nhục (nhẹ 6, vừa 7, nặng 4) + 8 dấu vết không thù (khóc, say, mất ngủ, dầm mưa, mồ hôi, rét, đậu mùa...). Mỗi việc có: hình vẽ lên người, bao lâu, thuốc/cách xóa, trò nhỏ, ai làm được với ai, nguồn.
+- Em liệt kê 26 việc: 18 hành vi hại/làm nhục (nhẹ 6, vừa 8, nặng 4) + 8 dấu vết không thù (khóc, say, mất ngủ, dầm mưa, mồ hôi, rét, đậu mùa...). Mỗi việc có: hình vẽ lên người, bao lâu, thuốc/cách xóa, trò nhỏ, ai làm được với ai, nguồn.
 - Bản nháp của main s34 đúng hướng. Em sửa 3 chỗ: (1) "cào" chưa có hành vi riêng, chỉ có dấu cào hủy dung (scar-1..3); (2) thêm cắt tóc (có thật trong sử Thanh), kẹp ngón, giội nước đá mùa đông, xé áo, đạp váy; (3) tách rõ "lỡ tay" (kẻ dưới làm với người trên, có thể bị lộ) khỏi "ra tay thẳng" (chỉ người trên với người dưới).
 - Có sẵn trong main: Tát (3 bậc), Phạt quỳ (chỉ chữ, chưa có hình), Hủy dung (bát canh / mèo / phấn độc, dấu cào 3 bậc, mạng che, Ngọc dung cao), Bỏ phấn lạ (mẩn đỏ), ốm, trúng độc. Chưa có: mọi thứ còn lại, kể cả đậu mùa (có dịch nhưng chưa có hình nốt).
 - Thuốc chia 3 hạng: Cao tiêu ứ (rẻ, nhẹ) / Cao sinh cơ (vừa, bỏng, cào) / Ngọc dung cao (đã có: sẹo vĩnh viễn, đậu mùa, bỏng nặng).
