@@ -30,7 +30,11 @@ function wName(w){if(!w)return"";try{if(EVD[w.k]&&EVD[w.k].nm)return EVD[w.k].nm
 const WW={stat:{start:{},end:0,skip:{}},err:0};window.WW=WW;
 function wErr(t,e){WW.err++;console.error("jworld "+t,e)}
 function wZ(){if(!S)return null;let z=S.wwin;if(!z||typeof z!=="object")z=S.wwin={};if(!Array.isArray(z.L))z.L=[];if(!z.last)z.last={};if(!z.n)z.n={};if(z.seq==null)z.seq=0;return z}
-function worldWin(k){try{if(!S||!BAL.world||!B().on)return k?null:[];const z=S.wwin;if(!z||!Array.isArray(z.L))return k?null:[];const t=now();const A=z.L.filter(w=>w&&w.t0<=t&&t<w.t1);return k?(A.find(w=>w.k===k)||null):A}catch(e){return k?null:[]}}
+/* perf (buổi): nightCh / mindW / festToday / stipend call worldWin many times a buổi — the open list is memoised per (save, record, length, tuần) */
+let WM={S:null,L:null,n:-1,t:-1,A:null};
+function worldWin(k){try{if(!S||!BAL.world||!B().on)return k?null:[];const z=S.wwin;if(!z||!Array.isArray(z.L))return k?null:[];const t=now();
+ let A;if(WM.S===S&&WM.L===z.L&&WM.n===z.L.length&&WM.t===t&&WM.A&&WM.A.every(w=>w.t1>t))A=WM.A;else{A=z.L.filter(w=>w&&w.t0<=t&&t<w.t1);WM={S,L:z.L,n:z.L.length,t,A}}
+ return k?(A.find(w=>w.k===k)||null):A.slice()}catch(e){return k?null:[]}}
 function worldAny(f){return worldWin().some(f)}
 /* ---------- who is who ---------- */
 const isEmpP=p=>!!S&&(p===S.emp||p==="emp");

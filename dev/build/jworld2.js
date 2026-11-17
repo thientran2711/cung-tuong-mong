@@ -277,9 +277,12 @@ XH.push(x2Tick);
 XH.push(function(){if((S.tuan||0)!==0)return;const M=S.wMM,T=T_();if(!M||!T||M.done2)return;M.done2=1;const b=B();
  if((M.k==="lut"||M.k==="han")&&M.fail&&T.kho>=b.dis.kho&&T.kho<b.trung.kho&&b.trung.months.includes(S.month))ws("trung","Sau trận "+(M.k==="lut"?"lũ":"hạn")+", châu chấu nổi lên ăn lúa",{len:b.trung.len});
  if(M.k==="giac"&&M.fail&&T.bien<b.cam.bien)ws("cam","Giặc tràn qua biên ải, kinh thành giới nghiêm",{len:b.cam.len})});
-/* vu cổ: a REAL bùa found (framed with a bùa / hình nhân why) while someone of the Emperor's house is ill */
-if(typeof framed==="function"){const f0=framed;framed=function(p,why){const r=f0.apply(this,arguments);try{if(S&&B().on&&(typeof worldOn!=="function"||worldOn())&&/bùa|hình nhân|trù ẻo/.test(String(why||""))){
+/* vu cổ: a REAL bùa / hình nhân found while someone of the Emperor's house is ill. ONE cause function, called from both roads that dig one up:
+   framed() (j8 Vu oan, j42 plant, the month search, jtruth) and the j8 "kframe" act (hình nhân trù ẻo in a son's room, no framed() call). */
+function vucoCause(p,by){try{if(!S||!B().on||(typeof worldOn==="function"&&!worldOn())||!p||ww("vuco"))return;
   const kid=(()=>{try{return allKids().find(([k])=>k.alive&&(k.hp||100)<B().vuco.kidHp)}catch(e){return null}})();
   const why2=S.emp&&S.emp.ill?"long thể bất an":(!S.thDead&&S.thIll)?"Thái hậu đang bệnh":kid?`${kid[0].name} ốm yếu`:"";
-  if(why2&&!ww("vuco"))window.worldQueue("vuco","Phát hiện hình nhân bùa ngải",{len:B().vuco.len,x:{t:pid(p),tn:p===S?"ngươi":p.name,by:typeof ACTX!=="undefined"&&ACTX.a?pid(ACTX.a):null,why:why2}})}}catch(e){wErr("vuco",e)}return r}}
+  if(why2&&!((wZ().q||[]).some(a=>a.k==="vuco")))window.worldQueue("vuco","Phát hiện hình nhân bùa ngải",{len:B().vuco.len,x:{t:pid(p),tn:p===S?"ngươi":p.name,by:by?pid(by):null,why:why2}})}catch(e){wErr("vuco",e)}}
+if(typeof framed==="function"){const f0=framed;framed=function(p,why){const r=f0.apply(this,arguments);if(/bùa|hình nhân|trù ẻo/.test(String(why||"")))vucoCause(p,typeof ACTX!=="undefined"?ACTX.a:null);return r}}
+try{const K=typeof ACT!=="undefined"&&ACT.kframe;if(K&&K.f){const f0=K.f;K.f=function(a,t){const r=f0.apply(this,arguments);if(/đào được hình nhân/.test(String(r||"")))vucoCause(t,a);return r}}}catch(e){wErr("kframe",e)}
 })();

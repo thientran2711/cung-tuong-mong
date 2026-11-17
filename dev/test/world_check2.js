@@ -13,7 +13,7 @@ const {chromium}=require('playwright');const [,,U0]=process.argv;const URL=/^(ht
 const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+m+(x!==undefined?' '+JSON.stringify(x):''))};
 (async()=>{const b=await chromium.launch();const p=await b.newPage({viewport:{width:1180,height:820}});const errs=[];p.on('pageerror',e=>errs.push(e.message));
  await p.goto(URL,{waitUntil:'domcontentloaded'});await p.waitForTimeout(2500);
- const fresh=()=>p.evaluate(()=>{localStorage.clear();SLOT=4;document.getElementById('title').hidden=true;window.__nlInner=1;start();window.__nlInner=0;window.__bot=1;quiet=true;Q.length=0;try{deal()}catch(e){}
+ const fresh=()=>p.evaluate(()=>{for(let i=0;i<12;i++){localStorage.clear();SLOT=4;document.getElementById('title').hidden=true;window.__nlInner=1;start();window.__nlInner=0;if(!(typeof isSrv==='function'&&isSrv())&&!S.out)break}/* a consort life (a maid start has no consort options) */window.__bot=1;quiet=true;Q.length=0;try{deal()}catch(e){}
   for(const v of rivals)v.preg=0;S.preg=0;S.sung=Math.max(S.sung,60);S.bac=Math.max(S.bac,500);BAL.world.maxOpen=9;S.wwin={L:[],last:{},n:{},seq:0};worldTick();S.wwin.L=[];S.wwin.q=[];return 1});
  /* 1 */
  await fresh();
@@ -37,7 +37,7 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
   /* heir */
   clr();tick();setHeir(k,v);tick();R.lap=!!worldWin("lap");
   /* Thái hậu ill */
-  clr();S.thDead=false;S.thIll={k:"phonghan",st:BAL.world.thb.st,known:true};tick();R.thb=!!worldWin("thb");
+  clr();S.thDead=false;S.thIll={k:"phonghan",st:BAL.world.thb.st,known:true};tick();R.thb=!!worldWin("thb");S.wwin.L=S.wwin.L.filter(w=>w.k==="thb");/* only this window (a random real cause may open another the same tick) */
   const C=consorts().filter(x=>x!==S);const raw=x=>{const L=S.wwin.L;S.wwin.L=[];const c=nightCh(x);S.wwin.L=L;return c};const ratio=C.map(x=>[raw(x),nightCh(x)]).filter(a=>a[0]>=10).map(a=>+(a[1]/a[0]).toFixed(1));
   const me=[raw(S),nightCh(S)];R.thbNight={ratio:[...new Set(ratio)],me,want:BAL.world.thb.nightMul};S.thIll=null;
   /* Emperor ill */
@@ -47,13 +47,16 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
   clr();framed(v,"bị vu dùng bùa ngải");R.vucoQ=(S.wwin.q||[]).some(a=>a.k==="vuco");tick();R.vuco=!!worldWin("vuco");
   const cut=q=>Math.round((BAL.pay[Math.min(7,rkOf(q))]||0)*BAL.world.vuco.payCut);const run=q=>{const b0=q.bac;const s=Math.random;Math.random=()=>.5;try{stipend(q)}finally{Math.random=s}return q.bac-b0};
   const sOn=run(S),vOn=run(v);const L=S.wwin.L;S.wwin.L=[];const sOff=run(S),vOff=run(v);S.wwin.L=L;R.vucoPay={me:sOff-sOn,meW:cut(S),npc:vOff-vOn,npcW:cut(v)};
+  /* the j8 kframe act (hình nhân in a son's room) is the second road to the same cause */
+  clr();const t2=liveRivals(true).find(x=>x!==v)||v;const son=mkKid("m",8);(t2.kids=t2.kids||[]).push(son);const c0=caught,r0=roll;caught=()=>"";roll=()=>true;let kf="";
+  try{kf=ACT.kframe.f(v,t2)}finally{caught=c0;roll=r0}R.kframe={dug:/hình nhân/.test(kf),q:(S.wwin.q||[]).some(a=>a.k==="vuco")};tick();R.kframe.open=!!worldWin("vuco");
   S.emp.ill=null;
   /* châu chấu: failed flood relief, Kho lúa between the two marks, summer */
   clr();S.month=6;S.tuan=0;T.kho=Math.round((BAL.world.dis.kho+BAL.world.trung.kho)/2);S.wMM={k:"lut",fail:1,kho:T.kho,bien:T.bien,y:S.year,m:6};tick();R.trung=!!worldWin("trung");
   /* đại hàn */
   clr();S.month=12;S.tuan=1;S.wwin.snowL=Array(BAL.world.ret.run-1).fill(1);S.wx={n:"tuyết dày",k:"snowh",f:4};tick();R.ret=!!worldWin("ret");S.wwin.snowL=[];S.wx={n:"trời quang",k:"dust",f:0};
   /* ngoại thích */
-  clr();S.month=5;S.tuan=0;const age0=S.emp.age;S.emp.age=BAL.world.ngoai.young-2;T.H["Lễ bộ"].pow=BAL.world.ngoai.pow+2;S.wMM=null;tick();R.ngoai=(worldWin("ngoai")||{x:{}}).x.c||null;S.emp.age=age0;T.H["Lễ bộ"].pow=50;
+  clr();S.month=5;S.tuan=0;const age0=S.emp.age;S.emp.age=BAL.world.ngoai.young-2;for(const c of CLANS)T.H[c].pow=50;T.H["Lễ bộ"].pow=BAL.world.ngoai.pow+2;S.wMM=null;tick();R.ngoai=(worldWin("ngoai")||{x:{}}).x.c||null;S.emp.age=age0;T.H["Lễ bộ"].pow=50;
   /* wedding */
   clr();const d=mkKid("f",18);(v.kids=v.kids||[]).push(d);tick();d.wed=1;d.hW={kind:"ban"};tick();R.hon=!!worldWin("hon");
   /* calendar */
@@ -73,6 +76,7 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
  ok(r2.benh&&r2.benhNight===0,'Emperor illness stage → long thể bất an, nobody (her or NPC) is called at night',{o:r2.benh,n:r2.benhNight});
  ok(r2.benhForce,'AG-ALL hook: Hầu thuốc force slot at Dưỡng Hòa điện',r2.benhForce);
  ok(r2.vucoQ&&r2.vuco,'a real bùa frame while he is ill → đại án vu cổ',{q:r2.vucoQ,o:r2.vuco});
+ ok(r2.kframe.dug&&r2.kframe.q&&r2.kframe.open,'the j8 kframe act (hình nhân in a son\'s room) opens the same vu cổ',r2.kframe);
  ok(r2.vucoPay.me===r2.vucoPay.meW&&r2.vucoPay.npc===r2.vucoPay.npcW,'vu cổ: the same pay hold for her and an NPC (BAL)',r2.vucoPay);
  ok(r2.trung,'failed flood relief + Kho lúa low in summer → nạn châu chấu',r2.trung);
  ok(r2.ret,'heavy snow BAL tuần in a row → đại hàn',r2.ret);
