@@ -550,3 +550,4 @@ WAKES: send_later 00:32Z set (trig_01Wsr691BDk4chMGkbX6y9se) — it fires into s
 - (16/11 ~23:42Z) s26 → s27 rollover (context ~31 %).
 - (16/11 ~23:43Z) s26 opened MAIN SESSION 27 = session_01UV1Szh248gDvHSAH88RvJm and stopped (s26's 00:32 wake deleted).
 - (16/11 ~23:45Z) MAIN SESSION 27 = session_01UV1Szh248gDvHSAH88RvJm; START_CTX ~8 % (estimated; used_tokens reads 0) → rollover at ~33 %, ceiling 60 %.
+- (17/11 00:09Z) s27: diemtrang-score PASS 8098201f → batch 00:32 (worker+reviewer archived). kit-size-9 r1 FAIL (2 items, keeper fixing; reviewer session_01UV1SzkikBfqZTH1shzwwG6 waits r2). balance-core r1 FAIL 10 items on 10fa43d4 → worker fixing on 80dbed1e, §7 owner table to be redone (owner told s26 numbers wrong). coop-e2e start-friend fails pre-existing on main 08725411 → coop-main-faults. s27 wake trig_01Bqp85mgGHo5TxC42GbV1oD 00:32Z.
