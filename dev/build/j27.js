@@ -3,7 +3,7 @@
 const PALN=MAPH.rivalSlots.map(s=>s.name),HOMEN="Ngọc Thanh các";
 const PLNAME={kn:["Càn Ninh cung","cung Hoàng hậu"],tn:["Đức Thọ cung","cung Thái hậu"],dtd:["Dưỡng Hòa điện","tẩm điện Hoàng thượng"],thu:["Cần Chính điện","nơi Hoàng thượng phê tấu"],lc:["Trường Môn viện","lãnh cung"],vuon:["Ngự hoa viên","vườn ngự"],tyv:["Thái y viện","thuốc thang"],ksp:["Kính sự phòng","giữ thẻ bài thị tẩm"]};
 /* start: traits spread so no two of the same rank share one; each gets a second trait (virtue or vice) */
-const TRAIT2=["Hiếu thảo","Ghen tuông","Tham tiền","Trọng nghĩa","Nhiều chuyện","Thù dai","Cả nể","Thẳng thắn","Mê tín","Khéo léo"];
+const TRAIT2=["Vì gia tộc","Nóng nảy","Ham lợi","Trọng nghĩa","Nhiều chuyện","Thù dai","Rộng lượng","Thật thà","Mê tín","Thực dụng"];
 function spreadTraits(){const A=[...TRAITS,...TRAITS].sort(()=>Math.random()-.5),B=[...TRAIT2,...TRAIT2].sort(()=>Math.random()-.5);
  rivals.forEach((v,i)=>{const t=A[i%A.length];v.trait=t[0];v.malice=cl(t[1]+R(20)-10,0,100);v.trait2=B[i%B.length]})}
 function ensureT2(v){if(v&&!v.trait2)v.trait2=pick(TRAIT2);return v}
