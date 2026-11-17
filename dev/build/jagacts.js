@@ -94,7 +94,7 @@ agReg("hh","acts",(q,N,need)=>{if(q===S||!q.queen)return[];const H=BAL.ag.hh;con
  return O});
 for(const k in AGHH)agRunReg("hh:"+k,(q,t)=>{if(!q||!q.queen||!t)return"";return hhAct(q,t,k)});
 /* the player-as-Empress buttons call the same function */
-(function(){const e0=empAct;empAct=function(i,k){const v=rivals[i];if(!v||S.rank<7||!can(BAL.ag.hh.kh)||S.dead||Q.length||!AGHH[k])return e0.apply(this,arguments);
+(function(){const e0=empAct;empAct=function(i,k){const v=rivals[i];if(!v||S.rank<7||!(typeof agCanDay==="function"?agCanDay(BAL.ag.hh.kh):can(BAL.ag.hh.kh))||S.dead||Q.length||!AGHH[k])return e0.apply(this,arguments);
  if(k==="judge"&&evG(S,v)<2)return;if(k==="conf"&&v.inv.findIndex(e=>(IT[e.k]||{}).kd==="Trang sức"&&!e.h)<0)return;if(k==="reward"&&S.bac<-BAL.tw.reward.bac)return;if(k==="pardon"&&!v.confined&&!v.out)return;
  const r=hhAct(S,v,k);if(!r)return;spend(BAL.ag.hh.kh);log(r+".");render()}})();
 

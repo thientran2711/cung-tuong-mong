@@ -46,8 +46,10 @@ function knSid(s,m){return s.sid!=null?String(s.sid):"cm"+knId(m)}
 /* ---------- a happening: id, window, people ---------- */
 function knHid(h){let b="";try{b=bkey()}catch(e){}return b+":"+h.k+":"+h.id+":"+(h.x&&h.x.pid||"")}
 function knPend(h){try{return h.x&&h.x.pid&&typeof haPend==="function"?haPend(h.x):null}catch(e){return null}}
-function knWin(h){const kh=agKh(),KH=J95.KH;const p=knPend(h);if(p)return [p.kh,p.k1!=null?p.k1:p.kh];
- if(h.id==="emp"){try{const R=agRec();if(R&&R.P.emp){let a=-1,b=-1;for(let k=kh;k<KH;k++)if(R.P.emp[k]&&R.P.emp[k][0]==="vuon"){if(a<0)a=k;b=k}if(a>=0)return [a,b]}}catch(e){}}
+function knWin(h){const kh=agKh(),KH=J95.KH;const p=knPend(h);if(p)return (h.w0=[p.kh,p.k1!=null?p.k1:p.kh]);
+ if(h.id==="emp"){try{const R=agRec();if(R&&R.P.emp){let a=-1,b=-1;for(let k=kh;k<KH;k++)if(R.P.emp[k]&&R.P.emp[k][0]==="vuon"){if(a<0)a=k;b=k}if(a>=0)return (h.w0=[h.w0?Math.min(h.w0[0],a):a,b])}}catch(e){}}
+ /* AG-ALL-2d2: a deed that has landed (no pending row any more) / the Emperor gone from the garden keeps the window it had: it is OVER, not "now" */
+ if(h.w0&&!knFixed(h))return h.w0;
  return [kh,KH-1]}
 function knWho(h){const p=knPend(h);if(p){const L=[p.id||("v"+p.vid)];if(p.t)L.push(p.t);return L}if(h.id==="emp")return ["emp"];return []}
 /* public: the calendar and world happenings (a festival …) everyone knows; the Emperor's walk and a cold-palace night follow the rule */
@@ -95,6 +97,7 @@ const KN_POOL={
   cold:["Ở {W} có chuyện: {what}. {Xung} chỉ nghe vậy.","{Goi} có hỏi thì {xung} bẩm: {what} ở {W}."]},
  friend:{warm:["{Goi}, {xung} vừa đi ngang {W}, thấy {what}. Có muốn cùng đi xem không?","{Goi} biết chưa? Ở {W} {what}."],
   cool:["{Xung} nghe nói ở {W} {what}."],cold:["Ở {W} {what}, {goi} không biết sao?"]},
+ end:{any:["Việc ấy đã xong, giờ tới cũng chẳng còn gì.","Chuyện đã qua rồi, nơi ấy giờ đã vắng."]},
  mat:{any:["Tai mắt báo ({N}, người hầu cung {P}): ở {W} {what}.","Tai mắt báo ({N}, người hầu cung {P}): {what}, ngay ở {W}."]},
  pass:{any:["{N}, người hầu cung {P}, đi ngang ghé bẩm: ở {W} {what}.","{N}, người hầu cung {P}, nói nhỏ: {what}, ngay ở {W}."]},
  le:{any:["Ở {W} {what}."]},
@@ -115,14 +118,18 @@ function knLine(r,h){const W=agPlaceTxt(h.k),what=knWhat(h);const fill=t=>String
 function knTb(){let b="";try{b=bkey()}catch(e){}S.tb=S.tb||{};if(S.tb.b!==b){S.tb.b=b;S.tb.K={}}if(!S.tb.R||S.tb.d!==wk()){S.tb.d=wk();S.tb.R=[]}S.tb.K=S.tb.K||{};return S.tb}
 function knRaw(){return KN.raw||[]}
 function knScan(L){if(!S||S.dead||S.out)return[];try{knFlush()}catch(e){agErr("knFlush",e)}const T=knTb();KN.stat.scan++;const out=[];const now=agKh();
- for(const h of L){if(h.done)continue;const hid=knHid(h);const w=knWin(h);if(w[1]<now&&!knFixed(h))continue;
+ for(const h of L){if(h.done)continue;const hid=knHid(h);const w=knWin(h);const ended=w[1]<now&&!knFixed(h)?1:0;/* AG-ALL-2d2: an ENDED happening still reaches her (late news down the khắc chain), flagged ended */
   let r=null;try{r=knFor(S,h)}catch(e){agErr("know",e)}if(!r){KN.stat.hidden++;continue}
-  let it=T.K[hid];if(!it){it=T.K[hid]={id:hid,k:h.id,place:h.k,b:S.buoi||0,k0:w[0],k1:w[1],who:knWho(h),line:knLine(r,h),by:r.by,inf:knInf(r),infName:knInfName(r),seen:r.by==="here"?1:0};KN.stat.known++;knTmN(r.by==="mat"&&r.e);
+  let it=T.K[hid];if(!it){it=T.K[hid]={id:hid,k:h.id,place:h.k,b:S.buoi||0,k0:w[0],k1:w[1],who:knWho(h),line:knLine(r,h),by:r.by,inf:knInf(r),infName:knInfName(r),seen:r.by==="here"?1:0,ended:0};if(ended)knEnd(it);KN.stat.known++;knTmN(r.by==="mat"&&r.e);
    for(const f of KN.cb)try{f(Object.assign({},it))}catch(e){console.error("tinBao cb",e)}}
-  else{it.k0=w[0];it.k1=w[1]}out.push(it)}
+  else{it.k0=w[0];it.k1=w[1];if(ended)knEnd(it)}out.push(it)}
  return out}
+/* AG-ALL-2d2 (C-AG #3 order; owner logic L1638 kept): a TIN BÁO about a happening already OVER says so — it.ended = 1 and the line in the past
+   ("vừa …" + KN_POOL.end), so it never invites her to a place where nothing is left. It stays in her list for the rest of the buổi. */
+function knEnd(it){if(!it||it.ended)return it;it.ended=1;try{const e=kLine("tinbao:end",KN_POOL.end,{m:"any"});it.line=String(it.line||"").replace(/(^|\s)đang(\s)/g,"$1vừa$2").replace(/\s*$/,"")+" "+e}catch(x){}return it}
 function tinBaoList(){if(!knOn()||!S||S.dead||S.out)return[];let L=[];try{L=adHapNow()}catch(e){}const T=knTb();const now=agKh();
- const A=Object.values(T.K).filter(it=>it.k1>=now||it.k==="fest"||it.k==="cold");const R=(T.R||[]).filter(it=>it.b===(S.buoi||0));return A.concat(R).map(x=>Object.assign({},x))}
+ for(const it of Object.values(T.K))if(it.k1<now&&it.k!=="fest"&&it.k!=="cold"&&!it.ended)knEnd(it);
+ const A=Object.values(T.K).filter(it=>it.k1>=now||it.ended||it.k==="fest"||it.k==="cold");const R=(T.R||[]).filter(it=>it.b===(S.buoi||0));return A.concat(R).map(x=>Object.assign({},x))}
 function tinBaoNew(){return tinBaoList().filter(x=>!x.seen).length}
 function tinBaoOn(fn){if(typeof fn==="function")KN.cb.push(fn);return ()=>{const i=KN.cb.indexOf(fn);if(i>=0)KN.cb.splice(i,1)}}
 function tinBaoSeen(id){const T=knTb();for(const it of Object.values(T.K).concat(T.R||[]))if(id==null||it.id===id)it.seen=1}
@@ -240,7 +247,7 @@ function knSrvCards(m){if(!m||!knOn())return[];const X=[];const once=k=>typeof i
  if(typeof j95sync==="function"){const s0=j95sync;j95sync=function(){const r=s0.apply(this,arguments);try{if(knOn())sc()}catch(e){}return r}}
  if(typeof agSlice==="function"){const a0=agSlice;agSlice=function(){const r=a0.apply(this,arguments);try{if(knOn()){if(!AG.q)knReact();sc()}}catch(e){agErr("knReact",e)}return r}}
 })();
-Object.assign(window,{KN,knFor,knOn,knHearO,knOpts,knStaffOpts,knSrvCards,knWatchLand,tinBaoList,tinBaoNew,tinBaoOn,tinBaoSeen});
+Object.assign(window,{knEnd,KN,knFor,knOn,knHearO,knOpts,knStaffOpts,knSrvCards,knWatchLand,tinBaoList,tinBaoNew,tinBaoOn,tinBaoSeen});
 /* ================= AG-ALL-2f — TAI MẮT DATA LINK (owner OD 17/11 ~16:25Z, verbatim in dev/OWNER_DECISIONS.md: "tai mắt là ai, là người nào ... những
    cái người mà báo tin cho tôi là có phải thực sự là những tai mắt này không ... mình phải có một cái sự kết nối để cho nó make sense") — data only, no UI
    (main's tinbao-ui builds the kit list + card).

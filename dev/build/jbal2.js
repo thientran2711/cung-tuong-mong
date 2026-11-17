@@ -925,9 +925,10 @@ BAL.ag.emo2={max:2};
    cost, j2) plus the walk between places (travel, j9). on = 0 → one deed per buổi as before.
    rest   × BAL.ag.routine = the weight of "keep my schedule for the rest of the buổi" when she weighs another deed (needs × BAL.ag.needW against it)
    max    most extra deeds of a consort in one buổi after her planned one; maxX the same for the Emperor / Thái hậu / staff (perf)
+   spill  1 = an NPC deed may run on into the next buổi of the same day (the DAY-khắc gate, owner OD L852 / 17/11 ~16:45Z; jagday agFitDay / agSpill); 0 = must fit this buổi
    see    NPCs who stand where a deed happens, in its khắc, react like the player (agSeeNpc): w = weights ignore / hear / join / mediate; hear odds =
           BAL.ag.wit.hear + Tai mắt × BAL.ag.wit.mat (one function agHearOf for her and them), a heard harm deed = 1 evidence (the player's rule) */
-Object.assign(BAL.ag,{kh2:{on:1,rest:1,max:3,maxX:1,see:{on:1,w:{ignore:3,hear:1,join:1,mediate:1},ev:1}}});
+Object.assign(BAL.ag,{kh2:{on:1,spill:1,rest:1,max:3,maxX:1,see:{on:1,w:{ignore:3,hear:1,join:1,mediate:1},ev:1}}});
 /* AG-ALL-2c know (jagknow): who knows a Dư đồ happening and how the news travels (one rule for her and every NPC, OD 17/11 ~14:50Z + ~15:00Z).
    eye = her own Tai mắt for a happening still to come: oSee(x) × eye/100; friend = an NPC who likes her this much (aff ≥) and meets her passes the news on (close = sends word without meeting);
    tell = a servant's choice (mindPick) when she knows: tell ×(lòng/100), keep ×(1 − lòng/100), sell (a bought servant) ×(1 − lòng/100); q = her nết (jnet qv);
