@@ -53,7 +53,9 @@ function kpmSplit(k){const W=S.where||{};const O={chinh:{ppl:[],n:0,res:[]},dong
  const here=rivals.filter(v=>v.alive&&!v.out&&W[v.id]===k);here.forEach(v=>O[kpmHallOf(v,k)].ppl.push(v));
  let total=0;try{total=countAt(k)}catch(e){total=here.length}
  for(const h in O)if(h!=="cungnhan")O[h].n=O[h].ppl.length;O.chinh.n+=Math.max(0,total-here.length); /* men, kids, Thái hậu…: the chính điện */
- const i=palSlot(k);if(i!=null)["chinh","dong","tay"].forEach(h=>{O[h].res=roomResidents(i,h)});else residents(k).forEach(p=>O.chinh.res.push(p));return O}
+ const i=palSlot(k);if(i!=null)["chinh","dong","tay"].forEach(h=>{O[h].res=roomResidents(i,h)});else residents(k).forEach(p=>O.chinh.res.push(p));
+ /* she is home in her own phối điện of this palace (owner 17/11 04:08Z): she counts there */
+ const mine=i!=null&&kpmMine(i);if(mine&&S.place==="home"&&!S.out){O[mine].ppl.push(S);O[mine].n++}return O}
 /* her own servants (the people her rooms show, minus consorts, kids, men): they live in the dãy nhà cung nhân */
 function kpmIsSrv(p){return !!p&&!(p.ref&&(rivals||[]).includes(p.ref))&&!["kid","man","emp","th","hh","rival","chest","fallen"].includes(p.kind)}
 function kpmServants(){try{return (homePeople()||[]).filter(kpmIsSrv)}catch(e){return[]}}

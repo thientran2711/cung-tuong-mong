@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"4719d424+","t":"2026-11-17T04:16Z","c":"batch-0415: CHANGE line; site rebuilt after the 3 merges","b":"a2ccaffdbfad","h":[{"s":"ee492cfd","t":"2026-11-17T04:15Z","c":"Hộp Chọn sổ nay rộng rãi, chữ trên nút đọc trọn, không còn ô hình bị cắt; trang Tuần lục hiện trọn dáng người đến tận gót chân, bảng thân s…"},{"s":"bad6d59f+","t":"2026-11-17T03:41Z","c":"Chơi chung: chuẩn bị đường truyền gọn nhẹ hơn giữa hai máy; khi chơi chưa có gì thay đổi."},{"s":"babc9b4a","t":"2026-11-17T01:39Z","c":"Chơi chung không còn treo máy vì tên bạn lặp chữ; số bóng người trên dư đồ khớp đúng người đang ở đó; việc có hạn giờ hiện đồng hồ ngay dướ…"},{"s":"92685210+","t":"2026-11-17T00:53Z","c":"Khung việc và khung sự kiện bốn cỡ, tranh lấp đầy khung, việc nhắc tên ai hiện chân dung người ấy; phẩm của món đồ nằm ngay trên viền khung…"},{"s":"6f513340","t":"2026-11-16T23:24Z","c":"Vào game mới không còn bật ngay màn lật thẻ, lật thẻ chỉ khi vào buổi tối; dư đồ nhãn giấy mới; việc dài lấn sang buổi sau; lời trong cung …"},{"s":"7a18d957","t":"2026-11-16T22:44Z","c":"review-diemtrang-fx-r1 report"},{"s":"afe2bcbc","t":"2026-11-16T22:25Z","c":"review r1: KIT 84.1a note + report"},{"s":"dea1d445+","t":"2026-11-16T21:32Z","c":"golive lag-play-2: CHANGE line + site rebuilt"},{"s":"674f3af4","t":"2026-11-16T21:21Z","c":"Chơi cùng bạn: bạn chơi chung chưa gặp mặt nay hiện tên gọi chung “Hảo hữu của ta” ở mọi nơi, không còn ẩn thành dấu hỏi."},{"s":"923567d5+","t":"2026-11-16T21:03Z","c":"Hình nhân vật: hết vệt xám ở cổ và viền tối quanh người."}]};
+window.CTM_BI={"s":"911fa249+","t":"2026-11-17T04:48Z","c":"residence-seats: residence/seat/harem test + measure add-on","b":"030f7eb42c07","h":[{"s":"ee492cfd","t":"2026-11-17T04:15Z","c":"Hộp Chọn sổ nay rộng rãi, chữ trên nút đọc trọn, không còn ô hình bị cắt; trang Tuần lục hiện trọn dáng người đến tận gót chân, bảng thân s…"},{"s":"bad6d59f+","t":"2026-11-17T03:41Z","c":"Chơi chung: chuẩn bị đường truyền gọn nhẹ hơn giữa hai máy; khi chơi chưa có gì thay đổi."},{"s":"babc9b4a","t":"2026-11-17T01:39Z","c":"Chơi chung không còn treo máy vì tên bạn lặp chữ; số bóng người trên dư đồ khớp đúng người đang ở đó; việc có hạn giờ hiện đồng hồ ngay dướ…"},{"s":"92685210+","t":"2026-11-17T00:53Z","c":"Khung việc và khung sự kiện bốn cỡ, tranh lấp đầy khung, việc nhắc tên ai hiện chân dung người ấy; phẩm của món đồ nằm ngay trên viền khung…"},{"s":"6f513340","t":"2026-11-16T23:24Z","c":"Vào game mới không còn bật ngay màn lật thẻ, lật thẻ chỉ khi vào buổi tối; dư đồ nhãn giấy mới; việc dài lấn sang buổi sau; lời trong cung …"},{"s":"7a18d957","t":"2026-11-16T22:44Z","c":"review-diemtrang-fx-r1 report"},{"s":"afe2bcbc","t":"2026-11-16T22:25Z","c":"review r1: KIT 84.1a note + report"},{"s":"dea1d445+","t":"2026-11-16T21:32Z","c":"golive lag-play-2: CHANGE line + site rebuilt"},{"s":"674f3af4","t":"2026-11-16T21:21Z","c":"Chơi cùng bạn: bạn chơi chung chưa gặp mặt nay hiện tên gọi chung “Hảo hữu của ta” ở mọi nơi, không còn ẩn thành dấu hỏi."},{"s":"923567d5+","t":"2026-11-16T21:03Z","c":"Hình nhân vật: hết vệt xám ở cổ và viền tối quanh người."}]};
 /* KBOOT — BOOT COVER (owner 15/11 "Khi vừa bấm vào game, có chừng ít hơn 1 giây hiện khung này"; KIT §14.1).
    Before: while the 4 MB page parsed, the browser painted the bare static markup of p1.html (HUD box, a vertical stat label list, empty
    panels, the old 11-tab bar) for ~1 s on a warm open and many seconds on a cold one, before any kit CSS/JS existed.
@@ -36416,6 +36416,8 @@ function resMeHoused(){try{if(!S||S.pal!=null||S.out||S.dead)return null;const r
 (function(){const r0=residents;residents=function(k){const L=r0.apply(this,arguments);try{const r=resMeHoused();if(r&&k!=="home"&&palaceOf(r.head)===k&&!L.includes(S)){L.push(S);L.sort((a,b)=>rkOf(b)-rkOf(a))}}catch(e){}return L}})();
 (function(){const m0=mapSpots;mapSpots=function(){const L=m0.apply(this,arguments);try{const r=resMeHoused();if(!r)return L;const hk=palaceOf(r.head);
   const out=L.filter(x=>x.k!=="home");const sp=out.find(x=>x.k===hk);if(sp){if(!(sp.res||[]).includes(S))sp.res=(sp.res||[]).concat([S]);sp.fn=`${sp.fn} · ngươi ở ${RES_PART_N[r.part]}`}return out}catch(e){return L}}})();
+/* walking: her home is where her phối điện is (the chủ vị's palace), not Ngọc Thanh các */
+(function(){if(typeof mapPos!=="function")return;const m0=mapPos;mapPos=function(k){try{if(k==="home"){const r=resMeHoused();if(r)return m0.call(this,palaceOf(r.head))}}catch(e){}return m0.apply(this,arguments)}})();
 /* ================= jseal: kitSeal · ẤN TRÂN NỮ (owner 11/15, review/brand; KIT §39) =================
    Ported from Phượng Lệnh public/choi/js/kit/seal.js (word() glyph builder, the pl-seal-ink filter, the pl-seal-tn carved mask): a square
    cinnabar seal, TRÂN over NỮ cut white into the cinnabar (bạch văn) in Vietnamese seal-script capitals drawn in code (one even stroke on a
@@ -51136,7 +51138,9 @@ function kpmSplit(k){const W=S.where||{};const O={chinh:{ppl:[],n:0,res:[]},dong
  const here=rivals.filter(v=>v.alive&&!v.out&&W[v.id]===k);here.forEach(v=>O[kpmHallOf(v,k)].ppl.push(v));
  let total=0;try{total=countAt(k)}catch(e){total=here.length}
  for(const h in O)if(h!=="cungnhan")O[h].n=O[h].ppl.length;O.chinh.n+=Math.max(0,total-here.length); /* men, kids, Thái hậu…: the chính điện */
- const i=palSlot(k);if(i!=null)["chinh","dong","tay"].forEach(h=>{O[h].res=roomResidents(i,h)});else residents(k).forEach(p=>O.chinh.res.push(p));return O}
+ const i=palSlot(k);if(i!=null)["chinh","dong","tay"].forEach(h=>{O[h].res=roomResidents(i,h)});else residents(k).forEach(p=>O.chinh.res.push(p));
+ /* she is home in her own phối điện of this palace (owner 17/11 04:08Z): she counts there */
+ const mine=i!=null&&kpmMine(i);if(mine&&S.place==="home"&&!S.out){O[mine].ppl.push(S);O[mine].n++}return O}
 /* her own servants (the people her rooms show, minus consorts, kids, men): they live in the dãy nhà cung nhân */
 function kpmIsSrv(p){return !!p&&!(p.ref&&(rivals||[]).includes(p.ref))&&!["kid","man","emp","th","hh","rival","chest","fallen"].includes(p.kind)}
 function kpmServants(){try{return (homePeople()||[]).filter(kpmIsSrv)}catch(e){return[]}}
@@ -58173,7 +58177,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="a2ccaffdbfad";window.CTM_BUILD=BUILD;
+const BUILD="030f7eb42c07";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
