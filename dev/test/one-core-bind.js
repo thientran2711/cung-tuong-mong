@@ -85,8 +85,9 @@ function linkMods(idx,f,st,n){const {names,nNames}=namesAt(st,n,null,true);const
 function bind(B){const idx=index(B);const {mods,FN,LINK,NOBJ,reads,prints}=idx;
  /* reads per module, sorted by position, for range lookups */
  const R={};for(const r of reads)(R[r.m.f]=R[r.m.f]||[]).push(r);
- const readIn=(m,node,key)=>(R[m.f]||[]).some(r=>r.key===key&&r.n.start>=node.start&&r.n.end<=node.end);
- const anyRead=new Set(reads.map(r=>r.key));
+ /* a read of the key itself, or of an object that holds it (use:BAL.arc.item.vangbac applies the whole item; A=BAL.arc.alt["td_an.c1"][0] then A.l) */
+ const readIn=(m,node,key)=>(R[m.f]||[]).some(r=>(r.key===key||key.startsWith(r.key+'.')&&r.key.split('.').length>=3)&&r.n.start>=node.start&&r.n.end<=node.end);
+ const anyRead=new Set(reads.map(r=>r.key));const anyReadOf=(key,min)=>{const p=key.split('.');for(let i=p.length;i>=Math.min(min,p.length);i--)if(anyRead.has(p.slice(0,i).join('.')))return true;return false};
  /* names a node calls (Identifier callees) */
  const callsOf=node=>{const S=new Set();walk(node,n=>{if(n.type==='CallExpression'&&n.callee.type==='Identifier')S.add(n.callee.name);if(n.type==='Property'&&n.value.type==='Identifier'&&FN[n.value.name])S.add(n.value.name)});return S};
  const CC=new Map();const callsC=node=>{if(!CC.has(node))CC.set(node,callsOf(node));return CC.get(node)};
@@ -97,7 +98,7 @@ function bind(B){const idx=index(B);const {mods,FN,LINK,NOBJ,reads,prints}=idx;
  for(const P of prints){const {m,stack:st,key}=P;
   /* example numbers that no rule reads by design: the kit sample page (BAL.kitpage) and the Hạnh lesson's first-time example picture (BAL.td.exNeed) */
   if(P.p[0]==='kitpage'||key==='td.exNeed'){out.push(Object.assign(P,{ok:true,how:'example number (no rule by design)'}));continue}
-  if(!SITE.has(P.p[0])){const ok=anyRead.has(key)||anyRead.has(P.p.slice(0,-1).join('.'));out.push(Object.assign(P,{ok,how:ok?'concept: read by a rule':'concept: read by no rule'}));if(!ok)bad.push(P);continue}
+  if(!SITE.has(P.p[0])){const ok=anyReadOf(key,1);out.push(Object.assign(P,{ok,how:ok?'concept: read by a rule':'concept: read by no rule'}));if(!ok)bad.push(P);continue}
   /* walk up to the option boundary */
   let scope=null;
   for(let i=st.length-1;i>=0;i--){const x=st[i],child=st[i+1]||P.n;
@@ -113,6 +114,8 @@ function bind(B){const idx=index(B);const {mods,FN,LINK,NOBJ,reads,prints}=idx;
   const prev=new Set();for(const c of m.comments)if(c.start>=scope.start&&c.end<=scope.end||fnIn&&c.start>=fnIn.start&&c.end<=fnIn.end){const q=/previews:\s*([\w$, ]+)/.exec(c.value);if(q)q[1].split(/[ ,]+/).filter(Boolean).forEach(x=>prev.add(x))}
   let how=null;
   if(readDeep(m,scope,key,2,new Set()))how='same option';
+  /* a BAL.road / BAL.arc amount in a help or info text (not inside an option object): the rule it describes lives in the road / arc engine */
+  else if(P.p[0]!=='eff'&&scope.type!=='ObjectExpression'&&anyReadOf(key,2))how='road / arc rule (info text)';
   else for(const k of names){for(const L of LINK[k]||[])if(readDeep(L.m,L.node,key,2,new Set())){how='act '+k+' ('+L.m.f+':'+L.node.loc.start.line+')';break}if(how)break}
   /* a handler function named after the action (data-td="probe" → tdProbe) */
   if(!how)for(const k of names){const cap=k[0].toUpperCase()+k.slice(1);for(const nm of Object.keys(FN))if((nm===k||nm.endsWith(cap)&&/[a-z0-9]$/.test(nm.slice(0,-cap.length)))&&FN[nm].some(d=>readDeep(d.m,d.node,key,2,new Set()))){how='handler '+nm;break}if(how)break}
