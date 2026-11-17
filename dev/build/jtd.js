@@ -20,8 +20,8 @@ Object.assign(KG82_KIND,{
 Object.assign(KG82_SPR,{td_cong:["kim-needle","theu-cloud"],td_dung:["mua-mat","banh-pot"],td_ngon:[],td_hanh:[]});
 (function(){const b0=kg82BgName;kg82BgName=function(kind){return TD_BG[kind]||b0.apply(this,arguments)}})();
 const TD_RULES={
- cong:[["1","Xem chỉ mẫu ở trên, chạm sợi chỉ cùng màu."],["2","Đặt ngón tay lên chấm xanh, kéo kim men theo nét chấm tới cờ đỏ."],["3","Lệch khỏi nét thì mũi chỉ không bám; kéo lại gần nét là thêu tiếp được."]],
- dung:[["1","Bước chân nào cũng làm bát nghiêng một chút. Dấu trên sàn có mũi tên chỉ bên nghiêng."],["2","Giữ nửa trái hoặc nửa phải của khung để đỡ bát về phía ngược lại."],["3","Giữ mũi tên xanh ở vùng sáng giữa thanh là được điểm; bát đổ thì đứng lại một nhịp."]],
+ cong:[["1","Xem chỉ mẫu ở trên, chạm sợi chỉ cùng màu."],["2","Đặt ngón tay lên chấm xanh, kéo kim men theo nét chấm tới cờ đỏ."],["3","Mũi chỉ đi đúng theo tay kéo: lệch khỏi nét thì mũi chỉ hiện đỏ và mất điểm. Nhấc tay rồi đặt lại ở chấm sáng là thêu tiếp được."]],
+ dung:[["1","Bước chân nào cũng làm bát nghiêng một chút. Dấu trên sàn có mũi tên chỉ bên nghiêng."],["2","Giữ nửa trái hoặc nửa phải của khung để đỡ bát về phía ngược lại."],["3","Giữ mũi tên xanh ở vùng sáng giữa thanh là được điểm; bát đổ thì mất điểm và đứng lại một nhịp."]],
  ngon:[["1","Người nói xong và vòng xám đầy (người đang giận, buồn, lo cần nguôi) thì vòng xanh sáng: tới lúc thưa. Nói chen vào là cướp lời."],["2","Giữ nút Thưa: tiếng nói dâng lên trong thanh bên phải."],["3","Buông tay khi tiếng nói nằm trong dải xanh: bề trên nhỏ nhẹ, kẻ dưới ôn tồn, ngang hàng vui vẻ. Giữ quá lâu là lớn tiếng."]],
  hanh:[["1","Mỗi người chờ ghi rõ cần mấy phần. Họ không chờ lâu được: mỗi lượt có hạn giờ."],["2","Chạm + để thêm một phần cho người ấy, chạm − để bớt lại."],["3","Chia cho ai cũng đủ, đừng thừa cho người này mà thiếu người kia, rồi chạm Phát xong."]]};
 const TD_GOAL={cong:"Đường kim đều và đúng màu chỉ",dung:"Bát giữ thẳng trọn buổi",ngon:"Nói đúng lúc, vừa tiếng người nghe",hanh:"Ai cũng được đủ phần cần"};
@@ -30,39 +30,50 @@ function tdEase(lv){return cl(Math.round(lv||0),0,5)}
 /* ---------- 1. Công: Thêu theo nét ---------- */
 const TD_THREAD=[["đỏ son","#c23b22"],["lam ngọc","#2f6aa5"],["vàng nghệ","#e0a526"],["lục","#2f8a5a"],["tím","#7a4a9a"]];
 const TD_PATH=[t=>[.1+.8*t,.5+.2*Math.sin(Math.PI*4*t)],t=>{const a=Math.PI*(-.85+1.7*t);return[.5+.34*Math.sin(a)*1.0,.62-.34*Math.cos(a)]},t=>[.5+.27*Math.sin(Math.PI*2*t),.12+.76*t]];
-function kgTdThread(box,env){const C=kg82Canvas(box,1,430),{g,W,H}=C;const lv=tdEase(env.lv),N=44,TOL=W*(.055+.006*lv)*mgTol(env),LIM=26000;
- const order=kg82Shuf([0,1,2]);let piece=0,pts=0,phase="pick",stop=false,raf=0,t0=0,i=0,down=false,px=0,py=0,off=0,lastT=0,tgt=0,choice=[],P=[],colOk=false;const pops=[];
- const pc=kg82Col("--good","#2d7a52"),rc=kg82Col("--red","#c23b22");
+/* review/mg-snap (owner 17/11 07:10Z, OD:L1571): the stitch follows HER finger. Before, the thread was drawn along the dotted path and the needle
+   jumped to the next path dot whenever the finger came near it, so a scribble looked and scored like a clean line. Now every point she draws is
+   kept and drawn: inside the tolerance in the thread colour, outside it as a red stitch; a piece is scored by the ONE trace score mgTraceScore
+   (jmgt, the same as Đồ nét bút / Chép kinh / May áo): path covered by her line × her line lying on the path. Tolerance = BAL.mgTier.lev.td_cong.tol
+   (share of the board width, by the board ease = rank / skill, mgLev). The bright dot still shows the first part of the path not yet covered. */
+function kgTdThread(box,env){const C=kg82Canvas(box,1,430),{g,W,H}=C;const N=44,TOL=W*mgLev(env,"td_cong","tol"),LIM=26000;
+ const order=kg82Shuf([0,1,2]);let piece=0,pts=0,phase="pick",stop=false,raf=0,t0=0,i=0,down=false,px=0,py=0,tgt=0,choice=[],P=[],D=[],cov=[],ink=null,inks=[],colOk=false;const pops=[];
+ const pc=kg82Col("--good","#2d7a52"),rc=kg82Col("--red","#c23b22");const lv=tdEase(env.lv);
  function samples(k){return Array.from({length:N},(_,j)=>{const [x,y]=TD_PATH[order[k]](j/(N-1));return[x*W,(.1+.8*y)*H]})}
- function begin(){if(stop)return;if(piece>=3){stop=true;return setTimeout(()=>env.end((pts)),350)}P=samples(piece);i=0;off=0;down=false;colOk=false;phase="pick";
+ /* the path densified to ~4 px for scoring (the 44 dots stay the picture) */
+ function dense(Q){const R=[Q[0]];for(let j=1;j<Q.length;j++){const n=Math.max(1,Math.ceil(Math.hypot(Q[j][0]-Q[j-1][0],Q[j][1]-Q[j-1][1])/4));for(let s=1;s<=n;s++)R.push([Q[j-1][0]+(Q[j][0]-Q[j-1][0])*s/n,Q[j-1][1]+(Q[j][1]-Q[j-1][1])*s/n])}return R}
+ const near=(x,y)=>{let m=1e9;for(const q of D){const d=(q[0]-x)**2+(q[1]-y)**2;if(d<m)m=d}return Math.sqrt(m)};
+ function begin(){if(stop)return;if(piece>=3){stop=true;return setTimeout(()=>env.end((pts)),350)}P=samples(piece);D=dense(P);cov=P.map(()=>false);i=0;ink=null;inks=[];down=false;colOk=false;phase="pick";
   const ids=kg82Shuf([0,1,2,3,4]).slice(0,lv>=3?2:3);tgt=ids[Math.floor(Math.random()*ids.length)];choice=kg82Shuf(ids)}
- function endPiece(){if(phase!=="stitch")return;phase="judge";const p=i/(N-1),q=p*(1-Math.min(.4,off*.25));const got=((colOk?.2:0)+.8*q)*10/3;pts+=got;
-  kg82Pop(pops,W/2,H*.5,p>=.98?"Thêu đẹp lắm!":p>=.6?"Đường kim khá đều":"Còn dang dở",p>=.6?pc:rc);piece++;setTimeout(begin,1100)}
+ function endPiece(){if(phase!=="stitch")return;phase="judge";if(ink){inks.push(ink);ink=null}down=false;const U=[].concat(...inks);const q=mgTraceScore(D,U,TOL);const got=((colOk?.2:0)+.8*q)*10/3;pts+=got;
+  kg82Pop(pops,W/2,H*.5,q>=.85?"Thêu đẹp lắm!":q>=.6?"Đường kim khá đều":q>=.3?"Mũi kim lệch nhiều":"Còn dang dở",q>=.6?pc:rc);piece++;setTimeout(begin,1100)}
+ /* her point at (x,y): marks the path dots it covers; i = the first dot not yet covered (the bright dot) */
+ function stitch(x,y){const l=ink[ink.length-1];if(l&&Math.hypot(x-l[0],y-l[1])<2)return;ink.push([x,y,near(x,y)<=TOL]);for(let j=0;j<N;j++)if(!cov[j]&&Math.hypot(P[j][0]-x,P[j][1]-y)<TOL)cov[j]=true;while(i<N&&cov[i])i++}
  const sw=()=>{const r=Math.min(W*.085,34),n=choice.length,gap=(W-n*2*r)/(n+1);return choice.map((id,k)=>({id,x:gap*(k+1)+r*(2*k+1),y:H*.72,r}))};
  function draw(now){kg82Bg(g,W,H,"td_cong",.1,.6);g.textAlign="center";g.textBaseline="alphabetic";
   if(phase==="pick"){g.fillStyle="#3a1a0c";g.font=`700 15px ${kg82Col("--body","sans-serif")}`;kg82Lbl(g,"Chỉ mẫu",W/2,H*.2);g.beginPath();g.arc(W/2,H*.34,Math.min(W*.1,40),0,Math.PI*2);g.fillStyle=TD_THREAD[tgt][1];g.fill();g.lineWidth=3;g.strokeStyle="#fff6dc";g.stroke();
    g.fillStyle="#3a1a0c";kg82Lbl(g,"Chạm sợi chỉ cùng màu",W/2,H*.56);sw().forEach(s=>{g.beginPath();g.arc(s.x,s.y,s.r,0,Math.PI*2);g.fillStyle=TD_THREAD[s.id][1];g.fill();g.lineWidth=3;g.strokeStyle="#fff6dc";g.stroke()})}
-  else{const col=TD_THREAD[choice.length?tgt:0][1];g.save();g.lineCap="round";g.lineJoin="round";g.setLineDash([2,9]);g.lineWidth=4;g.strokeStyle="rgba(58,26,12,.75)";g.beginPath();P.forEach(([x,y],j)=>j?g.lineTo(x,y):g.moveTo(x,y));g.stroke();g.restore();
-   if(i>0){g.save();g.lineCap="round";g.lineJoin="round";g.lineWidth=5.5;g.strokeStyle=useCol;g.beginPath();for(let j=0;j<=i;j++)j?g.lineTo(P[j][0],P[j][1]):g.moveTo(P[j][0],P[j][1]);g.stroke();g.restore()}
-   const nx=P[Math.min(N-1,i+3)];if(phase==="stitch"){g.save();g.globalAlpha=.55+.4*Math.sin(now/180);g.fillStyle="#ffe08a";g.shadowColor="#ffe08a";g.shadowBlur=16;g.beginPath();g.arc(nx[0],nx[1],8,0,Math.PI*2);g.fill();g.restore()}
+  else{g.save();g.lineCap="round";g.lineJoin="round";g.setLineDash([2,9]);g.lineWidth=4;g.strokeStyle="rgba(58,26,12,.75)";g.beginPath();P.forEach(([x,y],j)=>j?g.lineTo(x,y):g.moveTo(x,y));g.stroke();g.restore();
+   /* her own line: on the path in the thread colour, off the path red and thin (an off stitch shows and costs) */
+   inks.concat(ink?[ink]:[]).forEach(U=>{g.save();g.lineCap="round";g.lineJoin="round";for(let j=1;j<U.length;j++){const ok=U[j][2]&&U[j-1][2];g.lineWidth=ok?5.5:3;g.strokeStyle=ok?useCol:rc;g.globalAlpha=ok?1:.85;g.beginPath();g.moveTo(U[j-1][0],U[j-1][1]);g.lineTo(U[j][0],U[j][1]);g.stroke()}g.restore()});
+   if(phase==="stitch"&&i<N){const nx=P[Math.min(N-1,i)];g.save();g.globalAlpha=.55+.4*Math.sin(now/180);g.fillStyle="#ffe08a";g.shadowColor="#ffe08a";g.shadowBlur=16;g.beginPath();g.arc(nx[0],nx[1],8,0,Math.PI*2);g.fill();g.restore()}
    g.fillStyle="#2d7a52";g.beginPath();g.arc(P[0][0],P[0][1],9,0,Math.PI*2);g.fill();g.fillStyle="#c23b22";g.beginPath();g.arc(P[N-1][0],P[N-1][1],9,0,Math.PI*2);g.fill();
    g.fillStyle="#3a1a0c";g.font=`700 12px ${kg82Col("--body","sans-serif")}`;kg82Lbl(g,"bắt đầu",P[0][0],P[0][1]+(P[0][1]<H*.5?24:-14),70);kg82Lbl(g,"hết nét",P[N-1][0],P[N-1][1]+(P[N-1][1]<H*.5?24:-14),70);
-   if(down||i>0)kg82Spr(g,"kim-needle",down?px:P[i][0],down?py:P[i][1],W*.2,null,{ax:.08,ay:.92})}
+   const tip=ink&&ink.length?ink[ink.length-1]:null;if(tip)kg82Spr(g,"kim-needle",tip[0],tip[1],W*.2,null,{ax:.08,ay:.92})}
   kg82DrawPops(g,pops,now)}
  let useCol="#c23b22";
- function frame(now){if(stop&&phase!=="judge")return;if(phase==="stitch"){const left=LIM-(now-t0);if(down){const dt=Math.min(.05,(now-lastT)/1000);let bd=1e9;for(let j=Math.max(0,i-2);j<N;j++){const d=Math.hypot(P[j][0]-px,P[j][1]-py);if(d<bd)bd=d}if(bd>TOL*1.6)off+=dt}lastT=now;if(i>=N-1||left<=0)endPiece()}
+ function frame(now){if(stop&&phase!=="judge")return;if(phase==="stitch"){const left=LIM-(now-t0);if(left<=0||(i>=N&&!down))endPiece()}
   env.hud({score:`${Math.round(pts)}/10`,round:`Hồi ${Math.min(piece+1,3)}/3`,time:phase==="stitch"?`${Math.max(0,Math.ceil((LIM-(now-t0))/1000))} giây`:phase==="pick"?"chọn chỉ":"–"});draw(now);raf=requestAnimationFrame(frame)}
- function move(e){if(phase!=="stitch"||!down)return;[px,py]=C.at(e);for(let j=Math.min(N-1,i+4);j>i;j--){if(Math.hypot(P[j][0]-px,P[j][1]-py)<TOL*1.15){i=j;break}}}
- C.cv.addEventListener("pointerdown",e=>{e.preventDefault();const [x,y]=C.at(e);if(phase==="pick"){const s=sw().find(s=>Math.hypot(s.x-x,s.y-y)<s.r*1.4);if(!s)return;colOk=s.id===tgt;useCol=TD_THREAD[s.id][1];kg82Pluck(colOk?3:0,colOk);kg82Pop(pops,W/2,H*.5,colOk?"Đúng màu!":"Lệch màu rồi",colOk?pc:rc);phase="stitch";t0=performance.now();lastT=t0;return}
-  if(phase!=="stitch")return;px=x;py=y;if(Math.hypot(P[i][0]-x,P[i][1]-y)<TOL*2.2){down=true;try{C.cv.setPointerCapture(e.pointerId)}catch(_){}}});
- C.cv.addEventListener("pointermove",move);const up=()=>{down=false};C.cv.addEventListener("pointerup",up);C.cv.addEventListener("pointercancel",up);
+ function move(e){if(phase!=="stitch"||!down||!ink)return;[px,py]=C.at(e);stitch(px,py)}
+ C.cv.addEventListener("pointerdown",e=>{e.preventDefault();const [x,y]=C.at(e);if(phase==="pick"){const s=sw().find(s=>Math.hypot(s.x-x,s.y-y)<s.r*1.4);if(!s)return;colOk=s.id===tgt;useCol=TD_THREAD[s.id][1];kg82Pluck(colOk?3:0,colOk);kg82Pop(pops,W/2,H*.5,colOk?"Đúng màu!":"Lệch màu rồi",colOk?pc:rc);phase="stitch";t0=performance.now();return}
+  if(phase!=="stitch")return;px=x;py=y;down=true;ink=[];stitch(x,y);try{C.cv.setPointerCapture(e.pointerId)}catch(_){}});
+ C.cv.addEventListener("pointermove",move);const up=()=>{down=false;if(ink){if(ink.length)inks.push(ink);ink=null}};C.cv.addEventListener("pointerup",up);C.cv.addEventListener("pointercancel",up);
  const act=document.createElement("div");act.className="kg82act";act.innerHTML=`<button class="${kg82Btn(true)}" id="tdthx">Xong mảnh này<small>nộp mảnh thêu đang làm</small></button>`;box.appendChild(act);act.querySelector("button").onclick=()=>{if(phase==="stitch")endPiece()};
- KG82.peek=()=>{if(phase==="pick"){const s=sw().find(s=>s.id===tgt);return s?C.client(s.x,s.y):null}if(phase!=="stitch")return null;return{drag:P.slice(Math.max(0,i)).filter((_,j,a)=>j%2===0||j===a.length-1).map(([x,y])=>{const c=C.client(x,y);return[c.x,c.y]})}};
- KG82.dbg=()=>({phase,i,down,off,TOL,p0:P[0],piece});
+ KG82.peek=()=>{if(phase==="pick"){const s=sw().find(s=>s.id===tgt);return s?C.client(s.x,s.y):null}if(phase!=="stitch"||down||i>=N)return null;return{drag:P.slice(Math.max(0,i)).filter((_,j,a)=>j%2===0||j===a.length-1).map(([x,y])=>{const c=C.client(x,y);return[c.x,c.y]})}};
+ KG82.dbg=()=>({phase,i,down,TOL,p0:P[0],piece,ink:inks.reduce((a,u)=>a+u.length,0)});
  begin();raf=requestAnimationFrame(frame);return()=>{stop=true;phase="";cancelAnimationFrame(raf)}}
 
 /* ---------- 2. Dung: Đi đứng giữ bát ---------- */
-function kgTdWalk(box,env){const C=kg82Canvas(box,1,430),{g,W,H}=C;const lv=tdEase(env.lv),BAND=mgLev(env,"td_dung","band"),KICK=mgLev(env,"td_dung","kick"),DUR=20,STEP=1.6,KN=12;/* mg-balance-2: safe band + step sway by ease (BAL.mgTier.lev.td_dung) */
+function kgTdWalk(box,env){const C=kg82Canvas(box,1,430),{g,W,H}=C;const lv=tdEase(env.lv),BAND=mgLev(env,"td_dung","band"),KICK=mgLev(env,"td_dung","kick"),SPL=mgLev(env,"td_dung","spill"),DUR=20,STEP=1.6,KN=12;/* mg-balance-2: safe band + step sway by ease (BAL.mgTier.lev.td_dung) */
  const kicks=Array.from({length:KN},(_,k)=>({t:2.4+k*STEP,d:k%3===2?(Math.random()<.5?-1:1):(k%2?-1:1)*(Math.random()<.35?-1:1),m:(.9+.4*Math.random())*KICK}));
  let x=0,v=0,t=0,inB=0,spill=0,stag=0,dir=0,pend=0,ki=0,stop=false,raf=0,last=performance.now();const ptr=new Map(),pops=[];
  const good=kg82Col("--good","#2d7a52"),red=kg82Col("--red","#c23b22");
@@ -86,7 +97,7 @@ function kgTdWalk(box,env){const C=kg82Canvas(box,1,430),{g,W,H}=C;const lv=tdEa
  function step(dt){t+=dt;
   while(ki<KN&&t>=kicks[ki].t){v+=kicks[ki].d*kicks[ki].m*1.1;ki++}
   const eff=dir||pend;/* a tap shorter than one frame still counts for that frame */v+=(.55*x+eff*3.2)*dt;v*=Math.exp(-1.4*dt);x+=v*dt;
-  if(Math.abs(x)>=1){spill++;x=0;v=0;stag=1;kg82Pluck(0,false);kg82Pop(pops,W/2,H*.5,"Bát nghiêng quá, đứng lại một nhịp",red)}
+  if(Math.abs(x)>=1){spill++;x=0;v=0;stag=1;inB=Math.max(0,inB-SPL);/* review/mg-snap: a spill costs (it used to re-centre the bowl inside the band for free) */kg82Pluck(0,false);kg82Pop(pops,W/2,H*.5,"Bát nghiêng quá, đứng lại một nhịp",red)}
   if(stag>0)stag-=dt;else if(Math.abs(x)<BAND)inB+=dt}
  /* real-time clock: a slow frame (down to ~4 fps) is run as several small steps, so a laggy phone gets the same 20 s as everyone, never a clock that crawls past the shared 97 s guard */
  function frame(now){if(stop)return;const dl=Math.min(.6,Math.max(0,(now-last)/1000));last=now;const n=Math.max(1,Math.ceil(dl/.034));for(let q=0;q<n&&t<DUR+1;q++)step(dl/n);pend=0;

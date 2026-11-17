@@ -15,7 +15,7 @@ const {chromium}=require('playwright');const fs=require('fs');
 const [,,BASE,KL,TL,BL,NN,PG,OUT]=process.argv;
 const ALL='dan,hat,co,dauho,ban,ve,hoa,theu,kim,mua,banh,huong,kinh,may,duho,den,td_cong,td_dung,td_ngon,td_hanh';
 const KINDS=(KL&&KL!=='all'?KL:ALL).split(',');const TIERS=(TL||'e2').split(',');const BOTS=(BL||'skilled,random').split(',');const N=+(NN||30);const PAGES=+(PG||3);
-const BOT={rt:+(process.env.MGBOT_RT||70),px:+(process.env.MGBOT_PX||.018),think:450,slip:.06,thinkD:900,slipD:.12,timing:'dan,ban,duho,hat,den,dauho,banh,td_dung,td_ngon',aim:40,seek:[+(process.env.MGBOT_SEEK0||600),+(process.env.MGBOT_SEEK1||350)]};
+const BOT={sloppy:+(process.env.MGBOT_SLOPPY||5),rt:+(process.env.MGBOT_RT||70),px:+(process.env.MGBOT_PX||.018),think:450,slip:.06,thinkD:900,slipD:.12,timing:'dan,ban,duho,hat,den,dauho,banh,td_dung,td_ngon',aim:40,seek:[+(process.env.MGBOT_SEEK0||600),+(process.env.MGBOT_SEEK1||350)]};
 const VCLOCK=()=>{const rP=performance.now.bind(performance),rST=window.setTimeout.bind(window),rCT=window.clearTimeout.bind(window);
  let vt=rP(),seq=1;const T=new Map(),RAF=new Map();const ch=new MessageChannel();let pumping=false;
  const fire=()=>{const due=[...T.entries()].filter(([,t])=>t.at<=vt).sort((a,b)=>a[1].at-b[1].at||a[0]-b[0]);
@@ -44,10 +44,12 @@ const BOTS_SRC=(BOT)=>{
   const sc=()=>{const r=boxR();return Math.min(r.width,r.height)};
   const end=()=>{if(hold){pe(hold.el,'pointerup',hold.x,hold.y,7);hold=null}res()};
   const tick=()=>{if(KG82.phase!=='play'){end();return}const now=performance.now();
+   if(kind==='idle'){setTimeout(tick,16);return}/* review/mg-snap: never touches the board (timed boards only) — a board that pays idle play cannot fail */
    if(kind==='random'){if(!busy&&now>nx){busy=true;
      if(Math.random()<.3){const r=boxR();const x=r.left+Math.random()*r.width,y=r.top+Math.random()*r.height,el=at(x,y);if(hold){pe(hold.el,'pointerup',hold.x,hold.y,7);hold=null}else if(el){pe(el,'pointerdown',x,y,7);hold={el,x,y}}busy=false}
      else randomMove(()=>{busy=false});nx=now+250+Math.random()*400}setTimeout(tick,16);return}
-   /* skilled (casual = the same person with twice the timing error) */
+   /* skilled (casual = the same person with twice the timing error; sloppy (review/mg-snap) = the same person with BOT.sloppy × the tap / drag scatter:
+      she scribbles roughly along the line instead of following it; a board where sloppy play still scores high cannot fail = snap / magnet) */
    const pk=KG82.peek();
    if(pk&&pk.at!=null){/* a predictable target (jslap needle): a person ANTICIPATES the crossing she sees coming and taps at at + N(0, BOT.aim) ms */
      if(!busy){busy=true;const k=kind==='casual'?2:1;setTimeout(()=>{if(KG82.phase!=='play')return;const q=KG82.peek()||pk;tap(q.x,q.y)},Math.max(0,pk.at+G()*BOT.aim*k))}
@@ -61,7 +63,7 @@ const BOTS_SRC=(BOT)=>{
       if(holdWant&&!hold&&el){pe(el,'pointerdown',x,y,7);hold={el,x,y,k:holdWant}}}
      if(!pk.drag&&!pk.sel){setTimeout(tick,16);return}}
    const timing=BOT.timing.split(',').includes(kind0);
-   if(pk&&!busy&&now>nx){busy=true;const slip=Math.random()<(timing?BOT.slip:BOT.slipD);const s=sc()*BOT.px;
+   if(pk&&!busy&&now>nx){busy=true;const slip=Math.random()<(timing?BOT.slip:BOT.slipD);const s=sc()*BOT.px*(kind==='sloppy'?BOT.sloppy:1);
     const go=()=>{if(KG82.phase!=='play'){busy=false;return}
      if(slip){randomMove(()=>{busy=false;nx=performance.now()+BOT.think*(.5+Math.random())});return}
      const q=KG82.peek()||pk;
@@ -90,6 +92,8 @@ const BOTS_SRC=(BOT)=>{
    if(typeof mgPace==='function'){const m0=mgPace;window.mgPace=function(env,kind,el,lim){(window.__pl=window.__pl||[]).push(+(cl((+el||0)/Math.max(1,+lim||1),0,1)).toFixed(3));return m0.apply(this,arguments)}}
    /* measuring only: freeze the rest of the game (whole-UI render loops) — the minigame engines do not use them */window.__mgQuiet=1;for(const f of ['render','kmmAll','k3CatTabs','kitBdBox','kitRankPaint','kmmSweep'])try{if(typeof window[f]==='function')window[f]=function(){}}catch(e){}
    const st=document.createElement('style');st.textContent='#kroul,#title{display:none!important} *,*::before,*::after{animation:none!important;transition:none!important} body *{visibility:hidden!important} #ov,#ov *{visibility:visible!important}';document.head.appendChild(st)});
+  /* review/mg-snap calibration: MGBOT_EVAL = JS run in the page before the plays (e.g. try BAL values: BAL.mgTier.lev.td_cong.tol=[.02,.06]) */
+  if(process.env.MGBOT_EVAL)await p.evaluate(process.env.MGBOT_EVAL);
   await p.waitForTimeout(800);return{ctx,p}};
  const worker=async(wi)=>{let {ctx,p}=await open();
   while(jobs.length){const J=jobs.shift();
