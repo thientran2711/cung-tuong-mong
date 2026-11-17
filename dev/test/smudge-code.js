@@ -1,5 +1,5 @@
 /* review/smudge-code: makeup SMUDGE as a CODE effect on the makeup colour layer (owner 17/11 ~23:30Z).
-   usage: node dev/test/smudge-code.js <page url> [outdir]   -> JSON {checks, errs}; with outdir also writes smudge-0..3.png (face close-up 400 css px @dpr 3 + figure strip).
+   usage: [CLOSEUP=fig] node dev/test/smudge-code.js <page url> [outdir]   -> JSON {checks, errs}; with outdir also writes smudge-0..3.png (face close-up 400 css px @dpr 3 + figure strip).
    checks: layer present at every level and place, below nothing but above makeup, levels differ (pixel mass grows 1<2<3), no makeup = none, NPC woman gets one,
    men none, picture without points nothing, every colour from BAL (no typed numbers in the draw: BAL.looks.smuFx). */
 const {chromium}=require('playwright');const URL=process.argv[2],OUT=process.argv[3];
@@ -9,10 +9,11 @@ const {chromium}=require('playwright');const URL=process.argv[2],OUT=process.arg
  await p.evaluate(()=>{const kl=document.getElementById('kload');if(kl)kl.remove();try{localStorage.clear()}catch(e){}SLOT=3;window.__forceOrigin='tt';document.getElementById('title').hidden=true;start()});
  await p.waitForFunction(()=>typeof S!=='undefined'&&S&&S.name&&S.known);await p.waitForTimeout(4000);
  await p.waitForFunction(()=>window.TOIL_FIT&&TOIL_FIT.fit&&window.KIT_VEIL&&KIT_VEIL.fit,null,{timeout:40000}).catch(()=>{});
+ if(process.env.LOCALFIT){const fs=require('fs'),mk={};for(const f of fs.readdirSync('dev/art/mkfit'))if(f.endsWith('.json'))mk[f.slice(0,-5)]=JSON.parse(fs.readFileSync('dev/art/mkfit/'+f,'utf8'));await p.evaluate(mk=>{for(const g in mk){MK_FIT.g[g]=mk[g];MK_FIT.ld[g]=1}},mk)}/* LOCALFIT=1: use the repo's dev/art/mkfit tables instead of the CDN ones (diagnosis) */
  const C=await p.evaluate(async()=>{Q.length=0;document.getElementById('modal').hidden=true;const C={};
   try{toilAuto()}catch(e){}const T=S.toilette;T.makeup=true;T.look='dep';T.col=Object.assign(toilColDef(),{seed:5});
   /* a FIXED face whose face points are good (a few pictures' img/mk-fit points sit off the painted face: the makeup colour layer is off there too, not this effect's business) */
-  const por='por-consort-c19-kc-a18.webp',fig='fig-consort-c19-kc-a18.webp';
+  const por='por-consort-c11-tcold-a18.webp',fig='fig-consort-c11-tcold-a18.webp';
   const kf0=kitFace,kg0=kitFigOf;kitFace=function(q){const f=kf0.apply(this,arguments);if(q===S&&f&&f.src){const g=Object.assign({},f,{src:String(f.src).replace(/[^/]*$/,por)});if(f.__kp)g.__kp=f.__kp;return g}return f};kitFigOf=function(q){const s=kg0.apply(this,arguments);return q===S?String(s).replace(/[^/?]*(\?.*)?$/,fig):s};
   for(let i=0;i<60&&!(MK_FIT.get(por)&&MK_FIT.get(fig));i++)await new Promise(r=>setTimeout(r,250));/* her REAL portrait + figure (no swap): the picture and its face points must belong together */
   window.__por=por;window.__fig=fig;
@@ -36,12 +37,12 @@ const {chromium}=require('playwright');const URL=process.argv[2],OUT=process.arg
   C.balOnly=!!(BAL.looks.smuFx&&BAL.looks.smuFx.blush&&BAL.looks.smuFx.tear);
   clear();host.remove();return C});
  if(OUT){require('fs').mkdirSync(OUT,{recursive:true});
-  for(const lv of [0,1,2,3]){await p.evaluate(async lv=>{const clear=()=>{S.lk=null;if(S.toilette)delete S.toilette.lk};clear();if(lv)lkSmudge(S,lv,'mua');
+  for(const lv of [0,1,2,3]){await p.evaluate(async([lv,CF])=>{const clear=()=>{S.lk=null;if(S.toilette)delete S.toilette.lk};clear();if(lv)lkSmudge(S,lv,'mua');
    let host=document.getElementById('smu-shot');if(!host){host=document.createElement('div');host.id='smu-shot';document.body.appendChild(host)}
    if(!document.getElementById('smu-hide')){const st=document.createElement('style');st.id='smu-hide';st.textContent='body>*:not(#smu-shot){visibility:hidden!important}';document.head.appendChild(st)}host.style.cssText='position:fixed;left:0;top:0;z-index:2147483647;background:#f3e8d4;padding:14px 16px;width:420px;font:700 30px/1.1 serif;color:#4a2a14';
-   const f=kitFile(window.__por),ff=kitFile(window.__fig);const zm=()=>kitFaceZoom(S,f);
+   const f=kitFile(CF==="fig"?window.__fig:window.__por),ff=kitFile(window.__fig);const zm=()=>kitFaceZoom(S,f);
    const L=['0 · không lem','1 · nhẹ','2 · vừa','3 · nặng'][lv];
    const html=()=>`<div style="margin-bottom:8px">${L}</div><div class="kfzoom" style="width:388px;margin:0 auto 8px">${zm().replace(/^<div class="kfzoom"[^>]*>/,'').replace(/<\/div>$/,'')}</div><div style="position:relative;width:150px;height:150px;margin:0 auto;overflow:hidden">${kitStageFig(S)||''}</div>`;
-   host.innerHTML=html();await new Promise(r=>setTimeout(r,300));for(let i=0;i<80;i++){const bad=[...host.querySelectorAll('img.klk-smu')].some(x=>x.src.indexOf('data:image/png')!==0);if(!bad)break;await new Promise(r=>setTimeout(r,150))}host.innerHTML=html();await new Promise(r=>setTimeout(r,500))},lv);
+   host.innerHTML=html();await new Promise(r=>setTimeout(r,300));for(let i=0;i<80;i++){const bad=[...host.querySelectorAll('img.klk-smu')].some(x=>x.src.indexOf('data:image/png')!==0);if(!bad)break;await new Promise(r=>setTimeout(r,150))}host.innerHTML=html();await new Promise(r=>setTimeout(r,500))},[lv,process.env.CLOSEUP||'por']);
    await p.locator('#smu-shot').screenshot({path:`${OUT}/smudge-${lv}.png`})}}
  console.log(JSON.stringify({checks:C,errs}));await b.close()})();
