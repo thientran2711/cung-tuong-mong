@@ -68,12 +68,12 @@ function haScoreT0(v,x,need){const B=haB().tw;if(need==="sung")return BAL.mind.p
 function haOpts(v,N,need){if(!v||v===S)return[];const C=HA.oc=HA.oc||{};const k=v.id+":"+(need||"")+":"+wk()+":"+(((AG.na||{})[v.id])||0)+":"+(v.plan?1:0)+":"+((HA.gv||{})[v.id]||0);
  const c=C[k];if(c&&c.b===(S.buoi||0)>>8)return c.O.filter(o=>!o.t||o.t===S||o.t.alive!==false&&!o.t.out);const O=haOpts0(v,N,need);C[k]={b:0,O};
  if(Object.keys(C).length>400)HA.oc={};return O}
-/* review ag-all-2 r2 fix2: the option cache also keys on a per-person grudge version, bumped whenever oán or thiện cảm between her and anyone moves
-   (oanAdd / affAdd, the one pair every slight and kindness goes through), so a slight mid-week opens her scheme options at once (was: stale until her
+/* review ag-all-2 r2 fix2: the option cache also keys on a per-person grudge version, bumped whenever her oán toward anyone moves
+   (oanAdd: every slight, and every falling-out through relAdd, moves oán), so a slight mid-week opens her scheme options at once (was: stale until her
    own deed landed or the week turned; seen as ag-all-c 'scheme options … n:0' when deal() had cached her calm options first). */
-(function(){const bump=(x,y)=>{const G=HA.gv=HA.gv||{};for(const p of [x,y])if(p&&p!==S&&p.id!=null)G[p.id]=(G[p.id]||0)+1};
- const o0=oanAdd;oanAdd=function(x,y,n){const r=o0.apply(this,arguments);if(n)bump(x,y);return r};
- const a0=affAdd;affAdd=function(x,y,n){const r=a0.apply(this,arguments);if(n)bump(x,y);return r}})();
+(function(){const bump=x=>{if(x&&x!==S&&x.id!=null){const G=HA.gv=HA.gv||{};G[x.id]=(G[x.id]||0)+1}};/* the holder of the grudge only; thiện cảm drift alone keeps the cache (perf: every chat moves thiện cảm a little; a falling-out moves oán too, relAdd → oanAdd) */
+ const o0=oanAdd;oanAdd=function(x,y,n){const r=o0.apply(this,arguments);if(n)bump(x);return r};
+})();
 function haOpts0(v,N,need){const O=[];if(!haOn()||v===S||v.coop||v.confined)return O;const H=haB();if(need&&!H.needs.includes(need))return O;
  const road=BAL.ag.road[agOrg(v)]||BAL.ag.road._;
  /* her scheme on one person (she waits for a big scheme already in hand: v.plan) */
