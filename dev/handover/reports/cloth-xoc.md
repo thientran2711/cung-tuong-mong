@@ -67,3 +67,9 @@ Looked at (1x/2x waist-up, lv1-3): c01 red+cup, c03 green+beads, c30 cream-blue+
 Samples: CDN img/_review/cloth-xoc/xoc-0..3.png (1200 px, c01, waist-up big + small full, label "Áo xốc xếch · n …").
 NOT DONE: TASK 2 stain layer (plan in r2 section); dark-robe check.
 Harness (scratch): node eval of jcloth.js with window=global, BAL stub, RGBA via PIL, face box from CDN img/veil-fit.json; no browser.
+
+## r4b (after MAIN verdict on a4bccf5) — review/cloth-xoc 7545e2a
+Done per verdict: (1) output is BYTE-IDENTICAL to the picture away from creases and the hem/lapel warp (global brightness comp removed; test in dev/test/cloth-xoc.js, >97 % of untouched non-warp pixels identical). (2) creases short (fan <= .13 fh, clusters of 4 near-parallel, gap .0065 fh), placed at waist knot, belt, bust SIDES, inner elbows, above hem; core sg 1.8/2/2.2, crisp lit side, soft shade side x2.4, thin light ridge; drag diagonals removed (drag:0); colour = robe hue scaled darker (no brown cast), cap .34. (3) lv3 hem zig-zag (L.zig 1.3 % fw). Effect still OFF. Tests: cloth-xoc.js OK, one-core-guard PASS.
+Samples re-uploaded (c01 + cream c30, big crop + small full, 1200x654): CDN img/_review/cloth-xoc/xoc-0..3.png.
+My honest eye: clean (no brown streaks, no blur) but at 1x the clusters read like regular horizontal BARS (venetian blind), not crumpled silk; lv1 faint on red. The a->darkness mapping (jcloth.js clothXocBake `Math.min(.34,a*.5)`) is steppy: .28/.38 looked faint, .42/.6 looked like ink.
+Next ideas: break the regularity (random length/angle +-25°, vary gap, taper opacity along each stroke, some strokes diagonal), fewer but softer clusters + a wide very-low-contrast (6-8 %) shade patch behind each cluster so it reads as a fold, lv1 more visible on saturated robes. Stain layer (TASK 2) and a dark-robe check NOT done.
