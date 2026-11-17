@@ -332,7 +332,7 @@ function keqTT(){const wb=wearBonus(S),vp=vpItems(S);const slots=KEQ_TT.map(([sl
    const risk=over?"vượt phẩm: dễ bị tố":"";
    mini=fx.map(([a,v])=>kitChip(a,v)).join("")+(sl==="dress"||risk?`<span class="keql2">${sl==="dress"?`<span class="keqm">còn ${S.dress.until-S.turn} tháng</span>`:""}${risk?`<span class="keqw" title="${risk}" aria-label="${risk}">⚠</span>`:""}</span>`:"")}
   return{k:sl,label,item,note,ix,mini,hint:kitItemHint(sl),ghost:sl==="dress"?`img/wd512/wd-${keqTier()}-y-01.webp`:sl==="veil"?"img/veil-silk-ivory.png":keqArt(gk)}});
- const C=[];if(wb.sac)C.push(["Sắc",wb.sac]);if(wb.danh)C.push(["Danh",wb.danh]);
+ const C=[],ws=wb.sac-(wb.shSac||0)/* worn only: the shelf set Sắc is not worn */;if(ws)C.push(["Sắc",ws]);if(wb.danh)C.push(["Danh",wb.danh]);
  const sum=(C.length?kitChips(C):`<span class="past">chưa mang gì: không thêm</span>`)+kitLuxChip(luxOf(S))+(vp.length?kitChip(`${vp.length} món vượt phẩm: dễ bị tố`,"no"):"");
  return kitEquipSlots({key:"tutrang",title:"Bên mình",slots,sum,onPick:keqPick,col:true})}
 function keqPick(x){if(x.k==="veil"){const on=veilOn(S),need=veilNeed(S),has=veilHas(S);

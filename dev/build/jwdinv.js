@@ -117,7 +117,7 @@ function wdStatusChip(){try{const lab=wdKnownStatus(S);if(lab)return kitChip(`Đ
    x.ghost=sl==="tram"?keqArt("tramngoc")||"img/wd-tramngoc.webp":(WD_ITEMS.y_luamoc?WD_ITEMS.y_luamoc.icon:x.ghost);
    if(!s){x.item=null;x.mini="";continue}x.item=s.item;const fx=Object.entries(s.w.w||{}).filter(([a,v])=>v).map(([a,v])=>[NAMES[a]||a,v]);
    x.mini=fx.length?fx.map(([a,v])=>kitChip(a,v)).join(""):`<span class="keqm">giản dị</span>`}
-  const wb=wearBonus(S),C=[];if(wb.sac)C.push(["Sắc",wb.sac]);if(wb.danh)C.push(["Danh",wb.danh]);const vp=wdVpSeen();
+  const wb=wearBonus(S),C=[],ws=wb.sac-(wb.shSac||0)/* worn only: the shelf set Sắc is not worn */;if(ws)C.push(["Sắc",ws]);if(wb.danh)C.push(["Danh",wb.danh]);const vp=wdVpSeen();
   const sum=(C.length?kitChips(C):`<span class="past">chưa mang gì: không thêm</span>`)+kitLuxChip(luxOf(S))+wdStatusChip()+(vp?kitChip(`${vp} món vượt phẩm: dễ bị tố`,"no"):"");
   return kitEquipSlots({key:"tutrang",title:"Đang mang",slots:o.slots,sum,onPick:keqPick,col:true})}catch(e){console.error("keqTT wd",e);return html}}})();
 function wdSlotOpen(x){const sl=x.wd;const s=wdSlotItem(sl);const seen=new Set();
