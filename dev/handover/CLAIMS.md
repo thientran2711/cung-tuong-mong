@@ -586,3 +586,4 @@
 | coop-thin-a r1 PASS b95a56e3c (Worker deploy SAFE; rollback wrangler rollback f7d52a7d-a2d5-4a4a-95a2-84499cc53b3b) → builder ships ALONE after 0232, then s29 deploys Worker; B starts parts B‖D | review/coop-thin-a-r1 | main s29 | session_01UV1SzgchwneMvxW4bNtCDm | PASS | 17/11 03:44Z |
 | wx-fx-size review r1 (sonnet SMALL; perf ≤ live +5 % check) of a36104cfe (worker archived) | review/wx-fx-size-r1 | main s29 | session_01UV1SzjG2KgWJed7eeh8a3d | RUNNING | 17/11 03:45Z |
 | save-dlg-fix r1 PASS 711d018 (review/save-dlg-fix-r1) → builder: next small batch after coop-thin-a | review/save-dlg-fix-r1 | main s29 | session_01UV1SzgbocUETEUWFViBc8f | PASS | 17/11 03:46Z |
+| tuanluc-sync (opus): one-time log lines once, BÁO during play, who of every log line, Tuần lục wording + S.vl veil/voice collision | review/tuanluc-sync | main | session_01UV1Szh89kMUtnfZPTNysLY | READY a1b683cbb | 17/11 04:3xZ |
