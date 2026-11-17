@@ -13,7 +13,7 @@ Object.assign(BAL,{eff:{
  j31:{go:6},
  j34:{contestEnd:10},
  j40:{mindBelief:8,mindBelief_2:8},
- j42:{cnvFrame:-30,srvErrandDone:3,srvDoOrder:-10,go:-5,srvRise:[25,-25],top:15,top_2:40},
+ j42:{cnvFrame:-30,srvErrandDone:3,srvErrandDone_2:1,srvDoOrder_2:1,meritMis:.25,meritRec:3,meritSweep:.5,meritTea:.25,meritNvp:.5,meritRite:.25,meritBooks:.5 /* Công lao (srvMerit) of the servant acts */,srvDoOrder:-10,go:-5,srvRise:[25,-25],top:15,top_2:40},
  j55:{tdGiftHead:-10,ccStep:-5,ccStep_2:-5,tdAsk:-3,tdProbe:-8,tdProbe_2:8,tdLeak:-6,tdLeak_2:25,tdLeak_3:-10,top:2,top_2:3,top_3:6,top_4:-8,top_5:-6,top_6:8,top_7:-10,tdSoMonth:3,tdSoMonth_2:[4,-3],tdSoMonth_3:2,tdSoMonth_4:-2,tdSoMonth_5:-5,tdSoMonth_6:-5,tdImpeach:-6,tdImpeach_2:2,tdImpeach_3:-5,top_8:6,top_9:-6,go:-3,fail:-3},
  j68e:{ok:-5},
  j70:{thShield:-3,thLotus:-3,step70:2,exec70:-10,no:5,no_2:8,ok:12,ok_2:8,ordMonth70:6,ok_3:-3},

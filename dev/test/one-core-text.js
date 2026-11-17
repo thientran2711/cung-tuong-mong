@@ -27,7 +27,7 @@ function loadBAL(B){
  /* the rulebook values (the BAL files only). Each top-level statement runs on its own, so one that needs the game (contestOpen …) cannot stop the
     Object.assign(BAL,{…}) after it from running */
  const ctx=vm.createContext({console,Math,Object,Array,JSON,Number,String,window:{},document:{},localStorage:{getItem(){return null}},navigator:{}});
- for(const f of ['jbal.js','jbal2.js','jbaleff.js','jbalroad.js']){const src=fs.readFileSync(path.join(B,f),'utf8');
+ for(const f of ['jbal.js','jbal2.js','jbaleff.js','jbalroad.js','jbalarc.js']){const src=fs.readFileSync(path.join(B,f),'utf8');
   for(const st of acorn.parse(src,{ecmaVersion:'latest'}).body){try{vm.runInContext(src.slice(st.start,st.end),ctx)}catch(e){}}}
  return vm.runInContext('BAL',ctx)}
 /* BAL.a.b[2] / BAL.a["b"] path text → value */
@@ -117,7 +117,7 @@ function scan(B){
  const nearestStat=(txt,i)=>{const seg=txt.slice(Math.max(0,i-24),i);let best=null,at=-1;for(const [re] of STATS){const g=new RegExp(re.source,'g');let q;while((q=g.exec(seg)))if(q.index>=at){at=q.index;best=re}}return best};
  /* a cut ref is a number, or a small array / object of numbers (its leaves are what a text may copy) */
  const leaves=(v,suf)=>{if(isNum(v))return[{suf,v}];if(Array.isArray(v))return v.flatMap((x,i)=>leaves(x,suf+'['+i+']'));if(v&&typeof v==='object')return Object.keys(v).flatMap(k=>leaves(v[k],suf+(/^[A-Za-z_$][\w$]*$/.test(k)?'.'+k:'["'+k+'"]')));return[]};
- const sites=[],early=[];const home={eff:'jbaleff.js',road:'jbalroad.js',arc:'jbalroad.js'};const homeOf=r=>r.mode==='cut'?'jbal.js':home[r.p[0]];
+ const sites=[],early=[];const home={eff:'jbaleff.js',road:'jbalroad.js',arc:'jbalarc.js'};const homeOf=r=>r.mode==='cut'?'jbal.js':home[r.p[0]];
  for(const f of ORDER){const src=fs.readFileSync(path.join(B,f),'utf8');
   const ast=acorn.parse(src,{ecmaVersion:'latest',locations:true});
   const strs=[],refs=[];

@@ -38,6 +38,8 @@ Object.assign(BAL,{road:{get first(){return BAL.st14.parts[1][0]+1},get last(){r
     keDanh = Danh of a won ch14 with no son */
  /* cnv_ma .11 (jrd_cnv.js): the SRK.maid index of the chưởng sự seat a maid wins when she takes Lưu ma ma's place */
  cnvMaRk:3,
+ /* cnv_ma (jrd_cnv.js lmmRk): Công lao a maid gets instead when a chapter ending would give a seat she already holds */
+ cnvMaMerit:8,
  end:{fertM:4,prayM:3,hauTh:10,hauDanh:6,hauShield:6,keShield:6,keFond:60,keHeir:12,keDanh:6},
  cnv_ban:{eDiv:5},           /* cnv_ban .7 x1 odds: Sủng (risen maid) or Chủ tin, divided by eDiv (RDQ.banRS) */
  cnv_mat:{tinDiv:5},         /* cnv_mat .10 c2 odds: Chủ tin / tinDiv while she is still a maid (RDQ.matTin) */

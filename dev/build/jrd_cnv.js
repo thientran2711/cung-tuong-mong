@@ -913,7 +913,7 @@ const LMMBOX=()=>{const e=rdEnd(10);let b="";try{b=S.st.f14.lmmBox||""}catch(x){
 /* the servant rank a chapter ending gives at once (cap: the top servant rank); consort: nothing */
 function lmmRk(n){try{if(S.srv&&!S.srv.risen){const old=S.srv.rk||0,to=Math.min(n,SRK.maid.length-1);if(to>old){S.srv.rk=to;S.srv.mp=0;S.srv.ex={};
   try{if(typeof exSrvDrop==="function")exSrvDrop()}catch(e){}log(`<b class="g">Được giao chức ${SRK.maid[to]}</b>.`);return `Được giao chức ${SRK.maid[to]}.`}
-  return e67merit(8)}}catch(e){console.error(e)}return""}
+  return e67merit(BAL.road.cnvMaMerit)}}catch(e){console.error(e)}return""}
 
 rdDef("cnv_ma",5,{t:"Bài học thứ nhất",w:"maid",sj:"việc đầu tiên Lưu ma ma giao",cast(A){return rdCast(A,["v"])},
  g:LMMT("Lưu ma ma giao ngươi việc thật đầu tiên: chia áo rét và than sưởi cho sáu cung trước ngày sương giá đầu mùa. Thiếu một tấm, cung nào cũng có người kêu; thừa một tấm, sổ Nội vụ phủ không khớp.",
