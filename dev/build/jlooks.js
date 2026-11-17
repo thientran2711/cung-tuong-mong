@@ -43,8 +43,8 @@ Object.assign(BAL,{looks:{
     (so portrait, figure, mirror all match); a = strength of that colour. blush/lid run DOWN the cheek (vertical, gravity), tear = grey lash-run lines, lip = colour
     dragged past the line from a mouth corner + a drip under the lower lip, blot = blotchy blush, streak = how much the runs break into separate streaks, cry = least
     tear-run when the cause is crying. */
- smuFx:{blush:{len:[0,.7,1.1,1.6],a:[0,.26,.36,.46],blot:[0,0,.3,.6]},lid:{len:[0,.5,.8,1.05],a:[0,.24,.34,.44]},
-  tear:{len:[0,0,1,1.7],a:[0,0,.42,.6],w:[0,0,.03,.04],n:[0,0,1,2]},cry:{len:.8,a:.36,w:.03},
+ smuFx:{blush:{len:[0,.8,1.15,1.65],a:[0,.34,.4,.48],blot:[0,0,.3,.6]},lid:{len:[0,.5,.8,1.05],a:[0,.24,.34,.44]},
+  tear:{len:[0,.5,1,1.7],a:[0,.24,.42,.6],w:[0,.026,.03,.04],n:[0,1,1,2]},cry:{len:.8,a:.36,w:.03},
   lip:{sm:[0,0,.6,1.15],a:[0,0,.3,.42],drip:[0,0,0,1]},streak:[0,.35,.45,.55]}}});
 window.LOOKS_ART={};
 const LK_N={smu:["","Phấn son lem nhẹ","Phấn son lem nhem","Phấn son lem nhem nặng"],bui:["","Mặt lấm bụi","Bụi bám đầy mặt","Bụi bám đầy mặt"],
