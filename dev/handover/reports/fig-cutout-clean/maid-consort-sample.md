@@ -41,3 +41,9 @@ START_CTX low; no rollover needed. Finished.
 ## Round 5: ladder headdress toned down (owner ~20:10Z "đừng over quá", anchor = live img/hd/fig-consort-c01-t1..t8-a18.webp)
 - Viewed the 8 anchors first: headdress there = t1 one flower, t2 flower+pin, t4 small comb, t5 gold crown, t6 crown+flowers, t7 phoenix crown, t8 tall gold crown; pearl shoulder cape from t6.
 - Redone with explicit "modest, not overdone": t6 KLDVhBCkqp (cut aFAZpB1fSh; first redo xSXef4mjfW had only a flower pin, too low vs t4, rejected), t7 4RQExTb9Aa (cut TdUgi32VNR), t8 bxV0Iny5Y2 (cut VXwS32jMMU). Overwrote my own m09_t6/t7/t8_ladder.png + m09_ladder_check.jpg in the review folder. Replaced attempts (3z5q1rVREY, vQ2Rz05a47, yiEfqMlPW9, s78BvYEl8e) are not used. Hems now floor length, no train. Total this ladder: 10 gens, 8 cuts.
+
+## Round 6: owner verdict on the ladder (hem to floor, no trains, slimmer t8, varied hands, t1/t3/t5 at 2k)
+- All 7 redone as single 2k figures (2048x3072), design refs = previous creations, face ref = m09 base; each cut with images_remove_background. t2 kept unchanged (owner OK).
+- Gens/cuts: t1 yiEfsWuPW9/nVLxZ45YQD (flower branch to cheek), t3 6AqFwePiJO/YMsj26HWeC (round fan raised beside face), t4 cpgsZJC0eP/VXwSYG5MMU (hem lowered to floor, open hand + round fan low), t5 EbnGIDxuuO/IfiNdeWtvE (hand at hairpin, folded fan down), t6 vQ2RoQLa47/N2HQOyB6D9 (handkerchief at chest + open hand, no train, less deep V), t7 s78Bky2l8e/p8O70Mhehw (folded fan low + hand on sleeve), t8 mERiBOZhJQ/1leDbtsr4r (two layers, slim, raised open hand + folded fan at hip). t2 = fan held low in front (unchanged).
+- Caveat: t4, t6, t8 each have one open extended hand (different side/height/other hand); could vary further if she says they look alike.
+- Overwrote my own m09_t1,t3-t8_ladder.png + m09_ladder_check.jpg. Ladder totals: 17 gens, 15 cuts (this round 7+7).
