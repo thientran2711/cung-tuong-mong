@@ -744,7 +744,7 @@
 | KEEP + SORT + RESTORE maid trung y (owner 12:28Z: keep redrawn ty files at img/_keep/maid-ty-redraw, sort into consort rank tK slots, then restore plain ty) keys replaced by consort-tier redraw, 570+ keys (sonnet W9; owner order 17/11 12:21Z, ROOT-6 GO 12:23Z; opened by lead #7) | review/fig-cutout-clean | C | session_011xDdVNG1ZBYKd7ZkiyqAJP | RUNNING | 17/11 12:26Z |
 | stage-caption SẴN SÀNG KIỂM ff3e0e74 | review/stage-caption | s31 worker | session_01UV1Szk3y43acKY1bEhtMWZ | READY | 17/11 |
 | REVIEW stage-caption r1 of ff3e0e74 (+ S.where family scan, 3 more sizes) | review/stage-caption-r1 | MAIN s31 | session_01UV1SzjCpLEqRoqbdxYksYe | DONE PASS d59541fe | 17/11 12:27Z |
-| REVIEW kit-rcol-top r1 of 44ac9cda (perf re-run, trial-merge morechip) | review/kit-rcol-top-r1 | MAIN s31 | session_01UV1Szgi8dLemLxMTeHcsgj | RUNNING | 17/11 12:30Z |
+| REVIEW kit-rcol-top r1 of 44ac9cda (perf re-run, trial-merge morechip) | review/kit-rcol-top-r1 | MAIN s31 | session_01UV1Szgi8dLemLxMTeHcsgj | PASS 8c84e6be | 17/11 12:30Z |
 | MISSING TAIL of consort-tier redraw set (a51 ty1 m25-m26, ty2/ty3 m01-m26; keep path img/_keep/maid-ty-redraw only; owner GO 17/11 12:31Z; sonnet W4g opened by lead #7) | review/fig-cutout-clean | C | session_011xDdVPT851mSQjBmLn4Sw1 | RUNNING | 17/11 12:34Z |
 | stage-caption-r1 | reviewer r1 | PASS d59541fe (rebuilt site; scan table in reports/review-stage-caption-r1.md) |
 | BATCH-D8 LIVE: main = 6ca04148 (FF from 65dcf52f by MAIN s31 after LOOK at Fold+iPad home shots) | main | MAIN s31 | session_01UV1SzhZw2hHEAf6bi644Jn | LIVE | 17/11 12:36Z |
