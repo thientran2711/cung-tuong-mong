@@ -10,7 +10,7 @@ const {chromium}=require('playwright');const [,,URL,TS]=process.argv;const T=+TS
   const txt=h=>{const d=document.createElement('div');d.innerHTML=String(h||'');return d.textContent.replace(/\s+/g,' ').trim()};
   const v=rivals.find(x=>!x.queen&&x.alive);const SIT={};
   const add=(k,f)=>{SIT[k]=f};
-  const looks=[["moc","hoppham"],["diem","hoppham"],["vua","giandi"],["vua","photruong"],["dep","hoppham"]];
+  const looks=[["moc","hoppham"],["tuyet","diem"],["vua","giandi"],["vua","photruong"],["dep","hoppham"]];
   for(const k of ["th-scold","th-praise","hh-scold","hh-praise","emp-like","emp-dislike","rival-jealous","rival-tease","rival-praise"])
    for(const [mk,dress] of looks){const host=k.startsWith("th")?"th":k.startsWith("emp")?"emp":k.startsWith("hh")?(rivals.find(x=>x.queen)||"hh"):v;
     add(`toil ${k} ${mk}/${dress}`,()=>toilSay(k,{mk,dress,host}))}

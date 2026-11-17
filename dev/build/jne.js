@@ -13,9 +13,9 @@
    Save state: only S.neMorn (the morning-after follow-up, §4 below; absent in old saves → nothing). */
 Object.assign(BAL,{nightEnd:{
  /* tier points = s (the night's own score from j8 night1: prep q + talk fit + his mood [+1,0,−1,−2] + luck 0..2, −2 if an over-rank
-    piece was confiscated) + her toilette today (jtoil makeup: tuyet Khuynh thành / dep Kiều diễm +1, vung Vụng về / diem Diêm dúa −1; names TOIL_MK) + talk (−2 when the pillow talk lost her
+    piece was confiscated) + her toilette today (jtoil makeup: sign of the level's beauty points BAL.toil.lv[level].dep − BAL.toil.lvBase — Khuynh thành / Kiều diễm +1, Đoan trang 0, Vụng về −1, bare face 0; makeup-lux) + talk (−2 when the pillow talk lost her
     Sủng or Ân tình) + illness (−2 when she is ill). warm ≥ warm, normal ≥ normal, else cold. */
- warm:6,normal:3,toil:{tuyet:1,dep:1,vua:0,moc:0,vung:-1,diem:-1},talkBad:-2,ill:-2,
+ warm:6,normal:3,talkBad:-2,ill:-2,
  /* his mood after the night (S.emp.mood 0 vui … 3 giận dữ): warm → one step better; cold → one step worse (never to giận dữ) */
  mood:{warm:-1,normal:0,cold:1},moodCap:2,
  /* lonely beat + dawn picture timings (ms); night card list shows after `list` */
@@ -109,7 +109,7 @@ const nightOn=()=>{try{return !!(N&&N.t&&S&&S.tonight==="me"&&Date.now()-N.t<15*
 {const fb0=window.feedback;if(typeof fb0==="function"){window.feedback=function(k){if(window.__kneHold&&(k==="night"||k==="favour"||k==="coin"))return;return fb0.apply(this,arguments)};feedback=window.feedback}}
 const nf0=nightFx;nightFx=function(s){if(!N)N={m0:S.emp.mood,inv:S.inv.length,t:Date.now()};N.s=s;const a0=S.sung,b0=S.an||0;window.__kneHold=1;const r=nf0.apply(this,arguments);N.sung=S.sung;N.an=S.an||0;N.g=S.sung-a0;return r};
 function tierOf(){const P=N||{};let pts=P.s||0;const why=[`đêm ${pts}`];
- try{const t=typeof toilToday==="function"?toilToday(S):null;const v=t?NE.toil[t.makeup]||0:0;if(v){pts+=v;why.push(`điểm trang ${v>0?"+":""}${v}`)}}catch(e){}
+ try{const t=typeof toilToday==="function"?toilToday(S):null;const v=t&&t.makeup?Math.sign(toilLv(toilMk(t)).dep-BAL.toil.lvBase):0;/* makeup-lux: the level's one beauty number (the old NE.toil[t.makeup] read a boolean key: never counted) */if(v){pts+=v;why.push(`điểm trang ${v>0?"+":""}${v}`)}}catch(e){}
  if(P.sung!=null&&((S.sung<P.sung)||((S.an||0)<P.an))){pts+=NE.talkBad;why.push(`lời gối đầu ${NE.talkBad}`)}
  try{if(typeof illOf==="function"&&illOf(S)){pts+=NE.ill;why.push(`đang bệnh ${NE.ill}`)}}catch(e){}
  return{tier:pts>=NE.warm?"warm":pts>=NE.normal?"normal":"cold",pts,why}}

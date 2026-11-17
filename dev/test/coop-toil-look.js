@@ -96,14 +96,14 @@ async function weekBoth(A,B,w){const n=await A.p.evaluate(()=>typeof B4N==='numb
  const ev=(o,f,a)=>o.p.evaluate(f,a);
  const read=(o,friend)=>ev(o,fr=>{const p=fr?rivals.find(v=>v.coop):S;if(!p)return{none:1};const was=S.toilSeen;S.toilSeen=null;
    const out={};for(const h of ["th","emp"]){const t=toilFx(p,h,toilFOf(h),"ok");out[h]=t?[t.mk,t.dress,t.aff,t.danh]:null}
-   out.face=toilLookOfP(p)||"";S.toilSeen=was;return out},friend);
+   out.face=toilLookOfP(p)||"";out.mkLux=typeof toilMkLux==="function"?toilMkLux(p):0;S.toilSeen=was;return out},friend);/* makeup-lux: the face's xa xỉ, the same on both seats */
  const same=async(tag)=>{for(let i=0;i<40;i++){const x=JSON.stringify(await read(A,false)),y=JSON.stringify(await read(B,true)),x2=JSON.stringify(await read(B,false)),y2=JSON.stringify(await read(A,true));if(x===y&&x2===y2)break;await clear(A);await clear(B);await sleep(300)}
    const ra=await read(A,false),rb=await read(B,true),rb2=await read(B,false),ra2=await read(A,true);
    ok(JSON.stringify(ra)===JSON.stringify(rb),tag+': A herself = A as seen on B',[ra,rb]);ok(JSON.stringify(rb2)===JSON.stringify(ra2),tag+': B herself = B as seen on A',[rb2,ra2]);return[ra,rb,rb2]};
  const sit=(o,t)=>ev(o,t=>{S.toilette=t?Object.assign({wk:toilWk(),day:toilWk()*10,F:1,occ:["th"],style:"fit",dv:"hopdip",makeup:true},t):null;render();return true},t);
  await same('no sitting (mặt mộc)');
  await sit(A,{score:72,look:"diem",col:{mat:"hongmai",ma:"yenchi",son:"dotham",may:"den",want:"diem",seed:1}});await sit(B,{score:30,look:"vung",col:{seed:2}});
- const [d1,,d2]=await same('A diêm dúa · B vụng');ok(d1.face==="diem"&&d2.face==="vung","face layer reads diêm dúa / vụng on both seats",[d1.face,d2.face]);
+ const [d1,,d2]=await same('A old diêm dúa · B vụng');ok(d1.face==="tuyet"&&d2.face==="vung"&&d1.mkLux>0&&d2.mkLux>0,"face layer reads the old diêm dúa as Khuynh thành / vụng on both seats, xa xỉ of the face counted (makeup-lux)",[d1.face,d2.face,d1.mkLux,d2.mkLux]);
  /* review r1: shots of each seat with the friend's page open (OUT is outside the repo). Check, not asserted: her portrait stays a silhouette
     until met (k61 rule), so her makeup shows where her picture is drawn (stage); the data check above is the binding one. */
  const look=async(o,n)=>{await clear(o);await ev(o,()=>{const f=rivals.find(v=>v.coop);tab='rv';PG.rv=rivals.indexOf(f);render()});await sleep(1500);await shot(o,n)};

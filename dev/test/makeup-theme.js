@@ -15,8 +15,8 @@ fs.mkdirSync(DIR,{recursive:true});
  await require('./lib/roulette').dismissRoulette(p);await p.waitForTimeout(1200);
  await p.evaluate(()=>{const k=document.getElementById('kroul');if(k)k.remove();Q.length=0;try{closeModal()}catch(e){}S.suc=90;S.bac=200;render()});
  /* 1. names: one source, six final names; presets show no tone word */
- const N=await p.evaluate(()=>({mk:TOIL_MK,sty:TOIL_STY,pre:toilPreRows(toilColDef()).flatMap(r=>r.items.map(i=>i.name)),pn:TOIL_PRE.map(x=>toilPreName(x[4],x[2]==="diem"?"diem":"dep")),hint:TOIL_HINT}));
- ck('names',JSON.stringify(N.mk)===JSON.stringify({moc:"Mặt mộc",vung:"Vụng về",vua:"Đoan trang",dep:"Kiều diễm",tuyet:"Khuynh thành",diem:"Diêm dúa"}),N.mk);
+ const N=await p.evaluate(()=>({mk:TOIL_MK,sty:TOIL_STY,pre:toilPreRows(toilColDef()).flatMap(r=>r.items.map(i=>i.name)),pn:TOIL_PRE.map(x=>toilPreName(Object.assign({},x[4],x[2]==="diem"?{want:"diem"}:{}))),hint:TOIL_HINT}));
+ ck('names',JSON.stringify(N.mk)===JSON.stringify({moc:"Mặt mộc",vung:"Vụng về",vua:"Đoan trang",dep:"Kiều diễm",tuyet:"Khuynh thành"}),N.mk);/* makeup-lux: five levels, Diêm dúa dropped (OD L1638) */
  ck('noTone',![...N.pre,...N.pn].some(s=>/sắc lạnh|sắc ấm/.test(s)),{pre:N.pre.slice(0,3),pn:N.pn.slice(0,3)});
  ck('hintNoOtherName',!Object.entries(N.hint).some(([k,t])=>Object.entries(N.mk).some(([k2,n])=>k2!==k&&t.toLowerCase().includes(n.toLowerCase()))),N.hint);
  /* 2. the notice: the Son phấn row + the scouting roads */
@@ -52,8 +52,8 @@ fs.mkdirSync(DIR,{recursive:true});
   return{like:toilTasteOf("th"),emp:toilTasteOf("emp"),n0,learned,pop:TOIL_POP.length+Q.filter(q=>q.toilEv).length,fx2:fx2&&fx2.why,nv,hkTxt:LIKES.mk,empRow:LIKEN.mk}});
  ck('taste',T.n0!==0&&T.learned&&T.pop>=1&&T.fx2&&T.fx2.some(w=>/son phấn/.test(w[0])),T);
  await p.evaluate(()=>{try{showModal()}catch(e){}});await p.waitForTimeout(700);await p.screenshot({path:`${DIR}/mkt-${tag}-3-taste.jpg`,quality:70});
- /* 6. rank: a low rank allows less, a high rank more (overdoing beyond rank = Diêm dúa) */
- const R=await p.evaluate(()=>({lo:toilAllow(["th"],0),mid:toilAllow(["th"],3),hi:toilAllow(["th"],6),none:toilAllow(["th"])}));ck('rank',R.lo<R.mid&&R.mid<R.hi,R);
+ /* 6. rank (makeup-lux): overdoing is judged on the ONE total vs her rank's allowance — a low rank allows less, a high rank more */
+ const R=await p.evaluate(()=>({lo:luxAllow({rank:0}),mid:luxAllow({rank:3}),hi:luxAllow({rank:6})}));ck('rank',R.lo<R.mid&&R.mid<R.hi,R);
  /* 7. old save: a save from before (no mkKnow, no emp.likes.mk, old look ids) loads and reads the new names */
  const O=await p.evaluate(()=>{const raw=JSON.parse(JSON.stringify(ser()));const R0=raw.S;delete R0.mkKnow;if(R0.emp&&R0.emp.likes)delete R0.emp.likes.mk;if(R0.emp&&R0.emp.known)delete R0.emp.known.mk;R0.toilette={day:toilWk()*10,wk:toilWk(),score:90,makeup:true,style:"fit",dv:"hopdip",look:null,col:{mat:"hongmai",ma:"yenchi",son:"dotham",may:"den",want:"diem"}};
   let ok=true,err="";try{deser(raw);render()}catch(e){ok=false;err=String(e)}const c=toilChip();return{ok,err,chip:c&&c.full,taste:toilTasteOf("emp"),row:typeof tsMkRow==="function"&&tsMkRow("phu",4)[1]}});

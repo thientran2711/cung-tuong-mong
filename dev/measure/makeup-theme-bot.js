@@ -13,7 +13,7 @@ const {chromium}=require('playwright');
    const r=toilNpcPlay(sk,h,col,bold?"diem":"","fit",["fest"],3);return{makeup:true,score:r.score,look:r.look,col}};
   const kinds=[["skilled + scouted",.8,1],["skilled, not scouted",.8,0],["scouted, not skilled",.4,1],["random (no skill, no scouting)",.4,0]];
   for(const [nm,sk,kn] of kinds){let s=0,d=0,v=0,a=[];for(const th of Object.keys(TS_THEME))for(const m of [4,10]){const w=tsMkWant(th,m);let t=0;
-    for(let i=0;i<N;i++){const h=wdHash(nm+th+m+i)>>>0;const f=face(sk,kn,w,h);const x=tsMkPts(f,w);s+=x.add;t+=x.add;if(x.mk==="diem")d++;if(x.mk==="vung")v++}
+    for(let i=0;i<N;i++){const h=wdHash(nm+th+m+i)>>>0;const f=face(sk,kn,w,h);const x=tsMkPts(f,w);s+=x.add;t+=x.add;if(x.mk==="tuyet")d++;if(x.mk==="vung")v++}
     out.themes[th+m]=out.themes[th+m]||{};out.themes[th+m][nm]=+(t/N).toFixed(2)}
    const n=N*Object.keys(TS_THEME).length*2;out.rows.push([nm,+(s/n).toFixed(2),Math.round(100*d/n),Math.round(100*v/n)])}
   {const w=tsMkWant("phu",4);out.rows.push(["bare face (Mặt mộc)",tsMkPts({makeup:false},w).add,0,0])}
@@ -25,7 +25,7 @@ const {chromium}=require('playwright');
   /* how often a rival knows the want, by stats */
   out.npc=[[10,10,10,0],[40,40,40,1],[70,60,50,2],[90,80,60,4]].map(([tc,tai,duc,mat])=>[`Tâm cơ ${tc}, Tài ${tai}, Đức ${duc}, Tai mắt ${mat}`,Math.round(100*tsMkNpcKnow({tamco:tc,tai,duc,mat,traits:[]}))]);
   return out});
- const md=['| player | mean makeup points in the contest total | Diêm dúa % | Vụng về % |','|---|---|---|---|',...R.rows.map(r=>`| ${r.join(' | ')} |`),'',
+ const md=['| player | mean makeup points in the contest total | Khuynh thành % | Vụng về % |','|---|---|---|---|',...R.rows.map(r=>`| ${r.join(' | ')} |`),'',
   `Dress part for scale (raw × 4): random set ${R.dress.random}, best set ${R.dress.best}.`,'','| rival stats | knows the want % |','|---|---|',...R.npc.map(r=>`| ${r[0]} | ${r[1]} |`),'',
   '| đề · month | '+Object.keys(R.themes[Object.keys(R.themes)[0]]).join(' | ')+' |','|---|---|---|---|---|',...Object.entries(R.themes).map(([k,v])=>`| ${k} | ${Object.values(v).join(' | ')} |`)];
  console.log(md.join('\n'));await b.close()})();

@@ -10,12 +10,13 @@
    (2) Every person has a hidden liked tone (Thái hậu, Hoàng hậu, Hoàng thượng = LIKES.mk in his 'Điều ngài thích', each consort).
        Inside the ONE judgement (toilFx → leAttire → aaThieuLeApply → toilReact): known → it shows on the card in advance and counts there;
        unknown → it surprises her once (a toilReact popup) and she learns it. NPCs seen by a host are judged by the same table (two-way).
-   (3) Big occasions want at least Kiều diễm (BAL.toil.underOcc); overdoing beyond the occasion OR her rank = Diêm dúa (jtoil toilAllow + allowRk).
+   (3) Big occasions want at least Kiều diễm (BAL.toil.underOcc). makeup-lux (OD L1638): overdoing is no longer a face level — the makeup level's
+       xa xỉ joins the ONE luxury total (jtoil luxOf wrapper) and "diêm dúa" is the word for that total far above the occasion (jlux luxVerdict).
+   (4) makeup-lux: each person also has a liked LEVEL (Đoan trang / Kiều diễm / Khuynh thành) from her own nết (taste.lvTrait), else her hash;
+       learnt and judged exactly like the liked tone (known → on the card; unknown → a surprise once, then known).
    Old saves: new fields S.mkKnow / S.emp.likes.mk are filled on first use; stored look ids are unchanged. Co-op: every NPC value is a hash of
    person + contest (no Math.random), the friend is judged by her own sitting (toilFriendRec). Numbers: BAL.toil (below + jtoil.js). */
 Object.assign(BAL.toil,{
- /* rank → shift of what the day allows (overdoing beyond her rank = Diêm dúa): [from rank index, shift] (Đáp ứng..Quý nhân −1, Tần/Phi 0, Quý phi up +1) */
- allowRk:[[0,-1],[3,0],[5,1]],
  /* a big occasion (F ≥ F) wants at least Kiều diễm: a face of these levels is under the occasion (thiện cảm n), except for hosts of these kinds */
  underOcc:{F:2,lv:["moc","vung","vua"],n:-1,skip:["frugal","jealous"]},
  taste:{
@@ -24,10 +25,15 @@ Object.assign(BAL.toil,{
   /* "mua" đề: the tone follows the game's own season of the contest month (j1 SEASON): spring + summer warm, autumn + winter cool */
   season:{"Xuân":"w","Hạ":"w","Thu":"c","Đông":"c"},
   /* contest points of the makeup (× w, added to the contest total; the dress gives raw 0..10 × 4): tone right / wrong, preset group right / wrong,
-     the level itself, and a bold đề that got less than Kiều diễm */
-  pts:{toneOk:2,toneBad:-1,boldOk:1,boldBad:-1,lv:{moc:-3,vung:-2,vua:0,dep:1,tuyet:2,diem:-2},needLv:-1},w:1.5,
+     the level itself = its beauty points BAL.toil.lv[level].dep − BAL.toil.lvBase (makeup-lux: one number per level), a bare face = moc,
+     and a bold đề that got less than Kiều diễm */
+  pts:{toneOk:2,toneBad:-1,boldOk:1,boldBad:-1,moc:-3,needLv:-1},w:1.5,
   /* each person's liked tone: hash share < like[0] → đào cam, < like[1] → hồng tím, else none; react = thiện cảm when the tone is liked / disliked */
   like:[.4,.8],react:[1,-1],
+  /* makeup-lux: each person's liked LEVEL — by nết first (the first trait listed here wins), else hash share < lvLike[i] → TOIL_LVS[i+2]
+     (Đoan trang / Kiều diễm / Khuynh thành), else none. react: her level = lvReact[0]; two or more steps away (Vụng về counts as below Đoan trang) = lvReact[1] */
+  lvTrait:{"Khiêm nhường":"vua","Ân cần":"vua","Kín đáo":"vua","Kiêu ngạo":"tuyet","Tham vọng":"tuyet"},lvEmp:{mesac:"tuyet",nhantu:"vua",chamchinh:"vua"},
+  lvLike:[.25,.5,.75],lvReact:[1,-1],
   /* scouting the want (odds in the kit ladder): ma ma = o0 + Lòng × loyal; Tai mắt = o0 + Tai mắt × kMat +; cost = Bạc; Tâm cơ × tamco; hỏi người = o0 + thiện cảm × aff + Tâm cơ × tamco */
   scout:{mama:{cost:10,o0:55,loyal:.4},spy:{cost:15,o0:30,kMat:6,tamco:.2,need:1},ask:{need:25,o0:40,aff:.4,tamco:.2}},
   /* a rival knows the want: k0 + Tâm cơ × tamco + Tài × tai + Đức × duc + Tai mắt × mat + trait, capped */
@@ -53,12 +59,30 @@ function toilTasteKnown(host){try{if(host==="emp")return !!(S.emp&&S.emp.known&&
 function toilTasteLearn(host){try{if(toilTasteKnown(host))return;const t=toilTasteOf(host);if(!t)return;if(host==="emp"){S.emp.known=S.emp.known||{};S.emp.known.mk=true}else mktKnow().p[toilTasteKey(host)]=1;
   log(`<span class="g">Ngươi biết được: ${toilWho(host)} ưa son phấn ${TOIL_TONE[t]}.</span>`)}catch(e){}}
 /* the tone part of one host's judgement of person p's look today (0 = none): only a made face that shows its colours (not vụng / diêm dúa) */
-function toilTasteN(p,host){if(!host||host===p)return 0;const rec=p===S?toilToday(S):toilFriendRec(p)||toilNpc(p);if(!rec||!rec.makeup)return 0;const mk=toilMk(rec);if(mk==="vung"||mk==="diem")return 0;
+function toilTasteN(p,host){if(!host||host===p)return 0;const rec=p===S?toilToday(S):toilFriendRec(p)||toilNpc(p);if(!rec||!rec.makeup)return 0;const mk=toilMk(rec);if(mk==="vung")return 0;
  const tone=toilToneOf(rec.col),like=toilTasteOf(host);if(!like||(tone!=="w"&&tone!=="c"))return 0;return tone===like?BAL.toil.taste.react[0]:BAL.toil.taste.react[1]}
+/* ---------- makeup-lux: the per-person liked LEVEL (the same taste system: key, learn, known, surprise) ---------- */
+try{LIKES.mkLv=TOIL_LVS.slice(2).map(k=>"dung nhan "+TOIL_MK[k]);LIKEN.mkLv="Dung nhan"}catch(e){}
+function toilLvTasteOf(host){try{const B=BAL.toil.taste;
+  if(host==="emp"){const E=S.emp;E.likes=E.likes||{};if(!E.likes.mkLv){const T=E.traits||[];const t=Object.keys(B.lvEmp).find(k=>T.includes(k));
+    E.likes.mkLv=t?"dung nhan "+TOIL_MK[B.lvEmp[t]]:LIKES.mkLv[mktH((E.name||"")+":mklv")%LIKES.mkLv.length]}return TOIL_LVS.slice(2).find(k=>E.likes.mkLv==="dung nhan "+TOIL_MK[k])||""}
+  let T=[];try{T=host==="th"?traitsOf({kind:"th"}):host&&host!=="emp"?traitsOf(host):[]}catch(e){}
+  const t=Object.keys(B.lvTrait).find(k=>T.includes(k));if(t)return B.lvTrait[t];
+  const nm=host==="th"?"th:"+((typeof pTH==="function"&&pTH()&&pTH().name)||""):host&&host.name?toilTasteKey(host)+":"+host.name:"";if(!nm)return"";
+  const r=mktR(nm+":mklv");for(let i=0;i<B.lvLike.length;i++)if(r<B.lvLike[i])return TOIL_LVS[i+2];return""}catch(e){return""}}
+/* Hoàng thượng's two makeup likes exist before "Nói thật lòng" can reveal them (j1 discover reads E.likes[k]) */
+(function(){if(typeof discover!=="function")return;const d0=discover;discover=function(){try{toilTasteOf("emp");toilLvTasteOf("emp")}catch(e){}return d0.apply(this,arguments)}})();
+function toilLvTasteKnown(host){try{if(host==="emp")return !!(S.emp&&S.emp.known&&S.emp.known.mkLv);const k=toilTasteKey(host);return !!(k&&mktKnow().lv&&mktKnow().lv[k])}catch(e){return false}}
+function toilLvTasteLearn(host){try{if(toilLvTasteKnown(host))return;const t=toilLvTasteOf(host);if(!t)return;if(host==="emp"){S.emp.known=S.emp.known||{};S.emp.known.mkLv=true}else{const K=mktKnow();K.lv=K.lv||{};K.lv[toilTasteKey(host)]=1}
+  log(`<span class="g">Ngươi biết được: ${toilWho(host)} ưa dung nhan ${toilMkW(t)}.</span>`)}catch(e){}}
+/* the level part of one host's judgement of p's look today (0 = none): a made face only; Vụng về sits below Đoan trang */
+function toilLvTasteN(p,host){if(!host||host===p)return 0;const rec=p===S?toilToday(S):toilFriendRec(p)||toilNpc(p);if(!rec||!rec.makeup)return 0;const mk=toilMk(rec);
+ const like=toilLvTasteOf(host);if(!like)return 0;const B=BAL.toil.taste;const d=Math.abs(TOIL_LVS.indexOf(mk)-TOIL_LVS.indexOf(like));return d===0?B.lvReact[0]:d>=2?B.lvReact[1]:0}
 /* the note under the colour swatches: the đề's want (contest sitting) and the tastes she already knows */
 function toilTasteNote(){try{const L=[];const h=TOIL.st&&TOIL.st.hoi;if(h){const T=TS_THEME[h.th],w=h.want,k=mktKnow().th[h.key]||{};
    L.push(`Đề ${T.n}: ${k.tone?"son phấn "+TOIL_TONE[w.tone]:"chưa rõ đề chuộng son phấn nào"}${k.bold?`, ${w.bold?TOIL_STY.diem+" và dung nhan "+toilMkW("dep")+" trở lên":TOIL_STY.dep}`:""}.`)}
-  const K=[];for(const host of ["th","emp",typeof queenP==="function"&&queenP()!==S?queenP():null].filter(Boolean))if(toilTasteKnown(host)){const t=toilTasteOf(host);if(t)K.push(`${toilWho(host)} ưa ${TOIL_TONE[t]}`)}
+  const K=[];for(const host of ["th","emp",typeof queenP==="function"&&queenP()!==S?queenP():null].filter(Boolean)){if(toilTasteKnown(host)){const t=toilTasteOf(host);if(t)K.push(`${toilWho(host)} ưa ${TOIL_TONE[t]}`)}
+   if(toilLvTasteKnown(host)){const t=toilLvTasteOf(host);if(t)K.push(`${toilWho(host)} ưa dung nhan ${toilMkW(t)}`)}}
   if(K.length)L.push(`Đã biết: ${K.join(" · ")}.`);return L.length?" "+L.join(" "):""}catch(e){return""}}
 
 /* ---------- the ONE judgement: toilFx gains the tone part (known) and the big-occasion want ---------- */
@@ -66,6 +90,7 @@ function toilTasteNote(){try{const L=[];const h=TOIL.st&&TOIL.st.hoi;if(h){const
   if(!toilOn(p)||(p===S&&toilSeen(host)))return r;const rec=p===S?toilToday(S):toilFriendRec(p)||toilNpc(p);const mk=toilMk(rec);const hk=toilHostKind(host);const add=[];
   const U=BAL.toil.underOcc;if((F|0)>=U.F&&U.lv.includes(mk)&&!U.skip.includes(hk))add.push([`dung nhan ${toilMkW(mk)} (dịp lớn cần ${toilMkW("dep")} trở lên)`,U.n]);
   const t=toilTasteN(p,host);if(t&&(p!==S||toilTasteKnown(host)))add.push([`son phấn ${TOIL_TONE[toilToneOf(rec.col)]} (${toilWho(host)} ${t>0?"ưa":"không ưa"})`,t]);
+  const tl=toilLvTasteN(p,host);if(tl&&(p!==S||toilLvTasteKnown(host)))add.push([`dung nhan ${toilMkW(mk)} (${toilWho(host)} ${tl>0?"ưa":"không ưa"})`,tl]);
   if(!add.length)return r;if(!r)r={aff:0,danh:0,duc:0,why:[],hk,dress:null,mk};const C=BAL.toil.cap;
   r.aff=Math.max(C[0],Math.min(C[1],r.aff+add.reduce((a,x)=>a+x[1],0)));r.why=r.why.concat(add);if(!r.aff&&!r.danh)return null}catch(e){console.error("mkt toilFx",e)}return r};window.toilFx=toilFx})();
 
@@ -76,10 +101,17 @@ function toilTasteSurprise(host,v){try{if(!toilOn(S)||toilTasteKnown(host))retur
   const pic=host==="th"?pTH():host==="emp"?pEmp():pv(host);const nm=host==="emp"?"Sủng":`${who} thiện cảm`;
   toilReact({k,who:pic,host,v,s0,n,name:who,line:`son phấn ${TOIL_TONE[toilToneOf((toilToday(S)||{}).col)]}, ${who} ${n>0?"ưa":"không ưa"}: ${host==="emp"?`Sủng ${n>0?"+":"-"}${Math.abs(Math.sign(n))}`:`${nm} ${n>0?"+":""}${n}`}`,ctx:{mk:toilMk(toilToday(S)),tone:n>0?"like":"dis"}});
   toilTasteLearn(host)}catch(e){console.error("mkt surprise",e)}}
+/* makeup-lux: an unknown liked LEVEL surprises her the same way (its own seen key "l…"), then she knows it */
+function toilLvTasteSurprise(host,v){try{if(!toilOn(S)||toilLvTasteKnown(host))return;S.toilSeen=S.toilSeen&&S.toilSeen.wk===toilWk()?S.toilSeen:{wk:toilWk(),h:{}};const sk="l"+toilTasteKey(host);if(S.toilSeen.h[sk])return;
+  const n=toilLvTasteN(S,host);if(!n)return;S.toilSeen.h[sk]=1;const s0=S.logSeq||0;toilBack(host,n);const who=toilWho(host);const mk=toilMk(toilToday(S));
+  const k=host==="th"?(n>0?"th-praise":"th-scold"):host==="emp"?(n>0?"emp-like":"emp-dislike"):host&&host.queen?(n>0?"hh-praise":"hh-scold"):(n>0?"rival-praise":"rival-tease");
+  const pic=host==="th"?pTH():host==="emp"?pEmp():pv(host);const nm=host==="emp"?"Sủng":`${who} thiện cảm`;
+  toilReact({k,who:pic,host,v,s0,n,name:who,line:`dung nhan ${toilMkW(mk)}, ${who} ${n>0?"ưa":"không ưa"}: ${host==="emp"?`Sủng ${n>0?"+":"-"}${Math.abs(Math.sign(n))}`:`${nm} ${n>0?"+":""}${n}`}`,ctx:{mk}});
+  toilLvTasteLearn(host)}catch(e){console.error("mkt lv surprise",e)}}
 /* the meeting cards (thỉnh an Thái hậu / Hoàng hậu, Hoàng thượng, a consort met in person): after the card's own effect, the unknown taste (once per host per day) */
 (function(){if(typeof talkOpts!=="function")return;const t0=talkOpts;talkOpts=function(p){const A=t0.apply(this,arguments);try{if(!p||!toilOn(S)||!(p.kind==="th"||p.kind==="hh"||p.kind==="emp"||(p.kind==="rival"&&p.ref)))return A;
-  const host=p.kind==="th"?"th":p.kind==="emp"?"emp":p.ref;if(!host||toilTasteKnown(host))return A;
-  return A.map(a=>{if(!a||((p.kind==="th"||p.kind==="hh")&&!/^Thỉnh an/.test(a.n)))return a;const o=Object.assign({},a);const after=f=>function(){const r=f?f.apply(this,arguments):undefined;toilTasteSurprise(host,null);return r};
+  const host=p.kind==="th"?"th":p.kind==="emp"?"emp":p.ref;if(!host||(toilTasteKnown(host)&&toilLvTasteKnown(host)))return A;
+  return A.map(a=>{if(!a||((p.kind==="th"||p.kind==="hh")&&!/^Thỉnh an/.test(a.n)))return a;const o=Object.assign({},a);const after=f=>function(){const r=f?f.apply(this,arguments):undefined;toilTasteSurprise(host,null);toilLvTasteSurprise(host,null);return r};
    if(o.run)o.run=after(o.run);else{o.go=after(o.go);if(o.fail)o.fail=after(o.fail)}return o})}catch(e){console.error("mkt talkOpts",e)}return A}})();
 /* the words of a tone reaction (spoken line), before the dress / face pools */
 const TOIL_TONE_SAY={like:{th:"“Sắc son hôm nay hợp mắt ai gia.”",hh:"“Màu son này khéo chọn, bổn cung ưa.”",emp:"“Sắc son này, trẫm thích.”",rival:"“Màu son ấy… quả là khéo chọn.”"},
@@ -116,7 +148,7 @@ function tsMkNpc(v,w,cid){if(v&&v.coop){const r=toilFriendRec(v);if(r&&r.makeup)
  const R=toilNpcPlay(sk,h,col,bold?"diem":"","fit",["fest"],v.rank);return{makeup:true,score:R.score,look:R.look,col,knows}}
 /* the makeup points of one entrant (rec = a toilette record) against the want; returns {pts, add (to the total), mk, tone, bold} */
 function tsMkPts(rec,w){const P=BAL.toil.taste.pts;let s=0;const mk=toilMk(rec);const o={mk,tone:"",bold:false};
- if(!rec||!rec.makeup)s=P.lv.moc;else{s=P.lv[mk]||0;if(mk!=="vung"&&mk!=="diem"){const t=toilToneOf(rec.col);o.tone=t;s+=t===w.tone?P.toneOk:(t==="w"||t==="c")?P.toneBad:0;
+ if(!rec||!rec.makeup)s=P.moc;else{s=toilLv(mk).dep-BAL.toil.lvBase;if(mk!=="vung"){const t=toilToneOf(rec.col);o.tone=t;s+=t===w.tone?P.toneOk:(t==="w"||t==="c")?P.toneBad:0;
   o.bold=!!(rec.col&&rec.col.want==="diem");s+=o.bold===w.bold?P.boldOk:P.boldBad;if(w.bold&&mk==="vua")s+=P.needLv}}
  o.pts=s;o.add=Math.round(s*BAL.toil.taste.w);return o}
 /* her sitting before presenting: the ONE morning mirror (jtoil colour pick → three hồi → reveal), judged as a festival; the bot sits from skill */
@@ -129,6 +161,6 @@ function tsMkSit(th,m,done){const w=tsMkWant(th,m);if(toilToday(S)){done();retur
 /* leaving the mirror any way (Đã hiểu after the reveal, ✕, Esc) hands the contest back: exactly once */
 (function(){if(typeof kg82Close!=="function")return;const c0=kg82Close;kg82Close=function(){const a=TOIL.after;TOIL.after=null;const r=c0.apply(this,arguments);if(a)setTimeout(a,0);return r}})();
 /* contest end: the want is told to everyone present (she remembers it for this đề and season: past contests) */
-function tsMkLine(mine,w,th){const T=TS_THEME[th];const L=[];if(mine&&mine.mk){const x=mine.mk;L.push(`Dung nhan ${toilMkW(x.mk)}${x.tone==="w"||x.tone==="c"?`, son phấn ${TOIL_TONE[x.tone]}`:""}: ${x.add>0?"điểm trang cộng "+x.add:x.add<0?"điểm trang trừ "+(-x.add):"điểm trang không thêm bớt"}${x.mk==="diem"?" (người ta chê phô trương)":""}.`)}
+function tsMkLine(mine,w,th){const T=TS_THEME[th];const L=[];if(mine&&mine.mk){const x=mine.mk;L.push(`Dung nhan ${toilMkW(x.mk)}${x.tone==="w"||x.tone==="c"?`, son phấn ${TOIL_TONE[x.tone]}`:""}: ${x.add>0?"điểm trang cộng "+x.add:x.add<0?"điểm trang trừ "+(-x.add):"điểm trang không thêm bớt"}.`)}
  L.push(`Đề ${T.n} năm nay chuộng ${tsMkWantTxt(w)}.`);if(mine)tsMkLearn(w,{tone:1,bold:1});return L.join(" ")}
-window.tsMkPts=tsMkPts;window.tsMkWant=tsMkWant;window.tsMkNpc=tsMkNpc;window.toilToneOf=toilToneOf;window.toilTasteOf=toilTasteOf;window.tsMkSit=tsMkSit;
+window.toilLvTasteOf=toilLvTasteOf;window.tsMkPts=tsMkPts;window.tsMkWant=tsMkWant;window.tsMkNpc=tsMkNpc;window.toilToneOf=toilToneOf;window.toilTasteOf=toilTasteOf;window.tsMkSit=tsMkSit;

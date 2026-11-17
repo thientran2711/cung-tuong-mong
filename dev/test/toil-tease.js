@@ -7,8 +7,8 @@ const {chromium}=require('playwright');const [,,URL,VP]=process.argv;const m=/(\
  for(let i=0;i<20;i++){await p.evaluate(()=>{window.S0=typeof S!=='undefined'?S:null;try{store.set(NL_KEY,null)}catch(e){}start()});await p.waitForFunction(()=>typeof S!=='undefined'&&S&&S!==window.S0&&S.origin,null,{timeout:30000});
   if(await p.evaluate(()=>S.origin.k!=='cnv'&&!isSrv()&&!S.out&&qOn()&&S.rank<7&&rivals.some(v=>!v.queen&&!v.out)))break}
  await p.waitForTimeout(1500);
- const R=await p.evaluate(()=>{const out=[];const v=rivals.find(v=>!v.queen&&!v.out);for(const mk of['vung','diem']){for(let i=0;i<12;i++){Q.length=0;TOIL_POP.length=0;
-   toilReact({k:'rival-tease',who:pv(v),host:v,v,n:-1,name:v.name,line:`thấy ta điểm trang ${toilMkW(mk)}, nàng ta bớt ghen (Ghen -2)`,ctx:{mk,dress:'chinh'}});toilFlush();
+ const R=await p.evaluate(()=>{const out=[];const v=rivals.find(v=>!v.queen&&!v.out);for(const mk of['vung','diem']){for(let i=0;i<12;i++){Q.length=0;TOIL_POP.length=0;/* makeup-lux: "diem" = the whole look's verdict (dress), on a Khuynh thành face */
+   toilReact({k:'rival-tease',who:pv(v),host:v,v,n:-1,name:v.name,line:mk==='diem'?`thấy ta ăn vận ${TOIL_DV.diem}, nàng ta bớt ghen (Ghen -2)`:`thấy ta điểm trang ${toilMkW(mk)}, nàng ta bớt ghen (Ghen -2)`,ctx:mk==='diem'?{mk:'tuyet',dress:'diem'}:{mk,dress:'chinh'}});toilFlush();
    const q=Q[0];out.push({mk,h:q?q.h:'',opts:q?q.opts.map(o=>o.n):[]})}}
   Q.length=0;toilReact({k:'th-scold',who:pTH(),host:'th',n:-2,name:'Thái hậu',line:'x',ctx:{mk:'vung',dress:'chinh'}});toilFlush();out.push({mk:'th',h:Q[0]?Q[0].h:'',opts:Q[0]?Q[0].opts.map(o=>o.n):[]});return out});
  for(const r of R){if(r.mk==='th'){chk(r.opts.includes('Xin lỗi'),'a scolding from Thái hậu keeps Xin lỗi');continue}
