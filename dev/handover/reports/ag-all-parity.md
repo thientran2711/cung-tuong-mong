@@ -318,3 +318,40 @@ Mismatched pairs (button exists but different function/numbers): Cảnh báo nà
 | **Total** | **243** | **151** | **29** | **63** | **72 / 70 / 9** |
 NPC option keys live: AGREG consort 9 providers (agOpts: 9 AGSELF + 11 AGSOC + effort; cx 7 + study/thHelp/hhShield/buy/gift/ally/portrait/humble 8 + tqGift; cx2 20; harm 44 ACT keys + taint/cook/tieuhuy), hh 5 + admon, th 3, emp 3, maid/srv 36 SRVA + empTea each.
 NPC keys with NO player button: 6 (emp:summon, emp:visit, emp:tea, th:gift, th:admon, th:release) + the eunuch group srv:* (no player) incl. srv:vow đối thực; partial/no exact button: check, harm:cook, effort-qf labels, cx2:maidTalk ("Tâm sự" renamed); dead registered keys never offered: maid:/srv: follow, errand, cut, pil (4×2).
+
+## 2e — PARITY BUILD (worker AG-ALL-2e session_01UV1SzhDp4m5VLV1k7vMcg3, review/ag-all-2 @ 986f797a; START_CTX ≈ 6 % of 1M)
+PRIORITY #1 CHECK ('jagacts3 par3 cx3 coldActsOf servDo P3C'): OD 0 | ledger 0 | claims AG-ALL-2 = C-AG | main 0 | review/* 0 (new names); reused jagday agReg/agRunReg, jagacts agcU/agcCan, jmind mindPick, j8 useItem/sellItem, j13 treat, j10 courtGive, j85 charityFx, jrest restLat, j83 wkMake/wkNpcRaw, jagstaff asOpts/asOpt/asRun, jagknow errands (2c).
+Code: dev/build/jagacts3.js (new, assembled after jagtoil), BAL.ag.par3 (jbal2 end); shared-file hunks: j2 (5 cards → P3C), j78 (Kể tội pick → P3C.tell), j10 (servAct body → servDo(m,a,s)), j14 (coldActs → coldActsOf(p); coldMonth NPC roll → p3Cold), j85 (charityFx(p)), jrest (restLatEmo(p)). Test dev/test/ag-par3.js ALL PASS (13 checks); ag-stf2 23/23; one-core-guard PASS (inline 4920 < baseline 5093).
+ONE FUNCTION rule: each card is built once by P3C.<k>(p) (her card = P3C.<k>(S), NPC = P3C.<k>(v) through p3Run: cost → odA odds → gain/loss → the card's go); acts that already took a person are called as they are. NPC options = agReg("consort","par3") keys cx3:<k>, utility agcU (needs × odds × nết), picked by mindPick in the day plan; khắc = cardCost of the same card (o.kc).
+NOTE for 2d / ag-all.test okK: accept cx3:<k> when AGC3BTN[k] (player label) is in the page — same rule as AGC2BTN.
+
+### before → after (rows of the NONE lists above)
+| player button | before | after | NPC key | function |
+|---|---|---|---|---|
+| Múa trong yến tiệc | — | SAME | cx3:dance | P3C.dance (ghen of the others) |
+| Cài tai mắt | — | SAME | cx3:eyes | P3C.eyes |
+| An thai / Tự bào chế thuốc an thai | — | SAME | cx3:anthai | P3C.anthai (p.anthai halves miscarriage risk, j8/jkh already read it for NPCs) |
+| Nghỉ ngơi một lát | — | SAME | cx3:restLat | BAL.restLatSuc + restLatEmo(p) |
+| Phát bạc cứu giúp cung nhân nghèo (+ Đưa cơm áo, merged into it by jact) | — | SAME | cx3:charity | charityFx(p), once a month (p.charM) |
+| Tự học {nghề}: tác phẩm | — | SAME | cx3:work | wkMake(v, WDEF[best art], 0, wkNpcRaw) |
+| Kể tội {X} (Thái hậu) | — | SAME | cx3:tell | P3C.tell (her evidence evG, Thái hậu regard) |
+| Xin chữa bệnh (Thái y viện) | — | SAME | cx3:treat | P3C.treat → treat(p,"ty") |
+| Dùng (item) | — (j8 drip only) | SAME | cx3:use | useItem(v, ix) |
+| Bán (item) | — | SAME | cx3:sell | sellItem(v, ix) |
+| Biếu (Thái y) | — | SAME | cx3:tyGift | courtGive(v,"ty") (feeds thyBribedBy) |
+| Thưởng / Phạt / Hỏi chuyện / Đổi người / Che chở (own staff, j10) | — | SAME | cx3:staffThuong/Phat/Hoi/Doi/Che | servDo(m,a,s) (servAct calls it for her) |
+| Lãnh cung: Cầu xin · Nhờ người bên ngoài · Tìm chứng cứ minh oan · Gửi bài thơ cũ · Nhờ con cầu xin · Chép kinh, giữ đức · Trồng rau · Thêu khăn bán · Xuất gia | NPC flat roll 3 % / 5 % | SAME | (monthly choice, p3Cold) | coldActsOf(p) — one list; NPC freed by p3Free, nun by p3Nun |
+| Theo hầu chủ (maid) | registered, never offered | SAME | maid:follow / srv:follow | SRVA.follow via asOpt/asRun (master away) |
+| Cắt đứt (maid) | registered, never offered | SAME | maid:cut | SRVA.cut; worth = asRisk × caughtTin |
+| Việc chủ sai / Làm xong (maid) | — | SAME (2c) | maid:listen / scout / watch | jagknow knStaffOpts (the 2c errands) |
+### documented exemptions (information only — the NPC already holds that knowledge, or no NPC state exists)
+Xem sổ nguyệt sự · Xem lén sổ nguyệt sự · Hầu chuyện, xem lén sổ nguyệt sự · Xem sổ thị tẩm · Xem người · Hỏi người hầu: đó là ai? · Sai tai mắt dò nơi ở (an NPC reads places from the record, agAt) · Tháo (makeup off: look only) · Biếu KSP / thái giám bán rong (court af only drives HER sổ / shop; an NPC's KSP deed = key ksp "Đút lót lật thẻ") · Nhờ {người} đưa thư kêu oan (needs her palace-men bond S.men; NPCs have none).
+### STILL OPEN (successor, in this order)
+1. Talk / social: Nhắc lại ân xưa (jmem memInvoke) · Giải bày hiểu lầm (j95bClear) · Mời đến cung ta (j21 invite) · NPC↔NPC Hỏi han sức khỏe / Khen tài nghệ / Bàn tán / Chia sẻ bí mật (jgreet: today NPC→player only) · Cầu tin tức người nhà (jts) · Mời thái y bắt mạch / Sang Thái y viện / Xin bắt mạch (jthaiy req) · Học hỏi y lý (moved to Tài nghệ Y = cx:study; confirm).
+2. Household: jhouse own-staff talk (17 labels: Tâm sự, Thưởng vì…, Phạt vì…, Tha lỗi, Tiến cử…) → route to servDo where the same act; Tiến cử (staff) · Dọa tố đối thực (threatServ) · Thêm cung nữ / thái giám (hire) · Chưởng sự tra xét · Phòng bị / Giao việc phòng bị / Nghe ngóng chung (j70) · Thử độc · Đeo/Tháo (check j8:420 NPC wear = wear()).
+3. Faction (j10 facHTML ×5: Lập phe / Xin vào phe / Ly gián / Rời phe / Bán đứng; NPC = facMonth rolls) · Mời danh sư (S.master; NPC study j85 must read v.master) · Nhờ thái giám tìm thú nuôi (jpet) · Giúp chăm thú nuôi (petcare, jpetcare) · Dạy dỗ con / Dạy học chữ (j53 ktNpcTutor → option).
+4. Pregnancy roads: Uống thuốc thúc sinh / Tâu xin nghiệm thân (jkh, jroute) · Thú tội / Hối lộ KSP sửa sổ / Uống thuốc phá thai (j22: check whether NPCs can carry another man's child; else exemption).
+5. Toilette answers: Cảm tạ / Tạ ơn · Ghi hận / Mách Hoàng hậu / Tặng lại / Hỏi bí quyết (jtoilr) — extend jagtoil tl2AnsPick.
+6. Maid dilemmas (NPC maids never answer them today): Tân Giả khố (Giặt đồ / Nghỉ tay / Cầu xin quản sự) · Uống thuốc phá thai · Dọa tố chuyện tư tình + Bẩm chủ chuyện của X · bị mắng (cnvScold ×3) · yến (cnvFest ×2) · bị tống tiền (cnvBlack ×3) · gọi thị tẩm (Tắm gội chờ giá / Cáo bệnh: jagmaid:88–92 never declines) · vương phủ (j42:451 ×2). Pattern: the cnv*Opts builder once + stf2Pick, like jagstf2.
+7. The 9 DIFF pairs: warn / provoke (TW vs jgreet), cx2:help (j9 vs jagacts2), cx2:maidTalk (label "Tâm sự" → "Trò chuyện với cung nữ", player numbers w:{maid:3}+intel roll vs BAL.ag.cx2.maidTalk), cx2:maidSpy (jwhy), cx:study vs lesson handler, Điểm trang vs jagtoil, effort qf labels, check vs "Kiểm tra đồ" — make one builder per pair (P3C pattern) and delete the other path.
+COUNT after 2e part 1+2: NONE rows 63 → 63 − 30 done (labels above, lãnh cung counted as its 6 NONE labels + maid follow/cut/errand) − 10 exempt = ~23 open + 9 DIFF.
