@@ -193,3 +193,12 @@ maid-m37-tm0-a18	rgdPMrqxtc	kspOMPS16B	ok
 maid-m37-tm2-a18	kspOVrq16B	O6CzaWOynm	ok
 maid-m37-tm3-a18	kspOVxC16B	mERKijJhJQ	ok
 ## 175 a18 done (list lines 1-175) through maid-m37-tm3-a18. NEXT = maid-m37-tm4-a18 (line 176).
+maid-m37-tm4-a18	P3uYQte42C	xSX4BFDjfW	ok
+maid-m38-a18	LwoN8MVswO	YMs8lRFWeC	ok
+maid-m38-cold-a18	p8OCygPehw	LwoN8K5swO	ok (cold: small hairpin+earrings, rule says no jewellery: check all *-cold-a18)
+maid-m38-kc-a18	eIyEPUHdqL	EbnLYvguuO	ok
+maid-m38-ngheo-a18	0eSmUjcTfW	huZk2INvqL	ok
+maid-m38-t1-a18	3z5MKFlREY	huZkA3HvqL	ok
+maid-m38-t2-a18	aFArGZTfSh	IfibR6ltvE	ok
+maid-m38-t3-a18	aFArG2VfSh	fHGxnzECDY	ok
+## 183 a18 done (list lines 1-183) through maid-m38-t3-a18. NEXT = maid-m38-t4-a18 (line 184). TODO: audit all *-cold-a18 for jewellery (owner: cold palace = plain clothes, no jewellery).
