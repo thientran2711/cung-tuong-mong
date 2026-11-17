@@ -840,3 +840,4 @@
 | loading-words-2: hide English boot diag line + remove regex lookbehind (old Safari) whole family + fix update-notes test | review/loading-words-2 | MAIN s33 | session_01UV1SzkaNQaeHGcLrqFrzzQ | RUNNING | 17/11 16:03Z |
 | BATCH s31b READY 17e6c4b4 (builder s31b rolled over) → successor builder s32a lands s31b on newest main then builds s32a + balance chain | review/batch-s32a | MAIN s33 | session_01UV1SzgWoEmnjTTEv7UgBNP | RUNNING | 17/11 16:06Z |
 | learn-scene-fix-2: root fix of jorder kmHold↔kmPump deadlock (co-op stall after rebirth) | review/learn-scene-fix-2 | MAIN s33 | session_01UV1SzikmgZjJmYQFugTW3f | RUNNING | 17/11 16:06Z |
+| B lander #2 (coop-thin-b-r3 S.wwin root cause + land; then origin-bd-r1; opus; brief briefs/land-b-2.md) | review/land-* | B | (opening) | RUNNING | 17/11 16:10Z |
