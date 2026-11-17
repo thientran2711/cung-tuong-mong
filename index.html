@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"babc9b4a","t":"2026-11-17T01:39Z","c":"Chơi chung không còn treo máy vì tên bạn lặp chữ; số bóng người trên dư đồ khớp đúng người đang ở đó; việc có hạn giờ hiện đồng hồ ngay dướ…","b":"dc467b22ef69","h":[{"s":"92685210+","t":"2026-11-17T00:53Z","c":"Khung việc và khung sự kiện bốn cỡ, tranh lấp đầy khung, việc nhắc tên ai hiện chân dung người ấy; phẩm của món đồ nằm ngay trên viền khung…"},{"s":"6f513340","t":"2026-11-16T23:24Z","c":"Vào game mới không còn bật ngay màn lật thẻ, lật thẻ chỉ khi vào buổi tối; dư đồ nhãn giấy mới; việc dài lấn sang buổi sau; lời trong cung …"},{"s":"7a18d957","t":"2026-11-16T22:44Z","c":"review-diemtrang-fx-r1 report"},{"s":"afe2bcbc","t":"2026-11-16T22:25Z","c":"review r1: KIT 84.1a note + report"},{"s":"dea1d445+","t":"2026-11-16T21:32Z","c":"golive lag-play-2: CHANGE line + site rebuilt"},{"s":"674f3af4","t":"2026-11-16T21:21Z","c":"Chơi cùng bạn: bạn chơi chung chưa gặp mặt nay hiện tên gọi chung “Hảo hữu của ta” ở mọi nơi, không còn ẩn thành dấu hỏi."},{"s":"923567d5+","t":"2026-11-16T21:03Z","c":"Hình nhân vật: hết vệt xám ở cổ và viền tối quanh người."},{"s":"59812a63+","t":"2026-11-16T20:41Z","c":"Khung chung: khoảng cách đều nhau ở sổ tuần và thẻ thân phận; hàng sổ gọn, thẻ lật không đè chữ."},{"s":"ab12d6fc","t":"2026-11-16T20:53Z","c":"Tuyết và đom đóm mới, mượt hơn; nền tranh không còn vẽ lại mỗi khung hình."},{"s":"8adfd886+","t":"2026-11-16T20:33Z","c":"Tư trang: các trang đều nhau, ô đồ đeo gọn trên Fold và iPad."}]};
+window.CTM_BI={"s":"7abaf07a+","t":"2026-11-17T01:39Z","c":"batch-0132: CHANGE line + rebuild site","b":"de0b7ebc240a","h":[{"s":"babc9b4a","t":"2026-11-17T01:39Z","c":"Chơi chung không còn treo máy vì tên bạn lặp chữ; số bóng người trên dư đồ khớp đúng người đang ở đó; việc có hạn giờ hiện đồng hồ ngay dướ…"},{"s":"92685210+","t":"2026-11-17T00:53Z","c":"Khung việc và khung sự kiện bốn cỡ, tranh lấp đầy khung, việc nhắc tên ai hiện chân dung người ấy; phẩm của món đồ nằm ngay trên viền khung…"},{"s":"6f513340","t":"2026-11-16T23:24Z","c":"Vào game mới không còn bật ngay màn lật thẻ, lật thẻ chỉ khi vào buổi tối; dư đồ nhãn giấy mới; việc dài lấn sang buổi sau; lời trong cung …"},{"s":"7a18d957","t":"2026-11-16T22:44Z","c":"review-diemtrang-fx-r1 report"},{"s":"afe2bcbc","t":"2026-11-16T22:25Z","c":"review r1: KIT 84.1a note + report"},{"s":"dea1d445+","t":"2026-11-16T21:32Z","c":"golive lag-play-2: CHANGE line + site rebuilt"},{"s":"674f3af4","t":"2026-11-16T21:21Z","c":"Chơi cùng bạn: bạn chơi chung chưa gặp mặt nay hiện tên gọi chung “Hảo hữu của ta” ở mọi nơi, không còn ẩn thành dấu hỏi."},{"s":"923567d5+","t":"2026-11-16T21:03Z","c":"Hình nhân vật: hết vệt xám ở cổ và viền tối quanh người."},{"s":"59812a63+","t":"2026-11-16T20:41Z","c":"Khung chung: khoảng cách đều nhau ở sổ tuần và thẻ thân phận; hàng sổ gọn, thẻ lật không đè chữ."},{"s":"ab12d6fc","t":"2026-11-16T20:53Z","c":"Tuyết và đom đóm mới, mượt hơn; nền tranh không còn vẽ lại mỗi khung hình."}]};
 /* KBOOT — BOOT COVER (owner 15/11 "Khi vừa bấm vào game, có chừng ít hơn 1 giây hiện khung này"; KIT §14.1).
    Before: while the 4 MB page parsed, the browser painted the bare static markup of p1.html (HUD box, a vertical stat label list, empty
    panels, the old 11-tab bar) for ~1 s on a warm open and many seconds on a cold one, before any kit CSS/JS existed.
@@ -4456,6 +4456,7 @@ const BAL={wkFinCap:1,/* Đức from handmade works (kinh, vật cầu phúc): a
  /* handmade works (j83), by material 0 thường / 1 tốt / 2 quý: matQ = phần added to the score; cap = highest tier it can reach (only quý makes a
     Tuyệt phẩm); val = gift value added (Sủng / Thái hậu / thiện cảm); sell = share of the material's silver paid back when sold (1: a sale never loses the material's price); tinh = extra
     chân tình for a quý work given to a sincere person. Value check: dev/test/paid-tiers.js */
+ tsGift:{bac:12,ghen:8,oan:5,aff:3,eq:4},/* Biếu quà làm lành (jts): bạc per person, effect, least worth of a work/item given instead (D19) */
  wk:{matQ:[0,2,4],cap:[2,2,3],val:[0,1,2],sell:[0,1,1],tinh:[0,0,1]},
  /* paid lessons (owner 14:50Z: paying must be worth it): a teacher always gives at least self-study + tchMin */
  tchMin:1,
@@ -20292,7 +20293,7 @@ function kmPump(){if(kmBusy||!KMQ.length)return;if(!kmFree()){clearTimeout(kmPum
 /* ---------- KIT 81 · SCENE-END BUTTON label (owner OD:L1261) ----------
    kitSceneEndLabel(cls, o): o.end (the caller's own words, e.g. "Chuẩn bị thị tẩm" when the card flip lands on HER) wins; else the scene class decides;
    else "Tiếp theo". Words are short and fit the event (never "OK"); VANPHONG register. */
-const KM_END={"km-edict":"Đã hiểu","km-gloom":"Đã hiểu","km-bloom":"Tiếp theo","km-inkov":"Tiếp theo","km-tablet":"Tiếp theo","km-soft":"Ta biết rồi"};
+const KM_END={"km-edict":"Đã hiểu","km-gloom":"Đã hiểu","km-learn":"Tiếp theo","km-bloom":"Tiếp theo","km-inkov":"Tiếp theo","km-tablet":"Tiếp theo","km-soft":"Ta biết rồi"};
 function kitSceneEndLabel(cls,o){if(o&&o.end)return String(o.end);for(const k in KM_END)if(new RegExp("(^|\\s)"+k+"(\\s|$)").test(cls||""))return KM_END[k];return "Tiếp theo"}
 window.kitSceneEndLabel=kitSceneEndLabel;
 /* kitSceneFit(ov): a scene taller than the room left above the button (short landscape, 844x390) is scaled down (CSS zoom on .kmst, never below .55) so nothing
@@ -36943,12 +36944,26 @@ function tsDangerPanel(){if(!S||S.dead)return;const D=tsDangerOf(S,true);
  const sec=`<div class="kpsec"><h4 class="kpst">Thanh chung</h4>${tsRows([["Nguy hiểm chung",`${D.n} · ${tsDWord(D.n)}`,D.n>=30?"r":"t"],["Gộp từ",`${D.top.length} người ngươi đã rõ lòng`,"n"],D.unk?["Chưa rõ",`${D.unk} người ngươi chưa rõ lòng (dò la, tai mắt để biết)`,"n"]:null].filter(Boolean))}</div>`+
   `<div class="kpsec"><h4 class="kpst">Cách tính</h4>${tsRows([["Mỗi người","Ghen, Oán hoặc ghét (lấy cao nhất) + tính nết → mức hại (thang nguy hiểm)","n"],["Gộp","cơ một tháng có ít nhất một người ra tay với ngươi, từ 0 đến 100","n"],["Áp cho","mọi phi tần, cùng một cách tính","n"]])}</div>`+
   (facts.length?`<div class="kpsec"><h4 class="kpst">Người nặng lòng nhất</h4>${tsFacts(facts)}</div>`:"");
- const g=tsS().guard>wk();const opts=[tsOptGuard(),tsOptGifts(D),{n:"Thôi",fx:{}}].filter(Boolean);/* "Thôi" = the kit ✕ (KIT 32.10), never a button */
+ const g=tsS().guard>wk();const opts=[tsOptGuard(),tsOptGifts(D),tsOptGiftsItem(D),{n:"Thôi",fx:{}}].filter(Boolean);/* "Thôi" = the kit ✕ (KIT 32.10), never a button */
  Q.unshift({t:"Nguy hiểm chung",h:sec,opts,showOut:true,tsk:"danger"});showModal()}
 function tsOptGuard(){const s=tsS();if(s.guard>wk())return tsOpt({n:"Đóng cửa giữ mình",need:[{t:`chưa giữ mình (còn ${s.guard-wk()} tuần)`,ok:false}],duoc:["kẻ muốn hại khó ra tay"]});
  return tsOpt({n:"Đóng cửa giữ mình",fx:{sung:-2},need:[{t:"không cấm túc",ok:!S.confined}],duoc:["2 tuần: mưu hại nhắm vào ngươi thành ít đi một nửa"],kem:["ít gặp Hoàng thượng"],go:()=>{s.guard=wk()+2;log("Ngươi đóng cửa cung, dặn kẻ hầu canh giữ nghiêm, hai tuần không ra ngoài nhiều.")}})}
-function tsOptGifts(D){const L=D.top.filter(x=>x.b>=1).slice(0,4);if(!L.length)return null;const c=L.length*12;
- return tsOpt({n:"Biếu quà làm lành",fx:{bac:-c},need:[tsNeedBac(c)],duoc:L.map(x=>`${x.v.name} bớt ghen 8, bớt oán 5`),go:()=>{for(const x of L){x.v.ghen=cl((x.v.ghen||0)-8,0,100);oanAdd(x.v,S,-5);tsAff(x.v,3)}log(`Ngươi sai người mang quà sang ${kitNameList(L.map(x=>x.v))}, lời lẽ mềm mỏng.`)}})}
+function tsOptGifts(D){const L=D.top.filter(x=>x.b>=1).slice(0,4);if(!L.length)return null;const G=BAL.tsGift,c=L.length*G.bac;
+ return tsOpt({n:"Biếu quà làm lành",fx:{bac:-c},need:[tsNeedBac(c)],duoc:L.map(x=>`${x.v.name} bớt ghen ${G.ghen}, bớt oán ${G.oan}`),go:()=>{for(const x of L){x.v.ghen=cl((x.v.ghen||0)-G.ghen,0,100);oanAdd(x.v,S,-G.oan);tsAff(x.v,G.aff)}log(`Ngươi sai người mang quà sang ${kitNameList(L.map(x=>x.v))}, lời lẽ mềm mỏng.`)}})}
+/* D19 (owner OD:L752): "Biếu quà làm lành" also takes a handmade work or an item of equal worth instead of bạc, for the person who bears the most
+   ill will. Worth = the same rules as any gift: a work by wkEval (tastes, fatigue, chân tình), an item by giftVal (her tastes) + jlux.luxGift (a
+   mọn piece is not enough). BAL.tsGift.eq = the least worth; the item itself goes through giveTo (one gift rule for her and every consort). */
+function tsGiftWorth(e,v){if(!e||e.h)return{ok:false,why:"",q:-1};
+ if(e.wk){const ev=wkEval(S,e.wk,v);if(!ev.ok)return{ok:false,why:ev.why||"nàng không nhận đồ này",q:-1};const ok=ev.v>=BAL.tsGift.eq;return{ok,why:ok?"":"tác phẩm còn mỏng, chưa đủ lễ",q:ev.v,note:ev.notes.join("; ")}}
+ const it=IT[e.k];if(!it)return{ok:false,why:"",q:-1};if(e.t)return{ok:false,why:"đồ đã tẩm, không thể biếu",q:-1};
+ const q=giftVal(Object.assign({k:e.k},it),v);let lg=null;try{lg=luxGift(e.k,S,v)}catch(x){}
+ const mon=lg&&lg.st==="mon";const ok=q>=BAL.tsGift.eq&&!mon;return{ok,why:ok?"":(mon?"quà mọn, chưa đủ lễ":"nàng không ưa món này, chưa đủ lễ"),q,note:lg?lg.word:""}}
+function tsOptGiftsItem(D){const L=D.top.filter(x=>x.b>=1).slice(0,4);if(!L.length||!S.inv.some(e=>!e.h))return null;const x=L[0],G=BAL.tsGift;
+ return tsOpt({n:"Biếu quà làm lành bằng đồ",duoc:[`${x.v.name} bớt ghen ${G.ghen}, bớt oán ${G.oan}`],kem:["một món trong rương thay cho bạc"],note:"người nặng lòng nhất",go:()=>{pushDil(mkP("tsgiftpick",{v:x.v.id}),"Biếu quà làm lành")}})}
+PEND.tsgiftpick=p=>{const v=RV(p.v);if(!v)return null;const G=BAL.tsGift;const items=S.inv.map((e,i)=>[e,i]).filter(([e])=>!e.h);
+ return{who:pv(v),t:`<p>Chọn món đồ biếu ${v.name} để làm lành. Món phải đáng giá một phần lễ bạc (${G.bac} bạc), hợp ý nàng.</p>`,o:items.map(([e,i])=>{const w=tsGiftWorth(e,v);
+  return{n:giftName(e),ik:i,fx:{},x:w.ok?`Chắc chắn · thành: nàng bớt ghen ${G.ghen}, bớt oán ${G.oan}${w.note?" · "+w.note:""}`:"",need:w.ok?[]:[{t:w.why||"không biếu được",ok:false}],tsDis:!w.ok,
+   go:()=>{if(!w.ok)return;spend(2);const r=giveTo(S,v,i);v.ghen=cl((v.ghen||0)-G.ghen,0,100);oanAdd(v,S,-G.oan);log(`${r}Lời lẽ mềm mỏng, lòng nàng dịu đi.`)}}}).concat([{n:"Thôi",fx:{}}])}};
 /* the guard: same rule for everyone (a target who keeps to herself is harder to reach) */
 (function(){if(typeof npcAct!=="function")return;const n0=npcAct;npcAct=function(v,t){try{const g=t===S?tsS().guard:t&&t.tsGuard;if(g>wk()&&roll(50))return""}catch(e){}return n0.apply(this,arguments)}})();
 /* NPC side: a consort whom many want to harm closes her doors / sends gifts, by her own nature (same costs) */
@@ -36961,7 +36976,7 @@ if(window.K3_RIGHT)window.K3_RIGHT.push("tsnh");
 document.addEventListener("click",e=>{const b=e.target.closest('[data-hx="tsnh"],[data-k3="tsnh"]');if(!b||!tsOn())return;e.stopPropagation();e.preventDefault();if(Q.length)return;tsDangerPanel()},true);
 function tsDangerOmen(){const s=tsS();const D=tsDangerOf(S,true);const st=TS_DW.filter(x=>D.n>=x[0]).length-1;const was=s.dStep||0;s.dStep=st;if(st<=was||st<2||!D.top.length)return;
  const x=D.top[0];tsPanel({t:"Lời cảnh báo",who:pMaid(),h:`<p>${S.maid.name} khẽ thưa: ${kLine("ts:warn",TS_WARN,{sp:{srv:"f"},ls:S}).replace(/\{V\}/g,x.v.name)}</p>${tsRows([["Nguy hiểm chung",`${D.n} · ${tsDWord(D.n)}`,"r"]])}`,
-  opts:[tsOptGuard(),tsOptGifts(D),tsOpt({n:"Ghi nhớ, cứ như thường",duoc:["không tốn gì"],kem:["kẻ muốn hại vẫn rình"]})].filter(Boolean)})}
+  opts:[tsOptGuard(),tsOptGifts(D),tsOptGiftsItem(D),tsOpt({n:"Ghi nhớ, cứ như thường",duoc:["không tốn gì"],kem:["kẻ muốn hại vẫn rình"]})].filter(Boolean)})}
 
 /* =============== Ý 5 · NGƯỠNG XÉT PHẨM HIỆN TRƯỚC (promoReqP j8: cùng điều kiện cho mọi phi tần) =============== */
 function tsPromoRows(){const L=promoReqP(S);return L.map(([ok,t])=>[ok?"Đủ":"Thiếu",t,ok?"g":"r"])}
@@ -40798,6 +40813,115 @@ window.dhAutoWear0=function(p){try{if(typeof dhSync==="function")dhSync(p,true);
 /* §64: the dialogs show the piece in the kit item frame */
 setTimeout(()=>{try{if(typeof IEV_PID==="object"){IEV_PID.dhlost=pp=>{const c=typeof loGet==="function"?loGet(pp&&pp.id):null;return c&&c.e?{e:c.e,acts:[null,null,null]}:false};IEV_PID.dhatone=()=>false}}catch(e){}},0);
 }catch(e){console.error("jdh2",e)}})();
+/* ================= jdemo: GIÁNG PHẨM / LÃNH CUNG — Nội vụ phủ thu đồ vượt phẩm (review/scenes-3, sweep S3-82, owner OD:L374 08:35Z) =================
+   "Demoted / sent to cold palace: above-rank items are CONFISCATED in a scene — Nội vụ phủ eunuch (person dialog) takes each item cell onto a tray,
+   announcing the confiscation by decree."
+   ONE rule for her and every consort (two-way): jdh2's weekly state check (dhCheck → window.dhConfiscate, every route caught: demote, fall, cold, inline
+   rank drops) is the ONE hook. After it, demoSeize(p, kind, why) takes every WORN piece above the person's new standing:
+     · jewellery in the chest worn (e.w) with IT.rk > rank (lãnh cung: any worn piece; plain clothes, no jewellery — art rule),
+     · wardrobe slots tram / y (j92 wdOf) with phẩm > her phẩm (wdPOf; lãnh cung 0); the issued base robe (from:"base") stays.
+   The pieces go to the Nội vụ phủ store (S.il.box, why "demote", own = pk) and come home by themselves once the owner stands high enough again
+   (demoReturn, weekly): nothing is ever lost for good. Her side: the scene = KIT person dialog (kitPanel notice, subject = the Nội vụ phủ eunuch
+   pEunCourt("ped")), the decree line, the tray = the kit item tags (kitItemTag, KIT §70) of each piece; no per-piece kitLose card (tagged "use").
+   An NPC consort loses them the same way (data + news line, co-op host only like every NPC rule). No numbers here: the rank rule is vpItems' own. */
+(function(){
+const npcOK=()=>!(window.COOPW&&COOPW.on&&COOPW.seat!=="a");
+const pk=p=>p===S?"me":String(p&&p.id);
+const byK=k=>{if(k==="me")return S;try{return (rivals||[]).find(v=>String(v.id)===String(k))||null}catch(e){return null}};
+const esc=s=>String(s==null?"":s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const alive=p=>{try{return typeof window.alive==="function"?window.alive(p):!!p&&!p.dead}catch(e){return !!p}};
+function box(){if(!S.il||typeof S.il!=="object")S.il={};S.il.box=S.il.box||[];S.il.log=S.il.log||[];return S.il.box}
+function nameOf(e){try{const w=typeof wdItem==="function"?wdItem(e):null;if(w)return w.n}catch(x){}return IT[e.k]?IT[e.k].n:String(e.k)}
+/* her standing after the fall: lãnh cung = below every rank */
+function stand(p){return p.out?-1:rkOf(p)}
+/* what the person wears above that standing: [{e, sl}] (sl = wardrobe slot, "" = a piece worn from the chest) */
+function above(p){const r=stand(p),L=[];
+ for(const e of p.inv||[])if(e&&e.w&&!e.h&&IT[e.k]&&IT[e.k].sl&&IT[e.k].rk>r)L.push({e,sl:""});
+ try{const w=wdOf(p);for(const sl of ["tram","y"]){const e=w&&w[sl];if(!e||e.from==="base")continue;const it=wdItem(e);if(it&&wdP(e,p)>wdPOf(p))L.push({e,sl})}}catch(x){}
+ return L}
+function seize(p,L,kind){const got=[];for(const {e,sl} of L){
+  if(sl){const w=wdOf(p);w[sl]=null;if(sl==="y"){try{const k=wdDefault(p,"y");if(k)w.y={k,from:"base"}}catch(x){}}}
+  else{const i=p.inv.indexOf(e);if(i<0)continue;p.inv.splice(i,1);try{KFX.lt.set(e,{why:"use"})}catch(x){}}
+  delete e.w;box().push({e,at:"nvp",why:"demote",own:pk(p),w:wk(),by:"",rel:1e9});
+  try{S.il.log.push([wk(),e.dhid||0,e.k,pk(p),"nvp",kind==="cold"?"thu khi vào lãnh cung":"thu khi giáng phẩm"]);if(S.il.log.length>600)S.il.log.splice(0,S.il.log.length-600)}catch(x){}
+  got.push(e)}return got}
+/* the decree (cổ trang, VANPHONG): who and why, what comes back */
+function decree(p,kind){const rk=kind==="cold"?"":(RANKS[rkOf(p)]||{}).n||"";
+ return kind==="cold"?`«Phụng chỉ: phế phi vào lãnh cung, y phục trang sức đeo trên người đều thu về Nội vụ phủ, chỉ giữ áo vải mộc.»`
+  :`«Phụng chỉ: giáng xuống ${esc(rk)}, trang sức y phục quá phẩm không còn hợp lệ, thu về Nội vụ phủ cất giữ, đợi ngày thăng phẩm sẽ hoàn lại.»`}
+function tag(e){try{if(typeof kitItemTag==="function"&&typeof kitItemInfo==="function")return kitItemTag(kitItemInfo(e)).replace('class="kiev"','class="kiev kiev-own kiev-txt"')}catch(x){}return `<p>${esc(nameOf(e))}</p>`}
+function scene(p,got,kind,why){const names=got.map(nameOf);
+ const t=`Nội vụ phủ thu ${names.join(", ")} của ngươi (${kind==="cold"?"vào lãnh cung":"bị giáng phẩm"}).`;log(`<span class="r">${esc(t)}</span>`);
+ if(typeof kitPanel!=="function")return;
+ kitPanel({kind:"notice",title:"Nội vụ phủ thu đồ",subject:typeof pEunCourt==="function"?pEunCourt("ped"):null,
+  sections:[{h:"",html:`<p>${decree(p,kind)}</p>`},{h:"Mâm thu về",html:`<div class="kdemo-tray">${got.map(tag).join("")}</div>`},
+   {h:"",rows:[["Vì sao",esc(why||(kind==="cold"?"vào lãnh cung":"bị giáng phẩm"))],["Bị thu",esc(names.join(", "))],["Lấy lại",kind==="cold"?"ra khỏi lãnh cung, đủ phẩm thì Nội vụ phủ tự trả về rương":"đủ phẩm trở lại thì Nội vụ phủ tự trả về rương"]]}],btn:"Tuân chỉ"})}
+function demoSeize(p,kind,why){if(!p||!alive(p))return[];const L=above(p);if(!L.length)return[];const got=seize(p,L,kind);if(!got.length)return[];
+ if(p===S)scene(p,got,kind,why);else{try{newsAdd(p,"conf",`${p.name} ${kind==="cold"?"vào lãnh cung":"bị giáng phẩm"}, Nội vụ phủ thu ${got.map(nameOf).join(", ")}.`)}catch(x){}}
+ return got}
+/* the tray: the item tags side by side on one row (wrapping), the same tag as every other item reveal (KIT §70) */
+(function(){const st=document.createElement("style");st.textContent=`.kdemo-tray{display:flex;flex-wrap:wrap;gap:6px;align-items:flex-start}.kdemo-tray .kiev{flex:0 0 auto!important;width:auto!important;max-width:46%;margin:0!important}`;document.head.appendChild(st)})();
+window.demoSeize=demoSeize;window.demoAbove=above;
+/* the ONE hook: jdh2's state check names the kind (cold / giang) for every person, every route */
+(function(){const c0=window.dhConfiscate;if(typeof c0!=="function"||c0.__demo)return;
+ const g=function(p,kind,why){const r=c0.apply(this,arguments);try{if(kind==="cold"||kind==="giang")demoSeize(p,kind,why)}catch(e){console.error("demo",e)}return r};g.__demo=1;window.dhConfiscate=g})();
+/* home again: weekly, an owner who is out of lãnh cung and stands high enough gets each piece back (jewellery: rank; wardrobe: phẩm) */
+function worthy(p,e){if(p.out)return false;const w=typeof wdItem==="function"?wdItem(e):null;if(w)return wdP(e,p)<=wdPOf(p);const it=IT[e.k];return !it||!it.sl||it.rk<=rkOf(p)}
+function demoReturn(){const B=box();for(const x of B.slice()){if(x.why!=="demote")continue;const o=byK(x.own);if(!o||!alive(o)||(o!==S&&!npcOK()))continue;if(!worthy(o,x.e))continue;
+ B.splice(B.indexOf(x),1);o.inv=o.inv||[];o.inv.push(x.e);
+ if(o===S){log(`Nội vụ phủ trả lại ${nameOf(x.e)}.`);Q.push({t:"Nội vụ phủ trả đồ",who:typeof pEunCourt==="function"?pEunCourt("ped"):null,h:`${tag(x.e)}<p>Ngươi đã đủ phẩm, Nội vụ phủ sai người đem <b>${esc(nameOf(x.e))}</b> trả về rương.</p>`})}}}
+window.demoReturn=demoReturn;
+(function(){if(typeof endTurn!=="function")return;const e0=endTurn;endTurn=function(){const w0=S&&wk();const r=e0.apply(this,arguments);
+ try{if(S&&!S.dead&&wk()!==w0){const q=Q.length;demoReturn();if(Q.length>q&&typeof showModal==="function"){showModal();render()}}}catch(e){console.error("demo",e)}return r}})();
+})();
+/* ================= jlevel: HỌC THÀNH TÀI — level-up scene (review/scenes-3, sweep S3-203, owner OD:L712) — KIT §86 kitLearn =================
+   "Art level-up (every art / Công Dung Ngôn Hạnh level): a short 'học thành tài' celebration scene (painted) that also shows what she gained: new
+   effects / abilities / recipes shown as info lines."
+   ONE hook for every road (lessons, teachers, Thái hậu, mini-games, works, events): addArt (the 6 tài nghệ, j2; addArtP(S) goes through it) and addVir (Công Dung
+   Ngôn Hạnh, j85) — when HER level rises, kitLearn plays after the work that raised it (kmPush queue, behind any edict). NPC consorts: no scene (data only, as always).
+   What she gained = the effect table's own lines (ARTFX / VIRFX, the same text as her skill card, ONE source) + the recipes the level opens (Tứ đức, RCP_ST via
+   tdsOpenN). No number here.
+   PAINTING: img/scene-thanhtai.webp (ART REQUEST to Foreman C, dev/handover/FOREMAN_C_STATUS.md). Until it lands the scene shows the skill's own painting
+   (kitSkillArt, the one on her skill card) — an <img> onerror swap, no 404 loop.
+   kitLearn({kind:"art"|"vir", k, from, to}) — the scene only; kitLearnHTML(o) = its HTML (kit sample page §86). Reduced motion / Hiệu ứng Gọn: final frame at once. */
+(function(){
+const esc=s=>typeof kmEsc==="function"?kmEsc(s):String(s==null?"":s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const PAINT="https://ctm-img.victoria-tntt.workers.dev/img/scene-thanhtai.webp";
+function info(kind,k,from,to){const V=kind==="vir",T=V?VIR.find(x=>x.k===k):ARTS.find(x=>x.k===k);if(!T)return null;
+ const fx=(V?VIRFX:ARTFX)[k]||[];const L=[];for(let l=from+1;l<=to;l++)if(fx[l-1])L.push([`Bậc ${l}`,fx[l-1]]);
+ let rec=[];if(V&&typeof RCP_ST==="object"&&typeof TDS_KIND==="object"&&typeof tdsOpenN==="function"){const kd=TDS_KIND[k],st=kd&&RCP_ST[kd];
+  if(st)rec=st.slice(tdsOpenN(from),tdsOpenN(to)).map(s=>s[0]).filter(Boolean)}
+ if(rec.length)L.push(["Mở thêm",`công thức mới: ${rec.join(", ")}`]);
+ const name=V?`${T.n} (${T.full})`:T.n;let img="";try{img=V?kitSkillArt("vir",k,T.n):(kitSkillArt("art",k,T.n)||(typeof AIMG==="object"&&AIMG[k]?AIMG[k]:""))}catch(e){}
+ return{name,rows:L,img,levelWord:`${name} lên bậc ${to}`}}
+function kitLearnHTML(o){const I=info(o.kind,o.k,o.from,o.to);if(!I)return"";
+ const rows=typeof kitRows==="function"?kitRows(I.rows.map(([a,b])=>[a,esc(b)])):I.rows.map(([a,b])=>`<p><b>${esc(a)}</b> ${esc(b)}</p>`).join("");
+ /* the same frame as kitPersonReveal (§65.2): header, the centre (here the painting), card with the info lines + ONE button */
+ return `<div class="kprev klearn"><div class="kmrew-h kprev-h"><b>Học thành tài</b><small>${esc(I.levelWord)}</small></div>
+  <div class="kprev-fig klearn-fig"><img class="klearn-pic" src="${PAINT}" alt="" draggable="false" decoding="async" ${I.img?`onerror="this.onerror=null;this.src='${I.img}'"`:`onerror="this.remove()"`}></div>
+  <div class="kprev-card klearn-card">${typeof kitSteps==="function"?kitSteps(o.to,5,"","Bậc"):""}<div class="kinvrows klearn-rows">${rows}</div><button type="button" class="kbtn kmtake" data-km-close>Tiếp theo</button></div></div>`}
+function kitLearn(o){if(!o||typeof kmPush!=="function"||!kmOn())return;kmPush(done=>{const st=kmStage("km-reward km-prev km-learn",kitLearnHTML(o),{manual:true,dur:60000,onEnd:done});st.ov.id="klearnov";
+  try{if(typeof sfx==="function")sfx("sfx-open")}catch(e){}
+  try{if(typeof kitFxBurst==="function"){const f=st.ov.querySelector(".klearn-fig");if(f){kitFxBurst("glowburst",f);kitFxBurst("spark",f,10)}}}catch(e){}})}
+window.kitLearn=kitLearn;window.kitLearnHTML=kitLearnHTML;
+/* ---------- the hook: her level rose ---------- */
+/* addArt / addVir are global function declarations: reassign the binding other code calls by name */
+if(typeof addArt==="function"&&!addArt.__lrn){const f0=addArt;addArt=function(k){const l0=S&&S.arts?S.arts[k]|0:0;const r=f0.apply(this,arguments);
+  try{const l1=S&&S.arts?S.arts[k]|0:0;if(l1>l0&&!S.dead)kitLearn({kind:"art",k,from:l0,to:l1})}catch(e){console.error("learn",e)}return r};addArt.__lrn=1}
+if(typeof addVir==="function"&&!addVir.__lrn){const f0=addVir;addVir=function(p,k){const mine=p===S;const l0=mine&&S.vir?S.vir[k]|0:0;const r=f0.apply(this,arguments);
+  try{if(mine){const l1=S.vir?S.vir[k]|0:0;if(l1>l0&&!S.dead)kitLearn({kind:"vir",k,from:l0,to:l1})}}catch(e){console.error("learn",e)}return r};addVir.__lrn=1}
+/* ---------- CSS (kit part §86; the layout classes are §65.2's) ---------- */
+(function(){const st=document.createElement("style");st.textContent=`
+.klearn-fig{min-height:200px;overflow:hidden;border-radius:12px;box-shadow:0 6px 18px #000a}
+.klearn-pic{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;animation:kmFade calc(.8s*var(--pace)) ease both}
+.klearn-fig::before{display:none}
+.klearn-card{width:100%;max-width:520px}
+.klearn-rows{width:100%;text-align:left}
+`;document.head.appendChild(st)})();
+/* ---------- kit sample page §86 ---------- */
+try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§86",title:"kitLearn: Học thành tài (tài nghệ / Công Dung Ngôn Hạnh lên bậc)",where:"<b>Level-up scene</b> — every time HER tài nghệ (Cầm, Kỳ, Thi, Họa, Vũ, Y…) or Công Dung Ngôn Hạnh reaches a new bậc: the painting, the bậc steps, the effect lines of the skill card, the recipes it opens, ONE button.",
+ html:()=>`<div class="kitpg-row" style="background:#1a0f0acc;padding:10px;border-radius:8px;height:460px">${kitLearnHTML({kind:"art",k:"cam",from:2,to:3}).replace('class="kprev klearn"','class="kprev klearn" style="height:440px"')}</div>`})}catch(e){}
+})();
 /* ---- jpm: kitPalaceMap — BẢN ĐỒ CHI TIẾT MỘT CUNG (owner 11/15, KIT.md §33) ----
    Dư đồ → chạm một trong 8 cung phi tần (MAPH.rivalSlots) hoặc Càn Ninh → bản đồ chi tiết sân cung (tranh L2 của Phượng Lệnh,
    img/pl2/<dir>-<mùa>-<buổi>.webp, lễ: <dir>-<lễ>-<buổi>.webp) với 3 điểm chạm: Chính điện · Đông phối điện · Tây phối điện.
@@ -47112,7 +47236,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="dc467b22ef69";window.CTM_BUILD=BUILD;
+const BUILD="de0b7ebc240a";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

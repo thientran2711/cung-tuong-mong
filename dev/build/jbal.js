@@ -6,6 +6,7 @@ const BAL={wkFinCap:1,/* Đức from handmade works (kinh, vật cầu phúc): a
  /* handmade works (j83), by material 0 thường / 1 tốt / 2 quý: matQ = phần added to the score; cap = highest tier it can reach (only quý makes a
     Tuyệt phẩm); val = gift value added (Sủng / Thái hậu / thiện cảm); sell = share of the material's silver paid back when sold (1: a sale never loses the material's price); tinh = extra
     chân tình for a quý work given to a sincere person. Value check: dev/test/paid-tiers.js */
+ tsGift:{bac:12,ghen:8,oan:5,aff:3,eq:4},/* Biếu quà làm lành (jts): bạc per person, effect, least worth of a work/item given instead (D19) */
  wk:{matQ:[0,2,4],cap:[2,2,3],val:[0,1,2],sell:[0,1,1],tinh:[0,0,1]},
  /* paid lessons (owner 14:50Z: paying must be worth it): a teacher always gives at least self-study + tchMin */
  tchMin:1,

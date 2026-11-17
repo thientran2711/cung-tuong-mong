@@ -45,7 +45,7 @@ function kmPump(){if(kmBusy||!KMQ.length)return;if(!kmFree()){clearTimeout(kmPum
 /* ---------- KIT 81 · SCENE-END BUTTON label (owner OD:L1261) ----------
    kitSceneEndLabel(cls, o): o.end (the caller's own words, e.g. "Chuẩn bị thị tẩm" when the card flip lands on HER) wins; else the scene class decides;
    else "Tiếp theo". Words are short and fit the event (never "OK"); VANPHONG register. */
-const KM_END={"km-edict":"Đã hiểu","km-gloom":"Đã hiểu","km-bloom":"Tiếp theo","km-inkov":"Tiếp theo","km-tablet":"Tiếp theo","km-soft":"Ta biết rồi"};
+const KM_END={"km-edict":"Đã hiểu","km-gloom":"Đã hiểu","km-learn":"Tiếp theo","km-bloom":"Tiếp theo","km-inkov":"Tiếp theo","km-tablet":"Tiếp theo","km-soft":"Ta biết rồi"};
 function kitSceneEndLabel(cls,o){if(o&&o.end)return String(o.end);for(const k in KM_END)if(new RegExp("(^|\\s)"+k+"(\\s|$)").test(cls||""))return KM_END[k];return "Tiếp theo"}
 window.kitSceneEndLabel=kitSceneEndLabel;
 /* kitSceneFit(ov): a scene taller than the room left above the button (short landscape, 844x390) is scaled down (CSS zoom on .kmst, never below .55) so nothing
