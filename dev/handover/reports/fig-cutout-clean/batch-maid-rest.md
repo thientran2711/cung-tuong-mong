@@ -178,3 +178,11 @@ maid-m07-tm2-a18	DoJfTu7pcl	redo ok U
 maid-m07-tm3-a18	5jM7HyoKxe	redo ok U
 maid-m07-tm4-a18	jUB91iqLD0	redo ok U
 maid-m08-a18	mERK8xfhJQ	redo ok U
+maid-m08-cold-a18	5jM75EPKxe	redo ok U
+maid-m08-kc-a18	8a6q8DPIrU	redo ok U
+maid-m08-ngheo-a18	3z5M3yLREY	redo ok U
+maid-m08-t1-a18	Bh9FBVeoQR	redo ok U
+maid-m08-t2-a18	lJIil1Pgv9	redo ok U
+maid-m08-t3-a18	JNfGJloOq4	redo ok U
+maid-m08-t4-a18	rgdPrq8xtc	redo ok U
+maid-m08-t5-a18	EbnLEmIuuO	redo ok U
