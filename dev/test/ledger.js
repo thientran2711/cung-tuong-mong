@@ -30,16 +30,16 @@ const {chromium}=require('playwright');const [,,URL]=process.argv;
    ok("2 cycle by day: drawn on her other days, never her cycle days, played only on a non-cycle day",onCyc===0&&off>0&&pCyc===0,{A:A.name,cd,onCyc,off,played,pCyc})}
   /* 7. the PLAYED scene by day (review r1): her in her cycle tuần, 12 months (lengths 5/6/7 by cyLen) */
   {fresh();S.age=20;S.preg=0;S.cyb={};const t0=S.tuan,u0=S.turn;const nc=nightCh;nightCh=function(p){p=p||S;const c=nc(p);return p===S?(c>0?100:0):(c>0?1e-3:0)};
-   const lens={},rows=[];let bad=0,playOff=0,blockIn=0,trayBefore=0;
+   const lens={},rows=[];let bad=0,playOff=0,blockIn=0,trayBefore=0,meAny=0;
    try{for(let m=0;m<12;m++){S.turn=u0+m;S.tuan=cyBase(S).t;S.cyb={};const cd=cycleDaysOf(S,null,0);lens[cd.length]=(lens[cd.length]||0)+1;
      if(cd.length!==cyLen(S,S.turn))bad++;
-     S.ledger=null;if(cyTray(S))trayBefore++;           /* before the roll nothing blocks the whole tuần */
-     const L=ldRoll();for(const e of L.days)if(e.w==="me"&&cd.includes(e.d))bad++;
+     S.ledger=null;if(cyTray(S))trayBefore++;           /* before the draw the played day is unknown: her cycle tuần blocks the day's acts as before */
+     const L=ldRoll();for(const e of L.days)if(e.w==="me"&&cd.includes(e.d))bad++;if(L.days.some(e=>e.w==="me"))meAny++;
      const pe=L.days[L.p];if(pe&&pe.w==="me"){if(cd.includes(pe.d))bad++;else if(!cyTray(S)&&nightCh(S)>0)playOff++}
      /* force the played tối onto her cycle day: the scene is blocked (cyTray true, nightCh 0) */
      const save=L.p;const ci=L.days.findIndex(e=>cd.includes(e.d));if(ci>=0){L.p=ci;if(cyTray(S)&&nightCh(S)===0)blockIn++;L.p=save}
      rows.push({m,len:cd.length,cd:cd[0]+"-"+cd[cd.length-1],p:pe?pe.d:null})}}finally{nightCh=nc;S.tuan=t0;S.turn=u0}
-   ok("7 played scene by day: plays her non-cycle day, blocked on a cycle day; per-month 5/6/7 length",bad===0&&trayBefore===0&&playOff===12&&blockIn===12&&Object.keys(lens).length>=2,{lens,bad,trayBefore,playOff,blockIn,rows:rows.slice(0,6)})}
+   ok("7 played scene by day: plays her non-cycle day, blocked on a cycle day; per-month 5/6/7 length",bad===0&&trayBefore===12&&meAny>=10&&playOff===meAny&&blockIn===12&&Object.keys(lens).length>=2,{lens,bad,trayBefore,meAny,playOff,blockIn,rows:rows.slice(0,6)})}
   /* 3. played tối = her first day; j8 flip pin */
   {const L0=fresh();S.cyb=Object.assign(S.cyb||{},{lie:wk(),rk:wk(),rv:"lui"});const nc=nightCh;nightCh=function(p){p=p||S;const c=nc(p);return p===S?50:(c>0?50:0)};
    let good=0,tot=0,npcFirst=0,nT=0;try{for(let k=0;k<30;k++){S.ledger=null;S.tonight=null;const L=ldRoll();const i=L.days.findIndex(e=>e.w==="me");
@@ -51,8 +51,8 @@ const {chromium}=require('playwright');const [,,URL]=process.argv;
    S.ledger={wk:wk(),days:[...Array(10)].map((_,k)=>({d:base+k+1,w:[1,4,7].includes(k)?"me":k===2?A.id:null,y:[1,4,7].includes(k)?"pick":k===2?"pick":"blank"})),p:1,st:0};
    S.tonight="me";S.nfN=wk();const sw=window.stealWant;window.stealWant=()=>({u:0,p:0,mode:null});
    let nS=0,nA=0;const ng=night;night=function(q){q=q||S;if(q===S)nS++;if(q===A)nA++;return ng.apply(this,arguments)};
-   const n0=S.nights||0,a0=A.nights||0,an0=S.an,l0=S.logSeq||0,mat=S.mat;S.mat=0;
-   try{ldSettle()}finally{night=ng;window.stealWant=sw;S.mat=mat}
+   const n0=S.nights||0,a0=A.nights||0,an0=S.an,l0=S.logSeq||0,mat=S.mat,aP=BAL.nt.extraFx.anP;S.mat=0;BAL.nt.extraFx.anP=100;/* r1: Ân by chance anP; this case checks the gain itself */
+   try{ldSettle()}finally{night=ng;window.stealWant=sw;S.mat=mat;BAL.nt.extraFx.anP=aP}
    const L=S.logs.slice(0,(S.logSeq||0)-l0).join(" | ");
    const lines=(L.match(/ngươi được lật thẻ thêm một đêm/g)||[]).length;
    ok("4 her other days: notice + gains + own conception roll; NPC silent w/o tai mắt",S.ledger.st===1&&(S.nights||0)-n0===2&&nS===2&&nA===1&&(A.nights||0)-a0===1&&lines===2&&S.an-an0===2*BAL.nt.extraFx.an&&!/cung ${A.name}/.test(L),{nights:(S.nights||0)-n0,nS,nA,lines,an:S.an-an0,log:L.slice(0,400)})}

@@ -2,11 +2,11 @@
    Real days: tối → "Sang ngày mới" (jnf commit: flip at the end of tối, the 10-second choice answered "Thôi", her night dialogs answered with
    the first option that is not a way out) — the same day walk as dev/test/night-multi.js. Her stats floored like night-time-bot3
    (Sủng ≥ SUNG, Danh 15, Sức 60, Đức 55, Bạc 80, rank ≥ 2); NPCs live their own lives.
-   review r1: env NT_OFF=1 = the same build with BAL.nt.on false (one night a tuần: the BEFORE column); PACE / ANP override BAL.nt.pace /
+   review r1: env NT_OFF=1 = the same build with BAL.nt.on false (one night a tuần: the BEFORE column); AGOFF=1 the agent loop off (window.__agOff), EMPOFF=1 only the Emperor agent off (empOn false); PACE / ANP override the night pace (jledger ntPace = BAL.nt.days) /
    extraFx.anP; per month also: tuần with a độc sủng (favNow), admonitions, mean satiety factor of the tray (FAIRN.sat), nights a tuần.
    usage: node dev/measure/ledger-bot.js <url> <lives> <months> <out.json>   (seeded: SEED0) */
 const {chromium}=require('playwright');const fs=require('fs');
-const [,,URL,LS,MS,OUT]=process.argv;const OPTS={off:!!+process.env.NT_OFF,pace:process.env.PACE!=null?+process.env.PACE:null,anP:process.env.ANP!=null?+process.env.ANP:null};const LIVES=+LS||6,MONTHS=+MS||30;
+const [,,URL,LS,MS,OUT]=process.argv;const OPTS={agOff:!!+process.env.AGOFF,empOff:!!+process.env.EMPOFF,off:!!+process.env.NT_OFF,pace:process.env.PACE!=null?+process.env.PACE:null,anP:process.env.ANP!=null?+process.env.ANP:null};const LIVES=+LS||6,MONTHS=+MS||30;
 const SEEDRNG=`(function(){let s=(window.__seed||1)>>>0;Math.random=function(){s=(s+0x6D2B79F5)>>>0;let t=s;t=Math.imul(t^(t>>>15),t|1);t^=t+Math.imul(t^(t>>>7),t|61);return((t^(t>>>14))>>>0)/4294967296}})();`;
 (async()=>{const b=await chromium.launch({args:['--disable-gpu']});const lives=[];const errs=[];const t0=Date.now();
  for(let l=0;l<LIVES;l++){
@@ -17,7 +17,7 @@ const SEEDRNG=`(function(){let s=(window.__seed||1)>>>0;Math.random=function(){s
   await p.goto(URL,{waitUntil:'domcontentloaded',timeout:0});await p.waitForFunction(()=>typeof start==='function'&&typeof nfOn==='function',null,{timeout:0});await p.waitForTimeout(1500);
   const r=await p.evaluate(([M,SUNG,OPT])=>{for(const id of ['kload','kroul']){const x=document.getElementById(id);if(x)x.remove()}try{localStorage.clear()}catch(e){}
    SLOT=3;window.__nlInner=1;window.__bot=1;document.getElementById('title').hidden=true;window.render=function(){};
-   if(OPT.off)BAL.nt.on=false;if(OPT.pace!=null)BAL.nt.pace=OPT.pace;if(OPT.anP!=null)BAL.nt.extraFx.anP=OPT.anP;
+   if(OPT.agOff)window.__agOff=1;if(OPT.empOff)window.empOn=empOn=()=>false;if(OPT.off)BAL.nt.on=false;if(OPT.pace!=null){const lo=window.ldOn;window.ntPace=()=>lo()?OPT.pace:1}if(OPT.anP!=null)BAL.nt.extraFx.anP=OPT.anP;
    for(let i=0;i<60;i++){start();if(!isSrv()&&!(typeof isKc==="function"&&isKc()))break}Q.length=0;
    const C={meC:0,npcC:0};const ng0=night;night=function(q){q=q||S;const was=!!q.preg;const r=ng0.apply(this,arguments);if(!was&&q.preg){if(q===S)C.meC++;else C.npcC++}return r};
    const drain=(max=80)=>{for(let n=0;n<max&&Q.length;n++){const m=Q[0];const o=m.opts||m.o;

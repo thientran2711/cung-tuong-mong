@@ -76,11 +76,13 @@ function cycleLate(p){try{p=p||S;if(!cyPreg(p)||cyAge(p)>=50||p.pregWk==null)ret
 /* calendar: month m (1..12) → days in its next occurrence (or `ahead` months ahead) */
 function cycleDaysOf(p,m,ahead){try{p=p||S;if(!S)return[];let o=ahead!=null?+ahead:((+m-(S.month||1))%12+12)%12;if(!(o>=0))o=0;const mi=cyCur()+o;return cyHas(p,mi)?cyDaysM(p,mi):[]}catch(e){return[]}}
 /* BY DAY with the 10-night ledger (owner OD 16/11 19:00Z "only the actual cycle days block"; review/night-ledger-r1): while jledger runs
-   (ldOn) the tuần's ONE played tối is a real day of the month (ldNow().days[p].d). Her cycle blocks that scene only when her cycle covers
-   THAT day; before the ledger is rolled (the day itself, the roll) nothing blocks the whole tuần — the ledger keeps every woman off her own
-   cycle days night by night (jledger cyDayOf). Without the ledger (co-op parked, BAL.nt.on false): the whole cycle tuần, as before. */
-function cyLdDay(){try{if(!(typeof ldOn==="function"&&ldOn()))return undefined;const L=typeof ldNow==="function"?ldNow():null;const e=L&&L.days&&L.days[L.p];return e?e.d:null}catch(e){return undefined}}
-function cyNow(p){if(!cycOn(p))return false;const d=cyLdDay();if(d===undefined)return true;return d!=null&&cyDaysM(p,cyCur()).includes(d)}
+   (ldOn) the tuần's ONE played tối is a real day of the month (ldNow().days[p].d), drawn at the end of tối. Once it is drawn her cycle
+   blocks the scene / the flip choice / the steal only when her cycle covers THAT day. While the ledger draws (jledger window.__ldRoll)
+   nothing blocks: it keeps every woman off her own cycle days night by night (jledger cyDayOf). Before the draw (the day's own acts: the
+   late visit's night option, the ksp bath, the tray she sees) the played day is not known yet: her cycle tuần blocks as before.
+   Without the ledger (co-op parked, BAL.nt.on false): the whole cycle tuần, as before. */
+function cyLdDay(){try{if(!(typeof ldOn==="function"&&ldOn()))return undefined;if(window.__ldRoll)return 0;const L=typeof ldNow==="function"?ldNow():null;const e=L&&L.days&&L.days[L.p];return e?e.d:null}catch(e){return undefined}}
+function cyNow(p){if(!cycOn(p))return false;const d=cyLdDay();if(d===undefined||d===null)return true;if(d===0)return false;return cyDaysM(p,cyCur()).includes(d)}
 /* the TRAY (Kính sự phòng's view): her card is off while in her cycle (the played day with the ledger, else her cycle tuần), unless she
    reported falsely this tuần (báo sớm / giấu) */
 function cyTray(p){if(!cyNow(p))return false;const c=cybOf(p);if(c&&c.lie===wk())return false;return true}
@@ -159,7 +161,7 @@ PEND.cyrep=()=>{if(!S||!S.maid||!cycOn(S))return null;const R=B().rep,c=cyb(),lo
     odds word of the one rolled road and every risk in words; the full numbers come on the result card. (Full Được/Mất/Kèm rows overflow
     the kit option card in a scrolling dialog: KIT REQUEST in PROGRESS_cycle.md.) */
  /* with the 10-night ledger the card is off only on her cycle days (review/night-ledger-r1, OD 19:00Z): the words say so (LUẬT SỬA CẢ NHÓM) */
- const TN=cyLdDay()!==undefined?"những đêm kỳ nguyệt sự":"tuần này";
+ const TN=cyLdDay()!==undefined?"những đêm ấy":"tuần này";
  const H=[[`sổ ghi đúng, không ai bắt bẻ được; nhưng thẻ bài tạm cất ${TN}`,"an toàn"], /* review r3: hints shortened to fit the kit option card at 755 (KIT REQUEST K11 aside); giấu now names the evidence risk too */
   [`${word(lo).toLowerCase()}; có thai thì người ngoài muộn đoán ra; tổn Đức, tuần sau khó được lật thẻ; hỏng thì Tổng quản biết`,"có rủi ro"],
   [`thẻ bài vẫn trên khay; tổn Đức; bị ma ma soát ra (${chanceW(100-po)}) thì mất sủng; kẻ thù có thể nắm chứng cứ`,"có rủi ro"],

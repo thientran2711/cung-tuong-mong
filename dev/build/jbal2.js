@@ -481,10 +481,10 @@ BAL.steal.choice={ms:10000,waitMs:90000};
    CORE, review r1: the ledger's own summon / summonBusy copies are gone)); customDays = days of the month he spends at the Hoàng hậu's palace by custom (mùng một, rằm; her card is then never on the tray);
    extraFx = what a NOT-played night gives the woman (Sủng +sung with sungP chance, Ân tình +an; night-time.md [M]); concF = × on conceiveCh,
    applied as a FLOAT at the roll (spec 7: keeps NPC births ≈ 0.10 per consort-year with 10 nights, [M] night-time-bot3). on:false = old flip. */
-/* pace = how many times more nights a tuần holds with the ledger than with one night a tuần: the rules that count RECENT nights (j8 anMonth,
-   j75 favNow FAIRN.fav / satN FAIRN.sat · satO) divide by it so they keep the old pace (review r1 §5.2 / §5.3, measured: ledger-bot, report
-   review-night-ledger-r1.md); extraFx.anP = chance a NOT-played night gives Ân +an (§5.3: NPC Ân at the old pace). */
-BAL.nt={on:true,days:10,customDays:[1,15],extraFx:{sungP:50,sung:1,anP:100,an:1},concF:.065,pace:10};
+/* RULES THAT COUNT RECENT NIGHTS (review r1 §5.2 / §5.3, LUẬT SỬA CẢ NHÓM): j8 anMonth (Ân fades), j75 favNow (FAIRN.fav) and satN
+   (FAIRN.sat / satO) divide the nights of their window by days (jledger ntPace: one night a tuần stood for the tuần's 10 days), so they keep
+   the one-night-a-tuần pace (bot before/after: report review-night-ledger-r1.md). extraFx.anP = chance a NOT-played night gives Ân +an. */
+BAL.nt={on:true,days:10,customDays:[1,15],extraFx:{sungP:50,sung:1,anP:25,an:1},concF:.065};
 
 /* NPC AGENT LOOP (jagent, Foreman C AG1 + AG1b; owner OD:L1386 "every NPC plays the game like a player"; design dev/handover/reports/npc-agent.md §3).
    ONE CORE: every number of jagent.js. The deeds' own costs / odds / gains stay in BAL.tw (jtwoway) and j75 (npcEffortKind); here only the
