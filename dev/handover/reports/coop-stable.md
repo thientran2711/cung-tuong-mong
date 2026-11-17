@@ -27,9 +27,9 @@ coop-play (places, real buttons) and coop-bot (whereabouts every week).
 ## OPEN / HANDOVER (worker rolled over at ~START_CTX+25 %: coordinator opens the successor)
 1. **#next stays locked "Chờ hảo hữu…" at the start of a day buổi** (fold or ipad, week 3, buổi 1–2): 3 times in ~50 runs (p31-2, C3-2, G2-3).
    Not diagnosed. 6696656e adds a full dump (bend/pend/sent/nrdy/pendBuoi/whereKey/ended/trace/socket log) to that FAIL; next step:
-   loop coop-e2e until it hits, read the dump. Could be a lost  broadcast (server stores m.buoi; syncRoom catches up only on a
+   loop coop-e2e until it hits, read the dump. Could be a lost "buoi" broadcast (server stores m.buoi; syncRoom catches up only on a
    reconnect) — if so, the fix is a client re-check when the friend's bended view is stale.
-2. Deploy of the Worker fix (#1) waits for main s25's OK: ; then re-run coop-e2e ×10 + the probe
+2. Deploy of the Worker fix (#1) waits for main s25's OK: "cd coop/worker && npm test && npx wrangler deploy"; then re-run coop-e2e ×10 + the probe
    (/home/user/wt/coopst-out/probe/stale.js → b must read offline at ~60 s).
 3. Part 3 list above (22 tests not run).
 - Guest who is a cung nữ (COOP_B_ORIGIN=cn) sometimes knows the host's servant entry at stage 3 at the start (`key s901, K=3`,
