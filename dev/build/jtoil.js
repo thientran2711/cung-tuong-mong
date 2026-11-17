@@ -727,9 +727,9 @@ const TOIL_MKS={
  /* bl = blush strength, blr = blush size (x the eye distance), sk = skin-light lift, hl = soft luminous cheekbone (round, never a streak), dabs = white powder dabs, gloss = natural sheen INSIDE the lip. Every skin-side layer is clipped to the skin mask (toilMkDraw). */
  vung:{lip:.5,eye:.4,eyeH:.5,brow:0,wing:0,low:0,vung:1,bl:.26,r:.17,sk:.08,dabs:6},
  vua:{lip:.44,eye:.5,eyeH:.5,brow:.45,wing:.08,low:0,bl:.21,r:.165,sk:.13},/* = the ?v=2 Đoan trang (approved by the owner 17/11 13:48Z) */
- dep:{lip:.62,eye:.7,eyeH:.68,brow:.55,wing:.2,low:.25,bl:.27,r:.185,sk:.15},
- tuyet:{lip:.74,eye:.9,eyeH:.8,brow:.7,wing:.3,low:.34,shim:.5,gloss:.65,bl:.31,r:.2,sk:.3,hl:1},
- diem:{lip:.86,eye:.95,eyeH:.9,brow:.78,wing:.32,low:.55,shim:.45,gloss:.2,bl:.42,r:.22,sk:.3}};
+ dep:{lip:.74,eye:.9,eyeH:.8,brow:.7,wing:.3,low:.34,shim:.5,gloss:.65,bl:.31,r:.2,sk:.3,hl:1},/* Kiều diễm = the ?v=5 Khuynh thành look, moved down one step (owner 17/11 ~14:00Z) */
+ tuyet:{lip:.86,eye:1,eyeH:.92,brow:.78,wing:.4,low:.46,shim:.85,gloss:.72,bl:.4,r:.21,sk:.38,hl:1,glam:1},/* Khuynh thành: lộng lẫy, full careful glamour, still soft */
+ diem:{lip:.92,eye:1,eyeH:.95,brow:.82,wing:.36,low:.6,shim:.5,gloss:.2,bl:.5,r:.22,sk:.32}};
 const MK_FIT={g:{},ld:{},face(f){const m=/^(?:por|fig)-([a-z]+-[a-z]*\d+)-/.exec(String(f||""));return m?m[1]:null},
  get(f){const g=this.face(f);if(!g)return null;const t=this.g[g];if(t)return t[f]||null;this.load(g);return null},
  load(g){if(this.ld[g])return;this.ld[g]=1;try{fetch("img/mk-fit/"+g+".json").then(r=>r.ok?r.json():null).then(j=>{if(j){MK_FIT.g[g]=j;try{if(typeof S!=="undefined"&&S&&!Q.length&&!TOIL.st)render();else if(TOIL.st&&TOIL.prev&&TOIL.prevUI)TOIL.prevUI()}catch(e){}}}).catch(()=>{})}catch(e){}}};
