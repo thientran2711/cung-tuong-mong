@@ -306,7 +306,7 @@ html body #stage.j59slot #tokens>.tok .tag,html body #stage.j59slot #j59metag .t
 html body #stage.j59slot #tokens>.tok.fig .tag{top:100%!important;margin-top:3px!important}
 html body #stage.j59slot #j59metag{translate:none!important}
 html body #stage.j59ph #kshR{top:var(--j59kt,44px)!important;left:6px!important;right:6px!important;width:auto!important;max-width:none!important;min-width:0!important;flex-direction:row;flex-wrap:wrap;justify-content:flex-end;align-items:center;gap:3px}
-html body #stage.j59ph #kshR .k3cs{flex-direction:row;flex-wrap:wrap;justify-content:flex-end;gap:3px}
+html body #stage.j59ph #kshR .k3cs{display:flex;flex-direction:row;flex-wrap:wrap;justify-content:flex-end;gap:3px}
 html body #stage.j59ph #kshR .k3c{width:auto;padding:1px 6px;gap:3px}
 html body #stage.j59ph #kshR .k3c .md{display:none}
 html body #stage.j59ph #kshR .k3c .k3ct{flex-direction:row;align-items:baseline;gap:4px;white-space:nowrap}

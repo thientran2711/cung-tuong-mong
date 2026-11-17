@@ -405,11 +405,11 @@ function rgGoalHTML(){const L=rgL();const R=[];let n=0;
   if(l.done)n++;const st=l.done?"đã thành tâm nguyện":ok?`bước ${Math.min(3,l.st+1)}/3: ${plain(String(T72I[RGL[k].q[Math.min(l.st,2)]].t).replace(/^Tâm nguyện [^:]*: /,"").replace(/\{A\}/g,who))}`:"người này không còn ở đây";
   const sub=`${RGL[k].g} · ${st}`;const A=ok&&!l.done?rgLA(k):null;R.push(`<div class="ktprow">${A&&typeof ktPerson==="function"?ktPerson(A,sub):`<div class="kpl"><span class="kplt"><b>${who}</b><small>${sub}</small></span></div>`}</div>`)}
  return kitSkillCard({kind:"story",k:"rgl",kicker:"Phụ tuyến",name:"Tâm nguyện",level:n,max:Object.keys(RGL).length,word:"Xong",bar:false,next:"",img:""})+
-  `<div class="ktop">${kitInfo("Tâm nguyện")}</div><div class="ktpeople">${R.join("")}</div>`}
+  `<div class="ktpeople">${R.join("")}</div>`}
 try{KIT_GLOSS["Tâm nguyện"]="Mỗi người có một tâm nguyện. Họ sẽ tự tìm đến nhờ ngươi từng việc (mục Việc nhờ). Giúp trọn ba việc thì tâm nguyện thành."}catch(e){}
 (function(){if(typeof ktStoryHTML!=="function"||typeof kitSubTabs!=="function")return;const k0=kitSubTabs;
- kitSubTabs=function(key,list){if(key==="story"&&S&&S.ps&&S.reign&&!list.some(x=>x.k==="rg")){list=list.concat([{k:"rg",label:"Triều cục",n:""},{k:"rgl",label:"Tâm nguyện",n:""}])}return k0.call(this,key,list)};
+ kitSubTabs=function(key,list,info){if(key==="story"&&S&&S.ps&&S.reign&&!list.some(x=>x.k==="rg")){list=list.concat([{k:"rg",label:"Triều cục",n:""},{k:"rgl",label:"Tâm nguyện",n:""}])}return k0.call(this,key,list,info)};
  const h0=ktStoryHTML;ktStoryHTML=function(){if(S&&S.ps&&S.reign){const L=[{k:"now",label:"Chương này",n:""},{k:"rank",label:"Sắc phong",n:""},{k:"past",label:"Đã qua",n:String(((S.st&&S.st.ch&&S.st.ch.past)||[]).length+(S.r97||[]).length)},{k:"rg",label:"Triều cục",n:""},{k:"rgl",label:"Tâm nguyện",n:""}];
-   const cur=ktSubGet("story",L);if(cur==="rg"||cur==="rgl"){const sub=kitSubTabs("story",L.slice(0,3));return sub.html+(cur==="rg"?rgPaneHTML():rgGoalHTML())}}return h0.apply(this,arguments)}})();
+   const cur=ktSubGet("story",L);if(cur==="rg"||cur==="rgl"){const sub=kitSubTabs("story",L.slice(0,3),kitInfo(cur==="rgl"?"Tâm nguyện":"Luật chương"));return sub.html+(cur==="rg"?rgPaneHTML():rgGoalHTML())}}return h0.apply(this,arguments)}})();
 document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-rgsw]");if(!b||b.disabled)return;e.stopPropagation();try{rgSwitchOpen()}catch(x){console.error(x)}},true);
 /* co-op: the guest's own S.reign is personal; the court (S.trieu.rg) comes from the host's world */
