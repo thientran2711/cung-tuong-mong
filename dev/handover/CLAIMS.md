@@ -575,7 +575,7 @@
 | night-final SUCCESSOR #6 (opus; HELD BY MAIN while Foreman D is out of quota; returns to D on a new D account) from ea74aff6: shots, buổi perf ≤ live +5 %, G4 probe proof; co-op PARKED | review/night-final | main s29 | session_01UV1SzkcuhnxeSAywiQC2hz | RUNNING | 17/11 03:33Z |
 | OI family (opus): render-cost root fix + origin-intros flow/oldsave tests + kc2val Chờ re-measure (carries kc-roads-cn-nc-fix2), then one OI reviewer | review/batch-0032-oi | D | session_01964izCi8228y2v2JjEknpd | RUNNING | 17/11 03:35Z |
 | npc-roads-fx FINISH (opus): F1–F6 scan, merge main, suites → SẴN SÀNG KIỂM, then BIG reviewer | review/npc-roads-fx | D | session_01964izFdMcMY1NA9hQZVoJw | DONE SẴN SÀNG KIỂM e34393b1 (archived) | 17/11 03:35Z |
-| item-ledger SOLO landing (opus): from PASS 7aba5de9, branch co-op transport removed (live giftin only), co-op part parked | review/item-ledger-solo | D | session_01964izCwq2JLHTHaaBox66W | RUNNING | 17/11 03:35Z |
+| item-ledger SOLO landing (opus): from PASS 7aba5de9, branch co-op transport removed (live giftin only), co-op part parked | review/item-ledger-solo | D | session_01964izCwq2JLHTHaaBox66W | DONE SẴN SÀNG KIỂM ac939102 (archived) | 17/11 03:35Z |
 | npc-death re-wire (opus): jnpcd/jly into j95 place-people record (Lý Trường Môn viện, dead off lists, Thái y viện new name) | review/npc-death-wire | D | session_01964izBuQu8dWabKyYB69JE | DONE SẴN SÀNG KIỂM de166c3f (archived) | 17/11 03:35Z |
 | suc-khoe review r2 (opus BIG) of da50857d | review/suc-khoe-r2 | D | session_01964izEdQ4cDsTpuGgdScHp | RUNNING | 17/11 03:35Z |
 | C44 cloud-del 'Xóa sổ trên mây' (sonnet UI, KIT §83.9) | review/cloud-del | D | session_01964izCcuExvScNgYEs1xN6 | DONE SẴN SÀNG KIỂM e12ef99a (archived) | 17/11 03:35Z |
@@ -616,3 +616,5 @@
 | npc-roads review r2 (opus BIG) of e34393b1 (U2/U3/U4 + r1 families + ch1–4 gate; on a test build with B's road engine) | review/npc-roads-r2 | D | session_01964izESTjuhUzS2khSQ5K9 | RUNNING | 17/11 04:28Z |
 | BATCH 04:15 LIVE: main = 4719d424 (FF from 64c39ca28; save-dlg-fix-r1, fig-rank-match-r2-r1, wx-fx-size-r1); s30 looked at Fold/iPad shots | review/batch-0415 | main s30 | session_01UV1SzjhxXkcba8uS4TZeVm | LIVE | 17/11 04:31Z |
 | person-leftcol HELD by worker until owner confirms (WIP 66228c7a; worker context high → successor needed from a root main) | review/person-leftcol | main s30 | session_01UV1SzhEnrDEEXPkBwigyNF | HELD | 17/11 04:31Z |
+| item-ledger-solo review r1 (opus BIG) of ac939102 | review/item-ledger-solo-r1 | D | session_01964izDZwBFDcEekKPJkVPu | RUNNING | 17/11 04:36Z |
+| RESIDENCE + SEATS halved + HAREM 20 (opus; main s29 04:12Z/04:21Z/04:31Z/04:33Z; OD 04:08Z–04:32Z) | review/residence-seats | D | session_01964izBzU18L6Nv89Q2F288 | RUNNING | 17/11 04:36Z |
