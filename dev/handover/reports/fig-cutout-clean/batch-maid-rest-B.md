@@ -80,3 +80,12 @@ maid-m31-tm0-a18	O6CzPTfynm	nVLoW4WYQD	ok
 maid-m31-tm2-a18	6AqT3XmiJO	gOt3UbuSXO	ok
 maid-m31-tm3-a18	s786gz8l8e	s786gbel8e	ok
 maid-m31-tm4-a18	huZkaS6vqL	O6CzPlZynm	ok
+maid-m31-a18	nVLoWt5YQD	iGbVRLt3uK	ok
+maid-m31-cold-a18	LwoNlR8swO	xSX4LfljfW	ok
+maid-m31-kc-a18	lJIiSAegv9	6AqT3lJiJO	ok
+maid-m31-ngheo-a18	xSX4LRXjfW	LwoNlFyswO	ok
+maid-m31-t1-a18	YMs8cfbWeC	1leyxEmr4r	ok
+maid-m31-t2-a18	kspOr3B16B	rgdPjF6xtc	ok
+maid-m31-t3-a18	s786gnIl8e	WDlI0ZicXe	ok
+maid-m31-t4-a18	u5YsFPzQLD	aFArCIYfSh	ok
+## 80 a18 done through maid-m31-tm4-a18. NEXT = line 81 of grep a18 lists/shards/maid-rest-B.txt (maid-m32-a18).
