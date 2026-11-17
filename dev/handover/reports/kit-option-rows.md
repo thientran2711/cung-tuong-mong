@@ -32,3 +32,9 @@ CORE GATES PASS (one-core-guard, rules-one-source, kit-conform, coop-one-world, 
 
 ## Final quickcheck (3dabd1f7 vs live e8b1906f)
 QUICKCHECK PASS · 127 s · open 1367 ms · old save ok · perf (median of 3, new/live): render 158/150 ms, tab 271/248 ms, buổi 764/770 ms, tasks>200ms 11/10 · core gates PASS · build 2 s · total 285 s
+
+## HANDOVER (rollover, kit-option-rows worker, 17/11 ~17:10Z)
+Part 1 DONE and ready: review/kit-option-rows 3dabd1f7 (quickcheck PASS). Successor starts from it (branch from origin/review/kit-option-rows or main after it lands).
+SCOPE ADD from MAIN s34 (not started): THÀNH / BẠI two blocks per act/option card (OD tail "(17/11 ~17:10Z real" item 2), HỎNG -> BẠI everywhere (kitResultSeal, labels, VANPHONG, KIT.md); KÈM stays inside its block; cost paid either way shown once above both blocks.
+Where to work: dev/build/j63.js — kaModelStr (labels tốn/thành/hỏng/kèm), kaRows (R rows why/ton/duoc/mat/kem/note), KA_ROWS + kaBody (row render), kaNorm1 (re-reads rows from DOM: .kr-<k>), kaOdds. The "hỏng:" label is parsed in j19 kitParse, j63 kaModelStr, j17 dilLine ("hỏng: không mất gì" appended), and 100s of x strings in dev/build/*.js use "hỏng:"; keep "hỏng:" as an accepted INPUT alias and print BẠI. Result card seal: grep kitResultSeal. Tools: dev/measure/option-modal-scan.js (add a flag for old rows), shots harness idea: wait 4 s after start() then clear Q/modal before pushModal (an "Điều mới trong cung" notice pops otherwise).
+Gotchas learned: dilLine wraps x without odds word as "Chắc chắn · thành: "+x (fixed to keep an existing label); kaRows `sure` = no odds or "Chắc chắn"; KA_NOTHING regex hides empty lines; layout of picture cards: jksize kszNeedTxt.
