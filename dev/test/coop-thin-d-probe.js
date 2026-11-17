@@ -1,11 +1,14 @@
-/* review/coop-thin-d-r1 PROBE (reviewer, not a gate yet): the cases coop-thin-d.js does not cover. P1 ev proof mid-week on her phone,
-   P2 host reload while HIS invite card is open on the guest, P3 guest buys the host (cung nữ), P4 double click. Same usage as coop-thin-d.js.
-   Expected on 099ce05b: P1 mid-week FAIL, P2 FAIL (CW.acts lost on host reload), P3/P4 ok. */
+/* review/coop-thin-d-r1 PROBE — a GATE since D r1 (run beside coop-thin-d.js): the cases coop-thin-d.js does not cover.
+   P1 ev proof host world → her phone at once (mid-week) and counted once after the merge; P1b ev the other way (her tai mắt → the host's proof);
+   P2 host reload while HIS invite card is open on the guest; P2b host reload while his Tặng quà card is open on her (the item found by value); P3 guest buys the host
+   (cung nữ) + his card shot; P4 double click; P5 the rows family: she buys the host, he reports to his mistress → that NPC's rows toward HER
+   (evm.me proof, Thiện cảm) on her phone at once, host world unchanged until the merge, counted once after it; P6 both seats at once (her
+   pick arrives while the host answers his own card). Same usage as coop-thin-d.js. Expected on 099ce05b: P1 mid-week FAIL, P2 FAIL. */
 /* Co-op thin guest, part D (review/coop-thin-d): remote dialogs (cards) built on the host. Two Playwright clients in one room,
    host Fold 686x880 + guest iPad 1180x820 (swap=1: iPad hosts, Fold joins). Needs a Worker with part A (e.g. local `wrangler dev`).
    usage: python3 dev/build/assemble.py && node dev/test/coop-thin-d.js <workerURL> [level=1] [swap=0]   (SHOTS=<dir outside git> for shots)
    Both seats set the test-only flag localStorage ctm-thin-part-4=1 (contract C1: part B not on main yet). */
-const {chromium}=require('playwright');const {serve,BASE}=require('./coop-serve.js');
+const {chromium}=require('playwright');const {cardShot}=require('./coop-thin-d-kit.js');const {serve,BASE}=require('./coop-serve.js');
 const WURL=process.argv[2]||'https://ctm-coop.victoria-tntt.workers.dev';const LVL=+(process.argv[3]||0);const SWAP=+(process.argv[4]||0);
 const res=[];const ok=(c,m,x)=>{res.push([!!c,m]);console.log((c?'ok  ':'FAIL')+' '+m+(x!==undefined?' '+(c?JSON.stringify(x).slice(0,400):JSON.stringify(x.paths?{paths:x.paths,dels:x.dels,err:x.err}:x).slice(0,3000)):''))};
 const sleep=ms=>new Promise(r=>setTimeout(r,ms));
@@ -40,7 +43,7 @@ async function week(A,B,tag){for(let i=0;i<3;i++){await clear(A);await clear(B)}
  ok(await until(G,()=>window.COOP&&COOP.seat==='b'&&!COOP.frozen,null,60000),'guest joined seat b');
  const inW=async()=>{const t0=Date.now();while(Date.now()-t0<120000){await clear(H);await clear(G);const a=await H.p.evaluate(()=>__co().world&&rivals.some(v=>v.coop)),c=await G.p.evaluate(()=>__co().world&&rivals.some(v=>v.coop));if(a&&c)return true;await sleep(500)}return false};
  await inW();
- for(const o of [H,G])await o.p.evaluate(()=>{try{if(BAL.coopTm)BAL.coopTm.buoiMs=600000}catch(e){}if(S.srv)S.srv.risen=1;if(S.kc)S.kc.inPal=1;S.rank=3;S.sung=Math.max(S.sung||0,40);render()});
+ for(const o of [H,G])await o.p.evaluate(()=>{try{if(BAL.coopTm)BAL.coopTm.buoiMs=600000}catch(e){}if(S.srv)S.srv.risen=1;if(S.kc)S.kc.inPal=1;S.rank=3;S.sung=Math.max(S.sung||0,40);S.kpWarn=1;render()});
  if(!(await until(H,()=>!!COOPW.friend(),null,20000)&&await until(G,()=>!!COOPW.friend(),null,20000)))await week(H,G,'setup');
  ok(await until(H,()=>!!COOPW.friend(),null,30000)&&await until(G,()=>!!COOPW.friend(),null,30000),'each seat has the other as a consort entry');
 
@@ -73,6 +76,10 @@ async function week(A,B,tag){for(let i=0;i<3;i++){await clear(A);await clear(B)}
  console.log('P1 after week guest ev',g2,'host',JSON.stringify(h2));
  ok(ev.d>0&&g1.ev===gev0+ev.d,'P1 ev: the proof is on her phone mid-week (old relay did this at once)',[ev,gev0,g1,h1]);
  ok(g2===gev0+ev.d,'P1 ev: after the week her proof counted once',[gev0,g2,h2]);
+ /* ===== P1b: ev her tai mắt → the host holds the proof (guest-side evA with the host's entry as holder; the host's own world, at once) ===== */
+ const evh0=await H.p.evaluate(()=>{const v=liveRivals(true).filter(x=>!x.coop&&x.alive&&x.id<900)[1];return {id:v.id,ev:v.ev||0}});
+ const evb=await G.p.evaluate(id=>{const f=rivals.find(v=>v.coop);const v=RV(id);const d=evA(f,v,1);return {id:v.id,d}},evh0.id);
+ ok(evb.d>0&&await until(H,o=>(RV(o.id).ev||0)===o.ev+1,evh0,15000),'P1b ev her tai mắt → the proof is the HOST\'s, at once',[evb,await H.p.evaluate(id=>RV(id).ev||0,evb.id)]);
  for(const o of [H,G])await o.p.evaluate(()=>{deedCap=window.__dc});
  /* ===== P2: host reload while HIS invite card is open on the guest ===== */
  await settle();await H.p.evaluate(()=>{window.__dil=[]});
@@ -89,6 +96,19 @@ async function week(A,B,tag){for(let i=0;i<3;i++){await clear(A);await clear(B)}
  const p2=await H.p.evaluate(()=>[__dil,COOPW.thin.D.log.slice(-4)]);const rlG2=await G.p.evaluate(()=>(S.rl||{})[901]||0);
  console.log('P2 host dil',JSON.stringify(p2),'guest rl',rlG,rlG2,await gQ());
  ok(p2[0].includes('Hảo hữu nhận lời'),'P2 after host reload, her Nhận runs his act',p2);
+ /* ===== P2b: host reload while his Tặng quà card is open on her: the item is found again BY VALUE in his chest (pp carries it, not the index) ===== */
+ await settle();await H.p.evaluate(()=>{window.__dil=[]});
+ const it=await H.p.evaluate(()=>{S.inv=S.inv||[];const k=Object.keys(IT).find(k=>IT[k]&&!IT[k].pet&&!IT[k].hide)||Object.keys(IT)[0];S.inv.push({k},{k});const i=S.inv.length-1;return {i,k,n:S.inv.length}});
+ await H.p.evaluate(i=>runAct(S,rivals.find(v=>v.coop),'gift',i),it.i);
+ ok(await until(G,()=>Q.some(q=>q.thin&&q.t==='Hảo hữu tìm đến'),null,20000),'P2b her "muốn tặng ngươi" card open',await gQ());
+ await H.p.evaluate(()=>{S.inv.unshift({k:Object.keys(IT)[1]});save()});/* his chest order changes before the reload: the old index would point at another thing */
+ await H.p.goto(BASE+'?room='+code);await H.p.waitForTimeout(3000);{const t0=Date.now();while(Date.now()-t0<60000){if(await H.p.evaluate(()=>!!(window.COOPW&&COOPW.on&&typeof S!=='undefined'&&S&&COOPW.thin.dOn())).catch(()=>false))break;await tapText(H,/^(Vào phòng|Tiếp tục|Chơi tiếp)/,1500);await sleep(500)}}
+ await H.p.evaluate(()=>{window.__dil=[];const d=pushModal;pushModal=function(m){window.__dil.push((COOPW.ctx?'b:':'')+((m&&m.t)||''));return d.apply(this,arguments)}});await sleep(3000);
+ const hn=await H.p.evaluate(k=>(S.inv||[]).filter(e=>e&&e.k===k).length,it.k);
+ await front(G,'Hảo hữu tìm đến');ok(await tapM(G,/^Nhận(?!\s*bạc)/),'P2b guest taps Nhận after the host reload');
+ ok(await until(H,()=>__dil.includes('Hảo hữu nhận lời'),null,20000),'P2b after host reload her Nhận runs his gift (rebuilt from pp)',await H.p.evaluate(()=>__dil));
+ ok(await until(H,a=>(S.inv||[]).filter(e=>e&&e.k===a.k).length===a.n-1,{k:it.k,n:hn},20000),'P2b the gift left his chest (found by value, one of it)',[hn,await H.p.evaluate(k=>(S.inv||[]).filter(e=>e&&e.k===k).length,it.k)]);
+ ok(await until(G,()=>Q.some(q=>q.thin&&q.t==='Quà tặng'),null,20000),'P2b her Quà tặng card',await gQ());
  /* ===== P3: guest buys the host who serves as a cung nữ ===== */
  await settle();await H.p.evaluate(()=>{window.__dil=[]});
  const mid=await H.p.evaluate(()=>{const m=liveRivals(true).find(v=>!v.coop&&v.alive&&!v.out&&v.rank>=1);S.srv={mid:m.id,rk:1,mp:0,lau:0,rk0:1,lw:0,af:{},know:{},met:[],sec:0,msch:0,intel:[],spyFor:null,betray:null,sent:null,err:null,once:{},mama:0,risen:0};return m.id});
@@ -96,7 +116,7 @@ async function week(A,B,tag){for(let i=0;i<3;i++){await clear(A);await clear(B)}
  const gb=await G.p.evaluate(()=>S.bac),hb=await H.p.evaluate(()=>S.bac);
  const r3=await G.p.evaluate(()=>String(bribeServ(S,allServ().find(x=>x.coop))));console.log('P3 guest',r3);
  ok(await until(H,()=>Q.some(q=>q.pid==='thBribe'),null,20000),'P3 host: his Bạc lạ card',await H.p.evaluate(()=>Q.map(q=>q.t)));
- await H.p.evaluate(()=>{const i=Q.findIndex(q=>q.pid==='thBribe');const m=Q.splice(i,1)[0];Q.unshift(m);showModal()});
+ await H.p.evaluate(()=>{const i=Q.findIndex(q=>q.pid==='thBribe');const m=Q.splice(i,1)[0];Q.unshift(m);showModal()});await cardShot(H,'p3-host-bribe',SWAP);
  ok(await tapM(H,/^Nhận bạc/),'P3 host Nhận bạc');
  ok(await until(G,b=>S.bac<b&&Q.some(q=>q.thin&&q.t==='Mua chuộc'),gb,20000),'P3 guest pays + her Mua chuộc card',[gb,await G.p.evaluate(()=>S.bac),await gQ()]);
  ok(await H.p.evaluate(b=>S.bac>b&&S.srv.spyFor===902,hb),'P3 host gets Bạc and spies for her',await H.p.evaluate(()=>[S.bac,S.srv.spyFor]));
@@ -108,5 +128,36 @@ async function week(A,B,tag){for(let i=0;i<3;i++){await clear(A);await clear(B)}
  await sleep(5000);
  console.log('P4',await H.p.evaluate(()=>JSON.stringify(__dil)));
  ok(await H.p.evaluate(()=>__dil.filter(t=>t==='Hảo hữu nhận lời').length===1),'P4 double click runs once');
- const errs=[...H.errs.map(e=>'H '+e),...G.errs.map(e=>'G '+e)].filter(e=>!/WebSocket|net::|ERR_|Failed to fetch/.test(e));ok(!errs.length,'no page errors',errs.slice(0,6));
+ /* ===== P5 rows family: she buys the host, he reports to his mistress (briberRes "told" in HER context: that NPC's proof against her
+    evm.me +1, its Thiện cảm toward her −5) → on her phone at once; the host's world keeps the old numbers until the week; once after ===== */
+ await settle();
+ const mid5=await H.p.evaluate(()=>{const m=liveRivals(true).find(v=>!v.coop&&v.alive&&!v.out&&v.rank>=1);S.srv={mid:m.id,rk:1,mp:0,lau:0,rk0:1,lw:0,af:{},know:{},met:[],sec:0,msch:0,intel:[],spyFor:null,betray:null,sent:null,err:null,once:{},mama:0,risen:0};return m.id});
+ await G.p.evaluate(mid=>{const m=RV(mid);m.staff=m.staff||[];if(!m.staff.some(x=>x.coop))m.staff.push({sid:901,coop:true,name:'Hảo hữu',role:'maid',fc:'',fk:'',face:0,hue:0,age:18,tr:'trung',loyal:60,spyFor:null,lover:null,af:{},kn:1,imp:'',org:''});S.bac=Math.max(S.bac||0,200)},mid5);
+ for(const o of [H,G])await o.p.evaluate(()=>{window.__dc=deedCap;deedCap=()=>1e9});
+ const rowG=id=>G.p.evaluate(id=>{const v=RV(id);return {ev:(v.evm||{}).me||0,rel:v.rel||0}},id),rowH=id=>H.p.evaluate(id=>{const v=RV(id);return {ev:(v.evm||{})['902']||(v.evm||{})['p902']||0,rel:(v.rl||{})[902]||0}},id);
+ const g50=await rowG(mid5),h50=await rowH(mid5);
+ await G.p.evaluate(()=>String(bribeServ(S,allServ().find(x=>x.coop))));
+ ok(await until(H,()=>Q.some(q=>q.pid==='thBribe'),null,20000),'P5 host: his Bạc lạ card');
+ await H.p.evaluate(()=>{const i=Q.findIndex(q=>q.pid==='thBribe');const m=Q.splice(i,1)[0];Q.unshift(m);showModal()});ok(await tapM(H,/^Từ chối, bẩm chủ/),'P5 host: Từ chối, bẩm chủ');
+ ok(await until(G,()=>Q.some(q=>q.thin&&q.t==='Mua chuộc'),null,20000),'P5 her Mua chuộc note',await gQ());
+ await sleep(1500);const g51=await rowG(mid5),h51=await rowH(mid5);
+ console.log('P5 rows guest',JSON.stringify([g50,g51]),'host',JSON.stringify([h50,h51]));
+ ok(g51.ev===g50.ev+1&&g51.rel<g50.rel,'P5 her rows on that NPC (its proof against her +1, its Thiện cảm toward her down) on her phone at once',[g50,g51]);
+ ok(h51.ev===h50.ev&&h51.rel===h50.rel,'P5 the host\'s world keeps the old numbers for her rows until the merge (no double count)',[h50,h51]);
+ await H.p.evaluate(()=>{S.srv=null});await G.p.evaluate(mid=>{const m=RV(mid);m.staff=(m.staff||[]).filter(x=>!x.coop)},mid5);/* back to a consort before the merge */
+ await settle();await week(H,G,'P5 week');const g52=await rowG(mid5),h52=await rowH(mid5);
+ /* the proof is a plain count (nothing else moves it in a week): counted once on both seats. Thiện cảm also drifts with the week, printed only. */
+ ok(g52.ev===g51.ev&&h52.ev===g51.ev,'P5 after the week her proof row counted once (guest and host world agree)',[g51,g52,h52]);
+ for(const o of [H,G])await o.p.evaluate(()=>{deedCap=window.__dc});
+ /* ===== P6 both seats at once: her pick of HIS invite arrives while the host answers HER invite on his own card ===== */
+ await settle();await H.p.evaluate(()=>{window.__dil=[]});
+ ok(await until(H,()=>!!rivals.find(v=>v.coop),null,20000)&&await until(G,()=>!!rivals.find(v=>v.coop),null,20000),'P6 both seats see the other as a consort');
+ await H.p.evaluate(()=>runAct(S,rivals.find(v=>v.coop),'ally'));await G.p.evaluate(()=>runAct(S,rivals.find(v=>v.coop),'ally'));
+ ok(await until(G,()=>Q.some(q=>q.thin&&q.t==='Hảo hữu tìm đến'),null,20000)&&await until(H,()=>Q.some(q=>q.pid==='thInv'),null,20000),'P6 both cards open');
+ await front(G,'Hảo hữu tìm đến');await H.p.evaluate(()=>{const i=Q.findIndex(q=>q.pid==='thInv');const m=Q.splice(i,1)[0];Q.unshift(m);showModal()});
+ await Promise.all([tapM(G,/^Nhận(?!\s*bạc)/),tapM(H,/^Nhận(?!\s*bạc)/)]);
+ ok(await until(H,()=>__dil.filter(t=>t==='Hảo hữu nhận lời').length===1,null,20000),'P6 host: her answer ran his act once',await H.p.evaluate(()=>__dil));
+ ok(await until(G,()=>Q.some(q=>q.thin&&q.t==='Hảo hữu nhận lời'),null,20000),'P6 guest: his answer ran her act (her "Hảo hữu nhận lời")',await gQ());
+ ok(await H.p.evaluate(()=>COOPW.thin.selfTest().ok),'P6 host: withSeat round trip still exact');
+ const errs=[...H.errs.map(e=>'H '+e),...G.errs.map(e=>'G '+e)].filter(e=>!/WebSocket|net::|ERR_|Failed to fetch|navigator\.vibrate/.test(e))/* vibrate: Chrome's no-gesture notice (the heart feedback of a pid card), not a page error */;ok(!errs.length,'no page errors',errs.slice(0,6));
  await b.close();const f=res.filter(r=>!r[0]).length;console.log(`coop-thin-d-probe: ${res.length-f}/${res.length}`);process.exit(f?1:0)})().catch(e=>{console.error(e);process.exit(2)});
