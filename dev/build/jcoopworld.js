@@ -33,7 +33,9 @@ window.worldOn=function(){const c=window.COOPW;return !(c&&c.on&&c.seat!=="a")};
    jcoopone MUTE / ONLY_ME / PERSON, module npcOK guards) stay until parts E / G: the host rolls those once, for both seats (coop-thin-c.md). */
 window.thinW=function(){const c=window.COOPW;return !!(c&&c.on&&c.thin&&c.thin.on&&c.thin.on(3))};
 window.oldRan=function(n){const c=window.COOPW;if(c){c.oldRun=c.oldRun||{};c.oldRun[n]=(c.oldRun[n]||0)+1}};
-window.stateOn=function(n){if(worldOn()||thinW())return true;oldRan(n);return false};
+/* review r1: while the lens is still installed on this guest (the room holds for a moment: reconnect / two builds), her world is still
+   read-only, so the old guards stay bypassed (before: a hold let jcoopask's temp-id path run once with the lens on, C8 "ask":1) */
+window.stateOn=function(n){if(worldOn()||thinW())return true;try{const C=window.COOPW&&COOPW.thin&&COOPW.thin.C;if(C&&C.lensOn&&C.lensOn())return true}catch(e){}oldRan(n);return false};
 (function(){try{
 if(typeof COOP!=="object")return;
 /* thIll (Thái hậu illness), cm (Thái hậu / Hoàng hậu mood; her own "seen"/spy/drop part stays personal, CM_P), men (palace men; her own

@@ -71,7 +71,7 @@ function lp(raw,root,path){if(!plain(raw)||raw[LENS])return raw;let p=PXM.get(ra
    const td=Reflect.getOwnPropertyDescriptor(t,k);if(!td||td.configurable)d.configurable=true;else d.configurable=false;return d}});
  PXM.set(raw,p);return p}
 const unl=v=>v&&v[LENS]?v[RAW]:v;
-C.raw=unl;
+C.raw=unl;C.lensOn=()=>lOn();
 
 /* the world keys of S: accessors over a lens of the host's value (the guest's S is her person; these keys are the world's) */
 let WB=null;   /* raw values of the world keys (the host's, in her perspective, with her own parts) */
@@ -166,7 +166,11 @@ function wrapF(n,kind,cond){const f=window[n];if(typeof f!=="function")return;wi
  /* an implicit act frame (writes outside any frame) is closed first: its ops go out, then the world step. An EXPLICIT act (runAct,
     chooseM) stays open: a render or a buổi step it calls runs as a world frame on top of it (reads see the act's writes, its own writes
     are dropped) and the act's ops go out whole at its end (before: render inside kpoison / kframe closed the act, the rest went implicit) */
- if(kind==="world")C.flushImp();return C.frame(kind,f,this,arguments)}}
+ if(kind==="world")C.flushImp();const r=C.frame(kind,f,this,arguments);
+ /* review r1 (O1): her week / buổi step may leave cards in Q with the modal hidden (in a C room her date keys are the lens, so a hook
+    that shows cards only when the date moved on her phone — jworld endTurn — skips them): the week end waits for an empty Q, so show them */
+ if(kind==="world"&&n!=="render")try{if(gOn()&&S&&!S.dead&&!S.mg&&Q.length&&$("modal").hidden)setTimeout(()=>{try{if(Q.length&&$("modal").hidden&&!S.mg)showModal()}catch(e){}},0)}catch(e){}
+ return r}}
 C.flushAct=()=>{while(FR.length&&FR[FR.length-1].kind==="act")close(FR[FR.length-1])};
 C.flushImp=()=>{while(FR.length&&FR[FR.length-1].kind==="act"&&FR[FR.length-1].implicit)close(FR[FR.length-1])};
 for(const n of ["endTurn","nextBuoi","monthTick","render"])wrapF(n,"world");
