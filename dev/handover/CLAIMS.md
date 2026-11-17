@@ -860,3 +860,4 @@
 | one-core-jkc r1 PASS 9f3c96854 → re-merge main e8b1906f → Foreman B push | review/one-core-jkc-r1 | B | session_01N1tNP2T3QBr5EHz4r5RAmd | PASS | 17/11 16:45Z |
 | tinbao-ui-r3r PASS 47a462ca (supersedes 05e82176; lands after ag-all-2 by C-AG #3) → r4 = Tai mắt list on 2f API | review/tinbao-ui-r4 | MAIN s34 | session_01UV1Szjhrq5VUWD5Haiagxz | RUNNING | 17/11 16:37Z |
 | harm-acts-expert: drama/history list of harm acts nhẹ/vừa/nặng with visible filters + minigame fit (OD 16:40Z; OD:L1327) (sonnet; brief briefs/s34-harm-acts-expert.md) | review/harm-acts-design | MAIN s34 | session_01UV1SzhJvtkPFYjL1ee1Y1P | DESIGN READY e6e36106 | 17/11 16:40Z |
+| REVIEW world-ret-phong r1 (opus BIG) of 54cb809f | review/world-ret-phong-r1 | C-AG | session_01UV1Szgs7rrynEBwLodvmU5 | RUNNING | 17/11 16:41Z |
