@@ -99,7 +99,7 @@ async function weekBoth(A,B,w){const n=await A.p.evaluate(()=>typeof B4N==='numb
  {const a=await st(A),c=await st(B);ok(a.kc&&!c.kc,'after 2 weeks: A still at home, B in the palace',[a.kc,c.kc]);ok(String(a.d)===String(c.d),'same date',[a.d,c.d]);ok(!c.fr,'B has no entry for A while A is at home',c.fr);
   const due=await A.p.evaluate(()=>[S.kc.due,(S.turn||0)+(KC.ty-S.year)*12+(KC.tm-1-S.month)]);if(await A.p.evaluate(()=>!!S.kc.kd))ok(due[0]===due[1],'A home end month = the tiểu thư tuyển tú month',due)}
  /* A passes her selection alone: she enters at once (no gate, no waiting for B) */
- const r=await A.p.evaluate(()=>{for(let i=0;i<20&&Q.length&&!S.dead;i++){const m=Q[0];if(m.opts&&m.opts.length)chooseM(m.opts.length-1);else closeModal()}if(S.kc.kd){S.kc.ex={art:'',play:1,done:1};kc2Enter(6)}else{S.kc.soOk=1;S.kc.tt={early:false,raw:5,done:1};kcEnter(1)}return{kc:isKc(),inPal:!!S.kc.inPal,gate:'gate' in S.kc}});
+ const r=await A.p.evaluate(()=>{for(let i=0;i<20&&Q.length&&!S.dead;i++){const m=Q[0];if(m.opts&&m.opts.length)chooseM((L=>L.length?L[L.length-1]:0)(m.opts.map((c,i)=>c.off?-1:i).filter(i=>i>=0)));else closeModal()}if(S.kc.kd){S.kc.ex={art:'',play:1,done:1};kc2Enter(6)}else{S.kc.soOk=1;S.kc.tt={early:false,raw:5,done:1};kcEnter(1)}return{kc:isKc(),inPal:!!S.kc.inPal,gate:'gate' in S.kc}});
  ok(!r.kc&&r.inPal&&!r.gate,'A enters alone, at once',r);await clear(A);
  {const wk=(await C(A)).week;await weekBoth(A,B,7);for(const o of [A,B])await untilC(o,x=>__co().week===x+1,wk,90000);await clear(A);await clear(B);
   const a=await st(A),c=await st(B);ok(c.fr===a.name,'B sees A in the palace after her entry',[a.name,c.fr])}
