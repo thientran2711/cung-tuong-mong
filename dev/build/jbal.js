@@ -261,6 +261,11 @@ function ntRiseOdds(){return Math.max(0,(S.nt||0)/BAL.ntRise.div-BAL.ntRise.sub)
    SG_LO / SG_HI (before: the cuts were typed in all four). */
 Object.assign(BAL,{odds:{cut:[31,46,56,66,81,91],lo:5,hi:95}});
 function oddsLv(o){let i=0;for(const c of BAL.odds.cut)if(o>=c)i++;return i}
+/* ONE CORE number formatters for player texts (review/one-core-dup r2, OD:L1267 "text prints the constant"): balSg(n) = the signed amount as the
+   texts show it ("+4" / "-4"), balAb(n) = the amount without sign ("4"). A text that shows a BAL.eff / BAL.road / BAL.arc amount prints it with these
+   (dev/test/one-core-text.js fails a typed copy). */
+function balSg(n){return(n>0?"+":n<0?"-":"")+Math.abs(n)}
+function balAb(n){return String(Math.abs(n))}
 /* ONE CORE age bands (owner art rule OD:L567: 18–25 / 26–35 / 36–50 / 51+; review/one-core-dup): band i starts at ageBand[i-1].
    Read by band4 (j35), pidBand (j66), kcBand (jkc) (before: 26/36/51 typed in each). */
 Object.assign(BAL,{ageBand:[26,36,51]});

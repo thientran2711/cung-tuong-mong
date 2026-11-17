@@ -16,10 +16,21 @@ function lastDefs(ref){const L={};for(const f of order(ref)){const src=rd(ref,f)
    listed with the module that sets the key so the reviewer can check it is set before the function can run. */
 const FB=/((?:\bBAL|\bB)(?:\.[\w$]+)+)\s*\|\|\s*(-?[\d.]+|\[[^\[\]]*\]|\{[^{}]*\})/g;
 const norm=t=>t.replace(/\(typeof BAL==="object"&&(BAL(?:\.[\w$]+)+)\)/g,'$1').replace(FB,'$1').replace(/\(((?:\bBAL|\bB)(?:\.[\w$]+)+)\)/g,'$1');
+/* the third allowed change (review/one-core-dup r2): a player text that now PRINTS the BAL.eff amount it used to type (${balSg(BAL.eff.m.k)} → "+4" / "-4",
+   ${balAb(…)} → "4"). The new side is printed back with the BAL value and both sides are compared as programs (acorn AST; "…" string ≡ `…` template without ${}). */
+const EFF=(()=>{try{return Function('const BAL={};'+fs.readFileSync('dev/build/jbaleff.js','utf8')+';return BAL.eff')()}catch(e){return {}}})();
+const REFRE='BAL\\.eff\\.([\\w$]+)(?:\\.([\\w$]+)|\\["([^"]+)"\\])(?:\\[([01])\\])?';
+const printed=src=>src.replace(new RegExp('\\$\\{bal(Sg|Ab)\\('+REFRE+'\\)\\}','g'),(m,fn,md,k1,k2,i)=>{let v=EFF[md][k1||k2];if(i!=null)v=v[+i];return fn==='Sg'?(v>0?'+':v<0?'-':'')+Math.abs(v):String(Math.abs(v))});
+const canon=t=>JSON.stringify(acorn.parse(t,{ecmaVersion:'latest'}),(k,v)=>{if(k==='start'||k==='end'||k==='raw')return undefined;
+ if(v&&v.type==='TemplateLiteral'&&v.expressions.length===0&&v.quasis.length===1)return{S:v.quasis[0].value.cooked};
+ if(v&&v.type==='Literal'&&typeof v.value==='string')return{S:v.value};return v});
+const back=src=>src.replace(new RegExp(REFRE,'g'),(m,md,k1,k2,i)=>{let v=EFF[md][k1||k2];if(i!=null)v=v[+i];return v<0?'(-'+(-v)+')':String(v)});
+const sameText=(a,b)=>{try{return canon(back(norm(a)))===canon(back(norm(printed(b))))}catch(e){return false}};
 const A=lastDefs(REF),N=lastDefs(null);const bad=[],fbs=[];let same=0;
 for(const k in A){if(!N[k]){bad.push(`${k}: live in ${A[k].f} before, gone after`);continue}if(N[k].src===A[k].src){same++;continue}
  if(norm(N[k].src)===norm(A[k].src)){for(const m of A[k].src.matchAll(FB))if(!N[k].src.includes(m[0]))fbs.push(`${A[k].f} ${k}: ${m[0]}`);same++;continue}
+ if(sameText(A[k].src,N[k].src)){same++;continue}
  bad.push(`${k}: live copy differs (${A[k].f} → ${N[k].f})`)}
 if(fbs.length)console.log('dead fallbacks removed (key set in BAL at load):\n  '+fbs.join('\n  '));
 console.log(JSON.stringify({ref:REF,liveFunctionsBefore:Object.keys(A).length,after:Object.keys(N).length,identical:same,differ:bad.length}));
-if(bad.length){console.log('FAIL\n  '+bad.slice(0,60).join('\n  '));process.exit(1)}console.log('PASS: every live top-level function is byte-identical');
+if(bad.length){console.log('FAIL\n  '+bad.slice(0,60).join('\n  '));process.exit(1)}console.log('PASS: every live top-level function is byte-identical (or prints the same text from BAL)');
