@@ -713,3 +713,4 @@ OWNER WAITING (ask one at a time, numbered options at the end): makeup ?v=8 OK?;
 TODO for main: image sweep worker (one-time: images committed to git by mistake + CDN img/_review leftovers incl. kit-ico-rank-r2 13 shots) per OD ~14:15Z; KIT REQUEST key strip in ksz3/kdper dialogs (low); Foreman B wrote no hourly STATUS line since 08:45Z — check it.
 WAKE: s32's trig_01AmoCgbYdSVFExgtksKLznL (15:32Z) — s33 deletes it and sets its own at :32.
 LESSONS s32: check `git ls-remote` for a reported sha BEFORE archiving (person-leftcol #2 lost d1c121b1); LOOK at every worker shot (pcard popup shot was the start screen; morechip shots wiped by the worker); owner small asks = small steps but not invisible ones (v6 too subtle, v7 too heavy).
+- (17/11 ~14:58Z) s32 opened MAIN SESSION 33 = session_01UV1SzknccDMmbvCf4hWxC8 (child of s32, depth 2) and stops; s32 forwards any late message to s33.
