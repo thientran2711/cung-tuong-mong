@@ -11,3 +11,4 @@ consort-c01-ty5-a18 1leOVHJr4r OK
 (ids of all OK files: batch-consort-ty-tools/progress/ids.tsv; per-agent logs progress/g*.tsv)
 Method: sub-agents run JOB.md (4 images in parallel, max). First 9 files by lead W2 directly: c01 ty1-8 + c02 ty1 all OK.
 UPLOADED to CDN: first 73 a18 (fig+por) 17/11
+## PAUSE (Foreman C 17/11): all consort ty1 (Đáp ứng) files are PAUSED (owner: Đáp ứng and cung nữ dresses look identical). ty1 a18 already generated: 27 files (see ids.tsv, grep ty1) (idx%8==0 in a18_index.txt); NOT redone yet; awaiting lead #6's new anchor after the owner OK of a side-by-side sample. ty1 files of c32 and every ty1 of a26/a36/a51 NOT generated. g5 told to skip ty1 keys.
