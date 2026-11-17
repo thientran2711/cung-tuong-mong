@@ -11,3 +11,6 @@ Shots (scratch, Fold 755x1000@2 + iPad 1180x820@2, direct mode; host mode stuck 
 
 # r2 re-review — PASS 05e82176 (review/tinbao-ui-r2r = worker r2 a0327a6b rebased on NEWEST ag-all-2 72263137; ag-all-2 had grown, built files regenerated)
 Items 1-4 fixed and LOOKED at (Fold + iPad): informer name+role per row (kitName), big figure = the informer (Cung nữ Lạc Mai), place printed once, count tag moved to the left, clear of "Buổi sáng". tinbao-ui.test 19/19, quickcheck PASS (perf render 242/203, tab 331/317, buổi 1135/1122, tasks>200ms 14/14, old save ok). one-core-guard PASS (fails 0). QUICKCHECK G1 one-core-text FAIL is inherited from ag-all-2 head (sites in j2/j9/j10/j42/jpromsv/jagknow "chứng cứ +1"; none in jtinbao): judge in ag-all-2 review. Worker CDN shots wiped.
+
+# r3 re-review — PASS 47a462ca (review/tinbao-ui-r3r = worker r3 84152ddc (= r2 + card title "Tai mắt báo", owner (e)) rebased on NEWEST ag-all-2 986f797a, site rebuilt)
+Title shown, looked at (Fold). tinbao-ui.test 19/19, one-core-guard PASS (fails 0), old save ok. quickcheck G1 one-core-text FAIL still inherited from ag-all-2 (none in jtinbao); perf single run buổi 1845 vs live 1067 is single-run noise (r2 3-run median 1135/1122, no tinbao code on the buổi path). Worker CDN shots wiped.
