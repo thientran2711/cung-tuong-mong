@@ -572,3 +572,4 @@
 | fig-rank-match-r2 review (sonnet URGENT; manifests 656→1296 / 240→2112 + strict picker + guard; safe-first verdict per manifest) of 2d0f41c56 | review/fig-rank-match-r2-r1 | main s29 | session_01UV1SzgpLfyJgZdu2ie2XYZ | RUNNING | 17/11 03:27Z |
 | WHOLE FIGURE REPAINT batch W4d (successor of W4c session_011xDdVShYq4ow4VaBTVm4CY, archived; hero+misc remainder, maid-ty on GO after owner OK of rank-sample-v2) | review/fig-cutout-clean | C | session_011xDdVPnYcsf2h5vWcgL2Z5 | RUNNING | 17/11 03:29Z |
 | save-dlg-fix review r1 (sonnet SMALL UI) of 340c616a (worker #2 archived) | review/save-dlg-fix-r1 | main s29 | session_01UV1SzgbocUETEUWFViBc8f | RUNNING | 17/11 03:31Z |
+| night-final SUCCESSOR #6 (opus; HELD BY MAIN while Foreman D is out of quota; returns to D on a new D account) from ea74aff6: shots, buổi perf ≤ live +5 %, G4 probe proof; co-op PARKED | review/night-final | main s29 | session_01UV1SzkcuhnxeSAywiQC2hz | RUNNING | 17/11 03:33Z |
