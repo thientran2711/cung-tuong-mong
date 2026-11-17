@@ -909,3 +909,4 @@
 | DISPLAY SHELF builder #2 (opus): 70 items + OD L1678 (d) + rebase → SẴN SÀNG KIỂM | review/display-shelf | C-AG | session_01UV1Szj9tDw8PAVnkXJ7CYJ | RUNNING | 17/11 18:41Z |
 | REVIEW kit-fx-register r1 of 893b3f45 (sonnet SMALL; brief briefs/s36-review-kit-fx-register.md) | review/kit-fx-register-r1 | MAIN s36 | session_01UV1SzjbQtX54oMDpW6uSfe | RUNNING | 17/11 18:44Z |
 | REVIEW wx-anim (sonnet SMALL) of be36f27 | review/wx-anim-r1 | C-AG | session_01UV1SzjfdPe1XaTKj3NacXr | RUNNING | 17/11 18:51Z |
+| REVIEW looks-2 r2 cfd4a6813 (fresh opus BIG; r1 reviewer rolled over; brief briefs/review-looks-2-r2.md) | review/looks-2-r2 | B | (opening) | RUNNING | 17/11 18:56Z |
