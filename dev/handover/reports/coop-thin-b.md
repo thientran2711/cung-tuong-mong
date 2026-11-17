@@ -161,3 +161,26 @@ Setup: worktree /home/user/wt/thinb (sparse, at a0342238, hooks installed); test
 Commands (LIVE Worker https://ctm-coop.victoria-tntt.workers.dev): python3 dev/build/assemble.py; node dev/test/coop-thin-d.js <W> 2 [1]; node dev/test/coop-thin-d-probe.js <W> 2 [1];
 node dev/test/coop-thin-b.js <W> 2 [1]; node dev/test/coop-thin-a.js <W> 0|1; node dev/test/coop-e2e.js <out> (COOP_SWAP=1); node dev/test/coop-p2.js <out>;
 node dev/test/one-core-guard.js; bash dev/site/build_site.sh + commit index.html/sw.js/assets.json, then bash dev/tools/quickcheck.sh. Shots: SHOTS=<dir outside git>.
+
+## r1 FIX (worker #3 session_01N1tNP3op5jQGEdK2Sf7aVD successor, 11/17/2026) — review/coop-thin-b @ be599e1e
+PRIORITY #1 CHECK ('coop-thin-b r1|waitCard|takeQ|TB.hold|allyBond|ghenNew|hhBind buildFriend'): OD co-op thin-guest (ORDER s28, C3) | main 05ebe3da (merged in) | review/* coop-thin-b a0342238 (base), coop-thin-b-r1 674b5fa9 (probe taken) | claims: this worker. No BAL key for the ally / new-face ghen existed on main or review/* → added (item 5).
+START_CTX ≈ 10 %; ends ≈ 35 % (push + report only at the end; no successor needed for this task).
+Commits: 1f44a195 merge origin/main 05ebe3da (built files taken from main, rebuilt) · bf76752c fixes · be599e1e probe shots + site rebuilt.
+
+| # | Item | Fix (root) |
+|---|---|---|
+| 1 | Wait card drew her dead old person; ✕ ran the old local accept | jcoopthinb waitCard = a plain kit note (title "Sổ luân hồi", VANPHONG text kept; no `nl`, no `nlcard`, so no kpIdentity / faces / Độ khó tabs / origin backdrop); closing it only hides the note. nlAccept / nlReroll wrappers: `if(guestThin()&&TB.ask&&on())return` BEFORE the TB.key test (nothing local while an intent is out). The real card's ✕ = nlCard onClose → nlAccept(true) → host accept (unchanged). oldPath also clears the note. |
+| 2 | SEAM B‖D: life intents also ran D takeQ + whole-person patch | jcoopthin withSeat: `dW = dOn && TH.curDo!=="life"` gates D.hold, p0 snapshot, row tracking, takeQ and patchOut → ONE life-change path (B's answer P/q/rows). D.save/afterRun unchanged. |
+| 3 | TB.hold never released | jcoopthinb release(): host drops hold + TB.last + her seat store when the peer goes offline (leave / reload / socket drop; her later accept gets `stale` → same seed + re re-roll) or a week merges after the roll's week (TB.last.wk). TB.stat.release / TB.why. |
+| 4 | stale re-roll used re=0 | lifeRes: `rollAsk(s.seed, s.re|0)`. |
+| 5 | ONE CORE relAdd 35 / ghen R(15) | BAL.allyRel 35 + BAL.ghenNew 15 (jbal.js); j2 `allyBond(L)` (start uses it), j1 `ghenNew0()` (newRival uses it); rebase calls both. Seeded rolls unchanged (same R calls). one-core-guard PASS (inline 6642 < baseline 6691). |
+| 6 | Hoàng hậu drift on the old path | Root X.buildFriend: `delete v.hh; hhBind(v)` before anything sees the entry (no migration on either seat / either path); __b baseline reads it via hhSafe (fromCanon before S exists on the guest's first life: queenP reads S); the old week write-back skips "hh" (the world merge carries the row) — same rule as B's bridge. standIn's own bind removed (one place). Test: probe R6 (host + guest: copied hh 77 → Empress rows unchanged, hh bound == aff). |
+Not changed: TH.CAP stays 2 (CAP=4 at the B/D merge to main = Foreman decision; item 2 now done). Known pre-existing note (not B): sendRes still sends fx.hh deltas on the old path (unchanged behaviour; hh already bound there by consorts()).
+
+Gates (LIVE Worker, part A deployed):
+- coop-thin-b-r1.js (probe + R0 wait note, R4 nlRe, R6 hh): DFLAG=0 37/37 · DFLAG=1 37/37, 37/37, 39/39 (with shots) · final thq 0 every run, 0 page errors (no rkName/kpBuild).
+- coop-thin-b L2 148/148 · swap 148/148 · DFLAG=1 148/148.
+- coop-thin-d L2 52/52 · swap 52/52 · probe 34/34.
+- coop-thin-a L0 19/19 · L1 24/24. coop-e2e 62/62 · swap 62/62. coop-p2 45/45.
+- one-core-guard PASS. quickcheck PASS (164 s, open 1506 ms, old save ok, core gates PASS incl. coop-one-world). (1st quickcheck run FAILED perf longTask 32 s only because 2 co-op suites ran in parallel on the box; rerun alone PASS.)
+- Shots (looked at): CDN img/_review/coop-thin-b-r1fix/wait-755x1000.png + wait-1180x820.png (@2): kit BÁO note "Sổ luân hồi đang định thân phận kiếp này, xin đợi giây lát.", no person, no tabs, no overflow. The screen behind the dim is the probe's live old person (the probe calls start() without dying); in play it is her death screen. The Luân hồi intro gallery shows first (unchanged), the note under it.
