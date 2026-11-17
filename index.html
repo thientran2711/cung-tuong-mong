@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"babc9b4a","t":"2026-11-17T01:39Z","c":"Chơi chung không còn treo máy vì tên bạn lặp chữ; số bóng người trên dư đồ khớp đúng người đang ở đó; việc có hạn giờ hiện đồng hồ ngay dướ…","b":"dc467b22ef69","h":[{"s":"92685210+","t":"2026-11-17T00:53Z","c":"Khung việc và khung sự kiện bốn cỡ, tranh lấp đầy khung, việc nhắc tên ai hiện chân dung người ấy; phẩm của món đồ nằm ngay trên viền khung…"},{"s":"6f513340","t":"2026-11-16T23:24Z","c":"Vào game mới không còn bật ngay màn lật thẻ, lật thẻ chỉ khi vào buổi tối; dư đồ nhãn giấy mới; việc dài lấn sang buổi sau; lời trong cung …"},{"s":"7a18d957","t":"2026-11-16T22:44Z","c":"review-diemtrang-fx-r1 report"},{"s":"afe2bcbc","t":"2026-11-16T22:25Z","c":"review r1: KIT 84.1a note + report"},{"s":"dea1d445+","t":"2026-11-16T21:32Z","c":"golive lag-play-2: CHANGE line + site rebuilt"},{"s":"674f3af4","t":"2026-11-16T21:21Z","c":"Chơi cùng bạn: bạn chơi chung chưa gặp mặt nay hiện tên gọi chung “Hảo hữu của ta” ở mọi nơi, không còn ẩn thành dấu hỏi."},{"s":"923567d5+","t":"2026-11-16T21:03Z","c":"Hình nhân vật: hết vệt xám ở cổ và viền tối quanh người."},{"s":"59812a63+","t":"2026-11-16T20:41Z","c":"Khung chung: khoảng cách đều nhau ở sổ tuần và thẻ thân phận; hàng sổ gọn, thẻ lật không đè chữ."},{"s":"ab12d6fc","t":"2026-11-16T20:53Z","c":"Tuyết và đom đóm mới, mượt hơn; nền tranh không còn vẽ lại mỗi khung hình."},{"s":"8adfd886+","t":"2026-11-16T20:33Z","c":"Tư trang: các trang đều nhau, ô đồ đeo gọn trên Fold và iPad."}]};
+window.CTM_BI={"s":"7abaf07a+","t":"2026-11-17T01:39Z","c":"batch-0132: CHANGE line + rebuild site","b":"cfefeccf4379","h":[{"s":"babc9b4a","t":"2026-11-17T01:39Z","c":"Chơi chung không còn treo máy vì tên bạn lặp chữ; số bóng người trên dư đồ khớp đúng người đang ở đó; việc có hạn giờ hiện đồng hồ ngay dướ…"},{"s":"92685210+","t":"2026-11-17T00:53Z","c":"Khung việc và khung sự kiện bốn cỡ, tranh lấp đầy khung, việc nhắc tên ai hiện chân dung người ấy; phẩm của món đồ nằm ngay trên viền khung…"},{"s":"6f513340","t":"2026-11-16T23:24Z","c":"Vào game mới không còn bật ngay màn lật thẻ, lật thẻ chỉ khi vào buổi tối; dư đồ nhãn giấy mới; việc dài lấn sang buổi sau; lời trong cung …"},{"s":"7a18d957","t":"2026-11-16T22:44Z","c":"review-diemtrang-fx-r1 report"},{"s":"afe2bcbc","t":"2026-11-16T22:25Z","c":"review r1: KIT 84.1a note + report"},{"s":"dea1d445+","t":"2026-11-16T21:32Z","c":"golive lag-play-2: CHANGE line + site rebuilt"},{"s":"674f3af4","t":"2026-11-16T21:21Z","c":"Chơi cùng bạn: bạn chơi chung chưa gặp mặt nay hiện tên gọi chung “Hảo hữu của ta” ở mọi nơi, không còn ẩn thành dấu hỏi."},{"s":"923567d5+","t":"2026-11-16T21:03Z","c":"Hình nhân vật: hết vệt xám ở cổ và viền tối quanh người."},{"s":"59812a63+","t":"2026-11-16T20:41Z","c":"Khung chung: khoảng cách đều nhau ở sổ tuần và thẻ thân phận; hàng sổ gọn, thẻ lật không đè chữ."},{"s":"ab12d6fc","t":"2026-11-16T20:53Z","c":"Tuyết và đom đóm mới, mượt hơn; nền tranh không còn vẽ lại mỗi khung hình."}]};
 /* KBOOT — BOOT COVER (owner 15/11 "Khi vừa bấm vào game, có chừng ít hơn 1 giây hiện khung này"; KIT §14.1).
    Before: while the 4 MB page parsed, the browser painted the bare static markup of p1.html (HUD box, a vertical stat label list, empty
    panels, the old 11-tab bar) for ~1 s on a warm open and many seconds on a cold one, before any kit CSS/JS existed.
@@ -29729,7 +29729,7 @@ function dlPanel(){const s=dlState(),g=s.g;
   {h:"Chi tiết",rows:[["Đang thỉnh","tranh vẽ các nhân vật trong cung"],["Đã về",`${mb(g.have)} / ${mb(g.total)} MB`],["Còn lại",s.done?"không còn":`${g.left} tệp`]]}],opts:o}}
 function paintChip(){const g=KLOAD.fig;if(!bgOn||!g.total||typeof kitStatusIcon==="undefined")return;
  const s=dlState();if(s.done&&!dlDoneAt)dlDoneAt=Date.now();
- kitStatusIcon.set("dl",{title:"Thỉnh tranh nhân vật",order:40,glyph:()=>dlState().done?"✓":"↓",
+ kitStatusIcon.set("dl",{title:"Thỉnh tranh nhân vật",order:40,icon:"img/kit/ico-download.webp",
   busy:()=>{const q=dlState();return !q.done&&!q.paused&&!KLOAD.err},done:()=>dlState().done,badge:()=>{const q=dlState();return q.paused||q.err},
   show:()=>!dlState().done||Date.now()-dlDoneAt<5000,panel:dlPanel});
  kitStatusIcon.refresh();if(s.done)setTimeout(()=>{try{kitStatusIcon.refresh()}catch(e){}},5200)}
@@ -39141,7 +39141,7 @@ function sgRun(id,k,m){const v=RV(id),i=rivals.indexOf(v);if(i<0)return;SG.mod=m
    the goal strip on the stage and on top of Hành sự, §72.2; a small dot while the goal changed and she has not opened it).
    (2) Chat is added by co-op chat (review/coop-chat) through the API:
      kitStageRail.add({id, icon:"https://ctm-img.victoria-tntt.workers.dev/img/kit/….webp", title:"Tên", onTap:fn, badge:()=>bool, when:()=>bool, order:20})
-   Status-icon extras (§77.1, used by kitStatusIcon in jstatus.js): glyph:"↓" (text placeholder instead of icon), busy:()=>bool (tiny CSS-only motion on the glyph),
+   Status-icon extras (§77.1, used by kitStatusIcon in jstatus.js): icon:()=>path (painted state icon, ico-download / ico-update) or glyph:"↓" (text, fallback only), busy:()=>bool (tiny CSS-only motion on the glyph),
    done:()=>bool (still, green), onTitle:true (also shown in a fixed bottom-left dock while no game is on screen).
      kitStageRail.remove(id) · kitStageRail.paint() (re-draw now; it also re-draws after every renderStage / render and on resize).
    Kit look: the square kit icon button (card paper, gold hairline, soft shadow) with a painted icon; the badge = the kit seal-red dot.
@@ -39164,7 +39164,7 @@ function paint(){try{const st=document.getElementById("stage");let el=document.g
  let calm=false;try{calm=typeof reducedMotion==="function"&&reducedMotion()}catch(e){}
  const L=R.filter(x=>(live||x.onTitle)&&val(x.when,true));if(!L.length){if(el)el.remove();return}
  if(!el){el=document.createElement("nav");el.id="krail";el.className="krail";el.setAttribute("aria-label","Lối tắt")}
- const h=L.map(x=>{const b=val(x.badge,false),bz=val(x.busy,false)&&!calm,dn=val(x.done,false);return `<button type="button" class="krailb${b?" kbadge":""}${bz?" kbusy":""}${dn?" kdone":""}${x.glyph?" kglyph":""}" data-rail="${x.id}" aria-label="${x.title}${b?" (có mới)":""}" title="${x.title}">${x.glyph?`<span class="krailg" aria-hidden="true">${val(x.glyph,"")}</span>`:`<img src="${x.icon}" alt="" decoding="async">`}</button>`}).join("");
+ const h=L.map(x=>{const b=val(x.badge,false),bz=val(x.busy,false)&&!calm,dn=val(x.done,false);return `<button type="button" class="krailb${b?" kbadge":""}${bz?" kbusy":""}${dn?" kdone":""}${x.glyph?" kglyph":""}" data-rail="${x.id}" aria-label="${x.title}${b?" (có mới)":""}" title="${x.title}">${x.glyph?`<span class="krailg" aria-hidden="true">${val(x.glyph,"")}</span>`:`<img src="${val(x.icon,"")}" alt="" decoding="async">`}</button>`}).join("");
  const host=live?(onMap?mvh:st):document.body;el.classList.toggle("kstdock",!live);
  if(el.__h!==h){el.innerHTML=h;el.__h=h}if(el.parentNode!==host)host.appendChild(el);
  if(live){place(el,onMap?mvh:st);el.style.bottom=""}else{el.style.top="";const tb=document.getElementById("tabs");const q=!onTitle&&tb&&tb.getClientRects().length?tb.getBoundingClientRect():null;el.style.bottom=q?`${Math.round(innerHeight-q.top+6)}px`:""}
@@ -39177,11 +39177,11 @@ try{const r1=render;render=function(){const r=r1.apply(this,arguments);paint();r
 let rt=0;addEventListener("resize",()=>{clearTimeout(rt);rt=setTimeout(paint,80)});
 window.kitStageRail={add,remove,paint,items:()=>R.slice()};
 /* (1) Lịch tháng — §58 kitMonthCalOpen; the desk calendar in the room corner is retired (one place: the rail) */
-add({id:"cal",order:10,icon:"https://ctm-img.victoria-tntt.workers.dev/img/kit/mo-calendar.webp",title:"Lịch tháng",when:()=>typeof kitMonthCalOpen==="function",onTap:()=>kitMonthCalOpen()});
+add({id:"cal",order:10,icon:"https://ctm-img.victoria-tntt.workers.dev/img/kit/ico-cal.webp",title:"Lịch tháng",when:()=>typeof kitMonthCalOpen==="function",onTap:()=>kitMonthCalOpen()});
 try{if(typeof kitDeskCal==="function"){window.kitDeskCal=kitDeskCal=function(){const b=document.getElementById("kmcdesk");if(b)b.remove()};const b=document.getElementById("kmcdesk");if(b)b.remove()}}catch(e){}
 /* (3) Mục tiêu chương — §72 kitGoalDetail; dot = the goal changed since she last opened it */
 const gSig=()=>{try{const G=typeof kitGoalNow==="function"?kitGoalNow():null;return G?[G.kicker,G.title,G.step].join("|"):""}catch(e){return""}};
-add({id:"goal",order:30,icon:"https://ctm-img.victoria-tntt.workers.dev/img/kit/mo-edict-closed.webp",title:"Mục tiêu chương",when:()=>!!gSig(),badge:()=>{const s=gSig();return !!s&&S.goalSeen!==s},
+add({id:"goal",order:30,icon:"https://ctm-img.victoria-tntt.workers.dev/img/kit/ico-goal.webp",title:"Mục tiêu chương",when:()=>!!gSig(),badge:()=>{const s=gSig();return !!s&&S.goalSeen!==s},
  onTap:()=>{S.goalSeen=gSig();if(typeof kitGoalDetail==="function")kitGoalDetail()}});
 const css=document.createElement("style");css.id="kit-rail";css.textContent=`
 .krail{position:absolute;left:8px;top:44px;z-index:7;display:flex;flex-direction:column;gap:6px;pointer-events:none}
@@ -39190,32 +39190,34 @@ const css=document.createElement("style");css.id="kit-rail";css.textContent=`
 .krailb img{width:100%;height:100%;object-fit:contain;display:block;pointer-events:none}
 .krailb:active{transform:scale(.94)}
 .krailg{font:700 22px/1 var(--body,inherit);color:var(--ink,#3a2418);display:block;pointer-events:none}
-.krailb.kbusy .krailg{animation:krailDl calc(1.8s*var(--pace,1)) ease-in-out infinite}
+.krailb.kbusy .krailg,.krailb.kbusy img{animation:krailDl calc(1.8s*var(--pace,1)) ease-in-out infinite}
 @keyframes krailDl{0%,100%{transform:translateY(-3px);opacity:.55}50%{transform:translateY(3px);opacity:1}}
 .krailb.kdone .krailg{color:var(--k-ok,#3c6b32)}
+.krailb.kdone{border-color:var(--k-ok,#3c6b32)}
 .krail.kstdock{position:fixed;left:calc(env(safe-area-inset-left,0px) + 8px);top:auto;bottom:calc(env(safe-area-inset-bottom,0px) + 8px);z-index:8700}
 body:has(#modal:not([hidden])) .krail.kstdock,body:has(#ov:not([hidden])) .krail.kstdock,body.kbk-open .krail.kstdock{visibility:hidden}
 .krailb.kbadge:after{content:"";position:absolute;top:1px;right:1px;width:10px;height:10px;border-radius:50%;background:var(--k-seal,#9a2c1c);box-shadow:0 0 0 2px var(--k-card,#fffaf0)}
 `;document.head.appendChild(css);
 try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§77",title:"kitStageRail · cột nút vuông bên trái sân khấu (Lịch · Chat · Mục tiêu)",
- html:()=>`<div class="kitpg-row" style="position:relative;height:150px"><nav class="krail" style="position:static">${[["mo-calendar","Lịch tháng",0],["ico-chat","Chat",0],["mo-edict-closed","Mục tiêu chương",1]].map(([i,t,b])=>`<button type="button" class="krailb${b?" kbadge":""}" title="${t}"><img src="https://ctm-img.victoria-tntt.workers.dev/img/kit/${i}.webp" alt=""></button>`).join("")}</nav></div>`})}catch(e){}
+ html:()=>`<div class="kitpg-row" style="position:relative;height:150px"><nav class="krail" style="position:static">${[["ico-cal","Lịch tháng",0],["ico-chat","Chat",0],["ico-goal","Mục tiêu chương",1]].map(([i,t,b])=>`<button type="button" class="krailb${b?" kbadge":""}" title="${t}"><img src="https://ctm-img.victoria-tntt.workers.dev/img/kit/${i}.webp" alt=""></button>`).join("")}</nav></div>`})}catch(e){}
 }catch(e){console.error("jrail",e)}})();
 /* ================= jstatus: kitStatusIcon — ONE status icon (KIT §77.1, owner 16/11 16:25Z, review/status-icons) =================
    Owner: "nhiều game bây giờ nó làm rất là đơn giản. Nó chỉ là một cái icon biểu tượng download nằm ở một cái góc nhỏ … có animation sao đó để cho người chơi
    biết là có cái gì đó đang download về. Người nào muốn biết thông tin thì bấm vô cái nút đó thì nó sẽ hiện những cái thông tin … Cái nào bỏ vô trong cái icon
    được thì mình cứ việc bỏ thôi."  → a status that has no business on screen as a chip/strip is a SQUARE kit icon (the stage rail button, §77) with
    a tiny activity animation while it is running; tap → a kit info panel (kitPanel kind "info", ✕ top-right / tap outside / Esc, NO "Đã hiểu").
-   API:  kitStatusIcon.set(id, {title, glyph, busy:()=>bool, done:()=>bool, badge:()=>bool, show:()=>bool, panel:()=>kitPanelSpec | onTap:fn (own card), order})
+   API:  kitStatusIcon.set(id, {title, icon, glyph, busy:()=>bool, done:()=>bool, badge:()=>bool, show:()=>bool, panel:()=>kitPanelSpec | onTap:fn (own card), order})
          kitStatusIcon.refresh()  (call after the state changed) · kitStatusIcon.remove(id) · kitStatusIcon.items()
    - It lives in the stage rail (left column, under the scene title, never over a face); while no game is on screen (title) the same square button sits
      in a fixed bottom-left dock (rail `onTitle`). Nothing else floats; no strip, no chip, no reserved band under the tab bar.
    - busy = glyph bobs up and down (transform + opacity only, BAL.pace slow, off under reduced motion / Hiệu ứng Gọn: `reducedMotion()`); done = still, green;
      badge = the kit seal-red dot (something needs her: paused / error).
-   - glyph is a PLAIN TEXT PLACEHOLDER until Foreman C draws the painted icon (ART REQUEST: download icon → swap `glyph` for `icon:"https://ctm-img.victoria-tntt.workers.dev/img/kit/….webp"`).
+   - the icon is PAINTED (K-ICO-3): `icon:"https://ctm-img.victoria-tntt.workers.dev/img/kit/ico-download.webp"` (dl) / `"https://ctm-img.victoria-tntt.workers.dev/img/kit/ico-update.webp"` (upd); `glyph` (text) stays only as a fallback for a status without a painted icon.
    Old saves: no state, nothing stored (the pause flag stays in localStorage as before). */
 (function(){try{
 const M=new Map();
-function railItem(id,o){return{id:"st-"+id,order:o.order||40,title:o.title,glyph:()=>{try{return(typeof o.glyph==="function"?o.glyph():o.glyph)||"•"}catch(e){return"•"}},icon:o.icon,
+/* painted icon (o.icon = path or ()=>path, KIT §77.1: img/kit/ico-download.webp · ico-update.webp); a text glyph only when no icon is given */
+function railItem(id,o){return{id:"st-"+id,order:o.order||40,title:o.title,glyph:o.icon?undefined:()=>{try{return(typeof o.glyph==="function"?o.glyph():o.glyph)||"•"}catch(e){return"•"}},icon:o.icon,
  busy:o.busy,done:o.done,badge:o.badge,onTitle:true,when:()=>{try{return o.show?!!o.show():true}catch(e){return false}},onTap:()=>open(id)}}
 function set(id,o){if(!id||!o)return;M.set(id,o);if(window.kitStageRail)kitStageRail.add(railItem(id,o))}
 function refresh(){if(window.kitStageRail)kitStageRail.paint()}
@@ -39225,7 +39227,7 @@ function open(id){const o=M.get(id);if(o&&typeof o.onTap==="function"){o.onTap()
  try{kitPanel(sp,true);showModal()}catch(e){console.error("kitStatusIcon open",e)}}
 window.kitStatusIcon={set,refresh,remove,open,items:()=>[...M.keys()]};
 try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§77.1",title:"kitStatusIcon · icon trạng thái (đang chạy · xong · cần chú ý), chạm → bảng thông tin",
- html:()=>`<div class="kitpg-row" style="position:relative;height:70px"><nav class="krail" style="position:static;flex-direction:row">${[["Đang thỉnh tranh (nhấp nhô)"," kbusy","↓"],["Đã thỉnh đủ"," kdone","✓"],["Tạm ngưng (có chấm đỏ)"," kbadge","↓"]].map(([t,c,g])=>`<button type="button" class="krailb kglyph${c}" title="${t}"><span class="krailg">${g}</span></button>`).join("")}</nav></div>`})}catch(e){}
+ html:()=>`<div class="kitpg-row" style="position:relative;height:70px"><nav class="krail" style="position:static;flex-direction:row">${[["Đang thỉnh tranh (nhấp nhô)"," kbusy","ico-download"],["Đã thỉnh đủ (viền xanh)"," kdone","ico-download"],["Tạm ngưng (có chấm đỏ)"," kbadge","ico-download"],["Có bản mới (chấm đỏ)"," kbadge","ico-update"]].map(([t,c,g])=>`<button type="button" class="krailb${c}" title="${t}"><img src="https://ctm-img.victoria-tntt.workers.dev/img/kit/${g}.webp" alt=""></button>`).join("")}</nav></div>`})}catch(e){}
 }catch(e){console.error("jstatus",e)}})();
 /* j84 — VĂN PHONG: every player-visible word in one classical (cổ trang) register. Style guide: dev/kit/VANPHONG.md.
    Must stay the LAST module. It changes no rule or number: (1) data patches (tab names, tooltips); (2) one replacement
@@ -39673,8 +39675,13 @@ try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§49.2c",title:"pi
 /* ================= jph: PLACEHOLDER PICTURES — KIT §59 (owner 15/11 ~18:45Z, review/placeholder-pics) =================
    Four generic palace still-lifes (gpt-2-6, no people) stand in for every EVENT or ACT that has no picture of its own, so the owner sees at
    a glance "this one still lacks its picture" and reports it:
-     img/ph-event-light.webp / img/ph-event-dark-v2.webp  (640x480, like the dialog banners img/ev-<key>.webp): folding screen + sealed scroll
-     img/ph-act-light.webp   / img/ph-act-dark-v2.webp    (384x506, like act pictures img/act-<key>.webp): blank round fan + lacquer box + hairpin
+     ONE SET PER REAL ORIENTATION AND SIZE (owner 7.3, OD:L1343 / L1439; art = Foreman C, K-ICO-2), light + dark, painted at 2x the slot:
+       portrait 3:4   img/ph-p-<tone>-{ps,pm,pl}.webp       (PS 84x112 · PM 120x160 · PL 162x216; act / button / person-less frame pictures)
+       landscape 2:1  img/ph-l-<tone>-{ls,lm,ll}.webp       (LS 192x96 · LM 300x140 · LL full width; event banners, narrow strips NS/NM crop the same set)
+       wide ~4.3:1    img/ph-w-<tone>-ll.webp               (full width x 110-200: the long-story picture on top / NL strip)
+       square 1:1     img/ph-s-<tone>-{s56,s64,s72}.webp    (the 56 / 64 / 72 button + skill thumbnails)
+     The wraps below hand out the LARGEST file of the orientation; kitPhFit() then picks orientation + size from the slot the picture really sits in.
+     (the old 2 + 2 pictures img/ph-event-* / img/ph-act-* are no longer referenced)
    light = normal / positive, dark = negative / scheming: a GLOOMY daytime mood, cold muted, heavy shadow — never night (owner 15/11): kitPhTone(text, hint) below, documented in KIT.md §59.
    Wiring (wraps only, edits nothing):
      · events: the OUTERMOST kitEvArt. A dialog that would show nothing, or only the room she is standing in (j17 evArt, the old generic
@@ -39685,7 +39692,14 @@ try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§49.2c",title:"pi
      · the week book (Tuần lục) is NOT changed: owner 11/15 "no picture rather than a repeated one" for book lines still holds.
    Dev list: every fallback is recorded once in window.CTM_MISSING_PICS [{kind,id,tone,title}] and logged once (console.info).
    Full static list: node dev/tools/missing_pics.js <build url> → dev/art/MISSING_PICS.md. ===================================== */
-const KIT_PH={ev:{light:"https://ctm-img.victoria-tntt.workers.dev/img/ph-event-light.webp",dark:"https://ctm-img.victoria-tntt.workers.dev/img/ph-event-dark-v2.webp"},act:{light:"https://ctm-img.victoria-tntt.workers.dev/img/ph-act-light.webp",dark:"https://ctm-img.victoria-tntt.workers.dev/img/ph-act-dark-v2.webp"}};
+const KIT_PH={ev:{light:"https://ctm-img.victoria-tntt.workers.dev/img/ph-l-light-ll.webp",dark:"https://ctm-img.victoria-tntt.workers.dev/img/ph-l-dark-ll.webp"},act:{light:"https://ctm-img.victoria-tntt.workers.dev/img/ph-p-light-pl.webp",dark:"https://ctm-img.victoria-tntt.workers.dev/img/ph-p-dark-pl.webp"},
+ /* slot width (CSS px) up to which a size is used, per orientation: the sizes of KIT_SIZE.pic (PS/PM/PL, LS/LM/LL, Q56/Q64/Q72) */
+ sz:{p:[["ps",102],["pm",141],["pl",1e9]],l:[["ls",246],["lm",400],["ll",1e9]],s:[["s56",60],["s64",68],["s72",1e9]]}};
+/* the file for a slot of w x h CSS px: orientation from the real aspect ratio, size from the real width (ONE rule, KIT §59) */
+function kitPhPick(w,h,tone){tone=tone==="dark"?"dark":"light";const r=w/h;const o=r<.9?"p":r<=1.15?"s":"l";
+ if(o==="l"&&r>3.8&&w>=400)return"https://ctm-img.victoria-tntt.workers.dev/img/ph-w-"+tone+"-ll.webp";const L=KIT_PH.sz[o];return"https://ctm-img.victoria-tntt.workers.dev/img/ph-"+o+"-"+tone+"-"+(L.find(x=>w<=x[1])||L[L.length-1])[0]+".webp"}
+const KIT_PH_RX=/\/ph-(?:[plws]-(?:light|dark)-|act-|event-)/;
+window.kitPhIs=src=>KIT_PH_RX.test(String(src||""));
 /* tone rule (§59): DARK when the act category is Hại người / Mưu kế, or the event family is rumour / mystery (j68 "rumor","myst"),
    or the id / title / first lines speak of harm, scheming, punishment, rivalry, illness or death (KIT_PH_NEG); else LIGHT */
 const KIT_PH_NEG=/hạ độc|thuốc độc|độc dược|trúng độc|hãm hại|làm hại|hại người|hại nhỏ|vu oan|vu cáo|vu khống|tố giác|tố cáo|mưu|gian kế|kế hiểm|lén|nghe trộm|rình|dò la|do thám|tai mắt|tung tin|tin đồn|lời đồn|đồn đại|đồn rằng|ly gián|mua chuộc|hối lộ|đút lót|uy hiếp|đe dọa|đe doạ|trộm|lục rương|lục soát|bắt gặp|bị phạt|trách phạt|hình phạt|xử phạt|đánh đòn|quỳ phạt|cấm túc|ghen|tranh sủng|chặn ngự giá|cãi|khiêu khích|mỉa|chèn ép|bắt nạt|oán|báo thù|thù hận|kẻ thù|lãnh cung|giáng chức|giáng phẩm|bị giáng|tội|sảy thai|xạ hương|tráo|trù ẻo|yểm bùa|bùa|ám sát|thích khách|phản bội|mưu phản|tạo phản|bí mật|giấu|cắt xén|ăn bớt|bớt xén|tham ô|mất cắp|ốm|bệnh|cái chết|chết oan|chết thảm|đã chết|bị giết|qua đời|tang lễ|quốc tang|nghi ngờ|vạch mặt|hăm dọa|phóng hỏa|phóng hoả|đốt kho|ép nộp|ép buộc|sỉ nhục|nhục mạ|cướp|giết/i;
@@ -39731,13 +39745,25 @@ function kitPhEvent(m){const tone=kitPhEvTone(m);kitPhNote("event",kitPhEvId(m),
 /* the act card: j79 kpActArt draws kitActArt's src (the placeholder above) in the normal art slot; jk4 / jexam no longer drop the slot
    once the manifests are ready (they test kitPhActReady). Here only: mark the card (data-kph, not observed by j63 kaMO) and record it once. */
 (function(){if(typeof kpActArt!=="function")return;const p0=kpActArt;kpActArt=function(b){const r=p0.apply(this,arguments);try{
-  const im=b&&b.querySelector(':scope > .kaart img[src*="/ph-act-"]');if(!im){if(b&&b.dataset.kph)delete b.dataset.kph;return r}
-  const tone=/ph-act-dark/.test(im.getAttribute("src"))?"dark":"light";if(b.dataset.kph!==tone)b.dataset.kph=tone;
+  const im=b&&b.querySelector(':scope > .kaart img[src*="/ph-"]');if(!im){if(b&&b.dataset.kph)delete b.dataset.kph;return r}
+  const tone=/\/ph-(?:[plws]-|act-)dark/.test(im.getAttribute("src"))?"dark":"light";if(b.dataset.kph!==tone)b.dataset.kph=tone;
   const kan=b.querySelector(".kan");const name=kan?(typeof kpActName==="function"?kpActName(kan):kitPhPlain(kan.textContent)):"";if(name)kitPhNote("act",name,tone,b.dataset.kart||"")}catch(e){}return r};window.kpActArt=kpActArt})();
+/* ---- fit: swap each placeholder for the file that matches its slot (orientation + size, KIT §59) ---- */
+function kitPhFit(root){try{(root&&root.querySelectorAll?root:document).querySelectorAll('img[src*="/ph-"]').forEach(im=>{
+  const src=im.getAttribute("src")||"";if(!KIT_PH_RX.test(src))return;const tone=/dark/.test(src.replace(/^.*\/ph-/,""))?"dark":"light";
+  let r=im.getBoundingClientRect();if(r.width<8||r.height<8){const q=im.parentElement&&im.parentElement.getBoundingClientRect();if(q)r=q}
+  if(!r||r.width<8||r.height<8)return;const to=kitPhPick(r.width,r.height,tone);if(src.endsWith(to))return;
+  if(!im.dataset.phOrig)im.dataset.phOrig=src;im.onerror=function(){im.onerror=null;im.src=im.dataset.phOrig};im.src=to})}catch(e){}}
+window.kitPhFit=kitPhFit;
+(function(){let t=0;const later=()=>{clearTimeout(t);t=setTimeout(()=>kitPhFit(document),120)};
+ /* a slot that was hidden when drawn (a card on another page, a closed panel) is fitted the moment it gets a box: one IntersectionObserver on the slots */
+ let io=null;try{io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting)kitPhFit(e.target)})})}catch(e){}
+ const once=n=>{if(n.nodeType!==1)return;const L=[];if(n.matches&&n.matches('img[src*="/ph-"]'))L.push(n);if(n.querySelectorAll)n.querySelectorAll('img[src*="/ph-"]').forEach(x=>L.push(x));
+  if(!L.length)return;kitPhFit(n);requestAnimationFrame(()=>kitPhFit(n));setTimeout(()=>kitPhFit(n),400);if(io)L.forEach(im=>{if(im.parentElement)io.observe(im.parentElement)})};
+ try{new MutationObserver(ms=>{for(const m of ms)m.addedNodes.forEach(once)}).observe(document.documentElement,{childList:true,subtree:true});window.addEventListener("resize",later)}catch(e){}})();
 /* kit sample page */
-try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§59",title:"Tranh tạm (chưa có tranh riêng): sự kiện sáng · tối, việc sáng · tối",html:()=>`<div class="kitpg-row">`+
- `<div style="width:220px">${kitSceneArt(KIT_PH.ev.light,"",{shape:"wide"})}</div><div style="width:220px">${kitSceneArt(KIT_PH.ev.dark,"",{shape:"wide"})}</div>`+
- `<div style="width:110px">${kitSceneArt(KIT_PH.act.light,"",{shape:"tall"})}</div><div style="width:110px">${kitSceneArt(KIT_PH.act.dark,"",{shape:"tall"})}</div></div>`})}catch(e){}
+try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§59",title:"Tranh tạm (chưa có tranh riêng): một bộ cho mỗi hướng và cỡ — dọc PS·PM·PL, ngang LS·LM·LL, dài, vuông 56·64·72; sáng · tối",html:()=>{const box=(w,h,tone)=>{const f=kitPhPick(w,h,tone);return `<div style="width:${w}px;max-width:100%;text-align:center"><div style="width:${w}px;height:${h}px;max-width:100%">${kitSceneArt(f,"",{shape:w<h?"tall":"wide",cap:false}).replace('class="ksart','style="height:100%;aspect-ratio:auto" class="ksart')}</div><small>${f.replace(/^img\/ph-|\.webp$/g,"")}</small></div>`};
+ return ["light","dark"].map(t=>`<div class="kitpg-row" style="align-items:flex-end;gap:8px;margin-bottom:6px">${[[84,112],[120,160],[162,216],[192,96],[300,140],[56,56],[64,64],[72,72]].map(([w,h])=>box(w,h,t)).join("")}</div><div class="kitpg-row" style="margin-bottom:6px">${box(520,120,t)}</div>`).join("")}})}catch(e){}
 window.kitPhTone=kitPhTone;window.KIT_PH=KIT_PH;
 /* ================= jopic: OPTION CARD = COMPACT ACT CARD WITH ITS PICTURE LEFT — KIT §6.2 (owner 15/11, review/opt-pics) =================
    Owner (verbatim, repeated): "Hình minh họa cho từng hành động bên trái. Bên phải là thông tin. Tôi nói hoài vậy."
@@ -39872,7 +39898,7 @@ function kitOptPic(title,b){const t=kitOptPlain(title);const tryKey=(k,how)=>{if
   /* review/pcard-actrow (owner 16/11 "Hình nhân vật đâu?"): an option that is a PERSON (spy target, gift recipient, invite, accuse, visit … any "chọn người"
      — it carries that person's kit portrait chip in its title) shows THAT person's portrait (a stranger: the kit silhouette pv gives), never a meaning-group
      scene picture. Beats the `log` / `rule` groups; a specific act picture (above) still wins. */
-  try{const kn=b&&b.querySelector(".kan");const chip=(kn&&kn.querySelector(":scope > .md"))||(b&&b.querySelector(":scope > .md"));const im=chip&&chip.querySelector("img");const fs=im&&im.getAttribute("src");if(fs&&!/\/ph-act-/.test(fs))return{src:fs,key:"",how:"face",face:true}}catch(e){}
+  try{const kn=b&&b.querySelector(".kan");const chip=(kn&&kn.querySelector(":scope > .md"))||(b&&b.querySelector(":scope > .md"));const im=chip&&chip.querySelector("img");const fs=im&&im.getAttribute("src");if(fs&&!/\/ph-(?:act-|event-|[plws]-)/.test(fs))return{src:fs,key:"",how:"face",face:true}}catch(e){}
   try{if(typeof kbkRules==="function")for(const [re,k] of kbkRules())if(re.test(t)||re.test(t+".")){r=tryKey(k,"log");if(r)return r;break}}catch(e){}
   for(const [re,k] of KIT_OPT_RULES)if(kitOptHit(re,t)){r=tryKey(k,"rule");if(r)return r;break}}
  /* pickers of people / items: the person's own portrait (as j25 put beside the title) or the item's own picture */
@@ -39882,7 +39908,7 @@ function kitOptPic(title,b){const t=kitOptPlain(title);const tryKey=(k,how)=>{if
   try{if(typeof IT!=="undefined"&&typeof kitItemSrc==="function"){if(!kitOptPic.items){kitOptPic.items={};for(const k in IT){const n=IT[k]&&IT[k].n;if(n&&!kitOptPic.items[n])kitOptPic.items[n]=k}}
    const k=kitOptPic.items[t]||kitOptPic.items[t.split(" · ")[0]];const s=k?kitItemSrc(k,""):"";if(s)return{src:s,key:"",how:"item"}}}catch(e){}}
  /* a picture the option already carries: that picture, in the slot */
- if(b){const im=b.querySelector(".kan .md img, .kan img, .kitem img");const s=im&&(im.getAttribute("src")||"");if(s&&!/\/ph-act-/.test(s))return{src:s,key:"",how:"own",face:!!im.closest(".md")}}
+ if(b){const im=b.querySelector(".kan .md img, .kan img, .kitem img");const s=im&&(im.getAttribute("src")||"");if(s&&!/\/ph-(?:act-|event-|[plws]-)/.test(s))return{src:s,key:"",how:"own",face:!!im.closest(".md")}}
  if(typeof KIT_PH!=="undefined"&&(typeof kitPhActReady!=="function"||kitPhActReady())&&(typeof kitPhEventLike!=="function"||typeof Q==="undefined"||!Q[0]||!b||!b.closest("#modal")||kitPhEventLike(Q[0]))){/* review/kpanel-compact: no placeholder picture on a menu / confirm / picker option */const tone=typeof kitPhTone==="function"?kitPhTone(t):"light";
   try{if(typeof kitPhNote==="function")kitPhNote("opt",t.slice(0,60),tone,"")}catch(e){}return{src:KIT_PH.act[tone],key:"",how:"ph",tone}}
  return{src:"",key:"",how:"none"}}
@@ -39955,7 +39981,7 @@ try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§6.3",title:"Vi�
 /* GOAL / TASK cards (owner 16/11 21:10Z, chapter goal list "Đi làm: Học một môn tài nghệ" had no picture): an "Đi làm: <việc>" option is matched on the
    task itself (prefix dropped), and when nothing names a picture it shows the task's act / act-category picture (kitActArt) — every goal card has one. */
 (function(){const p0=kitOptPic;kitOptPic=function(title,b){const t=kitOptPlain(title),m=/^Đi làm:\s*(.+)$/i.exec(t);if(!m)return p0.apply(this,arguments);
- const r0=p0.apply(this,arguments);if(r0&&r0.src&&r0.how!=="ph")return r0;const r=p0.call(this,m[1],b);if(r&&r.src&&r.how!=="ph")return r;try{const a=kitActArt(m[1]);if(a&&a.src&&!/\/ph-act-/.test(a.src)&&kitOptOnCdn(a.src))return{src:a.src,key:"",how:"cat"}}catch(e){}return r0&&r0.how==="ph"?r0:r};/* nothing yet (e.g. the person chip is painted later): "none" lets kpOptArt run again */window.kitOptPic=kitOptPic})();
+ const r0=p0.apply(this,arguments);if(r0&&r0.src&&r0.how!=="ph")return r0;const r=p0.call(this,m[1],b);if(r&&r.src&&r.how!=="ph")return r;try{const a=kitActArt(m[1]);if(a&&a.src&&!/\/ph-(?:act-|event-|[plws]-)/.test(a.src)&&kitOptOnCdn(a.src))return{src:a.src,key:"",how:"cat"}}catch(e){}return r0&&r0.how==="ph"?r0:r};/* nothing yet (e.g. the person chip is painted later): "none" lets kpOptArt run again */window.kitOptPic=kitOptPic})();
 /* ================= UPDATE NOTES (D10) — "Thông tin cập nhật" =================
    ONE maintained list: CTM_NOTES below (newest FIRST). The coordinator adds ONE entry per release (or a line to today's entry):
      {id:"2026-11-16", n:["Câu ngắn, cổ trang, không dấu %.", ...]}          // id = ISO date (+ letter b, c… for a second release the same day)
@@ -46670,8 +46696,8 @@ function kszItemsSheet(){const ks=["tramngoc","vongngoc","luahang","nhansam","th
  h+=`<h3>6.5 item tag in events: tile with grade chip, name only</h3><div class="kszrow">${pk.slice(0,6).map(k=>`<div style="text-align:center;width:64px">${kszItemTile(k,"S")}<div style="font-size:.68rem">${kitItemInfo(k).name}</div></div>`).join("")}</div>`;
  const Z=KIT_SIZE.pic,m=kitSzMode();const box=(k,src)=>{const p=Z[k];const w=typeof p.w==="number"?p.w:300,hh=typeof p.h==="number"?p.h:p.h[m];return `<div><div class="kszlab">${k} ${w}x${hh}</div><div style="width:${w}px;height:${hh}px">${kitSceneArt(kszImg(src),"",{shape:w<hh?"tall":"wide",cap:false}).replace('class="ksart','style="height:100%;aspect-ratio:auto" class="ksart')}</div></div>`};
  h+=`<h3>7.1 thumbnails = the picture size table (replaces wide / tall / thumb): portrait PS · PM · PL · landscape LS · LM · LL · square Q56 · Q64 · Q72</h3><div class="kszrow" style="align-items:flex-end">${["PS","PM","PL"].map(k=>box(k,"https://ctm-img.victoria-tntt.workers.dev/img/ev-trieu-chinh.webp")).join("")}${["LS","LM"].map(k=>box(k,"https://ctm-img.victoria-tntt.workers.dev/img/ev-trieu-chinh.webp")).join("")}${["Q56","Q64","Q72"].map(k=>box(k,"https://ctm-img.victoria-tntt.workers.dev/img/ev-trieu-chinh.webp")).join("")}</div>`;
- h+=`<h3>7.3 placeholder pictures: ONE set per real orientation (portrait 3:4 · landscape · square) × tone (light · dark), shown at every size of that orientation</h3><p class="kszn">Today: 2 event (640x480) + 2 act (384x506) pictures stretched into every slot. Spec: ph-{light,dark}-{p,l,q}.webp painted at the largest size of its orientation (PL 162x216 → 3:4 at 486x648, LL 860x260 → 3.3:1 at 1720x520, Q72 → 1:1 at 288x288) — ART REQUEST → Foreman C (all drawing is C's, OD 15:35Z). Below: the slots with today's pictures.</p>`;
- h+=`<div>${[["portrait","https://ctm-img.victoria-tntt.workers.dev/img/ph-act-light.webp",["PS","PM","PL"]],["landscape","https://ctm-img.victoria-tntt.workers.dev/img/ph-event-light.webp",["LS","LM","LL"]],["square","https://ctm-img.victoria-tntt.workers.dev/img/ph-act-dark-v2.webp",["Q56","Q64","Q72"]]].map(([n,src,L])=>`<div class="kszlab">${n}</div><div class="kszrow" style="align-items:flex-end;margin-bottom:10px">${L.map(k=>box(k,src)).join("")}</div>`).join("")}</div>`;
+ h+=`<h3>7.3 placeholder pictures: ONE set per real orientation (portrait 3:4 · landscape 2:1 · wide · square) × tone (light · dark) × size, painted at 2x (K-ICO-2, KIT §59)</h3><p class="kszn">Each slot shows the file that fits it: <code>kitPhPick(w,h,tone)</code> reads the slot's real aspect ratio + width (jph.js, the swap runs in <code>kitPhFit</code>).</p>`;
+ h+=`<div>${[["portrait",["PS","PM","PL"]],["landscape",["LS","LM","LL"]],["square",["Q56","Q64","Q72"]]].map(([n,L])=>["light","dark"].map(t=>{const row=L.map(k=>{const p=Z[k];const w=typeof p.w==="number"?p.w:300,hh=typeof p.h==="number"?p.h:p.h[m];return box(k,kitPhPick(w,hh,t))}).join("");return `<div class="kszlab">${n} · ${t}</div><div class="kszrow" style="align-items:flex-end;margin-bottom:10px">${row}</div>`}).join("")).join("")}</div>`;
  return h}
 
 /* ================= v3 · kit-size #3 (owner 16/11 16:45Z s20, OD "(16/11 16:45Z, s20 chat)" (1)–(6)) =================
@@ -47112,7 +47138,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="dc467b22ef69";window.CTM_BUILD=BUILD;
+const BUILD="cfefeccf4379";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
@@ -47221,7 +47247,7 @@ function css(){if($i("kit-upd"))return;const st=document.createElement("style");
 /* the status icon (kitStatusIcon "upd", jstatus): shown only while a new build is pending, she is playing and no dialog is open; the rail repaints on every tick */
 const showIcon=()=>!!(K.pending&&!K.leaving&&playing()&&!busy());
 function place(){K.chip=showIcon();try{if(window.kitStatusIcon)kitStatusIcon.refresh()}catch(e){}}
-function chip(){css();try{if(window.kitStatusIcon)kitStatusIcon.set("upd",{title:"Có bản mới",order:20,glyph:"⟳",badge:()=>true,show:showIcon,onTap:()=>card()})}catch(e){}place()}
+function chip(){css();try{if(window.kitStatusIcon)kitStatusIcon.set("upd",{title:"Có bản mới",order:20,icon:"img/kit/ico-update.webp",badge:()=>true,show:showIcon,onTap:()=>card()})}catch(e){}place()}
 K.showChip=()=>{K.pending=true;chip()};/* test hook (dev/test/brand-seal.js): the chip alone, no card */
 function close(){if(K.cardEl){K.cardEl.remove();K.cardEl=null}place()}
 function mkCard(sub,note,btns){css();close();if(typeof kpHeader!=="function")return null;

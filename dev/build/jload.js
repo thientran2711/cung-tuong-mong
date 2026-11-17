@@ -165,7 +165,7 @@ function dlPanel(){const s=dlState(),g=s.g;
   {h:"Chi tiết",rows:[["Đang thỉnh","tranh vẽ các nhân vật trong cung"],["Đã về",`${mb(g.have)} / ${mb(g.total)} MB`],["Còn lại",s.done?"không còn":`${g.left} tệp`]]}],opts:o}}
 function paintChip(){const g=KLOAD.fig;if(!bgOn||!g.total||typeof kitStatusIcon==="undefined")return;
  const s=dlState();if(s.done&&!dlDoneAt)dlDoneAt=Date.now();
- kitStatusIcon.set("dl",{title:"Thỉnh tranh nhân vật",order:40,glyph:()=>dlState().done?"✓":"↓",
+ kitStatusIcon.set("dl",{title:"Thỉnh tranh nhân vật",order:40,icon:"img/kit/ico-download.webp",
   busy:()=>{const q=dlState();return !q.done&&!q.paused&&!KLOAD.err},done:()=>dlState().done,badge:()=>{const q=dlState();return q.paused||q.err},
   show:()=>!dlState().done||Date.now()-dlDoneAt<5000,panel:dlPanel});
  kitStatusIcon.refresh();if(s.done)setTimeout(()=>{try{kitStatusIcon.refresh()}catch(e){}},5200)}
