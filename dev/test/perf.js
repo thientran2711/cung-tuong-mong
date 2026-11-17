@@ -57,10 +57,10 @@ async function runDevice(b,srvUrl,dev){
  await game.evaluate(()=>{window.__lt=[];try{new PerformanceObserver(l=>{for(const e of l.getEntries())window.__lt.push(Math.round(e.duration))}).observe({type:'longtask',buffered:false})}catch(e){}});
  const t1=Date.now();
  await game.evaluate(()=>{SLOT=3;document.getElementById('title').hidden=true;for(let i=0;i<20;i++){start();if(S.origin.k!=='cnv')break}});
- await game.waitForFunction(()=>{try{for(let j=0;j<6&&Q.length&&!S.dead;j++){const m=Q[0];if(m.opts&&m.opts.length)chooseM(0);else closeModal()}}catch(e){}const n=document.getElementById('next');return !!n&&!n.disabled&&!Q.length&&!S.dead},null,{timeout:TMO,polling:100});
+ await game.waitForFunction(()=>{try{for(let j=0;j<6&&Q.length&&!S.dead;j++){const m=Q[0];if(m.opts&&m.opts.length)chooseM(Math.max(0,m.opts.findIndex(c=>!c.off)));else closeModal()}}catch(e){}const n=document.getElementById('next');return !!n&&!n.disabled&&!Q.length&&!S.dead},null,{timeout:TMO,polling:100});
  R.timeToPlayableMs=Date.now()-t1;
  const play=await game.evaluate(async N=>{const sl=t=>new Promise(r=>setTimeout(r,t));let done=0;window.__lt.length=0;const perBuoi=[];
-  for(let i=0;i<N*6&&done<N&&!S.dead;i++){for(let j=0;j<12&&Q.length&&!S.dead;j++){const m=Q[0];try{if(m.opts&&m.opts.length)chooseM(Math.floor(Math.random()*m.opts.length));else closeModal()}catch(e){Q.shift();try{showModal()}catch(e){}}await sl(60)}
+  for(let i=0;i<N*6&&done<N&&!S.dead;i++){for(let j=0;j<12&&Q.length&&!S.dead;j++){const m=Q[0];try{if(m.opts&&m.opts.length)chooseM((L=>L.length?L[Math.floor(Math.random()*L.length)]:0)(m.opts.map((c,i)=>c.off?-1:i).filter(i=>i>=0)));else closeModal()}catch(e){Q.shift();try{showModal()}catch(e){}}await sl(60)}
    const n=document.getElementById('next');const l0=window.__lt.length;if(n&&!n.disabled){n.click();done++}else{try{Q.length=0;endTurn()}catch(e){}}await sl(500);perBuoi.push(window.__lt.length-l0)}
   try{gc()}catch(e){}await sl(300);try{gc()}catch(e){}
   const lt=window.__lt.slice();return{turns:done,heapMB:performance.memory?Math.round(performance.memory.usedJSHeapSize/1e5)/10:null,lt200:lt.filter(x=>x>200).length,ltMax:lt.length?Math.max(...lt):0,lt50:lt.length,worstBuoi:Math.max(0,...perBuoi),dead:!!S.dead}},TURNS);

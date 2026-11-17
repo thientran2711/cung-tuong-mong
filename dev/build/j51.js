@@ -2,7 +2,7 @@
 /* ================= j51 KẾ VỊ: lập đích, lập trưởng, lập hiền; tranh ngôi Đông cung (cùng một luật cho mọi người mẹ) ================= */
 const KV={c:.007,base:22,deb:4,debGap:12};
 /* hệ số theo tính nết: người mẹ có con trai đứng sau mưu dọn đường cho con */
-const KVT={"Xảo quyệt":2,"Tham vọng":1.7,"Kiêu ngạo":1.2,"Đa nghi":1,"Nhu mì":.4,"Hiền lành":.08};
+const KVT={"Xảo quyệt":2,"Tham vọng":1.7,"Kiêu ngạo":1.2,"Kín đáo":1,"Khiêm nhường":.4,"Ân cần":.08};
 const KVACT=[["kframe",3],["kpoison",2],["pond",1.5],["ksab",3],["spy",2.5],["frame",1.5]];
 /* thứ tự sinh: mỗi con một mốc (tháng sinh), con cũ được gán một lần theo tuổi */
 function kvStamp(){allKids().forEach(([k])=>{if(k.bt==null)k.bt=S.turn-(k.age||0)*12})}

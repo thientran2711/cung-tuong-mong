@@ -75,7 +75,7 @@ function h54Grow(k,p){if(!h54Home(k)||k.age<5)return;const h=k.hp>=60?1:k.hp>=35
  const a0=pick(H54A)[0];A[a0]=Math.min(100,A[a0]+H54.nat*3*h);
  if(k.hP&&h54Live(p))A[k.hP]=Math.min(100,A[k.hP]+H54.tut*h);
  if(k.tv!=null){A.thi=Math.min(100,A.thi+k.tv/250);A.ky=Math.min(100,A.ky+k.tv/250)}}
-function h54NpcArts(k,v){if(!h54Live(v)||!h54Home(k)||k.age<5)return;const P=/Tham vọng|Kiêu ngạo|Xảo quyệt/.test(v.trait)?.6:.4;
+function h54NpcArts(k,v){if(!h54Live(v)||!h54Home(k)||k.age<5)return;const P=nv(v,"h54P");
  if(!k.hP&&k.age>=6&&(v.bac||0)>=H54.fee*6&&roll(P*30)){const best=H54A.map(([a])=>a).sort((a,b)=>k.hA[b]-k.hA[a])[0];k.hP=R(3)?best:pick(H54A)[0]}
  const T=H54A.map(([a])=>a).filter(a=>h54CanTeach(v,k,a));if(T.length&&roll(P*60)){const a=pick(T);k.hA[a]=Math.min(100,k.hA[a]+h54TeachG(v,k,a));k.hM=cl(k.hM+2,0,100)}}
 (function(){const s0=stipend;stipend=function(p){let line=s0.apply(this,arguments);try{const ks=(p.kids||[]).filter(k=>h54Home(k)&&k.hP);let fee=ks.length*H54.fee;const quit=[];
@@ -103,7 +103,7 @@ function h54Month(){let ev="";if(!S||S.dead)return ev;h54PoolUp();if(S.month===1
    if(p!==S&&h54Live(p)){if(roll(10)&&(p.bac||0)>=15){ap(p,{bac:-15});k.hM=cl(k.hM+8,0,100)}
     if(W.kind!=="hoa"&&S.turn-(k.hV==null?-99:k.hV)>=4&&roll(25)&&(p.bac||0)>=10){k.hV=S.turn;ap(p,{bac:-10});k.hM=cl(k.hM-4,0,100);if(roll(odA(p,h54SpeakO(k)))){if(p.confined>0){p.confined--;log(`${h54Name(k)} vào cung quỳ xin cho mẹ; Hoàng thượng giảm cấm túc của ${p.name} một tháng.`)}else ap(p,{sung:3+(W.kind==="tinh"?2:0)})}}}
    if(W.kind==="nha"&&W.joy<40&&roll(1.5)&&h54Cd(p)&&h54Live(p)){h54Mark(p);if(p===S)pushDil(mkP("h54sad",{k:k.name}),"Con gái về khóc");else{
-     if(/Hiền lành|Nhu mì/.test(p.trait)){ap(p,{sung:-4});if(roll(odA(p,40+k.fond/2))){W.joy=cl(W.joy+30,0,100);k.hM=cl(k.hM+8,0,100)}}else{k.hM=cl(k.hM-8,0,100);ap(p,{danh:1})}}}}}
+     if(netRx(p,/Ân cần|Khiêm nhường/)){ap(p,{sung:-4});if(roll(odA(p,40+k.fond/2))){W.joy=cl(W.joy+30,0,100);k.hM=cl(k.hM+8,0,100)}}else{k.hM=cl(k.hM-8,0,100);ap(p,{danh:1})}}}}}
  /* bonds lost before a wedding */
  allKids().forEach(([k,v])=>{if(!k.alive&&k.hB&&!k.hBx){k.hBx=1;const p=v||S;p.hon=Math.max(0,(p.hon||0)-(k.hB.b||0));const s=h54Son(k.hB.s);if(s)s.taken=null}});
  ev+=h54Titles();ev+=h54Envoy();
@@ -113,8 +113,8 @@ function h54Month(){let ev="";if(!S||S.dead)return ev;h54PoolUp();if(S.month===1
 (function(){const m0=monthTick;monthTick=function(){let ev=m0.apply(this,arguments)||"";try{if(S&&!S.dead)ev+=h54Month()}catch(e){console.error(e)}return ev}})();
 /* ---- NPC marriage talks: same candidates, same costs, choice by temper ---- */
 function h54NpcBan(k,p){const love=k.hMet&&h54Son(k.hMet)&&!h54Son(k.hMet).taken?h54Son(k.hMet):null;
- if(S.hEnv&&k.age>=BAL.age.wed&&/Tham vọng|Kiêu ngạo/.test(p.trait)&&k.fond<50&&roll(40))return h54Hoa(k,p);
- if(love&&(/Hiền lành|Nhu mì/.test(p.trait)||roll(25))&&!h54Cands(p,k).includes(love)){ap(p,{sung:-5});if(roll(odA(p,h54LoveO(p,k))))return h54Betroth(k,p,love,"tinh");return""}
+ if(S.hEnv&&k.age>=BAL.age.wed&&netRx(p,/Tham vọng|Kiêu ngạo/)&&k.fond<50&&roll(40))return h54Hoa(k,p);
+ if(love&&(netRx(p,/Ân cần|Khiêm nhường/)||roll(25))&&!h54Cands(p,k).includes(love)){ap(p,{sung:-5});if(roll(odA(p,h54LoveO(p,k))))return h54Betroth(k,p,love,"tinh");return""}
  const C=h54Cands(p,k).filter(s=>(p.bac||0)>=h54Dow(k,s));if(!C.length)return"";const s=love&&C.includes(love)?love:C[0];return h54Betroth(k,p,s,"nha")}
 function h54LoveO(p,k){return 30+k.fond/2+(p.sung||0)/4}
 function h54SpeakO(k){const W=k.hW||{};return 40+k.hM/2+((W.joy||50)-50)/5}
@@ -123,10 +123,10 @@ function h54Elig(){return h54Daus().filter(([k])=>h54Home(k)&&!k.hB&&k.age>=BAL.
 function h54Envoy(){let ev="";const E=h54Elig();
  if(!S.hEnv){if(E.length&&(S.hEnvY==null||S.turn-S.hEnvY>=24)&&roll(4)){S.hEnv={until:S.turn+3};ev+=`Sứ thần Bắc Địch vào kinh dâng ngựa quý, xin cưới một vị công chúa đã đến tuổi. Hoàng thượng muốn thuận mối này: trong ba tháng, phi tần nào dâng con thì được ban thưởng; quá hạn ngài tự chọn. `}return ev}
  if(!E.length){S.hEnv=null;S.hEnvY=S.turn;return ev+"Sứ thần Bắc Địch về nước tay không: trong cung không còn công chúa nào đến tuổi. "}
- for(const [k,p] of E)if(p!==S&&h54Live(p)&&/Tham vọng|Kiêu ngạo/.test(p.trait)&&k.fond<50&&roll(15)){log(h54Hoa(k,p));return ev}
+ for(const [k,p] of E)if(p!==S&&h54Live(p)&&netRx(p,/Tham vọng|Kiêu ngạo/)&&k.fond<50&&roll(15)){log(h54Hoa(k,p));return ev}
  if(S.turn>=S.hEnv.until){const w=E.map(([k,p])=>Math.max(5,100-k.fond+(7-rkOf(p))*8));let r=Math.random()*w.reduce((a,b)=>a+b),i=0;while(r>w[i]&&i<w.length-1){r-=w[i];i++}const [k,p]=E[i];
   if(p===S){S.hEnv.until=S.turn+99;pushDil(mkP("h54hoa",{k:k.name}),"Sứ thần cầu hôn")}
-  else if(h54Live(p)&&(/Hiền lành|Nhu mì/.test(p.trait)||k.hM>=75)){if(roll(odA(p,30+(p.sung||0)/3+k.fond/4))){S.hEnv=null;S.hEnvY=S.turn;log(`${p.name} quỳ xin giữ ${h54Name(k)} lại; Hoàng thượng động lòng, gả một tông nữ sang Bắc Địch thay.`)}else{ap(p,{sung:-10,danh:-3});log(`${p.name} quỳ xin giữ con nhưng Hoàng thượng không nghe. `+h54Hoa(k,p))}}
+  else if(h54Live(p)&&(netRx(p,/Ân cần|Khiêm nhường/)||k.hM>=75)){if(roll(odA(p,30+(p.sung||0)/3+k.fond/4))){S.hEnv=null;S.hEnvY=S.turn;log(`${p.name} quỳ xin giữ ${h54Name(k)} lại; Hoàng thượng động lòng, gả một tông nữ sang Bắc Địch thay.`)}else{ap(p,{sung:-10,danh:-3});log(`${p.name} quỳ xin giữ con nhưng Hoàng thượng không nghe. `+h54Hoa(k,p))}}
   else log(h54Hoa(k,p))}
  return ev}
 EVI.foreignwed&&(EVI.foreignwed.ok=()=>false);
@@ -174,7 +174,7 @@ function h54GainTxt(){return `được khen: Hoàng thượng thương con +${H5
 function h54Run(f,title,mine){const P=h54Perf();const byMom=new Map();P.forEach(([k,p])=>{if(!byMom.has(p))byMom.set(p,[]);byMom.get(p).push(k)});const res=[];
  for(const [p,ks] of byMom){let k,a,skip=false;
   if(p===S){if(!mine)continue;if(mine.skip){k=S.kids.find(x=>x.name===mine.k)||ks[0];skip=true}else{k=S.kids.find(x=>x.name===mine.k);if(!k||!ks.includes(k))continue;a=mine.a}}
-  else{k=ks.sort((x,y)=>h54Base(y,h54BestArt(y,f))-h54Base(x,h54BestArt(x,f)))[0];a=h54BestArt(k,f);if(h54PPoor(h54Base(k,a))>40&&p.trait!=="Kiêu ngạo"&&roll(30))skip=true}
+  else{k=ks.sort((x,y)=>h54Base(y,h54BestArt(y,f))-h54Base(x,h54BestArt(x,f)))[0];a=h54BestArt(k,f);if(h54PPoor(h54Base(k,a))>40&&!hasT(p,"Kiêu ngạo")&&roll(30))skip=true}
   if(skip){res.push({k,p,r:"skip",s:-99});continue}const s=h54Base(k,a)+R(31);res.push({k,p,a,s,r:s>=H54.good?"good":s<H54.poor?"poor":"ok"})}
  if(!res.length)return"";const top=res.filter(x=>x.r==="good").sort((x,y)=>y.s-x.s)[0];
  for(const x of res){const g=Object.assign({},H54G[x.r]||{});if(x===top)for(const kk in H54G.top)g[kk]=(g[kk]||0)+H54G.top[kk];x.g=g;if(g.fond)x.k.fond=cl(x.k.fond+g.fond,0,100);if(x.r==="skip")x.k.hM=cl(x.k.hM+2,0,100);

@@ -72,7 +72,7 @@ EV6("flowerBloom","sea",{a:[],pp:()=>({}),w:C=>(C.sea==="Xuân"||C.sea==="Thu")?
  o:X=>[c6("Mời Hoàng thượng thưởng hoa",{p:od(30+S.sung/2+mm()),w:{sung:4},l:{danh:-1},lt:[R6("ngài bận, cả cung biết ngươi bị từ chối")]}),
   c6("Ngắt hoa dâng Thái hậu",{c:{suc:-2},w:{th:4},k:[R6("vườn trơ trụi, cung nhân tiếc")]}),
   c6("Mời các phi tần ngắm hoa",{c:{bac:-15},w:{danh:2},k:[R6(`người ghen thêm: phi tần ghen +${ghenN(BAL.ghen.flowerParty)}`)],ok:()=>{ghenAll(BAL.ghen.flowerParty);return "Buổi thưởng hoa vui vẻ, ai cũng khen cung ngươi."}})]});
-EV6("servGamble","serv",{a:["sv"],pp:()=>{const a=sv6(s=>s.tr==="tham"||R(3)===0);return a==null?null:{a0:a}},w:C=>1,
+EV6("servGamble","serv",{a:["sv"],pp:()=>{const a=sv6(s=>netIs(s,"greed")||R(3)===0);return a==null?null:{a0:a}},w:C=>1,
  v:["{A} bị bắt quả tang đánh bạc với đám thái giám gác cổng, thua sạch tiền tháng.","Người ta đồn {A} mang đồ cũ của cung ngươi ra ngoài bán lấy tiền tiêu.","{A} nợ tiền một thái giám bên Ngự thiện phòng, hắn đến tận cửa đòi.","{A} lén nhận bạc của người lạ để chuyển thư ra ngoài cung."],
  o:X=>[c6("Trả nợ, răn đe",{c:{bac:-15},r:[[X.A,10]],k:[R6("dễ quen thói")]}),
   c6("Phạt theo phép cung",{w:{danh:1},r:[[X.A,-12]]}),
@@ -84,12 +84,12 @@ EV6("proudVisit","visit",{a:["rv"],pp:()=>{const a=rv6(v=>T6(v,"Kiêu ngạo")||
  o:X=>[c6("Nhún nhường tiếp đãi",{c:{bac:-10},w:{duc:2},r:[[X.A,5]],k:[R6("cung nhân thấy ngươi yếu thế")]}),
   c6("Đáp lời sắc sảo",{p:od(35+S.tai/3+S.tamco/4),w:{danh:2},r:[[X.A,-6]],l:{danh:-2},lt:[R6("bị nắm thóp lời nói")],lr:[[X.A,-8]]}),
   c6("Cáo bệnh không tiếp",{w:{suc:3},r:[[X.A,-4]]})]});
-EV6("kindVisit","visit",{a:["rv"],pp:()=>{const a=rv6(v=>T6(v,"Hiền lành")||T6(v,"Nhu mì")||fr6(v));return a==null?null:{a0:a}},w:C=>1.4,
+EV6("kindVisit","visit",{a:["rv"],pp:()=>{const a=rv6(v=>T6(v,"Ân cần")||T6(v,"Khiêm nhường")||fr6(v));return a==null?null:{a0:a}},w:C=>1.4,
  v:["{A} mang canh hạt sen sang, bảo dạo này thấy ngươi gầy đi.","{A} rủ ngươi cùng chép kinh cầu phúc cho Thái hậu.","{A} sang hỏi cách ướp trà hoa nhài, ngồi nán lại rất lâu như có điều muốn nói.","{A} nhờ ngươi xem giúp bài thơ nàng định dâng Hoàng thượng."],
  o:X=>[c6("Tiếp chuyện cả buổi",{c:{suc:-4},r:[[X.A,8]]}),
   c6("Nhận lời giúp hết lòng",{c:{suc:-6},p:od(40+S.tai/2),r:[[X.A,12]],w:{danh:1},lr:[[X.A,-2]],lt:[R6("giúp không tới, nàng hơi buồn")]}),
   c6("Hẹn hôm khác",{w:{suc:2},r:[[X.A,-3]]})]});
-EV6("slyVisit","visit",{a:["rv"],pp:()=>{const a=rv6(v=>T6(v,"Xảo quyệt")||T6(v,"Đa nghi")||fo6(v));return a==null?null:{a0:a}},w:C=>1.2,
+EV6("slyVisit","visit",{a:["rv"],pp:()=>{const a=rv6(v=>T6(v,"Xảo quyệt")||T6(v,"Kín đáo")||fo6(v));return a==null?null:{a0:a}},w:C=>1.2,
  v:["{A} sang chơi, mắt cứ đảo quanh án thư và hộp thuốc của ngươi.","{A} niềm nở lạ thường, rủ ngươi ngày mai cùng đi dạo hồ sen lúc vắng người.","{A} hỏi han tỉ mỉ giờ giấc ngươi dùng bữa, ngủ nghỉ, 'để tiện sang thăm'.","{A} mang quà sang, nhất định đòi tận tay cài trâm cho ngươi."],
  o:X=>[c6("Tiếp, nhưng cho người canh chừng",{c:{suc:-4},w:{tamco:1},wt:[G6("không lọt chuyện gì ra")],r:[[X.A,2]]}),
   c6("Dò ngược ý nàng",{p:od(35+S.tamco/2),w:{mat:1},wt:[G6(`ghi nhận ý đồ của ${X.A.n}`)],l:{danh:-1},lt:[R6("nàng biết ngươi đề phòng")],lr:[[X.A,-6]],ok:()=>{try{noteAdd(X.A.o.id,"Sang dò giờ giấc, đồ dùng của ngươi")}catch(e){}return `${X.A.n} dò hỏi quá kỹ; ngươi ghi nhớ.`}}),

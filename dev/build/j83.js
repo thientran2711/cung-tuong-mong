@@ -66,7 +66,7 @@ function wkEmpMatch(w){const E=S.emp,K=E.known,L=E.likes,R=[];
  if(has("chamchinh")&&w.a==="ky")R.push("ngài thích bàn cờ, bàn việc");
  if(has("mesac")&&(w.kind==="ao"||w.kind==="huong"))R.push("ngài trọng sắc");
  return R}
-function wkSincere(r){if(r==="emp")return has("nhantu")||has("datinh");if(r==="th")return (traitsOf("th")[0]||"")==="Hiền lành";if(r==="maid")return true;if(r&&typeof r==="object")return traitsOf(r).some(t=>t==="Hiền lành"||t==="Nhu mì");return false}
+function wkSincere(r){if(r==="emp")return has("nhantu")||has("datinh");if(r==="th")return (traitsOf("th")[0]||"")==="Ân cần";if(r==="maid")return true;if(r&&typeof r==="object")return traitsOf(r).some(t=>t==="Ân cần"||t==="Khiêm nhường");return false}
 function wkProud(r){return r&&typeof r==="object"&&traitsOf(r).includes("Kiêu ngạo")}
 function wkBestArt(r){const a=(r&&r.arts)||{};let b=null,l=0;for(const k in a)if(a[k]>l){l=a[k];b=k}return b}
 /* emperor's fatigue: handmade gifts to him in the last 3 weeks, and the same kind among them */
@@ -216,9 +216,10 @@ if(typeof wrapR==="function")wrapR("wkPoisonPick",()=>"Bỏ độc vào món");
 /* ================= ĐỒ CẤM: reliable but risky ways to get poison, same rules for every consort =================
    effect and how traceable each poison is, shown on the chest card */
 const WILL={hacdinh:{eff:"chết",tr:"dễ lần ra: thái y nhận ra ngay, tra được người mua"},xahuong:{eff:"sảy thai (trộn vào túi thơm, hương trầm)",tr:"khó lần ra: mùi lẫn trong hương"},botngua:{eff:"ngứa, mất thể diện, Danh -5",tr:"vừa: áo dính bột còn để lại dấu"}};
-for(const k in WILL)if(IT[k]&&!/Hiệu quả:/.test(itm(k).d))IT[k].d+=` · Hiệu quả: ${WILL[k].eff} · Dấu vết: ${WILL[k].tr}`;
+/* jreg: forbidden goods added later (jpoison docngam/phanhuy/meduoc) get the same Hiệu quả / Dấu vết line */
+regEach(WILL,k=>{if(IT[k]&&!/Hiệu quả:/.test(itm(k).d))IT[k].d+=` · Hiệu quả: ${WILL[k].eff} · Dấu vết: ${WILL[k].tr}`},"WILL desc");
 /* who ends up holding evidence when a buyer is exposed: the Empress, else the most hostile consort */
-function illWitness(p){const q=queenP();if(q&&q!==p)return q;const L=consorts().filter(x=>x!==p&&x.alive&&!x.out);if(!L.length)return null;return L.sort((x,y)=>hostility(y,p)-hostility(x,p))[0]}
+function illWitness(p){const q=queenP();if(q&&q!==p)return q;const L=consorts().filter(x=>x!==p&&x.alive&&!x.out);if(!L.length)return null;return mindPickBy(L,x=>BAL.mind.pick.j83.base+hostility(x,p)*mindW(x,"frame"),null)}/* npc-mind: was ARGMAX */
 function illAllies(p){return consorts().filter(v=>v!==p&&v.alive&&!v.out&&aff(v,p)>=40&&(v.inv||[]).some(e=>WILL[e.k]&&!e.h&&!e.t))}
 const IROUTE={
  maid:{n:"Sai cung nữ thân tín mua lén ngoài cung",k:1,ks:Object.keys(WILL),cost:k=>itm(k).pr+15,o:p=>cl(Math.round(55+(p.maid?p.maid.loyal:0)/3+(p.mat||0)*2),5,95),

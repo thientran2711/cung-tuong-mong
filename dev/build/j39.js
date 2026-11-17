@@ -34,7 +34,7 @@ function figTierOf(who){if(who===S)return S.out?-1:S.rank;if((rivals||[]).includ
 function figDist(f,tier,age){const ft=figTier(f.tier),fa=figAge(f.ageBand);return (tier!=null&&ft!=null?Math.abs(ft-tier)*2:0)+(fa!=null?Math.abs(fa-age)/8:0)}
 function figBest(L,tier,age){let b=null,bd=1e9;for(const f of L){const d=figDist(f,tier,age);if(d<bd){bd=d;b=f}}return b}
 function figSubOk(who,f){const want=MANSUB[who.rw]||[];if(!want.length||f.sub==null)return 0;const s=norm(f.sub);return want.some(w=>norm(w)===s||s.includes(norm(w)))?1:-1}
-function figLook(who,f){const want=(typeof LOOKFOR!=="undefined"&&LOOKFOR[who.trait])||[];if(!want.length||f.look==null)return 0;return want.includes(norm(f.look))?1:0}
+function figLook(who,f){const want=(typeof LOOKFOR!=="undefined"&&tv(LOOKFOR,who))||[];if(!want.length||f.look==null)return 0;return want.includes(norm(f.look))?1:0}
 function figUsed(){S.fidUsed=S.fidUsed||[];return S.fidUsed}
 function figPick(who){const roles=figRoles(who);if(!roles.length)return null;const used=new Set(figUsed());
  if(who.fid){const r=who.fid.split(":")[0];if(FIGIX[r]&&FIGIX[r][who.fid])return who.fid}

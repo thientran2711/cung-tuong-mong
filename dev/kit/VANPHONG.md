@@ -80,6 +80,21 @@ Thi hành: `dev/build/j84.js` (module cuối trong assemble.py) sửa dữ liệ
 | Bảng xếp hạng | Bảng vàng | Bảng vinh danh, leaderboard |
 | Tab Hoàng thượng + Thái hậu | Chí tôn | Hoàng thượng · Thái hậu, Thánh thượng |
 
+### Makeup (Điểm trang): the six result levels — owner 17/11 05:03Z / 05:16Z (OD:L1553-1554). ONE label source: `TOIL_MK` (jtoil.js; `toilMkW` inside a sentence: a name keeps its capital, only "mặt mộc" is lower case)
+
+| Level id (code, saves) | Player name | Meaning |
+|---|---|---|
+| `moc` | Mặt mộc | no makeup: her own face, no layer |
+| `vung` | Vụng về | a part went wrong: smeared lip / cheek (brows untouched), funny but still pretty |
+| `vua` | Đoan trang | a decent face, the light layer; not enough for a big occasion |
+| `dep` | Kiều diễm | the beautiful level (positive); what big occasions / bold đề require |
+| `tuyet` | Khuynh thành | the most beautiful: luminous, never heavy |
+| `diem` | Diêm dúa | OVERDONE beyond the occasion or her rank (still pretty, never clownish); judged with the word "phô trương" |
+
+- Preset groups the player picks from (`TOIL_STY`): **Kiểu thanh nhã** · **Kiểu cầu kỳ** (bold, elaborate, NOT negative; owner 03:38Z). A preset shows ONLY its own name (owner 03:35Z: never "(sắc lạnh)" / "(sắc ấm)").
+- The hidden tone a person / a Hội phối đồ đề likes, once she learns it (`TOIL_TONE`): **tông đào cam** · **tông hồng tím**. Hoàng thượng's row in "Điều ngài thích": **Son phấn**.
+- Never use "đẹp / tuyệt / vừa / vụng" as a level name on screen; "đoan trang" is not used for dress hints any more (dress: "chỉnh tề", "y phục đoan trang" for the dress taste).
+
 Từ đã cổ trang, giữ nguyên: Bạc, Sức, Sủng, Danh, Sắc, Tài, Tâm cơ, Đức, Tai mắt, Ân tình, Phúc duyên, Lòng, Chủ tin, thiện cảm, oán, ghen, khắc, quẻ, thẻ bài, thị tẩm, tấn phong, sắc phong, lãnh cung, cấm túc, ân thưởng, bổng lộc, Phi tần, Phe phái, Kẻ hầu, Con cái, Rương đồ, Tài nghệ, Bảng phẩm vị.
 
 ## 2. Xưng hô và giọng cung đình (theo phẩm, theo người nói, theo tình)
@@ -197,3 +212,4 @@ Giữ rõ luật (mục 4): con số, bậc may rủi, Tốn/Thành/Hỏng/Kèm 
 | “Không có khẩu dụ, nương nương xin hồi cung.” (người chơi là Thường tại) | “Không có khẩu dụ, tiểu chủ xin hồi cung.” |
 
 - Nết (trait) names: the pre-judged villain nết "Hiểm độc" is now "Xảo quyệt" (owner 17/11 05:35Z). One label map TRAIT_OLD/traitLabel in j1.js; old saves migrate on load (trMigrate in deser).
+- Nết (ONE TRAIT POOL, owner 17/11 05:45Z–06:20Z): the only nết words the player reads are the rows of BAL.net (jbal2.js): Tính tình Ân cần/Lạnh lùng, Nóng nảy/Điềm tĩnh, Nhiều chuyện/Kín đáo, Kiêu ngạo/Khiêm nhường (men: Cương trực/Xu nịnh); Lòng dạ Thật thà/Xảo quyệt, Thanh liêm/Ham lợi, Rộng lượng/Thù dai, Trọng nghĩa/Thực dụng; Chí hướng Tham vọng/An phận, Ham học/Ham vui, Mê tín/Thực tế, Vì gia tộc/Vì mình. Each row's tend/gain/cost text is cổ trang and shown as "Hay:" and the nết tooltip (Được … · Mất …). Old words (Hiền lành, Đa nghi, Nhu mì, Tham tiền, servant trung thành/tham lam/nhát gan/lanh lợi…) are never shown again; old saves map them (BAL.net.old).

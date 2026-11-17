@@ -46,7 +46,7 @@ function succNeeds(p,son,U){const N=[];if(p==="a")return N;const cold=!!S.out;
   N.push(succNeed(`Bạc ${BAL.succN.cBac} (có ${S.bac||0})`,(S.bac||0)>=BAL.succN.cBac));if(cold)N.push(succNeed("Không ở lãnh cung",false))}
  return N.sort((x,y)=>(+x.ok)-(+y.ok))}
 /* ---------- NPC dowager (two-way): the same conditions as (b) ---------- */
-function succNpcClaims(v,k){if(!v||!v.alive||v.out||!k||k.age>=BAL.succN.bAge)return false;const tr=(typeof traitsOf==="function"?traitsOf(v):[v.trait]).concat([v.trait]);
+function succNpcClaims(v,k){if(!v||!v.alive||v.out||!k||k.age>=BAL.succN.bAge)return false;const tr=(typeof traitsOf==="function"?traitsOf(v):[v.trait]);
  return (((v.danh||40)>=BAL.succN.npcDanh&&(v.tamco||40)>=BAL.succN.npcTam)||tr.some(t=>/Tham vọng|Xảo quyệt|Kiêu ngạo/.test(t||"")))}
 let SUCC_NPC=null;
 (function(){const o0=over;over=function(h,t,fate,alive){if(SUCC_NPC&&S&&!S.dead){const v=SUCC_NPC;SUCC_NPC=null;
