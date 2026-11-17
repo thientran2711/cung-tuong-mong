@@ -211,7 +211,7 @@ function kmEmpAct(a,kind){const why=kmEmpWhy(a,kind);if(why)return null;a.kmEmpD
   return{ok,txt:`Hoàng thượng cười, bảo hôm nay còn bận, hẹn dịp khác.`}}
  if(ok){const g=2+Math.min(2,Math.floor(((a.arts&&a.arts[kind])||0)/2));ap(a,{sung:g,an:1});if(!me)newsAdd(a,"emp",`${nm} ${kind==="ky"?"hầu cờ":"đánh đàn hầu"} Hoàng thượng.`);
   return{ok,g,txt:`${nm} ${kind==="ky"?"hầu Hoàng thượng một ván cờ":"gảy đàn cho Hoàng thượng nghe"}; ngài vui. Sủng +${g} · Ân tình +1.`}}
- ap(a,{sung:-1});return{ok,txt:`Hoàng thượng ${kind==="ky"?"xem":"nghe"} một lúc rồi ngáp dài, cho lui. Sủng -1.`}}
+ ap(a,{sung:BAL.eff.jgift.sungKmEmpAct});return{ok,txt:`Hoàng thượng ${kind==="ky"?"xem":"nghe"} một lúc rồi ngáp dài, cho lui. Sủng ${balSg(BAL.eff.jgift.sungKmEmpAct)}.`}}
 /* tonight: the walk raises her tablet chance */
 (function(){const n0=nightCh;nightCh=function(p){const r=n0.apply(this,arguments);try{const q=p||S;if(q&&q.kmWalk===wk()&&r>0)return cl(r+BAL.empDay.walkNight,0,70)}catch(e){}return r}})();
 /* her: buttons in the Emperor card, result + the choice inside it */
@@ -220,8 +220,8 @@ document.addEventListener("click",ev=>{const b=ev.target.closest&&ev.target.clos
  try{closeModal()}catch(e){}const r=kmEmpAct(S,kind);if(!r){render();return}log(r.txt);
  if(r.ok&&kind!=="walk"){const tc=S.tamco||0;const oW=odA(S,30+tc/2),oL=odA(S,40+tc/2);
   Q.push({ev:1,t:KM_EMPACT[kind][0],h:`<p>${KM_EMPACT[kind][1]}</p><p class="g">${r.txt}</p><p>${kind==="ky"?"Ván cờ đến hồi gay cấn.":"Khúc đàn sắp hết."} Ngươi định thế nào?</p>`,
-   opts:[{n:kind==="ky"?"Thắng khéo, để ngài thua mà vẫn vui":"Kết khúc thật hay, khoe tài",fx:{},x:`${word(oW)} · thành: Danh +1, Sủng +1 · hỏng: ngài phật ý, Sủng -1`,go:()=>{if(roll(oW)){ap(S,{danh:1,sung:1});log("Ngài khen ngươi khéo léo. Danh +1 · Sủng +1.")}else{ap(S,{sung:-1});log("Ngài thoáng phật ý. Sủng -1.")}}},
-    {n:kind==="ky"?"Cố ý thua một nước":"Cố ý đàn chậm lại, để ngài chỉ bảo",fx:{},x:`${word(oL)} · thành: Ân tình +1 · hỏng: ngài nhận ra, Sủng -1`,go:()=>{if(roll(oL)){ap(S,{an:1});log("Ngài đắc ý, càng thương ngươi. Ân tình +1.")}else{ap(S,{sung:-1});log("Ngài nhận ra ngươi cố ý nhường. Sủng -1.")}}}]})}
+   opts:[{n:kind==="ky"?"Thắng khéo, để ngài thua mà vẫn vui":"Kết khúc thật hay, khoe tài",fx:{},x:`${word(oW)} · thành: Danh ${balSg(BAL.eff.jgift.danhGo)}, Sủng ${balSg(BAL.eff.jgift.sungGo)} · hỏng: ngài phật ý, Sủng ${balSg(BAL.eff.jgift.sungGo_2)}`,go:()=>{if(roll(oW)){ap(S,{danh:BAL.eff.jgift.danhGo,sung:BAL.eff.jgift.sungGo});log(`Ngài khen ngươi khéo léo. Danh ${balSg(BAL.eff.jgift.danhGo)} · Sủng +1.`)}else{ap(S,{sung:BAL.eff.jgift.sungGo_2});log("Ngài thoáng phật ý. Sủng -1.")}}},
+    {n:kind==="ky"?"Cố ý thua một nước":"Cố ý đàn chậm lại, để ngài chỉ bảo",fx:{},x:`${word(oL)} · thành: Ân tình ${balSg(BAL.eff.jgift.anGo)} · hỏng: ngài nhận ra, Sủng ${balSg(BAL.eff.jgift.sungGo_3)}`,go:()=>{if(roll(oL)){ap(S,{an:BAL.eff.jgift.anGo});log("Ngài đắc ý, càng thương ngươi. Ân tình +1.")}else{ap(S,{sung:BAL.eff.jgift.sungGo_3});log("Ngài nhận ra ngươi cố ý nhường. Sủng -1.")}}}]})}
  else Q.push({t:KM_EMPACT[kind][0],h:`<p>${KM_EMPACT[kind][1]}</p><p class="${r.ok?"g":"r"}">${r.txt}</p>`});
  showModal();render()},true);
 (function(){const c0=courtMeet;courtMeet=function(t){const B=c0.apply(this,arguments);if(t==="emp")try{B.splice(Math.max(0,B.length-1),0,...kmEmpBtns())}catch(e){}return B}})();

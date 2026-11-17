@@ -29,19 +29,19 @@ Object.assign(BAL,{stip:{
 (function(){const N={
  vaibong:{n:"Vải bông",kd:"Vải vóc",d:"May áo thường: Sắc +1 trong 3 tháng · tặng, bán được",pr:8,rk:0,dr:1,tg:["rv"]},
  vaitho:{n:"Vải thô (hàng kém)",kd:"Vải vóc",d:"Hàng kém Nội vụ phủ phát: may áo cho cung nữ thân tín, lòng +3",pr:2,use:{maid:3},tg:[]},
- tragoi:{n:"Trà Long Tĩnh",kd:"Trà",d:"Pha mời phi tần đến chơi: thiện cảm +3 · uống: Sức +3 · tặng được",pr:6,use:{suc:3},host:3,tg:["rv","th"]},
- trahop:{n:"Trà Quân Sơn ngân châm",kd:"Trà",d:"Trà thượng hạng: mời khách thiện cảm +5 · uống: Sức +4, Đức +1 · tặng Thái hậu, Hoàng thượng",pr:25,use:{suc:4,duc:1},host:5,gv:4,tg:["rv","th","emp","hh"]},
- tramoc:{n:"Trà mốc (hàng kém)",kd:"Trà",d:"Trà cũ ẩm mốc Nội vụ phủ phát: mời khách thì bị chê (thiện cảm -2) · uống: Sức +1",pr:0,use:{suc:1},host:-2,tg:[]},
+ tragoi:{n:"Trà Long Tĩnh",kd:"Trà",d:`Pha mời phi tần đến chơi: thiện cảm +3 · uống: Sức ${balSg(BAL.eff.jstip.sucUse)} · tặng được`,pr:6,use:{suc:BAL.eff.jstip.sucUse},host:3,tg:["rv","th"]},
+ trahop:{n:"Trà Quân Sơn ngân châm",kd:"Trà",d:`Trà thượng hạng: mời khách thiện cảm +5 · uống: Sức ${balSg(BAL.eff.jstip.sucUse_2)}, Đức ${balSg(BAL.eff.jstip.ducUse)} · tặng Thái hậu, Hoàng thượng`,pr:25,use:{suc:BAL.eff.jstip.sucUse_2,duc:BAL.eff.jstip.ducUse},host:5,gv:4,tg:["rv","th","emp","hh"]},
+ tramoc:{n:"Trà mốc (hàng kém)",kd:"Trà",d:`Trà cũ ẩm mốc Nội vụ phủ phát: mời khách thì bị chê (thiện cảm -2) · uống: Sức ${balSg(BAL.eff.jstip.sucUse_3)}`,pr:0,use:{suc:BAL.eff.jstip.sucUse_3},host:-2,tg:[]},
  thanbac:{n:"Than bạc sương",kd:"Than sưởi",d:"Đốt sưởi: mùa đông Sức +6, mùa khác Sức +2",pr:6,heat:[6,2],tg:["rv"]},
  thanden:{n:"Than đen (hàng kém)",kd:"Than sưởi",d:"Than khói Nội vụ phủ phát: mùa đông Sức +3, mùa khác Sức +1",pr:1,heat:[3,1],tg:[]},
- banhtrai:{n:"Hộp điểm tâm",kd:"Điểm tâm",d:"Ăn: Sức +3 · tặng, chia kẻ hầu",pr:5,use:{suc:3},tg:["rv"]},
- ruoucuc:{n:"Rượu hoa cúc",kd:"Rượu",d:"Uống: Sức +4 · tặng Hoàng thượng, phi tần",pr:12,use:{suc:4},gv:3,tg:["emp","rv"]},
+ banhtrai:{n:"Hộp điểm tâm",kd:"Điểm tâm",d:`Ăn: Sức ${balSg(BAL.eff.jstip.sucUse_4)} · tặng, chia kẻ hầu`,pr:5,use:{suc:BAL.eff.jstip.sucUse_4},tg:["rv"]},
+ ruoucuc:{n:"Rượu hoa cúc",kd:"Rượu",d:`Uống: Sức ${balSg(BAL.eff.jstip.sucUse_5)} · tặng Hoàng thượng, phi tần`,pr:12,use:{suc:BAL.eff.jstip.sucUse_5},gv:3,tg:["emp","rv"]},
  aolong:{n:"Áo lông chồn tiến cống",kd:"Vải vóc",d:"Mặc mùa đông: Sắc +4 trong 3 tháng",pr:120,rk:0,dr:4,tg:["th"]},
  cocngoc:{n:"Bộ cờ ngọc",kd:"Lễ vật",d:"Tặng người mê cờ: rất hợp ý",pr:100,gv:10,tg:["emp","th","rv"]},
- guong:{n:"Gương Tây dương",kd:"Trang sức",d:"Dùng: bày lên bàn trang điểm, Sắc +3",pr:60,use:{sac:3},tg:["rv"]},
+ guong:{n:"Gương Tây dương",kd:"Trang sức",d:`Dùng: bày lên bàn trang điểm, Sắc ${balSg(BAL.eff.jstip.sacUse)}`,pr:60,use:{sac:BAL.eff.jstip.sacUse},tg:["rv"]},
  thamba:{n:"Thảm Ba Tư",kd:"Lễ vật",d:"Tặng: êm ấm, quý hiếm",pr:120,gv:9,tg:["th","rv","hh"]},
  cungbac:{n:"Cung bạc chạm rồng",kd:"Lễ vật",d:"Tặng Hoàng thượng: hợp ý người mê săn bắn",pr:60,gv:8,tg:["emp"]},
- traicay:{n:"Giỏ trái cây tiến cống",kd:"Điểm tâm",d:"Ăn: Sức +5 · tặng",pr:15,use:{suc:5},tg:["rv","th"]},
+ traicay:{n:"Giỏ trái cây tiến cống",kd:"Điểm tâm",d:`Ăn: Sức ${balSg(BAL.eff.jstip.sucUse_6)} · tặng`,pr:15,use:{suc:BAL.eff.jstip.sucUse_6},tg:["rv","th"]},
  lanquy:{n:"Chậu lan quý",kd:"Lễ vật",d:"Tặng người yêu hoa",pr:40,gv:5,tg:["rv","th","hh"]}};
  for(const k in N){if(!IT[k])IT[k]=N[k]}
  /* coal: the use depends on the season (read when shown and when used) */
@@ -141,7 +141,7 @@ function stipEvent(G,SK){const B=BAL.stip,r=rkOf(S),st=stipSt(S),W=stipW();const
  const T=stipReportTo(SK);if(T){const stat=T.k==="hh"?(S.hh||0):(S.th||0);const ev=W.ev||0;const od=T.risky?5:cl(B.reportBase+Math.round(stat/2)+Math.round((S.danh||0)/5)+ev*15,5,95);
   O.push({n:`Tố lên ${T.n}`,fx:{},x:`${word(od)} · thành: ${eun} bị phạt, trả lại ${SK.bac?"bạc và ":""}đồ tốt${SK.sup&&!T.risky?`, ${supTxt} bị trách (Danh -2)`:""} · hỏng: Danh -1, Nội vụ phủ để bụng${T.risky?`, ${T.n} chính là người sai chèn ép: nàng thù ngươi thêm`:""}`,
    go:()=>{if(roll(od)){back();W.pun=S.turn;W.ev=0;if(SK.sup&&!T.risky){ap(SK.sup,{danh:-2});oanAdd(SK.sup,S,BAL.eff.jstip.go)}log(`${T.n} nghe ngươi tâu, sai phạt ${eun}${SK.sup&&!T.risky?`, trách ${supTxt}`:""}. Nội vụ phủ trả lại đủ phần.`)}
-    else{apply({danh:-1});st.spite=S.turn;if(T.risky&&T.v)oanAdd(T.v,S,BAL.eff.jstip.go_2);log(`<span class="r">${T.n} gạt đi, cho là ngươi nhỏ nhen.</span> Danh -1.${T.risky?` ${T.n} thù ngươi thêm.`:""}`)}}})}
+    else{apply({danh:BAL.eff.jstip.danhGo});st.spite=S.turn;if(T.risky&&T.v)oanAdd(T.v,S,BAL.eff.jstip.go_2);log(`<span class="r">${T.n} gạt đi, cho là ngươi nhỏ nhen.</span> Danh ${balSg(BAL.eff.jstip.danhGo)}.${T.risky?` ${T.n} thù ngươi thêm.`:""}`)}}})}
  const om=cl(B.remember+(S.mat||0)*10,5,95);
  O.push({n:"Ghi nhớ để trả thù sau",fx:{},x:`${word(om)} · thành: Tai mắt dò ra ${SK.sup?`chứng cứ về ${supTxt} (chứng cứ ${balSg(BAL.eff.jstip.evN)})`:`sổ sách ${eun} ăn bớt (lần tố sau dễ thành)`} · hỏng: không dò được gì`,
   go:()=>{if(roll(om)){const n=SK.sup?/*evok: checked (n)*/evA(S,SK.sup,BAL.eff.jstip.evN):0;if(!SK.sup)W.ev=(W.ev||0)+1;log(SK.sup&&!n?`Ngươi ghi nhớ. Tai mắt dò ra ${supTxt} không dính líu: chỉ ${eun} ăn bớt.`:`Ngươi ghi nhớ. Tai mắt dò ra ${SK.sup?`chứng cứ về ${supTxt}: chứng cứ ${balSg(BAL.eff.jstip.evN)}`:`sổ sách ${eun} ăn bớt`}.`)}else log("Ngươi ghi nhớ, nhưng chưa dò được gì.")}});

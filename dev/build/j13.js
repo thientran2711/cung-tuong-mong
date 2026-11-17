@@ -16,8 +16,8 @@ function illMonthP(p){const me=p===S;let ev="";const i=illOf(p);
   else{const near=others(p).find(x=>illOf(x)&&ILL[x.ill.k].cont&&(together(p,x)||sameHouse(p,x)));if(near&&roll(8))ev+=catchIll(p,near.ill.k)}
   return ev}
  const d=ILL[i.k];ap(p,{suc:-5*i.st});if(d.sac)ap(p,{sac:d.sac});if(d.sung)ap(p,{sung:d.sung});
- const c=careOdds(p);if(roll(30+c-(d.slow?15:0))){p.ill=null;if(d.scar)ap(p,{sac:d.scar});return ev+(me?`Ngươi khỏi ${d.n.toLowerCase()}${d.scar?", nhưng mặt để lại sẹo (Sắc "+d.scar+")":""}. `:"")}
- if(i.st<3&&roll(35-c/2)){i.st++;if(me)ev+=`<span class="r">${d.n} trở ${STG[i.st]}.</span> `}
+ const c=careOdds(p);if(roll(BAL.odb.j13.rbIllMonthP+c-(d.slow?15:0))){p.ill=null;if(d.scar)ap(p,{sac:d.scar});return ev+(me?`Ngươi khỏi ${d.n.toLowerCase()}${d.scar?", nhưng mặt để lại sẹo (Sắc "+d.scar+")":""}. `:"")}
+ if(i.st<3&&roll(BAL.odb.j13.rbIllMonthP_2-c/2)){i.st++;if(me)ev+=`<span class="r">${d.n} trở ${STG[i.st]}.</span> `}
  else if(i.st===3&&d.die&&roll(25*d.die)){if(me){die(`${d.n} nguy kịch, không qua khỏi`);return ev}p.alive=false;if(p.queen)p.queen=false;return ev+`<span class="r">${p.name} mất vì ${d.n.toLowerCase()}.</span> `}
  return ev}
 function epidemic(){const P=consorts().filter(p=>p===S||p.alive&&!p.out);if(!roll(1.2))return"";const h=pick(P),hk=houseOf(h);let ev=`<span class="r">Dịch đậu mùa phát ở ${houseName(h)==="cung riêng"?"cung "+NM(h):houseName(h)}.</span> Cả cung bị phong tỏa một tháng. `;
