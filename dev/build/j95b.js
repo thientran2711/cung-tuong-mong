@@ -77,7 +77,7 @@ function j95bGate(role,a,t,kind,ctx){t=t||S;ctx=ctx||{};
  if(role.n!=null)return{ok:true,why:"trung lập: "+role.n};
  if(!a)return role.opt?{ok:true,why:"không có ai"}:{ok:false,why:"không có người"};
  if(a.rel==null||a===S){/* not a consort: servants / court eunuchs */
-  if(kind==="svthief"){const s=a;if(netIs(s,"greed"))return{ok:true,why:"tính tham của"};if(s.spyFor&&s.spyFor!=="me")return{ok:true,why:"làm tai mắt cho người khác"};if((s.loyal||50)<35)return{ok:true,why:`lòng với chủ thấp (${s.loyal})`};return{ok:false,why:"kẻ hầu không có lý do lấy đồ"}}
+  if(kind==="svthief"){const s=a;if(netIs(s,"greed"))return{ok:true,why:"tính tham của"};if(s.spyFor&&s.spyFor!=="me")return{ok:true,why:"làm tai mắt cho người khác"};if((s.loyal||50)<BAL.loy.bad)return{ok:true,why:`lòng với chủ thấp (${s.loyal})`};return{ok:false,why:"kẻ hầu không có lý do lấy đồ"}}
   if(kind==="squeeze"){if(S.rank<=2)return{ok:true,why:`thái giám khinh cung phẩm thấp (phẩm ${S.rank}), đòi lệ phí`};return{ok:false,why:"phẩm cao, thái giám không dám làm khó"}}
   return{ok:true,why:role.h?"kẻ dưới làm theo lệ":"kẻ dưới lấy lòng"}}
  if(role.h&&a===t)return{ok:false,why:"không ai tự hại mình"};
@@ -218,7 +218,7 @@ function j95bHear(r){const y=RV(r.y);if(!y||!y.alive)return;r.known=1;J95B.stat.
   opts:j95bRumOpts(r,y,x)})}
 /* port 16/11 (owner 11/15 07:15Z): whole Tốn / Được / Mất + odds word on every option */
 function j95bRumOpts(r,y,x){const oc=j95bClearOdds(r),ot=cl(35+(S.mat||0)*8+(S.tamco||0)/4,5,90);
- return[{n:`Sang gặp ${y.name} giải bày`,fx:{},x:`${word(oc)} · tốn: ${BAL.m95b.k} khắc · thành: hết hiểu lầm, ${y.name} bớt oán ngươi · hỏng: ${y.name} chưa tin, oán ngươi +4 · (chuyện có thật thì khó giải, chỉ nguôi một nửa)`,go:()=>j95bClear(r.u,"card")},
+ return[{n:`Sang gặp ${y.name} giải bày`,fx:{},x:`${word(oc)} · tốn: ${BAL.m95b.k} khắc · thành: hết hiểu lầm, ${y.name} bớt oán ngươi · hỏng: ${y.name} chưa tin, oán ngươi ${balSg(BAL.eff.j95b.j95bClear_3)} · (chuyện có thật thì khó giải, chỉ nguôi một nửa)`,go:()=>j95bClear(r.u,"card")},
   {n:"Cho người tra xem ai tung tin",fx:{...BAL.m95b.trace},x:`${word(ot)} · tốn: ${BAL.m95b.k} khắc · Bạc ${BAL.m95b.trace.bac} · thành: biết kẻ tung tin, chứng cứ về kẻ ấy +1 · giải bày về sau dễ hơn · hỏng: không lần ra ai`,go:()=>j95bTrace(r.u)},
   {n:"Mặc kệ",fx:{},x:`Nắm chắc · kèm: ${y.name} vẫn tin lời đồn, sẽ tìm dịp ra tay với ngươi`,go:()=>log(`Ngươi bỏ ngoài tai lời đồn về ${y.name}.`)}]}
 function j95bRumOf(y){const z=j95bZ();for(let i=z.rum.length-1;i>=0;i--){const r=z.rum[i];if(r.y===y.id&&!r.cleared&&wk()-r.w<=J95B.RUMW+4)return r}return null}
@@ -228,9 +228,9 @@ function j95bClear(u,how,face){const z=j95bZ();const r=z.rum.find(x=>x.u===u);if
  J95B.stat.clear++;const o=j95bClearOdds(r);const x=r.x!=null?RV(r.x):null;let msg;
  if(j95dice(o)){r.cleared=1;J95B.stat.clearOk++;if(y.j95rum)delete y.j95rum[key(S)];
   if(r.truth){oanAdd(y,S,-Math.round(r.oa/2));msg=`${y.name} nghe ngươi nhận lỗi, nguôi đi phần nào; chuyện ấy có thật nên nàng vẫn còn để bụng.`}
-  else{oanAdd(y,S,-r.oa);affAdd(y,S,r.af+4);if(x&&x.alive){oanAdd(y,x,12);affAdd(y,x,-8)}msg=`${y.name} tin lời ngươi: hiểu lầm đã gỡ.${x&&r.traced?` Nàng quay sang giận ${x.name}.`:""}`}
+  else{oanAdd(y,S,-r.oa);affAdd(y,S,r.af+4);if(x&&x.alive){oanAdd(y,x,BAL.eff.j95b.j95bClear);affAdd(y,x,BAL.eff.j95b.j95bClear_2)}msg=`${y.name} tin lời ngươi: hiểu lầm đã gỡ.${x&&r.traced?` Nàng quay sang giận ${x.name}.`:""}`}
   j95bAct("v"+y.id,"cleared","me",{ok:true,why:`hết hiểu lầm: ngươi đã giải bày (${how})`},"rumor:clear")}
- else{oanAdd(y,S,4);msg=r.truth?`${y.name} không nghe: chuyện ấy có thật.`:`${y.name} chưa tin lời ngươi.`}
+ else{oanAdd(y,S,BAL.eff.j95b.j95bClear_3);msg=r.truth?`${y.name} không nghe: chuyện ấy có thật.`:`${y.name} chưa tin lời ngươi.`}
  log(msg);if(!face)Q.push({t:"Giải bày",who:pv(y),h:`<p>${msg}</p>`});return msg}
 function j95bTrace(u){const z=j95bZ();const r=z.rum.find(x=>x.u===u);if(!r)return"";if(typeof can==="function"&&can(BAL.m95b.k))spend(BAL.m95b.k);J95B.stat.trace++;const x=r.x!=null?RV(r.x):null;const y=RV(r.y);
  let msg;if(x&&x.alive&&j95dice(cl(35+(S.mat||0)*8+(S.tamco||0)/4,5,90))){r.traced=1;evA(S,x,1);try{noteAdd(x.id,`tra ra: người của nàng đã rỉ tai ${y?y.name:"một phi tần"} để gây hiểu lầm với ngươi`)}catch(e){}

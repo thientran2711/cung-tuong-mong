@@ -669,7 +669,7 @@ const mute=n=>{const f=window[n];if(typeof f!=="function")return;window[n]=funct
    tuẫn táng…, from her own heir and rank) at the same moment; the new lives (Luân hồi) join the same world under a NEW Emperor, made
    once by the host (mkEmp) and carried by its next week. The guest's own roll never fires. */
 (function(){const f=emperorDies;emperorDies=function(){if(!CW.on)return f.apply(this,arguments);try{if(arguments[0])log(arguments[0])}catch(e){}
- if(!host()||!S||!S.emp||S.emp.dead)return;if(typeof S.emp.y0==="number"&&(S.year||0)-S.emp.y0<=(BAL.coopEmpY||12))return;
+ if(!host()||!S||!S.emp||S.emp.dead)return;if(typeof S.emp.y0==="number"&&(S.year||0)-S.emp.y0<=(BAL.coopEmpY))return;
  S.emp.dead={w:wk()+(CW.inTurn?1:0),y:S.year,age:S.emp.age}};
  CW.empWeek=function(){if(!CW.on||!S||S.dead)return false;const d=S.emp&&S.emp.dead;if(!d||d.w!==wk()||CW.empDone===d.w)return false;CW.empDone=d.w;
   let ne=null;if(host()){try{ne=mkEmp();ne.y0=S.year||0}catch(e){console.error(e)}}
@@ -804,7 +804,7 @@ P2H.briber=m=>{const a=(CW.brb||{})[m.rid];if(!a)return;delete CW.brb[m.rid];if(
  if(m.no)h=`<p><b>${nm}</b> nay không còn hầu ở cung ${on}.</p>`;
  else{try{deedAdd(S,"sbribe",null,1,`mua chuộc người hầu của ${o?o.name:"cung khác"}`)}catch(e){}
   if(m.ok){apply({bac:-B.pay});if(s)s.spyFor="me";h=`<p><b>${nm}</b> nhận bạc, thành tai mắt của ngươi trong cung ${on}.</p><p>${fmt({bac:-B.pay})}</p>`}
-  else if(m.told){let d=0;if(o&&o.alive){d=evA(o,S,1);relAdd(S,o,-5)}h=`<p><span class="r"><b>${nm}</b> từ chối bạc, bẩm với ${on}.</span></p>${d?`<p class="r">${on} nắm thêm ${d} chứng cứ của ngươi.</p>`:""}`}
+  else if(m.told){let d=0;if(o&&o.alive){d=evA(o,S,1);relAdd(S,o,BAL.eff.jcoopworld.briber)}h=`<p><span class="r"><b>${nm}</b> từ chối bạc, bẩm với ${on}.</span></p>${d?`<p class="r">${on} nắm thêm ${d} chứng cứ của ngươi.</p>`:""}`}
   else h=`<p><b>${nm}</b> từ chối, trả lại bạc.</p>`}
  pushModal({t:"Mua chuộc",h});showModal();render()};
 P2H.nbribe=m=>{if(S.dead||!isSrvMe())return;const v=RV(m.r);if(!v||!v.alive)return;try{pushDil(mkP("cnvBribe",{r:v.id}),"Bạc lạ")}catch(e){console.error(e)}showModal();render()};

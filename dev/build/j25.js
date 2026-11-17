@@ -7,7 +7,7 @@ const RISKRE=/(lộ:|mách lại|nắm thóp|có thể (mách|nắm|bị|lật)|
   if(a.n==="Nhờ giúp đỡ"&&v&&aff(v,S)<30){a.lock=true;a.t=`cần nàng quý ngươi 30 (đang ${aff(v,S)})`}
   if(a.n==="Cảnh báo nàng"&&/không có căn cứ/.test(a.x||"")){a.lock=true;a.t="chưa biết ai đang hại nàng"}
   if(a.open&&!S.inv.some(e=>!e.h)){a.lock=true;a.t="rương trống"}
-  if(/^Bàn tán về/.test(a.n)&&/mách lại/.test(a.x||"")){a.x="";a.x="nàng quý ngươi -3";a.risk=`nàng mách lại, ${a.n.replace(/^Bàn tán về /,"")} oán ngươi +10: ${chanceW(50)}`}
+  if(/^Bàn tán về/.test(a.n)&&/mách lại/.test(a.x||"")){a.x="";a.x=`nàng quý ngươi ${balSg(BAL.eff.j9.run_3)}`;a.risk=`nàng mách lại, ${a.n.replace(/^Bàn tán về /,"")} oán ngươi ${balSg(BAL.eff.j9.run_4)}: ${chanceW(50)}`}
   if(a.n==="Chia sẻ bí mật"&&/nắm thóp/.test(a.x||"")){a.x=a.x.replace(/ · nàng có thể nắm thóp ngươi/,"");a.risk=`nàng nắm 1 chứng cứ của ngươi: ${chanceW(50)}`}
   if(a.n==="Khiêu khích"){a.risk=a.x;a.x=""}
   return a})}})();
@@ -73,15 +73,15 @@ const LACK={musk:t=>!t.preg||t.hidden?"nàng không có thai (ngươi biết)":"
 /* her portrait in the death dialog is labelled by her name and rank */
 (function(){const p0=pMe;pMe=function(){const f=p0.apply(this,arguments);f.rw=(S.rank>=7?"Hoàng hậu":RANKS[S.rank].n);return f}})();
 /* older eunuchs are not 'Tiểu': Lão X; servant names unique across all palaces */
-(function(){const a0=ageInit;ageInit=function(){const r=a0.apply(this,arguments);try{allServ().forEach(s=>{if(s.role!=="maid"&&s.age>=45&&/^Tiểu /.test(s.name))s.name=s.name.replace(/^Tiểu /,"Lão ")})}catch(e){}return r}})();
-(function(){const m0=mkServ;mkServ=function(role){let s=m0.apply(this,arguments);const taken=new Set([S&&S.maid&&S.maid.name].concat((rivals||[]).map(v=>v.maid&&v.maid.name),allServ().map(x=>x.name)));let n=2;const base=s.name;while(taken.has(s.name))s.name=base+" "+(n++);if(role!=="maid"&&s.age>=45&&/^Tiểu /.test(s.name))s.name=s.name.replace(/^Tiểu /,"Lão ");return s}})();
+(function(){const a0=ageInit;ageInit=function(){const r=a0.apply(this,arguments);try{allServ().forEach(s=>{if(s.role!=="maid"&&s.age>=BAL.srvAge.old&&/^Tiểu /.test(s.name))s.name=s.name.replace(/^Tiểu /,"Lão ")})}catch(e){}return r}})();
+(function(){const m0=mkServ;mkServ=function(role){let s=m0.apply(this,arguments);const taken=new Set([S&&S.maid&&S.maid.name].concat((rivals||[]).map(v=>v.maid&&v.maid.name),allServ().map(x=>x.name)));let n=2;const base=s.name;while(taken.has(s.name))s.name=base+" "+(n++);if(role!=="maid"&&s.age>=BAL.srvAge.old&&/^Tiểu /.test(s.name))s.name=s.name.replace(/^Tiểu /,"Lão ");return s}})();
 /* items without their own picture yet use the nearest picture; the proof bundle uses the proof icon */
 Object.assign(ITIMG,{tramngoc:"tram-phuong",vongvang:"vong-ngoc",gamvang:"gam-to-chau",demgam:"lua-hang-chau"});
 (function(){const i0=iic;iic=function(k,s){if(k==="chungcu")return ic("chung-cu",s||22);return i0.apply(this,arguments)}})();
 /* each rival palace looks a little different (tint of the shared hall art by owner rank) */
 (function(){const r0=renderStage;renderStage=function(){r0.apply(this,arguments);try{const st=$("stage");const k=S.place;st.classList.remove("rp0","rp1","rp2","rp3","day","night");if(k&&k[0]==="r"){const v=RV(+k.slice(1));if(v)st.classList.add("rp"+(v.rank>=5?3:v.rank>=3?2:v.rank>=1?1:0))}st.classList.add((S.buoi||0)===B4L?"night":"day")}catch(e){}}})();
 /* a faction may ask her to join (two-way) */
-(function(){const a1=approachOne;approachOne=function(){if(!facOf(S)&&(S.facs||[]).length&&roll(20)){const f=pick(S.facs);const l=facLeader(f);if(l&&l!==S&&aff(l,S)>=0)return{ev:1,t:"Có người đến",who:pv(l),h:`<p>${l.name}, người đứng đầu ${f.name}, mời ngươi vào phe.</p>`,opts:[{n:"Nhận lời vào phe",fx:{},x:`nàng quý ngươi +10 · kẻ thù của phe oán ngươi`,go:()=>{f.m.push(key(S));relAdd(S,l,10)}},{n:"Khéo từ chối",fx:{},x:"nàng quý ngươi -3",go:()=>relAdd(S,l,-3)}]}}return a1.apply(this,arguments)}})();
+(function(){const a1=approachOne;approachOne=function(){if(!facOf(S)&&(S.facs||[]).length&&roll(20)){const f=pick(S.facs);const l=facLeader(f);if(l&&l!==S&&aff(l,S)>=0)return{ev:1,t:"Có người đến",who:pv(l),h:`<p>${l.name}, người đứng đầu ${f.name}, mời ngươi vào phe.</p>`,opts:[{n:"Nhận lời vào phe",fx:{},x:`nàng quý ngươi ${balSg(BAL.eff.j25.go)} · kẻ thù của phe oán ngươi`,go:()=>{f.m.push(key(S));relAdd(S,l,BAL.eff.j25.go)}},{n:"Khéo từ chối",fx:{},x:`nàng quý ngươi ${balSg(BAL.eff.j25.go_2)}`,go:()=>relAdd(S,l,BAL.eff.j25.go_2)}]}}return a1.apply(this,arguments)}})();
 /* card sub-tabs: one group at a time, remembered per role */
 document.addEventListener("click",e=>{const b=e.target.closest("[data-pct]");if(!b)return;e.stopPropagation();e.preventDefault();window.__pcTab=window.__pcTab||{};window.__pcTab[b.dataset.role]=b.dataset.pct;const c=b.closest(".pcr");c.querySelectorAll(".pct").forEach(x=>x.classList.toggle("on",x===b));c.querySelectorAll(".pcg").forEach(g=>g.classList.toggle("on",g.dataset.g===b.dataset.pct))},true);
 /* consort faces by DRESS TIER (picked by rank), reviewed by eye: only serene, slim, adult, approved-style faces; stern, plump, sad or childlike ones are left out */

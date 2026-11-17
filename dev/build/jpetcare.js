@@ -138,7 +138,7 @@ A("petsteal","Trộm thú nuôi của nàng",{c:{},ok:(a,t)=>tsbPets(t).length>0
  const j=petTarget(t);const P=tsbPets(t)[j];if(!P)return"";const T=petT(P),s=petStage(P);a.schemes=(a.schemes||0)+1;let r="";
  if(roll(BAL.pet.stealBite[s])){ap(a,{suc:-BAL.pet.stealSuc});r+=`${T.n} cắn, cào ${a===S?"ngươi":NM(a)} (Sức -${BAL.pet.stealSuc}). `}
  const c=caught(a,t,false,`trộm ${T.n.toLowerCase()} của ${NM(t)}`);if(c){ap(a,{danh:-BAL.pet.stealCaughtDanh});return r+c}
- if(!roll(petStealO(a,t))){relAdd(a,t,-6);return r+`${T.n} kêu inh ỏi, người trong cung ${NM(t)} chạy ra; ${a===S?"ngươi":NM(a)} phải bỏ đi tay không. `}
+ if(!roll(petStealO(a,t))){relAdd(a,t,BAL.eff.jpetcare.f);return r+`${T.n} kêu inh ỏi, người trong cung ${NM(t)} chạy ra; ${a===S?"ngươi":NM(a)} phải bỏ đi tay không. `}
  const stg=s;/* petLose (not a bare splice): the follow bonus leaves with the pet, the next one follows (review/coop-pets) */petLose(t,j,"bị trộm mất");const N=petAdd(a,P.t,`Lấy từ cung ${t.name}`,"stolen");if(N){N.stg=stg;N.at=P.at;N.aff=BAL.pet.stolenAff}
  if(t===S&&tsbOn()&&!tsbBot())Q.push({t:"Thú nuôi bị trộm",who:typeof pMe==="function"?pMe():null,h:`<p class="r">Sáng ra không thấy ${T.n.toLowerCase()} đâu; cửa lồng mở, có dấu người lạ.</p>`});
  return r+`${a===S?"Ngươi":NMc(a)} lén mang ${T.n.toLowerCase()} của ${NM(t)} về cung. `}});

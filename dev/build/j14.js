@@ -1,6 +1,6 @@
 /* ================= LÃNH CUNG: a playable state for every consort ================= */
 function cold(why){if(S.dead)return;if(S.out)return;S.out=1;S.coldWhy=why;S.coldRank=S.rank;S.coldTurn=S.turn;S.rank=0;S.confined=0;S.preg=S.fake?0:S.preg;S.fake=0;
- const keep=(S.staff||[]).filter(s=>s.loyal>=70).slice(0,1);(S.staff||[]).filter(s=>!keep.includes(s)).forEach(s=>{});S.staff=keep;
+ const keep=(S.staff||[]).filter(s=>s.loyal>=BAL.loy.trust).slice(0,1);(S.staff||[]).filter(s=>!keep.includes(s)).forEach(s=>{});S.staff=keep;
  log(`<span class="r">${why}. Ngươi bị đưa vào lãnh cung.</span>`);Q.push({t:"Lãnh cung",cls:"end",who:pMe(),h:`<p>${why}.</p><p>Cửa lãnh cung đóng lại sau lưng. Bổng lộc chỉ còn chút gạo mốc, kẻ hầu bỏ đi gần hết${keep.length?`; chỉ ${keep[0].name} ở lại`:""}.</p><p class="past">Chưa hết đường: minh oan, cầu xin, nhờ người bên ngoài, hay chờ ân xá.</p>`,btn:"Bước vào"});coldVisit();deal()}
 function coldVisit(){S.place="lc";const f=rivals.filter(v=>v.alive&&v.out);S.visit={k:"lc",people:f.slice(0,4).map(v=>({kind:"fallen",ref:v,name:v.name,ini:v.name.split(" ").pop()[0],col:"#6a7a8a",info:"Phế phi · cùng cảnh ngộ"})),talked:false,tk:{},msg:"Gió lùa qua song cửa mục. Ở đây chỉ có những người bị quên lãng."}}
 function restore(full,why){S.out=0;S.rank=full&&S.coldRank>=7&&seatHas(S,7)?7:seatDown(S,full?S.coldRank:S.coldRank-1);S.place="home";S.visit={k:"home",people:homePeople(),talked:false,tk:{}};S.lastPromo=S.turn;fillStaff(S,true);
@@ -21,7 +21,7 @@ function coldMonth(){let ev="";
   if((S.month===1||S.month===8)&&roll(25)){restore(false,S.month===1?"Đại xá đầu năm":"Đại xá nhân tiết Vạn thọ");return ev}
   if(S.suc<=0){die("Chết rét, chết đói trong lãnh cung");return ev}}
  for(const v of rivals){if(!v.alive||!v.out)continue;ap(v,{suc:-4});if(v.suc<=0){v.alive=false;continue}
-  if((roll(3)||(v.th>=50&&roll(5)))&&twCanPay(v,"cold")&&(twPay(v,"cold"),roll(odA(v,35+(v.mat||0)*6+(v.tamco||0)/5)))){/* two-way law: her release petition costs Sức (BAL.tw.cold) and rolls her odds; the NPC pays and rolls the same */v.out=false;v.rank=0;v.lastPromo=S.turn;v.oan=cl((v.oan||0)+20,0,100);ev+=`${v.name} được tha khỏi lãnh cung, phục vị ${RANKS[0].n}. `;if(v.coldBy!=null){const b=byKey(v.coldBy);if(b)oanAdd(v,b,40)}}}
+  if((roll(3)||(v.th>=50&&roll(5)))&&twCanPay(v,"cold")&&(twPay(v,"cold"),roll(odA(v,35+(v.mat||0)*6+(v.tamco||0)/5)))){/* two-way law: her release petition costs Sức (BAL.tw.cold) and rolls her odds; the NPC pays and rolls the same */v.out=false;v.rank=0;v.lastPromo=S.turn;v.oan=cl((v.oan||0)+20,0,100);ev+=`${v.name} được tha khỏi lãnh cung, phục vị ${RANKS[0].n}. `;if(v.coldBy!=null){const b=byKey(v.coldBy);if(b)oanAdd(v,b,BAL.eff.j14.coldMonth)}}}
  return ev}
 
 /* ================= SERVANT RANKS ================= */

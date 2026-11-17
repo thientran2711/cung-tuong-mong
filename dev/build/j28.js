@@ -4,7 +4,7 @@ let FIGS=[];
 (function(){try{fetch("img/FIGURES.json",{cache:"no-cache"}).then(r=>r.ok?r.json():null).then(j=>{const L=Array.isArray(j)?j:j&&(j.figures||j.files||j.items)||[];FIGS=L.filter(x=>x&&(x.file||x.src));if(FIGS.length&&S)render()}).catch(()=>{})}catch(e){}})();
 const TRK={"Xảo quyệt":"hiemdoc","Kiêu ngạo":"kieungao","Ân cần":"hienlanh","Kín đáo":"danghi","Tham vọng":"thamvong","Khiêm nhường":"numi"};
 function figRole(p){if(p===S)return"heroine";const k=p&&p.kind;if(k==="emp"||p===S.emp)return"emperor";if(k==="th")return"thaihau";if(k==="man"||(p&&p.ref&&p.ref.rw))return"man";if(k==="ty")return"physician";if(k==="maid"||k==="serv")return(p.ref&&p.ref.role==="eunuch")?"eunuch":"maid";return"consort"}
-function ageBandOf(a){return a>=36?"old":a>=26?"mid":"young"}
+function ageBandOf(a){const B=BAL.ageBand;return a>=B[1]?"old":a>=B[0]?"mid":"young"}
 function norm(x){return String(x==null?"":x).toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g,"").replace(/đ/g,"d").replace(/[^a-z0-9]/g,"")}
 function figFor(p,kind){if(!FIGS.length||!p)return"";const role=figRole(p),who=p.ref||p;const tier=who===S?(S.out?"cold":S.rank):who.queen?7:who.rank;const tr=TRK[who.trait]||norm(who.trait||who.look||"");const ab=ageBandOf(who===S.thO||who.kind==="th"?(S.thAge||55):who.kind==="emp"&&S.emp?S.emp.age:(who.age||20));
  const L=FIGS.filter(f=>norm(f.role)===norm(role)&&(kind!=="por"||/(^|\/)por-/.test(f.file||f.src))&&(kind==="por"||!/(^|\/)por-/.test(f.file||f.src)));if(!L.length)return"";
@@ -44,28 +44,28 @@ function npcAct(v,t){const b=bandOf(danger(v,t));if(!b)return"";const allow=BAND
 /* reactions: Oán from a slight scales with the victim's traits; forgiveness (monthly fade) too; trust gains from her too */
 (function(){const o0=oanAdd;oanAdd=function(x,y,n){if(n>0&&x&&x!==S)n*=persF(x,"slight",1);return o0.call(this,x,y,n)}})();
 (function(){const a0=affAdd;affAdd=function(x,y,n){if(n>0&&y===S&&x&&x!==S)n*=persF(x,"trust",1);return a0.call(this,x,y,Math.round(n))}})();
-function oanMonth(){for(const v of rivals){const f=Math.round(2*persF(v,"forgive",1));v.oan=Math.max(0,(v.oan||0)-f);for(const k in v.ro)v.ro[k]=Math.max(0,v.ro[k]-f)}for(const k in S.ro)S.ro[k]=Math.max(0,S.ro[k]-2)}
+function oanMonth(){for(const v of rivals){const f=Math.round(BAL.oanFade*persF(v,"forgive",1));v.oan=Math.max(0,(v.oan||0)-f);for(const k in v.ro)v.ro[k]=Math.max(0,v.ro[k]-f)}for(const k in S.ro)S.ro[k]=Math.max(0,S.ro[k]-BAL.oanFade)}
 /* gifts land by trait: Kiêu ngạo shrugs at small ones, Tham vọng warms to a rising giver, Tham tiền to anything */
 (function(){const g0=giftVal;giftVal=function(it,r){let v=g0.apply(this,arguments);if(r&&typeof r==="object"&&r!==S){let m=persF(r,"gift",1);const lav=persF(r,"lavish",0);if(lav&&(it.pr||0)>=lav)m=Math.max(m,1.5);{const rg=Math.max(1,...traitsOf(r).map(t=>(PERS[t]&&PERS[t].riseGift)||1));if(rg>1&&(S.rank>=r.rank||S.sung>=r.sung))m*=rg}v=Math.max(1,Math.round(v*m))}return v}})();
 /* SOCIAL MENU: once a week each consort may do one non-harm deed, by her traits; the same menu toward her and toward anyone */
 const SOC={
- help:{w:1,ok:(v,t)=>aff(v,t)>=10,run:(v,t)=>{relAdd(v,t,6);return `${v.name} sang giúp ${NM(t)} việc trong cung`}},
- visit:{w:0.8,ok:(v,t)=>t!==S?(t.suc<50||t.preg):(S.suc<50||S.preg),run:(v,t)=>{relAdd(v,t,5);if(t===S)apply({suc:3});return `${v.name} sang thăm ${NM(t)} lúc ốm mệt`}},
- warn:{w:0.8,ok:(v,t)=>aff(v,t)>=20&&liveRivals(true).some(x=>x!==v&&x!==t&&bandOf(danger(x,t))>=2),run:(v,t)=>{const x=mindPickBy(liveRivals(true).filter(x=>x!==v&&x!==t&&bandOf(danger(x,t))>=2),x=>danger(x,t)+Math.max(0,oan(v,x)),v);/* npc-mind: was FIRST */if(t===S){if(traitsOf(S).length){}S.dKnown=S.dKnown||{};S.dKnown[x.id]=wk();noteAdd(x.id,`${v.name} báo: nàng có ý hại ngươi`)}else{t.shield=Math.max(t.shield||0,1)}relAdd(v,t,4);return `${v.name} lén báo ${NM(t)} đề phòng ${x.name}`}},
- mediate:{w:0.8,ok:(v,t)=>t!==S&&oan(t,S)>=20,run:(v,t)=>{oanAdd(t,S,-10);return `${v.name} đứng ra hòa giải giữa ${t.name} và ngươi`}},
- provoke:{w:0.6,ok:(v,t)=>danger(v,t)>=10,run:(v,t)=>{oanAdd(t,v,6);if(t===S)apply({duc:0});else t.ghen=cl(t.ghen+3,0,100);ap(v,{danh:-1});return `${v.name} buông lời khiêu khích ${NM(t)}`}},
- humiliate:{w:0.5,ok:(v,t)=>danger(v,t)>=18&&rkOf(v)>=rkOf(t),run:(v,t)=>{oanAdd(t,v,10);ap(t,{danh:-2});ap(v,{danh:-1});return `${v.name} hạ nhục ${NM(t)} trước mặt cung nhân`}},
+ help:{w:1,ok:(v,t)=>aff(v,t)>=10,run:(v,t)=>{relAdd(v,t,BAL.eff.j28.run);return `${v.name} sang giúp ${NM(t)} việc trong cung`}},
+ visit:{w:0.8,ok:(v,t)=>t!==S?(t.suc<50||t.preg):(S.suc<50||S.preg),run:(v,t)=>{relAdd(v,t,BAL.eff.j28.run_2);if(t===S)apply({suc:3});return `${v.name} sang thăm ${NM(t)} lúc ốm mệt`}},
+ warn:{w:0.8,ok:(v,t)=>aff(v,t)>=20&&liveRivals(true).some(x=>x!==v&&x!==t&&bandOf(danger(x,t))>=2),run:(v,t)=>{const x=mindPickBy(liveRivals(true).filter(x=>x!==v&&x!==t&&bandOf(danger(x,t))>=2),x=>danger(x,t)+Math.max(0,oan(v,x)),v);/* npc-mind: was FIRST */if(t===S){if(traitsOf(S).length){}S.dKnown=S.dKnown||{};S.dKnown[x.id]=wk();noteAdd(x.id,`${v.name} báo: nàng có ý hại ngươi`)}else{t.shield=Math.max(t.shield||0,1)}relAdd(v,t,BAL.eff.j28.run_3);return `${v.name} lén báo ${NM(t)} đề phòng ${x.name}`}},
+ mediate:{w:0.8,ok:(v,t)=>t!==S&&oan(t,S)>=20,run:(v,t)=>{oanAdd(t,S,BAL.eff.j28.run_4);return `${v.name} đứng ra hòa giải giữa ${t.name} và ngươi`}},
+ provoke:{w:0.6,ok:(v,t)=>danger(v,t)>=10,run:(v,t)=>{oanAdd(t,v,BAL.eff.j28.run_5);if(t===S)apply({duc:0});else t.ghen=cl(t.ghen+3,0,100);ap(v,{danh:-1});return `${v.name} buông lời khiêu khích ${NM(t)}`}},
+ humiliate:{w:0.5,ok:(v,t)=>danger(v,t)>=18&&rkOf(v)>=rkOf(t),run:(v,t)=>{oanAdd(t,v,BAL.eff.j28.run_6);ap(t,{danh:-2});ap(v,{danh:-1});return `${v.name} hạ nhục ${NM(t)} trước mặt cung nhân`}},
  flaunt:{w:0.5,ok:(v,t)=>v.sung>=40,run:(v,t)=>{liveRivals(true).forEach(x=>{if(x!==v)x.ghen=cl(x.ghen+2,0,100)});return `${v.name} đi khắp cung khoe quà ngự ban`}},
  spy:{w:0.6,ok:()=>true,run:(v,t)=>{evA(v,t,roll(40)?1:0);return `Người của ${v.name} dò hỏi giờ giấc của ${NM(t)}`}},
- test:{w:0.4,ok:(v,t)=>aff(v,t)>=0,run:(v,t)=>{const ok=t===S?roll(60):roll(50);affAdd(v,t,ok?3:-6);return `${v.name} thử lòng ${NM(t)}: ${ok?"tin thêm một chút":"càng ngờ vực"}`}},
+ test:{w:0.4,ok:(v,t)=>aff(v,t)>=0,run:(v,t)=>{const ok=t===S?roll(60):roll(50);affAdd(v,t,ok?BAL.eff.j28.run_7[0]:BAL.eff.j28.run_7[1]);return `${v.name} thử lòng ${NM(t)}: ${ok?"tin thêm một chút":"càng ngờ vực"}`}},
  check:{w:0.4,ok:v=>v.inv.some(e=>!e.h),run:v=>{const i=v.inv.findIndex(e=>e.t);if(i>=0){v.inv.splice(i,1);return `${v.name} cho soát quà, vứt bỏ một món có độc`}return `${v.name} cho thái y soát lại quà được tặng`}},
- ally:{w:0.6,ok:(v,t)=>t!==S?t.sung>=v.sung:S.sung>=v.sung,run:(v,t)=>{relAdd(v,t,8);return `${v.name} tìm đến kết thân với ${NM(t)} đang được sủng`}},
- drop:{w:0.6,ok:(v,t)=>aff(v,t)>=30&&(t===S?S.sung<25||S.confined:t.sung<25||t.confined),run:(v,t)=>{affAdd(v,t,-20);return `${v.name} lạnh nhạt với ${NM(t)} lúc sa cơ`}},
- steal:{w:0.5,ok:(v,t)=>(t===S?S.tonight:true)&&v.sung>=20,run:(v,t)=>{ap(v,{sung:2});ap(t,{sung:-2});oanAdd(t,v,4);return `${v.name} khéo léo cướp đêm thị tẩm của ${NM(t)}`}},
+ ally:{w:0.6,ok:(v,t)=>t!==S?t.sung>=v.sung:S.sung>=v.sung,run:(v,t)=>{relAdd(v,t,BAL.eff.j28.run_8);return `${v.name} tìm đến kết thân với ${NM(t)} đang được sủng`}},
+ drop:{w:0.6,ok:(v,t)=>aff(v,t)>=30&&(t===S?S.sung<25||S.confined:t.sung<25||t.confined),run:(v,t)=>{affAdd(v,t,BAL.eff.j28.run_9);return `${v.name} lạnh nhạt với ${NM(t)} lúc sa cơ`}},
+ steal:{w:0.5,ok:(v,t)=>(t===S?S.tonight:true)&&v.sung>=20,run:(v,t)=>{ap(v,{sung:2});ap(t,{sung:-2});oanAdd(t,v,BAL.eff.j28.run_10);return `${v.name} khéo léo cướp đêm thị tẩm của ${NM(t)}`}},
  bribeksp:{w:0.4,ok:v=>v.bac>=30,run:v=>{ap(v,{bac:-30,sung:2});return `${v.name} đút lót Kính sự phòng để được lật thẻ`}},
- follow:{w:0.5,ok:v=>liveRivals(true).some(x=>x!==v&&rkOf(x)>rkOf(v)+1),run:v=>{const L=liveRivals(true).filter(x=>x!==v&&rkOf(x)>rkOf(v)+1);const x=mindPickBy(L,y=>BAL.mind.pick.j28up.base+rkOf(y)+Math.max(0,aff(v,y))/BAL.mind.pick.j28up.aff,v);relAdd(v,x,6)/* npc-mind: was ARGMAX rank */;return `${v.name} nép theo ${x.name}`}},
- feign:{w:0.5,ok:(v,t)=>danger(v,t)>=20,run:(v,t)=>{affAdd(t,v,6);return `${v.name} niềm nở với ${NM(t)}, chuyện trò thân mật`}},
- apologise:{w:0.4,ok:(v,t)=>oan(t,v)>=15,run:(v,t)=>{oanAdd(t,v,-8);return `${v.name} sang xin lỗi ${NM(t)}`}},
+ follow:{w:0.5,ok:v=>liveRivals(true).some(x=>x!==v&&rkOf(x)>rkOf(v)+1),run:v=>{const L=liveRivals(true).filter(x=>x!==v&&rkOf(x)>rkOf(v)+1);const x=mindPickBy(L,y=>BAL.mind.pick.j28up.base+rkOf(y)+Math.max(0,aff(v,y))/BAL.mind.pick.j28up.aff,v);relAdd(v,x,BAL.eff.j28.run_11)/* npc-mind: was ARGMAX rank */;return `${v.name} nép theo ${x.name}`}},
+ feign:{w:0.5,ok:(v,t)=>danger(v,t)>=20,run:(v,t)=>{affAdd(t,v,BAL.eff.j28.run_12);return `${v.name} niềm nở với ${NM(t)}, chuyện trò thân mật`}},
+ apologise:{w:0.4,ok:(v,t)=>oan(t,v)>=15,run:(v,t)=>{oanAdd(t,v,BAL.eff.j28.run_13);return `${v.name} sang xin lỗi ${NM(t)}`}},
  serveTH:{w:0.5,ok:()=>!S.thDead,run:v=>{v.th=cl((v.th||0)+2,-100,100);return `${v.name} sớm hôm hầu hạ Thái hậu`}},
  gossip:{w:0.4,ok:()=>true,run:(v,t)=>{const x=pick(liveRivals(true).filter(y=>y!==v));if(x)ap(x,{danh:-1});return `${v.name} rỉ tai chuyện trong cung`}},
  pray:{w:0.3,ok:()=>true,run:v=>{v.pray=Math.max(v.pray||0,1);return `${v.name} lên chùa cầu khấn`}},

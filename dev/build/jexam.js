@@ -32,7 +32,7 @@ const EX_CKTT=[["cam","dan"],["ky","co"],["thi","tho"],["hoa","ve"]];
 function exOn(){return !!(typeof S!=="undefined"&&S&&BAL&&BAL.ex)}
 function exSrv(p){return p===S&&typeof isSrv==="function"&&isSrv()}
 function exRk(to){return to>=7?"Hoàng hậu":RANKS[Math.max(0,to)].n}
-function exTier(to){return to<=3?0:to<=5?1:2}
+function exTier(to){return to<=BAL.cut.exTier[0]?0:to<=BAL.cut.exTier[1]?1:2}
 function exCd(to){const c=BAL.ex.cd;return c[Math.max(0,Math.min(c.length-1,to))]}
 function exLv(p,k){try{if(EXK[k])return typeof virLv==="function"?virLv(p,EXK[k].vir):0;return kg82LvFor(p,k)}catch(e){return 0}}
 function exArt(p,k){try{return typeof artLv==="function"?artLv(p,k):((p.arts||{})[k]||0)}catch(e){return 0}}
@@ -226,10 +226,10 @@ function exRun(P,e,done){e.pend={raws:[]};const raws=e.pend.raws;let i=0;const n
    co-op clients roll the same; fail = wait BAL.ex.srvCd months. State: S.srv.ex = {to, w0, w1, cd, lapse, pend, last, n}; NPC s.exCd. */
 function exSrvName(to){return to==="mama"?"Ma ma":SRK.maid[to]||"Cung nữ"}
 function exSrvIx(to){return to==="mama"?5:Math.max(1,Math.min(4,to|0))}
-function exSrvCdN(to){const c=BAL.ex.srvCd||[1,1,1,2,2,3];return c[exSrvIx(to)]}
+function exSrvCdN(to){const c=BAL.ex.srvCd;return c[exSrvIx(to)]}
 function exSrvS(){if(!S||!S.srv)return{};let e=S.srv.ex;if(!e||typeof e!=="object")e=S.srv.ex={};return e}
 function exSrvPlan(to){const B=BAL.ex;const V=EX_VIR[0];const A=exArtPart(S,0);const tin=Math.round(S.tin||0);
- const sh=cl(Math.round((tin-50)/B.attDiv),-B.attMax,B.attMax);const bar0=(B.srvBar||[0,18,20,22,24,24])[exSrvIx(to)];
+ const sh=cl(Math.round((tin-50)/B.attDiv),-B.attMax,B.attMax);const bar0=B.srvBar[exSrvIx(to)];
  return{to,srv:1,tier:0,rounds:exRounds(S,0),ex:{k:"mm",name:"Ma ma Nội vụ phủ",att:tin},bar0,sh,bar:bar0-sh,V,vir:(virLv(S,V[0])+virLv(S,V[1]))*B.wVir,
   virL:`${exVirN(V[0])} ${virLv(S,V[0])}, ${exVirN(V[1])} ${virLv(S,V[1])}`,art:A.v,artL:A.l,rk:exSrvName(to),cdN:exSrvCdN(to),
   passTxt:to==="mama"?"Được ở lại cung làm ma ma.":`Được thăng ${exSrvName(to)}.`}}
@@ -265,7 +265,7 @@ function exSrvMama(){if(!exOn()){S.srv.mama=1;log("Ngươi ở lại cung làm m
 /* NPC servants: one seeded roll per month at their rank as level; true = the rise is given */
 function exSrvNpc(s){try{if(!exOn())return true;if(s.coop)return true;if(s.exCd>S.turn)return false;const lv=srk(s);
  const rnd=exRng(((s.sid||1)*7919+(S.turn||0)*104729)|0);const raws=[0,1].map(()=>exRaw(lv,rnd));const avg=(raws[0]+raws[1])/2;const B=BAL.ex;
- const tot=Math.round(avg*B.wPlay)+Math.round((s.loyal||50)/25);const pass=tot>=(B.srvBar||[0,18,20,22,24])[Math.max(1,Math.min(4,lv+1))];
+ const tot=Math.round(avg*B.wPlay)+Math.round((s.loyal||50)/25);const pass=tot>=B.srvBar[Math.max(1,Math.min(4,lv+1))];
  const N=window.__exN;N.npcSrvSit=(N.npcSrvSit||0)+1;if(pass){N.npcSrvPass=(N.npcSrvPass||0)+1;s.exCd=0;return true}
  s.exCd=S.turn+(B.srvCd||[1,1,1,2,2])[Math.max(1,Math.min(4,lv+1))];return false}catch(e){return true}}
 (function(){const d0=deal;deal=function(){const r=d0.apply(this,arguments);try{if(exOn()&&isSrv()&&S.srv.ex&&S.srv.ex.w1!=null)exSrvAdd()}catch(e){}return r}})();

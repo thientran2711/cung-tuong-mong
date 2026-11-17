@@ -178,7 +178,7 @@ ARC67.tm96b={o:"tm",ok:ok96,t:"Thanh mai trúc mã: Lửa thử vàng",w:"lv",sj
   b_ton:{k:0,tag:"Chàng gánh tội thay",w:"lv",t:"{lvn} bị giáng chức, phạt bổng, suýt bị đuổi khỏi kinh. Ngươi giữ được thanh danh; chàng giữ được lời hẹn theo cách của chàng.",fx:{duc:2},go:()=>{T96().hurt=(T96().hurt||0)+1;T96().rise=Math.max(0,(T96().rise||0)-1);adj96({t:8,h:8,sus:-5});T96().endB="b_ton";return `${(man96()||{}).name||"Chàng"} bị giáng chức.`}},
   b_tin:{k:1,tag:"Qua được lửa thử",w:"emp",t:"Hoàng thượng tin ngươi. Kẻ đứng sau bị phạt, và chẳng ai dám nhắc lại chuyện cũ nữa.",fx:{sung:5,danh:4},go:A=>{adj96({sus:-20});T96().endB="b_tin";const v=rv67(A,"v");return v?e67pun(v,6):""}}}};
 /* ================= CHƯƠNG CUỐI ĐỜI: LỰA CHỌN CUỐI ================= */
-function rare96(){const t=T96(),m=man96(),w=watcher();return !!(t&&m&&m.alive&&(t.h||0)>=80&&(m.tinh||0)>=80&&w&&w.loyal>=70&&!S.preg&&(t.sus||0)<40&&!S.out)}
+function rare96(){const t=T96(),m=man96(),w=watcher();return !!(t&&m&&m.alive&&(t.h||0)>=80&&(m.tinh||0)>=80&&w&&w.loyal>=BAL.loy.trust&&!S.preg&&(t.sus||0)<40&&!S.out)}
 ARC67.tm96c={o:"tm",ok:ok96,t:"Thanh mai trúc mã: Lựa chọn cuối",w:"lv",sj:"mối tình cũ của ngươi",tslot:1,p:[[],[],[],[]],
  g:"Bao năm đã qua, mối tình ấy chưa bao giờ thật sự tắt. Nay triều đình định hôn sự cho {lvn}, kẻ thù sắp ra đòn cuối, và chàng đến xin ngươi một lời. Lần này, ngươi phải chọn hẳn.",
  ord:[["c1n","c1o","c1t"],["c2"],["c3a","c3b"],["c4a","c4b"],["c5"],["c6"]],

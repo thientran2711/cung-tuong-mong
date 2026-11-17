@@ -95,7 +95,7 @@ window.dhSync=dhSync;window.dhInc=dhInc;
 function earned(p){const D=(p&&p.dh)||{};return Object.keys(DH).filter(k=>D[k]&&D[k].i!=null&&D[k].i>=0&&!D[k].conf)}/* conf = confiscated (jdh2): not wearable until atonement */
 /* NPCs: wear the highest title, pick the bonus by need (no heir yet → conception; low Sủng / Danh → that; else the first) */
 function npcPick(p,key){const e=p.dh[key],L=choices(key,e.i);const pr=[];if(!p.preg&&(p.kids||[]).length<2)pr.push("thai");if((p.sung||0)<50)pr.push("gSung","sung");
- if((p.danh||0)<50)pr.push("gDanh","danh");if(p.maid&&(p.maid.loyal||0)<50)pr.push("gTrung");e.pick=pr.find(t=>L.includes(t))||L[0]}
+ if((p.danh||0)<50)pr.push("gDanh","danh");if(p.maid&&(p.maid.loyal||0)<BAL.loy.mid)pr.push("gTrung");e.pick=pr.find(t=>L.includes(t))||L[0]}
 function dhAutoWear(p){const L=earned(p).map(k=>dhObj(p,k)).filter(Boolean).sort((a,b)=>b.tier-a.tier);if(L.length){npcPick(p,L[0].key);dhWear(p,L[0].key,true)}}
 /* ---------- wearing: one title at a time; its stat only while worn ---------- */
 function wornKey(p){return keyOfWorn(p===S?S.titleWorn:p.titleWorn)}

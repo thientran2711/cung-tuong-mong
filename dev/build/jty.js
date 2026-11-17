@@ -82,7 +82,7 @@ function tyCharge(k){try{if(!tyOn(S)||!S.visit)return;const key=`${wk()}.${S.buo
    does not fire for an NPC in trung y (jty's weekly npcOut is her price). leAttire is a hoisted declaration in jaudit (later in the bundle),
    so this wrap sits under jtoil's. */
 (function(){if(typeof leAttire!=="function")return;const la0=leAttire;leAttire=function(p,occasion,host){const q=p||S;if(!tyOn(q))return la0.apply(this,arguments);
-  const B=BAL.thieuLe||{aff:-3,strict:1.5};let st=false;try{st=leHostKind(host)==="strict"}catch(e){}
+  const B=BAL.thieuLe;let st=false;try{st=leHostKind(host)==="strict"}catch(e){}
   return{state:"plain",delta:{danh:0,duc:0,aff:Math.round(B.aff*(st?B.strict:1))},why:["mặc trung y"],occasion:occasion||"",host,ty:1}};window.leAttire=leAttire})();
 (function(){if(typeof aaThieuLe0!=="function")return;const a0=aaThieuLe0;aaThieuLe0=function(p){if(tyOn(p))return false;return a0.apply(this,arguments)}})();
 /* ---------- robbery on the road (cướp / giật y phục) ---------- */
