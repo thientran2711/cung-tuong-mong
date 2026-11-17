@@ -40,7 +40,7 @@ function serve(){return new Promise(r=>{const s=http.createServer((q,a)=>{const 
    /* 10 samples per band: reactions of Thái hậu / Hoàng thượng / Hoàng hậu / a consort, then a talk result */
    const SM=[["th-praise","th",{mk:"vua",dress:"doan"}],["th-scold","th",{mk:"diem",dress:"doan"}],["emp-like","emp",{mk:"dep",dress:"doan"}],["emp-dislike","emp",{mk:"moc",dress:"doan"}],
     ["hh-praise",q,{mk:"vua",dress:"giandi"}],["hh-scold",q,{mk:"vua",dress:"photruong"}],["rival-jealous",v,{mk:"vua",dress:"photruong"}],["rival-praise",v,{mk:"vua",dress:"giandi"}],["crowd-jealous",v,{mk:"vua",dress:"photruong"}],["th-praise","th",{mk:"vua",dress:"giandi"}]];
-   S.vl={};for(const [k,host,L] of SM){if(bd==="hq"&&/^hh-/.test(k)){S.tuan=(S.tuan+1)%3;if(!S.tuan)S.turn++;samples[bd].push(`Hoàng thượng (talk result): ${kOutcome("emp",true)}`);continue}
+   S.vmem={};for(const [k,host,L] of SM){if(bd==="hq"&&/^hh-/.test(k)){S.tuan=(S.tuan+1)%3;if(!S.tuan)S.turn++;samples[bd].push(`Hoàng thượng (talk result): ${kOutcome("emp",true)}`);continue}
     S.tuan=(S.tuan+1)%3;if(!S.tuan)S.turn++;samples[bd].push(`${TOIL_EV[k]}: ${toilSay(k,Object.assign({host},L))}`)}}
   /* Hoàng thượng address only nàng / ái phi */
   S.rank=2;S.sung=BAL.voice.aiPhi-5;const a1=kSay("emp",S,"{Goi}");S.sung=BAL.voice.aiPhi+5;const a2=kSay("emp",S,"{Goi}");if(a1!=="Nàng"||a2!=="Ái phi")fail.push(`emp address ${a1} / ${a2}`);
