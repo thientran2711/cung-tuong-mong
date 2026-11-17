@@ -27,10 +27,18 @@ function f88Pick(L,tier,age,base,mrank){if(!L||!L.length)return null;const T=L.f
   /* the plain maid art (tier null) is the dress of maid rank 1 (there is no "m1" file for maid faces); m0, m2..m4 are their own ranks */
   let md=1e9;const d=f=>Math.abs((f.tier==null||f.tier===""?1:(parseInt(String(f.tier).replace(/\D/g,""),10)||0))-(mrank||0));
   for(const f of B)md=Math.min(md,d(f));return figBest(B.filter(f=>d(f)===md),null,age)}
- if(!base&&tier!=null&&T.length){let md=1e9;for(const f of T)md=Math.min(md,Math.abs(f88TNum(f)-tier));return figBest(T.filter(f=>Math.abs(f88TNum(f)-tier)===md),tier,age)}
+ /* review/fig-rank-match (owner 17/11: "Hoàng hậu ... chưa đúng phẩm"): dress tier = rank tier EXACTLY. The exact tier if it is drawn,
+    else the nearest tier ABOVE (reported in dev/handover/reports/fig-rank-match.md), NEVER a lower rank's dress, never maid art on a
+    consort. Nothing to show -> null (figFor returns "" and the frame shows its own placeholder). (Old rule: nearest tier either way, so a
+    Hoàng hậu (t8) wore t4 and a promoted maid wore maid clothes.) */
+ if(!base&&tier!=null){return figBestRank(T,tier,age)}
  if(!base&&T.length&&tier==null)return figBest(T,null,age);
  if(B.length){const N=B.filter(f=>f.tier==null||f.tier==="");return figBest(N.length?N:B,null,age)}
  return figBest(L,tier,age)}
+/* strict rank pick inside one identity's consort-dress records T: exact tier, else the nearest tier above, else null (never lower) */
+function figBestRank(T,tier,age){try{if(!T||!T.length)return null;const C=T.filter(f88IsCT);if(tier==null)return C.length?figBest(C,null,age):null;
+ let md=1e9;for(const f of C){const d=f88TNum(f)-tier;if(d>=0&&d<md)md=d}if(md===1e9)return null;
+ return figBest(C.filter(f=>f88TNum(f)-tier===md),tier,age)}catch(e){return null}}
 /* who wears consort dress */
 function f88Wear(who){try{if(who===S)return !(typeof isSrv==="function"&&isSrv());return (rivals||[]).includes(who)}catch(e){return false}}
 /* her maid dress rank on the cung nữ road (review/player-dress): Tân Giả khố = m0, Ma ma = m4 (the highest maid dress; the mama

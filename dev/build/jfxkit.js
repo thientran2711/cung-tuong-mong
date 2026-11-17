@@ -58,7 +58,7 @@ const KFK_CAP=()=>kitView().pages===1?140:240;  /* hard cap of live particles on
 function kfkSp(kind,x,y,v,tint,sc,blend,frame){const P=window.PIXI,K=KFK_SP[kind],fr=KFK.tex[kind];if(!P||!K||!fr||!KFX.root)return null;if(KFX.parts.length>=KFK_CAP())return null;
  let s=KFK.pool.pop();if(!s){s=new P.Sprite(fr[0]);s.anchor.set(.5);KFK.made++}
  s.texture=fr[frame!=null?frame%fr.length:Math.floor(Math.random()*fr.length)];s.x=x;s.y=y;s.rotation=Math.random()*6.28;s.visible=true;
- s.tint=K.t&&tint!=null?tint:0xffffff;s.blendMode=blend||K.b||"normal";const k=(sc||1)*K.d/K.s;s.scale.set(k);
+ s.tint=K.t&&tint!=null?tint:0xffffff;s.blendMode=blend||K.b||"normal";const k=(sc||1)*K.d/K.s*(typeof KFK_U!=="undefined"&&KFK_U.test(kind)?kfUnit():1);s.scale.set(k);
  s.v=Object.assign({vx:0,vy:0,g:0,drag:1,life:60,max:60,spin:0,grow:0,a0:1,fade:"out",sway:0,ph:Math.random()*6.28,sc:k},v);s.v.max=s.v.life;
  if(s.v.grow)s.v.grow*=K.d/K.s;s.alpha=s.v.fade==="in"||s.v.fade==="inout"?0:s.v.a0;KFX.root.addChild(s);KFX.parts.push(s);return s}
 function kfkFree(s){try{s.parent&&s.parent.removeChild(s);s.v=null;if(KFK.pool.length<400){s.visible=false;KFK.pool.push(s)}else s.destroy();KFK.freed++}catch(e){}}
@@ -81,7 +81,7 @@ function kitFxBurst(name,at,n,o){o=o||{};if(!KFK_SP[name]||!kfOn()||kfStill())re
  if(KFK_LSP[name]){/* light sprites: KIT §68.7 — over a person the burst becomes a rim light on that person */const p0=kfkAt(at),d0=(KFK_SP[name].d||100)*(o.scale||1),gb={x:p0.x-d0/2,y:p0.y-d0/2,w:d0,h:d0};if(p0.r){gb.x=Math.min(gb.x,p0.r.left);gb.y=Math.min(gb.y,p0.r.top);gb.w=Math.max(gb.x+gb.w,p0.r.right)-gb.x;gb.h=Math.max(gb.y+gb.h,p0.r.bottom)-gb.y}
   const rim=kfkRimFor(gb,name,{opacity:(o.a0!=null?o.a0:.8)-.3,dur:(o.life||60)*30,r:Math.max(8,Math.min(22,d0/12))});if(rim)return Promise.resolve(1)}
  return kfkLoad([name]).then(()=>{const p=kfkAt(at),N=kfBudget(n||12);let k=0;
-  for(let i=0;i<N;i++){const m=kfkMove(name,p,i,N,o);const s=kfkSp(name,m.x,m.y,m.v,o.tint,(o.scale||1)*kR(.75,1.25),o.blend);if(s){k++;if(m.rot!=null)s.rotation=m.rot;if(m.v.coin)s.v.coin=1}}
+  for(let i=0;i<N;i++){const m=kfkMove(name,p,i,N,o);const s=kfkSp(name,m.x,m.y,m.v,o.tint,(o.scale!=null?o.scale:/^(petal-|osmanthus$)/.test(name)?.65:1)*kR(.75,1.25),o.blend);if(s){k++;if(m.rot!=null)s.rotation=m.rot;if(m.v.coin)s.v.coin=1}}
   kfWake();return k}).catch(()=>0)}
 /* ---------- 1b. PERSON-SAFE LIGHT (owner 16/11 21:25Z, KIT §68.7) ----------
    Light / glow NEVER lies over a person or a face. Wherever a light, a glow sprite or a light sheet would reach a person (stage figure, her figure,
