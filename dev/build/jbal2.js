@@ -653,3 +653,20 @@ BAL.net.n={
  menHide:{"Kín đáo":10,"_":0},
  thyEv:{"Xảo quyệt":6,"Tham vọng":6,"_":0},
  tsCare:{"Kín đáo":70,"Kiêu ngạo":15,"_":40}};
+/* ===== GREETING NAME RULE + AG-MEET (owner 17/11 05:12Z chosen 05:28Z "phẩm + tính cách"; 05:25Z NPCs come to her) — jgreet.js reads ONLY this =====
+   Rank side: a title held by ONE seat (BAL.seatCap[r] === 1: Hoàng hậu, Hoàng quý phi) or a chí tôn (Hoàng thượng, Thái hậu) is public: the lower one
+   knows the name at once. Trait side: a nết-keyed table in the ONE trait pool (BAL.net.n.greetName, read by nv()): 1 = the higher / equal one gives
+   her name back, 0 = she only nods (Tính tình Kiêu ngạo / Lạnh lùng). ann = who walks with a herald who calls the name (chí tôn retinue).
+   rank = the ladder used to compare (consort rank r → cons + r; servants srv + their rank (tq / mama: srv + tq / mama, her too); a child cons + kid; men / officials man; chí tôn top).
+   meet = AG-MEET: each buổi a consort present where others are spends her ONE deed of the buổi (agent law) on approaching someone, or keeps her
+   schedule (stay). Utility of approaching = (ally need + spite need × spite) × her nết's sociability (BAL.net.n.meetW) — needs from agNeeds, no new bar;
+   pick weights: base for a stranger (a grey shadow, picked at random), + thiện cảm / + oán for people she knows. opt = how her nết weighs each
+   person-dialog option she uses on the one she approaches (product over her 3 nết of BAL.net.T[t].w[tag], the same w the agent loop uses). */
+BAL.greet={ann:{emp:1,th:1},rank:{top:100,th:99,cons:10,out:9,man:8,srv:1,tq:5,mama:4,kid:3},
+ meet:{on:1,stay:.35,spite:.6,base:1,affK:20,oanK:20,max:3,
+  opt:{greet:"visit",health:"visit",praise:"help",secret:"ally",gossip:"gossip",warn:"warn",provoke:"provoke"}}};
+BAL.net.n.greetName={"Kiêu ngạo":0,"Lạnh lùng":0,"_":1};
+BAL.net.n.meetW={"Ân cần":1.6,"Nhiều chuyện":1.8,"Xu nịnh":1.4,"Nóng nảy":1.2,"Lạnh lùng":.4,"Kín đáo":.6,"Kiêu ngạo":.8,"_":1};
+/* the person-dialog chat options (j9 topicOpts, j2 Khiêu khích): ONE table read by her options AND by the same options an NPC uses on her (AG-MEET, jgreet:
+   mirrored, she is the judge). Gains are × chatF (fewer each repeat). praise odds = od(o + the speaker's Tài / div); foe = oán a third must hold to warn. */
+BAL.talk={health:4,praise:{o:60,div:5},praiseFail:2,secret:10,secretBond:30,gossip:{hit:8,miss:3,oan:5,tell:50,tellOan:10},warn:{hit:10,miss:2,oan:10,foe:30},provoke:{rel:15,ghen:10,danh:1}};
