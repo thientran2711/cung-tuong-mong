@@ -97,8 +97,30 @@ coop/worker/test/thin.test.mjs, dev/test/coop-thin-a.js, dev/test/coop-thin-trip
 ### C3. Per-player module state registry
 - `TH.reg(name, get, set)` — name of a global, getter, setter; the default value is captured at registration (deep copy) and is what a fresh
   seat starts with. Registered today: used deck Q popIdx popMsg ACTX EVHOLD EVLAST wkPend jointScheme0 SUCC_NPC NOLUCK FORCE EIT_PIL EVB_ART
-  inFlip stoleFrom NLP NLR DEED85 DT85 TR_DEED K61PASS (`TH.REG` lists them).
-- A module whose per-player state lives INSIDE an IIFE registers itself from its own file: `if(window.COOPW&&COOPW.thin)COOPW.thin.reg("x",()=>x,v=>{x=v})`.
+  inFlip stoleFrom NLP NLR DEED85 DT85 TR_DEED K61PASS (`TH.REG` lists them; NOLUCK FORCE inFlip stoleFrom via THIN_REG since review r1).
+- A module whose per-player state lives INSIDE an IIFE (or anywhere jcoopthin cannot see) registers itself from its own file, right after the
+  declaration: `(window.THIN_REG=window.THIN_REG||[]).push(["x",()=>x,v=>{x=v}]);` — every module loads BEFORE jcoopthin, so `COOPW.thin`
+  does not exist there yet; jcoopthin drains the queue at load and later pushes register at once (review r1; NOLUCK jdh, FORCE jdh2,
+  inFlip stoleFrom jflip go this way). A name that cannot be read is listed in `TH.REGBAD` (must stay empty; coop-thin-a.js checks it).
+  A field of a module object (e.g. `SP13.L`, `J95B.next`) registers the same way with a getter/setter on that field.
+- KNOWN per-player module state NOT registered yet (review r1 scan of all.js with acorn: module-level variables written inside functions),
+  by the part whose code reaches it — the owning part registers it (or proves it per-phone UI) before it runs that code in withSeat:
+  B (start / nlRun): `J95B.bind/ev/notes/next` (j95b start wrapper clears them = would wipe the HOST's), `SP13.L/held` + `SP13.reset` (jspread),
+  `KMS/KMSNAP` (jkc kcSnapReset sets KMS=S; j93 kmDiff), jtut `T.fresh/PICK/NEWLIFE` (the tutorial start wrapper = host phone UI: must not
+  fire in context b), `K61NEW` (transient). D (cards): `J78.cur/ctx`, `IEV.cur/hold`, `RCP.ctx`, `KIP_GO/KIP_GIVE`.
+  E (buổi + night): jflip `life/cur/KEEP`, jnight `cur/busy/asked/again`, jne `N/HELD/PREV`, `J95C.later`, `btrPrev/btrEl/btrEnd`, `advLock`.
+  F: `ACTK` `ECON_AT` `RUMT` `nrTalk` jmem `SUP/CAUGHT/CTX` `PID_AVOID` `__restAct/__cardSuc` (call-scoped flags), `TOIL.st`, `SG`, `KG82`,
+  `PETC`, `mgStop/mgDone`. Full list: dev/handover/reports/review-coop-thin-a-r1.md §3.
+- CALL-SCOPED FLAGS (set on entry of a function, reset in its finally: ACTX ACTK ECON_AT RUMT NOLUCK FORCE inFlip K61NEW K61RAW PID_AVOID
+  __restAct __cardSuc SUP CAUGHT …): withSeat must be entered from the TOP of the event loop (a socket message / a host-level driver),
+  never from inside a host engine call that has such a flag set; G (week end for both) must call withSeat beside endTurn, not inside it,
+  or register every flag set on that call path.
+- TIMERS / PROMISES: anything fn schedules (setTimeout, requestAnimationFrame, fetch().then, a debounced render) runs AFTER withSeat has
+  returned, i.e. against the HOST's S. Code moved into withSeat must be synchronous for state; a part that meets a deferred step moves it
+  inside the context (call it synchronously when CW.ctx is set) and lists it.
+- UI SIDE EFFECTS: only render / showModal / save are no-ops inside. Toasts (kitLine), sounds (jsfx), stat floaters (jstatfx), overlays
+  (kitGloom / kitEdict / kitReward), direct DOM writes and localStorage writes are NOT stopped: they would show HER events on the host's
+  phone. The first part that runs real game code in context b (B) adds them to the no-op list in jcoopthin (one place) and tests it.
 - Rule: a part that moves code into withSeat registers every module-level per-player variable that code reads/writes, else her data leaks
   into the host's screen. Shared (never register): rid, sidN, tab and UI/picture/DOM caches.
 
