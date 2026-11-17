@@ -43,7 +43,7 @@ function hsvActs(s){const A=[],H=BAL.house;if(!s||!(S.staff||[]).includes(s))ret
  const J=(n,how,c,x,risk,lock)=>A.push(Object.assign({n,dom:"Thưởng phạt",o:100,c,x},risk?{risk}:{},lock?{lock:true,t:lock}:{},{open:()=>{if(how==="thuong"&&S.bac<H.thuongBac)return;const bf=rsnap();judgeServ(s,how);pay(H.k);hsvDone(n,bf,true)}}));
  J(merit?`Thưởng vì ${c.txt}`:"Thưởng vô cớ","thuong",{bac:-H.thuongBac},merit?"lòng +15, kẻ hầu khác lòng +2":"lòng +6 (ít hơn thưởng có cớ)","",S.bac<H.thuongBac?`thiếu bạc (cần ${H.thuongBac})`:"");
  if(spy)A.push({n:"Tra khảo",dom:"Thưởng phạt",o:100,x:`${he} khai là tai mắt của ai · lòng -15`,open:()=>{const bf=rsnap();servAct("phat",s.sid);pay(H.k);hsvDone("Tra khảo",bf,true)}});
- else J(fault?`Phạt vì ${c.txt}`:"Phạt vô cớ","phat",{},fault?"kỷ cương, kẻ hầu khác lòng +1 · lòng -5":`lòng -25, Đức -${H.phatDuc}, kẻ hầu khác lòng -5`,fault?"":`${he} mang hận; lòng dưới 30 thì mỗi tuần bán mình cho phi tần khác: ${chanceW(15)}`);
+ else J(fault?`Phạt vì ${c.txt}`:"Phạt vô cớ","phat",{},fault?"kỷ cương, kẻ hầu khác lòng +1 · lòng -5":`lòng -25, Đức -${H.phatDuc}, kẻ hầu khác lòng -5`,fault?"":`${he} mang hận; lòng dưới ${balAb(BAL.loy.out)} thì mỗi tuần bán mình cho phi tần khác: ${chanceW(15)}`);
  if(fault)J("Tha lỗi","tha",{},"lòng +5 · kẻ hầu khác lòng -1");
  if(tr)A.push({n:"Che chở (đang bị bắt tội)",dom:"Thưởng phạt",o:100,c:{danh:-H.cheDanh},x:"lòng +20",open:()=>{const bf=rsnap();servAct("che",s.sid);pay(H.k);hsvDone("Che chở",bf,true)}});
  A.push({n:"Hỏi chuyện",dom:"Sai bảo",act:1,o:s.tr==="chuyen"&&s.kn?70:40,x:"chứng cứ +1 nếu quen người cung khác",l:{},open:()=>{S.payOnPick=0;const bf=rsnap();servAct("hoi",s.sid);hsvDone("Hỏi chuyện",bf,true)}});

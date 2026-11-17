@@ -6,19 +6,30 @@
    counts when it equals |value| and its sign agrees ("-15" for -15, "+15" for 15, "±15" / "bớt oán 15" for either; after "oán" / "thù" the sign is read
    inverted: a Thân amount -10 shows as "oán +10"). No enclosing option object (≤ 2500 chars) = the ±300-char window only. Print it instead:
    ${balSg(BAL.eff.m.k)} (signed "+4" / "-4") or ${balAb(BAL.eff.m.k)} (unsigned) — helpers in dev/build/jbal.js. No baseline: the list is empty.
+   CUTS (review/one-core-dup2 r2): also fails a typed threshold copy of a moved ladder: beside a BAL.loy / ducLv / quyLv / wit / sungLv / tinhLv / tinLv / sucLv /
+   rareLv / oanFade / tsDanger / cut / odds / ageBand read, or (stat-word scan, whole game) "lòng 60+" / "dưới 40" for BAL.loy, a typed tier range "80–100" for ducLv / sungLv …
+   OC_WIDE=1 lists every stat-word threshold in any shape (diagnostic: lone "Đức từ 40" gates of other rules share numbers by coincidence and are NOT failures).
    usage: node dev/test/one-core-text.js [--list]      (--list prints every site, exit 0)
    module: require('./one-core-text.js').scan(buildDir) → sites (used by dev/measure/one-core-text-move.js) */
 const fs=require('fs'),path=require('path'),vm=require('vm');
 const acorn=(()=>{try{return require('acorn')}catch(e){return require('/opt/node-tools/node_modules/acorn')}})();
 const ROOT=path.join(__dirname,'..','..');
-const NS=new Set(['eff','road','arc']);
+const NS=new Set(['eff','road','arc']);/* amounts of effects: a signed typed number beside them is a copy */
+/* CUT keys (review/one-core-dup2): thresholds / ladders the words show ("lòng 60+", "dưới 40", "80–100"): ANY typed number equal to one of their values beside the read is a copy */
+const CUT=new Set(['loy','wit','ducLv','quyLv','sungLv','tinhLv','tinLv','rareLv','sucLv','oanFade','tsDanger','cut','odds','ageBand']);
+const CUT2={age:new Set(['adult']),srvAge:new Set(['old']),pet:new Set(['life'])};
 const WIN=300;
 const isNum=v=>typeof v==='number'&&isFinite(v)&&v!==0;
 function loadBAL(B){
- /* the rulebook values (the BAL files only; a file that needs the game to finish still leaves its const BAL / Object.assign done before it throws) */
+ /* the rulebook values (the BAL files only). Each top-level statement runs on its own, so one that needs the game (contestOpen …) cannot stop the
+    Object.assign(BAL,{…}) after it from running */
  const ctx=vm.createContext({console,Math,Object,Array,JSON,Number,String,window:{},document:{},localStorage:{getItem(){return null}},navigator:{}});
- for(const f of ['jbal.js','jbal2.js','jbaleff.js','jbalroad.js']){try{vm.runInContext(fs.readFileSync(path.join(B,f),'utf8'),ctx)}catch(e){}}
+ for(const f of ['jbal.js','jbal2.js','jbaleff.js','jbalroad.js']){const src=fs.readFileSync(path.join(B,f),'utf8');
+  for(const st of acorn.parse(src,{ecmaVersion:'latest'}).body){try{vm.runInContext(src.slice(st.start,st.end),ctx)}catch(e){}}}
  return vm.runInContext('BAL',ctx)}
+/* BAL.a.b[2] / BAL.a["b"] path text → value */
+const BALPATH='BAL(?:\\.[\\w$]+|\\["[^"]+"\\]|\\[\\d+\\])+';
+function valAt(BAL,txt){try{let o=BAL;for(const m of txt.slice(3).matchAll(/\.([\w$]+)|\["([^"]+)"\]|\[(\d+)\]/g))o=o[m[1]!==undefined?m[1]:m[2]!==undefined?m[2]:+m[3]];return o}catch(e){return undefined}}
 /* a typed text and a BAL read in different branches of one if / else / switch are not "beside" each other (two outcomes, two sentences) */
 function sameBranch(sa,sb,na,nb){let i=0;while(i<sa.length&&i<sb.length&&sa[i]===sb[i])i++;const L=sa[i-1];if(!L)return true;
  const ca=sa[i]||na,cb=sb[i]||nb;
@@ -31,37 +42,69 @@ function scan(B){
  const refOf=n=>{const p=[];let c=n;while(c.type==='MemberExpression'){const k=c.computed?(c.property.type==='Literal'?c.property.value:null):c.property.name;if(k==null)return null;p.unshift(k);c=c.object}
   return c.type==='Identifier'&&c.name==='BAL'?p:null};
  const valOf=p=>{try{let o=BAL;for(const k of p){if(o==null)return undefined;o=o[k]}return o}catch(e){return undefined}};
- const sites=[],early=[];const home={eff:'jbaleff.js',road:'jbalroad.js',arc:'jbalroad.js'};
- for(const f of ORDER){const src=fs.readFileSync(path.join(B,f),'utf8');if(!/BAL\.(?:eff|road|arc)/.test(src))continue;
+ /* stat word → the BAL ladders its thresholds live in; 'any' = every threshold shape ("lòng 60+", "dưới 40", "từ 30"), 'range' = only a typed range "80–100"
+    (a lone "Đức từ 40" can be an unrelated gate that happens to share the number, e.g. a road option's own requirement) */
+ const STATS=[[/[Ll]òng|trung thành|thân tín/,['loy'],'any'],[/Đức|đức/,['ducLv'],'range'],[/Sủng|sủng/,['sungLv'],'range'],[/Sức|sức/,['sucLv'],'range'],[/Tâm cơ|tâm cơ/,['wit'],'range'],[/Chủ tin/,['tinLv'],'range']];
+ /* the stat word closest before position i of a text (within 24 chars): the number at i belongs to THAT stat */
+ const nearestStat=(txt,i)=>{const seg=txt.slice(Math.max(0,i-24),i);let best=null,at=-1;for(const [re] of STATS){const g=new RegExp(re.source,'g');let q;while((q=g.exec(seg)))if(q.index>=at){at=q.index;best=re}}return best};
+ /* a cut ref is a number, or a small array / object of numbers (its leaves are what a text may copy) */
+ const leaves=(v,suf)=>{if(isNum(v))return[{suf,v}];if(Array.isArray(v))return v.flatMap((x,i)=>leaves(x,suf+'['+i+']'));if(v&&typeof v==='object')return Object.keys(v).flatMap(k=>leaves(v[k],suf+(/^[A-Za-z_$][\w$]*$/.test(k)?'.'+k:'["'+k+'"]')));return[]};
+ const sites=[],early=[];const home={eff:'jbaleff.js',road:'jbalroad.js',arc:'jbalroad.js'};const homeOf=r=>r.mode==='cut'?'jbal.js':home[r.p[0]];
+ for(const f of ORDER){const src=fs.readFileSync(path.join(B,f),'utf8');
   const ast=acorn.parse(src,{ecmaVersion:'latest',locations:true});
   const strs=[],refs=[];
   (function walk(n,stack){if(!n||typeof n.type!=='string')return;const par=stack[stack.length-1];
    if(n.type==='Literal'&&typeof n.value==='string'&&!(par&&par.type==='Property'&&par.key===n&&!par.computed))strs.push({a:n.start,b:n.end,s:n.value,lit:1,line:n.loc.start.line,stack:stack.slice()});
    else if(n.type==='TemplateElement')strs.push({a:n.start,b:n.end,s:n.value.cooked||'',lit:0,line:n.loc.start.line,stack:stack.slice()});
    else if(n.type==='MemberExpression'&&!(par&&par.type==='MemberExpression'&&par.object===n)){
-    const p=refOf(n);if(p&&p.length>=2&&NS.has(p[0])){const v=valOf(p);if(isNum(v))refs.push({n,p,v,stack:stack.slice()})}}
+    const p=refOf(n);if(p&&p.length>=2&&NS.has(p[0])){const v=valOf(p);if(isNum(v))refs.push({n,p,v,mode:'amt',stack:stack.slice()})}
+    else if(p&&p.length>=2&&(CUT.has(p[0])||(CUT2[p[0]]&&CUT2[p[0]].has(p[1])))){const v=valOf(p);const L=leaves(v,'');if(L.length&&L.length<=14)refs.push({n,p,v,mode:'cut',leaves:L,stack:stack.slice()})}}
    stack.push(n);for(const k in n){if(k==='type'||k==='start'||k==='end'||k==='loc')continue;const c=n[k];if(Array.isArray(c))c.forEach(x=>walk(x,stack));else if(c&&typeof c.type==='string')walk(c,stack)}stack.pop()})(ast,[]);
   /* a BAL.eff / road / arc read outside every function (it runs while the script loads) in a module that loads BEFORE the file that sets it = TDZ crash
      ("Cannot access 'BAL' before initialization"): read it lazily (inside the function, or a `get x(){…}` for a text) */
-  for(const r of refs)if(!r.stack.some(x=>/Function/.test(x.type))&&ORDER.indexOf(f)<ORDER.indexOf(home[r.p[0]]))early.push({f,line:r.n.loc.start.line,key:r.p.join('.')});
+  for(const r of refs)if(!r.stack.some(x=>/Function/.test(x.type))&&ORDER.indexOf(f)<ORDER.indexOf(homeOf(r)))early.push({f,line:r.n.loc.start.line,key:r.p.join('.')});
+  /* STAT-WORD CUTS: a text that says "lòng 60+", "dưới 40", "Đức 80–100" with a stat word of a moved ladder and a threshold-shaped number equal to one of
+     that ladder's values (the rule behind it may sit in another function: watcher(), econLoyalMaid() …) */
+  for(const t of strs){if(t.lit&&!/[^\x00-\x7f]|[A-Za-z]{3}/.test(t.s))continue;
+   const SH=/(?:(?:dưới|từ|trên|đến|ít nhất|nhiều hơn|≥|≤|<|>)\s*(\d+))|(?:(?<![\w$.,])(\d+)\s*(?:\+|trở lên))|(?:(?<![\w$.,])(\d+)\s*[–-]\s*(\d+))/g;let m;
+   while((m=SH.exec(t.s))){const nums=[[m[1],m.index+m[0].lastIndexOf(m[1])],[m[2],m.index],[m[3],m.index],[m[4],m.index+m[0].lastIndexOf(m[4]||'~')]].filter(x=>x[0]!=null&&x[0]!==undefined);
+    const ctx=t.s.slice(Math.max(0,m.index-24),m.index+m[0].length+1);
+    const isRange=m[3]!=null;
+    for(const [num,idx] of nums){const near=nearestStat(t.s,idx);const hit=STATS.filter(([re,keys,shape])=>re.test(ctx)&&(shape==='any'||isRange||process.env.OC_WIDE)&&(isRange||near===re)).flatMap(([re,keys])=>keys.flatMap(k=>{const L=leaves(valOf(k.split('.')),'');return L.filter(l=>Math.abs(l.v)===+num).map(l=>({key:k+l.suf,v:l.v,ref:'BAL.'+k+l.suf}))}));
+     if(hit.length){const uq=[...new Map(hit.map(h=>[h.key,h])).values()];sites.push({f,line:t.line,t,idx:idx+(t.s.slice(idx).search(/\d/)),sg:'',abs:String(num),inv:false,cut:true,cands:uq,amb:uq.length>1,text:t.s.slice(Math.max(0,idx-24),idx+String(num).length+14).replace(/\s+/g,' ')})}}}}
+  /* a tier label that is only a range ("80–100", "60–79") inside a section that names a stat (Thang Đức page): its ends are the ladder's cuts */
+  for(const t of strs){const m=/^\s*(\d+)\s*[–-]\s*(\d+)\s*$/.exec(t.s);if(!m)continue;const ctx=src.slice(Math.max(0,t.a-400),t.a);
+   for(const [num,pos] of [[m[1],t.s.indexOf(m[1])],[m[2],t.s.lastIndexOf(m[2])]]){const hit=STATS.filter(([re,keys,shape])=>shape==='range'&&re.test(ctx)).flatMap(([re,keys])=>keys.flatMap(k=>leaves(valOf(k.split('.')),'').filter(l=>Math.abs(l.v)===+num).map(l=>({key:k+l.suf,v:l.v,ref:'BAL.'+k+l.suf}))));
+    if(hit.length){const uq=[...new Map(hit.map(h=>[h.key,h])).values()];sites.push({f,line:t.line,t,idx:pos,sg:'',abs:String(num),inv:false,cut:true,cands:uq,amb:uq.length>1,text:t.s})}}}
   /* per typed number: every ref it could copy */
   const byTok=new Map();
   for(const r of refs){
    let box=null;for(let i=r.stack.length-1;i>=0;i--){const x=r.stack[i];if(x.type==='ObjectExpression'&&x.end-x.start<=2500){box=x;break}}
    const a=Math.max(box?box.start:0,r.n.start-WIN),b=Math.min(box?box.end:src.length,r.n.end+WIN);
-   const abs=Math.abs(r.v);
+   const absOf=r.mode==='cut'?null:Math.abs(r.v);
    for(const t of strs){if(t.a<a||t.b>b)continue;if(!sameBranch(r.stack,t.stack,r.n,t))continue;if(t.lit&&!/[^\x00-\x7f]|[A-Za-z]{3}/.test(t.s))continue;/* a plain string must hold words (not a CSS / key string); a template piece may be just " (-8)." after a ${} */
     const re=/([+\-−±]?)(?<![\w$.,])(\d+(?:\.\d+)?)(?![\d]|[.,]\d)/g;let m;
-    while((m=re.exec(t.s))){if(+m[2]!==abs)continue;const sg=m[1];const pre=t.s.slice(Math.max(0,m.index-14),m.index);if(!sg&&!/(?:oán|thù|bớt|giảm|mất|thiện cảm|thân|quý|ghen|lòng)\s*$/i.test(pre))continue;/* an unsigned number must follow a relation word */
-     const inv=/(?:oán|thù)\s*$/i.test(t.s.slice(Math.max(0,m.index-12),m.index));const v=inv?-r.v:r.v;
-     if(sg==='+'&&v<0||(sg==='-'||sg==='−')&&v>0)continue;
-     const k=t.a+':'+m.index;const e=byTok.get(k)||{t,idx:m.index,sg,abs:m[2],inv,cands:[]};e.cands.push(r);byTok.set(k,e)}}}
-  for(const e of byTok.values()){const uniq=[...new Map(e.cands.map(r=>[r.n.start,r])).values()];const r=uniq[0];
-   sites.push({f,line:e.t.line,t:e.t,idx:e.idx,sg:e.sg,abs:e.abs,inv:e.inv,cands:uniq.map(x=>({key:x.p.join('.'),v:x.v,ref:src.slice(x.n.start,x.n.end)})),amb:uniq.length>1,
+    while((m=re.exec(t.s))){let cand=null;
+     if(r.mode==='cut'){const lf=r.leaves.find(l=>Math.abs(l.v)===+m[2]);if(!lf)continue;cand=lf;
+      /* the stat word just before the number must be the ladder's own ("Chủ tin 60+" beside BAL.loy.close is another stat) */
+      const before=t.s.slice(Math.max(0,m.index-24),m.index);const sw=STATS.filter(([re])=>re.test(before));if(sw.length&&!sw.some(([re,keys])=>keys.includes(r.p[0])))continue}
+     else{if(+m[2]!==absOf)continue;const sg=m[1];const pre=t.s.slice(Math.max(0,m.index-14),m.index);if(!sg&&!/(?:oán|thù|bớt|giảm|mất|thiện cảm|thân|quý|ghen|lòng)\s*$/i.test(pre))continue;/* an unsigned number must follow a relation word */
+      const inv=/(?:oán|thù)\s*$/i.test(t.s.slice(Math.max(0,m.index-12),m.index));const v=inv?-r.v:r.v;
+      if(sg==='+'&&v<0||(sg==='-'||sg==='−')&&v>0)continue;cand={suf:'',v:r.v,inv}}
+     const sg=m[1];const k=t.a+':'+m.index;const e=byTok.get(k)||{t,idx:m.index,sg,abs:m[2],inv:!!cand.inv,cut:r.mode==='cut',cands:[]};e.cands.push(Object.assign({},r,{suf:cand.suf,cv:cand.v}));byTok.set(k,e)}}}
+  for(const e of byTok.values()){const uniq=[...new Map(e.cands.map(r=>[r.n.start+r.suf,r])).values()];
+   sites.push({f,line:e.t.line,t:e.t,idx:e.idx,sg:e.sg,abs:e.abs,inv:e.inv,cut:e.cut,cands:uniq.map(x=>({key:x.p.join('.')+x.suf,v:x.cv!==undefined?x.cv:x.v,ref:src.slice(x.n.start,x.n.end)+x.suf})),amb:uniq.length>1,
     text:e.t.s.slice(Math.max(0,e.idx-24),e.idx+e.abs.length+14).replace(/\s+/g,' ')})}}
  sites.sort((x,y)=>ORDER.indexOf(x.f)-ORDER.indexOf(y.f)||x.line-y.line);
  sites.early=early;return sites}
-module.exports={scan,loadBAL};
+/* proof helpers (dev/measure/one-core-text-same.js, one-core-dup-same.js): printed(src) turns every ${balSg(expr)} / ${balAb(expr)} back into the words it prints
+   (expr = BAL paths + arithmetic, evaluated with the BAL values), back(src) puts the value back in every BAL.a.b[i] read that is a number */
+function proof(B){const BAL=loadBAL(B);const re=new RegExp(BALPATH,'g');const lit=v=>v<0?`(-${-v})`:String(v);
+ const back=src=>src.replace(re,m=>{const v=valAt(BAL,m);return typeof v==='number'?lit(v):m});
+ const sg=n=>(n>0?'+':n<0?'-':'')+Math.abs(n);
+ const printed=src=>src.replace(/\$\{bal(Sg|Ab)\(((?:[^()]|\([^()]*\))*)\)\}/g,(m,fn,ex)=>{const n=Function('return '+back(ex))();return fn==='Sg'?sg(n):String(Math.abs(n))});
+ return{printed,back,BAL}}
+module.exports={scan,loadBAL,valAt,BALPATH,proof};
 if(require.main===module){
  const B=process.env.OC_BUILD||path.join(ROOT,'dev','build');
  const sites=scan(B);const per={};sites.forEach(s=>per[s.f]=(per[s.f]||0)+1);
@@ -70,5 +113,5 @@ if(require.main===module){
  if(process.argv.includes('--list')){sites.forEach(s=>console.log(row(s)));console.log(JSON.stringify({sites:sites.length,per}));process.exit(0)}
  console.log(JSON.stringify({sites:sites.length,early:early.length,per}));
  if(early.length){console.log('FAIL: a BAL.eff / road / arc read at load time in a module that loads before it (TDZ): read it lazily\n  '+early.join('\n  '));process.exit(1)}
- if(sites.length){console.log('FAIL: a player text types an amount that is a BAL.eff / BAL.road / BAL.arc value read beside it (print the constant: ${balSg(BAL…)} / ${balAb(BAL…)})\n  '+sites.slice(0,+(process.env.OCG_MAX||60)).map(row).join('\n  '));process.exit(1)}
- console.log('PASS: no player text types an amount that lives in BAL.eff / BAL.road / BAL.arc')}
+ if(sites.length){console.log('FAIL: a player text types an amount (BAL.eff / road / arc) or a cut (BAL.loy / ducLv / quyLv / wit / sungLv / tinhLv / tinLv / sucLv / rareLv / tsDanger / cut / …) that lives in BAL (print the constant: ${balSg(BAL…)} / ${balAb(BAL…)})\n  '+sites.slice(0,+(process.env.OCG_MAX||60)).map(row).join('\n  '));process.exit(1)}
+ console.log('PASS: no player text types an amount or a cut that lives in BAL (eff / road / arc amounts, loy / ducLv / quyLv … cuts)')}
