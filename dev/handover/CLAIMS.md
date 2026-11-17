@@ -846,3 +846,5 @@
 | KIT-OPTION-ROWS: iPad 2-option modal narrow columns + 'không được không mất' family + sure option 'thành:' rows (sonnet; brief briefs/s34-kit-option-rows.md) | review/kit-option-rows | MAIN s34 | (opening) | RUNNING | 17/11 16:22Z |
 | world-events-2 LIVE e8b1906f (C-AG; main 7e0250ec → e8b1906f) | review/world-events-2-r1 | C-AG | - | LIVE | 17/11 16:18Z |
 | WORLD link đại hàn → đại phóng cung nhân (opus small; main s34 16:20Z (c); brief briefs/world-ret-phong.md) | review/world-ret-phong | C-AG | session_01UV1SzkMv4WH519U2wy8sQ2 | RUNNING | 17/11 16:25Z |
+| toil-looks5: Vụng A ?v=10 (OD 16:20Z (a)) on 97f57862 (sonnet; brief briefs/s34-toil-looks5.md) | review/toil-looks5 | MAIN s34 | (opening) | RUNNING | 17/11 16:30Z |
+| kit-rank-name: stacked title/rank/name vs one line (OD 16:20Z (b)), whole family (sonnet; brief briefs/s34-kit-rank-name.md) | review/kit-rank-name | MAIN s34 | (opening) | RUNNING | 17/11 16:30Z |
