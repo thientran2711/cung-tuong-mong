@@ -43,7 +43,7 @@ function kitRelSign(d){return d>0?"+"+d:d<0?"−"+Math.abs(d):"0"}
 function kitRelCls(d,kind){return !d?"n":(kind==="bad"?d<0:d>0)?"g":"r"}
 const kr2Num=r=>r.now==null?"—":r.now<0?"−"+Math.abs(r.now):String(r.now);
 /* the number's colour = its meaning (no bars): thiện cảm > 10 green / < −10 red; oán, ghen ≥ 20 red; sủng, ân tình green when > 0; else dim ink */
-const kr2Cls=r=>{const v=r.now;if(v==null)return"n";if(r.kind==="bad")return v>=20?"r":"n";if(r.kind==="pos")return v>0?"g":"n";return v>10?"g":v<-10?"r":"n"};
+const kr2Cls=r=>{const v=r.now;if(v==null)return"n";if(r.kind==="bad")return v>=20?"r":"n";if(r.kind==="pos")return v>0?"g":"n";return v>BAL.quyLv[2]?"g":v<BAL.quyLv[1]?"r":"n"};
 /* KIT §52 kitRel2 — THE relation component, used by EVERY screen (owner 11/16 15:00Z 4.6 / 4.7 / 4.8): TWO column boxes, LEFT = that person → me ("Nàng → ta"),
    RIGHT = me → that person ("Ta → nàng"); a header tab on each box; rows are SHORT words only (Thiện cảm / Oán / Ghen / Sủng / Tin cậy), the number in its meaning colour, NO bars;
    o.week → inside each box the "Hiện nay" and "Tuần này" columns are aligned. cols = [{head, dir:"them"|"me"|"x", rows:[{w, now, d, kind:"good"|"bad"|"pos", gloss?, unk?}]}] (one or two boxes). */

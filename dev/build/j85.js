@@ -48,13 +48,13 @@ function vNormAll(){try{if(!S)return;vNorm(S);(rivals||[]).forEach(vNorm)}catch(
 function artLv(p,k){return ((p&&p.arts)||{})[k]||0}
 function virLv(p,k){return ((p&&p.vir)||{})[k]||0}
 function virtueBonus(p,k){const lv=virLv(p,k);const b={lv};
- if(k==="cong"){b.q=lv*4;b.tier=lv>=5?2:lv>=3?1:0;b.prog=lv>=2?1:0}
+ if(k==="cong"){b.q=lv*4;b.tier=lv>=BAL.cut.virCong[2]?2:lv>=BAL.cut.virCong[1]?1:0;b.prog=lv>=BAL.cut.virCong[0]?1:0}
  if(k==="dung"){b.odds=lv*3;b.sac=(lv>=1?2:0)+(lv>=3?2:0)+(lv>=5?2:0)}
  if(k==="ngon"){b.odds=lv*3;b.slip=lv>=4?2:lv>=2?1:0}
  if(k==="hanh"){b.duc=lv*3;b.month=lv>=3?1:0}
  return b}
 function artBonus(p,k){const lv=artLv(p,k),cg=virtueBonus(p,"cong");const q=cl(Math.round(lv*14+((p&&p.tai)||0)/10+cg.q),0,100);
- let tier=q<25?1:q<45?2:q<65?3:q<85?4:5;tier=Math.min(5,tier+cg.tier);
+ let tier=q<BAL.cut.wkQ[0]?1:q<BAL.cut.wkQ[1]?2:q<BAL.cut.wkQ[2]?3:q<BAL.cut.wkQ[3]?4:5;tier=Math.min(5,tier+cg.tier);
  return{lv,q,tier,odds:lv*4,gift:k==="hoa"?lv*10:k==="theu"?lv*8:0,scheme:k==="ky"?lv*2:0,detect:k==="y"&&lv>=2?20:0,night:k==="vu"?lv*2:k==="y"?lv*1.5:0}}
 function productTier(p,k){return artBonus(p,k).tier}
 function ducOf(p){if(!p)return 50;if(p===S)return S.duc||0;return p.duc==null?50:p.duc}
@@ -77,10 +77,10 @@ regEach(ACT,k=>{const A2=ACT[k];if(!A2||A2.__j85||typeof A2.f!=="function")retur
 (function(){const c0=chooseM;chooseM=function(i){const m=Q[0],c=m&&m.opts&&m.opts[i];return withDeed(c?c.n:null,()=>c0.apply(this,arguments))}})();
 /* ---- what she knows: Đức (true nature) only once she knows the person; Danh is what the palace says ---- */
 function ducKnown(v){if(!v||v===S)return true;try{S.kduc=S.kduc||{};return !!S.kduc[v.id]||trKnown(v).length>0||(v.ev||0)>0||(typeof evG==="function"&&evG(v,S)>0)}catch(e){return false}}
-function ducWord(d){return d>=80?"hiền đức":d>=60?"tử tế":d>=40?"thường":d>=20?"bạc đức":"thất đức"}
+function ducWord(d){return d>=BAL.ducLv.word[3]?"hiền đức":d>=BAL.ducLv.word[2]?"tử tế":d>=BAL.ducLv.word[1]?"thường":d>=BAL.ducLv.word[0]?"bạc đức":"thất đức"}
 function ducLine(v){vNorm(v);if(!ducKnown(v))return `Đức: <span class="ef n">chưa rõ</span> · Danh <b>${v.danh||0}</b> <span class="past">(tiếng ngoài)</span>`;
  const bad=v.dlog.filter(x=>x.d<0),good=v.dlog.filter(x=>x.d>0);const cnt=L=>{const m={};L.forEach(x=>{if(x.n)m[x.n]=(m[x.n]||0)+1});return Object.entries(m).map(([n,c])=>`${ducLow(n)}${c>1?` ×${c}`:""}`).join(", ")};
- return `Đức <b class="${v.duc<40?"r":v.duc>=60?"g":""}">${v.duc}</b> (${ducWord(v.duc)}) · Danh <b>${v.danh||0}</b>${bad.length&&cnt(bad)?`<br><span class="ef r">Đã làm: ${cnt(bad)}</span>`:""}${good.length&&cnt(good)?`<br><span class="ef g">Việc thiện: ${cnt(good)}</span>`:""}`}
+ return `Đức <b class="${v.duc<BAL.ducLv.word[1]?"r":v.duc>=BAL.ducLv.up?"g":""}">${v.duc}</b> (${ducWord(v.duc)}) · Danh <b>${v.danh||0}</b>${bad.length&&cnt(bad)?`<br><span class="ef r">Đã làm: ${cnt(bad)}</span>`:""}${good.length&&cnt(good)?`<br><span class="ef g">Việc thiện: ${cnt(good)}</span>`:""}`}
 (function(){const rc=rvCard;rvCard=function(v,i){let h=rc(v,i);try{if(v.alive)h=h.replace('<div class="pcinfo">',`<div class="pcinfo"><span>${ducLine(v)}</span>`)}catch(e){}return h}})();
 /* ---- Đức in the rules everyone shares ---- */
 (function(){const d0=danger;danger=function(v,t){return d0.apply(this,arguments)+ducDanger(v)}})();
@@ -138,14 +138,14 @@ function v85Month(){if(!S||S.dead)return"";let ev="";const season=S.turn%3===0;
  for(const p of consorts()){if(!p||(p!==S&&(!p.alive||p.out)))continue;vNorm(p);const me=p===S,A=p.arts,f={};const add=(k,n)=>{if(n)f[k]=(f[k]||0)+n};
   if(A.theu>=3)add("bac",A.theu>=5?10:5);if(A.nau>=2)add("suc",A.nau>=4?4:2);if(A.nau>=3)add("an",A.nau>=5?2:1);
   if(season){if(A.thi>=2)add("danh",1);if(A.hoa>=2)add("danh",A.hoa>=4?2:1)}
-  if(A.y>=5)kidsOf(p).forEach(k=>{if(k.hp!=null)k.hp=Math.min(100,k.hp+2)});
+  if(A.y>=5)kidsOf(p).forEach(k=>{if(k.hp!=null)k.hp=Math.min(100,k.hp+BAL.eff.j85.hpV85Month)});
   if(A.cam>=5&&(p.sung||0)>=40&&S.emp&&S.emp.mood>0&&roll(50))S.emp.mood--;
   if(Object.keys(f).length){if(me){apply(f);ev+=`Tài nghệ trong tháng: ${fmt(f)}. `}else ap(p,f)}
   /* Đức: Hạnh bậc 3 keeps it rising; it moves Thái hậu / Hoàng hậu and the servants' Lòng */
   if(virtueBonus(p,"hanh").month&&ducOf(p)<80)withDeed("giữ đức hạnh (Hạnh bậc 3)",()=>me?apply({duc:1}):ap(p,{duc:1}));
-  const d=ducOf(p),q=queenP(),tf=d>=60?1:d<20?-1:0;
+  const d=ducOf(p),q=queenP(),tf=d>=BAL.ducLv.up?1:d<BAL.ducLv.down?-1:0;
   if(tf){if(me){S.th=cl(S.th+tf,-100,100);if(q&&q!==S)S.hh=cl(S.hh+tf,-100,100)}else if(q&&q!==p)p.hh=cl((p.hh||0)+tf,-100,100)}
-  const lf=d>=70?1:d<25?-1:0;if(lf){(p.staff||[]).forEach(s=>{if(s.loyal!=null)s.loyal=cl(s.loyal+lf,0,100)});if(p.maid&&p.maid.loyal!=null)p.maid.loyal=cl(p.maid.loyal+lf,0,100)}
+  const lf=d>=BAL.ducLv.staffUp?1:d<BAL.ducLv.staffDown?-1:0;if(lf){(p.staff||[]).forEach(s=>{if(s.loyal!=null)s.loyal=cl(s.loyal+lf,0,100)});if(p.maid&&p.maid.loyal!=null)p.maid.loyal=cl(p.maid.loyal+lf,0,100)}
   /* (her Thái hậu / Hoàng hậu drift by Đức is written once, with numbers, in the turn-change line of jlogsync — log-sync r1) */
   if(me&&lf)ev+=lf>0?`Đức ${d}: kẻ hầu thêm Lòng (+1). `:`Đức ${d}: kẻ hầu bớt Lòng (-1). `;
   if(!me){npcStudy(p);if(d>=60&&d<85&&(p.bac||0)>=BAL.charity.bac*3&&roll(5))withDeed("phát bạc cứu giúp cung nhân nghèo",()=>ap(p,{bac:-BAL.charity.bac,duc:BAL.charity.duc,danh:BAL.charity.danh}))}}
@@ -162,7 +162,7 @@ function v85Table(k){const V=VIR.find(x=>x.k===k),A=ARTS.find(x=>x.k===k);
 function ducDeedList(){const L=[];for(const k in ACT){const A2=ACT[k];if(A2&&A2.c&&A2.c.duc<0)L.push([A2.n,A2.c.duc])}L.sort((a,b)=>a[1]-b[1]);return L}
 function v85DucPanel(){const d=S.duc,bad=ducDeedList();
  kitModal({kind:"rule",title:"Đức",sub:"Ai cũng có Đức; việc làm thật mới làm Đức lên xuống",
-  sections:[{h:"Thang Đức",tiers:[{k:"80–100",n:"hiền đức",d:"khó bị vu oan, lời tố được tin; Thái hậu, Hoàng hậu +1 mỗi tháng; kẻ hầu Lòng +1 mỗi tháng",c:"g",on:d>=80},{k:"60–79",n:"tử tế",d:"Thái hậu, Hoàng hậu +1 mỗi tháng (từ 70: kẻ hầu Lòng +1)",c:"g",on:d>=60&&d<80},{k:"50–59",n:"đủ Đức",d:"đủ Đức để lên Hoàng hậu (mẹ Thái tử: 40)",on:d>=50&&d<60},{k:"20–49",n:"bạc đức",d:"chưa được lên Hoàng hậu (dưới 25: kẻ hầu Lòng -1 mỗi tháng)",c:"r",on:d>=20&&d<50},{k:"0–19",n:"thất đức",d:"Thái hậu, Hoàng hậu -1 mỗi tháng; kẻ hầu dễ bị mua chuộc",c:"r",on:d<20}]},
+  sections:[{h:"Thang Đức",tiers:[{k:`${balAb(BAL.ducLv.word[3])}–100`,n:"hiền đức",d:"khó bị vu oan, lời tố được tin; Thái hậu, Hoàng hậu +1 mỗi tháng; kẻ hầu Lòng +1 mỗi tháng",c:"g",on:d>=BAL.ducLv.word[3]},{k:`${balAb(BAL.ducLv.up)}–${balAb(BAL.ducLv.word[3]-1)}`,n:"tử tế",d:`Thái hậu, Hoàng hậu +1 mỗi tháng (từ ${balAb(BAL.ducLv.staffUp)}: kẻ hầu Lòng +1)`,c:"g",on:d>=BAL.ducLv.up&&d<BAL.ducLv.word[3]},{k:"50–59",n:"đủ Đức",d:"đủ Đức để lên Hoàng hậu (mẹ Thái tử: 40)",on:d>=50&&d<60},{k:`${balAb(BAL.ducLv.down)}–49`,n:"bạc đức",d:`chưa được lên Hoàng hậu (dưới ${balAb(BAL.ducLv.staffDown)}: kẻ hầu Lòng -1 mỗi tháng)`,c:"r",on:d>=BAL.ducLv.down&&d<50},{k:`0–${balAb(BAL.ducLv.down-1)}`,n:"thất đức",d:"Thái hậu, Hoàng hậu -1 mỗi tháng; kẻ hầu dễ bị mua chuộc",c:"r",on:d<BAL.ducLv.down}]},
    {h:`Cách tính (ngươi: Đức ${d})`,rows:[["Nguy hiểm","(50 − Đức) ÷ 5 cộng vào mức nguy hiểm của người ra tay: "+`${ducDanger(S)>=0?"+":""}${ducDanger(S)}`,"t"],["Tố giác","(Đức − 50) ÷ 5 cộng vào phần thắng của người tố: "+`${ducOdds(S)>=0?"+":""}${ducOdds(S)}`,"t"],["Bị vu oan","kẻ vu oan, tung tin đồn về ngươi được cộng (50 − Đức) ÷ 6: "+`${-ducShield(S)>=0?"+":""}${-ducShield(S)}`,"t"],["Kẻ hầu","(50 − Đức) ÷ 4 cộng vào việc mua chuộc kẻ hầu của ngươi: "+`${ducBetray(S)>=0?"+":""}${ducBetray(S)}`,"t"],["Người khác","Đức của họ chỉ thấy khi ngươi đã biết nết họ hoặc nắm chứng cứ; Danh là tiếng ngoài, kẻ ác giấu mặt vẫn giữ Danh cao đến khi bị lộ","t"]]},
    {h:"Việc làm Đức giảm",rows:bad.map(([n,v])=>[n,`<span class="ef r">Đức ${v}</span>`,"r"])},
    {h:"Việc làm Đức tăng",rows:[["Phát bạc cứu giúp cung nhân",`<span class="ef g">Đức +${BAL.charity.duc}, Danh +${BAL.charity.danh}</span>`,"g"],["Xin tha cho cung nữ bị phạt","<span class=\"ef g\">Đức +3</span>","g"],["Ân xá người ở lãnh cung","<span class=\"ef g\">Đức +2</span>","g"],["Nhịn lời mỉa mai","<span class=\"ef g\">Đức +2</span>","g"],["Học Hạnh","<span class=\"ef g\">Đức +3 mỗi bậc; từ bậc 3 mỗi tháng +1</span>","g"]]}],btn:"Đã hiểu"})}
