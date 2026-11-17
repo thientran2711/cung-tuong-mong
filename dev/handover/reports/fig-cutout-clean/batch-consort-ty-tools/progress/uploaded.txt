@@ -374,7 +374,6 @@ consort-c14-ty5-a26
 consort-c14-ty6-a26
 consort-c14-ty7-a26
 consort-c14-ty8-a26
-<<<<<<< HEAD
 consort-c26-ty4-a26
 consort-c26-ty5-a26
 consort-c26-ty6-a26
@@ -453,5 +452,3 @@ consort-c08-ty8-a36
 consort-c09-ty4-a36
 consort-c27-ty4-a26
 consort-c28-ty5-a26
-=======
->>>>>>> 5d649e20 (report: story-bot REPORT READY line)

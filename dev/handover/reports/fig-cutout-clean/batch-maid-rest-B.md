@@ -216,7 +216,6 @@ maid-m38-tm3-a18	w4v2uHm7EI	O6CzqKMynm	ok (plain-note)
 ## PAUSE (owner 17/11 ~03:55Z via lead): NO new maid-rank files until owner approves the rank standard. Running: repaint redo batches (batch-maid-rest-B-redo.tsv, 52 keys). RESUME POINT after approval = maid-m39-a18 (list line 192).
 ## REDO COMPLETE (17/11): 54 keys repainted in place with each maid's own original look (cold no jewellery), uploaded, fragments W6b-redo-rA..rG.json, sheets rank-sample/redo-r*.jpg. IDLE at resume point maid-m39-a18 (list line 192) until owner approves rank standard. Drift list in batch-maid-rest-B-redo.done.
 ## RESUME (lead GO 17/11 ~05:40Z, rank standard DROPPED: each maid keeps her OWN original look; no plain prompt). CORRECTION: list line 192 = maid-m38-tm4-a18 was NEVER painted (my line count missed it). NEXT = maid-m38-tm4-a18, then maid-m39-a18 (line 193) ... Refs = that maid's OLD CDN figure uploaded 1 per file AFTER daily upload reset ~06:19Z (2,500/day shared); before that only creation ids already held; img/FIGURES-servants.json has 'bg' ids only for m13,m26,m39,m52 base identity (m39 bg = Sytp7xRUb8, sheet xSdWxTojfW). FIRST 16 resumed files: contact sheet <=1100px dark to C s13 (session_011xDdVRGgKNzubDW5gNXGyG) + lead.
-<<<<<<< HEAD
 maid-m38-tm4-a18	TdUakXIVNR	IfiKw3RtvE	ok (resumed, original look)
 maid-m39-a18	Sym2D4rUb8	gOtZMfrSXO	ok
 maid-m39-cold-a18	gOtZM9WSXO	s783TCgl8e	ok
@@ -272,5 +271,3 @@ maid-m39-tm3-a18	UPhAIGvwny	xSXNdykjfW	ok
 - Uploads: ROOT-4 OK arrives as a notification: a26 m44-m47, a26 m48/m50-m52 pending. Reports to lead after each ~24 keys.
 
 ## W6f status (17/11 ~10:45Z): a51 maid consort-tier m30-ty1..m52-ty3 = 69 keys generated+processed (ledger batch-maid-ctier-W6f-ledger.tsv; sheets rank-sample/maid-a51-ctier-*-W6f-before-after.jpg), NOT uploaded, waiting ROOT-4 OK. Work dir /home/user/w6f-work (out/ = finished files; w1_drv.py rows). To upload after OK: ln -s /home/user/w6f-work /tmp/w6d/W6f; DIR=W6f bash tools/W6d/up.sh rows.tsv W6f-1 (fragment replaces keys). Container must stay up until uploaded. a51 ty1 face-ref ids: tools/W6d/refs-a51ty1-W6f.txt.
-=======
->>>>>>> 5d649e20 (report: story-bot REPORT READY line)

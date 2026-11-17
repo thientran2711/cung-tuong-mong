@@ -46,12 +46,9 @@ Needed by: review/cloud-del (jcloud.js, Sổ mây › Ám hiệu page). Waiting 
 1. **Toilette one-page** (≤574 px) on BOTH modes: mirror band on top with her portrait, "Hôm nay" as chips, slots + scrolling bag, sticky buttons (matches every other kg82 page = spread). Reviewer: gain > loss.
 2. **Per-mode modal rules**: kit modals still carry :where(.kv1/.kv2) rules (kpdlg, dawn kpanel, kpsc, kitReward kmtabs/kmbox, kpm-list, kipd2, .art .pcb, toilette, coop timer chip) — breaks KIT §0.0; fold into one rule + dialog rect-compare test.
 Start AFTER design-scale-p2-r1 is live (it owns those files).
-<<<<<<< HEAD
 
 ## (17/11, art worker A1–A3 for Foreman C) KIT REQUEST — painted presentation art landed on the CDN (wire only, nothing wired by the art worker)
 For main's kit keeper (jpres.js KPO_ART / kitFigFx / jfxkit §68.8). All files are on https://ctm-img.victoria-tntt.workers.dev/img/kit/ (alpha WebP):
 1. **KPO_ART[k] origin frames** (9 keys: tt dtq muoi cn nc td ch thd cnv): `img/kit/kpo-<k>-l.webp` (4:3, 1024x768, 133–166 KB) and `img/kit/kpo-<k>-p.webp` (3:4, 768x1024, 105–141 KB). Transparent centre. ALL 18 share the same opening, so code aligns one way: 4:3 opening = x .082–.917, y .154–.867 of the image; 3:4 opening = x .109–.891, y .102–.894. Place the image so its opening equals the dialog rect (frame ≈ dialog × 1.20 wide, ×1.40 tall for 4:3; ×1.28 / ×1.26 for 3:4); pick -l when dialog w>=h, -p otherwise; set data-kpres-art to drop the placeholder rule. Proven in a mock on a real dialog (Fold 755x1000, iPad 1180x820).
 2. **A2 baby sprite**: `img/kit/kpo-baby.webp` 256x256, 18 KB, swaddled bundle, no face, tilted held look → birth moment (replaces lotus-light placeholder).
 3. **A3 red-thread JOIN sheet**: `img/kit/kpo-join-sheet.webp` 1024x576, 4x4 cells of 256x144 (same grid as fx/thread-sheet.webp: cols 4, rows 4, n 16), play forward 0→15 (slack → taut → loop → knot → golden glow + petals), ~7 fps; 87 KB (over the 40 KB sprite budget because of the glow gradients; load on demand). Replaces the reversed snap sheet.
-=======
->>>>>>> 5d649e20 (report: story-bot REPORT READY line)

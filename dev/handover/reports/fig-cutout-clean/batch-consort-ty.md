@@ -34,7 +34,6 @@ QUEUED (resume exactly): (1) older_ty4-8_index.txt lines 126-480 (a26 rest, a36,
 W2b: a26 ty4-8 index lines 1-125 DONE+live (b6,b7,b7b). Next after the pause: older_ty4-8_index.txt lines 126-480.
 W2b NOTE 17/11 ~04:55Z (lead, owner via C s13): all consort art = flowing Han style, wide soft sleeves, never bulkier by rank, NO qipao/stand collar/narrow sleeves/vest, ALWAYS a phi bach (pibo) silk streamer; rank = fabric/embroidery/headdress/jewellery only. Generation PAUSED until the owner approves the v4 standards; prompt.py R2 texts must be rewritten to v4 before resuming.
 W2b LEDGER 17/11 ~05:25Z: key -> new master gen id for every finished file = batch-consort-ty-tools/progress/ids.tsv (381 lines, LAST line per key wins). old_ref upload ids were NOT recorded by W2/agents (lost with their contexts); redo/repaint of a18 = use its own gen id as ref (no upload). From now on agents must log old_ref_id per key in progress/refs.tsv. Face refs (never re-upload): N2HYqYa6D9 bxVgMSX5Y2 dtPf4EDXSL eIyaPEVdqL. No uploads before ~06:19Z.
-<<<<<<< HEAD
 ## HANDOVER W2b -> W2c (written 17/11 ~07:40Z; my context 30% of 1M, START_CTX ~6%)
 Lead = session_011xDdVS87fDNLJMJGzeiVWL; foreman = Foreman C ROOT-3 session_011xDdVQvSf8pvDHnXCRCRsz (send it each sheet path). Both ask: no uploads of new files before foreman OK except what is already OK'd.
 STATE: a18 251/256 live (the old W2 flat gens; owner: keep). a26 ty4-8 index lines 1-125 live (b6,b7,b7b). Older-age queue (OLD design kept): first 16 = c26-c29 a26 ty4-8: 14 LIVE with hd (fragment hd-entries/W2b-older-1.json); 2 pending REDO because the prop was missing: consort-c27-ty4-a26 (idx 211) and consort-c28-ty5-a26 (idx 220) — queued at the end of agent o2 (a48a66f41c85f5008, running at the handover, job file progress/job_o2.txt = index lines 142-201 = c29-ty5 a26 .. c09-ty4 a36, 60 files, 1 gen at a time). Owner rule: EVERY figure holds a prop; prompt.py now always adds it.
@@ -43,5 +42,3 @@ UPLOAD: after o2 reports: put its keys (older.tsv OK rows minus the 2 redo ones 
 NEXT after o2: index lines 202-480 (a36 rest, a51). Voided/not to do: rank-standard v2-v5, t1/t2/t3 wide audit, ty redo, consort drift audits (owner 06:02Z: consort identities are fine). Audit files remain in rank-sample/ for reference only. Not generated ever: c28-c32 ty1 a18 (old figure stays live). ty1-3 of a26/a36/a51 stay as old figures (live); only repaint on explicit order.
 Credits so far this session: ~125 files x 65 + 16 x 65 + o2 in progress.
 W2b FINAL 17/11 ~08:00Z: o2 finished and UPLOADED (62 files, fragment W2b-older-2.json). Older-age live total 76. RESUME at older_ty4-8_index.txt LINE 202. No agent running.
-=======
->>>>>>> 5d649e20 (report: story-bot REPORT READY line)

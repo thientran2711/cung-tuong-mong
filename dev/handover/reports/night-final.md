@@ -380,7 +380,6 @@ Merge of main 64c39ca2: assemble = main's list + jbalcore/jnf − jfe.js; j8 npc
 - Kit changes 32.8a + 43.0a touch every dialog using the live frame / compact option cards: kit reviewer consistency scan.
 - KIT REQUEST (open): flip tassel over the rank line (main's jflip/§48).
 - Co-op parts stay PARKED. Scratch (not in git): /home/user/wt/nf6s (cshots.js, fair*.js, cprof.js, bprof.js).
-<<<<<<< HEAD
 
 ## 13. FIX F1 (worker session_01964izGWAYU1GWVeqgVeUUc; coordinator Foreman D #8 session_01964izEvrHqnQQMQqZ2g5t1) — review/night-final-fix @ f7c54202
 PRIORITY #1 CHECK ('nfOn|COOPW.on|night-final'): OD 6 | ledger 0 | claims 8 | main 15 | review/* 2 → small fix on the existing branch (from review/night-final-r1 @ 72148b66), no rebuild.
@@ -416,5 +415,3 @@ Mid-week switch: solo→room with the tablet waiting (S.nfP) → jfe turns it at
 Still lands after balance-core (branch carries 9abcfa72). origin/main 6c4f21c3 is an ancestor (FF).
 
 SẴN SÀNG KIỂM f7c54202a786d58794f34318e212aa8b91e9a9b1
-=======
->>>>>>> 5d649e20 (report: story-bot REPORT READY line)
