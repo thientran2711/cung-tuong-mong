@@ -700,4 +700,4 @@
 | staff-root r1 PASS review/staff-root-r1 1abbf075 → FOR MAIN | review/staff-root-r1 | B | session_01N1tNP5HB9qHe8rHrMv1JDw | PASS (archived) | 17/11 10:04Z |
 | one-core-dup3 SẴN SÀNG KIỂM b9f8d5cf (= main 9391f9a9 + dup2-r2 + arcs-r2v + roads-r1 + leftovers; ONE landing branch) → review r1 (opus BIG; brief briefs/review-one-core-dup3-r1.md) | review/one-core-dup3-r1 | B | session_01N1tNP3isvTeoV44r7whdk6 | RUNNING | 17/11 10:20Z |
 | coop-thin-b r2 FAIL be599e1e (1 item: B‖D seam, D work on HELD rolled store; probe R7/R7c on review/coop-thin-b-r2 e7c7f16b; CAP 4 = no until fixed) → fix worker #4 (opus; brief briefs/coop-thin-b-4.md) | review/coop-thin-b | B | session_01N1tNP3jpUPBE4NGtW7DxC2 | RUNNING | 17/11 10:22Z |
-| GREET-MEET greeting name rule + AG-MEET (opus; s30 orders 05:26Z/05:29Z; brief briefs/greet-meet.md) | review/greet-meet | C ROOT-5 | (opening) | RUNNING | 17/11 10:40Z |
+| GREET-MEET greeting name rule + AG-MEET (opus; s30 orders 05:26Z/05:29Z; brief briefs/greet-meet.md) | review/greet-meet | C ROOT-5 | session_011xDdVPQEBukEXYnUVs5fDo | RUNNING | 17/11 10:40Z |
