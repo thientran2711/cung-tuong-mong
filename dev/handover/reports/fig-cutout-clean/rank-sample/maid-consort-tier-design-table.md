@@ -63,7 +63,7 @@ Finding behind it: a36 ty2 = one pale sage hanfu, ty3 = one pale grey-blue hanfu
 | m46 | coral | cherry red | iris | beaded hair ribbon | silk handkerchief |
 | m47 | peach | sage green | plum and bamboo | side coil with a fresh flower | jade pendant |
 | m48 | peach | emerald | thorn rose | bun with a long tassel hairpin | book |
-| m49 | peach | celadon | sakura petals | feather pin | folded fan |
+| m49 | peach | misty rose-beige (dusty tan-pink, NOT green; ROOT-3 08:20Z, was celadon: m47 sage, m48 emerald and m49 were three greens in a row) | sakura petals | feather pin | folded fan |
 | m50 | coral | rouge | lotus seed | low chignon with a carved comb | small lantern |
 | m51 | gold | lemon cream | phoenix tail | flower cluster at the temple | teacup |
 | m52 | coral | amber red | gourd vine | high bun with pearl pins | scroll |
@@ -74,4 +74,5 @@ Open question for lead/C: huadian on promoted maid-consorts (ty1-ty3)? Default h
 
 ## AUTHORITATIVE COLOUR OVERRIDES (folded in by lead #6, 17/11 07:58Z, per Foreman C ROOT-3): THIS FILE IS THE ONLY SOURCE; ignore maid-design-render-notes-W4d.md and the OVR dict of tools/ct_design2.py
 Rows above already carry these signature colours: m04 orange-apricot, m09 copper-bronze, m13 strong coral, m14 bright pea-green (yellow-green), m15 indigo (pale indigo-blue at ty1 -> deep indigo-navy at ty3), m16 deep rose-red, m19 cornflower blue, m21 azure-turquoise, m24 ivory white, m25 silver grey, m26 dove grey, m39 peacock teal (silver thread).
-RENDER RULES (from W4d's notes): the signature colour must read CLEARLY even at the pale ty1 tint (never washed out to cream/white), neighbours m+-2 of the same tier stay clearly different in hue, the same maid keeps the same colour across ty1/ty2/ty3 and across a18/a26/a36/a51.
+COLOUR FIX 08:20Z: m49 = misty rose-beige (not celadon); if any m49 file already exists in celadon, redo it.
+RENDER RULES (from W4d notes): the signature colour must read CLEARLY even at the pale ty1 tint (never washed out to cream/white), neighbours m+-2 of the same tier stay clearly different in hue, the same maid keeps the same colour across ty1/ty2/ty3 and across a18/a26/a36/a51.
