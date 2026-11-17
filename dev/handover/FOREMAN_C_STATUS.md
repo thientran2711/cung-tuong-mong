@@ -39,6 +39,16 @@ FOREMAN C-AG = session_01UV1Szh1sUAVP6FUuqZgkYs (main's account; opened as 'ROOT
 - 13:18Z C-AG: WORLD-EVENTS READY 12bca8a2 (dev/research/world-events.md, 11 events, all real-cause, reuse list) → C-AG looked: OK; sent to main s31 for the owner's pick; expert session_01UV1SzhXPVGk7w6iSpeP3QM ARCHIVED.
 - 13:15Z SPLIT (main s31): C-AG = npc-agent only; ART stays on the C account (ROOT-6 → owner opens the art ROOT-7). ROOT-6: do NOT stop for C-AG; keep art + your wake until the art successor exists.
 - 13:14Z NOTE: C-AG runs on main's account (TÀI KHOẢN 7); send_message to the C-account sessions (ROOT-6 011xDdVQNd…, lead #7, W8, vân kiên sample, W-A2, voice reviewer) FAILS 'not found'. ROOT-6: read the line above on your :32 wake, disable trig_017VztNAuLezGyK58FczkjRw and stop. C-account workers: report to ROOT-7 via this STATUS file (ROOT-7 reads it hourly); sessions on that account can only be archived/opened from that account. REQUEST main s31: tell the owner the active Foreman C chat = ROOT-7; if the C-account art workers (lead #7, W8, vân kiên, voice W-A2 + reviewer) still need a live foreman on their account, say so.
+## HANDOVER C-AG (session_01UV1Szh1sUAVP6FUuqZgkYs) → C-AG #2, 15:34Z 17/11
+Why: context 42 % (START ~6 % → limit 31 %). Takeover prompt: dev/handover/TAKEOVER_FOREMAN_C_AG2.md. Old wake trig_01EuVPMGwysiMDcbgNmuqT8q DISABLED.
+LIVE: world-events part 1 = main abe056c3 (FF'd 15:00Z).
+RUNNING (all on main's account):
+- WORLD-EVENTS part 2: reviewer opus session_01UV1SzjLZvCQHBpfo4LK15L (review/world-events-2-r1 of ee9f5396; brief briefs/review-world-events-2-r1.md) → on PASS: FF main, archive reviewer + worker session_01UV1Szm9sHk4A9qggdUgHhF (idle for fixes).
+- AG-ALL base (review/ag-all): r1 FAIL (reports/review-ag-all-r1.md) → fixer A2 opus session_01UV1SziAW9nRRmuRJXDn5N6 (F2–F5 + weight pass; sends "AG-ALL FIX DONE <sha>" to C-AG + 2b).
+- AG-ALL-2 (review/ag-all-2, brief briefs/ag-all-2bc.md): 2b opus session_01UV1SzhW8pwS5jUZNP7cmH8 = branch-tip owner + assembler (§17.5 leftovers, G4–G12 khắc parity/timing/consequences/toilette, + s33 15:30Z: per-khắc event re-decide w/ Ngự hoa viên test, minigame parity one odds roll, parity table; rebases on A2 fix); 2c2 opus session_01UV1SzhfokEWfWFiRbetFJT (NO LIES news, perf proof of jagknow, errand tuning). 2c DONE 4b82a0ca (TIN BÁO API live on branch; main's UI worker session_01UV1Szjhrq5VUWD5Haiagxz builds review/tinbao-ui FROM 4b82a0ca — API changes must be sent to it).
+- NEXT when 2b says SẴN SÀNG KIỂM: ONE combined BIG opus review r2 of review/ag-all-2 (includes A2's base fixes); copy briefs/review-ag-all-r1.md → review-ag-all-2-r2.md, add: r1 faults all fixed, parity table, no-lies, per-khắc timing, perf CPU×4, TIN BÁO API unchanged or UI worker told.
+OPEN NOTES: kit-keeper family note sent to s33 ('không được không mất' ×20; sure options without leading word). Handover branch saw one non-FF rewrite today (A's commit lost once) — verify your lines after pushes.
+
 ## HANDOVER (Foreman C ROOT-6 session_011xDdVQNdyTACuGN42yEBQZ → ROOT-7, ~13:05Z 17/11)
 Why: context ~32% (START ~8% → limit 33%). OWNER now writes in the ROOT-6 chat (old ROOT chat session_011xDdVSwTjDmQyniASgFZyk relayed earlier lines). Read the ROOT-6 log lines below (12:16Z–13:04Z): they hold her verbatim lines of 12:19Z–13:04Z.
 OPEN WITH THE OWNER:
