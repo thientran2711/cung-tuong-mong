@@ -766,3 +766,4 @@
 =======
 >>>>>>> 19ad1764 (reports/one-core-dup: §6 part 2 (review/one-core-dup2 0ffa37bf))
 | REVIEW kit-rcol-top r1 of 44ac9cda (perf re-run, trial-merge morechip) | review/kit-rcol-top-r1 | MAIN s31 | session_01UV1Szgi8dLemLxMTeHcsgj | RUNNING | 17/11 12:30Z |
+| MISSING TAIL of consort-tier redraw set (a51 ty1 m25-m26, ty2/ty3 m01-m26; keep path img/_keep/maid-ty-redraw only; owner GO 17/11 12:31Z; sonnet W4g opened by lead #7) | review/fig-cutout-clean | C | session_011xDdVPT851mSQjBmLn4Sw1 | RUNNING | 17/11 12:34Z |
