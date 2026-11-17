@@ -11,6 +11,9 @@ Two tables describe one face picture: img/toil-fit2.json (mouth, used to seat th
 - Close-up: portrait patch no longer replaces the figure (it was a hard cut line mid-body): figure stays under it, portrait edges feather; card+figure fit Fold 755x1000, cover 412x1058, iPad 1180x820 / 1366x1024, 390x844 (geometry checked: card bottom < button top < viewport).
 ## Tests
 dev/test/anchor-table.py (offline, all 5992 pictures: PASS 0 bad); dev/test/anchor-sheet.js (contact sheet through the game's own transform; 128 identity x age faces looked at: brows/cheeks/lips on the face, 0 misses; 60 random replaced sets looked at old vs new); mk-reveal.js; podium.js; quickcheck (see sha line below). Shots Fold + iPad of the reveal looked at.
+## Add-on (s29): her picked colours all day + vụng
+- Scan dev/test/toil-allday.js (vụng / diêm dúa / đẹp day, every tab, Fold): every picture of her (portrait, figure, mini) has the makeup layer next to it (0 bad of ~25 renders per look). The render path (kitFxLayers -> toilFaceLayer, day record S.toilette.look/col) is whole. The clean face she saw after vụng = the layer was drawn from displaced anchors (20 % of a18 faces, fixed above), plus 'vừa' (middle score) has NO layer by design.
+- vụng samples from the real renderer, same face đẹp | diêm dúa | vụng: CDN img/_review/toil-vung/toil-vung-1.png, -2.png (wipe: cdn_sync.py --wipe-review toil-vung). vụng is subtle (one brow a bit heavy, lip slightly off, uneven blush), no new art.
 ## COORDINATOR MUST, ON PASS (data lives on the CDN, not in git)
 `python3 dev/site/cdn_sync.py img/mk-fit img/toil-fit2.json` from a worktree that has img/mk-fit + img/toil-fit2.json (copy from dev/art/mkfit/*.json and dev/art/toil-fit2.json; the 0-byte-risk files are only the consort-*/player-look* ones). Until pushed, live code reads the old tables (new code + old data still works; old code + new data also fine). Old CDN copies: pull first if a rollback is wanted.
 ## CLAIMS row
