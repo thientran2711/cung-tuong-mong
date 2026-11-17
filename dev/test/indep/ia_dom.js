@@ -15,7 +15,7 @@ const HOOK=fs.readFileSync(path.join(__dirname,'ia_hook.js'),'utf8');
  const inject=async()=>{await p.evaluate(HOOK)};await inject();
  const clear=async(keepCard)=>{await p.evaluate(keep=>{for(let r=0;r<6;r++){const dg=document.getElementById('dawn-go');if(dg&&dg.offsetParent)dg.click();const ov=document.getElementById('ov');
    if(ov&&!ov.hidden){const ok=ov.querySelector('#mgok')||ov.querySelector('#mgskip');if(ok)ok.click();else{const bs=ov.querySelectorAll('button');if(bs.length)bs[bs.length-1].click()}}
-   if(keep)break;let n=0;while(Q.length&&n++<20){const m=Q[0];try{if(m.opts&&m.opts.length)chooseM(m.opts.length-1);else closeModal()}catch(e){Q.shift()}}}try{showModal()}catch(e){}},!!keepCard);await p.waitForTimeout(250)};
+   if(keep)break;let n=0;while(Q.length&&n++<20){const m=Q[0];try{if(m.opts&&m.opts.length)chooseM((L=>L.length?L[L.length-1]:0)(m.opts.map((c,i)=>c.off?-1:i).filter(i=>i>=0)));else closeModal()}catch(e){Q.shift()}}}try{showModal()}catch(e){}},!!keepCard);await p.waitForTimeout(250)};
  await clear();
  for(let i=0;i<+NN;i++){
   const r=Math.random();let what="";

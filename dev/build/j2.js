@@ -119,9 +119,10 @@ function goTo(k){if(S.dead||Q.length||S.out)return;popIdx=null;popMsg="";
  if(k==="tn"){if(S.thDead)msg="Đức Thọ cung vắng lặng từ ngày Thái hậu băng hà.";else ppl.push({kind:"th",name:"Thái hậu",ini:"Từ",col:"#c9a0e0",info:`Thái hậu · lòng ${S.th}`})}
  for(const v of here){if(v.ill)v.ill.known=true;if(v.queen&&qOn())ppl.push({...rp(v),kind:"hh",name:`Hoàng hậu ${v.name}`,ini:"Phượng"});else ppl.push(rp(v))}
  if(P.v&&!here.includes(P.v)&&P.v.alive&&!P.v.out){ppl.push({kind:"chest",ref:P.v,name:`Rương của ${P.v.name}`,ini:"Rương",col:"#8a6a4a",info:"Chủ nhân đi vắng"});msg=`${P.v.name} không có ở cung.`}
- if(k==="tyv")ppl.push({kind:"ty",name:"Thái y Trương",ini:"Y",col:"#8fc38a",info:"Thái y viện"});
- if(k==="ksp")ppl.push({kind:"ksp",name:"Tổng quản",ini:"Hoạn",col:"#b9a48a",info:"Giữ thẻ bài các phi tần"});
- if(k==="lc"){const f=rivals.filter(v=>v.alive&&v.out);(f.length?f.slice(0,3):[null]).forEach(v=>ppl.push(v?{kind:"fallen",ref:v,name:v.name,ini:v.name.split(" ").pop()[0],col:"#6a7a8a",info:"Phế phi"}:{kind:"fallen",name:"Phế phi họ Lý",ini:"Lý",col:"#6a7a8a",info:"Phế phi"}))}
+ if(k==="tyv")ppl.push({kind:"ty",name:(S.court&&S.court.ty&&S.court.ty.name)||"Thái y Trương",ini:"Y",col:"#8fc38a",info:"Thái y viện"});
+ if(k==="ksp")ppl.push({kind:"ksp",name:(S.court&&S.court.ksp&&S.court.ksp.name)||"Tổng quản",ini:"Hoạn",col:"#b9a48a",info:"Giữ thẻ bài các phi tần"});
+ /* D4 (owner OD:L641): Phế phi họ Lý STAYS beside fallen rivals until she dies; then the post is empty until a real person arrives */
+ if(k==="lc")lcPeople("Phế phi").forEach(x=>ppl.push(x));
  if(!msg)msg=ppl.length?`Ở đây có ${ppl.length} người.`:"Không gặp ai.";
  S.visit={k,people:ppl,talked:false,tk:{},msg};log(`Đến ${P.n}.`);render()}
 function curPeople(){return S.visit?S.visit.people:[]}
@@ -172,7 +173,7 @@ function talk(oi){if(popIdx==null||!S.visit||S.visit.talked===true||S.dead||Q.le
  if(a.open){a.open();render();return}
  S.visit.tk[popIdx]=1;const s0=S.logSeq||0;const ok=runOpt(a);
  /* two forms from one line (jvoice kGL / kLitLog): the Sổ ghi line and this card note carry the literary sentence, the result card only the facts */
- let lit="";try{lit=kLitLog(s0,kOutcome(p.kind,ok))}catch(e){}
+ let lit="";try{lit=kLitLog(s0,kOutcome(p.kind,ok,p))}catch(e){}
  popMsg=`${a.n}: ${ok?'<span class="g">thành</span>':'<span class="r">hỏng</span>'}. ${lit?kGL("",lit):""}${fmt(ok?a.w:a.l)}`;render()}
 
 /* arts */
