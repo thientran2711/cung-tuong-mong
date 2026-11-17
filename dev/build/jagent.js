@@ -189,8 +189,9 @@ function agHereKh(){try{const R=agRec();if(!R)return null;const kh=agKh();return
 /* every player witnesses, a consort or a servant-start (OD:L1386 one world): a servant stands in the same places; her reactions = the ones that fit her (agReact: no joining a consort's deed) */
 function agWatch(){if(!agOn()||S.out)return;const H=agHereKh();if(!H)return;const z=agZ();let n=0;
  for(const p of z.pend.slice()){if(p.key!==H.R.key)continue;{const e=H.R.P[p.id];p.gone=!e||!e[p.kh]||e[p.kh][1]!=="ag_"+p.k?1:0}/* a card / told deed moved her since: the act did not happen */
-  if(p.kh<H.kh){agLand(p);continue}if(p.gone)continue;
-  if(p.kh!==H.kh||p.pl!==H.k||p.seen)continue;const v=RV(p.vid);if(!v||!v.alive)continue;if(H.k==="home"&&sameHouse(S,v)&&p.t!=="me"){continue}
+  /* G9: a deed lasts its khắc window [kh, k1] (k1 = kh + its khắc cost − 1); it lands when her clock passes its END, she can walk in on it while it lasts */
+  if(agK1(p)<H.kh){agLand(p);continue}if(p.gone)continue;
+  if(p.kh>H.kh||p.pl!==H.k||p.seen)continue;const v=RV(p.vid);if(!v||!v.alive)continue;if(H.k==="home"&&sameHouse(S,v)&&p.t!=="me"){continue}
   p.seen=1;AG.stat.wit++;n++;agScene(p,v)}
  if(n)try{showModal()}catch(e){}}
 function agPlaceTxt(k){try{return placeName(k)}catch(e){return k}}
@@ -202,7 +203,11 @@ function agScene(p,v){const t=agPerson(p.t);const W=agPlaceTxt(p.pl);
 const AGJOIN={thTH:{n:"Thỉnh an Thái hậu",x:()=>{const g=BAL.tw.g.thTH;return `thành: Thái hậu +${g[0]} · Danh +${g[1]} · Đức +${g[2]} · hỏng: Thái hậu ${g[3]}`}},
  thHH:{n:"Thỉnh an Hoàng hậu",x:()=>{const g=BAL.tw.g.thHH;return `thành: Hoàng hậu +${g[0]} · Danh +${g[1]} · Đức +${g[2]} · hỏng: Hoàng hậu ${g[3]}`}},
  pray:{n:"Cầu tự",x:()=>"thành: lòng thành cầu tự, dễ có thai hơn"},ksp:{n:"Đút lót Kính sự phòng",x:()=>"thành: thẻ bài của ngươi dễ được lật hơn"}};
-function agHearO(){return od(BAL.ag.wit.hear+(S.mat||0)*BAL.ag.wit.mat)}
+/* the odds to overhear a deed: ONE function for her and every NPC who stands there (G9 agSeeNpc) */
+function agHearOf(a){return odA(a,BAL.ag.wit.hear+((a===S?S.mat:a.mat)||0)*BAL.ag.wit.mat)}
+function agHearO(){return agHearOf(S)}
+/* the last khắc of a deed (G9): planned deeds carry k1; older ones (saves before AG-ALL-2) last one khắc */
+function agK1(p){return p&&p.k1!=null?p.k1:p?p.kh:0}
 /* a reaction that takes her time costs BAL.ag.kh khắc, like the player's talk options (j15 pbtn): no khắc left → the kit greyed option (KIT §84 kitOff) with its reason */
 function agKhLock(){const k=BAL.ag.kh;return typeof can==="function"&&!can(k)?(typeof whyTime==="function"&&whyTime(k)||"hết khắc buổi này"):""}
 function agSpendKh(){const k=BAL.ag.kh;if(!can(k))return false;spend(k);return true}
@@ -249,4 +254,4 @@ function agSeeHer(k,t,joined){if(!agOn())return;const H=agHereKh();if(!H)return;
  /* labels of the ledger activities (dev table, tai mắt lines) */
  try{for(const k in AGSELF)ACT95["ag_"+k]=AGSELF[k].act;for(const k in AGACTW)ACT95["ag_"+k]=AGACTW[k];ACT95.ag_effort="tìm cách được Hoàng thượng để mắt"}catch(e){}
 })();
-Object.assign(window,{agTick,agFlush,agOn,agNeeds,agOpts,agOrg,agZ,agPlan,agWatch,AG});
+Object.assign(window,{agK1,agHearOf,agTick,agFlush,agOn,agNeeds,agOpts,agOrg,agZ,agPlan,agWatch,AG});

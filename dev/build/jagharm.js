@@ -129,7 +129,7 @@ window.haStealTry=haStealTry;
 
 /* ---------- §4 AG-HAP: the '!' list of this buổi from the agents' planned deeds ---------- */
 function haHapDeeds(){const z=agZ();const key=agKey();const kh0=agKh();const W=new Set(haB().hap.wit);const out=[];
- for(const p of z.pend){if(p.key!==key||p.kh<kh0||p.gone||p.drop||p.seen)continue;const t=agPerson(p.t);
+ for(const p of z.pend){if(p.key!==key||agK1(p)<kh0||p.gone||p.drop||p.seen)continue;const t=agPerson(p.t);
   const fav=t===S&&["help","visit","follow","warn"].includes(p.k);/* a kindness aimed at her: the doer comes with a request (q72) */
   if(!fav&&!W.has(p.k))continue;
   if(haB().hap.pub[p.k]&&!haB().hap.pub[p.k].includes(p.pl))continue;/* a show is seen only in its public place */

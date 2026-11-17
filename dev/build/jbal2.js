@@ -900,3 +900,13 @@ BAL.ag.give={b:1,ref:40,div:60,anDiv:200,lo:.4,hi:2,tr:{datinh:1.2,lanhlung:.7},
 Object.assign(BAL.ag.cx2,{maidTalk:{w:{"maid":6},below:70,g:{safe:2}},maidSpy:{o:40,ld:3,l:{"maid":-5},g:{spite:3,safe:2}},bribeSrv:{g:{safe:3,spite:2}},plantSrv:{cost:40,g:{spite:3,safe:1}}});
 /* AG-ALL-2 emotion cards (jemoact eaNpcWeek): an NPC acts on a feeling with the old % × (feeling strength / actV), at most × max */
 BAL.ag.emo2={max:2};
+
+/* AG-ALL-2 part 2b — G8 KHẮC PARITY + G9 TIMING (jagday.js block "G8/G9"). An NPC's buổi has the player's khắc budget (BAL.time.khac):
+   after her planned deed she may do more, one after another, while khắc are left — each deed costs the PLAYER's khắc for that act
+   (agKhC: talk BAL.time.cost.talk, harm act BAL.time.cost.harm, a maid's SRVA k, the Empress BAL.ag.hh.kh, any other card = cardCost of its own
+   cost, j2) plus the walk between places (travel, j9). on = 0 → one deed per buổi as before.
+   rest   × BAL.ag.routine = the weight of "keep my schedule for the rest of the buổi" when she weighs another deed (needs × BAL.ag.needW against it)
+   max    most extra deeds of a consort in one buổi after her planned one; maxX the same for the Emperor / Thái hậu / staff (perf)
+   see    NPCs who stand where a deed happens, in its khắc, react like the player (agSeeNpc): w = weights ignore / hear / join / mediate; hear odds =
+          BAL.ag.wit.hear + Tai mắt × BAL.ag.wit.mat (one function agHearOf for her and them), a heard harm deed = 1 evidence (the player's rule) */
+Object.assign(BAL.ag,{kh2:{on:1,rest:1,max:3,maxX:1,see:{on:1,w:{ignore:3,hear:1,join:1,mediate:1},ev:1}}});
