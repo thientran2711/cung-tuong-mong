@@ -50,11 +50,14 @@ def standalone(im, info, n, out):
 
 def save(im, d, info, n, out):
     res, rect = remove(im, d)
-    res.save(f'{out}/{n}.webp', 'WEBP', quality=int(os.environ.get('Q', 95)), method=6)   # fig/hd/tn: lossy q98 (ROOT-9 pending) (ROOT-9 20:00Z)
+    res.save(f'{out}/{n}.webp', 'WEBP', quality=int(os.environ.get('Q', 98)), method=6)   # fig/hd/tn: lossy q95 (ROOT-9 20:00Z)
     A = np.asarray(im).astype(int); B = np.asarray(Image.open(f'{out}/{n}.webp').convert('RGBA')).astype(int)
     mk = d['mask']; diff = np.abs(A - B)[..., :3].mean(-1)
     outside = ~mk; vis = A[..., 3] > 0
-    info.update(status='clean', box=list(d['box']), anchor=list(d['anchor']), peak=d['peak'], rect=list(rect),
+    import io as _io; bb = _io.BytesIO(); im.save(bb, 'WEBP', quality=int(os.environ.get('Q', 98)), method=6)
+    C = np.asarray(Image.open(_io.BytesIO(bb.getvalue())).convert('RGBA')).astype(int)
+    base = round(float(np.abs(A - C)[..., :3].mean(-1)[outside & vis].mean()), 3)
+    info.update(status='clean', box=list(d['box']), anchor=list(d['anchor']), peak=d['peak'], rect=list(rect), base_mad=base,
                 changed=int(mk.sum()), out_mad=round(float(diff[outside & vis].mean()), 3), size_ok=A.shape == B.shape, size=list(im.size))
 
 KR = dict(fig=(0.45, 1.10, 0.01), hd=(0.9, 2.2, 0.02), tn=(0.15, 0.70, 0.01))
