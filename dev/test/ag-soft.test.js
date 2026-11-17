@@ -5,7 +5,7 @@
    2 agTry at the cap fails sometimes (nothing is 100 %) and counts soft fails; below the cap a failure is not soft
    3 every ag-all-2 site: forced failure at the cap = no consequence, below the cap = the normal consequence
      p3Run (NPC deck card: cost paid, l skipped, fail() skipped, BẠI line) · stf2Do (servant deed l skipped) · amDo (maid tea: no lòng loss)
-     · pillowDo (no Sủng / Danh loss for the speaker) · jworld yến "Dâng một khúc đàn" (no Danh loss, BẠI line in the log)
+     · pillowDo (no Sủng / Danh loss for the speaker) · runOpt (her card, r2 A3) · threatServ + j70 accomplice (r2 C5) · jworld yến "Dâng một khúc đàn" (no Danh loss, BẠI line in the log)
    4 no page errors */
 const {chromium}=require('playwright');const URL0=process.argv[2]||'dev/index.html';const URL=/^(https?|file):/.test(URL0)?URL0:'file://'+require('path').resolve(URL0);
 const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+m+(x!==undefined?' '+JSON.stringify(x):''))};
@@ -31,7 +31,24 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
   /* pillowDo (NPC speaker) */
   const a=v,tg=liveRivals(true).find(z=>z!==v&&z.alive&&!z.out);a.sung=50;a.danh=50;let pr=fail(()=>pillowDo(a,tg,99));o.pilSoft={pr,sung:a.sung,danh:a.danh};
   pr=fail(()=>pillowDo(a,tg,50));o.pilHard={pr,sung:a.sung};
+  /* runOpt (her deck card / option: same soft fail as p3Run, review ag-all-2 r2 A3) */
+  {S.suc=80;let fl2=0;const C2=o2=>({n:"Thử việc",o:o2,w:{suc:5},l:{suc:-20},fail:()=>{fl2++}});fail(()=>runOpt(C2(95)));o.roSoft={suc:S.suc,fl:fl2};
+   S.suc=80;fail(()=>runOpt(C2(50)));o.roHard={suc:S.suc,fl:fl2};const ok100=runOpt(C2(100));o.ro100=ok100}
+  /* threatServ (Dọa tố, review ag-all-2 r2 C5): cap = soft (no tell, no fear); below = refusal + her sent servant's fear */
+  try{const own=liveRivals(true).find(z=>z.alive&&!z.out&&(z.staff||[]).length);const sv=own&&own.staff[0];if(!(S.staff||[]).length)S.staff=[mkServ("maid")];/* a low-rank start has none beside the close maid */const snt=typeof bestSent==="function"?bestSent(S):null;
+   if(sv&&snt){sv.lover=1;sv.spyFor=null;const T0=window.tmOdds,P0=window.p3CnvOn;window.p3CnvOn=()=>false;/* the base j10 roll (the NPC-maid dilemma path has its own stf2Do soft fail) */const L60=()=>S.staff.forEach(x=>x.loyal=60),sum=()=>S.staff.reduce((a,x)=>a+(x.loyal||0),0)/S.staff.length;/* bestSent re-picks by lòng: measure the household */
+     try{window.tmOdds=()=>BAL.odds.hi;L60();const t1=fail(()=>threatServ(S,sv));o.thSoft={sp:sv.spyFor,loy:sum(),t:t1};
+     window.tmOdds=()=>30;L60();fail(()=>threatServ(S,sv));o.thHard={sp:sv.spyFor,loy:sum()}}finally{window.tmOdds=T0;window.p3CnvOn=P0}}else o.thSkip=1}catch(e){o.thErr=String(e)}
+  /* j70 accomplice (tsv route, C5): cap = soft (the target hears nothing); below = refusal told, the target gains evidence */
+  try{let mk=null,rid=null;for(const k in M70){const r=M70[k].R.find(x=>x.acc==="tsv");if(r){mk=k;rid=r.id;break}}
+   const tg=liveRivals(true).find(z=>z.alive&&!z.out&&(z.staff||[]).length);if(mk&&tg){S.bac=500;const T0=window.tmOdds;try{window.tmOdds=()=>BAL.odds.hi;const e0=evG(tg,S);const p1=fail(()=>newPlot70(S,tg,mk,rid,"own"));o.acSoft={end:p1&&p1.end,pend:p1&&p1.pend,ev:evG(tg,S)-e0};
+     window.tmOdds=()=>30;const e1=evG(tg,S);const p2=fail(()=>newPlot70(S,tg,mk,rid,"own"));o.acHard={end:p2&&p2.end,pend:p2&&p2.pend,ev:evG(tg,S)-e1}}finally{window.tmOdds=T0}}else o.acSkip=1}catch(e){o.acErr=String(e)}
   return o});
+ ok(r.roSoft.suc===80&&r.roSoft.fl===0,'3 runOpt (her card) soft at the cap: no l, no fail(), as p3Run',r.roSoft);
+ ok(r.roHard.suc===60&&r.roHard.fl===1,'3 runOpt below cap: l + fail()',r.roHard);
+ ok(r.ro100===true,'3 runOpt o ≥ 100 still no roll',r.ro100);
+ ok(r.thSkip||(!r.thSoft.sp&&r.thSoft.loy===60&&r.thHard.loy<60&&!r.thHard.sp),'3 threatServ: soft at the cap (no fear), below: refusal + sent servant fear (BAL.ag.bt.fear)',{s:r.thSoft,h:r.thHard,e:r.thErr});
+ ok(r.acSkip||(r.acSoft.end==="refused"&&!r.acSoft.pend&&r.acSoft.ev===0&&r.acHard.end==="refused"&&r.acHard.pend==="ownfail"&&r.acHard.ev>0),'3 j70 accomplice: soft at the cap (nothing told), below: refusal told + evidence',{s:r.acSoft,h:r.acHard,e:r.acErr});
  ok(r.cap[0]===r.cap[4]&&r.cap[1]===r.cap[4]&&r.cap[2]===r.cap[5]&&r.cap[3]===r.cap[5],'1 agOdd caps at BAL.odds.hi / floors at BAL.odds.lo',r.cap);
  ok(r.soft[0]&&r.soft[1]&&!r.soft[2]&&!r.soft[3],'1 agSoft: raw ≥ hi soft, below not',r.soft);
  ok(r.txt[0]&&r.txt[1],'1 BẠI line from BAL.odds.softFail (one core)');

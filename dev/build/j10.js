@@ -52,8 +52,10 @@ function servCaught(p,s){if(!s)return"";if(roll(30)){p.staff.splice(p.staff.inde
 /* acts on servants (same functions for NPC mistresses) */
 function threatServ(a,s){const o=ownerOf(s);if(!o||!s.lover)return"";/* 2f2: still the person's choice; fear weighs in (BAL.ag.know.tm.threat) */
  if(typeof tmOdds!=="function"){s.spyFor=key(a);return `${NMc(a)} dọa tố chuyện đối thực của ${s.name}; hắn/nàng sợ hãi, thành tai mắt. `}
- if(roll(agOdd(tmOdds(a,s)+BAL.ag.know.tm.threat))){s.spyFor=key(a);return `${NMc(a)} dọa tố chuyện đối thực của ${s.name}; hắn/nàng sợ hãi, thành tai mắt. `}const t=tmRefuse(a,s);
- return `${NMc(a)} dọa tố chuyện đối thực của ${s.name}; hắn/nàng không chịu làm tai mắt${t?", còn bẩm lại với chủ":""}. `}
+ const od=tmOdds(a,s)+BAL.ag.know.tm.threat;if(agTry(od)){s.spyFor=key(a);return `${NMc(a)} dọa tố chuyện đối thực của ${s.name}; hắn/nàng sợ hãi, thành tai mắt. `}
+ if(agSoft(od))return a===S?agSoftTxt(S)+" ":"";/* review ag-all-2 r2 C5: soft fail at the cap (OD ~17:35Z), as tmAsk */
+ const t=tmRefuse(a,s);const f=typeof tmFear==="function"?tmFear(a,1):"";/* failure costs both ways (OD ~17:00Z): her master hears, her sent servant fears (BAL.ag.bt.fear) */
+ return `${NMc(a)} dọa tố chuyện đối thực của ${s.name}; hắn/nàng không chịu làm tai mắt${t?", còn bẩm lại với chủ":""}.${f?" "+f+".":""} `}
 let PLANT_OK=0;/* the last plantServ landed (cx2:plantSrv reads it: a refusal returns a line too) */
 function plantServ(a,t){PLANT_OK=0;if(!a.staff)a.staff=[];const s=bestSent(a);if(!s||a.bac<BAL.house.plantBac)return"";/* review ag-all-2 r2 A5 (OD 17/11 ~17:10Z (1)): the bạc only when Nội vụ phủ takes the servant; she must hold it to try */if(roll(odA(a,40+a.tamco/4+nq(s,"sharp",BAL.net.k.poachSharp)))){ap(a,{bac:-BAL.house.plantBac});PLANT_OK=1;a.staff.splice(a.staff.indexOf(s),1);s.spyFor=key(a);(t.staff=t.staff||[]).push(s);/* a full household: the plant takes the place of its least trusted servant (one table, review/staff-root) */capTrim(t,s);return `${NMc(a)} cài ${s.name} vào cung ${NM(t)} làm tai mắt. `}evA(t,a,BAL.eff.j10.evPlantServ);return `Nội vụ phủ thấy lạ, ${NM(t)} không nhận ${s.name}. `}
 function servMonth(){let ev="";capSweep();for(const p of consorts()){if(!p.staff)p.staff=[];
