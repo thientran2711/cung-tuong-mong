@@ -176,6 +176,8 @@ ilGuard("eitPilfer","pil");ilGuard("rivalsMonth",e=>e.t?"evid":"conf",()=>ilPeop
 /* weekly hook (after every other weekly rule) + census at load (old saves: every piece gets its id, nothing to move) */
 (function(){const e0=endTurn;endTurn=function(){const w0=S&&wk();const r=e0.apply(this,arguments);try{if(S&&!S.dead&&wk()!==w0){const q=Q.length;ilWeek();if(Q.length>q){showModal();render()}}}catch(e){console.error("ilWeek",e)}return r}})();
 setTimeout(()=>{try{if(typeof S!=="undefined"&&S&&!S.dead&&(!S.il||!S.il.at))ilCensus()}catch(e){}},0);
+/* a new life (start / co-op rebuild): census at once, so a piece that leaves her chest before the first week is known (co-op res log) */
+(function(){if(typeof start!=="function")return;const s0=start;start=function(){const r=s0.apply(this,arguments);try{if(S&&!S.dead&&(!S.il||!S.il.at))ilCensus()}catch(e){console.error("ilCensus start",e)}return r}})();
 /* a save loaded from the title (deser): an old save has no S.il → census at once (ids for every piece, nothing moves) — reviewer r1 */
 (function(){if(typeof deser!=="function")return;const d0=deser;deser=function(){const r=d0.apply(this,arguments);try{if(S&&!S.dead&&(!S.il||!S.il.at))ilCensus()}catch(e){console.error("ilCensus load",e)}return r}})();
 /* co-op rebirth (jcoopworld: the new life is put into the SAME world): her past life's pieces stay in that world —
@@ -186,7 +188,7 @@ function ilInherit(old){const O=(old&&old.il)||{};const I=ilS();I.seq=Math.max(I
  for(const e of ilSlots(old))if(ilDur(e)&&!ilAt(e)){I.box.push({e,at:"nvp",why:"dead",own:"",w:wk(),by:""});ilUid(e);ilLog(e,"me","nvp","di vật")}
  I.at=null;ilCensus()}
 (function(){if(typeof nlRun!=="function")return;const f=nlRun;nlRun=function(){let old=null;try{if(ilCoop()&&S&&S.dead)old=S}catch(e){}const r=f.apply(this,arguments);
- try{if(old&&S&&S!==old)ilInherit(old)}catch(e){console.error("ilInherit",e)}return r}})();
+ try{if(old&&S&&S!==old)ilInherit(old);else if(S&&!S.dead&&(!S.il||!S.il.at))ilCensus()}catch(e){console.error("ilInherit",e)}return r}})();
 /* dev audit (main / bots): every piece and where it is now; "net" = removals with no route (must be 0) */
 function ilAudit(){const I=ilS();const rows=[];for(const p of ilPeople())for(const e of ilSlots(p))rows.push([e.iu||0,ilNm(e),ilKey(p),p===S?"":(p.alive===false?"chết":"")]);
  for(const x of I.box)rows.push([x.e.iu,ilNm(x.e),x.at,x.why+(x.own?" · của "+x.own:"")]);return{n:rows.length,net:I.net,box:I.box.length,rows,log:I.log.slice(-50)}}
