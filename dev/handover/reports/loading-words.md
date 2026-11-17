@@ -36,3 +36,9 @@ Tests updated: webkit-boot.js, chonso-cloud.js (new words).
 - Menu entry «Thông tin cập nhật» (j74/jnotes): "cập nhật" is modern; suggest «Tin bản mới» or «Sổ đổi mới». Needs owner pick.
 - iOS notes still say Safari / iPad / màn hình chính (device names, kept).
 - VP (j84) still rewrites "ngươi"→"ta" on screen; table text says "ngươi" in two lines (screen shows "ta").
+
+# loading-words-2 (follow-up on r1 PASS d4318833)
+Branch `review/loading-words-2` @ **8816f08ee**. quickcheck --runs 3 PASS (open 1267 ms, old save ok, core gates PASS); webkit-boot native/old-safari/broken PASS; webkit-syntax parse-level hits 0; update-notes.js ALL OK (755x1000).
+1. Boot fail card: the raw (English) error line is hidden; a small "Chi tiết" link (CTM_WAIT.bootDetail) toggles it for bug reports. Shots CDN img/_review/loading-words-2/ (fold/ipad -6-fail-closed, -7-fail-detail; looked at fold closed).
+2. Lookbehind family (old Safari < 16.4): scan `python3 dev/test/lookbehind-scan.py` (BAD = lookbehind line without kRx/R). Before: 3 literals (jlogsync:85, j95b:130, j95b:173 = parse errors) + 8 `new RegExp(` with lookbehind (j19 kWB, j61, j79:1229, j87:233, jaudit:347, jlogsync:31, jlux:155, j84:110) not via kRx. After: all via kRx; scan 38 via kRx/R, 0 BAD (2 string-only lines allow-listed: j84 B prefix, jaudit KREL_RE parts, both consumed by kRx/R).
+3. update-notes.js crash at line 40 (and same pattern at line 53): title "Tiếp tục" now opens Chọn sổ (data-tgo="slots"), no data-tgo="cont" button; test now opens Chọn sổ and clicks the saved sổ card ([data-load]).
