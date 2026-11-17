@@ -23,6 +23,10 @@ function record(x){try{poll();const c=S.st&&S.st.ch;x.f14=!!(S.st&&S.st.f14);x.r
  x.past=c?(c.past||[]).map(p=>({n:p.n,tag:p.tag,k:p.k,late:p.late?1:0,id:p.ms||p.a})):[];
  x.cur=S.st.ms?{ms:S.st.ms.id,t0:S.st.ms.t0,q:S.st.ms.q14?S.st.ms.q14.L.map(q=>q.id+(q.ok?"+":q.x?"x":"-")):null}:S.st.M?{a:S.st.M.a,due:S.st.M.due,dl:S.st.M.dl,step:S.st.M.i}:null;
  x.tq=L?L.tq:[];x.diff=typeof diffOf==="function"?diffOf():null;x.rot=window.__rotK;x.srvRisen=S.srv?!!S.srv.risen:null}catch(e){x.storyErr=String(e).slice(0,120)}L=null}
+/* the sens bot (inpage6 modalStep) does not read c.off (an option whose «Cần» is not met, e.g. «Tố giác» in «Sau vụ mưu hại», j70):
+   chooseM then does nothing and the life sticks in that modal (TIMEOUT). A player cannot press a greyed option: take the best open one. */
+{const c0=window.chooseM;window.chooseM=function(i){try{const m=Q[0];if(m&&m.opts){const bad=c=>!c||c.off||(c.fx&&c.fx.bac&&S.bac+c.fx.bac<0);
+ if(bad(m.opts[i])){const j=m.opts.findIndex(c=>!bad(c));(window.__offPick=window.__offPick||{})[m.t]=((window.__offPick||{})[m.t]||0)+1;if(j<0){closeModal();return}i=j}}}catch(e){}return c0.call(this,i)}}
 {const s0=window.start;window.start=function(){L=null;return s0.apply(this,arguments)}}
 if(R&&!R.__st){const p0=R.push;R.push=function(x){try{if(x&&S)record(x)}catch(e){}return p0.apply(this,arguments)};R.__st=1}
 /* chapter starts: stamp at once (exact month) */
@@ -57,6 +61,14 @@ const x0=window.__xOpts;
 window.__xOpts=function(N){const out=x0?x0(N)||[]:[];if(window.__tqOff||!S||S.dead||Q.length||S.mg)return out;
  const L2=openQ();const tk=S.turn+"_"+S.tuan+"_"+(S.buoi||0)+"_"+used;if(window.__tqK!==tk){window.__tqK=tk;window.__tqN=0}
  if(L2.length&&window.__tqN<4)for(const id of L2)out.push({L:"tq"+id,s:4.5,f:()=>{window.__tqN++;let ok=false;try{ok=tryQ(id)}catch(e){}if(!ok)window.__tqN+=2;(window.__tqC=window.__tqC||{})[id+(ok?"+":"-")]=((window.__tqC||{})[id+(ok?"+":"-")]||0)+1}});
+ /* the chapter goal itself (a new player reads «Mục tiêu»): «Học quy củ» = one friend (thiện cảm BAL.st14.goal.rel) + one art at goal.art */
+ try{const m=S.st&&S.st.ms;if(m&&m.id==="tap14"&&!window.__tqOff&&!S.srv){const G=BAL.st14.goal;
+  const fr=liveRivals(true).some(v=>(aff(v,S)||0)>=G.rel);
+  if(!fr&&can(2)){let bi=-1,ba=-1e9;rivals.forEach((v,i)=>{if(!v||!v.alive||v.out)return;const a=aff(v,S)||0;if(a>ba){let B=[];try{B=rvBtns(i)}catch(e){}if(B.includes("gift")||B.includes("ally")){ba=a;bi=i}}});
+   if(bi>=0)out.push({L:"tqfr",s:3.2,f:()=>{let B=[];try{B=rvBtns(bi)}catch(e){}doAct(bi,B.includes("ally")&&S.bac>=60?"ally":"gift");(window.__tqC=window.__tqC||{}).fr=(window.__tqC.fr||0)+1}})}
+  const ar=Object.values(S.arts||{}).some(l=>(l||0)>=G.art);
+  if(!ar&&can(2)&&!S.mg){const A=ARTS.filter(a=>S.arts[a.k]<G.art).sort((a,b)=>S.arts[b.k]-S.arts[a.k]);const a=A.find(a=>S.bac>=(typeof tchFee==="function"?tchFee(a.k):5));
+   if(a)out.push({L:"tqart",s:3.2,f:()=>{lesson(a.k);(window.__tqC=window.__tqC||{}).art=(window.__tqC.art||0)+1}})}}}catch(e){}
  return out};
 /* ---- 4. chapter stop ---- */
 const st0=window.__bot.step;
@@ -67,5 +79,5 @@ function stopChk(){if(!S||S.dead)return;try{poll()}catch(e){}
   window.__maxRank=0;window.__lifeIter=0;window.__hhTurn=null;window.__hhWk=null;window.__hhB=null;window.__lifeB=0;window.__sucTrace=[];window.__acts={};Q=[];try{closeModal()}catch(e){}start()}}
 /* one bot iteration at a time, so the stop lands on the exact chapter start */
 window.__bot.step=function(mode,n){let r=0;for(let i=0;i<n;i++){stopChk();r=st0.call(this,mode,1)}return r};
-{const e0=window.__bot.extra;window.__bot.extra=()=>Object.assign(e0(),{tqC:window.__tqC||{}})}
+{const e0=window.__bot.extra;window.__bot.extra=()=>Object.assign(e0(),{tqC:window.__tqC||{},offPick:window.__offPick||{}})}
 })();
