@@ -37,9 +37,12 @@ PRIORITY #1 CHECK: OD 17/11 ~23:30Z (smudge = CODE on the makeup layer, not Magn
 ## r5 (owner on r4: nhẹ ok; vừa one side short / one long; nặng fewer details)
 - vừa: BAL.looks.smuFx.tear.pair[2] = [.5, 1.5] u — one eye's lash-run short, the other long (which eye is seeded per face). nặng: one clean run per eye (n 1), softer blush blot / drag, smaller lip smear (BAL smuFx values), still heavier than vừa. nhẹ untouched. smudge-2 / smudge-3 re-uploaded.
 
+## r6 (owner: vừa blush must bleed into the skin; nặng back to the first heavy look but prettier)
+- BAL.looks.smuFx.blush.wash: a wide feathered halo from each cheek (down / outward, heavily blurred) so the blush bleeds into the skin, vừa .3 / nặng .42. nặng: 3 lash runs per eye (n 3, lengths 1 / .62 / .38), tear.fine: thin at the lash line tapering to nothing, wandering, broken, soft; blush streak + blot back to r4 strength; lip drag soft. vừa tears untouched (approved). Known: where the skin mask meets the face edge the wash ends in a faint straight edge on the far cheek.
+
 ## Open items / follow-ups
 - Small figure faces (~40 px): nhẹ barely visible, vừa/nặng read as a tear stain.
 - Shots outside git; built root files not committed.
 
 ## State
-branch review/smudge-code 2e22ce6 (pushed). Waiting for verdict.
+branch review/smudge-code 345c115 (pushed). Waiting for verdict.
