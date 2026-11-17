@@ -704,4 +704,4 @@
 | WHOLE FIGURE REPAINT lead #7 (sonnet art; successor of lead #6; LEAD HANDOVER #6->#7 in BATCH_PLAN.md) | review/fig-cutout-clean | C | session_011xDdVNkgEgTqsZJxUh9Xd8 | RUNNING | 17/11 10:30Z |
 | MAMA a36/a51 t1-t5 maid repaint (sonnet art W8; ROOT-5 GO 17/11 10:29Z; opened by lead #7) | review/fig-cutout-clean | C | session_011xDdVRWZVWQYAYYva3YuqJ | RUNNING | 17/11 10:30Z |
 | BATCH-D8 re-merge #3 (opus) on main 7e264081 | review/batch-d8 | D | session_01964izDXBECKNTXdyNVmcBc | RUNNING | 17/11 10:46Z |
-| REVIEW greet-meet-r1 (opus BIG; brief briefs/review-greet-meet-r1.md) | review/greet-meet-r1 | C ROOT-5 | (opening) | RUNNING | 17/11 11:02Z |
+| REVIEW greet-meet-r1 (opus BIG; brief briefs/review-greet-meet-r1.md) | review/greet-meet-r1 | C ROOT-5 | session_011xDdVR96B2JxbaT3UMSFAk | RUNNING | 17/11 11:02Z |
