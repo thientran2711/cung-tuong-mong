@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"e73210f1","t":"2026-11-17T06:07Z","c":"story-frame WIP: jreg regEach/regSweep - every load-time registry pass also covers entries later modules add (STORY wrap+acts, ARC67 halve …","b":"5ca2e76f2289","h":[{"s":"fa42f8c4","t":"2026-11-17T04:50Z","c":"Bước sang kiếp mới nay sạch sẽ như trang giấy trắng: không còn vết thương, khăn che mặt hay đồ vật không tên sót lại từ kiếp trước; các trò…"},{"s":"ee492cfd","t":"2026-11-17T04:15Z","c":"Hộp Chọn sổ nay rộng rãi, chữ trên nút đọc trọn, không còn ô hình bị cắt; trang Tuần lục hiện trọn dáng người đến tận gót chân, bảng thân s…"},{"s":"bad6d59f+","t":"2026-11-17T03:41Z","c":"Chơi chung: chuẩn bị đường truyền gọn nhẹ hơn giữa hai máy; khi chơi chưa có gì thay đổi."},{"s":"babc9b4a","t":"2026-11-17T01:39Z","c":"Chơi chung không còn treo máy vì tên bạn lặp chữ; số bóng người trên dư đồ khớp đúng người đang ở đó; việc có hạn giờ hiện đồng hồ ngay dướ…"},{"s":"92685210+","t":"2026-11-17T00:53Z","c":"Khung việc và khung sự kiện bốn cỡ, tranh lấp đầy khung, việc nhắc tên ai hiện chân dung người ấy; phẩm của món đồ nằm ngay trên viền khung…"},{"s":"6f513340","t":"2026-11-16T23:24Z","c":"Vào game mới không còn bật ngay màn lật thẻ, lật thẻ chỉ khi vào buổi tối; dư đồ nhãn giấy mới; việc dài lấn sang buổi sau; lời trong cung …"},{"s":"7a18d957","t":"2026-11-16T22:44Z","c":"review-diemtrang-fx-r1 report"},{"s":"afe2bcbc","t":"2026-11-16T22:25Z","c":"review r1: KIT 84.1a note + report"},{"s":"dea1d445+","t":"2026-11-16T21:32Z","c":"golive lag-play-2: CHANGE line + site rebuilt"},{"s":"674f3af4","t":"2026-11-16T21:21Z","c":"Chơi cùng bạn: bạn chơi chung chưa gặp mặt nay hiện tên gọi chung “Hảo hữu của ta” ở mọi nơi, không còn ẩn thành dấu hỏi."}]};
+window.CTM_BI={"s":"bc4ca1ed","t":"2026-11-17T06:18Z","c":"story-frame: f67Mig keeps one summary log line (catch-up chapter lines dropped); old-save test story-frame-oldsave.js","b":"ad7e33418628","h":[{"s":"fa42f8c4","t":"2026-11-17T04:50Z","c":"Bước sang kiếp mới nay sạch sẽ như trang giấy trắng: không còn vết thương, khăn che mặt hay đồ vật không tên sót lại từ kiếp trước; các trò…"},{"s":"ee492cfd","t":"2026-11-17T04:15Z","c":"Hộp Chọn sổ nay rộng rãi, chữ trên nút đọc trọn, không còn ô hình bị cắt; trang Tuần lục hiện trọn dáng người đến tận gót chân, bảng thân s…"},{"s":"bad6d59f+","t":"2026-11-17T03:41Z","c":"Chơi chung: chuẩn bị đường truyền gọn nhẹ hơn giữa hai máy; khi chơi chưa có gì thay đổi."},{"s":"babc9b4a","t":"2026-11-17T01:39Z","c":"Chơi chung không còn treo máy vì tên bạn lặp chữ; số bóng người trên dư đồ khớp đúng người đang ở đó; việc có hạn giờ hiện đồng hồ ngay dướ…"},{"s":"92685210+","t":"2026-11-17T00:53Z","c":"Khung việc và khung sự kiện bốn cỡ, tranh lấp đầy khung, việc nhắc tên ai hiện chân dung người ấy; phẩm của món đồ nằm ngay trên viền khung…"},{"s":"6f513340","t":"2026-11-16T23:24Z","c":"Vào game mới không còn bật ngay màn lật thẻ, lật thẻ chỉ khi vào buổi tối; dư đồ nhãn giấy mới; việc dài lấn sang buổi sau; lời trong cung …"},{"s":"7a18d957","t":"2026-11-16T22:44Z","c":"review-diemtrang-fx-r1 report"},{"s":"afe2bcbc","t":"2026-11-16T22:25Z","c":"review r1: KIT 84.1a note + report"},{"s":"dea1d445+","t":"2026-11-16T21:32Z","c":"golive lag-play-2: CHANGE line + site rebuilt"},{"s":"674f3af4","t":"2026-11-16T21:21Z","c":"Chơi cùng bạn: bạn chơi chung chưa gặp mặt nay hiện tên gọi chung “Hảo hữu của ta” ở mọi nơi, không còn ẩn thành dấu hỏi."}]};
 /* KBOOT — BOOT COVER (owner 15/11 "Khi vừa bấm vào game, có chừng ít hơn 1 giây hiện khung này"; KIT §14.1).
    Before: while the 4 MB page parsed, the browser painted the bare static markup of p1.html (HUD box, a vertical stat label list, empty
    panels, the old 11-tab bar) for ~1 s on a warm open and many seconds on a cold one, before any kit CSS/JS existed.
@@ -9286,15 +9286,16 @@ window.f14Info=f14Info;
    one keeps only the months it has left, then the story goes on as in a new life. Runs once (afterwards v267() is true): no double chapter.
    The save holds no palace-entry month: a life that began in the palace entered at month 0; at home (f14Home) the tutorial just waits. */
 function f67Mig(){try{if(!S||S.dead||!S.origin||!S.st||v267())return 0;const k=S.origin.k,W=STORY[k];if(!W||!W.__late||!W.__old)return 0;
- const q0=quiet;quiet=true;let closed=0;
+ const q0=quiet,ls0=S.logSeq||0;quiet=true;let closed=0;
  try{a67init(k);const c=S.st.ch;if(!c)return 0;const el=Math.max(0,S.turn||0);let used=0;
   for(let g=0;g<6&&S.st.ms&&F14T.test(S.st.ms.id)&&!f14Home();g++){const m=S.st.ms,d=MS67[m.id],L=d&&d.lim?d.lim():0;if(!L)break;
    if(el>=used+L){c.past.push({ms:m.id,t:d.t(),tag:"Lỡ dịp",k:0,n:c.n,late:1,mig:1});S.st.ms=null;used+=L;closed++;chAdvance67(null);continue}
    m.t0=S.turn-(el-used);break}}
- finally{quiet=q0}
- const c=S.st.ch,m=S.st.ms;const now=m&&MS67[m.id]?MS67[m.id].t():S.st.M&&ARC67[S.st.M.a]?ARC67[S.st.M.a].t:"";
+ finally{quiet=q0;/* the chapter lines written while catching up would carry today's date: one summary line instead */
+  try{const d=(S.logSeq||0)-ls0;if(d>0)S.logs.splice(0,Math.min(d,S.logs.length))}catch(e){}}
+ syncMain67();const c=S.st.ch,m=S.st.ms;const now=m&&MS67[m.id]?MS67[m.id].t():S.st.M&&ARC67[S.st.M.a]?ARC67[S.st.M.a].t:"";
  log(`<b>Mệnh truyện mở lại.</b> Đời này đang ở chương ${c.n}${now?` «${now}»`:""}${closed?`; ${closed} chương đầu đã qua hạn, khép lại không thưởng`:""}.`);
- syncMain67();return 1}catch(e){console.error("f67Mig",e);return 0}}
+ return 1}catch(e){console.error("f67Mig",e);return 0}}
 window.f67Mig=f67Mig;
 /* after a save loads (normAll); a new life is already framed by then (STORY init runs right after normAll), so this is a no-op there */
 (function(){const n0=normAll;normAll=function(){const r=n0.apply(this,arguments);try{setTimeout(()=>{if(f67Mig())try{render()}catch(e){}},0)}catch(e){}return r}})();
@@ -58234,7 +58235,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="5ca2e76f2289";window.CTM_BUILD=BUILD;
+const BUILD="ad7e33418628";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
