@@ -12,3 +12,8 @@ Thợ báo "KIT REQUEST" trong báo cáo → điều phối ghi vào đây → g
 | 16/11 | sếp (coop-chat) | Bong bóng thư + danh sách thư (kitChatBubble / kitChatList) + nút biểu tượng có huy hiệu chưa đọc (kitChatBtn) + khung Thư từ (kitChatPanel) | chơi cùng bạn: phòng của nàng | coop-chat | xong, KIT §76, chờ duyệt |
 
 ## 16/11 s19 — closed by review/kit-marks: "KIT REQUEST — cloud-del" items 1–2 built as KIT §83.9 (`.kbtn.kdanger`, `kitConfirm`); KIT number clash §72 verified resolved (KIT_NUMBERS.md).
+
+## 17/11 — KIT REQUEST — timed choice dialog (night-final, owner OD 16/11 22:45Z "Phải quyết định trong vòng 10 giây thôi")
+| date | from | need | where | who | status |
+|---|---|---|---|---|---|
+| 17/11 | night-final (session_01UV1SzhwBU5vBCvZomnavDM) | A dialog with a COUNTDOWN (kit §69 `kitCoopClock` chip in the body) must show the clock + the one-line question WITHOUT scrolling on Fold 755x1000. Today the kit dialog (art + option cards) puts the body text after the option cards on narrow: measured on the flip choice (pid "nfch"): body 736 px tall in a 493 px box, the clock chip at y 965 (off screen), options at 472–796. iPad 1180x820 is fine (text + clock above the cards). Ask: a kit way to pin a timer chip (and the question line) above the options / in the dialog header for timed choices — no private CSS in jnf | flip choice after the card flip (jnf.js showChoice); any later timed choice | kit keeper | mở |
