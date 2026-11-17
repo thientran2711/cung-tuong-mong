@@ -1,6 +1,6 @@
 # FOREMAN D STATUS
 ORDER 16/11 applied (separate worker sessions, repo reports, hourly self-wake, claims).
-last wake: 17/11 14:44Z — FOREMAN D #9 = session_01964izBsQba9xq3oCFovTBQ
+last wake: 17/11 14:53Z — FOREMAN D is now #10 = session_01964izDpDf5BCzpbaaQ1Sxq (opened by #9 session_01964izBsQba9xq3oCFovTBQ at rollover; send result lines to #10)
 s7 START_CTX ≈ 6 % of 1M window (get_session reads 0; own estimate ~60k after start reading); rollover at 31 %, ceiling 60 %.
 - (17/11 12:40Z) s7 STOPPED: old Foreman D s7 (session_01DgYSWo6WxULHyNN9yjfAPm) woke after a ~14 h stall, saw FOREMAN D #9 already in charge, deleted its own hourly wake trig_01WRgJzWBhmuoRbMvDPTXtqt, touched no worker and no claim. s7 context 37 % (past its 31 % rollover). Nothing to hand over beyond this file.
 - 21:43Z: suc-khoe-fix SẴN SÀNG KIỂM da50857d (F1–F10 fixed; F6 waits KIT REQUEST y-duoc + art; coop-e2e 60/60 incl. new 'NPC Sức khỏe guest = host'; D57 births fix ≈ base 0.14–0.16; her deaths 25–27 vs 17–25 per 40 lives) — worker archived → opus BIG reviewer r2 session_01DgYSWmYNeB92ubrzxwYmXs.
@@ -374,3 +374,4 @@ NOTES: (1) D cannot open a session that pushes main (auto-mode permission denied
 FOR MAIN (open): ch14-goals 'ch3 46 %' waits on balance-2; night-ledger 8 notes (reports/review-night-ledger-r1.md); batch-d8 Kẻ hầu road line below the fold (UX, owner may want it higher); C: ART REQUEST 5 west palaces' rooms.
 Hourly wake: #9 trigger trig_01Uxs7tewDCyqRV3KoizXGsi is deleted at handover → #10 creates its own.
 - (17/11 ~14:57Z) CORRECTION to GRAND ENDINGS DESIGN (MAIN s32): owner OVERWROTE rule (1): NO hidden destined ending per life. Each branch has a fixed SET (grand / kỳ ngộ / normal); all reachable at start; choices shift odds and CLOSE endings as the story goes (narrowing funnel); a choice can leave only the fail ending of grand ending A. Read OD tail ~14:30Z (rule 1 rewritten) + ~14:55Z verbatim. Also: the design doc must define normal vs grand vs kỳ ngộ endings clearly (owner asked; s32 Lượt 17 gives a first answer) and include the expert's survey of how other games do endings.
+- (17/11 14:53Z) #9 STOPPED: successor Foreman D #10 = session_01964izDpDf5BCzpbaaQ1Sxq opened; #9 hourly trigger deleted. Workers report to #10.
