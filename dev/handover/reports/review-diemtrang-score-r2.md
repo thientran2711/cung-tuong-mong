@@ -17,3 +17,10 @@ Her mk-fit points sit about one feature low on all 12 portraits (brow line on th
 
 ## Tests on 64effc1c
 toil-draw Fold 755x1000@2 PASS 10, iPad 1180x820@2 PASS 10; quickcheck PASS 142 s (old save loads + plays a buổi, coop one-world gate, perf new/live render 254/248, tab 333/295, buổi 856/877); dev/measure/toil-dist.js 200 matches the report (thường/thanh nhã vụng 49/34/21/22, NPC unchanged). Shots in scratch only, none uploaded.
+
+## Re-check of the fix: PASS 8098201f
+Reviewed review/diemtrang-score @ 8098201f (on top of 64effc1c; origin/main 08725411 is its ancestor, so main can fast-forward).
+- Hold: "Kẻ xong" is rendered disabled while the face points are missing, setBtn() re-enables it once anchored, next() returns early unless ready. Probe with mk-fit blocked: button disabled; forcing it enabled and clicking twice + tapping the glass → 0 page errors; after meshWait the sitting is played from skill (đẹp 81). 
+- Thái hậu points re-measured: contact sheet of all 12 thaihau portraits (fresh CDN data, real toilGeom + toilIdeal) — brows on the brows, cheeks on the cheekbones, lip dots on the mouth, 12/12. Looked at.
+- toil-draw Fold 755x1000@2 PASS 10, 0 page errors; coop-e2e 59/59 twice (the worker's 57/59 flake did not show). Quickcheck not re-run by me on this 2-line delta (worker: PASS; golive runs it again).
+Verdict: PASS 8098201f.
