@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"16d4925f+","t":"2026-11-17T05:39Z","c":"one-core-dup: delete 28 dead second copies of top-level functions (only the last declaration ever runs: sentPen/confessRisk/bribeServ j10, …","b":"a41958ddcc74","h":[{"s":"ee492cfd","t":"2026-11-17T04:15Z","c":"Hộp Chọn sổ nay rộng rãi, chữ trên nút đọc trọn, không còn ô hình bị cắt; trang Tuần lục hiện trọn dáng người đến tận gót chân, bảng thân s…"},{"s":"bad6d59f+","t":"2026-11-17T03:41Z","c":"Chơi chung: chuẩn bị đường truyền gọn nhẹ hơn giữa hai máy; khi chơi chưa có gì thay đổi."},{"s":"babc9b4a","t":"2026-11-17T01:39Z","c":"Chơi chung không còn treo máy vì tên bạn lặp chữ; số bóng người trên dư đồ khớp đúng người đang ở đó; việc có hạn giờ hiện đồng hồ ngay dướ…"},{"s":"92685210+","t":"2026-11-17T00:53Z","c":"Khung việc và khung sự kiện bốn cỡ, tranh lấp đầy khung, việc nhắc tên ai hiện chân dung người ấy; phẩm của món đồ nằm ngay trên viền khung…"},{"s":"6f513340","t":"2026-11-16T23:24Z","c":"Vào game mới không còn bật ngay màn lật thẻ, lật thẻ chỉ khi vào buổi tối; dư đồ nhãn giấy mới; việc dài lấn sang buổi sau; lời trong cung …"},{"s":"7a18d957","t":"2026-11-16T22:44Z","c":"review-diemtrang-fx-r1 report"},{"s":"afe2bcbc","t":"2026-11-16T22:25Z","c":"review r1: KIT 84.1a note + report"},{"s":"dea1d445+","t":"2026-11-16T21:32Z","c":"golive lag-play-2: CHANGE line + site rebuilt"},{"s":"674f3af4","t":"2026-11-16T21:21Z","c":"Chơi cùng bạn: bạn chơi chung chưa gặp mặt nay hiện tên gọi chung “Hảo hữu của ta” ở mọi nơi, không còn ẩn thành dấu hỏi."},{"s":"923567d5+","t":"2026-11-16T21:03Z","c":"Hình nhân vật: hết vệt xám ở cổ và viền tối quanh người."}]};
+window.CTM_BI={"s":"076aa4ed+","t":"2026-11-17T05:41Z","c":"one-core-dup F3: 326 typed effect amounts (relAdd/oanAdd/affAdd/kcAf/tdPowAdd/e67* in 42 modules) → BAL.eff (new jbaleff.js after jbal.js);…","b":"74363119c4c6","h":[{"s":"ee492cfd","t":"2026-11-17T04:15Z","c":"Hộp Chọn sổ nay rộng rãi, chữ trên nút đọc trọn, không còn ô hình bị cắt; trang Tuần lục hiện trọn dáng người đến tận gót chân, bảng thân s…"},{"s":"bad6d59f+","t":"2026-11-17T03:41Z","c":"Chơi chung: chuẩn bị đường truyền gọn nhẹ hơn giữa hai máy; khi chơi chưa có gì thay đổi."},{"s":"babc9b4a","t":"2026-11-17T01:39Z","c":"Chơi chung không còn treo máy vì tên bạn lặp chữ; số bóng người trên dư đồ khớp đúng người đang ở đó; việc có hạn giờ hiện đồng hồ ngay dướ…"},{"s":"92685210+","t":"2026-11-17T00:53Z","c":"Khung việc và khung sự kiện bốn cỡ, tranh lấp đầy khung, việc nhắc tên ai hiện chân dung người ấy; phẩm của món đồ nằm ngay trên viền khung…"},{"s":"6f513340","t":"2026-11-16T23:24Z","c":"Vào game mới không còn bật ngay màn lật thẻ, lật thẻ chỉ khi vào buổi tối; dư đồ nhãn giấy mới; việc dài lấn sang buổi sau; lời trong cung …"},{"s":"7a18d957","t":"2026-11-16T22:44Z","c":"review-diemtrang-fx-r1 report"},{"s":"afe2bcbc","t":"2026-11-16T22:25Z","c":"review r1: KIT 84.1a note + report"},{"s":"dea1d445+","t":"2026-11-16T21:32Z","c":"golive lag-play-2: CHANGE line + site rebuilt"},{"s":"674f3af4","t":"2026-11-16T21:21Z","c":"Chơi cùng bạn: bạn chơi chung chưa gặp mặt nay hiện tên gọi chung “Hảo hữu của ta” ở mọi nơi, không còn ẩn thành dấu hỏi."},{"s":"923567d5+","t":"2026-11-16T21:03Z","c":"Hình nhân vật: hết vệt xám ở cổ và viền tối quanh người."}]};
 /* KBOOT — BOOT COVER (owner 15/11 "Khi vừa bấm vào game, có chừng ít hơn 1 giây hiện khung này"; KIT §14.1).
    Before: while the 4 MB page parsed, the browser painted the bare static markup of p1.html (HUD box, a vertical stat label list, empty
    panels, the old 11-tab bar) for ~1 s on a warm open and many seconds on a cold one, before any kit CSS/JS existed.
@@ -864,7 +864,7 @@ function can(c){return !!S&&!S.dead&&used+c<=BAL.time.khac&&(c<=1||S.suc>=BAL.ti
 function spend(c){used=Math.max(0,used+c)}
 function pips(n){n=Math.max(0,Math.min(4,n));return `<span class="pip">${"●".repeat(n)}${"○".repeat(4-n)}</span>`}
 
-function word(o){return o>=91?"Nắm chắc":o>=81?"Rất chắc":o>=66?"Chắc":o>=56?"Khá chắc":o>=46?"Năm ăn năm thua":o>=31?"Khó":"Liều"}
+function word(o){return KIT_ODDS[oddsLv(o)]}
 /* TWO scales, never mixed (owner 11/14, coordinator 11/15): word() above = the 7-step ladder, ONLY for the act's own success/failure (the one
    word in the card corner / beside an option). Every side chance of something that comes along (có thai, được ban thưởng, lật thẻ, bị lộ,
    chết… in Được / Mất / Kèm, result cards, Sổ ghi, hints, the HUD) reads on the chance scale Rất thấp / Thấp / Vừa / Cao / Rất cao. Same numbers. */
@@ -4179,7 +4179,7 @@ function fillSeats(){let ev="";if(ct())return"";for(const r of [6,5,4,3]){if(!se
 (function(){const r0=rankBoard;rankBoard=function(){const h=r0.apply(this,arguments);const c=ct();if(!c)return h;return h.replace('<div class="rboard">',`<div class="rboard"><h3>Tranh ghế ${c.r>=7?"Hoàng hậu":RANKS[c.r].n} · vòng ${Math.min(3,c.round+1)}/3</h3>${scoreTable()}`)}})();
 /* ================= ONE IDENTITY FOR LIFE, FOUR AGE BANDS FOR ALL, SMALL AGE EFFECTS ================= */
 /* bands for every group: 18-25 / 26-35 / 36-50 / 51+ */
-function band4(a){return a>=51?3:a>=36?2:a>=26?1:0}
+function band4(a){return ageBandIx(a)}
 const BAND4N=["18-25","26-35","36-50","51+"];
 function tagBand(x){const s=String(x==null?"":x).toLowerCase();const m=s.match(/\d+/);if(m)return band4(+m[0]);return /old|lao|51/.test(s)?3:/mid|trung|36/.test(s)?2:/adult|26/.test(s)?1:0}
 /* faces stay for life: once drawn, kept across promotions and ageing (children still grow) */
@@ -4672,6 +4672,15 @@ Object.assign(BAL,{st14:{max:14,parts:[[1,3],[4,11],[12,14]],lim:{nhap:6,nhapCnv
    Đáp ứng = nt / div − sub (j42 roll, the Thân phận row, the j67 / jst14 «Từ kẻ hầu thành tiểu chủ» step all read this) */
  ntRise:{at:45,div:2,sub:10}});
 function ntRiseOdds(){return Math.max(0,(S.nt||0)/BAL.ntRise.div-BAL.ntRise.sub)}
+/* ONE CORE odds ladder (review/one-core-dup; VANPHONG odds words Liều … Nắm chắc, words in KIT_ODDS j79): an odds value o reaches word
+   step i when o ≥ cut[i-1]; lo / hi = the lowest / highest odds a chancy option shows. Read by j1 word(), j79 kitOddsLv, jsgame sgLv /
+   SG_LO / SG_HI (before: the cuts were typed in all four). */
+Object.assign(BAL,{odds:{cut:[31,46,56,66,81,91],lo:5,hi:95}});
+function oddsLv(o){let i=0;for(const c of BAL.odds.cut)if(o>=c)i++;return i}
+/* ONE CORE age bands (owner art rule OD:L567: 18–25 / 26–35 / 36–50 / 51+; review/one-core-dup): band i starts at ageBand[i-1].
+   Read by band4 (j35), pidBand (j66), kcBand (jkc) (before: 26/36/51 typed in each). */
+Object.assign(BAL,{ageBand:[26,36,51]});
+function ageBandIx(a){let i=0;for(const c of BAL.ageBand)if(a>=c)i++;return i}
 /* ================= jbaleff: ONE CORE (OD:L1267) amounts of relation / power effects (review/one-core-dup, family F3) =================
    BAL.eff.<module>.<site> = the amount the module's effect call applies (relAdd thiện cảm, oanAdd oán, affAdd, kcAf, tdPowAdd …);
    [a,b] = the two amounts of a `cond ? a : b` call. Site = the enclosing function / option key (_2, _3 … for the next calls in it).
@@ -6940,7 +6949,7 @@ function pidRoll(d){const K=pidKeys();const r=nlRng((d.seed^0x2c1b3c6d)>>>0);r()
 (function(){const r0=nlReroll;nlReroll=function(){PID_AVOID=S&&S.pid||null;try{return r0.apply(this,arguments)}finally{PID_AVOID=null}}})();
 function pidOn(){return !!(S&&S.pid)}
 /* 8 ranks = 8 dress tiers; 4 age bands as the standing rule draws them */
-function pidBand(a){return a==null?null:a<26?0:a<36?1:a<51?2:3}
+function pidBand(a){const B=BAL.ageBand;return a==null?null:a<B[0]?0:a<B[1]?1:a<B[2]?2:3}
 (function(){const t0=figTierOf;figTierOf=function(who){try{
   if(who===S&&S){if(S.pid)return (typeof isSrv==="function"&&isSrv())?1:S.out?-1:Math.min(7,S.rank||0)+1;return t0.apply(this,arguments)}
   if((rivals||[]).includes(who))return who.out?-1:who.queen?8:Math.min(7,who.rank||0)+1}catch(e){}return t0.apply(this,arguments)}})();
@@ -22843,7 +22852,7 @@ function kitActMini(a){const line=[a.odds||"Chắc chắn",a.ton&&`tốn: ${a.to
 const KIT_ODDS=["Liều","Khó","Năm ăn năm thua","Khá chắc","Chắc","Rất chắc","Nắm chắc"];
 const KIT_ODDS_TXT=["thường hỏng","hỏng nhiều hơn thành","nửa thành nửa hỏng","thành nhiều hơn hỏng","thường thành","hiếm khi hỏng","gần như chắc thành"];
 const KIT_ODDS_COL=["#b8321f","#d0662a","#c99a1e","#a3a52a","#6f9a34","#3f8a43","#2d7a52"];
-function kitOddsLv(w){if(typeof w==="number")return w<=0?-1:w>=91?6:w>=81?5:w>=66?4:w>=56?3:w>=46?2:w>=31?1:0;const i=KIT_ODDS.indexOf(String(w).trim());return i}
+function kitOddsLv(w){if(typeof w==="number")return w<=0?-1:oddsLv(w);const i=KIT_ODDS.indexOf(String(w).trim());return i}
 function kitOdds(w,o){o=o||{};const lv=kitOddsLv(w);const word=lv<0?(o.none||"Không có"):KIT_ODDS[lv];
  return `<span class="kodm" data-kodds="${lv}" role="button" tabindex="0" title="${o.label?o.label+": ":""}${word}${lv>=0?` — bậc ${lv+1}/7`:""}" style="--oc:${lv<0?"#9a8f80":KIT_ODDS_COL[lv]}"><span class="kseg">${KIT_ODDS.map((x,i)=>`<i${i<=lv?` style="background:${KIT_ODDS_COL[i]}"`:""}></i>`).join("")}</span><b>${word}</b></span>`}
 function kitOddsLadder(lv){return `<div class="kpopt">Thang cơ hội · 7 bậc</div>`+KIT_ODDS.map((x,i)=>`<div class="kpopr${i===lv?" on":""}"><span class="kseg">${KIT_ODDS.map((y,j)=>`<i${j<=i?` style="background:${KIT_ODDS_COL[j]}"`:""}></i>`).join("")}</span><b style="color:${KIT_ODDS_COL[i]}">${x}</b><small>${KIT_ODDS_TXT[i]}</small></div>`).reverse().join("")}
@@ -49109,8 +49118,8 @@ function sgThoiCo(box,env){const R=sgRM();const C=kg82Canvas(box,.6,300),{g,W,H}
 
 /* ---------- odds ladder: a game moves the odds by ONE step of Liều / Khó / Năm ăn năm thua / Khá chắc / Chắc / Rất chắc / Nắm chắc ----------
    raw 7–10 = up one step, 4–6 = unchanged, 0–3 = down one step. The number keeps its place inside the new step (word() boundaries). */
-const SG_LO=[5,31,46,56,66,81,91],SG_HI=[30,45,55,65,80,90,95];
-function sgLv(o){return o>=91?6:o>=81?5:o>=66?4:o>=56?3:o>=46?2:o>=31?1:0}
+const SG_LO=[BAL.odds.lo,...BAL.odds.cut],SG_HI=[...BAL.odds.cut.map(c=>c-1),BAL.odds.hi];
+function sgLv(o){return oddsLv(o)}
 function sgShift(o,d){if(!d)return o;const l=sgLv(o),l2=cl(l+d,0,6);if(l2===l)return o;const f=cl((o-SG_LO[l])/Math.max(1,SG_HI[l]-SG_LO[l]),0,1);return Math.round(SG_LO[l2]+f*(SG_HI[l2]-SG_LO[l2]))}
 function sgStep(raw){return raw>=7?1:raw<=3?-1:0}
 
@@ -55052,7 +55061,7 @@ function kcFigLoad(){try{fetch("https://ctm-img.victoria-tntt.workers.dev/img/FI
  const n=Object.keys(X).length;const was=Object.keys(KCFX).length;KCFX=X;if(n!==was)try{if(isKc())render()}catch(e){}}).catch(()=>{})}catch(e){}}
 kcFigLoad();setInterval(kcFigLoad,300000);
 function kcDress(){return S&&S.origin&&(S.origin.k==="thd"||(S.origin.k==="td"&&!kcLore()))?"ngheo":"kc"}/* KC LORE: td is a Thị lang's daughter until the day she leaves home: khuê các dress; only thd is poor */
-const KC_AB=["a18","a26","a36","a51"];function kcBand(age){return age>=51?3:age>=36?2:age>=26?1:0}
+const KC_AB=["a18","a26","a36","a51"];function kcBand(age){return ageBandIx(age)}
 function kcDressRec(fid,tier,age){const X=fid&&KCFX[fid];const L=X&&X[tier];if(!L||!L.length)return null;const w=kcBand(age==null?18:age);/* the band of her age, else the nearest one */
  let b=null,bd=9;for(const f of L){const d=Math.abs(KC_AB.indexOf(f.ageBand||"a18")-w);if(d<bd){bd=d;b=f}}return b}
 function kcDressSrc(fid,kind,tier,age){const f=kcDressRec(fid,tier||kcDress(),age==null&&S?S.age:age);if(!f)return"";return figPath(kind==="por"?(f.por||f.file):f.file)}
@@ -58076,7 +58085,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="a41958ddcc74";window.CTM_BUILD=BUILD;
+const BUILD="74363119c4c6";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

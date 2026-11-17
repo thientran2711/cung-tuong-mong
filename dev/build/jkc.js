@@ -651,7 +651,7 @@ function kcFigLoad(){try{fetch("img/FIGURES-kc.json",{cache:"no-cache"}).then(r=
  const n=Object.keys(X).length;const was=Object.keys(KCFX).length;KCFX=X;if(n!==was)try{if(isKc())render()}catch(e){}}).catch(()=>{})}catch(e){}}
 kcFigLoad();setInterval(kcFigLoad,300000);
 function kcDress(){return S&&S.origin&&(S.origin.k==="thd"||(S.origin.k==="td"&&!kcLore()))?"ngheo":"kc"}/* KC LORE: td is a Thị lang's daughter until the day she leaves home: khuê các dress; only thd is poor */
-const KC_AB=["a18","a26","a36","a51"];function kcBand(age){return age>=51?3:age>=36?2:age>=26?1:0}
+const KC_AB=["a18","a26","a36","a51"];function kcBand(age){return ageBandIx(age)}
 function kcDressRec(fid,tier,age){const X=fid&&KCFX[fid];const L=X&&X[tier];if(!L||!L.length)return null;const w=kcBand(age==null?18:age);/* the band of her age, else the nearest one */
  let b=null,bd=9;for(const f of L){const d=Math.abs(KC_AB.indexOf(f.ageBand||"a18")-w);if(d<bd){bd=d;b=f}}return b}
 function kcDressSrc(fid,kind,tier,age){const f=kcDressRec(fid,tier||kcDress(),age==null&&S?S.age:age);if(!f)return"";return figPath(kind==="por"?(f.por||f.file):f.file)}
