@@ -600,3 +600,4 @@
 | toil-overlay READY 71d804787 (makeup layer follows her figure; colours all day) → reviewed together with toil-reveal-fix by session_01UV1SzgsZQKGbpwSCbZt39u | review/toil-overlay | main s29 | session_01UV1SzhkR4i2bVXfUL54aTE | READY | 17/11 04:09Z |
 | toil-looks (same worker): vừa = light đẹp layer, new soft vụng, samples → owner first | review/toil-looks | main s29 | session_01UV1SzhkR4i2bVXfUL54aTE | RUNNING | 17/11 04:09Z |
 | app-edge review r1 (sonnet; whole-app canvas width) of 5a842f58 | review/app-edge-r1 | main s29 | session_01UV1Szi6Up9sVYdCYyMqqwW | RUNNING | 17/11 04:09Z |
+| map-full review r1 (sonnet UI; + trial-merge with review/app-edge) of 44f65e81 (worker archived; app-edge worker archived too) | review/map-full-r1 | main s29 | session_01UV1Szipn2t9xXY2WubCJ1T | RUNNING | 17/11 04:10Z |
