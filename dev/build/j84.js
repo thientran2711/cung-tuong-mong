@@ -107,7 +107,7 @@ function itRx(){const now=Date.now();if(ITRX!==null&&now-ITT<4000)return ITRX;IT
   try{for(const k in IT){const n=IT[k]&&itm(k).n;if(n)L.push(n)}}catch(e){}
   try{if(typeof WD_ITEMS==="object")for(const k in WD_ITEMS){const n=WD_ITEMS[k]&&WD_ITEMS[k].n;if(n)L.push(n)}}catch(e){}
   if(L.length===ITN&&ITRX)return ITRX;ITN=L.length;const U=[...new Set(L.filter(n=>n.length>=3&&/^\p{Lu}\p{Ll}/u.test(n)&&/ /.test(n)||/^(A giao|Xạ hương|Yến sào)$/.test(n)))].sort((a,b)=>b.length-a.length);
-  ITRX=U.length?new RegExp("(?<![\\p{L}\\p{M}\\d])(?:"+U.map(x=>x.replace(/[.*+?^${}()|[\]\\]/g,"\\$&")).join("|")+")(?![\\p{L}\\p{M}\\d])","gu"):false;return ITRX}
+  ITRX=U.length?kRx("(?<![\\p{L}\\p{M}\\d])(?:"+U.map(x=>x.replace(/[.*+?^${}()|[\]\\]/g,"\\$&")).join("|")+")(?![\\p{L}\\p{M}\\d])","gu"):false;return ITRX}
 const ITMID=/[\p{L}\p{M}\d,:)]\s+$/u;
 function itemLow(s,before){if(!s||!/\p{Lu}/u.test(s))return s;const rx=itRx();if(!rx)return s;rx.lastIndex=0;
   return s.replace(rx,(m,i)=>ITMID.test((before||"")+s.slice(0,i))?m.charAt(0).toLowerCase()+m.slice(1):m)}
