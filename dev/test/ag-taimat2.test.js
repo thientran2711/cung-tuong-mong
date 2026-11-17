@@ -6,7 +6,7 @@
    4 what the person wants raises the odds (grudge / ill-treated / higher patron)
    5 NPC parity: ap(v,{mat}) and the cx3 "Cài tai mắt" card recruit only real people, by the same choice
    6 no automatic Tai mắt: new game = 0 for everyone (origins / NPC birth give none); the j7 volunteer is a real willing servant
-   7 old save: a stored S.mat N → N placed real spies where willing people exist (else the real count); NPC stored mat dropped
+   7 old save: a stored S.mat N → at most N placed real spies, only people whose tmOdds ≥ vol.min (no loyal one auto-turned); NPC stored mat dropped
    usage: node dev/test/ag-taimat2.test.js [dev/index.html] → exit 1 on any FAIL */
 const {chromium}=require('playwright');const path=require('path');const URL0=process.argv[2]||'dev/index.html';const URL=/^(https?|file):/.test(URL0)?URL0:'file://'+path.resolve(URL0);
 const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+m+(x!==undefined?' '+JSON.stringify(x):''))};
@@ -60,11 +60,14 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
   return{name:s2&&d.t.includes(s2.name),other:s2&&ownerOf(s2)!==S,odds:bribeOdds(S,s2),min:BAL.ag.know.tm.vol.min}});
  ok(r6b.none?!r6b.s:(r6b.name&&r6b.other&&r6b.odds>=r6b.min),'j7 volunteer = a real willing servant of another palace (or no event)',r6b);
  /* 7 old save */
- const r7=await p.evaluate(()=>{for(const s of allServ())s.spyFor=null;const d=JSON.parse(JSON.stringify(ser()));d.S.mat=3;d.R.forEach(r=>r.mat=2);deser(d);
-  const a={mat:S.mat,list:taiMatList().length,mig:KN.stat.tmMig,npc:liveRivals(true).map(v=>v.mat)};
-  const d2=JSON.parse(JSON.stringify(ser()));d2.S.mat=999;deser(d2);const b={mat:S.mat,list:taiMatList().length,cands:tmCands(S).length};return{a,b}});
- ok(r7.a.mat===3&&r7.a.list===3&&r7.a.npc.every(n=>n===0),'old save: stored S.mat 3 → 3 real placed spies; NPC stored mat dropped',r7.a);
- ok(r7.b.mat===r7.b.list,'old save: more than real people → the real count',r7.b);
+ const r7=await p.evaluate(()=>{for(const s of allServ())s.spyFor=null;const mn=BAL.ag.know.tm.vol.min;const will=tmCands(S).filter(s=>tmOdds(S,s)>=mn).length;
+  const d=JSON.parse(JSON.stringify(ser()));d.S.mat=3;d.R.forEach(r=>r.mat=2);deser(d);
+  const pl=()=>taiMatRaw(S).map(s=>tmOdds(S,s));
+  const a={mat:S.mat,list:taiMatList().length,will,mig:KN.stat.tmMig,npc:liveRivals(true).map(v=>v.mat),od:pl(),mn};
+  for(const s of allServ())s.spyFor=null;const d2=JSON.parse(JSON.stringify(ser()));d2.S.mat=999;deser(d2);
+  const b={mat:S.mat,list:taiMatList().length,will:tmCands(S).filter(s=>tmOdds(S,s)>=mn).length+taiMatRaw(S).length,od:pl(),mn};return{a,b}});
+ ok(r7.a.mat===r7.a.list&&r7.a.list===Math.min(3,r7.a.will)&&r7.a.od.every(o=>o>=r7.a.mn)&&r7.a.npc.every(n=>n===0),'old save: stored S.mat 3 → at most 3 placed spies, only people willing by their own odds (≥ vol.min); NPC stored mat dropped',r7.a);
+ ok(r7.b.mat===r7.b.list&&r7.b.od.every(o=>o>=r7.b.mn),'old save: more than real people → only the willing ones, never a loyal servant auto-turned',r7.b);
  const ag=await p.evaluate(()=>{try{return (window.AGD&&AGD.err||[]).slice(0,3)}catch(e){return[]}});
  ok(!errs.length,'no page errors',errs.slice(0,3));
  await b.close();const f=res.filter(x=>!x).length;console.log(f?`AG-TAIMAT2: ${f} FAIL`:`AG-TAIMAT2: ALL ${res.length} PASS`);process.exit(f?1:0)})();

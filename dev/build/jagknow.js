@@ -295,7 +295,7 @@ function knEye(x,h,hid){const doer=knWho(h)[0],pl=h.k,nw=agKh();const at=s=>{con
  const own=knStaff(x);const A=knAllSrv().filter(s=>!own.includes(s)&&ownerOf(s)!==x);const B=A.filter(at);const e=knPickH(B.length?B:A,"ep"+knId(x)+"|"+hid);
  return e?{by:"pass",how:"pass",e}:null}
 function knPal(o){try{return palaceOf(o)}catch(e){return null}}
-function knLoyK(p,s){return p===S&&s&&s.kn?cl(s.loyal||0,0,100):null}
+function knLoyK(p,s){if(!(p===S&&s&&s.kn))return null;const o=ownerOf(s);return o===S||s===S.maid?cl(s.loyal||0,0,100):tmOdds(S,s)}/* a Tai mắt's firmness for HER = her will (tmOdds), never lòng to her own master (review ag-all-2 r2 C2) */
 function taiMatList(p){p=p||S;if(!p)return[];const N=p===S&&S.tmN||{};return taiMatRaw(p).map(s=>{const o=ownerOf(s);return{id:"s"+s.sid,sid:s.sid,name:s.name,role:s.role,
  placedAt:o?knPal(o):null,placedWith:o?knId(o):null,placedName:o?o.name:"",loyaltyKnown:knLoyK(p,s),reports:N[s.sid]||0,
  /* the tinbao-ui adapter shape (main s34 / tinbao worker): p, place, loy, loyalWord, sold */
@@ -392,11 +392,11 @@ function matN(p){return p?taiMatRaw(p).length:0}
 function tmWho(s){const o=ownerOf(s);return `${s.name} (${s.role==="eunuch"?"thái giám":"cung nữ"} cung ${o?NM(o):"khác"})`}
 function tmInstall(p){if(!p||typeof p!=="object")return p;const d=Object.getOwnPropertyDescriptor(p,"mat");if(d&&d.get)return p;const n=p===S&&d?Math.round(+d.value||0):0;if(d)delete p.mat;
  Object.defineProperty(p,"mat",{get(){return window.__tmOff?(this.__matT||0):matN(this)},set(v){if(window.__tmOff)Object.defineProperty(this,"__matT",{value:v,writable:true,configurable:true,enumerable:false});else KN.stat.tmDrop=(KN.stat.tmDrop||0)+1},enumerable:false,configurable:true});
- if(n>0){const h=matN(S);const got=tmPlace(S,n);KN.stat.tmMig={want:n,had:h,got}}return p}
+ if(n>0){const h=matN(S);const got=tmPlace(S,n,tmB().vol.min);KN.stat.tmMig={want:n,had:h,got}}return p}
 /* set p's real Tai mắt to n where real people exist (most willing first; extra ones let go, r2 tmLose) → the real count. Used by the old-save
    migration (people who had already accepted in that save) and by tests to stage a count; never by an act (acts go through tmOdds) */
-function tmPlace(p,n){n=Math.max(0,Math.round(+n||0));let have=matN(p);if(have>n){tmLose(p,have-n);return matN(p)}
- const L=tmCands(p).sort((x,y)=>tmOdds(p,y)-tmOdds(p,x)||x.sid-y.sid);const k=key(p);for(const s of L){if(have>=n)break;s.spyFor=k;have++}return have}
+function tmPlace(p,n,min){n=Math.max(0,Math.round(+n||0));let have=matN(p);if(have>n){tmLose(p,have-n);return matN(p)}
+ const L=tmCands(p).filter(s=>min==null||tmOdds(p,s)>=min)/* old save: only people willing by their own odds (OD ~16:50Z; review ag-all-2 r2 C3) */.sort((x,y)=>tmOdds(p,y)-tmOdds(p,x)||x.sid-y.sid);const k=key(p);for(const s of L){if(have>=n)break;s.spyFor=k;have++}return have}
 /* the most willing real person for an approach (deterministic: a card re-picks the same one at run time) */
 function tmBest(p){let b=null,bo=-1;for(const s of tmCands(p)){const o=tmOdds(p,s);if(o>bo||(o===bo&&s.sid<b.sid)){b=s;bo=o}}return b}
 function tmTake(p,s){if(!p||!s)return"";s.spyFor=key(p);KN.stat.tmOk=(KN.stat.tmOk||0)+1;const r=`${tmWho(s)} nhận làm tai mắt cho ${p===S?"ngươi":p.name}.`;if(p===S&&!quiet)try{log(r)}catch(e){}return r}

@@ -259,7 +259,7 @@ function tsDenCard(){const f=tsDenFest();if(!f||!tsOn()||S.out)return null;const
 (function(){const d0=deal;deal=function(){const r=d0.apply(this,arguments);try{if(Array.isArray(deck)&&tsOn()){const c=tsDenCard();if(c)deck.unshift(c)}}catch(e){}return r}})();
 function tsDenSeen(){const E=S.emp;return (E.mood||0)<=1&&(S.sung||0)>=BAL.tsx.denSung}
 /* ONE rule for every lantern (hers and the NPCs', mg2): the odds of being seen / heard without a far lantern, and "far" from the play (raw ≥ 6) */
-function tsDenOdds(p){return 45+(p.tai||0)/4+(p.arts&&p.arts.hoa||0)*4}
+function tsDenOdds(p){return agOdd(45+(p.tai||0)/4+(p.arts&&p.arts.hoa||0)*4)}/* one cap BAL.odds (review ag-all-2 r2 C4) */
 function tsDenFar(raw){return raw>=6}
 function tsDenWish(f){const s=tsS();const pdLeft=Math.max(0,6-(s.denPD||0));const hos=liveRivals(true).filter(v=>bandOf(danger(v,S))>=1&&!(S.dKnown&&S.dKnown[v.id])&&!knows(v));
  const odds=tsDenOdds(S);const seen=tsDenSeen();

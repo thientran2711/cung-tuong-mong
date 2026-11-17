@@ -1196,7 +1196,7 @@ BAL.talk.secretMal=50;BAL.talk.secretGrab=50;
    recruiter can pay her price), protect (badly treated: lòng < BAL.loy.low, recruiter outranks her master), post (low post srk < post, recruiter outranks),
    revenge (holds a grudge and the recruiter is at odds with her master). loyalMul = the odds × this for a servant at lòng ≥ BAL.loy.top. tell = % a refusing
    servant at lòng ≥ BAL.loy.mid reports the attempt to her master (oan = the master's regard lost toward the recruiter). cap = most Tai mắt one can hold. */
-BAL.ag.know.tm={cap:10,lo:3,hi:95,want:{bac:15,protect:15,post:10,revenge:20},post:3,loyalMul:.35,tell:50,oan:6,
+BAL.ag.know.tm={cap:10,want:{bac:15,protect:15,post:10,revenge:20},post:3,loyalMul:.35,tell:50,oan:6,
  /* 2f2: threat = fear bonus on tmOdds for Dọa tố (threatServ); vol = the j7 volunteer comes only when her odds for him reach min, she pays bac */
  threat:20,vol:{min:55,bac:30}};
 /* AG-ALL-2f3 — ONE betray / sell / recruit odds core (owner OD 17/11 ~17:20Z: "tính cách tham lam ... 60% ... lòng ... dưới 25 ... cộng thêm 10% ... trọng

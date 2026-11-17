@@ -51,7 +51,7 @@ function cx2O(p,k){const X=BAL.ag.cx2[k],M=S.emp?mm():0;const A=p.arts||{};
 function empGive(p,pct,why){return roll(pct)}
 /* a yes / no that is the person's own inclination: w is computed by the caller from HER stats (loyalty, traits, regard); a straight weighted draw,
    no jmind slip / temperature (they would bend a rare act's rate) */
-function ag2Ch(p,w){return roll(Math.max(0,Math.min(100,w)))}
+function ag2Ch(p,w){return roll(Math.max(0,Math.min(BAL.odds.hi,w)))}/* OD 17/11 ~17:00Z / ~17:35Z: an inclination is never sure (cap BAL.odds.hi, as agCap) */
 function thGive(p,pct,why){return roll(pct)}
 function effSac(p){return cl(p.sac+wearBonus(p).sac,0,130)}
 function conceiveCh(p=S){return cl(Math.round(lotB(p,"Con cái")+10+p.sung/4+effSac(p)/8+(p.pray?15:0)+(p.fert?20:0)-(p.age>28?(p.age-28)*3:0)),2,85)}
