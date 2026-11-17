@@ -767,3 +767,4 @@
 | AG-ALL (opus; main s31 13:21Z, replaces AG4/AG5/AG6 + folds AG-HAP 13:16Z): every NPC group picks from the SAME full act list as the player of that group; step 1 = reports/ag-all.md gap table | review/ag-all | C ROOT-7 | session_01UV1SzjsTYMFvr4Rvhpd1tt (+ world-events expert session_01UV1SzhXPVGk7w6iSpeP3QM) | RUNNING | 17/11 13:14Z |
 | WORLD EVENTS: window layer + all 11 (opus; owner OD 13:48Z via main s31; brief briefs/world-events.md) | review/world-events | C-AG | (opening) | RUNNING | 17/11 13:22Z |
 | WORLD EVENTS research batch 2 (sonnet expert, OD:L1327) | dev/research/world-events-2.md | C-AG | (opening) | RUNNING | 17/11 13:22Z |
+| narrow-T3 kit: 412/390 T3 narrow mode + 1-col cards + dup option list (from opt-pic-same-r2 review item 1) | review/narrow-t3 | MAIN s31 | session_01UV1SzgsQDt2y7LHaYSDb8g | RUNNING | 17/11 13:22Z |
