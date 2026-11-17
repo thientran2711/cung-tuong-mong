@@ -17,7 +17,7 @@ const {chromium}=require('playwright');const [,,BASE,NEW,OLD,OUT]=process.argv;
   const loadBtn=await q.$('#slots button[data-load]');let loaded=false,turn='';
   if(loadBtn){await q.evaluate(()=>document.querySelector("#slots button[data-load]").click());await q.waitForTimeout(1500);loaded=await q.evaluate(()=>!!S&&!S.dead);turn=await q.evaluate(()=>S.turn+'/'+S.tuan+'/'+S.buoi+' '+S.name)}
   await q.screenshot({path:`${OUT}/loaded-${w}.png`});
-  for(let i=0;i<12;i++){await q.evaluate(()=>{for(let k=0;k<5&&Q.length;k++){const m=Q[0];if(m.opts&&m.opts.length)chooseM(m.opts.length-1);else closeModal()}});
+  for(let i=0;i<12;i++){await q.evaluate(()=>{for(let k=0;k<5&&Q.length;k++){const m=Q[0];if(m.opts&&m.opts.length)chooseM((L=>L.length?L[L.length-1]:0)(m.opts.map((c,i)=>c.off?-1:i).filter(i=>i>=0)));else closeModal()}});
    const nx=await q.$('#next:not([disabled])');if(nx){await nx.click().catch(()=>{})}await q.waitForTimeout(300)}
   await q.evaluate(()=>{for(let k=0;k<20&&Q.length;k++)closeModal()});await q.waitForTimeout(300);await q.screenshot({path:`${OUT}/play-${w}.png`});
   const ovf=await q.evaluate(()=>document.documentElement.scrollWidth>innerWidth+1);

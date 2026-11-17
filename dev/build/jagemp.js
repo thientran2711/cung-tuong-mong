@@ -27,11 +27,13 @@ function empDuty(){let f=1;try{for(const t of S.emp.traits||[])f*=empD().duty[t]
 function empBusy(){try{if(illOf(S.emp))return"ill"}catch(e){}if(has("chamchinh"))return"duty";try{if(tdOn()&&tdCrisis())return"court"}catch(e){}return""}
 function empSummon(){const b=empBusy();const o=empD().summon[b?1:0];const ok=roll(o);const z=empWhyZ();z.k=ok?"call":"rest";z.busy=b;return ok}
 /* 2 WHO: his memory of each person's deeds near him */
-function empMetL(p){if(!p||!S.emp)return null;if(p.coop&&p.emet)return p.emet;const M=S.emp.met;return M?M[key(p)]||null:null}
+/* AG3: a staff maid is remembered by her own key "s"+sid (jagmaid), everyone else by key() */
+function empK(p){return p&&p!==S&&p.role==="maid"&&p.sid!=null?"s"+p.sid:key(p)}
+function empMetL(p){if(!p||!S.emp)return null;if(p.coop&&p.emet)return p.emet;const M=S.emp.met;return M?M[empK(p)]||null:null}
 /* r1 (review/npc-agent-ag2-r1): a co-op GUEST's own deeds are kept in her personal key S.empMe (emp is a WORLD key: the host's copy
    overwrites it and myBlob never sends it), so buildFriend on the host can weigh her card by them; the host / solo keep S.emp.met */
 function empGuestSelf(p){try{return p===S&&typeof agGuest==="function"&&agGuest()&&!!(BAL.ag&&BAL.ag.on&&BAL.ag.emp)&&!window.__agOff&&!S.dead}catch(e){return false}}
-function empMet(p,kd,ok){try{if(!p||!S||!S.emp)return;const gs=empGuestSelf(p);if(!gs&&!empOn())return;const D=empD().met,w=wk();const k=key(p);
+function empMet(p,kd,ok){try{if(!p||!S||!S.emp)return;const gs=empGuestSelf(p);if(!gs&&!empOn())return;const D=empD().met,w=wk();const k=empK(p);
   const L=((gs?S.empMe:(S.emp.met||{})[k])||[]).filter(e=>w-e[0]>=0&&w-e[0]<D.keep);L.push([w,kd,ok?1:0]);while(L.length>D.n)L.shift();if(gs)S.empMe=L;else{const M=S.emp.met=S.emp.met||{};M[k]=L}}catch(e){console.error("jagemp met",e)}}
 function empMemN(p){const L=empMetL(p);if(!L)return 0;const D=empD().met,w=wk();let s=0;for(const e of L)if(w-e[0]>=0&&w-e[0]<D.keep)s+=e[2]?1:D.miss;return Math.min(D.cap,s)}
 function empMemF(p){return empOn()?1+empD().met.w*empMemN(p):1}
