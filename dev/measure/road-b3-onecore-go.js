@@ -14,7 +14,7 @@ const LIT=new RegExp('\\{\\s*'+ST+'\\s*:\\s*[+-]?\\d+(?:\\.\\d+)?(?:\\s*,\\s*'+S
 const table={};
 for(const f of files){const fp=path.join(dir,f);let src=fs.readFileSync(fp,'utf8');const m=mask(src);
  const marks=[];for(const r of m.matchAll(/rdDef\(/g)){const a=src.slice(r.index).match(/^rdDef\("(\w+)",(\d+)/);marks.push([r.index,a[1]+'_'+a[2]])}
- for(const r of src.matchAll(/RD97L\.push\(rdRare\(\{a:"(\w+)"/g))marks.push([r.index,r[1]]);marks.sort((x,y)=>x[0]-y[0]);
+ for(const r of src.matchAll(/RD97L\.push\(rdRare\(\{a:"(\w+)"/g))marks.push([r.index,r[1]]);for(const r of src.matchAll(/\bARC67\.(\w+)=\{o:"eg"/g))marks.push([r.index,r[1]]);marks.sort((x,y)=>x[0]-y[0]);
  const reps=[];for(const r of m.matchAll(LIT)){const at=r.index;let id=null;for(const [p,k] of marks)if(p<at)id=k;if(!id){console.log('NO CHAPTER',f,src.slice(at,at+60));continue}
   const lit=src.slice(at,at+r[0].length);const T=table[id]=table[id]||[];T.push(Function('return '+lit)());reps.push([at,at+r[0].length,`rdGo("${id}",${T.length-1})`])}
  reps.sort((x,y)=>y[0]-x[0]);for(const [a,b,s] of reps)src=src.slice(0,a)+s+src.slice(b);fs.writeFileSync(fp,src);console.log(f,'literals',reps.length)}

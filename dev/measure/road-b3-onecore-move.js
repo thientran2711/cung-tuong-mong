@@ -23,7 +23,7 @@ const close=(m,i)=>{let d=0;for(let j=i;j<m.length;j++){const c=m[j];if('([{'.in
 /* depth-1 members of the object/array opening at i: [{key,ks (key start),vs (value start),ve (value end, exclusive)}] */
 function members(m,i,arr){const end=close(m,i);const out=[];let j=i+1;
  while(j<end){while(j<end&&/[\s,]/.test(m[j]))j++;if(j>=end)break;let key=null,ks=j;
-  if(!arr){const km=/^([A-Za-z_$][\w$]*|"[^"]*"|'[^']*')\s*(?::|(?=\())/.exec(m.slice(j,j+80));if(!km)throw Error('no key at '+j+': '+m.slice(j,j+40));key=km[1];j+=km[0].length}
+  if(!arr){const km=/^(get\s+[A-Za-z_$][\w$]*(?=\s*\())|^([A-Za-z_$][\w$]*|"[^"]*"|'[^']*')\s*(?::|(?=\())/.exec(m.slice(j,j+80));if(km&&km[1])km[1]=km[1].replace(/\s+/,' ');else if(km)km[1]=km[2];if(!km)throw Error('no key at '+j+': '+m.slice(j,j+40));key=km[1];j+=km[0].length}
   const vs=j;let d=0;while(j<end){const c=m[j];if('([{'.includes(c))d++;else if(')]}'.includes(c))d--;else if(c===','&&d===0)break;j++}
   out.push({key,ks,vs,ve:j})}
  return out}
@@ -58,8 +58,11 @@ for(const f of files){const fp=path.join(dir,f);let src=fs.readFileSync(fp,'utf8
  const re=/\brdDef\(/g;let r;
  while((r=re.exec(m))){const pa=r.index+5;const args=members(m,pa,true);if(args.length<3)continue;
   const road=JSON.parse(src.slice(args[0].vs,args[0].ve).trim()),n=+src.slice(args[1].vs,args[1].ve).trim(),id=road+'_'+n;
-  const def=args[2];if(m[def.vs]!=='{')throw Error(id+': def is not a literal');const T=table[id]={};
-  const dm=members(m,def.vs,false);
+  const def=args[2];if(m[def.vs]!=='{')throw Error(id+': def is not a literal');proc(id,def.vs)}
+ /* jend14 (Phần cuối hồi form): ARC67.<id>={… B, E …} literals take the same table; the file calls rdFx(id,ARC67.<id>) after each */
+ const re2=/\bARC67\.(\w+)=\{/g;let r2;while((r2=re2.exec(m))){if(src.slice(r2.index,r2.index+80).indexOf('o:"eg"')<0)continue;proc(r2[1],r2.index+r2[0].length-1)}
+ function proc(id,defVs){const T=table[id]={};
+  const dm=members(m,defVs,false);
   const take=(mem,keys,into,where)=>{const own=members(m,mem.vs,false);let any=false;
    own.forEach((x,ix)=>{if(!keys.includes(x.key))return;let txt=src.slice(x.vs,x.ve).trim();
     if(x.key==='o'){const q=odds(txt);if(!q){left.push(`${f} ${where} o: ${txt}`);return}check.push({fn:txt,q,where:f+' '+where});into.o=q}
