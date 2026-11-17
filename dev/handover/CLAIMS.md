@@ -881,4 +881,4 @@
 | WEATHER-KHAC-2 delta: every j12 kind per khắc + levels + world effects (opus; owner OD L1665 ~17:40Z (3); main s34) | review/weather-khac | C-AG | session_01UV1SzhyGUZ4FTxi1y3XNvr | RUNNING | 17/11 17:18Z |
 | face-w404 fix round 2 (sonnet; CDN prefix vs index key; seeded same-face proof) | review/face-w404 | D | session_01964izEN55ZZFTgoSkJ3BVj | RUNNING | 17/11 17:22Z |
 | coop-thin-b-r3 LIVE b5d109fe0 (main e9bbc4d6 → b5d109fe; rollback e9bbc4d6) | review/land-coop-thin-b-r3 | B | session_01N1tNP34QePRanPQevmttcs | LIVE | 17/11 17:25Z |
-| kit-rank-name r1 successor (continues 9f54a9a1; report HANDOVER) | review/kit-rank-name | MAIN s35 | (opening) | RUNNING | 17/11 17:26Z |
+| kit-rank-name r1 successor (continues 9f54a9a1; report HANDOVER) | review/kit-rank-name | MAIN s35 | session_01UV1SzgiSj7gRNYszv9YgxE | RUNNING | 17/11 17:26Z |
