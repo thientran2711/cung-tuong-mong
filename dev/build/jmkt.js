@@ -21,7 +21,8 @@ Object.assign(BAL.toil,{
  taste:{
   /* the hidden want of each đề (jts TS_THEME): tone "w" đào cam / "c" hồng tím / "mua" = by the season of the contest month; bold = Kiểu cầu kỳ + ≥ Kiều diễm */
   theme:{thanh:{tone:"c",bold:0},phu:{tone:"w",bold:1},huong:{tone:"mua",bold:1},xuan:{tone:"w",bold:0},co:{tone:"mua",bold:0}},
-  season:{xuan:"w",thu:"c"},
+  /* "mua" đề: the tone follows the game's own season of the contest month (j1 SEASON): spring + summer warm, autumn + winter cool */
+  season:{"Xuân":"w","Hạ":"w","Thu":"c","Đông":"c"},
   /* contest points of the makeup (× w, added to the contest total; the dress gives raw 0..10 × 4): tone right / wrong, preset group right / wrong,
      the level itself, and a bold đề that got less than Kiều diễm */
   pts:{toneOk:2,toneBad:-1,boldOk:1,boldBad:-1,lv:{moc:-3,vung:-2,vua:0,dep:1,tuyet:2,diem:-2},needLv:-1},w:1.5,
@@ -86,13 +87,13 @@ const TOIL_TONE_SAY={like:{th:"“Sắc son hôm nay hợp mắt ai gia.”",hh:
 (function(){if(typeof toilSay!=="function")return;const s0=toilSay;toilSay=function(k,ctx){try{if(ctx&&ctx.tone&&TOIL_TONE_SAY[ctx.tone]){const w=/^th-/.test(k)?"th":/^hh-/.test(k)?"hh":/^emp-/.test(k)?"emp":"rival";return TOIL_TONE_SAY[ctx.tone][w]}}catch(e){}return s0.apply(this,arguments)}})();
 
 /* ---------- Hội phối đồ: the đề's hidden makeup want ---------- */
-function tsMkSeason(m){return (m|0)>=4&&(m|0)<=9?"xuan":"thu"}
+function tsMkSeason(m){return SEASON[(((m|0)||1)-1)%12]}/* the game's season of month m (j1 SEASON; reviewer r1: the old 4–9 "xuân" split contradicted the calendar) */
 function tsMkWant(th,m){const T=BAL.toil.taste.theme[th]||BAL.toil.taste.theme.thanh;const tone=T.tone==="mua"?BAL.toil.taste.season[tsMkSeason(m)]:T.tone;return{tone,bold:!!T.bold,key:th+":"+tone}}
 function tsMkKnown(w){return mktKnow().th[w.key]||{}}
 function tsMkLearn(w,what){const K=mktKnow().th;K[w.key]=Object.assign({},K[w.key]||{},what);return K[w.key]}
 function tsMkWantTxt(w,k){k=k||{tone:1,bold:1};const L=[];if(k.tone)L.push(`son phấn ${TOIL_TONE[w.tone]}`);if(k.bold)L.push(w.bold?`${TOIL_STY.diem}, dung nhan ${toilMkW("dep")} trở lên`:TOIL_STY.dep);return L.join(", ")}
 /* the notice row: what she knows of the want, and the roads to learn it */
-function tsMkRow(th,m){const w=tsMkWant(th,m),k=tsMkKnown(w);return["Son phấn",k.tone&&k.bold?`đề chuộng ${tsMkWantTxt(w,k)}`:k.tone||k.bold?`đề chuộng ${tsMkWantTxt(w,k)}; còn lại chưa rõ`:`chưa rõ: hỏi ma ma, sai tai mắt, hỏi người từng dự, hay đoán theo sắc của đề và mùa ${tsMkSeason(m)==="xuan"?"xuân":"thu"}`,k.tone&&k.bold?"g":"n"]}
+function tsMkRow(th,m){const w=tsMkWant(th,m),k=tsMkKnown(w);return["Son phấn",k.tone&&k.bold?`đề chuộng ${tsMkWantTxt(w,k)}`:k.tone||k.bold?`đề chuộng ${tsMkWantTxt(w,k)}; còn lại chưa rõ`:`chưa rõ: hỏi ma ma, sai tai mắt, hỏi người từng dự, hay đoán theo sắc của đề và mùa ${tsMkSeason(m).toLowerCase()}`,k.tone&&k.bold?"g":"n"]}
 /* the three asking roads (tsOpt, odds in the ladder; a miss teaches nothing, never a wrong answer) */
 function tsMkScoutOpts(th,m){const w=tsMkWant(th,m),k=tsMkKnown(w);if(k.tone&&k.bold)return[];const B=BAL.toil.taste.scout;const L=[];const all={tone:1,bold:1};
  const got=(who,what)=>{tsMkLearn(w,what);log(`${who}: đề ${TS_THEME[th].n} chuộng ${tsMkWantTxt(w,what)}.`)};
