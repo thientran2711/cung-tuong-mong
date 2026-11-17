@@ -87,7 +87,7 @@ function motiveOK(a,t,kind){if(!a||!t||a===S||a===t)return{ok:true,why:a===S?"ng
   if(af>=40&&!ex)return{ok:false,why:`thiện cảm ${af} với ${t===S?"ngươi":t.name}`};
   if(mot<30&&!ex)return{ok:false,why:`động cơ yếu (oán ${oa}, ghen ${gh}, thiện cảm ${af})`};
   if(ex)return{ok:true,why:ex,ex:1};
-  const parts=[];if(oa>=20)parts.push(`oán ${oa}`);if(gh>=20)parts.push(`ghen ${gh}`);if(af<=-20)parts.push(`ghét (thiện cảm ${af})`);if(ef)parts.push("khác phe");if(hasT(a,"Xảo quyệt"))parts.push("tính hiểm độc");
+  const parts=[];if(oa>=20)parts.push(`oán ${oa}`);if(gh>=20)parts.push(`ghen ${gh}`);if(af<=-20)parts.push(`ghét (thiện cảm ${af})`);if(ef)parts.push("khác phe");if(hasT(a,"Xảo quyệt"))parts.push("tính xảo quyệt");
   return{ok:true,why:parts.join(", ")||`động cơ ${mot}`}}
  if(F95.has(kind)){let fr=false;try{fr=!!(facOf(a)&&facOf(a)===facOf(t))}catch(e){}if(af<-20&&oa>=40&&!fr)return{ok:false,why:`ghét ${t===S?"ngươi":t.name} (thiện cảm ${af}, oán ${oa})`};
   return{ok:true,why:fr?"cùng phe":af>=10?`thiện cảm ${af}`:"lấy lòng vì lợi"}}
@@ -253,7 +253,7 @@ function j95secApply(R){const z=j95z();const c=R.c;
   /* NPC passers-by at the same place and khắc may see (same odds as hers) */
   for(const v of liveRivals(true)){const id="v"+v.id;if(id===s.a||!R.P[id])continue;const at=s.kh.some(i=>R.P[id][i][0]===s.k);if(!at)continue;
    const sub=RV(+s.a.slice(1));if(!sub)continue;const out=j95catchRoll(v,sub);if(out==="flee")continue;
-   evA(v,sub,out==="one"?1:2);if(s.kind==="tryst")sub.scandal=1;R.ev.push(`${v.name} bắt gặp ${sub.name} (${s.kind==="tryst"?"hẹn hò lén":"gặp tay chân"})`)}}}
+   evA(v,sub,out==="one"?BAL.eff.j95.evJ95secApply[0]:BAL.eff.j95.evJ95secApply[1]);if(s.kind==="tryst")sub.scandal=1;R.ev.push(`${v.name} bắt gặp ${sub.name} (${s.kind==="tryst"?"hẹn hò lén":"gặp tay chân"})`)}}}
 
 /* ---------------- 6. SYNC: the views every old reader uses ---------------- */
 function j95view(R,kh){const W={};W.emp=R.P.emp?R.P.emp[kh][0]:"dtd";W.th=R.P.th?R.P.th[kh][0]:null;
@@ -385,7 +385,7 @@ function j95watch(R,kh){if(S.dead||S.out||(typeof isSrv==="function"&&isSrv()))r
  for(const v of liveRivals(true)){const e=R.P["v"+v.id];if(!e||e[kh][0]!==k||k==="home"&&sameHouse(S,v))continue;j95obs(v,c,e[kh][0],"Chính ngươi thấy");
   const sk=R.key+":"+v.id;if(e[kh][1]==="ambush"&&!z.seen[sk]){z.seen[sk]=1;if(j95dice(35)){const g=motiveOK(v,S,"ambush");if(g.ok){let r="";try{r=npcAct(v,S)}catch(x){}if(r)Q.push({t:"Có người chờ sẵn",who:pv(v),h:`<p>${v.name} như đã đợi ngươi ở ${j95pn(k)}.</p><p>${r}</p>`})}}}}
  for(const s of z.sec){if(s.key!==R.key||s.k!==k||!s.kh.includes(kh))continue;const ck=R.key+":"+s.a+":me";if(z.seen[ck])continue;z.seen[ck]=1;j95caught(s)}
- for(const cl of z.clue)if(!cl.done){const e=R.P[cl.vid];if(e&&e[kh][0]===k&&j95dice(35)){const v=RV(+cl.vid.slice(1));if(v){cl.done=1;j95ctx({how:`Nhận ra ${cl.item} là của ${v.name}`,proves:`${v.name} là người lén hẹn ở ${cl.spot}`},()=>evA(S,v,1));
+ for(const cl of z.clue)if(!cl.done){const e=R.P[cl.vid];if(e&&e[kh][0]===k&&j95dice(35)){const v=RV(+cl.vid.slice(1));if(v){cl.done=1;j95ctx({how:`Nhận ra ${cl.item} là của ${v.name}`,proves:`${v.name} là người lén hẹn ở ${cl.spot}`},()=>evA(S,v,BAL.eff.j95.evJ95watch));
    if(cl.kind==="tryst")v.scandal=1;Q.push({t:"Nhận ra",who:pv(v),h:`<p>Ngươi nhìn kỹ: ${cl.item} nhặt được ở ${cl.spot} hôm nọ đúng là của ${v.name}.</p>`})}}}
  if(Q.length)try{showModal()}catch(e){}}
 function j95obs(v,c,k,by){const z=j95z();const O=z.obs[v.id]=z.obs[v.id]||{};const key=c+":"+k;const R=S.roster;const once=R?R.key:"";const o=O[key]=O[key]||{n:0,w:wk(),by};if(o.bk===once)return;o.bk=once;o.n++;o.w=wk();o.by=by}
@@ -402,14 +402,14 @@ function j95caught(s){const v=RV(+s.a.slice(1));if(!v||!v.alive)return;const m=s
  const full=out!=="one";const what=s.kind==="tryst"?(full&&m?`lén hẹn hò với ${m.name}`:"lén gặp một nam nhân"):"thì thầm trao đồ với tay chân";
  noteAdd(v.id,`chính ngươi bắt gặp nàng ${what} ở ${W}`);
  if(s.kind==="tryst"){v.scandal=1;try{intelAdd(v,{k:"affair",kind:"secret",txt:`${v.name} ${what}.`},{by:"Chính ngươi",how:`Bắt gặp ở ${W}`})}catch(e){}}
- j95ctx({how:`Ngươi tận mắt bắt gặp ở ${W}`,proves:s.kind==="tryst"?`${v.name} ${what}`:undefined},()=>evA(S,v,1));
+ j95ctx({how:`Ngươi tận mắt bắt gặp ở ${W}`,proves:s.kind==="tryst"?`${v.name} ${what}`:undefined},()=>evA(S,v,BAL.eff.j95.evJ95caught));
  if(out==="rev"){z.wit[v.id]={w:wk(),k:s.kind};const g=motiveOK(v,S,"harm");
-  if(g.ok&&(v.malice||0)>=55){oanAdd(v,S,25);affAdd(v,S,-15);noteAdd(v.id,"biết ngươi đã thấy chuyện kín của nàng; phải đề phòng nàng diệt khẩu")}
+  if(g.ok&&(v.malice||0)>=55){oanAdd(v,S,BAL.eff.j95.j95caught);affAdd(v,S,BAL.eff.j95.j95caught_2);noteAdd(v.id,"biết ngươi đã thấy chuyện kín của nàng; phải đề phòng nàng diệt khẩu")}
   else{v.j95bribe=wk()}}
  Q.push({t:out==="rev"?"Bắt gặp, và bị thấy":"Bắt gặp",who:pv(v),h:`<p>Ở ${W}, ngươi thấy rõ ${v.name} ${what}.</p>${out==="rev"?`<p class="r">Nàng ngẩng lên, bắt gặp ánh mắt ngươi. Nàng biết ngươi đã thấy.</p>`:""}`,opts:j95catchOpts(v,m,s,out)});
  if(out==="rev"&&v.j95bribe===wk()){const g=Math.min(60,Math.max(10,Math.floor((v.bac||0)/3)));Q.push({t:"Lời nhờ cậy",who:pv(v),h:`<p>Tối ấy cung nữ của ${v.name} lén mang sang một hộp gấm, trong có ${g} lượng bạc: “Chủ tử nhà nô tỳ xin ${kSay({srv:"f"},S,"{goi}")} coi như chưa thấy gì.”</p>`,
-  opts:[{n:"Nhận lễ, giữ im lặng",fx:{},x:`Nắm chắc · thành: Bạc +${g} · nàng quý ngươi +6 · nàng nợ ngươi một ân tình · kèm: nhận lễ là đã hứa giữ kín`,go:()=>j95bribeTake(v,g)},{n:"Trả lại hộp gấm",fx:{},x:"Nắm chắc · thành: không mắc nợ nàng · kèm: nàng oán ngươi +10",go:()=>{oanAdd(v,S,10);log(`Ngươi trả lại lễ của ${v.name}.`)}}]})}}
-function j95bribeTake(v,g){const n=Math.min(g,Math.floor(v.bac||0));v.bac=Math.max(0,(v.bac||0)-n);apply({bac:n});relAdd(v,S,6);j95z().owe[v.id]=(j95z().owe[v.id]||0)+1;log(`Nhận ${n} lượng bạc của ${v.name}, hứa giữ kín.`)}
+  opts:[{n:"Nhận lễ, giữ im lặng",fx:{},x:`Nắm chắc · thành: Bạc +${g} · nàng quý ngươi ${balSg(BAL.eff.j95.j95bribeTake)} · nàng nợ ngươi một ân tình · kèm: nhận lễ là đã hứa giữ kín`,go:()=>j95bribeTake(v,g)},{n:"Trả lại hộp gấm",fx:{},x:`Nắm chắc · thành: không mắc nợ nàng · kèm: nàng oán ngươi ${balSg(BAL.eff.j95.go)}`,go:()=>{oanAdd(v,S,BAL.eff.j95.go);log(`Ngươi trả lại lễ của ${v.name}.`)}}]})}}
+function j95bribeTake(v,g){const n=Math.min(g,Math.floor(v.bac||0));v.bac=Math.max(0,(v.bac||0)-n);apply({bac:n});relAdd(v,S,BAL.eff.j95.j95bribeTake);j95z().owe[v.id]=(j95z().owe[v.id]||0)+1;log(`Nhận ${n} lượng bạc của ${v.name}, hứa giữ kín.`)}
 /* port 16/11 (owner 11/15 07:15Z): every option shows its whole Tốn / Được / Mất and the odds word, split by " · " for the kit rows (jmen format) */
 function j95accO(v,to){const pr=evG(S,v);const q=queenP();return to==="emp"?cl(20+pr*15+(S.sung||0)/5,5,90):S.rank>=7?cl(40+pr*15,5,95):cl(25+pr*15+(q?aff(q,S)/4:0),5,90)}
 function j95catchOpts(v,m,s,out){const O=[];const q=queenP();const love=s.kind==="tryst";const pr=evG(S,v);
@@ -418,25 +418,25 @@ function j95catchOpts(v,m,s,out){const O=[];const q=queenP();const love=s.kind==
  if(q&&q!==S&&q!==v)O.push({n:"Tố giác lên Hoàng hậu",fx:{},x:`${word(j95accO(v,"hh"))} · tốn: ${BAL.m95.k} khắc · thành: ${win} · hỏng: ${lose} · ${why}`,go:()=>j95accuse(v,m,s,"hh")});
  if(S.rank>=7)O.push({n:"Xử tội theo luật cung",fx:{},x:`${word(j95accO(v,"hh"))} · tốn: ${BAL.m95.k} khắc · thành: ${win} · hỏng: ${lose} · ${why}`,go:()=>j95accuse(v,m,s,"hh")});
  O.push({n:"Tố giác lên Hoàng thượng",fx:{},x:`${word(j95accO(v,"emp"))} · tốn: ${BAL.m95.k} khắc · thành: ${win} · hỏng: ${lose.replace("bị cấm túc","bị cấm túc hay giáng phẩm")} · ${why} · (Sủng càng cao Hoàng thượng càng tin)`,go:()=>j95accuse(v,m,s,"emp")});
- O.push({n:"Giữ làm con bài khống chế",fx:{},x:`Nắm chắc · thành: chứng cứ về nàng +1 · giữ kín, chờ lúc dùng`,go:()=>j95hold(v)});
+ O.push({n:"Giữ làm con bài khống chế",fx:{},x:`Nắm chắc · thành: chứng cứ về nàng ${balSg(BAL.eff.j95.evJ95hold)} · giữ kín, chờ lúc dùng`,go:()=>j95hold(v)});
  const risk=(v.malice||0)>=70?25:0;
- O.push({n:"Lặng im, đổi lấy ân tình",fx:{},x:`${word(100-risk)} · tốn: ${BAL.m95.k} khắc (gặp riêng nàng) · thành: nàng quý ngươi +12 · nàng bớt oán ngươi 10 · nàng nợ ngươi một ân tình${risk?" · hỏng: nàng vẫn coi ngươi là mối nguy, oán ngươi +15":""}`,go:()=>j95silent(v)});
+ O.push({n:"Lặng im, đổi lấy ân tình",fx:{},x:`${word(100-risk)} · tốn: ${BAL.m95.k} khắc (gặp riêng nàng) · thành: nàng quý ngươi ${balSg(BAL.eff.j95.j95silent_2)} · nàng bớt oán ngươi 10 · nàng nợ ngươi một ân tình${risk?` · hỏng: nàng vẫn coi ngươi là mối nguy, oán ngươi ${balSg(BAL.eff.j95.j95silent)}`:""}`,go:()=>j95silent(v)});
  O.push({n:"Giả như không thấy",fx:{},x:"Nắm chắc · thành: không dính vào chuyện",go:()=>log("Ngươi lặng lẽ quay đi như không thấy gì.")});return O}
 function j95accuse(v,m,s,to){if(typeof can==="function"&&can(BAL.m95.k))spend(BAL.m95.k);const pr=evG(S,v);const q=queenP();
  const o=j95accO(v,to);
- if(j95dice(o)){evA(S,v,-99);apply({danh:BAL.m95.accWin.danh});const what=s.kind==="tryst"?`tư thông${m?" với "+m.name:""}`:"chuẩn bị mưu hại";log(`<span class="r">${v.name} bị xét tội ${what}.</span>`);
+ if(j95dice(o)){evA(S,v,BAL.evWipe);apply({danh:BAL.m95.accWin.danh});const what=s.kind==="tryst"?`tư thông${m?" với "+m.name:""}`:"chuẩn bị mưu hại";log(`<span class="r">${v.name} bị xét tội ${what}.</span>`);
   if(s.kind==="tryst"){if(m){m.alive=false;v.affair=null;log(`<span class="r">${m.name} bị xử trảm.</span>`)}deathSentence(v,`tư thông${m?" với "+m.name:""}`)}else punish(v,"chuẩn bị mưu hại",2);
   Q.push({t:"Tố giác",who:pv(v),h:`<p>Chứng cứ đủ, ${v.name} bị xét tội ${what}.</p><p class="g">Danh +${BAL.m95.accWin.danh}</p>`})}
  else{apply({danh:-BAL.tw.g.accFail[0]});oanAdd(v,S,BAL.tw.g.accFail[1]);affAdd(v,S,-BAL.tw.g.accFail[2]);punish(S,"vu cáo phi tần không đủ chứng cứ",to==="emp"?2:1);Q.push({t:"Tố giác",who:pv(v),h:`<p>${to==="emp"?"Hoàng thượng":"Hoàng hậu"} cho rằng chứng cứ chưa đủ, ngươi bị coi là vu cáo.</p><p class="r">Danh -${BAL.tw.g.accFail[0]} · ${v.name} oán ngươi +${BAL.tw.g.accFail[1]}</p>`})}
  showModal()}
-function j95hold(v){const z=j95z();z.hold[v.id]=wk();j95ctx({how:"Ngươi giữ kín chuyện tận mắt thấy làm con bài",proves:`${v.name} có chuyện kín bị ngươi bắt gặp`},()=>evA(S,v,1));log(`Ngươi giữ kín chuyện của ${v.name}, chờ lúc dùng.`)}
+function j95hold(v){const z=j95z();z.hold[v.id]=wk();j95ctx({how:"Ngươi giữ kín chuyện tận mắt thấy làm con bài",proves:`${v.name} có chuyện kín bị ngươi bắt gặp`},()=>evA(S,v,BAL.eff.j95.evJ95hold));log(`Ngươi giữ kín chuyện của ${v.name}, chờ lúc dùng.`)}
 function j95silent(v){if(typeof can==="function"&&can(BAL.m95.k))spend(BAL.m95.k);const z=j95z();
- if((v.malice||0)>=70&&j95dice(25)&&motiveOK(v,S,"harm").ok){oanAdd(v,S,15);noteAdd(v.id,"nhận lời hứa im lặng nhưng vẫn coi ngươi là mối nguy");log(`${v.name} gật đầu, ánh mắt lạnh tanh.`);return}
- relAdd(v,S,12);oanAdd(v,S,-10);z.owe[v.id]=(z.owe[v.id]||0)+1;log(`${v.name} nợ ngươi một ân tình vì giữ kín chuyện.`)}
+ if((v.malice||0)>=70&&j95dice(25)&&motiveOK(v,S,"harm").ok){oanAdd(v,S,BAL.eff.j95.j95silent);noteAdd(v.id,"nhận lời hứa im lặng nhưng vẫn coi ngươi là mối nguy");log(`${v.name} gật đầu, ánh mắt lạnh tanh.`);return}
+ relAdd(v,S,BAL.eff.j95.j95silent_2);oanAdd(v,S,BAL.eff.j95.j95silent_3);z.owe[v.id]=(z.owe[v.id]||0)+1;log(`${v.name} nợ ngươi một ân tình vì giữ kín chuyện.`)}
 /* two-way: NPCs present where she meets her lover may catch HER, same odds, same choices (decided by their real feelings) */
 function j95npcCatch(m){const R=S.roster;if(!R)return;const kh=j95kh();const k=S.place;
- for(const v of liveRivals(true)){const e=R.P["v"+v.id];if(!e||e[kh][0]!==k)continue;const out=j95catchRoll(v,S);if(out==="flee"){if(j95dice(35))evA(v,S,1);continue}
-  if(out==="one"){evA(v,S,1);continue}evA(v,S,2);v.j95saw={w:wk(),m:m.id};
+ for(const v of liveRivals(true)){const e=R.P["v"+v.id];if(!e||e[kh][0]!==k)continue;const out=j95catchRoll(v,S);if(out==="flee"){if(j95dice(35))evA(v,S,BAL.eff.j95.evJ95npcCatch);continue}
+  if(out==="one"){evA(v,S,BAL.eff.j95.evJ95npcCatch_2);continue}evA(v,S,BAL.eff.j95.evJ95npcCatch_3);v.j95saw={w:wk(),m:m.id};
   if(out==="rev")Q.push({t:"Có người thấy",who:pv(v),h:`<p>Lúc trở ra, ngươi thấy bóng ${v.name} khuất sau cửa. Nàng đã thấy ngươi đi cùng ${m.name}.</p>`});
   const hard=motiveOK(v,S,"expose");
   if(hard.ok&&hostility(v,S)>=40&&evG(v,S)>=2&&j95dice(40)){const o=cl(25+evG(v,S)*15,5,90);if(j95dice(o)){affairExposed(m,`${v.name} tố giác:`);return}/* two-way law: a failed accusation costs the accuser what it costs her (Danh -8, resentment +25, regard -20, punishment) */ap(v,{danh:-BAL.tw.g.accFail[0]});oanAdd(S,v,BAL.tw.g.accFail[1]);affAdd(S,v,-BAL.tw.g.accFail[2]);punish(v,"vu cáo người khác tư thông",1)}
