@@ -89,7 +89,7 @@ function makeDil(){const pool=liveRivals(false),L=[];
 function endTurn(){
   if(S.dead||Q.length||S.mg)return;S.buoi=0;const qStart=Q.length;let ev=resolveTonight();const lsB=typeof lsSnap==="function"?lsSnap():null;
   S.sung=cl(S.sung-((has("lanhlung")&&S.tuan===1)||(S.rank>=7&&S.tuan!==0)?0:1),0,100);
-  const rg=harsh()?1:4;S.suc=cl(S.suc+rg,0,100);if(worldOn())liveRivals(true).forEach(v=>v.suc=cl(v.suc+rg,0,100));if(S.tablet)S.tablet--;if(worldOn())liveRivals(true).forEach(v=>{if(v.tablet)v.tablet--});/* NPC ticks: host only (worldOn, jcoopworld) */
+  const rg=nightRg();S.suc=cl(S.suc+rg,0,100);if(worldOn())liveRivals(true).forEach(v=>v.suc=cl(v.suc+rg,0,100));if(S.tablet)S.tablet--;if(worldOn())liveRivals(true).forEach(v=>{if(v.tablet)v.tablet--});/* NPC ticks: host only (worldOn, jcoopworld) */
   if(lsB)lsNote(lsB,{sung:"ân sủng nhạt dần",suc:"nghỉ ngơi qua tuần"},true)/* Sức: dropped again when folded into j76 "Ngủ một đêm: Sức +N", which already counts this +4 */;
   ev+=rivalsTurn();if(S.dead)return;
   if(S.suc<=0)return die("Bệnh nặng, không qua khỏi");
@@ -142,3 +142,5 @@ function over(h,t,fate){S.dead=true;record(fate);const ms=mySons().length,md=myD
   Q=[{t:h,cls:"end",who:pMe(),h:`<p>${t}</p><p class="past">${S.name} · ${S.origin.n} · ${RANKS[S.rank].n} · ${S.age} tuổi · ${ms} hoàng tử, ${md} công chúa · ${S.year} năm trong cung${S.st.tag?` · ${S.st.tag}`:""}</p>`,btn:"Đầu thai kiếp sau",onClose:start}];
   showModal();render()}
 function die(why){over("Hồng nhan bạc mệnh",why+".",why)}
+/* the base night rest of everyone (endTurn; AG3: the maid road's week too, j42 srvEndTurn) */
+function nightRg(){return harsh()?1:4}

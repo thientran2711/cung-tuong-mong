@@ -4,7 +4,7 @@
       serving tea elsewhere) × (1 + master's Sủng/100 × eyeSung: he visits her palace more) × seekMul while she seeks his notice;
       only ages eyeAge[0]..eyeAge[1]. The consort ceiling is kept: j14 still requires roomFor("consort") (a free consort slot).
    2. SEEKING (mlSeek): each month a maid may start to seek his notice (serve tea, stand where he passes) for seekMonths months;
-      by nết (tham / lanh more, trung / nhat less). Her master notices (seeNotice): a harsh master (Hiểm độc / Kiêu ngạo / Đa nghi)
+      by nết (tham / lanh more, trung / nhat less). Her master notices (seeNotice): a harsh master (Xảo quyệt / Kiêu ngạo / Đa nghi)
       punishes her (lòng -punLoy, slapped; sometimes sent to Tân Giả khố = leaves the household); a master losing favour (Sủng useGap under the harem median, r2)
       USES her instead (pushes her: seekMul × useMul, lòng +useLoy) — a maid who rises loyal (lòng ≥ 60, j14) stays her master's ally.
    3. MAIDS HARM EACH OTHER (mlFeud): maids of two hostile palaces fight over duties, frame or poison each other.
@@ -33,10 +33,10 @@ function mlRose(p,s){mlC("rose");if(s.seek)mlC("roseSeek");if(s.seek&&s.seek.use
 /* 2. seeking his notice */
 function mlSeek(p){const B=mlB();let ev="";for(const s of (p.staff||[]).slice()){if(s.role!=="maid"||!mlAgeOk(s))continue;const T=S.turn||0;
   if(s.seek&&s.seek.until<T){s.seek=null;s.seekCd=T+B.seekCd}/* review/servant-mline-r2: a cooldown before the same maid seeks again */
-  if(!s.seek){if(s.age>B.seekAge||(s.seekCd||0)>T)continue;const m=B.seekTr[s.tr]||1;if(!roll(B.seekStart*m))continue;s.seek={from:T,until:T+B.seekMonths,used:0};mlC("seek");
+  if(!s.seek){if(s.age>B.seekAge||(s.seekCd||0)>T)continue;const m=qv(B.seekTr,s,1);if(!roll(B.seekStart*m))continue;s.seek={from:T,until:T+B.seekMonths,used:0};mlC("seek");
    if(mlMine(p))ev+=`${s.name} dạo này hay xin đi dâng trà, đứng chờ nơi Hoàng thượng đi qua. `;else if(mlSee(p)&&(S.mat||0)>=B.seeMat)ev+=`Tai mắt báo: ${s.name}, người hầu của ${p.name}, tìm cách lọt vào mắt Hoàng thượng. `;continue}
   if(mlMine(p)||s.seek.seen)continue;/* she decides about her own maids herself (her acts); an NPC master reacts once */
-  if(!roll(B.seeNotice))continue;s.seek.seen=1;const tr=typeof traitsOf==="function"?traitsOf(p):[p.trait];const harsh=tr.some(x=>x==="Hiểm độc"||x==="Kiêu ngạo"||x==="Đa nghi");
+  if(!roll(B.seeNotice))continue;s.seek.seen=1;const tr=typeof traitsOf==="function"?traitsOf(p):[p.trait];const harsh=tr.some(x=>x==="Xảo quyệt"||x==="Kiêu ngạo"||x==="Kín đáo");
   if(harsh&&roll(B.punish)){s.loyal=cl((s.loyal||0)-B.punLoy,0,100);mlFx(typeof slapGive==="function"?slapGive:null,s,p,"bị chủ đánh vì dám lọt mắt Hoàng thượng");s.seek=null;s.seekCd=T+B.seekCd;mlC("punish");
    if(roll(B.punOut)){p.staff.splice(p.staff.indexOf(s),1);mlC("punOut");if(mlSee(p))ev+=`${p.name} bắt gặp ${s.name} tìm cách lọt mắt Hoàng thượng, sai đánh rồi đuổi xuống Tân Giả khố. `}
    else if(mlSee(p))ev+=`${p.name} bắt gặp ${s.name} tìm cách lọt mắt Hoàng thượng, sai vả miệng, cấm ra khỏi cung. `}
@@ -77,7 +77,7 @@ function mlFeud(p){const B=mlB();let ev="";const G=mlGuest();if(G&&p===S)return"
 /* 4. a consort targets another palace's maid (co-op guest: pickTarget (jcoopworld) returns only her, so an NPC's act aimed at her
    household lands on her side, NPC vs NPC rolls on the host) */
 function mlHit(p){const B=mlB();if(p===S||!roll(B.hit))return"";const t=pickTarget(p);if(!t||!(t.staff||[]).some(x=>x.role==="maid"))return"";const s=pick(t.staff.filter(x=>x.role==="maid"));if(!s)return"";{const g=typeof cmGuard==="function"?cmGuard(t,p):"";if(g)return g}
- const tr=typeof traitsOf==="function"?traitsOf(p):[p.trait];const cruel=tr.some(x=>x==="Hiểm độc"||x==="Kiêu ngạo");const k=(p.bac||0)>=B.hitBribeBac&&roll(B.hitBribe)?"bribe":cruel&&roll(B.hitBeat)?"beat":"frame";mlC("hit_"+k);let ev="";const see=mlSee(t);
+ const tr=typeof traitsOf==="function"?traitsOf(p):[p.trait];const cruel=tr.some(x=>x==="Xảo quyệt"||x==="Kiêu ngạo");const k=(p.bac||0)>=B.hitBribeBac&&roll(B.hitBribe)?"bribe":cruel&&roll(B.hitBeat)?"beat":"frame";mlC("hit_"+k);let ev="";const see=mlSee(t);
  if(k==="bribe"){const r=bribeServ(p,s);if(t===S&&r&&s.spyFor!==key(p))ev+=r}
  else if(k==="beat"){mlFx(typeof slapGive==="function"?slapGive:null,s,p,`bị ${p.name} đánh`);s.loyal=cl(s.loyal+B.beatLoy,0,100);
   /* a beating is done in the open: always a true deed; the victim's mistress resents it, and holds proof of it at hitEv % */
