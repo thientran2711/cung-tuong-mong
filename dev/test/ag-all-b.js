@@ -25,7 +25,7 @@ const BTN={sweep:"Quét sân, lau điện",tea:"Dâng trà, hầu điểm tâm",
  ok(r1.tea&&r1.sweep,'one table: the player maid cards read SRVA',r1);
  /* 2 histogram, consort life then maid life */
  for(const maid of [false,true]){await fresh(maid);const r=await play(WK);const H=Object.assign({},r.N.maid);const Hs=r.N.srv;
-  const ks=[...Object.keys(r.N.maid),...Object.keys(r.N.srv)].map(k=>k.replace(/^sv_/,""));const hidden=ks.filter(k=>!BTN[k]);
+  const ks=[...Object.keys(r.N.maid),...Object.keys(r.N.srv)].map(k=>k.replace(/^(sv_|maid:|srv:)/,""));const hidden=ks.filter(k=>!BTN[k]);
   console.log((maid?'maid life':'consort life')+' '+WK+' tuần · maid acts '+JSON.stringify(H)+' · eunuch acts '+JSON.stringify(Hs)+' · react '+JSON.stringify(r.N.react||{})+' · hit '+JSON.stringify(r.N.hit||{})+' · out '+(r.N.out||0)+' · rise '+JSON.stringify(r.AM)+' · ticks '+r.N.tick+' · ms '+(r.N.ms/Math.max(1,r.N.tick)).toFixed(2)+'/tick');
   ok(!r.E.length,(maid?'maid':'consort')+' life: 0 errors',r.E);ok(hidden.length===0,'no NPC-only hidden act (every k is a player button)',hidden);
   ok(Object.keys(H).length>=8&&Object.keys(Hs).length>=6,'both groups use many acts',{maid:Object.keys(H).length,srv:Object.keys(Hs).length});

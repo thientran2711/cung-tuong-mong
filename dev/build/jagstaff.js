@@ -51,7 +51,7 @@ function asOdds(s,b){return b>=100?100:odA(s,b)}
 function asPeerOK(s,x){return x&&x!==s&&ownerOf(x)}
 /* one option from one SRVA row: k = the player's button (histogram key), t = target, at = place, run = the shared execution */
 function asOpt(s,k,raw,more){const m=ownerOf(s);const A=SRVA[k];const mp=A.mp||0;
- const o=Object.assign({k:"sv_"+k,sk:k,g:asGrp(s),p:asOdds(s,raw),c:srvCa(k,s,m),w:Object.assign({},srvWa(k,s,m),mp?{mp:mp*asB().mpS}:{}),l:A.l||{},at:asHome(m),tag:"staff"},more||{});
+ const o=Object.assign({k:asGrp(s)+":"+k,sk:k,g:asGrp(s),p:asOdds(s,raw),c:srvCa(k,s,m),w:Object.assign({},srvWa(k,s,m),mp?{mp:mp*asB().mpS}:{}),l:A.l||{},at:asHome(m),tag:"staff"},more||{});
  const pl=o.at;o.at=()=>pl;o.pl=pl;o.run=(p,t)=>asRun(p||s,o);return o}
 function asOpts(s,N){asSt(s);const m=ownerOf(s);if(!m)return[];N=N||asNeeds(s);const L=[],maid=s.role==="maid",home=asMisHome(m),X=x=>x&&L.push(x);
  const strict=home&&(hasT(m,"Kiêu ngạo")||hasT(m,"Xảo quyệt"));
@@ -65,7 +65,7 @@ function asOpts(s,N){asSt(s);const m=ownerOf(s);if(!m)return[];N=N||asNeeds(s);c
   if((s.intel||[]).length)X(asOpt(s,"tellMis",100,{ev:1}));if(s.loyal>=SRVA.askRec.tin&&srk(s)<srkMax(m,s))X(asOpt(s,"askRec",SRVA.askRec.o(s,m),{w:{mp:SRVA.askRec.mpOk*asB().mpS}}))}
  else X(asOpt(s,"beside",SRVA.beside.o(s,m),{at:srvWhere(m)}));
  /* Hoàng thượng where he passes (srvTalk "emp", jagmaid one rule) */
- try{const W=S.where||{};if(maid&&mlAgeOk(s)&&W.emp&&W.emp!=="dtd"&&W.emp!=="home")X({k:"sv_empTea",sk:"empTea",g:"maid",p:odA(s,amTeaO(s,0)),c:{},w:{sung:amTeaG(s)*qv(BAL.mline.seekTr,s,1)},l:{tin:-BAL.ag.maid.tea.fail},at:()=>W.emp,pl:W.emp,tag:"staff",run:p=>asEmpTea(p||s)})}catch(e){}
+ try{const W=S.where||{};if(maid&&mlAgeOk(s)&&W.emp&&W.emp!=="dtd"&&W.emp!=="home")X({k:"maid:empTea",sk:"empTea",g:"maid",p:odA(s,amTeaO(s,0)),c:{},w:{sung:amTeaG(s)*qv(BAL.mline.seekTr,s,1)},l:{tin:-BAL.ag.maid.tea.fail},at:()=>W.emp,pl:W.emp,tag:"staff",run:p=>asEmpTea(p||s)})}catch(e){}
  /* consorts (srvTalk "rv" / "hh") */
  const hh=typeof queenP==="function"?queenP():null;
  if((s.sec||0)>0){const foe=liveRivals(true).find(v=>v!==m&&(v===hh||hostility(v,m)>=20));if(foe)X(asOpt(s,"betray",100,{t:foe,at:palaceOf(foe)}));
@@ -184,12 +184,14 @@ function asHitPick(p){if(p===S)return null;const t=pickTarget(p);if(!t||!(t.staf
 try{if(typeof agReg==="function"){agReg("maid","staff",(p,N)=>asOpts(p,N));agReg("srv","staff",(p,N)=>asOpts(p,N))}
  if(typeof agRegNeeds==="function"){agRegNeeds("maid",asNeeds);agRegNeeds("srv",asNeeds)}
  /* part A's day draw (jagday agDrawReg): every staff "s"+sid (ledgerId) draws her 4 slots there; base row = her master's palace (her duties);
-    the planned deed lands through the pend / ledger / witness path (agPlanX → AGRUN "sv_<SRVA key>" → the same option's run) */
+    the planned deed lands through the pend / ledger / witness path (agPlanX → AGRUN "maid:<key>" / "srv:<key>" → the same option's run) */
  if(typeof agDrawReg==="function"){agDrawReg(()=>asOn()?asStaff().map(s=>[s,"s"+s.sid,asGrp(s)]):[]);
   const base=p=>{const m=ownerOf(p);const r=[m?palaceOf(m):"home","go",null,""];return [r,r.slice(),r.slice(),r.slice()]};agBaseReg("maid",base);agBaseReg("srv",base);
   agDoerReg("s",id=>/^s\d+$/.test(id)?servById(+String(id).slice(1)):null);
-  for(const k of Object.keys(SRVA).concat(["empTea"]))agRunReg("sv_"+k,(d,t,pd)=>{if(!d||d.sid==null||d.out)return"";const O=asOpts(d);const c=O.find(o=>o.k===pd.k&&(!t||o.t===t||o.man===t))||O.find(o=>o.k===pd.k);
-   if(!c){ASN.miss=(ASN.miss||0)+1;return""}return c.run(d)||""})}
+  for(const k of Object.keys(SRVA).concat(["empTea"]))for(const g of ["maid","srv"])agRunReg(g+":"+k,(d,t,pd)=>{if(!d||d.sid==null||d.out)return"";const O=asOpts(d);const c=O.find(o=>o.k===pd.k&&(!t||o.t===t||o.man===t))||O.find(o=>o.k===pd.k);
+   if(!c){ASN.miss=(ASN.miss||0)+1;return""}return c.run(d)||""});
+  /* the record's row of a household staff ("s"+sid, kind "st") = her plan (the old errand dice j95 :244 give way to it) */
+  if(typeof j95planOther==="function"){const po=j95planOther;j95planOther=function(p,c,P){try{if(p&&p.kind==="st"&&asOn()&&agDOn()){agDayEnsure();const sl=agDaySlot(p.id);if(sl)return agRow(sl)}}catch(e){console.error("jagstaff row",e)}return po.apply(this,arguments)}}}
  /* a household staff's group by her role (jagday reads .eunuch / .male; staff carry role "maid" / "eunuch") */
  if(typeof agGrp==="function"){const g0=agGrp;agGrp=function(p){if(p&&p.sid!=null&&p.role)return asGrp(p);return g0.apply(this,arguments)}}}catch(e){console.error("jagstaff reg",e)}
 (function(){
