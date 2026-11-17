@@ -96,6 +96,7 @@ DONE in s9: dressing rooms 13 LIVE img/toil-room-<key>.webp + KIT REQUEST 7f4bda
 Always create worker sessions WITH source_url (a session without it cannot get the repo: add_repo is refused).
 ## SESSION 10 LOG
 - 00:19Z start (depth 4/8, START_CTX ~7% → roll at 32%). s9 told to stop + ARCHIVED; s9 trigger trig_013d5QhyskDumNGQz5fP4vjL and s8 trigger trig_01H3zi9E3V7wtGmAA31EBXWr DISABLED; s8 ARCHIVED (permission check allowed it this time). Own wake trig_017q7zZaTequQLKLLGaESPJx (:19). Archived stopped sessions: fig lead #3 session_011xDdVSheHFnhXPEAMEEfZT, lead #4 session_011xDdVSWqu69NuYMoAK4SaC, art session_011xDdVQYXHozUcGDzx2ZoV3. Running C sessions told C = s10 (lead #5, art QJPz, old-people, npc-agent r1-fix).
+- 00:28Z npc-agent r1-fix worker rolled over @654afb61 (faults 1–7 done; fault 8 early death 85 % open) → archived; successor #2 opus session_011xDdVSQh3xBMmQ1KhP1rYA (claimed).
 - Waiting owner: 5 figure-repaint pilot families + 2k/4k whole set; origin intro samples; por-vacant-hh; FP v23; old-people v4.
 
 ## SESSION 9 LOG
