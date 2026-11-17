@@ -38,6 +38,8 @@ const SEEDRNG=`(function(){let s=(window.__seed||1)>>>0;Math.random=function(){s
       heirNpc:!!(S.heir&&S.heir.v),heirMe:!!(S.heir&&!S.heir.v&&S.heir.k),cons:liveRivals(true).length}};
     for(let w=0;w<Y*36&&!S.dead;w++){
      S.sung=Math.max(S.sung,+(window.__sung||25));S.danh=Math.max(S.danh,15);S.suc=Math.max(S.suc,Math.min(60,typeof sucCap==="function"?sucCap(S):100));S.duc=Math.max(S.duc,55);S.bac=Math.max(S.bac,80);S.rank=Math.max(S.rank,2);
+     /* main 17/11: jfe.js holds flip() until buổi tối (S.buoi ≥ B4L), not inside endTurn, so a bot that calls endTurn directly must flip itself */
+     if(!S.tonight&&typeof flip==="function"){const bb=S.buoi;S.buoi=Math.max(S.buoi||0,typeof B4L==="number"?B4L:2);try{flip()}catch(e){}S.buoi=bb;Q.length=0}
      if(S.tonight==="me"){S.tonight=null;try{night(S)}catch(e){}}
      Q.length=0;S.mg=0;const y=Math.floor((S.turn||0)/12);
      try{endTurn()}catch(e){out.push({err:String(e).slice(0,160)});break}Q.length=0;S.mg=0;
