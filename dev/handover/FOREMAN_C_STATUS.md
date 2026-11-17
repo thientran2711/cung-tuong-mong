@@ -13,6 +13,9 @@ HELD (art): W3e consort-rest-A, W7b player set, W2c consort-ty ty4–8 + HELD li
 Not blocking for main/owner: AG-MEET only consorts approach her (maids/eunuchs/men not yet) = owner's call. ROOT-4's REQUEST to main (AG3 follow-ups A/B/D) still unanswered.
 Push: commit in a sparse worktree of the handover branch (/home/user/wt/ho), pull --rebase + push retry.
 
+FOREMAN C SESSION ROOT-6 = session_011xDdVQNdyTACuGN42yEBQZ (opened by ROOT-5 ~12:20Z 17/11) · START_CTX ~8% (~80k of 1M; get_session reads 0, own estimate) → roll over at >= 33%, ceiling 60% · lineage depth 5/8 (at rollover: depth 6 child NOT allowed → handover here + ask main/owner to open Foreman C from claude.ai) · own hourly wake (:32) below.
+- 12:25Z(wall) ROOT-6 took over; telling lead #7, W4f, W8, W-A, W-B, W-C that ROOT-6 is their foreman. Waiting: W-A HANDOVER DONE → open W-A2.
+
 NEXT FOREMAN C SESSION: ROOT-5 = session_011xDdVSQvhH4vp7H6B7arST (opened by ROOT-4 ~10:25Z 17/11, depth 4). ROOT-4 stops; its trigger trig_01Tgrv9ofbb5dfhkqZNjzAdk disabled.
 ## HANDOVER (Foreman C ROOT-4 session_011xDdVSQC3Gf8WhM6WW38QF → ROOT-5, ~10:25Z 17/11)
 Why: context 31.6% (used_tokens 316k; START_CTX ~6% → limit 31%). Depth 3 → successor depth 4 (allowed). Read: this block + the ROOT-4 log lines below it (08:38Z–10:22Z); CLAIMS rows 'C ROOT-4' + W4e/W5d/W6f rows.
