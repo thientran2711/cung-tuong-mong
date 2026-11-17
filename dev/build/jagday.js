@@ -54,12 +54,15 @@ function agTop(N){let b="",v=0;for(const n in N)if(N[n]>v){v=N[n];b=n}return b}
 /* one buổi of one person's plan: base place (the old schedule's weights) + what she wants + how */
 function agDrawB(p,id,b,base,W){const c=j95c(b);const slot={pl:base[0],a:base[1],t:base[2],why:base[3],k:null,need:null};
  if(W&&W.force){const f=W.force.find(x=>x.b===b||x.b===-1);if(f){AGD.stat.world++;return Object.assign(slot,{pl:f.pl,a:"ag_"+(f.deed||"duty"),k:null,need:"world",why:f.why||W.why||"",world:1})}}
- if(W&&W.place&&W.place[slot.pl]===0)slot.pl=p===S.emp?"dtd":p==="th"?"tn":palaceOf(p);
+ if(W&&W.place){const P=W.place;if(P[slot.pl]===0)slot.pl=p===S.emp?"dtd":p==="th"?"tn":palaceOf(p);
+  /* a world window draws people to its places (worldPlanW place × > 1): her "no goal" place is picked among her own and those, by weight */
+  const L=[[slot.pl,P[slot.pl]!=null?P[slot.pl]:1]];for(const k in P)if(P[k]>1&&k!==slot.pl&&(p===S.emp||p==="th"||j95acc(p,k)))L.push([k,(P[k]-1)*BAL.ag.day.worldPull]);
+  if(L.length>1){const k=agPw(L);if(k!==slot.pl){slot.pl=k;slot.a="go";slot.why=W.why||"việc chung trong cung";AGD.stat.world++}}}
  let N;try{N=agNeedsG(p)}catch(e){return slot}
  const rt=BAL.ag.routine;const NL=[[null,rt]];for(const n in N)if(N[n]>0)NL.push([n,N[n]*BAL.ag.needW]);/* rest is a need (the rest card) */
  const need=agPw(NL);if(!need)return slot;
  let O=agOptsG(p,N,need);
- if(W)O=O.map(o=>{const m=(W.deed&&W.deed[o.k]!=null?W.deed[o.k]:1);return m===1?o:Object.assign({},o,{u:o.u*m})}).filter(o=>o.u>0);
+ if(W)O=O.map(o=>{let m=(W.deed&&W.deed[o.k]!=null?W.deed[o.k]:1);if(W.place){let pl=null;try{pl=o.at(0,p,o.t)}catch(e){}if(pl&&W.place[pl]!=null)m*=W.place[pl]}return m===1?o:Object.assign({},o,{u:o.u*m})}).filter(o=>o.u>0);
  if(!O.length)return slot;
  const o=mindPick(O.map(x=>[x,x.u]),p);if(!o)return slot;
  let pl=null;try{pl=o.at(0,p,o.t)}catch(e){}
@@ -69,11 +72,13 @@ function agDrawB(p,id,b,base,W){const c=j95c(b);const slot={pl:base[0],a:base[1]
  return {pl,a:"ag_"+o.k,t:o.t?ledgerId(o.t):null,why:o.why||"",k:o.k,kd:o.kd||"",need,act:o.act,base:base[0]}}
 /* the old schedule's own row for buổi b, its surprise dice off (surprises are re-plans now) */
 function agBase(fn,args,b){const sur=J95.SUR;const bo=S.buoi;J95.SUR=0;try{S.buoi=b;return fn.apply(null,args)}finally{J95.SUR=sur;S.buoi=bo}}
-const AGD0={};/* the unwrapped schedule functions (set at wiring) */
+const AGD0={};const AGDRAW=[];
+/* other groups join the day draw: agDrawReg(()=>[[person, ledgerId, grp], …]) (part B: maids "maid", servants "srv"); their base row = AGBASE[grp](p,c) */
+function agDrawReg(f){AGDRAW.push(f)}const AGBASE={};function agBaseReg(grp,fn){AGBASE[grp]=fn}/* the unwrapped schedule functions (set at wiring) */
 function agDrawPerson(p,id,from,kind){const D=agDz();const L=D.P[id]=D.P[id]||[];const nB=j95nB();const W=agWorld(p);
  const bo=S.buoi;for(let b=from;b<nB;b++){AG.cB=b;S.buoi=b;/* the access rules / weather of THAT buổi (accessOf reads S.buoi) */try{const c=j95c(b);
-   let base;if(kind==="emp")base=agBase(AGD0.emp,[c],b)[0];else if(kind==="th")base=agBase(AGD0.th,[c],b)[0];else base=agBase(AGD0.rv,[p,c],b)[0];
-   L[b]=kind==="consort"?agDrawB(p,id,b,base,W):(()=>{const s={pl:base[0],a:base[1],t:base[2],why:base[3],k:null,need:null};
+   let base;if(kind==="emp")base=agBase(AGD0.emp,[c],b)[0];else if(kind==="th")base=agBase(AGD0.th,[c],b)[0];else if(AGBASE[kind])base=agBase(AGBASE[kind],[p,c],b)[0];else base=agBase(AGD0.rv,[p,c],b)[0];
+   L[b]=kind==="consort"||kind==="hh"?agDrawB(p,id,b,base,W):(()=>{const s={pl:base[0],a:base[1],t:base[2],why:base[3],k:null,need:null};
     /* the Emperor / Thái hậu: their own providers when a part registers them (AG-ALL part A), else their schedule weights */
     if(Object.keys(AGREG[kind]||{}).length)return agDrawB(p,id,b,base,W);return s})();
    AGD.stat.slots++}catch(e){agdErr("draw",e)}finally{AG.cB=null;S.buoi=bo}}
@@ -82,6 +87,7 @@ function agDayDraw(){const t0=performance.now();const D=agDz();D.d=wk();D.P={};D
  try{if(S.emp)agDrawPerson(S.emp,"emp",0,"emp")}catch(e){agdErr("emp",e)}
  try{if(!S.thDead)agDrawPerson("th","th",0,"th")}catch(e){agdErr("th",e)}
  for(const v of liveRivals(true)){if(!v.alive||v.out)continue;try{agDrawPerson(v,"v"+v.id,0,"consort")}catch(e){agdErr("rv",e)}}
+ for(const f of AGDRAW){try{for(const [p,id,kind] of (f()||[]))agDrawPerson(p,id,0,kind)}catch(e){agdErr("drawReg",e)}}
  const ms=performance.now()-t0;window.__agDayMs=ms;AGD.ms.push(ms);if(AGD.ms.length>60)AGD.ms.shift()}
 /* re-plan at a new buổi (b > 0): her top need changed, or she was touched; chance BAL.ag.day.replan */
 function agTouch(p){try{const id=ledgerId(p);if(!id)return;const z=agZ();z.rp=z.rp||{};z.rp[id]=1;AGD.stat.touch++}catch(e){}}
@@ -130,7 +136,7 @@ function agTickX(){if(!agDOn())return;const D=agDz();if(D.d!==wk())return;const 
 (function(){
  AGD0.rv=j95planRival;AGD0.emp=j95planEmp;AGD0.th=j95planTH;
  j95planRival=function(v,c){if(agDOn()&&v&&!v.out&&!v.confined){try{agDayEnsure();const s=agDaySlot("v"+v.id);if(s)return agRow(s)}catch(e){agdErr("rv",e)}}return AGD0.rv.apply(this,arguments)};
- j95planEmp=function(c){if(agDOn()){try{agDayEnsure();const s=agDaySlot("emp");if(s)return agRow(s)}catch(e){agdErr("emp",e)}}return AGD0.emp.apply(this,arguments)};
+ j95planEmp=function(c){let away=null;try{away=typeof worldWin==="function"&&worldWin("away")}catch(e){}if(agDOn()&&!away){try{agDayEnsure();const s=agDaySlot("emp");if(s)return agRow(s)}catch(e){agdErr("emp",e)}}return AGD0.emp.apply(this,arguments)};
  j95planTH=function(c){if(agDOn()){try{agDayEnsure();const s=agDaySlot("th");if(s)return agRow(s)}catch(e){agdErr("th",e)}}return AGD0.th.apply(this,arguments)};
  /* the buổi's deed = the planned one (AG1's fresh choice per buổi stays as the fallback with no plan) */
  const d0=agDecide0;agDecide0=function(v){if(agDOn()){try{agDayEnsure();const r=agDecideDay(v);if(r!==null)return r}catch(e){agdErr("decide",e)}}return d0.apply(this,arguments)};
@@ -140,4 +146,9 @@ function agTickX(){if(!agDOn())return;const D=agDz();if(D.d!==wk())return;const 
  /* touched: the player's deed aimed at her; a deed of hers that failed */
  const tw0=twDo;twDo=function(a,t,k){const r=tw0.apply(this,arguments);try{if(a===S&&t&&t!==S&&t.id!=null)agTouch(t);if(a&&a!==S&&AG.inTick&&!r)agTouch(a)}catch(e){}return r};
 })();
-Object.assign(window,{agRunReg,agDoerReg,agPlanX,agTickX,AGRUN,agReg,agRegNeeds,agGrp,agNeedsG,agOptsG,agDayDraw,agDayEnsure,agDaySlot,agTouch,AGD,AGREG});
+/* the deeds of this buổi (planned or pending) for the Dư đồ '!' (part C agHap): [{who, k, t, pl, kh, why, wit}] — wit = a person could
+   see it there (the pending deed of this buổi at a real place); plus the day plan's later slots of this buổi with a deed */
+function agPlanned(){const z=agZ(),key=agKey(),L=[];for(const p of z.pend||[])if(p.key===key&&!p.gone&&!p.drop)L.push({who:p.id,k:p.k,t:p.t,pl:p.pl,kh:p.kh,why:p.why,wit:1});
+ const D=agDz();if(D.d===wk())for(const id in D.P){const s=D.P[id][agDayB()];if(s&&s.k&&!L.some(x=>x.who===id))L.push({who:id,k:s.k,t:s.t,pl:s.pl,kh:null,why:s.why,wit:0})}return L}
+window.WORLD_PLAN_HOOKED=1;
+Object.assign(window,{agPlanned,agDrawReg,agBaseReg,agRunReg,agDoerReg,agPlanX,agTickX,AGRUN,agReg,agRegNeeds,agGrp,agNeedsG,agOptsG,agDayDraw,agDayEnsure,agDaySlot,agTouch,AGD,AGREG});

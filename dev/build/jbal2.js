@@ -823,3 +823,4 @@ Object.assign(BAL.ag,{cx:{face:{c:{bac:-30},o:92,w:{sac:3},need:{sung:2}},arts:{
   buy:{keep:20,g:2},gift:{g:4},ally:{bac:30,rel:10,g:4}},
  hh:{g:{judge:6,conf:4,reward:4,pardon:4,cutpay:3,admon:5},confHh:-40,rewardHh:50,cutRelMax:-30,cutRel:15,pardonAff:20,pardonRel:30,pardonDuc:2},
  th:{w:{order:1,fond:.6,mercy:.8},g:{order:10,fond:6,mercy:8},fondTh:60,giftCd:4,mercyTh:50,items:["nhansam","yensao","vongngoc","huongtram"]}});
+BAL.ag.day.worldPull=2;/* weight of a world window place against her own "no goal" place, per × above 1 (worldPlanW place) */
