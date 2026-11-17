@@ -25,3 +25,8 @@ FAULT FOUND: faces of m01/m02/m03 look almost identical (style ref dominates ide
 ## 17/11 ~22:15Z v2.1 (no gens) + measurements
 Owner rule (via ROOT-12): body measured from SKULL TOP (not bun/pins) to feet = 7.5 heads, same px for everyone; buns/ornaments are extra height; never shrink the body to fit them. v2.1 = v2 with that sentence replacing the PROPORTIONS sentence (fig-cutout-clean/PROMPT_V21.txt). Owner 23:30Z: face similarity ignored ("kệ đi"); costume, hairpins, BODY must look the same. Identity test variant (face fig as ref 1) kept for reference only: PROMPT_V21_IDTEST.txt (2 gens, m02/m03 ty1 a18, used for measuring).
 Measurement (px at 1800 tall, by eye on a 10 px ruler): see message to ROOT-12; B01 bodies measure ~8.1-8.6 heads (skull->chin 205-218) vs spec 7.4-7.5 (ref 239): the prompt sentence "1/7.5" yields ~8 heads, heads ~10 % too small, shoulders ~1.5-1.8 face-heights vs 2.0.
+
+## 17/11 ~23:15Z v2.2 tall-canvas tests (owner: (b) base-body dropped, no post-processing; (a) prompt calibration)
+Test keys m02-ty1-a18 / m03-ty1-a18, refs eIyOFEidqL (m09 hd), sheet, face fig; 1024x2304 canvas with headroom; singles + 50 % overlays in img/_review/maid-ty-m09/v22-*, v23-*.
+v22 (v2.1 sentence '7.5 heads from skull top'): face (hairline->chin) m02 155, m03 152 vs m09 172 (-10 %/-12 %) FAIL.
+v23 (v22 + '7.0 heads' + 'head and face exactly as large as reference 1'): m02 ~163, m03 ~165 vs 172-173 (-5 %/-4.6 %), gate 3 % still not met; stopped per order, no more gens. Prompt delta recorded in the messages to Foreman C.
