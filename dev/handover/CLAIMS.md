@@ -642,7 +642,7 @@
 | OI branch review r1 (opus BIG) of de6a876b (origin-intros + entry-exam + kc-roads fix2 + render-cost) | review/batch-0032-oi-r1 | D | session_01964izCyrKPEnt2GpVBazHD | RUNNING | 17/11 05:50Z |
 | one-core-dup part 1 SẴN SÀNG KIỂM 648461b5 → review r1 (opus BIG) | review/one-core-dup-r1 | B | session_01N1tNP6WJifjTnmrtNwmBm4 | RUNNING | 17/11 05:53Z |
 | one-core-dup2 — successor (rolled over): dup hunt round 2 (§5 disagreements + ~30 single-copy concepts), owns guard (opus) | review/one-core-dup2 | B | session_01N1tNP5YW8yGvX2ZkQozRyk | RUNNING | 17/11 05:53Z |
-| STORY FRAME for late-added origins (bd 0 chapters; whole family of load-time registry loops) (opus; story-bot fault 1) | review/story-frame | D | session_01964izFgZ6CTgm1p1mFw3Un | RUNNING | 17/11 05:56Z |
+| STORY FRAME for late-added origins (bd 0 chapters; whole family of load-time registry loops) (opus; story-bot fault 1) | review/story-frame | D | session_01964izFgZ6CTgm1p1mFw3Un | DONE SẴN SÀNG KIỂM 7be4cdc6 (archived) | 17/11 05:56Z |
 | one-core-arcs SẴN SÀNG KIỂM c682afe6 → review r1 (opus BIG) | review/one-core-arcs-r1 | B | session_01N1tNP4ZHFJ1oKb2cNK3zov | RUNNING | 17/11 06:04Z |
 | trait-rename r1 PASS 84d47894 (review/trait-rename-r1; FF on main 6c4f21c3; Hiểm độc → Xảo quyệt, old saves map, coop 60/60) → FOR MAIN next batch | review/trait-rename-r1 | B | session_01N1tNP31pNXiReqkE3LxVdh | PASS | 17/11 06:05Z |
 | one-core-roads SẴN SÀNG KIỂM 75bc9f05 → review r1 (opus BIG; trial-merge with one-core-arcs) | review/one-core-roads-r1 | B | session_01N1tNP5phUb758q6HmgPWgY | RUNNING | 17/11 06:05Z |
@@ -660,3 +660,4 @@
 | coop-thin-d SẴN SÀNG KIỂM 099ce05b → review r1 (opus BIG co-op; brief briefs/review-coop-thin-d-r1.md) | review/coop-thin-d-r1 | B | session_01N1tNP6MvvQQJhGffLYV2m8 | RUNNING | 17/11 06:42Z |
 | one-core-roads r1 PASS 75bc9f05 (review/one-core-roads-r1 = review/one-core-roads, no reviewer fixes; contains main 6c4f21c3, FF-able; trial merge with one-core-arcs clean except rebuild files + baseline per-key min) → FOR MAIN (landing order dup(r2) → dup2 → arcs → roads) | review/one-core-roads-r1 | B | session_01N1tNP5phUb758q6HmgPWgY | PASS | 17/11 06:43Z |
 | origin-bd-branch — Bắc Địch becomes a country branch of hòa thân (OD:L1213–1220, B37), old saves map, measure bd only (opus; brief briefs/origin-bd-branch.md) | review/origin-bd-branch | B | session_01N1tNP2P9Eko2vdenJRPyk3 | RUNNING | 17/11 06:44Z |
+| story-frame review r1 (opus BIG) of 7be4cdc6 | review/story-frame-r1 | D | session_01964izELGvtEztUpxp4u3FC | RUNNING | 17/11 06:45Z |
