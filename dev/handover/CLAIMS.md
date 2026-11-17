@@ -922,3 +922,4 @@
 | odds-cap review r1 (opus BIG) of d3589f39 | review/odds-cap-r1 | D | session_01964izEqMuRVcBrUFRY8F3P | RUNNING | 17/11 19:15Z |
 | REVIEW moodknow final + mood-mem step0 (opus) of 8e2ac171 | review/mood-mem-r1 | C-AG | session_01UV1SzgWE17y4bj2Nh4xG1c | RUNNING | 17/11 19:16Z |
 | MOOD-MEM #2 (opus): memory 2 layers (b) on 8e2ac171 + step0 test runs | review/mood-mem | C-AG | session_01UV1Szigr35QvLkVSd2Vb9L | RUNNING | 17/11 19:17Z |
+| batch s36a-1 LIVE 579e8976 (main d4a850ce → 579e8976; ROLLBACK d4a850ce): kit-figure-mood-r2 + kit-fx-register-r1 | review/batch-s32a | MAIN s36 | session_01UV1SzgWoEmnjTTEv7UgBNP | LIVE | 17/11 19:19Z |
