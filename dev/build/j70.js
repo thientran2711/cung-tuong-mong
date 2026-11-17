@@ -141,7 +141,7 @@ function newPlot70(a,t,m,rid,mo,opt){const z=j70();const M=M70[m];if(!M)return n
 /* ---------- motive -> plot ---------- */
 function motives70(v){const out=[];const z=j70();const sh=z.sh;const rise=sh.length>=4?S.sung-sh[sh.length-4]:0;
  if(rise>=8&&(v.ghen||0)>=35)out.push([S,"ghen"]);
- if(v.slightAt!=null&&bq()-v.slightAt<=6){const L=others(v).filter(x=>x===S||alive70(x));const t=L.sort((a,b)=>oan(v,b)-oan(v,a))[0];if(t&&oan(v,t)>=20)out.push([t,"nhuc"])}
+ if(v.slightAt!=null&&bq()-v.slightAt<=6){const L=others(v).filter(x=>x===S||alive70(x));const t=mindPickBy(L.filter(x=>oan(v,x)>=20),x=>oan(v,x),v);if(t)out.push([t,"nhuc"])/* npc-mind: was ARGMAX oán; gate oán≥20 kept */}
  try{if(sonsOf(v).length&&mySons().length&&(mySons().some(k=>k.heir)||rkOf(S)>=rkOf(v)))out.push([S,"ngoi"])}catch(e){}
  return out}
 function motiveTick70(){const z=j70();for(const v of liveRivals(true)){if(v.confined||v.plan||cnt70(p=>p.a===v.id))continue;const M=motives70(v);if(!M.length)continue;
