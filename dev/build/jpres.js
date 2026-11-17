@@ -86,30 +86,30 @@ function kpresShow(m){try{if(!m||m.__pres)return;const P=kpresPlan(m);if(!P)retu
  W("showModal",o=>function(){const r=o.apply(this,arguments);try{kpresShow(typeof Q!=="undefined"&&Q[0])}catch(e){}return r});
  W("musicCtx",o=>function(){try{const m=typeof Q!=="undefined"&&Q[0];if(m&&m.__presMus&&S&&!S.dead&&S.place!=="lc"&&(m.pid||m.evId))return m.__presMus}catch(e){}return o.apply(this,arguments)})})();
 /* ================= PEOPLE MOMENTS (owner 15/11 20:05Z item 13 + 22:45Z list; S3-151/182/205; review/presentation-wiring) =================
-   The 13 approved people animations + the painted-effect list, wired from ONE table (KPM) through the kit: kitFigFx (KIT §68.8, what happens to a stage figure),
+   The 13 approved people animations + the painted-effect list, wired from ONE table (KPM) through the kit: kitFigMove (KIT §68.8, what happens to a stage figure),
    kitFx (§54 screen moments), kitFxBurst / kitFxSheet / kitFxRim (§68). No private drawing here. Every moment is local presentation after the state applied
    (co-op: nothing sent, nothing awaited); Gọn / reduced motion / bots / no figure on the stage: nothing. Where the person is not on the stage the log line already says it.
    Her own moments (rank, cold palace, pregnancy, birth, death, hit, poison, harm) keep their j93 / j11 scenes; this adds what happens to OTHER people and to her figure.
    Test hook window.KPM_LOG [{m, who, fig, t}]; test dev/test/presentation-people.js. */
 const KPM_LOG=window.KPM_LOG=[];const KPM_LAST={};let KPM_PREV=[],KPM_PL="";const KPM_OUT=new Set();   /* KPM_PREV = the people list the stage was LAST drawn with (the game changes the list before it re-renders) */
 const kpmKey=w=>w&&(w.ref||(w.kind?w.kind+":"+w.name:w));   /* the stage lists wrappers {kind, ref, name}; homePeople() builds NEW wrappers every render, so identity = ref, else kind:name */
-function kpmOn(){try{return typeof kfOn==="function"&&kfOn()&&typeof S!=="undefined"&&S&&!S.dead&&typeof kitFigFx==="function"}catch(e){return false}}
+function kpmOn(){try{return typeof kfOn==="function"&&kfOn()&&typeof S!=="undefined"&&S&&!S.dead&&typeof kitFigMove==="function"}catch(e){return false}}
 function kpmOnce(k,ms){const n=performance.now();if(KPM_LAST[k]&&n-KPM_LAST[k]<ms)return false;KPM_LAST[k]=n;return true}
-function kpmDir(p){try{const e=kfkFigEl(p);if(!e||e.snap)return 1;const r=e.getBoundingClientRect();return r.left+r.width/2<innerWidth/2?-1:1}catch(x){return 1}}
+function kpmSide(p){try{const e=kfkFigEl(p);if(!e||e.snap)return 1;const r=e.getBoundingClientRect();return r.left+r.width/2<innerWidth/2?-1:1}catch(x){return 1}}
 /* moment → what it does. p = the person it happens to (person | "me"), q = the second person (thread), o = options. Returns true when a figure moved. */
 const KPM={
- slap:(p)=>{const f=kitFigFx("flush",p);if(!f&&p!==S&&kpmOnce("slapb"+(p&&p.name),800))kitFxBurst("brush",null,5);return !!f},                       /* one beat: jolt + brief red flush (hit's brush streak + shake is kitFx hit, her only, j11) */
- poison:(p)=>{const f=kitFigFx("poison",p);if(p===S&&kpmOnce("poison",1500))kitFx("poison");return !!f},                                            /* figure tints green, then blurs */
- harm:(p)=>{const f=kitFigFx("flush",p);if(p===S&&kpmOnce("harm",1500))kitFx("harm");return !!f},                                                  /* heavy harm: ink-blood edge on her; the figure jolts */
+ slap:(p)=>{const f=kitFigMove("flush",p);if(!f&&p!==S&&kpmOnce("slapb"+(p&&p.name),800))kitFxBurst("brush",null,5);return !!f},                       /* one beat: jolt + brief red flush (hit's brush streak + shake is kitFx hit, her only, j11) */
+ poison:(p)=>{const f=kitFigMove("poison",p);if(p===S&&kpmOnce("poison",1500))kitFx("poison");return !!f},                                            /* figure tints green, then blurs */
+ harm:(p)=>{const f=kitFigMove("flush",p);if(p===S&&kpmOnce("harm",1500))kitFx("harm");return !!f},                                                  /* heavy harm: ink-blood edge on her; the figure jolts */
  rumour:(p)=>{const e=kfkFigEl(p);if(kpmOnce("rumour",2500))kitFx("rumour",{el:e&&!e.snap?e:null});if(e&&!e.snap&&p!==S)kitFxBurst("paper",e,6);return !!e},    /* ink wisps + fluttering paper notes */
- death:(p)=>{if(p===S)return false;return !!kitFigFx("die",p)},                                                                                    /* figure greys, sinks and fades; white silk falls over */
- drag:(p)=>{return !!kitFigFx("drag",p,{dir:kpmDir(p)})},                                                                                          /* dragged off the stage, screen dims (her: j93 scenes) */
- out:(p)=>!!kitFigFx("out",p,{dir:kpmDir(p)}),                                                                                                     /* leaves the stage: fades out */
- preg:(p)=>{const f=kitFigFx("glow",p,{tone:"lotuslight",r:16});const e=kfkFigEl(p);if(e&&!e.snap)kitFxBurst("petal-lotus",e,5);return !!f},       /* soft pink light round her (rim only, never over the face) */
- birth:(p)=>{const f=kitFigFx("glow",p,{tone:"lotuslight",r:20,ms:3200});const e=kfkFigEl(p);if(e&&!e.snap){kitFxBurst("petal-lotus",e,8);kitFxBurst("lotuslight",e,1)}return !!f},   /* ART REQUEST: swaddled baby appears in her arms (sprite not drawn yet) */
- rise:(p)=>{const f=kitFigFx("glow",p,{tone:"glow-gold",r:18});const e=kfkFigEl(p);if(e&&!e.snap)kitFxBurst("petal-peach",e,6);return !!f},          /* promoted: gold rim + petals */
- fall:(p)=>{return !!kitFigFx("grey",p)},                                                                                                          /* demoted / cold palace: figure greys */
- favour:(p)=>{const e=kfkFigEl(p);if(e&&!e.snap)kitFxBurst("petal-peach",e,9);return !!kitFigFx("glow",p,{tone:"candle",r:12})},                       /* favoured: petals fall round her */
+ death:(p)=>{if(p===S)return false;return !!kitFigMove("die",p)},                                                                                    /* figure greys, sinks and fades; white silk falls over */
+ drag:(p)=>{return !!kitFigMove("drag",p,{dir:kpmSide(p)})},                                                                                          /* dragged off the stage, screen dims (her: j93 scenes) */
+ out:(p)=>!!kitFigMove("out",p,{dir:kpmSide(p)}),                                                                                                     /* leaves the stage: fades out */
+ preg:(p)=>{const f=kitFigMove("glow",p,{tone:"lotuslight",r:16});const e=kfkFigEl(p);if(e&&!e.snap)kitFxBurst("petal-lotus",e,5);return !!f},       /* soft pink light round her (rim only, never over the face) */
+ birth:(p)=>{const f=kitFigMove("glow",p,{tone:"lotuslight",r:20,ms:3200});const e=kfkFigEl(p);if(e&&!e.snap){kitFxBurst("petal-lotus",e,8);kitFxBurst("lotuslight",e,1)}return !!f},   /* ART REQUEST: swaddled baby appears in her arms (sprite not drawn yet) */
+ rise:(p)=>{const f=kitFigMove("glow",p,{tone:"glow-gold",r:18});const e=kfkFigEl(p);if(e&&!e.snap)kitFxBurst("petal-peach",e,6);return !!f},          /* promoted: gold rim + petals */
+ fall:(p)=>{return !!kitFigMove("grey",p)},                                                                                                          /* demoted / cold palace: figure greys */
+ favour:(p)=>{const e=kfkFigEl(p);if(e&&!e.snap)kitFxBurst("petal-peach",e,9);return !!kitFigMove("glow",p,{tone:"candle",r:12})},                       /* favoured: petals fall round her */
  join:(p,q)=>kpmThread(p,q,true),betray:(p,q)=>kpmThread(p,q,false)};                                                                                /* alliance: a red thread joins two people; betrayal: it snaps */
 function kpmThread(p,q,join){try{const a=kfkFigEl(p),b=kfkFigEl(q);if(!a||!b||a.snap||b.snap||a===b){const e=a||b;if(e&&!e.snap)kitFxBurst("petal-peach",e,5);return false}
  const ra=a.getBoundingClientRect(),rb=b.getBoundingClientRect(),x=(ra.left+ra.width/2+rb.left+rb.width/2)/2,y=(ra.top+ra.height*.45+rb.top+rb.height*.45)/2,w=Math.max(120,Math.min(innerWidth*.6,Math.abs(ra.left+ra.width/2-(rb.left+rb.width/2))*1.1));
@@ -141,7 +141,7 @@ const KPM_ACT={tat:{m:"slap",ok:/./},phatquy:{m:"slap",ok:/./},
  /* state changes of the people on the stage, read after each render (any code path): pregnancy announced, rank up / down, cold palace */
  W("render",o=>function(){const r=o.apply(this,arguments);try{kpmScan()}catch(e){}return r})})();
 /* snap = [[wrapper, kfkSnap(picture)]] of the figures drawn BEFORE; cur = the people list now: every figure whose person is gone fades out (a ghost of the old picture) */
-function kpmOutCheck(snap,cur){const now=new Set(cur.map(kpmKey));let n=0;for(const [w,sn] of snap){const k=kpmKey(w),pp=w.ref||w;if(!now.has(k)&&pp.alive!==false&&!KPM_OUT.has(k)){KPM_OUT.add(k);setTimeout(()=>KPM_OUT.delete(k),900);n++;try{kitFigFx("out",sn,{dir:sn.rect.left+sn.rect.width/2<innerWidth/2?-1:1})}catch(e){}}}return n}
+function kpmOutCheck(snap,cur){const now=new Set(cur.map(kpmKey));let n=0;for(const [w,sn] of snap){const k=kpmKey(w),pp=w.ref||w;if(!now.has(k)&&pp.alive!==false&&!KPM_OUT.has(k)){KPM_OUT.add(k);setTimeout(()=>KPM_OUT.delete(k),900);n++;try{kitFigMove("out",sn,{dir:sn.rect.left+sn.rect.width/2<innerWidth/2?-1:1})}catch(e){}}}return n}
 window.kpmOutCheck=kpmOutCheck;
 const KPM_SNAP=new WeakMap();
 function kpmScan(){if(!kpmOn()||typeof curPeople!=="function")return;for(const w of curPeople()){const p=w&&w.ref||w;if(!p||p===S||typeof p!=="object"||p.alive===false||typeof p.rank!=="number")continue;

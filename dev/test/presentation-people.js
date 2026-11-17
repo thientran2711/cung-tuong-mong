@@ -1,4 +1,4 @@
-/* presentation-people (review/presentation-wiring): the people moments of jpres.js (KPM) + the kit part kitFigFx (KIT §68.8).
+/* presentation-people (review/presentation-wiring): the people moments of jpres.js (KPM) + the kit part kitFigMove (KIT §68.8).
    usage: node dev/test/presentation-people.js <site url> <outdir> [--shots] 755x1000@2 1180x820@2 ...
    Per size: 0 page errors, 0 HTTP>=400 (art may 404 until it lands), every moment returns/plays through the kit (KPM_LOG + KFK.log fig:*), figures restore
    (no .kfxk-g ghost left, picture visible again), Gọn (OPT.fxon=false) animates nothing, hooks fire (death via dieIf, leaving the stage = out, state scan = preg,
@@ -8,10 +8,11 @@ const [,,URL,OUT,...A]=process.argv;const SHOTS=A.includes('--shots');const SZ=A
 (async()=>{const b=await chromium.launch();const out=[];fs.mkdirSync(OUT,{recursive:true});
  for(const sz of SZ){const [wh,dp]=sz.split('@');const [W,H]=wh.split('x').map(Number);const ctx=await b.newContext({viewport:{width:W,height:H},deviceScaleFactor:+(dp||1),hasTouch:true,isMobile:W<1100});
   const p=await ctx.newPage();p.setDefaultTimeout(60000);const errs=[],bad=[];p.on('pageerror',e=>errs.push(e.message.slice(0,160)));p.on('response',r=>{if(r.status()>=400&&!/\.(webp|webm|mp4|mp3)|_index\.json/.test(r.url()))bad.push(r.status()+' '+r.url().slice(-60))});
-  await p.goto(URL,{waitUntil:'domcontentloaded'});await p.waitForFunction(()=>typeof start==='function'&&typeof kpmGo==='function'&&typeof kitFigFx==='function');await p.waitForTimeout(2000);
-  await p.evaluate(()=>{try{localStorage.clear()}catch(e){}SLOT=3;document.getElementById('title').hidden=true;for(let i=0;i<60;i++){start();if(!(window.isSrv&&isSrv()))break}['kroul','dawn','kload','ktut'].forEach(i=>{const e=document.getElementById(i);if(e)e.remove()});Q.length=0;
+  await p.goto(URL,{waitUntil:'domcontentloaded'});await p.waitForFunction(()=>typeof start==='function'&&typeof kpmGo==='function'&&typeof kitFigMove==='function');await p.waitForTimeout(2000);
+  await p.evaluate(()=>{window.kitRoulette=function(o){try{o.done&&o.done()}catch(e){}};window.kitKnown=()=>true;try{localStorage.clear()}catch(e){}SLOT=3;document.getElementById('title').hidden=true;for(let i=0;i<60;i++){start();if(!(window.isSrv&&isSrv()))break}['kroul','dawn','kload','ktut'].forEach(i=>{const e=document.getElementById(i);if(e)e.remove()});Q.length=0;
    document.querySelectorAll('.kmov').forEach(e=>e.remove());const md=document.getElementById('modal');if(md)md.hidden=true;render();window.P=()=>curPeople().filter(w=>w.ref&&typeof w.ref.rank==='number'&&kfkFigEl(w.ref)).map(w=>w.ref);goTo('vuon')});
   await p.waitForTimeout(1200);await p.evaluate(()=>{['kroul','dawn','kload','ktut'].forEach(i=>{const e=document.getElementById(i);if(e)e.remove()});Q.length=0;render()});await p.waitForTimeout(1500);
+  await p.waitForFunction(()=>window.P&&P().length>=1,null,{timeout:60000}).catch(()=>{});await p.waitForTimeout(1500);
   const setup=await p.evaluate(()=>{const v=P();return{people:curPeople().length,figs:v.length,place:S.place}});
   const res={};
   /* 1. every moment on a stage figure */

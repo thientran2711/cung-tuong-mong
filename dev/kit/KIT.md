@@ -3627,7 +3627,7 @@ Old flat CSS flashes: red → painted blood edge; gold / warm → painted glowbu
 `node dev/test/fxkit.js <url> <out> [shots]` (5 sizes + reduced motion): every kind loads, 50 bursts → 0 leaks + pool reused, every kitFx kind,
 lights play (screen blend), low-end sheet, edges / gift / letter / sheets clean up, auto-Gọn, frame time, heap after bursts, bytes per scene.
 Kit page sample "§68": a button per sprite kind, light, sheet, edge, gift act, letter and kitFx moment.
-### 68.8 PERSON MOTION · kitFigFx(kind, who, o) (owner 15/11 20:05Z item 13 + 22:45Z list; review/presentation-wiring) — `dev/build/jfxkit.js`
+### 68.8 PERSON MOTION · kitFigMove(kind, who, o) (owner 15/11 20:05Z item 13 + 22:45Z list; review/presentation-wiring) — `dev/build/jfxkit.js`
 The ONE part that animates a stage figure. `who` = person (or its stage wrapper `ref`), `"me"` (her figure), a picture element, or a snapshot `kfkSnap(img)`. Filter + translate on the picture itself (composite "add", so the people-picture filter `url(#kfa)` stays first); terminal kinds use a GHOST copy so a re-render cannot cut them. Pace = kitPace. Gọn / reduced motion / bots / hidden figure (`kfkSeen`): nothing.
 | kind | what | ms (x BAL.pace) |
 |---|---|---|
