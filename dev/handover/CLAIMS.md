@@ -809,7 +809,7 @@
 | REVIEW morechip-sil r2 of d51137ff (sonnet SMALL UI; + count math + dark-scene name) | review/morechip-sil-r2 | MAIN s33 | session_01UV1SzmEh1P3ynxAm3BMz7L | RUNNING | 17/11 15:04Z |
 | REVIEW pcard-facts r1 of 87c73de4 (sonnet SMALL UI) | review/pcard-facts-r1 | MAIN s33 | session_01UV1SzgsZeZ5eQhPhzEf88x | PASS d5f1abb2 | 17/11 15:06Z |
 | one-core-dup3-land LIVE ce29592e1 (main abe056c3 → ce29592e1; rollback abe056c3) | review/one-core-dup3-land | B | session_01N1tNP33c2NR3dwmam25S4X | LIVE | 17/11 15:12Z |
-| one-core jkc wave (kap help vs rules + text family + frozen odb/hst/oan; opus; brief briefs/one-core-jkc-wave.md) | review/one-core-jkc | B | session_01N1tNP4pyJv7mGA2v6arE1f | RUNNING | 17/11 15:20Z |
+| one-core jkc wave (kap help vs rules + text family + frozen odb/hst/oan; opus; brief briefs/one-core-jkc-wave.md) | review/one-core-jkc | B | session_01N1tNP4pyJv7mGA2v6arE1f | SẴN SÀNG KIỂM 84129fa23 (kap cuts → BAL.kc2.st.kc, help 40/90; text family 49 TYPED + 3 real DIFF fixed incl. j79 Sức gloss 20→5; jkc hst/oan/odb → 0; guard 5093→4957; quickcheck/road-end/coop-e2e PASS; bạc-lock family 14 + game odb left for successor; report reports/one-core-jkc.md) | 17/11 16:20Z |
 | REVIEW world-events-2 r1 (opus BIG) of ee9f5396 | review/world-events-2-r1 | C-AG | session_01UV1SzjLZvCQHBpfo4LK15L | RUNNING | 17/11 15:16Z |
 | pcard-facts-r1 PASS d5f1abb2 → builder batch s32a; reviewer archived (main LOOKED Fold popup + iPad) | review/pcard-facts-r1 | MAIN s33 | session_01UV1SzhfMi68Cmn88G2Yqze | PASS → BATCH | 17/11 15:24Z |
 | pcard-facts-2: Thích/Ghét popup date via kpDateText + iPad left block Ghét clip (reviewer notes) on d5f1abb2 | review/pcard-facts-2 | MAIN s33 | session_01UV1Szh5bDFLJ7XCmCJoDvp | RUNNING | 17/11 15:24Z |
