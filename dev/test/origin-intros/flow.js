@@ -1,4 +1,4 @@
-/* review/origin-intros (reviewer r1: each panel is the kit story card — picture band #mb > .kdlgart, text in #mb): every origin, one road: new life → intro panels (kit scene panel, picture frame with §59 fallback, n/N, last panel
+/* review/origin-intros (reviewer r1: each panel is the kit story card — picture band #mb > .kdlgart or the kit-size frame .k3mpic/.k3ev (BAND), text in #mb): every origin, one road: new life → intro panels (kit scene panel, picture frame with §59 fallback, n/N, last panel
    kitTiles) → the selection named for its road (consorts "Tuyển chọn", hòa thân "Lễ ra mắt", cn "Xét phong danh phận", cnv "Tuyển cung nữ")
    → "Để tài nghệ quyết định" → "Nhập cung" card with a "Vì sao" row → entry scene (ONE button) → the first day (two buổi played).
    Home road (road=nha): panels 1, 2, h3 then the home road's own first card; the reason is checked by forcing the road's entry
@@ -7,6 +7,9 @@
 const {chromium}=require('playwright');const URL=process.argv[2];const [W,H]=(process.argv[3]||'755x1000').split('x').map(Number);const SH=process.argv[4]&&process.argv[4]!=='-'?process.argv[4]:'';
 const OR=(process.argv[5]||'tt,dtq,muoi,cn,nc,bd,thd,ch,td,cnv').split(',');const ROAD=process.argv[6]||'cung';const sleep=ms=>new Promise(r=>setTimeout(r,ms));
 const HEAD={nc:'Lễ ra mắt',bd:'Lễ ra mắt',cn:'Xét phong danh phận',cnv:'Tuyển chọn'};
+/* the kit picture band of a story card: the dialog band #mb > .kdlgart, or (kit-size, jksize §"bốn cỡ") the picture frame .k3mpic / .k3ev
+   of the sized card (#mb > .k3body > .k3main.k3mpic > figure.ksart) — both are the ONE kit event picture (oi-render 11/17: batch-0032 kit-size) */
+const BAND='#mb > .kdlgart, #mb .k3mpic, #mb .k3ev';
 (async()=>{const b=await chromium.launch();const out=[];let bad=0;
  for(const o of OR){const c=await b.newContext({viewport:{width:W,height:H},deviceScaleFactor:1,serviceWorkers:'block'});
   await c.addInitScript(()=>{try{localStorage.setItem('ctm-bgpause','1')}catch(e){}setInterval(()=>{document.querySelectorAll('.krskip').forEach(b=>b.click());document.querySelectorAll('.kmov.kcf').forEach(o=>{const b=o.querySelector('.kmend,button');if(b)b.click();else o.click()})},300)});
@@ -23,10 +26,10 @@ const HEAD={nc:'Lễ ra mắt',bd:'Lễ ra mắt',cn:'Xét phong danh phận',cn
   R.q0=await p.evaluate(()=>Q.map(m=>m.t+(m.oiP?'#'+m.oiP:'')));
   /* the intro panels */
   const want=ROAD==='nha'?3:4;const pan=[];
-  for(let i=0;i<want+1;i++){for(let w=0;w<120&&await p.evaluate(()=>{const im=document.querySelector('#modal #mb > .kdlgart figure.ksart img')||document.querySelector('#modal figure.ksart img');return !(im&&im.complete&&im.naturalWidth)});w++)await sleep(250);
-   const s=await p.evaluate(()=>{const m=Q[0];if(!m||!m.oiP)return null;const M=document.getElementById('modal');const d=M.querySelector('.dlg');const fig=d&&(d.querySelector('#mb > .kdlgart figure.ksart')||d.querySelector('figure.ksart'));const img=fig&&fig.querySelector('img');const shown=!!(img&&img.complete&&img.naturalWidth);
-     const r=d.getBoundingClientRect();return{n:m.oiP,t:m.t,scene:!!d.querySelector('#mb > .kdlgart'),sub:(d.querySelector('.kph')||{}).innerText||'',fig:!!fig,src:img?img.getAttribute('src'):'',shown,txt:(d.querySelector('#mb')||{}).innerText||'',tiles:d.querySelectorAll('.kst-tile').length,
-      btn:(document.getElementById('mclose')||{}).textContent||'',fit:r.bottom<=innerHeight+1&&r.right<=innerWidth+1&&r.top>=-1,ovx:document.documentElement.scrollWidth>innerWidth+1}});
+  for(let i=0;i<want+1;i++){for(let w=0;w<120&&await p.evaluate(B=>{const im=document.querySelector('#modal :is('+B+') figure.ksart img')||document.querySelector('#modal figure.ksart img');return !(im&&im.complete&&im.naturalWidth)},BAND);w++)await sleep(250);
+   const s=await p.evaluate(B=>{const m=Q[0];if(!m||!m.oiP)return null;const M=document.getElementById('modal');const d=M.querySelector('.dlg');const band=d&&d.querySelector(B);const fig=d&&(band&&band.querySelector('figure.ksart')||d.querySelector('figure.ksart'));const img=fig&&fig.querySelector('img');const shown=!!(img&&img.complete&&img.naturalWidth);
+     const r=d.getBoundingClientRect();return{n:m.oiP,t:m.t,scene:!!band,sub:(d.querySelector('.kph')||{}).innerText||'',fig:!!fig,src:img?img.getAttribute('src'):'',shown,txt:(d.querySelector('#mb')||{}).innerText||'',tiles:d.querySelectorAll('.kst-tile').length,
+      btn:(document.getElementById('mclose')||{}).textContent||'',fit:r.bottom<=innerHeight+1&&r.right<=innerWidth+1&&r.top>=-1,ovx:document.documentElement.scrollWidth>innerWidth+1}},BAND);
    if(!s)break;pan.push(s);if(SH&&(s.n===1||s.n===want))await p.screenshot({path:`${SH}/oi-${o}-${ROAD}-${s.n}-${W}.jpg`,type:'jpeg',quality:50});
    await p.evaluate(()=>document.getElementById('mclose').click());await sleep(500)}
   R.panels=pan.map(x=>({n:x.n,src:x.src.replace(/^.*img\//,'img/'),btn:x.btn,tiles:x.tiles,fit:x.fit}));
