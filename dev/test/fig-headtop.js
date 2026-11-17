@@ -19,10 +19,6 @@ const sleep=t=>new Promise(r=>setTimeout(r,t));
   R[sz]=await p.evaluate(tab=>{const st=document.getElementById('stage');
    const figs=[...st.querySelectorAll('img')].filter(im=>/fig-/.test(im.getAttribute('src'))&&im.getBoundingClientRect().height>50).map(im=>{const r=im.getBoundingClientRect(),n=im.getAttribute('src').split('?')[0].split('/').pop(),fb=(window.__KITFB||{})[im.getAttribute('src')],v=fb&&fb.v||{t:0,b:1};const ht=tab[n]!=null?tab[n]/4000:v.t;
     const head=r.top+ht*r.height,feet=r.top+v.b*r.height,paint=r.top+v.t*r.height;return{n,head:+head.toFixed(1),feet:+feet.toFixed(1),paint:+paint.toFixed(1),body:+(feet-head).toFixed(1)}});return{shown:true,figs}},tab);
-  const f=R[sz].figs||[];if(f.length>1){const mb=Math.max(...f.map(x=>x.body));R[sz].spread=+((Math.max(...f.map(x=>x.head))-Math.min(...f.map(x=>x.head)))/mb).toFixed(4)}
-  R[sz]=await p.evaluate(tab=>{const M=document.getElementById('modal');const col=M.querySelector('#mb .kpsubj.kes');if(!col)return{shown:false};
-   const figs=[...col.querySelectorAll('.kesimg')].map(im=>{const r=im.getBoundingClientRect(),n=im.getAttribute('src').split('?')[0].split('/').pop(),fb=(window.__KITFB||{})[im.getAttribute('src')],v=fb&&fb.v||{t:0,b:1};const ht=tab[n]!=null?tab[n]/4000:v.t;
-    const head=r.top+ht*r.height,feet=r.top+v.b*r.height,paint=r.top+v.t*r.height;return{n,head,feet,paint,body:feet-head}});return{shown:true,figs}},tab);
   {const f=R[sz].figs||[];if(f.length>1){const mb=Math.max(...f.map(x=>x.body));R[sz].spread=+((Math.max(...f.map(x=>x.head))-Math.min(...f.map(x=>x.head)))/mb).toFixed(4)}}
   R[sz].errs=errs;await ctx.close()}
  console.log(JSON.stringify(R,null,1));await b.close()})();
