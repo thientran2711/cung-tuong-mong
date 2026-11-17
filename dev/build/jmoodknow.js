@@ -235,7 +235,7 @@ function mwWhy(how,hk,ak,m,pl){if(!(window.MEM_DEEDS||{})[m.d]||typeof memPhrase
 /* feeling by deed; a key the EMO table does not hold (e.g. after a feeling-set rename) falls back to the good / bad kind */
 function mwFeel(m){const K=mwB().kind,g=m.s>0?K.good:K.bad,k=K.d&&K.d[m.d];return k&&typeof EMO!=="undefined"&&EMO[k]?k:g}
 /* one wake: a layer-1 cause on the holder; true if it woke */
-function mwWake(hk,ak,m,how,pl){const B=mwB();const p=emoByKey(hk);if(!p||typeof p!=="object")return false;if(hk!=="me"&&!mwWorld())return false;
+function mwWake(hk,ak,m,how,pl){const B=mwB();const p=emoByKey(hk);if(!p||typeof p!=="object"||p.alive===false||p.dead)return false;/* the dead remember nothing */if(hk!=="me"&&!mwWorld())return false;
  const k=mwFeel(m);if(!EMO[k])return false;const t=S.turn;let c=p.mwc;if(!c||c.t!==t)c=p.mwc={t,n:0};if(c.n>=B.cap){MW.n.cap++;return false}
  const g=Math.round(m.g),s=cl(Math.round(g*B.s.k),B.s.min,B.s.max),dur=Math.min(B.dur.max,Math.round((B.dur.base+g*B.dur.k)*(m.L?B.dur.life:1)));
  const why=mwWhy(how,hk,ak,m,pl);if(!why)return false;c.n++;m.ww=mwW();MW.n[how]=(MW.n[how]||0)+1;
