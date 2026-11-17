@@ -623,3 +623,4 @@
 | fig-headtop SẴN SÀNG KIỂM 203a8291 → review asked of map-full reviewer | review/fig-headtop | main s30 | session_01UV1SziNzVtVrRy8QmSoLTB | READY | 17/11 04:56Z |
 | consort rank standard v4 (sonnet art; owner 04:50Z+04:55Z: flowing, phi bạch, no qipao/vest/bulk) | handover reports/fig-cutout-clean/rank-standard | C s13 (via lead #6) | session_011xDdVNgD6LSAWCKxGvMzYP | RUNNING | 17/11 04:55Z |
 | npc-agent AG1 r1-fix2 PASS 2756d2d2 (BIG; WAGE live bug fix inside) → main batch | review/npc-agent-r1-fix2 | C s13 | session_011xDdVRyN4EWAMkVGeM4BB3 | PASS | 17/11 05:13Z |
+| fig-headtop r1 PASS f95f5a92 (review/fig-headtop-r1; 4 more layouts moved to kitFigTop; 8 s fetch-fail fallback = 4 % smaller until retry) → next batch after presentation-wiring + kit-ico-rank | review/fig-headtop-r1 | main s30 | session_01UV1Szipn2t9xXY2WubCJ1T | PASS | 17/11 05:23Z |
