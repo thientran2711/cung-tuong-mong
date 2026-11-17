@@ -33,3 +33,11 @@ Honest: new Thai hau looks like the mama build (shorter, broader robe) than befo
 
 ## OLD MAN (fig-kid-p03-a51) — NOT uploaded, needs C's decision
 Measured face height / figure height: Emperor .097; previous live p03 .081; v4 .089; latest tries .085-.092 (best D = .085, chin line 14.4% vs Emperor 16.3%). So by measurement his head is SMALLER than the Emperor's, not bigger; the owner's first verdict was 'head tiny'. Relayed order says 'still too big'. Variant D (smallest, .085) is prepared (final/fig-kid-p03-a51.webp, not on CDN). If she means the crown+topknot make the whole head look big, say so and I shrink the crown/hair; if she means the face is small, I enlarge to Emperor's .097. Women f04/f01 v4 samples were not rolled out (only samples); no other old-people batch started.
+
+## 17/11 ~01:45Z CORRECTION from owner (via C): colours follow AGE; Thai hau a18 problem = PROPORTION (too tall); old man head too SMALL
+- Colours: young bands keep bright/young colours (pink/orange/pale green); only older ages dark. My earlier all-dark a18/a26 (already live on CDN: fig-thaihau-h*-a18, h*-a26 and por) are WRONG colour -> REPLACED below (not yet uploaded: C sees sheet first).
+- a18/a26 (6 figs): base = young consort c01-a26 body (c01-a18 pose has closed eyes + fan, so c01-a26 used for both); identity+costume = OLD live figure (original pastel colours kept: h1 peach-orange, h2 pink / pink-lilac, h3 pale cream-green / pale green); no train. Sheets: young-thaihau-a18.jpg (light bg), young-thaihau-a26-dark.jpg. face height/figure height: a18 .091/.098/.093, a26 .096/.096/.094 (c01 a18 .104, a26 .098). Poses now = c01-a26 pose (beads held at the chest).
+- a36/a51 + fig-thaihau-1/2/3 stay as uploaded (mama build, colours = their old colours, already dark/amber in the old files).
+- Old man p03-a51: base Emperor, face crop of the old man as identity, outfit from previous live figure, prompt says head as big as the Emperor's: face .091-.095 (Emperor .097, previous live .081). Candidate G (.095) chosen: oldman-p03-v5.jpg. Not uploaded.
+- por for a18/a26: must be re-cut from the new figures (6 more busts) after C OKs the figures; the por on CDN for those 6 are currently the dark-colour ones.
+- 2K: all gens used the default 2K output.
