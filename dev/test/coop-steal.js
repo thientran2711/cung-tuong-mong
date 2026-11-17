@@ -80,7 +80,8 @@ async function join(B,code){await B.page();await B.p.goto(BASE+'?room='+code,DCL
     const b=[...document.querySelectorAll('.kmov.kcf button,.kmov.kcf [role=button]')].find(x=>x.offsetParent!==null);if(b){b.click();return ''}
     const m=document.getElementById('modal');if(m&&!m.hidden&&Q[0]&&Q[0].pid!=="nfch")return 'other';
     const k=[...document.querySelectorAll('.kmov')].find(e=>e.getClientRects().length&&!e.classList.contains('kcf'));if(k){const bb=[...k.querySelectorAll('button')].find(x=>x.getClientRects().length);(bb||k).click()}return ''},name).catch(()=>'');
-   if(r==='other'){await clear(o,1);await sleep(200);continue}   /* another dialog (mood, news…) sits over the scene: the player answers it first */
+   if(r==='other'){await clear(o,1);await sleep(200);continue}
+   if(r===''&&Date.now()-t0>4000&&(Date.now()-t0)%3000<400)await press1(o);   /* the seat answered its other dialogs: press "Sang ngày mới" again (the commit runs on the first press with nothing open) */   /* another dialog (mood, news…) sits over the scene: the player answers it first */
    if(r)return r;
    if(!STUCK[o.name]&&Date.now()-t0>15000){STUCK[o.name]=await o.p.evaluate(()=>({kmov:[...document.querySelectorAll('.kmov')].map(e=>e.className+(e.offsetParent?'':'(hidden)')),dawn:!!document.getElementById('dawn'),
      modal:!document.getElementById('modal').hidden&&document.getElementById('mt').textContent,Q:Q.map(m=>m.pid||m.t),busy:window.cfBusy&&cfBusy(),cf:(window.__cfdbg||[]).slice(-6),x:S.nfX})).catch(e=>e.message);console.log('STUCK',o.name,JSON.stringify(STUCK[o.name]).slice(0,900))}
@@ -95,7 +96,7 @@ async function join(B,code){await B.page();await B.p.goto(BASE+'?room='+code,DCL
  /* 1. the host's Emperor turns an NPC's card; BOTH seats get the choice; the guest's Tranh sủng is resolved once on the host → her night */
  let H=await force("npc");await noCyc(B);await A.p.evaluate(()=>{oSteal=()=>100});/* the friend's odds are read on the host */
  await endEvening();
- const c1=await answer(B,"Tranh sủng"),h1=await answer(A,"Thôi");
+ const [c1,h1]=await Promise.all([answer(B,"Tranh sủng"),answer(A,"Thôi")]);/* both seats at the same time (order never matters) */
  ok(c1==="Tranh sủng/Chặn ngự giá/Thôi"&&h1==="Tranh sủng/Chặn ngự giá/Thôi",'1: both seats get the attacker choice after the flip',[c1,h1]);
  ok(await until(A,()=>S.tonight&&S.tonight.coop&&S.ntk&&S.ntk.who===S.tonight.id,null,30000),'1: host gives the night to the friend (decided once)',await A.p.evaluate(()=>nfDebug()));
  ok(await until(B,()=>S.tonight==="me"&&(S.nfN===wk()||Q.some(m=>m.pid==="nfsum"||m.pid==="prep")),null,30000),'1: guest plays her own night (summons → sequence)',await B.p.evaluate(()=>({d:nfDebug(),Q:Q.map(m=>m.pid)})));
@@ -106,7 +107,7 @@ async function join(B,code){await B.page();await B.p.goto(BASE+'?room='+code,DCL
  H=await force("npc");await A.p.evaluate(()=>{oSteal=()=>100;S.sung=80;const f=liveRivals(false).find(v=>v.coop);if(f)f.sung=20});
  const s0=await B.p.evaluate(()=>{S.sung=20;S.cyb=Object.assign(S.cyb||{},{lie:wk()});return S.sung});
  await endEvening();
- const c2=await answer(B,"Tranh sủng"),h2=await answer(A,"Tranh sủng");ok(!!c2&&!!h2,'2: both chose Tranh sủng',[c2,h2]);
+ const [c2,h2]=await Promise.all([answer(B,"Tranh sủng"),answer(A,"Tranh sủng")]);ok(!!c2&&!!h2,'2: both chose Tranh sủng',[c2,h2]);
  ok(await until(A,()=>S.tonight==="me"||S.nfN===wk(),null,30000),'2: the higher Sủng (host) wins',await A.p.evaluate(()=>nfDebug()));
  ok(await until(B,()=>S.tonight&&S.tonight!=="me"&&S.tonight.coop,null,30000),'2: guest sees the host holding it',await B.p.evaluate(()=>nfDebug()));
  const g=await B.p.evaluate(()=>({sung:S.sung,line:S.logs.slice(0,8).join(" ")}));ok(g.sung===s0&&/cũng mời được/.test(g.line),'2: guest: no Sủng loss, the "cũng mời được" line',g);
@@ -115,7 +116,7 @@ async function join(B,code){await B.page();await B.p.goto(BASE+'?room='+code,DCL
  ok(await nextNight('3'),'3: at tối again');
  H=await force("friend");await noCyc(B);await A.p.evaluate(()=>{oSteal=()=>1;oKeep=()=>99});
  await endEvening();
- const c3=await answer(B,"Giữ chân Hoàng thượng"),h3=await answer(A,"Tranh sủng");
+ const [c3,h3]=await Promise.all([answer(B,"Giữ chân Hoàng thượng"),answer(A,"Tranh sủng")]);
  ok(c3==="Giữ chân Hoàng thượng/Thôi"&&h3==="Tranh sủng/Chặn ngự giá/Thôi",'3: the flipped guest gets the defence choice, the host the attack',[c3,h3]);
  ok(await until(B,()=>S.tonight==="me"&&(S.nfN===wk()||Q.some(m=>m.pid==="ksp"||m.pid==="prep"))&&S.logs.slice(0,10).join(" ").includes("không ai giành được"),null,30000),'3: guest keeps her night, the defence gain line',await B.p.evaluate(()=>({d:nfDebug(),Q:Q.map(m=>m.pid),L:S.logs.slice(0,6)})));
  ok(await until(A,()=>S.tonight&&S.tonight.coop&&S.logs.slice(0,10).join(" ").includes("không động lòng"),null,30000),'3: host: the friend still holds, the host\'s try failed (stealFail line)',await A.p.evaluate(()=>({d:nfDebug(),L:S.logs.slice(0,6)})));
