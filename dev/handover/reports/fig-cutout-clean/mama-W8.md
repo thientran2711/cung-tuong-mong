@@ -14,3 +14,9 @@ Sheet = pilot-mama/pilot-sheet.jpg (a18 | OLD | NEW per file). Scratch /home/use
 
 ## OWED / DENIED (do not retry; ROOT-5 raising with main)
 - m05-t1-a36: creations_upload_image of the OLD ref denied by classifier ('Unsanctioned Communication') 10:5xZ. Skipped. Not routed around.
+
+## BATCH m05-m07 (29 files + owed m05-t1-a36), sheets pilot-mama/sheet-m05|m06|m07.jpg (a18|OLD|NEW), all looked OK, forehead crops bare, NOT uploaded (hold for ROOT-5 OK)
+Gen ids: m05-t1-a51 LwoGpiNswO | t2-a36 aFAUzAofSh | t2-a51 MB7qO3iDCm | t3-a36 4RQebhx9Aa | t3-a51 Xm41iyrBfo | t4-a36 DoJb6gapcl | t4-a51 3z58Lb7REY | t5-a36 u5YOeZKQLD | t5-a51 SymWK8lUb8
+m06 t1-a36 jUBAKD3LD0 | t1-a51 bxVNuTb5Y2 | t2-a36 gOtYgxgSXO | t2-a51 TdUFTTUVNR | t3-a36 bxV6xXF5Y2 | t3-a51 nVLCVPVYQD | t4-a36 UPh0ivdwny | t4-a51 WDluBJUcXe | t5-a36 P3ueWYF42C | t5-a51 u5YylO3QLD
+m07 t1-a36 u5Yy7LgQLD | t1-a51 u5Yy7UJQLD | t2-a36 mERggVjhJQ | t2-a51 xSXAAH1jfW | t3-a36 KLD3ANpkqp | t3-a51 w4vTpVa7EI | t4-a36 3z5ICytREY | t4-a51 0eSF1WyTfW | t5-a36 YMsExUFWeC | t5-a51 mERg6cfhJQ
+Credits batch: ~130 (wasted m05 retries) + 585 + 1300 = ~2,000; total ~3,200. Method now delegated to sub-agents (brief = scratch AGENT_BRIEF.md, prompt in mama-W8 pilot v2 notes).
