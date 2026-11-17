@@ -1,6 +1,6 @@
 # Sub-agent brief: generate+finish+upload ~10 kid figures (W4d)
 Repo /home/user/cung-tuong-mong (detached, handover branch). NEVER git commit/push. Scratch: /tmp/claude-0/w/<AGENTNAME>/ (create). Tools: dev/handover/reports/fig-cutout-clean/tools/{finish_fig.py,qa_fig.py} (python3 -I; scipy/cv2/pillow installed). dev/site/cdn_sync.py exists (uncommitted).
-Load Magnific tools via ToolSearch select: mcp__0ddfb647-f012-4bd3-adf9-4599110717d2__creations_upload_image, __images_generate, __creations_wait, __creations_get (full prefixed names).
+Load Magnific tools via ToolSearch select: mcp__0ddfb647-f012-4bd3-adf9-4599110717d2__creations_upload_image, __images_generate, __creations_wait, __creations_get (full prefixed names; the server may be named mcp__Magnific__* instead of the long id prefix).
 RATE LIMIT: max 5 images_generate in flight in total (you are the only generator now): send 5, creations_wait, then the next 5. On throttle wait and retry; never duplicate a submission.
 Per key (e.g. eunuch-u06-a18):
 1. creations_upload_image url https://ctm-img.victoria-tntt.workers.dev/img/fig-<key>.webp fileName <key>.webp folderReference ba4aecfe-efce-47e2-b53f-30d292091886 -> old-ref id (all in ONE message).
