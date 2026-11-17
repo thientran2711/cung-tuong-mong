@@ -38,3 +38,4 @@ YOUR LOOP: read notifications; when a worker reports a rollover, open its succes
 - 02:00Z told all 7 workers 'new lead'. Maid hd answer (told Foreman C): game reads hd for any fig-*.webp listed in img/FIGURES-hd.json; maids simply were never listed/uploaded => no code change; workers now make+upload hd for all figs and merge manifest entries (BATCH_BRIEF.md section 'HD FOR EVERY FIGURE').
 - Files live / credits: (fill each hour)
 - 02:15Z manifest merge #1: CDN FIGURES-hd.json 1598 -> 1635 (W4b maid fragment, rebuilt by lead from CDN). W4b->W4c = session_011xDdVShYq4ow4VaBTVm4CY; W7->W7b = session_011xDdVRfTXkRr1K97oJueiZ (retro-fits 56 hd). W2: 33/256 a18 (ctx ~15%).
+- 02:20Z W6->W6b = session_011xDdVNxAYRynZa8Sq6PzU6 (retro-fit hd of 56). Workers now: W1b ...Qbi2, W2 ...RJKY, W3b ...RasD, W4c ...ShYq4, W5b ...RUq5, W6b ...NxAY, W7b ...RfTX.
