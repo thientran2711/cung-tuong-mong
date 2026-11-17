@@ -42,3 +42,7 @@ Risks: Fold labels tiny at fit-all (owner may want a higher floor); labels pass 
 - Result: iPad fit-all hides 5 of 29 labels, 1366 hides 3, Fold hides 26 (3 labels shown: her place, Đông cung, Kính sự phòng) because the Fold free width is 509 px (screen minus rail minus right column). Fold zoom step 1 shows ~20 readable labels (shot below). Whole map stays visible at fit-all (I did NOT zoom up, that would cut the palace).
 - Option for main/owner if 3 labels on Fold is too few: let the Fold map ignore the right column width at fit-all (map 689 px wide, right part under the cards until panned) — trade: part of the palace hidden under the column.
 - Shots (CDN img/_review/map-me-mark/): {755x1000,1180x820,1366x1024}-map-fitall.jpg, {755x1000,1180x820}-map-zoom-rightend.jpg, 755x1000-map-zoom-step1.jpg (older place-view / weather shots still valid).
+
+## §5 Round 3 (MAIN 12:48Z) — review/map-me-mark b62bd85f
+Portrait (Fold) fit-all now uses the FULL map width (689 px); the right part runs under the right column with its faded edge, pan to the right end still lands flush. Fold fit-all: 15 of 29 labels visible, all readable (>= ~11 px), 0 overlaps. Previous CDN fit-all shot was the Luân hồi screen (harness flake) — replaced; all r3 shots were LOOKED at.
+Shots (CDN img/_review/map-me-mark/): 755x1000-fitall-r3, 755x1000-zoom1-r3, 755x1000-placeview-r3, 1180x820-fitall-r3, 1180x820-weather-r3 (.jpg).
