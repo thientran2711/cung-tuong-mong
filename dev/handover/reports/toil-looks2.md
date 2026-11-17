@@ -31,3 +31,11 @@ PRIORITY #1 CHECK: OD 17/11 ~13:08Z (overwrites 13:05Z) | reused jtoil.js toilMk
 - Samples (real renderer, 755x1000@2, c07-t3-a18 + c31-ty2-a18, Ho phach warm + Lan tuyet cool, 6 panels, LOOKED at both): https://ctm-img.victoria-tntt.workers.dev/img/_review/toil-looks/toil-looks-1.png?v=3 and -2.png?v=3
 - Gates: mk-layer-scan 12960 pictures 0 bad; toil-tease 25/25; toil-react PASS; toil-overlay 33 checks 0 bad; toil-allday PASS 10; toil-draw 0 bad; quickcheck PASS 158 s (render 193/231 ms).
 - Note: svg ellipse-count scan unchanged (SVG path kept for mesh-less faces). Data still HELD on CDN (mesh), as before.
+
+### looks3 v4 - review/toil-looks2 b56f18bd7 (main's ?v=3 feedback + owner 13:25Z lips + 13:28Z mask)
+PRIORITY #1 CHECK: OD 13:08Z/13:25Z/13:28Z | reused toilMkDraw (new helper toilMkGeom in jtoil.js).
+- Blush = feathered gaussian oval, tilted toward the temple, below the eyes; size = eye distance x level, SHRUNK until it fits the face outline and stays below the eyes; a cheek that cannot fit (far side of a strongly turned face) gets none.
+- Mask (per face, from the mesh; the mesh has no jaw points, so the outline oval is built from eye span + eye-to-mouth): skin layers x outline x her cheek-skin colour match x (1 - dilated eye polygons); eyelid/shimmer x outline x looser skin match. Lips/brows are painted from the picture itself.
+- Ladder: Doan trang light < Kieu diem fuller < Khuynh thanh most polished (blush .5, eye .92 + shimmer .5, lip .74 + sheen, skin light .36) ; Diem dua overdone (blush .62 big feathered, lips .86). Vung ve: irregular white powder patches/streaks. Lips: blurred edge (softer the darker), colour floor raised so the artwork's own lip line no longer shows as an outline.
+- mk-layer-scan now also checks, for ALL 12960 mesh pictures x 5 levels, that every blush oval lies inside the outline and below the eyes: 0 bad. (A pixel-level check on all faces needs every picture from the CDN; not done, only the 2 sample sheets looked at.)
+- Samples ?v=4: https://ctm-img.victoria-tntt.workers.dev/img/_review/toil-looks/toil-looks-1.png?v=4 / -2.png?v=4. Gates: mk-layer-scan 0 bad, toil-tease 25/25, toil-react PASS, toil-overlay 0 bad, quickcheck PASS (one noisy buoi median 1489 vs live 904 in that run, 889/934 in the previous one).
