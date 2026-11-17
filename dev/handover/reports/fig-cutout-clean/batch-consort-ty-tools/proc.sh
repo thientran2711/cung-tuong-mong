@@ -2,7 +2,7 @@
 # proc.sh KEY URL  -> download master, finish, qa; appends to scratch log. KEY e.g. consort-c01-ty1-a18
 S=/tmp/claude-0/-home-user-cung-tuong-mong/dad78ca2-b43f-5b5f-9eea-225524ea5f8a/scratchpad
 T=/home/user/cung-tuong-mong/dev/handover/reports/fig-cutout-clean/tools
-K=$1; mkdir -p $S/m $S/out
+export FORCE_HD=1; K=$1; mkdir -p $S/m $S/out
 curl -s -o $S/m/$K.png "$2"
 python3 -I - <<PY
 from PIL import Image;im=Image.open("$S/m/$K.png");e=im.getchannel("A").getextrema() if im.mode=="RGBA" else None
