@@ -202,3 +202,61 @@ window.emo2Stat=()=>Object.assign({},EMO2.n);
 /* review r1: the card's "Đã biết" mood fact ("… đang buồn, vì …") is marked "nay đã khác" (kit current:false) once that cause is no longer on the person */
 (function(){if(typeof intelOf!=="function")return;const i0=intelOf;intelOf=function(p){const L=i0.apply(this,arguments);try{if(!p||!mckOn())return L;const W=[];const e=emoGet(p);if(e&&e.why)W.push(e.why);
   const now=mkOn()?mkNow():0;for(const m of p.mk||[])if(m.k&&m.why&&m.k1>now)W.push(m.why);for(const x of L)if(x.kind==="mood")x.current=W.some(w=>String(x.fact||"").includes("vì "+w))}catch(x){}return L};window.intelOf=intelOf})();
+
+/* ================= MOOD-MEM — TWO LAYERS (owner OD 17/11 ~18:25Z (b): "làm theo 2 tầng giống như bạn khuyến nghị ở lượt 35") =================
+   Layer 1 = mood causes (p.mk above, khắc timers, BAL.mood2). Layer 2 = jmem memories (months / years / lifelong, S.mem / holder.mem).
+   A memory WAKES a short layer-1 cause when its holder (1) MEETS the remembered person (the two come to one place; S.place for her, S.where for NPCs,
+   a servant stays with its master's household), (2) comes to the PLACE where it happened (m.pl, stamped by jmem memAdd when both were there; not the
+   holder's own dwelling), or (3) on its ANNIVERSARY (same tuần of a later year). Strength / khắc by the memory's weight (lifelong longer), feeling by
+   the deed (BAL.memWake.kind); cap of wakes a month per person and a per-memory pause (BAL.memWake.cap / cd). One rule for her and every NPC.
+   The woken cause is an ordinary cause (class secret, aimed at the remembered person) → moodCauseKnown reads it like any other.
+   The jealousy score/feeling split (ghenUp, Chạnh lòng) lives in step 0 (j1 ghenUp + ghenFeel above), not here. Co-op: NPC wakes / NPC feelings on the host only (mckWorld). Off switch: window.__mwOff = 1. Stats: mwStat(). */
+const MW={at:-1,w:-1,loc:{},tog:{},n:{meet:0,place:0,ann:0,cap:0}};
+function mwB(){return BAL.memWake}
+function mwOn(){try{return !!(typeof S!=="undefined"&&S&&!S.dead&&BAL.memWake&&!window.__mwOff&&typeof memHolders==="function"&&typeof emoOn==="function"&&emoOn())}catch(e){return false}}
+function mwWorld(){try{return typeof mckWorld==="function"?mckWorld():(typeof worldOn!=="function"||!!worldOn())}catch(e){return true}}
+function mwYear(){try{return 12*TUAN.length}catch(e){return 36}}
+function mwW(){try{return wk()}catch(e){return 0}}
+/* where a person is now: her place; NPCs by the buổi's S.where; a servant with its master's household */
+function mwLoc(hk){try{hk=String(hk);if(hk==="me")return S.place||"home";const W=S.where||{};if(hk==="emp")return W.emp||null;if(hk==="th")return S.thDead?null:(W.th||null);
+ const p=emoByKey(hk);if(!p||typeof p!=="object")return null;if(p.sid!=null&&p.id==null){const o=ownerOf(p);return o===S?"home":o&&o.alive&&!o.out?palaceOf(o):null}
+ if(!p.alive||p.coop)return null;return whereOf(p)}catch(e){return null}}
+function mwHome(hk){try{hk=String(hk);if(hk==="me")return"home";const p=emoByKey(hk);if(!p||typeof p!=="object")return null;
+ if(p.sid!=null&&p.id==null){const o=ownerOf(p);return o===S?"home":o?palaceOf(o):null}return p.id!=null?palaceOf(p):null}catch(e){return null}}
+/* jmem memAdd stamps m.pl with this: the place both people are at, or null */
+function mwPlaceOf(hk,ak){const a=mwLoc(hk),b=mwLoc(ak);return a&&a===b?a:null}
+function mwName(k){k=String(k);if(k==="me")return"ngươi";if(k==="emp")return"Hoàng thượng";if(k==="th")return"Thái hậu";const p=emoByKey(k);return p&&p.name||"người ấy"}
+function mwPron(k){k=String(k);return k==="me"?"ngươi":k==="emp"?"ngài":k==="th"?"người":"nàng"}
+const MW_NUM=["","một","hai","ba","bốn","năm","sáu","bảy","tám","chín","mười"];
+function mwWhy(how,hk,ak,m,pl){const D=(window.MEM_DEEDS||{})[m.d];if(!D)return"";const who=mwName(ak);
+ const ph=who+" "+D[2].replace(/\{o\}/g,mwPron(hk)).replace(/\{x\}/g,m.x||"").replace(/\s+/g," ").trim();
+ if(how==="ann"){const n=Math.max(1,Math.round((mwW()-(m.w||0))/mwYear()));return `tròn ${MW_NUM[n]||n} năm ngày ${ph}`}
+ if(how==="place"){let pn=pl;try{pn=placeName(pl)}catch(e){}return `trở lại ${pn}, chợt nhớ chuyện cũ: ${ph}`}
+ return `gặp ${who}, chợt nhớ chuyện cũ: ${ph}`}
+/* feeling by deed; a key the EMO table does not hold (e.g. after a feeling-set rename) falls back to the good / bad kind */
+function mwFeel(m){const K=mwB().kind,g=m.s>0?K.good:K.bad,k=K.d&&K.d[m.d];return k&&typeof EMO!=="undefined"&&EMO[k]?k:g}
+/* one wake: a layer-1 cause on the holder; true if it woke */
+function mwWake(hk,ak,m,how,pl){const B=mwB();const p=emoByKey(hk);if(!p||typeof p!=="object")return false;if(hk!=="me"&&!mwWorld())return false;
+ const k=mwFeel(m);if(!EMO[k])return false;const t=S.turn;let c=p.mwc;if(!c||c.t!==t)c=p.mwc={t,n:0};if(c.n>=B.cap){MW.n.cap++;return false}
+ const g=Math.round(m.g),s=cl(Math.round(g*B.s.k),B.s.min,B.s.max),dur=Math.min(B.dur.max,Math.round((B.dur.base+g*B.dur.k)*(m.L?B.dur.life:1)));
+ const why=mwWhy(how,hk,ak,m,pl);if(!why)return false;c.n++;m.ww=mwW();MW.n[how]=(MW.n[how]||0)+1;
+ if(mkOn()){mkAdd(p,{kd:"m:"+ak+":"+m.d+":"+(m.x||""),k,s,why,e:"mem",c:"sec",t:ak},dur);mkSync(p)}else emoSet(p,k,s,why,ak);
+ return true}
+/* once a khắc: meetings (a pair comes together), places (the holder arrives where it happened), anniversaries (first look of the tuần) */
+function mwTick(){if(!mwOn())return;let now=0;try{now=mkNow()}catch(e){}if(MW.at===now)return;MW.at=now;const W=mwW(),Y=mwYear(),B=mwB();
+ const LC={},L=k=>k in LC?LC[k]:(LC[k]=mwLoc(k));const world=mwWorld();
+ for(const [hk,HM] of memHolders()){if(hk!=="me"&&!world)continue;let P;try{P=memPairs(hk,HM)}catch(e){continue}
+  const lh=L(hk),prev=MW.loc[hk];MW.loc[hk]=lh;if(!P.length)continue;const home=mwHome(hk),cand=[];
+  for(const [ak,arr] of P){if(!Array.isArray(arr))continue;const la=L(ak),tg=!!(lh&&la&&lh===la),key=hk+"|"+ak,was=MW.tog[key];MW.tog[key]=tg;
+   for(const m of arr){if(!m||!(m.g>0)||!MEM_DEEDS[m.d])continue;
+    if(m.w!=null&&W>m.w&&(W-m.w)%Y===0&&(m.g>=B.ann||m.L)&&m.ww!==W){cand.push([m,ak,"ann"]);continue}
+    if(m.g<B.min||(m.ww!=null&&W-m.ww<B.cd))continue;
+    if(tg&&was===false)cand.push([m,ak,"meet"]);
+    else if(m.pl&&lh===m.pl&&prev!==undefined&&prev!==lh&&m.pl!==home)cand.push([m,ak,"place"])}}
+  if(!cand.length)continue;cand.sort((a,b)=>b[0].g-a[0].g);const done=new Set();
+  for(const [m,ak,how] of cand){if(done.has(m))continue;done.add(m);mwWake(hk,ak,m,how,lh);const q=emoByKey(hk);if(q&&q.mwc&&q.mwc.t===S.turn&&q.mwc.n>=B.cap)break}}
+ MW.w=W}
+window.mwPlaceOf=mwPlaceOf;window.mwTick=mwTick;window.mwStat=()=>Object.assign({},MW.n);window.__MW=MW;
+(function(){const run=()=>{try{mwTick()}catch(e){console.error("mwTick",e)}};
+ if(typeof render==="function"){const r0=render;render=function(){run();return r0.apply(this,arguments)}}
+ if(typeof endTurn==="function"){const e0=endTurn;endTurn=function(){const r=e0.apply(this,arguments);run();return r}}})();
