@@ -225,6 +225,23 @@ def pull(globs):
     print(f"pull: {len(keys)} on CDN match, {n} downloaded ({by / 1e6:.1f} MB) into {R}")
 
 
+def anchor_check(uploaded):
+    """owner 17/11 (toil-reveal-fix): after a face picture upload (por-/fig- of the consort faces / player looks) the face-mesh anchor check runs by itself
+    (dev/art/mkfit/verify.py --names, report only; needs mediapipe + the model, else a loud notice). Fix: bash dev/art/mkfit/on-upload.sh"""
+    import re, subprocess
+    names = sorted(k.split("/")[-1] for k in uploaded if re.match(r"img/(por|fig)-(consort|player)-.*\.webp$", k))
+    if not names: return
+    print(f"anchor check: {len(names)} face pictures uploaded -> dev/art/mkfit/verify.py (face-mesh points must sit on the painted face)")
+    try:
+        import mediapipe  # noqa: F401
+    except Exception:
+        print("  !! mediapipe is not installed: the anchor check did NOT run. pip install mediapipe, then: python3 -I dev/art/mkfit/verify.py --names " + ",".join(names[:5]) + (",..." if len(names) > 5 else ""))
+        return
+    here = os.path.dirname(os.path.abspath(__file__))
+    r = subprocess.run([sys.executable, "-I", os.path.join(here, "..", "art", "mkfit", "verify.py"), "--names", ",".join(names), "--jobs", "4"], capture_output=True, text=True)
+    print("\n".join(("  " + l) for l in (r.stdout + r.stderr).splitlines() if l.strip() and "Traceback" not in l and "File " not in l)[-1500:])
+
+
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("paths", nargs="*", help="files/folders/globs under img/ or audio/ (default: all)")
@@ -339,6 +356,7 @@ def main():
             raise SystemExit(f"after upload {len(bad)} files do not match on the CDN, e.g. {bad[:5]}")
         write_index(remote)
     print(f"done: uploaded {done} ({by / 1e6:.1f} MB), deleted {len(gone)}, unchanged {same}, held {len(held)} in {time.time() - t0:.0f} s")
+    anchor_check(todo)
     if held:
         sys.exit(2)
 
