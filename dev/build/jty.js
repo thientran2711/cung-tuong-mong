@@ -82,7 +82,7 @@ function tyCharge(k){try{if(!tyOn(S)||!S.visit)return;const key=`${wk()}.${S.buo
    does not fire for an NPC in trung y (jty's weekly npcOut is her price). leAttire is a hoisted declaration in jaudit (later in the bundle),
    so this wrap sits under jtoil's. */
 (function(){if(typeof leAttire!=="function")return;const la0=leAttire;leAttire=function(p,occasion,host){const q=p||S;if(!tyOn(q))return la0.apply(this,arguments);
-  const B=BAL.thieuLe||{aff:-3,strict:1.5};let st=false;try{st=leHostKind(host)==="strict"}catch(e){}
+  const B=BAL.thieuLe;let st=false;try{st=leHostKind(host)==="strict"}catch(e){}
   return{state:"plain",delta:{danh:0,duc:0,aff:Math.round(B.aff*(st?B.strict:1))},why:["mặc trung y"],occasion:occasion||"",host,ty:1}};window.leAttire=leAttire})();
 (function(){if(typeof aaThieuLe0!=="function")return;const a0=aaThieuLe0;aaThieuLe0=function(p){if(tyOn(p))return false;return a0.apply(this,arguments)}})();
 /* ---------- robbery on the road (cướp / giật y phục) ---------- */
@@ -91,7 +91,7 @@ function tyRobOdds(k){const T=BAL.ty;let o=0;const night=(S.buoi||0)>=(typeof B4
  const plot=S.tyOmen&&S.tyOmen.until>=wk()&&RV(S.tyOmen.by);
  if(!night&&!lonely)return 0;if(plot)o+=T.robPlot;else if(night&&lonely)o+=T.robThug;else return 0;if(night)o+=T.robNight;if(lonely)o+=T.robLonely;return Math.min(80,o)}
 function tyRob(k){const T=BAL.ty;const w=wdOf(S);const e=w.y;if(!e||!wdItem(e))return false;const it=wdItem(e);const plot=S.tyOmen&&S.tyOmen.until>=wk()?RV(S.tyOmen.by):null;
- w.y=null;S.tyOmen=null;tyLost(S,"cuop");S.tyRobbed=(S.tyRobbed||0)+1;
+ w.y=null;/* item conservation (jil): the robe sits in the plotter's chest */if(typeof ilRob==="function")ilRob(S,e,plot);S.tyOmen=null;tyLost(S,"cuop");S.tyRobbed=(S.tyRobbed||0)+1;
  const nm=typeof accName==="function"?accName(k):k;apply({danh:-(T.robDanh+T.robWalk)});
  log(`Trên đường ở ${nm}, kẻ lạ giật mất ${it.n}. Ngươi phải mặc trung y về cung (Danh -${T.robDanh+T.robWalk}).`);
  Q.unshift({t:"Bị giật y phục giữa đường",kind:"notice",act:1,h:`<p class="past">${when()}</p><p>${(S.buoi||0)>=(typeof B4L==="number"?B4L:3)?"Trời tối":"Nơi vắng người"}, ở ${nm} có kẻ bịt mặt xông ra giật mất ${it.n} của ngươi rồi chạy biến.</p><p>Ngươi mất ${it.n}, chỉ còn trung y, đành cúi đầu đi về tẩm cung.</p><p>Nội vụ phủ sẽ cấp lại áo sau ${T.reissueWk} tuần; muốn sớm hơn thì mặc áo khác trong Tư trang.</p>${plot?`<p>Cung nhân thì thầm: kẻ ấy hình như là người của ${plot.name}.</p>`:""}`,
@@ -113,7 +113,7 @@ function tyWeek(){const T=BAL.ty;let ev="";try{
   if(!w.y&&typeof earnFromChest==="function"){const c=earnFromChest(v,"y");if(c){w.y=c;v.tyNvp=null}}
   if(!w.y&&v.tyNvp!=null&&wk()>=v.tyNvp){v.tyNvp=null;const k=typeof earnPlainY==="function"?earnPlainY(v):null;if(k)w.y={k,src:"nvp",nvp:1,giver:"Nội vụ phủ"}}
   if(!w.y){if(v.tyNvp==null)tyLost(v,"");if(whereOf(v)!==palaceOf(v)){if(typeof v.danh==="number")v.danh=Math.max(0,v.danh-T.npcOut);try{newsAdd(v,"ty",`${v.name} mặc trung y mà ra khỏi cung, bị chê thiếu lễ`)}catch(e){}}}
-  else if(roll(T.npcRob)&&roll(35)){const e=w.y;if(e&&wdItem(e)&&!wdItem(e).nt){w.y=null;tyLost(v,"cuop");if(typeof v.danh==="number")v.danh=Math.max(0,v.danh-T.robDanh);try{newsAdd(v,"ty",`${v.name} đi đêm qua lối vắng, bị kẻ lạ giật mất y phục, phải mặc trung y về cung`)}catch(x){}}}
+  else if(roll(T.npcRob)&&roll(35)){const e=w.y;if(e&&wdItem(e)&&!wdItem(e).nt){w.y=null;if(typeof ilRob==="function"){const E=tyEnemies(v);ilRob(v,e,E.length?pick(E):null)}tyLost(v,"cuop");if(typeof v.danh==="number")v.danh=Math.max(0,v.danh-T.robDanh);try{newsAdd(v,"ty",`${v.name} đi đêm qua lối vắng, bị kẻ lạ giật mất y phục, phải mặc trung y về cung`)}catch(x){}}}
  }catch(e){}}}catch(e){console.error(e)}return ev}
 (function(){if(typeof endTurn!=="function")return;const e0=endTurn;endTurn=function(){const r=e0.apply(this,arguments);try{if(S&&!S.dead)tyWeek()}catch(e){console.error(e)}return r};window.endTurn=endTurn})();
 window.tyOn=tyOn;window.tyCost=tyCost;window.tyRob=tyRob;window.tyWeek=tyWeek;window.tyFig=tyFig;

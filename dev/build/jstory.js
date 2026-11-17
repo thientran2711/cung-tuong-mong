@@ -27,10 +27,14 @@ function sev67(A,bid,b){const k=A.a+"."+bid;if(SEV67[k])return SEV67[k];if(b&&b.
 const SEVN67={Khan:"khẩn",Vua:"vừa",Lon:"lớn"};
 /* hand-written non-silver routes (key arc.beat); {maid} {foed}… are j67 tokens */
 const ALT67={
- "td_an.c1":[{n:"Nhờ {maid} giấu ông trong kho củi sau cung",c:{suc:-6},o:()=>40+(S.maid?(S.maid.loyal||0)/3:0)+(S.mat||0)*4,sc:1,f:"wit",wx:"giữ được nhân chứng",
-   l:{danh:-3},lx:"lục soát ra thì cung ngươi mang tiếng chứa chấp",rt:"Lão Vương nằm im trong kho củi, {maid} đêm đêm mang cơm.",rf:"Người của {foed} lục soát, lão Vương phải bỏ trốn; cung ngươi bị dị nghị."},
-  {n:"Xin Thái y viện nhận ông làm người sắc thuốc",c:{suc:-4},o:()=>30+((S.arts&&S.arts.y)||0)*9+(S.tamco||0)/5,sc:1,f:"wit",wx:"nhân chứng có chỗ đứng chính danh",
-   l:{},lx:"thái y không dám nhận",rt:"Lão Vương thành người sắc thuốc ở Thái y viện, không ai ngờ.",rf:"Thái y lắc đầu, không dám chứa người lạ."}]};
+ "td_an.c1":[{n:"Nhờ {maid} giấu ông trong kho củi sau cung",f:"wit",wx:"giữ được nhân chứng",
+   lx:"lục soát ra thì cung ngươi mang tiếng chứa chấp",rt:"Lão Vương nằm im trong kho củi, {maid} đêm đêm mang cơm.",rf:"Người của {foed} lục soát, lão Vương phải bỏ trốn; cung ngươi bị dị nghị."},
+  {n:"Xin Thái y viện nhận ông làm người sắc thuốc",f:"wit",wx:"nhân chứng có chỗ đứng chính danh",
+   lx:"thái y không dám nhận",rt:"Lão Vương thành người sắc thuốc ở Thái y viện, không ai ngờ.",rf:"Thái y lắc đầu, không dám chứa người lạ."}]};
+/* ONE CORE (OD:L1267): the numbers of these routes live in BAL.arc.alt["arc.beat"] (jbalarc.js), filled like an arc (arcOpt, j67.js);
+   maidLoy = her close maid's loyalty (0 without one), artY = her Y thuật level (also registered by the road files) */
+RDQ.maidLoy=()=>S.maid?(S.maid.loyal||0):0;if(!RDQ.artY)RDQ.artY=()=>S.arts&&S.arts.y||0;
+for(const k in BAL.arc.alt)BAL.arc.alt[k].forEach((x,i)=>{if(x&&ALT67[k]&&ALT67[k][i])arcOpt(x,ALT67[k][i])});
 /* bạc ↔ the road without it (owner rule 15/11 via coordinator): the road without silver costs about what the silver is WORTH to her —
    the price in khắc at her rank (BAL.bacTuan = bạc she earns per tuần of 16 khắc at each rank, measured by the sensible bot,
    dev/measure/bacroad.js) — paid as Sức (BAL.altK.suc per khắc of price), a lower chance (BAL.altK.pen points per khắc) and, on a phụ tuyến step, khắc of
@@ -101,8 +105,8 @@ window.addEventListener("click",e=>{const t=e.target.closest&&e.target.closest('
 (function(){const o0=obj67;obj67=function(){const r=o0.apply(this,arguments);try{const P=pl67();if(P)return `Lo liệu «${P.n}»: còn ${dlT67(P.due-absB67())} · `+r}catch(e){}return r}})();
 /* ---------- old story (j4, saves from before chapters): the witness also gets routes without silver ---------- */
 (function(){const t0=PEND.td1;if(!t0)return;PEND.td1=function(p){const d=t0.apply(this,arguments);try{if(d&&d.o){const st=S.st;
- d.o.splice(1,0,{n:`Nhờ ${S.maid?S.maid.name:"cung nữ thân tín"} giấu ông trong kho củi`,fx:{suc:-6},x:`${word(od(40+(S.maid?(S.maid.loyal||0)/3:0)+(S.mat||0)*4))} · thành: giữ được nhân chứng · hỏng: Danh -3, mất nhân chứng`,
-  go:()=>{if(roll(od(40+(S.maid?(S.maid.loyal||0)/3:0)+(S.mat||0)*4)))st.wit=1;else{apply({danh:-3});S.caseEv=Math.max(0,(S.caseEv||0)-1);log(`<span class="r">Người của ${S.foeDad} lục soát, lão Vương bỏ trốn.</span>`)}}});
+ d.o.splice(1,0,{n:`Nhờ ${S.maid?S.maid.name:"cung nữ thân tín"} giấu ông trong kho củi`,fx:{...BAL.arc.alt["td_an.c1"][0].c},x:`${word(od(rdOdds(BAL.arc.alt["td_an.c1"][0].o,{})))} · thành: giữ được nhân chứng · hỏng: Danh ${BAL.arc.alt["td_an.c1"][0].l.danh}, mất nhân chứng`,
+  go:()=>{const Q=BAL.arc.alt["td_an.c1"][0];if(roll(od(rdOdds(Q.o,{}))))st.wit=1;else{apply(Q.l);S.caseEv=Math.max(0,(S.caseEv||0)-1);log(`<span class="r">Người của ${S.foeDad} lục soát, lão Vương bỏ trốn.</span>`)}}});
  const g=d.o.find(o=>/Tân Giả Khố/.test(o.n));if(g&&g.fx&&g.fx.bac)g.fx.bac=price67(g.fx.bac)}}catch(e){}return d}})();
 /* ---------- phụ tuyến (j72): every step that costs Bạc gets a branch without silver (owner 17:06Z, whole group) ----------
    A single Bạc step becomes a two-way step: the original (same odds / cost / outcome) or "… (nhờ người, không dùng bạc)": one khắc more,
@@ -117,7 +121,8 @@ function alt72(s,n){const bac=s.c&&s.c.bac,p0=Math.min(s.p!=null?s.p:(s.b==null?
  Object.defineProperty(o,"p",{get:()=>p0-altCost(bac,rk(),6,BAL.alt72Pen).pen,enumerable:true,configurable:true});
  Object.defineProperty(o,"k",{get:()=>k0+Math.round(bacK(bac,rk())*BAL.altK.k72),enumerable:true,configurable:true});
  Object.defineProperty(o,"c",{get:()=>({suc:-altCost(bac,rk(),6,BAL.alt72Pen).suc}),enumerable:true,configurable:true});return o}
-(function(){try{if(typeof T72==="undefined")return;for(const T of T72)for(const st of T.s||[]){if(st.w!=null&&!st.n)continue;
+/* jreg: quest lines registered later (jreign) get the cheaper second way too */
+(function(){try{if(typeof T72==="undefined")return;regEach(T72,(i,T)=>{if(T)for(const st of T.s||[]){if(st.w!=null&&!st.n)continue;
  if(!st.ch&&st.c&&st.c.bac<0){const o0={n:st.n,p:st.b<100?st.b:null,sk:st.sk,k:st.k,c:st.c,w:st.w,r:st.r,rb:st.rb,l:st.l,lr:st.lr,lrb:st.lrb,fn:st.fn,ok:st.ok,no:st.no,lto:st.f};
   st.ch=[o0,alt72(Object.assign({},st,{p:st.b}),st.n)]}
- else if(st.ch&&st.ch.length&&!st.ch.some(o=>o.alt72)&&st.ch.every(o=>o.c&&o.c.bac<0))st.ch.push(alt72(st.ch[0],st.ch[0].n))}}catch(e){console.error("jstory j72",e)}})();
+ else if(st.ch&&st.ch.length&&!st.ch.some(o=>o.alt72)&&st.ch.every(o=>o.c&&o.c.bac<0))st.ch.push(alt72(st.ch[0],st.ch[0].n))} },"T72 alt")}catch(e){console.error("jstory j72",e)}})();

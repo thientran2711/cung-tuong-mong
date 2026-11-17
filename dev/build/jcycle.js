@@ -154,7 +154,7 @@ PEND.cyrep=()=>{if(!S||!S.maid||!cycOn(S))return null;const R=B().rep,c=cyb(),lo
   mk("Giấu, không báo",{wt:[G6("thẻ bài vẫn nằm trên khay")],k:[`cả cung đồn có tin vui: phi tần ghen +${ghenN(R.giauGhen)}`,`cuối tháng chưa có thai thì mừng hụt: Sủng -${B().rumSung} Danh -${B().rumDanh}`,risk,evi],
     wl:"Ma ma không lên Kính sự phòng báo kỳ; trong cung bắt đầu xì xào ngươi có tin vui."},"giau",lie("giau"))];
  O.forEach((o,i)=>{o.hint=H[i][0];o.risk=H[i][1]});
- return{who:pMaid(),t:`<p>${S.maid.name} khẽ thưa: ${kLine("cycle:ask",CY_ASK,{sp:{srv:"f"},ls:S}).replace("{d}",dName(cyDaysM(S,cyCur())))}</p><p class="past">Kính sự phòng ghi sổ theo lời ma ma các cung báo lên; ai đang kỳ thì thẻ bài tạm cất.</p>`,o:O}};
+ return{who:pMaid(),t:`<p>${S.maid.name} khẽ thưa: ${kLine("cycle:ask",kTP("cycle:ask")||CY_ASK,{sp:{srv:"f"},ls:S,t:kToneSt(S.maid,S.maid&&S.maid.name)}).replace("{d}",dName(cyDaysM(S,cyCur())))}</p><p class="past">Kính sự phòng ghi sổ theo lời ma ma các cung báo lên; ai đang kỳ thì thẻ bài tạm cất.</p>`,o:O}};
 /* palace voice: the monthly question is a pool (jvoice kLine, no repeat within BAL.voice.noRepeat tuần); {d} = the days */
 const CY_ASK=["“Kỳ nguyệt sự của {goi} đã tới ({d}). Nô tỳ lên Kính sự phòng báo thế nào ạ?”","“Bẩm {goi}, tháng này nguyệt sự đến ({d}). Thẻ bài có cần tạm cất không ạ?”",
  "“{Goi}, ma ma Kính sự phòng vừa sai người sang hỏi. Kỳ này ({d}), nô tỳ nên thưa thế nào?”","“Nguyệt sự của {goi} lại tới rồi ({d}). Nô tỳ đã chuẩn bị nước gừng; còn bên Kính sự phòng, xin {goi} định liệu.”",
@@ -190,12 +190,12 @@ function cyBook(how){const c=cyb();c.read=cyCur();const F=[];const L=consorts().
   F.push({who:p,kind:p===S?"me":"person",text:`${p===S?"Ta":p.name}: tháng này ${cyRepText(a)} · tháng trước: ${cyRepText(b)}${n?` · ${n} đêm thị tẩm`:""}`});
   if(p===S)continue;
   if(a.s==="miss"||b.s==="miss"){if(cyPreg(p)&&S.cyKnow[p.id]!==p.pregWk){S.cyKnow[p.id]=p.pregWk;try{noteAdd(p.id,"Sổ nguyệt sự: tháng này không báo; e là đã có tin vui")}catch(e){}found.push(`${p.name} tháng này không báo nguyệt sự: e là đã có tin vui.`)}}
-  if(p.preg&&p.pregMismatch&&!p.fake&&p.cyEvi!==p.pregWk){p.cyEvi=p.pregWk;const g=evA(S,p,2);if(g){try{noteAdd(p.id,`Sổ nguyệt sự: ngày nàng ta có thai không khớp đêm thị tẩm nào (chứng cứ +${g})`)}catch(e){}found.push(`Ngày ${p.name} có thai không khớp đêm thị tẩm nào trong sổ: chứng cứ +${g}.`)}}
-  if(p.preg&&p.fake&&a.s==="ok"&&p.cyEvi!=="f"+p.pregWk){p.cyEvi="f"+p.pregWk;cyDeed(p,"cyfk:"+p.pregWk,"cyfake","báo có thai giả mà ma ma cung ấy vẫn báo nguyệt sự");const g=evA(S,p,1);if(g)found.push(`${p.name} báo có thai mà ma ma cung ấy vẫn báo nguyệt sự: chứng cứ +${g}.`)}}
+  if(p.preg&&p.pregMismatch&&!p.fake&&p.cyEvi!==p.pregWk){p.cyEvi=p.pregWk;const g=evA(S,p,BAL.eff.jcycle.evG);if(g){try{noteAdd(p.id,`Sổ nguyệt sự: ngày nàng ta có thai không khớp đêm thị tẩm nào (chứng cứ +${g})`)}catch(e){}found.push(`Ngày ${p.name} có thai không khớp đêm thị tẩm nào trong sổ: chứng cứ +${g}.`)}}
+  if(p.preg&&p.fake&&a.s==="ok"&&p.cyEvi!=="f"+p.pregWk){p.cyEvi="f"+p.pregWk;cyDeed(p,"cyfk:"+p.pregWk,"cyfake","báo có thai giả mà ma ma cung ấy vẫn báo nguyệt sự");const g=evA(S,p,BAL.eff.jcycle.evG_2);if(g)found.push(`${p.name} báo có thai mà ma ma cung ấy vẫn báo nguyệt sự: chứng cứ +${g}.`)}}
  const opts=[];const rum=c.rum;
  if(rum&&rum.m===cyCur()&&!rum.fixed&&!rum.self){const fx=rum;opts.push({n:"Xin Kính sự phòng chép lại cho đúng",fx:{},x:`sổ ghi đúng, tin đồn tắt · biết kẻ sửa sổ: ${typeof chanceW==="function"?chanceW(((S.court&&S.court.ksp&&S.court.ksp.af.me)||0)>=B().fixAf?90:40):""}`,
   go:()=>{fx.fixed=1;const v=(rivals||[]).find(x=>x.id===fx.by);const af=(S.court&&S.court.ksp&&S.court.ksp.af.me)||0;
-   if(v&&roll(af>=B().fixAf?90:40)){cyDeed(v,"cyfo:"+fx.m,"cyforge","đút lót Kính sự phòng ghi sai sổ nguyệt sự của người khác");const g=evA(S,v,1);if(g)try{noteAdd(v.id,`Đút lót Kính sự phòng ghi sai sổ nguyệt sự của ta (chứng cứ +${g})`)}catch(e){}log(`Kính sự phòng chép lại sổ nguyệt sự cho ngươi; Tổng quản khai ${v.name} đã đút lót ghi sai.${g?` Chứng cứ +${g}.`:""}`)}
+   if(v&&roll(af>=B().fixAf?90:40)){cyDeed(v,"cyfo:"+fx.m,"cyforge","đút lót Kính sự phòng ghi sai sổ nguyệt sự của người khác");const g=evA(S,v,BAL.eff.jcycle.evG_3);if(g)try{noteAdd(v.id,`Đút lót Kính sự phòng ghi sai sổ nguyệt sự của ta (chứng cứ +${g})`)}catch(e){}log(`Kính sự phòng chép lại sổ nguyệt sự cho ngươi; Tổng quản khai ${v.name} đã đút lót ghi sai.${g?` Chứng cứ +${g}.`:""}`)}
    else log("Kính sự phòng chép lại sổ nguyệt sự cho ngươi; không rõ ai đã ghi sai.")}})}
  const facts=F.concat(found.map(t=>({text:t,kind:"world"})));
  if(rum&&rum.m===cyCur()&&!rum.fixed&&!rum.self)facts.push({text:`Sổ ghi ngươi tháng này ${kitChip("không báo","r")}, mà ngươi đã báo: có kẻ sửa sổ.`,kind:"world"});
@@ -244,7 +244,7 @@ const mp0=monthPay;monthPay=function(){let ev=mp0.apply(this,arguments)||"";try{
   if(cyPreg(S)&&S.hidden&&(cyLateSeen(S)>=1||c.giauM===mi-1)&&!cyHideOf(S))for(const v of F){if(v.cyKnowMe===S.pregWk||!roll(B().npcRead))continue;v.cyKnowMe=S.pregWk;
    if((S.mat||0)>=1){const t=`Tai mắt báo: ${v.name} cho người tra sổ nguyệt sự ở Kính sự phòng, đã đoán ra ngươi có tin vui.`;log(t);ev+=t+" "}break}
   /* her own false line last month (báo sớm / giấu) is forgery evidence for a foe who reads the book */
-  if(c.lieM===mi-1&&!c.lieEv){c.lieEv=1;cyDeed(S,"cyl:"+c.lieM,"cylie","khai man ngày nguyệt sự với Kính sự phòng");for(const v of F){if(!roll(B().npcRead))continue;if(!evA(v,S,1))continue;
+  if(c.lieM===mi-1&&!c.lieEv){c.lieEv=1;cyDeed(S,"cyl:"+c.lieM,"cylie","khai man ngày nguyệt sự với Kính sự phòng");for(const v of F){if(!roll(B().npcRead))continue;if(!evA(v,S,BAL.eff.jcycle.evTop))continue;
     if((S.mat||0)>=1){const t=`Tai mắt báo: ${v.name} tra sổ nguyệt sự, thấy ngày ma ma ngươi báo không khớp: nàng ta nắm chứng cứ ngươi khai man.`;log(t);ev+=t+" "}}}
   /* a foe forges a "không báo" against her (this month) */
   if(!cyPreg(S)&&cyAge(S)<50&&!(c.rum&&c.rum.m===mi)){const v=F.find(x=>(x.bac||0)>=B().forgeBac);if(v&&roll(B().npcForge)){ap(v,{bac:-B().forgeBac});c.rum={by:v.id,m:mi};cyDeed(v,"cyfo:"+mi,"cyforge","đút lót Kính sự phòng ghi sai sổ nguyệt sự của người khác");
