@@ -1,6 +1,6 @@
 # FOREMAN_B_STATUS (written ONLY by Foreman B)
 ORDER 16/11 applied (workers/reviewers = separate sessions; hourly self-wake; rollover; claims).
-last wake: 11/17/2026 06:33Z (FOREMAN B ROOT session_01N1tNP45oWLjAtk16aRVZKp, depth 0) — ROLLING OVER (context 26 %, budget ~28 %); successor = see HANDOVER 06:35Z line below.
+last wake: 11/17/2026 06:33Z (FOREMAN B ROOT session_01N1tNP45oWLjAtk16aRVZKp, depth 0) — ROLLED OVER (context 26 %, budget ~28 %); SUCCESSOR = FOREMAN B SESSION 2 = session_01N1tNP5QYubNg1dqA9BZitC (child, depth 1).
 HANDOVER 06:35Z (ROOT → successor): RUNNING B sessions (12 slots):
 - coop-thin-b session_01N1tNP6svxoSpRYt6QpgSiS (opus, review/coop-thin-b, coding jcoopthinb.js) · coop-thin-d session_01N1tNP2zKazQevGeQbxzSnq (opus, review/coop-thin-d; note: coop-thin-a swap test fails 2/3 on main too) → when both SẴN SÀNG: trial-merge B‖D, one opus BIG co-op reviewer each; then part C (audit reports/coop-thin-guest-audit.md §3) → E → F1–F6 → G → H.
 - staff-root session_01N1tNP3ZSe15ZCwXea7LSMe (opus, review/staff-root, bot runs) → reviewer on SẴN SÀNG.
