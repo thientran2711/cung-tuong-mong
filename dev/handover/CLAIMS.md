@@ -770,3 +770,5 @@
 | narrow-T3 kit: 412/390 T3 narrow mode + 1-col cards + dup option list (from opt-pic-same-r2 review item 1) | review/narrow-t3 | MAIN s31 | session_01UV1SzgsQDt2y7LHaYSDb8g | RUNNING | 17/11 13:22Z |
 | BATCH s31a builder (opus): presentation-wiring-r1 + fig-headtop-r1 IN; kit-ico-rank HELD (co-op rebirth 61/63); report reports/batch-s31a.md; ROLLED OVER | review/batch-s31a | MAIN s31 | session_01UV1SziPrputLM5qYtCL6zH | BATCH READY c29866a6 | 17/11 14:30Z |
 | BATCH s31a LIVE: main = c29866a6 (FF from 6ca04148 by MAIN s31 after LOOK; presentation-wiring-r1 + fig-headtop-r1; kit-ico-rank HELD co-op rebirth) | main | MAIN s31 | session_01UV1SzhZw2hHEAf6bi644Jn | LIVE | 17/11 13:27Z |
+| BATCH builder s31b (opus): fig-tag-chip-r1, morechip-fix-r1, kit-rcol-top-r1, stage-caption-r1, learn-scene-fix, opt-pic-same-r2 (+morechip-corners-r1 on PASS) + KPM_LOG clear | review/batch-s31b | MAIN s31 | session_01UV1SzhfMi68Cmn88G2Yqze | RUNNING | 17/11 13:24Z |
+| kit-ico-rank r2: co-op rebirth blocked by rank board/end card | review/kit-ico-rank-r2 | MAIN s31 | session_01UV1Szi6oANLyE5bWQnjMQv | RUNNING | 17/11 13:24Z |
