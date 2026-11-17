@@ -1,6 +1,6 @@
 # road-onecore — ONE CORE for the full origin roads (worker report)
 
-Branch `review/road-onecore` (from review/road-b1-fixa-r1 @ c012bf32). Final sha: **59b3d653e1a3ebbe83631247917a4a31de3d7901** (pushed).
+Branch `review/road-onecore` (from review/road-b1-fixa-r1 @ c012bf32). Final sha: **6a1112d17790b27e82c0fa627284cd3416e4178c** (pushed).
 
 ## PATTERN (for review/road-b2-fix, review/road-b3-fix2 and every later jrd_<origin>.js)
 1. **Where the numbers live:** `dev/build/jbalroad.js` (new, assemble list: right BEFORE `jroad.js`). It holds ALL of `BAL.road`
@@ -9,7 +9,7 @@ Branch `review/road-onecore` (from review/road-b1-fixa-r1 @ c012bf32). Final sha
      beat's `o:[…]` order (`0` = option with no numbers). `opt = {c, w, l, o}` (stat deltas as before; empty `c:{}` stays).
    - odds `o = [base, term…]`, added left to right by `rdOdds` (bit-identical to the old arrow). Terms:
      `["d",stat,k]` +S[stat]/k · `["m",stat,k]` +S[stat]*k · `["f","a|b",y,n]` +(A.f.a||A.f.b?y:n) · `["e",ch|[ch…],end,y,n]` +(rdEnd(ch)===end?y:n) ·
-     `["b",key,y,n]` +(road flag S.st.f14.fb[key]?y:n) · `["k",name,k]` +RDQ[name](A)*k · `["q",name,y,n]` +(RDQ[name](A)?y:n) · leading `-` on f/e/b subtracts.
+     `["b",key,y,n]` +(road flag S.st.f14.fb[key]?y:n) · `["k",name,k]` +RDQ[name](A)*k · `["kd",name,k]` +RDQ[name](A)/k (added for road-b3) · `["q",name,y,n]` +(RDQ[name](A)?y:n) · leading `-` on f/e/b subtracts.
    - `BAL.road.rare["<road>_11"] = {p,np,sc,c,fx,bar}` — the RD97L rare finale choice; its `x` reads `S.<stat>>=RR(a).bar` and its text prints
      `"Đức từ "+RR(a).bar` (no typed number in the text).
 2. **Engine helpers (jroad.js, inside the ROAD14…rdOn slice the scans eval):** `rdDef` → `rdFx(id,def)` puts the numbers back on the options /
@@ -72,4 +72,4 @@ before 303 fails (4,755 inline numbers in the road files) → after **0 fails** 
   `sc:` (Lợi thế) and `k:` (ending tier) values of options/endings. They are rule numbers by OD:L1267; the mover can be extended
   (`g:` list per option in BAL.road.fx). Left for a follow-up so this branch stays a pure, provably value-identical move.
 
-SẴN SÀNG KIỂM 59b3d653e1a3ebbe83631247917a4a31de3d7901
+SẴN SÀNG KIỂM 6a1112d17790b27e82c0fa627284cd3416e4178c
