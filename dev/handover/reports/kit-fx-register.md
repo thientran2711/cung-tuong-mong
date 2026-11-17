@@ -1,6 +1,6 @@
 PRIORITY #1 CHECK ('kfxc|.kfx|kitFxLayers|bake'): OD:L1672 (17:53Z) + OD:L1677 (18:10Z avatar rule) | main jk2b.js kitFxLayers/.kfxc (found, replaced for avatars only) | review/toil-looks5 6b348e9d (LOD, untouched) | claims kit-fx-register MAIN s35.
 # kit-fx-register (toil-looks6 worker) — AVATAR = ID CARD
-Branch review/kit-fx-register **b45850d3** (from origin/main 03a776e4), pushed. Files: dev/build/jk2b.js, dev/kit/KIT.md (28.8 entry), index.html/sw.js (rebuilt), dev/test/avatar-idcard.js, dev/test/avatar-perf.js.
+Branch review/kit-fx-register **893b3f45** (b45850d3 + veil dropped from avatars, j79 hooks/CSS removed per MAIN s36; stage veil kveil2 untouched) (from origin/main 03a776e4), pushed. Files: dev/build/jk2b.js, dev/kit/KIT.md (28.8 entry), index.html/sw.js (rebuilt), dev/test/avatar-idcard.js, dev/test/avatar-perf.js.
 
 ## What changed
 - Root cause (measured by toil-looks5): the `.kfxc>.kfx` overlay box (jk2b.js:462 hack -7 %/-5.7 %/114 %) was 5.5 % bigger than the photo -> every layer (makeup, rash, scar) landed off in small frames.
@@ -24,7 +24,7 @@ after: heap 49.9 MB, nodes 994, layout 311 ms, script 2582 ms, 4 bakes; before: 
 Caveat: in the sample the scar position for faces without a scar-fit row borrows the c01 row (test-only patch); production draws only where a row exists (same rule as the stage), so a face with no row shows no scar (as before).
 
 ## Open points for MAIN
-1. Veil (`kveil` imgs in j79:1203/1204, KIT_VEIL) on avatars is NOT touched: it is a worn item, not makeup/mark; the owner's literal list does not name it. Decide (one-line change: drop those two hooks) .
+1. RESOLVED in 893b3f45: veil removed from avatars (was: left on avatars): it is a worn item, not makeup/mark; the owner's literal list does not name it. Decide (one-line change: drop those two hooks) .
 2. tcold-tier portraits (her "Cung lạnh" tier) have no scar-fit row -> no scar baked until rows are added (pre-existing gap).
 3. CDN files to delete after verdict: img/_review/toil-looks/lod-v13b-head.png, img/_review/kit-fx-register/avatar-idcard-sheet.png.
 
@@ -32,3 +32,5 @@ Caveat: in the sample the scar position for faces without a scar-fit row borrows
 Stage sample re-rendered (same face for all 5 cells, Mặt mộc now shows the face): https://ctm-img.victoria-tntt.workers.dev/img/_review/toil-looks/lod-v13b-head.png . Flag: at seed 7 the Vụng về cell shows almost no blush/powder.
 
 ## HANDOVER (context): finished; nothing pending except review. START_CTX ~5 %, ended ~35 % of 1M window.
+
+## v14 stage sample (toil-looks5 db7c0f5d): https://ctm-img.victoria-tntt.workers.dev/img/_review/toil-looks/lod-v14-head.png ; tcold scar-fit rows NOT added (needs fit measurement, pre-existing gap).
