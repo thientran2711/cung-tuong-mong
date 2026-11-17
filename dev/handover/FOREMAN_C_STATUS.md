@@ -1,7 +1,9 @@
 # FOREMAN_C_STATUS (written ONLY by Foreman C)
 NEXT FOREMAN C SESSION: ROOT-7 = session_01UV1Szh1sUAVP6FUuqZgkYs (opened by MAIN s31 ~13:10Z 17/11, depth 1). ROOT-6 stops; it disables its trigger trig_017VztNAuLezGyK58FczkjRw.
 FOREMAN C SESSION ROOT-7 = session_01UV1Szh1sUAVP6FUuqZgkYs · START_CTX ~6% (~60k of 1M; get_session reads 0, own estimate) → roll over at >= 31%, ceiling 60% · lineage depth 1/8 · own hourly wake (:32).
-- 13:40Z ROOT-7 took over; read TAKEOVER + HANDOVER + main s31 orders 13:16Z AG-HAP and 13:21Z AG-ALL. AG-ALL claimed; first deliverable reports/ag-all.md gap table (≤1 h) → main s31.
+- 13:12Z ROOT-7 took over; read TAKEOVER + HANDOVER + main s31 orders 13:16Z AG-HAP and 13:21Z AG-ALL. AG-ALL claimed; first deliverable reports/ag-all.md gap table (≤1 h) → main s31.
+- 13:14Z ROOT-7: AG-ALL worker (opus) session_01UV1SzjsTYMFvr4Rvhpd1tt opened (brief briefs/ag-all.md; STEP 1 gap table reports/ag-all.md ≤1 h → C + main s31; then design/build on review/ag-all). World-events expert (sonnet, OD:L1327) session_01UV1SzhXPVGk7w6iSpeP3QM → dev/research/world-events.md. Own wake trig_01EuVPMGwysiMDcbgNmuqT8q (:32).
+- 13:14Z NOTE: ROOT-7 runs on main's account (TÀI KHOẢN 7); send_message to the C-account sessions (ROOT-6 011xDdVQNd…, lead #7, W8, vân kiên sample, W-A2, voice reviewer) FAILS 'not found'. ROOT-6: read the line above on your :32 wake, disable trig_017VztNAuLezGyK58FczkjRw and stop. C-account workers: report to ROOT-7 via this STATUS file (ROOT-7 reads it hourly); sessions on that account can only be archived/opened from that account. REQUEST main s31: tell the owner the active Foreman C chat = ROOT-7; if the C-account art workers (lead #7, W8, vân kiên, voice W-A2 + reviewer) still need a live foreman on their account, say so.
 ## HANDOVER (Foreman C ROOT-6 session_011xDdVQNdyTACuGN42yEBQZ → ROOT-7, ~13:05Z 17/11)
 Why: context ~32% (START ~8% → limit 33%). OWNER now writes in the ROOT-6 chat (old ROOT chat session_011xDdVSwTjDmQyniASgFZyk relayed earlier lines). Read the ROOT-6 log lines below (12:16Z–13:04Z): they hold her verbatim lines of 12:19Z–13:04Z.
 OPEN WITH THE OWNER:
