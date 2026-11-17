@@ -758,7 +758,7 @@
 | MAID CONSORT-TIER REDRAW W4f (successor of W4e; a36 m22 + a51 m01-m26; opened by lead #7) | review/fig-cutout-clean | C | session_011xDdVSvgMHhWjrFtf6Qv8J | RUNNING | 17/11 11:48Z |
 | REVIEW voice-trait-r1 (opus BIG) of e134694 | review/voice-trait-r1 | C ROOT-6 | session_011xDdVNmiymzf41EueV5zCn | PASS d0a839e8 → main (archived) | 17/11 12:41Z |
 | REVIEW map-me-mark r1 of b62bd85f | review/map-me-mark-r1 | MAIN s31 | session_01UV1SzkrhfnKSSwFEpGBcVS | PASS a86ea58c | 17/11 12:52Z |
-| REVIEW toil-looks2 r1+r2 (opus BIG) of 43b9a8b64 + looks3 v5 8acee5db | review/toil-looks2-r2 | MAIN s32 | session_01UV1Szhz851NPoNbAv8MGF7 | PASS ebacfb15 (FF; contains makeup-theme-r1; CDN mk-fit c01-c32 + player-look1-4 + toil-fit2.json before live; owner OK on ?v=5 look pending) | 17/11 14:40Z |
+| REVIEW toil-looks2 r1+r2+r3 (opus BIG) of 43b9a8b64 + looks3 v5/v7 | review/toil-looks2-r3 | MAIN s32 | session_01UV1Szhz851NPoNbAv8MGF7 | PASS 619edd87 (FF; contains makeup-theme-r1; CDN mk-fit c01-c32 + player-look1-4 + toil-fit2.json before live; owner OK on ?v=7 pending) | 17/11 15:05Z |
 | morechip-corners: '+N' chip bigger, bottom-left/right (owner 13:02Z) on top of morechip-fix-r1 3bed78e3 | review/morechip-corners | MAIN s31 | session_01UV1SzgitG1nAF1r7wZK2wd | PASS a66f274c (review r1) | 17/11 12:55Z |
 | toil-looks3: Khuynh thành redraw, streaks→Vụng về, Đoan trang≠Kiều diễm, Diêm dúa lips (owner 13:05Z) on review/toil-looks2 | review/toil-looks2 | MAIN s31 | session_01UV1Szgv5xtMpkNRXeojDX5 | RUNNING | 17/11 12:59Z |
 | REVIEW opt-pic-same r2 of 42d52109 (+ 412/390 tall person cards) | review/opt-pic-same-r2 | MAIN s31 | session_01UV1SzioDmB4Xjzd2Wg26k4 | FAIL 9b2f7821 (412/390 narrow T3: new kit job; 755/1180/1366 PASS) | 17/11 13:01Z |
