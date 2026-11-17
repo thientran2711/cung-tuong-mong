@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"92685210+","t":"2026-11-17T00:53Z","c":"Khung việc và khung sự kiện bốn cỡ, tranh lấp đầy khung, việc nhắc tên ai hiện chân dung người ấy; phẩm của món đồ nằm ngay trên viền khung…","b":"1c12209a0793","h":[{"s":"6f513340","t":"2026-11-16T23:24Z","c":"Vào game mới không còn bật ngay màn lật thẻ, lật thẻ chỉ khi vào buổi tối; dư đồ nhãn giấy mới; việc dài lấn sang buổi sau; lời trong cung …"},{"s":"7a18d957","t":"2026-11-16T22:44Z","c":"review-diemtrang-fx-r1 report"},{"s":"afe2bcbc","t":"2026-11-16T22:25Z","c":"review r1: KIT 84.1a note + report"},{"s":"dea1d445+","t":"2026-11-16T21:32Z","c":"golive lag-play-2: CHANGE line + site rebuilt"},{"s":"674f3af4","t":"2026-11-16T21:21Z","c":"Chơi cùng bạn: bạn chơi chung chưa gặp mặt nay hiện tên gọi chung “Hảo hữu của ta” ở mọi nơi, không còn ẩn thành dấu hỏi."},{"s":"923567d5+","t":"2026-11-16T21:03Z","c":"Hình nhân vật: hết vệt xám ở cổ và viền tối quanh người."},{"s":"59812a63+","t":"2026-11-16T20:41Z","c":"Khung chung: khoảng cách đều nhau ở sổ tuần và thẻ thân phận; hàng sổ gọn, thẻ lật không đè chữ."},{"s":"ab12d6fc","t":"2026-11-16T20:53Z","c":"Tuyết và đom đóm mới, mượt hơn; nền tranh không còn vẽ lại mỗi khung hình."},{"s":"8adfd886+","t":"2026-11-16T20:33Z","c":"Tư trang: các trang đều nhau, ô đồ đeo gọn trên Fold và iPad."},{"s":"b77d3250+","t":"2026-11-16T20:20Z","c":"Chơi cùng bạn: lời đáp Kỳ nguyệt sự của bạn đến kịp trước khi rút thẻ đêm; ghế đã đủ người báo gọn một lần."}]};
+window.CTM_BI={"s":"f5220eaa+","t":"2026-11-17T01:23Z","c":"Khung việc và khung sự kiện bốn cỡ, tranh lấp đầy khung, việc nhắc tên ai hiện chân dung người ấy; phẩm của món đồ nằm ngay trên viền khung…","b":"645c7f9c1c5d","h":[{"s":"6f513340","t":"2026-11-16T23:24Z","c":"Vào game mới không còn bật ngay màn lật thẻ, lật thẻ chỉ khi vào buổi tối; dư đồ nhãn giấy mới; việc dài lấn sang buổi sau; lời trong cung …"},{"s":"7a18d957","t":"2026-11-16T22:44Z","c":"review-diemtrang-fx-r1 report"},{"s":"afe2bcbc","t":"2026-11-16T22:25Z","c":"review r1: KIT 84.1a note + report"},{"s":"dea1d445+","t":"2026-11-16T21:32Z","c":"golive lag-play-2: CHANGE line + site rebuilt"},{"s":"674f3af4","t":"2026-11-16T21:21Z","c":"Chơi cùng bạn: bạn chơi chung chưa gặp mặt nay hiện tên gọi chung “Hảo hữu của ta” ở mọi nơi, không còn ẩn thành dấu hỏi."},{"s":"923567d5+","t":"2026-11-16T21:03Z","c":"Hình nhân vật: hết vệt xám ở cổ và viền tối quanh người."},{"s":"59812a63+","t":"2026-11-16T20:41Z","c":"Khung chung: khoảng cách đều nhau ở sổ tuần và thẻ thân phận; hàng sổ gọn, thẻ lật không đè chữ."},{"s":"ab12d6fc","t":"2026-11-16T20:53Z","c":"Tuyết và đom đóm mới, mượt hơn; nền tranh không còn vẽ lại mỗi khung hình."},{"s":"8adfd886+","t":"2026-11-16T20:33Z","c":"Tư trang: các trang đều nhau, ô đồ đeo gọn trên Fold và iPad."},{"s":"b77d3250+","t":"2026-11-16T20:20Z","c":"Chơi cùng bạn: lời đáp Kỳ nguyệt sự của bạn đến kịp trước khi rút thẻ đêm; ghế đã đủ người báo gọn một lần."}]};
 /* KBOOT — BOOT COVER (owner 15/11 "Khi vừa bấm vào game, có chừng ít hơn 1 giây hiện khung này"; KIT §14.1).
    Before: while the 4 MB page parsed, the browser painted the bare static markup of p1.html (HUD box, a vertical stat label list, empty
    panels, the old 11-tab bar) for ~1 s on a warm open and many seconds on a cold one, before any kit CSS/JS existed.
@@ -12087,6 +12087,10 @@ function k61Scrub(s,lead,prev,ann,plain){const rx=k61Table();if(!rx||!s)return s
  return s.replace(rx,(m,ti,nm,off,str)=>{const k=K61MAP[nm];if(!k)return m;const e=k61Ent(k);if(!e||k61Named(e))return m;
   if(ann&&k61Announce(ann))return m;
   const before=(ti?"":(prev||""))+str.slice(0,off);let d=k61Mask(e,before,plain);
+  /* idempotent (review/coop-main-faults): a mask that holds the name itself (a friend named "Hảo hữu" → "Hảo hữu của ta") is already
+     in place when the text around the name reads the mask; masking it again grew the line forever and hung the page (the two DOM observers, this one
+     and j84's, kept answering each other) */
+  {const dl=String(d||"").toLowerCase(),j=dl.indexOf(m.toLowerCase());if(j>=0&&off>=j&&str.slice(off-j,off-j+dl.length).toLowerCase()===dl)return m}
   const capit=/^(\s|<[^>]+>)*$/.test(str.slice(0,off))?lead:/[.!?:(“"]\s*$/.test(str.slice(0,off));return capit?k61Cap(d):d})}
 function k61PrevText(n){let x=n;for(let i=0;i<6&&x;i++){let p=x.previousSibling;while(p){const t=p.textContent;if(t&&t.trim())return t;p=p.previousSibling}x=x.parentNode;if(!x||/^(DIV|P|LI|BUTTON|H\d|FIGCAPTION|SECTION|TD)$/.test(x.nodeName))return""}return""}
 function k61Node(n){if(n.nodeType===3){const t=n.nodeValue;if(!t||t.length<4)return;const p=n.parentNode;if(!p||/^(SCRIPT|STYLE|TEXTAREA|INPUT)$/.test(p.nodeName))return;if(p.closest&&p.closest("[data-k61skip]"))return;/* co-op chat Thư từ (KIT §76): real players' names are shown as they are */
@@ -42411,6 +42415,10 @@ function j95sync(watch,plan){if(!j95on())return;let R=S.roster;if(!R||R.key!==j9
  try{j95fixHouse(R,kh,ppl)}catch(e){j95err("house",e)}
  const W=j95view(R,kh);S.where=W;const MW={};for(const m of S.men||[]){const e=R.P[m.id];if(m.alive&&e&&e[kh][0]&&e[kh][0]!==J95OUT_)MW[m.id]=e[kh][0]}S.menW=MW;
  R.m[kh]=j95counts(R,kh);R.kh=kh;
+ /* ONE RULE for every reader (review/coop-main-faults): the record also keeps WHO the map leaves out at this khắc (j95vis false: herself, her
+    maid walking with her), so dev/tools/roster.js counts from the game's own rule instead of a private copy (its copy had kept the rule from
+    before the people ledger and counted 1-8 fewer than the screen) */
+ R.nv=R.nv||[];R.nv[kh]=Object.keys(R.P).filter(id=>{const w=R.P[id][kh][0];return w&&w!==J95OUT_&&!j95vis(id,w)});
  J95.stageCh=false;try{J95.stageCh=!!j95stage(R,kh)}catch(e){}if(watch)try{j95watch(R,kh)}catch(e){}}
 /* housing changed after the plan (jpal palFix at start / end of week / map / load, a head of house fallen, dead or raised):
    from the current khắc on, what is done at home happens in the NEW home; a visit follows the person visited to her new home or
@@ -42561,7 +42569,7 @@ function j95followers(p){try{const R=S&&S.roster;if(!R||R.key!==j95key()||!p)ret
 function j95log(R){try{const L=S.rlog=S.rlog||{e:{},who:{}};const ids=Object.keys(R.P);const D={P:[],A:[],T:[],W:[]};const ix=(arr,x)=>{x=x==null?"":String(x);let i=arr.indexOf(x);if(i<0){arr.push(x);i=arr.length-1}return i.toString(36).padStart(2,"0")};
  const s=ids.map(id=>{const q=R.P[id].map(e=>ix(D.P,e[0])+ix(D.A,ACT95[e[1]]||e[1])+ix(D.T,e[2])+ix(D.W,e[3]));return q.every(x=>x===q[0])?q[0]:q.join("")});
  const pn={};for(const k of D.P)if(k)pn[k]=j95pn(k);for(const id of ids)L.who[id]=R.who[id]||L.who[id]||[id,""];
- L.e[R.key]={wk:R.wk,b:R.b,nb:R.nb,ids,s,D,pn,m:(R.m||[]).map(o=>o?Object.entries(o).map(x=>x.join(":")).join(","):""),acts:(R.acts||[]).slice(-40),ev:R.ev||[]};
+ L.e[R.key]={wk:R.wk,b:R.b,nb:R.nb,ids,s,D,pn,m:(R.m||[]).map(o=>o?Object.entries(o).map(x=>x.join(":")).join(","):""),nv:(R.nv||[]).map(a=>(a||[]).join(",")),acts:(R.acts||[]).slice(-40),ev:R.ev||[]};
  for(const k in L.e)if(L.e[k].wk<R.wk-J95.LOGW)delete L.e[k];const keep={};for(const k in L.e)for(const id of L.e[k].ids)keep[id]=1;for(const id in L.who)if(!keep[id])delete L.who[id]}catch(e){}}
 function j95table(t,b,kh){/* the dev table (also used by dev/tools/roster.js logic) */const R=S.roster;const cur=t==null||(R&&R.wk===t&&R.b===(b==null?R.b:b));
  if(cur&&R){kh=kh==null?j95kh():kh;const rows=Object.keys(R.P).map(id=>{const e=R.P[id][kh];return{id,name:(R.who[id]||[id])[0],role:(R.who[id]||["",""])[1],place:e[0],placeName:j95pn(e[0]),act:ACT95[e[1]]||e[1],tgt:e[2]?((R.who[e[2]]||[e[2]])[0]):"",why:e[3]||""}});return j95check(rows,R.m&&R.m[kh],{wk:R.wk,b:R.b,kh})}
@@ -47044,19 +47052,27 @@ wrap("fxServants",f=>function(){const L=f.apply(this,arguments);return solo?L.fi
 function onlyMe(f,self,args){solo++;try{return f.apply(self,args)}finally{solo--}}
 for(const n of ONLY_ME)wrap(n,f=>function(){if(guest())return onlyMe(f,this,arguments);return f.apply(this,arguments)});
 /* the rest of the monthly world (stipends, illness, kids growth) is per person: PERSON below + inline checks in j8/j13 */
+/* HER OWN ACT (review/coop-main-faults): the guards below stop the guest's WORLD LOOPS (week end, month) from rolling for NPCs; they must
+   never stop what she does herself. Her act on the friend or an NPC (runAct with her as the actor: Sai người lấy trộm đồ → loLose on the
+   target, …) runs in full on her side, and its result reaches the other seat as before (res.fam ops for the friend, the merged week for NPCs).
+   Before, loLose(friend) returned null on the guest: "Rương … không còn món nào đáng lấy" though the chest was full (dev/test/coop-b1.js 8). */
+let own=0;
+wrap("runAct",f=>function(a){if(a===S&&guest()){own++;try{return f.apply(this,arguments)}finally{own--}}return f.apply(this,arguments)});
+const npcOff=p=>guest()&&!own&&p!==S;
 /* PERSON: any of these called for an NPC (from any loop) does nothing on the guest */
 const PERSON={stipend:"",illMonthP:"",fireServ:"",npcStudy:undefined,loLose:null,ktGrow:undefined};
-for(const n in PERSON)wrap(n,f=>function(p){if(guest()&&p!==S&&n!=="ktGrow")return PERSON[n];if(guest()&&n==="ktGrow"&&arguments[1]!==S)return;return f.apply(this,arguments)});
+for(const n in PERSON)wrap(n,f=>function(p){if(n!=="ktGrow"&&npcOff(p))return PERSON[n];if(n==="ktGrow"&&npcOff(arguments[1]))return;return f.apply(this,arguments)});
 /* illness of servants / children / court people, NPC dress: only her own people on the guest */
-wrap("fxIllMonth",f=>function(p){if(guest()&&!mine(p))return;return f.apply(this,arguments)});
-wrap("wdNpcDress",f=>function(v){if(guest()&&v!==S)return;return f.apply(this,arguments)});
+wrap("fxIllMonth",f=>function(p){if(guest()&&!own&&!mine(p))return;return f.apply(this,arguments)});
+wrap("wdNpcDress",f=>function(v){if(npcOff(v))return;return f.apply(this,arguments)});
 /* fortune lots: an NPC's lot stays the host's */
-wrap("drawLot",f=>function(p){if(guest()&&p!==S)return p.lot||{i:0,lv:0,dom:""};return f.apply(this,arguments)});
+wrap("drawLot",f=>function(p){if(npcOff(p))return p.lot||{i:0,lv:0,dom:""};return f.apply(this,arguments)});
 /* Thái hậu / Hoàng hậu mood (S.cm, a world key): the host rolls it; the guest keeps only her own spy line and resets her own offence count */
 wrap("cmMonth",f=>function(){if(guest()){try{if(!S||S.dead)return;const C=cmSt();C.thDrop=0;C.hhDrop=0;if((S.mat||0)>=3)C.spy=wk()}catch(e){}return}return f.apply(this,arguments)});
 /* the safety net's snapshots (jcoopworld guestNet) around the outermost endTurn, so every module's week-end work counts as her roll */
-wrap("endTurn",f=>function(){if(window.COOPW&&COOPW.netWrap)return COOPW.netWrap(f,this,arguments);return f.apply(this,arguments)});
-window.COOP_ONE={MUTE,ONLY_ME,PERSON:Object.keys(PERSON).concat(["drawLot","cmMonth","fxIllMonth","wdNpcDress"])};
+wrap("endTurn",f=>function(){const o=own;own=0;/* a week end reached from inside an act is a world loop again */try{if(window.COOPW&&COOPW.netWrap)return COOPW.netWrap(f,this,arguments);return f.apply(this,arguments)}finally{own=o}});
+wrap("nextBuoi",f=>function(){const o=own;own=0;try{return f.apply(this,arguments)}finally{own=o}});
+window.COOP_ONE={ownAct:()=>own,MUTE,ONLY_ME,PERSON:Object.keys(PERSON).concat(["drawLot","cmMonth","fxIllMonth","wdNpcDress"])};
 })();
 
 window.__ctmBuilt=1;
@@ -47086,7 +47102,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="1c12209a0793";window.CTM_BUILD=BUILD;
+const BUILD="645c7f9c1c5d";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
