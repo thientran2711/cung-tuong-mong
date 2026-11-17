@@ -36,9 +36,19 @@ function kmModalOpen(){try{const M=document.getElementById("modal");return(typeo
 /* kmPush(fn, o): o.pre = pictures the scene shows (warmed at push, the scene waits up to 1.5 s for them); o.afterModals = the scene belongs AFTER the dialogs that are open / queued right now
    (the made-item result dialog first, then this scene): it waits until no dialog is open ("armed"), and from then on counts as a running scene for kmHold(). */
 function kmPush(fn,o){if(o){fn.kmo=o;if(o.pre){fn.kmReady=false;kmPre(o.pre).then(()=>{fn.kmReady=true;kmPump()})}}KMQ.push(fn);kmPump()}
-/* kmHold(): true while a scene is running or armed in the queue — a NEW dialog (showModal gate, jorder) and the next VIỆC wait for it, so nothing opens underneath a running scene. A scene stuck for 90 s stops holding. */
-let kmBusySince=0;
-function kmHold(){if(kmBusy&&Date.now()-kmBusySince<90000)return true;return KMQ.some(f=>!(f.kmo&&f.kmo.afterModals&&!f.kmArmed))}
+/* ONE QUEUE OWNER (review/learn-scene-fix-2, co-op stall 61/63): kmPump owns the order of scenes and dialogs; every gate asks kmHold() and nothing else.
+   A dialog (jorder showModal gate) and the buổi transition (jbuoi) wait for a scene ONLY while that scene is ON SCREEN or WILL START NOW — never for a scene that is itself
+   waiting (kmFree() false: week panel / podium / roulette / reward up, or an afterModals scene that waits for the dialogs to close, or a running job whose picture never came up).
+   So the two waits can never close a ring: scene waits for dialog => dialogs do not wait for it; dialogs wait for a scene => that scene is starting / showing.
+   kmHold() = true when
+     (a) a job runs AND its picture is on screen (.kmov / #kmrew / the buổi strip #buoitr), or it started < KM_GRACE ms ago (preload / first frame), capped at 90 s; or
+     (b) the HEAD of the queue (FIFO: only the head can start next) is startable now: kmFree(), and it is not an afterModals scene still waiting for the dialogs (unarmed).
+   A head that is only preloading (kmReady false) counts as startable: kmPre resolves in at most 1.5 s. */
+let kmBusySince=0;const KM_GRACE=2000;
+function kmOnScreen(){try{for(const e of document.querySelectorAll(".kmov,#kmrew,#buoitr"))if(e.isConnected&&!e.hidden&&e.getClientRects().length)return true}catch(e){}return false}
+function kmHold(){const t=Date.now()-kmBusySince;
+ if(kmBusy)return t<90000&&(t<KM_GRACE||kmOnScreen());
+ const h=KMQ[0];if(!h)return false;if(h.kmo&&h.kmo.afterModals&&!h.kmArmed)return false;return kmFree()}
 function kmArm(){KMQ.forEach(f=>{if(f.kmo&&f.kmo.afterModals)f.kmArmed=true})}
 /* kmReset (FIX-THE-WHOLE-GROUP, review/flip-newlife): everything that belongs to ONE life must not outlive it. A new life / a loaded slot / the title
    screen calls this: the queue is emptied, the running job's finish is voided (kmGen), every .kmov scene (card-flip, ink, reward, reveal…) and the
