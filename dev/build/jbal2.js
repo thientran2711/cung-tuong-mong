@@ -1115,3 +1115,13 @@ BAL.mck={pub:{def:35,max:3,o:{selfUp:60,selfDown:60,cold:75,kidBorn:75,kidDie:70
  pubRe:"thế ở triều|việc triều|hoàng tự|tấn phong|lãnh cung|giáng|qua đời|cấm túc|phật ý|lọt ra ngoài|sinh hạ|lật thẻ|thị tẩm",
  spy:85,eye:40,pri:45,keep:6,npcErr:{scout:100,listen:50}};
 BAL.ag.sell.val.mood=70;
+/* AG-MOODKNOW KHÓC + HỜN (owner OD 17/11 ~18:00Z): two more jemo moods. khoc: from events ev when buồn/đau khổ/sợ ≥ v, odds o + trait points tr; a slap:
+   odds slap[sev], strength slapV[sev]. hon: from events ev aimed by someone close (thiện cảm ≥ aff, own master, Hoàng thượng), odds o + tr. decay = points per tuần;
+   w = act weights (jemo EMO_W shape), od = odds points at v 100, loy = servants' Lòng a month, lv = old mood ladder level (0 vui … 3 giận). Odds clamped BAL.odds. */
+BAL.emo2={khoc:{ev:["slight","punished","selfDown","cold","kidDie","friendDie","motherDie","motherCold","loyalDown","neglect"],v:45,o:40,
+  tr:{"Khiêm nhường":15,"Ân cần":10,"Mê tín":5,"Kiêu ngạo":-30,"Kín đáo":-20,"Xảo quyệt":-20,"Tham vọng":-15,"Thù dai":-10,nhat:20,trung:5,lanh:-10},
+  slap:[0,35,55,75],slapV:[0,40,60,80]},
+ hon:{ev:["slight","loyalDown","punished","neglect"],aff:30,o:35,
+  tr:{"Kiêu ngạo":15,"Nóng nảy":15,"Thật thà":10,"Ân cần":-15,"Khiêm nhường":-15,"Xảo quyệt":-20,"Kín đáo":-10,lanh:10,nhat:-10}},
+ decay:{khoc:20,hon:10},w:{khoc:{harm:.6,kind:.7,idle:1.5,visit:.6},hon:{harm:.9,kind:.6,visit:.5,idle:1.2}},od:{khoc:-1,hon:0},loy:{khoc:-1,hon:-2},lv:{khoc:2,hon:2}};
+BAL.mck.pubEv.push("slap");BAL.mck.pub.o.slap=55;BAL.mck.pubRe+="|tát";

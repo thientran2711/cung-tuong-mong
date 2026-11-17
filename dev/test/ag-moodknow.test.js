@@ -57,6 +57,28 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
  const r5=await p.evaluate(()=>{const [v]=__M.R();delete S.mck;delete S.mckPub;for(const x of rivals)delete x.mck;v.emo={k:"buon",v:55,why:"bị giáng phẩm",t:null,w:emoW()};v.emoH=[{k:"buon",v:55,why:"bị giáng phẩm",w:emoW()}];
   let err="";let k=null;try{k=moodCauseKnown(v);Q.length=0;for(let i=0;i<3;i++){S.tb.seed=77+i;mckMorning()}kitEmotion(v);emoCauses(v)}catch(e){err=String(e)}return {err,k,cls:mckCls(v.emo),pub:!!S.mckPub}});
  ok(!r5.err&&r5.k===null&&r5.cls==="pub"&&r5.pub,'old save: no store / unstamped cause → no throw, classified by its words',r5);
+ /* 7 KHÓC + HỜN (owner OD 17/11 ~18:00Z) */
+ const r7=await p.evaluate(()=>{const B=BAL.emo2,o0=B.khoc.o,h0=B.hon.o,s0=B.khoc.slap.slice();const V=__M.R();const out={};
+  B.khoc.o=200;let kc=0,el=0;V.forEach((v,i)=>{v.emo=null;emoEv(v,"selfDown","bị giáng phẩm (k"+i+")");if(v.emo&&["khoc","buon","dau","so"].includes(v.emo.k)&&v.emo.v>=B.khoc.v){el++;if(v.emo.k==="khoc")kc++}});out.khocHi=[kc,el];
+  B.khoc.o=0;kc=0;V.forEach((v,i)=>{v.emo=null;emoEv(v,"selfDown","bị giáng phẩm (n"+i+")");if(v.emo&&v.emo.k==="khoc")kc++});out.khocLo=[kc,V.length];B.khoc.o=o0;
+  let v=V[0];B.khoc.slap=[100,100,100,100];for(let i=0;i<V.length*3;i++){v=V[i%V.length];v.emo=null;v.slap=null;if(slapGive(v,S,"thử",3)&&v.emo&&v.emo.k==="khoc")break}out.slap=v.emo&&{k:v.emo.k,why:v.emo.why,c:v.emo.c,known:moodCauseKnown(v)};B.khoc.slap=s0;
+  /* hờn: her own servant scolded by her */
+  B.hon.o=200;const s=(S.staff||[]).find(x=>x&&x.sid!=null&&!x.out);if(s){for(let i=0;i<6&&!(s.emo&&s.emo.k==="hon");i++){s.emo=null;emoEv(s,"loyalDown","bị chủ nhân quát mắng"+(i?" ("+i+")":""))}out.srv=s.emo&&{k:s.emo.k,t:s.emo.t,known:moodCauseKnown(s)}}
+  /* NPC parity: a consort slighted by a close friend sulks at HER, not at a stranger */
+  const [a,b2,c]=V;const af=(x,y,n)=>{try{x.aff=x.aff||{};}catch(e){}};let ab=0;try{ab=aff(a,b2)}catch(e){}
+  try{affAdd(a,b2,60-ab)}catch(e){}for(let i=0;i<6&&!(a.emo&&a.emo.k==="hon");i++){a.emo=null;emoEv(a,"slight",`bị ${b2.name} làm nhục (${i})`,emoKey(b2))}out.npc=a.emo&&{k:a.emo.k,t:a.emo.t,b:emoKey(b2),aff:aff(a,b2),byB:moodCauseKnownBy(b2,a)};
+  /* sulking blocks friendly acts toward that person (motive gate) */
+  try{render()}catch(e){}a.emo={k:"hon",v:60,why:"thử",t:emoKey(b2),w:emoW()};const g=motiveOK(a,b2,"visit");out.gate={ok:g.ok,why:g.why,f95:typeof F95!=="undefined"&&F95.has("visit")};
+  B.hon.o=h0;
+  /* decay: tears dry fast */
+  a.emo={k:"khoc",v:60,why:"thử",t:null,w:emoW()};const v0=a.emo.v;emoWeek();out.decay=[v0,a.emo?a.emo.v:0,B.decay.khoc];
+  out.names=[EMO.khoc,EMO.hon];return out});
+ ok(r7.khocHi[0]>=r7.khocHi[1]*.7&&r7.khocLo[0]<=r7.khocLo[1]*.3,'KHÓC: strong sadness turns into tears by BAL odds (clamped)',r7);
+ ok(r7.slap&&r7.slap.k==="khoc"&&/tát/.test(r7.slap.why)&&r7.slap.c==="pub"&&r7.slap.known,'KHÓC: a slap brings tears; cause "bị … tát" is public, she (the slapper) knows it',r7.slap);
+ ok(!r7.srv||(r7.srv.k==="hon"&&r7.srv.t==="me"&&r7.srv.known),'HỜN: her servant scolded by her sulks AT her; she knows why',r7.srv);
+ ok(r7.npc&&r7.npc.k==="hon"&&r7.npc.t===r7.npc.b&&r7.npc.byB,'HỜN NPC: a consort slighted by a close friend sulks at that friend (who knows why)',r7.npc);
+ ok(!r7.gate.f95||(r7.gate.ok===false&&/hờn/.test(r7.gate.why)),'HỜN: friendly acts toward that person refused while sulking',r7.gate);
+ ok(r7.decay[1]<=r7.decay[0]-r7.decay[2]+1&&r7.names[0]==="Khóc"&&r7.names[1]==="Hờn",'KHÓC fades by BAL decay; words Khóc / Hờn',{d:r7.decay,n:r7.names});
  /* 6 bot days: all known causes true */
  const r6=await p.evaluate(async DAYS=>{const bad=[];let known=0;for(let d=0;d<DAYS;d++){for(let bb=0;bb<4;bb++){Q.length=0;S.mg=0;try{nextBuoi()}catch(e){}Q.length=0}
    for(const v of rivals){const k=moodCauseKnown(v);if(k==null)continue;known++;if(!v.emo||k!==v.emo.why)bad.push([v.name,k])}}

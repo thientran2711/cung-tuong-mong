@@ -50,6 +50,19 @@ Morning (endTurn, after emoWeek): each PUBLIC cause not leaked gets one draw at 
 2. Friends passing the cause on (knFor rule (d)) — not added; leaks + Tai mắt + scouting cover the owner's routes.
 3. Tuần lục: public causes reach it through the morning news log line; no separate Tuần lục entry.
 
+## ADD — KHÓC + HỜN moods (owner OD L1669 '(17/11 ~18:00Z real'; order C-AG #3/#4, s35)
+Owner (verbatim): "Mình có biểu tượng cảm xúc khóc chưa ta? ... khóc là mình sẽ thấy có cái nước mắt chảy ra" + hờn from her 16:20Z (g) list ("buồn, vui, giận, hờn").
+Built in jmoodknow.js (same piece, reuse jemo; numbers BAL.emo2 in jbal2.js; off switch __emo2Off). State keys for the seals: **`khoc`** (name "Khóc") and **`hon`** (name "Hờn") in EMO → p.emo.k; art keys img/kit/emo-khoc / emo-hon (+ emo-m- / emo-mo-) = kit-figure-mood's part (sent).
+| mood | trigger (one rule for her, consorts, servants, Emperor) | odds / strength | duration / effects |
+|---|---|---|---|
+| khoc | a strong buồn / đau khổ / sợ (v ≥ BAL.emo2.khoc.v) from the events khoc.ev (làm nhục, phạt, giáng, lãnh cung, mất con, bạn mất, mẹ mất, bị hắt hủi, lạnh nhạt) turns into tears | khoc.o + trait points tr, clamped BAL.odds | decay 20 / tuần (fast); act weights like grief (harm .6, kind .7, idle 1.5); vent group "buồn" |
+| khoc | a SLAP (jface slapGive) | khoc.slap[sev] 35/55/75, strength slapV | cause "bị X tát" = PUBLIC (the mark shows), event key "slap" leaks at 55 |
+| hon | a slight / scolding / punishment / neglect from someone CLOSE (thiện cảm ≥ hon.aff 30; a servant's own master; Hoàng thượng for a consort) → sulks AT that person (emo.t) | hon.o + tr, clamped | decay 10 / tuần; friendly acts (F95) toward that person refused while it lasts (motive gate "đang hờn X (cause)"); servants' Lòng −2 a month |
+Cause = the true event (why) → moodCauseKnown works unchanged (sulking at her involves her → she knows why). Old mood ladders read them (emoLv: level 2; eaGrpK: khoc→buồn, hon→giận).
+Not changed: the red/green word colour lists in jemo.js:210 / jevb.js:64 (colour only; khoc/hon show neutral) — kit worker's call.
+Tests: ag-moodknow.test now 23/23 PASS (3 runs): khóc by odds high/low, slap → khóc public and known to the slapper, her servant sulks at her (known), NPC sulks at a close friend who knows why, motive gate refuses the friendly act, khóc decay + words.
+ag-all.test perf p95 (day draw) fails its 8 ms budget on this box for BOTH builds: base (no jmoodknow) 14 / 16.1 ms vs this branch 15.5 / 17.8 ms — box noise, not this part.
+
 ## Handover
 Done except review. Worktree /home/user/wt/moodknow (sparse). START_CTX ≈ 5 %.
 ROLLOVER (verbatim): Workers roll over too (owner 16/11 08:22Z s14, option 1): at START_CTX % + 25 % of the window, ceiling 60 %; a worker may finish if only push + report remain; it writes its handover in its report file and tells its coordinator, and the COORDINATOR opens the successor (never the worker).
