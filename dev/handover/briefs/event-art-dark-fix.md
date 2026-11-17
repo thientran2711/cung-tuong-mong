@@ -22,3 +22,10 @@ OWNER (verbatim, 12:24Z, see dev/rules/topic/art-events-effects.md line after 'C
 DARK STYLE + BRIGHTNESS ANCHOR = the 3 Hành sự cards she circled: img/_review/owner-refs-1117/dark-act-ref-1/2/3.webp (Giả bệnh, Để ý một nam nhân áo gấm, Cài tai mắt) — deep red/indigo night room, candle + lantern + moon, objects readable; card art mean lum ~65–80. Pass the card art (crop from the shots or the act files) as style refs.
 SCOPE: REPAINT with Magnific gpt-2-6 (not a brightness lift) every dark event/option/intro picture made by event-art-style #2/#3/#3b/#4/#5 today, so that (1) brightness/colour = the anchor, (2) composition obeys the people rule above (today's redraws often show big foreground ladies from behind → make them small/distant/symbolic; option/act pictures → no person). This includes the 11 keys event-art #2 lifted as an interim (ev-am-muu + ev-e68-*). Also LIST (no repaint yet) the LIGHT event pictures redrawn today that break the people rule → report to C.
 FLOW: measurement + rule-check table first; then 4 samples (sheet OLD | LIVE | NEW + lum) to C; wait for OK; then batches of ~12.
+
+## UPDATE 2 C ROOT-6 12:35Z (owner clarified; REPLACES 'UPDATE 12:30Z' where they differ)
+OWNER (verbatim, see canon line in art-events-effects.md): today's redrawn people event pictures are OK as composed — do NOT shrink/remove figures. Fix = LIGHT/MOOD only:
+- scheming / sinister / dangerous events = "darkness" look like her circled act cards (lum ~65–80, deep red/indigo night, candle + lantern + moon, readable, never black);
+- normal events = bright, or matching their buổi (time of day), season or weather.
+STEP 1 table: every event/option/intro picture redrawn today: key | scheming or normal (from the event text) | live lum | verdict (OK / too dark / too bright / wrong mood). event-art #2 is uploading a brightness-lift (lum 72) for its 11 as an interim — include them; 6 of them had pastel day OLDs → decide by the event text whether they are scheming (stay dark 65–80) or normal (bright / buổi).
+STEP 2: 4 Magnific repaint samples (same composition, light/mood fixed) → C; wait; then batches.
