@@ -41,6 +41,9 @@ Object.assign(BAL,{road:{get first(){return BAL.st14.parts[1][0]+1},get last(){r
  tm:[2,6,10],
  /* the rare finale choice of every road (RD97L «Cơ duyên hiếm», filled by rdRare in jroad.js): p = chance it shows, np = path options needed,
     sc = Lợi thế it gives, c = cost, fx = ending change, bar = the stat floor of its condition (the condition text prints it; stat named after the comment) */
+ /* ch roads: Thái hậu (th) / Hoàng hậu (hh) favour a choice moves in its go (guarded: only while she lives), read by CHTH(key) in jrd_ch;
+    key = "<chapter>.<beat>.<option index>.<stat>" | "<chapter>.E.<ending>.<stat>" | "<road>_11.rare.<stat>" */
+ chTh:{"ch_co_5.c1.2.th":-4,"ch_co_5.t1.2.th":-2,"ch_co_5.E.win.th":6,"ch_co_6.c1.2.th":3,"ch_co_7.E.lose.th":-4,"ch_co_8.x1.1.th":-6,"ch_co_8.x1.3.th":-10,"ch_co_9.c1.2.th":-4,"ch_co_9.x1.1.th":-10,"ch_co_9.x1.2.th":-4,"ch_co_10.x1.1.th":6,"ch_co_10.x1.2.th":-12,"ch_co_10.x1.2.hh":8,"ch_co_10.E.win.th":8,"ch_co_10.E.lose.th":-6,"ch_co_11.t1.2.th":-6,"ch_co_11.x1.2.th":6,"ch_co_11.E.win.th":12,"ch_co_11.E.lose.th":-12,"ch_co_11.rare.th":15,"ch_benh_5.E.win.th":8,"ch_benh_6.x1.1.hh":5,"ch_benh_6.E.win.th":6,"ch_benh_8.x1.0.th":6,"ch_benh_8.x1.1.th":-4,"ch_benh_8.E.lose.th":-4,"ch_benh_9.E.win.th":6,"ch_benh_10.E.win.th":12,"ch_benh_11.E.win.th":15,"ch_benh_11.rare.th":15,"ch_bi_11.E.win.th":15},
  rare:{
  /* B2 roads (review/road-b2-fix); ch_bi_11 th = the Thái hậu favour floor of its x; ch_benh_11 reads BAL.road.ch_benh.heir */
  nc_gian_11:{p:.12,np:2,sc:2,c:{suc:-4},fx:{danh:12,sung:6},bar:45},

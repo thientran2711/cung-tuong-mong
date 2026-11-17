@@ -15,10 +15,10 @@
 const DIFF_KEY="ctm-diff";
 const DIFF={
  de:{n:"Dễ",d:"Hậu cung ôn hòa, ít kẻ ra tay; vào cung bạc dày hơn.",
-  bal:{hz:[.55,0],birthAdd:[1,-2],birthMin:[1,-3],illDie:[.5,0],seeMaxP:[1,15],poisonX:[.67,0],poisonNow:[0,0],accCdT:[1.5,0],hhTh:[1,-5]},j70:{mot:[.6,0]},bac:1.5,pd:1},
- vua:{n:"Vừa",d:"Hậu cung như vốn có, phúc họa chia đều.",bal:{},j70:{},bac:1,pd:1},
+  bal:{hz:[.55,0],birthAdd:[1,-2],birthMin:[1,-3],illDie:[.5,0],seeMaxP:[1,15],poisonX:[.67,0],poisonNow:[0,0],accCdT:[1.5,0],hhTh:[1,-5]},j70:{mot:[.6,0]},bac:BAL.diff.bac.de,pd:1},
+ vua:{n:"Vừa",d:"Hậu cung như vốn có, phúc họa chia đều.",bal:{},j70:{},bac:BAL.diff.bac.vua,pd:1},
  kho:{n:"Khó",d:"Hậu cung hiểm ác, sinh nở hiểm nghèo; Phúc duyên gấp rưỡi.",
-  bal:{hz:[1.1,0],birthAdd:[1,3],birthMin:[1,4],illDie:[1.5,0],illAdd:[2,0],poisonX:[1.2,0],accCdT:[.67,0],outQ:[1,25]},j70:{mot:[1.2,0]},bac:.7,pd:1.5}};
+  bal:{hz:[1.1,0],birthAdd:[1,3],birthMin:[1,4],illDie:[1.5,0],illAdd:[2,0],poisonX:[1.2,0],accCdT:[.67,0],outQ:[1,25]},j70:{mot:[1.2,0]},bac:BAL.diff.bac.kho,pd:1.5}};
 const DIFF_K=["de","vua","kho"];
 /* every knob any mode touches (only these are saved and restored; the rest of BAL is never written here) */
 const DIFF_KN={bal:[...new Set(DIFF_K.flatMap(k=>Object.keys(DIFF[k].bal)))],j70:[...new Set(DIFF_K.flatMap(k=>Object.keys(DIFF[k].j70)))]};

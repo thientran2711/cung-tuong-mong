@@ -30,7 +30,7 @@ const GEOM=()=>{const ov=document.querySelector('.kmov.kcf');if(!ov)return null;
   /* A · a real week end: only her card can be turned (others barred by a hidden tablet), the flip roll forced */
   res.real=await p.evaluate(()=>{S.dead=false;S.preg=0;S.pregUnk=0;S.ill=0;S.confined=0;S.block=0;S.sung=Math.max(S.sung,40);const R0=Math.random;Math.random=()=>0.01;
    const keep=[];for(const v of liveRivals(true)){keep.push([v,v.block]);v.block=1}let nc=0;try{nc=nightCh(S)}catch(e){}
-   try{CLEAN();endTurn()}finally{Math.random=R0;keep.forEach(([v,b])=>v.block=b)}
+   try{CLEAN();endTurn();/* flip-entry (jfe/jnf): the tablet turns when buổi tối starts, not at the new day: walk the new day to tối */if((S.buoi||0)<B4L){CLEAN();S.mg=null;S.buoi=B4L-1;nextBuoi()}}finally{Math.random=R0;keep.forEach(([v,b])=>v.block=b)}
    const d=document.getElementById('dawn');if(d){d.classList.remove('on');d.hidden=true}
    return{nc,tonight:S.tonight==="me"?"me":S.tonight&&S.tonight.id,why:S.nightWhy&&{pick:S.nightWhy.pick,flip0:S.nightWhy.flip0,cause:S.nightWhy.cause,n:S.nightWhy.rows.length,bar:S.nightWhy.rows.filter(r=>!(r.w>0)).length}}});
   await p.waitForFunction(()=>document.querySelector('.kmov.kcf'),null,{timeout:20000}).catch(async()=>{console.log('NO SCENE',await p.evaluate(()=>JSON.stringify({q:KMQ.length,busy:kmBusy,dawn:(document.getElementById('dawn')||{}).className,dh:(document.getElementById('dawn')||{}).hidden,kbk:document.querySelectorAll('.kbk').length,title:document.getElementById('title').hidden,dbg:window.__cfdbg,kmov:[...document.querySelectorAll('.kmov,#kmrew,#kpodov,[id^=kroul],.kroul-ov')].map(e=>e.id+'.'+e.className)})))});

@@ -15,7 +15,7 @@
       (the lối they dislike last), as many as BAL.tds.npcLv[art level]. Tứ đức: the same level rule as hers (2/4/5).
    Keys for D19 ("Biếu quà làm lành" accepts works): a work is an inventory entry {k:"tp", wk:{kind,r,ti,q,...}}; Tứ đức kinds = TDS_KIND
    values (window.tdsKinds()); wkEval(a,w,r) values it like any other work. Notes: dev/PROGRESS_tuduc-sub.md. ================= */
-Object.assign(BAL,{tds:{open:[0,2,4,5],npcLv:[0,1,1,2,2,3],npcWk:50,npcWkCap:4}});
+/* BAL.tds (open, npcLv, npcWk, npcWkCap, phucDuc, pracK, pracSuc, pracMin) lives in jbal.js (ONE CORE) */
 BAL.rcp.tFavB=2;BAL.rcp.tFavK=4;BAL.rcp.tFavMin=3;BAL.rcp.tFavMax=9;
 const TDS_KIND={cong:"kimchi",dung:"phanson",ngon:"thuchuc",hanh:"phucthien"};
 const TDS_OF=Object.fromEntries(Object.entries(TDS_KIND).map(([a,b])=>[b,a]));
@@ -27,7 +27,7 @@ Object.assign(WK,{
  kimchi:{a:"cong",n:"Làm đồ kim chỉ",w:"Đồ kim chỉ",need:2,mat:[0,4,15],mn:["vải, chỉ thường","lụa, chỉ màu","gấm, chỉ kim tuyến, hạt ngọc"],sub:["hoa mai","hoa sen","uyên ương"]},
  phanson:{a:"dung",n:"Làm phấn son",w:"Phấn son tự chế",need:2,mat:[0,4,15],mn:["gạo, hoa vườn","hoa quý, sáp ong, hộp sứ","trân châu, nhân sâm, hộp ngọc"],sub:["hoa nhài","hoa hồng","hoa quế"]},
  thuchuc:{a:"ngon",n:"Viết thư, lời chúc",w:"Thư từ, lời chúc",need:2,mat:[0,4,15],mn:["giấy thường","giấy hoa tiên","giấy dát vàng, mực Huy Châu"],sub:["Thăm hỏi","Tạ ơn","Chúc xuân"]},
- phucthien:{a:"hanh",n:"Làm việc thiện",w:"Vật cầu phúc",need:4,mat:[0,4,15],mn:["vải, giấy thường","lụa, sáp ong, gỗ thơm","gấm, trầm hương, ngọc"],sub:["Bình an","Hoa đăng","Nữ giới"],fin:{duc:1}}});
+ phucthien:{a:"hanh",n:"Làm việc thiện",w:"Vật cầu phúc",need:4,mat:[0,4,15],mn:["vải, giấy thường","lụa, sáp ong, gỗ thơm","gấm, trầm hương, ngọc"],sub:["Bình an","Hoa đăng","Nữ giới"],fin:{duc:BAL.tds.phucDuc}}});
 /* ---- 10 recipes each (WKR_LV levels by index, as every kind) ---- */
 (function(){const R={
  kimchi:["Hà bao thêu hoa mai","Túi thơm thêu sen","Dây kết bình an","Tua quạt kết ngọc","Hà bao uyên ương","Hài thêu hoa đào","Đai lưng thêu mây","Dây kết đồng tâm","Hài gấm thêu phượng","Khăn choàng bách điệp"],
@@ -80,12 +80,12 @@ const TDV={pend:null,tch:null,go:0,fin:0,hit:null,raw:null,skip:0};window.TDV=TD
 (function(){const c0=virCost;virCost=function(l,p){if(TDV.tch&&(!p||p===S)&&(TDV.go||TDV.fin||(window.TDS&&TDS.busy)))return 0;return c0.apply(this,arguments)}})();
 function tdsTchCons(k){const l=virLv(S,k);return liveRivals(true).filter(v=>v.alive&&!v.out&&!v.confined&&v.vir&&(((v.vir[k]||0)>l)||(v.vir[k]||0)>=4)&&(rel(v,S)||0)>=BAL.rcp.tRel)
  .sort((a,b)=>(b.vir[k]||0)-(a.vir[k]||0)).slice(0,3)}
-function tdsOK(k,mode){if(!S||S.dead||Q.length||S.mg)return false;const l=virLv(S,k);if(mode==="prac")return l>=5&&can(2)&&S.suc>=15;if(l>=5)return false;
- if(mode==="self")return can(2)&&S.suc>=25;return can(2)&&S.suc>=10}
+function tdsOK(k,mode){if(!S||S.dead||Q.length||S.mg)return false;const l=virLv(S,k);if(mode==="prac")return l>=5&&can(BAL.tds.pracK)&&S.suc>=BAL.tds.pracMin;if(l>=5)return false;
+ if(mode==="self")return can(BAL.td.k)&&S.suc>=BAL.td.selfMin;return can(BAL.td.k)&&S.suc>=BAL.td.mMin}
 function tdsReset(){TDV.pend=null;TDV.tch=null;TDV.hit=null;TDV.raw=null;TDV.skip=0;RCPT.k=null;RCPT.t=null}
-function tdsTchAsk(k,then){const V=VIR.find(x=>x.k===k),fee=virCost(virLv(S,k),S),fav=rcpFavorOf(S),O=[];const t2=whyTime(2);
- O.push(kitOffBac({n:"Ma ma giáo tập",fx:{},x:`Nắm chắc · tốn: 2 khắc, Sức -10, Bạc -${fee} · thành: tiến bộ +2..3, dạy được mọi lối, ra một món`,go:()=>{TDV.tch=null;RCPT.k=k;RCPT.t="nq";then()}},fee));
- for(const v of tdsTchCons(k))O.push({n:`${rkName(v)} ${v.name} (${V.n} bậc ${v.vir[k]})`,fx:{},x:`Nắm chắc · tốn: 2 khắc, Sức -10 · thành: tiến bộ +2..3, dạy các lối nàng ta biết, ra một món · kèm: nợ nàng ta một ân, thiện cảm -${fav}, ${BAL.gift.askW} tuần quà tặng nàng ta không thành chân tình`,
+function tdsTchAsk(k,then){const V=VIR.find(x=>x.k===k),fee=virCost(virLv(S,k),S),fav=rcpFavorOf(S),O=[];const t2=whyTime(BAL.td.k);
+ O.push(kitOffBac({n:"Ma ma giáo tập",fx:{},x:`Nắm chắc · tốn: ${BAL.td.k} khắc, Sức -${BAL.td.mSuc}, Bạc -${fee} · thành: tiến bộ +2..3, dạy được mọi lối, ra một món`,go:()=>{TDV.tch=null;RCPT.k=k;RCPT.t="nq";then()}},fee));
+ for(const v of tdsTchCons(k))O.push({n:`${rkName(v)} ${v.name} (${V.n} bậc ${v.vir[k]})`,fx:{},x:`Nắm chắc · tốn: ${BAL.td.k} khắc, Sức -${BAL.td.mSuc} · thành: tiến bộ +2..3, dạy các lối nàng ta biết, ra một món · kèm: nợ nàng ta một ân, thiện cảm -${fav}, ${BAL.gift.askW} tuần quà tặng nàng ta không thành chân tình`,
   go:()=>{TDV.tch=String(v.id);RCPT.k=k;RCPT.t=String(v.id);then()}});
  if(!O.length){log(`Chưa có ai dạy ${V.n}: ma ma cần ${fee} bạc, chưa có phi tần giỏi ${V.n} quý ta (thiện cảm ${BAL.rcp.tRel}).`);return}
  O.push({n:"Thôi",fx:{},go:()=>tdsReset()});
@@ -104,7 +104,7 @@ function tdsTchAsk(k,then){const V=VIR.find(x=>x.k===k),fee=virCost(virLv(S,k),S
  Q.push({act:1,t:`${r.n}: dùng vật liệu gì?`,who:pMe(),h:`<p>Phẩm = phần chơi (0..10) + ${V.n} bậc ${l}: +${wkLvQ(S,k)} + vật liệu (thường +${WMAT[0]}, tốt +${WMAT[1]}, quý +${WMAT[2]}).</p><p class="past">${wkThTxt()}</p><p>Chỉ vật liệu quý mới thành Tuyệt phẩm.${fee?` Phí thầy ${fee} bạc trả riêng.`:""}</p>`,opts:O})}})();
 /* run the lesson itself (j85 lessonVir, or review/tuduc-mg tdPlay); the work is made once the lesson really happened */
 function tdsRun(k,mode,pick){TDV.pend=Object.assign({k,mode},pick);TDV.hit=null;
- if(mode==="prac"){if(!tdsOK(k,"prac")){tdsReset();return}apply({suc:-10});spend(2);TDV.hit={k};tdsFinish("tự học");save();render();return}
+ if(mode==="prac"){if(!tdsOK(k,"prac")){tdsReset();return}apply({suc:-BAL.tds.pracSuc});spend(BAL.tds.pracK);TDV.hit={k};tdsFinish("tự học");save();render();return}
  /* a consort teaches: j85's "Theo ma ma giáo tập học …" log becomes "Học …" (tdsFinish names her; review r1) */
  const tv=mode==="master"&&TDV.tch?RV(+TDV.tch):null,lg=log;if(tv)log=function(h){return lg.call(this,typeof h==="string"?h.replace(/[Tt]heo ma ma giáo tập học ([^.]+)\./,(m,a)=>`Học ${a}.`).replace(/Học ([^ .]+) với ma ma giáo tập([^.]*)\./,(m,a,b)=>`Học ${a}${b}.`):h)};
  TDV.go=1;try{window.__tdsL0(k,mode)}finally{TDV.go=0;if(tv)log=lg}
@@ -132,10 +132,10 @@ function tdsFinish(how){const P=TDV.pend,k=P&&P.k;TDV.hit=null;if(!P){return}
 function tdsPractice(k){if(!tdsOK(k,"prac"))return;tdsReset();wkAsk(k,"prac",()=>{})}
 document.addEventListener("click",ev=>{const b=ev.target.closest&&ev.target.closest("[data-tdsprac]");if(!b||b.disabled)return;ev.stopPropagation();tdsPractice(b.dataset.tdsprac)},true);
 /* ---------- Tài nghệ › Tứ đức cards: real costs, "ra một món", the lối list ---------- */
-(function(){if(typeof ktArtSkills!=="function")return;const s0=ktArtSkills;ktArtSkills=function(){const L=s0.apply(this,arguments);try{const t2=whyTime(2);for(const s of L){if(s.kind!=="vir"||!TDS_KIND[s.k])continue;const k=s.k,l=virLv(S,k),kind=TDS_KIND[k],W=WK[kind].w.toLowerCase();
+(function(){if(typeof ktArtSkills!=="function")return;const s0=ktArtSkills;ktArtSkills=function(){const L=s0.apply(this,arguments);try{const t2=whyTime(BAL.td.k);for(const s of L){if(s.kind!=="vir"||!TDS_KIND[s.k])continue;const k=s.k,l=virLv(S,k),kind=TDS_KIND[k],W=WK[kind].w.toLowerCase();
   const fee=virCost(l,S),fav=rcpFavorOf(S),game=s.acts.some(h=>/trò nhỏ/.test(h))?"chơi một trò nhỏ · ":"";
-  s.acts=s.acts.map(h=>/data-mode="self"/.test(h)?pbtn(`data-vlearn="${k}" data-mode="self"`,"Tự học",`Chắc chắn · ${game}tốn: 2 khắc, Sức -15 · thành: tiến bộ ${game?"+1..2":"+1"}, ra một món ${W}`,t2||(S.suc<25?"Sức dưới 25":""))
-   :/data-mode="master"/.test(h)?pbtn(`data-vlearn="${k}" data-mode="master"`,"Học với thầy",`Chắc chắn · ${game}tốn: 2 khắc, Sức -10, Bạc -${fee} (ma ma) hoặc nợ một ân, thiện cảm -${fav} (phi tần giỏi ${VIR.find(x=>x.k===k).n}) · thành: tiến bộ +2..3, mở được lối mới, ra một món ${W}`,t2||(S.suc<10?"Sức dưới 10":"")):h);
+  s.acts=s.acts.map(h=>/data-mode="self"/.test(h)?pbtn(`data-vlearn="${k}" data-mode="self"`,"Tự học",`Chắc chắn · ${game}tốn: ${BAL.td.k} khắc, Sức -${BAL.td.selfSuc} · thành: tiến bộ ${game?"+1..2":"+1"}, ra một món ${W}`,t2||(S.suc<BAL.td.selfMin?`Sức dưới ${BAL.td.selfMin}`:""))
+   :/data-mode="master"/.test(h)?pbtn(`data-vlearn="${k}" data-mode="master"`,"Học với thầy",`Chắc chắn · ${game}tốn: ${BAL.td.k} khắc, Sức -${BAL.td.mSuc}, Bạc -${fee} (ma ma) hoặc nợ một ân, thiện cảm -${fav} (phi tần giỏi ${VIR.find(x=>x.k===k).n}) · thành: tiến bộ +2..3, mở được lối mới, ra một món ${W}`,t2||(S.suc<BAL.td.mMin?`Sức dưới ${BAL.td.mMin}`:"")):h);
   s.acts.push(pbtn(`data-rcpls="${k}"`,"Các lối, sách phổ",`thành: xem lối đã học, lối chưa học và cách học`,""))}}catch(e){console.error("tds skills",e)}return L}})();
 /* the lối list of a course: lối opened by level are named with their level */
 (function(){const o0=rcpListOpen;rcpListOpen=function(k){if(!TDS_KIND[k])return o0.apply(this,arguments);const V=VIR.find(x=>x.k===k),kind=TDS_KIND[k],R=[];
@@ -143,9 +143,9 @@ document.addEventListener("click",ev=>{const b=ev.target.closest&&ev.target.clos
   R.push([`${WK[kind].w}: ${s[1]}`,[kn?"đã học":`chưa học: ${V.n} bậc ${BAL.tds.open[i]} tự mở, hoặc học với thầy, hoặc đọc ${RCP_BK[kind].toLowerCase()} «${s[1]}» (Nội vụ phủ, ${rcpBookPr(i)} bạc)`,rs],kn?"g":"n"])});
  kitModal({kind:"info",title:`${V.n} · ${V.full}: các lối`,sub:"Lối đã học, lối chưa học",html:`<div class="kinvrows">${kitRows(R)}</div>${kitFacts([`Bậc 2, 4, 5 mỗi bậc tự mở thêm một lối; thầy dạy hay sách phổ mở sớm hơn.`,"Mỗi lối mở vài món; món còn cần đủ bậc.","Mỗi người thích một lối, có người chê một lối: quà đúng lối người ấy thích mới được trọn."])}`})}})();
 /* ---------- Tài nghệ › Tác phẩm: one card per course (what it makes, lối learnt, practice when mastered) ---------- */
-(function(){if(typeof ktWorksHTML!=="function")return;const w0=ktWorksHTML;ktWorksHTML=function(){let h=w0.apply(this,arguments);try{const why=whyTime(2)||(S.suc<15?"Sức dưới 15":"");
+(function(){if(typeof ktWorksHTML!=="function")return;const w0=ktWorksHTML;ktWorksHTML=function(){let h=w0.apply(this,arguments);try{const why=whyTime(BAL.tds.pracK)||(S.suc<BAL.tds.pracMin?`Sức dưới ${BAL.tds.pracMin}`:"");
   const C=VIR.filter(V=>TDS_KIND[V.k]).map(V=>{const k=V.k,l=virLv(S,k),kind=TDS_KIND[k],K=WK[kind],kn=rcpKnown()[kind].length;
-   const acts=l>=5?[pbtn(`data-tdsprac="${k}"`,"Tự học, làm đồ",`Chắc chắn · tốn: Sức -10, 2 khắc · thành: một món ${K.w.toLowerCase()}, ${wkOddsTxt(S,kind,0)}`,why)]:[];
+   const acts=l>=5?[pbtn(`data-tdsprac="${k}"`,"Tự học, làm đồ",`Chắc chắn · tốn: Sức -${BAL.tds.pracSuc}, ${BAL.tds.pracK} khắc · thành: một món ${K.w.toLowerCase()}, ${wkOddsTxt(S,kind,0)}`,why)]:[];
    return{kind:"wk",k,name:`${V.n} · ${V.full}`,level:l,prog:S.virp[k],need:l+2,desc:`<span class="kchip n">lối đã học ${kn}/${RCP_ST[kind].length}</span> <span class="kchip n">${K.w}${K.fin?" · "+wkFinTxt(K):""}</span> <span class="kchip g">phẩm +${wkLvQ(S,k)}</span><br>${wkOddsTxt(S,kind,0)}`,next:"",acts,img:kitSkillArt("vir",k,V.n),can:!!(acts.length&&!why)}});
   const tail=h.indexOf(`data-skill="wk-taste"`);const cards=C.map(kitSkillCard).join("");
   if(tail>0){const i=h.lastIndexOf("<div",tail);h=h.slice(0,i)+cards+h.slice(i)}else h+=cards}catch(e){console.error("tds works",e)}return h}})();
