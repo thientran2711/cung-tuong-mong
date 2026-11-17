@@ -76,7 +76,7 @@ Object.assign(BAL,{shelf:{
     The viewer judges a room against HER OWN line: allowance × (1 + taste × k) — a frugal eye calls a lawful (even ngự ban) room "quá xa xỉ", a lover of show admires
     what others frown on (likeAff × taste). The inquiry still judges by the rule (true allowance), never by taste. */
  taste:{tr:{"Kiêu ngạo":.5,"Ham vui":.4,"Tham vọng":.3,"Ham lợi":.3,"Xu nịnh":.2,"Vì mình":.2,"Khiêm nhường":-.5,"Thanh liêm":-.5,"An phận":-.3,"Cương trực":-.3,"Ân cần":-.2,"Thật thà":-.2,"Điềm tĩnh":-.1},
-  trong:{"Kiệm":-.5,"Khiêm":-.3,"Lễ":-.2},spread:.3,k:.5,likeAff:3,npcCapK:.4},
+  trong:{"Kiệm":-.5,"Khiêm":-.3,"Lễ":-.2},spread:.3,k:.5,fMin:.2,/* a viewer's line never below fMin × allowance */likeAff:3,npcCapK:.4},
  /* Thái hậu hears of a room her own taste calls too lavish (someone saw it or the talk reached her) and rebukes the owner: o in 100 a month, th favour, Danh, mood */
  th:{o:20,thAff:-6,danh:-2,mood:24},
  /* her mood (and every NPC's), weekly, the one jemo bar */
@@ -87,7 +87,7 @@ Object.assign(BAL,{shelf:{
  npc:{seed:[0,1,1,2,2,3,3,4],capF:.9,care:.8},/* + taste × taste.npcCapK: a lover of show fills her shelf further, and only she puts a non-gift piece above her rank */
  /* plants + creatures (jpet model): care 0..100, falls (start-wither)/hw a tuần; servants care by default (0 khắc), quality by lòng and traits; her own care = the minigame */
  plant:{start:80,hw:3,wither:35,deadW:3,witherLux:.3,khacSelf:1,/* OWNER DECIDED (OD 17/11 ~18:15Z, option 1): servants care plants + pets at 0 khắc to her; 'Tự tay chăm' = khacSelf khắc; ONE 'Chăm sóc' act */srvBase:.45,srvLoyK:.006,srvMax:1.1,qCut:[.6,.9],/* servant care words: below qCut[0] vụng về, below qCut[1] tạm được, else khéo tay */srvTr:{"Cẩn thận":.2,"Chăm chỉ":.2,"Lười biếng":-.3,"Vụng về":-.2},
-  gain:[10,45],game:{rounds:3,steps:10,band:[6,8],ms:[260,170]}},
+  gain:[10,45],word:[.35,.8],/* her care score: below word[0] "chưa khéo", at or above word[1] "rất khéo tay" */game:{rounds:3,steps:10,band:[6,8],ms:[260,170]}},
  /* the shared deed "Ghé chơi" (TW call): friendship + a look at the room */
  visit:{rel:3,w:.6,affMin:-15,dayP:12,base:5,herW:15,upW:5},/* dayP: a consort who keeps her schedule this buổi still drops in on someone dayP in 100 (owner: daily visits); target weight base + liking (+ her, + a superior) *//* anyone not on bad terms may call (owner: NPCs come to her room as she goes to theirs) */
  seeDeeds:["call","visit","help","apol","provoke","humil","test","mediate","warn"],
@@ -132,7 +132,7 @@ Object.assign(BAL,{shelf:{
  ngocdich:["Sáo ngọc","Sáo chạm bằng ngọc, hiếm có"],
  tranchi:["Chặn giấy ngọc","Chặn giấy bằng ngọc trên bàn viết"],thaiho:["Đá Thái Hồ nhỏ","Hòn đá Thái Hồ dáng lạ, kẻ sĩ ưa chuộng"],
  cungdang:["Cung đăng lụa","Đèn lụa treo trong điện"],daminh:["Dạ minh châu","Ngọc châu sáng trong đêm"]};
- const P=BAL.shelf.it;for(const k in D){if(IT[k])continue;const s=P[k];IT[k]={n:D[k][0],kd:"Bày biện",d:`${D[k][1]} · bày ở Nơi trưng bày`,pr:s.pr|0,rk:0,tg:s.dead||s.imp?[]:["rv","th","hh"],gv:3}}})();
+ const P=BAL.shelf.it;for(const k in D){if(IT[k])continue;const s=P[k];IT[k]={n:D[k][0],kd:"Bày biện",d:`${D[k][1]} · bày ở Nơi trưng bày`,pr:s.imp?0:s.pr|0,/* imperial: no price, so no shop / weekly rare item can ever offer it */rk:0,tg:s.dead||s.imp?[]:["rv","th","hh"],gv:3}}})();
 /* Nội vụ phủ tray + ngự ban: décor joins without changing the old lists' balance */
 (function(){const P=BAL.shelf.it,has=(k,c)=>!!(P[k]&&!P[k].imp&&!P[k].dead&&(P[k].src||"").includes(c)&&IT[k]);window.SHELF_SRC=c=>Object.keys(P).filter(k=>has(k,c));
  if(typeof restock==="function"){const r0=restock;restock=function(){const r=r0.apply(this,arguments);try{if(S&&Array.isArray(S.shop))for(const k of shuf(SHELF_SRC("m")).slice(0,BAL.shelf.shopN))if(!S.shop.includes(k))S.shop.push(k)}catch(e){console.error("shelf restock",e)}return r};window.restock=restock}
@@ -142,6 +142,9 @@ Object.assign(BAL,{shelf:{
 function shelfLuxK(k){const s=BAL.shelf.it[k];return s&&s.gr!=null?LUX_V[s.gr]+Math.round((s.pr||0)/10):null}
 (function(){if(typeof luxPiece!=="function")return;const l0=luxPiece;luxPiece=function(k){const v=shelfLuxK(k);if(v!=null)return v;return l0.apply(this,arguments)};window.luxPiece=luxPiece})();
 
+/* the kit item info (grade chip, colour) of a new décor piece = its BAL grade gr, the same grade the luxury formula uses (one core) */
+(function(){if(typeof kitItemInfo!=="function")return;const k0=kitItemInfo;kitItemInfo=function(x){const I=k0.apply(this,arguments);try{const k=x&&typeof x==="object"?x.k:x,s=BAL.shelf.it[k];
+ if(I&&s&&s.gr!=null&&!(x&&x.wk)){const g=Math.max(0,Math.min(4,s.gr|0)),G=(typeof KIT_GRADE!=="undefined"&&KIT_GRADE[g])||null;I.grade=g;if(G){I.gname=G.n;I.col=G.c}}}catch(e){}return I};window.kitItemInfo=kitItemInfo})();
 /* ---------- data ---------- */
 const SHELF_LV=["Đơn sơ","Hợp phẩm","Xa hoa","Quá xa xỉ"];
 function shelfGrp(k){const s=BAL.shelf.it[k];return s?s.g:null}
@@ -195,7 +198,7 @@ window.shelfTaste=shelfTaste;
 const SHELF_TASTE_W=[[-.5,"ghét xa hoa"],[-.15,"chuộng giản dị"],[.15,"không để ý"],[.5,"ưa sang trọng"],[9,"mê xa hoa"]];
 function shelfTasteWord(p){const v=shelfTaste(p);return SHELF_TASTE_W.find(x=>v<x[0])[1]}
 /* the room as ONE viewer sees it: the same sum against her own line (allowance × (1 + taste × k)); the inquiry uses the rule (shelfLux) */
-function shelfLvFor(obs,t){const x=shelfLux(t),B=BAL.shelf;if(!obs||obs===t)return x.lv;const f=Math.max(.2,1+shelfTaste(obs)*B.taste.k);
+function shelfLvFor(obs,t){const x=shelfLux(t),B=BAL.shelf;if(!obs||obs===t)return x.lv;const f=Math.max(B.taste.fMin,1+shelfTaste(obs)*B.taste.k);
  return x.sc<x.bud*B.plainF?0:x.sc<=x.bud*f?1:x.sc<=x.bud*B.lv3*f?2:3}
 window.shelfLvFor=shelfLvFor;
 
@@ -221,7 +224,7 @@ function shelfSee(obs,t,by){const r=shelfLook(obs,t,by,true);if(r)shelfReact(obs
 const SHELF_PW={k:""};/* once per buổi (placeWhere runs many times a buổi: perf) */
 /* her walk into a palace: she sees the rooms of everyone living there; NPCs at her palace the same buổi see hers */
 (function(){if(typeof goTo==="function"){const g0=goTo;goTo=function(){const was=S&&S.place;const r=g0.apply(this,arguments);try{if(S&&S.place!==was&&!S.out)for(const v of liveRivals(true))if(v.alive&&palaceOf(v)===S.place)shelfSee(S,v,"tận mắt")}catch(e){console.error("shelf goTo",e)}return r}}
- if(typeof placeWhere==="function"){const p0=placeWhere;placeWhere=function(){const r=p0.apply(this,arguments);try{const kb=wk()+"-"+(S&&S.buoi||0);if(S&&!S.dead&&S.where&&SHELF_PW.k!==kb&&(SHELF_PW.k=kb))for(const v of liveRivals(true)){if(!v.alive||v.out)continue;const w=whereOf(v);
+ if(typeof placeWhere==="function"){const p0=placeWhere;placeWhere=function(){const r=p0.apply(this,arguments);try{const kb=wk()+"-"+(S&&S.buoi||0);if(S&&!S.dead&&S.where&&!shelfGuest()&&SHELF_PW.k!==kb&&(SHELF_PW.k=kb))for(const v of liveRivals(true)){if(!v.alive||v.out)continue;const w=whereOf(v);
    if(w==="home"&&!S.out)shelfSee(v,S,"tận mắt");else for(const o of liveRivals(true))if(o!==v&&o.alive&&!o.out&&palaceOf(o)===w&&w!==palaceOf(v))shelfSee(v,o,"tận mắt")}}catch(e){console.error("shelf where",e)}return r}}})();
 /* Dò la (both ways) also reports the room; her maid's "Sai đi dò la" the same */
 function shelfSpyTxt(a,t,by){const r=shelfSee(a,t,by);if(!r||a!==S)return"";return `Phòng của ${NM(t)}: ${r.n?`bày ${r.n} món, ${SHELF_LV[r.lv].toLowerCase()}`:"không bày gì"}${r.vr?", có món quá phẩm nàng":""}${r.wi?", có cây cảnh, chim cá bỏ bê":""}. `}
@@ -233,6 +236,9 @@ function shelfSpyTxt(a,t,by){const r=shelfSee(a,t,by);if(!r||a!==S)return"";retu
  TWD("call",{n:"Ghé chơi",req:(a,t)=>!!t&&t!==a&&!t.out&&t.alive!==false,run:(a,t)=>{relAdd(a,t,BAL.tw.g.call);shelfSee(a,t,"ghé chơi");if(t!==S)shelfSee(t,a,"ghé chơi");return `${twNm(a)} ghé chơi cung ${NM(t)}`}});
  SOC.call={w:BAL.shelf.visit.w,ok:(v,t)=>t!==v&&!t.out&&aff(v,t)>=BAL.shelf.visit.affMin,run:(v,t)=>twDo(v,t,"call",true)};
  if(typeof AGSOC==="object"){AGSOC.call=["call","social","ally",g=>({ally:g.call})];AGACTW.call="ghé chơi"}}catch(e){console.error("shelf call",e)}})();
+/* two-way (OD:L1386): the deed NPCs do to her is also hers — "Ghé chơi" in her talk list (jtwoway topicOpts), same deed, same gain, both see the rooms */
+(function(){if(typeof topicOpts!=="function")return;const t0=topicOpts;topicOpts=function(v){const A=t0.apply(this,arguments);try{const D=TW.call;
+ if(S&&v&&D&&!(typeof sameHouse==="function"&&sameHouse(S,v))&&D.req(S,v)&&!A.some(a=>a.n===D.n))A.push({n:D.n,o:100,x:`nàng quý ngươi +${BAL.tw.g.call} · hai bên thấy phòng ốc của nhau`,run:()=>{try{chatMark(v)}catch(e){}return twDo(S,v,"call",true)+"."}})}catch(e){console.error("shelf talk",e)}return A};window.topicOpts=topicOpts})();
 /* the visit happens AT the target's palace (her room / theirs), not wherever she is that khắc */
 (function(){if(typeof agOpts!=="function")return;const o0=agOpts;agOpts=function(){const O=o0.apply(this,arguments);try{for(const o of O)if(o.k==="call")o.at=(kh,vv,tt)=>tt?palaceOf(tt):null}catch(e){}return O}})();
 /* daily life: a consort who keeps her schedule this buổi may drop in on someone (her room weighs more: the player's palace is where life is seen) */
@@ -320,9 +326,11 @@ function shelfRumour(){const B=BAL.shelf.rum;const P=[S].concat(liveRivals(true)
  for(const t of P){const x=shelfLux(t);if(x.lv<B.lv&&!x.vr)continue;for(const o of P){if(o===t||shelfSeen(o,t))continue;if(!roll(B.o))continue;shelfLook(o,t,"tin đồn",false);if(t===S)heardMe++;
    else if(o===S){try{noteAdd(t.id,`Nghe đồn phòng ${t.name} ${x.vr?"bày đồ quá phẩm nàng":"bày biện "+SHELF_LV[x.lv].toLowerCase()}.`)}catch(e){}}}}
  if(heardMe&&!(typeof tsbBot==="function"&&tsbBot()))log(`Hậu cung xì xào về đồ bày trong phòng ngươi.`)}
-function shelfWeek(){if(!S||S.dead)return;try{shelfAccHook()}catch(e){}const P=[S].concat(liveRivals(true)).filter(p=>p&&p.alive!==false);
+/* co-op: the world (NPC shelves, rumours, NPC charges, Thái hậu, reputation) is computed once on the host (jcoopone rule); the guest runs only her own room */
+function shelfGuest(){try{return typeof worldOn==="function"&&!worldOn()}catch(e){return false}}
+function shelfWeek(){if(!S||S.dead)return;try{shelfAccHook()}catch(e){}const gu=shelfGuest();const P=(gu?[S]:[S].concat(liveRivals(true))).filter(p=>p&&p.alive!==false);
  for(const p of P){try{if(p.out){if(p.shelf&&p.shelf.g)for(const g in p.shelf.g)shelfTake(p,g);continue}if(p!==S)shelfArrange(p);shelfPlantWeek(p);shelfMood(p)}catch(e){console.error("shelfWeek",e)}}
- try{shelfRumour()}catch(e){console.error("shelfRumour",e)}
+ if(gu)return;try{shelfRumour()}catch(e){console.error("shelfRumour",e)}
  if(S.shM!==S.turn){S.shM=S.turn;for(const p of P){try{if(shelfLux(p).lv>=3)p.luxRep=Math.min(BAL.lux.repMax,(p.luxRep|0)+BAL.shelf.rep)}catch(e){}}try{shelfNpcAccuse()}catch(e){console.error("shelfNpcAccuse",e)}try{shelfThRebuke()}catch(e){console.error("shelfThRebuke",e)}}}
 window.shelfWeek=shelfWeek;
 (function(){if(typeof petWeek!=="function")return;const w0=petWeek;petWeek=function(){const r=w0.apply(this,arguments);try{shelfWeek()}catch(e){console.error("shelfWeek",e)}return r}})();
@@ -354,7 +362,7 @@ function shelfWaterGame(box,done,W){W=W||SHELF_CARE.cay;const G=BAL.shelf.plant.
   const d=lv<G.band[0]?G.band[0]-lv:lv>G.band[1]?lv-G.band[1]:0;end(cl(1-d/G.band[0],0,1))});draw();tm=setTimeout(tick,G.ms[0]);SHPC.peek=()=>lv;return stop}
 window.shelfWaterGame=shelfWaterGame;
 function shelfPlantGain(score){const e=shelfOf(S).g[SHPC.g];if(!e)return;const G=BAL.shelf.plant.gain;const v=Math.round(G[0]+(G[1]-G[0])*score);const p0=e.pc|0;e.pc=cl(p0+v,0,100);e.pm=wk();e.pz=0;
- const msg=`Tươi tốt +${Math.round(e.pc-p0)}${score>=.8?" · rất khéo tay":score<.35?" · chưa khéo":""}.`;log(`Ngươi tự tay chăm ${shelfNm(e).toLowerCase()} (${msg})`);
+ const msg=`Tươi tốt +${Math.round(e.pc-p0)}${score>=BAL.shelf.plant.word[1]?" · rất khéo tay":score<BAL.shelf.plant.word[0]?" · chưa khéo":""}.`;log(`Ngươi tự tay chăm ${shelfNm(e).toLowerCase()} (${msg})`);
  const box=document.getElementById("kshp");if(box){box.innerHTML=shelfPlantBody(e,msg);try{if(typeof kitFix==="function")kitFix(box)}catch(x){}}}
 document.addEventListener("click",ev=>{const b=ev.target.closest&&ev.target.closest("[data-shc]");if(!b||b.disabled)return;ev.stopPropagation();const k=b.dataset.shc;
  if(k==="pet"){try{closeModal()}catch(x){}petcOpen(+b.dataset.i);return}
