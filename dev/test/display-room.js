@@ -53,7 +53,18 @@ async function viaCurl(ctx){await ctx.route(/ctm-img\.victoria-tntt\.workers\.de
   r.ro=await p.evaluate(()=>{const k=document.getElementById('kdr');return{ro:k.dataset.ro==='1',title:k.querySelector('.kdr-cart').textContent}});
   await p.click('.kdr-sh').catch(()=>{});await p.waitForTimeout(250);r.roNoDrawer=await p.evaluate(()=>{const d=document.getElementById('kdrdrw');return !d||d.hidden});
   await p.evaluate(()=>kitDisplayRoomClose());
+  /* REAL API (jshelf on main, BAL.shelf.ui=1): put a chest piece on a shelf through the UI, then take it down */
+  r.real=await (async()=>{try{await p.evaluate(()=>{BAL.shelf.ui=1;const k=Object.keys(BAL.shelf.it).find(k=>IT[k]&&BAL.shelf.it[k].g&&!BAL.shelf.it[k].plant);S.inv.push({k});window.__k=k;window.__g=BAL.shelf.it[k].g;kitStageRail.paint();kitDisplayRoomOpen(S)});await p.waitForTimeout(400);
+   const L=await p.evaluate(()=>({rail:!!document.querySelector('#krail [data-rail=disp]'),n:document.querySelectorAll('#kdr .kdr-sh').length,per:BAL.shelf.per,sil:document.querySelectorAll('#kdr .kdr-sil').length}));
+   await fr.click(`#kdr [data-kdrg="${await p.evaluate(()=>window.__g)}"]`);await p.waitForTimeout(300);await fr.click('#kdrdrw [data-kdrk]');
+   const a=await fr.waitForSelector('#kidfl [data-kidact=put]',{timeout:8000});await a.click();await p.waitForTimeout(500);
+   const put=await p.evaluate(()=>({inShelf:shelfIn(S,window.__g).some(x=>x[1].k===window.__k),inInv:S.inv.some(e=>e.k===window.__k)}));
+   await fr.click(`#kdr [data-kdrg="${await p.evaluate(()=>window.__g)}"]`);await p.waitForTimeout(300);await fr.click('#kdrdrw [data-kdron]');
+   const tk=await fr.waitForSelector('#kidfl [data-kidact=take]',{timeout:8000});await tk.click();await p.waitForTimeout(500);
+   const back=await p.evaluate(()=>({inShelf:shelfIn(S,window.__g).some(x=>x[1].k===window.__k),inInv:S.inv.some(e=>e.k===window.__k)}));
+   await p.evaluate(()=>{kitDisplayRoomClose();BAL.shelf.ui=0});
+   return{L,put,back,ok:L.rail&&L.n===12&&L.sil>0&&L.sil<=12*L.per&&put.inShelf&&!put.inInv&&!back.inShelf&&back.inInv}}catch(e){return{ok:false,err:String(e).slice(0,160)}}})();
   r.errs=errs;
-  const ok=r.apiHidden&&r.noFixtureOpen&&r.fit&&r.layout&&!g.frames&&!g.cut&&r.drawer&&r.drawer.tiles>0&&r.drawer.inside&&r.drawer.x&&Array.isArray(r.card)&&r.card.some(t=>/Trưng bày/.test(t))&&r.placed.now===before+1&&r.placed.drawerClosed&&r.placed.cardClosed&&r.on&&r.take&&r.taken&&r.closed&&r.ro.ro&&r.roNoDrawer&&!errs.length;
+  const ok=r.apiHidden&&r.noFixtureOpen&&r.fit&&r.layout&&!g.frames&&!g.cut&&r.drawer&&r.drawer.tiles>0&&r.drawer.inside&&r.drawer.x&&Array.isArray(r.card)&&r.card.some(t=>/Trưng bày/.test(t))&&r.placed.now===before+1&&r.placed.drawerClosed&&r.placed.cardClosed&&r.on&&r.take&&r.taken&&r.closed&&r.real.ok&&r.ro.ro&&r.roNoDrawer&&!errs.length;
   r.verdict=ok?'PASS':'FAIL';if(!ok)bad++;all[sz]=r;await ctx.close()}
  console.log(JSON.stringify(all,null,1));await b.close();process.exit(bad?1:0)})().catch(e=>{console.error(e);process.exit(1)});
