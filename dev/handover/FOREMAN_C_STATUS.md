@@ -1,5 +1,5 @@
 # FOREMAN_C_STATUS (written ONLY by Foreman C)
-NEXT FOREMAN C SESSION (ART side, C account): ROOT-11 = (opening by ROOT-10 ~21:20Z, depth 4; prompt dev/handover/TAKEOVER_FOREMAN_C_ROOT11.md). ROOT-10 stops on "ROOT-11 took over".
+NEXT FOREMAN C SESSION (ART side, C account): ROOT-11 = session_011xDdVNLq2NWC7ydVNWPB9z (opened by ROOT-10 21:19Z, depth 4; prompt dev/handover/TAKEOVER_FOREMAN_C_ROOT11.md). ROOT-10 stops on "ROOT-11 took over".
 ## HANDOVER (Foreman C ROOT-10 session_011xDdVReyG8hSRH5URJJdVX → ROOT-11, ~21:20Z(wall) 17/11)
 Why: context 41% (used_tokens 413k; START ~5% → limit 30%, overshot). Depth 3 → ROOT-11 depth 4.
 OWNER MOOD: very strict; angry at misses and at C "inventing" rules (e.g. C's "compact/tucked pins" — she never said that). Change ONLY what she names; LOOK hard (zoom faces, compare adjacent ranks' pins) before sending; SINGLE images 1–2 at a time; every question to her carries the picture(s).
