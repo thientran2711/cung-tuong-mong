@@ -915,7 +915,7 @@
 | FEELINGS-18 (opus; s36 order 19:26Z, OD 18:55Z–19:25Z): 18 feelings × 3 levels + acts + hidden intent + faceKeyFor | review/feelings-18 | C-AG | session_01UV1SzmJYgJQJkt1RUTV1wK | RUNNING | 17/11 18:59Z |
 | REVIEW kit-display-room r1 of c35952b7 (sonnet SMALL; brief briefs/s36-review-kit-display-room.md) | review/kit-display-room-r1 | MAIN s36 | session_01UV1SzjzC6iVhRrTbemy4L6 | RUNNING | 17/11 19:01Z |
 | batch-s32a LIVE d4a850ce (main c114ab9e → d4a850ce; ROLLBACK TARGET c114ab9e; 11 branches, OUT tuanluc-sync/learn-scene-fix-2/pcard-facts-2) | review/batch-s32a | MAIN s36 | session_01UV1SzgWoEmnjTTEv7UgBNP | LIVE | 17/11 19:05Z |
-| UI-FIXES-1: rail blank slot, card art brown box, 412 header under seal, label under flower sprite (sonnet; brief briefs/s36-ui-fixes-1.md) | review/ui-fixes-1 | MAIN s36 | session_01UV1SzjovTp4KY9Xq1JSKvC | RUNNING | 17/11 19:08Z |
+| UI-FIXES-1: rail blank slot, card art brown box, 412 header under seal, label under flower sprite (sonnet; brief briefs/s36-ui-fixes-1.md) | review/ui-fixes-1 | MAIN s36 | session_01UV1SzjovTp4KY9Xq1JSKvC | READY 7f902a5b (reports/ui-fixes-1.md) | 17/11 19:08Z |
 | toil-looks7: finish toil-looks5 (V2-B smaller, final sheet v17, merge main) (sonnet; brief briefs/s36-toil-looks7.md) | review/toil-looks5 | MAIN s36 | session_01UV1SzknrVcN46ftwSGV7f9 | RUNNING | 17/11 19:36Z |
 | REVIEW display-shelf (opus BIG) of e0a86875 | review/display-shelf | C-AG | session_01UV1SzkUH3pxqYSkZMUQX7v | RUNNING | 17/11 19:09Z |
 | REVIEW kit-figure-mood r3 of 5758b6e3 (sonnet SMALL; brief briefs/s36-review-kit-figure-mood-r3.md) | review/kit-figure-mood-r3 | MAIN s36 | session_01UV1Szh4nqVY4zaK7Nk1kui | RUNNING | 17/11 19:12Z |
