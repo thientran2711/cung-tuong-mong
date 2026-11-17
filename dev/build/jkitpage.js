@@ -93,6 +93,11 @@ KIT_SAMPLES.push({id:"§32.1",title:"kitStatRow: thanh đầu trang (trái 6 | p
 /* §28.0 / §28.1 portrait frame cell (review/tassel-fix, owner 15/11 06:35Z): the whole frame canvas 550x1037 — crest, photo window, band,
    jade pendant + tassel — in the person-card cell (.pc>.pcl>.pcp.kit, width --kpcw) and in every small frame mdH (xs 26 · sm 38 · 60 · big 84 px
    wide), tops on one line; a list row (xs frame + text) as in Sổ ghi / Tuần lục / gift recipients. */
+KIT_SAMPLES.push({id:"§28.8d",title:"kitFigSeal: biểu tượng tâm trạng cạnh đầu hình toàn thân",html:()=>{
+ const live=typeof S!=="undefined"&&S&&S.emp&&S.name&&typeof kitStageFig==="function";
+ if(!live)return `<div class="kitpg-row"><span>Mở một ván để xem: hình toàn thân đứng trong phòng, Dư đồ và hộp thoại đều có biểu tượng tâm trạng ở bên đầu (cùng ấn với khung chân dung).</span></div>`;
+ const v=typeof rivals!=="undefined"?rivals.filter(x=>x.alive)[0]:null;
+ return `<div class="kitpg-row" style="align-items:flex-start;gap:24px"><div style="width:230px;height:420px;position:relative">${kitStageFig(S,{cap:false})}</div>${v?`<div style="width:230px;height:420px;position:relative">${kitStageFig(v,{cap:false})}</div>`:""}</div>`}});
 KIT_SAMPLES.push({id:"§28.1",title:"pcPort · mdH: khung chân dung đủ ngọc bội + tua rua",html:()=>{
  /* review/small-bugs-3: the kit page opens before any game (#kit, no S): sample people are the kit's soft silhouettes, never pMe()/pEmp() */
  const live=typeof S!=="undefined"&&S&&S.emp&&S.name;const sf=(rk,rw,ini,src,col)=>({rk,rw,w:[rk],src,hue:0,ini,col});
