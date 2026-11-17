@@ -225,14 +225,13 @@ function mwHome(hk){try{hk=String(hk);if(hk==="me")return"home";const p=emoByKey
  if(p.sid!=null&&p.id==null){const o=ownerOf(p);return o===S?"home":o?palaceOf(o):null}return p.id!=null?palaceOf(p):null}catch(e){return null}}
 /* jmem memAdd stamps m.pl with this: the place both people are at, or null */
 function mwPlaceOf(hk,ak){const a=mwLoc(hk),b=mwLoc(ak);return a&&a===b?a:null}
-function mwName(k){k=String(k);if(k==="me")return"ngươi";if(k==="emp")return"Hoàng thượng";if(k==="th")return"Thái hậu";const p=emoByKey(k);return p&&p.name||"người ấy"}
-function mwPron(k){k=String(k);return k==="me"?"ngươi":k==="emp"?"ngài":k==="th"?"người":"nàng"}
-const MW_NUM=["","một","hai","ba","bốn","năm","sáu","bảy","tám","chín","mười"];
-function mwWhy(how,hk,ak,m,pl){const D=(window.MEM_DEEDS||{})[m.d];if(!D)return"";const who=mwName(ak);
- const ph=who+" "+D[2].replace(/\{o\}/g,mwPron(hk)).replace(/\{x\}/g,m.x||"").replace(/\s+/g," ").trim();
- if(how==="ann"){const n=Math.max(1,Math.round((mwW()-(m.w||0))/mwYear()));return `tròn ${MW_NUM[n]||n} năm ngày ${ph}`}
- if(how==="place"){let pn=pl;try{pn=placeName(pl)}catch(e){}return `trở lại ${pn}, chợt nhớ chuyện cũ: ${ph}`}
- return `gặp ${who}, chợt nhớ chuyện cũ: ${ph}`}
+/* cause text: jmem's own phrase / name / pronoun / number words (memPhrase, memName, memPron, memNum) — one source, no copy */
+function mwWhy(how,hk,ak,m,pl){if(!(window.MEM_DEEDS||{})[m.d]||typeof memPhrase!=="function")return"";const who=memName(ak),
+  ph=memPhrase(m,memPron(hk)).replace(/\s+/g," ").trim();
+ if(how==="ann"){const n=Math.max(1,Math.round((mwW()-(m.w||0))/mwYear()));return `tròn ${memNum[n]||n} năm ngày ${who} ${ph}`}
+ if(how==="place"){let pn=pl;try{pn=placeName(pl)}catch(e){}return `trở lại ${pn}, chợt nhớ chuyện cũ: ${who} ${ph}`}
+ const sj=memPron(ak)===memPron(hk)?who:memPron(ak);/* "nàng … về nàng" would be unclear → the name */
+ return `gặp ${who}, chợt nhớ chuyện cũ: ${sj} từng ${ph}`}
 /* feeling by deed; a key the EMO table does not hold (e.g. after a feeling-set rename) falls back to the good / bad kind */
 function mwFeel(m){const K=mwB().kind,g=m.s>0?K.good:K.bad,k=K.d&&K.d[m.d];return k&&typeof EMO!=="undefined"&&EMO[k]?k:g}
 /* one wake: a layer-1 cause on the holder; true if it woke */

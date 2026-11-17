@@ -155,7 +155,7 @@ function memInvoke(v,p){p=p||S;const C=B();const m=memTop(v,p,1);if(!m||m.g<C.in
  if(!owe)try{affAdd(v,p,C.invokeAff)}catch(e){}
  if(p!==S)return `${p.name} nhắc ${v.name} chuyện xưa: ${p.name} đã ${phrase(m,v.name)}; ${v.name} quý ${p.name} hơn`;
  return `Ngươi nhắc ${v.name} chuyện xưa: ngươi đã ${phrase(m,"nàng")}. ${v.name} cúi đầu: “Ơn ấy ta chưa trả.”${owe?" Nàng nợ ngươi một ân.":""}`}
-Object.assign(window,{memAdd,memList,memScore,memMod,memTop,memLine,memFade,memInvoke,memAgo,memKey:mk,memFadeK,memHolders,memPairs,memFadeWord});
+Object.assign(window,{memAdd,memList,memScore,memMod,memTop,memLine,memFade,memInvoke,memAgo,memKey:mk,memFadeK,memHolders,memPairs,memFadeWord,memPhrase:phrase,memName:mName,memPron:mPron,memNum:NUMW});/* MOOD-MEM mwWhy reuses these (one phrase / name / pronoun source) */
 
 /* ================= HOOK LEDGER ================= */
 const HK_KIND={promise:"Lời hứa",debt:"Ngươi nợ ân",favour:"Nợ ngươi một ân",secret:"Bí mật nắm được",threat:"Bị nắm thóp",proof:"Chứng cứ trong tay",vow:"Lời thề"};
