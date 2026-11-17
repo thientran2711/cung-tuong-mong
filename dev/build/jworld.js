@@ -88,7 +88,7 @@ EVD.tang={place:w=>w.x.why==="queen"?"kn":"tn",
  card(w){for(let i=Q.length-1;i>=0;i--)if(Q[i]&&Q[i].t==="Quốc tang"&&!Q[i].wwin)Q.splice(i,1);/* j92's announcement: ours carries the same words + her options */
   return{wwin:1,t:"Quốc tang",who:pEmp(),h:`<p>${w.cause}. ${w.txt||""}</p><p class="past">Mặc đồ đỏ hay vàng lúc này là tội. Nên thay y phục, tháo trâm (Tư trang).</p>`}},
  scene(w){const b=B().tang.rite;const P=wPresent(EVD.tang.place(w));return{t:"Linh cữu",h:`<p>Quan tài đặt giữa chính điện, khói hương nghi ngút. ${P.length?nmList(P)+" đang quỳ túc trực.":"Cung nhân thay nhau túc trực."}</p>`,
-  opts:[{n:"Quỳ túc trực, tụng kinh",fx:{suc:-8},x:`thành: Đức +${b.duc}, Thái hậu +${b.th}`,go:()=>{apply({duc:b.duc});if(!S.thDead&&w.x.why!=="th")apply({th:b.th})}},
+  opts:[{n:"Quỳ túc trực, tụng kinh",fx:{suc:-b.suc},x:`thành: Đức +${b.duc}, Thái hậu +${b.th}`,go:()=>{apply({duc:b.duc});if(!S.thDead&&w.x.why!=="th")apply({th:b.th})}},
    {n:"Thắp nén hương rồi lui",fx:{},x:"không được không mất"}]}},
  night(w,p){return wNow0(w)<(B().tang.noNight[w.x.why]||1)},feast:1};
 /* 2 NGỰ GIÁ XA CUNG (rows 10 + 11): tế Giao (calendar), thu săn (autumn, peace), tuần du (good years), thân chinh (a lost war).

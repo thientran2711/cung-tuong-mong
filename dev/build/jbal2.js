@@ -813,7 +813,7 @@ BAL.talk={health:4,praise:{o:60,div:5},praiseFail:2,secret:10,secretBond:30,goss
    pull = chance points per point of place multiplier above 1 that an NPC goes to the window's place (fallback until AG-ALL's day plan reads
    worldPlanW: window.WORLD_PLAN_HOOKED). */
 BAL.world={on:1,maxOpen:2,pull:18,
- tang:{len:{th:9,queen:9,heir:3},noNight:{th:3,queen:2,heir:1},mood:2,place:{tn:2.5,kn:2,vuon:0},act:{art:.3,social:.6,greet:1.6,harm:.7,scheme:.8},srvAct:{work:1.3},rite:{duc:2,th:3},force:[{b:0,pl:"$",deed:"pray",why:"Túc trực linh cữu",g:["consort","queen"],first:1}]},
+ tang:{len:{th:9,queen:9,heir:3},noNight:{th:3,queen:2,heir:1},mood:2,place:{tn:2.5,kn:2,vuon:0},act:{art:.3,social:.6,greet:1.6,harm:.7,scheme:.8},srvAct:{work:1.3},rite:{duc:2,th:3,suc:8},force:[{b:0,pl:"$",deed:"pray",why:"Túc trực linh cữu",g:["consort","queen"],first:1}]},
  away:{len:{te:1,san:2,tuan:4,chinh:5},fol:{te:0,san:2,tuan:3,chinh:0},folSung:3,stayDanh:-1,
   te:{every:3,month:11},san:{month:9,p:50,bien:45,age:62,folSung:50},tuan:{month:3,p:25,kho:55,bien:50,gapY:5,age:65},chinh:{p:40,bien:35,age:58,gapY:3,win:[35,3,3],winBien:20,loseBien:-10},
   place:{vuon:1.3,kn:1.3},act:{scheme:1.5,frame:1.4,harm:1.2,spy:1.3,greet:1.2},srvAct:{work:.8}},
