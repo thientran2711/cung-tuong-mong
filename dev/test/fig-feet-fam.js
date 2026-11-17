@@ -4,6 +4,7 @@
    Cases: timed choice (sample / two options / no chip), the kit §8 pop-ups (event, long, info, rule, result, news, place, personopt),
    and each person kind (player, emperor, Thái hậu, queen, consort, child, eunuch, maid, man, npc) as a 'Có người đến' dialog with ONE option
    and with THREE long options (the tall case). Per case: layout class (live v3 frame kszlive / legacy kdper), figure count.
+   PLATE=1 = every person wears a title plate (the tallest tag).
    usage: node dev/test/fig-feet-fam.js <url> [WxH,...]   default 755x1000,1180x820,1366x1024,412x1058,390x844   exit 1 when any figure is cut */
 const {chromium}=require('playwright');const [,,URL,SIZES]=process.argv;const sleep=t=>new Promise(r=>setTimeout(r,t));
 const VPS=(SIZES||'755x1000,1180x820,1366x1024,412x1058,390x844').split(',');
@@ -14,6 +15,7 @@ const VPS=(SIZES||'755x1000,1180x820,1366x1024,412x1058,390x844').split(',');
   await p.goto(URL,{waitUntil:'domcontentloaded'});await p.addStyleTag({content:'#kroul,#kroulw,.kroul,#krottip{display:none!important}'});
   await p.waitForFunction(()=>typeof start==='function'&&typeof showModal==='function',null,{timeout:180000});await sleep(2500);
   await p.evaluate(()=>{const kl=document.getElementById('kload');if(kl)kl.remove();try{localStorage.clear()}catch(e){}SLOT=3;document.getElementById('title').hidden=true;for(let i=0;i<60;i++){start();if(!isSrv())break}});
+  if(process.env.PLATE)await p.evaluate(()=>{window.kitTitleWorn=kitTitleWorn=function(){return kitTitleDef('dh-nights')}});/* PLATE=1: every figure wears the 3-line tag (plate+rank+name), fig-tag-chip */
   for(let i=0;i<15;i++){await sleep(400);const srv=await p.evaluate(()=>{const s=isSrv();if(s)start();return s});if(!srv)break}
   await p.evaluate(()=>{Q.length=0;document.getElementById('modal').hidden=true;render()});await sleep(800);
   /* case list (built inside the page, so the people are the live ones) */
