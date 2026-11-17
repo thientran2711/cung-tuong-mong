@@ -729,3 +729,4 @@
 | REVIEW learn-scene-fix r1 of 41836865 (worker session_01UV1SziySB5E5PWMp5Wc7uX SẴN SÀNG KIỂM) | review/learn-scene-fix-r1 | MAIN s31 | session_01UV1SzkJwiGXxoBvWoVcncV | RUNNING | 17/11 12:23Z |
 | event-art DARK fix (sonnet; owner 17/11 12:19Z/12:22Z; brief briefs/event-art-dark-fix.md) | CDN only (report reports/event-art-dark-fix.md) | C ROOT-6 | session_011xDdVSTVyLVuATNYT3izSd | RUNNING | 17/11 12:24Z |
 | RESTORE maid trung y (ty) keys replaced by consort-tier redraw, 681 keys (sonnet W9; owner order 17/11 12:21Z, ROOT-6 GO 12:23Z; opened by lead #7) | review/fig-cutout-clean | C | session_011xDdVNG1ZBYKd7ZkiyqAJP | RUNNING | 17/11 12:26Z |
+| stage-caption SẴN SÀNG KIỂM ff3e0e74 | review/stage-caption | s31 worker | session_01UV1Szk3y43acKY1bEhtMWZ | READY | 17/11 |
