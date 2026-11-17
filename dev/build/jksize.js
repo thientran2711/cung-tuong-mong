@@ -517,7 +517,7 @@ function kszLiveLay3(dlg,K){const X=dlg.__ksz3;if(!X)return;const V=KIT_SIZE.v3,
  const body=X.body,right=X.right;[...body.children].forEach(c=>{if(c!==right)c.remove()});right.querySelectorAll(":scope>.k3ev").forEach(c=>c.remove());
  let left="",ev=true;if(pres==="one"){if(foc==="event"){left=kszPic3(X.src,"k3main k3mpic");ev=false}else left=X.who?kszPor3(X.who):""}else left=X.who?kszFigHtml(X.who):"";
  if(left)body.insertAdjacentHTML("afterbegin",left);if(ev&&X.src)right.insertAdjacentHTML("afterbegin",kszPic3(X.src,"k3ev"));
- if(X.opts){if(pres==="one"||nar)X.mb.appendChild(X.opts);else right.appendChild(X.opts);/* narrow: option cards BELOW the figure row, full width; else kit-option-rows r2: stack label over value when the column is too narrow */const bs=[...X.opts.querySelectorAll(":scope>button")],w=X.opts.clientWidth;X.opts.classList.toggle("kszstk",!!(bs.length&&w&&pres!=="one"&&w<kszNeedTxt(bs,0,KIT_SIZE.v3.btn)+KIT_SIZE.v3.btn.stackBelow))}
+ if(X.opts){if(pres==="one"||nar)X.mb.appendChild(X.opts);else right.appendChild(X.opts);/* narrow: option cards BELOW the figure row, full width; else kit-option-rows r2: stack label over value when the column is too narrow */const bs=[...X.opts.querySelectorAll(":scope>button")],w=X.opts.clientWidth;X.opts.classList.remove("kszstk")}
  body.querySelectorAll("img").forEach(im=>{if(!im.complete)im.addEventListener("load",()=>kszLiveRepick3(dlg),{once:true})});
  right.querySelectorAll(":scope>.k3ev img").forEach(im=>{if(!im.complete)im.addEventListener("load",()=>kitFrameApplyLive3(dlg),{once:true})});
  kitFrameApplyLive3(dlg)}
@@ -546,8 +546,7 @@ Object.assign(window,{kitFrameLive3,kszLivePick3,kitFrameApplyLive3,kitFrameFits
 (function(){const st=document.createElement("style");st.id="k-size3-live";st.textContent=`
 html body #modal .dlg.kszlive.kszlive{width:var(--kszw)!important;max-width:calc(100% - 16px)!important;height:auto!important;min-height:0!important;max-height:calc(100% - 16px);padding:0;display:flex;flex-direction:column;overflow:hidden}
 #modal .dlg.kszlive>#mb{padding:0;margin:0;display:block;max-height:none;overflow:visible;flex:none}
-/* r2: narrow option column -> label above value (kit rows) */
-#modal .dlg.kszlive .opts.kszstk .kb,#modal .dlg.kszlive .opts.kszstk small.kb{grid-template-columns:minmax(0,1fr)!important;row-gap:0!important}#modal .dlg.kszlive .opts.kszstk .krl{padding-top:3px!important;line-height:1.1}
+/* r4 (owner 17/11): option rows are label LEFT + value RIGHT at every size; the stacked label-over-value layout (r2 .kszstk) is gone */
 #modal .dlg.kszlive>#mr:not(:has(button:not([hidden]))){display:none}
 #modal .dlg.kszlive[data-narrow="1"]{overflow-x:hidden;overflow-y:auto}
 #modal .dlg.kszlive[data-pres="one"] .k3right{justify-content:center}
@@ -593,5 +592,5 @@ window.kitScrollCues=kitScrollCues;
  const st=document.createElement("style");st.id="k-scroll-cue";st.textContent=`
 .kscue{position:sticky;bottom:0;flex:none;height:0;width:100%;margin:0;padding:0;pointer-events:none;display:none;z-index:5}
 .kscue.on{display:block}
-.kscue .kscg{position:absolute;left:0;right:0;bottom:0;height:46px;background:linear-gradient(to bottom,rgba(253,249,238,0),rgba(253,249,238,.96))}
-.kscue .kscc{position:absolute;left:50%;bottom:6px;transform:translateX(-50%);font-size:.72rem;font-weight:700;color:#7a5a1e;background:#fbf1d6;border:1px solid #c9a24a;border-radius:999px;padding:2px 10px;white-space:nowrap;box-shadow:0 1px 3px rgba(0,0,0,.18)}`;document.head.appendChild(st)})();
+.kscue .kscg{position:absolute;left:0;right:0;bottom:0;height:36px;background:linear-gradient(to bottom,rgba(253,249,238,0),rgba(253,249,238,1) 42%)}/* r4: the chip sits in the SOLID lower part of the fade (never over readable text) */
+.kscue .kscc{position:absolute;left:50%;bottom:2px;transform:translateX(-50%);font-size:.66rem;line-height:1.25;font-weight:700;color:#7a5a1e;background:#fbf1d6;border:1px solid #c9a24a;border-radius:999px;padding:0 9px;white-space:nowrap;box-shadow:0 1px 3px rgba(0,0,0,.18)}`;document.head.appendChild(st)})();

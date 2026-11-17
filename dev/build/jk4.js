@@ -962,7 +962,7 @@ function kitCompactCSS(B,w,h){w=w||84;h=h||w;return `
  ${B} .klead{display:-webkit-box!important;-webkit-box-orient:vertical!important;-webkit-line-clamp:1!important;overflow:hidden!important}
  /* KIT §51 (kit-table r6): the Cần/Tốn/Được rows stay ONE kit table (j63 .kb grid, rows display:contents) so every value starts at the
     same x; only the value cell flows its chips. (Was a flex chip flow: short values sat beside the label, long ones under it.) */
- ${B} small.kb{display:grid!important;grid-template-columns:fit-content(var(--kt-lab,max(34%,7rem))) minmax(0,1fr)!important;column-gap:6px!important;row-gap:2px!important}
+ ${B} small.kb{display:grid!important;grid-template-columns:fit-content(4.3rem) minmax(0,1fr)!important;column-gap:6px!important;row-gap:2px!important}
  ${B} small.kb>.kr>.krl{font-size:.66rem!important;align-self:baseline}
  ${B} small.kb>.kr>.krv{display:flex!important;flex-wrap:wrap!important;gap:2px 4px!important;min-width:0!important}
  ${B} small.kb>.kr>.krv>*{display:inline-block!important;white-space:normal!important;max-width:100%!important;overflow-wrap:anywhere}

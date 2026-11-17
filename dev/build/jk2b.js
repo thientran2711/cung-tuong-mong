@@ -296,7 +296,7 @@ function kitHint(o,m,lv){if(lv==null)lv=kitHintLevel();if(!o)return{hint:"",risk
 /* the DOM fallback (a hidden-outcome button with no option object): its rows as a pseudo option */
 function kitHintOf(b,o){if(o)return kitHint(o,typeof Q!=="undefined"?Q[0]:null);const rows={};b.querySelectorAll(".kb .kr").forEach(r=>{const l=((r.querySelector(".krl")||{}).textContent||"").trim();const v=r.querySelector(".krv");if(v)(rows[l]=rows[l]||[]).push(...[...v.querySelectorAll(".ef")].map(e=>e.textContent.trim()))});
  const odd=((b.querySelector(":scope > .kat > .kodds, :scope > .kabody > .kat > .kodds")||{}).textContent||"").match(KIT_HINT_LADDER);
- const j67=[odd?odd[1]:"",rows["Được"]&&"thành: "+rows["Được"].join(", "),rows["Mất"]&&"hỏng: "+rows["Mất"].join(", "),rows["Kèm"]&&"kèm: "+rows["Kèm"].join(", ")].filter(Boolean).join(" · ");
+ const j67=[odd?odd[1]:"",(rows["Được"]||rows["Thành"])&&"thành: "+(rows["Được"]||rows["Thành"]).join(", "),(rows["Mất"]||rows["Bại"])&&"hỏng: "+(rows["Mất"]||rows["Bại"]).join(", "),rows["Kèm"]&&"kèm: "+rows["Kèm"].join(", ")].filter(Boolean).join(" · ");
  return kitHint({j67},null)}
 /* KIT PARTS (KIT 28.6, kit sample page): the hint row and the risk chip — every hidden-outcome option uses these, nothing private */
 function kitHintRow(text){if(!text)return"";try{if(typeof VP==="object"&&VP&&VP.fix)text=VP.fix(text)}catch(e){}return `<span class="kr kr-hint"><span class="krl">Gợi ý</span><span class="krv"><span class="ef i">${text}</span></span></span>`}

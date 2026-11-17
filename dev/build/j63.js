@@ -96,8 +96,12 @@ function kaRowH(k,lab,L,b){return `<span class="kr kr-${k}${b?" kb-"+b:""}"><spa
 function kaBody(R,dis){kaNoteDedup(R);const one=R.one!==false;let h="";
  for(const [k,lab] of [["why","Cần"],["ton","Tốn"]])if(R[k].length)h+=kaRowH(k,lab,R[k]);
  {const A=R.duoc.filter(x=>x.b==="a");if(A.length)h+=kaRowH("duoc","Được ngay",A,"a")}
- for(const b of one?["t"]:["t","b"]){const rows=KA_BLK.map(([k,lab])=>[k,lab,R[k].filter(x=>x.b===b)]).filter(r=>r[2].length);if(!rows.length&&one)continue;
-  h+=`<span class="kbh kbh-${b}">${b==="t"?"Thành":"Bại"}</span>`+(rows.length?rows.map(([k,lab,L])=>kaRowH(k,lab,L,b)).join(""):`<span class="kr kr-none kb-${b}"><span class="krl"></span><span class="krv"><span class="ef n">${b==="t"?"Không được gì thêm":"Tốn công, không được gì"}</span></span></span>`)}
+ if(one){const rows=KA_BLK.map(([k,lab])=>[k,lab,R[k].filter(x=>x.b==="t")]).filter(r=>r[2].length);h+=rows.map(([k,lab,L])=>kaRowH(k,lab,L,"t")).join("")}
+ else for(const b of ["t","b"]){
+  /* kit-thanh-bai r4 (owner 17/11): NO head rows. A rolled card's gain/loss row of each block is labelled THÀNH (green, replaces Được) / BẠI (red, replaces Mất); Được+Mất of one block share that one row; Kèm keeps its own row after it */
+  let L=[...R.duoc.filter(x=>x.b===b),...R.mat.filter(x=>x.b===b)];if(dis&&b==="t")L=L.filter(x=>x.c!=="r");
+  h+=L.length?kaRowH(b==="t"?"thanh":"bai",b==="t"?"Thành":"Bại",L,b):`<span class="kr kr-none kr-${b==="t"?"thanh":"bai"} kb-${b}"><span class="krl">${b==="t"?"Thành":"Bại"}</span><span class="krv"><span class="ef n">${b==="t"?"Không được gì thêm":"Tốn công, không được gì"}</span></span></span>`;
+  const K=R.kem.filter(x=>x.b===b);if(K.length)h+=kaRowH("kem","Kèm",K,b)}
  if(R.note.length)h+=kaRowH("note","Ghi chú",R.note);
  return `<small class="kb${dis?" kbdis":""}">`+h+`</small>`}
 /* kitParse: same input, kit rows out (odds chip first, the frame moves it to the title row) */
@@ -121,8 +125,8 @@ function kaNorm1(b){if(b.dataset.ka==="1"){const kan=b.querySelector(":scope > .
  let M,R,odds="";
  if(/class="kb/.test(bodyHTML)){const t=document.createElement("template");t.innerHTML=bodyHTML;const od=t.content.querySelector(".kodds");odds=od?od.innerHTML:"";
   /* already rows: re-read them (adds a kwhy that was inserted later) */
-  R={why:[],ton:[],duoc:[],mat:[],kem:[],note:[],one:!t.content.querySelector(".kbh-b")};
-  t.content.querySelectorAll(".kr").forEach(r=>{const k=[...r.classList].find(c=>c.startsWith("kr-")).slice(3);if(!R[k])return;const bb=r.classList.contains("kb-b")?"b":r.classList.contains("kb-a")?"a":r.classList.contains("kb-t")?"t":"";r.querySelectorAll(".krv>.ef,.krv>.kwhy").forEach(e=>R[k].push({b:bb,h:k==="why"?e.innerHTML.replace(/^[✓✗]\s*/,""):e.innerHTML,c:k==="why"?(e.classList.contains("kok")?"g":"r"):e.classList.contains("g")?"g":e.classList.contains("r")?"r":e.classList.contains("t")?"t":"n"}))});
+  R={why:[],ton:[],duoc:[],mat:[],kem:[],note:[],one:!t.content.querySelector(".kr-bai,.kr-none.kb-b")};
+  t.content.querySelectorAll(".kr").forEach(r=>{const k0=[...r.classList].find(c=>c.startsWith("kr-")).slice(3);if(k0==="none")return;const tb=k0==="thanh"||k0==="bai";const k=tb?"duoc":k0;if(!R[k])return;const bb=r.classList.contains("kb-b")?"b":r.classList.contains("kb-a")?"a":r.classList.contains("kb-t")?"t":"";r.querySelectorAll(".krv>.ef,.krv>.kwhy").forEach(e=>R[tb&&e.classList.contains("r")?"mat":k].push({b:bb,h:k==="why"?e.innerHTML.replace(/^[✓✗]\s*/,""):e.innerHTML,c:k==="why"?(e.classList.contains("kok")?"g":"r"):e.classList.contains("g")?"g":e.classList.contains("r")?"r":e.classList.contains("t")?"t":"n"}))});
   t.content.querySelectorAll(".kwhy").forEach(w=>{if(!w.closest(".kr-why")){const x=kaPlain(w.innerHTML).replace(/[\s—-]+$/,"");if(x&&!R.why.some(y=>y.h===x))R.why.push({h:x,c:"r"})}});}
  else{M=kaModel(bodyHTML);R=kaRows(M);odds=kaOdds(M)}
  extraTime.reverse().forEach(x=>R.ton.unshift({h:x,c:"t"}));R.why=R.why.map(x=>({h:kaWhyCut(x.h),c:"r"}));{const wt=R.why.map(x=>kaPlain(x.h).toLowerCase());R.note=R.note.filter(x=>!wt.some(w=>w.includes(kaPlain(x.h).toLowerCase())))}if(R.ton.length>1)R.ton=R.ton.filter(x=>!/^không(\s|$)/i.test(kaPlain(x.h)));
@@ -173,12 +177,14 @@ button.ka .kr-note .krv .ef{color:var(--dim);font-weight:400}
 button.ka.kdis,button.ka:disabled{opacity:1!important;background:#eee7da!important;border-color:#d4c8b2;cursor:default;filter:none}
 button.ka.kdis .kan,button.ka:disabled .kan{color:#7d7263}
 button.ka.kdis .kodds,button.ka:disabled .kodds{filter:grayscale(1);opacity:.7}
-button.ka.kdis .kr-mat,button.ka.kdis .kr-kem,button.ka:disabled .kr-mat,button.ka:disabled .kr-kem{display:none}
+button.ka.kdis .kr-mat,button.ka.kdis .kr-kem,button.ka.kdis .kr-bai,button.ka:disabled .kr-mat,button.ka:disabled .kr-kem,button.ka:disabled .kr-bai{display:none}
 /* kit-thanh-bai: the THÀNH / BẠI block heads (full grid row) and their rows; a disabled card shows no BẠI block (same rule as its hidden Mất / Kèm) */
-.kb .kbh{grid-column:1/-1;font-size:.64rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;line-height:1.2;margin-top:3px;padding-top:3px;border-top:1px dashed #d9c79c}
-.kb .kbh-t{color:var(--good)}.kb .kbh-b{color:var(--bad)}
+/* r4: no head rows — the row label itself is THÀNH (green) / BẠI (red); label column LEFT, value RIGHT at every size */
+.kb .kr-thanh .krl{color:var(--good);font-weight:800}.kb .kr-bai .krl{color:var(--bad);font-weight:800}
+.kb .kr-none.kr-thanh .krl{color:var(--good)}.kb .kr-none.kr-bai .krl{color:var(--bad)}
+.kb .kr-duoc.kb-a .krl{white-space:normal;line-height:1.1}
 .kb .kr-none .ef{color:var(--dim);font-weight:400;font-style:italic}
-button.ka.kdis .kbh-b,button.ka:disabled .kbh-b,button.ka.kdis .kr.kb-b,button.ka:disabled .kr.kb-b{display:none}
+button.ka.kdis .kr.kb-b,button.ka:disabled .kr.kb-b{display:none}
 button.ka.kdis .krv .ef.g,button.ka.kdis .krv .ef.r,button.ka.kdis .krv .ef.t{opacity:.75}
 button.ka.kcard{border-radius:8px}
 button.ka.kcard .kan{font-family:var(--title,inherit);font-size:calc(var(--kfs,.82rem) + .12rem)}
