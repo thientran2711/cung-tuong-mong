@@ -66,7 +66,7 @@ function kill(p,why,K){let ev="";note(p,why,K);
  if(p.lyF)return typeof lyDie==="function"?lyDie(p,why):(p.dead=1,"");
  if(p===S.emp){S.mort.empDue=why||(p.thoO?"Ngài lâm trọng bệnh đã lâu, thuốc thang vô hiệu":"Ngài trúng phong đột ngột giữa đêm");return ""}
  if(p===S.thO){if(!S.thDead){S.thDead=true;S.th=0;S.thIll=null;ev+=`<b>Thái hậu băng hà, thọ ${S.thAge} tuổi.</b> ${why?why+". ":""}`}return ev}
- if(K.has(p)){const mine=(S.kids||[]).includes(p);return kidDie(p,why||(p.nb?"yểu mệnh khi chưa đầy tháng":p.age<6?pick(["mất vì đậu mùa","mất vì sốt cao","nhiễm dịch mà mất"]):"lâm bệnh mà mất"),mine)}
+ if(K.has(p)){const mine=(S.kids||[]).includes(p);return kidDie(p,why||(p.nb?"yểu mệnh khi chưa đầy tháng":p.age<BAL.mortx.youngAge?pick(["mất vì đậu mùa","mất vì sốt cao","nhiễm dịch mà mất"]):"lâm bệnh mà mất"),mine)}
  if(rivals.includes(p)){p.alive=false;if(p.queen){p.queen=false;if(S.vacSince==null)S.vacSince=S.turn}return `<span class="r">${p.name} ${why||"lâm trọng bệnh qua đời"}, ${p.age} tuổi.</span> `}
  if(p===S.maid){const o=S.maid.name;S.maid=newMaid(typeof npcFreshName==="function"?npcFreshName(MAIDS,[o]):pick(MAIDS.filter(x=>x!==o)),M.maidLoy);if(typeof npcRoleGone==="function")npcRoleGone("maid");return `<span class="r">Cung nữ thân cận ${o} ${why||"lâm bệnh qua đời"}.</span> Nội vụ phủ đưa ${S.maid.name} đến hầu thay. `}
  for(const q of [S].concat(rivals))if(q&&q.staff&&q.staff.includes(p)){q.staff.splice(q.staff.indexOf(p),1);try{fillStaff(q,true)}catch(e){}return q===S?`Người hầu ${p.name||""} trong cung ngươi ${why||"qua đời"}. `:""}

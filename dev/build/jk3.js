@@ -79,14 +79,18 @@ document.addEventListener("click",e=>{const a=e.target.closest&&e.target.closest
  /* short stages (844x390): the opened card is scrolled into view inside the column */
  const R2=$$("kshR");if(R2&&window.__kasOpen)R2.scrollTop=R2.scrollHeight},true);
 function k3Stage(){try{const st=$$("stage");if(!st)return;{const pk=S?(S.place||"")+"|"+(S.buoi|0)+"|"+(S.month|0):"";if(window.__kasKey!==pk){window.__kasKey=pk;if(window.__kasOpen){window.__kasOpen=false;const kr=$$("kshR");if(kr)kr.dataset.full=""}}}const stop=st.querySelector(".stop");const gm=document.querySelector(".game");
- let L=$$("kshL"),R=$$("kshR");const off=!S||S.dead||!stop||(gm&&gm.classList.contains("maptab"));
+ let L=$$("kshL"),R=$$("kshR");/* KIT 33.11 SIDE COLUMNS EVERYWHERE (owner 16/11 ~19:20Z via s22: "bất kỳ cái nào … dư đồ, màn hình cảnh phòng, nơi chốn … đều sẽ có những
+    cái thông tin cột trái và cột phải y chang giống như cái phòng ngủ"): the SAME right column (#kshR) and left rail (#krail, jrail) as her room
+    stand on every Dư đồ level too — kitSideHost() = the map leather (.mapv: plan + courtyard) on the Dư đồ tab, else the stage. */
+ const mvh=kitSideHost(),mv=mvh!==st?mvh:null;st.classList.toggle("kplfs",!!(typeof window.kplAway==="function"&&window.kplAway()));
+ const off=!S||S.dead||!stop||(gm&&gm.classList.contains("maptab")&&!mv);
  if(off){if(L)L.hidden=true;if(R)R.hidden=true;st.classList.remove("k3g");return}
- if(!L){L=document.createElement("div");L.id="kshL";L.className="ksh kshL"}if(L.parentNode!==stop)stop.appendChild(L);
- if(!R){R=document.createElement("div");R.id="kshR";R.className="ksh kshR";st.appendChild(R)}
- L.hidden=false;R.hidden=false;st.classList.add("k3g");k3RW(st);
+ if(mv){if(L)L.hidden=true}else{if(!L){L=document.createElement("div");L.id="kshL";L.className="ksh kshL"}if(L.parentNode!==stop)stop.appendChild(L)}
+ if(!R){R=document.createElement("div");R.id="kshR";R.className="ksh kshR"}const host=mv||st;if(R.parentNode!==host)host.appendChild(R);
+ if(!mv)L.hidden=false;R.hidden=false;if(mv){mv.classList.add("kside");k3RW(mv)}else{st.classList.add("k3g");k3RW(st)}
  /* left: time · tư chất · tình trạng */
  const bu=k3hc("buoi"),lot=k3hc("lot"),wx=$$("hud2")&&$$("hud2").querySelector(".kmwx");
- let t="";if(bu){const w=String(BUOI[S.buoi||0]);{const left=typeof used!=="undefined"?Math.max(0,4-used):4;t+=`<button type="button" class="k3r k3time" data-k3="buoi" title="Còn ${left} khắc trong buổi" aria-label="${esc(w)}, còn ${left} khắc"><span class="k3l">${esc(w)}</span><span class="k3dots">${[0,1,2,3].map(i=>`<i class="${i<left?"on":""}"></i>`).join("")}</span></button>`}}
+ let t="";if(bu){const w=String(BUOI[S.buoi||0]);{const left=typeof used!=="undefined"?Math.max(0,BAL.time.khac-used):BAL.time.khac;t+=`<button type="button" class="k3r k3time" data-k3="buoi" title="Còn ${left} khắc trong buổi" aria-label="${esc(w)}, còn ${left} khắc"><span class="k3l">${esc(w)}</span><span class="k3dots">${[0,1,2,3].map(i=>`<i class="${i<left?"on":""}"></i>`).join("")}</span></button>`}}
  const t1=t;t="";/* line 1 = buổi + khắc (+ states); line 2 = weather + Quẻ (kitStatCell lines, KIT 32) */
  if(wx){const c=wx.cloneNode(true);c.className="k3r k3wx kmwx";window.__k3wx=c.outerHTML}if(window.__k3wx&&S.wx)t+=window.__k3wx
  if(lot){const lt=(k3lab(lot)||T(lot.textContent)).replace(/^Quẻ tuần:\s*/,"Quẻ ");t+=`<button type="button" class="k3r k3lot ${lot.classList.contains("ok")?"ok":lot.classList.contains("hot")?"hot":""}" data-k3="lot"><span class="k3l">${esc(lt)}</span></button>`}
@@ -108,7 +112,8 @@ function k3Stage(){try{const st=$$("stage");if(!st)return;{const pk=S?(S.place||
      scrolls inside itself (.kasx) */}
  R.classList.add("kasx");
  k3Gut()}catch(e){console.error("k3Stage",e)}}
-window.k3Stage=k3Stage;window.k3row=k3row;/* the top-bar row builder, for modules that add a row (jtoil "Hôm nay: …") */
+function kitSideHost(){try{const gm=document.querySelector(".game");if(gm&&gm.classList.contains("maptab")){const m=document.querySelector("#panel .mapv");if(m&&m.getClientRects().length)return m}}catch(e){}return $$("stage")}
+window.kitSideHost=kitSideHost;window.k3Stage=k3Stage;window.k3row=k3row;/* the top-bar row builder, for modules that add a row (jtoil "Hôm nay: …") */
 /* name tags are one-line text now: re-run the stage layout once the tags have their final width (fonts, new labels), so neighbours that
    would touch drop to the second tag row (j59 crowd rule) */
 function k3Relay(){clearTimeout(window.__k3rl);window.__k3rl=setTimeout(()=>{try{window.j59lay&&j59lay()}catch(e){}},250)}
@@ -117,7 +122,7 @@ if(typeof renderStage==="function"){const r1=renderStage;renderStage=function(){
 /* gutter widths: from the stage width, then grown to the plaques' real width; j59 keeps the figures between them */
 /* review/stage-side: the side column's width comes from the stage width only (never from its content), so it is the same narrow column
    on every screen and every render: 24 % of the stage, 132–172 px */
-function k3RW(st){const W=st.clientWidth;if(!W)return;const v=Math.round(Math.max(132,Math.min(172,W*.24)))+"px";if(st.style.getPropertyValue("--kgrw")!==v)st.style.setProperty("--kgrw",v)}
+function k3RW(st){/* one column width for every host: from the PAGE width (the map leather spans the spread on iPad = 2 pages) */let W=st.clientWidth;try{if((st.classList.contains("mapv")||st.classList.contains("kplfs"))&&kitView().pages===2)W=W/2}catch(e){}/* reviewer stage-pets-r1: the full-screen place painting spans the spread too (33.10) → same column as her room / the map (139 px at 1180, was 172) */if(!W)return;const v=Math.round(Math.max(132,Math.min(172,W*.24)))+"px";if(st.style.getPropertyValue("--kgrw")!==v)st.style.setProperty("--kgrw",v)}
 function k3Gut(){const st=$$("stage");if(!st)return;const W=st.clientWidth;if(!W)return;k3RW(st);
  const g=Math.round(Math.max(W<520?96:116,Math.min(190,W*.2)));st.classList.toggle("k3n",g<116);const L=$$("kshL"),R=$$("kshR");
  st.style.setProperty("--kgw",g+"px");st.style.setProperty("--k3stw",W+"px");
@@ -195,7 +200,7 @@ html body .stage.k3g #sc-t h2{display:block!important;font-size:1.05rem;line-hei
 html body .stage.k3g.k3n #sc-t h2{font-size:.86rem}
 .ksh{display:flex;flex-direction:column;gap:5px;pointer-events:none;min-width:0}
 .ksh[hidden]{display:none!important}
-.kshR{position:absolute;top:8px;right:8px;width:var(--kgrw,150px);min-width:0;max-width:none;z-index:2;align-items:stretch;box-sizing:border-box}
+html body .kshR{position:absolute;top:8px;right:8px;width:var(--kgrw,150px);min-width:0;max-width:none;z-index:2;align-items:stretch;box-sizing:border-box}
 /* review/stage-side: one narrow column; every plaque is the column width (border-box), names / labels wrap, nothing runs past its edge */
 .kshR *{box-sizing:border-box}.kshR .k3c .k3ct>b{white-space:normal!important;overflow-wrap:anywhere}.kshR .k3c .k3ct{flex:1 1 auto}
 .kshR .k3r>b{white-space:normal;text-align:right}
@@ -254,10 +259,13 @@ try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§0b",title:"Thanh
 try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§75",title:"kitBackBtnHtml · nút về phòng / về bản đồ (biểu tượng vẽ)",
  html:()=>`<div class="kitpg-row" style="display:flex;gap:18px;align-items:center;flex-wrap:wrap"><span class="kbackb">${kitBackBtnHtml("room","Về phòng")}</span><span class="kbackb">${kitBackBtnHtml("room","Về Kính sự phòng")}</span><span class="kbackb">${kitBackBtnHtml("map","Dư đồ")}</span></div>`})}catch(e){}
 /* one-page view (KIT §0 kv1): the room home and the open tab are the two pages of the spread, shown one at a time */
-function k3Phone(){try{return kitView().pages===1}catch(e){return false}}
+/* KIT 33.10 (jplfs): away from her own residence the place painting is the whole page on EVERY screen = the one-page shell */
+function k3Phone(){try{return kitView().pages===1||(typeof window.kplAway==="function"&&window.kplAway())}catch(e){return false}}
 function k3Shell(){try{const gm=document.querySelector(".game");if(!gm)return;try{const hd0=document.querySelector("header.hud");if(hd0)document.documentElement.style.setProperty("--k3hb",Math.round(hd0.getBoundingClientRect().bottom)+"px");const nb0=document.querySelector("nav.bar");if(nb0)document.documentElement.style.setProperty("--k3nb",Math.round(innerHeight-nb0.getBoundingClientRect().top)+"px")}catch(e){}const on=k3Phone()&&!!S&&!S.dead;const alive=!!S&&!S.dead;gm.classList.toggle("k3ph",on);
  const pw=$$("popw");const pop=!!(pw&&pw.children.length&&pw.textContent.trim());
- gm.classList.toggle("k3home",on&&K3SH.home&&!pop);gm.classList.toggle("k3pop",on&&pop);
+ const wasPop=gm.classList.contains("k3pop");gm.classList.toggle("k3home",on&&K3SH.home&&!pop);gm.classList.toggle("k3pop",on&&pop);
+ /* reviewer stage-pets-r1: the left rail (KIT 33.11) is re-drawn by renderStage while the card page still hides the stage, so closing a person card left the painting WITHOUT the rail (no way back to the map): re-draw it when the card page opens / closes */
+ if(wasPop!==gm.classList.contains("k3pop"))try{if(typeof kitStageRail==="object"&&kitStageRail.paint)requestAnimationFrame(()=>kitStageRail.paint())}catch(e){}
  let rb=$$("k3room");const hd=document.querySelector("header.hud");
  if(alive&&!rb&&hd){rb=document.createElement("button");rb.id="k3room";rb.type="button";rb.className="btn k3room kbackb";rb.innerHTML=kitBackBtnHtml("room","Về phòng");rb.title="Về phòng";rb.setAttribute("aria-label","Về phòng");rb.addEventListener("click",e=>{e.stopPropagation();k3Home()});hd.appendChild(rb)}
  /* owner 16/11 (Q6): wide / landscape (two-page spread) shows the room button too, always; one-page view keeps it only while away from the room home */
@@ -297,6 +305,9 @@ html body .game#game.k3ph:not(.k3home):not(.maptab)>#stage{visibility:hidden!imp
 html body .game#game.k3ph.k3pop>#panel{display:none!important}
 /* the person card docked by j59 (#popw.j59dock, grid-area:panel) has no 'panel' area on the one-page grid: it took implicit tracks and squeezed the top bar to 329 px (Fold, found by review/two-way-acts shots) — it takes the page box like a tab panel */
 html body .game#game.k3ph.k3pop>#popw{grid-area:stage!important}
+/* the person card page (#popw docked in the grid by j59dock with grid-area "panel") takes the ONE page box too: the one-page grid has no "panel"
+   area, so an undocked area name made an implicit second column (top bar + tabs squeezed to the left, card in a 270 px strip; Fold home + places) */
+html body .game#game.k3ph>#popw.j59dock{grid-area:stage!important}
 html body .game#game.k3ph:not(.k3pop)>#popw{display:none!important}
 html body header.hud>#k3room{grid-area:stats;justify-self:start;min-height:40px;padding:0 12px;font-weight:600;color:var(--gold);white-space:nowrap}
 /* KIT §75 painted back button (room / map): icon + short label, no bar */

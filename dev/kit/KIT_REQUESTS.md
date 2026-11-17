@@ -12,3 +12,5 @@ Thợ báo "KIT REQUEST" trong báo cáo → điều phối ghi vào đây → g
 | 16/11 | sếp (coop-chat) | Bong bóng thư + danh sách thư (kitChatBubble / kitChatList) + nút biểu tượng có huy hiệu chưa đọc (kitChatBtn) + khung Thư từ (kitChatPanel) | chơi cùng bạn: phòng của nàng | coop-chat | xong, KIT §76, chờ duyệt |
 
 ## 16/11 s19 — closed by review/kit-marks: "KIT REQUEST — cloud-del" items 1–2 built as KIT §83.9 (`.kbtn.kdanger`, `kitConfirm`); KIT number clash §72 verified resolved (KIT_NUMBERS.md).
+
+## 17/11 kit-size-10 — closed: night-final KIT REQUEST "A dialog with a COUNTDOWN (§69 chip) must show the clock + the question WITHOUT scrolling on Fold 755x1000" built as KIT §32.5c + §69.4 (root cause: `.kdpall` + `.kdpbanner` grid rows, jk4 `#kit-dp-all`; every banner event dialog, with or without a clock). Test `dev/test/timed-choice-fit.js`; sample kit page §8 "VIỆC CÓ ĐỒNG HỒ". Callers (night-final jnf) put `kitCoopClock` in the text only; no private CSS.

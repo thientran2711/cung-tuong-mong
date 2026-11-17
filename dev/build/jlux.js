@@ -35,6 +35,7 @@ Object.assign(BAL,{lux:{
  /* frugal edict: when ≥ edictN people in the palace have tiếng xa hoa (a frugal Thái hậu: edictNF), chance edictP each month, lasts edictM months,
     not again within edictCd months. While it stands: everyone above its range at month end Đức −2 (her: also Thái hậu −2); plain dress 1 in 3 Đức +1 */
  edictN:4,edictNF:3,edictP:25,edictM:3,edictCd:24,edictTh:-2,
+ plainP:33,plainDuc:1,/* under the edict, plain dress within its range: chance a month of praise, and the Đức it gives */
  npcCalm:70,npcCalmProud:25,/* chance an NPC with tiếng xa hoa (or above an edict) dresses one phẩm lower that month */
  lanhDuc:-1,          /* lavish dress in lãnh cung (monthly) */
  /* Hội phối đồ: theme range is absolute (4 pieces), capped by her allowance; a floor never above capLo × allowance */
@@ -118,7 +119,7 @@ window.luxXaHoa=luxXaHoa;
 const luxGuest=()=>{try{return !!(window.COOPW&&COOPW.on&&COOPW.seat==="b")}catch(e){return false}};
 function luxEdictCard(E){const B=BAL.lux;const q=typeof queenP==="function"?queenP():null;const by=E.by;const who=by==="th"?"Thái hậu":by==="hh"&&q?`Hoàng hậu ${q.name}`:"Hoàng thượng";const me=luxXaHoa(S);S.luxEdictSeen=E.at;
  try{Q.push({t:"Ý chỉ tiết kiệm",who:by==="th"?pTH():by==="hh"&&q?pv(q):pEmp(),h:`<p>${who} nghe lục cung chuộng xa hoa, ban ý chỉ: ${B.edictM} tháng tới hậu cung phải tiết kiệm, y phục trang sức giản dị.</p>`+
-  (typeof kitRows==="function"?kitRows([["Trong ba tháng","ăn vận xa xỉ quá lệnh: Đức "+B.edictDuc+", bề trên phật ý","r"],["Ăn vận giản dị","có khi được khen: Đức +1","g"],["Thỉnh an","mặc giản dị không bị coi là thiếu lễ","n"]].concat(me?[["Tiếng xa hoa","ngươi cũng bị nhắc tên trong số người phô trương","r"]]:[])):"")})}catch(e){}
+  (typeof kitRows==="function"?kitRows([["Trong ba tháng","ăn vận xa xỉ quá lệnh: Đức "+B.edictDuc+", bề trên phật ý","r"],["Ăn vận giản dị",`có khi được khen: Đức +${B.plainDuc}`,"g"],["Thỉnh an","mặc giản dị không bị coi là thiếu lễ","n"]].concat(me?[["Tiếng xa hoa","ngươi cũng bị nhắc tên trong số người phô trương","r"]]:[])):"")})}catch(e){}
  return `${who} ban ý chỉ tiết kiệm ba tháng. `}
 function luxEdictTry(){const B=BAL.lux;if(!S||S.dead)return"";
  if(luxGuest()){const E=S.luxEdict;return E&&E.until>S.turn&&E.at!=null&&S.luxEdictSeen!==E.at?luxEdictCard(E):""}
@@ -136,7 +137,7 @@ function luxMonthX(p){const B=BAL.lux;let r="";const me=p===S;if(!p||p.alive===f
   else{ap(p,{danh:B.repDanh});p.th=cl((p.th||0)+B.repTh,-100,100)}}
  else if(was&&me)r+="Tiếng xa hoa của ngươi đã lắng. ";
  if(luxEdictOn()){const R=luxRange(p,"thinhan");if(ratio>R.hi){if(me){apply({duc:B.edictDuc});if(!S.thDead&&S.luxEdict.by==="th")apply({th:B.edictTh});r+=`<span class="r">Ngươi ăn vận quá lệnh tiết kiệm. Đức ${B.edictDuc}${!S.thDead&&S.luxEdict.by==="th"?`, Thái hậu ${B.edictTh}`:""}.</span> `}else ap(p,{duc:B.edictDuc})}
-  else if(x.sc>0&&ratio<=R.fit[1]&&roll(33)){if(me){apply({duc:1});r+="Ngươi giữ lệnh tiết kiệm, được khen. Đức +1. "}else ap(p,{duc:1})}}
+  else if(x.sc>0&&ratio<=R.fit[1]&&roll(B.plainP)){if(me){apply({duc:B.plainDuc});r+=`Ngươi giữ lệnh tiết kiệm, được khen. Đức +${B.plainDuc}. `}else ap(p,{duc:B.plainDuc})}}
  /* NPCs learn: with tiếng xa hoa or above an edict they tone down (nết Kiêu ngạo / Tham vọng seldom) — j92 wdAutoFor one phẩm lower */
  if(!me){try{const over=luxXaHoa(p)||(luxEdictOn()&&ratio>luxRange(p,"thinhan").hi);const t=traitsOf(p);
   if(over&&roll(t.some(x=>x==="Kiêu ngạo"||x==="Tham vọng")?BAL.lux.npcCalmProud:BAL.lux.npcCalm)&&typeof wdAutoFor==="function")wdAutoFor(p,-1)}catch(e){}}

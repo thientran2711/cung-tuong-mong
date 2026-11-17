@@ -19,12 +19,20 @@
    COOPW.attach() can be called by any route that builds a fresh S (e.g. tiểu thư ngoài cung) to drop it into the shared world.
    Save: in co-op, save() keeps the slots untouched and stores the canonical C in localStorage "ctm-coop-last" (the room's DO is
    the real save). */
+/* ONE WORLD (owner co-op rule OD:L96; audit dev/handover/reports/coop-one-world.md): every shared world fact is computed ONCE, on the host.
+   worldOn() = true in single player and on the host seat, false on the co-op guest seat. EVERY world loop checks it (the guard table is
+   jcoopone.js, the last script; a few inline checks in j3/j8/j13). The guest computes only HER OWN person; the world comes from the host. */
+window.worldOn=function(){const c=window.COOPW;return !(c&&c.on&&c.seat!=="a")};
 (function(){try{
 if(typeof COOP!=="object")return;
-const W_KEYS=["year","month","tuan","turn","emp","thDead","thAge","thO","thF","court","wx","vacSince","trieu","storms","festDone","usedFaces","fidUsed","kidUsed","lyF","fdead","fidDead","dnames","luxEdict","tn"];  /* tn: B2 the Emperor's night (host); D4 npc-death: Phế phi họ Lý + retired faces/names are world */
+/* thIll (Thái hậu illness), cm (Thái hậu / Hoàng hậu mood; her own "seen"/spy/drop part stays personal, CM_P), men (palace men; her own
+   ties to each man stay personal, MEN_P) + menG2 are WORLD keys since review/coop-one-world. Old rooms: the host's copy wins (HOST_ONLY). */
+const W_KEYS=["year","month","tuan","turn","emp","thDead","thAge","thO","thF","court","wx","vacSince","trieu","storms","festDone","usedFaces","fidUsed","kidUsed","luxEdict","tn","thIll","cm","men","menG2","lyF","fdead","fidDead","dnames"];  /* tn: B2 the Emperor's night (host); D4 npc-death: Phế phi họ Lý + retired faces/names are world (host rolls) */
+const HOST_ONLY=["tn","thIll","cm","men","menG2"];  /* tn: B2 the Emperor's night (host) */   /* the guest never writes these: her toCanon copies them from the room base */
+const CM_P=["seen","spy","thDrop","hhDrop"],MEN_P=["tinh","letters","trysts","knowsMe","af","grudge","grudgeN","debt","seen"];
 const REFF=["resHead","spyFor","lover","mid","owner","by","who","tgt","from","to"];   /* fields whose "me" value names the viewer */
 const STAT=["sung","danh","bac","suc","sac","tai","tamco","duc","th","hh","mat","confined","shield","block"];
-const LOOK=["face","fc","fk","fcKeep","fid","pid","age","sac","tai","tamco","duc","arts","pal","resHead","dress","ill","maid","lot","hieu","titleWorn","dh"];  /* hieu + titleWorn + dh: her hiệu and worn title show on the friend too (review/title-sys) */
+const LOOK=["face","fc","fk","fcKeep","fid","pid","age","sac","tai","tamco","duc","arts","pal","resHead","dress","ill","maid","lot","hieu","titleWorn","dh","toilette","wd"];  /* toilette + wd: her look of the day and the clothes she wears (jtoil toilFriendRec / toilDress, diemtrang-coop-look); hieu + titleWorn + dh: her hiệu and worn title show on the friend too (review/title-sys) */
 const J=x=>x==null?x:JSON.parse(JSON.stringify(x));
 const PETK2=["pets","petOn","petB","petBn"];
 const CW=window.COOPW={tr:[],on:false,seat:"",base:null,pend:false,sent:-1,dying:null,attachC:null,news:"",life:0};
@@ -62,7 +70,7 @@ function buildFriend(P,mine){if(!P||!P.S||P.dead||P.S.dead||friendHome(P))return
     Display copies only: what an act does to them goes to her through `res` (item / kid ops), never through the week write-back. */
  v.inv=bagOf(s.inv);v.kids=kidsCopy(s.kids);if(s.preg&&!s.hidden){v.preg=s.preg;if(s.fake)v.fake=s.fake}v.fx7=J((s.j71&&s.j71.fx)||null);
  mapMe(v,false,mp);v.id=fp();
- v.__b=J(Object.assign({},...STAT.map(k=>({[k]:v[k]})),{rel:v.rel,oan:v.oan,rl:v.rl,ro:v.ro,em:v.evm.me,out:v.out,rank:v.rank}));
+ v.__b=J(Object.assign({},...STAT.map(k=>({[k]:v[k]})),{rel:v.rel,oan:v.oan,rl:v.rl,ro:v.ro,em:v.evm.me,out:v.out,rank:v.rank,ill:v.ill||null}));
  return v}
 function buildFriendSrv(P){const s=P.S;return {sid:fp(),coop:true,name:P.name||s.name,role:"maid",fc:s.fc,fk:s.fk,face:0,hue:0,age:s.age||18,tr:"trung",loyal:60,
  spyFor:s.srv&&s.srv.spyFor!=null?(s.srv.spyFor===me()?"me":s.srv.spyFor):null/* p2 B1: whom she spies for (me = bought by me) */,lover:null,af:{},kn:1,imp:"hảo hữu chơi cùng",org:"hảo hữu chơi cùng"}}
@@ -82,11 +90,20 @@ function placeFriend(P){T("placeFriend "+(P&&P.name));pullFriend();if(!P)return;
  if(v.queen&&!qOn()){rivals.unshift(v)}else{if(v.queen)v.queen=false,v.rank=Math.min(v.rank,6);rivals.push(v)}}
 
 /* ---------- local game → canonical ---------- */
+/* split / join the personal part of the world keys cm and men (her own knowledge of the court mood, her own ties to each man) */
+function splitP(sS,P){if(sS.cm){const c={};for(const k of CM_P)if(sS.cm[k]!=null)c[k]=J(sS.cm[k]);P.cmP=c}
+ if(Array.isArray(sS.men)){const m={};for(const x of sS.men){if(!x||x.id==null)continue;const o={};for(const k of MEN_P)if(x[k]!=null)o[k]=J(x[k]);m[x.id]=o}P.menP=m}}
+function worldPart(k,v){v=J(v);if(k==="cm"&&v){for(const f of CM_P)delete v[f]}else if(k==="men"&&Array.isArray(v)){for(const x of v)if(x)for(const f of MEN_P)delete x[f]}return v}
+function joinP(sS,Pm){const c=Pm.cmP;if(sS.cm&&c)Object.assign(sS.cm,J(c));
+ const m=Pm.menP;if(Array.isArray(sS.men)&&m)for(const x of sS.men){const o=x&&m[x.id];if(o)Object.assign(x,J(o))}
+ if(Array.isArray(sS.men))for(const x of sS.men)if(x){/* defaults of her own ties to a man she never met */if(x.tinh==null)x.tinh=0;if(x.letters==null)x.letters=0;if(x.trysts==null)x.trysts=0;if(x.af==null)x.af=0;if(!x.knowsMe)x.knowsMe=[]}
+ delete sS.cmP;delete sS.menP}
 function myBlob(sS){const P={pid:me(),ok:S.origin&&S.origin.k,name:S.name,rank:S.rank,dead:!!S.dead,srv:!!(S.srv&&!S.srv.risen),life:CW.life,S:{}};
- for(const k in sS)if(!W_KEYS.includes(k))P.S[k]=sS[k];
+ for(const k in sS)if(!W_KEYS.includes(k))P.S[k]=sS[k];splitP(sS,P.S);
  if(sS.emp)P.S.empKnown=sS.emp.known||{};delete P.S.heir;/* p2 B2: the heir is the world key hr, resolved again on every rebuild */return P}
 function toCanon(){try{CW.hrSync&&CW.hrSync()}catch(e){console.error(e)}const L=(CW.pulled||[]).concat(pullFriend());let d;try{S.cev=S.cev||{};const f=L.find(x=>x[0]>=0);if(f)S.cev[fp()]=f[1].ev||0;d=ser()}finally{pushFriend(L.filter(x=>!(CW.pulled||[]).includes(x)))}
- const mp=me(),sS=d.S;const WS={};for(const k of W_KEYS)if(k in sS)WS[k]=J(sS[k]);if(WS.emp)delete WS.emp.known;
+ const mp=me(),sS=d.S;const WS={};for(const k of W_KEYS)if(k in sS)WS[k]=worldPart(k,sS[k]);if(WS.emp)delete WS.emp.known;
+ if(!host()){const bS=(CW.base&&CW.base.W&&CW.base.W.S)||{};for(const k of HOST_ONLY){if(k in bS)WS[k]=J(bS[k]);else delete WS[k]}}
  if(host())WS.cnews={w:wk(),h:CW.news||""};else if(CW.base&&CW.base.W&&CW.base.W.S)WS.cnews=J(CW.base.W.S.cnews);
  const R=d.R.filter(r=>!r.coop).map(r=>{r.rl=r.rl||{};r.ro=r.ro||{};r.gp=r.gp||{};r.ep=r.ep||{};r.evm=r.evm||{};
   r.rl[mp]=r.rel||0;r.ro[mp]=r.oan||0;r.gp[mp]=r.ghen||0;r.ep[mp]=r.ev||0;delete r.rel;delete r.oan;delete r.ghen;delete r.ev;
@@ -102,13 +119,14 @@ function toCanon(){try{CW.hrSync&&CW.hrSync()}catch(e){console.error(e)}const L=
    for(const id in v.rl||{})if(v.rl[id]!==(b.rl||{})[id]&&id!=="me")s.rl[id]=v.rl[id];
    for(const id in v.ro||{})if(v.ro[id]!==(b.ro||{})[id]&&id!=="me")s.ro[id]=v.ro[id];
    if(!v.alive||(v.out&&!b.out)){if(!v.alive){fP.dead=true;s.dead=true;s.coopWhy="Mất trong cung"}else{s.coopCold=1}}
-   if(v.rank!==b.rank&&!v.out){s.rank=v.rank}}
+   if(v.rank!==b.rank&&!v.out){s.rank=v.rank}
+   if("ill" in b&&JSON.stringify(v.ill||null)!==JSON.stringify(b.ill))s.ill=v.ill?Object.assign(J(v.ill),{known:true}):null/* r1 (her own illness: she knows it): the host's epidemic caught her (one world) */}
   P[fs()]=fP}
  return {v:1,week:wk(),W:{S:WS,R,rid:Math.max(rid,...R.map(r=>+r.id||0).filter(n=>n<900),0)},P}}
 
 /* ---------- canonical → local game ---------- */
 function fromCanon(C,opt){opt=opt||{};const mp=me(),Pm=C.P&&C.P[CW.seat];if(!Pm)return false;
- const sS=J(Pm.S);Object.assign(sS,J(C.W.S||{}));if(sS.emp)sS.emp.known=Pm.S.empKnown||{};delete sS.empKnown;delete sS.cnews;
+ const sS=J(Pm.S);Object.assign(sS,J(C.W.S||{}));joinP(sS,Pm.S);if(sS.emp)sS.emp.known=Pm.S.empKnown||{};delete sS.empKnown;delete sS.cnews;
  const R=J(C.W.R||[]).map(r=>{r.rl=r.rl||{};r.ro=r.ro||{};r.gp=r.gp||{};r.ep=r.ep||{};
   r.rel=r.rl[mp]||0;r.oan=r.ro[mp]||0;r.ghen=r.gp[mp]||0;/*evok: co-op sync*/r.ev=r.ep[mp]||0;delete r.rl[mp];delete r.ro[mp];delete r.gp[mp];delete r.ep[mp];
   return mapMe(r,false,mp)});
@@ -132,7 +150,7 @@ function attach(C){T("attach");if(!C||!C.W)return;const mp=me();
  keep.rl={};keep.ro={};keep.tonight=null;keep.toMorning=0;keep.heir=null;keep.evd={};keep.chat={};keep.cev={};keep.resHead=null;keep.where=null;keep.dead=false;
  S=keep;const sS=J(ser().S);
  const P={pid:mp,ok:S.origin&&S.origin.k,name:S.name,rank:S.rank,dead:false,srv:!!(S.srv&&!S.srv.risen),life:(CW.life||0)+1,S:{}};
- for(const k in sS)if(!W_KEYS.includes(k))P.S[k]=sS[k];P.S.empKnown={};
+ for(const k in sS)if(!W_KEYS.includes(k))P.S[k]=sS[k];splitP(sS,P.S);P.S.empKnown={};if(P.S.menP)for(const id in P.S.menP)P.S.menP[id]={};if(P.S.cmP)P.S.cmP={seen:{}};
  const C2=J(C);C2.P=C2.P||{};C2.P[CW.seat]=P;
  /* NPCs start fresh toward the new face */
  (C2.W.R||[]).forEach(r=>{for(const m of ["rl","ro","gp","ep"]){r[m]=r[m]||{};r[m][mp]=m==="gp"?R(15):0}if(r.evm)r.evm[mp]=0;if(r.resHead===mp)r.resHead=null});
@@ -147,7 +165,38 @@ CW.attach=()=>{const C=CW.dying||CW.base;if(C)attach(C)};
 CW.sendMe=()=>sendMe();CW.friendHome=friendHome;
 
 /* ---------- sending ---------- */
-function sendEnd(){if(!CW.on||!S||S.dead||CW.sent===wk()||CW.cyHold!=null/* the host's night waits for her cycle answer (B2 × jcycle) */)return;const C=toCanon();CW.sent=wk();CW.pend=false;CW.mine=snapStats();
+/* ONE WORLD safety net (guest only): whatever world change her endTurn still rolled (a loop the guard table missed, an inline tick)
+   is taken back before her week goes to the server, so a missed guard shows as "guest roll lost", never as a double count.
+   c0 = her world just before endTurn, c1 = just after it (the guest's own rolls), c2 = now (after she answered the dawn dialogs):
+   a path the endTurn changed and nothing changed since → c0; changed again later (her own act in a dialog) → numbers keep only the
+   later delta (c0 + c2 − c1), anything else keeps c2. Her own rows on each NPC (rl/ro/gp/ep/evm[her pid]) are hers: always c2.
+   Date keys roll the same on both seats (c2). The server merge (PROTOCOL §4) then adds only her real acts to the host's world. */
+const NET_OWN=["rl","ro","gp","ep","evm"],NET_DATE=["year","month","tuan","turn","cnews"];
+const nNum=x=>typeof x==="number"&&isFinite(x),nObj=x=>x!==null&&typeof x==="object"&&!Array.isArray(x);
+const nEq=(a,b)=>a===b||JSON.stringify(a)===JSON.stringify(b);
+const nIdArr=x=>Array.isArray(x)&&x.length>0&&x.every(e=>nObj(e)&&e.id!=null);
+function unroll(c0,c1,c2,own){if(own)return c2;if(nEq(c1,c0))return c2;if(nEq(c2,c1))return J(c0);
+ if(nNum(c0)&&nNum(c1)&&nNum(c2))return c0+(c2-c1);
+ if(nObj(c0)&&nObj(c1)&&nObj(c2)){const o={};for(const k of new Set([...Object.keys(c0),...Object.keys(c1),...Object.keys(c2)])){const v=unroll(c0[k],c1[k],c2[k],false);if(v!==undefined)o[k]=v}return o}
+ if((nIdArr(c0)||nIdArr(c2))&&Array.isArray(c0)&&Array.isArray(c1)&&Array.isArray(c2)){const m0=new Map(c0.map(e=>[String(e.id),e])),m1=new Map(c1.map(e=>[String(e.id),e]));const out=[],seen=new Set();
+  for(const e of c2){const id=String(e.id);seen.add(id);if(m0.has(id))out.push(m1.has(id)?unroll(m0.get(id),m1.get(id),e,false):e);else if(!m1.has(id))out.push(e)}
+  for(const e of c0){const id=String(e.id);if(!seen.has(id)&&!m1.has(id))out.push(J(e))}   /* taken out by her endTurn roll: back */
+  return out}
+ return c2}   /* both changed and not mergeable: her act stands (the server's host-wins rule settles a clash) */
+function unrollR(r0,r1,r2,mp){const o=unroll(r0,r1,r2,false);if(!nObj(o))return o;const own=String(mp);
+ for(const m of NET_OWN){const a=r2&&r2[m];if(a&&own in a){o[m]=nObj(o[m])?o[m]:{};o[m][own]=a[own]}else if(o[m]&&nObj(o[m]))delete o[m][own]}return o}
+function guestNet(C){const n=CW.net;if(host()||!n||n.week!==C.week||!n.c1||!C.W)return C;const mp=me(),W0=n.c0.W,W1=n.c1.W,W2=C.W;
+ const S0=W0.S||{},S1=W1.S||{},S2=W2.S||{},SO={};
+ for(const k of new Set([...Object.keys(S0),...Object.keys(S1),...Object.keys(S2)])){const v=NET_DATE.includes(k)||HOST_ONLY.includes(k)?S2[k]:unroll(S0[k],S1[k],S2[k],false);if(v!==undefined)SO[k]=v}
+ const m0=new Map((W0.R||[]).map(r=>[String(r.id),r])),m1=new Map((W1.R||[]).map(r=>[String(r.id),r]));const R=[],seen=new Set();let back=0;
+ for(const r of W2.R||[]){const id=String(r.id);seen.add(id);if(m0.has(id))R.push(unrollR(m0.get(id),m1.has(id)?m1.get(id):r,r,mp)/* missing right after the week end: treat all of it as the roll */);else if(!m1.has(id))R.push(r)}
+ for(const r of W0.R||[]){const id=String(r.id);if(!seen.has(id)&&!m1.has(id)){R.push(J(r));back++}}
+ C.W={S:SO,R,rid:W0.rid!=null?Math.max(W0.rid,W2.rid||0):W2.rid};return C}
+CW.unroll=unroll;CW.guestNet=guestNet;
+/* her world just before and just after her whole week end: called by jcoopone.js around the OUTERMOST endTurn (every module's wrapper inside) */
+CW.netWrap=function(f,self,args){if(!CW.on||host()){return f.apply(self,args)}const p0=CW.pend;let c0=null;try{c0=toCanon()}catch(e){}
+ const r=f.apply(self,args);try{if(!p0&&CW.pend&&c0)CW.net={week:wk(),c0,c1:toCanon()}}catch(e){CW.net=null}return r};
+function sendEnd(){if(!CW.on||!S||S.dead||CW.sent===wk()||CW.cyHold!=null/* the host's night waits for her cycle answer (B2 × jcycle) */)return;const C=guestNet(toCanon());CW.sent=wk();CW.pend=false;CW.mine=snapStats();
  COOP.send({t:"end",week:wk(),state:C});try{localStorage.setItem("ctm-coop-last",JSON.stringify({room:COOP.state.room,C}))}catch(e){}lockNext()}
 function sendMe(){T("sendMe "+(S&&S.dead));if(!CW.on||!S||S.dead)return;
  /* a new life: the old life's pending / sent week end is void (the server drops my sent end on `me`); she ends this week herself */
@@ -211,12 +260,15 @@ function sendFam(P){if(!CW.on||!S||S.dead)return;P=P||famPack();CW.famSentH=P.h;
 CW.famPack=famPack;
 function sendPos(){if(!CW.on||!CW.p2||!S||S.dead)return;const st={};for(const x of LIVE)st[x]=S[x];
  const P=famPack();if(P.h!==CW.famSentH)sendFam(P);
- const k=[wk(),S.buoi||0,S.place||"home",used,LIVE.map(x=>S[x]).join("/"),!!S.out,S.name,P.h].join(":");if(k===CW.posKey)return;CW.posKey=k;
- COOP.send({t:"pos",place:S.place||"home",khac:used,week:wk(),buoi:S.buoi||0,st,fh:P.h,out:!!S.out,alive:!S.dead,name:S.name,life:CW.life||0})}
+ const tl=S.toilette&&S.toilette.wk===wk()?J(S.toilette):null,wd=S.wd?J(S.wd):null;/* her look of the day + worn clothes, live (diemtrang-coop-look) */
+ const k=[wk(),S.buoi||0,S.place||"home",used,LIVE.map(x=>S[x]).join("/"),!!S.out,S.name,P.h,tl?JSON.stringify(tl):"",wd?JSON.stringify(wd):""].join(":");if(k===CW.posKey)return;CW.posKey=k;
+ COOP.send({t:"pos",place:S.place||"home",khac:used,week:wk(),buoi:S.buoi||0,st,fh:P.h,out:!!S.out,alive:!S.dead,name:S.name,life:CW.life||0,tl,wd})}
 /* her own numbers, live: shown on her entry; the week write-back baseline moves with them so the merge never counts them as mine */
 function liveStats(m){const f=friendEntry();if(!f||!m.st||(m.name&&m.name!==f.name))return false;let ch=false;
  for(const x of LIVE){const v=m.st[x];if(typeof v!=="number")continue;if(x==="rank"&&f.queen)continue;if(f[x]!==v){f[x]=v;ch=true}if(f.__b&&x in f.__b)f.__b[x]=v}
  if(f.__b)f.__b.rank=f.rank;
+ if(m.tl&&typeof m.tl==="object"&&JSON.stringify(m.tl)!==JSON.stringify(f.toilette||null)){f.toilette=J(m.tl);ch=true}/* her look of the day (jtoil toilFriendRec) */
+ if(m.wd&&typeof m.wd==="object"&&JSON.stringify(m.wd)!==JSON.stringify(f.wd||null)){f.wd=J(m.wd);ch=true}/* the clothes she wears (jtoil toilDress) */
  if(famIn(f,m.fam,m.pets))ch=true;
  return ch}
 /* her bag / kids / pregnancy / festival entries / pets onto her entry (inline pos of an old client, or the ctm-fam relay) */
@@ -249,7 +301,7 @@ function bend(){T("bend "+wk()+"."+(S&&S.buoi));if(CW.bend)return;CW.bend=true;C
    Returns the buổi key it ended ("week:buổi") or "" (nothing done: jnight asks again on the next render). */
 CW.nightEnd=function(){if(!CW.on||!S||S.dead||Q.length||S.mg)return"";if(waiting()||frozen()||CW.pend||!CW.base||CW.bend||CW.pendBuoi||needWhere())return"";
  const b=S.buoi||0;if(typeof CW.rbuoi==="number"&&CW.rweek===wk()&&CW.rbuoi!==b)return"";
- const k=bkey();used=4;nextBuoi();return (CW.bend||nReady()||CW.pend||(S.buoi||0)!==b)?k:""};
+ const k=bkey();used=BAL.time.khac;nextBuoi();return (CW.bend||nReady()||CW.pend||(S.buoi||0)!==b)?k:""};
 CW.bkey=bkey;
 COOP.on("buoi",onBuoi);
 /* the room's current buổi (for a reborn life that joins mid-week) */
@@ -468,6 +520,10 @@ function syncRoom(m){if(!m||!CW.on||!S)return;try{const o=COOP.other();if(m.wher
 COOP.on("room",m=>{if(m.buoi!==undefined)CW.p2=true;CW.roomMsg=m;T("room "+m.week+"."+m.buoi+" sent "+CW.sent+" in "+CW.wkIn);if(!CW.on||!m.state)return;const C=m.state;
  /* reconnect: the merge happened while we were away → rebuild; otherwise keep the local week */
  if(CW.sent>=0&&m.week>CW.sent&&m.week!==CW.wkIn){onWeek({state:C,week:m.week});return}
+ /* review/coop-stable: her new character (first / reborn) whose `state` broadcast came while my socket was down rides only this snapshot:
+    place her now, as onState does (before: she stayed missing / under her old name on my side until the next week merge) */
+ const fP=C.P&&C.P[fs()],fe=CW.base&&S&&!S.dead&&!CW.inLife?(friendEntry()||rivals.flatMap(v=>v.staff||[]).find(isF)||null):undefined;
+ if(fe!==undefined&&fP&&!fP.dead&&(fe?fe.name!==fP.name:!friendHome(fP))){T("room: friend new "+fP.name);onState({state:C});syncRoom(m);return}
  if(!CW.base)CW.base=J(C);else{CW.base.P=J(C.P);CW.base.W=J(C.W)}syncRoom(m)});
 
 /* ---------- the night gate (review/coop-night-sync, owner rule "nobody runs ahead") ----------
@@ -498,8 +554,12 @@ CW.nReady=nReady;
 COOP.on("act",m=>{if(!m||m.k!==NK||!CW.on||m.from===CW.seat)return;T("nr "+m.mode+" "+m.week+" me "+wk());if(m.week!==wk())return;
  if(m.mode==="rd"&&host()){CW.nfr=m.week;if(CW.ngo===m.week)nsay("go");else nCheck()}
  else if(m.mode==="go"&&!host()){CW.ngoW=m.week;nCheck()}
+ /* review/coop-stable: the host came back (reconnect) and asks again; her rd sent while its socket was down was lost (both sat on "Chờ hảo hữu…") */
+ else if(m.mode==="q"&&!host()){if(CW.nrdy===m.week&&CW.ngoW!==m.week)nsay("rd")}
  lockNext()});
-function nResync(){if(!CW.on||!S)return;if(!host()&&CW.nrdy===wk()&&CW.ngoW!==wk())nsay("rd");if(host()&&CW.ngo===wk())nsay("go");nCheck()}
+function nResync(){if(!CW.on||!S)return;if(!host()&&CW.nrdy===wk()&&CW.ngoW!==wk())nsay("rd");if(host()&&CW.ngo===wk())nsay("go");
+ /* host back on a new socket at night, not gone yet: ask the guest for her ready again (a fast reconnect never shows the guest a peer drop, so she would not resend) */
+ if(host()&&CW.ngo!==wk()&&nAtNight()&&CW.nfr!==wk())nsay("q");nCheck()}
 COOP.on("room",()=>setTimeout(nResync,350));COOP.on("peer",on=>{if(on)setTimeout(nResync,350)});
 COOP.on("presence",()=>{if(CW.on){nCheck();lockNext()}});
 
@@ -590,6 +650,13 @@ const mute=n=>{const f=window[n];if(typeof f!=="function")return;window[n]=funct
    into her blob by toCanon, so the merge lands it on HER own S; the lines about her reach her in the week's news (cnews). */
 ["rivalsTurn","rivalsMonth","festival"].forEach(n=>{const f=window[n];if(typeof f!=="function")return;window[n]=function(){if(!CW.on||!host())return f.apply(this,arguments);
  const L=CW.pulled;if(!L||!L.length)return f.apply(this,arguments);pushFriend(L.slice());(CW.b4=CW.b4||[]).push(n);if(CW.b4.length>20)CW.b4.shift();try{return f.apply(this,arguments)}finally{pullFriend()}}});
+/* ONE WORLD r1 (review/coop-one-world-r1): the palace epidemic is a world fact rolled on the host only (jcoopone MUTE on the guest).
+   The host's roll runs WITH the friend's entry in the harem (same pattern as B4), so she can catch it / be quarantined like anyone in
+   that palace (her entry's ill + confined go back to her blob by toCanon), and its news line goes into the week's world news (cnews). */
+(function(){const f=window.epidemic;if(typeof f!=="function")return;window.epidemic=function(){if(!CW.on||!host())return f.apply(this,arguments);
+ const L=CW.pulled;let r;if(L&&L.length){pushFriend(L.slice());const fe=friendEntry(),ks=fe&&fe.kids;if(fe)fe.kids=[];/* her children are display copies here: their illness rolls on her own seat */
+  try{r=f.apply(this,arguments)}finally{if(fe)fe.kids=ks;pullFriend()}}else r=f.apply(this,arguments);
+ if(typeof r==="string"&&r)CW.news+=r;return r}})();
 /* B3 (review/coop-b1b5): the Emperor's death in co-op, host-authoritative. The month roll only counts on the HOST and only for the
    reigning Emperor's own years (emp.y0 = the year he came to the throne); it writes emp.dead = {w} into the world (emp is a world key)
    and the week goes on. When the merged week w arrives, BOTH clients run the normal ending of the reign (heir → Thái hậu / Thái phi /
@@ -609,7 +676,8 @@ const mute=n=>{const f=window[n];if(typeof f!=="function")return;window[n]=funct
 (function(){const f=pickTarget;pickTarget=function(v){if(CW.on&&isF(v))return null;const t=f.apply(this,arguments);if(CW.on&&!host()&&t!==S)return null;return t}})();
 (function(){const f=rivalsBuoi;rivalsBuoi=function(){return withoutFriend(()=>f.apply(this,arguments))}})();
 (function(){const f=endTurn;endTurn=function(){if(CW.on){if(waiting()||frozen()||CW.pend||!CW.base)return;CW.news=""}
- if(!CW.on)return f.apply(this,arguments);let r;CW.inTurn=true;const alt=typeof CW.altTurn==="function"?CW.altTurn():null;/* a route with its own week (jkc at home: kcEndTurn) */try{r=withoutFriend(()=>(alt||f).apply(this,arguments))}finally{CW.inTurn=false}if(S){CW.pend=true;try{render()}catch(e){}lockNext()}return r};CW.weekEnd=endTurn/* a route with its own week (jkc) calls this directly, past the palace-only wrappers made after it */})();
+ if(!CW.on)return f.apply(this,arguments);let r;CW.inTurn=true;const alt=typeof CW.altTurn==="function"?CW.altTurn():null;/* a route with its own week (jkc at home: kcEndTurn) */
+ try{r=withoutFriend(()=>(alt||f).apply(this,arguments))}finally{CW.inTurn=false}if(S){CW.pend=true;try{render()}catch(e){}lockNext()}return r};CW.weekEnd=endTurn/* a route with its own week (jkc) calls this directly, past the palace-only wrappers made after it */})();
 (function(){const f=nextBuoi;nextBuoi=function(){if(!CW.on)return f.apply(this,arguments);if(waiting()||frozen()||CW.pend||!CW.base)return;
  /* same buổi for both: buổi sáng / chiều end with `bend`; the server's `buoi` runs the real step (CW.allow); buổi tối ends the week (`end`) */
  if(CW.p2&&!CW.allow&&(S.buoi||0)<(typeof B4L==="number"?B4L:2)){if(!S||S.dead||Q.length||S.mg||needWhere())return;bend();return}
@@ -631,10 +699,14 @@ let qT=0;function reshowQ(){qT=0;try{const M=$("modal");if(CW.on&&S&&Q.length&&M
  if(CW.on&&!S){Q.shift();if(Q.length)showModal();else{const m=$("modal");if(m)m.hidden=true}return}const r=f.apply(this,arguments);if(CW.on)soonEnd();return r}})();
 COOP.on("status",()=>{if(CW.on){lockNext();soonEnd()}});
 /* the rebirth / first-life flow: Luân hồi builds the life (nlRun), she accepts it (nlAccept) */
-if(typeof nlRun==="function"){const f=nlRun;nlRun=function(){const r=f.apply(this,arguments);try{if(CW.on){const C=CW.dying||CW.base;if(C)attach(C);CW.inLife=true}}catch(e){console.error(e)}return r};}
+/* review/coop-stable: the new life's throwaway world (start() inside nlRun) is built while she is already "in life": before, CW.inLife was
+   set only after it, so on the GUEST jcoopask's newRival gave its ~10 consorts temp ids (1001…) as persons she "made", attach()'s ser()
+   turned them into new-consort requests to the host, she kept them as ghost consorts the host never had, and a reborn cung nữ could be
+   given one of them as mistress (the host then never saw her: RV(mid) missing). */
+if(typeof nlRun==="function"){const f=nlRun;nlRun=function(){if(CW.on)CW.inLife=true;const r=f.apply(this,arguments);try{if(CW.on){const C=CW.dying||CW.base;if(C)attach(C);CW.inLife=true}}catch(e){console.error(e)}return r};}
 if(typeof nlAccept==="function"){const f=nlAccept;nlAccept=function(){const r=f.apply(this,arguments);try{if(CW.on&&CW.inLife&&S&&!S.dead){CW.inLife=false;if(CW.holdMe)CW.heldMe=true;else sendMe()}}catch(e){console.error(e)}return r};}
 /* a start() that bypasses Luân hồi (window.__nlInner): attach + send at once */
-(function(){const f=start;start=function(){const r=f.apply(this,arguments);try{if(CW.on&&window.__nlInner&&S&&!S.dead){const C=CW.dying||CW.base;if(C)attach(C);CW.inLife=false;sendMe()}}catch(e){console.error(e)}return r}})();
+(function(){const f=start;start=function(){if(CW.on&&window.__nlInner&&!CW.inLife)CW.inLife=true;/* same: her throwaway world never counts as hers */const r=f.apply(this,arguments);try{if(CW.on&&window.__nlInner&&S&&!S.dead){const C=CW.dying||CW.base;if(C)attach(C);CW.inLife=false;sendMe()}}catch(e){console.error(e)}return r}})();
 CW.toCanon=toCanon;CW.fromCanon=fromCanon;CW.friend=friendEntry;CW.sendEnd=sendEnd;
 /* co-op buổi clock (jcooptimer, KIT §69): read-only views + the one forced step it may take. forceBend = "Sẵn sàng" pressed for her when
    the buổi ran out: sends `bend` even with a dialog / mini game open (the room's step then waits for it: CW.pendBuoi, nothing is cut);
@@ -653,17 +725,32 @@ const SNK="ctm-coop-wk",SEAT_MS=3000;let svT=0,seatT=0,seatAt=0,seatLast="";
 const DEV=(()=>{try{let d=localStorage.getItem("ctm-coop-dev");if(!d){d=Math.random().toString(36).slice(2,12)+Date.now().toString(36);localStorage.setItem("ctm-coop-dev",d)}return d}catch(e){return "x"+Math.random().toString(36).slice(2,10)}})();
 function snapSave(now){svT=0;try{const o=CW.snap&&CW.snap();if(o){o.dev=DEV;o.sv=CW.ssv||0;localStorage.setItem(SNK,JSON.stringify(o));seatPush(o,now)}}catch(e){}}
 function snapSoon(){if(CW.on&&!svT)svT=setTimeout(snapSave,1000)}
+/* review/lag-play-2: the seat copy is ~40 KB; when the server can (room reply caps "seatd") only the PARTS that changed since the copy
+   the server confirmed (seatok) are sent: {t:"seatd",sv,set,del}. The server applies them on top of exactly version sv, else answers
+   "seatresync" and the next push is the full copy again. Parts = buoi, used, c, d.<key>, d.S.<key> (one JSON string each). */
+let seatBase=null,seatPend=null,seatBusy=0;
+function seatParts(o){const P={buoi:JSON.stringify(o.buoi),used:JSON.stringify(o.used),c:JSON.stringify(o.c)};const d=o.d||{};
+ for(const k in d){if(k==="S"&&d.S&&typeof d.S==="object"){for(const j in d.S)if(d.S[j]!==undefined)P["d.S."+j]=JSON.stringify(d.S[j])}else if(d[k]!==undefined)P["d."+k]=JSON.stringify(d[k])}return P}
+function seatDelta(P,B){const set={},del=[];let n=0;for(const k in P)if(B[k]!==P[k]){set[k]=JSON.parse(P[k]);n++}
+ for(const k in B)if(!(k in P))del.push(k);return {set,del,n:n+del.length}}
 function seatPush(o,now){if(!CW.on||CW.seatOld||!o||COOP.state.status!=="open")return;
- if(!now&&Date.now()-seatAt<SEAT_MS){if(!seatT)seatT=setTimeout(()=>{seatT=0;snapSave()},SEAT_MS-(Date.now()-seatAt));return}
- const k=JSON.stringify([o.week,o.buoi,o.used,o.d,o.c]);if(k===seatLast)return;
- seatAt=Date.now();COOP.send({t:"seat",sv:CW.ssv||0,o}).then(ok=>{if(ok)seatLast=k})}
-COOP.on("seatok",m=>{if(typeof m.sv==="number"){CW.ssv=Math.max(CW.ssvWk===wk()?CW.ssv||0:0,m.sv);CW.ssvWk=wk()}});
-COOP.on("error",m=>{if(m&&m.code==="seatold"){CW.seatOld=true;T("seatold "+m.sv)}});
-COOP.on("week",m=>{seatLast="";CW.seatOld=false;CW.ssv=0;CW.ssvWk=m&&m.week});  /* the server starts the seat versions again each week */
+ if(seatBusy&&Date.now()-seatBusy>10000)seatBusy=0;  /* no seatok within 10 s (socket dropped): give up waiting */
+ if(!now&&(seatBusy||Date.now()-seatAt<SEAT_MS)){if(!seatT)seatT=setTimeout(()=>{seatT=0;snapSave()},Math.max(400,SEAT_MS-(Date.now()-seatAt)));return}
+ const P=seatParts(o);const k=JSON.stringify([o.week,P]);if(k===seatLast)return;
+ const caps=COOP.state.caps||[];let msg;
+ if(caps.indexOf("seatd")>=0&&!Object.keys(P).some(x=>x.split(".").length>(x.startsWith("d.S.")?3:2))&&seatBase&&seatBase.wk===o.week&&seatBase.sv===(CW.ssv||0)&&!seatBusy){const D=seatDelta(P,seatBase.P);
+  msg={t:"seatd",sv:CW.ssv||0,set:D.set,del:D.del,dev:o.dev}}
+ else msg={t:"seat",sv:CW.ssv||0,o};
+ seatAt=Date.now();seatBusy=Date.now();seatPend={P,wk:o.week};COOP.send(msg,!!now).then(ok=>{if(ok)seatLast=k;else{seatBusy=0;seatPend=null}})}
+COOP.on("seatok",m=>{if(typeof m.sv==="number"){CW.ssv=Math.max(CW.ssvWk===wk()?CW.ssv||0:0,m.sv);CW.ssvWk=wk();
+ if(seatPend&&CW.ssv===m.sv)seatBase={P:seatPend.P,wk:seatPend.wk,sv:m.sv};else seatBase=null}seatBusy=0;seatPend=null});
+COOP.on("error",m=>{if(!m)return;if(m.code==="seatold"){CW.seatOld=true;seatBase=null;seatBusy=0;T("seatold "+m.sv)}
+ if(m.code==="seatresync"||m.code==="seatbig"||m.code==="badseat"){seatBase=null;seatBusy=0;seatPend=null;seatLast="";if(m.code==="seatresync"){T("seatresync "+m.sv);snapSoon()}}});
+COOP.on("week",m=>{seatLast="";seatBase=null;seatBusy=0;seatPend=null;CW.seatOld=false;CW.ssv=0;CW.ssvWk=m&&m.week});  /* the server starts the seat versions again each week */
 /* review/coop-rejoin-xdev-r1: a device that was only ASLEEP (socket gone, page kept, e.g. the Fold locked) while she played on another
    device reconnects by itself (no begin): when the room's copy of her seat is newer and was written by another device, take it, so this
    device does not go on with its stale week (and its own copies are accepted again instead of "seatold"). */
-COOP.on("room",m=>{if(!CW.on||!CW.base||!m||!m.state)return;const R=m.mine;
+COOP.on("room",m=>{seatBase=null;seatBusy=0;seatPend=null;seatLast="";if(!CW.on||!CW.base||!m||!m.state)return;const R=m.mine;
  if(!R||!R.dev||R.dev===DEV||(R.sv||0)<=(CW.ssvWk===R.week?CW.ssv||0:0)||!snapOk(R,m.state))return;T("snap wake server sv"+(R.sv||0));
  if(CW.restore(R)){CW.ssv=m.msv||R.sv||0;CW.ssvWk=R.week;CW.seatOld=false;seatLast="";T("restored "+R.week+"."+R.buoi+" u"+R.used)}});
 function snapOk(o,C){const P=C&&C.P&&C.P[CW.seat];

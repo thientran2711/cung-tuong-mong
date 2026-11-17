@@ -15,7 +15,7 @@ function kitPlaceHours(k){if(typeof ACC_DAY!=="undefined"&&ACC_DAY[k])return"m�
    + the card's own lines as kit fact rows; options below as kit option rows (32.9), scrolling inside the frame. No hand-built columns,
    no second picture, no portrait cell, no silhouettes drawn on the picture (the count is a row). */
 function kitPlaceHostName(q){try{if(!q)return"";if(q.p&&typeof q.p==="object")return kitName(q.p);if(q.p==="th"&&S&&S.thO)return kitName(S.thO);return q.name||""}catch(e){return q&&q.name||""}}
-function kitPlaceInfo(k,h){let tc=0,n=0;try{tc=k===S.place?0:travel(S.place,k)}catch(e){}try{n=countAt(k)}catch(e){}const left=Math.max(0,4-used);const hr=kitPlaceHours(k);
+function kitPlaceInfo(k,h){let tc=0,n=0;try{tc=k===S.place?0:travel(S.place,k)}catch(e){}try{n=countAt(k)}catch(e){}const left=Math.max(0,BAL.time.khac-used);const hr=kitPlaceHours(k);
  const q=kitPlaceHost(k);const R=[];if(q)R.push(["Chủ vị",kitPlaceHostName(q)]);if(tc)R.push(["Đường đi",`${tc} khắc`]);R.push(["Còn",`${left} khắc`,left?"n":"r"]);
  if(n)R.push(["Bóng người",`${n}`]);if(hr)R.push(["Giờ",hr[0].toUpperCase()+hr.slice(1)]);
  const t=document.createElement("template");t.innerHTML=String(h||"");const L=[];

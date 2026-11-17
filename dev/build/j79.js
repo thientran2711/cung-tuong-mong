@@ -48,7 +48,7 @@ function kitChips(list){return `<span class="kchips">${(list||[]).map(x=>Array.i
 /* ---------- rows: the act-card label grid (same .kb as j63) ---------- */
 /* kitRows([[label, value(html|array of chips/values), cls]]) cls: g|r|n|t (value colour), "need" for a Cần row of chips */
 function kitRows(rows){return `<span class="kb kpkb">`+(rows||[]).filter(r=>r&&r[1]!=null&&r[1]!==""&&!(Array.isArray(r[1])&&!r[1].length)).map(([l,v,c])=>{const vals=Array.isArray(v)?v:[v];
- return `<span class="kr"><span class="krl">${l}</span><span class="krv">${vals.map(x=>/^\s*<span class="(kchip|ef|kname)/.test(x)||/^\s*<b class="kname/.test(x)?x:`<span class="ef ${c||"n"}">${x}</span>`).join('<span class="ksep">·</span>')}</span></span>`}).join("")+`</span>`}
+ return `<span class="kr"><span class="krl">${l}</span><span class="krv">${vals.map(x=>/^\s*<span class="(kchip|ef|kname)/.test(x)||/^\s*<b class="kname/.test(x)?x:`<span class="ef ${c||"n"}">${x}</span>`).join(vals.every(x=>/^\s*<span class="kchip/.test(x))?'':'<span class="ksep">·</span>')/* chips carry their own border: no "·" between them (a wrapped line never starts with a stray "·", owner kit review 15:00Z) */}</span></span>`}).join("")+`</span>`}
 /* KIT §51 kitRowsJoin(kitRows(a), kitRows(b), …) -> ONE table: kit tables written one after another (price rows + the item's rows)
    are merged into a single grid, so their values line up too. Pass only kitRows / kitItemRows output (or ""). */
 function kitRowsJoin(){return [...arguments].filter(Boolean).join("").replace(/(<\/span><\/span>)<\/span>\s*<span class="kb kpkb">/g,"$1")}
@@ -204,15 +204,15 @@ const KIT_GLOSS={
  "Thiện cảm":"Thiện cảm của người ấy với ngươi (âm là ghét). Cao thì giúp đỡ, che chở ngươi.",
  "Chứng cứ":"Số bằng chứng ngươi đang giữ về lỗi của người ấy. Đủ thì tố giác được, khó bị cho là vu cáo.",
  "Nguy hiểm":"Mức một người muốn hại người khác: lấy Ghen, Oán hoặc ghét cao nhất, cộng tính nết.",
- "Quẻ":"Quẻ đầu tuần: vận may tuần này. Cát thì việc dễ thành hơn, Hung thì khó hơn. Gieo lại tốn 10 bạc và 1 khắc.",
+ get "Quẻ"(){return `Quẻ đầu tuần: vận may tuần này. Cát thì việc dễ thành hơn, Hung thì khó hơn. Gieo lại tốn ${BAL.lot.bac} bạc và ${BAL.lot.k} khắc.`},
  "Quẻ tuần":"Quẻ đầu tuần: vận may tuần này. Cát thì việc dễ thành hơn, Hung thì khó hơn.",
  "Phục vị":"Được trả lại phẩm vị cũ sau khi bị giáng hay vào lãnh cung.",
- "khắc":"Đơn vị thời gian: mỗi buổi có 4 khắc. Mỗi việc tốn khắc; hết khắc thì sang buổi sau.",
+ get "khắc"(){return `Đơn vị thời gian: mỗi buổi có ${BAL.time.khac} khắc. Mỗi việc tốn khắc; hết khắc thì sang buổi sau.`},
  "Thị tẩm":"Được gọi hầu Hoàng thượng qua đêm. Có thể có thai, tăng Sủng và Ân tình.",
  "Lật thẻ":"Mỗi tối Hoàng thượng lật thẻ bài để chọn người hầu đêm. Khả năng ngươi được chọn mỗi tuần.",
  "Lãnh cung":"Cung lạnh: nơi giam phi tần bị phế. Mất phẩm vị, chỉ còn đường xin phục vị.",
  "Cấm túc":"Bị giữ trong cung của mình một thời gian, không được ra ngoài, không được lật thẻ.",
- "Bổng lộc":`Bạc phát đầu mỗi tháng theo phẩm vị (${BL[0]}–${BL[BL.length-1]} bạc).`,
+ get "Bổng lộc"(){return `Bạc phát đầu mỗi tháng theo phẩm vị (${BAL.pay[0]}–${BAL.pay[BAL.pay.length-1]} bạc).`},
  "Ân thưởng":"Những lần ngươi được Hoàng thượng, Thái hậu ban thưởng và vật đã nhận.",
  "Tranh ghế":"Cuộc thi giành một ghế phẩm vị còn trống: thi tài nghệ rồi xét đức hạnh.",
  "Tuyển tú":"Ba năm một lần, cung đón thêm tú nữ mới.",
@@ -227,7 +227,7 @@ const KP_GLRE=new RegExp("^("+Object.keys(KIT_GLOSS).sort((a,b)=>b.length-a.leng
 /* kitGloss("Tâm cơ") -> the term with a dotted underline; tap shows its meaning. Unknown terms come back as plain text. */
 function kitGloss(term,label){const t=String(term||"").trim();const k=Object.keys(KIT_GLOSS).find(x=>x.toLowerCase()===t.toLowerCase());return k?`<span class="kgl" data-kgl="${kpEsc(k)}">${label||t}</span>`:(label||t)}
 /* HUD help texts read the glossary too (one source) */
-(function(){try{if(typeof HX==="object"){const map={tamco:"Tâm cơ",an:"Ân tình",mat:"Tai mắt",duc:"Đức",sac:"Sắc",tai:"Tài",sung:"Sủng",danh:"Danh",bac:"Bạc",suc:"Sức"};for(const k in map)HX[k]=`${map[k]}: ${KIT_GLOSS[map[k]].charAt(0).toLowerCase()+KIT_GLOSS[map[k]].slice(1)}`;HX.lot=KIT_GLOSS["Quẻ"]}}catch(e){}})();
+(function(){try{if(typeof HX==="object"){const map={tamco:"Tâm cơ",an:"Ân tình",mat:"Tai mắt",duc:"Đức",sac:"Sắc",tai:"Tài",sung:"Sủng",danh:"Danh",bac:"Bạc",suc:"Sức"};for(const k in map)HX[k]=`${map[k]}: ${KIT_GLOSS[map[k]].charAt(0).toLowerCase()+KIT_GLOSS[map[k]].slice(1)}`;/* HX.lot reads KIT_GLOSS["Quẻ"] itself (j19 getter) */0}}catch(e){}})();
 
 /* ---------- ROAD-AWARE GLOSSES (review/small-bugs-2, LUẬT SỬA CẢ NHÓM): a stat's meaning follows her road. On the cung nữ road
    (isSrv) and in lãnh cung (S.out) the consort-only goals (lập Hoàng hậu, thăng bậc phi tần, thị tẩm, bổng lộc) mean nothing, so every
@@ -495,11 +495,21 @@ KP_SEAL.week="TUẦN";
 KP_SEAL.game="TÀI NGHỆ";
 /* kitGameFrame({art:"Cầm", title:"Tấu khúc", how:"Chạm đúng dây khi nốt chạm vạch đỏ.", hud:[["score","Điểm",0],["time","Thời gian","30 giây"]], id:"kgbox"})
    -> HTML of the frame; the game draws into #<id> (.kgbox). Update a HUD cell with kitGameSet("score", 12). */
-function kitGameFrame(g){g=g||{};return `<div class="kgame">${kpHeader("game",`${g.art?g.art+": ":""}${g.title||""}`,"")}`+
- `<div class="kgbody${g.pic?" kgpic-on":""}">`+(g.pic?`<div class="kgpic"><img src="${g.pic}" alt="" draggable="false" onerror="this.parentNode.parentNode.classList.remove('kgpic-on');this.parentNode.remove()"></div>`:"")+`<div class="kginfo">`+
+function kitGameFrame(g){g=g||{};const fg=g.fig?kitGameFig(g):"";return `<div class="kgame">${kpHeader("game",`${g.art?g.art+": ":""}${g.title||""}`,"")}`+
+ `<div class="kgbody${fg?" kgfig-on":g.pic?" kgpic-on":""}">`+(fg||(g.pic?`<div class="kgpic"><img src="${g.pic}" alt="" draggable="false" onerror="this.parentNode.parentNode.classList.remove('kgpic-on');this.parentNode.remove()"></div>`:""))+`<div class="kginfo">`+
  (g.how?`<div class="kghow"><span class="krl">Cách chơi</span><span>${g.how}</span></div>`:"")+
  (g.hud&&g.hud.length?`<div class="kghud">${g.hud.map(([k,l,v])=>`<span class="kgc"><small>${l}</small><b data-kg="${k}">${v==null?"":v}</b></span>`).join("")}</div>`:"")+
  `<div class="kgbox" id="${g.id||"kgbox"}"></div><div class="kgres" id="${(g.id||"kgbox")}-res" hidden></div></div></div></div>`}
+/* KIT §N.1 kitGameFig (owner 16/11 ~21:30Z, mini-game layout): the LEFT column of every tài nghệ frame on a wide screen (html.kv2) = HER full figure in the
+   outfit she wears NOW (kitStageFig: kit figure at the KIT_FIG ratio + the face layers, so makeup / scar / veil show live), the game's prop picture small in the
+   corner (never a second big picture), a play animation while the game runs (.kg-idle off). html.kv1 (Fold portrait / one page): NO column, the game alone at full width.
+   g.fig = true (her) | a person; g.pic = the prop picture. kitGameFigRefresh(p) redraws the figure in place after an outfit / makeup change. */
+function kitGameFig(g){g=g||{};try{const p=g.fig&&g.fig!==true?g.fig:(typeof S!=="undefined"?S:null);if(!p||typeof kitStageFig!=="function")return"";const f=kitStageFig(p,{cap:false});if(!f)return"";
+ const an=typeof OPT!=="undefined"&&OPT.fxon&&!(typeof RM!=="undefined"&&RM);
+ return `<div class="kgfig${an?" kgf-anim":""}" data-kgf="${p===S?"me":"other"}">${f}${g.prop&&g.pic?`<img class="kgprop" src="${g.pic}" alt="" draggable="false" onerror="this.remove()">`:""}</div>`}catch(e){return""}}
+function kitGameFigRefresh(p){try{const c=document.querySelector(".kgame .kgfig");if(!c||typeof kitStageFig!=="function")return;p=p||(c.dataset.kgf==="me"?S:null)||S;const f=kitStageFig(p,{cap:false});if(!f)return;
+ const t=document.createElement("div");t.innerHTML=f;const n=t.firstElementChild,o=c.querySelector(".kesf");if(!n)return;if(o)o.replaceWith(n);else c.prepend(n)}catch(e){}}
+window.kitGameFig=kitGameFig;window.kitGameFigRefresh=kitGameFigRefresh;
 function kitGameSet(k,v){document.querySelectorAll(`[data-kg="${k}"]`).forEach(e=>e.innerHTML=v)}
 /* kitGameResult({raw, talent, prep, total, place:"Nhất", of:4, rivals:[{who:person, score}], gains:[["Sủng",3]], losses:[["Sức",-10]], note})
    -> result block: score rows (true numbers), standings with face + rank title, Được / Mất chips. */
@@ -511,6 +521,21 @@ function kitGameResult(r){r=r||{};const rows=[];
  return `<div class="kgr">${kitRows(rows)}`+(st.length?`<h4 class="kpst">Bảng định thứ</h4><div class="kfacts kgrv">${st.map((x,i)=>`<div class="kfact${x.who===S?" kfme":""}">${kitFaceH(x.who,"sm")}<span class="kft kgrow"><span><b class="kgpl">${i+1}.</b> ${kitName(x.who,{cap:true})}${x.sub?`<small class="kfwhy">${x.sub}</small>`:""}</span><b>${x.score}</b></span></div>`).join("")}</div>`:"")+
  ((r.gains||[]).length||(r.losses||[]).length?`<h4 class="kpst">Kết quả</h4>`+kitRows([["Được",(r.gains||[]).map(x=>kitChip(x[0],x[1],"g"))],["Mất",(r.losses||[]).map(x=>kitChip(x[0],x[1],"r"))]]):"")+
  (r.extra||"")+(r.note?`<div class="kpnote">${r.note}</div>`:"")+`</div>`}
+(function(){const st=document.createElement("style");st.id="kgfig-css";st.textContent=`
+.kgame .kgbody.kgfig-on{display:grid;grid-template-columns:minmax(150px,30%) minmax(0,1fr);grid-template-rows:minmax(0,1fr);gap:0;overflow:hidden}
+.kgfig{position:relative;margin:10px 0 10px 14px;min-height:240px;border:1px solid var(--line);border-radius:var(--k-rad);overflow:hidden;background:linear-gradient(#f8efdc,#ecdcbc);box-shadow:0 0 0 2px #fffaf0 inset}
+.kgfig>.kesf{position:absolute;inset:8px 6px 0;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;min-width:0;flex:none}
+.kgfig .kesfi{position:relative;display:flex;height:calc(100%*var(--kfr,1));max-width:100%;justify-content:center}
+.kgfig .kesfi>.kesimg{display:block;height:100%;width:auto;max-width:100%;max-height:none;object-fit:contain;object-position:50% 100%}
+.kgfig .kesfi>.kesfx{position:absolute;inset:0;pointer-events:none}
+.kgprop{position:absolute;right:6px;bottom:6px;width:32%;max-width:92px;aspect-ratio:1;object-fit:cover;border-radius:8px;border:1px solid var(--line);box-shadow:0 0 0 2px #fffaf0 inset,0 2px 6px #3a20104d;background:#f1e6d2}
+.kgf-anim .kesfi{transform-origin:50% 100%}
+.kgame:not(.kg-idle) .kgf-anim .kesfi{animation:kgfBreath 3.2s ease-in-out infinite}
+.kgame:not(.kg-idle) .kgf-anim .kgprop{animation:kgfProp 1.6s ease-in-out infinite}
+@keyframes kgfBreath{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-1.2%) rotate(.5deg)}}
+@keyframes kgfProp{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}
+/* kv3:.kv1 */:where(.kv1) .kgame .kgbody.kgfig-on{display:block;overflow:visible}:where(.kv1) .kgfig{display:none}
+`;document.head.appendChild(st)})();
 /* the lesson overlay (#ov .mg) wears the same frame */
 (function(){if(typeof openMG!=="function")return;const o0=openMG;openMG=function(k,lv,cb){const r=o0.apply(this,arguments);try{const mg=document.querySelector("#ov .mg");mg.classList.add("kpanel","kgame");
   let h=mg.querySelector(":scope > .kph");if(h)h.remove();const t=$("mgt").textContent;const [art,ti]=t.split(":");mg.insertAdjacentHTML("afterbegin",kpHeader("game",t,""));$("mgt").hidden=true;
@@ -590,8 +615,8 @@ function kpDeathP(k,v){try{const inv=x=>(x.inv||[]).some(e=>e.k===x.__k&&!e.h);c
 (function(){if(typeof rvGroups!=="function")return;const g0=rvGroups;rvGroups=function(v){const G=g0.apply(this,arguments);try{for(const g of G)g[1]=g[1].map(h=>{const m=String(h).match(/data-a="(\w+)"/);if(!m)return h;const p=kpDeathP(m[1],v);if(p==null)return h;
   return String(h).replace(/,\s*có thể chết( đuối)?/g,(x,d)=>` · ${kpDeathWord(p,m[1]==="poison"?"nàng":"con nàng")}`)})}catch(e){}return G}})();
 /* Cần: the Sức rule follows the live game rule (j80 SUC_FLOOR; one source, never a hard-coded 20) */
-if(typeof kaTimeNeeds==="function"){kaTimeNeeds=function(c,bacCost,sucCost){const L=[];const left=4-used;L.push(j76need(c,window.__cbCard));
- const fl=typeof SUC_FLOOR!=="undefined"?SUC_FLOOR:20;if(c>1)L.push({t:`Sức ≥${fl} (có ${S.suc})`,ok:S.suc>=fl});if(bacCost>0)L.push({t:`Bạc ${bacCost} (có ${S.bac})`,ok:S.bac>=bacCost});return L}}
+if(typeof kaTimeNeeds==="function"){kaTimeNeeds=function(c,bacCost,sucCost){const L=[];const left=BAL.time.khac-used;L.push(j76need(c,window.__cbCard));
+ const fl=BAL.time.sucMin;if(c>1)L.push({t:`Sức ≥${fl} (có ${S.suc})`,ok:S.suc>=fl});if(bacCost>0)L.push({t:`Bạc ${bacCost} (có ${S.bac})`,ok:S.bac>=bacCost});return L}}
 /* "có thể gặp người" (Lĩnh đồ, j42 srvMeet: 25 % bị bắt nạt Sức -5, else quen một người mới if anyone is left) -> real ladder words */
 (function(){if(typeof srvCards!=="function")return;const c0=srvCards;srvCards=function(){const D=c0.apply(this,arguments);try{for(const a of D||[]){if(!a||!/có thể gặp người/.test(a.x||""))continue;
  let left=0;try{const m=srvM();left=allServ().filter(s=>ownerOf(s)!==m&&!S.srv.met.includes(s.sid)).length}catch(e){}
@@ -705,7 +730,7 @@ document.addEventListener("click",e=>{const a=e.target.closest("[data-kevact]");
 if(typeof when==="function"){when=function(){return `${kitDate(S.month,S.year,S.tuan,null,true)} (${SEASON[S.month-1]})`}}
 (function(){const st=document.createElement("style");st.id="kp-kat-css";st.textContent=`button.ka .kat{flex-wrap:wrap}button.ka .kat>.kan{min-width:min(9em,100%)}button.ka .kat>.kodds{margin-left:auto}`;document.head.appendChild(st)})();
 /* Tranh sủng / Chặn ngự giá: no ranges, no "có thể" — the night's floor (nightFx: Sủng +3, Ân tình +2 at least) and the reward chance on the ladder (roll 10+4s, s≤3) */
-if(typeof stealX==="function"){stealX=function(v,road){let c=0;try{c=conceiveCh(S)}catch(e){}return `thị tẩm đêm nay: Sủng +3, Ân tình +2 trở lên${S.preg?"":` · có thai: ${chanceW(c)}`} · ban thưởng: ${chanceW(22)} · kèm: ${stealKem(v)}`}}
+if(typeof stealX==="function"){stealX=function(v,road){let c=0;try{c=conceiveCh(S)}catch(e){}const NG=nightGain(0),BN=BAL.night;return `thị tẩm đêm nay: Sủng +${NG.sung}, Ân tình +${NG.an} trở lên${S.preg?"":` · có thai: ${chanceW(c)}`} · ban thưởng: ${chanceW(BN.bestow+BN.bestowS*BN.stealS)} · kèm: ${stealKem(v)}`}}
 /* wording guide fixes in merged copies */
 (function(){const fix=root=>{try{root.querySelectorAll&&root.querySelectorAll(".kalog").forEach(e=>{if(/Nhật ký/.test(e.textContent))e.textContent="Xem đầy đủ trong Sổ ghi"})}catch(e){}};new MutationObserver(ms=>{for(const m of ms)m.addedNodes.forEach(n=>{if(n.nodeType===1){if(n.classList&&n.classList.contains("kalog"))fix(n.parentNode);else fix(n)}})}).observe(document.documentElement,{childList:true,subtree:true})})();
 /* Tài nghệ rows "Bậc 3: Mở «…»": wrap, never cut */
@@ -821,25 +846,35 @@ function kpIdFig(M,tries){let src="";try{src=typeof figFor==="function"?figFor(S
 const KPID_OK={};const KPID_WR=.5;/* widest painted width / body height over all faces (see kpIdLay) */
 /* the geometry (screen px, from the modal box — the design canvas): phone portrait keeps the figure-on-top layout (CSS, --kidh) */
 function kpIdLay(M){try{const im=M.querySelector(":scope > img.kidfig2"),d=M.querySelector(".dlg");if(!im||!d)return;const W=M.clientWidth||innerWidth,H=M.clientHeight||innerHeight;
- const phone=W<600&&H>W;if(phone){["left","top","width","height","bottom","-webkit-mask-image","mask-image"].forEach(k=>im.style.removeProperty(k));d.style.removeProperty("width");d.style.removeProperty("max-width");
-  const r=d.getBoundingClientRect();M.style.setProperty("--kidh",Math.max(120,Math.round(r.top-10))+"px");return}
- M.style.removeProperty("--kidh");
+ /* KIT 32.2b EQUAL GAPS (owner 16/11 s21 + s22 "whole group"): her full figure stands between the two frame lines of the card scene —
+    one page (html.kv1, portrait): the screen top and the panel's top edge (figure ABOVE the panel); spread: the screen top and bottom
+    (figure in the column left of the panel). Gap above the painted head = gap under the feet, each ≥ KIT_DP_GAP (5 % of that height,
+    ≥ 14 px); a figure the column width keeps shorter is centred between the lines (equal larger gaps), never left on the floor. */
+ const one=typeof kitView==="function"?kitView().pages===1:(W<600&&H>W);
+ d.style.removeProperty("width");d.style.removeProperty("max-width");
  /* the panel is the ONE frame size (KIT 8.1 tokens --kpw/--kph, never set here; merge review/newgame-ui-r1); the figure column is the space
     left of it (its left edge minus 8 px), so a tab with more cells can never widen it over her */
- d.style.removeProperty("width");d.style.removeProperty("max-width");
- const port=H>W;const mr=M.getBoundingClientRect(),dr=d.getBoundingClientRect();const colR=Math.round(dr.left-mr.left)-8,colL=port?0:Math.round(W*.01);const colW=colR-colL;
+ const port=H>W;const mr=M.getBoundingClientRect(),dr=d.getBoundingClientRect();
+ const colR=one?W:Math.round(dr.left-mr.left)-8,colL=one?0:port?0:Math.round(W*.01);const colW=colR-colL;
+ const lt=0,lb=one?Math.max(120,Math.round(dr.top-mr.top)):H;M.style.setProperty("--kidh",Math.max(120,Math.round(dr.top-mr.top-10))+"px");
  const want=M.__kidWant||im.getAttribute("src")||"";const s1=kitTn(want)||want;/* measured on the small copy (same fractions, tiny canvas) */
  const fb0=kitFigBody(s1,()=>{if((M.__kidWant||"")===want)kpIdLay(M)});
  /* not measured yet: the whole picture stands in (no hidden flash), re-laid when the measure arrives */
  const fb=fb0||{t:0,b:1,ht:0,l:0,r:1,ar:(im.naturalWidth&&im.naturalHeight)?im.naturalWidth/im.naturalHeight:.33};if(!fb0&&!im.naturalWidth)im.addEventListener("load",()=>kpIdLay(M),{once:true});
- const floor=H-Math.round(H*.012);let Hs=H*(port?.80:.84);/* the standard body height: same for every face on this screen */
+ const A=lb-lt,G=typeof KIT_DP_GAP!=="undefined"?Math.max(KIT_DP_GAP.min,KIT_DP_GAP.pct*A):Math.max(14,A*.05);
+ const ar=fb.ar||.35,bf=Math.max(.3,fb.b-fb.ht),pf=Math.max(bf,fb.b-fb.t);/* body = head top → feet (28.11a); painted = top of the crown / hairpin → feet (the gap is measured on it) */
+ let Hs=Math.min((A-2*G)*bf/pf,H*(port?.80:.84));/* the standard body height: same for every face on this screen */
  /* ONE common tier per screen (coordinator 16/11, KIT 28.11a): the body height is capped so the WIDEST painted figure of the 420 faces a new
     game can show (KPID_WR = widest painted width / body height, measured .496 on consort-c05-t4-a18, dev/test/newgame-ui.js) still fits the
-    column whole; every face, consort and maid, gets that same body height and floor — no robe cut, no spill, no per-face shrink */
- const ar=fb.ar||.35,bf=Math.max(.3,fb.b-fb.ht);Hs=Math.min(Hs,colW*.98/KPID_WR);let ih=Hs/bf,iw=ih*ar;
- const pw=(fb.r-fb.l)*iw;let left=Math.round((colL+colW/2)-((fb.l+fb.r)/2)*iw);const top=Math.round(floor-fb.b*ih);
+    column whole; every face, consort and maid, gets that same body height — no robe cut, no spill, no per-face shrink */
+ Hs=Math.max(40,Math.min(Hs,colW*.98/KPID_WR));let ih=Hs/bf,iw=ih*ar;
+ const floor=lb-(A-ih*pf)/2;/* 32.2b: the painted figure centred between the two lines → gap above the crown = gap under the feet */
+ let left=Math.round((colL+colW/2)-((fb.l+fb.r)/2)*iw);const top=Math.round(floor-fb.b*ih);
  Object.assign(im.style,{left:left+"px",top:top+"px",bottom:"auto",width:Math.round(iw)+"px",height:Math.round(ih)+"px",objectFit:"fill"});
  im.style.removeProperty("-webkit-mask-image");im.style.removeProperty("mask-image");
+ /* review/fig-cutout-code: the HD twin is picked from `sizes` (jfighd kitFigHD); refresh it to the width just set, or a stale smaller
+    width left from an earlier layout keeps the 900 px file and the browser upscales her face */
+ try{if(typeof kitFigHD==="function")kitFigHD(im)}catch(e){}
  M.dataset.kidcol=colL+","+colR}catch(e){console.error("kpIdLay",e)}}
 /* review/newgame-ui (perf budget 22:35Z "one shared Pixi layer, paused when hidden"): while a full-screen scene panel (identity card,
    opening story, title — .modal.kpscene with its painted backdrop) or the Luân hồi deck covers the stage, the stage Pixi layer stops
@@ -1058,7 +1093,7 @@ function kitPickerLayout(root,keepPage){try{const g=root.querySelector(".kpkgrid
    decoded in idle time, so a page turn is one class toggle on already-decoded thumbnails (small WebP, kitTn). */
 function kitPickerShow(root,pg){const c=root.__kpc;if(!c)return;const {per,pages,B}=c;pg=Math.min(Math.max(0,pg),pages-1);root.dataset.pg=pg;
  B.forEach((b,i)=>{const on=i>=pg*per&&i<(pg+1)*per;if(b.hidden===on)b.hidden=!on});
- const [pv,nx]=root.querySelectorAll(".kpkpg");pv.disabled=pg<=0;nx.disabled=pg>=pages-1;pv.hidden=nx.hidden=pages<2;root.querySelector(".kpkpn").textContent=pages>1?`trang ${pg+1}/${pages} · ${B.length} dung mạo`:"";
+ const [pv,nx]=root.querySelectorAll(".kpkpg");pv.disabled=pg<=0;nx.disabled=pg>=pages-1;pv.hidden=nx.hidden=pages<2;root.querySelector(".kpkpn").textContent=pages>1?`trang ${pg+1}/${pages}`:"";
  const idle=window.requestIdleCallback||(f=>setTimeout(f,60));idle(()=>{[pg+1,pg-1].forEach(q=>kitPickerDecode(root,q))});try{const o=KIT_PICK[root.dataset.pick];o&&o.onPage&&o.onPage(kitPickerPage(root,pg))}catch(e){}}
 function kitPickerPage(root,pg){const c=root.__kpc;if(!c||pg<0||pg>=c.pages)return[];return c.B.slice(pg*c.per,(pg+1)*c.per)}
 function kitPickerDecode(root,pg){return Promise.all(kitPickerPage(root,pg).flatMap(b=>[...b.querySelectorAll("img")]).map(im=>im.decode?im.decode().catch(()=>0):0))}
@@ -1187,8 +1222,9 @@ function kitRankText(h){try{const re=kitRpRx();if(!re||!h)return h;return kpMapT
 window.kitRankText=kitRankText;
 function kitRankPaint(root){try{if(!root||typeof S==="undefined"||!S)return 0;const re=kitRpRx();if(!re)return 0;
  if(root.nodeType===3)root=root.parentElement;if(!root||root.nodeType!==1||!root.isConnected)return 0;if(root.closest(KIT_RP_SKIP))return 0;
- const W=document.createTreeWalker(root,NodeFilter.SHOW_TEXT,{acceptNode:n=>{const p=n.parentElement;if(!p||/^(SCRIPT|STYLE|TEXTAREA|INPUT|OPTION|SELECT|TITLE)$/.test(p.tagName)||p.closest(KIT_RP_SKIP))return NodeFilter.FILTER_REJECT;
-  re.lastIndex=0;return re.test(n.nodeValue)?NodeFilter.FILTER_ACCEPT:NodeFilter.FILTER_REJECT}});
+ const W=document.createTreeWalker(root,NodeFilter.SHOW_TEXT,{acceptNode:n=>{/* review/lag-play-2: the cheap name test first; the ancestor walk (closest) only for the few text nodes that hold a name */
+  re.lastIndex=0;if(!re.test(n.nodeValue))return NodeFilter.FILTER_REJECT;const p=n.parentElement;
+  return !p||/^(SCRIPT|STYLE|TEXTAREA|INPUT|OPTION|SELECT|TITLE)$/.test(p.tagName)||p.closest(KIT_RP_SKIP)?NodeFilter.FILTER_REJECT:NodeFilter.FILTER_ACCEPT}});
  const L=[];while(W.nextNode())L.push(W.currentNode);let k=0;
  for(const n of L){const v=n.nodeValue;re.lastIndex=0;let m,last=0;const f=document.createDocumentFragment();
   while((m=re.exec(v))){const h=kitRpOne(m[1],m[2],m[3],m[4]);if(!h)continue;if(m.index>last)f.appendChild(document.createTextNode(v.slice(last,m.index)));
@@ -1220,7 +1256,7 @@ window.kitMarkPaint=kitMarkPaint;
 function kitNameTone(root){try{if(!root||root.nodeType!==1)return;const L=root.matches&&root.matches(".kname")?[root]:[];root.querySelectorAll&&L.push(...root.querySelectorAll(".kname"));
  for(const n of L){if(n.style.getPropertyValue("--rtn")||n.classList.contains("kmy")||n.classList.contains("kme"))continue;const t=n.querySelector(":scope>.kti");const v=t&&t.style.getPropertyValue("--rt");if(v)n.style.setProperty("--rtn",v)}}catch(e){}}
 window.kitNameTone=kitNameTone;
-(function(){let q=0;const R=new Set();const run=()=>{q=0;const L=[...R];R.clear();for(const r of L){kitRankPaint(r);kitNameTone(r);kitMarkPaint(r)}};
+(function(){let q=0;const R=new Set();const run=()=>{q=0;const L=[...R].filter(n=>n&&n.isConnected);R.clear();/* review/lag-play-2: a root inside another queued root is walked once */for(const r of L)if(!L.some(m=>m!==r&&m.contains(r))){kitRankPaint(r);kitNameTone(r);kitMarkPaint(r)}};
  const mo=new MutationObserver(ms=>{for(const m of ms){if(m.type==="characterData")R.add(m.target.parentElement);else m.addedNodes.forEach(x=>R.add(x.nodeType===3?x.parentElement:x))}
   if(!q&&R.size)q=requestAnimationFrame(run)});
  const go=()=>{try{mo.observe(document.body,{childList:true,subtree:true,characterData:true})}catch(e){}kitRankPaint(document.body);kitNameTone(document.body);kitMarkPaint(document.body)};

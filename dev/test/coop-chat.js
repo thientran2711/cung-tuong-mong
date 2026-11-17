@@ -12,7 +12,11 @@ const ROOT=path.resolve(__dirname,'../..');
 const res=[];const ok=(c,m,x)=>{res.push([!!c,m]);console.log((c?'ok  ':'FAIL')+' '+m+(x!==undefined?' '+JSON.stringify(x):''))};
 const sleep=ms=>new Promise(r=>setTimeout(r,ms));
 async function mk(b,name,vp){const ctx=await b.newContext({viewport:{width:vp[0],height:vp[1]},deviceScaleFactor:vp[2],hasTouch:true,isMobile:vp[0]<1100,reducedMotion:vp[3]?'reduce':'no-preference'});
-  await serve(ctx);await ctx.addInitScript(u=>{window.COOP_URL=u;
+  await serve(ctx);/* socket log for failure dumps (same as coop-e2e) */
+  await ctx.addInitScript(()=>{const W0=window.WebSocket,t0=Date.now();window.__wsLog=[];window.WebSocket=function(u,p){const w=p===undefined?new W0(u):new W0(u,p);const L=window.__wsLog,i=L.length,tag=String(u).replace(/^.*\/room\//,'').replace(/&name=.*$/,'');
+    L.push([Date.now()-t0,'new',tag]);w.addEventListener('open',()=>L.push([Date.now()-t0,'open',i]));w.addEventListener('close',e=>L.push([Date.now()-t0,'close',i,e.code]));return w};
+   window.WebSocket.prototype=W0.prototype;Object.assign(window.WebSocket,{CONNECTING:0,OPEN:1,CLOSING:2,CLOSED:3})});
+  await ctx.addInitScript(u=>{window.COOP_URL=u;
     /* one view of the co-op hooks, whatever the client module names them */
     window.__co=()=>{const c=window.COOP;if(!c)return{};const s=c.state||{};const you=c.seat||s.you||null;const ended=c.ended||s.ended||{};
       const online=c.online||(s.seats?{a:!!(s.seats.a&&s.seats.a.online),b:!!(s.seats.b&&s.seats.b.online)}:{});
@@ -39,7 +43,7 @@ async function tapText(o,re,ms=8000){const t0=Date.now();while(Date.now()-t0<ms)
 async function clear(o,n=25){for(let i=0;i<n;i++){const st=await o.p.evaluate(()=>{const ke=[...document.querySelectorAll('.kmov .kmend')].find(x=>x.offsetParent!==null&&!x.disabled);if(ke){ke.click();return'x'}const kv=[...document.querySelectorAll('.kmov')].find(x=>!x.classList.contains('km-out')&&!x.querySelector('.kmend')&&!x.dataset.tsk);if(kv){kv.dataset.tsk=1;kv.click();return'x'}const c=__co();if(c.frozen||c.waiting)return'coop';
    const ov=[...document.querySelectorAll('button')].find(x=>x.offsetParent!==null&&!x.disabled&&!x.closest('#panel,#tabs,#hud,#modal')&&x.parentElement&&x.closest('[class^=km],[class*=" km"]')&&(x.classList.contains('kmend')||/^(Nhận|Đã hiểu|Tạ ơn|Lĩnh chỉ|Tuân chỉ)$/.test(x.textContent.trim())));if(ov){ov.click();return'x'}
   const bk=[...document.querySelectorAll('.kbk-x,.kbk-bar button')].find(x=>x.offsetParent!==null&&(/^Lui$/.test(x.textContent.trim())||/^(Lui|Đóng)$/.test(x.getAttribute('aria-label')||'')));if(bk){bk.click();return'x'}
-   const m=document.getElementById('modal');if(!m||m.hidden)return typeof S!=='undefined'&&S&&S.mg?'mg':'';const all=[...m.querySelectorAll('button:not([disabled])')].filter(x=>x.offsetParent!==null);const b=all.find(x=>/Nhận thân phận|Nhập cung|Tiến cung|Vào cung/.test(x.textContent))||m.querySelector('#mr button:not([disabled])')||m.querySelector('.opts button:not([disabled])');if(b){b.click();return'x'}return'stuck'});
+   const m=document.getElementById('modal');if(!m||m.hidden)return typeof S!=='undefined'&&S&&S.mg?'mg':'';const all=[...m.querySelectorAll('button:not([disabled])')].filter(x=>x.offsetParent!==null);/* the new-life card: its accept button (data-nl=ok), never Kiếp mới (data-nl=re: a pinned life re-rolls the same card for ever) */const b=m.querySelector('[data-nl="ok"]:not([disabled])')||all.find(x=>/^Nhận thân phận/.test(x.textContent.trim()))||all.find(x=>!x.dataset.kcp&&x.dataset.nl!=='re'&&/Nhận thân phận|Nhập cung|Tiến cung|Vào cung/.test(x.textContent))||m.querySelector('#mr button:not([disabled])')||m.querySelector('.opts button:not([disabled]):not([data-kcp]):not([data-nl="re"])');if(b){b.click();return'x'}return'stuck'});
   if(st==='mg'){await o.p.evaluate(()=>{try{S.mg=null;render()}catch(e){}});continue}
   if(st!=='x')return st;await sleep(200)}return'many'}
 const CC=(o,f,a)=>o.p.evaluate(f,a);
@@ -63,13 +67,14 @@ async function inRoomWorld(A,B,code){const t0=Date.now();while(Date.now()-t0<150
  ok(await until(A,()=>__co().code&&__co().seat==='a'),'A has a room code');const code=(await C(A)).code;await clear(A);
  await B.page();await B.p.goto(BASE+'?room='+code,DCL);await B.p.waitForTimeout(3000);await tapText(B,/^Vào phòng/,4000);
  ok(await until(B,()=>__co().seat==='b'&&__co().online&&__co().online.a&&__co().online.b&&!__co().frozen,null,40000),'B joined, both online');
-await inRoomWorld(A,B);for(let i=0;i<60;i++){const ra=await rstep(A),rb=await rstep(B);await clear(A,3);await clear(B,3);if(ra==='gone'&&rb==='gone')break;await sleep(600)}await A.p.emulateMedia({reducedMotion:'no-preference'});/* A: motion ON from here (the roulette / world entry runs reduced, like coop-e2e) */ok(await until(A,()=>__co().world,null,60000)&&await until(B,()=>__co().world,null,60000),'both players are in the shared world');for(const o of[A,B])for(let i=0;i<12;i++){const m=await o.p.evaluate(()=>{const b=document.querySelector('#modal:not([hidden]) [data-nl="ok"]');if(b){b.click();return 1}return 0});if(!m)break;await sleep(700)}
+await inRoomWorld(A,B);for(let i=0;i<60;i++){const ra=await rstep(A),rb=await rstep(B);await clear(A,3);await clear(B,3);if(ra==='gone'&&rb==='gone')break;await sleep(600)}await A.p.emulateMedia({reducedMotion:'no-preference'});/* A: motion ON from here (the roulette / world entry runs reduced, like coop-e2e) */{const wa=await until(A,()=>__co().world,null,60000)&&await until(B,()=>__co().world,null,60000);const wd=o=>o.p.evaluate(()=>{const m=document.getElementById('modal'),t=document.getElementById('title'),k=document.getElementById('kroul');return{S:typeof S!=='undefined'&&!!S,n:typeof S!=='undefined'&&S&&S.name,base:!!(window.COOPW&&COOPW.base),inLife:COOPW.inLife,ww:COOPW.waitWorld,st:COOP.state.status,you:COOP.state.you,C:!!COOP.state.C,title:t&&!t.hidden,kroul:k?k.textContent.slice(0,80):null,modal:m&&!m.hidden?m.textContent.slice(0,120):'',ws:window.__wsLog,tr:COOPW.tr.slice(-16)}}).catch(e=>e.message);
+ ok(wa,'both players are in the shared world',wa?undefined:{A:await wd(A),B:await wd(B)})}for(const o of[A,B])for(let i=0;i<12;i++){const m=await o.p.evaluate(()=>{const b=document.querySelector('#modal:not([hidden]) [data-nl="ok"]');if(b){b.click();return 1}return 0});if(!m)break;await sleep(700)}
  await clear(A);await clear(B);await home(A);await home(B);
  ok(await until(A,()=>!!document.querySelector('#krail [data-rail="chat"]'),null,8000)&&await until(B,()=>!!document.querySelector('#krail [data-rail="chat"]'),null,8000),'both rooms show the chat icon');
  for(const o of[A,B]){const i=await ICON(o);ok(i&&i.left&&i.vis&&i.badge==='','icon on the LEFT of the room scene, no badge yet ('+o.name+')',i)}
  await shot(A,'01-icon');await shot(B,'01-icon');
  /* A writes through the UI while closed→open */
- await dismiss(A);await A.p.click('#krail [data-rail="chat"]',{noWaitAfter:true});ok(await until(A,()=>!!document.getElementById('kchatp')),'A: tap icon opens the frame');
+ await dismiss(A);await A.p.evaluate(()=>document.querySelector('#krail [data-rail="chat"]').click());ok(await until(A,()=>!!document.getElementById('kchatp')),'A: tap icon opens the frame');
  ok(await A.p.evaluate(()=>/Thư từ/.test(document.querySelector('#kchatp .kptitle').textContent)&&!!document.querySelector('#kchatp .kit-x')&&!!document.querySelector('#kchatp .kchat-empty')),'frame: title Thư từ, kit ✕, empty note');
  await shot(A,'02-open-empty');
  const nasty='Chào <b>muội</b> & <img src=x onerror=window.__xss=1> ơi';
@@ -81,16 +86,31 @@ await inRoomWorld(A,B);for(let i=0;i<60;i++){const ra=await rstep(A),rb=await rs
  
  ok(await B.p.evaluate(()=>COOPCHAT.sounds===1&&(KSFX.log.concat(KSFX.drop).some(x=>x.m==='notice'||/notice/.test(x.n||'')))),'B: notification sound requested (kit sfx notice)',await B.p.evaluate(()=>({s:COOPCHAT.sounds,l:KSFX.log.concat(KSFX.drop).slice(-3)})));
  await shot(B,'03-unread');
- await dismiss(B);await B.p.click('#krail [data-rail="chat"]',{noWaitAfter:true});await B.p.waitForSelector('#kchatp .kcm');
+ await dismiss(B);await B.p.evaluate(()=>document.querySelector('#krail [data-rail="chat"]').click());await B.p.waitForSelector('#kchatp .kcm');
  const bub=await B.p.evaluate(()=>{const x=document.querySelector('#kchatp .kcm.fr');return{t:x.querySelector('.kcm-x').textContent,html:x.querySelector('.kcm-x').children.length,n:x.querySelector('.kcm-h b').textContent,w:x.querySelector('.kcm-h span').textContent,xss:!!window.__xss,un:COOPCHAT.unread}});
- ok(bub.t===nasty&&bub.html===0&&!bub.xss,'B: text shown as plain text (HTML escaped)',bub);ok(bub.n===nA&&/tháng/.test(bub.w),'sender = her character name, game-style time',[bub.n,bub.w]);ok(bub.un===0,'opening marks it read');
+ ok(bub.t===nasty&&bub.html===0&&!bub.xss,'B: text shown as plain text (HTML escaped)',bub);ok(bub.n==='Hảo hữu của ta'&&/tháng/.test(bub.w),'unmet friend: signature = the header chip label "Hảo hữu của ta" (OD:L165), game-style time',[bub.n,bub.w]);
+ await shot(B,'04a-open-friend-UNMET');ok(await B.p.evaluate(()=>{const c=document.querySelector('.kctmf .kctmf-n');return !!c&&[...c.querySelectorAll('span')].filter(s=>s.offsetParent).map(s=>s.textContent).join('')===document.querySelector('#kchatp .kcm.fr .kcm-h b').textContent}),'guest: visible header chip label == chat label');await B.p.evaluate(()=>document.querySelector('#kchatp .kit-x').click());await B.p.waitForTimeout(500);await shot(B,'04a2-chip-UNMET');await B.p.evaluate(()=>document.querySelector('#krail [data-rail="chat"]').click());await B.p.waitForSelector('#kchatp .kcm');
+ /* met friend (j61 stage 2): her real name, panel header too (reopen), kitRankNamePaint leaves it alone */
+ await B.p.evaluate(()=>{k61Know(k61CoopEnt(),'test',true,2)});
+ await B.p.evaluate(s=>document.querySelector(s).click(),'#kchatp .kit-x');await until(B,()=>!document.getElementById('kchatp'));
+ await B.p.evaluate(s=>document.querySelector(s).click(),'#krail [data-rail="chat"]');await B.p.waitForSelector('#kchatp .kcm');await B.p.waitForTimeout(600);
+ const bubM=await B.p.evaluate(()=>({n:document.querySelector('#kchatp .kcm.fr .kcm-h b').textContent,h:document.querySelector('#kchatp .kpsub,#kchatp .kptitle+*').textContent}));
+ ok(bubM.n===nA&&bubM.h.includes(nA),'met friend: signature + header = her real name',[bubM,nA]);await shot(B,'04b-open-friend-met');ok(bub.un===0,'opening marks it read');
  await shot(B,'04-open-friend');
  await B.p.fill('#kchat-in','Được thôi.');await B.p.keyboard.press('Enter');
  ok(await until(B,()=>COOPCHAT.msgs.length===2),'B sends with Enter');
  await B.p.keyboard.press('Escape');ok(await until(B,()=>!document.getElementById('kchatp')),'Esc closes the frame back to the icon');
  /* A has the frame open: the reply shows at once, no badge */
  ok(await until(A,()=>COOPCHAT.msgs.length===2&&document.querySelectorAll('#kchatp .kcm').length===2),'A (frame open): reply appears in the list, in order');
+ const aU=await A.p.evaluate(()=>({n:document.querySelector('#kchatp .kcm.fr .kcm-h b').textContent,h:document.querySelector('#kchatp .kpsub,#kchatp .kptitle+*').textContent}));
+ ok(aU.n==='Hảo hữu của ta'&&/hảo hữu/i.test(aU.h),'host, unmet friend: signature + header = "Hảo hữu của ta" (same label as the header chip)',aU);
  await shot(A,'05-two-lines');
+ /* host, friend met: real name */
+ const nB=await B.p.evaluate(()=>S.name);await A.p.evaluate(()=>{k61Know(k61CoopEnt(),'test',true,2)});
+ await A.p.evaluate(s=>document.querySelector(s).click(),'#kchatp .kit-x');await until(A,()=>!document.getElementById('kchatp'));
+ await A.p.evaluate(s=>document.querySelector(s).click(),'#krail [data-rail="chat"]');await A.p.waitForSelector('#kchatp .kcm.fr');await A.p.waitForTimeout(600);
+ const aM=await A.p.evaluate(()=>({n:document.querySelector('#kchatp .kcm.fr .kcm-h b').textContent,h:document.querySelector('#kchatp .kpsub,#kchatp .kptitle+*').textContent}));
+ ok(aM.n===nB&&aM.h.includes(nB),'host, friend met: signature + header = her real name',[aM,nB]);await shot(A,'05b-two-lines-met');
  await A.p.click('#kchatp .kit-x',{noWaitAfter:true});ok(await until(A,()=>!document.getElementById('kchatp')&&!!document.querySelector('#krail [data-rail="chat"]')),'✕ closes the frame back to the icon');
  ok((await ICON(A)).badge==='','A: no unread after reading');
  /* a line while the frame is closed on A (motion ON): shake + glow + sound */
@@ -111,7 +131,7 @@ await inRoomWorld(A,B);for(let i=0;i<60;i++){const ra=await rstep(A),rb=await rs
  ok(await until(B,n=>COOPCHAT.msgs.length===n,seenB+1,25000),'rejoin: history reloaded (all lines, in order) incl. the line sent while away',await B.p.evaluate(()=>COOPCHAT.msgs.map(m=>m.i)));
  const bi2=await ICON(B);ok(bi2&&bi2.badge==='2'||bi2&&bi2.badge==='1'||bi2&&+bi2.badge>=1,'rejoin: unread badge counts what she missed',bi2);
  await shot(B,'07-rejoined');
- await dismiss(B);await B.p.click('#krail [data-rail="chat"]',{noWaitAfter:true});await B.p.waitForSelector('#kchatp .kcm');await shot(B,'08-history');
+ await dismiss(B);await B.p.evaluate(()=>document.querySelector('#krail [data-rail="chat"]').click());await B.p.waitForSelector('#kchatp .kcm');await shot(B,'08-history');
  ok(await B.p.evaluate(()=>document.querySelectorAll('#kchatp .kcm').length===COOPCHAT.msgs.length&&COOPCHAT.msgs.length>=5),'history list shows every line');
  /* other places: the rail is on every stage */
  await B.p.click('#kchatp .kit-x',{noWaitAfter:true});const s0=await B.p.evaluate(()=>COOPCHAT.sounds);

@@ -100,7 +100,7 @@ function wdFabOpen(x){const g=x.g,it=IT[g.k],gk=wdFabOf(g.k),w=WD_ITEMS[gk];cons
  B.push(pbtn(`data-kinvact="gift" data-ix="${i}"`,"Tặng","tốn: 2 khắc · thành: chọn người nhận",whyTime(2)));
  if(it.pr)B.push(pbtn(`data-kinvact="sell" data-ix="${i}"`,"Bán",`thành: Bạc +${Math.floor(it.pr/2)}`,""));
  const gr=KIT_GRADE[x.grade|0];const rows=kitItemRows(g.k,{e:S.inv[i]});const fr="";/* origin: the Lai lịch row (KIT §70) */
- kitModal({kind:"info",title:it.n,sub:`${it.kd} · ${gr.n}`,itemPic:kitItem({src:x.src512||x.src,name:"",grade:x.grade,size:"lg",qty:g.n}).replace('<span class="kitn"></span>',''),
+ kitModal({kind:"info",title:it.n,sub:it.kd,itemPic:kitItem({src:x.src512||x.src,name:"",grade:x.grade,size:"lg",qty:g.n}).replace('<span class="kitn"></span>',''),
   html:`<div class="kinvrows">${rows}</div>${g.n>1||fr?kitFacts([g.n>1?`Trong rương: ${g.n} món.`:"",fr?fr+".":""].filter(Boolean)):""}<div class="rbtn kinvacts">${B.join("")}</div>`,btn:"Lui"})}
 (function(){const o0=kinvOpen;kinvOpen=function(x){try{if(x&&x.g&&WD_ITEMS[x.g.k])return wdOpen(x);if(x&&x.g&&IT[x.g.k]&&IT[x.g.k].dr&&wdFabOf(x.g.k))return wdFabOpen(x)}catch(e){console.error("wdOpen",e)}return o0.apply(this,arguments)}})();
 /* a [data-wd] act inside an item panel closes the panel first (like jinv's [data-kinvact]) */
