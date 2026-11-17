@@ -340,6 +340,7 @@ function kszNeedTxt(bs,need,B){const TX=B.txtMin||190;let pic=0,any=false;bs.for
 function kszBtnGrid3(root){root.querySelectorAll(".k3btns").forEach(g=>{const B=KIT_SIZE.v3.btn,w=g.clientWidth;if(!w)return;const bs=[...g.querySelectorAll(":scope>.kszb")];
  /* the cell = what the widest SHORT button needs at its narrowest (title ≥ 7 em, a row may put its value under its label, chips never break), never less than cellS */
  g.classList.add("k3meas");let need=B.cellS;bs.filter(b=>b.dataset.kbs==="S").forEach(b=>{b.style.width="min-content";need=Math.max(need,Math.ceil(b.getBoundingClientRect().width));b.style.width=""});g.classList.remove("k3meas");
+ if(bs.some(b=>b.classList.contains("kart")))need=Math.max(need,270);/* §6.2 option card = picture + text: never a cell under 270 px (149 px cells wrapped the Được/Mất text one word per line, owner 17/11) */
  need=kszNeedTxt(bs,need,B);const cols=Math.max(1,Math.floor((w+B.gap)/(need+B.gap)));const cell=(w-(cols-1)*B.gap)/cols,long=Math.min(cols,Math.ceil((B.cellLong+B.gap)/(cell+B.gap)));g.style.setProperty("--k3c",cols);
  bs.forEach(b=>b.style.setProperty("--k3s",b.dataset.kbs==="S"?1:long))})}
 /* the left column decides the body height; the event picture in the info grows into what the text leaves */
@@ -480,6 +481,7 @@ function kszLiveSrc3(m,mb,kind){let src="";const im=mb.querySelector(":scope > .
 function kszBtnGridLive3(g){const B=KIT_SIZE.v3.btn,w=g.clientWidth;if(!w)return;const bs=[...g.children].filter(b=>b.tagName==="BUTTON"&&b.getClientRects().length);
  bs.forEach(b=>{b.dataset.kbs=kitBtnSize({rows:b.querySelectorAll(".kar,.kl,.kr-why,.kab>*").length,chars:((b.querySelector(".kabody")||b).textContent||"").replace(/\s+/g," ").trim().length})});
  g.classList.add("k3meas");let need=B.cellS;bs.filter(b=>b.dataset.kbs==="S").forEach(b=>{b.style.setProperty("width","min-content","important");b.style.setProperty("min-width","0","important");need=Math.max(need,Math.ceil(b.getBoundingClientRect().width));b.style.removeProperty("width");b.style.removeProperty("min-width")});g.classList.remove("k3meas");
+ if(bs.some(b=>b.classList.contains("kart")))need=Math.max(need,270);/* §6.2 option card = picture + text: never a cell under 270 px (149 px cells wrapped the Được/Mất text one word per line, owner 17/11) */
  need=kszNeedTxt(bs,need,B);const cols=Math.max(1,Math.floor((w+B.gap)/(need+B.gap)));const cell=(w-(cols-1)*B.gap)/cols,long=Math.min(cols,Math.ceil((B.cellLong+B.gap)/(cell+B.gap)));g.style.setProperty("--k3c",cols);
  bs.forEach(b=>b.style.setProperty("--k3s",b.dataset.kbs==="S"?1:long))}
 /* the height the info column may take: the modal box minus the frame's header, button row and body padding */
