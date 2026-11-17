@@ -33,3 +33,9 @@ D. agemp_check flaked 2 of 5 runs (each a different case): court not running in 
 4. Breaking the lệ costs him nothing with Thái hậu yet (npc-agent §6 owner question 2, open).
 
 Shots: scratch only (/home/user/wt/rv-ag2-shots), not uploaded, deleted with the worktree.
+
+## r2 (Foreman C ROOT-3: main moved to 9fdc1199 = trait-pool r1)
+**PASS r2 05ebe3da (FF of main 9fdc1199)** — branch review/npc-agent-ag2-r2 = 9a5ff46d + merge of origin/main 9fdc1199.
+- Conflicts kept BOTH: assemble.py (main's jnet.js after jtrong.js + our jmind / jagent / jagemp); j75 npcEffort (AG1 deck table + trait-pool's EFF words "Nóng nảy / Ân cần / Khiêm nhường" read by `tv(EFF,v)`); jlost (mindPickBy + `netIs(s,"timid")`); jtin (mindPickBy + `nq(s,"sharp",15)`); generated files main's, rebuilt.
+- LUẬT SỬA CẢ NHÓM after the merge: jmind.js (npc-mind, not on main before) still read 27 removed nết words (NET_POOL, STR_TR, the witness weights) → migrated with dev/tools/netmig.py words (jmind only). net-scan old rows now equal main's (removed-word 10 = jbal2 9 + j1 1, P_TR 2). NOTE for the trait-pool owner: `netmig.py` is NOT idempotent on main's files — a second run rewrites j1 (Emperor ETRAITS labels "Đa nghi"→"Kín đáo", "Hiếu thảo"→"Vì gia tộc", the rename comment) and breaks j28 / j72 (`tv(return,v)` syntax error); those three were left as main has them.
+- Tests on 05ebe3da: agemp_check 20/20, agent_check 16/16, trait-pool 20/20 (vs base 6c4f21c3), trait-rename-oldsave 9/9, one-core-guard PASS, onecore-pick 0, coop-night 105/105, coop-e2e 62/62, QUICKCHECK PASS (old save ok; perf median of 5 new/live: render 306/352, tab 433/491, buổi 1198/1230 ms, tasks>200ms 16/18). Fold 755x1000 + iPad 1180x820 smoke: flip scene "he rests" / "he remembers her dance" reason line shown, no overflow, 6 tuần played, 0 throws, 0 page errors.
