@@ -536,3 +536,4 @@
 | FP princess art SUCCESSOR #5 (sonnet art, 2K): v25 NC graceful + BD ranks with owner → NC ranks after pick; game-ready keys | review/foreign-princess-samples + reports on handover | C | session_011xDdVQLLoooSkPhJraizSu | RUNNING | 17/11 02:04Z |
 | WHOLE FIGURE REPAINT batch W7b consort-rest-B (successor of W7: 56 a18 live; first hd retro-fit) | review/fig-cutout-clean | C | session_011xDdVRfTXkRr1K97oJueiZ | RUNNING | 17/11 02:06Z |
 | WHOLE FIGURE REPAINT batch W4c maid-ty (successor of W4b: 37 live; next maid-m05-ty6-a18) | review/fig-cutout-clean | C | session_011xDdVShYq4ow4VaBTVm4CY | RUNNING | 17/11 02:08Z |
+| balance-core review r2b (opus numbers): ONE item — early-death gap (<3y 2/42 main vs 7/41 branch, p≈0.08) with ≥150 sens-bot lives per side, baff0824 vs main 7abaf07a; PASS stands or FAIL (r2 PASS baff0824 conditional; reviewer #1 + worker #2 archived) | review/balance-core-r2 | main s28 | session_01UV1Szk2uZjmbYdXJKyXFCH | RUNNING | 17/11 02:12Z |
