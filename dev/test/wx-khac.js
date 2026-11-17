@@ -1,5 +1,6 @@
 /* weather-khac (owner 17/11 (g)): weather per KHẮC by season, one shared clock. usage: node dev/test/wx-khac.js <url> [WxH@dpr]
    §1 season never off: 12 months × 60 days, every khắc state is in the season's list (j12 wxStates); no snow outside Đông, no heat in Đông.
+   §2b an act spilling into the next buổi (j76 day-time gate) sees that khắc's weather.
    §2 timeline monotone per khắc: S.wx follows S.wxDay.s[khắc] as her clock moves (spend / buổi), the day never changes under her,
       a refund (spend −1) never takes the weather back, save/load keeps it.
    §3 sudden downpour while she is in Ngự hoa viên: at the next khắc S.wx = mưa rào, wet(), jfx weather layer = drizzle, j11 backdrop key
@@ -33,6 +34,10 @@ const sleep=t=>new Promise(r=>setTimeout(r,t));
   S.buoi=1;used=0;S.wxDay.at=N-1;wxSync();o.noBack=S.wx.b===copy[N-1];   /* a khắc refund or earlier buổi never takes the weather back */
   o.api=[currentWeather(0).b===copy[0],currentWeather(N-1).b===copy[N-1],currentWeather().kh===N-1];
   const blob=ser();deser(blob);o.save=JSON.stringify(S.wxDay.s)===JSON.stringify(copy)&&S.wx.b===copy[N-1];
+  /* §2b an act that spills into the next buổi (j76 ONE DAY-TIME GATE) sees the spilled khắc's weather */
+  {S.month=5;S.tuan=0;S.buoi=1;used=3;S.j76carry=0;S.j76ck="";S.dead=false;const s=[];for(let i=0;i<N;i++)s.push(i<2*K?"nắng gắt":"trời âm u");
+   S.wxDay={d:wkKey(),s,u:[],lv:Array(N).fill(0),at:K+3,sk:K+3};S.wx={n:"nắng gắt",b:"nắng gắt",k:"sun",f:2};window.__j76win=0;
+   spend(2);o.spill={carry:S.j76carry,used,k:wxkNow(),want:2*K+1,wx:S.wx.b,left:j76left()};S.j76carry=0;S.j76ck=""}
   /* §3 garden downpour */
   S.month=5;S.tuan=2;S.buoi=1;used=0;S.place="vuon";const s=Array(N).fill("nắng gắt");const k0=K;for(let i=k0+1;i<N;i++)s[i]="mưa rào";
   S.wxDay={d:wkKey(),s,u:[k0+1],at:k0};S.wx={n:"nắng gắt",b:"nắng gắt",k:"sun",f:2};render();
@@ -46,7 +51,7 @@ const sleep=t=>new Promise(r=>setTimeout(r,t));
   const c0=window.COOPW;window.COOPW={on:true,seat:"b"};delete S.wxDay;S.wx={n:"mưa phùn",b:"mưa phùn",k:"rain",f:1};S.month=3;rollWx();const g1=!S.wxDay;S.wx={n:"mưa phùn",b:"mưa phùn",k:"rain",f:1};
   o.guest=[g1,currentWeather().b==="mưa phùn",!S.wxDay];window.COOPW=c0;
   return o});
- const ok1=r.offN===0&&r.stat.days===720,ok2=r.mono&&r.noBack&&r.api.every(Boolean)&&r.save,
+ const ok1=r.offN===0&&r.stat.days===720,ok2=r.mono&&r.noBack&&r.api.every(Boolean)&&r.save&&r.spill.carry===1&&r.spill.k===r.spill.want&&r.spill.wx==="trời âm u",
   g=r.garden,ok3=g.wx==="mưa rào"&&!g.wet[0]&&g.wet[1]&&g.fx[1]==="drizzle"&&g.fx[0]!==g.fx[1]&&g.px[1]==="rain"&&/Trời bỗng đổ mưa rào/.test(g.line)&&g.lines===1&&g.hook&&g.hook[2]===true&&/rgba\(90, ?100, ?120/.test(g.wash)&&/mưa rào/.test(g.chip),
   ok4=r.old.built&&r.old.head&&r.old.lines===0&&r.old.wx==="tuyết nhẹ",ok5=r.guest.every(Boolean);
  console.log(JSON.stringify(r,null,1));

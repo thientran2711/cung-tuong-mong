@@ -49,8 +49,12 @@ const WXK_HOOKS=[];
 function wxkHook(fn){if(typeof fn==="function")WXK_HOOKS.push(fn)}
 function wxkLast(){return typeof B4L==="number"?B4L:3}
 function wxkN(){return (wxkLast()+1)*BAL.time.khac}
-/* her khắc of the day = buổi × khắc per buổi + khắc used (the last khắc of a buổi holds until Sang buổi) */
-function wxkNow(){if(!S)return 0;const K=BAL.time.khac,b=Math.max(0,Math.min(wxkLast(),S.buoi||0)),u=typeof used==="number"?used:0;return b*K+Math.max(0,Math.min(K-1,u))}
+/* her khắc of the DAY, read through the ONE day-time function (j76 ONE DAY-TIME GATE, owner OD 17/11 ~16:45Z): khắc gone = day − j76left()
+   + the khắc an act spilled into the next buổi (S.j76carry) — that act sees the spilled khắc's weather. Without a spill the last khắc of a
+   buổi holds until Sang buổi (her buổi's words never show the next buổi's). */
+function wxkNow(){if(!S)return 0;const K=BAL.time.khac,N=wxkN(),b=Math.max(0,Math.min(wxkLast(),S.buoi||0));
+ const gone=typeof j76left==="function"?N-j76left():b*K+(typeof used==="number"?used:0);const carry=S.j76carry||0;
+ return Math.max(0,Math.min(N-1,carry>0?gone+carry:Math.min(gone,b*K+K-1)))}
 function wxkSea(){return SEASON[S.month-1]}
 function wxkRow(sea,n){return wxStates(sea).find(w=>w[0]===n)||null}
 /* seeded like the forecast (jmcal): the same world + date gives the same day; host only */
