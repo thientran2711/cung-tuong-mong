@@ -62,5 +62,33 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
   for(const k in AG3.stat.by)if(/^cold:/.test(k))H[k.slice(5)]=AG3.stat.by[k]-(b0[k]||0);return{me,n,H}});
  ok(r5.me.includes("Cầu xin")&&r5.me.includes("Chép kinh, giữ đức")&&r5.me.includes("Xuất gia"),'her lãnh cung cards come from coldActsOf(S)',r5.me);
  ok(r5.n>=100&&Object.keys(r5.H).length>=3,'NPC in lãnh cung chooses among the same cards (histogram, never one answer)',r5.H);
+ /* 2e part 3 (AG-ALL-2e2): talk P3T, household, phe phái, thuốc thúc sinh */
+ const r6=await p.evaluate(()=>{const out={};const L=liveRivals(true).filter(x=>!x.out&&!x.queen&&x.alive);const v=L[0],t=L[1],u=L[2];vNorm(v);vNorm(t);
+  /* her talk: topicOpts builds the four topics through P3T(S, …) */
+  const n={};const W={};for(const k of ["health","praise","gossip","secret"]){W[k]=P3T[k];P3T[k]=function(){if(arguments[0]===S)n[k]=(n[k]||0)+1;return W[k].apply(this,arguments)}}
+  try{topicOpts(t)}finally{for(const k in W)P3T[k]=W[k]}out.herTalk=n;
+  /* NPC↔NPC talk */
+  v.rl=v.rl||{};v.rl[t.id]=60;t.rl=t.rl||{};t.rl[u.id]=-40;const N=Object.assign({},agNeeds(v),{ally:1,spite:1,safe:1,danh:1,hh:1,kid:1});
+  const O=AGREG.consort.par3talk(v,N,null);out.talkOpt=O.map(o=>o.k);const a0=aff(t,v);const o1=O.find(o=>o.k==="cx3:talkHealth");out.talkRun=o1?AGRUN[o1.k](v,o1.t):"";out.talkMoved=aff(t,v)!==a0;
+  /* household */
+  const spy={};const sp=nm=>{const f=window[nm];spy[nm]=0;window[nm]=function(){if(arguments[0]===v||arguments[1]===v)spy[nm]++;return f.apply(this,arguments)};return()=>window[nm]=f};
+  const U=["itemTest","hireTake","staffTam","recommend","searchMaids","threatServ"].map(sp);
+  try{v.bac=500;const k0=Object.keys(IT).find(k=>IT[k].pr>0&&!IT[k].sl);v.inv=[{k:k0,from:key(t),d:S.turn}];
+   v.staff=[{sid:9e6+1,name:"Thử A",role:"maid",loyal:20,af:{},rk:3},{sid:9e6+2,name:"Thử B",role:"maid",loyal:90,af:{}}];
+   S.npool=S.npool||{maid:[],eunuch:[]};S.npool.eunuch.push({sid:9e6+3,name:"Thử C",role:"eunuch",loyal:50,af:{},age:16,org:"dân",imp:"hiền"});
+   const ts=(t.staff||[])[0]||(t.staff=[{sid:9e6+4,name:"Thử D",role:"maid",loyal:50,af:{}}])[0];ts.lover=9e6+5;ts.spyFor=null;v.knowDT=[ts.sid];const h0=hostility;hostility=(a,b)=>a===v&&b===t?90:h0(a,b);
+   try{const H=AGREG.consort.par3house(v,N,null);out.house=H.map(o=>o.k);out.houseRun={};for(const o of H)out.houseRun[o.k]=String(AGRUN[o.k](v,o.t)||"").slice(0,60)}finally{hostility=h0}
+  }finally{U.forEach(f=>f())}out.spy=spy;
+  /* phe phái */
+  const F0=(S.facs||[]).slice();try{S.facs=[];v.p3FacM=-1;v.rl[t.id]=60;const F=AGREG.consort.par3fac(v,N,null);out.fac=F.map(o=>o.k);const of=F.find(o=>o.k==="cx3:facFound");out.facRun=of?AGRUN[of.k](v,of.t):"";out.facMade=!!facOf(v)}finally{S.facs=F0}
+  /* thuốc thúc sinh: her card = P3C.drug(S); the NPC builder gives the same odds */
+  const D=P3C.drug(S),Dv=P3C.drug(v);out.drug={n:D.n,same:D.n===Dv.n&&JSON.stringify(D.c)===JSON.stringify(Dv.c)};
+  return out});
+ ok(r6.herTalk.health>=1&&r6.herTalk.praise>=1&&r6.herTalk.secret>=1,'her talk topics are P3T.<k>(S, …)',r6.herTalk);
+ ok(["cx3:talkHealth","cx3:talkPraise","cx3:talkSecret"].every(k=>r6.talkOpt.includes(k))&&r6.talkMoved,'NPC↔NPC talk: offered, runs the same card, moves the listener’s liking',{opt:r6.talkOpt,run:r6.talkRun});
+ ok(["cx3:test","cx3:hire","cx3:staffTam","cx3:staffUp","cx3:search","cx3:threat"].every(k=>r6.house.includes(k)),'household options offered (Nghiệm độc / Thêm người / Tâm sự / Tiến cử / Tra xét / Dọa tố)',r6.house);
+ ok(Object.values(r6.spy).every(x=>x>=1),'household deeds run her buttons’ own functions',r6.spy);
+ ok(r6.fac.includes("cx3:facFound")&&r6.facMade,'phe phái: NPC founds a faction through found() (the same as Lập phe cùng)',{fac:r6.fac,run:r6.facRun});
+ ok(r6.drug.same,'Uống thuốc thúc sinh: one builder P3C.drug for her and the NPC',r6.drug);
  ok(errs.length===0,'no page errors',errs.slice(0,3));
  await b.close();const f=res.filter(x=>!x).length;console.log(f?`${f} FAIL`:'ALL PASS');process.exit(f?1:0)})();

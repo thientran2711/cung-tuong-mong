@@ -1052,6 +1052,10 @@ BAL.ag.par3={on:1,
  /* 2e part 3 (AG-ALL-2e2): NPC↔NPC talk topics (P3T) — worth = the liking she would win from the listener */
  talk:{health:{"ally":1},praise:{"ally":1.5},secret:{"ally":2},gossip:{"ally":1.5,"spite":1},invoke:{"ally":2}},
  /* household: Nghiệm độc (her button + NPC; bạc, odds bonus over oSee), Thêm cung nữ / thái giám (bạc), Tiến cử (công lao), Tâm sự / Tra xét / Dọa tố worth */
- test:{bac:10,o:25,g:{"safe":2}},hire:{bac:20,g:{"safe":1,"danh":1}},house:{merit:5,tamBelow:50,upLoyal:70,gTam:{"safe":1},gUp:{"danh":1,"safe":1},gSearch:{"safe":3},gThreat:{"spite":2,"safe":1}},
+ test:{bac:10,o:25,g:{"safe":2}},hire:{bac:20,g:{"safe":1,"danh":1}},house:{merit:5,tamBelow:50,upLoyal:70,gTam:{"safe":1},gUp:{"danh":3,"safe":1},gSearch:{"safe":3},gThreat:{"spite":2,"safe":1}},
  /* phe phái (j10 facAct for her, cx3:fac* for an NPC): khắc of her button; friend bar to found; worth per deed */
- fac:{k:2,frAff:35,clanAff:15,sharedOan:30,foeOan:25,gFound:{"ally":3},gJoin:{"ally":2,"safe":1},gLeave:{"safe":1},gSell:{"hh":1,"safe":1},gDiv:{"spite":3}}};
+ fac:{k:2,frAff:35,clanAff:15,sharedOan:30,foeOan:25,gFound:{"ally":3},gJoin:{"ally":2,"safe":1},gLeave:{"safe":1},gSell:{"hh":1,"safe":1},gDiv:{"spite":3}},
+ /* Uống thuốc thúc sinh (P3C.drug): worth = the book-mismatch danger she escapes */
+ drug:{g:{"safe":4,"kid":2}}};
+/* Chia sẻ bí mật (P3T.secret, her talk and NPC↔NPC): a listener with malice above secretMal may keep it against the speaker, odds secretGrab */
+BAL.talk.secretMal=50;BAL.talk.secretGrab=50;

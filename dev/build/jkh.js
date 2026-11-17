@@ -128,7 +128,7 @@ if(typeof chooseM==="function"){const c0=chooseM;chooseM=function(i){const m=Q&&
  try{/* chosen = the dialog left the queue (a choice it could not pay for stays) */if(c&&Q[0]!==m&&S&&!S.dead&&/thuốc bổ|bồi bổ/i.test(String(c.n||"")))khTonic(S)}catch(e){}return r}}
 /* ---- the world each month: rivals with chứng cứ demand the blood test on a 'lệch sổ' child; NPCs take the drug in that spot ---- */
 window.khWorld=function(){let ev="";if(!S||S.dead||khGuest())return ev;
- for(const v of liveRivals(true))if(v.preg&&!v.fake&&!v.khInd){const o=khRecOff(v);if(o>=1&&v.preg===9-o&&roll(P.npcDrug)){v.khInd=1;khStat("drug_npc")}}
+ for(const v of liveRivals(true))if(v.preg&&!v.fake&&!v.khInd){const o=khRecOff(v);if(o>=1&&v.preg===9-o&&!(typeof p3On==="function"&&p3On())&&roll(P.npcDrug)){v.khInd=1;khStat("drug_npc")}}/* AG-ALL-2e2: with the day plan on, an NPC takes the SAME card (P3C.drug, cx3:drug) */
  const moms=[S].concat(liveRivals(true));
  for(const m of moms){if(m!==S&&(!m.alive||m.out))continue;if(m===S&&S.out)continue;for(const k of (m===S?S.kids:m.kids)||[]){if(!k.alive||!k.dateOff||k.tfOk||(k.age||0)>P.ageMax)continue;
   if(m===S&&S.rt&&S.rt.ng)break;
@@ -139,9 +139,7 @@ window.khWorld=function(){let ev="";if(!S||S.dead||khGuest())return ev;
 const m0=monthTick;monthTick=function(){let ev=m0.apply(this,arguments);try{ev+=khWorld()}catch(e){console.error(e)}return ev};
 window.monthTick=monthTick;
 /* ---- her cards: thuốc thúc sinh; the blood test on an NPC's 'lệch sổ' child (kit card rtCard, the existing PEND.rtNgNpc dialog) ---- */
-const d0=deal;deal=function(){d0.apply(this,arguments);try{if(!S||S.out||S.dead||!S.preg||S.fake||S.khInd)return;const o=khRecOff(S);if(o<1||S.preg<9-o||S.preg>8)return;const D=P.drug;
- deck.unshift({n:"Uống thuốc thúc sinh",t:"Bài thuốc giục sinh, cho đứa bé ra đời đúng ngày sổ Kính sự phòng ghi.",c:{bac:-D.bac},o:od(D.o+(S.arts.y||0)*D.perY),w:{},l:{suc:-D.sucF},
-  x:`tháng tới trở dạ, đúng ngày trong sổ · đứa bé thật ra sinh non, dễ yếu · hỏng: Sức -${D.sucF}`,dom:"Sức khỏe",go:()=>{S.khInd=1;apply({suc:-D.suc});khStat("drug_me")}})}catch(e){console.error(e)}};
+const d0=deal;deal=function(){d0.apply(this,arguments);try{if(!S||S.out||S.dead||!S.preg||S.fake||S.khInd)return;const o=khRecOff(S);if(o<1||S.preg<9-o||S.preg>8)return;deck.unshift(P3C.drug(S))}catch(e){console.error(e)}};/* AG-ALL-2e2: ONE builder P3C.drug(p) — her card and an NPC's cx3:drug */
 if(typeof rtCards==="function"){const r0=rtCards;rtCards=function(){let A=r0.apply(this,arguments);try{if(!rtRoad()||S.out||(window.__bot&&!window.__rtGo))return A;
  for(const v of liveRivals(true)){const k=(v.kids||[]).find(x=>x.alive&&x.dateOff&&x.dateKnown&&!x.tfOk&&(x.age||0)<=P.ageMax);if(!k)continue;if(A.some(c=>c.rtId==="ngn_"+v.id))continue;
   const ev=typeof evG==="function"?evG(S,v):0;
