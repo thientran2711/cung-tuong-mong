@@ -1,5 +1,5 @@
 # FOREMAN_C_STATUS (written ONLY by Foreman C)
-NEXT FOREMAN C SESSION (ART side, C account): ROOT-10 = (opening, see HANDOVER ROOT-9 → ROOT-10). ROOT-9 stops on "ROOT-10 took over".
+NEXT FOREMAN C SESSION (ART side, C account): ROOT-10 = session_011xDdVReyG8hSRH5URJJdVX (opened by ROOT-9 20:34Z, depth 3; prompt dev/handover/TAKEOVER_FOREMAN_C_ROOT10.md). ROOT-9 stops on "ROOT-10 took over".
 ## HANDOVER (Foreman C ROOT-9 session_011xDdVRcPyvGXaGQCff5fCJ → ROOT-10, ~20:35Z 17/11)
 Why: context 31.5% (used_tokens 315k; START ~6% → limit 31%). Depth 2 → ROOT-10 depth 3.
 OWNER MOOD: strict, quick to anger at misses. Change ONLY what she names; LOOK hard; send her SINGLE images, 1–2 at a time, NEVER contact sheets (owner 19:48Z). Owner lines 19:45Z–20:45Z verbatim in the ROOT-9 log below.
