@@ -110,3 +110,126 @@ DONE on review/one-core-dup:
 - 12 dead typed fallbacks after BAL keys deleted (BAL value was already live): BAL.selfMinus||12 (BAL 8 — DISAGREED), BAL.loyalCost||10 (BAL 25 — DISAGREED), B.srvBar||[0,18,20,22,24] (5-long copy), BAL.ex.srvCd||[…], BAL.oanLv||[…] (jhc), BAL.restLatK||1, BAL.restLatSuc||6, BAL.coopEmpY||12, BAL.thieuLe||{…}, B.hintSharp/hintMat/hintMid, B.ctFit/ctPlainK. Behaviour change: none.
 - OWNED ELSEWHERE: servants per rank (capOf j10, fillStaff j10+j29, jpromo/jstaff wrappers, close-maid +1) → review/staff-root (session_01N1tNP3ZSe15ZCwXea7LSMe), listed only.
 
+- ODDS LADDER (4 typed copies, all agree 31/46/56/66/81/91, lo 5 / hi 95): j1 word(), j79 kitOddsLv, jsgame SG_LO/SG_HI/sgLv → ONE key BAL.odds {cut,lo,hi} + oddsLv() (jbal.js); words from KIT_ODDS only. Behaviour change: none (word/step identical for o = −20…130 step .5 and NaN/null).
+- F3 move: 326 typed effect amounts in 42 modules → BAL.eff (dev/build/jbaleff.js, after jbal.js); proof dev/measure/one-core-eff-same.js (AST identical with the values put back). j10 / j29 amounts left for review/staff-root (same files).
+- coregates G1: the "frozen list grew" check now compares only the kinds the live list counts (new kinds amt/sw/sc/k/ladder are a new count, not growth).
+
+### 3b. CONCEPT TABLE (whole-game scan, 119 ladders + 29 shadow pairs + BAL-copy tables; agent pass, file:line on main 4719d424)
+OPEN DISAGREEMENTS for Foreman B (two live copies with different numbers; unifying changes what the player sees — each needs the owner ruling named or a "live wins" pick per place):
+# ONE CORE duplicate-rule hunt: concepts with more than one number source
+
+Worktree: /home/user/wt/ocd (branch review/one-core-dup, HEAD 4719d424). Read-only pass. Assemble order is from dev/build/assemble.py; for a top-level `function X` defined twice, the LAST one in that order is live.
+OD = origin/claude/cung-tuong-mong-handover-hj0h8w:dev/OWNER_DECISIONS.md (line numbers). VP = dev/kit/VANPHONG.md.
+All paths are under dev/build/ unless noted. "Dead" = shadowed or overridden copy; it runs nowhere.
+
+Counts: 119 ladder lines. 64 lines belong to the 29 multi-copy concepts in section A (several of those concepts were found beyond the inputs), 30 lines are single copies with no BAL key (section B), and 25 lines are UI only or not a rule (section C).
+29 shadowed-function pairs/triples: 13 hold rule numbers that differ (birthRisk, npcAct, oanMonth, rivalsBuoi, sentPen, confessRisk, bribeServ, danger, fillSeats, a67init, chEnd67, a67Month, end67). The other 16 are UI or have the same numbers.
+2 of the 3 "typed table = BAL table" hits were found: jhc.js:39 and jexam.js:270. The third, `[0,18,20,22,24,24]` in jexam.js, is not in the current file; only BAL.ex.srvBar jbal2.js:17 holds it.
+
+## A. Concepts with 2+ copies (most copies first)
+
+| concept | places (file:line + value) | existing BAL key (or none) | disagree? (which values) | live value | owner ruling (OD line or none) | proposed ONE BAL key | behaviour change if unified (yes/no + why) |
+|---|---|---|---|---|---|---|---|
+| Maid / servant "Lòng" (loyalty) thresholds | rule ≥70: j8.js:42, j8.js:56, j14.js:3, j24.js:55, j32.js:4, j34.js:27, j40.js:54, j43.js:55, j70.js:166, j70.js:169, j70.js:323, j70.js:331, j96.js:181, jaudit.js:66 · rule ≥60: j8.js:281, j8.js:331, j22.js:16, j29.js:65, j43.js:54, j70.js:185, jtin.js:8 · ≥55 j24.js:33 · ≥50 j21.js:76, jroute.js:80 · <45 j8.js:382 (maid may leave), j15.js:63 (chip), j19.js:86 (hot) · <40 j83.js:225, j83.js:250 · <35 j24.js:35 · <30 j24.js:75, j29.js:62, jface.js:250 · words: jsgame.js:127 sgLoyW 70/50/30 · colour: jk3.js:57 ≥60 g / <45 r | partial: BAL.mood.maidHi 70 (jbal2.js:283), BAL.mort.maidLoy 40 (jbal2.js:164), BAL.dbLoyal 55 (jaudit.js:43) | yes: the word ladder (70/50/30) and the colour ladder (60/45) do not match the rule tiers. "Trusted" is 70 in some rules and 60 in others | every copy is live in its own rule | none | BAL.loy {trust:70, close:60, warn:45, low:30, words:[30,50,70]} | no for the rules if each keeps its own tier key; yes for the words and colours (one ladder) |
+| Thiện cảm ("quý") word / colour ladder | j21.js:19 affW −60/−30/<−10/≤10/<30/<60 (words Thù/Ghét/Lạnh nhạt/…/Thân/Thân thiết) · jhc.js:13 quyW ≤−30/<−10/≤10/<30/<60 · jts.js:110 tsQuy ≤−30/≤−11/≤10/≤29/≤59 · colour ±10: j21.js:22, jk2b.js:146, jkrel.js:46, j72.js:448 · j19.js:86 HH ±20 · j42.js:345 servant ≥30 g / <0 r · jstaff.js:126 Thái hậu 30/0 · jstaff.js:128 Hoàng hậu ≥10/>−10 · j68g.js:69 Thái hậu words 50/20/−10 · j68f.js:100 v.th ≥40 "quý" · j68h.js:63 rumour by S.th 10/40 · related: BAL.voice warm 40 / cold −25 (jbal2.js:420) | none for the word ladder (VP:69 is the wording canon) | yes: affW has 7 words with −60 and banned words ("Thù", "Lạnh nhạt", "Thân"); quyW and tsQuy match VP:69; the TH and HH lines use 50/20/−10, 30/0, 10/−10 and ±20 | affW is LIVE at j21.js:22 (feel), j24.js:86 and jk2b.js:146; quyW at j22.js:48 and jk2b.js:1046; tsQuy in jts | OD:247 (levels Ghét/Không ưa/Bình thường/Có cảm tình/Quý mến/Thân thiết everywhere), VP:69 cuts −30/−10/10/30/60 | BAL.quyLv [-30,-10,10,30,60] (+ the words in VP) | yes: affW callers change words (−60 "Thù" becomes "Ghét", 30–59 "Thân" becomes "Quý mến", "Lạnh nhạt" becomes "Không ưa"); the TH/HH lines change cut points. This is the owner's rule |
+| Age bands (adult, art and display) | owner's 4 bands: j35.js:3 band4 26/36/51 (+BAND4N j35.js:4), j66.js:23 pidBand 26/36/51, jkc.js:654 kcBand 26/36/51 (+KC_AB a18…a51), j17.js:37 emperor ≤25/≤35/≤50 · different: j3.js:14 eunBand 28/40/52 · j28.js:7 ageBandOf 26/36 (3 bands; 36+ merged) · jimg.js:37 MEBANDS [18,26,36,51] picked by NEAREST (jimg.js:40) · j17.js:33 consort ≤35/≤50 · j17.js:34 maid ≤35/≤44 · j17.js:39 official ≤35/≤50 (man >50 old) · j17.js:38 Thái hậu ≤55 · j25.js:92 age>35 womid | none | yes: eunuch faces 28/40/52; ageBandOf has no 51+ band; jimg puts ages 23–25 in the 26 band, 32–35 in the 36 band and 44–50 in the 51 band; maid art switches at 45, not 36/51 | each is live in its own picker | OD:567 ART RULE: 4 bands 18–25/26–35/36–50/51+ | BAL.ageBand [26,36,51] (+ BAL.srvAge.mama for the maid→mama art) | yes for j3 eunBand, j28 ageBandOf and jimg MEBANDS (some ages get a different face/figure); no for band4, pidBand, kcBand and the j17 emperor band |
+| Đức tiers (monthly drift, words, page) | j3.js:109 player ≥60 TH +1(+2 nhantu) / <20 −1 · j8.js:443 NPC ≥60/<20 · j85.js:145 ≥60/<20 TH+HH ±1 · j85.js:147 staff Lòng ≥70/<25 · j85.js:79 ducWord 80/60/40/20 · j85.js:82 colour <40 r / ≥60 g · j85.js:164 "Thang Đức" page 80/60/50/20 (+70/25) · j19.js:86 duc<50 hot · jlogsync.js:136 ≥60 | partial: BAL.hhDuc 50, BAL.hhDucHeir 40, BAL.ducFree 50 (jbal.js) | yes: ducWord makes 40–49 "thường" while the page shows 20–49 "bạc đức" and 50–59 "đủ Đức". Also j3.js:109 and j85.js:145 BOTH run each month (monthTick, then the v85Month wrapper j85.js:152), so the player's Thái hậu gets ±1 twice | all live | none | BAL.ducLv {hi:80, good:60, staffUp:70, staffDown:25, low:20, words:[20,40,60,80]} (keep hhDuc 50) | no if the values are copied as they are; yes if the double monthly TH drift is removed or the word ladder is aligned with the page |
+| NPC Tâm cơ (wit) tiers | j40.js:19 tc≥30 · j40.js:20 tc<35 · j40.js:49 tc<30 · j40.js:52 plan delay ≥60→2 / ≥35→1 · j40.js:54 <35 +15 / ≥70 −8 · j43.js:43 mistake roll ≥60→12 / ≥30→18 / else 20 · j43.js:55 = j40.js:54 · j51.js:35 ≥30 · j51.js:36 <35 · j70.js:127 ≥60 · j70.js:129 ≥60 · j70.js:165 <35 +12 / ≥70 −8 · j70.js:169 <35 +12 / ≥70 −8 | none (BAL.tc j53.js:18 is the kids' tâm cơ growth) | yes: the low cut is 30 in some places and 35 in others; the "spot" bonus is 15 in j40/j43 and 12 in j70 | all live | none | BAL.wit {lo:30, mid:35, hi:60, top:70} | no if copied as they are |
+| Sủng word ladder | j24.js:91 70/45/25 · j68f.js:100 55/30 (cao/vừa/thấp) · j68g.js:74 60/35/15 · j68h.js:62 rumour <30 / ≥55 · jk2b.js:148 60/30/10 (Sủng ái/Để mắt/Biết mặt/Chưa để ý) · jkc.js:277 and jkc.js:596 60/30 (rất cao/khá/ít) · related: BAL.voice.aiPhi 40 (jbal2.js:420), BAL.visit.minSung 20 (jbal2.js:199) | none | yes: 5 different cut sets (70/45/25, 60/35/15, 60/30/10, 55/30, 60/30) | all live | none (VP has no Sủng ladder) | BAL.sungLv [10,30,60,80] + one word list in VP | yes: the words shown for the same Sủng differ by screen today |
+| Odds word ladder (Liều … Nắm chắc) | j1.js:71 word() 91/81/66/56/46/31 · j79.js:187 kitOddsLv same · jsgame.js:196 SG_LO/SG_HI [5,31,46,56,66,81,91]/[30,45,55,65,80,90,95] · jsgame.js:197 sgLv same · word lists: j79.js:184 KIT_ODDS, j13.js:59 LADW, j19.js:26 oddsChip map · j8.js:305 nx() step 3/2/1/0 → Rất chắc…Khó (its own step→word table) | none | no on the cuts (all 31/46/56/66/81/91); j8.js:305 is a separate step→word table that never gives Liều or Nắm chắc | 31/46/56/66/81/91 | VP:64 words; OD:221 (ladder only for the act's own odds) | BAL.odds {cut:[31,46,56,66,81,91], lo:5, hi:95} + one word list (KIT_ODDS) | no (same numbers); j8 nx stays as it is unless it is moved to cut→word |
+| Night score tone (warm / normal / cold) | jne.js:18 BAL.nightEnd warm 6 / normal 3 · jne.js:225 NT_TONE typed ≥6/≥3 · j8.js:311 night text ≥6/≥3 · j75.js:140 NPC night grade ≥6/≥3 | BAL.nightEnd.warm / .normal | no (all 6/3) | 6/3 | none | BAL.nightEnd.warm / .normal (already there) | no |
+| Servants per rank (household cap) | j10.js:5 capOf NPC: <4 [1,1], 4 [2,1], 5–6 [3,2], ≥7 [4,2] · jpromo.js:20 BAL.promo.cap player [[1,1],[2,1],[2,2],[3,2],[3,3],[4,3],[4,4],[5,4]] (used by the jpromo.js:37 wrapper) · jstaff.js:27 Thái hậu [4,2] | BAL.promo.cap (player only) | yes: player and NPC tables differ from rank 2 (player [2,2] vs NPC [1,1]; rank 7 [5,4] vs [4,2]); TH [4,2] is typed | player BAL.promo.cap, NPC capOf, TH [4,2] | OD:1148 (+1 per rank OK, hold lifted); OD:1155 (owner: 5+4 "far too many", wants a moderate ceiling; pending); OD:1134 (4+2 proposal, not ruled) | BAL.staffCap {player:[…], npc:[…], th:[4,2]} | no if each table is copied; the owner still has to choose the ceiling (OD:1155) |
+| Servant hire price (Nội vụ phủ) | j10.js:63 label "Bạc -20" + 2× S.bac<20 · j15.js:64 label "Bạc -20" · j29.js:32 and j29.js:33 NPC fill bac≥20 / −20 · j29.js:36 fx {bac:-20} + log "Bạc -20" · j29.js:37 S.bac<20 · j10.js:16 dead fillStaff copy | none | no (all 20) | 20 | none | BAL.hireBac 20 | no |
+| Child age bands | j17.js:16 kidBand ≤2/≤6/≤12 (face art) · j73.js:12 KIDBANDS [4,9,14,20] + j73.js:13 kidBandOf ≤6/≤11/≤16 (figure art) · j53.js:49 tâm cơ growth band <3/<6 · BAL.mortx.youngAge 6 (jbal.js:183) · <16 = child in j71.js:205, j71.js:208, j71.js:220 · BAL.age.betroth 16 | partial: BAL.mortx.youngAge, BAL.age.betroth / matchShow | yes: the face band changes at 12 but the figure band changes at 11/16 | each live | none | BAL.kidBand [3,7,12,16] (one ladder for face, figure and child rules) | yes: the face and the figure would pick the same band (a different picture for some ages) |
+| Adult minimum age 18 | jage.js:4 AGE_MIN 18 (raises any adult under 18) · typed under 18 (now overridden): j3.js:19 newMaid 16+R(7), j10.js:17 servAge maid 16+R(10), j17.js:3 maid ≥16, BAL.cmaidx.age 16 (jbal.js:185, jcmaid.js:46), BAL.mline.eyeAge [16,29] (jbal2.js:210) · ≥18 typed: j17.js:9, j42.js:201, j42.js:207, j42.js:417, j88.js:78 · start ages 18+R(n): j2.js:5, j8.js:22, j27.js:55, j42.js:41, j54.js:36, j55.js:121, jkc.js:131 | none for 18 (BAL.age.wed 18 means a different thing: a child's wedding age) | yes: 16 in five places, but jage lifts every adult to 18 (the 16s are dead numbers; eyeAge lower bound 16 never applies) | 18 | OD:104 (tuyển tú ages 18+); jage.js:1 header "luật của sếp" | BAL.age.adult 18 | no (jage already enforces 18); cleaner if the 16s read it |
+| Ma ma / old-servant age 45 | BAL.srvAge.mama 45 (jbal.js:51; ma ma retires: j42.js:212, j42.js:324, j42.js:339) · j3.js:13 maidSrc old && age≥45 (old-maid art) · j17.js:34 maid art = mama band from 45 (≤44) · j25.js:76 and j25.js:77 eunuch drops "Tiểu" at age ≥45 | BAL.srvAge.mama | value agrees (45) but means 2 things: retirement age (BAL) vs "looks old / is called old" (art, names) | 45 | none | keep BAL.srvAge.mama + add BAL.srvAge.old 45 for art/names | no |
+| Oán word ladder | BAL.oanLv [5,20,45,75] (jbal.js:2) · jhc.js:39 window.oanW reads it, typed fallback [5,20,45,75] · j21.js:20 oanW ≤10/<30/<60 (4 words, dead: jhc assigns window.oanW at load) · j21.js:22 oán colour >10 r | BAL.oanLv | yes: j21 copy 10/30/60 (dead) vs 5/20/45/75 | BAL.oanLv | VP:72 | BAL.oanLv | no (j21 copy is dead); drop it and the jhc fallback |
+| Childbirth risk (base, age, clamp) | j8.js:346 (dead) base 1, suc<40 +3, (age−30)×.5, doctor −2, arts −1.5, anthai −1, clamp .5–60 · j32.js:3 LIVE base 9, suc<40 +4, 30–35 ×.5 then >35 ×3, doctor −5, arts −3, anthai −2, loyal maid −2, midBribe +10, clamp 1.5–60 · jbal.js:202 wrapper clamp 1.5–60 + BAL.later/birthAdd · jbal2.js:67 floor BAL.birthMin 8 · j35.js:25 display "(ag−35)×3" | partial: BAL.birthAdd 2, BAL.later 6, BAL.birthMin 8 | yes: dead j8 copy; clamp 1.5 typed twice but BAL.birthMin 8 is the real floor | j32 + wrappers, floor 8 | none | BAL.birth {base:9, lowSuc:4, age1:30, age2:35, k1:.5, k2:3, doctor:5, arts:3, anthai:2, maid:2, bribe:10, max:60} + birthMin | no if copied as they are (the 1.5 clamp never matters under the floor of 8) |
+| Monthly oán fade | j9.js:11 (dead) −2 · j28.js:68 LIVE −2×persF(forgive), player S.ro −2 | none | no (base 2) | 2 | none | BAL.oanFade 2 | no |
+| NPC harm-act weights | j8.js:397 (dead) accuse 6, vp 3/0, musk 6/3, catswap 3/1, k* 2/1, trip 2, frame 1, poison 1, rumor 2, spy 2, bribe 1, block 1, plant 3 · j24.js:6 (dead) and j28.js:60 (LIVE, ×persW) the same table: accuse 6, vp 3, musk 4, catswap 2, k* 2, takeaway 2, pushp 1, trip 3, frame 2, poison 2, rumor 3, spy 3, bribe 2, block 2, plant 3 · band gates j24.js:3 BANDS [30,60,80] | none | yes, dead j8 vs live | j28 table | none | BAL.npcActW {…} + BAL.dangerBand [30,60,80] | no |
+| Origin-road finale (cut + reward tier) | j67.js:107 (dead chEnd67 v1) sum ≥1 / ≥−1 · j67.js:1779 LIVE chFinale67 sum ≥2 / ≥−1, reward tier typed 3/1/−1 · jbalroad.js:16 BAL.road.finTier {win:3, mid:1, lose:−1}, read at jroad.js:89 | BAL.road.finTier (tier only) | yes: finale cut 1 (dead) vs 2 (live); tier 3/1/−1 is typed again in j67.js:1779 | sum≥2 / ≥−1; tiers 3/1/−1 | none | BAL.road.finTier + BAL.road.finCut [2,-1] | no |
+| Rarity word (event weight) | j69.js:21 ow69Rare ≤6/≤9 · jk2b.js:638 kitRare fallback ≤6/≤9 (KIT_OW default 10) | none | no | 6/9 | none | BAL.rareLv [6,9] | no |
+| Sức word ladder | jthaiy.js:50 sucWord 70/50/30 · jaudit.js:108 60/30 (tốt/vừa/yếu) · related BAL.mood.need sucLo 30 / sucHi 80 (jbal2.js:283) | partial: BAL.mood.need.sucLo / sucHi | yes (70/50/30 vs 60/30) | each live | none | BAL.sucLv [30,50,70] | yes: jaudit words change for Sức 50–69 |
+| Side-chance word ladder (Rất thấp … Rất cao) | j1.js:75 chanceLvl 8/18/35/60 (chanceW j1.js:77) · j55.js:43 ccWord risk 30/15 (cao/vừa/thấp) | none | yes (8/18/35/60 vs 15/30, and its own words) | each live | OD:221 (side chances use Rất thấp/Thấp/Vừa/Cao/Rất cao) | BAL.chanceLv [8,18,35,60] | yes: ccWord words and cuts change (owner's rule) |
+| Man's tình gates / words | j22.js:13 tinhW 70/50/30/10 · gates: j22.js:23 ≥30, j22.js:24 ≥50, j22.js:25 ≥30, j22.js:48 ≥10 known / ≥50 colour, j42.js:398 ≥30, j42.js:399 ≥50, j42.js:402 ≥30, j42.js:408 ≥30, j42.js:418 ≥40, j42.js:435 ≥30, j42.js:448 ≥10, j24.js:43 ≥50, j24.js:45 ≥60, jmen.js:240 ≥50 | none | mostly the same (10/30/50); 40 and 60 appear once each | as typed | none | BAL.tinhLv [10,30,50,70] | no |
+| Chủ tin bands (cung-nữ road) | j42.js:323 chip <30 hot / ≥60 ok · j42.js:335 the same colour · rules: j42.js:110 ≥60, j42.js:113 ≥50, j42.js:198 and j42.js:199 ≥35, j42.js:231 <10, j42.js:232 <30 / <20, j42.js:275 <8, j42.js:278 <40, j42.js:289 ≥60, j42.js:419 ≥55 · HX text "dưới 10" j42.js:12 | none | the colour ladder (30/60) is typed twice; the rules use 8/10/20/30/35/40/50/55/60 | as typed | none | BAL.tinLv {lo:30, hi:60, out:10, up:35} | no |
+| Pet care word | jpetlife.js:20 BAL.pet.life.careOk 70 (careLapse 40) · jpet.js:221 petCareW ≥70 / ≥30 | BAL.pet.life.careOk | low cut 30 (word) vs careLapse 40 | 70 / 30 | none | BAL.pet.life.careOk + careLow | no (only the word for 30–39 changes if 40 is used) |
+| Room / stage tier by rank (UI) | j25.js:82 rank ≥5/≥3/≥1 · jsl.js:72 same | none | no | 5/3/1 | none | KIT const (not BAL) | no |
+| Harem size cap | j27.js:53 CAPC 16 (j27.js:54, j27.js:58) · j55.js:109 fallback 16 · j27.js:54 tuyển tú skips off-years at ≥8 live | none | yes vs owner: code 16, owner 20 | 16 | OD:1545 (harem cap 20, start ~12), OD:1541 | BAL.haremCap 20 (+ BAL.ttSkipAt 8) | yes: up to 4 more consorts (owner's rule) |
+| Seats per rank | jbal.js:52 BAL.seat {7:1,6:1,5:2,4:4,3:6} · j30.js:3 SEATCAP mirror (filled jbal.js:190) · jseat.js:2 comment lists "Quý phi 2, Phi 4, Tần 6" and calls the key BAL.seatCap | BAL.seat | yes vs owner: OD says Quý phi 1, Phi 2, Tần 3 | {7:1,6:1,5:2,4:4,3:6} | OD:1538 (canon: HH 1, HQP 1, QP 1, Phi 2, Tần 3) | BAL.seat {7:1,6:1,5:1,4:2,3:3} | yes: fewer seats (owner's rule; OD asks for a bot-measure first) |
+| Servant max rank by master rank | j14.js:31 srkMax maid ≥7→4, ≥4→3, else 2; eunuch ≥5→3, ≥3→2, else 1 · jstaff.js:26 Thái hậu maid 4 / eunuch 3 · related BAL.sp.head {maid:3, eunuch:2} (jpromsv.js:14) | none | no | as typed | OD:1149 (confirms the j14 values) | BAL.srkMax {maid:[[7,4],[4,3],[0,2]], eunuch:[[5,3],[3,2],[0,1]], th:[4,3]} | no |
+| Servant-trait rule numbers (shadowed) | sentPen j10.js:22 (dead) 15/−8/cap 25 vs j29.js:11 LIVE + tham −10/+3, trung +12/−6, nhat +6/−4, chuyen −12/+2, cap 30 · confessRisk j10.js:23 vs j29.js:13 (+tham 5) · bribeServ j10.js:26 cost 30 vs j29.js:15 cost 30 (tham 15), nhat −25, trung −10 | none | yes (dead vs live) | j29 | none | BAL.srvTrait {…} | no |
+
+## B. Single copy, no BAL key (ladder lines)
+
+| concept | place + value | existing BAL key | proposed ONE BAL key | behaviour change |
+|---|---|---|---|---|
+| Rhythm minigame grade | j5.js:29 hits ≥13→3, ≥8→2 | none | BAL.mg.rhythm [8,13] | no |
+| Faction standing word | j10.js:110 st ≥20 thân / ≤−20 thù (word + colour) | none | BAL.facRelLv 20 | no |
+| Kid care cost | j25.js:49 bac<10 (+label "Bạc -10") | none | BAL.kidCare.bac 10 | no |
+| Days → tuần | j31.js:5 day ≤10/≤20 (typed twice on one line) | none | BAL.time.tuanDays [10,20] | no |
+| Cung-nữ story step | j42.js:16 rank ≥3→3, ≥1→2 | none (RANKS index) | none needed (story goal) | no |
+| Clan relation word | j55.js:20 ±25 Đồng minh/Đối đầu | none | BAL.clanRelLv 25 | no |
+| Kid talent rumour | j68h.js:66 tal <40 / ≥65 | none | BAL.kidTalLv [40,65] | no |
+| Sports form word | j71.js:71 65/50/35 | none | BAL.formLv | no |
+| Virtue level tiers | j85.js:51 cong lv ≥5/≥3 (+prog ≥2) · j85.js:53 ngon lv ≥4/≥2 | none | BAL.virTier | no |
+| Handmade work quality tier | j85.js:57 q 25/45/65/85 | none (BAL.wk holds material numbers) | BAL.wk.qTier | no |
+| Voice minigame idle time | jtd.js:199 lv ≤1 6500 ms / ≤3 10500 ms | none | BAL.td.idle | no |
+| Lifespan word | jmort.js:46 tho 40/60/75 | none (BAL.mort has the dice) | BAL.mort.thoLv | no |
+| Wedding-day auto odds | j92.js:423 unknown 0→91, ≤1→70, ≤3→55, else 40 | none | BAL.wd.autoOdds | no |
+| Succession ending | j99succ.js:142 an ≥5 / q ≥6 | none | BAL.succN.end | no |
+| Veil craft tier | jveil.js:92 q 14/10/6 | none | BAL.veil.tier | no |
+| Lost-item grade by price | jlost.js:42 200/100/40 | none (BAL.priceTier holds prices, not grade cuts) | BAL.lostGrade | no |
+| Rumour heat word | jroute.js:29 15/35/60/80 | none | BAL.route.heatLv | no |
+| Kid health word | jht.js:225 hp <35 / <60 | none | BAL.kidHpLv | no |
+| Exam tier by target rank | jexam.js:35 to ≤3→0, ≤5→1, else 2 (only the BAL comment jbal2.js:9 says it) | none for the cut (BAL.ex.bar is indexed by it) | BAL.ex.tierTo [3,5] | no |
+| Luxury reputation tick | jlux.js:114 lv ≥3→2, ≥2→1 | none (BAL.lux has repMax/repOn) | BAL.lux.repLv | no |
+| Reign faction trust word | jreign.js:396 60/35/15 | none (BAL.rg.tr0 30) | BAL.rg.trLv | no |
+| "Nguy hiểm chung" chip | jts.js:149 ≥30 hot / <10 ok (the NPC rule at jts.js:140 uses 35) | none | BAL.tsDanger {hot:30, act:35} | no |
+| Summon gain | jts.js:225 raw 8/5/3 → Sủng 4/3/2/1, Ân 3/2/1 | none | BAL.tsSummon | no |
+| Minigame raw → odds step | jsgame.js:199 raw ≥7 +1, ≤3 −1 | none | BAL.sg.step [3,7] | no |
+| Perk wording | jdh.js:71 <20/<30 · jdh.js:72 ≤5/≤8 | none | none (text for perk values) | no |
+
+## C. UI only / not a rule (one line each)
+
+- j37.js:2 real clock hour → title art (11/18). UI.
+- j60.js:68 frame metal colour by rank (4/2). UI.
+- j79.js:9 number sign format. UI.
+- j93.js:194 sparkle size by grade. UI.
+- jtd.js:129 voice-game result text/colour. UI.
+- jlant.js:42 lantern grid columns. UI layout.
+- jload.js:64 loading time text (20/45/90 s). UI.
+- jfx.js:112 season sprites by month. UI.
+- jtoil.js:93 segment-distance maths. Not a rule.
+- jtime4z.js:11 3→4 buổi save migration. Not a rule.
+- Sign → colour/word (x>0 g / x<0 r), 15 lines: j67.js:99 (pool index), j67.js:110/220/1781/1824, j67.js:158/1750 (done = sign), j67.js:160/1753, jroad.js:90, jroad.js:91–93, jk3.js:54, jwhy.js:109, jkrel.js:109, jtabs.js:92, jmcal.js:94, jsgame.js:291, jmood.js:132, jmood.js:133, jemoact.js:495. UI.
+
+## D. Shadowed top-level functions (live = last in assemble order)
+
+| function | dead copy | live copy | numbers that differ |
+|---|---|---|---|
+| curtain | j3.js:124 | j18.js:17 | 650 ms (dead); live calls dawn()/buoiShift(). UI |
+| pastHTML | j3.js:140 | j32.js:40 | live shows 12 lives. UI |
+| over | j3.js:141 | j32.js:32 | no rule numbers. UI |
+| birthRisk | j8.js:346 | j32.js:3 | see the "Childbirth risk" row (base 1→9, suc +3→+4, doctor −2→−5, arts −1.5→−3, anthai −1→−2, clamp .5→1.5, +age >35 ×3, +maid −2, +bribe +10) |
+| npcAct | j8.js:397, j24.js:6 | j28.js:60 | see the "NPC harm-act weights" row; j24 = j28 table without persW |
+| oanMonth | j9.js:11 | j28.js:68 | 2 → 2×persF(forgive) |
+| houseName | j9.js:17 | j27.js:40 | none (wording) |
+| relHTML | j9.js:92 | j21.js:29 | none (UI) |
+| rivalsBuoi | j9.js:140 | j24.js:12 | dead: want×.04, .25/.4, ghen 60 · live: band chance [0,.03,.04,.05]×2 range, guardWarn ×.5, ×BAL.hz; shield ×.5 and Hung ×1.5 shared |
+| fillStaff | j10.js:15 | j29.js:30 | same (20 bạc) |
+| sentPen / confessRisk / bribeServ | j10.js:22/23/26 | j29.js:11/13/15 | see the "Servant-trait" row |
+| cardH | j6.js:10 | j19.js:39 | same odds clamp 5–95. UI |
+| tuoi | j17.js:14 | j35.js:26 | live adds the band label. UI |
+| buoiShift | j18.js:18 | jbuoi.js:47 | UI timings (1000/150 → 2000/1700/260 ms) |
+| danger | j24.js:4 | j28.js:58 | dead trait mods Hiểm độc +10 / Hiền lành −15 / Nhu mì −10 → live persF (ghen ×1.15, dang, harmGate cap 29) |
+| mapSpots / mapHTML | j26.js:5/7 | j27.js:60/66 | live zoom 2.5 on 1-page view. UI |
+| fillSeats | j30.js:11 | j34.js:52 | dead weighted pick by SEATCAP; live opens a contest (candOK) |
+| a67init | j67.js:74 | j67.js:1762 | v2 1→3; side-story timer nx 8+rI67(6) → 999 + noside:1 (side stories off) |
+| msStart67 / msCheck67 / obj67 / hint67 | j67.js:87/89/213/187 | j67.js:1790/1792/1815/1811 | small index changes only |
+| chEnd67 | j67.js:101 | j67.js:1782 | dead holds the inline finale (sum ≥1); live defers to chFinale67 j67.js:1778–1779 (sum ≥2) |
+| end67 | j67.js:158 | j67.js:1750 | live adds ign (−3 for an ignored arc) |
+| a67Month | j67.js:177 | j67.js:1801 | dead 14 / 2 / 3 / 6 timers → live 1 / −3 |
+| panel67 | j67.js:218 | j67.js:1819 | UI |
+
+Typed copies of BAL tables: jhc.js:39 `[5,20,45,75]` = fallback of BAL.oanLv (drop it). jexam.js:270 `(B.srvCd||[1,1,1,2,2])` = a truncated fallback of BAL.ex.srvCd [1,1,1,2,2,3] (jbal2.js:17) (drop it). `[0,18,20,22,24,24]` is not in jexam.js at HEAD; only BAL.ex.srvBar holds it.
