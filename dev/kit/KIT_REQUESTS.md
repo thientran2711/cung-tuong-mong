@@ -24,3 +24,8 @@ Thợ báo "KIT REQUEST" trong báo cáo → điều phối ghi vào đây → g
 |---|---|---|---|---|---|
 | 17/11 | night-final #6 (session_01UV1SzkcuhnxeSAywiQC2hz) | The picked card's name tag (`.kcf-pick .kcf-tag.kcf-tag-l{top:79%}`, KIT §48 kitNameRank on the tray) sits ON the jade tassel by design ("over the tassel"), so the tassel cord runs through the rank word (e.g. "Quý nhân"). Needs a kit answer: tag below the tassel end, or the tassel behind a paper backing. Not night-final code (jflip.js / §48 from main) — not changed here. | jflip.js final still, Fold 755x1000 + iPad 1180x820 | kit keeper | open |
 
+
+## 17/11 — KIT REQUEST — live v3 frame at phone portrait 390x844: info column too narrow for option cards (night-final-r1 reviewer)
+| date | from | need | where | who | status |
+|---|---|---|---|---|---|
+| 17/11 | night-final-r1 reviewer (session_01964izDUxnFjybggNj6Ukev) | At 390x844 (secondary device) the live v3 frame (`kszlive`, lay L) gives the figure most of the width and the right info column only ~146 px; compact option cards (§43, `button.ka.kart.kopt`, 84 px picture) are then 146 px wide: name wraps per word, the odds ladder chip and the Được/Mất values run past the card edge. Pre-existing on live main 6c4f21c3 (there the name is squeezed to 0 px); §43.0a makes it better (name 30 px) but cannot fix the column width. Fold 755x1000 + iPad 1180x820 are fine. Ask: a kit rule for the v3 frame at phone width (figure column narrower / option cards below the figure, full width). | kitFrameLive3 / KIT_SIZE.v3 (jksize.js), every person/event dialog with options at ≤ 420 px wide | kit keeper | open |
