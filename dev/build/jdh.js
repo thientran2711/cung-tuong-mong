@@ -124,7 +124,7 @@ function addGains(p,o,keys){if(!o||typeof o!=="object")return o;let c=null;for(c
 /* liking from consorts: affAdd (j9, every thiện cảm change); x (her or a consort) likes y (the wearer) more */
 (function(){if(typeof affAdd!=="function")return;const a0=affAdd;affAdd=function(x,y,n){try{if(n>0&&x&&y&&x!==y&&(x===S||(typeof rivals==="object"&&rivals.includes(x)))){const d=dhB(y,"gHau");if(d)n=n+fr(n,d)}}catch(e){}return a0.call(this,x,y,n)}})();
 /* LUCK (Phúc khí): lotB (j13, the one odds modifier of every rolled act, hers and NPCs'); never conception; the Quẻ tag stays the quẻ only */
-let NOLUCK=0;
+let NOLUCK=0;(window.THIN_REG=window.THIN_REG||[]).push(["NOLUCK",()=>NOLUCK,v=>{NOLUCK=v}]);/* per-player state for the co-op host (jcoopthin TH.reg) */
 (function(){if(typeof lotB!=="function")return;const l0=lotB;lotB=function(p,dom){const r=l0.apply(this,arguments);try{if(!NOLUCK&&dom!=="Con cái")return r+dhB(p,"phuc")}catch(e){}return r};
  if(typeof lotTag==="function"){const t0=lotTag;lotTag=function(){NOLUCK++;try{return t0.apply(this,arguments)}finally{NOLUCK--}}}})();
 /* conception: conceiveCh (the final chance, after every multiplier) +v points, only when a chance exists */
