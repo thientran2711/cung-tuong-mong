@@ -1850,6 +1850,11 @@ height as long as the options keep at least min(their content, 42 % of the body,
 scrolls INSIDE `.kpmain` (soft top shadow `.kdsh` once scrolled, same as the options). Nothing is ever clipped: a text taller than the frame is reachable by scrolling it, at every viewport.
 Person dialogs (`kdper`, figure column on the left, 32.7) are not capped: their whole right column scrolls (`.kdpall`, pcard-actrow) with the person pinned on the left.
 Dialogs without `.opts` (notices, results, news, rules, info) already scroll their whole `#mb` (§8).
+### 32.5c TEXT (+ COUNTDOWN CHIP) STAYS ABOVE THE OPTIONS — event dialog with a picture band, whole-column scroll (kit-size-10, night-final KIT REQUEST "clock chip off screen on Fold")
+Rule: in ONE dialog the order down the right column is always **picture band → question text (+ the §69 countdown chip of a timed choice) → option cards**, on every device. A timed choice shows its clock without scrolling.
+Root cause (found by the scan, not only the chip): `.kdpall` (32.5, whole column scrolls) forced a 2-row grid, but a dialog with a picture band (`.kdpbanner`, 32.6/50) has THREE rows (band, text, options). The options took row 2, so the text fell into an implicit row 3 BELOW the options (412x1058: chip at y 971–990 in a 285–777 body; 390x844: y 1298; the options also pushed first). Whole family: every event dialog that has a band + figure and goes `kdpall` (narrow right column / long option list), with or without a clock.
+Fix, one place (jk4 `#kit-dp-all`): `.kdper.kdpall.kdpbanner>#mb{grid-template-rows:max-content max-content max-content}` and its `.opts{grid-row:3}`. No private CSS in any caller, no per-screen variant; a timed choice (night-final `jnf` flip choice, later ones) only puts `kitCoopClock(...)` in the text (`<p class="nfcd">`). Limit: the chip is above the options at the top of the column; if the player scrolls down to read the last card it scrolls off like the text (the figure column stays pinned).
+Sample: kit page §8 button "VIỆC CÓ ĐỒNG HỒ" (demo numbers `BAL.kitpage.clock`). Test: `node dev/test/timed-choice-fit.js <url> <outdir> [WxH,…]` (755x1000, 412x1058, 1180x820, 390x844; 3 variants: sample / 2 options / no chip): text block above the options, chip inside the screen and inside the dialog body without scrolling. Before (main 744b80e7): 10 of 12 cases FAIL.
 Family scan: `node dev/test/dlg-clip.js <url> <out.json> [WxH@dpr,…]` opens every kit modal and every PEND event dialog twice (own text, +long text) at the 5 sizes and FAILS on any text cut off by a clipping ancestor or a long dialog with no scroll area. Sample: kit page §8 "VIỆC DÀI".
 
 ### 32.6 PEOPLE ON THE PICTURE — event stage (owner 11/15, dev/owner-shots/1115-figs-on-scene.jpg) — `kitEsOvFit` (jk4)
@@ -3740,6 +3745,7 @@ Test: `node dev/test/buoi-transition.js <url> <out>` (6 viewports). Kit page sam
   hảo hữu vào, không phải chạm gì"). Guest (`you:"b"`) row 1 reads "Nhận lời mời ✓". The kpnote under the buttons adds "Muốn thử một mình: mở đường
   dẫn trên máy khác". When the friend joins the lobby plays `sfx-join` + `kitLine("Hảo hữu đã vào phòng. Cuộc chơi bắt đầu.")` and hands over to the
   shared game at once (existing COOP "both" → "start"). Sample on the kit page "§69". Test: `node dev/test/coop-invite-ux.js`.
+- §69.4 CLOCK CHIP IN A TIMED CHOICE DIALOG (kit-size-10): `kitCoopClock({left,len})` goes in the dialog text right under the question (`<p class="nfcd">`); the kit keeps text + chip above the options (§32.5c). A caller never positions, pins or restyles the chip. Sample: kit page §8 "VIỆC CÓ ĐỒNG HỒ".
 
 ## 78. PLACE ICON · kitPlaceIcon + HAPPENING MARK · kitHapMark (owner 16/11 Dư đồ split, review/act-dedupe) — `dev/build/jact.js`
 - `kitPlaceIcon(k, size=14)` → the kit icon set glyph (`ic()`, img/<n>.webp) that says what a place is FOR, class `.ic.kplic`, placed BEFORE

@@ -174,7 +174,8 @@ Object.assign(BAL,{
       trace:{bac:-10}}, /* silver to have the rumour traced */
  kitpage:{demo:{age:19,k:1,grey:{need:40,have:3,k:2,suc:10},/* §84 greyed-option sample (jgrey) */mapK:2,/* §85 Dư đồ sample khắc (jmapc) */tomb:{suc:10,duc:3},gift:{bac:20,hh:4,danh:2,th:1},study:{k:2,suc:15,bac:15},/* jksize sheet study cards */ask:{danh:5,sung:10,an:2},/* jkitpage night-ask sample */ev:{need:1,have:0}/* jgrey §84 need[] sample */},/* kit sample page demo option texts (jopic §6.2b) and slot age (j74) */
       wk:2,         /* kit sample page: the demo "· 2 tuần trước" age of a mood cause */
-      listen:{duc:1}},  /* kit sample page: the demo option "Nghe hết rồi mới định" gain */
+      listen:{duc:1},  /* kit sample page: the demo option "Nghe hết rồi mới định" gain */
+      clock:{left:22000,len:30000}},  /* kit sample page: the timed-choice demo chip (§69 + §32.5c): 22 s left of 30 s */
  diff:{bac:{de:1.5,vua:1,kho:.7}},   /* starting bạc × by difficulty (Dễ / Vừa / Khó) */
  m92:{srvY:{chuongsu:{sac:1},nuquan:{sac:1},mama:{sac:2}}},  /* Sắc of the servant-rank clothes: chưởng sự cô cô, nữ quan, ma ma */
  stealx:{hearMat:2},    /* Tai mắt she needs to hear that a consort stole another consort's night (jsteal) */
