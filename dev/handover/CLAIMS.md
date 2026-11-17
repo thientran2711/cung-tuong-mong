@@ -569,3 +569,4 @@
 | kit-ico-rank review r1 (opus; + ctm-rank Worker/D1 deploy verdict; renumber kitRank off KIT §86 = kitLearn of scenes-3) | review/kit-ico-rank-r1 | main s29 | session_01UV1Szh3wz6vc9DcUjfYN4f | RUNNING | 17/11 03:24Z |
 | presentation-wiring #2 (sonnet, opened by s28; base b0b972b97) | review/presentation-wiring | main s29 | session_01UV1SzhippoJhAJG9kpDYJP | RUNNING | 17/11 03:23Z |
 | newlife-reset review r1 (opus BIG save/state) of 631b8898 (worker archived) | review/newlife-reset-r1 | main s29 | session_01UV1Szj7gGyXgBXgvj6d6xG | RUNNING | 17/11 03:26Z |
+| fig-rank-match-r2 review (sonnet URGENT; manifests 656→1296 / 240→2112 + strict picker + guard; safe-first verdict per manifest) of 2d0f41c56 | review/fig-rank-match-r2-r1 | main s29 | session_01UV1SzgpLfyJgZdu2ie2XYZ | RUNNING | 17/11 03:27Z |
