@@ -60,7 +60,9 @@ const srv=http.createServer((q,r)=>{let p=decodeURIComponent(new URL(q.url,'http
  await F.evaluate(()=>{const kl=document.getElementById('kload');if(kl)kl.remove();try{localStorage.clear()}catch(e){}SLOT=3;const t=document.getElementById('title');if(t)t.hidden=true;/* a consort life (the flake: a random life could be a maid, isSrv, where the consort gate greeting does not apply) */window.__forceOrigin='thd';window.__nlInner=1;start();window.__forceOrigin=0;window.__nlInner=0;quiet=false;Q.length=0;const md=document.getElementById("modal");if(md)md.hidden=true;try{NLP=null}catch(e){}});
  await p.waitForTimeout(800);
  const R=await F.evaluate(()=>{if(window.__tsgRnd)Math.random=window.__tsgRnd;const out={rows:[],bad:[]};const B4=typeof B4L==='number'?B4L:BUOI.length-1,CH=B4-1;
-  const clr=()=>{Q.length=0;const md=document.getElementById('modal');if(md)md.hidden=true};
+  /* batch-s31b: jorder (review/learn-scene-fix) holds a new dialog while a scene runs or is queued (kmHold); scenes wait for a tap, so the
+     clean slate between checks also drops the scene queue (this guard tests khắc rules, not scenes) */
+  const clr=()=>{Q.length=0;try{KMQ.length=0;kmBusy=false}catch(e){}const md=document.getElementById('modal');if(md)md.hidden=true};
   const body=()=>{const M=document.getElementById('modal');if(!M||M.hidden)return null;return{t:(document.getElementById('mt')||{}).textContent||'',body:M.innerText.replace(/\s+/g,' '),opts:[...M.querySelectorAll('#mb .opts > button, #mb .opts button')].map(x=>({n:x.innerText.replace(/\s+/g,' ').trim(),dis:x.disabled}))}};
   const row=(id,ok,info)=>{out.rows.push({id,ok,info});if(!ok)out.bad.push({id,info})};
   const base=(bu,u)=>{clr();window.__walkSpill=null;S.out=0;S.confined=0;S.mg=0;S.dead=false;S.buoi=bu;used=u;S.j76carry=0;S.j76ck="";S.acPass={};S.acGreet={};S.acGreetNx={};S.acSkip={};S.acSeen={};S.suc=80;S.bac=500;S.place="home";S.visit={k:"home",people:homePeople(),talked:false,tk:{}}};
