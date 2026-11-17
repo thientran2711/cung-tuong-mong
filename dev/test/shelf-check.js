@@ -24,7 +24,7 @@ const sl=t=>new Promise(r=>setTimeout(r,t));
     spread:P.map(x=>+x[1].toFixed(2)).join(" ")};F(lo[1]<hi[1]&&shelfLvFor(lo[0],S)>=shelfLvFor(hi[0],S),"taste does not change how a room is seen");
    F(shelfTaste(lo[0])===lo[1],"taste not stable for one person");
    /* a fake frugal Thái hậu: ngự ban room → rebuke when the talk has reached her */
-   const ot=BAL.shelf.taste.spread,oo=BAL.shelf.th.o;BAL.shelf.th.o=100;const th0=S.th|0,q0=Q.length;BAL.shelf.taste.k=-1.5;/* her line far below: anything is too lavish */lo[0].shn={};shelfLook(lo[0],S,"test",true);shelfThRebuke();BAL.shelf.taste.k=.5;BAL.shelf.th.o=oo;
+   const ot=BAL.shelf.taste.spread,oo=BAL.shelf.th.o;BAL.shelf.th.o=100;const th0=S.th|0,q0=Q.length;const st0=shelfTaste;shelfTaste=p=>p==="th"?-1:st0(p);/* a frugal Thái hậu */lo[0].shn={};shelfLook(lo[0],S,"test",true);out.T.thLv=SHELF_LV[shelfLvFor("th",S)];shelfThRebuke();shelfTaste=st0;BAL.shelf.th.o=oo;
    const card=Q.slice(q0).find(q=>q.t==="Thái hậu quở");out.T.thRebuke=card?card.h.replace(/<[^>]+>/g,""):"none (thDead "+!!S.thDead+")";F(S.thDead||(card&&(S.th|0)<=th0),"Thái hậu did not rebuke a room too lavish to her");Q.length=q0;
    shelfOf(S).g=JSON.parse(kp);S.rank=rk}
   S.inv.push({k:"vongngoc",w:1});F(shelfWhyNot(S,S.inv[S.inv.length-1])!=="","worn / non-décor piece accepted");S.inv.pop();
