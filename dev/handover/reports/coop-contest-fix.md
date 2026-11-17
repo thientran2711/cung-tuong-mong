@@ -61,3 +61,19 @@ had a section-5 week stall that the base a3b5e963 did not show in 1 run — reru
 other player's played row says "tự chơi", no formula split, kit portrait ✓. dc 26/26, core 9/9, solo 6/6, coop-p2 (B1 skipped,
 pre-existing main bug) 35/35, coop-e2e 58/59 (1 random: week after rebirth), quickcheck PASS. Shots looked at (scratch): Fold host +
 iPad guest result card, same rows/order, friend row "Hảo hữu của ta — múa: 60 phần tự chơi" with its portrait.
+
+## HANDOVER (worker rolled over at ~40 % context, START_CTX ~4 %; owner rollover rule) — r3 task NOT started
+State: `review/coop-contest-fix-r1` @ db92d8de holds r2 (both reviewer items fixed). Reviewer §r2 (reports/review-coop-contest-fix-r1.md): FAIL on re-merge onto
+live main 744b80e7 — conflicts in j34 / j71 / j8. Successor's task (from s27):
+1. Fresh sparse worktree of review/coop-contest-fix-r1 (db92d8de); merge origin/main 744b80e7 (or newer live main).
+2. Jealousy = ONE core = main's `BAL.ghen.*` + `ghenN()`. Drop the branch's `BAL.fest.winGhen / fxGhen / giftGhen / ctGhen` (jbal.js BAL.fest) and every
+   read of them: j71 (solo C/FX/P paths + option texts "ghen +N"), j8 festival(), j34 contestEnd, jcoopcontest (applyRes ghenAll(BAL.fest.*Ghen), ccplay
+   option text, tgBuilt crowned guest ghenAll(BAL.fest.ctGhen)). Map each to the matching main BAL.ghen key / ghenN(); texts print the BAL value.
+   Update dev/test/coop-contest-core.js (it asserts BAL.fest values + a static no-typed-copy guard).
+3. j34 contestEnd: keep main's `seatHas` + the co-op crown through the seat rule (jcoopcontest's contestEnd wrapper records ctcRes; a crowned guest
+   takes rank 7 from ctcRes; jcoopworld toCanon writes the friend entry's queen back as rank 7 — check both agree with seatHas).
+4. Keep r2: rowsH7 played row names its player; applyRes keeps mg; j82 mg sub text; kpPeople wrapper (jcoopworld) + fEnt in who()/fName (jcoopcontest).
+5. assemble.py union (jcoopcontest before jlag2/jgrey/jcoopone); bash dev/site/build_site.sh.
+6. Tests: core gates (quickcheck), coop-contest (72; known flakes "3 guest Sủng +3" week drift, a section-5 week stall seen 2x on r2 — watch),
+   coop-contest-dc 26, coop-contest-core, coop-contest-solo 6, coop-p2 (B1 = PRE-EXISTING main bug: run a scratch copy with the B1 block `if(false)`,
+   never commit it), coop-e2e (1–2 random fails known), coop-one-world, quickcheck. Then SẴN SÀNG KIỂM <sha> to s27 + reviewer session_01UV1SziJoyYJ3o5iLXG8BuP.
