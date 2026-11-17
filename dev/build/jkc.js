@@ -79,7 +79,7 @@ function kcTitle(){return `Tiểu thư ${KCDAD[S.origin.k][1]}`}
 (function(){const p0=pMe;pMe=function(){const f=p0.apply(this,arguments);try{if(isKc()&&kcLore())f.rw="Tiểu thư"}catch(e){}return f}})();
 
 /* ---------- faces: every family member carries a figure identity (fid) from the existing pools (placeholders; §14 art list) ---------- */
-function kcPor(m,kind){try{const r=m.fid.split(":")[0];const L=(FIGIX[r]||{})[m.fid];if(!L||!L.length)return"";const f=figBest(L,r==="consort"?0:null,m.age);return f?figPath(kind==="fig"?(f.file||f.src):f.por):""}catch(e){return""}}
+function kcPor(m,kind){try{const r=m.fid.split(":")[0];const L=(FIGIX[r]||{})[m.fid];if(!L||!L.length)return"";const L2=r==="consort"?L:(typeof f88IsCT==="function"&&L.filter(f=>!f88IsCT(f)).length?L.filter(f=>!f88IsCT(f)):L);/* maid faces now also list t1–t8 consort-dress records: a khuê các / maid pick never takes one */const f=figBest(L2,r==="consort"?0:null,m.age);return f?figPath(kind==="fig"?(f.file||f.src):f.por):""}catch(e){return""}}
 function kcFace(m){if(m.r==="ty"&&S.maid)return pMaid();const f={src:kcPor(m),ini:(m.name||"?").split(" ").pop()[0],col:m.r==="cha"||m.r==="huynh"||m.r==="tm"?"#6a8aa0":"#b08a8a",rk:"off",rw:m.t};
  f.__kp=m;try{f.__kr=personRoleRank(m)}catch(e){}return f}
 function kcFreeFid(role,pref){const U=new Set(figUsed());const keys=Object.keys((FIGIX||{})[role]||{});const L=(pref||[]).filter(k=>keys.includes(k)&&!U.has(k)).concat(shuf(keys.filter(k=>!U.has(k))));const k=L[0]||"";if(k)figUsed().push(k);return k}
