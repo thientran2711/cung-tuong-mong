@@ -290,16 +290,16 @@ function tsDressHost(){return queenP()&&queenP()!==S?queenP():null}
 function tsLuxK(k){return typeof luxPiece==="function"?luxPiece(k):Math.round((IT[k]&&itm(k).pr||0)/5)}
 /* an empty Cài tóc / Áo slot = what she wears now (j92 wardrobe) */
 function tsDressFill(p,pickd){const P=Object.assign({},pickd);try{const w=wdOf(p);if(!P.hair&&w.tram&&IT[w.tram.k])P.hair=w.tram.k;if(!P.ao&&w.y&&IT[w.y.k]&&w.y.k!=="y_tang")P.ao=w.y.k}catch(e){}return P}
-/* makeup-lux (OD L1638): mk = the entrant's face of the day (a toilette record) — its level's xa xỉ joins the outfit's ONE total, judged the same way */
+/* makeup-lux (OD L1634/L1643): mk = the entrant's face of the day (a toilette record) — its look's xa xỉ and her pets' join the outfit total, judged the same way */
 function tsDressPts(p,pickd,th,mk){const T=TS_THEME[th]||TS_THEME.thanh,B=BAL.lux||{};const P=tsDressFill(p,pickd);let s=0,L=0;const vp=[];
  for(const [sl] of TS_SLOT){const k=P[sl];if(!k||!IT[k])continue;const it=itm(k);s+=T.tags.includes(k)?2:0;L+=tsLuxK(k);if(it.rk&&it.rk>rkOf(p)){s-=3;vp.push(it.n)}}
- let ml=0;try{if(mk&&mk.makeup)ml=toilLv(toilMk(mk)).lux}catch(e){}L+=ml;
+ let ml=0,pl=0;try{if(mk&&mk.makeup)ml=toilLv(toilMk(mk)).lux}catch(e){}try{pl=typeof petLuxOf==="function"?petLuxOf(p):0}catch(e){}L+=ml+pl;/* + pet (OD L1643: the event total = clothes + jewels + makeup + pet) */
  const R=typeof luxThemeRange==="function"?luxThemeRange(p,T):{lo:T.r?T.r[0]:40,hi:T.r?T.r[1]:120,bud:999};let st="hop";
  if(L>R.bud){st="vuot";s+=B.ctOver!=null?B.ctOver:-2;vp.push(`bộ đồ Xa xỉ ${L}`)}
  else if(L>R.hi){st="photruong";s+=B.ctShow!=null?B.ctShow:1}
  else if(L<R.lo){st="giandi";s+=Math.max(B.ctPlainMin!=null?B.ctPlainMin:-1,(B.ctFit)-(B.ctPlainK)*(R.lo-L)/Math.max(1,R.lo))}
  else s+=B.ctFit;
- return{raw:cl(Math.round(10*s/11),0,10),vp,lux:L,mkLux:ml,st,lo:R.lo,hi:R.hi}}
+ return{raw:cl(Math.round(10*s/11),0,10),vp,lux:L,mkLux:ml,petLux:pl,st,lo:R.lo,hi:R.hi}}
 function tsDressTotal(p,raw){return raw*4+Math.round(effSac(p)/5)+Math.round((p.tamco||0)/12)}
 /* the best set from the pieces at hand (smart pick: NPC by Tâm cơ, a loyal maid) — small search, top pieces per slot by theme */
 function tsDressBest(p,keys,th){const T=TS_THEME[th]||TS_THEME.thanh;const C=TS_SLOT.map(([sl,,fit])=>[sl,[...new Set(keys.filter(fit))].sort((a,b)=>(T.tags.includes(b)?1:0)-(T.tags.includes(a)?1:0)).slice(0,5)]);

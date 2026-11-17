@@ -596,9 +596,10 @@ No text over text: a pop (`kg82Pop`) replaces any live pop it would land on; a r
   `kinvItems`; tap = wear). Buttons: Mặc bộ này · Giữ đồ hôm qua. Verdict row (kitRows): hợp dịp / hợp phẩm / quá giản dị / quá phô trương / vượt phẩm /
   phạm tang. Hồi 2–4 TRANG ĐIỂM (canvas): the mirror of `mg-chai-bg` zoomed to fill the board, HER portrait in the glass (face from veil-fit),
   live marks only (gold dotted guides, ink stroke, powder bloom, rouge dots, closing ring) + the three sprites as the tool under the finger.
-  The clock of each hồi starts at the first touch. Result = kitRows (each hồi /100, Phần chơi, Tay nghề chip, Dung nhan, Mức điểm trang = `toilLvChips` "Dung nhan N" + "Xa xỉ N",
-  Cả bộ hôm nay = `kitLuxChip` of the ONE total + the day's verdict word, Hôm nay: who reacts how). The colour step shows the five-level ladder
-  (`toilLvRows` in `kitRows`, makeup-lux). No new part: kitRows / kitChip / kitLuxChip only.
+  The clock of each hồi starts at the first touch. Result = kitRows (each hồi /100, Phần chơi, Tay nghề chip, Dung nhan, Xa xỉ son phấn = `toilLvChips` (tier word chip + `kitLuxChip` "Xa xỉ N"; no beauty number),
+  Hôm nay: who reacts how). The colour step shows the five-look ladder (`toilLvRows` in `kitRows`, makeup-lux). No new part: kitRows / kitChip /
+  kitLuxChip only. The day's TOTAL xa xỉ display (Tư trang / room panel / Dư đồ, gold calligraphy label) is MAIN's kit part reading `luxTotal(S)` /
+  `luxParts(S)` and the window event `ctm-lux` (jlux).
 - Small CSS (`#toil-css`): `.toilw` two columns (portrait | slots + bag), one column under 640 px with a 110 px portrait beside the facts.
 - Face look all day (owner 15/11): one layer in the face-effects slot `kitFxLayers` (jk2b §7 — tall frame, small avatar, stage figures; same box as
   the picture, order portrait < makeup < scar < veil): `<img class="kmkl kmkl-dep|kmkl-diem">` = an SVG drawn from `img/toil-fit.json`
