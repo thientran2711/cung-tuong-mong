@@ -908,3 +908,25 @@ ROLLOVER = CONTEXT, NEVER 30 TURNS (owner OD:L1217; repeated by the owner 16/11 
 - Every takeover prompt you write MUST copy these three lines verbatim. Workers roll over too (owner 16/11 08:22Z s14, option 1): at START_CTX % + 25 % of the window, ceiling 60 %; a worker may finish if only push + report remain; it writes its handover in its report file and tells its coordinator, and the COORDINATOR opens the successor (never the worker).
 LIVE (art #4, C OK 07:35-07:44Z, uploaded ~07:50Z): b9 10 ev-toil-*; b10 9 ev-wk-* (cam hoa ky nau phanson phucthien theu thi y); b11 11 (tt2 tt3 vlcraft vlout vulan shop taintpick td1 thd1 plantpick opt-giu-chan-hoang-thuong); b12 3 (wk-thuchuc tt1 runner); b13 26 intro (all except G5 muoi-2 thd-h3); b7 11 q72 (already live/unchanged).
 OPEN FOR SUCCESSOR (C ROOT-3 orders, before acts): (1) 10 'Học thành tài' pictures img/scene-thanhtai-<k>.webp k=cam ky thi hoa vu y cong dung ngon hanh, portrait 3:4, 2 samples first (cong, cam) -> sheet to C, light rich daytime, face hidden, no text/out-of-era, neutral season; (2) redo ev-vlnvp (silk bolts/fabric samples on a tray, not a colour-swatch card); intro G5 (Ming/Han-style guards, no Qing fur caps), intro muoi-2 (no dragon motif on her robe; peony/cloud), intro thd-h3 (hanging painted landscape scroll / wooden screen instead of blank whiteboard); (3) acts (419).
+
+# #5 — art worker event-art #5 (17/11, session successor of #4) -> Foreman C ROOT-3
+PRIORITY #1 CHECK ('thanhtai|kitSkillArt|scene-learn'): OD 2 | ledger 0 | claims 4 | main 13 (jlevel.js:13 PAINT single file, kitSkillArt fallback) | review/* 0 — no per-subject picture existed. START_CTX ~3%.
+JOB 1: all 72 OK'd keys (b7, b9, b10 minus thuchuc, b11 minus tt1/runner/vlnvp, b12 3, b13 intro 26 minus G5/muoi-2/thd-h3) were already LIVE and md5-identical on the CDN (checked); nothing uploaded.
+JOB 2 "Hoc thanh tai" per subject, gpt-2-6, 3:4 768x1024 webp (<=245 KB), refs DoJfAENpcl + IfibTkptvE, face hidden, one season per picture, robe varied (pink only cong + dung).
+LIVE (C OK 17/11 07:51Z-08:03Z), img/scene-thanhtai-<k>.webp, all 200 on CDN:
+| key | creation | scene |
+|---|---|---|
+| cong | ovN5djI829 | spring, peony embroidery on hoop |
+| cam | 5jMPrsWKxe | summer lakeside, qin mid-melody, celadon |
+| ky | xSXilOTjfW | bamboo grove, won weiqi board, ivory-gold |
+| thi | mERxHPQhJQ | winter plum, partly rolled poem scroll (no script), sky blue (first try yiEc.. no: rgd6sP8xtc had script strokes, replaced) |
+| hoa | 9ZFM3MDNYZ | spring peach, finished painting, apricot |
+| vu | dtPq8K2XSL | autumn maple, sleeves flying, lilac |
+| y | ksp9j2m16B | herb room, mortar + pills tray, moss green |
+| dung | gOtA7DTSXO | spring pear blossom, hairpin, mirror shows no face, pale rose |
+| ngon | 4RQVGCV9Aa | autumn chrysanthemum, 3 listeners from behind (first try ksp9jcK16B had faces) , crimson |
+| hanh | 1leNlqCr4r | winter pine+snow, alms to old maid, saffron (first try JNfW4aZOq4 had a dragon on the robe) |
+JOB 3 redos LIVE (C OK 08:03Z): img/ev-vlnvp.webp u5YUjJNQLD (silk bolts, no swatch card); img/intro/G5.webp xSXiynXjfW (Ming helmets/Han caps, no fur); img/intro/muoi-2.webp O6CcAouynm (peony/cloud, no dragon); img/intro/thd-h3.webp aFAskikfSh (hanging painted scroll, no whiteboard).
+Review sheets (CDN img/_review/thanhtai/s1,s2,s3) can be wiped with the verdict (cdn_sync.py --wipe-review thanhtai).
+Wiring NOT done by art: game still loads single img/scene-thanhtai.webp (jlevel.js:13); a coder must map ARTS (j1.js:61) + VIR (j85.js:9) keys -> img/scene-thanhtai-<k>.webp (KIT_REQUESTS if a kit part is missing). Acts untouched (OD:L84). Credits: ~19 pictures x 40.
+HANDOVER: none needed (stopped at ~15% context). ~100% art done / ~0% chơi được until wiring.
