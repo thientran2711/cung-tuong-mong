@@ -12,7 +12,7 @@ const {chromium}=require('playwright');const [,,URL,NM,ORIG]=process.argv;const 
  await p.evaluate(o=>{localStorage.clear();SLOT=4;document.getElementById('title').hidden=true;if(o)window.__forceOrigin=o;window.__nlInner=1;start();window.__nlInner=0;window.__bot=1;quiet=false;Q.length=0;try{deal()}catch(e){}render()},ORIG||'');
  const agg={moments:0,buoi:{},menIn:0,offIn:0,court:0,courtOk:0,bad:{},ex:[]};
  for(let i=0;i<N;i++){
-  await p.evaluate(()=>{const clear=()=>{const ov=document.getElementById('ov');for(let j=0;j<5&&ov&&!ov.hidden;j++){const bs=ov.querySelectorAll('button');if(!bs.length)break;bs[bs.length-1].click()}let n=0;while(Q.length&&n++<30){const m=Q[0];if(m.opts&&m.opts.length){try{chooseM(m.opts.length-1)}catch(e){Q.shift()}}else{try{closeModal()}catch(e){Q.shift()}}}};clear();
+  await p.evaluate(()=>{const clear=()=>{const ov=document.getElementById('ov');for(let j=0;j<5&&ov&&!ov.hidden;j++){const bs=ov.querySelectorAll('button');if(!bs.length)break;bs[bs.length-1].click()}let n=0;while(Q.length&&n++<30){const m=Q[0];if(m.opts&&m.opts.length){try{chooseM((L=>L.length?L[L.length-1]:0)(m.opts.map((c,i)=>c.off?-1:i).filter(i=>i>=0)))}catch(e){Q.shift()}}else{try{closeModal()}catch(e){Q.shift()}}}};clear();
    const r=Math.random();if(r<.6){try{nextBuoi()}catch(e){}}else{const L=places().map(x=>x.k).filter(k=>k!==S.place&&accessOf(S,k).ok);if(L.length)try{goTo(L[Math.floor(Math.random()*L.length)])}catch(e){}}clear()});
   await p.waitForTimeout(200);
   const m=await p.evaluate(()=>{if(S.dead)return{dead:1};const R=S.roster;if(!R||R.key!==j95key())return{norec:1};const bad=[];const B=S.buoi||0,kh=j95kh();const OUT=J95OUT_;

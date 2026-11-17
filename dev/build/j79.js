@@ -202,7 +202,8 @@ const KIT_GLOSS={
  "Tâm cơ":"Mưu trí, sự khôn khéo. Giúp dò la, bày mưu, nhìn thấu mưu của người khác.",
  "Tai mắt":"Số người ngầm báo tin cho ngươi khắp cung. Nhiều thì biết trước mưu hại, dễ có chứng cứ.",
  "Ân tình":"Tình nghĩa riêng giữa Hoàng thượng và ngươi, tích qua những đêm hầu hạ. Giữ sủng lâu, khó bị bỏ rơi.",
- "Sức":"Sức khỏe. Dưới 20 thì không làm được việc nặng; về 0 là bệnh nặng, nguy đến tính mạng.",
+ "Sức":"Sức lực để làm việc trong ngày. Dưới 20 thì không làm được việc nặng; về 0 là bệnh nặng, nguy đến tính mạng. Sức tối đa do Sức khỏe định.",
+ "Sức khỏe":"Thân thể lâu dài, định Sức tối đa. Tuổi càng cao, sinh nở, bệnh nặng, trúng độc càng hạ; nghỉ ngơi, ở cữ trọn tháng, thuốc bổ chỉ bù lại phần hao tạm, không vượt mức tuổi và vết thương cũ cho phép.",
  "Bạc":"Tiền riêng của ngươi: bổng lộc hằng tháng, ban thưởng. Dùng để mua đồ, đút lót, thưởng kẻ hầu.",
  "Chủ tin":"Chủ nhân tin ngươi bao nhiêu (0–100). Cao thì được thưởng, tiến cử; dưới 10 dễ bị đày Tân Giả khố.",
  "Lòng":"Kẻ hầu trung thành với ngươi bao nhiêu (0–100). Dưới 45 dễ bị người khác mua chuộc.",
@@ -231,7 +232,8 @@ const KIT_GLOSS={
  "Tân Giả khố":"Nơi đày cung nữ, thái giám có tội làm việc nặng.",
  "Thai":"Khả năng có thai mỗi lần thị tẩm.",
  "Cơ hội":"Thang 7 bậc: Liều < Khó < Năm ăn năm thua < Khá chắc < Chắc < Rất chắc < Nắm chắc."};
-const KP_GLRE=new RegExp("^("+Object.keys(KIT_GLOSS).sort((a,b)=>b.length-a.length).map(k=>k.replace(/[.*+?^${}()|[\]\\]/g,"\\$&")).join("|")+")$");
+/* jreg: built on first use, so glossary words of later modules are in it (was built at load: 27 later words missed) */
+let KP_GLRE0=null,KP_GLN=-1;const KP_GLREf=()=>{const n=Object.keys(KIT_GLOSS).length;if(!KP_GLRE0||n!==KP_GLN){KP_GLN=n;KP_GLRE0=new RegExp("^("+Object.keys(KIT_GLOSS).sort((a,b)=>b.length-a.length).map(k=>k.replace(/[.*+?^${}()|[\]\\]/g,"\\$&")).join("|")+")$")}return KP_GLRE0};
 /* kitGloss("Tâm cơ") -> the term with a dotted underline; tap shows its meaning. Unknown terms come back as plain text. */
 function kitGloss(term,label){const t=String(term||"").trim();const k=Object.keys(KIT_GLOSS).find(x=>x.toLowerCase()===t.toLowerCase());return k?`<span class="kgl" data-kgl="${kpEsc(k)}">${label||t}</span>`:(label||t)}
 /* HUD help texts read the glossary too (one source) */
@@ -831,10 +833,12 @@ function kitInfoArt(title){const k=kitInfoKey(title);const have=KIT_INFOM.have||
 (function(){const b0=kpBuild;kpBuild=function(M,m){b0.apply(this,arguments);try{const dlg=M.querySelector(".dlg");if(!dlg||!/^(rule|info)$/.test(dlg.dataset.kind||""))return;
  const body=M.querySelector("#mb > .kpb");if(!body||body.querySelector(":scope > .kpsubj"))return;const a=kitInfoArt(m.t);
  body.classList.add("kphas","kpinfo");body.insertAdjacentHTML("afterbegin",`<div class="kpsubj kpiart" data-info="${a.key}">${kitArtFrame(a.src,a.label)}</div>`)}catch(e){console.error("kpInfo",e)}}})();
-/* the HUD help panels use the same structured layout as the rule panel: what it is · what you have now */
+/* the HUD help panels use the same structured layout as the rule panel: what it is · what you have now.
+   HXNOW[key]() → kitRows rows for "Ngươi đang có" when the live value needs more than the status chip (Sức: N, tối đa M, Sức khỏe — jkh) */
+const HXNOW={};
 (function(){const s0=showModal;showModal=function(){try{const m=Q[0];if(m&&!m.kit&&!m.opts&&typeof m.h==="string"&&/^<p>[^<]*<\/p>$/.test(m.h)&&typeof HX==="object"){
   const txt=m.h.replace(/<\/?p>/g,"");const k=Object.keys(HX).find(x=>HX[x]===txt);if(k){const lab=kpPlain(m.t);const gl=txt.replace(/^[^:]{1,24}:\s*/,"");const cur=(m.t.match(/(-?\d+)\s*$/)||[])[1];
-   const now=document.querySelector(`#hud2 .hc[data-hx="${k}"] b, #hud2 .hc[data-hx="${k}"] .kodm`);m.kit={kind:"rule",title:lab,sections:[{h:"Là gì",rows:[[lab.replace(/\s*\d+$/,""),gl.charAt(0).toUpperCase()+gl.slice(1),"t"]]}].concat(now?[{h:"Ngươi đang có",html:`<div class="kpnow">${now.outerHTML}</div>`}]:[])};m.t=lab.replace(/\s*-?\d+$/,"")}}}catch(e){}return s0.apply(this,arguments)}})();
+   const now=document.querySelector(`#hud2 .hc[data-hx="${k}"] b, #hud2 .hc[data-hx="${k}"] .kodm`);const nr=typeof HXNOW==="object"&&HXNOW[k]?HXNOW[k]():null;m.kit={kind:"rule",title:lab,sections:[{h:"Là gì",rows:[[lab.replace(/\s*\d+$/,""),gl.charAt(0).toUpperCase()+gl.slice(1),"t"]]}].concat(nr&&nr.length?[{h:"Ngươi đang có",rows:nr}]:now?[{h:"Ngươi đang có",html:`<div class="kpnow">${now.outerHTML}</div>`}]:[])};m.t=lab.replace(/\s*-?\d+$/,"")}}}catch(e){}return s0.apply(this,arguments)}})();
 /* ---- 3. identity card: larger, balanced; tiles beside the portrait; no stale result toast over the buttons ---- */
 (function(){const k0=kpIdentity;kpIdentity=function(M,m){k0.apply(this,arguments);try{const mb=$("mb");const id=mb.querySelector(".kpid"),tl=mb.querySelector(":scope > .kstgrid"),main=id&&id.querySelector(".kpmain");if(main&&tl)main.appendChild(tl);
   const t=$("rtoast");if(t){t.classList.remove("on");t.hidden=true;setTimeout(()=>{t.hidden=false},50)}}catch(e){}try{kpIdFig(M)}catch(e){console.error("kpIdFig",e)}}})();
@@ -1020,7 +1024,7 @@ function kgLabel(k){const b=document.querySelector(`#tabs [data-tab="${k}"]`);if
 function kgBar(){const T=$("tabs");if(!T)return;const on=kgOn();
  for(const g in KG){const ks=kgKeys(g);ks.forEach((k,i)=>{const b=T.querySelector(`[data-tab="${k}"]`);if(!b)return;
   if(!on){if(b.dataset.kg){b.textContent=b.dataset.kl0;b.dataset.s=b.dataset.ks0;delete b.dataset.kg}b.classList.remove("kghide");return}
-  if(i===0){if(!b.dataset.kg){b.dataset.kl0=b.textContent;b.dataset.ks0=b.dataset.s||"";}b.dataset.kg=g;b.classList.remove("kghide");/* a group head is always shown (a key that was a member of another group before KG changed keeps no stale kghide — review 11/15: Giao tình vanished) */if(b.textContent!==KG[g].l)b.textContent=KG[g].l;b.dataset.s=KG[g].s;b.setAttribute("aria-selected",String(kgOf(tab)===g));b.classList.toggle("kgon",kgOf(tab)===g)}
+  if(i===0){if(!b.dataset.kg){b.dataset.kl0=b.textContent;b.dataset.ks0=b.dataset.s||"";}b.dataset.kg=g;b.classList.remove("kghide");/* a group head is always shown (a key that was a member of another group before KG changed keeps no stale kghide — review 11/15: Giao tình vanished) */if(b.textContent!==KG[g].l)b.textContent=KG[g].l;if(b.dataset.s!==KG[g].s)b.dataset.s=KG[g].s;const sel=String(kgOf(tab)===g);if(b.getAttribute("aria-selected")!==sel)b.setAttribute("aria-selected",sel);b.classList.toggle("kgon",kgOf(tab)===g)}
   else b.classList.add("kghide")})}}
 function kgSub(){const P=$("panel");if(!P)return;const g=kgOf(tab);let nav=P.querySelector(":scope > .ksub:not(.kpgsub), :scope > .kpbar > .ksub:not(.kpgsub)");if(!g||!kgOn()){if(nav)nav.remove();return}
  try{localStorage.setItem("hclh-kg-"+g,tab)}catch(e){}
@@ -1029,7 +1033,7 @@ function kgSub(){const P=$("panel");if(!P)return;const g=kgOf(tab);let nav=P.que
 document.addEventListener("click",e=>{const s=e.target.closest&&e.target.closest("[data-ksub]");if(s){e.preventDefault();e.stopPropagation();tab=s.dataset.ksub;render();return}
  const b=e.target.closest&&e.target.closest("#tabs [data-kg]");if(b&&kgOn()){e.preventDefault();e.stopPropagation();const g=b.dataset.kg;tab=kgOf(tab)===g?tab:kgLast(g);try{feedback("page")}catch(x){}render()}},true);
 (function(){const r0=renderPanel;renderPanel=function(){const r=r0.apply(this,arguments);try{kgSub()}catch(e){}return r}})();
-(function(){const r0=render;render=function(){const r=r0.apply(this,arguments);try{kgBar();kgSub();if(typeof tabsFit==="function")tabsFit()}catch(e){}return r}})();
+(function(){const r0=render;render=function(){const r=r0.apply(this,arguments);try{kgBar();kgSub();if(typeof tabsFitR==="function")tabsFitR()/* oi-render: at the end of the render */}catch(e){}return r}})();
 (function(){const st=document.createElement("style");st.id="kit2-tabs";st.textContent=`
 html body #tabs.tabs button.kghide{display:none!important}
 /* SUB-TABS: the ONE segmented control (same look everywhere a tab has sub-tabs) */

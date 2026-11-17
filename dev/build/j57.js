@@ -46,7 +46,9 @@ function tabsFit(force){try{const T=$("tabs");if(!T)return;{const gm=document.qu
   const w=TFS_CV.measureText(txt.trim()).width+1;const room=b.clientWidth-parseFloat(getComputedStyle(b).paddingLeft)-parseFloat(getComputedStyle(b).paddingRight);if(w>room&&room>0)k=Math.min(k,room/w)});
  if(k<1)T.style.setProperty("--tfs",(base*k).toFixed(3)+"rem")}catch(e){}}
 addEventListener("resize",()=>{clearTimeout(window.__tfsT);window.__tfsT=setTimeout(()=>tabsFit(1),80)});
-(function(){const r0=render;render=function(){const r=r0.apply(this,arguments);tabsFit();return r}})();
+/* oi-render: the fit measures the tab buttons — inside a render once at its end (jlag2 renderAfter); a call with an argument (resize, fonts) at once */
+function tabsFitR(){(window.renderAfter||((k,g)=>g()))("tabsFit",()=>tabsFit())}
+(function(){const r0=render;render=function(){const r=r0.apply(this,arguments);tabsFitR();return r}})();
 try{if(document.fonts&&document.fonts.ready)document.fonts.ready.then(()=>tabsFit(1))}catch(e){}
 setTimeout(tabsFit,0);
 /* status panel toggle (owner, Fold): the ▾ was display:none from 1200px up (and a 22px box below), so on a wide screen it could
