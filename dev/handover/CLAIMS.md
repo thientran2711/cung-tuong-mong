@@ -853,7 +853,7 @@
 | balance-2 review r1 (opus BIG) of de993ca8 | review/balance-2-r1 | D | session_01964izCu8Je1GMvrc1moQH6 | RUNNING | 17/11 16:30Z |
 | loading-words-2-r1 PASS 64e303045 → builder batch s32a (replaces d4318833); worker + reviewer archived | review/loading-words-2-r1 | MAIN s34 | session_01UV1SzgWoEmnjTTEv7UgBNP | PASS → BATCH | 17/11 16:26Z |
 | tinbao-ui-r2r PASS 05e82176 (lands after ag-all-2) → r3 "Tai mắt báo" + Tai mắt list (OD 16:20Z (e), 16:25Z) | review/tinbao-ui-r3 | MAIN s34 | session_01UV1Szjhrq5VUWD5Haiagxz | RUNNING | 17/11 16:26Z |
-| BISECT G4 50-coop-one-world seed 7 "merge differs from the host" on plain main 7e0250ec (pre-existing; candidates staff-root-fix-1 / trait-rename / mg-snap / world-events-2) | (diagnose) | D | (opening, opus) | RUNNING | 17/11 16:26Z |
+| BISECT G4 50-coop-one-world seed 7 "merge differs from the host" on plain main 7e0250ec (pre-existing; candidates staff-root-fix-1 / trait-rename / mg-snap / world-events-2) | (diagnose) | D | session_01964izD7hcJWkGEuNzDXbC7 (opus) | RUNNING | 17/11 16:26Z |
 | STAFF CAPS COUNT (ORDER main s33 15:50Z; OD:L1636; opus; measure only; brief briefs/staff-caps-count.md) | review/staff-caps-count | B | session_01N1tNP6Neas51xgJE6D4CK1 | RUNNING | 17/11 16:40Z |
 | NEW LOOKS looks-2 (ORDER main s34 16:30Z; OD 16:20Z (g); opus BIG; brief briefs/looks-2.md) | review/looks-2 | B | session_01N1tNP5NugSQQVChrBKbF4p | RUNNING | 17/11 16:40Z |
 | emo-samples: owner sample sheets A (code mesh-warp, stronger) + B (old expression pictures + makeup) (OD 16:35Z) (sonnet; brief briefs/s34-emo-samples.md) | review/emo-samples | MAIN s34 | session_01UV1SzgTrNW | SAMPLES READY (A only; B none exist) 8ea55572 | 17/11 16:35Z |
@@ -863,7 +863,7 @@
 | REVIEW world-ret-phong r1 (opus BIG) of 54cb809f | review/world-ret-phong-r1 | C-AG | session_01UV1Szgs7rrynEBwLodvmU5 | RUNNING | 17/11 16:41Z |
 | REVIEW one-core-jkc-2 da026fc87 (opus BIG; brief briefs/review-one-core-jkc-2.md) | review/one-core-jkc-2-r1 | B | session_01N1tNP2MBRBHV2KnMWfTMRx | RUNNING | 17/11 16:55Z |
 | REVIEW one-core-jkc-2 da026fc87 (opus BIG; brief briefs/review-one-core-jkc-2.md) | review/one-core-jkc-2-r1 | B | (opening) | RUNNING | 17/11 16:55Z |
-| DAY-KHẮC AUDIT: every feasibility check uses total khắc left in the DAY, never the buổi (OD 16:45Z + L852/L1473) — scan + fix whole family | review/day-khac-audit | D | (opening, opus) | RUNNING | 17/11 16:45Z |
+| DAY-KHẮC AUDIT: every feasibility check uses total khắc left in the DAY, never the buổi (OD 16:45Z + L852/L1473) — scan + fix whole family | review/day-khac-audit | D | session_01964izGNNjem7GHhQv3q6B5 (opus) | RUNNING | 17/11 16:45Z |
 | one-core-jkc LIVE 086f1d607 (main e8b1906f → 086f1d60; rollback e8b1906f) | review/one-core-jkc-r1 | B | session_01N1tNP2T3QBr5EHz4r5RAmd | LIVE | 17/11 16:58Z |
 | STAFF CAPS COUNT DONE (A 38/40/39 · B1 ~29 · B2 ~31 · C ~23; faces 15+15) | review/staff-caps-count | B | session_01N1tNP6Neas51xgJE6D4CK1 | DONE (archived) | 17/11 17:00Z |
 | REVIEW coop-thin-c 475beba7 (opus BIG; brief briefs/review-coop-thin-c.md) | review/coop-thin-c-r1 | B | session_01N1tNP4NkEVbfkftEhoSW5h | RUNNING | 17/11 17:05Z |
