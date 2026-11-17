@@ -112,6 +112,7 @@ Always create worker sessions WITH source_url (a session without it cannot get t
 - 01:50Z old-people worker uploaded 15 Thái hậu (mama base) BEFORE the 01:35Z correction: C checked LIVE h1-a18/a51, h2-a18/a36 → body proportion OK (not too tall), but h1-a18 GREY-haired old face = a51 (age bands ignored) and young bands in dark robes → sent back: fix all 15 by age (a18 young black hair, young colours; dark only older), re-upload. Old man: enlarge head to Emperor ratio (owner: head smaller than Emperor).
 - 01:48Z FP NC v24 (3 options, fresh 2K-class gen, transparent; worker recommends opt2) looked at by C (clean cut-out dark+light, slim straight skirt no train, lively hands, compact hair, no pearls) → SENT to owner (3 options sheet + opt2 in-room crop). FP #3 rolled over → archived; successor #4 sonnet session_011xDdVSKDexc7PYaJAwNMew (BD other ranks now; NC ranks after her pick).
 - 01:52Z old-people fix sheets looked at by C: old man p03 v5 head = Emperor ratio → OK upload + roll out; young Thái hậu a26 OK upload; a18 colours/face OK but head still ~10 % small vs c01 a18 (.091–.098 vs .104) → enlarge to ≈.10 then upload; a36/a51 keep.
+- 01:55Z OWNER (s10 chat) — FOR MAIN: log in OD (verbatim): "Cái trang phục của công chúa Nam Chiêu thiệt sự là nhìn nó giống như nó xấu quá, nhìn nó không có thước tha một cái chút nào hết trơn á." → NC v24 costume rejected; FP #4 redesigns NC costume graceful/flowing (no train), 3 options 2K, in-room next to a repainted consort.
 - Waiting owner: FP NC v24 pick; origin intro samples; por-vacant-hh.
 
 ## SESSION 9 LOG
