@@ -59,7 +59,7 @@ function kitTinBaoCard(){try{const L=items();if(!L.length){if(typeof kitLine==="
   const t=`${p?`${kitName(p)} · `:""}${at}${it.line}${it.seen?" <small>(đã xem)</small>":""}`;return p?{who:p,text:t}:{text:t}});
  const lead=A.map(informer).find(Boolean)||null;/* the big figure = the informer of the first (unseen first) row that has a person */
  const pl=[...new Set(A.map(x=>x.place))];const opts=[{n:pl.length===1?`Để ta tới xem · ${esc(plName(pl[0]))}`:"Để ta tới xem",fx:{},go:()=>{try{tinBaoSeen()}catch(e){}goDuDo();kitTinBaoBadge()}},{n:"Thôi",fx:{},go:()=>kitTinBaoBadge()}];
- const m=kitModal({kind:"news",title:"Tin báo",sub:U.length?`${U.length} tin mới`:"Đã xem hết",facts,subject:lead||undefined,opts,onClose:()=>kitTinBaoBadge()});
+ const m=kitModal({kind:"news",title:"Tai mắt báo",sub:U.length?`${U.length} tin mới`:"Đã xem hết",facts,subject:lead||undefined,opts,onClose:()=>kitTinBaoBadge()});
  try{tinBaoSeen()}catch(e){}TB.card++;setTimeout(kitTinBaoBadge,0);return m}catch(e){console.error("kitTinBaoCard",e);return null}}
 /* ---------- wiring ---------- */
 document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("#ktbbadge");if(!b)return;e.stopPropagation();e.preventDefault();try{if(typeof sfx==="function")sfx("sfx-tap")}catch(x){}kitTinBaoCard()},true);

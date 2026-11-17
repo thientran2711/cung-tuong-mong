@@ -40,7 +40,7 @@ const VP=[[755,1000],[1180,820],[1366,1024],[412,1058],[390,844]];
  await plant();await p.evaluate(()=>{const e=document.getElementById("ktbtoast");if(e)e.remove();clearTimeout(TB.t);TB.t=0});
  await p.click("#ktbbadge");await p.waitForTimeout(1500);
  const c3=await p.evaluate(()=>{const d=document.querySelector("#modal .dlg.kpanel");return {kind:d&&d.dataset.kind,seal:(d&&d.querySelector(".kpseal")||{}).textContent,title:(d&&d.querySelector(".kptitle")||{}).textContent,facts:d?d.querySelectorAll(".kfact").length:0,opts:d?d.querySelectorAll(".opts button").length:0,txt:d?d.querySelector("#mb").textContent:"",n:tinBaoNew()}});
- ok(c3.kind==="news"&&c3.seal==="TIN"&&c3.title==="Tin báo"&&c3.facts>=3,'card: kit TIN panel "Tin báo" lists every item',c3);
+ ok(c3.kind==="news"&&c3.seal==="TIN"&&c3.title==="Tai mắt báo"&&c3.facts>=3,'card: kit TIN panel "Tai mắt báo" lists every item',c3);
  ok(c3.txt.indexOf("Ngự hoa viên")>=0&&c3.txt.indexOf("Thái y viện")>=0&&c3.txt.indexOf("đã xem")>=0&&c3.txt.indexOf("Ngự hoa viên")<c3.txt.indexOf("Lãnh cung")&&!/%/.test(c3.txt),'card: unseen first, the seen one marked "đã xem", no %');
  ok(c3.n===0,'card: opening it marks everything seen');
  await p.click("#modal .opts button");await p.waitForTimeout(800);
