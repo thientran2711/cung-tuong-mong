@@ -735,7 +735,7 @@
 | person-leftcol #2 | review/person-leftcol | MAIN s31 | session_01UV1SzjHhXKnA5TKza26b1V | RUNNING | 17/11 12:11Z |
 | stage-caption | review/stage-caption | MAIN s31 | session_01UV1Szk3y43acKY1bEhtMWZ | RUNNING | 17/11 12:11Z |
 | toil-looks #N (6 levels, colour, chin, tease 1-3) | review/toil-looks2 | MAIN s31 | session_01UV1SzmK8entV9CAWqPJaHH | SẴN SÀNG KIỂM 43b9a8b64 | 17/11 12:11Z |
-| tuanluc-sync #3 (opus) | review/tuanluc-sync | MAIN s31 | session_01UV1SziJFVGaiWpZGPF2Egd | RUNNING | 17/11 12:11Z |
+| tuanluc-sync #3 (opus) | review/tuanluc-sync | MAIN s31 | session_01UV1SziJFVGaiWpZGPF2Egd | READY c70fb3973 (report reports/tuanluc-sync.md) | 17/11 ~14:00Z |
 | map-me-mark #2 (successor; #1 rolled over at ff6ade20) — zoom fit-all, 4-edge fade, map weather, pan flush, Ta + N bóng | review/map-me-mark | MAIN s31 | session_01UV1SzjTth6eagb4DB6vtqt | SẴN SÀNG KIỂM edaf5aa8 | 17/11 12:21Z |
 | one-core-dup3 SẴN SÀNG KIỂM 67430058 → re-review r2 (fresh opus BIG; brief briefs/review-one-core-dup3-r2.md) | review/one-core-dup3-r2 | B | session_01N1tNP6AWLddG5uQRXjrEPn | PASS review/one-core-dup3-r2 3213abc8 (stack on main 65dcf52f; +reviewer fixes: 3 word counts print their key, text gate reads word counts, bind 3 link holes + crash) — NOT fast-forwardable: main moved to 6ca04148; trial merge review/one-core-dup3-r2-main cd2810ff = guard FAIL 70 (batch-d8 typed numbers) → merge worker; report reports/review-one-core-dup3-r2.md | 17/11 12:25Z |
 | kit-rcol-top #2 (successor; #1 partial fa787165) — gates, kit page, shots | review/kit-rcol-top | MAIN s31 | session_01UV1SzkTmHFW7tFdo9JrjMv | READY FOR REVIEW 44ac9cda | 17/11 12:23Z |
