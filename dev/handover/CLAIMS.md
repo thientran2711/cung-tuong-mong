@@ -851,3 +851,6 @@
 | FACE TOKEN 404 (sonnet, owner-bug lane; img/@W<n>.webp × 33 on live, j25.js:88 CW; whole token family) | review/face-w404 | D | session_01964izC859jzWy9Hygkf3UJ | RUNNING | 17/11 16:25Z |
 | WEATHER per khắc by season + currentWeather(k) API (opus; owner OD ~16:20Z (g); main s34 16:23Z; brief briefs/weather-khac.md) | review/weather-khac | C-AG | session_01UV1SzhiC88PsoqSrcX1TAr | RUNNING | 17/11 16:28Z |
 | balance-2 review r1 (opus BIG) of de993ca8 | review/balance-2-r1 | D | session_01964izCu8Je1GMvrc1moQH6 | RUNNING | 17/11 16:30Z |
+| loading-words-2-r1 PASS 64e303045 → builder batch s32a (replaces d4318833); worker + reviewer archived | review/loading-words-2-r1 | MAIN s34 | session_01UV1SzgWoEmnjTTEv7UgBNP | PASS → BATCH | 17/11 16:26Z |
+| tinbao-ui-r2r PASS 05e82176 (lands after ag-all-2) → r3 "Tai mắt báo" + Tai mắt list (OD 16:20Z (e), 16:25Z) | review/tinbao-ui-r3 | MAIN s34 | session_01UV1Szjhrq5VUWD5Haiagxz | RUNNING | 17/11 16:26Z |
+| BISECT G4 50-coop-one-world seed 7 "merge differs from the host" on plain main 7e0250ec (pre-existing; candidates staff-root-fix-1 / trait-rename / mg-snap / world-events-2) | (diagnose) | D | (D opens) | ORDERED | 17/11 16:26Z |
