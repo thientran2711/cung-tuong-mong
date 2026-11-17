@@ -102,3 +102,14 @@ eunuch-u05-a18	TdUhsbQVNR	https://pikaso.cdnpk.net/private/production/6060874749
 - Pipeline that works: sub-agents with 10 keys each, 5 images_generate at a time (lead: max 5 in flight in total), brief = /tmp/claude-0/w/EUBRIEF.md (lost with the container; recipe: upload old fig as ref -> images_generate gpt-2-6 1024x2048 2k transparentBackground true refs [old, N2HYqYa6D9, bxVgMSX5Y2, dtPf4EDXSL, eIyaPEVdqL], prompt ~110 words with the plain eunuch wording + prop rotation + FULLY TRANSPARENT line -> creations_wait -> curl + alpha check + FORCE_HD=1 finish_fig + qa_fig + sheet -> upload fig/hd/por + fragment W4c-<batch>.json).
 - Needs each new container: pip install scipy opencv-python-headless; git fetch origin main --depth=1 && git show FETCH_HEAD:dev/site/cdn_sync.py > dev/site/cdn_sync.py (uncommitted; also .cdn-state.json uncommitted).
 - RETRO RESULT: 63/63 hd twins uploaded (0 skipped), fragment hd-entries/W4c-hero-retro.json (63 entries). Retro step (1) is DONE.
+eunuch-u05-r0-a18	WDlI7dqcXe	https://pikaso.cdnpk.net/private/production/6060947154/render.png	ok 2k+hd (W4d-E2)
+eunuch-u05-r3-a18	0eSmOoLTfW	https://pikaso.cdnpk.net/private/production/6060947497/render.png	ok 2k+hd (W4d-E2)
+eunuch-u06-a18	bxVwdge5Y2	https://pikaso.cdnpk.net/private/production/6060947047/render.png	ok 2k+hd (W4d-E2)
+eunuch-u06-r0-a18	TdUhyt0VNR	https://pikaso.cdnpk.net/private/production/6060947776/render.png	ok 2k+hd (W4d-E2)
+eunuch-u06-r2-a18	dtPuiEMXSL	https://pikaso.cdnpk.net/private/production/6060947877/render.png	ok 2k+hd (W4d-E2)
+eunuch-u06-r3-a18	aFArWp8fSh	https://pikaso.cdnpk.net/private/production/6060953168/render.png	ok 2k+hd (W4d-E2)
+eunuch-u07-a18	6AqT1UDiJO	https://pikaso.cdnpk.net/private/production/6060953144/render.png	ok 2k+hd (W4d-E2)
+eunuch-u07-r0-a18	IfibADitvE	https://pikaso.cdnpk.net/private/production/6060953594/render.png	ok 2k+hd (W4d-E2)
+eunuch-u07-r2-a18	1ley8HLr4r	https://pikaso.cdnpk.net/private/production/6060953681/render.png	ok 2k+hd (W4d-E2)
+eunuch-u07-r3-a18	p8OCN0Dehw	https://pikaso.cdnpk.net/private/production/6060954013/render.png	ok 2k+hd (W4d-E2)
+## W4d: E2 done (10 eunuch a18 u05-r0/r3,u06x4,u07x4; 650 cr). Remaining eunuch a18 = 92 (batches /tmp list eu_todo minus these); maid-ty a18 resumed first per lead.
