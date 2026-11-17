@@ -157,7 +157,7 @@ function luxThemesOf(k){const L=[];try{const w=typeof WD_ITEMS==="object"?WD_ITE
  for(const t in LUX_TH){const D=LUX_TH[t];if((col&&D.col.includes(col))||D.re.test(nm))L.push(t)}}catch(e){}return L}
 window.luxThemesOf=luxThemesOf;
 /* fills TS_THEME[t].tags (jts) with every wearable that fits, keeping the hand-picked ones */
-function luxThemeTags(TH){try{const keys=new Set(Object.keys(IT).filter(k=>IT[k]&&(IT[k].sl||IT[k].dr||IT[k].wsl||["sonphan","tuithom","huongtram"].includes(k))));
+function luxThemeTags(TH){try{const keys=new Set(Object.keys(IT).filter(k=>IT[k]&&(itm(k).sl||itm(k).dr||itm(k).wsl||["sonphan","tuithom","huongtram"].includes(k))));
  if(typeof WD_ITEMS==="object")for(const k in WD_ITEMS)if(k!=="y_tang")keys.add(k);
  for(const k of keys)for(const t of luxThemesOf(k))if(TH[t]&&!TH[t].tags.includes(k))TH[t].tags.push(k)}catch(e){console.error("luxThemeTags",e)}}
 window.luxThemeTags=luxThemeTags;

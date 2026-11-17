@@ -1,5 +1,5 @@
 # PROGRESS review/item-ledger-solo (Foreman D #8 worker, opus) — 17/11
-Base: review/item-ledger-r1 PASS 7aba5de9 + origin/main 7abaf07a merged. Brief: dev/handover/briefs/D8-item-ledger-solo.md (handover branch).
+Base: review/item-ledger-r1 PASS 7aba5de9 + origin/main 7abaf07a, then 64c39ca2 (coop-thin A, off by default) merged. Brief: dev/handover/briefs/D8-item-ledger-solo.md (handover branch).
 Report: dev/handover/reports/item-ledger.md (handover branch).
 
 ## Done
@@ -10,8 +10,7 @@ Report: dev/handover/reports/item-ledger.md (handover branch).
 - Co-op "Trả lại quà" to the friend: no live way back → Nội vụ phủ store ("kho", ownerless), never lost (open fault for coop-thin).
 - Main's new removal sites routed: jtwoway "check" (poisoned gift → tang vật, as j28), jdress dropJ (→ conf; file not assembled today).
 - jdh2 (sắc phong book / seal, main): x.dh boxes keep jdh2's own road (jil never resells / nets them; Việc row shows no fake week count).
-- Live main bug fixed (item conservation family): jvoice kept its line memory in S.vl = the worn VEIL slot → with no veil Tư trang crashed
-  (vlInvHTML IT[undefined]) and "taking the veil off" put the memory in her chest as a fake item. Memory → S.vom; old saves cleaned (vomFix).
+- jvoice memory in S.vl (veil slot) clash: fixed here first (S.vom), then main fixed it the same way (review/it-key-guard: S.vmem + j8 itClean) → main's version taken at the 2nd merge (64c39ca2).
 - One-core: jlost raise line numbers from LO (raiseK, hearW, thief) — guard PASS (6667 ≤ 6691).
 - jil endTurn hook: render() then showModal() (the §64 tag is placed by showModal).
 

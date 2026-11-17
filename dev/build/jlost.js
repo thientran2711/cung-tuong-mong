@@ -38,12 +38,12 @@ function loNm(k){return typeof wdFrameNm==="function"?wdFrameNm(k):((IT[k]||{}).
 function loP(k){return byKey(k)}
 function loAlive(p){return !!p&&(p===S?!S.dead:p.alive&&!p.out)}
 function loPal(p){if(!p)return"";if(p===S)return"cung ngươi";let k=true;try{if(typeof kitKnownName==="function")k=kitKnownName(p)}catch(e){}try{const n=palName(palaceOf(p));if(n)return k?`${n}, chỗ ${p.name}`:n}catch(e){}return k?`cung ${p.name}`:"một cung khác"}
-function loPrice(e){const w=typeof wdItem==="function"?wdItem(e):null;return w?(w.pr||0):((IT[e.k]&&IT[e.k].pr)||0)}
-function loGrade(e){const w=typeof wdItem==="function"?wdItem(e):null;if(w)return w.g|0;const pr=loPrice(e);return (IT[e.k]&&IT[e.k].nt)?4:pr>=200?3:pr>=100?2:pr>=40?1:0}
+function loPrice(e){const w=typeof wdItem==="function"?wdItem(e):null;return w?(w.pr||0):((IT[e.k]&&itm(e.k).pr)||0)}
+function loGrade(e){const w=typeof wdItem==="function"?wdItem(e):null;if(w)return w.g|0;const pr=loPrice(e);return (IT[e.k]&&itm(e.k).nt)?4:pr>=200?3:pr>=100?2:pr>=40?1:0}
 function loPic(e,sz){const w=typeof wdItem==="function"?wdItem(e):null;return typeof kitItem==="function"?kitItem({src:kitItemSrc(e.k,w?w.icon:""),name:loNm(e.k),grade:loGrade(e),size:sz||"md"}):""}
 /* the item in a notice: the §64.1 item frame (kitItemTag), kept by ievPlace (kiev-own) and floated right of the text */
 function loTag(e){try{if(typeof kitItemTag==="function"&&typeof kitItemInfo==="function")return kitItemTag(kitItemInfo(e)).replace('class="kiev"','class="kiev kiev-own kiev-txt"')}catch(x){}return loPic(e,"md")}
-function loOk(e){return !!e&&!e.h&&!e.t&&!e.lo&&!e.w&&!e.keep&&!(typeof wdIsNt==="function"&&wdIsNt(e))&&!(typeof vlIs==="function"&&vlIs(e))&&!(IT[e.k]&&(IT[e.k].evi||IT[e.k].nt))&&loPrice(e)>=LO.minPr}
+function loOk(e){return !!e&&!e.h&&!e.t&&!e.lo&&!e.w&&!e.keep&&!(typeof wdIsNt==="function"&&wdIsNt(e))&&!(typeof vlIs==="function"&&vlIs(e))&&!(IT[e.k]&&(itm(e.k).evi||itm(e.k).nt))&&loPrice(e)>=LO.minPr}
 function loMotive(v,t){try{if(typeof motiveOK==="function")return !!motiveOK(v,t,"plant").ok}catch(e){}return true}
 /* hidden cause, chosen by the existing motive system */
 function loCause(p){let R0=[];try{R0=liveRivals(true).filter(v=>v!==p&&bandOf(danger(v,p))>=2&&loMotive(v,p)&&(v.bac||0)>=LO.act.bac)}catch(e){}/* two-way law: a rival's theft costs what her Act 'Sai người lấy trộm đồ' costs: bạc LO.act.bac + Đức -4 */
@@ -144,7 +144,7 @@ function loRecog(c){const x=loEntry(c);if(!x||!x.worn)return;const o=loP(c.own),
 /* NPC holder who sees an item of unknown owner: an honest one hands it in, another keeps it and may wear it */
 function loHolderMove(c){const x=loEntry(c);if(!x||x.h===S)return;const h=x.h;
  if(c.ret&&wk()>=c.ret){lostUnwear(h);const i=h.inv.indexOf(x.e);if(i>=0)h.inv.splice(i,1);lostReturn(x.e,"nop");const o=loP(c.own);if(o)relAdd(h,o,3);if(o===S){Q.push({t:"Đồ thất lạc",who:pv(h),h:`<p>${wdNmC(h)} thấy ${loNm(c.k)} lẫn trong rương, sai người nộp Nội vụ phủ trả về ngươi.</p>`,btn:"Đã hiểu"})}return}
- if(!c.ret&&!x.worn&&!c.wo&&roll(LO.keepWear)){c.wo=1;c.lied=1;const i=h.inv.indexOf(x.e);if(i<0)return;try{if(typeof wdItem==="function"&&wdItem(x.e))wdWear(h,i);else if(IT[x.e.k]&&IT[x.e.k].sl)wear(h,i)}catch(e){}}}
+ if(!c.ret&&!x.worn&&!c.wo&&roll(LO.keepWear)){c.wo=1;c.lied=1;const i=h.inv.indexOf(x.e);if(i<0)return;try{if(typeof wdItem==="function"&&wdItem(x.e))wdWear(h,i);else if(IT[x.e.k]&&itm(x.e.k).sl)wear(h,i)}catch(e){}}}
 /* ---------- weekly / monthly ---------- */
 function loWeek(){if(!S||S.dead)return;for(const c of loL()){if(c.st==="done")continue;try{
   const o=loP(c.own);if(!o||!loAlive(o)){c.st="done";c.how="mat";loGoneOwner(c,o);continue}
