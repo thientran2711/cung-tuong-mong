@@ -35,3 +35,10 @@ Done (KIT §85.7 + §41.2; jmapc.js CSS, j38 mapFit, j27 mapHTML, jfx kfStageRec
 Shots (CDN img/_review/map-me-mark/): {755x1000,1180x820}-{map-fitall,map-zoom-rightend,place-view,map-weather}.jpg, 1366x1024-map-fitall.jpg.
 Scan (own script, 29 spots): overlaps at fit-all Fold = 9 (labels at floor .5, ~6px text), iPad 0, 1366 0; +1/+2 zoom 0 everywhere. 412/390 portrait shows the rotate gate (not checked). 0 page errors. quickcheck.sh missing; map-full / map-frame-kit tests not run (need a local server, denied); map-full asserts map width = 100% and now differs on purpose.
 Risks: Fold labels tiny at fit-all (owner may want a higher floor); labels pass under overlays only mid-pan, never at the pan ends.
+
+## §4 Round 2 after MAIN s31 12:40Z — branch review/map-me-mark 08ebbe38
+- Her place line now "Ta + N bóng · còn K khắc" / "Chỉ có ta · còn K khắc" (K = BAL.time.khac - used).
+- Label size floor = KMAP_MLS .85 (13px label -> ~11px). Collisions at that size: lower-priority label hides (.kmhide: .sm first, then fewer people; never her place; "!" place only vs another "!" place); it returns at the first zoom step with room. Scan: 0 overlaps at fit-all and +1/+2 zoom on Fold 755x1000, iPad 1180x820, 1366x1024.
+- Result: iPad fit-all hides 5 of 29 labels, 1366 hides 3, Fold hides 26 (3 labels shown: her place, Đông cung, Kính sự phòng) because the Fold free width is 509 px (screen minus rail minus right column). Fold zoom step 1 shows ~20 readable labels (shot below). Whole map stays visible at fit-all (I did NOT zoom up, that would cut the palace).
+- Option for main/owner if 3 labels on Fold is too few: let the Fold map ignore the right column width at fit-all (map 689 px wide, right part under the cards until panned) — trade: part of the palace hidden under the column.
+- Shots (CDN img/_review/map-me-mark/): {755x1000,1180x820,1366x1024}-map-fitall.jpg, {755x1000,1180x820}-map-zoom-rightend.jpg, 755x1000-map-zoom-step1.jpg (older place-view / weather shots still valid).
