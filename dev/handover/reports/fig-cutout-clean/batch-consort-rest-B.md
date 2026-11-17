@@ -69,6 +69,7 @@ t1 live today (UNHELD by Foreman C with rules: OWN outfit lighter variant of her
 REDO notes (maid-like/plain, no redo until told): c21-kc, c21-ngheo, c21-t1, c22-kc, c22-ngheo, c24/25/26/27/28/29 kc+ngheo, c30-ngheo, c31-kc, c31-ngheo, c32-kc, c32-ngheo (kc/ngheo are intentionally poor looks). Drift: 0 reported. Caveat: prompts before the 'own costume / not richer than c01 t2-t3' orders pushed richness per tier; check t5-t8 of c20-c32 a18 and F's t6-t8 ages (richer side).
 RULES in force: max 5 images_generate in total; own costume per identity (old figure = style reference), rank = richness on top; cdn_sync ONLY with explicit img/*.webp paths (never no-args/json); hd for every fig, fragment per driver.
 PIPELINE as before + AGES: ref = the new a18 file of that look + old age file + 4 faces. Driver brief = /tmp/claude-0/brief.txt (scratch, lost on rollover): per 8 keys upload refs, <=2-5 images_generate at once, ONE creations_wait, ONE bash (curl, alpha check, FORCE_HD=1 finish_fig, qa_fig, one sheet), upload explicit webp, own TSV + fragment, push only those files via recipe (checkout -B x FETCH_HEAD).
+<<<<<<< HEAD
 
 ## HANDOVER #2 (W7b session 1, ~17/11 06:40Z) — all drivers PAUSED (maid redraw has priority; resume on lead word)
 Context ~31% of 1M at this point (START ~8-12%): roll over at ~37%, ceiling 60%.
@@ -78,3 +79,5 @@ REFS: FIGURES.json 'bg' = a 4-age sheet, not a single figure; magnificUrl exists
 RESUME LIST: H1: consort ages from c18-tm0-a51 on (c18 tm1-tm4 x3, c19 kc,t2-t8,tcold,tm0.. ~48-key slice, then c19 rest, c20-c32 non-t1 ages ~ 560, then all t1 ages 48). Driver state in scratchpad/H1 (ledger batch-consort-rest-B-H1*.tsv, hd-entries/W7b-H1.json). P1: player set t5, t7, tcold x look1-4 (12 keys), then player ages a26/a36/a51 (new a18 + her live t1 age); scratch scratchpad/P1 (finish_p.py = finish_fig with GEOM env from the look's live t3-a18; mapping player-set/mapping.md: look1=c07+face01, look2=c15+face12, look3=c16+face05, look4=c13+face18 — face-to-look unconfirmed).
 Fragments to merge (lead): W7b-{0,A,B,C,D,E,F,G,H1,P1}.json. Ledgers: batch-consort-rest-B-{A..G,H1,P1}.tsv.
 Tools note: scratch scripts live in /tmp/claude-0/.../scratchpad (lost on rollover); the brief in /tmp/claude-0/brief.txt is NOT durable — summary: per 8 keys upload refs, <=cap gens in flight, one creations_wait, one bash (curl, alpha check, FORCE_HD=1 finish_fig, qa_fig, sheet), upload explicit img/*.webp only (never no-args/json), TSV + fragment, push only own files via checkout -B x FETCH_HEAD.
+=======
+>>>>>>> 19ad1764 (reports/one-core-dup: §6 part 2 (review/one-core-dup2 0ffa37bf))

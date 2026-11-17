@@ -54,6 +54,7 @@ Tools: dev/measure/arc-onecore-move.js (+ -lib, -emit, -rare-move).
 2. jbal.js: 4 BAL.route keys appended at the end of the route block.
 3. BAL.arc option numbers are the values BEFORE j67's measured halving of story Sức / Hoàng hậu costs (the halving pass still runs after registration; noted in jbalarc.js header).
 4. Feature freeze respected: nothing new built; ideas: none.
+<<<<<<< HEAD
 
 ## r2 FIX (worker session_01N1tNP5MRPzxmbFfWjw6LuT) — PARTIAL, HANDOVER (context rollover)
 PRIORITY #1 CHECK ('e67heir'): OD 0 | ledger 0 | claims 0 | main 15 | review/* one-core-arcs-r1 f6b07eb3 (reviewer proof) | claims B arcs = this worker.
@@ -104,3 +105,5 @@ Commits on top of 882649ac:
 | road-end | 51/51 pass |
 | trial merge with review/one-core-roads-r1 75bc9f05 (temp, not pushed) | conflicts ONLY in generated assets.json / index.html / sw.js and dev/test/one-core-baseline.json; all code auto-merges. On the merged tree: guard 0 fails, `--update` shrinks 9128 → 4730 (no grow), arc-onecore-same vs 648461b5 SAME, 0 page errors. For main: take either baseline, then `--update` (shrink only), rebuild the site. |
 Pre-existing items from r1 (story14 p.startsWith, chap-label-oldsave v3 .obj67, chap-label head) not touched / not re-run.
+=======
+>>>>>>> 19ad1764 (reports/one-core-dup: §6 part 2 (review/one-core-dup2 0ffa37bf))
