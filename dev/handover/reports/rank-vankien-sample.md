@@ -37,3 +37,13 @@ Same c01 face; each rank a different colour AND cut, Magnific gpt-2-6, all 5 com
 - Hoàng hậu: bright imperial yellow, red-gold phoenix on robe, modest red-gold collar, phoenix crown.
 Sheets v2: https://ctm-img.victoria-tntt.workers.dev/img/_review/rank-vankien/sheet_figures_v2.jpg and .../sheet_shoulders_v2.jpg
 Note: Tần collar is very small (mandarin-style scalloped), vân kiên barely visible by design.
+
+## V3 (owner 17/11 ~16:45Z: collars too alike; Tần looked like a servant)
+PRIORITY #1 CHECK: OD no 'cổ áo' rule | main none | review/* none. One try per rank, v2 colours kept, same c01 face.
+Collar type per rank (no two alike), different cut + outer layer:
+- Tần: jade green full court robe, CROSS-COLLAR (jiaoling) with wide gold border, woven orchid damask, jade belt.
+- Phi: lake blue fitted satin jacket, HIGH STANDING collar, small soft vân kiên, organza sleeves, pleated skirt with lotus panel.
+- Quý phi: crimson, wide ROUND neck, defined vân kiên with gold peonies, ruqun, ribbon streamers.
+- Hoàng quý phi: apricot gold, WIDE SQUARE neck + six-lobe phoenix/pearl vân kiên, amber over-vest with phoenix medallions.
+- Hoàng hậu: imperial yellow, tall TIERED PHOENIX collar (red-gold tabs), modest vân kiên, red-gold phoenix skirt, phoenix crown.
+Sheets: https://ctm-img.victoria-tntt.workers.dev/img/_review/rank-vankien/sheet_figures_v3.jpg and sheet_shoulders_v3.jpg
