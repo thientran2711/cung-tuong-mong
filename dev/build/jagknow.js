@@ -115,7 +115,7 @@ function knLine(r,h){const W=agPlaceTxt(h.k),what=knWhat(h);const fill=t=>String
   const P=KN_POOL[r.how==="self"?"here":r.by]||KN_POOL.mat;let t=fill(kLine("tinbao:"+r.by,P,{m:"cool"}));
   if(r.e){const o=ownerOf(r.e);t=t.replace(/\{N\}/g,r.e.name).replace(/\{P\}/g,o?(o===S?"ta":NM(o)):"khác")}return t}catch(e){return `Ở ${W} ${what}.`}}
 /* ---------- her TIN BÁO list ---------- */
-function knTb(){let b="";try{b=bkey()}catch(e){}S.tb=S.tb||{};if(S.tb.b!==b){S.tb.b=b;S.tb.K={}}if(!S.tb.R||S.tb.d!==wk()){S.tb.d=wk();S.tb.R=[]}S.tb.K=S.tb.K||{};return S.tb}
+function knTb(){let b="";try{b=bkey()}catch(e){}S.tb=S.tb||{};if(S.tb.b!==b){S.tb.b=b;S.tb.K={};knCarryIn(S.tb)}if(!S.tb.R||S.tb.d!==wk()){S.tb.d=wk();S.tb.R=[]}S.tb.K=S.tb.K||{};return S.tb}
 function knRaw(){return KN.raw||[]}
 function knScan(L){if(!S||S.dead||S.out)return[];try{knFlush()}catch(e){agErr("knFlush",e)}const T=knTb();KN.stat.scan++;const out=[];const now=agKh();
  for(const h of L){if(h.done)continue;const hid=knHid(h);const w=knWin(h);const ended=w[1]<now&&!knFixed(h)?1:0;/* AG-ALL-2d2: an ENDED happening still reaches her (late news down the khắc chain), flagged ended */
@@ -130,6 +130,20 @@ function knEnd(it){if(!it||it.ended)return it;it.ended=1;try{const e=kLine("tinb
 function tinBaoList(){if(!knOn()||!S||S.dead||S.out)return[];let L=[];try{L=adHapNow()}catch(e){}const T=knTb();const now=agKh();
  for(const it of Object.values(T.K))if(it.k1<now&&it.k!=="fest"&&it.k!=="cold"&&!it.ended)knEnd(it);
  const A=Object.values(T.K).filter(it=>it.k1>=now||it.ended||it.k==="fest"||it.k==="cold");const R=(T.R||[]).filter(it=>it.b===(S.buoi||0));return A.concat(R).map(x=>Object.assign({},x))}
+/* AG-ALL-2d3 (design gap §23.5): a deed in the LAST khắc of a buổi reaches her only after the buổi (the khắc chain: seen → the bearer walks →
+   known, knRelay khắc) and the hap list is per buổi, so that news was lost. At the buổi turn (before it turns: the records of the ending buổi are
+   still there) every happening of the ending buổi she has not learned yet is asked once more with THE SAME rule (knFor) at the khắc its news can
+   arrive (last khắc of the buổi + knRelay); what would reach her is carried into the next buổi as an ENDED TIN BÁO item (knEnd: "vừa …" + "đã
+   xong"), with the same informer. Hidden news stays hidden; fixed happenings (lễ) are known anyway; deeds that run on into the next buổi are in
+   its list already (agSpan carry). */
+function knCarryOut(){if(!knOn()||!S||S.dead||S.out)return 0;const D=knRelay();if(!D)return 0;let L=[];try{adHapNow();L=KN.raw||[]}catch(e){return 0}
+ const T=knTb();const KH=J95.KH,real=agKh;const C=[];
+ for(const h of L){if(!h||h.done||knFixed(h))continue;const hid=knHid(h);if(T.K[hid])continue;const w=knWin(h);if(!w||w[1]+D<KH)continue;/* its news could not come inside this buổi */
+  let r=null;agKh=()=>Math.max(real(),w[1])+D;try{r=knFor(S,h)}catch(e){agErr("knCarry",e)}finally{agKh=real}
+  if(!r)continue;const it={id:hid+":c",k:h.id,place:h.k,k0:0,k1:0,who:knWho(h),line:knLine(r,h),by:r.by,inf:knInf(r),infName:knInfName(r),seen:0,ended:0,carry:1};C.push(it)}
+ S.tb.C=C;KN.stat.carry=(KN.stat.carry||0)+C.length;return C.length}
+function knCarryIn(T){const C=T.C||[];T.C=[];for(const it of C){it.b=S.buoi||0;knEnd(it);T.K[it.id]=it;for(const f of KN.cb)try{f(Object.assign({},it))}catch(e){console.error("tinBao cb",e)}}}
+(function(){const n0=nextBuoi;nextBuoi=function(){try{knCarryOut()}catch(e){agErr("knCarry",e)}return n0.apply(this,arguments)}})();
 function tinBaoNew(){return tinBaoList().filter(x=>!x.seen).length}
 function tinBaoOn(fn){if(typeof fn==="function")KN.cb.push(fn);return ()=>{const i=KN.cb.indexOf(fn);if(i>=0)KN.cb.splice(i,1)}}
 function tinBaoSeen(id){const T=knTb();for(const it of Object.values(T.K).concat(T.R||[]))if(id==null||it.id===id)it.seen=1}
