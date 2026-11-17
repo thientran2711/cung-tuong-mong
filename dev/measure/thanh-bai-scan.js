@@ -18,8 +18,8 @@ for(const f of fs.readdirSync(P))if(/^j.*\.js$/.test(f)&&f!=='all.js'){const s=f
   for(let i=0;i<(st?Math.min(st,8):0);i++)await g.evaluate(()=>{try{if(!S||S.dead)start();Q.length=0;endTurn();Q.length=0;$("modal").hidden=true}catch(e){}});
   const L=await g.evaluate(()=>{const out=[];let box=document.getElementById('tbscan');if(!box){box=document.createElement('div');box.id='tbscan';document.body.appendChild(box)}
    try{(deck||[]).forEach((a,i)=>{box.innerHTML=cardH(a,i);kaNorm(box);const bt=box.querySelector('button');if(!bt)return;
-    const one=!bt.querySelector('.kbh-b'),hasT=!!bt.querySelector('.kbh-t'),hasB=!!bt.querySelector('.kbh-b');const n=k=>bt.querySelectorAll('.kr.kb-'+k+':not(.kr-none)').length;
-    out.push({name:a.n,odds:(a.o==null?100:a.o),dis:bt.disabled,one,hasT,hasB,nt:n('t'),nb:n('b'),emptyB:hasB&&!n('b'),emptyT:hasT&&!n('t'),ton:!!bt.querySelector('.kr-ton'),literal:/(^|[\s·])(thành|hỏng|bại|tốn|kèm)\s*:/i.test(bt.textContent),txt:bt.textContent.replace(/\s+/g,' ').slice(0,200)})})}catch(e){out.push({err:String(e.message)})}
+    const hasB=!!bt.querySelector('.kr-bai'),hasT=!!bt.querySelector('.kr-thanh'),one=!hasB;const n=k=>bt.querySelectorAll('.kr.kb-'+k+':not(.kr-none)').length;
+    out.push({name:a.n,odds:(a.o==null?100:a.o),dis:bt.disabled,one,hasT,hasB,nt:n('t'),nb:n('b'),emptyB:!!bt.querySelector('.kr-none.kr-bai'),emptyT:!!bt.querySelector('.kr-none.kr-thanh'),ton:!!bt.querySelector('.kr-ton'),literal:/(^|[\s·])(thành|hỏng|bại|tốn|kèm)\s*:/i.test(bt.textContent),txt:bt.textContent.replace(/\s+/g,' ').slice(0,200)})})}catch(e){out.push({err:String(e.message)})}
    box.innerHTML='';return out});
   for(const c of L)cards[c.name+'|'+(c.odds<100)]=c}
  const C=Object.values(cards).filter(c=>!c.err);
