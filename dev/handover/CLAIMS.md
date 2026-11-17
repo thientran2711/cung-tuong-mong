@@ -799,3 +799,4 @@
 | origin-bd-branch r1 PASS 4e50e6ea → lander queue; reviewer + worker archived | review/origin-bd-branch-r1 | B | session_01N1tNP3r4Wz5SfLPnQXnXnJ | PASS (archived) | 17/11 14:56Z |
 | narrow-t3-r1 PASS 07747a9b (412/390 T3 narrow + showModal dup-list root fix; on opt-pic-same-r2) → builder batch s32a; worker + reviewer archived; follow-up: court tab rows + 10-option menu at phone width | review/narrow-t3-r1 | MAIN s32 | session_01UV1SzhfMi68Cmn88G2Yqze | PASS → BATCH | 17/11 14:57Z |
 | toil-looks4: Vụng A powder puffs more blurred + varied sizes (OD ~15:00Z) on review/toil-looks2 630eaa633 → ?v=9 | review/toil-looks2 | MAIN s33 | session_01UV1SzgeSNEfimjeQXX5dPa | RUNNING | 17/11 15:01Z |
+| one-core-dup3-land delta PASS 5507baafa → re-merge on main abe056c3 → Foreman B push | review/one-core-dup3-land | B | session_01N1tNP4w2TLPYNZz2SH8hxL | PASS | 17/11 15:05Z |
