@@ -52,10 +52,11 @@ const CODE_PAT={
    ladder = a private threshold table typed as a ternary chain: r>=7?[4,2]:r>=5?[3,2]:… / o>=91?"Nắm chắc":o>=81?… (a second table for a
             concept the rulebook should hold once: capOf, the odds-word cut points …) */
 const NUMV='[+-]?\\d+(?:\\.\\d+)?';
+const NUMA='[+-]?(?:\\d+(?:\\.\\d+)?|\\.\\d+)'; /* an amount may be typed '.5' (srvMerit(.5), one-core-dup3) */
 const JOIN_PAT={
  /* amt also counts ONE-argument calls (dup2 c66ef16a: e67dad(4)); e67heir added by review/one-core-arcs r2 (reviewer r1 item 1) —
     one kind, the former 'amt1' folded in here */
- amt:new RegExp('\\b(?:rdOan|rdRel|relAdd|oanAdd|affAdd|kcAf|tdPowAdd|e67(?:dad|bien|kho|heir|ally|pun|foe|drop))\\((?:(?:[^()]|\\([^()]*\\))*?[(,])?\\s*(?:[\\w$.!]+\\s*\\?\\s*)?'+NUMV+'(?:\\s*:\\s*'+NUMV+')?\\s*\\)','g'),
+ amt:new RegExp('\\b(?:rdOan|rdRel|relAdd|oanAdd|affAdd|kcAf|tdPowAdd|e67(?:dad|bien|kho|heir|ally|pun|foe|drop|merit|srvUp)|srvMerit)\\((?:(?:[^()]|\\([^()]*\\))*?[(,])?\\s*(?:[\\w$.!]+\\s*\\?\\s*)?'+NUMA+'(?:\\s*:\\s*'+NUMA+')?\\s*\\)','g'),
  ladder:new RegExp('(?:[\\w$.\\])]+\\s*(?:>=|>|<=|<)\\s*'+NUMV+'\\s*\\?\\s*(?:\\[[^\\[\\]]*\\]|'+NUMV+'|""|``)\\s*:\\s*){2,}(?:\\[[^\\[\\]]*\\]|'+NUMV+'|""|``)','g'),
 };
 const TXT_PAT={
