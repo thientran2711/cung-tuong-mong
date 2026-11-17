@@ -1,0 +1,8 @@
+# Sub-agent brief: REPAINT 8 maid a18 files with the ORIGINAL maid look (W6b redo)
+Same as tools/AGENT_GEN_BRIEF.md (read it fully: setup, tools, prompt text, finish/QA/upload, RATE LIMIT max 5 gens in flight, MANIFEST BAN: cdn_sync explicit webp paths only) with these differences:
+- Keys are given with their OLD-REF creation id (column 2 of dev/handover/reports/fig-cutout-clean/batch-maid-rest-B-redo.tsv): the ORIGINAL figure already uploaded to Magnific. SKIP step 1 (no upload); use that id as image 1 (references: [old-ref id, + the four face ids from AGENT_GEN_BRIEF.md step 2, copied exactly]).
+- LOOK: ORIGINAL maid look = exactly what image 1 shows: rich fine silk, same embroidery, same hairpins/headdress/crown. Do NOT simplify, do NOT make plain. Only change: the new gesture prop (fan, small lantern, teacup, scroll, flower branch, silk handkerchief, jade pendant, small comb; never fingertip-at-hairpin), calm frontal, tiny/no huadian (maids none), no long train, feet visible, transparent background. For *-cold-* keys: plain clothes AND NO jewellery at all (no hairpin ornaments, no earrings).
+- The live CDN files are the plain version; finish_fig saves them in OUT/_old/ (that is the BEFORE). Uploading overwrites the live files in place (same names: fig, hd, por, tn if produced).
+- Fragment: hd-entries/W6b-redo-<AGENTNAME>.json (same format).
+- Contact sheet for the look: build ONE before|after sheet (<=1100 px wide): for each key a row-pair BEFORE(_old fig) | AFTER(new hd), 8 figures on dark; save it as /tmp/claude-0/w/<AGENTNAME>/redo_sheet.jpg AND copy to dev/handover/reports/fig-cutout-clean/rank-sample/redo-<AGENTNAME>.jpg (jpg quality 80).
+- Final reply: TSV "key<TAB>old-ref id<TAB>new gen id<TAB>status" x8 + 3 lines max.

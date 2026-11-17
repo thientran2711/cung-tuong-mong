@@ -203,3 +203,12 @@ maid-m38-t2-a18	aFArGZTfSh	IfibR6ltvE	ok
 maid-m38-t3-a18	aFArG2VfSh	fHGxnzECDY	ok
 ## 183 a18 done (list lines 1-183) through maid-m38-t3-a18. NEXT = maid-m38-t4-a18 (line 184). TODO: audit all *-cold-a18 for jewellery (owner: cold palace = plain clothes, no jewellery).
 ## PLAIN-PROMPT batches (lead note active, painted since ~02:51Z; Foreman C decides if they stay; owner later said she likes the ORIGINAL look): gL = m35-tm4, m36-a/cold/kc/ngheo/t1/t2/t3; gM = m36-t4..t8, tm0, tm2, tm3; gN = m36-tm4, m37-a/cold/kc/ngheo/t1/t2/t3; gO = m37-t4..t8, tm0, tm2, tm3; gP = m37-tm4, m38-a/cold/kc/ngheo/t1/t2/t3; gQ (running, started with plain note) = m38-t4..t8, tm0, tm2, tm3. Earlier batches (m27-m35-tm3) used the original-look prompt (except none had the note). From gR on: ORIGINAL look.
+maid-m38-t4-a18	N2H0kbP6D9	eIyEiXidqL	ok (plain-note)
+maid-m38-t5-a18	KLDJBdTkqp	s786aUtl8e	ok (plain-note)
+maid-m38-t6-a18	DoJf94Epcl	3z5MjzMREY	ok (plain-note)
+maid-m38-t7-a18	9ZFcK59NYZ	u5YsMKWQLD	ok (plain-note)
+maid-m38-t8-a18	4RQW55s9Aa	KLDJog1kqp	ok (plain-note)
+maid-m38-tm0-a18	mERKznWhJQ	VXwv44XMMU	ok (plain-note)
+maid-m38-tm2-a18	P3uYbKa42C	p8OC6iZehw	ok (plain-note)
+maid-m38-tm3-a18	w4v2uHm7EI	O6CzqKMynm	ok (plain-note)
+## 191 a18 done (lines 1-191). REPAINT ORDER (Foreman C s12): repaint the plain-note keys with ORIGINAL look BEFORE continuing; redo TSV in batch-maid-rest-B-redo.tsv; after that NEXT new = maid-m39-a18 (line 192).
