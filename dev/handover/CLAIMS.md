@@ -524,3 +524,4 @@
 | BATCH 0032b LIVE: main = 0f61ff928 (f5220eaa + coop-main-faults 608309dc; quickcheck PASS, coop-e2e vs live 60/60; Worker unchanged f7d52a7d) | main | main s28 | session_01UV1Szgb3UbRCJaMcocuGrF | LIVE | 17/11 01:42Z |
 | FP princess art SUCCESSOR #4 (sonnet art, 2K): NC v24 owner pick → NC other ranks; BD other ranks; per HANDOVER #3 | review/foreign-princess-samples + reports on handover | C | session_011xDdVSKDexc7PYaJAwNMew | RUNNING | 17/11 01:47Z |
 | WHOLE FIGURE REPAINT batch W3b consort-rest-A (successor of W3, 2K) | review/fig-cutout-clean | C | session_011xDdVRasDZpQLoZZZc3Mmn | RUNNING | 17/11 01:47Z |
+| BATCH 01:32 builder (opus): batch-0132 = main 0f61ff92 (coop-main-faults) + kit-size-10 8ab00ede; oi-perf / it-key-guard / coop-contest-fix not received | review/batch-0132 | main s28 | session_01UV1Szgb3UbRCJaMcocuGrF | SẴN SÀNG KIỂM 7abaf07a | 17/11 02:00Z |
