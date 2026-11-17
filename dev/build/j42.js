@@ -177,6 +177,8 @@ function srvMeet(){const m=srvM();const L=allServ().filter(s=>ownerOf(s)!==m&&!S
 (function(){const n0=nextBuoi;nextBuoi=function(){if(!isSrv())return n0.apply(this,arguments);const b0=bid();const r=n0.apply(this,arguments);if(isSrv()&&!S.dead&&bid()!==b0&&(S.buoi||0)>0){deal();render()}return r}})();
 (function(){const e0=endTurn;endTurn=function(){if(isSrv())return srvEndTurn();return e0.apply(this,arguments)}})();
 function srvEndTurn(){if(S.dead||Q.length||S.mg)return;S.buoi=0;const q0=Q.length;let ev="";
+ /* AG3 (one world): the consorts sleep and rest in a maid life as in hers (j3 nightRg + j76sleep); before, their Sức only fell on this road */
+ try{if(typeof worldOn!=="function"||worldOn())liveRivals(true).forEach(v=>v.suc=cl(v.suc+nightRg()+(typeof j76sleep==="function"?j76sleep(v):0),0,100))}catch(e){console.error("srv rest",e)}
  srvMisCheck();
  ev+=srvW(()=>resolveTonight()||"");ev+=srvW(()=>rivalsTurn()||"");if(S.dead)return;
  {const lb=typeof lsSnap==="function"?lsSnap():null;/* log-sync r1: the weekly rest gets its reason in the morning line */

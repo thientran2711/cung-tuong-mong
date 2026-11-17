@@ -473,12 +473,14 @@ Object.assign(BAL,{ag:{on:1,
             g = his regard gained on success (+ Sắc / gs, srvNotice), fail = master's trust (Chủ tin / lòng) lost on a spilt cup
     jeal    the master sees him look at her: % = b + master's malice / d; trust lost = BAL.net.n.misJealTin by the master's nết (one table with show-why)
     decay   his regard for a maid fades per month (was S.nt − 2 / month, j42)
-    ch      her weight in his night pool (the same terms as a consort's nightCh: regard / sung + Sắc / sac, cap); only maids he MET (S.emp.met)
+    ch      her weight in his night pool (the terms of a consort's nightCh: regard / sung + Sắc / sac, cap; bot-tuned so maid nights ≈ the old
+            eye-roll rises); only maids he MET (S.emp.met)
     night   a maid's night: his regard + b + q / 2 (q = Sắc / 20 + luck, rivalNight's own formula); rise = her Sủng as a consort = b + regard / d
             (srvRise's own conversion: was 15 + nt / 5)
-    send    the consort's "Tiến cử <maid> hầu thay" on her night: × on her need (tired / ill / wants an ally) against keeping it (BAL.ag.routine)
+    send    the consort's "Tiến cử <maid> hầu thay" on her night: × on her need (tired / ill; × (1 + ally need) with a trusted maid) against
+            keeping it (BAL.ag.routine)
     decline the player maid begs off his summons: his regard lost */
- maid:{st:{sac:[20,60],tai:[0,30]},tea:{b:25,sac:2.5,tai:10,nt:5,g:8,gs:20,fail:1},jeal:{b:30,d:3},decay:2,ch:{sung:4,sac:12,cap:70},
+ maid:{st:{sac:[20,60],tai:[0,30]},tea:{b:25,sac:2.5,tai:10,nt:5,g:8,gs:20,fail:1},jeal:{b:30,d:3},decay:2,ch:{sung:2,sac:8,cap:70},
   night:{b:2},rise:{b:15,d:5},send:.15,decline:10}}});
 
 /* BAL.mind — jmind (one mind for every person, review/npc-mind; moved here from jmind.js, r1 fault 3 ONE CORE)
