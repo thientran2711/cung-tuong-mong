@@ -3,7 +3,7 @@
 const {chromium}=require('./lib/pw-roulette');const [,,URL]=process.argv;const sleep=t=>new Promise(r=>setTimeout(r,t));
 (async()=>{const b=await chromium.launch();const errs=[];const p=await b.newPage({viewport:{width:1180,height:820}});p.on('pageerror',e=>errs.push(e.message));p.setDefaultTimeout(240000);
  await p.goto(URL,{waitUntil:'domcontentloaded',timeout:240000});
- for(let i=0;i<400;i++){const s=await p.evaluate(()=>{const b=document.querySelector('#kload [data-kl="go"]');if(b){b.click();return ''}return window.KLOAD&&['done','skipped','all'].includes(KLOAD.phase)&&!document.getElementById('kload')?'ok':''});if(s==='ok')break;await sleep(1500)}
+ for(let i=0;i<12;i++){const s=await p.evaluate(()=>{const b=document.querySelector('#kload [data-kl="go"]');if(b){b.click();return ''}return window.KLOAD&&['done','skipped','all'].includes(KLOAD.phase)&&!document.getElementById('kload')?'ok':''});if(s==='ok')break;await sleep(1500)}
  const out=await p.evaluate(async()=>{window.__forceOrigin="thd";SLOT=3;document.getElementById('title').hidden=true;window.__nlInner=1;start();window.__nlInner=0;await new Promise(r=>setTimeout(r,800));
   const R={n:0,bad:[],emp:{with:0,without:0}};const CLAIM=/tình cờ gặp Hoàng thượng|đang phê tấu chương|cho ngươi vào hầu/;
   const chk=(tag)=>{const V=S.visit;if(!V)return;R.n++;const has=V.people.some(p=>p.kind==="emp");has?R.emp.with++:R.emp.without++;const m=V.msg||"";
