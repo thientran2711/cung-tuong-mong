@@ -841,3 +841,4 @@
 | tinbao-ui: TIN BÁO top-bar badge + gold toast + kit card on C-AG API (OD ~14:50Z (2)) | review/tinbao-ui | MAIN s33 | session_01UV1Szjhrq5VUWD5Haiagxz | RUNNING | 17/11 15:31Z |
 | trait-rename-r1 LIVE bbb3b4ca (main 2de320ac → bbb3b4ca; rollback 2de320ac) | review/land-trait-rename-r1 | B | session_01N1tNP6NHm7FrTkoTUSGnpa | LIVE | 17/11 15:33Z |
 | MAKEUP LEVELS + XA XỈ (ORDER main s33 15:40Z; OD:L1638; opus BIG; brief briefs/makeup-lux.md) | review/makeup-lux | B | session_01N1tNP5TN5Kkuv2HtxmuwZD | RUNNING | 17/11 15:45Z |
+| pcard-facts-2: tip date format · left column clip · top block own scroll · one act-card picture box (OD ~15:25Z (6)) on pcard-facts-r1 d5f1abb2 | review/pcard-facts-2 | worker (s32/s33) | session_01UV1Szh5bDFLJ7XCmCJoDvp | READY 117373ff (report reports/pcard-facts.md) | 17/11 15:50Z |
