@@ -311,7 +311,7 @@ Object.assign(BAL,{mem:{cap:5,fadeMo:2,keepFloor:.35,modDiv:8,modMax:10,recallMi
   help:10,visit:10,warn:15,mediate:12,humiliate:20,drop:15,nightsteal:12,threat:20,demote:60,confine:30,srvreward:10,srvpunish:15,srvshield:45,rescue:70},
  holderCap:16,life:["poison","musk","kidharm","pardon","frame","takeaway","gifttaint","demote","srvshield","rescue"],lifeMin:60,lifeCap:3,lifeRel:30,
  fadeJit:.25,fadeMinK:.1,
- fadeT:{"Hiểm độc":[1.3,.5],"Kiêu ngạo":[1.3,.6],"Hiền lành":[.8,1.8],"Đa nghi":[1.2,.7],"Tham vọng":[1.6,1],"Nhu mì":[.9,1.3],"Hiếu thảo":[.8,1],"Ghen tuông":[1,.7],
+ fadeT:{"Xảo quyệt":[1.3,.5],"Kiêu ngạo":[1.3,.6],"Hiền lành":[.8,1.8],"Đa nghi":[1.2,.7],"Tham vọng":[1.6,1],"Nhu mì":[.9,1.3],"Hiếu thảo":[.8,1],"Ghen tuông":[1,.7],
   "Tham tiền":[1.5,1],"Trọng nghĩa":[.4,1],"Nhiều chuyện":[1.5,1.5],"Thù dai":[1,.25],"Cả nể":[.9,1.4],"Thẳng thắn":[1,1.2],"Mê tín":[1,1],"Khéo léo":[1.2,1.1],
   trung:[.5,1.2],tham:[1.6,1],nhat:[1,.8],lanh:[1.2,1],chuyen:[1.4,1.4],
   nongnay:[1.3,.6],nhantu:[.8,1.8],datinh:[1.6,1.3],lanhlung:[.6,.6],chamchinh:[1,1],danghi:[1,.6],mesac:[1.3,1],trongtai:[1,1],hieuthao:[1,1]},

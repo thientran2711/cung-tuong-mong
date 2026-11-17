@@ -195,3 +195,5 @@ Giữ rõ luật (mục 4): con số, bậc may rủi, Tốn/Thành/Hỏng/Kèm 
 | B3: Mở «Phượng cầu hoàng»: cơ hội được thị tẩm | Bậc 3: Mở «Phượng cầu hoàng»: thêm dịp được thị tẩm |
 | Đem đến Thái y viện xét nghiệm | Đem đến Thái y viện nghiệm độc |
 | “Không có khẩu dụ, nương nương xin hồi cung.” (người chơi là Thường tại) | “Không có khẩu dụ, tiểu chủ xin hồi cung.” |
+
+- Nết (trait) names: the pre-judged villain nết "Hiểm độc" is now "Xảo quyệt" (owner 17/11 05:35Z). One label map TRAIT_OLD/traitLabel in j1.js; old saves migrate on load (trMigrate in deser).

@@ -274,7 +274,7 @@ try{RANKED_W.forEach(([n,pr,d],r)=>{IT["ngocboi_r"+r]={n,kd:"Trang sức",d:`Đe
    Level (internal): 0 nothing worn · 1 ≤ allowance · 2 ≤ 1.5 × allowance · 3 above.
    Monthly (j8 itemMonth, player and every NPC alike): Xa hoa → others' Ghen +1 (×trait); Quá xa xỉ → Ghen +3 (×trait), Thái hậu/Hoàng hậu
    may frown (chance falls with Đức): Thái hậu -3 for her / Danh -2 for an NPC, gossip 1 in 4: Danh -1. Giản dị from Tần up: 1 in 4 Đức +1. ---------- */
-const LUX_W=[0,1,2,3,5],LUX_N=[["Giản dị","n"],["Vừa phẩm","g"],["Xa hoa","n"],["Quá xa xỉ: dễ bị ghen","r"]],LUX_TR={"Kiêu ngạo":1.5,"Tham vọng":1.5,"Hiểm độc":1.2,"Đa nghi":1,"Hiền lành":.5,"Nhu mì":.5};
+const LUX_W=[0,1,2,3,5],LUX_N=[["Giản dị","n"],["Vừa phẩm","g"],["Xa hoa","n"],["Quá xa xỉ: dễ bị ghen","r"]],LUX_TR={"Kiêu ngạo":1.5,"Tham vọng":1.5,"Xảo quyệt":1.2,"Đa nghi":1,"Hiền lành":.5,"Nhu mì":.5};
 function luxWorn(p){const L=(p.inv||[]).filter(e=>e.w&&!e.h&&IT[e.k]&&itm(e.k).sl).map(e=>e.k);if(p.dress&&p.dress.until>S.turn&&IT[p.dress.k])L.push(p.dress.k);return L}
 function luxGrade(k){const a=typeof itemArt==="function"?itemArt(k):null;return a?a.grade|0:0}
 const LUX_V=[8,16,28,44,64];

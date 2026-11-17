@@ -47,7 +47,7 @@ function succNeeds(p,son,U){const N=[];if(p==="a")return N;const cold=!!S.out;
  return N.sort((x,y)=>(+x.ok)-(+y.ok))}
 /* ---------- NPC dowager (two-way): the same conditions as (b) ---------- */
 function succNpcClaims(v,k){if(!v||!v.alive||v.out||!k||k.age>=BAL.succN.bAge)return false;const tr=(typeof traitsOf==="function"?traitsOf(v):[v.trait]).concat([v.trait]);
- return (((v.danh||40)>=BAL.succN.npcDanh&&(v.tamco||40)>=BAL.succN.npcTam)||tr.some(t=>/Tham vọng|Hiểm độc|Kiêu ngạo/.test(t||"")))}
+ return (((v.danh||40)>=BAL.succN.npcDanh&&(v.tamco||40)>=BAL.succN.npcTam)||tr.some(t=>/Tham vọng|Xảo quyệt|Kiêu ngạo/.test(t||"")))}
 let SUCC_NPC=null;
 (function(){const o0=over;over=function(h,t,fate,alive){if(SUCC_NPC&&S&&!S.dead){const v=SUCC_NPC;SUCC_NPC=null;
   if(!/buông rèm/.test(t||""))t=String(t||"").replace(/\.?\s*$/,".")+` Tân đế còn nhỏ, ${v.name} buông rèm nhiếp chính, nắm cả triều đình lẫn hậu cung.`;fate=(fate||"")+" · Thánh mẫu nhiếp chính"}

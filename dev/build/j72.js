@@ -209,7 +209,7 @@ function q72Date(){try{if(window.VP&&typeof VP.date==="function")return VP.date(
 function q72Npc(){const q=q72();if(!q72On())return"";const L=liveRivals(true).filter(v=>!v.confined);if(L.length<2)return"";let ev="";
  for(let t=0;t<2;t++){if(!roll(Q72CFG.npc*100))continue;const a=pick(L);const others=L.filter(v=>v!==a);
   const w=others.map(v=>Math.max(.1,10+aff(a,v)));let r=Math.random()*w.reduce((x,y)=>x+y),i=0;while(r>w[i]&&i<others.length-1){r-=w[i];i++}const b=others[i];
-  const tr=(()=>{try{return traitsOf(b)}catch(e){return[b.trait]}})();const p=cl(40+aff(b,a)/2+(tr.includes("Hiền lành")?20:0)+(tr.includes("Nhu mì")?10:0)-(tr.includes("Kiêu ngạo")?15:0)-(tr.includes("Hiểm độc")?10:0),5,95);
+  const tr=(()=>{try{return traitsOf(b)}catch(e){return[b.trait]}})();const p=cl(40+aff(b,a)/2+(tr.includes("Hiền lành")?20:0)+(tr.includes("Nhu mì")?10:0)-(tr.includes("Kiêu ngạo")?15:0)-(tr.includes("Xảo quyệt")?10:0),5,95);
   const what=pick(NPCQ72);const ok=roll(p);relAdd(a,b,ok?6:-4);const k=[a.id,b.id].join(">");q.nd=q.nd||{};if(ok)q.nd[k]=(q.nd[k]||0)+1;
   const txt=ok?`${a.name} nhờ ${b.name} ${what}; ${b.name} giúp, hai người thân hơn.`:`${a.name} nhờ ${b.name} ${what}; ${b.name} từ chối, hai người sinh hiềm khích.`;
   q.np.unshift({w:q72Date(),t:txt,a:a.id,b:b.id});if(q.np.length>8)q.np.length=8;try{const s=seenNPC(b,a,txt+" ");if(s)ev+=s}catch(e){}}
@@ -500,7 +500,7 @@ window.q72Bot=function(){if(!S||S.dead||Q.length||!q72On())return false;const q=
   s:[C("Hồi môn",O("Tặng 30 bạc",{c:{bac:-30}}),O("Thêu cho nàng đôi gối uyên ương",{p:60,sk:"tai",k:2,lto:"stay"}))],ok:{r:20,fx:{duc:2}},no:{r:-4}});
  T7("dong_tam","love",{r:"svm",rf:s=>!!loverOf(s)||!!fiM(s),w:fest(7),t:"Thắt nút đồng tâm Thất tịch cùng {A}",h:"“Đêm Thất tịch, nô tỳ muốn thắt nút đồng tâm gửi người thương mà thiếu chỉ đỏ. {Nc} cho nô tỳ xin ít.”",dl:2,
   s:[G("home","Mua chỉ đỏ","",100,1,{bac:-8}),G("home","Thắt nút cùng {A}","tai",75,1)],ok:{r:10},no:{r:-2}});
- T7("giau_cn","pro",{r:"rsv",rf:(s,z)=>(s.loyal||50)<45&&trs(z.own).some(t=>t==="Hiểm độc"||t==="Kiêu ngạo"),t:"Cứu {A} khỏi chủ cũ",
+ T7("giau_cn","pro",{r:"rsv",rf:(s,z)=>(s.loyal||50)<45&&trs(z.own).some(t=>t==="Xảo quyệt"||t==="Kiêu ngạo"),t:"Cứu {A} khỏi chủ cũ",
   h:X=>`“{Nc} cứu nô tỳ! ${X.A.own.name} hễ giận là đánh, lưng nô tỳ chưa lành vết cũ. Cho nô tỳ trốn tạm vài hôm.”`,dl:5,
   s:[W("Giấu {A} trong cung",1),C("Đưa {A} đi đâu",O("Xin Tổng quản cho nàng về hầu cung ngươi",{t:()=>capOk(),tw:"cung ngươi đã đủ người hầu",c:{bac:-20},p:55,sk:"danh",lto:"bad",fn:(X,x,ok)=>{if(!ok)return"";const s=X.A.o,ow=X.A.own;const i=(ow.staff||[]).indexOf(s);if(i>=0)ow.staff.splice(i,1);s.spyFor=null;s.loyal=60;S.staff.push(s);relAdd(S,ow,-6);return `${s.name} về hầu cung ngươi (lòng 60); ${ow.name} mất thiện cảm -6.`}}),
    O("Trả về chủ cũ, xin chủ nương tay",{p:60,sk:"danh",lto:"fail",fn:X=>{relAdd(S,X.A.own,-3);X.A.o.loyal=cl((X.A.o.loyal||40)+10,0,100);return `${X.A.own.name} nương tay; lòng ${X.A.n} với chủ +10.`}}))],

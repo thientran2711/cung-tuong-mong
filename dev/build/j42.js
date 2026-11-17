@@ -27,7 +27,7 @@ function srvMerit(n){S.srv.mp=(S.srv.mp||0)+n}
 function srvOnce(k,sc){const v=S.srv.once[k];return !!v&&(sc==="b"?v.b===bid():v.w===wk())}
 function srvWhere(v){const w=whereOf(v);if(!w||w==="home"||w==="tgk")return palaceOf(v);try{return places().some(x=>x.k===w)?w:palaceOf(v)}catch(e){return palaceOf(v)}}
 function srvMisHome(){const m=srvM();return !!m&&srvWhere(m)===palaceOf(m)}
-function misAdj(m){return (m.trait==="Hiền lành"||m.trait==="Nhu mì"?10:m.trait==="Kiêu ngạo"||m.trait==="Hiểm độc"?-8:0)+(S.tin-40)/5}
+function misAdj(m){return (m.trait==="Hiền lành"||m.trait==="Nhu mì"?10:m.trait==="Kiêu ngạo"||m.trait==="Xảo quyệt"?-8:0)+(S.tin-40)/5}
 function srvAf(s,n){S.srv.af[s.sid]=cl((S.srv.af[s.sid]||0)+n,-100,100)}
 function srvColleagues(){const m=srvM();const L=(m&&m.staff||[]).slice();for(const sid of S.srv.met||[]){const s=servById(sid);if(s&&!L.includes(s))L.push(s)}return L.slice(0,10)}
 function srvFriendList(){return srvColleagues().filter(s=>(S.srv.af[s.sid]||0)>=30)}
@@ -111,7 +111,7 @@ function srvTalk(p){const m=srvM();const A=[];if(!m)return A;
   const iv=(S.srv.intel||[]).map(RV).filter(v=>v&&v.alive&&v!==m)[0];
   T("Bẩm tin dò được",100,{tin:5},{},iv?`chủ nắm 1 chứng cứ của ${iv.name}`:"",()=>{if(iv){/*evok: servant-mode intel; capped, preview only*/evA(m,iv,1);S.srv.intel.splice(S.srv.intel.indexOf(iv.id),1)}},{lock:!iv,t:"Chưa dò được tin gì"});
   T("Xin chủ tiến cử lên Nội vụ phủ",od(30+S.tin/2),{},{tin:-3},"công lao +3",ok=>{if(ok)srvMerit(3)},{lock:S.tin<50||S.srv.rk>=srvMax(),t:S.srv.rk>=srvMax()?"Đã ở bậc cao nhất cung này cho phép":"Cần Chủ tin 50"})}
- if(p.sk==="emp"){T("Quỳ dâng trà",od(25+S.sac/2.5+S.tai/10+mm()),{},{tin:-1},`Hoàng thượng để ý +8 · kèm: chủ ghen, Chủ tin -${m.trait==="Hiểm độc"||m.trait==="Kiêu ngạo"?8:4}: ${chanceW(cl(30+(m.malice||40)/3,0,100))}`,ok=>{if(ok)srvNotice("meet",8);return ok?"Ngài nhận chén trà, liếc nhìn ngươi.":"Tay run, trà sóng ra khay."});
+ if(p.sk==="emp"){T("Quỳ dâng trà",od(25+S.sac/2.5+S.tai/10+mm()),{},{tin:-1},`Hoàng thượng để ý +8 · kèm: chủ ghen, Chủ tin -${m.trait==="Xảo quyệt"||m.trait==="Kiêu ngạo"?8:4}: ${chanceW(cl(30+(m.malice||40)/3,0,100))}`,ok=>{if(ok)srvNotice("meet",8);return ok?"Ngài nhận chén trà, liếc nhìn ngươi.":"Tay run, trà sóng ra khay."});
   T("Cúi đầu lui tránh",100,{duc:1},{},"giữ phận",null)}
  if(p.sk==="rv"||p.sk==="hh"){const v=p.ref&&RV(p.ref.id);if(v&&v!==m){{const gN=typeof trSrvGreet==="function"?trSrvGreet(v):2;T("Hành lễ thỉnh an",100,{danh:1},{},gN?`${v.name} quý ngươi +${gN}`:`${v.name} không để tâm`,()=>{if(gN)affAdd(v,S,gN)})}
    const hostile=p.sk==="hh"||hostility(v,m)>=20;
@@ -130,7 +130,7 @@ function srvErrandDone(){const sn=S.srv.sent;if(!sn||sn.done)return"";sn.done=1;
  if(sn.v){const v=RV(sn.v),m=srvM();if(v&&m)relAdd(m,v,3)}
  return r}
 function srvNotice(src,gain){if(!S||(S.age||0)<18)return;const g=gain||(6+Math.round(S.sac/12));S.nt=cl(S.nt+g+Math.round(S.sac/20),0,100);const m=srvM();
- if(m&&roll(30+(m.malice||40)/3)){const d=m.trait==="Hiểm độc"||m.trait==="Kiêu ngạo"?8:4;apply({tin:-d});log(`<span class="r">${m.name} thấy Hoàng thượng nhìn ngươi, sa sầm nét mặt.</span> Chủ tin -${d}.`)}
+ if(m&&roll(30+(m.malice||40)/3)){const d=m.trait==="Xảo quyệt"||m.trait==="Kiêu ngạo"?8:4;apply({tin:-d});log(`<span class="r">${m.name} thấy Hoàng thượng nhìn ngươi, sa sầm nét mặt.</span> Chủ tin -${d}.`)}
  if(S.nt>=BAL.ntRise.at&&roll(ntRiseOdds()))pushDil(mkP("cnvName",{src}),"Hoàng thượng hỏi tên")}
 
 /* ---------- the day's cards (Việc) ---------- */
@@ -153,7 +153,7 @@ function srvCards(){const m=srvM();const X=[];if(!m)return X;const B=bid();const
  X.push({n:"Học lễ nghi với cô cô",t:"Đứng nghe cô cô dạy cách đi đứng, dâng trà, quỳ lạy.",k:1,c:{suc:-3},o:100,w:{duc:1},x:"công lao +0.25",rep:1,go:()=>srvMerit(.25)});
  X.push({n:"Luyện thêu thùa, chữ nghĩa",t:"Lén học chữ, thêu hoa dưới đèn dầu.",k:1,c:{suc:-3},o:od(60),w:{tai:1},l:{},rep:1});
  X.push({n:"Chải chuốt, giữ nhan sắc",t:"Phấn rẻ, nước giếng, ngủ đủ giấc.",k:1,c:{bac:-3},o:od(55),w:{sac:1},l:{},rep:1});
- const strict=home&&(m.trait==="Kiêu ngạo"||m.trait==="Hiểm độc");
+ const strict=home&&(m.trait==="Kiêu ngạo"||m.trait==="Xảo quyệt");
  X.push({n:"Nghỉ lấy sức",t:strict?`Chợp mắt; ${m.name} ghét kẻ lười.`:"Chợp mắt trong phòng cung nữ.",k:1,c:{},o:strict?od(70):100,w:{suc:12},l:{suc:6,tin:-3},x:"",rep:1});
  X.push({n:"Thêu khăn bán ra ngoài",t:"Nhờ thái giám mang ra cửa Thần Vũ bán.",k:2,c:{suc:-6},o:od(70),w:{bac:6},l:{danh:-2,tin:-2},rep:1});
  if(S.suc<50&&!srvOnce("med"))X.push(med);
@@ -161,7 +161,7 @@ function srvCards(){const m=srvM();const X=[];if(!m)return X;const B=bid();const
  if(!S.srv.err||S.srv.err.b!==B)S.srv.err=roll(45)?Object.assign({b:B},srvErrPick()):{b:B,none:1};
  const er=S.srv.err;if(!er.none&&!er.acc)X.push({n:"Việc chủ sai",t:er.n+".",k:1,c:{},o:100,w:{},x:"được vào nơi ấy buổi này · đến nơi chạm “Việc chủ sai”",go:()=>{er.acc=1;S.srv.sent={k:er.k,n:er.n,until:B,done:0,v:er.v||null};srvGoTo(er.k)}});
  if(S.tonight&&S.tonight!=="me"&&S.tonight.id===m.id&&!srvOnce("tea")){
-  X.push({n:"Hầu trà khi ngự giá",t:`Tối nay Hoàng thượng ngự giá đến cung ${m.name}. Ngươi bưng khay trà vào điện.`,b:B4L,k:1,c:{},o:od(25+S.sac/2.5+S.tai/10+S.nt/5),w:{},l:{tin:-1},x:`Hoàng thượng để ý +8 · kèm: chủ ghen, Chủ tin -${m.trait==="Hiểm độc"||m.trait==="Kiêu ngạo"?8:4}: ${chanceW(cl(30+(m.malice||40)/3,0,100))}`,once:"tea",go:()=>srvNotice("tea",8)});
+  X.push({n:"Hầu trà khi ngự giá",t:`Tối nay Hoàng thượng ngự giá đến cung ${m.name}. Ngươi bưng khay trà vào điện.`,b:B4L,k:1,c:{},o:od(25+S.sac/2.5+S.tai/10+S.nt/5),w:{},l:{tin:-1},x:`Hoàng thượng để ý +8 · kèm: chủ ghen, Chủ tin -${m.trait==="Xảo quyệt"||m.trait==="Kiêu ngạo"?8:4}: ${chanceW(cl(30+(m.malice||40)/3,0,100))}`,once:"tea",go:()=>srvNotice("tea",8)});
   X.push({n:"Lui sau bình phong",t:"Để chủ nhân một mình hầu ngài.",b:B4L,k:1,c:{},o:100,w:{tin:2},once:"tea"})}
  if(S.srv.spyFor!=null&&!srvOnce("spy")){const v=RV(S.srv.spyFor);if(v&&v.alive)X.push({n:`Lén báo tin cho ${v.name}`,t:"Kể chuyện trong cung chủ cho người đã mua chuộc ngươi.",k:1,c:{},o:od(70+S.tamco/5),w:{bac:8},l:{tin:-15},x:`${v.name} nắm 1 chứng cứ của ${m.name}`,once:"spy",go:()=>/*evok: capped; preview only*/evA(v,m,1),fail:()=>{if(roll(40))srvLaundry(`${m.name} bắt gặp ngươi lén lút với người của ${v.name}.`,8)}})}
  X.forEach(a=>a.dom="");return X}
@@ -226,10 +226,10 @@ function srvLaundry(why,weeks){if(!isSrv())return;if(S.srv.lau<=0)S.srv.rk0=Math
  log(`<span class="r">${why} Ngươi bị đày xuống Tân Giả khố ${weeks} tuần.</span>`);
  Q.push({t:"Tân Giả khố",cls:"end",who:pMe(),h:`<p>${why}</p><p>Ngươi bị đày xuống <b>Tân Giả khố</b> giặt đồ ${weeks} tuần. Việc nặng, cơm hẩm; Sức cạn thì nguy đến tính mạng.</p>`,btn:"Cúi đầu"});if(!quiet)deal()}
 function srvFromLaundry(){S.srv.lau=0;S.srv.rk=Math.max(1,(S.srv.rk0||1)-1);srvReassign("Hết hạn phạt ở Tân Giả khố.")}
-function srvMoodEvent(){const m=srvM();const tr=m.trait;const good=(S.tin-20)/100+(tr==="Hiền lành"||tr==="Nhu mì"?.2:0)-(tr==="Hiểm độc"||tr==="Kiêu ngạo"?.12:0);
+function srvMoodEvent(){const m=srvM();const tr=m.trait;const good=(S.tin-20)/100+(tr==="Hiền lành"||tr==="Nhu mì"?.2:0)-(tr==="Xảo quyệt"||tr==="Kiêu ngạo"?.12:0);
  if(Math.random()<good){const g=3+rkOf(m);apply({bac:g,tin:1});log(`${m.name} vui lòng, thưởng ngươi ${g} lạng bạc.`);Q.push({t:"Chủ thưởng",who:pv(m),h:`<p>${m.name} vui lòng, thưởng ngươi ${g} lạng bạc.</p><p class="g">Bạc +${g} · Chủ tin +1</p>`});return}
  if(S.tin<10){srvLaundry(`${m.name} chán ghét ngươi, sai người giải xuống Nội vụ phủ.`,6+R(5));return}
- if((tr==="Hiểm độc"&&S.tin<30&&roll(45))||(S.tin<20&&roll(40))){const d=20+R(15);apply({suc:-d});log(`<span class="r">${m.name} sai thái giám đánh ngươi hai mươi trượng.</span> Sức -${d}.`);
+ if((tr==="Xảo quyệt"&&S.tin<30&&roll(45))||(S.tin<20&&roll(40))){const d=20+R(15);apply({suc:-d});log(`<span class="r">${m.name} sai thái giám đánh ngươi hai mươi trượng.</span> Sức -${d}.`);
   Q.push({t:"Bị đánh đòn",cls:"end",who:pv(m),h:`<p>${m.name} nổi giận, sai thái giám đánh ngươi hai mươi trượng.</p><p class="r">Sức -${d}</p>`});if(S.suc<=0)die(`Bị ${m.name} sai đánh trượng đến chết`);return}
  pushDil(mkP("cnvScold",{}),`${m.name} quở mắng`)}
 function ordOdds(k){return od(k==="spy"?45+S.tamco/5+S.tai/10:k==="plant"?30+S.tamco/4+S.srv.rk*3:25+S.tamco/4+S.srv.rk*3)}

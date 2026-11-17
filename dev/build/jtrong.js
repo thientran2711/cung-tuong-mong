@@ -21,7 +21,7 @@ const VIRT_GL={"Hiếu":"hiếu thảo với bề trên","Đễ":"kính nhườn
 /* nết → the virtue they lean to / virtues they never hold */
 const TR_V={"Hiền lành":"Nhân","Hiếu thảo":"Hiếu","Trọng nghĩa":"Nghĩa","Thẳng thắn":"Tín","Kiêu ngạo":"Sỉ","Nhu mì":"Khiêm","Khéo léo":"Lễ","Cả nể":"Đễ","Đa nghi":"Trí","Tham vọng":"Trí","Mê tín":"Hiếu",
  trung:"Trung",nhat:"Cần",lanh:"Trí",nhantu:"Nhân",chamchinh:"Cần",trongtai:"Trí",hieuthao:"Hiếu",nongnay:"Trung",danghi:"Trung"};
-const TR_BAN={"Tham tiền":["Liêm","Kiệm"],"Kiêu ngạo":["Khiêm"],"Hiểm độc":["Nhân","Tín"],tham:["Liêm","Kiệm"],"Nhiều chuyện":["Tín"],chuyen:["Tín"]};
+const TR_BAN={"Tham tiền":["Liêm","Kiệm"],"Kiêu ngạo":["Khiêm"],"Xảo quyệt":["Nhân","Tín"],tham:["Liêm","Kiệm"],"Nhiều chuyện":["Tín"],chuyen:["Tín"]};
 /* deeds → virtue tags (+1 honours, -1 offends) */
 const DEED={greet:{"Hiếu":1,"Lễ":1},greetHH:{"Lễ":1,"Khiêm":1},snow:{"Hiếu":1,"Cần":1},
  "Hỏi han sức khỏe":{"Nhân":1,"Lễ":1},"Khen tài nghệ nàng":{"Lễ":1,"Tín":-1},"Bàn tán":{"Tín":-1,"Nghĩa":-1},"Chia sẻ bí mật":{"Tín":1},"Cảnh báo nàng":{"Trung":1,"Nghĩa":1},

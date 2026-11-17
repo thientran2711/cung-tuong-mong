@@ -119,7 +119,7 @@ const ACC_ETQ={mode:"expected",
  khac:1,            /* khắc the greeting takes */
  okAff:2,           /* chủ vị thiện cảm for the greeting (a sure act) */
  skipBase:1,skipGap:.5,skipMax:6, /* walking in without greeting: −(base + gap×rank gap), capped, × her nature */
- skipTrait:{"Kiêu ngạo":1.5,"Hiểm độc":1.25,"Đa nghi":1.25,"Tham vọng":1,"Nhu mì":.75,"Hiền lành":.5},
+ skipTrait:{"Kiêu ngạo":1.5,"Xảo quyệt":1.25,"Đa nghi":1.25,"Tham vọng":1,"Nhu mì":.75,"Hiền lành":.5},
  skipDanh:0,        /* no Danh loss: it is discourtesy, not an offence */
  npcGreet:70,       /* % an NPC guest greets the chủ vị (same costs and effects apply to her) */
  lead:false,        /* 'nhờ thái giám dẫn vào' for the Emperor's halls: off (summons only) */

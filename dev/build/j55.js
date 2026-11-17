@@ -3,7 +3,7 @@
 const TD={so:32,soGap:2,ccBase:6,ccStep:7,npc:.6};
 const TDOFF={"Tể tướng":"Tể tướng","Đại tướng quân":"Đại tướng quân","Lễ bộ":"Lễ bộ thượng thư","Hộ bộ":"Hộ bộ thượng thư","Hàn lâm":"Hàn lâm học sĩ"};
 const TDTR={"Cương trực":"không nhận quà, hay dâng sớ hặc tội; người nhà ít tham ô","Tham lam":"dễ nhận quà; người nhà dễ dính tham ô","Cẩn trọng":"ít dâng sớ, ít khi sai sót","Tham vọng":"hay xin đưa con gái vào cung, hay hặc nhà đối đầu","Trung hậu":"đã ủng hộ ai thì giữ lâu"};
-const TDAMB={"Tham vọng":1.6,"Hiểm độc":1.4,"Kiêu ngạo":1.1,"Đa nghi":.8,"Nhu mì":.4,"Hiền lành":.3};
+const TDAMB={"Tham vọng":1.6,"Xảo quyệt":1.4,"Kiêu ngạo":1.1,"Đa nghi":.8,"Nhu mì":.4,"Hiền lành":.3};
 function tdOn(){return !!(S&&!S.dead&&!(typeof isSrv==="function"&&isSrv()))}
 function tdSur(n){const w=String(n||"").split(" ");return w.length>2?w.slice(0,w.length-2).join(" "):w[0]}
 function trS(){if(!S)return null;if(S.trieu&&S.trieu.H)return S.trieu;

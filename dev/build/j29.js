@@ -59,7 +59,7 @@ function servTraitMonth(){let ev="";for(const p of consorts()){for(const s of (p
   if(s.tr==="trung"&&me&&roll(8))servLearn(s,"Thấy hắn tận tụy");
   if(s.tr==="nhat"&&me&&roll(8))servLearn(s,"Thấy hắn rụt rè");
   /* rivals manage by the same rules: a harsh mistress fires low-loyalty servants */
-  if(!me&&s.loyal<30&&roll(["Kiêu ngạo","Hiểm độc"].includes(p.trait)?25:8))ev+=fireServ(p,s,true)||""}}
+  if(!me&&s.loyal<30&&roll(["Kiêu ngạo","Xảo quyệt"].includes(p.trait)?25:8))ev+=fireServ(p,s,true)||""}}
  return ev}
 /* a trung servant takes the blame when her sent man is caught, at the cost of his own life or freedom */
 (function(){const c0=servCaught;servCaught=function(p,s){if(p===S){const t=(S.staff||[]).find(x=>x.tr==="trung"&&x!==s&&x.loyal>=60);if(t&&roll(40)){S.staff.splice(S.staff.indexOf(t),1);servLearn(t,"Nhận tội thay");return `${t.name} đứng ra nhận hết tội thay chủ, bị đưa vào Thận Hình ti. `}}return c0.apply(this,arguments)}})();

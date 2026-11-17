@@ -92,10 +92,10 @@ function ktSea(){return Math.floor((S.turn||0)/3)}/* mỗi mùa (3 tháng) mẹ 
 function ktTeachG(k,p,f){const st=f==="tv"?(p.tai||0):(p.duc||0);return Math.round((.8+cl(st,0,100)/60)*Math.max(0,1-k[f]/KT.cap)*ktD(k).m*tcMul(k)*10)/10}
 function ktG(g){return String(g).replace(".",",")}
 function ktTeach(k,p,f){ktSync(k);const g=ktTeachG(k,p,f);k[f]=cl(k[f]+g,0,100);k[f==="tv"?"mtv":"mtd"]=ktSea();ktTal(k);return g}
-const KTPT={"Hiền lành":[.35,.55,.3],"Nhu mì":[.35,.55,.35],"Tham vọng":[.45,.3,.6],"Kiêu ngạo":[.3,.25,.5],"Hiểm độc":[.4,.15,.5],"Đa nghi":[.35,.3,.4]};
+const KTPT={"Hiền lành":[.35,.55,.3],"Nhu mì":[.35,.55,.35],"Tham vọng":[.45,.3,.6],"Kiêu ngạo":[.3,.25,.5],"Xảo quyệt":[.4,.15,.5],"Đa nghi":[.35,.3,.4]};
 function ktPT(v){return KTPT[v.trait]||[.35,.35,.4]}
 /* NPC chọn thầy theo tính nết và hầu bao (người cũng có khi chọn sai) */
-function ktNpcTutor(k,v){if(!ktLive(v))return;const T=v.trait;let want=/Tham vọng|Kiêu ngạo|Hiểm độc/.test(T)?3:/Đa nghi/.test(T)?2:1+R(2);
+function ktNpcTutor(k,v){if(!ktLive(v))return;const T=v.trait;let want=/Tham vọng|Kiêu ngạo|Xảo quyệt/.test(T)?3:/Đa nghi/.test(T)?2:1+R(2);
  if(R(4)===0)want=cl(want+(R(2)?1:-1),0,3);
  if(want===3&&v.sung>=50&&roll(50)){ap(v,{sung:-4});if(roll(cl(KT.favO+v.sung/2,5,95))){k.tut=3;k.fav=1;return}want=2}
  while(want>0&&(v.bac||0)<KT.fee[want]*4)want--;k.tut=want;k.fav=0;

@@ -89,7 +89,7 @@ EV6("kindVisit","visit",{a:["rv"],pp:()=>{const a=rv6(v=>T6(v,"Hiền lành")||T
  o:X=>[c6("Tiếp chuyện cả buổi",{c:{suc:-4},r:[[X.A,8]]}),
   c6("Nhận lời giúp hết lòng",{c:{suc:-6},p:od(40+S.tai/2),r:[[X.A,12]],w:{danh:1},lr:[[X.A,-2]],lt:[R6("giúp không tới, nàng hơi buồn")]}),
   c6("Hẹn hôm khác",{w:{suc:2},r:[[X.A,-3]]})]});
-EV6("slyVisit","visit",{a:["rv"],pp:()=>{const a=rv6(v=>T6(v,"Hiểm độc")||T6(v,"Đa nghi")||fo6(v));return a==null?null:{a0:a}},w:C=>1.2,
+EV6("slyVisit","visit",{a:["rv"],pp:()=>{const a=rv6(v=>T6(v,"Xảo quyệt")||T6(v,"Đa nghi")||fo6(v));return a==null?null:{a0:a}},w:C=>1.2,
  v:["{A} sang chơi, mắt cứ đảo quanh án thư và hộp thuốc của ngươi.","{A} niềm nở lạ thường, rủ ngươi ngày mai cùng đi dạo hồ sen lúc vắng người.","{A} hỏi han tỉ mỉ giờ giấc ngươi dùng bữa, ngủ nghỉ, 'để tiện sang thăm'.","{A} mang quà sang, nhất định đòi tận tay cài trâm cho ngươi."],
  o:X=>[c6("Tiếp, nhưng cho người canh chừng",{c:{suc:-4},w:{tamco:1},wt:[G6("không lọt chuyện gì ra")],r:[[X.A,2]]}),
   c6("Dò ngược ý nàng",{p:od(35+S.tamco/2),w:{mat:1},wt:[G6(`ghi nhận ý đồ của ${X.A.n}`)],l:{danh:-1},lt:[R6("nàng biết ngươi đề phòng")],lr:[[X.A,-6]],ok:()=>{try{noteAdd(X.A.o.id,"Sang dò giờ giấc, đồ dùng của ngươi")}catch(e){}return `${X.A.n} dò hỏi quá kỹ; ngươi ghi nhớ.`}}),

@@ -93,7 +93,7 @@ function eaS(){if(!S.ea||typeof S.ea!=="object")S.ea={};const A=S.ea;A.used=A.us
 const T_HOT=["Kiêu ngạo","Thẳng thắn","Thù dai","Ghen tuông","nongnay","phong lưu","Cương trực","tham vọng"];
 const T_TIMID=["Nhu mì","Hiền lành","Cả nể","nhat","nhantu","cẩn trọng","trung hậu","Cẩn trọng","Trung hậu"];
 const T_GEN=["Hiền lành","Trọng nghĩa","Cả nể","Khéo léo","nhantu","datinh","trung","trung hậu","đa tình"];
-const T_STINGY=["Tham tiền","tham","Tham vọng","Hiểm độc"];
+const T_STINGY=["Tham tiền","tham","Tham vọng","Xảo quyệt"];
 function eaTraits(p){try{if(p===S)return traitsOf(S)||[];if(S.emp&&p===S.emp)return S.emp.traits||[];if(p===S.thO)return traitsOf("th")||[];if(p&&p.tr&&!p.trait)return[p.tr,p.tr2].filter(Boolean);if(p&&p.trait&&!p.rank&&p.rank!==0&&!p.kids)return[p.trait];return traitsOf(p)||[]}catch(e){return[]}}
 function eaTemper(p){const T=eaTraits(p);const hot=T.some(t=>T_HOT.includes(t)),tim=T.some(t=>T_TIMID.includes(t));
  return {k:hot&&!tim?"hot":tim&&!hot?"timid":hot&&tim?"even":"even",gen:T.some(t=>T_GEN.includes(t))&&!T.some(t=>T_STINGY.includes(t)),stingy:T.some(t=>T_STINGY.includes(t)),sus:T.includes("Đa nghi")||T.includes("danghi"),pious:T.includes("Mê tín")||T.includes("Hiếu thảo"),tr:T}}

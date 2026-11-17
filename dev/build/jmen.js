@@ -226,7 +226,7 @@ function menChoose(m,v,y,a){const at=placeName(y.k);menStat("ch_"+a);if(a==="ngh
 /* ---------- 5. NPC consorts see the same strays and choose by their nature ---------- */
 /* NPC choice by nature and feeling, no dice: same rules for every consort */
 function menDecide(w,c){const tr=w.trait||"";const h=c?hostility(w,c):0;
- if(c){if(tr==="Hiểm độc"||tr==="Kiêu ngạo"||h>45)return"report";if(tr==="Tham vọng")return"hide";if(tr==="Đa nghi")return"listen";if(tr==="Hiền lành"||tr==="Nhu mì")return h>25?"hide":"ignore";return h>30?"report":"ignore"}
+ if(c){if(tr==="Xảo quyệt"||tr==="Kiêu ngạo"||h>45)return"report";if(tr==="Tham vọng")return"hide";if(tr==="Đa nghi")return"listen";if(tr==="Hiền lành"||tr==="Nhu mì")return h>25?"hide":"ignore";return h>30?"report":"ignore"}
  if(tr==="Kiêu ngạo"||tr==="Đa nghi")return"report";if(tr==="Tham vọng")return"hide";return"ignore"}
 function menNpcAct(w,m,c,y){const d=menDecide(w,c);menStat("npc_"+d);
  if(d==="report"){menReport(w,m,c,y,(w.tamco||0)>=50?1:0);return d}

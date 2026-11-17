@@ -20,7 +20,7 @@ const EMO_TR={
  "Kiêu ngạo":{rivalUp:["gian",1.4],slight:["gian",1.5],punished:["gian",1.2],selfDown:["gian",1.3],gift:["vui",.6],otherKid:["ghen",1.4],selfUp:["vui",1.2]},
  "Nhu mì":{rivalUp:["buon",1],slight:["buon",1],punished:["so",1.4],selfDown:["buon",1.2],gift:["vui",1.2],otherKid:["buon",.8]},
  "Tham vọng":{rivalUp:["muu",1.3],otherKid:["muu",1.2],selfUp:["vui",1.3],punished:["muu",1],selfDown:["muu",1.2],friendDie:["lo",.6]},
- "Hiểm độc":{rivalUp:["muu",1.2],slight:["muu",1.3],punished:["muu",1.1],otherKid:["muu",1.3],foeDown:["vui",1.6],foeDie:["vui",1.5],gift:["vui",.8]},
+ "Xảo quyệt":{rivalUp:["muu",1.2],slight:["muu",1.3],punished:["muu",1.1],otherKid:["muu",1.3],foeDown:["vui",1.6],foeDie:["vui",1.5],gift:["vui",.8]},
  "Hiền lành":{rivalUp:["vui",.5],slight:["buon",.6],gift:["vui",1.3],punished:["so",1],otherKid:["vui",.5],foeDown:[null,0],foeDie:["buon",.6],friendDie:["dau",1]},
  "Đa nghi":{rivalUp:["lo",1],slight:["gian",1],gift:["lo",.5],punished:["so",1.2],ill:["lo",1.4],night:["lo",.3]},
  "Ghen tuông":{rivalUp:["ghen",1.6],otherKid:["ghen",1.6]},
@@ -37,7 +37,7 @@ const EMO_TR={
  nongnay:{slight:["gian",1.5],kidDie:["gian",.8]},nhantu:{slight:["buon",.7]},danghi:{slight:["gian",1.2],ill:["lo",1.3]}};
 /* decay per tuần (points); trait multipliers per emotion */
 const EMO_DECAY={vui:9,binh:0,buon:6,gian:8,so:9,ghen:6,lo:6,dau:3,muu:5};
-const EMO_DK={"Thù dai":{gian:.4,muu:.6},"Hiền lành":{gian:1.6,ghen:1.6,muu:1.5},"Nhu mì":{buon:.7,so:.8},"Kiêu ngạo":{gian:.8},"Ghen tuông":{ghen:.6},"Hiểm độc":{muu:.6},"Trọng nghĩa":{dau:.7}};
+const EMO_DK={"Thù dai":{gian:.4,muu:.6},"Hiền lành":{gian:1.6,ghen:1.6,muu:1.5},"Nhu mì":{buon:.7,so:.8},"Kiêu ngạo":{gian:.8},"Ghen tuông":{ghen:.6},"Xảo quyệt":{muu:.6},"Trọng nghĩa":{dau:.7}};
 /* EFFECTS. persW multipliers at full strength (v=100); scaled linearly by v/100 */
 const EMO_HARM=["poison","kpoison","frame","kframe","plant","musk","catswap","pushp","provoke","humiliate","rumor","trip","accuse","block","steal","vp","pond","ksab","takeaway","bribe","spy","punish"];
 const EMO_KIND=["help","visit","warn","mediate","apologise","ally","gift","reward","pardon","serveTH"];
@@ -123,10 +123,10 @@ function emoWeek(){if(!emoOn())return;const W=emoW();S.emoSnap=S.emoSnap||{};con
 /* ---------- effects ---------- */
 /* Đức + personality brake (owner 11/14): anger/jealousy only raise the WISH to harm; how much of it becomes harm depends on Đức and traits.
    f = share of the emotional harm boost that turns into harm acts. High Đức: 0 (anger turns into withdrawing / confronting words), mid: ½, low: 1,
-   low Đức + Hiểm độc / Tham vọng: 1.5. A severe grudge (oán ≥ 60 toward the target) keeps at least ½ even at high Đức. Same rule for everyone. */
-const EMO_BRAKE={hi:70,mid:40,fHi:0,fMid:.5,fLo:1,fBad:1.5,soft:{"Hiền lành":15,"Nhu mì":8,"Trọng nghĩa":8,"Hiếu thảo":5,"Hiểm độc":-10,"Tham vọng":-5,"Thù dai":-5}};
+   low Đức + Xảo quyệt / Tham vọng: 1.5. A severe grudge (oán ≥ 60 toward the target) keeps at least ½ even at high Đức. Same rule for everyone. */
+const EMO_BRAKE={hi:70,mid:40,fHi:0,fMid:.5,fLo:1,fBad:1.5,soft:{"Hiền lành":15,"Nhu mì":8,"Trọng nghĩa":8,"Hiếu thảo":5,"Xảo quyệt":-10,"Tham vọng":-5,"Thù dai":-5}};
 function emoDuc(p){if(!p)return 50;if(p===S)return S.duc||0;let d=p.duc;if(d==null)d=p.tr==="trung"?60:p.tr==="tham"?30:45;for(const t of emoTraits(p))d+=EMO_BRAKE.soft[t]||0;return d}
-function emoBrake(p,t){const d=emoDuc(p),B=EMO_BRAKE;let f=d>=B.hi?B.fHi:d>=B.mid?B.fMid:B.fLo;const T=emoTraits(p);if(d<B.mid&&(T.includes("Hiểm độc")||T.includes("Tham vọng")))f=B.fBad;
+function emoBrake(p,t){const d=emoDuc(p),B=EMO_BRAKE;let f=d>=B.hi?B.fHi:d>=B.mid?B.fMid:B.fLo;const T=emoTraits(p);if(d<B.mid&&(T.includes("Xảo quyệt")||T.includes("Tham vọng")))f=B.fBad;
  if(t&&f<.5){try{if(oan(p,t)>=60)f=.5}catch(e){}}return f}
 function emoMul(p,act){const e=emoGet(p);if(e.k==="binh")return 1;const T=EMO_W[e.k];if(!T)return 1;const harm=EMO_HARM.includes(act);let m=T[act];if(m==null)m=harm?T.harm:EMO_KIND.includes(act)?T.kind:null;if(m==null)return 1;
  if(harm&&m>1){const f=emoBrake(p);m=f>0?1+(m-1)*f:.9}

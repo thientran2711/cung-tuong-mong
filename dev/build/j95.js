@@ -53,7 +53,7 @@ function j95habPool(v){const a=v.arts||{},C=[];const add=(k,s,act,w)=>{if(w>0)C.
  add("own",[5,15,30,5],"dance",(a.vu||0)*1.5);add("tyv",[10,30,15,0],"herb",(a.y||0)*2.5);
  if(v.trait==="Hiền lành"||v.trait==="Nhu mì"||(v.pray||0)>0)add("tn",[45,10,5,0],"pray",3);
  if(v.trait==="Tham vọng")add("ksp",[0,25,15,0],"spy",2);if(v.trait==="Kiêu ngạo")add("vuon",[5,30,25,0],"walk",2);
- if(v.trait==="Đa nghi")add("own",[10,20,20,10],"read",2);if(v.trait==="Hiểm độc")add("tyv",[5,15,20,0],"spy",1.5);
+ if(v.trait==="Đa nghi")add("own",[10,20,20,10],"read",2);if(v.trait==="Xảo quyệt")add("tyv",[5,15,20,0],"spy",1.5);
  if((v.sac||0)>=75)add("vuon",[0,10,25,20],"walk",2);
  try{const f=facOf(v);const L=f&&facLeader(f);if(L&&L!==v&&L!==S)add("ally:"+key(L),[0,25,30,35],"visit",2.5)}catch(e){}
  try{const al=others(v).filter(x=>x!==S&&x.alive&&!x.out&&!sameHouse(v,x)).map(x=>[x,aff(v,x)]).sort((p,q)=>q[1]-p[1])[0];if(al&&al[1]>=10)add("ally:"+key(al[0]),[0,20,25,35],"visit",2)}catch(e){}
@@ -83,11 +83,11 @@ function motiveOK(a,t,kind){if(!a||!t||a===S||a===t)return{ok:true,why:a===S?"ng
  if(typeof a!=="object"||a.rel==null)return{ok:true,why:""};
  const af=aff(a,t),oa=oan(a,t),gh=t===S?(a.ghen||0):Math.max(0,Math.round(((t.sung||0)-(a.sung||0))/2));
  let ef=false;try{const f=facOf(a),g=facOf(t);ef=!!(f&&g&&f!==g)}catch(e){}
- if(H95.has(kind)){const ex=j95except(a,t);const mot=Math.max(oa,gh,-af)+(ef?10:0)+(a.trait==="Hiểm độc"?10:0);
+ if(H95.has(kind)){const ex=j95except(a,t);const mot=Math.max(oa,gh,-af)+(ef?10:0)+(a.trait==="Xảo quyệt"?10:0);
   if(af>=40&&!ex)return{ok:false,why:`thiện cảm ${af} với ${t===S?"ngươi":t.name}`};
   if(mot<30&&!ex)return{ok:false,why:`động cơ yếu (oán ${oa}, ghen ${gh}, thiện cảm ${af})`};
   if(ex)return{ok:true,why:ex,ex:1};
-  const parts=[];if(oa>=20)parts.push(`oán ${oa}`);if(gh>=20)parts.push(`ghen ${gh}`);if(af<=-20)parts.push(`ghét (thiện cảm ${af})`);if(ef)parts.push("khác phe");if(a.trait==="Hiểm độc")parts.push("tính hiểm độc");
+  const parts=[];if(oa>=20)parts.push(`oán ${oa}`);if(gh>=20)parts.push(`ghen ${gh}`);if(af<=-20)parts.push(`ghét (thiện cảm ${af})`);if(ef)parts.push("khác phe");if(a.trait==="Xảo quyệt")parts.push("tính hiểm độc");
   return{ok:true,why:parts.join(", ")||`động cơ ${mot}`}}
  if(F95.has(kind)){let fr=false;try{fr=!!(facOf(a)&&facOf(a)===facOf(t))}catch(e){}if(af<-20&&oa>=40&&!fr)return{ok:false,why:`ghét ${t===S?"ngươi":t.name} (thiện cảm ${af}, oán ${oa})`};
   return{ok:true,why:fr?"cùng phe":af>=10?`thiện cảm ${af}`:"lấy lòng vì lợi"}}

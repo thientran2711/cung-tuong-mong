@@ -6,7 +6,7 @@ function tagBand(x){const s=String(x==null?"":x).toLowerCase();const m=s.match(/
 /* faces stay for life: once drawn, kept across promotions and ageing (children still grow) */
 (function(){const ff=faceFor;faceFor=function(o,kind,age){if(o&&o.fc&&o.fcKeep)return;const r=ff.apply(this,arguments);if(o&&o.fc)o.fcKeep=1;return r}})();
 /* figures: each person gets one identity and keeps it; no two people in one game ever share one (a dead woman's identity is not reused until a new game) */
-const LOOKFOR={"Hiểm độc":["hienlanh","gentle","diu","numi"],"Kiêu ngạo":["kieungao","proud"],"Hiền lành":["hienlanh","gentle"],"Đa nghi":["danghi","cool"],"Tham vọng":["thamvong","bold"],"Nhu mì":["numi","soft","hienlanh"]};
+const LOOKFOR={"Xảo quyệt":["hienlanh","gentle","diu","numi"],"Kiêu ngạo":["kieungao","proud"],"Hiền lành":["hienlanh","gentle"],"Đa nghi":["danghi","cool"],"Tham vọng":["thamvong","bold"],"Nhu mì":["numi","soft","hienlanh"]};
 function idsFor(role){const m={};for(const f of FIGS)if(norm(f.role)===norm(role)&&f.identity!=null)m[f.identity]=m[f.identity]||[],m[f.identity].push(f);return m}
 function identityOf(p,role){const who=p.ref||p;if(who.idn!=null)return who.idn;const M=idsFor(role);const ids=Object.keys(M);if(!ids.length)return null;
  const used=new Set([S].concat(rivals||[]).filter(x=>x&&x!==who&&(x===S||x.alive)&&x.idn!=null).map(x=>String(x.idn)));if(S.emp&&S.emp.idn!=null)used.add(String(S.emp.idn));

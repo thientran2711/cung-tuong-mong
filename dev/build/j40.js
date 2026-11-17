@@ -26,8 +26,8 @@ const FAILRX=/bị lộ|bị bắt|phát giác|bị phát hiện|không thành|k
 function mindRun(v,t,k,err){v.__err=err||0;let r="";try{r=k==="plant"?runAct(v,t,"plant",v.inv.findIndex(e=>e.t||(IT[e.k]&&itm(e.k).il))):runAct(v,t,k)}finally{v.__err=0}
  v.fails=v.fails||{};const failed=FAILRX.test(r);if(failed)v.fails[k]=(v.fails[k]||0)+1;else if(r)v.fails[k]=0;
  if(r&&!failed&&k!=="spy"&&k!=="accuse"&&k!=="vp"&&k!=="xx")mindBelief(t,v,k);
- /* Hiểm độc over-plots: a success may leave a clue behind */
- if(r&&!failed&&traitsOf(v).includes("Hiểm độc")&&BIG.includes(k)&&roll(20)){/*evok: after a BIG act (runAct deed)*/evA(t,v,1);mindLog(v,"_clue");if(t===S)r+=`(Để lại dấu vết: ngươi nắm thêm 1 chứng cứ về ${v.name}.) `}
+ /* Xảo quyệt over-plots: a success may leave a clue behind */
+ if(r&&!failed&&traitsOf(v).includes("Xảo quyệt")&&BIG.includes(k)&&roll(20)){/*evok: after a BIG act (runAct deed)*/evA(t,v,1);mindLog(v,"_clue");if(t===S)r+=`(Để lại dấu vết: ngươi nắm thêm 1 chứng cứ về ${v.name}.) `}
  return r}
 /* knowledge: a victim of a hidden blow only guesses who did it; wit and evidence help; a wrong guess turns her hatred on someone else (the player too) */
 function mindBelief(t,v,k){if(!t||t===S||!t.alive)return;const ev=(t.evm&&t.evm[key(v)])||0;const p=cl(35+witOf(t)/2+(ev>0?25:0)-witOf(v)/4,10,90);mindLog(t,"_belief");

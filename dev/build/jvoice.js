@@ -142,7 +142,7 @@ function kLitLog(seq0,lit){try{if(!lit||!S||!S.logs||!S.logs.length||(S.logSeq||
 /* ---- SIGNATURE HABIT of a consort (palace-voice phase D): each consort has one small habit by her trait (TRAITS j1), fixed for her life
    (picked from her id, so both co-op seats see the same one, nothing stored); shown in the long form only (event panels), every other
    occurrence (week parity) so it marks her without wearing out. kHabit(v) → sentence or "" */
-const HABIT={"Hiểm độc":["Nàng ta khẽ vuốt chiếc hộ giáp bạc trên ngón út","Nàng ta lần chuỗi ngọc trên cổ tay, mắt không rời ta","Nàng ta mỉm cười, tay mân mê túi hương bên hông","Nàng ta khẽ thổi chén trà, mà chẳng uống"],
+const HABIT={"Xảo quyệt":["Nàng ta khẽ vuốt chiếc hộ giáp bạc trên ngón út","Nàng ta lần chuỗi ngọc trên cổ tay, mắt không rời ta","Nàng ta mỉm cười, tay mân mê túi hương bên hông","Nàng ta khẽ thổi chén trà, mà chẳng uống"],
  "Kiêu ngạo":["Nàng ta phe phẩy chiếc quạt lông công, cằm hơi ngẩng","Nàng ta đưa tay chỉnh lại cây trâm phượng trên tóc","Nàng ta liếc ta một cái rồi nhìn đi chỗ khác","Nàng ta gõ nhẹ hộ giáp vàng lên tay ghế"],
  "Hiền lành":["Nàng ta khẽ cười, hai má ửng hồng","Nàng ta vén lọn tóc mai, giọng nhỏ nhẹ","Nàng ta nắm chiếc khăn tay thêu hoa lan","Nàng ta cúi đầu, tay đặt ngay ngắn trước người"],
  "Đa nghi":["Nàng ta liếc nhanh về phía người hầu của ta","Nàng ta khẽ nhíu mày, ngón tay gõ lên mép bàn","Nàng ta nhìn quanh một lượt rồi mới nói","Nàng ta nheo mắt, như cân từng chữ"],

@@ -124,7 +124,7 @@ function canNew70(aKey,tKey){if(aKey!=="me"&&cnt70(p=>p.a===aKey))return false;i
 function methFor70(k){const L=Object.keys(M70).filter(m=>M70[m].k===k);return L.length?pick(L):null}
 /* an NPC picks a route by price, wit (the clever avoid loud routes) and who can be bought */
 function pickRoute70(a,t,M){const tc=tc70(a);const L=M.R.filter(r=>{if(a!==S&&r.bac&&(a.bac||0)<r.bac)return false;if(r.acc==="tsv"&&!((t.staff||[]).length))return false;return true});if(!L.length)return null;
- const w=L.map(r=>[r,Math.max(.2,(tc>=60?10-r.vis:5)+(r.acc&&traitsOf(a).includes("Hiểm độc")?3:0))]);let s=Math.random()*w.reduce((x,y)=>x+y[1],0),i=0;while(s>w[i][1]&&i<w.length-1){s-=w[i][1];i++}return w[i][0]}
+ const w=L.map(r=>[r,Math.max(.2,(tc>=60?10-r.vis:5)+(r.acc&&traitsOf(a).includes("Xảo quyệt")?3:0))]);let s=Math.random()*w.reduce((x,y)=>x+y[1],0),i=0;while(s>w[i][1]&&i<w.length-1){s-=w[i][1];i++}return w[i][0]}
 function newPlot70(a,t,m,rid,mo,opt){const z=j70();const M=M70[m];if(!M)return null;const r=rid?M.R.find(x=>x.id===rid):pickRoute70(a,t,M);if(!r)return null;
  const tc=tc70(a);const p={id:++z.n,a:a===S?"me":a.id,t:t===S?"me":t.id,m,r:r.id,mo:mo||"band",st:"prep",pg:0,need:r.need+(a!==S&&tc>=60?1:0),born:wk(),g:0,kn:0,kt:[],err:(opt&&opt.err)||0,cool:0,wt:0};
  if(opt&&opt.fac)p.fac=1;if(M.k==="kpoison"||M.k==="pond"||M.k==="kframe"||M.k==="ksab"){const k=tKid70(p);if(k)p.kid=k.name}
@@ -146,7 +146,7 @@ function motives70(v){const out=[];const z=j70();const sh=z.sh;const rise=sh.len
  return out}
 function motiveTick70(){const z=j70();for(const v of liveRivals(true)){if(v.confined||v.plan||cnt70(p=>p.a===v.id))continue;const M=motives70(v);if(!M.length)continue;
   const [t,mo]=pick(M);if(!alive70(t)||(typeof sameHouse==="function"&&sameHouse(v,t)))continue;const b=bandOf(danger(v,t));if(!b)continue;
-  const T=traitsOf(v);let c=J70CFG.mot*(T.includes("Hiểm độc")?1.6:1)*(T.includes("Hiền lành")?.3:1)*(T.includes("Nhu mì")?.5:1)*(b>=2?1.2:1);if(t===S&&typeof BAL==="object"&&BAL.hz)c*=Math.min(1.2,BAL.hz);
+  const T=traitsOf(v);let c=J70CFG.mot*(T.includes("Xảo quyệt")?1.6:1)*(T.includes("Hiền lành")?.3:1)*(T.includes("Nhu mì")?.5:1)*(b>=2?1.2:1);if(t===S&&typeof BAL==="object"&&BAL.hz)c*=Math.min(1.2,BAL.hz);
   if(!roll(c)||!canNew70(v.id,key(t)))continue;
   let O=[];try{O=mindMenu(v,t)}catch(e){O=[]}O=O.filter(x=>methFor70(x[0])&&M70[methFor70(x[0])].band<=b);if(!O.length)continue;const k=wpick(O);const m=methFor70(k);if(!m||!okAct70(v,t,k))continue;
   const p=newPlot70(v,t,m,null,mo);if(p&&!p.end){v.plan={k:M70[m].k,t:key(t),due:1e9,err:0,j70:p.id};try{mindLog(v,"_tell")}catch(e){}}}}
