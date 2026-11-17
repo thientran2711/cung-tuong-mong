@@ -655,3 +655,4 @@
 | ration-research — monthly ration history + ITEM LIST for art (research only; OD:L1577, PARKING_LOT #5) (sonnet; brief briefs/ration-research.md) | handover reports/item-list-ration.md + monthly-ration-history.md | B | (opening) | RUNNING | 17/11 06:50Z |
 | BALANCE-2 (opus): Danh/Sủng/rank collapse, Giả bệnh trap + one-core, bot-proof-hint, RANK PRESSURE FLAT (OD 08:25Z C), Khó early, §7 Sủng table for owner; on balance-core-r2 baff0824 | review/balance-2 | D | session_01964izCgvagC6fUGWVGhXHy | RUNNING | 17/11 06:37Z |
 | CH1–4 GOALS (story-bot faults 4–6, BAL.st14) + HER ALLERGY (S4-allergy/D39) (opus) | review/ch14-goals | D | session_01964izEFbPPP2sy98Z4cBWn | RUNNING | 17/11 06:37Z |
+| ART event-art-style #3 (sonnet; successor of #2; batches b3+ of REMAINING list in reports/event-art-style.md HANDOVER #2) | handover reports/event-art-style.md | C ROOT-2 | session_011xDdVQS2NiQBmm8ahMxJkk | RUNNING | 17/11 06:38Z |
