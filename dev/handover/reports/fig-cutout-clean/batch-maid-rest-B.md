@@ -234,3 +234,10 @@ maid-m39-tm0-a18	JNfnhGYOq4	Ebnlz5RuuO	ok
 maid-m39-tm2-a18	Sym28Z5Ub8	KLDyMSwkqp	ok
 maid-m39-tm3-a18	UPhAIGvwny	xSXNdykjfW	ok
 ## 207 a18 done (list lines 1-207). NEXT = maid-m39-tm4-a18 (line 208), then m40.
+## HANDOVER (W6b #1 -> W6c, 17/11 ~06:40Z, lead order: stop new maid generation, maid consort-tier redraw has priority)
+- START_CTX ~15%; ended ~30%. a18 of maid-rest-B: list lines 1-207 done (m27..m39-tm3) + in-flight gT = m39-tm4, m40 a,cold,kc,ngheo,t1,t2,t3 (see TSV lines below once gT reports; if the TSV has no gT lines the batch did not finish: check img/ on the CDN, upload ids in rank-sample/ not kept). 54 redo repaints done (batch-maid-rest-B-redo.done).
+- RESUME KEY (if gT not recorded): maid-m39-tm4-a18; otherwise maid-m40-t4-a18 (a18 list line 216 = grep a18 lists/shards/maid-rest-B.txt | sed -n 216p). Then a26/a36/a51 (identity ref = new a18 of that look + old file).
+- LEDGER: col 2 (old-ref creation id of the ORIGINAL CDN fig, uploaded) and col 3 (master gen id) in the TSV above for every key; the 54 redo keys' old-ref ids are in batch-maid-rest-B-redo.tsv; face refs N2HYqYa6D9 bxVgMSX5Y2 dtPf4EDXSL eIyEPUHdqL? -> use the ids in tools/AGENT_GEN_BRIEF.md step 2 (never re-upload them).
+- a51 ty1-ty3 audit: NOT STARTED by W6b.
+- Method: tools/AGENT_GEN_BRIEF.md (new files) and tools/AGENT_REDO_BRIEF.md (repaint); 1 agent at a time, 8 keys, max 5 gens in flight, 1 upload per file, explicit webp paths only, fragment hd-entries/W6b-g<X>.json per batch; push recipe: commit, flock fetch --depth=1, checkout -B x FETCH_HEAD, cherry-pick, push (retry). Never commit dev/site/cdn_sync.py, .cdn-state.json, __pycache__.
+- Drift left unredone (owner praised live files; keep): m37-t3, m37-t8, m38-t1..t3, m38-t5..t8.
