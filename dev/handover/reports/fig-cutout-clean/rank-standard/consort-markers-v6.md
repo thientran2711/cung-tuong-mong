@@ -12,3 +12,5 @@
 | t9 Hoàng thái hậu a51 | Ifi5NOstvE | crossed-collar robe, straight skirt, dragon-peony, jade forehead band | deep emerald + dark gold |
 | t10 Nữ đế | Lwo6BzYswO | golden flowing wide-sleeve robe, dragon-phoenix, tall pearl crown, no train | gold + ivory |
 Superseded: v5 t3-t9 ids (CqzLRqOEEy huZ1NQMvqL p8OESvrehw huZ1N5XvqL JNfzt7POq4 xSX9MxEjfW) and v4 t8 lJI3Dragv9, t10 79aGBw3JAL.
+
+## v6b (17/11, per Foreman C): t6 regenerated with clearly visible deeper-rose phi bach with pearl tassel ends: gen YMsIsrDWeC (replaces WDltjPocXe), same cut/colour; alpha 0..254, bbox x 142-873. Sheet rank-standard-consort-v6b-2row.jpg, zooms consort-v6b-zoom-row1/2.jpg. All other tiers as v6. +65 cr (1690 total tonight).

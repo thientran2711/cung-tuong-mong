@@ -128,3 +128,4 @@ Credits this session ~ 76+? : 10 hd retrofit 0; ~137 generations (~8900 cr) incl
 DONE: rank standard v4 (c01 a18, t1-t10, flowing hanfu + phi bach every tier) pushed: rank-standard/rank-standard-consort-v4-2row.jpg, consort-v4-zoom-row1.jpg (t3,t5), consort-v4-zoom-row2.jpg (t8,t10), consort-markers-v4.md (gen ids + marker + phi bach per tier). 10 gens, 650 cr, alpha 0..254 verified, nothing uploaded. No options sheet. Masters not on disk (scratchpad); refetch via creations_get ids. All other generation remains PAUSED; next = owner verdict on v4, then lead GO.
 ## W3d v5 (17/11): rank-standard/consort-markers-v5.md + rank-standard-consort-v5-2row.jpg pushed (t2-t7,t9 new cuts, ids in markers). Still paused.
 ## W3d v6 (17/11): consort-markers-v6.md + rank-standard-consort-v6-2row.jpg pushed (C addendum applied). Still paused.
+## W3d v6b (17/11): t6 phi bach fix pushed (rank-standard-consort-v6b-2row.jpg). Idle.
