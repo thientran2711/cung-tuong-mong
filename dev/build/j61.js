@@ -264,7 +264,7 @@ function k61Scrub(s,lead,prev,ann,plain){const rx=k61Table();if(!rx||!s)return s
   const capit=/^(\s|<[^>]+>)*$/.test(str.slice(0,off))?lead:/[.!?:(“"]\s*$/.test(str.slice(0,off));return capit?k61Cap(d):d})}
 function k61PrevText(n){let x=n;for(let i=0;i<6&&x;i++){let p=x.previousSibling;while(p){const t=p.textContent;if(t&&t.trim())return t;p=p.previousSibling}x=x.parentNode;if(!x||/^(DIV|P|LI|BUTTON|H\d|FIGCAPTION|SECTION|TD)$/.test(x.nodeName))return""}return""}
 /* the title-screen pages (Chọn sổ, Sổ luân hồi, Thiết lập: .kpt-mount) and every .kslot card show OTHER lives (a saved sổ, a co-op room, the cloud copy): their names are real, never masked by the knowledge of the life now loaded (owner 17/11 "Kiếp Đáp ứng Hạ Thị vệ ???": a slot's own name matched a palace person the loaded life does not know yet) */
-const K61SKIP="[data-k61skip],.kpt-mount,.kslot";
+const K61SKIP="[data-k61skip],.kpt-mount,.kslot,.mspot .mlab,.mtile>b";/* Dư đồ place names (map spots + tiles): a place called like an unknown servant ("Vĩnh Thọ") must never read "Thái giám ???" (map-portrait-r2) */
 function k61Node(n){if(n.nodeType===3){const t=n.nodeValue;if(!t||t.length<4)return;const p=n.parentNode;if(!p||/^(SCRIPT|STYLE|TEXTAREA|INPUT)$/.test(p.nodeName))return;if(p.closest&&p.closest(K61SKIP))return;/* co-op chat Thư từ (KIT §76): real players' names are shown as they are */
   const pv=k61PrevText(n);const lead=!pv.trim()||/[.!?:]\s*$/.test(pv);const blk=p.closest&&p.closest(".kft,.kitem,.logs > div,p,li,.rt,.spkt,.krv,.tag,figcaption");
   const s=k61Scrub(t,lead,pv,blk?blk.textContent:t);if(s!==t)n.nodeValue=s;return}
