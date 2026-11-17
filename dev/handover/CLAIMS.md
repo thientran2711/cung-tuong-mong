@@ -908,7 +908,7 @@
 | DISPLAY ROOM kit UI (owner option 1, OD ~18:33Z (3)): full-screen room, shelves 2×6 / 1×12, per-shelf tư trang drawer filtered by group — kit part for C-AG display-shelf builder | review/kit-display-room | MAIN s35 | session_01UV1SzisVVpBnxyKZsxjCfY | RUNNING | 17/11 18:34Z |
 | REVIEW hoa-dien fa483a8ed delta on makeup-lux (opus BIG; brief briefs/review-hoa-dien.md) | review/hoa-dien-r1 | B | session_01N1tNP4LhhQaE7j3FQW5NGV | PASS review/hoa-dien-r1 67b18b1e (reviewer fixes: tolD .45→.24 medium 26 % top, sprite fallback; lands after makeup-lux; report reports/review-hoa-dien.md) | 17/11 18:40Z |
 | hoa-dien r2 FIX (owner OD 21:03Z: shown hoa điền always at the forehead anchor; vụng = fixed tilt) | review/hoa-dien-r2 | B | session_01N1tNP6SdCcvsQaB11nruyu | SẴN SÀNG KIỂM 7907c543d (report reports/hoa-dien.md §r2) | 17/11 21:40Z |
-| REVIEW ag-all-2 r2 (opus BIG) of 6badc4d4 | review/ag-all-2-r2 | C-AG | session_01UV1SzibgyTxRDxLdJ5yW6t | RUNNING | 17/11 18:36Z |
+| REVIEW ag-all-2 r2 (opus BIG) of 6badc4d4 | review/ag-all-2-r2 | C-AG | session_01UV1SzibgyTxRDxLdJ5yW6t | ROLLED OVER → SziCw1g (archived) | 17/11 18:36Z |
 | DISPLAY SHELF builder #2 (opus): 70 items + OD L1678 (d) + rebase → SẴN SÀNG KIỂM | review/display-shelf | C-AG | session_01UV1Szj9tDw8PAVnkXJ7CYJ | RUNNING | 17/11 18:41Z |
 | REVIEW kit-fx-register r1 of 893b3f45 (sonnet SMALL; brief briefs/s36-review-kit-fx-register.md) | review/kit-fx-register-r1 | MAIN s36 | session_01UV1SzjbQtX54oMDpW6uSfe | RUNNING | 17/11 18:44Z |
 | REVIEW wx-anim (sonnet SMALL) of be36f27 | review/wx-anim-r1 | C-AG | session_01UV1SzjfdPe1XaTKj3NacXr | LIVE 03f97e15 19:46Z | 17/11 18:51Z |
@@ -959,3 +959,4 @@
 | tuyet-glow SAMPLE (Khuynh thành glossy glowing skin + moving light streak; owner OD ~21:55Z; sample first) (sonnet) | review/tuyet-glow | MAIN s38 | session_01UV1SzjKnHbwdNpGhhNLbnS | SAMPLE READY 3bb19bde, waiting main verdict | 17/11 21:53Z |
 base-body test (m09 body template, edit clothes only) | img/_review/maid-consort-sample | session_011xDdVQzeuta29DT66RfH38 | RUNNING (owner 00:22Z: keep method, neutral bodysuit base) | 2026-11-17T23:52Z (Foreman C ROOT-12 → ROOT-13)
 | hoa-dien SAMPLES sheet (đẹp vs vụng × 4 designs, in-room; owner OD ~22:12Z) (sonnet) | review/hoa-dien-r2 (read only) | MAIN s38 | session_01UV1SziQZkLLitwkfqjx3Bq | DONE: sheet at CDN img/_review/hoa-dien/hoa-dien-samples.png (report reports/hoa-dien-samples.md) | 17/11 22:40Z |
+| REVIEW ag-all-2 r2 #2 (opus BIG; successor of SzibgyT; 2 reds after main 99f3978d) | review/ag-all-2-r2 | C-AG | session_01UV1SziCw1gnLVkS7bUSAPM | RUNNING | 17/11 22:27Z |
