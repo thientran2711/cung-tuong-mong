@@ -635,7 +635,7 @@
 | npc-agent AG2 Emperor agent + nights (opus; reports/npc-agent.md §5 AG2; after AG1 PASS 2756d2d2) | review/npc-agent-ag2 | C ROOT | session_011xDdVRNkhkw9vZBGkZ1mDK | RUNNING | 17/11 05:40Z |
 | ONE TRAIT POOL 3 groups × 8 (24 traits, 2 pools by sex) + BALANCE LAW gain/cost table (opus; main s30 orders 05:46Z/06:12Z/06:21Z) | review/trait-pool | C ROOT | session_011xDdVQM2jyGVY8RsCxbtvX | RUNNING | 17/11 05:40Z |
 | ART A1 nine origin frames + A2 swaddled baby + A3 red-thread JOIN (sonnet art; reports/presentation-wiring.md ART REQUESTS) | CDN img/kit + reports/art-pres-a123.md | C ROOT | session_011xDdVQ93v6b8Bre1hVaJtG | A1 frames REJECTED by owner (too heavy/big) → deleted from CDN, KIT REQUEST cancelled; A2 baby + A3 thread live (archived) | 17/11 05:40Z |
-| night-final review r1 (opus BIG; main s30 04:50Z order) of 5535697b | review/night-final-r1 | D | session_01964izDUxnFjybggNj6Ukev | RUNNING | 17/11 05:36Z |
+| night-final review r1 (opus BIG; main s30 04:50Z order) of 5535697b | review/night-final-r1 | D | session_01964izDUxnFjybggNj6Ukev | FAIL 1 @72148b66 (co-op weeks hang at end of tối) (archived) | 17/11 05:36Z |
 | trait-rename review r1 (opus BIG, save migration) of 27886326 | review/trait-rename-r1 | B | session_01N1tNP31pNXiReqkE3LxVdh | RUNNING | 17/11 05:40Z |
 | one-core-roads — ONE CORE F1 roads: go:/sc:/k: amounts → BAL.road.fx, values identical (opus; split of one-core-dup §2b) | review/one-core-roads | B | session_01N1tNP4eyJ4AQGCmA1HpA9c | RUNNING | 17/11 05:41Z |
 | one-core-arcs — ONE CORE F2 arcs: ARC67/j97/j96/jorigins/jroute/jstory → BAL.arc.fx, values identical (opus; split of one-core-dup §2b) | review/one-core-arcs | B | session_01N1tNP5MRPzxmbFfWjw6LuT | RUNNING | 17/11 05:41Z |
@@ -666,3 +666,4 @@
 | REVIEW npc-agent-ag2-r1 (opus BIG) | review/npc-agent-ag2-r1 | C ROOT-2 | session_011xDdVPQSbLtuVm6zoyJHBN | RUNNING | 17/11 06:56Z |
 | one-core-dup2 r1 FAIL (1 item: ~15 texts still type moved cut values; work branch review/one-core-dup2-r1 8e75df35 = dup2 + r2 merged) → fix r2 (same sonnet fix worker; extend one-core-text.js to dup2 keys) | review/one-core-dup2-r2 | B | session_01N1tNP2SKjMzEdsyLuEZtJa | RUNNING | 17/11 06:58Z |
 | one-core-dup r2 re-review FAIL f97a5841 (~34 typed BAL.eff amounts left + one-core-text guard gaps; report reports/review-one-core-dup-r2.md) → folded into the SAME fix branch review/one-core-dup2-r2 (ships as ONE branch replacing dup-r2 + dup2) | review/one-core-dup2-r2 | B | session_01N1tNP2SKjMzEdsyLuEZtJa | RUNNING | 17/11 07:01Z |
+| night-final fix F1 (opus): jnf solo-only while COOPW.on (co-op keeps live path until coop-thin E) | review/night-final-fix | D | session_01964izGWAYU1GWVeqgVeUUc | RUNNING | 17/11 07:08Z |
