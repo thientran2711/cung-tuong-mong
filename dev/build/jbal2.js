@@ -1103,3 +1103,15 @@ BAL.talk.secretMal=50;BAL.talk.secretGrab=50;
 BAL.ag.know.tm={cap:10,lo:3,hi:95,want:{bac:15,protect:15,post:10,revenge:20},post:3,loyalMul:.35,tell:50,oan:6,
  /* 2f2: threat = fear bonus on tmOdds for Dọa tố (threatServ); vol = the j7 volunteer comes only when her odds for him reach min, she pays bac */
  threat:20,vol:{min:55,bac:30}};
+/* AG-MOODKNOW (owner OD 17/11 ~17:55Z (1)): who knows the CAUSE of a mood (jmoodknow). pub = morning "Tin trong cung" leak odds per cause event
+   (def for others; clamped BAL.odds.lo/hi; max lines a morning); pubEv = PUBLIC cause events (jemo EMO_EV keys), the rest SECRET; pubRe = PUBLIC cause
+   words for causes set without an event key (old saves too); spy = a Tai mắt inside that person's household learns it; eye = % of oSee for the
+   morning general eyes; pri = j78 "mood" fact priority (scouting / servants' reports); keep = causes remembered per person; npcErr = an NPC master
+   learns the target's cause from a told errand (scout / listen). */
+BAL.mck={pub:{def:35,max:3,o:{selfUp:60,selfDown:60,cold:75,kidBorn:75,kidDie:70,otherKid:30,punished:50,night:30,neglect:25,ill:30,rivalUp:25,friendUp:25,
+ foeDown:25,friendDie:50,foeDie:40,mistressUp:15,mistressDown:15,motherDie:60,motherCold:50,clanUp:35,clanDown:35}},
+ pubEv:["selfUp","selfDown","rivalUp","friendUp","foeDown","kidBorn","kidDie","otherKid","punished","cold","night","neglect","ill","friendDie","foeDie",
+  "mistressUp","mistressDown","motherDie","motherCold","clanUp","clanDown"],
+ pubRe:"thế ở triều|việc triều|hoàng tự|tấn phong|lãnh cung|giáng|qua đời|cấm túc|phật ý|lọt ra ngoài|sinh hạ|lật thẻ|thị tẩm",
+ spy:85,eye:40,pri:45,keep:6,npcErr:{scout:100,listen:50}};
+BAL.ag.sell.val.mood=70;
