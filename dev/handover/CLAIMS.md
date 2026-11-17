@@ -773,3 +773,6 @@
 | BATCH builder s31b (opus): fig-tag-chip-r1, morechip-fix-r1, kit-rcol-top-r1, stage-caption-r1, learn-scene-fix, opt-pic-same-r2 (+morechip-corners-r1 on PASS) + KPM_LOG clear | review/batch-s31b | MAIN s31 | session_01UV1SzhfMi68Cmn88G2Yqze | RUNNING | 17/11 13:24Z |
 | kit-ico-rank r2: co-op rebirth blocked by rank board/end card | review/kit-ico-rank-r2 | MAIN s31 | session_01UV1Szi6oANLyE5bWQnjMQv | RUNNING | 17/11 13:24Z |
 | morechip-sil: '+N' chip = grey neutral silhouette icon + number (OD 14:05Z; main draws) on top of morechip-corners-r1 a66f274c | review/morechip-sil | MAIN s32 | session_01UV1Szi57hvzWiNmX4GRXYk | RUNNING | 17/11 13:36Z |
+| REVIEW map-portrait r1 of c34e99e3 (SMALL UI; '!' bright-yellow check) | review/map-portrait-r1 | MAIN s32 | session_01UV1SzjXidWjrysZBq2qz2c | RUNNING | 17/11 13:31Z |
+| REVIEW tuanluc-sync r1 of c70fb3973 (opus BIG; + remove TA TUẦN QUA chips per OD L1458(3)) | review/tuanluc-sync-r1 | MAIN s32 | session_01UV1Szm7QwzuJJuvFXUbJdi | RUNNING | 17/11 13:31Z |
+| person-leftcol #3 (iPad fit + 3 sizes + ksz3/kdper) on d1c121b1 | review/person-leftcol | MAIN s32 | session_01UV1SzgmaEVQSFzUscM5dKD | RUNNING | 17/11 13:31Z |
