@@ -611,7 +611,7 @@
 | map-full r1 PASS 29131677 (review/map-full-r1; trial-merge app-edge clean) → ships TOGETHER with app-edge after app-edge r1 PASS, next batch | review/map-full-r1 | main s30 | session_01UV1Szipn2t9xXY2WubCJ1T | PASS | 17/11 04:22Z |
 | mg-clutter r1 PASS cbbbc7d9 (review/mg-clutter-r1; needs merge on main) → next batch with newlife-reset b2da25cc0 + map-full 29131677 (+ app-edge on PASS) | review/mg-clutter-r1 | main s30 | session_01UV1SzhB4ckkvjk7TVuS92E | PASS | 17/11 04:23Z |
 | cloud-del review r1 (sonnet SMALL) of e12ef99a | review/cloud-del-r1 | D | session_01964izGAVcoDZanXLDNekPh | PASS 7d67ba1f (archived) → FOR MAIN batch | 17/11 04:23Z |
-| npc-death-wire review r1 (opus BIG) of de166c3f | review/npc-death-wire-r1 | D | session_01964izCQT8gNjjT2WA7WDjh | RUNNING | 17/11 04:27Z |
+| npc-death-wire review r1 (opus BIG) of de166c3f | review/npc-death-wire-r1 | D | session_01964izCQT8gNjjT2WA7WDjh | PASS 9253ec1b | 17/11 04:27Z |
 | newlife-reset r1 PASS 0045ff8ef (supersedes b2da25cc0; tuanluc-sync drops vmemFix) → next batch | review/newlife-reset-r1 | main s30 | session_01UV1Szj7gGyXgBXgvj6d6xG | PASS | 17/11 04:28Z |
 | npc-roads review r2 (opus BIG) of e34393b1 (U2/U3/U4 + r1 families + ch1–4 gate; on a test build with B's road engine) | review/npc-roads-r2 | D | session_01964izESTjuhUzS2khSQ5K9 | RUNNING | 17/11 04:28Z |
 | BATCH 04:15 LIVE: main = 4719d424 (FF from 64c39ca28; save-dlg-fix-r1, fig-rank-match-r2-r1, wx-fx-size-r1); s30 looked at Fold/iPad shots | review/batch-0415 | main s30 | session_01UV1SzjhxXkcba8uS4TZeVm | LIVE | 17/11 04:31Z |
