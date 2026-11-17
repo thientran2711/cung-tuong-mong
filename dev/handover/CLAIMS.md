@@ -757,7 +757,7 @@
 | coop-thin-b SẴN SÀNG KIỂM 4609afa6 (r2 seam fix by #4) → re-review r3 (fresh opus BIG; brief briefs/review-coop-thin-b-r3.md) | review/coop-thin-b-r3 | B | session_01N1tNP5hpVGVh45GCMzd9Ah | RUNNING | 17/11 11:40Z |
 | MAID CONSORT-TIER REDRAW W4f (successor of W4e; a36 m22 + a51 m01-m26; opened by lead #7) | review/fig-cutout-clean | C | session_011xDdVSvgMHhWjrFtf6Qv8J | RUNNING | 17/11 11:48Z |
 | REVIEW voice-trait-r1 (opus BIG) of e134694 | review/voice-trait-r1 | C ROOT-6 | session_011xDdVNmiymzf41EueV5zCn | RUNNING | 17/11 12:41Z |
-| REVIEW map-me-mark r1 of b62bd85f | review/map-me-mark-r1 | MAIN s31 | session_01UV1SzkrhfnKSSwFEpGBcVS | RUNNING | 17/11 12:52Z |
+| REVIEW map-me-mark r1 of b62bd85f | review/map-me-mark-r1 | MAIN s31 | session_01UV1SzkrhfnKSSwFEpGBcVS | PASS a86ea58c | 17/11 12:52Z |
 | REVIEW toil-looks2 r1 (opus BIG) of 43b9a8b64 (after makeup-theme-r1 471de81f) | review/toil-looks2-r1 | MAIN s31 | session_01UV1Szhz851NPoNbAv8MGF7 | RUNNING | 17/11 12:54Z |
 | morechip-corners: '+N' chip bigger, bottom-left/right (owner 13:02Z) on top of morechip-fix-r1 3bed78e3 | review/morechip-corners | MAIN s31 | session_01UV1SzgitG1nAF1r7wZK2wd | RUNNING | 17/11 12:55Z |
 | toil-looks3: Khuynh thành redraw, streaks→Vụng về, Đoan trang≠Kiều diễm, Diêm dúa lips (owner 13:05Z) on review/toil-looks2 | review/toil-looks2 | MAIN s31 | session_01UV1Szgv5xtMpkNRXeojDX5 | RUNNING | 17/11 12:59Z |
