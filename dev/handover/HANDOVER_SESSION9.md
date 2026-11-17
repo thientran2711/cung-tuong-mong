@@ -722,3 +722,4 @@ LESSONS s32: check `git ls-remote` for a reported sha BEFORE archiving (person-l
 =======
 >>>>>>> 61f334cd (review kit-ico-rank-r2 report: PASS aaa1bec1)
 - (17/11 15:40Z wake) LOAD: main running 8 (builder s31b/s32a [quickcheck PASS a2eda349, gates running], toil-looks4 + toil-looks2 reviewer (r5), morechip-sil worker + reviewer (r3 = 4821b39d + icon c4cff1fc), pcard-facts-2, loading-words, tinbao-ui — all owner UI/go-live) | B: active (landed mg-snap-r1 + trait-rename-r1 → main bbb3b4ca), free ? (no STATUS line; ordered makeup-lux) | C-AG free many | D free 9 | moved: IMAGE SWEEP (one-time git images + CDN img/_review leftovers, OD ~14:15Z storage rule) main → D.
+- (17/11 15:35Z) FOREMAN C-AG rolled over: #2 = session_01UV1SziUGzeqJM9bXyR2ehR (takeover dev/handover/TAKEOVER_FOREMAN_C_AG2.md). tinbao-ui worker told.
