@@ -68,7 +68,7 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
   const n={};const W={};for(const k of ["health","praise","gossip","secret"]){W[k]=P3T[k];P3T[k]=function(){if(arguments[0]===S)n[k]=(n[k]||0)+1;return W[k].apply(this,arguments)}}
   try{topicOpts(t)}finally{for(const k in W)P3T[k]=W[k]}out.herTalk=n;
   /* NPC↔NPC talk */
-  v.rl=v.rl||{};v.rl[t.id]=60;t.rl=t.rl||{};t.rl[u.id]=-40;const N=Object.assign({},agNeeds(v),{ally:1,spite:1,safe:1,danh:1,hh:1,kid:1});
+  v.rl=v.rl||{};v.rl[t.id]=60;t.rl=t.rl||{};t.rl[u.id]=-40;t.rl[v.id]=0;const N=Object.assign({},agNeeds(v),{ally:1,spite:1,safe:1,danh:1,hh:1,kid:1});
   const O=AGREG.consort.par3talk(v,N,null);out.talkOpt=O.map(o=>o.k);const a0=aff(t,v);const o1=O.find(o=>o.k==="cx3:talkHealth");out.talkRun=o1?AGRUN[o1.k](v,o1.t):"";out.talkMoved=aff(t,v)!==a0;
   /* household */
   const spy={};const sp=nm=>{const f=window[nm];spy[nm]=0;window[nm]=function(){if(arguments[0]===v||arguments[1]===v)spy[nm]++;return f.apply(this,arguments)};return()=>window[nm]=f};
