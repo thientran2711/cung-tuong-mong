@@ -145,3 +145,12 @@ maid-m09-t5-a18	nVLoS4EYQD	ok U
 - W5c: 48 done. NEXT maid-m09-t6-a18 (queue line 49).
 - OWNER VERDICT (lead 17/11 ~03:45Z): original maid look approved; NO maid redo; look-alike list and rank-sample/maid-rest-A-at-risk.tsv are IGNORED. From A8 on: original rich-silk prompt (brief2).
 - PLAIN-PROMPT BATCH (painted with the 'plain maid' prompt, lead asks Foreman C whether they stay; do not repaint): maid-m06-t6..m06-tm4, m07-a18, m07-cold..m07-t5, m07-t6..m07-tm4, m08-a18, m08-cold..m08-t5, m08-t6..m08-tm4, m09-a18, m09-cold..m09-t5 (all -a18) = 48 files, + A7 (m09-t6..m10-a18, 8) in progress.
+maid-m09-t6-a18	LwoNCGxswO	plain U (repaint pending)
+maid-m09-t7-a18	P3uY1d242C	plain U
+maid-m09-t8-a18	YMs8yQ9WeC	plain U
+maid-m09-tm0-a18	jUB9fW9LD0	plain U
+maid-m09-tm2-a18	IfibY7utvE	plain U
+maid-m09-tm3-a18	p8OCROOehw	plain U
+maid-m09-tm4-a18	Xm4QANQBfo	plain U
+maid-m10-a18	CqzjDWTEEy	plain U
+- W5c: 56 plain-prompt files (m06-t6 .. m10-a18) being REPAINTED to own original look (agents R1..R7, redo.txt in scratch). NEW MAIDS PAUSED (owner rank standard pending). RESUME POINT for new maids: maid-m10-cold-a18 (a18 queue then a26/a36/a51; 8 old m01 files at end). Redo TSV = lines tagged 'redo'.
