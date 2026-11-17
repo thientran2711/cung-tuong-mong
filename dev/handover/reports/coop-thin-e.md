@@ -47,3 +47,46 @@ quickcheck buổi (solo, iPad ×4, includes dialogs): 830–985 ms on recent sha
 
 ## Next (building)
 CAP 4 → 5, level 5 = E; everything behind TH.on(5) (levels 0–4 unchanged; solo untouched). Order: (1) `do ready` + host step for both (day buổi) + her patch; (2) the night: host decides, resolves her night in context b, her endTurn skips the resolved night; (3) cycle flags read directly; (4) host clock only; (5) world windows' end() on her household; (6) delete the listed relays at level 5; tripwire before/after.
+
+## #1 progress (worker session_01N1tNP5f2oakg2Jy1DdVpxy) — review/coop-thin-e @ 2fa0acf1 (pushed), NOT ready for review
+Built (level 5 = E, CAP 4 → 5, everything behind TH.on(5); levels 0–4 + solo unchanged):
+- **dev/build/jcoopthine.js** (new, after jcoopthinc in assemble.py): guest "Sẵn sàng" = `do erd` packs (her person NOW vs the host's copy
+  in the view P.<seat>, TH.pDiff, packs < 15 000 chars, only after every pq patch is applied) + `do ready {w,b}`; host: own step
+  (real nextBuoi) when both ready (or his clock: forceBend → eForce, host clock only), then her step in withSeat("b") from the top of
+  the event loop: rivalsBuoi / placeWhere do not run again (her NPC places = his, mapped), and the WORLD is put back after her step
+  (wSnap / wRestore: NPC fields, NPC list, W keys, rid; her viewer rows rel/oan/ghen/ev/<map>.me and her part of emp/cm/men kept) =
+  the same rule as part C's lens. Her buổi returns as a part-D patch; on her phone a buổi moved by the patch resets used / popIdx /
+  popMsg + curtain. Night gate: her tối ready = the same intent (host sets CW.nfr), his go rides the view (o.e.go).
+- **jcoopworld.js**: ONE switch `eW()` (= TH.on(5)): needWhere false, onBuoi / bend / badbuoi / rebend / catch-up loop / setWhere / sendWhere
+  off, nsay (ctm-nr) muted, nextBuoi wrapper → CW.eNext, forceBend → CW.eForce, lockNext waits on CW.eWait; keepFriendPos in her context =
+  the host's own place; sendPos / sendFam never from inside her context. Exports CW.nCheck / nightReady / mapPlace / refreshHere.
+- Tests: **dev/test/coop-thin-e.js** (E1–E8) **19/19** L5 (host Fold, guest iPad) on 2fa0acf1; dev/test/coop-thin-e-perf.js (step 0 c).
+  Regression on 2fa0acf1: coop-e2e (level 0) 63/63; coop-thin-c L4 16/16; (thin-e L5 swap, thin-d L4: see ## #1 runs below).
+  Seen in the run: her step's world writes put back each buổi (host E.stat wrR 39 NPC fields, wrW 2: `emp`, `tn`), 0 persons added/removed.
+
+## ROLLOVER HANDOVER #1 → #2 (11/17/2026; context ≈ START_CTX 3 % + 25 %) — Foreman B opens the successor
+Worktree /home/user/wt/cte (sparse, hooks installed; logs /home/user/wt/cte-out). Run: `python3 dev/build/assemble.py && node dev/test/coop-thin-e.js <W> 5 [swap]`.
+Left, in order:
+1. **cycle flags (row 10)**: at eW(): cySend → return; cyWait → false (no cyHold: the flip runs after both are ready, her tối `erd` carries
+   her S.cyb); CW.fcyb on the host → TH.seatOf(fs()).S.cyb; remove "cyb" from jcoopthine BAD (the guest diff must carry it; D's SKIP for
+   host→guest patches stays). Test: dev/test/coop-cyc.js at level 5 (+ E check: her báo sớm / giấu changes the host's tray).
+2. **tn relay (row 7)**: at eW() tnRelay / tnFinal / the ctm-tn listener off (her own change = part C's act op on the world key tn; the
+   host's change = the view). Her side effect (tnTake: "Thẻ bài … đã được lật" note / the ksp card) driven from the view: on thinview,
+   when S.tn (her lens) differs from CW.tnLast → tnTake. CHECK first how tn.who reads on her phone (REFF has "who": mapMe turns her pid into
+   "me"; tnSet compares with me() = 902) — test with coop-night.js / a forced tn in coop-thin-e.
+3. **her night in context b (rows 8/9)**: her night dialogs (ksp → prep → night1 → night2 → nightFx) are pid cards: at level 5 build them
+   on the host in her context (D.cardFor / takeQ) instead of tnTake's local pushDil; her pick runs nightFx in context b; S.toMorning on
+   her store = the host ends her day (treat as her ready in check()). jnight on the guest: step() → nothing at eW() (no nightEnd).
+   resolveTonight only resolves NPC nights (j8:519; "me" = ""), already host-only.
+4. **world windows' end() on her household** (ORDER s34 16:22Z, coop-thin-c.md 'For part E'): jworld's end() of a window (vu cổ / trộm /
+   phóng cung) runs on the host; for her household (her choice S.wwMe in her store) run it in withSeat("b") (D.later), result = patch.
+5. jcooptimer guest: dueTick on the guest must step nothing (forceBend already → eForce false on the guest; the tối branch calls nextBuoi
+   = her ready, harmless) — add a guard + say so in the header (host clock only).
+6. Gates (brief): coop-thin-e L5 + swap; coop-thin-a/b/c/d at levels 0–4 (+ swap); coop-e2e (+COOP_SWAP=1); coop-p2; coop-b1;
+   coop-one-world seeds 1–10; night tests (coop-night, night-*, log-sync-night); coop-cyc; coop-timer; tripwire before/after
+   (`TRIP=1 THIN=4 node dev/test/coop-bot.js 4 <out>` vs THIN=5 — check coop-bot accepts THIN=5; buổi/night categories must drop);
+   quickcheck; one-core-guard; perf re-measure (coop-thin-e-perf on the built E: her step for real); shots host Fold + guest iPad at a
+   buổi step + a night result (scratch, CDN img/_review/coop-thin-e/ if the reviewer needs them).
+7. Then report '## Done' (deleted/bypassed paths table: rows 1–12 of 0b), CLAIMS 'SẴN SÀNG KIỂM <sha>', send_message Foreman B.
+Known: the night gate's go reached the guest through nOtherEnded (host's end out) in the run, E.stat.go 0 → check the view path
+(o.e.go) really arrives before his end (hostView after nGoNow: call TH.flush() in nGoNow at eW()).
