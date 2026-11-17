@@ -383,7 +383,7 @@ function petApply(ops,k){const out=[];if(!Array.isArray(ops))return out;
  if(ASK.includes(k)&&!CW.inv){if(sameHouse(a,t))return f.apply(this,arguments);const id=newId();CW.acts[id]={k,extra,v:t.id};
   const item=extra!=null&&S.inv&&S.inv[extra]?iname(S.inv[extra]):"";
   if(dOn()){if(host()){const who=S.name,v=t.id,he=extra!=null&&S.inv&&S.inv[extra]?J(S.inv[extra]):null;/* D r1: k/v/item ride in pp, so a host reload keeps the answer (CW.acts is memory only) */
-    CW.thin.D.cardFor(fs(),()=>pushDil(mkP("thInv",{id,k,item,who,v,he}),"Hảo hữu tìm đến"))}
+    CW.thin.D.kind(fs(),"inv",{id,k,item,who,v,he})/* B r2: as data (deferred while her rolled life is held; survives a host reload) */}
    else CW.thin.doSend("inv",{id,k,item,e:extra!=null&&S.inv&&S.inv[extra]?J(S.inv[extra]):null});return `Ngươi ngỏ ý ${((ACT[k]||{}).n||k).toLowerCase()} với ${t.name}, đợi nàng trả lời. `}
   COOP.send({t:"act",id,k,mode:"invite",n:(ACT[k]||{}).n||k,who:S.name,item});return `Ngươi ngỏ ý ${((ACT[k]||{}).n||k).toLowerCase()} với ${t.name}, đợi nàng trả lời. `}
  const pa=PETACT.includes(k);let L0=null;if(pa){petLoseHook();L0=tsbPets(t).map(P=>[P,Object.assign({},P)]);CW.petV=t;CW.petAdj={}}
@@ -821,11 +821,11 @@ const isSrvMe=()=>typeof isSrv==="function"&&isSrv();
  const o=ownerOf(s);if(!o||o===a)return "";const B=BAL.coopBribe;
  if(a===S){if((S.bac||0)<B.pay)return "";const id=newId();
   if(dOn()){if(CW.ctx)return "";if(host()){(CW.brb=CW.brb||{})[id]={o:o.id};const who=S.name;
-    CW.thin.D.cardFor(fs(),()=>{const d=!S.dead&&isSrvMe()?mkP("thBribe",{rid:id,who,pay:B.pay,o:o.id}):null;if(d)pushDil(d,"Bạc lạ");else CW.thin.D.after(()=>briberRes({rid:id,no:1}))})}
+    CW.thin.D.kind(fs(),"bribe",{rid:id,who,pay:B.pay,o:o.id})}
    else CW.thin.doSend("bribe",{rid:id,o:o.id,who:S.name,pay:B.pay})}
   else{(CW.brb=CW.brb||{})[id]={o:o.id};p2say("bribe",{rid:id,who:S.name,pay:B.pay})}
   return `Ngươi sai thái giám đem ${B.pay} lượng bạc dúi cho ${s.name}, đợi nàng trả lời. `}
- if(host()&&a&&a.id!=null&&a.alive&&(a.bac||0)>=B.pay){if(dOn())CW.thin.D.cardFor(fs(),()=>nbribeIn(a.id));else p2say("nbribe",{r:a.id})}return ""}})();
+ if(host()&&a&&a.id!=null&&a.alive&&(a.bac||0)>=B.pay){if(dOn())CW.thin.D.kind(fs(),"nbribe",{r:a.id});else p2say("nbribe",{r:a.id})}return ""}})();
 P2H.bribe=m=>{if(S.dead||!isSrvMe())return p2say("briber",{rid:m.rid,no:1});const mis=srvM(),B=BAL.coopBribe,nm=esc(m.who||friendName()),mn=esc(mis?mis.name:"chủ nhân");
  pushModal({act:1,t:"Bạc lạ",h:`<p>Một thái giám của <b>${nm}</b> chặn ngươi ở hành lang, dúi vào tay ngươi một túi bạc: “Chủ tử nhà ta muốn biết chuyện trong cung ${mn}.”</p>`,opts:[
   {n:"Nhận bạc, làm tai mắt",fx:{bac:+m.pay||B.pay},x:cnvSpyX(mis),go:()=>{S.srv.spyFor=fp();p2say("briber",{rid:m.rid,ok:1})}},
@@ -847,7 +847,7 @@ function nbribeIn(r){if(S.dead||!isSrvMe())return;const v=RV(r);if(!v||!v.alive)
 P2H.ev=m=>evIn(m.tg,m.n);
 function evIn(tg,n){if(S.dead)return;const v=RV(tg);if(!v||!v.alive)return;const d=evA(S,v,+n||0);if(d>0){try{log(`Tai mắt ${esc(friendName())} lén báo tin: chứng cứ với ${esc(v.name)} +${d}.`)}catch(e){}render()}}
 /* part D: the proof goes to the player who holds it, run by the host in that player's context */
-function evOut(tg,n){const T=CW.thin;if(CW.ctx)T.D.after(()=>evIn(tg,n));else if(host())T.D.later(fs(),()=>evIn(tg,n));else T.doSend("ev",{tg,n})}
+function evOut(tg,n){const T=CW.thin;if(CW.ctx)T.D.after(()=>evIn(tg,n));else if(host())T.D.kind(fs(),"ev",{tg,n});else T.doSend("ev",{tg,n})}
 /* ---------- B2 × jcycle (review/coop-b1b5-fix): her Kỳ nguyệt sự answers reach the other seat ----------
    Before: with B2 the HOST draws the one night with the friend's entry in its deck, but jcycle read the lie / back / hide flags only from
    its own S: the guest's maid card (báo lùi / báo sớm / giấu) cost her Đức / ghen and changed nothing on the host's tray, and both seats
@@ -888,7 +888,7 @@ CW.hrApply=function(){if(!CW.on||!S)return;const h=S.hr||null;for(const [k] of a
 CW.hrSync=function(){if(!CW.on||!S||S.dead)return;S.hr=hrStr();if(!host())CW.hrPrev=S.hr};
 (function(){if(typeof heirMonth!=="function")return;const f=heirMonth;heirMonth=function(){if(!CW.on)return f.apply(this,arguments);if(!host())return "";
  const L=CW.pulled;if(L&&L.length)pushFriend(L.slice());if(CW.dHr===undefined)CW.dHr=S.hr||null;let r;try{r=f.apply(this,arguments)}finally{if(L&&L.length)pullFriend()}try{S.hr=hrStr()}catch(e){}
- try{const h=S.hr||null,was=CW.dHr;CW.dHr=h;if(dOn()&&h&&h!==was)CW.thin.D.later(fs(),()=>hrCard(h))}catch(e){console.error(e)}return r}})();
+ try{const h=S.hr||null,was=CW.dHr;CW.dHr=h;if(dOn()&&h&&h!==was)CW.thin.D.kind(fs(),"hr",{h})}catch(e){console.error(e)}return r}})();
 /* guest, merged week: the host named a new heir → her card (her own son: the j1 gain on her side) */
 CW.hrWeek=function(){if(!CW.on||!S||S.dead||host())return;const h=S.hr||null,was=CW.hrPrev;CW.hrPrev=h;if(dOn())return;/* part D: the host builds her card */if(was===undefined||h===was||!h)return;hrCard(h)};
 /* her "Lập Thái tử" card (old: built on the guest after the merged week; part D: built on the host in her context the month it happens) */
@@ -969,12 +969,13 @@ CW.X.resApply=resApply;
 CW.reEnd=function(){if(CW.on&&S&&!S.dead&&CW.sent===wk()){CW.sent=-1;sendEnd()}};
 CW.soonEnd=soonEnd;
 CW.hrCardTest=h=>hrCard(h);   /* test hook (dev/test/coop-thin-d.js): her heir card in the current context */
-const otherSide=fn=>{const T=CW.thin;if(CW.ctx)T.D.after(fn);else T.D.later(fs(),fn)};
+/* fn = the host's side (run after her context closes); k + a = her side as data (D.kind: deferred while her rolled life is held) */
+const otherSide=(fn,k,a)=>{const T=CW.thin;if(CW.ctx)T.D.after(fn);else T.D.kind(fs(),k,a)};
 /* Kết giao / Tặng quà: pp {id, k, item, who, e (the guest's item, when she gives it)} */
 PEND.thInv=pp=>{if(!pp||!pp.id)return null;const what=pp.k==="gift"?`muốn tặng ngươi ${esc(pp.item||"một món quà")}`:`muốn kết giao với ngươi`;
  return {t:`<p><b>${esc(pp.who||friendName())}</b> ${what}.</p>`,o:[
-  {n:"Nhận",fx:{},x:"hảo hữu tiếp tục việc ấy",go:()=>otherSide(()=>CW.ctx?invHer(pp,true):invRun(pp.id,true,pp))},
-  {n:"Từ chối",fx:{},x:"không nhận",go:()=>otherSide(()=>CW.ctx?invHer(pp,false):invRun(pp.id,false,pp))}]}};
+  {n:"Nhận",fx:{},x:"hảo hữu tiếp tục việc ấy",go:()=>otherSide(()=>invRun(pp.id,true,pp),"invHer",{pp,ok:true})},
+  {n:"Từ chối",fx:{},x:"không nhận",go:()=>otherSide(()=>invRun(pp.id,false,pp),"invHer",{pp,ok:false})}]}};
 /* her invite accepted / refused by the host: run in HER context (she is the actor, the host's entry the target) */
 function invHer(pp,ok){if(!S||S.dead)return;const v=friendEntry();
  if(!ok||!v||v.alive===false){pushModal({t:"Hảo hữu từ chối",h:`<p><b>${esc(friendName())}</b> không nhận.</p>`});return}
@@ -984,15 +985,21 @@ function invHer(pp,ok){if(!S||S.dead)return;const v=friendEntry();
  pushModal({t:"Hảo hữu nhận lời",h:`<p>${r||"Hảo hữu đã nhận."}</p>`})}
 /* Mua chuộc on a player who serves as a cung nữ: pp {rid, who, pay, o (her mistress)} — the j42 card with the other player as the buyer */
 PEND.thBribe=pp=>{if(!pp||!isSrvMe())return null;const mis=srvM(),B=BAL.coopBribe,pay=+pp.pay||B.pay,nm=esc(pp.who||friendName()),mn=esc(mis?mis.name:"chủ nhân");
- const ans=r=>otherSide(()=>briberRes(Object.assign({rid:pp.rid,o:pp.o},r)));
+ const ans=r=>{const m=Object.assign({rid:pp.rid,o:pp.o},r);otherSide(()=>briberRes(m),"briber",m)};
  return {t:`<p>Một thái giám của <b>${nm}</b> chặn ngươi ở hành lang, dúi vào tay ngươi một túi bạc: “Chủ tử nhà ta muốn biết chuyện trong cung ${mn}.”</p>`,o:[
   {n:"Nhận bạc, làm tai mắt",fx:{bac:pay},x:cnvSpyX(mis),go:()=>{S.srv.spyFor=fp();ans({ok:1})}},
   {n:"Từ chối, bẩm chủ",fx:{tin:B.tin},x:`${mn} nắm 1 chứng cứ của ${nm}`,go:()=>ans({told:1})},
   {n:"Từ chối, im lặng",fx:{},x:"trả lại bạc",go:()=>ans({})}]}};
 CW.dInit=function(T){
+ /* B r2: every D work into the other player's context, as data (jcoopthin D.kind): the card kinds and their answers */
+ Object.assign(T.D.K,{inv:a=>pushDil(mkP("thInv",a),"Hảo hữu tìm đến"),
+  bribe:a=>{const d=!S.dead&&isSrvMe()?mkP("thBribe",a):null;if(d)pushDil(d,"Bạc lạ");else T.D.after(()=>briberRes({rid:a.rid,o:a.o,no:1}))},
+  nbribe:a=>nbribeIn(a.r),ev:a=>evIn(a.tg,a.n),hr:a=>hrCard(a.h),invHer:a=>invHer(a.pp,a.ok),briber:a=>briberRes(a)});
+ /* a Mua chuộc card she can no longer answer (no longer a cung nữ after a new life): the buyer still gets "no longer serves there" */
+ T.D.GONE.thBribe=pp=>briberRes({rid:pp.rid,o:pp.o,no:1});
  /* the guest's offers to the host: the host's own card (his context); her side runs in her context when he answers */
  T.onDo("inv",a=>{a=a||{};const who=S.name;T.D.after(()=>{if(!S||S.dead)return;pushDil(mkP("thInv",{id:a.id,k:a.k,item:a.item,who,e:a.e||null}),"Hảo hữu tìm đến");showModal();render()});return {ok:1}});
  T.onDo("bribe",a=>{a=a||{};const who=S.name;T.D.after(()=>{const d=S&&!S.dead&&isSrvMe()?mkP("thBribe",{rid:a.rid,who,pay:a.pay,o:a.o}):null;
-   if(d){pushDil(d,"Bạc lạ");showModal();render()}else T.D.later("b",()=>briberRes({rid:a.rid,o:a.o,no:1}))});return {ok:1}});
+   if(d){pushDil(d,"Bạc lạ");showModal();render()}else T.D.kind("b","briber",{rid:a.rid,o:a.o,no:1})});return {ok:1}});
  T.onDo("ev",a=>{a=a||{};T.D.after(()=>evIn(a.tg,a.n));return {ok:1}})};
 }catch(e){console.error(e)}})();

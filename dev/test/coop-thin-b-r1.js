@@ -39,7 +39,7 @@ const until=async(o,fn,arg,ms=40000)=>{try{await o.p.waitForFunction(fn,arg,{tim
  ok(await until(G,()=>window.COOP&&COOP.seat==='b'&&!COOP.frozen,null,60000),'guest joined seat b');
  {const t0=Date.now();while(Date.now()-t0<90000){await clear(H);await clear(G);const a=await H.p.evaluate(()=>__co().world&&rivals.some(v=>v.coop)),c=await G.p.evaluate(()=>__co().world&&rivals.some(v=>v.coop));if(a&&c)break;await sleep(500)}}
  const both=async f=>[await H.p.evaluate(f),await G.p.evaluate(f)];
- ok((await both(()=>COOPW.thin.CAP))+''==='2,2','both seats run a build with part B (TH.CAP 2)');
+ {const c=await both(()=>COOPW.thin.CAP);ok(c[0]>=2&&c[0]===c[1],'both seats run the same build with part B (TH.CAP >= 2)',c)}
  const L=await both(()=>COOPW.thin.lvl);ok(L[0]===LVL&&L[1]===LVL,'room level '+LVL+' on both',L);
  ok(await H.p.evaluate(()=>COOPW.thin.NOOP.every(n=>COOPW.thin.NOOPED.includes(n))&&!COOPW.thin.REGBAD.length&&['KMS','KMSNAP','J95B.bind','SP13.L','J95C.lastV'].every(n=>COOPW.thin.REG.includes(n))),'UI no-op list wrapped, part B state registered, REGBAD empty');
  if(process.env.DBG1)console.log('DBG1',JSON.stringify(await H.p.evaluate(()=>({why:COOPW.thin.life.why,st:COOPW.thin.life.stat,hold:COOPW.thin.life.hold}))),JSON.stringify(await G.p.evaluate(()=>({ask:COOPW.thin.life.ask,key:COOPW.thin.life.key,S:!!S,Q:Q.map(m=>m.t),ctx:(window.__tx||[]).slice(-30)}))),JSON.stringify(G.errs.concat(H.errs).slice(0,5)));
@@ -143,7 +143,10 @@ const until=async(o,fn,arg,ms=40000)=>{try{await o.p.waitForFunction(fn,arg,{tim
   ok(q2.t.filter(t=>/Hảo hữu tìm đến/.test(t)).length===1,'R7 the host invite is still on her phone after accept, once (not lost by the new life, not doubled)',{q1:q1.t,q2:q2.t});
   ok(q2.t.filter(t=>/Nhập cung/.test(t)).length===1,'R7 her new life Nhập cung card shown once after accept (not stolen by D takeQ, not doubled)',q2.t);
   ok(q1.t.filter(t=>/Nhập cung/.test(t)).length<=1,'R7 while held: Nhập cung not shown twice (D takeQ must not take the rolled life dialogs)',q1.t);
-  const L=await settle(l0);ok(L.hb===l0+1&&L.g===l0+1,'R7 one new life',L);const q3=await dupQ();ok(q3.thq===0,'R7 thq 0 after clearing',q3)}
+  /* r2 FIX: the invite was deferred while held (never run on the rolled store), then delivered after the accept */
+  const dl=await H.p.evaluate(()=>COOPW.thin.D.log.map(x=>x[0]));ok(dl.includes('defer')&&dl.includes('flush')&&!dl.includes('held-run'),'R7 host: D work deferred while held, flushed after accept, none ran on the held store',dl.slice(-12));
+  const L=await settle(l0);ok(L.hb===l0+1&&L.g===l0+1,'R7 one new life',L);const q3=await dupQ();ok(q3.thq===0,'R7 thq 0 after clearing',q3);
+  const hk=await H.p.evaluate(()=>{const B=COOPW.thin.seatOf('b');return {acts:Object.keys(COOPW.acts||{}).length,thq:(B&&B.S.thq||[]).length,df:(COOPW.thin.D.DF.b||[]).length}});ok(hk.thq===0&&hk.df===0,'R7 host: her card answered (store thq 0), nothing left deferred',hk)}
  console.log('final Q',JSON.stringify(await dupQ()));
  const E=[...H.errs,...G.errs].filter(e=>!/ResizeObserver/.test(e));ok(!E.length,'no page errors',E.slice(0,5));
  const f=res.filter(r=>!r[0]).length;console.log(`\n${res.length-f}/${res.length} ok`);await b.close();process.exit(f?1:0)})().catch(e=>{console.error(e);process.exit(2)});

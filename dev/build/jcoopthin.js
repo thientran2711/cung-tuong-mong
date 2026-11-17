@@ -108,8 +108,15 @@ function swapView(from,to,mks,wobj){const fp=PID[from],tp=PID[to];const L=npcs()
  const seen=new Set();for(const r of L)mapView(r,fp,tp,r,seen,skip);
  for(const k of X.W_KEYS)if(wobj&&plain(wobj[k]))mapView(wobj[k],fp,tp,wobj[k],seen,skip)}
 /* her stored state: from the room's P[seat] the first time (S = personal keys only, refs as {$r}/{$k}) */
+/* B r2 (seam): the person her accept just made, until the room has it (her `me` reaches the server, then the room's P[seat]): a D intent
+   deferred while her life was held is delivered on THIS person, never on the dead old one the room still holds */
+TH.pbase={};
+TH.lifeOf=function(seat){const C=CW.base||COOP.state.C;const P=C&&C.P&&C.P[seat];let l=(P&&P.life)||0;const O=TH.pbase[seat];if(O&&(O.life||0)>l)l=O.life;return l};
+/* a seat whose rolled life waits for her accept (part B TB.hold): no part-D work may run on that store (jcoopthinb sets TH.holdOf) */
+TH.held=seat=>!!(TH.holdOf&&TH.holdOf(seat));
 TH.seatOf=function(seat){if(ST[seat])return ST[seat];
  const C=CW.base||COOP.state.C;let P=C&&C.P&&C.P[seat];
+ {const O=TH.pbase[seat];if(O){if(P&&(P.life||0)>=(O.life||0))delete TH.pbase[seat];else P=O}}
  /* part B: a seat with no person yet (the guest's FIRST life) gets a blank store, only for the intent that builds her life (TH.blank) */
  if(!P||!P.S){if(!(TH.blank&&TH.blank(seat)))return null;P={S:{},ok:"tt"}}
  const s=J(P.S);const pers={kn:[s.empKnown||{}],cm:s.cmP||{},men:s.menP||{}};
@@ -144,7 +151,10 @@ TH.withSeat=function(seat,fn){
  let v=null,p0=null;const dOn=TH.dOn();
  /* B r1 item 2 (ONE life-change path): a part-B life intent (roll / accept) answers with its own person (P), dialogs (q) and rows; part D's
     steps (thq hold, takeQ of her cards, the person patch, her row tracking) do not run for it, so a new life never travels twice */
- const dW=dOn&&TH.curDo!=="life";
+ /* B r2 (seam, belt): every D path into a held seat is deferred upstream (D.later / D.kind / her intents); one that still gets here
+    runs without D's steps (never takeQ on the rolled life) and is logged ("held-run", the tests assert none) */
+ const hd=TH.held(seat)&&TH.curDo!=="life";if(hd)D.log.push(["held-run",seat,TH.curDo||"later"]);
+ const dW=dOn&&TH.curDo!=="life"&&!hd;
  try{if(B.fresh){fixRefs(S);B.fresh=false}if(dW&&D.hold)D.hold(S);v=standIn(PA,S);if(v)v.__inv0=(v.inv||[]).slice();if(dW&&!D.noPatch)try{p0=pSnap()}catch(e){console.error("thin p0",e)}D.cur={p0,rv:dW&&!D.noPatch?D.rvIn(seat):null};return fn()}
  finally{const sN=S;
   if(dW)try{D.takeQ()}catch(e){console.error("thin takeQ",e)}
@@ -220,9 +230,14 @@ COOP.on("delta",m=>{if(host()||!m)return;const V=TH.view;if(!V||V.v!==(m.base|0)
 const DO={};let doN=0;
 TH.onDo=(op,fn)=>{DO[op]=fn};
 TH.doSend=function(op,args){if(host()||!TH.on(1))return false;const id="d"+Date.now().toString(36)+"-"+(doN++);COOP.send({t:"do",op,args:args===undefined?null:args,base:TH.view?TH.view.v:0,id});return id};
-COOP.on("do",m=>{if(!host()||!m||!TH.on(1))return;const fn=DO[m.op];let r=null;TH.curDo=m.op;
+function runDo(m){const fn=DO[m.op];let r=null;TH.curDo=m.op;
  try{if(fn)r=TH.withSeat(m.from||"b",()=>fn(m.args,m))}catch(e){console.error("thin do",m.op,e);r={err:String(e&&e.message||e)}}
- TH.curDo=null;/* D r1: call-scoped (a later D.later must not see a stale op) */TH.dn=m.n|0;TH.dr={id:m.id,op:m.op,r:r===undefined?null:J(r)};deltaSoon(0)});
+ TH.curDo=null;/* D r1: call-scoped (a later D.later must not see a stale op) */return r}
+COOP.on("do",m=>{if(!host()||!m||!TH.on(1))return;let r;
+ /* B r2 (seam): her intents other than the life itself wait while her rolled life is held (they run on her accepted person) */
+ if(m.op!=="life"&&m.op!=="probe"&&TH.held(m.from||"b")){D.defer(m.from||"b",{op:m.op,args:m.args===undefined?null:J(m.args),m:{from:m.from||"b",id:m.id}});r={held:1}}
+ else r=runDo(m);
+ TH.dn=m.n|0;TH.dr={id:m.id,op:m.op,r:r===undefined?null:J(r)};deltaSoon(0)});
 /* part A test intent: read her person in context b (no change) */
 TH.onDo("probe",()=>({name:S.name,used,ctx:CW.ctx,host:(rivals.find(v=>v.coop)||{}).id||null}));
 
@@ -301,11 +316,19 @@ TH.nvApply=nvApply;
 /* host: card store = her stored S.thq; pending patches D.PQ[seat] = [{n,p,rid}]; both kept in localStorage per room (a host reload) */
 D.PQ={};D.N={};
 const LSK=()=>"ctm-thin-d:"+room();
-D.save=function(){try{const o={q:{},pq:D.PQ,n:D.N,rv:D.RV,rw:COOP.state.week||0};for(const k in ST)o.q[k]=(ST[k].S&&ST[k].S.thq)||[];localStorage.setItem(LSK(),JSON.stringify(o))}catch(e){}};
+/* B r2 (seam): D.QS = her saved cards per seat, kept when her store is dropped (part B's accept drops it INSIDE her context: before, the
+   save that followed wrote no list for her and the next store loaded none = the host's invite lost); D.DF = deferred D work (data only) */
+D.QS=null;D.qsRoom="";
+function qsInit(){if(D.QS&&D.qsRoom===room())return;const o=loadLS();D.QS=(o&&o.q)||{};D.qsRoom=room();if(o&&o.df&&typeof o.df==="object")for(const k in o.df)if(Array.isArray(o.df[k])&&!(D.DF[k]&&D.DF[k].length))D.DF[k]=o.df[k]}
+D.save=function(){try{qsInit();for(const k in ST)D.QS[k]=(ST[k].S&&ST[k].S.thq)||[];
+ const df={};for(const k in D.DF)df[k]=(D.DF[k]||[]).filter(x=>x&&!x.fn);
+ const o={q:D.QS,pq:D.PQ,n:D.N,rv:D.RV,rw:COOP.state.week||0,df};localStorage.setItem(LSK(),JSON.stringify(o))}catch(e){}};
+/* her card list after a life change (part B accept): replaces the saved list of that seat (her store is gone; the next one loads this) */
+D.keepQ=function(seat,L){qsInit();D.QS[seat]=Array.isArray(L)?L:[];if(ST[seat]&&ST[seat].S)ST[seat].S.thq=D.QS[seat];D.save()};
 function loadLS(){try{return JSON.parse(localStorage.getItem(LSK())||"null")}catch(e){return null}}
 {const so=TH.seatOf;TH.seatOf=function(seat){const had=!!ST[seat];const B=so.apply(this,arguments);if(B&&!had&&TH.dOn()){const o=loadLS();
   /* D r1: her cards come ONLY from the host's own store; a thq inside the room's person blob is ignored (stale: a host reload showed an old card) */
-  B.S.thq=o&&o.q&&Array.isArray(o.q[seat])?o.q[seat]:[];
+  qsInit();B.S.thq=Array.isArray(D.QS[seat])?D.QS[seat]:o&&o.q&&Array.isArray(o.q[seat])?o.q[seat]:[];
   if(o){if(o.pq&&o.pq[seat]&&!D.PQ[seat])D.PQ[seat]=o.pq[seat];if(o.n&&o.n[seat]&&!D.N[seat])D.N[seat]=o.n[seat];
    if(o.rv&&o.rv[seat]&&!D.RV[seat]&&o.rw===(COOP.state.week||0))D.RV[seat]=o.rv[seat]}}return B}}
 D.hold=s=>{if(!Array.isArray(s.thq))s.thq=[]};
@@ -335,20 +358,40 @@ D.afterRun=function(seat){const L=AFTER.splice(0);for(const f of L)try{f()}catch
   try{pushDil(mkP("giftin",{f:pid,e:x}),"Quà tặng")}catch(er){console.error(er)}}}
  if(L.length||AFTER.length)try{showModal();render()}catch(e){}
  try{if(CW.reEnd)CW.reEnd()}catch(e){}};
-/* run fn in her context from the top of the event loop (her cards, her res); rid = a host wait (CW.rpend) released when she has it */
-D.later=function(seat,fn,rid){setTimeout(()=>{let pn=D.N[seat]||0;try{TH.withSeat(seat,fn)}catch(e){console.error("thin later",e)}
+/* run fn in her context from the top of the event loop (her cards, her res); rid = a host wait (CW.rpend) released when she has it.
+   B r2 (seam, the ONE gate for every D path into her context): while her rolled life is held (TH.held) the work is DEFERRED (D.DF), never
+   run on the rolled store; it runs when the hold ends (her accept: on her accepted person; release: on the room's person). Work given as
+   data (D.kind: k + args + the life it was meant for) survives a host reload; a kind about her PERSON (D.LIFEB: an effect, a proof, news)
+   meant for a life she no longer has is dropped (her old life's news die with it); a kind that needs her answer or answers her own act
+   (D.ANS cards, her own intents) is always delivered, so the other player's act gets its answer. */
+D.K={};D.ANS=["thInv","thBribe"];D.LIFEB=new Set(["res","ev","hr","nbribe","invHer"]);D.GONE={};D.DF={};
+D.later=function(seat,fn,rid,it){setTimeout(()=>{if(TH.held(seat)){D.defer(seat,it?Object.assign({},it,{rid}):{fn,rid});return}
+  if(it&&D.LIFEB.has(it.k)&&it.life!=null&&TH.lifeOf(seat)>it.life){D.log.push(["drop-life",seat,it.k]);if(rid&&CW.rpend)delete CW.rpend[rid];return}
+  const run=it?()=>{const f=D.K[it.k];if(f)f(it.a);else D.log.push(["no-kind",it.k])}:fn;
+  let pn=D.N[seat]||0;try{TH.withSeat(seat,run)}catch(e){console.error("thin later",e)}
   if(rid){if((D.N[seat]||0)>pn){const L=D.PQ[seat]||[];const P=L[L.length-1];if(P)P.rid=rid}else if(CW.rpend)delete CW.rpend[rid]}},0)};
+D.kind=function(seat,k,a,rid){D.later(seat,null,rid,{k,a:a===undefined?null:J(a),life:TH.lifeOf(seat)})};
+D.defer=function(seat,it){(D.DF[seat]=D.DF[seat]||[]).push(it);D.log.push(["defer",seat,it.op||it.k||"fn"]);D.save()};
+/* the hold is over: the deferred work runs in order (each from the top of the event loop) */
+D.flush=function(seat){if(!host()||TH.held(seat))return 0;const L=(D.DF[seat]||[]).splice(0);if(!L.length)return 0;D.save();D.log.push(["flush",seat,L.length]);
+ for(const it of L){if(it.op){setTimeout(()=>{if(TH.held(seat)){D.defer(seat,it);return}const r=runDo({op:it.op,args:it.args,from:seat,id:it.m&&it.m.id});D.log.push(["late-do",it.op,!!(r&&!r.err)]);deltaSoon(0)},0)}
+  else D.later(seat,it.fn||null,it.rid,it.fn?null:it)}return L.length};
+setInterval(()=>{try{if(!CW.on||!host()||!TH.dOn())return;qsInit();for(const k in D.DF)if(D.DF[k]&&D.DF[k].length&&!TH.held(k))D.flush(k)}catch(e){}},1000);
+/* part B accept: her old life's unacked patches are void (her new person never had them; S.thpn restarts with it) */
+D.dropPQ=function(seat){for(const x of D.PQ[seat]||[])if(CW.rpend){delete CW.rpend["pq"+seat+x.n];if(x.rid)delete CW.rpend[x.rid]}D.PQ[seat]=[]};
 /* her card from the host's side: build is called in her context; true when a card was queued */
 D.cardFor=function(seat,build,rid){D.later(seat,()=>{build()},rid)};
 D.patchOut=function(seat,p){D.N[seat]=(D.N[seat]||0)+1;const L=D.PQ[seat]=D.PQ[seat]||[];L.push({n:D.N[seat],p});while(L.length>40)L.shift();
  const k="pq"+seat+D.N[seat];if(CW.rpend)CW.rpend[k]=Date.now();D.log.push(["patch",seat,D.N[seat],p.length]);setTimeout(()=>TH.flush(),0)};
 /* an act / NPC event's effect on her (the old `res` message), applied on the host in her context; death / lãnh cung stay on the old path (part B/G) */
-D.resTo=function(seat,m,rid){const g=m.flags||{};if(g.dead||g.cold)return false;D.later(seat,()=>{try{X.resApply(m)}catch(e){console.error("thin res",e)}},rid);return true};
+D.resTo=function(seat,m,rid){const g=m.flags||{};if(g.dead||g.cold)return false;D.kind(seat,"res",{m},rid);return true};
+D.K.res=a=>{try{X.resApply(a.m)}catch(e){console.error("thin res",e)}};
 {const hv=TH.hostView;TH.hostView=function(){const o=hv.apply(this,arguments);if(o&&TH.dOn()){const other=CW.seat==="a"?"b":"a";o.pq=(D.PQ[other]||[]).map(x=>({n:x.n,p:x.p}))}return o}}
-/* host: her choice */
+/* host: her choice. B r2: a card that needs her answer but cannot be rebuilt any more (her life changed: e.g. Mua chuộc on a cung nữ who
+   is one no longer) still answers the other side (D.GONE[pid], run in the host's context) */
 TH.onDo("pick",a=>{a=a||{};D.hold(S);const L=S.thq,i=L.findIndex(c=>c&&c.id===a.card);if(i<0)return {gone:1};const c=L.splice(i,1)[0];
  let m=null;if(c.pid){const d=mkP(c.pid,c.pp||{});if(d)m={t:c.t||"Việc khó xử",h:d.t,opts:d.o,who:d.who,pid:d.pid,pp:d.pp,cls:d.cls}}else m={t:c.t,h:c.h,cls:c.cls,btn:c.btn};
- if(!m){D.log.push(["pick-stale",c.pid]);return {stale:1}}
+ if(!m){D.log.push(["pick-stale",c.pid]);const g=D.GONE[c.pid];if(g)D.after(()=>g(c.pp||{}));return {stale:1}}
  Q.unshift(m);const k=+a.i;const nw=window.__kpNoWarn;window.__kpNoWarn=true;/* asked on her phone already (kpGate) */
  try{if(m.opts){if(k>=0&&m.opts[k])chooseM(k);if(Q[0]===m){Q.shift();if(k>=0){L.splice(i,0,c);return {refused:1}}}}
  else closeModal()}finally{window.__kpNoWarn=nw}
@@ -362,7 +405,10 @@ COOP.on("week",()=>{if(host())D.RV={};if(host()&&TH.dOn()&&!TH.on(2)){D.save();f
 
 /* guest: her cards and patches from the view */
 const SENT=new Map();
-function gSync(V){if(host()||!TH.dOn()||!V||!V.o||!S)return;const me=V.o.P&&V.o.P[CW.seat];
+function gSync(V){if(host()||!TH.dOn()||!V||!V.o||!S)return;
+ /* B r2 (seam): while her life changes (the roll asked / her Luân hồi card up / the accept out) her S is a display of the rolled person:
+    no card and no patch lands on it; part B's answer calls TH.gSync again once her accepted person is in */
+ if(CW.inLife||(TH.life&&TH.life.ask))return;const me=V.o.P&&V.o.P[CW.seat];
  /* patches first (a card may speak of what the patch changed) */
  const pq=V.o.pq||[];let got=0;
  for(const x of pq){if(x.n<=(S.thpn||0))continue;pApply(S,x.p);S.thpn=x.n;got++}   /* the host keeps each patch until she acks it */
@@ -373,7 +419,7 @@ function gSync(V){if(host()||!TH.dOn()||!V||!V.o||!S)return;const me=V.o.P&&V.o.
  for(const c of cards){if(SENT.has(c.id)||Q.some(q=>q&&q.thin===c.id))continue;
   Q.push(D.standIn(c));ch=true}
  if(ch||got){try{showModal();render()}catch(e){console.error(e)}}}
-COOP.on("thinview",gSync);
+COOP.on("thinview",gSync);TH.gSync=gSync;
 COOP.on("room",()=>SENT.clear());
 /* her tap on a card: never applied here; the host runs it */
 if(typeof chooseM==="function"){const f=chooseM;chooseM=function(i){const m=Q[0];if(m&&m.thin&&!host()){const c=m.opts&&m.opts[i];if(!c||c.off||c.fx&&c.fx.bac&&S.bac+c.fx.bac<0)return;

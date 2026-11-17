@@ -36,7 +36,7 @@ const until=async(o,fn,arg,ms=40000)=>{try{await o.p.waitForFunction(fn,arg,{tim
  ok(await until(G,()=>window.COOP&&COOP.seat==='b'&&!COOP.frozen,null,60000),'guest joined seat b');
  {const t0=Date.now();while(Date.now()-t0<90000){await clear(H);await clear(G);const a=await H.p.evaluate(()=>__co().world&&rivals.some(v=>v.coop)),c=await G.p.evaluate(()=>__co().world&&rivals.some(v=>v.coop));if(a&&c)break;await sleep(500)}}
  const both=async f=>[await H.p.evaluate(f),await G.p.evaluate(f)];
- ok((await both(()=>COOPW.thin.CAP))+''==='2,2','both seats run a build with part B (TH.CAP 2)');
+ {const c=await both(()=>COOPW.thin.CAP);ok(c[0]>=2&&c[0]===c[1],'both seats run the same build with part B (TH.CAP >= 2)',c)}
  const L=await both(()=>COOPW.thin.lvl);ok(L[0]===LVL&&L[1]===LVL,'room level '+LVL+' on both',L);
  ok(await H.p.evaluate(()=>COOPW.thin.NOOP.every(n=>COOPW.thin.NOOPED.includes(n))&&!COOPW.thin.REGBAD.length&&['KMS','KMSNAP','J95B.bind','SP13.L','J95C.lastV'].every(n=>COOPW.thin.REG.includes(n))),'UI no-op list wrapped, part B state registered, REGBAD empty');
  /* first life of the guest */

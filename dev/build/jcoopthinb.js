@@ -28,6 +28,10 @@ const TH=CW.thin,X=CW.X,J=X.J,LV=2;
 const host=()=>CW.seat==="a",on=()=>TH.on(LV);
 const TB=TH.life={ask:null,hold:false,last:null,cache:{},stat:{roll:0,accept:0,rename:0,maid:0,mistress:0,scrub:0,ally:0,foe:0,qdrop:0,resend:0,old:0}};
 const plain=o=>o!==null&&typeof o==="object";
+const other=()=>CW.seat==="a"?"b":"a";
+/* B r2 (B‖D seam): her seat is HELD while a rolled life waits for her accept: part D defers all its work for that seat (jcoopthin D.later /
+   D.kind / her intents); it runs after the accept on her accepted person (TH.pbase) or after a release on the room's person */
+TH.holdOf=seat=>host()&&TB.hold&&seat===other();
 
 /* ================= HOST ================= */
 /* her dialogs as data: kit dilemmas travel by id (mkP rebuilds them), plain notes travel as text + picture; anything with closures cannot */
@@ -88,13 +92,14 @@ function blob(life){const P=X.myBlob(ser().S);P.life=life;P.dead=false;return P}
 /* the rows of every NPC toward her new face (what the guest shows); then the host's own world gets the room's old numbers back */
 function rowsOut(K){const o={};for(const [r,v] of K.old){o[r.id]=[r.rel||0,r.oan||0,r.ghen||0,r.ev||0];r.rel=v[0];r.oan=v[1];r.ghen=v[2];r.ev=v[3];if(plain(r.evm)){if(v[4]===undefined)delete r.evm.me;else r.evm.me=v[4]}}return o}
 function mistressOk(){if(!S.srv)return true;const m=typeof RV==="function"?RV(S.srv.mid):null;return !!(m&&!m.coop&&m.alive&&!m.out&&+m.id<900)}
-function roll(a){const seat=CW.ctx;const oP=CW.base&&CW.base.P&&CW.base.P[seat];
+function roll(a){const seat=CW.ctx;const oP=CW.base&&CW.base.P&&CW.base.P[seat];const thq0=Array.isArray(S&&S.thq)?S.thq:null;/* B r2: her D cards are D's, never the new life's to drop */
  const K=TB.K={seed:(+a.seed>>>0)||1,R0:rivals,rid0:rid,sid0:typeof sidN!=="undefined"?sidN:null,W0:{}};for(const k of X.W_KEYS)if(k in S)K.W0[k]=S[k];
  const tab0=tab;TB.renamed=null;
  try{start()}finally{TB.K=null;tab=tab0;quiet=true;
   /* a throw inside the core build: the room world goes back as it was (her store is rebuilt from the room) */
   if(!K.done){rivals=K.R0;rid=K.rid0;try{if(K.sid0!=null)sidN=K.sid0}catch(e){}for(const k of X.W_KEYS){if(k in K.W0)S[k]=K.W0[k];else delete S[k]}TH.seatDrop(CW.ctx)}}
  if(!K.go||!K.done||rivals!==K.R0)throw new Error("life: core build did not run");
+ if(thq0)S.thq=thq0;
  checkNames();if(!mistressOk()){const L=X.pullFriend();try{S.srv=null;srvInit()}finally{X.pushFriend(L)}tab=tab0}
  if(a.re)S.nlRe=a.re|0;
  const life=((oP&&oP.life)||0)+1,rows=rowsOut(K);
@@ -107,7 +112,15 @@ function accept(a){if(TB.cache[a.key])return TB.cache[a.key];try{if(TH.D&&TH.D.R
  try{if(a.kc)S.kcPick=String(a.kc);if(a.kc==="nha"&&!S.kc&&typeof kcInit==="function"&&kcOk(S.origin.k)&&!S.srv)kcInit()}finally{tab=tab0}
  Q=Q.filter(m=>!m.nl);
  const P=blob(L.life);const r={st:"accept",key:a.key,P,q:qSer(Q),rows:L.rows};
- TB.cache={[a.key]:r};TB.hold=false;TB.last=null;TB.stat.accept++;TH.seatDrop(CW.ctx);/* her `me` (the guest sends this blob) rebuilds it from the room */
+ TB.cache={[a.key]:r};TB.hold=false;TB.last=null;TB.stat.accept++;
+ /* B r2 (seam): D's side of a new life. Her cards: the ones that wait for her answer (D.ANS: the other player's invite / Mua chuộc) stay with
+    her (his act gets an answer; one that no longer fits her new life answers him "gone" at her pick), news of the old life go with it; the
+    old life's unacked patches are void; until the room has her `me`, her store is built from THIS person (TH.pbase), and the D work held
+    during the roll runs now, on it */
+ const seat=CW.ctx,D=TH.D;if(TH.dOn()){const L0=Array.isArray(S.thq)?S.thq:[];const keep=L0.filter(c=>c&&D.ANS.includes(c.pid));if(L0.length>keep.length)D.log.push(["life-cards",seat,L0.length-keep.length]);
+  D.keepQ(seat,keep);D.dropPQ(seat)}
+ TH.pbase[seat]=J(P);TH.seatDrop(seat);/* her `me` (the guest sends this blob) rebuilds it from the room */
+ setTimeout(()=>{try{TH.D.flush(seat)}catch(e){console.error(e)}},0);
  return r}
 TH.blank=seat=>TH.curDo==="life"&&seat!==CW.seat;
 TH.onDo("life",(a)=>{a=a||{};if(a.st==="accept")return accept(a);return roll(a)});
@@ -116,9 +129,10 @@ const drop=()=>{if(host()&&!CW.ctx&&!TB.hold)TH.seatDrop(CW.seat==="a"?"b":"a")}
 /* B r1 item 3: the rolled life is held only while she can still accept it: she left / reloaded / dropped (peer offline: her phone keeps no
    roll, an accept after it gets "stale" and re-rolls the same seed + reroll count) or a week merged after the roll → the hold, the rolled
    person and her store go (rebuilt from the room = her real person) */
-function release(why){if(!host()||CW.ctx||!TB.hold)return;TB.hold=false;TB.last=null;TB.stat.release=(TB.stat.release||0)+1;TB.why=why;TH.seatDrop(CW.seat==="a"?"b":"a")}
-COOP.on("peer",o=>{if(!o)release("left")});
-COOP.on("week",()=>{if(TB.last&&(COOP.state&&COOP.state.week||0)>TB.last.wk)release("week");drop()});COOP.on("state",drop);
+function release(why){if(!host()||CW.ctx||!TB.hold)return;TB.hold=false;TB.last=null;TB.stat.release=(TB.stat.release||0)+1;TB.why=why;TH.seatDrop(other());
+ try{TH.D.flush(other())}catch(e){console.error(e)}/* B r2: the D work held for her runs on the room's person (she left / a week merged) */}
+COOP.on("peer",o=>{if(!o){release("left");if(host())TH.pbase={}/* B r2: her `me` may never come: the room's person again */}});
+COOP.on("week",()=>{if(TB.last&&(COOP.state&&COOP.state.week||0)>TB.last.wk)release("week");if(host())TH.pbase={};drop()});COOP.on("state",drop);
 
 /* ================= GUEST ================= */
 const SEND_MS=8000;
@@ -143,7 +157,9 @@ function lifeRes(r){if(!r||!r.P){if(r&&r.err==="stale"){const s=nlGet();rollAsk(
  clearTimeout(TB.t);TB.ask=null;
  if(r.st==="roll"){if(!show(r))return;CW.inLife=true;TB.key=r.key;NLP={seed:0,thin:1}/* truthy for the card (jkc road cards, no pdCheck); never a stored seed, so nlFaces never repaints faces here */;try{nlCard()}catch(e){console.error(e)}return}
  if(r.st==="accept"){if(!show(r))return;NLP=null;try{nlNew()}catch(e){}TB.key=null;CW.inLife=false;
-  try{CW.sendMe(J(r.P))}catch(e){console.error(e)}try{showModal();render()}catch(e){}}}
+  try{CW.sendMe(J(r.P))}catch(e){console.error(e)}
+  /* B r2 (seam): her D cards / patches were held off her S during the life change (gSync); her accepted person is in now */
+  try{if(TH.gSync)TH.gSync(TH.view)}catch(e){console.error(e)}try{showModal();render()}catch(e){}}}
 COOP.on("thinview",V=>{if(host()||!V||!V.o)return;const d=V.o.dr;if(!d||d.op!=="life"||!TB.ask||d.id!==TB.ask.id)return;lifeRes(d.r)});
 COOP.on("error",m=>{if(host()||!m||!TB.ask||(m.id&&m.id!==TB.ask.id))return;
  if(m.code==="nothin"){const A=TB.ask;TB.ask=null;clearTimeout(TB.t);oldPath(A.o)}
