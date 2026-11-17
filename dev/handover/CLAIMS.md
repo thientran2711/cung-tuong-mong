@@ -749,4 +749,4 @@
 | stage-caption-r1 | reviewer r1 | PASS d59541fe (rebuilt site; scan table in reports/review-stage-caption-r1.md) |
 | BATCH-D8 LIVE: main = 6ca04148 (FF from 65dcf52f by MAIN s31 after LOOK at Fold+iPad home shots) | main | MAIN s31 | session_01UV1SzhZw2hHEAf6bi644Jn | LIVE | 17/11 12:36Z |
 | rank shoulder-piece (vân kiên) SAMPLE Tần→Hoàng hậu, one consort (sonnet; owner order 17/11 ~12:33Z; history check first) | CDN img/_review/rank-vankien/ + reports/rank-vankien-sample.md | C ROOT-6 | session_011xDdVSeXkZANCvC1jxcTK1 | RUNNING | 17/11 12:35Z |
-| LAND B PASSes on main (makeup-theme-r1 → staff-root-r1 → mg-snap-r1 → trait-rename-r1; ORDER main s31 12:10Z; opus; brief briefs/land-b-passes.md; Foreman B pushes main) | review/land-* | B | (opening) | RUNNING | 17/11 12:45Z |
+| LAND B PASSes on main (makeup-theme-r1 → staff-root-r1 → mg-snap-r1 → trait-rename-r1; ORDER main s31 12:10Z; opus; brief briefs/land-b-passes.md; Foreman B pushes main) | review/land-* | B | session_01N1tNP6NHm7FrTkoTUSGnpa | RUNNING | 17/11 12:45Z |
