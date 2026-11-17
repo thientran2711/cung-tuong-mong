@@ -883,7 +883,7 @@
 | coop-thin-b-r3 LIVE b5d109fe0 (main e9bbc4d6 → b5d109fe; rollback e9bbc4d6) | review/land-coop-thin-b-r3 | B | session_01N1tNP34QePRanPQevmttcs | LIVE | 17/11 17:25Z |
 | kit-rank-name r1 successor (continues 9f54a9a1; report HANDOVER) | review/kit-rank-name | MAIN s35 | session_01UV1SzgiSj7gRNYszv9YgxE | SẴN SÀNG KIỂM a4ccfc74 on review/kit-rank-name-r1 | 17/11 17:26Z |
 | AG-MOODKNOW moodCauseKnown(pid): secret vs public palace info (opus; owner OD ~L1668 17:55Z (1); main s35) | review/ag-moodknow | C-AG | session_01UV1Szkwcqu7s9tTHPUXBrh | RUNNING | 17/11 17:28Z |
-| REVIEW coop-b1-regress 24d8eb38 (sonnet SMALL, tests only; brief briefs/review-coop-b1-regress.md) | review/coop-b1-regress-r1 | B | session_01N1tNP2QjFM4j8yePrC6qwU | RUNNING | 17/11 17:30Z |
+| REVIEW coop-b1-regress 24d8eb38 (sonnet SMALL, tests only; brief briefs/review-coop-b1-regress.md) | review/coop-b1-regress-r1 | B | session_01N1tNP2QjFM4j8yePrC6qwU | PASS aea2f74f (tests only; reports/review-coop-b1-regress.md) | 17/11 17:30Z |
 | emo-seal ANIM: every mood seal animates everywhere (one kit part) + khóc/hờn seals (OD 18:00Z) — folded into kit-figure-mood; art = Foreman C | review/kit-figure-mood | MAIN s35 | session_01UV1SzjLSjT2E1w24wsPwS5 | RUNNING | 17/11 17:32Z |
 | HOA ĐIỀN item + placing minigame (ORDER main s34 17:45Z; opus BIG; brief briefs/hoa-dien.md; stacked on makeup-lux) | review/hoa-dien | B | session_01N1tNP6SdCcvsQaB11nruyu | RUNNING | 17/11 17:40Z |
 | REVIEW kit-figure-mood r1 of c7d4b72a (sonnet SMALL; brief briefs/s35-review-kit-figure-mood.md) | review/kit-figure-mood-r1 | MAIN s35 | session_01UV1Szkv9nsgVqSwQC5r8a8 | RUNNING | 17/11 17:47Z |
