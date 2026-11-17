@@ -17,7 +17,7 @@
      last error text, small. Errors before the game is ready are kept in localStorage "ctm-boot-err" (last 8) for the coordinator.
    - automated direct mode (navigator.webdriver, no host, no ?kboot=1): removed at once, no fade, so old tests see the game as before.
    Backdrop values = KIT_BD.title in dev/build/jbd.js (change both together). Test: dev/test/boot-flash.js. Hook: window.__kbootDone. */
-(function(){var d=document,IMG="__IMG__",T=IMG+"img/title-key",inFrame;try{inFrame=window.top!==window}catch(e){inFrame=true}
+(function(){var W=window.CTM_WAIT||{},d=document,IMG="__IMG__",T=IMG+"img/title-key",inFrame;try{inFrame=window.top!==window}catch(e){inFrame=true}
  var css="#kboot{position:fixed;top:0;right:0;bottom:0;left:0;z-index:2147483000;overflow:hidden;transition:opacity .35s ease;font-family:'Be Vietnam Pro',system-ui,sans-serif;color:#2a1a12;"+
   "background:linear-gradient(rgba(245,236,220,0) 56%,rgba(245,236,220,.72)),url("+T+".webp) center top/cover no-repeat,#f3e6d6}"+
   "#kboot[data-o=l]{background:linear-gradient(90deg,rgba(245,236,220,0) 58%,rgba(245,236,220,.18)),url("+T+"-l.webp) left 25%/cover no-repeat,#f3e6d6}"+
@@ -35,12 +35,12 @@
   "#kboot .kbtx{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}#kboot .kbtx button{flex:1 1 150px;min-height:42px;padding:8px 14px;border-radius:8px;cursor:pointer;"+
   "font:700 15px/1.2 'Noto Serif',Georgia,serif;letter-spacing:.02em;color:#fff8e6;background:linear-gradient(#b0402c,#8a2a1e);border:1px solid #6e1d12;box-shadow:inset 0 0 0 1px #f0d07066,0 1px 0 #d9c49a}"+
   "#kboot .kbtx button.alt{background:#fffaf0;color:#2a1a12;border-color:#d2b071;box-shadow:none}"+
-  "#kboot .kbte{margin-top:8px;font:11px/1.35 ui-monospace,monospace;color:#6b5643;max-height:4.2em;overflow:hidden;word-break:break-word}#kboot.fail .kbtp i{display:none}"+
+  "#kboot .kbtd{display:inline-block;margin-top:10px;font-size:12px;color:#8a6b3f;text-decoration:underline;cursor:pointer}#kboot .kbte{margin-top:6px;font:11px/1.35 ui-monospace,monospace;color:#6b5643;max-height:4.2em;overflow:hidden;word-break:break-word}#kboot.fail .kbtp i{display:none}"+
   "@keyframes kbootRun{to{transform:translateX(286%)}}@media (prefers-reduced-motion:reduce){#kboot .kbtp i:after{animation:none;transform:none;width:30%}#kboot{transition:none}}";
  function shape(w,h){return w<h?"p":w/h<=1.4?"m":"l"}
  function make(w,h){if(!d.getElementById("kboot-css")){var s=d.createElement("style");s.id="kboot-css";s.textContent=css;(d.head||d.documentElement).appendChild(s)}
   var c=d.createElement("div");c.id="kboot";c.setAttribute("aria-busy","true");c.setAttribute("data-o",shape(w,h));
-  c.innerHTML='<div class="kbtp" role="status"><b>Cung Tường Mộng</b><small>Cửa cung đang mở</small><i></i></div>';return c}
+  c.innerHTML='<div class="kbtp" role="status"><b>Cung Tường Mộng</b><small>'+W.bootOpen+'</small><i></i></div>';return c}
  /* HOST (rot.js calls this with the design box it fits like the frame) */
  window.__kbootHost=function(box,w,h){var c=make(w,h);box.appendChild(c);window.__kbootHostDrop=function(){if(c.parentNode)c.parentNode.removeChild(c);window.__kbootHostDrop=null}};
  var q=location.search||"";
@@ -53,12 +53,14 @@
  window.addEventListener("error",function(e){if(!window.__kbootDone)keep((e.message||"error")+(e.filename?" @"+String(e.filename).split("/").pop().split("?")[0]+":"+e.lineno+":"+e.colno:""))});
  window.addEventListener("unhandledrejection",function(e){if(!window.__kbootDone){var r=e.reason;keep("promise: "+(r&&(r.message||r.name)||r))}});
  /* WATCHDOG: never leave the player on the cover (or the bare skeleton): the game script did not finish, or 15 s passed → a failure card */
- var MSG_BROKEN="Máy này chưa mở được bản game. Xin tải lại; nếu vẫn vậy, xóa bộ nhớ đệm rồi tải lại (sổ đã ghi vẫn giữ nguyên).";
+ var MSG_BROKEN=W.bootFailBroken;
  function fail(why){if(window.__kbootDone)return;if(c.classList.contains("fail")){if(why==="broken"&&c.getAttribute("data-why")!=="broken"){c.setAttribute("data-why","broken");var sm=c.querySelector(".kbtp small");if(sm)sm.textContent=MSG_BROKEN}return}c.classList.add("fail");c.setAttribute("data-why",why);c.setAttribute("aria-busy","false");
-  var p=c.querySelector(".kbtp");p.innerHTML='<b>Cửa cung chưa mở được</b><small>'+(why==="slow"?"Đường xa, cung chưa dựng xong. Có thể đợi thêm, hoặc tải lại.":MSG_BROKEN)+'</small>'+
-   '<div class="kbtx"><button type="button" data-kb="re">Tải lại</button><button type="button" class="alt" data-kb="clr">Xóa bộ nhớ đệm rồi tải lại</button></div>'+
-   (ERR.length?'<div class="kbte"></div>':"");var e=p.querySelector(".kbte");if(e)e.textContent=ERR.slice(-2).join(" · ");
-  p.addEventListener("click",function(ev){var b=ev.target.closest&&ev.target.closest("[data-kb]");if(!b)return;b.disabled=true;
+  var p=c.querySelector(".kbtp");p.innerHTML='<b>'+W.bootFail+'</b><small>'+(why==="slow"?W.bootFailSlow:MSG_BROKEN)+'</small>'+
+   '<div class="kbtx"><button type="button" data-kb="re">'+W.bootRe+'</button><button type="button" class="alt" data-kb="clr">'+W.bootClr+'</button></div>'+
+   (ERR.length?'<a class="kbtd" role="button" tabindex="0" data-kb="dt">'+W.bootDetail+'</a><div class="kbte" hidden></div>':"");var e=p.querySelector(".kbte");if(e)e.textContent=ERR.slice(-2).join(" · ");
+  p.addEventListener("click",function(ev){var b=ev.target.closest&&ev.target.closest("[data-kb]");if(!b)return;
+   if(b.getAttribute("data-kb")==="dt"){/* the raw error line (English, for a bug report) shows only behind this small tap */if(e)e.hidden=!e.hidden;return}
+   b.disabled=true;
    if(b.getAttribute("data-kb")==="re"){try{return window.top.location.reload()}catch(x){return location.reload()}}
    /* the stale-shell risk: drop the app-shell caches and the service worker; pictures (ctm-assets, content-keyed) and saves stay */
    var jobs=[];try{if(window.caches)jobs.push(caches.keys().then(function(K){return Promise.all(K.filter(function(k){return k!=="ctm-assets"&&!/^ctm-\d+$/.test(k)}).map(function(k){return caches.delete(k)}))}))}catch(x){}
@@ -70,7 +72,7 @@
  /* review r1: a SLOW but working first open (the 4 MB page still downloading/parsing) is not a failure. 15 s: the cover keeps its moving bar
     and says "Đường xa, cung đang dựng dần…"; 30 s: the card with the two buttons (data-why=slow). Either way the moment the game is ready
     the cover/card lets go (kbootDone below) — only a game script that did not finish (data-why=broken) keeps the card. */
- var dog=setTimeout(function(){if(window.__kbootDone||c.classList.contains("fail"))return;var s=c.querySelector(".kbtp small");if(s)s.textContent="Đường xa, cung đang dựng dần…";
+ var dog=setTimeout(function(){if(window.__kbootDone||c.classList.contains("fail"))return;var s=c.querySelector(".kbtp small");if(s)s.textContent=W.bootSlow;
   dog=setTimeout(function(){fail("slow")},15000)},15000);
  /* the host may drop its copy once this one has painted */
  /* ...after its backdrop picture is decoded here too (else the swap shows a bare paper for a moment); at most 3 s */

@@ -552,7 +552,7 @@ window.q72Bot=function(){if(!S||S.dead||Q.length||!q72On())return false;const q=
   s:[G("","Tiến cử nhạc sư với Hoàng thượng","sung",50,1,{},"r",{emp:1})],ok:{r:8,d:1},no:{r:-10}});
  T7("hs_hoa","craft",{r:"man:họa sư",rf:()=>(S.arts.hoa||0)>=1,t:"Vẽ chung bức Bách điểu triều phụng",h:"“Bức Bách điểu triều phụng dâng Thái hậu, thần vẽ không kịp. Nghe nói {N} cũng cầm cọ, xin vẽ giúp phần hoa lá.”",dl:5,
   s:[G("home","Vẽ phần hoa lá","hoa",50,2),G("A","Ghép tranh cùng họa sư","",100,1)],ok:{r:8,fn:art("hoa",1),fx:{danh:2}},no:{r:-4}});
- T7("dich_thu","court",{r:"man:sứ thần",rf:()=>S.tai>=50||S.origin.k==="nc",t:"Dịch quốc thư của sứ đoàn",h:"“Thông ngôn của sứ đoàn ngã bệnh, quốc thư phải dâng trong tuần. Nghe nói {N} thông chữ nghĩa…”",dl:4,
+ T7("dich_thu","court",{r:"man:sứ thần",rf:()=>S.tai>=50||originRoot(S.origin.k)==="nc",/* every hòa thân branch knows a foreign tongue */t:"Dịch quốc thư của sứ đoàn",h:"“Thông ngôn của sứ đoàn ngã bệnh, quốc thư phải dâng trong tuần. Nghe nói {N} thông chữ nghĩa…”",dl:4,
   s:[G("home","Dịch thư","tai",45,2)],ok:{r:10,fx:{danh:3,bac:20},fn:bien(1)},no:{r:-4}});
  T7("ak_sach","craft",{r:"ak",rf:k=>(k.tal||50)<55,t:"Tìm bản sách cổ cho {A}",h:"“Thầy chê con học kém. Con muốn đọc bộ Thủy kinh chú bản cổ, chỉ thư phòng hoàng gia còn giữ. {Nc} xin chép giúp con.”",dl:6,
   s:[G("","Xin Hoàng thượng cho chép sách","danh",55,1,{},"r",{emp:1}),G("home","Chép sách","tai",70,2,{suc:-4})],ok:{fx:{tai:2},fn:X=>{X.A.o.tal=cl((X.A.o.tal||40)+BAL.eff.j72.talFn_4,0,100);return `${X.A.n} tài cán ${balSg(BAL.eff.j72.talFn_4)}.`},x:`{A} tài cán ${balSg(BAL.eff.j72.talFn_4)}`},no:{}});

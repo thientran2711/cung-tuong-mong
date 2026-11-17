@@ -98,7 +98,7 @@ function coopTick(){if(!coopOn()){/* in the lobby / waiting room: never; once sh
  if((older||K.goNow)&&!hardBusy()){coopGo(older?"older":"together");return}
  if(bk()!==K.k0&&khac()===0&&!busy()&&!W.pend&&!W.bend&&W.sent!==(coop().state.week||0)&&peerReady()){if(++K.calm>=2)coopGo("buoi");return}K.calm=0}
 function coopGo(why){const W=window.COOPW;const o=W&&W.snap&&W.snap();if(!o){K.goNow=false;return}
- say("going");line("Hai người cùng mở bản mới, đang vào lại phòng",0);reopen(why,{coop:true,room:o.room,seat:o.seat,snap:o})}
+ say("going");line(CTM_WAIT.newTogether,0);reopen(why,{coop:true,room:o.room,seat:o.seat,snap:o})}
 function onAct(m){if(!m||m.k!=="ctm-upd")return;const c=coop();if(!c||m.from===c.state.you)return;
  K.peer={v:m.v,pending:!!m.pending,at:Date.now()};
  const diff=m.v!==BUILD;hold(diff);
@@ -129,7 +129,7 @@ function css(){if($i("kit-upd"))return;const st=document.createElement("style");
 /* the status icon (kitStatusIcon "upd", jstatus): shown only while a new build is pending, she is playing and no dialog is open; the rail repaints on every tick */
 const showIcon=()=>!!(K.pending&&!K.leaving&&playing()&&!busy());
 function place(){K.chip=showIcon();try{if(window.kitStatusIcon)kitStatusIcon.refresh()}catch(e){}}
-function chip(){css();try{if(window.kitStatusIcon)kitStatusIcon.set("upd",{title:"Có bản mới",order:20,glyph:"⟳",badge:()=>true,show:showIcon,onTap:()=>card()})}catch(e){}place()}
+function chip(){css();try{if(window.kitStatusIcon)kitStatusIcon.set("upd",{title:"Có bản mới",order:20,icon:"img/kit/ico-update.webp",badge:()=>true,show:showIcon,onTap:()=>card()})}catch(e){}place()}
 K.showChip=()=>{K.pending=true;chip()};/* test hook (dev/test/brand-seal.js): the chip alone, no card */
 function close(){if(K.cardEl){K.cardEl.remove();K.cardEl=null}place()}
 function mkCard(sub,note,btns){css();close();if(typeof kpHeader!=="function")return null;
@@ -175,13 +175,13 @@ function resumeSolo(){K.resuming=true;
    else{const l=$i("slots")&&$i("slots").querySelector(`[data-load="${rec.slot}"]`);if(l)l.click()}
    ok=!!G()&&!titleUp()}}catch(e){console.error(e)}
   LS.del(LSK);K.resuming=false;K.resumed={ok,t:Date.now(),why:rec.why,slot:rec.slot,k:bk(),u:khac(),was:rec.k,wasU:rec.u};
-  if(ok)line("Đã mở bản mới",4500);tick()},()=>{LS.del(LSK);K.resuming=false})}
+  if(ok)line(CTM_WAIT.newOpened,4500);tick()},()=>{LS.del(LSK);K.resuming=false})}
 /* co-op: the lobby's own "Trở lại phòng" (same code, same seat); COOP "start" → jcoopworld begin → resumeCoop puts the week back */
 function resumeCoop(){if(!rec||!rec.coop||!window.COOPW||!COOPW.restore)return;const r=rec;rec=null;LS.del(LSK);
  let ok=false;try{ok=COOPW.restore(r.snap)}catch(e){console.error(e)}
  K.resuming=false;K.resumed={ok,coop:true,why:r.why,room:coop().state.room,seat:COOPW.seat,k:bk(),u:khac(),was:r.snap.buoi};
- line(ok?"Đã mở bản mới":"Đã mở bản mới · vào lại phòng",4500);tick()}
-function rejoin(){K.resuming=true;line("Hai người cùng mở bản mới, đang vào lại phòng",0);
+ line(ok?CTM_WAIT.newOpened:CTM_WAIT.newOpenedRoom,4500);tick()}
+function rejoin(){K.resuming=true;line(CTM_WAIT.newTogether,0);
  waitFor(()=>ready()&&coop()&&document.querySelector('#modal.kpthome [data-coop="co"]'),180e3,()=>{LS.set("ctm-coop-room",rec.room);
   document.querySelector('#modal.kpthome [data-coop="co"]').click();
   waitFor(()=>document.querySelector('#modal [data-coop="resume"]'),10e3,()=>document.querySelector('#modal [data-coop="resume"]').click(),()=>{K.resuming=false})},

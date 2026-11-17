@@ -14,7 +14,7 @@ const CTM_NOTES=[
   "Thắng thua trò chơi nhỏ có tiếng báo; nhiều thẻ có tranh mới; sưu tầm đủ món được danh hiệu.",
   "Chữ trên thẻ hành động rõ hơn; mỗi tháng có kỳ nguyệt sự, xem được sổ nguyệt sự ở Kính sự phòng."]},
  {id:"2026-11-16",n:[
-  "Thiết lập có mục «Thông tin cập nhật»: xem lại những điều mới của từng lần cập nhật.",
+  "Thiết lập có mục «Sổ đổi mới»: xem lại những điều mới của từng lần đổi mới.",
   "Sổ chơi một mình và phòng chơi cùng hảo hữu ghi riêng, không đè lên nhau.",
   "Chơi cùng hảo hữu: có đồng hồ chung; máy ngủ dậy vẫn vào lại được phòng.",
   "Thẻ lựa chọn: tranh đặt bên trái, chữ bên phải; nút chạm vào có lún xuống."]},
@@ -42,7 +42,7 @@ function tick(){try{if(!CTM_NOTES.length){clearInterval(T);return}
  if(seen===top){clearInterval(T);return}
  if(seen==null&&!hasSave()){ls.set(top);clearInterval(T);return}   /* first visit ever: nothing "new" to tell */
  if(!calm()){ok=0;return}if(++ok<2)return;
- const u=unseen();ls.set(top);clearInterval(T);if(u.length)show(u,"Điều mới trong cung","Xem lại ở Thiết lập, mục «Thông tin cập nhật».","Đã hiểu")}catch(e){}}
+ const u=unseen();ls.set(top);clearInterval(T);if(u.length)show(u,"Điều mới trong cung","Xem lại ở Thiết lập, mục «Sổ đổi mới».","Đã hiểu")}catch(e){}}
 const T=setInterval(tick,1500);
 /* body() = the Thông tin cập nhật sub-screen of the title / Thiết lập (j74 page "notes"): kit sections, same markup kitPanel builds */
 /* BUILD LINE (go-live kit, owner OD:L1370 (d)): window.CTM_BI is written by dev/site/buildinfo.py at build time = {s: source commit, t: time
@@ -53,13 +53,13 @@ function stamp(t){const d=new Date(t||"");if(isNaN(d))return String(t||"");const
  return `${p(d.getMonth()+1)}/${p(d.getDate())}/${d.getFullYear()} ${p(d.getHours())}:${p(d.getMinutes())}`}
 const esc=x=>String(x==null?"":x).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 function buildHTML(){const b=BI();if(!b)return "";
- const now=`<div class="kpsec kbuild"><h4 class="kpst">Lần cập nhật đang chơi</h4>${kitRows([["Mã",esc(b.s)],["Lúc",stamp(b.t)],["Điều mới",esc(b.c)]])}</div>`;
+ const now=`<div class="kpsec kbuild"><h4 class="kpst">Bản đang chơi</h4>${kitRows([["Mã",esc(b.s)],["Lúc",stamp(b.t)],["Điều mới",esc(b.c)]])}</div>`;
  const h=(b.h||[]).slice(0,10);
  return now+(h.length?`<div class="kpsec kbuilds"><h4 class="kpst">Các lần trước</h4>${kitRows(h.map(e=>[stamp(e.t),[esc(e.s),esc(e.c)]]))}</div>`:"")}
 const body=()=>buildHTML()+CTM_NOTES.slice(0,8).map(e=>`<div class="kpsec"><h4 class="kpst">${when(e.id)}</h4>${kitFacts(e.n.map(t=>({text:t,kind:"world"})),{group:false})}</div>`).join("");
 window.CTM_NOTES_UI={list:CTM_NOTES,seen:ls.get,body,tick,calm,build:BI,buildHTML,reset(){try{localStorage.removeItem(KEY)}catch(e){}}};
 /* Settings: one more kit row at the end of the Thiết lập grid (label + .kbtn.alt, same row part as the switches) */
 const o0=optHTML;
-optHTML=function(){let h=o0.apply(this,arguments);const row=`<div class="kctl"><span class="kctl-l">Thông tin cập nhật<small>${BI()?`mã ${esc(BI().s)} · ${stamp(BI().t)}`:"những điều mới từng lần"}</small></span><span class="kctl-c"><button type="button" class="kbtn alt" data-tgo="notes">Xem</button></span></div>`;
+optHTML=function(){let h=o0.apply(this,arguments);const row=`<div class="kctl"><span class="kctl-l">${CTM_WAIT.notesName}<small>${BI()?`mã ${esc(BI().s)} · ${stamp(BI().t)}`:"những điều mới từng lần"}</small></span><span class="kctl-c"><button type="button" class="kbtn alt" data-tgo="notes">Xem</button></span></div>`;
  return h.replace(/<\/div>\s*$/,row+"</div>")};
 }catch(e){console.error(e)}})();

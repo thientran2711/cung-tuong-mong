@@ -1,5 +1,5 @@
 /* missing_pics.js — KIT §59 (review/placeholder-pics): lists every EVENT dialog id and every ACT card that has no picture of its own and
-   therefore shows a placeholder (img/ph-event-light|dark.webp, img/ph-act-light|dark.webp), with its tone.
+   therefore shows a placeholder (img/ph-{p,l,w,s}-light|dark-<size>.webp, picked by orientation and size, KIT §59), with its tone.
    Runs the game (Playwright, pictures stubbed), opens every dialog it can build (same enumeration as dev/tools/pic_usage.js: PEND builders,
    E68 events, T72 quests, festivals, feast invitations, news, gift) and reads window.CTM_MISSING_PICS (filled by jph.js);
    acts = every act of the deck pools (pool, coldActs, illCards, 40 deals) plus every act button the tabs render, checked with kitActKey + the CDN index.
