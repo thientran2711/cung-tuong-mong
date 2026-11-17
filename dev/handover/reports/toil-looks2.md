@@ -51,3 +51,10 @@ PRIORITY #1 CHECK: OD ~14:00Z s32 makeup | reused TOIL_MKS only (values).
 - Mat moc / Vung ve / Doan trang untouched (approved). Kieu diem = the v5 Khuynh thanh look unchanged (moved down). NEW Khuynh thanh: eye 1.0 / lid height .92 / wing .4 / lower lash .46 / shimmer .85, lip .86 + sheen .72, blush .40 (same soft spread), skin light .38. Diem dua one small step heavier: lip .86->.92, eye/brow/lash up, blush .42->.50; same clip (nothing on eyes/hair/background).
 - Gates: mk-layer-scan 12960 0 bad, toil-tease 25/25, toil-overlay 0 bad, quickcheck PASS 150 s.
 - Samples ?v=6 + side by side with v5 (top v5, bottom v6): img/_review/toil-looks/toil-looks-1.png, -2.png, toil-looks-side-1.png, -side-2.png.
+
+### looks3 v7 - review/toil-looks2 8a159f912 (s32 asks after v6)
+PRIORITY #1 CHECK: OD ~14:05Z Vung ve not approved | reused jtoil.js (TOIL_MKS values + 2 small canvas additions).
+- Vung ve: white powder visible again (irregular patchy flecks/streaks, 10 per face, alpha .32-.52, flat-top profile BLP.patch), blotchier blush, the OLDER lip smudge back (bigger smear past the lip line + a lip-colour smudge beside the mouth, less blur), all inside the face mask.
+- Khuynh thanh clearly more splendid than Kieu diem: lip 1.0 + sheen .9, eye/lid 1.0, wing .55, lower lash .6, shimmer 1.0, skin light .5, blush .46. Diem dua clearly overdone: blush .78 (clip keeps it off eyes/background), lip 1.0, lid height 1.18, lower lash .85, brow .9, wing .55. Mat moc / Doan trang / Kieu diem unchanged.
+- Gates: mk-layer-scan 12960 0 bad, toil-tease 25/25, toil-overlay 0 bad, quickcheck PASS 143 s.
+- Samples ?v=7: img/_review/toil-looks/toil-looks-1.png, -2.png, -side-1/-2 (v5 over v7), -vung-1/-2 (Vung v4|v5|v7).
