@@ -6,6 +6,11 @@
 - Every takeover prompt you write MUST copy these three lines verbatim. Workers roll over too (owner 16/11 08:22Z s14, option 1): at START_CTX % + 25 % of the window, ceiling 60 %; a worker may finish if only push + report remain; it writes its handover in its report file and tells its coordinator, and the COORDINATOR opens the successor (never the worker).
 
 
+## SPREAD THE WORK — EVERY WAKE, NO REMINDER (owner 17/11 ~02:30Z, angry: she has reminded this session after session)
+Owner (verbatim): "Tại sao lần nào cũng phải để tao nhắc vậy ta? ... tao có tới 4 cái tài khoản lận, không có đưa qua bớt để mà làm đi. Rồi tài khoản D, đó, tài khoản C, đủ thứ hết mà không có chịu đưa qua đi ... Một mình ôm hết bên này, trong khi là tao lại đang muốn cái game chơi lẹ." (with OD:L1286 hourly load check, OD:L1197 main = her bugs + UI only, OD:L1229/L1237 whole jobs, never split).
+MANDATORY on session start AND on every wake, BEFORE anything else, written as one line in HANDOVER: "LOAD: main running n (owner bugs/UI/go-live only) | B free n | C free n | D free n | moved: <items>".
+1. Read FOREMAN_B/C/D_STATUS last lines + CLAIMS. 2. Every main-held item that is NOT her bug, NOT UI, NOT go-live → move it, as a WHOLE job, to the foreman with free seats (write the ORDER in its STATUS file). 3. Every NEW non-UI item is written straight into a foreman's STATUS, never opened by main. 4. A foreman with free seats and items left = coordinator fault. 5. Every takeover prompt and every wake message repeats this block's first line.
+
 Holds: main chat only (what the main chat does itself, how it talks to the owner).
 
 Read in full at start by: MAIN. Reading sets: MAIN = START_CORE + START_FOREMAN + START_MAIN; FOREMAN = START_CORE + START_FOREMAN; WORKER = START_CORE + START_WORKER; REVIEWER = START_CORE + START_WORKER + START_REVIEWER; ART = START_CORE + START_WORKER + START_ART. Then read ONLY the dev/rules/topic/*.md files your task touches (list in dev/PRIORITY_RULES.md).
