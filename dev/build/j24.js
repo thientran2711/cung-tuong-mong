@@ -1,7 +1,7 @@
 /* ================= HARM BANDS, PEOPLE COME TO HER, AFFAIR ROAD WHEN THE THRONE ROAD IS BLOCKED ================= */
 /* C. danger of one person toward another, in plain bands (same for every NPC toward every NPC, and toward her) */
 const BANDS=[[0,"không",[]],[30,"nhỏ",["rumor","spy","trip"]],[60,"nặng",["frame","plant","block","bribe","accuse","vp","ksab","takeaway","steal","road"]],[80,"sát hại",["poison","kpoison","pond","pushp","musk","catswap","kframe"]]];
-function danger(v,t){const tr=hasT(v,"Xảo quyệt")?10:hasT(v,"Ân cần")?-15:hasT(v,"Khiêm nhường")?-10:0;return Math.round(Math.max(t===S?(v.ghen||0):0,oan(v,t),Math.max(0,-aff(v,t)))+tr)}
+function danger(v,t){const tr=nv(v,"danger");return Math.round(Math.max(t===S?(v.ghen||0):0,oan(v,t),Math.max(0,-aff(v,t)))+tr)}
 function bandOf(d){let b=0;for(let i=0;i<BANDS.length;i++)if(d>=BANDS[i][0])b=i;return b}
 function npcAct(v,t){const b=bandOf(danger(v,t));if(!b)return"";const allow=BANDS.slice(1,b+1).flatMap(x=>x[2]);const O=[];const add=(k,w)=>{const a=ACT[k];if(a&&allow.includes(k)&&a.ok(v,t)&&w>0)O.push([k,w])};
  add("accuse",6);add("vp",3);add("musk",4);add("catswap",2);for(const k of ["kpoison","pond","kframe","ksab"])add(k,2);add("takeaway",2);add("pushp",1);add("trip",3);add("frame",2);add("poison",2);add("rumor",3);add("spy",3);add("bribe",2);add("block",t.nightLog&&t.nightLog.length?2:0);
@@ -59,7 +59,7 @@ const SCAUSE={tham:[["ăn cắp trâm bạc",1]],nhat:[["ngủ quên lúc canh c
 function servCauses(){for(const s of (S.staff||[])){if(s.cause&&wk()-s.cause.w>3)s.cause=null;if(s.cause||!roll(12))continue;const L=qv(SCAUSE,s)||[["làm việc chăm chỉ",0]];const c=pick(L);s.cause={txt:c[0],fault:!!c[1],w:wk()};
   Q.push({ev:1,t:"Việc của kẻ hầu",who:pServ(s),h:`<p>${s.name} ${c[0]}.</p>`,opts:c[1]?[{n:`Phạt vì ${c[0]}`,fx:{},x:"lòng -5 · kẻ hầu khác giữ kỷ cương (lòng +1)",go:()=>judgeServ(s,"phat")},{n:"Tha lỗi",fx:{},x:"lòng +5 · kẻ hầu khác dễ lơ là (lòng -1)",go:()=>judgeServ(s,"tha")}]:[{n:`Thưởng vì ${c[0]}`,fx:{bac:-10},x:"lòng +15 · kẻ hầu khác gắng sức (lòng +2)",go:()=>judgeServ(s,"thuong",true)},{n:"Khen một câu",fx:{},x:"lòng +3",go:()=>{s.loyal=cl(s.loyal+3,0,100);s.cause=null}}]})}
  /* every consort's servants drift by how their mistress treats them: a cruel mistress's servants defect more easily */
- for(const v of liveRivals(true))for(const s of (v.staff||[])){const d=hasT(v,"Xảo quyệt")||hasT(v,"Kiêu ngạo")?-2:hasT(v,"Ân cần")||hasT(v,"Khiêm nhường")?1:0;s.loyal=cl(s.loyal+d,0,100)}}
+ for(const v of liveRivals(true))for(const s of (v.staff||[])){const d=nv(v,"staffLoyMonth");s.loyal=cl(s.loyal+d,0,100)}}
 function otherServ(s){return (S.staff||[]).filter(x=>x!==s)}
 function judgeServ(s,how,paid){const c=s.cause;if(how==="phat"){if(c&&c.fault){s.loyal=cl(s.loyal-5,0,100);otherServ(s).forEach(x=>x.loyal=cl(x.loyal+1,0,100));log(`Phạt ${s.name} vì ${c.txt}: lòng -5; kẻ hầu khác giữ kỷ cương.`)}else{s.loyal=cl(s.loyal-25,0,100);apply({duc:-3});otherServ(s).forEach(x=>x.loyal=cl(x.loyal-5,0,100));s.grudge=1;log(`<span class="r">Phạt ${s.name} vô cớ: lòng -25, Đức -3; kẻ hầu khác sợ hãi (lòng -5); hắn/nàng mang hận: lòng còn dưới 30 thì mỗi tuần bán mình cho phi tần khác: ${chanceW(15)}.</span>`)}}
  else if(how==="tha"){s.loyal=cl(s.loyal+5,0,100);otherServ(s).forEach(x=>x.loyal=cl(x.loyal-1,0,100));log(`Tha lỗi cho ${s.name}: lòng +5.`)}

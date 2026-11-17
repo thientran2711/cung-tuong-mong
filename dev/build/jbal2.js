@@ -203,7 +203,7 @@ Object.assign(BAL,{coopBribe:{pay:20,tin:5}});
 Object.assign(BAL,{visit:{minSung:20,base:.3,slope:.07,anK:.01,cap:8,datinh:1.5,lanhlung:.5,gap:9,illSt:2,q:2,
  sung:3,danh:3,ghen:6,lostGhen:15,lostRel:8,hh:3,thP:25,thNeg:15,thLoss:4,adviseDuc:3,adviseSung:1,adviseTh:2,
  show:{o:40,w:8,suc:5,sung:6,danh:2},tea:{minSung:60,p:50,sung:2,an:2}},
- night:{sung:3,an:2,ghen:8,bestow:10,bestowS:4,stealS:3}});
+ night:{sung:3,an:2,ghen:8,bestow:10,bestowS:4,stealS:3,mood:[1,0,-1,-2] /* his mood 0..3 (vui, thường, buồn, giận) → night score add-on (j8 night1; jwhyn reads it) */}});
 /* ACTIVE MAID LINE (jmline.js, review/servant-system, owner 16/11): % per month unless named. eye[rank] = the Emperor's eye by servant rank
    (thô sử, cung nữ, đại cung nữ, chưởng sự, nữ quan; was 0/0/1.2/1.2/1.2), eyeSung = ×(1 + master Sủng/100 × eyeSung), eyeAge = ages that can rise;
    seekStart (× nết: tham 2, lanh 1.5, trung/nhát 0.3) for seekMonths months, maids up to seekAge, seekMul on the eye while seeking;
@@ -536,6 +536,87 @@ BAL.pgRisk={freeKhac:6,khac:.25,rain:1,freeSuc:40,work:.05,lowSuc2:3,lowSuc2At:5
    on a rival's child (her card; the 'lệch sổ' road uses BAL.preT.accEv, the same bar as NPC accusers).  seeMat / oilMat: Tai mắt she needs
    to hear of an NPC test / to learn the bowl was oiled. */
 BAL.ngh={alumTc:55,oilTc:60,frameAff:-30,accOan:40,accPun:1,needEv:2,seeMat:2,oilMat:4};
+/* NPC AGENT LOOP (jagent, Foreman C AG1 + AG1b; owner OD:L1386 "every NPC plays the game like a player"; design dev/handover/reports/npc-agent.md §3).
+   ONE CORE: every number of jagent.js. The deeds' own costs / odds / gains stay in BAL.tw (jtwoway) and j75 (npcEffortKind); here only the
+   agent's WHEN and WHY: what each person needs, how much a deed is worth to her, and what she may do when she sees someone act.
+   on      1 = the loop runs (host only); 0 = the old drips run as before (measuring switch; window.__agOff=1 does the same for one page)
+   own     the deeds whose WHEN belongs to the loop: the weekly / monthly dice that used to fire them (npcMonthly, the SOC menu, npcEffort)
+           are muted for NPC doers while the loop is on (one path per deed). Her own use of the same deeds is unchanged.
+   routine weight of keeping her schedule this buổi (the j95 activity), × (1 + restW × need rest); needW = weight of each need against it
+           (step 1 of her choice: WHAT she wants this buổi; step 2: which deed serves it, by utility)
+   unit    gain points that close one whole need; goal = the level each need aims at (gap = (goal − now) / goal, 0..1)
+           friend = thiện cảm that counts as a friend for the 'ally' need; kidAge = she still hopes for a child below this age
+   road    need weights per origin road (8 noble origins of j1 ORIGINS; "_" = no road yet). Origin = v.nr.o (npc-roads, Foreman D) when
+           present, else v.ag.o seeded once from her house by `org` (same rule as BAL.nroad.org; that table wins when it is loaded)
+   uniq    origins one father holds alone (the player's own father): no NPC takes them
+   val     how much an indirect effect is worth to the doer, in gain points (her belief, not an outcome): tablet = a bribed tablet (Sủng),
+           kid = a prayer for a child (kid need), check = searching gifts (safety), drop = dropping a fallen friend (safety)
+   costW   how much a cost weighs against what she holds (bạc / Sức); costCap = most of her holding a cost can weigh; costMin = floor of the factor
+   kh      khắc a deed takes (the player's talk / deck act: 1)
+   wit     witness (AG1b): hear/mat = odds base and per Tai mắt level of "Nghe lén" (the player's Nghe lén câu chuyện, j2/j9);
+           caught = thiện cảm lost toward the listener when a listener is caught; hoD = hostility that makes an NPC as keen to listen as w.hear; w = NPC reaction weights {hear, join, ignore}
+   vent    r1 fault 8: a spite deed (provoke / humil / gossip / flaunt) closes her spite need by its own gain (BAL.tw.g spite points, unit
+           points = one whole need) toward that target ("*" = everyone); fade = points of that memory lost per tuần (1: a provoke, 15
+           points, keeps her spite toward that person closed ~5 tuần and back in full after 15)
+   perf    p95 budget in ms per slice of the buổi tick (one frame's work, Fold 755x1000), n = how many slices the counter keeps,
+           slice = ms of deciding in one frame before the other consorts wait for the next frame / resync of the same buổi */
+Object.assign(BAL,{ag:{on:1,
+ own:["thTH","thHH","pray","ksp","fakeIll","fakePreg","announce","flaunt","check","help","apol","visit","mediate","follow","provoke","humil","warn","test","drop","gossip","effort"],
+ routine:5,restW:1.5,needW:1,unit:10,
+ goal:{sung:80,th:60,hh:40,danh:50,duc:40,rest:45,friend:30,ally:2,kidAge:38},
+ road:{_:{sung:1,th:.6,hh:.5,danh:.6,duc:.4,kid:.8,ally:.6,spite:.5,safe:.6},
+  tt:{sung:1,th:.5,hh:.3,danh:1.2,duc:.4,kid:1,ally:.7,spite:.8,safe:.6},dtq:{sung:1,th:.4,hh:.4,danh:1,duc:.3,kid:.9,ally:.5,spite:.7,safe:.5},
+  muoi:{sung:1.1,th:.6,hh:.6,danh:.8,duc:.3,kid:.8,ally:1,spite:.4,safe:.6},cn:{sung:1.3,th:.6,hh:.6,danh:.5,duc:.4,kid:1,ally:.9,spite:.4,safe:.7},
+  nc:{sung:1,th:1,hh:.5,danh:.8,duc:.4,kid:.8,ally:.7,spite:.5,safe:.8},td:{sung:.9,th:.4,hh:.4,danh:.6,duc:.2,kid:.6,ally:.6,spite:1.3,safe:.8},
+  ch:{sung:.9,th:1.3,hh:.4,danh:.8,duc:.6,kid:.9,ally:.6,spite:.5,safe:.5},thd:{sung:.9,th:.6,hh:.6,danh:1.1,duc:.8,kid:.8,ally:.6,spite:.3,safe:.6}},
+ org:{"Tể tướng":[["tt",1]],"Đại tướng quân":[["dtq",1]],"Thái hậu":[["ch",1]],"Hàn lâm":[["thd",3],["td",1]],"Lễ bộ":[["thd",1],["td",1],["muoi",1]],"Hộ bộ":[["muoi",3],["td",1]],"":[["muoi",1],["thd",1],["td",1]]},
+ uniq:["tt","dtq"],
+ val:{tablet:2,kid:10,check:4,drop:3},
+ costW:1,costCap:.9,costMin:.05,kh:1,
+ wit:{hear:40,mat:6,caught:5,hoD:50,w:{hear:1,join:1,ignore:3}},
+ vent:{fade:1},
+ perf:{p95:8,n:200,slice:3},
+ /* AG2 the Emperor as an agent (jagemp.js; design reports/npc-agent.md §3.2):
+    summon  [calm, busy] % that he calls someone to his bed tonight — the owner's rule (OD 16/11 18:10Z): 90, 65 when busy with court
+            (trait Chăm chính sự, or the court in crisis = j55 tdCrisis, which was an extra 30 % cancel: 90 × 70 % ≈ 65, now one rule)
+            or he is ill; else he rests / reads memorials alone
+    custom  [mùng 1, rằm] weight of the custom (lệ: the night at Hoàng hậu's palace) against his wish for the card he turned (100 − x);
+            the old j75 FAIRN.custom roll, moved here (ONE CORE)
+    duty    × on the custom's / the seat's weight per trait of his (dutiful up, amorous down)
+    want    [floor, cap] of his wish for the turned card against the Empress (nightCh ratio, square root) when he weighs the custom
+    met     his memory of what each person did near him: w = × per remembered deed on her night weight, miss = a failed deed counts this much,
+            keep = tuần he remembers, cap = deeds counted at most, n = deeds kept per person
+    seat    a vacant Hoàng hậu seat: % per tuần that he decides = b + m × (months vacant − mourn), [lo, hi], × duty, × th when Thái hậu lives
+            (was the flat j8 roll 12) */
+ emp:{summon:[90,65],custom:[40,20],duty:{chamchinh:1.25,hieuthao:1.25,datinh:.75,mesac:.75},want:[.5,2],
+  met:{w:.15,miss:.5,keep:2,cap:3,n:4},seat:{b:6,m:3,lo:6,hi:40,mourn:3,th:1.2}}}});
+
+/* BAL.mind — jmind (one mind for every person, review/npc-mind; moved here from jmind.js, r1 fault 3 ONE CORE)
+   like      regard gained on top when a gift is one the receiver likes (jdis BAL.dis.aff is the one dislike penalty)
+   likeSung, herMood, learnTalk (% a talk reveals a like), spyPri (intel priority), disN = [min,max] dislikes drawn for people jdis does not cover
+   slip      % of NPC choices that misjudge (a random option);  temp = weight power of mindPick
+   strW / abW / abMid / trW / wMin  mindW: × when the act uses her strength; per point of ability above abMid; × per honoured / offended virtue; floor
+   odds      odds shift (%) on an act that uses her strength;  kidTal = a child's talent from which a strength is an art;  bacPer = bạc per ability point
+   pickMin   least weight of a target in mindPickBy
+   pick.<site>  the target weights of every mindPickBy call site (base + x / divisor …): j10fr (friend to warn), j28up (the higher-ranked to court),
+             j28soc (social target), j34 (sabotage target), j4 (who is framed: top - rel), j40 (harm target: base + rank² + hostility / host),
+             j55 (leak target), j8buy (who buys: top - rel), j8ev (Hoàng hậu evidence case: evG × ev − rel / rel), j83 (gift framer),
+             j96 (accuser: base + ghen / ghen − rel), lost1 / lost2 (jlost), tin (informant: max(floor, score)^pow), wd (jwd92b), ag (jagent SOC target)
+   men       menDecide (a stray man seen): report [base, hostility per], hide [Tham vọng, else], listen [Đa nghi, else],
+             ignore [Hiền lành / Nhu mì, else, floor, hostility per], keep = weight added to the old fixed answer */
+Object.assign(BAL,{mind:{like:3,likeSung:1,herMood:30,learnTalk:20,spyPri:50,disN:[1,2],slip:12,temp:1,strW:1.6,abW:.012,abMid:40,trW:.35,wMin:.05,odds:4,kidTal:55,bacPer:3,pickMin:.01,
+ pick:{j10fr:{base:1},j28up:{base:1,aff:10},j28soc:{base:4,aff:4,oan:4},j34:{base:2},j4:{top:30,floor:1},j40:{base:1,host:5},j55:{host:20},j8buy:{top:10,floor:1},
+  j8ev:{ev:2,rel:5},j83:{base:1},j96:{base:40,ghen:2,floor:1},lost1:{base:1},lost2:{base:2},tin:{floor:1,pow:2},wd:{base:1},ag:{base:1}},
+ men:{report:[1,25],hide:[2,.6],listen:[2,.5],ignore:[2.5,1.2,.3,80],keep:4}}});
+/* BAL.deck — the Sủng deck acts, ONE table for her cards (j2 artActs + the Emperor talk "Dâng một cành hoa") and an NPC's same deed
+   (j75 npcEffortKind, the agent loop). r1 fault 7 (OD:L1386 "same odds" + ONE CORE). Odds = deckOdds(p,k): base + artW2(p,k) × per + stat / div + mood
+   (od for her, odA for an NPC). lv = art level the card needs; sucMin = Sức an NPC keeps before she spends on it (her card: the khắc / Sức rule);
+   c / w / l = cost / gain / loss (vu's loss and side effects: BAL.tw.g.vu; ky's Danh / Tâm cơ: BAL.tw.g.ky).
+   qf = a small gift to the Emperor (her "Dâng một cành hoa"): bac cost, o odds when his flower is not known, w gain (wKnown when it is) */
+Object.assign(BAL,{deck:{vu:{lv:3,sucMin:40,c:{suc:-20},o:[40,8],st:["sac",5],w:{sung:15,danh:3}},
+ cam:{lv:3,sucMin:30,c:{suc:-10},o:[40,8],st:["tai",5],w:{sung:12},l:{sung:-2}},
+ ky:{lv:3,sucMin:25,c:{suc:-5},o:[45,8],st:null,w:{sung:5},l:{sung:-1}},
+ qf:{bac:5,o:50,w:2,wKnown:6}}});
 /* palace voice (jvoice, VANPHONG §2): mood of an address from the real relation (S.sung − sungMid, S.th / S.hh − favMid, aff()):
    ≥ warm → warm words (ái phi, con, muội muội, tỷ tỷ), ≤ cold → "ngươi"; nuong = first rank called "nương nương" / allowed "bổn cung" (Tần);
    noRepeat = tuần before a pooled line may come back; hi / hq = first rank index of the "hi" (Quý phi) / "hq" (Hoàng hậu) rank band of
@@ -639,3 +720,55 @@ BAL.net={qClamp:[-1,1.5],qOn:.8,malBase:30,k:{hide:8,study:.25},
 /* ONE CORE (OD:L1267) for jkc2.js (the cnv / nc / bd home roads before the palace, review/origin-intros): every cost (c), gain (w), loss (l),
    bar (min_), khắc (k) and odds base (odds) of a home card or event. Key = card name (ASCII) or the function, then the slot and the stat. */
 Object.assign(BAL,{kc2:{kcGoWhy_k:1,nghiNgoi_w_suc:25,detVaiBan_c_suc:-15,detVaiBan_w_bac:4,detVaiBan_l_suc:-5,theuKhan_c_suc:-10,soiBongNuocChai_c_suc:-5,soiBongNuocChai_w_sac:1,hoiHan_c_suc:-5,raRuongGiupCha_c_suc:-20,raRuongGiupCha_c_sac:-1,muaThuocChoMe_c_suc:-5,muaThuocChoMe_c_bac:-8,muaThuocChoMe_w_duc:1,haiLaThuocCho_c_suc:-20,haiLaThuocCho_w_duc:1,gopBacCuoiVo_c_bac:-10,detThemVaiLam_c_suc:-25,traBotNoNha_c_bac:-15,traBotNoNha_odds:40,lamKhongCongCho_c_suc:-25,bieuQuaLyTruong_c_bac:-10,theuKhanBieuBa_c_suc:-20,giatAoCungXuan_c_suc:-10,dayXuanDaoDuong_c_suc:-10,hocLeNghiVoi_c_suc:-15,hocLeNghiVoi_c_bac:-4,hocLeNghiVoi_w_duc:1,ganhNuocQuetNha_c_suc:-20,ganhNuocQuetNha_w_duc:1,ngheBaTuKe_c_suc:-5,ngheBaTuKe_w_tamco:1,hocChuVoiSu_c_suc:-10,hocChuVoiSu_w_tai:1,leChuaCauBinh_c_suc:-10,leChuaCauBinh_c_bac:-1,leChuaCauBinh_w_duc:2,leChuaCauBinh_odds:30,banVaiOCho_c_suc:-10,banVaiOCho_w_bac:6,banVaiOCho_o_bac:2,hoiTinNguoiDi_c_suc:-5,kc2CardsNc_c_suc:-10,kc2CardsNc_o_suc:5,kc2CardsNc_o_sac:1,docSachDaiHy_c_suc:-10,docSachDaiHy_w_tai:1,vanAn_c_suc:-5,hau_c_suc:-10,hau_w_tamco:1,xinThemHoiMon_c_suc:-10,cung_c_suc:-15,cung_w_duc:1,troChuyenVoi_c_suc:-10,ketThan_c_suc:-5,ketThan_c_bac:-8,day_c_suc:-15,doYHoangThuc_c_suc:-10,tiepSuThanDai_c_suc:-10,tiepSuThanDai_odds:50,hocLeNghiDai_c_suc:-15,hocLeNghiDai_c_bac:-10,hocLeNghiDai_w_duc:1,tuHocLeNghi_c_suc:-25,tuHocLeNghi_w_duc:1,guiLeVatCho_c_bac:-20,danhCoVoiSu_c_suc:-15,cauPhuc_c_suc:-15,cauPhuc_c_bac:-3,cauPhuc_w_duc:2,raChoNgheDan_c_suc:-10,raChoNgheDan_c_bac:-2,top_c_suc:-5,top_w_suc:10,top_w_duc:1,kc2Month_o_bac:1,kc2Month_o_bac2:6,kc2Month_min_suc:0,d_benh_o_bac:-12,d_benh_o_suc:-5,d_benh_min_bac:12,d_benh_o_suc2:-25,d_benh_o_duc:2,d_benh_o_bac2:-4,d_benh_o_suc3:-10,d_benh_min_bac2:4,d_ghe_o_duc:1,d_ghe_odds:60,d_xd_o_bac:-15,d_xd_min_bac:15,d_xd_o_suc:-5,d_xd_o_duc:1,d_lai_o_suc:-20,d_lai_o_bac:15,d_lai_o_bac2:4,d_lai_o_bac3:3,d_bac_o_bac:-10,d_bac_odds:40,d_bac_min_bac:10,d_bac_odds2:45,d_lu_o_suc:-25,d_lu_o_suc2:-10,d_lu_o_suc3:-15,d_thue_o_bac:-12,d_thue_min_bac:12,d_thue_o_suc:-20,d_thue_o_suc2:-5,d_thue_odds:25,n_hoi_o_suc:-15,n_hoi_o_danh:3,n_hoi_o_danh2:-1,n_muoi_o_suc:-5,n_benh_o_suc:-25,n_benh_o_duc:3,n_benh_o_suc2:-5,n_le_o_suc:-10,n_le_o_duc:2,n_thich_odds:70,n_thich_o_suc:-30,n_thich_o_suc2:-10,n_thich_odds2:35,n_thich_o_suc3:-35,n_yen_o_suc:-5,n_pha_o_suc:-15,top_o_bac:-5,top_min_bac:5,top_o_suc:-20,top_o_suc2:-10,top_o_tamco:2,top_o_duc:2,top_o_suc3:5,top_o_suc4:-5,top_o_duc2:3,d_tuyen_o_suc:-10,d_thi_o_suc:-5,n_ramat_o_suc:-10,n_ramat_o_suc2:-5,kc2SelOn_o_suc:-5}});
+
+/* ONE CORE (owner OD:L1267; review/show-why, from review-trait-pool-r1 follow-up): every number chosen by a nết test lives here.
+   BAL.net.k: quality-keyed sizes for nq(p,quality,n) / netIs (servant + agent qualities). BAL.net.n: nết-keyed tables read by
+   nv(p,key) (jnet.js): keys are nết names or "q:<quality>" (netIs), tested IN ORDER, first match wins (= the old a?x:b?y:z chains),
+   "_" = the value when none matches. Scan: python3 dev/tools/net-inline-scan.py → 0. */
+Object.assign(BAL.net.k,{spySharp:15,askSharp:15,sentSharp:8,confTimid:20,confLoyal:15,confGreed:5,bribeGreed:25,bribeTimid:25,bribeLoyal:10,poachSharp:10,
+ firmLoyal:30,firmGreed:-20,lean:{greed:[-10,3],loyal:[12,-6],timid:[6,-4],talk:[-12,2]}/* sentPen: [dirty act or rumor, otherwise] */});
+BAL.net.n={
+ tellRoll:{"q:talk":25,"_":10},
+ askTalk:{"q:talk":70,"_":40},
+ flirtTinh:{"Ham vui":6,"_":0},
+ danger:{"Xảo quyệt":10,"Ân cần":-15,"Khiêm nhường":-10,"_":0},
+ staffLoyMonth:{"Xảo quyệt":-2,"Kiêu ngạo":-2,"Ân cần":1,"Khiêm nhường":1,"_":0},
+ bribeCost:{"q:greed":15,"_":30},
+ misAdj:{"Ân cần":10,"Khiêm nhường":10,"Kiêu ngạo":-8,"Xảo quyệt":-8,"_":0},
+ misJealTin:{"Xảo quyệt":8,"Kiêu ngạo":8,"_":4},
+ betrayFind:{"Kín đáo":25,"_":10},
+ spyFind:{"Kín đáo":25,"_":8},
+ srvBad:{"Xảo quyệt":.12,"Kiêu ngạo":.12,"_":0},
+ srvGood:{"Ân cần":.2,"Khiêm nhường":.2,"_":0},
+ affairRumor:{"Kín đáo":3,"_":0},
+ agentW:{"q:sharp":3,"q:talk":3,"q:loyal":2,"_":1},
+ tutorWant:{"Tham vọng":3,"Kiêu ngạo":3,"Xảo quyệt":3,"Kín đáo":2,"_":1},
+ h54P:{"Tham vọng":.6,"Kiêu ngạo":.6,"Xảo quyệt":.6,"_":.4},
+ corrupt:{"Ham lợi":25,"Cương trực":-15,"_":0},
+ dadT:{"Ham lợi":20,"Cương trực":-15,"_":0},
+ giftO:{"Ham lợi":25,"Cương trực":-25,"_":0},
+ feudW:{"Cương trực":2,"Tham vọng":2,"Kín đáo":.5,"_":1},
+ afFade:{"Thật thà":1,"_":2},
+ praise:{"Kiêu ngạo":8,"Tham vọng":8,"_":4},
+ agentLeak:{"q:talk":15,"_":0},
+ motive:{"Xảo quyệt":10,"_":0},
+ empW:{"Tham vọng":2.5,"Kiêu ngạo":2.5,"_":1},
+ coverUp:{"Kín đáo":15,"_":0},
+ traceHide:{"Kín đáo":12,"_":0},
+ rumorP:{"Nhiều chuyện":5,"Xảo quyệt":5,"Nóng nảy":3,"Kín đáo":3,"_":1.5},
+ ducDef:{"q:loyal":60,"q:greed":30,"_":45},
+ kcBac:{"Ham vui":1.2,"_":.5},
+ kcReal:{"Xảo quyệt":75,"_":45},
+ kcPowder:{"Xảo quyệt":30,"_":0},
+ menGap:{"Ham vui":9,"_":12},
+ menHide:{"Kín đáo":10,"_":0},
+ thyEv:{"Xảo quyệt":6,"Tham vọng":6,"_":0},
+ tsCare:{"Kín đáo":70,"Kiêu ngạo":15,"_":40}};
+/* review/batch-d8 merge (show-why × origin-intros): the nết-chosen numbers of jkc2.js (home roads cnv / nc / bd), read by nv() like jkc.js kcBac/kcReal/kcPowder.
+   kc2HmAsk = odds shift when she asks father for more hồi môn · kc2MeSick = mother's illness harder · kc2MuTalk = odds of making up with vương muội ·
+   kc2ChaWant / kc2MeWant = thiện cảm when her name stays in the draft · kc2EnvoyMeet = envoy at the old-country greeting · kc2KhanGo / kc2MuGo = khan / sister when
+   she volunteers · kc2MuSwap / kc2KhanSwap = odds the sister goes instead (+) / the khan refuses (−) · kc2KhanVow = odds of his vow · kc2KhanStay = when she stays loyal to Đại Hy */
+Object.assign(BAL.net.n,{kc2HmAsk:{"Kín đáo":-10,"_":0},kc2MeSick:{"Kín đáo":20,"_":0},kc2MuTalk:{"Khiêm nhường":20,"Ân cần":20,"_":0},
+  kc2ChaWant:{"Cương trực":6,"_":2},kc2MeWant:{"Kín đáo":-6,"_":-2},kc2EnvoyMeet:{"Cương trực":-6,"_":3},kc2KhanGo:{"Cương trực":10,"_":5},
+  kc2MuGo:{"Tham vọng":-6,"_":4},kc2MuSwap:{"Tham vọng":25,"Kiêu ngạo":25,"_":0},kc2KhanSwap:{"Cương trực":10,"_":0},kc2KhanVow:{"Kín đáo":10,"_":0},
+  kc2KhanStay:{"Tham vọng":-12,"_":-4}});

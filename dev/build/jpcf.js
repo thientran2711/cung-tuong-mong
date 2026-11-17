@@ -38,7 +38,7 @@ function pcfTaste(e){try{const rows=[];
   if(typeof thArch==="function"){const k=S.thO&&S.thO.archK;rows.push(["Tính nết",k?thArch().n:"chưa rõ",k?"":"n"])}else rows.push(["Tính nết",traitsOf("th").join(" · ")||"chưa rõ"])
   try{const d=typeof disRow==="function"&&disRow("th");if(d)rows.push(d)}catch(x){}}
  else if(typeof trKnown==="function"&&e.id!=null){const K=trKnown(e),T=typeof traitsOf==="function"?traitsOf(e):[];const un=T.filter(t=>!K.includes(t)).length;
-  rows.push(["Tính nết",K.length?K.join(" · ")+(un?` (còn ${un} nết chưa rõ)`:""):"chưa rõ",K.length?"":"n"]);
+  rows.push(["Tính nết",K.length?K.map(t=>typeof kitGloss==="function"?kitGloss(t):t).join(" · ")+(un?` (còn ${un} nết chưa rõ)`:""):"chưa rõ",K.length?"":"n"]);
   try{const l=typeof disLikeRow==="function"&&disLikeRow(e);if(l)rows.push(l)}catch(x){}
   try{const d=typeof disRow==="function"&&disRow(e);if(d)rows.push(d)}catch(x){}
   const tend=K.map(t=>PERS[t]&&PERS[t].tend).filter(Boolean);if(tend.length)rows.push(["Hay",tend.join("; ")])}

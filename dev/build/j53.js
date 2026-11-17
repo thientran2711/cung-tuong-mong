@@ -95,7 +95,7 @@ function ktTeach(k,p,f){ktSync(k);const g=ktTeachG(k,p,f);k[f]=cl(k[f]+g,0,100);
 const KTPT={"Ân cần":[.35,.55,.3],"Khiêm nhường":[.35,.55,.35],"Tham vọng":[.45,.3,.6],"Kiêu ngạo":[.3,.25,.5],"Xảo quyệt":[.4,.15,.5],"Kín đáo":[.35,.3,.4]};
 function ktPT(v){return tv(KTPT,v)||[.35,.35,.4]}
 /* NPC chọn thầy theo tính nết và hầu bao (người cũng có khi chọn sai) */
-function ktNpcTutor(k,v){if(!ktLive(v))return;let want=netRx(v,/Tham vọng|Kiêu ngạo|Xảo quyệt/)?3:hasT(v,"Kín đáo")?2:1+R(2);
+function ktNpcTutor(k,v){if(!ktLive(v))return;let want=nv(v,"tutorWant")+R(2);
  if(R(4)===0)want=cl(want+(R(2)?1:-1),0,3);
  if(want===3&&v.sung>=50&&roll(50)){ap(v,{sung:-4});if(roll(cl(KT.favO+v.sung/2,5,95))){k.tut=3;k.fav=1;return}want=2}
  while(want>0&&(v.bac||0)<KT.fee[want]*4)want--;k.tut=want;k.fav=0;
