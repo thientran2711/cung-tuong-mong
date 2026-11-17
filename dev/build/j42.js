@@ -86,7 +86,7 @@ function srvVisitOf(k){const ppl=[];let msg="";const m=srvM();const W=S.where||{
  else{if(W.emp===k)P("emp",{name:"Hoàng thượng",ini:"Đế",col:"#f0d070",info:"Hoàng thượng"});
   for(const v of liveRivals(true).filter(v=>srvWhere(v)===k).slice(0,4))rvP(v);
   if(k[0]==="r"||k==="kn"){const hd=accHostK(k);for(const s of (hd&&hd.staff||[]).slice(0,2))svP(s,hd)}
-  if(k==="tyv")P("ty",{name:"Thái y Trương",ini:"Y",col:"#8fc38a",info:"Thái y viện"})}
+  if(k==="tyv")P("ty",{name:(S.court&&S.court.ty&&S.court.ty.name)||"Thái y Trương",ini:"Y",col:"#8fc38a",info:"Thái y viện"})}
  const sn=S.srv.sent;if(sn&&!sn.done&&sn.k===k&&sn.until>=bid())P("task",{name:"Việc chủ sai",ini:"Vụ",col:"#c9a46a",info:sn.n});
  if(!msg)msg=ppl.length?`Ở đây có ${ppl.length} người.`:"Không gặp ai.";
  return{k,people:ppl,talked:false,tk:{},msg}}

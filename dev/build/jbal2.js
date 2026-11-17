@@ -166,7 +166,11 @@ BAL.mort={on:1,playerFloorYears:0,
  illAge:[35,25,1.5],dieAge:[45,15,25],tired:{from:35,per:5,min:4},griefMo:6,griefIll:12,
  birth:{misX:.62,hardX:2,choiceP:35,hardDie:45,hardSuc:35,barrenP:8,stillP:3,stillSuc:20,stillAge:.5,newbornP:3,
   emp:{base:50,sung:.5,th:.2,heirNeed:15,boyGuess:50,boy:10,nhantu:10,datinh:5,mesac:5,lanhlung:-10,chamchinh:-5,hieuthao:2}},
- fate:{phiRank:4,homeRank:1,homeAge:30,homeP:50,tuanSung:60,tuanP:25,tuanDuc:50,tuanTh:40}};
+ fate:{phiRank:4,homeRank:1,homeAge:30,homeP:50,tuanSung:60,tuanP:25,tuanDuc:50,tuanTh:40},
+ /* D4 review/npc-death (owner OD:L641–643): ly = Phế phi họ Lý in Trường Môn viện: age when the game starts, floor = minimum years she lives
+    (her rửa oan story needs time), lcShow = fallen consorts shown with her in a visit; dead = faces / figures / names of the dead kept (newest) so
+    no new person ever gets them (owner: a NEW person, never the dead person's picture) */
+ ly:{age:34,floor:3,lcShow:3},dead:{keep:400}};
 /* D49 collection milestones (jcol): [items, Phúc duyên once per life (OD L46: ~+5/+10/+20/+35), danh hiệu (VANPHONG cổ trang)]; keep = lives remembered in the once-only ledger */
 BAL.col={ms:[[20,5,"Tích bảo"],[50,10,"Tàng bảo"],[100,20,"Bách bảo"],[200,35,"Vạn bảo các chủ"]],keep:80};
 /* TÂN QUÂN LẬP UY (jreign, owner 16/11 D5): the Emperor's side story + her faction road. Months from the accession: at[c] opens chapter c+1;
