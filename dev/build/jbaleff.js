@@ -58,7 +58,6 @@ Object.assign(BAL,{eff:{
  jcmaid:{evD:1,evD_2:1,evCmMonthNpc:1,loyalTop:1,loyalTop_2:1,loyalTop_3:1},
  jcoopworld:{briber:-5,evBriber:1},
  jcycle:{evG:2,evG_2:1,evG_3:1,evTop:1},
- jdress:{danhTop:-2},
  jecon:{econDoDuty:2,f:-8,evF:1,evF_2:1,loyalF:10,loyalF_2:5,danhF:-2},
  jeitem:{evGo:1},
  jemo:{},
