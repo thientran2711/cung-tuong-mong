@@ -503,3 +503,4 @@
 | coop-stable r1 review PASS 6f8e33a0 (= 744b80e7 + 6696656e) → batch-0032 incl. Worker deploy by the builder (reviewer archived) | review/coop-stable-r1 | main s27 | session_01UV1SzgbJc6UCzVHi6vVpju | PASS | 17/11 01:08Z |
 | it-key-guard (opus bug): npcMonthly j8.js:399 IT[e.k].tg undefined crash on live + 25-file family | review/it-key-guard | main s27 | session_01UV1SzhtmrVzHNMoDZ13Wac | RUNNING | 17/11 01:08Z |
 | road-b2-fix review r2 (opus, BIG) of db5c49f4 (incl. road-onecore 6a1112d1) | review/road-b2-fix-r2 | B | session_01N1tNP5i7LqTvSFFBdZwQiG | RUNNING | 17/11 01:10Z |
+| coop-thin-guest AUDIT (opus, read-only + plan; owner OK 17/11 01:15Z): list every place the guest computes game state locally, propose part-by-part migration order to host-authoritative thin guest; report to owner before building | — (reports/coop-thin-guest-audit.md) | main s27 | (opening) | RUNNING | 17/11 01:16Z |
