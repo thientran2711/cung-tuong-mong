@@ -6,7 +6,7 @@ For every por-/fig- picture of the 32 consort faces + the old player looks (dev/
   3. the independent whole-picture face mesh agreed or the points were replaced by it (dev/art/mkfit/verify.py, needs mediapipe, run when pictures change).
 usage: python3 dev/test/anchor-table.py   (exit 1 + the list of bad pictures)"""
 import json, glob, math, os, re, sys
-ROOT = os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__)), "../.."))
+ROOT = os.environ.get("ANCHOR_ROOT") or os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__)), "../.."))   # ANCHOR_ROOT = the worktree whose data is checked (quickcheck hook)
 fit = json.load(open(os.path.join(ROOT, "dev/art/toil-fit2.json"))); fit = fit.get("fit", fit)
 mk = {}
 for f in glob.glob(os.path.join(ROOT, "dev/art/mkfit/consort-*.json")) + glob.glob(os.path.join(ROOT, "dev/art/mkfit/player-*.json")): mk.update(json.load(open(f)))
@@ -23,7 +23,9 @@ for n, v in sorted(mk.items()):
     lip, e1, e2, b1, b2 = c(0, 12), c(20, 30), c(30, 40), c(40, 50), c(50, 60)
     ed = math.hypot(e1[0] - e2[0], e1[1] - e2[1])
     why = []
+    mx, my = (e1[0] + e2[0]) / 2, (e1[1] + e2[1]) / 2
     if not (lip[1] > max(e1[1], e2[1]) + .5 * ed): why.append("lips not below eyes")
+    elif not (.55 < (lip[1] - my) / ed < 1.7 and abs(lip[0] - mx) < .5 * ed): why.append("lips %.2f eye-distances below the eyes / %.2f off centre (chin or nose?)" % ((lip[1] - my) / ed, (lip[0] - mx) / ed))
     if not (b1[1] < e1[1] and b2[1] < e2[1]) and not (b1[1] < e2[1] and b2[1] < e1[1]): why.append("brows not above eyes")
     if abs(math.degrees(math.atan2(e2[1] - e1[1], e2[0] - e1[0]))) > 25 and abs(math.degrees(math.atan2(e1[1] - e2[1], e1[0] - e2[0]))) > 25: why.append("eye line tilted")
     if t:

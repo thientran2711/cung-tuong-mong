@@ -8,7 +8,7 @@ import json, sys, os, re, math, glob, io, concurrent.futures as cf
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import numpy as np
 import mkfit
-THR = .22
+THR = .10   # review r1 (17/11): .22 let a lips-on-the-chin set through (c07 t3 a18)
 def cents(P):
     P = np.asarray(P, float); return [P[0:12].mean(0), P[20:30].mean(0), P[30:40].mean(0), P[40:50].mean(0), P[50:60].mean(0)]
 def main():

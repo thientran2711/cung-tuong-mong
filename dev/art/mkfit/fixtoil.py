@@ -11,7 +11,8 @@ _a = sys.argv[1:]; _g = lambda k, d=None: _a[_a.index(k) + 1] if k in _a else d
 FITF = _g("--fit", os.path.join(ROOT, "dev/art/toil-fit.json")); MKD = _g("--mk", os.path.join(ROOT, "img/mk-fit")); OUTF = _g("--out")
 fit = json.load(open(FITF)); fit = fit.get("fit", fit)
 mk = {}
-for f in glob.glob(os.path.join(MKD, "*.json")): mk.update(json.load(open(f)))
+for f in glob.glob(os.path.join(MKD, "*.json")):
+    if os.path.basename(f) != "md5.json": mk.update(json.load(open(f)))
 def geo(n):
     v, t = mk[n], fit[n]; A = t[8]
     P = [(v[2 * i] / 40, v[2 * i + 1] / 40 * A) for i in range(60)]   # % of width on both axes
