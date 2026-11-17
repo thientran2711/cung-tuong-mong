@@ -226,8 +226,8 @@ function menChoose(m,v,y,a){const at=placeName(y.k);menStat("ch_"+a);if(a==="ngh
 /* ---------- 5. NPC consorts see the same strays and choose by their nature ---------- */
 /* NPC choice by nature and feeling, no dice: same rules for every consort */
 function menDecide(w,c){const h=c?hostility(w,c):0;
- if(c){if(tr==="Xảo quyệt"||tr==="Kiêu ngạo"||h>45)return"report";if(tr==="Tham vọng")return"hide";if(tr==="Kín đáo")return"listen";if(tr==="Ân cần"||tr==="Khiêm nhường")return h>25?"hide":"ignore";return h>30?"report":"ignore"}
- if(tr==="Kiêu ngạo"||tr==="Kín đáo")return"report";if(tr==="Tham vọng")return"hide";return"ignore"}
+ if(c){if(hasT(w,"Xảo quyệt")||hasT(w,"Kiêu ngạo")||h>45)return"report";if(hasT(w,"Tham vọng"))return"hide";if(hasT(w,"Kín đáo"))return"listen";if(hasT(w,"Ân cần")||hasT(w,"Khiêm nhường"))return h>25?"hide":"ignore";return h>30?"report":"ignore"}
+ if(hasT(w,"Kiêu ngạo")||hasT(w,"Kín đáo"))return"report";if(hasT(w,"Tham vọng"))return"hide";return"ignore"}
 function menNpcAct(w,m,c,y){const d=menDecide(w,c);menStat("npc_"+d);
  if(d==="report"){menReport(w,m,c,y,(w.tamco||0)>=50?1:0);return d}
  if(d==="hide"){menHide(w,m,c,y,menEyes(y.k,c));if(c===S||menEye(S)>=(y.hide||0)+25){try{intelAdd(w,{k:"menhide:"+m.id,kind:"secret",txt:`${rkName(w)} ${w.name} đã che giấu ${m.name} lẻn vào ${placeName(y.k)}${c&&c!==S?` cùng ${rkName(c)} ${c.name}`:""}.`},{by:"tai mắt",how:"tai mắt"})}catch(e){}}return d}

@@ -229,7 +229,7 @@ function srvFromLaundry(){S.srv.lau=0;S.srv.rk=Math.max(1,(S.srv.rk0||1)-1);srvR
 function srvMoodEvent(){const m=srvM();const good=(S.tin-20)/100+(nv(m,"srvGood"))-(nv(m,"srvBad"));
  if(Math.random()<good){const g=3+rkOf(m);apply({bac:g,tin:1});log(`${m.name} vui lòng, thưởng ngươi ${g} lạng bạc.`);Q.push({t:"Chủ thưởng",who:pv(m),h:`<p>${m.name} vui lòng, thưởng ngươi ${g} lạng bạc.</p><p class="g">Bạc +${g} · Chủ tin +1</p>`});return}
  if(S.tin<10){srvLaundry(`${m.name} chán ghét ngươi, sai người giải xuống Nội vụ phủ.`,6+R(5));return}
- if((tr==="Xảo quyệt"&&S.tin<30&&roll(45))||(S.tin<20&&roll(40))){const d=20+R(15);apply({suc:-d});log(`<span class="r">${m.name} sai thái giám đánh ngươi hai mươi trượng.</span> Sức -${d}.`);
+ if((hasT(m,"Xảo quyệt")&&S.tin<30&&roll(45))||(S.tin<20&&roll(40))){const d=20+R(15);apply({suc:-d});log(`<span class="r">${m.name} sai thái giám đánh ngươi hai mươi trượng.</span> Sức -${d}.`);
   Q.push({t:"Bị đánh đòn",cls:"end",who:pv(m),h:`<p>${m.name} nổi giận, sai thái giám đánh ngươi hai mươi trượng.</p><p class="r">Sức -${d}</p>`});if(S.suc<=0)die(`Bị ${m.name} sai đánh trượng đến chết`);return}
  pushDil(mkP("cnvScold",{}),`${m.name} quở mắng`)}
 function ordOdds(k){return od(k==="spy"?45+S.tamco/5+S.tai/10:k==="plant"?30+S.tamco/4+S.srv.rk*3:25+S.tamco/4+S.srv.rk*3)}
