@@ -167,3 +167,4 @@ Probe notes: repo-root index.html is STALE (no CDN base) -> use `git show origin
 Credits: 3 x 40 = 120 (v8-v24 5,080). Not uploaded to live keys (waiting for owner's OK via C).
 ## HANDOVER #3 (written after v24; successor to be opened by Foreman C)
 START_CTX ~1%; ~25% used. STATE: NC Tần v24 done (3 options, awaiting owner pick). NOT done: (2) BD other ranks (Đáp ứng braids+turquoise ribbon, Phi opt-2 hair, Quý phi B court robe) on the c26 model, BD Tần v23 O6CA0Efynm approved; (3) NC Đáp ứng / Phi / Quý phi (waist sash) after she picks Tần; (4) room test BD. Recipe as HANDOVER #2 + transparentBackground. Use other urgent5 repainted figures as model for variety, one prop per rank, own hair per rank.
+OWNER (via C s10, 17/11): all foreign-princess generations at 2K ("Không có cần tới 4K đâu, 2K là được rồi") — pass resolution 2k, never 4k.
