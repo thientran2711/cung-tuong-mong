@@ -93,12 +93,12 @@ const HD={peek:()=>null};window.HD=HD;
 
 /* ---------- the makeup step (called by jtoil toilMakeup after the lips; return true = it took over) ---------- */
 function hdStep(ctx){try{if(!S||!TOIL.st)return false;const L=hdOwned(S);if(!L.length)return false;const st=TOIL.st;
- TOIL.hdLbl="Chọn một hoa điền để dán";ctx.draw();
+ TOIL.hdLbl="Chọn một hoa điền để dán";/* keep the glass painted while she chooses (pictures may still be arriving) */let pk=true;const loop=()=>{if(!pk)return;ctx.draw();requestAnimationFrame(loop)};loop();KG82.run={stop:()=>{pk=false}};
  const btn=e=>{const w=WD_ITEMS[e.k];return `<button class="${kg82Btn(true)}" data-hdk="${e.k}">${w.n}<small>${KIT_GRADE[w.g|0].n} · xa xỉ ${wdLux(w.k)}</small></button>`};
  const old=ctx.box.querySelector(".kg82act");if(old)old.remove();
  ctx.box.insertAdjacentHTML("beforeend",`<div class="kg82act">${L.map(btn).join("")}<button class="${kg82Btn(true)}" data-hdk="">Không dán<small>để trán trơn</small></button></div>`);
  try{toilHUD({round:"Hoa điền",time:"thong thả"})}catch(e){}
- ctx.box.querySelectorAll("[data-hdk]").forEach(b=>b.onclick=()=>{const k=b.dataset.hdk;try{sfx("tap")}catch(e){}
+ ctx.box.querySelectorAll("[data-hdk]").forEach(b=>b.onclick=()=>{pk=false;const k=b.dataset.hdk;try{sfx("tap")}catch(e){}
   if(!k){const a=ctx.box.querySelector(".kg82act");if(a)a.remove();TOIL.hdLbl="";ctx.done();return}
   TOIL.hdLbl="Kéo hoa điền vào giữa trán, nghiêng cho cân";
   const run=hdBoard({C:ctx.C,G:ctx.G,file:ctx.file,box:ctx.box,k,sk:(st.sk&&st.sk.sk)||0,lvF:hdLvF(BAL.hd.mkLv),seed:wdHash(k+":"+toilWk()),paint:()=>ctx.draw(),
