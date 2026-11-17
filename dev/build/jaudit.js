@@ -189,7 +189,7 @@ window.kitThey=kitThey;
 Object.assign(BAL,{thieuLe:{danh:-2,duc:-1,aff:-3,strict:1.5,frac:.35}});
 function aaThieuLe0(p){try{if(!p||p.out)return false;if(p.rankSet!=null&&p.rankSet===rkOf(p)&&p.rankSetWorn)return false;if(typeof luxOf!=="function")return false;const x=luxOf(p);if(x.sc>0)return x.sc<x.bud*BAL.thieuLe.frac;
  /* nothing worn: thiếu lễ only when she could have dressed (a bestowed rank set, or wearable things in her chest) — nobody is blamed for clothes she does not own */
- return p.rankSet!=null||(p.inv||[]).some(e=>!e.h&&IT[e.k]&&IT[e.k].sl)}catch(e){return false}}
+ return p.rankSet!=null||(p.inv||[]).some(e=>!e.h&&IT[e.k]&&itm(e.k).sl)}catch(e){return false}}
 function aaHostStrict(host){try{if(host==="th"){const t=traitsOf({kind:"th"});return t.includes("Đa nghi")||t.includes("Kiêu ngạo")}if(host&&host.queen)return traitsOf(host).some(t=>t==="Kiêu ngạo"||t==="Ghen tuông")}catch(e){}return false}
 function aaThieuLeFx(host){const B=BAL.thieuLe,m=aaHostStrict(host)?B.strict:1;return{danh:B.danh,duc:B.duc,aff:Math.round(B.aff*m)}}
 function aaThieuLeTxt(host,f0){const f=f0||aaThieuLeFx(host);const who=host==="th"?"Thái hậu":host==="emp"?"Hoàng thượng":host&&host.queen?"Hoàng hậu":"chủ nhà";
@@ -331,7 +331,7 @@ function aaPunishTxt(sev){const m=has("nongnay")?3:has("nhantu")?1:2;return sev>
    the text just before it, or earlier in the same block), and puts kitName(p) (title + name, rank colour) in its place. Names already
    written as "title name" in plain text are left to the rank-colour pass. Short names (roster strip under portraits: "Thục Nghi") are
    not full names and are never touched. Opt out: [data-krn-skip]. dry=true returns the bare sites instead (dev/test/rank-name-scan.js). */
-const KRN_SKIP=".kname,.kti,[data-vp-skip],[data-krn-skip],script,style,textarea,input,option,select";
+const KRN_SKIP=".kname,.kti,[data-vp-skip],[data-krn-skip],.kpt-mount,.kslot,script,style,textarea,input,option,select";
 const KRN_BLK=".kft,.krv,.kitem,.logs > div,p,li,button,.kptitle,.kpsub,figcaption,td,.kpnote,.tag";
 let KRN_C={k:"",rx:null,m:null};
 /* lag-play (owner 16/11 15:05Z): one rank-name pass reads the title of every person (kitTitle -> kitFace -> portrait/figure lookups)

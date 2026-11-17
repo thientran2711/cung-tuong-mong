@@ -136,7 +136,7 @@ function evNames(t){let x=t;try{(rivals||[]).forEach(r=>{x=x.split(r.name).join(
 function evKeys(m){const t=evTxt(m);const tpl=m.pid?"p:"+m.pid.replace(/^e68/,"e:"):"t:"+(m.t||"")+"|"+evNames(t).slice(0,26);return{tpl,key:tpl+"|"+evActorKey(m)+"|"+t.slice(0,40)}}
 function evS(){const e=e68();e.sch=e.sch||{tpl:{},key:{},last:"",bk:"",day:-1,dn:0};return e.sch}
 function bk6(){return wk()*B4N+(S.buoi||0)}
-let EVHOLD=[],EVLAST=null;
+let EVHOLD=[],EVLAST=null;lifeStore("EVHOLD held events",()=>{EVHOLD=[];EVLAST=null});/* was reset by start() only: a slot load released the OLD life's held events into the loaded one */
 function evDropInfo(m){if(!m.opts&&m.h){try{log(evTxt(m).slice(0,200))}catch(e){}}}
 /* dry=1 (D13 jspread, during a buổi change): hold / drop the optional cards exactly as at a real show, but mark nothing as shown */
 function evGate(dry){if(!S||S.dead||window.__e68off||!Q.length)return;const sc=evS();const b=bk6(),day=wk();if(sc.day!==day){sc.day=day;sc.dn=0}

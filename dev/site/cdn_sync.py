@@ -17,6 +17,7 @@
   --wipe-review TOPIC                          DELETE every object under img/_review/TOPIC/ (review shots live there while a verdict is
                                                pending, never in git; wipe them with the verdict) and rebuild the index; --dry-run lists only
   --prune                                      also DELETE objects under the synced folders that are not in the source (careful)
+  --allow-shrink                               push a figure manifest even if it has FEWER entries than the live one / the floor (manifest_guard.py)
   --force                                      push a *.json manifest even if someone else changed it on the CDN since your last pull
 
   Manifests (img/*.json) are shared by every worker: pull right before editing, push right after. A push of a manifest whose CDN copy
@@ -30,6 +31,8 @@ ACCOUNT = os.environ.get("CLOUDFLARE_ACCOUNT_ID") or "7fc1b88a522c6a91b40051536f
 BUCKET = os.environ.get("CTM_BUCKET") or "ctm-img"
 PUBLIC = os.environ.get("CTM_IMG_BASE") or "https://ctm-img.victoria-tntt.workers.dev/"
 API = f"https://api.cloudflare.com/client/v4/accounts/{ACCOUNT}/r2/buckets/{BUCKET}"
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import manifest_guard as GUARD
 R = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
 STATE = os.path.join(R, "dev", "site", ".cdn-state.json")  # untracked: md5 of manifests last pulled/pushed from this checkout
 TOPS = ("img",)  # audio/ (4.6 MB, rarely changes) stays in git
@@ -235,6 +238,7 @@ def main():
     ap.add_argument("--prune", action="store_true")
     ap.add_argument("--wipe-review", metavar="TOPIC")
     ap.add_argument("--force", action="store_true")
+    ap.add_argument("--allow-shrink", action="store_true")
     ap.add_argument("--pull", action="store_true")
     ap.add_argument("--index", action="store_true")
     ap.add_argument("-j", type=int, default=6, help="parallel uploads (default 6; the API pace CTM_CDN_RATE=3.2/s is the real limit)")
@@ -269,7 +273,7 @@ def main():
     t0 = time.time()
     remote = remote_list()
     st = load_state()
-    todo, same, held, sizes = [], 0, [], {}
+    todo, same, held, sizes, shrunk = [], 0, [], {}, []
 
     def hash_one(k):
         b = src[k]()
@@ -290,6 +294,14 @@ def main():
         if r and k.endswith(".json") and not a.force and st.get(k) and st[k] != r[0]:
             held.append(k)
             continue
+        if k.startswith("img/") and os.path.basename(k) in GUARD.GUARDED and not a.allow_shrink:
+            # NEVER-SHRINK GUARD (17/11: the live FIGURES.json lost its consort t5–t8 entries): a figure manifest may not drop entries / counts
+            try:
+                bad = GUARD.check(os.path.basename(k), json.loads(src[k]()), live=GUARD.fetch(os.path.basename(k)) if r else None, floor=GUARD.load_floor())
+            except Exception as e:
+                bad = [f"{k}: guard could not run ({e})"]
+            if bad:
+                shrunk.extend(bad); continue
         todo.append((k, h))
     gone = []
     if a.prune and not a.missing_only:
@@ -300,6 +312,11 @@ def main():
           f" · same {same} · to upload {len(todo)} ({tot / 1e6:.1f} MB){' · to delete ' + str(len(gone)) if gone else ''}")
     for k in held:
         print(f"  HELD {k}: changed on the CDN since your last pull/push — run --pull {k}, merge, push again (or --force)")
+    for m in shrunk:
+        print("  SHRINK " + m)
+    if shrunk:
+        print("  REFUSED: a figure manifest may never shrink (dev/site/manifest_guard.py). Pull the live copy, merge your entries into it, push again (or --allow-shrink if the removal is intended).")
+        sys.exit(1)
     if a.check or a.dry_run:
         for k, _ in todo[:40]:
             print("  " + ("new " if k not in remote else "changed ") + k)

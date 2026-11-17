@@ -1,9 +1,11 @@
-// usage: node dev/measure/runb.js <sens|rand> <lives> <outfile.json>   env: BALJ='{"hz":1.4}' SERV=keep|fire AFF=1 INP2=inx.js (extra counters) XJS='js run after load'
+// usage: node dev/measure/runb.js <sens|rand> <lives> <outfile.json>   env: SEED=<n> (seeded Math.random), BALJ='{"hz":1.4}' SERV=keep|fire AFF=1 INP2=inx.js (extra counters) XJS='js run after load'
 const {chromium}=require('playwright');const fs=require('fs');const path=require('path');
 const mode=process.argv[2],target=+process.argv[3]||40,out=process.argv[4];
 const M=__dirname,GAME=process.env.GAME||path.join(M,'..','index.html');
 (async()=>{
- const b=await chromium.launch();const ctx=await b.newContext({viewport:{width:390,height:844},reducedMotion:process.env.FAST!=='0'?'reduce':'no-preference'});if(process.env.FAST!=='0')await ctx.addInitScript(()=>{/* bot speed: visual-only DOM observers and focus off (rules untouched) */window.MutationObserver=class{observe(){}disconnect(){}takeRecords(){return[]}};HTMLElement.prototype.focus=function(){};});const page=await ctx.newPage();await page.route(/\.(webp|png|jpg|mp3|ogg)$/,r=>r.abort());
+ const b=await chromium.launch();const ctx=await b.newContext({viewport:{width:390,height:844},reducedMotion:process.env.FAST!=='0'?'reduce':'no-preference'});if(process.env.FAST!=='0')await ctx.addInitScript(()=>{/* bot speed: visual-only DOM observers and focus off (rules untouched) */window.MutationObserver=class{observe(){}disconnect(){}takeRecords(){return[]}};HTMLElement.prototype.focus=function(){};});/* emotion-acts-3: SEED=<n> seeds Math.random (same generator as palstart.js / reign.js) so two arms start from the same stream */
+ if(process.env.SEED)await ctx.addInitScript(`window.__seed=${+process.env.SEED};(function(){let s=(window.__seed||1)>>>0;Math.random=function(){s=(s+0x6D2B79F5)>>>0;let t=s;t=Math.imul(t^(t>>>15),t|1);t^=t+Math.imul(t^(t>>>7),t|61);return((t^(t>>>14))>>>0)/4294967296}})();`);
+ const page=await ctx.newPage();await page.route(/\.(webp|png|jpg|mp3|ogg)$/,r=>r.abort());
  page.on('pageerror',e=>{console.log('PAGEERR',mode,e.message.slice(0,200))});
  await page.goto('file://'+GAME);await page.waitForTimeout(500);
  await page.evaluate(()=>localStorage.clear());await page.reload();await page.waitForTimeout(500);

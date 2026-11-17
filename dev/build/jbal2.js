@@ -337,6 +337,7 @@ BAL.seatCap=SEATCAP;
    "now" (owner 13:50Z wording: every place's count at ONE moment, the counts add up to the record, nobody twice / missing) or "arrive"
    (main's dev/test/stage-counts.js: a place's count = the people she meets on arrival, after the walk's khắc). One switch, read by j95. */
 Object.assign(BAL,{led:{court:2,cnt:"now"}});
+ /* BAL.road (full origin roads) lives in jbalroad.js: it must load before jroad.js / jrd_<origin>.js (review/road-onecore) */
 
 /* D13 spread events across buổi (jspread, owner 15/11 23:20Z): world cards shown per buổi at most cap; a card waits at most maxWait buổi
    (then shown even in a full buổi); a card whose options run code (cannot be saved; autosave held while it waits) at most codeWait buổi. */
