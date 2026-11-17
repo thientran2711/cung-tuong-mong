@@ -158,6 +158,8 @@ RUNNING C sessions (12): lead #6 session_011xDdVS87fDNLJMJGzeiVWL + W2b session_
 
 - 05:02Z W3d consort v4 (1e2ef578) looked: flowing + phi bạch OK, but t3–t7 same cut → v5 ordered (distinct Hán cut per tier). W3c (still alive, double v4 unpushed) told to stop; lead #6 to archive it.
 
+- 05:06Z W3d consort v5 (rank-standard-consort-v5-2row.jpg): distinct cut + colour per tier, flowing, phi bạch all tiers, no vest/qipao → C looked OK → sent to owner for her morning (minor: fans on t3/t5). WAITING OWNER: consort v5 + maid v4b + event-art samples + phi bạch repaint cost (~2,800 files ≈ 182k cr).
+
 ## SESSION 12 LOG
 - 04:40Z ROLLOVER at ctx ~26%. 04:33Z: W6b + W5c plain-maid repaint done (own original looks); drift lists parked for post-standard pass. Relayed owner 04:48Z (player 4 figures → 36 consorts; mama from maid figures) to lead #6: mama new files paused, hero grid report asked.
 - 03:33Z start (depth 6/8, START_CTX ~5% → roll at 30%). s11 told to stop + ARCHIVED; s11 trig disabled; own wake trig_0117UxAwzdJZpDAAmy4cTHSM (:33). All C sessions told C = s12. rank-sample-v2 shown to owner.
