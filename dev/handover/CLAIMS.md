@@ -921,3 +921,4 @@
 | REVIEW kit-figure-mood r3 of 5758b6e3 (sonnet SMALL; brief briefs/s36-review-kit-figure-mood-r3.md) | review/kit-figure-mood-r3 | MAIN s36 | session_01UV1Szh4nqVY4zaK7Nk1kui | RUNNING | 17/11 19:12Z |
 | odds-cap review r1 (opus BIG) of d3589f39 | review/odds-cap-r1 | D | session_01964izEqMuRVcBrUFRY8F3P | RUNNING | 17/11 19:15Z |
 | REVIEW moodknow final + mood-mem step0 (opus) of 8e2ac171 | review/mood-mem-r1 | C-AG | session_01UV1SzgWE17y4bj2Nh4xG1c | RUNNING | 17/11 19:16Z |
+| MOOD-MEM #2 (opus): memory 2 layers (b) on 8e2ac171 + step0 test runs | review/mood-mem | C-AG | session_01UV1Szigr35QvLkVSd2Vb9L | RUNNING | 17/11 19:17Z |
