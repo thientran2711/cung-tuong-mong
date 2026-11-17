@@ -878,3 +878,4 @@
 | day-khac-audit review r1 (opus BIG) of 4408ef0a | review/day-khac-audit-r1 | D | session_01964izE2ap49KwCk9DAQtjP | RUNNING | 17/11 17:12Z |
 | REVIEW looks-2 040ce3440 (opus BIG; brief briefs/review-looks-2.md) | review/looks-2-r1 | B | session_01N1tNP4D3L5wFB1qrZAfoHp | RUNNING | 17/11 17:20Z |
 | kit-figure-mood: mood seal beside the head of every interactable full-body figure (OD 17:40Z (2)) (sonnet; brief briefs/s34-kit-figure-mood.md) | review/kit-figure-mood | MAIN s34 | (opening) | RUNNING | 17/11 17:40Z |
+| WEATHER-KHAC-2 delta: every j12 kind per khắc + levels + world effects (opus; owner OD L1665 ~17:40Z (3); main s34) | review/weather-khac | C-AG | session_01UV1SzhyGUZ4FTxi1y3XNvr | RUNNING | 17/11 17:18Z |
