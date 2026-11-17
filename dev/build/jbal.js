@@ -129,6 +129,11 @@ Object.assign(BAL,{route:{
  threatEv:2 /* evidence on the rival gained by threatening her (printed in the choice) */
 }});
 Object.assign(BAL,{orig:{ /* jorigins.js: Bac Dich (bd) origin numbers */
+ /* j69 origin roulette weights (approved 11/14 table, OD:L19). Hòa thân (nc) is ONE origin: its weight is the whole hòa thân slot, its country
+    branches split it by br.nc (owner OD:L1213–L1219; set from the bd bot measure, review/origin-bd-branch report). ow2 = the frozen table of
+    lives pre-rolled while bd was a separate card (ow=2 marks): they keep the origin they were shown. */ ow:{nc:6,thd:9,cn:13,dtq:17,muoi:17,ch:13,td:9,tt:8,cnv:8},
+ ow2:{nc:6,bd:7,thd:9,cn:13,dtq:17,muoi:17,ch:13,td:9,tt:8,cnv:8},
+ /* country-branch share inside an origin: {origin:{branch:weight}} (hard branch = rare, OD:L1216) */ br:{nc:{nc:1,bd:1}},
  /* Bac Dich princess origin: start stats o, Thai hau favour th */ bd:{o:{danh:15,suc:90,bac:90},th:-20},
  /* QUEST67.bd chapter-end rewards [both nations / forgiven hostage / still a hostage] */ quest:[{danh:10,th:8},{th:4},{tamco:3}],
  /* arc bd_hoa (ten-year treaty): per option <node><a|b|c> c=cost w=win l=loss; win/win2/mid/lose = ending fx */ hoa:{s1a:{c:{bac:-20},w:{danh:3,sung:2}},s1b:{w:{sung:3},l:{danh:-3}},s2a:{c:{bac:-10},w:{duc:2}},s2b:{w:{th:2}},c1a:{c:{suc:-3},w:{danh:5,sung:3},l:{danh:-4}},c1b:{c:{bac:-30},w:{sung:4},l:{danh:-3}},c2a:{c:{bac:-50},w:{duc:4},l:{sung:-6}},c2b:{c:{bac:-20},w:{duc:3}},t1a:{c:{suc:-4},l:{danh:-3}},t1b:{c:{bac:-20},w:{sung:2}},x1a:{c:{suc:-5}},x1b:{c:{suc:-3}},x1c:{c:{bac:-60},w:{danh:2}},win:{danh:12,sung:6},win2:{sung:10,th:4},mid:{danh:3},lose:{sung:-8,danh:-6}},
@@ -241,11 +246,14 @@ BAL.staff={retire:[63,68],gift:20,giftAf:10,talk:2,succAge:[46,54],
 /* ONE CORE (owner OD:L1267) for the 14-chapter frame (jst14.js, review/story14-p1-r2): every number the frame uses or prints lives here; texts print these.
    max = chapters in one life; parts = [first, last] chapter of Phần đầu / giữa / cuối.
    lim = months before a tutorial chapter closes by itself with NO reward (nhap: chương 1 «Nhập cung, đứng vững»; nhapCnv: chương 1 of the
-   cung nữ được sủng hạnh road; sung: «Lần đầu được sủng»; tap: «Học quy củ trong cung»; «Từ kẻ hầu thành tiểu chủ» has no limit: the later
+   cung nữ được sủng hạnh road; nhapHi: chương 1 of an origin that enters at rank hiR or above (Nam Chiếu enters as Tần: one more step
+   up from a palace head is slower; D8 story bot 17/11: nc chương 1 done 4/29 in 6 months); sung: «Lần đầu được sủng»; tap: «Học quy củ trong cung»; «Từ kẻ hầu thành tiểu chủ» has no limit: the later
    chapters are a consort's and open only when she is raised). The months count
    from the day she is in the palace (a home road «Ở nhà chờ tuyển tú» starts them at entry).
    goal: sung = Sủng for «Lần đầu được sủng»; rel = thiện cảm of one palace person for «kết thân»; art = tài nghệ level; tin = Chủ tin and nt =
-   Hoàng thượng để ý for the servant tutorial steps (cnv, while she still serves).
+   Hoàng thượng để ý for the servant tutorial steps (cnv, while she still serves). Tuned 17/11 (D8 story bot, aim: a player who follows
+   the goal makes it about 6–7 times in 10): rel 30 → 20 (chương 3 done 36 % → 57 %; 15 measured no better: the misses are lives where every consort dislikes her), nt 25 → 14
+   (cnv chương 2 done 1/28 → about half; 12 made it near-certain). tin 60 kept (85 measured: still done in 1–2 months).
    danh / rw = Danh and reward67 tier (0..2) when a tutorial chapter is DONE (nothing when it closes by time).
    hate: a hostile arc role (F14ROLE table in jst14) costs thiện cảm max(min, base + the better of the two thiện cảm) both ways (j9 relAdd: oán up);
    such a role takes, when it can, someone whose thiện cảm both ways is under friend.
@@ -257,8 +265,8 @@ BAL.staff={retire:[63,68],gift:20,giftAf:10,talk:2,succAge:[46,54],
    q = tutorial quests of chapters 1–3 (jtq14.js, review/tut-quests): bac = Bạc paid the moment one quest is done (c consort, s cung nữ who still
    serves); need = how many times a quest's deed must be done (default 1); narr = the BAL.staff post whose holder tells the tutorial (OD:L1432:
    gt Giáo tập ma ma for a new consort, kn Quản sự ma ma for a new palace maid). */
-Object.assign(BAL,{st14:{max:14,parts:[[1,3],[4,11],[12,14]],lim:{nhap:6,nhapCnv:8,sung:10,tap:8},
- goal:{sung:25,rel:30,art:2,tin:60,nt:25},danh:{nhap:3,sung:2,tap:2,len:4},rw:{nhap:0,sung:1,tap:1,len:2},
+Object.assign(BAL,{st14:{max:14,parts:[[1,3],[4,11],[12,14]],lim:{nhap:6,nhapCnv:8,nhapHi:9,hiR:3,sung:10,tap:8},
+ goal:{sung:25,rel:20,art:2,tin:60,nt:14},danh:{nhap:3,sung:2,tap:2,len:4},rw:{nhap:0,sung:1,tap:1,len:2},
  hate:{min:25,base:15,friend:20},tr:{"Xảo quyệt":-5,"Tham vọng":-3,"Kiêu ngạo":-2,"Khiêm nhường":2,"Ân cần":4,"Trung hậu":3},
  ctx:{aff:6,affCap:6,oan:10,oanCap:5,tam:[40,15],duc:[50,20],foeOan:30,foeCap:4,cap:15},
  shift:{base:15,slope:2,sc:2,min:5,max:40},

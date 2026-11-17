@@ -21,11 +21,21 @@ const ORIGINS=[
  {k:"dtq",n:"Con gái Đại tướng quân",r:1,o:{danh:15,suc:100,bac:80},hh:0,th:0,t:"Cha giữ binh quyền biên ải. Thân thể khỏe mạnh."},
  {k:"muoi",n:"Con gái nhà buôn muối",r:0,o:{bac:320},hh:0,th:-5,t:"Giàu mà xuất thân thấp. Có bạc để mua lòng người."},
  {k:"cn",n:"Cung nữ được sủng hạnh",r:1,o:{sung:20,bac:60,mat:3,danh:6,suc:10},hh:0,th:5,art:{y:2},ally:1,t:"Từng hầu trà ở Càn Thanh cung. Quen biết khắp đám cung nhân."},
- {k:"nc",n:"Công chúa nước Nam Chiếu hòa thân",r:3,o:{danh:30,bac:120},hh:0,th:-15,art:{vu:1},t:"Người ngoại tộc. Thái hậu không ưa."},
+ {k:"nc",on:"Công chúa hòa thân",land:"Nam Chiếu",n:"Công chúa nước Nam Chiếu hòa thân",r:3,o:{danh:30,bac:120},hh:0,th:-15,art:{vu:1},t:"Người ngoại tộc. Thái hậu không ưa."},
  {k:"td",n:"Con gái tội thần",r:0,o:{bac:70,sung:10,thu:1,tamco:15,tai:15,danh:6,mat:2},hh:0,th:0,art:{thi:1},ally:1,t:"Cả nhà bị xử trảm. Ngươi vào cung để báo thù."},
  {k:"ch",n:"Cháu gái Thái hậu",r:2,o:{danh:20,bac:100},hh:-5,th:40,t:"Có Thái hậu chống lưng."},
  {k:"thd",n:"Con gái thầy đồ nghèo",r:0,o:{bac:20,tai:20,duc:10},hh:5,th:0,art:{thi:1},t:"Thơ văn hơn người, ngoài ra không có gì."}
 ];
+/* HÒA THÂN = ONE origin with COUNTRY BRANCHES (owner OD:L1213–L1216): the roulette and every origin-level table show ONE card, the ORIGINS
+   entry nc ("on" = the origin's own name, Công chúa hòa thân). A life plays one country branch: nc itself (Nam Chiếu) or a branch in ORIGIN_BR
+   (jorigins adds bd = Bắc Địch). A branch keeps its own key for its own story road (STORY / QUEST67 / ARC67 bd_*, letters, close maid, home money);
+   par = the origin it belongs to. The branch is rolled with the origin (j69, weights BAL.orig.br). Old saves with origin "bd" load through originByKey. */
+const ORIGIN_BR={};
+function originByKey(k){return ORIGINS.find(o=>o.k===k)||ORIGIN_BR[k]||null}
+function originRoot(k){const b=ORIGIN_BR[k];return b?b.par:k}
+/* branch of origin k for a roll r in [0,1): weights BAL.orig.br[k] ({branch key: weight}); an origin without branches is itself */
+function originBrPick(k,r){try{const W=BAL.orig.br[k];if(!W)return k;const L=Object.keys(W).filter(b=>W[b]>0&&originByKey(b));const tot=L.reduce((a,b)=>a+W[b],0);
+ let x=r*tot;for(const b of L){x-=W[b];if(x<0)return b}return L.length?L[L.length-1]:k}catch(e){return k}}
 const SURN=["Thẩm","Tô","Lâm","Diệp","Ôn","Hạ","Mộ Dung","Bạch","Liễu","Cố","Tạ","Vân","Chu","Trịnh","Phùng","Lục","Tống","Hàn","Lý","Đường","Thượng Quan","Âu Dương","Hoa","Kiều","Tần","Nhan","Mạnh","Từ","Khương","Đoan Mộc"];
 const GIVEN=["Mi Trang","Uyển Nhi","Thanh Ca","Lan Chi","Như Ý","Nguyệt Hoa","Tuyết Dao","Cẩm Tú","Ngọc Hành","Tịnh Nghi","Lăng Vân","Thục Nghi","Diễm Thu","Hàm Hương","Bích Dao","Linh Lung","Yên Nhiên","Tố Tâm","Mạn Châu","Khinh Vũ","Tử Yên","Vân Thường","Nhược Lan","Hải Đường","Thanh Liên","Mộng Điệp","Ngưng Sương","Tú Uyển","Phương Hoa","Họa Mi","Vân Khanh","Bạch Lộ","Kiều Nguyệt","Thủy Tiên","Hồng Diệp","Tịch Nhan","Lạc Anh","Băng Tâm","Ngọc Dao","Dao Cầm"];
 const MALEN=["Văn Uyên","Tử Khiêm","Minh Viễn","Thừa Chí","Lục Trường","Tiêu Viễn","Hàn Phong","Lăng Vân","Kính Chi","Bá Ngôn"];

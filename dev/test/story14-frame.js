@@ -50,9 +50,9 @@ const INP=fs.readFileSync(path.join(__dirname,'../measure/inpage4.js'),'utf8');
     const t=S.turn;for(let g=0;g<40&&S.turn===t;g++){Q.length=0;used=0;if(S.dead||S.out){S.dead=false;S.out=0;S.suc=60}if((S.age||0)>40)S.age=40;/* the story bot keeps her alive: a dead month skips a67Month, so a long life (Thanh mai chapters) never closed its last chapter */try{nextBuoi()}catch(e){err=err||('buoi '+e.message);break}}Q.length=0;
     if(S.turn===t){if(++window.__stall>5){err=err||('time stopped at month '+S.turn+' buổi '+S.buoi+' '+JSON.stringify({mg:!!S.mg,out:S.out,dead:S.dead,place:S.place,exam:!!S.exam,kc:!!S.kc,wait:S.wait,night:S.night,ms:S.st.ms&&S.st.ms.id,M:S.st.M&&S.st.M.a}).slice(0,300));break}}else window.__stall=0}
    return {k:S.origin.k,want:k,road:S.st.f14&&S.st.f14.road,seq,ends,ctx,host,all:!!S.st.ch.all,n:S.st.ch.n,fin:S.st.ch.fin||'',months:mon,err}}});
- const FB=[];for(const k of ['tt','dtq','muoi','cn','nc','td','ch','thd','cnv'])FB.push(await p.evaluate(k=>window.__fast(k,'rand',99),k));
+ const FB=[];for(const k of ['tt','dtq','muoi','cn','nc','td','ch','thd','cnv'].concat(await p.evaluate(()=>typeof ORIGIN_BR==='object'?Object.keys(ORIGIN_BR):[])))FB.push(await p.evaluate(k=>window.__fast(k,'rand',99),k));
  for(const r of FB)console.log(r.k,'(asked '+r.want+')',r.road,'host:'+JSON.stringify(r.host),'n='+r.n,r.all?'ALL':'',r.months+'m',r.fin,'|',r.seq.join(' '),r.err||'');
- chk('fast story bot ran every one of the 9 origins it asked for',FB.every(r=>r.k===r.want),FB.map(r=>r.want+'→'+r.k));
+ chk('fast story bot ran every origin (+ country branches: hòa thân · Bắc Địch) it asked for',FB.every(r=>r.k===r.want),FB.map(r=>r.want+'→'+r.k));
  const fbBad=FB.filter(r=>{const ns=r.seq.map(x=>+x.split(':')[0]);return r.err||!r.all||r.n!==14||ns.some((n,i)=>n!==i+1)||r.seq.slice(0,3).some(x=>!/^(\d+):(nhap14|sung14|tap14)\//.test(x))||!r.fin});
  chk('fast story bot: every origin walks chapters 1..14 in order, tutorial first, origin ending told',!fbBad.length,fbBad.map(r=>r.k+' '+r.seq.join(' ')+' '+(r.err||'')));
  chk('the rolled road opens chapter 4',FB.every(r=>r.seq[3]&&r.seq[3].split(':')[1].startsWith(r.road+'/')),FB.map(r=>r.road+' '+r.seq[3]));
