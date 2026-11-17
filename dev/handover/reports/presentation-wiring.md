@@ -23,12 +23,12 @@ STATUS: code + kit part + tests PUSHED; entrance animation / origin frames / gro
 | S3-205 harm / poison / rumour / seal | kinds existed, not wired | harm: ACT pond/pushp/trip/huydung/thathu/phonghoa; rumour: rumor/lygian/frame/kframe; seal: NOT wired (no single result hook found; resultShow already does win/fail/expose; contest-ui + promo-exam stamp = TODO) |
 ## Tests
 - `node dev/test/presentation-people.js <url> <out> [--shots] 755x1000@2 1180x820@2`: per size 0 page errors, every moment returns through the kit, no ghost left, Gọn animates nothing, hooks (death via dieIf, out via kpmOutCheck, preg via state scan, rumour + tat via forced-success ACT), perf max frame gap 17–26 ms, no overflow: ok:true at 755x1000@2 and 1180x820@2 (local build, LOCAL art only). NOTE: those runs used hidden/undecoded stage figures (see Blockers), so they prove the wiring + cleanup, not the look.
-- quickcheck: see CLAIMS row / tail of this file (run on b0b972b97 in background at report time).
+- quickcheck on b0b972b97: PASS · 132 s · open 917 ms · old save ok · perf median of 3 new/live: render 251/237 ms, tab 331/316 ms, buổi 932/979 ms (perf gate +5 %: met, −4.8 %) · core gates PASS · time-spill PASS.
 ## Blockers / what the successor must do
 1. VISUAL CHECK (owner rule: look at every shot): the stage tokens stay `.j59wait` (visibility hidden, stacked) until every figure body is measured; with a local partial art pull nothing is visible, and the roulette overlay `#kroul` re-opens after removal. Do it with the default CTM_IMG_BASE (CDN, ~20 s to load) and click the roulette "Tiếp" via the page, or on the coordinator's full-art box; take Fold 755x1000@2 + iPad 1180x820@2 shots of slap, poison, die, drag, preg, join and LOOK. Tune the filter strengths in kitFigFx if they read wrong (all in KFK_FIG / kitFigFx). The same test `--shots` mode takes them.
 2. S3-152 entrance animation (edict scroll) + 9 origin frames; S3-181 frame art per group/main/side; S3-180 group voices. Not started (budget). Needs: kit part for the entrance (an `kitEdictOpen` unroll using the painted edict from j93 kitEdict) and the 9 origin frame arts (ART REQUEST A1).
 3. seal moment wiring (contest result + promo-exam stamp → kitFx seal at the stamp element).
-4. Perf gate "buổi time not worse than live +5 %": not measured (quickcheck perf smoke covers a part).
+4. Perf gate: met by the quickcheck smoke (buổi 932 vs 979 ms); re-measure after the entrance animation lands.
 ## ART REQUESTS (do not draw; placeholder in code)
 - A1 origin frames: 9 painted event-dialog frames, one per origin (jpres sets data-kpres-origin only), 3:4 and 4:3, transparent centre, same family as the kit category frames.
 - A2 swaddled baby: painted sprite (1 frame, ~256 px, alpha) for the birth moment ("baby appears in her arms / beside her"); placeholder = lotus light + petals.
