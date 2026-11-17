@@ -16,6 +16,7 @@ Object.assign(BAL,{toil:{khac:1,
  /* the day's dress verdict by formality F (0 ngày thường, 1 thỉnh an / gặp bề trên / thị tẩm, 2 yến, lễ lớn):
     d = j92 outfit level − her own phẩm; r = worn luxury / her allowance (jinv) */
  dress:[{under:-2.75,rLo:0,fitD:-9,fitR:0,fitHi:.62,showR:.9},{under:-1.75,rLo:.2,fitD:-.75,fitR:.38},{under:-1,rLo:.3,fitD:-.25,fitR:.55}],
+ vuaK:.55,/* 'vừa' draws the SAME makeup layer as 'đẹp' at this share of its strength (owner 17/11 04:25Z); 'mặt mộc' (skipped) draws none */
  tier:[40,65,85],          /* makeup score → vụng < 40 ≤ vừa < 65 ≤ đẹp < 85 ≤ tuyệt */
  /* host reaction (thiện cảm; Hoàng thượng: + → Sủng +1, − → Sủng −1) by kind of host */
  react:{strict:{hopdip:2,hoppham:0,giandi:-3,photruong:-1,moc:-1,vung:-2,vua:0,dep:1,tuyet:2,diem:-3},
@@ -624,7 +625,11 @@ const TOIL_LOOKS={
  /* owner 15/11 22:xxZ: "vụng" = deliberate clumsy makeup in her colours: uneven blotchy blush, a powder patch (the colour layer adds lips past the line, smudged lids, crooked brows, smeared ink) */
  vung:{skin:[255,252,248,.08,.6],blush:[236,112,130,.30,.17,0],lip:[206,60,80,.4,.08,.036],powder:0,vung:1},
  diem:{skin:[255,252,248,.24,.64],blush:[236,104,124,.40,.20,0],lip:[198,40,64,.56,.084,.038],powder:0}};
-function toilLookOfP(p){try{if(!S)return null;if(p&&p!==S&&p.coop){const r=toilFriendRec(p);return r&&r.makeup&&r.look?r.look:null}if(p!==S)return null;if(TOIL.prev)return TOIL.prev.look;const r=toilToday(S);return r&&r.makeup&&r.look?r.look:null}catch(e){return null}}
+/* vừa = đẹp, lighter: the same layers, alpha x BAL.toil.vuaK (one strength constant) */
+{const d=TOIL_LOOKS.dep,k=BAL.toil.vuaK,a=v=>{const o=v.slice();o[3]=+(o[3]*k).toFixed(3);return o};TOIL_LOOKS.vua={skin:a(d.skin),blush:a(d.blush),lip:a(d.lip),powder:0}}
+/* the look a record draws: its own look, else 'vừa' (middle score, owner 17/11: a light 'đẹp' layer); mặt mộc / no makeup = none */
+function toilLookRec(r){if(!r||!r.makeup)return null;if(r.look)return r.look;return r.score!=null&&toilTier(r.score|0)==='vua'?'vua':null}
+function toilLookOfP(p){try{if(!S)return null;if(p&&p!==S&&p.coop){return toilLookRec(toilFriendRec(p))}if(p!==S)return null;if(TOIL.prev)return TOIL.prev.look;return toilLookRec(toilToday(S))}catch(e){return null}}
 const TOIL_SVGC={};
 function toilRnd(seed){let a=(seed*2654435761)>>>0||1;return()=>{a=(a+0x6D2B79F5)>>>0;let t=a;t=Math.imul(t^t>>>15,t|1);t^=t+Math.imul(t^t>>>7,t|61);return((t^t>>>14)>>>0)/4294967296}}
 /* col = her picks (toilColOf): the blush disc and the fallback lip oval take HER colours; noLip = the lips come from the colour layer (§60) */
@@ -642,7 +647,7 @@ function toilMakeupSvg(file,look,col,noLip){const L=TOIL_LOOKS[look];const v=toi
  `<radialGradient id="b"><stop offset="0" stop-color="${c(bl)}" stop-opacity="${bl[3]}"/><stop offset="${bl[5]||.35}" stop-color="${c(bl)}" stop-opacity="${(bl[3]*(bl[5]?.92:.55)).toFixed(3)}"/><stop offset="1" stop-color="${c(bl)}" stop-opacity="0"/></radialGradient>`+
  `<filter id="f" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="${(fw*.012).toFixed(3)}"/></filter></defs>`+
  `<g transform="rotate(${ang.toFixed(2)} ${cx.toFixed(2)} ${cy.toFixed(2)})"><ellipse cx="${cx.toFixed(2)}" cy="${(cy-d*(L.powder?.02:.18)).toFixed(2)}" rx="${(d*sk[4]*1.25).toFixed(2)}" ry="${(d*sk[4]*1.55).toFixed(2)}" fill="url(#s)"/></g>`+
- `<circle cx="${(lx+jl[1]).toFixed(2)}" cy="${(Y(ly)+jl[2]).toFixed(2)}" r="${(br*jl[0]).toFixed(2)}" fill="url(#b)" fill-opacity="${Math.min(1,jl[3])}"/><circle cx="${(rx+jr[1]).toFixed(2)}" cy="${(Y(ry)+jr[2]).toFixed(2)}" r="${(br*jr[0]).toFixed(2)}" fill="url(#b)" fill-opacity="${jr[3]}"/>`+(pw?`<ellipse cx="${pw[0].toFixed(2)}" cy="${pw[1].toFixed(2)}" rx="${pw[2].toFixed(2)}" ry="${(pw[2]*.7).toFixed(2)}" fill="rgb(255,250,246)" fill-opacity=".42" filter="url(#f)"/>`:"")+
+ `<circle cx="${(lx+jl[1]).toFixed(2)}" cy="${(Y(ly)+jl[2]).toFixed(2)}" r="${(br*jl[0]).toFixed(2)}" fill="url(#b)" fill-opacity="${Math.min(1,jl[3])}"/><circle cx="${(rx+jr[1]).toFixed(2)}" cy="${(Y(ry)+jr[2]).toFixed(2)}" r="${(br*jr[0]).toFixed(2)}" fill="url(#b)" fill-opacity="${jr[3]}"/>`+(pw?`<ellipse cx="${pw[0].toFixed(2)}" cy="${pw[1].toFixed(2)}" rx="${pw[2].toFixed(2)}" ry="${(pw[2]*.7).toFixed(2)}" fill="rgb(255,250,246)" fill-opacity=".28" filter="url(#f)"/>`:"")+
  (noLip?"":`<ellipse cx="${mx}" cy="${Y(my).toFixed(2)}" rx="${(fw*lp[4]).toFixed(2)}" ry="${(fw*lp[5]).toFixed(2)}" transform="rotate(${ang.toFixed(2)} ${mx} ${Y(my).toFixed(2)})" fill="${c(lp)}" fill-opacity="${lp[3]}" filter="url(#f)"/>`)+`</svg>`;
  return TOIL_SVGC[key]="data:image/svg+xml;charset=utf-8,"+encodeURIComponent(svg)}
 window.toilMakeupSvg=toilMakeupSvg;window.TOIL_FIT=TOIL_FIT;
@@ -699,7 +704,8 @@ function toilColFix(c){const o=toilColDef();if(c&&typeof c==="object"){for(const
 function toilColOfP(p){if(p&&p!==S&&p.coop){const r=toilFriendRec(p);return toilColFix(r&&r.col)}if(TOIL.prev)return TOIL.prev.col;const r=p===S?toilToday(S):null;return toilColFix(r&&r.col)}
 function toilColText(c){c=toilColFix(c);return ["mat","ma","son","may"].map(k=>toilColE(k,c[k])[1]).join(", ")}
 /* strength by look: lip / eyelid colour share, eyelid height (share of the lid→brow gap), brow tint, outer wing, lower lash line */
-const TOIL_MKS={vung:{lip:.62,eye:.5,eyeH:.62,brow:.5,wing:0,low:0,vung:1},dep:{lip:.54,eye:.5,eyeH:.5,brow:.45,wing:.08,low:0},diem:{lip:.86,eye:.7,eyeH:.68,brow:.68,wing:.22,low:.4}};
+const TOIL_MKS={vung:{lip:.54,eye:.5,eyeH:.55,brow:.45,wing:0,low:0,vung:1},dep:{lip:.54,eye:.5,eyeH:.5,brow:.45,wing:.08,low:0},diem:{lip:.86,eye:.7,eyeH:.68,brow:.68,wing:.22,low:.4}};
+TOIL_MKS.vua=Object.assign({},TOIL_MKS.dep,{lip:TOIL_MKS.dep.lip*BAL.toil.vuaK,eye:TOIL_MKS.dep.eye*BAL.toil.vuaK,brow:TOIL_MKS.dep.brow*BAL.toil.vuaK,eyeH:TOIL_MKS.dep.eyeH*BAL.toil.vuaK,wing:0});
 const MK_FIT={g:{},ld:{},face(f){const m=/^(?:por|fig)-([a-z]+-[a-z]*\d+)-/.exec(String(f||""));return m?m[1]:null},
  get(f){const g=this.face(f);if(!g)return null;const t=this.g[g];if(t)return t[f]||null;this.load(g);return null},
  load(g){if(this.ld[g])return;this.ld[g]=1;try{fetch("img/mk-fit/"+g+".json").then(r=>r.ok?r.json():null).then(j=>{if(j){MK_FIT.g[g]=j;try{if(typeof S!=="undefined"&&S&&!Q.length&&!TOIL.st)render();else if(TOIL.st&&TOIL.prev&&TOIL.prevUI)TOIL.prevUI()}catch(e){}}}).catch(()=>{})}catch(e){}}};
@@ -726,7 +732,7 @@ function toilMkDraw(im,v,look,col,box){const W=im.naturalWidth,H=im.naturalHeigh
  /* lips: outer minus the mouth opening */
  const R=toilRnd((col.seed|0)+11),VU=!!T.vung;const lc=P.slice(0,12).reduce((a,p)=>[a[0]+p[0]/12,a[1]+p[1]/12],[0,0]);
  /* vụng: the lip colour goes past the lip line (bigger, shifted outline), patchy */
- const lipO=VU?(()=>{const sx=1.12+.1*R(),sy=1.3+.2*R(),dx=(R()-.5)*u*.09,dy=(R()-.35)*u*.05;return P.slice(0,12).map(([x,y])=>[lc[0]+(x-lc[0])*sx+dx,lc[1]+(y-lc[1])*sy+dy])})():P.slice(0,12);
+ const lipO=VU?(()=>{const sx=1.04+.05*R(),sy=1.1+.1*R(),dx=(R()-.5)*u*.05,dy=(R()-.35)*u*.03;return P.slice(0,12).map(([x,y])=>[lc[0]+(x-lc[0])*sx+dx,lc[1]+(y-lc[1])*sy+dy])})():P.slice(0,12);
  const [cl,gl]=mk();toilSoft(gl,g=>{toilSmooth(g,lipO);toilSmooth(g,P.slice(12,20))},u*(VU?.05:.035),1,K);
  /* eyelids: soft layers from the lash line up toward the brow, stronger at the lash line, a small wing at the outer corner; the eye itself stays clear */
  const [ce,ge]=mk();const lerp=(a,b,t)=>[a[0]+(b[0]-a[0])*t,a[1]+(b[1]-a[1])*t];
@@ -746,9 +752,7 @@ const eh=VU?[.6+.55*R(),.3+.35*R()]:[1,1];let en=0;
  const [ci,gi]=mk();if(VU){gi.lineCap="round";gi.lineJoin="round";gi.strokeStyle="#000";const side=R()<.5?0:1;
   const Bu=[P.slice(40,45),P.slice(50,55)],Bl=[P.slice(45,50),P.slice(55,60)];/* upper edge outer→inner, lower edge inner→outer */
   const line=(L,w,a,blur)=>{gi.save();gi.globalAlpha=a;gi.lineWidth=w;gi.shadowColor="#000";gi.shadowBlur=blur*K;gi.beginPath();L.forEach((p,i)=>i?gi.lineTo(p[0],p[1]):gi.moveTo(p[0],p[1]));gi.stroke();gi.restore()};
-  const up=-(.035+.035*R())*u;line(Bu[side].map((p,i)=>[p[0],p[1]+up*(.4+.6*Math.sin(Math.PI*i/4))]),u*(.05+.02*R()),.62,u*.01);
-  const o=Bl[1-side],t=o[4],t2=o[3];const ext=[t[0]+(t[0]-t2[0])*(.9+.6*R()),t[1]+(t[1]-t2[1])*.9+u*(.05+.05*R())];line([t2,t,ext],u*.04,.55,u*.012);
-  const sm=Bl[side][4];line([sm,[sm[0]+(sm[0]-lc[0])*.18,sm[1]+u*(.18+.12*R())]],u*.07,.32,u*.06)}
+  /* owner 17/11 04:15Z: vụng stays PRETTY — no drawn / thick brows, no ink: only soft faults (uneven blush + a caked powder patch in the SVG layer, lip line a little off, soft uneven lids) */}
  const D=g0.getImageData(0,0,cw,chh),mI=gi.getImageData(0,0,cw,chh).data,mL=gl.getImageData(0,0,cw,chh).data,mE=ge.getImageData(0,0,cw,chh).data,mB=gb.getImageData(0,0,cw,chh).data,o=D.data;
  const Lum=i=>.299*o[i]+.587*o[i+1]+.114*o[i+2];let sl=0,nl=0,se=0,ne=0;
  for(let i=0;i<o.length;i+=4){const l=Lum(i);if(mL[i+3]>140){sl+=l;nl++}if(mE[i+3]>60&&l>110){se+=l;ne++}}

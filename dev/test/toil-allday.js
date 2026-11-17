@@ -6,8 +6,8 @@ const {chromium}=require('playwright');const [,,URL,VP]=process.argv;const m=/(\
  await p.goto(URL,{waitUntil:'domcontentloaded',timeout:0});await p.waitForFunction(()=>typeof start==='function'&&typeof toilMakeup==='function',null,{timeout:0});await p.waitForTimeout(1500);
  await p.evaluate(()=>{try{localStorage.clear()}catch(e){}document.getElementById('title').hidden=true;new MutationObserver(()=>document.querySelectorAll('.kroul,#kload').forEach(e=>e.remove())).observe(document.body,{childList:true});start()});
  await p.waitForFunction(()=>typeof S!=='undefined'&&S&&S.origin,null,{timeout:120000});await p.waitForTimeout(3000);
- for(const lk of ['vung','diem','dep']){
-  await p.evaluate(lk=>{Q.length=0;try{closeModal()}catch(e){}document.querySelectorAll('.kroul,#kload').forEach(e=>e.remove());const c=toilColFix(null);c.seed=toilWk();S.toilette={day:toilWk()*10,wk:toilWk(),score:lk==='dep'?85:30,makeup:true,style:'fit',dv:'chinh',F:0,occ:[],look:lk,col:c};TOIL.prev=null;toilMkPre();render()},lk);await p.waitForTimeout(3500);
+ for(const lk of ['vung','diem','dep','vua']){
+  await p.evaluate(lk=>{Q.length=0;try{closeModal()}catch(e){}document.querySelectorAll('.kroul,#kload').forEach(e=>e.remove());const c=toilColFix(null);c.seed=toilWk();S.toilette={day:toilWk()*10,wk:toilWk(),score:lk==='dep'?85:lk==='vua'?50:30,makeup:true,style:'fit',dv:'chinh',F:0,occ:[],look:lk==='vua'?null:lk,col:c};TOIL.prev=null;toilMkPre();render()},lk);await p.waitForTimeout(3500);
   const tabs=await p.evaluate(()=>[...document.querySelectorAll('#tabs button,.ktabs button,nav button,.kbar button')].map(b=>b.textContent.trim()).filter(Boolean).slice(0,12));
   const res={};
   for(const t of ['']. concat(tabs)){
