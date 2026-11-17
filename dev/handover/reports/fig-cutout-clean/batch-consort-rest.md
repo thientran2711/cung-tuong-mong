@@ -129,3 +129,9 @@ DONE: rank standard v4 (c01 a18, t1-t10, flowing hanfu + phi bach every tier) pu
 ## W3d v5 (17/11): rank-standard/consort-markers-v5.md + rank-standard-consort-v5-2row.jpg pushed (t2-t7,t9 new cuts, ids in markers). Still paused.
 ## W3d v6 (17/11): consort-markers-v6.md + rank-standard-consort-v6-2row.jpg pushed (C addendum applied). Still paused.
 ## W3d v6b (17/11): t6 phi bach fix pushed (rank-standard-consort-v6b-2row.jpg). Idle.
+## W3e (START_CTX ~10%) 17/11 ~05:50Z
+METHOD (no upload needed): FIGURES.json 'bg' = lineup sheet of the look (a18,a26,a36,a51 left to right). refs [bg, faces N2HYqYa6D9 bxVgMSX5Y2 dtPf4EDXSL eIyaPEVdqL] + prompt "LEFTMOST figure only in image 1 ... keep exact outfit". Test c01-t1 faithful (gen 8a6bDSqIrU). Only 23/69 remaining a18 keys have a bg; 400/976 shard keys have none (kc, ngheo, tm*, tcold, some t5-t8) -> upload old fig after 06:19Z reset.
+Tools: w3e/batch.py (TSV key,genid,url -> download, alpha check, finish_fig FORCE_HD, qa, sheet), w3e/upload.sh.
+HELD t1 (gen ids, NOT uploaded): see w3e/held.tsv (c08-t1 bxV7ugA5Y2, c09-t1 9ZF0JWpNYZ, c14-t4 3z5DP9yREY, c15-t1 gOtRrsCSXO, c13-t3 3z5D4FCREY pending look).
+AUDIT t1/t2 vs maid refs (a18, current CDN): rank-sample/consort-rest-A-t1t2-audit.tsv: all 32 OK by eye (no maid-like cut); c14-t1,c16-t1,c16-t2 borderline-plain.
+BLOCK: a subagent's images_generate (c13-t4) was refused by the auto classifier ('Destructive or Unwanted Actions'); not retried/worked around.
