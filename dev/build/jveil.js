@@ -40,18 +40,16 @@ function vlSrc(k,p){const t=vlTier({k},p||S);return `img/veil-${t||"t5"}.png`}
 (function(){if(typeof kitItemSrc!=="function")return;const k0=kitItemSrc;kitItemSrc=function(k,fb){if(vlIsK(k))return vlSrc(k);return k0.apply(this,arguments)}})();
 
 /* ---------- worn veil <-> p.scar.veil; old saves ---------- */
-/* vlFix (review/newlife-reset, owner bug 17/11): p.vl is ONLY a worn veil entry {k:'mcPG'|'mcnt',…}. Until that branch kLine (jvoice) kept its
-   line memory in S.vl too, so on a brand-new life the first spoken line made S.vl={…}: the veil code saw a 'veil' on a healed face, logged
-   'Vết thương trên mặt đã lành, ngươi tháo mạng che, cất vào rương' and put the memory object in her chest. Old saves: the memory moves to
-   S.vmem, and memory objects already pushed into a chest are taken out (a veil-less object whose values are all line-memory maps). */
+/* vlFix (review/newlife-reset, owner bug 17/11): p.vl is ONLY a worn veil entry. The ONE migration of the old voice memory (S.vl -> S.vmem, keyless
+   chest pieces dropped) is j8 itClean (it-key-guard, kept by main s29 17/11). vlFix only adds what itClean does not: the false line 'Vết thương trên mặt
+   đã lành, ngươi tháo mạng che' that bug logged leaves her log. It runs BEFORE itClean (wrapper below) while the old memory is still visible. */
 function vlMemLike(e){if(!e||typeof e!=="object"||Array.isArray(e)||e.k!=null)return false;const V=Object.values(e);return V.length>0&&V.every(x=>x&&typeof x==="object"&&!Array.isArray(x))||!V.length}
-function vlFix(p){if(!p)return;try{if(p.vl!=null&&!vlIs(p.vl)){const m=p.vl;p.vl=null;if(p===S&&vlMemLike(m)){S.vmem=Object.assign({},m,S.vmem||{});vlScrubLog()}}
- if(Array.isArray(p.inv)&&p.inv.some(vlMemLike)){const L=p.inv.filter(vlMemLike);p.inv=p.inv.filter(e=>!vlMemLike(e));if(p===S){L.forEach(m=>{S.vmem=Object.assign({},m,S.vmem||{})});vlScrubLog()}}}catch(e){}}
+function vlFix(p){if(!p||p!==S)return;try{if((p.vl!=null&&!vlIs(p.vl))||(Array.isArray(p.inv)&&p.inv.some(vlMemLike)))vlScrubLog()}catch(e){}}
 /* the false healing line of that bug: gone from her log when she never owned a veil (a real healing always follows a veil she wore) */
 function vlScrubLog(){try{if(!Array.isArray(S.logs)||vlIs(S.vl)||(S.inv||[]).some(vlIs))return;S.logs=S.logs.filter(l=>!/Vết thương trên mặt đã lành, ngươi tháo mạng che/.test(String(l)))}catch(e){}}
 function vlMig(p){try{vlFix(p);if(!p||!p.scar)return;if(p.scar.veil&&!p.vl){const P=Math.min(8,wdPOf(p));p.vl={k:vlKey(P,0),src:"cu",d:typeof wdWhen==="function"?wdWhen():""};
   if(p===S){S.wdk=S.wdk||{};S.wdk[p.vl.k]=1}else{p.wdk=p.wdk||{};p.wdk[p.vl.k]=1}}p.scar.veil=p.vl?1:0}catch(e){}}
-function vlSync(p){if(!p)return;vlFix(p);if(p.scar)vlMig(p);if(!vlNeed(p)&&p.vl){p.inv=p.inv||[];p.inv.push(p.vl);p.vl=null;
+function vlSync(p){if(!p)return;vlFix(p);if(p.scar)vlMig(p);if(!vlNeed(p)&&vlIs(p.vl)){/* only a real veil comes off (never a foreign object in the veil slot) */p.inv=p.inv||[];p.inv.push(p.vl);p.vl=null;
   if(p===S)try{log("Vết thương trên mặt đã lành, ngươi tháo mạng che, cất vào rương.")}catch(e){}}}
 function vlPeople(){const L=[S];try{for(const v of rivals)if(v&&v!==S)L.push(v)}catch(e){}return L}
 /* r1 (merge with main it-key-guard): j8 itClean (inside normAll / co-op) also moves an old voice memory out of S.vl; vlFix runs FIRST so it still sees
@@ -67,7 +65,7 @@ KIT_VEIL.tierOf=function(p){try{if(p&&p.vl&&vlNeed(p))return vlTier(p.vl,p)||VL_
 
 /* ---------- wear / take off (same function for everyone) ---------- */
 function vlWear(p,ix){const e=p&&p.inv&&p.inv[ix];if(!vlIs(e)||e.h||!vlNeed(p))return"";p.inv.splice(ix,1);if(e.from){e.src=e.src||e.from;delete e.from}if(p.vl){p.inv.push(p.vl)}p.vl=e;if(p.scar)p.scar.veil=1;return itm(e.k).n}
-function vlOff(p){vlFix(p);if(!p||!p.vl)return"";const n=itm(p.vl.k).n;p.inv=p.inv||[];p.inv.push(p.vl);p.vl=null;if(p.scar)p.scar.veil=0;return n}
+function vlOff(p){if(!p||!vlIs(p.vl))return"";const n=itm(p.vl.k).n;p.inv=p.inv||[];p.inv.push(p.vl);p.vl=null;if(p.scar)p.scar.veil=0;return n}
 function vlChest(p){return (p.inv||[]).map((e,ix)=>({e,ix})).filter(x=>vlIs(x.e)&&!x.e.h)}
 /* useItem on a veil = wear it (never consumed) */
 (function(){const u0=useItem;useItem=function(p,ix,tgt){const e=p&&p.inv&&p.inv[ix];if(vlIs(e)){const n=vlWear(p,ix);return n?`${NMc(p)} đeo ${n}. `:""}return u0.apply(this,arguments)}})();
