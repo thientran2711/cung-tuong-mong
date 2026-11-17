@@ -234,8 +234,8 @@ function sgTitle(k){return SG.K[k]&&SG.K[k].hide?"Thời cơ":ACT[k].n}
 SG.K.over={g:"nghe",t:"Nghe ngóng",eng:sgNghe,dur:"30 giây",how:SG.K.spy.how,hud:SG.K.spy.hud,steps:SG.K.spy.steps,ask:()=>"Nghe lén câu chuyện ở đây: tự mình nép sau bình phong nghe ngóng, hay nghe qua loa?"};
 SG.K.serv={g:"mac",t:"Mặc cả",eng:sgMac,dur:"3 hồi, mỗi hồi 10 giây",how:SG.K.bribe.how,hud:SG_HUD("10 giây"),steps:SG.K.bribe.steps,ask:()=>"Mua chuộc người hầu cung khác: tự mặc cả, hay giao cho người làm?"};
 const SG_ACTS=[["Dò la","spy"],["Tung tin đồn","rumor"],["Bỏ độc vào trà nàng","poison"],["Bỏ xạ hương vào thuốc nàng","musk"],["Đẩy con nàng xuống hồ","pond"],["Vu oan","frame"]];
-function sgServCost(s){return netIs(s,"greed")?15:30}
-function sgServOdds(s){return odA(S,35+nq(s,"greed",25)-nq(s,"timid",25)-nq(s,"loyal",10)-s.loyal/3+S.tamco/5)}
+function sgServCost(s){return nv(s,"bribeCost")}
+function sgServOdds(s){return odA(S,35+nq(s,"greed",BAL.net.k.bribeGreed)-nq(s,"timid",BAL.net.k.bribeTimid)-nq(s,"loyal",BAL.net.k.bribeLoyal)-s.loyal/3+S.tamco/5)}
 function sgPopPay(pi,tc){return()=>{if(!can(tc))return false;spend(tc);try{S.payOnPick=0}catch(e){}try{if(pi!=null&&S.visit){S.visit.tk=S.visit.tk||{};S.visit.tk[pi]=1}}catch(e){}return true}}
 function sgJob(p){if(!p||typeof S==="undefined"||!S)return null;if(!p.j)p.j="act";
  if(p.j==="act"||p.j==="place"){const v=RV(p.v),k=p.k,a=ACT[k],G=SG.K[k];if(!v||!a||!G)return null;
