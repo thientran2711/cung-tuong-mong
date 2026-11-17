@@ -13,3 +13,11 @@ Note: seals appear only after kitFigBody finishes measuring the picture (CDN ima
 
 ## Shots
 CDN img/_review/kit-figure-mood-r1/ (fold-room, fold-event, fold-place, ipad-room, ipad-event, ipad-place). Wipe: python3 dev/site/cdn_sync.py --wipe-review kit-figure-mood-r1.
+
+# r2 — PASS 1d4e9796 (review/kit-figure-mood-r2 = worker e684d672 + r1 fix dee2e13f + main e503c53e + 1 reviewer fix)
+- Seals: Fold + iPad fig-seal.js (MOTION=1 FAKE=1): all inside stage, not on face, 0 page errors; FAKE gian loop swaps in and out as designed.
+- Motion (KIT 38.4): live only on screen (IntersectionObserver); reduced-motion = 0 live / 0 running animations; Gọn from boot = 0 live. FOUND + FIXED: Settings toggle Cảnh động/Gọn did not touch seals already on screen (saveOpt does not re-render); jemoseal now re-evaluates on saveOpt (before 8 live, Gọn 0, back 8).
+- No frozen seals: room + tabs court/rel/kid/inv/act, every visible img.kemo is kemo-live with a running animation (0 frozen).
+- Perf (CPU 4x, Fold, 4 s rAF): real Dư đồ seals avg 16.7 ms, 0 frames >50 ms; 60 extra animated seals stress: avg 18.6 ms, 4 frames >50 ms (max 117 ms at insert) — far above real counts; Gọn 16.7 ms.
+- Tap card: known cause shows mood: cause; unknown cause shows "Nguyên do chưa rõ"; stranger "Tâm trạng chưa rõ". khoc/hon fallback: emoSealSrc gives buon/gian pictures (all 3 sets); kitEmoSeal.pop khoc swaps to buon picture + droop then restores the old key and class.
+- Old save 16/16. Shots not needed (no CDN upload for r2).
