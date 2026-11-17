@@ -44,7 +44,9 @@ function btrVariant(){const o=window.__btrVar;if(o)return{sea:o.sea||"xuan",fest
  let sea="xuan",fest=null;try{sea=SEAK[SEASON[S.month-1]]||"xuan"}catch(e){}try{const f=typeof festToday==="function"?festToday():null;if(f&&BTR_FEST[f.k])fest={k:f.k,name:f.name||""}}catch(e){}return{sea,fest}}
 function btrArc(a,b,W,H){const K=[],n=14;for(let i=0;i<=n;i++){const u=i/n,e=u*u*(3-2*u),t=a.t+(b.t-a.t)*e,v=a.v+(b.v-a.v)*e;
   const x=t*W,y=H*.78-Math.sin(Math.max(0,Math.min(1,t))*Math.PI)*H*.62;K.push({transform:`translate(${x.toFixed(1)}px,${y.toFixed(1)}px)`,opacity:Math.max(0,Math.min(1,v*(t<0||t>1?Math.max(0,1-Math.abs(t<0?t:t-1)*8):1)))})}return K}
-function buoiShift(){
+/* ORDER (owner 17/11): a scene that is running / queued (Học thành tài, reward, edict…) plays first; the buổi transition waits its turn in the SAME queue (kmPush), so it is never hidden under a scene */
+function buoiShift(){try{if(S&&!window.__bot&&typeof kmPush==="function"&&typeof kmHold==="function"&&kmHold()){kmPush(done=>{let ms=0;try{ms=btrGo()||0}catch(e){}setTimeout(done,ms+60)});return}}catch(e){}btrGo()}
+function btrGo(){
  try{if(!S||window.__bot||(typeof quiet!=="undefined"&&quiet))return;btrKill();
   try{if(typeof kitSfx==="function")kitSfx((typeof B4L!=="undefined"&&(S.buoi||0)===B4L)?"nightWatch":"buoi")}catch(e){}
   const b=((S.buoi||0)%4+4)%4,prev=btrPrev!=null?btrPrev:(b+3)%4;btrPrev=b;const C=BTR_C[b],V=btrVariant(),VS=BTR_SEA[V.sea]||BTR_SEA.xuan,VF=V.fest?BTR_FEST[V.fest.k]:null,VT=(VF||VS).tint;
@@ -80,6 +82,7 @@ function buoiShift(){
    addEventListener("pointerdown",skip,true);
   }else if(d.animate)d.querySelector(".btr-tint").animate([{opacity:.7},{opacity:0}],{duration:dur,fill:"forwards"});
   setTimeout(()=>{if(!window.__btrHold)end(still?30:kitPace(260))},dur);
+  return dur+(still?30:kitPace(260))+40;
  }catch(e){console.error("buoiShift",e)}}
 (function(){const st=document.createElement("style");st.id="btr-css";st.textContent=`
 .btr{position:fixed;inset:0;z-index:36;pointer-events:none;overflow:hidden}

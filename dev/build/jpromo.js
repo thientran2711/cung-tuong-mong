@@ -80,7 +80,7 @@ function kprevFit(root){try{const box=root.querySelector(".kprev-fig"),im=root.q
 function kitPersonReveal(o){if(!o||!o.who||typeof kmPush!=="function")return;window.__prRev=(window.__prRev||0)+1;
  kmPush(done=>{const st=kmStage("km-reward km-prev",kitPersonRevealHTML(o),{manual:true,dur:60000,onEnd:done});st.ov.id="kprevov";const root=st.ov.querySelector(".kprev");
   kprevFit(root);requestAnimationFrame(()=>kprevFit(root));const rs=()=>kprevFit(root);addEventListener("resize",rs);const mo=new MutationObserver(()=>{if(!st.ov.isConnected){removeEventListener("resize",rs);mo.disconnect()}});mo.observe(document.body,{childList:true});
-  try{if(typeof sfx==="function")sfx("sfx-open")}catch(e){}})}
+  try{if(typeof sfx==="function")sfx("sfx-open")}catch(e){}},{pre:(()=>{try{return [...String(kitPersonRevealHTML(o)).matchAll(/<img[^>]*\ssrc="([^"]+)"/g)].map(m=>m[1]).filter(u=>!/^data:/.test(u)).slice(0,3)}catch(e){return[]}})()})}
 function prServLine(s,r){const maid=s.role==="maid";const self=maid?"Nô tỳ":"Nô tài";const kind=maid?"một cung nữ":"một thái giám";
  return `«${self} ${kmEsc(s.name)} khấu kiến chủ tử. Chủ tử được tấn phong ${kmEsc(prRankName(r))}, Nội vụ phủ phụ cấp thêm ${kind} theo lệ, sai ${self.toLowerCase()} đến hầu hạ chủ tử. Từ nay xin chủ tử sai bảo.»`}
 function prServSub(s){const b=[];try{b.push(srkName(s))}catch(e){}if(s.age)b.push(`${s.age} tuổi`);if(s.org)b.push(s.org);return b.join(" · ")}
