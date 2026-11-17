@@ -28,14 +28,19 @@ function informer(it){const by=String(it&&it.by||"");let p=null;try{
 function byName(it){const p=informer(it);if(p&&p.name)return String(p.name);const by=String(it&&it.by||"");return by==="mat"?"Tai mắt":""}
 function face(it){const p=informer(it);if(p){try{return kitFace(p)}catch(e){}}return{src:"img/kit/unknown-f.webp",ini:"?",col:"#9a8a78"}}
 /* ---------- badge ---------- */
-function badgePos(b){try{const h=document.querySelector("header.hud");const e=[h.querySelector(".kseal-hud"),document.getElementById("emp")].find(x=>x&&x.getClientRects().length);
- const r=(e||h).getBoundingClientRect();const s=b.offsetWidth||34;b.style.top=Math.round(r.top+Math.max(0,(r.height-s)/2))+"px";b.style.left=Math.max(4,Math.round(e?r.left-s-6:r.right-s-8))+"px"}catch(x){}}
+/* the badge floats over the top bar: it takes the first free spot (nothing of the bar under it): left of the seal · under the seal · left of the time block · else ON the seal (no text there) */
+function badgePos(b){try{const h=document.querySelector("header.hud");const s=b.offsetWidth||34;const hr=h.getBoundingClientRect();const seal=h.querySelector(".kseal-hud")||document.getElementById("emp");const sr=seal&&seal.getClientRects().length?seal.getBoundingClientRect():null;
+ const tc=h.querySelector(".k3tc"),tr=tc&&tc.getClientRects().length?tc.getBoundingClientRect():null;
+ const leaves=[...h.querySelectorAll("*")].filter(e=>!e.children.length&&e!==b&&e.getClientRects().length&&!(sr&&seal.contains(e))&&!e.matches(".kseal")&&(e.textContent.trim()||e.tagName==="IMG"||e.tagName==="I")).map(e=>e.getBoundingClientRect()).filter(r=>r.width>1&&r.height>1);
+ const free=(x,y)=>x>=hr.left+2&&x+s<=hr.right-2&&y>=hr.top+2&&y+s<=hr.bottom-2&&!leaves.some(r=>x<r.right+3&&x+s>r.left-3&&y<r.bottom+2&&y+s>r.top-2);
+ const C=[];if(sr){C.push([sr.left-s-6,sr.top+(sr.height-s)/2],[sr.right-s,sr.bottom+3],[sr.left-s-6,sr.bottom+3])}if(tr)C.push([tr.left-s-8,tr.top+(tr.height-s)/2]);
+ let c=C.find(q=>free(q[0],q[1]));if(!c)c=sr?[sr.left+(sr.width-s)/2,sr.top+(sr.height-s)/2]:[hr.right-s-8,hr.top+4];/* nothing free (narrow bar): it sits ON the seal, which carries no text */
+ b.style.left=Math.round(c[0])+"px";b.style.top=Math.round(c[1])+"px"}catch(x){}}
 function kitTinBaoBadge(){try{let b=document.getElementById("ktbbadge");const L=items(),n=L.filter(x=>!x.seen).length;const hud=document.querySelector("header.hud");
- if(!L.length||!hud||!hud.getClientRects().length){if(b)b.remove();document.body.classList.remove("ktb-has");return null}
- document.body.classList.add("ktb-has");
+ if(!L.length||!hud||!hud.getClientRects().length){if(b)b.remove();return null}
  if(!b){b=document.createElement("button");b.type="button";b.id="ktbbadge";b.className="ktbb";b.innerHTML=`<i class="khap" aria-hidden="true">!</i>`;document.body.appendChild(b)}
  b.classList.toggle("on",n>0);b.classList.toggle("calm",calm());b.dataset.n=String(n);
- const lab=n>0?`Tin báo: ${n} tin mới`:"Tin báo (đã xem hết)";b.setAttribute("aria-label",lab);b.title=lab;badgePos(b);return b}catch(e){console.error("kitTinBaoBadge",e);return null}}
+ const lab=n>0?`Tin báo: ${n} tin mới`:"Tin báo (đã xem hết)";b.setAttribute("aria-label",lab);b.title=lab;badgePos(b);clearTimeout(kitTinBaoBadge.t);kitTinBaoBadge.t=setTimeout(()=>{const x=document.getElementById("ktbbadge");if(x)badgePos(x)},500);try{if(window.ResizeObserver&&!kitTinBaoBadge.ro){kitTinBaoBadge.ro=new ResizeObserver(()=>{const x=document.getElementById("ktbbadge");if(x)badgePos(x)});kitTinBaoBadge.ro.observe(hud)}}catch(e){}return b}catch(e){console.error("kitTinBaoBadge",e);return null}}
 /* ---------- toast ---------- */
 function toastShow(it){const hud=document.querySelector("header.hud");let el=document.getElementById("ktbtoast");if(el)el.remove();
  el=document.createElement("div");el.id="ktbtoast";el.className="ktbt";el.setAttribute("role","status");el.dataset.tb=it.id;
@@ -47,12 +52,12 @@ function toastShow(it){const hud=document.querySelector("header.hud");let el=doc
 function next(){if(TB.t)return;const it=TB.queue.shift();if(!it)return;if(modalOpen()){return next()}toastShow(it)}
 function kitTinBaoToast(it){if(!it||!it.id||TB.toasted[it.id])return false;TB.toasted[it.id]=1;if(it.seen||modalOpen())return false;TB.queue.push(it);next();return true}
 /* ---------- card ---------- */
-function goDuDo(it){try{const b=document.querySelector('#tabs [data-tab="go"]');if(b)b.click()}catch(e){}}
+function goDuDo(){try{const b=document.querySelector('#tabs [data-tab="go"]');if(b)b.click()}catch(e){}}
 function kitTinBaoCard(){try{const L=items();if(!L.length){if(typeof kitLine==="function")kitLine("Chưa có tin báo",2600);return null}
  const U=L.filter(x=>!x.seen),A=U.concat(L.filter(x=>x.seen));
  const facts=A.map(it=>{const p=informer(it);const t=`<b>${esc(plName(it.place))}</b>${it.seen?" · đã xem":""}: ${it.line}`;return p?{who:p,text:t}:{text:t}});
- const seen={};const opts=A.filter(it=>!seen[it.place]&&(seen[it.place]=1)).map(it=>({n:`Để ta tới xem · ${esc(plName(it.place))}`,fx:{},go:()=>{A.filter(x=>x.place===it.place).forEach(x=>{try{tinBaoSeen(x.id)}catch(e){}});goDuDo(it);kitTinBaoBadge()}}));
- const m=kitModal({kind:"news",title:"Tin báo",sub:U.length?`${U.length} tin mới`:"Đã xem hết",facts,opts,btn:"Thôi",onClose:()=>kitTinBaoBadge()});
+ const pl=[...new Set(A.map(x=>x.place))];const opts=[{n:pl.length===1?`Để ta tới xem · ${esc(plName(pl[0]))}`:"Để ta tới xem",fx:{},go:()=>{try{tinBaoSeen()}catch(e){}goDuDo();kitTinBaoBadge()}},{n:"Thôi",fx:{},go:()=>kitTinBaoBadge()}];
+ const m=kitModal({kind:"news",title:"Tin báo",sub:U.length?`${U.length} tin mới`:"Đã xem hết",facts,opts,onClose:()=>kitTinBaoBadge()});
  try{tinBaoSeen()}catch(e){}TB.card++;setTimeout(kitTinBaoBadge,0);return m}catch(e){console.error("kitTinBaoCard",e);return null}}
 /* ---------- wiring ---------- */
 document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("#ktbbadge");if(!b)return;e.stopPropagation();e.preventDefault();try{if(typeof sfx==="function")sfx("sfx-tap")}catch(x){}kitTinBaoCard()},true);
@@ -69,7 +74,6 @@ const st=document.createElement("style");st.id="kit-tinbao";st.textContent=`
 .ktbb.on .khap{animation:ktbBlink calc(1.1s*var(--pace,1)) ease-in-out infinite}.ktbb.calm .khap{animation:none}
 .ktbb[data-n]:not([data-n="0"]):not([data-n="1"]):after{content:attr(data-n);position:absolute;top:-4px;right:-4px;min-width:14px;height:14px;line-height:14px;border-radius:7px;padding:0 3px;box-sizing:border-box;text-align:center;font:700 .62rem/14px var(--body,inherit);color:#fff;background:var(--k-seal,#9a2c1c);box-shadow:0 0 0 1.5px var(--k-card,#fffaf0)}
 .ktbb:active{transform:scale(.94)}
-body.ktb-has header.hud .k3tc{padding-right:40px;box-sizing:border-box}
 @keyframes ktbBlink{0%,100%{opacity:1;box-shadow:0 0 0 1.5px #fff8e6,0 0 10px var(--trim,#e6c25a)}50%{opacity:.35;box-shadow:0 0 0 1.5px #fff8e6,0 0 2px var(--trim,#e6c25a)}}
 .ktbt{position:fixed;left:50%;transform:translateX(-50%);z-index:9760;max-width:calc(100vw - 24px);box-sizing:border-box;display:flex;align-items:center;gap:8px;padding:6px 14px 6px 8px;border-radius:14px;border:2px solid var(--trim,#e6c25a);
  background:#fffaf0f4;color:var(--ink,#3a2418);font:600 .84rem/1.3 var(--body,inherit);box-shadow:0 4px 14px #0004,0 0 0 1px var(--gold,#b8892b);cursor:pointer;transition:opacity .5s}
