@@ -27,7 +27,7 @@
 const LO={rate:8,cd:6,minPr:30,findW:[2,7],
  home:{mis:55,srv:15,riv:0},away:{mis:20,srv:65,riv:75},   /* % back home / turns up in another palace; the rest: never found */
  rivP:40,srvP:[20,45],                                       /* cause: a rival (when one's motive allows), a servant (careless servant) */
- tipW:[1,3],hearW:[1,2],recog:{own:15,fr:4,me:8},keepWear:25,expire:54,keepP:35,hearCd:6,
+ tipW:[1,3],hearW:[1,2],raiseK:1,thief:{danh:-10,sung:-5},recog:{own:15,fr:4,me:8},keepWear:25,expire:54,keepP:35,hearCd:6,
  act:{bac:30,duc:-4},
  cost:{ask:{k:1},cct:{k:1,bac:20},book:{k:1,bac:10},soat:{k:2}}};
 function loL(){S.lost=S.lost||[];return S.lost}
@@ -109,8 +109,8 @@ function loAskOdds(h,o,c){return cl(Math.round(40+aff(h,o)/2+(loHonest(h)?20:-10
 function loKeepOdds(c,a,h){return cl(Math.round(40+lostEv(c.id)*10+evG(a,h)*10+((a.danh||0)-(h.danh||0))/10-(h.mat||0)*3),5,95)}
 function loKeepHear(c,a,h){const nm=loNm(c.k);const o=loKeepOdds(c,a,h);
  if(roll(o)){const x=loEntry(c);if(x){lostUnwear(x.h,a);const i=x.h.inv.indexOf(x.e);if(i>=0)x.h.inv.splice(i,1);lostReturn(x.e,"xet")}
-  if(evG(a,h)>0)evA(a,h,-1);ap(h,{danh:-10,sung:-5});punish(h,"lấy trộm đồ",1);relAdd(h,a,-6);
-  return h===S?`<span class="r">Cung Chính ti soát cung ngươi, thấy ${nm} của ${wdNm(a)}.</span> Ngươi mang tội lấy trộm: Danh -10, Sủng -5, bị phạt. Món đồ về lại với chủ.`
+  if(evG(a,h)>0)evA(a,h,-1);ap(h,LO.thief);punish(h,"lấy trộm đồ",1);relAdd(h,a,-6);
+  return h===S?`<span class="r">Cung Chính ti soát cung ngươi, thấy ${nm} của ${wdNm(a)}.</span> Ngươi mang tội lấy trộm: Danh ${LO.thief.danh}, Sủng ${LO.thief.sung}, bị phạt. Món đồ về lại với chủ.`
    :`Cung Chính ti soát ${loPal(h)}, thấy ${nm} của ${wdNm(a)}. ${wdNmC(h)} mang tội lấy trộm: Danh -10, Sủng -5, bị phạt. Món đồ về lại với ${wdNm(a)}.`}
  c.asked=0;c.reT=wk()+LO.hearCd;relAdd(h,a,-6);
  return h===S?`Cung Chính ti soát cung ngươi, không thấy ${nm}. ${wdNmC(a)} chưa đủ chứng cứ; việc tạm gác.`
@@ -188,8 +188,8 @@ function loActs(c){const B=[];const me=c.own==="me",h=c.at?loP(c.at):null,atMe=c
  if(me&&!known&&c.st!=="done"){tra();return B}
  if(known){const x=loEntry(c);const o=x?cl(WD.clearBase+(h.mat||0)*WD.clearMat+wdFrameEv(h,S,x.e)*10,5,95):50;
   B.push(loBtn(c,"askback","Đòi lại êm thấm",`${word(loAskOdds(h,S,c))} · tốn: 1 khắc · thành: nàng trả lại món đồ · hỏng: nàng chối, thân -4`,c.hear?"đã báo Cung Chính ti":whyTime(1)));
-  if(loHigh(h,S)){const ev=loEmpEv(c,S,h),need=BAL.il.empEv;B.push(loBtn(c,"raise","Tâu Hoàng thượng xin soát cung",`tốn: 1 khắc · cần: ${need} chứng cứ thật (đang có ${ev}) · thành: Hoàng thượng hạ chỉ cho Cung Chính ti soát cung nàng trong 1–2 tuần; thấy món đồ thì về lại rương · kèm: ai có lỗi thật thì bị phạt, Danh -10; người vô can được minh oan · hỏng: không thấy, ${LO.hearCd} tuần sau mới tâu lại được`,c.hear?"đã tâu, đang chờ xét":(c.reT||0)>wk()?`vừa xét xong, chờ ${c.reT-wk()} tuần`:ev<need?`${wdNm(h)} phẩm cao hơn: cần ${need} chứng cứ thật (hỏi cung nhân, Cung Chính ti, sổ Nội vụ phủ)`:whyTime(1)))}
-  else B.push(loBtn(c,"raise","Báo Cung Chính ti thu hồi",`tốn: 1 khắc · thành: Cung Chính ti xét trong 1–2 tuần, soát cung nàng; thấy món đồ thì về lại rương · kèm: ai có lỗi thật (giữ đồ người khác, chối) thì bị phạt, Danh -10; người vô can được minh oan · hỏng: không thấy, ${LO.hearCd} tuần sau mới báo lại được`,c.hear?"đã báo, đang chờ xét":(c.reT||0)>wk()?`vừa xét xong, chờ ${c.reT-wk()} tuần`:whyTime(1)));
+  if(loHigh(h,S)){const ev=loEmpEv(c,S,h),need=BAL.il.empEv;B.push(loBtn(c,"raise","Tâu Hoàng thượng xin soát cung",`tốn: ${LO.raiseK} khắc · cần: ${need} chứng cứ thật (đang có ${ev}) · thành: Hoàng thượng hạ chỉ cho Cung Chính ti soát cung nàng trong ${LO.hearW[0]}–${LO.hearW[1]} tuần; thấy món đồ thì về lại rương · kèm: ai có lỗi thật thì bị phạt, Danh ${LO.thief.danh}; người vô can được minh oan · hỏng: không thấy, ${LO.hearCd} tuần sau mới tâu lại được`,c.hear?"đã tâu, đang chờ xét":(c.reT||0)>wk()?`vừa xét xong, chờ ${c.reT-wk()} tuần`:ev<need?`${wdNm(h)} phẩm cao hơn: cần ${need} chứng cứ thật (hỏi cung nhân, Cung Chính ti, sổ Nội vụ phủ)`:whyTime(LO.raiseK)))}
+  else B.push(loBtn(c,"raise","Báo Cung Chính ti thu hồi",`tốn: ${LO.raiseK} khắc · thành: Cung Chính ti xét trong ${LO.hearW[0]}–${LO.hearW[1]} tuần, soát cung nàng; thấy món đồ thì về lại rương · kèm: ai có lỗi thật (giữ đồ người khác, chối) thì bị phạt, Danh ${LO.thief.danh}; người vô can được minh oan · hỏng: không thấy, ${LO.hearCd} tuần sau mới báo lại được`,c.hear?"đã báo, đang chờ xét":(c.reT||0)>wk()?`vừa xét xong, chờ ${c.reT-wk()} tuần`:whyTime(LO.raiseK)));
   tra();return B}
  if(atMe&&(c.open||c.hear)){const ownK=c.kn["ome"]||c.hear;
   if(c.hear)tra();
@@ -224,7 +224,7 @@ function loInvHTML(){if(!S||S.dead)return"";const L=loMine();const D=loL().filte
 function loUI(a,id){const c=loGet(id);if(!c||c.st==="done"||!S||S.dead||Q.length)return;const nm=loNm(c.k);let r="";
  if(["ask","cct","book"].includes(a)){const C=LO.cost[a];if(!can(C.k)||(C.bac&&S.bac<C.bac))return;spend(C.k);r=loDo(a,S,c)}
  else if(a==="askback"){const h=loP(c.at);if(!can(1)||!h)return;spend(1);if(roll(loAskOdds(h,S,c))){const x=loEntry(c);if(x){lostUnwear(h,S);const i=h.inv.indexOf(x.e);if(i>=0)h.inv.splice(i,1);lostReturn(x.e,"tra")}r=`${wdNmC(h)} trả lại ${nm}.`}else{relAdd(S,h,-4);r=`${wdNmC(h)} chối không thấy ${nm}. Thân -4.`}}
- else if(a==="raise"){const h=loP(c.at);if(!can(1)||!h||c.hear||(c.reT||0)>wk())return;const hi=loHigh(h,S);if(hi&&loEmpEv(c,S,h)<BAL.il.empEv)return;spend(1);loRaise(c,S);r=hi?`Ngươi dâng chứng cứ, tâu Hoàng thượng xin soát ${loPal(h)} tìm ${nm}. Hoàng thượng chuẩn tấu: Cung Chính ti sẽ soát trong ${c.hear-wk()} tuần.`:`Ngươi báo Cung Chính ti thu hồi ${nm} ở ${loPal(h)}; sẽ xét trong ${c.hear-wk()} tuần.`}
+ else if(a==="raise"){const h=loP(c.at);if(!can(LO.raiseK)||!h||c.hear||(c.reT||0)>wk())return;const hi=loHigh(h,S);if(hi&&loEmpEv(c,S,h)<BAL.il.empEv)return;spend(LO.raiseK);loRaise(c,S);r=hi?`Ngươi dâng chứng cứ, tâu Hoàng thượng xin soát ${loPal(h)} tìm ${nm}. Hoàng thượng chuẩn tấu: Cung Chính ti sẽ soát trong ${c.hear-wk()} tuần.`:`Ngươi báo Cung Chính ti thu hồi ${nm} ở ${loPal(h)}; sẽ xét trong ${c.hear-wk()} tuần.`}
  else if(a==="giveback"||a==="handin"){if(!can(1))return;spend(1);const x=loEntry(c);const o=loP(c.own);if(x){lostUnwear(S);const i=S.inv.indexOf(x.e);if(i>=0)S.inv.splice(i,1);lostReturn(x.e,a==="handin"?"nop":"tra")}
   if(a==="giveback"&&o){relAdd(S,o,4);r=`Ngươi sai người trả ${nm} về ${wdNm(o)}. Thân +4.`}else{apply({danh:1});r=`Ngươi nộp ${nm} lên Nội vụ phủ trả về chủ. Danh +1.`}}
  else if(a==="sneak"){if(!can(1))return;spend(1);const x=loEntry(c);const o=loP(c.own);if(x){lostUnwear(S);const i=S.inv.indexOf(x.e);if(i>=0)S.inv.splice(i,1);lostReturn(x.e,"nop")}c.hear=0;r=`Người của ngươi lặng lẽ đặt ${nm} về rương ${wdNm(o)}. Không ai bị tra.`}
