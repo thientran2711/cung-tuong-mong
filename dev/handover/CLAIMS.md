@@ -660,7 +660,7 @@
 | coop-thin-d SẴN SÀNG KIỂM 099ce05b → review r1 (opus BIG co-op; brief briefs/review-coop-thin-d-r1.md) | review/coop-thin-d-r1 | B | session_01N1tNP6MvvQQJhGffLYV2m8 | RUNNING | 17/11 06:42Z |
 | one-core-roads r1 PASS 75bc9f05 (review/one-core-roads-r1 = review/one-core-roads, no reviewer fixes; contains main 6c4f21c3, FF-able; trial merge with one-core-arcs clean except rebuild files + baseline per-key min) → FOR MAIN (landing order dup(r2) → dup2 → arcs → roads) | review/one-core-roads-r1 | B | session_01N1tNP5phUb758q6HmgPWgY | PASS | 17/11 06:43Z |
 | origin-bd-branch — Bắc Địch becomes a country branch of hòa thân (OD:L1213–1220, B37), old saves map, measure bd only (opus; brief briefs/origin-bd-branch.md) | review/origin-bd-branch | B | session_01N1tNP2P9Eko2vdenJRPyk3 | RUNNING | 17/11 06:44Z |
-| story-frame review r1 (opus BIG) of 7be4cdc6 | review/story-frame-r1 | D | session_01964izELGvtEztUpxp4u3FC | RUNNING | 17/11 06:45Z |
+| story-frame review r1 (opus BIG) of 7be4cdc6 | review/story-frame-r1 | D | session_01964izELGvtEztUpxp4u3FC | PASS 7be4cdc6 (archived) → FOR MAIN batch | 17/11 06:45Z |
 | one-core-dup r2 re-review FAIL f97a5841: ~34 typed BAL.eff amounts left (10 same-rule texts, AOUT/evidence previews j78/jtsb/jlost/j92, relAdd-derived oán); guard one-core-text misses them; gates/merge/wording PASS; report reports/review-one-core-dup-r2.md | review/one-core-dup-r2 | B | session_01N1tNP2Wcx1hby3C2UmyxPs | FAIL | 17/11 07:45Z |
 | REVIEW trait-pool-r1 (opus BIG) | review/trait-pool-r1 | C ROOT-2 | session_011xDdVNywSx622xztN465ec | RUNNING | 17/11 06:54Z |
 | REVIEW npc-agent-ag2-r1 (opus BIG) | review/npc-agent-ag2-r1 | C ROOT-2 | session_011xDdVPQSbLtuVm6zoyJHBN | RUNNING | 17/11 06:56Z |
