@@ -247,3 +247,65 @@ Counts: 119 ladder lines. 64 lines belong to the 29 multi-copy concepts in secti
 | panel67 | j67.js:218 | j67.js:1819 | UI |
 
 Typed copies of BAL tables: jhc.js:39 `[5,20,45,75]` = fallback of BAL.oanLv (drop it). jexam.js:270 `(B.srvCd||[1,1,1,2,2])` = a truncated fallback of BAL.ex.srvCd [1,1,1,2,2,3] (jbal2.js:17) (drop it). `[0,18,20,22,24,24]` is not in jexam.js at HEAD; only BAL.ex.srvBar holds it.
+
+## 6. PART 2 — review/one-core-dup2 (successor worker session_01N1tNP5YW8yGvX2ZkQozRyk)
+PRIORITY #1 CHECK ('one-core-dup|quyW|affW|sungLv|BAL.loy|staff-root|finTier'): OD 3 (L221 side-chance scale, L247 quý words everywhere, L104 adults 18+) | ledger 0 | CLAIMS: staff-root (servants per rank, capOf, j10/j29), one-core-roads, one-core-arcs (finTier), trait-rename (trait labels) — left to them | main 0 / review/* 0 hits for these keys (no other branch moves them).
+START_CTX ≈ 5 % of 1M window (get_session reads 0; own estimate) → rollover at ≈ 30 %, ceiling 60 %.
+Base: review/one-core-dup 648461b5 (part 1, frozen under review) + origin/main 6c4f21c3 merged (c0ba82de). Merged review/one-core-dup-r1 3d43d535 at 0ffa37bf (reviewer's j28 ageBandOf / j13 LADW / j19 oddsChip; I did not touch the 71 BAL.eff text lines the r1 FAIL names — they belong to the r2 fix worker). review/one-core-dup-r2 not pushed yet at report time: merge it when it lands (expect generated-file conflicts only; re-run guard --update + one-core-dup2-same <c0ba82de> <r2>).
+Commits: 5eef2d13 concept cuts (quyLv, loy, wit, ducLv, sungLv, nightEnd) · 73c10f7c part 2 (tinhLv, tinLv, rareLv, sucLv, oanFade, tsDanger, age.adult, srvAge.old, pet careLow, ccWord, dead j21 oanW) · e6c8904e part 3: single-copy ladders → BAL.cut · d0e7994d baseline shrunk 11646 → 11557 · c66ef16a guard amt kind counts single-argument calls (e67dad(4)) + jroute rtHeatW handed back to one-core-arcs.
+Tools: dev/measure/one-core-dup2-move.py (the move, rules per file:line, --part2 / --part3), dev/measure/one-core-dup2-same.js <old-ref> (puts every BAL value back in place of the moved refs on BOTH sides and compares every top-level statement, IIFE bodies descended, acorn AST; only the listed owner-ruled functions may differ; negative check done: loy.trust 70→71 makes it FAIL on jtsb tsbGuard).
+
+### 6a. BEFORE / AFTER per concept (values unchanged unless the last column says so)
+| concept | places before | the ONE BAL key | behaviour change |
+|---|---|---|---|
+| Thiện cảm "quý" words | j21 affW (7 words: Thù/Lạnh nhạt/Thân, −60 cut), jhc quyW, jts tsQuy (≤−11 / ≤29 / ≤59), colour ±10 in j21 feel, jk2b att, jkrel | BAL.quyLv [-30,-10,10,30,60] + quyIx(); words only in jhc quyW; affW / tsQuy call quyW | YES (owner OD:L247 + VANPHONG:69): affW callers (j21 feel, j24 "… với ngươi", jk2b people strip) now show Ghét for ≤ −60 (was Thù), Không ưa for −29…−11 (was Lạnh nhạt), Quý mến for 30–59 (was Thân). tsQuy same words; only a fractional value in (−11,−10) could differ (aff is whole) |
+| Servant Lòng cuts | ~70 typed `loyal op N` in 40 modules (70/60/55/50/45/40/35/30/75/80) + jsgame sgLoyW 70/50/30 + jk3 colour 60/45 | BAL.loy {trust 70, close 60, firm 55, mid 50, warn 45, low 40, bad 35, out 30, deep 75, top 80} | no (each place keeps its own tier; the word ladder 70/50/30 and colour 60/45 still differ from each other — listed) |
+| NPC Tâm cơ cuts | j40 ×5, j43 ×2, j51 ×2, j70 ×4 (30/35/60/70, incl. (tc−30)/35) | BAL.wit {lo 30, mid 35, hi 60, top 70} | no |
+| Đức tiers | j3 / j8 / j85 monthly drift 60/20, j85 staff drift 70/25, j85 ducWord 80/60/40/20 + colour 40/60, jlogsync 60 | BAL.ducLv {up, down, staffUp, staffDown, word[4]} | no |
+| Sủng words | j24 70/45/25, j68f + j68h 55/30, j68g 60/35/15, jk2b 60/30/10, jkc ×2 60/30 | BAL.sungLv {emp, th, kinh, card, kc} | no (live cut sets kept per screen — OPEN, see 6b) |
+| Night tone | jne NT_TONE, j8 night text, j75 NPC grade: typed 6/3 | BAL.nightEnd.warm / .normal (already the key) | no |
+| Man's tình ý | j22 tinhW + 4 gates, j42 ×8, j24 ×2, jmen ×1 (10/30/40/50/60/70) | BAL.tinhLv {known, warm, prince, close, ally, love} | no |
+| Chủ tin colour | j42 chip + card (30/60 ×2) | BAL.tinLv {lo, hi} | no |
+| Rarity word | j69 ow69Rare, jk2b kitRare fallback (6/9) | BAL.rareLv [6,9] | no |
+| Sức words | jthaiy sucWord 70/50/30, jaudit Hỏi han 60/30 | BAL.sucLv {word, ask} | no (two live ladders kept — listed) |
+| Oán fade | j28 oanMonth NPC 2×persF, player flat 2 | BAL.oanFade 2 | no |
+| Nguy hiểm chung | jts chip 30 / 10, NPC act 35 (3 places) | BAL.tsDanger {hot 30, act 35, calm 10} | no |
+| Adult age | jage AGE_MIN 18 | BAL.age.adult 18 | no |
+| Old servant age | j25 eunuch "Tiểu → Lão" at 45 ×2 (same number as BAL.srvAge.mama, other meaning) | BAL.srvAge.old 45 | no |
+| Pet care word | jpet petCareW 70/30 (careOk 70 already in BAL) | BAL.pet.life.careOk + careLow 30 | no |
+| Side-chance word "nguy cơ" | j55 ccWord own 30/15 cao/vừa/thấp | j1 chanceLvl scale (chanceLo) | YES (owner OD:L221: side chances use Rất thấp/Thấp/Vừa/Cao/Rất cao): "lộ chuyện can chính (nguy cơ …)" now reads rất thấp … rất cao on the 8/18/35/60 cuts |
+| Oán word | j21 oanW 10/30/60 (dead: jhc window.oanW overrides at load) | BAL.oanLv (jhc, already) | no (dead copy deleted) |
+| 17 single-copy ladders (§3b B) | j5, j10 ×2, j31, j55 ×2, j71, j85 ×2, jmort, j99succ, jveil, jlost, jht ×2, jexam, jlux, jreign, jts, jsgame | BAL.cut.{rhythm, facRel, tuanDays, clanRel, form, virCong, wkQ, tho, succEnd, veil, lost, kidHp, exTier, luxRep, rgTrust, summon, sgStep} | no |
+
+### 6b. DISAGREEMENTS (two live copies, different numbers) — value chosen = live, unless an owner ruling
+1. Thiện cảm words: j21 affW vs VANPHONG — owner ruling OD:L247 → VANPHONG ladder everywhere (DONE, behaviour change above).
+2. Sủng words: 5 cut sets (70/45/25 · 55/30 · 60/35/15 · 60/30/10 · 60/30), no ruling, VANPHONG has no Sủng ladder → each screen keeps its live set under BAL.sungLv; NEEDS OWNER: one ladder + one word list (proposal BAL.sungLv one set [10,30,60] with the jk2b words Chưa để ý/Biết mặt/Để mắt/Sủng ái).
+3. Đức: ducWord makes 40–49 "thường" while the Thang Đức page says 20–49 "bạc đức" / 50–59 "đủ Đức" → live kept (word 20/40/60/80); page text typed in j85:164 left as is. NEEDS OWNER or a VANPHONG line.
+4. Thái hậu Đức drift runs TWICE a month for the player (j3 monthTick + j85 v85Month wrapper): live = double, kept; both now read BAL.ducLv. Foreman B: is the double intended? (if not, drop the j3 one).
+5. NPC Tâm cơ "spotted" bonus 15 (j40/j43) vs 12 (j70) — amounts kept (frozen list); cuts unified.
+6. Lòng: rule tiers vs the word ladder (sgLoyW 70/50/30) vs colour (jk3 60/45) — kept live; all in BAL.loy.
+7. Sức: jthaiy 70/50/30 vs jaudit 60/30 — live kept in BAL.sucLv.word / .ask.
+8. Night tone: no disagreement (all 6/3) — now one key.
+9. Child age bands (face j17 ≤2/≤6/≤12 vs figure j73 ≤6/≤11/≤16) and adult art bands (j3 eunBand 28/40/52, j28 ageBandOf 3 bands, jimg MEBANDS nearest), maid art at 45 (j3 maidSrc, j17) → ART, Foreman C (listed only, not touched).
+10. Ma ma 45: same number, two meanings → BAL.srvAge.mama (retire) + BAL.srvAge.old (called / looks old; j25 used; art j3/j17 left for Foreman C).
+
+### 6c. NOT MINE (listed only)
+- Servants per rank (capOf, fillStaff, close-maid +1), hire price 20 ×7, srkMax (j14:31 / jstaff:26), servant-trait numbers (j29 sentPen / confessRisk / bribeServ) → staff-root session_01N1tNP3ZSe15ZCwXea7LSMe.
+- j67 finale finTier 3/1/−1 + finale cut [2,−1] → one-core-arcs session_01N1tNP5MRPzxmbFfWjw6LuT.
+- Seats per rank (BAL.seat vs OD:L1538) and harem cap 16 vs OD:L1545 20 → Foreman D (review/residence-seats).
+- Art age bands j3 / j28 / jimg / j17 / j73 → Foreman C.
+- Single live copies after part 1's dead-copy delete (not duplicates any more, still in the frozen list): birthRisk (j32), npcAct weights (j28), danger bands (j24 BANDS).
+- Left typed (text that prints the amount, would need a text change): j25 kid care "thiếu bạc (cần 10)" + S.bac<10; j92 wedding auto odds 91/70/55/40; jtd voice idle ms; j85:52 ngôn virtue Sắc steps; j68h kid talent rumour; jdh perk wording.
+
+### 6d. GUARD (I own guard + baseline now)
+- amt kind missed single-argument calls (one-core-roads report): regex now `name\((?:…*?[(,])?\s*N` → also e67dad(4). Re-frozen with --allow-grow on Foreman B's order (a detection fix, not new numbers): 11557 → 11826 = +269 (jrd_dtq 109, jrd_tt 68, jrd_nc 32, jrd_muoi 9, jrd_td 2 → one-core-roads; j67 39, j97 10 → one-core-arcs); nothing lost; NONE in F3 modules, so nothing for this branch to move. coregates G1 is unaffected (live main does not count amt).
+- jroute rtHeatW ladder (+1) is back to main's typed form: review/one-core-arcs moves it to BAL.route.heatW (avoids two keys for one concept).
+
+### 6e. TESTS @ c66ef16a / 0ffa37bf (proof/guard) — browser tests ran on d0e7994d (later commit = guard regex + one jroute line back to main + one dropped BAL key)
+one-core-guard PASS 0 fails, no --allow-grow except the ordered detection fix above · one-core-dup2-same c0ba82de origin/review/one-core-dup-r1 PASS (66 modules, 241 cuts put back, AST identical except the 4 owner-ruled word functions affW / tsQuy / quyW / ccWord + dead j21 oanW) · quickcheck PASS (coregates PASS, old save ok, perf new/live render 272/272 ms) · coop-e2e 60/60 (LIVE Worker) · coop-one-world PASS · solo: no page errors. KIT FIRST: no UI part touched (only words/colour cuts inside existing kit rows). quickcheck re-run PASS on c66ef16a and on 0ffa37bf (after the r1 merge): core gates PASS, old save ok, render 239/261 ms new/live
+
+### 6f. NEXT / HANDOVER
+- Foreman B 06:03Z added: ~31 jroute rtCard khắc values (k:0..4), 18 j96 clamp/state odds, j92 Ngự tứ table = copy of j97's (→ BAL.arc.ntItem). Waits for review/one-core-arcs (c682afe6) reviewer PASS, then base on it (same files jroute/j96/j97) — not started.
+- Optional (Foreman B): the 2nd-table detector only sees typed tables ≥ 4 long; 3-long copies are not caught — not done.
+- Owner questions pending (6b): Sủng one ladder; Đức word vs Thang Đức page; double Thái hậu drift.
+- START_CTX ≈ 5 %; now ≈ 22 % (estimate) — below rollover (30 %).
