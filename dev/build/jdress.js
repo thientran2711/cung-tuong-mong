@@ -26,7 +26,7 @@ Object.assign(BAL.lux,{xx:{
  showBud:false}});   /* OD 08:10Z (line 187): NEVER show the rank allowance — only "Xa xỉ N" per item and the worn total; the player learns the limit from consequences. true = debug only */
 
 /* ---------- what people see of a dress ---------- */
-function dsVj(p){try{const r=rkOf(p);return (p.inv||[]).filter(e=>e&&e.w&&!e.h&&IT[e.k]&&IT[e.k].sl&&IT[e.k].rk>r).map(e=>e.k)}catch(e){return[]}}
+function dsVj(p){try{const r=rkOf(p);return (p.inv||[]).filter(e=>e&&e.w&&!e.h&&IT[e.k]&&itm(e.k).sl&&itm(e.k).rk>r).map(e=>e.k)}catch(e){return[]}}
 function dsSig(p){let L=[];try{L=luxWorn(p).slice()}catch(e){}try{const P=p.petOn!=null&&typeof tsbPets==="function"?tsbPets(p)[p.petOn]:null;if(P)L.push("pet:"+P.t)}catch(e){}
  return L.sort().join("|")}
 function dressRec(t,by){let x;try{x=luxOf(t)}catch(e){return null}return{w:wk(),sig:dsSig(t),sc:x.sc,bud:x.bud,vj:dsVj(t),by:by||""}}
@@ -47,7 +47,7 @@ function dressLookPlace(){try{if(!S||S.dead||!S.where)return;const by={};
 
 /* ---------- Dò la (both ways) also reports the dress: Xa xỉ, jewellery above rank, and the true phẩm of the worn robe / hairpin ---------- */
 function dressSpyTxt(a,t,by){const rec=dressLook(a,t,by);if(!rec)return"";try{if(typeof wdKnowAll==="function")wdKnowAll(a,t);if(typeof wdSee==="function"&&typeof wdStatus==="function")wdSee(a,t,wdStatus(t),by,true)}catch(e){}
- if(a!==S)return"";let vp=[];try{vp=(vpItems(t)||[]).map(e=>IT[e.k]?IT[e.k].n:e.k)}catch(e){}
+ if(a!==S)return"";let vp=[];try{vp=(vpItems(t)||[]).map(e=>itm(e.k).n)}catch(e){}
  const lux=`Xa xỉ ${rec.sc}${BAL.lux.xx.showBud?` (mức của nàng ${rec.bud})`:""}`;
  return `Y phục của ${wdNm(t)}: ${lux}${vp.length?`; vượt phẩm: ${vp.join(", ")}`:"; không có món nào vượt phẩm"}. `}
 (function(){if(typeof spyFind!=="function")return;const s0=spyFind;spyFind=function(a,t){const r=s0.apply(this,arguments);let add="";try{add=dressSpyTxt(a,t,a===S?"dò la":(a.name||""))}catch(e){}return (r||"")+add}})();
@@ -64,11 +64,11 @@ function dsSpyX(A){return Array.isArray(A)?A.map(o=>o&&o.n==="Sai đi dò la"&&o
  try{const r=dressNow(obs,t);if(r&&r.vj&&r.vj.length&&dsVj(t).length)return{st:"over",sure:true,by:r.by==="cùng chỗ"?"tận mắt thấy":r.by,jw:1}}catch(e){}return null};window.wdCause=wdCause})();
 (function(){if(typeof wdAccuse!=="function")return;const a0=wdAccuse;wdAccuse=function(a,t){let J=[];try{J=dsVj(t)}catch(e){}let st="ok";try{st=wdStatus(t)}catch(e){}
  if(!J.length||st==="tang")return a0.apply(this,arguments);
- const dropJ=()=>{t.inv=(t.inv||[]).filter(e=>!(e&&e.w&&!e.h&&IT[e.k]&&IT[e.k].sl&&IT[e.k].rk>rkOf(t)))};
- if(st==="over"){const r=a0.apply(this,arguments);if(/>thành</.test(r||"")){dropJ();return r+`${J.map(k=>IT[k].n).join(", ")} cũng bị tịch thu. `}return r}
+ const dropJ=()=>{t.inv=(t.inv||[]).filter(e=>!(e&&e.w&&!e.h&&IT[e.k]&&itm(e.k).sl&&itm(e.k).rk>rkOf(t)))};
+ if(st==="over"){const r=a0.apply(this,arguments);if(/>thành</.test(r||"")){dropJ();return r+`${J.map(k=>itm(k).n).join(", ")} cũng bị tịch thu. `}return r}
  /* the outfit itself is fine, but she wears jewellery above her rank: judged by the same odds, the same numbers as a Vượt phẩm outfit */
  const judge=judgeName(t),A0=wdNmC(a),T0=wdNm(t);for(const o of consorts()){try{dressLook(o,t,judge)}catch(e){}}
- const nm=J.map(k=>IT[k].n).join(", ");
+ const nm=J.map(k=>itm(k).n).join(", ");
  try{a.vpA92=wk();t.vpT92=wk()}catch(e){}
  if(!roll(oVP(a))){ap(a,{danh:-2});relAdd(a,t,-10);return `${A0} tố ${T0} vượt phẩm (${nm}), ${judge} bỏ qua, chỉ dặn lần sau giữ ý. ${a===S?"Danh -2. ":""}`}
  relAdd(a,t,-10);ap(a,{danh:2});dropJ();ap(t,{danh:-6});punish(t,"ăn mặc vượt phẩm",1);
@@ -78,7 +78,7 @@ function dsSpyX(A){return Array.isArray(A)?A.map(o=>o&&o.n==="Sai đi dò la"&&o
 function xxCause(obs,t){if(!obs||!t||obs===t)return null;const r=dressNow(obs,t);return r&&r.sc>r.bud?r:null}
 window.xxCause=xxCause;
 /* the most lavish worn piece comes off (jewellery: unworn into her chest; WD hairpin: taken off; never the robe or the veil) */
-function xxStrip(t){const C=[];for(const e of (t.inv||[]))if(e&&e.w&&!e.h&&IT[e.k]&&IT[e.k].sl)C.push({e,v:luxPiece(e.k),n:IT[e.k].n});
+function xxStrip(t){const C=[];for(const e of (t.inv||[]))if(e&&e.w&&!e.h&&IT[e.k]&&itm(e.k).sl)C.push({e,v:luxPiece(e.k),n:itm(e.k).n});
  try{const w=wdOf(t);if(w.tram&&w.tram.from!=="base"){const it=wdItem(w.tram);if(it)C.push({tram:1,v:luxPiece(it.k),n:it.n})}}catch(e){}
  if(!C.length)return"";const b=C.sort((x,y)=>y.v-x.v)[0];if(b.tram)wdTakeOff(t,"tram");else delete b.e.w;return b.n}
 function xxAccuse(a,t){const B=BAL.lux.xx;const c=xxCause(a,t);let x;try{x=luxOf(t)}catch(e){x={sc:0,bud:1}}const judge=judgeName(t),A0=wdNmC(a),T0=wdNm(t);
@@ -117,7 +117,7 @@ function dressSlots(p){const out=[];let w={};try{w=wdOf(p)}catch(e){}
   try{if(sl==="tram"||sl==="y"){const e=w[sl],it=wdItem(e);if(it)c={slot:sl,label,k:it.k,name:it.n,grade:it.g,src:kitItemSrc(it.k,it.icon),lux:luxPiece(it.k),over:wdP(e,p)>wdPOf(p)&&!(it.nt&&e.own===wdKey(p)),pKnown:wdKnowsE(e)}}
    else if(sl==="veil"){if(typeof veilOn==="function"&&veilOn(p))c={slot:sl,label,name:"Khăn che mặt",grade:veilGrade(p),src:veilSrc(p),lux:0}}
    else if(sl==="pet"){const P=p.petOn!=null&&typeof tsbPets==="function"?tsbPets(p)[p.petOn]:null;if(P){const T=petT(P);c={slot:sl,label,k:P.t,name:T.n,grade:Math.min(4,T.tr|0),src:petPSrc(P,false),lux:petLux(P.t)}}}
-   else{const e=(p.inv||[]).find(e=>e&&e.w&&!e.h&&IT[e.k]&&IT[e.k].sl===sl);if(e)c={slot:sl,label,k:e.k,name:IT[e.k].n,grade:dsGrade(e.k),src:(typeof keqArt==="function"?keqArt(e.k):"")||kitItemSrc(e.k),lux:luxPiece(e.k),over:IT[e.k].rk>rkOf(p),pKnown:true}}}catch(e){}
+   else{const e=(p.inv||[]).find(e=>e&&e.w&&!e.h&&IT[e.k]&&itm(e.k).sl===sl);if(e)c={slot:sl,label,k:e.k,name:itm(e.k).n,grade:dsGrade(e.k),src:(typeof keqArt==="function"?keqArt(e.k):"")||kitItemSrc(e.k),lux:luxPiece(e.k),over:itm(e.k).rk>rkOf(p),pKnown:true}}}catch(e){}
   out.push(c)}
  return out}
 window.dressSlots=dressSlots;

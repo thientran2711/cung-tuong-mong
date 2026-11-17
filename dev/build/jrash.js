@@ -33,8 +33,8 @@ PEND.rashcard=pp=>{const r=S&&S.rash;if(!r)return null;const x=rshOf(S);const o=
  o.push(ch70("Mời thái y kê thuốc",{c:{bac:-RASH.medBac},wt:[G70("hai tuần tới mỗi tuần lặn nhanh thêm")],ok:()=>{r.tr=2;return "Thái y kê thuốc bôi, thuốc uống."}}));
  o.push(ch70("Tự sắc thuốc thảo mộc",{p:cl(35+y*15,5,95),c:{suc:-3},wt:[G70("hai tuần tới mỗi tuần lặn nhanh thêm")],lt:[R70("uống sai vị, mẩn lâu thêm một tuần")],ok:()=>{r.tr=2;return "Ngươi tự sắc thuốc kim ngân, cúc hoa."},no:()=>{r.until++;return "Thuốc không hợp, mẩn lâu thêm."}}));
  if(typeof vlChest==="function"){const L=vlChest(S);
-  if(S.vl)o.push(ch70(`Tháo ${IT[S.vl.k].n}`,{wt:[G70("không còn vướng víu")],k:[R70(`Sắc mất trở lại ${RASH.d[r.sev]}`)],ok:()=>{vlOff(S);return "Ngươi tháo mạng che mặt."}}));
-  else if(L.length){const b=L.slice().sort((a,c)=>vlG(c.e)-vlG(a.e))[0];const it=IT[b.e.k];o.push(ch70(`Đeo ${it.n}`,{wt:[G70(`Sắc mất còn ${Math.round(RASH.d[r.sev]*VL.cover[vlG(b.e)])}`)],ok:()=>{const j=S.inv.indexOf(b.e);return j>=0&&vlWear(S,j)?`Ngươi đeo ${it.n}.`:""}}))}
+  if(S.vl)o.push(ch70(`Tháo ${itm(S.vl.k).n}`,{wt:[G70("không còn vướng víu")],k:[R70(`Sắc mất trở lại ${RASH.d[r.sev]}`)],ok:()=>{vlOff(S);return "Ngươi tháo mạng che mặt."}}));
+  else if(L.length){const b=L.slice().sort((a,c)=>vlG(c.e)-vlG(a.e))[0];const it=itm(b.e.k);o.push(ch70(`Đeo ${it.n}`,{wt:[G70(`Sắc mất còn ${Math.round(RASH.d[r.sev]*VL.cover[vlG(b.e)])}`)],ok:()=>{const j=S.inv.indexOf(b.e);return j>=0&&vlWear(S,j)?`Ngươi đeo ${it.n}.`:""}}))}
   else o.push({n:"Tìm mạng che mặt",fx:{},x:"chưa có mạng: tự tay kết, đặt mua hay xin ban",j67:"tốn: không tốn gì · thành: tự tay kết, đặt mua hay xin ban",go:()=>pushDil(mkP("vlget"),"Mạng che mặt")})}
  o.push(ch70("Để tự khỏi",{wt:[G70("không tốn gì")],k:[R70(`còn ${x.weeksLeft} tuần`)],ok:()=>"Ngươi để mẩn tự lặn."}));
  return{who:pMe(),t:`<p>Mặt ngươi nổi mẩn đỏ (${x.name}${r.how?", vì "+r.how:""}): Sắc đang mất ${x.lost}; còn chừng ${x.weeksLeft} tuần mới lặn.</p>`,o}};

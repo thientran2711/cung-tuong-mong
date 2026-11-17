@@ -147,7 +147,7 @@ function v85Month(){if(!S||S.dead)return"";let ev="";const season=S.turn%3===0;
   const lf=d>=70?1:d<25?-1:0;if(lf){(p.staff||[]).forEach(s=>{if(s.loyal!=null)s.loyal=cl(s.loyal+lf,0,100)});if(p.maid&&p.maid.loyal!=null)p.maid.loyal=cl(p.maid.loyal+lf,0,100)}
   /* (her Thái hậu / Hoàng hậu drift by Đức is written once, with numbers, in the turn-change line of jlogsync — log-sync r1) */
   if(me&&lf)ev+=lf>0?`Đức ${d}: kẻ hầu thêm Lòng (+1). `:`Đức ${d}: kẻ hầu bớt Lòng (-1). `;
-  if(!me){npcStudy(p);if(d>=60&&d<85&&(p.bac||0)>=60&&roll(5))withDeed("phát bạc cứu giúp cung nhân nghèo",()=>ap(p,{bac:-20,duc:3,danh:1}))}}
+  if(!me){npcStudy(p);if(d>=60&&d<85&&(p.bac||0)>=BAL.charity.bac*3&&roll(5))withDeed("phát bạc cứu giúp cung nhân nghèo",()=>ap(p,{bac:-BAL.charity.bac,duc:BAL.charity.duc,danh:BAL.charity.danh}))}}
  return ev}
 (function(){const m0=monthTick;monthTick=function(){const ev=m0.apply(this,arguments);let e2="";try{if(!S.dead)e2=v85Month()}catch(e){}return typeof ev==="string"?ev+e2:ev}})();
 /* ---- the danger ladder card names the Đức term ---- */

@@ -140,7 +140,7 @@ function kitOptPic(title,b){const t=kitOptPlain(title);const tryKey=(k,how)=>{if
  if(t){try{const v=typeof rivals!=="undefined"?rivals.find(r=>r&&r.name&&t.startsWith(r.name)):null;
    const f=v&&typeof pv==="function"?pv(v):/^Hoàng thượng$/.test(t)&&typeof pEmp==="function"?pEmp():/^Thái hậu$/.test(t)&&typeof pTH==="function"?pTH():null;
    if(f&&f.src)return{src:f.src,key:"",how:"face",face:true}}catch(e){}
-  try{if(typeof IT!=="undefined"&&typeof kitItemSrc==="function"){if(!kitOptPic.items){kitOptPic.items={};for(const k in IT){const n=IT[k]&&IT[k].n;if(n&&!kitOptPic.items[n])kitOptPic.items[n]=k}}
+  try{if(typeof IT!=="undefined"&&typeof kitItemSrc==="function"){if(!kitOptPic.items){kitOptPic.items={};for(const k in IT){const n=IT[k]&&itm(k).n;if(n&&!kitOptPic.items[n])kitOptPic.items[n]=k}}
    const k=kitOptPic.items[t]||kitOptPic.items[t.split(" · ")[0]];const s=k?kitItemSrc(k,""):"";if(s)return{src:s,key:"",how:"item"}}}catch(e){}}
  /* STAND-IN pictures (KIT §84.4): an option with no picture of its own yet borrows an existing one that fits, marked 'tạm' (kitTam) until its own exists */
  if(t)for(const [re,k] of KIT_OPT_TAM)if(re.test(t)){const own=tryKey(typeof kitActKey==="function"?kitActKey(t):"","act");if(own)return own;const r2=tryKey(k,"tam");if(r2){r2.tam=true;return r2}break}
