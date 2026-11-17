@@ -1053,12 +1053,12 @@ function kitPcKey(pc){const L=pc&&pc.querySelector(":scope > .pcl"),key=L&&L.que
  pc.querySelectorAll(":scope > .pcr .pcf .kpsec").forEach(sec=>{if(sec.querySelector(".kpst")&&!sec.querySelector(".kr,.kpnote,.kchips,button"))sec.remove()});
  if(lines.length){const d=document.createElement("div");d.className="kpkl";d.innerHTML=lines.map(([a,b])=>`<div><span class="kpkl-l">${a}</span> ${b}</div>`).join("");key.appendChild(d)}}
 function kitPcKeyFit(pc){try{const L=pc.querySelector(":scope > .pcl"),key=L&&L.querySelector(":scope > .kpkey"),pcp=L&&L.querySelector(":scope > .pcp");if(!key||!pcp||!pc.classList.contains("kpwide"))return;
- const max=parseFloat(pc.style.getPropertyValue("--kpcmax"))||0,nat=+pc.dataset.kpcw0||0;if(!max||!nat)return;
+ let max=parseFloat(pc.style.getPropertyValue("--kpcmax"))||0;const nat=+pc.dataset.kpcw0||0;if(!max||!nat)return;/* pcard-facts-2: the column's REAL visible height (the card's own padding/border take 2-3 px of --kpcmax): fit to what is on screen, nothing of the key block may sit under the edge */ if(L.clientHeight>0&&L.clientHeight<max)max=L.clientHeight;
  for(let i=0;i<4;i++){const cw=parseFloat(pc.style.getPropertyValue("--kpcw"))||nat;const gap=6;
   const wear=L.querySelector(":scope > .kwear"),wh=wear&&wear.offsetHeight?wear.offsetHeight+gap:0; /* r1: the outfit thumbnail row sits under the key block, it must not be pushed out of view either (Fold) — counted only while the figure stays >= 160 px wide */
   const mk=x=>{const need=pcp.offsetTop+pcp.offsetHeight+gap+key.offsetHeight+8+x,over=need-max;return{over,w:Math.max(112,Math.min(nat,Math.floor((pcp.offsetHeight-over)*550/1037)))}};
   let r=mk(wh);if(wh&&r.w<160)r=mk(0);const over=r.over,w=r.w;
-  if(Math.abs(over)<2||(over<0&&cw>=nat))break;
+  if((over<=0&&over>-2)||(over<0&&cw>=nat))break;
   if(Math.abs(w-cw)<1)break;pc.style.setProperty("--kpcw",w+"px")}}catch(e){}}
 function kitPcGrid(pc){try{if(!pc||pc.querySelector(".kpgrid"))return;const L=pc.querySelector(":scope > .pcl");if(!L)return;
  const T=e=>String(e||"").replace(/\s+/g," ").trim();const unk=v=>/^(chưa rõ|\?|không rõ)/i.test(v);

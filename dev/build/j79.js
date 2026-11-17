@@ -63,7 +63,7 @@ function kitRowsJoin(){return [...arguments].filter(Boolean).join("").replace(/(
 /* KIT §73b kitFactRows([{l:label, f:fact(html), d:{src,how,when}|null}]) — owner 17/11 ~14:15Z + ~14:40Z (review/pcard-facts): a known-fact row shows the FACT first, short
    ("Thích Cầm"); when / how / who found it open in a kit pop-up on tapping the fact (kit dotted underline, tip style). No prefix, no "…" cut-off.
    kitFactTap(factHtml, detail) = ONE fact (several facts in one row: pass the array as the row value). Detail missing -> plain text, nothing to open. */
-function kitFactDetail(d){if(!d)return"";if(typeof d==="string")return d;const R=[["Khi nào",d.when&&typeof kpDateText==="function"?kpDateText(String(d.when)):d.when],["Cách biết",d.how],["Nguồn",d.src&&typeof d.src==="object"?d.src.name:d.src]].filter(r=>r[1]);
+function kitFactDetail(d){if(!d)return"";if(typeof d==="string")return d;const R=[["Khi nào",d.when&&typeof kpDateFull==="function"?kpDateFull(String(d.when)):d.when],["Cách biết",d.how],["Nguồn",d.src&&typeof d.src==="object"?d.src.name:d.src]].filter(r=>r[1]);
  return R.map(r=>`<div class="kpopx"><b>${r[0]}:</b> ${r[1]}</div>`).join("")}
 function kitFactTap(f,d){const det=kitFactDetail(d);return det?`<span class="kgl kfx" tabindex="0" data-kfx="${kpEsc(det)}">${f}</span>`:f}
 function kitFactTipHtml(el){return `<div class="kpopt">${el.innerHTML}</div>${el.dataset.kfx}`}
@@ -274,7 +274,7 @@ function kitHxRoad(){try{if(typeof HX!=="object")return;const r=kitRoad();if(r==
  for(const k in KIT_HXMAP){const R=r&&KIT_GLOSS_ROAD[r],t=KIT_HXMAP[k];HX[k]=R&&R[t]!=null?`${t}: ${R[t].charAt(0).toLowerCase()+R[t].slice(1)}`:KIT_HX0[k]}}catch(e){}}
 window.kitHxRoad=kitHxRoad;
 /* ---------- popover (odds ladder, glossary): never a modal, never covers the scene for long; any tap closes ---------- */
-function kpPop(anchor,html,o){o=o||{};let p=document.getElementById("kpop");if(!p){p=document.createElement("div");p.id="kpop";p.className="kpop";document.body.appendChild(p)}
+function kpPop(anchor,html,o){o=o||{};if(typeof html==="string"&&/\bT\d{1,2}\/\d{1,3}\b/.test(html))html=kpDateFull(html);let p=document.getElementById("kpop");if(!p){p=document.createElement("div");p.id="kpop";p.className="kpop";document.body.appendChild(p)}
  p.innerHTML=html;p.hidden=false;const r=anchor.getBoundingClientRect();
  /* o.inside (act-dedupe UI): the pop-up sits ON the tapped card (never below it), so it cannot cover the next card in the list/grid */
  const W=o.inside?Math.max(120,Math.min(300,r.width-8,innerWidth-24)):Math.min(300,innerWidth-24);p.style.width=W+"px";
@@ -695,6 +695,8 @@ const kpYear=y=>`năm thứ ${y>=1&&y<=10?KP_NUM[y-1]:y}`;
 function kitDate(m,y,t,b,full){if(window.VP&&typeof VP.date==="function"){try{return VP.date(m,y,t,b)}catch(e){}}const mo=`Tháng ${KP_MON[(m-1)%12]||m}`,tu=t!=null?TUAN[t]:null,bu=b!=null?String(BUOI[b]).toLowerCase():null;
  return full?[mo,kpYear(y),tu,bu].filter(Boolean).join(", "):[mo,tu,kpYear(y)].filter(Boolean).join(" · ")}
 const KP_TDATE=/\bT(\d{1,2})\/(\d{1,3})\b(\s*·?\s*(thượng|trung|hạ) tuần)?/g;
+/* pcard-facts-2: ONE date format in every tip pop-up (kpPop) = the full wording guide form, "Tháng ba, năm thứ nhất, trung tuần" (same as the intel `when`) */
+function kpDateFull(s){return String(s).replace(KP_TDATE,(m,mo,y,x,tu)=>{const t=tu?["thượng","trung","hạ"].indexOf(tu):-1;return kitDate(+mo,+y,t>=0?t:null,null,true)})}
 function kpDateText(s){return s.replace(KP_TDATE,(m,mo,y,x,tu)=>`Tháng ${KP_MON[(+mo-1)%12]||mo}`+(tu?` · ${tu} tuần`:"")+` · ${kpYear(+y)}`)}
 function kpDateFix(root){try{const w=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);let n;const L=[];while((n=w.nextNode()))if(/\bT\d{1,2}\/\d/.test(n.nodeValue))L.push(n);L.forEach(n=>{n.nodeValue=kpDateText(n.nodeValue)})}catch(e){}}
 (function(){let q=false;const mo=new MutationObserver(ms=>{if(q)return;q=true;queueMicrotask(()=>{q=false;for(const m of ms){m.addedNodes.forEach(x=>{if(x.nodeType===1)kpDateFix(x);else if(x.nodeType===3&&/\bT\d{1,2}\/\d/.test(x.nodeValue))x.nodeValue=kpDateText(x.nodeValue)});if(m.type==="characterData"&&/\bT\d{1,2}\/\d/.test(m.target.nodeValue))m.target.nodeValue=kpDateText(m.target.nodeValue)}})});
