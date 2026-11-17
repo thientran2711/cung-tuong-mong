@@ -32,7 +32,7 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
  console.log('LANDED deeds: '+JSON.stringify(r.by));
  const tot=Object.values(r.byG.consort||{}).reduce((a,b)=>a+b,0);ok(tot>0,'consorts choose deeds from their act list',tot);
  /* 3 every chosen key = a player button of that group */
- const r3=await p.evaluate((byG)=>{const P=new Set(Object.keys(TW).concat(["effort"]));for(const k in AGCX)P.add("cx:"+k);["cx:study","cx:thHelp","cx:hhShield","cx:buy","cx:gift","cx:ally","cx:portrait","cx:humble","cx:tqGift"].forEach(k=>P.add(k));
+ const r3=await p.evaluate((byG)=>{const P=new Set(Object.keys(TW).concat(["effort"]));for(const k in AGCX)P.add("cx:"+k);["cx:study","cx:thHelp","cx:hhShield","cx:buy","cx:gift","cx:ally","cx:portrait","cx:humble","cx:tqGift"].forEach(k=>P.add(k));/* AG-ALL-2: a cx2 deed counts only if its player button label is really in the game's code */const SRC=[...document.scripts].map(x=>x.textContent).join("\n");for(const k in AGC2BTN)if(SRC.includes('n:"'+AGC2BTN[k])||SRC.includes('n:`'+AGC2BTN[k])||SRC.includes('>'+AGC2BTN[k]+'<'))P.add("cx2:"+k);
   for(const k in AGHH)P.add("hh:"+k);const TH=new Set(["th:gift","th:admon","th:release"]);const EMP=new Set(["emp:summon","emp:visit","emp:tea"]);/* the Emperor is never the player: his summons mirrors her Xin hầu cờ / đánh đàn (jgift kmEmpAct) *//* Thái hậu is never the player: her acts mirror the Empress's Ban thưởng / Khuyên / Ân xá */
   /* F3: every prefixed key mapped to its player button: harm:* → the rival card (j15 RVGRP, + Tẩm đồ / workshop); maid:* / srv:* → the player maid's SRVA rows */
   const RVK=new Set(RVGRP.flatMap(g=>g[1]).concat(["taint","cook"]));const okK=(g,k)=>{const m=/^(harm|maid|srv):(.+)$/.exec(k);

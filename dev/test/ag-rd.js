@@ -1,42 +1,74 @@
-/* AG-ALL-2 part 2b — the owner's Ngự hoa viên scenario (OD 17/11 ~15:25Z (2)) as an automated test. node dev/test/ag-rd.js [dev/index.html] [runs]
-   Noon. A maid of consort A stands in Ngự hoa viên. The player walks there; the maid tells her master in that khắc (her choice); A re-decides
-   in that khắc (a deed aimed at the player), walks over, and is in Ngự hoa viên in the next khắc: her record row and the Dư đồ view
-   (whereOf / the per-khắc counts) show her there. Also: a servant who chooses not to tell (quiet) → A keeps her plan; switch off → nothing. */
+/* AG-ALL-2d — the owner's Ngự hoa viên scenario as a KHẮC CHAIN + ONE SHARED CLOCK (owner OD 17/11 ~15:45Z L1638, ~16:00Z L1641).
+   node dev/test/ag-rd.js [dev/index.html] [runs]
+   1 CHAIN (her timeline, owner's words "k1 she enters → k2 maid present / scouts → k3 master knows + acts → k4 visible there"):
+     noon, she stands one walk-khắc from Ngự hoa viên; a maid of consort A is on an errand there. She walks in (k1 = khắc index 0, her walk).
+     k2 (index 1): the maid has seen her and spends this khắc going to tell A (her row "ag_tell"); A has NOT re-decided yet (no NPC a khắc ahead of her).
+     k3 (index 2): A hears at the START of this khắc, decides and walks (her row "go").  k4 (index 3): A is in Ngự hoa viên (row, whereOf, Dư đồ count).
+     a maid who keeps quiet → nothing; switch off → nothing.
+   2 SHARED ACT (her): an NPC comes to her in khắc k → popup "Có người tìm đến" with Tiếp chuyện / Không tiếp. Tiếp chuyện: the deed lands and HER clock
+     moves past the deed's khắc with the NPC's (both at k1+1). Không tiếp: her clock stays, the deed does not happen, the NPC's row keeps the khắc she spent.
+   3 SHARED ACT (NPC ↔ NPC): A's meeting deed aimed at B who stands there free → B's row holds "ag_with"; B elsewhere → the meeting deed drops.
+   → exit 1 on any FAIL or page error */
 const {chromium}=require('playwright');const URL0=process.argv[2]||'dev/index.html';const URL=/^(https?|file):/.test(URL0)?URL0:'file://'+require('path').resolve(URL0);const RUNS=+process.argv[3]||5;
 const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+m+(x!==undefined?' '+JSON.stringify(x):''))};
 (async()=>{const b=await chromium.launch();const p=await b.newPage({viewport:{width:755,height:1000}});const errs=[];p.on('pageerror',e=>errs.push(e.message));
  await p.goto(URL,{waitUntil:'domcontentloaded'});await p.waitForTimeout(2500);
  const r=await p.evaluate(async(RUNS)=>{const out={runs:[]};
-  const one=(mode)=>{localStorage.clear();SLOT=4;document.getElementById('title').hidden=true;for(let i=0;i<20;i++){window.__nlInner=1;start();window.__nlInner=0;if(!isSrv())break}
-   window.__bot=1;window.__agAll=1;Q.length=0;
-   for(let i=0;i<8&&(S.buoi||0)!==1;i++){Q.length=0;S.mg=0;try{nextBuoi()}catch(e){}Q.length=0}
-   placeWhere();agFlush();const R=agRec();if(!R)return{err:"no record"};
-   const A=liveRivals(true).find(v=>v.alive&&!v.out&&!v.confined&&!sameHouse(S,v)&&(v.staff||[]).some(s=>s.role==="maid")&&R.P["v"+v.id]&&travel(palaceOf(v),"vuon")===1);/* a palace one walk-khắc from the garden (the scenario: she arrives the next khắc) */if(!A)return{err:"no consort with a maid"};
-   const s=A.staff.find(x=>x.role==="maid");s.loyal=100;A.rel=90;A.oan=0;
-   const sid="s"+s.sid;if(!R.P[sid]){R.P[sid]=[0,1,2,3].map(()=>[null,"go",null,""]);R.who[sid]=[s.name,"maid"]}for(let q=0;q<4;q++)R.P[sid][q]=["vuon","go",null,""];{const D=agDz();D.P[sid]=D.P[sid]||[];D.P[sid][S.buoi||0]={pl:"vuon",a:"go",t:null,why:"",k:null,need:null}}/* her plan of this buổi: errands in the garden (the record is rebuilt from the plan on every resync) */
-   const aid="v"+A.id;for(let q=0;q<4;q++)R.P[aid][q]=[palaceOf(A),"go",null,""];const z=agZ();z.pend=z.pend.filter(x=>x.id!==aid);
+  const fresh=()=>{localStorage.clear();SLOT=4;document.getElementById('title').hidden=true;for(let i=0;i<20;i++){window.__nlInner=1;start();window.__nlInner=0;if(!isSrv())break}
+   window.__bot=1;window.__agAll=1;Q.length=0;for(let i=0;i<8&&(S.buoi||0)!==1;i++){Q.length=0;S.mg=0;try{nextBuoi()}catch(e){}Q.length=0}};
+  const PLS=()=>{const L=new Set();try{const R=agRec();for(const id in R.P)for(const e of R.P[id])if(e&&e[0])L.add(e[0])}catch(e){}return [...L]};
+  const one=(mode)=>{fresh();placeWhere();agFlush();
+   /* she stands one walk-khắc from the garden at khắc 0 */
+   const near=PLS().find(k=>k!=="vuon"&&k!=="home"&&k!=="lc"&&(()=>{try{return travel(k,"vuon")===1&&j95acc(S,k)}catch(e){return false}})());if(!near)return{err:"no place one khắc from the garden",pl:PLS()};
+   S.place=near;placeWhere();agFlush();const R=agRec();if(!R)return{err:"no record"};
+   const A=liveRivals(true).find(v=>v.alive&&!v.out&&!v.confined&&!sameHouse(S,v)&&(v.staff||[]).some(s=>s.role==="maid")&&R.P["v"+v.id]&&travel(palaceOf(v),"vuon")===1);if(!A)return{err:"no consort with a maid"};
+   const s=A.staff.find(x=>x.role==="maid");s.loyal=100;A.rel=90;A.oan=0;const sid="s"+s.sid,aid="v"+A.id;
+   const pinMaid=R2=>{if(!R2.P[sid]){R2.P[sid]=[0,1,2,3].map(()=>[null,"go",null,""]);R2.who[sid]=[s.name,"maid"]}for(let q=0;q<4;q++)if(R2.P[sid][q][1]!=="ag_tell")R2.P[sid][q]=["vuon","errand",null,""]};
+   const pinA=R2=>{const mine=agZ().pend.some(x=>x.id===aid);if(mine)return;for(let q=0;q<4;q++)R2.P[aid][q]=[palaceOf(A),"rest",null,""]};
+   pinMaid(R);pinA(R);const z=agZ();z.pend=z.pend.filter(x=>x.id!==aid);z.rq=[];pinA(R);
    const sv={keep:BAL.ag.kh2.rd.keep,quiet:BAL.ag.kh2.rd.quiet,slip:BAL.mind.slip,on:BAL.ag.kh2.rd.on};
    BAL.ag.kh2.rd.keep=mode==="go"?.0001:sv.keep;BAL.ag.kh2.rd.quiet=mode==="quiet"?1e9:mode==="go"?.0001:sv.quiet;BAL.mind.slip=0;if(mode==="off")BAL.ag.kh2.rd.on=0;
-   const rd0=AGD.stat.rd||0,tl0=AGD.stat.tell||0;
-   /* the maid is on an errand in the garden this buổi: the record is rebuilt on every resync, so put her there each time, before the re-decide hook reads it */
-   const rt0=agRdTick;agRdTick=function(){const R2=agRec();if(R2){if(!R2.P[sid])R2.P[sid]=[0,1,2,3].map(()=>[null,"go",null,""]);for(let q=0;q<4;q++)R2.P[sid][q]=["vuon","errand",null,""]}return rt0.apply(this,arguments)};
-   AG.rdMe=null;const dbg={};const t0=agTell;agTell=function(R2,pl,kh){if(pl==="vuon")dbg.t={kh,row:R2.P[sid]&&R2.P[sid][kh],srv:!!servById(s.sid),own:ownerOf(servById(s.sid))===A,same:R2===R};return t0.apply(this,arguments)};
-   let got=null;try{goTo("vuon");j95sync()}catch(e){got=e.message}agTell=t0;agRdTick=rt0;
-   const kA=agKh();const me=R.P.me?R.P.me[kA][0]:j95mePlace();
-   const rows=R.P[aid].map(e=>e[0]+"/"+e[1]);const deed=agZ().pend.find(x=>x.id===aid&&x.key===R.key);
-   let viewNext=null,cnt=null;if(deed){try{while(agKh()<deed.kh){spend(1);j95sync()}viewNext=whereOf(A);const C=j95counts(R,agKh());cnt=C&&C.vuon}catch(e){viewNext="err "+e.message}}
-   Object.assign(BAL.ag.kh2.rd,{keep:sv.keep,quiet:sv.quiet,on:sv.on});BAL.mind.slip=sv.slip;
-   return{dbg,mode,me,kA,told:(AGD.stat.tell||0)-tl0,rdN:AGD.stat.rdN,rd:(AGD.stat.rd||0)-rd0,deed:deed?{k:deed.k,kh:deed.kh,pl:deed.pl,t:deed.t}:null,rows,viewNext,cnt,got}};
-  for(let i=0;i<RUNS;i++)out.runs.push(one("go"));out.quiet=one("quiet");out.off=one("off");out.errs=AGD.errs.concat(AG.errs).slice(0,5);return out},RUNS);
- console.log(JSON.stringify(r));
- const G=r.runs.filter(x=>!x.err);
- ok(G.length>0&&G.every(x=>x.me==="vuon"),'she is in Ngự hoa viên after the walk',G.map(x=>x.me));
- ok(G.every(x=>x.told>=1),'the maid standing there tells her master in that khắc',G.map(x=>x.told));
- const went=G.filter(x=>x.deed&&x.deed.pl==="vuon"&&x.deed.t==="me");
- ok(went.length>=1,'consort A re-decides in that khắc: a deed aimed at her in Ngự hoa viên, after her walk (when she has such a deed she can pay for; else she keeps her plan)',G.map(x=>x.deed));
- ok(went.every(x=>x.deed.kh>x.kA),'A arrives in a LATER khắc (she has to walk)',went.map(x=>[x.kA,x.deed.kh]));
- ok(went.every(x=>x.viewNext==="vuon"&&x.cnt>=1),'Dư đồ: in that khắc A is shown in Ngự hoa viên (whereOf + per-khắc count)',went.map(x=>[x.viewNext,x.cnt]));
- ok(r.quiet&&!r.quiet.err&&r.quiet.told===0&&!r.quiet.deed,'a maid who keeps quiet → A does not know, keeps her plan',r.quiet);
- ok(r.off&&!r.off.err&&r.off.rd===0,'switch off (BAL.ag.kh2.rd.on=0) → no re-decide',r.off);
+   /* the maid is on an errand in the garden all buổi; A rests at home unless she re-decides (the record is rebuilt on every resync) */
+   const rt0=agRdTick;agRdTick=function(){const R2=agRec();if(R2){pinMaid(R2);pinA(R2)}return rt0.apply(this,arguments)};
+   const rd0=AGD.stat.rd||0,tl0=AGD.stat.tell||0;const T=[];
+   const snap=(lab)=>{const R2=agRec(),kh=agKh();let cnt=0;try{const C=j95counts(R2,kh);cnt=C&&C.vuon||0}catch(e){}T.push({k:kh,lab,me:R2.P.me[kh][0],maid:R2.P[sid]&&R2.P[sid][kh]?R2.P[sid][kh][1]:null,A:R2.P[aid][kh][0]+"/"+R2.P[aid][kh][1],Awhere:whereOf(A),told:(AGD.stat.tell||0)-tl0,rd:(AGD.stat.rd||0)-rd0,cnt})};
+   let got=null;try{AG.rdMe=null;snap("start");goTo("vuon");j95sync();snap("entered");for(let i=0;i<3&&agKh()<3;i++){spend(1);j95sync();snap("next")}}catch(e){got=e.message+" "+(e.stack||"").split("\n")[1]}
+   agRdTick=rt0;Object.assign(BAL.ag.kh2.rd,{keep:sv.keep,quiet:sv.quiet,on:sv.on});BAL.mind.slip=sv.slip;
+   const deed=agZ().pend.find(x=>x.id===aid)||null;return{mode,T,got,deed:deed?{k:deed.k,kh:deed.kh,pl:deed.pl,t:deed.t}:null,near}};
+  for(let i=0;i<RUNS;i++)out.runs.push(one("go"));out.quiet=one("quiet");out.off=one("off");
+  /* 2 shared act with her */
+  const sh=(ans)=>{fresh();placeWhere();agFlush();const R=agRec();const kh=agKh(),me=R.P.me[kh][0];
+   for(const v of liveRivals(true).filter(v=>v.alive&&!v.out&&!v.confined&&!sameHouse(S,v)&&R.P["v"+v.id])){let N;try{N=agNeedsC(v)}catch(e){continue}const O=agOptsG(v,N,null).filter(o=>o.t===S);if(!O.length)continue;
+    const o=O[0];const id="v"+v.id;const z=agZ();z.pend=z.pend.filter(x=>x.id!==id);agPlan(v,o,N,kh,me);const pd=z.pend[z.pend.length-1];agSpan(pd,o,v);
+    Q.length=0;const k0=agKh();agWatch();const card=Q.find(x=>x.t==="Có người tìm đến");if(!card)return{err:"no popup",k:o.k,me};
+    const names=(card.opts||[]).map(x=>x.n);const c=card.opts.find(x=>x.n===ans);c.go();Q.length=0;
+    return{k:o.k,k0,k1:agK1(pd),after:agKh(),names,inPend:agZ().pend.includes(pd),drop:!!pd.drop,row:agRec().P[id][pd.kh][1]}}
+   return{err:"no NPC deed aimed at her"}};
+  out.shRec=sh("Tiếp chuyện");out.shDec=sh("Không tiếp");
+  /* 3 NPC ↔ NPC */
+  {fresh();placeWhere();agFlush();const R=agRec();const kh=agKh();const L=liveRivals(true).filter(v=>v.alive&&!v.out&&!v.confined&&R.P["v"+v.id]);let o3={err:"no pair"};
+   for(const a of L){let N;try{N=agNeedsC(a)}catch(e){continue}const O=agOptsG(a,N,null).filter(o=>o.t&&o.t!==S&&typeof o.t==="object"&&o.t.id!=null&&AGTALK.has(o.k));if(!O.length)continue;const o=O[0],t=o.t;const tid="v"+t.id;if(!R.P[tid])continue;
+    const pl=R.P[tid][kh][0];const z=agZ();z.pend=z.pend.filter(x=>x.id!=="v"+a.id&&x.id!==tid);for(let q=0;q<4;q++)R.P[tid][q]=[pl,"rest",null,""];
+    const sv=BAL.ag.kh2.sh.dec;BAL.ag.kh2.sh.dec=0;
+    agPlan(a,o,N,kh,pl);let pd=z.pend[z.pend.length-1];agLand(pd);const rec=R.P[tid][kh][1];
+    /* away: B stands elsewhere */
+    for(let q=0;q<4;q++)R.P[tid][q]=[pl==="home"?"vuon":"home","rest",null,""];agPlan(a,o,N,kh,pl);pd=z.pend[z.pend.length-1];agLand(pd);const away={drop:!!pd.drop};
+    BAL.ag.kh2.sh.dec=sv;o3={k:o.k,rec,away};break}
+   out.npc=o3}
+  out.errs=AGD.errs.concat(AG.errs).slice(0,5);out.stat={shMe:AGD.stat.shMe,shNo:AGD.stat.shNo,shNpc:AGD.stat.shNpc,shAway:AGD.stat.shAway,rdCap:AGD.stat.rdCap,rdLate:AGD.stat.rdLate};return out},RUNS);
+ console.log(JSON.stringify(r).slice(0,3000));
+ const G=r.runs.filter(x=>!x.err&&!x.got);
+ console.log('KHẮC TIMELINE (run 1): '+(G[0]?G[0].T.map(t=>`k${t.k+1}[${t.lab}] me=${t.me} maid=${t.maid} A=${t.A} told=${t.told} rd=${t.rd} vuon#=${t.cnt}`).join(' | '):'-'));
+ ok(G.length===r.runs.length&&G.length>0,'runs set up (she one walk-khắc from the garden, A one walk-khắc away)',r.runs.map(x=>x.err||x.got||'ok'));
+ const at=(x,k)=>x.T.find(t=>t.k===k&&t.lab!=="start");
+ ok(G.every(x=>{const t=at(x,1);return t&&t.me==="vuon"&&t.told>=1&&t.maid==="ag_tell"&&t.rd===0}),'k2: she is in the garden; the maid saw her and spends this khắc going to tell A; A has not re-decided yet (no NPC ahead of her clock)',G.map(x=>at(x,1)));
+ /* A re-decides when she has a deed aimed at her she can pay for (else she keeps her plan, as the player would) */const W=G.filter(x=>x.T.some(t=>t.rd>0));
+ ok(W.length>=1&&W.every(x=>{const t=at(x,2);return t&&t.rd===1&&/\/go$/.test(t.A)}),'k3: A hears at the start of the khắc, decides and walks (row "go")',G.map(x=>at(x,2)));
+ ok(W.every(x=>{const t=at(x,3);return t&&t.A.split("/")[0]==="vuon"&&t.Awhere==="vuon"&&t.cnt>=1&&x.deed&&x.deed.kh===3&&x.deed.t==="me"}),'k4: A is in Ngự hoa viên (row, whereOf, Dư đồ count) with a deed aimed at her',G.map(x=>[at(x,3),x.deed]));
+ ok(r.quiet&&!r.quiet.err&&r.quiet.T.every(t=>t.told===0&&t.rd===0),'a maid who keeps quiet → A never knows, keeps her plan',r.quiet&&(r.quiet.err||r.quiet.T));
+ ok(r.off&&!r.off.err&&r.off.T.every(t=>t.rd===0),'switch off (BAL.ag.kh2.rd.on=0) → no re-decide',r.off&&(r.off.err||r.off.T));
+ ok(r.shRec&&!r.shRec.err&&r.shRec.names.join()==="Tiếp chuyện,Không tiếp"&&r.shRec.after===r.shRec.k1+1&&!r.shRec.inPend,'shared act: Tiếp chuyện → the deed lands and her clock moves on with the NPC (both at k1+1)',r.shRec);
+ ok(r.shDec&&!r.shDec.err&&r.shDec.after===r.shDec.k0&&r.shDec.drop&&/^ag_/.test(r.shDec.row||""),'shared act: Không tiếp → her khắc kept, the deed does not happen, the NPC\'s row keeps the khắc she spent coming',r.shDec);
+ ok(r.npc&&!r.npc.err&&r.npc.rec==="ag_with"&&r.npc.away.drop,'NPC ↔ NPC: the met one, free there, holds the shared act (ag_with); away → the meeting deed drops',r.npc);
  ok(!errs.length&&!r.errs.length,'no page / agent errors',errs.concat(r.errs).slice(0,5));
  await b.close();process.exit(res.every(x=>x)?0:1)})().catch(e=>{console.error(e);process.exit(1)});

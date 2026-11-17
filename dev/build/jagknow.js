@@ -34,7 +34,12 @@ function knOn(){try{return typeof agOn==="function"&&agOn()&&!!knB()&&!window.__
 function knH(s){let h=2166136261;s=String(s);for(let i=0;i<s.length;i++){h^=s.charCodeAt(i);h=Math.imul(h,16777619)}return ((h>>>0)%10000)/100}
 function knSeed(){S.tb=S.tb||{};if(S.tb.seed==null)S.tb.seed=Math.floor(Math.random()*1e9);return S.tb.seed}
 function knHit(tag,p){return knH(knSeed()+"|"+tag)<p}
-function knMemo(){const k=agKey();if(!KN.m||KN.m.key!==k)KN.m={key:k,x:{},t:{}};return KN.m}
+function knMemo(){const k=agKey();if(!KN.m||KN.m.key!==k)KN.m={key:k,x:{},t:{},at:{},kh:-1};let kh=0;try{kh=agKh()}catch(e){}if(KN.m.kh!==kh){KN.m.kh=kh;KN.m.x={}}/* AG-ALL-2d: who knows is re-read each khắc (news travels khắc by khắc); the tell / keep choices (t) stay for the buổi */return KN.m}
+/* AG-ALL-2d per-khắc chain (owner OD 17/11 ~15:45Z L1638): news carried by someone (a servant, her Tai mắt, a friend sending word) reaches the master at the
+   START of the khắc after the bearer's trip: seen at khắc q → the bearer reacts the next khắc (BAL.ag.kh2.rd.see) and spends it going (… .go) → known
+   from q + see + go. Seeing it oneself (presence), one's own deed and the calendar are known at once; a friend met face to face passes on what she knows. */
+function knRelay(){try{const B=BAL.ag.kh2.rd;return agRdOn()?(B.see||0)+(B.go||0):0}catch(e){return 0}}
+function knFirst(id,h,w){for(let kh=w[0];kh<=w[1];kh++)if(knAt(id,kh)===h.k)return kh;return -1}
 function knId(x){return x===S?"me":x&&x.sid!=null?"s"+x.sid:x&&x.id!=null?"v"+x.id:""}
 /* a servant's key: her sid, or "cm<master>" for a confidant maid (S.maid / v.maid carry no sid) */
 function knSid(s,m){return s.sid!=null?String(s.sid):"cm"+knId(m)}
@@ -73,12 +78,15 @@ function knFor(x,h,noFriend){if(!x)return null;const hid=knHid(h);const M=knMemo
  if(knFixed(h))r={by:"le",how:"le"};
  else if(knThere(id,h,w))r={by:"here",how:"here"};
  else{const wh=knWho(h);if(wh[0]===id)r={by:"here",how:"self"};}/* the doer knows her own deed */
- if(!r){for(const s of knStaff(x)){const how=knSrvKnows(s,x,h,w,hid);if(!how)continue;if(knTell(s,x,hid)==="tell"){r={by:"s"+knSid(s,x),how,s};break}}}
- if(!r){let o=0;try{o=oSee(x,false)*knB().eye/100}catch(e){}if(knHit("e"+id+"|"+hid,o))r={by:"mat",how:"mat"}}
- if(!r&&!noFriend){const F=knB().friend;for(const v of liveRivals(true)){if(v===x||!v.alive||v.out)continue;const a=aff(v,x);if(a<F)continue;/* the news travels when they meet (same place this khắc), or a close friend sends word (aff ≥ close) */if(a<knB().close){const nw=agKh();if(knAt(id,nw)==null||knAt("v"+v.id,nw)!==knAt(id,nw))continue}const k=knFor(v,h,true);if(!k||k.by==="le"||k.how==="self")continue;
+ const now=agKh(),D=knRelay();
+ if(!r){for(const s of knStaff(x)){const how=knSrvKnows(s,x,h,w,hid);if(!how)continue;const q=how==="here"&&s.sid!=null?knFirst("s"+s.sid,h,w):w[0];if(Math.max(q,w[0])+D>now){KN.stat.wait=(KN.stat.wait||0)+1;continue}/* still on her way to tell */if(knTell(s,x,hid)==="tell"){r={by:"s"+knSid(s,x),how,s};break}}}
+ if(!r&&w[0]+D<=now){let o=0;try{o=oSee(x,false)*knB().eye/100}catch(e){}if(knHit("e"+id+"|"+hid,o))r={by:"mat",how:"mat"}}
+ if(!r&&!noFriend){const F=knB().friend;for(const v of liveRivals(true)){if(v===x||!v.alive||v.out)continue;const a=aff(v,x);if(a<F)continue;/* the news travels when they meet (same place this khắc), or a close friend sends word (aff ≥ close) */const meet=(()=>{const nw=agKh();return knAt(id,nw)!=null&&knAt("v"+v.id,nw)===knAt(id,nw)})();if(a<knB().close&&!meet)continue;const k=knFor(v,h,true);if(!k||k.by==="le"||k.how==="self")continue;
+   if(!meet&&D>0){const ka=M.at["v"+v.id+"|"+hid+"|n"];if(ka==null||ka+BAL.ag.kh2.rd.go>now)continue}/* sending word: one trip after she knew (AG-ALL-2d) */
    /* she passes it on or keeps it to herself: her choice by how much she likes x (the servant's rule, thiện cảm for lòng) */
    const kk="f"+v.id+">"+id+"|"+hid;if(M.t[kk]==null){const T=knB().tell,lo=cl(a,0,100)/100;let c="keep";try{c=mindPick([["tell",Math.max(.01,lo*T.tell)],["keep",Math.max(.01,(1-lo)*T.keep)]],v)||"keep"}catch(e){}M.t[kk]=c}
    if(M.t[kk]==="tell"){r={by:"v"+v.id,how:"friend",v};break}}}
+ if(r&&M.at[mk]==null)M.at[mk]=now;/* the first khắc she knew it (a friend's word travels from then) */
  return M.x[mk]=r}
 /* ---------- the informer's line (jvoice: address by speaker and listener, mood by lòng / thiện cảm) ---------- */
 const KN_POOL={

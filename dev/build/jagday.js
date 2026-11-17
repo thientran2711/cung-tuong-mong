@@ -200,7 +200,7 @@ function agKhC(o,p){if(!o||!o.k)return 1;const k=o.k;if(o.kc!=null)return o.kc;
   let c=TW[k]?twCost(k):null;if(!c&&g==="cx"&&BAL.ag.cx&&BAL.ag.cx[x])c=BAL.ag.cx[x].c;if(!c&&g==="cx2"&&BAL.ag.cx2&&BAL.ag.cx2[x])c=BAL.ag.cx2[x].c;
   return cardCost({c:c&&typeof c==="object"?c:{}})}catch(e){return 1}}
 /* a khắc of her row she may still use: not a secret meeting / off duty / bound by a card, not a deed already there */
-function agKhFree(R,id,kh){const e=R&&R.P[id]&&R.P[id][kh];if(!e)return false;if(e[1]==="tryst"||e[1]==="meet"||e[1]==="offduty"||e[1]==="laundry"||/^ag_see:/.test(e[1]||""))return false;
+function agKhFree(R,id,kh){const e=R&&R.P[id]&&R.P[id][kh];if(!e)return false;if(e[1]==="tryst"||e[1]==="meet"||e[1]==="offduty"||e[1]==="laundry"||e[1]==="ag_tell"||/^ag_(see:|with$)/.test(e[1]||""))return false;
  if(agBound(id,kh,R.key))return false;/* the day plan labels her whole buổi row with its deed; the khắc really taken are the pending deeds' windows */
  for(const p of agZ().pend)if(p.id===id&&p.key===R.key&&!p.drop&&p.kh<=kh&&kh<=agK1(p))return false;return true}
 /* write a deed's window into the record: each khắc of [kh, k1] holds its place (the shadow stays there while it lasts) */
@@ -265,18 +265,21 @@ function agRdOn(){try{return agKhOn()&&BAL.ag.kh2.rd&&BAL.ag.kh2.rd.on}catch(e){
 function agRdLog(R,id,kh,k,t,why,pl){try{const L=R.acts=R.acts||[];L.push({id,kh,k,t,why,ok:1,ag:1,pl});if(L.length>60)L.shift()}catch(e){}}
 /* she heard: info = {pl, kh, who (the person it is about), why, by (the servant who told her)} */
 function agHeard(v,info){if(!agRdOn()||!v||v===S||typeof v!=="object"||!v.alive||v.out||v.confined||!info)return 0;const R=agRec();const id="v"+v.id;if(!R||!R.P[id])return 0;
- const B=BAL.ag.kh2.rd;const k0=info.kh!=null?info.kh:agKh();if(k0>=J95.KH-1)return 0;let N;try{N=agNeedsC(v)}catch(e){return 0}
+ const B=BAL.ag.kh2.rd;const k0=info.kh!=null?info.kh:agKh();if(k0>=J95.KH-1)return 0;AGD.rdC=AGD.rdC||{};AGD.rdC[R.key+":"+k0]=(AGD.rdC[R.key+":"+k0]||0)+1;let N;try{N=agNeedsC(v)}catch(e){return 0}
  let O=[];try{O=agOptsG(v,N,null).filter(o=>!info.who||o.t===info.who)}catch(e){agdErr("rdOpts",e)}
  AGD.stat.rdN=(AGD.stat.rdN||0)+1;
  const c=mindPick([["keep",B.keep*BAL.ag.routine]].concat(O.map(o=>[o,o.u])),v);
  if(!c||c==="keep"){agRdLog(R,id,k0,"ag:rd:keep",info.who?ledgerId(info.who):null,info.why||"",info.pl);return 0}
  let at=null;try{at=c.at(k0+1,v,c.t)}catch(e){}/* a deed aimed at the one she heard of goes where she heard that one is */if(info.who&&c.t===info.who&&info.pl)at=info.pl;if(!at)return 0;if(!j95acc(v,at)&&at!=="home"&&at!==palaceOf(v))return 0;
- const from=(R.P[id][k0]&&R.P[id][k0][0])||palaceOf(v);let w=0;try{w=at===from?0:travel(from,at)}catch(e){}const kh=k0+Math.max(1,w),kc=Math.max(1,agKhC(c,v));if(kh+kc-1>=J95.KH)return 0;
- for(let q=k0+1;q<kh+kc;q++){const e=R.P[id][q];if(!e||e[1]==="tryst"||e[1]==="meet"||agBound(id,q,R.key))return 0}
+ /* OD L1638/L1641 (one shared clock): she hears at the START of khắc k0 and decides + walks IN k0; she is at the place from k0 + walk (≥ 1).
+    A deed of hers already running in k0 ends first (she starts after its last khắc). */
+ let s0=k0;for(const p of agZ().pend)if(p.id===id&&p.key===R.key&&!p.drop&&p.kh<=s0&&s0<=agK1(p))s0=agK1(p)+1;
+ const from=(R.P[id][Math.max(0,s0-1)]&&R.P[id][Math.max(0,s0-1)][0])||palaceOf(v);let w=0;try{w=at===from?0:travel(from,at)}catch(e){}const kh=s0+Math.max(1,w),kc=Math.max(1,agKhC(c,v));if(kh+kc-1>=J95.KH)return 0;
+ for(let q=s0;q<kh+kc;q++){const e=R.P[id][q];if(!e||e[1]==="tryst"||e[1]==="meet"||/^ag_(see:|with$)/.test(e[1]||"")||agBound(id,q,R.key))return 0}
  /* she changes her mind: the deeds of hers not yet started in that time are dropped */
- const z=agZ();for(const p of z.pend.slice())if(p.id===id&&p.key===R.key&&p.kh>k0&&p.kh<kh+kc){p.drop=1;z.pend.splice(z.pend.indexOf(p),1);AG.stat.drop++}
- for(let q=k0+1;q<kh;q++)R.P[id][q]=[at,"go",null,info.why||""];/* on her way */
- c.need=c.need||"rd";agPlan(v,c,N,kh,at);AGD.stat.rd=(AGD.stat.rd||0)+1;
+ const z=agZ();for(const p of z.pend.slice())if(p.id===id&&p.key===R.key&&p.kh>=s0&&p.kh<kh+kc){p.drop=1;z.pend.splice(z.pend.indexOf(p),1);AG.stat.drop++}
+ for(let q=s0;q<kh;q++)R.P[id][q]=[at,"go",null,info.why||""];/* on her way (this khắc is spent walking) */
+ c.need=c.need||"rd";agPlan(v,c,N,kh,at);{const pp=agZ().pend[agZ().pend.length-1];if(pp&&pp.id===id&&pp.kh===kh)pp.go=[s0,kh]}AGD.stat.rd=(AGD.stat.rd||0)+1;
  agRdLog(R,id,k0,"ag:rd:"+c.k,c.t?ledgerId(c.t):null,info.why||"",at);
  if(!AG.syQ){AG.syQ=1;setTimeout(agSyncNow,0)}/* the shadows of the khắc to come follow at once */
  return 1}
@@ -285,15 +288,58 @@ function agTell(R,pl,kh,why,who,interest){const B=BAL.ag.kh2.rd;let n=0;
  for(const id in R.P){if(!/^s\d+$/.test(id))continue;const e=R.P[id][kh];if(!e||e[0]!==pl)continue;const s=servById(+id.slice(1));if(!s||s.out)continue;const m=ownerOf(s);
   if(!m||m===S||m===who||!m.alive||m.out)continue;const it=interest?interest(m):1;if(!(it>0))continue;
   const c=mindPick([["tell",B.tell*cl((s.loyal||0)/100,0,1)*it],["quiet",B.quiet]],s);if(c!=="tell")continue;
-  agRdLog(R,id,kh,"ag:tell",ledgerId(m),why,pl);n++;AGD.stat.tell=(AGD.stat.tell||0)+1;agHeard(m,{pl,kh,who,why,by:s})}
+  const kg=kh+B.see,due=kg+B.go;/* OD L1638: she sees at once, reacts the NEXT khắc (her khắc spent going to her master), he hears at the start of the khắc after */
+  if(kg<J95.KH&&R.P[id][kg]&&R.P[id][kg][1]!=="tryst"&&R.P[id][kg][1]!=="meet"){let mp=null;try{mp=R.P["v"+m.id]&&R.P["v"+m.id][kg]?R.P["v"+m.id][kg][0]:palaceOf(m)}catch(e){}R.P[id][kg]=[mp||palaceOf(m),"ag_tell",ledgerId(m),why]}
+  agRdLog(R,id,kh,"ag:tell",ledgerId(m),why,pl);n++;AGD.stat.tell=(AGD.stat.tell||0)+1;
+  const z=agZ();z.rq=z.rq||[];z.rq.push({key:R.key,due,kg,sid:id,m:ledgerId(m),pl,who:who===S?"me":who&&typeof who==="object"?ledgerId(who):null,why,by:ledgerId(s),kh});if(z.rq.length>B.qMax)z.rq.shift()}
  return n}
+/* deliver the news whose khắc has come (her clock passed the teller's khắc): the master hears at the START of that khắc (agHeard k0 = due).
+   BAL cap on re-deciders per khắc (low-end phones, OD L1638): over the cap the news waits one khắc. A news due after the buổi's last khắc
+   reaches her at the next buổi: she re-plans the rest of her day (agTouch, the day-plan rule). */
+function agRdDeliver(R,kh){const z=agZ();if(!z.rq||!z.rq.length)return 0;const B=BAL.ag.kh2.rd;let n=0;const keep=[];AGD.rdC=AGD.rdC||{};
+ /* the record is rebuilt from the plans on a resync: the tellers' walk rows of this buổi come back */
+ for(const q of z.rq)if(q.key===R.key&&q.sid&&R.P[q.sid]&&q.kg<J95.KH){const e=R.P[q.sid][q.kg];if(e&&e[1]!=="tryst"&&e[1]!=="meet"&&e[1]!=="ag_tell"){let mp=null;try{const m=agTgt(q.m);mp=m&&R.P["v"+m.id]&&R.P["v"+m.id][q.kg]?R.P["v"+m.id][q.kg][0]:palaceOf(m)}catch(x){}R.P[q.sid][q.kg]=[mp||e[0],"ag_tell",q.m,q.why]}}
+ for(const q of z.rq){if(q.key!==R.key){if(q.key.split("-")[0]===R.key.split("-")[0]||q.due>=J95.KH){const m=agTgt(q.m);if(m&&typeof m==="object")agTouch(m);AGD.stat.rdLate=(AGD.stat.rdLate||0)+1}continue}
+  if(q.due>kh||q.due>=J95.KH){if(q.due>=J95.KH){const m=agTgt(q.m);if(m&&typeof m==="object"){agTouch(m);AGD.stat.rdLate=(AGD.stat.rdLate||0)+1}continue}keep.push(q);continue}
+  const ck=R.key+":"+q.due;if((AGD.rdC[ck]||0)>=B.cap){q.due++;AGD.stat.rdCap=(AGD.stat.rdCap||0)+1;if(q.due<J95.KH)keep.push(q);else{const m=agTgt(q.m);if(m&&typeof m==="object")agTouch(m)}continue}
+  const m=agTgt(q.m);if(!m||typeof m!=="object")continue;n+=agHeard(m,{pl:q.pl,kh:q.due,who:q.who?agTgt(q.who):null,why:q.why,by:agTgt(q.by)})}
+ z.rq=keep;return n}
 /* the triggers: her ARRIVAL at a place (her place changed since the last resync), a happening STARTING at its khắc */
 function agRdTick(){if(!agRdOn()||AG.inRd)return;const R=agRec();if(!R)return;AG.inRd=1;try{const kh=agKh();let me=null;try{me=R.P.me?R.P.me[kh][0]:j95mePlace()}catch(e){}
+  agRdDeliver(R,kh);
   const k=R.key+":"+kh+":"+me,L=AG.rdMe;if(L!==k){const moved=!L||L.split(":")[0]!==R.key||L.split(":").pop()!==me;AG.rdMe=k;
-   if(moved&&me&&me!=="home")agTell(R,me,kh,`nghe tin ngươi đến ${agPlaceTxt(me)}`,S,m=>{let x=0;try{x=agNeedsC(m)}catch(e){}return x?1:0})}
+   /* the khắc she ENTERED: the finished khắc whose result put her there (her walk khắc: her row shows the place from the khắc after it); the
+      servants there react the khắc after that (OD L1638: "k1 she enters → k2 maid present / scouts → k3 master knows + acts → k4 visible") */
+   let a=kh;try{if(R.P.me)while(a>0&&R.P.me[a-1]&&R.P.me[a-1][0]===me)a--}catch(e){}if(a>0)a--;
+   if(moved&&me&&me!=="home")agTell(R,me,a,`nghe tin ngươi đến ${agPlaceTxt(me)}`,S,m=>{let x=0;try{x=agNeedsC(m)}catch(e){}return x?1:0})}
   for(const p of agZ().pend){if(p.key!==R.key||p.st||p.kh>kh||p.drop||p.gone)continue;p.st=1;const d=agTgt(p.id),t=agTgt(p.t);
    agTell(R,p.pl,kh,`nghe tin ${d&&d.name?d.name:""} ${p.act} ở ${agPlaceTxt(p.pl)}`,t&&t!==S?t:d,m=>{const a=typeof d==="object"&&d&&d!==m?Math.abs(aff(m,d)):0,b=typeof t==="object"&&t&&t!==m?Math.abs(aff(m,t)):0;return (a+b)/100})}}
  catch(e){agdErr("rd",e)}finally{AG.inRd=0}}
 (function(){const sy0=j95sync;j95sync=function(){const r=sy0.apply(this,arguments);try{agRdTick()}catch(e){agdErr("rdSync",e)}return r}})();
-try{ACT95["ag_go"]=ACT95["ag_go"]||"đang trên đường tới"}catch(e){}
-Object.assign(window,{agHeard,agTell,agRdTick});
+try{ACT95["ag_go"]=ACT95["ag_go"]||"đang trên đường tới";ACT95["ag_tell"]=ACT95["ag_tell"]||"đi bẩm tin cho chủ";ACT95["ag_with"]=ACT95["ag_with"]||"đang tiếp người tới"}catch(e){}
+Object.assign(window,{agHeard,agTell,agRdTick,agRdDeliver});
+/* ================= ONE SHARED CLOCK (AG-ALL-2d; owner OD 17/11 ~16:00Z L1641, verbatim key words: "tất cả mọi người đều phải make sure là cùng phải
+   trải qua cái mốc thời gian giống nhau, cùng sống trên một cái mốc thời gian") =================
+   Her clock IS the world clock: an NPC deed lands only when her clock has passed its last khắc (agWatch), news moves only on finished khắc (agTell →
+   agRdDeliver), so no NPC is ever a khắc ahead of her. An NPC who comes TO her in khắc k starts ONE shared act: the popup "Có người tìm đến" offers
+   Tiếp chuyện (her answers inside it are part of the same act; she spends the deed's khắc from her clock to its end — both move on together) or
+   Không tiếp (the NPC's khắc is spent — she came — hers is not; the deed does not happen). NPC ↔ NPC: a consort whose deed is aimed at another
+   consort meets her only if that one stands there with those khắc free; she receives or declines (mindPick: BAL.ag.kh2.sh rec vs dec × hostility);
+   received = the met one's row holds the shared act (ag_with, the comer's row already holds her deed) and both spend those khắc; declined or away = the comer's khắc spent, a meeting deed (talk)
+   does not happen. Co-op: each player's own clock (the popup spends only the clock of the player it opens for). Off: BAL.ag.kh2.sh.on = 0. */
+function agShOn(){try{return agKhOn()&&BAL.ag.kh2.sh&&BAL.ag.kh2.sh.on}catch(e){return false}}
+function agShKh(p){let kh=0;try{kh=agKh()}catch(e){}return Math.max(1,agK1(p)-kh+1)}
+function agShOpts(p,v){const n=agShKh(p);const lock=typeof can==="function"&&!can(n)?(typeof whyTime==="function"&&whyTime(n)||"hết khắc buổi này"):"";const O=[];
+ O.push({n:"Tiếp chuyện",r:"rec",fx:{},x:`Nắm chắc · tốn: ${n} khắc · thành: cùng ${v.name} trải qua khắc này`,go:()=>{if(!can(n)){agShDecl(p,v);return}spend(n);AGD.stat.shMe=(AGD.stat.shMe||0)+1;const r=agLand(p,true);if(r)log(`${r}.`)}});
+ O.push({n:"Không tiếp",r:"dec",fx:{},x:`Nắm chắc · thành: ${v.name} ra về, khắc của ngươi còn nguyên`,go:()=>agShDecl(p,v)});
+ if(lock)kitOff(O[0],lock,"");return O}
+function agShDecl(p,v){const z=agZ();const i=z.pend.indexOf(p);if(i>=0)z.pend.splice(i,1);p.drop=1;AG.stat.drop++;AGD.stat.shNo=(AGD.stat.shNo||0)+1;/* her row in the record keeps the khắc she spent coming */log(`Ngươi không tiếp ${v.name}.`)}
+/* NPC ↔ NPC: before the deed lands */
+function agShNpc(p,d){if(!agShOn()||!p||p.vid==null||!p.t||p.t[0]!=="v")return 1;const R=agRec();if(!R||p.key!==R.key)return 1;const t=agTgt(p.t);if(!t||t===S||typeof t!=="object"||t===d)return 1;
+ const id="v"+t.id,row=R.P[id];if(!row)return 1;const A=BAL.ag.kh2.sh;let here=true;const k1=Math.min(J95.KH-1,agK1(p));
+ for(let q=p.kh;q<=k1;q++)if(!row[q]||row[q][0]!==p.pl||!agKhFree(R,id,q)){here=false;break}
+ let c="dec";if(here){const ho=Math.max(0,hostility(t,d))/BAL.ag.wit.hoD;try{c=mindPick([["rec",A.rec],["dec",A.dec*ho]].filter(x=>x[1]>0),t)||"rec"}catch(e){c="rec"}}
+ if(c==="rec"){for(let q=p.kh;q<=k1;q++)row[q]=[p.pl,"ag_with",ledgerId(d),p.act||""];AGD.stat.shNpc=(AGD.stat.shNpc||0)+1;return 1}
+ AGD.stat[here?"shDec":"shAway"]=(AGD.stat[here?"shDec":"shAway"]||0)+1;return AGTALK.has(p.k)?0:1}
+(function(){const l0=agLand;agLand=function(p,seen){try{if(p&&!p.drop&&!p.gone&&!p.sh){p.sh=1;const d=agDoer(p);if(!agShNpc(p,d)){p.drop=1}}}catch(e){agdErr("shNpc",e)}return l0.apply(this,arguments)}})();
+Object.assign(window,{agShOn,agShOpts,agShNpc});

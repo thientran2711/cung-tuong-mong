@@ -176,7 +176,10 @@ function agPlan(v,c,N,kh,k){const z=agZ(),R=agRec(),id="v"+v.id;const why=agWhy(
  try{if(R){const A=R.acts=R.acts||[];A.push({id,kh,k:"ag:"+c.k,t:tid,why,ok:1,ag:1});if(A.length>60)A.shift()}}catch(e){}}
 /* a second plan of the same buổi (j95 re-plans on every placeWhere) keeps the acts already decided at their place/khắc */
 function agReapply(){const R=agRec();if(!R||!S.ag)return;let ch=0;for(const p of S.ag.pend){if(p.key!==R.key||!R.P[p.id])continue;const e=R.P[p.id][p.kh];if(e&&e[1]==="ag_"+p.k&&e[0]===p.pl)continue;
-  if(e&&(e[1]==="tryst"||e[1]==="meet"))continue;if(agBound(p.id,p.kh,R.key)){p.drop=1;continue}R.P[p.id][p.kh]=[p.pl,"ag_"+p.k,p.t,p.why];ch=1}if(ch)try{j95sync()}catch(e){}}
+  if(e&&(e[1]==="tryst"||e[1]==="meet"))continue;if(agBound(p.id,p.kh,R.key)){p.drop=1;continue}R.P[p.id][p.kh]=[p.pl,"ag_"+p.k,p.t,p.why];ch=1;
+  /* AG-ALL-2d: the deed's whole window [kh, k1] and the walk before it (a re-decide, OD L1638) come back with it */
+  for(let q=p.kh+1;q<=agK1(p)&&q<J95.KH;q++){const x=R.P[p.id][q];if(x&&x[1]!=="tryst"&&x[1]!=="meet"&&!agBound(p.id,q,R.key))R.P[p.id][q]=[p.pl,"ag_"+p.k,p.t,p.why]}
+  if(p.go)for(let q=p.go[0];q<p.go[1];q++){const x=R.P[p.id][q];if(x&&x[1]!=="tryst"&&x[1]!=="meet"&&!agBound(p.id,q,R.key))R.P[p.id][q]=[p.pl,"go",null,p.why]}}if(ch)try{j95sync()}catch(e){}}
 function agPerson(id){if(!id)return null;if(id==="me")return S;if(id[0]==="v")return RV(+id.slice(1));return null}
 /* the deed happens (its own function: cost, odds, effect) */
 function agLand(p,seen){const t9=performance.now();try{return agLand0(p,seen)}finally{(AG.last=AG.last||[]).push("l"+p.k+":"+(performance.now()-t9).toFixed(1))}}
@@ -201,7 +204,8 @@ function agWatch(){if(!agOn()||S.out)return;const H=agHereKh();if(!H)return;cons
  if(n)try{showModal()}catch(e){}}
 function agPlaceTxt(k){try{return placeName(k)}catch(e){return k}}
 function agScene(p,v){const t=agPerson(p.t);const W=agPlaceTxt(p.pl);
- if(t===S){const r=agLand(p,true);Q.push({t:"Có người tìm đến",who:pv(v),h:`<p>${v.name} ${p.act} ngươi ở ${W}.</p>${r?`<p>${r}.</p>`:""}`});return}
+ if(t===S){if(typeof agShOn==="function"&&agShOn()){Q.push({t:"Có người tìm đến",who:pv(v),h:`<p>${v.name} tìm đến ngươi ở ${W}: nàng muốn ${p.act} ngươi.</p>`,opts:agShOpts(p,v)});return}/* AG-ALL-2d one shared act (OD L1641) */
+  const r=agLand(p,true);Q.push({t:"Có người tìm đến",who:pv(v),h:`<p>${v.name} ${p.act} ngươi ở ${W}.</p>${r?`<p>${r}.</p>`:""}`});return}
  const tn=t?` ${t.name}`:"";Q.push({t:"Ngươi bắt gặp",who:pv(v),h:`<p>Ở ${W}, ngươi thấy ${v.name} đang ${p.act}${tn}.</p>`,opts:agReact(p,v,t)})}
 /* the deeds she may join where she sees them done (the same deed for her: her cost, her odds, her gains — BAL.tw, one source).
    The option is named by the player's own act of that deed (its kit act picture, KIT §6.2 kitOptPic "act"), so every reaction row has a picture. */
