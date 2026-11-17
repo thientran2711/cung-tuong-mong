@@ -62,7 +62,7 @@ const SOC={
  ally:{w:0.6,ok:(v,t)=>t!==S?t.sung>=v.sung:S.sung>=v.sung,run:(v,t)=>{relAdd(v,t,BAL.eff.j28.run_8);return `${v.name} tìm đến kết thân với ${NM(t)} đang được sủng`}},
  drop:{w:0.6,ok:(v,t)=>aff(v,t)>=30&&(t===S?S.sung<25||S.confined:t.sung<25||t.confined),run:(v,t)=>{affAdd(v,t,BAL.eff.j28.run_9);return `${v.name} lạnh nhạt với ${NM(t)} lúc sa cơ`}},
  steal:{w:0.5,ok:(v,t)=>(t===S?S.tonight:true)&&v.sung>=20,run:(v,t)=>{ap(v,{sung:2});ap(t,{sung:-2});oanAdd(t,v,BAL.eff.j28.run_10);return `${v.name} khéo léo cướp đêm thị tẩm của ${NM(t)}`}},
- bribeksp:{w:0.4,ok:v=>v.bac>=30,run:v=>{ap(v,{bac:-30,sung:2});return `${v.name} đút lót Kính sự phòng để được lật thẻ`}},
+ bribeksp:{w:0.4,ok:v=>v.bac>=BAL.bacFee.ksp,run:v=>{ap(v,{bac:-BAL.bacFee.ksp,sung:2});return `${v.name} đút lót Kính sự phòng để được lật thẻ`}},
  follow:{w:0.5,ok:v=>liveRivals(true).some(x=>x!==v&&rkOf(x)>rkOf(v)+1),run:v=>{const L=liveRivals(true).filter(x=>x!==v&&rkOf(x)>rkOf(v)+1);const x=mindPickBy(L,y=>BAL.mind.pick.j28up.base+rkOf(y)+Math.max(0,aff(v,y))/BAL.mind.pick.j28up.aff,v);relAdd(v,x,BAL.eff.j28.run_11)/* npc-mind: was ARGMAX rank */;return `${v.name} nép theo ${x.name}`}},
  feign:{w:0.5,ok:(v,t)=>danger(v,t)>=20,run:(v,t)=>{affAdd(t,v,BAL.eff.j28.run_12);return `${v.name} niềm nở với ${NM(t)}, chuyện trò thân mật`}},
  apologise:{w:0.4,ok:(v,t)=>oan(t,v)>=15,run:(v,t)=>{oanAdd(t,v,BAL.eff.j28.run_13);return `${v.name} sang xin lỗi ${NM(t)}`}},

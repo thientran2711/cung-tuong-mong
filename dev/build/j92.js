@@ -352,9 +352,9 @@ PEND.wdframe=pp=>{const a=byKey(pp.a);if(!a)return null;const nm=wdFrameNm(pp.k)
  O.push({n:"Xin Cung Chính ti tra xét",fx:{},j67:"tốn: không tốn gì",go:()=>{if(roll(o2))clear("Cung Chính ti tra hỏi người ra vào.");else guilty(false)}});
  O.push({n:"Nhận lỗi, xin khoan hồng",fx:{},j67:"tốn: không tốn gì",go:()=>guilty(true)});
  return{t:lo?`<p>${wdNmC(a)} báo Cung Chính ti: <b>${nm}</b> của nàng bị thất lạc, nay thấy ở cung ngươi. Cung Chính ti khám phòng ngươi và tìm thấy món ấy.</p>`:`<p>${wdNmC(a)} tố ngươi lấy trộm <b>${nm}</b>. Cung Chính ti khám phòng ngươi và tìm thấy món ấy trong rương.</p>`,o:ev>=1?O:O.slice(1),who:pv(a)}};
-A("giahoa","Giá họa trộm đồ",{c:{bac:-40},ok:(a,t)=>a.bac>=40&&!(t===S&&S.wdFrame),o:(a,t)=>oPlant(a,t),x:"sai người lén đặt đồ quý vào phòng nàng rồi tố nàng ăn cắp",f:(a,t)=>wdFrame(a,t)});
+A("giahoa","Giá họa trộm đồ",{c:{bac:-BAL.actBac.giahoa},ok:(a,t)=>a.bac>=BAL.actBac.giahoa&&!(t===S&&S.wdFrame),o:(a,t)=>oPlant(a,t),x:"sai người lén đặt đồ quý vào phòng nàng rồi tố nàng ăn cắp",f:(a,t)=>wdFrame(a,t)});
 try{AOUT.giahoa=["nàng mang tội ăn trộm: Danh -10, Sủng -5, bị phạt",`kẻ đặt đồ bị bắt: nàng nắm ${balAb(BAL.eff.j92.evWdFrame)} chứng cứ, thù ${balSg(BAL.eff.j92.wdFrame)} · hoặc nàng minh oan được: ngươi Danh -10, bị phạt`]}catch(e){}
-try{LACK.giahoa=()=>S.bac<40?"cần Bạc 40 để sai người":""}catch(e){}
+try{LACK.giahoa=t=>S.bac<actBac("giahoa",S,t)?"cần Bạc "+actBac("giahoa",S,t)+" để sai người":""}catch(e){}
 try{ACTDOM.giahoa="Mưu kế";J78VERB.giahoa="giá họa {t} tội ăn trộm";DIRTY.push("giahoa");
  const g=RVGRP.find(x=>x[0]==="Hại nặng");if(g&&!g[1].includes("giahoa"))g[1].push("giahoa");if(BANDS[2]&&!BANDS[2][2].includes("giahoa"))BANDS[2][2].push("giahoa")}catch(e){}
 /* NPC minds: frame-ups for the malicious (weight 2, like Vu oan) */

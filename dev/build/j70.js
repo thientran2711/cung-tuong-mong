@@ -424,7 +424,7 @@ PEND.j70def=pp=>{if(!S)return null;const L=ords70();const cur=L.length?`<p>Lện
 /* ---------- every warning carries concrete answers ---------- */
 function thrOpts70(v){const o=[];const mat=S.mat||0;
  o.push(Object.assign(ch70("Ra lệnh phòng bị",{wt:[G70("giữ được mình: chọn kẻ hầu canh cung, thử độc, theo dõi nàng")],k:[R70("kẻ hầu bận việc, có lệnh tốn bạc mỗi tháng")]}),{go:()=>{Q.unshift(def70m({s:1}))}}));
- o.push(Object.assign(ch70(`Dò la ${v.name}`,{c:{},p:oSpy(S),/* previews: spyFind (runAct spy) */wt:[G70(`chứng cứ về ${v.name} ${balSg(BAL.eff.jtruth.evN)}`)],lt:[R70(`${v.name} mất thiện cảm`)],k:[R70("Bạc -15")]}),{go:()=>{if(S.bac<15){log("Không đủ bạc để dò la.");return}log(runAct(S,v,"spy")||"Ngươi cho người dò la.")}}));
+ o.push(Object.assign(ch70(`Dò la ${v.name}`,{c:{},p:oSpy(S),/* previews: spyFind (runAct spy) */wt:[G70(`chứng cứ về ${v.name} ${balSg(BAL.eff.jtruth.evN)}`)],lt:[R70(`${v.name} mất thiện cảm`)],k:[R70("Bạc -"+actBac("spy",S,v))]}),{go:()=>{if(S.bac<actBac("spy",S,v)){log("Không đủ bạc để dò la.");return}log(runAct(S,v,"spy")||"Ngươi cho người dò la.")}}));
  if(accOK(S,v)){const c=ch70(`Tố giác ${title70(v)}`,{p:oAccuse(S,v),wt:[G70("nàng bị xử theo chứng cứ")],lt:[R70("tố hụt: mất chứng cứ, Danh giảm")]});c.go=()=>log(runAct(S,v,"accuse")||"Ngươi tố giác.");o.push(c)}
  if(!S.thDead)o.push(ch70("Xin Thái hậu che chở",{c:{bac:-20},p:cl(30+(S.th||0)/2,5,95),wt:[G70("3 tuần tới kẻ hại ngươi khó ra tay gấp đôi")],lt:[R70(`Thái hậu với ngươi ${balSg(BAL.eff.j70.thShield)}`)],ok:()=>{S.guardWarn=Math.max(S.guardWarn||0,3);return "Thái hậu sai thị vệ để mắt đến cung ngươi."},no:()=>{apply({th:BAL.eff.j70.thShield});return "Thái hậu không muốn dính vào chuyện hậu cung."}}));
  const al=liveRivals(true).filter(x=>x!==v&&aff(x,S)>=40&&!x.confined).sort((a,b)=>aff(b,S)-aff(a,S))[0];
@@ -482,8 +482,8 @@ window.scarOf=scarOf;
 (function(){const e0=effSac;effSac=function(p){let r=e0.apply(this,arguments);try{if(p&&p.scar)r=cl(r-Math.round(p.scar.d*(p.scar.veil?2/3:1)),0,130)}catch(e){}return r}})();
 function scar70(t,sev,a,how){const L=SCAR70[sev];t.scar={sev,d:L.d,need:L.need,pg:0,veil:0,tr:0,cure:0,by:a?key(a):null,at:wk(),how:how||""};ap(t,{sung:-L.sung,danh:-L.danh});
  if(t===S){for(const v of liveRivals(true))v.ghen=cl((v.ghen||0)-Math.round(6*sev),0,100)}return L}
-A("huydung","Hủy dung",{c:{bac:-30,duc:-8},ok:(a,t)=>(a.bac||0)>=30&&!t.scar,o:a=>odA(a,38+(a.tamco||0)/5+(a.mat||0)*4),x:"Sắc nàng giảm mạnh, ân sủng giảm",f:(a,t)=>{
- ap(a,{bac:-30});if(typeof ducAdd==="function")ducAdd(a,-8,"hủy dung");else ap(a,{duc:-8});a.schemes=(a.schemes||0)+1;const how=window.__j70hd||"phan";
+A("huydung","Hủy dung",{c:{bac:-BAL.actBac.huydung,duc:-8},ok:(a,t)=>(a.bac||0)>=BAL.actBac.huydung&&!t.scar,o:a=>odA(a,38+(a.tamco||0)/5+(a.mat||0)*4),x:"Sắc nàng giảm mạnh, ân sủng giảm",f:(a,t)=>{
+ ap(a,{bac:-BAL.actBac.huydung});if(typeof ducAdd==="function")ducAdd(a,-8,"hủy dung");else ap(a,{duc:-8});a.schemes=(a.schemes||0)+1;const how=window.__j70hd||"phan";
  const c=caught(a,t,how==="phan"||how==="son","hủy dung "+NM(t)+(how==="canh"?" bằng bát canh nóng":how==="meo"?" bằng cách dụ mèo dữ":" bằng phấn trộn độc"));if(c)return c;
  if(!roll(odA(a,38+(a.tamco||0)/5+(a.mat||0)*4))){if(how!=="canh"||roll(40))evA(t,a,BAL.eff.j70.evF);return `${NMc(a)} định hủy dung ${NM(t)} nhưng không thành, ${how==="canh"?"bát canh chỉ đổ ra sàn":"bị lộ dấu vết"}. `}
  const W=HDR70[how]||HDR70.phan;let x=Math.random(),sev=1;if(x>W[0])sev=2;if(x>W[0]+W[1])sev=3;const L=scar70(t,sev,a,how);if(how==="phan"&&roll(35))evA(t,a,BAL.eff.j70.evF_2);
@@ -504,7 +504,7 @@ try{ORD70.thudoc.acts.push("huydung");ORD70.canh.acts.push("huydung");ORD70.thud
 (function(){const x0=exec70;exec70=function(p,opp){const pw=window.__j70hd;if(p&&p.m==="huydung")window.__j70hd=p.r;try{return x0.apply(this,arguments)}finally{window.__j70hd=pw}}})();
 /* her button on a rival card (same markup as the other scheme buttons) */
 (function(){const r0=rvButtons;rvButtons=function(v,i){let h=r0.apply(this,arguments);try{if(!S||!v||h.indexOf('data-a="huydung"')>=0||h.indexOf('data-a="poison"')<0)return h;const a=ACT.huydung,dis=!can(2)||!v.alive||v.out||S.dead,ok=a.ok(S,v),o=a.o(S,v);
-  const btn=`<button data-r="${i}" data-a="huydung" ${dis||!ok?"disabled":""}>${a.n}<small>${[ok?word(cl(o,5,95)):"",fmt(a.c),v.scar?"nàng đang có sẹo":S.bac<30?"cần 30 bạc":a.x].filter(Boolean).join(" · ")}</small></button>`;
+  const btn=`<button data-r="${i}" data-a="huydung" ${dis||!ok?"disabled":""}>${a.n}<small>${[ok?word(cl(o,5,95)):"",fmt(a.c),v.scar?"nàng đang có sẹo":S.bac<actBac("huydung",S,v)?"cần "+actBac("huydung",S,v)+" bạc":a.x].filter(Boolean).join(" · ")}</small></button>`;
   h=h.replace(/(<button[^>]*data-a="poison")/,btn+"$1")}catch(e){}return h}})();
 /* recovery, the same weekly rule for everyone */
 function heal70(p){const s=p.scar;if(!s)return;let st=1;const me=p===S;if(me?S.doctor:(p.doc||roll(20)))st++;if(me&&(S.arts&&S.arts.y>=2))st++;if(s.tr>0){st++;s.tr--}s.pg+=st;

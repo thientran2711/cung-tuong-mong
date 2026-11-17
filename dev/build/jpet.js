@@ -203,8 +203,8 @@ PEND.tsbPetW=pp=>{const P=tsbPets(S)[pp.i];if(!P)return null;const T=petT(P);con
 /* ---------------- kẻ thù hại thú (Hại nhỏ) ---------------- */
 function petTarget(t){const L=tsbPets(t);if(!L.length)return -1;let j=0;L.forEach((P,i)=>{if(petT(P).tr>petT(L[j]).tr)j=i});return j}
 function petHarmO(a,t){const j=petTarget(t);const P=tsbPets(t)[j];const T=petT(P);return cl(Math.round(odA(a,50+(a.tamco||0)/5+(T.easy?15:0)-T.tr*4)-tsbGuard(t)),5,90)}
-A("thaopet","Hại thú nuôi của nàng",{c:{bac:-10},ok:(a,t)=>(a.bac||0)>=10&&tsbPets(t).length>0,o:(a,t)=>petHarmO(a,t),x:"nàng mất con thú quý nhất (thả đi hay làm hại)",
- f:(a,t)=>{ap(a,{bac:-10});const j=petTarget(t);const P=tsbPets(t)[j];const T=petT(P);const c=caught(a,t,false,`sai người hại ${T.n.replace(/^./,c=>c.toLowerCase())} của ${NM(t)}`);if(c)return c;const o=petHarmO(a,t);
+A("thaopet","Hại thú nuôi của nàng",{c:{bac:-BAL.actBac.thaopet},ok:(a,t)=>(a.bac||0)>=BAL.actBac.thaopet&&tsbPets(t).length>0,o:(a,t)=>petHarmO(a,t),x:"nàng mất con thú quý nhất (thả đi hay làm hại)",
+ f:(a,t)=>{ap(a,{bac:-BAL.actBac.thaopet});const j=petTarget(t);const P=tsbPets(t)[j];const T=petT(P);const c=caught(a,t,false,`sai người hại ${T.n.replace(/^./,c=>c.toLowerCase())} của ${NM(t)}`);if(c)return c;const o=petHarmO(a,t);
   if(!roll(o)){const e=roll(40);if(e)/*evok: pet harm act (runAct deed)*/evA(t,a,BAL.eff.jpet.evF);return `Kẻ lạ lảng vảng bên chuồng thú của ${NM(t)} bị kẻ hầu chặn lại${e?`; hắn khai là người của ${NM(a)} (chứng cứ ${balSg(BAL.eff.jpet.evF)})`:""}. `}
   const fly=/hoami|sao|vet|uyenuong|camke|phuong|thanhlong|bachloc|kylan|cuuvi|hac|thienma/.test(P.t);const n=petLose(t,j,fly?"bị thả đi (chưa rõ ai làm)":"bị hại (chưa rõ ai làm)");
   if(T.tr>=3&&roll(25)){/* a rare animal the court knows: the loss is noticed */if(t===S)apply({danh:-1})}

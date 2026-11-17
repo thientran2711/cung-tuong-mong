@@ -137,6 +137,8 @@ function econGuards(t){return Math.min(3,[t.maid].concat(t.staff||[]).filter(s=>
 function econSchemeMul(a,t){if(!a||!t)return 1;/* two-way law (owner 16/11 s21): one price for everyone, no NPC discount (was .06/.04 for NPCs) */return 1+BAL.schemeRk*Math.max(0,rkOf(t)-rkOf(a))+BAL.schemeGuard*econGuards(t)}
 let ECON_AT=[null,null];/* the actor / target of the scheme being priced: per life (review/newlife-reset: it kept the old life's people) */
 try{lifeStore("ECON_AT",()=>{ECON_AT=[null,null]})}catch(e){}
+/* actBac: the bạc an act really charges actor a against target t (a scheme priced by target: econSchemePrice; else its BAL.actBac cost) — the lock words print it (review/one-core-jkc-2) */
+function actBac(k,a,t){const A0=ACT[k];if(!A0)return 0;if(A0.__c0)return econSchemePrice(k,a,t);return A0.c&&A0.c.bac<0?-A0.c.bac:0}
 function econSchemePrice(k,a,t){const A0=ACT[k];const base=A0&&A0.__c0&&A0.__c0.bac<0?-A0.__c0.bac:0;return Math.round(base*econSchemeMul(a,t))}
 (function(){for(const k in ACT){const A0=ACT[k];if(!A0||!A0.c||!(A0.c.bac<0)||ECON_FREE.includes(k))continue;const c0=Object.assign({},A0.c);A0.__c0=c0;
   const c={};for(const x in c0)if(x!=="bac")c[x]=c0[x];Object.defineProperty(c,"bac",{enumerable:true,get(){const [a,t]=ECON_AT;return a&&t?-econSchemePrice(k,a,t):c0.bac}});A0.c=c;

@@ -84,8 +84,8 @@ function judgeName(t){return t.queen||t===S&&S.rank>=7?"Hoàng thượng":queenP
 /* ---------- the acts: act(actor, target) ---------- */
 const ACT={};
 function A(k,n,o){o.k=k;o.n=n;ACT[k]=o}
-A("spy","Dò la",{c:{bac:-15},ok:(a,t)=>a.bac>=15,o:(a)=>oSpy(a),f:(a,t)=>{ap(a,{bac:-15});if(roll(oSpy(a))){ap(a,{tamco:2});return spyFind(a,t)}relAdd(a,t,BAL.eff.j8.f);return `${NMc(a)} dò la ${NM(t)}: <span class="r">bị phát hiện</span>. `}});
-A("ally","Kết giao",{c:{bac:-30},ok:(a,t)=>a.bac>=30,o:(a,t)=>oAlly(a,t),f:(a,t)=>{ap(a,{bac:-30});if(roll(oAlly(a,t))){relAdd(a,t,BAL.eff.j8.f_2);if(t!==S)t.ghen=cl(t.ghen-10,0,100);return `${NMc(a)} kết giao với ${NM(t)}: <span class="g">thành</span>. `}relAdd(a,t,BAL.eff.j8.f_3);return `${NMc(a)} kết giao với ${NM(t)}: bị lạnh nhạt. `}});
+A("spy","Dò la",{c:{bac:-BAL.actBac.spy},ok:(a,t)=>a.bac>=BAL.actBac.spy,o:(a)=>oSpy(a),f:(a,t)=>{ap(a,{bac:-BAL.actBac.spy});if(roll(oSpy(a))){ap(a,{tamco:2});return spyFind(a,t)}relAdd(a,t,BAL.eff.j8.f);return `${NMc(a)} dò la ${NM(t)}: <span class="r">bị phát hiện</span>. `}});
+A("ally","Kết giao",{c:{bac:-BAL.actBac.ally},ok:(a,t)=>a.bac>=BAL.actBac.ally,o:(a,t)=>oAlly(a,t),f:(a,t)=>{ap(a,{bac:-BAL.actBac.ally});if(roll(oAlly(a,t))){relAdd(a,t,BAL.eff.j8.f_2);if(t!==S)t.ghen=cl(t.ghen-10,0,100);return `${NMc(a)} kết giao với ${NM(t)}: <span class="g">thành</span>. `}relAdd(a,t,BAL.eff.j8.f_3);return `${NMc(a)} kết giao với ${NM(t)}: bị lạnh nhạt. `}});
 A("rumor","Tung tin đồn",{c:{},ok:()=>true,o:a=>oRumor(a),x:"Danh nàng -8",f:(a,t)=>{const c=caught(a,t,false,"tung tin đồn bẩn");if(c)return c;if(roll(oRumor(a))){ap(t,{danh:-8});return `<span class="r">Khắp cung đồn ${NM(t)} tư thông.</span> Danh ${NM(t)} -8. `}evA(t,a,BAL.eff.j8.evF);relAdd(a,t,BAL.eff.j8.f_4);return `Lời đồn ${NM(a)} tung ra về ${NM(t)} không ai tin. `}});
 A("frame","Vu oan",{c:{duc:-5},ok:()=>true,o:a=>oFrame(a),x:"lộ: Danh -15",f:(a,t)=>{a.schemes=(a.schemes||0)+1;ap(a,{duc:-5});const c=caught(a,t,false,"vu cho "+NM(t)+" dùng bùa ngải");if(c)return c;
   if(roll(oFrame(a))){const d=framed(t,"bị vu dùng bùa ngải");if(d<0)return `<span class="r">Trong tẩm cung ngươi tìm thấy hình nhân bùa ngải.</span> `;if(!d)return `Trong tẩm cung ${NM(t)} tìm thấy hình nhân bùa ngải. ${FRAME_LAST}`;ap(a,{danh:3,tamco:2});return `<span class="r">Trong tẩm cung ${NM(t)} tìm thấy hình nhân bùa ngải.</span> Danh ${NM(t)} -${d} · Sủng -10. `}
@@ -97,15 +97,15 @@ A("poison","Hạ độc",{c:{duc:-10},ok:()=>true,o:a=>oPoison(a),x:"lộ: ban c
 A("accuse","Tố giác",{c:{},ok:(a,t)=>accOK(a,t),o:(a,t)=>oAccuse(a,t),get x(){return `cần ${BAL.accNeedEv[0]} chứng cứ (Hoàng hậu: ${BAL.accNeedEv[1]} chứng cứ và phẩm Tần trở lên; tố hụt Hoàng hậu là phạm thượng)`},f:(a,t)=>{const o=oAccuse(a,t);evA(a,t,BAL.evWipe);
   if(roll(o)){const r=`${NMc(a)} tố giác ${NM(t)} trước ${judgeName(t)}: <span class="${t===S?"r":"g"}">thành</span>. `;ap(a,{danh:6});if(roll(BAL.tw.accBestow))bestow(a,"accuse");if(rkOf(t)>=7)a.seatBan=S.turn+12;fall(t,"bị tố giác, chứng cứ rành rành");return r}
   ap(a,{danh:-8});relAdd(a,t,BAL.eff.j8.f_6);if(rkOf(t)>=7)punish(a,"tố hụt Hoàng hậu, phạm thượng",2);return `${NMc(a)} tố giác ${NM(t)} không thành; chứng cứ bị hủy. `}});
-A("bribe","Mua chuộc cung nữ",{c:{bac:-40},ok:(a,t)=>a.bac>=40,o:(a,t)=>oBribe(a,t),f:(a,t)=>{ap(a,{bac:-40});
+A("bribe","Mua chuộc cung nữ",{c:{bac:-BAL.actBac.bribe},ok:(a,t)=>a.bac>=BAL.actBac.bribe,o:(a,t)=>oBribe(a,t),f:(a,t)=>{ap(a,{bac:-BAL.actBac.bribe});
   if(roll(oBribe(a,t))){if(t.schemes>0){/*evok: schemes>0*/evA(a,t,BAL.eff.j8.evF_3);return `Cung nữ ${t.maid.name} của ${NM(t)} bị ${NM(a)} mua chuộc, khai ra mưu kế của chủ: ${NM(a)} nắm ${balAb(BAL.eff.j8.evF_3)} chứng cứ. `}const g=Math.min(30,t.bac);ap(t,{bac:-g});ap(a,{bac:g});t.maid.loyal=cl(t.maid.loyal-BAL.eff.j8.loyalF,0,100);return `Cung nữ ${t.maid.name} của ${NM(t)} bị ${NM(a)} mua chuộc, lấy trộm ${g} lượng. `}
   t.maid.loyal=cl(t.maid.loyal+BAL.eff.j8.loyalF_2,0,100);evA(t,a,BAL.eff.j8.evF_4);return `Cung nữ ${t.maid.name} từ chối bạc của ${NM(a)} và báo cho chủ. `}});
-A("block","Rút thẻ bài",{c:{bac:-40},ok:(a,t)=>a.bac>=40&&!t.block,o:a=>oBlock(a),x:"2 tuần nàng không được lật thẻ",f:(a,t)=>{ap(a,{bac:-40});const c=caught(a,t,false,"đút lót Kính sự phòng rút thẻ bài của "+NM(t));if(c)return c;
+A("block","Rút thẻ bài",{c:{bac:-BAL.actBac.block},ok:(a,t)=>a.bac>=BAL.actBac.block&&!t.block,o:a=>oBlock(a),x:"2 tuần nàng không được lật thẻ",f:(a,t)=>{ap(a,{bac:-BAL.actBac.block});const c=caught(a,t,false,"đút lót Kính sự phòng rút thẻ bài của "+NM(t));if(c)return c;
   if(roll(oBlock(a))){t.block=2;return `${NMc(a)} đút lót Kính sự phòng: thẻ bài của ${NM(t)} bị giấu đi hai tuần. `}evA(t,a,BAL.eff.j8.evF_5);return `Tổng quản Kính sự phòng nhận bạc của ${NM(a)} rồi đem chuyện kể với ${NM(t)}. `}});
-A("musk","Bỏ xạ hương",{c:{bac:-30,duc:-8},ok:(a,t)=>a.bac>=30&&t.preg&&!t.hidden,o:()=>null,x:"nàng sảy thai",f:(a,t)=>{ap(a,{bac:-30,duc:-8});a.schemes=(a.schemes||0)+1;const c=caught(a,t,true,"bỏ xạ hương vào thuốc an thai của "+NM(t));if(c)return c;
+A("musk","Bỏ xạ hương",{c:{bac:-BAL.actBac.musk,duc:-8},ok:(a,t)=>a.bac>=BAL.actBac.musk&&t.preg&&!t.hidden,o:()=>null,x:"nàng sảy thai",f:(a,t)=>{ap(a,{bac:-BAL.actBac.musk,duc:-8});a.schemes=(a.schemes||0)+1;const c=caught(a,t,true,"bỏ xạ hương vào thuốc an thai của "+NM(t));if(c)return c;
   if(t.fake){t.preg=0;t.fake=0;evA(t,a,BAL.eff.j8.evF_6);return `${NMc(a)} sai người bỏ xạ hương vào thuốc của ${NM(t)}; ${NM(t)} nhân đó giả sảy thai, thoát khỏi vở kịch. `}
   t.preg=0;t.hidden=false;ap(t,{suc:-25});return `<span class="r">${NMc(t)} sảy thai.</span> Thái y nói trong thuốc có xạ hương. Sức -25. `}});
-A("catswap","Mua chuộc bà đỡ",{c:{bac:-50,duc:-10},ok:(a,t)=>a.bac>=50&&t.preg>=6&&!t.hidden&&!t.catplot,o:()=>null,x:"tráo hài nhi khi nàng sinh",f:(a,t)=>{ap(a,{bac:-50,duc:-10});a.schemes=(a.schemes||0)+1;t.catplot=key(a);return `${NMc(a)} cài bà đỡ vào cung ${NM(t)}, chờ ngày nàng lâm bồn. `}});
+A("catswap","Mua chuộc bà đỡ",{c:{bac:-BAL.actBac.catswap,duc:-10},ok:(a,t)=>a.bac>=BAL.actBac.catswap&&t.preg>=6&&!t.hidden&&!t.catplot,o:()=>null,x:"tráo hài nhi khi nàng sinh",f:(a,t)=>{ap(a,{bac:-BAL.actBac.catswap,duc:-10});a.schemes=(a.schemes||0)+1;t.catplot=key(a);return `${NMc(a)} cài bà đỡ vào cung ${NM(t)}, chờ ngày nàng lâm bồn. `}});
 A("ksab","Phá việc học",{c:{duc:-3},kid:1,ok:(a,t)=>!!tKid(t),o:a=>oKSab(a),f:(a,t)=>{const k=tKid(t);a.schemes=(a.schemes||0)+1;ap(a,{duc:-3});const c=caught(a,t,false,`phá việc học của ${k.name}`);if(c)return c;
   if(roll(oKSab(a))){k.tal=cl(k.tal-BAL.eff.j8.talF,0,100);ap(a,{tamco:2});return `${NMc(a)} mua chuộc thầy dạy, ${k.name} học hành sa sút. Tài -${balAb(BAL.eff.j8.talF)}. `}ap(a,{danh:-10});relAdd(a,t,BAL.eff.j8.f_7);punish(a,"phá việc học của hoàng tự",2);return `<span class="r">Mưu phá việc học của ${k.name} bị lộ.</span> `}});
 A("kpoison","Hạ độc con nàng",{c:{duc:-20},kid:1,ok:(a,t)=>!!tKid(t),o:a=>oKPoison(a),x:"lộ: ban chết",f:(a,t)=>{const k=tKid(t);a.schemes=(a.schemes||0)+1;ap(a,{duc:-20});const c=caught(a,t,true,`bỏ độc vào cháo của ${k.name}`);if(c)return c;
@@ -323,7 +323,7 @@ PEND.giu=()=>{const o1=od(45+S.tamco/3),o2=od(30+S.an/2);return{who:pTH(),t:"<p>
 /* a rival's night: same formula, no modal */
 function rivalNight(v){v.nights++;v.nightLog.push(wk());const q=Math.round(effSac(v)/20+Math.max(...Object.values(v.arts))+R(4)-1);ap(v,{sung:2+Math.round(q/2),an:2+Math.max(0,q)});v.pg=cl(v.pg+6,0,100);v.tablet=0;
  let r=`Đêm qua thẻ bài của ${v.name} được lật. `;
- if(giuBlocked(v)){if(v.bac>=40&&roll(odA(v,45+v.tamco/3))){ap(v,{bac:-40});night(v)}}else night(v);
+ if(giuBlocked(v)){if(v.bac>=BAL.bacFee.giu&&roll(odA(v,45+v.tamco/3))){ap(v,{bac:-BAL.bacFee.giu});night(v)}}else night(v);
  if(v.rel<-20&&roll(20)){const o=odA(v,30+v.an/2);if(roll(o)){apply({sung:-4});if(S.mat>=2)r+=`Tai mắt nghe được: gối đầu, ${v.name} nói xấu ngươi. Sủng -4. `}else if(DG()){ap(v,{sung:-6});}}
  if(typeof amOn==="function"&&amOn()?amSendQ(v):roll(3)){r+=sendMaid(v)}/* AG3: her own choice (jagmaid) */
  if(roll(8))bestow(v,"night");return r}
@@ -407,7 +407,7 @@ function npcMonthly(v){let ev="";const cost=k=>5+v.arts[k]*5;
  if(roll(30)&&roll(odA(v,55+v.sung/5+mm())))ap(v,{sung:3});
  if(!S.thDead&&roll(25))twDo(v,null,"thTH");
  if(qOn()&&!v.queen&&roll(20))twDo(v,queenP(),"thHH");
- if(roll(10)){const fr=others(v).filter(t=>rel(v,t)>10&&(t===S||t.alive));if(fr.length&&v.bac>=30){const t=pick(fr);const s=ACT.ally.f(v,t);if(t===S)ev+=s}}
+ if(roll(10)){const fr=others(v).filter(t=>rel(v,t)>10&&(t===S||t.alive));if(fr.length&&v.bac>=BAL.actBac.ally){const t=pick(fr);const s=ACT.ally.f(v,t);if(t===S)ev+=s}}
  if(roll(10)&&v.inv.some(e=>!e.h&&(itm(e.k).tg||[]).includes("rv"))){const t=pick(others(v));const i=v.inv.findIndex(e=>!e.h&&(itm(e.k).tg||[]).includes("rv"));if(rel(v,t)>0||t===S&&v.rel>5)ev+=seenNPC(v,t,giveTo(v,t,i))}
  /* an NPC may hold a piece that is not an IT item (a dress piece of WD_ITEMS, a co-op merged piece): skip it, never crash the month (co-op week stalled: coop-e2e) */v.inv.forEach((e,i)=>{const it=e&&IT[e.k];if(it&&it.sl&&!e.w&&!e.h&&(it.rk<=rkOf(v)||hasT(v,"Kiêu ngạo")))wear(v,i)});
  const ui=v.inv.findIndex(e=>!e.h&&(IT[e.k]||{}).use&&!e.t&&(v.suc<60||(itm(e.k).ant&&v.preg)));if(ui>=0)useItem(v,ui);
@@ -489,7 +489,7 @@ function itemAct(a,ix){const e=S.inv[ix];if(!e||S.dead||Q.length)return;const it
  else if(a==="gift"){if(!can(2))return;pushDil(mkP("giftpick",{ix}),"Tặng quà")}
  else if(a==="sell"){const r=sellItem(S,ix);if(r)log(r)}
  else if(a==="taint")pushDil(mkP("taintpick",{ix}),"Tẩm đồ");
- else if(a==="test"){if(S.bac<10)return;apply({bac:-10});if(e.t&&e.by!=="me"&&roll(cl(oSee(S,true)+25,5,95))){S.inv.splice(ix,1);const by=byKey(e.by);if(by)/*evok: tainted by (scheme)*/evA(S,by,BAL.eff.j8.evItemAct);log(`Thái y phát hiện ${it.n} ${TAINT[e.t].n}${by?`; dấu vết dẫn về ${NM(by)} (chứng cứ ${balSg(BAL.eff.j8.evItemAct)})`:""}.`)}else log(`Thái y xét ${it.n}: không thấy gì lạ.`)}
+ else if(a==="test"){if(S.bac<BAL.bacFee.itTest)return;apply({bac:-BAL.bacFee.itTest});if(e.t&&e.by!=="me"&&roll(cl(oSee(S,true)+25,5,95))){S.inv.splice(ix,1);const by=byKey(e.by);if(by)/*evok: tainted by (scheme)*/evA(S,by,BAL.eff.j8.evItemAct);log(`Thái y phát hiện ${it.n} ${TAINT[e.t].n}${by?`; dấu vết dẫn về ${NM(by)} (chứng cứ ${balSg(BAL.eff.j8.evItemAct)})`:""}.`)}else log(`Thái y xét ${it.n}: không thấy gì lạ.`)}
  render()}
 function invAct(a){if(S.dead||Q.length)return;
  if(a==="shop"){pushDil(mkP("shop"),"Nhờ thái giám mua đồ");render();return}
@@ -507,7 +507,7 @@ function invHTML(){const wb=wearBonus(S),vp=vpItems(S);const vis=S.inv.map((e,i)
   if(g.k!=="ngocboi"||g.t)B.push(`<button data-it="gift" data-ix="${i}" ${!can(2)?"disabled":""}>Tặng<small>tốn 2 khắc</small></button>`);
   if(it.pr)B.push(`<button data-it="sell" data-ix="${i}">Bán<small>Bạc +${Math.floor(it.pr/2)}</small></button>`);
   if(Object.values(TAINT).some(T=>T.on.includes(g.k))&&!g.t)B.push(`<button data-it="taint" data-ix="${i}">Tẩm<small>mưu kế</small></button>`);
-  if(g.from&&g.from!=="me"&&g.from!=="emp"&&g.from!=="th")B.push(`<button data-it="test" data-ix="${i}" ${S.bac<10?"disabled":""}>Xét nghiệm<small>Bạc -10</small></button>`);
+  if(g.from&&g.from!=="me"&&g.from!=="emp"&&g.from!=="th")B.push(`<button data-it="test" data-ix="${i}" ${S.bac<BAL.bacFee.itTest?"disabled":""}>Xét nghiệm<small>Bạc -${BAL.bacFee.itTest}</small></button>`);
   return `<div class="card"><h4>${iic(g.k)}${it.n}${g.n>1?` ×${g.n}`:""}${g.w?" · Đang mặc":""}</h4><p>${it.kd} · ${it.d}${g.t?` · <span class="r">đã ${TAINT[g.t].n}</span>`:""}${it.rk?` · bậc ${RANKS[Math.min(7,it.rk)].n}`:""}</p><div class="rbtn">${B.join("")}</div></div>`}).join("")+`</div>`;return h}
 /* the tablet: every consort weighted by the same night formula; others may steal it by the same act (the try is chosen in jsteal.js) */
 /* AG2 (jagemp): with the agent loop on, whether he calls anyone (empSummon, BAL.ag.emp.summon) and whom (empPick) are HIS choice */

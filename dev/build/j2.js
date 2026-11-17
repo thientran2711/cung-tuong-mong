@@ -182,7 +182,7 @@ function addArt(k,g){const a=ARTS.find(x=>x.k===k);S.artp[k]+=g;
 function lesson(k){const l=S.arts[k],cost=typeof tchFee==="function"?tchFee(k):5+l*5;if(!can(2)||l>=5||S.bac<cost||S.dead||Q.length||S.mg)return;apply({suc:-10,bac:-cost});spend(2);render();
  S.mg={k,l};save();resumeMG()}
 function resumeMG(){const m=S.mg;if(!m)return;const a=ARTS.find(x=>x.k===m.k);openMG(m.k,m.l,g=>{S.mg=null;log(`Học ${a.n}. Tiến bộ +${g}.`);addArt(m.k,g);render()})}
-function hireMaster(){if(S.bac<60||S.master||S.dead)return;apply({bac:-60});S.master=3;log("Mời danh sư vào cung dạy: 3 tháng tiến bộ gấp đôi.");render()}
+function hireMaster(){if(S.bac<BAL.bacFee.master||S.master||S.dead)return;apply({bac:-BAL.bacFee.master});S.master=3;log("Mời danh sư vào cung dạy: 3 tháng tiến bộ gấp đôi.");render()}
 
 /* what a won night is worth, in numbers: a full thị tẩm (Sủng, Ân tình, a chance of a child and of a gift); the cost to the rival on a red 'kèm' line */
 function stealX(v,road){let c=0;try{c=conceiveCh(S)}catch(e){}return `Sủng +${nightG(0)} đến +${nightG(10)} · Ân tình +${nightA(0)} đến +${nightA(5)}${S.preg?"":` · thai: ${chanceW(c)}`} · có thể được thưởng · kèm: ${stealKem(v)}`}

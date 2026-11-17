@@ -49,8 +49,8 @@ function tsbThuO(a,t){return cl(Math.round(odA(a,44+(a.tamco||0)/5+(a.mat||0)*3)
 function tsbFireO(a,t){return cl(Math.round(odA(a,46+(a.tamco||0)/5)-tsbGuard(t)),5,90)}
 
 /* ---------------- 1. Thả thú dữ (Hại nặng) ---------------- */
-A("thathu","Thả thú dữ làm hại dung nhan",{c:{bac:-40,duc:-6},ok:(a,t)=>(a.bac||0)>=40&&!t.scar&&!t.out,o:(a,t)=>tsbThuO(a,t),x:"Sắc nàng giảm mạnh tới khi lành, Sủng và Danh giảm",
- f:(a,t)=>{ap(a,{bac:-40,duc:-6});a.schemes=(a.schemes||0)+1;const c=caught(a,t,false,"mua chuộc người giữ thú thả thú dữ vào cung "+NM(t));if(c)return c;
+A("thathu","Thả thú dữ làm hại dung nhan",{c:{bac:-BAL.actBac.thathu,duc:-6},ok:(a,t)=>(a.bac||0)>=BAL.actBac.thathu&&!t.scar&&!t.out,o:(a,t)=>tsbThuO(a,t),x:"Sắc nàng giảm mạnh tới khi lành, Sủng và Danh giảm",
+ f:(a,t)=>{ap(a,{bac:-BAL.actBac.thathu,duc:-6});a.schemes=(a.schemes||0)+1;const c=caught(a,t,false,"mua chuộc người giữ thú thả thú dữ vào cung "+NM(t));if(c)return c;
   if(!roll(tsbThuO(a,t))){const e=roll(50);if(e)/*evok: thathu act*/evA(t,a,BAL.eff.jtsb.evF);return `Con thú dữ lọt vào cung ${NM(t)} bị người canh chặn kịp, đuổi đi trước khi kịp gây chuyện${e?`; kẻ thả thú bị bắt, khai là người của ${NM(a)} (chứng cứ ${balSg(BAL.eff.jtsb.evF)})`:""}. `}
   const sev=tsbSev();const L=tsbScar(t,sev,a);if(t===S){try{feedback("hit")}catch(e){}}
   return `<span class="r">Một con thú dữ không rõ từ đâu lọt vào cung ${NM(t)}, làm tổn dung nhan ${NM(t)} (hủy dung ${L.n}): Sắc -${L.d} tới khi lành, Sủng -${L.sung}, Danh -${L.danh}.</span> `}});
@@ -69,8 +69,8 @@ function tsbFitArt(g){try{const id="cat:"+g;const src=typeof evArtOf==="function
 function tsbPlaceArt(){try{const f=evArt();return f?{src:f,label:placeName(S.place||"home")}:undefined}catch(e){return undefined}}
 function tsbItemSrc(e){try{const a=tsbItemArt(e);if(a&&a.src)return a.src;if(e.wk)return `img/item-tp-${e.wk.kind||"theu"}-b${(e.wk.ti||0)+1}.webp`;const f=ITIMG[e.k];return kitItemSrc(e.k,f?`img/item-${f}.webp`:`img/item-${e.k}.webp`)}catch(x){return""}}
 function tsbBurn(p,n,cause){if((p.tsbSafe||0)>=tsbWk())return[];const L=tsbBurnable(p);const out=[];for(let i=0;i<n&&L.length;i++){const j=R(L.length);const [e]=L.splice(j,1);const ix=p.inv.indexOf(e);if(ix>=0){p.inv.splice(ix,1);out.push(tsbItemN(e));if(p===S)tsbLedger({what:tsbItemN(e),how:"cháy",cause})}}return out}
-A("phonghoa","Phóng hỏa kho đồ",{c:{bac:-30,duc:-8},ok:(a,t)=>(a.bac||0)>=30&&!t.out&&tsbBurnable(t).length>0,o:(a,t)=>tsbFireO(a,t),x:"đồ cháy được trong kho nàng bị thiêu (1-2 món)",
- f:(a,t)=>{ap(a,{bac:-30,duc:-8});a.schemes=(a.schemes||0)+1;const c=caught(a,t,false,"sai người phóng hỏa kho đồ của "+NM(t));if(c)return c;
+A("phonghoa","Phóng hỏa kho đồ",{c:{bac:-BAL.actBac.phonghoa,duc:-8},ok:(a,t)=>(a.bac||0)>=BAL.actBac.phonghoa&&!t.out&&tsbBurnable(t).length>0,o:(a,t)=>tsbFireO(a,t),x:"đồ cháy được trong kho nàng bị thiêu (1-2 món)",
+ f:(a,t)=>{ap(a,{bac:-BAL.actBac.phonghoa,duc:-8});a.schemes=(a.schemes||0)+1;const c=caught(a,t,false,"sai người phóng hỏa kho đồ của "+NM(t));if(c)return c;
   if(!roll(tsbFireO(a,t))){const e=roll(50);if(e)/*evok: phonghoa act*/evA(t,a,BAL.eff.jtsb.evF_2);return `Lửa vừa bén ở kho đồ của ${NM(t)} đã được chặn kịp, không mất gì${e?`; kẻ phóng hỏa bị bắt, khai là người của ${NM(a)} (chứng cứ ${balSg(BAL.eff.jtsb.evF_2)})`:""}. `}
   const lost=tsbBurn(t,1+(roll(35)?1:0),"có kẻ phóng hỏa (chưa rõ là ai)");t.tsbFire=(t.tsbFire||0)+1;
   if(!lost.length)return `Kho đồ của ${NM(t)} bén lửa nhưng đồ quý đã được cất chỗ khác; không mất gì. `;
@@ -210,9 +210,9 @@ function tsbPetHTML(){if(!S||!tsbOn())return"";let h="";/* the pet strip now sit
   if(S.turn!==t0){tsbFireMonth();tsbPetMonth()}}}catch(e){console.error("tsb week",e)}return r}})();
 /* the real unmet condition of each new act (person card Cần row, j63 reads LACK[k](v)) */
 try{if(typeof LACK==="object")Object.assign(LACK,{
- thathu:t=>t.scar?"nàng đang bị hủy dung, chưa lành":t.out?"nàng ở lãnh cung":S.bac<40?`Bạc 40 (có ${S.bac})`:"",
- phonghoa:t=>t.out?"nàng ở lãnh cung":!tsbBurnable(t).length?"kho nàng không có đồ cháy được (vải, giấy, hương, lễ vật gỗ)":S.bac<30?`Bạc 30 (có ${S.bac})`:"",
- thaopet:t=>!tsbPets(t).length?"nàng không nuôi thú":S.bac<10?`Bạc 10 (có ${S.bac})`:"",
+ thathu:t=>t.scar?"nàng đang bị hủy dung, chưa lành":t.out?"nàng ở lãnh cung":S.bac<actBac("thathu",S,t)?`Bạc ${actBac("thathu",S,t)} (có ${S.bac})`:"",
+ phonghoa:t=>t.out?"nàng ở lãnh cung":!tsbBurnable(t).length?"kho nàng không có đồ cháy được (vải, giấy, hương, lễ vật gỗ)":S.bac<actBac("phonghoa",S,t)?`Bạc ${actBac("phonghoa",S,t)} (có ${S.bac})`:"",
+ thaopet:t=>!tsbPets(t).length?"nàng không nuôi thú":S.bac<actBac("thaopet",S,t)?`Bạc ${actBac("thaopet",S,t)} (có ${S.bac})`:"",
  batnat:t=>rkOf(S)<=rkOf(t)?"phẩm ngươi phải cao hơn nàng":t.out?"nàng ở lãnh cung":"nàng không có bạc hay món quý nào đáng đòi"})}catch(e){}
 
 /* ================= CÂN BẰNG LỰA CHỌN "Có người đến" (điều phối 05:12Z, sếp hỏi "có thật sự cân bằng không") =================

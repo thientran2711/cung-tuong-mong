@@ -364,7 +364,7 @@ const KCE={
   kcO("Thưa: con chỉ muốn ở gần cha mẹ",{},()=>kcDo("Cha say rượu",()=>{kcAf(c,BAL.eff.jkc.o_11);S.kap+=BAL.eff.jkc.kapO_2;return"Cha im lặng một lúc. Sáng hôm sau ông cho gọi bà mối."})),
   kcO("Lắng nghe, hỏi chuyện các nhà trên triều",{},()=>kcDo("Cha say rượu",()=>{apply({tamco:2});kcNews();return"Ngươi nhớ từng cái tên cha nhắc tới."}))]}}},
  bac:{t:"Huynh trưởng thua bạc",b:()=>{const h=kcR("huynh");return{who:kcFace(h),t:`<p>${h.name} thua bạc ở sòng phía Nam, nợ năm mươi lạng, lén xin ngươi giúp, đừng cho cha biết.</p>`,o:[
-  kcO("Đưa bạc",{bac:-50},()=>kcDo("Thua bạc",()=>{kcAf(h,BAL.eff.jkc.o_12);h.me+=BAL.eff.jkc.meO;return"Huynh trưởng thề sẽ trả ơn."}),{dis:S.bac<50}),
+  kcO("Đưa bạc",{bac:-BAL.kc2.st.kc.bacHuynh},()=>kcDo("Thua bạc",()=>{kcAf(h,BAL.eff.jkc.o_12);h.me+=BAL.eff.jkc.meO;return"Huynh trưởng thề sẽ trả ơn."}),{dis:S.bac<BAL.kc2.st.kc.bacHuynh}),
   kcO("Mách cha",{},()=>kcDo("Thua bạc",()=>{kcAf(h,BAL.eff.jkc.o_13);h.oan+=BAL.eff.jkc.oanO_6;const c=kcR("cha");if(c)kcAf(c,BAL.eff.jkc.o_14);S.kgt-=BAL.eff.jkc.kgtO_4;return"Cha đánh huynh trưởng mười roi."})),
   kcO("Từ chối, giữ kín",{},()=>kcDo("Thua bạc",()=>{kcAf(h,BAL.eff.jkc.o_15);if(roll(40)){S.kgt-=BAL.eff.jkc.kgtO_5;return"Chủ sòng đến tận cửa đòi nợ. Cả phố biết."}return"Huynh trưởng tự xoay xở được."}))]}}},
  tobenh:{t:"Tổ mẫu lâm bệnh",b:()=>{const t=kcR("to");S.kc.ev.tobenh=1;return{who:kcFace(t),t:`<p>Tổ mẫu lâm bệnh nặng. Cả nhà bàn ai sẽ hầu thuốc ngày đêm.</p>`,o:[
@@ -375,7 +375,7 @@ const KCE={
   kcO("Đứng ngoài",{},()=>kcDo("Di nương có thai",()=>{const me=kcR("me");if(me)kcAf(me,BAL.eff.jkc.o_19);return"Mẫu thân ngồi một mình dưới giàn tử đằng."}))]}}},
  thuc:{t:"Thư nhà từ trong cung",b:()=>{const ct=kcContact();return{who:pMe(),t:`<p>${ct?ct+" gửi":"Một thái giám quen gửi"} thư ra, kể chuyện trong cung.</p>`,o:[
   kcO("Đọc kỹ, ghi nhớ",{},()=>kcDo("Thư từ trong cung",()=>{kcIntel(1,3);return""})),
-  kcO("Hồi âm, gửi kèm quà",{bac:-15},()=>kcDo("Thư từ trong cung",()=>{kcIntel(2,3);return"Người trong cung nhận quà, hứa để mắt giúp."}),{dis:S.bac<15})]}}},
+  kcO("Hồi âm, gửi kèm quà",{bac:-BAL.kc2.st.kc.bacThu},()=>kcDo("Thư từ trong cung",()=>{kcIntel(2,3);return"Người trong cung nhận quà, hứa để mắt giúp."}),{dis:S.bac<BAL.kc2.st.kc.bacThu})]}}},
  tho:{t:"Hội thơ xuân",b:()=>({who:pMe(),t:`<p>Phủ thế giao mở hội thơ xuân. Các tiểu thư kinh thành đều tới; nghe nói có cả người nhà các vương phủ.</p>`,o:[
   kcO("Dự hội, làm thơ",{suc:-15},()=>kcFest("Hội thơ","thi")),kcO("Cáo bệnh ở nhà",{},()=>kcDo("Hội thơ",()=>"Ngươi ở nhà đọc sách."))]})},
  hoa:{t:"Hội ngắm mẫu đơn",b:()=>({who:pMe(),t:`<p>Hầu phủ mời các nhà đến ngắm mẫu đơn. Các phu nhân đi xem mặt dâu.</p>`,o:[
@@ -418,7 +418,7 @@ const KCE={
  dinhhon2:{t:"Cha định hôn",b:()=>{const s=S.kc.suit[0];return{who:kcFace(kcR("cha")),t:`<p>Sính lễ của ${s.n} đã bày đầy chính sảnh. Không còn đường lùi.</p>`,o:[kcO("Lên kiệu hoa",{},()=>kcMarry(s)),kcO("Cắt tóc xin đi tu",{},()=>kcEnd("tu")),kcO("Thắt cổ tự vẫn",{},()=>kcDie("Tự vẫn trước ngày bị ép gả"))]}}},
  chieu:{t:"Chiếu tuyển tú",b:()=>({who:pEmp(),t:`<p>Chiếu tuyển tú ban xuống: mùa xuân năm tới, con gái các nhà quan và lương gia từ mười tám tới hai mươi tuổi đều phải ghi tên. ${kcR("muoi")?"Thứ muội cũng có tên.":""}</p>`,o:[
   kcO("Ghi tên",{},()=>kcDo("Chiếu tuyển tú",()=>{S.kap=Math.max(0,S.kap-BAL.eff.jkc.kapO_8);S.kc.suit=[];S.kc.forced=0;return"Tú nữ đã ghi tên thì không nhà nào được dạm hỏi. Nhà thôi bàn chuyện gả ngươi đi."})),
-  kcO("Xin cha lo cho được miễn tuyển",{bac:-40},()=>kcDo("Chiếu tuyển tú",()=>{S.kc.mien=1;return"Cha gật đầu. Ngươi sẽ không phải đi tuyển; nhà sẽ lo chuyện gả chồng."}),{dis:S.kap<BAL.kc2.st.kc.mien||S.bac<40})]})},
+  kcO("Xin cha lo cho được miễn tuyển",{bac:-BAL.kc2.st.kc.bacMien},()=>kcDo("Chiếu tuyển tú",()=>{S.kc.mien=1;return"Cha gật đầu. Ngươi sẽ không phải đi tuyển; nhà sẽ lo chuyện gả chồng."}),{dis:S.kap<BAL.kc2.st.kc.mien||S.bac<BAL.kc2.st.kc.bacMien})]})},
  o0:{t:"",b:()=>kcOrigin(0)},o1:{t:"",b:()=>kcOrigin(1)},o2:{t:"",b:()=>kcOrigin(2)},
  so:{t:"Sơ tuyển",b:()=>kcSoD()},phuc:{t:"Phúc tuyển",b:()=>kcPhucD()},dien:{t:"Điện tuyển",b:()=>kcDienD()},trave:{t:"Trả thẻ bài",b:()=>kcTraveD()}};
 PEND.kcE=pp=>{if(!S||!S.kc||S.dead)return null;if(!isKc()&&!/^(dien)$/.test(pp.e))return null;const E=KCE[pp.e];if(!E)return null;const d=E.b(pp);if(!d)return null;
@@ -498,7 +498,7 @@ function kcSoTuyen(){if(S.kc.so||S.dead)return;S.kc.so=1;if(S.kc.mien){S.kc.mien
  pushDil(mkP("kcE",{e:"so"}),"Sơ tuyển")}
 function kcSoOk(bribe){const C=KC.so;const sc=(S.sac>=C.sac?1:0)+(S.suc>=C.suc?1:0)+(S.kld<C.ld?1:0)+(S.kgt>=C.gt?1:0)+(bribe?1:0);return sc>=3}
 function kcSoD(){return{who:pMe(),t:`<p>Ma ma Nội vụ phủ đến khám tuyển: xem dung mạo, khí sắc, hỏi gia thế, nghe ngóng tiếng tăm. ${S.kc.ldSeen&&S.kld>=40?"Ngươi biết lời đồn về mình đã đến tai họ.":""}</p>`,o:[
- kcO("Ra mắt ma ma",{},()=>kcSoGo(false)),kcO("Dúi bạc cho ma ma khám tuyển",{bac:-60},()=>kcSoGo(true),{dis:S.bac<60})]}}
+ kcO("Ra mắt ma ma",{},()=>kcSoGo(false)),kcO("Dúi bạc cho ma ma khám tuyển",{bac:-BAL.kc2.st.kc.bacMama},()=>kcSoGo(true),{dis:S.bac<BAL.kc2.st.kc.bacMama})]}}
 function kcPd(n,why){try{if(typeof pdAdd==="function")pdAdd(n,why,"kc")}catch(e){}}
 function kcSoGo(bribe){const b=rsnap();if(kcSoOk(bribe)){S.kpTron=1;S.kc.soOk=1;kcPd(5,"qua Sơ tuyển");kcRes("Sơ tuyển",b,"Ngươi qua Sơ tuyển. Tên ngươi được ghi vào sổ tú nữ.")}else{S.kc.soOk=0;kcRes("Sơ tuyển",b,"Ma ma lắc đầu: ngươi bị trả về.");pushDil(mkP("kcE",{e:"trave"}),"Trả thẻ bài")}}
 function kcTuyen(early){if(S.kc.tt||S.dead)return;if(!early&&!S.kc.soOk)return;S.kc.tt={early:!!early,raw:5};if(early){S.kpTron=1}
