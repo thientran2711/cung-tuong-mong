@@ -948,3 +948,4 @@
 | DISPLAY SET BONUS build (opus; OD 21:15Z approved, s37 order 21:16Z) | review/display-set-bonus | C-AG | session_01UV1SzjpfceWSitedZq3R6g | RUNNING | 17/11 21:11Z |
 | odds-cap fix round 2 (opus; r1 FAIL 5 @bc58dd46) | review/odds-cap | D | session_01964izBuoCyMCGvstmPMb5T | RUNNING | 17/11 21:15Z |
 | ART hoa-dien-art #2 (opus; successor of R5e4: fig/hd/tn twins, W2c/W12 keys, HD_ANCHOR; POR stays with R5e4) | handover reports/hoa-dien-art.md | C ROOT-10 | session_011xDdVNfSx9r7wqg7ooEXKn | RUNNING | 17/11 21:15Z |
+| REVIEW coop-thin-c reviewer #2 (successor of 4NkEVbfk at f65b5b6c; opus BIG; brief briefs/review-coop-thin-c-2.md) | review/coop-thin-c-r1 | B | (opening) | RUNNING | 17/11 21:22Z |
