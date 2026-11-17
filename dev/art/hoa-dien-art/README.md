@@ -15,3 +15,10 @@ Images never in git; review copies on CDN img/_review/hoa-dien-art/.
 - clean3.py: haar face of the image (REF only when haar finds no eyes); 2nd pass on the result for leftovers. por = lossless.
 - twin.py: fig/hd/tn at own size, lossy (Q env, default 95) + out_mad QA.
 - sprites/icons: img/hd-hd-*.webp, img/hd-hoadien-bac.webp, img/wd-hd-*.webp (live 17/11 ~20:15Z).
+
+## v3 (hoa-dien #2, 17/11 ~22:30Z) — twins
+- resume.sh KIND LIST OUT LOG: resumable 4-worker twin.py run (fig|hd|hd2|tn); runclean.sh: 4-worker clean3.py; look.py: before|after zoom sheet.
+- guided.py KIND SRC OUT PORSRC PORLOG NAME...: 2nd pass for twin misses ('nomark' at twin scale: figs are often a re-painted pose whose
+  small/pale mark the detector loses). Warps the twin forehead back to por scale (template match), skin ref = brighter part of a ring
+  around the KNOWN por mark box, mask = colour outliers connected to the anchor (dark uncoloured = brow/hair never), dilate, harmonic fill.
+  Pilot 12 misses: 10 clean, 2 nomark, brows intact, out_mad = base.
