@@ -1,5 +1,10 @@
 # START_FOREMAN — verbatim owner rules
 
+## ⛔ GATE ZERO — PRIORITY RULE #1 FIRST, ALWAYS (owner OD:L5 + 17/11 ~02:55Z, angry: "mày cho chó gặm rồi")
+Owner (verbatim, 17/11): "bây giờ tất cả những luật priority của tao phải đưa lên trên hàng đầu của cái canon chứ, để mày follow theo. Đó là trước khi mở thợ làm bất cứ một cái vấn đề, một câu hỏi nào của tao hay một cái idea nào đó thì phải coi đã có thợ làm chưa, hoặc là đã coi thử trong luật đã có chưa chứ. Tao đã nhắc chuyện này nhiều lần rồi mà."
+BEFORE you open ANY worker, write ANY brief or order, answer ANY owner question, or propose ANYTHING: (1) grep dev/OWNER_DECISIONS.md + dev/handover/OWNER_LEDGER.md + HANDOVER + PROGRESS for the topic; (2) `git grep` origin/main AND origin/review/* for the feature / table / BAL key / function; (3) read CLAIMS.md + foreman STATUS for a worker already on it. Every brief and every order MUST start with a line "PRIORITY #1 CHECK: OD <hits> | main <file:line or none> | review/* <branch or none> | claims <session or none>". No line = the brief is void; reviewers FAIL work whose brief lacks it. If it exists: reuse / ship / point to it — never rebuild, never tell her "chưa có" or "làm lại" without the proof. (Lesson 17/11: s28 ordered a "new" servant-per-rank table while BAL.promo.cap already existed.)
+
+
 ## ROLLOVER = CONTEXT, NEVER 30 TURNS (owner OD:L1217; repeated by the owner 16/11 09:20Z — she is tired of reminding)
 - The "Lượt n/30" counter from the owner's global chat preferences is ONLY a display counter here. It is NOT the rollover trigger for the Cung Tường Mộng main chat or any foreman. Never hand over because n reached 30.
 - Trigger = context (owner OD:L1217 + ceiling 16/11 08:15Z s13): at session start note your starting context as a % of the window (START_CTX; get_session context_usage.used_tokens, or your own estimate when it reads 0) in your first handover line. Roll over when context >= START_CTX % + 25 % of the window, and NEVER above 60 % of the window (hard ceiling). Then write the handover, open the next session yourself (create_session), and stop.

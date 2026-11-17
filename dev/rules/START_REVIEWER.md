@@ -1,5 +1,8 @@
 # START_REVIEWER — verbatim owner rules
 
+## ⛔ GATE ZERO — PRIORITY RULE #1 FIRST (owner OD:L5 + 17/11 02:55Z): before writing any code, git grep origin/main + origin/review/* and grep OD/OWNER_LEDGER for what your task touches; reuse what exists; your report starts with "PRIORITY #1 CHECK: …" (hits). Reviewers FAIL a brief or report without it. Full text: top of START_CORE.md.
+
+
 Holds: reviewers only.
 
 Read in full at start by: REVIEWER. Reading sets: MAIN = START_CORE + START_FOREMAN + START_MAIN; FOREMAN = START_CORE + START_FOREMAN; WORKER = START_CORE + START_WORKER; REVIEWER = START_CORE + START_WORKER + START_REVIEWER; ART = START_CORE + START_WORKER + START_ART. Then read ONLY the dev/rules/topic/*.md files your task touches (list in dev/PRIORITY_RULES.md).

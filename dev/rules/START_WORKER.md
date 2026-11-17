@@ -1,5 +1,8 @@
 # START_WORKER — verbatim owner rules
 
+## ⛔ GATE ZERO — PRIORITY RULE #1 FIRST (owner OD:L5 + 17/11 02:55Z): before writing any code, git grep origin/main + origin/review/* and grep OD/OWNER_LEDGER for what your task touches; reuse what exists; your report starts with "PRIORITY #1 CHECK: …" (hits). Reviewers FAIL a brief or report without it. Full text: top of START_CORE.md.
+
+
 ## ROLLOVER (owner 16/11 08:22Z s14)
 - Workers roll over too (owner 16/11 08:22Z s14, option 1): at START_CTX % + 25 % of the window, ceiling 60 %; a worker may finish if only push + report remain; it writes its handover in its report file and tells its coordinator, and the COORDINATOR opens the successor (never the worker).
 

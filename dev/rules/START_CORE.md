@@ -1,5 +1,10 @@
 # START_CORE — verbatim owner rules
 
+## ⛔ GATE ZERO — PRIORITY RULE #1 FIRST, ALWAYS (owner OD:L5 + 17/11 ~02:55Z, angry: "mày cho chó gặm rồi")
+Owner (verbatim, 17/11): "bây giờ tất cả những luật priority của tao phải đưa lên trên hàng đầu của cái canon chứ, để mày follow theo. Đó là trước khi mở thợ làm bất cứ một cái vấn đề, một câu hỏi nào của tao hay một cái idea nào đó thì phải coi đã có thợ làm chưa, hoặc là đã coi thử trong luật đã có chưa chứ. Tao đã nhắc chuyện này nhiều lần rồi mà."
+BEFORE you open ANY worker, write ANY brief or order, answer ANY owner question, or propose ANYTHING: (1) grep dev/OWNER_DECISIONS.md + dev/handover/OWNER_LEDGER.md + HANDOVER + PROGRESS for the topic; (2) `git grep` origin/main AND origin/review/* for the feature / table / BAL key / function; (3) read CLAIMS.md + foreman STATUS for a worker already on it. Every brief and every order MUST start with a line "PRIORITY #1 CHECK: OD <hits> | main <file:line or none> | review/* <branch or none> | claims <session or none>". No line = the brief is void; reviewers FAIL work whose brief lacks it. If it exists: reuse / ship / point to it — never rebuild, never tell her "chưa có" or "làm lại" without the proof. (Lesson 17/11: s28 ordered a "new" servant-per-rank table while BAL.promo.cap already existed.)
+
+
 Holds: binding laws for EVERY role (kit first, fix the whole group, priority rule #1, canon overwrite, verbatim rules, low context, devices).
 
 Read in full at start by: MAIN, FOREMAN, WORKER, REVIEWER, ART. Reading sets: MAIN = START_CORE + START_FOREMAN + START_MAIN; FOREMAN = START_CORE + START_FOREMAN; WORKER = START_CORE + START_WORKER; REVIEWER = START_CORE + START_WORKER + START_REVIEWER; ART = START_CORE + START_WORKER + START_ART. Then read ONLY the dev/rules/topic/*.md files your task touches (list in dev/PRIORITY_RULES.md).
