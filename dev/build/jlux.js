@@ -111,7 +111,7 @@ if(typeof toilFx==="function"){const tf0=toilFx;toilFx=function(p,host,F,baseSta
  if(x&&x.sc>0){const V=luxVerdict(v,toilFOf("th"),"th");o.dv=V.v==="tang"||V.v==="vuot"?"photruong":V.v;o.style=V.style}}catch(e){}return o}})();
 
 /* ---------- monthly: reputation (tiếng xa hoa), the frugal edict, lãnh cung ---------- */
-function luxRepTick(p){const B=BAL.lux;let x={lv:1};try{x=luxOf(p)}catch(e){}const add=(x.lv>=3?2:x.lv>=2?1:0)+(p===S?Math.min(2,S.luxRepD|0):0);if(p===S)S.luxRepD=0;
+function luxRepTick(p){const B=BAL.lux;let x={lv:1};try{x=luxOf(p)}catch(e){}const add=(x.lv>=BAL.cut.luxRep[1]?2:x.lv>=BAL.cut.luxRep[0]?1:0)+(p===S?Math.min(2,S.luxRepD|0):0);if(p===S)S.luxRepD=0;
  p.luxRep=cl((p.luxRep|0)+(add||-1),0,B.repMax);return p.luxRep}
 function luxXaHoa(p){return (p.luxRep|0)>=BAL.lux.repOn}
 window.luxXaHoa=luxXaHoa;

@@ -18,7 +18,7 @@ const OBON69=[0,10,20];
 /* noBd: a life pre-rolled before bd existed (ow=1) keeps the origin it had (same table order without bd); new rolls are ow=2 (D18) */
 function ow69Pick(seed,noBd){const r=nlRng((seed^0x9e3779b9)>>>0)();const L=ORIGINS.filter(o=>OW69[o.k]>0&&!(noBd&&o.k==="bd"));const tot=L.reduce((a,o)=>a+OW69[o.k],0);
  let x=r*tot;for(const o of L){x-=OW69[o.k];if(x<0)return o.k}return L[L.length-1].k}
-function ow69Rare(k){const w=OW69[k]||0;return w<=6?"Rất hiếm":w<=9?"Hiếm":"Thường gặp"}
+function ow69Rare(k){const w=OW69[k]||0;return w<=BAL.rareLv[0]?"Rất hiếm":w<=BAL.rareLv[1]?"Hiếm":"Thường gặp"}
 if(typeof nlRun==="function")(function(){const r0=nlRun;nlRun=function(d){
  if(!d||window.__forceOrigin)return r0.apply(this,arguments);
  if(!d.ow&&!d.faces){d.ow=2;try{const c=store.get(NL_KEY);if(c&&c.seed===d.seed){c.ow=2;store.set(NL_KEY,c)}}catch(e){}}

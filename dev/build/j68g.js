@@ -51,9 +51,9 @@ EV6("empOldFlame","emp",{a:["emp"],pp:()=>S.sung>=30?{a0:0}:null,w:C=>.7,
   c6("Lảng sang chuyện khác",{w:{suc:1},k:[R6("lỡ dịp gần ngài: Sủng -1")],ok:()=>{apply({sung:-1});return "Ngài thở dài, không nói thêm."}})]});
 EV6("kidTutor","kid",{a:["kid"],pp:()=>{const a=kid6(k=>k.age>=6);return a==null?null:{a0:a}},w:C=>1.2,
  v:["Thầy dạy ở Thượng thư phòng tâu {A} lười học, hay ngủ gật.","Thầy khen {A} thông minh hơn các anh em, muốn cho học thêm binh pháp.","{A} cãi lại thầy dạy, bị phạt đứng ngoài hiên cả buổi.","{A} trốn học ra ngự hoa viên bắt dế, thầy dạy không dám báo lên."],
- o:X=>[c6("Tự kèm con học",{c:{suc:-8},r:[[X.A,6]],ok:()=>{X.A.o.tal=cl((X.A.o.tal||40)+4,0,100);return `${X.A.n} chịu học hơn. Tài năng của con +4.`},wt:[G6("con tiến bộ")]}),
-  c6("Biếu thầy, nhờ dạy kỹ",{c:{bac:-25},ok:()=>{X.A.o.tal=cl((X.A.o.tal||40)+3,0,100);return "Thầy để tâm hơn. Tài năng của con +3."},wt:[G6("con tiến bộ")]}),
-  c6("Mắng con nghiêm khắc",{r:[[X.A,-8]],ok:()=>{X.A.o.tal=cl((X.A.o.tal||40)+2,0,100);return `${X.A.n} sợ mẹ, ngồi yên học. Tài năng của con +2.`},wt:[G6("con chịu học")]})]});
+ o:X=>[c6("Tự kèm con học",{c:{suc:-8},r:[[X.A,6]],ok:()=>{X.A.o.tal=cl((X.A.o.tal||40)+BAL.eff.j68g.talOk,0,100);return `${X.A.n} chịu học hơn. Tài năng của con ${balSg(BAL.eff.j68g.talOk)}.`},wt:[G6("con tiến bộ")]}),
+  c6("Biếu thầy, nhờ dạy kỹ",{c:{bac:-25},ok:()=>{X.A.o.tal=cl((X.A.o.tal||40)+BAL.eff.j68g.talOk_2,0,100);return `Thầy để tâm hơn. Tài năng của con ${balSg(BAL.eff.j68g.talOk_2)}.`},wt:[G6("con tiến bộ")]}),
+  c6("Mắng con nghiêm khắc",{r:[[X.A,-8]],ok:()=>{X.A.o.tal=cl((X.A.o.tal||40)+BAL.eff.j68g.talOk_3,0,100);return `${X.A.n} sợ mẹ, ngồi yên học. Tài năng của con ${balSg(BAL.eff.j68g.talOk_3)}.`},wt:[G6("con chịu học")]})]});
 EV6("kidLie","kid",{a:["kid","sv"],pp:()=>{const a=kid6(k=>k.age>=5&&k.age<=14);const b=sv6();return a==null||b==null?null:{a0:a,a1:b}},w:C=>1,
  v:["{A} làm vỡ bình hoa, rồi đổ cho {B}.","{A} lấy trộm bánh dâng Thái hậu, {B} bị nghi.","{A} xé sách của thầy, nói là {B} sơ ý.","{A} thả chim trong lồng của Hoàng thượng ban, rồi bảo {B} quên đóng cửa."],
  o:X=>[c6("Tra cho rõ, minh oan người hầu",{c:{suc:-3},r:[[X.B,12],[X.A,-5]],w:{duc:2}}),
@@ -71,9 +71,9 @@ EV6("rumorTH","rumor",{a:["th"],pp:()=>S.thDead?null:{a0:0},w:C=>1,
   c6("Bỏ ngoài tai",{w:{duc:1},k:[R6("không biết thật hư")]})]});
 EV6("rumorFavor","rumor",{a:["emp"],pp:()=>({a0:0}),w:C=>1,
  v:["Lời đồn khắp lục cung: Hoàng thượng đã chán ngươi.","Người ta xì xào: ngươi sắp được tấn phong.","Cung nữ các cung đồn ngài hay hỏi đến ngươi khi uống rượu.","Có kẻ bảo thẻ bài của ngươi bị Kính sự phòng giấu xuống dưới."],
- o:X=>[c6("Mua tin Kính sự phòng",{c:{bac:-20},p:od(55+S.mat*4),wt:[G6("biết sự thật")],w:{mat:1},lt:[R6("hắn ậm ừ")],l:{bac:-5},ok:()=>`Thái giám Kính sự phòng nói thật: Sủng của ngươi đang ${S.sung>=60?"rất cao":S.sung>=35?"khá":S.sung>=15?"thấp":"rất thấp"}${S.block?"; có người chặn thẻ của ngươi":""}.`}),
+ o:X=>[c6("Mua tin Kính sự phòng",{c:{bac:-20},p:od(55+S.mat*4),wt:[G6("biết sự thật")],w:{mat:1},lt:[R6("hắn ậm ừ")],l:{bac:-5},ok:()=>`Thái giám Kính sự phòng nói thật: Sủng của ngươi đang ${S.sung>=BAL.sungLv.kinh[2]?"rất cao":S.sung>=BAL.sungLv.kinh[1]?"khá":S.sung>=BAL.sungLv.kinh[0]?"thấp":"rất thấp"}${S.block?"; có người chặn thẻ của ngươi":""}.`}),
   c6("Làm như không nghe",{w:{duc:1},k:[R6("không biết thật hư")]}),
-  c6("Tìm kẻ tung tin",{c:{suc:-5},p:od(35+S.mat*6),w:{danh:1},wt:[G6("biết ai đứng sau")],l:{suc:-2},lt:[R6("không ra ai")],ok:()=>{const L=liveRivals(true).filter(v=>{try{return bandOf(danger(v,S))>=1}catch(e){return false}});const v=L.length?pick(L):null;if(v){evStory(v,1,"tung tin đồn về ngươi");return `Lời đồn bắt nguồn từ người của ${v.name}. Chứng cứ +1.`}return "Chỉ là lời đồn vô hại của đám cung nhân rảnh việc."}})]});
+  c6("Tìm kẻ tung tin",{c:{suc:-5},p:od(35+S.mat*6),w:{danh:1},wt:[G6("biết ai đứng sau")],l:{suc:-2},lt:[R6("không ra ai")],ok:()=>{const L=liveRivals(true).filter(v=>{try{return bandOf(danger(v,S))>=1}catch(e){return false}});const v=L.length?pick(L):null;if(v){evStory(v,BAL.eff.j68g.evOk,"tung tin đồn về ngươi");return `Lời đồn bắt nguồn từ người của ${v.name}. Chứng cứ ${balSg(BAL.eff.j68g.evOk)}.`}return "Chỉ là lời đồn vô hại của đám cung nhân rảnh việc."}})]});
 EV6("lotusSeason","sea",{a:["rv"],pp:()=>{const a=rv6();return a==null?null:{a0:a}},w:C=>C.sea==="Hạ"&&C.wx.f!==3?1.6:0,
  v:["Sen Thái Dịch trì nở trắng hồ; {A} rủ ngươi chèo thuyền hái sen.","Sương sớm đọng trên lá sen, {A} bày trò hứng sương pha trà dâng Hoàng thượng.","{A} muốn cùng ngươi làm bánh hạt sen mời Thái hậu.","Đêm hè, {A} thả đèn hoa sen trên hồ, cầu duyên con cái."],
  o:X=>[c6("Đi cùng nàng",{c:{suc:-5},r:[[X.A,7]],w:{sac:1}}),
