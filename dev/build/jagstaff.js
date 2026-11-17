@@ -107,7 +107,7 @@ function asRun(s,o){const m=ownerOf(s);if(!m)return"";const A=SRVA[o.sk];asC(s,o
   return r}
 function asOut(s,why){const o=ownerOf(s);if(o&&o.staff){const i=o.staff.indexOf(s);if(i>=0)o.staff.splice(i,1)}s.out=why||1;ASN.out=(ASN.out||0)+1}
 const AS_DO={
- nvp(s){if(roll(SRVA.nvp.bully)){asAp(s,{suc:-5});return""}const L=allServ().filter(x=>x!==s&&ownerOf(x)!==ownerOf(s));if(L.length){const x=L[R(L.length)];s.af=s.af||{};s.af[x.sid]=cl((s.af[x.sid]||0)+5,-100,100)}return""},
+ nvp(s){if(roll(SRVA.nvp.bully)){asAp(s,SRVA.nvp.bullyC);return""}const L=allServ().filter(x=>x!==s&&ownerOf(x)!==ownerOf(s));if(L.length){const x=L[R(L.length)];s.af=s.af||{};s.af[x.sid]=cl((s.af[x.sid]||0)+5,-100,100)}return""},
  spy(s,m,o,ok){const v=o.t;if(ok){/*evok: capped (the player's own "Lén báo tin")*/evA(v,m,SRVA.spy.ev);return v===S?`Tai mắt ${s.name} trong cung ${m.name} lén báo tin: chứng cứ +${SRVA.spy.ev}. `:""}
   if(roll(SRVA.spy.out)){asOut(s,"tgk");return asSee(m,v)?`${m===S?"Ngươi":m.name} bắt gặp ${s.name} lén lút với người của ${NM(v)}, đày xuống Tân Giả khố. `:""}return""},
  tellMis(s,m){const iv=(s.intel||[]).map(RV).filter(v=>v&&v.alive&&v!==m)[0];s.intel=(s.intel||[]).slice(1);if(iv){/*evok: servant intel, capped*/evA(m,iv,SRVA.tellMis.ev);if(m===S)return `${s.name} bẩm tin dò được về ${iv.name}: chứng cứ +${SRVA.tellMis.ev}. `}return""},

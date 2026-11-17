@@ -617,6 +617,9 @@ Object.assign(BAL,{ag:{on:1,
    uMul     × on every option of hers against keeping her routine (BAL.ag.routine): bot 40 tuần, 1 → ~10 % of buổi acted, 3 → most buổi
    monthSuc Sức back each month (a night's sleep is in the buổi rest act); secSee = % per month she sees her master scheming at home (Biết chuyện)
    hit      × on a consort's spite when she weighs hitting another palace's maid (jmline mlHit as a choice) */
+/* BAL.srvGate — the player maid's gates read by SRVA (j42) and the NPC staff: Chủ tin for "Xin chủ ban thưởng" (rew) / "Xin chủ tiến cử" (rec);
+   frameLoy = the framed colleague's lòng after "Tố lỗi với chủ"; bully = Sức lost when bullied at Nội vụ phủ (Lĩnh đồ) */
+BAL.srvGate={rew:60,rec:50,frameLoy:-15,bully:5};
 BAL.ag.staff={st:{duc:[10,40],tamco:[10,40],danh:[0,10],suc:[60,90],bac:[0,20]},goal:{tin:70,suc:60,bac:40,sac:60,tai:40,duc:40,friend:2},
  nw:{tin:1.2,mp:1,suc:1.2,bac:.6,self:.4,ally:.5,sung:1,love:.3,spite:.4},greed:2,mpS:4,sc:{af:.3,tinh:.3,spite:.3,sung:.25},
  riskD:3,caughtTin:20,caughtSuc:20,vowTinh:20,dt:40,expel:30,exile:35,vowW:.5,outW:.3,monthSuc:10,secSee:30,hit:1,uMul:3};

@@ -38,7 +38,7 @@ const SRVA={
  sweep:{k:1,c:a=>({suc:srvRkA(a)>=2?-2:-5}),o:()=>100,w:{tin:1},mp:.5},
  tea:{k:1,c:{suc:-2},o:(a,m)=>50+a.sac/10+a.tai/10+misAdj(m,a),w:{tin:2},l:{tin:-2},mp:.25},
  follow:{k:1,o:()=>100,w:{tin:1}},
- nvp:{k:2,c:{suc:-8},o:()=>100,w:{tin:2},mp:.5,bully:25},
+ nvp:{k:2,c:{suc:-8},o:()=>100,w:{tin:2},mp:.5,bully:25,get bullyC(){return {suc:-BAL.srvGate.bully}}},
  rite:{k:1,c:{suc:-3},o:()=>100,w:{duc:1},mp:.25},
  study:{k:1,c:{suc:-3},o:()=>60,w:{tai:1}},
  groom:{k:1,c:{bac:-3},o:()=>55,w:{sac:1}},
@@ -49,9 +49,9 @@ const SRVA={
  errand:{k:1,o:()=>100,w:{},offer:45},
  spy:{k:1,o:a=>70+a.tamco/5,w:{bac:8},l:{tin:-15},ev:1,out:40},
  massage:{k:1,o:(a,m)=>45+a.sac/10+a.tai/10+misAdj(m,a),w:{tin:3},l:{tin:-1},mp:.25},
- askRew:{k:1,o:a=>40+srvTin(a)/2,w:(a,m)=>({bac:3+rkOf(m)}),l:{tin:-4},tin:60},
+ askRew:{k:1,o:a=>40+srvTin(a)/2,w:(a,m)=>({bac:3+rkOf(m)}),l:{tin:-4},get tin(){return BAL.srvGate.rew}},
  tellMis:{k:1,o:()=>100,w:{tin:5},ev:1},
- askRec:{k:1,o:a=>30+srvTin(a)/2,w:{},l:{tin:-3},mpOk:3,tin:50},
+ askRec:{k:1,o:a=>30+srvTin(a)/2,w:{},l:{tin:-3},mpOk:3,get tin(){return BAL.srvGate.rec}},
  beside:{k:1,o:(a,m)=>55+misAdj(m,a),w:{tin:2},l:{tin:-1}},
  greet:{k:1,o:()=>100,w:{danh:1}},
  betray:{k:1,o:()=>100,w:{bac:15,danh:1},ev:2,kill:30},
@@ -59,7 +59,7 @@ const SRVA={
  chat:{k:1,o:a=>55+a.duc/5+a.sac/10,af:10,afL:-3,know:35},
  gift:{k:1,c:{bac:-5},o:()=>100,af:12},
  ask:{k:1,o:()=>100,af:30},
- frame:{k:1,o:a=>30+a.tamco/3,w:{tin:3},l:{tin:-5},loy:-15,af:-40,afL:-30,out:25},
+ frame:{k:1,o:a=>30+a.tamco/3,w:{tin:3},l:{tin:-5},get loy(){return BAL.srvGate.frameLoy},af:-40,afL:-30,out:25},
  tonic:{k:1,c:{bac:-6},o:()=>100,w:{suc:15}},
  learn:{k:1,o:a=>40+a.tai/3,w:{tai:1},art:30},
  hail:{k:1,o:()=>100,af:5},
@@ -209,7 +209,7 @@ function srvCards(){const m=srvM();const X=[];if(!m)return X;const B=bid();const
  if(S.srv.spyFor!=null&&!srvOnce("spy")){const v=RV(S.srv.spyFor);if(v&&v.alive)X.push({n:`Lén báo tin cho ${v.name}`,t:"Kể chuyện trong cung chủ cho người đã mua chuộc ngươi.",k:SRVA.spy.k,c:{},o:od(SRVA.spy.o(S)),w:SRVA.spy.w,l:SRVA.spy.l,x:`${v.name} nắm ${SRVA.spy.ev} chứng cứ của ${m.name}`,once:"spy",go:()=>/*evok: capped; preview only*/evA(v,m,SRVA.spy.ev),fail:()=>{if(roll(SRVA.spy.out))srvLaundry(`${m.name} bắt gặp ngươi lén lút với người của ${v.name}.`,8)}})}
  X.forEach(a=>a.dom="");return X}
 function srvMeet(){const m=srvM();const L=allServ().filter(s=>ownerOf(s)!==m&&!S.srv.met.includes(s.sid));
- if(roll(SRVA.nvp.bully)){apply({suc:-5});log("Tiểu thái giám Nội vụ phủ bắt nạt, bắt ngươi xách thêm hai gánh nước. Sức -5.");return}
+ if(roll(SRVA.nvp.bully)){apply(SRVA.nvp.bullyC);log("Tiểu thái giám Nội vụ phủ bắt nạt, bắt ngươi xách thêm hai gánh nước. Sức -5.");return}
  if(L.length){const s=pick(L);S.srv.met.push(s.sid);srvAf(s,5);log(`Ở Nội vụ phủ ngươi quen ${s.name}, ${srkName(s).toLowerCase()} của ${NM(ownerOf(s))}.`)}}
 (function(){const d0=deal;deal=function(){if(isSrv()){deck=srvCards();return}return d0.apply(this,arguments)}})();
 (function(){const a0=act;act=function(i){const a=deck[i];const was=a&&a.done;const r=a0.apply(this,arguments);
