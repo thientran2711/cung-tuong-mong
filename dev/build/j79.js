@@ -449,6 +449,8 @@ html body #modal:not(.pcm) .dlg.kpanel .kpb.kpshort .kpmain{align-items:center}
 .dlg.kpanel #mr{display:flex;justify-content:flex-end;gap:8px}
 .kbtn,.dlg.kpanel #mr .main{font-family:var(--display);font-weight:700;letter-spacing:.02em;color:#fff8e6;background:linear-gradient(#b0402c,#8a2a1e);border:1px solid #6e1d12;box-shadow:inset 0 0 0 1px #f0d07066,0 1px 0 #d9c49a;border-radius:8px;min-height:42px;padding:8px 22px;cursor:pointer;white-space:normal}
 .kbtn:hover{filter:brightness(1.06)}
+/* RULE (owner 17/11, every button in the game): a word never breaks inside a button; a button that is too narrow grows or wraps to a new row, it never breaks letters */
+html body .kbtn,html body .kbtn *{word-break:normal!important;overflow-wrap:normal!important;hyphens:none!important}
 .kbtn.alt{background:var(--k-card);color:var(--ink);border-color:var(--line);box-shadow:none}
 /* night: same light paper panel as every pop-up (owner s8 "Tại sao khung này màu tối"); the night feel comes from the backdrop + seal */
 .modal.end .dlg.kpanel{text-align:left}

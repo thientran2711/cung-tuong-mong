@@ -1,0 +1,11 @@
+/* save-dlg-fix: a slot summary / title page must never be name-masked ("???") by the life now loaded. usage: node dev/test/save-dlg-mask.js */
+const {chromium}=require('playwright');const {serve,BASE}=require('./coop-serve.js');
+(async()=>{const b=await chromium.launch({args:['--no-sandbox']});const ctx=await b.newContext({viewport:{width:755,height:1000}});await serve(ctx);await ctx.route(/\/(img|audio)\//,r=>r.abort());
+const p=await ctx.newPage();await p.goto(BASE);await p.waitForFunction(()=>document.querySelector('#modal.kpthome'),null,{timeout:90000});
+await p.evaluate(()=>{SLOT=1;$("title").hidden=true;start()});await p.waitForFunction(()=>typeof S!=='undefined'&&S&&S.name&&typeof rivals!=="undefined"&&rivals.length,null,{timeout:60000});await p.waitForTimeout(500);
+const v=await p.evaluate(()=>{while(Q.length)Q.shift();try{closeModal()}catch(e){}const v=rivals.slice(2).find(x=>x.alive)||rivals[2];S.known=S.known||{};delete S.known[v.id];K61RX=null;return v.name});
+await p.evaluate(()=>{window.__st=[];for(const [P,k] of [[Node.prototype,'nodeValue'],[Node.prototype,'textContent'],[CharacterData.prototype,'data'],[Element.prototype,'innerHTML'],[Element.prototype,'outerHTML']]){const D=Object.getOwnPropertyDescriptor(P,k);if(!D||!D.set)continue;Object.defineProperty(P,k,{get:D.get,set(v){if(/\?\?\?/.test(String(v)))__st.push(k+' '+new Error().stack.split('\n').slice(2,5).join('|'));D.set.call(this,v)},configurable:true})}});
+const get=async cls=>{await p.evaluate(([c,n])=>{const d=document.createElement("div");d.id="t-"+c;d.className=c;d.innerHTML=`<span>Kiếp ${n}</span>`;window['__a'+c]=d.textContent;document.body.appendChild(d)},[cls,v]);await p.waitForTimeout(200);return p.evaluate(c=>document.getElementById("t-"+c).textContent,cls)};
+const ctl=await get("plainctl"),slot=await get("kslot"),mount=await get("kpt-mount");
+console.log(await p.evaluate(()=>[window.__akslot,window['__akpt-mount']]),JSON.stringify({rival:v,ctl,slot,mount}),(await p.evaluate(()=>__st)).join('\n'));
+const okc=ctl.includes("???"),oks=slot==="Kiếp "+v&&mount==="Kiếp "+v;console.log(okc?"control masked (trap valid)":"control NOT masked (trap invalid)",oks?"PASS slot/title page keep the real name":"FAIL slot masked");await b.close()})();
