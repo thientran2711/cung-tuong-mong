@@ -79,3 +79,12 @@ Bức tranh, Khăn thêu, Bình hoa (để 1 tuần), Bức thư pháp, Quyển 
 3. Y phục chỉ là "áo mới 3 tháng" từ vải, không có món áo cụ thể; NPC không có ô đang mặc thấy được.
 4. 11 món chưa có ảnh riêng.
 → j92 bổ sung (xem dev/WARDROBE.md).
+
+## Hoa điền (review/hoa-dien, owner OD 17/11 ~17:30Z / ~17:45Z real)
+- ONE table: j92 `WD_LIST` slot `"hd"`, 8 tiers (P1 Hoa điền mai trắng · P2 hoa đào · P3 bạc khảm lưu ly (old hair item, moved) · P4 hồ điệp · P5 lá lan phỉ thúy · P6 liên hoa hồng ngọc · P7 mẫu đơn điểm thúy · P8 kim phượng). Motifs: flowers / leaves / butterfly / phoenix only (OD:L1104).
+- Never worn through the wardrobe (`wdWear` refuses "hd"); placed during makeup only (jhd `hdStep`): pick one → drag + tilt → Dán. q = `hdQ(distance / eye distance, tilt vs eye line)`; part `hd` of `toilRaw` (weights `BAL.toil.w`), a miss still counts.
+- NPCs, her auto bot and contest rivals: `hdNpc` (same q from their hand, hashed per day, cap `BAL.hd.npcCap`).
+- Xa xỉ: `wdLux(k)` of the placed one inside `toilMkLux` → `luxOf` → `luxTotal`; `luxParts(p).hd` = its share of `mk`.
+- Sources: shop restock (`BAL.hd.shop` %), NPC holdings (`BAL.hd.npcHave` %) → their gifts (j8 tg "rv"), found (`BAL.hd.find` % / month), +1 per promotion (her and NPCs).
+- Thử tay: `KG82_KIND.hoadien` / `KG82_ENG.hoadien` (board ease → `BAL.mgTier.lev.hoadien.tol`).
+- Art pending (Foreman C): transparent sprites `img/hd-<key>.webp` (until then the item picture is placed), item icons `img/wd-hd-*.webp`, clean foreheads + per-face anchors (`window.HD_ANCHOR[file]`).
