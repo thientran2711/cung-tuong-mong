@@ -28,7 +28,28 @@ function kmEsc(s){return String(s==null?"":s).replace(/[&<>"]/g,c=>({"&":"&amp;"
 const KMQ=[];let kmBusy=false;
 function kmFree(){const d=document.getElementById("dawn");if(d&&!d.hidden&&d.classList.contains("on"))return false;
  if(document.getElementById("kpodov")||document.querySelector('[id^="kroul"],.kroul-ov'))return false;if(document.getElementById("kmrew"))return false;return true}
-function kmPush(fn){KMQ.push(fn);kmPump()}
+/* kmPre(urls, ms): warm a scene's pictures; resolves when they are all loaded / failed or after ms (default 1500), so a scene never opens on a black wait. A src is requested once (KM_PRE). Empty / falsy srcs are skipped (never a request for a missing file: callers pass only pictures the CDN index lists). */
+const KM_PRE={};
+function kmPre(urls,ms){const L=(Array.isArray(urls)?urls:[urls]).filter(Boolean);return Promise.race([Promise.all(L.map(u=>KM_PRE[u]||(KM_PRE[u]=new Promise(r=>{const im=new Image();im.onload=im.onerror=()=>r();im.src=u})))),new Promise(r=>setTimeout(r,ms||1500))])}
+/* kmModalOpen(): a dialog (VIỆC / result / news) is open or waiting in Q. */
+function kmModalOpen(){try{const M=document.getElementById("modal");return(typeof Q!=="undefined"&&Q.length>0)||!!(M&&!M.hidden)}catch(e){return false}}
+/* kmPush(fn, o): o.pre = pictures the scene shows (warmed at push, the scene waits up to 1.5 s for them); o.afterModals = the scene belongs AFTER the dialogs that are open / queued right now
+   (the made-item result dialog first, then this scene): it waits until no dialog is open ("armed"), and from then on counts as a running scene for kmHold(). */
+function kmPush(fn,o){if(o){fn.kmo=o;if(o.pre){fn.kmReady=false;kmPre(o.pre).then(()=>{fn.kmReady=true;kmPump()})}}KMQ.push(fn);kmPump()}
+/* ONE QUEUE OWNER (review/learn-scene-fix-2, co-op stall 61/63): kmPump owns the order of scenes and dialogs; every gate asks kmHold() and nothing else.
+   A dialog (jorder showModal gate) and the buổi transition (jbuoi) wait for a scene ONLY while that scene is ON SCREEN or WILL START NOW — never for a scene that is itself
+   waiting (kmFree() false: week panel / podium / roulette / reward up, or an afterModals scene that waits for the dialogs to close, or a running job whose picture never came up).
+   So the two waits can never close a ring: scene waits for dialog => dialogs do not wait for it; dialogs wait for a scene => that scene is starting / showing.
+   kmHold() = true when
+     (a) a job runs AND its picture is on screen (.kmov / #kmrew / the buổi strip #buoitr), or it started < KM_GRACE ms ago (preload / first frame), capped at 90 s; or
+     (b) the HEAD of the queue (FIFO: only the head can start next) is startable now: kmFree(), and it is not an afterModals scene still waiting for the dialogs (unarmed).
+   A head that is only preloading (kmReady false) counts as startable: kmPre resolves in at most 1.5 s. */
+let kmBusySince=0;const KM_GRACE=2000;
+function kmOnScreen(){try{for(const e of document.querySelectorAll(".kmov,#kmrew,#buoitr"))if(e.isConnected&&!e.hidden&&e.getClientRects().length)return true}catch(e){}return false}
+function kmHold(){const t=Date.now()-kmBusySince;
+ if(kmBusy)return t<90000&&(t<KM_GRACE||kmOnScreen());
+ const h=KMQ[0];if(!h)return false;if(h.kmo&&h.kmo.afterModals&&!h.kmArmed)return false;return kmFree()}
+function kmArm(){KMQ.forEach(f=>{if(f.kmo&&f.kmo.afterModals)f.kmArmed=true})}
 /* kmReset (FIX-THE-WHOLE-GROUP, review/flip-newlife): everything that belongs to ONE life must not outlive it. A new life / a loaded slot / the title
    screen calls this: the queue is emptied, the running job's finish is voided (kmGen), every .kmov scene (card-flip, ink, reward, reveal…) and the
    podium / reward / buổi-transition overlays are removed, and modules that keep their own timers register a hook with kmOnReset(fn). */
@@ -40,7 +61,9 @@ function kmReset(){kmGen++;KMQ.length=0;kmBusy=false;clearTimeout(kmPump.t);
  try{if(typeof btrKill==="function")btrKill()}catch(e){}
  try{document.querySelectorAll(".kmov,#kmrew,.kmfly,.kmalarm").forEach(e=>e.remove())}catch(e){}}
 function kmPump(){if(kmBusy||!KMQ.length)return;if(!kmFree()){clearTimeout(kmPump.t);kmPump.t=setTimeout(kmPump,250);return}
- kmBusy=true;const fn=KMQ.shift();let done=false;const g=kmGen;const fin=()=>{if(done||g!==kmGen)return;done=true;clearTimeout(sf);kmBusy=false;setTimeout(kmPump,80)};const sf=setTimeout(fin,600000);
+ {const h=KMQ[0];if(h.kmo&&h.kmo.afterModals&&!h.kmArmed){if(kmModalOpen()){clearTimeout(kmPump.t);kmPump.t=setTimeout(kmPump,120);return}h.kmArmed=true}
+  if(h.kmReady===false){clearTimeout(kmPump.t);kmPump.t=setTimeout(kmPump,120);return}}
+ kmBusy=true;kmBusySince=Date.now();const fn=KMQ.shift();let done=false;const g=kmGen;const fin=()=>{if(done||g!==kmGen)return;done=true;clearTimeout(sf);kmBusy=false;setTimeout(kmPump,80)};const sf=setTimeout(fin,600000);
  try{fn(fin)}catch(e){console.error(e);fin()}}
 
 /* ---------- KIT 81 · SCENE-END BUTTON label (owner OD:L1261) ----------
@@ -89,7 +112,7 @@ function kitFlipTablet(p,o){o=o||{};if(!p)return;const me=p===S||o.me;const nm=p
  const html=`<div class="kmflip${me?" kmflip-me":""}"><div class="kmcap">Hoàng thượng lật thẻ bài</div><div class="kmtabs">${side(-2)}${side(-1)}<div class="kmtab kmtab-c"><div class="kmcard"><div class="kmface kmback">${back}</div><div class="kmface kmfront"><img src="${KM_DIR}mo-tablet-front.webp" alt="" draggable="false"><div class="kmname"><small>${kmEsc(rk)}</small>${words}</div></div></div></div>${side(1)}${side(2)}</div>
   <div class="kmres">${kmFace(p,"big")}<div><b>${me?"Thẻ bài của ngươi được lật":"Tối nay: "+kmEsc(nm)}</b><small>${me?"Tối nay ngươi hầu giá.":`${kmEsc(rk)} được chọn hầu đêm nay.`}</small></div></div></div>`;
  kmPush(done=>{const st=kmStage("km-tablet"+(me?"":" km-soft"),html,{dur:1900,end:me?"Chuẩn bị thị tẩm":"Ta biết rồi",onEnd:done,onFinal:()=>{}});
-  if(me)st.later(1250,()=>{const c=st.ov.querySelector(".kmtab-c");if(c){const r=c.getBoundingClientRect();kmSpark(st.ov,r.left+r.width/2,r.top+r.height*.4,26,["#f0d070","#fff3c4","#e0a526"],170)}})})}
+  if(me)st.later(1250,()=>{const c=st.ov.querySelector(".kmtab-c");if(c){const r=c.getBoundingClientRect();kmSpark(st.ov,r.left+r.width/2,r.top+r.height*.4,26,["#f0d070","#fff3c4","#e0a526"],170)}})},{pre:[KM_DIR+"mo-tablet-back.webp",KM_DIR+"mo-tablet-front.webp"]})}
 
 /* someone else's tablet: one short line under the top bar (kit chip), no backdrop, never takes a tap, fades by itself */
 function kitFlipNote(p){if(!p||p===S)return;const nm=p.name||"";const rk=kmRankName(typeof rkOf==="function"?rkOf(p):0);
@@ -200,7 +223,7 @@ function kitReward(o){o=o||{};const kind=KM_BOX[o.kind]?o.kind:"chest";const B=K
     const b=root.querySelector(".kmbox").getBoundingClientRect();const best=seq.length?Math.max(...seq.map(x=>x.g)):0;kmSpark(st.ov,b.left+b.width/2,b.top+b.height*.45,best>=4?40:24,best>=4?["#f0d070","#fff3c4","#e0a526"]:["#fff3c4","#f6ead6","#e0c080"],best>=3?190:140);
     later(RV.pause||700,()=>one(0))})};
   st.ov.addEventListener("click",e=>{if(e.target.closest("[data-km-close]")){T.forEach(clearTimeout);return}if(step===0)open();else if(step===1)fin()},true);
-  if(kmReduced())open()})}
+  if(kmReduced())open()},{pre:[KM_DIR+B[0]+".webp",KM_DIR+B[1]+".webp"]})}
 function kitFlyItem(k){if(kmReduced()||!k)return;const src=kmItemImg(k);const tb=document.querySelector('[data-tab="inv"]');if(!src||!tb)return;const r=tb.getBoundingClientRect();
  const im=document.createElement("img");im.className="kmfly";im.src=src;im.alt="";const x0=innerWidth/2,y0=innerHeight*.45;im.style.left=x0+"px";im.style.top=y0+"px";document.body.appendChild(im);
  im.animate([{transform:"translate(-50%,-50%) scale(.4)",opacity:0},{transform:"translate(-50%,-80%) scale(1.15)",opacity:1,offset:.3},{transform:`translate(${r.left+r.width/2-x0-24}px,${r.top+r.height/2-y0-24}px) scale(.35)`,opacity:.2}],{duration:900,easing:"cubic-bezier(.4,.1,.3,1)",fill:"forwards"}).onfinish=()=>{im.remove();tb.classList.remove("km-pulse");void tb.offsetWidth;tb.classList.add("km-pulse")}}
