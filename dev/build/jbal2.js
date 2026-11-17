@@ -411,6 +411,46 @@ BAL.dh={n0:[1,5,10],step:2,artLv:[3,4,5],
  hieu:{minRank:3,sung:10,danh:8,gapM:2,p:25,danhG:5},
  conf:{p:{cold:[100,100],giang:[50,35],cam:[0,40]},danh:5,sung:3,wait:3,kinh:3,cong:12,top:100},
  it:{lose:2,lostDanh:8,backW:[4,10]}};
+
+/* review/suc-khoe (jkh.js, owner 16/11 18:05–19:00Z; spec dev/handover/reports/suc-khoe.md §4.1–4.7 with the owner changes):
+   kh  SỨC KHỎE = ONLY the Sức MAX ceiling (owner 18:05Z: "giữ cái trần của cái sức"; Sức regen unchanged, no second cut; jmort `tired` folded in).
+       health khOf(p) = 100 − max(0, age − ageFrom) × agePer − khScar (lasting) − khTmp (heals); floor capMin.  Sức max sucCap(p) = maxBase + maxPer × health (≤ 100).
+       lasting / healing harm per event: birth / hard (extra) / still / mis / close (a birth < closeMo months after the last) / ocuScar (ở cữ broken) / poisonScar (once per poisoning);
+       illSt per illness stage per month, sick per month of p.sick (poison), tmpMax cap of the healing part.  Healing per month (never the lasting part):
+       rec while not ill + recCare per care source (the jmort care sources, BAL.mort.life careSuc / own thái y / Y thuật ≥ careYt); ocu once when the ở cữ month is kept;
+       tonic per thuốc bổ (at most tonicMo a month).  ocuMo = months of ở cữ (no conception; owner 18:10Z: 1 month, the ×0.7 cut removed); a move out of her palace or a card
+       costing ≥ ocuHeavy Sức in that month breaks it → ocuScar + Hậu sản (ILL.hausan) ocuIll %.  oldScar = lasting harm per child already born (old saves, NPCs at load).
+       illLo / illP: health below illLo → an extra illP % a month to catch a seasonal illness.  thyLo: the thái y says "Hơi yếu" below it, thyBad: "Có bệnh" below it (spec 4.6); faceLo: ỐM YẾU face below it.
+   preT  preterm / overdue (pregMonthP, everyone): m8 / m9 % a month at month 8 / 9, + lowSuc (Sức < lowSucAt), + lowKh (health < khLo), + age per year over ageFrom, ×½ an thai;
+       a preterm baby dies in its first month at die8 / die9 %.  od % at the birth month the baby is a month late → birthRisk × odHard, stillbirth + odStill; odOmen % "điềm thánh nhân"
+       (a son: Danh + omenDanh), else ill-omen talk.  'lệch sổ' (the birth does not match the Kính sự phòng book): a true fact of weight lsW in the mother's
+       ledger (jtruth deedSync, so a CLEAN mother can be accused too, owner Q3 18:17Z; dropped once the test is held or the child is past ageMax);
+       rivals with a motive (mot: her own son vs a son, rank gap ≤ rkGap with thiện cảm < aff, thiện cảm ≤ hate, or oán ≥ oan against her) and she
+       (two-way) get evi chứng cứ; anyone with ≥ accEv demands the blood test (BAL.ngh; jroute rtNgSet / rtNgNpcRes) accP % a month while the child is
+       ≤ ageMax years.  recDefend = added to her "nghiệm lại bằng bát nước mới" odds when the child really came early or late AND the thái y mạch án
+       holds the month the pregnancy was found (S.pregDisc at birth).  khRecOff: the book's night lies recMin..recMax tuần before the real conception
+       (recSlack tuần = still the same night).
+       drug = thuốc thúc sinh (owner PARKING_LOT #1): bạc, odds base + Y thuật × perY, Sức lost on success / failure; npcDrug % an NPC in that spot takes it.
+   pgRisk  miscarriage causes (owner 19:15Z), added to the monthly risk while pregnant, capped at cap: khac % per khắc walked beyond freeKhac in the month;
+       rain % per walk in harsh weather; work % per Sức spent on cards beyond freeSuc; lowSuc2 under lowSuc2At Sức; an thai halves it.
+       lowSuc under lowSucAt and misSuc (Sức lost at a miscarriage) are the base pregnancy month's own numbers (j8 pregMonthP reads them too). */
+BAL.kh={on:1,ageFrom:30,agePer:1.2,capMin:30,maxBase:40,maxPer:.6,tmpMax:40,
+ birth:10,birthScar:2,hard:15,hardScar:5,still:10,stillScar:2,mis:6,misScar:1,closeMo:18,close:6,closeScar:1,
+ ocuMo:1,ocuHeavy:10,ocuScar:2,ocuIll:25,ocu:5,illSt:1,sick:3,poisonScar:4,rec:.5,recCare:.5,tonic:3,tonicMo:1,oldScar:2,
+ illLo:50,illP:4,thyLo:80,thyBad:50,faceLo:45};
+BAL.preT={m8:1.5,m9:4,lowSuc:3,lowSucAt:30,lowKh:3,khLo:40,age:.2,ageFrom:35,die8:40,die9:15,od:8,odHard:1.5,odStill:3,odOmen:30,omenDanh:2,
+ evi:2,lsW:3,accEv:3,accP:20,ageMax:3,recDefend:20,recSlack:1,recMin:2,recMax:9,
+ mot:{rkGap:1,aff:0,hate:-30,oan:45},drug:{bac:40,o:60,perY:6,suc:10,sucF:25},npcDrug:60};
+BAL.pgRisk={freeKhac:6,khac:.25,rain:1,freeSuc:40,work:.05,lowSuc2:3,lowSuc2At:50,lowSucAt:30,lowSuc:8,misSuc:20,cap:4};
+/* review/suc-khoe-fix (F4, ONE CORE OD:L1267): THE BLOOD TEST (trích huyết nghiệm thân) — one block read by jroute (her child, her demand on an NPC's
+   child, an NPC mother's child) AND jkh (a rival's demand after a 'lệch sổ' birth). Before this, jkh held a copy of jroute's numbers.
+   alumTc / alumP: a guilty mother slips alum in (Tâm cơ ≥ alumTc, else alumP %) → the blood mixes.  oilTc / oilP: an accuser drops oil
+   (Hiểm / Tâm trait or Tâm cơ ≥ oilTc, then oilP %) → the blood never mixes.  frameAff / frameOil: an NPC who hates the mother below frameAff
+   thiện cảm frames her child (oil frameOil %).  die: % the condemned mother is put to death (else lãnh cung).  Backlash when the blood mixes,
+   the same for her and every NPC accuser: accSung / accDanh, oán accOan, punish level accPun.  needEv: chứng cứ she needs to demand the test
+   on a rival's child (her card; the 'lệch sổ' road uses BAL.preT.accEv, the same bar as NPC accusers).  seeMat / oilMat: Tai mắt she needs
+   to hear of an NPC test / to learn the bowl was oiled. */
+BAL.ngh={alumTc:55,oilTc:60,frameAff:-30,accOan:40,accPun:1,needEv:2,seeMat:2,oilMat:4};
 /* palace voice (jvoice, VANPHONG §2): mood of an address from the real relation (S.sung − sungMid, S.th / S.hh − favMid, aff()):
    ≥ warm → warm words (ái phi, con, muội muội, tỷ tỷ), ≤ cold → "ngươi"; nuong = first rank called "nương nương" / allowed "bổn cung" (Tần);
    noRepeat = tuần before a pooled line may come back; hi / hq = first rank index of the "hi" (Quý phi) / "hq" (Hoàng hậu) rank band of

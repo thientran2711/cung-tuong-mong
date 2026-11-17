@@ -162,7 +162,10 @@ async function nightGap(A,B){const w0=(await C(A)).week;await clear(A);await cle
  const wkF=(await C(A)).week;
  await B.page();await B.p.goto(BASE+'?room='+code,DCL);await B.p.waitForTimeout(3000);await tapText(B,/^Vào phòng|^Tiếp tục/,3000);
  ok(await until(B,x=>__co().seat==='b'&&__co().week===x&&!__co().frozen,wkF,40000),'B back in same seat and week');
- ok(await until(A,()=>!__co().frozen,null,20000),'A resumes');await clear(A);await clear(B);await same('after rejoin');await shot(B,'09-rejoined');
+ ok(await until(A,()=>!__co().frozen,null,20000),'A resumes');await clear(A);await clear(B);await same('after rejoin');
+ /* review/suc-khoe-fix (owner CO-OP FIRST OD:L1447): NPC health is host-computed; the guest shows the host's value (Sức khỏe, Sức tối đa, scars) */
+ {const hv=async o=>o.p.evaluate(()=>typeof khOf!=="function"?null:rivals.filter(v=>!v.coop&&v.alive).map(v=>[v.name,khOf(v),sucCap(v),v.khScar||0]).sort().join("|"));
+  await clear(A);await clear(B);const ha=await hv(A),hb=await hv(B);ok(ha!=null&&ha===hb,'NPC Sức khỏe / Sức tối đa: guest = host',ha===hb?undefined:[ha&&ha.slice(0,200),hb&&hb.slice(0,200)])}await shot(B,'09-rejoined');
  /* 5 B dies → normal rebirth choice → new person in the same world */
  const before=await B.p.evaluate(()=>({n:S.name,era:S.emp.era}));
  if(RECON){await netDown(A);await sleep(300)}/* her rebirth's `state` broadcast reaches nobody on the host: it must catch up from the room snapshot */

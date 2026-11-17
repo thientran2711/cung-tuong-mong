@@ -202,7 +202,8 @@ const KIT_GLOSS={
  "Tâm cơ":"Mưu trí, sự khôn khéo. Giúp dò la, bày mưu, nhìn thấu mưu của người khác.",
  "Tai mắt":"Số người ngầm báo tin cho ngươi khắp cung. Nhiều thì biết trước mưu hại, dễ có chứng cứ.",
  "Ân tình":"Tình nghĩa riêng giữa Hoàng thượng và ngươi, tích qua những đêm hầu hạ. Giữ sủng lâu, khó bị bỏ rơi.",
- "Sức":"Sức khỏe. Dưới 20 thì không làm được việc nặng; về 0 là bệnh nặng, nguy đến tính mạng.",
+ "Sức":"Sức lực để làm việc trong ngày. Dưới 20 thì không làm được việc nặng; về 0 là bệnh nặng, nguy đến tính mạng. Sức tối đa do Sức khỏe định.",
+ "Sức khỏe":"Thân thể lâu dài, định Sức tối đa. Tuổi càng cao, sinh nở, bệnh nặng, trúng độc càng hạ; nghỉ ngơi, ở cữ trọn tháng, thuốc bổ chỉ bù lại phần hao tạm, không vượt mức tuổi và vết thương cũ cho phép.",
  "Bạc":"Tiền riêng của ngươi: bổng lộc hằng tháng, ban thưởng. Dùng để mua đồ, đút lót, thưởng kẻ hầu.",
  "Chủ tin":"Chủ nhân tin ngươi bao nhiêu (0–100). Cao thì được thưởng, tiến cử; dưới 10 dễ bị đày Tân Giả khố.",
  "Lòng":"Kẻ hầu trung thành với ngươi bao nhiêu (0–100). Dưới 45 dễ bị người khác mua chuộc.",
@@ -831,10 +832,12 @@ function kitInfoArt(title){const k=kitInfoKey(title);const have=KIT_INFOM.have||
 (function(){const b0=kpBuild;kpBuild=function(M,m){b0.apply(this,arguments);try{const dlg=M.querySelector(".dlg");if(!dlg||!/^(rule|info)$/.test(dlg.dataset.kind||""))return;
  const body=M.querySelector("#mb > .kpb");if(!body||body.querySelector(":scope > .kpsubj"))return;const a=kitInfoArt(m.t);
  body.classList.add("kphas","kpinfo");body.insertAdjacentHTML("afterbegin",`<div class="kpsubj kpiart" data-info="${a.key}">${kitArtFrame(a.src,a.label)}</div>`)}catch(e){console.error("kpInfo",e)}}})();
-/* the HUD help panels use the same structured layout as the rule panel: what it is · what you have now */
+/* the HUD help panels use the same structured layout as the rule panel: what it is · what you have now.
+   HXNOW[key]() → kitRows rows for "Ngươi đang có" when the live value needs more than the status chip (Sức: N, tối đa M, Sức khỏe — jkh) */
+const HXNOW={};
 (function(){const s0=showModal;showModal=function(){try{const m=Q[0];if(m&&!m.kit&&!m.opts&&typeof m.h==="string"&&/^<p>[^<]*<\/p>$/.test(m.h)&&typeof HX==="object"){
   const txt=m.h.replace(/<\/?p>/g,"");const k=Object.keys(HX).find(x=>HX[x]===txt);if(k){const lab=kpPlain(m.t);const gl=txt.replace(/^[^:]{1,24}:\s*/,"");const cur=(m.t.match(/(-?\d+)\s*$/)||[])[1];
-   const now=document.querySelector(`#hud2 .hc[data-hx="${k}"] b, #hud2 .hc[data-hx="${k}"] .kodm`);m.kit={kind:"rule",title:lab,sections:[{h:"Là gì",rows:[[lab.replace(/\s*\d+$/,""),gl.charAt(0).toUpperCase()+gl.slice(1),"t"]]}].concat(now?[{h:"Ngươi đang có",html:`<div class="kpnow">${now.outerHTML}</div>`}]:[])};m.t=lab.replace(/\s*-?\d+$/,"")}}}catch(e){}return s0.apply(this,arguments)}})();
+   const now=document.querySelector(`#hud2 .hc[data-hx="${k}"] b, #hud2 .hc[data-hx="${k}"] .kodm`);const nr=typeof HXNOW==="object"&&HXNOW[k]?HXNOW[k]():null;m.kit={kind:"rule",title:lab,sections:[{h:"Là gì",rows:[[lab.replace(/\s*\d+$/,""),gl.charAt(0).toUpperCase()+gl.slice(1),"t"]]}].concat(nr&&nr.length?[{h:"Ngươi đang có",rows:nr}]:now?[{h:"Ngươi đang có",html:`<div class="kpnow">${now.outerHTML}</div>`}]:[])};m.t=lab.replace(/\s*-?\d+$/,"")}}}catch(e){}return s0.apply(this,arguments)}})();
 /* ---- 3. identity card: larger, balanced; tiles beside the portrait; no stale result toast over the buttons ---- */
 (function(){const k0=kpIdentity;kpIdentity=function(M,m){k0.apply(this,arguments);try{const mb=$("mb");const id=mb.querySelector(".kpid"),tl=mb.querySelector(":scope > .kstgrid"),main=id&&id.querySelector(".kpmain");if(main&&tl)main.appendChild(tl);
   const t=$("rtoast");if(t){t.classList.remove("on");t.hidden=true;setTimeout(()=>{t.hidden=false},50)}}catch(e){}try{kpIdFig(M)}catch(e){console.error("kpIdFig",e)}}})();

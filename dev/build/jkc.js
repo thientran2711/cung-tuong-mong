@@ -287,7 +287,7 @@ function kcChance(where){const tm=kcTmMan();if(tm&&tm.alive&&S.tm96&&!S.kc.ev.me
 try{if(window.COOPW)COOPW.altTurn=()=>isKc()?kcEndTurn:null}catch(e){}
 function kcEndTurn(){if(S.dead||Q.length||S.mg)return;S.buoi=0;let ev="";
  ev+=kcW(()=>resolveTonight()||"");ev+=kcW(()=>rivalsTurn()||"");if(S.dead)return;
- S.suc=cl(S.suc+14+(S.suc<30?6:0),0,100);try{kcWeek()}catch(e){console.error(e)}if(S.dead)return;
+ S.suc=cl(S.suc+14+(S.suc<30?6:0),0,sucCap(S));try{kcWeek()}catch(e){console.error(e)}if(S.dead)return;
  if(S.tuan===2){kcMonth();if(S.dead)return}else S.tuan++;
  /* r2: the round starts on the first week from the tuyển tú month on once Sơ tuyển is passed (was: only week 0 of that month, so a Sơ tuyển
     answered late never led on); a life past the date that never had its Sơ tuyển gets it now */
