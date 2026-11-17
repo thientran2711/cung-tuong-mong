@@ -30,7 +30,7 @@ const VPS=(SIZES||'755x1000').split(',');
     if(!d.querySelector(':scope > .kph'))why.push('no kit header .kph');
     const mb=d.querySelector('#mb')||d.querySelector(':scope > .body');if(!mb)return{v:'CUSTOM',why:['no #mb']};
     const kids=[...mb.children].filter(e=>e.getClientRects().length);
-    kids.forEach(e=>{if(e.matches('.k3body,.kpb,.opts,.kpscopts,.kdlgart.kesband,.kdlgart.kdpban,.kpnote,.kpsec'))return;if(e.matches('.kdlgart'))return;why.push('#mb child '+(e.className||e.tagName))});
+    kids.forEach(e=>{if(e.matches('.k3body,.kpb,.opts,.kpscopts,.kdlgart.kesband,.kdlgart.kdpban,.kpnote,.kpsec,.kscue'))return;if(e.matches('.kdlgart'))return;why.push('#mb child '+(e.className||e.tagName))});
     const body=mb.querySelector(':scope > .kpb');let tpl='T1';
     /* T7 KIT SIZE FRAME (§84 live, kitFrameLive3): .ksz3 > #mb > .k3body (figure / portrait / event picture left + .k3right[event picture, .kpmain]) + .opts.k3btns */
     const k3=mb.querySelector(':scope > .k3body');if(k3){tpl='T7';if(!d.classList.contains('ksz3')||!d.dataset.ksz)why.push('k3body without the kit size frame');if(!k3.querySelector(':scope > .k3right > .kpmain'))why.push('T7 without .kpmain');
