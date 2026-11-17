@@ -158,7 +158,9 @@ function send(ops){if(ops.length){C.ops=ops;C.stat.sent++}SQ.push(...ops);clearT
 const PD=new Map();
 COOP.on("thinview",V=>{try{const d=V&&V.o&&V.o.dr;if(d&&d.op==="npc")PD.delete(d.id)}catch(e){}});
 /* the Worker refused an intent (too big / bad): counted, never silent */
-COOP.on("error",m=>{try{if(!gOn()||!m)return;if(m.code==="bado"){C.stat.bado=(C.stat.bado||0)+1;lg(["bado",m.id]);PD.delete(m.id);return}
+/* review r1 #2: listened to on any guest seat (not gOn): a "thin" level drop or a build hold can land before the Worker's nohost / nothin
+   answer, and the pack must still go back in the queue (send() waits while the room is not on) */
+COOP.on("error",m=>{try{if(!m||!CW.on||host())return;if(m.code==="bado"){C.stat.bado=(C.stat.bado||0)+1;lg(["bado",m.id]);PD.delete(m.id);return}
  if((m.code==="nohost"||m.code==="nothin")&&PD.has(m.id)){const ops=PD.get(m.id);PD.delete(m.id);C.stat.resend=(C.stat.resend||0)+1;lg(["resend",m.id,m.code]);SQ.unshift(...ops);clearTimeout(sT);sT=setTimeout(()=>send([]),1000)}}catch(e){}});
 
 /* frames on the guest's engine entries (this module loads last but one: these wrappers are outermost) */
