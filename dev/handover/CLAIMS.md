@@ -870,7 +870,7 @@
 | coop-b1 regression on main (laydo/takeaway 24/41; bisect + family fix; opus; brief briefs/coop-b1-regress.md) | review/coop-b1-regress | B | session_01N1tNP6usJ5fWhrv4JU1m4R | SẴN SÀNG KIỂM 24d8eb38 (stale tests after ONE TRAIT POOL d296f3cd, no game bug; test family fixed; reports/coop-b1-regress.md) | 17/11 17:05Z |
 | ODDS-CAP AUDIT: no rolled outcome 100 %/0 % (BAL one cap ~95/5), drop 'Chắc chắn' word; 85 o:100 acts in 23 files (OD 17:00Z) | review/odds-cap | D | (D opens) | ORDERED | 17/11 17:00Z |
 | REVIEW kit-option-rows r1 of 3dabd1f7 (sonnet; brief briefs/s34-review-kit-option-rows.md) | review/kit-option-rows-r1 | MAIN s34 | session_01UV1Szhb1246Fs6RgQcMEqb | FAIL f7e2e1ef (reports/review-kit-option-rows.md) | 17/11 17:06Z |
-| kit-thanh-bai: THÀNH/BẠI two-block act cards + HỎNG→BẠI (OD 17:10Z (2)); successor of kit-option-rows (sonnet; brief briefs/s34-kit-thanh-bai.md) | review/kit-thanh-bai | MAIN s34 | (opening) | RUNNING | 17/11 17:08Z |
+| kit-thanh-bai: THÀNH/BẠI two-block act cards + HỎNG→BẠI (OD 17:10Z (2)); successor of kit-option-rows (sonnet; brief briefs/s34-kit-thanh-bai.md) | review/kit-thanh-bai | MAIN s34 | session_01UV1SzhiWiAzVtxCHuZo9Zy | READY FOR REVIEW 76558786 | 17/11 17:08Z |
 | tinbao-ui-r6r PASS 220359da (supersedes 47a462ca; lands after ag-all-2 by C-AG #3) | review/tinbao-ui-r6r | MAIN s34 | - | PASS → C-AG land | 17/11 17:08Z |
 | face-w404 review r1 (sonnet) of df8b57bc | review/face-w404-r1 | D | session_01964izEvirrwGUKDneEGtXa | DONE FAIL 1 @51857175 (FAV=0 all pools: CDN prefix vs index keys) | 17/11 17:08Z |
 | REVIEW weather-khac r1 (opus BIG) of e1d540cf | review/weather-khac-r1 | C-AG | session_01UV1Szhk5EGru6rSkDekM6s | RUNNING | 17/11 17:10Z |
