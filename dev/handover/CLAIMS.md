@@ -772,4 +772,4 @@
 | BATCH s31a LIVE: main = c29866a6 (FF from 6ca04148 by MAIN s31 after LOOK; presentation-wiring-r1 + fig-headtop-r1; kit-ico-rank HELD co-op rebirth) | main | MAIN s31 | session_01UV1SzhZw2hHEAf6bi644Jn | LIVE | 17/11 13:27Z |
 | BATCH builder s31b (opus): fig-tag-chip-r1, morechip-fix-r1, kit-rcol-top-r1, stage-caption-r1, learn-scene-fix, opt-pic-same-r2 (+morechip-corners-r1 on PASS) + KPM_LOG clear | review/batch-s31b | MAIN s31 | session_01UV1SzhfMi68Cmn88G2Yqze | RUNNING | 17/11 13:24Z |
 | kit-ico-rank r2: co-op rebirth blocked by rank board/end card | review/kit-ico-rank-r2 | MAIN s31 | session_01UV1Szi6oANLyE5bWQnjMQv | RUNNING | 17/11 13:24Z |
-| morechip-sil: '+N' chip = grey neutral silhouette icon + number (OD 14:05Z; main draws) on top of morechip-corners-r1 a66f274c | review/morechip-sil | MAIN s32 | (opening) | CLAIMED | 17/11 13:36Z |
+| morechip-sil: '+N' chip = grey neutral silhouette icon + number (OD 14:05Z; main draws) on top of morechip-corners-r1 a66f274c | review/morechip-sil | MAIN s32 | session_01UV1Szi57hvzWiNmX4GRXYk | RUNNING | 17/11 13:36Z |
