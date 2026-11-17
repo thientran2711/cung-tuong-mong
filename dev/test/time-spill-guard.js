@@ -127,7 +127,7 @@ const srv=http.createServer((q,r)=>{let p=decodeURIComponent(new URL(q.url,'http
      const pn=document.getElementById('panel');if(pn)pn.querySelectorAll('button[disabled]').forEach(b=>seen.push(b.outerHTML));
      try{window.__mapList=1;if(t==="go")render();if(pn)pn.querySelectorAll('button[disabled]').forEach(b=>seen.push(b.outerHTML))}catch(e){}window.__mapList=0}
     for(const k of places().map(x=>x.k)){if(k==="home")continue;base(bu,3);S.where.emp=k;try{courtMeet('emp');courtMeet('th')}catch(e){}}}}finally{pbtn=p0}
-   let n=0;for(const h of seen){if(!dis(h))continue;n++;const m=(h.match(/<span class="kwhy">([^<]*)<\/span>/)||[])[1]||'';if(SPILL.test(m))row('disabled by a spill: '+txt(h).slice(0,80),false,m)}
+   let n=0;for(const h of new Set(seen)){if(!dis(h))continue;n++;const m=(h.match(/<span class="kwhy">([^<]*)<\/span>/)||[])[1]||'';if(SPILL.test(m))row('disabled by a spill: '+txt(h).slice(0,80),false,m)}
    out.rows.push({id:'disabled buttons scanned',ok:true,info:n})}
   /* 12. words (review r1 FAIL 3): ask / sneak / lead lines say the arrival buổi when the walk spills, "buổi này" only when it fits */
   {base(CH,3);let wn=0;for(const k of places().map(x=>x.k)){if(k==="home")continue;const st=accState(k);if(!st.ask&&!st.kind)continue;const tc=st.tc||0;wn++;
