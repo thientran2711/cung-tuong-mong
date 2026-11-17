@@ -154,7 +154,7 @@ function toilLookOf(P,score,H,allow,seed){const B=BAL.toil;const parts=[["brow",
    both co-op seats read the same allowance for the same consort (review r1, CO-OP FIRST) */
 function toilNpcOcc(){const L=[];try{if(!S.thDead)L.push("th");if(typeof festToday==="function"&&festToday())L.push("fest")}catch(e){}return L.length?L:["thuong"]}
 /* hồi 1: start loading THIS face's points (the portrait follows the dress she tries on) so the board never waits long */
-function toilMkPre(){try{MK_FIT.get(String(toilPor().src||"").split("?")[0].split("/").pop())}catch(e){}}
+function toilMkPre(){try{const f=String(toilPor().src||"").split("?")[0].split("/").pop();MK_FIT.get(f);toilEyePx(f)}catch(e){}}
 function toilMk(rec){return rec&&rec.makeup?(rec.look==="diem"?"diem":rec.look==="vung"?"vung":toilTier(rec.score|0)):"moc"}
 /* NPCs and the bot: the same parts, score and look from skill (hash of person + day: no Math.random, both co-op seats agree) */
 function toilNpcPlay(sk,h,col,want,style,occ,rk){const N=BAL.toil.play,B=BAL.toil;const r=i=>(wdHash(h+":"+i)%1000)/1000;
@@ -715,7 +715,20 @@ window.MK_FIT=MK_FIT;
 /* KIT §60 face axis (owner 17/11 ~18:00Z, face left of the mirror centre): the TRUE vertical axis of a face picture = the midpoint of its two eyes from the face-mesh (img/mk-fit, eye rings = points 20-29 and 30-39, units 1/4000 of the picture);
    returns it as a 0..1 share of the picture width, or null while that face's mesh is not loaded. toil-fit's mouth point sits on average 1.2 % of the picture width (up to 5.8 %) to the RIGHT of it, so every place
    that centres a face in a round/mirror frame (camera close-up, makeup board, kitFaceZoom) centres THIS axis and falls back to the mouth point only when there is no mesh. */
-function toilAxisX(file){try{const e=MK_FIT.get(String(file||"").split("?")[0].split("/").pop());if(!e||e.length<80)return null;let x=0;for(const s of[20,30])for(let i=0;i<10;i++)x+=e[2*(s+i)];return x/20/4000}catch(err){return null}}
+const TOIL_EYEPX={};
+function toilAxisX(file){try{const fn=String(file||"").split("?")[0].split("/").pop();if(TOIL_EYEPX[fn]!=null)return TOIL_EYEPX[fn];const e=MK_FIT.get(fn);if(!e||e.length<80)return null;let x=0;for(const s of[20,30])for(let i=0;i<10;i++)x+=e[2*(s+i)];return x/20/4000+TOIL_AXIS_BIAS}catch(err){return null}}
+/* THE FACE'S REAL CENTRE, from the picture's own pixels (owner 17/11 + review r1: the fit files lie, on average the mesh sits 3.0 % of the picture width RIGHT of the painted face, up to 10 %, and the toil-fit mouth is shifted the same way):
+   centroid x of the skin-coloured pixels in the face band (from a little above the eyes to the mouth line; hair, jewellery, clothes and hands are not skin); the fit points are only used to say which rows and what x range to look at.
+   async, once per picture, cached in TOIL_EYEPX (0..1 of the picture width); needs the CDN's CORS (it has it); resolves false when something is missing, then toilAxisX falls back to the mesh minus its measured bias */
+async function toilEyePx(file){const fn=String(file||"").split("?")[0].split("/").pop();if(TOIL_EYEPX[fn]!=null)return true;
+ try{const v=TOIL_FIT.fit&&TOIL_FIT.fit[fn];if(!v)return false;const bm=await createImageBitmap(await (await fetch(IMG_U("img/"+fn),{mode:"cors"})).blob()),Wd=bm.width,Hd=bm.height,c=document.createElement("canvas");c.width=Wd;c.height=Hd;const g=c.getContext("2d",{willReadFrequently:true});g.drawImage(bm,0,0);const d=g.getImageData(0,0,Wd,Hd).data;
+  const my=v[1]/100*Hd,fw=v[6]/100*Wd,mx=v[0]/100*Wd,y0=Math.max(0,v[3]/100*Hd-.06*Hd|0),y1=Math.min(Hd,my+.02*Hd|0),x0=Math.max(0,mx-.9*fw|0),x1=Math.min(Wd,mx+.9*fw|0);const cnt=new Float32Array(Wd);let n=0;
+  for(let y=y0;y<y1;y++)for(let x=x0;x<x1;x++){const i=(y*Wd+x)*4,r=d[i],gg=d[i+1],b=d[i+2];if(d[i+3]>200&&r>150&&r>gg&&gg>b&&r-b>18&&r-gg<60&&gg>110){cnt[x]++;n++}}
+  /* a hand or a sleeve beside the face is skin too: keep only the heaviest run of skin columns (gaps up to 2 % of the width are bridged) */
+  if(n<100)return false;const segs=[],thr=Math.max(...cnt)*.06;let cur=null,gap=0;for(let x=x0;x<x1;x++){if(cnt[x]>thr){if(!cur)cur={a:x,m:0,s:0};cur.m+=cnt[x];cur.s+=cnt[x]*x;cur.e=x;gap=0}else if(cur&&++gap>Wd*.02){segs.push(cur);cur=null}}if(cur)segs.push(cur);
+  const top=segs.reduce((a,b)=>b.m>a.m?b:a);TOIL_EYEPX[fn]=top.s/top.m/Wd;return true}catch(err){return false}}
+
+const TOIL_AXIS_BIAS=-.03;/* mesh eye midpoint -> painted face centre, mean over 229 portraits (sd 2.0 %, min -10.4 %); only used while the pixel centre is not known */
 const TOIL_BLANK="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7";
 const TOIL_MKC={},TOIL_MKQ=[];
 function toilMkPts(v){const P=[];for(let i=0;i<60;i++)P.push([v[2*i]/40,v[2*i+1]/40]);return P}/* → % of width / height */
@@ -845,7 +858,7 @@ const TOIL_HINT={moc:"Gương mặt mộc: người trọng lễ dễ chê, kẻ
 function toilPreName(col,look){if(!col)return"";const k=toilPreOf(Object.assign({},col,{want:look==="diem"?"diem":""}));const p=TOIL_PRE.find(x=>x[0]===k&&(x[2]==="diem")===(look==="diem"));return p?p[1]:"màu tự chọn"}
 function toilFigAt(){let P=0;try{const it=wdItem(wdOf(S).y);P=it?it.P:0}catch(e){}const rank=P>=1?Math.min(7,P-1):S.rank;const f0=figTierOf;try{figTierOf=function(w){return w===S?rank:f0.apply(this,arguments)};return figFor(S,"")}catch(e){return""}finally{figTierOf=f0}}
 /* the dressing-room plate (img/toil-mirror-room.webp, 1200x800): bx = its CSS background-position-x (.ktrv-plate), gx = the bronze mirror's glass centre across the picture (measured) */
-const TOIL_PLATE={w:1200,h:800,bx:.52,gx:628/1200};
+const TOIL_PLATE={w:1200,h:800,bx:.52,gx:630/1200};/* gx = the mirror axis of symmetry measured on the painting (frame rows 60-470, left half vs flipped right half: x = 629.5-631 of 1200; dev/test/mirror-center.js re-measures it from the picture) */
 function toilReveal(o,done){let fin=false;const end=()=>{if(fin)return;fin=true;try{done()}catch(e){console.error(e)}};
  try{if(typeof kmStage!=="function"||!kmOn()||!S||!TOIL_FIT.fit)return end();const fig=toilFigAt(),por=toilPor();if(!fig||!por.src)return end();
   const ff=kitFile(fig),pf=kitFile(por.src),v=TOIL_FIT.fit[ff];if(!v)return end();const A=v[8]||1.3,red=kmReduced(),look=o.look;
@@ -880,7 +893,7 @@ function toilReveal(o,done){let fin=false;const end=()=>{if(fin)return;fin=true;
   const goZoom=()=>{if(ph>=2)return;ph=1.5;camSet();R.classList.add("ktrv-go");later(1500,toZoom)};
   if(red){camSet();R.classList.add("ktrv-red");toZoom();return}
   /* step in, effect, zoom */
-  camSet();/* the figure stands in front of the mirror from the first frame */requestAnimationFrame(()=>R.classList.add("ktrv-in"));
+  camSet();/* the figure stands in front of the mirror from the first frame */[pf,ff].forEach(f=>toilEyePx(f).then(ok=>{if(ok&&ph<3){try{camSet()}catch(e){}}}));requestAnimationFrame(()=>R.classList.add("ktrv-in"));
   try{kitFxPreload&&kitFxPreload(look==="vung"?["ink"]:look==="diem"?["spark","petal-peach"]:look==="dep"||look==="tuyet"?["petal-plum","petal-peach"]:[])}catch(e){}
   const runFx=()=>{if(ph>=2)return;const SF={dep:"favour",tuyet:"favour",diem:"rankNew",vung:"mglose",vua:"mirror",moc:"mirror"}[look]||"mirror";try{kitSfx(SF)}catch(e){}
    /* KIT §68.7: light is a RIM only (starts at her outline, radiates outward, never over her face); sparks and petals leave from her silhouette's edges */
