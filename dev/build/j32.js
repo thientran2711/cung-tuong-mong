@@ -4,7 +4,7 @@ function birthRisk(p){const me=p===S;const ag=p.age||20;let r=9+(p.suc<40?4:0)+M
  if(p.doctor){r-=5}else why.push("không có thái y tâm phúc");if(p.arts&&p.arts.y>=2)r-=3;else if(me)why.push("Y thuật dưới bậc 2");if(p.anthai)r-=2;if(me&&S.maid&&S.maid.loyal>=BAL.loy.trust)r-=2;
  if(p.midBribe){r+=10;why.push("bà đỡ bị mua chuộc")}if(p.suc<40)why.push(`Sức chỉ ${p.suc}`);if(ag>35)why.push(`đã ${ag} tuổi`);if(me)S.birthWhy=why;return cl(r,1.5,60)}
 /* a hostile rival may bribe the midwife in the last month (same rule for everyone) */
-(function(){const p0=pregMonth;pregMonth=function(){try{for(const p of consorts()){const pr=p===S?S.preg:p.preg;if(pr>=8&&!p.midChk){p.midChk=1;const f=others(p).filter(x=>x!==p&&bandOf(danger(x,p))>=3&&(x===S?false:x.bac>=40));if(f.length&&roll(25)){const x=pick(f);ap(x,{bac:-40});p.midBribe=key(x);persCount(x,"midwife")}}if(!pr){p.midChk=0;p.midBribe=null}}}catch(e){}return p0.apply(this,arguments)}})();
+(function(){const p0=pregMonth;pregMonth=function(){try{for(const p of consorts()){const pr=p===S?S.preg:p.preg;if(pr>=8&&!p.midChk){p.midChk=1;const f=others(p).filter(x=>x!==p&&bandOf(danger(x,p))>=3&&(x===S?false:x.bac>=BAL.bacFee.midwife));if(f.length&&roll(25)){const x=pick(f);ap(x,{bac:-BAL.bacFee.midwife});p.midBribe=key(x);persCount(x,"midwife")}}if(!pr){p.midChk=0;p.midBribe=null}}}catch(e){}return p0.apply(this,arguments)}})();
 /* every death card names the cause and the chain: who, what, how it could have been prevented */
 function deathChain(fate){const L=[];const f=String(fate||"");
  if(/Khó sinh/.test(f)){const w=S.birthWhy||[];L.push(`Mỗi lần sinh nở đều nguy đến tính mạng. Lần này: ${w.length?w.join(", "):"vận rủi"}.`);if(S.midBribe){const x=byKey(S.midBribe);L.push(`Bà đỡ đã nhận bạc của ${x?x.name:"kẻ giấu mặt"}.`)}L.push("Phòng được: thái y tâm phúc, học Y thuật bậc 2, giữ Sức trên 40, cung nữ trung thành đỡ đẻ.")}
@@ -30,8 +30,11 @@ function endArt(h,t,fate,live){const s=String(h||""),f=String(fate||""),x=String
  if(!k)k=live?"le-xuan":"tang-le";return `img/ev-${k}.webp`}
 window.endArt=endArt;
 function over(h,t,fate,alive){if(S.dead)return"";const live=overAlive(fate,alive);S.dead=true;S.fate=fate;record(fate);lifeSave(fate);const ms=mySons().length,md=myDaus().length;const ch=deathChain(fate);
- Q=[{t:"Kiếp này",cls:"end",art:endArt(h,t,fate,live),who:pMe(),h:`<h3>${h}</h3><p>${t}</p>${ch.length?`<div class="pcb rows">${ch.map(x=>`<div class="pcrow"><span>${x}</span></div>`).join("")}</div>`:""}
-  ${kitRows([["Thân phận",`${S.name} · ${S.origin.n}`,"t"],["Sống trong cung",`${S.year} năm · ${S.age} tuổi`,"t"],["Phẩm cao nhất",Math.max(S.rank,S.maxRank||0)>=7?"Hoàng hậu":RANKS[Math.max(S.rank,S.maxRank||0)].n,"t"],["Con cái",`${ms} hoàng tử, ${md} công chúa`,"t"],[live?"Kết cục":"Chết vì",fate,"t"]])}
+ /* kit sections + kit rows (KIT 9: h4.kpst + kitRows), no boxed panels (owner 15/11). Chain lines "Nhãn: lời" become labelled rows. */
+ const chR=ch.map(x=>{const m=String(x).match(/^([^:.]{2,26}):\s*(.+)$/);return m?[m[1],m[2],"t"]:["Nguyên do",x,"t"]});
+ const maxR=Math.max(S.rank,S.maxRank||0);
+ Q=[{t:"Kiếp này",cls:"end",art:endArt(h,t,fate,live),who:pMe(),h:`<h3>${h}</h3><p>${t}</p>${chR.length?`<div class="kpsec kend-why">${kitRows(chR)}</div>`:""}
+  <div class="kpsec kend-life"><h4 class="kpst">Kiếp này</h4>${kitRows([["Thân phận",`${S.name} · ${S.origin.n}`,"t"],["Sống trong cung",`${S.year} năm · ${S.age} tuổi`,"t"],["Phẩm cao nhất",maxR>=7?"Hoàng hậu":RANKS[maxR].n,"t"],["Con cái",`${ms} hoàng tử, ${md} công chúa`,"t"],[live?"Kết cục":"Chết vì",fate,"t"]])}</div>
   <p class="past">${live?"Kiếp này khép lại.":"Chết là hết."} Kiếp sau bắt đầu lại từ đầu, chỉ còn tên trong Sổ luân hồi.</p>`,btn:"Chuyển kiếp",onClose:start}];
  showModal();render();return""}
 /* the highest rank this life reached */

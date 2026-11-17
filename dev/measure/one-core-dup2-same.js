@@ -12,7 +12,9 @@ const NS=['quyLv','loy','wit','ducLv','sungLv','nightEnd','tinhLv','tinLv','rare
  /* review/one-core-dup3-land: main's batch-d8 jkc2 numbers (BAL.kc2 incl. kc2.st), the jentry word table (BAL.mgTier) */
  'kc2','mgTier','staff',
  /* review/one-core-jkc PART 2: the cuts a help / gloss / lock text also typed (jbal.js block, jweather wx, jpoison pg) */
- 'm95','accNeedEv','coldEvNeed','ngocboiSung','sinhThanSung','m30','srvx','virx','tsx','facJoinAff','sucNeed','loy','time','wx','pg'];
+ 'm95','accNeedEv','coldEvNeed','ngocboiSung','sinhThanSung','m30','srvx','virx','tsx','facJoinAff','sucNeed','loy','time','wx','pg',
+ /* review/one-core-jkc-2: the «thiếu bạc (cần N)» price-lock family (BAL.house servant prices, BAL.bacFee, BAL.actBac scheme bases, BAL.tw.reward) */
+ 'house','bacFee','actBac','tw','odb'];
 /* owner-ruled word changes (VANPHONG:69 / OD:L247 thiện cảm words everywhere): */
 const INTENDED={'jhc.js':['window.quyW'],'jts.js':['tsQuy'],'j55.js':['ccWord'],
  /* review/one-core-dup3: jlost A("laydol") x + AOUT.laydo/laydol: the text said «cung nữ thân tín lòng -10» while the rule (jlost loSteal self / jecon bribel)
@@ -49,6 +51,11 @@ INTENDED['jtruth.js']=['spyFind'];INTENDED['j78.js'].push('ExpressionStatement')
    (ExpressionStatement) and wxRisk reads them via the alias W (= BAL.wx) */
 INTENDED['j19.js']=(INTENDED['j19.js']||[]).concat(['VariableDeclaration']);INTENDED['j20.js']=(INTENDED['j20.js']||[]).concat(['VariableDeclaration','awCard']);
 INTENDED['j79.js']=(INTENDED['j79.js']||[]).concat(['VariableDeclaration']);INTENDED['jinv.js']=(INTENDED['jinv.js']||[]).concat(['TryStatement']);
+/* review/one-core-jkc-2 (price-lock family): j10 staffHTML / j15 staffTabHTML: «Mua chuộc» price + lock print nv(s,"bribeCost") — the price bribeServ charges
+   (a greedy servant costs 15, the text said 30) · j25 LACK.block / j70 rvButtons + thrOpts70 / j92 LACK.giahoa / jtsb LACK thathu·phonghoa·thaopet: the lock words print
+   actBac(k,S,t) = the price the act really charges (jecon raises a scheme's base by the target's rank / guards; the text said the base) · jecon: + function actBac ·
+   j6 rvButtons: -BAL.tw.reward.bac (= 30, the proof cannot fold a minus of the negative key) · jinv kinvOpen: «tốn: Bạc 10» → «tốn: Bạc -10» (the cost words of every other act) · jweather wxHit: «Sức −20» (U+2212) → balSg «Sức -20» (reviewer r1: the text prints BAL.eff.jweather.sucSlip) */
+for(const [f,d] of [['j10.js','staffHTML'],['j15.js','staffTabHTML'],['j25.js','VariableDeclaration'],['j6.js','rvButtons'],['j70.js','thrOpts70'],['j70.js','rvButtons'],['j92.js','TryStatement'],['jtsb.js','TryStatement'],['jinv.js','kinvOpen'],['jweather.js','wxHit']])(INTENDED[f]=INTENDED[f]||[]).push(d);
 INTENDED['jpoison.js']=(INTENDED['jpoison.js']||[]).concat(['ExpressionStatement']);INTENDED['jweather.js']=(INTENDED['jweather.js']||[]).concat(['ExpressionStatement','wxRisk']);
 /* j55 ccWord = side-chance scale (owner OD:L221) */
 const bal=()=>{const c={Math,BAL:{pace:1}};vm.createContext(c);
@@ -70,7 +77,7 @@ const fold=n=>{if(!n||typeof n!=='object')return n;if(Array.isArray(n))return n.
  if(n.type==='TemplateLiteral'){const Q=[n.quasis[0].value.cooked],E=[];n.expressions.forEach((e,i)=>{const v=numL(e)??strL(e);if(v!=null)Q[Q.length-1]+=v+n.quasis[i+1].value.cooked;else{E.push(e);Q.push(n.quasis[i+1].value.cooked)}});
   return E.length?{type:'TemplateLiteral',expressions:E,quasis:Q.map(c=>({type:'TemplateElement',value:{cooked:c}}))}:{type:'Literal',value:Q[0]}}
  if(n.type==='BinaryExpression'&&n.operator==='+'&&strL(n.left)!=null&&(numL(n.right)!=null||strL(n.right)!=null))return{type:'Literal',value:strL(n.left)+(numL(n.right)??strL(n.right))};
- if(n.type==='Property'&&n.kind==='get'&&n.value.body&&n.value.body.body&&n.value.body.body.length===1&&n.value.body.body[0].type==='ReturnStatement'&&strL(n.value.body.body[0].argument)!=null)
+ if(n.type==='Property'&&n.kind==='get'&&n.value.body&&n.value.body.body&&n.value.body.body.length===1&&n.value.body.body[0].type==='ReturnStatement'&&(strL(n.value.body.body[0].argument)!=null||numL(n.value.body.body[0].argument)!=null))/* review/one-core-jkc-2: c:{get bac(){return -K}} (j8 / j30 load before BAL) ≡ c:{bac:-N} */
   return Object.assign({},n,{kind:'init',method:false,value:n.value.body.body[0].argument});
  return n};
 const strip=n=>JSON.stringify(fold(JSON.parse(JSON.stringify(n))),(k,v)=>{if(k==='start'||k==='end'||k==='raw')return undefined;/* "…" ≡ `…` without ${} */if(v&&v.type==='TemplateLiteral'&&v.expressions.length===0&&v.quasis.length===1)return{S:v.quasis[0].value.cooked};if(v&&v.type==='Literal'&&typeof v.value==='string')return{S:v.value};return v});
@@ -82,12 +89,14 @@ const RX=new RegExp('BAL\\.('+NS.join('|')+')(?![\\w$])((?:\\.[\\w$]+|\\[\\d+\\]
 const nameOf=s=>s.type==='FunctionDeclaration'?s.id.name:s.type==='ExpressionStatement'&&s.expression.left?cp_src(s.expression.left):s.type;
 let cur='';const cp_src=n=>cur.slice(n.start,n.end);
 const changed=cp.execSync(`git diff --name-only ${REF} -- dev/build`,{encoding:'utf8'}).split('\n').filter(f=>/^dev\/build\/j[\w]+\.js$/.test(f)&&!/\/(jbal\w*|jpetlife)\.js$/.test(f));/* BAL files: new keys only, checked by the value table */
+/* a new helper function the moved code calls (listed, the rest of the module is still compared statement by statement) */
+const ADDED={'jecon.js':['actBac']};/* review/one-core-jkc-2 */
 let refs=0,bad=[],rows=[];
 for(const p of changed){const f=p.split('/').pop();const NEW=fs.readFileSync(p,'utf8');let OLD;try{OLD=cp.execSync(`git show ${REF}:${p}`,{encoding:'utf8',maxBuffer:1<<26})}catch(e){bad.push(f+': new file');continue}
  let c=0;const put=(T,cnt)=>T.replace(RX,(m,ns,path)=>{let v=B[ns];for(const k of path.match(/[\w$]+/g)||[])v=v==null?v:v[k];const L=lit(v);if(L==null)return m;c+=cnt;return L});
  /* both sides: a BAL ref the old code already had is put back too, so only the newly moved cuts count */
  const back=put(PRINTED(NEW),1);OLD=put(PRINTED(OLD),-1);refs+=c;/* c = new refs − old refs = the cuts moved here */
- const a=acorn.parse(back,{ecmaVersion:'latest'}).body,b=acorn.parse(OLD,{ecmaVersion:'latest'}).body.filter(s=>!(s.type==='FunctionDeclaration'&&(REMOVED[f]||[]).includes(s.id.name)));let diff=[];
+ const a=acorn.parse(back,{ecmaVersion:'latest'}).body.filter(s=>!(s.type==='FunctionDeclaration'&&(ADDED[f]||[]).includes(s.id.name))),b=acorn.parse(OLD,{ecmaVersion:'latest'}).body.filter(s=>!(s.type==='FunctionDeclaration'&&(REMOVED[f]||[]).includes(s.id.name)));let diff=[];
  if(a.length!==b.length)diff.push('statement count '+b.length+'→'+a.length);else{cur=back;const iife=s=>{const e=s.type==='ExpressionStatement'&&s.expression;const f=e&&e.type==='CallExpression'&&e.callee;return f&&/Function/.test(f.type)&&f.body.body};
   const cmp=(A,Bs)=>A.forEach((s,i)=>{if(strip(s)===strip(Bs[i]))return;const ia=iife(s),ib=iife(Bs[i]);if(ia&&ib&&ia.length===ib.length)cmp(ia,ib);else diff.push(nameOf(s))});cmp(a,b)}
  let theirs=new Set();if(REF2){try{const T=put(cp.execSync(`git show ${REF2}:${p}`,{encoding:'utf8',maxBuffer:1<<26}),0);const tb=acorn.parse(T,{ecmaVersion:'latest'}).body;const flat=x=>x.flatMap(st=>{const e=st.type==='ExpressionStatement'&&st.expression;const fn=e&&e.type==='CallExpression'&&e.callee;return [st].concat(fn&&/Function/.test(fn.type)?fn.body.body:[])});

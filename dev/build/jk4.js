@@ -17,13 +17,12 @@ function kitStatIcon(icon){if(!icon)return"";if(/[\/.]/.test(icon))return `<img 
    bar: 0–100 shows the thin bar; null keeps the empty slot (row cells) — nobar drops it (tiles, chips). */
 function kitStatCell(icon,label,value,o){o=o||{};const bar=o.bar==null?"":Math.max(0,Math.min(100,+o.bar||0));const tg=o.tag==="span"?"span":"div";
  const b=o.nobar?"":`<i class="mini kstb${bar===""?" kstb0":""}"><u${bar===""?"":` style="width:${bar}%"`}></u></i>`;
- return `<${tg} class="kst${o.cls?" "+o.cls:""}"${o.id?` id="${o.id}"`:""}${o.k?` data-k="${o.k}"`:""}${o.title?` title="${kitStatEsc(o.title)}"`:""}><small class="kstl">${kitStatIcon(icon)}${label}</small><span class="kstv${o.vcls?" "+o.vcls:""}">${value==null?"":value}</span>${o.warn?`<i class="kstw" aria-label="${kitStatEsc(o.warn)}">!</i>`:""}${b}</${tg}>`}
-/* kitStatSet(cell,value,{bar,title,warn}): update a live cell in place (no re-render, no flicker) */
+ return `<${tg} class="kst${o.cls?" "+o.cls:""}"${o.id?` id="${o.id}"`:""}${o.k?` data-k="${o.k}"`:""}${o.title?` title="${kitStatEsc(o.title)}"`:""}><small class="kstl">${kitStatIcon(icon)}${label}</small><span class="kstv${o.vcls?" "+o.vcls:""}">${value==null?"":value}</span>${b}</${tg}>`}
+/* kitStatSet(cell,value,{bar,title}): update a live cell in place (no re-render, no flicker) */
 function kitStatSet(c,v,o){if(!c)return;o=o||{};const s=c.querySelector(".kstv");const t=v==null?"":String(v);if(s&&s.textContent!==t){const was=s.textContent;s.textContent=t;try{if(was!==""&&typeof kitStatDelta==="function"&&!c.id.startsWith("hud-"))kitStatDelta(c,was,t)}catch(e){}}
  if(o.bar!=null){const u=c.querySelector(".kstb u");if(u)u.style.width=Math.max(0,Math.min(100,+o.bar||0))+"%"}
  if(o.title!=null&&c.title!==o.title)c.title=o.title;
- let w=c.querySelector(".kstw");if(o.warn&&!w){w=document.createElement("i");w.className="kstw";c.insertBefore(w,c.querySelector(".kstb"));w.textContent="!"}
- if(w){if(o.warn)w.setAttribute("aria-label",o.warn);else w.remove()}}
+ /* NO "!" badge on a stat cell (owner 17/11 08:00Z): the info stays on tap; any stray .kstw is dropped */const w=c.querySelector(".kstw");if(w)w.parentNode.removeChild(w)}
 /* kitStatRow([{id,cls,title,cells:[html…]}…],{id,cls}) → HTML: groups side by side, divided by a hairline. Each group carries --kn = its cell
    count, so where the row is stretched (two-row bar, phones) every CELL gets the same width whatever the group sizes (6 | 2 on the top bar). */
 function kitStatRow(groups,o){o=o||{};return `<div class="kstrow${o.cls?" "+o.cls:""}"${o.id?` id="${o.id}"`:""}>${groups.map(g=>`<div class="kstg${g.cls?" "+g.cls:""}"${g.id?` id="${g.id}"`:""} style="--kn:${g.cells.length}"${g.title?` title="${kitStatEsc(g.title)}"`:""}>${g.cells.join("")}</div>`).join("")}</div>`}
@@ -41,9 +40,6 @@ window.kitStatCell=kitStatCell;window.kitStatSet=kitStatSet;window.kitStatRow=ki
 .kst>.kstb{display:block;align-self:center;width:100%;height:3px;margin:0}
 .kst>.kstb0{visibility:hidden}
 .kst-tile>.kstv:not(.kunk){font-weight:700}.kst-tile>.kstl img.ic,.kst-chip>.kstl img.ic{width:13px;height:13px;vertical-align:-2px}
-/* one-row bar (cells sized to content): a cell wearing the "!" keeps the badge inside its own box (owner 15/11: Danh now follows Đức) */
-/* kv3:.kv2 */:where(.kv2) header.hud:not(.khd2) #kstrow .kst:has(>.kstw){padding-right:12px}
-.kst>.kstw{position:absolute;left:calc(50% + 1.1em);top:calc(var(--kst-l) + (var(--kst-n) - 13px)/2);font-style:normal;font-weight:800;font-size:.62rem;line-height:13px;color:#fff;background:var(--gold);border-radius:50%;width:13px;height:13px;text-align:center}
 /* the time block: same two line boxes as a stat cell */
 .k3tc .k3tt{display:grid!important;grid-template-rows:var(--kst-l) var(--kst-n) var(--kst-b);gap:0!important;min-width:0}
 /* each line is a block whose own font is the stat cell's font for that line: the line's strut puts the baseline exactly where the cells
@@ -401,7 +397,7 @@ function kitDpApply(){try{const o=kitDpOn();const d0=document.querySelector("#mo
  const ban=mb.querySelector(":scope > .kdlgart.kdpban");d.classList.toggle("kdpbanner",!!ban);
  if(ban){const im=ban.querySelector("img");if(im){const f=(im.getAttribute("src")||"").replace(/^.*\//,"");im.style.setProperty("object-position",(window.KIT_FOCUS||{})[f]||"50% 50%","important")}}
  const op=mb.querySelector(":scope > .opts");if(op){const B=[...op.children].filter(x=>x.matches("button,.opt"));
-  const short=B.length>=2&&B.every(b=>b.querySelectorAll(".kr").length<=2&&(b.textContent||"").replace(/\s+/g," ").trim().length<=70);op.classList.toggle("kdpo2",short)}
+  const short=B.length>=2&&op.clientWidth>=540&&B.every(b=>b.querySelectorAll(".kr").length<=2&&(b.textContent||"").replace(/\s+/g," ").trim().length<=70);op.classList.toggle("kdpo2",short)}
  kitDpFit()}catch(e){console.error("kitDpApply",e)}}
 /* KIT 50: banner focus points (object-position) for vertical event art; anything not listed = "50% 50%" (chosen from the crop sheets, dev/review/event-banners.md) */
 window.KIT_FOCUS=Object.assign({"ev-trieu-chinh-2.webp":"50% 15%","ev-thang-tran.webp":"50% 55%","ev-hoang-de-gian.webp":"50% 15%","ev-di-san.webp":"50% 15%","ev-le-thu.webp":"50% 15%","ev-le-thu-2.webp":"50% 15%","ev-le-thu-3.webp":"50% 15%","ev-le-dong-2.webp":"50% 15%","ev-thoi-tiet-3.webp":"50% 15%","ev-dieu-troi.webp":"50% 15%","ev-dieu-lanh.webp":"50% 15%","ev-mat-uoc.webp":"50% 15%"},window.KIT_FOCUS||{});/* dev/review/event-banners.md */
@@ -520,7 +516,7 @@ function kitDpAll(){try{const o=kitDpOn();if(!o||!o.d.classList.contains("kdper"
  d.classList.remove("kdpall");const tiny=op.scrollHeight>op.clientHeight+2&&op.clientHeight<280;if(tiny){d.classList.add("kdpall");if(!d.__kdpTop){d.__kdpTop=1;mb.scrollTop=0}}mb.style.setProperty("--kdpmbh",mb.clientHeight+"px")}catch(e){}}
 window.kitDpAll=kitDpAll;
 function kitDpNat(d,mb,col){try{const cs=e=>getComputedStyle(e);const items=[...mb.querySelectorAll(":scope > *, :scope > .kpb > *")].filter(e=>e!==col&&e.offsetParent&&cs(e).display!=="contents"&&cs(e).gridColumnStart==="2");
- let sum=0;items.forEach(e=>{const c=cs(e);let h=e.offsetHeight;if(e.classList.contains("opts")){const K=[...e.children].filter(x=>x.offsetParent);if(K.length){const t=e.getBoundingClientRect().top;h=Math.max(...K.map(x=>x.getBoundingClientRect().bottom))-t+e.scrollTop+parseFloat(c.paddingBottom||0)}}
+ let sum=0;items.forEach(e=>{const c=cs(e);let h=e.offsetHeight;if(e.classList.contains("kpmain")&&e.scrollHeight>e.clientHeight+1)h=e.scrollHeight+(e.offsetHeight-e.clientHeight);/* KIT 32.7d: a scrolling text side counts its full text */if(e.classList.contains("opts")){const K=[...e.children].filter(x=>x.offsetParent);if(K.length){const t=e.getBoundingClientRect().top;h=Math.max(...K.map(x=>x.getBoundingClientRect().bottom))-t+e.scrollTop+parseFloat(c.paddingBottom||0)}}
   sum+=h+parseFloat(c.marginTop||0)+parseFloat(c.marginBottom||0)});
  const m=cs(mb);sum+=parseFloat(m.paddingTop||0)+parseFloat(m.paddingBottom||0)+(parseFloat(m.rowGap)||0)*Math.max(0,items.length-1);
  return d.offsetHeight-mb.offsetHeight+sum}catch(e){return d.scrollHeight}}
@@ -748,7 +744,7 @@ html body .stage .tok .tag .j59n.kmy,html body .stage #j59metag .tag .j59n.kmy,h
 .knr>.knr-n{font-size:.98rem;color:color-mix(in srgb,var(--rc,#7a5530) 45%,#2a1a12);overflow-wrap:anywhere}
 /* person cards (j15 pcard + jk2b layout): the same order — rank line, name, THEN the portrait. Narrow card: the name block is a full row
    above the portrait and the bars (was beside the portrait); wide card: rank above the name, both above the portrait. */
-.pc.kpnar[data-k2]>.pcl{grid-template-areas:"nm nm" "por bars" "por fx"!important;grid-template-rows:auto auto 1fr!important}
+.pc.kpnar[data-k2]>.pcl{grid-template-areas:"nm nm" "por bars" "por fx" "key key"!important;grid-template-rows:auto auto 1fr auto!important}
 .pc.kpnar[data-k2]>.pcl>.kpnm{display:flex!important;flex-direction:column!important;align-items:flex-start!important;gap:0!important;margin:0 0 4px}
 .pc.kpnar[data-k2]>.pcl>.kpnm>.pcrk{order:-1}
 html body .pc.kpwide[data-k2]>.pcl>.pcrk{order:-4!important;margin:0!important}
@@ -766,6 +762,11 @@ html body #modal .dlg.kdper>#mb>.kdlgart.kdpban>.ksart{width:100%!important;heig
 html body #modal .dlg.kdper>#mb>.kdlgart.kdpban>.ksart img{width:100%!important;height:100%!important;object-fit:cover!important}
 #modal .dlg.kdper.kdpbanner>#mb>.kpb>.kpmain,#modal .dlg.kdper.kdpbanner>#mb>.kdpr:not(.kdlgart){grid-column:2}
 html body #modal .dlg.kdper>#mb>.opts.kdpo2,html body #modal .dlg.kdper>#mb>.opts.kdpo2.k3grid{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;align-content:start;gap:8px}
+/* KIT 32.7d (owner 15/11 end card "Kiếp này", D36; kit-keeper-1): a 32.7 dialog with NO option list (end card, Đã rõ cards) — the TEXT side scrolls by
+   itself and the person column keeps the dialog's visible height, so the whole figure is always in view (844x390 included). Never a sticky hack. */
+#modal .dlg.kdper:not(.kdnarrow)>#mb:not(:has(>.opts)){grid-template-rows:minmax(0,1fr)!important;grid-auto-rows:max-content}
+#modal .dlg.kdper.kdpbanner:not(.kdnarrow)>#mb:not(:has(>.opts)){grid-template-rows:max-content minmax(0,1fr)!important}
+#modal .dlg.kdper:not(.kdnarrow)>#mb:not(:has(>.opts))>.kpb>.kpmain{min-height:0;overflow-y:auto;overscroll-behavior:contain;align-self:stretch}
 /* 50.1: a kdpo2 group is all short by KIT 50 (≤ 2 rows): no 32.9 "long" full-width cell / reorder inside it; the natural height is measured
    from the right column's own parts (kitDpNat: banner + text + the options' content), so the dialog fits its options instead of scrolling them */
 html body #modal .dlg.kdper>#mb>.opts.kdpo2.kdpo2>button.ka.k3long,html body #modal .dlg.kdper>#mb>.opts.kdpo2.kdpo2>button.ka.k3odd{grid-column:auto!important;order:0!important}
@@ -984,16 +985,31 @@ const KIT_OPT_FIT_SEL="button.ka.kart";
 let KIT_OPT_DPQ=0;/* a card that changed height inside a person dialog → the dialog (content height, 32.7c) and its figure (32.2b gaps) are laid out again */
 function kitOptFitDone(b,h0){try{if(Math.abs(b.offsetHeight-h0)>1&&b.closest("#modal .dlg.kdper")&&!KIT_OPT_DPQ){KIT_OPT_DPQ=requestAnimationFrame(()=>{KIT_OPT_DPQ=0;try{kitDpFit()}catch(e){}})}}catch(e){}}
 function kitOptFit(b){const h0=b&&b.offsetHeight||0;kitOptFit0(b);if(b)kitOptFitDone(b,h0)}
-function kitOptFit0(b){try{if(!b||!b.isConnected)return;const art=b.querySelector(":scope > .kaart"),body=b.querySelector(":scope > .kabody");if(!art||!body)return;
- const set=s=>{if(s){b.style.setProperty("--kah",s+"px","important");b.style.setProperty("--kaw",s+"px","important");["flex-basis","width","height"].forEach(k=>art.style.setProperty(k,s+"px","important"));b.classList.add("kasq")}
-  else{b.style.removeProperty("--kah");b.style.removeProperty("--kaw");["flex-basis","width","height"].forEach(k=>art.style.removeProperty(k));b.classList.remove("kasq")}};
- set(0);if(getComputedStyle(art).display==="none"||getComputedStyle(b).flexDirection!=="row"){b.dataset.kapic="";return}
- const a=art.getBoundingClientRect();if(a.width<24||a.width>112||a.height<a.width*1.15){b.dataset.kapic="";return}/* not the compact tall form (the big Hành sự card keeps its own) */
- const w=a.width,h=a.height,lo=Math.round(w*KIT_OPT_SQ.min);let bh=body.getBoundingClientRect().height;
- if(bh>=h-2){b.dataset.kapic="tall";b.__kof=b.clientWidth+"x"+Math.round(bh);return}
- let s=Math.round(Math.max(lo,Math.min(w,bh)));set(s);
- for(let i=0;i<2;i++){bh=body.getBoundingClientRect().height;const s2=Math.round(Math.max(lo,Math.min(w,bh)));if(s2===s)break;s=s2;set(s)}
- b.dataset.kapic="sq";b.__kof=b.clientWidth+"x"+Math.round(body.getBoundingClientRect().height)}catch(e){console.error("kitOptFit",e)}}
+function kitOptGroup(b){const r=b.closest("#modal .dlg")||b.parentElement||document;return [...r.querySelectorAll(KIT_OPT_FIT_SEL)].filter(x=>x.querySelector(":scope > .kaart")&&x.querySelector(":scope > .kabody"))}
+function kitOptSet(x,s,h){const art=x.querySelector(":scope > .kaart");if(!art)return;h=h||s;if(s){x.style.setProperty("--kaw",s+"px","important");x.style.setProperty("--kah",h+"px","important");art.style.setProperty("flex-basis",s+"px","important");art.style.setProperty("width",s+"px","important");art.style.setProperty("height",h+"px","important");x.classList.toggle("kasq",s===h)}
+ else{x.style.removeProperty("--kah");x.style.removeProperty("--kaw");["flex-basis","width","height"].forEach(k=>art.style.removeProperty(k));x.classList.remove("kasq")}}
+/* PERSON / SUBJECT DIALOGS (owner 17/11 ~05:00Z, final rule): the group is a person card's act rows or a dialog with a figure column (.kpsubj / kdper):
+   every card is ONE size (the tallest text sets it) and its picture is a TALL 3:4 RECTANGLE filling the card height (width = 3/4 of that height, 54..112 px;
+   cover-cropped), never a square, nothing empty beside the text. Other dialogs keep the one-form-per-dialog rule below. */
+function kitOptIsPerson(b){try{if(b.closest(".pc"))return true;const D=b.closest("#modal .dlg");return !!(D&&(D.classList.contains("kdper")||D.classList.contains("kszf")||D.querySelector(".kpsubj,.kszfig")))}catch(e){return false}}
+function kitOptFill(E,done){const pad=x=>{const cs=getComputedStyle(x);return (parseFloat(cs.paddingTop)||0)+(parseFloat(cs.paddingBottom)||0)+(parseFloat(cs.borderTopWidth)||0)+(parseFloat(cs.borderBottomWidth)||0)};
+ const body=x=>x.querySelector(":scope > .kabody").getBoundingClientRect().height,P=pad(E[0]);let Hp=Math.round(Math.max(72,...E.map(body))),Wp=0;
+ for(let i=0;i<4;i++){const W=Math.round(Math.max(54,Math.min(84,Hp*.75,E[0].clientWidth-20-10-190)));if(W===Wp&&i)break;Wp=W;E.forEach(x=>{kitOptSet(x,Wp,Hp);x.style.setProperty("min-height",(Hp+P)+"px","important")});
+  const m=Math.round(Math.max(72,...E.map(body)));if(m<=Hp)break;Hp=m}
+ const H=Math.round(Math.max(...E.map(x=>x.getBoundingClientRect().height)));E.forEach(x=>{kitOptSet(x,Wp,H-P);x.style.setProperty("min-height",H+"px","important")});
+ done("fill")}
+/* ONE PICTURE SIZE PER GROUP (owner 17/11 "nút to nút nhỏ", §6.2b): every option card of one dialog (or one sibling list) gets the SAME picture size.
+   The size is the one the SHORTEST card text allows (no empty space under any text-shortest card); all tall when every text fills the tall picture. */
+function kitOptFit0(b){try{if(!b||!b.isConnected)return;const G=kitOptGroup(b);if(!G.includes(b))G.push(b);G.forEach(x=>{kitOptSet(x,0);x.style.removeProperty("min-height")});
+ const E=[];let w=0,h=0;G.forEach(x=>{const art=x.querySelector(":scope > .kaart");x.dataset.kapic="";if(!x.isConnected||getComputedStyle(art).display==="none"||getComputedStyle(x).flexDirection!=="row")return;
+  const a=art.getBoundingClientRect();if(a.width<24||a.width>112||a.height<a.width*1.15)return;E.push(x);w=Math.max(w,a.width);h=Math.max(h,a.height)});
+ if(!E.length)return;E.forEach(x=>x.style.removeProperty("min-height"));const lo=Math.round(w*KIT_OPT_SQ.min),bhs=()=>E.map(x=>x.querySelector(":scope > .kabody").getBoundingClientRect().height);
+ const done=(f)=>E.forEach(x=>{x.dataset.kapic=f;x.__kof=x.clientWidth+"x"+Math.round(x.querySelector(":scope > .kabody").getBoundingClientRect().height)});
+ if(kitOptIsPerson(E[0])&&E[0].clientWidth>=274){kitOptFill(E,done);return}/* narrower than 274 px the text column would drop under 190 px: keep the one-form rule below */
+ let m=Math.min(...bhs());if(m>=h-2){done("tall");return}
+ let s=Math.round(Math.max(lo,Math.min(w,m)));E.forEach(x=>kitOptSet(x,s));
+ for(let i=0;i<3;i++){m=Math.min(...bhs());const s2=Math.round(Math.max(lo,Math.min(w,m)));if(s2===s)break;s=s2;E.forEach(x=>kitOptSet(x,s))}
+ done("sq")}catch(e){console.error("kitOptFit",e)}}
 let KIT_OPT_RO=null;
 function kitOptFitAll(root){try{root=root&&root.querySelectorAll?root:document;const B=[...root.querySelectorAll(KIT_OPT_FIT_SEL)].filter(b=>b.querySelector(":scope > .kaart")&&b.querySelector(":scope > .kabody"));
  if(!KIT_OPT_RO&&typeof ResizeObserver==="function")KIT_OPT_RO=new ResizeObserver(E=>{const seen=new Set();E.forEach(e=>{const b=e.target.closest(KIT_OPT_FIT_SEL);if(!b||seen.has(b))return;seen.add(b);

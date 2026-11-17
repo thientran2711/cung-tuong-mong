@@ -22,12 +22,15 @@ function k3Date(){try{const mo=(typeof KP_MON!=="undefined"&&KP_MON[(S.month-1)%
 window.k3Date=k3Date;
 /* the status sheet always starts closed (it is opened from a stage plaque) */
 try{localStorage.setItem("hclh-h2c","1")}catch(e){}window.__h2c=true;
+/* the Đức goal line (lập Hoàng hậu is a consort goal: never on the cung nữ road or in lãnh cung); "" when it does not apply */
+function k3DucNeed(){try{return S.rank<7&&S.duc<hhNeed(S).duc&&!(window.kitRoad&&kitRoad())?`Cần Đức ${BAL.hhDuc} mới được lập Hoàng hậu (mẹ Thái tử: ${BAL.hhDucHeir})`:""}catch(e){return""}}
+window.k3DucNeed=k3DucNeed;
 function k3Hud(){try{if(!S)return;const d=$$("me-d");if(d){const t=k3Date();if(d.textContent!==t)d.textContent=t}
  /* lãnh cung: the rank chip says what the figure label says (rkOfFace "Phế phi · lãnh cung"), not her old rank (review fold-layout) */
  if(S.out){const r=$$("me-r"),w="Phế phi · lãnh cung";if(r&&r.textContent.trim()!==w)r.textContent=w}
  /* her Tư chất: the kit stat cells in the top bar's kitStatRow (jk4) */
- k3TopRow();try{window.kitHxRoad&&kitHxRoad()}catch(e){}if(typeof kitStatSet!=="function")return;/* the Đức "!" (lập Hoàng hậu) is a consort goal: never on the cung nữ road or in lãnh cung */const nd=hhNeed(S).duc,hq=S.rank<7&&S.duc<nd&&!(window.kitRoad&&kitRoad()),dw=`Cần Đức ${BAL.hhDuc} mới được lập Hoàng hậu (mẹ Thái tử: ${BAL.hhDucHeir})`;
- [["sac","Sắc"],["tai","Tài"],["tamco","Tâm cơ"],["duc","Đức"]].forEach(([k,l])=>{const c=$$("hud-"+k);if(c)kitStatSet(c,S[k],{title:`${l} ${S[k]}${k==="duc"&&hq?" · "+dw:""} · chạm để xem đủ`,warn:k==="duc"&&hq?dw:""})});
+ k3TopRow();try{window.kitHxRoad&&kitHxRoad()}catch(e){}if(typeof kitStatSet!=="function")return;/* NO "!" badge on top-bar stat cells (owner 17/11 08:00Z): the Đức goal (lập Hoàng hậu) lives in the tooltip + the tap popup (k3DucNeed) */const dw=k3DucNeed();
+ [["sac","Sắc"],["tai","Tài"],["tamco","Tâm cơ"],["duc","Đức"]].forEach(([k,l])=>{const c=$$("hud-"+k);if(c)kitStatSet(c,S[k],{title:`${l} ${S[k]}${k==="duc"&&dw?" · "+dw:""} · chạm để xem đủ`})});
  /* Danh · Sủng · Bạc · Sức: tooltip = name + value + "chạm để xem đủ" (the label line's own text, so the servant road's "Chủ tin" reads right) */
  ["danh","sung","bac","suc"].forEach(k=>{const c=$$("hud-"+k);if(!c)return;const l=T((c.querySelector(".kstl")||c).textContent),v=k3CellKey(k)==="tin"?S.tin:S[k];kitStatSet(c,hudFmt(k3CellKey(k),v),{title:`${l} ${hudFmt(k3CellKey(k),v)} · chạm để xem đủ`})})}catch(e){}}
 /* the top bar's second row (KIT 31.1): time (buổi, khắc dots, weather, Quẻ tuần) + status chips | her Tư chất. ONE component, every device */
@@ -122,7 +125,7 @@ if(typeof renderStage==="function"){const r1=renderStage;renderStage=function(){
 /* gutter widths: from the stage width, then grown to the plaques' real width; j59 keeps the figures between them */
 /* review/stage-side: the side column's width comes from the stage width only (never from its content), so it is the same narrow column
    on every screen and every render: 24 % of the stage, 132–172 px */
-function k3RW(st){/* one column width for every host: from the PAGE width (the map leather spans the spread on iPad = 2 pages) */let W=st.clientWidth;try{if((st.classList.contains("mapv")||st.classList.contains("kplfs"))&&kitView().pages===2)W=W/2}catch(e){}/* reviewer stage-pets-r1: the full-screen place painting spans the spread too (33.10) → same column as her room / the map (139 px at 1180, was 172) */if(!W)return;const v=Math.round(Math.max(132,Math.min(172,W*.24)))+"px";if(st.style.getPropertyValue("--kgrw")!==v)st.style.setProperty("--kgrw",v)}
+function k3RW(st){/* one column width for every host: from the PAGE width (the map leather spans the spread on iPad = 2 pages) */let W=st.clientWidth;try{if((st.classList.contains("mapv")||st.classList.contains("kplfs"))&&kitView().pages===2)W=W/2}catch(e){}/* reviewer stage-pets-r1: the full-screen place painting spans the spread too (33.10) → same column as her room / the map (139 px at 1180, was 172) */if(!W)return;/* owner 17/11 06:45Z: the column is NARROWER, fits its content (the widest line is ~135 px) → ONE width KIT_RCOLW (140 px) on every screen; only a tiny stage shrinks it */const v=Math.round(Math.max(132,Math.min(140,W*.25)))+"px";if(st.style.getPropertyValue("--kgrw")!==v)st.style.setProperty("--kgrw",v)}
 function k3Gut(){const st=$$("stage");if(!st)return;const W=st.clientWidth;if(!W)return;k3RW(st);
  const g=Math.round(Math.max(W<520?96:116,Math.min(190,W*.2)));st.classList.toggle("k3n",g<116);const L=$$("kshL"),R=$$("kshR");
  st.style.setProperty("--kgw",g+"px");st.style.setProperty("--k3stw",W+"px");
@@ -141,7 +144,7 @@ document.addEventListener("click",e=>{const p=e.target.closest&&e.target.closest
    chips. A tap on a fact opens its own explanation (the j19 status-cell card: HX text, Bổng lộc card, Ân thưởng card), never a sheet. */
 function k3Explain(k){try{if(!S||S.dead||Q.length)return;try{window.kitHxRoad&&kitHxRoad()}catch(e){}const b=k3hc(k);
  if(b&&!b.classList.contains("keep")){b.click();return}
- const t=typeof HX==="object"&&HX[k];if(t){const hc=$$("hud-"+k),hl=hc&&hc.querySelector(".kstl");Q.unshift({t:b?k3lab(b)||T(b.textContent):hl?T(hl.textContent):k,h:`<p>${t}</p>`});showModal()}}catch(e){}}
+ const t=typeof HX==="object"&&HX[k];if(t){const hc=$$("hud-"+k),hl=hc&&hc.querySelector(".kstl");Q.unshift({t:b?k3lab(b)||T(b.textContent):hl?T(hl.textContent):k,h:`<p>${t}</p>${k==="duc"&&k3DucNeed()?`<p>${k3DucNeed()}</p>`:""}`});showModal()}}catch(e){}}
 window.k3Explain=k3Explain;
 function k3Sheet(open){const h=$$("hud2");if(!h)return;if(open)return;/* the sheet never opens (owner 04:05Z) */
  const isOpen=!h.classList.contains("col");if(open===isOpen)return;const t=h.querySelector(".h2t");if(t)t.click()}
@@ -224,7 +227,7 @@ html body .kshR{position:absolute;top:8px;right:8px;width:var(--kgrw,150px);min-
 .ksh .k3time{flex-wrap:wrap;column-gap:4px}.ksh .k3time .k3l{font-weight:700;color:var(--gold);flex:0 1 auto}.ksh .k3time>b{margin-left:0}
 .ksh .k3wx{padding-left:0!important;font-size:.75rem!important;background:none!important;border:0!important;box-shadow:none!important;min-height:0!important}
 .ksh .k3wx img{width:18px!important;height:18px!important;border-radius:50%}
-.ksh .k3cs{display:flex;flex-direction:column;gap:4px}
+.ksh .k3cs{display:grid;grid-template-columns:100%;grid-auto-rows:1fr;gap:4px}/* owner 17/11 06:50Z: same-kind cards (Hoàng thượng / Thái hậu / Hoàng hậu / cung nữ) = ONE height (the tallest), all the column's width */
 .ksh .k3c{display:flex;align-items:center;gap:5px;padding:2px 6px 2px 3px;font:inherit;text-align:left;cursor:pointer;min-height:0;color:var(--ink);width:100%}
 .ksh .k3c .md{flex:0 0 auto}
 .ksh .k3c .k3ct{display:flex;flex-direction:column;line-height:1.2;min-width:0}
@@ -343,8 +346,10 @@ html body .game#game.k3ph header.hud>#k3room:not([hidden]){grid-area:room}
 html body #hud2 .khg .khc .hc[data-hx="buoi"],html body #hud2 .khg .khc .hc[data-hx="sac"],html body #hud2 .khg .khc .hc[data-hx="tai"],html body #hud2 .khg .khc .hc[data-hx="tamco"],html body #hud2 .khg .khc .hc[data-hx="duc"]{display:none!important}
 html body #hud2 .khg .hc.hot[data-hx]{color:inherit}
 /* 3 + 4 · scene words straight on the painting (no plaque, no pill), one line each, soft light halo for readability */
-html body .stage #sc-t{background:none!important;border:0!important;box-shadow:none!important;backdrop-filter:none!important;padding:0 2px!important}
-html body .stage #sc-t h2,html body .stage #sc-t h2 *{white-space:nowrap!important;color:#3a1d10;text-shadow:0 0 2px #fff8ee,0 0 6px #fff8ee,0 0 10px #fff8eecc}
+/* s31 stage-caption (owner 17/11: caption too faint over the backdrop): the place name + caption sit on the SAME kit plate as the side plaques (.k3p: --k3pl paper, --line border, 8px radius) and the caption uses the kit body size */
+html body .stage #sc-t{background:var(--k3pl)!important;border:1px solid var(--line)!important;border-radius:8px!important;box-shadow:0 1px 4px #3a20101f!important;backdrop-filter:blur(2px)!important;padding:3px 8px!important}
+html body .stage #sc-t h2,html body .stage #sc-t h2 *{white-space:nowrap!important;color:#3a1d10;text-shadow:none}
+html body .stage #sc-t h2 .rmsg{font-size:.88rem!important;line-height:1.25;font-weight:600}
 /* the place line never runs under the court chips (review fold-layout): it ends before the right plaque column; the place NAME stays one
    line, the trailing note ("… đi vắng, đang ở …") wraps under it */
 html body .stage.k3g #sc-t{width:max-content!important;max-width:calc(var(--k3stw,100vw) - var(--kgr,0px) - 24px)!important}
@@ -533,6 +538,7 @@ function k3IsLong(b){if(b.querySelector(".kr-can,.kr-duoc,.kr-mat,.kr-kem,.kr-wh
 function k3OptCols(){try{const W=innerWidth;const m=typeof Q!=="undefined"?Q[0]:null;const want=m&&(m.optLayout||(m.kit&&m.kit.optLayout));
  document.querySelectorAll("#modal .opts:has(> button.ka), #modal .kpscopts").forEach(g=>{const dl=g.closest(".dlg");if(dl&&dl.querySelector(".kpid"))return;
   const B=[...g.querySelectorAll(":scope > button.ka")];g.classList.remove("k3rows","k3grid","k3g3");B.forEach(x=>x.classList.remove("k3long"));
+  if(g.clientWidth>0&&g.clientWidth<540){g.classList.add("k3rows");return}/* two columns need >= 270 px per card (a 304 px right column made 149 px cards: one word per line) */
   if(want==="rows"){g.classList.add("k3rows");return}if(want==="grid"){g.classList.add("k3grid");if(W>=1000&&B.length>=3)g.classList.add("k3g3");return}
   g.classList.add("k3rows");const L=B.map(k3IsLong);if(L.every(Boolean))return;g.classList.remove("k3rows");g.classList.add("k3grid");if(W>=1000&&B.filter((x,i)=>!L[i]).length>=3)g.classList.add("k3g3");
   B.forEach((x,i)=>{if(L[i])x.classList.add("k3long")});

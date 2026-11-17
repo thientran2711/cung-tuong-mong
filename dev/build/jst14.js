@@ -30,14 +30,16 @@ function f14Srv(){return S.origin.k==="cnv"&&!(S.srv&&S.srv.risen)}
 /* the time step of a tutorial chapter (third item "t" = only the limit that lets the story go on) */
 function f14Late(m,L,w){const e=f14El(m);return[`Hoặc qua ${f14Nv(L)} tháng${w||""} (${Math.min(L,e)}/${L}), không thưởng`,e>=L,"t"]}
 const F14G=()=>BAL.st14.goal,F14L=()=>BAL.st14.lim,F14D=()=>BAL.st14.danh,F14R=()=>BAL.st14.rw;
+/* chương 1 time limit of a consort road: longer when she enters at rank lim.hiR or above (entry rank = m.r0, else her origin's rank) */
+function f14NhapL(m){const L=F14L();let r=0;try{r=m&&m.r0!=null?m.r0:S.st&&S.st.ms&&S.st.ms.r0!=null?S.st.ms.r0:(S.origin&&S.origin.r)|0}catch(e){}return r>=L.hiR?L.nhapHi:L.nhap}
 /* tutorial milestones (phase 1): every step is a real state check she can do from her real position (fix r1 item 2: the cung nữ road
    serves first, so its steps are servant steps until she is raised; «Từ kẻ hầu thành tiểu chủ» runs only if she is not raised yet) */
 Object.assign(MS67,{
- nhap14:{t:()=>S.origin.k==="cnv"?"Kẻ hầu mới vào cung":"Nhập cung, đứng vững",lim:()=>S.origin.k==="cnv"?F14L().nhapCnv:F14L().nhap,wait:()=>f14Home(),
+ nhap14:{t:()=>S.origin.k==="cnv"?"Kẻ hầu mới vào cung":"Nhập cung, đứng vững",lim:()=>S.origin.k==="cnv"?F14L().nhapCnv:f14NhapL(),wait:()=>f14Home(),
   g:()=>S.origin.k==="cnv"?`Mới vào cung làm kẻ hầu: làm tròn phận sự, giữ lòng tin của chủ. Chủ tin lên ${F14G().tin}, hoặc được thăng Đại cung nữ, thì xong chương, có thưởng; qua ${f14Nv(F14L().nhapCnv)} tháng thì chương tự khép, không thưởng.`
-   :`Mới vào cung: giữ mình, được Hoàng thượng để mắt. Được tấn phong một bậc thì xong chương, có thưởng; qua ${f14Nv(F14L().nhap)} tháng thì chương tự khép, không thưởng.`,
+   :`Mới vào cung: giữ mình, được Hoàng thượng để mắt. Được tấn phong một bậc thì xong chương, có thưởng; qua ${f14Nv(f14NhapL())} tháng thì chương tự khép, không thưởng.`,
   steps:m=>S.origin.k==="cnv"?[[`Chủ tin ${S.tin||0}/${F14G().tin}`,(S.tin||0)>=F14G().tin],["Được thăng Đại cung nữ",!!(S.srv&&S.srv.rk>=2)],["Được phong Đáp ứng",!!(S.srv&&S.srv.risen)],f14Late(m,F14L().nhapCnv," đầu")]
-   :[[`Được tấn phong một bậc (nay ${RANKS[Math.min(S.rank,7)].n})`,S.rank>m.r0],f14Late(m,F14L().nhap," đầu")],
+   :[[`Được tấn phong một bậc (nay ${RANKS[Math.min(S.rank,7)].n})`,S.rank>m.r0],f14Late(m,f14NhapL(m)," đầu")],
   any:1,get fx(){return{danh:F14D().nhap}},end:"Ngươi đã đứng được chân trong cung.",get rw(){return["court",F14R().nhap]}},
  sung14:{t:()=>f14Srv()?"Lọt vào mắt Hoàng thượng":"Lần đầu được sủng",lim:()=>F14L().sung,wait:()=>f14Home(),
   g:()=>f14Srv()?`Kẻ hầu cũng có ngày được Hoàng thượng để mắt: Hoàng thượng để ý lên ${F14G().nt}, hoặc được phong Đáp ứng, thì xong chương, có thưởng. Quá ${f14Nv(F14L().sung)} tháng mà chưa được thì chương tự khép để truyện đi tiếp, không thưởng.`

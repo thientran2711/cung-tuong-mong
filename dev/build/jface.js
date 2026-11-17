@@ -133,7 +133,7 @@ function pzWeek(p){const z=p&&p.pz;if(!z)return;if(z.until<=wk()){p.pz=null;fxLo
   const by=z.by&&typeof byKey==="function"?byKey(z.by):null;if(by&&by!==S&&roll(FXF.docNotice+(S.doctor?20:0))){evA(S,by,BAL.eff.jface.evPzWeek);t+=` Ngươi lần theo thang thuốc, ra dấu vết người của ${by.name}: Chứng cứ về ${by.name} ${balSg(BAL.eff.jface.evPzWeek)}.`}try{log(t)}catch(e){}}}
 PEND.pzcard=pp=>{const z=S&&S.pz;if(!z||z.until<=wk())return null;const o=[];const y=(S.arts&&S.arts.y)||0;
  o.push(ch70("Mời thái y bắt mạch, giải độc",{c:{bac:-FXF.docMed},wt:[G70("rõ là độc gì, mau tan")],ok:()=>{z.dx=1;z.until=Math.max(wk()+1,z.until-2);let t="Thái y bắt mạch, nói ngươi trúng độc, kê thang giải độc.";
-  const by=z.by&&typeof byKey==="function"?byKey(z.by):null;if(by&&by!==S&&roll(40+(S.doctor?20:0))){evA(S,by,BAL.eff.jface.evOk);t+=` Thái y nhận ra vị độc, lần ra người của ${by.name} từng mua: Chứng cứ về ${by.name} ${balSg(BAL.eff.jface.evOk)}.`}return t}}));
+  const by=z.by&&typeof byKey==="function"?byKey(z.by):null;if(by&&by!==S&&roll(BAL.odb.jface.rbOk+(S.doctor?20:0))){evA(S,by,BAL.eff.jface.evOk);t+=` Thái y nhận ra vị độc, lần ra người của ${by.name} từng mua: Chứng cứ về ${by.name} ${balSg(BAL.eff.jface.evOk)}.`}return t}}));
  o.push(ch70("Uống thuốc giải trong rương",{need:[{t:kitWhyItem("thuốc giải"),ok:(S.inv||[]).some(e=>e.k==="giaidoc"&&!e.h),w:kitWhenItem()}],wt:[G70("độc tan ngay")],k:[R70("dùng hết 1 thuốc giải")],ok:()=>{takeItem(S,"giaidoc");S.pz=null;return "Ngươi uống thuốc giải, môi hồng trở lại."}}));
  o.push(ch70("Tự sắc thuốc giải độc",{p:cl(30+y*15,5,95),c:{suc:-3},wt:[G70("độc tan sớm hơn")],lt:[R70("uống sai vị, lâu khỏi hơn")],ok:()=>{z.until=Math.max(wk()+1,z.until-1);return "Ngươi tự sắc cam thảo, lục đậu giải độc."},no:()=>{z.until++;return "Thuốc không hợp, độc lâu tan hơn."}}));
  o.push(ch70("Nằm nghỉ chờ khỏi",{wt:[G70("không tốn gì")],k:[R70(`còn ${fxLeft(z.until)} tuần`)],ok:()=>"Ngươi nằm nghỉ, uống nước cháo loãng."}));
@@ -235,8 +235,8 @@ function fxIllMonth(p){if(!p||!KIT_FACEFX.live(p))return;const kd=KIT_FACEFX.kin
   if(roll(base+(L.length?3:0))){const k=L.length&&roll(70)?pick(L)[0]:pick(["lao","matngu","phonghan"]);if(k==="longthe"||k==="docman"||k==="hausan"||k==="daumua")return;p.ill={k,st:1,known:fxSeen(p)};if(fxSeen(p))log(`${nm} mắc ${ILL[k].n.toLowerCase()}.`)}
   else{const o=KIT_FACEFX.owner(p),mates=KIT_FACEFX.everyone().filter(x=>x!==p&&KIT_FACEFX.owner(x)===o);const near=mates.find(x=>illOf(x)&&ILL[x.ill.k].cont);if(near&&roll(8)){p.ill={k:near.ill.k,st:1,known:fxSeen(p)};if(fxSeen(p))log(`${nm} nhiễm ${ILL[near.ill.k].n.toLowerCase()}.`)}}return}
  const d=ILL[i.k];if(kd==="kid"&&typeof p.hp==="number")p.hp-=5*i.st;const c=careOdds(p);
- if(roll(30+c-(d.slow?15:0))){p.ill=null;if(fxSeen(p))log(`${nm} đã khỏi ${d.n.toLowerCase()}.`);return}
- if(i.st<3&&roll(35-c/2)){i.st++;if(fxSeen(p))log(`${nm}: ${d.n.toLowerCase()} trở ${STG[i.st]}.`);return}
+ if(roll(BAL.odb.jface.rbFxIllMonth+c-(d.slow?15:0))){p.ill=null;if(fxSeen(p))log(`${nm} đã khỏi ${d.n.toLowerCase()}.`);return}
+ if(i.st<3&&roll(BAL.odb.jface.rbFxIllMonth_2-c/2)){i.st++;if(fxSeen(p))log(`${nm}: ${d.n.toLowerCase()} trở ${STG[i.st]}.`);return}
  if(i.st===3&&d.die&&roll(25*d.die)){
   if(kd==="kid"){if(typeof kidDie==="function"){const mom=KIT_FACEFX.owner(p);const t=kidDie(p,"mất vì "+d.n.toLowerCase(),mom===S);if(t)log(t)}}
   else if(p!==S.maid&&!(S.court&&Object.values(S.court).includes(p))){const ow=typeof ownerOf==="function"?ownerOf(p):null;if(ow&&ow.staff){ow.staff.splice(ow.staff.indexOf(p),1);if(fxSeen(p))log(`${nm} mất vì ${d.n.toLowerCase()}.`)}}}}
@@ -251,7 +251,7 @@ function fxServMonth(){const all=fxServants();for(const s of all){if(!KIT_FACEFX
   const o=KIT_FACEFX.owner(s);const mates=all.filter(x=>x!==s&&KIT_FACEFX.owner(x)===o&&KIT_FACEFX.live(x));if(!mates.length)continue;fxHarm(s,pick(mates),"ghen ghét trong cung")}
  for(const v of liveRivals(true)){let hot=0;try{hot=typeof hostility==="function"?hostility(v,S):0}catch(e){}
   if(hot>=40&&roll(6)){const t=pick((S.staff||[]).concat(S.maid&&typeof S.maid==="object"?[S.maid]:[]));if(t&&KIT_FACEFX.live(t)){fxHarm(v,t,"");if(roll(40)){try{evA(S,v,BAL.eff.jface.evFxServMonth);if(fxSeen(t))log(`Ngươi lần ra dấu vết: người của ${v.name} ra tay với ${fxName(t)}: Chứng cứ về ${v.name} ${balSg(BAL.eff.jface.evFxServMonth)}.`)}catch(e){}}}}
-  const v2=pick(liveRivals(true).filter(x=>x!==v&&(x.staff||[]).length));if(v2&&roll(2+(typeof hostility==="function"?(()=>{try{return hostility(v,v2)>=40?3:0}catch(e){return 0}})():0))){const t=pick(v2.staff);if(t&&KIT_FACEFX.live(t))fxHarm(v,t,"")}}}
+  const v2=pick(liveRivals(true).filter(x=>x!==v&&(x.staff||[]).length));if(v2&&roll(BAL.odb.jface.rbFxServMonth+(typeof hostility==="function"?(()=>{try{return hostility(v,v2)>=40?3:0}catch(e){return 0}})():0))){const t=pick(v2.staff);if(t&&KIT_FACEFX.live(t))fxHarm(v,t,"")}}}
 (function(){if(typeof monthTick!=="function")return;const m0=monthTick;monthTick=function(){const r=m0.apply(this,arguments);try{if(S&&!S.dead)fxServMonth()}catch(e){console.error(e)}return r}})();
 /* a mark still on the cheek (vừa / nặng) may be seen and reported: one witness keeps evidence against whoever slapped, once per mark */
 function slapReport(p){const z=p&&p.slap;if(!z||z.rep||z.until<=wk())return;const c=BAL.slap.rep[slapSev(p)];if(!c||!roll(c))return;
