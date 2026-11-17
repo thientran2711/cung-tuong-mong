@@ -1133,3 +1133,14 @@ BAL.mood2={def:8,max:16,carry:24,kd:16,carryWhy:"chuyện cũ còn vương",
    friendDie:160,foeDie:16,night:16,neglect:24,ill:32,mistressUp:8,mistressDown:16,motherDie:320,motherCold:96,clanUp:32,clanDown:32,slap:6},
   k:{vui:8,binh:4,buon:12,gian:8,so:6,ghen:12,lo:10,dau:48,muu:16,khoc:4,hon:8},
   bar:{ok:6,fail:6,rest:8,comfort:12,w:16,ea:6}}};
+/* MOOD-MEM (owner OD 17/11 ~18:25Z (b) "làm theo 2 tầng"): layer 2 = jmem memories (months / years / lifelong) WAKE a short layer-1 mood cause (BAL.mood2)
+   when the holder MEETS that person (they come to one place), comes to the PLACE where it happened (m.pl; not the holder's own dwelling), or on the
+   ANNIVERSARY (same tuần of a later year). One rule for her and every NPC (consorts, Hoàng thượng, Thái hậu, servants).
+   min = weight a memory needs to wake (ann = for an anniversary) · cap = wakes a month per person · cd = tuần before the same memory wakes again ·
+   s = strength: weight × k, clamped [min, max] · dur = khắc: base + weight × k, × life for a lifelong memory, ≤ max ·
+   kind = the feeling: good memory → good, bad → bad, unless the deed is in d. ghen = a rise of the jealousy SCORE (v.ghen of a consort toward her,
+   v.pg hers toward a consort) also adds a short CHẠNH LÒNG feeling: strength = rise × k, clamped [min, max] (timer BAL.mood2.dur.e.ghenUp). */
+BAL.memWake={min:20,ann:30,cap:4,cd:6,s:{k:.6,min:18,max:60},dur:{base:4,k:.12,life:2,max:48},
+ kind:{good:"vui",bad:"gian",d:{poison:"so",musk:"dau",kidharm:"dau",takeaway:"dau",frame:"gian",gifttaint:"so",demote:"buon",rescue:"vui",pardon:"vui"}},
+ ghen:{k:2,min:16,max:50}};
+BAL.mood2.dur.e.ghenUp=10;

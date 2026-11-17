@@ -106,6 +106,8 @@ function memAdd(h,a,d,o){if(off())return null;o=o||{};const hk=mk(h),ak=mk(a);co
  if(m){m.g=Math.min(100,Math.round(m.g+g*C.reinforce),Math.max(m.g,Math.round(((C.w||{})[d]||g)*C.reinforceMax)));m.g0=Math.max(m.g0||0,m.g);m.n=(m.n||1)+1;m.w=nowW();m.dt=dtNow();if(!m.L&&isLife(d,m.g,o))m.L=1}
  else{m={d,s:D[0],g,g0:g,k:D[1]||(o.keep?1:0),n:1,w:nowW(),dt:dtNow()};if(x)m.x=x;if(isLife(d,g,o))m.L=1;L.unshift(m)}
  if(o.c)m.c=String(o.c);if(o.y)m.y=o.y;
+ /* MOOD-MEM: where it happened (both people at one place) — a later visit there can wake the memory (jmoodknow mwPlace) */
+ try{if(typeof mwPlaceOf==="function"){const pl=mwPlaceOf(hk,ak);if(pl)m.pl=pl}}catch(e){}
  /* cap: ordinary memories ≤ cap, lifelong ones ≤ lifeCap, each list keeps its strongest */
  const lf=L.filter(z=>z.L).sort((p,q)=>q.g-p.g).slice(0,C.lifeCap),nl=L.filter(z=>!z.L).sort((p,q)=>q.g-p.g).slice(0,C.cap);
  L.length=0;L.push(...lf.concat(nl).sort((p,q)=>q.g-p.g));if(!L.includes(m))return null;

@@ -95,6 +95,8 @@ Thi hành: `dev/build/j84.js` (module cuối trong assemble.py) sửa dữ liệ
 - The hidden tone a person / a Hội phối đồ đề likes, once she learns it (`TOIL_TONE`): **tông đào cam** · **tông hồng tím**. Hoàng thượng's row in "Điều ngài thích": **Son phấn**.
 - Never use "đẹp / tuyệt / vừa / vụng" as a level name on screen; "đoan trang" is not used for dress hints any more (dress: "chỉnh tề", "y phục đoan trang" for the dress taste).
 
+**Ghen (điểm) vs Chạnh lòng (cảm xúc)** (owner OD 17/11 ~18:25Z (g)): the jealousy SCORE (`v.ghen`, `v.pg`, chips "Ghen", "Ngươi ghen N") keeps the word **Ghen**; the short jealous FEELING (mood seal key `ghen`, `EMO.ghen`) is named **Chạnh lòng** — one constant `EMO_GHEN` in jemo.js (owner's pick pending; a rename is that one line). A memory waking a feeling reads: "gặp X, chợt nhớ chuyện cũ: …" · "trở lại <nơi>, chợt nhớ chuyện cũ: …" · "tròn một năm ngày …".
+
 Từ đã cổ trang, giữ nguyên: Bạc, Sức, Sủng, Danh, Sắc, Tài, Tâm cơ, Đức, Tai mắt, Ân tình, Phúc duyên, Lòng, Chủ tin, thiện cảm, oán, ghen, khắc, quẻ, thẻ bài, thị tẩm, tấn phong, sắc phong, lãnh cung, cấm túc, ân thưởng, bổng lộc, Phi tần, Phe phái, Kẻ hầu, Con cái, Rương đồ, Tài nghệ, Bảng phẩm vị.
 
 ## 2. Xưng hô và giọng cung đình (theo phẩm, theo người nói, theo tình)
