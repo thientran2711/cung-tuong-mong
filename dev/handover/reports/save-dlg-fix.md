@@ -1,3 +1,5 @@
+PRIORITY #1 CHECK: OD tail 17/11 02:47Z (Chọn sổ bug) | main j74.js/jksize.js kitFrameLive3 + jaudit/j61 masks (root found, no existing fix) | review/fig-feet-crop-2-r1 d431dc3db (kszRankName stage-tag mask: merged; it is the same global-mask family but a different spot; slot cards fixed here) | claims: CLAIMS row save-dlg-fix.
+
 # save-dlg-fix report (owner bug 17/11 "Lỗi tùm lum", Chọn sổ)
 Branch review/save-dlg-fix (from main 7abaf07a). Kit keeper fix, whole family. START_CTX ~8% of window; finished far below the rollover limit.
 
@@ -20,3 +22,13 @@ Shots (looked at): Chọn sổ at 755x1000 and 1180x820 are clean (Sổ mây car
 quickcheck PASS (open ok, old save loads + plays a buổi, core gates PASS, perf render 217/263 ms vs live). chonso-cloud.js 0 FAIL, cloud-save.js 0 FAIL, save-slots.js ALL OK (old sổ + old room load).
 
 SẴN SÀNG KIỂM 668e4692 (review/save-dlg-fix)
+
+## UPDATE 17/11 03:15Z: branch now 6d60cfd7 (d431dc3db merged, site rebuilt). Part 1 (Chọn sổ, 4 faults) = DONE.
+
+## HANDOVER (worker rolled over at its context limit; COORDINATOR opens the successor, same branch review/save-dlg-fix, base 6d60cfd7)
+Remaining, from main s28 messages 02:55Z-03:08Z (verbatim owner words are in OD tail; refs dev/handover/refs/owner-tuanluc-fig-wide-1117.jpg, owner-tuanluc-rel-1..3-1117.jpg; the successor must re-fetch the handover branch):
+A. Tuần lục (kit book-page part, jsl.js:147 KIT 32.2a; KIT.md T3 'figure column <= 36 %'; ledger row 137): the figure column hugs the LEFT page edge, narrow (standard proportions, feet visible); the RIGHT text frame/column gets the freed width and is WIDER. Owner CORRECTION: text size does NOT change. Every Tuần lục page + every page/dialog with a figure column (whole family). Report before/after column widths at Fold 755x1000, iPad 1180x820, cover 412x1058, 390x844; shots of page 4 'Tổng lược' on Fold + iPad.
+B. KIT 52 kitRelTable (dev/build/jkrel.js:57): an 'on paper' mode for every book page: no purple header band, no white card; the table sits straight on the paper (text colours readable). The Thái hậu table is cut at the right edge ('TUẦN NÀY' column): must fit the wider right column. Same branch.
+C. Then one SẴN SÀNG KIỂM for the whole branch to main s29 (id in dev/handover/HANDOVER_SESSION9.md; s28 forwards meanwhile).
+Tools already on the branch: dev/test/save-dlg-scan.js (Chọn sổ screens: harness pattern = dev/test/coop-serve.js + a life in each slot), save-dlg-mask.js. Build: python3 dev/build/assemble.py; node dev/test/*.js; final: bash dev/site/build_site.sh, commit, bash dev/tools/quickcheck.sh (run in background, ~270 s).
+Tips: direct-mode harness serves dev/index.html with images aborted (sparse), so for figure shots route img/ to the live site as dev/test/slot-card.js does.
