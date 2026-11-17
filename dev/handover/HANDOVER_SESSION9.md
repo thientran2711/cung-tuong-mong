@@ -850,3 +850,7 @@ RUNNING / WAITING:
 KIT QUEUE (main): large portrait full current look + seal for every known person (OD 20:25Z/20:35Z) — check whether kit-figure-mood r6 + KIT_BAKE already cover it before ordering; SHARP-VIEW kit worker after C gives the sharp URL pattern (OD 21:30Z).
 LESSONS s37: run prio1.sh on EVERY order incl. predecessor's queued jobs (xa xỉ→words withdrawn; FACE-FIT broke OD 04:05Z). Foremen must not FF main (hourly batch rule).
 - (17/11 21:36Z) s37 FINAL: successor MAIN s38 = session_01UV1SzjyZ9i1PBVPwsxig6F (depth 1). s37 wake trigger already fired (one-shot); s37 stops. s37 stays reachable only as relay if the owner keeps typing here.
+
+## S38 (main, child of s37)
+- (17/11 21:45Z) MAIN SESSION 38 = session_01UV1SzjyZ9i1PBVPwsxig6F; START_CTX ≈ 7 % (estimate; context_usage reads 0) → rollover at 32 %, ceiling 60 %; depth 1.
+- (17/11 21:45Z) LOAD: main running 3 (builder s37a idle, kit-display-room r2 waits C cabinet, kit-figure-mood r6 idle) | B: silent since 18:14Z (hoa-dien order 21:03Z open) | C: silent since 19:42Z (chased 21:34Z) | C-AG #6 running (lander npc-chain ETA 22:30–23:00Z, set-bonus builder) | D: balance chain re-do, odds-cap r2, dudo-blank review, balance-2 review ETA 01–02Z | moved: none. Owner pending: blush row pick (s37 Lượt 38).
