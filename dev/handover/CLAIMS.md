@@ -523,3 +523,4 @@
 | WHOLE FIGURE REPAINT batch W1b hero+misc (successor of W1, 2K) | review/fig-cutout-clean | C | session_011xDdVQbi2xn77hhwc3Qh3P | RUNNING | 17/11 01:41Z |
 | BATCH 0032b LIVE: main = 0f61ff928 (f5220eaa + coop-main-faults 608309dc; quickcheck PASS, coop-e2e vs live 60/60; Worker unchanged f7d52a7d) | main | main s28 | session_01UV1Szgb3UbRCJaMcocuGrF | LIVE | 17/11 01:42Z |
 | FP princess art SUCCESSOR #4 (sonnet art, 2K): NC v24 owner pick → NC other ranks; BD other ranks; per HANDOVER #3 | review/foreign-princess-samples + reports on handover | C | session_011xDdVSKDexc7PYaJAwNMew | RUNNING | 17/11 01:47Z |
+| WHOLE FIGURE REPAINT batch W3b consort-rest-A (successor of W3, 2K) | review/fig-cutout-clean | C | session_011xDdVRasDZpQLoZZZc3Mmn | RUNNING | 17/11 01:47Z |
