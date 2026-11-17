@@ -45,3 +45,9 @@ PRIORITY #1 CHECK: OD 13:48Z | reused toilMkDraw/toilMkGeom.
 - Blush restored to the ?v=2 geometry: centres + radius per level from the fit row (r .165/.185/.2/.22 x face width), never shrunk; only the clip cuts it (outline oval enlarged x skin colour x no eyes). Profile: Doan trang = exact v2 (0:1, .35:.55, 1:0, alpha .21, other values = v2); Kieu diem / Khuynh thanh / Diem dua use an even soft profile with a little more colour per step (.27 / .31 / .42). Khuynh thanh keeps the v4 lip sheen. Vung ve: blotches + powder patches blurred into the skin. Lips: soft edge, no outline (v4).
 - mk-layer-scan: geometry check now = both cheek centres inside the outline oval and below the eyes, all 12960 faces: 0 bad. toil-tease 25/25, toil-react PASS, toil-overlay 0 bad, quickcheck PASS 160 s.
 - Samples ?v=5 + side by side with ?v=2: img/_review/toil-looks/toil-looks-1.png, -2.png, toil-looks-side-1.png, -side-2.png (top 2 rows v2, bottom 2 rows v5).
+
+### looks3 v6 - review/toil-looks2 73a8beedc (owner ~14:00Z verdict on v5)
+PRIORITY #1 CHECK: OD ~14:00Z s32 makeup | reused TOIL_MKS only (values).
+- Mat moc / Vung ve / Doan trang untouched (approved). Kieu diem = the v5 Khuynh thanh look unchanged (moved down). NEW Khuynh thanh: eye 1.0 / lid height .92 / wing .4 / lower lash .46 / shimmer .85, lip .86 + sheen .72, blush .40 (same soft spread), skin light .38. Diem dua one small step heavier: lip .86->.92, eye/brow/lash up, blush .42->.50; same clip (nothing on eyes/hair/background).
+- Gates: mk-layer-scan 12960 0 bad, toil-tease 25/25, toil-overlay 0 bad, quickcheck PASS 150 s.
+- Samples ?v=6 + side by side with v5 (top v5, bottom v6): img/_review/toil-looks/toil-looks-1.png, -2.png, toil-looks-side-1.png, -side-2.png.
