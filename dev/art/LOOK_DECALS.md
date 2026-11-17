@@ -18,13 +18,14 @@ Decal spec (owner ~00:05Z): Magnific gpt-2-6, the mark painted OPAQUE in normal 
 | Sẹo rỗ (sau đậu mùa) | face | fx-pox-scar-1..2 (pockmark scars) | đậu mùa khỏi |
 | Tóc rối, sợi tóc xổ | hair edge | fx-hair-xo-1..3 (loose dark strands, transparent) | gió, bị xô ngã, cành cây |
 | Trâm lệch | hair | none (code tilts the existing pin layer) | gió |
+| Áo nhăn, nhàu, xốc xếch (owner 23:48Z: Magnific) | clothes | fx-crease-1..4 (tall vertical fold patches), fx-crease-knot-1, fx-crease-hem-1 (neutral grey, code tints) | looks-2 xốc xếch, dressing result |
 | Vương trên tóc/áo | hair / clothes | fx-vuong-hoadao-1, fx-vuong-la-1, fx-vuong-tuyet-1 (single petal / maple leaf / snowflake sprites) | hoa đào bay, lá phong, tuyết |
 
 ## B. CODE ONLY (no painting)
 | Effect | How |
 |---|---|
 | Phấn son lem nhem (mưa, khóc, mồ hôi) | streak/blur of the makeup layer (worker smudge-code) |
-| Áo nhăn, nhàu, xốc xếch | crease filter on the cloth mask (worker cloth-xoc) |
+| Áo nhăn, nhàu, xốc xếch | MOVED to section A decals (owner 23:48Z); code only places/tints them (worker cloth-xoc) |
 | Áo ướt sũng (overall) | cloth darken + slight gloss on the cloth mask, plus fx-stain-uot decals |
 | Áo ám khói | grey tint on the cloth mask (+ fx-muoi decal) |
 | Tóc ẩm / bết | hair darken + gloss on the hair mask |
