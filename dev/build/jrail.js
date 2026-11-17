@@ -72,5 +72,5 @@ body:has(#modal:not([hidden])) .krail.kstdock,body:has(#ov:not([hidden])) .krail
 .krailb.kbadge:after{content:"";position:absolute;top:1px;right:1px;width:10px;height:10px;border-radius:50%;background:var(--k-seal,#9a2c1c);box-shadow:0 0 0 2px var(--k-card,#fffaf0)}
 `;document.head.appendChild(css);
 try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§77",title:"kitStageRail · cột nút vuông bên trái sân khấu (Lịch · Chat · Mục tiêu)",
- html:()=>`<div class="kitpg-row" style="position:relative;height:150px"><nav class="krail" style="position:static">${[["ico-cal","Lịch tháng",0],["ico-chat","Chat",0],["ico-goal","Mục tiêu chương",1]].map(([i,t,b])=>`<button type="button" data-g="${String(x.title||"").trim().charAt(0)}" class="krailb${x.glyph?"":" kld"}${b?" kbadge":""}" title="${t}"><img src="img/kit/${i}.webp" alt=""></button>`).join("")}</nav></div>`})}catch(e){}
+ html:()=>`<div class="kitpg-row" style="position:relative;height:150px"><nav class="krail" style="position:static">${[["ico-cal","Lịch tháng",0],["ico-chat","Chat",0],["ico-goal","Mục tiêu chương",1]].map(([i,t,b])=>`<button type="button" data-g="${t.charAt(0)}" class="krailb${b?" kbadge":""}" title="${t}"><img src="img/kit/${i}.webp" alt=""></button>`).join("")}</nav></div>`})}catch(e){}
 }catch(e){console.error("jrail",e)}})();
