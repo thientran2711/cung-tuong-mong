@@ -59,7 +59,7 @@ function lbFlush(){LB.t=0;try{if(!S||S.dead||S.mg||!S.lbQ||!S.lbQ.length||window
   if(more)facts.push(`Còn ${more} việc nữa, xem trong Tuần lục.`);
   let sub="";try{sub=typeof BUOI!=="undefined"&&BUOI[S.buoi||0]||""}catch(e){}
   kitPanel({kind:"notice",title:"Việc đáng nhớ",sub:sub||"Vừa xảy ra",cls:"klbao",facts,btn:"Đã hiểu"});if(typeof showModal==="function")showModal()}catch(e){console.error("lbFlush",e)}}
-function lbLater(){if(!LB.t)LB.t=setTimeout(lbFlush,0)}
+function lbLater(){if(!LB.t)LB.t=setTimeout(lbFlush,700)}/* a moment after the buổi settles: never inside the buổi's own work */
 (function(){if(typeof log!=="function")return;const l0=log;log=function(h){
   if(typeof h!=="string"||!S)return l0.apply(this,arguments);
   const who=lbWho(h),cls=lbClass(h),seq=S.logSeq||0;const r=l0.apply(this,arguments);
