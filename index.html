@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"4f5c75d9+","t":"2026-11-17T02:32Z","c":"oi-perf: closing an origin story panel (entI, no onClose) that another card follows does not redraw the board (nothing on it changed); rebu…","b":"e8481d7aab69","h":[{"s":"babc9b4a","t":"2026-11-17T01:39Z","c":"Chơi chung không còn treo máy vì tên bạn lặp chữ; số bóng người trên dư đồ khớp đúng người đang ở đó; việc có hạn giờ hiện đồng hồ ngay dướ…"},{"s":"92685210+","t":"2026-11-17T00:53Z","c":"Khung việc và khung sự kiện bốn cỡ, tranh lấp đầy khung, việc nhắc tên ai hiện chân dung người ấy; phẩm của món đồ nằm ngay trên viền khung…"},{"s":"6f513340","t":"2026-11-16T23:24Z","c":"Vào game mới không còn bật ngay màn lật thẻ, lật thẻ chỉ khi vào buổi tối; dư đồ nhãn giấy mới; việc dài lấn sang buổi sau; lời trong cung …"},{"s":"7a18d957","t":"2026-11-16T22:44Z","c":"review-diemtrang-fx-r1 report"},{"s":"afe2bcbc","t":"2026-11-16T22:25Z","c":"review r1: KIT 84.1a note + report"},{"s":"dea1d445+","t":"2026-11-16T21:32Z","c":"golive lag-play-2: CHANGE line + site rebuilt"},{"s":"674f3af4","t":"2026-11-16T21:21Z","c":"Chơi cùng bạn: bạn chơi chung chưa gặp mặt nay hiện tên gọi chung “Hảo hữu của ta” ở mọi nơi, không còn ẩn thành dấu hỏi."},{"s":"923567d5+","t":"2026-11-16T21:03Z","c":"Hình nhân vật: hết vệt xám ở cổ và viền tối quanh người."},{"s":"59812a63+","t":"2026-11-16T20:41Z","c":"Khung chung: khoảng cách đều nhau ở sổ tuần và thẻ thân phận; hàng sổ gọn, thẻ lật không đè chữ."},{"s":"ab12d6fc","t":"2026-11-16T20:53Z","c":"Tuyết và đom đóm mới, mượt hơn; nền tranh không còn vẽ lại mỗi khung hình."}]};
+window.CTM_BI={"s":"247a71b7","t":"2026-11-17T03:47Z","c":"oi-render: render-time layout reads run once at the end of render (jlag2 renderAfter): k3Stage, kitSealHud, j59 tooltips, kitFloorFit, kitP…","b":"40bb7b7bf396","h":[{"s":"babc9b4a","t":"2026-11-17T01:39Z","c":"Chơi chung không còn treo máy vì tên bạn lặp chữ; số bóng người trên dư đồ khớp đúng người đang ở đó; việc có hạn giờ hiện đồng hồ ngay dướ…"},{"s":"92685210+","t":"2026-11-17T00:53Z","c":"Khung việc và khung sự kiện bốn cỡ, tranh lấp đầy khung, việc nhắc tên ai hiện chân dung người ấy; phẩm của món đồ nằm ngay trên viền khung…"},{"s":"6f513340","t":"2026-11-16T23:24Z","c":"Vào game mới không còn bật ngay màn lật thẻ, lật thẻ chỉ khi vào buổi tối; dư đồ nhãn giấy mới; việc dài lấn sang buổi sau; lời trong cung …"},{"s":"7a18d957","t":"2026-11-16T22:44Z","c":"review-diemtrang-fx-r1 report"},{"s":"afe2bcbc","t":"2026-11-16T22:25Z","c":"review r1: KIT 84.1a note + report"},{"s":"dea1d445+","t":"2026-11-16T21:32Z","c":"golive lag-play-2: CHANGE line + site rebuilt"},{"s":"674f3af4","t":"2026-11-16T21:21Z","c":"Chơi cùng bạn: bạn chơi chung chưa gặp mặt nay hiện tên gọi chung “Hảo hữu của ta” ở mọi nơi, không còn ẩn thành dấu hỏi."},{"s":"923567d5+","t":"2026-11-16T21:03Z","c":"Hình nhân vật: hết vệt xám ở cổ và viền tối quanh người."},{"s":"59812a63+","t":"2026-11-16T20:41Z","c":"Khung chung: khoảng cách đều nhau ở sổ tuần và thẻ thân phận; hàng sổ gọn, thẻ lật không đè chữ."},{"s":"ab12d6fc","t":"2026-11-16T20:53Z","c":"Tuyết và đom đóm mới, mượt hơn; nền tranh không còn vẽ lại mỗi khung hình."}]};
 /* KBOOT — BOOT COVER (owner 15/11 "Khi vừa bấm vào game, có chừng ít hơn 1 giây hiện khung này"; KIT §14.1).
    Before: while the 4 MB page parsed, the browser painted the bare static markup of p1.html (HUD box, a vertical stat label list, empty
    panels, the old 11-tab bar) for ~1 s on a warm open and many seconds on a cold one, before any kit CSS/JS existed.
@@ -2659,7 +2659,13 @@ function renderPanel0(){const el=$("panel");let h="";faceInit();const gm=documen
  if(tab==="staff")h=staffTabHTML();
  if(tab==="fac")h=facHTML();
  if(tab==="log")h=`<h3>Nhật ký</h3><div class="logs">${S.logs.map(x=>{const v=rivals.find(r=>x.includes(r.name));return `<div>${v?mdH(pv(v),"xs"):x.includes("Hoàng thượng")?mdH(pEmp(),"xs"):""}${x}</div>`}).join("")||"<div>Chưa có gì.</div>"}</div>`+pastHTML();
- const same=el.dataset.tab===tab&&el.dataset.pg===String(PG[tab]),keep=el.dataset.tab===tab?el.scrollTop:0,rc=el.querySelector(".pcr"),rk=same&&rc?rc.scrollTop:0,lc=el.querySelector(".pcl"),lk=same&&lc?lc.scrollTop:0;el.innerHTML=h;el.dataset.tab=tab;el.dataset.pg=String(PG[tab]);el.scrollTop=keep;kitFix(el);const r2=el.querySelector(".pcr");if(r2)r2.scrollTop=rk;const l2=el.querySelector(".pcl");if(l2)l2.scrollTop=lk}
+ const same=el.dataset.tab===tab&&el.dataset.pg===String(PG[tab]),keep=el.dataset.tab===tab?el.scrollTop:0,rc=el.querySelector(".pcr"),rk=same&&rc?rc.scrollTop:0,lc=el.querySelector(".pcl"),lk=same&&lc?lc.scrollTop:0;el.innerHTML=h;el.dataset.tab=tab;el.dataset.pg=String(PG[tab]);kitFix(el);panelScrollKeep(el,keep,rk,lk)}
+/* oi-render: the panel keeps its scroll place after a redraw. Setting scrollTop right after innerHTML forced a full layout of the new panel,
+   and the card fixes after it (kitFix, kaNorm) changed the panel again, so the next read laid it all out a second time. Inside a render the
+   scroll is set once when the outermost render returns (jlag2 renderAfter, same task, before the frame); outside a render, at once.
+   Every panel renderer (j6, j42, j72, jhc, jht, jkc) uses this one helper. */
+function panelScrollKeep(el,keep,rk,lk){const f=()=>{if(!el.isConnected)return;el.scrollTop=keep;if(rk!=null){const r2=el.querySelector(".pcr");if(r2)r2.scrollTop=rk}if(lk!=null){const l2=el.querySelector(".pcl");if(l2)l2.scrollTop=lk}};
+ (window.renderAfter||((k,g)=>g()))("pscroll",f)}
 function showSelf(){Q.unshift({t:S.name,cls:"pcm",h:selfCardHTML()});showModal()}
 function showEmp(){Q.unshift({t:empName(),cls:"pcm",h:empCardHTML()});showModal()}
 
@@ -5360,7 +5366,10 @@ function srvRise(why){if(!S||(S.age||0)<18)return;const m=srvM();const tin=S.tin
 /* ---------- UI: HUD, tabs, panels, self card, map ---------- */
 const SRVTABS={act:"Việc",go:null,staff:"Đồng liêu",story:"Thân phận",log:null};
 function srvTabs(){const on=isSrv();document.querySelectorAll("#tabs button").forEach(b=>{const t=b.dataset.tab;if(b.dataset.l0==null){b.dataset.l0=b.textContent;b.dataset.s0=b.dataset.s||""}
- if(on){b.style.display=t in SRVTABS?"":"none";const L=SRVTABS[t];b.textContent=L||b.dataset.l0;b.dataset.s=L||b.dataset.s0}else{b.style.display="";b.textContent=b.dataset.l0;b.dataset.s=b.dataset.s0}})}
+ /* oi-render: write only what differs, and a tab-group head (j79 kgBar, data-kg) keeps the group's label: this reset it to its own label on
+    every render and kgBar put the group label back right after — two text changes per render, so the tab bar was re-measured (tabsFit) twice */
+ const set=(d,l,s)=>{if(b.style.display!==d)b.style.display=d;if(b.dataset.kg&&!on)return;if(b.textContent!==l)b.textContent=l;if(b.dataset.s!==s)b.dataset.s=s};
+ if(on){const L=SRVTABS[t];set(t in SRVTABS?"":"none",L||b.dataset.l0,L||b.dataset.s0)}else set("",b.dataset.l0,b.dataset.s0)})}
 function srvHud(){const e=$("hud-sung");if(!e)return;const sm=e.querySelector("small");if(sm&&sm.dataset.o0==null)sm.dataset.o0=sm.innerHTML;
  if(isSrv()){$("me-r").textContent=srvTitle();if(sm)sm.innerHTML=sm.dataset.o0.replace("Sủng","Chủ tin");e.querySelector("span").textContent=S.tin;const u=e.querySelector("u");if(u)u.style.width=S.tin+"%";e.title=HX.tin}
  else if(sm&&sm.innerHTML!==sm.dataset.o0){sm.innerHTML=sm.dataset.o0;e.title=""}}
@@ -5378,7 +5387,7 @@ function srvMapFix(){const m=srvM(),mk=m&&palaceOf(m);document.querySelectorAll(
   const h=window.placeEnterHook(S,k);if(h&&!h.ok&&!b.disabled){b.disabled=true;b.classList.add("off","srvno");b.title=`${b.title.split(":")[0]}: ${h.why}`;let mt=b.querySelector(".mmeta");if(!mt){mt=document.createElement("span");mt.className="mmeta";b.appendChild(mt)}mt.innerHTML=`<em>${h.why}</em>`}})}
 (function(){const p0=renderPanel0;renderPanel0=function(){if(!isSrv()||!["staff","story","act"].includes(tab))return p0.apply(this,arguments);
  const el=$("panel");if(tab==="act"){const r=p0.apply(this,arguments);try{el.insertAdjacentHTML("afterbegin",srvHead())}catch(e){}return r}
- const gm=document.querySelector(".game");if(gm)gm.classList.remove("cardtab","maptab");const keep=el.dataset.tab===tab?el.scrollTop:0;el.innerHTML=tab==="staff"?srvStaffHTML():srvRoadHTML();el.dataset.tab=tab;el.dataset.pg="";el.scrollTop=keep;kitFix(el)}})();
+ const gm=document.querySelector(".game");if(gm)gm.classList.remove("cardtab","maptab");const keep=el.dataset.tab===tab?el.scrollTop:0;el.innerHTML=tab==="staff"?srvStaffHTML():srvRoadHTML();el.dataset.tab=tab;el.dataset.pg="";kitFix(el);panelScrollKeep(el,keep)}})();
 function srvHead(){const m=srvM();if(!m)return"";const w=srvWhere(m),mk=palaceOf(m);const sn=S.srv.sent&&!S.srv.sent.done&&S.srv.sent.until>=bid()?S.srv.sent:null;
  if(S.srv.lau>0)return `<div class="srvhead">${mdH(pMe(),"sm")}<span><b>Cung nữ Tân Giả khố</b> · <b class="r">còn ${S.srv.lau} tuần</b> · giặt đủ thì được về sớm; hết hạn, Nội vụ phủ chia về hầu chủ mới.</span></div>`;
  return `<div class="srvhead">${mdH(pv(m),"sm")}<span><b>${srvTitle()}</b> · chủ ${m.trait}${m.trait2?", "+m.trait2:""} · ${w===mk?"đang ở cung":"đang ở "+placeOf(w).n} · Chủ tin <b class="${S.tin<30?"r":S.tin>=60?"g":""}">${S.tin}</b>${sn?` · <b class="g">Việc chủ sai: ${sn.n} (đến ${placeOf(sn.k).n})</b>`:""}${S.srv.lau>0?` · <b class="r">Tân Giả khố còn ${S.srv.lau} tuần</b>`:""}</span></div>`}
@@ -6580,7 +6589,8 @@ function j59unk(b,p,im){const s0=im.getAttribute("src")||"";const m=/fig-(empero
 function j59tags(st,tk){const ppl=typeof curPeople==="function"?curPeople():[];const TT=[];
  if(tk)tk.querySelectorAll(".tok").forEach(b=>{const g=b.querySelector(".tag"),p=ppl[+b.dataset.p];if(!g||!p)return;const h=j59tagHTML(p,p.name);if(g.dataset.j59!==h){g.innerHTML=h;g.dataset.j59=h}g.style.setProperty("--tc",j59col(p));g.classList.toggle("j59u",!j59known(p));g.classList.toggle("j59mine",p===S);TT.push(g);const im=b.querySelector(".figimg");if(im){if(!j59known(p))j59unk(b,p,im);else b.classList.remove("j59unk")}});
  /* lag-play: the tooltips read innerText (a layout read) AFTER all the writes: one layout instead of one per person */
- {const V=TT.map(g=>g.innerText.replace(/\n/g," · "));TT.forEach((g,i)=>{if(g.title!==V[i])g.title=V[i]})}
+ /* oi-render: and inside a render, at its end (jlag2 renderAfter: one layout for every part fit, not one more here) */
+ (window.renderAfter||((k,f)=>f()))("j59tt",()=>{const L=TT.filter(g=>g.isConnected);const V=L.map(g=>g.innerText.replace(/\n/g," · "));L.forEach((g,i)=>{if(g.title!==V[i])g.title=V[i]})});
  const me=document.getElementById("mefig");let mt=document.getElementById("j59metag");
  if(!me){if(mt)mt.remove();return null}
  if(!mt){mt=document.createElement("div");mt.id="j59metag";mt.className="tok j59me";mt.style.visibility="hidden";mt.innerHTML='<span class="tag"></span>';st.appendChild(mt)}
@@ -10656,7 +10666,7 @@ function q72HTML(){const q=q72();const mo=q.mo[S.turn]||0;
  h+=`<h3>Việc nhờ trong cung (ngươi biết)</h3><div class="logs">${q.np.map(z=>{const v=RV(z.a);return `<div>${v?mdH(pv(v),"xs"):""}<span class="ld">${z.w}</span>${z.t}</div>`}).join("")||"<div>Chưa nghe chuyện gì.</div>"}</div>`;
  return h}
 (function(){const r0=renderPanel0;renderPanel0=function(){if(tab!=="q72"||!S)return r0.apply(this,arguments);const el=$("panel");try{faceInit()}catch(e){}const gm=document.querySelector(".game");if(gm)gm.classList.toggle("cardtab",true);
- const same=el.dataset.tab===tab,keep=same?el.scrollTop:0,rc=el.querySelector(".pcr"),rk=same&&rc?rc.scrollTop:0;el.innerHTML=q72HTML();el.dataset.tab=tab;el.dataset.pg=String(PG.q72);el.scrollTop=keep;kitFix(el);const r2=el.querySelector(".pcr");if(r2)r2.scrollTop=rk}})();
+ const same=el.dataset.tab===tab,keep=same?el.scrollTop:0,rc=el.querySelector(".pcr"),rk=same&&rc?rc.scrollTop:0;el.innerHTML=q72HTML();el.dataset.tab=tab;el.dataset.pg=String(PG.q72);kitFix(el);panelScrollKeep(el,keep,rk)}})();
 document.addEventListener("click",e=>{const b=e.target.closest("[data-q72d],[data-q72x],[data-q72a],[data-q72c],[data-q72g]");if(!b||b.disabled)return;e.stopPropagation();try{
  if(b.dataset.q72d!=null)q72Do(+b.dataset.q72d,b.dataset.q72o!=null?+b.dataset.q72o:null);else if(b.dataset.q72x!=null)q72Drop(+b.dataset.q72x);else if(b.dataset.q72a)q72Ask();else if(b.dataset.q72c)q72Call(b.dataset.q72c);
  else if(b.dataset.q72g){const k=b.dataset.q72g;if(k==="home")goTo("home");else{q72Pass(k);goTo(k)}tab="q72";render()}}catch(x){console.error(x)}},true);
@@ -13609,7 +13619,7 @@ function kgLabel(k){const b=document.querySelector(`#tabs [data-tab="${k}"]`);if
 function kgBar(){const T=$("tabs");if(!T)return;const on=kgOn();
  for(const g in KG){const ks=kgKeys(g);ks.forEach((k,i)=>{const b=T.querySelector(`[data-tab="${k}"]`);if(!b)return;
   if(!on){if(b.dataset.kg){b.textContent=b.dataset.kl0;b.dataset.s=b.dataset.ks0;delete b.dataset.kg}b.classList.remove("kghide");return}
-  if(i===0){if(!b.dataset.kg){b.dataset.kl0=b.textContent;b.dataset.ks0=b.dataset.s||"";}b.dataset.kg=g;b.classList.remove("kghide");/* a group head is always shown (a key that was a member of another group before KG changed keeps no stale kghide — review 11/15: Giao tình vanished) */if(b.textContent!==KG[g].l)b.textContent=KG[g].l;b.dataset.s=KG[g].s;b.setAttribute("aria-selected",String(kgOf(tab)===g));b.classList.toggle("kgon",kgOf(tab)===g)}
+  if(i===0){if(!b.dataset.kg){b.dataset.kl0=b.textContent;b.dataset.ks0=b.dataset.s||"";}b.dataset.kg=g;b.classList.remove("kghide");/* a group head is always shown (a key that was a member of another group before KG changed keeps no stale kghide — review 11/15: Giao tình vanished) */if(b.textContent!==KG[g].l)b.textContent=KG[g].l;if(b.dataset.s!==KG[g].s)b.dataset.s=KG[g].s;const sel=String(kgOf(tab)===g);if(b.getAttribute("aria-selected")!==sel)b.setAttribute("aria-selected",sel);b.classList.toggle("kgon",kgOf(tab)===g)}
   else b.classList.add("kghide")})}}
 function kgSub(){const P=$("panel");if(!P)return;const g=kgOf(tab);let nav=P.querySelector(":scope > .ksub:not(.kpgsub), :scope > .kpbar > .ksub:not(.kpgsub)");if(!g||!kgOn()){if(nav)nav.remove();return}
  try{localStorage.setItem("hclh-kg-"+g,tab)}catch(e){}
@@ -20886,7 +20896,7 @@ function kitFloorFit(){try{const st=$("stage"),im=$("scimg");if(!st||!im)return;
  const ftA=KIT_FLOOR[scene]!=null?KIT_FLOOR[scene]:ft;const fs=A.feet!=null?A.feet:ftA+.9*(1-ftA);let feet=Math.min(H*.97,y0+fs*dh);
  const old=st.__kfa;st.__kfa={feet:Math.round(feet),ax:Math.round(x0+A.x*dw),scene};
  if(!old||old.feet!==st.__kfa.feet||old.ax!==st.__kfa.ax){clearTimeout(st.__kfaT);st.__kfaT=setTimeout(()=>{try{window.j59lay&&window.j59lay()}catch(e){}},0)}const kfb=Math.max(H*.03,24,H-feet);st.style.setProperty("--kfb",kfb.toFixed(0)+"px");st.style.setProperty("--kfh",Math.max(H*.45,H-kfb-H*.03).toFixed(0)+"px");st.dataset.kfloor=name}catch(e){}}
-(function(){if(typeof renderStage!=="function")return;const r0=renderStage;renderStage=function(){const r=r0.apply(this,arguments);kitFloorFit();return r};
+(function(){if(typeof renderStage!=="function")return;const r0=renderStage;renderStage=function(){const r=r0.apply(this,arguments);(window.renderAfter||((k,f)=>f()))("kitFloorFit",kitFloorFit)/* oi-render: reads the stage size — once at the end of a render (jlag2) */;return r};
  try{let ro=null;const hook=()=>{const st=$("stage");if(!st||ro)return;ro=new ResizeObserver(()=>kitFloorFit());ro.observe(st)};if(document.readyState!=="loading")hook();else addEventListener("DOMContentLoaded",hook)}catch(e){}
  const st=document.createElement("style");st.id="k2b-floor";st.textContent=`
 .stage[data-kfloor] .scimg{transition:background-position .2s}
@@ -23414,9 +23424,15 @@ window.k3Sheet=k3Sheet;
 /* the sheet: tap on the dim backdrop closes it */
 document.addEventListener("click",e=>{const h=$$("hud2");if(h&&e.target===h&&!h.classList.contains("col"))k3Sheet(false)});
 document.addEventListener("keydown",e=>{if(e.key==="Escape"){const h=$$("hud2");if(h&&!h.classList.contains("col"))k3Sheet(false)}});
-if(typeof renderStage==="function"){const r0=renderStage;renderStage=function(){const r=r0.apply(this,arguments);try{k3Stage()}catch(e){}return r}}
-if(typeof renderHud2==="function"){const r0=renderHud2;renderHud2=function(){const r=r0.apply(this,arguments);try{k3Stage();k3Hud()}catch(e){}return r}}
-if(typeof render==="function"){const r0=render;render=function(){const r=r0.apply(this,arguments);try{k3Hud();k3Stage()}catch(e){}return r}}
+/* oi-render: k3Stage reads the stage size (clientWidth/Height) after writing the side column — it ran 3x per render (renderHud2, renderStage,
+   render), each a forced layout. Inside a render it now runs ONCE when the outermost render returns (jlag2 renderAfter); outside, at once.
+   The name tags (j59lay, inside renderStage) were placed with the gutters of this render's first k3Stage: when the gutters change, they are
+   placed again right after, so the frame shows the same as before. */
+function k3StageR(){(window.renderAfter||((k,f)=>f()))("k3Stage",()=>{const st=$$("stage");const g0=st?st.className+"|"+st.style.cssText:"";k3Stage();
+ try{if(st&&g0!==st.className+"|"+st.style.cssText){if(window.kitFloorFit)kitFloorFit();if(window.j59lay)j59lay()}}catch(e){}})}
+if(typeof renderStage==="function"){const r0=renderStage;renderStage=function(){const r=r0.apply(this,arguments);try{k3StageR()}catch(e){}return r}}
+if(typeof renderHud2==="function"){const r0=renderHud2;renderHud2=function(){const r=r0.apply(this,arguments);try{k3StageR();k3Hud()}catch(e){}return r}}
+if(typeof render==="function"){const r0=render;render=function(){const r=r0.apply(this,arguments);try{k3Hud();k3StageR()}catch(e){}return r}}
 try{const st=$$("stage");if(st&&window.ResizeObserver)new ResizeObserver(()=>{clearTimeout(window.__k3g);window.__k3g=setTimeout(k3Gut,30)}).observe(st)}catch(e){}
 
 /* ---------- CSS: the one layout ---------- */
@@ -26350,7 +26366,7 @@ header.hud.kseal-pad>.kseal-hud{top:calc(50% - var(--kseal) / 2)}
    seal all fit */
 
 `;document.head.appendChild(st)})();
-if(typeof renderHUD==="function"){const r0=renderHUD;renderHUD=function(){const r=r0.apply(this,arguments);try{kitSealHud()}catch(e){}return r}}
+if(typeof renderHUD==="function"){const r0=renderHUD;renderHUD=function(){const r=r0.apply(this,arguments);try{(window.renderAfter||((k,f)=>f()))("kitSealHud",kitSealHud)/* oi-render: reads the bar's boxes — once at the end of a render (jlag2) */}catch(e){}return r}}
 try{kitSealHud()}catch(e){}
 /* ================= §39.1 THE SEAL ON EVERY EVENT FRAME (owner 15/11 ~20:15Z, review/cal-plus) =================
    Every event dialog (#modal showing an event of the queue: kitEventDp person dialogs, the 32.7 person dialog, place-event frames, event stages,
@@ -29185,7 +29201,7 @@ window.menTabHTML=function(){try{menInit()}catch(e){}menUnique();const M=(S.men|
 /* panel rendering of the two new keys (j6 renderPanel0 dispatches by key; these keys are new) */
 if(typeof renderPanel0==="function"){const p0=renderPanel0;renderPanel0=function(){if(tab!=="court"&&tab!=="men")return p0.apply(this,arguments);
   const el=$("panel");faceInit();const gm=document.querySelector(".game");if(gm)gm.classList.add("cardtab");const h=tab==="court"?courtTabHTML():menTabHTML();
-  const same=el.dataset.tab===tab,keep=same?el.scrollTop:0;el.innerHTML=h;el.dataset.tab=tab;el.dataset.pg=String(PG[tab]);el.scrollTop=keep;kitFix(el)}}
+  const same=el.dataset.tab===tab,keep=same?el.scrollTop:0;el.innerHTML=h;el.dataset.tab=tab;el.dataset.pg=String(PG[tab]);kitFix(el);panelScrollKeep(el,keep)}}
 /* servant road keeps its own tab set */
 (function(){const r0=render;render=function(){const r=r0.apply(this,arguments);try{const srv=typeof isSrv==="function"&&isSrv();document.querySelectorAll('#tabs [data-tab="court"],#tabs [data-tab="men"]').forEach(b=>{if(srv)b.style.display="none"})}catch(e){}return r}})();
 
@@ -29203,7 +29219,8 @@ if(typeof renderPanel==="function"){const r0=renderPanel;renderPanel=function(){
   const r=r0.apply(this,arguments);
   /* same tab (another person): keep the panel where it was — j6 restored scrollTop before the sticky sub-tab bar came back, which
      shifted the card by the bar's height for one frame */
-  try{if(P&&P.dataset.tab===t0&&Math.abs(P.scrollTop-top0)>0.5)P.scrollTop=top0}catch(e){}
+  /* oi-render: after the renderer's own scroll keep (both at the end of a render, jlag2 renderAfter: the read here forced a 2nd full layout) */
+  try{if(P&&P.dataset.tab===t0)(window.renderAfter||((k,g)=>g()))("pscroll2",()=>{if(P.dataset.tab===t0&&Math.abs(P.scrollTop-top0)>0.5)P.scrollTop=top0})}catch(e){}
   try{if(snap&&P.dataset.tab===t0){const n=P.querySelector(".pc>.pcl>.pcp.kit");const nk=n&&n.querySelector(".kin");if(nk&&nk.innerHTML!==snap.innerHTML){
     snap.removeAttribute("id");snap.classList.add("kpxf");nk.after(snap);snap.animate([{opacity:1},{opacity:0}],{duration:180,easing:"ease-out",fill:"forwards"}).onfinish=()=>snap.remove();setTimeout(()=>snap.remove(),400)}}}catch(e){}
   return r}}
@@ -29570,7 +29587,7 @@ function qtTab(){const L=qtList();const head=`<div class="ph"><span>Con các nh�
 window.htTabHTML=function(t){return `<div class="pgwrap kht">`+({kid:kidTab,kvo:kvTab,kin:kinTab,hon:honTab,qt:qtTab}[t]||kidTab)()+`</div>`};
 if(typeof renderPanel0==="function"){const p0=renderPanel0;renderPanel0=function(){if(!HTK.includes(tab)||!S||S.dead||(typeof isSrv==="function"&&isSrv()))return p0.apply(this,arguments);
   const el=$("panel");faceInit();const gm=document.querySelector(".game");if(gm)gm.classList.add("cardtab");const h=htTabHTML(tab);
-  const same=el.dataset.tab===tab,keep=same?el.scrollTop:0;el.innerHTML=h;el.dataset.tab=tab;el.dataset.pg=String(PG[tab]);el.scrollTop=keep;kitFix(el)}}
+  const same=el.dataset.tab===tab,keep=same?el.scrollTop:0;el.innerHTML=h;el.dataset.tab=tab;el.dataset.pg=String(PG[tab]);kitFix(el);panelScrollKeep(el,keep)}}
 /* ---------- CSS ---------- */
 const st=document.createElement("style");st.id="kit-ht";st.textContent=`
 .khtempty{display:grid;grid-template-columns:minmax(110px,170px) minmax(0,1fr);gap:12px 16px;align-items:center;padding:12px;margin:4px 0 8px;border:1px solid var(--k-hair,#e6d3ac);border-radius:var(--k-rad,8px);background:var(--k-card,#fffaf0)}
@@ -32161,7 +32178,10 @@ function kitPane(){try{const P=$("panel");if(!P)return;let bar=P.querySelector("
  want.forEach((r,i)=>{const w=r.parentElement;if(bar.children[i]!==r)bar.insertBefore(r,bar.children[i]||null);
   if(w&&w!==bar&&w!==P&&!w.children.length&&!w.textContent.trim())w.remove()});
  [...bar.children].forEach(c=>{if(!want.includes(c))c.remove()});
- P.classList.add("kpane");const cs=getComputedStyle(P),pl=cs.paddingLeft,pr=cs.paddingRight;/* lag-play-2: write only what changed (an equal write still dirties style) */if(bar.style.marginLeft!=="-"+pl)bar.style.setProperty("margin-left","-"+pl,"important");if(bar.style.marginRight!=="-"+pr)bar.style.setProperty("margin-right","-"+pr,"important");if(bar.style.paddingLeft!==pl)bar.style.paddingLeft=pl;if(bar.style.paddingRight!==pr)bar.style.paddingRight=pr;const h=Math.round(bar.getBoundingClientRect().height);if(h&&P.style.getPropertyValue("--kpbarh")!==h+"px")P.style.setProperty("--kpbarh",h+"px")}catch(e){console.error("kitPane",e)}}
+ P.classList.add("kpane");
+ /* oi-render: the bar's padding / height are READ (computed style + box) — inside a render once at its end (jlag2 renderAfter), the moves above stay at once */
+ (window.renderAfter||((k,g)=>g()))("kitPaneM",()=>{try{if(!bar.isConnected||bar.parentElement!==P)return;
+ const cs=getComputedStyle(P),pl=cs.paddingLeft,pr=cs.paddingRight;/* lag-play-2: write only what changed (an equal write still dirties style) */if(bar.style.marginLeft!=="-"+pl)bar.style.setProperty("margin-left","-"+pl,"important");if(bar.style.marginRight!=="-"+pr)bar.style.setProperty("margin-right","-"+pr,"important");if(bar.style.paddingLeft!==pl)bar.style.paddingLeft=pl;if(bar.style.paddingRight!==pr)bar.style.paddingRight=pr;const h=Math.round(bar.getBoundingClientRect().height);if(h&&P.style.getPropertyValue("--kpbarh")!==h+"px")P.style.setProperty("--kpbarh",h+"px")}catch(e){console.error("kitPane",e)}})}catch(e){console.error("kitPane",e)}}
 window.kitPane=kitPane;
 (function(){const r0=renderPanel;renderPanel=function(){const r=r0.apply(this,arguments);kitPane();return r};
  if(typeof k3CatTabs==="function"){const k0=k3CatTabs;k3CatTabs=function(){const r=k0.apply(this,arguments);kitPane();return r}}
@@ -39203,8 +39223,10 @@ function paint(){try{const st=document.getElementById("stage");let el=document.g
  if(!paint.__t){paint.__t=setTimeout(()=>{paint.__t=0;const s2=document.getElementById("stage"),on=!!s2&&s2.getBoundingClientRect().height>40;if(on!==stOn)paint()},450)}}catch(e){console.error("kitStageRail",e)}}
 document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("#krail [data-rail]");if(!b)return;e.stopPropagation();e.preventDefault();
  const x=byId(b.dataset.rail);if(!x||typeof x.onTap!=="function")return;try{if(typeof sfx==="function")sfx("sfx-tap")}catch(y){}try{x.onTap()}catch(y){console.error("rail tap",y)}paint()},true);
-try{if(typeof renderStage==="function"){const r0=renderStage;renderStage=function(){const r=r0.apply(this,arguments);paint();return r}}}catch(e){}
-try{const r1=render;render=function(){const r=r1.apply(this,arguments);paint();return r};window.render=render}catch(e){}
+/* oi-render: paint reads the stage box — it ran 2x per render (renderStage + render); inside a render it now runs once at its end (jlag2 renderAfter) */
+const paintR=()=>(window.renderAfter||((k,g)=>g()))("krail",paint);
+try{if(typeof renderStage==="function"){const r0=renderStage;renderStage=function(){const r=r0.apply(this,arguments);paintR();return r}}}catch(e){}
+try{const r1=render;render=function(){const r=r1.apply(this,arguments);paintR();return r};window.render=render}catch(e){}
 let rt=0;addEventListener("resize",()=>{clearTimeout(rt);rt=setTimeout(paint,80)});
 window.kitStageRail={add,remove,paint,items:()=>R.slice()};
 /* (1) Lịch tháng — §58 kitMonthCalOpen; the desk calendar in the room corner is retired (one place: the rail) */
@@ -44806,7 +44828,7 @@ function kcSel(id){const L=kcFamList("nha");const i=L.findIndex(m=>m.id===id);if
 (function(){const p0=renderPanel0;renderPanel0=function(){if(!isKc())return p0.apply(this,arguments);const el=$("panel");const gm=document.querySelector(".game");if(gm)gm.classList.remove("cardtab","maptab");
  let h="";if(tab==="art"||tab==="inv"){p0.apply(this,arguments);if(tab==="art")el.insertAdjacentHTML("beforeend",kcArtHTML());return}
  if(tab==="go")h=kcMapHTML();else if(tab==="story")h=kcStoryHTML();else if(tab==="rv")h=kcFamHTML();else if(tab==="staff")h=kcSocHTML();else if(tab==="kid")h=kcMailHTML();else h=kcGroupHTML(KCG[tab]||"khue");
- const keep=el.dataset.tab===tab?el.scrollTop:0;el.innerHTML=h;el.dataset.tab=tab;el.dataset.pg="";el.scrollTop=keep;try{kitFix(el)}catch(e){}if(!keep)requestAnimationFrame(()=>{el.scrollTop=0})/* the pane bar (kitPane) moves the sub-tab row after this render */}})();
+ const keep=el.dataset.tab===tab?el.scrollTop:0;el.innerHTML=h;el.dataset.tab=tab;el.dataset.pg="";try{kitFix(el)}catch(e){}panelScrollKeep(el,keep);if(!keep)requestAnimationFrame(()=>{el.scrollTop=0})/* the pane bar (kitPane) moves the sub-tab row after this render */}})();
 function kcDoable(a){return !a.done&&!a.lock&&can(cardCost(a))&&canPay(a)}
 function kcCardsH(L){return L.length?`<div class="cards">${L.map(([a,i])=>cardH(a,i)).join("")}</div>`:""}
 function kcGroupHTML(g){return kcCardsH(deck.map((a,i)=>[a,i]).filter(([a])=>a.g===g))}
@@ -46279,8 +46301,14 @@ window.eitPilfer=eitPilfer;window.eitReOpts=eitReOpts;window.eitReDialog=eitReDi
       since its last full pass is skipped. Buttons inside the dialog (#modal) always run (their wrappers read the open dialog's Q[0]). */
 (function(){
  window.__rendN=0;
+ /* 3. renderAfter(key, fn) — oi-render (owner 16/11 15:05Z lag first priority): a part fit that READS layout (clientWidth, scrollTop,
+    getBoundingClientRect, innerText) in the middle of a render forced a full layout of the page each time the render had written in between
+    (8–12 forced layouts per render, ~40 % of render() time). Inside a render the fit is queued once per key and runs when the OUTERMOST
+    render returns (same task, before the frame is painted, so the screen is the same); outside a render it runs at once, as before. */
+ const RA=new Map();window.renderAfter=function(k,fn){if(window.__rdep>0){RA.set(k,fn);return}fn()};/* a key queued again keeps its first place in the queue and runs its latest fn */
+ const raFlush=()=>{for(let i=0;i<4&&RA.size;i++){const L=[...RA.values()];RA.clear();for(const f of L)try{f()}catch(e){console.error("renderAfter",e)}}};
  setTimeout(()=>{try{
-  if(typeof render==="function"){const r0=render;let d=0;render=function(){d++;window.__rdep=d;try{return r0.apply(this,arguments)}finally{d--;window.__rdep=d;if(!d)window.__rendN++}};window.render=render}
+  if(typeof render==="function"){const r0=render;let d=0;render=function(){d++;window.__rdep=d;try{return r0.apply(this,arguments)}finally{d--;window.__rdep=d;if(!d){raFlush();window.__rendN++}}};window.render=render}
   if(typeof kaNorm1==="function"){const n0=kaNorm1;const SIG=new WeakMap();
    const sig=b=>b.className+"|"+b.childElementCount+"|"+b.textContent.length+"|"+(b.disabled?1:0)+"|"+b.attributes.length;
    kaNorm1=function(b){if(!b||!b.nodeType)return n0.apply(this,arguments);const inDlg=!!(b.closest&&b.closest("#modal"));
@@ -47997,7 +48025,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="e8481d7aab69";window.CTM_BUILD=BUILD;
+const BUILD="40bb7b7bf396";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
