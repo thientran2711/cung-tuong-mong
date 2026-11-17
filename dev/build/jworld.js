@@ -247,7 +247,7 @@ if(typeof petMonth==="function"){const p0=petMonth;petMonth=function(){try{if(S&
      or a storm, storm (2) and lightning (5) a storm (rollWx severity 3), snow (3) a snow storm; no cause, no merit card. */
 try{if(typeof RTC!=="undefined"&&RTC)RTC.fire=0}catch(e){}
 try{if(typeof MF7!=="undefined"&&MF7.hoahoan){const H=MF7.hoahoan,w0=H.w;const storm=()=>!!(S&&S.wx&&S.wx.f===3);
-  const ok=i=>{if(!B().on)return true;const d=worldWin("dis");return i===0||i===4?!!worldWin("hoa"):i===1?!!(d&&d.x.sub==="lut")||storm():i===3?storm()&&/tuyết/.test(S.wx.n||""):storm()};
+  const ok=i=>{if(!B().on)return true;const d=worldWin("dis");return i===0||i===4?!!worldWin("hoa"):i===1?!!(d&&d.x.sub==="lut")||storm():i===3?storm()&&/tuyết/.test(S.wx.b||S.wx.n||""):storm()};
   H.pick=ok;H.w=function(){const r=w0.apply(this,arguments);try{if(B().on&&!H.v.some((x,i)=>ok(i)))return 0}catch(e){}return r}}}catch(e){wErr("mf7",e)}
 /* places: the Emperor is out of the palace; NPCs go where the window draws them (fallback until AG-ALL's day plan reads worldPlanW) */
 {const pw=placeWhere;placeWhere=function(){const r=pw.apply(this,arguments);try{if(S&&S.where&&B().on){const A=worldWin();if(!A.length)return r;
@@ -294,7 +294,7 @@ function wCalendar(){const b=B(),T=T_(),z=wZ(),y=S.year,m=S.month,t=S.tuan||0,E=
   if(vt&&m===vt.m&&t===vt.t[0]&&(E.age||0)>=c.emp[0]&&(E.age||0)%c.emp[1]===0&&z.thoE!==y){z.thoE=y;worldStart("tho",`Vạn thọ: Hoàng thượng tròn ${E.age} tuổi`,{x:{who:"emp"},cd:0})}
   if(tt&&m===tt.m&&t===tt.t[0]&&!S.thDead&&(S.thAge||0)>=c.th[0]&&(S.thAge||0)%c.th[1]===0&&z.thoT!==y){z.thoT=y;worldStart("tho",`Thánh thọ: Thái hậu tròn ${S.thAge} tuổi`,{x:{who:"th"},cd:0})}}
  /* lightning in a storm (rollWx severity 3, the real weather of the tuần) sets a cung on fire: the second real fire cause beside jtsb */
- if(S.wx&&S.wx.f===3&&roll(b.hoa.storm)){const L=liveR().filter(v=>!v.confined);const v=L.length?pick(L):null;if(v)worldStart("hoa",`Sét đánh trúng mái cung ${v.name} trong cơn giông, lửa bốc lên`,{len:b.hoa.len,x:{who:v.id}})}
+ if(wxDayAny(3)&&roll(b.hoa.storm))  /* weather-khac: a storm in ANY khắc of the day */{const L=liveR().filter(v=>!v.confined);const v=L.length?pick(L):null;if(v)worldStart("hoa",`Sét đánh trúng mái cung ${v.name} trong cơn giông, lửa bốc lên`,{len:b.hoa.len,x:{who:v.id}})}
  /* the sky: a month's chance (Khâm Thiên giám) */
  if(t===0&&roll(b.sao.p))worldStart("sao",pick(["Nhật thực giữa trưa","Sao chổi hiện ở trời tây"]));}
 /* a real jtsb fire that spreads in the dry season */
