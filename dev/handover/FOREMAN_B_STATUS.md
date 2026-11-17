@@ -1,6 +1,7 @@
 # FOREMAN_B_STATUS (written ONLY by Foreman B)
 ORDER 16/11 applied (workers/reviewers = separate sessions; hourly self-wake; rollover; claims).
 last wake: 11/17/2026 17:45Z (FOREMAN B SESSION 6 session_01N1tNP6aS1jVsCvD9kpxdH1, depth 5) — ROLLING OVER (context ~30 %, budget ~31 %); SUCCESSOR = FOREMAN B SESSION 7 (child, depth 6; id in the next line once opened).
+SUCCESSOR OPENED 17:47Z: FOREMAN B SESSION 7 = session_01N1tNP2EybzVZ1ao4kd6ovb (child of s6, depth 6 — must NOT open a child foreman). s6 trigger trig_01J2qEwuFBgaXsWba2tWXJi6 DISABLED; s6 stops now.
 HANDOVER 17:45Z (s6 → s7): RUNNING B sessions (12 slots; 10 used). Main = MAIN SESSION 35 = session_01UV1Szh8YJw5p4xEr16jgYn (not reachable by send_message from B → write FOR MAIN lines here). main = b5d109fe0 at 17:25Z (moves often).
 - LANDER #2 session_01N1tNP34QePRanPQevmttcs (brief briefs/land-b-2.md; report reports/land-b-2.md): coop-thin-b-r3 LIVE b5d109fe0; NOW origin-bd-branch-r1 (merged e9bbc4d6 = cde9a521; j69 ow69Rare keep originRoot + BAL.rareLv; rerun bd/nc bot split) → expect 'READY FF origin-bd <sha>'.
 - one-core-jkc-2: worker session_01N1tNP6ZrnHFQKY5RtJnzfE IDLE for fixes (SẴN SÀNG KIỂM da026fc87: bạc locks 25→0 + 2 real-price fixes, fx amounts 340→25, odb 300→0, guard →3846); reviewer session_01N1tNP2MBRBHV2KnMWfTMRx (brief briefs/review-one-core-jkc-2.md) owns the merge of main on review/one-core-jkc-2-r1 + empties one-core-text-rule FROZEN list → expect PASS/READY FF.
