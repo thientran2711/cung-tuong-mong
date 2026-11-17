@@ -47,3 +47,7 @@ START_CTX low; no rollover needed. Finished.
 - Gens/cuts: t1 yiEfsWuPW9/nVLxZ45YQD (flower branch to cheek), t3 6AqFwePiJO/YMsj26HWeC (round fan raised beside face), t4 cpgsZJC0eP/VXwSYG5MMU (hem lowered to floor, open hand + round fan low), t5 EbnGIDxuuO/IfiNdeWtvE (hand at hairpin, folded fan down), t6 vQ2RoQLa47/N2HQOyB6D9 (handkerchief at chest + open hand, no train, less deep V), t7 s78Bky2l8e/p8O70Mhehw (folded fan low + hand on sleeve), t8 mERiBOZhJQ/1leDbtsr4r (two layers, slim, raised open hand + folded fan at hip). t2 = fan held low in front (unchanged).
 - Caveat: t4, t6, t8 each have one open extended hand (different side/height/other hand); could vary further if she says they look alike.
 - Overwrote my own m09_t1,t3-t8_ladder.png + m09_ladder_check.jpg. Ladder totals: 17 gens, 15 cuts (this round 7+7).
+
+## Round 7: headdress per owner ~20:35Z (t6-t8 grand crowns back; t4/t5 richer pins)
+- Only the headdress changed on t4-t8 (pose, hem, outfit kept via the round-6 creation as ref 2): t4 CqzAfrJEEy/jUBXlgkLD0 small gold crown-comb + 2-3 pins short dangles; t5 gOt8lRoSXO/w4vhO4g7EI larger gold comb + phoenix pin; t6 nVLxnkpYQD/8a6NmuEIrU, t7 SymISIPUb8/EbnzFr6uuO, t8 aFAZaTofSh/aFA2E1gfSh with the round-1 grand crowns (refs 3z5q1rVREY / yiEfqMlPW9 / s78BvYEl8e). t1-t3 unchanged. 5 gens + 5 cuts (ladder total 22 gens, 20 cuts).
+- Overwrote my own m09_t4..t8_ladder.png + m09_ladder_check.jpg.
