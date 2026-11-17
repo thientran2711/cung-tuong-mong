@@ -47,7 +47,7 @@ function chapRankOpen(){if(Q.some(m=>m.kit&&m.kit.chap))return;if(S.rank>=7||S.o
 function chapChipHint(c){const t=(c.innerText||"").replace(/\s+/g," ").trim();const C=typeof Q72CFG==="object"?Q72CFG:{max:4,mo:2};
  if(/^Đang làm/.test(t))return [`Đang làm ${t.replace(/^Đang làm\s*/,"")}`,`Số việc nhờ ngươi đang nhận; nhận tối đa ${C.max} việc một lúc.`];
  if(/^Lời nhờ tháng/.test(t))return ["Lời nhờ tháng này",`Mỗi tháng người trong cung ngỏ lời nhờ ngươi tối đa ${C.mo} lần.`];
- if(/^Xong/.test(t))return ["Xong","Số việc nhờ ngươi đã làm trọn."];if(/^Hỏng/.test(t))return ["Hỏng","Số việc nhờ ngươi làm hỏng hoặc bỏ dở."];if(/^Từ chối/.test(t))return ["Từ chối","Số lời nhờ ngươi đã từ chối; từ chối thì người nhờ mếch lòng."];
+ if(/^Xong/.test(t))return ["Xong","Số việc nhờ ngươi đã làm trọn."];if(/^(Hỏng|Bại)/.test(t))return ["Bại","Số việc nhờ ngươi làm hỏng hoặc bỏ dở."];if(/^Từ chối/.test(t))return ["Từ chối","Số lời nhờ ngươi đã từ chối; từ chối thì người nhờ mếch lòng."];
  if(/^Đức/.test(t))return ["Đức",KIT_GLOSS["Ngôi Hoàng hậu"]||"Đức là điều kiện của ngôi Hoàng hậu."];if(/khảo hạch|điều kiện/i.test(t))return ["Khảo hạch tấn phong",(typeof kitGlossText==="function"&&kitGlossText("Khảo hạch tấn phong"))||"Đủ điều kiện thì được dự khảo hạch tấn phong; đỗ mới được thăng bậc."];
  return null}
 document.addEventListener("click",e=>{try{const t=e.target;if(!t||!t.closest)return;const go=t.closest("[data-chapgo]");if(go){e.stopPropagation();e.preventDefault();if(Q.length&&Q[0].kit&&Q[0].kit.chap){Q.shift();showModal()}tab="act";render();return}
