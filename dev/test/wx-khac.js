@@ -24,7 +24,7 @@ const sleep=t=>new Promise(r=>setTimeout(r,t));
   for(let m=1;m<=12;m++)for(let d=0;d<60;d++){S.month=m;S.year=y0+d;S.tuan=d%3;rollWx();const D=S.wxDay,sea=SEASON[m-1];const ok=new Set(wxStates(sea).map(w=>w[0]));
    if(!D||D.s.length!==N){off.push([m,d,"no day"]);continue}
    for(const n of D.s){if(!ok.has(n))off.push([m,sea,n]);if(sea!=="Đông"&&/tuyết|sương giá/.test(n))off.push([m,sea,n,"snow"]);if(sea==="Đông"&&/nắng|ve kêu|đom đóm/.test(n))off.push([m,sea,n,"heat"])}
-   const z=sea4[sea]=sea4[sea]||{k:0,wet:0,lv:[0,0,0,0]};for(let i=0;i<N;i++){z.k++;const w=currentWeather(i);if([1,3,4].includes(w.f)){z.wet++;z.lv[w.lv]++;if(!(w.lv>=1&&w.lv<=3))off.push([m,sea,w.b,'no lv'])}else if(w.lv)off.push([m,sea,w.b,'dry lv'])}
+   const z=sea4[sea]=sea4[sea]||{k:0,wet:0,lv:[0,0,0,0],kd:{}};for(let i=0;i<N;i++){z.k++;const w=currentWeather(i);{const q=z.kd[w.kd]=z.kd[w.kd]||[0,0,0,0];q[0]++;q[w.kl]++}if([1,3,4].includes(w.f)){z.wet++;z.lv[w.lv]++;if(!(w.lv>=1&&w.lv<=3))off.push([m,sea,w.b,'no lv'])}else if(w.lv)off.push([m,sea,w.b,'dry lv'])}
    stat.days++;for(let i=1;i<N;i++)if(D.s[i]!==D.s[i-1])stat.chg++;stat.burst+=(D.u||[]).length;
    if(sea==="Hạ"&&D.s[0]==="nắng gắt"){stat.arcDays++;const a=D.s.indexOf("trời âm u");if(a>0&&D.s.slice(a).some(n=>n==="mưa rào"||n==="giông tố"))stat.arcHit++}}
   o.sea4=sea4;o.off=off.slice(0,10);o.offN=off.length;o.stat=stat;
@@ -62,11 +62,13 @@ const sleep=t=>new Promise(r=>setTimeout(r,t));
    S.wx={n:"nắng gắt",b:"nắng gắt",k:"sun",f:2};S.storms=0;for(let u=0;u<K-1;u++)spend(1);S.buoi=1;used=0;wxSync();for(let u=0;u<K-1;u++)spend(1);o.storms=S.storms}
   return o});
  const ok1=r.offN===0&&r.stat.days===720,ok2=r.mono&&r.noBack&&r.api.every(Boolean)&&r.save&&r.spill.carry===1&&r.spill.k===r.spill.want&&r.spill.wx==="trời âm u",
-  g=r.garden,ok3=g.wx==="mưa rào"&&!g.wet[0]&&g.wet[1]&&g.fx[1]==="drizzle"&&g.fx[0]!==g.fx[1]&&g.px[1]==="rain"&&/Trời bỗng đổ mưa rào/.test(g.line)&&g.lines===1&&g.hook&&g.hook[2]===true&&/rgba\(90, ?100, ?120/.test(g.wash)&&/mưa rào/.test(g.chip),
+  g=r.garden,ok3=g.wx==="mưa rào"&&!g.wet[0]&&g.wet[1]&&g.fx[1]==="rainh"&&g.fx[0]!==g.fx[1]&&g.px[1]==="rain"&&/Trời bỗng đổ mưa rào/.test(g.line)&&g.lines===1&&g.hook&&g.hook[2]===true&&/rgba\(90, ?100, ?120/.test(g.wash)&&/mưa rào/.test(g.chip),
   ok4=r.old.built&&r.old.head&&r.old.lines===0&&r.old.wx==="tuyết nhẹ",ok5=r.guest.every(Boolean)&&r.guest.length===10,ok6=r.storms===1;
  console.log(JSON.stringify(r,null,1));
  console.log("§1 season",ok1?"OK":"FAIL","§2 monotone",ok2?"OK":"FAIL","§3 garden",ok3?"OK":"FAIL","§4 old save",ok4?"OK":"FAIL","§5 guest",ok5?"OK":"FAIL","§6 storm days",ok6?"OK":"FAIL");
  for(const [s,z] of Object.entries(r.sea4))console.log(`${s}: wet khắc ${Math.round(100*z.wet/z.k)}/100 · nhẹ ${z.lv[1]} vừa ${z.lv[2]} nặng ${z.lv[3]}`);
+ /* weather-khac-2 (reviewer r1 D): every kind's share of the season's khắc + its level mix */
+ for(const [s,z] of Object.entries(r.sea4))console.log(`${s} kinds: `+Object.entries(z.kd).sort((a,b)=>b[1][0]-a[1][0]).map(([k,q])=>`${k} ${Math.round(100*q[0]/z.k)}/100 (nhẹ ${q[1]} vừa ${q[2]} nặng ${q[3]})`).join(" · "));
  console.log(`days ${r.stat.days} · changes/day ${(r.stat.chg/r.stat.days).toFixed(2)} · downpours/day ${(r.stat.burst/r.stat.days).toFixed(2)} · summer nắng→âm u→mưa ${r.stat.arcHit}/${r.stat.arcDays}`);
  bad=[ok1,ok2,ok3,ok4,ok5,ok6].filter(x=>!x).length;console.log('pageerrors',errs.length,errs.slice(0,3));if(errs.length)bad++;
  await b.close();console.log(bad?`FAIL ${bad}`:"ALL OK");process.exit(bad?1:0)})();

@@ -174,6 +174,14 @@ const KF_WX={
  snowp:{k:[KF_SPR.snow,KF_SPR.snow,"petal-plum"],cap:84,vx:[-.3,.5],vy:[.7,1.4],sway:.7,spin:.03,sc:[1.1,1.9],a0:1,gust:.5,fall:1,snow:1},
  drizzle:{k:["streak"],cap:20,vx:[-.8,-.4],vy:[9,12],a0:.75,rain:1,tint:0xc4d6e6,sc:[.8,1.1]},
  storm:{k:["streak"],cap:80,vx:[-3.4,-2],vy:[14,19],a0:.8,rain:1,tint:0xbccde0,sc:[.9,1.2],bolt:1},
+ /* weather-khac-2 (reviewer r1 B, owner "mưa ào tới"): the LEVEL of the khắc shows (jwxk kfWxCfg picks by currentWeather lv/kl, BAL.wx.day.fxLv);
+    same painted streak / leaf / smoke sprites, denser and faster — vừa rain = denser drizzle, nặng rain = the storm streaks WITHOUT the bolt */
+ rain2:{k:["streak"],cap:44,vx:[-1.4,-.8],vy:[11,14],a0:.78,rain:1,tint:0xc4d6e6,sc:[.85,1.15]},
+ rainh:{k:["streak"],cap:80,vx:[-3.4,-2],vy:[14,19],a0:.8,rain:1,tint:0xbccde0,sc:[.9,1.2]},
+ wind1:{k:["leaf","streak"],cap:24,vx:[3,6],vy:[.3,1.2],sway:1.2,spin:.08,sc:[.55,.85],a0:.85,gust:1.4,fall:1,fromLeft:1,line:1},
+ wind3:{k:["leaf","leaf","streak","streak"],cap:100,vx:[8,13],vy:[.4,1.8],sway:1.6,spin:.14,sc:[.55,.95],a0:.95,gust:3,fall:1,fromLeft:1,line:1},
+ mist1:{k:["smoke"],cap:3,vx:[.15,.45],vy:[-.12,.12],a0:.16,float:1,tint:0xf0ece4,sc:[3,4.6],life:[480,700]},
+ mist3:{k:["smoke"],cap:7,vx:[.1,.35],vy:[-.1,.1],a0:.32,float:1,tint:0xf0ece4,sc:[3.6,5.4],life:[520,760]},
  mist:{k:["smoke"],cap:4,vx:[.15,.45],vy:[-.12,.12],a0:.22,float:1,tint:0xf0ece4,sc:[3,4.6],life:[480,700]},
  fly:{k:[KF_SPR.fly],cap:90,vx:[-.3,.3],vy:[-.25,.25],sway:.8,a0:1,float:1,sc:[.5,.8],life:[300,560],glow:1},  /* each firefly = tiny warm core + soft green-gold halo (2 sprites), slow wander, deep slow blink, depth (near = bigger, far = tiny) */
  gold:{k:["petal-peach"],cap:12,vx:[-.3,.3],vy:[.5,1],sway:.8,spin:.04,sc:[.5,.8],a0:.85,gust:.4}

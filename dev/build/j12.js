@@ -6,8 +6,9 @@ const WX={Xuân:[["hoa đào bay","petal",0],["mưa phùn","rain",1],["sương s
 /* flags: 1 wet, 2 heat, 3 storm, 4 heavy snow */
 /* weather-khac (owner 17/11 (g) "nắng gắt ... trưa chiều âm u ... tối trời mưa"): IN-SEASON states the day can turn into khắc by khắc (jwxk.js).
    Never drawn as the tuần's first weather (the forecast keeps WX); a season's allowed states = WX[sea] + WX_KH[sea] (wxStates). */
-const WX_KH={Xuân:[["trời âm u","cloud",0],["mưa rào","rain",1]],Hạ:[["trời âm u","cloud",0],["mưa rào","rain",1]],
- Thu:[["trời âm u","cloud",0],["mưa thu","rain",1]],Đông:[["trời âm u","cloud",0]]};
+/* weather-khac-2 (owner 17/11 ~17:40Z (3) "dông bão nè, gió nè ... gió nhiều"): + wind gusts (gió lớn / gió bấc) and fog mornings (sương mù) */
+const WX_KH={Xuân:[["trời âm u","cloud",0],["mưa rào","rain",1],["gió lớn","wind",0]],Hạ:[["trời âm u","cloud",0],["mưa rào","rain",1],["gió lớn","wind",0]],
+ Thu:[["trời âm u","cloud",0],["mưa thu","rain",1],["sương mù","mist",0]],Đông:[["trời âm u","cloud",0],["sương mù","mist",0],["gió bấc","wind",0]]};
 function wxStates(sea){return (WX[sea]||[]).concat(WX_KH[sea]||[])}
 /* what a weather does to Hoàng thượng's mood (+ storm count): at the tuần roll AND when the day turns into it (jwxk) — one rule */
 function wxMood(w){if(w[2]===3){if(has("nongnay"))S.emp.mood=3;else if(S.emp.mood<2)S.emp.mood=2;S.storms=(S.storms||0)+1}
@@ -23,7 +24,9 @@ function lightTick(){const st=$("stage");if(!st||!S)return;let L=st.querySelecto
  /* owner 16/11: every scene has its own 4-buổi paintings (j94), so NO buổi tint on any picture (the painting carries the light, night included).
     Only the weather washes below stay (rain / snow / frost), at 1/4 strength on a buổi painting. */
  const b=S.buoi||0;let own=false;try{own=/-(sang|trua|chieu|toi)$/.test(SCIMG[placeOf(S.place).sc]||"")}catch(e){}
- const k=own?.25:1,A=x=>(x*k).toFixed(3);const c="rgba(0,0,0,0)";
+ /* weather-khac-2 (reviewer r1 B): a nặng downpour / heavy snow washes stronger (BAL.wx.day.wash × alpha; on a buổi painting washOwn instead of 1/4) */
+ const D=BAL.wx&&BAL.wx.day,lv=S.wx&&(S.wx.lv||0),lvw=D&&D.wash?D.wash[lv]||1:1;
+ const k=(own?(D&&D.washOwn?D.washOwn[lv]||.25:.25):1)*lvw,A=x=>Math.min(.6,x*k).toFixed(3);const c="rgba(0,0,0,0)";
  const w=wet()?(b===B4L?`,rgba(40,50,80,${A(.25)})`:`,rgba(90,100,120,${A(.18)})`):S.wx&&(S.wx.k==="frost"||S.wx.k.startsWith("snow"))?`,rgba(200,225,255,${A(.16)})`:S.wx&&S.wx.k==="cloud"?`,rgba(70,78,92,${A(.14)})`:"";  /* trời âm u (weather-khac): a dim grey wash, no particles */
  L.style.background=`linear-gradient(${c},${c})${w?`,linear-gradient(${w.slice(1)},${w.slice(1)})`:""}`;document.body.dataset.buoi=b;
  st.classList.toggle("frost",!!(S.wx&&S.wx.k==="frost"))}
