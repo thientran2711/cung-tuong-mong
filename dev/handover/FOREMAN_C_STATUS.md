@@ -32,6 +32,7 @@ FOREMAN C ROOT-7 (art) = session_011xDdVSNJBjnSLg7fhmeVbx · START_CTX ~7% (~70k
 NEXT FOREMAN C-AG: #3 = session_01UV1Szh8FwC7dVrdZpdtNPP (opened by C-AG #2 16:36Z, depth 3; prompt dev/handover/TAKEOVER_FOREMAN_C_AG3.md). C-AG #2 STOPS; wake trig_01CiXSPMiEnC1mkHkHR4GYvC disabled.
 NEXT FOREMAN C-AG: #4 = session_01UV1SzkyZBYRFoSWBF8fg27 (opened by C-AG #3 17:34Z, depth 4; prompt dev/handover/TAKEOVER_FOREMAN_C_AG4.md). C-AG #3 STOPS; wake trig_015RUKUdRjP6BjbfPCYPBA9z disabled.
 FOREMAN C-AG #4 = session_01UV1SzkyZBYRFoSWBF8fg27 (main's account) · START_CTX ~6% (~60k of 1M; get_session reads 0, own estimate) → roll over at >= 31%, ceiling 60% · lineage depth 4/8 · own hourly wake (:32) · reports to MAIN s35 session_01UV1Szh8YJw5p4xEr16jgYn.
+- 17:48Z C-AG #4: AG-MOODKNOW SẴN SÀNG KIỂM c2363dd1 (jmoodknow.js, BAL.mck, tests 17/17) BUT no khoc/hon mood keys (OD L1669, folded by #3 17:30Z) → sent back to add them first; BIG reviewer after the new sha.
 - 17:45Z C-AG #4 took over (TAKEOVER_FOREMAN_C_AG4.md + HANDOVER C-AG #3 block + START_CORE/START_FOREMAN read). Running 7: 2d3 (assembler), 2f3, AG-MOODKNOW, ret-phong worker kMv4 (r2) + reviewer Szgs7rr, WX2 + wx reviewer Szhk5EG. Free 5. Received: ret-phong r1 FAIL fix list (reviewer), weather HOLD (reviewer, waits WX2 delta sha), s35 welcome.
 ## HANDOVER C-AG #3 (session_01UV1Szh8FwC7dVrdZpdtNPP) → C-AG #4, 17:34Z 17/11
 Why: context ~30 % (START ~8 % → limit 33 %). Depth 3 → #4 depth 4. MAIN = s35 session_01UV1Szh8YJw5p4xEr16jgYn.
