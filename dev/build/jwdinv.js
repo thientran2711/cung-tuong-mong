@@ -17,14 +17,16 @@
      Tự chọn): its level is never shown, only what someone said or what she learnt. */
 (function(){if(typeof WD_ITEMS!=="object")return;
  /* 1. remaining hair items (j97 ngự tứ hairpins…) become WD trâm */
- for(const k in IT){const it=IT[k];if(!it||it.sl!=="hair"||WD_ITEMS[k])continue;let a=null;try{a=typeof itemArt==="function"?itemArt(k):null}catch(e){}
+ /* jreg: hair items of later modules too */
+ regEach(IT,k=>{const it=IT[k];if(!it||it.sl!=="hair"||WD_ITEMS[k])return;let a=null;try{a=typeof itemArt==="function"?itemArt(k):null}catch(e){}
   WD_ITEMS[k]={k,sl:"tram",n:it.n,P:it.nt?8:Math.min(8,(it.rk|0)+1),g:it.nt?4:(a?a.grade|0:0),col:"vang",w:Object.assign({},it.w||{}),nt:it.nt?1:0,pr:it.nt?0:(it.pr||0),
    icon:a&&a.src?a.src:(typeof ITIMG==="object"&&ITIMG[k]?`img/item-${ITIMG[k]}.webp`:""),note:""};
-  it.wsl="tram";it.wd=1;it.kd="Trâm cài";delete it.sl}})();
+  it.wsl="tram";it.wd=1;it.kd="Trâm cài";delete it.sl},"WD hair")})();
 /* 2. fabric → the garment it is sewn into (same names as the j92 store) */
 const WD_FAB={luahang:"y_vanthuy",gamto:"y_maudon",gamvang:"y_minhhoang"};
 function wdFabOf(k){const it=IT[k];if(!it||!it.dr)return null;if(WD_FAB[k]&&WD_ITEMS[WD_FAB[k]])return WD_FAB[k];return wdPickAt(Math.min(8,(it.rk|0)+1),"y",0)}
-try{for(const k in IT){const g=IT[k]&&itm(k).dr?wdFabOf(k):null;if(g&&WD_ITEMS[g]){const w=WD_ITEMS[g];IT[k].d=`May áo: ${w.n} (Y phục, ${plainFx(w.w)||"giản dị"})`}}}catch(e){}
+/* jreg: fabrics of later modules (jstip vaibong, aolong) read the same «May áo» line (their old «May áo thường: Sắc +1» text was wrong: sewing gives a garment) */
+regEach(IT,k=>{const g=IT[k]&&itm(k).dr?wdFabOf(k):null;if(g&&WD_ITEMS[g]){const w=WD_ITEMS[g];IT[k].d=`May áo: ${w.n} (Y phục, ${plainFx(w.w)||"giản dị"})`}},"WD fabric desc");
 function wdSew(p,fk){const g=wdFabOf(fk);if(!g)return null;const e={k:g,src:"may",fab:fk,d:wdWhen()};
  /* the tailors know the cloth: the garment's phẩm is known to its owner */
  if(p===S){S.wdk=S.wdk||{};S.wdk[g]=1}else{p.wdk=p.wdk||{};p.wdk[g]=1}wdWearEntry(p,e);return e}
