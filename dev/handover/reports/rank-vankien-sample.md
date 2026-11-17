@@ -75,3 +75,8 @@ Honest quality:
 - The 5 v4 outfits belong to c01 only. Other consorts get entirely different designs.
 - Method: ONE design-sheet table, rows = person (32 consorts) × rank (8 tiers), columns = main colour, collar type, neckline shape, cut/outer layer, embroidery motif, vân kiên size, hairstyle, hairpin set, held item, palette-clash check. Rules: within a person all ranks differ (colour + collar); within one palace row/screen (people near each other) no two share colour+collar; colour ladder per rank as the owner's rule; motifs per person (flower/leaf/butterfly/phoenix only). Generate from the table row (prompt template + person's face ref + shared pose rule), one try, redo only fails.
 - Credit per outfit: gpt-2-6 2k = 135 credits per image (observed). With ~1.4 tries avg ≈ 190 credits per outfit figure. 32 persons × 8 ranks = 256 figures ≈ 35–50k credits (single age a18; ×4 ages if all). Layered variant adds ≈ 105 (3 masks) + 3 per figure, plus a one-time inpainted base per person.
+
+## V4c (owner 17/11 ~17:25Z: NO round/U/scoop neckline on anyone)
+Hoàng hậu redone once: imperial yellow + red-gold phoenix + crown + ruyi kept; neckline = low deep-V CROSS-COLLAR (jiaoling) double-layered (red phoenix-embroidered pearl-trimmed outer band over yellow inner edge), shoulders covered, upper chest open.
+Neckline check of the other 4: Tần deep-V cross-collar OK | Phi wide square OK | Quý phi straight parallel lapels OK | Hoàng quý phi sweetheart: neck is open, but the bodice top-line is a soft curve at the bust (heart shape), no round/U neck; flagged, not redrawn.
+Sheet: https://ctm-img.victoria-tntt.workers.dev/img/_review/rank-vankien/sheet_figures_v4c.jpg
