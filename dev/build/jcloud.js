@@ -142,6 +142,7 @@ function body(pg){
   `<div class="kpnote">Ám hiệu này là chìa khóa sổ: ai có nó đều mở được sổ của ngươi. Chớ đưa cho người khác.</div>`+
   `<div class="kslot-a"><button class="kbtn" data-cl="copy">Chép ám hiệu</button><button class="kbtn alt" data-cl="share">Gửi sang máy kia</button></div>`+
   `<div class="kslot"><h4 class="kpst">Thôi nối trên máy này</h4>${kitRows([["Sổ trên máy","vẫn giữ nguyên","n"],["Sổ trên mây","vẫn còn, nối lại bằng ám hiệu","n"]])}<div class="kslot-a"><button class="kbtn alt" data-cl="unlink">${ASK?"Chắc chắn?<small>máy này thôi gửi sổ lên mây</small>":"Thôi nối"}</button></div></div>`+
+  `<div class="kslot"><h4 class="kpst">Xóa sổ trên mây</h4>${kitRows([["Sổ trên máy","vẫn giữ nguyên","n"],["Sổ trên mây","xóa hẳn, không lấy lại được","r"],["Máy khác","mất mối nối bằng ám hiệu này","n"]])}<div class="kslot-a"><button class="kbtn kdanger" data-cl="drop"${STATE==="busy"?" disabled":""}>Xóa sổ trên mây</button></div></div>`+
   (MSG?`<div class="kpnote">${esc(MSG)}</div>`:"");
  if(pg==="link")return kitInput({id:"cl-in",label:"Ám hiệu sổ mây",value:"",placeholder:"tám chữ và số, như ABCD-EFGH"})+
   `<div class="kslot-a"><button class="kbtn" data-cl="go"${STATE==="busy"?" disabled":""}>Nối sổ</button></div>`+
@@ -178,6 +179,15 @@ async function link(v){const k=String(v||"").toUpperCase().replace(/[\s-]/g,"").
  C={k,rev:0,h:{},dev:devLabel()};saveC();MSG="";const r=await sync();
  if(r==="conflict"){PICK={};open("pick");return}
  MSG=r==="ok"||r==="same"?"Đã nối sổ. Sổ trên máy này đã khớp với mây.":ERR[C.err]||"";back()}
+/* Xóa sổ trên mây: kit danger button → kitConfirm → Worker "drop" (wipes the Vault only; the sổ on this device stay) → clear the link like "Thôi nối" */
+function dropAsk(){if(!C.k||STATE==="busy")return;
+ kitConfirm({title:"Xóa hẳn sổ trên mây?",lines:["Sổ trên máy này vẫn còn.","Các máy khác nối bằng ám hiệu này sẽ không còn sổ để nối. Sổ trên mây xóa rồi không lấy lại được."],yes:"Xóa hẳn",no:"Thôi",onYes:dropGo});
+ /* on the title the pop-up must sit at the title menu's layer (z 55) like every title sub-panel, or #title covers it */
+ const m=Q[0];if(m&&!/kptitle/.test(m.cls||"")){m.cls=((m.cls||"")+" kptitle").trim();showModal()}}
+async function dropGo(){const k=C.k;if(!k)return;STATE="busy";wire();const r=await api("drop",{k});STATE="";
+ if(r.s===200||r.s===404){C={};saveC();MSG="";ASK=0;wire();back();
+  try{kitModal({kind:"notice",title:"Đã xóa sổ trên mây",sections:[{h:"",html:"<p>Sổ trên máy này vẫn còn.</p>"}],btn:"Đã hiểu"})}catch(e){}return}
+ MSG=r.s===0?ERR.net:r.s===429?ERR.slow:ERR.srv;wire();redraw()}
 async function vers(){VERS=null;MSG="";open("vers");const r=await api("list",{k:C.k});if(r.s===200)VERS=r.j;else MSG=r.s===0?ERR.net:ERR.srv;redraw()}
 $("modal").addEventListener("click",async e=>{const b=e.target.closest("button[data-cl]");if(!b||b.disabled)return;e.stopPropagation();
  try{if(typeof sfx==="function")sfx("sfx-tap")}catch(x){}
@@ -190,6 +200,7 @@ $("modal").addEventListener("click",async e=>{const b=e.target.closest("button[d
  if(a==="copy")return copy(group(C.k),b,"Đã chép ám hiệu");
  if(a==="share"){if(navigator.share)navigator.share({title:"Cung Tường Mộng · Sổ mây",text:"Ám hiệu sổ mây: "+group(C.k)}).catch(()=>{});else copy(group(C.k),b,"Đã chép ám hiệu, dán sang máy kia");return}
  if(a==="unlink"){if(!ASK){ASK=1;redraw();return}ASK=0;C={};saveC();back();return}
+ if(a==="drop")return dropAsk();
  if(a==="now"){await sync();return}
  if(a==="pick"){PICK={};MSG="";return open("pick")}
  if(a==="keep"){PICK[+b.dataset.n]=b.dataset.v;const P=C.pend;if(P&&P.slots.every(n=>PICK[n])){MSG="Đang giữ bản đã chọn…";redraw();await resolve(PICK);PICK={};

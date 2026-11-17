@@ -22,7 +22,7 @@ const sleep=t=>new Promise(r=>setTimeout(r,t));const WEEKS=+(WK||4);
   const st=await p.evaluate(()=>{try{
    const bk=document.querySelector('#dawn.kbkdawn:not([hidden]) .kbk');if(bk)return 'book';
    if(S.dead)return 'dead';
-   if(Q.length){const m=Q[0];if(m.opts&&m.opts.length){const ok=m.opts.map((o,i)=>i).filter(i=>{const c=m.opts[i];return !(c.fx&&c.fx.bac&&S.bac+c.fx.bac<0)});const i=ok.length?ok[Math.floor(Math.random()*ok.length)]:0;try{chooseM(i)}catch(e){Q.shift();showModal()}}else{try{closeModal()}catch(e){Q.shift();showModal()}}return 'q'}
+   if(Q.length){const m=Q[0];if(m.opts&&m.opts.length){const ok=m.opts.map((o,i)=>i).filter(i=>{const c=m.opts[i];return !c.off&&!(c.fx&&c.fx.bac&&S.bac+c.fx.bac<0)});const i=ok.length?ok[Math.floor(Math.random()*ok.length)]:0;try{chooseM(i)}catch(e){Q.shift();showModal()}}else{try{closeModal()}catch(e){Q.shift();showModal()}}return 'q'}
    if(S.mg){try{S.mg=null;render()}catch(e){}return 'mg'}
    const can_=deck.map((a,i)=>i).filter(i=>{const a=deck[i];return a&&!a.done&&!(a.b!=null&&(S.buoi||0)!==a.b)&&can(cardCost(a))&&canPay(a)});
    const r=Math.random();
