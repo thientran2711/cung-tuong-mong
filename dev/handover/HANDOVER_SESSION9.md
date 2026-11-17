@@ -828,3 +828,4 @@ LESSONS s36: owner wants ONE complete reviewed proposal, never item-by-item ques
 - (17/11 20:27Z) s37 WITHDREW the xa xỉ→words order (wrong: per-item numbers are owner-ruled OD L1365/L1382/17/11 15:45Z); r2 = painted-cabinet re-map + kit lux parts only. Lesson: run prio1.sh before every order, even small ones.
 - (17/11 22:00Z) OWNER: no code-drawn picture anywhere (OD 22:00Z) — C audit + paint for care minigames ordered; main kit swaps art in when URLs arrive.
 - (17/11 22:05Z) OWNER: up to 5 items per display group (OD 22:05Z) → C-AG shelf + C cabinet + main kit display-room slots (5 per compartment).
+- (17/11 20:34Z) C-AG #5 rolled over → C-AG #6 = session_01UV1SzjqdQPh2K9YUVK9VhU (depth 6: no child foreman; at its rollover s37 opens a ROOT C-AG or owner does). #5 archived. Batch s36a 4c8568f5 gates running (ETA ~21:15Z; jdisp gated on BAL.shelf.ui=0).
