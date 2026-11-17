@@ -25,6 +25,10 @@ const tag=SZ.replace('@','_');
   setTimeout(()=>{Q.length=0;const m=document.getElementById('modal');if(m)m.hidden=true},50);render()});
  await require('./lib/roulette').dismissRoulette(p);
  await p.waitForTimeout(1500);
+ /* main since 11/15: a new life opens the Luân hồi roulette (#kroul) and the identity card (NLP) — skip both like rank-e2e does */
+ await p.evaluate(()=>{try{if(typeof NLP!=='undefined'&&NLP)nlAccept(false)}catch(e){}});
+ for(let i=0;i<8;i++){await p.waitForTimeout(300);await p.evaluate(()=>{const k=document.querySelector('#kroul .krskip');if(k)k.click();try{if(typeof NLP!=='undefined'&&NLP)nlAccept(false)}catch(e){}})}
+ await p.evaluate(()=>{const r=document.getElementById('kroul');if(r)r.remove();Q.length=0;const m=document.getElementById('modal');if(m)m.hidden=true;render()});await p.waitForTimeout(300);
  /* 1: she wins */
  await p.evaluate(()=>{Object.assign(S.arts,{cam:5,ky:5,thi:5,hoa:5,vu:5,y:5});S.tai=95;const R=liveRivals(true).slice(0,3);R.forEach(v=>{v.tai=20;Object.keys(v.arts||{}).forEach(k=>v.arts[k]=0)});
   startContest({art:'tho',title:'Hội Thượng nguyên',rivals:R,prep:20,stakes:{win:{sung:8,danh:3},top3:{danh:1},last:{danh:-1},paid:{suc:-6}},onDone:r=>window.__res=r})});
@@ -42,7 +46,7 @@ const tag=SZ.replace('@','_');
  await p.evaluate(()=>{S.tai=5;Object.keys(S.arts).forEach(k=>S.arts[k]=0);const R=liveRivals(true).slice(0,4);R.forEach(v=>{v.tai=95;v.arts.thi=5;v.arts.cam=5});R[1].tai=200;window.__unk=R[1];window.kitKnown=x=>x!==window.__unk;
   startContest({art:'doi',title:'Thi câu đối',rivals:R,prep:0,onDone:r=>window.__res=r})});
  await p.waitForTimeout(400);await p.locator('#kg82skip').tap();await p.waitForTimeout(600);
- await p.locator('.kpod-stage').tap();await p.waitForTimeout(300);checks.push(await check('lose-4th-stranger'));
+ await p.locator('.kpod-stage').tap({force:true});await p.waitForTimeout(300);checks.push(await check('lose-4th-stranger'));
  await p.screenshot({path:`${OUT}/5-lose-stranger-${tag}.png`});
  await p.locator('.kpod-next').tap();await p.waitForTimeout(300);await require('./lib/roulette').closeResult(p);await p.waitForTimeout(300);
  await p.evaluate(()=>{delete window.kitKnown;window.kitKnown=()=>true});
