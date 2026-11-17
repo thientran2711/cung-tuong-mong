@@ -17,6 +17,8 @@ Push helper /home/user/wt/push.sh (commits dev/handover in /home/user/wt/c4).
 REQUEST to main (FOREMAN C ROOT-4 10:24Z): AG3 LIVE 7e264081. Reviewer follow-ups (not blocking, report review-npc-agent-ag3-r1.md): (A) AG3b — NPC maid tea/errand/feast deeds not in the ledger at place/khắc (owner's own OD 18:20Z example) → recommend as next AG item; (B) maid-life NPC consorts ill 15–18% of nights vs ~5% → audit srvMonth/srvEndTurn vs monthTick/endTurn; (D) "lòng 45" typed number → BAL. Say which C takes (C can run them after the s30 queue).
 
 FOREMAN C SESSION ROOT-5 = session_011xDdVSQvhH4vp7H6B7arST (opened by ROOT-4 ~10:25Z 17/11) · START_CTX ~7% (~70k of 1M; get_session reads 0, own estimate) → roll over at >= 32%, ceiling 60% · lineage depth 4/8 · own hourly wake (:32) below.
+- 10:50Z Lead #6 at 75% → C opened lead #7 session_011xDdVNkgEgTqsZJxUh9Xd8 (sonnet; handover BATCH_PLAN.md 'LEAD HANDOVER #6 -> #7'). Lead #6 stops when #7 confirms (not my child; lead #6 was opened by an earlier root).
+- 10:48Z C LOOKED W5d E10 a36 m50–m52 ×3 (9): all OK → upload → W5d halves complete. W4e CT12 (16: a36 ty2 m13–m26 + m02 saffron redo, ty3 m01–m02): all OK, re-cut m01-ty3 halo first. W6f a51 m37–m43 (21): 20 OK; m38-ty3 apricot vs ty1/ty2 gold → check vs live a36/a26 m38-ty3, redo to deep honey-gold if they are gold. Owed W6f: m29-ty3, m32-ty3, m35-ty1.
 - 10:42Z GREET-MEET (greeting name rule + AG-MEET, one job, expert check first) → opus worker session_011xDdVPQEBukEXYnUVs5fDo (review/greet-meet; brief briefs/greet-meet.md; claimed). Own wake trig_011Z7Ybzk4LQQ5P7KZQm2LvM (:32).
 - 10:35Z ROOT-5 took over; told lead #6, W4e, W5d, W6f that ROOT-5 is their foreman.
 
