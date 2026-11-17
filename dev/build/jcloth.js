@@ -13,9 +13,9 @@ Object.assign(BAL.looks,{xoc:{on:0,
  /* per level 1..3 (nhẹ / vừa / nặng), r3: counts of creases per body place (waist = fan out of the tie, belt = bunched above the sash, elbow = per arm,
     hem = bunched above the hem, drag = shoulder→waist diagonals), dep = band strength 0..1, sg = band half-width (px at a 900-px figure),
     dark = how much a full-strength band darkens (multiply), lite = ridge light (screen), warp = hem wave (% of figure width), skew = hem tilt, collar = lapel drift */
- lv:[null,{waist:3,belt:3,elbow:2,hem:3,drag:0,dep:.75,sg:2.8,dark:.3,lite:.26,warp:.8,skew:1.2,collar:1},{waist:5,belt:6,elbow:4,hem:9,drag:1,dep:.9,sg:3,dark:.38,lite:.32,warp:1.6,skew:2.6,collar:2.2},{waist:8,belt:9,elbow:6,hem:15,drag:2,dep:1,sg:3.2,dark:.46,lite:.4,warp:2.8,skew:4.5,collar:3.6}],
+ lv:[null,{waist:4,belt:4,elbow:3,hem:4,drag:0,dep:1,sg:4.2,dark:.62,lite:.16,warp:.8,skew:1.2,collar:1},{waist:6,belt:7,elbow:5,hem:9,drag:1,dep:1,sg:4.4,dark:.62,lite:.2,warp:1.6,skew:2.6,collar:2.2},{waist:9,belt:10,elbow:7,hem:15,drag:2,dep:1,sg:4.6,dark:.74,lite:.24,warp:2.8,skew:4.5,collar:3.6}],
  /* body anchors as a share of the figure box (waist tie row, elbow bend, shoulder), ridge = offset / width (in band widths) / strength of the lit edge, comp = brightness kept */
- body:{waist:.34,elbowX:.24,elbowY:.43,shoulder:.17},ridge:{off:1.1,w:.42,k:1,edge:.45},comp:.85,bunchK:3,
+ body:{waist:.34,elbowX:.24,elbowY:.43,shoulder:.17},ridge:{off:1.3,w:.55,k:.8,edge:.5},comp:.85,bunchK:3,
  seed:7,light:[-.55,-.8],skin:{de:15,lum:.32,min:.003,max:.02,fill:.25,asp:2.6},hair:{de:26,reach:.34},head:.012,item:60}});
 /* ---------- tiny deterministic noise ---------- */
 function clothHash(x,y,s){let h=(x*374761393+y*668265263+s*2147483647)|0;h=(h^(h>>>13))*1274126177|0;return((h^(h>>>16))>>>0)/4294967295}
@@ -101,7 +101,7 @@ function clothField(W,H,mk,L,seed){const n=W*H,dk=new Float32Array(n),lt=new Flo
   bunch(sp[0]+(.12+R()*.76)*(sp[1]-sp[0]),y,J()*.3,Math.min(per,L.hem-q*per),fw*.15,gp*1.1,S,D)}
  /* 5. drag lines: long, faint, straight diagonals from the shoulder down toward the waist knot */
  for(let q=0;q<L.drag;q++){const sd=q%2?1:-1,sx=cx+sd*fw*(.27+R()*.05),sy=mk.y0+fh*(B.body.shoulder+.04+R()*.03),tx=cx-sd*fw*.06,ty=waist+fh*.02,ang=Math.atan2(ty-sy,tx-sx);
-  stroke(sx,sy,ang,Math.hypot(tx-sx,ty-sy)*.85,S*1.15,D*.55)}
+  stroke(sx,sy,ang,Math.hypot(tx-sx,ty-sy)*.85,S*.75,D*.32)}
  return{dk,lt}}
 /* ---------- the effect: one call = baked ImageData ---------- */
 function clothXocBake(d,W,H,lv,opt){opt=opt||{};const B=BAL.looks.xoc,L=B.lv[cl(lv|0,1,3)],n=W*H,seed=opt.seed==null?B.seed:opt.seed;
@@ -114,7 +114,7 @@ function clothXocBake(d,W,H,lv,opt){opt=opt||{};const B=BAL.looks.xoc,L=B.lv[cl(
  for(let i=0;i<n;i++){const k=m[i];if(k<.01)continue;const r=d[i*4],g=d[i*4+1],b=d[i*4+2],lum=(r*.3+g*.59+b*.11)/255,mx=Math.max(r,g,b,1);
   const a=dk[i]*L.dark*(.75+.35*lum),li=lt[i]*L.lite*(1-lum*.5);
   for(let c=0;c<3;c++){const v=c===0?r:c===1?g:b,sat=v/mx;/* the channel's share of the colour: dominant channels darken less -> own hue, a bit richer */
-   const sh=v*v/255;let o=(v+(sh-v)*Math.min(1,a*2.6))*(1-a*.35*(1.2-.4*sat))*(1+comp);/* shadow = the colour multiplied by itself (richer own hue, never grey), then a little darker */o=o+(255-o)*li;cloth[i*4+c]=Math.max(0,Math.min(255,o))*k}cloth[i*4+3]=k}
+   const sh=v*v/255;let o=(v+(sh-v)*Math.min(.8,a*2))*(1-a*.3*(1.2-.4*sat))*(1+comp);/* shadow = the colour multiplied by itself (richer own hue, never grey), then a little darker */o=o+(255-o)*li;cloth[i*4+c]=Math.max(0,Math.min(255,o))*k}cloth[i*4+3]=k}
  /* (c) warp ONLY the hem and the collar / lapel edge (uneven hem, askew collar); never hands, face, hair, pendants (protect map) */
  const hem0=mk.y1-fh*.12,col0=mk.y0+fh*.1,col1=mk.y0+fh*.24,hw=L.warp/100*fw,sk=L.skew/100*fw,cw=L.collar/100*fw,out=new Uint8ClampedArray(d.length);
  const dxo=new Float32Array(n),dyo=new Float32Array(n);
