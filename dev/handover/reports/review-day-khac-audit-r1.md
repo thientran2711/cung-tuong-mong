@@ -53,3 +53,47 @@ Successor: write your verdict under this heading ("§ ROUND 2") and send PASS/FA
 - coop-e2e AFTER the 03a776e4 merge, branch and live (`python3 dev/build/assemble.py && node dev/test/coop-e2e.js <out>` in each worktree); round 1 both 63/63.
 - Shots: Fold + iPad, wait ~7 s for the CDN map art (at 1.8 s the map is blank on BOTH builds — not a bug). Shots to scratch only, never git/CDN.
 - C-AG list: ag-all-2 was at 0ea08935 in round 1; re-check the head and the added rows jagday.js:221/278, jagent.js:186.
+
+## § ROUND 2 — successor reviewer session_01964izEHVzU6h14EnvhUm8C (17/11 ~19:30Z)
+PRIORITY #1 CHECK ('j76left|dayFit|accSpillOk|day-khắc'): OD L852, L886, L1473 + OD tail '(17/11 ~16:45Z real' | main j76.js (j76left :17, dayFit :43) | review/day-khac-audit 9e7ddc14 (round 2 target), review/day-khac-audit-r1 319df260 (r1 FAIL 3) | claims day-khac rows (D)
+
+START_CTX ≈ 12 % of the window (estimate; tool-heavy session prompt). Read in full: START_CORE, START_WORKER, START_REVIEWER, topic/time-calendar, the brief, this file (r1 + handover), worker report § ROUND 2, OD L852/L886/L1473 + the 16:45Z tail.
+Reviewed review/day-khac-audit @ 9e7ddc14 (already held origin/main 03a776e4). origin/main moved to **c114ab9e** (origin-bd + coop-b1-regress) during the review → merged into review/day-khac-audit-r1: only sw.js/index.html conflicted (theirs + build_site.sh); no time-core file touched by that merge. **review/day-khac-audit-r1 @ 46900ee2bd46fc3b15c773c1bb2231e83de3a124**, FF from live main. No code change by the reviewer.
+
+### The 3 r1 FAIL items — re-checked
+1. **Court walks on spill — FIXED (whole accState.why family).** j77 accState now returns `spill` for a walk that only spills; every reader checked: jgift courtMeet emp/th (accSpillOk → open, tap → walkGo = goTo or the spill walk), j41 accSpot/list (accSpillOk), j77Tap/j77Card ("Đi (đến nơi vào buổi sau)"), jgift:232 askWhy (dayFit), jkitpage:142 (skips spill places), accAsk → j77In (walkSpillGo when it spills). My runtime probe (below): at sáng and chiều with 1 left, "Đến <nơi> gặp ngài" is open for tn/r2/r3/r5 (+ vuon/tyv/cnh at sáng) with chip "✓ 2 khắc (sang buổi tối/trưa)"; red only when closed on arrival, with the reason (vuon/tyv "đến nơi đã sang buổi tối — đóng cửa tối", cnh "— đêm chỉ cung nhân ra vào", kn at sáng "— cung Hoàng hậu: ngoài giờ thỉnh an phải được mời"). Live shows the 9 + 18 spill-greyed court buttons; branch 0.
+2. **dayFit typed 4 — FIXED.** j76.js:43 `used+n<=BAL.time.khac||j76spills(n)`; guard ALLOW holds only j76 khongkip:3 (sáng-only thỉnh an / a.b cards); guard row 13 changes BAL.time.khac at runtime and dayFit follows.
+3. **Ask/sneak/lead words — FIXED.** j77When(n): "buổi này" when it fits, " (đến nơi vào <buổi>)" when it spills (j76arrive). Probe: "Lẻn vào … thành: vào được (đến nơi vào buổi tối)", "Xin bái kiến … được vào (đến nơi vào buổi trưa)"; ask result card/log say the same.
+
+### Own fresh scan (static, 312 built modules from assemble.py)
+grep `used±N <=/</>/>= 4|BAL.time.khac`, `4-used`, `BAL.time.khac-used`, `J95.KH`, `kịp`, `buổi này`: every hit classified —
+- time gates: j1 can (base, wrapped by j76:52 day can), j9 walkOk/walkWhy (walk fits THIS buổi = the plain-walk test; every spill path goes through walkSpill/walkLate), j15 whyTime (wrapped j76:68–69 → day words), j72:176 (after day can()), j76 core (j76need/dayFit/j76spills/j76arrive), j77 j77WalkWhy/j77When/j77Tap:86 (last-walk card), j77:157–160 accEtqCard (spill option offered, dayFit for greet), j77:210 lead (dayFit), jclose:21 greet (dayFit), jmen:182 / jtsb:34 (spill via j76spills) — all day-based.
+- labels only (not gates): j9:86, j27:69, j42/jkc/jkc2 header, jk3:96 dots, jplace:18 "Còn N khắc", j63/j79/jclose kaTimeNeeds `left` (chip = j76need).
+- jmen:111 menNtCard `left>=1` for a 1-khắc ask: can only be 0 when the buổi is spent/carried = same as can(1) → true.
+- j76:83 "không kịp xong trong buổi sáng" = thỉnh an Hoàng hậu / Thái hậu, sáng-only by nature (OD L852 (b)) — justified.
+- J95.KH loops (j95, j95c, jagent, jgreet) = NPC record rows → C-AG (below).
+Nothing left for this branch.
+
+### Runtime probe (my own, not the guard): sáng / chiều / tối with 1 khắc left
+Every tab (act, go map+list, staff, inv, rv, court, rel, fac, kid, art, story, home) rendered, every disabled button collected; courtMeet('emp') with the Emperor at EVERY place + courtMeet('th'); j77Tap(k) for every place (also through the kpm palace sub-map, __kpmGo — r2/r3/r5 open the palace sub-map first; tapping in → "Đi (đến nơi vào buổi sau)" at 1 left, "Bái kiến … rồi vào 3 khắc" at 2 left = spills); visit/see buttons of 12 consorts.
+- branch: no button is greyed by a spill. Remaining time reds: tối "hết khắc trong ngày (cần N, còn 1)" (day words, correct); sáng "không kịp xong trong buổi sáng" only on the 2 thỉnh an cards (justified); "Buổi sáng/tối (đang …)" = buổi-tied cards; "chỉ họp buổi tối hạ tuần"; court "đã tối" (night). Person "Đến cung nàng thăm" open at chiều 1 left (2–3 khắc).
+- live 03a776e4: 18+18 "Sang Đức Thọ cung thỉnh an" + 10 "Đến … gặp ngài" greyed by "đi 2 khắc, đến nơi đã sang buổi …", + 2 "không kịp xong trong buổi tối".
+- time-spill-guard: branch **PASS** (static + 77 runtime); live **FAIL 50** — matches the worker's claim.
+
+### Gates (9e7ddc14, then re-run on the merge 46900ee2)
+- quickcheck.sh on 9e7ddc14: **PASS** · core gates PASS (one-core-guard 0 fails, rules-one-source, kit-conform, coop one-world) · time-spill guard PASS · old save from live loads + plays a buổi · perf median of 3: render 191/200, tab 297/279, buổi 921/973 ms.
+- quickcheck.sh on 46900ee2: **PASS** · core gates PASS (one-core 0) · time-spill guard PASS · old save loads · render 152/155, tab 279/277, buổi 676/794 ms; my probe re-run on the merge: 0 buttons greyed by a spill
+- PERF seeded deterministic A/B (my script: seeded RNG, consort life __forceOrigin='thd', iPad 1180x820, CPU ×4, 8 × nextBuoi() with a synchronous modal drain, same 543 modals both builds, 8 interleaved pairs): **median live 4546 / branch 4533 ms (−0.3 %)**. No regression.
+- coop-e2e: branch 9e7ddc14 63/63, live 03a776e4 63/63; merged 46900ee2: 63/63. No co-op code touched.
+- Shots (scratch only, never git/CDN; deleted): Fold 755x1000@2 + iPad 1180x820@2, buổi chiều 1 left. iPad Dư đồ list: Đức Thọ cung plain "2 khắc", Ngự hoa viên + Thái y viện grey "đến nơi đã sang buổi tối — đóng cửa tối", Cần Chính / Dưỡng Hòa / Càn Ninh with ask/sneak "3 khắc"; no overlap, nothing cut, no horizontal overflow, 0 page errors. Court card (DOM read, both sizes): "Đến Khải Tường cung gặp ngài · Cần ✓ 2 khắc (sang buổi tối) · đến Khải Tường cung vào buổi tối, gặp ngài nếu ngài còn ngự ở đó" enabled.
+  FOR MAIN (not this branch, same on live): in my harness the Fold Dư đồ MAP view stayed blank after 7 s on BOTH builds (29 spots in the DOM, art 18/37 loaded), and the Fold map title "Ngọc Thanh các · 2 bóng" sits under the −/+ zoom buttons on both builds — worth a kit-layout look by the map owner.
+
+### C-AG list (review/ag-all-2, NOT edited)
+Head is now **7220585** (lines moved: jagday 221→223, 278→280; jagent 186→193). Those first-buổi loops still stop at J95.KH, but the spilled part is now checked AND painted at the next buổi by agSpill (jagday.js:370–373: same day, very next buổi only; clash with tryst/meet/not-free/bound → no spill) → r1's added rows are covered by design. Still for C-AG: drop the unbuilt dumps (all40*.js, all41–43.js, all_asm*.js) from dev/build.
+
+### Notes (not FAIL, outside this rule)
+- j77 accEtqCard spill option text still starts with the odds word "Chắc chắn" (j77:157/159/160) — belongs to the OD 17/11 ~17:00Z "no Chắc chắn" odds audit, not day-khắc.
+- jk3:96 / j95 `[0,1,2,3]` row shapes and accLeadCost() typed 15 (one-core cleanup, r1/worker notes).
+- quickcheck buổiMs remains noise (seeded A/B is the measure).
+
+PASS 46900ee2bd46fc3b15c773c1bb2231e83de3a124
