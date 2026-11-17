@@ -601,3 +601,4 @@
 | toil-looks (same worker): vừa = light đẹp layer, new soft vụng, samples → owner first | review/toil-looks | main s29 | session_01UV1SzhkR4i2bVXfUL54aTE | RUNNING | 17/11 04:09Z |
 | app-edge review r1 (sonnet; whole-app canvas width) of 5a842f58 | review/app-edge-r1 | main s29 | session_01UV1Szi6Up9sVYdCYyMqqwW | RUNNING | 17/11 04:09Z |
 | map-full review r1 (sonnet UI; + trial-merge with review/app-edge) of 44f65e81 (worker archived; app-edge worker archived too) | review/map-full-r1 | main s29 | session_01UV1Szipn2t9xXY2WubCJ1T | RUNNING | 17/11 04:10Z |
+| coop-thin-a LIVE: main = 64c39ca28 (FF from bad6d59f9; alone); co-op Worker ctm-coop DEPLOYED new version 3a62e10c-49b5-4e94-802f-8518fc75af3a (rollback: wrangler rollback f7d52a7d-a2d5-4a4a-95a2-84499cc53b3b); coop-e2e vs LIVE after deploy 60/60 | main | main s29 | session_01UV1SzkcNCwgZaSP59sonVH | LIVE | 17/11 04:14Z |
