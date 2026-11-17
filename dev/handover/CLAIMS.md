@@ -785,3 +785,5 @@
 | coop-thin part C worker #2 (successor at 72d7768c; opus; brief briefs/coop-thin-c-2.md) | review/coop-thin-c | B | session_01N1tNP6EZvNuroq8VSupxw7 | RUNNING | 17/11 14:03Z |
 | person-leftcol-r1 PASS e06e38a1 → builder batch s32a; worker #3 + reviewer archived | review/person-leftcol-r1 | MAIN s32 | session_01UV1SzhfMi68Cmn88G2Yqze | PASS → BATCH | 17/11 14:08Z |
 | tuanluc-sync-r1 PASS 4156a49d0 (TA TUẦN QUA chips + 42 numbers removed) → builder batch s32a; reviewer archived | review/tuanluc-sync-r1 | MAIN s32 | session_01UV1SzhfMi68Cmn88G2Yqze | PASS → BATCH | 17/11 14:13Z |
+| REVIEW world-events r1 (opus BIG) of 34520347 | review/world-events-r1 | C-AG | session_01UV1SzghsExH1c11ENnDH6Q | RUNNING | 17/11 14:22Z |
+| WORLD EVENTS part 2 — 18 events of world-events-2.md (opus) | review/world-events-2 | C-AG | session_01UV1Szm9sHk4A9qggdUgHhF | RUNNING | 17/11 14:22Z |
