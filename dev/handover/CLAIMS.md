@@ -876,7 +876,7 @@
 | REVIEW weather-khac r1 (opus BIG) of e1d540cf | review/weather-khac-r1 | C-AG | session_01UV1Szhk5EGru6rSkDekM6s | RUNNING | 17/11 17:10Z |
 | REVIEW learn-scene-fix-2 r1 of 8c30a85d (opus BIG; brief briefs/s34-review-learn-scene-fix-2.md) | review/learn-scene-fix-2-r1 | MAIN s34 | session_01UV1SziXvWUAbjGtoEq234J | DONE PASS f8ac2f08 | 17/11 17:12Z |
 | day-khac-audit review r1 (opus BIG) of 4408ef0a | review/day-khac-audit-r1 | D | session_01964izE2ap49KwCk9DAQtjP | DONE FAIL 3 @319df260 (reviewer kept idle for r2) | 17/11 17:12Z |
-| REVIEW looks-2 040ce3440 (opus BIG; brief briefs/review-looks-2.md) | review/looks-2-r1 | B | session_01N1tNP4D3L5wFB1qrZAfoHp | RUNNING | 17/11 17:20Z |
+| REVIEW looks-2 040ce3440 (opus BIG; brief briefs/review-looks-2.md) | review/looks-2-r1 | B | session_01N1tNP4D3L5wFB1qrZAfoHp | FAIL part 1 (1 item: a harm mark put on the co-op friend by a real act (tea/ink/slap…) never reaches her; repro dev/test/coop-looks-act.js 20/21 on review/looks-2-r1 4d9fcd648; report reports/review-looks-2.md) | 17/11 18:05Z |
 | kit-figure-mood: mood seal beside the head of every interactable full-body figure (OD 17:40Z (2)) (sonnet; brief briefs/s34-kit-figure-mood.md) | review/kit-figure-mood | MAIN s34 | session_01UV1SzjLSjT2E1w24wsPwS5 (kit-figure-mood worker) | READY | 17/11 17:40Z |
 | WEATHER-KHAC-2 delta: every j12 kind per khắc + levels + world effects (opus; owner OD L1665 ~17:40Z (3); main s34) | review/weather-khac | C-AG | session_01UV1SzhyGUZ4FTxi1y3XNvr | RUNNING | 17/11 17:18Z |
 | face-w404 fix round 2 (sonnet; CDN prefix vs index key; seeded same-face proof) | review/face-w404 | D | session_01964izEN55ZZFTgoSkJ3BVj | DONE SẴN SÀNG KIỂM c81fd72c (archived) → r1 reviewer re-reviews | 17/11 17:22Z |
