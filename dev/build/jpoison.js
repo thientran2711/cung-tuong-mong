@@ -36,9 +36,9 @@ const PGX={hacdinh:{n:"Hạc đỉnh hồng",won:"nàng Sức -120 · nàng thư
  phanhuy:{n:"Phấn hủy nhan",won:"nàng Sắc -8 vì nổi mẩn",duc:5},xahuong:{n:"Xạ hương",won:"nàng sảy thai · nàng Sức -25",duc:10,preg:1},meduoc:{n:"Mê dược",won:"nàng Sức -10 · nàng không được lật thẻ một tuần",duc:3}};
 /* food, drink, sachets: handmade dishes / sachets, and every bought or stipend good of those kinds (jstip tea, snacks, wine; j8 tonics; túi thơm) */
 const PGX_FOOD=["yensao","nhansam","agiao","tuithom"],PGX_KD=["Thuốc bổ","Trà","Điểm tâm","Rượu"];
-function pgFood(e){return !!e&&!e.h&&(e.wk?["mon","huong"].includes(e.wk.kind):PGX_FOOD.includes(e.k)||!!(IT[e.k]&&PGX_KD.includes(IT[e.k].kd)))}
+function pgFood(e){return !!e&&!e.h&&(e.wk?["mon","huong"].includes(e.wk.kind):PGX_FOOD.includes(e.k)||!!(IT[e.k]&&PGX_KD.includes(itm(e.k).kd)))}
 function pgHeld(a){return Object.keys(PGX).filter(k=>(a.inv||[]).some(e=>e&&e.k===k&&!e.h))}
-function pgGrade(e){return e&&e.wk?(e.wk.ti|0):e&&IT[e.k]?Math.min(3,Math.floor((IT[e.k].pr||0)/25)):0}
+function pgGrade(e){return e&&e.wk?(e.wk.ti|0):e&&IT[e.k]?Math.min(3,Math.floor((itm(e.k).pr||0)/25)):0}
 function pgNm(p,cap){return p===S?(cap?"Ngươi":"ngươi"):p.name}
 /* the target's guard: [label, points] lowering the odds (hidden facts stay without numbers) */
 function pgGuard(t){const L=[];const v=Math.round(oSee(t,true)/3);L.push([`${pgNm(t,1)} cảnh giác`,-v]);if(t.doctor)L.push([`Thái y tâm phúc của ${pgNm(t)}`,-BAL.pg.doctor]);
@@ -48,7 +48,7 @@ function pgGuard(t){const L=[];const v=Math.round(oSee(t,true)/3);L.push([`${pgN
 function pgOdds(a,t,e){const G=pgGuard(t);const tr=Math.round((rel(t,a)||0)/4),tc=Math.round((a.tamco||0)/4),gr=pgGrade(e)*BAL.pg.grade;
  const raw=BAL.pg.base+tc+tr+gr+G.reduce((s,x)=>s+x[1],0);const o=cl(Math.round(odA(a,raw)),3,92);
  const F=[[`Tâm cơ ${pgNm(a)} ${a.tamco|0}`,tc],[`${pgNm(t,1)} ${tr>=0?"tin":"ngờ"} ${pgNm(a)}`,tr],
-  [e&&e.wk?`Món ${WTIER[e.wk.ti|0]} che vị`:`${e&&IT[e.k]?IT[e.k].n:"Món"} che vị`,gr]].concat(G);if((a.suc||0)<30)F.push([`Sức ${pgNm(a)} dưới 30`,-15]);
+  [e&&e.wk?`Món ${WTIER[e.wk.ti|0]} che vị`:`${e&&IT[e.k]?itm(e.k).n:"Món"} che vị`,gr]].concat(G);if((a.suc||0)<30)F.push([`Sức ${pgNm(a)} dưới 30`,-15]);
  const cp=cl(oSee(t,true)-4*(facN(a)-1),5,95);return{o,F,cp}}
 function pgEffect(a,t,pk){const nm=t===S?"Ngươi":`${rkName(t)} ${t.name}`;
  if(pk==="hacdinh"){if(t===S){die("Trúng độc, không qua khỏi");return `<span class="r">Ngươi trúng độc.</span> `}ap(t,{suc:-120});try{dieIf(t,"Trúng độc, không qua khỏi")}catch(e){}return `<span class="r">${nm} trúng độc nặng.</span> `}
@@ -58,7 +58,7 @@ function pgEffect(a,t,pk){const nm=t===S?"Ngươi":`${rkName(t)} ${t.name}`;
  if(pk==="meduoc"){ap(t,{suc:-10});t.block=Math.max(t.block||0,1);return `${nm} ngủ li bì cả ngày, lỡ thẻ bài tuần này (Sức -10). `}return""}
 /* the one act: same function for her and every NPC */
 function pgGive(a,t,ix,pk){const e=a.inv[ix];if(!e||!pgFood(e)||!PGX[pk])return"";const pi=a.inv.findIndex(x=>x&&x.k===pk&&!x.h);if(pi<0)return"";
- const by=a===S?"Ngươi":`${rkName(a)} ${a.name}`,dn=e.wk?e.wk.n:IT[e.k].n;const O=pgOdds(a,t,e);
+ const by=a===S?"Ngươi":`${rkName(a)} ${a.name}`,dn=e.wk?e.wk.n:itm(e.k).n;const O=pgOdds(a,t,e);
  a.inv.splice(Math.max(ix,pi),1);a.inv.splice(Math.min(ix,pi),1);a.schemes=(a.schemes||0)+1;if(typeof ducAdd==="function")ducAdd(a,-PGX[pk].duc,"bỏ độc vào quà");else ap(a,{duc:-PGX[pk].duc});
  if(t===S){pushDil(mkP("pgin",{f:key(a),dn,pk,o:O.o,e:Object.assign({},e)}),"Quà tặng");return ""}
  if(roll(O.o)){const r=pgEffect(a,t,pk);if(a!==S)try{newsAdd(t,"poison",`${rkName(t)} ${t.name} lâm bệnh lạ sau khi dùng quà.`)}catch(x){}return `${by} sai người mang ${dn} sang tặng ${rkName(t)} ${t.name}. ${r}`}
@@ -68,7 +68,7 @@ function pgGive(a,t,ix,pk){const e=a.inv[ix];if(!e||!pgFood(e)||!PGX[pk])return"
 /* her card: target × poison — kit options with the real odds word, full numbers, Vì sao (option.why) */
 function pgLine(t,pk,X){const P=PGX[pk];const q=queenP();const hh=q&&q!==t&&q!==S?` · Hoàng hậu nắm thêm ${BAL.pg.hhEv} chứng cứ của ngươi`:"";
  return `${word(X.o)} · tốn: 2 khắc, ${P.n} -1, Đức -${P.duc} · thành: ${P.won} · hỏng: ${t.name} với ngươi -6 vì nhận ra vị lạ · kèm: hỏng mà bị lần ra (khả năng ${chanceLo(X.cp)}): nàng nắm 2 chứng cứ của ngươi${hh}`}
-PEND.pgpick=p=>{const e=S.inv[p.ix];if(!e||!pgFood(e))return null;const dn=e.wk?e.wk.n:IT[e.k].n;const O=[];
+PEND.pgpick=p=>{const e=S.inv[p.ix];if(!e||!pgFood(e))return null;const dn=e.wk?e.wk.n:itm(e.k).n;const O=[];
  for(const t of liveRivals(true)){if(t.out)continue;for(const pk of pgHeld(S)){const P=PGX[pk];if(P.preg&&!(t.preg&&!t.hidden))continue;const X=pgOdds(S,t,e);
   O.push({n:`${P.n} vào ${dn} tặng ${rkName(t)} ${t.name}`,fx:{},x:pgLine(t,pk,X),o:X.o,base:BAL.pg.base,why:()=>pgOdds(S,t,e).F,
    go:()=>{spend(2);const i=S.inv.indexOf(e);const r=pgGive(S,t,i,pk);if(r)log(r)}})}}
@@ -112,7 +112,7 @@ function gfSincere(a,w,r){const made=w.by===key(a)||(a===S&&w.bn==="ngươi");co
  (made?have:miss).push(made?`tự tay làm cho ${who}`:"đồ tự tay làm");
  (fr?have:miss).push(fr?`hợp ý ${who}`:`làm đúng ý ${who}${r==="emp"?": món, hoa, nhạc ngài thích":r==="th"?": kinh, tranh, đồ thêu":(()=>{const k=wkBestArt(r);const A=k&&ARTS.find(x=>x.k===k);return A?`: nàng mê ${A.n}`:""})()}`);
  if(b>=need)have.push(`${lab} ${b} ≥ ${need}`);else miss.push(`${lab} từ ${need}, nay ${b}`);if(asked)miss.push(`đợi ${BAL.gift.askW} tuần sau khi nhờ việc`);
- let tr=0;try{if(r==="emp"&&(has("nhantu")||has("datinh")))tr=1;else if(r&&typeof r==="object"&&traitsOf(r).some(x=>x==="Hiền lành"||x==="Nhu mì"))tr=1}catch(e){}
+ let tr=0;try{if(r==="emp"&&(has("nhantu")||has("datinh")))tr=1;else if(r&&typeof r==="object"&&traitsOf(r).some(x=>x==="Ân cần"||x==="Khiêm nhường"))tr=1}catch(e){}
  const txt=ok?`Chân tình: đủ — ${have.join(", ")}${tr?", tính người nhận thêm +1":""}`:`Chân tình: chưa đủ — cần ${miss.join(" và ")}`;return{ok,have,miss,tr,txt}}
 wkSincere=function(r){return r==="maid"};/* the old hidden trait check: off (the maid keeps j83's fixed bonus); wkEval below adds the visible one */
 (function(){const e0=wkEval;wkEval=function(a,w,r){const ev=e0.apply(this,arguments);try{if(!ev||!ev.ok||r==="maid")return ev;const s=gfSincere(a,w,r);

@@ -19,9 +19,9 @@ const VIRT_GL={"Hiếu":"hiếu thảo với bề trên","Đễ":"kính nhườn
  "Nghĩa":"trọng nghĩa, không bỏ người hoạn nạn","Liêm":"trong sạch, ghét đút lót","Sỉ":"biết liêm sỉ, ghét điều nhục","Nhân":"thương người",
  "Trí":"trọng người hiểu biết","Cần":"chăm chỉ","Kiệm":"tiết kiệm, ghét xa hoa","Khiêm":"khiêm nhường, ghét kiêu căng"};
 /* nết → the virtue they lean to / virtues they never hold */
-const TR_V={"Hiền lành":"Nhân","Hiếu thảo":"Hiếu","Trọng nghĩa":"Nghĩa","Thẳng thắn":"Tín","Kiêu ngạo":"Sỉ","Nhu mì":"Khiêm","Khéo léo":"Lễ","Cả nể":"Đễ","Đa nghi":"Trí","Tham vọng":"Trí","Mê tín":"Hiếu",
- trung:"Trung",nhat:"Cần",lanh:"Trí",nhantu:"Nhân",chamchinh:"Cần",trongtai:"Trí",hieuthao:"Hiếu",nongnay:"Trung",danghi:"Trung"};
-const TR_BAN={"Tham tiền":["Liêm","Kiệm"],"Kiêu ngạo":["Khiêm"],"Hiểm độc":["Nhân","Tín"],tham:["Liêm","Kiệm"],"Nhiều chuyện":["Tín"],chuyen:["Tín"]};
+/* pool nết lean (first trọng follows the Lòng dạ nết) and bans come from the ONE trait table BAL.net (jnet.js fills them); the Emperor keys stay here */
+const TR_V={nhantu:"Nhân",chamchinh:"Cần",trongtai:"Trí",hieuthao:"Hiếu",nongnay:"Trung",danghi:"Trung"};
+const TR_BAN={};
 /* deeds → virtue tags (+1 honours, -1 offends) */
 const DEED={greet:{"Hiếu":1,"Lễ":1},greetHH:{"Lễ":1,"Khiêm":1},snow:{"Hiếu":1,"Cần":1},
  "Hỏi han sức khỏe":{"Nhân":1,"Lễ":1},"Khen tài nghệ nàng":{"Lễ":1,"Tín":-1},"Bàn tán":{"Tín":-1,"Nghĩa":-1},"Chia sẻ bí mật":{"Tín":1},"Cảnh báo nàng":{"Trung":1,"Nghĩa":1},
@@ -30,29 +30,27 @@ const DEED={greet:{"Hiếu":1,"Lễ":1},greetHH:{"Lễ":1,"Khiêm":1},snow:{"Hi�
  bribeksp:{"Liêm":-1},gossip:{"Tín":-1},feign:{"Tín":-1},steal:{"Nghĩa":-1}};
 /* Thái hậu archetypes: trait (PERS) · trọng · greeting base · odds · repetition fade · ceiling · scolding · monthly neglect loss · rank weight */
 const TH_ARCH={
- tuai:{n:"Từ ái",trait:"Hiền lành",tr:["Nhân","Hiếu"],base:5,o:80,rep:.12,cap:58,scold:1,neg:0,rk:0},
- nghiem:{n:"Nghiêm khắc",trait:"Thẳng thắn",tr:["Lễ","Cần"],base:4,o:65,rep:.2,cap:48,scold:2,neg:3,rk:.04},
- danghi:{n:"Đa nghi",trait:"Đa nghi",tr:["Tín","Trung"],base:4,o:65,rep:.3,cap:45,scold:2,neg:2,rk:0},
+ tuai:{n:"Từ ái",trait:"Ân cần",tr:["Nhân","Hiếu"],base:5,o:80,rep:.12,cap:58,scold:1,neg:0,rk:0},
+ nghiem:{n:"Nghiêm khắc",trait:"Thật thà",tr:["Lễ","Cần"],base:4,o:65,rep:.2,cap:48,scold:2,neg:3,rk:.04},
+ danghi:{n:"Đa nghi",trait:"Kín đáo",tr:["Tín","Trung"],base:4,o:65,rep:.3,cap:45,scold:2,neg:2,rk:0},
  quyen:{n:"Quyền uy",trait:"Kiêu ngạo",tr:["Lễ","Trung"],base:4,o:70,rep:.15,cap:52,scold:1,neg:2,rk:.08},
  phat:{n:"Sùng Phật",trait:"Mê tín",tr:["Nhân","Kiệm"],base:4,o:75,rep:.1,cap:55,scold:1,neg:1,rk:0}};
-const TH_FROM={"Hiền lành":"tuai","Đa nghi":"danghi","Kiêu ngạo":"quyen","Hiếu thảo":"tuai"};
+const TH_FROM={"Ân cần":"tuai","Kín đáo":"danghi","Kiêu ngạo":"quyen","Vì gia tộc":"tuai"};
 /* per-life seed: the co-op room (both seats agree; thO is a world key) else her name (random per life) */
 function trLifeSeed(){try{if(window.COOPW&&COOPW.on&&typeof COOP==="object"&&COOP.state&&COOP.state.room)return "room:"+COOP.state.room}catch(e){}return "me:"+(S.name||"")+":"+((S.year||0)-Math.floor((S.turn||0)/12))}
 function trHash(s){let h=7;for(const c of String(s))h=(h*31+c.charCodeAt(0))>>>0;return h}
 function thArch(){S.thO=S.thO||{};const O=S.thO;if(!O.arch||!TH_ARCH[O.arch]){const k=Object.keys(TH_ARCH);
   /* during start() her name / Thái hậu age are not set yet: answer without fixing the archetype */
-  if(!S.name||!S.thAge)return TH_ARCH[TH_FROM[S.thTrait]||"tuai"];
-  O.arch=TH_FROM[S.thTrait]||k[trHash("th:"+(S.thAge||0)+":"+trLifeSeed())%k.length]}
+  if(!S.name||!S.thAge)return TH_ARCH[TH_FROM[BAL.net.old[S.thTrait]||S.thTrait]||"tuai"];
+  O.arch=TH_FROM[BAL.net.old[S.thTrait]||S.thTrait]||k[trHash("th:"+(S.thAge||0)+":"+trLifeSeed())%k.length]}
  const A=TH_ARCH[O.arch];S.thTrait=A.trait;return A}
 /* who is this? → S / "th" / Emperor / the consort object / the servant */
 function trRes(p){if(!p)return null;if(p===S||p==="me")return S;if(p==="th"||p===S.thO||(p.kind==="th"&&!p.name))return"th";if(p.kind==="th")return"th";
  if(p===S.emp||p.kind==="emp")return S.emp;if(typeof p.kind==="string"&&p.ref)return p.ref;if(p.kind==="maid"&&!p.name)return S.maid;return p}
 /* the player has a nết too (owner: "whatever they have, she has"); kept off .trait (figure art reads .trait) */
-const P_TR=["Hiền lành","Kiêu ngạo","Đa nghi","Tham vọng","Nhu mì","Thẳng thắn","Trọng nghĩa","Khéo léo"];
-(function(){const t0=traitsOf;traitsOf=function(p){try{if(p===S&&S)return[S.pTr||(S.pTr=P_TR[trHash("me:"+(S.name||""))%P_TR.length])];
- if(p&&(p==="th"||p.kind==="th"))return[thArch().trait]}catch(e){}return t0.apply(this,arguments)}})();
-/* co-op friend (id/sid 901/902, .coop): her seat's nết is P_TR[hash("me:"+name)] (S.pTr), so both seats compute the same trọng (reviewer r1) */
-function trTraits(p){if(p&&p.coop&&p!==S)return[P_TR[trHash("me:"+(p.name||""))%P_TR.length]];if(p===S.emp)return S.emp.traits||[];if(p&&p.tr&&!p.trait)return[p.tr,p.tr2].filter(Boolean);return traitsOf(p)}
+(function(){const t0=traitsOf;traitsOf=function(p){try{if(p&&(p==="th"||p.kind==="th"))return[thArch().trait]}catch(e){}return t0.apply(this,arguments)}})();
+/* trọng reads the same ONE pool as everything else (jnet.js netOf; co-op friend keyed "me:"+name on both seats) */
+function trTraits(p){if(p===S.emp)return S.emp.traits||[];return traitsOf(p)}
 function trongOf(p0){const p=trRes(p0);if(!p)return[];if(p==="th")return thArch().tr;if(Array.isArray(p.trong)&&p.trong.length===2)return p.trong;
  const key=p===S||p.coop||p.id===901||p.id===902?"me:"+(p.name||""):p===S.emp?"emp:"+(p.name||S.empName||""):p.sid!=null?"s:"+p.sid:p.id!=null?"id:"+p.id+":"+(p.name||""):"n:"+(p.name||"");
  const T=trTraits(p);const ban=new Set();T.forEach(t=>(TR_BAN[t]||[]).forEach(x=>ban.add(x)));const out=[];const f=T.map(t=>TR_V[t]).find(v=>v&&!ban.has(v));if(f)out.push(f);
@@ -67,7 +65,7 @@ function trongKnown(p){if(trRes(p)===S)return true;S.tgK=S.tgK||{};return !!S.tg
 function trongLearn(p,tags,why){if(!S||trongKnown(p))return;const H=trongHit(p,tags);if(!H.length||!roll(BAL.trong.learn))return;S.tgK[trKey(p)]=1;const q=trRes(p);
  const nm=q==="th"?"Thái hậu":q===S.emp?"Hoàng thượng":q&&q.queen?"Hoàng hậu":q&&q.name||"";const t=`${why||"Qua lời qua lại"}: biết ${nm} trọng ${trongOf(p).join(", ")}`;
  try{if(q&&q.id!=null&&q!==S.emp)noteAdd(q.id,t)}catch(e){}log(`<span class="past">${t}.</span>`)}
-function trongLine(p){return `Trọng: ${trongKnown(p)?trongOf(p).map(v=>`<b title="${VIRT_GL[v]}">${v}</b>`).join(" · "):"chưa rõ"}`}
+function trongLine(p){return `Trọng: ${trongKnown(p)?trongOf(p).map(v=>`<b>${kitGloss(v)}</b>`).join(" · "):"chưa rõ"}`}
 
 /* ---------- ONE greeting rule ---------- */
 const TR_MH={vui:1.3,binh:1,buon:.8,lo:.8,so:1,gian:.4,ghen:.7,muu:.7,dau:.6},TR_MW={vui:1.1,buon:.85,dau:.8,gian:.75,lo:.9};
@@ -125,7 +123,7 @@ function trSnowGreet(){try{return Math.max(1,trGreet(S,"th",{base:5,tags:DEED.sn
 (function(){const p0=pcard;pcard=function(o){try{if(o&&S&&!o.__tr){o=Object.assign({},o,{__tr:1});const L=(o.lines||[]).slice();let who=null;
   if(o.name===S.name||o.me)who=S;else if(o.rank==="Thái hậu")who="th";else if(o.rank==="Hoàng thượng")who=S.emp;else if(S.maid&&o.name===S.maid.name)who=S.maid;
   else if(typeof kitPersonByName==="function")who=kitPersonByName(o.name);
-  if(who){if(who===S&&!L.some(x=>/Tính nết/.test(x)))L.push(`Tính nết: <b>${traitsOf(S)[0]}</b>`);
+  if(who){if(who===S&&!L.some(x=>/Tính nết/.test(x)))L.push(`Tính nết: ${traitsOf(S).map(t=>`<b>${kitGloss(t)}</b>`).join(" · ")}`);
    if(who==="th"&&!L.some(x=>/Tính nết/.test(x)))L.push(`Tính nết: ${S.thO&&S.thO.archK?`<b>${thArch().n}</b>`:"chưa rõ"}`);
    if(who==="th"||who===S||who===S.emp||who===S.maid||(typeof rivals!=="undefined"&&rivals.includes(who)))L.push(trongLine(who));o.lines=L}}}catch(e){console.error(e)}return p0.call(this,o)}})();
 /* LUẬT SỬA CẢ NHÓM: every other deck act that raises Thái hậu regard (gifts, portrait, sutra…) follows the same family rule:
