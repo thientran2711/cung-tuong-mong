@@ -513,7 +513,13 @@ Object.assign(BAL,{deck:{vu:{lv:3,sucMin:40,c:{suc:-20},o:[40,8],st:["sac",5],w:
    ≥ warm → warm words (ái phi, con, muội muội, tỷ tỷ), ≤ cold → "ngươi"; nuong = first rank called "nương nương" / allowed "bổn cung" (Tần);
    noRepeat = tuần before a pooled line may come back; hi / hq = first rank index of the "hi" (Quý phi) / "hq" (Hoàng hậu) rank band of
    pooled lines (bands: lo < nuong ≤ mid < hi ≤ hi-band < hq); aiPhi = her Sủng from which Hoàng thượng calls her "ái phi" (below: "nàng") */
-Object.assign(BAL,{voice:{warm:40,cold:-25,sungMid:0,favMid:0,nuong:3,hi:5,hq:7,aiPhi:40,noRepeat:5}});
+Object.assign(BAL,{voice:{warm:40,cold:-25,sungMid:0,favMid:0,nuong:3,hi:5,hq:7,aiPhi:40,noRepeat:5,
+ /* VOICE BY TÍNH TÌNH (owner 17/11 06:05Z, review/voice-trait): the tone of a speaker = his / her Tính tình nết (first of the 3 of the ONE trait pool).
+    The Emperor (ETRAITS keys) and Thái hậu (S.thTrait) have their own sets: mapped to the nearest tone here. alias = a male-only nết speaks with the
+    nearest female tone's lines until its own pool is written. dflt = the tone of a speaker with no named nết (an unnamed servant). */
+ tone:{emp:{nongnay:"Nóng nảy",lanhlung:"Lạnh lùng",danghi:"Kín đáo",nhantu:"Ân cần",datinh:"Ân cần",mesac:"Ân cần",chamchinh:"Điềm tĩnh",trongtai:"Điềm tĩnh",hieuthao:"Điềm tĩnh"},
+  th:{"Ân cần":"Ân cần","Kín đáo":"Kín đáo","Kiêu ngạo":"Kiêu ngạo","Vì gia tộc":"Điềm tĩnh"},
+  alias:{"Cương trực":"Nóng nảy","Xu nịnh":"Khiêm nhường"},dflt:"Điềm tĩnh"}}});
 /* BAL.ghen = "every consort ghen +n" events (ghenAll, j1). ONE CORE (OD:L1267): the rule applies ghenN(n) and every text shows ghenN(n), so with an
    Emperor who is đa tình both read n × datinh. Keys: dance j2 Múa yến tiệc · kinhHong j2 Kinh hồng vũ · preg news of her pregnancy (j2, j75, j8 belly shows,
    jcycle ma ma slips) · rumor j7 · cry j7 · son / girl her child born (j8) · rankUp she is raised (j8, j34) · festival j8 · bestow j20 ân thưởng ·
