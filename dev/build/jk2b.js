@@ -1048,7 +1048,7 @@ function kitPcKey(pc){const L=pc&&pc.querySelector(":scope > .pcl"),key=L&&L.que
  const ch=[...L.querySelectorAll(".chips .chip")].find(c=>W.some(w=>T(c.textContent).replace(/ⓘ/g,"").trim()===w));
  if(ch){const w=document.createElement("div");w.className="kpk-st";w.appendChild(ch);key.prepend(w)}
  const lines=[];pc.querySelectorAll(":scope > .pcr .pcf .kr").forEach(r=>{const l=T((r.querySelector(".krl")||{}).textContent);const m=/^(?:Nàng |Ngài |Hắn )?(thích|ghét)$/i.exec(l);if(!m)return;
-  const v=r.querySelector(".krv .ef");if(v&&v.classList.contains("t"))lines.push([m[1][0].toUpperCase()+m[1].slice(1).toLowerCase(),T(v.textContent)]);r.remove()});
+  const v=r.querySelector(".krv .ef"),kv=r.querySelector(".krv");if(v&&v.classList.contains("t"))lines.push([m[1][0].toUpperCase()+m[1].slice(1).toLowerCase(),kv.innerHTML]);/* pcard-facts: keep every fact + its tap (kitFactTap), not the first item's plain text */r.remove()});
  /* an empty "Sở trọng" panel section loses its heading */
  pc.querySelectorAll(":scope > .pcr .pcf .kpsec").forEach(sec=>{if(sec.querySelector(".kpst")&&!sec.querySelector(".kr,.kpnote,.kchips,button"))sec.remove()});
  if(lines.length){const d=document.createElement("div");d.className="kpkl";d.innerHTML=lines.map(([a,b])=>`<div><span class="kpkl-l">${a}</span> ${b}</div>`).join("");key.appendChild(d)}}
@@ -1119,8 +1119,7 @@ html body .pc.kpwide[data-k2]>.pcl>.pcp.kit.kit{width:var(--kpcw)!important;marg
 .pc[data-k2] .kpstick .pcf .kpsec{margin:0 0 2px;display:grid;grid-template-columns:4.4rem minmax(0,1fr);column-gap:6px;align-items:start}
 .pc[data-k2] .kpstick .pcf .kpst{margin:2px 0 0;font-size:.66rem;line-height:1.2;border:0;padding:0}
 .pc[data-k2] .kpstick .pcf .kpsec>:not(.kpst){grid-column:2;min-width:0}
-.pc[data-k2] .kpstick .pcf .pcf-i .krv{-webkit-line-clamp:1}
-.pc[data-k2] .kpstick .pcf .krv{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.pc[data-k2] .kpstick .pcf .krv{overflow-wrap:anywhere}/* pcard-facts: the fact is shown whole, never cut with "…" (details sit behind the tap) */
 .kpgrid{display:flex;flex-direction:column;gap:4px;margin:4px 0 6px}
 .kpgr{display:flex;flex-wrap:wrap;gap:4px}
 .kst-chip{display:inline-flex;align-items:center;gap:4px;padding:2px 7px;border:1px solid var(--k-hair,#e6d3ac);border-radius:7px;background:var(--k-card,#fffaf0);font-size:.76rem;line-height:1.25;white-space:nowrap;cursor:help}

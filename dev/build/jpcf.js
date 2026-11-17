@@ -20,31 +20,39 @@ function pcfEnt(o){try{const f=o&&o.f;let e=f&&f.__kp&&typeof f.__kp==="object"?
  return e}catch(x){return null}}
 const isEmp=e=>S&&e===S.emp, isTh=e=>S&&(e===S.thO||e.kind==="th");
 function pcfName(e){try{if(isEmp(e))return"Hoàng thượng";if(isTh(e))return"Thái hậu";return plain(e.name||"")}catch(x){return""}}
-function pcfTaste(e){try{const rows=[];
- if(isEmp(e)){const E=S.emp,K=E.known||{},L=E.likes||{};const like=[["flower","hoa"],["music","khúc nhạc"],["dish","món ăn"]].filter(([k])=>K[k]).map(([k,w])=>`${w} ${L[k]}`);
-  rows.push(["Ngài thích",like.length?like.join(" · "):"chưa biết (trò chuyện với ngài để biết)",like.length?"":"n"]);
-  try{const d=typeof disRow==="function"&&disRow("emp");if(d)rows.push(d)}catch(x){}
-  const T=(E.traits||[]).map(t=>PERS[t]&&PERS[t].tend?PERS[t].tend:"").filter(Boolean);if(T.length)rows.push(["Ngài hay",T.join("; ")])}
+/* pcard-facts (owner 17/11 ~14:15Z + ~14:40Z): every row shows the FACT first, short ("Thích Cầm", "Ghét Ngọc Hành"); when / how / who found it
+   sit behind a tap on the dotted-underlined fact (kit part kitFactRows / kitFactTap, j79). No date prefix, no "…" cut-off. */
+const KNOWN=e=>{try{return typeof kitKnownList==="function"?kitKnownList(e):[]}catch(x){return[]}};
+function pcfDetail(L,key){const k=plain(key).toLowerCase();return L.find(x=>x.f.toLowerCase().includes(k))||null}
+/* likes / dislikes: one tappable item per known key + a quiet "còn N điều chưa rõ" */
+function pcfPrefRow(e,L,lab,names,total,verb){if(!names.length)return null;const tap=(typeof kitFactTap==="function")?kitFactTap:(f=>f);
+ const items=names.map(n=>tap(n,pcfDetail(L,verb+" "+n)));if(total>names.length)items.push(`<span class="kfxm">còn ${total-names.length} điều chưa rõ</span>`);return {l:lab,f:items,c:"t"}}
+function pcfDisRow(e,L){const N=typeof disOf==="function"?disOf(e).length:0;if(!N)return null;const dk=disKnown(e);return dk.length?pcfPrefRow(e,L,"Ghét",dk.map(k=>disEntry(k).n),N,"không ưa"):{l:"Ghét",f:"chưa rõ",c:"n"}}
+function pcfTaste(e){try{const rows=[];const L=KNOWN(e);
+ if(isEmp(e)){const E=S.emp,K=E.known||{},Lk=E.likes||{};const like=[["flower","hoa"],["music","khúc nhạc"],["dish","món ăn"]].filter(([k])=>K[k]).map(([k,w])=>`${w} ${Lk[k]}`);
+  rows.push({l:"Thích",f:like.length?like.join(" · "):"chưa biết (trò chuyện với ngài để biết)",c:like.length?"t":"n"});
+  try{rows.push(pcfDisRow(e,L))}catch(x){}
+  const T=(E.traits||[]).map(t=>PERS[t]&&PERS[t].tend?PERS[t].tend:"").filter(Boolean);if(T.length)rows.push({l:"Hay",f:T.join("; ")})}
  else if(isTh(e)){/* jtrong (D7 r1): the same answer as the card chip — her archetype once met at thỉnh an, else "chưa rõ" (stranger rule) */
-  if(typeof thArch==="function"){const k=S.thO&&S.thO.archK;rows.push(["Tính nết",k?thArch().n:"chưa rõ",k?"":"n"])}else rows.push(["Tính nết",traitsOf("th").join(" · ")||"chưa rõ"])
-  try{const d=typeof disRow==="function"&&disRow("th");if(d)rows.push(d)}catch(x){}}
+  if(typeof thArch==="function"){const k=S.thO&&S.thO.archK;rows.push({l:"Tính nết",f:k?thArch().n:"chưa rõ",c:k?"t":"n"})}else rows.push({l:"Tính nết",f:traitsOf("th").join(" · ")||"chưa rõ"});
+  try{rows.push(pcfDisRow(e,L))}catch(x){}}
  else if(typeof trKnown==="function"&&e.id!=null){const K=trKnown(e),T=typeof traitsOf==="function"?traitsOf(e):[];const un=T.filter(t=>!K.includes(t)).length;
-  rows.push(["Tính nết",K.length?K.map(t=>typeof kitGloss==="function"?kitGloss(t):t).join(" · ")+(un?` (còn ${un} nết chưa rõ)`:""):"chưa rõ",K.length?"":"n"]);
-  try{const l=typeof disLikeRow==="function"&&disLikeRow(e);if(l)rows.push(l)}catch(x){}
-  try{const d=typeof disRow==="function"&&disRow(e);if(d)rows.push(d)}catch(x){}
-  const tend=K.map(t=>PERS[t]&&PERS[t].tend).filter(Boolean);if(tend.length)rows.push(["Hay",tend.join("; ")])}
- if(!rows.length)return"";return `<div class="kpsec"><h4 class="kpst">Sở trọng</h4>${kitRows(rows)}</div>`}catch(x){return""}}
-function pcfIntel(e){try{if(e.id==null||typeof kitRows!=="function")return"";const L=typeof intelOf==="function"?intelOf(e):[];const old=(S.notes&&S.notes[e.id])||[];
- const rows=L.slice(0,2).map(x=>["Tin",x.fact+(x.current===false?" (nay đã khác)":"")]);
- old.forEach(t=>{if(rows.length<2&&!L.some(x=>plain(x.fact).includes(plain(t))))rows.push(["Nghe được",t])});
- const n=Math.max(L.length,old.length);const ev=e.ev||0;
+  rows.push({l:"Tính nết",f:K.length?K.map(t=>typeof kitGloss==="function"?kitGloss(t):t).concat(un?[`<span class="kfxm">còn ${un} nết chưa rõ</span>`]:[]):"chưa rõ",c:K.length?"t":"n"});
+  try{if(typeof disLikeKnown==="function"){const keys=disLikeKeys(e),kn_=disLikeKnown(e).filter(k=>keys.includes(k));
+    const r=kn_.length?pcfPrefRow(e,L,"Thích",kn_.map(k=>disEntry(k).n),keys.length,"thích"):(keys.length?{l:"Thích",f:"chưa rõ",c:"n"}:null);if(r)rows.push(r)}}catch(x){}
+  try{rows.push(pcfDisRow(e,L))}catch(x){}
+  const tend=K.map(t=>PERS[t]&&PERS[t].tend).filter(Boolean);if(tend.length)rows.push({l:"Hay",f:tend.join("; ")})}
+ const R=rows.filter(Boolean);if(!R.length)return"";return `<div class="kpsec"><h4 class="kpst">Sở trọng</h4>${kitFactRows(R)}</div>`}catch(x){return""}}
+const PREF=/^(thích|không ưa|ghét)\b/i;
+function pcfIntel(e){try{if(e.id==null||typeof kitRows!=="function")return"";const L=KNOWN(e).filter(x=>!PREF.test(x.f));/* likes / dislikes already sit in Sở trọng */const n=KNOWN(e).length;const ev=e.ev||0;
+ const rows=L.slice(0,2).map(x=>({l:"Tin",f:x.f,d:x}));
  const chips=[n?`<button class="chip kchipb" data-kintel="${e.id}">Đã biết: ${n} tin ›</button>`:"",ev?`<button class="chip hot kchipb" data-kev="${e.id}" title="Xem chứng cứ">Chứng cứ ${ev} ›</button>`:""].filter(Boolean);
- return `<div class="kpsec pcf-i"><h4 class="kpst">Đã biết</h4>${rows.length?kitRows(rows):`<div class="kpnote">Chưa biết gì thêm. Dò la, hỏi kẻ hầu để biết.</div>`}${chips.length?`<div class="kchips">${chips.join(" ")}</div>`:""}</div>`}catch(x){return""}}
+ return `<div class="kpsec pcf-i"><h4 class="kpst">Đã biết</h4>${rows.length?kitFactRows(rows):`<div class="kpnote">Chưa biết gì thêm. Dò la, hỏi kẻ hầu để biết.</div>`}${chips.length?`<div class="kchips">${chips.join(" ")}</div>`:""}</div>`}catch(x){return""}}
 function pcfLog(e){try{const nm=pcfName(e);if(!nm||!S.logs)return"";const parts=nm.split(" ");const key=isEmp(e)||isTh(e)?nm:parts.slice(-2).join(" ");const mark=`T${S.month}/${S.year} `;const rows=[];
  for(const h of S.logs){const m=/^<span class="ld">(T\d+\/\d+) ([^<]*)<\/span>([\s\S]*)$/.exec(h);if(!m||(m[1]+" ")!==mark)continue;const t=plain(m[3]);if(!t.includes(key)&&!(isEmp(e)&&/Hoàng thượng|ngài /i.test(t)))continue;
-  rows.push([m[2],m[3]]);if(rows.length>=1)break}
+  rows.push({l:"Chuyện",f:m[3],d:{when:`${m[1]} ${m[2]}`}});if(rows.length>=1)break}
  if(!rows.length)return `<div class="kpsec"><h4 class="kpst">Dạo này</h4><div class="kpnote">Tháng này ngươi chưa có chuyện gì với ${isEmp(e)||isTh(e)?"người":typeof nrHe==="function"?nrHe(e):"nàng"}.</div></div>`;
- return `<div class="kpsec"><h4 class="kpst">Dạo này</h4>${kitRows(rows.map(([w,t])=>[w,t,"t"]))}</div>`}catch(x){return""}}
+ return `<div class="kpsec"><h4 class="kpst">Dạo này</h4>${kitFactRows(rows)}</div>`}catch(x){return""}}
 /* quick acts: only for a rival, only when her card has no act (the pop-up after the one talk of the visit) */
 function pcfQuick(e){try{if(typeof rivals==="undefined"||typeof rvGroups!=="function")return"";const i=rivals.indexOf(e);if(i<0||!e.alive||e.out||typeof pbtn!=="function")return"";
  const B=[];const push=b=>{if(b&&/<button(?![^>]*disabled)/.test(b))B.push(b)};
