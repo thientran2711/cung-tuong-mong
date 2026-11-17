@@ -550,3 +550,4 @@
 | kit-ico-rank (sonnet kit keeper): kit-ico-wire C42/C44/K-ICO-1..3 + kitRankList/Row/Foot → finish rank-port-r2 (owner-bug-sweep) | review/kit-ico-rank | main s28 | session_01UV1Szgrzg6rs6qWkr3xzsH | RUNNING | 17/11 02:40Z |
 | scenes-3 (sonnet): demotion-scene S3-82 + level-up-scene D14 + biếu quà làm lành D19 (owner-bug-sweep) | review/scenes-3 | main s28 | session_01UV1SzjdXNvKV2hkH4Y9s2y | RUNNING | 17/11 02:40Z |
 | presentation-wiring (sonnet): remaining jpres animations S3-151/182/205, entrance edict S3-152 (owner-bug-sweep) | review/presentation-wiring | main s28 | session_01UV1SziPP4d9141LvjeJ4wM | RUNNING | 17/11 02:40Z |
+| save-dlg-fix (sonnet kit keeper; OWNER BUG 02:47Z 'Lỗi tùm lum' Chọn sổ: squeezed column, letter-by-letter buttons, '???' life title, cut picture; whole family: picture+info dialogs, no word breaks in any button) | review/save-dlg-fix | main s28 | session_01UV1SzhRZF6zDmg7pUydbUm | RUNNING | 17/11 02:44Z |
