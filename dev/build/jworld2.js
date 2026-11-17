@@ -113,7 +113,7 @@ EVD.ret={place:()=>"home",
    else if((v.bac||0)>=b.share.bac&&npcPick(v,[["share",mW(v,"help")],["keep",1]])==="share"){ap(v,{bac:-b.share.bac,duc:b.share.duc,danh:b.share.danh});Sh.push(v)}}
   try{for(const s of allServ())if(s&&s.role==="maid"&&roll(b.maidCatch))s.suc=Math.max(0,(s.suc||b.maidSuc)-b.suc)}catch(e){}
   return `Tuyết lớn phủ kín cung cấm; than sưởi chia theo phẩm, cung thấp và lãnh cung rét cóng.${Sh.length?` Chia than cho các cung thấp: ${nmList(Sh)}.`:""}${Su.length?` Chịu rét: ${nmList(Su)}.`:""}`},
- end(){return "Tuyết đã tan; Nội vụ phủ phát than như thường."},
+ end(){phongAfter(B().ret.phongP,"Sau trận đại hàn, Hoàng thượng cho giảm bớt người trong cung");return "Tuyết đã tan; Nội vụ phủ phát than như thường."},
  card(w){const b=B().ret;if(!meCons())return info(w);if(rkOf(S)<=b.rank)return Object.assign(info(w),{opts:[{n:"Bỏ bạc mua thêm than",fx:{bac:-b.buy.bac},x:"thành: qua mùa rét yên ổn"},
    {n:"Chịu rét cho qua",fx:{suc:-b.cold.suc},x:"kèm: có thể bị nhiễm phong hàn",go:()=>{if(roll(b.catch)){const r=catchIll(S,b.ill);if(r)log(r)}}}]});
   return Object.assign(info(w),{opts:[{n:"Chia than cho các cung thấp",fx:{bac:-b.share.bac},x:`thành: Đức +${b.share.duc}, Danh +${b.share.danh}`,go:()=>apply({duc:b.share.duc,danh:b.share.danh})},{n:"Giữ than cho cung mình",fx:{},x:"không được mất gì"}]})},
@@ -163,7 +163,7 @@ EVD.trom={place:()=>"home",
  end(w){const b=B().trom;let n=w.x.C||0;const me=meGet(w,"me")||"open";const mine=(S.staff||[]).filter(greedy);
   if(me==="self"||(me==="open"))for(const s of mine)if(me==="self"||roll(b.catch)){S.staff.splice(S.staff.indexOf(s),1);n++;log(`${s.name} trong cung ngươi bị bắt vì trộm của ngự khố.`)}
   let r="";if(!n&&roll(b.scape)){const v=pick(liveR().filter(v=>!v.out));if(v){ap(v,{danh:b.scapeDanh});r=` Không bắt được ai; cung ${v.name} bị đổ tiếng.`}}
-  if(roll(b.phongP))ws("phong","Sau án trộm, Hoàng thượng cho giảm bớt người trong cung");return `Án trộm ngự khố đã xong.${r}`},
+  phongAfter(b.phongP,"Sau án trộm, Hoàng thượng cho giảm bớt người trong cung");return `Án trộm ngự khố đã xong.${r}`},
  card(w){const b=B().trom;if(!meCons())return info(w);return Object.assign(info(w),{opts:[{n:"Mở kho cung mình cho kiểm",fx:{},x:"thành: kẻ gian trong cung ngươi có thể bị bắt",go:()=>{meSet(w,"me","open")}},
   {n:"Lo lót Nội vụ phủ cho qua",fx:{bac:-b.bribe.bac},x:`kèm: Đức ${b.bribe.duc}`,go:()=>{meSet(w,"me","bribe");apply({duc:b.bribe.duc})}},
   {n:"Tự tra người của mình",fx:{},x:`thành: kẻ tham trong cung ngươi bị lôi ra, Đức +${b.self.duc}`,go:()=>{meSet(w,"me","self");apply({duc:b.self.duc})}}]})},
@@ -172,6 +172,9 @@ EVD.trom={place:()=>"home",
    after a trộm / rét); rich NPCs pay Nội vụ phủ to keep a good one; Nội vụ phủ refills (fillStaff) at the end. Her: send them off with silver,
    keep one, or let them go. */
 const aged=s=>s&&s.role==="maid"&&(s.age||0)>=BAL.srvAge.out&&!s.eid&&!s.coop&&!((s.rk||0)>=3)&&s!==S.maid;
+/* ONE path for "a world event ends → the Emperor reduces the palace" (trộm, đại hàn): roll the event's own BAL phongP, then the same
+   palace-wide min of aged maids as the spring calendar (an empty release never opens); worldStart keeps phong's cd / maxOpen / host gate. */
+const phongAfter=(p,cause)=>{if(roll(p)&&allServ().filter(aged).length>=B().phong.min)ws("phong",cause)};
 EVD.phong={place:()=>"home",
  start(w){const b=B().phong;let n=0;for(const v of liveR()){const L=(v.staff||[]).filter(aged);if(!L.length)continue;let keep=null;
    if((v.bac||0)>=b.keep.bac&&roll(b.npcKeep)){keep=L.sort((x,y)=>(y.loyal||0)-(x.loyal||0))[0];ap(v,{bac:-b.keep.bac})}
