@@ -94,6 +94,10 @@ RUNNING C sessions:
 - npc-agent AG1 r1-fix opus session_011xDdVQKTUc737xUKnLUEy6 (review/npc-agent-r1 @2298416f; faults 1–8, perf blocking, fault 8 early death/illness regression per bot run a567c992) → on SẴN SÀNG KIỂM open an opus reviewer (old reviewer session_011xDdVSu5Mec6qvjHhWrgco finished) → PASS → ANSWER line for main.
 DONE in s9: dressing rooms 13 LIVE img/toil-room-<key>.webp + KIT REQUEST 7f4bda18 (line at top); urgent 5 figures LIVE.
 Always create worker sessions WITH source_url (a session without it cannot get the repo: add_repo is refused).
+## SESSION 10 LOG
+- 00:19Z start (depth 4/8, START_CTX ~7% → roll at 32%). s9 told to stop + ARCHIVED; s9 trigger trig_013d5QhyskDumNGQz5fP4vjL and s8 trigger trig_01H3zi9E3V7wtGmAA31EBXWr DISABLED; s8 ARCHIVED (permission check allowed it this time). Own wake trig_017q7zZaTequQLKLLGaESPJx (:19). Archived stopped sessions: fig lead #3 session_011xDdVSheHFnhXPEAMEEfZT, lead #4 session_011xDdVSWqu69NuYMoAK4SaC, art session_011xDdVQYXHozUcGDzx2ZoV3. Running C sessions told C = s10 (lead #5, art QJPz, old-people, npc-agent r1-fix).
+- Waiting owner: 5 figure-repaint pilot families + 2k/4k whole set; origin intro samples; por-vacant-hh; FP v23; old-people v4.
+
 ## SESSION 9 LOG
 - 22:42Z start (depth 3/8). s8 told to stop; disabling s8 trigger + archiving s8 REFUSED by permission check (owner asked). Own wake trig_013d5QhyskDumNGQz5fP4vjL (:14). 6 running C sessions told C = s9.
 - 22:55Z FP NC v22 (ad725095): v22a = v20 costumes + QP sash, shoulders barely wider; v22b = broader shoulders + wider sleeves. Looked at by C (one skin, faces OK, sash on QP, heights equal in-room) → SENT to owner (crop a|b, both lineups, v22b iPad shot), C recommends b. Note: in-room test labels read 'Quý phi'/'Cung nữ' (slot labels of the test build, not the art).
