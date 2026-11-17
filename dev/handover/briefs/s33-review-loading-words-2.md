@@ -1,0 +1,5 @@
+PRIORITY #1 CHECK ('kboot|lookbehind|update-notes'): OD ~15:25Z (7) | main kboot/swreg/jnotes | review/* loading-words-r1 d4318833 (PASS, in batch) → loading-words-2 8816f08ee | claims worker session_01UV1SzkaNQaeHGcLrqFrzzQ
+# s33 REVIEW loading-words-2 (sonnet, SMALL; boot path = check carefully) — read dev/handover/briefs/s33-common.md + START_REVIEWER.md
+Review review/loading-words-2 8816f08ee (report: last section of reports/loading-words.md). Re-merge newest origin/main on review/loading-words-2-r1.
+CHECK: (1) boot failure card shows NO English to the player; diagnostic only behind "Chi tiết", VANPHONG words; (2) NO regex lookbehind left anywhere in shipped JS (grep the BUILT index.html/sw.js too, not only sources); old Safari (webkit-boot old-safari / iOS<16.4 profile) boots; every rewritten regex behaves the same (spot tests on the changed lines); (3) update-notes test PASS; quickcheck; old-save load; Fold + iPad boot shots LOOK.
+Report reports/review-loading-words-2.md; "PASS/FAIL loading-words-2-r1 <sha>" to main s33 session_01UV1SzknccDMmbvCf4hWxC8.
