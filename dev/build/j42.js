@@ -406,7 +406,7 @@ function srvStaffAct(k,s){if(!can(1))return null;const m=srvM();
  if(k==="ask"){if((S.srv.af[s.sid]||0)<SRVA.ask.af)return null;spend(1);const L=liveRivals(true).filter(x=>x!==m);if(L.length){const v=pick(L);S.srv.intel.push(v.id);log(`${s.name} kể cho ngươi chuyện trong cung ${v.name}: có tin để bẩm chủ.`)}else log(`${s.name} không biết gì mới.`);return true}
  if(k==="frame"){if(ownerOf(s)!==m||S.srv.lau>0)return null;spend(1);const ok=roll(od(SRVA.frame.o(S)));
   if(ok){s.loyal=cl(s.loyal+SRVA.frame.loy,0,100);s.trouble=wk();srvAf(s,SRVA.frame.af);apply(SRVA.frame.w);let r=`Ngươi tố ${s.name} lười nhác; ${m.name} phạt hắn.`;if(roll(SRVA.frame.out)&&m.staff.includes(s)){m.staff.splice(m.staff.indexOf(s),1);r+=` ${s.name} bị đuổi về Nội vụ phủ.`}log(r);return true}
-  srvAf(s,SRVA.frame.afL);apply(SRVA.frame.l);log(`Ngươi tố ${s.name} nhưng ${m.name} không tin, còn trách ngươi gây chuyện.`);return false}
+  srvAf(s,BAL.eff.j42.cnvFrame);apply(SRVA.frame.l);log(`Ngươi tố ${s.name} nhưng ${m.name} không tin, còn trách ngươi gây chuyện.`);return false}
  return null}
 document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-cnv]");if(!b)return;e.stopPropagation();e.preventDefault();if(b.disabled||!isSrv()||S.dead||Q.length)return;
  const s=servById(+b.dataset.sid);if(!s)return;const bf=rsnap();const r=srvStaffAct(b.dataset.cnv,s);if(r!=null)resultShow(b.firstChild.textContent,bf,r);render()},true);
