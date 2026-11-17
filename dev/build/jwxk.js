@@ -59,7 +59,7 @@ Object.assign(BAL.wx,{day:{
    "sương giá":[["trời âm u",[1,1,1,1]],["tuyết nhẹ",[1,1,2,2]],["mai nở trong tuyết",[1,1,0,0]],["sương mù",[3,0,0,1]],["gió bấc",[0,1,1,0]]],
    "mai nở trong tuyết":[["tuyết nhẹ",[1,1,2,2]],["sương giá",[0,0,1,3]],["trời âm u",[1,1,1,1]]],
    "trời âm u":[["tuyết nhẹ",[1,2,3,3]],["tuyết dày",[0,0,1,1]],["sương giá",[1,0,0,2]],["sương mù",[3,0,0,1]],["gió bấc",[1,1,1,1]]],
-   "sương mù":[["sương giá",[1,0,0,1]],["trời âm u",[1,2,2,1]],["mai nở trong tuyết",[1,1,0,0]],["tuyết nhẹ",[0,1,1,1]]],
+   "sương mù":[["sương giá",[2,0,0,1]],["trời âm u",[1,2,2,1]],["mai nở trong tuyết",[1,1,0,0]],["tuyết nhẹ",[0,1,1,1]]],
    "gió bấc":[["tuyết nhẹ",[1,1,2,2]],["tuyết dày",[0,1,1,1]],["trời âm u",[1,1,1,1]],["sương giá",[1,0,0,2]]]}}},
  /* WORLD EFFECTS (weather-khac-2, owner 17/11 ~17:40Z (3)), through existing rules only; kl = the level 1 nhẹ · 2 vừa · 3 nặng:
     fog  -> the target's chance to SEE a scheme (j8 oSee, the one witness roll) drops by see[kl]; still held to BAL.odds lo..hi
