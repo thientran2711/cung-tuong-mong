@@ -30,3 +30,9 @@ Not re-run: kit-size5, kit-size7-pics (no frame/picture-layout code touched).
 - kitReward / kitGain full-screen reveal tile (sm, 52) chip is 7 px; the reveal card XL chip is large (13.8 px) by the 9.2 % rule.
 - The item detail rows still carry PHẨM (a row, not the picture line); remove only if the owner wants.
 - ART/none. No new text, no BAL numbers.
+
+## r1 fix (reviewer FAIL 23:58Z) — READY: code 526e1bc8, build 0295fa45
+1. jgpick kipTile + sample: grade word `.kshp` dropped, grid rows 4 → 3 (jgpick .kshc.kshpick.kipc). Family scan (grade word next to a kitItem): only jgpick found in tiles; ALSO three pop-up header subs printed "kind · grade" beside the picture chip (jecon:116, jrcp:198, jwdinv:103) → kind only. jitev:94 / jk2b:787 = tooltips, kept.
+2. Chip/name gap: `.kshc>.kshpic{margin-bottom:8px}` (jinv, gift / shop / pet / recipe tiles), named tiles margin-bottom +3 px (jk2b), wear/pet column +3 px (jinv). New scan dev/test/kit-size9-gap.js (kit page, Fold + iPad): text starting inside the 3 px band under any chip = 0 (one hit is the sample overlay over the real bag, a false positive); duplicate grade word in a tile = 0. Gift tile + recipe tile looked at (Fold).
+3. Tests: kit-size9-chip 60/60, live bag/wear Fold+iPad clean, kit-conform 755/1180 MIXED 0 (CONFORMS 101/100, MISSING 2 stale), quickcheck PASS 170 s (first run FAIL perf renderMs 303 vs 201 live, limit 301 = noise, rerun 310/339 PASS).
+Note for owner/main: recipe tiles (jwkr/jrcp, grade:0) now show a "Thường" chip because they use kitItem; they are recipes, not graded items. Say if they should hide it (needs a kitItem flag, not a per-screen CSS).
