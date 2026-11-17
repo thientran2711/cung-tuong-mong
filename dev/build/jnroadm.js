@@ -12,7 +12,7 @@
    Row format: [title, cast key w, win tag, lose tag]; .11 row: [title, w, win, middle, lose]. */
 (function(){const MID="việc còn dở dang";
  const def=(id,k,t,sk,rows)=>{const c={};rows.forEach((r,i)=>{const n=BAL.road.first-1+i;const last=i===rows.length-1;
-   c[n]={t:r[0],w:r[1],sk,mk:k,E:{a:{k:1,tag:r[2]},m:{k:0,tag:last?r[3]:MID},b:{k:-1,tag:last?r[4]:r[3]}}}});NRM[id]={k,t,sk,c}};
+   c[n]={t:r[0],w:r[1],sk,mk:k,E:{a:{k:BAL.arc.tier.win,tag:r[2]},m:{k:BAL.arc.tier.mid,tag:last?r[3]:MID},b:{k:BAL.arc.tier.lose,tag:last?r[4]:r[3]}}}});NRM[id]={k,t,sk,c}};
  /* gd — Thị vệ */
  def("gd_tl","gd","Đường lên Thống lĩnh","loyal",[["Ca trực đêm mưa","gd","giữ vững cổng cung","để lọt kẻ lạ"],["Kẻ đứng trên","gd","được Thống lĩnh để mắt","bị Thống lĩnh quở"],
   ["Đồng liêu ghen","gd","êm chuyện với đồng liêu","bị đồng liêu gài"],["Bạc lót tay","bac","từ chối bạc bẩn","dính tiếng nhận bạc"],["Hộ giá đi săn","emp","hộ giá chu toàn","để ngựa kinh trước thánh giá"],
