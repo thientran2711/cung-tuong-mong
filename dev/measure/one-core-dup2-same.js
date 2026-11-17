@@ -28,6 +28,10 @@ const INTENDED={'jhc.js':['window.quyW'],'jts.js':['tsQuy'],'j55.js':['ccWord'],
  'j17.js':['caughtW','VariableDeclaration','actLine'],'j21.js':['affW','doAct'],'j29.js':['fireServ'],'j63.js':['rvGroups'],'j78.js':['actLineRaw'],'j79.js':['IfStatement'],
  'j8.js':['VariableDeclaration'],'jdress.js':['IfStatement'],'jpet.js':['VariableDeclaration']};
 INTENDED['jlost.js'].push('lostEvUse');
+/* review/one-core-dup3 r2: word counts print their key too (same words: balWord(balAb(key)) = VP.num (jbal) → «một»; the proof cannot fold balWord):
+   jtruth spyFind «thêm một chứng cứ» → jtruth.evN · j78 A("uyhiep") «chuộc lại một chứng cứ» → j78.evF_3 · jecon AOUT.spyk «nắm thêm một chứng cứ»
+   → jtruth.evN (spyk runs spyFind; aoLz: balWord needs VP, which loads after jecon) */
+INTENDED['jtruth.js']=['spyFind'];INTENDED['j78.js'].push('ExpressionStatement');INTENDED['jecon.js']=['TryStatement'];
 /* j55 ccWord = side-chance scale (owner OD:L221) */
 const bal=()=>{const c={Math,BAL:{pace:1}};vm.createContext(c);
  const src=fs.readFileSync('dev/build/jbal.js','utf8')+'\n'+fs.readFileSync('dev/build/jbal2.js','utf8');

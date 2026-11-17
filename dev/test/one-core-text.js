@@ -116,7 +116,9 @@ function scanAmt(B,BAL,ORDER){
    S.caseEv-1, deA(a,t,1) — a quest / tham-ô counter: the typed rule belongs to one-core-guard, not to this text scan).
    Templates are read whole (each ${} = "{}") so "chứng cứ ${v.name} +2" is one sentence. */
 const EV_SG=/chứng cứ((?:\s*(?:về|của)?\s*(?:\{\}|[^\d\s·;,.:()+\-−{}<>][^\d·;,.:()+\-−{}<>]{0,30}?))?)\s*([+\-−])(\d+)(?![\d.,]\d|\s*\/)/gi;
-const EV_AB=/(?<![\w$.,\/])(\d+)\s+chứng cứ/gi;
+/* (review one-core-dup3 r2) a count may be a word: «thêm một chứng cứ» types 1 as much as «thêm 1 chứng cứ» (only after the same verbs, EV_PRE) */
+const EV_AB=/(?<![\p{L}\w$.,\/])(\d+|một|hai|ba|bốn|năm)\s+chứng cứ/giu;
+const EV_WN={'một':1,'hai':2,'ba':3,'bốn':4,'năm':5};const evNum=x=>/^\d+$/.test(x)?+x:EV_WN[x.toLowerCase()];
 const EV_PRE=/(?:nắm(?: thêm| được)?|thêm|tốn:?|dùng|trả lại|chuộc lại|lấy được|được|ra|kế:|\(|:)\s*$/i;
 const EV_THR=/(?:cần|có|đủ|gom|tới|ít nhất|hơn)\s*$/i;
 function scanEv(B,BAL,ORDER){
@@ -150,7 +152,7 @@ function scanEv(B,BAL,ORDER){
   return new RegExp('(?:\\b(?:\\w+Ev|proof|cev)\\s*(?:\\+\\+|--)|(?:\\+\\+|--)\\s*[\\w.]*(?:Ev|proof|cev)\\b|(?:Ev|proof|cev)\\b[^;]{0,24}[+\\-]\\s*'+n+'\\b|\\bdeA\\([^()]*,\\s*-?'+n+'\\s*\\))').test(code)};
  mods.forEach((m,mi)=>{for(const t of per[mi].T){if(!/chứng cứ/i.test(t.s))continue;const hits=[];let q;
    EV_SG.lastIndex=0;while((q=EV_SG.exec(t.s)))hits.push({i:q.index+q[0].length-q[3].length,n:+q[3],sg:q[2]==='+'?1:-1});
-   EV_AB.lastIndex=0;while((q=EV_AB.exec(t.s))){const pre=t.s.slice(Math.max(0,q.index-24),q.index);if(EV_THR.test(pre)||!EV_PRE.test(pre))continue;hits.push({i:q.index,n:+q[1],sg:0})}
+   EV_AB.lastIndex=0;while((q=EV_AB.exec(t.s))){const pre=t.s.slice(Math.max(0,q.index-24),q.index);if(EV_THR.test(pre)||!EV_PRE.test(pre))continue;hits.push({i:q.index,n:evNum(q[1]),sg:0})}
    for(const h of hits){if(!h.n)continue;if(counterNear(m,t,h.n))continue;
     if(!t.links){t.links=BIND.linkMods(idx,m.f,t.stack,t.node);callLinks(t).forEach(f=>t.links.add(f))}
     const before=t.s.slice(Math.max(0,h.i-80),h.i);

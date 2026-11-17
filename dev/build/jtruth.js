@@ -74,7 +74,7 @@ function spyKnow(a,t){a.know=a.know||{};a.know[key(t)]=wk();const ks=Object.keys
 /* one spying attempt that succeeded: returns the act line (who · what · result); ev:true when real proof was found */
 function spyFind(a,t,verb){verb=verb||"dò la";const d0=deedFor(a,t);const n=evA(a,t,BAL.eff.jtruth.evN);
  if(n>0){const d=d0;if(t===S)return `${NMc(a)} ${verb} ngươi: <span class="r">nắm được chuyện ngươi ${d?d.x:"từng làm điều sai trái"}</span>. `;
-  if(a===S)return `Ngươi ${verb} ${t.name}: <span class="g">tìm ra chuyện nàng ${d?d.x:"từng làm điều sai trái"}, thêm một chứng cứ</span>. `;
+  if(a===S)return `Ngươi ${verb} ${t.name}: <span class="g">tìm ra chuyện nàng ${d?d.x:"từng làm điều sai trái"}, thêm ${balWord(balAb(BAL.eff.jtruth.evN))} chứng cứ</span>. `;
   return `${a.name} ${verb} ${t.name}: nắm được một chuyện sai trái của nàng. `}
  spyKnow(a,t);const h=harmTxt(t);return `${NMc(a)} ${verb} ${NM(t)}: không tìm ra điều gì sai trái; chỉ biết ${h}. `}
 

@@ -22,6 +22,7 @@ const CUT=new Set(['loy','wit','ducLv','quyLv','sungLv','tinhLv','tinLv','rareLv
    that very site. Every other BAL key names ONE concept (BAL.steal.rel, BAL.loy.close, BAL.time.khac …): a print must be read by some rule of the game. */
 const SITE=new Set(['eff','road','arc']);
 const NAMEY=/^[A-Za-z_$][\w$]*$/;
+const TYPEW=new Set(['function','object','string','number','boolean','undefined','symbol','bigint']);
 const isFn=n=>n&&/Function/.test(n.type);
 function balPath(n){const p=[];let c=n;while(c.type==='MemberExpression'){let k;if(!c.computed)k=c.property.name;else if(c.property.type==='Literal')k=String(c.property.value);else return null;p.unshift(k);c=c.object}
  return c.type==='Identifier'&&c.name==='BAL'&&p.length?p:null}
@@ -118,9 +119,12 @@ function bind(B){const idx=index(B);const {mods,FN,LINK,NOBJ,reads,prints}=idx;
   if(readDeep(m,scope,key,2,new Set()))how='same option';
   /* a BAL.road / BAL.arc amount in a help or info text (not inside an option object): the rule it describes lives in the road / arc engine */
   else if(P.p[0]!=='eff'&&scope.type!=='ObjectExpression'&&anyReadOf(key,2))how='road / arc rule (info text)';
-  else for(const k of names){for(const L of LINK[k]||[])if(readDeep(L.m,L.node,key,2,new Set())){how='act '+k+' ('+L.m.f+':'+L.node.loc.start.line+')';break}if(how)break}
+  /* (review one-core-dup3 r2) not a link: a typeof word (typeof f==="function"); and when the entry call IS this option (step("home",{…})),
+     an if / case branch of the same word in another module (j74 page PG==="home") is not its rule (acts A("k") of that name still link) */
+  else for(const k of names){if(TYPEW.has(k))continue;const own=[scope,st[si-1]].some(c=>c&&c.type==='CallExpression'&&c.arguments.length&&litOf(c.arguments[0])===k);for(const L of LINK[k]||[])if(!(own&&L.kind==='branch'&&L.m!==m))if(readDeep(L.m,L.node,key,2,new Set())){how='act '+k+' ('+L.m.f+':'+L.node.loc.start.line+')';break}if(how)break}
   /* a handler function named after the action (data-td="probe" → tdProbe) */
-  if(!how)for(const k of names){const cap=k[0].toUpperCase()+k.slice(1);for(const nm of Object.keys(FN))if((nm===k||nm.endsWith(cap)&&/[a-z0-9]$/.test(nm.slice(0,-cap.length)))&&FN[nm].some(d=>readDeep(d.m,d.node,key,2,new Set()))){how='handler '+nm;break}if(how)break}
+  /* (review one-core-dup3 r2) a 1–2 letter name is a text property (x / h / t / rt …), not an action: x → pcfX let a look-alike key pass */
+  if(!how)for(const k of names){if(k.length<3||TYPEW.has(k))continue;const cap=k[0].toUpperCase()+k.slice(1);for(const nm of Object.keys(FN))if((nm===k||nm.endsWith(cap)&&/[a-z0-9]$/.test(nm.slice(0,-cap.length)))&&FN[nm].some(d=>readDeep(d.m,d.node,key,2,new Set()))){how='handler '+nm;break}if(how)break}
   if(!how)for(const v of nNames){const L=nobjOf(idx,v);for(const d of L)if(d.node!==scope&&readDeep(d.m,d.node,key,2,new Set())){how='wraps option "'+v.replace(/^\^/,'')+'" ('+d.m.f+':'+d.node.loc.start.line+')';break}if(how)break}
   if(!how)for(const nm of prev)if((FN[nm]||[]).some(d=>readDeep(d.m,d.node,key,2,new Set()))){how='previews '+nm;break}
   /* also an option that is the preview of the act it calls: go:()=>runAct("k") … — the names in the scope */
