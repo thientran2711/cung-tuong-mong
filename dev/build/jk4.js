@@ -107,6 +107,13 @@ html body .game#game.k3ph header.hud>#k3room:not([hidden]){grid-area:room}
  html:where(.kv1) body header.hud .k3tc .k3tt .k3r{white-space:nowrap;margin-right:0!important;max-width:100%;height:18px!important;line-height:18px!important;align-items:center}
  html:where(.kv1) body header.hud .k3tc .k3tt .k3wx img{width:16px!important;height:16px!important}
 
+/* .khd3 (ui-fixes-1): the narrow one-page bar — the time block on its own row, stats cells icon-only when their labels do not fit */
+html:where(.kv1) body .game#game header.hud.khd3{grid-template-columns:auto minmax(0,1fr)!important;grid-template-areas:"menu me" "tc tc" "stats stats"!important;grid-template-rows:auto auto auto!important;row-gap:2px!important}
+html:where(.kv1) body .game#game.k3ph header.hud.khd3:has(#k3room:not([hidden])){grid-template-columns:auto minmax(0,1fr)!important;grid-template-areas:"menu me" "room me" "tc tc" "stats stats"!important;grid-template-rows:auto minmax(0,1fr) auto auto!important}
+html:where(.kv1) body header.hud.khd3>#k3tc{justify-self:stretch!important;align-self:center!important;margin-right:0!important}
+html:where(.kv1) body header.hud.khd3 .k3tc .k3tt{justify-content:flex-start}
+html:where(.kv1) body header.hud.khd3s #kstrow .kstl{font-size:0!important;line-height:0!important;white-space:nowrap}
+html:where(.kv1) body header.hud.khd3s #kstrow .kstl .ic{font-size:0}
 html body .game#game header.hud.khd2{grid-template-columns:auto max-content minmax(0,1fr) minmax(0,max-content)!important;grid-template-areas:"menu me . tc" "menu me . room" "stats stats stats stats"!important;
  grid-template-rows:auto auto auto!important;row-gap:0!important}
 /* owner 16/11 (Q6): the room button also shows on wide / landscape: two-row bar (.khd2) = under the time block (area room); one-row bar = between the menu button and her name */
@@ -136,8 +143,15 @@ function kitHdClash(hd,tc){try{const me=hd.querySelector(":scope>.me");if(!me||!
  leaf(me,q=>{r=Math.max(r,q.right)});leaf(tc,q=>{l=Math.min(l,q.left)});return r>0&&l<1e9&&r+8>l}catch(e){return false}}
 /* one-row bar only from this width (1366 iPad Pro); 1000–1279 (iPad 1180, split views) = the two-row bar, always */
 const KHD1_MIN=1280;
+/* ui-fixes-1 (owner-found 17/11, shot 412x1058): on a page narrower than the design page (Fold cover, split view) the time block (Buổi / điểm trang / weather / quẻ) was squeezed to a sliver
+   beside her name block and ran under the TRÂN NỮ seal and off the screen. .khd3 = measured, not a width query: when the time block does not fit beside her block it takes its OWN ROW
+   under the name block (menu · me / time block full width / eight cells); .khd3s = the eight cells' labels do not fit either -> icon + number only (the title still names each cell). */
+function kitHd3(hd){try{hd.classList.remove("khd3","khd3s");const tc=document.getElementById("k3tc"),tt=document.getElementById("k3tt");
+ if(tc&&tt&&tc.offsetParent&&(tt.scrollWidth>tc.clientWidth+1||tc.clientWidth<70||kitHdClash(hd,tc)))hd.classList.add("khd3");
+ const row=document.getElementById("kstrow");if(row&&[...row.querySelectorAll(".kst")].some(c=>{const l=c.querySelector(".kstl");return l&&l.scrollWidth>c.clientWidth+1}))hd.classList.add("khd3s");
+ try{window.kitSealHud&&kitSealHud()}catch(e){}}catch(e){}}
 function kitHdFit(){try{const hd=document.querySelector("header.hud");if(!hd)return;kitHdMe(hd);const wide=kitView().pages===2;
- if(!wide){hd.classList.remove("khd2");kitTcFit(hd);return}const had=hd.classList.contains("khd2");
+ if(!wide){hd.classList.remove("khd2");kitHd3(hd);kitTcFit(hd);return}const had=hd.classList.contains("khd2");
  /* review/stage-side (owner 16/11 "nó không có giữ cố định một chỗ"): the bar form is FIXED per viewport, never re-decided by content
     (a dialog, a longer clothes / weather line). < KHD1_MIN px wide = always two rows; wider = one row, measured once per viewport size,
     and once it needed two rows it keeps them for that size (one-way latch = hysteresis: it never flips back on shorter text). */
@@ -155,7 +169,7 @@ window.kitHdFit=kitHdFit;
    the top bar — and so the page box under it — would be taller than the spread's. When a long day (state chips, a long weather or quẻ)
    still overflows, the whole block is scaled down together (zoom steps of 5 %, never below 80 %), like the tab bar's one font size. */
 function kitTcFit(hd){try{const tc=document.getElementById("k3tc"),me=hd.querySelector(":scope>.me");if(!tc||!me||!tc.offsetParent)return;
- tc.style.zoom="";const lim=me.offsetHeight+1;let z=1;while(tc.offsetHeight>lim&&z>.8){z=+(z-.05).toFixed(2);tc.style.zoom=String(z)}}catch(e){}}
+ tc.style.zoom="";if(hd.classList.contains("khd3"))return;const lim=me.offsetHeight+1;let z=1;while(tc.offsetHeight>lim&&z>.8){z=+(z-.05).toFixed(2);tc.style.zoom=String(z)}}catch(e){}}
 if(typeof renderHUD==="function"){const r0=renderHUD;renderHUD=function(){const r=r0.apply(this,arguments);if(!window.__rdep)kitHdFit();return r}}
 if(typeof render==="function"){const r1=render;render=function(){const r=r1.apply(this,arguments);kitHdFit();return r}}
 addEventListener("resize",()=>{clearTimeout(window.__khdf);window.__khdf=setTimeout(kitHdFit,40)});
