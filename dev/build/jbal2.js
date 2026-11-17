@@ -1145,4 +1145,4 @@ Object.assign(BAL.mood.emo,{khoc:-.4,hon:-.2});BAL.mood2.dur.e.ghenUp=10;BAL.moo
    s = strength: weight × k, clamped [min, max] · dur = khắc: base + weight × k, × life for a lifelong memory, ≤ max ·
    kind = the feeling: good memory → good, bad → bad, unless the deed is in d. */
 BAL.memWake={min:20,ann:30,cap:4,cd:6,s:{k:.6,min:18,max:60},dur:{base:4,k:.12,life:2,max:48},
- kind:{good:"vui",bad:"gian",d:{poison:"so",musk:"dau",kidharm:"dau",takeaway:"dau",frame:"gian",gifttaint:"so",demote:"buon",rescue:"vui",pardon:"vui"}}};
+ kind:{good:"vui",bad:"gian",d:{poison:"so",musk:"buon",kidharm:"buon",takeaway:"buon",frame:"gian",gifttaint:"so",demote:"buon",rescue:"vui",pardon:"vui"}}};/* FEELINGS-18: the old "dau" (grief) is Buồn now (owner 19:10Z dau→buon heavy); a missing key would fall back to gian */
