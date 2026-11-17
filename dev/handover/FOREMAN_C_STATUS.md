@@ -88,6 +88,7 @@ OPEN OWNER QUESTIONS: (B) explicit OK to overwrite live fig-maid-*-ty* with the 
 IDLE (C's): art lead #7 session_011xDdVNkgEgTqsZJxUh9Xd8; W8 mama session_011xDdVRWZVWQYAYYva3YuqJ. ROOT-6 session_011xDdVQNdyTACuGN42yEBQZ stopped (ROOT-5's child; not archived by C).
 
 FOREMAN C ROOT-12 (art) = session_011xDdVP8NwhY7F8EwPHbZsi · START_CTX ~9% (get_session reads 0, own estimate) → roll over at >= 34%, ceiling 60% · depth 5 (lineage 5/8; no child foreman) · own hourly wake (:32) · reports to MAIN s34 via this file.
+- 02:05Z(real 18/11) OWNER asked for the fashion link → W14 hairpin try-on DONE: https://claude.ai/artifact/XzxMY7EXFotVTNf9SKJjmW (report reports/hairpin-tryon.md; 5 gens ~280 cr; 1 figure double-loop bun no pins + hair_front occlusion + 9 anchors + 8 pins; known gaps: front view only, rigid tassels, anchors on hair edge) → OPENED for owner. W14 can be archived after her verdict.
 - 02:00Z(real 18/11) W15 sample 2 ướt sũng overlay (stain-uot-overlay-room.jpg): C LOOKED — darker streaked robe + glossy droplets, clipped OK; face/hair wet sheen faint, tóc bết needs hair-fit box → SENT owner. Next smudge/ink/pox.
 - 01:52Z(real 18/11) OWNER: "Ok, vẽ theo lệnh của chat chính đi" → tea overlay v3 OK; W15 continues the full MAIN looks-2 list with the overlay method.
 - 01:48Z(real 18/11) W15 tea overlay v3 (translucent amber wash on left sleeve + chest, pattern visible, clipped to figure, tiny face droplets): C LOOKED OK → SENT owner room shot. Next ướt sũng, then smudge/ink/pox.
