@@ -45,3 +45,15 @@ START_CTX ≈ 4 % of the 1M window (estimate). Rollover at 29 %, ceiling 60 %.
 | mB merged as is | 152 | 23 (15 %) | 57 (38 %) | 25 (16 %) | 5.0 | 99/99/98 | 57/58/68 |
 | mH Th no-son 70 / hiếu 62, outQ 30, HH Danh 70 | 133 (time cap) | 35 (26 %) | 51 (38 %) | 25 (19 %) | 4.9 | 96/99/98 | 56/54/56 |
 mH HQP → HH months blocked: promo gap 91 % (owner pace OD:L353, kept), seat not vacant 35 %, Thái hậu no son 24 %, seat contest 20 %; Danh no longer a wall. Early death unchanged (38 %, OD:L20 band). RUNNING mH2 (Th no-son 62 / hiếu 55, outQ 15, HH Danh 70), 152 lives, ETA ~16:30Z.
+
+## FINAL (worker #2, 17/11 ~17:30Z) — coordinator Foreman D #10 (session_01964izDpDf5BCzpbaaQ1Sxq)
+Branch review/balance-2 @de993ca846040a6666e201ce898d46da041338de = #1's work (a2ce31a3) + live main 9391f9a merged + the items below.
+SHIPPED (all via BAL, same rule for NPCs):
+- (2) HH gate: BAL.hhThNoSon 80→70, hhThNoSonHieu 70→62, outQ 60→30, RANKS Hoàng hậu Danh 78→70. Merged build, sens bot, Vừa, 8-y cap: **HH 15 % (152 lives) → 26 % (133)**; ended before HH/cap 38 % → 38 %; < 3 y 16 % → 19 %. A stronger arm (62/55/15, 152 lives) gave HH 26 % again with < 3 y 21 % → the gate saturates; the rest of the way to ~32 % is time at HQP (promo gap blocks ~90 % of HQP months = owner pace OD:L353, not touched). Text prints BAL (rules-one-source guard updated to read BAL instead of pinning the old 80).
+- (4) bot-proof S3-126: BAL.ctxTaste 12→18, ctxCap 22→30 (jevb). #1's arms (40 lives each, pre-merge): old hint HH 5 % / < 3 y 30 % vs random 2 % / 15 % (skill did not pay); new hint 12 % / 15 %, Danh m36 89 vs random 5 % / 25 %, Danh m36 30. Under 150 lives per arm — a confirming run on the merged build is still owed.
+- §7 Sủng curve: NOT shipped — owner chose option 1 (Sủng unchanged) at ~14:02Z (Foreman D #9).
+OPEN (measured, not tuned — reported honestly):
+- (6) Khó early: BAL.hz (her-side) is NOT the lever. Khó < 3 y: hz 1.1 base 12–17 %, 1.35 20 %, 1.6 18 % (34 lives), 2.0 15 % (33) vs Vừa 16–20 %. Vừa deaths < 3 y are mostly poison (13/25 in mB), plus childbirth, illness, Emperor dying (Thái phi / ni cô ends). A real Khó lever = world rules poisonX / birthAdd / illDie (hit NPCs too) and needs ≥ 4 h per 150-life arm; left for the next balance pass.
+- Origin spread with the new gate (mH2): ch / nc 50 %, cn / td / tt 33 %, dtq 19 %, bd / muoi 13 %, **cnv 7 %, thd 7 %** (OD:L43 asks 20–40 %, cnv 20–25 %).
+GATES (all on this sha or its build): one-core-guard PASS (fails 0, inline 6588 < 6691) · quickcheck.sh PASS ×2 (core gates PASS incl. rules-one-source, time-spill PASS, old save from live loads + plays a buổi, open 1.7 s, render 313/329 ms) · buổi in quickcheck 1338/1195 ms (+12 %) is popup count (fixed 40 ms sleep per popup); seeded check 9 games × 16 buổi: script time per step 195/188 ms (+3.7 %), total +2.9 % → within +5 % · balance-core.js 0 FAIL, 0 page errors · coop-e2e (live Worker) 62/62 (r2: 60/60) · shots.js Fold 755x1000 + iPad 1180x820: SHOTS OK, home + act tab looked at (no overlap, nothing cut) · bot lives on the merged build 0 page errors. No images committed.
+SẴN SÀNG KIỂM de993ca846040a6666e201ce898d46da041338de
