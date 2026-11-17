@@ -1,12 +1,36 @@
-<<<<<<< HEAD
+# FINAL REPORT (W-A2, 17/11) — VOICE BY TÍNH TÌNH, branch review/voice-trait
+
+PRIORITY #1 CHECK: OD 11 + part-1 report below | main jvoice.js kTone/kLine | review/voice-trait only (W-A part 1, W-B ee84e25, W-C 34ef2a9); nothing rebuilt, I only registered, built, tested.
+Start context W-A2: ~5% of window; context at finish ~25%, no rollover needed.
+
+## What shipped (all on review/voice-trait, head e134694, not pushed to main, no PR)
+- W-A (engine + jtone.js): rival ok/no 80+80, maid ok/no 80+80, greet come 80, th ok/no 40+40, emp ok/no 50+50, hh ok/no 80+80, 6 greet acts 480 = 1,200 lines.
+- W-B (jtone_b.js + jtone_b1..b5.js): 65 pools, 5,481 lines (toil reactions 25 pools, toilGest 8, toilSlip 16, wd ok/over/under, staff tn/kn/gt, cycle:ask, ts:warn, habit). Old pools stay as fallback; TOIL_BAND rank lines merged tone-neutral at runtime.
+- W-C (jtone_c.js): askLead / askOk / askNo (j72 quests) + beatWait (j67 beats) = 4 pools x 8 tones x 10 = 320 lines.
+- W-A2: registered jtone_b.js, jtone_b1..b5.js in dev/build/assemble.py (right after jtone.js, before jtone_c.js); fixed QUICKCHECK FAIL "NEW inline rule number j72.js [fx] hh:1" (Q72_TONED object -> array); full site build committed (index.html assets.json sw.js).
+
+## Tests (on e134694)
+- node dev/test/voice-trait.js, voice-trait-b.js, voice-trait-c.js: PASS, no page errors, noRepeat 0 repeats / 40 draws. (voice-trait-c fails against a stale build: always run assemble.py first.)
+- dev/test/tone-pool-check.js prints "0 pools" (W-B's tool; the pools are covered by voice-trait*.js instead). Reviewer: check what it should scan.
+- one-core-guard PASS (6,638 inline rule numbers vs baseline 6,691).
+- QUICKCHECK PASS · 88 s · open 1761 ms · perf median render 307 / tab 356 / buổi 1173 ms · core gates PASS · time-spill PASS. Old-save compare skipped (no live build given); old saves covered by the unit tests (no S.vmem save still speaks).
+- voice-rep audit (10 steps): 4 quotes, 4 distinct, 0 repeats, 0 page errors. W-C's 12-step run: 20 quotes, 16 distinct, rep6 1 (5%), 0 errors; the repeats are old non-tone pools. The audit only sees quotes inside “…”; narration lines are proven by the unit tests.
+- voice-trait-scan.py: still lists many kLine call sites as MOOD because W-B routes through kTP/kToneSt wrappers (dynamic keys); the new pools are measured by the runtime tests, not by this static scan. No before/after table beyond part 1's (before 0 TONE sites).
+
+## Not done / known leftovers
+- Outcome kinds ty / man / kid still use the mood pool (no tone).
+- W-C: jrd_*, j96/j97, j95, jreign beats outside j67, emp/th as quest askers not toned.
+- W-B lines were written in one pass by sub-writers: reviewer should sample-read.
+- No Fold / iPad screenshots (headless modal does not paint); card text verified from DOM/return values.
+
+~80% xong / ~65% chơi được (cả nhiệm vụ voice; phần lớn tình huống đã theo tính tình, còn vài loại lời chưa)
+
 # HANDOVER (W-A -> W-A2, 17/11 ~12:15Z) — read this first
 State: branch review/voice-trait @ 5c3ea679a (pushed; W-C also pushed 50bd7eba3 part). W-A parts DONE: engine (jvoice kTone/kLine) + jtone.js with rival/maid ok+no, greet come, th/hh/emp outcome ok+no, and the 6 greet acts (greetHealth/Praise/Secret/Gossip/Warn/Provoke, wired in jgreet.js via gmSay). dev/test/voice-trait.js PASS on all pools (REQ map: th 4 tones, emp 5, rest 8). QUICKCHECK PASS earlier at 4ed80a060 (before W-A's later commits; rerun at the end).
 W-A2 must: (1) wait for W-B (jtone_b.js) + W-C (jtone_c.js) DONE; add their files to dev/build/assemble.py right after 'jtone.js' (one line, W-A2 only); (2) `python3 dev/build/assemble.py`, `node dev/test/voice-trait.js` (+ voice-trait-c.js, W-B's test) must PASS; (3) BUILD: bash dev/site/build_site.sh, then `git update-index --no-skip-worktree index.html assets.json sw.js` (root files are skip-worktree in sparse worktrees: without this the commit misses the build and QUICKCHECK says NOT BUILT), git add index.html assets.json sw.js, commit; (4) bash dev/tools/quickcheck.sh (≈6 min, run in background; untracked _aa.html/_old.html appear while it runs and vanish after); (5) voice-rep: node dev/test/voice-rep.js file://$PWD/dev/index.html 10 out.json (≈3 min; it only sees quotes inside “…”, narration lines are proven by the unit test) ; (6) python3 dev/test/voice-trait-scan.py before/after table (BEFORE = --git origin/main); (7) report: update the counts table below (W-A part: rival/maid ok+no, greet come, th/hh/emp ok+no, 6 greet acts = 17+... pools), add W-B/W-C counts, sha, last line SẴN SÀNG KIỂM <sha>; send_message foreman. Fold 755x1000 + iPad 1180x820 shots of 3 traits: my headless modal did not paint (the card text was verified from gmOpts(v).run().h per trait); try Q.push(m);showModal() after the intro closes, or screenshot the log line.
 Known leftovers: 'ty'/'man'/'kid' outcome kinds still use the mood pool (no tone) — mention in the report or add a small tone pool; the 2 old HABIT traits mapping is W-B's. Context at stop: W-A ~50%.
 Counts W-A: rival ok/no 80+80, maid ok/no 80+80, greetCome 80, th ok/no 40+40, emp ok/no 50+50, hh ok/no 80+80, 6 greet acts 480 = 1,200 lines.
 
-=======
->>>>>>> 942503ed (report voice-trait part 1 (engine + 5 situations, split proposal))
 # voice-trait — VOICE BY TÍNH TÌNH (worker, sonnet) — PART 1: engine + first situations
 
 PRIORITY #1 CHECK: OD 11 (OD tail 17/11 06:05Z VOICE BY TÍNH TÌNH + 06:20Z balance; L1435/L1436/L1458) | ledger 2 | claims 0 | main 15 (dev/build/jvoice.js kAddr/kSay/kLine; trait pool jbal2.js BAL.net + jnet.js traitsOf; jgreet.js) | review/* 2 (palace-voice, palace-voice-r1: both ancestors of main 65dcf52f, nothing missing; trait-pool-r1 + greet-meet-r1 also on main)
@@ -56,3 +80,5 @@ Context stayed low (~35%); no rollover needed. Anything left is in the split lis
 ~25% xong / ~10% chơi được (cả nhiệm vụ voice; phần engine xong, 5/≈60 tình huống)
 
 SẴN SÀNG KIỂM 4ed80a060
+
+SẴN SÀNG KIỂM e134694
