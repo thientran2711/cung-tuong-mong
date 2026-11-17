@@ -480,7 +480,7 @@
 | road-onecore (opus): B1 road files jrd_cn/tt/muoi/dtq 303 typed numbers → BAL (one-core-guard 0), from PASS c012bf32 | review/road-onecore | B | session_01N1tNP2CnQZTs1376PcZZun | RUNNING | 16/11 23:25Z |
 | tut-followups review r1 (opus, BIG) of aa391edf | review/tut-followups-r1 | B | session_01N1tNP54HW3RMjDu7rXSHce | RUNNING | 16/11 23:26Z |
 | emotion-acts-3 review r1 (opus, BIG) of 99a7eb84 | review/emotion-acts-3-r1 | B | session_01N1tNP2S1tTXpLvLnFrpHP2 | PASS 2118d118 → main batch (archived) | 16/11 23:31Z |
-| road-b2 one-core successor (opus): jrd_nc/td/ch typed numbers → BAL (gate 0), from bda971a2; then SẴN SÀNG | review/road-b2-fix | B | session_01N1tNP2boznW7SbhZfGfvpp | RUNNING | 16/11 23:33Z |
+| road-b2 one-core successor (opus): jrd_nc/td/ch typed numbers → BAL (gate 0), from bda971a2; then SẴN SÀNG | review/road-b2-fix | B | session_01N1tNP2boznW7SbhZfGfvpp | DONE SẴN SÀNG db5c49f4 (archived) | 16/11 23:33Z |
 | WHOLE FIGURE REPAINT lead #4 (sonnet art; successor of #3 session_011xDdVSheHFnhXPEAMEEfZT; HANDOVER #4 349cfeb7; 5 pilots HOLD for owner GO + 2k/4k) | review/fig-cutout-clean | C | session_011xDdVSWqu69NuYMoAK4SaC | RUNNING | 16/11 23:37Z |
 | road-b3 one-core successor (opus): jroad/jrd_thd/jrd_cnv/jend14 typed numbers → BAL (gate 0), from 83641f2a; then SẴN SÀNG | review/road-b3-fix2 | B | session_01N1tNP3P9XTBMP5HeZATrcL | RUNNING | 16/11 23:36Z |
 | WHOLE FIGURE REPAINT lead #5 (sonnet art; replaces #4 session_011xDdVSWqu69NuYMoAK4SaC which had no repo; pilots HOLD for owner GO + 2k/4k) | review/fig-cutout-clean | C | session_011xDdVRBW26agruDT2Bm65K | RUNNING | 16/11 23:40Z |
@@ -502,3 +502,4 @@
 | coop-main-faults review r1 (opus co-op) of 3751fbba (a,b,d; (c) + start-friend fails moved to coop-stable #2) | review/coop-main-faults-r1 | main s27 | session_01UV1SzhNibrJw9xWf4TES12 | RUNNING | 17/11 00:59Z |
 | coop-stable r1 review PASS 6f8e33a0 (= 744b80e7 + 6696656e) → batch-0032 incl. Worker deploy by the builder (reviewer archived) | review/coop-stable-r1 | main s27 | session_01UV1SzgbJc6UCzVHi6vVpju | PASS | 17/11 01:08Z |
 | it-key-guard (opus bug): npcMonthly j8.js:399 IT[e.k].tg undefined crash on live + 25-file family | review/it-key-guard | main s27 | session_01UV1SzhtmrVzHNMoDZ13Wac | RUNNING | 17/11 01:08Z |
+| road-b2-fix review r2 (opus, BIG) of db5c49f4 (incl. road-onecore 6a1112d1) | review/road-b2-fix-r2 | B | (opening) | RUNNING | 17/11 01:10Z |
