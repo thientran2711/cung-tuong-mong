@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"d4baf3b6","t":"2026-11-16T23:38Z","c":"Phẩm của món đồ nay nằm ngay trên viền khung ảnh, mọi nơi đều giống nhau.","b":"340321296257","h":[{"s":"7a18d957","t":"2026-11-16T22:44Z","c":"review-diemtrang-fx-r1 report"},{"s":"afe2bcbc","t":"2026-11-16T22:25Z","c":"review r1: KIT 84.1a note + report"},{"s":"dea1d445+","t":"2026-11-16T21:32Z","c":"golive lag-play-2: CHANGE line + site rebuilt"},{"s":"674f3af4","t":"2026-11-16T21:21Z","c":"Chơi cùng bạn: bạn chơi chung chưa gặp mặt nay hiện tên gọi chung “Hảo hữu của ta” ở mọi nơi, không còn ẩn thành dấu hỏi."},{"s":"923567d5+","t":"2026-11-16T21:03Z","c":"Hình nhân vật: hết vệt xám ở cổ và viền tối quanh người."},{"s":"59812a63+","t":"2026-11-16T20:41Z","c":"Khung chung: khoảng cách đều nhau ở sổ tuần và thẻ thân phận; hàng sổ gọn, thẻ lật không đè chữ."},{"s":"ab12d6fc","t":"2026-11-16T20:53Z","c":"Tuyết và đom đóm mới, mượt hơn; nền tranh không còn vẽ lại mỗi khung hình."},{"s":"8adfd886+","t":"2026-11-16T20:33Z","c":"Tư trang: các trang đều nhau, ô đồ đeo gọn trên Fold và iPad."},{"s":"b77d3250+","t":"2026-11-16T20:20Z","c":"Chơi cùng bạn: lời đáp Kỳ nguyệt sự của bạn đến kịp trước khi rút thẻ đêm; ghế đã đủ người báo gọn một lần."},{"s":"4a43ded3","t":"2026-11-16T20:23Z","c":"Tranh sủng đêm: NPC giành đêm theo luật chung, cả khi chơi chung."}]};
+window.CTM_BI={"s":"526e1bc8","t":"2026-11-17T00:02Z","c":"Phẩm của món đồ nay nằm ngay trên viền khung ảnh, mọi nơi đều giống nhau.","b":"38882e2d5978","h":[{"s":"7a18d957","t":"2026-11-16T22:44Z","c":"review-diemtrang-fx-r1 report"},{"s":"afe2bcbc","t":"2026-11-16T22:25Z","c":"review r1: KIT 84.1a note + report"},{"s":"dea1d445+","t":"2026-11-16T21:32Z","c":"golive lag-play-2: CHANGE line + site rebuilt"},{"s":"674f3af4","t":"2026-11-16T21:21Z","c":"Chơi cùng bạn: bạn chơi chung chưa gặp mặt nay hiện tên gọi chung “Hảo hữu của ta” ở mọi nơi, không còn ẩn thành dấu hỏi."},{"s":"923567d5+","t":"2026-11-16T21:03Z","c":"Hình nhân vật: hết vệt xám ở cổ và viền tối quanh người."},{"s":"59812a63+","t":"2026-11-16T20:41Z","c":"Khung chung: khoảng cách đều nhau ở sổ tuần và thẻ thân phận; hàng sổ gọn, thẻ lật không đè chữ."},{"s":"ab12d6fc","t":"2026-11-16T20:53Z","c":"Tuyết và đom đóm mới, mượt hơn; nền tranh không còn vẽ lại mỗi khung hình."},{"s":"8adfd886+","t":"2026-11-16T20:33Z","c":"Tư trang: các trang đều nhau, ô đồ đeo gọn trên Fold và iPad."},{"s":"b77d3250+","t":"2026-11-16T20:20Z","c":"Chơi cùng bạn: lời đáp Kỳ nguyệt sự của bạn đến kịp trước khi rút thẻ đêm; ghế đã đủ người báo gọn một lần."},{"s":"4a43ded3","t":"2026-11-16T20:23Z","c":"Tranh sủng đêm: NPC giành đêm theo luật chung, cả khi chơi chung."}]};
 /* KBOOT — BOOT COVER (owner 15/11 "Khi vừa bấm vào game, có chừng ít hơn 1 giây hiện khung này"; KIT §14.1).
    Before: while the 4 MB page parsed, the browser painted the bare static markup of p1.html (HUD box, a vertical stat label list, empty
    panels, the old 11-tab bar) for ~1 s on a warm open and many seconds on a cold one, before any kit CSS/JS existed.
@@ -21201,7 +21201,7 @@ document.addEventListener("click",ev=>{const t=ev.target.closest&&ev.target.clos
 /* the Xa xỉ box sits top-right, so the "đã tẩm" tag moves to the top-left (under the seal "Ngự" when both are there) */
 .kitem[class*=" kig"]:has(.kitx)>.kitb .kitm{right:auto;left:9%;top:max(31cqw,19px)}
 /* room for the half of the grade chip that hangs below the frame (named tiles; a bag slot has no name line and relies on its grid gap) */
-.kitem:not(.kitem-slot)>.kitb:has(>.kgchip-fr){margin-bottom:max(calc(var(--isz)*.06),5px)}
+.kitem:not(.kitem-slot)>.kitb:has(>.kgchip-fr){margin-bottom:calc(max(var(--isz)*.06,5px) + 3px)}
 `;const st=document.createElement("style");st.id="k2b-itemgrade";st.textContent=c;document.head.appendChild(st)})();
 
 /* ---------- 16. STAGE LAYOUT OWNER = j59 (main): after merging main, j59 lays out the stage (one height for every adult by the visible body,
@@ -23660,7 +23660,7 @@ document.addEventListener("keydown",e=>{if((e.key==="Enter"||e.key===" ")&&e.tar
 .keq .keqc{display:flex;flex-direction:column;align-items:center;gap:2px;min-width:0;text-align:center}
 .keq .keqc>.kitem-slot{width:min(var(--keqsz,96px),100%)}
 /* KIT §54.1b: the grade chip hangs half below the frame, so the caption under a wear / pet slot starts below it */
-.keq .keqc>.kitem-slot:not(.kitem-empty){margin-bottom:max(calc(var(--keqsz,var(--kside,72px))*.06),6px)}
+.keq .keqc>.kitem-slot:not(.kitem-empty){margin-bottom:calc(max(var(--keqsz,var(--kside,72px))*.06,6px) + 3px)}
 @supports (grid-template-rows:subgrid){.keq .keqs{grid-auto-rows:auto;align-items:start}.keq .keqc{display:grid;grid-row:span 4;grid-template-rows:subgrid;row-gap:2px;align-items:start;justify-items:center;align-content:start}
  .keq .keqc>.keqfx:empty,.keq .keqc>.keqnote:empty{min-height:0}.keq .keqc>.keqnm{margin-top:0}}
 .keq .keqnote{display:flex;justify-content:center;min-width:0}.keq .keqnote>.keql2{flex-basis:auto}
@@ -23902,6 +23902,8 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape"){for(const k in KSHO
 .kshpic{all:unset;box-sizing:border-box;display:block;width:100%;max-width:84px;aspect-ratio:1;cursor:zoom-in;border-radius:6px}
 .kshpic:focus-visible{box-shadow:0 0 0 2px var(--gold,#c9a46a)}
 .kshpic>.kitem-slot{width:100%;height:100%}
+/* KIT §54.1b: the grade chip hangs half below the frame; the name / price row starts below it (gap >= 3 px) */
+.kshc>.kshpic{margin-bottom:8px}
 .kshc.kshno .kshpic>.kitem-slot{filter:grayscale(.85) brightness(.92);opacity:.7}
 .kshn,.kshe{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden;line-height:var(--kshl);overflow-wrap:anywhere;width:100%;align-self:start}
 .kshn{font-weight:700;font-size:.8rem}
@@ -24071,7 +24073,7 @@ function wdFabOpen(x){const g=x.g,it=IT[g.k],gk=wdFabOf(g.k),w=WD_ITEMS[gk];cons
  B.push(pbtn(`data-kinvact="gift" data-ix="${i}"`,"Tặng","tốn: 2 khắc · thành: chọn người nhận",whyTime(2)));
  if(it.pr)B.push(pbtn(`data-kinvact="sell" data-ix="${i}"`,"Bán",`thành: Bạc +${Math.floor(it.pr/2)}`,""));
  const gr=KIT_GRADE[x.grade|0];const rows=kitItemRows(g.k,{e:S.inv[i]});const fr="";/* origin: the Lai lịch row (KIT §70) */
- kitModal({kind:"info",title:it.n,sub:`${it.kd} · ${gr.n}`,itemPic:kitItem({src:x.src512||x.src,name:"",grade:x.grade,size:"lg",qty:g.n}).replace('<span class="kitn"></span>',''),
+ kitModal({kind:"info",title:it.n,sub:it.kd,itemPic:kitItem({src:x.src512||x.src,name:"",grade:x.grade,size:"lg",qty:g.n}).replace('<span class="kitn"></span>',''),
   html:`<div class="kinvrows">${rows}</div>${g.n>1||fr?kitFacts([g.n>1?`Trong rương: ${g.n} món.`:"",fr?fr+".":""].filter(Boolean)):""}<div class="rbtn kinvacts">${B.join("")}</div>`,btn:"Lui"})}
 (function(){const o0=kinvOpen;kinvOpen=function(x){try{if(x&&x.g&&WD_ITEMS[x.g.k])return wdOpen(x);if(x&&x.g&&IT[x.g.k]&&IT[x.g.k].dr&&wdFabOf(x.g.k))return wdFabOpen(x)}catch(e){console.error("wdOpen",e)}return o0.apply(this,arguments)}})();
 /* a [data-wd] act inside an item panel closes the panel first (like jinv's [data-kinvact]) */
@@ -24222,7 +24224,7 @@ function econWkOpen(x){const i=x.g.i,e=S.inv[i],w=e.wk,ar=ARTS.find(y=>y.k===w.a
  if(!w.show&&w.p==null)B.push(pbtn(`data-wk="show" data-ix="${i}"`,"Bày ở yến tiệc",`tốn: 2 khắc · thành: Danh +${WSHOW[w.ti]}${w.ti===3?" · kèm: phi tần ghen +2":""}`,t2));
  /* the rows = KIT §70 kitItemDetailRows (same Phẩm · Loại · Được · Lai lịch · Ghi chú as every item) */
  const rows=kitItemDetailRows({ix:i});
- kitModal({kind:"info",title:w.n,sub:`Tác phẩm tự tay · ${gr.n}`,itemPic:kitItem({src:x.src512||x.src,name:"",grade:econWkGrade(w),size:"lg"}).replace('<span class="kitn"></span>',''),
+ kitModal({kind:"info",title:w.n,sub:"Tác phẩm tự tay",itemPic:kitItem({src:x.src512||x.src,name:"",grade:econWkGrade(w),size:"lg"}).replace('<span class="kitn"></span>',''),
   html:`<div class="kinvrows">${rows}</div><div class="rbtn kinvacts">${B.join("")}</div>`,btn:"Lui"})}
 (function(){const o0=kinvOpen;kinvOpen=function(x){try{const e=x&&x.g&&x.g.i>=0?S.inv[x.g.i]:null;if(e&&e.wk)return econWkOpen(x);
   /* plain items: the sale card says the real risk (a gift of Hoàng thượng / Thái hậu / Hoàng hậu) */
@@ -39506,7 +39508,7 @@ function rcpBookRows(k){const b=rcpBk(k),a=itemArt(k),gr=KIT_GRADE[a?a.grade|0:0
  const kn=rcpKnows(S,b.kind,b.sid);const B=[pbtn(`data-rcpread="${i}"`,"Đọc, học lối này",`tốn: 1 khắc · thành: học ${rcpStN(b.kind,b.sid)}`,kn?"đã học lối này":whyTime(1)),
   pbtn(`data-kinvact="gift" data-ix="${i}"`,"Tặng","tốn: 2 khắc · thành: chọn người nhận",whyTime(2)),pbtn(`data-kinvact="sell" data-ix="${i}"`,"Bán",`thành: Bạc +${Math.floor((it.pr||0)/2)}`,"")];
  const F=[];if(g.n>1)F.push(`Trong rương: ${g.n} món.`);const fr=kinvFrom(g.from);if(fr)F.push(fr+".");
- kitModal({kind:"info",title:it.n,sub:`${it.kd} · ${KIT_GRADE[x.grade|0].n}`,itemPic:kitItem({src:x.src512||x.src,name:"",grade:x.grade,size:"lg",qty:g.n}).replace('<span class="kitn"></span>',''),
+ kitModal({kind:"info",title:it.n,sub:it.kd,itemPic:kitItem({src:x.src512||x.src,name:"",grade:x.grade,size:"lg",qty:g.n}).replace('<span class="kitn"></span>',''),
   html:`<div class="kinvrows">${rcpBookRows(g.k)}</div>${F.length?kitFacts(F):""}<div class="rbtn kinvacts">${B.join("")}</div>`})}})();
 document.addEventListener("click",ev=>{const b=ev.target.closest&&ev.target.closest("[data-rcpread]");if(!b||b.disabled)return;ev.stopPropagation();const ix=+b.dataset.rcpread;
  try{if(typeof kitModalClose==="function")kitModalClose()}catch(e){}if(Q.length&&!Q[0].opts)closeModal();rcpRead(ix)},true);
@@ -40840,7 +40842,7 @@ function kipTile(c,i,on){const e=S.inv[c.ik],I=kipItem(e),lock=kipLocked(c);
  return `<div class="kshc kshpick kipc${lock?" kshno":""}${on?" on":""}" role="radio" aria-checked="${on?"true":"false"}" data-kip="${i}">`+
   `<button type="button" class="kshpic" data-kip="${i}" aria-label="${kipE(I.name)}">${kitItem({src:I.src,name:I.name,grade:I.grade,size:"slot",tip:I.name,mark})}</button>`+
   `<span class="kshn"${I.col?` style="color:${I.col}"`:""} title="${kipE(I.name)}">${kipE(I.name)}</span>`+
-  `<span class="kshe" title="${kipE(I.use)}">${kipE(I.use)}</span><span class="kshp">${kipE(I.gname)}</span></div>`}
+  `<span class="kshe" title="${kipE(I.use)}">${kipE(I.use)}</span></div>`}
 /* the detail: the option's own decorated kit card (a display copy: name, odds, Tốn / Được / Mất / Kèm or the reason) + the confirm button.
    KIT §70 item detail (kitItemDetail strip, jitd) sits above the card (reviewer r1, item-info landed). */
 function kipDetail(M,m,i){const d=M.querySelector(".kipd");if(!d)return;const c=m.opts[i];const src=M.querySelector(`.opts>.opt[data-m="${i}"]`);
@@ -40908,7 +40910,7 @@ function kipRecv(i){try{const m=Q[0],M=$("modal");if(!m||!/^(giftin|pgin)$/.test
 #modal .opts.kiphas>.opt{display:none!important}
 html body #modal .opts.kiphas>.kipw{grid-column:1/-1!important;width:100%;max-width:none!important}
 .kipg{--kshsz:96px;flex:none;max-height:min(calc(46*var(--kvh,1vh)),420px)}
-.kshc.kshpick.kipc{grid-template-rows:auto calc(2rem * 1.2 * .8) calc(2rem * 1.2 * .72) calc(1rem * 1.3 * .8);cursor:pointer}
+.kshc.kshpick.kipc{grid-template-rows:auto calc(2rem * 1.2 * .8) calc(2rem * 1.2 * .72);cursor:pointer}
 .kshc.kipc>.kshpic{cursor:pointer;transition:transform .15s}
 .kipw.has .kshc.kipc:not(.on){opacity:.75}
 .kshc.kipc.on>.kshpic{filter:var(--k-glow);transform:scale(1.06)}
@@ -40925,7 +40927,7 @@ html body #modal .opts.kiphas>.kipw{grid-column:1/-1!important;width:100%;max-wi
 `;document.head.appendChild(st)})();
 if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§28.13i",title:"Item pick grid (Tặng quà · Dâng quà · Cài đồ) — tile + selected",html:()=>{try{
  const L=Object.keys(IT).filter(k=>!IT[k].story).slice(0,4);return `<div class="kipw kshop has"><div class="kshg kipg">${L.map((k,i)=>{const I=kipItem({k});
-  return `<div class="kshc kshpick kipc${i===1?" on":""}"><span class="kshpic">${kitItem({src:I.src,name:I.name,grade:I.grade,size:"slot"})}</span><span class="kshn" style="color:${I.col}">${kipE(I.name)}</span><span class="kshe">${kipE(I.use)}</span><span class="kshp">${kipE(I.gname)}</span></div>`}).join("")}</div></div>`}catch(e){return""}}});
+  return `<div class="kshc kshpick kipc${i===1?" on":""}"><span class="kshpic">${kitItem({src:I.src,name:I.name,grade:I.grade,size:"slot"})}</span><span class="kshn" style="color:${I.col}">${kipE(I.name)}</span><span class="kshe">${kipE(I.use)}</span></div>`}).join("")}</div></div>`}catch(e){return""}}});
 /* ================= jstaff: NAMED PALACE STAFF (owner 16/11, review/elder-staff) =================
    Five named servants hold the palace's offices, each with 3–4 duties (numbers and names in BAL.staff, jbal.js):
      gt  Giáo tập ma ma, Trữ Tú cung: sent by Thái hậu, in Thái hậu's household; teaches tú nữ, lễ nghi, tuyển tú; the tutorial guide.
@@ -45811,7 +45813,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="340321296257";window.CTM_BUILD=BUILD;
+const BUILD="38882e2d5978";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
