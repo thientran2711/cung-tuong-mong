@@ -54,6 +54,7 @@ OPEN OWNER QUESTIONS: (B) explicit OK to overwrite live fig-maid-*-ty* with the 
 IDLE (C's): art lead #7 session_011xDdVNkgEgTqsZJxUh9Xd8; W8 mama session_011xDdVRWZVWQYAYYva3YuqJ. ROOT-6 session_011xDdVQNdyTACuGN42yEBQZ stopped (ROOT-5's child; not archived by C).
 
 FOREMAN C ROOT-11 (art) = session_011xDdVNLq2NWC7ydVNWPB9z · START_CTX ~7% (get_session reads 0, own estimate) → roll over at >= 32%, ceiling 60% · lineage depth 4/8 · own hourly wake trig_011iCdztobQJwsi52BqzBqct (:32) · reports to MAIN s34 via this file.
+- 21:35Z(wall) C LOOKED W10 m09 round 11 (fresh gens, 8 colours): t5–t8 good (t5 both sides, crowns w/ tassels) → SENT owner t5 + t6 singles. t1–t4 held: t2 pins not above t1 (same pin, smaller flowers), t4 ≈ t3, t2–t4 all round fans → W10 redo t2/t4 fresh, vary held items.
 - 21:22Z(wall) Told ROOT-10 (disable its wake, stop), W11, W10, W13, W12, hoa-điền #2, R5e4, fig-style-audit, lead #7 (for W2f + W8): ROOT-11 is their foreman, orders unchanged. Waiting first singles.
 - 21:30Z(wall) ROOT-11 took over (TAKEOVER_FOREMAN_C_ROOT11.md + START_CORE/FOREMAN/ART + art-costumes + ROOT-10 HANDOVER + log + 5 reports read). Telling ROOT-10, W11, W10, W13, W12, hoa-điền #2, R5e4, fig-style-audit, lead #7, W8.
 FOREMAN C ROOT-10 (art) = session_011xDdVReyG8hSRH5URJJdVX · START_CTX ~5% (get_session reads 0, own estimate) → roll over at >= 30%, ceiling 60% · lineage depth 3/8 · own hourly wake trig_016cbgoeT1np55rZem823Rxq (:32) · reports to MAIN s34 via this file.
