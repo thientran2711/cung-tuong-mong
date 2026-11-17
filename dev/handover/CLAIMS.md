@@ -887,4 +887,4 @@
 | emo-seal ANIM: every mood seal animates everywhere (one kit part) + khóc/hờn seals (OD 18:00Z) — folded into kit-figure-mood; art = Foreman C | review/kit-figure-mood | MAIN s35 | session_01UV1SzjLSjT2E1w24wsPwS5 | RUNNING | 17/11 17:32Z |
 | HOA ĐIỀN item + placing minigame (ORDER main s34 17:45Z; opus BIG; brief briefs/hoa-dien.md; stacked on makeup-lux) | review/hoa-dien | B | session_01N1tNP6SdCcvsQaB11nruyu | RUNNING | 17/11 17:40Z |
 | REVIEW kit-figure-mood r1 of c7d4b72a (sonnet SMALL; brief briefs/s35-review-kit-figure-mood.md) | review/kit-figure-mood-r1 | MAIN s35 | session_01UV1Szkv9nsgVqSwQC5r8a8 | RUNNING | 17/11 17:47Z |
-| day-khac-audit fix round 2 (opus; courtMeet accState.why spill-block, dayFit typed 4, j77 "vào buổi này") | review/day-khac-audit-r1 | D | (opening) | RUNNING | 17/11 17:50Z |
+| day-khac-audit fix round 2 (opus; courtMeet accState.why spill-block, dayFit typed 4, j77 "vào buổi này") | review/day-khac-audit-r1 | D | session_01964izFWMBhdej2k6C1qo1c | RUNNING | 17/11 17:50Z |
