@@ -52,6 +52,15 @@ agReg("consort","ally",(v,N,need)=>{if(need&&need!=="ally")return[];if(!ACT.ally
  return u>0?[{k:"cx:ally",t,u,tag:"help",act:"sang kết giao",at:(kh,vv,tt)=>tt===S?"home":agAt(tt,kh)}]:[]});
 agRunReg("cx:ally",(v,t)=>{if(!t||(v.bac||0)<BAL.ag.cx.ally.bac)return"";return String(ACT.ally.f(v,t)||"").replace(/\.\s*$/,"")});
 
+/* Vẽ chân dung tặng Thái hậu (j2: Họa ≥ 3, the same cost / odds / gain) and Nhún nhường (j9: before someone who resents her) */
+agReg("consort","more",(v,N,need)=>{const O=[];const X=BAL.ag.cx;
+ if(!S.thDead&&(v.arts&&v.arts.hoa||0)>=X.portrait.hoa&&(!need||need==="th")&&agcCan(v,X.portrait.c)){let aw=0;try{aw=artW2(v,"hoa")}catch(e){}const o=odA(v,X.portrait.o+aw*X.portrait.k);
+  const u=agcU(v,N,o,{th:X.portrait.w.th},X.portrait.c,"art",{th:-X.portrait.l.th});if(u>0)O.push({k:"cx:portrait",t:null,u,tag:"art",act:"vẽ chân dung dâng Thái hậu",at:kh=>{const k=agThAt(kh);return k==="tn"?k:null}})}
+ if((!need||need==="safe")&&(v.danh||0)>=-X.humble.c.danh){const L=others(v).filter(t=>t&&t!==v&&(t===S||t.alive)&&oan(t,v)>=X.humble.oan);if(L.length){const t=mindPickBy(L,x=>BAL.mind.pick.ag.base+oan(x,v),v);
+  const u=agcU(v,N,100,{safe:X.humble.g},X.humble.c,"help");if(t&&u>0)O.push({k:"cx:humble",t,u,tag:"help",act:"sang nhún nhường",at:(kh,vv,tt)=>tt===S?"home":agAt(tt,kh)})}}
+ return O});
+agRunReg("cx:portrait",(v)=>{const X=BAL.ag.cx.portrait;if(!agcCan(v,X.c))return"";agcPay(v,X.c);let aw=0;try{aw=artW2(v,"hoa")}catch(e){}if(roll(odA(v,X.o+aw*X.k))){ap(v,X.w);return `${v.name} vẽ chân dung dâng Thái hậu, Thái hậu rất vui`}ap(v,X.l);return `${v.name} vẽ chân dung dâng Thái hậu, Thái hậu chê không giống`});
+agRunReg("cx:humble",(v,t)=>{const X=BAL.ag.cx.humble;if(!t)return"";ap(v,X.c);oanAdd(t,v,-X.oanDown);affAdd(t,v,X.aff);return `${v.name} nhún nhường trước ${agcNm(t)}`});
 /* ---------------- 2. HOÀNG HẬU: the player-as-Empress buttons (empAct: Xử tội / Tịch thu / Ban thưởng / Ân xá / Khất bổng lộc) ---------------- */
 /* ONE function for her and the NPC Empress (empAct calls it for the player) */
 function hhAct(a,v,k){const me=a===S;const nm=me?"Ngươi":`Hoàng hậu ${a.name}`;
@@ -98,7 +107,7 @@ agRunReg("th:admon",(th,p)=>{if(!p||S.thDead)return"";const me=p===S;const b=p.s
 agRunReg("th:release",(th,p)=>{if(!p||!p.out||S.thDead)return"";if(p===S){restore(false,"Thái hậu mở lòng từ bi");return"Thái hậu mở lòng từ bi, tha ngươi khỏi lãnh cung"}p.out=false;p.rank=0;p.confined=0;return `Thái hậu mở lòng từ bi, tha ${p.name} khỏi lãnh cung`});
 /* ledger labels of the new deeds (dev table, tai mắt lines) */
 try{for(const k in AGCX)ACT95["ag_cx:"+k]=AGCX[k].act;Object.assign(ACT95,{"ag_cx:study":"tự học","ag_cx:thHelp":"xin Thái hậu đỡ lời","ag_cx:hhShield":"xin Hoàng hậu che chở",
- "ag_cx:buy":"mua đồ ở Nội vụ phủ","ag_cx:gift":"đem quà đi tặng","ag_cx:ally":"sang kết giao","ag_admon":"khuyên Hoàng thượng mưa móc đều khắp","ag_th:gift":"ban thưởng","ag_th:admon":"khuyên Hoàng thượng","ag_th:release":"xét tha người ở lãnh cung"});
+ "ag_cx:buy":"mua đồ ở Nội vụ phủ","ag_cx:gift":"đem quà đi tặng","ag_cx:ally":"sang kết giao","ag_cx:portrait":"vẽ chân dung dâng Thái hậu","ag_cx:humble":"sang nhún nhường","ag_admon":"khuyên Hoàng thượng mưa móc đều khắp","ag_th:gift":"ban thưởng","ag_th:admon":"khuyên Hoàng thượng","ag_th:release":"xét tha người ở lãnh cung"});
  for(const k in AGHH)ACT95["ag_hh:"+k]=AGHH[k].act}catch(e){}
 /* ---------------- 4. THE EMPEROR's day: he calls someone to play đàn / cờ / du hồ with him (was jts weekly roll 14 × mood) ---------------- */
 agRegNeeds("emp",()=>{const E=BAL.ag.emp2;let m=1;try{m=tsMoodW()}catch(e){}let busy="";try{busy=empBusy()}catch(e){}return{company:E.company*m*(busy?E.busyF:1),rest:busy?E.rest:0}});

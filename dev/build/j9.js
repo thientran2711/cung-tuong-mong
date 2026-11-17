@@ -60,7 +60,7 @@ function topicOpts(v){const f=chatF(v),g=n=>Math.max(1,Math.round(n*f)),third=li
  const foe=liveRivals(true).filter(x=>x!==v&&oan(x,v)>=TK.warn.foe)[0];
  A.push({n:"Cảnh báo nàng",o:100,x:foe?`có kẻ đang oán nàng: nàng quý ngươi +${g(TK.warn.hit)}`:`không có căn cứ: nàng quý ngươi -${TK.warn.miss}`,run:()=>{chatMark(v);if(foe){affAdd(v,S,g(TK.warn.hit));oanAdd(v,foe,TK.warn.oan);return `Ngươi nhắc ${v.name} coi chừng ${foe.name}. Nàng quý ngươi +${g(TK.warn.hit)}.`}affAdd(v,S,-TK.warn.miss);return `${v.name} nghi ngươi gây chia rẽ. Nàng quý ngươi -${TK.warn.miss}.`}});
  if(oan(v,S)>0){A.push({n:"Tạ lỗi",o:100,c:{danh:-1},x:"oán -15",run:()=>{oanAdd(v,S,-15);chatMark(v);return `Ngươi hạ mình tạ lỗi. ${v.name} oán -15.`}});
-  A.push({n:"Nhún nhường",o:100,c:{danh:-2},x:"oán -8 · nàng quý ngươi +2",run:()=>{oanAdd(v,S,-8);affAdd(v,S,2);chatMark(v);return `Ngươi nhún nhường trước ${v.name}. Oán -8, nàng quý ngươi +2.`}})}
+  A.push({n:"Nhún nhường",o:100,c:{...BAL.ag.cx.humble.c},x:`oán -${BAL.ag.cx.humble.oanDown} · nàng quý ngươi +${BAL.ag.cx.humble.aff}`,run:()=>{oanAdd(v,S,-BAL.ag.cx.humble.oanDown);affAdd(v,S,BAL.ag.cx.humble.aff);chatMark(v);return `Ngươi nhún nhường trước ${v.name}. Oán -${BAL.ag.cx.humble.oanDown}, nàng quý ngươi +${BAL.ag.cx.humble.aff}.`}})}
  A.push({n:"Giúp đỡ nàng",c:{bac:-20},o:100,x:"nàng quý ngươi +10 · oán -5",run:()=>{relAdd(S,v,10);oanAdd(v,S,-5);chatMark(v);return `Ngươi giúp ${v.name} việc khó. Nàng quý ngươi +10.`}});
  if(same)return A.filter(a=>["Hỏi han sức khỏe","Bàn tán về "+(third?third.name:""),"Tạ lỗi","Nhún nhường"].includes(a.n)).concat([{n:"Cùng cung",o:100,lock:true,t:"không thể lấy lòng hay ra tay",x:""}]);
  return A}

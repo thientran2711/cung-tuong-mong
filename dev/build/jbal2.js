@@ -829,3 +829,6 @@ BAL.ag.day.mood={min:30,k:{vui:{ally:1.4,sung:1.2,_:.8},buon:{rest:1.6,ally:1.2,
 /* AG-ALL the Emperor's day (jagacts §4): company = his wish for company per buổi (× his mood tsMoodW; the old weekly roll 14 × mood ≈ this over the
    4 buổi of a day against BAL.ag.routine), busyF = × when busy (ill / Chăm chính / court crisis), rest = his rest need then, buoi = the buổi (j95c) he summons in */
 BAL.ag.emp2={company:.38,busyF:.4,rest:.5,buoi:[1,2]};
+/* AG-ALL consort cards (jagacts "more"; the player's j2 / j9 cards read the same): portrait = Vẽ chân dung tặng Thái hậu (Họa ≥ hoa, odds o + artW × k);
+   humble = Nhún nhường (cost, oán −oanDown, quý +aff; an NPC does it before someone whose oán toward her ≥ oan; g = safety points) */
+Object.assign(BAL.ag.cx,{portrait:{hoa:3,c:{suc:-10,bac:-10},o:50,k:8,w:{th:10},l:{th:-1}},humble:{c:{danh:-2},oanDown:8,aff:2,oan:20,g:4}});

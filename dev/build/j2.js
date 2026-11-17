@@ -54,7 +54,7 @@ function artActs(){const A=[],r=S.arts;
  if(r.cam>=D.cam.lv)A.push({n:"Đàn khúc Phượng cầu hoàng",t:"Tiếng đàn đêm trăng vọng đến Dưỡng Hòa điện.",c:Object.assign({},D.cam.c),o:od(deckOdds(S,"cam")),w:deckGain("cam"),l:deckLoss("cam")});
  if(r.vu>=D.vu.lv)A.push({n:"Kinh hồng vũ",t:"Điệu múa trong yến tiệc khiến cả điện lặng người.",c:Object.assign({},D.vu.c),o:od(deckOdds(S,"vu")),w:deckGain("vu"),l:deckLoss("vu"),x:`các phi tần ghen +${ghenN(BAL.tw.g.vu[0])}, thiện cảm -${BAL.tw.g.vu[1]}`,go:()=>{ghenAll(BAL.tw.g.vu[0]);liveRivals(true).forEach(v=>v.rel-=BAL.tw.g.vu[1])}});
  if(r.ky>=D.ky.lv)A.push({n:"Đánh cờ với Hoàng thượng",t:"Biết lúc thắng, biết lúc nhường.",c:Object.assign({},D.ky.c),o:od(deckOdds(S,"ky")),w:deckGain("ky"),l:deckLoss("ky")});
- if(r.hoa>=3)A.push({n:"Vẽ chân dung tặng Thái hậu",t:"Mất nửa tháng, từng sợi tóc bạc.",c:{suc:-10,bac:-10},o:od(50+artW("hoa",r.hoa)*8),w:{th:10},l:{th:-1}});
+ if(r.hoa>=BAL.ag.cx.portrait.hoa)A.push({n:"Vẽ chân dung tặng Thái hậu",t:"Mất nửa tháng, từng sợi tóc bạc.",c:{...BAL.ag.cx.portrait.c},o:od(BAL.ag.cx.portrait.o+artW("hoa",r.hoa)*BAL.ag.cx.portrait.k),w:{...BAL.ag.cx.portrait.w},l:{...BAL.ag.cx.portrait.l}});
  return A}
 function deal(){
  const X=[];const v=S.tonight&&S.tonight!=="me"?S.tonight:null;
