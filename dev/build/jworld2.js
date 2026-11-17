@@ -275,7 +275,7 @@ XH.push(x2Tick);
 /* the court roll (batch-1 wCourt reads S.wMM): châu chấu after a failed relief that left Kho lúa between dis.kho and trung.kho;
    giới nghiêm when Biên cương falls below BAL after a lost battle */
 XH.push(function(){if((S.tuan||0)!==0)return;const M=S.wMM,T=T_();if(!M||!T||M.done2)return;M.done2=1;const b=B();
- if((M.k==="lut"||M.k==="han")&&M.fail&&T.kho>=b.dis.kho&&T.kho<b.trung.kho&&b.trung.months.includes(S.month))ws("trung","Sau trận "+(M.k==="lut"?"lũ":"hạn")+", châu chấu nổi lên ăn lúa",{len:b.trung.len});
+ if((M.k==="lut"||M.k==="han")&&M.fail&&T.kho>=b.dis.kho&&T.kho<b.trung.kho&&S.month>=b.trung.m0&&S.month<=b.trung.m1)ws("trung","Sau trận "+(M.k==="lut"?"lũ":"hạn")+", châu chấu nổi lên ăn lúa",{len:b.trung.len});
  if(M.k==="giac"&&M.fail&&T.bien<b.cam.bien)ws("cam","Giặc tràn qua biên ải, kinh thành giới nghiêm",{len:b.cam.len})});
 /* vu cổ: a REAL bùa / hình nhân found while someone of the Emperor's house is ill. ONE cause function, called from both roads that dig one up:
    framed() (j8 Vu oan, j42 plant, the month search, jtruth) and the j8 "kframe" act (hình nhân trù ẻo in a son's room, no framed() call). */
