@@ -15,7 +15,7 @@ const {chromium}=require('playwright');const {serve,BASE}=require('./coop-serve.
 const WURL=process.argv[2]||'https://ctm-coop.victoria-tntt.workers.dev';const LVL=+(process.argv[3]||2);const SWAP=+(process.argv[4]||0);const ONLY=(process.argv[5]||'').split(',').filter(Boolean);
 const res=[];const ok=(c,m,x)=>{res.push([!!c,m]);console.log((c?'ok  ':'FAIL')+' '+m+(x!==undefined?' '+JSON.stringify(x).slice(0,c?300:2500):''))};
 const sleep=ms=>new Promise(r=>setTimeout(r,ms));
-async function mk(b,name,vp,want,trip){const ctx=await b.newContext({viewport:{width:vp[0],height:vp[1]},deviceScaleFactor:process.env.SHOTS?2:1,reducedMotion:'reduce'});await serve(ctx);if(process.env.DFLAG)await ctx.addInitScript(()=>{try{localStorage.setItem('ctm-thin-part-4','1')}catch(e){}});
+async function mk(b,name,vp,want,trip){const ctx=await b.newContext({viewport:{width:vp[0],height:vp[1]},deviceScaleFactor:process.env.SHOTS?2:1,reducedMotion:'reduce',hasTouch:!!process.env.TOUCH});await serve(ctx);if(process.env.DFLAG)await ctx.addInitScript(()=>{try{localStorage.setItem('ctm-thin-part-4','1')}catch(e){}});
   await ctx.addInitScript(([u,w])=>{window.COOP_URL=u;window.__co=()=>{const c=window.COOP;if(!c)return{};const s=c.state||{};return{code:c.code,seat:c.seat,week:c.week,frozen:!!c.frozen,waiting:!!(window.COOPW&&COOPW.on&&(COOPW.sent===(s.week||0)||(c.seat&&(c.ended||{})[c.seat]))),world:typeof S!=='undefined'&&!!S&&!!(window.COOPW&&COOPW.base)}};if(w)try{localStorage.setItem('ctm-thin',String(w))}catch(e){}
    const W0=window.WebSocket;window.__tx=[];window.WebSocket=function(a,p){const s=p===undefined?new W0(a):new W0(a,p);window.__ws=s;const sd=s.send.bind(s);
     s.send=d=>{try{if(typeof d==='string'){const m=JSON.parse(d);__tx.push(m.t==='do'?'do:'+m.op+':'+(m.args&&m.args.st):m.t)}}catch(e){}return sd(d)};return s};
@@ -74,6 +74,8 @@ const until=async(o,fn,arg,ms=40000)=>{try{await o.p.waitForFunction(fn,arg,{tim
   if(process.env.SHOTS){await tapText(G,/^Bỏ qua$/,1500);await sleep(300);for(const [vw,vh] of [[755,1000],[1180,820]]){await G.p.setViewportSize({width:vw,height:vh});await sleep(400);await G.p.screenshot({path:require('path').join(process.env.SHOTS,'wait-'+vw+'x'+vh+'.png')});
     const ov=await G.p.evaluate(()=>document.documentElement.scrollWidth>innerWidth);ok(!ov,'R0 wait note '+vw+'x'+vh+': no horizontal overflow')}await G.p.setViewportSize({width:SWAP?686:1180,height:SWAP?880:820})}
   ok(w.thw&&!w.nl&&!w.old&&!w.kpid&&!w.tabs&&w.wait,'R0 wait note: no person drawn (not the dead old life '+old+'), no Độ khó tabs, the wait text shown',w);
+  if(process.env.TOUCH){/* r2 reviewer: REAL touch on every button of the wait note (✕ included) */const bx=await G.p.evaluate(()=>[...document.querySelectorAll('#modal button,#modal .x,#modal [onclick]')].filter(e=>e.offsetParent).map(e=>{const r=e.getBoundingClientRect();return [r.x+r.width/2,r.y+r.height/2,(e.textContent||'').trim().slice(0,20)]}));
+   console.log('R0 touch targets',JSON.stringify(bx));for(const [x,y] of bx){await G.p.touchscreen.tap(x,y);await sleep(300)}ok(bx.length>0,'R0 real touch: tapped '+bx.length+' wait-note buttons')}
   await G.p.evaluate(()=>{try{nlAccept(true)}catch(e){}try{nlAccept()}catch(e){}try{closeModal()}catch(e){}});
   const T=(await tx()).slice(t0);const g=await G.p.evaluate(()=>({life:COOPW.life||0,acc:(window.__ctx||[]).filter(x=>/do:life:accept|^me$/.test(x)).length}));
   ok(!T.some(x=>/do:life:accept|^me$/.test(x))&&g.life===l0,'R0 ✕ / Nhận / close on the wait note: no accept, no me, no local life',{T,g});
@@ -124,6 +126,24 @@ const until=async(o,fn,arg,ms=40000)=>{try{await o.p.waitForFunction(fn,arg,{tim
  /* 5. reconnect (socket drop) mid-roll */
  {const l0=(await lifeOf()).hb;await begin('bd');await G.p.evaluate(()=>{try{__ws.close()}catch(e){}});
   const L=await settle(l0);await same('R5');ok(L.hb===l0+1&&L.g===l0+1,'R5 socket drop mid-roll: one new life',L)}
+ /* r2 reviewer R7 (B‖D seam, D on): the host acts on HER (Kết giao invite = a part-D card built in her context) while her rolled life is
+    still held (Luân hồi card up, not accepted) → after accept: no card twice (no "Nhập cung" from both B's q and D's takeQ), the invite once, thq 0 */
+ /* R7c control (no invite): what her Q holds right after accept in the normal flow */
+ {const l0=(await lifeOf()).hb;await begin('tt');ok(await cardUp(),'R7c card up');await sleep(1500);await G.p.evaluate(()=>{try{nlAccept()}catch(e){}});await until(G,l=>(COOPW.life||0)>l&&!COOPW.inLife,l0,30000);await sleep(4000);
+  const qc=await dupQ();console.log('R7c after accept (control)',JSON.stringify(qc));ok(qc.t.filter(t=>/Nhập cung/.test(t)).length===1,'R7c control: Nhập cung once after accept',qc.t);await settle(l0)}
+ if(process.env.DFLAG||process.env.LVL4){const l0=(await lifeOf()).hb;await begin('tt');ok(await cardUp(),'R7 card up (roll held)');
+  const q0=await dupQ();const hd0=await H.p.evaluate(()=>({hold:COOPW.thin.life.hold,log:JSON.stringify(COOPW.thin.D.log.slice(-3))}));
+  await H.p.evaluate(()=>{try{runAct(S,rivals.find(v=>v.coop),'ally')}catch(e){window.__r7e=String(e)}});await sleep(5000);
+  const q1=await dupQ();const hd1=await H.p.evaluate(()=>({hold:COOPW.thin.life.hold,e:window.__r7e||null,log:JSON.stringify(COOPW.thin.D.log.slice(-4))}));
+  console.log('R7 before',JSON.stringify(q0),JSON.stringify(hd0),'after invite',JSON.stringify(q1),JSON.stringify(hd1));
+  await G.p.evaluate(()=>{try{nlAccept()}catch(e){}});await until(G,l=>(COOPW.life||0)>l&&!COOPW.inLife,l0,30000);await sleep(4000);
+  const q2=await dupQ();console.log('R7 after accept',JSON.stringify(q2));
+  const cnt={};for(const t of q2.t){const k=t.split('|').slice(0,2).join('|');cnt[k]=(cnt[k]||0)+1}const dup=Object.entries(cnt).filter(([k,n])=>n>1);
+  ok(!dup.length,'R7 after accept: no card twice in her Q (B q vs D takeQ)',{dup,t:q2.t});
+  ok(q2.t.filter(t=>/Hảo hữu tìm đến/.test(t)).length===1,'R7 the host invite is still on her phone after accept, once (not lost by the new life, not doubled)',{q1:q1.t,q2:q2.t});
+  ok(q2.t.filter(t=>/Nhập cung/.test(t)).length===1,'R7 her new life Nhập cung card shown once after accept (not stolen by D takeQ, not doubled)',q2.t);
+  ok(q1.t.filter(t=>/Nhập cung/.test(t)).length<=1,'R7 while held: Nhập cung not shown twice (D takeQ must not take the rolled life dialogs)',q1.t);
+  const L=await settle(l0);ok(L.hb===l0+1&&L.g===l0+1,'R7 one new life',L);const q3=await dupQ();ok(q3.thq===0,'R7 thq 0 after clearing',q3)}
  console.log('final Q',JSON.stringify(await dupQ()));
  const E=[...H.errs,...G.errs].filter(e=>!/ResizeObserver/.test(e));ok(!E.length,'no page errors',E.slice(0,5));
  const f=res.filter(r=>!r[0]).length;console.log(`\n${res.length-f}/${res.length} ok`);await b.close();process.exit(f?1:0)})().catch(e=>{console.error(e);process.exit(2)});
