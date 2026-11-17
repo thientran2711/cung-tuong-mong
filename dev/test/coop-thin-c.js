@@ -97,12 +97,14 @@ async function week(A,B,tag){for(let i=0;i<3;i++){await clear(A);await clear(B)}
   await sleep(300);
   const chk=await G.p.evaluate(ops=>{const bad=[];const J=x=>String(JSON.stringify(x));const RW=['rel','oan','ghen','ev'];
    for(const o of ops){if(o.t!=="npc")continue;const v=rivals.find(x=>x.id===o.id);if(!v){bad.push([o.id,'gone']);continue}const now=JSON.parse(JSON.stringify(v));
-    const key=x=>x&&typeof x==='object'?(x.id!=null?'i'+x.id:x.sid!=null?'s'+x.sid:x.ci!=null?'c'+x.ci:null):null;const pl=x=>x&&typeof x==='object'&&!Array.isArray(x);
+    const key=x=>x&&typeof x==='object'?(x.id!=null?'i'+x.id:x.sid!=null?'s'+x.sid:x.ci!=null?'c'+x.ci:typeof x.name==='string'&&x.name?'n'+x.name:null):null;/* = jcoopthinc key (r1: children by name) */const pl=x=>x&&typeof x==='object'&&!Array.isArray(x);
     /* her change is in the host's world: numbers by her delta, keyed arrays with her members in / out, objects key by key, anything else = hers */
     const has=(b,a,n,pa)=>{if(J(a)===J(b))return;if(typeof a==='number'&&typeof b==='number'){if(typeof n!=='number'||Math.abs((n-b)-(a-b))>1e-9)bad.push([pa,b,a,n]);return}
      if(Array.isArray(a)&&Array.isArray(b)&&Array.isArray(n)&&a.every(key)&&b.every(key)&&n.every(key)){const mb=new Map(b.map(x=>[key(x),x])),ma=new Map(a.map(x=>[key(x),x])),mn=new Map(n.map(x=>[key(x),x]));
       for(const [q,x] of ma){if(!mb.has(q)){if(!mn.has(q))bad.push([pa+'+'+q,'missing'])}else has(mb.get(q),x,mn.get(q),pa+'.'+q)}for(const q of mb.keys())if(!ma.has(q)&&mn.has(q))bad.push([pa+'-'+q,'still there']);return}
-     if(pl(a)&&pl(b)&&pl(n)){for(const f of new Set([...Object.keys(a),...Object.keys(b)]))if(f!=='hh')has(b[f],a[f],n[f],pa+'.'+f);return}
+     /* r1: a child's face identity (j73 kid, rolled lazily by display code on whichever phone shows her first) and kk (each phone's own k61
+        handle, j61) are not the act's effect: on a child staged a moment before the act both phones may roll one (report: lazy identity note) */
+     if(pl(a)&&pl(b)&&pl(n)){const lazy=/\.kids\.n[^.]*$/.test(pa);for(const f of new Set([...Object.keys(a),...Object.keys(b)]))if(f!=='hh'&&!(lazy&&(f==='kid'||f==='kk')))has(b[f],a[f],n[f],pa+'.'+f);return}
      if(J(n)!==J(a))bad.push([pa,J(a).slice(0,80),J(n).slice(0,80)])};
     has(o.b,o.a,now,String(o.id))}return bad},r.ops);
   /* the host's own world: same NPC numbers (non-row) as on her phone */
@@ -114,7 +116,7 @@ async function week(A,B,tag){for(let i=0;i<3;i++){await clear(A);await clear(B)}
   /* TRACE=1 (reviewer r1): per changed field of her op: before / after on her act frame, now on the host world, now on her phone */
   if(process.env.TRACE){const pick=async(o,ops)=>o.p.evaluate(ops=>ops.filter(x=>x.t==='npc').map(x=>{const v=rivals.find(y=>y.id===x.id);const f={};for(const k of Object.keys(x.a))if(JSON.stringify(x.a[k])!==JSON.stringify(x.b[k]))f[k]=v?JSON.stringify(v[k]):'gone';return [x.id,f]}),ops);
    const hN=await pick(H,r.ops),gN=await pick(G,r.ops);for(const o of r.ops.filter(x=>x.t==='npc')){const h=(hN.find(x=>x[0]===o.id)||[])[1]||{},g=(gN.find(x=>x[0]===o.id)||[])[1]||{};
-    for(const f of Object.keys(h))console.log('TRACE',k,o.id,f,'b='+JSON.stringify(o.b[f]).slice(0,160),'a='+JSON.stringify(o.a[f]).slice(0,160),'host='+String(h[f]).slice(0,160),'her='+String(g[f]).slice(0,160))}
+    for(const f of Object.keys(h)){const N=+process.env.TRACE_N||160;console.log('TRACE',k,o.id,f,'b='+String(JSON.stringify(o.b[f])).slice(0,N),'a='+String(JSON.stringify(o.a[f])).slice(0,N),'host='+String(h[f]).slice(0,N),'her='+String(g[f]).slice(0,N))}}
    for(const o of r.ops.filter(x=>x.t!=='npc'))console.log('TRACE',k,'op',o.t,JSON.stringify(o).slice(0,300))}
   if(!good)ok(false,'C2 '+k,{same:r.same,got,chk,hostSame,ops:r.ops.map(o=>o.t+':'+o.id),glog:await G.p.evaluate(()=>[COOPW.thin.C.log.slice(-4),COOPW.thin.C.lastId,COOPW.thin.view&&COOPW.thin.view.o&&COOPW.thin.view.o.dr]),hlog:await H.p.evaluate(()=>[COOPW.thin.C.log.slice(-4),COOPW.thin.C.stat.applied,COOPW.thin.held&&COOPW.thin.held('b'),(COOPW.thin.D&&COOPW.thin.D.log||[]).slice(-4)])})}
  if(!process.env.NOACT)ok(nAct>0&&nAct===nOk,`C2 every ACT kind with an NPC effect: her world untouched by the act, effect applied once by the host and back on her phone (${nOk}/${nAct}; ${kinds.length} kinds, ${table.filter(x=>x.skip).length} without a target, ${table.filter(x=>!x.skip&&!x.ops).length} without an NPC effect)`);

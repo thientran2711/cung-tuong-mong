@@ -221,7 +221,9 @@ CW.cW=function(out){if(!gOn())return out;const B=CW.base&&CW.base.W;if(!B)return
 
 /* ---------- 4. host: her ops, applied in her context ---------- */
 /* 3-way: b = the world before her act (as she saw it), h = the host's now, a = after her act */
-const key=x=>plain(x)?(x.id!=null?"i"+x.id:x.sid!=null?"s"+x.sid:x.ci!=null?"c"+x.ci:null):null;
+/* review r1: a child has no id but a name unique in the world (j1 mkKid): keyed by it, a change the host made meanwhile (her death in his
+   step) is kept; before, her whole kids array replaced the host's. Lists without a key (memories: a capped ring) still travel whole. */
+const key=x=>plain(x)?(x.id!=null?"i"+x.id:x.sid!=null?"s"+x.sid:x.ci!=null?"c"+x.ci:typeof x.name==="string"&&x.name?"n"+x.name:null):null;
 function m3(b,h,a){const sb=JSON.stringify(b),sa=JSON.stringify(a);if(sa===sb)return h;
  /* an object she added that the host also holds (or a part of a big op cut by keys): merged key by key */
  if(b===undefined&&plain(a)&&plain(h)&&!Array.isArray(a)&&!Array.isArray(h))b={};
