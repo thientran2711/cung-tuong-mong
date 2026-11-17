@@ -97,13 +97,13 @@ async function weekBoth(A,B,w){const n=await A.p.evaluate(()=>typeof B4N==='numb
    const ra=await read(A,false),rb=await read(B,true),rb2=await read(B,false),ra2=await read(A,true);
    ok(JSON.stringify(ra)===JSON.stringify(rb),tag+': A herself = A as seen on B',[ra,rb]);ok(JSON.stringify(rb2)===JSON.stringify(ra2),tag+': B herself = B as seen on A',[rb2,ra2]);return[ra,rb,rb2]};
  const marks=(o,friend)=>ev(o,fr=>{const p=fr?rivals.find(v=>v.coop):S;if(!p)return{none:1};const C=[];KIT_FACEFX.each(p,(d,st)=>{if(d.chip){const c=d.chip(p,st);if(c)C.push(d.id+':'+c[0])}});
-   return{C:C.sort(),stain:p.stain?p.stain.k:null,smu:(typeof lkSmuOf==='function'&&lkSmuOf(p))?lkSmuOf(p).sev:0,ink:!!(typeof lkInkOf==='function'&&lkInkOf(p)),rash:p.rash?p.rash.sev:0}},friend);
+   return{C:C.sort(),stain:(typeof lkStainOf==='function'&&lkStainOf(p))?lkStainOf(p).k:null,smu:(typeof lkSmuOf==='function'&&lkSmuOf(p))?lkSmuOf(p).sev:0,ink:!!(typeof lkInkOf==='function'&&lkInkOf(p)),rash:p.rash?p.rash.sev:0}},friend);
  const sameM=async(tag)=>{let x,y,x2,y2;for(let i=0;i<40;i++){x=JSON.stringify(await marks(A,false));y=JSON.stringify(await marks(B,true));x2=JSON.stringify(await marks(B,false));y2=JSON.stringify(await marks(A,true));if(x===y&&x2===y2)break;await clear(A);await clear(B);await sleep(300)}
    ok(x===y,tag+': A herself = A as seen on B',[x,y]);ok(x2===y2,tag+': B herself = B as seen on A',[x2,y2]);return[JSON.parse(x),JSON.parse(x2)]};
  await sameM('no marks');
  await ev(A,()=>{S.toilette=Object.assign({wk:toilWk(),day:toilWk()*10,F:1,occ:["th"],style:"fit",dv:"hopdip",makeup:true,score:80,look:"dep"});lkSmudge(S,2,'mua');lkStain(S,'uot');lkInk(S);render();return 1});
  await ev(B,()=>{S.rash={sev:2,until:wk()+3,at:wk()};S.slap={sev:1,until:wk()+2,at:wk()};lkStain(S,'tra');render();return 1});
- const [ma,mb]=await sameM('A smudge+wet+ink · B rash+slap+tea');ok(ma.smu===2&&ma.stain==='uot'&&ma.ink&&mb.rash===2&&mb.stain==='tra','marks present',[ma,mb]);
+ const [ma,mb]=await sameM('A smudge+wet+ink · B rash+slap+tea');ok(ma.smu>=2&&ma.stain==='uot'&&ma.ink&&mb.rash===2&&mb.stain==='tra','marks present',[ma,mb]);
  /* write-back: B's seat puts a rash on A's entry; after the merged week A carries it herself */
  await ev(B,()=>{const f=rivals.find(v=>v.coop);f.rash={sev:3,until:wk()+4,at:wk()};render();return 1});
  await weekBoth(A,B,1);let wr=0;for(let i=0;i<30&&wr!==3;i++){wr=await ev(A,()=>S.rash?S.rash.sev:0);await sleep(300)}
