@@ -44,14 +44,29 @@ Test change: road-full / road-rare retry in a FRESH context (a fresh world) when
 - A world whose children are all < vlAge (or only the Hoàng hậu's) cannot roll thd_hoc that life (by design); over later lives in the same world the children grow and the school-age wording takes over.
 - No UI change (texts only, j67 kit cards); no new kit part.
 
-## NEW GATE one-core-guard (Foreman B s8 23:24Z) — NOT done, handed over (worker rolled over: context at the ceiling)
-- The guard is not on origin/main yet (main 08725411); it is on review/one-core-land-r1 and needs that branch's jbal (ONE CORE block).
-- Measured: one-core-land-r1 dev/build + this branch's jroad/jrd_thd/jrd_cnv/jend14 added to assemble.py → `fails: 229`,
-  inlineNow 9681 vs baseline 6691 = **~2990 inline rule numbers** in the 4 road files (option c/w/l stat costs and gains [fx], odds and
-  stat comparisons [cmp]); e.g. jrd_thd suc:-2 ×128, danh:-2 ×124, duc:3 ×70. One fail line per (file, pattern).
-- Successor: wait for road-onecore's BAL key pattern (dev/handover/reports/road-onecore.md, worker session_01N1tNP2CnQZTs1376PcZZun),
-  merge latest origin/main (once the guard is there) into review/road-b3-fix2 @ 83641f2a, move every number into BAL.road.* with values
-  unchanged, regenerate jrd_thd/jrd_cnv from rdfrag (rdfrag/cat.sh — edit the rdfrag sources, not the generated files), run
-  `node dev/test/one-core-guard.js` → 0 fails (no --allow-grow), then re-run road-full thd_hoc, road-rare (8 B3 roads), road-option-scan,
-  road-end, road-saves, coop-e2e — ONE bot at a time (2 parallel bots OOM-killed the container once).
-- Everything above (item 1 fix + family + tests) stands at 83641f2a.
+## ONE CORE gate (OD:L1267) — DONE by the successor (opus session_01N1tNP3P9XTBMP5HeZATrcL; START_CTX ~4 %, ended ~20 %)
+Branch **review/road-b3-fix2 @ 995f6349** = 83641f2a + origin/main 744b80e7 + review/road-onecore-r1 74ba4f9a (PASS; incl. 6a1112d1 "kd").
+Pattern = review/road-onecore (no second scheme): all of BAL.road lives in dev/build/jbalroad.js (loads before jroad.js).
+- jrd_thd + jrd_cnv (edit dev/build/rdfrag/*, then rdfrag/cat.sh): option c/w/l/odds + ending fx of the 56 B3 chapters → BAL.road.fx
+  (rdDef → rdFx); 8 B3 RD97L rare choices → BAL.road.rare via rdRare/RR (condition text prints RR(id).bar / bar2);
+  stat amounts inside code (matSrv/lmmSrv/matCon/lmmCon/thd_tho .6) → BAL.road.go[id][i] read by rdGo(id,i) (fresh copy; defined in the jrd_thd header).
+  25 odds of other shapes → named RDQ counts in the rdfrag headers (artThi, th0/hh0/tin0, cnvQv, chuE, banE, banRS, matTin, lmmR) with the
+  new rdOdds term "kd" = RDQ/k (bit-identical divide; road-onecore added the same line upstream). cnv_mat ...MAT2(o,m) twins = two fx entries.
+- jend14 (Foreman B: this branch converts it): ARC67.noi14/hau14/ke14 options + endings → BAL.road.fx.<id> via rdFx(id,ARC67.<id>) after each
+  definition; the 4 egThGone getters' amounts → BAL.road.go (rdGo). B3 keys thd_hoc.vlAge / cnvMaRk / end / thd_tho moved from jbal2 to jbalroad.
+- Tools (dev/measure): road-b3-onecore-move.js (road-onecore mover + B3 patterns, MAT2, ARC67 eg arcs, getters), road-b3-onecore-go.js,
+  road-b3-onecore-rare.py, road-b3-onecore-same.js (SAME_FILES=jrd_thd.js,jrd_cnv.js … 94d041352), road-b3-onecore-esame.js (jend14).
+- road-option-scan FX ALIGN extended to the jend14 rows (loads jend14.js in a lenient sandbox; a planted extra ke14 option is caught).
+
+| check (final build 995f6349 / 1e81774f, one bot at a time, own utf-8 server) | result |
+|---|---|
+| before/after: jrd_thd + jrd_cnv (c/w/l/fx deep-equal, odds === on 241 k trials, RD97L numbers + condition answers) | SAME, 0 differences |
+| before/after: jend14 (both egThGone states, 18 486 compares) | SAME |
+| node dev/test/one-core-guard.js (on main's guard) | **fails 0**, inlineNow 6674 ≤ baseline 6691, no --allow-grow |
+| road-option-scan | FREE GAIN 0 · text-only 0 · digits 0 · double Lợi thế 0 · inverted 0 · **FX ALIGN 0** |
+| road-fixb-scan | unchanged vs 83641f2a (thd DOM 2, cnv HH 31 — same as before the move) |
+| road-full thd_hoc (2 lives) | **17/17** (chapters 4–14 in order, finale told) |
+| road-rare 8 B3 roads | **49 PASS / 0 FAIL**, ALL PASS |
+| road-end | **51/51** (incl. old f14 plan) |
+| road-saves @755x1000 (main 08725411 save, phase-1, mid-road tt/thd/cnv) | **6/6**, old saves load |
+| coop-e2e (live Worker) | **59/59** |
