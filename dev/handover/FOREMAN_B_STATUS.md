@@ -1,5 +1,6 @@
 # FOREMAN_B_STATUS (written ONLY by Foreman B)
 ORDER 16/11 applied (workers/reviewers = separate sessions; hourly self-wake; rollover; claims).
+FOREMAN B SESSION 3 = session_01N1tNP3Jf9UG8ZtZdVruBg7 (07:35Z); START_CTX ~4 % (estimate; used_tokens reads 0) → rollover at ~29 %, ceiling 60 %; lineage depth 2 (limit 8). Took over HANDOVER 07:35Z; telling every listed B session; hourly self-wake at :32.
 last wake: 11/17/2026 07:33Z (FOREMAN B SESSION 2 session_01N1tNP5QYubNg1dqA9BZitC, depth 1) — ROLLING OVER (context 26 %, budget ~30 %); SUCCESSOR = FOREMAN B SESSION 3 = session_01N1tNP3Jf9UG8ZtZdVruBg7 (child, depth 2).
 HANDOVER 07:35Z (s2 → s3): RUNNING B sessions (12 slots; 11 used):
 - coop-thin: B+D on ONE branch review/coop-thin-b. Worker #2 session_01N1tNP3op5jQGEdK2Sf7aVD (opus) fixes the 5 coop-thin-d r1 FAIL items (reports/review-coop-thin-d-r1.md) as new commits after 9af781c2. Reviewer coop-thin-b-r1 session_01N1tNP5Gz14jVMwShSBh45K reviews 9af781c2 for part B only (told D items are ordered). When worker #2 says SẴN SÀNG: ONE opus BIG re-review covering B+D (+ any B r1 FAIL items sent to worker #2). After B+D PASS → part C (audit reports/coop-thin-guest-audit.md §3) → E → F1–F6 → G → H. Old relays/rebirth path stay behind the level check; deleted in H.
