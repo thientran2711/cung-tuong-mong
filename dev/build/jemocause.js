@@ -14,4 +14,14 @@ function kitMoodCauseRows(L,drive,o){o=o||{};const name=o.name||(k=>(window.KIT_
    out.push([i?"":bold(name(G.k),on),bold(`${why}${left?" · "+left:""}`,on),cls(G.k)])})}
  return out}
 window.kitMoodCauseRows=kitMoodCauseRows;
+/* the top lines of the tap card (owner 19:25Z, ONE seal = "vẻ mặt": act > visible intent > dominant feeling; C-AG FEELINGS-18 faceKeyFor(pid) -> {kind:'act'|'intent'|'feel', key, level, feel?:{key,level}}):
+   "Đang: <act>" (only when the face is an act) · "Cảm xúc: <name> (<bậc>)" · "Vẻ mặt: <name>". Names: KIT_EMOLABEL -> EMO -> KIT_FACENAME -> the key; nothing is hard-coded per kind. [] while faceKeyFor is not there. */
+window.KIT_FACENAME=window.KIT_FACENAME||{};
+function kitFaceName(k){return window.KIT_EMOLABEL[k]||(typeof EMO!=="undefined"&&EMO[k])||window.KIT_FACENAME[k]||k}
+function kitFaceRows(p,m,o){o=o||{};try{if(typeof window.faceKeyFor!=="function")return[];const f=window.faceKeyFor(p);if(!f||!f.key)return[];const out=[];
+ if(f.kind==="act")out.push(["Đang",kitFaceName(f.key)]);
+ const fe=f.feel||{key:(typeof window.sealKeyFor==="function"&&window.sealKeyFor(p))||(m&&m.k),level:f.kind==="feel"?f.level:(m&&m.v!=null?m.level:null)};
+ if(fe&&fe.key&&fe.key!=="binh"||f.kind==="feel")out.push(["Cảm xúc",`${kitFaceName(fe.key)}${fe.level!=null&&fe.level!==""?` (${fe.level})`:""}`,o.cls?o.cls(fe.key):""]);
+ out.push(["Vẻ mặt",kitFaceName(f.key)]);return out}catch(e){return[]}}
+window.kitFaceRows=kitFaceRows;
 (function(){const st=document.createElement("style");st.id="kmc-css";st.textContent=`.kmcsub{font-weight:400}b:has(>.kmcsub){font-weight:400}`;document.head.appendChild(st)})();

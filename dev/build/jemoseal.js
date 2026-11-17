@@ -9,22 +9,22 @@
        pointer-events none, removed when the seal leaves the screen. No file = no layer. Nothing is drawn in code (no code-drawn tears / smoke).
    KEYS: the seal map holds khoc + hon too (names "Khóc", "Hờn"); the mood logic (jemo EMO) decides when a person is in one — until then they never appear. ===== */
 window.KIT_EMOSEAL=window.KIT_EMOSEAL||{keys:{vui:{m:"sway"},binh:{m:"breathe"},buon:{m:"droop"},gian:{m:"shake"},so:{m:"tremble"},ghen:{m:"flicker"},lo:{m:"bob"},dau:{m:"wince"},muu:{m:"glint"},an:{m:"bob"},khoc:{m:"droop",name:"Khóc"},hon:{m:"flicker",name:"Hờn"}},
- fb:{khoc:"buon",hon:"gian"},have:{},anim:"img/kit/emo-anim/",fx:"img/kit/emo-fx/",fxScale:1.7};
+ art:["vui","binh","buon","gian","so","ghen","lo","dau","muu","an"],fb:{khoc:"buon",hon:"gian"},have:{},defaultMotion:"breathe",anim:"img/kit/emo-anim/",fx:"img/kit/emo-fx/",fxScale:1.7};
 const KES_HAVE={};/* url -> true | false | "wait" (probe result) */
 function kesProbe(url,cb){const h=KES_HAVE[url];if(h===true||h===false){cb(h);return}
  if(h&&h.w){h.w.push(cb);return}const e={w:[cb]};KES_HAVE[url]=e;const im=new Image();const done=ok=>{KES_HAVE[url]=ok;e.w.forEach(f=>{try{f(ok)}catch(x){}})};im.onload=()=>done(true);im.onerror=()=>done(false);im.src=url}
 function kesMotionOK(){try{if(matchMedia("(prefers-reduced-motion: reduce)").matches)return false;return!(typeof OPT!=="undefined"&&OPT&&OPT.fxon===false)}catch(e){return false}}
-function kesKey(el){const m=/kemo-([a-z]+)/.exec(el.className.replace(/kemo-(live|m-\w+)/g,""));return m?m[1]:""}
+function kesKey(el){const m=/kemo-([a-z0-9_]+)/.exec(el.className.replace(/kemo-(live|m-\w+)/g,""));return m?m[1]:""}
 /* the still name of the seal minus the key: img/kit/emo-<set><k>.webp -> "<set>" */
 function kesSet(el,k){const m=/emo-((?:m-|mo-)?)[a-z]+\.webp/.exec(el.getAttribute("data-kemos")||el.getAttribute("src")||"");return m?m[1]:""}
 function kesFxOff(el){const f=el.__fx;if(f){f.remove();el.__fx=null}}
 function kesFxSync(el){const f=el.__fx;if(!f||!el.isConnected)return;const w=el.offsetWidth,h=el.offsetHeight,W=w*KIT_EMOSEAL.fxScale,H=h*KIT_EMOSEAL.fxScale;
  f.style.cssText=`left:${(el.offsetLeft+w/2-W/2).toFixed(1)}px;top:${(el.offsetTop+h/2-H/2).toFixed(1)}px;width:${W.toFixed(1)}px;height:${H.toFixed(1)}px`}
-function kesReal(el){/* khoc / hon: the real still replaces the fallback picture once it exists */const k=kesKey(el),fb=KIT_EMOSEAL.fb[k];if(!fb||el.__real)return;el.__real=1;const set=kesSet(el,k),real=`img/kit/emo-${set}${k}.webp`;
+function kesReal(el){/* khoc / hon: the real still replaces the fallback picture once it exists */const k=kesKey(el);if(!k||KIT_EMOSEAL.art.includes(k)||el.__real)return;el.__real=1;const set=kesSet(el,k),real=`img/kit/emo-${set}${k}.webp`;
  kesProbe(real,ok=>{if(!ok)return;KIT_EMOSEAL.have[real]=true;if(el.isConnected){el.dataset.kemos=real;if(!/emo-anim/.test(el.getAttribute("src")||""))el.setAttribute("src",real)}})}
 function kesLive(el,on){if(!el.isConnected)return;kesReal(el);
  if(!el.dataset.kemos){el.dataset.kemos=el.getAttribute("src")||""}
- el.classList.toggle("kemo-live",on&&kesMotionOK());const k=kesKey(el),spec=KIT_EMOSEAL.keys[k];if(spec)el.classList.add("kemo-m-"+spec.m);
+ el.classList.toggle("kemo-live",on&&kesMotionOK());const k=kesKey(el),spec=KIT_EMOSEAL.keys[k];if(!/kemo-m-/.test(el.className))el.classList.add("kemo-m-"+(spec?spec.m:KIT_EMOSEAL.defaultMotion));
  const still=el.dataset.kemos;
  if(on&&kesMotionOK()){const set=kesSet(el,k);
   kesProbe(KIT_EMOSEAL.anim+set+k+".webp",ok=>{if(ok&&el.isConnected&&el.classList.contains("kemo-live")&&el.getAttribute("src")===still)el.setAttribute("src",KIT_EMOSEAL.anim+set+k+".webp")});
