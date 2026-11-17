@@ -383,7 +383,7 @@ window.q72Bot=function(){if(!S||S.dead||Q.length||!q72On())return false;const q=
  T7("bac_mat","inv",{r:"sv",rf:s=>(S.staff||[]).some(z=>netIs(z,"greed")&&z!==s),p:X=>{const s=(S.staff||[]).find(z=>netIs(z,"greed")&&z.sid!==X.A.id);return{cul:s.sid,cn:s.name}},t:"Tìm số bạc lương {A} bị mất",
   h:"“Số bạc dành dụm cả năm của nô tỳ để dưới gối, giờ mất sạch. {Nc} làm chủ cho nô tỳ.”",dl:4,
   s:[G("home","Tra hỏi trong cung","mat",50,2),C(X=>`Ngươi biết sự thật: ${X.p.cn} lấy bạc`,
-   O(X=>`Bắt ${X.p.cn} trả lại, phạt nhẹ`,{fn:X=>{const s=servById(X.p.cul);if(s&&ownerOf(s)===S){s.loyal=cl((s.loyal||0)-8,0,100);return `${s.name} trả bạc, lòng với ngươi ${balSg(BAL.eff.j72.fn_2)}.`}return""}}),
+   O(X=>`Bắt ${X.p.cn} trả lại, phạt nhẹ`,{fn:X=>{const s=servById(X.p.cul);if(s&&ownerOf(s)===S){s.loyal=cl((s.loyal||0)+BAL.eff.j72.bacMat,0,100);return `${s.name} trả bạc, lòng với ngươi ${balSg(BAL.eff.j72.bacMat)}.`}return""}}),
    O("Bù bạc cho {A} từ tiền riêng, nhắc khéo kẻ lấy",{c:{bac:-20},r:6,w:{duc:2}}))],ok:{r:10},no:{r:-5}});
  T7("hang_lau","risk",{r:"sve",rf:s=>netIs(s,"greed"),t:"Giấu hàng {A} mang lậu vào cung",h:"“Nô tài tham chút lời, mang ít lụa lậu vào bán. Xin {N} cho cất tạm trong kho cung mình mấy hôm.”",dl:3,
   s:[W("Cất hàng trong kho",1),C("Hàng lậu",O("Để hắn bán xong, chia ít lời",{p:65,w:{bac:20},lto:"bad"}),O("Bắt mang đi, răn đe",{r:-6,w:{duc:2},to:"ok"}))],ok:{r:10},no:{r:-4},bad:{fx:{danh:-4,bac:-20},pun:"chứa hàng lậu trong cung"},badT:"Nội vụ phủ khám kho, thấy hàng lậu."});
@@ -437,9 +437,9 @@ window.q72Bot=function(){if(!S||S.dead||Q.length||!q72On())return false;const q=
 
  /* ===== the Thái hậu / Hoàng hậu / consort favour ladders (real numbers) ===== */
  T7("gioi_th","social",{r:"rv",rf:v=>v.rank<=2&&(v.th||0)<10&&!S.thDead&&S.th>=30,t:"Đưa {A} sang thỉnh an Thái hậu",h:"“{Xung} vào cung đã lâu mà Thái hậu chưa nhìn {xung} lấy một lần. {Goi} được Thái hậu thương, dắt {xung} đi cùng được không?”",dl:4,
-  s:[G("tn","Đưa {A} sang Đức Thọ cung","danh",60,1)],ok:{r:15,fn:X=>{ap(X.A.o,{th:5});return `Thái hậu để ý đến ${X.A.n} (+5).`},x:`Thái hậu với nàng ${balSg(BAL.eff.j72.fn_6)}`},no:{r:-5,fx:{th:-2}}});
+  s:[G("tn","Đưa {A} sang Đức Thọ cung","danh",60,1)],ok:{r:15,fn:X=>{ap(X.A.o,{th:BAL.eff.j72.gioiTh});return `Thái hậu để ý đến ${X.A.n} (${balSg(BAL.eff.j72.gioiTh)}).`},x:`Thái hậu với nàng ${balSg(BAL.eff.j72.gioiTh)}`},no:{r:-5,fx:{th:-2}}});
  T7("hh_th","social",{r:"hh",rf:o=>(o.th||0)<0&&!S.thDead,t:"Đưa lời Hoàng hậu sang Đức Thọ cung",h:"“Thái hậu dạo này lạnh nhạt với bổn cung. Bổn cung có lời muốn thưa mà không tiện tự đi. {Goi} chuyển lời giúp, lựa lúc Thái hậu vui.”",dl:3,
-  s:[G("tn","Chuyển lời Hoàng hậu","tai",60,1)],ok:{r:8,fn:X=>{ap(X.A.o,{th:5});return "Thái hậu bớt giận Hoàng hậu (+5)."},x:"Thái hậu với Hoàng hậu +5"},no:{r:-4}});
+  s:[G("tn","Chuyển lời Hoàng hậu","tai",60,1)],ok:{r:8,fn:X=>{ap(X.A.o,{th:BAL.eff.j72.hhTh});return `Thái hậu bớt giận Hoàng hậu (${balSg(BAL.eff.j72.hhTh)}).`},x:`Thái hậu với Hoàng hậu ${balSg(BAL.eff.j72.hhTh)}`},no:{r:-4}});
  T7("th_nhac_hh","pro",{r:"th",rf:()=>{const q=qn();return !!q&&(q.staff||[]).some(s=>s.spyFor!=null&&s.spyFor!==key(q))},p:()=>{const q=qn();const s=q.staff.find(s=>s.spyFor!=null&&s.spyFor!==key(q));return{sid:s.sid,sn:s.name}},t:"Nhắc Hoàng hậu: có người hầu không thật thà",
   h:"“Ai gia biết một người hầu bên Hoàng hậu làm tai mắt cho kẻ khác. {Goi} khéo léo nhắc nàng, đừng để nàng biết ai gia bảo.”",tr:"Điều Thái hậu nói là thật.",dl:3,
   s:[G("kn","Nhắc khéo Hoàng hậu","tai",55,1)],ok:{r:6,fx:{hh:5},fn:X=>{const s=servById(X.p.sid);if(s){s.spyFor=null;return `${s.name} bị Hoàng hậu cắt việc, thôi làm tai mắt.`}return""},x:"kẻ làm tai mắt bên Hoàng hậu bị cắt việc"},no:{r:-3}});
@@ -448,7 +448,7 @@ window.q72Bot=function(){if(!S||S.dead||Q.length||!q72On())return false;const q=
   s:[G("kn","Thỉnh an Hoàng hậu, để ý","mat",55,1),Object.assign(C(X=>`Ngươi biết sự thật: Hoàng hậu ${X.p.a>=10?"đối đãi ngươi tử tế":X.p.a<=-10?"lạnh nhạt với ngươi":"giữ khoảng cách với mọi người"}`,O("Kể thật với Thái hậu",{})),{pl:"tn"})],ok:{r:6,d:1},no:{r:-10}});
  T7("tin_doi","trade",{r:"rva",rf:v=>(v.th||0)<20&&!S.thDead&&S.rank>=2,acc:X=>{apply({mat:1});q72DebtAdd(X.A,-1)},accX:"Tai mắt +1; ngươi nợ nàng một ân.",t:"Đổi ơn: tin của {A}, lời nói đỡ của ngươi",
   h:"“{Xung} cho {goi} biết một tin trong cung. Đổi lại, {goi} nói đỡ {xung} vài câu trước Thái hậu nhé; người chẳng ưa {xung}.”",tr:"Nhận lời: ngay Tai mắt +1, ngươi nợ nàng một ân.",dl:5,
-  s:[G("tn","Nói đỡ {A} trước Thái hậu","danh",55,1)],ok:{r:6,d:1,fn:X=>{ap(X.A.o,{th:4});return `Thái hậu với ${X.A.n} +4.`},x:`Thái hậu với nàng ${balSg(BAL.eff.j72.fn_7)}`},no:{r:-12}});
+  s:[G("tn","Nói đỡ {A} trước Thái hậu","danh",55,1)],ok:{r:6,d:1,fn:X=>{ap(X.A.o,{th:BAL.eff.j72.tinDoi});return `Thái hậu với ${X.A.n} ${balSg(BAL.eff.j72.tinDoi)}.`},x:`Thái hậu với nàng ${balSg(BAL.eff.j72.tinDoi)}`},no:{r:-12}});
  T7("quat_rv","craft",{r:"rv",rf:v=>v.sung<30,t:"Vẽ quạt cho {A} dâng Hoàng thượng",h:"“Hoàng thượng lâu rồi chẳng nhìn đến {xung}. {Xung} vụng tay; {goi} vẽ giúp {xung} cây quạt dâng ngài được không?”",dl:5,
   s:[G("home","Vẽ quạt","hoa",50,2),C("Đề tên ai trên quạt",O("Chỉ đề tên {A}",{r:4,fn:X=>{ap(X.A.o,{sung:3});return `${X.A.n} được ngài để ý (Sủng nàng +3).`}}),O("Đề thêm tên ngươi bên cạnh",{w:{sung:2},lr:-8,p:50,sk:"tamco",lto:"ok"}))],ok:{r:10},no:{r:-6}});
  T7("ksp_xem","risk",{r:"rva",rf:v=>v.sung<S.sung,t:"Lẻn xem sổ thị tẩm cho {A}",h:"“{Xung} muốn biết vì sao Hoàng thượng lật thẻ người khác mà không lật thẻ {xung}. {Goi} quen người Kính sự phòng, xem giúp {xung}.”",dl:3,

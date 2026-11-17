@@ -171,8 +171,8 @@ function menOpts(m,v,y,heard){/* items split by " · " so the kit (j63 kaRows) p
  else{A.push({k:"bao",n:"Báo thị vệ",x:`Chắc chắn · tốn: 1 khắc · thành: Danh +2 · Thái hậu quý ngươi +1 · (hắn bị đánh trượng, đuổi ra ngoại triều) · kèm: hắn ôm hận, có thể tung tin đồn trả thù · Danh -3 mỗi lần bị trả thù`});
   A.push({k:"ccti",n:"Báo Cung Chính ti",x:`Chắc chắn · tốn: 2 khắc · thành: Danh +3 · Thái hậu quý ngươi +1 · (hắn bị cấm vào cung một năm) · kèm: hắn và đồng liêu thị vệ có thể trả thù · Danh -3 mỗi lần bị trả thù`})}
  const risk=cl(Math.round(10+menEyes(y.k,v)*5-tc/10),4,60);
- A.push({k:"giau",n:"Giấu giúp",x:`${word(100-risk)} · tốn: 1 khắc · thành: hắn mang ơn, người ấy quý ngươi ${balSg(BAL.eff.jmen.menHide)} · giữ bí mật của hắn để uy hiếp về sau${v?` · chứng cứ về nàng +${ev} · nàng quý ngươi ${balSg(BAL.eff.jmen.menHide)}`:""} · hỏng: bị thấy, mắc tội che giấu, Danh -6, cấm túc · kèm: lộ ra về sau thì bị liên lụy`});
- if(!heard){const oh=od(35+(S.mat||0)*6+tc/4);A.push({k:"nghe",n:"Núp nghe lén",x:`${word(oh)} · tốn: 1 khắc · thành: biết tên ${v?"hai người":"hắn"} · biết vì sao hắn ở đây${v?` · chứng cứ về nàng +${ev}`:""} · (rồi chọn tiếp báo hay giấu) · (thành hay bại tùy Tai mắt và Tâm cơ của ngươi) · hỏng: bị phát hiện, họ tản đi, hắn quý ngươi -5${v?` · kèm: nàng oán ngươi +${balOan(BAL.eff.jmen.menReport_2,"hurt")}`:""}`})}
+ A.push({k:"giau",n:"Giấu giúp",x:`${word(100-risk)} · tốn: 1 khắc · thành: hắn mang ơn, người ấy quý ngươi ${balSg(BAL.eff.jmen.hideMan)} · giữ bí mật của hắn để uy hiếp về sau${v?` · chứng cứ về nàng +${ev} · nàng quý ngươi ${balSg(BAL.eff.jmen.menHide)}`:""} · hỏng: bị thấy, mắc tội che giấu, Danh -6, cấm túc · kèm: lộ ra về sau thì bị liên lụy`});
+ if(!heard){const oh=od(35+(S.mat||0)*6+tc/4);A.push({k:"nghe",n:"Núp nghe lén",x:`${word(oh)} · tốn: 1 khắc · thành: biết tên ${v?"hai người":"hắn"} · biết vì sao hắn ở đây${v?` · chứng cứ về nàng +${ev}`:""} · (rồi chọn tiếp báo hay giấu) · (thành hay bại tùy Tai mắt và Tâm cơ của ngươi) · hỏng: bị phát hiện, họ tản đi, hắn quý ngươi ${balSg(BAL.eff.jmen.hearMan)}${v?` · kèm: nàng oán ngươi ${balSg(BAL.eff.jmen.menChoose)}`:""}`})}
  A.push({k:"lo",n:"Làm như không thấy",x:`Chắc chắn · thành: không dính vào chuyện · kèm: nếu về sau lộ ra ngươi thấy mà không báo, dễ bị liên lụy`});
  return A}
 function menArt(k){try{const P=placeOf(k);const f=SCIMG[P.sc];return f?{src:`img/${f}.webp`,label:P.n}:undefined}catch(e){return undefined}}
@@ -202,7 +202,7 @@ function menReport(by,m,c,y,formal){const at=placeName(y.k);const nm=m.name;cons
 function menHide(by,m,c,y,eyes){menStat(by===S?"hideMe":"hideNpc");const risk=cl(Math.round(10+eyes*5-(by.tamco||0)/10),4,60);
  if(c&&c!==by){const prev=J78.ctx;if(by===S)J78.ctx={how:"Ngươi giấu giúp, nên biết rõ chuyện",proves:menTrue(m,c,y).replace(/\.$/,"")};try{evA(by,c,y.r==="tryst"?2:1)}finally{J78.ctx=prev}affAdd(c,by,BAL.eff.jmen.menHide);oanAdd(c,by,BAL.eff.jmen.menHide_2)}
  if(roll(risk)){ap(by,{danh:-6});punish(by,"che giấu nam nhân lẻn vào hậu cung",1);m.ban=wk()+MEN.banS;return false}
- if(by===S){m.af=(m.af||0)+15;m.debt=(m.debt||0)+1;S.menSec=S.menSec||{};S.menSec[m.id]={r:y.r,v:y.v||null,k:y.k,w:wk(),hid:1}}return true}
+ if(by===S){m.af=(m.af||0)+BAL.eff.jmen.hideMan;m.debt=(m.debt||0)+1;S.menSec=S.menSec||{};S.menSec[m.id]={r:y.r,v:y.v||null,k:y.k,w:wk(),hid:1}}return true}
 
 /* the player's choice */
 function menEyes(k,c){return liveRivals(true).filter(w=>w!==c&&whereOf(w)===k).reduce((s,w)=>s+1+(w.mat||0)/2,0)}
@@ -220,7 +220,7 @@ function menChoose(m,v,y,a){const at=placeName(y.k);menStat("ch_"+a);if(a==="ngh
    if(v){const prev=J78.ctx;J78.ctx={how:"Ngươi núp nghe lén",proves:menTrue(m,v,y).replace(/\.$/,"")};try{evA(S,v,y.r==="tryst"?2:1)}finally{J78.ctx=prev}
     try{intelAdd(v,{k:"man:"+m.id,kind:"secret",txt:menTrue(m,v,y)},{by:"me",how:"nghe lén"})}catch(e){}}
    setTimeout(()=>{try{if(S&&!S.dead&&manById(m.id))menCard(m,v,y,1)}catch(e){}},0);return}
-  menStat("hearBad");m.knowsMe=m.knowsMe||[];if(!m.knowsMe.includes("me"))m.knowsMe.push("me");m.af=(m.af||0)-5;
+  menStat("hearBad");m.knowsMe=m.knowsMe||[];if(!m.knowsMe.includes("me"))m.knowsMe.push("me");m.af=(m.af||0)+BAL.eff.jmen.hearMan;
   if(v){oanAdd(v,S,BAL.eff.jmen.menChoose);affAdd(v,S,BAL.eff.jmen.menChoose_2)}log(`<span class="r">Ngươi giẫm phải cành khô; ${menNmFull(m)}${v?" và "+menVT(v):""} giật mình tản đi. ${v?"Nàng đã thấy ngươi nghe lén.":"Hắn đã thấy mặt ngươi."}</span>`);delete (S.menWhy||{})[m.id];return}}
 
 /* ---------- 5. NPC consorts see the same strays and choose by their nature ---------- */

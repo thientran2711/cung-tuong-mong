@@ -66,7 +66,7 @@ function pgGive(a,t,ix,pk){const e=a.inv[ix];if(!e||!pgFood(e)||!PGX[pk])return"
  if(c){const q=queenP();const hq=q&&q!==a&&q!==t;if(hq)evA(q,a,BAL.pg.hhEv);return `${by} tặng ${NM(t)} ${dn} có độc. ${c}${hq?`Hoàng hậu nắm thêm ${BAL.pg.hhEv} chứng cứ. `:""}`}
  relAdd(t,a,BAL.eff.jpoison.pgGive);return `${NMc(t)} thấy ${dn} có vị lạ, sai đổ đi; từ đó dè chừng ${a===S?"ngươi":NM(a)} (quý ${a===S?"ngươi":NM(a)} ${balSg(BAL.eff.jpoison.pgGive)}). `}
 /* her card: target × poison — kit options with the real odds word, full numbers, Vì sao (option.why) */
-function pgLine(t,pk,X){const P=PGX[pk];const q=queenP();const hh=q&&q!==t&&q!==S?` · Hoàng hậu nắm thêm ${BAL.pg.hhEv} chứng cứ của ngươi`:"";
+function pgLine(t,pk,X){/* previews: pgGive */const P=PGX[pk];const q=queenP();const hh=q&&q!==t&&q!==S?` · Hoàng hậu nắm thêm ${BAL.pg.hhEv} chứng cứ của ngươi`:"";
  return `${word(X.o)} · tốn: 2 khắc, ${P.n} -1, Đức -${P.duc} · thành: ${P.won} · hỏng: ${t.name} với ngươi ${balSg(BAL.eff.jpoison.pgGive)} vì nhận ra vị lạ · kèm: hỏng mà bị lần ra (khả năng ${chanceLo(X.cp)}): nàng nắm 2 chứng cứ của ngươi${hh}`}
 PEND.pgpick=p=>{const e=S.inv[p.ix];if(!e||!pgFood(e))return null;const dn=e.wk?e.wk.n:itm(e.k).n;const O=[];
  for(const t of liveRivals(true)){if(t.out)continue;for(const pk of pgHeld(S)){const P=PGX[pk];if(P.preg&&!(t.preg&&!t.hidden))continue;const X=pgOdds(S,t,e);

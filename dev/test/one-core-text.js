@@ -46,26 +46,38 @@ function sameBranch(sa,sb,na,nb){let i=0;while(i<sa.length&&i<sb.length&&sa[i]==
    "thù -12", "thế lực -3") and it equals a value of that kind (sign included). Derived oán: relAdd(n<0) also gives oán |n|×BAL.relOan.hurt (hurt one) and
    |n|×doer (the doer), relAdd(n>0) takes mend×n off: those derived amounts count as oán values too (print balOan(ref)). A relation read inverted ("nàng oán +10" for a
    Thân amount -10) counts. Searched in EVERY module (previews, action tables AOUT / add() / risk:, buttons) and in both branches of an if. */
+const PROP_KIND={th:'th',hh:'hh',loyal:'loyal',maid:'loyal'};
 const KIND_OF={relAdd:'rel',affAdd:'rel',kcAf:'rel',rdRel:'rel',e67ally:'rel',e67dad:'rel',e67bien:'pow',e67kho:'pow',e67pun:'rel',e67foe:'rel',e67drop:'rel',oanAdd:'oan',rdOan:'oan',tdPowAdd:'pow'};
+/* (c) the STAT word just before the number decides its kind, before any relation word: "Thái hậu với nàng +5" is Thái hậu (th), "Hoàng hậu thiện cảm -5"
+   is Hoàng hậu (hh: her own stat for the player, or her relation to a consort), "lòng với ngươi -8" is a servant's lòng (loyal). Only the amounts that
+   the code applies to THAT stat count: {th:BAL…} / x.th=…BAL… (th), {hh:BAL…} or a relation call (hh), {loyal:…} / {maid:…} / .loyal=…BAL… (loyal). */
+const STATW=[[/Thái hậu/,'th'],[/Hoàng hậu/,'hh'],[/(?:^|[^\p{L}])[Ll]òng(?![\p{L}])/u,'loyal']];
 const WORD={rel:/(?:thiện cảm|thù|quý(?: mến)?(?: ngươi| nàng| ta| nhau)?|[Tt]hân(?: với ngươi| với nàng)?|với ngươi|với nàng|với ta|mến)\s*$/,oan:/(?:oán|thù)[^\d+\-−()]{0,26}\(?\s*$/i,pow:/thế lực\s*$/};
 /* a text is compared with the BAL.eff amounts read in ITS OWN module and in the modules whose actions it previews. A module that wraps another module's option
    (Object.assign({},A[i],{x:…,risk:…}) in a talkOpts / coldActs wrapper) shows that module's amounts: list the pair here (text module → rule modules). OC_GLOBAL=1 compares
    with every module (diagnostic: lists numbers that coincide, to find a missing pair). */
-const LINK={'j78.js':['j8.js','j2.js']};
-const linked=(tm,rm)=>tm===rm||(LINK[tm]||[]).includes(rm);
+/* LINKS ARE DERIVED FROM CODE (review/one-core-dup2 r3, reviewer FAIL 3a: no hand list): dev/test/one-core-bind.js linkMods() — every link name of the
+   text (AOUT / ACT / act-table property keys, add("k") / A("k") / loBtn(c,"k") string arguments, data-x="k", ACT.k.f= chains, if(k==="lit") branches) → the
+   module that defines that act (A("k",…), ACT.k=…, k:{…run…} table entries, if(…==="k") branches, a handler named …K); an option looked up by name
+   (A.findIndex(a=>a.n==="…"), /^…/.test(a.n)) → the module that defines n:"…". */
+const BIND=require('./one-core-bind.js');
 function scanAmt(B,BAL,ORDER){
  const mods=ORDER.map(f=>{const src=fs.readFileSync(path.join(B,f),'utf8');return{f,src,ast:acorn.parse(src,{ecmaVersion:'latest',locations:true})}});
  const kindOf={};/* key → Set of kinds */
  const refPath=n=>{const p=[];let c=n;while(c.type==='MemberExpression'){const k=c.computed?(c.property.type==='Literal'?c.property.value:null):c.property.name;if(k==null)return null;p.unshift(k);c=c.object}return c.type==='Identifier'&&c.name==='BAL'&&p[0]==='eff'?p:null};
  const valOfP=p=>{try{let o=BAL;for(const k of p)o=o[k];return o}catch(e){return undefined}};
  const refsOf=m=>{const R=[],S=[];(function walk(n,stack){if(!n||typeof n.type!=='string')return;const par=stack[stack.length-1];
-   if(n.type==='Literal'&&typeof n.value==='string'&&!(par&&par.type==='Property'&&par.key===n&&!par.computed))S.push({a:n.start,b:n.end,s:n.value,lit:1,line:n.loc.start.line});
-   else if(n.type==='TemplateElement')S.push({a:n.start,b:n.end,s:n.value.cooked||'',lit:0,line:n.loc.start.line});
-   else if(n.type==='MemberExpression'&&!(par&&par.type==='MemberExpression'&&par.object===n)){const p=refPath(n);if(p&&p.length>=3){let call=null;for(let i=stack.length-1;i>=0;i--){const x=stack[i];if(x.type==='CallExpression'&&x.callee.type==='Identifier'&&KIND_OF[x.callee.name]){call=x.callee.name;break}if(/Function|Statement/.test(x.type))break}
-     R.push({n,p,kind:call?KIND_OF[call]:null,src:m.src.slice(n.start,n.end)})}}
+   if(n.type==='Literal'&&typeof n.value==='string'&&!(par&&par.type==='Property'&&par.key===n&&!par.computed))S.push({a:n.start,b:n.end,s:n.value,lit:1,line:n.loc.start.line,node:n,stack:stack.slice()});
+   else if(n.type==='TemplateElement')S.push({a:n.start,b:n.end,s:n.value.cooked||'',lit:0,line:n.loc.start.line,node:n,stack:stack.slice()});
+   else if(n.type==='MemberExpression'&&!(par&&par.type==='MemberExpression'&&par.object===n)){const p=refPath(n);if(p&&p.length>=3){let kind=null;for(let i=stack.length-1;i>=0;i--){const x=stack[i];if(x.type==='CallExpression'&&x.callee.type==='Identifier'&&KIND_OF[x.callee.name]){kind=KIND_OF[x.callee.name];break}
+       /* {th:BAL…} in apply / ap, x.th=x.th+BAL…, s.loyal=cl(s.loyal+BAL…) */
+       if(x.type==='Property'&&!x.computed&&PROP_KIND[x.key.name]){kind=PROP_KIND[x.key.name];break}
+       if(x.type==='AssignmentExpression'&&x.left.type==='MemberExpression'&&!x.left.computed&&PROP_KIND[x.left.property.name]){kind=PROP_KIND[x.left.property.name];break}
+       if(/Function|Statement/.test(x.type))break}
+     R.push({n,p,kind,src:m.src.slice(n.start,n.end)})}}
    stack.push(n);for(const k in n){if(k==='type'||k==='start'||k==='end'||k==='loc')continue;const c=n[k];if(Array.isArray(c))c.forEach(x=>walk(x,stack));else if(c&&typeof c.type==='string')walk(c,stack)}stack.pop()})(m.ast,[]);return{R,S}};
  /* pass 1: the amounts of each kind (key + [i] index), every module */
- const vals={rel:[],oan:[],pow:[]};const per=mods.map(m=>refsOf(m));
+ const vals={rel:[],oan:[],pow:[],th:[],hh:[],loyal:[]};const idx=BIND.index(B);const per=mods.map(m=>refsOf(m));
  const hurt=BAL.relOan?BAL.relOan.hurt:.6,doer=BAL.relOan?BAL.relOan.doer:.2,mend=BAL.relOan?BAL.relOan.mend:.3;
  const seen=new Set();
  per.forEach((pr,mi)=>pr.R.forEach(r=>{if(!r.kind)return;const v=valOfP(r.p);const list=Array.isArray(v)?v.map((x,i)=>[x,r.src.replace(/\[[01]\]$/,'')+'['+i+']']):[[v,r.src]];
@@ -75,10 +87,14 @@ function scanAmt(B,BAL,ORDER){
  const out=[];
  mods.forEach((m,mi)=>{for(const t of per[mi].S){if(!/\d/.test(t.s))continue;
   const re=/([+\-−±]?)(?<![\w$.,])(\d+(?:\.\d+)?)(?![\d]|[.,]\d)/g;let q;
-  while((q=re.exec(t.s))){const before=t.s.slice(Math.max(0,q.index-40),q.index).replace(/\s+$/,' ');const kinds=Object.keys(WORD).filter(k=>WORD[k].test(before));if(!kinds.length)continue;
+  while((q=re.exec(t.s))){const before=t.s.slice(Math.max(0,q.index-40),q.index).replace(/\s+$/,' ');
+   /* the clause the number sits in (after the last "·" / ";" / "," / "." / ":"): its stat word wins */
+   const clause=before.split(/[·;,.]/).pop();let st=null,at=1e9;for(const w of STATW){const q=w[0].exec(clause);if(q&&q.index<at){at=q.index;st=w}}/* the FIRST stat word: "Thái hậu với Hoàng hậu +5" is Thái hậu's */
+   const kinds=st?(st[1]==='hh'?['hh','rel']:[st[1]]).filter(k=>st[1]!=='hh'||k==='hh'||WORD.rel.test(before)):Object.keys(WORD).filter(k=>WORD[k].test(before));if(!kinds.length)continue;
+   if(!t.links)t.links=BIND.linkMods(idx,m.f,t.stack,t.node);
    const sg=q[1];if(!sg&&!/(?:oán|thù|bớt|giảm|mất|thiện cảm|thân|quý|ghen|lòng)\s*$/i.test(before))continue;/* unsigned only straight after a relation word */
    const n=+q[2];const cands=[];
-   for(const k of kinds)for(const c of vals[k]){if(!(process.env.OC_GLOBAL||linked(m.f,c.mod)))continue;const sv=sg==='-'||sg==='−'?-n:(sg==='+'?n:null);const cv=c.v;
+   for(const k of kinds)for(const c of vals[k]){if(!(process.env.OC_GLOBAL||t.links.has(c.mod)))continue;const sv=sg==='-'||sg==='−'?-n:(sg==='+'?n:null);const cv=c.v;
      /* signed typed: equal value and sign; unsigned: equal magnitude */
      if(sv!=null?cv!==sv&&!(c.inv&&cv===n&&sg==='+'):Math.abs(cv)!==n)continue;cands.push(c)}
    if(!cands.length)continue;
@@ -109,7 +125,9 @@ function scan(B){
    if(n.type==='Literal'&&typeof n.value==='string'&&!(par&&par.type==='Property'&&par.key===n&&!par.computed))strs.push({a:n.start,b:n.end,s:n.value,lit:1,line:n.loc.start.line,stack:stack.slice()});
    else if(n.type==='TemplateElement')strs.push({a:n.start,b:n.end,s:n.value.cooked||'',lit:0,line:n.loc.start.line,stack:stack.slice()});
    else if(n.type==='MemberExpression'&&!(par&&par.type==='MemberExpression'&&par.object===n)){
-    const p=refOf(n);if(p&&p.length>=2&&NS.has(p[0])){const v=valOf(p);if(isNum(v))refs.push({n,p,v,mode:'amt',stack:stack.slice()})}
+    const p=refOf(n);const printed=stack.some(x=>x.type==='CallExpression'&&x.callee.type==='Identifier'&&/^bal(Sg|Ab|Oan)$/.test(x.callee.name));
+    if(printed){}/* a print (balSg / balAb / balOan) is not a rule read: nothing beside it copies it */
+    else if(p&&p.length>=2&&NS.has(p[0])){const v=valOf(p);if(isNum(v))refs.push({n,p,v,mode:'amt',stack:stack.slice()})}
     else if(p&&p.length>=2&&(CUT.has(p[0])||(CUT2[p[0]]&&CUT2[p[0]].has(p[1])))){const v=valOf(p);const L=leaves(v,'');if(L.length&&L.length<=14)refs.push({n,p,v,mode:'cut',leaves:L,stack:stack.slice()})}}
    stack.push(n);for(const k in n){if(k==='type'||k==='start'||k==='end'||k==='loc')continue;const c=n[k];if(Array.isArray(c))c.forEach(x=>walk(x,stack));else if(c&&typeof c.type==='string')walk(c,stack)}stack.pop()})(ast,[]);
   /* a BAL.eff / road / arc read outside every function (it runs while the script loads) in a module that loads BEFORE the file that sets it = TDZ crash
@@ -130,7 +148,7 @@ function scan(B){
     if(hit.length){const uq=[...new Map(hit.map(h=>[h.key,h])).values()];sites.push({f,line:t.line,t,idx:pos,sg:'',abs:String(num),inv:false,cut:true,cands:uq,amb:uq.length>1,text:t.s})}}}
   /* per typed number: every ref it could copy */
   const byTok=new Map();
-  for(const r of refs){if(r.mode==='amt')continue;/* amounts: scanAmt() below */
+  for(const r of refs){/* amounts (BAL.road / BAL.arc / any BAL.eff) beside their read: this pass; BAL.eff amounts anywhere in the module or its linked acts: scanAmt() below */
    let box=null;for(let i=r.stack.length-1;i>=0;i--){const x=r.stack[i];if(x.type==='ObjectExpression'&&x.end-x.start<=2500){box=x;break}}
    const a=Math.max(box?box.start:0,r.n.start-WIN),b=Math.min(box?box.end:src.length,r.n.end+WIN);
    const absOf=r.mode==='cut'?null:Math.abs(r.v);
@@ -147,7 +165,7 @@ function scan(B){
   for(const e of byTok.values()){const uniq=[...new Map(e.cands.map(r=>[r.n.start+r.suf,r])).values()];
    sites.push({f,line:e.t.line,t:e.t,idx:e.idx,sg:e.sg,abs:e.abs,inv:e.inv,cut:e.cut,cands:uniq.map(x=>({key:x.p.join('.')+x.suf,v:x.cv!==undefined?x.cv:x.v,ref:src.slice(x.n.start,x.n.end)+x.suf})),amb:uniq.length>1,
     text:e.t.s.slice(Math.max(0,e.idx-24),e.idx+e.abs.length+14).replace(/\s+/g,' ')})}}
- for(const x of scanAmt(B,BAL,ORDER))sites.push(x);
+ {const seen=new Set(sites.map(x=>x.f+':'+x.t.a+':'+x.idx));for(const x of scanAmt(B,BAL,ORDER)){const k=x.f+':'+x.t.a+':'+x.idx;if(!seen.has(k)){seen.add(k);sites.push(x)}}}
  sites.sort((x,y)=>ORDER.indexOf(x.f)-ORDER.indexOf(y.f)||x.line-y.line);
  sites.early=early;return sites}
 /* proof helpers (dev/measure/one-core-text-same.js, one-core-dup-same.js): printed(src) turns every ${balSg(expr)} / ${balAb(expr)} back into the words it prints

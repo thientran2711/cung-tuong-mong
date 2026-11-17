@@ -22,6 +22,8 @@ const {proof}=require('../test/one-core-text.js');const {printed,back}=proof(pat
 const canon=t=>JSON.stringify(acorn.parse(t,{ecmaVersion:'latest'}),(k,v)=>{if(k==='start'||k==='end'||k==='raw')return undefined;
  if(v&&v.type==='Property'&&v.kind==='get'&&v.value&&v.value.body&&v.value.body.body.length===1&&v.value.body.body[0].type==='ReturnStatement')return{type:'Property',method:false,shorthand:false,computed:v.computed,key:v.key,value:v.value.body.body[0].argument,kind:'init'};/* get x(){return `…`} ≡ x:`…` (a text that must be read lazily, review/one-core-dup r2) */
  if(v&&v.type==='TemplateLiteral'&&v.expressions.length===0&&v.quasis.length===1)return{S:v.quasis[0].value.cooked};
+ /* review/one-core-dup2 r3: a typed `x-8` moved to `x+BAL.eff…` holding -8 puts back as `x+(-8)` ≡ `x-8` */
+ if(v&&v.type==='BinaryExpression'&&v.operator==='+'&&v.right.type==='UnaryExpression'&&v.right.operator==='-'&&v.right.argument.type==='Literal')return Object.assign({},v,{operator:'-',right:v.right.argument});
  if(v&&v.type==='Literal'&&typeof v.value==='string')return{S:v.value};return v});
 const sameText=(a,b)=>{try{return canon(norm(back(printed(a))))===canon(norm(back(printed(b))))}catch(e){console.log("sameText err",e.message.slice(0,120));return false}};
 const A=lastDefs(REF),N=lastDefs(null);const bad=[],fbs=[];let same=0;
