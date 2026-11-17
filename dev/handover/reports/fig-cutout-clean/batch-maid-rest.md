@@ -230,3 +230,20 @@ maid-m10-tm3-a18	xSXNMR7jfW	ok HELD
 maid-m10-tm4-a18	9ZFTfeSNYZ	ok HELD (hat as old figure)
 maid-m11-a18	aFAjiwnfSh	ok HELD
 - W5c: new a18 m10-cold..m11-a18 (16 files, A8+A9) generated, HELD in /tmp/claude-0/w/A8|A9/out (scratch), fragments W5c-A8/A9.json untracked in main checkout. PRIORITY now: maid consort-tier redraw a18 m27-m52 x ty1-3 (78 keys), prompts in scratch prompts.json; D1.. agents; first-16 tile -> C. New-maid queue held (resume maid-m11-cold-a18).
+- W5c REDRAW a18 (consort-tier, my slice m27-m52 x ty1-3 = 78 keys): D1/D2 done, HELD (files in /tmp/claude-0/w/D1|D2/out, fragments W5c-D1/D2.json local) pending Foreman C OK of rank-sample/maid-redraw-first16-W5c.jpg:
+maid-m27-ty1-a18	p8OuJTtehw	redo ok HELD
+maid-m28-ty2-a18	EbnlzfOuuO	redo ok HELD
+maid-m29-ty3-a18	N2HVHwD6D9	redo ok HELD
+maid-m30-ty1-a18	1le4eH4r4r	redo ok HELD
+maid-m31-ty2-a18	s783IE5l8e	redo ok HELD
+maid-m32-ty3-a18	xSXNBEUjfW	redo ok HELD
+maid-m33-ty1-a18	dtPFNJkXSL	redo ok HELD
+maid-m34-ty2-a18	MB7Cy7jDCm	redo ok HELD
+maid-m35-ty3-a18	IfiKny5tvE	redo ok HELD
+maid-m36-ty1-a18	lJIREBJgv9	redo ok HELD
+maid-m37-ty2-a18	aFAjMwOfSh	redo ok HELD
+maid-m38-ty3-a18	MB7C3kmDCm	redo ok HELD
+maid-m39-ty1-a18	gOtZHpYSXO	redo ok HELD
+maid-m40-ty2-a18	JNfnktVOq4	redo ok HELD
+maid-m41-ty3-a18	yiEWxtCPW9	redo ok HELD
+maid-m42-ty1-a18	TdUa3saVNR	redo ok HELD
