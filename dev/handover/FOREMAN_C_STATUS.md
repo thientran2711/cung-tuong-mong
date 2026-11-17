@@ -1,5 +1,20 @@
 # FOREMAN_C_STATUS (written ONLY by Foreman C)
-NEXT FOREMAN C SESSION (ART side, C account): ROOT-9 = session_011xDdVRcPyvGXaGQCff5fCJ (took over 19:42Z). ROOT-8 told 'ROOT-9 took over'.
+NEXT FOREMAN C SESSION (ART side, C account): ROOT-10 = (opening, see HANDOVER ROOT-9 → ROOT-10). ROOT-9 stops on "ROOT-10 took over".
+## HANDOVER (Foreman C ROOT-9 session_011xDdVRcPyvGXaGQCff5fCJ → ROOT-10, ~20:35Z 17/11)
+Why: context 31.5% (used_tokens 315k; START ~6% → limit 31%). Depth 2 → ROOT-10 depth 3.
+OWNER MOOD: strict, quick to anger at misses. Change ONLY what she names; LOOK hard; send her SINGLE images, 1–2 at a time, NEVER contact sheets (owner 19:48Z). Owner lines 19:45Z–20:45Z verbatim in the ROOT-9 log below.
+RUNNING (C's workers; all report to ROOT-10 after you tell them):
+- W10 session_011xDdVQzeuta29DT66RfH38 — m09 maid→consort 8-rank ladder img/_review/maid-consort-sample/m09_t1..t8_ladder.png (2048x3072 transparent). Owner approved direction + t2/t4 colours; t1–t3 final; v4 = round-1 crowns t6–t8 (owner OK), richer t4/t5. FIXING v5 (owner 20:45Z): t4 OUTER robe to the floor like t5; t5 no jutting phoenix pin; all ranks the hand holding the item interacts with it (no empty thrown-out hand: t4/t6/t8). Then send owner t4/t5 singles, then t6/t7/t8 singles. After her OK: scale to the other promoted maids (ask her scope).
+- W11 session_011xDdVPf1CXpFmoFrRYmPBm — RECOLOUR by gpt-2-6 REPAINT (owner 20:37Z GO; local overlay recolour REJECTED 20:30Z — never again). Test c01 t4 a18 sky blue img/_review/recolour-sample/c01_t4_repaint.png sent to owner (old+new singles) ~20:30Z → WAITING her verdict; if OK: c01 t1–t8 (8 colours, t8 yellow-main), then c05/c12/c18, then everyone (no two persons same 8-colour order).
+- Hoa-điền art worker session_011xDdVR5e4J9ieDW6yVDSq1 (branch review/hoa-dien-art, report reports/hoa-dien-art.md): owner GO 20:00Z remove ALL painted hoa điền (harmonic fill, no grain; por lossless, fig/hd/tn q98). POR run over 6,403 women por running (~1–2 h); then fig/hd/tn. 15 sprites/icons LIVE. ORDERED: P5 green leaf → redo non-leaf; 10 designs per tier = 80 sprites img/hd-<key>-01..10 (+ icons derived wd-<key>-01..10), cost check first. 54 W2c keys: clean fig+por; hd after W2d re-export. Skip list W2C_SKIP_KEYS_hoadien.txt (W2d's remaining keys).
+- W2d session_011xDdVSFebEJbrw8z3ZeoVU (lead #7's) — consort-ty transparent repaint, 230 keys left (a36 70 + a51 160), clean forehead, varied hands, full 2048 hd; first 6 live looked OK. Extra job: re-export 54 W2c hd twins at full ~2035 then ping the hoa-điền worker. Owner rules 20:45Z passed via lead.
+- Art lead #7 session_011xDdVNkgEgTqsZJxUh9Xd8 (manifests/merges, W2d brief).
+OWNER RULES TODAY (new): singles only; hems — Đáp ứng/Thường tại may be shorter, from Tần up the OUTER robe reaches the floor, no trains; Hoàng hậu not bulky; headdress ladder: t6–t8 grand (round-1 m09 crowns OK), Tần/Phi clearly above Thường tại/Quý nhân, no pin jutting out; varied hand poses, hand interacts with the held item; clean foreheads everywhere (hoa điền = item); face drift on maid→consort OK.
+OPEN OWNER QUESTIONS: c01 t4 repaint verdict; (B) overwrite live fig-maid-*-ty* with old plain trung y; (D) W8 mama ref-upload (W8 session_011xDdVRWZVWQYAYYva3YuqJ idle).
+REQUESTS to main s36/s34 (in log lines): log owner lines 19:45Z–20:45Z in OD + art-costumes.md; code: hoa điền 10 designs per tier.
+UNHANDLED ART REQUESTS (still): Xa xỉ gold title; looks-2 face overlays; mood seals emo-khoc/emo-hon + effect sprites; wx-anim fx-fogbank.
+Magnific balance ~1.03M cr at 19:52Z (gpt-2-6 135 cr/gen W2c, ~80 W11).
+
 ## HANDOVER (Foreman C ROOT-8 session_011xDdVRxwG5P4aVZdE26CMn → ROOT-9, ~19:40Z 17/11)
 Why: context 28.7% (used_tokens 287k; START ~5% → limit 30%). Depth 1 → ROOT-9 depth 2.
 OWNER MOOD: very angry about repeated misses ("càng sửa càng sai", "vẽ xấu", "không giống ảnh mẫu"). Change ONLY what she names; LOOK hard before sending; never resend an unchanged image.
