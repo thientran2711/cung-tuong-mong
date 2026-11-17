@@ -650,3 +650,4 @@
 | one-core-dup r1 FAIL (71 player texts still type BAL.eff amounts) → fix r2 (sonnet) from r1 3d43d535 | review/one-core-dup-r2 | B | session_01N1tNP2SKjMzEdsyLuEZtJa | RUNNING | 17/11 06:14Z |
 | makeup-theme SẴN SÀNG KIỂM 3a54ec94 → review r1 (opus BIG) | review/makeup-theme-r1 | B | session_01N1tNP2HWAjTouMuEtM1ysQ | RUNNING | 17/11 06:15Z |
 | one-core-dup2 SẴN SÀNG KIỂM 0ffa37bf → review r1 (opus BIG; trial-merge roads/arcs; r2 text fix merge pending) | review/one-core-dup2-r1 | B | session_01N1tNP2aBFygh2hzMbxRRU3 | RUNNING | 17/11 06:21Z |
+| makeup-theme r1 PASS 471de81f (review/makeup-theme-r1; FF on main 6c4f21c3; reviewer fixed season mapping) → FOR MAIN: land BEFORE main's toil-looks2 (55889159 conflicts in jtoil.js + drops 'tuyet' → rework); toil-react/-r1/toil-room-art stale → close | review/makeup-theme-r1 | B | session_01N1tNP2HWAjTouMuEtM1ysQ | PASS | 17/11 06:36Z |
