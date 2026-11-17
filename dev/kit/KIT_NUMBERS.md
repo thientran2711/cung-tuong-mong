@@ -67,3 +67,4 @@ Why this order: face-sharp (§71) and tutorial (§72) were already registered by
 - (16/11, title-tag) §82 = TITLE SYSTEM PARTS (jtitle.js, review/title-tag, on main).
 - (16/11, anim-pace-r1) §83 = ONE ANIMATION PACE (BAL.pace / kitPace / --pace, review/anim-pace; renumbered from a clash with title-tag's §82). Next free: §84.
 - (17/11, scenes-3) §86 = kitLearn (jlevel.js, review/scenes-3); demotion tray is §66.3 (no new number). Next free: §87.
+- (17/11, kit-display-room) §87 = kitDisplayRoom · Nơi trưng bày (jdisp.js, review/kit-display-room). Next free: §88.
