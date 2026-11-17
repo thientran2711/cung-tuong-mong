@@ -612,3 +612,4 @@
 | mg-clutter r1 PASS cbbbc7d9 (review/mg-clutter-r1; needs merge on main) → next batch with newlife-reset b2da25cc0 + map-full 29131677 (+ app-edge on PASS) | review/mg-clutter-r1 | main s30 | session_01UV1SzhB4ckkvjk7TVuS92E | PASS | 17/11 04:23Z |
 | cloud-del review r1 (sonnet SMALL) of e12ef99a | review/cloud-del-r1 | D | session_01964izGAVcoDZanXLDNekPh | RUNNING | 17/11 04:23Z |
 | npc-death-wire review r1 (opus BIG) of de166c3f | review/npc-death-wire-r1 | D | session_01964izCQT8gNjjT2WA7WDjh | RUNNING | 17/11 04:27Z |
+| newlife-reset r1 PASS 0045ff8ef (supersedes b2da25cc0; tuanluc-sync drops vmemFix) → next batch | review/newlife-reset-r1 | main s30 | session_01UV1Szj7gGyXgBXgvj6d6xG | PASS | 17/11 04:28Z |
