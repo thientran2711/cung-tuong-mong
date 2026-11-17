@@ -2,7 +2,7 @@ PRIORITY #1 CHECK ('ghenUp|v\.ghen'): OD 0 | ledger 0 | claims 2 | main 15 | rev
 # REVIEW MOOD-MEM r2 (BIG, opus) — delta 654b205b..1b4f4967 on review/mood-mem-r2 (step 0 = 654b205b already PASSed)
 Reviewer session_01UV1SzhYFatoThxPEGCiErj. START_CTX ≈ 5 %.
 
-## PHASE 1 VERDICT: CONTENT PASS = __HEAD__ (review/mood-mem-r2, worker 1b4f4967 + 3 reviewer commits). Not fast-forwardable yet:
+## PHASE 1 VERDICT: CONTENT PASS = 96e65494 (report commit; code = 983a4e5e) (review/mood-mem-r2, worker 1b4f4967 + 3 reviewer commits). Not fast-forwardable yet:
 origin/main is not an ancestor (base review/ag-all-2 not on main). PHASE 2 (main merge → FF sha) waits for the foreman's "ag-all-2 LIVE on main".
 
 ## Owner rules checked (OD verbatim read: L1678 (b), 17/11 ~18:33Z, ~19:10Z, ~19:25Z, ~20:25Z)
