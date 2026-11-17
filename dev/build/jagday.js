@@ -124,11 +124,11 @@ function agDayDraw(){const t0=performance.now();const D=agDz();D.d=wk();D.P={};D
    their base row (their master's palace), then slices of at most BAL.ag.perf.slice ms draw them in later frames (all at once under window.__agAll);
    each drawn one gets her row repainted from the current khắc and her deed booked (agTickX), then one resync. AGD.ms holds every unit's time. */
 function agLzKind(kind){return kind==="maid"||kind==="srv"}
-function agLzNew(b){AGD.lz={key:wk()+"-"+b,b,L:[],ids:{}}}
+function agLzNew(b){AGD.lz={key:wk()+"-"+b,b,L:[],ids:{},w:S}}/* w: the world (S) the queue was drawn for — a chunk never runs on another world (co-op seat swap, load, new life) */
 function agLzPush(p,id,kind,b,intent){const Q=AGD.lz;if(!Q)return;Q.L.push([p,id,kind,b,intent]);Q.ids[id]=1}
 function agLzHas(id){const Q=AGD.lz;return !!(Q&&Q.ids[id]&&Q.key===wk()+"-"+agDayB())}
 function agLzGo(){const Q=AGD.lz;if(!Q||!Q.L.length)return;if(window.__agAll){while(AGD.lz&&AGD.lz.L.length)agLzRun();return}if(AGD.lzT)return;AGD.lzT=1;setTimeout(agLzRun,0)}
-function agLzRun(){AGD.lzT=0;const Q=AGD.lz;if(!Q)return;const D=agDz();if(Q.key!==wk()+"-"+agDayB()||D.d!==wk()){AGD.lz=null;return}
+function agLzRun(){AGD.lzT=0;const Q=AGD.lz;if(!Q)return;if(Q.w!==S||!agDOn()){AGD.lz=null;return}const D=agDz();if(Q.key!==wk()+"-"+agDayB()||D.d!==wk()){AGD.lz=null;return}
  const t0=performance.now(),B=BAL.ag.perf.slice;const done=[];
  while(Q.L.length){if(done.length&&performance.now()-t0>=B)break;const [p,id,kind,b,intent]=Q.L.shift();delete Q.ids[id];try{if(intent||!D.I||!D.I[id])agIntent(p,id);agDrawPerson(p,id,b,kind,b);done.push(id)}catch(e){agdErr("lz",e)}}
  try{const R=agRec();if(R){const k0=agKh();for(const id of done){const s=agDaySlot(id);const row=R.P[id];if(!s||!row)continue;const nr=agRow(s);
