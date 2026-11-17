@@ -9,11 +9,11 @@
    ONE PLACEMENT RULE: marker bottom = TOP OF HER HEAD (first opaque row of the figure art, hair ornaments included) − gap, gap = KIT_MEMARK.gap ×
    her drawn figure height (same fraction for every figure, size and screen). Never covers the head; when there is not enough room above the head
    (dialogs, the scene title) the marker SHRINKS instead (down to KIT_MEMARK.tiny px).
-   Motion: only a gentle bob (no glow), only with Cảnh động on and no reduced motion. A very faint soft shadow keeps it readable on busy paintings.
+   Motion: squash-and-bounce loop (17/11), only with Cảnh động on and no reduced motion. A very faint soft shadow keeps it readable on busy paintings.
    ITEMS: markers are owned items (S.meMarks = ranks owned; S.meMark = the one she shows, null = highest owned). Every promotion gives that rank's
    marker (shown in the rank chest of review/gift-chest — jrankset rsChest/kitReward kind "chest" — via the hook below); old saves get every rank
    up to the current one on load. Tư trang has a "Dấu ấn" tab; tapping a marker → "Dùng" switches to it (any owned one, older ones too). ===== */
-window.KIT_MEMARK=window.KIT_MEMARK||{h:.085,gap:.012,min:26,max:72,tiny:12,sc:[.78,.84,.9,.95,1,1.06,1.14,1.22]};
+window.KIT_MEMARK=window.KIT_MEMARK||{h:.085,gap:.012,min:26,max:72,tiny:12,big:1.05,sc:[.78,.84,.9,.95,1,1.06,1.14,1.22]};
 const KMM_NAMES=["Mai ngà","Lan bạc ngọc bích","Hoa bạc ngọc lam","Búp sen ngọc","Cúc tím chim loan","Mẫu đơn hồng ngọc","Phượng vàng mây ngọc","Cánh phượng hổ phách"];
 /* ---------- owned markers (save data) ---------- */
 function kmmRankNow(){try{if(!S||S.out)return null;if(typeof isSrv==="function"&&isSrv())return null;return Math.max(0,Math.min(7,S.rank|0))}catch(e){return null}}
@@ -47,7 +47,7 @@ function kitMeMark(fig){try{
  const im=mk.firstChild;if(im.getAttribute("src")!==src){im.onerror=()=>{mk.style.display="none"};im.onload=()=>{mk.style.display="";kmmSched()};im.setAttribute("src",src)}
  const fsrc=fig.currentSrc||fig.getAttribute("src")||"";const hd=fsrc?kmmHead(fsrc,()=>kitMeMark(fig)):{t:0,x:.5};if(!hd){mk.style.visibility="hidden";return mk}
  const B=kmmBox(fig),hr=host.getBoundingClientRect();if(B.bh<20){mk.style.visibility="hidden";return mk}
- const K=KIT_MEMARK,sc=K.sc[r]||1;let H=Math.round(Math.max(K.min*sc,Math.min(K.max*sc,B.bh*K.h*sc)));
+ const K=KIT_MEMARK,sc=K.sc[r]||1;let H=Math.round(Math.max(K.min*sc,Math.min(K.max*sc,B.bh*K.h*sc))*(K.big||1)); /* owner 17/11 07:15Z: +5 % (K.big, one kit value; 2–8 % allowed) */
  const ar=im.naturalWidth&&im.naturalHeight?im.naturalWidth/im.naturalHeight:1;
  const cx=B.bx+B.bw*hd.x,headTop=B.by+B.bh*hd.t,gap=Math.max(1,B.bh*K.gap),bottom=headTop-gap;
  /* room above the head: the host's top edge, and anything the marker must not cover (scene title, plaques, chips) */
@@ -71,14 +71,22 @@ document.addEventListener("load",e=>{const t=e.target;if(t&&t.tagName==="IMG"&&(
 try{new MutationObserver(ms=>{if(ms.every(m=>m.target.closest&&m.target.closest(".kmemark")))return;if(document.getElementById("mefig")||document.querySelector(".kesme"))kmmSched();else kmmSweep()})
  .observe(document.body,{childList:true,subtree:true,attributes:true,attributeFilter:["src","hidden"]})}catch(e){}
 (function(){const st=document.createElement("style");st.id="kmm-css";st.textContent=`
-.kmemark{position:absolute;z-index:6;pointer-events:none;display:block;filter:drop-shadow(0 1px 1.5px #2a1a1238) drop-shadow(0 0 3px #ffd77acc) drop-shadow(0 0 7px #f2b93b99)}
-.kmemark>img{display:block;width:100%;height:100%;object-fit:contain;object-position:50% 100%}
+.kmemark{position:absolute;z-index:6;pointer-events:none;display:block;filter:drop-shadow(0 1px 1.5px #2a1a1240) drop-shadow(0 0 2px #fff4c8) drop-shadow(0 0 5px #ffd77aff) drop-shadow(0 0 11px #f7c548d9) drop-shadow(0 0 20px #f2b93b80)}
+.kmemark>img{display:block;width:100%;height:100%;object-fit:contain;object-position:50% 100%;transform-origin:50% 100%}
 .kesme .kesfi{position:relative}
-/* owner 16/11 (review/face-sharp): the "this is me" mark bobs SLOWLY with a clearly visible travel (7 px / 2.4 s) and glows gold (static glow).
-   Only this small mark moves (its own layer, will-change) — never the figure image (KIT motion rule STILL PEOPLE). Reduced motion / Hiệu ứng
-   Gọn (OPT.fxon false): kmmMotion() drops .kmmove → still mark, same gold glow. */
-@media (prefers-reduced-motion:no-preference){.kmemark.kmmove>img{animation:kmmBob 2.4s ease-in-out infinite;will-change:transform}}
-@keyframes kmmBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
+/* owner 16/11 (face-sharp): only this small mark moves (own layer), never the figure (KIT motion rule STILL PEOPLE).
+   owner 17/11 07:00Z/07:15Z (map-me-mark): BRIGHTER static glow (white core + 3 gold halos, no animated filter = perf ≤ live) and a livelier loop:
+   a squash-and-bounce — rises, DROPS fast with a squash on landing, small rebound, settles, then rises again. Travel 11 px, squash scaleY .84 / scaleX 1.1,
+   transform only, 2.6 s. Reduced motion / Hiệu ứng Gọn (OPT.fxon false): kmmMotion() drops .kmmove → still mark, same glow. */
+@media (prefers-reduced-motion:no-preference){.kmemark.kmmove>img{animation:kmmBob 2.6s linear infinite;will-change:transform}}
+@keyframes kmmBob{
+ 0%{transform:translateY(-11px) scale(.98,1.03);animation-timing-function:cubic-bezier(.5,0,.9,.6)}
+ 22%{transform:translateY(0) scale(1.1,.84);animation-timing-function:cubic-bezier(.2,.7,.3,1)}
+ 34%{transform:translateY(-5px) scale(.98,1.03);animation-timing-function:cubic-bezier(.5,0,.9,.6)}
+ 46%{transform:translateY(0) scale(1.04,.94);animation-timing-function:cubic-bezier(.3,.6,.4,1)}
+ 58%{transform:translateY(-1.5px) scale(1,1);animation-timing-function:ease-in-out}
+ 78%{transform:translateY(-6px) scale(.99,1.02);animation-timing-function:ease-in-out}
+ 100%{transform:translateY(-11px) scale(.98,1.03)}}
 `;document.head.appendChild(st)})();
 /* ---------- markers are items: promotion gives the new rank's marker; the rank chest shows it ---------- */
 let kmmLast=null;

@@ -3034,7 +3034,9 @@ merit invitation, opened for real and measured (layout, one person, banner in th
   × her drawn figure height. Measured: Fold stage 7.7 px on a 644 px figure, iPad 6.5 px, iPad dialog 6.3 px on 524 px, 390 dialog 3.8 px on
   320 px (all = rule). Height 8.5 % of the figure × sc[r], 26–72 px; when the room above the head is short (dialog, scene title, plaques,
   chips) it SHRINKS (down to 12 px), never covers the head or the title.
-- Motion: a gentle 3 px bob only (Cảnh động on, no reduced motion); a very faint soft shadow; no glow.
+- Size: `KIT_MEMARK.big` = 1.05 (owner 17/11 07:15Z: "to hơn một xíu", 2–8 % allowed; one value, every figure and rank).
+- Glow (owner 17/11 07:00Z, map-me-mark): BRIGHT static glow = white core + three gold halos on the `.kmemark` layer (never an animated filter, perf ≤ live).
+- Motion (Cảnh động on, no reduced motion): squash-and-bounce loop `kmmBob` 2.6 s, transform only on the mark's own `<img>` (origin bottom centre): rises 11 px, drops fast, squash (scaleY .84 / scaleX 1.1), rebound 5 px, small second landing, settles, rises again. Reduced motion / Hiệu ứng Gọn → still mark, same glow. Never the figure.
 - Items: `S.meMarks` (owned ranks), `S.meMark` (chosen; null = highest owned). Every promotion adds that rank's marker; old saves get ranks
   0..current on load. The rank chest of review/gift-chest (`kitReward({kind:"chest",title:"Phẩm phục …"})`, jrankset `rsChest`) gets the
   marker as one more item through a `kitReward` wrapper in jmark (no edit in jrankset). Tư trang: tab "Dấu ấn"; tap a marker → "Dùng"
