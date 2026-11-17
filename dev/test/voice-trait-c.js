@@ -18,6 +18,10 @@ function serve(){return new Promise(r=>{const s=http.createServer((q,a)=>{const 
    T("lead / "+t,full);T("ok / "+t,v.name+" "+o);T("no / "+t,v.name+" "+n)}
   T("8 leads distinct",new Set(Object.values(lead)).size,8);T("8 ok distinct",new Set(Object.values(ok)).size,8);T("8 no distinct",new Set(Object.values(no)).size,8);
   /* not for emp / th / a non-quote h / unnamed kinds */
+  /* event beats (j67): the speaker's waiting sentence in HER tone (maid path; the hh / v paths share the same code) */
+  if(!S.maid)fail.push("no S.maid to test beat wait");else{const mw={};for(const t of TONES){S.maid.net=[t,S.maid.net?S.maid.net[1]:"Thật thà",S.maid.net?S.maid.net[2]:"Chăm chỉ"];S.vmem={};const w=wait67({w:"maid"},{});mw[t]=w;T("beat wait maid / "+t,w);
+    if(!P.beatWait[t].some(l=>w.includes(l)))fail.push("beat wait not from own pool: "+t)}T("8 beat waits distinct",new Set(Object.values(mw)).size,8)}
+  T("beat wait for a speaker with no name (dad)",wait67({w:"dad"},{}),"");
   T("emp ask untouched",q72Lead({A:{k:"emp",o:null,n:"Hoàng thượng"}},txt),txt);T("plain h untouched",q72Lead(X,"Việc này khó."),"Việc này khó.");
   /* noRepeat: a tone pool of 10, one draw per tuần */
   v.net=["Ân cần",v.net[1],v.net[2]];S.vmem={};const W=BAL.voice.noRepeat,seq=[];for(let i=0;i<40;i++){S.tuan=i%3;S.turn=Math.floor(i/3);S.buoi=0;seq.push(q72Tone(X,"askLead","q72:ask"))}
