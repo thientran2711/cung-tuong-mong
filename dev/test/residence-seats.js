@@ -60,6 +60,11 @@ const {chromium}=require('playwright');const [,,URL,GAMES='6']=process.argv;cons
    /* R9 (successor #2, whole family): adds that check the room when queued but add later. A newgirl event (j7) chosen after the harem
       filled up, and every option of it, keeps the harem at the cap; bạc of the paid option comes back. j55 sớ tuyển tú re-checks roomFor. */
    {const E=EVI.newgirl&&EVI.newgirl.b&&EVI.newgirl.b();if(!E)ok(false,'R9 no newgirl event');else for(const o of E.o){const b0=S.bac;try{o.go()}catch(e){ok(false,'R9 go '+e.message)}ok(liveRivals(true).length+1<=BAL.harem.cap,'R9 newgirl "'+o.n+'" -> '+(liveRivals(true).length+1));if(o.fx&&o.fx.bac)ok(S.bac>=b0,'R9 bạc not refunded')}
+    /* R9b back from lãnh cung while the harem is full: pardon (empAct), coldvisit 'Xin Hoàng thượng ân xá' (locked, and no return if forced) */
+    {const v=liveRivals(false).find(x=>x.rank<3);if(v){v.out=true;const w=newRival(0);Object.assign(w,drawFace());rivals.push(w);palFix();
+      ok(liveRivals(true).length+1===BAL.harem.cap,'R9b refill '+(liveRivals(true).length+1));const i=rivals.indexOf(v);const r7=S.rank;S.rank=7;Q.length=0;try{used=0}catch(e){}
+      try{empAct(i,'pardon')}catch(e){ok(false,'R9b pardon '+e.message)}ok(v.out&&liveRivals(true).length+1<=BAL.harem.cap,'R9b pardon brought her back over the cap');S.rank=r7;
+      const C=EVI.coldvisit&&EVI.coldvisit.b&&EVI.coldvisit.b({f:v.id,o:100});const o=C&&C.o.find(x=>/ân xá/.test(x.n));if(!o)ok(false,'R9b no coldvisit ân xá option');else{ok(!!o.off,'R9b ân xá option not locked');try{o.go()}catch(e){}ok(v.out&&liveRivals(true).length+1<=BAL.harem.cap,'R9b coldvisit brought her back over the cap')}v.out=false;w.alive=false;palFix()}}
     ok(/roomFor\("consort"\)\){const n=newRival\(roll\(70\)/.test(String(typeof tdTurn==='function'?'':'')+[...document.scripts].map(x=>x.text).join('')),'R9 j55 sớ tuyển tú re-checks roomFor')}
    out.capAt=liveRivals(true).length+1;const C={};for(const p of [S].concat(rivals))if(live(p)&&!p.queen){const r=residenceOf(p);C[r.part]=(C[r.part]||0)+1}out.full=C}
   render=r0;quiet=false;return {F,out}},+GAMES);
