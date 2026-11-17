@@ -25,7 +25,7 @@ const sl=t=>new Promise(r=>setTimeout(r,t));
    F(shelfTaste(lo[0])===lo[1],"taste not stable for one person");
    /* a fake frugal Thái hậu: ngự ban room → rebuke when the talk has reached her */
    const ot=BAL.shelf.taste.spread,oo=BAL.shelf.th.o;BAL.shelf.th.o=100;const th0=S.th|0,q0=Q.length;const st0=shelfTaste;shelfTaste=p=>p==="th"?-1:st0(p);/* a frugal Thái hậu */lo[0].shn={};shelfLook(lo[0],S,"test",true);out.T.thLv=SHELF_LV[shelfLvFor("th",S)];shelfThRebuke();shelfTaste=st0;BAL.shelf.th.o=oo;
-   const card=Q.slice(q0).find(q=>q.t==="Thái hậu quở");out.T.thRebuke=card?card.h.replace(/<[^>]+>/g,""):"none (thDead "+!!S.thDead+")";F(S.thDead||(card&&(S.th|0)<=th0),"Thái hậu did not rebuke a room too lavish to her");Q.length=q0;
+   const card=Q.slice(q0).find(q=>q.t==="Thái hậu quở");out.T.thRebuke=card?card.h.replace(/<[^>]+>/g,""):"none (thDead "+!!S.thDead+")";out.T.thRb=[th0,S.th];F(S.thDead||(card&&(S.th|0)<=th0),"Thái hậu did not rebuke a room too lavish to her");Q.length=q0;
    shelfOf(S).g=JSON.parse(kp);S.rank=rk}
   S.inv.push({k:"vongngoc",w:1});F(shelfWhyNot(S,S.inv[S.inv.length-1])!=="","worn / non-décor piece accepted");S.inv.pop();
   const tk=shelfTake(S,"chuong");F(tk&&S.inv.some(x=>x.k==="chuonggio"),"take down failed");out.T.lock={put:r1.ok,swap:r2.old,take:tk};
@@ -43,6 +43,7 @@ const sl=t=>new Promise(r=>setTimeout(r,t));
   /* mood */
   S.emo=null;shelfMood(S);out.T.mood=S.emo?S.emo.k+" "+S.emo.v+" ("+S.emo.why+")":"none";F(S.emo&&S.emo.k==="vui","lavish room did not lift her mood");
   /* 5 ACCUSE: proof (visit) → act ok; rumour only → not ok; false charge when the room is within allowance */
+  {const st1=shelfTaste;shelfTaste=x=>x===peer?0:st1(x);shelfLook(peer,S,"tận mắt",true);shelfTaste=st1}/* r2 reviewer: a neutral eye (the peer's random once-per-life taste made this flaky) */
   F(!!(ACT.xx&&ACT.xx.ok(peer,S)),"Tố xa xỉ not open to a visitor who saw it");
   /* owner (d): a TIP (rumour) is enough to accuse; with nothing seen or heard an NPC does not (her monthly guess pass aside); the player may always guess */
   const rm=w&&w!==peer?w:liveRivals(true).find(x=>x!==peer&&x.alive);if(rm){rm.shn={};F(!ACT.xx.ok(rm,S)||(typeof dressNow==="function"&&dressNow(rm,S)),"NPC accuses with nothing seen or heard");shelfLook(rm,S,"tin đồn",false);

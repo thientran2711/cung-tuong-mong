@@ -297,7 +297,7 @@ function shelfNpcAccuse(){const B=BAL.shelf.acc;for(const a of liveRivals(true))
 /* Thái hậu: her own taste decides; she hears of a room through the palace talk (someone saw it or heard of it) — even ngự ban can be "quá xa xỉ" to her (owner OD 17/11 ~19:50Z) */
 function shelfThRebuke(){if(!S||S.thDead)return;const B=BAL.shelf.th;const P=[S].concat(liveRivals(true)).filter(p=>p&&p.alive!==false&&!p.out);
  for(const t of P){if(shelfLvFor("th",t)<2)continue;const talk=P.some(o=>o!==t&&shelfSeen(o,t));if(!talk||!roll(B.o))continue;
-  const ngu=shelfList(t).some(e=>e.from==="emp");t.th=cl((t.th||0)+B.thAff,0,100);ap(t,{danh:B.danh});try{if(typeof emoSet==="function")emoSet(t,"buon",B.mood,"bị Thái hậu quở vì phòng ốc xa xỉ")}catch(e){}
+  const ngu=shelfList(t).some(e=>e.from==="emp");ap(t,{th:B.thAff,danh:B.danh});/* the one stat path (Thái hậu favour runs −100…100) */try{if(typeof emoSet==="function")emoSet(t,"buon",B.mood,"bị Thái hậu quở vì phòng ốc xa xỉ")}catch(e){}
   const h=`Thái hậu nghe nói phòng ${t===S?"ngươi":t.name} bày biện quá xa xỉ${ngu?", đồ ngự ban cũng không nên phô ra như thế":""}, cho gọi đến quở trách. Thái hậu thiện cảm ${B.thAff}, Danh ${B.danh}.`;
   if(t===S){if(!(typeof tsbBot==="function"&&tsbBot()))Q.push({t:"Thái hậu quở",who:typeof pTH==="function"?pTH():null,h:`<p>${h}</p>`})}else try{newsAdd(t,"xx",h,false)}catch(e){}}}
 /* ---------- the week: plants (decay, servants' care, withered, dead pot), NPC arrange, mood, rumours; the month: reputation, NPC charges ---------- */
