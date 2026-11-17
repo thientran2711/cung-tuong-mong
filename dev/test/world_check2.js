@@ -19,7 +19,7 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
  await fresh();
  const K=["day","lap","hau","thb","thi","vuong","ret","trung","vuco","cam","trom","phong","hon","ngoai","phat","benh","tinh"];
  const r1=await p.evaluate((K)=>{const out={};const kid=allKids()[0];const v=liveRivals(true)[0];
-  const X={day:{kid:"Hoàng tử Thử",sex:"m",mo:v.id},lap:{kid:"Hoàng tử Thử",mo:v.id},hau:{old:null,nw:v.id,sub:"lap"},hon:{kid:"Công chúa Thử",mo:v.id},ngoai:{c:"Tể tướng"},vuco:{t:v.id,tn:v.name,by:null,why:"long thể bất an"}};
+  const X={day:{kid:"Hoàng tử Thử",sex:"m",who:v.id},lap:{kid:"Hoàng tử Thử",who:v.id},hau:{from:null,to:v.id,sub:"lap"},hon:{kid:"Công chúa Thử",who:v.id},ngoai:{c:"Tể tướng"},vuco:{tgt:v.id,tn:v.name,by:null,why:"long thể bất an"}};
   for(const k of K){S.wwin.L=[];S.wwin.q=[];S.wwin.last={};S.wwin.H=[];Q.length=0;S.mg=0;const n0=(S.logs||[]).length;worldQueue(k,"thử",{x:X[k]||{}});
    let e=null;try{const t=wk();endTurn()}catch(x){e=x.message}const w=worldWin(k);const c=Q.find(m=>m&&m.t===worldName(w||{k}));
    const lg=(S.logs||[]).slice(0,8).some(l=>/thử/.test(l));const hap=(()=>{try{S.adHap=null;return adHapNow().some(x=>x.id==="world")}catch(x){return false}})();

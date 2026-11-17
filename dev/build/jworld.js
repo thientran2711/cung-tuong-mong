@@ -213,9 +213,9 @@ EVD.sao={place:w=>"cnh",
 EVD.xa={place:w=>"lc",
  start(w){const b=B().xa;const F=[];if(S.confined&&!(typeof isSrv==="function"&&isSrv())){S.confined=0;F.push(S)}
   for(const v of rivals){if(!v.alive)continue;if(v.confined){v.confined=0;F.push(v)}else if(v.out&&!v.coop&&roll(b.npcP)){v.out=false;v.rank=0;F.push(v)}}
-  const T=T_();if(T)T.kho=cl(T.kho-b.kho,0,100);w.x.me=S.out&&(S.turn-(S.coldTurn||0))>=b.minM?1:0;
+  const T=T_();if(T)T.kho=cl(T.kho-b.kho,0,100);
   return `Chiếu đại xá: miễn thuế một năm, người bị cấm túc được tha${F.length?`: ${nmList(F)}`:""}.`},
- card(w){if(w.x.me&&S.out){try{restore(false,"Chiếu đại xá thiên hạ")}catch(e){wErr("restore",e)}return null}return{t:"Đại xá thiên hạ",who:pEmp(),h:`<p>${w.cause}.</p><p>${w.txt||""}</p>`}},
+ card(w){if(S.out&&(S.turn-(S.coldTurn||0))>=B().xa.minM){try{restore(false,"Chiếu đại xá thiên hạ")}catch(e){wErr("restore",e)}return null}return{t:"Đại xá thiên hạ",who:pEmp(),h:`<p>${w.cause}.</p><p>${w.txt||""}</p>`}},
  night(w,p){return false}};
 function wNow0(w){return now()-w.t0}
 function wPresent(k){try{return liveR().filter(v=>whereOf(v)===k&&!v.confined)}catch(e){return[]}}
