@@ -68,9 +68,9 @@ Object.assign(BAL,{feel:{
   "Kiêu ngạo":["tutin","được khen dung mạo trong buổi thỉnh an"],"Tham vọng":["hanghai","lo liệu việc cung đâu ra đấy"],"Trọng nghĩa":["vui","được bạn cũ gửi thư"],
   "Mê tín":["lo","nằm mộng thấy điềm lạ"],"Nóng nảy":["khochiu","trời oi bức khó ngủ"],"Ham lợi":["vui","được nhà gửi bạc vào"],def:["hungkhoi","ngắm hoa trong vườn"]}},
  /* INTENT (ý đồ). from = min level of a source kind; bar = the person's bar at or under this; o = odds a buổi (+ trait points tr), clamped BAL.odds;
-    dur = khắc it lasts, renewed while the source holds; fade = khắc after the source is gone; show: face odds = o − Tâm cơ × tc (clamped BAL.odds,
+    the bar must be past the NPC act line (BAL.ea.npc.bar.act, MOOD-MEM: one source); dur = khắc it lasts, renewed while the source holds; fade = khắc after the source is gone; show: face odds = o − Tâm cơ × tc (clamped BAL.odds,
     one hashed draw per viewer per day); w = act weights while it lasts (the old Toan tính weights), danger = added to danger toward the target */
- intent:{from:{ghen:2,gian:2,hon:2},bar:-25,o:25,
+ intent:{from:{ghen:2,gian:2,hon:2},o:25,
   tr:{"Xảo quyệt":20,"Tham vọng":15,"Thù dai":15,"Kiêu ngạo":5,"Nóng nảy":5,"Ân cần":-25,"Khiêm nhường":-15,"Trọng nghĩa":-15,"Thật thà":-10,"Rộng lượng":-20},
   dur:48,fade:16,show:{o:70,tc:.6},w:{frame:1.5,plant:1.5,ally:1.3,bribe:1.5,bribeksp:1.5,feign:1.6,rumor:1.3,provoke:.8},danger:8}
 ,
@@ -120,24 +120,28 @@ const fB=()=>BAL.feel;
  if(BAL.mood2&&BAL.mood2.dur&&BAL.mood2.dur.k[FEEL_KEY_CHANH]==null)BAL.mood2.dur.k[FEEL_KEY_CHANH]=BAL.mood2.dur.k.ghen||12;
  Object.assign(EMO_EV,B.ev);
  for(const t in B.tr)EMO_TR[t]=Object.assign(EMO_TR[t]||{},B.tr[t]);
+ /* a daze from a slap is as public as the slap mark (BAL.mck: same leak odds) */
+ if(BAL.mck&&!BAL.mck.pubEv.includes("dazed")){BAL.mck.pubEv.push("dazed");BAL.mck.pub.o.dazed=BAL.mck.pub.o.slap}
 }catch(e){console.error("jfeel set",e)}})();
 /* an old key → the set: [key, strength] or null (no feeling) */
 function feelConv(k,v){const O=fB().old;if(!(k in O))return[k,v];const n=O[k];FEEL.stat.conv[k]=(FEEL.stat.conv[k]||0)+1;if(!n)return null;
  if(k==="dau")return[n,Math.max(v,fB().lv[2])];return[n,v]}
 /* the ONE entry point: every emoSet of every module (old keys too) lands in the set */
-(function(){if(typeof emoSet!=="function")return;const s0=emoSet;emoSet=function(p,k,v,why,t){try{if(feelOn()&&k in fB().old){const c=feelConv(k,v);if(!c)return;arguments[1]=c[0];arguments[2]=c[1]}}catch(e){}return s0.apply(this,arguments)}})();
+(function(){if(typeof emoSet!=="function")return;const s0=emoSet;emoSet=function(p,k,v,why,t){const g=FEEL.grief;try{if(feelOn()&&k in fB().old){const c=feelConv(k,v);if(!c)return;arguments[1]=c[0];arguments[2]=c[1];FEEL.grief=k==="dau"}}catch(e){}try{return s0.apply(this,arguments)}finally{FEEL.grief=g}}})();
+/* a grief (old Đau khổ) keeps its heavier weight on the bar: the cause is marked hv and weighs BAL.mood.emo.dau (MOOD-MEM mkBarOne) */
+(function(){if(typeof mkBarOne!=="function")return;const b0=mkBarOne;mkBarOne=function(m){if(m&&m.hv&&m.k==="buon"&&m.s>0&&BAL.mood.emo&&BAL.mood.emo.dau!=null)return (m.d||0)+BAL.mood.emo.dau*m.s;return b0.apply(this,arguments)}})();
 /* causes written straight into the list (jmoodknow emo2Turn: the old khóc turn) obey the set too: khóc is an act now, so no khóc cause */
-(function(){if(typeof mkAdd!=="function")return;const a0=mkAdd;mkAdd=function(p,o){try{if(feelOn()&&o&&o.k&&o.k in fB().old){if(o.k==="khoc"){FEEL.stat.conv.khoc=(FEEL.stat.conv.khoc||0)+1;return null}const c=feelConv(o.k,o.s||0);if(!c)return null;o=Object.assign({},o,{k:c[0],s:c[1]});arguments[1]=o}}catch(e){}return a0.apply(this,arguments)}})();
+(function(){if(typeof mkAdd!=="function")return;const a0=mkAdd;mkAdd=function(p,o){try{if(feelOn()&&o&&o.k&&o.k in fB().old){if(o.k==="khoc"){FEEL.stat.conv.khoc=(FEEL.stat.conv.khoc||0)+1;return null}const c=feelConv(o.k,o.s||0);if(!c)return null;o=Object.assign({},o,{k:c[0],s:c[1]});arguments[1]=o}}catch(e){}try{if(FEEL.grief&&o&&o.k==="buon")arguments[1]=Object.assign({},arguments[1],{hv:1})}catch(e){}return a0.apply(this,arguments)}})();
 /* stored causes (old saves, legacy writers of p.emo): converted once per person */
 function feelMig(p){if(!p||p.__feelMig)return;p.__feelMig=1;FEEL.stat.mig++;const O=fB().old;
- if(Array.isArray(p.mk))p.mk=p.mk.filter(m=>{if(!m||!m.k||!(m.k in O))return true;const c=feelConv(m.k,m.s||0);if(!c)return false;m.k=c[0];m.s=c[1];return true});
+ if(Array.isArray(p.mk))p.mk=p.mk.filter(m=>{if(!m||!m.k||!(m.k in O))return true;const c=feelConv(m.k,m.s||0);if(!c)return false;if(m.k==="dau")m.hv=1;m.k=c[0];m.s=c[1];return true});
  if(Array.isArray(p.emoH))for(const h of p.emoH)if(h&&h.k in O){const c=feelConv(h.k,h.v||0);h.k=c?c[0]:"binh";if(c)h.v=c[1]}
  const e=p.emo;if(e&&e.k in O){const c=feelConv(e.k,e.v||0);if(!c)p.emo=null;else{e.k=c[0];e.v=c[1]}}
  if(p.__mkL&&p.__mkL.k in O)p.__mkL=null;p.__mkAt=undefined/* re-sum the seal on the next read */}
 (function(){if(typeof mkSync!=="function")return;const m0=mkSync;mkSync=function(p){try{if(feelOn()&&p&&!p.__feelMig)feelMig(p)}catch(e){}return m0.apply(this,arguments)}})();
 (function(){if(typeof emoGet!=="function")return;const g0=emoGet;emoGet=function(p){try{if(feelOn()){const q=emoRes(p);if(q&&!q.__feelMig)feelMig(q)}}catch(e){}return g0.apply(this,arguments)}})();
 /* ---------- 2. LEVELS ---------- */
-function feelSums(p){const q=emoRes(p);const o={};if(!q)return o;try{if(typeof mkOn==="function"&&mkOn()){mkSync(q);const now=mkNow();for(const m of q.mk||[])if(m.k&&EMO[m.k]&&m.s>0&&m.k1>now)o[m.k]=(o[m.k]||0)+m.s}
+function feelSums(p){const q=emoRes(p);const o={};if(!q)return o;try{if(typeof mkOn==="function"&&mkOn()){const now=mkNow();if(q.__mkAt!==now)mkSync(q);/* once a khắc, as jmoodknow emoGet */for(const m of q.mk||[])if(m.k&&EMO[m.k]&&m.s>0&&m.k1>now)o[m.k]=(o[m.k]||0)+m.s}
  else{const e=q.emo;if(e&&EMO[e.k]&&e.v>0)o[e.k]=e.v}}catch(e){}for(const k in o)o[k]=Math.min(100,Math.round(o[k]));return o}
 function feelLvOf(s){const L=fB().lv;return s>=L[2]?3:s>=L[1]?2:s>=L[0]?1:0}
 function feelLv(p,k){return feelLvOf(feelSums(p)[k]||0)}
@@ -183,7 +187,7 @@ function feelIntentTick(p){if(!p||p===S)return;const B=fB().intent,now=mkNow();c
  for(const k in B.from){const l=feelLvOf(o[k]||0);if(l>=B.from[k]&&l>lv){lv=l;src=k}}
  const f=feelIntentOn(p);
  if(f){if(src&&f.from===src){f.k1=Math.max(f.k1,now+B.dur);return}if(!src&&!f.gone){f.gone=1;f.k1=Math.min(f.k1,now+B.fade)}return}
- if(!src||feelBar(p)>B.bar)return;let t=null;try{const now2=mkNow();const c=(p.mk||[]).filter(m=>m.k===src&&m.t!=null&&m.k1>now2).sort((a,b)=>b.s-a.s)[0];if(c)t=c.t}catch(e){}if(t==null)return;
+ if(!src||feelBar(p)>-((BAL.ea.npc&&BAL.ea.npc.bar&&BAL.ea.npc.bar.act)||11))return;let t=null;try{const now2=mkNow();const c=(p.mk||[]).filter(m=>m.k===src&&m.t!=null&&m.k1>now2).sort((a,b)=>b.s-a.s)[0];if(c)t=c.t}catch(e){}if(t==null)return;
  const tp=emoByKey(String(t));if(!tp||tp===p)return;
  let od=B.o;for(const tr of emoTraits(p))od+=B.tr[tr]||0;if(!roll(Math.max(BAL.odds.lo,Math.min(BAL.odds.hi,od))))return;
  p.fi={id:(S.fiN=(S.fiN||0)+1),t:String(t),from:src,k0:now,k1:now+B.dur};FEEL.stat.fiBorn++}
@@ -248,6 +252,9 @@ function faceKeyFor(pid,viewer){try{if(!S)return null;const p=typeof mckRes==="f
  const act=feelActNow(p),fi=p!==S&&feelIntentSeen(p,x);
  if(act)lines.push(`Đang: ${act.n}`);if(k!=="binh"&&lv)lines.push(`Cảm xúc: ${feelName(k,lv)} (${FEEL_LVN[lv]})`);if(fi)lines.push(`Vẻ mặt: ${FEEL_INTENT_N}`);
  let r;if(act)r={kind:"act",key:act.face||k,level:lv,name:act.n};else if(fi)r={kind:"intent",key:"toantinh",level:0,name:FEEL_INTENT_N};else r={kind:"feel",key:k,level:lv,name:k==="binh"?FEEL_N.binh:feelName(k,lv)};
- r.fb=FEEL_FB[r.key]||null;r.lines=lines;FEEL.stat.lvl[lv]++;return r}catch(er){return null}}
+ r.fb=FEEL_FB[r.key]||null;try{r.set=typeof emoArtSet==="function"?emoArtSet(p):"";r.art=feelArt(r.key,r.set)}catch(e){r.art=r.key}r.lines=lines;FEEL.stat.lvl[lv]++;return r}catch(er){return null}}
+/* the seal art key to draw for set ("" women, "m-", "mo-") : the key when its painting is on the CDN (img/_index.json, kitPhOnCdn), else its fallback */
+function feelArt(key,set){const fb=FEEL_FB[key];if(!fb)return key;try{if(typeof kitPhOnCdn==="function"&&!kitPhOnCdn(`img/kit/emo-${set||""}${key}.webp`))return fb}catch(e){}return key}
+window.feelArt=feelArt;
 window.faceKeyFor=faceKeyFor;window.FEEL_N=FEEL_N;window.FEEL_FB=FEEL_FB;
 window.feelStat=()=>JSON.parse(JSON.stringify(FEEL.stat));

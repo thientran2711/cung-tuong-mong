@@ -57,9 +57,10 @@ function emoCauseArt(c){try{if(!c)return"";if(c.a)return c.a;if(typeof evArtCat!
 function emoBoxArt(p,m,L){const k=m.known?m.k:"an";const c=m.known?(L.find(x=>x.k===m.k)||(m.k==="binh"?null:L[0])):null;
  let set="";try{set=typeof emoArtSet==="function"?emoArtSet(p):""}catch(e){}
  const own=emoCauseArt(c);const w=typeof emoW==="function"?emoW():0;
- const src=own||`img/ev-mood-${EMO[k]||k==="an"?k:"binh"}${w%2?"-2":""}.webp`;
+ /* FEELINGS-18: a new kind shows the picture of its nearest painted kind (FEEL_FB) */const pk=typeof FEEL_FB!=="undefined"&&FEEL_FB[k]?FEEL_FB[k]:k;
+ const src=own||`img/ev-mood-${EMO[k]||k==="an"?pk:"binh"}${w%2?"-2":""}.webp`;
  const cap=c?String(c.why).replace(/\s*«[^»]*»/g,"").replace(/[,.]\s*$/,"").trim():m.known?(EMO[k]||""):"Chưa rõ lòng người";
- return{src,label:cap,mark:`img/kit/emo-${set}${k}.webp`,markAlt:`Tâm trạng: ${m.known?m.name:"chưa rõ"}`}}
+ return{src,label:cap,mark:`img/kit/emo-${set}${typeof feelArt==="function"?feelArt(k,set):k}.webp`,markAlt:`Tâm trạng: ${m.known?m.name:"chưa rõ"}`}}
 function emoBox(k){const p=emoByKey(k);if(!p||!S||S.dead)return;const m=window.kitEmotion(p);if(!m)return;let nm=p===S?"Ngươi":emoName(p);/* rank + name always together (owner 15/11, OD L820-821): same plain title+name as Đã biết về X */try{if(p!==S&&typeof kitName==="function"&&typeof kpPlain==="function"){const t=kpPlain(kitName(p)).trim();if(t)nm=t}}catch(e){}
  const cls=x=>typeof feelGood==="function"?(feelGood(x)?"g":feelBad(x)?"r":""):x==="vui"?"g":["gian","buon","so","lo","ghen"].includes(x)?"r":"";const W=emoW();const ago=w=>W-w<=0?"tuần này":`${W-w} tuần trước`;
  const L=m.known?emoCauses(p):[];

@@ -4,7 +4,7 @@ Old keys of the 9+2 set (dau, muu, khoc, ghen-as-feeling) must be either convert
 through a group map; the scan prints file:line:kind so the before/after table can be made. usage: python3 dev/measure/feelings18-scan.py [dir]"""
 import re,sys,os,glob
 d=sys.argv[1] if len(sys.argv)>1 else os.path.join(os.path.dirname(__file__),'..','build')
-OLD=['dau','muu','khoc','ghen']
+OLD=['dau','muu','khoc']
 pat=[('key-compare',re.compile(r'\.k\s*===?\s*"(%s)"'%'|'.join(OLD))),
      ('key-list',re.compile(r'\[[^\]]*"(%s)"[^\]]*\]\.includes\([^)]*\.k\)'%'|'.join(OLD))),
      ('emoSet-old',re.compile(r'emoSet\([^,]+,\s*"(%s)"'%'|'.join(OLD))),

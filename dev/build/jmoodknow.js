@@ -174,7 +174,7 @@ window.mckStat=()=>Object.assign({},MCK.stat);
    HỜN (hon): a slight / scolding / punishment / neglect from someone she is CLOSE to (thiện cảm ≥ BAL.emo2.hon.aff; her own master for a servant; Hoàng thượng for
      a consort) turns into sulking AT that person (emo.t) by odds (BAL.emo2.hon.o + traits): friendly acts toward that person are refused while it lasts (motive gate).
    Same rule for her, every consort, servant, the Emperor; the cause stays the true event (why) and feeds moodCauseKnown. Seal art keys: emo-khoc, emo-hon (kit). */
-(function(){try{EMO.khoc="Khóc";EMO.hon="Hờn";const B=BAL.emo2;Object.assign(EMO_W,B.w);Object.assign(EMO_OD,B.od);Object.assign(EMO_LOY,B.loy);EMO_NIGHT.khoc=1;EMO_NIGHT.hon=1;EMO_DECAY.khoc=EMO_DECAY.hon=Number.MIN_VALUE}catch(e){}})();
+(function(){try{EMO.hon="Hờn dỗi";/* FEELINGS-18: khóc is an ACT now (jfeel feelActTick), not a feeling */const B=BAL.emo2;Object.assign(EMO_W,B.w);Object.assign(EMO_OD,B.od);Object.assign(EMO_LOY,B.loy);EMO_NIGHT.khoc=1;EMO_NIGHT.hon=1;EMO_DECAY.khoc=EMO_DECAY.hon=Number.MIN_VALUE}catch(e){}})();
 const EMO2={n:{khoc:0,hon:0,slap:0}};
 function emo2On(){try{return !!BAL.emo2&&!window.__emo2Off}catch(e){return false}}
 function emo2Tr(p,T){let d=0;try{for(const t of emoTraits(p))d+=T[t]||0}catch(e){}return d}
@@ -186,10 +186,10 @@ function emo2Turn(q,e,ev,t){if(!emo2On()||!q||!e)return;const B=BAL.emo2;const v
  /* moodlets: the tears / the sulk are a short cause of their own on top of the sad / hurt one (seal shows them while they last); old path: the feeling turns */
  const turn=(k,tg)=>{if(ml){mkAdd(q,{kd:k+":"+e.kd,k,s:val+1/* one above the cause it rides on, also at 100 (seal shows it; emo.v stays capped) */,why:e.why,e:e.e,c:e.c,t:tg!=null?tg:e.t,a:e.a},mkDur(null,k));q.__mkL=null;mkSync(q)}else{const k0=e.k;e.k=k;if(tg!=null)e.t=tg;emo2Row(q,e,k0)}};
  if(B.hon.ev.includes(ev)&&["gian","buon","so"].includes(e.k)){const w=emo2Who(q,ev,t);if(w&&emo2Close(q,w)&&roll(mckOdds(B.hon.o+emo2Tr(q,B.hon.tr)))){turn("hon",emoKey(w));EMO2.n.hon++;return}}
- if(B.khoc.ev.includes(ev)&&["buon","dau","so"].includes(e.k)&&val>=B.khoc.v&&roll(mckOdds(B.khoc.o+emo2Tr(q,B.khoc.tr)))){turn("khoc",null);EMO2.n.khoc++}}
+ /* FEELINGS-18 (owner OD 17/11 ~19:10Z "Khóc là một hành động"): no khóc turn here; tears come as the act (heavy Buồn + the bar line, jfeel) */}
 /* a slap brings tears (her too); the mark on the face is seen by all → the cause is PUBLIC */
 (function(){if(typeof slapGive!=="function")return;const g0=slapGive;slapGive=function(p,by,why,sev){const r=g0.apply(this,arguments);try{if(!emo2On()||!r||!p||typeof emoOn!=="function"||!emoOn())return r;const B=BAL.emo2.khoc;const s=cl(sev|0||BAL.slap.def,1,3);
-  if(roll(mckOdds(B.slap[s]+emo2Tr(p,B.tr)))){const o=MCK.ev;MCK.ev="slap";try{emoSet(p,"khoc",B.slapV[s],`bị ${by?emoName(by):"người ta"} tát`,by?emoKey(by):null)}finally{MCK.ev=o}EMO2.n.slap++}}catch(e){}return r}})();
+  if(roll(mckOdds(B.slap[s]+emo2Tr(p,B.tr)))){const o=MCK.ev;MCK.ev="slap";try{emoSet(p,"buon",B.slapV[s],`bị ${by?emoName(by):"người ta"} tát`,by?emoKey(by):null)}finally{MCK.ev=o}EMO2.n.slap++}}catch(e){}return r}})();
 /* the old mood ladders (Emperor / Thái hậu bars, vent-act groups) read the two new moods */
 (function(){if(typeof emoLv==="function"){const l0=emoLv;emoLv=function(k){return BAL.emo2&&BAL.emo2.lv[k]!=null?BAL.emo2.lv[k]:l0.apply(this,arguments)}}
  if(typeof eaGrpK==="function"){const g0=eaGrpK;eaGrpK=function(k){return k==="khoc"?"buon":k==="hon"?"gian":g0.apply(this,arguments)}}})();

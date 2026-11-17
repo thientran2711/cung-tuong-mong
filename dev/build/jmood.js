@@ -35,7 +35,7 @@ function mbAdd(d,why,kind){if(!mbOn()||!d)return 0;const M=mbS();/* the deeper s
  const x=M.log.find(e=>e.w===W&&e.k===kind);if(x){x.d+=real;x.n=(x.n||1)+1;if(why&&x.why.indexOf(why)<0&&x.why.length<70)x.why+=", "+why}else M.log.unshift({w:W,k:kind,d:real,why:String(why||"").slice(0,80),n:1});
  M.log=M.log.filter(e=>W-e.w<=B().keep).slice(0,B().logMax);return real}
 /* ---------- bands ---------- */
-function mbFlav(){try{const e=typeof emoGet==="function"?emoGet(S):null;if(!e||e.k==="binh")return"";if(e.k==="gian")return"gian";if(e.k==="ghen")return"ghen";if(e.k==="so"||e.k==="lo")return"so";return""}catch(e){return""}}
+function mbFlav(){try{const e=typeof emoGet==="function"?emoGet(S):null;if(!e||e.k==="binh")return"";const k=typeof feelGrp==="function"?feelGrp(e.k):e.k;/* FEELINGS-18: a new kind reads its group */if(k==="gian")return"gian";if(k==="ghen")return"ghen";if(k==="so"||k==="lo")return"so";return""}catch(e){return""}}
 const MB_LOW={"":["Phiền muộn","U uất"],gian:["Bực dọc","Phẫn uất"],ghen:["Hờn tủi","Hờn ghen"],so:["Bất an","Hoảng hốt"]};
 function mbBand(v){if(v==null){const M=mbS();v=M?M.v:0}const b=B().band;const f=mbFlav();
  if(v>=b[3])return{i:2,name:"Hân hoan",cls:"g",f:""};if(v>=b[2])return{i:1,name:"Vui vẻ",cls:"g",f:""};

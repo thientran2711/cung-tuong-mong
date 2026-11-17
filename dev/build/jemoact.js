@@ -107,8 +107,9 @@ function eaSealG(p){try{const e=emoGet(p);return e&&e.k!=="binh"?eaGrpK(e.k):nul
 function eaBarOk(p,g,L){try{const b=typeof moodBar==="function"?moodBar(p):0;return g==="vui"?b>=L:b<=-L}catch(e){return false}}
 window.eaSealG=eaSealG;window.eaBarOk=eaBarOk;
 function eaBarAbs(p){try{return Math.abs(typeof moodBar==="function"?moodBar(p):0)}catch(e){return 0}}
-/* khóc (tears at heavy sadness) acts as buồn; hờn (sulk) as giận — they weigh like đau khổ / giận in BAL.mood.emo (reviewer mood-mem r1: a crying seal blocked every buồn act) */
-function eaGrpK(k){return k==="vui"?"vui":k==="gian"||k==="hon"?"gian":k==="buon"||k==="dau"||k==="khoc"?"buon":k==="so"||k==="lo"?"so":k==="ghen"?"ghen":null}
+/* FEELINGS-18: a new kind acts in the group of its nearest old kind (jfeel feelGrp: Tự tin/Hăng hái/Tình tứ/Hứng khởi/Tinh nghịch → vui, Hổ thẹn/Chán chường → buồn,
+   Khó chịu/Hờn dỗi → giận, Choáng váng → sợ; Chuyên tâm/Bình thản → none); old keys khóc / đau khổ act as buồn, hờn as giận (reviewer mood-mem r1) */
+function eaGrpK(k){if(typeof feelGrp==="function")k=feelGrp(k);return k==="vui"?"vui":k==="gian"||k==="hon"?"gian":k==="buon"||k==="dau"||k==="khoc"?"buon":k==="so"||k==="lo"?"so":k==="ghen"?"ghen":null}
 /* hers, from the mood bar: band and flavour (jmood mbBand) */
 function eaMine(){try{if(typeof mbBand!=="function"||!S.mood)return{i:0,g:null};const b=mbBand();const sg=eaSealG(S);/* owner OD 17/11 ~18:33Z (1): the bar past its line AND the matching dominant feeling */const g=b.i>=1?(sg==="vui"?"vui":null):b.i<=-1?(sg&&sg!=="vui"?sg:null):null;return{i:b.i,g,b}}catch(e){return{i:0,g:null}}}
 window.eaMine=eaMine;
@@ -484,8 +485,8 @@ const EA_NACT={m:{gian:"Ra thao trường luyện võ",buon:"Viết thư về qu
  t:{gian:"Tụng kinh cho nguôi giận",buon:"Ngồi lần tràng hạt",so:"Thắp hương cầu an",ghen:"Ngồi lần tràng hạt",vui:"Ngắm hoa trong vườn"}};
 function eaNpcWeek(){if(!eaHost())return;const N=E().npc;try{eaMinFeel()}catch(e){}
  for(const p of eaPeople()){const e=p.emo;const g=e&&e.v>=15?eaGrpK(e.k):null;eaExtNpc(p,g);if(!g)continue;const T=eaTemper(p),kd=eaKind(p);
-  if(eaBarOk(p,g,E().npc.bar.out)){const ch=N.outCh*(E().out.t[T.k]||1);if(roll(ch)){const P=eaPick(p,g);if(P){const o=eaDo(p,P.r);if(o){cnt(EA_N.npcOut,kd+":"+P.r.k);cnt(EA_N.npcOutT,T.k);eaSay(p,o.h,o.target===S)}}}}
-  else if(eaBarOk(p,g,N.bar.act)&&ag2Ch(p,N.actCh*(window.agOn&&agOn()?Math.min(BAL.ag.emo2.max,eaBarAbs(p)/N.bar.act):1))){/* AG-ALL-2: the stronger her feeling, the likelier she acts on it (her own inclination, BAL.ag.emo2) *//* the same emotion acts as hers, chosen to calm down: vent + the act's own price */
+  if(!eaActsJfeel()&&eaBarOk(p,g,E().npc.bar.out)){const ch=N.outCh*(E().out.t[T.k]||1);if(roll(ch)){const P=eaPick(p,g);if(P){const o=eaDo(p,P.r);if(o){cnt(EA_N.npcOut,kd+":"+P.r.k);cnt(EA_N.npcOutT,T.k);eaSay(p,o.h,o.target===S)}}}}
+  else if(!eaBarOk(p,g,E().npc.bar.out)&&eaBarOk(p,g,N.bar.act)&&ag2Ch(p,N.actCh*(window.agOn&&agOn()?Math.min(BAL.ag.emo2.max,eaBarAbs(p)/N.bar.act):1))){/* AG-ALL-2: the stronger her feeling, the likelier she acts on it (her own inclination, BAL.ag.emo2) *//* the same emotion acts as hers, chosen to calm down: vent + the act's own price */
    const C=E().card,cg=g==="ghen"?"buon":g;
    if(kd==="c"){const L=Object.keys(C).filter(k=>C[k].g===cg);if(!L.length)continue;const k=pick(L),c=C[k];if(c.bac&&(p.bac||0)<c.bac)continue;const o={};if(c.bac)o.bac=-c.bac;if(c.suc)o.suc=-c.suc;if(c.danh)o.danh=-c.danh;if(c.tai)o.tai=c.tai;if(c.duc)o.duc=c.duc;ap(p,o);
     let m=null;if(c.loy){const ml=maidOf(p);if(ml.length){m=pick(ml);loyAdd(m,-c.loy)}}if(c.oan)for(const x of liveC())if(x!==p)oanAdd(x,p,c.oan);
@@ -515,11 +516,12 @@ const QUO_E={hot:"Hoàng thượng đập bàn quát lớn",even:"Hoàng thượ
    if(!adj)continue;const b=(o.od||0)+adj,g0=o.go;const w=String(nx(b,"")).split(" · ")[0];
    o.x=String(o.x||"").replace(/^[^·]+·/,w+" ·")+` · lòng ngươi đang ${band} (${adj>0?"dễ":"khó"} hơn)`;o.od=b;
    o.go=function(){pp.q=(pp.q||0)+adj;try{return g0.apply(this,arguments)}finally{pp.q-=adj}};cnt(EA_N,"pillow")}}catch(e){}return d}})();
+function eaActsJfeel(){try{return typeof feelOn==="function"&&feelOn()&&!!(BAL.feel&&BAL.feel.act)}catch(e){return false}}
 function eaWeek(){if(!eaOn())return;EA_N.wk++;const A=eaS(),w=W();if(A.wk===w)return;A.wk=w;
  try{eaHoi()}catch(e){console.error(e)}
  try{eaExtMe()}catch(e){console.error(e)}
- /* her outburst */
- try{const M=eaMine(),O=E().out;const v=S.mood?Math.abs(S.mood.v):0;if(M.g&&v>=O.v&&(A.ocd||0)<=w&&!(typeof isSrv==="function"&&isSrv())){const T=eaTemper(S);if(roll(O.ch*(O.t[T.k]||1))){if(eaMeOut(M.g)){A.ocd=w+O.cd;EA_N.outWk++}}}}catch(e){console.error(e)}
+ /* her outburst (FEELINGS-18: per buổi in jfeel feelActTick — heavy level + this bar line — while jfeel is on; this weekly path is the off-switch fallback) */
+ try{if(!eaActsJfeel()){const M=eaMine(),O=E().out;const v=S.mood?Math.abs(S.mood.v):0;if(M.g&&v>=O.v&&(A.ocd||0)<=w&&!(typeof isSrv==="function"&&isSrv())){const T=eaTemper(S);if(roll(O.ch*(O.t[T.k]||1))){if(eaMeOut(M.g)){A.ocd=w+O.cd;EA_N.outWk++}}}}}catch(e){console.error(e)}
  try{eaNpcWeek()}catch(e){console.error(e)}}
 window.eaWeek=eaWeek;
 (function(){if(typeof endTurn!=="function")return;const e0=endTurn;endTurn=function(){const w0=W();const r=e0.apply(this,arguments);try{if(S&&!S.dead&&W()!==w0)eaWeek()}catch(e){console.error(e)}return r}})();

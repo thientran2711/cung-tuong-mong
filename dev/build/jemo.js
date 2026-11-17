@@ -11,47 +11,47 @@
    ===================================================================================================================== */
 /* the short jealous FEELING has its own name (owner OD 17/11 ~18:38Z "Dùng từ chạnh lòng được á"); the long-term SCORE v.ghen keeps "Ghen". Rename = this one line (VANPHONG). */
 const EMO_GHEN="Chạnh lòng";
-const EMO={vui:"Vui",binh:"Bình thường",buon:"Buồn",gian:"Giận",so:"Sợ",ghen:EMO_GHEN,lo:"Lo âu",dau:"Đau khổ",muu:"Toan tính"};
+const EMO={vui:"Vui",binh:"Bình thường",buon:"Buồn",gian:"Giận",so:"Sợ",ghen:EMO_GHEN,lo:"Lo âu"};/* FEELINGS-18 (owner OD 17/11 ~19:10Z): the full 18-kind set, levels, heavy names and the old-key conversion live in jfeel.js (FEEL_N, BAL.feel); Toan tính is an intent there, Đau khổ = Buồn at the heavy level */
 /* default reaction of an event: [emotion, strength]; null = no feeling */
 const EMO_EV={selfUp:["vui",60],selfDown:["buon",55],rivalUp:["ghen",30],friendUp:["vui",20],foeDown:["vui",20],gift:["vui",18],slight:["gian",35],
- kidBorn:["vui",70],kidDie:["dau",95],otherKid:["ghen",25],punished:["so",50],cold:["dau",85],night:["vui",35],neglect:["buon",30],ill:["lo",35],
- friendDie:["buon",55],foeDie:["vui",15],mistressUp:["vui",30],mistressDown:["lo",40],loyalUp:["vui",25],loyalDown:["buon",30],motherDie:["dau",90],
+ kidBorn:["vui",70],kidDie:["buon",95],otherKid:["ghen",25],punished:["so",50],cold:["buon",85],night:["vui",35],neglect:["buon",30],ill:["lo",35],
+ friendDie:["buon",55],foeDie:["vui",15],mistressUp:["vui",30],mistressDown:["lo",40],loyalUp:["vui",25],loyalDown:["buon",30],motherDie:["buon",90],
  motherCold:["buon",50],clanUp:["vui",35],clanDown:["lo",40]};
 /* personality filter: trait → event → [emotion, ×strength] (null emotion = shrugs it off) */
 const EMO_TR={
  "Kiêu ngạo":{rivalUp:["gian",1.4],slight:["gian",1.5],punished:["gian",1.2],selfDown:["gian",1.3],gift:["vui",.6],otherKid:["ghen",1.4],selfUp:["vui",1.2]},
  "Khiêm nhường":{rivalUp:["buon",1],slight:["buon",1],punished:["so",1.4],selfDown:["buon",1.2],gift:["vui",1.2],otherKid:["buon",.8]},
- "Tham vọng":{rivalUp:["muu",1.3],otherKid:["muu",1.2],selfUp:["vui",1.3],punished:["muu",1],selfDown:["muu",1.2],friendDie:["lo",.6]},
- "Xảo quyệt":{rivalUp:["muu",1.2],slight:["muu",1.3],punished:["muu",1.1],otherKid:["muu",1.3],foeDown:["vui",1.6],foeDie:["vui",1.5],gift:["vui",.8]},
- "Ân cần":{rivalUp:["vui",.5],slight:["buon",.6],gift:["vui",1.3],punished:["so",1],otherKid:["vui",.5],foeDown:[null,0],foeDie:["buon",.6],friendDie:["dau",1]},
+ "Tham vọng":{rivalUp:["ghen",1.3],otherKid:["ghen",1.2],selfUp:["vui",1.3],punished:["gian",.8],selfDown:["gian",1],friendDie:["lo",.6]},
+ "Xảo quyệt":{rivalUp:["ghen",1.2],slight:["gian",1.1],punished:["gian",.9],otherKid:["ghen",1.3],foeDown:["vui",1.6],foeDie:["vui",1.5],gift:["vui",.8]},
+ "Ân cần":{rivalUp:["vui",.5],slight:["buon",.6],gift:["vui",1.3],punished:["so",1],otherKid:["vui",.5],foeDown:[null,0],foeDie:["buon",.6],friendDie:["buon",1.6]},
  "Kín đáo":{rivalUp:["lo",1],slight:["gian",1],gift:["lo",.5],punished:["so",1.2],ill:["lo",1.4],night:["lo",.3]},
  "Nóng nảy":{rivalUp:["ghen",1.6],otherKid:["ghen",1.6]},
  "Thù dai":{slight:["gian",1.4],foeDown:["vui",1.3]},
  "Ham lợi":{gift:["vui",1.6]},
- "Trọng nghĩa":{friendDie:["dau",1.1],friendUp:["vui",1.4]},
+ "Trọng nghĩa":{friendDie:["buon",1.7],friendUp:["vui",1.4]},
  "Rộng lượng":{slight:["buon",.8]},
  "Thật thà":{slight:["gian",1.1],rivalUp:["ghen",.6]},
- "Mê tín":{ill:["so",1.2],kidDie:["dau",1]},
+ "Mê tín":{ill:["so",1.2],kidDie:["buon",1]},
  /* servants (j10 STR) */
- trung:{mistressDown:["lo",1.4],mistressUp:["vui",1.3]},tham:{gift:["vui",1.6],mistressDown:["muu",.8]},nhat:{punished:["so",1.6],mistressDown:["so",1.3],loyalDown:["so",1.2]},
- lanh:{mistressUp:["vui",1.2],loyalDown:["muu",1]},chuyen:{},
+ trung:{mistressDown:["lo",1.4],mistressUp:["vui",1.3]},tham:{gift:["vui",1.6],mistressDown:["lo",.8]},nhat:{punished:["so",1.6],mistressDown:["so",1.3],loyalDown:["so",1.2]},
+ lanh:{mistressUp:["vui",1.2],loyalDown:["gian",.8]},chuyen:{},
  /* the Emperor */
  nongnay:{slight:["gian",1.5],kidDie:["gian",.8]},nhantu:{slight:["buon",.7]},danghi:{slight:["gian",1.2],ill:["lo",1.3]}};
 /* decay per tuần (points); trait multipliers per emotion */
-const EMO_DECAY={vui:9,binh:0,buon:6,gian:8,so:9,ghen:6,lo:6,dau:3,muu:5};
-const EMO_DK={"Thù dai":{gian:.4,muu:.6},"Ân cần":{gian:1.6,ghen:1.6,muu:1.5},"Khiêm nhường":{buon:.7,so:.8},"Kiêu ngạo":{gian:.8},"Nóng nảy":{ghen:.6},"Xảo quyệt":{muu:.6},"Trọng nghĩa":{dau:.7}};
+const EMO_DECAY={vui:9,binh:0,buon:6,gian:8,so:9,ghen:6,lo:6};
+const EMO_DK={"Thù dai":{gian:.4},"Ân cần":{gian:1.6,ghen:1.6},"Khiêm nhường":{buon:.7,so:.8},"Kiêu ngạo":{gian:.8},"Nóng nảy":{ghen:.6},"Trọng nghĩa":{buon:.8}};
 /* EFFECTS. persW multipliers at full strength (v=100); scaled linearly by v/100 */
 const EMO_HARM=["poison","kpoison","frame","kframe","plant","musk","catswap","pushp","provoke","humiliate","rumor","trip","accuse","block","steal","vp","pond","ksab","takeaway","bribe","spy","punish"];
 const EMO_KIND=["help","visit","warn","mediate","apologise","ally","gift","reward","pardon","serveTH"];
 const EMO_W={vui:{harm:.75,kind:1.5,idle:.9},gian:{harm:1.6,kind:.6,provoke:1.3,humiliate:1.3,punish:1.4},buon:{harm:.75,kind:.8,idle:1.3,visit:.6},
  so:{harm:.6,kind:.9,apologise:1.8,idle:1.15},ghen:{harm:1.3,steal:1.6,block:1.6,trip:1.4,rumor:1.4,kind:.8},lo:{spy:1.6,check:1.6,test:1.4,harm:.9},
- dau:{harm:.7,kind:.7,idle:1.5},muu:{frame:1.5,plant:1.5,ally:1.5,bribe:1.5,bribeksp:1.5,feign:1.6,provoke:.7}};
+ };/* the old Toan tính weights are the INTENT weights now (BAL.feel.intent.w, jfeel) */
 /* odds of any act by the doer's mood (points at v=100; "a little") */
-const EMO_OD={vui:1,binh:0,buon:0,gian:-1,so:-1,ghen:0,lo:0,dau:-1,muu:0};
+const EMO_OD={vui:1,binh:0,buon:0,gian:-1,so:-1,ghen:0,lo:0};
 /* the Emperor's tablet chance by her mood */
-const EMO_NIGHT={vui:1,binh:1,buon:1,gian:1,so:1,ghen:1,lo:1,dau:1,muu:1};/* v3: her own mood no longer moves the tablet (it fed a happy → more nights loop); only the Emperor's feelings do */
+const EMO_NIGHT={vui:1,binh:1,buon:1,gian:1,so:1,ghen:1,lo:1};/* v3: her own mood no longer moves the tablet (it fed a happy → more nights loop); only the Emperor's feelings do */
 /* servants' Lòng per month by their own mood */
-const EMO_LOY={vui:2,binh:0,buon:-1,gian:-2,so:-1,ghen:-1,lo:-1,dau:0,muu:-1};
+const EMO_LOY={vui:2,binh:0,buon:-1,gian:-2,so:-1,ghen:-1,lo:-1};
 const EMO_N={set:0,ev:{},motive:0,motiveGate:0,odds:0,kinds:{}};
 function emoOn(){return !!(typeof S!=="undefined"&&S&&!window.__emoOff)}
 /* ---------- who ---------- */
@@ -73,13 +73,16 @@ function emoW(){try{return wk()}catch(e){return 0}}
 /* an event filtered by personality */
 function emoEv(p,ev,why,t,scale){if(!emoOn())return;p=emoRes(p);if(!p)return;const d=EMO_EV[ev];if(!d)return;let k=d[0],v=d[1]*(scale||1);
  for(const tr of emoTraits(p)){const o=EMO_TR[tr]&&EMO_TR[tr][ev];if(o){if(o[0]===null)return;k=o[0];v*=o[1]}}
- EMO_N.ev[ev]=(EMO_N.ev[ev]||0)+1;emoSet(p,k,v,why,["gian","ghen","muu"].includes(k)?t:null)}
+ EMO_N.ev[ev]=(EMO_N.ev[ev]||0)+1;emoSet(p,k,v,why,["gian","ghen","hon"].includes(k)?t:null)}
 /* legacy mood bars stay in step: S.emp.mood (0 vui,1 bình,2 phiền,3 giận) and jcmood th/hh */
-function emoLv(k){return k==="vui"?0:k==="gian"?3:["buon","so","lo","dau","ghen"].includes(k)?2:1}
+function emoLv(k){const g=typeof feelGrp==="function"?feelGrp(k):k;return g==="vui"?0:g==="gian"?3:typeof feelBad==="function"?(feelBad(k)?2:1):["buon","so","lo","ghen"].includes(g)?2:1}
 function emoSync(p){try{if(p===S.emp&&p.emo&&p.emo.v>=40){p.mood=emoLv(p.emo.k);p.__emoMood=p.mood}if(p===S.thO&&S.cm&&S.cm.th&&p.emo&&p.emo.v>=40){S.cm.th.lv=emoLv(p.emo.k);S.cm.th.why=p.emo.why;p.__emoLv=S.cm.th.lv}}catch(e){}}
-function emoFromLegacy(){try{const E=S.emp;if(E&&E.mood!=null&&E.mood!==E.__emoMood){E.__emoMood=E.mood;const k=["vui","binh","buon","gian"][E.mood]||"binh";
+/* the Emperor's / Thái hậu's OLD 4-step bars (S.emp.mood, S.cm.th.lv: 0 vui · 1 bình · 2 phiền · 3 giận) are still written by court code; a change
+   lands as ONE cause in the full set (FEELINGS-18: "phiền" = Khó chịu, not Buồn); the seal itself never reads the old bar (kitEmotion). */
+const EMO_LEG=["vui","binh","khochiu","gian"];
+function emoFromLegacy(){try{const E=S.emp;if(E&&E.mood!=null&&E.mood!==E.__emoMood){E.__emoMood=E.mood;const k=EMO_LEG[E.mood]||"binh";
   if(k==="binh"){if(E.emo&&E.emo.v<50)E.emo=null}else{const ex=E.emo;if(!ex||ex.k!==k)E.emo={k,v:50,why:k==="vui"?"long thể khoan khoái":k==="gian"?"việc trong cung làm ngài phật ý":"việc triều đè nặng",t:null,w:emoW()}}}
- const C=S.cm;if(C&&C.th&&!S.thDead){const th=emoTH();if(C.th.lv!==th.__emoLv){th.__emoLv=C.th.lv;const k=["vui","binh","buon","gian"][C.th.lv]||"binh";if(k==="binh"){if(th.emo&&th.emo.v<50)th.emo=null}else th.emo={k,v:50,why:C.th.why||"",t:null,w:emoW()}}}}catch(e){}}
+ const C=S.cm;if(C&&C.th&&!S.thDead){const th=emoTH();if(C.th.lv!==th.__emoLv){th.__emoLv=C.th.lv;const k=EMO_LEG[C.th.lv]||"binh";if(k==="binh"){if(th.emo&&th.emo.v<50)th.emo=null}else th.emo={k,v:50,why:C.th.why||"",t:null,w:emoW()}}}}catch(e){}}
 /* ---------- the week: read what really changed ---------- */
 function emoPeople(){const L=[S];for(const v of rivals||[])if(v.alive)L.push(v);return L}
 function emoSnap(p){let kids=0,kidsAll=0;for(const k of p.kids||[]){kidsAll++;if(k.alive)kids++}return{r:rkOf(p),out:!!p.out,conf:(p.confined||0)>0,kids,kidsAll,n:(p.nightLog||[]).length+(p===S?(S.nights||0):(p.nights||0)),sung:p.sung||0,suc:p.suc||0,alive:p===S?!S.dead:!!p.alive}}
@@ -105,7 +108,7 @@ function emoWeek(){if(!emoOn())return;const W=emoW();S.emoSnap=S.emoSnap||{};con
  /* servants: by their mistress and by their own Lòng */
  for(const p of P){const e=emoGet(p),tp=S.emoSnap[emoKey(p)];for(const s of p.staff||[]){const k="s"+s.sid,o=S.emoSnap[k],l=s.loyal||0;S.emoSnap[k]={l};
    if(o&&o.l!=null){if(l>=o.l+5)emoEv(s,"loyalUp","được chủ đối đãi tử tế");else if(l<=o.l-5)emoEv(s,"loyalDown","bị chủ hắt hủi")}
-   if(e.w===W&&e.v>=40){if(["vui"].includes(e.k))emoEv(s,"mistressUp",`chủ nhân ${e.why||"vui"}`);else if(["dau","so","buon","lo"].includes(e.k)&&/giáng|lãnh cung|cấm túc|mất con/.test(e.why||""))emoEv(s,"mistressDown",`chủ nhân ${e.why}`);
+   if(e.w===W&&e.v>=40){if(["vui"].includes(e.k))emoEv(s,"mistressUp",`chủ nhân ${e.why||"vui"}`);else if((typeof feelBad==="function"?feelBad(e.k):["so","buon","lo"].includes(e.k))&&/giáng|lãnh cung|cấm túc|mất con/.test(e.why||""))emoEv(s,"mistressDown",`chủ nhân ${e.why}`);
     else if(e.k==="gian"&&roll(30))emoSet(s,"so",30,"chủ nhân đang nổi giận")}}}
  if(S.maid){const e=emoGet(S);if(e.w===W&&e.v>=40&&e.k==="vui")emoEv(S.maid,"mistressUp",`chủ nhân ${e.why||"vui"}`);else if(e.w===W&&/giáng|lãnh cung|cấm túc|mất con/.test(e.why||""))emoEv(S.maid,"mistressDown",`chủ nhân ${e.why}`)}
  /* children: by their mother */
@@ -115,7 +118,7 @@ function emoWeek(){if(!emoOn())return;const W=emoW();S.emoSnap=S.emoSnap||{};con
  try{if(S.court)for(const c in S.court){const of=S.court[c];if(!of||!of.name)continue;if(!of.emo&&roll(6))emoSet(of,pick(["vui","lo"]),30,pick(["việc triều thuận lợi","việc triều rối ren"]))}}catch(e){}
  for(const m of S.men||[]){if(m.alive&&!m.emo&&roll(5))emoSet(m,pick(["vui","lo","buon"]),25,"chuyện riêng")}
  /* the Emperor grieves a lost child and rejoices at a birth (one rule: same as anyone's child) */
- try{let n=0,a=0;for(const [k] of allKids()){a++;if(k.alive)n++}const o=S.emoSnap.empK;S.emoSnap.empK={n,a};if(o){if(a>o.a)emoSet(S.emp,"vui",55,"mừng có hoàng tự");if(n<o.n-(a-o.a))emoSet(S.emp,"dau",60,"thương xót hoàng tự yểu mệnh")}}catch(e){}}
+ try{let n=0,a=0;for(const [k] of allKids()){a++;if(k.alive)n++}const o=S.emoSnap.empK;S.emoSnap.empK={n,a};if(o){if(a>o.a)emoSet(S.emp,"vui",55,"mừng có hoàng tự");if(n<o.n-(a-o.a))emoSet(S.emp,"buon",75,"thương xót hoàng tự yểu mệnh")}}catch(e){}}
 /* ---------- direct hooks: a slight (oán) and a kindness (thiện cảm) land at once ---------- */
 (function(){const o0=oanAdd;oanAdd=function(x,y,n){const r=o0.apply(this,arguments);try{if(emoOn()&&n>=5&&x&&y&&x!==y)emoEv(x,"slight",`bị ${emoName(y)} làm nhục`,emoKey(y),cl(n/10,.6,1.6))}catch(e){}return r}})();
 (function(){const a0=affAdd;affAdd=function(x,y,n){const r=a0.apply(this,arguments);try{if(emoOn()&&n>=8&&x&&y&&x!==y&&x!==S.emp)emoEv(x,"gift",`được ${emoName(y)} đối đãi tử tế`,null,cl(n/10,.6,1.6))}catch(e){}return r}})();
@@ -136,12 +139,12 @@ function emoMul(p,act){const e=emoGet(p);if(e.k==="binh")return 1;const T=EMO_W[
  return 1+(m-1)*e.v/100}
 (function(){const w0=persW;persW=function(p,act){const w=w0.apply(this,arguments);try{if(emoOn()&&p&&p!==S)return w*emoMul(p,act)}catch(e){}return w}})();
 /* anger and jealousy aimed at someone raise the danger toward that person (capped: +12) */
-(function(){const d0=danger;danger=function(v,t){const d=d0.apply(this,arguments);try{if(emoOn()&&v&&t){const e=emoGet(v);if((e.k==="gian"||e.k==="ghen"||e.k==="muu")&&e.t!=null&&e.t===emoKey(t)){const f=emoBrake(v,t);if(f>0)return d+Math.min(8,Math.round(e.v/8*f))}}}catch(e){}return d}})();
+(function(){const d0=danger;danger=function(v,t){const d=d0.apply(this,arguments);try{if(emoOn()&&v&&t){const e=emoGet(v);if((e.k==="gian"||e.k==="ghen"||e.k==="hon")&&e.t!=null&&e.t===emoKey(t)){const f=emoBrake(v,t);if(f>0)return d+Math.min(8,Math.round(e.v/8*f))}}}catch(e){}return d}})();
 (function(){const o0=odA;odA=function(a,b){const r=o0.apply(this,arguments);try{if(emoOn()&&a){const e=emoGet(a);const m=Math.round((EMO_OD[e.k]||0)*e.v/100);if(m){EMO_N.odds++;return cl(r+m,5,95)}}}catch(e){}return r}})();
 (function(){const t0=odT;odT=function(a,b){const r=t0.apply(this,arguments);try{if(emoOn()&&a){const e=emoGet(a);const m=Math.round((EMO_OD[e.k]||0)*e.v/100);if(m)return cl(r+m,5,95)}}catch(e){}return r}})();
-(function(){const n0=nightCh;nightCh=function(p){const c=n0.apply(this,arguments);try{p=p||S;if(emoOn()&&c){const e=emoGet(p);let m=EMO_NIGHT[e.k]||1;if((e.k==="buon"||e.k==="dau")&&(S.emp.traits||[]).includes("nhantu"))m=1.05;let x=1+(m-1)*e.v/100;
+(function(){const n0=nightCh;nightCh=function(p){const c=n0.apply(this,arguments);try{p=p||S;if(emoOn()&&c){const e=emoGet(p);let m=EMO_NIGHT[e.k]||1;if(e.k==="buon"&&(S.emp.traits||[]).includes("nhantu"))m=1.05;let x=1+(m-1)*e.v/100;
   /* his own mood: who he is angry with / fond of, and in grief or worry he seeks the gentle ones */
-  const E=S.emp.emo,k=emoKey(p);if(E&&E.v>=15){if(E.k==="gian"&&E.t===k)x*=1-.5*E.v/100;else if(["buon","dau","lo"].includes(E.k)&&emoTraits(p).some(t=>t==="Ân cần"||t==="Khiêm nhường"))x*=1.08}
+  const E=S.emp.emo,k=emoKey(p);if(E&&E.v>=15){if(E.k==="gian"&&E.t===k)x*=1-.5*E.v/100;else if(["buon","lo"].includes(E.k)&&emoTraits(p).some(t=>t==="Ân cần"||t==="Khiêm nhường"))x*=1.08}
   
   if(x!==1)return Math.max(1,Math.round(c*x))}}catch(e){}return c}})();
 function emoMonth(){if(!emoOn())return;for(const p of emoPeople())for(const s of p.staff||[]){const e=emoGet(s);const d=Math.round((EMO_LOY[e.k]||0)*e.v/60);if(d)s.loyal=cl((s.loyal||0)+d,0,100)}}
@@ -153,11 +156,11 @@ function emoHalf(a,t,kind){try{if(typeof j95hash==="function"&&typeof j95key==="
 function emoGateWrap(){if(window.__emoGate||typeof motiveOK!=="function")return;window.__emoGate=1;const g0=motiveOK;
  motiveOK=function(a,t,kind){const g=g0.apply(this,arguments);try{if(!emoOn()||!a||!t||a===S||a===t||typeof a!=="object")return g;const e=emoGet(a);if(e.k==="binh")return g;
   const at=e.t!=null&&e.t===emoKey(t);const H=typeof H95!=="undefined"&&H95.has(kind),F=typeof F95!=="undefined"&&F95.has(kind);
-  if(H&&at&&(e.k==="gian"||e.k==="ghen"||e.k==="muu")){const w=`vì đang ${e.k==="gian"?"giận":e.k==="ghen"?"ghen với":"toan tính hạ"} ${emoName(t)} (${e.why})`;
+  if(H&&at&&(e.k==="gian"||e.k==="ghen")){const w=`vì đang ${e.k==="gian"?"giận":"ghen với"} ${emoName(t)} (${e.why})`;
    if(!g.ok&&/động cơ yếu/.test(g.why||"")&&e.v>=50&&emoBrake(a,t)>=1){EMO_N.motive++;return{ok:true,why:w,emo:1}}if(g.ok){EMO_N.motive++;return Object.assign({},g,{why:(g.why?g.why+", ":"")+w})}}
-  if(H&&g.ok&&(e.k==="so"||e.k==="dau")&&e.v>=60){EMO_N.motiveGate++;return{ok:false,why:`đang ${EMO[e.k].toLowerCase()} (${e.why}), không còn lòng dạ nào`}}
+  if(H&&g.ok&&(e.k==="so"||(e.k==="buon"&&typeof feelLv==="function"&&feelLv(a,"buon")>=3))&&e.v>=60){EMO_N.motiveGate++;return{ok:false,why:`đang ${(typeof feelName==="function"?feelName(e.k,feelLv(a,e.k)):EMO[e.k]).toLowerCase()} (${e.why}), không còn lòng dạ nào`}}
   if(F&&!g.ok&&e.k==="vui"&&e.v>=60&&aff(a,t)>-30){EMO_N.motive++;return{ok:true,why:`vì đang vui (${e.why})`,emo:1}}
-  if(F&&g.ok&&(e.k==="buon"||e.k==="dau")&&e.v>=60&&emoHalf(a,t,kind)){EMO_N.motiveGate++;return{ok:false,why:`đang ${EMO[e.k].toLowerCase()}, muốn ở một mình`}}}catch(x){}return g}}
+  if(F&&g.ok&&e.k==="buon"&&e.v>=60&&emoHalf(a,t,kind)){EMO_N.motiveGate++;return{ok:false,why:`đang ${(typeof feelName==="function"?feelName(e.k,feelLv(a,e.k)):EMO[e.k]).toLowerCase()}, muốn ở một mình`}}}catch(x){}return g}}
 (function(){const r0=render;render=function(){try{emoGateWrap();emoSee()}catch(e){}return r0.apply(this,arguments)}})();
 try{emoGateWrap()}catch(e){}
 /* ---------- fog of knowledge ---------- */
@@ -171,7 +174,7 @@ function emoKnown(p){p=emoRes(p);if(!p)return false;if(p===S)return true;try{if(
 /* public API — the ONE source of emotion display (owner 22:50Z: no code-drawn face expressions): null = no badge (stranger); known false = "chưa rõ" */
 window.kitEmotion=function(p){try{if(!S)return null;const q=emoRes(p);if(!q)return null;try{if(q!==S&&typeof kitIsKnown==="function"&&!kitIsKnown(q))return null}catch(e){}
  const kn=q===S.emp||emoKnown(q);if(!kn)return{k:"an",name:"Chưa rõ",known:false};let e=emoGet(q);
- if(q===S.emp&&!(e.v>=40)){const k=["vui","binh","buon","gian"][S.emp.mood]||"binh";e={k,v:k==="binh"?0:50,why:k===e.k?e.why:""}}return{k:e.k,name:EMO[e.k],v:e.v||0,why:e.why||"",known:true}}catch(e){return null}};
+ return{k:e.k,name:typeof feelName==="function"&&e.k!=="binh"?feelName(e.k,feelLv(q,e.k)):EMO[e.k],v:e.v||0,why:e.why||"",known:true}}catch(e){return null}};
 /* ---------- the badge (KIT.md 31): one layer in pcPort → every frame size ---------- */
 /* men wear the men's seals (owner 11/15, review/emo-men; same 10 moods, same backgrounds and marks): img/kit/emo-m-<k> = a young man
    (Hoàng thượng, hoàng tử, công tử / nam nhân, vương gia, thái giám, thị vệ); img/kit/emo-mo-<k> = a mature man with cap and beard
@@ -182,7 +185,10 @@ function emoArtSet(p){try{if(p&&p.__kp)p=p.__kp;const q=emoRes(p)||p;if(!q||q===
 function emoBadge(p){const m=window.kitEmotion(p);if(!m)return"";const t=m.known?`Tâm trạng: ${m.name}${m.why&&m.k!=="binh"?" ("+m.why+")":""}`:"Tâm trạng: chưa rõ";
  const E=x=>String(x==null?"":x).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
  /* owner 11/15: no visible label; TAP the seal = the kit popover (kpPop, j79) with the mood word + one-line cause; any other tap closes it */
- return `<img class="kemo kemo-${m.k}" src="img/kit/emo-${emoArtSet(p)}${m.k}.webp" alt="${E(t)}" data-kemo="${E(m.known?m.name:"Chưa rõ")}" data-kemow="${E(m.known&&m.k!=="binh"?m.why:"")}" role="button" tabindex="0" onerror="this.remove()">`}
+ /* FEELINGS-18: the art key is the "vẻ mặt" key (faceKeyFor: act > visible intent > feeling); a seal not painted yet falls back to its FEEL_FB art, then goes */
+ let ak=m.k,fb="";try{if(m.known&&typeof faceKeyFor==="function"){const f=faceKeyFor(p);if(f){ak=f.key;fb=f.fb||""}}else if(typeof FEEL_FB!=="undefined")fb=FEEL_FB[ak]||""}catch(e){}const set=emoArtSet(p);
+ const oe=fb?`if(!this.dataset.fb){this.dataset.fb=1;this.src='img/kit/emo-${set}${fb}.webp'}else this.remove()`:"this.remove()";
+ return `<img class="kemo kemo-${ak}" src="img/kit/emo-${set}${ak}.webp" alt="${E(t)}" data-kemo="${E(m.known?m.name:"Chưa rõ")}" data-kemow="${E(m.known&&m.k!=="binh"?m.why:"")}" role="button" tabindex="0" onerror="${oe}">`}
 /* tap on any seal (hers or an NPC's, any frame size): kit popover; capture phase so the tap never also opens the card/portrait under it */
 function emoTipHTML(el){const n=el.dataset.kemo||"",w=el.dataset.kemow||"";const E=x=>String(x).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
  return n==="Chưa rõ"?`<div class="kpopt">Tâm trạng chưa rõ</div><div class="kpopx">Lâu rồi chưa gặp, chưa biết lòng người này ra sao.</div>`:`<div class="kpopt">${E(n)}${w?": "+E(w):""}</div>`}
@@ -200,7 +206,7 @@ span.md.kfc.sm .kin>img.kemo{width:30%!important;left:5%!important;top:16%!impor
 span.md.kfc.xs .kin>img.kemo{width:38%!important;left:2%!important;top:14%!important}
 .kin>img.kemo.kemo-an{opacity:.85!important}
 .kin>img.kemo{cursor:pointer;-webkit-tap-highlight-color:transparent}
-@media (prefers-reduced-motion:no-preference){.kin>img.kemo.kemo-gian,.kin>img.kemo.kemo-dau{animation:kemoPulse 2.4s ease-in-out infinite!important}}
+@media (prefers-reduced-motion:no-preference){.kin>img.kemo.kemo-gian,.kin>img.kemo.kemo-phanno,.kin>img.kemo.kemo-khoc{animation:kemoPulse 2.4s ease-in-out infinite!important}}
 @keyframes kemoPulse{0%,100%{filter:drop-shadow(0 1px 1.5px #000a)}50%{filter:drop-shadow(0 0 4px #ffcf8a) drop-shadow(0 1px 1.5px #000a)}}
 `;document.head.appendChild(st)})();
 /* measurement hook */
@@ -209,4 +215,4 @@ window.emoStat=function(){const c={};for(const p of emoPeople()){const e=emoGet(
 /* jk2b kitCourtRows calls window.kitCourtMood(who) -> [text, cls] | null ("chưa rõ"); jcmood's object getter never matched that hook */
 Object.defineProperty(window,"kitCourtMood",{configurable:true,writable:true,value:function(w){try{if(!S)return null;const q=typeof queenP==="function"?queenP():null;
  const p=w==="emp"?S.emp:w==="th"?emoTH():w==="hh"?q:null;if(!p||p===S)return null;const m=window.kitEmotion(p);if(!m||!m.known)return null;
- return[m.name,m.k==="vui"?"g":["gian","buon","dau","so","lo","ghen"].includes(m.k)?"r":""]}catch(e){return null}}});
+ return[m.name,typeof feelGood==="function"?(feelGood(m.k)?"g":feelBad(m.k)?"r":""):m.k==="vui"?"g":["gian","buon","so","lo","ghen"].includes(m.k)?"r":""]}catch(e){return null}}});
