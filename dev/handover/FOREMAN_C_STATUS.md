@@ -1,5 +1,6 @@
 # FOREMAN_C_STATUS (written ONLY by Foreman C)
 FOREMAN C SESSION ROOT-4 = session_011xDdVSQC3Gf8WhM6WW38QF (opened by ROOT-3 ~08:30Z 17/11) · START_CTX ~6% (~60k of 1M; get_session reads 0, own estimate) → roll over at >= 31%, ceiling 60% · lineage depth 3/8 · own hourly wake (:32) below.
+- 09:22Z C LOOKED W5d E4 a36 m35 ×3 (mustard), m36 ×3, m37-ty1/ty2 (8): all OK → upload.
 - 09:16Z AG3 SẴN SÀNG KIỂM db193fbd (tip 9f8425b7, not FF of main 9391f9a) → opus BIG reviewer session_011xDdVQWAuJrSNwTBesGWg3 (rebase as review/npc-agent-ag3-r1; judge BAL.ag.maid.send 1.5/yr; owner Q3 open, not decided).
 - 09:12Z C LOOKED W5d E3 a36 m32-ty2/ty3, m33 ×3, m34 ×3 (8): all OK → upload. W5d warned: m35 mustard, don't use the wrong a26 m35-ty1 as ref.
 - 09:10Z W6d rolled over → lead opened W6e session_011xDdVSYx9acP952drj5SoC (CLAIMS row updated).
