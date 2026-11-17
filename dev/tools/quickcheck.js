@@ -39,14 +39,16 @@ function serve(){return new Promise(res=>{const s=http.createServer((q,r)=>{let 
  s.listen(0,'127.0.0.1',()=>res({url:'http://127.0.0.1:'+s.address().port+'/',close:()=>s.close()}))})}
 const within=(ms,p,what)=>Promise.race([p,new Promise((_,rej)=>setTimeout(()=>rej(new Error(what+' took > '+ms/1000+' s')),ms))]);
 /* in-page helpers (run inside the game frame) */
-const NEWLIFE=()=>{try{localStorage.removeItem('hclh-opt')}catch(e){}SLOT=3;document.getElementById('title').hidden=true;for(let i=0;i<40;i++){start();if(!(S.origin&&S.origin.k==='cnv')&&!(window.isSrv&&isSrv()))break}
+/* reroll = a NEW pending life: without clearing ctm-nextlife (j52 NL_KEY) start() re-rolls the SAME stored life, so a first life that is a
+   cung nữ looped 40 identical start() calls in one task (27–33 s 'long task', seen on new AND live; fix oi-perf 11/17, same idiom as origin-intros/flow.js) */
+const NEWLIFE=()=>{try{localStorage.removeItem('hclh-opt')}catch(e){}SLOT=3;document.getElementById('title').hidden=true;for(let i=0;i<40;i++){if(i)try{store.set(NL_KEY,null)}catch(e){}start();if(!(S.origin&&S.origin.k==='cnv')&&!(window.isSrv&&isSrv()))break}
  ['kroul','dawn','kload'].forEach(i=>{const e=document.getElementById(i);if(e)e.remove()});return S.name};
-const SETTLE=()=>{try{for(let j=0;j<8&&Q.length&&!S.dead;j++){const m=Q[0];if(m.opts&&m.opts.length)chooseM(0);else closeModal()}}catch(e){try{Q.shift()}catch(x){}}
+const SETTLE=()=>{try{for(let j=0;j<8&&Q.length&&!S.dead;j++){const m=Q[0];if(m.opts&&m.opts.length)chooseM(Math.max(0,m.opts.findIndex(c=>!c.off)));else closeModal()}}catch(e){try{Q.shift()}catch(x){}}
  const n=document.getElementById('next');return !!n&&!n.disabled&&!Q.length&&!S.dead};
 const BUOI=async()=>{const sl=t=>new Promise(r=>setTimeout(r,t));const k0=JSON.stringify([S.turn,S.buoi,S.month,S.year]);const t0=performance.now();
- for(let i=0;i<40;i++){for(let j=0;j<12&&Q.length&&!S.dead;j++){const m=Q[0];try{if(m.opts&&m.opts.length)chooseM(0);else closeModal()}catch(e){Q.shift()}await sl(40)}
+ for(let i=0;i<40;i++){for(let j=0;j<12&&Q.length&&!S.dead;j++){const m=Q[0];try{if(m.opts&&m.opts.length)chooseM(Math.max(0,m.opts.findIndex(c=>!c.off)));else closeModal()}catch(e){Q.shift()}await sl(40)}
   const n=document.getElementById('next');if(n&&!n.disabled){n.click();await sl(300);break}await sl(200)}
- for(let j=0;j<40&&Q.length&&!S.dead;j++){const m=Q[0];try{if(m.opts&&m.opts.length)chooseM(0);else closeModal()}catch(e){Q.shift()}await sl(40)}
+ for(let j=0;j<40&&Q.length&&!S.dead;j++){const m=Q[0];try{if(m.opts&&m.opts.length)chooseM(Math.max(0,m.opts.findIndex(c=>!c.off)));else closeModal()}catch(e){Q.shift()}await sl(40)}
  return {ms:Math.round(performance.now()-t0),moved:JSON.stringify([S.turn,S.buoi,S.month,S.year])!==k0,dead:!!S.dead}};
 async function page(b,dev){const ctx=await D.newDeviceContext(b,dev,{deviceScaleFactor:1,reducedMotion:'reduce'});
  await ctx.addInitScript(()=>{window.COOP_URL='http://127.0.0.1:9/';window.__qcErr=[];addEventListener('error',e=>{try{window.__qcErr.push(String(e.message||e.error))}catch(x){}});

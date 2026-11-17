@@ -6,7 +6,7 @@ const sleep=ms=>new Promise(r=>setTimeout(r,ms));
 (async()=>{const b=await chromium.launch();const c=await b.newContext({viewport:{width:W,height:H},deviceScaleFactor:+(d||1),serviceWorkers:'block'});
  await c.addInitScript(()=>{try{localStorage.setItem('ctm-bgpause','1')}catch(e){}setInterval(()=>{document.querySelectorAll('.krskip').forEach(b=>b.click())},300)});
  const p=await c.newPage();const errs=[];p.on('pageerror',e=>errs.push(p.url().split('/').pop()+': '+e.message.slice(0,160)));const R={fail:[]};
- const close=()=>p.evaluate(()=>{for(let i=0;i<30&&Q.length;i++){const m=Q[0];if(m.opts&&m.opts.length)chooseM(0);else closeModal()}});
+ const close=()=>p.evaluate(()=>{for(let i=0;i<30&&Q.length;i++){const m=Q[0];if(m.opts&&m.opts.length)chooseM(Math.max(0,m.opts.findIndex(c=>!c.off)));else closeModal()}});
  /* 1. main build: new life, a few buổi, saved in Sổ một */
  await p.goto(OLD,{waitUntil:'domcontentloaded'});await sleep(3000);await p.evaluate(()=>{localStorage.clear();localStorage.setItem('ctm-bgpause','1')});await p.reload();await sleep(3000);
  await p.evaluate(()=>{const k=document.getElementById('kload');if(k)k.remove();document.querySelector('#slots button[data-new="1"]').click()});await sleep(3000);
