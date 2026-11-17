@@ -41,7 +41,7 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
  ok(r4.skip||r4.t&&r4.amT&&/cho gọi/.test(r4.why),'pool: a remembered maid is picked from his night pool, nightWhy says he called her',r4);
  ok(r4.skip||r4.added===1&&r4.newName&&r4.newName.endsWith(" "+r4.nm)&&r4.road==="cn"&&!r4.inStaff,'her night with a seat: the same person raised Đáp ứng (her name, road cn)',r4);
  const r4b=await p.evaluate(()=>{const L=amMaids().filter(([s,o])=>o!==S);if(!L.length)return{skip:1};const [s,o]=L[0];const rf=roomFor;roomFor=()=>false;const n0=rivals.length;let a,b;
-  try{amNight(s,o,"pick");a={fav:!!s.fav,added:rivals.length-n0,inStaff:o.staff.includes(s)};roomFor=()=>true;servMonth();b={added:rivals.length-n0,inStaff:o.staff.includes(s)}}finally{roomFor=rf}return{a,b}});
+  try{/* par3 (2e4): she may decline (Cáo bệnh, jagacts3) — this check is about the night she accepts */const mpk=mindPick;mindPick=(O,p)=>O.some(z=>z[0]==="go")?"go":mpk(O,p);try{amNight(s,o,"pick")}finally{mindPick=mpk}a={fav:!!s.fav,added:rivals.length-n0,inStaff:o.staff.includes(s)};roomFor=()=>true;servMonth();b={added:rivals.length-n0,inStaff:o.staff.includes(s)}}finally{roomFor=rf}return{a,b}});
  ok(r4b.skip||r4b.a.fav&&r4b.a.added===0&&r4b.a.inStaff,'seats full: she stays a maid, favoured',r4b);ok(r4b.skip||r4b.b.added===1&&!r4b.b.inStaff,'a free seat at the month goes to the favoured maid',r4b);
  /* 5 Tiến cử */
  const r5=await p.evaluate(()=>{const v=liveRivals(true).find(x=>x.maid);const seen=[];const r0=roll;roll=function(o){seen.push(o);return r0.apply(this,arguments)};let q;try{q=amSendQ(v)}finally{roll=r0}

@@ -134,8 +134,8 @@ function npcStudy(v){if(!v||!v.alive||v.out||(window.agDOn&&agDOn())||!roll(40*(
 function npcStudyDo(v){if(!v||!v.alive||v.out)return;vNorm(v);const T=traitsOf(v)||[];const W=[];
  const w=k=>{let x=1;if(/Ân cần|Khiêm nhường/.test(T.join()))x*=(k==="hanh"?3:k==="dung"||k==="cong"?2:1);if(T.includes("Xảo quyệt"))x*=(k==="ky"?3:k==="ngon"?2:k==="hanh"?.3:1);if(T.includes("Kiêu ngạo"))x*=(k==="vu"||k==="dung"?2:1);return x};
  ARTS.forEach(a=>{if(v.arts[a.k]<5)W.push(["a",a.k,w(a.k)])});VIR.forEach(x=>{if(v.vir[x.k]<5)W.push(["v",x.k,w(x.k)])});if(!W.length)return;
- let r=Math.random()*W.reduce((s,x)=>s+x[2],0),i=0;while(r>W[i][2]&&i<W.length-1){r-=W[i][2];i++}const [t,k]=W[i];const l=t==="a"?v.arts[k]:v.vir[k],cost=t==="a"?(typeof tchFeeOf==="function"?tchFeeOf(v):5+l*5):virCost(l,v);
- const paid=(v.bac||0)>=cost+40&&roll(50);let g=1;if(paid){ap(v,{bac:-cost});g=2+R(2)}
+ const [t,k]=mindPick(W.map(x=>[x,x[2]]),v)||W[0];const l=t==="a"?v.arts[k]:v.vir[k],cost=t==="a"?(typeof tchFeeOf==="function"?tchFeeOf(v):5+l*5):virCost(l,v);
+ const SX=BAL.ag.par3.study;const paid=(v.bac||0)>=cost+SX.keep&&mindPick([["t",SX.teach],["s",SX.self]],v)==="t";let g=1;if(paid){ap(v,{bac:-cost});g=2+R(2)}
  /* AG-ALL-2b mg2 (owner OD 17/11 ~15:25Z (3)): her lesson game for the NPC = one draw (jmgt mgNpcRaw, practice board occ hoc at the NPC's level) through HER
     points rule: an art = j83 wkLessonPts (teacher or self, same value, as her art lessons); a virtue = jtd tdPoints (self / with a ma ma) */
  if(typeof mg2On==="function"&&mg2On()&&BAL.ag.mg2.study){try{if(t==="a"&&typeof wkLessonPts==="function")g=wkLessonPts(kg82NpcRaw(v,kg82Kind(k,"",true),{occ:"hoc"}));

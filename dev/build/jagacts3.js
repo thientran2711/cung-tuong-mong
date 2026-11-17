@@ -300,3 +300,41 @@ function p3MaidMonth(){if(!p3On()||!stf2On())return"";let ev="";const X=BAL.ag.p
 (function(){if(typeof asMonth!=="function")return;const m0=asMonth;asMonth=function(){let ev=m0.apply(this,arguments)||"";try{ev+=p3MaidMonth()}catch(e){agdErr("par3:maidMonth",e)}return ev}})();
 Object.assign(AGC3BTN,{cnvScold:"Khóc lóc xin tha",cnvFest:"Rót rượu gần ngự tọa",cnvBlack:"Đút bạc bịt miệng",cnvAff:"Dọa tố chuyện tư tình"});
 Object.assign(window,{p3MaidMonth});
+/* ================= 2e4: the "same button, different code" pairs → ONE function for her button and the NPC (ag-all-parity.md DIFF list) =================
+   Nhờ giúp đỡ (j9 her card / cx2:help) = helpAsk(p,t) · Trò chuyện với cung nữ (jact her card / cx2:maidTalk) = maidTalkDo(p) · Sai đi dò la (jwhy spyMaidRun / cx2:maidSpy):
+   the NPC names a target (maidSpyT, mindPick) and uses her odds spyRoll(p,t,maid), her gain (chứng cứ BAL.eff.j78.evN) and her failure (lòng −, target oán) ·
+   jgreet (an NPC comes to her): Hỏi han / Khen / Chia sẻ bí mật / Bàn tán = P3T.<k>(v,S), Cảnh báo / Khiêu khích = twDo(v,S,k) (her TW buttons) ·
+   Soát quà (TW.check) = j8 inspect (her Kiểm tra đồ) · cx:study = npcStudyDo with mindPick (j85) · Đánh đàn chờ ngự giá (jact adStroll) = qinCard(p), NPC cx3:qin */
+function helpAsk(p,t){const X=BAL.ag.cx2.help,me=p===S;if(aff(t,p)<X.aff){affAdd(t,p,-X.fail);return{ok:0,r:me?`${t.name} khéo từ chối. Nàng quý ngươi -${X.fail}.`:`${t.name} khéo từ chối lời nhờ của ${p.name}`}}
+ if(roll(cnvOd(X.p))&&(t.bac||0)>=X.bac){ap(t,{bac:-X.bac});if(me)apply({bac:X.bac});else ap(p,{bac:X.bac});return{ok:1,r:me?`${t.name} cho ngươi mượn ${X.bac} lượng.`:`${t.name} cho ${p.name} mượn ${X.bac} lượng`}}
+ const x=evGuilty(p,others(p).filter(y=>y&&y!==p&&y!==t&&(y===S||y.alive)));if(x&&evA(p,x,BAL.ag.ev.one))return{ok:1,r:me?`${t.name} kể cho ngươi một chuyện về ${x.name}: ${evSg(BAL.ag.ev.one)}.`:`${t.name} kể cho ${p.name} một chuyện về ${agcNm(x)}`};
+ return{ok:1,r:me?`${t.name} tiếp ngươi ân cần.`:`${t.name} tiếp ${p.name} ân cần`}}
+agRunReg("cx2:help",(v,t)=>{if(!t||t===S)return"";const h=helpAsk(v,t);return ag2Res(v,"help",h.ok,h.r)});
+function maidTalkDo(p){const X=BAL.ag.cx2.maidTalk,m=p===S?S.maid:p.maid;if(!m)return"";if(p===S)apply({maid:X.w.maid});else m.loyal=cl((m.loyal||0)+X.w.maid,0,100);
+ if(p===S&&roll(cnvOd(X.hear))){const t=liveRivals(true);if(t.length){const v=pick(t);try{seeLoc&&seeLoc(v)}catch(e){}log(`${S.maid.name} kể: ${v.name} đang ở ${placeName(whereOf(v))} buổi này.`)}}/* an NPC reads places from the record (agAt): information only */
+ return p===S?"":`${p.name} trò chuyện với ${m.name}`}
+try{AGC2BTN.maidTalk="Trò chuyện với cung nữ"}catch(e){}
+agRunReg("cx2:maidTalk",v=>{const r=maidTalkDo(v);return r?ag2Res(v,"maidTalk",1,r):""});
+function maidSpyT(v){const L=others(v).filter(t=>t&&t!==v&&(t===S||t.alive)&&!t.out&&!sameHouse(v,t));return L.length?mindPickBy(L,t=>BAL.mind.pick.ag.base+Math.max(0,agSpite(v,t))+Math.max(0,danger(t,v))/10,v):null}
+agRunReg("cx2:maidSpy",(v,t)=>{const m=v.maid;t=t||maidSpyT(v);if(!m||!t)return"";if(!roll(spyRoll(v,t,m))){m.loyal=cl((m.loyal||0)-BAL.eff.jwhy.loyalSpyMaidRun,0,100);oanAdd(t,v,BAL.eff.j78.j78maidFail);
+  return ag2Res(v,"maidSpy",0,`${m.name} nấp nghe ngoài cửa sổ cung ${agcNm(t)} thì bị bắt gặp; ${agcNm(t)} đoán ra ${v.name}`)}
+ const ok=!!evA(v,t,BAL.eff.j78.evN);return ag2Res(v,"maidSpy",ok,ok?`${m.name} nghe lén được chuyện của ${agcNm(t)} cho ${v.name}`:`${m.name} dò la ${agcNm(t)} cho ${v.name}, chẳng thấy điều gì sai trái`)});
+/* jgreet: an NPC who comes to her runs her own talk / TW buttons with herself as the speaker */
+(function(){if(typeof gmOpts!=="function")return;const g0=gmOpts;const SAY={health:["Health","hỏi han sức khỏe ngươi"],praise:["Praise","khen tài nghệ của ngươi"],secret:["Secret","kéo ngươi ra một góc, kể chuyện riêng"],gossip:["Gossip","ghé tai bàn tán về {x}"],
+  warn:["Warn","nhắc ngươi coi chừng {x}"],provoke:["Provoke","buông lời khiêu khích ngươi trước mặt mọi người"]};
+ gmOpts=function(v){const A=g0.apply(this,arguments);if(!p3On()||!v||v===S)return A;const out=[];
+  for(const o of A){const k=o.k;if(!SAY[k]){out.push(o);continue}
+   if(k==="warn"||k==="provoke"){if(!TW[k]||!twCanPay(v,k)||(TW[k].req&&!TW[k].req(v,S)))continue;
+    out.push(Object.assign({},o,{run:()=>{const a0=aff(S,v);const r=String(twDo(v,S,k)||"").replace(/<[^>]+>/g,"");const d=aff(S,v)-a0;return{h:`${v.name} ${gmSay(SAY[k][0],v,SAY[k][1],"")}.`.replace(/ \./," ."),line:r+(d?` Ngươi quý nàng ${d>0?"+":""}${d}.`:"")}}}));continue}
+   const th=k==="gossip"?p3Third(v,S):null;if(k==="gossip"&&!th)continue;
+   out.push(Object.assign({},o,{run:()=>{const a0=aff(S,v);const C=k==="gossip"?P3T.gossip(v,S,th):P3T[k](v,S);const r=String(C.run()||"");const d=aff(S,v)-a0;
+    return{h:`${v.name} ${gmSay(SAY[k][0],v,SAY[k][1],th&&th.name)}.`,line:d?`Ngươi quý nàng ${d>0?"+":""}${d}.`:r}}}))}
+  return out}})();
+/* Đánh đàn chờ ngự giá (her garden pop-up jact PEND.adStroll; the old deck card): ONE card for her and an NPC consort in Ngự hoa viên */
+function qinCard(p){const X=BAL.ag.par3.qin;const me=p===S;const K=me&&S.emp.known&&S.emp.known.music;const tt=me&&has("trongtai")?X.tt:1;
+ return{n:"Đánh đàn chờ ngự giá",c:{suc:-X.suc},o:odA(p,X.o+(p.tai||0)/X.taiD+((p.arts&&p.arts.cam)||0)*X.cam*tt+(K?X.like:0)+mm()),w:{sung:K?X.wLike:X.w},l:{sung:-X.l}}}
+AGC3BTN.qin="Đánh đàn chờ ngự giá";AGC3ACT.qin="đánh đàn chờ ngự giá ở Ngự hoa viên";
+agReg("consort","par3qin",(v,N,need)=>{const O=[];if(!p3On()||v===S||v.out||v.confined||!v.alive||(need&&need!=="sung"))return O;try{const X=BAL.ag.par3.qin;if(((v.arts&&v.arts.cam)||0)<X.minCam)return O;
+ const x=p3O(v,"qin",qinCard(v),N,X.g,"art",()=>"vuon");if(x)O.push(x)}catch(e){agdErr("par3qin",e)}return O});
+agRunReg("cx3:qin",v=>p3Run(v,qinCard(v),"qin"));
+Object.assign(window,{helpAsk,maidTalkDo,maidSpyT,qinCard});

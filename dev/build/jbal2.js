@@ -1087,6 +1087,10 @@ BAL.ag.par3={on:1,
    aff = Dọa tố (odds o + Tâm cơ/tcD, Bạc, fail: odds lau of Tân Giả khố lauW tuần), Bẩm chủ (Chủ tin), see = % a month an NPC maid learns a consort's affair, w = worth weights of an NPC maid's pick */
 BAL.ag.par3.cnv={scold:{humble:{tin:1,duc:1},beg:{o:40,sacD:3,tin:3},talk:{danh:2,tin:8,kneel:40,suc:15}},fest:{pour:{o:30,sacD:3,taiD:10,nt:12,tin:4},stand:{tin:3}},
  black:{pay:20,ignore:{o:40},caught:{tin:10,tgk:30}},aff:{threat:{o:45,tcD:3,bac:30,lau:35,lauW:8},tell:{tin:6},see:3}};
+/* 2e4: Đánh đàn chờ ngự giá (qinCard, her garden pop-up and NPC cx3:qin): odds o + Tài/taiD + cầm × cam (× tt with Trống tài) + like when she knows his music; Sủng w / wLike, fail −l; Sức suc; NPC needs cầm ≥ minCam
+   study: an NPC lesson (j85 npcStudyDo) — pays a teacher only keeping keep bạc; teacher / self weights for mindPick */
+Object.assign(BAL.ag.par3,{qin:{o:35,taiD:3,cam:4,tt:2,like:15,w:7,wLike:9,l:1,suc:10,minCam:1,g:{"sung":2}},study:{keep:40,teach:1,self:1}});
+BAL.ag.cx2.maidTalk.hear=15;
 BAL.kidTeach={suc:5,k:2,age:3};
 BAL.def70={taste:30,die:40,caught:12,ev:30};/* + Theo dõi một người, monthly: odds the watcher is caught / brings evidence */
 BAL.invite={base:40,affD:2,rk:5,hate:-30};

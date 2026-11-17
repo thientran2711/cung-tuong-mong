@@ -39,7 +39,7 @@ function spyFactors(a,t,ag){const F=[],me=a===S;ag=spyAgent(a,t,ag);
  return F.filter(x=>x[1]||/Tự tay/.test(x[0]))}
 function spyRaw(a,t,ag){return BAL.spyBase+spyFactors(a,t,ag).reduce((s,x)=>s+x[1],0)}
 function spyO(a,t,ag){return cl(Math.round(spyRaw(a,t,ag)),5,95)}
-function spyRoll(a,t,ag){return cl(Math.round(spyRaw(a,t,ag)+lotB(a,"Mưu kế")),5,95)}
+function spyRoll(a,t,ag){return cl(Math.round(spyRaw(a,t,ag)+lotB(a,"Mưu kế")),BAL.odds.lo,BAL.odds.hi)}
 /* consort act "Dò la" (everyone, two-way): the formula above; the servant penalty is inside it (no second sentPen) */
 (function(){const A0=ACT.spy;if(!A0)return;A0.o=(a,t)=>t?spyO(a,t):oSpy(a);A0.why=(a,t)=>spyFactors(a,t);
  A0.f=(a,t)=>{ap(a,{bac:-15});const o=spyRoll(a,t);if(roll(o)){ap(a,{tamco:2});return spyFind(a,t)}relAdd(a,t,BAL.eff.jwhy.f);return `${NMc(a)} dò la ${NM(t)}: <span class="r">bị phát hiện</span>. `};})();

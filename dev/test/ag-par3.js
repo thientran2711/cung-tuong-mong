@@ -122,7 +122,7 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
  /* 2e4 maid dilemmas: ONE builder for her PEND card and the NPC maid (stf2Pick), both answers happen */
  const r9=await p.evaluate(()=>{const o=liveRivals(true).find(x=>(x.staff||[]).some(s=>s.role==="maid"));if(!o)return{skip:1};const m=o.staff.find(s=>s.role==="maid");asSt(m);const keep=JSON.stringify(m);const st0=JSON.stringify(o.staff.map(x=>x.sid));
   const B={scold:0,fest:0,black:0,aff:0};const W={};for(const k of ["cnvScoldOpts","cnvFestOpts","cnvBlackOpts","cnvAffOpts"]){W[k]=window[k];window[k]=function(){if(arguments[0]===m)B[k.slice(3,-4).toLowerCase()]++;return W[k].apply(this,arguments)}}
-  const H={};const reset=()=>{const K=JSON.parse(keep);for(const k in m)if(!(k in K))delete m[k];Object.assign(m,K);if(!o.staff.includes(m))o.staff.push(m)};const t=liveRivals(true).find(x=>x!==o&&!x.out);
+  const H={};const reset=()=>{const K=JSON.parse(keep);for(const k in m)if(!(k in K))delete m[k];Object.assign(m,K);m.spyFor=null;m.out=0;m.loyal=50;if(!o.staff.includes(m))o.staff.push(m)};const t=liveRivals(true).find(x=>x!==o&&!x.out);
   try{for(let i=0;i<60;i++){reset();servDo(o,"phat",m);reset();m.lover=m.lover||9e6;threatServ(t,m);reset();
     const c1=stf2Pick(m,cnvFestOpts(m,o),"fest");H["fest_"+c1.id]=1;t.affair=t.affair||1;const c2=stf2Pick(m,cnvAffOpts(m,t,o),"aff");H["aff_"+c2.id]=1}
    const sm=S.month;S.month=1;const n0=B.fest;window.__p3see=BAL.ag.par3.cnv.aff.see;BAL.ag.par3.cnv.aff.see=100;try{reset();p3MaidMonth()}finally{S.month=sm;BAL.ag.par3.cnv.aff.see=window.__p3see}
@@ -138,5 +138,26 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
  ok(r9.skip||r9.H.monthFest>=1&&Object.keys(r9.H).some(k=>k.startsWith("aff_")),'yến / biết tư tình: monthly NPC maid picks from cnvFestOpts / cnvAffOpts',r9.H);
  ok(r9.skip||r9.hb.length===3,'her PEND cnvScold / cnvFest / cnvBlack are built by the same builders',r9.hb);
  ok(r9.skip||r9.od[0]===r9.od[2]&&r9.od[1]===r9.od[3]&&r9.od[0]<100&&r9.od[1]>0,'odds clamped by BAL.odds.lo/hi',r9.od);
+ /* 2e4 DIFF pairs: her button and the NPC run ONE function */
+ const r10=await p.evaluate(()=>{const v=liveRivals(true).find(x=>!x.out&&!x.queen);vNorm(v);const t=liveRivals(true).find(x=>x!==v&&!x.out);const sp={};const W={};
+  for(const k of ["helpAsk","maidTalkDo","spyRoll","inspect","twDo","qinCard"]){W[k]=window[k];sp[k]={me:0,npc:0};window[k]=function(){sp[k][arguments[0]===S?"me":"npc"]++;return W[k].apply(this,arguments)}}
+  const P0={};for(const k of ["health","praise","secret","gossip"]){P0[k]=P3T[k];P3T[k]=function(){sp["P3T_"+k]=(sp["P3T_"+k]||0)+1;return P0[k].apply(this,arguments)}}
+  const out={};try{
+   /* her side */
+   const her=(topicOpts(v)||[]).concat(talkOpts({kind:"rival",ref:v})||[]);const h=her.find(a=>a.n==="Nhờ giúp đỡ");out.hasHelp=!!h;if(h)h.run();
+   if(!S.maid)S.maid=newMaid(pick(MAIDS),50);const mo=talkOpts({kind:"maid"})||[];const mt=mo.find(a=>a.n==="Trò chuyện với cung nữ");if(mt&&mt.go)mt.go();
+   PEND.adStroll();
+   /* NPC side */
+   v.maid=v.maid||newMaid(pick(MAIDS),50);AGRUN["cx2:help"](v,t);AGRUN["cx2:maidTalk"](v);AGRUN["cx2:maidSpy"](v,t);v.inv=v.inv||[];TW.check.run(v);
+   v.arts=v.arts||{};v.arts.cam=Math.max(2,v.arts.cam||0);v.suc=80;AGRUN["cx3:qin"](v);
+   /* jgreet: an NPC who comes to her */
+   const nk0=window.npcKnows,kn0=window.k61Named;window.npcKnows=()=>true;window.k61Named=()=>true;S.known=S.known||{};for(const k in sp)if(k.startsWith("P3T_"))delete sp[k];
+   const keys=new Set();try{for(let i=0;i<30;i++){const A=gmOpts(v);for(const o of A){keys.add(o.k);if(["health","praise","secret","gossip","warn","provoke"].includes(o.k))try{o.run()}catch(e){out.err=String(e)}}}}finally{window.npcKnows=nk0;window.k61Named=kn0}
+   out.keys=[...keys];out.btn=AGC2BTN.maidTalk}finally{for(const k in W)window[k]=W[k];for(const k in P0)P3T[k]=P0[k]}
+  out.sp=sp;return out});
+ ok(r10.sp.helpAsk.me>=1&&r10.sp.helpAsk.npc>=1,'Nhờ giúp đỡ: her card and cx2:help run helpAsk',r10.sp.helpAsk);
+ ok(r10.sp.maidTalkDo.me>=1&&r10.sp.maidTalkDo.npc>=1&&r10.btn==="Trò chuyện với cung nữ",'Trò chuyện với cung nữ: her card and cx2:maidTalk run maidTalkDo (label matches)',{s:r10.sp.maidTalkDo,b:r10.btn});
+ ok(r10.sp.spyRoll.npc>=1&&r10.sp.inspect.npc>=1&&r10.sp.qinCard.me>=1&&r10.sp.qinCard.npc>=1,'Sai đi dò la (spyRoll) · Soát quà (inspect) · Đánh đàn chờ ngự giá (qinCard): NPC uses her function',r10.sp);
+ ok(!r10.err&&Object.keys(r10.sp).some(k=>k.startsWith("P3T_")),'jgreet health/praise/secret/gossip run P3T(v,S); warn/provoke run twDo',{keys:r10.keys,err:r10.err,tw:r10.sp.twDo});
  ok(errs.length===0,'no page errors',errs.slice(0,3));
  await b.close();const f=res.filter(x=>!x).length;console.log(f?`${f} FAIL`:'ALL PASS');process.exit(f?1:0)})();

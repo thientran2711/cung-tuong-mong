@@ -66,7 +66,7 @@ const AD_ACTNAME={"Bỏ độc vào trà nàng":"poison","Bỏ xạ hương vào
 (function(){const t0=talkOpts;talkOpts=function(p){let A=t0.apply(this,arguments);try{if(!p||!Array.isArray(A)||adSrv())return A;
   if(p.kind==="ty")A=A.filter(a=>a&&a.n!=="Học hỏi y lý");
   if(p.kind==="fallen")A=A.filter(a=>a&&a.n!=="Đưa cơm áo");
-  if(p.kind==="maid"&&S.maid){const i=A.findIndex(a=>a&&a.n==="Tâm sự");if(i>=0)A[i]={n:"Trò chuyện với cung nữ",o:100,w:{maid:3},x:"có khi nghe được tin",go:()=>{if(roll(15)){const t=liveRivals(true);if(t.length){const v=pick(t);try{seeLoc&&seeLoc(v)}catch(e){}log(`${S.maid.name} kể: ${v.name} đang ở ${placeName(whereOf(v))} buổi này.`)}}}}}
+  if(p.kind==="maid"&&S.maid){const i=A.findIndex(a=>a&&a.n==="Tâm sự");if(i>=0)A[i]={n:"Trò chuyện với cung nữ",o:100,w:{},x:`lòng +${BAL.ag.cx2.maidTalk.w.maid} · có khi nghe được tin`,go:()=>{maidTalkDo(S)}}}
   if(p.kind==="peddler")A=[{n:"Xem hàng Nội vụ phủ",o:100,x:`hàng mua từ ngoài cung${adRare()?" · tuần này có một món hiếm":""} · không tốn khắc`,adShop:1}];
   if(p.kind==="rival"||p.kind==="hh")A=A.map(a=>{const k=a&&AD_ACTNAME[a.n];return k&&ACT[k]&&ACT[k].n?Object.assign({},a,{n:ACT[k].n}):a});
   A=A.map(a=>{const n=a&&adDoorOfPop(p.kind,a.n);return n&&adDoorUsed(n)?Object.assign({},a,{lock:true,t:(AD_DOOR[n][2]==="buoi"?"đã làm buổi này":(AD_DOOR_WHY[p.kind]||"đã làm tuần này"))}):a})
@@ -148,9 +148,9 @@ function adHapFire1(h,k){h.done=1;let fired=false;if(AD_HAP_FIRE[h.id]){try{fire
  else if(h.id==="favour"&&h.x){try{if(q72X(h.x)&&q72CanOffer()){q72().a.push(h.x);fired=q72Offer(h.x,"meet");if(!fired){const q=q72();q.a.splice(q.a.indexOf(h.x),1)}}}catch(e){console.error(e)}}
  return fired}
 /* the Emperor in the garden: "Đánh đàn ở ngự hoa viên" (was a Hành sự card) now lives here, same numbers */
-PEND.adStroll=()=>{const K=S.emp.known,L=S.emp.likes,tt=has("trongtai")?2:1;const o=od(35+S.tai/3+S.arts.cam*4*tt+(K.music?15:0)+mm());const w=K.music?9:7;
+PEND.adStroll=()=>{const K=S.emp.known,L=S.emp.likes;const C=qinCard(S);/* 2e4: ONE card with the NPC (jagacts3 qinCard, BAL.ag.par3.qin) */const o=C.o;const w=C.w.sung;
  return{who:pEmp(),t:`<p>Hoàng thượng đang dạo bước trong Ngự hoa viên, thái giám theo hầu cách xa mấy bước.</p>`,o:[
-  {n:"Đánh đàn chờ ngự giá",fx:{suc:-10},x:`${word(o)} · thành: Sủng +${w}${K.music?` (tấu ${L.music}, khúc ngài thích)`:""} · hỏng: Sủng -1`,go:()=>{const b=rsnap();if(roll(o)){apply({sung:w});log(`Tiếng đàn làm Hoàng thượng dừng bước. Sủng +${w}.`)}else{apply({sung:-1});log("Ngài đi qua, không để ý tiếng đàn. Sủng -1.")}}},
+  {n:"Đánh đàn chờ ngự giá",fx:{...C.c},x:`${word(o)} · thành: Sủng +${w}${K.music?` (tấu ${L.music}, khúc ngài thích)`:""} · hỏng: Sủng -${C.l.sung}`,go:()=>{const b=rsnap();if(roll(o)){apply({sung:w});log(`Tiếng đàn làm Hoàng thượng dừng bước. Sủng +${w}.`)}else{apply({sung:-C.l.sung});log(`Ngài đi qua, không để ý tiếng đàn. Sủng -${C.l.sung}.`)}}},
   {n:"Ra vấn an",fx:{},x:"chạm vào ngài trên cảnh để nói chuyện"},
   {n:"Lánh đi lối khác",fx:{},x:"không được không mất"}]}};
 (function(){const st=document.createElement("style");st.textContent=`
