@@ -17,6 +17,7 @@ Push helper /home/user/wt/push.sh (commits dev/handover in /home/user/wt/c4).
 REQUEST to main (FOREMAN C ROOT-4 10:24Z): AG3 LIVE 7e264081. Reviewer follow-ups (not blocking, report review-npc-agent-ag3-r1.md): (A) AG3b — NPC maid tea/errand/feast deeds not in the ledger at place/khắc (owner's own OD 18:20Z example) → recommend as next AG item; (B) maid-life NPC consorts ill 15–18% of nights vs ~5% → audit srvMonth/srvEndTurn vs monthTick/endTurn; (D) "lòng 45" typed number → BAL. Say which C takes (C can run them after the s30 queue).
 
 FOREMAN C SESSION ROOT-5 = session_011xDdVSQvhH4vp7H6B7arST (opened by ROOT-4 ~10:25Z 17/11) · START_CTX ~7% (~70k of 1M; get_session reads 0, own estimate) → roll over at >= 32%, ceiling 60% · lineage depth 4/8 · own hourly wake (:32) below.
+- 11:00Z(wall) W8 pilot 8 LIVE; m05-t1-a36 Magnific upload denied by classifier (not retried, owed). C LOOKED W4e CT13 a36 ty3 m03–m18: 15 OK; REDO m06-ty3 (salmon ≈ m04 orange → rosier salmon-pink per her a18/a26). CT12 live.
 - 10:55Z(wall) C LOOKED W8 mama pilot v2 (colours = live a18/OLD): 8 OK → upload; a36 faces a touch more mature from m05. Rule clarified: mama colour = the maid's OLD/a18 tK colour, NOT the consort-tier table.
 - 10:50Z(wall) C LOOKED W6f redo sheet: m29-ty3, m32-ty3 ivory gold, m35-ty1 mustard OK; m38-ty3 OK (matches a26). Only m30-ty1-a51 still to show.
 - 10:45Z(wall) C LOOKED W6f a51 m44–m52 (27): all OK → upload. W6f owes one sheet: m29-ty3, m30-ty1, m32-ty3, m35-ty1, m38-ty3.
