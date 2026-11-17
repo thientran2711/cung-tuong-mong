@@ -72,9 +72,9 @@ function dsSpyX(A){return Array.isArray(A)?A.map(o=>o&&o.n==="Sai đi dò la"&&o
  const judge=judgeName(t),A0=wdNmC(a),T0=wdNm(t);for(const o of consorts()){try{dressLook(o,t,judge)}catch(e){}}
  const nm=J.map(k=>itm(k).n).join(", ");
  try{a.vpA92=wk();t.vpT92=wk()}catch(e){}
- if(!roll(oVP(a))){ap(a,{danh:BAL.eff.jdress.danhTop});relAdd(a,t,-10);return `${A0} tố ${T0} vượt phẩm (${nm}), ${judge} bỏ qua, chỉ dặn lần sau giữ ý. ${a===S?`Danh ${balSg(BAL.eff.jdress.danhTop)}. `:""}`}
- relAdd(a,t,-10);ap(a,{danh:2});dropJ();ap(t,{danh:-6});punish(t,"ăn mặc vượt phẩm",1);
- return `${A0} tố ${T0} vượt phẩm: <span class="${t===S?"r":"g"}">thành</span>. ${nm} bị tịch thu. ${wdNmC(t)} Danh -6. `};window.wdAccuse=wdAccuse})();
+ if(!roll(oVP(a))){ap(a,{danh:BAL.eff.jdress.danhTop});relAdd(a,t,BAL.eff.j92.wdAccuse_2);return `${A0} tố ${T0} vượt phẩm (${nm}), ${judge} bỏ qua, chỉ dặn lần sau giữ ý. ${a===S?`Danh ${balSg(BAL.eff.jdress.danhTop)}. `:""}`}
+ relAdd(a,t,BAL.eff.j92.wdAccuse_3);ap(a,{danh:BAL.eff.j92.danhWdAccuseA});dropJ();ap(t,{danh:BAL.eff.j92.danhWdAccuse_3});/* the SAME keys as a Vượt phẩm outfit (j92 wdAccuse) */punish(t,"ăn mặc vượt phẩm",1);
+ return `${A0} tố ${T0} vượt phẩm: <span class="${t===S?"r":"g"}">thành</span>. ${nm} bị tịch thu. ${wdNmC(t)} Danh ${balSg(BAL.eff.j92.danhWdAccuse_3)}. `};window.wdAccuse=wdAccuse})();
 
 /* ---------- TỐ XA XỈ (act xx) ---------- */
 function xxCause(obs,t){if(!obs||!t||obs===t)return null;const r=dressNow(obs,t);return r&&r.sc>r.bud?r:null}
