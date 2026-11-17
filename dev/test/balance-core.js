@@ -26,6 +26,10 @@ const {chromium}=require('playwright');const path=require('path');
   S.mat=BAL.steal.ea.mat;S.eaK=-1;eaLearn(true);ok("Tai mắt ≥ ea.mat knows it at the month start",eaKnows(S));
   for(const k of ARTS.map(a=>a.k)){S.arts[k]=0;S.artp[k]=0}S.arts[ea.f]=3;const fav=oSteal(S,"road");S.arts[ea.f]=0;S.arts[ea.d]=3;const dis=oSteal(S,"road");S.arts[ea.d]=0;const none=oSteal(S,"road");
   ok("favoured art up, disfavoured art down",fav>none&&dis<none,[fav,none,dis,ea,empArt(),S.turn]);
+  /* F2 (r1): every person uses HER OWN best art (an NPC with Thêu while she has Cầm), Thêu/Nấu count like any art */
+  {const z=liveRivals(true)[2]||w;for(const k of ARTS.map(a=>a.k)){S.arts[k]=0;S.artp[k]=0;z.arts[k]=0;z.artp[k]=0}S.arts.cam=3;z.arts.theu=3;S.emp.ea={m:S.turn,f:"theu",d:"cam"};
+   ok("NPC night art bonus = her own best art (Thêu favoured → up), hers (Cầm disfavoured → down)",stealArtB(z,"road")>0&&stealArtB(S,"road")<0&&stBestArt(z).k==="theu"&&stBestArt(S).k==="cam",[stealArtB(z,"road"),stealArtB(S,"road")]);
+   S.emp.ea={m:S.turn,f:"nau",d:"theu"};ok("disfavoured Thêu lowers the NPC who is best at it",stealArtB(z,"feign")<0,stealArtB(z,"feign"));z.arts.theu=0;S.arts.cam=0;S.emp.ea=ea}
   const s0=S.sung,d0=S.danh;stealFail(S,w,"road");ok("Chặn ngự giá failure = BAL.steal.m.road.lose",Math.abs((S.sung-s0)-BAL.steal.m.road.lose.sung)<=2/* sg(): the Emperor's trait scales Sủng */&&S.danh===Math.max(0,d0+(BAL.steal.m.road.lose.danh||0)),[S.sung-s0,S.danh-d0]);
   ok("word() reads BAL.lad",word(BAL.lad[2])==="Khá chắc"&&word(BAL.lad[2]-1)==="Năm ăn năm thua");
   ok("ARTFX texts print BAL.art.stUp",ARTFX.cam[0].startsWith(`Tài +${BAL.art.stUp}`),ARTFX.cam[0]);

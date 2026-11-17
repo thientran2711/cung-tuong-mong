@@ -406,7 +406,11 @@ BAL.start={
    prizes it (Trọng tài: Cầm/Kỳ/Thi/Họa · Mê sắc: Vũ); side = share of it for passive weights (lật thẻ, mưu kế). stUp = Tài (Vũ/Y: Sắc) at each new
    bậc; danh = Danh at bậc 3 / 5. Old saves keep their bậc (points = floor of that bậc + the old progress share). */
 BAL.art={tier:[0,10,25,45,70,100],nm:["Chưa thạo","Nhập môn","Thuần thục","Tinh thông","Xuất chúng","Tông sư"],
- gain:[1.2,1,.8,.6,.4],odds:[0,4,8,13,18,24],emp:1.5,side:.4,stUp:1,danh:{3:3,5:6}};
+ gain:[1.2,1,.8,.6,.4],odds:[0,4,8,13,18,24],emp:1.5,side:.4,stUp:1,danh:{3:3,5:6},
+ flipX:2 /* Mê sắc: × of Sắc and Vũ in the card-flip chance (j8 nightCh) */,
+ score:2.5 /* contest score per odds point (khuê các festival kcFest: score ≥ 60 first, ≥ 40 praised) */,
+ fee:[5,5] /* teacher fee = fee[0] + bậc × fee[1] Bạc (artFee) */,
+ fx:{q:.7,cong:.2,hanh:3,gift:{hoa:.5,theu:.4}} /* per POINT of a course: handmade quality q × points (+ Công × cong), gift bonus × points; hanh = Đức per bậc of Hạnh (monthly) */};
 /* growth of the trained abilities (Sắc, Tài, Tâm cơ): every gain is × mul[band] where band = how many of band[] the value has passed
    (0–39 ×1 · 40–59 ×.5 · 60–79 ×.25 · 80+ ×.1); the same for her and every NPC; fractions roll (expected value).
    Sủng / Danh are NOT on the curve (they gate promotion; owner proposal first, see the report): adding "sung" to keys is the whole change. */

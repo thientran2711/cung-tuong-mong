@@ -102,7 +102,7 @@ const ch0=chip;chip=function(t,cls){if(S&&S.preg&&/Mang thai tháng/.test(String
 /* --- prep: every option a real effect and a real cost; numbers it shows are the numbers it uses --- */
 const UA="mỗi +1: Ân tình +1 · mỗi +2: Sủng +1 · dễ được ban thưởng hơn";
 PEND.prep=()=>{const wb=wearBonus(S),vp=vpItems(S).length>0,b=bestArt();const jb=wb.sac>0?Math.max(2,1+Math.round(wb.sac/3)):0;
- const lv=Math.max(1,b.l||0),oP=od(40+S.tai/2+(b.l||0)*8);
+ const lv=Math.max(1,b.l||0),oP=od(40+S.tai/2+artOE(S,b.k));
  const nx1=(q,vpv,ln)=>()=>{if(ln)log(ln);pushFront(mkP("night1",{q,vp:vpv}),"Đêm thị tẩm")};
  return{who:pMe(),t:`<p>Kính sự phòng đã báo tin. Còn hai canh giờ trước khi kiệu đến. Chỉ kịp chuẩn bị một việc.</p><p class="past">Được ưa đêm nay: ${UA}.</p>`,o:[
  {n:"Tắm cánh hoa, xông hương",fx:{bac:-15},x:"đêm nay được ưa +2",go:nx1(3,0,"Tắm cánh hoa, xông hương: đêm nay được ưa +2.")},
@@ -134,7 +134,7 @@ const MOODW=["vui","bình thường","phiền muộn","giận dữ"];
 function talkOpts(p){const E=S.emp;return [has("trongtai")?3:(p.tai||0)>=60?1:0,has("chamchinh")?3:-1,has("datinh")||has("mesac")?3:has("lanhlung")?-1:0,E.mood>=2?2:1]}
 /* (a) an NPC's night: same formula as hers (PEND.prep q, PEND.night1 talk + mood + R(3), nightFx gains and reward) */
 rivalNight=function(v){v.nights++;v.nightLog.push(wk());
- let q=1;if(v.bac>=15&&roll(55)){ap(v,{bac:-15});q=3}else if((v.suc||0)>=30){ap(v,{suc:-5});const lv=Math.max(1,Math.max(...Object.values(v.arts)));q=1+(roll(odA(v,40+(v.tai||0)/2+lv*8))?1+lv:1)}
+ let q=1;if(v.bac>=15&&roll(55)){ap(v,{bac:-15});q=3}else if((v.suc||0)>=30){ap(v,{suc:-5});const b=nightArt(v),lv=Math.max(1,b.l||0);q=1+(roll(odA(v,40+(v.tai||0)/2+artOE(v,b.k)))?1+lv:1)}/* her PEND.prep: the same best art (no Thêu/Nấu), the same odds */
  const O=talkOpts(v);const fit=roll(35+(v.tamco||0)/2)?Math.max(...O):pick(O);const mood=[1,0,-1,-2][S.emp.mood];
  const sc=q+fit+mood+R(3);const g=nightG(sc),an=nightA(sc);ap(v,{sung:g,an});v.pg=cl(v.pg+6,0,100);v.tablet=0;v.lastNightS=sc;
  const grade=sc>=6?"đêm vui":sc>=3?"đêm êm":"đêm nhạt";

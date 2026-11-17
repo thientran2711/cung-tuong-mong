@@ -172,7 +172,7 @@ function talk(oi){if(popIdx==null||!S.visit||S.visit.talked===true||S.dead||Q.le
 /* arts */
 function addArt(k,g){const a=ARTS.find(x=>x.k===k);if(!a)return;crsPush(S.arts,S.artp,k,g,l=>{const f={[a.st]:BAL.art.stUp};if(BAL.art.danh[l])f.danh=BAL.art.danh[l];apply(f);
    log(`<span class="g">${a.n} lên bậc ${l} · ${artNm(l)}.</span> ${fmt(f)}${l===3?" Cả cung nghe danh.":l===5?" Tiếng tăm vang khắp kinh thành.":""}`)})}
-function lesson(k){const l=S.arts[k],cost=typeof tchFee==="function"?tchFee(k):5+l*5;if(!can(2)||artPts(S,k)>=100||S.bac<cost||S.dead||Q.length||S.mg)return;apply({suc:-10,bac:-cost});spend(2);render();
+function lesson(k){const l=S.arts[k],cost=typeof tchFee==="function"?tchFee(k):artFee(l);if(!can(2)||artPts(S,k)>=100||S.bac<cost||S.dead||Q.length||S.mg)return;apply({suc:-10,bac:-cost});spend(2);render();
  S.mg={k,l};save();resumeMG()}
 function resumeMG(){const m=S.mg;if(!m)return;const a=ARTS.find(x=>x.k===m.k);openMG(m.k,m.l,g=>{S.mg=null;log(`Học ${a.n}. Tiến bộ +${g}.`);addArt(m.k,g);render()})}
 function hireMaster(){if(S.bac<60||S.master||S.dead)return;apply({bac:-60});S.master=3;log("Mời danh sư vào cung dạy: 3 tháng tiến bộ gấp đôi.");render()}

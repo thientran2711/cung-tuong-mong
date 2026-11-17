@@ -26,6 +26,11 @@ function artNm(l){return BAL.art.nm[Math.max(0,Math.min(BAL.art.nm.length-1,l|0)
 /* the ONE odds bonus of a course; artOE: when the Emperor himself judges (his trait Trọng tài / Mê sắc prizes it: × BAL.art.emp) */
 function artO(p,k){const l=((p&&p.arts)||{})[k]||0;return BAL.art.odds[Math.min(l,BAL.art.odds.length-1)]||0}
 function artOE(p,k){let m=1;try{if((["cam","ky","thi","hoa"].includes(k)&&has("trongtai"))||(k==="vu"&&has("mesac")))m=BAL.art.emp}catch(e){}return Math.round(artO(p,k)*m)}
+function artFee(l){const F=BAL.art.fee;return F[0]+(l|0)*F[1]}
+/* the art a person shows the Emperor on her night (bestArt in j85 for her: no Thêu/Nấu, his trait doubles what he prizes): the same pick for an NPC */
+function nightArt(p){let b={k:null,l:0,w:0};for(const a of ARTS){if(a.k==="theu"||a.k==="nau")continue;const l=((p&&p.arts)||{})[a.k]||0,w=artW(a.k,l);if(w>b.w)b={k:a.k,l,w}}return b}
+/* a multiplier in plain words for rule text (one core: the text prints the BAL constant) */
+function xWord(m){return m===2?"gấp đôi":m===1.5?"gấp rưỡi":m===3?"gấp ba":`gấp ${String(m).replace(".",",")} lần`}
 function artSide(p,k){return Math.round(artO(p,k)*BAL.art.side*10)/10}
 function virO(p,k){const l=((p&&p.vir)||{})[k]||0;return BAL.art.odds[Math.min(l,BAL.art.odds.length-1)]||0}
 /* ---- start values: one table for her and every NPC ---- */

@@ -36,7 +36,7 @@ function evA(h,t,n){if(!h||!t||h===t)return 0;const g=evG(h,t);let d=n;if(n>0){c
 function od(b){return odA(S,b)}
 function effSac(p){return cl(p.sac+wearBonus(p).sac,0,130)}
 function conceiveCh(p=S){return cl(Math.round(lotB(p,"Con cái")+10+p.sung/4+effSac(p)/8+(p.pray?15:0)+(p.fert?20:0)-(p.age>28?(p.age-28)*3:0)),2,85)}
-function nightCh(p=S){if(p.preg||p.block||p.confined||p.out)return 0;const m=has("mesac")?2:1;
+function nightCh(p=S){if(p.preg||p.block||p.confined||p.out)return 0;const m=has("mesac")?BAL.art.flipX:1;
   let c=4+p.sung/4+effSac(p)/12*m+artSide(p,"vu")*m+artSide(p,"y")+(p.tablet?20:0)+mm()/2+(rkOf(p)>=7?5:0)+(typeof tqAf==="function"?tqAf(p)/10:0);
   c+=lotB(p,"Sủng")/2+((p.staff||[]).some(s=>s.role==="eunuch"&&srk(s)>=3)?4:0);c*=illNightF(p);if(has("chamchinh"))c*=.6;if(has("datinh"))c*=1.2;if(illOf(S.emp))c*=.6;return cl(Math.round(c/1.4),c>0?1:0,70)}
 function oSee(t=S,p){return cl(Math.round(15+t.mat*9+t.tamco/4+(t.maid&&t.maid.loyal>=70?10:0)+(p?(t.doctor?25:0)+(t.arts.y>=2?20:0):0)),5,95)}
@@ -383,7 +383,7 @@ function npcAct(v,t){const O=[];const add=(k,w)=>{const a=ACT[k];if(a&&a.ok(v,t)
 const SEEN_BAD=kRx("(?<![\\p{L}])(độc|xạ hương|bùa|hình nhân|vu oan|vu cáo|vu khống|hối lộ|đút lót|cài|lén|tráo|ám hại|hãm hại|làm hại|hại|tung tin|tin đồn|đồn|xô ngã|đẩy|giấu|trộm|giả mạo|tư thông|âm mưu|mưu|kết bè|nói xấu|xúi|phá|cắt xén|bôi nhọ|ám toán|cướp|bán đứng|uy hiếp|tống tiền|bỏ thuốc|ngáng|gièm|chèn ép|bắt nạt|đe dọa|dọa|khai man|phao tin|làm nhục|tố giác|cáo giác|bị lộ|bị bắt|đồ có vấn đề)(?![\\p{L}])","iu");
 function seenBad(txt){return SEEN_BAD.test(String(txt||"").replace(/<[^>]+>/g,""))||(/tặng|dâng/.test(String(txt||""))&&!!window.__giftTaint)}
 function seenNPC(v,t,txt){const bad=seenBad(txt);window.__giftTaint=0;if(!txt)return"";if(t===S||v===S)return txt;if(roll(15+S.mat*6)){if(!bad)return `Tai mắt thấy: ${txt}`;evA(S,v,1);return""}return""}
-function npcMonthly(v){let ev="";const cost=k=>5+v.arts[k]*5;
+function npcMonthly(v){let ev="";const cost=k=>artFee(v.arts[k]);
  if(roll(30)){const k=pick(Object.keys(v.arts));if(v.arts[k]<5&&(v.bac>=cost(k)||v.suc>=40)){/* the same lesson as hers: teacher (bạc) 1–3, alone 1; points through the one course ladder (addArtP → jbalcore crsPush, review/balance-core) */if(v.bac>=cost(k)){ap(v,{bac:-cost(k),suc:-10});addArtP(v,k,1+R(3))}else{ap(v,{suc:-15});addArtP(v,k,1)}}}
  if(roll(25)&&S.shop.length){const k=pick(S.shop);if(IT[k]&&v.bac>=IT[k].pr+20&&(!IT[k].il||v.malice>60))buy(v,k)}
  if(v.malice>60&&roll(8)&&v.bac>=45&&!v.inv.some(e=>e.t)){buy(v,"tuithom");taintItem(v,v.inv.length-1,v.inv.some(e=>e.k==="xahuong")?"xa":"bua")}

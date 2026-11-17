@@ -46,7 +46,7 @@ ev("eunuch",()=>S.mat<10,()=>({o:od(50+S.tamco/3)}),p=>({
  {n:"Thử lòng hắn trước",fx:{},x:`${word(p.o)} · thành: Tai mắt +1 · hỏng: hắn là gián điệp`,go:()=>{if(roll(p.o))apply({mat:1});else{apply({danh:-3});log('<span class="r">Tiểu Đức Tử mang chuyện cung ngươi đi bán.</span>')}}},
  {n:"Đuổi đi",fx:{duc:1}}]}));
 /* the Emperor */
-ev("empnight",()=>!S.preg&&S.sung>=20,()=>({o:od(40+bestArt().w*8+mm())}),p=>({who:pEmp(),
+ev("empnight",()=>!S.preg&&S.sung>=20,()=>({o:od(40+artOE(S,bestArt().k)+mm())}),p=>({who:pEmp(),
  t:"Đêm khuya, không đèn lồng, không thái giám báo trước. Hoàng thượng đứng ngoài rèm cửa cung ngươi.<br>“Trẫm không ngủ được.”",o:[
  {n:"Thắp đèn hầu rượu",fx:{},x:"được thị tẩm",go:()=>{S.tonight="me";nightScene()}},
  {n:`Phô tài: ${bestArt().n}`,fx:{suc:-5},x:`${word(p.o)} · thành: Sủng +6, Danh +2`,go:()=>{if(roll(p.o))apply({sung:6,danh:2})}},
