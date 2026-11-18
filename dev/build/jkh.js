@@ -56,12 +56,12 @@ function khMotive(v,m,k){if(!v||!m||v===m)return false;const M=BAL.preT.mot;cons
 function khLech(m,k,pre){k.dateOff=pre?"pre":"od";khStat("lech");const P=BAL.preT,w=pre?"sinh non":"sinh quá ngày";
  if(m!==S){k.dateKnown=1;try{noteAdd(m.id,`${k.name} ${w}, ngày sinh lệch với đêm thị tẩm ghi trong sổ Kính sự phòng`)}catch(e){}if(!S.dead&&!S.out)evA(S,m,P.evi)}
  if(!khGuest())for(const v of liveRivals(true))if(v!==m&&v.alive&&!v.out&&khMotive(v,m,k))evA(v,m,P.evi);
- return m===S?`Trong cung xì xào: ${k.name} ${w}, ngày tháng lệch với sổ Kính sự phòng. `:((S.mat||0)>=1?`Trong cung xì xào: ${k.name} của ${m.name} ${w}, lệch ngày trong sổ Kính sự phòng. `:"")}
+ return m===S?`Trong cung xì xào: ${k.name} ${w}, ngày tháng lệch với sổ Kính sự phòng. `:(eyes(S)>=1?`Trong cung xì xào: ${k.name} của ${m.name} ${w}, lệch ngày trong sổ Kính sự phòng. `:"")}
 /* the NPC twin of the blood test when the child is an NPC's (accuser = an NPC): same truth rule, same bowl tricks */
-function khNgNpc(a,m,k){const N=BAL.ngh;const r=rtNgNpcRes(m,k,a,rtNgOil(a));khStat("lech_set");khStat("ng_set");const seen=(S.mat||0)>=N.seeMat;
+function khNgNpc(a,m,k){const N=BAL.ngh;const r=rtNgNpcRes(m,k,a,rtNgOil(a));khStat("lech_set");khStat("ng_set");const seen=eyes(S)>=N.seeMat;
  if(r.shown){khStat("lech_mix");return seen?`${a.name} tâu xin nghiệm máu cho ${k.name} của ${m.name}; máu hòa, ${a.name} mang tội vu cáo. `:""}
  khStat(r.truth?"lech_oan":"lech_lo");if(r.truth)khStat("ng_oan");
- return `<span class="r">${m.name}: trích huyết nghiệm thân, máu ${k.name} không hòa. Nàng bị trị tội.</span>${r.truth&&(S.mat||0)>=N.oilMat?` Tai mắt báo: bát nước đã bị ${a.name} nhỏ dầu.`:""} `}
+ return `<span class="r">${m.name}: trích huyết nghiệm thân, máu ${k.name} không hòa. Nàng bị trị tội.</span>${r.truth&&eyes(S)>=N.oilMat?` Tai mắt báo: bát nước đã bị ${a.name} nhỏ dầu.`:""} `}
 /* F5 (owner Q3 18:17Z): a 'lệch sổ' birth is a TRUE fact in the mother's ledger (weight BAL.preT.lsW), for her and every NPC, so evidence on it can
    reach the accuse bar even against a clean mother; it leaves the ledger once the blood test was held or the child is past ageMax (held proof then
    turns into rumour through jtruth's sweep). */
@@ -76,10 +76,10 @@ const p0=pregMonthP;pregMonthP=function(p){if(!p||!p.preg||p.fake||(p!==S&&khGue
  /* the drug taken last month: the birth comes now, really early, looking full-term */
  if(p.khInd){p.khInd=0;if(c<9){realM=c+1;p.preg=9;p.khPreM=realM;khStat("drug_birth")}}
  else if((c===7||c===8)&&!p.khOd){let r=(c===7?P.m8:P.m9)+((p.suc||0)<P.lowSucAt?P.lowSuc:0)+(khOf(p)<P.khLo?P.lowKh:0)+Math.max(0,khAge(p)-P.ageFrom)*P.age;if(p.anthai)r/=2;
-  if(roll(r)){realM=c+1;p.preg=9;p.khPreM=realM;khStat("pre"+realM);ev+=me?`<span class="r">Mới ${realM===8?"tám":"chín"} tháng, ngươi đã trở dạ (sinh non).</span> `:`${p.name} trở dạ sớm (sinh non). `}}
+  if(roll(agCap(r))){realM=c+1;p.preg=9;p.khPreM=realM;khStat("pre"+realM);ev+=me?`<span class="r">Mới ${realM===8?"tám":"chín"} tháng, ngươi đã trở dạ (sinh non).</span> `:`${p.name} trở dạ sớm (sinh non). `}}
  else if(c===9&&!p.khOd&&roll(P.od)){p.khOd=1;khStat("od");p.pgK=p.pgR=p.pgS=0;return me?"Đã qua chín tháng mười ngày mà ngươi vẫn chưa trở dạ; bà đỡ bảo cứ chờ thêm. ":""}
  /* miscarriage causes (a month that is not the birth month) */
- if(p.preg+1<10){const [x,why]=khPgRisk(p);p.pgK=p.pgR=p.pgS=0;if(x>0&&roll(x)){const G=BAL.pgRisk;p.preg=0;p.hidden=false;ap(p,{suc:-G.misSuc});p.misN=(p.misN||0)+1;khStat("mis_cause");khHit(p,K.mis,K.misScar,"b");p.khBook=0;
+ if(p.preg+1<10){const [x,why]=khPgRisk(p);p.pgK=p.pgR=p.pgS=0;if(x>0&&roll(agCap(x))){const G=BAL.pgRisk;p.preg=0;p.hidden=false;ap(p,{suc:-G.misSuc});p.misN=(p.misN||0)+1;khStat("mis_cause");khHit(p,K.mis,K.misScar,"b");p.khBook=0;
   return ev+(me?`<span class="r">Ngươi ${why}, động thai, sảy mất đứa bé.</span> Sức -${G.misSuc}. `:`${p.name} động thai, sảy mất đứa bé. `)}}
  p.pgK=p.pgR=p.pgS=0;
  const birth=p.preg+1>=10;const off=birth?khRecOff(p):0,mism=!!p.pregMismatch,od=!!p.khOd;
@@ -100,7 +100,7 @@ const p0=pregMonthP;pregMonthP=function(p){if(!p||!p.preg||p.fake||(p!==S&&khGue
  p.khOcuT=S.turn;p.khOcuX=0;if(me)ev+=`Thái y dặn: ở cữ ${K.ocuMo} tháng, chớ ra khỏi cung, chớ làm việc nặng. `;
  const nk=(p.kids||[]).slice(n0);realM=realM||(od?11:10);
  for(const k of nk){if(disc!=null)k.thyRec=disc;if(realM<10){k.pre=realM;if(roll(realM<=8?P.die8:P.die9)){k.tho=0;k.thoM=((S.month||1)%12)+1;k.thoO=0;k.nb=1;k.nbWhy="sinh non yếu ớt, không qua khỏi";khStat("pre_die")}}
-  if(od&&k.alive!==false){if(roll(P.odOmen)){if(k.sex==="m")ap(p,{danh:P.omenDanh});ev+=me||(S.mat||0)>=1?`Thai quá ngày mới sinh; trong cung đồn ${k.name} là điềm thánh nhân giáng thế. `:""}
+  if(od&&k.alive!==false){if(roll(P.odOmen)){if(k.sex==="m")ap(p,{danh:P.omenDanh});ev+=me||eyes(S)>=1?`Thai quá ngày mới sinh; trong cung đồn ${k.name} là điềm thánh nhân giáng thế. `:""}
    else ev+=me?`Thai quá ngày mới sinh; có kẻ rỉ tai đó là điềm chẳng lành. `:""}
   if(!mism&&realM+off!==10&&!k.gone)ev+=khLech(p,k,realM+off<10)}
  return ev};
@@ -128,7 +128,7 @@ if(typeof chooseM==="function"){const c0=chooseM;chooseM=function(i){const m=Q&&
  try{/* chosen = the dialog left the queue (a choice it could not pay for stays) */if(c&&Q[0]!==m&&S&&!S.dead&&/thuốc bổ|bồi bổ/i.test(String(c.n||"")))khTonic(S)}catch(e){}return r}}
 /* ---- the world each month: rivals with chứng cứ demand the blood test on a 'lệch sổ' child; NPCs take the drug in that spot ---- */
 window.khWorld=function(){let ev="";if(!S||S.dead||khGuest())return ev;
- for(const v of liveRivals(true))if(v.preg&&!v.fake&&!v.khInd){const o=khRecOff(v);if(o>=1&&v.preg===9-o&&roll(P.npcDrug)){v.khInd=1;khStat("drug_npc")}}
+ for(const v of liveRivals(true))if(v.preg&&!v.fake&&!v.khInd){const o=khRecOff(v);if(o>=1&&v.preg===9-o&&!(typeof p3On==="function"&&p3On())&&roll(P.npcDrug)){v.khInd=1;khStat("drug_npc")}}/* AG-ALL-2e2: with the day plan on, an NPC takes the SAME card (P3C.drug, cx3:drug) */
  const moms=[S].concat(liveRivals(true));
  for(const m of moms){if(m!==S&&(!m.alive||m.out))continue;if(m===S&&S.out)continue;for(const k of (m===S?S.kids:m.kids)||[]){if(!k.alive||!k.dateOff||k.tfOk||(k.age||0)>P.ageMax)continue;
   if(m===S&&S.rt&&S.rt.ng)break;
@@ -139,9 +139,7 @@ window.khWorld=function(){let ev="";if(!S||S.dead||khGuest())return ev;
 const m0=monthTick;monthTick=function(){let ev=m0.apply(this,arguments);try{ev+=khWorld()}catch(e){console.error(e)}return ev};
 window.monthTick=monthTick;
 /* ---- her cards: thuốc thúc sinh; the blood test on an NPC's 'lệch sổ' child (kit card rtCard, the existing PEND.rtNgNpc dialog) ---- */
-const d0=deal;deal=function(){d0.apply(this,arguments);try{if(!S||S.out||S.dead||!S.preg||S.fake||S.khInd)return;const o=khRecOff(S);if(o<1||S.preg<9-o||S.preg>8)return;const D=P.drug;
- deck.unshift({n:"Uống thuốc thúc sinh",t:"Bài thuốc giục sinh, cho đứa bé ra đời đúng ngày sổ Kính sự phòng ghi.",c:{bac:-D.bac},o:od(D.o+(S.arts.y||0)*D.perY),w:{},l:{suc:-D.sucF},
-  x:`tháng tới trở dạ, đúng ngày trong sổ · đứa bé thật ra sinh non, dễ yếu · hỏng: Sức -${D.sucF}`,dom:"Sức khỏe",go:()=>{S.khInd=1;apply({suc:-D.suc});khStat("drug_me")}})}catch(e){console.error(e)}};
+const d0=deal;deal=function(){d0.apply(this,arguments);try{if(!S||S.out||S.dead||!S.preg||S.fake||S.khInd)return;const o=khRecOff(S);if(o<1||S.preg<9-o||S.preg>8)return;deck.unshift(P3C.drug(S))}catch(e){console.error(e)}};/* AG-ALL-2e2: ONE builder P3C.drug(p) — her card and an NPC's cx3:drug */
 if(typeof rtCards==="function"){const r0=rtCards;rtCards=function(){let A=r0.apply(this,arguments);try{if(!rtRoad()||S.out||(window.__bot&&!window.__rtGo))return A;
  for(const v of liveRivals(true)){const k=(v.kids||[]).find(x=>x.alive&&x.dateOff&&x.dateKnown&&!x.tfOk&&(x.age||0)<=P.ageMax);if(!k)continue;if(A.some(c=>c.rtId==="ngn_"+v.id))continue;
   const ev=typeof evG==="function"?evG(S,v):0;

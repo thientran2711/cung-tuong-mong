@@ -59,7 +59,7 @@ function leak(by,F){if(!by)return"";const L=[];try{
  if(F.preg&&S.preg&&S.hidden){S.hidden=false;by.ghen=cl((by.ghen||0)+6,0,100);noteAdd(by.id,`nhờ thái y mà biết ngươi đang mang thai`);L.push("có thai")}
  if(F.ill){const i=illOf(S);if(i){apply({danh:-2});try{newsAdd(by,"ty",`Mạch án của ${S.name} lọt ra ngoài: nàng mắc ${ILL[i.k].n.toLowerCase()}`)}catch(e){}L.push("bệnh")}}
  if(!L.length)noteAdd(by.id,`đọc được mạch án của ngươi qua thái y`);
- if(roll(oddsCl(Math.min(20+(S.mat||0)*8,90))))log(`<span class="r">Tai mắt báo: thái y vừa bắt mạch cho ngươi đã ghé cung ${by.name}.</span>`)}catch(e){console.error(e)}return L.join(", ")}
+ if(roll(oddsCl(Math.min(20+eyes(S)*8,90))))log(`<span class="r">Tai mắt báo: thái y vừa bắt mạch cho ngươi đã ghé cung ${by.name}.</span>`)}catch(e){console.error(e)}return L.join(", ")}
 /* he comes and names himself: she knows the physician from then on (face reveal rule, j61) */
 function meet(){try{const c=doc();if(c&&typeof k61Know==="function")k61Know(c,"",true,2)}catch(e){}}
 function rec(kind,v){meet();const z=thy();z.rec.unshift({t:S.turn,m:S.month,y:S.year,k:kind,v});if(z.rec.length>12)z.rec.length=12}
@@ -87,7 +87,7 @@ window.thaiyNextVisit=function(){if(!S||off())return null;return visitAt(1)};/* 
 window.thaiyVisits=function(n){if(!S||off())return[];const f=window.thaiyNextVisit();const a=f.turn-S.turn;const L=[];for(let i=0;i<(n||6);i++)L.push(visitAt(a+i));return L};
 
 /* ---------- 2. Mời thái y bắt mạch (two roads) ---------- */
-function findO(self){const o=T().find+(S.arts&&S.arts.y||0)*T().findY+(trusted(S)?T().findTrust:0)+(self?T().findSelf:0);return oddsCl(o)}
+function findO(self){const o=T().find+careY(S)+(trusted(S)?T().findTrust:0)+(self?T().findSelf:0);return oddsCl(o)}
 function why(road){if(!S||S.dead)return"không được";if(S.out)return"ở lãnh cung, Thái y viện không cử người";if(typeof isSrv==="function"&&isSrv())return"phận cung nữ";
  if(road==="pay"){if((S.bac||0)<cost())return `cần ${cost()} bạc`;if(!can(T().khPay))return"hết khắc";return""}
  if(S.confined)return"đang bị cấm túc";if(!can(T().khSelf))return `cần ${T().khSelf} khắc`;if((S.suc||0)<20)return"Sức không đủ";return""}

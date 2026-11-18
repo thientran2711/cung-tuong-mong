@@ -10,7 +10,7 @@ fs.mkdirSync(OUT,{recursive:true});const sleep=t=>new Promise(r=>setTimeout(r,t)
  const r=await p.evaluate(()=>{window.__forceOrigin='thd';SLOT=3;document.getElementById('title').hidden=true;window.__nlInner=1;start();window.__nlInner=0;quiet=true;Q.length=0;
   for(let i=0;i<3;i++){const s=mkServ('maid');s.age=17+i;S.staff.push(s)}
   /* force one of each kind this month so the shot is deterministic; numbers untouched (BAL restored after) */
-  const B=JSON.parse(JSON.stringify(BAL.mline));Object.assign(BAL.mline,{seekStart:100,feud:100,feudHost:-999,hit:100});S.mat=3;
+  const B=JSON.parse(JSON.stringify(BAL.mline));Object.assign(BAL.mline,{seekStart:100,feud:100,feudHost:-999,hit:100});tmPlace(S,3);
   const ev=mlMonth();Object.assign(BAL.mline,B);quiet=false;log(ev);return ev});
  for(let i=0;i<8;i++){await p.mouse.click(Math.round(W/2),Math.round(H*0.97)).catch(()=>{});await sleep(500);await p.evaluate(()=>{const md=document.getElementById('modal');if(md&&!md.hidden&&typeof closeModal==='function')try{closeModal()}catch(e){}})}
  await p.evaluate(()=>{try{render()}catch(e){}});await sleep(1500);

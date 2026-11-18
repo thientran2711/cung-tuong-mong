@@ -74,7 +74,7 @@ AT.fresh=()=>{try{localStorage.clear()}catch(e){}const t=document.getElementById
  if(S.suc<60)S.suc=80;if(S.bac<200)S.bac=200;render()};
 AT.scen=(n)=>{AT.fresh();
  if(n!=="dau"){try{k61Know(rivals.filter(v=>v.alive),"",true,3)}catch(e){}try{for(const v of rivals)S.met[v.id]=wk()}catch(e){}}
- if(n==="cao"){S.rank=5;S.sung=65;S.danh=60;S.th=55;S.tamco=55;S.mat=3;S.duc=60;for(const k in S.arts)S.arts[k]=5;try{fillStaff(S,true)}catch(e){}}
+ if(n==="cao"){S.rank=5;S.sung=65;S.danh=60;S.th=55;S.tamco=55;tmPlace(S,3);S.duc=60;for(const k in S.arts)S.arts[k]=5;try{fillStaff(S,true)}catch(e){}}
  if(n==="con"){try{S.kids.push(mkKid("m",4));S.kids.push(mkKid("f",2))}catch(e){}S.preg=0;for(const k in S.arts)S.arts[k]=2}
  if(n==="hau"){try{S.rank=Math.max(S.rank,3);fillStaff(S,true)}catch(e){}}
  if(n==="hh"){S.rank=7;const q=rivals.find(v=>v.queen);if(q){q.queen=false;q.rank=6}S.sung=70;S.danh=70;try{fillStaff(S,true)}catch(e){}}
