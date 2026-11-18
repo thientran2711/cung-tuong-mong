@@ -210,7 +210,7 @@ function lWant(u,raw){if(LIFE.done.has(u))return Promise.resolve(true);let e=LIF
  const fin=ok=>{if(e.ok!=null)return;e.ok=ok;LIFE.busy--;res(ok);
   if(ok&&/\/por-/.test(u))try{if(typeof PORK!=="undefined"){[u,raw].forEach(k=>{if(k&&PORK[k]!==1){PORK[k]=1;LIFE.dirty=1}})}}catch(x){}
   setTimeout(()=>{LIFE.keep.delete(u);LIFE.done.add(u)},90000)};
- im.onload=()=>{(im.decode?im.decode().catch(()=>0):Promise.resolve()).then(()=>fin(true))};im.onerror=()=>fin(false);im.src=u}
+ im.onload=()=>{(im.decode?im.decode().catch(()=>0):Promise.resolve()).then(()=>fin(true))};im.onerror=()=>fin(false);im.src=u;setTimeout(()=>fin(false),45000)/* review r6: a picture that never answers (stalled line) no longer holds LIFE.busy (fig pool, title prefetch) forever */;return e.p/* review r6: the title prefetch chains on it (was undefined: pPump threw after the first picture) */}
 /* the pictures of THIS life (raw strings → absolute); never assigns a figure to someone who has none yet (figFor would pick one) */
 function kitLifeSet(){const M=new Map();const add=r=>{if(r&&typeof r==="string"){const a=lAbs(r);if(a)M.set(a,r)}};
  try{if(typeof S==="undefined"||!S||typeof figFor!=="function")return M;
@@ -260,7 +260,8 @@ async function lifeGate(why){if(LIFE.off)return;/* test hook: KLIFE.off = no gat
    await lSleep(120)}}catch(e){console.error("life gate",e)}
  st.n=all.size;st.bytes=[...all].reduce((s,u)=>s+sizeOf(u),0);st.ms=Date.now()-t0;
  const c=lel;lel=null;if(c){c.classList.add("out");setTimeout(()=>c.remove(),500)}
- LIFE.on=false;if(LIFE.again){LIFE.again=false;setTimeout(()=>lifeGate("again"),0)}}
+ LIFE.on=false;/* review r6: the loop above already re-reads kitLifeSet() of the CURRENT S every round; a re-run after the 25 s cap or 'Vào cung ngay' covered the game again for the same pictures (25 s + 25 s, one flash between) */
+ if(LIFE.again){LIFE.again=false;if(!st.late&&!LIFE.go)setTimeout(()=>lifeGate("again"),0)}}
 window.kitLifeGate=lifeGate;
 /* TITLE PREFETCH (owner 18/11 02:06Z "không lẽ bây giờ tôi cứ bấm từng kiếp"): as soon as the game opens, the life sets of EVERY saved life
    (all slots, newest first) come in the background, 4 at a time, before the generic 'fig' set (it waits while LIFE.busy) — so tapping any life
