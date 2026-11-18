@@ -73,3 +73,11 @@ Game scale, alpha widths at 17/38/50/90 % of body (include sleeves/arms):
 Waist +10 % is inside the asked +8…+12 %; shoulders +45 % (asked +30…35 %, slightly broader = "well-built"); cheek ≥ m09; neck visibly ≥ m09 in the crop row (not scripted). Medium sleeves, skirt with gentle folds, embroidered cuffs/collar/hem. Handsome, same man.
 Credits this round: 3 gens 120 + 3 cuts 9 = 129 cr; W22 total 11 gens, ~793 cr.
 Weak points: heads 8.13 (a touch over 8); shoulders +45 % > asked range; hip +19 % comes with the fuller skirt; embroidery still modest. Alternatives k3 (leaner) / k2 (fuller) available in the folder.
+
+## prompt-only man — W26, 18/11 (owner ~04:40Z: "Người nam quá xấu. Bỏ tỉ lệ. Chỉ prompt vẽ hình người nam thôi")
+PRIORITY #1 CHECK: OD 0 | ledger 0 | claims 1 (W22, dropped) | main 0 | review/* 0 | archive 0 — nothing to reuse except STYLE_ANCHOR. No m09 ref, no proportions, no overlay gate.
+Model gpt-2-6, folder ba4aecfe…, 768x2000, count 2, ONE call = 2 gens. Refs (rendering only): face-consort-01 as style + 05/12/18 as image (gpt-2-6 allows only 1 style ref).
+Prompt: STYLE_ANCHOR prefix verbatim + "One very handsome young man of about 20, romantic-lead looks like a handsome Chinese costume-drama lead, refined gentle face, soft warm almond eyes (never slanted narrow, never sad), bare forehead, elegant black hair gathered in a topknot with a small jade-and-gold guan hair crown and a hairpin, wearing a crossed-collar robe of fine embroidered silk in deep teal with ivory inner collar and gold thread embroidery on collar, cuffs and hem, a sash with a jade pendant, holding a folded paper fan naturally in one hand, full figure head to feet visible. The reference portraits are for rendering style only; draw a man."
+Result: both gens handsome, closed-lip faint smile, warm almond eyes, bare forehead, teal silk, fan. Chosen g2 (warmer smile, fuller brows, more manly). Other (g1, cooler/softer) dropped.
+Files (CDN img/_review/male-proportion/, md5 OK, nothing live): man_prompt_fresh.png (cut, 768x2000), man_prompt_sheet.jpg (figure + face crop at 100%).
+Credits: 2 gens 160 + 1 cut 3 = 163 cr. Gens: 2 of max 6.
