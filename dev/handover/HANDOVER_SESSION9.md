@@ -746,3 +746,4 @@ Helper: /tmp/…/scratchpad/hpush.sh pattern = fetch, reset --hard FETCH_HEAD, r
 - (18/11 ~20:50Z) ROOT-54: LIVE main 94d11623 → 13bb8c88 = shop-panel-r3 (owner approved 19:45Z; reviewer PASS session_01Rc5AsK7Vjz8vR2ZXexdh7h). ROLLBACK 94d11623. Foremen told.
 - (18/11 ~20:57Z) ROOT-54: owner 20:55Z (OD) stage right column: place name plain text 2 lines, «Cung nhân» group on top (accordion), «Chí tôn» group, +N chip never over column → maid6-sample worker converts to REAL build (brief stage-rightcol.md). AG-DEED-PERF #2: coop-e2e BLOCKED accepted by MAIN (perf-only, outcome diff 0/0/0).
 - (18/11 ~21:02Z) ROOT-54: fullbody s5b 8f6a97ae Fold Thân phận big figure LOOKED + sent owner; iPad idcard big picture + «Kéo xuống» = law 10 → back to s5 worker (+ Fold stat tiles wrap note).
+- (18/11 ~21:05Z) ROOT-54: maid6-sample worker rolled over → stage-rightcol successor session_01Rc5AsMuwoEKePMdcju7qZi (sonnet); old archived.
