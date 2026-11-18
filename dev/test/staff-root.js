@@ -73,10 +73,10 @@ ok(!hits.length,'one table: no private capOf table / wrapper / +1 count outside 
    /* past the first month: the Giáo tập ma ma (a named woman, never sent away) has left her room */S.turn=20;S.rank=1;const c=capOf(S);const x=mkServ("maid");x.loyal=30;const back=srvHome(mkServ("maid"));back.loyal=5;S.staff=[x,back];
    capSweep();r.cap=c;r.backStays=S.staff.includes(back);r.otherGone=!S.staff.includes(x);r.markCleared=!back.home;r.log=(S.logs||[]).some(l=>String(l).includes(x.name));
    /* only she could go: she stays over the table (no loss of the returning servant), on every later sweep too */
-   const e=srvHome(mkServ("eunuch"));S.staff=[back,e];capSweep();capSweep();render();capSweep();r.aloneStays=S.staff.includes(e)&&!!e.home;
+   const e=srvHome(mkServ("eunuch"));S.staff=[back,e];capSweep();capSweep();render();capSweep();/* owner 18/11 (review/staff-cap-fix): never over the table — alone she goes too, told */r.aloneStays=!S.staff.includes(e)&&Q.some(q=>q&&q.t==="Nội vụ phủ điều người");
    /* once within the table she is an ordinary servant again (least trusted first: she goes before the others) */
    const y=mkServ("maid");y.loyal=60;const z=mkServ("maid");z.loyal=70;S.staff=[back,y,z];capSweep();r.ordinary=!S.staff.includes(back)&&S.staff.includes(z)}finally{window.COOPW=W0}return r},seat);
-  ok(hm.backStays&&hm.otherGone&&hm.markCleared&&hm.log&&hm.aloneStays&&hm.ordinary,`servant coming home (seat ${seat}): never the one sent away; another goes with the log line; alone she stays over the table (every sweep); once within the table she is ordinary again`,JSON.stringify(hm))}
+  ok(hm.backStays&&hm.otherGone&&hm.markCleared&&hm.log&&hm.aloneStays&&hm.ordinary,`servant coming home (seat ${seat}): never the one sent away; another goes with the log line; alone she goes too, told (never over the table, review/staff-cap-fix); once within the table she is ordinary again`,JSON.stringify(hm))}
  /* (9) co-op settle(): refused seat ('np' with her maid) and refused 'srv' both hand the servant back with the mark; the next trim keeps them */
  await newGame('tt');const st=await p.evaluate(()=>{Q.length=0;S.logs=[];const CW=window.COOPW;const W={on:CW.on,seat:CW.seat,base:CW.base,inLife:CW.inLife};let r={};try{
   CW.on=true;CW.seat="b";S.turn=20;S.rank=0;while(S.rank<8&&capOf(S)[0]<3)S.rank++;const c=capOf(S);const x=mkServ("maid");x.loyal=20;const m=mkServ("maid");m.loyal=1;const sv=mkServ("maid");sv.loyal=2;sv.spyFor=null;
