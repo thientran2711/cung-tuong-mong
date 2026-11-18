@@ -31,8 +31,8 @@ function tl2Value(v,rec,o,H){const B=BAL.ag.toil2;let u=0;TL2.hypo={v,rec};
 /* the face part of one sitting by way o (seed h): the player's toilNpcPlay */
 function tl2Sit(v,base,o,h,sk,occ){const O=BAL.ag.toil2.opt[o];if(O.moc)return{makeup:false,score:0,look:null};const want=O.want||"";
  const L=TOIL_PRE.filter(x=>(x[2]==="diem")===(want==="diem"));const hh=wdHash(wdKey(v)+":"+toilWk());const col=Object.assign({},L[(hh>>>12)%L.length][4]);
- const R=toilNpcPlay(sk,h,col,want,base.style,occ,v.rank);
- const rec={makeup:true,score:R.score,look:R.look,col:Object.assign(col,want?{want}:{})};if(R.slip)rec.slip=R.slip;return rec}
+ const HD=typeof hdNpc==="function"?hdNpc(v,hh,sk):null;/* hoa điền (jhd): the same draw as toilNpc, per person per day */const R=toilNpcPlay(sk,h,col,want,base.style,occ,v.rank,HD?HD.q:null);
+ const rec={makeup:true,score:R.score,look:R.look,col:Object.assign(col,want?{want}:{})};if(R.slip)rec.slip=R.slip;if(HD)rec.hd=HD;return rec}
 /* HER CHOICE (host): weigh each way, pick by nết with a human slip, then sit (the same seed the old hash look used) */
 function tl2Choose(v,base){tl2MIn();try{return tl2Choose0(v,base)}finally{tl2MOut()}}
 function tl2Choose0(v,base){const B=BAL.ag.toil2;const sk=toilNpcSk(v),occ=toilNpcOcc(),H=tl2Hosts(v),h=wdHash(wdKey(v)+":"+toilWk());let art=1;try{art=mindW(v,"art")}catch(e){}
@@ -54,7 +54,7 @@ const TL2M={on:0,c:{}};function tl2MIn(){TL2M.on++}function tl2MOut(){if(--TL2M.
 (function(){if(typeof toilNpc!=="function")return;const n0=toilNpc;toilNpc=function(v){if(TL2.hypo&&TL2.hypo.v===v)return TL2.hypo.rec;
  const base=n0.apply(this,arguments);try{if(!tl2On()||!v||v.coop||v===S)return base;let z=v.tl2;
   if(!(z&&z.wk===toilWk()&&z.rec)){if(!agOn()||!toilOn(v))return base;z=tl2Choose(v,base)}
-  const o=Object.assign({},base,{makeup:!!z.rec.makeup,score:z.rec.score|0,look:z.rec.look||null,k:z.k});delete o.slip;if(z.rec.slip)o.slip=z.rec.slip;
+  const o=Object.assign({},base,{makeup:!!z.rec.makeup,score:z.rec.score|0,look:z.rec.look||null,k:z.k});delete o.slip;if(z.rec.slip)o.slip=z.rec.slip;delete o.hd;if(z.rec.hd)o.hd=z.rec.hd;/* hoa điền goes with her chosen sitting (a bare face has none) */
   if(z.rec.col)o.col=Object.assign({},z.rec.col);return o}catch(e){try{agErr("toil2",e)}catch(x){}return base}};window.toilNpc=toilNpc})();
 
 /* ---------- consequences where they stand together (host, once per buổi) ---------- */
