@@ -2,7 +2,7 @@
 /* ---- jface: harm to servants, a slap answered ---- */
 npwReg("fxSrvHarm",{grp:"G2c",who:c=>c.p?[c.p]:[],why:(s,c)=>{const B=BAL.ag.why.fxSrv;const lo=s.loyal!=null&&s.loyal<BAL.loy.out;if(!s.grudge&&!lo)return null;
  const t=npwPick(c.mates||[],x=>1+Math.max(0,(x.loyal||0)-(s.loyal||0)));if(!t)return null;
- return {s:(s.grudge?B.grudge:0)+(lo?(BAL.loy.out-s.loyal)*B.loyW:0)+Math.max(0,netQ(s,"spite"))*B.spite,t,r:s.grudge?"mang oán trong lòng, trút lên bạn hầu":"ghen ghét bạn hầu được chủ tin hơn"}}});
+ return {s:(s.grudge?B.grudge:0)+(lo?npwB().min+(BAL.loy.out-s.loyal)*B.loyW:0)+Math.max(0,netQ(s,"spite"))*B.spite,t,r:s.grudge?"mang oán trong lòng, trút lên bạn hầu":"ghen ghét bạn hầu được chủ tin hơn"}}});
 npwReg("fxRivSrv",{grp:"G2c",who:c=>c.p?[c.p]:[],why:(v,c)=>{const B=BAL.ag.why.fxSrv,h=hostility(v,S);if(h<B.hot)return null;
  const t=npwPick((S.staff||[]).concat(S.maid&&typeof S.maid==="object"?[S.maid]:[]),x=>KIT_FACEFX.live(x)?1+Math.max(0,x.loyal||0):0);if(!t)return null;
  return {s:h*mindW(v,"scheme"),t,r:"oán ngươi, ra tay với người hầu của ngươi"}}});
