@@ -1,5 +1,7 @@
 # FIGURE GATE — the ONE checklist for every full-body figure (Foreman C, owner 18/11 ~03:35Z)
 
+**⛔ APPROVED FORMS FIRST (owner 18/11 ~22:20Z): before ANY gen read dev/art/APPROVED_PROMPTS.md — copy the approved form unchanged; only the held item and the pose may change (calmer with rank and age).**
+
 Every art worker and every foreman runs ALL of this on EVERY new figure BEFORE reporting it. A worker reports only figures that pass every line; a fail is regenerated first. Foremen paste this file (by path) into every art brief and order; no piecemeal orders.
 
 ## Owner's words (verbatim, 18/11 ~03:35Z)

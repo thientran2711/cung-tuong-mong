@@ -1,5 +1,7 @@
 # START_ART — verbatim owner rules
 
+**⛔ APPROVED FORMS FIRST (owner 18/11 ~22:20Z): before ANY gen read dev/art/APPROVED_PROMPTS.md — copy the approved form unchanged; only the held item and the pose may change (calmer with rank and age).**
+
 ## ⛔ GATE ZERO — PRIORITY RULE #1 FIRST (owner OD:L5 + 17/11 02:55Z): before writing any code, git grep origin/main + origin/review/* and grep OD/OWNER_LEDGER for what your task touches; reuse what exists; your report starts with "PRIORITY #1 CHECK: …" (hits). Reviewers FAIL a brief or report without it. Full text: top of START_CORE.md.
 
 
