@@ -1952,7 +1952,7 @@
 "status": "DICE-ONLY",
 "group": "G2-last",
 "event": "family whereabouts per buổi; old flame / stranger met",
-"fp": "reduce((a,x)=>a+x[1],0);let r=Math.random()*tot,p=\"\";for(const [k,w] o"
+"done": "function kcHab(L){const x=npwPick(L,y=>y[1]);"
 },
 {
 "f": "jkc.js",
@@ -1960,7 +1960,7 @@
 "status": "DICE-ONLY",
 "group": "G2-last",
 "event": "family whereabouts per buổi; old flame / stranger met",
-"fp": "an.alive)S.kc.at.ftm=b===3?\"\":pick([\"kc_chua\",\"kc_sach\",\"kc_tra\",\"\",\"\""
+"done": "return npwPick([\"kc_chua\",\"kc_sach\",\"kc_tra\",\"\"],k=>k?h*B.seek:B.home)"
 },
 {
 "f": "jkc.js",
@@ -1968,7 +1968,7 @@
 "status": "DICE-ONLY",
 "group": "G2-last",
 "event": "family whereabouts per buổi; old flame / stranger met",
-"fp": "alive&&S.tm96&&!S.kc.ev.meet&&roll(35)){S.kc.ev.meet=1;pushDil(mkP(\"kc"
+"done": "npcWhy(\"kcMeet\",{tm})&&roll(35)"
 },
 {
 "f": "jkc.js",
@@ -1976,7 +1976,7 @@
 "status": "DICE-ONLY",
 "group": "G2-last",
 "event": "family whereabouts per buổi; old flame / stranger met",
-"fp": ".ev.vh&&S.year>=2&&S.sac>=70&&roll(4)){S.kc.ev.vh=1;pushDil(mkP(\"kcE\","
+"done": "npcWhy(\"kcVh\",{})&&roll(4)"
 },
 {
 "f": "jkc2.js",
@@ -1984,7 +1984,7 @@
 "status": "DICE-ONLY",
 "group": "G2-last",
 "event": "family whereabouts per buổi; old flame / stranger met",
-"fp": "reduce((a,x)=>a+x[1],0);let r=Math.random()*tot,p=\"\";for(const [k,w] o"
+"done": "const p=(npwPick(L,y=>y[1])||[\"\"])[0];"
 },
 {
 "f": "jkc.js",
@@ -1992,7 +1992,7 @@
 "status": "PARTIAL",
 "group": "G2-last",
 "event": "weekly family event; matchmaker; creditor; lantern lover; stare",
-"fp": " if(!S.kc.ev.dich&&S.year>=2&&roll(KC.ill))add(\"dich\",6);"
+"out": "illness, not an NPC choice (report §Out of scope)"
 },
 {
 "f": "jkc.js",
@@ -2000,7 +2000,7 @@
 "status": "PARTIAL",
 "group": "G2-last",
 "event": "weekly family event; matchmaker; creditor; lantern lover; stare",
-"fp": ">{kcAf(h,BAL.eff.jkc.o_15);if(roll(40)){S.kgt-=BAL.eff.jkc.kgtO_5;retu"
+"out": "consequence of the player's own choice (she refused the brother's gambling debt): the creditor is owed by definition; roll = whether he comes to the door"
 },
 {
 "f": "jkc.js",
@@ -2008,7 +2008,7 @@
 "status": "PARTIAL",
 "group": "G2-last",
 "event": "weekly family event; matchmaker; creditor; lantern lover; stare",
-"fp": "t tm=kcTmMan();if(tm&&S.tm96&&roll(60)){S.tm96.h=Math.min(100,S.tm96.h"
+"done": "npcWhy(\"kcMeet\",{tm})&&roll(60)"
 },
 {
 "f": "jkc.js",
@@ -2016,7 +2016,7 @@
 "status": "PARTIAL",
 "group": "G2-last",
 "event": "weekly family event; matchmaker; creditor; lantern lover; stare",
-"fp": " if(kcCity(k)&&roll(4)){S.kld+=3;log(\"Có kẻ nhìn ngươi "
+"out": "unnamed crowd: no NPC exists or acts; the line only raises her own exposure S.kld at a crowded place she chose"
 },
 {
 "f": "jkc2.js",
@@ -2024,7 +2024,7 @@
 "status": "PARTIAL",
 "group": "G2-last",
 "event": "weekly family event; matchmaker; creditor; lantern lover; stare",
-"fp": "ce((a,x)=>a+x[1],0);if(!tot||!roll(KC.ev))return;let r=Math.random()*t"
+"done": "const o=npcWhy(\"kcWeek\",{E});if(!o||!roll(KC.ev))return;/* npc-purpose G2: the strongest motive acts */"
 },
 {
 "f": "jcmaid.js",
@@ -2376,7 +2376,7 @@
 "status": "DICE-ONLY",
 "group": "G2",
 "event": "mood set with no cause (servant, kid, officials, men, HH, TH)",
-"done": "lv=npwPick([3,2],k=>k===3?Math.max(0,hostility(q,S)):BAL.ag.why.cm.hhSad+Math.max(0,aff(q,S)))"
+"done": "lv=npwPick([3,2],k=>k===3?Math.max(0,hostility(q,S)):BAL.ag.why.cmood.hhSad+Math.max(0,aff(q,S)))"
 },
 {
 "f": "jcmood.js",
@@ -3268,43 +3268,11 @@
 },
 {
 "f": "jkc.js",
-"line0": 166,
-"status": "DICE-ONLY",
-"group": "G2",
-"event": "family whereabouts per buổi (pre-palace)",
-"done": "function kcHab(L){const x=npwPick(L,y=>y[1]);"
-},
-{
-"f": "jkc.js",
-"line0": 168,
-"status": "DICE-ONLY",
-"group": "G2",
-"event": "old flame's place per buổi (pre-palace)",
-"done": "return npwPick([\"kc_chua\",\"kc_sach\",\"kc_tra\",\"\"],k=>k?h*B.seek:B.home)"
-},
-{
-"f": "jkc2.js",
-"line0": 144,
-"status": "DICE-ONLY",
-"group": "G2",
-"event": "family whereabouts per buổi (jkc2 roads)",
-"done": "const p=(npwPick(L,y=>y[1])||[\"\"])[0];"
-},
-{
-"f": "jkc.js",
 "line0": 311,
 "status": "PARTIAL",
 "group": "G2",
 "event": "weekly family event (pre-palace)",
 "done": "const o=npcWhy(\"kcWeek\",{E});if(!o||!roll(KC.ev))return;/* npc-purpose G2: the strongest motive in the house acts"
-},
-{
-"f": "jkc2.js",
-"line0": 229,
-"status": "PARTIAL",
-"group": "G2",
-"event": "weekly family event (jkc2 roads)",
-"done": "const o=npcWhy(\"kcWeek\",{E});if(!o||!roll(KC.ev))return;/* npc-purpose G2: the strongest motive acts */"
 },
 {
 "f": "jkc.js",
@@ -3313,22 +3281,6 @@
 "group": "G2",
 "event": "palace rumour heard at home: about a random rival",
 "done": "const v=npwPick(liveRivals(true),x=>1+Math.max(0,x.sung||0));"
-},
-{
-"f": "jkc.js",
-"line0": 279,
-"status": "DICE-ONLY",
-"group": "G2",
-"event": "old flame met by chance",
-"done": "npcWhy(\"kcMeet\",{tm})&&roll(35)"
-},
-{
-"f": "jkc.js",
-"line0": 280,
-"status": "DICE-ONLY",
-"group": "G2",
-"event": "stranger (Emperor incognito) at the temple",
-"done": "npcWhy(\"kcVh\",{})&&roll(4)"
 },
 {
 "f": "jkc.js",
@@ -3345,22 +3297,6 @@
 "group": "G2",
 "event": "which suitor house",
 "done": "s=npwPick(f.length?f:L.slice(-2),x=>x[2])"
-},
-{
-"f": "jkc.js",
-"line0": 193,
-"status": "DICE-ONLY",
-"group": "G2",
-"event": "stranger stares at her in a crowded place",
-"out": "unnamed crowd: no NPC exists or acts; the line only raises her own exposure S.kld at a crowded place she chose"
-},
-{
-"f": "jkc.js",
-"line0": 309,
-"status": "DICE-ONLY",
-"group": "G2",
-"event": "epidemic at home",
-"out": "illness, not an NPC choice (report §Out of scope)"
 }
 ]
 }
