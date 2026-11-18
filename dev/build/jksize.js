@@ -524,7 +524,7 @@ function kszFeetFit(dlg){try{const B=dlg.querySelector(".k3body"),L=B&&B.querySe
   if(allow>=cur-.5)break;dlg.__kszShrink=Math.max(.3,allow/body0);kszFigFit(dlg)}
  kszFigFill(dlg,L,B,lay,cRef)}catch(e){console.error("kszFeetFit",e)}}
 /* OWNER 18/11 ~21:20Z (OD tail): the figure FILLS the left column's height (the frame body = the tallest of figure / info / grown tall frame), rank+name tag at the TOP, figure right under it. Grow the body only when the column is taller than the figure; the column width grows with it up to KSZ_FILLW of the frame body width (the right column keeps the rest). Whole group, every tier, Fold + iPad. */
-const KSZ_FILLW=1.45,KSZ_FILLS=1.6;
+const KSZ_FILLW=1.7,KSZ_FILLS=1.6;
 function kszFigFill(dlg,L,B,lay,cRef){const cur0=dlg.__kszShrink||1;const R=dlg.querySelector(".k3right");if(R){R.style.minHeight="";R.style.maxHeight="";R.style.overflow=""}
  const cs=getComputedStyle(B),avail=B.clientHeight-parseFloat(cs.paddingTop)-parseFloat(cs.paddingBottom),fs=L.querySelector(".kszfs");if(!fs)return;
  const part=L.offsetHeight-fs.offsetHeight,body0=KIT_SIZE.fig[lay.fig].h*(dlg.__kszKid||1),allow=(avail-part)/(1+cRef);let s=Math.min(KSZ_FILLS,allow/body0);
