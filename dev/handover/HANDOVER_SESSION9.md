@@ -908,3 +908,4 @@ Helper: /tmp/…/scratchpad/hpush.sh pattern = fetch, reset --hard FETCH_HEAD, r
   · rel-picker r2 (NEW, owner bug) sonnet session_01Rc5AsJZVez3V2TABepBaUE, brief briefs/root58-rel-picker-r2.md → LOOK shots → SMALL reviewer → land.
 - FOREMEN: B ORDER residence (QP alone, Tần/Phi 2 per room) written in FOREMAN_B_STATUS ~23:15Z. C: ART REQUEST closing-gate notice picture. C-AG #17 session_01Rc5AsHvrGcAHBVm2GZfixz. D: parallel-time #3 BIG rv, choice-value fixer #3 (4 owner flags in reports/review-choice-value-audit.md — apply 22:05Z rule: decide by recommendation). E: questline-q2 remerge, W2/W3.
 - Triggers: ROOT-58 trig_01Y8P1vJkddJqWiWLgYUtY47 (:32) → ROOT-59 disables (or asks owner) + makes own. Brief template briefs/root58-common.md (has ⛔ KIT FIRST line).
+- (18/11 ~22:56Z real) ROOT-58 opened ROOT-59 = session_01Rc5AsMK8HoGvFJPQquNYYg (opus, child, depth 6) and STOPS coordinating. Owner: talk to ROOT-59 (session title "Cung Tường Mộng 59 (MAIN)").
