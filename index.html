@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"e1cad739+","t":"2026-11-18T02:12Z","c":"Phi tần, Hoàng thượng, Thái hậu và cung nhân nay tự lo việc mình mỗi ngày theo cùng một luật, cùng một giá và cùng một cơ may như ngươi; ta…","b":"9a73de0d9c66","h":[{"s":"3b69182e","t":"2026-11-18T01:50Z","c":"hoa-dien r3 onto main 3da5720a (makeup-lux live): hoa-dien (jhd.js + hooks) replayed on the new main, replacing the old stacked branch. Sha…"},{"s":"631a703e","t":"2026-11-18T01:37Z","c":"review staff-cap-fix r6: hire pick refused at the cap gives the silver back (+ staff-cap.js case); site rebuilt"},{"s":"4cdcffa9+","t":"2026-11-18T00:44Z","c":"review looks-s40: site rebuilt from merged sources (glow v8)"},{"s":"eb3675a6+","t":"2026-11-17T22:59Z","c":"review coop-thin-c r1 #2: merge origin/main b048e495 (kit-display-room r2, jdisp/jshelf only; generated files from main + site rebuilt)"},{"s":"4eac30bc+","t":"2026-11-17T22:57Z","c":"review coop-thin-c r1 #2: her NPC pack resend (F1) listens on any guest seat, not only while the C switch is on: a level drop / build hold …"},{"s":"c7375c0c+","t":"2026-11-17T22:33Z","c":"batch s38a: dudo-blank-r1 2270c4c5 merged onto main 99f3978d; site rebuilt"},{"s":"99f3978d+","t":"2026-11-17T21:07Z","c":"batch s37a: display-shelf-r3rv 41418cd8 merged onto main 4c8568f5; site rebuilt"},{"s":"4c8568f5+","t":"2026-11-17T20:30Z","c":"batch s36a: main 60b0e3bf (display-shelf) merged; jdisp gated on BAL.shelf.ui (=0, room hidden); site rebuilt"},{"s":"da86e866","t":"2026-11-17T20:29Z","c":"Thẻ hành sự chia hai khối THÀNH và BẠI cho rõ được mất; khung dài có chữ \"Kéo xuống\" nhắc còn nữa; thẻ người chỉ ghi tước vị một lần, không…"},{"s":"9c6292d3+","t":"2026-11-17T20:17Z","c":"review display-shelf r2: Thái hậu rebuke through the one stat path ap (favour runs -100..100; cl(...,0,100) RAISED a negative favour to 0);…"}]};
+window.CTM_BI={"s":"69ea327a+","t":"2026-11-18T02:28Z","c":"Phi tần, Hoàng thượng, Thái hậu và cung nhân nay tự lo việc mình mỗi ngày theo cùng một luật, cùng một giá và cùng một cơ may như ngươi; ta…","b":"6693ff1bd170","h":[{"s":"29385ec6+","t":"2026-11-18T02:07Z","c":"greet-stranger: site rebuilt"},{"s":"3b69182e","t":"2026-11-18T01:50Z","c":"hoa-dien r3 onto main 3da5720a (makeup-lux live): hoa-dien (jhd.js + hooks) replayed on the new main, replacing the old stacked branch. Sha…"},{"s":"631a703e","t":"2026-11-18T01:37Z","c":"review staff-cap-fix r6: hire pick refused at the cap gives the silver back (+ staff-cap.js case); site rebuilt"},{"s":"4cdcffa9+","t":"2026-11-18T00:44Z","c":"review looks-s40: site rebuilt from merged sources (glow v8)"},{"s":"eb3675a6+","t":"2026-11-17T22:59Z","c":"review coop-thin-c r1 #2: merge origin/main b048e495 (kit-display-room r2, jdisp/jshelf only; generated files from main + site rebuilt)"},{"s":"4eac30bc+","t":"2026-11-17T22:57Z","c":"review coop-thin-c r1 #2: her NPC pack resend (F1) listens on any guest seat, not only while the C switch is on: a level drop / build hold …"},{"s":"c7375c0c+","t":"2026-11-17T22:33Z","c":"batch s38a: dudo-blank-r1 2270c4c5 merged onto main 99f3978d; site rebuilt"},{"s":"99f3978d+","t":"2026-11-17T21:07Z","c":"batch s37a: display-shelf-r3rv 41418cd8 merged onto main 4c8568f5; site rebuilt"},{"s":"4c8568f5+","t":"2026-11-17T20:30Z","c":"batch s36a: main 60b0e3bf (display-shelf) merged; jdisp gated on BAL.shelf.ui (=0, room hidden); site rebuilt"},{"s":"da86e866","t":"2026-11-17T20:29Z","c":"Thẻ hành sự chia hai khối THÀNH và BẠI cho rõ được mất; khung dài có chữ \"Kéo xuống\" nhắc còn nữa; thẻ người chỉ ghi tước vị một lần, không…"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -4710,7 +4710,7 @@ wrapR("scout",()=>"Sai tai mắt dò nơi ở");wrapR("invite",()=>"Mời đến
 /* every talk tells what she learned and the bar moves with their new values */
 (function(){const t1=talk;talk=function(oi){const p=S&&curPeople()[popIdx];const b=rsnap();const r=t1.apply(this,arguments);try{if(p&&b&&popMsg){const ch=RKEYS.filter(([k])=>(S[k]||0)!==b[k]).map(([k,n])=>`<span class="ef ${(S[k]||0)>b[k]?"g":"r"}">${n} ${b[k]} → ${S[k]||0}</span>`);let learn="";
  if(p.kind==="emp"){const sw=S.sung>=BAL.sungLv.emp[2]?"rất sủng ái ngươi":S.sung>=BAL.sungLv.emp[1]?"thương ngươi":S.sung>=BAL.sungLv.emp[0]?"còn nhớ đến ngươi":"chưa để tâm đến ngươi";learn=`Ngài lúc này: ${MOODS[S.emp.mood][0].toLowerCase()}; ngài ${sw}.`;const kn=Object.keys(LIKES).filter(k=>S.emp.known[k]).map(k=>`${LIKEN[k].toLowerCase()}: ${S.emp.likes[k]}`);if(kn.length)learn+=` Đã biết ngài thích: ${kn.join("; ")}.`}
- else if(p.ref&&p.ref.name&&p.kind!=="man"){const v=p.ref;learn=`${v.name} với ngươi: ${knows(v)?affW(aff(v,S)).toLowerCase()+" ("+aff(v,S)+")":"chưa rõ"}.`}
+ else if(p.ref&&p.ref.name&&p.kind!=="man"&&p.kind!=="min"&&(typeof kitKnownName!=="function"||kitKnownName(pFaceOf(p)))){/* greet-stranger: never a stranger's real name; officials have no "với ngươi" bar */const v=p.ref;learn=`${v.name} với ngươi: ${knows(v)?affW(aff(v,S)).toLowerCase()+" ("+aff(v,S)+")":"chưa rõ"}.`}
  else if(p.kind==="man"){learn=`${p.ref.name}: ${tinhW(p.ref.tinh)}.`}
  if(ch.length||learn){popMsg+=`<br>${ch.join(" · ")}${learn?`<br><span class="past">${learn}</span>`:""}`;renderStage()}}}catch(e){}return r}})();
 /* events, dilemmas, summons that come to her also count as unasked */
@@ -23744,10 +23744,15 @@ function k61VisEnt(p){if(!p||p.kind==="chest")return null;try{return k61PortEnt(
 (function(){const r0=renderStage;renderStage=function(){const r=r0.apply(this,arguments);try{const ppl=curPeople();document.querySelectorAll("#tokens .tok").forEach(b=>{const p=ppl[+b.dataset.p];const e=k61VisEnt(p);if(e&&!k61Named(e)){const t=b.querySelector(".tag");if(t)t.textContent=k61Coop(e)?K61FR:isKnown61(e)?"???":"Người lạ"}else if(e&&k61NoFace(e)){const t=b.querySelector(".tag");if(t&&t.textContent==="Người lạ"&&p.name)t.textContent=p.name}})}catch(e){}return r}})();
 /* talking face to face: a stranger first; greeting (1 khắc, sure) reveals both ways and leaves the talk open */
 let K61RAW=false;(function(){const d0=directActs;directActs=function(){K61RAW=true;try{return d0.apply(this,arguments)}finally{K61RAW=false}}})();
-(function(){const t0=talkOpts;talkOpts=function(p){const A=t0.apply(this,arguments);if(K61RAW)return A;try{const e=k61VisEnt(p);const st=e?k61St(e):3;if(e&&st<2){const k=k61Kind(e);const big=k==="emp"||k==="th";const riv=(rivals||[]).includes(e);
+/* k61Gate(p,A): the ONE stranger gate of a talk list (greet first, every other option locked). greet-stranger (owner 18/11 01:38Z): a later
+   talkOpts wrapper that answers a kind by itself without calling down (jmen "min" officials) skipped this gate, so a stranger official got the
+   plain "Chào hỏi đúng lễ" (no face, no name). jgreet re-applies the gate as the last wrapper; already-gated lists pass through unchanged. */
+function k61Gate(p,A){if(K61RAW||!Array.isArray(A)||(A[0]&&A[0].k61))return A;try{const e=k61VisEnt(p);const st=e?k61St(e):3;if(e&&st<2){const k=k61Kind(e);const big=k==="emp"||k==="th";const riv=(rivals||[]).includes(e);
   const g=st===0?{n:big?"Hành lễ":"Chào hỏi",o:100,k61:"greet",kke:kOf61(e),x:`thấy mặt, rõ thân phận${riv?" · nàng cũng biết mặt ngươi":""} · chưa biết tên`}
    :{n:big?"Kính cẩn hỏi danh tính":"Hỏi danh tính",o:100,k61:"name",kke:kOf61(e),x:`biết tên người này${riv?" · nàng cũng biết ngươi":""}`};
-  return [g].concat(A.map(a=>Object.assign({},a,{lock:true,t:K61WHY})))}}catch(x){}return A}})();
+  return [g].concat(A.map(a=>Object.assign({},a,{lock:true,t:K61WHY})))}}catch(x){}return A}
+window.k61Gate=k61Gate;
+(function(){const t0=talkOpts;talkOpts=function(p){return k61Gate(p,t0.apply(this,arguments))}})();
 (function(){const t0=talk;talk=function(oi){try{if(S&&popIdx!=null&&!S.dead&&!Q.length){const p=curPeople()[popIdx];const a=p&&talkOpts(p)[oi];
   if(a&&(a.k61==="greet"||a.k61==="name")){const e=k61Ent(a.kke);if(e&&can(1)){spend(1);const k=k61Kind(e);
    if(a.k61==="greet"){/* jgreet: ONE greeting name rule (rank + nết), the line says why */const G=greetName(S,e);popMsg=G.line;log(G.line)}
@@ -29556,9 +29561,20 @@ function onePop(h,ttl,b){if(!h)return h;const seg=h.split("<br>");if(seg.length<
    if(!items.length)continue;if(items.length===t.split("·").length){out.push(sgm);continue}
    out.push(items.map(x=>`<span class="ef ${/→ /.test(x)&&(+x.split("→")[1]>+x.split("→")[0].split(" ").pop())?"g":"r"}">${x}</span>`).join('<span class="ksep">·</span>'));continue}
   if(f){for(const v of [`${ttl}. ${f}`,`${ttl}: ${f}`,`${ttl}. Thành. ${f}`,`${ttl}. Hỏng. ${f}`,`${ttl}. Bại. ${f}`,f])t=t.split(v).join("");t=t.replace(/\s+/g," ").trim();if(!t||/^[.·\s]*$/.test(t))continue;
-   if(t!==T(sgm)){out.push(`<span class="past">${t}</span>`);continue}}
+   if(t!==T(sgm)){const d=popDedup(t,first,ttl);if(d)out.push(`<span class="past">${d}</span>`);continue}}
+  {const d=popDedup(t,first,ttl);if(!d)continue;if(d!==t){out.push(`<span class="past">${d}</span>`);continue}}
   out.push(sgm)}
  return out.join("<br>")}
+/* greet-stranger (owner 18/11 01:38Z "Người nghe gật gù…" ×2, "Chào hỏi đúng lễ" ×2): the Sổ ghi line appended under the result (j21) is
+   "<literary line> <title>. <facts>" — a different order than line one, so the whole-string strip above missed it. Sentence by sentence:
+   drop a sentence line one already says, the bare title / Thành / Hỏng, and "X a → b" items whose label line one already moved. Every action. */
+function popDedup(t,first,ttl){const F=T(first).replace(/\s+/g," ");const lab=x=>{const m=x.match(/^(.+?) -?\d+ → -?\d+(?: \([^)]*\))?$/);return m?m[1]:null};
+ const has=l=>{const al=S&&S.maid&&l==="Lòng "+S.maid.name?"Lòng cung nữ":l;return F.includes(l+" ")||F.includes(al+" ")};
+ const keep=[];for(const s0 of String(t).split(/(?<=[.!?])\s+/)){const s=s0.trim().replace(/[.!?]+$/,"").trim();if(!s)continue;
+  if(s===ttl||/^(Thành|Hỏng|Bại|thành|hỏng|bại)$/.test(s)||F.includes(s))continue;
+  const it=s.split("·").map(x=>x.trim()).filter(Boolean);if(it.length&&it.every(lab)){const k=it.filter(x=>!has(lab(x)));if(k.length)keep.push(k.join(" · ")+".");continue}
+  keep.push(s0.trim())}
+ return keep.join(" ").trim()}
 /* pop card: numbers read live (the visit list keeps a snapshot "lòng 97") */
 try{const pc0=popCard;popCard=function(p){try{if(p&&p.info){if(p.kind==="maid"&&S.maid)p.info=p.info.replace(/lòng -?\d+/,"lòng "+S.maid.loyal);if(p.kind==="th")p.info=p.info.replace(/lòng -?\d+/,"lòng "+S.th)}}catch(e){}return pc0.apply(this,arguments)}}catch(e){}
 /* review/lag-play-2: fixTitles only drops tooltips (no visible change) but reads scrollWidth = a forced layout in the middle of a render;
@@ -56572,9 +56588,12 @@ function pcfIntel(e){try{if(e.id==null||typeof kitRows!=="function")return"";con
  const rows=L.slice(0,2).map(x=>({l:"Tin",f:x.f,d:x}));
  const chips=[n?`<button class="chip kchipb" data-kintel="${e.id}">Đã biết: ${n} tin ›</button>`:"",ev?`<button class="chip hot kchipb" data-kev="${e.id}" title="Xem chứng cứ">Chứng cứ ${ev} ›</button>`:""].filter(Boolean);
  return `<div class="kpsec pcf-i"><h4 class="kpst">Đã biết</h4>${rows.length?kitFactRows(rows):`<div class="kpnote">Chưa biết gì thêm. Dò la, hỏi kẻ hầu để biết.</div>`}${chips.length?`<div class="kchips">${chips.join(" ")}</div>`:""}</div>`}catch(x){return""}}
-function pcfLog(e){try{const nm=pcfName(e);if(!nm||!S.logs)return"";const parts=nm.split(" ");const key=isEmp(e)||isTh(e)?nm:parts.slice(-2).join(" ");const mark=`T${S.month}/${S.year} `;const rows=[];
- for(const h of S.logs){const m=/^<span class="ld">(T\d+\/\d+) ([^<]*)<\/span>([\s\S]*)$/.exec(h);if(!m||(m[1]+" ")!==mark)continue;const t=plain(m[3]);if(!t.includes(key)&&!(isEmp(e)&&/Hoàng thượng|ngài /i.test(t)))continue;
+/* greet-stranger (owner 18/11 01:38Z: the result read twice): the line the open result note (popMsg) already shows is not repeated as "Dạo này" */
+function pcfShown(t){try{const P=typeof popMsg==="string"&&popMsg?plain(popMsg).replace(/\s+/g," "):"";if(!P)return false;const s=String(t).replace(/\s+/g," ").trim().split(/(?<=[.!?])\s/)[0].replace(/[.!?]+$/,"").replace(/^[^:]{1,40}:\s*/,"").trim();return s.length>=8&&P.includes(s)}catch(x){return false}}
+function pcfLog(e){try{const nm=pcfName(e);if(!nm||!S.logs)return"";const parts=nm.split(" ");const key=isEmp(e)||isTh(e)?nm:parts.slice(-2).join(" ");const mark=`T${S.month}/${S.year} `;const rows=[];let sk=0;
+ for(const h of S.logs){const m=/^<span class="ld">(T\d+\/\d+) ([^<]*)<\/span>([\s\S]*)$/.exec(h);if(!m||(m[1]+" ")!==mark)continue;const t=plain(m[3]);if(!t.includes(key)&&!(isEmp(e)&&/Hoàng thượng|ngài /i.test(t)))continue;if(pcfShown(t)){sk=1;continue}
   rows.push({l:"Chuyện",f:m[3],d:{when:`${m[1]} ${m[2]}`}});if(rows.length>=1)break}
+ if(!rows.length&&sk)return"";/* the only story is the result shown above */
  if(!rows.length)return `<div class="kpsec"><h4 class="kpst">Dạo này</h4><div class="kpnote">Tháng này ngươi chưa có chuyện gì với ${isEmp(e)||isTh(e)?"người":typeof nrHe==="function"?nrHe(e):"nàng"}.</div></div>`;
  return `<div class="kpsec"><h4 class="kpst">Dạo này</h4>${kitFactRows(rows)}</div>`}catch(x){return""}}
 /* quick acts: only for a rival, only when her card has no act (the pop-up after the one talk of the visit) */
@@ -64929,7 +64948,7 @@ function grNet(p){try{return nv(p,"greetName")?1:0}catch(e){return 1}}
 /* g = how the GIVER's name reaches the other: low (she named herself, lower), uniq (one seat), ann (herald), net (her nết said yes/no), me (her choice) */
 function grGive(g,o2,rg,ro,o,side){if(rg<ro)return{y:1,w:"low"};if(grUniq(g))return{y:1,w:"uniq"};if(grHerald(g,o))return{y:1,w:"ann"};
  if(g===S&&o&&o.me!=null)return{y:o.me?1:0,w:"me"};return{y:grNet(g),w:"net",t:grTT(g),eq:rg===ro}}
-function grLearn(x,y){if(!x||!y||x===y||!S)return;try{if(x===S){if(S.known&&!k61Named(y))k61Know(y,"",true,2);grMet(y)}else if(y===S)npcLearn(x,S);else npcLearn(x,y)}catch(e){}}
+function grLearn(x,y){if(!x||!y||x===y||!S)return;try{if(x===S){if(S.known&&k61St(y)<2)k61Know(y,"",true,2)/* greet-stranger: a public name (Hoàng hậu, level 0/1) still needs face + level 2, else the gate asks "Chào hỏi" again forever */;grMet(y)}else if(y===S)npcLearn(x,S);else npcLearn(x,y)}catch(e){}}
 function grFace(x,y){if(x!==S||!S||!S.known)return;try{if(k61St(y)<1)k61Know(y,"",true,1);grMet(y)}catch(e){}}
 function grMet(y){try{if((rivals||[]).includes(y)&&y.id!=null){S.met=S.met||{};if(S.met[y.id]==null)S.met[y.id]=wk()}}catch(e){}}
 /* she knows x's name / x knows hers BEFORE the greeting */
@@ -64939,7 +64958,7 @@ function greetName(a,b,o){o=o||{};const ra=grRank(a),rb=grRank(b);const ka=grKne
  if(A.y)grLearn(b,a);else grFace(b,a);if(B.y)grLearn(a,b);else grFace(a,b);
  const G={a,b,A,B,newA:!ka&&A.y,newB:!kb&&B.y,ra,rb};G.line=a===S||b===S?grLine(G):"";GM.stat["g_"+A.w]=(GM.stat["g_"+A.w]||0)+1;return G}
 /* ---- words (VANPHONG: cổ trang; the nết is named only when she knows it) ---- */
-function grPron(p){try{if(p===S.emp)return"Hoàng thượng";if(S.thO&&p===S.thO)return"Thái hậu";return netSex(p)==="m"?"người ấy":"nàng"}catch(e){return"nàng"}}
+function grPron(p){try{if(p===S.emp)return"Hoàng thượng";if(S.thO&&p===S.thO)return"Thái hậu";const k=typeof k61Kind==="function"?k61Kind(p):"";if(/^(man|off|phys|eun|tq)$/.test(k))return"người ấy"/* greet-stranger: thái y, thái giám, quan, nam nhân */;return netSex(p)==="m"?"người ấy":"nàng"}catch(e){return"nàng"}}
 function grKnowsT(p,t){try{return !!t&&(rivals||[]).includes(p)&&(trKnown(p)||[]).includes(t)}catch(e){return false}}
 function grWhy(p,g){const P=grPron(p);const T=()=>{try{return k61Named(p)?k61Title(p):k61Cap(k61Desc(p))}catch(e){return P}};
  if(g.w==="low")return`${P} phận dưới, xưng danh thỉnh an trước`;
@@ -64962,6 +64981,8 @@ function grPreview(a,b){const ra=grRank(a),rb=grRank(b);const P=grPron(b);const 
  else if(rb<ra)L.push("biết tên người ấy");if(rb<ra&&a===S&&!grUniq(S))L.push("tên ngươi: tùy tính nết ngươi có xưng danh đáp lễ hay không")/* r1: what happens to her own name is said too */;return L.join(" · ")}
 
 /* ===================== the greeting sites (LUẬT SỬA CẢ NHÓM: every one goes through greetName) ===================== */
+/* 0 greet-stranger (owner 18/11 01:38Z): the stranger gate again as the outer wrapper, so no kind can skip it (jmen "min" did) */
+(function(){const t0=talkOpts;talkOpts=function(p){const A=t0.apply(this,arguments);try{return typeof k61Gate==="function"?k61Gate(p,A):A}catch(x){return A}}})();
 /* 1 j61 talk face to face: "Chào hỏi" / "Hành lễ" of a stranger (was: face only + a 2nd tap "Hỏi danh tính"): the tap is edited in j61 (greetName); here the preview */
 (function(){const t0=talkOpts;talkOpts=function(p){const A=t0.apply(this,arguments);try{if(A&&A[0]&&A[0].k61==="greet"){const e=k61Ent(A[0].kke);if(e)A[0]=Object.assign({},A[0],{x:grPreview(S,e)})}}catch(x){}return A}})();
 /* 2 j61 NPC acts on her face to face (SOC run / runAct ally·gift): edited in j61 itself to call greetName(v,S) (was: her name + theirs always) */
@@ -64972,7 +64993,7 @@ function grWrapOpt(A,re,who){try{for(const o of A||[]){if(!o||!re.test(o.n||""))
   o[f]=function(){const r=f0.apply(this,arguments);let G=null;try{G=greetName(S,e)}catch(x){}if(f==="run"&&G&&(G.newA||G.newB))return (r?r+" ":"")+G.line;if(f==="go"&&G&&(G.newA||G.newB))try{log(G.line)}catch(x){}return r}}}}catch(e){}return A}
 (function(){if(typeof srvTalk!=="function")return;const s0=srvTalk;srvTalk=function(p){const A=s0.apply(this,arguments);try{
   const who=p&&p.sk==="man"?()=>manById(p.mid):p&&(p.sk==="rv"||p.sk==="hh")?()=>p.ref&&RV(p.ref.id):null;if(who)grWrapOpt(A,/^(Chào hỏi đúng lễ|Hành lễ thỉnh an)$/,who)}catch(e){}return A}})();
-(function(){const t0=talkOpts;talkOpts=function(p){const A=t0.apply(this,arguments);try{if(p&&p.kind==="man"&&p.ref)grWrapOpt(A,/^Chào hỏi đúng lễ$/,()=>p.ref)}catch(e){}return A}})();
+(function(){const t0=talkOpts;talkOpts=function(p){const A=t0.apply(this,arguments);try{if(p&&(p.kind==="man"||p.kind==="min")&&p.ref)grWrapOpt(A,/^Chào hỏi đúng lễ$/,()=>p.ref)/* min: officials too (greet-stranger) */}catch(e){}return A}})();
 
 /* ===================== AG-MEET: people at a place come to HER (and to each other) ===================== */
 function gmZ(){const z=S.gmeet=S.gmeet||{};z.pend=Array.isArray(z.pend)?z.pend:[];return z}
@@ -70237,7 +70258,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="9a73de0d9c66";window.CTM_BUILD=BUILD;
+const BUILD="6693ff1bd170";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

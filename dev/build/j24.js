@@ -85,7 +85,7 @@ wrapR("scout",()=>"Sai tai mắt dò nơi ở");wrapR("invite",()=>"Mời đến
 /* every talk tells what she learned and the bar moves with their new values */
 (function(){const t1=talk;talk=function(oi){const p=S&&curPeople()[popIdx];const b=rsnap();const r=t1.apply(this,arguments);try{if(p&&b&&popMsg){const ch=RKEYS.filter(([k])=>(S[k]||0)!==b[k]).map(([k,n])=>`<span class="ef ${(S[k]||0)>b[k]?"g":"r"}">${n} ${b[k]} → ${S[k]||0}</span>`);let learn="";
  if(p.kind==="emp"){const sw=S.sung>=BAL.sungLv.emp[2]?"rất sủng ái ngươi":S.sung>=BAL.sungLv.emp[1]?"thương ngươi":S.sung>=BAL.sungLv.emp[0]?"còn nhớ đến ngươi":"chưa để tâm đến ngươi";learn=`Ngài lúc này: ${MOODS[S.emp.mood][0].toLowerCase()}; ngài ${sw}.`;const kn=Object.keys(LIKES).filter(k=>S.emp.known[k]).map(k=>`${LIKEN[k].toLowerCase()}: ${S.emp.likes[k]}`);if(kn.length)learn+=` Đã biết ngài thích: ${kn.join("; ")}.`}
- else if(p.ref&&p.ref.name&&p.kind!=="man"){const v=p.ref;learn=`${v.name} với ngươi: ${knows(v)?affW(aff(v,S)).toLowerCase()+" ("+aff(v,S)+")":"chưa rõ"}.`}
+ else if(p.ref&&p.ref.name&&p.kind!=="man"&&p.kind!=="min"&&(typeof kitKnownName!=="function"||kitKnownName(pFaceOf(p)))){/* greet-stranger: never a stranger's real name; officials have no "với ngươi" bar */const v=p.ref;learn=`${v.name} với ngươi: ${knows(v)?affW(aff(v,S)).toLowerCase()+" ("+aff(v,S)+")":"chưa rõ"}.`}
  else if(p.kind==="man"){learn=`${p.ref.name}: ${tinhW(p.ref.tinh)}.`}
  if(ch.length||learn){popMsg+=`<br>${ch.join(" · ")}${learn?`<br><span class="past">${learn}</span>`:""}`;renderStage()}}}catch(e){}return r}})();
 /* events, dilemmas, summons that come to her also count as unasked */
