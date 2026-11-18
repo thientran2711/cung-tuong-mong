@@ -49,7 +49,7 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
  /* 6 + 7 bot run: truth audit + rate */
  const r6=await p.evaluate(async(DAYS)=>{const A={sk:{},bad:[],items:0,ev:0,evBad:0};const names=()=>new Set(consorts().map(c=>c.name).concat(allServ().map(s=>s.name)));
   const r0=asRun;window.asRun=asRun=function(s,o){A.sk[o.sk]=(A.sk[o.sk]||0)+1;return r0.apply(this,arguments)};
-  const g0=knErrGive;window.knErrGive=knErrGive=function(s,m,k,t,late){if(k==="scout"||k==="listen"){if(!t||!t.alive||t===m)A.evBad++;A.ev++}return g0.apply(this,arguments)};
+  const g0=knErrGive;window.knErrGive=knErrGive=function(s,m,k,t,late){if(k==="scout"||k==="listen"){if(!t||(t!==S&&!t.alive)||t===m)A.evBad++;A.ev++}return g0.apply(this,arguments)};
   const seen=new Set();tinBaoOn(it=>{A.items++;if(/\{|\}|undefined|null|NaN/.test(it.line))A.bad.push(it.line);if(it.k!=="bao"){const raw=(KN.raw||[]).concat(adHapNow?[]:[]);if(!it.who||!it.who.length)0}});
   for(let d=0;d<DAYS;d++){for(let bb=0;bb<4;bb++){Q.length=0;S.mg=0;try{placeWhere();agFlush()}catch(e){}try{const L=tinBaoList();for(const it of L){if(seen.has(it.id))continue;seen.add(it.id);
      if(it.k!=="bao"){const h=(KN.raw||[]).find(h=>knHid(h)===it.id);const ok2=!!h||it.k==="fest"||it.k==="cold"||it.k1<agKh();if(!ok2)A.bad.push("no happening: "+it.id)}}}catch(e){A.bad.push("err "+e.message)}
@@ -60,6 +60,7 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
    }},DAYS);
  console.log('bot: '+JSON.stringify(r6));
  ok(r6.items>0&&!r6.bad.length,'bot run: every TIN BÁO item is about a real happening / real people (no invented news, no broken line)',{items:r6.items,bad:r6.bad});
+  /* the player as target (an NPC master's errand on her, incl. late reports): S has no .alive (S.dead) — living */
  ok(r6.evBad===0,'bot run: every finding an errand gives a master is about a real, living other consort',{ev:r6.ev,bad:r6.evBad});
  ok(r6.share>=r6.band[0]&&r6.share<=r6.band[1],'rate: servants\' own errands are a believable share of servant deeds (BAL.ag.know.share)',{share:r6.share,band:r6.band,er:r6.er,all:r6.all,st:r6.st});
  const ae=await p.evaluate(()=>(typeof AG==="object"&&AG.errs)?AG.errs.slice(0,3):[]);
