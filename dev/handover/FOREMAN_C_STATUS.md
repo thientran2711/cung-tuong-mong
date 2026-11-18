@@ -27,6 +27,7 @@ DONE: 4 open MAIN art orders. Act pictures 6 LIVE + ACTS.json guarded (LAND READ
 OPEN: owner D14 pick (a/b/c) → wiring worker; MAIN GO face-fix; owner 5 questions (ROOT-20 HANDOVER); NEW STANDBY not opened. No painters. W37 paused.
 
 FOREMAN C ROOT-24 (art) = session_011xDdVPdDYJQYPD3hB5cR5S · depth 2 (limit 8: open ROOT-25 at rollover) · START_CTX ~8% (own estimate; get_session reads 0; window 1M) → roll over at >= 33%, ceiling 60% · hourly wake trig_01SgnrP3QViuC7Wauu8K5SBG (:32) · reports to MAIN via this file. STANDBY: none registered yet.
+- 14:32Z 18/11 wake: ctx 17% (real 175k/1M; roll at 33%). No painter. No new MAIN/owner order for C. Waiting: owner D14 pick + 5 OPEN questions + STANDBY; MAIN GO face-fix.
 - 13:36Z 18/11 ROOT-24 took over (TAKEOVER ROOT24 + START_CORE/FOREMAN/ART + FIGURE_GATE + consort-B10 + ROOT-23/ROOT-20 handover + log read). Renamed "Foreman C ROOT-24 (vẽ)". Hourly wake :32 created. No painters. Waiting: owner D14 pick, MAIN GO face-fix, 5 OPEN questions, new STANDBY.
 
 FOREMAN C ROOT-23 (art) = session_011xDdVPu6X3z9NfWyEW4SBa · depth 1 (limit 8: open ROOT-24 at rollover) · START_CTX ~6% (own estimate; get_session reads 0; window 1M) → roll over at >= 31%, ceiling 60% · hourly wake trig_01Lge5oNPkuH7cofNV4gQhRh (:32) · reports to MAIN via this file. STANDBY: none registered yet.
