@@ -21,3 +21,5 @@ CDN (img/_review/thaihau/, https://ctm-img.victoria-tntt.workers.dev/ + path): c
 All 9 people done, 27 gens, 0 regens. Extra: 6 images_remove_background (c22 a36, c24 a51, c24 a65, c28 a51, c31 a51, c31 a65).
 Credits: 27 gens x 135 = 3645 + 6 remove-bg x 3 = 18.
 Notes: transparentBackground worked on most gens but ~1/3 had a baked parchment background or stains (listed above); fixed with images_remove_background, otherwise local alpha cleanup only. Thin hair dangles can be slightly trimmed by remove-bg (c24 a65).
+
+STYLE IMAGE NOTE (ROOT-33 change 23:45Z, style3_girls Xm9tPkMBfo from the next gen on): ALL 27 TH3 gens (and the 6 remove-bg) were made before the change and used m09 eIyOFEidqL as image 1; none used Xm9tPkMBfo. No gens made after the change.
