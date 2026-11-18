@@ -70,7 +70,7 @@ document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest
  W("punish",o=>function(p){if(typeof p==="string"||p===S)feedback("hit");return o.apply(this,arguments)});
  W("birthP",o=>function(p){const r=o.apply(this,arguments);if(p===S&&!S.dead)feedback("birth");return r});
  W("nightFx",o=>function(){feedback("night");feedback("favour");return o.apply(this,arguments)});
- /* buổi / tuần change: no page sound, no dark wipe (owner 15/11: it read as a page flip) — jbuoi.js paints the transition */
+ /* buổi / tuần change: no page sound, no dark wipe (owner 15/11: it read as a page flip) — jbuoi.js shows the buổi banner */
 
  W("goTo",o=>function(k){const r=o.apply(this,arguments);if(S&&S.place===k&&k!=="home")feedback("step");if(k==="lc")feedback("ash");return r});
  W("over",o=>function(){const r=o.apply(this,arguments);auTick();return r});
