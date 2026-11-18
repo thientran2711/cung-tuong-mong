@@ -41,7 +41,7 @@ function rtWeary(){const L=[];if(!S)return L;const kids=rtKidsAlive().length;
  if(S.turn>=6&&S.sung<BAL.route.wearySung&&!S.out)L.push("ân sủng nhạt dần");
  if(S.out)L.push("đang ở lãnh cung");else if(S.rt&&S.rt.wasCold)L.push("từng nếm mùi lãnh cung");
  if(S.turn>=18&&S.rank<=1&&!S.out)L.push("mãi không được tấn phong");
- try{if(typeof emoGet==="function"){const e=emoGet(S);if(["buon","dau","so"].includes(e.k)&&e.v>=45)L.push("lòng "+EMO[e.k].toLowerCase())}}catch(e){}
+ try{if(typeof emoGet==="function"){const e=emoGet(S);if(["buon","so"].includes(typeof feelGrp==="function"?feelGrp(e.k):e.k)&&e.v>=45)L.push("lòng "+EMO[e.k].toLowerCase())}}catch(e){}
  return L}
 function rtTm(){return (S.tm96&&S.tm96.mid)||null}
 function rtMenMet(){try{menInit()}catch(e){}const tm=rtTm();return (S.men||[]).filter(m=>m.alive&&!(typeof menBanned==="function"&&menBanned(m))&&(m.id===tm||m.seen||(m.af||0)>0||(m.tinh||0)>0))}

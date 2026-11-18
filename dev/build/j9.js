@@ -37,9 +37,35 @@ function npcEncounters(){const by={};for(const v of liveRivals(true)){const k=S.
 
 /* sending someone instead of going: same act, lower odds, the servant may be caught and confess */
 let ACTX={a:null,pen:0};
-function runAct(a,t,k,extra){const A2=ACT[k];if(!A2)return"";const sent=!together(a,t)&&!["accuse","vp","xx","gift","steal","road","takeaway"].includes(k);const where=together(a,t)?placeName(whereOf(a)):"";
+/* ONE act context (review/shown-odds-one-path, ORDER ROOT-52 18/11): the roll (runAct) and EVERY screen that prints an act's odds
+   build the same ACTX here — sent-servant penalty (pen), her lá số on the act's domain (lotB via dom), fresh spy knowledge of the
+   target (spyKnowB via t) — so the word on the card is the odds the roll uses (shown == rolled; dev/test/shown-odds.test.js).
+   x = an extra part of one way of doing the act (e.g. plant "tại cung nàng": x.pen, x.here = done in person, no sent-servant pen), the same object on both sides. */
+const ACT_NOSEND=["accuse","vp","xx","gift","steal","road","takeaway"];
+function actCtx(a,t,k,sv,x){const sent=!(x&&x.here)&&!together(a,t)&&!ACT_NOSEND.includes(k);/* x.here: she does it herself on the spot (no servant sent) */if(sent&&sv===undefined)sv=bestSent(a);
+ const K0=ACTK;ACTK=k;let pen=0;try{pen=sent?sentPen(sv)-(sv?srk(sv)*3:0):0}finally{ACTK=K0}
+ return{a,t,pen:pen+((x&&x.pen)||0),dom:ACTDOM[k]}}
+/* the odds an act's own roll will use, for display: ACT[k].o evaluated inside actCtx (then the one odds cap oddsCl) */
+function actOdds(a,t,k,x){const A2=ACT[k];if(!A2||typeof A2.o!=="function")return null;const X0=ACTX,K0=ACTK;ACTK=k;ACTX=actCtx(a,t,k,undefined,x);
+ try{const o=A2.o(a,t);return o==null||o>=100?o:oddsCl(Math.round(o))}finally{ACTX=X0;ACTK=K0}}
+/* SHOWN ODDS FROZEN ACROSS THE TIME SPEND (review/shown-odds-r2, ORDER ROOT-52 18/11 15:30Z): a do-path that pays khắc (spend) and
+   THEN rolls must roll the odds she saw. What runs inside the spend (khắc moves, roster / weather resync, world events) can move
+   the odds between the card and the roll. ONE way for every such path: read the shown odds BEFORE the spend, then run the act
+   inside fzRun(o,k,fn); the act's own success roll is aRoll(o,a) and takes those frozen odds instead of re-reading them (every own roll of
+   that one act: e.g. batnat rolls twice on the same odds).
+   runAct(S,…,k) moves them into its ACTX (ACTX.fz) when the key matches. Effects still happen after the spend; NPC rolls and every
+   roll outside fzRun are unchanged (aRoll = roll there). dev/test/shown-odds-spend.test.js. */
+let ACTFZ=null;
+function fzRun(o,k,fn){const z0=ACTFZ;ACTFZ=o==null?null:{o:Math.round(o),k:k||null};try{return fn()}finally{ACTFZ=z0}}
+/* an act's OWN success roll (side rolls — caught, a servant refuses, confess, punish — stay roll()); a = the actor when known */
+function aOdd(o,a){/* the odds an act's own success uses: the frozen shown odds inside fzRun / runAct(ACTX.fz), else o (also for weights, e.g. jagstf2 stf2Bribe) */
+ if(ACTX&&ACTX.fz!=null&&(a===undefined||a===ACTX.a))return ACTX.fz;
+ if(ACTFZ&&(a===undefined||a===S)&&(!ACTX||!ACTX.a||ACTX.a===S))return ACTFZ.o;
+ return o}
+function aRoll(o,a){const z=aOdd(o,a);return z>=100||roll(z)}
+function runAct(a,t,k,extra){const A2=ACT[k];if(!A2)return"";const sent=!together(a,t)&&!ACT_NOSEND.includes(k);const where=together(a,t)?placeName(whereOf(a)):"";
  if(sameHouse(a,t)&&k!=="accuse")return a===S?"Người cùng cung, ngươi không thể ra tay hay lấy lòng. ":"";
- const sv=sent?bestSent(a):null;ACTX={a,t,pen:sent?sentPen(sv)-(sv?srk(sv)*3:0):0,dom:ACTDOM[k]};let r="";try{r=A2.f(a,t,extra)}finally{ACTX={a:null,pen:0}}
+ const sv=sent?bestSent(a):null;ACTX=actCtx(a,t,k,sv);if(a===S&&ACTFZ&&(!ACTFZ.k||ACTFZ.k===k)){ACTX.fz=ACTFZ.o;ACTFZ=null}/* the odds she saw (fzRun) */let r="";try{r=A2.f(a,t,extra)}finally{ACTX={a:null,pen:0}}
  const harm=!["ally","gift","spy"].includes(k);
  if(sent&&sv&&!/bị lộ|bị bắt|phát giác|chặn kịp|từ chối/.test(r))servMerit(sv,2);if(sent&&harm&&roll(confessRisk(sv))){const n=evA(t,a,BAL.eff.j9.evN);r+=`${sv?sv.name:"Kẻ"} được ${NM(a)} sai đi bị bắt, khai ra chủ${n?`: ${NM(t)} nắm thêm ${balAb(BAL.eff.j9.evN)} chứng cứ`:""}. `+servCaught(a,sv)}
  if(sent&&sv)r=r.replace(/\(sai người đi\)/,"");
@@ -66,7 +92,7 @@ function topicOpts(v){const f=chatF(v),g=n=>Math.max(1,Math.round(n*f)),third=li
 /* harms that need the place: food served, the lotus pond, her palace while she is away, overhearing */
 const FOOD=["kn","tn","home","dtd"];
 function placeHarms(v,k){const H=[];if(sameHouse(S,v))return H;
- const act=(key2,n,x)=>{const a=ACT[key2];if(a&&a.ok(S,v))H.push({n,o:a.o?a.o(S,v):100,act:1,x:[a.x||"",fmt(a.c)].filter(Boolean).join(" · "),run:()=>runAct(S,v,key2)})};
+ const act=(key2,n,x)=>{const a=ACT[key2];if(a&&a.ok(S,v))H.push({n,o:a.o?actOdds(S,v,key2):100,act:1,x:[a.x||"",fmt(a.c)].filter(Boolean).join(" · "),run:()=>runAct(S,v,key2)})};
  act("spy","Dò la");act("rumor","Tung tin đồn");
  if(FOOD.includes(k)||k[0]==="r"){act("poison","Bỏ độc vào trà nàng");act("musk","Bỏ xạ hương vào thuốc nàng")}
  if(k==="vuon"){H.push({n:"Đẩy nàng xuống hồ sen",o:odA(S,40+S.tamco/4),act:1,x:"Đức -12 · lộ: bị phạt",run:()=>pushPond(S,v)});act("pond","Đẩy con nàng xuống hồ")}
@@ -74,11 +100,11 @@ function placeHarms(v,k){const H=[];if(sameHouse(S,v))return H;
  act("frame","Vu oan");act("vp","Tố vượt phẩm");act("xx","Tố xa xỉ");
  return H}
 function pushPond(a,t){ap(a,{duc:-12});a.schemes=(a.schemes||0)+1;const c=caught(a,t,false,"đẩy "+NM(t)+" xuống hồ sen");if(c)return c;
- if(roll(odA(a,40+a.tamco/4))){ap(t,{suc:-25});if(t.preg&&!t.fake&&roll(60)){t.preg=0;t.hidden=false}relAdd(a,t,BAL.eff.j9.pushPond);return (t===S?"<span class=\"r\">Ngươi bị đẩy xuống hồ sen</span>":`${t.name} trượt chân rơi xuống hồ sen`)+`, ướt sũng, nhiễm lạnh. Sức ${balSg(BAL.eff.j9.pushPond_2)}${t.preg===0?"":""}. `+dieIf(t,"nhiễm lạnh mà mất")}
+ if(aRoll(odA(a,40+a.tamco/4),a)){ap(t,{suc:-25});if(t.preg&&!t.fake&&roll(60)){t.preg=0;t.hidden=false}relAdd(a,t,BAL.eff.j9.pushPond);return (t===S?"<span class=\"r\">Ngươi bị đẩy xuống hồ sen</span>":`${t.name} trượt chân rơi xuống hồ sen`)+`, ướt sũng, nhiễm lạnh. Sức ${balSg(BAL.eff.j9.pushPond_2)}${t.preg===0?"":""}. `+dieIf(t,"nhiễm lạnh mà mất")}
  ap(a,{danh:-8});relAdd(a,t,BAL.eff.j9.pushPond_2);punish(a,"xô ngã phi tần",2);return `<span class="r">${NMc(a)} xô ${NM(t)} bị người thấy.</span> `}
-function trip(a,t){ap(a,{duc:-4});if(roll(odA(a,50+a.tamco/5))){ap(t,{danh:BAL.eff.j9.danhTrip});let r=`${NMc(t)} vấp ngã giữa chốn đông người. Danh ${balSg(BAL.eff.j9.danhTrip)}. `;if(t.preg&&!t.fake&&roll(25)){t.preg=0;t.hidden=false;ap(t,{suc:-15});r+=`<span class="r">${NMc(t)} động thai.</span> `}relAdd(a,t,BAL.eff.j9.trip);return r}
+function trip(a,t){ap(a,{duc:-4});if(aRoll(odA(a,50+a.tamco/5),a)){ap(t,{danh:BAL.eff.j9.danhTrip});let r=`${NMc(t)} vấp ngã giữa chốn đông người. Danh ${balSg(BAL.eff.j9.danhTrip)}. `;if(t.preg&&!t.fake&&roll(25)){t.preg=0;t.hidden=false;ap(t,{suc:-15});r+=`<span class="r">${NMc(t)} động thai.</span> `}relAdd(a,t,BAL.eff.j9.trip);return r}
  relAdd(a,t,BAL.eff.j9.trip_2);evA(t,a,BAL.eff.j9.evTrip);return `${NMc(t)} thấy rõ ${NM(a)} ngáng chân. `}
-function overhear(k){const here=liveRivals(true).filter(v=>whereOf(v)===k);if(here.length<2)return"";const v=pick(here);if(roll(od(BAL.ag.wit.hear+eyes(S)*BAL.ag.wit.mat))){return evA(S,v,BAL.eff.j9.evOverhear)?`Ngươi nghe lén ${v.name} nói chuyện: chứng cứ ${balSg(BAL.eff.j9.evOverhear)}.`:`Ngươi nghe lén ${v.name} nói chuyện: không có gì sai trái, chỉ biết ${harmTxt(v)}.`}return "Không nghe được gì."}
+function overhear(k){const here=liveRivals(true).filter(v=>whereOf(v)===k);if(here.length<2)return"";const v=pick(here);if(aRoll(od(BAL.ag.wit.hear+eyes(S)*BAL.ag.wit.mat))){return evA(S,v,BAL.eff.j9.evOverhear)?`Ngươi nghe lén ${v.name} nói chuyện: chứng cứ ${balSg(BAL.eff.j9.evOverhear)}.`:`Ngươi nghe lén ${v.name} nói chuyện: không có gì sai trái, chỉ biết ${harmTxt(v)}.`}return "Không nghe được gì."}
 
 /* the palace map */
 const MAPL=[["thu","dtd","tn"],["kn","vuon","ksp"],["tyv","lc","home"]];

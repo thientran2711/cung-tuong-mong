@@ -17,7 +17,7 @@ const jfx=fs.readFileSync(path.join(B,'jfx.js'),'utf8');ok(/W\("kmDiff"/.test(jf
  await p.goto(BASE,{waitUntil:'domcontentloaded'});await p.waitForFunction(()=>typeof start==='function'&&window.kitGain,null,{timeout:180000});
  await p.waitForFunction(()=>!document.getElementById('kload')||(window.KLOAD&&['done','skipped','all'].includes(KLOAD.phase)),null,{timeout:240000}).catch(()=>{});await sleep(1500);
  const R=await p.evaluate(async()=>{const wait=t=>new Promise(o=>setTimeout(o,t));
-  document.querySelectorAll('#kload').forEach(e=>e.remove());SLOT=3;document.getElementById('title').hidden=true;for(let i=0;i<60;i++){start();if(!isSrv())break}Q.length=0;document.getElementById('modal').hidden=true;
+  document.querySelectorAll('#kload').forEach(e=>e.remove());SLOT=3;document.getElementById('title').hidden=true;for(let i=0;i<60;i++){try{nlNew()}catch(e){}start();if(!isSrv())break}Q.length=0;document.getElementById('modal').hidden=true;
   document.querySelectorAll('[id^=kroul],#dawn,.kmov').forEach(e=>e.remove());render();await wait(300);
   /* hook S.inv: record every add, whoever makes it */
   const adds=[];const hook=()=>{const a=S.inv;if(a.__h)return;const P=a.push,U=a.unshift;Object.defineProperty(a,'__h',{value:1});a.push=function(...x){adds.push(...x);return P.apply(this,x)};a.unshift=function(...x){adds.push(...x);return U.apply(this,x)}};hook();

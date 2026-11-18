@@ -11,7 +11,7 @@ const sleep=t=>new Promise(r=>setTimeout(r,t));
   await p.goto(URL,{waitUntil:'domcontentloaded'});await p.waitForFunction(()=>typeof start==='function'&&typeof render==='function');await sleep(2500);
   await p.addStyleTag({content:'#kroul{display:none!important}'});
   const r=await p.evaluate(()=>{const kl=document.getElementById('kload');if(kl)kl.remove();SLOT=3;document.getElementById('title').hidden=true;
-   for(let i=0;i<400;i++){start();if(!isSrv())break}Q.length=0;document.getElementById('modal').hidden=true;try{NLP=null}catch(e){}render();
+   for(let i=0;i<400;i++){try{nlNew()}catch(e){}start();if(!isSrv())break}Q.length=0;document.getElementById('modal').hidden=true;try{NLP=null}catch(e){}render();
    const o={mo:BAL.wx.gearMo};S.wx={n:"giông tố",k:"storm",f:3};S.rank=1;S.inv=S.inv||[];S.bac=200;
    const r0=wxRisk(S,{kieu:false});o.buy=buy(S,"aotoi");const e=S.inv[S.inv.length-1];o.stamp=[e.wxe,S.turn+BAL.wx.gearMo];
    const r1=wxRisk(S,{kieu:false});o.cold=[r0.cold,r1.cold];

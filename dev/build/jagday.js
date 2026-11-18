@@ -52,7 +52,7 @@ function agOptsG(p,N,need){const g=agGrp(p);let O=[];
  return O}
 function agWorld(p){try{return typeof window.worldPlanW==="function"?window.worldPlanW(p,agGrp(p)):null}catch(e){agdErr("world",e);return null}}
 /* LIFE: the feeling she wakes with (jemo p.emo, strong enough) leans what she wants today: BAL.ag.day.mood.k[feeling] = {need: ×, _: × keeping her schedule} */
-function agMoodF(p){try{const e=p&&typeof p==="object"&&p.emo;const M=BAL.ag.day.mood;if(!e||!(e.v>=M.min))return{};return M.k[e.k]||{}}catch(e){return{}}}
+function agMoodF(p){try{const e=p&&typeof p==="object"&&p.emo;const M=BAL.ag.day.mood;if(!e||!(e.v>=M.min))return{};/* FEELINGS-18: Buồn at the heavy level reads the old Đau khổ row; a new kind reads its group's row (jfeel) */let k=e.k;if(k==="buon"&&M.k.dau&&typeof feelLv==="function"&&feelLv(p,"buon")>=3)k="dau";else if(typeof feelIn==="function")k=feelIn(M.k,k);return M.k[k]||{}}catch(e){return{}}}
 function agTop(N){let b="",v=0;for(const n in N)if(N[n]>v){v=N[n];b=n}return b}
 /* one buổi of one person's plan: base place (the old schedule's weights) + what she wants + how */
 function agDrawB(p,id,b,base,W){const c=j95c(b);const slot={pl:base[0],a:base[1],t:base[2],why:base[3],k:null,need:null};

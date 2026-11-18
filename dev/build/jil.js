@@ -150,7 +150,7 @@ PEND.ilconf=pp=>{const x=ilFind(pp.u);if(!x||x.at!=="nvp"||x.why!=="conf"||x.own
 function ilShopTiles(){const I=ilS();return I.box.filter(x=>x.at==="mkt"&&x.shop&&(x.own==="me"||!ilAlive(ilP(x.own)))).map(x=>{const e=x.e,nm=ilNm(e);
  const info=(()=>{try{return typeof kitItemInfo==="function"?kitItemInfo(e):null}catch(z){return null}})()||{};const a=typeof itemArt==="function"?itemArt(e.k):null;
  const pr=Math.max(1,Math.round(ilVal(e)));const crafted=!!e.wk;
- return{k:crafted?"il"+e.iu:e.k,crafted,src:info.src||(typeof kitItemSrc==="function"?kitItemSrc(e.k,""):""),src512:a&&a.src512||"",name:nm,sub:x.own==="me"?"Đồ cũ của ta":"Đồ cũ",
+ return{k:crafted?"il"+e.iu:e.k,crafted,cat:typeof kitShopCat==="function"?kitShopCat(e.k,crafted):"tap",src:info.src||(typeof kitItemSrc==="function"?kitItemSrc(e.k,""):""),src512:a&&a.src512||"",name:nm,sub:x.own==="me"?"Đồ cũ của ta":"Đồ cũ",
   grade:info.grade!=null?info.grade|0:(a?a.grade|0:0),lux:0,price:pr,eff:crafted?"tự tay làm":(typeof kitShopEff==="function"?kitShopEff(e.k):""),rows:crafted?"":(typeof kitItemRows==="function"&&IT[e.k]?kitItemRows(e.k):""),
   stock:1,have:()=>0,onBuy:()=>{if(S.bac<pr||ilS().box.indexOf(x)<0)return;apply({bac:-pr});ilTake(x,S,"mua lại");log(`Mua lại ${nm}. Bạc -${pr}`)}}})}
 (function(){if(typeof kitShop!=="function")return;const k0=kitShop;kitShop=function(o){try{if(o&&o.key==="nvp"&&Array.isArray(o.items))o.items=o.items.concat(ilShopTiles())}catch(e){console.error("ilShop",e)}return k0.apply(this,arguments)}})();

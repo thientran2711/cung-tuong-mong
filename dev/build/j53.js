@@ -150,7 +150,7 @@ function ktRun(e,ch){const E=KTE[e];if(!E||!S)return;S.kt53t=S.turn;const L=ktLi
  const top=res.filter(x=>x.r==="ex").sort((a,b)=>b.s-a.s)[0];let rev="";
  for(const x of res){const p=x.v||S,g=Object.assign({},KTG[x.r]);if(x===top)for(const kk in KTG.top)g[kk]=(g[kk]||0)+KTG.top[kk];ktApply(x.k,p,g);x.g=g;
   x.k.lt={n:E.n,y:S.year,r:x.r,top:x===top?1:0};if(!x.v&&x.r!=="skip"&&npwPick(["tell","quiet"],y=>{const B=BAL.ag.why.g2b.rev;return y==="tell"?B.base+(x.k.tut||0)*B.tut:B.quiet})==="tell")rev+=ktReveal(x.k,"Thầy dạy tâu riêng:")}
- if(top&&!top.v)ghenAll(BAL.ghen.kidTop);
+ if(top&&!top.v)ghenAll(BAL.ghen.kidTop,"con ngươi hơn con người khác");
  const RW={ex:"Xuất sắc",ok:"Khá",poor:"Kém",skip:"Ở nhà"};
  const eff=x=>{const g=x.g,o=[];if(g.fond)o.push(`<span class="${g.fond>0?"g":"r"}">Hoàng thượng thương con ${g.fond>0?"+":""}${g.fond}</span>`);if(!x.v&&g.sung)o.push(`<span class="g">Sủng +${g.sung}</span>`);if(!x.v&&g.danh)o.push(`<span class="${g.danh>0?"g":"r"}">Danh ${g.danh>0?"+":""}${g.danh}</span>`);return o.join(" · ")};
  res.sort((a,b)=>b.s-a.s);const shown=res.filter(x=>!x.v||x===top||(x.r==="ex"&&res.indexOf(x)<4));const hid=res.filter(x=>!shown.includes(x));
@@ -204,8 +204,8 @@ function ktAct(a,name,t){const k=S&&S.kids.find(x=>x.name===name&&x.alive);if(!k
   log(`Tự tay ${a==="tv"?"dạy":"dạy lễ nghi cho"} ${k.name}${a==="tv"?" học chữ":""}: ${a==="tv"?"Văn":"Đức"} con +${ktG(g)}. ${roll(25)?ktReveal(k,"Dạy con, ngươi thấy"):""}`)}
  else if(a==="tut"){t=+t;if(k.age<6||!can(1)||(t&&S.bac<KT.fee[t]*2)||(k.tut===t&&(t<3||!k.fav)))return;if(t)spend(1);k.tut=t;k.fav=0;title=t?`Mời ${TUT[t]}`:"Cho con học chung";
   log(t?`Mời ${TUTD[t]} dạy ${k.name}: học phí Bạc ${KT.fee[t]} mỗi tháng, trả cùng bổng lộc.`:`${k.name} về học lớp chung của Thượng thư phòng, không tốn học phí.`)}
- else if(a==="fav"){if(k.age<6||!can(2)||S.out||(k.tut===3&&k.fav))return;spend(2);apply({sung:-4});title="Xin Hoàng thượng cử Đại học sĩ";
-  if(roll(od(KT.favO+S.sung/2))){k.tut=3;k.fav=1;log(`Hoàng thượng chuẩn tấu, cử một Đại học sĩ dạy ${k.name}; học phí chỉ Bạc ${KT.feeFav} mỗi tháng.`);ok=true}
+ else if(a==="fav"){if(k.age<6||!can(2)||S.out||(k.tut===3&&k.fav))return;const fo=od(KT.favO+S.sung/2);/* the odds on the card, read before the spend and the Sủng cost (shown-odds r2-rv) */spend(2);apply({sung:-4});title="Xin Hoàng thượng cử Đại học sĩ";
+  if(roll(fo)){k.tut=3;k.fav=1;log(`Hoàng thượng chuẩn tấu, cử một Đại học sĩ dạy ${k.name}; học phí chỉ Bạc ${KT.feeFav} mỗi tháng.`);ok=true}
   else{log(`Hoàng thượng không cho: “Thượng thư phòng đã có thầy.” Xin không thành.`);ok=false}}
  else if(a==="vo"){t=+t;if(k.age<6||!can(t?1:0)||(t&&S.bac<KT.feeVo*2))return;if(t)spend(1);k.vt=t;title=t?"Mời thầy cưỡi ngựa bắn cung":"Thôi học võ";
   log(t?`Mời thầy cưỡi ngựa bắn cung dạy ${k.name}: Bạc ${KT.feeVo} mỗi tháng.`:`${k.name} thôi học võ riêng.`)}

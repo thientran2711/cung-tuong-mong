@@ -17,7 +17,7 @@ const LIVE='https://thientran2711.'+'github.io/cung-tuong-mong/';const html=fs.r
   await p.goto(LIVE,{waitUntil:'domcontentloaded'});await p.addStyleTag({content:'#kroul,#kroulw,.kroul{display:none!important}'}).catch(()=>{});
   await p.waitForFunction(()=>typeof start==='function');await p.waitForTimeout(2500);
   await p.evaluate(()=>{const kl=document.getElementById('kload');if(kl)kl.remove();try{localStorage.clear()}catch(e){}SLOT=3;document.getElementById('title').hidden=true;
-   for(let i=0;i<60;i++){start();if(!isSrv())break}Q.length=0;document.getElementById("modal").hidden=true;try{NLP=null}catch(e){}render()});
+   for(let i=0;i<60;i++){try{nlNew()}catch(e){}start();if(!isSrv())break}Q.length=0;document.getElementById("modal").hidden=true;try{NLP=null}catch(e){}render()});
   await p.waitForTimeout(1500);
   const res=await p.evaluate(async TURNS=>{const sleep=t=>new Promise(r=>setTimeout(r,t));const out=[];let shots=0;
    ['kroul','kroulw','kload'].forEach(i=>{const e=document.getElementById(i);if(e)e.remove()});

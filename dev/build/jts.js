@@ -229,12 +229,12 @@ function tsLeHost(p,to){const me=p===S;if(me){const G=tsGuests(S).filter(x=>x!==
   const W=G.map(v=>[v,tsWish(v,S)]);const warm=W.filter(x=>x[1][0]==="thân"),cold=W.filter(x=>x[1][0]==="gượng"),pol=W.filter(x=>x[1][0]==="lễ");
   const lines=warm.slice(0,2).map(([v,w])=>({who:v,text:`${kitName(v)} ${w[1]}.`})).concat(cold.slice(0,2).map(([v,w])=>({who:v,text:`${kitName(v)} ${w[1]}.`})));
   if(pol.length)lines.push(`${pol.length} vị khác chúc theo lễ, lời lẽ chừng mực.`);if(warm.length+cold.length>4)lines.push(`Còn ${warm.length+cold.length-4} vị nữa, xem trong Sổ ghi.`);
-  const gifts=G.filter(v=>aff(v,S)>=30&&v.inv&&v.inv.length).slice(0,2);const gl=[];for(const v of gifts){const k=pick(["tuithom","demgam","sonphan","huongtram"]);S.inv.push({k,from:v.id});gl.push(`${v.name}: ${itm(k).n}`)}
+  const gifts=G.filter(v=>aff(v,S)>=30&&v.inv&&v.inv.length).slice(0,2);const gl=[];for(const v of gifts){const k=pick(["tuithom","demgam","lxson0","huongtram"]);S.inv.push({k,from:v.id});try{if(typeof lxFix==="function")lxFix(S)}catch(e){}gl.push(`${v.name}: ${itm(k).n}`)}
   const n=G.length,hi=8*n,lo=4*n;const s=tsS();s.leN=(s.leN||0)+1;
   tsPanel({t:`Lễ tấn phong · ${RANKS[to].n}`,who:pMe(),h:`<p>Thánh chỉ vừa tuyên, ${n} vị phi tần sang cung ngươi dự lễ chúc mừng.</p>${tsFacts(lines)}${gl.length?tsRows([["Quà mừng",gl.join(" · "),"g"]]):""}<p class="past">Theo lệ, chủ lễ phát lì xì cho khách. Phát hậu thì lòng người êm; không phát dễ mang tiếng keo kiệt.</p>`,
    opts:[tsOpt({n:"Phát lì xì hậu",fx:{bac:-hi},need:[tsNeedBac(hi)],duoc:[`${n} vị khách bớt ghen 6`,"khách: thiện cảm +4",`Danh ${balSg(BAL.eff.jts.danhGo)}`],go:()=>{G.forEach(v=>{v.ghen=cl((v.ghen||0)-6,0,100);tsAff(v,4)});apply({danh:BAL.eff.jts.danhGo});log(`Lễ tấn phong: ngươi phát lì xì hậu cho ${n} vị khách.`)}}),
     tsOpt({n:"Phát lì xì vừa phải",fx:{bac:-lo},need:[tsNeedBac(lo)],duoc:[`${n} vị khách bớt ghen 3`,"khách: thiện cảm +2"],go:()=>{G.forEach(v=>{v.ghen=cl((v.ghen||0)-3,0,100);tsAff(v,2)});log(`Lễ tấn phong: ngươi phát lì xì cho ${n} vị khách.`)}}),
-    tsOpt({n:"Không phát",mat:[`Danh ${balSg(BAL.eff.jts.danhGo_2)}`,"người đang ghen: ghen +3 (chê keo kiệt)"],go:()=>{apply({danh:BAL.eff.jts.danhGo_2});G.forEach(v=>{if((v.ghen||0)>=40)v.ghen=cl(v.ghen+3,0,100)});log("Lễ tấn phong: ngươi không phát lì xì; có người xì xào chê keo kiệt.")}})]});
+    tsOpt({n:"Không phát",mat:[`Danh ${balSg(BAL.eff.jts.danhGo_2)}`,"người đang ghen: ghen +3 (chê keo kiệt)"],go:()=>{apply({danh:BAL.eff.jts.danhGo_2});G.forEach(v=>{if((v.ghen||0)>=40)ghenUp(v,3,"chê ngươi keo kiệt ngày tấn phong",S)});log("Lễ tấn phong: ngươi không phát lì xì; có người xì xào chê keo kiệt.")}})]});
   return}
  /* an NPC host: the same rite, she is a guest */
  if(!tsOn()||S.out||S.confined)return;const s=tsS();if(s.leWk===wk())return;s.leWk=wk();const [k]=tsWish(S,p);
@@ -328,15 +328,15 @@ function tsDenNpc(){const f=tsDenFest();if(!f)return;const s=tsS();const key=`${
    Xa xỉ inside the range (below = quá giản dị, above = phô trương: Đức −1, above her allowance = vượt phẩm: Danh −3) — chasing the
    highest number no longer wins. An empty Cài tóc / Áo slot = what she wears now. */
 const TS_THEME={thanh:{n:"Thanh nhã",d:"ngọc bích, lụa mềm, hương thanh",r:[40,100],tags:["tramngoc","vongngoc","luahang","huongtram","tuithom"]},
- phu:{n:"Phú quý",d:"vàng, gấm, trâm diêu",r:[130,230],tags:["boodieu","vongvang","gamto","gamvang","tramphuong","sonphan"]},
- huong:{n:"Hương sắc",d:"son phấn, túi thơm, lụa",r:[60,130],tags:["sonphan","tuithom","luahang","huongtram","tramngoc"]},
- xuan:{n:"Xuân sắc",d:"hoa đào, hoa mai, lụa hồng",r:[50,120],tags:["luahang","tuithom","sonphan"]},
+ phu:{n:"Phú quý",d:"vàng, gấm, trâm diêu",r:[130,230],tags:["boodieu","vongvang","gamto","gamvang","tramphuong","lxson3","lxmay3"]},
+ huong:{n:"Hương sắc",d:"son phấn, túi thơm, lụa",r:[60,130],tags:["lxson1","lxma1","tuithom","luahang","huongtram","tramngoc"]},
+ xuan:{n:"Xuân sắc",d:"hoa đào, hoa mai, lụa hồng",r:[50,120],tags:["luahang","tuithom","lxma0","lxma2"]},
  co:{n:"Cổ phong",d:"trâm gỗ, đồng, hoa văn mây hạc",r:[70,150],tags:["vongngoc","huongtram"]}};
 try{if(typeof luxThemeTags==="function")luxThemeTags(TS_THEME)}catch(e){}
 /* items added by modules loaded after jts (e.g. jkc's khuê các pieces) or at run time get their tags too: re-tag whenever the item list grew */
 let tsTagN=0;function tsTagsFresh(){try{if(typeof luxThemeTags!=="function")return;const n=Object.keys(IT).length+(typeof WD_ITEMS==="object"?Object.keys(WD_ITEMS).length:0);if(n!==tsTagN){tsTagN=n;luxThemeTags(TS_THEME)}}catch(e){}}
 if(typeof kidThemes==="function"){const kt0=kidThemes;kidThemes=function(){tsTagsFresh();return kt0.apply(this,arguments)};window.kidThemes=kidThemes}
-const TS_SLOT=[["hair","Cài tóc",k=>IT[k]&&(itm(k).sl==="hair"||itm(k).wsl==="tram")],["wrist","Đeo tay",k=>IT[k]&&itm(k).sl==="wrist"],["ao","Áo",k=>IT[k]&&(itm(k).dr||itm(k).wsl==="y")&&k!=="y_tang"],["kem","Hương, phấn",k=>["sonphan","tuithom","huongtram"].includes(k)]];
+const TS_SLOT=[["hair","Cài tóc",k=>IT[k]&&(itm(k).sl==="hair"||itm(k).wsl==="tram")],["wrist","Đeo tay",k=>IT[k]&&itm(k).sl==="wrist"],["ao","Áo",k=>IT[k]&&(itm(k).dr||itm(k).wsl==="y")&&k!=="y_tang"],["kem","Hương, phấn",k=>["tuithom","huongtram"].includes(k)||(typeof lxOf==="function"&&!!lxOf(k))]];
 function tsDressHost(){return queenP()&&queenP()!==S?queenP():null}
 function tsLuxK(k){return typeof luxPiece==="function"?luxPiece(k):Math.round((IT[k]&&itm(k).pr||0)/5)}
 /* an empty Cài tóc / Áo slot = what she wears now (j92 wardrobe) */

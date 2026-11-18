@@ -4,7 +4,7 @@
    Metrics per tab (CPU throttled 4x, same seeded life): tapMs = click -> two animation frames later, renderMs = render() call, longMs = long-task total over the tap. */
 const {chromium}=require('playwright');const [,,A,B,SZ='755x1000@2',REPS='4']=process.argv;const sleep=t=>new Promise(r=>setTimeout(r,t));
 const SEED=()=>{let a=20261116;Math.random=function(){a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}};
-const LIFE=()=>{try{localStorage.clear()}catch(e){}OPT.fxon=false;SLOT=3;document.getElementById('title').hidden=true;for(let i=0;i<200;i++){start();if(!isSrv()&&!(window.isKc&&isKc()))break}
+const LIFE=()=>{try{localStorage.clear()}catch(e){}OPT.fxon=false;SLOT=3;document.getElementById('title').hidden=true;for(let i=0;i<200;i++){try{nlNew()}catch(e){}start();if(!isSrv()&&!(window.isKc&&isKc()))break}
  window.CLEAN=()=>{document.querySelectorAll('[id^=kroul],#dawn,#kload,#kpodov,.kmov').forEach(e=>e.remove());Q.length=0;const m=document.getElementById('modal');if(m)m.hidden=true;render()};CLEAN();return S.name};
 async function run(b,base,W,H,D,reps){const c=await b.newContext({viewport:{width:W,height:H},deviceScaleFactor:D,serviceWorkers:'block',hasTouch:true,isMobile:W<1100});await c.addInitScript(SEED);
  const p=await c.newPage();const errs=[];p.on('pageerror',e=>errs.push(e.message));await p.goto(base.replace(/\/?$/,'/')+'index.html?khost=1',{waitUntil:'commit'});

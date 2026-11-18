@@ -37,7 +37,7 @@ function kitParse(str){str=String(str||"").trim();if(!str)return"";const segs=st
 function kemCol(h){return String(h).replace(/<span class="ef ([gn])">([\s\S]*?)<\/span>/g,(m,c,x)=>{const p=x.replace(/<[^>]+>/g,"");return /\+\s?\d/.test(p)&&kcls(p)==="g"?`<span class="ef g">${x}</span>`:`<span class="ef r">${x}</span>`})}
 /* the act card */
 function cardH(a,i){const poor=!a.lock&&!canPay(a),o=oddsOf(a),capd=oddsCapped(a),sft=capd||agSoft(o+lotB(S,a.dom));/* AG soft fail at the cap: one rule with runOpt */const dis=!can(cardCost(a))||a.done||poor||a.lock||S.dead||(a.b!=null&&(S.buoi||0)!==a.b);const rolled=o<100&&!a.lock;
- const ow=rolled?(capd?capW():word(oddsCl(o+lotB(S,a.dom)))+lotTag(a.dom,o)):"";
+ const ow=rolled?(capd?capW():word(optOdds(a))+lotTag(a.dom,o)):"";
  return `<button class="card kcard" data-i="${i}" ${dis?"disabled":""}><h4>${a.n}</h4><span class="ktime">${pips(cardCost(a))} ${cardCost(a)} khắc${a.b!=null?` · Chỉ ${BUOI[a.b].toLowerCase()}`:""}</span><p>${a.t||""}</p><span class="krow">${oddsChip(ow)}</span>
  <span class="kgrid"><span class="kl">Tốn</span><span>${effList([fmt(a.c)||"không",ducWarnTxt(a.c)])}</span><span class="kl">Thành</span><span>${effList([fmt(a.w||{}),String(a.x||"").split(/ · kèm: /)[0]],"g")}</span>${/ · kèm: /.test(a.x||"")?`<span class="kl">Kèm</span><span>${kemCol(effList(String(a.x).split(/ · kèm: /)[1],"r"))}</span>`:""}${rolled?`<span class="kl">Bại</span><span>${effList(sft?kitSoftW(a.c):payWinFail(a,fmt(a.l||{}))||"không mất gì","r")}</span>`:""}</span></button>`}
 /* route the older line builders through the kit */

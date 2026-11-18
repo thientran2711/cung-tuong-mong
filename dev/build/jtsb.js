@@ -51,7 +51,7 @@ function tsbFireO(a,t){return oddsCl(Math.min(Math.round(odA(a,46+(a.tamco||0)/5
 /* ---------------- 1. Thả thú dữ (Hại nặng) ---------------- */
 A("thathu","Thả thú dữ làm hại dung nhan",{c:{bac:-BAL.actBac.thathu,duc:-6},ok:(a,t)=>(a.bac||0)>=BAL.actBac.thathu&&!t.scar&&!t.out,o:(a,t)=>tsbThuO(a,t),x:"Sắc nàng giảm mạnh tới khi lành, Sủng và Danh giảm",
  f:(a,t)=>{ap(a,{duc:-6});/* review ag-all-2 r2 A5: the keeper's bạc only when the beast is loosed (econPayWin below) */a.schemes=(a.schemes||0)+1;const c=caught(a,t,false,"mua chuộc người giữ thú thả thú dữ vào cung "+NM(t));if(c)return c;
-  if(!roll(tsbThuO(a,t))){const e=roll(50);if(e)/*evok: thathu act*/evA(t,a,BAL.eff.jtsb.evF);return `Con thú dữ lọt vào cung ${NM(t)} bị người canh chặn kịp, đuổi đi trước khi kịp gây chuyện${e?`; kẻ thả thú bị bắt, khai là người của ${NM(a)} (chứng cứ ${balSg(BAL.eff.jtsb.evF)})`:""}. `}
+  if(!aRoll(tsbThuO(a,t),a)){const e=roll(50);if(e)/*evok: thathu act*/evA(t,a,BAL.eff.jtsb.evF);return `Con thú dữ lọt vào cung ${NM(t)} bị người canh chặn kịp, đuổi đi trước khi kịp gây chuyện${e?`; kẻ thả thú bị bắt, khai là người của ${NM(a)} (chứng cứ ${balSg(BAL.eff.jtsb.evF)})`:""}. `}
   econPayWin(a,"thathu",t,BAL.actBac.thathu);const sev=tsbSev();const L=tsbScar(t,sev,a);if(t===S){try{feedback("hit")}catch(e){}}
   return `<span class="r">Một con thú dữ không rõ từ đâu lọt vào cung ${NM(t)}, làm tổn dung nhan ${NM(t)} (hủy dung ${L.n}): Sắc -${L.d} tới khi lành, Sủng -${L.sung}, Danh -${L.danh}.</span> `}});
 AOUT.thathu=["nàng bị hủy dung (vết cào 1 đến 3 nét), Sắc giảm tới khi lành",`thú bị đuổi đi; nàng có thể nắm ${balAb(BAL.eff.jtsb.evF)} chứng cứ`];
@@ -71,7 +71,7 @@ function tsbItemSrc(e){try{const a=tsbItemArt(e);if(a&&a.src)return a.src;if(e.w
 function tsbBurn(p,n,cause){if((p.tsbSafe||0)>=tsbWk())return[];const L=tsbBurnable(p);const out=[];for(let i=0;i<n&&L.length;i++){const j=R(L.length);const [e]=L.splice(j,1);const ix=p.inv.indexOf(e);if(ix>=0){p.inv.splice(ix,1);out.push(tsbItemN(e));if(p===S)tsbLedger({what:tsbItemN(e),how:"cháy",cause})}}return out}
 A("phonghoa","Phóng hỏa kho đồ",{c:{bac:-BAL.actBac.phonghoa,duc:-8},ok:(a,t)=>(a.bac||0)>=BAL.actBac.phonghoa&&!t.out&&tsbBurnable(t).length>0,o:(a,t)=>tsbFireO(a,t),x:"đồ cháy được trong kho nàng bị thiêu (1-2 món)",
  f:(a,t)=>{ap(a,{bac:-BAL.actBac.phonghoa,duc:-8});a.schemes=(a.schemes||0)+1;const c=caught(a,t,false,"sai người phóng hỏa kho đồ của "+NM(t));if(c)return c;
-  if(!roll(tsbFireO(a,t))){const e=roll(50);if(e)/*evok: phonghoa act*/evA(t,a,BAL.eff.jtsb.evF_2);return `Lửa vừa bén ở kho đồ của ${NM(t)} đã được chặn kịp, không mất gì${e?`; kẻ phóng hỏa bị bắt, khai là người của ${NM(a)} (chứng cứ ${balSg(BAL.eff.jtsb.evF_2)})`:""}. `}
+  if(!aRoll(tsbFireO(a,t),a)){const e=roll(50);if(e)/*evok: phonghoa act*/evA(t,a,BAL.eff.jtsb.evF_2);return `Lửa vừa bén ở kho đồ của ${NM(t)} đã được chặn kịp, không mất gì${e?`; kẻ phóng hỏa bị bắt, khai là người của ${NM(a)} (chứng cứ ${balSg(BAL.eff.jtsb.evF_2)})`:""}. `}
   const lost=tsbBurn(t,1+(roll(35)?1:0),"có kẻ phóng hỏa (chưa rõ là ai)");t.tsbFire=(t.tsbFire||0)+1;
   if(!lost.length)return `Kho đồ của ${NM(t)} bén lửa nhưng đồ quý đã được cất chỗ khác; không mất gì. `;
   return `<span class="r">Đêm qua kho đồ của ${NM(t)} bốc cháy: mất ${lost.join(", ")}.</span> `}});
@@ -98,8 +98,8 @@ function tsbBulRec(a,t){t.tsbBul=t.tsbBul||{};const r=t.tsbBul[key(a)]=t.tsbBul[
 function tsbBulNpc(a,t,kind){/* an NPC target decides by the same odds (NPC rule) */const od=tsbBulO(a,t,kind==="uyhiep");/* success odds of the deed (BAL), allowed */const want=kind==="uyhiep"?null:((npcWhy("bulWant",{a,t})||{}).place||null);const want2=want&&want[0];const r=tsbBulRec(a,t);
 
  if(r.n>=2&&evG(t,a)>=1&&npcWhy("bulTell",{a,t})){const q=queenP();if(q&&q!==a&&q!==t){punish(a,"ức hiếp người dưới phẩm",1);affAdd(q,t,BAL.eff.jtsb.tsbBulNpc);return `${tsbCap(tsbNm(t))} bị ${tsbNm(a)} ép nộp của nhiều lần, đem chứng cứ trình Hoàng hậu: ${tsbNm(a)} bị quở phạt. `}}
- if(roll(od)){const n=tsbTake(a,t,want2,kind);if(kind==="uyhiep")evA(a,t,BAL.eff.jtsb.evTsbBulNpc);oanAdd(t,a,BAL.eff.jtsb.tsbBulNpc_2);return `${tsbCap(tsbNm(t))} sợ ${tsbNm(a)}, đành nộp ${n}. `}
- if(roll(od)){ap(t,{danh:BAL.eff.jtsb.danhTsbBulNpc,suc:BAL.eff.jtsb.sucTsbBulNpc});oanAdd(t,a,BAL.eff.jtsb.tsbBulNpc_3);return `${tsbCap(tsbNm(t))} không chịu nộp, bị ${tsbNm(a)} làm nhục giữa đường: Danh ${balSg(BAL.eff.jtsb.danhTsbBulNpc)}, Sức ${balSg(BAL.eff.jtsb.sucTsbBulNpc)}. `}
+ if(aRoll(od,a)){const n=tsbTake(a,t,want2,kind);if(kind==="uyhiep")evA(a,t,BAL.eff.jtsb.evTsbBulNpc);oanAdd(t,a,BAL.eff.jtsb.tsbBulNpc_2);return `${tsbCap(tsbNm(t))} sợ ${tsbNm(a)}, đành nộp ${n}. `}
+ if(aRoll(od,a)){ap(t,{danh:BAL.eff.jtsb.danhTsbBulNpc,suc:BAL.eff.jtsb.sucTsbBulNpc});oanAdd(t,a,BAL.eff.jtsb.tsbBulNpc_3);return `${tsbCap(tsbNm(t))} không chịu nộp, bị ${tsbNm(a)} làm nhục giữa đường: Danh ${balSg(BAL.eff.jtsb.danhTsbBulNpc)}, Sức ${balSg(BAL.eff.jtsb.sucTsbBulNpc)}. `}
  ap(a,{danh:-2});oanAdd(t,a,BAL.eff.jtsb.tsbBulNpc_4);evA(t,a,BAL.eff.jtsb.evTsbBulNpc_2);return `${tsbCap(tsbNm(t))} không chịu nộp của cho ${tsbNm(a)}, còn kể khắp nơi. `}
 
 /* ---------------- the planned harm: NPC -> anyone: scheduled with an omen (thathu, phonghoa) ---------------- */

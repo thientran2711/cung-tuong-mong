@@ -173,7 +173,7 @@ window.k61Gate=k61Gate;
    else{k61Meet(e,k==="emp"?"Nam nhân áo vàng chính là Hoàng thượng; ngươi vội quỳ xuống.":"Người ấy xưng danh.",2);popMsg=`<span class="g">Ngươi đã biết: đó là ${k61Title(e)}.</span>`}render()}return}
   const e=p&&k61VisEnt(p);const st0=e?k61St(e):3;const r=t0.apply(this,arguments);if(e&&st0===2&&S.visit&&(S.visit.tk||{})[popIdx])k61Know(e,"Trò chuyện thêm, ngươi hiểu người ấy hơn.",false,3);return r}}catch(x){console.error(x)}return t0.apply(this,arguments)}})();
 /* asking a servant (true answers only) */
-function k61Ask(k){const e=k61Ent(k);if(!e||!S||S.dead||Q.length||k61Named(e)||!can(1))return;spend(1);const o=od(BAL.odb.j61.odO+eyes(S)*8+((S.maid&&S.maid.loyal)||40)/5);
+function k61Ask(k){const e=k61Ent(k);if(!e||!S||S.dead||Q.length||k61Named(e)||!can(1))return;const o=od(BAL.odb.j61.odO+eyes(S)*8+((S.maid&&S.maid.loyal)||40)/5);/* read before the spend (shown-odds r2-rv) */spend(1);
  if(roll(o))k61Know(e,`${S.maid.name} thưa: "Đó là ${k61Title(e)}."`);else log(`${S.maid.name} cũng không biết ${k61Desc(e)} ấy là ai.`);render()}
 document.addEventListener("click",e=>{const b=e.target.closest("[data-k61]");if(!b||b.disabled)return;e.preventDefault();e.stopPropagation();if(b.dataset.k61==="ask")k61Ask(b.dataset.kk)},true);
 /* acts on a stranger need knowing her first */

@@ -47,7 +47,7 @@ function dbNeed(o,s){const L=[];const mx=srkMax(o,s);L.push({ok:srk(s)<mx,t:srk(
  L.push({ok:(s.loyal||0)>=BAL.dbLoyal,t:`Lòng ${s.loyal} (cần ${BAL.dbLoyal})`});L.push({ok:(s.mp||0)>=BAL.dbMerit,t:`Công lao ${s.mp||0} (cần ${BAL.dbMerit})`});return L}
 function dbDo(o,s,road,paid){const c=dbCost(s);const fav=road==="fav";/* D41: two roads of equal worth — bạc (lót tay) or favour (spFav, jpromsv) */
  const fv=fav&&typeof spFav==="function"?spFav(o,s):null;if(!paid&&(fav?!fv||!fv.ok:(o.bac||0)<c))return null;if(!dbNeed(o,s).every(x=>x.ok))return null;
- if(!paid&&fav)spPayFav(o,fv);/* review ag-all-2 r2 A5: the lót tay bạc only when Nội vụ phủ approves (OD 17/11 ~17:10Z (1)); she must hold it (the gate above / tsNeedBac) */const ok=roll(dbOdds(o,s));if(ok&&!fav)ap(o,{bac:-Math.min(c,Math.max(0,o.bac||0))});const nm=s.name;const r0=srk(s);
+ if(!paid&&fav)spPayFav(o,fv);/* review ag-all-2 r2 A5: the lót tay bạc only when Nội vụ phủ approves (OD 17/11 ~17:10Z (1)); she must hold it (the gate above / tsNeedBac) */const ok=aRoll(dbOdds(o,s),o);if(ok&&!fav)ap(o,{bac:-Math.min(c,Math.max(0,o.bac||0))});const nm=s.name;const r0=srk(s);
  const others=(o.staff||[]).filter(x=>x!==s);
  if(ok){s.rk=srk(s)+1;s.mp=0;s.loyal=cl(s.loyal+BAL.dbGain,0,100);others.forEach(x=>x.loyal=cl(x.loyal-BAL.dbEnvy,0,100));
   if(o===S)log(`Ngươi đề bạt ${nm} lên ${srkName(s)}${fav&&fv?` (${fv.how})`:""}: lòng +${BAL.dbGain}; kẻ hầu khác ghen tị (lòng -${BAL.dbEnvy}).`);try{if(typeof spAfter==="function")spAfter(o,s,r0)}catch(e){console.error(e)}return true}
@@ -60,7 +60,7 @@ function dbDo(o,s,road,paid){const c=dbCost(s);const fav=road==="fav";/* D41: tw
  return B.concat([btn.replace("<button ",`<button data-kneed="${encodeURIComponent(JSON.stringify(N))}" `)])}catch(e){console.error(e);return B}}})();
 document.addEventListener("click",e=>{const b=e.target.closest("[data-dbsv]");if(!b||b.disabled||!S||S.dead||Q.length)return;e.stopPropagation();const s=servById(+b.dataset.dbsv);if(!s||!can(1))return;
  if(typeof spOpen==="function"){spOpen(s);return}/* D41: the two-road card (jpromsv) */
- const bf=rsnap();spend(1);const r=dbDo(S,s);if(r==null)return;try{resultShow(`Đề bạt ${s.name}`,bf,r)}catch(x){}render()},true);
+ const bf=rsnap();const fz=dbOdds(S,s);/* read before the spend (j9 fzRun) */spend(1);const r=fzRun(fz,null,()=>dbDo(S,s));if(r==null)return;try{resultShow(`Đề bạt ${s.name}`,bf,r)}catch(x){}render()},true);
 /* NPC mistresses: the same act, by motive — a loyal, deserving servant, a purse that can pay, once in a while */
 (function(){if(typeof servRanks!=="function")return;const r0=servRanks;servRanks=function(){const ev=r0.apply(this,arguments);try{if(typeof mlGuest==="function"&&mlGuest())return ev;/* co-op guest: NPC promotions roll on the host */for(const p of liveRivals(true)){{const L=(p.staff||[]).filter(s=>dbNeed(p,s).every(x=>x.ok)&&s.loyal>=BAL.loy.trust);/* npc-purpose G2: the mistress raises the trusted servant she values most, when she has a reason (cooldown = cadence) */
  const o=L.length?npcWhy("dbPromo",{p,L}):null;const s=o&&o.t;if(s){if((p.bac||0)>=dbCost(s)*2)dbDo(p,s);else if(typeof spFav==="function"&&spFav(p,s).ok)dbDo(p,s,"fav")}}}}catch(e){console.error(e)}return ev}})();
