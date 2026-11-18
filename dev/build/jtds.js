@@ -117,7 +117,7 @@ function tdsRun(k,mode,pick){TDV.pend=Object.assign({k,mode},pick);TDV.hit=null;
   if(TDS_KIND[k]&&after>before)for(let l=before+1;l<=after;l++){const kind=TDS_KIND[k];
    if(p===S){const i=BAL.tds.open.indexOf(l);if(i>0){const t=rcpGrant(kind,RCP_ST[kind][i][0],`${VIR.find(x=>x.k===k).n} lên bậc ${l}`);if(t)log(`<span class="g">${t}</span>`)}}
    const gft=rcpLvGift(p,k);if(gft&&p===S)log(rcpLvTxt(gft))}
-  if(p&&p!==S&&TDS_KIND[k]&&p.alive&&!p.out){p.inv=p.inv||[];if(p.inv.filter(e=>e.wk).length<BAL.tds.npcWkCap&&roll(BAL.tds.npcWk))wkNpcMake(p,k)}
+  if(p&&p!==S&&TDS_KIND[k]&&p.alive&&!p.out){p.inv=p.inv||[];if(p.inv.filter(e=>e.wk).length<BAL.tds.npcWkCap&&npcWhy("tdsMake",{p,k})&&roll(BAL.tds.npcWk))wkNpcMake(p,k)}/* npc-purpose G2: she makes a piece when her craft plan calls for one (skill to show, bạc to earn, a friend to give it to); npcWk = the success */
  }catch(e){console.error("tds vir",e)}return r}})();
 function tdsFinish(how){const P=TDV.pend,k=P&&P.k;TDV.hit=null;if(!P){return}
  if(TDV.skip){log("Để trời định: không ra thành phẩm.");tdsReset();return}

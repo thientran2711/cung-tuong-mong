@@ -1236,6 +1236,28 @@ Object.assign(BAL.ag.why,{
 //
 //
 // G2d (worker d adds its Object.assign lines below this line)
+Object.assign(BAL.ag.why.cd,{cyRead:4,cyLie:4,cyForge:8,dhConf:0,dhTake:8,dhHieu:0,dbPromo:12,eitPil:4,psStrike:4,khAcc:8,tyPlot:8,tyRob:4,tFrame:8,wdFrame:8,vlGift:4,tdsMake:2,thyHarm:2,socDeed:1,midBribe:0});/* G2d cooldowns in weeks per actor (0 = the Emperor / once-per-pregnancy kinds, gated elsewhere) */
+Object.assign(BAL.ag.why,{
+ cyRead:{host:.5,eye:8,forge:.6},   /* jcycle: a foe reads the cycle book: s = hostility × host + eyes(her informants) × eye; forging: s = hostility × scheme weight × forge */
+ dhConf:{base:10,sev:.5,sung:.3},   /* jdh2: the Emperor takes back hiệu / title: s = base + the old odds × sev − her Sủng × sung (a favourite keeps them) */
+ dhHieu:{base:10,sung:.3,danh:.2},  /* jdh2: the Emperor bestows a hiệu: s = base + Sủng × sung + Danh × danh */
+ luxEdict:{th:40,frMul:1.5,hh:30,emp:20,perN:2},  /* jlux: who issues the thrift edict: Thái hậu th (× frMul when frugal), Hoàng hậu hh, Emperor emp, + perN per person with tiếng xa hoa */
+ luxCalm:{calm:30,edict:20,rep:3,keep:15,proud:60},/* jlux: an NPC with tiếng xa hoa tones down: calm + edict (while it stands) + rep × tiếng xa hoa, vs keep + proud (Kiêu ngạo / Tham vọng) */
+ dbPromo:{base:20,loy:1},           /* jaudit: the mistress raises the trusted servant she values most: s = base + (loyalty − trust) × loy */
+ eitPil:{spy:15,greed:20,sour:20,sourS:5},/* jeitem: pilferer s = her inclination ch + spy (a spy) / greed × netQ greed / sourS when loyalty < sour; none of these → no pilfering */
+ exTh:{base:20,need:40,tgt:20,fest:15},/* jexam: Thái hậu errand order: base + need (its live trouble rf is true) / tgt (aimed at a person) + fest (festival copy); rf false → not asked */
+ psStrike:{top:60,base:10,sung:.5}, /* jexam: the grown Emperor remembers the quyền thần: s = base + (top − her Sủng) × sung; Sủng ≥ top → never */
+ khAcc:{base:10,k:1},               /* jkh: false birth-date accuser: s = base + danger × scheme weight × k */
+ tyPlot:{base:10,k:1},              /* jty: plotter / robber-hirer: s = base + danger × scheme weight × k (both tyPlot and tyRob) */
+ tFrame:{mal:.5,host:.5,env:10,gap:.5},/* jtruth / jwd92b: framer s = malice × mal + hostility × host; target = env + Sủng gap × gap + hostility × host */
+ vlGet:{buy:40,craft:30,lv:5,ask:10,askO:.5,bacDiv:10,plain:5,aff:.5},/* jveil: her way to a veil: buy (+ spare bạc / bacDiv), craft (+ lv × level), ask (+ best giver odds × askO); finer kind vs plain; friend gift s = liking × aff */
+ tdsMake:{base:10,lv:4,poor:30,sell:15,gift:10},/* jtds: workshop piece: s = base + art level × lv + sell (bạc < poor) + gift (has a friend) */
+ rgErr:{trMin:5,base:10,need:20,fresh:20,tr:.2},/* jreign: the leader asks an errand only when her trust ≥ trMin; errand = base + need (live occasion) + fresh (not done) + trust × tr */
+ j9:{oan0:40,ghen0:110,q0:30,q:1,c0:20,c:.5,none:30},/* j9: two NPCs in one place: quarrel = q0 + excess over (oán sum oan0, ghen sum ghen0) × q; chat = c0 + liking sum × c; pass by = none */
+ thyHarm:{p:25,base:10,host:.5},    /* j13: a really bribed physician worsens her: s = base + briber's hostility × host; p = the success (old 25) */
+ socDeed:{base:10,aff:.5,oan:.5},   /* j28: a weekly social deed: s = base + strongest feeling (|liking| × aff + oán × oan) toward anyone */
+ midBribe:{p:25,k:.5}               /* j32: midwife bribe: s = danger × bribe weight × k; p = the success (old 25) */
+});
 //
 //
 // end G2 kinds

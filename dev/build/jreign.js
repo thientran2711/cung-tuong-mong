@@ -272,8 +272,11 @@ function rgWorldMonth(){const W=rgW();if(!W||W.out)return"";const Bg=BAL.rg;let 
 function rgNext(second){const W=rgW(),r=rgMe();if(!W)return null;const queued=new Set(Q.filter(m=>m.pid==="rg").map(m=>m.pp&&m.pp.b));
  for(let c=0;c<Math.min(W.ch,RGC.length);c++){for(const id of RGC[c].b){if(r.done[id]||queued.has(id))continue;const b=RGBT[id];
   if(b.if&&!b.if()){r.done[id]=-1;continue}if(b.fin&&!W.out)return null;return id}}
- const s=rgSideNow();if(!second&&s&&!W.out&&S.turn-(r.erT==null?-99:r.erT)>=BAL.rg.erCd&&S.turn-(r.last||-99)>=2&&roll(BAL.rg.erP)){
-  const L=RGE[s].filter(e=>(!e.if||e.if())&&(r.done[s+":"+e.id]||0)<1);const e=L.length?pick(L):pick(RGE[s].filter(e=>!e.if||e.if()));if(e){r.erT=S.turn;return s+":"+e.id}}
+ const s=rgSideNow();if(!second&&s&&!W.out&&S.turn-(r.erT==null?-99:r.erT)>=BAL.rg.erCd&&S.turn-(r.last||-99)>=2){
+  /* npc-purpose G2: the leader asks only when she trusts her enough, and asks for what she needs now (an errand whose occasion is live, one not done yet);
+     erP = the chance the need comes up this month */
+  const Wr=BAL.ag.why.rgErr;const L=RGE[s].filter(e=>!e.if||e.if());
+  const e=(r.tr||0)>=Wr.trMin?npwPick(L,e=>Wr.base+(e.if?Wr.need:0)+((r.done[s+":"+e.id]||0)<1?Wr.fresh:0)+(r.tr||0)*Wr.tr):null;if(e&&roll(BAL.rg.erP)){r.erT=S.turn;return s+":"+e.id}}
  return null}
 function rgMonth(){if(!rgOn())return"";let ev="";if(!rgGuest())ev+=rgWorldMonth();
  const W=rgW(),r=rgMe();if(S.thDead&&r.side==="th"&&!(W&&W.out)){r.side="ngoai";log(`<b>${RGT}</b>: Thái hậu băng hà, phe Thái hậu tan rã. Ngươi thành người đứng ngoài.`)}if(W&&W.out&&!r.res){const t=rgMine();if(t)log(`<b>${RGT}</b>: ${t}`)}

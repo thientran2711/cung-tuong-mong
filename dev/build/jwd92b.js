@@ -10,8 +10,9 @@
 (function(){const m0=monthTick;monthTick=function(){const r=m0.apply(this,arguments);let add="";
  try{if(S&&!S.dead&&!(typeof isSrv==="function"&&isSrv())){const T=[S].concat(liveRivals(true)).filter(p=>p===S||(p.alive&&!p.out));
   for(const v of liveRivals(true)){if(!v.alive||v.out||v.confined||(v.malice||0)<WD.frameMalice)continue;
-   const L=T.filter(t=>t!==v&&hostility(v,t)>=WD.frameHost&&ACT.giahoa.ok(v,t));if(!L.length||!roll(WD.frameP))continue;
-   const t=mindPickBy(L,x=>BAL.mind.pick.wd.base+hostility(v,x),v);/* npc-mind: was ARGMAX */const x=wdFrame(v,t);if(x){add+=x;try{log(x)}catch(e){}}if(S.dead)break}}}catch(e){console.error(e)}
+   const L=T.filter(t=>t!==v&&hostility(v,t)>=WD.frameHost&&ACT.giahoa.ok(v,t));if(!L.length)continue;
+   const o=npcWhy("wdFrame",{v,L});if(!o||!o.tgt||!roll(WD.frameP))continue;/* npc-purpose G2: she plants contraband on the one she hates most, from her malice (frameP = the success) */
+   const t=o.tgt;const x=wdFrame(v,t);if(x){add+=x;try{log(x)}catch(e){}}if(S.dead)break}}}catch(e){console.error(e)}
  return (r||"")+add}})();
 /* pacing (measured: without it an angry palace impeached her ~140 times a life). Same for every accuser and every target:
    an accuser waits WD.vpCdA tuần between impeachments and WD.frCdA between frame-ups; a target is not impeached again within

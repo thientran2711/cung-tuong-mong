@@ -102,7 +102,7 @@ function tyRob(k){const T=BAL.ty;const w=wdOf(S);const e=w.y;if(!e||!wdItem(e))r
   try{if(S&&!S.dead&&k&&k!=="home"&&S.place===k&&p0!==k&&!tyOn(S)&&!window.__tyGo&&!S.out&&!(typeof isSrv==="function"&&isSrv())){const o=tyRobOdds(k);if(o>0&&roll(o)){tyRob(k);render()}}}catch(e){console.error(e)}return r};window.goTo=goTo})();
 /* the omen: an enemy plans it; her people warn her (a card) — then night walks to lonely places are dangerous for omenWk weeks */
 function tyWeek(){const T=BAL.ty;let ev="";try{
- if(S&&!S.dead&&!S.out&&!(typeof isSrv==="function"&&isSrv())&&!(S.tyOmen&&S.tyOmen.until>=wk())){const E=tyEnemies(S);if(E.length&&roll(T.plotCh)){const v=pick(E);S.tyOmen={by:v.id,until:wk()+T.omenWk};
+ if(S&&!S.dead&&!S.out&&!(typeof isSrv==="function"&&isSrv())&&!(S.tyOmen&&S.tyOmen.until>=wk())){const o=npcWhy("tyPlot",{t:S});/* npc-purpose G2: the plotter = the enemy whose grudge pushes her most; plotCh = the success */if(o&&roll(T.plotCh)){const v=o.who;S.tyOmen={by:v.id,until:wk()+T.omenWk};
    Q.push({t:"Điềm báo",kind:"notice",act:1,h:`<p class="past">${when()}</p><p>Cung nhân báo: mấy đêm nay có kẻ lạ lảng vảng quanh lối đi vắng, hỏi han giờ giấc ngươi ra vào.</p><p>Có người thấy kẻ ấy từng ra vào chỗ ${v.name}.</p>`,
     opts:[{n:"Đã rõ",fx:{},x:`Chắc chắn · kèm: ${T.omenWk} tuần tới đi đêm, qua nơi vắng dễ bị giật y phục (ở nơi đông người, đi ban ngày thì không sao)`,go:()=>{}}]})}}
  /* Nội vụ phủ issues a plain robe of her rank (a chest) */
@@ -113,7 +113,7 @@ function tyWeek(){const T=BAL.ty;let ev="";try{
   if(!w.y&&typeof earnFromChest==="function"){const c=earnFromChest(v,"y");if(c){w.y=c;v.tyNvp=null}}
   if(!w.y&&v.tyNvp!=null&&wk()>=v.tyNvp){v.tyNvp=null;const k=typeof earnPlainY==="function"?earnPlainY(v):null;if(k)w.y={k,src:"nvp",nvp:1,giver:"Nội vụ phủ"}}
   if(!w.y){if(v.tyNvp==null)tyLost(v,"");if(whereOf(v)!==palaceOf(v)){if(typeof v.danh==="number")v.danh=Math.max(0,v.danh-T.npcOut);try{newsAdd(v,"ty",`${v.name} mặc trung y mà ra khỏi cung, bị chê thiếu lễ`)}catch(e){}}}
-  else if(roll(T.npcRob)&&roll(35)){const e=w.y;if(e&&wdItem(e)&&!wdItem(e).nt){w.y=null;if(typeof ilRob==="function"){const E=tyEnemies(v);ilRob(v,e,E.length?pick(E):null)}tyLost(v,"cuop");if(typeof v.danh==="number")v.danh=Math.max(0,v.danh-T.robDanh);try{newsAdd(v,"ty",`${v.name} đi đêm qua lối vắng, bị kẻ lạ giật mất y phục, phải mặc trung y về cung`)}catch(x){}}}
+  else{const o=npcWhy("tyRob",{t:v});/* npc-purpose G2: only an enemy with a grudge hires the robbers (no enemy → no robbery); npcRob = the success */if(o&&roll(T.npcRob)){const e=w.y;if(e&&wdItem(e)&&!wdItem(e).nt){w.y=null;if(typeof ilRob==="function")ilRob(v,e,o.who);tyLost(v,"cuop");if(typeof v.danh==="number")v.danh=Math.max(0,v.danh-T.robDanh);try{newsAdd(v,"ty",`${v.name} đi đêm qua lối vắng, bị kẻ lạ giật mất y phục, phải mặc trung y về cung`)}catch(x){}}}}
  }catch(e){}}}catch(e){console.error(e)}return ev}
 (function(){if(typeof endTurn!=="function")return;const e0=endTurn;endTurn=function(){const r=e0.apply(this,arguments);try{if(S&&!S.dead)tyWeek()}catch(e){console.error(e)}return r};window.endTurn=endTurn})();
 window.tyOn=tyOn;window.tyCost=tyCost;window.tyRob=tyRob;window.tyWeek=tyWeek;window.tyFig=tyFig;
