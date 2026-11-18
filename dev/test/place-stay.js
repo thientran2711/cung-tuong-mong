@@ -13,7 +13,7 @@ const [,,URL,SZ,OUT,TAG]=process.argv;const [WH,DPR]=SZ.split('@');const [W,H]=W
  const st=()=>p.evaluate(()=>({buoi:S.buoi,used,place:S.place,visitK:S.visit&&S.visit.k,people:(S.visit&&S.visit.people||[]).map(x=>x.name||x.kind).slice(0,6),msg:(S.visit&&S.visit.msg||"").replace(/<[^>]+>/g,"").slice(0,160),
   tab,home:document.querySelector(".game").classList.contains("k3home"),room:(document.getElementById('k3room')||{}).textContent||"",roomHidden:(document.getElementById('k3room')||{}).hidden,modal:!document.getElementById('modal').hidden?document.getElementById('mt').textContent:""}));
  const R={};
- await p.evaluate(()=>{try{localStorage.clear()}catch(e){}SLOT=3;document.getElementById('title').hidden=true;for(let i=0;i<60;i++){start();if(!isSrv())break}Q.length=0;document.getElementById('modal').hidden=true;try{NLP=null}catch(e){}render()});
+ await p.evaluate(()=>{try{localStorage.clear()}catch(e){}SLOT=3;document.getElementById('title').hidden=true;for(let i=0;i<60;i++){try{nlNew()}catch(e){}start();if(!isSrv())break}Q.length=0;document.getElementById('modal').hidden=true;try{NLP=null}catch(e){}render()});
  await clean();await p.waitForTimeout(1200);
  /* A */
  R.A0=await p.evaluate(()=>{S.week=S.week;S.buoi=1;S.place="home";S.visit={k:"home",people:homePeople(),talked:false,tk:{}};S.confined=0;S.out=0;const tc=travel("home","ksp");used=4-tc;

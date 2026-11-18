@@ -223,7 +223,7 @@ function loInvHTML(){if(!S||S.dead)return"";const L=loMine();const D=loL().filte
   if(B.length)G.unshift(["Đồ thất lạc",B])}}catch(e){console.error(e)}return G}})();
 function loUI(a,id){const c=loGet(id);if(!c||c.st==="done"||!S||S.dead||Q.length)return;const nm=loNm(c.k);let r="";
  if(["ask","cct","book"].includes(a)){const C=LO.cost[a];if(!can(C.k)||(C.bac&&S.bac<C.bac))return;spend(C.k);r=loDo(a,S,c)}
- else if(a==="askback"){const h=loP(c.at);if(!can(1)||!h)return;spend(1);if(roll(loAskOdds(h,S,c))){const x=loEntry(c);if(x){lostUnwear(h,S);const i=h.inv.indexOf(x.e);if(i>=0)h.inv.splice(i,1);lostReturn(x.e,"tra")}r=`${wdNmC(h)} trả lại ${nm}.`}else{relAdd(S,h,BAL.eff.jlost.loUI);r=`${wdNmC(h)} chối không thấy ${nm}. Thân ${balSg(BAL.eff.jlost.loUI)}.`}}
+ else if(a==="askback"){const h=loP(c.at);if(!can(1)||!h)return;const o=loAskOdds(h,S,c);/* odds read before the spend (shown-odds r2) */spend(1);if(roll(o)){const x=loEntry(c);if(x){lostUnwear(h,S);const i=h.inv.indexOf(x.e);if(i>=0)h.inv.splice(i,1);lostReturn(x.e,"tra")}r=`${wdNmC(h)} trả lại ${nm}.`}else{relAdd(S,h,BAL.eff.jlost.loUI);r=`${wdNmC(h)} chối không thấy ${nm}. Thân ${balSg(BAL.eff.jlost.loUI)}.`}}
  else if(a==="raise"){const h=loP(c.at);if(!can(LO.raiseK)||!h||c.hear||(c.reT||0)>wk())return;const hi=loHigh(h,S);if(hi&&loEmpEv(c,S,h)<BAL.il.empEv)return;spend(LO.raiseK);loRaise(c,S);r=hi?`Ngươi dâng chứng cứ, tâu Hoàng thượng xin soát ${loPal(h)} tìm ${nm}. Hoàng thượng chuẩn tấu: Cung Chính ti sẽ soát trong ${c.hear-wk()} tuần.`:`Ngươi báo Cung Chính ti thu hồi ${nm} ở ${loPal(h)}; sẽ xét trong ${c.hear-wk()} tuần.`}
  else if(a==="giveback"||a==="handin"){if(!can(1))return;spend(1);const x=loEntry(c);const o=loP(c.own);if(x){lostUnwear(S);const i=S.inv.indexOf(x.e);if(i>=0)S.inv.splice(i,1);lostReturn(x.e,a==="handin"?"nop":"tra")}
   if(a==="giveback"&&o){relAdd(S,o,BAL.eff.jlost.loUI_2);r=`Ngươi sai người trả ${nm} về ${wdNm(o)}. Thân ${balSg(BAL.eff.jlost.loUI_2)}.`}else{apply({danh:BAL.eff.jlost.danhLoUI});r=`Ngươi nộp ${nm} lên Nội vụ phủ trả về chủ. Danh ${balSg(BAL.eff.jlost.danhLoUI)}.`}}
@@ -241,7 +241,7 @@ function loStealO(a,t,self){return oddsCl(Math.round(odA(a,38+(a.tamco||0)/4+eye
 function loSteal(a,t,self){a.schemes=(a.schemes||0)+1;if(typeof ducAdd==="function")ducAdd(a,LO.act.duc,"sai người lấy trộm đồ");else ap(a,{duc:LO.act.duc});
  if(self){const m=typeof econLoyalMaid==="function"?econLoyalMaid(a):a.maid;if(m)m.loyal=cl((m.loyal||0)-(BAL.loyalCost),0,100)}
  const cg=caught(a,t,false,"sai người lấy trộm đồ trong rương "+NM(t));if(cg)return cg;
- if(!roll(loStealO(a,t,self))){relAdd(a,t,BAL.eff.jlost.loSteal);return `Người ${NM(a)} sai đi lấy đồ của ${NM(t)} không gặp lúc vắng người, đành về tay không. `}
+ if(!aRoll(loStealO(a,t,self),a)){relAdd(a,t,BAL.eff.jlost.loSteal);return `Người ${NM(a)} sai đi lấy đồ của ${NM(t)} không gặp lúc vắng người, đành về tay không. `}
  const keep=a===S||roll(LO.keepP);const c=loLose(t,{cause:"riv",by:key(a),keep:keep?1:0});if(!c)return `Rương ${NM(t)} không còn món nào đáng lấy. `;
  const nm=loNm(c.k);if(a===S)return `<span class="g">Người của ngươi lấy được ${nm} trong rương ${wdNm(t)}</span>; món ấy nay nằm trong rương ngươi. Đeo ra ngoài thì dễ bị nhận ra. `;
  return `${NMc(a)} sai người lấy ${nm} trong rương ${NM(t)}. `}

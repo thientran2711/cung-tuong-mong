@@ -294,7 +294,7 @@ function wdAccuse(a,t){const c=wdCause(a,t);const truth=wdStatus(t);const judge=
  for(const o of consorts())wdSee(o,t,truth,judge,true);
  if(truth==="ok"){ap(a,{danh:-5});ap(t,{danh:2});relAdd(a,t,BAL.eff.j92.wdAccuse);
   return `${A0} hặc ${T0} ${c?WD_ST_WORD[c.st]:"ăn mặc sai phẩm"}; <span class="${a===S?"r":"g"}">tra xét ra ${T0} ăn vận đúng phẩm</span>, ${a===S?"ngươi":wdNm(a)} bị quở vì hặc bừa. Danh -5, ${T0} Danh +2. `}
- if(!roll(oVP(a))){ap(a,{danh:BAL.eff.j92.danhWdAccuse_2});relAdd(a,t,BAL.eff.j92.wdAccuse_2);return `${A0} hặc ${T0} ${WD_ST_WORD[truth]}, ${judge} bỏ qua, chỉ dặn lần sau giữ ý. ${a===S?`Danh ${balSg(BAL.eff.j92.danhWdAccuse_2)}. `:""}`}
+ if(!aRoll(oVP(a),a)){ap(a,{danh:BAL.eff.j92.danhWdAccuse_2});relAdd(a,t,BAL.eff.j92.wdAccuse_2);return `${A0} hặc ${T0} ${WD_ST_WORD[truth]}, ${judge} bỏ qua, chỉ dặn lần sau giữ ý. ${a===S?`Danh ${balSg(BAL.eff.j92.danhWdAccuse_2)}. `:""}`}
  relAdd(a,t,BAL.eff.j92.wdAccuse_3);ap(a,{danh:BAL.eff.j92.danhWdAccuseA});const w=wdOf(t);
  if(truth==="over"){const gone=[];for(const sl of ["tram","y"]){const e=w[sl],it=wdItem(e);if(it&&wdP(e,t)>wdPOf(t)&&!(it.nt&&e.own===wdKey(t))){gone.push(it.n);w[sl]=null;const k=wdDefault(t,sl);if(k)w[sl]={k,from:"base"}}}
   ap(t,{danh:BAL.eff.j92.danhWdAccuse_3});punish(t,"ăn mặc vượt phẩm",1);return `${A0} hặc ${T0} vượt phẩm: <span class="${t===S?"r":"g"}">thành</span>. ${gone.length?gone.join(", ")+" bị tịch thu. ":""}${wdNmC(t)} Danh ${balSg(BAL.eff.j92.danhWdAccuse_3)}. `}
@@ -310,7 +310,7 @@ function wdFrameItem(a){const own=(a.inv||[]).filter(e=>e&&!e.h&&!e.t&&!wdIsNt(e
  const k=wdPickAt(Math.min(8,wdPOf(a)+1),"tram",1);return{take:null,k}}
 function wdFrame(a,t){ap(a,{bac:-40});a.schemes=(a.schemes||0)+1;if(typeof ducAdd==="function")ducAdd(a,-4,"giá họa người khác");else ap(a,{duc:-4});
  const F=wdFrameItem(a);if(!F.k)return"";const nm=itm(F.k).n;
- if(!roll(oPlant(a,t))){/*evok: giahoa act (runAct deed)*/evA(t,a,BAL.eff.j92.evWdFrame);relAdd(a,t,BAL.eff.j92.wdFrame);return `<span class="r">Người lén mang ${nm} vào phòng ${wdNm(t)} bị bắt, khai ra ${wdNm(a)}.</span> ${wdNmC(t)} nắm ${balAb(BAL.eff.j92.evWdFrame)} chứng cứ. `}
+ if(!aRoll(oPlant(a,t),a)){/*evok: giahoa act (runAct deed)*/evA(t,a,BAL.eff.j92.evWdFrame);relAdd(a,t,BAL.eff.j92.wdFrame);return `<span class="r">Người lén mang ${nm} vào phòng ${wdNm(t)} bị bắt, khai ra ${wdNm(a)}.</span> ${wdNmC(t)} nắm ${balAb(BAL.eff.j92.evWdFrame)} chứng cứ. `}
  if(F.take){const i=a.inv.indexOf(F.take);if(i>=0)a.inv.splice(i,1)}
  /* item conservation (jil): the very piece is planted (same id) */t.inv=t.inv||[];const P0={k:F.k,h:1,by:key(a),gh:key(a)};if(F.take&&F.take.iu)P0.iu=F.take.iu;t.inv.push(P0);
  if(t===S){S.wdFrame={by:key(a),k:F.k,due:wk()+1+R(2)};

@@ -67,7 +67,7 @@ AA.run=async(sf,j,f,k)=>{AA.restore();AA.show(sf);let B=AA.btns(sf);let b=B[j];i
  return{card,pre,d:AA.diff(pre,post),res,errs:AA.errs.slice(e0)}};
 AA.errs=[];window.addEventListener("error",e=>AA.errs.push(String(e.message).slice(0,200)));
 /* ---- scenarios ---- */
-AA.fresh=()=>{try{localStorage.clear()}catch(e){}document.getElementById("title").hidden=true;AA.reseed(11);for(let i=0;i<8;i++){start();if(!isSrv())break}AA.hide();S.buoi=0;used=0;
+AA.fresh=()=>{try{localStorage.clear()}catch(e){}document.getElementById("title").hidden=true;AA.reseed(11);for(let i=0;i<8;i++){try{nlNew()}catch(e){}start();if(!isSrv())break}AA.hide();S.buoi=0;used=0;
  if(S.suc<60)S.suc=80;if(S.bac<200)S.bac=200;render()};
 AA.scen=(n)=>{AA.fresh();
  /* every state but "dau": she already knows everyone (names, faces), so the person acts are open */

@@ -86,7 +86,7 @@ const res=[];const ok=(c,m,x)=>{res.push([!!c,m]);console.log((c?'ok  ':'FAIL')+
   await boot(q,'http://ts.local/dev/index.html');
   await q.evaluate(()=>{const kl=document.getElementById('kload');if(kl)kl.remove();try{localStorage.clear()}catch(e){}SLOT=3;document.getElementById('title').hidden=true;for(let i=0;i<60;i++){try{store.set(NL_KEY,null)}catch(e){}start();if(!isSrv())break}
    Q.length=0;const md=document.getElementById("modal");if(md)md.hidden=true;try{NLP=null}catch(e){}const st=document.createElement("style");st.textContent=".kroul{display:none!important}";document.head.appendChild(st);tab="go";render()});
-  for(let i=0;i<15;i++){await q.waitForTimeout(400);const srv=await q.evaluate(()=>{const s=isSrv();if(s){Q.length=0;start()}return s});if(!srv)break}
+  for(let i=0;i<15;i++){await q.waitForTimeout(400);const srv=await q.evaluate(()=>{const s=isSrv();if(s){Q.length=0;try{nlNew()}catch(e){}start()}return s});if(!srv)break}
   await q.evaluate(()=>{document.querySelectorAll(".kroul").forEach(e=>e.remove());Q.length=0;const md=document.getElementById("modal");if(md)md.hidden=true;
    const v=rivals.find(x=>x.alive&&!x.queen);v.out=1;goTo("lc");Q.length=0;if(md)md.hidden=true;tab="go";render()});await q.waitForTimeout(5000);
   await q.evaluate(()=>{document.querySelectorAll('.kmov,.kroul,#kpop').forEach(e=>e.remove());Q.length=0;const md=document.getElementById("modal");if(md)md.hidden=true;tab=innerWidth<innerHeight?"go":"act";render();scrollTo(0,0);document.querySelectorAll("*").forEach(e=>{if(e.scrollTop)e.scrollTop=0});try{if(innerWidth<innerHeight){const b=document.querySelector("#tabs [aria-selected=\"true\"]");if(b)b.click()}}catch(e){}});await q.waitForTimeout(2500);

@@ -21,7 +21,7 @@ let SIZES=args.slice(1);if(!SIZES.length)SIZES=['755x1000@2','1180x820@2','412x1
    /* an old save with fractions */
    R.load=await p.evaluate(()=>{const v=rivals[0];v.oan=2.36;v.rel=-3.4;S.ro[v.id]=1.64;if(S.maid)S.maid.loyal=50.5;const d=ser();deser(d);const w=rivals.find(x=>x.id===v.id);return{oan:w.oan,rel:w.rel,ro:S.ro[v.id],loyal:S.maid&&S.maid.loyal}});
    /* the real log line of a sure act (no card text) */
-   R.logLine=await p.evaluate(()=>{const a={n:"Thử việc chắc",c:{suc:-5},o:100,w:{danh:2},x:"được: Danh +2 · kèm: lời hứa trên thẻ"};const s0=S.logSeq;runOpt(a);return plain(S.logs[0])});
+   R.logLine=await p.evaluate(()=>{const a={n:"Thử việc chắc",c:{suc:-5},o:100,w:{danh:2},x:"được: Danh +2 · kèm: lời hứa trên thẻ"};const s0=S.logSeq;{const r0=window.roll;window.roll=()=>true;try{runOpt(a)}finally{window.roll=r0}}return plain(S.logs[0])});
    ok=ok&&R.sim.nbad===0&&R.sim.weeks>=4&&!R.sim.thu.length&&!R.sim.help.length&&Number.isInteger(R.load.oan)&&Number.isInteger(R.load.rel)&&Number.isInteger(R.load.ro)&&(R.load.loyal==null||Number.isInteger(R.load.loyal))&&!/lời hứa/.test(R.logLine)&&/Danh \d+→\d+/.test(R.logLine);
    /* a dialog choice is logged with its event and what really happened */
    R.choice=await p.evaluate(()=>{Q.length=0;Q.push({t:"Lão Vương bị truy sát",h:"",opts:[{n:"Mặc kệ",fx:{danh:-2},go:()=>log("Ông bị giết, mất nhân chứng.")}]});const n0=S.logs.length;chooseM(0);Q.length=0;return{line:plain(S.logs[0]),added:S.logs.length-n0}});

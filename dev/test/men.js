@@ -8,7 +8,7 @@ const [,,BASE,SZ,OUT,TAG]=process.argv;const [WH,DPR]=SZ.split('@');const [W,H]=
  const R={};const ovf=()=>p.evaluate(()=>document.documentElement.scrollWidth>innerWidth+1);
  /* 1. an old save (build without jmen) */
  await p.goto(BASE+'/_old.html',{waitUntil:'domcontentloaded'});await p.waitForTimeout(3500);
- await p.evaluate(()=>{try{localStorage.clear()}catch(e){}SLOT=3;document.getElementById('title').hidden=true;for(let i=0;i<60;i++){start();if(!isSrv())break}Q.length=0;
+ await p.evaluate(()=>{try{localStorage.clear()}catch(e){}SLOT=3;document.getElementById('title').hidden=true;for(let i=0;i<60;i++){try{nlNew()}catch(e){}start();if(!isSrv())break}Q.length=0;
   for(let i=0;i<4;i++){try{nextBuoi()}catch(e){}Q.length=0}quiet=false;try{NLP=null}catch(e){}save();return Object.keys(localStorage)}).then(k=>R.oldKeys=k);
  await p.goto(BASE+'/_mt.html',{waitUntil:'domcontentloaded'});await p.waitForTimeout(3500);
  R.newKeys=await p.evaluate(()=>Object.keys(localStorage));
@@ -16,7 +16,7 @@ const [,,BASE,SZ,OUT,TAG]=process.argv;const [WH,DPR]=SZ.split('@');const [W,H]=
   try{nextBuoi()}catch(e){ok='NEXT '+e.message}Q.length=0;if(m)m.hidden=true;render();return{ok,men:(S.men||[]).length,why:Object.keys(S.menWhy||{}).length,turn:S.turn}});
  console.log('STEP1',JSON.stringify(R));
  /* 2. the encounter card: a guard and a consort in the garden, afternoon */
- await p.evaluate(()=>{for(let i=0;i<60;i++){start();if(!isSrv())break}Q.length=0;const md=document.getElementById("modal");if(md)md.hidden=true;
+ await p.evaluate(()=>{for(let i=0;i<60;i++){try{nlNew()}catch(e){}start();if(!isSrv())break}Q.length=0;const md=document.getElementById("modal");if(md)md.hidden=true;
   const m=S.men.find(x=>x.rw==="thị vệ");const v=liveRivals(false).find(x=>!x.queen&&x.alive)||liveRivals(false)[0];
   S.out=0;S.confined=0;S.buoi=1;used=0;S.place="home";S.menMet={};S.menW={[m.id]:"vuon"};S.menWhy={[m.id]:{w:"stray",k:"vuon",r:"letter",v:v.id,why:"jealous"}};S.where[v.id]="vuon";window.__tv=v.id;window.__tm=m.id;goTo("vuon")});
  await p.waitForTimeout(2500);
