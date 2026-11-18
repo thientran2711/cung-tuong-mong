@@ -54,7 +54,7 @@ function faceFor(o,kind,age){const k=bandKeys(kind,age)[0];if(o.fc==null||o.fk!=
    servants = the FIGURE identity pool (FIGIX, j39): women servants (cung nữ, ma ma) <= maid + mama identities, young cung nữ <= maid identities,
    in both cases minus the maid / mama identities consorts wear (j88: a raised maid keeps hers); eunuchs (household + the court eunuchs) <= eunuch identities.
    Before the manifests load, the face lists (FPOOL) stand in; never the old face-*.webp load probe (FAV), so missing old files never stop hiring.
-   Consorts: unchanged, the face pool as before (the consort ceiling is CAPC, j27). */
+   Consorts: unchanged, the face pool as before (the consort ceiling is BAL.harem.cap through roomFor, j27). */
 function roomFor(role){if(!S)return true;
  if(role==="maid"||role==="eunuch"){const IX=typeof FIGIX!=="undefined"&&FIGIX?FIGIX:{};const K=r=>Object.keys(IX[r]||{}).filter(k=>IX[r][k]&&IX[r][k].length);
   const SV=typeof allServ==="function"?allServ():[];

@@ -68,7 +68,7 @@ const errsOf=async(g,errs)=>errs.concat(await g.evaluate(()=>window.__qcErr||[])
   const b1=await within(60e3,g.evaluate(BUOI),'old build buổi');
   const saved=await g.evaluate(()=>{try{localStorage.setItem(SK(3),JSON.stringify(ser()));return {ok:true,name:S.name}}catch(e){return {ok:false,err:e.message}}});
   const oldErr=await errsOf(g,errs);errs.length=0;
-  await fetch(srv.url+'__ver/new');g=await within(150e3,open(p,srv.url),'new build open (old save)');await sl(1500);
+  await fetch(srv.url+'__ver/new');g=await within(150e3,open(p,srv.url),'new build open (old save)');await g.waitForFunction(()=>window.__ctmBuilt===1,null,{timeout:60000});/* real condition (game script ran to its end), was a 1.5 s timer before loadSlot (review r1) */
   const ld=await g.evaluate(()=>{try{const d=loadSlot(3);if(!d)return{ok:false,err:'NO SAVE'};SLOT=3;document.getElementById('title').hidden=true;deser(d);try{deal()}catch(e){}
    ['kroul','dawn','kload'].forEach(i=>{const e=document.getElementById(i);if(e)e.remove()});render();return{ok:true,name:S.name}}catch(e){return{ok:false,err:e.message}}});
   let b2=null;if(ld.ok){await within(60e3,g.waitForFunction(SETTLE,null,{polling:150}),'old save first turn');b2=await within(60e3,g.evaluate(BUOI),'old save buổi')}
