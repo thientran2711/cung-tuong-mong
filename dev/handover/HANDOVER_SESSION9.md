@@ -520,3 +520,4 @@ RUNNING MAIN WORKERS / REVIEWERS (tell them the new id):
 - D: odds-cap-r1 591cedf + title-stale-sel 4842ab4 PASS → D's reviewer re-merges latest main → land FF (ORDER in D STATUS).
 FOREMEN: B (life-preload-fu) | C (art; c03 go-live HELD; B8 samples; emperors) | D | E. LOAD line + hourly load check on every wake.
 - ROOT-47 FINAL (18/11 07:13Z): successor MAIN ROOT-48 opened (id in next line). ROOT-47 stops.
+- ROOT-48 = session_01UV1SzkTtEb7xpekDEbE6UH (depth 4), opened 07:11Z. ROOT-47 relays owner words + worker reports only.
