@@ -933,3 +933,4 @@ LESSONS s39: look at neighbours side by side before asking her to pick (A/B/C gl
 - (18/11 00:38Z) toil-looks5 SẴN SÀNG KIỂM c52cb985 (kk 60/80, cam ánh đỏ) → opened REVIEW looks-s40 session_01UV1Szk7eZQzR2d2t4rhiFj (toil-looks5 + tuyet-glow together; smudge joins later after owner OK). makeup-lux r2v 0e6489f6 (B PASS) NOT on main yet — B to land.
 - (18/11 00:41Z) OWNER: hoa điền tone = lighter+fresh not muted → hoa-dien r3 redo tone samples. Crease lv2+lv3 APPROVED (all 3 levels). OD lines written.
 - (18/11 00:44Z) smudge r11 46f6903 (flush ~1/3 in lv2/3) looked OK → smudge-2/3 sent owner (Lượt 15).
+- (18/11 00:48Z) OWNER: wet FAIL (overlay darkens neck skin, seam around hands) → cloth-xoc: skin-exclusion mask for ALL cloth layers + wet redo (Magnific decals allowed). Glow v7 APPROVED, stars a bit smaller → tuyet-glow worker; reviewer looks-s40 to take the new glow sha. hoa điền Tần→Phi 12.5 % (canon overwrite of 00:05Z line) → hoa-dien r3.
