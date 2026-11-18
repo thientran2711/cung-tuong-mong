@@ -57,6 +57,8 @@ function inPage(arg){const {TRIES}=arg;const out={rows:{},err:[],pend:[]};
    for(const [dir,a,b] of [["P",v,S],["N",S,t],["NN",u,t]]){if(row[dir]&&row[dir].touched&&(dir==="P"?row[dir].pc.length:row[dir].nc.length))continue;
     const x=run(fam,k,a,b);if(!row[dir]||x.touched&&!row[dir].touched||x.touched&&(dir==="P"?x.pc.length:x.nc.length))row[dir]=x}
    try{S.place=JSON.parse(snap).S.place}catch(e){}}
+  /* THIRD-PARTY receiver: the one asked is not the target (Nhờ ơn người quen: the acquaintance who owes the asker) → N→P = she is that acquaintance */
+  if(fam==="act"&&k==="blockf"){try{const V=L();const v=V[0],t=V[1];for(const x of [S,v,t])rich(x);t.block=0;const a0=aff(S,v);affAdd(S,v,300);const x=run(fam,k,v,t);affAdd(S,v,a0-aff(S,v));if(x.touched||x.pc.length)row.P=x}catch(e){E("third:"+k,e)}}
   out.rows[fam+":"+k]=row}
  Math.random=R0;out.pendIds=Object.keys(PEND);return out}
 
@@ -67,9 +69,11 @@ async function scan(html,opt){opt=opt||{};const {chromium}=require('playwright')
   window.__nlInner=0;window.__bot=1;quiet=false;Q.length=0;S.rank=Math.max(S.rank||0,3);try{render()}catch(e){}});
  const r=await p.evaluate(inPage,{TRIES:opt.tries||6});await b.close();r.pageErr=pageErr;return build(r)}
 
-function cell(x,side){if(!x||!x.touched)return"n/a";return (side==="P"?x.pc.length:x.nc.length)?"CHOICE":"AUTO"}
+/* SERVANT receiver: the one asked is the target's servant (Mua chuộc …): when she is the target, HER maid / servant (an NPC) is the receiver, so her side counts the servant's own pick */
+const SRVR=["bribe","cx2:bribeSrv","bribel"];
+function cell(x,side,k){if(!x||!x.touched)return"n/a";return (side==="P"&&!SRVR.includes(k)?x.pc.length:x.nc.length||x.pc.length)?"CHOICE":"AUTO"}
 function build(o){const rows=[],gaps=[];
- for(const id in o.rows){const R=o.rows[id];const k=R.k,kind=KIND(id.replace(/^ag:/,""));const c={P:cell(R.P,"P"),N:cell(R.N,"N"),NN:cell(R.NN,"N")};
+ for(const id in o.rows){const R=o.rows[id];const k=R.k,kind=KIND(id.replace(/^ag:/,""));const c={P:cell(R.P,"P",k),N:cell(R.N,"N",k),NN:cell(R.NN,"N",k)};
   if(c.P==="n/a"&&c.N==="n/a"&&c.NN==="n/a"||R.self&&!(R.P&&R.P.pc.length))continue;
   /* verdict: ASYM = one receiver chooses, the other is forced (law 1) · FORCED = asked / proposed / ordered and no receiver can say no (21:15Z) ·
      SAME = every receiver chooses · OK = done-to / covert, no receiver answers at the moment on either side (counterplay after) */

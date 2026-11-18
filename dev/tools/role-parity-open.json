@@ -1391,22 +1391,6 @@
  },
  {
   "role": "receiver",
-  "key": "tw:call",
-  "label": "Ghé chơi",
-  "side": "FORCED",
-  "kind": "PROP",
-  "owner": "D receiver-choice (next)"
- },
- {
-  "role": "receiver",
-  "key": "act:bribe",
-  "label": "Mua chuộc cung nữ",
-  "side": "FORCED",
-  "kind": "REQ",
-  "owner": "staff dilemma G10 (cnvBribeOpts): her own maid as receiver"
- },
- {
-  "role": "receiver",
   "key": "act:bribel",
   "label": "Sai cung nữ thân tín lấy lòng",
   "side": "FORCED",
@@ -1415,51 +1399,11 @@
  },
  {
   "role": "receiver",
-  "key": "ag:cx:ally",
-  "label": "",
-  "side": "FORCED",
-  "kind": "PROP",
-  "owner": "D receiver-choice (next)"
- },
- {
-  "role": "receiver",
-  "key": "ag:cx2:bribeSrv",
-  "label": "Mua chuộc",
-  "side": "ASYM",
-  "kind": "REQ",
-  "owner": "staff dilemma G10 (cnvBribeOpts): her own maid as receiver"
- },
- {
-  "role": "receiver",
-  "key": "ag:emp:visit",
-  "label": "",
-  "side": "FORCED",
-  "kind": "ORDER",
-  "owner": "D receiver-choice (next)"
- },
- {
-  "role": "receiver",
   "key": "ag:cx3:staffUp",
   "label": "Tiến cử",
   "side": "FORCED",
   "kind": "REQ",
-  "owner": "D receiver-choice (next)"
- },
- {
-  "role": "receiver",
-  "key": "ag:cx3:facFound",
-  "label": "Lập phe cùng",
-  "side": "FORCED",
-  "kind": "PROP",
-  "owner": "D receiver-choice (next)"
- },
- {
-  "role": "receiver",
-  "key": "ag:cx3:facJoin",
-  "label": "Xin vào phe",
-  "side": "FORCED",
-  "kind": "REQ",
-  "owner": "D receiver-choice (next)"
+  "owner": "written reason (D receiver-choice #2): Tiến cử = the master puts her OWN servant's name forward to Nội vụ phủ (an office, not a person: law 6b), paying bạc + Danh herself — the same function recommend() for her and every NPC master (law 1 SAME); the servant only gains merit (law 3: gain-only is fine), nobody is asked to do anything. Kept listed so the BIG reviewer sees it."
  },
  {
   "role": "receiver",
@@ -1468,21 +1412,5 @@
   "side": "FORCED",
   "kind": "PROP",
   "owner": "D parallel-time (send button «Mời đến cung ta», jptime §4)"
- },
- {
-  "role": "receiver",
-  "key": "ag:see:mediate",
-  "label": "",
-  "side": "FORCED",
-  "kind": "PROP",
-  "owner": "D receiver-choice (next)"
- },
- {
-  "role": "receiver",
-  "key": "act:blockf",
-  "label": "Nhờ ơn người quen rút thẻ bài",
-  "side": "FORCED",
-  "kind": "REQ",
-  "owner": "D receiver-choice (next)"
  }
 ]

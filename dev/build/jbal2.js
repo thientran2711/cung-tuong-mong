@@ -1327,4 +1327,6 @@ BAL.rcv={kw:["Giúp hết lòng","Làm qua loa","Từ chối","Mách lẻo"],hel
  /* the bạc to take a gift to Thái y viện (her giftin card j8 and an NPC receiver, one number) */
  chk:10,
  /* per-kind factor on the L1876 weights [full, half, no, sab] (tunable): refusing the throne is rare, sending a gift back less common than keeping it */
- k:{help:[1,1,1,1],gift:[1,1,.5,1],emp:[1,1,.2,.2]}};
+ k:{help:[1,1,1,1],gift:[1,1,.5,1],emp:[1,1,.2,.2]},
+ /* every request / proposal (jrcv rcvYesO / rcvNoO): «giúp hết lòng» costs the receiver Sức suc (her time); «từ chối» a proposal keeps her out of cliques: Danh + danh */
+ prop:{suc:4,danh:1}};
