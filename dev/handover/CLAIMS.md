@@ -1001,3 +1001,4 @@ looks-2 overlay art (fx-stain-tra/uot, smudge, ink, pox, scars, messy hair) | im
 | OWNER UI BUG place-banner (count icon missing, chip on chip, banner covers head/ornament; options A/B/C; sonnet; brief briefs/place-banner.md) | review/place-banner | MAIN s42 | session_01UV1SzmHEoDtWWruq6yMGnZ | RUNNING | 18/11 01:49Z |
 | OWNER UI BUG opt-card-short (option cards too tall: stretched picture, long notes; options A/B/C; sonnet; brief briefs/opt-card-short.md) | review/opt-card-short | MAIN s42 | session_01UV1Szk6j15PHjAL8gMSR9z | RUNNING | 18/11 01:58Z |
 | REVIEW men-forbidden 13286b4 (opus BIG; brief briefs/review-men-forbidden.md) | review/men-forbidden | MAIN s42 | session_01UV1Szh3jq9brqAHDsVQitM | RUNNING | 18/11 02:01Z |
+| OWNER UI BUG book-figsize (one body height on every book figure; sonnet; brief briefs/book-figsize.md) | review/book-figsize | MAIN s42 | session_01UV1Szh... (worker, this session) | RUNNING | 18/11 02:03Z |
