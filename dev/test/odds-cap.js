@@ -1,8 +1,8 @@
 /* ODDS CAP unit draw (owner 17/11 17:00Z + 17:35Z: nothing is 100 %, nothing is 0 %; cap 95, floor 5 = BAL.odds.hi / lo).
    capRes(ok,o) (j1) turns a noise-draw result whose raw odds are o into one whose final chance is oddsCl(o).
-   usage: node dev/test/odds-cap.js [--old]   (--old = the r2 formula roll(H/o*100), for the before/after table)
+   usage: [OC_BUILD=<dev/build dir>] node dev/test/odds-cap.js [--old]   (--old = the r2 formula roll(H/o*100), for the before/after table)
    Reads capRes / roll / oddsCl / cl from dev/build/j1.js and BAL.odds from dev/build/jbal.js (ONE core: no typed 95 / 5 here). */
-const fs=require('fs'),path=require('path');const B=path.join(__dirname,'..','build');
+const fs=require('fs'),path=require('path');const B=process.env.OC_BUILD||path.join(__dirname,'..','build');
 const j1=fs.readFileSync(path.join(B,'j1.js'),'utf8'),jb=fs.readFileSync(path.join(B,'jbal.js'),'utf8');
 const m=jb.match(/odds:\{[^}]*?lo:(\d+),hi:(\d+)/);if(!m){console.log('FAIL: BAL.odds lo/hi not found in jbal.js');process.exit(1)}
 const BAL={odds:{lo:+m[1],hi:+m[2]}};
