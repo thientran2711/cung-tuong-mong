@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"e09b4142+","t":"2026-11-18T05:55Z","c":"kit-set-lines: fixture line without a typed number (one-core-guard)","b":"5460aac66a69","h":[{"s":"c1104d92+","t":"2026-11-18T05:41Z","c":"face-zoom-aspect test: SEED / FORCE options for same-character before/after shots"},{"s":"16b4dad8+","t":"2026-11-18T05:32Z","c":"cloth-bake-static: cloth layer on every static figure path on a cold cache (wait layer + patch on bake done); test + report"},{"s":"231cd3b3+","t":"2026-11-18T03:27Z","c":"review display-set-bonus: VANPHONG rows (Đa Bảo Các + set wording); cap line drops 'điểm'; j8 'Điểm trang lộng lẫy' night quality reads wor…"},{"s":"bd8547f2+","t":"2026-11-18T03:28Z","c":"men-forbidden r6: old saves drop officials / festival princes standing in the hậu cung on load (menLoadFix, same ONE rule)"},{"s":"c743265c+","t":"2026-11-18T03:18Z","c":"review life-preload r6: title prefetch chained on undefined (lWant returns its promise); gate cap really 25 s (no re-run after cap / Vào cu…"},{"s":"2aca2aac+","t":"2026-11-18T03:17Z","c":"review cloth-tea-r6: kclo-on hides the picture by clip-path, not visibility (visibility:hidden made kfxGeom hide the cloth layer too: her f…"},{"s":"2b1b0701","t":"2026-11-18T03:00Z","c":"review staff-cap-apply r6: site rebuilt on db24027f"},{"s":"64488e4f+","t":"2026-11-18T02:38Z","c":"cloth-xoc r6e: rebuild site"},{"s":"af71f94a+","t":"2026-11-18T02:17Z","c":"smudge r16: stage4 + avatar probe tests, options script score fix (look tier by score), FINAL mode"},{"s":"e1f60927+","t":"2026-11-18T02:25Z","c":"result-reason: every result card line says a short why (kitWhy, KIT 7); values left-aligned next to labels"}]};
+window.CTM_BI={"s":"1d240e20+","t":"2026-11-18T06:11Z","c":"kit-set-lines: display-room test pins rank so the real-data pair is never over rank","b":"f20607c85413","h":[{"s":"04bb2793+","t":"2026-11-18T05:52Z","c":"hud-mood-bar: owner picked layout 1 (full row); switch and slim layout removed; KIT 49.4"},{"s":"c1104d92+","t":"2026-11-18T05:41Z","c":"face-zoom-aspect test: SEED / FORCE options for same-character before/after shots"},{"s":"16b4dad8+","t":"2026-11-18T05:32Z","c":"cloth-bake-static: cloth layer on every static figure path on a cold cache (wait layer + patch on bake done); test + report"},{"s":"231cd3b3+","t":"2026-11-18T03:27Z","c":"review display-set-bonus: VANPHONG rows (Đa Bảo Các + set wording); cap line drops 'điểm'; j8 'Điểm trang lộng lẫy' night quality reads wor…"},{"s":"bd8547f2+","t":"2026-11-18T03:28Z","c":"men-forbidden r6: old saves drop officials / festival princes standing in the hậu cung on load (menLoadFix, same ONE rule)"},{"s":"c743265c+","t":"2026-11-18T03:18Z","c":"review life-preload r6: title prefetch chained on undefined (lWant returns its promise); gate cap really 25 s (no re-run after cap / Vào cu…"},{"s":"2aca2aac+","t":"2026-11-18T03:17Z","c":"review cloth-tea-r6: kclo-on hides the picture by clip-path, not visibility (visibility:hidden made kfxGeom hide the cloth layer too: her f…"},{"s":"2b1b0701","t":"2026-11-18T03:00Z","c":"review staff-cap-apply r6: site rebuilt on db24027f"},{"s":"64488e4f+","t":"2026-11-18T02:38Z","c":"cloth-xoc r6e: rebuild site"},{"s":"af71f94a+","t":"2026-11-18T02:17Z","c":"smudge r16: stage4 + avatar probe tests, options script score fix (look tier by score), FINAL mode"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -43719,7 +43719,7 @@ function restDs(a){if(!a||a.rest!=="ds")return a;const T=restTonic(),k=restDsK()
  a.go=()=>{const t=restTonic();if(t&&!(a.c&&a.c.bac)){S.inv.splice(t.i,1);log(`Ngươi sắc ${t.it.n} uống rồi ngủ sớm.`)}else log("Ngươi sai người mua chén thuốc bổ, uống rồi ngủ sớm.")};return a}
 function restLat(a){if(!a||a.rest!=="lat")return a;const e=typeof emoGet==="function"?emoGet(S):{k:"binh",v:0};const bad=REST_BAD.includes(e.k)&&e.v>=15;
  a.k=BAL.restLatK;a.c={};a.o=100;a.w={suc:BAL.restLatSuc};a.l={};
- a.t=`Nằm nghỉ trong tẩm cung, uống chén trà sen.${bad?"":` Tâm trạng đang ${typeof EMO==="object"&&EMO[e.k]?EMO[e.k].toLowerCase():"bình thường"}: không đổi.`}`;
+ a.t=`Nằm nghỉ trong tẩm cung, uống chén trà sen.${bad?"":` Tâm trạng đang ${typeof mbBand==="function"&&typeof kitMoodVal==="function"?mbBand(kitMoodVal()).name.toLowerCase():"bình thường"}: không đổi.`}`;
  a.x=bad?`được: bớt ${EMO[e.k]} ${Math.min(BAL.restLatEmo,e.v)} (${e.v} → ${Math.max(0,e.v-BAL.restLatEmo)})`:"";
  a.go=()=>{try{const m=S.emo;if(m&&REST_BAD.includes(m.k)&&m.v>=15){const v0=m.v;m.v=Math.max(0,m.v-BAL.restLatEmo);emoSync(S);log(`Nghỉ một lát, lòng nhẹ đi: bớt ${EMO[m.k]} ${v0-m.v}.`)}}catch(x){}};return a}
 function restFix(a){return a&&a.rest==="ds"?restDs(a):a&&a.rest==="lat"?restLat(a):a}
@@ -60227,6 +60227,26 @@ function mbTile(){try{if(!mbOn()||typeof kitSkillCard!=="function")return"";cons
 window.mbTile=mbTile;
 (function(){if(typeof selfCardHTML!=="function")return;const s0=selfCardHTML;selfCardHTML=function(){const h=s0.apply(this,arguments);try{const t=mbTile();if(!t)return h;
   const i=h.indexOf('data-g="Tư chất"');if(i<0)return h;const j=h.indexOf('<div class="pcg',i);const at=j<0?h.lastIndexOf("</div></div>"):h.lastIndexOf("</div>",j);if(at<0)return h;return h.slice(0,at)+t+h.slice(at)}catch(e){return h}}})();
+/* ---------- TOP BAR (owner 18/11 ~05:40Z: "cho cái thanh tâm trạng nằm ở thanh trên cố định của game, sắp xếp sao cho đẹp") ----------
+   ONE part, every screen that has the fixed top bar (header.hud, last child, one full-width grid row): her mood seal + band word + kitSignedBar (KIT §49.1: calm at the
+   centre, red left = low, green right = high) + the signed number. Tap = the existing mood box (data-emo-open="me", jpcf). ONE accessor for the number:
+   kitMoodVal() reads moodBar(S) when the npc-chain model is live, else S.mood.v — no second number.
+   Owner picked this full-row layout (18/11 ~06:05Z, "kiểu 1"). */
+window.kitMoodVal=function(){try{if(typeof moodBar==="function"){const x=moodBar(S);const n=typeof x==="number"?x:x&&x.v;if(typeof n==="number"&&isFinite(n))return Math.round(n)}}catch(e){}return S&&S.mood&&typeof S.mood.v==="number"?Math.round(S.mood.v):0};
+function mbHud(){try{const hd=document.querySelector("header.hud");if(!hd)return;let el=document.getElementById("hud-mood"); if(!mbOn()){if(el)el.hidden=true;return}
+ if(!el){el=document.createElement("div");el.id="hud-mood";el.setAttribute("role","button");el.tabIndex=0;el.dataset.emoOpen="me";hd.appendChild(el);
+  el.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();el.click()}})}
+ el.className="kstm";el.hidden=false;const v=kitMoodVal(),bd=mbBand(v),sg=v>0?"+"+v:String(v);let seal="";try{seal=typeof emoBadge==="function"?emoBadge(S):""}catch(e){}
+ const h=`<span class="kmd-seal">${seal}</span><small class="kmd-l">Tâm trạng</small><b class="kmd-w ef ${bd.cls}">${bd.name}</b>${typeof kitSignedBar==="function"?kitSignedBar(v):""}<span class="kmd-n">${sg}</span>`;
+ if(el.dataset.h!==h){el.dataset.h=h;el.innerHTML=h;el.title=`Tâm trạng ${bd.name} ${sg} · chạm để xem vì sao`}}catch(e){}}
+(function(){const st=document.createElement("style");st.id="kit-moodhud";st.textContent=`
+header.hud>.kstm{grid-area:auto;grid-column:1/-1;box-sizing:border-box;display:flex;align-items:center;gap:7px;height:20px;margin-top:2px;padding:2px 4px 0;cursor:pointer;min-width:0;border-top:1px solid var(--k-hair,#e6d3ac)}
+.kstm .kmd-seal{display:inline-flex;width:18px;height:18px;flex:0 0 18px}.kstm .kmd-seal img.kemo{width:18px;height:18px;border-radius:50%;object-fit:cover;margin:0;position:static}
+.kstm .kmd-l{font-size:.7rem;color:var(--dim);white-space:nowrap}.kstm .kmd-w{font-family:var(--display);font-size:.85rem;white-space:nowrap;min-width:3.6em}
+.kstm .ksbar{flex:1 1 auto;width:auto;min-width:40px;height:8px}.kstm .kmd-n{font-family:var(--display);font-size:.85rem;font-variant-numeric:tabular-nums;min-width:2.4em;text-align:right;color:var(--ink)}
+`;document.head.appendChild(st)})();
+if(typeof renderHUD==="function"){const r0=renderHUD;renderHUD=function(){const r=r0.apply(this,arguments);mbHud();return r}}
+window.mbHud=mbHud;
 /* measuring hook */
 window.moodStat=function(){return Object.assign({v:S&&S.mood?S.mood.v:null},MOOD_N)};
 })();
@@ -68075,7 +68095,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="5460aac66a69";window.CTM_BUILD=BUILD;
+const BUILD="f20607c85413";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
