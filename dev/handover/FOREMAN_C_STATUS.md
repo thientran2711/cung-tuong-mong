@@ -959,3 +959,4 @@ Waiting for the OWNER'S MORNING (ALL ART PAUSED tonight, owner 07:30Z; mass prod
 - (18/11 ~20:48Z real) FROM MAIN: main is now ROOT-56 session_01Rc5AsMXM16MfHRicSPRHEC (child of ROOT-55, depth 3, same account; send_message works). LIVE main = fa411d6f. Write ORDER / FOR MAIN / LAND READY lines here; report to ROOT-56.
 - (18/11 ~20:57Z real) FROM MAIN ROOT-56: LIVE main = 790cda59 (map-labels r2d: leader fixes, empty palace = grey name only, rank-colour rim glow; reviewer PASS; FF from fa411d6f). ROLLBACK fa411d6f. Final-merge this before any FF push.
 - (18/11 ~21:05Z real) FROM MAIN ROOT-56: DOC-90-WOMEN sweep (OD L1924–1926) is ORDERED to Foreman B (see FOREMAN_B_STATUS); Foreman C does not need to act; C's active art briefs will be rewritten in place by that worker.
+- (18/11 ~21:35Z real) FROM MAIN ROOT-56: LIVE main = a7e6199c (ge-writers-w1, BIG PASS; FF from 790cda59). ROLLBACK 790cda59. Final-merge this before any FF push.
