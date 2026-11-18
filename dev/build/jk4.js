@@ -328,7 +328,7 @@ window.kitDlgFit=kitDlgFit;
 .modal .dlg.kdscroll>#mb>.opts{grid-template-rows:none!important;grid-auto-rows:max-content!important;align-content:start!important}
 .modal .dlg.kdscroll>#mb>.opts>*{min-height:max-content;flex:none}
 .modal .dlg.kdscroll>#mb>.opts.kdsh{box-shadow:inset 0 10px 8px -8px rgba(58,32,16,.28)}
-.modal .dlg.kdscroll>#mb>.kpb{flex:0 1 auto!important;min-height:0}
+.modal .dlg.kdscroll>#mb>.kpb{flex:0 0 auto!important;min-height:auto}/* kit-kpb (18/11): the intro / facts / item card keeps its FULL height (never shrinks under the option list); a long intro is capped by kitDlgText (.kdtx) and scrolls inside itself, only .opts takes the rest */
 .modal .dlg.kdscroll.kdtx>#mb>.kpb{overflow:hidden;display:flex;flex-direction:column}
 .modal .dlg.kdscroll.kdtx>#mb>.kpb.kphas{display:grid;grid-template-rows:minmax(0,1fr)}
 .modal .dlg.kdscroll.kdtx>#mb>.kpb>.kpmain{min-height:0;overflow-y:auto;overscroll-behavior:contain;transition:box-shadow .2s;flex:1 1 auto}

@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"53a69974+","t":"2026-11-18T09:54Z","c":"life-preload-fu r2: rebuild generated files","b":"c3a9d1c903a4","h":[{"s":"2a9170b2+","t":"2026-11-18T09:23Z","c":"look-fx R9g2: shared eye keep-out PAD (BAL.looks.keep.fit.eye +.042/.048 = ~4 % face width gap), keepscan --gap (eye contour dilated by GAP…"},{"s":"e3f833ce+","t":"2026-11-18T09:05Z","c":"odds-cap r3 review: dev/test/odds-cap.js runs in the go-live suite (quickcheck.d/40-odds-cap.sh, OC_BUILD = the sha's build)"},{"s":"824cfccf+","t":"2026-11-18T08:43Z","c":"scroll-cue-scan: every dialog with a Kéo xuống cue (94 dialogs x Fold+iPad)"},{"s":"9c581406+","t":"2026-11-18T07:37Z","c":"review map-tap-go r9: merge origin/main e0b9662 (generated files rebuilt from merged sources)"},{"s":"c571aaea+","t":"2026-11-18T07:26Z","c":"map-tap-go: KIT 84c person-less VIỆC frame — main picture fills the left column (k3fill), kit-conform rule, kit page sample, KIT_REQUESTS c…"},{"s":"5ae28ddb+","t":"2026-11-18T07:13Z","c":"place-stage r5 redo: A1 (marker back on the head, KIT_FIG.h .79, band 70, vivid gold glow) + seal at ONE fixed offset from the standing anc…"},{"s":"5c5d1e8b+","t":"2026-11-18T07:04Z","c":"review person-dialog-restore r1: greet result card carries the greeting line (was the ambient weather line); rebuilt"},{"s":"2eea9a2b+","t":"2026-11-18T06:45Z","c":"review coop-thin-e r1: coop-thin-e E2 diagnostics; a setup press that landed in the new week is stepped first (swap flake 2/7)"},{"s":"8af2fc24+","t":"2026-11-18T06:31Z","c":"mg-skip-all r2: one quick-button look everywhere (kquick css, never an option card), playArt default fix, KIT 13.6 + MINIGAMES, page test m…"},{"s":"c9ada2a3+","t":"2026-11-18T06:14Z","c":"Fix S.lyF: recognise the fallen Ly person by lyF===1 (S carries the object), not truthiness; her own figure keeps her rank tier. + dev/test…"}]};
+window.CTM_BI={"s":"e5518ddc+","t":"2026-11-18T10:01Z","c":"life-preload-fu r2: rebuild generated files","b":"7b0cb7a35c7d","h":[{"s":"65aeddd7+","t":"2026-11-18T10:26Z","c":"review d19-gift-work r1: a refused piece (jdis: stays in her chest) eases nothing — no free peace; test covers it; site rebuilt"},{"s":"32cc2a68+","t":"2026-11-18T10:12Z","c":"kit-kpb: kpb-shots.js (after-only Fold|iPad shots of pgpick, giftpick, short picker)"},{"s":"40e74a62+","t":"2026-11-18T09:19Z","c":"cloth-hd: cloth layer bakes the edit onto the HD picture (out = HD + up(bake) - up(source)) and wears the picture's own filter (kfa edge, s…"},{"s":"2a9170b2+","t":"2026-11-18T09:23Z","c":"look-fx R9g2: shared eye keep-out PAD (BAL.looks.keep.fit.eye +.042/.048 = ~4 % face width gap), keepscan --gap (eye contour dilated by GAP…"},{"s":"e3f833ce+","t":"2026-11-18T09:05Z","c":"odds-cap r3 review: dev/test/odds-cap.js runs in the go-live suite (quickcheck.d/40-odds-cap.sh, OC_BUILD = the sha's build)"},{"s":"824cfccf+","t":"2026-11-18T08:43Z","c":"scroll-cue-scan: every dialog with a Kéo xuống cue (94 dialogs x Fold+iPad)"},{"s":"9c581406+","t":"2026-11-18T07:37Z","c":"review map-tap-go r9: merge origin/main e0b9662 (generated files rebuilt from merged sources)"},{"s":"c571aaea+","t":"2026-11-18T07:26Z","c":"map-tap-go: KIT 84c person-less VIỆC frame — main picture fills the left column (k3fill), kit-conform rule, kit page sample, KIT_REQUESTS c…"},{"s":"5ae28ddb+","t":"2026-11-18T07:13Z","c":"place-stage r5 redo: A1 (marker back on the head, KIT_FIG.h .79, band 70, vivid gold glow) + seal at ONE fixed offset from the standing anc…"},{"s":"5c5d1e8b+","t":"2026-11-18T07:04Z","c":"review person-dialog-restore r1: greet result card carries the greeting line (was the ambient weather line); rebuilt"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -33601,7 +33601,7 @@ function kfxGeom(s){const img=s.__img;if(!img||!img.isConnected){s.style.display
    const op=(cs.objectPosition||"50% 50%").split(/\s+/);const f=(v,free)=>/%$/.test(v)?free*parseFloat(v)/100:/px$/.test(v)?parseFloat(v):/left|top/.test(v)?0:/right|bottom/.test(v)?free:free/2;
    L+=f(op[0]||"50%",bw-w);T+=f(op[1]||"50%",bh-h)}
   const to=(cs.transformOrigin||"").split(/\s+/).map(parseFloat);const tor=to.length>=2&&!isNaN(to[0])?`${to[0]-(L-L0)}px ${to[1]-(T-T0)}px`:"50% 50%";
-  const st=s.style;st.left=L+"px";st.top=T+"px";st.width=w+"px";st.height=h+"px";st.transform=cs.transform;st.transformOrigin=tor;st.translate=cs.translate||"none";st.rotate=cs.rotate||"none";st.scale=cs.scale||"none";st.opacity=cs.opacity}
+  const st=s.style;st.left=L+"px";st.top=T+"px";st.width=w+"px";st.height=h+"px";st.transform=cs.transform;st.transformOrigin=tor;st.translate=cs.translate||"none";st.rotate=cs.rotate||"none";st.scale=cs.scale||"none";st.opacity=cs.opacity;/* cloth-hd: the cloth layer REPLACES the picture (it hides under clip-path, which also hides the picture's own filter: cut-out edge url(#kfa), floor shadow, halo / glow of her stage figure); the layer wears the same filter so lv0 and lv1-3 look the same */{const k=s.querySelector("img.kclo");if(k){const fl=cs.filter==="none"?"":cs.filter;if(k.style.filter!==fl)k.style.filter=fl}}}
 function kfxSyncAll(){KFX_L.forEach(s=>{if(!s.isConnected){KFX_L.delete(s);return}kfxGeom(s)})}
 function kfxKick(){kfxT=performance.now()+900;if(kfxRaf||!KFX_L.size)return;const f=()=>{kfxSyncAll();if(performance.now()<kfxT)kfxRaf=requestAnimationFrame(f);else kfxRaf=0};kfxRaf=requestAnimationFrame(f)}
 ["transitionrun","transitionend","animationstart","animationend"].forEach(e=>document.addEventListener(e,kfxKick,true));addEventListener("resize",kfxKick);
@@ -37890,7 +37890,7 @@ window.kitDlgFit=kitDlgFit;
 .modal .dlg.kdscroll>#mb>.opts{grid-template-rows:none!important;grid-auto-rows:max-content!important;align-content:start!important}
 .modal .dlg.kdscroll>#mb>.opts>*{min-height:max-content;flex:none}
 .modal .dlg.kdscroll>#mb>.opts.kdsh{box-shadow:inset 0 10px 8px -8px rgba(58,32,16,.28)}
-.modal .dlg.kdscroll>#mb>.kpb{flex:0 1 auto!important;min-height:0}
+.modal .dlg.kdscroll>#mb>.kpb{flex:0 0 auto!important;min-height:auto}/* kit-kpb (18/11): the intro / facts / item card keeps its FULL height (never shrinks under the option list); a long intro is capped by kitDlgText (.kdtx) and scrolls inside itself, only .opts takes the rest */
 .modal .dlg.kdscroll.kdtx>#mb>.kpb{overflow:hidden;display:flex;flex-direction:column}
 .modal .dlg.kdscroll.kdtx>#mb>.kpb.kphas{display:grid;grid-template-rows:minmax(0,1fr)}
 .modal .dlg.kdscroll.kdtx>#mb>.kpb>.kpmain{min-height:0;overflow-y:auto;overscroll-behavior:contain;transition:box-shadow .2s;flex:1 1 auto}
@@ -45740,6 +45740,8 @@ function kitPopSample(k){try{if(typeof S==="undefined"||!S||typeof kitModal!=="f
   result:q&&{kind:"result",title:"Kết quả: Thỉnh an Hoàng hậu",sub:"Thượng tuần · buổi sáng",subject:q,facts:[{who:q,text:"hài lòng vì ta giữ lễ.",chips:[["Thiện cảm",5]]},{who:S,kind:"me",text:"được tiếng hiền thục trong cung.",chips:[["Đức",2],["Sức",-10]]}],btn:"Đã hiểu"},
   long:{kind:"choice",title:"Việc dài lời kể",sub:"Thượng tuần · buổi sáng",facts:Array.from({length:9},(_,i)=>"Lời kể số "+(i+1)+": người trong cung kể rằng chuyện này kéo dài suốt cả buổi, hết người này đến người khác đến thưa, nên khung phải cuộn phần chữ mà giữ nguyên tiêu đề, tranh và các lựa chọn."),
    opts:[{n:"Nghe hết rồi mới định",fx:{...BAL.kitpage.listen},x:`thành: Đức +${BAL.kitpage.listen.duc}`,go:nop},{n:"Cho lui, để mai bàn",fx:{},x:"",go:nop}]},
+  pickmany:{kind:"choice",title:"Chọn một món",sub:"Thượng tuần · buổi sáng",facts:["Lời dẫn của hộp chọn luôn hiện đủ, không bị danh sách lựa chọn che.","Chỉ danh sách bên dưới cuộn khi có nhiều lựa chọn; tiêu đề, lời dẫn và nút đứng yên (KIT §8 kdscroll)."],
+   opts:Array.from({length:16},(_,i)=>({n:"Món số "+(i+1),fx:{},x:"Khá chắc · thành: được lòng người nhận · hỏng: bị nghi ngờ",go:nop}))},
   news:{kind:"news",title:"Tin trong cung",sub:"Tháng 3 · Năm 1",facts:[v2?{who:v2,text:"được lật thẻ bài đêm qua",chips:[["Sủng",3]]}:"Đêm qua Hoàng thượng lật thẻ bài.","Tháng này: Được mùa khắp nơi. Kho lúa +12."],btn:"Đã rõ"}};
  /* kit-size #8: the two real-path cards the §84 samples open (place card = ONE place picture left + kit rows; option naming a person = that person's portrait) */
  if(k==="place"||k==="personopt"){let m=null;
@@ -45755,7 +45757,7 @@ function kitPopSample(k){try{if(typeof S==="undefined"||!S||typeof kitModal!=="f
  if(sp.opts)sp.opts.forEach(o=>{const g=o.go;o.go=()=>{g();setTimeout(back,0)}});kitModal(sp);return true}catch(e){console.error("kitPopSample",e);const pg=document.getElementById("kitpage");if(pg)pg.hidden=false;return false}}
 window.kitPopSample=kitPopSample;
 KIT_SAMPLES.push({id:"§8",title:"kitModal · khung pop-up chung: ĐIỀU · LUẬT · VIỆC · KẾT QUẢ · TIN (chạm để mở pop-up thật)",html:()=>{
- const L=[["info","ĐIỀU · Thái hậu (người)"],["rule","LUẬT · Bổng lộc (tranh nhỏ 3:4)"],["event","VIỆC · Hoàng hậu triệu kiến (hình người + lựa chọn)"],["result","KẾT QUẢ · Thỉnh an Hoàng hậu"],["news","TIN · Tin trong cung (không người)"],["long","VIỆC DÀI · lời kể dài (chữ cuộn trong khung, tranh + nút đứng yên · KIT 32.5b)"],["timed","VIỆC CÓ ĐỒNG HỒ · hỏi + chip đếm ngược luôn nằm trên các lựa chọn (KIT 32.5c · §69)"]];
+ const L=[["info","ĐIỀU · Thái hậu (người)"],["rule","LUẬT · Bổng lộc (tranh nhỏ 3:4)"],["event","VIỆC · Hoàng hậu triệu kiến (hình người + lựa chọn)"],["result","KẾT QUẢ · Thỉnh an Hoàng hậu"],["news","TIN · Tin trong cung (không người)"],["pickmany","CHỌN NHIỀU · lời dẫn đứng yên, chỉ danh sách cuộn (KIT §8 kdscroll)"],["long","VIỆC DÀI · lời kể dài (chữ cuộn trong khung, tranh + nút đứng yên · KIT 32.5b)"],["timed","VIỆC CÓ ĐỒNG HỒ · hỏi + chip đếm ngược luôn nằm trên các lựa chọn (KIT 32.5c · §69)"]];
  const ok=typeof S!=="undefined"&&S;return `<div class="kitpg-row">${L.map(([k,t])=>`<button type="button" class="kbtn${k==="info"?"":" alt"}" data-kpop="${k}"${ok?"":" disabled"}>${t}</button>`).join("")}</div>`+
   (ok?"":kitFacts(["Vào một kiếp rồi mở lại trang mẫu để xem pop-up."],{group:false}))}});
 KIT_SAMPLES.push({id:"§28.13b",title:"kitItem lớn · không khung, ảnh 512 (lg 150 px · xl 260 px) — so với ô có khung (md · slot)",html:()=>{const s=kitItemSrc("nhansam","https://ctm-img.victoria-tntt.workers.dev/img/item-nhansam.webp");
@@ -50799,6 +50801,7 @@ function tsBot(){return typeof window.__bot!=="undefined"}
 function tsLast(){return BUOI.length-1}
 /* ---------- one option card: odds word + Được / Mất / Kèm (+ costs in fx → Tốn) + Cần (need) ---------- */
 function tsOpt(o){const sure=o.odds==null||o.odds>=100;const L=[sure?"":word(oddsCl(Math.round(o.odds)))];
+ if(o.ton&&o.ton.length)L.push("tốn: "+o.ton.join(", "));/* a cost that is not a number of BAL keys (a piece given away: "<món> −1") */
  if(o.duoc&&o.duoc.length)L.push("thành: "+o.duoc.join(" · "));if(o.mat&&o.mat.length)L.push("hỏng: "+o.mat.join(" · "));else if(!sure)L.push("hỏng: không mất gì");
  if(o.kem&&o.kem.length)L.push("kèm: "+o.kem.join(" · "));if(o.note)L.push(`(${o.note})`);
  const need=(o.need||[]).filter(Boolean);return{n:o.n,fx:o.fx||{},x:L.join(" · "),go:o.go,need,tsDis:need.some(x=>!x.ok),tsLater:!!o.later}}
@@ -50903,30 +50906,74 @@ function tsDangerPanel(){if(!S||S.dead)return;const D=tsDangerOf(S,true);
  const sec=`<div class="kpsec"><h4 class="kpst">Thanh chung</h4>${tsRows([["Nguy hiểm chung",`${D.n} · ${tsDWord(D.n)}`,D.n>=BAL.tsDanger.hot?"r":"t"],["Gộp từ",`${D.top.length} người ngươi đã rõ lòng`,"n"],D.unk?["Chưa rõ",`${D.unk} người ngươi chưa rõ lòng (dò la, tai mắt để biết)`,"n"]:null].filter(Boolean))}</div>`+
   `<div class="kpsec"><h4 class="kpst">Cách tính</h4>${tsRows([["Mỗi người","Ghen, Oán hoặc ghét (lấy cao nhất) + tính nết → mức hại (thang nguy hiểm)","n"],["Gộp","cơ một tháng có ít nhất một người ra tay với ngươi, từ 0 đến 100","n"],["Áp cho","mọi phi tần, cùng một cách tính","n"]])}</div>`+
   (facts.length?`<div class="kpsec"><h4 class="kpst">Người nặng lòng nhất</h4>${tsFacts(facts)}</div>`:"");
- const g=tsS().guard>wk();const opts=[tsOptGuard(),tsOptGifts(D),tsOptGiftsItem(D),{n:"Thôi",fx:{}}].filter(Boolean);/* "Thôi" = the kit ✕ (KIT 32.10), never a button */
+ const g=tsS().guard>wk();const opts=[tsOptGuard(),tsOptGifts(D),{n:"Thôi",fx:{}}].filter(Boolean);/* "Thôi" = the kit ✕ (KIT 32.10), never a button */
  Q.unshift({t:"Nguy hiểm chung",h:sec,opts,showOut:true,tsk:"danger"});showModal()}
 function tsOptGuard(){const s=tsS();if(s.guard>wk())return tsOpt({n:"Đóng cửa giữ mình",need:[{t:`chưa giữ mình (còn ${s.guard-wk()} tuần)`,ok:false}],duoc:["kẻ muốn hại khó ra tay"]});
  return tsOpt({n:"Đóng cửa giữ mình",fx:{sung:-2},need:[{t:"không cấm túc",ok:!S.confined}],duoc:["2 tuần: mưu hại nhắm vào ngươi thành ít đi một nửa"],kem:["ít gặp Hoàng thượng"],go:()=>{s.guard=wk()+2;log("Ngươi đóng cửa cung, dặn kẻ hầu canh giữ nghiêm, hai tuần không ra ngoài nhiều.")}})}
-function tsOptGifts(D){const L=D.top.filter(x=>x.b>=1).slice(0,4);if(!L.length)return null;const G=BAL.tsGift,c=L.length*G.bac;
- return tsOpt({n:"Biếu quà làm lành",fx:{bac:-c},need:[tsNeedBac(c)],duoc:L.map(x=>`${x.v.name} bớt ghen ${G.ghen}, bớt oán ${G.oan}`),go:()=>{for(const x of L){x.v.ghen=cl((x.v.ghen||0)-G.ghen,0,100);oanAdd(x.v,S,-G.oan);tsAff(x.v,G.aff)}log(`Ngươi sai người mang quà sang ${kitNameList(L.map(x=>x.v))}, lời lẽ mềm mỏng.`)}})}
-/* D19 (owner OD:L752): "Biếu quà làm lành" also takes a handmade work or an item of equal worth instead of bạc, for the person who bears the most
-   ill will. Worth = the same rules as any gift: a work by wkEval (tastes, fatigue, chân tình), an item by giftVal (her tastes) + jlux.luxGift (a
-   mọn piece is not enough). BAL.tsGift.eq = the least worth; the item itself goes through giveTo (one gift rule for her and every consort). */
-function tsGiftWorth(e,v){if(!e||e.h)return{ok:false,why:"",q:-1};
- if(e.wk){const ev=wkEval(S,e.wk,v);if(!ev.ok)return{ok:false,why:ev.why||"nàng không nhận đồ này",q:-1};const ok=ev.v>=BAL.tsGift.eq;return{ok,why:ok?"":"tác phẩm còn mỏng, chưa đủ lễ",q:ev.v,note:ev.notes.join("; ")}}
- const it=IT[e.k];if(!it)return{ok:false,why:"",q:-1};if(e.t)return{ok:false,why:"đồ đã tẩm, không thể biếu",q:-1};
- const q=giftVal(Object.assign({k:e.k},it),v);let lg=null;try{lg=luxGift(e.k,S,v)}catch(x){}
- const mon=lg&&lg.st==="mon";const ok=q>=BAL.tsGift.eq&&!mon;return{ok,why:ok?"":(mon?"quà mọn, chưa đủ lễ":"nàng không ưa món này, chưa đủ lễ"),q,note:lg?lg.word:""}}
-function tsOptGiftsItem(D){const L=D.top.filter(x=>x.b>=1).slice(0,4);if(!L.length||!S.inv.some(e=>!e.h))return null;const x=L[0],G=BAL.tsGift;
- return tsOpt({n:"Biếu quà làm lành bằng đồ",duoc:[`${x.v.name} bớt ghen ${G.ghen}, bớt oán ${G.oan}`],kem:["một món trong rương thay cho bạc"],note:"người nặng lòng nhất",go:()=>{pushDil(mkP("tsgiftpick",{v:x.v.id}),"Biếu quà làm lành")}})}
-PEND.tsgiftpick=p=>{const v=RV(p.v);if(!v)return null;const G=BAL.tsGift;const items=S.inv.map((e,i)=>[e,i]).filter(([e])=>!e.h);
- return{who:pv(v),t:`<p>Chọn món đồ biếu ${v.name} để làm lành. Món phải đáng giá một phần lễ bạc (${G.bac} bạc), hợp ý nàng.</p>`,o:items.map(([e,i])=>{const w=tsGiftWorth(e,v);
-  return{cap:0,n:giftName(e),ik:i,fx:{},x:w.ok?`${capW()} · thành: nàng bớt ghen ${G.ghen}, bớt oán ${G.oan}${w.note?" · "+w.note:""}`:"",need:w.ok?[]:[{t:w.why||"không biếu được",ok:false}],tsDis:!w.ok,
-   go:()=>{if(!w.ok)return;spend(G.khac);const r=giveTo(S,v,i);v.ghen=cl((v.ghen||0)-G.ghen,0,100);oanAdd(v,S,-G.oan);log(`${r}Lời lẽ mềm mỏng, lòng nàng dịu đi.`)}}}).concat([{n:"Thôi",fx:{}}])}};
+/* =============== D19 (owner OD:L752) · BIẾU QUÀ LÀM LÀNH — ONE act, three roads (review/d19-gift-work) ===============
+   The act "Biếu quà làm lành" (Nguy hiểm chung panel + the maid's warning) opens ONE choice of three kit option cards:
+   · Lễ bạc — as before: every person who bears her ill will (≤ 4) gets BAL.tsGift.bac bạc of gifts;
+   · Tác phẩm tự tay làm / Đồ trong rương — ONE piece for the person who bears the most ill will, instead of her share of bạc.
+   Equivalent value (OD:L582): a piece stands in for the bạc share when it is worth at least BAL.tsGift.bac bạc TO THE RECEIVER: its sale
+   price (econPrice, the ONE sale API) × her taste on the ONE gift scale — a work by wkEval (her tastes, fatigue, chân tình, Tham vọng /
+   Kiêu ngạo, material), an item by giftVal (her tastes). So a liked piece costs her what the bạc does; a piece she does not care for costs
+   more (taste matters); jlux.luxGift's word (mọn / vừa / hợp / quá hậu) is shown as a note. The
+   card says what she gives up ("mất: <món> · bán được N bạc") and what she gets (thiện cảm by the piece: the ONE gift preview giftEval).
+   The piece goes through giveTo (ONE gift rule for her and every consort). The same functions serve every NPC (tsNpcGift): a consort whom
+   many want to harm sends the cheapest road that is enough. Ghen is only ever aimed at her (j28 danger), so a consort's gift eases oán. */
+function tsGiftL(D){return D.top.filter(x=>x.b>=1).slice(0,4)}
+function tsGiftNo(e){if(!e||e.h)return true;try{if(typeof wdIsNt==="function"&&wdIsNt(e))return true;if(typeof isDh==="function"&&isDh(e))return true}catch(x){}return e.k==="mcnt"}
+/* worth of a piece TO THE RECEIVER, in bạc: what it sells for (econPrice) × her taste (the ONE gift scale: wkEval v / WVAL of its grade for a
+   work — chân tình, her art, Tham vọng, fatigue; giftVal / its value to someone who likes it for an item). Enough = at least the bạc share. */
+function tsGiftWorth(e,v,a){a=a||S;if(tsGiftNo(e))return{ok:false,why:"",q:-1,bac:0,wb:0};const G=BAL.tsGift;let bac=0;try{bac=econPrice(a,e)}catch(x){}
+ const fin=(f,why0,note)=>{const wb=Math.round(bac*f),ok=wb>=G.bac;return{ok,why:ok?"":why0,q:Math.round(f*100)/100,bac,wb,note}};
+ if(e.wk){const ev=wkEval(a,e.wk,v);if(!ev.ok)return{ok:false,why:ev.why||"nàng không nhận đồ này",q:-1,bac,wb:0};const b0=WVAL[Math.max(0,Math.min(3,e.wk.ti|0))]||1;
+  return fin(ev.v/b0,"tác phẩm còn mỏng, chưa đủ lễ",ev.notes.join("; "))}
+ const it=IT[e.k];if(!it)return{ok:false,why:"",q:-1,bac,wb:0};if(e.t)return{ok:false,why:"đồ đã tẩm, không thể biếu",q:-1,bac,wb:0};
+ const q=giftVal(Object.assign({k:e.k},it),v),full=giftVal(Object.assign({k:e.k},it,{tg:["rv","hh"]}),v)||1;let lg=null;try{lg=luxGift(e.k,a,v)}catch(x){}
+ return fin(q/full,q<full?"nàng không ưa món này, chưa đủ lễ":"món còn nhẹ, chưa đủ lễ",lg?lg.word:"")}
+/* the pieces of a kind ("wk" works, "it" items, null both) that could go to v: [{e,i,w}], enough first, then the cheapest to give up */
+function tsGiftPieces(a,v,kind){return (a.inv||[]).map((e,i)=>({e,i})).filter(({e})=>!tsGiftNo(e)&&(kind==null||(kind==="wk")===!!e.wk)).map(o=>Object.assign(o,{w:tsGiftWorth(o.e,v,a)}))
+ .sort((x,y)=>(y.w.ok-x.w.ok)||(x.w.bac-y.w.bac))}
+/* what the gift eases: ghen (aimed only at her) and oán toward the giver */
+function tsGiftEase(a,v){const G=BAL.tsGift;if(a===S)v.ghen=cl((v.ghen||0)-G.ghen,0,100);oanAdd(v,a,-G.oan)}
+function tsGiftEaseTxt(a,v){const G=BAL.tsGift;return a===S?`${v.name} bớt ghen ${G.ghen}, bớt oán ${G.oan}`:`${v.name} bớt oán ${G.oan}`}
+/* road 1: bạc (her or any consort; her bạc is taken by the option's fx) */
+function tsGiftBac(a,L){const G=BAL.tsGift;if(a!==S)ap(a,{bac:-L.length*G.bac});for(const v of L){tsGiftEase(a,v);relAdd(a,v,G.aff)}}
+/* roads 2 and 3: one piece (her or any consort) */
+function tsGiftPiece(a,v,i){const e=a.inv[i];const w=tsGiftWorth(e,v,a);if(!w.ok)return"";const nm=giftName(e);const r=giveTo(a,v,i);if(!r)return"";
+ /* review r1: she may refuse it (jdis: a piece she does not like stays in the chest) → nothing eased, nothing lost (no free peace) */
+ if((a.inv||[]).includes(e))return{r,nm,bac:w.bac,kept:true};tsGiftEase(a,v);return{r,nm,bac:w.bac}}
+/* the act card (one card, in the panel and in the warning) */
+function tsOptGifts(D){const L=tsGiftL(D);if(!L.length)return null;const G=BAL.tsGift,c=L.length*G.bac,x=L[0];
+ const nW=tsGiftPieces(S,x.v,"wk").filter(o=>o.w.ok).length,nI=tsGiftPieces(S,x.v,"it").filter(o=>o.w.ok).length;
+ return tsOpt({n:"Biếu quà làm lành",need:[{t:`Bạc ${c} (có ${S.bac}), hoặc một tác phẩm hay món đồ đủ lễ`,ok:S.bac>=c||nW+nI>0}],duoc:L.map(y=>tsGiftEaseTxt(S,y.v)),
+  kem:[`trả bằng lễ bạc (${G.bac} bạc mỗi người), hoặc một tác phẩm tự tay làm hay một món trong rương cho ${x.v.name}`],go:()=>{pushDil(mkP("tsgift",{L:L.map(y=>y.v.id)}),"Biếu quà làm lành")}})}
+PEND.tsgift=p=>{const L=(p.L||[]).map(RV).filter(v=>v&&v.alive!==false&&!v.out);if(!L.length)return null;const G=BAL.tsGift,c=L.length*G.bac,v=L[0];
+ const P=k=>tsGiftPieces(S,v,k).filter(o=>o.w.ok),W=P("wk"),I=P("it");const cheap=A=>A.length?Math.min(...A.map(o=>o.w.bac)):0;
+ const piece=(k,n,A,what)=>tsOpt({n,need:[{t:`${what} đủ lễ với ${v.name} (có ${A.length})`,ok:A.length>0}],duoc:[tsGiftEaseTxt(S,v),"thiện cảm theo món quà, nàng ưa thì thêm"],
+  ton:A.length?[`${what} −1 (rẻ nhất bán được ${cheap(A)} bạc)`]:[],kem:[`thay cho ${G.bac} bạc lễ của ${v.name}`],go:()=>{pushDil(mkP("tsgiftpick",{v:v.id,k}),"Biếu quà làm lành")}});
+ return{who:pv(v),t:`<p>Biếu quà làm lành: một phần lễ là ${G.bac} bạc mỗi người. Thay bạc, có thể biếu ${v.name} (người nặng lòng nhất) một tác phẩm tự tay làm hay một món trong rương, miễn nàng thấy đủ lễ.</p>`,
+  o:[tsOpt({n:"Lễ bạc",fx:{bac:-c},need:[tsNeedBac(c)],duoc:L.map(y=>tsGiftEaseTxt(S,y)),kem:[`${L.length} người, ${G.bac} bạc mỗi người`],
+     go:()=>{tsGiftBac(S,L);log(`Ngươi sai người mang quà sang ${kitNameList(L)}, lời lẽ mềm mỏng. Được: ${L.map(y=>tsGiftEaseTxt(S,y)).join("; ")}. Mất: ${c} bạc.`)}}),
+   piece("wk","Tác phẩm tự tay làm",W,"tác phẩm"),piece("it","Đồ trong rương",I,"món đồ"),{n:"Thôi",fx:{}}]}};
+/* the piece picker (k: "wk" / "it"; an old save's pending picker has no k = both) */
+PEND.tsgiftpick=p=>{const v=RV(p.v);if(!v)return null;const G=BAL.tsGift;const A=tsGiftPieces(S,v,p.k||null);
+ return{who:pv(v),t:`<p>Chọn ${p.k==="wk"?"tác phẩm":p.k==="it"?"món đồ":"món"} biếu ${v.name} để làm lành. Món phải đáng một phần lễ bạc (${G.bac} bạc) trong mắt nàng: nàng ưa món nào thì món ấy nặng hơn.</p>`,o:A.map(({e,i,w})=>{
+  let gain="";try{const ge=giftEval(e,v);const m=ge&&ge.ok&&/thành: (.*?)(?: · kèm: |$)/.exec(ge.x||"");gain=m?m[1]:""}catch(x){}
+  return{cap:0,n:giftName(e),ik:i,fx:{},x:w.ok?`${capW()} · tốn: ${G.khac} khắc, ${giftName(e)} −1 (bán được ${w.bac} bạc; nàng coi như ${w.wb} bạc) · thành: ${tsGiftEaseTxt(S,v)}${gain?", "+gain:""}${w.note?" · kèm: "+w.note:""}`:"",need:w.ok?[]:[{t:(w.why||"không biếu được")+(w.q>=0?` (nàng coi như ${w.wb} bạc, cần ${G.bac})`:""),ok:false}],tsDis:!w.ok,
+   go:()=>{if(!w.ok)return;const R=tsGiftPiece(S,v,i);if(!R)return;spend(G.khac);/* khắc only when the piece really went (review r1) */if(R.kept){log(`${R.r}Lễ làm lành không thành, lòng nàng chưa dịu.`);return}log(`${R.r}Lời lẽ mềm mỏng, lòng nàng dịu đi. Được: ${tsGiftEaseTxt(S,v)}. Mất: ${R.nm} (bán được ${R.bac} bạc).`)}}}).concat([{n:"Thôi",fx:{}}])}};
+/* both are pickers she opened herself: full act cards (Được / Mất), not hidden event outcomes (jk2b KIT_ACT_PIDS, as jpoison) */
+try{KIT_ACT_PIDS.add("tsgift");KIT_ACT_PIDS.add("tsgiftpick")}catch(e){}
+/* NPC side, the same rule: the cheapest road that is enough (a piece worth less bạc than her bạc share, else bạc, else nothing) */
+function tsNpcGift(a,D){const L=tsGiftL(D);if(!L.length)return"";const G=BAL.tsGift,v=L[0].v;const A=tsGiftPieces(a,v,null).filter(o=>o.w.ok&&o.w.bac<=G.bac*L.length);
+ if(A.length){const R=tsGiftPiece(a,v,A[0].i);if(R&&!R.kept)return R.r}
+ if((a.bac||0)>=L.length*G.bac){tsGiftBac(a,L.map(x=>x.v));return `${rkName(a)} ${a.name} sai người mang quà sang ${kitNameList(L.map(x=>x.v))}.`}return""}
 /* the guard: same rule for everyone (a target who keeps to herself is harder to reach) */
 (function(){if(typeof npcAct!=="function")return;const n0=npcAct;npcAct=function(v,t){try{const g=t===S?tsS().guard:t&&t.tsGuard;if(g>wk()&&roll(50))return""}catch(e){}return n0.apply(this,arguments)}})();
 /* NPC side: a consort whom many want to harm closes her doors / sends gifts, by her own nature (same costs) */
-function tsNpcDanger(){for(const v of liveRivals(true)){if(!v.alive||v.out||v.tsGuard>wk())continue;const D=tsDangerOf(v,false);if(D.n<BAL.tsDanger.act)continue;const care=nv(v,"tsCare");if(!roll(care))continue;v.tsGuard=wk()+2;v.sung=cl((v.sung||0)-2,0,100)}}
+function tsNpcDanger(){for(const v of liveRivals(true)){if(!v.alive||v.out||v.tsGuard>wk())continue;const D=tsDangerOf(v,false);if(D.n<BAL.tsDanger.act)continue;const care=nv(v,"tsCare");if(!roll(care))continue;v.tsGuard=wk()+2;v.sung=cl((v.sung||0)-2,0,100);
+  /* D19: and she sends a peace gift by the same rule as the player (tsNpcGift) */try{const t=tsNpcGift(v,D);if(t&&typeof newsAdd==="function")newsAdd(v,"gift",t)}catch(e){console.error("tsNpcGift",e)}}}
 /* the HUD chip (Tình trạng row) + điềm báo when her own known bar climbs a step */
 /* review ts-a FAIL 2: the chip sits in the stage's right column (K3_RIGHT), never on the top bar's buổi line (it broke the date line on Fold) */
 if(window.K3_RIGHT)window.K3_RIGHT.push("tsnh");
@@ -50935,7 +50982,7 @@ if(window.K3_RIGHT)window.K3_RIGHT.push("tsnh");
 document.addEventListener("click",e=>{const b=e.target.closest('[data-hx="tsnh"],[data-k3="tsnh"]');if(!b||!tsOn())return;e.stopPropagation();e.preventDefault();if(Q.length)return;tsDangerPanel()},true);
 function tsDangerOmen(){const s=tsS();const D=tsDangerOf(S,true);const st=TS_DW.filter(x=>D.n>=x[0]).length-1;const was=s.dStep||0;s.dStep=st;if(st<=was||st<2||!D.top.length)return;
  const x=D.top[0];tsPanel({t:"Lời cảnh báo",who:pMaid(),h:`<p>${S.maid.name} khẽ thưa: ${kLine("ts:warn",kTP("ts:warn")||TS_WARN,{sp:{srv:"f"},ls:S,t:kToneSt(S.maid,S.maid&&S.maid.name)}).replace(/\{V\}/g,x.v.name)}</p>${tsRows([["Nguy hiểm chung",`${D.n} · ${tsDWord(D.n)}`,"r"]])}`,
-  opts:[tsOptGuard(),tsOptGifts(D),tsOptGiftsItem(D),tsOpt({n:"Ghi nhớ, cứ như thường",duoc:["không tốn gì"],kem:["kẻ muốn hại vẫn rình"]})].filter(Boolean)})}
+  opts:[tsOptGuard(),tsOptGifts(D),tsOpt({n:"Ghi nhớ, cứ như thường",duoc:["không tốn gì"],kem:["kẻ muốn hại vẫn rình"]})].filter(Boolean)})}
 
 /* =============== Ý 5 · NGƯỠNG XÉT PHẨM HIỆN TRƯỚC (promoReqP j8: cùng điều kiện cho mọi phi tần) =============== */
 function tsPromoRows(){const L=promoReqP(S);return L.map(([ok,t])=>[ok?"Đủ":"Thiếu",t,ok?"g":"r"])}
@@ -66963,7 +67010,7 @@ Object.assign(BAL.looks,{xoc:{on:1,
 /* r4 TASK 2: stain DECALS on the cloth (tra = tea, uot = wet, bun = mud). Decal art = CDN img/fx-stain-<kind>-<n>.webp (transparent webp); code places it on ANY figure through the cloth mask.
    on:0 = live feature OFF. lv[1..3] (nhẹ / vừa / nặng): n = decals, sc = decal width as a share of the robe width, op = opacity, wet = overall cloth darkening (wet cloth), pos = anchors tried in order
    (fx, fy = share of the robe box: chest / sleeve / hem), blend = multiply | soft | normal (folds and the robe's own pattern show through), variants = how many decal files exist per kind. */
-Object.assign(BAL.looks,{stain:{on:{uot:1,bun:1,tra:0}/* per kind: wet + mud ON (owner approved), tea OFF until the owner approves tea (flip tra to 1) */,
+Object.assign(BAL.looks,{stain:{on:{uot:1,bun:1,tra:1}/* per kind: wet + mud + tea ON (all owner approved) */,
  lv:[null,{n:1,sc:.16,op:.6,wet:.5},{n:2,sc:.2,op:.72,wet:.78},{n:3,sc:.26,op:.85,wet:1}],
  anchor:{chest:[.5,.27],sleeve:[.2,.5],hem:[.5,.93],hemL:[.22,.94],hemR:[.78,.94],hemH1:[.5,.85],hemH2:[.28,.79],hemH3:[.72,.76],hemH4:[.45,.7],sleeveL:[.14,.6],sleeveR:[.86,.6],lap:[.42,.66]},
  kind:{tra:{pos:["chest","lap","sleeve"],blend:"stain",variants:3,wet:0,scm:1.4,dy:0,opm:1,tint:[135,82,38],tm:.9,lv:[null,{n:1,sc:.3,op:1.3},{n:2,sc:.36,op:1.2},{n:3,sc:.44,op:1.15}]},uot:{pos:["hem","sleeveL","sleeveR","hemL","hemR"],blend:"wet",variants:2,wet:1,scm:1.15,dy:0,opm:1,rotm:.4,deep:{k:.95,dark:.2,pow:1,paleP:.5,satMin:.07,warm:[1,.97,.88],rad:5,cling:2.2,hem:.84,hemV:.34,hemF:11,nx:5,ny:1.1,front:[0,.5,.75,1],floor:[0,0,.6,.92],darkL:[0,.2,.22,.3]}},bun:{pos:["hem"],blend:"mud",tm:.35,variants:8,base:2,wet:0,scm:1,tilt:.5,scatter:1,lv:[null,{n:8,sc:.32,op:.9},{n:9,sc:.34,op:.92},{n:12,sc:.38,op:1}],
@@ -66975,7 +67022,7 @@ Object.assign(BAL.looks,{stain:{on:{uot:1,bun:1,tra:0}/* per kind: wet + mud ON 
   tide:[null,{h:.08,v:.6,f:9,soft:.03,op:.42},{h:.15,v:.55,f:9,soft:.045,op:.55},{h:.23,v:.5,f:9,soft:.06,op:.7}],col:[122,84,50],warm:.35,shoe:.85}},
  rot:.5,jit:.05,
  /* r6e tea look: translucent amber (core = inside darkness, ring = tide-line edge, cap = max strength, pull = how far it is pulled toward tea brown on saturated red / orange cloth) */
- tea:{core:.5,ring:.25,cap:.5,mix:.9,tint:[170,98,42],base:1,texK:.3,texMin:.7,texMax:1.3,at:[.3,.28],rot:0,dripX:[-.12,.14,0],dripY:.2,dripLen:[.05,.04,.03],dripW:.006,dripOp:.7,
+ tea:{core:.52,ring:.5,cap:.75,mix:1,tint:[130,70,24],base:.9,texK:.8,texMin:.55,texMax:1.4,at:[.5,.27],band:[.2,.34],xr:[.28,.72],clear:.8,full:.9,ky:1.6,rot:0,dripX:[-.12,.14,0],dripY:.2,dripLen:[.05,.04,.03],dripW:.006,dripOp:.7,
   /* r6h: one fixed splash (decal 1, no turn, no size jitter) for every costume; sc = width share of the robe; drips = thin runs down the grain */
   lv:[null,{sc:.14,op:1,drips:1},{sc:.2,op:1,drips:2},{sc:.27,op:1,drips:3}]}}});
 /* ---------- tiny deterministic noise ---------- */
@@ -67132,7 +67179,7 @@ function clothDecalMip(dec,dw){let m=dec;while(m.w>dw*2&&m.w>8&&m.h>8){if(!m.hal
 let clothTeaDec=null;
 function clothTeaShape(){if(clothTeaDec)return clothTeaDec;const N=128,data=new Uint8ClampedArray(N*N*4);for(let y=0;y<N;y++)for(let x=0;x<N;x++){const dx=(x+.5-N/2)/(N/2),dy=(y+.5-N/2)/(N/2),r=Math.hypot(dx,dy),t=Math.atan2(dy,dx),R=.62*(1+.1*Math.cos(2*t+1)+.08*Math.cos(3*t+2)+.05*Math.cos(5*t+.5)),a=1-clothSmooth(R-.22,R+.04,r);const i=(y*N+x)*4;data[i]=data[i+1]=data[i+2]=200;data[i+3]=Math.round(255*a)}return clothTeaDec={w:N,h:N,data}}
 let clothTeaLm=150;
-function clothTeaMix(out,i,sv){const T=BAL.looks.stain.tea,r=out[i*4],g=out[i*4+1],b=out[i*4+2],L=r*.3+g*.59+b*.11,tx=Math.min(T.texMax,Math.max(T.texMin,L/clothTeaLm)),k=T.base+T.texK*(tx-1),a=Math.min(1,sv/T.cap*T.mix);
+function clothTeaMix(out,i,sv){const T=BAL.looks.stain.tea,r=out[i*4],g=out[i*4+1],b=out[i*4+2],L=r*.3+g*.59+b*.11,tx=Math.min(T.texMax,Math.max(T.texMin,L/clothTeaLm)),k=T.base+T.texK*(tx-1),a=Math.min(1,sv*T.mix);
  const tr=T.tint[0]*k,tg=T.tint[1]*k,tb=T.tint[2]*k,nr=r+(tr-r)*a,ng=g+(tg-g)*a,nb=b+(tb-b)*a,NL=nr*.3+ng*.59+nb*.11,f=NL>L&&NL>0?L/NL:1;out[i*4]=nr*f;out[i*4+1]=ng*f;out[i*4+2]=nb*f}
 function drawDecalOnCloth(out,W,H,mk,dec,ax,ay,scale,rot,op,blend,tint,tm){const B=BAL.looks.stain;const fw=mk.x1-mk.x0+1,dw=Math.max(2,fw*scale);if(blend!=="shade")dec=clothDecalMip(dec,dw);const sc=dw/dec.w,dh=dec.h*sc,c=Math.cos(rot),sn=Math.sin(rot),R=Math.hypot(dw,dh)/2+1;let n=0;
  for(let y=Math.max(0,Math.floor(ay-R));y<=Math.min(H-1,Math.ceil(ay+R));y++)for(let x=Math.max(0,Math.floor(ax-R));x<=Math.min(W-1,Math.ceil(ax+R));x++){const i=y*W+x,mm0=(blend==="shade"?mk.m:mk.mS)[i];if(mm0<.5)continue;const mm=clothSmooth(.5,.97,mm0);
@@ -67144,7 +67191,7 @@ function drawDecalOnCloth(out,W,H,mk,dec,ax,ay,scale,rot,op,blend,tint,tm){const
   const a=Math.min(1,(blend==="stain"?1:wedge)*da*op*mm*ef*ef*(3-2*ef)*(1-(blend==='shade'?Math.min(1,Math.max(mk.protS[i]*1.6,mk.prot[i]*1.2)):mk.protL[i])));if(a<.003)continue;
   const mx0=Math.max(1,out[i*4],out[i*4+1],out[i*4+2]);
   if(blend==="stain"){/* translucent stain: only the decal SHAPE is used; multiply by a tea-brown factor so the fabric texture and folds stay visible; darker tide-line ring at the edge, lighter centre */
-   if(!dec.A)clothDecalRing(dec);const ii=(Math.round(v)*dec.w+Math.round(u)),sv=Math.min(B.tea.cap,op*mm*ef*(1-mk.protL[i])*(B.tea.core*dec.A[ii]+B.tea.ring*dec.ring[ii]));if(sv<.01)continue;
+   if(!dec.A)clothDecalRing(dec);const ii=(Math.round(v)*dec.w+Math.round(u)),sv=Math.min(B.tea.cap,op*mm*ef*(mk.protL[i]>.04?0:1)*(B.tea.core*dec.A[ii]+B.tea.ring*dec.ring[ii]));if(sv<.01)continue;
    clothTeaMix(out,i,sv);n++;continue}/* r6e: on saturated red / orange cloth a tea-brown multiply stays red: pull toward a deeper tea brown by the cloth's saturation (BAL tra.tm), never lighter */
   for(let q=0;q<3;q++){let dc=D[j+q]*w0+D[j+4+q]*w1+D[j+k+q]*w2+D[j+k+4+q]*w3;if(tint)dc=dc+(tint[q]-dc)*tm;const b=out[i*4+q];let o;
    if(blend==="shade"){if(dec.mid==null)clothDecalMid(dec);const dl=dc/255-dec.mid;const sat=1-b/mx0;/* shade tinted to the robe: the weaker channels darken more, so shadows are the robe's own deeper hue, not neutral grey */o=b*(1+BAL.looks.xoc.dec.shadeK*(dl<0?dl*(1+.9*sat):dl*.45))}else if(blend==="normal")o=dc;else if(blend==="soft")o=dc<128?2*b*dc/255:255-2*(255-b)*(255-dc)/255;else if(blend==="mud"){const sat=1-Math.min(out[i*4],out[i*4+1],out[i*4+2])/mx0,e=Math.min(1,tm*sat*2.2);o=Math.min(b,b*dc/255*(1-e)+dc*.85*e)}else o=b*dc/255;/* mud (r6e): multiply, pulled toward the mud colour on saturated cloth; multiply: the robe's folds and pattern show through */
@@ -67186,11 +67233,17 @@ function clothStainBake(d,W,H,kind,lv,decals,opt){opt=opt||{};const B=BAL.looks.
  const T=kind==="tra"&&B.tea&&B.tea.lv?B.tea:null;
  if(T&&decals&&decals.length){/* r6h owner: ONE cup of tea, ONE identical splash (same decal, same turn, same size, same amber) on every costume, high on the chest clear of the elbow fold; lv3 = a bit larger + more drips */
   let ls=0,lc=0;for(let i=0;i<W*H;i+=5)if(mk.mS[i]>.9){ls+=d[i*4]*.3+d[i*4+1]*.59+d[i*4+2]*.11;lc++}clothTeaLm=Math.max(60,lc?ls/lc:150);
-  const TL=T.lv[cl(lv|0,1,3)],dec=clothTeaShape(),sc=TL.sc,ax=mk.x0+fw*T.at[0],ay=mk.y0+fh*T.at[1];
+  const TL=T.lv[cl(lv|0,1,3)],dec=clothTeaShape(),sc=TL.sc;
+  /* r6h5 owner: on the VISIBLE chest cloth (below the collar, above the sash), never under hands / a cup / a sleeve: the chest band is scanned for the spot nearest the centre-front where a square of the lv3 splash size holds only free cloth (cloth mask, no skin / item / hair); same rule and same size for every figure and level */
+  const rr=Math.max(3,Math.round(fw*T.lv[3].sc*T.clear/2)),ok=new Uint8Array(W*H);for(let y=mk.y0;y<=mk.y1;y++)for(let x=mk.x0;x<=mk.x1;x++){const i=y*W+x;ok[i]=mk.mS[i]>.6&&mk.protL[i]<.08?1:0}
+  const S2=new Int32Array((W+1)*(H+1));for(let y=0;y<H;y++){let r=0;for(let x=0;x<W;x++){r+=ok[y*W+x];S2[(y+1)*(W+1)+x+1]=S2[y*(W+1)+x+1]+r}}
+  const box=(x,y)=>{const x0=Math.max(0,x-rr),x1=Math.min(W,x+rr+1),y0=Math.max(0,y-rr),y1=Math.min(H,y+rr+1);return(S2[y1*(W+1)+x1]-S2[y0*(W+1)+x1]-S2[y1*(W+1)+x0]+S2[y0*(W+1)+x0])/((2*rr+1)*(2*rr+1))};
+  let bx=mk.x0+fw*T.at[0],by=mk.y0+fh*T.at[1],bs=1e9;for(let y=Math.round(mk.y0+fh*T.band[0]);y<=mk.y0+fh*T.band[1];y+=2)for(let x=Math.round(mk.x0+fw*T.xr[0]);x<=mk.x0+fw*T.xr[1];x+=2){if(box(x,y)<T.full)continue;const d=Math.hypot((x-(mk.x0+fw*T.at[0]))/fw,(y-(mk.y0+fh*T.at[1]))/fh*T.ky);if(d<bs){bs=d;bx=x;by=y}}
+  const ax=bx,ay=by;
   count+=drawDecalOnCloth(out,W,H,mk,dec,ax,ay,sc,T.rot,TL.op,"stain",T.tint,0);
   const dw=fw*sc;for(let q=0;q<TL.drips;q++){/* drip runs: thin, tapered, straight down from the lower edge of the splash, fixed places */
    const dx=ax+dw*T.dripX[q],dy0=ay+dw*T.dripY,len=fh*T.dripLen[q],sg=Math.max(.8,fw*T.dripW);
-   for(let y=dy0|0;y<Math.min(H,dy0+len);y++){const t=(y-dy0)/len,a=TL.op*T.dripOp*(1-t)*Math.min(1,t*6+.3);for(let x=Math.floor(dx-sg*3);x<=dx+sg*3;x++){if(x<0||x>=W)continue;const i=y*W+x,k=mk.mS[i]*(1-mk.protL[i]);if(k<.3)continue;clothTeaMix(out,i,Math.min(T.cap,a*Math.exp(-.5*((x-dx)/sg)**2)*k*T.cap))}}}}
+   for(let y=dy0|0;y<Math.min(H,dy0+len);y++){const t=(y-dy0)/len,a=TL.op*T.dripOp*(1-t)*Math.min(1,t*6+.3);for(let x=Math.floor(dx-sg*3);x<=dx+sg*3;x++){if(x<0||x>=W)continue;const i=y*W+x,k=mk.protL[i]>.04?0:mk.mS[i];if(k<.3)continue;clothTeaMix(out,i,Math.min(T.cap,a*Math.exp(-.5*((x-dx)/sg)**2)*k*T.cap))}}}}
  const D0=K.base?decals.slice(0,K.base):decals;
  if(D0&&D0.length&&!K.wet&&!T)for(let q=0;q<L.n;q++){const nm=K.pos[q%K.pos.length],an=B.anchor[nm],dec=D0[Math.floor(R()*D0.length)%D0.length];
   if(K.scatter){/* r5 mud follows the cloth grain: each streak is the strip decal turned VERTICAL, its foot on the hem line, running UP along the pleat, lengths vary, thinning with level; never a horizontal mark */
@@ -67220,18 +67273,25 @@ if(typeof KIT_FACEFX!=="undefined"&&typeof lkItem==="function"){
  const DEC={};function clothDecalKey(key){if(!DEC[key])DEC[key]=fetch(IMG_U("https://ctm-img.victoria-tntt.workers.dev/img/"+key+".webp"),{mode:"cors"}).then(r=>r.ok?r.blob():Promise.reject()).then(bl=>createImageBitmap(bl)).then(bm=>{const c=document.createElement("canvas");c.width=bm.width;c.height=bm.height;const g=c.getContext("2d",{willReadFrequently:true});g.drawImage(bm,0,0);const id=g.getImageData(0,0,c.width,c.height);return{w:c.width,h:c.height,data:id.data}}).catch(()=>null);return DEC[key]}
  function clothDecal(kind,n){return clothDecalKey("fx-stain-"+kind+"-"+n)}
  /* the figure picture -> canvas -> xoc bake (creases) -> stain decals (tra / uot / bun) -> data URL (async, once per picture + effect set, cached 24); a redraw of the stage puts it in */
+/* HD TRANSFER (cloth-hd, owner via main 18/11 "whole figure softer at lv1-3"): the stage shows the HD twin (https://ctm-img.victoria-tntt.workers.dev/img/hd, 2x the 900 px file, listed in KFHD.map) but the bake reads the 900 px file, so a layer that replaces the picture was softer everywhere. The edit (bake minus source, both at 900 px) is upscaled and ADDED to the HD picture: out = HD + up(bake) - up(source). Untouched pixels = the HD picture byte for byte (equal sharpness), edits keep their size. No HD twin / any failure = the 900 px layer as before. */
+ function clothHD(file,S,B,W,H){const ent=window.KFHD&&KFHD.map&&!KFHD.bad[file]&&KFHD.map[file];if(!ent)return Promise.resolve(null);
+  return fetch(IMG_U("https://ctm-img.victoria-tntt.workers.dev/img/hd/"+file),{mode:"cors"}).then(r=>r.ok?r.blob():Promise.reject()).then(bl=>createImageBitmap(bl)).then(bm=>{const HW=bm.width,HH=bm.height;if(HW<W*1.5||HH<H*1.5)return null;
+   const lo=(d)=>{const c=document.createElement("canvas");c.width=W;c.height=H;c.getContext("2d").putImageData(new ImageData(d,W,H),0,0);return c};
+   const u=document.createElement("canvas");u.width=HW;u.height=HH;const g=u.getContext("2d",{willReadFrequently:true});g.imageSmoothingEnabled=true;g.imageSmoothingQuality="high";
+   const grab=(src)=>{g.clearRect(0,0,HW,HH);g.drawImage(src,0,0,HW,HH);return g.getImageData(0,0,HW,HH).data};
+   const hd=grab(bm),su=grab(lo(S)),bu=grab(lo(B)),out=new Uint8ClampedArray(hd.length);for(let i=0;i<hd.length;i++)out[i]=hd[i]+bu[i]-su[i];return{data:out,w:HW,h:HH}}).catch(()=>null)}
  function clothPaint(file,fx,e){fetch(IMG_U("https://ctm-img.victoria-tntt.workers.dev/img/"+file),{mode:"cors"}).then(r=>r.blob()).then(bl=>createImageBitmap(bl)).then(bm=>{const W=bm.width,H=bm.height,c=document.createElement("canvas");c.width=W;c.height=H;const g=c.getContext("2d",{willReadFrequently:true});g.drawImage(bm,0,0);
-  const id=g.getImageData(0,0,W,H);let face=null;try{const f=window.KIT_VEIL&&KIT_VEIL.fit&&KIT_VEIL.fit[file];if(f)face={x:f[0]/100*W,y:f[1]/100*H,w:f[2]/100*W,h:f[3]/100*H}}catch(x){}
+  const id=g.getImageData(0,0,W,H),S0=new Uint8ClampedArray(id.data);let face=null;try{const f=window.KIT_VEIL&&KIT_VEIL.fit&&KIT_VEIL.fit[file];if(f)face={x:f[0]/100*W,y:f[1]/100*H,w:f[2]/100*W,h:f[3]/100*H}}catch(x){}
   let sd=7;for(const ch of file)sd=(sd*31+ch.charCodeAt(0))%9973;let cur=id.data,mk=null;
   let pre=Promise.resolve(null);if(fx.xoc&&BAL.looks.xoc.dec.mode==="decal")pre=Promise.all([[1,2,3,4].map(i=>clothDecalKey("fx-crease-"+i)),[clothDecalKey("fx-crease-knot-1")],[clothDecalKey("fx-crease-hem-1")]].map(a=>Promise.all(a))).then(r=>({patch:r[0].filter(Boolean),knot:r[1].filter(Boolean),hem:r[2].filter(Boolean)}));
   return pre.then(dc=>{if(fx.xoc){const o=clothXocBake(cur,W,H,fx.xoc,{face,seed:sd,decals:dc});cur=o.data;mk=o.mask}
   const kinds=["tra","uot","bun"].filter(k=>fx[k]);let wait=Promise.resolve();
   for(const k of kinds)wait=wait.then(()=>Promise.all(Array.from({length:BAL.looks.stain.kind[k].variants},(_,i)=>clothDecal(k,i+1)))).then(ds=>{const o=clothStainBake(id.data,W,H,k,fx[k],ds.filter(Boolean),{face,seed:sd,base:cur,mask:mk});cur=o.data;mk=o.mask});
-  return wait.then(()=>{g.putImageData(new ImageData(cur,W,H),0,0);e.src=c.toDataURL("image/png");clothPatch(e);try{if(typeof kitFigFx==="function")kitFigFx()}catch(x){}})})}).catch(()=>{e.src=""})}
+  return wait.then(()=>clothHD(file,S0,cur,W,H)).then(hd=>{const CW=hd?hd.w:W,CH=hd?hd.h:H;c.width=CW;c.height=CH;g.putImageData(new ImageData(hd?hd.data:cur,CW,CH),0,0);e.src=c.toDataURL("image/png");clothPatch(e);try{if(typeof kitFigFx==="function")kitFigFx()}catch(x){}})})}).catch(()=>{e.src=""})}
  /* COLD CACHE (cloth-bake-static): every static path (Dư đồ / event-stage figure, mirror close-up, mirror reveal, podium) prints the layer ONCE; a bake still running prints a blank WAIT layer (same box, same kit slot) and the finished bake is put into every wait layer in the page, so cold = warm */
  function clothPatch(e){try{document.querySelectorAll('img.kclo-wait[data-kclo="'+e.id+'"]').forEach(i=>{i.src=e.src;i.classList.remove("kclo-wait");const f=i.closest(".kfxf"),im=f&&f.__img;if(im)im.classList.add("kclo-on")})}catch(x){}}/* kitFxPut paths (podium, token): the plain picture hides under the finished layer, same as warm */
  function clothXocLayer(file,fx){if(!/^fig-/.test(file))return"";if(typeof fx==="number")fx={xoc:fx};const on={};if(BAL.looks.xoc.on&&fx.xoc)on.xoc=fx.xoc;for(const k of["tra","uot","bun"])if(BAL.looks.stain.on[k]&&fx[k])on[k]=fx[k];if(!Object.keys(on).length)return"";
-  const key=file+"|"+JSON.stringify(on);let e=CLO[key];if(!e){e=CLO[key]={src:"",t:0,id:++CLID};CLQ.push(key);if(CLQ.length>24)delete CLO[CLQ.shift()];clothPaint(file,on,e)}
+  const key=file+"|"+JSON.stringify(on);let e=CLO[key];if(!e){e=CLO[key]={src:"",t:0,id:++CLID};CLQ.push(key);if(CLQ.length>8)delete CLO[CLQ.shift()]/* HD layers are ~4 MB decoded each: keep 8 */;clothPaint(file,on,e)}
   return `<img class="${e.src?"kclo":"kclo kclo-wait"}"${e.src?"":' data-kclo="'+e.id+'"'} src="${e.src||BLANK}" alt="" aria-hidden="true" style="--fleft:0%;--ftop:0%;--fwidth:100%;--fheight:100%">`}
  const ent=KIT_FACEFX.get("lkcloth");if(ent){const h0=ent.html;ent.html=(p,file,z)=>{const fx={};for(const a of z.L)if(a[0]==="xoc"||a[0]==="tra"||a[0]==="uot"||a[0]==="bun")fx[a[0]]=a[1].lv;return Object.keys(fx).length?clothXocLayer(kitFile(file),fx):h0.apply(this,arguments)}}
  /* the cloth layer goes UNDER every face mark and the makeup (it repaints only the robe; the head is the picture's own) */
@@ -68720,7 +68780,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="c3a9d1c903a4";window.CTM_BUILD=BUILD;
+const BUILD="7b0cb7a35c7d";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
