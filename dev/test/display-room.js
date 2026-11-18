@@ -28,6 +28,9 @@ async function viaCurl(ctx){await ctx.route(/ctm-img\.victoria-tntt\.workers\.de
   r.fit=g.room.t>=g.hud.b-1&&g.room.b<=g.bar.b+1&&g.room.b>=g.bar.t-6&&!g.hscroll;
   r.inslot=await p.evaluate(()=>[...document.querySelectorAll('.kdr-sh.has')].every(s=>{const a=s.getBoundingClientRect(),i=s.querySelector('.kdr-it').getBoundingClientRect();return i.left>=a.left-2&&i.right<=a.right+2&&i.bottom<=a.bottom+2&&i.top>=a.top-2}));r.multi=await p.evaluate(()=>{const m=[...document.querySelectorAll('.kdr-sh')].filter(s=>s.querySelectorAll('.kdr-it').length>1);return m.length>0&&m.every(s=>{const r=[...s.querySelectorAll('.kdr-it')].map(i=>i.getBoundingClientRect()).sort((a,b)=>a.left-b.left);return r.every((x,i)=>i===0||x.left>=r[i-1].right-2)})});r.sil=await p.evaluate(()=>{const k=document.getElementById('kdr');const sil=k.querySelectorAll('.kdr-sil').length,pcs=k.querySelectorAll('.kdr-it').length,gl=[...k.querySelectorAll('.kdr-glow')];return{sil,pcs,glow:gl.length,sum:sil+pcs===60,glowAnim:gl.every(i=>getComputedStyle(i).animationName==='none'),silPtr:[...k.querySelectorAll('.kdr-sil')].every(i=>getComputedStyle(i).pointerEvents==='none')}});r.noBars=await p.evaluate(()=>{const s=document.querySelector('.kdr-seg');const pl=s&&s.querySelector('.kdr-plank');return !!s&&(s.querySelector('.kdr-bgi')?getComputedStyle(pl).display==='none':true)});
   r.layout=r.inslot&&r.sil.sum&&r.sil.glow===3&&r.sil.glowAnim&&r.sil.silPtr&&r.multi&&r.noBars&&g.n===12&&(g.kv2?(g.cols===2&&!g.scrolls):g.cols===1);
+  r.sets=await p.evaluate(()=>{const k=document.getElementById('kdr'),f=k.querySelector('.kdr-sets');if(!f)return null;const kr=k.getBoundingClientRect(),fr=f.getBoundingClientRect(),sc=k.querySelector('.kdr-sc').getBoundingClientRect(),rows=[...f.querySelectorAll('.kdr-set')];
+   return{rows:rows.length,kinds:rows.map(x=>x.className.replace('kdr-set kdr-s-','')).join(','),inside:fr.left>=kr.left-1&&fr.right<=kr.right+1&&fr.bottom<=kr.bottom+1,belowCab:fr.top>=sc.bottom-1,h:Math.round(fr.height),calm:getComputedStyle(f.querySelector('.kdr-s-on .kdr-sd')).animationName==='none',cut:rows.some(x=>x.scrollWidth>x.clientWidth+1)}});
+  r.setsOk=!!r.sets&&r.sets.rows===4&&r.sets.kinds==='on,wait,miss,bad'&&r.sets.inside&&r.sets.belowCab&&r.sets.calm&&!r.sets.cut;
   if(OUT&&OUT!=='-')await p.screenshot({path:`${OUT}/disp-${sz}.jpg`,type:'jpeg',quality:60});
   /* drawer */
   await p.click('.kdr-sh:not(.has)');await p.waitForTimeout(350);
@@ -62,9 +65,16 @@ async function viaCurl(ctx){await ctx.route(/ctm-img\.victoria-tntt\.workers\.de
    await fr.click(`#kdr [data-kdrg="${await p.evaluate(()=>window.__g)}"]`);await p.waitForTimeout(300);await fr.click('#kdrdrw [data-kdron]');
    const tk=await fr.waitForSelector('#kidfl [data-kidact=take]',{timeout:8000});await tk.click();await p.waitForTimeout(500);
    const back=await p.evaluate(()=>({inShelf:shelfIn(S,window.__g).some(x=>x[1].k===window.__k),inInv:S.inv.some(e=>e.k===window.__k)}));
+   /* set lines from the REAL data: a whole pair (quattron + quatgap) glows and counts, one lone piece of another set reads "còn thiếu" */
+   const SL=await p.evaluate(()=>{const z=S.shelf&&S.shelf.g;if(!z)return null;S.rank=5;const keys=["quattron","quatgap","lanquy"];keys.forEach(k=>{if(!IT[k])return;S.inv.push({k});const ix=S.inv.length-1;try{shelfPut(S,ix)}catch(e){}});shelfSetCheck(S);kitDisplayRoomClose();kitDisplayRoomOpen(S);
+    const f=document.querySelector('#kdr .kdr-sets');const rows=f?[...f.querySelectorAll('.kdr-set')]:[];const lines=shelfView(S).sets;
+    return{n:rows.length,view:lines.length,texts:rows.map(x=>x.textContent),ks:lines.map(x=>x.k).join(','),glow:document.querySelectorAll('#kdr .kdr-glow').length,same:rows.length===lines.length&&rows.every((x,i)=>x.textContent===lines[i].t)}});
+   if(OUT&&OUT!=='-')await p.screenshot({path:`${OUT}/disp-${sz}-real.jpg`,type:'jpeg',quality:60});
+   const mo=await p.evaluate(()=>{kitDisplayRoomClose();shelfOpen(S);const m=document.querySelector('#modal');const rows=m?m.querySelectorAll('.kdr-sets .kdr-set').length:0;try{closeModal()}catch(e){}return rows});
+   if(!SL||!SL.n||!SL.same||SL.glow<2||mo!==SL.n)return{ok:false,err:'sets '+JSON.stringify(SL)+' modal '+mo};
    await p.evaluate(()=>{kitDisplayRoomClose();BAL.shelf.ui=0});
    return{L,put,back,ok:L.rail&&L.n===12&&L.sil>0&&L.sil<=12*L.per&&put.inShelf&&!put.inInv&&!back.inShelf&&back.inInv}}catch(e){return{ok:false,err:String(e).slice(0,160)}}})();
   r.errs=errs;
-  const ok=r.apiHidden&&r.noFixtureOpen&&r.fit&&r.layout&&!g.frames&&!g.cut&&r.drawer&&r.drawer.tiles>0&&r.drawer.inside&&r.drawer.x&&Array.isArray(r.card)&&r.card.some(t=>/Trưng bày/.test(t))&&r.placed.now===before+1&&r.placed.drawerClosed&&r.placed.cardClosed&&r.on&&r.take&&r.taken&&r.closed&&r.real.ok&&r.ro.ro&&r.roNoDrawer&&!errs.length;
+  const ok=r.apiHidden&&r.noFixtureOpen&&r.fit&&r.layout&&r.setsOk&&!g.frames&&!g.cut&&r.drawer&&r.drawer.tiles>0&&r.drawer.inside&&r.drawer.x&&Array.isArray(r.card)&&r.card.some(t=>/Trưng bày/.test(t))&&r.placed.now===before+1&&r.placed.drawerClosed&&r.placed.cardClosed&&r.on&&r.take&&r.taken&&r.closed&&r.real.ok&&r.ro.ro&&r.roNoDrawer&&!errs.length;
   r.verdict=ok?'PASS':'FAIL';if(!ok)bad++;all[sz]=r;await ctx.close()}
  console.log(JSON.stringify(all,null,1));await b.close();process.exit(bad?1:0)})().catch(e=>{console.error(e);process.exit(1)});
