@@ -1,3 +1,9 @@
+# opt-card-short #7 (worker #4, ROOT-55 correction: OD ~21:35Z, standard = crowned Hoàng hậu) sha **f153b8da**, quickcheck PASS incl. core gates
+PRIORITY #1 CHECK: OD 18/11 ~21:35Z | KIT 56.12 | main 0 | review/opt-card-short reused | claims this row.
+Built strictly on the standard figure frame: merged review/fullbody-frame-s4 579fac03 (KIT_SIZE.fig XL3 393 measured on the crowned Hoàng hậu, BAL.bookFrame.cRef) + main. `kszFigFill` scales by the FRAME (body0 = KIT_SIZE.fig[lay].h, crown room 1+cRef), never by the person: every rank gets the same scale; the box may spread to 1.7 x the column (was 1.45; with the crowned Hoàng hậu 1.45 left 25 px on Fold).
+Scan new switch `HH=1` (every subject = the crowned Hoàng hậu): 13 cases x Fold 755x1000 + iPad 1180x820: FIG tag top 0 px everywhere; gap under the figure -1..5 px in all Fold cases with Hoàng hậu (man = a eunuch figure 17 px, fest iPad 45 px = narrow event frame: not Hoàng hậu cases); band-centre -2 every card; TIERCHK bad 0/n; SCROLLBIG 0.
+Shots (looked, crowned Hoàng hậu in every case): dev/handover/shots/opt-card-short/{fold,ipad}-{mat2,dress,many,night,choice,short,thtrieu,fest}.jpg (CDN write 403).
+
 # opt-card-short #6 (worker #4, ROOT-55 order: owner OD 18/11 ~21:20Z) sha **93db9adb**, quickcheck PASS incl. core gates
 PRIORITY #1 CHECK: OD 18/11 ~21:20Z (tail) | START_CORE law 10 | main 0 | review/opt-card-short reused | claims this row.
 Kit (KIT.md §6.2e), whole group, every tier, Fold 755x1000 + iPad 1180x820:
