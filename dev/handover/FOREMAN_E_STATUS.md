@@ -145,3 +145,4 @@ FOR MAIN (open, ALL E landings): E cannot push main (session permission). PASSed
 - (18/11 08:50Z) FROM MAIN: main is now ROOT-50 = session_01UV1SzkQbY6CG7anj9iuHK5 (ROOT-49 stopped); report READY/PASS shas and FOR MAIN lines to it. LIVE main = a2ad2401.
 - (18/11 08:50Z) FROM MAIN ROOT-50: your 4 PASSes (q0-ff 98737806, hall-names d5d389e8, monthly-ration-r6 287a0b79, steal-minigame 6b5414a8) → MAIN lander review/land-e (stacked on newest main); MAIN FFs main when LAND READY. Do not touch those 4 branches meanwhile.
 - (18/11 09:00Z) E7b: SẴN SÀNG KIỂM questline-q1b 7f12b48c (fix 3 on q1a 90796d3; shared TIME scan + engine + quickcheck PASS)
+- (18/11 08:37Z) READY: q1a 90796d37 (E7a2 FIX 3 + shared TIME rule, on main), q1b 7f12b48c (E7b FIX 3, 33→0), q1c 154506f (rebase of PASS b013ddf) → BIG delta reviewer E7r4 session_01DgYSWnPaLxwygTLN5J8FwP (opus). Load 5/12 (E1b, E7a2, E7b, E7c2, E7r4).
