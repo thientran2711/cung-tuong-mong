@@ -1,4 +1,4 @@
-/* map-tap-go test: tap a place on Dư đồ = go at once (no card); toast with cost + "Quay lại" undoes it; unreachable = reason toast.
+/* map-tap-go test: tap a place on Dư đồ = go at once (no card, no undo); plain arrival toast; unreachable = reason toast; place card has no person column.
    usage: node dev/test/map-tap-go.js <device> <outdir>  (serves the BUILT root) */
 const {chromium}=require('playwright');const D=require('./lib/device');const fs=require('fs');
 const [,,DEV='ipadAir',OUT='/tmp']=process.argv;fs.mkdirSync(OUT,{recursive:true});let bad=0;const ok=(c,m)=>{console.log((c?'PASS ':'FAIL ')+m);if(!c)bad++};
@@ -13,10 +13,9 @@ const [,,DEV='ipadAir',OUT='/tmp']=process.argv;fs.mkdirSync(OUT,{recursive:true
  await reset(0,0);await g.evaluate(()=>j77Tap('vuon'));await p.waitForTimeout(900); /* warm-up: the one-time chapter goal 'Đi một nơi trong cung' card is consumed here */
  for(const [name,u,bu] of [['mid-buổi',0,0],['last-walk',2,0]]){
   await reset(u,bu);await g.evaluate(()=>j77Tap('vuon'));await p.waitForTimeout(700);const a=await st();
-  ok(a.place==='vuon'&&!a.modal&&!a.q,`${name}: went at once, no card (${JSON.stringify(a)})`);ok(/Quay lại/.test(a.toast)&&a.on,`${name}: toast with Quay lại: ${a.toast.replace(/\s+/g,' ')}`);
+  ok(a.place==='vuon'&&!a.modal&&!a.q,`${name}: went at once, no card (${JSON.stringify(a)})`);ok(/ĐẾN/.test(a.toast)&&!/Quay lại/.test(a.toast)&&a.on&&!await g.evaluate(()=>!!document.querySelector('#rtoast button')),`${name}: arrival toast, no undo button: ${a.toast.replace(/\s+/g,' ')}`);
   await g.evaluate(()=>document.querySelectorAll('.kload,#klife').forEach(e=>e.remove()));await p.screenshot({path:`${OUT}/mtg-${DEV}-${name}.png`});
-  await g.evaluate(()=>document.querySelector('#rtoast .kundob').click());await p.waitForTimeout(700);const c=await st();
-  ok(c.place==='home'&&c.used===u&&c.buoi===bu&&!c.q,`${name}: undo restored place/used/buổi (${JSON.stringify(c)})`)}
+ }
  await reset(3,0);await g.evaluate(()=>j77Tap('vuon'));await p.waitForTimeout(900);const sp=await st();ok(sp.place==='vuon'||sp.q>0,`spill: goes at once, no confirm card (${JSON.stringify(sp)})`);
  await reset(3,3);await p.waitForTimeout(1500);await g.evaluate(()=>{Q.length=0;document.getElementById('modal').hidden=true;const t=document.getElementById('rtoast');if(t)t.classList.remove('on');j77Tap('tn')});await p.waitForTimeout(500);const d=await st();
  ok(d.place==='home'&&!d.modal&&d.on&&/hết khắc/.test(d.toast),`blocked: stays, reason toast (${d.toast.replace(/\s+/g,' ')})`);await g.evaluate(()=>document.querySelectorAll('.kload,#klife').forEach(e=>e.remove()));await p.screenshot({path:`${OUT}/mtg-${DEV}-blocked.png`});
