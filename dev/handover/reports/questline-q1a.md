@@ -33,3 +33,7 @@ Rebase on this branch; add only your data file + assemble line after jnrask.js; 
 
 SẴN SÀNG KIỂM questline-q1a 98cb395522dc387aef7036261bec345619038cd4
 
+
+## Fix r1 (Foreman E order from E7br q1b review item 6) → ed01a6b22ed161ac272f2d38e76e1c6b664d0cad
+No asker is sent to herself (whole family): `NRSELF = {queen:["hh"], ty:["y"]}` in jnroad.js; `nrAskPick(N,A,who)` skips those asks and `nrKind(A,no)` skips those stock kinds — consorts pass "queen" (v.queen), men pass their kind (Thái y = ty); Emperor / Thái hậu have no NPC road. nrask-engine check 7: every chapter of every road × each self role → never its own kind; 288 live queen offers → no nr_hh. nrask-scan / nrask-engine ALL PASS, quickcheck PASS. NRASK data shape unchanged (E7b/E7c files need no change).
+SẴN SÀNG KIỂM questline-q1a ed01a6b22ed161ac272f2d38e76e1c6b664d0cad
