@@ -16,7 +16,7 @@
 | cx2:kidMed | Xin thuốc cho | NUM | — | NUM | NUM | NUM | NUM | NUM | NUM | NUM | NUM | NUM |
 | cx2:likes | Hỏi sở thích Hoàng thượng | NUM | — | NUM | NUM | NUM | NUM | NUM | NUM | NUM | NUM | NUM |
 | cx2:maidSpy | Sai đi dò la | SAME | — | SAME | SAME | SAME | SAME | SAME | SAME | SAME | SAME | SAME |
-| cx2:maidTalk | Trò chuyện với cung nữ | SAME | — | SAME | SAME | SAME | SAME | SAME | SAME | SAME | SAME | SAME |
+| cx2:maidTalk | Trò chuyện với cung nữ | SAME | — | SAME | SAME | SAME | SAME | SAME | SAME | SAME | SAME | P-ONLY |
 | cx2:old | Hỏi chuyện cũ | NUM | — | NUM | NUM | NUM | NUM | NUM | NUM | NUM | NUM | NUM |
 | cx2:plantSrv | Cài người vào cung khác | SAME | — | N·draw | SAME | SAME | SAME | SAME | SAME | SAME | SAME | — |
 | cx2:show | Phô tài | NUM | — | NUM | NUM | NUM | NUM | NUM | NUM | NUM | NUM | NUM |
@@ -44,7 +44,7 @@
 | cx3:staffTam | Tâm sự | SAME | — | N·draw | SAME | SAME | SAME | SAME | SAME | SAME | P-ONLY | — |
 | cx3:staffThuong | Thưởng | SAME | — | N·draw | SAME | SAME | SAME | SAME | SAME | SAME | SAME | — |
 | cx3:staffUp | Tiến cử | SAME | — | N·draw | SAME | SAME | SAME | SAME | SAME | SAME | SAME | — |
-| cx3:talkGossip | Bàn tán về | SAME | — | SAME | SAME | SAME | SAME | SAME | SAME | SAME | SAME | SAME |
+| cx3:talkGossip | Bàn tán về | SAME | — | SAME | SAME | SAME | SAME | SAME | SAME | SAME | P-ONLY | P-ONLY |
 | cx3:talkHealth | Hỏi han sức khỏe | SAME | — | SAME | SAME | SAME | SAME | SAME | SAME | SAME | SAME | SAME |
 | cx3:talkPraise | Khen tài nghệ nàng | SAME | — | SAME | SAME | SAME | SAME | SAME | SAME | SAME | SAME | SAME |
 | cx3:talkSecret | Chia sẻ bí mật | SAME | — | SAME | SAME | SAME | SAME | SAME | SAME | SAME | SAME | SAME |
@@ -88,15 +88,15 @@
 | flaunt | Khoe quà ngự ban | SAME | — | SAME | SAME | SAME | SAME | SAME | SAME | SAME | SAME | SAME |
 | follow | Nương theo | SAME | — | SAME | SAME | SAME | SAME | SAME | SAME | N-RANK | — | SAME |
 | gossip | Rỉ tai chuyện trong cung | SAME | — | SAME | SAME | SAME | SAME | SAME | SAME | SAME | SAME | SAME |
-| harm:accuse | Tố giác | SAME | — | SAME | SAME | SAME | SAME | SAME | SAME | SAME | SAME | N-ONLY |
+| harm:accuse | Tố giác | SAME | — | SAME | SAME | SAME | SAME | SAME | SAME | SAME | SAME | SAME |
 | harm:ally | Kết giao | SAME | — | SAME | SAME | SAME | SAME | SAME | SAME | SAME | SAME | SAME |
-| harm:banphe | Bán cho phe khác | SAME | — | SAME | SAME | SAME | SAME | SAME | SAME | SAME | SAME | N-ONLY |
+| harm:banphe | Bán cho phe khác | SAME | — | SAME | SAME | SAME | SAME | SAME | SAME | SAME | SAME | SAME |
 | harm:batnat | Ép nộp của | SAME | — | — | SAME | SAME | SAME | SAME | SAME | SAME | SAME | — |
 | harm:block | Rút thẻ bài | SAME | — | SAME | SAME | SAME | SAME | SAME | SAME | SAME | SAME | SAME |
 | harm:blockf | Nhờ ơn người quen rút thẻ bài | SAME | — | SAME | SAME | SAME | SAME | SAME | SAME | SAME | SAME | SAME |
 | harm:bribe | Mua chuộc cung nữ | SAME | — | SAME | SAME | SAME | SAME | SAME | SAME | SAME | SAME | SAME |
 | harm:bribel | Sai cung nữ thân tín lấy lòng | SAME | — | SAME | SAME | SAME | SAME | SAME | SAME | SAME | SAME | SAME |
-| harm:expose | Bóc chuyện tư tình | SAME | — | SAME | SAME | SAME | SAME | SAME | SAME | SAME | SAME | N-ONLY |
+| harm:expose | Bóc chuyện tư tình | SAME | — | SAME | SAME | SAME | SAME | SAME | SAME | SAME | SAME | SAME |
 | harm:frame | Vu oan | SAME | — | SAME | SAME | SAME | SAME | SAME | SAME | SAME | SAME | SAME |
 | harm:giahoa | Giá họa trộm đồ | SAME | — | SAME | SAME | SAME | SAME | SAME | SAME | SAME | SAME | SAME |
 | harm:gift | Tặng quà | SAME | — | P-ONLY | P-ONLY | P-ONLY | P-ONLY | P-ONLY | P-ONLY | P-ONLY | P-ONLY | P-ONLY |
@@ -122,18 +122,17 @@
 | harm:tat | Tát | SAME | — | — | — | — | P-RANK | P-RANK | SAME | N-RANK | N-ONLY | — |
 | harm:tea | Hắt trà | SAME | — | SAME | SAME | SAME | SAME | SAME | SAME | SAME | SAME | SAME |
 | harm:thathu | Thả thú dữ làm hại dung nhan | SAME | — | SAME | SAME | SAME | SAME | SAME | SAME | SAME | SAME | SAME |
-| harm:tieuhuy | Trả chứng cứ lấy lòng | SAME | — | SAME | SAME | SAME | SAME | SAME | SAME | SAME | SAME | N-ONLY |
-| harm:trinhhh | Trình Hoàng hậu | SAME | — | SAME | SAME | SAME | SAME | SAME | SAME | SAME | — | — |
-| harm:trinhth | Trình Thái hậu | SAME | — | SAME | SAME | SAME | SAME | SAME | SAME | SAME | SAME | N-ONLY |
+| harm:tieuhuy | Trả chứng cứ lấy lòng | SAME | — | SAME | SAME | SAME | SAME | SAME | SAME | SAME | SAME | SAME |
+| harm:trinhhh | Trình Hoàng hậu | SAME | — | SAME | SAME | SAME | SAME | SAME | SAME | SAME | — | P-ONLY |
+| harm:trinhth | Trình Thái hậu | SAME | — | SAME | SAME | SAME | SAME | SAME | SAME | SAME | SAME | SAME |
 | harm:trip | Ngáng chân | SAME | — | SAME | N-RANK | N-RANK | SAME | SAME | SAME | SAME | SAME | — |
-| harm:uyhiep | Uy hiếp đòi bạc | SAME | — | SAME | SAME | SAME | SAME | SAME | SAME | SAME | SAME | N-ONLY |
+| harm:uyhiep | Uy hiếp đòi bạc | SAME | — | SAME | SAME | SAME | SAME | SAME | SAME | SAME | SAME | SAME |
 | harm:vp | Hặc ăn mặc sai phẩm | SAME | — | SAME | SAME | SAME | SAME | SAME | SAME | SAME | SAME | SAME |
 | harm:xinhh | Xin Hoàng hậu giáng | SAME | — | SAME | SAME | SAME | SAME | SAME | SAME | SAME | — | P-ONLY |
 | harm:xx | Tố xa xỉ | SAME | — | EXEMPT | EXEMPT | EXEMPT | EXEMPT | EXEMPT | EXEMPT | EXEMPT | EXEMPT | EXEMPT |
 | help | Giúp đỡ nàng | SAME | — | SAME | SAME | SAME | SAME | SAME | SAME | SAME | SAME | SAME |
 | hh:conf | Tịch thu trang sức (có cớ) | SAME | — | — | — | — | — | — | — | — | P-ONLY | — |
 | hh:cutpay | Khất bổng lộc | SAME | — | — | — | — | — | — | — | — | P-ONLY | — |
-| hh:judge | Xử tội | SAME | — | — | — | — | — | — | — | — | P-ONLY | — |
 | hh:pardon | Ân xá | SAME | — | — | — | — | — | — | — | — | SAME | — |
 | hh:reward | Ban thưởng | SAME | — | — | — | — | — | — | — | — | SAME | — |
 | humil | Hạ nhục | SAME | — | SAME | SAME | SAME | SAME | SAME | SAME | SAME | SAME | SAME |
@@ -164,31 +163,26 @@
 | label:Hại nhỏ 5/12 | Hại nhỏ 5/12 | ? | — | EXEMPT | EXEMPT | EXEMPT | — | — | — | — | — | EXEMPT |
 | label:Hại nhỏ 6/12 | Hại nhỏ 6/12 | ? | — | EXEMPT | — | — | — | — | — | — | — | — |
 | label:Hại nhỏ 7/12 | Hại nhỏ 7/12 | ? | — | EXEMPT | EXEMPT | EXEMPT | EXEMPT | EXEMPT | EXEMPT | EXEMPT | — | EXEMPT |
-| label:Hại nhỏ 8/12 | Hại nhỏ 8/12 | ? | — | EXEMPT | — | — | — | EXEMPT | EXEMPT | EXEMPT | — | — |
+| label:Hại nhỏ 8/12 | Hại nhỏ 8/12 | ? | — | EXEMPT | — | — | — | EXEMPT | EXEMPT | — | — | — |
 | label:Hại nhỏ 9/12 | Hại nhỏ 9/12 | ? | — | — | — | — | EXEMPT | EXEMPT | EXEMPT | EXEMPT | EXEMPT | — |
 | label:Hại nặng 0/18 | Hại nặng 0/18 | ? | — | EXEMPT | EXEMPT | EXEMPT | EXEMPT | EXEMPT | EXEMPT | EXEMPT | EXEMPT | EXEMPT |
-| label:Hại nặng 0/19 | Hại nặng 0/19 | ? | — | EXEMPT | EXEMPT | — | — | — | — | — | — | EXEMPT |
+| label:Hại nặng 0/19 | Hại nặng 0/19 | ? | — | EXEMPT | EXEMPT | EXEMPT | EXEMPT | EXEMPT | EXEMPT | EXEMPT | EXEMPT | EXEMPT |
 | label:Hại nặng 0/20 | Hại nặng 0/20 | ? | — | — | — | EXEMPT | — | — | — | EXEMPT | EXEMPT | — |
 | label:Hại nặng 10/18 | Hại nặng 10/18 | ? | — | — | — | — | EXEMPT | EXEMPT | — | — | — | — |
-| label:Hại nặng 10/19 | Hại nặng 10/19 | ? | — | — | — | — | — | — | — | — | EXEMPT | — |
-| label:Hại nặng 11/19 | Hại nặng 11/19 | ? | — | — | — | — | — | — | EXEMPT | EXEMPT | — | — |
 | label:Hại nặng 12/18 | Hại nặng 12/18 | ? | — | EXEMPT | EXEMPT | EXEMPT | EXEMPT | EXEMPT | EXEMPT | EXEMPT | EXEMPT | EXEMPT |
 | label:Hại nặng 13/18 | Hại nặng 13/18 | ? | — | EXEMPT | EXEMPT | EXEMPT | EXEMPT | EXEMPT | EXEMPT | EXEMPT | EXEMPT | EXEMPT |
-| label:Hại nặng 13/19 | Hại nặng 13/19 | ? | — | EXEMPT | EXEMPT | EXEMPT | EXEMPT | EXEMPT | — | — | — | — |
+| label:Hại nặng 13/19 | Hại nặng 13/19 | ? | — | — | — | — | — | — | — | — | — | EXEMPT |
 | label:Hại nặng 14/18 | Hại nặng 14/18 | ? | — | EXEMPT | EXEMPT | EXEMPT | EXEMPT | EXEMPT | EXEMPT | EXEMPT | — | — |
-| label:Hại nặng 14/19 | Hại nặng 14/19 | ? | — | — | — | — | — | — | — | — | EXEMPT | — |
-| label:Hại nặng 15/19 | Hại nặng 15/19 | ? | — | — | — | — | — | — | EXEMPT | EXEMPT | — | — |
-| label:Hại nặng 6/18 | Hại nặng 6/18 | ? | — | EXEMPT | — | — | EXEMPT | EXEMPT | — | — | — | EXEMPT |
+| label:Hại nặng 6/18 | Hại nặng 6/18 | ? | — | EXEMPT | — | — | EXEMPT | EXEMPT | — | — | — | — |
 | label:Hại nặng 7/18 | Hại nặng 7/18 | ? | — | EXEMPT | EXEMPT | EXEMPT | EXEMPT | EXEMPT | EXEMPT | — | — | EXEMPT |
-| label:Hại nặng 7/19 | Hại nặng 7/19 | ? | — | EXEMPT | — | — | — | — | — | — | — | — |
 | label:Hại nặng 8/18 | Hại nặng 8/18 | ? | — | — | — | — | — | EXEMPT | EXEMPT | EXEMPT | EXEMPT | — |
-| label:Hại nặng 8/19 | Hại nặng 8/19 | ? | — | — | EXEMPT | EXEMPT | EXEMPT | — | — | — | — | — |
-| label:Hại nặng 9/19 | Hại nặng 9/19 | ? | — | — | — | — | — | EXEMPT | — | — | — | — |
+| label:Hại nặng 8/19 | Hại nặng 8/19 | ? | — | — | — | — | — | — | — | — | — | EXEMPT |
 | label:Hầu chuyện, xem lén sổ nguyệt sự | Hầu chuyện, xem lén sổ nguyệt sự | ? | — | EXEMPT | EXEMPT | EXEMPT | EXEMPT | EXEMPT | EXEMPT | EXEMPT | EXEMPT | EXEMPT |
 | label:Hỏi người hầu: đó là ai? | Hỏi người hầu: đó là ai? | ? | — | EXEMPT | EXEMPT | EXEMPT | EXEMPT | EXEMPT | EXEMPT | EXEMPT | EXEMPT | EXEMPT |
 | label:Làm quen 1/1 | Làm quen 1/1 | ? | — | EXEMPT | EXEMPT | EXEMPT | EXEMPT | EXEMPT | EXEMPT | EXEMPT | EXEMPT | EXEMPT |
 | label:Lễ vật 0 | Lễ vật 0 | ? | — | — | — | — | — | — | — | — | — | EXEMPT |
 | label:Lễ vật 1 | Lễ vật 1 | ? | — | EXEMPT | EXEMPT | EXEMPT | EXEMPT | EXEMPT | EXEMPT | EXEMPT | EXEMPT | — |
+| label:Mắng cung nữ | Mắng cung nữ | ? | — | — | — | — | — | — | — | — | — | EXEMPT |
 | label:Mời thái y bắt mạch | Mời thái y bắt mạch | ? | — | EXEMPT | EXEMPT | EXEMPT | EXEMPT | EXEMPT | EXEMPT | EXEMPT | EXEMPT | EXEMPT |
 | label:Nghe lén câu chuyện | Nghe lén câu chuyện | ? | — | EXEMPT | — | — | EXEMPT | EXEMPT | EXEMPT | EXEMPT | EXEMPT | — |
 | label:Nghe ngóng chung | Nghe ngóng chung | ? | — | EXEMPT | EXEMPT | EXEMPT | EXEMPT | EXEMPT | EXEMPT | EXEMPT | EXEMPT | EXEMPT |
@@ -196,20 +190,16 @@
 | label:Quyền Hoàng hậu 0/4 | Quyền Hoàng hậu 0/4 | ? | — | — | — | — | — | — | — | — | EXEMPT | — |
 | label:Quyền Hoàng hậu 0/5 | Quyền Hoàng hậu 0/5 | ? | — | — | — | — | — | — | — | — | EXEMPT | — |
 | label:Quyền Hoàng hậu 3/4 | Quyền Hoàng hậu 3/4 | ? | — | — | — | — | — | — | — | — | EXEMPT | — |
-| label:Quyền Hoàng hậu 4/4 | Quyền Hoàng hậu 4/4 | ? | — | — | — | — | — | — | — | — | EXEMPT | — |
 | label:Quyền Hoàng hậu 4/5 | Quyền Hoàng hậu 4/5 | ? | — | — | — | — | — | — | — | — | EXEMPT | — |
 | label:Sai tai mắt dò nơi ở | Sai tai mắt dò nơi ở | ? | — | EXEMPT | EXEMPT | EXEMPT | EXEMPT | EXEMPT | EXEMPT | — | — | EXEMPT |
 | label:Sang Thái y viện xin bắt mạch | Sang Thái y viện xin bắt mạch | ? | — | EXEMPT | EXEMPT | EXEMPT | EXEMPT | EXEMPT | EXEMPT | EXEMPT | EXEMPT | EXEMPT |
 | label:Sát hại 0/7 | Sát hại 0/7 | ? | — | EXEMPT | EXEMPT | EXEMPT | EXEMPT | EXEMPT | EXEMPT | EXEMPT | EXEMPT | EXEMPT |
-| label:Sát hại 0/8 | Sát hại 0/8 | ? | — | — | — | — | — | — | — | — | — | EXEMPT |
-| label:Sát hại 0/9 | Sát hại 0/9 | ? | — | EXEMPT | EXEMPT | EXEMPT | — | — | — | EXEMPT | EXEMPT | EXEMPT |
-| label:Sát hại 1/7 | Sát hại 1/7 | ? | — | — | EXEMPT | EXEMPT | EXEMPT | EXEMPT | EXEMPT | EXEMPT | EXEMPT | — |
+| label:Sát hại 0/9 | Sát hại 0/9 | ? | — | EXEMPT | EXEMPT | EXEMPT | EXEMPT | EXEMPT | EXEMPT | EXEMPT | EXEMPT | EXEMPT |
+| label:Sát hại 1/7 | Sát hại 1/7 | ? | — | — | EXEMPT | EXEMPT | EXEMPT | EXEMPT | EXEMPT | EXEMPT | EXEMPT | EXEMPT |
 | label:Sát hại 2/7 | Sát hại 2/7 | ? | — | — | — | — | EXEMPT | EXEMPT | EXEMPT | EXEMPT | EXEMPT | — |
-| label:Sát hại 2/9 | Sát hại 2/9 | ? | — | EXEMPT | — | — | — | — | — | — | — | — |
 | label:Sát hại 3/7 | Sát hại 3/7 | ? | — | EXEMPT | EXEMPT | EXEMPT | EXEMPT | EXEMPT | EXEMPT | EXEMPT | EXEMPT | EXEMPT |
-| label:Sát hại 3/9 | Sát hại 3/9 | ? | — | — | EXEMPT | EXEMPT | EXEMPT | — | — | — | — | — |
-| label:Sát hại 4/9 | Sát hại 4/9 | ? | — | — | — | — | — | EXEMPT | EXEMPT | EXEMPT | EXEMPT | — |
-| label:Sát hại 5/9 | Sát hại 5/9 | ? | — | EXEMPT | EXEMPT | EXEMPT | EXEMPT | EXEMPT | EXEMPT | EXEMPT | EXEMPT | — |
+| label:Sát hại 3/9 | Sát hại 3/9 | ? | — | — | — | — | — | — | — | — | — | EXEMPT |
+| label:Sát hại 5/9 | Sát hại 5/9 | ? | — | — | — | — | — | — | — | — | — | EXEMPT |
 | label:Thuốc men 0 | Thuốc men 0 | ? | — | EXEMPT | EXEMPT | EXEMPT | EXEMPT | EXEMPT | EXEMPT | EXEMPT | EXEMPT | EXEMPT |
 | label:Thuốc men 1 | Thuốc men 1 | ? | — | — | — | — | — | EXEMPT | EXEMPT | — | — | — |
 | label:Thuốc men 2 | Thuốc men 2 | ? | — | — | — | — | — | — | — | EXEMPT | EXEMPT | — |
@@ -270,11 +260,11 @@
 | label:Y phục 3 | Y phục 3 | ? | — | EXEMPT | EXEMPT | EXEMPT | EXEMPT | EXEMPT | EXEMPT | EXEMPT | EXEMPT | — |
 | label:Y phục 4 | Y phục 4 | ? | — | — | EXEMPT | EXEMPT | EXEMPT | EXEMPT | EXEMPT | EXEMPT | EXEMPT | — |
 | label:Điểm trang | Điểm trang | ? | — | EXEMPT | EXEMPT | EXEMPT | EXEMPT | EXEMPT | EXEMPT | EXEMPT | EXEMPT | EXEMPT |
-| label:Đàn hát tự thưởng | Đàn hát tự thưởng | ? | — | EXEMPT | EXEMPT | EXEMPT | EXEMPT | EXEMPT | EXEMPT | EXEMPT | EXEMPT | EXEMPT |
+| label:Đàn hát tự thưởng | Đàn hát tự thưởng | ? | — | EXEMPT | EXEMPT | EXEMPT | EXEMPT | EXEMPT | EXEMPT | EXEMPT | EXEMPT | — |
+| label:Đập đồ | Đập đồ | ? | — | — | — | — | — | — | — | — | — | EXEMPT |
 | label:Đến cung nàng thăm | Đến cung nàng thăm | ? | — | EXEMPT | EXEMPT | EXEMPT | EXEMPT | EXEMPT | EXEMPT | EXEMPT | EXEMPT | EXEMPT |
 | label:Đến gặp Dao | Đến gặp Dao | ? | — | — | — | — | EXEMPT | EXEMPT | EXEMPT | EXEMPT | EXEMPT | — |
-| label:Đến gặp Lung | Đến gặp Lung | ? | — | EXEMPT | — | — | — | EXEMPT | EXEMPT | EXEMPT | EXEMPT | — |
-| label:Đến gặp Nhi | Đến gặp Nhi | ? | — | — | — | — | — | — | — | — | — | EXEMPT |
+| label:Đến gặp Hoa | Đến gặp Hoa | ? | — | — | — | — | — | — | — | — | — | EXEMPT |
 | label:Đến gặp Sương | Đến gặp Sương | ? | — | EXEMPT | — | — | EXEMPT | EXEMPT | EXEMPT | EXEMPT | EXEMPT | — |
 | label:Đến gặp Uyển | Đến gặp Uyển | ? | — | — | — | — | EXEMPT | EXEMPT | EXEMPT | EXEMPT | EXEMPT | — |
 | label:Đến gặp Vân | Đến gặp Vân | ? | — | — | — | — | — | — | — | EXEMPT | EXEMPT | — |
@@ -283,7 +273,6 @@
 | label:Đọc sách giải khuây | Đọc sách giải khuây | ? | — | EXEMPT | EXEMPT | EXEMPT | EXEMPT | EXEMPT | EXEMPT | EXEMPT | EXEMPT | EXEMPT |
 | label:Đổi › | Đổi › | ? | — | — | — | — | EXEMPT | EXEMPT | EXEMPT | EXEMPT | EXEMPT | — |
 | label:ⓘ | ⓘ | ? | — | EXEMPT | EXEMPT | EXEMPT | EXEMPT | EXEMPT | EXEMPT | EXEMPT | EXEMPT | EXEMPT |
-| maid:accuse | Tố cáo | NUM | P-ONLY | — | — | — | — | — | — | — | — | — |
 | maid:ask | Nhờ dò tin | NUM | N-ONLY | — | — | — | — | — | — | — | — | — |
 | maid:askRec | Xin chủ tiến cử lên Nội vụ phủ | NUM | NUM | — | — | — | — | — | — | — | — | — |
 | maid:askRew | Xin chủ ban thưởng | NUM | NUM | — | — | — | — | — | — | — | — | — |
@@ -307,6 +296,7 @@
 | maid:massage | Đấm lưng, hầu chuyện | NUM | NUM | — | — | — | — | — | — | — | — | — |
 | maid:med | Mua thuốc bổ | NUM | P-ONLY | — | — | — | — | — | — | — | — | — |
 | maid:nvp | Lĩnh đồ ở Nội vụ phủ | NUM | NUM | — | — | — | — | — | — | — | — | — |
+| maid:poison | Bỏ độc vào bát cơm | SAME | P-ONLY | — | — | — | — | — | — | — | — | — |
 | maid:rest | Nghỉ lấy sức | NUM | P-ONLY | — | — | — | — | — | — | — | — | — |
 | maid:rite | Học lễ nghi với cô cô | NUM | NUM | — | — | — | — | — | — | — | — | — |
 | maid:scout | Việc chủ sai | SAME | SAME | — | — | — | — | — | — | — | — | — |
@@ -316,7 +306,7 @@
 | maid:tellMis | Bẩm tin dò được | NUM | P-ONLY | — | — | — | — | — | — | — | — | — |
 | maid:tonic | Xin thuốc bổ | NUM | P-ONLY | — | — | — | — | — | — | — | — | — |
 | maid:watch | Việc chủ sai | SAME | SAME | — | — | — | — | — | — | — | — | — |
-| mediate | Hòa giải | SAME | — | SAME | SAME | SAME | SAME | SAME | SAME | SAME | SAME | N-ONLY |
+| mediate | Hòa giải | SAME | — | P-ONLY | P-ONLY | P-ONLY | P-ONLY | P-ONLY | P-ONLY | P-ONLY | SAME | N-ONLY |
 | pray | Cầu tự ở Phụng Tiên điện | SAME | — | SAME | SAME | SAME | SAME | SAME | SAME | SAME | SAME | SAME |
 | provoke | Khiêu khích | SAME | — | SAME | SAME | SAME | SAME | SAME | SAME | SAME | SAME | SAME |
 | test | Thử lòng | SAME | — | SAME | SAME | SAME | SAME | SAME | SAME | SAME | SAME | SAME |
