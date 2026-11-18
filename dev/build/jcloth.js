@@ -35,7 +35,7 @@ Object.assign(BAL.looks,{stain:{on:{uot:1,bun:1,tra:0}/* per kind: wet + mud ON 
   tide:[null,{h:.08,v:.6,f:9,soft:.03,op:.42},{h:.15,v:.55,f:9,soft:.045,op:.55},{h:.23,v:.5,f:9,soft:.06,op:.7}],col:[122,84,50],warm:.35,shoe:.85}},
  rot:.5,jit:.05,
  /* r6e tea look: translucent amber (core = inside darkness, ring = tide-line edge, cap = max strength, pull = how far it is pulled toward tea brown on saturated red / orange cloth) */
- tea:{core:.45,ring:.5,cap:.75,mix:1,tint:[146,82,30],base:.9,texK:.8,texMin:.55,texMax:1.4,at:[.55,.27],rot:0,dripX:[-.12,.14,0],dripY:.2,dripLen:[.05,.04,.03],dripW:.006,dripOp:.7,
+ tea:{core:.52,ring:.5,cap:.75,mix:1,tint:[130,70,24],base:.9,texK:.8,texMin:.55,texMax:1.4,at:[.5,.27],band:[.2,.34],xr:[.28,.72],clear:.8,full:.9,ky:1.6,rot:0,dripX:[-.12,.14,0],dripY:.2,dripLen:[.05,.04,.03],dripW:.006,dripOp:.7,
   /* r6h: one fixed splash (decal 1, no turn, no size jitter) for every costume; sc = width share of the robe; drips = thin runs down the grain */
   lv:[null,{sc:.14,op:1,drips:1},{sc:.2,op:1,drips:2},{sc:.27,op:1,drips:3}]}}});
 /* ---------- tiny deterministic noise ---------- */
@@ -246,7 +246,13 @@ function clothStainBake(d,W,H,kind,lv,decals,opt){opt=opt||{};const B=BAL.looks.
  const T=kind==="tra"&&B.tea&&B.tea.lv?B.tea:null;
  if(T&&decals&&decals.length){/* r6h owner: ONE cup of tea, ONE identical splash (same decal, same turn, same size, same amber) on every costume, high on the chest clear of the elbow fold; lv3 = a bit larger + more drips */
   let ls=0,lc=0;for(let i=0;i<W*H;i+=5)if(mk.mS[i]>.9){ls+=d[i*4]*.3+d[i*4+1]*.59+d[i*4+2]*.11;lc++}clothTeaLm=Math.max(60,lc?ls/lc:150);
-  const TL=T.lv[cl(lv|0,1,3)],dec=clothTeaShape(),sc=TL.sc,ax=mk.x0+fw*T.at[0],ay=mk.y0+fh*T.at[1];
+  const TL=T.lv[cl(lv|0,1,3)],dec=clothTeaShape(),sc=TL.sc;
+  /* r6h5 owner: on the VISIBLE chest cloth (below the collar, above the sash), never under hands / a cup / a sleeve: the chest band is scanned for the spot nearest the centre-front where a square of the lv3 splash size holds only free cloth (cloth mask, no skin / item / hair); same rule and same size for every figure and level */
+  const rr=Math.max(3,Math.round(fw*T.lv[3].sc*T.clear/2)),ok=new Uint8Array(W*H);for(let y=mk.y0;y<=mk.y1;y++)for(let x=mk.x0;x<=mk.x1;x++){const i=y*W+x;ok[i]=mk.mS[i]>.6&&mk.protL[i]<.08?1:0}
+  const S2=new Int32Array((W+1)*(H+1));for(let y=0;y<H;y++){let r=0;for(let x=0;x<W;x++){r+=ok[y*W+x];S2[(y+1)*(W+1)+x+1]=S2[y*(W+1)+x+1]+r}}
+  const box=(x,y)=>{const x0=Math.max(0,x-rr),x1=Math.min(W,x+rr+1),y0=Math.max(0,y-rr),y1=Math.min(H,y+rr+1);return(S2[y1*(W+1)+x1]-S2[y0*(W+1)+x1]-S2[y1*(W+1)+x0]+S2[y0*(W+1)+x0])/((2*rr+1)*(2*rr+1))};
+  let bx=mk.x0+fw*T.at[0],by=mk.y0+fh*T.at[1],bs=1e9;for(let y=Math.round(mk.y0+fh*T.band[0]);y<=mk.y0+fh*T.band[1];y+=2)for(let x=Math.round(mk.x0+fw*T.xr[0]);x<=mk.x0+fw*T.xr[1];x+=2){if(box(x,y)<T.full)continue;const d=Math.hypot((x-(mk.x0+fw*T.at[0]))/fw,(y-(mk.y0+fh*T.at[1]))/fh*T.ky);if(d<bs){bs=d;bx=x;by=y}}
+  const ax=bx,ay=by;
   count+=drawDecalOnCloth(out,W,H,mk,dec,ax,ay,sc,T.rot,TL.op,"stain",T.tint,0);
   const dw=fw*sc;for(let q=0;q<TL.drips;q++){/* drip runs: thin, tapered, straight down from the lower edge of the splash, fixed places */
    const dx=ax+dw*T.dripX[q],dy0=ay+dw*T.dripY,len=fh*T.dripLen[q],sg=Math.max(.8,fw*T.dripW);
