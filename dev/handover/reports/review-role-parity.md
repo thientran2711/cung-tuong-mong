@@ -38,3 +38,36 @@ START_CTX ~5 % of 1M.
 | coop-e2e | BLOCKED (co-op host not in this env) | | not faked |
 
 Shots: none taken (no UI change). Worktrees cleaned after verdict.
+
+
+# RE-CHECK r2 (part 1 + part 2 combined) — 18/11 ~22:40Z: **PASS → LAND READY f458b20df25615229fd2d5f61da3633838b02a8e**
+PRIORITY #1 CHECK: OD 18/11 ~21:30Z ROLE PARITY | main 884ce97c (live at verdict) | review/* review/role-parity-2 f2b8fb0c (ROLE-PARITY #2) | claims none other.
+Branch review/role-parity-r2 = f2b8fb0c + live main e16e1d6 (assemble.py: main's module list + jagacts4.js) + 2 reviewer fixes (bc8b3c1) + final-merge live 884ce97c (doc-90-women, comments only) + rebuilt root site.
+
+## My fix list (a)–(e)
+| item | result |
+|---|---|
+| (a) seed the whole page | DONE by worker: addInitScript LCG Math.random + crypto.getRandomValues, frozen performance.now / Date.now, start() under its own seeded LCG. **Proof: two full scans on the same build → byte-identical JSON and MD (md5 fc3b24f8…)**; test run 3 = same 150 gaps |
+| (b) force per-rank TARGET states | PARTIAL: new symmetric worlds (rouge, men, malice, seen) close the §4 families; per-rank target rows (harm:pushp t2–t7, tat t4/t5/t7/hh, trip t2/t3, follow t7, mediate) stay OPEN in the baseline — stable now that the scan is seeded, so they gate honestly. Successor item, not blocking |
+| (c) baseline keyed role\|key\|side + cap | NOT done by worker → **reviewer fix bc8b3c1**: role-parity.test.js keys open rows role\|key\|side and asserts OPEN.length ≤ OPEN_MAX = 150 (only shrinks) |
+| (d) «Chuyện cũ» | not seen in the seeded world but unhandled → **reviewer fix**: exempt (person-card kit tab, jpcf.js data-pct, UI only) |
+| (e) promotion EXACT | PASS both sides (onlyRisen = onlyBorn = [] NPC and player); the scan now compares the act set from the rank-world pass, not her real-needs draws |
+
+## Part 2 code (laws)
+- Law 1 two-way + law 4 one core: jagacts4 cx4:* runs the PLAYER's own builders, refactored to f(p,…): j25 kidCareOk/Do + kidGuardOk/Do (guard now shields any mother, decrements for NPCs too), jcycle cyHideCards(p), jration lxBorrowCard/lxBegCard/lxStealCard(p,v) (an NPC asking HER = her answer card lxAskHer; stealing from her = lxStolenNote), j83 IROUTE + illBuy routes, j22 manCards(p,m,k) + trystNpc (same odds odA of the doer, same death if caught; his tình ý per woman). Typed numbers moved to BAL (BAL.manRd, BAL.btn.kidGuard.mo/blk, BAL.ag.par4 = worth/gates only).
+- Law 6a real evidence: flat monthly rolls removed (canon overwrite): NPC affair start (roll 2) and death (roll 3), clever-rival cycle hide, rouge borrow/ask/steal, monthly poison buy → day-plan choices; an NPC affair is now exposed only by proof (seen within seenW → evA), the book, or a tryst caught in the act — same as hers.
+- Law 6c: rouge / poison items move between real inventories (lxGive, illBuy); NPC khăn tay counted per woman like hers (m.lw / m.letters).
+- Law 7 VANPHONG: no % / banned words in added strings; odds via word()/chanceW(). No new UI parts (law 9 n/a).
+
+## Gates (r2)
+| gate | r2 | live main | note |
+|---|---|---|---|
+| quickcheck | **PASS** on fa3e9f80, bc8b3c1, and the LAND sha f458b20 (core gates incl. one-core-guard, old save ok, perf ≈ live) | | |
+| role-parity.test.js (with reviewer cap) | **ALL PASS** (11/11): 0 new gaps, baseline 150 (was 278), promotion EXACT, riseCore numbers | | 2 extra scans identical |
+| agmaid_check | 1 FAIL «Tiến cử option text» | **same 1 FAIL on e16e1d6** | pre-existing |
+| ag-par3 | ALL PASS | | (flaky on main, proven r1) |
+| ag-stf2 + 13 ag-*.test.js | all PASS (ag-all 21/21) | | |
+| deeds (ag2perf-deeds 160 buổi, r2 harness incl. AG4) | s1 603, s2 529, s3 596, s4 628, s5 697, s6 634 | s1 615, s2 569, s3 594, s4 609, s5 514, s6 231 (died t6) | per seed −2.0 / −7.0 / +0.3 / +3.1 / +35.6 / (base died); comparable seeds 1–4 total 2387 → 2356 = **−1.3 %** (mean of ratios −1.4 %) → within ±3 %. Single seeds are chaotic (any changed draw shifts the life); flagged for MAIN |
+| coop-e2e | BLOCKED (co-op host) | | not faked |
+
+Open for a successor (not blocking): the 150 baseline rows (mostly probe limits, §4.3 of the worker report) + per-rank target worlds (b).
