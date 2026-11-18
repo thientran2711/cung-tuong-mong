@@ -109,12 +109,14 @@ var KBK_ART_LINE=window.KBK_ART_LINE={b:.0244};
       INTO it by its PAINTED box (l..r x t..b, kitFigBody), aspect kept: whole figure visible (crown, hands, sleeves, hem, feet), nothing cut, never squeezed; centred in the frame, feet on its floor. */
    let dyF=0,dxF=0;{const i1=f.querySelector("img"),s1=i1&&i1.getAttribute("src"),b1=s1?kitFigBody(s1,soon):null,Hc=por.clientHeight,BF=BAL.bookFrame;
     if(!b1||!Hc){f.style.visibility="hidden"}else{const inEl0=box.closest(".kbk-in"),inW=(inEl0&&inEl0.clientWidth)||box.clientWidth;
-     const ARF=BF.wMax/(1+BF.cMax),wantW=Math.max(60,Math.min(Math.round(Hc*ARF),Math.floor(inW*BF.maxCol)));if(Math.abs((parseFloat(box.dataset.kfw)||0)-wantW)>.5){box.dataset.kfw=wantW;box.style.setProperty("--porf",wantW+"px");soon();return}
-     /* ONE BODY SIZE: skull top (kitFigTop = head-top table) -> feet is the same px for every person (kids by KIT_FIG.fac); the frame is built for the tallest crown and the widest robe at that size, so the fit
-        guard below only ever fires on art outside the measured catalog (flagged data-kfit) */
-     const pwc=por.clientWidth,ar1=i1.naturalWidth&&i1.naturalHeight?i1.naturalWidth/i1.naturalHeight:b1.ar,sp=Math.max(.05,b1.b-b1.t),sw=Math.max(.05,b1.r-b1.l),FH=Math.min(Hc,pwc/ARF),kid=/fig-kid-/.test(s1)&&typeof KIT_FIG==="object"?KIT_FIG.fac(s1):1;
-     const bd=Math.max(.2,b1.b-kitFigTop(b1));let ih=pwc/BF.wMax*kid/bd;const lim=Math.min(FH/sp,pwc/(sw*ar1));f.dataset.kfit=ih>lim+.5?"1":"";ih=Math.min(ih,lim);
-     const cx=((b1.cl!=null?b1.cl:b1.l)+(b1.cr!=null?b1.cr:b1.r))/2,iw=ih*ar1;let dx=pwc/2-cx*iw;dx=Math.max(-b1.l*iw,Math.min(pwc-b1.r*iw,dx));   /* body core on the frame centre, painted box kept inside */
+     const wantW=Math.max(60,Math.min(Math.round(Hc*BF.ar),Math.floor(inW*BF.maxCol)));if(Math.abs((parseFloat(box.dataset.kfw)||0)-wantW)>.5){box.dataset.kfw=wantW;box.style.setProperty("--porf",wantW+"px");soon();return}
+     /* ONE BODY SIZE (fixed): skull top (kitFigTop = head-top table) -> feet is the same px for every person (kids by KIT_FIG.fac), feet on the frame floor, body core on the frame centre. Crowns rise into the free paper above the frame
+        (never cut); a wide robe spreads into the page margin LEFT of the column, never under the text on the right; only a picture that still does not fit is clipped minimally at the column edge (stopgap, data-kcut, listed for redraw). */
+     const pwc=por.clientWidth,ar1=i1.naturalWidth&&i1.naturalHeight?i1.naturalWidth/i1.naturalHeight:b1.ar,FH=Math.min(Hc,pwc/BF.ar),kid=/fig-kid-/.test(s1)&&typeof KIT_FIG==="object"?KIT_FIG.fac(s1):1;
+     const bd=Math.max(.2,b1.b-kitFigTop(b1)),ih=BF.body*FH*kid/bd,iw=ih*ar1,pgR=pg?pg.getBoundingClientRect():null,porR=por.getBoundingClientRect(),ml=pgR?Math.max(0,porR.left-pgR.left-pgR.width*BF.margin):0;
+     const cx=((b1.cl!=null?b1.cl:b1.l)+(b1.cr!=null?b1.cr:b1.r))/2,pl=b1.l*iw,pr=b1.r*iw;let dx=pwc/2-cx*iw;dx=Math.min(dx,pwc-pr);dx=Math.max(dx,-ml-pl);   /* painted box inside [-ml, pwc] */
+     const cutR=Math.max(0,dx+pr-pwc),cutL=Math.max(0,-ml-(dx+pl)),cutT=Math.max(0,ih*(b1.b-b1.t)-Hc);
+     f.dataset.kcut=(cutR+cutL+cutT).toFixed(1);if(cutR+cutL+cutT>.5){const im=f.querySelector("img");if(im)im.style.clipPath=`inset(${((ih*b1.t+cutT)/ih*100).toFixed(2)}% ${(cutR>0?(iw-(pwc-dx))/iw*100:0).toFixed(2)}% 0 ${(cutL>0?(-ml-dx)/iw*100:0).toFixed(2)}%)`}else{const im=f.querySelector("img");if(im)im.style.clipPath=""}
      dyF=ih*(1-b1.b);dxF=dx;
      f.style.height=ih.toFixed(1)+"px";f.style.width=iw.toFixed(1)+"px";f.style.visibility="";f.dataset.kbody=(ih*(b1.b-kitFigTop(b1))).toFixed(1);}}
    const w0=f.offsetWidth;if(!w0||!box.offsetWidth)return;

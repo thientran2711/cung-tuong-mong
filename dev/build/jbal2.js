@@ -934,8 +934,8 @@ Object.assign(BAL,{odb:{
 /* FACE REVEAL motion (owner 18/11 ~06:20Z, KIT §79 jreveal.js): ms = the grey veil clears from the face outward; lite = Gọn / reduced motion short fade;
    win = how long after a face is learned every place that first draws it (frame, avatar, stage figure) still plays its one reveal */
 Object.assign(BAL,{faceReveal:{ms:Math.round(1000*BAL.pace),lite:350,win:8000}});
-/* FULL-BODY FRAME (owner 18/11 ~06:45Z + ~06:55Z + ~07:00Z, KIT §56.3): ONE body size for everybody = SKULL TOP (kitFigBody ht, the head-top table / face mesh; never the crown, bun or hat) to FEET.
-   The frame holds the TALLEST crown (cMax = max (skull top - painted top) / body over the 1759 sampled adult figures, 18/11: .132 = maid t8) and the WIDEST robe (wMax = max painted width / body, .647)
-   at that one body size, so nobody is ever cut or shrunk: frame aspect = wMax/(1+cMax); frame width = the column (capped at maxCol of the inner page width); body = frame width / wMax; feet on the frame floor.
-   kid = child size by KIT_FIG.fac. Measured by dev/test/fullbody-frame-scan.js / the 18/11 catalog scan (report fullbody-frame.md). */
-Object.assign(BAL,{bookFrame:{maxCol:.56,wMax:.65,cMax:.132}});
+/* FULL-BODY FRAME (owner 18/11 ~06:45Z, ~06:55Z, ~07:00Z + angry at the small r3, ~07:05Z, KIT §56.3): the SIZE IS FIXED = the c03 figures of the approved r2 look: ONE body size for everybody, SKULL TOP (kitFigBody ht, the head-top table /
+   face mesh; never crown, bun or hat) to FEET = body x frame height, where the frame is the tight box of the widest c03 person (aspect ar .4824, width = the column, capped at maxCol of the inner page width) and body .9167 = c03 t6 skull-top-to-feet / 2678 crop box
+   (Fold 627 px, iPad 519 px). Nobody is shrunk for catalog extremes: crowns rise into the free paper above the frame, a wide robe spreads into the page margin beside the column (never under the text); only a picture that still does not fit is
+   cut minimally at the column edge (stopgap, flagged data-kcut, listed for redraw). */
+Object.assign(BAL,{bookFrame:{ar:.4824,maxCol:.56,body:.9167,margin:.06}});
