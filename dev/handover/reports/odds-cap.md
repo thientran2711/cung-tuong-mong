@@ -545,3 +545,88 @@ What C-AG must do when ag-all-2 meets odds-cap: o:100 → runner cap roll or fix
 - jworld.js:183 | own soft path | shared file | …ry(o))apply({sung:b.showSung,danh:b.showDanh});else if(agSoft(o))log(agSoftTxt(S));else apply({danh:b.fail…
 
 SẴN SÀNG KIỂM fcefca42f574cb73082083eac9db98cfce246c59
+
+
+---
+# § FIX ROUND 3 — fix of review r2 "FAIL 3 @9df9204d" (Foreman D #12 brief D12-odds-cap-fix3.md)
+PRIORITY #1 CHECK ('odds-cap|capRes|Nắm chắc|Thú tội'): OD 2 | ledger 0 | claims 8 | main 15 | review/* 2 | archive 23
+
+Worker session_01964izECUsWiXJp3oXeZY7A (opus). Branch review/odds-cap, continued from 9df9204d; merged newest origin/main twice (94a9375, then a95e8d4). START_CTX ≈ 4 % of 1M (estimate; the session tool reads 0).
+Read in full: START_CORE, START_WORKER, START_REVIEWER, review-odds-cap-r1.md § ROUND 2, this report (r1 + r2), OD L1657 / L1659 (1) / L1664 verbatim.
+Merge notes (94a9375): two conflicts. j61: main's new k61Gate greet / name options keep `fix:1` (greeting is bookkeeping). jmen: main's new "Hỏi thái giám tin ngoại triều" text came back with "Chắc chắn" → `cap:1` + `capW()`, as r1 did. Main's other new lines: no o:100, no "Chắc chắn", no typed cap, no raw draw.
+
+## A. capRes keeps the cap at raw odds 96–99 (FAIL A)
+j1.js:116, before: `if(o>H)return !!ok&&roll(H/o*100); if(o<L)return !!ok||roll((L-o)/(100-o)*100)`. roll() clips at 95, so the keep share was too small.
+After: `if(o>H)return !!ok&&Math.random()*o<H; if(o<L)return !!ok||Math.random()*(100-o)<L-o` (direct draw, same form in both branches; H/L = BAL.odds.hi/lo).
+Unit draw test: new `node dev/test/odds-cap.js` (reads capRes/roll/oddsCl/cl from j1 and BAL.odds from jbal; 200 000 draws per o; tolerance ±.004; `--old` runs the r2 formula):
+
+| raw o | 0–4 | 5 | 50 | 94 | 95 | 96 | 97 | 98 | 99 | 100 |
+|---|---|---|---|---|---|---|---|---|---|---|
+| before (r2, --old) | .050 | .050 | .500 | .940 | .949 | **.912** | **.921** | **.931** | **.940** | .950 |
+| after | .050 | .051 | .501 | .940 | .950 | .950 | .950 | .950 | .951 | .950 |
+Result: PASS (floor .05 for o ≤ 5, .950 for every o ≥ 95).
+
+## B. ONE CORE odds word — no typed ladder word (FAIL B)
+Rule applied: a decision (never rolled) shows NO ladder word (KIT.md:494); a real chance gets its word only from word() / oddsOf / capW; a side chance reads chanceW. Scan: new `python3 dev/tools/typed-ladder-scan.py [ref]`. It looks for every rung (Liều, Khó, Năm ăn năm thua, Khá chắc, Chắc, Rất chắc, Nắm chắc) typed as a hint segment, i.e. at a string start or after " · ". It skips regexes, comments and help prose. I cross-checked it with a broad grep of every quoted rung (89 lines; the extra hits are comments, help text, the difficulty / minigame "Khó", and flavour lines).
+Count: **42 before (e35e829, after the main merge) → 14 after**. The 14 left are listed under "Left" below.
+
+| file:line | text / option | before | after | why |
+|---|---|---|---|---|
+| j95.js:411 ×2 | Nhận lễ, giữ im lặng / Trả lại hộp gấm | `Nắm chắc · thành: …` | `thành: …` | decision, never rolled |
+| j95.js:421 | Giữ làm con bài khống chế | `Nắm chắc · …` | no word | decision |
+| j95.js:423 | Lặng im, đổi lấy ân tình | `${word(100-risk)}` = Nắm chắc + an impossible BẠI when risk 0 | the word only when risk > 0 (it rolls only then) | found by the runtime shot |
+| j95.js:424 | Giả như không thấy | `Nắm chắc · …` | no word | decision |
+| j95b.js:223 | Mặc kệ | `Nắm chắc · kèm: …` | `kèm: …` | decision |
+| jagent.js:216 / 217 | Thôi, lui về cung / Mặc kệ | `Nắm chắc · …` | no word | decision |
+| jagmaid.js:91 | Tắm gội chờ giá | `Nắm chắc · …` | no word | decision |
+| jagmaid.js:101 | amSendX (maid serves in her place) | `Nắm chắc · …` | no word | decision |
+| jgift.js:20 | giftEval (every gift line) | `Nắm chắc · tốn: 2 khắc` | `tốn: 2 khắc` | giving is deterministic |
+| jgift.js:161 / 164 | Đến … gặp ngài / Sang Đức Thọ cung thỉnh an | `Nắm chắc · …` | no word | walking |
+| jgift.js:166 | Dâng quà lên Hoàng thượng / Thái hậu | `Nắm chắc · …` | no word | opens the chest picker |
+| jrcp.js:251 / 252, jtds.js:85 / 86 | teacher choice (ma ma / a consort) | `Nắm chắc · …` | no word | a choice before the lesson |
+| j15.js:71 | Đổi người (own-servant card button) | `Chắc · …` | no word | her own order, no roll in servAct("doi") |
+| jhouse.js:54 | Đổi người (jhouse act) | o:100 (rolled at the cap) | o:100,**fix:1** | same act, same rule as Thưởng / Phạt (her orders); both doors now agree |
+| j15.js:36 | deadly scheme acts | forced `"Liều"` | `word(oddsCl(o+lotB))` + lotTag | jaudit #9 already says the word must be the real one |
+| j8.js:305 nx() | night (thị tẩm) quality word | its own ladder: v≥3 "Rất chắc" … <0 "Khó" | `word(BAL.night.vO[v])`, new BAL.night.vO [40,50,60,75,85] | one ladder (BAL.odds.cut); the same words as before |
+| jroute.js:221 rtX | 16 route options at o 100 | broken word `"Chắc cy"` (also live) | no word when o ≥ 100 | those options are decisions (blackmail pay, plan the escape …) |
+| jtsb.js:238 | Thu làm tai mắt | typed `Khá chắc` + "hỏng: … bán tin ngươi" (the act never fails; the 35 is a side leak) | no act word; `kèm: … ${chanceW(BAL.odb.jtsb.leakO)}`; roll(35) → roll(BAL.odb.jtsb.leakO) | new BAL key leakO 35, the same value |
+| jrcp.js:294 | Sai cung nữ dò la khẩu vị | `S.maid?word(rcpSpyO()):"Khó"` | `word(rcpSpyO())` | rcpSpyO already handles "no maid" |
+| jgrey.js:36 (kit sample page) | Ma ma giáo tập sample | `Nắm chắc · …` | no word | the sample must match the game |
+| jkitpage.js:147 (kit sample page) | Nghe hết rồi mới định / Cho lui | `Chắc · …` / `"Chắc"` | `thành: …` / `""` | decision samples |
+
+Left (14 scanner hits, not a game odds word): KIT_ODDS itself (j79:192); difficulty "Khó" (jdiff:20) and minigame tier "Khó" (jmgt:3/28); kit sample page chance demos that show one rung each (jkitpage:144 ×3, 153 ×2, 156 ×3, jksize:382, jopic:226; samples of the chip, not game text).
+Outside the scanner's pattern, left: j13:66 ("Chắc → Khá chắc" explains a one-step shift) and jgrey:37 (a chance demo).
+
+## C. Failure text stays in BẠI (FAIL C + family)
+- j22.js:38 Thú tội: `hỏng: Hoàng thượng không tha, bị ban chết` → `hỏng: Hoàng thượng không tha — có thể bị ban chết` (one item, "có thể" because death() mercy exists). The deck card now reads THÀNH "giữ được mạng (vào lãnh cung) · hắn bị xử trảm" / BẠI "Hoàng thượng không tha — có thể bị ban chết", with no KÈM row. Seen on Fold and iPad.
+- Family scan: new `node dev/test/kem-split-scan.js <base>` runs every string literal with "hỏng:" (205) through the kit's own kaModelStr + kaRows in the page. I also checked every `hỏng: ${var}` by hand (28 sites; ktLoss, pz7, accSneakPen, R0.fail, rcp fail, reign lose …), and the shots read real cards / options.
+
+| file:line | card / option | before | after |
+|---|---|---|---|
+| j22.js:37 | Uống thuốc phá thai | `…; hỏng: băng huyết …` sat inside THÀNH; "mất đứa bé" went to KÈM; "kèm khi hỏng: băng huyết mà chết" went to KÈM | `mất đứa bé, Sức −20 · hỏng: băng huyết — có thể băng huyết mà chết: <chanceW>`. BẠI = "băng huyết — có thể … · Sức −30" (the Sức from a.l, no duplicate). |
+| j42.js:465 | the same act (other door) | "kèm khi hỏng" → KÈM | same form as j22:37 |
+| jpoison.js:86 | Nhờ … nếm trước | `· Lòng X −5` after hỏng went to KÈM | `— Lòng X −5` inside BẠI (the loss happens only on fail, jpoison.js:87) |
+| j95.js:417 | accuse options (lose) | `vu cáo: Danh −8 · bị cấm túc · nàng oán +25 …` (cấm túc and oán went to KÈM) | joined with ", ", all in BẠI (Fold / iPad dialog shot) |
+| jreign.js:200 | reign options (lose) | `fmt(l) · có thể bị giáng bậc / bị cấm túc` joined with " · " → KÈM | joined with ", " → BẠI |
+After: kem-split-scan 0 of 205; the shots show no failure in KÈM.
+
+## Lists completed (reviewer notes)
+- spProudCh (jpromsv.js:27, cl(…,3,70), shown with chanceW) belongs to the left-as-is list of § ROUND 2 ¶1: it is a rate with a floor below 5, the same as conceiveCh / confessRisk.
+- agSoftTxt lines that were missing from Appendix R2 (origin/review/ag-all-2): jagacts2.js:71, jagacts3.js:40, jagent.js:37 (comment), jagent.js:41 (the agSoftTxt definition), jagstaff.js:106. Each one → j63 oddsSoft (one soft-fail path). I sent them to C-AG in a dated FOREMAN_C_STATUS line. Their branch was not edited.
+- r3 adds for C-AG too: their decision options must not type a ladder word (dev/tools/typed-ladder-scan.py on their branch).
+
+## Gates (final sha below; shots and runtime on 18dcebfb, same rules code)
+| gate | result |
+|---|---|
+| odds unit draw | `node dev/test/odds-cap.js` PASS (table § A) |
+| typed ladder word | 42 → 14 (all 14 are non-odds or kit samples, § B) |
+| failure → KÈM | kem-split-scan 0 / 205 + runtime cards |
+| odds-cap-scan | Chắc chắn 0 · typed cl(…,5,95) 0 · raw draw 1 (roll itself) · fix:1 16 (+ jhouse Đổi người) · o:100 not fix 70 · capAt 17 · oddsCl( 181 |
+| quickcheck (core gates: one-core-guard 0 fails · rules-one-source · kit-conform · coop-one-world · time-spill) | PASS ×2 on 18dcebfb, interleaved, 6 pairs each. Medians new/live: run 1 render 153/140, tab 321/291, buổi 671/783; run 2 render 144/154, tab 281/301, buổi 757/749. tasks>200ms 12/11, 12/12. The render sign flips between runs, so it is noise. Old save loads and plays a buổi. Final sha 27713d87 (live = a95e8d4): PASS, render 162/155, tab 329/305, buổi 832/790, tasks 13/12. This run alone is borderline (+4.5 % render, +5.3 % buổi). Over all 18 pairs (3 runs): render 459/449 ms (+2 %), buổi 2260/2322 ms (−3 %), so the perf does not move. |
+| coop-e2e (regression guard only) | branch 18dcebfb 63/63 · live origin/main 94a9375 63/63 — no worse |
+| shots, LOOKED at (scratch only, never in git, deleted after this report; `node dev/test/odds-cap-shots.js <base> <out>` reproduces them) | Fold 755x1000@2 + iPad 1180x820@2. (1) Thú tội deck card: BẠI only, "có thể bị ban chết". (2) Uống thuốc phá thai: failure in BẠI. (3) Decision dialog "Bắt gặp": Giữ làm con bài / Lặng im / Giả như không thấy show no word and no BẠI; Tố giác keeps its real word (Liều), its failure all in BẠI. No overlap, no cut text, page errors 0, no horizontal overflow. |
+Balance: no new run. A is the only odds change (it raises 96–99 wins to exactly the cap). The other changes are wording, plus Đổi người losing a 5 % soft fail. Per the reviewer, no new balance run is needed.
+
+Branch commits: e35e829 merge main 94a9375 · d8aba20 A · bcafa0c + 18dcebf B/C · 27713d8 merge main a95e8d4.
+
+SẴN SÀNG KIỂM 27713d87945a59ba9e69e1d88fd892b086ea48c8
