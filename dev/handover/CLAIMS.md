@@ -1012,5 +1012,5 @@ looks-2 overlay art (fx-stain-tra/uot, smudge, ink, pox, scars, messy hair) | im
 | OWNER UI BUG book-figsize (one body height on every book figure; sonnet; brief briefs/book-figsize.md) | review/book-figsize | MAIN s42 | session_01UV1Szgp1qDfnHSk36y8CPg | READY-FOR-REVIEW b0a69e2b | 18/11 02:03Z |
 | REVIEW life-preload 4ff10ae (opus, URGENT; brief briefs/review-life-preload.md) | review/life-preload | MAIN s42 | session_01UV1SzjKPEGVua6n1rUEV2S | RUNNING (merge r6 caa3ffe0 on main f986ff6a) | 18/11 02:22Z |
 | REVIEW result-reason 0db60e0e (sonnet SMALL; brief briefs/review-result-reason.md) | review/result-reason | MAIN s43 | session_01UV1SziWJ2pGVgUMJzwxqQF | RUNNING | 18/11 02:24Z |
-| REVIEW staff-cap-apply fc470e4 (opus BIG; brief briefs/review-staff-cap-apply.md) | review/staff-cap-apply | MAIN s43 | (opening) | RUNNING | 18/11 02:30Z |
+| REVIEW staff-cap-apply fc470e4 (opus BIG; brief briefs/review-staff-cap-apply.md) | review/staff-cap-apply | MAIN s43 | session_01UV1Szjx5c2mp4L6PXwg2zG | RUNNING | 18/11 02:30Z |
 | look-fx WIRE (upload 24 approved face finals + LOOKS_ART + fig fit rows re-measure; sonnet; brief briefs/look-fx-wire.md) | review/look-fx-wire | MAIN s43 | session_01UV1Szm7mHXbyLu55N39V6f | RUNNING | 18/11 02:31Z |

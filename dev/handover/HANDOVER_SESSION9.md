@@ -1101,3 +1101,26 @@ Wake: trig_01XziXcTa6TV3ACMFhLctFAr 02:34Z fires into s42 → s42 relays; s43 se
 - (18/11 02:41Z) OWNER (s43 chat, OD logged verbatim): (1) tone ladder for ink fx-muc, soot fx-muoi, scratch KIT_SCAR (100/85/70/55/40 %) → look-fx worker SzhzDHZ first, then wire; (2) PLACE BANNER PICK = one plaque, line 1 icon+name+count, line 2 happening line always on its own line → place-banner SzmHEoD bakes → SMALL review.
 - (18/11 02:31Z) look-fx SzhzDHZ hit rollover (55 %) before wire → archived; successor session_01UV1Szm7mHXbyLu55N39V6f (sonnet): ladder first, then wire. result-reason PASS e1f60927 (FF of f986ff6a, not of f8276cdb) → reviewer SziWJ2p asked to merge f8276cdb + regate. cloth-tea be9d08e SẴN SÀNG KIỂM (tea only = 7270a76..be9d08e) waits owner verdict.
 - (18/11 02:46Z) OWNER angry: cropped option sheet → sent 4 full-screen Fold shots; RULE logged (full screen, whole figure, same character for size compare); place-banner told.
+- (18/11 02:33Z) WAKE. LOAD: main running ~14 (owner bugs/UI/looks/go-live only) | B no new order | C ROOT-14 per its STATUS (art) | D 2 running, free 10 — nothing non-UI held by main to move | C-AG #8 free 7 | moved: none. Context 276k/1M = 28 % ≥ near START 6 % + 25 % → ROLLOVER NOW (depth 6: no child main).
+
+## S43 → ROOT MAIN HANDOVER (18/11 02:35Z real; s43 context 28 % measured, rollover line 31 %; depth 6 → owner opens a ROOT main from claude.ai)
+FOR MAIN: s43 stops at depth 6. The OWNER opens a ROOT main from claude.ai with the paste block given in the s43 chat (Lượt 7). Read this section + "## S43 (main, child of s42)" above.
+LIVE: main f8276cdb (greet-stranger r6). ROLLBACK chain … → f986ff6a → f8276cdb.
+OWNER RULINGS s43 (OD tail from "(18/11 ~09:25Z owner clock" to the end, VERBATIM): stage + avatar makeup = mirror strength (avatar frames get the makeup layer, whole group); book: everyone UP to her Tổng lược size, no shrink/crop; face marks already approved with C → ship the 24 finals; TONE LADDER for ink/soot/scratch (100/85/70/55/40 %); PLACE BANNER = one plaque, line 1 icon+name+count, line 2 happening line; every shot to her = FULL SCREEN, whole figure, same character when comparing size (she was angry at a cropped sheet).
+LAND ORDER (FF-only from live main; wipe img/_review/<topic> after verdict; tell C-AG each new main): life-preload (URGENT) → men-forbidden → result-reason (regate on f8276cdb) → cloth-xoc (r6 sha) → smudge r16 → staff-cap-apply → AG after C-AG BIG PASS.
+RUNNING (all report to MAIN — tell them the new main id):
+- REVIEW life-preload SzjKPEGVua6n1rUEV2S (opus URGENT) → PASS → land FIRST; worker SzgmQZwF1XMsH7EzhLL idle.
+- REVIEW men-forbidden Szh3jq9brqAHDsVQitM (opus BIG) → PASS → land; worker SziLuyrJEqfUqguNP1W idle.
+- REVIEW result-reason SziWJ2pGVgUMJzwxqQF: PASS e1f60927 on f986ff6a; asked to merge f8276cdb + regate → land. Worker SzirzUecQTMVipMrcQ1 idle (archive after land).
+- REVIEW cloth-xoc SziKea8TZQipjPGajgv on review/cloth-xoc-r6 (7270a76 wet+mud + main) → PASS → land. NOTE review/cloth-xoc head = be9d08e (tea pushed there by mistake; land the reviewer's r6 sha, NOT review/cloth-xoc head).
+- cloth-xoc worker SzjMK4RUBPdS1ZMuLds: TEA be9d08e on review/cloth-tea, full-tra c01/c30 sent owner (Lượt 3) → her verdict → SMALL review → land.
+- REVIEW smudge r16 SzitaUhhFRRJBAbEgHM → PASS → land; worker SzhMG33iYZzEKjZvDzg then does AVATAR MAKEUP LAYER (step 0, every avatar frame, new branch from live main, SMALL review, full-screen shots).
+- REVIEW staff-cap-apply BIG Szjx5c2mp4L6PXwg2zG (fc470e4) → PASS → land; worker SzkNqcjf9atNLxPVz8y idle.
+- place-banner SzmHEoDtWWruq6yMGnZ: baking owner's two-line plaque; must send full-screen same-character before|after shots ("SHOTS READY") → LOOK → owner → SMALL review → land.
+- opt-card-short Szk6j15PHjAL8gMSR9z: owner has 8 shots from s42; her A/B/C pick → bake → SMALL review → land (send full-screen shots only).
+- book-figsize Szgp1qD8CPg… (session_01UV1Szgp1qDfnHSk36y8CPg): r3 = every figure UP to her live p.5 body height; LOOK vs her screenshots before sending.
+- look-fx-wire Szm7mHXbyLu55N39V6f (sonnet): TONE LADDER sheets first ("LADDER READY", CDN img/_review/look-fx/ladder-{muc,muoi,cao}.png) → LOOK → owner picks → then wire (upload 24 finals by md5, LOOKS_ART, mirrored muc, re-measure ALL fig fit rows). Hair/cloth samples (tóc xổ, vương hoa/lá/tuyết, móc chỉ) still owe her a verdict (panels on CDN img/_review/look-fx/).
+- C-AG #8 SzgXTgLe5k9TFs9zfGm: lander #3 on ag-all-2-land/npc-chain-land; CAL PREVIEW SzgwDRVVjeacdPPtR47 sends Thử tay URL (?hieuchuan=1, separate origin) → send owner AT ONCE.
+- builder s37a SzjA6P5mZskv3JKn3BV idle (archive if nothing to batch).
+OWNER PENDING: tea verdict; opt-card A/B/C; ladder pick (when sent); place-banner after-shots.
+Wake: s43 trigger trig_01DnGumsCEWwRGKJbfBNDc4D (:32) → DELETE it when the ROOT main sets its own (s43 leaves it on so wakes still reach s43 until then; s43 relays only).
