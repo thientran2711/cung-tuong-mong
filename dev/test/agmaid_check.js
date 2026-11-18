@@ -60,7 +60,7 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
  await fresh(false);
  const r7=await p.evaluate(()=>{const L=amMaids();const [s,o]=L[0]||[];const n0=window.__amN.eyeOff;const e=s?mlEye(o,s):false;const a={e,off:window.__amN.eyeOff-n0};
   BAL.ag.on=0;const v=liveRivals(true).find(x=>x.maid&&!x.preg);const seen=[];const r0=roll;roll=function(x){seen.push(x);return false};try{rivalNight(v)}finally{roll=r0;BAL.ag.on=1}return{a,off3:seen.includes(3)}});
- ok(r7.a.e===false&&r7.a.off===1,'jmline: no eye roll while the loop is on',r7);ok(r7.off3,'off switch BAL.ag.on=0: the old roll 3 again',r7);
+ ok(r7.a.e===false&&r7.a.off===1,'jmline: no eye roll while the loop is on',r7);ok(!r7.off3,'off switch BAL.ag.on=0: fake illness stays a goal (npcWhy fakeIll, npc-purpose OD 18/11), no blind roll 3',r7);
  /* 8 play */
  const play=(maid)=>p.evaluate(async(maid)=>{const E=[];const ce=console.error;console.error=(...a)=>{E.push(a.map(String).join(" ").slice(0,200));ce.apply(console,a)};
   try{for(let i=0;i<30&&!S.dead;i++){Q.length=0;try{closeAll()}catch(e){}if(typeof agFlush==="function")agFlush();endTurn();Q.length=0;try{closeAll()}catch(e){}}}catch(e){E.push("throw "+e.message)}finally{console.error=ce}
