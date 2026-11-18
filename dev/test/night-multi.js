@@ -31,10 +31,10 @@ const {chromium}=require('playwright');const [,,URL]=process.argv;
  await p.evaluate(()=>{
   /* the flip at the end of tối picks A (forced); NPCs never attack on their own unless a case says so */
   T.sw=window.stealWant;
-  T.setup=()=>{const L=T.fresh();T.cu=T.cu||FAIRN.custom;FAIRN.custom=[0,0];/* no mùng 1 / rằm custom night (j75): the flip must reach the tray */window.stealWant=()=>({u:0,p:0,mode:null});L.forEach(v=>{v.confined=0;v.block=0;v.out=0;v.ill=null});S.sung=50;T.toEvening();used=0;T.ch="Thôi";T.opts=null;return L};
+  T.setup=()=>{const L=T.fresh();T.cu=T.cu||FAIRN.custom;FAIRN.custom=[0,0];T.cuA=T.cuA||(BAL.ag&&BAL.ag.emp&&BAL.ag.emp.custom);if(T.cuA)BAL.ag.emp.custom=[0,0];/* AG2 moved the custom weight to BAL.ag.emp.custom (ONE CORE); both off here *//* no mùng 1 / rằm custom night (j75): the flip must reach the tray */window.stealWant=()=>({u:0,p:0,mode:null});L.forEach(v=>{v.confined=0;v.block=0;v.out=0;v.ill=null});S.sung=50;T.toEvening();used=0;T.ch="Thôi";T.opts=null;return L};
   /* end tối with A forced as the flipped one (the real commit: realFlip → choice → resolve) */
   T.commitA=(A)=>{const un=T.only(A);try{T.endDay()}finally{un()}};
-  T.fin=()=>{window.stealWant=T.sw;if(T.cu)FAIRN.custom=T.cu};
+  T.fin=()=>{window.stealWant=T.sw;if(T.cu)FAIRN.custom=T.cu;if(T.cuA)BAL.ag.emp.custom=T.cuA};
  });
  const R={};const ok=(k,c,info)=>{R[k]={pass:!!c,info}};
  /* 1. several successes → higher Sủng; equal Sủng → the same seeded pick whatever the order */
