@@ -88,6 +88,7 @@ function gView(V){if(!on()||host()||!S||!V||!V.o)return;const k=bk();
  seen=k;const e=V.o.e;try{CW.tnView(e)}catch(x){console.error(x)}
  /* the host reloaded after her ready (his page holds her ready in memory only): send it again, against his reloaded copy of her */
  if(e&&e.boot){if(E.boot&&E.boot!==e.boot&&E.mine===bk()){lg(["re-ready",E.boot,e.boot]);E.stat.reRd++;E.mine="";E.boot=e.boot;setTimeout(()=>{try{gReady()}catch(x){console.error(x)}},0)}else E.boot=e.boot}
+ if(e&&typeof e.net==="number"){if(E.net!=null&&E.net!==e.net&&e.boot===E.boot&&E.mine&&E.mine===bk()){E.bs=null;E.last="";rr=1;E.stat.hNet=(E.stat.hNet|0)+1;lg(["host-net",E.net,e.net])}E.net=e.net}
  if(e&&e.go===wkx()&&CW.ngoW!==e.go&&(S.buoi||0)>=LAST()){CW.ngoW=e.go;E.stat.go++;lg(["go",e.go]);try{CW.nCheck()}catch(x){console.error(x)}}
  reNet();
  try{CW.lockNext()}catch(x){}}
@@ -218,7 +219,12 @@ E.wSnap=wSnap;E.wRestore=wRestore;
 /* the night: his go rides the view (the guest reads o.e.go), never the ctm-nr relay */
 /* boot: this page load of the host (a host reload loses her ready, held in memory: her phone sends it again when boot changes) */
 const BOOT=Date.now().toString(36)+Math.random().toString(36).slice(2,6);
-{const hv=TH.hostView;TH.hostView=function(){const o=hv.apply(this,arguments);if(o&&on()){o.e={go:CW.ngo===(COOP.state.week||0)?CW.ngo:-1,w:COOP.state.week||0,tnb:CW.tnb|0,boot:BOOT}}return o}}
+/* review coop-thin-f1 r1 #3 (net, the HOST's side): his socket can look open while it is dead too; her erd + ready relayed to it are lost
+   (the Worker took them, no "nohost"), he reconnects and the room stood (coop-cyc THIN=6: host 'room 2.0', her ready 2:1 never arrived,
+   both on "Chờ hảo hữu…"). Each reconnect of his counts in the view (net); her phone, still waiting on that buổi, sends her ready again
+   against his copy of her (the same re-net path as her own reconnect: nothing doubled, his ready is idempotent). */
+let HNET=0;COOP.on("room",()=>{if(host())HNET++});COOP.on("thin",()=>{if(host()&&HNET>1)setTimeout(()=>{try{TH.flush()}catch(e){console.error(e)}},0)/* the new count reaches her at once, not at his next step */});
+{const hv=TH.hostView;TH.hostView=function(){const o=hv.apply(this,arguments);if(o&&on()){o.e={go:CW.ngo===(COOP.state.week||0)?CW.ngo:-1,w:COOP.state.week||0,tnb:CW.tnb|0,boot:BOOT,net:HNET}}return o}}
 /* her in-week change of the night (Tranh sủng, Chặn ngự giá, cáo bệnh …): the intent replaces the ctm-tn claim; runs in the host's context */
 TH.onDo("tn",(a,m)=>{const base=m&&m.base;E.stat.tn++;setTimeout(()=>{try{CW.tnDo(a,base)}catch(e){console.error("thin E tn",e)}},0);return {ok:1}});
 /* the OUTERMOST nextBuoi (this module is the last one): 12 modules after jcoopworld wrap nextBuoi with after-step work (jexam exTick,

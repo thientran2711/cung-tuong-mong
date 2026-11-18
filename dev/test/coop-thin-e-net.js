@@ -14,7 +14,7 @@ async function mk(b,name,vp,want){const ctx=await b.newContext({viewport:{width:
    /* a dead socket: while __mute, every `do` frame this page sends is dropped (the socket still looks open); __wss = the page's sockets */
    const W0=window.WebSocket,s0=W0.prototype.send;window.__wss=[];window.__drop=[];
    W0.prototype.send=function(d){if(window.__mute&&typeof d==='string'&&d.indexOf('"t":"do"')>=0){window.__drop.push(d.slice(0,80));return}return s0.apply(this,arguments)};
-   window.WebSocket=function(u,p){const s=p===undefined?new W0(u):new W0(u,p);window.__wss.push(s);return s};window.WebSocket.prototype=W0.prototype;
+   window.WebSocket=function(u,p){const s=p===undefined?new W0(u):new W0(u,p);window.__wss.push(s);/* r1 #3: a dead HOST socket: while __deaf, every relayed `do` frame that reaches this page is dropped (registered first: stops onmessage too) */s.addEventListener('message',ev=>{if(window.__deaf&&typeof ev.data==='string'&&ev.data.indexOf('"t":"do"')>=0){window.__lost=(window.__lost||[]);window.__lost.push(ev.data.slice(0,80));ev.stopImmediatePropagation()}});return s};window.WebSocket.prototype=W0.prototype;
    Object.assign(window.WebSocket,{CONNECTING:0,OPEN:1,CLOSING:2,CLOSED:3})},[WURL,want]);
   const p=await ctx.newPage();p.setDefaultTimeout(90000);const o={name,ctx,p,errs:[]};
   p.on('pageerror',e=>o.errs.push(e.message));p.on('console',m=>{if(m.type()==='error'&&!/Failed to load resource|favicon|fonts\.gstatic|CORS|WebSocket/.test(m.text()))o.errs.push('console: '+m.text().slice(0,300))});return o}
@@ -63,5 +63,21 @@ async function press(o,ms=20000){const t0=Date.now();while(Date.now()-t0<ms){if(
  await sleep(2000);
  const hc=await H.p.evaluate(()=>{const B=COOPW.thin.seatOf('b');return B&&B.S.bac});const gc=await G.p.evaluate(()=>S.bac);
  ok(hc===gc&&gc===gb,'N4 her bạc on the host == her phone == before +5 (nothing doubled, nothing lost)',[hc,gc,gb]);
+ /* r1 #3 — the HOST's socket dies (her frames relayed to it are lost, the Worker gave her no "nohost"), then it reconnects */
+ for(let i=0;i<4;i++){await clear(H);await clear(G);await sleep(300)}
+ if(await H.p.evaluate(()=>(S.buoi||0)>=((typeof B4L==='number'?B4L:2)))){console.log('note: night buổi; the host-net part needs a day buổi: skipped');}
+ else{const g3=await st(G),h3=await st(H);await G.p.evaluate(()=>{S.bac=(S.bac||0)+7;render()});const gb3=g3.bac+7;
+  await H.p.evaluate(()=>{window.__deaf=1;window.__lost=[]});
+  ok(await press(G),'guest pressed Sẵn sàng (the host socket dead)');await sleep(3000);
+  const lost=await H.p.evaluate(()=>window.__lost.slice());const hr3=await H.p.evaluate(()=>COOPW.thin.E.rd.b||null);
+  ok(lost.some(x=>/"op":"ready"/.test(x))&&!(hr3&&hr3.w===g3.w&&hr3.b===g3.b),'N6 her ready was lost on the host\'s dead socket',{lost,hr3});
+  await H.p.evaluate(()=>{window.__deaf=0;for(const s of window.__wss)try{if(s.readyState<=1)s.close()}catch(e){}});
+  ok(await until(H,()=>window.COOP&&COOP.state.status==='open'&&!COOP.frozen&&window.__wss.some(s=>s.readyState===1)&&COOPW.thin.lvl>0,null,30000),'host reconnected');
+  ok(await until(H,([w,b])=>{const r=COOPW.thin.E.rd.b;return !!(r&&r.w===w&&r.b===b)},[g3.w,g3.b],20000),'N7 her ready reached the host after HIS reconnect',await H.p.evaluate(()=>({rd:COOPW.thin.E.rd,log:COOPW.thin.E.log.slice(-8)})));
+  await press(H);
+  const mv=await until(H,([w,b])=>(S.buoi||0)!==b||COOP.state.week>w,[h3.w,h3.b],30000)&&await until(G,([w,b])=>(S.buoi||0)!==b||COOP.state.week>w,[g3.w,g3.b],30000);
+  const g4=await st(G);ok(mv,'N8 the host\'s step moved both after his reconnect',[h3,g3,g4]);
+  await sleep(2000);const hc4=await H.p.evaluate(()=>{const B=COOPW.thin.seatOf('b');return B&&B.S.bac});const gc4=await G.p.evaluate(()=>S.bac);
+  ok(hc4===gc4&&gc4===gb3,'N9 her bạc on the host == her phone == before +7 (nothing doubled, nothing lost)',[hc4,gc4,gb3,await G.p.evaluate(()=>COOPW.thin.E.stat.hNet||0)])}
  ok(!H.errs.length&&!G.errs.length,'N5 no page errors',[H.errs.slice(0,3),G.errs.slice(0,3)]);
  const p=res.filter(r=>r[0]).length;console.log(`RESULT ${p} / ${res.length}`);await b.close();process.exit(p===res.length?0:1)})().catch(e=>{console.error(e);process.exit(2)});
