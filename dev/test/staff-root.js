@@ -57,7 +57,7 @@ ok(!hits.length,'one table: no private capOf table / wrapper / +1 count outside 
   return{before,toTh:ownerOf(kn)===S.thO,h:hhHas(q),c:capOf(q)}});
  ok(qc.skip||(qc.before&&qc.toTh&&qc.h[0]<=qc.c[0]&&qc.h[1]<=qc.c[1]),'NPC queen to the cold palace: Quản sự ma ma back to Thái hậu at once, household within row 0',JSON.stringify(qc));
  /* servant road */
- const s=await p.evaluate(()=>{window.__forceOrigin=null;for(let i=0;i<300;i++){start();if(isSrv())break}Q.length=0;return{srv:isSrv(),cap:capOf(S),staff:(S.staff||[]).length}});
+ const s=await p.evaluate(()=>{window.__forceOrigin=null;for(let i=0;i<300;i++){try{nlNew()}catch(e){}start();if(isSrv())break}Q.length=0;return{srv:isSrv(),cap:capOf(S),staff:(S.staff||[]).length}});
  ok(s.srv&&(s.cap[0]===0&&s.cap[1]===0&&s.staff===0),'servant road: no household of her own',JSON.stringify(s));
  /* (7) co-op guest seat (review/staff-root-r1): her household is a personal key, so the guest trims her own (NPC households stay the host's) */
  const gs=await newGame('tt');const gq=await p.evaluate(()=>{S.rank=4;fillStaff(S,true);while(hhHas(S)[0]<3)S.staff.push(mkServ("maid"));while(hhHas(S)[1]<1)S.staff.push(mkServ("eunuch"));

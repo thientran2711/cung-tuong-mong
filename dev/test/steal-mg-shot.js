@@ -10,7 +10,7 @@ const DEVS=DEV.length?DEV:['fold','ipadAir','ipadPro','iphone14'];
   await g.evaluate(()=>{const kl=document.getElementById('kload');if(kl)kl.remove();try{localStorage.clear()}catch(e){}SLOT=3;document.getElementById('title').hidden=true;start()});
   await g.waitForFunction(()=>typeof S!=='undefined'&&S&&S.name&&S.known);await p.waitForTimeout(4000);await g.addStyleTag({content:'#kroul,#kroulw,.kroul,#klife,.kmov{display:none!important}'});
   const setup=async()=>g.evaluate(()=>{document.querySelectorAll('#kroul,#kroulw,.kroul,#klife,#kload').forEach(e=>e.remove());Q.length=0;document.getElementById('modal').hidden=true;
-   for(let k=0;k<20&&(isSrv()||(typeof isKc==="function"&&isKc()));k++)start();
+   for(let k=0;k<20&&(isSrv()||(typeof isKc==="function"&&isKc()));k++)try{nlNew()}catch(e){}start();
    S.cyb=Object.assign(S.cyb||{},{lie:wk(),rk:wk(),rv:"lui"});S.preg=0;S.pregUnk=0;S.rank=Math.max(S.rank,2);S.sung=45;S.duc=60;S.suc=70;S.ntk=null;S.ntTry=null;used=0;S.cyb={};if(window.cyBase)S.tuan=(cyBase(S).t+1)%3;
    const v=liveRivals(true).filter(x=>!x.coop&&x.alive&&!x.out)[0];try{k61Meet(v,'gặp mặt',3)}catch(e){}S.tonight=v;S.buoi=B4L;deal();render();
    const i=deck.findIndex(a=>a&&a.n==="Chặn ngự giá");if(i<0||deck[i].lock)throw new Error("no steal card: "+JSON.stringify({srv:isSrv(),why:LACK.road(v),deck:deck.map(a=>a.n).slice(0,5)}));return i});
