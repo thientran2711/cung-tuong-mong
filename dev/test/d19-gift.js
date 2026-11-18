@@ -12,7 +12,7 @@ const {chromium}=require('playwright');const D=require('./lib/device');const out
   try{await g.waitForSelector('#kroul',{timeout:20000});await p.waitForTimeout(1500);await g.evaluate(()=>{const b=[...document.querySelectorAll('#kroul button')].find(x=>/Bỏ qua/.test(x.textContent));b&&b.click()});await g.waitForSelector('#kroul',{state:'detached',timeout:20000})}catch(e){r.rouErr=String(e).slice(0,80)}
   await p.waitForTimeout(1500);await g.evaluate(()=>{document.querySelectorAll('.krbox,#kroul').forEach(x=>{const o=x.id==='kroul'?x:x.parentElement;o&&o.remove()});const c=document.getElementById('curtain');if(c)c.hidden=true;Q.length=0;try{NLP=null}catch(e){}const m=document.getElementById('modal');if(m){m.hidden=true;m.className='modal'}render()});
   /* --- the act + the three roads --- */
-  r.roads=await g.evaluate(()=>{try{const G=BAL.tsGift;const V=rivals.filter(x=>x.alive!==false&&!x.out&&!x.queen&&!traitsOf(x).includes("Kiêu ngạo")&&!traitsOf(x).includes("Tham vọng")).slice(0,3);V.forEach(v=>{v.ghen=40;oanAdd(v,S,30)});
+  r.roads=await g.evaluate(()=>{try{const G=BAL.tsGift;const ref0=BAL.dis&&BAL.dis.refuse;if(BAL.dis)BAL.dis.refuse=0;/* review r1: the random jdis refusal is tested on its own below */const V=rivals.filter(x=>x.alive!==false&&!x.out&&!x.queen&&!traitsOf(x).includes("Kiêu ngạo")&&!traitsOf(x).includes("Tham vọng")).slice(0,3);V.forEach(v=>{v.ghen=40;oanAdd(v,S,30)});
    const liked=Object.keys(IT).filter(k=>Array.isArray(IT[k].tg)&&IT[k].tg.includes("rv")&&IT[k].pr>=20&&IT[k].pr<=80&&!IT[k].il&&!IT[k].keep&&!IT[k].nt).slice(0,2);
    S.inv=S.inv.filter(e=>e.h);for(const k of liked)S.inv.push({k});
    S.inv.push({k:"tp",wk:{kind:"theu",a:"hoa",ti:2,q:6,n:"Khăn thêu uyên ương",m:1,bn:"ngươi",d:"x",lv:2}});S.inv.push({k:"tp",wk:{kind:"theu",a:"hoa",ti:0,q:1,n:"Khăn thêu tạm",m:0,bn:"ngươi",d:"x"}});
@@ -27,6 +27,11 @@ const {chromium}=require('playwright');const D=require('./lib/device');const out
    /* road 3: an item */
    const pi=PEND.tsgiftpick({v:v.id,k:"it"});res.itPick=pi.o.map(o=>({n:o.n,x:o.x,dis:!!o.tsDis,need:(o.need||[]).map(n=>n.t)}));
    const ii=pi.o.findIndex(o=>o.ik!=null&&!o.tsDis);if(ii>=0){const G1=[v.ghen,oan(v,S),aff(v,S)],n0=S.inv.length;pi.o[ii].go();res.it={gave:pi.o[ii].n,ghen:G1[0]-v.ghen,oan:G1[1]-oan(v,S),aff:aff(v,S)-G1[2],inv:n0-S.inv.length,log:plain(S.logs[0]||"")}}else res.it={none:true};
+   /* review r1: a refused piece (jdis: it stays in her chest) eases nothing and the log says so (no free peace) */
+   {S.inv.push({k:"tp",wk:{kind:"theu",a:"hoa",ti:2,q:6,n:"Khăn thêu thử",m:1,bn:"ngươi",d:"x",lv:2}});const g0=giveTo;giveTo=function(){return "Nàng không nhận. "};
+    try{const pr=PEND.tsgiftpick({v:v.id,k:"wk"});const j=pr.o.findIndex(o=>o.n&&/Khăn thêu thử/.test(o.n)&&!o.tsDis);const G1=[v.ghen,oan(v,S)],n0=S.inv.length;if(j>=0)pr.o[j].go();
+     res.refused={found:j>=0,ghen:G1[0]-v.ghen,oan:G1[1]-oan(v,S),inv:n0-S.inv.length,log:plain(S.logs[0]||"")}}finally{giveTo=g0}}
+   if(BAL.dis)BAL.dis.refuse=ref0;
    /* old save: a pending picker saved before this branch has no kind */
    const po=PEND.tsgiftpick({v:v.id});res.old={n:po&&po.o.length};
    /* the act is greyed only when no road is open */
@@ -70,6 +75,7 @@ const {chromium}=require('playwright');const D=require('./lib/device');const out
   ck(x.wk&&x.wk.inv===1&&x.wk.ghen===8&&x.wk.oan>0&&x.wk.aff>0&&/Mất:/.test(x.wk.log),'work road '+JSON.stringify(x.wk));
   ck(x.wkPick&&x.wkPick.some(o=>o.dis&&o.need.length),'a work not enough is greyed with its reason');
   ck(x.it&&x.it.inv===1&&x.it.ghen===8&&x.it.oan>0&&x.it.aff>0&&/Mất:/.test(x.it.log),'item road '+JSON.stringify(x.it));
+  ck(x.refused&&x.refused.found&&x.refused.ghen===0&&x.refused.oan===0&&x.refused.inv===0&&/không thành/.test(x.refused.log),'refused piece eases nothing '+JSON.stringify(x.refused));
   ck(x.old&&x.old.n>1,'old-save picker (no kind) opens');ck(x.noRoad&&x.noRoad.dis,'act greyed when no road is open');
   const n=r.npc||{};ck(!n.err&&n.aInv===1&&n.vInv===1&&n.oan>0&&n.bac===0,'NPC piece road '+JSON.stringify(n));ck(n.bacRoad&&n.bacRoad.bac>0&&n.bacRoad.oan>0,'NPC bạc road '+JSON.stringify(n.bacRoad));
   ck(!errs.length,'page errors '+errs.join(' | '));ck((r.cardsDom||[]).length===3&&!(r.cardsDom||[]).some(c=>c.w),'3 cards (Thôi = kit ✕), no overflow '+JSON.stringify(r.cardsDom));
