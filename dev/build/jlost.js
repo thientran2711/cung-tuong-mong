@@ -47,7 +47,7 @@ function loMotive(v,t){try{if(typeof motiveOK==="function")return !!motiveOK(v,t
 /* hidden cause, chosen by the existing motive system */
 function loCause(p){const o=npcWhy("loTake",{p});/* npc-purpose G2: the taker = a person with a goal (rival grudge+motive, greedy or careless servant); nobody → nothing goes missing */
  return o?loCauseOf(p,o):null}
-function loCauseOf(p,o){const v=o.who;if(loStaff(p).includes(v))return{cause:"srv",sv:v.name||"",why:o.why};ap(v,{bac:-LO.act.bac,duc:LO.act.duc});return{cause:"riv",by:key(v),why:o.why}}
+function loCauseOf(p,o){const v=o.who;if(loStaff(p).includes(v))return{cause:o.why==="cất nhầm chỗ"?"mis":"srv",sv:v.name||"",why:o.why};ap(v,{bac:-LO.act.bac,duc:LO.act.duc});return{cause:"riv",by:key(v),why:o.why}}
 function loStaff(p){return [p.maid].concat(p.staff||[]).filter(Boolean)}
 /* the same function for everyone: an item leaves its owner's chest */
 function loLose(p,force){if(!loAlive(p))return null;const L=(p.inv||[]).filter(loOk);if(!L.length)return null;const cz=force||loCause(p);if(!cz)return null;
@@ -83,7 +83,7 @@ function loHonest(h){const tr=typeof traitsOf==="function"?traitsOf(h).join(" ")
 /* where it turns up */
 function loFind(c){const r=R(100);const o=loP(c.own);if(!o||!loAlive(o)){c.st="done";c.how="mat";loGoneOwner(c,o);return}
  if(r<LO.home[c.cause]){o.inv=o.inv||[];o.inv.push(loClean(c.e));c.st="done";c.end=wk();c.how="nha";
-  loLedgerBack(c);if(o===S){Q.push({t:"Tìm thấy đồ thất lạc",who:pMe(),h:`${loTag(c.e)}<p>Cung nhân tìm thấy <b>${loNm(c.k)}</b> ngay trong cung ngươi${c.cause==="srv"&&c.sv?`: ${c.sv} cất nhầm chỗ`:""}.</p>`,btn:"Đã hiểu"});log(`${loNm(c.k)} thất lạc nay tìm thấy trong cung.`)}return}
+  loLedgerBack(c);if(o===S){Q.push({t:"Tìm thấy đồ thất lạc",who:pMe(),h:`${loTag(c.e)}<p>Cung nhân tìm thấy <b>${loNm(c.k)}</b> ngay trong cung ngươi${(c.cause==="srv"||c.cause==="mis")&&c.sv?`: ${c.sv} cất nhầm chỗ`:""}.</p>`,btn:"Đã hiểu"});log(`${loNm(c.k)} thất lạc nay tìm thấy trong cung.`)}return}
  const quiet=r>=LO.home[c.cause]+LO.away[c.cause];
  const h=loHolder(c);if(!h){c.st="done";c.end=wk();c.how="nvp";if(typeof ilGone==="function")ilGone(o,c.e,"fix");return}const e=Object.assign({},c.e,{lo:c.id,gh:c.own});delete e.from;delete e.giver;if(c.cause==="riv"){e.h=1;e.by=c.by;c.tip=wk()+LO.tipW[0]+R(LO.tipW[1]-LO.tipW[0]+1)}else if(quiet){e.h=1;c.nf=1}else c.open=1;
  h.inv=h.inv||[];h.inv.push(e);c.st="held";c.at=key(h);
@@ -160,7 +160,7 @@ function loWeek(){if(!S||S.dead)return;for(const c of loL()){if(c.st==="done")co
     if(wk()>=c.hear){c.hear=0;const a=loP(c.acc);if(a&&h){const r=c.keep&&c.by===c.at?loKeepHear(c,a,h):(!c.by&&!c.lied)?loQuietHear(c,a,h):wdFrameResolve(a,h);if(r&&h===S&&a!==S)Q.push({t:"Cung Chính ti xét xử",who:pv(a),h:`<p>${r}</p>`,btn:"Đã hiểu"});if(r&&(a===S||h===S||c.heard))log(r);if(r&&a===S)Q.push({t:"Cung Chính ti xét xử",who:pv(h),h:`<p>${r}</p>`,btn:"Đã hiểu"});if(c.st!=="done"&&!loEntry(c)){c.st="done";c.how="xet"}}}}}
   if(c.st!=="done"&&wk()-c.w>LO.expire){c.st="done";c.how="mat";const x=c.at?loEntry(c):null;if(x){for(const f of ["lo","by","h"])delete x.e[f];try{if(typeof ilLog==="function")ilLog(x.e,c.own,key(x.h),"giữ luôn")}catch(z){}}else loGoneOwner(c,null)}}catch(e){console.error(e)}}
  S.lost=loL().filter(c=>c.st!=="done"||wk()-(c.end||c.w)<=12).slice(-40)}
-function loMonth(){if(!S||S.dead)return;for(const p of consorts()){if(!loAlive(p)||(p.loCd||0)>S.turn)continue;if(loL().some(c=>c.own===key(p)&&c.st!=="done"))continue;if(!(p.inv||[]).some(loOk))continue;/* nothing to take → nobody plans a theft (no cd, no charge) */const o=npcWhy("loTake",{p},()=>roll(LO.rate));if(o)loLose(p,loCauseOf(p,o))}
+function loMonth(){if(!S||S.dead)return;for(const p of consorts()){if(!loAlive(p)||(p.loCd||0)>S.turn)continue;if(loL().some(c=>c.own===key(p)&&c.st!=="done"))continue;if(!(p.inv||[]).some(loOk))continue;/* nothing to take → nobody plans a theft (no cd, no charge) */const o=npcWhy("loTake",{p},()=>roll(LO.rate));if(o){const cz=loCauseOf(p,o);if(cz.cause==="riv"&&loKeepPick(loP(cz.by),p)==="keep")cz.keep=1;/* the cause is passed in, so loLose skips its own keep pick: make it here (keep was never chosen: 0 of 56) */loLose(p,cz)}}
  for(const c of loL())if(c.st==="held"||c.st==="found")loRecog(c)}
 (function(){const e0=endTurn;endTurn=function(){const m=S&&S.turn,w0=S&&wk();const r=e0.apply(this,arguments);try{if(S&&!S.dead&&wk()!==w0){const q=Q.length;if(S.turn!==m)loMonth();loWeek();if(Q.length>q){showModal();render()}}}catch(e){console.error(e)}return r}})();
 /* Soát rương (j8 inspect) finds a missing item hidden in the chest: it goes back to its owner; the trail may lead to whoever hid it (same odds) */
@@ -237,7 +237,7 @@ document.addEventListener("click",ev=>{const b=ev.target.closest&&ev.target.clos
    Success: the item leaves the target's chest as a case (the target only sees "thất lạc"); her own theft stays in her chest
    (wear it and it may be recognised; plant it with "Cài đồ vào rương" to frame someone; "Lén trả lại" ends it quietly).
    An NPC thief keeps it or plants it on someone she dislikes (the hidden rival cause). Caught: the target holds 2 true evidence (j8 caught). */
-function loKeepPick(v,t){const B=BAL.ag.why.loTry;let fr=0;try{for(const x of consorts())if(x!==v&&x!==t&&loAlive(x))fr=Math.max(fr,danger(v,x))}catch(e){}return npwPick(["keep","plant"],k=>k==="keep"?B.keep:fr)||"keep"}/* npc-purpose G2: plant it on someone only if she wants that one harmed */
+function loKeepPick(v,t){const B=BAL.ag.why.loTry;let fr=0;try{for(const x of consorts())if(x!==v&&x!==t&&loAlive(x))fr=Math.max(fr,danger(v,x))}catch(e){}const pl=fr>0&&bandOf(fr)>=BAL.ag.why.loTake.band?B.plant:0;return npwPick(["keep","plant"],k=>k==="keep"?B.keep:pl,{all:true})||"keep"}/* npc-purpose: plant it only on someone she really wants harmed (danger band ≥ loTake.band); both wants real → weighted keep vs plant *//* npc-purpose G2: plant it on someone only if she wants that one harmed */
 function loStealOk(a,t){return !!t&&a!==t&&!t.out&&loAlive(t)&&(t.inv||[]).some(loOk)&&!loL().some(c=>c.own===key(t)&&c.st!=="done")}
 function loStealO(a,t,self){return oddsCl(Math.round(odA(a,38+(a.tamco||0)/4+eyes(a)*3-((t.maid&&t.maid.loyal)||50)/5))-(self?(BAL.selfMinus):0))}
 function loSteal(a,t,self){a.schemes=(a.schemes||0)+1;if(typeof ducAdd==="function")ducAdd(a,LO.act.duc,"sai người lấy trộm đồ");else ap(a,{duc:LO.act.duc});

@@ -1712,7 +1712,7 @@
 "group": "G1",
 "event": "weekly life event (visits, Emperor whims, servant events, rumours, kid",
 "fp": " if(evBusy()||!roll(E68CFG.p*100))return;const r=e68Fir",
-"done": "const r=e68Fire(null,L=>npwPick(L,x=>x[1]))"
+"done": "function e68Pick(L){return npwPick(L,x=>x[1],{all:true})}"
 },
 {
 "f": "j68.js",
@@ -1721,7 +1721,7 @@
 "group": "G1",
 "event": "weekly life event (visits, Emperor whims, servant events, rumours, kid",
 "fp": "if(e68On()&&!window.__e68off&&roll(E68CFG.swap*100)){const r=e68Fire([",
-"done": "const r=e68Fire([\"visit\",\"day\",\"serv\",\"rumor\",\"kid\",\"emp\"],L=>npwPick(L,x=>x[1]))"
+"done": "function e68Pick(L){return npwPick(L,x=>x[1],{all:true})}"
 },
 {
 "f": "j68.js",
@@ -1847,7 +1847,7 @@
 "status": "DICE-ONLY",
 "group": "G2",
 "event": "item goes missing (every consort monthly); holder random; investigatio",
-"done": "const o=npcWhy(\"loTake\",{p},()=>roll(LO.rate));if(o)loLose(p,loCauseOf(p,o))"
+"done": "const o=npcWhy(\"loTake\",{p},()=>roll(LO.rate));if(o){const cz=loCauseOf(p,o)"
 },
 {
 "f": "jlost.js",
@@ -1911,7 +1911,7 @@
 "status": "PARTIAL",
 "group": "G2",
 "event": "cause rival/servant; asks quietly; recognise / friend reports; wears; ",
-"done": "return npwPick([\"keep\",\"plant\"],k=>k===\"keep\"?B.keep:fr)"
+"done": "return npwPick([\"keep\",\"plant\"],k=>k===\"keep\"?B.keep:pl,{all:true})"
 },
 {
 "f": "jlost.js",
@@ -1967,7 +1967,7 @@
 "status": "PARTIAL",
 "group": "G2",
 "event": "cause rival/servant; asks quietly; recognise / friend reports; wears; ",
-"done": "return npwPick([\"keep\",\"plant\"],k=>k===\"keep\"?B.keep:fr)"
+"done": "return npwPick([\"keep\",\"plant\"],k=>k===\"keep\"?B.keep:pl,{all:true})"
 },
 {
 "f": "jdh2.js",

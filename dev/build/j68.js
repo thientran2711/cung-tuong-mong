@@ -75,7 +75,7 @@ function e68Cands(fams,big){const e=e68(),C=e68Ctx(),now=wk(),out=[];const story
  for(const s of E68){if(fams&&!fams.includes(s.fam))continue;if(s.fam==="plot"||s.fu)continue;if(big===false&&s.big)continue;if(s.big&&story)continue;
   const last=e.cd[s.id];if(last!=null&&now-last<(s.cd||E68CFG.cd))continue;let w=0;try{w=s.w?s.w(C):1}catch(x){w=0}if(!(w>0))continue;
   w*=Math.pow(.5,e68Past(s.id,true));out.push([s,w])}return out}
-function e68Pick(L){return npwPick(L,x=>x[1])} /* npc-purpose: weighted among the situations that fit best (no flat draw) */
+function e68Pick(L){return npwPick(L,x=>x[1],{all:true})} /* npc-purpose: weighted among the situations whose people / state fit (every fitting one may come; top-only made whole families vanish: Tin đồn 28→0) */
 /* params + a variant she has not seen lately (this life first, then the last five lives) */
 function e68Make(s){const e=e68();let p=null;try{p=s.pp?s.pp():{}}catch(x){p=null}if(!p)return null;const V=s.v||[""];
  let all=[...V.keys()];if(s.vf){let ok=null;try{ok=s.vf(p)}catch(x){}if(ok&&ok.length)all=all.filter(i=>ok.includes(i));else if(ok)return null}const used=e.vu[s.id]||[];let pool=all.filter(i=>!used.includes(i));if(!pool.length){pool=all.slice();e.vu[s.id]=(e.vu[s.id]||[]).filter(i=>!all.includes(i))}
@@ -87,12 +87,12 @@ function e68Push(d,s,front){const m={t:s.t||FAM6[s.fam]||"Chuyện trong cung",h
 function fu6(id,dt,p){const e=e68();e.fu.push({id,at:wk()+dt,p:p||{}})}
 function e68FuTick(){const e=e68(),now=wk();for(const f of e.fu.slice()){if(f.at>now)continue;e.fu.splice(e.fu.indexOf(f),1);const s=E68I[f.id];if(!s)continue;const p=Object.assign({},f.p);if(p.vi==null)p.vi=R((s.v||[""]).length);const d=mkP("e68"+s.id,p);if(d){e68Push(d,s);return true}}return false}
 /* the stock visit is sometimes swapped for a j68 event (same number of modals) */
-(function(){const a0=approachOne;approachOne=function(){const r0=a0.apply(this,arguments);if(r0)return r0;try{const e=e68();if(e68On()&&!window.__e68off&&e&&wk()>=(e.vx||0)){const r=e68Fire(["visit","day","serv","rumor","kid","emp"],L=>npwPick(L,x=>x[1]));if(r){e.vx=wk()+BAL.ag.why.e68.visitGap;const[d,s]=r;return{t:s.t||FAM6[s.fam],h:d.t,opts:d.o,who:d.who,pid:d.pid,pp:d.pp}}}}catch(x){console.error(x)}return r0}})();
+(function(){const a0=approachOne;approachOne=function(){const r0=a0.apply(this,arguments);if(r0)return r0;try{const e=e68();if(e68On()&&!window.__e68off&&e&&wk()>=(e.vx||0)){const r=e68Fire(["visit","day","serv","rumor","kid","emp"],e68Pick);if(r){e.vx=wk()+BAL.ag.why.e68.visitGap;const[d,s]=r;return{t:s.t||FAM6[s.fam],h:d.t,opts:d.o,who:d.who,pid:d.pid,pp:d.pp}}}}catch(x){console.error(x)}return r0}})();
 /* the tuần tick */
 function e68Tick(){const e=e68();if(!e)return;e.tick=(e.tick||0)+1;let added=0;
  if(Q.length>2)return;
  try{if(e68FuTick()){evBusyMark();return}}catch(x){console.error(x)}
- if(evBusy()||wk()<(e.nx||0))return;const r=e68Fire(null,L=>npwPick(L,x=>x[1]));if(r){e.nx=wk()+BAL.ag.why.e68.gap;e68Push(r[0],r[1]);if(r[1].big)evBusyMark()}}
+ if(evBusy()||wk()<(e.nx||0))return;const r=e68Fire(null,e68Pick);if(r){e.nx=wk()+BAL.ag.why.e68.gap;e68Push(r[0],r[1]);if(r[1].big)evBusyMark()}}
 (function(){const e0=endTurn;endTurn=function(){const w0=S&&!S.dead?wk():null;const r=e0.apply(this,arguments);try{if(e68On()&&!window.__e68off&&w0!=null&&wk()!==w0){e68Tick();if(Q.length&&$("modal").hidden)showModal()}}catch(x){console.error(x)}return r}})();
 /* ---------- debugging / testing helpers (in-page) ---------- */
 window.e68Test=function(id,p){const s=E68I[id];if(!s)return null;const d=e68Make(s);if(d){e68Push(d,s,true).must=1;showModal()}return !!d};

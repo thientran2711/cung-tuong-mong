@@ -50,7 +50,7 @@ function npwAsk(kind,ctx){const d=NPW.reg[kind];if(!d)throw new Error("npcWhy: u
   if(!r||!(r.s>=B.min))continue;if(!npwCdOk(kind,p)){cd++;continue}O.push({kind,who:p,tgt:r.t||null,why:r.r||"",place:r.k||null,s:r.s})}
  if(cd)npwSt(kind,"cd");return O}
 function npwOnFire(kind,o,ctx){const d=NPW.reg[kind];if(d&&typeof d.on==="function")try{d.on(o,ctx||{})}catch(e){console.error("npcWhy on "+kind,e)}}
-function npcWhy(kind,ctx,done){if(!npwOn())return null;const O=npwAsk(kind,ctx);const o=npwPick(O,x=>x.s);if(!o){npwSt(kind,"quiet");return null}
+function npcWhy(kind,ctx,done){if(!npwOn())return null;const O=npwAsk(kind,ctx);const d=NPW.reg[kind];const o=npwPick(O,x=>x.s,d&&d.pickAll?{all:true}:null);/* pickAll: every one with a real reason may be the one, weighted by how strong it is (kinds where several people compete for one deed) */if(!o){npwSt(kind,"quiet");return null}
  if(typeof done==="function"&&!done(o)){npwSt(kind,"miss");return null}npwStamp(kind,o.who);npwSt(kind,"fire");npwOnFire(kind,o,ctx);return o}
 function npcWhyAll(kind,ctx){if(!npwOn())return[];const O=npwAsk(kind,ctx);if(!O.length){npwSt(kind,"quiet");return[]}
  for(const o of O){npwStamp(kind,o.who);npwSt(kind,"fire");npwOnFire(kind,o,ctx)}return O}

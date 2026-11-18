@@ -121,7 +121,7 @@ npwReg("q72Collect",{grp:"debt",who:c=>c.C,why(c){return {s:npwB().min+c.n*npw1B
 npwReg("seekEmp",{grp:"consort",who:()=>liveRivals(false).filter(v=>v&&!v.coop&&!v.out&&!v.confined),why(v){const E=npw1B("seekEmp");
  const s=(E.want-(v.sung||0))*E.k+(traitsOf(v).some(t=>E.ambT.includes(t))?E.amb:0);return s>0?{s,t:S.emp||null,r:"mong được Hoàng thượng đoái hoài"}:null}});
 function npw1Art(v){const a=v.arts||{};return (a.ky||0)>=1&&(a.ky||0)>=(a.cam||0)?"ky":(a.cam||0)>=1?"cam":"walk"}
-npwReg("wdRemark",{grp:"wd",who:c=>{const L=others(c.p).filter(v=>v!==S&&v.alive&&!v.out&&!v.confined);if(!S.thDead)L.unshift(NPW1_TH);return L},
+npwReg("wdRemark",{grp:"wd",pickAll:true,who:c=>{const L=others(c.p).filter(v=>v!==S&&v.alive&&!v.out&&!v.confined);if(!S.thDead)L.unshift(NPW1_TH);return L},
  why(x,c){const W=npw1B("wd"),p=c.p,st=c.st;
   if(x===NPW1_TH){if(st!=="ok")return {s:npwB().min+W.th,t:p,r:"giữ lễ chế trong cung",k:st};const g=p===S?S.th:(p.th||0);return g>=W.thOk?{s:npwB().min+g/2,t:p,r:"quý người biết giữ lễ",k:st}:null}
   const q=queenP();const sure=x===q||["tram","y"].every(sl=>{const e=wdOf(p)[sl];return !e||((x.wdk||{})[e.k])});const view=sure?st:wdBelStatus(x,p);
