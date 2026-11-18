@@ -101,7 +101,7 @@ function kitSlotCxE(i,k,x0,avail){return x0+avail*(i+.5)/Math.max(1,k)}
    LEFT of every stage view for the left rail (#krail: 44 px buttons at 17 px + 5 px air), always, so the slots never move when the rail appears a moment later
    and no head stands under a rail button; edge = px the visible art (kitFigBody l..r, sleeves included) keeps from the stage edge / side column — a slot
    whose figure would be cut there is pulled in by just that much (kitSlotIn), its pet follows it. */
-const KIT_SLOTS={page:2,spread:4,band:64,rail:66,edge:4,pet:{sx:.3}};
+const KIT_SLOTS={page:2,spread:4,band:46,top:34,rail:66,edge:4,pet:{sx:.3}};/* owner 18/11 ~03:4xZ: band = floor strip under the feet (the name plate sits close to the frame's bottom edge: was 64); top = room above the tallest head for her marker/ornament (heads + marker stay INSIDE the frame) */
 function kitSlotIn(cx,l,r,lo,hi){/* l,r = visible art left/right edge relative to the body centre (l<0<r); returns the centre that keeps [cx+l,cx+r] inside [lo,hi] */
  if(r-l>=hi-lo)return (lo+hi)/2-(l+r)/2;if(cx+l<lo)return lo-l;if(cx+r>hi)return hi-r;return cx}
 function kitSlotsN(st){try{return st&&st.classList.contains("kplfs")&&kitView().pages===2?KIT_SLOTS.spread:KIT_SLOTS.page}catch(e){return KIT_SLOTS.page}}

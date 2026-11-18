@@ -3,7 +3,7 @@
    (1) people-count chip = TOP of the left button column (kitStageRail item "here", kit chip j59ico + number),
    (2) place name = TOP of the right column (#kpname, kit paper .k3p, bigger font); the court cards (#kshR) stand under it,
    (3) the place-entry line (S.visit.msg: "Thái giám chặn cửa", "Hoàng thượng không ra vườn hôm nay"…) = the TIN BÁO TOAST of review/tinbao-ui (owner 18/11
-       ~03:3xZ: "chip giống tai mắt báo"): `#ktbtoast.ktbt`, ONE gold pill line under the top bar, 3 s then fades, once per visit line. kitLineToast(text) here is a
+       ~03:3xZ: "chip giống tai mắt báo"): `#ktbtoast.ktbt`, ONE gold pill line under the top bar, BAL.entryToastMs then fades, once per visit line. kitLineToast(text) here is a
        thin twin of jtinbao's toastShow (same ids/classes/CSS, copied verbatim); when jtinbao lands, kitLineToast becomes a call into it.
        A line that carries a BUTTON ("… vừa rời đi [Theo]") must stay tappable, so only that kind stays as the persistent top-of-stage chip (.kmnote.kmslot),
    (4) figures keep their full size; nothing is drawn over a head (the chip is one line high, the columns are at the edges). */
@@ -16,7 +16,7 @@ function kitLineToast(text){try{if(!text)return null;try{const md=document.getEl
  const hud=document.querySelector("header.hud");let el=document.getElementById("ktbtoast");if(el)el.remove();
  el=document.createElement("div");el.id="ktbtoast";el.className="ktbt";el.setAttribute("role","status");el.innerHTML=`<span>${esc(text)}</span>`;
  const r=hud&&hud.getClientRects().length?hud.getBoundingClientRect():null;el.style.top=(r?Math.round(r.bottom+6):6)+"px";document.body.appendChild(el);
- el.addEventListener("click",()=>el.remove());clearTimeout(kitLineToast.t);kitLineToast.t=setTimeout(()=>{el.classList.add("out");setTimeout(()=>{if(el.classList.contains("out"))el.remove()},500)},window.__toastKeep?60000:Math.min(8000,Math.max(3000,3000+(text.length-40)*45)));return el}catch(e){return null}}
+ el.addEventListener("click",()=>el.remove());clearTimeout(kitLineToast.t);kitLineToast.t=setTimeout(()=>{el.classList.add("out");setTimeout(()=>{if(el.classList.contains("out"))el.remove()},500)},window.__toastKeep?60000:BAL.entryToastMs);return el}catch(e){return null}}
 window.kitLineToast=window.kitLineToast||kitLineToast;
 function lay(){try{const st=$("stage");if(!st)return;let nm=$("kpname"),en=$("kpent");
  const t=$("sc-t"),live=!!t&&!!S&&!S.dead&&onStage()&&st.getBoundingClientRect().height>40;

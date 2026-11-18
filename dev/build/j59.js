@@ -168,7 +168,7 @@ function j59lay(){const st=document.getElementById("stage");if(!st||!S)return;co
  const cmp=sH<420||sW<520;st.classList.toggle("j59c",cmp);
  const KF=KIT_FIG;
  let topR=8;try{const t=document.getElementById("sc-t");if(t&&t.offsetHeight){const q=t.getBoundingClientRect();if(q.bottom>R.top)topR=Math.max(topR,q.bottom-R.top+4)}}catch(e){}
- topR=Math.min(topR,sH*.12);
+ topR=Math.min(topR,sH*.12);topR=Math.max(topR,KIT_SLOTS.top||0);
  /* phones (< 600 px, coordinator 11/15): the right chip column (court chips, maid, "Ân sủng ›") folds into ONE compact row along the
     top edge under the place title, and the heads stand under that row — so two slots keep their width and no chip sits on a head */
  const ph=false;st.classList.toggle("j59ph",ph);/* KIT §0: the one-page room = the spread's left page (no phone stage variant) */
