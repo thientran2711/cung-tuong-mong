@@ -1,11 +1,11 @@
-# REVIEW men-forbidden — VERDICT: PASS bd8547f2 (review/men-forbidden-r6 bd8547f2, FF of live main 0527f921)
+# REVIEW men-forbidden — VERDICT: PASS 94a93759 (review/men-forbidden-r6 94a93759, FF of live main 9393889d)
 Reviewer session_01UV1Szh3jq9brqAHDsVQitM (opened by MAIN s42; result sent to MAIN s43 session_01UV1Szine3C2fgBgQ8qCx5w).
 START_CTX ~12 %; no rollover needed.
 PRIORITY #1 CHECK ('men-forbidden|menLawful|menMinW|cấm địa'): OD:L168 + OD:L1795 (18/11 ~02:20Z) read verbatim | main jmen.js menZone/menSched/menMinW/menCard (law existed, reused) | review/men-forbidden 13286b4 | claims MAIN s41 SziLuyr (worker), this review row filled.
 
 ## Branch
 - worker 13286b4 (jmen.js menLawful + S.minF; MEN_PLAN; dev/test/men-forbidden.js) — code read in full; one ONE-rule gate, no new UI, no kit part, no new player number (BAL untouched), wording cổ trang.
-- r6 7090b019 (reviewer fix, below), then main merged 4 times as it moved (each time only generated index.html/sw.js conflicted → rebuilt by assemble.py + build_site.sh): 0d98a2bb (f8276cdb greet-stranger) · 8f27d7be (95d5f767 cloth-xoc/result-reason/smudge) · 640809f9 (e24d5838 staff-cap) · bd8547f2 (0527f921 cloth-tea, jcloth.js only).
+- r6 7090b019 (reviewer fix, below), then main merged 4 times as it moved (each time only generated index.html/sw.js conflicted → rebuilt by assemble.py + build_site.sh): 0d98a2bb (f8276cdb greet-stranger) · 8f27d7be (95d5f767 cloth-xoc/result-reason/smudge) · 640809f9 (e24d5838 staff-cap) · bd8547f2 (0527f921 cloth-tea, jcloth.js only) · 94a93759 (9393889d life-preload: quickcheck PASS, men-forbidden test bad [], coop-e2e 63/63 x2).
 - Gates per sha: quickcheck PASS on all 5 (13286b4, 0d98a2bb, 8f27d7be, 640809f9, bd8547f2); dev/test/men-forbidden.js bad [] on all; old-save test r6 PASS on 0d98a2bb + 8f27d7be; coop-e2e 63/63 x3 on 13286b4, 0d98a2bb, 8f27d7be; on 640809f9 1 of 3 runs 63/63, two flaky runs unrelated to men (socket close 1006 loop at join; host held by an 'Điềm báo' omen card in week 3) — bd8547f2 adds only jcloth.js from main, coop not rerun.
 
 ## Reviewer fix (old saves) — found by my own old-save test
