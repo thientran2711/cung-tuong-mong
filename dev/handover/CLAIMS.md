@@ -155,7 +155,7 @@ receiver-choice audit (ORDER MAIN ~21:16Z, OD 21:15Z/21:30Z; shares C-AG role-pa
 | low t1+t4-t6 c25-c28 (W107; W101 archived) | handover reports/root30-* | Foreman C ROOT-30 | session_01PEhRbxaGPoBTcdK9mJAmsY | RUNNING | 18/11 21:12Z |
 | stage-here r3 (opus; toast never on people, collapse to rail «!»; merge 790cda59 + stage-rightcol) | review/stage-here | MAIN ROOT-57 | session_01Rc5AsMY7PgErES6LptdBUE | SẴN SÀNG KIỂM 8c8f9aa (r3c) | 18/11 22:55Z |
 | MAIN ROOT-57 (opus; child of ROOT-56; trig_01Ja7zaN36ChYwfwpjXs1Riu) | handover HANDOVER_SESSION9 | ROOT-56 | session_01Rc5AsKYmXLRoL6C62yZq4r | RUNNING | 18/11 21:37Z |
-| ge-writers-w2 remerge after W1 (sonnet E11w2m) | review/ge-writers-w2 | E ROOT #7 | session_01DgYSWpbQHujHaQRWp5BQX1 | RUNNING | 18/11 21:50Z |
+| ge-writers-w2 remerge after W1 (sonnet E11w2m) | review/ge-writers-w2 | E ROOT #7 | session_01DgYSWpbQHujHaQRWp5BQX1 | DONE c1e39605 | 18/11 22:47Z |
 | GE writers W3 (ch, thd, cnv_chu/ban/ma; opus E11c) | review/ge-writers-w3 | E ROOT #7 | session_01DgYSWpWugHTejVTtLoKV8s | RUNNING | 18/11 21:50Z |
 | stage-rightcol r7 (opus; successor of session_01Rc5AsMuwoEKePMdcju7qZi; WIP 9ace584c + Fold tag-cover fix) | review/stage-rightcol | MAIN ROOT-57 | session_01Rc5AsMCSTNrRWBqRtSxRnR | RUNNING | 18/11 22:03Z |
 | questline-q2 BIG REVIEW round 2 (opus E13r) | review/questline-q2 451b4d1e → r6 cb0c97b7 | Foreman E ROOT #7 | session_01DgYSWmBrrumpeuqy7XfMzM | DONE: PASS cb0c97b7 | 18/11 22:11Z |
@@ -169,3 +169,4 @@ art rule book cleanup part 2 (figures/costumes + FIGURE_GATE A0–H) | claude/cu
 art rule book cleanup part 2 (other art topics → FIGURE_GATE I) | claude/cung-tuong-mong-handover-hj0h8w | session_01PEhRbx4FcwX6zsqPPxGawP (R1c, Foreman C ROOT-33) | RUNNING | 2026-11-18T22:41Z
 Thái hậu missing c04–c08,c13–c16 | handover | session_01PEhRbx66FNstJGDVkovgGs (TH2, Foreman C ROOT-33) | RUNNING | 2026-11-18T23:00Z
 Thái hậu missing c21–c24,c28–c32 | handover | session_01PEhRbvnAhxnHAp1NLbsThf (TH3, Foreman C ROOT-33) | RUNNING | 2026-11-18T23:00Z
+| questline-q2 remerge main 53544bd8 (sonnet E13m) | review/questline-q2-r6 | E ROOT #7 | session_01DgYSWqCgqc7epxUFcw8svY | RUNNING | 18/11 22:47Z |
