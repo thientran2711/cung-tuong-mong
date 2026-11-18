@@ -1,4 +1,4 @@
-/* KIT §89 kitDisplayRoom test (owner 17/11): Nơi trưng bày full-screen between the top bar and the bottom bar; iPad (kv2) 2 cols x 6 shelves, phone 1 col x 12;
+/* KIT §87 kitDisplayRoom test (owner 17/11): Đa Bảo Các full-screen between the top bar and the bottom bar; iPad (kv2) 2 cols x 6 shelves, phone 1 col x 12;
    tap a shelf -> drawer with only that group's pieces; tap piece -> kit item card -> Trưng bày -> placed + drawer closes; tap placed -> Cất xuống; read-only has no drawer.
    HOST mode (built root index.html through rot.js, the real design canvas; dev/test/README.md). Fixture mode (no jshelf API needed). CDN pictures via curl (sandbox).
    usage: node dev/test/display-room.js <url> <outdir|-> [device,...]  (default fold,ipadAir,ipadPro,foldLand)  -> JSON per device; exit 1 on FAIL */
@@ -26,7 +26,8 @@ async function viaCurl(ctx){await ctx.route(/ctm-img\.victoria-tntt\.workers\.de
     cut:sh.some(e=>{const a=e.querySelector('.kdr-lab').getBoundingClientRect(),s=e.getBoundingClientRect();return a.right>s.right+1})}});
   r.geo=await geo();const g=r.geo;
   r.fit=g.room.t>=g.hud.b-1&&g.room.b<=g.bar.b+1&&g.room.b>=g.bar.t-6&&!g.hscroll;
-  r.layout=g.n===12&&(g.kv2?(g.cols===2&&!g.scrolls):g.cols===1);
+  r.inslot=await p.evaluate(()=>[...document.querySelectorAll('.kdr-sh.has')].every(s=>{const a=s.getBoundingClientRect(),i=s.querySelector('.kdr-it').getBoundingClientRect();return i.left>=a.left-2&&i.right<=a.right+2&&i.bottom<=a.bottom+2&&i.top>=a.top-2}));r.multi=await p.evaluate(()=>{const m=[...document.querySelectorAll('.kdr-sh')].filter(s=>s.querySelectorAll('.kdr-it').length>1);return m.length>0&&m.every(s=>{const r=[...s.querySelectorAll('.kdr-it')].map(i=>i.getBoundingClientRect()).sort((a,b)=>a.left-b.left);return r.every((x,i)=>i===0||x.left>=r[i-1].right-2)})});r.sil=await p.evaluate(()=>{const k=document.getElementById('kdr');const sil=k.querySelectorAll('.kdr-sil').length,pcs=k.querySelectorAll('.kdr-it').length,gl=[...k.querySelectorAll('.kdr-glow')];return{sil,pcs,glow:gl.length,sum:sil+pcs===60,glowAnim:gl.every(i=>getComputedStyle(i).animationName==='none'),silPtr:[...k.querySelectorAll('.kdr-sil')].every(i=>getComputedStyle(i).pointerEvents==='none')}});r.noBars=await p.evaluate(()=>{const s=document.querySelector('.kdr-seg');const pl=s&&s.querySelector('.kdr-plank');return !!s&&(s.querySelector('.kdr-bgi')?getComputedStyle(pl).display==='none':true)});
+  r.layout=r.inslot&&r.sil.sum&&r.sil.glow===3&&r.sil.glowAnim&&r.sil.silPtr&&r.multi&&r.noBars&&g.n===12&&(g.kv2?(g.cols===2&&!g.scrolls):g.cols===1);
   if(OUT&&OUT!=='-')await p.screenshot({path:`${OUT}/disp-${sz}.jpg`,type:'jpeg',quality:60});
   /* drawer */
   await p.click('.kdr-sh:not(.has)');await p.waitForTimeout(350);
@@ -52,7 +53,18 @@ async function viaCurl(ctx){await ctx.route(/ctm-img\.victoria-tntt\.workers\.de
   r.ro=await p.evaluate(()=>{const k=document.getElementById('kdr');return{ro:k.dataset.ro==='1',title:k.querySelector('.kdr-cart').textContent}});
   await p.click('.kdr-sh').catch(()=>{});await p.waitForTimeout(250);r.roNoDrawer=await p.evaluate(()=>{const d=document.getElementById('kdrdrw');return !d||d.hidden});
   await p.evaluate(()=>kitDisplayRoomClose());
+  /* REAL API (jshelf on main, BAL.shelf.ui=1): put a chest piece on a shelf through the UI, then take it down */
+  r.real=await (async()=>{try{await p.evaluate(()=>{BAL.shelf.ui=1;const k=Object.keys(BAL.shelf.it).find(k=>IT[k]&&BAL.shelf.it[k].g&&!BAL.shelf.it[k].plant);S.inv.push({k});window.__k=k;window.__g=BAL.shelf.it[k].g;kitStageRail.paint();kitDisplayRoomOpen(S)});await p.waitForTimeout(400);
+   const L=await p.evaluate(()=>({rail:!!document.querySelector('#krail [data-rail=disp]'),n:document.querySelectorAll('#kdr .kdr-sh').length,per:BAL.shelf.per,sil:document.querySelectorAll('#kdr .kdr-sil').length}));
+   await fr.click(`#kdr [data-kdrg="${await p.evaluate(()=>window.__g)}"]`);await p.waitForTimeout(300);await fr.click('#kdrdrw [data-kdrk]');
+   const a=await fr.waitForSelector('#kidfl [data-kidact=put]',{timeout:8000});await a.click();await p.waitForTimeout(500);
+   const put=await p.evaluate(()=>({inShelf:shelfIn(S,window.__g).some(x=>x[1].k===window.__k),inInv:S.inv.some(e=>e.k===window.__k)}));
+   await fr.click(`#kdr [data-kdrg="${await p.evaluate(()=>window.__g)}"]`);await p.waitForTimeout(300);await fr.click('#kdrdrw [data-kdron]');
+   const tk=await fr.waitForSelector('#kidfl [data-kidact=take]',{timeout:8000});await tk.click();await p.waitForTimeout(500);
+   const back=await p.evaluate(()=>({inShelf:shelfIn(S,window.__g).some(x=>x[1].k===window.__k),inInv:S.inv.some(e=>e.k===window.__k)}));
+   await p.evaluate(()=>{kitDisplayRoomClose();BAL.shelf.ui=0});
+   return{L,put,back,ok:L.rail&&L.n===12&&L.sil>0&&L.sil<=12*L.per&&put.inShelf&&!put.inInv&&!back.inShelf&&back.inInv}}catch(e){return{ok:false,err:String(e).slice(0,160)}}})();
   r.errs=errs;
-  const ok=r.apiHidden&&r.noFixtureOpen&&r.fit&&r.layout&&!g.frames&&!g.cut&&r.drawer&&r.drawer.tiles>0&&r.drawer.inside&&r.drawer.x&&Array.isArray(r.card)&&r.card.some(t=>/Trưng bày/.test(t))&&r.placed.now===before+1&&r.placed.drawerClosed&&r.placed.cardClosed&&r.on&&r.take&&r.taken&&r.closed&&r.ro.ro&&r.roNoDrawer&&!errs.length;
+  const ok=r.apiHidden&&r.noFixtureOpen&&r.fit&&r.layout&&!g.frames&&!g.cut&&r.drawer&&r.drawer.tiles>0&&r.drawer.inside&&r.drawer.x&&Array.isArray(r.card)&&r.card.some(t=>/Trưng bày/.test(t))&&r.placed.now===before+1&&r.placed.drawerClosed&&r.placed.cardClosed&&r.on&&r.take&&r.taken&&r.closed&&r.real.ok&&r.ro.ro&&r.roNoDrawer&&!errs.length;
   r.verdict=ok?'PASS':'FAIL';if(!ok)bad++;all[sz]=r;await ctx.close()}
  console.log(JSON.stringify(all,null,1));await b.close();process.exit(bad?1:0)})().catch(e=>{console.error(e);process.exit(1)});
