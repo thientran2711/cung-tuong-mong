@@ -1,8 +1,8 @@
-# REVIEW smudge-code r16 — PASS af71f94a
+# REVIEW smudge-code r16 — PASS db24027f
 
 PRIORITY #1 CHECK: OD 18/11 ~01:23Z + ~02:05Z (+20 % FINAL) | main smudge looks batch live | review/smudge-code-r16 50939b0 (old review/smudge-code obsolete) | claims MAIN smudge r16 SzhMG33.
 
-Reviewer session: session_01UV1SzitaUhhFRRJBAbEgHM (sonnet). Branch review/smudge-code-r16-rv = origin/main f986ff6a + 50939b0 (only jlooks.js + tests; index.html/sw.js/assets.json rebuilt with build_site.sh). origin/main is an ancestor of af71f94a → fast-forwardable.
+Reviewer session: session_01UV1SzitaUhhFRRJBAbEgHM (sonnet). Branch review/smudge-code-r16-rv = origin/main b32cdb39 + 50939b0 (only jlooks.js + tests; index.html/sw.js/assets.json rebuilt with build_site.sh). origin/main is an ancestor of db24027f → fast-forwardable.
 
 | check | result |
 |---|---|
@@ -16,3 +16,5 @@ Reviewer session: session_01UV1SzitaUhhFRRJBAbEgHM (sonnet). Branch review/smudg
 
 Notes (non-blocking): masses test name "growing" does not prove 1<2<3 any more; LOCALFIT=1 repo mkfit used for shots (CDN mk-fit table differs, known from r4).
 Shots: scratch only, nothing on CDN; worker's img/_review/smudge wiped (10 objects).
+
+Re-gate on live main b32cdb39 (merge db24027f): smudge-code.js all true, 0 errs; quickcheck PASS 244 s, old save ok, core gates PASS, render 215/193 (run noise: 182/188 on the first run of the same code), tab 387/368, buổi 976/940, tasks>200ms 12/14.
