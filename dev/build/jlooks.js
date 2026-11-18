@@ -40,6 +40,10 @@ Object.assign(BAL,{looks:{
  act:{nuoc:{duc:-2,ev:-3,w:1},tea:{duc:-3,ev:-4,w:1,hotSuc:5},ink:{duc:-4,ev:-6,w:.8},npcUp:50},
  /* tone = strength of the painted mark (owner picks 18/11: mực 85 %, muội 85 %, vết cào 85 %); opacity x strength + lighter colour, see kitToneCss (jk2b) */
  tone:{muc:.85,muoi:.85,cao:.85},
+ /* KEEP-OUT (owner 18/11 standing rule: a face mark NEVER covers the eyes or the lips): ellipses [cx,cy,rx,ry] in VEIL-ROW units (u = x/rowW, v = y/rowH from the row's left/top),
+    measured on 158 por pictures (Haar eyes + lip colour, dev/test/look-fx-keepout.py) and constant for every por-/fig- row because every row is cut from the face rect by the same ratios.
+    Face-square marks are masked by it (lkKeepCss), the scratch rows (scar-fit) are generated so the box stays inside the cheek zone: cheek = [left,top,side] of the veil row, below the eye, above the mouth. */
+ keep:{eye:[[.31,.08,.15,.17],[.72,.08,.15,.17]],mouth:[.45,.655,.23,.105],nose:[.51,.36,.11,.2],cheek:[.06,.30,.18]},
  pox:{thuydau:{sea:["Xuân"],cont:1,die:0},sac:{thuydau:[0,3,5,8],daumua:[0,6,10,14]},spread:35,spreadWk:3,scar:[0,1,1,2]}}});
 /* the 24 owner-approved face finals (384x384 face-square, uploaded to the CDN img/ 18/11, md5 table dev/handover/reports/looks-2-art.md); hair + cloth slots stay empty (not approved) */
 window.LOOKS_ART={};for(const f of["bui","moho","muc","muoi"])for(let n=1;n<=3;n++){LOOKS_ART[`fx-${f}-${n}.png`]=1;if(f==="muc")LOOKS_ART[`fx-muc-${n}-m.png`]=1}
@@ -170,8 +174,15 @@ function lkPoxScar(p,st){try{if(!p||p.scar||typeof SCAR70==="undefined")return""
 /* ---------- face-fx entries: pictures wait for Foreman C; chips + Sắc work now ---------- */
 /* ink faces the other way when the scar-fit cheek (the cheek facing the viewer) lies RIGHT of the face centre: pick the mirrored fx-muc-N-m (same side rule as the scar; today every por/fig row is the viewer-left cheek) */
 function lkMirror(file){try{const n=String(file||"").split("/").pop(),s=KIT_SCAR.fit&&KIT_SCAR.fit[n],v=KIT_VEIL.fit&&KIT_VEIL.fit[n];return !!(s&&v&&s[0]+s[2]/2>v[0]+v[2]/2+1)}catch(e){return false}}
+/* CSS mask (square coordinates) that cuts the eye / mouth / nose keep-out out of a face-square mark; the square = 1.08 x the veil row wide, 1.165 x as tall, its top .3826 rowH above the row top (KIT_RASH.style) */
+function lkKeepCss(){try{const K=BAL.looks.keep,E=[...K.eye,K.mouth,K.nose],gr="radial-gradient(ellipse closest-side,#000 82%,transparent 100%)";const im=[],sz=[],ps=[];
+ im.push("linear-gradient(#000,#000)");sz.push("100% 100%");ps.push("0 0");
+ for(const [u,v,ru,rv] of E){const s=(u+.04)/1.08,t=(v+.3826)/1.165,hw=ru/1.08,hh=rv/1.165,w=hw*200,h=hh*200,l=(s-hw)*100,tp=(t-hh)*100;im.push(gr);sz.push(w.toFixed(2)+"% "+h.toFixed(2)+"%");ps.push((l/(100-w)*100).toFixed(2)+"% "+(tp/(100-h)*100).toFixed(2)+"%")}
+ const a=im.join(","),b=sz.join(","),c=ps.join(","),x=im.map((_,i)=>i?"exclude":"add").join(",").replace("add","add"),xw=im.map((_,i)=>i?"xor":"source-over").join(",");
+ return `;-webkit-mask-image:${a}!important;mask-image:${a}!important;-webkit-mask-size:${b}!important;mask-size:${b}!important;-webkit-mask-position:${c}!important;mask-position:${c}!important;-webkit-mask-repeat:no-repeat!important;mask-repeat:no-repeat!important;-webkit-mask-composite:${xw}!important;mask-composite:${im.map((_,i)=>i?"exclude":"add").join(",")}!important`}catch(e){return""}}
+window.lkKeepCss=lkKeepCss;
 function lkFaceImg(cls,f,st,file){if(!st)return"";if(/^fx-muc-\d\.png$/.test(f)&&lkMirror(file))f=f.replace(".png","-m.png");const m=/^fx-(muc|muoi)-/.exec(f);
- return lkArt(f)?`<img class="${cls}" src="img/${f}" alt="" aria-hidden="true" style="${kitFxVars(st)}${m?kitToneCss(m[1],null):""}" onerror="this.remove()">`:""}
+ return lkArt(f)?`<img class="${cls}" src="img/${f}" alt="" aria-hidden="true" style="${kitFxVars(st)}${m?kitToneCss(m[1],null):""}${lkKeepCss()}" onerror="this.remove()">`:""}
 /* the same face-square as KIT_RASH.style as a [l,t,w,h,deg] rect (baked avatars / KIT_LASTING) */
 function lkSquareRect(file){try{const n=String(file||"").split("/").pop(),r=KIT_VEIL.fit&&KIT_VEIL.fit[n];if(!r)return null;const W=r[2]*KIT_RASH.WX,H=W*(r[3]*480)/(r[2]*445),bandY=r[1]+KIT_VEIL.B0*r[3];return[r[0]+r[2]/2-W/2,bandY-KIT_RASH.RB*H,W,H,r[4]]}catch(e){return null}}
 function lkSquare(file){try{return KIT_RASH.style(file)}catch(e){return""}}
