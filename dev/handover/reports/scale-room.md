@@ -22,11 +22,11 @@ Read: ArtifactData list on `figs`. Convert: `python3 -I dev/art/scale-room/rows_
 Live consort c12 t1..t8 a18: fig-ht.json row (176/226/220/232/291/234/330/399). Sample set (no rows): OpenCV Haar face box, skull top ≈ face top − 0.45 × face height (7 of 8); t8 fell back to painted top + 0.046 × body (edge rule). Estimates sit at the hair/bun top; she fine-tunes.
 
 ## Adding sets
-`dev/art/scale-room/build_sets.py <outdir> extra_sets.json` (extra = `[{"id","name","items":[{"file","url","label"}]}]`) downloads each figure, writes display-size WebP (h 900, ≤150 KB; current 46–103 KB) + `sets.json`. Republish the artifact (same URL) with the new `sets.json` + `img/*.webp` via the Artifact `files` map. Saved rows survive republish. Sets now: (1) c12 a18 sample t1 r5 … t8 v2 r4, (2) live c12 t1..t8 a18.
+Edit `dev/art/scale-room/sets_input.json` (swap file names, add sets), then run `python3 -I dev/art/scale-room/build_sets.py <outdir>` (list = `[{"id","name","items":[{"file","url","label"}]}]`) downloads each figure, writes display-size WebP (h 900, ≤150 KB; current 46–103 KB) + `sets.json`. Republish the artifact (same URL) with the new `sets.json` + `img/*.webp` via the Artifact `files` map. Saved rows survive republish. Sets now: (1) c12 a18 sample t1 r5 … t7 r5 (c12_a18_r5_t7_fresh) … t8 v2 r4, (2) live c12 t1..t8 a18.
 
 ## Checked
 Playwright Chromium touch at 755x1000 and 1180x820: no page errors, no horizontal overflow, pick + enlarge works. Not exercised: the db write (needs her signed-in click); `figs` read returned empty as expected.
 
 ## Files
-dev/art/scale-room/index.html, build_sets.py, rows_to_ht.py. Images are not in git (they live in the artifact).
+dev/art/scale-room/index.html, sets_input.json, build_sets.py, rows_to_ht.py. Images are not in git (they live in the artifact).
 Page source: dev/art/scale-room/index.html (publish with sets.json + img/ beside it).
