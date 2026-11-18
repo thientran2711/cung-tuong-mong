@@ -7,7 +7,7 @@ FIGURES-others 02:41:16.5, FIGURES.json 02:41:16.65, FIGURES-kids + INFO 02:41:1
 any checkout + `cdn_sync` with no args pushes them. Same incident Foreman C s11 diagnosed for FIGURES.json (FOREMAN_C_STATUS "EVIDENCE for main … 03:50Z").
 Effect on ACTS.json: 209 acts / 91 keys / NO "log" rules / NO "-h" keys (live before) vs 332 acts / 836 log rules / 144 "-h" redraws (intended). 709 act-*-h pictures sat unused on the CDN.
 So most act cards fell back to the kit placeholder (ph-p-light-pl = the dressing-table picture the owner circled) or to a neighbour's picture. NOT Foreman C deleting files: 0 manifest keys point to a missing file.
-**EVENTS.json regressed too** (52 categories; the 9 ev-art-fit categories mat-bao, am-muu, bac-tien, canh-phong, hao-huu, nguy-gia, tham-hoi, qua-tang, tin-cung and the act-pics2 festival categories are gone):
+**EVENTS.json regressed too (REBUILT below)** (52 categories; the 9 ev-art-fit categories mat-bao, am-muu, bac-tien, canh-phong, hao-huu, nguy-gia, tham-hoi, qua-tang, tin-cung and the act-pics2 festival categories are gone):
 event/BÁO/VIỆC pictures wrong = same incident. No EVENTS patch script is in git (only PROGRESS_ev-art-fit.md) → NOT rebuilt here; needs its own task.
 
 ## What is on review/act-pic-match (sha 243e6de97)
@@ -49,3 +49,18 @@ After each picture lands: add the name → key to dev/art/manifests/ACTS.json in
 
 ## Left / for main
 1. Push the candidate live (cdn_sync) → the 70-manifest-guard quickcheck hook then passes. 2. EVENTS.json rebuild (own task, see above). 3. `git rm` img/*.json on the handover branch + .gitignore it (stale copies = the cause). 4. FIGURES* were already handled by fig-rank-match.
+
+## Whole family (same 17/11 02:41Z push) — per-file before/after (candidates under CDN img/_review/act-pic-match/, sources in git dev/art/manifests/ @ 159a685e5)
+| manifest (live LastModified) | live now | candidate | evidence the candidate is right | status |
+|---|---|---|---|---|
+| ACTS.json (02:41:15) | 209 acts · 0 log · 0 "-h" | 332 acts · 836 log · 10 prefix | replayed act-pics/pic-dupes/act-pics2 patches; game scan 75→5 placeholders | rebuilt (rebuild_acts.py) |
+| EVENTS.json (02:41:16) | 52 categories · 232 events | 75 categories · 236 events · 47 stories | ev-art-fit + act-pics2 PROGRESS: 9 categories + 14 fest-<k> (all files on CDN, asserted) | rebuilt (rebuild_events.py); NOT game-scanned, category titles of the 9 are mine |
+| FIGURES-kids.json (02:41:17) | 192 records | 336 (168 prince · 168 princess) | art-complete-p2 doc: "grown kids a26/a36/a51 … FIGURES-kids.json 336 recs"; 144 unlisted fig-kid files on the CDN added | rebuilt (rebuild_kids.py); magnificUrl/bg/sheet fields of the 144 absent (runtime does not read them) |
+| FIGURES-others.json (02:41:16) | 84 | – | HANDOVER.md: thái hậu 3 + officials 6 + physicians 3 + men 9, ×4 ages = 84 | OK, unchanged |
+| INFO.json (02:41:17) | 30 keys | – | PROGRESS act-art: "all 30 keys" | OK, unchanged |
+| FIGURES.json / FIGURES-servants.json | rewritten 03:59 by fig-rank-match | – | fig-rank-match rebuild + guard | already fixed |
+Unlisted-but-on-CDN figure files NOT in any manifest (not touched, for main): player 20, man 8, fallen 4, steward 4, tutor 4 (look-ups by key/code, not by manifest).
+Guards now: manifest_guard DICT_GUARDED (ACTS, EVENTS) + floors for ACTS/EVENTS/FIGURES-kids; cdn_sync HOLDS any top-level img/*.json that differs from live on a bulk run (no .json named, no --manifest);
+quickcheck hook 70-manifest-guard.sh (live manifests ≥ floor; ACTS has log + -h keys). The hook FAILS until the candidates go live.
+**NOT DONE (blocked by the auto-mode classifier, needs main/owner):** `git rm --cached img/*.json` + `.gitignore` on the handover branch (tracked stale copies). Command: in a handover checkout `git rm -q --cached $(git ls-files img | grep '\.json$')`, add `img/*.json` to .gitignore, commit, push.
+Go live (main, after LOOK): `cp dev/art/manifests/{ACTS,EVENTS,FIGURES-kids}.json img/ && python3 dev/site/cdn_sync.py img/ACTS.json img/EVENTS.json img/FIGURES-kids.json` then `python3 dev/site/manifest_guard.py --live-check` must print PASS; wipe review: `python3 dev/site/cdn_sync.py --wipe-review act-pic-match`.
