@@ -46,3 +46,25 @@ Recommendation: one follow-up job "gift-receiver-wide" = extend giftVal/wkEval t
 
 ## Handover
 Not needed (done). Worktrees /home/user/wt/d19 + d19h can be deleted after review.
+
+## REVIEW r1 (opus BIG reviewer session_01N1tNP33iyLFhRjyAqZVTqZ, depth 1, START_CTX ~3 %) — PASS
+PRIORITY #1 CHECK: OD:L752 + OD:L582 (equivalent value) | main dev/build/jts.js (old bạc act + second act tsOptGiftsItem, reused/reshaped by the worker) | review/* only review/d19-gift-work | claims: this row.
+Branch `review/d19-gift-work-r1` = worker ddc29092 + reviewer fixes + merged origin/main up to 711d7bad (generated files rebuilt). PASS sha **5103d561** (descends from origin/main 13e2b834).
+
+### Checks
+1. OD:L752 / OD:L582 — PASS after fix. ONE act, three roads; worth = econPrice × the receiver's taste on the ONE gift scale (wkEval / giftVal, the rules the gift dialog uses). Probe over every rival × art × grade × material: an item is never worth more than its sale price (max ratio 1.0); a work can be worth up to 4× its sale (her art + material + chân tình), but the cheapest enough work still sells for 10 vs the 12 bạc share (giver pays ≈ the same; the work itself took time/materials). No piece under 10 bạc of sale value is ever enough. Kiêu ngạo refuses works; tainted items refused; unsellable/no-price items (27) never enough. Pieces leave the bag (inv −1, giveTo/wkGive, one gift rule).
+   **FOUND + FIXED (blocking, free peace):** jdis may REFUSE a piece she dislikes (random BAL.dis.refuse; the piece stays in the chest), but giveTo still returns text, so tsGiftPiece eased ghen −8 / oán −5 and logged "Mất: <món>" while she kept nothing and the player kept the piece → repeatable free peace. Seen live in the iPad run of d19-gift after the main merge. Fix: tsGiftPiece checks the piece really left the bag; if not, nothing is eased, the log says "Lễ làm lành không thành, lòng nàng chưa dịu." (khắc still spent: she tried); NPC road falls back to bạc. Also: the 2 khắc are now spent only after the piece really went (before, a giveTo refusal by a wrapper took khắc with no log). d19-gift.js: new check "refused piece eases nothing"; the jdis random refusal is pinned off for the main road checks (they flaked on it).
+   "Fatigue": the only gift fatigue in the game is the Emperor's (WFAT); consort gifts have none (wkEval0 / giftVal), so none applies here — consistent with the ONE gift rule.
+2. ONE CORE — PASS: every number BAL.tsGift.* / econPrice / WVAL(=BAL.craftGift); one-core-guard / text / text-rule / bind PASS. BAL.tsGift.eq is dead (pending removal after the jbal hold, as the worker wrote — do it in the next jbal touch).
+3. KIT FIRST / VANPHONG — PASS: the three roads are kit option cards (same as every tsOpt card: picture left, Cần/Tốn/Được/Kèm), piece picker = kit item grid (gift-pick PASS Fold + iPad); no private CSS. Main's odds-cap (merged 5cbfd620) removed "Chắc chắn"; the picker now uses capW() + cap:0 like main's old picker. Shots looked at Fold 755x1000@2 + iPad 1180x820@2 (scratch, not uploaded, deleted).
+4. NPC + co-op + old saves — PASS: tsNpcGift uses the same worth/giveTo functions (NPC piece + bạc roads tested); the new dialogs are id-based PEND (serialisable, thin-guest friendly). coop-e2e 63/63 and COOP_SWAP 63/63 (one earlier run had 63/64 on "fold #next enabled" timing, rerun clean — unrelated to jts). quickcheck PASS (old save ok, core gates PASS, perf ≈ live).
+5. WHOLE GROUP — agree with the worker's table; FOR MAIN (do not build here): one job "gift-receiver-wide" (giftVal/wkEval for servants, court staff, men) so j42 cnvGift / j10 thuong / j55 tdGift offer the same three roads via tsGiftWorth.
+6. poison-gift.js — red IDENTICAL on main 36e574fa and on the branch (`reading 'click'` at line 38) → pre-existing, not this branch.
+
+### FOR MAIN (non-blocking notes)
+- KIT rows de-duplicate repeated chunks: the Lễ bạc card's Được shows "X bớt ghen 8, bớt oán 5 · Tần ??? bớt ghen 8 · Tần ??? bớt ghen 8" — "bớt oán 5" is dropped for the 2nd+ person (same on main's old act). Kit keeper: the row splitter should not drop repeats across different people.
+- Personal dislikes (jmind/jdis) are not part of "enough" (hidden until learned; greying would leak them); the refusal/penalty now applies honestly via the fix above.
+- OD:L582 "value bạc by how hard it is to earn at her rank": BAL.tsGift.bac is a flat 12 at every rank (pre-existing); a rank-scaled share would be a balance job.
+- NPC road picks a piece (eases one person) when its sale ≤ the whole bạc bill (eases up to 4) — acceptable, but the bạc road would often be the better NPC choice.
+
+Tests on the final sha: d19-gift PASS ×2 (Fold + iPad), one-core x4 PASS, coop-e2e 63/63 + swap 63/63, gift-pick PASS, quickcheck PASS. Worktrees /home/user/wt/rv-d19c, rv-d19-gift, rv-d19-main + scratch to be deleted after the verdict.
