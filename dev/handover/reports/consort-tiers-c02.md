@@ -54,7 +54,11 @@ Credits: 9 gens x 135 = 1215 cr (no retries).
 Files (md5-verified): https://ctm-img.victoria-tntt.workers.dev/img/_review/consort-tiers/c02/b7/ — c02_a18_t1..t8.png, c02_a18_nude.png (Nữ đế), c02_a18_row9.jpg, c02_a18_live_vs_new.jpg, c02_a18_faces.jpg. Nothing live, no manifests.
 ~100% xong c02 B7 / ~0% chơi được.
 
-## B8 (W34, 18/11; ROOT-18 order B8 + addenda 1-2 — TWO STEPS: exact copy, then recolour, m09 in the STYLE slot; t1–t8, no Nữ đế)
+## B8 (W34, 18/11; KEPT SET 03314a1 — TWO STEPS: exact copy, then recolour, no m09; t1–t8, no Nữ đế)
+ROOT-18 STOP (owner: images already drawn stay, no redraw): this no-style two-step set is the c02 B8 deliverable. Method: STEP 1 "Reproduce image 1 exactly …" (1024x2304, ref = live hd figure only, transparent); STEP 2 "Edit image 1. Recolour ONLY the robe fabric …" (ref = the copy only). bbox w/h diff vs live (copy / recolour): t1 +0.7/+0.9, t2 +0.8/+0.9, t3 +0.7/+0.9, t4 +1.1/+1.0, t5 +2.7/+3.2 FAIL, t6 +0.1/-0.0, t7 +2.0/+2.9 FAIL, t8 +0.2/+0.3 (t5/t7 hit the 3-gen cap). Colours: lavender, peach, misty blue-grey, sage, blush pink, periwinkle, dusty rose-red + pale yellow, soft gold+jade+blush.
+Files (md5-verified, restored after an accidental overwrite): https://ctm-img.victoria-tntt.workers.dev/img/_review/consort-tiers/c02/b8/ — c02_a18_t1..t8.png, c02_a18_copy_t1..t8.png, c02_a18_row8.jpg, c02_a18_live_vs_new.jpg (live | copy | recolour). Nothing live.
+
+## B8b (W34, 18/11; addenda 1-2: m09 in the STYLE slot; NOT the kept set — owner: "ảnh nào vẽ rồi thì thôi")
 Method (1024x2304 canvas ≈ live 0.44; gpt-2-6 does not support 9:21): STEP 1 = "Reproduce image 1 exactly …" ref = live hd figure; STEP 2 = "Edit image 1. Recolour ONLY the robe fabric to <soft colour> …" ref = the step-1 copy, plus m09 (eIyOFEidqL) as STYLE ref (type style, never as image) with the skin/rendering clauses of batch-consort-ty §RECIPE ("Luminous smooth porcelain skin … NO dark contour line around face, nose or jaw …") and "style reference gives only drawing style, skin rendering and fabric texture, never its colours or shape".
 FINDING: m09 in the style slot leaks its PINK robe colour into step 1 (5 of 8 copies came out pink even with "same colours as image 1", only t4/t5/t8 stayed blue). So step-1 copies use the best colour-true copy: t4, t5, t8 = copy made WITH m09 style; t1, t2, t3, t6, t7 = copy made WITHOUT the style ref (colour true). Step 2 (recolour) uses the style ref for all 8 and shows no leak (colours exactly as listed). Earlier sets without the style ref are superseded.
 | rank | colour | copy diff vs live | recolour diff vs live |
@@ -69,5 +73,5 @@ FINDING: m09 in the style slot leaks its PINK robe colour into step 1 (5 of 8 co
 | t8 | soft golden yellow + jade + blush | +1.3 % | +1.2 % |
 t1–t4, t6, t8 pass; t5 and t7 are outside ±1.5 % (copy step already hit the 3-gen cap without the style ref; by eye pose/cut match). Alpha 0..254, nothing touches the canvas edge (top alpha <= 6).
 Credits: single-step first attempt 18 gens + no-style two-step 20 gens + with-style copies 16 gens (two rounds of 8; 1st round leaked pink) + with-style recolours 8 gens = 62 gens x 135 = ~8370 cr.
-Files (md5-verified): https://ctm-img.victoria-tntt.workers.dev/img/_review/consort-tiers/c02/b8/ — c02_a18_t1..t8.png (final recoloured), c02_a18_copy_t1..t8.png (step-1 copies used), c02_a18_row8.jpg (uniform scale, skull top on the red line), c02_a18_live_vs_new.jpg (live | copy | recolour). Nothing live.
+Files (md5-verified): https://ctm-img.victoria-tntt.workers.dev/img/_review/consort-tiers/c02/b8-style/ — c02_a18_t1..t8.png (final recoloured), c02_a18_copy_t1..t8.png (step-1 copies used), c02_a18_row8.jpg (uniform scale, skull top on the red line), c02_a18_live_vs_new.jpg (live | copy | recolour). Nothing live.
 ~100% xong c02 B8 / ~0% chơi được.
