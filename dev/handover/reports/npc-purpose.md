@@ -307,3 +307,30 @@ OPEN FOR SUCCESSOR (in order):
 3. men-forbidden: re-run and read "bad" (must be []). Diagnose "Có người đến an ủi" 24→5.
 4. Send head to reviewer session_01UV1SziEkemejE3R3kypQJT + C-AG #11 for PHASE A re-check; on C-AG "LIVE <sha>" (ag-all-2) merge, full gates, then SẴN SÀNG KIỂM.
 Worktrees: /home/user/wt/npcp (review/npc-purpose), np-rates / np-logic (merged local branches, can be removed), npbase (local base), live-main / ag2 (old, remove).
+
+## G1 #5 integrator (session_01UV1SziWu1FHzfVj6n9XR7N, 18/11 ~12:30Z) — open list 1-4 done, head 421465a1
+PRIORITY #1 CHECK: OD npc-purpose (brief) | main b3d2ccc7 | review/* npc-purpose 9b43144 → 421465a1, ag-all-2-land 7301df77 (LANDER #4, ONE agSoftTxt) | claims G1 rows. depth 7, START_CTX ≈ 4 % (estimate; context_usage read 0).
+HEAD review/npc-purpose @421465a1 = 9b43144 + merge review/ag-all-2-land 7301df77 (55d5a53) + rates-gate fix (421465a). Base for every measure below = ag-all-2-land 7301df77 (= this tree minus npc-purpose).
+1. PERF SPLIT — PASS, no hot-path fix needed. The "+49 %" was noise: quickcheck times ONE buổi per run and that number swings 700–3103 ms inside one build. Engine probe (seeded, UI stubbed, ms per buổi, 5 alternating runs; scratch /home/user/wt/diag/eng.js):
+| run | npc-purpose | ag-all-2-land | live | np vs ag2 |
+|---|---|---|---|---|
+| 9b43144 vs ee568c7 vs 13e2b83, 80 buổi | 50.5 | 58.6 | 46.8 | −14 % |
+| same, 160 buổi | 43.2 | 47.4 | 42.5 | −9 % |
+| 421465a1 vs 7301df77 vs b3d2ccc7, 120 buổi | 54.5 | 56.9 | 43.5 | −4 % |
+quickcheck --runs 5 paired 421465a1 vs 7301df77: render 215/202 (+6 %), tab 425/426, buổi 1176/1253 (−6 %), tasks 20/18 → npc-purpose's own cost < +10 %. The gap vs live (engine +25–31 %) belongs to ag-all-2 itself (ag2 vs live 56.9/43.5), not to npc-purpose — flag for C-AG / LANDER.
+2. odds-cap merge 10ae2c9 re-read hunk by hunk (git show --remerge-diff, 78 hunks: 75 conflicts + 2 clean jagacts3 + rows json): 77 correct (runOpt soft fail first then agOdd/agTry; servDo traO(s,m)/cheO(m), Danh paid once; courtAct bribe once in courtGive; coldActsOf kept + fix:1; cardH/optLine/actLine capW/kitSoftW + payWinFail; no cl(..,5,95), no odds "Chắc chắn"; node --check all). 1 defect fixed: j10 servDo "che" fail line said "biết ơn ngươi đã ra mặt" for an NPC mistress → only when me. Then merged LANDER #4's 7301df77 (ONE agSoftTxt = j63 oddsSoft): 15 conflicts; agSoft sites taken from LANDER (every agSoftTxt call identical to 7301df77, no log(agSoftTxt) double logs); npc-purpose picks kept (j43 spy-tell npwPick, jsteal stealWant order, jthaiy npcTell, jagacts3 p3Grab npcWhy, j10 comment); jbal2: LANDER's BAL.odds.softFail me/npc strings gone with the old agSoftTxt, BAL.ag.day.two not re-added (agIntent reads BAL.ag.why.g3.two, reviewer: unread key); assemble.py = union.
+3. men-forbidden (9b43144 and 421465a1): bad = [] — read: 288 checked, 105 stage; thái y = summons, họa/nhạc sư = order, vương gia @tn = visit (lawful), stray card ok.
+4. "Có người đến an ủi" 24→5: NOT a fault. jmood.js byte-identical to ag2; same seeds 1–5 × 200 tuần: head 27 vs ag2 12 cards; skip reasons alike (roll 321/286, angry 132/150, nobody 31/39). It needs her own mood band ≤ −1 + a friend aff ≥ 40 → follows the seed path.
+5. RATE GATE fix (family: every log-line row): 5 seeds were too few — the same build and seeds gave 'ghé chơi' 110 then 39, 'Lời cảnh báo' 21 then 10. Now 12 seeds default; base re-measured on 7301df77 (--write-base). NPC outbursts are judged by the event count (EA_N.npcExt: new f:"e" rows c:buon+ghen / c:vui / c:gian, band 0.6–1.6); the 'ưu uất' / 'khóc suốt' log lines (shown only for consorts she knows by name, eaSay → eaKnown) are reported. Result 12 × 200 tuần: PASS — sad/jealous 551→578 (1.05), glad 707→673, anger 551→456; ghé chơi 77→103, Chủ thưởng 9→30 (3.07, maid road, small N), Lời cảnh báo 78→43 (0.56), knSell 104→55 (0.53), Một ánh mắt 88→14 (0.17, only men with a pull — accepted earlier), ưu uất 120→237 log lines (reported).
+| gate @421465a1 | result |
+|---|---|
+| npc-purpose-scan --strict | PASS (419 rows) |
+| one-core-guard | PASS |
+| npc-why 10, g1 11, g1b 9, g1c 8, g1d 11, g1e 10, g1f 11, g1g 11, npc-purpose-logic 16 | PASS |
+| ag-soft 20, ag-soft-probe 6, ag-all 21, ag-know 25, ag-sell 19, agmaid 23 | PASS |
+| typed-ladder-scan | 14 hits (live main 15) |
+| men-forbidden | bad = [] |
+| npc-purpose-rates (12 seeds × 200 tuần, base 7301df77) | PASS |
+| quickcheck ×2 vs live b3d2ccc7 (incl. G4 core gates, old save) | PASS · PASS |
+| coop-e2e ×3 | 63/63 · 63/63 · 63/63 |
+NEXT: reviewer PHASE A re-check of 421465a1. On C-AG "LIVE <sha>" (ag-all-2 on main): merge live, rebuild, full gates (incl. long suite), perf vs the new live, SẴN SÀNG KIỂM. Worktrees: /home/user/wt/npcp (branch), ag2 (7301df77), live (b3d2ccc7), diag (scratch bots: eng.js, comfort.js, ea.js).
