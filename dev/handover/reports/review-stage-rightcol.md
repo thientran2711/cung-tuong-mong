@@ -25,3 +25,13 @@ Extra checks from ROOT-56:
 (1) CONFIRMED (fold-h6-map-cn): open Cung nhân list (6 people) covers the left-edge tags Tân Giả khố (half), Nội vụ phủ (name cut), Tích Cần viện (name cut). Tags under an open list are neither readable nor tappable. Not covered by a test (test only checks rail/list overlap + "no tag fully under the rail buttons"). Owner decision: either accept (list is temporary, tap button again to close) or shift tags/map; I flag it, not a kit-law failure. Law 9/11 same for all lists.
 (2) NOT REPRODUCED: ipad h6 home closed (and cn/ct open, h1) — the maid face chip sits ~100 px left of the column, clear of «Ân sủng». The test measures figure bodies, not round face chips, so it could not catch the r4 shot ROOT-56 saw; a scratch check of #tokens children vs #kshR over all 54 states found 0 overlaps, but my selector was not proven to match the face chip. Recommend adding face-chip vs column to stage-rightcol.js.
 VERDICT: PASS a1d5ea3 (rightcol part), with flag (1) for the owner's call. Do not land without deciding (1).
+
+## r7 review — review/stage-rightcol @ 9f00e40 (+ main 1130a49e = b60c1102; verdict to ROOT-59)
+PRIORITY #1 CHECK: OD 18/11 ~20:55Z/~21:40Z/~21:52Z | main 1130a49e | review/stage-rightcol 9f00e40 | claims stage-rightcol
+Merged LIVE 1130a49e onto 9f00e40 (conflicts only in generated index.html/sw.js, rebuilt) -> review/stage-rightcol-r8 @ b60c1102 (pushed). Diff vs worker branch = main's dev/build/jcoopworld.js only.
+- dev/test/stage-rightcol.js run 3 times, each printed 54 real PASS lines, 0 FAIL, 54 jpg written (not 0 cases), 0 page errors.
+- Fold drop list vs place tags (flag 1 from a1d5ea3): FIXED. fold-h6-map-cn: with the Cung nhân list open (6 people) Tân Giả khố / Nội vụ phủ / Tích Cần viện stay fully readable right of the list; Chí tôn list the same. LOOKED.
+- Overlay question: probe over every map state (Fold 755, phone 412, iPad 1180; 1/6 servants; closed/cn/ct): the only large absolute/fixed layers are the map itself (#mapsc) and the right-column host #kshR on kv1; NO picture/modal overlay appears on its own on Dư đồ. The worker's covered shot is not reproduced from a fresh save (likely a face-reveal/event picture from its own save state).
+- quickcheck PASS (open 1483 ms, old save ok, core gates incl. kit-conform PASS, render 219/224, tasks>200ms 17/18).
+- Not run: 1366x1024; iPad maid-face-under-Ân sủng not reproduced (test measures figure bodies only).
+VERDICT: PASS (rightcol part) b60c1102 (= 9f00e40 + main 1130a49e).
