@@ -485,3 +485,4 @@ c02 a18 consort rank set t1–t8 + Nữ đế (B6) | claude/cung-tuong-mong-hand
 c03 a18 consort rank set t1–t8 + Nữ đế (B6) | claude/cung-tuong-mong-handover-hj0h8w (art, _review CDN) | session_011xDdVPb927er8REUxdUaCc | RUNNING | 2026-11-18T05:58Z
 men: Hoàng thượng 4 faces a18 (prompt-only) | claude/cung-tuong-mong-handover-hj0h8w (art, _review CDN) | session_011xDdVSAtqavbvzVpkVAnqt | RUNNING | 2026-11-18T05:58Z
 art-matrix planner (MAIN s43 order) | claude/cung-tuong-mong-handover-hj0h8w (reports/art-matrix.md) | session_011xDdVS6wU7hJj7qWmYtDa8 | RUNNING | 2026-11-18T05:58Z
+| emo-seal-vanish (owner bug 18/11 05:50Z: maid's emotion seal vanishes after closing its box; sonnet; brief briefs/emo-seal-vanish.md) | review/emo-seal-vanish | MAIN ROOT-45 | (opening) | RUNNING | 18/11 05:14Z |
