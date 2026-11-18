@@ -134,3 +134,5 @@ FOR MAIN (open, repeat): READY FF review/monthly-ration-r6 a394546 (BIG PASS E4r
 - (18/11 08:20Z) E7b: SẴN SÀNG KIỂM questline-q1b 2f79ae26 (fix 2 on q1a a615eb7; scan/engine/quickcheck PASS)
 - (18/11 08:01Z) READY q1a a615eb7e (E7a2 FIX 2) · q1b 2f79ae26 (E7b FIX 2 on a615eb7) · q1c b013ddf (E7c2 FIX 2 on a615eb7) → ONE BIG reviewer for all three: E7r3 session_01DgYSWnKLMTfPEZmLjhWFYM (opus). E7a2/E7b/E7c2 idle for fixes. Load 6/12 (E1b, E7a2, E7b, E7c2, E7r3, E8).
 - (18/11 10:05Z) E8: READY FF steal-minigame 6b5414a8 (origin/main 9c581406 ancestor; quickcheck PASS). E8 done.
+- (18/11 08:06Z) E8 READY FF steal-minigame 6b5414a8 (main 9c58140 merged, jsmg last in assemble, rebuilt; mg-skip-audit, unit, quickcheck PASS; PASS E8r3 814078e5 + E8r2/E8r rounds) → E8 archived. Load 5/12.
+FOR MAIN (open): READY FF main → review/steal-minigame 6b5414a8 (PL #3b tranh sủng mini-game; BIG PASS rounds 1–3, reports/steal-minigame-review.md). Also still READY: review/monthly-ration-r6 a394546.
