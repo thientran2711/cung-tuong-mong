@@ -18,7 +18,7 @@ Object.assign(BAL.looks,{xoc:{on:0,
  body:{waist:.34,elbowX:.24,elbowY:.43,shoulder:.17},ridge:{off:1.5,w:.35,k:1,edge:.3,soft:2.4},comp:.85,bunchK:4,
  /* r4d (owner 17/11: crease = Magnific DECALS): mode 'decal' lays CDN img/fx-crease-1..4 (tall vertical fold patches), fx-crease-knot-1, fx-crease-hem-1 through drawDecalOnCloth (blend 'shade' = the grey fold shading scales the robe's own colour, hue kept);
     mode 'code' = the older stroke code (kept, off). dec: per level lv[1..3] n patches (2/4/6), knot / hem on or off, sc = patch width / robe width, op, pos = patch anchors (share of robe box, down the skirt), rot = max tilt, shadeK = contrast of the shading */
- dec:{mode:'decal',patch:4,lv:[null,{n:2,knot:0,hem:0,sc:.18,op:.85},{n:4,knot:0,hem:0,sc:.18,op:.92},{n:6,knot:1,hem:1,sc:.19,op:1}],pos:[[.44,.62],[.6,.72],[.3,.74],[.72,.66],[.5,.82],[.4,.52]],knotAt:[.5,.36],knotSc:.34,hemAt:[.5,.96],hemSc:.9,rot:.14,shadeK:1.5},
+ dec:{mode:'decal',patch:4,lv:[null,{n:2,knot:0,hem:0,sc:.18,op:.85},{n:4,knot:0,hem:0,sc:.18,op:.92},{n:6,knot:0,hem:1,sc:.19,op:1}],pos:[[.44,.62],[.6,.72],[.3,.74],[.72,.66],[.5,.82],[.4,.52]],knotAt:[.5,.36],knotSc:.34,hemAt:[.5,.96],hemSc:.9,rot:.14,shadeK:1.5},
  seed:7,light:[-.55,-.8],skin:{de:15,lum:.32,min:.003,max:.02,fill:.25,asp:2.6},hair:{de:26,reach:.34},head:.012,item:60}});
 /* r4 TASK 2: stain DECALS on the cloth (tra = tea, uot = wet, bun = mud). Decal art = CDN img/fx-stain-<kind>-<n>.webp (transparent webp); code places it on ANY figure through the cloth mask.
    on:0 = live feature OFF. lv[1..3] (nhẹ / vừa / nặng): n = decals, sc = decal width as a share of the robe width, op = opacity, wet = overall cloth darkening (wet cloth), pos = anchors tried in order
@@ -172,8 +172,9 @@ function drawDecalOnCloth(out,W,H,mk,dec,ax,ay,scale,rot,op,blend,tint,tm){const
   const da=(D[j+3]*w0+D[j+7]*w1+D[j+k+3]*w2+D[j+k+7]*w3)/255;if(da<.01)continue;
   const ef=Math.min(1,Math.min(u,v,dec.w-1-u,dec.h-1-v)/(.16*Math.min(dec.w,dec.h)+1));/* feathered rim: no hard patch edge */
   const a=Math.min(1,da*op*mm*ef*ef*(3-2*ef)*(1-Math.min(1,Math.max(mk.protS[i]*1.6,mk.prot[i]*1.2))));if(a<.003)continue;
+  const mx0=Math.max(1,out[i*4],out[i*4+1],out[i*4+2]);
   for(let q=0;q<3;q++){let dc=D[j+q]*w0+D[j+4+q]*w1+D[j+k+q]*w2+D[j+k+4+q]*w3;if(tint)dc=dc+(tint[q]-dc)*tm;const b=out[i*4+q];let o;
-   if(blend==="shade"){if(dec.mid==null)clothDecalMid(dec);const dl=dc/255-dec.mid;o=b*(1+BAL.looks.xoc.dec.shadeK*(dl<0?dl:dl*.45))}else if(blend==="normal")o=dc;else if(blend==="soft")o=dc<128?2*b*dc/255:255-2*(255-b)*(255-dc)/255;else o=b*dc/255;/* multiply: the robe's folds and pattern show through */
+   if(blend==="shade"){if(dec.mid==null)clothDecalMid(dec);const dl=dc/255-dec.mid;const sat=1-b/mx0;/* shade tinted to the robe: the weaker channels darken more, so shadows are the robe's own deeper hue, not neutral grey */o=b*(1+BAL.looks.xoc.dec.shadeK*(dl<0?dl*(1+.9*sat):dl*.45))}else if(blend==="normal")o=dc;else if(blend==="soft")o=dc<128?2*b*dc/255:255-2*(255-b)*(255-dc)/255;else o=b*dc/255;/* multiply: the robe's folds and pattern show through */
    out[i*4+q]=b+(o-b)*a}n++}
  return n}
 /* kind = "tra" | "uot" | "bun", lv 1..3, decals = [{w,h,data}] (variants of that kind); opt.base = RGBA already shaded (e.g. the xoc bake) else the picture; returns {data,mask,count} */
