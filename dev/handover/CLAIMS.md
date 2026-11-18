@@ -492,7 +492,7 @@ art-matrix planner (MAIN s43 order) | claude/cung-tuong-mong-handover-hj0h8w (re
 | E7c QUESTLINE Q1c help-hồi text (opus; briefs/E7-questline-q1.md) | review/questline-q1c | E ROOT | session_01DgYSWmbeLw227mrkMikC5W | HANDOVER 6dc4222 (reports/questline-q1c.md) | 18/11 05:22Z |
 | E7a QUESTLINE Q1a help-hồi text (opus; briefs/E7-questline-q1.md) | review/questline-q1a | E ROOT | (opening) | RUNNING | 18/11 05:22Z |
 | E7b QUESTLINE Q1b help-hồi text (opus; briefs/E7-questline-q1.md) | review/questline-q1b | E ROOT | (opening) | RUNNING | 18/11 05:22Z |
-| E7c2 QUESTLINE Q1c help-hồi text (opus; briefs/E7-questline-q1.md; successor of E7c) | review/questline-q1c | E ROOT | session_01DgYSWkXhh7hPLBJjzFYMWJ | SẴN SÀNG KIỂM c6015bd (on q1a 1b6005a) | 18/11 06:20Z |
+| E7c2 QUESTLINE Q1c help-hồi text (opus; briefs/E7-questline-q1.md; successor of E7c) | review/questline-q1c | E ROOT | session_01DgYSWkXhh7hPLBJjzFYMWJ | SẴN SÀNG KIỂM 2148089 (fix 1; rebase on new q1a pending) | 18/11 06:20Z |
 | map-tap-go (owner 18/11 06:00Z: two dialog looks for one place + tap = go at once with undo toast; sonnet; brief briefs/map-tap-go.md) | review/map-tap-go | MAIN ROOT-45 | session_01UV1SzhDm65KyvEigfRjon6 | RUNNING | 18/11 05:17Z |
 | life-preload-fu (follow-ups A,B,D,E; sonnet; brief briefs/life-preload-fu.md; ORDER ROOT-44 04:35Z) | review/life-preload-fu | B | session_01N1tNP49F8cp5bBg81G3WX5 | RUNNING | 18/11 05:25Z |
 | cloth-bake-static (cloth layer on every figure path on a cold cache; sonnet; brief briefs/cloth-bake-static.md; ORDER ROOT-44 04:35Z) | review/cloth-bake-static | B | session_01N1tNP6bXEreygYxkwtX5Vx | SẴN SÀNG KIỂM 16b4dad8 | 18/11 05:25Z |

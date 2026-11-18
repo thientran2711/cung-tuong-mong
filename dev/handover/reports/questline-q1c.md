@@ -1,4 +1,4 @@
-# Q1c — men help asks (jnrask_m.js) — SẴN SÀNG KIỂM c6015bd
+# Q1c — men help asks (jnrask_m.js) — SẴN SÀNG KIỂM 2148089 (fix 1 after E7cr FAIL b99f4bc)
 PRIORITY #1 CHECK: OD L644/L1072/L1243/L1252 | main none (Q1 engine not on main yet) | review/questline-q1a 1b6005a (engine + shared nrask-scan, hz exempt), review/questline-q1b 344e1e9 (no clash), review/questline-q1c (this) | claims E7c2 session_01DgYSWkXhh7hPLBJjzFYMWJ (successor of E7c session_01DgYSWmbeLw227mrkMikC5W)
 START_CTX ~5 % · lineage depth 2 · worker (no children).
 
@@ -24,3 +24,18 @@ CDN upload refused (cdn_sync HTTP 401 Authentication error) and images may not g
 ## Notes for the reviewer / Foreman E (not in my scope)
 - The men rival (nrMenRival, g "men") is any man of S.men, not one of his kind (shot: a Thị vệ's rival is a «Nhạc sư»). The asks are worded so {B} reads true for any man, but Foreman B / engine owner may want same-kind rivals.
 - Review waits for q1a on main; then rebase q1c and re-run the 4 tests above.
+
+## FIX 1 (review E7cr FAIL b99f4bc → reports/questline-q1c-review.md) — 2148089 on q1a 1b6005a
+Whole families, not just the listed asks: I listed EVERY ask naming {B} (63) per group and reread each against who {B} really is (S.men man of another trade · court consort for tq/ksp/court Thái y · fellow staff eunuch for eun_len · another house head for off), plus every time word and every option line.
+| # | family | before (rule hits on b99f4bc) | fixed asks | after |
+|---|---|---|---|---|
+| 1 | S.men {B} in the asker's own trade / given a phủ or post | 14 | gd_tinh_5#1, gd_tl_5#0 (extra), gd_tl_6#1, gd_tl_9#0, hs_hoa_5#1, hs_hoa_6#0, hs_hoa_7#1, ns_tho_5#1, ns_tho_9#0, st_uoc_6#1, vg_bien_5#0, vg_dat_6#0, vg_bien_6#1, vg_bien_9#1, vg_dat_7#1 (labels/loss lines too: no «phủ {B}» left in men groups) | 0 |
+| 2 | ty asks read for a consort {B} (court Thái y) | 2 (+ by hand) | ty_thu_5#1, ty_thu_7#1, ty_tra_6#1, ty_tra_8#0, ty_tra_10#1 — {B} only as «người của / bên {B}», no hắn/nàng/cung/phủ bound to {B} | 0 |
+| 3 | eun_len {B} = fellow eunuch | 5 | eun_len_5#1, 6#0, 7#0, 8#1, 9#1 (no servants / officials under {B}) | 0 |
+| 4 | time words vs the card deadline | 11 | gd_kho_7#0, ty_tra_10#0/#1, tq_an_7#0/#1, off_dan_10#0, st_uoc_9#0, ns_tho_10#1 (ask + label), ksp_so_7#0 (extra «mồng một») → «sắp», «chẳng còn bao lâu», «trước buổi bàn tới» | 0 |
+| 5 | handout asks | by hand | eun_len_5#0 → vouch for him to the old eunuch (tea stays only as the bạc option's cost); ty_tra_7#0 → sâm drawn in her palace's name | 0 |
+| 6 | assumed kin of the rival house in the palace | 2 (+ by hand) | off_ghe_5#0 (conditional «nếu phủ ấy có người nhà…»), off_ghe_10#1, off_dan_8#1 | 0 |
+| opt | «nô tài» as a noun in option lines | — | 8 lines → «thái giám» | 0 |
+nrask-m-scan now carries a rule for each family (time words, handout, S.men {B} post/phủ/trade verbs, ty {B} binding, eun_len {B} people, off kin); on b99f4bc it reports 30 hits, on 2148089 0.
+Tests on 2148089 (q1a 1b6005a + q1c; scan also with q1b 255f5b2a): nrask-scan ALL PASS (both), nrask-m-scan PASS, nrask-engine ALL PASS, quickcheck PASS (core gates PASS, old save ok, render 167/144, tab 276/310, buổi 703/676).
+nrVoiceM («thần» for every S.men man vs VANPHONG vi thần / thị vệ nô tài): engine side (jnroadm.js:147) → sent to E7a 18/11 ~06:55Z (it is moving address to jvoice kAddr). Rebase on E7a's new q1a sha (ed01a6b seen on origin) when E7a reports done.
