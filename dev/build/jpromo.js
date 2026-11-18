@@ -18,8 +18,11 @@ window.PROMO_SET=1;
 Object.assign(BAL,{promo:{
  /* THE household table (one core, review/staff-root; owner 17/11 04:48Z "phẩm thấp nhất chỉ có 1 cung nữ hoặc 1 thái giám", OD:L1155 ceiling):
     [maids incl. the personal (close) maid, eunuchs] per consort rank 0..7, for her AND every NPC consort (j10 capOf / hhHas read it; cold palace = row 0).
-    Đáp ứng 1 · Thường tại 2 · Quý nhân 3 · Tần 3 · Phi 4 · Quý phi 5 · Hoàng quý phi 6 · Hoàng hậu 6. Low ranks keep no eunuch of their own. */
- cap:[[1,0],[2,0],[2,1],[2,1],[3,1],[3,2],[4,2],[4,2]],
+    Owner pick OD 18/11 ~02:15Z (live table A with Quý nhân 2+0; review/staff-cap-apply): Đáp ứng 1+0 · Thường tại 2+0 · Quý nhân 2+0 · Tần 2+1 ·
+    Phi 3+1 · Quý phi 3+2 · Hoàng quý phi 4+2 · Hoàng hậu 4+2. Eunuchs start at Tần. */
+ cap:[[1,0],[2,0],[2,0],[2,1],[3,1],[3,2],[4,2],[4,2]],
+ /* Nữ đế (j99succ path "c"): harem style, mostly cung nữ, a row >= the Hoàng hậu row (owner OD 18/11 ~02:05Z; number pending her word = the HH row for now) */
+ capNd:[4,2],
  /* Thái hậu's household (jstaff: her named women Giáo tập ma ma, Chưởng sự cô cô, Quản sự ma ma while the queen seat is empty) */
  capTh:[4,2],
  /* a servant she trusts this much leaves her household (over the table) with a farewell scene, not a log line (j10 capTrim) */
@@ -38,7 +41,7 @@ Object.assign(BAL,{promo:{
  /* servant road: index = SRK.maid rank 1..4, 5 = ma ma; "wd:" = a WD garment / pin */
  srv:[[],[["vaibong",1],["banhtrai",1]],[["wd:y_luamoc",1],["wd:tram_dong",1],["vaibong",1],["tragoi",1],["banhtrai",1]],
   [["wd:y_chuongsu",1],["luahang",1],["tragoi",1],["traicay",1],["tuithom",1]],[["wd:y_nuquan",1],["luahang",2],["trahop",1],["traicay",1],["ruoucuc",1]],[["wd:y_mama",1],["luahang",1],["trahop",1],["traicay",1],["ruoucuc",1]]]}});
-/* ---------- staff capacity: one more servant at every rank ---------- */
+/* ---------- staff capacity: the table above (rank-ups that raise it bring one more servant) ---------- */
 /* (the private capOf wrapper that lived here is gone: j10 capOf reads BAL.promo.cap for everyone — review/staff-root) */
 /* ---------- the set ---------- */
 function prRankName(r){return r>=7?"Hoàng hậu":RANKS[Math.max(0,Math.min(7,r))].n}
@@ -54,7 +57,7 @@ function prGive(p,L){const E=[];p.inv=p.inv||[];for(const [k,n,kind] of L)for(le
   if(kind==="wd"&&typeof wdGain==="function"){const g=wdGain(p,k,{from:"nvp",giver:"Nội vụ phủ",nvp:1});if(g&&g.e)E.push(g.e)}
   else{const e={k,from:"nvp",giver:"Nội vụ phủ",d:S.turn};p.inv.push(e);E.push(e)}}
  return E}
-/* one new servant, free, while under the rank's cap (maids first). Faces are unique in the whole palace (j17 roomFor = the face pool), so:
+/* one new servant, free, while under the rank's cap (maids first). Faces are unique in the whole palace (j17 roomFor = the figure identity pool, FIGIX 52 maid + 8 ma ma / 30 eunuch), so:
    1. this month's Nội vụ phủ candidate (j29 npool), 2. a new person while the face pool has room, 3. (her only) a servant Nội vụ phủ moves
    from the lowest-ranked household that has one to spare. null when nobody can come. */
 function prStaff(p){try{if(!p||typeof mkServ!=="function")return null;p.staff=p.staff||[];const [cm,ce]=capOf(p);
