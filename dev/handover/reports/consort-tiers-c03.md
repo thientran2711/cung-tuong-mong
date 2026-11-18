@@ -34,3 +34,20 @@ Credits: 9 gens × 135 = 1215 cr, 0 bg removals (native transparent).
 Files (md5-verified, https://ctm-img.victoria-tntt.workers.dev/img/_review/consort-tiers/c03/b7/): c03_a18_t1..t8.png, c03_a18_nude.png, c03_a18_row9.jpg, c03_a18_live_vs_new.jpg, c03_a18_faces.jpg. Nothing live, no manifests.
 Gen ids: t1 xSXt3yNjfW, t2 vQ2Ys1Ha47, t3 tC3GxkLmZJ, t4 3z5xXddREY, t5 LwohZ2qswO, t6 cpgJfuw0eP, t7 s78v2Y3l8e, t8 6Aq1etriJO, Nữ đế s78v2eLl8e.
 ~100% xong c03 / ~0% chơi được (nothing live; owner review pending).
+
+## B8 (W35; order B8 — SAMPLE ONLY, colour change on the LIVE figure, no Nữ đế)
+Method: Magnific gpt-2-6 EDIT of the live img/hd/fig-consort-c03-tN-a18.webp, references = [live figure only], aspect 9:16 (9:21 not supported; snapped), transparentBackground, 2k; prompt "Edit image 1. Recolour ONLY the robe fabric to <colour>; keep everything else exactly identical …". Pose/turn, cut, embroidery layout, headdress, face, held item come from the live figure (checked live_vs_new). Forehead/smile untouched.
+| rank | colour | bbox w/h live → new | gens |
+|---|---|---|---|
+| t1 | pale apricot | 0.377 → 0.380 (+0.7 %) | 2 (3rd taken) PASS |
+| t2 | powder blue | 0.314 → 0.321 (+2.0 %) | 3, best kept — 0.5 % over ±1.5 % |
+| t3 | soft sage | 0.381 → 0.383 (+0.7 %) | 1 PASS |
+| t4 | dusty pink | 0.371 → 0.375 (+1.1 %) | 2 PASS |
+| t5 | soft lavender-grey | 0.393 → 0.395 (+0.5 %) | 1 PASS |
+| t6 | muted coral | 0.379 → 0.395 (+4.1 %) | 3, best kept — FAIL ±1.5 % (3 gens used) |
+| t7 | muted teal + pale imperial yellow inner/borders | 0.419 → 0.422 (+0.8 %) | 2 PASS |
+| t8 | soft golden yellow + dusty rose + jade | 0.380 → 0.392 (+3.1 %) | 3, best kept — FAIL ±1.5 % (3 gens used) |
+Note: the model systematically widens the alpha bbox by ~1–4 % (sleeve/skirt spread); by eye pose and silhouette match the live figure. t6/t8 not closer after 3 gens (stopped at the order's max 3). Canvas is 1520x2688 (not 0.44) — figures are not stretched. Row: uniform scale, skull top on the upper red line (c03_a18_row8.jpg).
+Credits: 8 + 6 + 4 = 18 gens × 135 = 2430 cr. Gen ids: t1 v1 SymCD9AUb8 v2 gOtfpJfSXO v3 79aQo0SJAL(kept); t2 v1 eIy6LaJdqL v2 9ZFKhAANYZ(kept) v3 N2HkaoX6D9; t3 rgdIYy8xtc; t4 v1 TdUykv9VNR v2 Cqz06KhEEy(kept); t5 jUBmciFLD0; t6 v1 WDl7bffcXe(kept) v2 LwohVPEswO v3 s78vDchl8e; t7 v1 yiEqoDYPW9 v2 rgdIcyBxtc(kept); t8 v1 6Aq1h8EiJO v2 kspoYyM16B v3 bxVdz2V5Y2(kept).
+Files (https://ctm-img.victoria-tntt.workers.dev/img/_review/consort-tiers/c03/b8/): c03_a18_t1..t8.png, c03_a18_row8.jpg, c03_a18_live_vs_new.jpg. Nothing live.
+~100% xong c03 B8 / ~0% chơi được.
