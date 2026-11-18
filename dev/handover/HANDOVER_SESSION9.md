@@ -1056,3 +1056,30 @@ LESSONS s41: verify any worker art/asset count on the CDN before telling her (52
 - (18/11 02:17Z) OWNER: mud APPROVED (7270a76) → SMALL reviewer; tea continues on review/cloth-tea (new branch from 7270a76).
 - (18/11 02:20Z) smudge r16 SẴN SÀNG KIỂM 50939b0 (review/smudge-code-r16) → SMALL reviewer. stage4 4 shots LOOKED (faces 3×: stage step = stronger blush/lip) → sent owner. Avatar recheck: top bar / tabs / side cards / pcPort = painted por-*.webp, NO makeup layer (KIT_LASTING only 'scar', jk2b.js:386-412) → told owner, asked which frame if she still sees change.
 - (18/11 02:22Z) life-preload SẴN SÀNG KIỂM 4ff10ae (root: 28k pics lazy; gate + §59.1 + kit icons to core +5 MB) → opus reviewer. look-fx SAMPLES (10 preview panels, game draws none: face/hair wiring missing) → LOOK + owner.
+- (18/11 02:20Z) look-fx samples LOOKED: ink = moustache across the mouth (FAIL) → worker SzhzDHZ re-shoots all 10 (ink on one cheek, đậu mùa = W15 look, tóc xổ thicker, móc chỉ visible); main draws NONE of these today (face/hair wiring missing = NEEDS CODE after her verdict).
+- (18/11 02:20Z) book-figsize cf415829: sizes equal (spread 53 % → 0 %) but silhouette CROPPED at left edge → sent back (zero crop, real owner pages).
+
+## S42 → S43 HANDOVER (18/11 02:21Z real; s42 context 37 % (measured get_session 366k/1M) > START 6 % + 25 % → rollover; depth 5 → s43 = depth 6: s43 opens WORKERS only, NO child foreman/main; at its own rollover s43 writes the handover + a FOR MAIN line so the OWNER opens a ROOT main from claude.ai)
+LIVE: main f986ff6a (s42 landed hoa-dien r3c). ROLLBACK chain … → 62a6846f → f986ff6a.
+OWNER RULINGS s42 (OD tail from "(18/11 ~08:55Z owner clock" to the end — read VERBATIM): option cards too tall + mixed forms in one dialog (KIT FIRST breach) → opt-card-short; wet FINAL; every look panel = FULL BODY; mud APPROVED (shifted one level up); book figures one size; '30 mini game link' = THỬ TAY ?hieuchuan=1 (C-AG ag-all-2-land; preview on a separate origin being built); result cards need short WHY per line; tea redo + all other look marks need samples.
+LESSONS s42: grep the owner's own words (thử tay / hiệu chuẩn) before saying 'no record' — she was angry; never send skirt crops; LOOK every worker sample before her (ink moustache, book crop caught).
+RUNNING (all report to MAIN; tell them s43):
+- place-banner session_01UV1SzmHEoDtWWruq6yMGnZ (sonnet) — options A/B/C (count icon missing at Ngự hoa viên, chip on chip, banner over head) → LOOK → owner numbered options.
+- opt-card-short session_01UV1Szk6j15PHjAL8gMSR9z (sonnet) — options A/B/C + ONE card form per dialog, title full width → LOOK → owner (s42 leaned B).
+- book-figsize session_01UV1Szgp1qDfnHSk36y8CPg (sonnet) — fix crop, real pages → SẴN SÀNG KIỂM → SMALL review.
+- result-reason session_01UV1SzirzUecQTMVipMrcQ1 (sonnet) — short reason per result line, whole group → SMALL review.
+- look-fx session_01UV1SzhzDHZiWyYW2YZdA9A (sonnet) — re-shoot 10 samples → LOOK → owner; then wiring build.
+- cloth-xoc r6 session_01UV1SzjMK4RUBPdS1ZMuLds (opus) — TEA on new branch review/cloth-tea (full-tra-c01/c30) → LOOK → owner.
+- REVIEW cloth-xoc 7270a76 session_01UV1SziKea8TZQipjPGajgv (sonnet) → PASS → land (wipe img/_review/cloth-xoc after tea verdict too).
+- REVIEW smudge r16 50939b0 session_01UV1SzitaUhhFRRJBAbEgHM (sonnet) → PASS → land.
+- REVIEW life-preload 4ff10ae session_01UV1SzjKPEGVua6n1rUEV2S (opus, URGENT) → PASS → land FIRST.
+- REVIEW men-forbidden 13286b4 session_01UV1Szh3jq9brqAHDsVQitM (opus BIG) → PASS → land; worker SziLuyr idle until verdict.
+- REVIEW greet-stranger 54431a1 session_01UV1SzhBWuWNyXoAhfWtFxm (sonnet; trial-merge with men-forbidden) → PASS → land.
+- staff-cap-apply session_01UV1SzkNqcjf9atNLxPVz8y (opus) — 303af62 final table OK; adding fid lifetime-leak fix + merge f986ff6a → then open ONE BIG reviewer (brief to write: OD 02:50Z table, roomFor FIGIX, leak test).
+- smudge r16 worker session_01UV1SzhMG33iYZzEKjZvDzg (sonnet, ~35 %) — done; archive after PASS lands.
+- greet-stranger worker session_01UV1SzknEXr3P2cemBDGhow, men-forbidden worker session_01UV1SziLuyrJEqfUqguNP1W, life-preload worker session_01UV1SzgmQZwF1XMsH7EzhLL — idle for reviewer fixes; archive after land.
+- builder s37a session_01UV1SzjA6P5mZskv3JKn3BV — idle (archive if nothing to batch).
+- C-AG #8 session_01UV1SzgXTgLe5k9TFs9zfGm — ag-all-2-land PASS ETA 04:00–04:30Z; CAL PREVIEW worker session_01UV1SzgwDRVVjeacdPPtR47 sends the Thử tay preview URL (separate origin) to MAIN → send owner at once; her CTM-CAL code → C-AG (mgcal_apply.py).
+OWNER PENDING: 4 stage makeup shots (sent Lượt 24, her pick of mirror vs stage strength) + avatar answer (portraits are painted por-*.webp, no makeup layer — asked which frame if she sees change); mud uneven-tide thought (not an order).
+Wake: trig_01XziXcTa6TV3ACMFhLctFAr 02:34Z fires into s42 → s42 relays; s43 sets its own hourly wake at :32.
+- (18/11 02:21Z) s42 FINAL: successor MAIN s43 = (see next line).
