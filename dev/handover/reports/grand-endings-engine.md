@@ -62,3 +62,26 @@ Next steps, in order:
 4. `bash dev/site/build_site.sh`, commit index.html + sw.js, then `bash dev/tools/quickcheck.sh` with nothing else running.
 5. Update CLAIMS row, write «SẴN SÀNG KIỂM grand-endings-engine <sha>» to Foreman E.
 Known notes: text with her as speaker is shown in first person by the game's naming rule (j84 "ngươi"→"ta"); Emperor addresses her «ái phi», other women «nàng ta» (VANPHONG). NPC grand endings off (BAL.ge.npc.on=false; build step 5). D2 Bắc Địch out of scope: a bd life on an nc road is not live.
+
+## E1b — review E1r FAIL fixes (18/11 11:40Z) · tip **f48857e** (pushed) · HANDOVER below
+LINEAGE: E1b depth 2 → successor E1c depth 3.
+PRIORITY #1 CHECK: review reports/grand-endings-engine-review.md (handover 3d3e71b7) read; scans reused (grep old labels, guard name check); no new tool.
+| # | status | what |
+|---|---|---|
+| 5 | DONE 84b7122 | merged origin/main 55db864a; assemble.py = main's list + jbalge after jbal2, jgecat/jgedata/jge after jdh2; KIT_REQUESTS both blocks; index.html/sw.js taken from main (REBUILD at the end) |
+| 1 | DONE f48857e | jst14.js:197 findIndex matches «Kết quả» or «Kết cục». Scan `grep '\[0\]==="Kết'` + `"Kết cục"` in code: only lookup was jst14:197 (others are display labels) |
+| 2 | DONE f48857e | «kết cục xuất thân xấu đi» → «Khép nẻo đời» xấu đi (j67:1766, j67:1783, jtabs:14) + comments j67:1784, jtabs:73, jroad:11/139; `grep -i "kết cục xuất thân" dev/build/j*.js` = 0 |
+| 3 | DONE f48857e | ge1 + ge2 options: risk "có rủi ro" + hint (ge1 «nẻo này dẫn tới đâu, thành hay hỏng, đến câu cuối mới rõ», ge2 «thành bại khó đoán; hỏng thì có thể mất danh tiếng, phẩm vị»). Other jge options: «Tạ ơn» / «Xem bảng vàng» / «Đóng» = truly safe, left |
+| nit a | DONE | jge.js:62 reads Object.keys(BAL.ge.funnel) |
+| 4 | **PARTLY** | measure now prints `IN/OUT shade <road>` per road (ge-measure.js:67). +6 ác tags on cnv_mat (lean.m: «Lặng lẽ tìm {v} xin chỗ dựa», «Lên kiệu, không ngoái lại», «Gọi thị vệ đến», «Gọi thái giám cung mình giữ nàng ta lại», «Xin khám luôn phòng người khác», «Cho {mis} biết {v} cũng định kéo nàng vào»). Verify m5 (cnv_mat kind+cruel, 8 lives): **cruel→ác still .50 OUT** (kind .75, inChar .25, open11 2). |
+
+**Why fix 4 is not closed (root cause):** cruel lives aiming at cnv_mat_1/_2 reach lt −8 → ác ✓. Cruel lives aiming at **cnv_mat_3 «Gác ô ra đi» (P3) and cnv_mat_4 «Tỷ muội cùng hầu» (P4)** stay at lt −2 (lean −1.5..−2.7 → natural T): the bot follows the ending's Chuỗi (pull +3 > lean +2), and EVERY P3/P4 Chuỗi option is gentle («Gửi lại cành mai, không đến», «Cảm ơn mà từ chối», «Cáo ốm ở lại», «Xin rút thẻ một kỳ», «Gửi lại ô, kèm một lời», «Thôi ngóng…», «Quỳ tạ, rồi tạ {mis}», «Thưa: là tỷ muội», «Từ chối, báo {mis}», «Ra chào {mis} trước khi đi», «Xin ngồi sau {mis}», «Đến xin {mis} nói giúp»…). So their ác titles «Bẻ ô ra đi» / «Mượn chị lên cao» are nearly unreachable — an evil road that isn't first-class (owner L1612). The new tags lie in beats off those paths.
+**Needed (writers' data, jgedata.js cnv_mat only, names must stay REAL options):** put harsh options ON the P3/P4 Chuỗi: e.g. add pull P4 to «Cho {mis} biết {v} cũng định kéo nàng vào» (10.c2) and «Gặp {v} hỏi chuyện cung {mis}» (5.s2) (= «Mượn chị lên cao»: using the sister); for P3 a cold leave-taking option with an ác tag (candidates: «Lên kiệu, không ngoái lại» 8.s1 doesn't fit FREE — needs a writer or Foreman E to pick; maybe an «@arc» push). List of all cnv_mat options with tags: scratch script /tmp/claude-0/…/scratchpad/opts.js (prints id.beat: option[+/−/P#K#]); rerun with `node opts.js`.
+
+## HANDOVER (E1b → E1c)
+Worktrees: code `/home/user/wt/ge` (local branch e1b-ge → push `HEAD:review/grand-endings-engine`), handover `/home/user/wt/ho` (local ho-e1b; `git reset --hard FETCH_HEAD` after fetch, then edit — remote is the truth), scratch `/home/user/wt/e1bs` (m3/m4/m5 logs). Shots local `/home/user/wt/e1b-shots`.
+Steps:
+1. Fix 4 data as above (ask Foreman E if the P3 option choice is a writer's call). Rebuild `python3 dev/build/assemble.py`; `node dev/test/ge-guard.js` (6/6), `node dev/test/ge-engine.js` (104/104).
+2. Verify: `MODES=kind,cruel node dev/measure/ge-measure.js - 4 2 /home/user/wt/e1bs/m6.json cnv_mat sens` (8 lives ≈ 10 min) → need `IN shade cnv_mat`. Then one full measure all 3 roads (`- 1 2 out.json`, ~24 lives, alone) for the table.
+3. `bash dev/site/build_site.sh` → commit assets.json + index.html + sw.js → `bash dev/tools/quickcheck.sh` ALONE (nothing else running; perf is reviewer-cleared, re-measured against main).
+4. Report table here + CLAIMS row (E1b row says READY 2ae4715 → replace) + FOREMAN_E_STATUS line, then «SẴN SÀNG KIỂM grand-endings-engine <sha>» to Foreman E session_01DgYSWmvDYnmfLCrNGtw5Uu.
