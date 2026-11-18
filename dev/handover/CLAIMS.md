@@ -80,3 +80,4 @@ style-ref test A/B/C c06 t1–t3 | CDN _review only | W79 session_011xDdVSouZw85
 | FOREMAN E ROOT #6 (opus; successor of #5; depth 5, START_CTX ~4 %) | handover FOREMAN_E_STATUS | E | session_01DgYSWn4eJjW3cuV1M7wtaa | RUNNING | 18/11 19:00Z |
 | E13 questline-q2 | review/questline-q2 | session_01DgYSWn8UViuUxqiymRM9sf | RUNNING | 2026-11-18T18:59Z | START_CTX ~5 % |
 | map-labels-r2 (sonnet OWNER BUG round 2: reviewer FAIL NE corner + grey rule 19:05Z/19:10Z/19:15Z) | review/map-labels-missing | MAIN ROOT-53 | session_01Rc5AsN8Rec5Ewr4xGzqVCe | RUNNING | 18/11 19:08Z |
+| map-zones (opus: Dư đồ zones + zoom/fog + 2nd level HH/TH + live servants; owner 19:25Z) | review/map-zones | MAIN ROOT-53 | (opening) | RUNNING | 18/11 19:27Z |
