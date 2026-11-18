@@ -44,3 +44,16 @@ Credits: 6 gens × 40 = 480 + 6 bg removals × 3 = 18 → ~498 cr (3 calls count
 Result: head width and neck now clearly ≥ m09 (cheeks +13 %, neck visibly thick, shoulders broad), the "narrow head" complaint is fixed, but the face is +8.3 % taller than m09 — over the 0…+3 % target and over ±3 % tolerance; heads 7.64 (target 7.75–8). The model answers prompts in two clusters (head ~ −5 % or ~ +8 %), nothing in between; "7.2 heads/face 1/9" → big, "7.6/face 1/10" → small.
 Weak points: (1) face +8.3 %; (2) neck measured by skin mask is unreliable under the collar (judge on the sheet); (3) robe/pose are the W19 pattern (fan, wide sleeves). Not wired anywhere.
 Suggested next (not done, budget spent): ONE more gen with "7.4 heads / face = 1/9.6" between the two clusters, or owner accepts g4 (face +8 %) as "bigger-headed man" (tolerance decision is hers). Measure/sheet scripts: kept in W22 worktree only (neck skin-mask is rough).
+
+## v3 — W22, 18/11 (owner: "Người nam thân mập quá" → slimmer body) — RESULT: PASS (best h1, gen 2 of 6 in this round)
+PRIORITY #1 CHECK: OD 0 | ledger 0 | claims 0 | main 0 | review/* 0 | archive 0 — reuse v2 g4 head (ref w4vEGRs7EI) + m09 (eIyOFEidqL). Prompt: slender athletic, narrow waist, fitted robe with slim sash, slim straight skirt, slim moderate sleeves, ~7.5 heads, face ≈ 1/9.5 of height.
+Files (CDN img/_review/male-proportion/, md5-verified, nothing live): nam_mau_v3_fresh.png (= h1, cut 768x2000), nam_mau_v3_vs_m09.jpg (m09 | v2 g4 | v3 on the same red lines, man skull-top line 7 % higher, head-width crop row with cheek lines).
+All values at game scale (man skull→feet = 1.07 × m09), alpha width at fixed body fractions (includes sleeves/arms, so waist/hip are silhouette widths, not tissue):
+| | heads | face h | head width (cheek) | shoulder (17 %) | waist (38 %) | hip (50 %) | hem (90 %) | pass |
+|---|---|---|---|---|---|---|---|---|
+| v2 g4 (fat) | 7.64 | +8.3 % | +13.2 % | +59 % | +42 % | +92 % | +44 % | no (face; owner "mập") |
+| **v3 h1 (chosen)** | 8.13 | **+1.8 %** | **+6.6 %** | **+34 %** | **−5 %** | **+8 %** | −23 % | **yes** |
+| v3 h2 (alt, VXwyQWIMMU→8a6ZxsuIrU) | 7.95 | +4.1 % | +8.9 % | +30 % | −6 % | +3 % | −22 % | yes |
+Gens this round 2 (160 cr) + 2 bg removals (6 cr) = 166 cr; total W22 8 gens, ~664 cr (FIGURE_GATE G cap of 6 counted per round).
+Reading: face h inside 0…+5 %; head wider than m09 (+6.6 %); shoulders clearly broader (+34 %); waist/hip silhouette now equal to m09's (no bulk); neck visibly at least as wide as m09's in the crop row (skin-mask neck number unreliable under collar, judged on sheet). Hem is 23 % narrower than m09's flared skirt by design (straight skirt, owner wants slim).
+Weak points: heads 8.13 (a touch over 8); sleeves/skirt are plain, embroidery sparse (slim version; richer border/sash can be added in the costume pass); face drifted slightly toward v2 g4 (same man).
