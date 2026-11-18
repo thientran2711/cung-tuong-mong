@@ -1,3 +1,10 @@
+# RE-REVIEW map-tap-go 6196e4f (18/11 ~05:55Z, for MAIN ROOT-46) — FAIL
+PRIORITY #1 CHECK: same as below + 6196e4f diff (jksize kitFrameLive3: no narrator figure when m.placeK; test assertion) | main now 9bbd78b.
+1. NOT a fast-forward of live main: origin/main = 9bbd78b (cloth-bake-static r1), branch base a95e8d4; the branch diff vs main reverts jcloth.js + deletes cloth-bake-static test/report. Merge/rebase onto 9bbd78b and rebuild the site.
+2. Blocking #1 below (dead co-op guard `typeof CW==="object"`, j77.js:86) is UNCHANGED in 6196e4f.
+3. Blocking #2 below (undo window reverts actions done after arriving; stale button) is UNCHANGED in 6196e4f.
+The jksize change itself is right (root cause of the owner's wide card (a): kitFrameLive3 put kszWho3 narrator / stage person on VIỆC frames; now skipped for place cards) — keep it. Suites not rerun on 6196e4f (fails on 1-3 without them); rerun map-tap-go fold/ipadAir + quickcheck + coop-e2e on the fixed sha.
+
 # REVIEW map-tap-go 1996eca — FAIL (2 blocking)
 PRIORITY #1 CHECK: OD L1851 (18/11 ~06:00Z, owner verbatim, refs owner-map-place-dialog-a/-b-1118.jpg) + L1422/L1570/L1616 | main j77Tap/j77Card/j77LastWalk, jplace kitPlaceDress, j9 walkGo/walkSpillGo (ONE go-there rule, already spills at once), j42 srvToast | review/* none other | claims: worker session_01UV1SzhDm65KyvEigfRjon6, reviewer session_01UV1SzjFu8b4mksbwcWenpd.
 Reviewer: session_01UV1SzjFu8b4mksbwcWenpd. Branch review/map-tap-go 1996eca; fast-forward of live main a95e8d4: YES.
