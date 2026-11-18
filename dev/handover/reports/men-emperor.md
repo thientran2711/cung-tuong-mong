@@ -71,3 +71,9 @@ Weak points: a26 is very close to a18 (only slightly firmer); a36 beard is light
 | emp4 a26 / a36 / a51 | 1 / 1 / 1 | 414 | pale-saffron + jade trim, dragon-head crown with red jade pin, fan kept; a26 light stubble; a36 moustache + light beard; a51 black + antique gold with dark jade trim, grey temples, both hands in front holding the (half-open) fan. Files emp4_a26/a36/a51.png + emp4_ages.jpg (CDN, md5 OK). Weak: a26 close to a18; a51 fan is half-open, not fully closed. |
 
 M1 W37 TOTAL (emperor group done): 12 gens × 135 + 12 cuts × 3 = 1656 cr; 1 gen per figure (cap 3); all 12 looked at, none regenerated. Nothing live. LIST DONE.
+
+## M1 round 2 (W37, 18/11) — owner: a26/a36/a51 proportion OK, a18 redone to a26 proportion; emp3 rejected (proportion), redone
+- emp1/emp2/emp4 a18 REDRAWN: refs = that man's a26 cut (head size, head-to-body, silhouette) + old a18 (younger face). 1 gen each; looked at; sheets rebuilt (empN_ages.jpg).
+- emp3 a18/a26/a36/a51 ALL redone: refs = emp1 a26 cut (body/head scale) + emp3's own a26 (face, robe, miện); a26 first (1 gen), then a18/a36/a51 from the new a26 (+ emp1 a26, a18 also old emp3 a18 for the younger face). 4 gens. Slimmer body, rounded shoulder pieces, hands together kept; painterly.
+- Check sheet img/_review/men/emperor/emp3_check.jpg: emp1 a26 | emp3 a18 | a26 | a36 | a51, scaled to the same total bbox height. Caveat: emp3's tall miện counts in the height, so emp3 is scaled ~6-8 % smaller than emp1 on that sheet; by eye head and body match.
+- Credits: 7 gens × 135 + 7 cuts × 3 = 966 cr (round total with round 1: 2622 cr). Nothing live. Old emp3_a26/a36/a51 on CDN overwritten by the new ones.
