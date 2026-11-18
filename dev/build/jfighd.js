@@ -8,10 +8,19 @@
    and keeps the light file otherwise (performance budget). src stays the 900 file (all code that compares / keys on src is unchanged).
    A src change by any code drops a stale srcset at once (MutationObserver). Test hook: window.KFHD {n, list}. ================= */
 (function(){
- const K=window.KFHD={map:null,n:0,ld:0,bad:{}};const RE=/\/img\/(fig-[^\/?#]+\.webp)(?:[?#].*)?$/;
+ const K=window.KFHD={map:null,n:0,ld:0,bad:{},pre:{},wait:{}};const RE=/\/img\/(fig-[^\/?#]+\.webp)(?:[?#].*)?$/;
  function hdUrl(lo){return lo.replace(/\/img\/(fig-[^\/?#]+\.webp)/,"/img/hd/$1")}
  function fit(im){try{const s=im.getAttribute("src")||"";const m=RE.exec(im.src||s);const ent=m&&K.map&&!K.bad[m[1]]&&K.map[m[1]];
    if(!ent){if(im.dataset.kfhd){im.removeAttribute("srcset");im.removeAttribute("sizes");delete im.dataset.kfhd}return}
+   /* review life-preload-fu r2v: a figure that already PAINTS its 900 file and will be drawn above it gets the HD twin only once that twin is in
+      (preloaded here): giving srcset at once made the browser drop the painted picture and paint the HD file line by line (slow line: a half-drawn
+      person / an empty slot for ~10 s on every stage, dialog and card). Same twin, same request mode, so the swap is instant from the cache. */
+   if(im.complete&&im.naturalWidth&&!im.getAttribute("srcset")){const w0=im.getBoundingClientRect().width;const u=hdUrl(im.src);
+    if(w0>4&&w0*(window.devicePixelRatio||1)>ent[0]&&K.pre[u]!==1){const W=K.wait[u]||(K.wait[u]=new Set());W.add(im);
+     if(!K.pre[u]){K.pre[u]=2;const h=new Image();if(im.crossOrigin)h.crossOrigin=im.crossOrigin;
+      h.onload=()=>{K.pre[u]=1;const L=K.wait[u];delete K.wait[u];if(L)L.forEach(x=>{if(x.isConnected)fit(x)})};
+      h.onerror=()=>{K.bad[m[1]]=1;delete K.wait[u];delete K.pre[u]};h.src=u}
+     return}}
    const ss=`${im.src} ${ent[0]}w, ${hdUrl(im.src)} ${ent[1]}w`;if(im.getAttribute("srcset")!==ss){im.setAttribute("srcset",ss);im.dataset.kfhd=m[1];K.n++}
    const w=Math.round(im.getBoundingClientRect().width);const sz=(w>4?w:ent[0])+"px";if(im.getAttribute("sizes")!==sz)im.setAttribute("sizes",sz)}catch(e){}}
  function all(){if(!K.map)return;document.querySelectorAll("img").forEach(im=>{if(im.dataset.kfhd||RE.test(im.src||""))fit(im)})}

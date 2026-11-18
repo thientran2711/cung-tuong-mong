@@ -130,8 +130,12 @@ function kitPhWaitMark(im){try{if(!im||im.tagName!=="IMG"||im.hasAttribute("data
 window.kitPhWaitMark=kitPhWaitMark;
 document.addEventListener("load",e=>{if(e.target&&e.target.tagName==="IMG")kitPhWaitClear(e.target)},true);
 document.addEventListener("error",e=>{if(e.target&&e.target.tagName==="IMG")kitPhWaitClear(e.target)},true);
+/* review life-preload-fu r2v: kitFigHD (jfighd) gives a figure srcset/sizes; the browser may then drop the picture it was loading/showing and fetch the
+   HD twin (currentSrc empty, naturalWidth 0) — on a slow line the slot stood EMPTY with no §59.1 mark (Fold 1.5 Mbps, 6 of 9 runs, ~10 s). A srcset/sizes
+   change re-checks the slot (next frame + 300 ms, when the new request has started): nothing drawn → the §59.1 mark; an older picture still drawn → no mark. */
+function kitPhSetChk(im){const c=()=>{try{if(im.isConnected&&!im.hasAttribute("data-kwait")&&!im.complete&&!im.naturalWidth)kitPhWaitMark(im)}catch(e){}};requestAnimationFrame(c);setTimeout(c,300)}
 (function(){const one=n=>{if(n.nodeType!==1)return;if(n.tagName==="IMG")kitPhWaitMark(n);else if(n.firstElementChild)n.querySelectorAll("img").forEach(kitPhWaitMark)};
- try{new MutationObserver(ms=>{for(const m of ms){if(m.type==="attributes")kitPhWaitMark(m.target);else m.addedNodes.forEach(one)}}).observe(document.documentElement,{childList:true,subtree:true,attributes:true,attributeFilter:["src"]});
+ try{new MutationObserver(ms=>{for(const m of ms){if(m.type==="attributes"){if(m.attributeName==="src")kitPhWaitMark(m.target);else if(m.target.tagName==="IMG")kitPhSetChk(m.target)}else m.addedNodes.forEach(one)}}).observe(document.documentElement,{childList:true,subtree:true,attributes:true,attributeFilter:["src","srcset","sizes"]});
   document.querySelectorAll("img").forEach(kitPhWaitMark)}catch(e){}})();
 try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§59.1",title:"Tranh đang về (đang thỉnh): nền giấy dịu thở nhẹ + dòng chữ ở ô từ 72 px; ô nhỏ chỉ có nền",html:()=>{
  const box=(w,h,mv)=>`<div style="position:relative;width:${w}px;height:${h}px;border-radius:6px;overflow:hidden;border:1px solid var(--line)"${h>=72?` data-kwaitp="${KPHW_TXT()}"`:""}><img data-kph-sample data-kwait="${mv}" alt="" style="width:100%;height:100%;display:block"></div>`;
