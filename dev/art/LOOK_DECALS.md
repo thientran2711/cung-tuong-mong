@@ -1,7 +1,6 @@
 # LOOK DECALS — painted by MAIN s38 art worker (owner exception ~00:05Z; was Foreman C) for the looks filters (MAIN s38, 17/11 23:55Z)
-Owner rules (read verbatim in dev/OWNER_DECISIONS.md): 23:45Z (Magnific paints small TRANSPARENT decals; CODE places them on ANY figure/outfit as a filter, like the makeup layer; never repaint whole figures), 23:30Z (makeup smudge = code), 23:20Z (creased/sloppy outfit = code), ~00:00Z (review this list for C).
+Art rules live ONLY in dev/art/FIGURE_GATE.md (owner 18/11 ~22:45Z).
 Source of the effect list: BAL.looks.cat (jlooks.js, live) = 15 items + pox — reports/looks-2.md §5–6.
-Decal spec (owner ~00:05Z): Magnific gpt-2-6, the mark painted OPAQUE in normal colour, then background removed → webp with a TRANSPARENT BACKGROUND, ~768 px long side, the mark alone (no person, no robe); code sets opacity/blend on the outfit; 2–3 shape variants each; LEVELS (nhẹ/vừa/nặng) are made by code (count, size, opacity), NOT separate paintings. Keys below = CDN img/<key>.webp.
 
 ## A. C PAINTS (decals)
 | Effect (player word) | Where | Keys | Causes |
@@ -34,4 +33,3 @@ Decal spec (owner ~00:05Z): Magnific gpt-2-6, the mark painted OPAQUE in normal 
 | Khuynh thành lấp lánh | glow + twinkle filter (worker tuyet-glow) |
 
 ## Not needed
-Emotion faces (owner dropped 17:40Z). Whole-figure repaints with any effect (owner 23:45Z).

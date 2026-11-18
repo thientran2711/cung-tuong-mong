@@ -103,3 +103,40 @@ FG t6 — 22:12Z small yellow, 23:25Z proposal — T6 FINAL 23:30Z.
 FG style B — 21:50Z "style ref B" — REFERENCES 22:35Z.
 FG emperor — 21:50Z e2–e4 redo, 22:35Z e2–e4 rewrite — 22:02Z redraw rule, 23:15Z.
 FG a51/a65 — 19:55Z t7/t8 exception, 22:30Z a65 colours, 22:45Z AGE COLOURS, "two levels" colour segment of the 15:55Z line — 22:50Z trầm, 21:06Z ELDER COLOURS.
+## R1c (worker R1c, 18/11) — events, effects, scenes, animations, frames, items, pets, other
+PRIORITY #1 CHECK: OD 0 | ledger 0 | claims 0 | main 0 | review/* 0 | archive 0. Moved verbatim (script copy, tags kept) into FIGURE_GATE "## I. OTHER ART" (sub-headings I.1–I.9; 227 lines; FIGURE_GATE 100 KB → 163 KB). Sections A0–H untouched. Dedupe: none of my [OD:Lnn] tags were already in FIGURE_GATE; ITEM_ART:L3 + EVENT_ART:L10 existed twice (topic file + dev/art file) → moved once.
+Old files now = title + pointer "Art rules live ONLY in dev/art/FIGURE_GATE.md (owner 18/11 ~22:45Z)." (+ leftover NON-ART lines, see FOR MAIN; EVENT_ART/ITEM_ART/LOOK_DECALS/MOVE_HOUSE keep their data tables/process steps; their rule lines moved).
+
+### TABLE (file = rules/topic/<file>; Ln = line in that file before the edit; [OD:Lnn] = its tag)
+| topic | kept (moved to FIGURE_GATE I.x) | removed (file:line) | reason |
+|---|---|---|---|
+| event/act picture light-dark | I.1: events-effects L33, L34 (17/11 owner verbatim), L37 (L638) | events-effects L32 (L545), L35 (exact duplicate of L33's first part) | 17/11 line states it "restates L545"; L35 = same text twice |
+| event frame layout | I.1: L10 (L448 kitEventDp, 13:15Z = newest) | events-effects L50 (L114), L55 (L194); art-other L26 (L236) | all replaced by L448 (left figure / right picture) |
+| Tiên đế băng hà art | I.1: L53 (L125 st-* style) | events-effects L51 (L117), L52 (L124), L54 (L131 approved-status) | chain L117→L124→L125 style rule; approval = status |
+| Thỉnh an pictures | I.1: L59 (L280 differ), L64 (L417 pose), L65 (L427 approved ref) | events-effects L57 (L237 old redraw spec), L107 (L838) | superseded by L417/L427; L838 covered by L383 anatomy audit |
+| default/fallback pictures | I.1: L16 (L967 no generic default), L75–77 (L548–550 placeholders, see Q2) | events-effects L66 (L428), L67 (L444), L68, L70, L109, L113, L117, L121, L123, L127, L84 | instance bug reports / audit-count status / worker notes covered by L967 + L987; L1144 covered by L1154 |
+| face marks | I.1: L41 (L1154 one rule) | events-effects L127 (L1144) | replaced by L1154 |
+| podium/results | I.1: L46 (OD:L15) ; I.6: art-other L76 (L378) | events-effects HANDOVER:L94 left (non-art, gameplay) | |
+| scenes / backdrops | I.2: scenes L12,13,15,16,23,28,31–35,37,39–42,44–51,53,56,59,61–63,66,68,70,74,82–86 | scenes L10 (L64 phone-stage plan, replaced by L77 "portrait room set cancelled"), L43 (L142 status), L52 (L268 → covered by L300/L1257), L55 (L300) + L58 (L328) (code colour-grade, replaced by L1176 "remove CSS buổi tint"), L64 (L505 bug status), L76 (L998), L81 (L1174 approved-status), L25 (ITEM_ART dup) | newer line same topic |
+| animations/effects | I.3: animations L10,12,14,15,19,21,23–33,35,37,39,41–45,47,49,52,53,55,57,59,61,63,65,66,68,70–72; events-effects L56,62,83,86–98,100–103; scenes L72; other L21,28,48; items-pets L34 | animations L51 (heading dup) | |
+| frames / portrait kit | I.4: frames-kit L10,11,16,18–23,25–27,29,31–39,41,43,45,47; scenes L29 | frames-kit L13 (worker task), L24 (L79 approved-status), L28 (L232, replaced by L251) | |
+| items / pets | I.5: items-pets L10,12–15,17,18,20,23–26,28,29,31–33,40,42–44,46,48,49; ITEM_ART.md:L3,L11 | items-pets L27 (L400, replaced by L413 "only the cat"), L30 (L403 "NO glow", replaced by L407 aura painted in), L38 (L683 ok-status), L41 (L577 status) | |
+| emotion/head marks/other | I.6: other L12,32,64,66–69,72,75–80,84; items-pets L22 | other L10 (L1000 replaced by L1009 owner override), L34 (L539 calendar icon → replaced by L1186 icon column), L70+L71 (L145, L151 → approved set L156), L74 (L366 emblem glow, replaced by L390/L1079), headings L36/38/40 | |
+| decals / event art / style | I.7: LOOK_DECALS.md L2,L4,L37; I.8: EVENT_ART.md L3,L10,L86–88; I.9: MOVE_HOUSE.md L2,L7–L14 | — | rule lines only; tables/steps stay in the files |
+
+### QUESTIONS (kept, not deleted)
+1. Pictures per MEANING GROUP shared (L987/L986, newest) vs "every act/meaning its own picture" (L341, L279, L468) vs "act buttons in person card: group pictures BANNED, leave empty" (L470). Which wins for Hành sự / person-card acts?
+2. Placeholder pictures event-light/dark, act-light/dark (L548–550, "owner sees it and reports") vs "no generic default picture anywhere, paint a fitting one" (L967). Still want the 4 placeholders?
+3. Page turn: L1349 (turn effect only on Tuần lục book) vs L961 (portrait phone: no page turn, other animation) vs older curl specs (L116/L132/L179/L186/L204/L208/L276/L924): curl specs kept for the book; confirm L961 is dead.
+4. Head mark above her: L1079 (bob more visibly + glow, newest) vs L390 ("only gentle bob, NO glow", 8 tiers, mixed line) — L390 kept whole; confirm glow wins.
+5. L375 / L380 / L410 Đáp ứng frame chain (plum-branch frame, paler gold, then "APPROVED A old frame + ivory") and L80 vs L81 (check badge vs "NO check badge"): all kept; which parts are dead?
+6. L1270 ("Dư đồ always from Phượng Lệnh, never painted") vs L1415 (16/11 18:40Z: missing season/buổi → paint it) vs L159/L329: kept all; is the PL-only rule narrowed to "paint only what is missing"?
+7. L139 (art-other L68) asks for a seasons redraw of place backdrops — rejected by L144 (kept as is). Mixed line, kept whole; delete the redraw half?
+8. L395 (pet stages Non→Trưởng thành→Linh thú) vs L398 (4 stages) — mixed line kept whole.
+9. MOVE_HOUSE:L12 (4 consort portraits in m09 style pending) vs R1 Q3 — same question, moved as is.
+
+### FOR MAIN — NON-ART lines left in the old topic files (not art; each file now = pointer + these)
+art-events-effects: L20–21 (new-game identity screen UI), L24 (Tự học wording), L26 (night notes), L43–44 (HANDOVER L91/L94 wardrobe, contests), L115 (week-book person page), L118 (contest intro layout). art-scenes: L17, L19, L21+L78 (stage slots), L27, L36, L38, L80. art-animations: L17 (minigames). art-other: L14,16,18,20,22–25,27,30,31,42,44,46,50,52,54,56,58,60–62,82 (UI, gameplay, balance, lifespan, wardrobe). art-frames-kit: L15 (KIT FIRST law). art-items-pets: L36 (handmade recipes, gameplay). Please re-home or confirm.
+
+### HANDOVER (R1c)
+Done: all 10 files processed in one pass. Remaining for others: answer the QUESTIONS; R1b owns A0–H. If FIGURE_GATE size (163 KB) is a problem, next prune = I.1/I.2 per-instance lines (event/room approvals) once the owner answers Q1/Q2/Q6.

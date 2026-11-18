@@ -1,6 +1,6 @@
 # TRANH VẬT PHẨM (ngoài trang phục)
+Art rules live ONLY in dev/art/FIGURE_GATE.md (owner 18/11 ~22:45Z).
 
-Luật sếp (OWNER_DECISIONS #44): mọi vật phẩm đều có tranh vẽ (gpt-2-6), kể cả tác phẩm tự tay làm khi học, tự luyện; mỗi bậc vẽ khác nhau (bậc thấp vụng, đơn sơ → bậc cao tinh xảo, quý giá). Khung + nền màu theo phẩm cấp do kit (`kitItem`) vẽ; ở đây chỉ có ảnh trong suốt và phẩm cấp.
 Trang phục (trâm cài, y phục: `WD_ITEMS`, `img/wd-*.webp`, j92) do thợ khác làm, không nằm trong bảng này.
 
 ## Tệp
@@ -8,7 +8,6 @@ Trang phục (trâm cài, y phục: `WD_ITEMS`, `img/wd-*.webp`, j92) do thợ k
 - Tác phẩm: `img/item-tp-<kiểu>-b<bậc>.webp`, bậc 1..4 = Thường / Khá / Tinh xảo / Tuyệt phẩm (j83 `WTIER`; `wk.ti` = bậc − 1).
 - Dữ liệu JS: `dev/build/j98.js` → `itemArt(key, tier)` trả `{key, src, src512, grade, gradeName}`; nhận khóa IT, `("theu", 3)`, `"tp-theu"` hoặc nguyên mục rương `{k:"tp", wk:{kind, ti}}`. j98 cũng trỏ `ITIMG` (biểu tượng nhỏ cũ `iic`) sang ảnh mới.
 - Phẩm cấp (grade): 0 Thường · 1 Tinh phẩm · 2 Trân phẩm · 3 Tuyệt phẩm · 4 Ngự tứ (cùng thang `WD_GRADE` j92).
-- Phong cách: guofeng bán tả thực, gần 3D, ánh sáng mềm, cùng lối vẽ biểu tượng trâm cài `img/wd-*` (style ref: wd-tram-maudon). Không có người, không tay.
 
 ## 1. Vật phẩm định sẵn (j8 `IT` 26 món + j67 3 món + j70 Ngọc dung cao) — 30 món, + 1 vật chứng
 (ITEMS.md ghi 33 món; đếm lại trong mã chỉ có 30 khóa IT, không kể `tp`.)

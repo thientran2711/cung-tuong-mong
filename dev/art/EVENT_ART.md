@@ -1,6 +1,6 @@
 # Tranh sự kiện (event art)
+Art rules live ONLY in dev/art/FIGURE_GATE.md (owner 18/11 ~22:45Z).
 
-Mọi sự kiện tuần, sự kiện triều chính và sự kiện Hoàng thượng đều có một tranh minh họa thật, cùng họ với tranh thẻ việc (img/act-*) và tranh khung thông tin (img/info-*).
 
 ## Tệp
 - `img/ev-<nhóm>.webp`, `img/ev-<nhóm>-2.webp`, `-3`: 768x1024 (3:4), webp ≤ 250 KB. 69 tranh, 52 nhóm.
@@ -83,9 +83,6 @@ Mã không có tiền tố được dò qua mọi tiền tố; mã lạ rơi v�
 | `tu-tinh` | Tư tình, ánh mắt | 1 | tối | `arc:cn_tinh`, `arc:s_tinh`, `e68:servRomance`, `j22:affair`, `j24:mot-anh-mat` |
 
 ## Cách vẽ (để vẽ thêm cùng họ)
-- Magnific, model `gpt-2-6`, 3:4, 1k (40 tín dụng/tranh), thư mục ba4aecfe-efce-47e2-b53f-30d292091886, đúng 1 style ref:
-  sáng = cảnh Ngự hoa viên (cplQijT0eP), tối = tẩm cung đêm (iGq8UJy3uK), giống tranh thẻ việc.
-- Khung lời: `dev/figwork/events/prompt.py <khóa>`. Không mặt người: người chỉ ở xa, bóng dáng hoặc sau lưng; nhóm mưu hại/tang/lãnh cung theo khuôn tối (70% khung hình trong bóng, một nguồn sáng).
 - Thêm nhóm hay biến thể: sửa `ev_data.py` (cat/m), vẽ, ghi `khóa id` vào `gens.txt`, chạy `fetch.py <khóa>` rồi `make_json.py`.
 
 ## Mệnh truyện (j67): img/st-<tuyến>-<khóa>.webp
