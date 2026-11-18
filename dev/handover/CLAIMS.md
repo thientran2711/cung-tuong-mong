@@ -18,3 +18,4 @@ c03-v1-t678 | CDN _review (then live) | W54 session_011xDdVRCEBrDDZRTJBtFKxq | R
 t8-v2-yellow | CDN _review only | W55 session_011xDdVQTwxN7jGoVprySAoD | RUNNING | 2026-11-18T15:45Z (Foreman C ROOT-24)
 b10-pose-eyes | CDN _review only | W56 session_011xDdVPNX13rhPHjdfkbyXh | RUNNING | 2026-11-18T15:52Z (Foreman C ROOT-25)
 live-open-eyes | CDN _review (then live) | W57 session_011xDdVPo2tyAFP5faQKZ1Xe | RUNNING | 2026-11-18T15:52Z (Foreman C ROOT-25)
+| E12 test-flaky-sure (sonnet; test-only) | review/test-flaky-sure @c3b9d58c | Foreman E | session_01DgYSWmvDYnmfLCrNGtw5Uu | DONE, SẴN SÀNG KIỂM | 18/11 |
