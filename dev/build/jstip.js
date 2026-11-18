@@ -148,7 +148,7 @@ function stipEvent(G,SK){const B=BAL.stip,r=rkOf(S),st=stipSt(S),W=stipW();const
  return{ev:1,t:"Bổng lộc bị cắt xén",evId:"j3:embezzle",who:typeof pEunCourt==="function"?pEunCourt("ped"):null,h,opts:O}}
 /* NPCs: the same rule; their answer by purse and patron; news by Tai mắt */
 function stipNpc(p,SK,G){const B=BAL.stip,st=stipSt(p),tip=B.tip[Math.min(7,rkOf(p))];let how="";
- const W=BAL.ag.why.stip,ans=npwPick(["tip","ask","meek"],k=>k==="tip"?(!SK.sup&&(p.bac||0)>=tip*2?W.tip+(p.bac||0)/tip:0):k==="ask"?(p.maid&&!p.maid.spyFor?(p.maid.loyal||0)*W.askLoy:0):W.meek+Math.max(0,netQ(p,"timid"))*W.timid);/* npc-purpose G2a: her answer by purse, maid and nết */
+ const W=BAL.ag.why.stipAns,ans=npwPick(["tip","ask","meek"],k=>k==="tip"?(!SK.sup&&(p.bac||0)>=tip*2?W.tip+(p.bac||0)/tip:0):k==="ask"?(p.maid&&!p.maid.spyFor?(p.maid.loyal||0)*W.askLoy:0):W.meek+Math.max(0,netQ(p,"timid"))*W.timid);/* npc-purpose G2a: her answer by purse, maid and nết */
  if(ans==="tip"){ap(p,{bac:-tip});st.tip=S.turn;st.tips=(st.tips||0)+1;stipRestore(p,G);how="nàng lót tay cho thái giám, được đổi đồ tốt"}
  else if(ans==="ask"&&roll(cl(B.askBase+Math.round((p.maid.loyal||0)/3)-(SK.sup?25:0),5,95))){ap(p,{bac:SK.bac});stipRestore(p,G);how=`cung nữ ${p.maid.name} đi đòi được đủ phần`}
  else{st.meek=S.turn;how="nàng đành nhịn"}

@@ -261,7 +261,7 @@ function srvEndTurn(){if(S.dead||Q.length||S.mg)return;S.buoi=0;const q0=Q.lengt
 function srvWeek(){srvMisCheck();const m=srvM();if(!m||!isSrv())return;
  const o=npcWhy("srvCard",{m});if(!o)return;/* npc-purpose G2a: the week's card comes from a person with a reason (her mistress's mood or malice, a rival who wants an eye in that palace, a colleague who hates her, a friend); nobody → a quiet week */
  if(o.who===m){if(npwPick(["mood","order"],k=>srvCardW(m,k))==="order")srvOrder();else srvMoodEvent()}else if(rivals.includes(o.who))srvBribeOffer(o.who);else if((S.srv.af[o.who.sid]||0)<0)srvFramedEvent(o.who);else srvFriendTip(o.who)}
-function srvCardW(m,k){const B=BAL.ag.why.srvCard;return k==="mood"?Math.abs((S.tin||0)-B.mid)*B.moodW:Math.max(0,(m.malice||40)-B.malMin)*B.malW}
+function srvCardW(m,k){const B=BAL.ag.why.srvWk;return k==="mood"?Math.abs((S.tin||0)-B.mid)*B.moodW:Math.max(0,(m.malice||40)-B.malMin)*B.malW}
 /* npc-purpose G2a scores (numbers: BAL.ag.why.srv): her anger's form, the order's deed, the punishment when she finds her maid out */
 function srvAngryW(m,k){const B=BAL.ag.why.srv.angry,tin=S.tin||0;if(k==="out")return tin<BAL.srvx.tinOut?B.out:0;
  if(k==="beat")return tin<B.beatTin?(B.beatTin-tin)*B.beatW+(hasT(m,"Xảo quyệt")?B.sly:0)+Math.max(0,(m.malice||40)-B.malMin)*B.malW:0;return B.scold}

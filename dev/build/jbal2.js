@@ -1231,7 +1231,7 @@ Object.assign(BAL.ag.why,{
 Object.assign(BAL.ag.why.cd,{svSteal:4,svMarket:8,svSpy:4,svLeave:12,svTalk:4,srvCard:6,srvBuy:12,srvWatch:4,srvWed:8,srvBlack:4,srvSearch:3,srvPrince:8,cmSpy:4,cmLeak:4,cmConf:4,cmTt:8,cmBrawl:8,cmScorn:8,cmLand:12,cmTh:4,knSell:1,tmTell:1,p3Grab:2});
 Object.assign(BAL.ag.why,{
  sv:{greed:40,loy:.3,market:30,spy:30,spyLoy:.3,leaveLoy:75,leaveW:1,leaveStall:1,leaveSung:.1,talk:35,tellLoy:.5,blabLoy:.5}, /* j29: steal s = netQ(greed)×greed + (100−lòng)×loy; market = netQ(greed)×market; spy = netQ(sharp)×spy + lòng×spyLoy; leave = (leaveLoy−lòng)×leaveW + months stalled×leaveStall (target: rank gap + Sủng×leaveSung); talk = netQ(talk)×talk, then tell (lòng×tellLoy) vs blab ((100−lòng)×blabLoy) */
- srvCard:{mid:50,moodW:1.5,malMin:40,malW:1,bribe:.6,frame:1.5,tip:.8}, /* j42 weekly card: mistress mood = |Chủ tin − mid|×moodW, order = (malice − malMin)×malW; rival bribe = hostility to the mistress×bribe; colleague frame = −quý×frame; friend tip = quý×tip */
+ srvWk:{mid:50,moodW:1.5,malMin:40,malW:1,bribe:.6,frame:1.5,tip:.8}, /* j42 weekly card: mistress mood = |Chủ tin − mid|×moodW, order = (malice − malMin)×malW; rival bribe = hostility to the mistress×bribe; colleague frame = −quý×frame; friend tip = quý×tip */
  srv:{reMin:1,reNeed:6,reRk:1,tipIntel:30,tipGift:25,leakMin:20, /* j42: Nội vụ phủ new mistress = max(reMin, reNeed − her staff) + rank×reRk; friend tells palace news (tipIntel + mistress grudge) vs a gift (tipGift); a witness holds the affair when grudge(her)+grudge(mistress) > leakMin */
   lau:{base:6,max:4,div:2}, /* Tân Giả khố weeks = base + min(max, (tinOut − Chủ tin)/div) */
   angry:{out:100,beatTin:30,beatW:2,sly:30,malMin:40,malW:.5,scold:30}, /* her anger: out when Chủ tin < tinOut (out); beat when Chủ tin < beatTin: (beatTin − tin)×beatW + Xảo quyệt sly + (malice − malMin)×malW; else scold */
@@ -1246,7 +1246,7 @@ Object.assign(BAL.ag.why,{
  cm:{spy:.4,leak:.4,debt:15,home:10,spyBy:20,conf:.4,tt:.5,brawl:.6,brLoy:.2,scorn:.6,land:.6,th:.4}, /* jcmaid: listens = lòng×spy; leaks = (100−lòng)×leak + debt/home(nhớ nhà)/spyBy by her secret; confides = lòng×conf; Tể tướng letter = her Sủng×tt; brawl = foe grudge×brawl + lòng×brLoy; scorn / Cung Chính ti report = foe grudge×scorn / ×land; speaks to Thái hậu = lòng×th */
  kn:{will:60,need:40,tell:.5}, /* jagknow: seller s = sell will (0..1)×will + bạc gap (0..1)×need; refusing servant tells = lòng×tell (only from lòng ≥ loy.mid) */
  p3:{see:60,host:1,mal:.5}, /* jagacts3: maid at the tryst place notices (see, odds); secret grab = grudge vs teller×host + (malice − secretMal)×mal */
- stip:{tip:30,askLoy:.5,meek:20,timid:20} /* jstip NPC answer: tip (tip + bạc/tip, when she can pay ×2) vs maid asks (lòng×askLoy) vs meek (meek + netQ(timid)×timid) */
+ stipAns:{tip:30,askLoy:.5,meek:20,timid:20} /* jstip NPC answer: tip (tip + bạc/tip, when she can pay ×2) vs maid asks (lòng×askLoy) vs meek (meek + netQ(timid)×timid) */
 });
 //
 //

@@ -15,7 +15,7 @@ npwReg("svTalk",{grp:"G2a",who:c=>c.s?[c.s]:[],why:s=>{const B=g2aW().sv,q=netQ(
 npwReg("srvCard",{grp:"G2a",who:c=>{const m=c.m;if(!m)return[];const B=BAL.srvx;let L=[m];
   try{L=L.concat(liveRivals(true).filter(v=>v!==m&&hostility(v,m)>=25&&(v.bac||0)>=40))}catch(e){}
   try{L=L.concat(srvColleagues().filter(s=>{const a=S.srv.af[s.sid]||0;return a<0||a>=B.friendAf}))}catch(e){}return L},
- why:(p,c)=>{const B=g2aW().srvCard,m=c.m;
+ why:(p,c)=>{const B=g2aW().srvWk,m=c.m;
   if(p===m){const mo=srvCardW(m,"mood"),or=srvCardW(m,"order");return mo>=or?{s:mo,t:S,r:(S.tin||0)>=B.mid?"vui lòng với ngươi":"chán ghét ngươi"}:{s:or,r:"lòng dạ hiểm, muốn hại người"}}
   if(rivals.includes(p))return {s:hostility(p,m)*B.bribe,t:m,r:"oán "+npwNm(m)+", muốn mua tai mắt trong cung nàng"};
   const a=S.srv.af[p.sid]||0;return a<0?{s:-a*B.frame,t:S,r:"ghét ngươi"}:{s:a*B.tip,t:S,r:"thân với ngươi"}}});
