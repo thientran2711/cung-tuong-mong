@@ -3,7 +3,7 @@
    usage: node dev/test/stage-rightcol.js <outdir>   (reads ./index.html built by dev/site/build_site.sh; prints PASS/FAIL per device x household x fold state; shots .jpg to <outdir>) */
 const {chromium}=require('playwright');const fs=require('fs');const OUT=process.argv[2]||'/tmp/rc-shots';fs.mkdirSync(OUT,{recursive:true});
 const LIVE='https://thientran2711.'+'github.io/cung-tuong-mong/';const html=fs.readFileSync(process.env.INDEX||'index.html','utf8');
-const DEV=[['fold',755,1000],['ipad',1180,820]];const HH=[['h1',0,0,['home','vuon']],['h6',5,6,['home','vuon']],['h1',0,0,['map']],['h6',5,6,['map']]];const FOLD=[['closed',null],['cn','cn'],['ct','ct']];
+const DEV=[['fold',755,1000],['phone',412,1058],['ipad',1180,820]];const HH=[['h1',0,0,['home','vuon']],['h6',5,6,['home','vuon']],['h1',0,0,['map']],['h6',5,6,['map']]];const FOLD=[['closed',null],['cn','cn'],['ct','ct']];
 const PLACES=(process.env.PLACES||'home,vuon,map').split(',');
 (async()=>{const b=await chromium.launch();let bad=0;
 for(const [dn,W,H] of DEV){
@@ -24,7 +24,7 @@ for(const [dn,W,H] of DEV){
   for(const pl of PL){
    await p.evaluate(async(pl)=>{Q.length=0;S.dead=false;S.confined=0;{tab='act';const g=document.querySelector('.game');if(g)g.classList.remove('maptab','cardtab');render()}if(pl==='home'){S.place='home'}else if(pl==='map'){const b=document.querySelector('[data-tab="go"]');if(b)b.click()}else{try{goTo(pl)}catch(e){}}await new Promise(r=>setTimeout(r,2500));try{j59lay()}catch(e){}const R=document.getElementById('kshR');if(R)R.dataset.full='';k3Stage();await new Promise(r=>setTimeout(r,800))},pl);await clean();
    for(const [fn,key] of FOLD){
-    await p.evaluate(async(key)=>{window.__kgfOpen=key;const R=document.getElementById('kshR');if(R)R.dataset.full='';k3Stage();try{j59lay()}catch(e){}await new Promise(r=>setTimeout(r,900))},key);
+    await p.evaluate(async(key)=>{window.__kgfOpen=key;const R=document.getElementById('kshR');if(R)R.dataset.full='';k3Stage();try{kitStageRail.paint()}catch(e){}try{j59lay()}catch(e){}await new Promise(r=>setTimeout(r,900))},key);
     const r=await p.evaluate(()=>{const st=document.getElementById('stage'),S0=st.getBoundingClientRect(),R=document.getElementById('kshR');const vis=e=>e&&e.offsetParent!==null&&getComputedStyle(e).display!=='none'&&e.getBoundingClientRect().width>2;
      const q=R&&!R.hidden?R.getBoundingClientRect():null;const o={};if(!q)return{noCol:true};
      const hit=(a,c)=>Math.max(0,Math.min(a.right,c.right)-Math.max(a.left,c.left))*Math.max(0,Math.min(a.bottom,c.bottom)-Math.max(a.top,c.top));
@@ -35,8 +35,8 @@ for(const [dn,W,H] of DEV){
      o.nameFig=nm&&!nm.hidden?figs.reduce((a,f)=>a+Math.round(hit(nm.getBoundingClientRect(),f)),0):0;o.colFig=figs.reduce((a,f)=>a+Math.round(hit(q,f)),0);
      o.scroll=R.scrollHeight>R.clientHeight+1;o.inStage=q.bottom<=S0.bottom+1&&q.top>=S0.top-1;o.groups=[...R.querySelectorAll('.kgf-h .k3l')].map(e=>e.textContent);
      o.order=[...R.children].map(e=>e.className.split(' ')[1]||e.className.split(' ')[0]).join('>');o.open=R.querySelectorAll('.kgfopen').length;o.cards=R.querySelectorAll('.kgf-l .k3c').length;
-     o.cut=[...R.querySelectorAll('.k3l,.k3ct>b')].filter(e=>vis(e)&&(e.scrollWidth>e.clientWidth+1)).map(e=>e.textContent);return o});
-    const isMap=pl==='map';const ok=isMap?(!r.noCol&&r.groups.length===2&&!r.cut.length&&r.open===(key?1:0)):!r.noCol&&(r.chip==='none'||r.chip===0)&&!r.nameCol&&!r.nameFig&&!r.colFig&&r.nameBg&&(r.nameLines===0||r.nameLines<=2)&&r.inStage&&!r.cut.length&&r.open===(key?1:0)&&(key||!r.scroll);if(!ok)bad++;
+     const rl=document.getElementById('krail'),dr=document.getElementById('kgfdrop'),mp=document.querySelector('#panel .mapv');o.rail=[...document.querySelectorAll('.krailt')].map(e=>e.textContent);o.bars=R.querySelectorAll('.kgf-h').length;o.drop=dr?dr.querySelectorAll('.k3c').length:0;if(dr&&rl){const a=dr.getBoundingClientRect(),b=rl.getBoundingClientRect();o.dropRail=Math.round(hit(a,b));o.dropIn=mp?(a.right<=mp.getBoundingClientRect().right+1&&a.bottom<=mp.getBoundingClientRect().bottom+1):null}const covered=(cov)=>[...document.querySelectorAll('.mspot')].filter(e=>e.offsetParent&&e.getBoundingClientRect().width>2).filter(e=>{const a=e.getBoundingClientRect();return cov.some(c=>{const q=c.getBoundingClientRect();return hit(a,q)>=.9*a.width*a.height})}).length;o.tagHidClosed=covered([...document.querySelectorAll('.krailb')]);o.tagHidDrop=dr?covered([dr]):0;o.cut=[...R.querySelectorAll('.k3l,.k3ct>b')].filter(e=>vis(e)&&(e.scrollWidth>e.clientWidth+1)).map(e=>e.textContent);return o});
+    const isMap=pl==='map',phoneMap=isMap&&W<1000;const ok=phoneMap?(!r.noCol&&r.rail.length===2&&r.bars===0&&!r.cut.length&&r.drop===(key==='cn'?(hn==='h1'?1:6):key==='ct'?3:0)&&!r.dropRail&&r.dropIn!==false&&!r.tagHidClosed):isMap?(!r.noCol&&r.groups.length===2&&!r.cut.length&&r.open===(key?1:0)):!r.noCol&&(r.chip==='none'||r.chip===0)&&!r.nameCol&&!r.nameFig&&!r.colFig&&r.nameBg&&(r.nameLines===0||r.nameLines<=2)&&r.inStage&&!r.cut.length&&r.open===(key?1:0)&&(key||!r.scroll);if(!ok)bad++;
     console.log(ok?'PASS':'FAIL',dn,hn,pl,fn,JSON.stringify(r));
     await p.screenshot({path:`${OUT}/${dn}-${hn}-${pl}-${fn}.jpg`,type:'jpeg',quality:70,animations:'disabled'})}}}
  console.log('errs',dn,JSON.stringify(errs.slice(0,4)));await ctx.close()}
