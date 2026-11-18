@@ -50,3 +50,22 @@ dev/handover/shots/entry-blank/ — before-fold-bigcache-newbuild.webp (her shot
 3. swreg resumeSolo still looks for `[data-tgo="cont"]` first (gone); its `#slots [data-load]` fallback works. The in-play auto-reopen after a new build was not driven end-to-end in host mode (the test's new build path = reload + title + sổ).
 
 HANDOVER: not needed (done in one session).
+
+## R2 (worker, answer to review FAIL item 6) — review/entry-blank-r3 @ 6e9277d8 (= ff98fe7e + fix c9009dba + merge main e16e1d66; only index.html / sw.js conflicted → rebuilt)
+Whole group = every picture slot of the first screen through the one kit part (§59.1), the one gate (jload) and the one worker (sw.js). No new kit part: the stand-in is the EXISTING kit stranger portrait `img/kit/unknown-f|m.webp` (the one the Hoàng hậu card shows), so no KIT REQUEST.
+1. **§59.1 (jph.js, KIT.md §59.1 + kit sample)**: a portrait on its way (`por-*`, any size: top-bar chip, side cards, rows, dialogs) waits as the kit portrait silhouette over the paper (`data-kwait="pf|pm"`, still `pfs|pms`; `kitPhPorG`: men / boys = m). The «Đang thỉnh tranh…» line on a slot whose box already draws its own `::after` (act-card art frames: corners / pins — the line was set but never painted) now goes on one small child `.kwaitl` (same look), so the frame keeps its decoration. A slot that was not laid out when marked is looked at again (≤ 20 × 0.5 s) instead of never getting its line.
+2. **Gate order (jload.js)**: the life set goes through a small queue (8 at a time under the cover); after the 25 s cap / «Vào cung ngay», while any picture ON SCREEN (img or CSS, incl. the room scene) is still out, only 1 off-screen picture at a time and the on-screen ones go to the head (`lFront`, `lAfter`, ≤ 90 s).
+3. **One download per picture (sw.js)**: the gate's request and the `<img>`'s request for the same picture used to both go to the network; the second now waits for the first and is answered from the cache.
+4. **CDN data files (sw.js)**: img/*.json (FIGURES*, *-fit, POR_FACE2… ~10 MB, precached in the shell) were network first on every open; now the shell copy answers at once and the network refreshes it 20 s later. (The CDN does answer 304 when the browser's HTTP cache still has a copy; this removes the dependence on that cache.) Same-origin JSON unchanged.
+5. **Child age bands (j73 kidPreAll)**: the other age bands of a child (~16 portraits) wait while the life set is busy.
+Test `dev/test/entry-blank.js`: emptyBox now = a waiting picture shown as bare paper with no kit silhouette and no line (silhouettes / paper + line are the allowed placeholders).
+
+| path · 1.5 Mbps | main e16e1d66 (before) | 6e9277d8 (after) |
+|---|---|---|
+| cold · Fold | 62/62 samples with an empty frame (portrait chip, side cards) | 0/62 (×3 runs: 0, 0, 0) |
+| cold · iPad | 63/63 | 0/64 (×3 runs: 0, 0, 0; one earlier run 1 stage sample) |
+| big · Fold / iPad | (r1 table) | 0/60 · 0/57 |
+| cont · Fold / iPad | (r1 table) | 0/57 · 1/57 (one 250 ms stage sample) |
+life-preload.js 1.5 Mbps: Fold 0 blank / 0 nobox, iPad 0 / 0 (whole walk to Hành sự). quickcheck **PASS** on the merge (open 1437 ms, old save ok, render 200/169, tab 339/371, buổi 984/813, tasks>200 19/16, core gates PASS).
+Shots (handover branch, CDN still refused): shots/entry-blank/r2-fold-cold-1.5mbps-44s-standins.webp, r2-ipad-cold-1.5mbps-26s-standins.webp — portraits = kit silhouette, people = §59.1 figure silhouette, act art = paper + «Đang thỉnh tranh…». LOOKED.
+Still true (honest): on an evicted cache at 1.5 Mbps the pictures themselves still need ~40–60 s to arrive (the test line is FIFO, a pessimistic model); the room scene waits as the stage's own striped ground (a CSS background, no §59.1 slot) until its picture lands.
