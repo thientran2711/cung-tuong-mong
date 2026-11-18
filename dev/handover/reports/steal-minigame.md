@@ -58,3 +58,11 @@ Tests (FIX 1):
 - `steal-mg-unit.js` (main build ea93a33d): 37 PASS, 0 FAIL, 0 page errors.
 - `steal-mg-nf.js` on a LOCAL merge with origin/review/balance-chain d9fe15ed (not pushed): **11/11 PASS** — the 7 earlier + co-op C1 friend picks during host's (async) game → kept, resolved after, host rung on; C2 friend wins her game → her resolve odds one rung up; C3 loses → plain; C4 guest order «mg» → (game) → «up:1» → «ch». Co-op cases lift only jnf's nfParked gate in the test (COOPW.on reads false inside nfParked).
 - quickcheck PASS (above).
+
+## FIX 2 (after E8r2 FAIL ea93a33d: stale base) — sha 814078e5
+- Merged origin/main b2a9d349 (has mg-skip-all r2 KIT §13.6 kitQuick, coop-thin-e). j82 playArt: main's QK / kitQuick / qRow kept; added only `rows / rowsHead`, `go` label and `resRows`. jsmg passes `quick:{n:"Thôi, không chơi", sub:"giữ nguyên <word>"}` (no skip/skipSub). KIT.md §13 text: the skip button = §13.6 quick. assemble: main's list + 'jsmg.js' last. Site rebuilt.
+- `node dev/test/mg-skip-audit.js`: PASS (21 games, 21 with kit quick, 0 fails).
+- `steal-mg-unit.js`: 37 PASS / 0 FAIL / 0 page errors.
+- `steal-mg-nf.js` on a LOCAL merge with origin/review/balance-chain f9a37b7e (not pushed; conflicts only assemble.py + generated files): 11/11 PASS, 0 page errors.
+- `bash dev/tools/quickcheck.sh` at 814078e5: **QUICKCHECK PASS · 149 s · open 1311 ms · old save ok · perf new/live render 150/184, tab 364/352, buổi 927/910 ms, tasks>200ms 15/15 · core gates PASS**. (A first run failed G3 kit-conform once — MISSING place:vuon / place:etq / contest / cold-palace + "tutorial: 0 intro pages" float; rerun of kit-conform alone: branch 103/2 MISSING, origin/main 106/2 MISSING, floats none on both → flaky load timing, not this branch; full quickcheck rerun PASS.)
+- Reviewer's non-blocking note kept for when jnf co-op goes live: a guest reload in the middle of her own game loses the held "ch" (memory only) → her pick counts as Thôi after coopMs + waitMs.
