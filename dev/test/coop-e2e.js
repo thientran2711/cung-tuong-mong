@@ -214,5 +214,7 @@ async function nightGap(A,B){const w0=(await C(A)).week;await clear(A);await cle
   const q=f=>ms.length?Math.round(ms[Math.min(ms.length-1,Math.floor(f*ms.length))]/100)/10:0;
   const line=`buổi lengths (s): n=${ms.length} median=${q(.5)} p90=${q(.9)} max=${q(1)} timeouts=${L.filter(x=>x.up).length}`;console.log(line);fs.appendFileSync(OUT+'/buoi-lengths.txt',line+'\n')}catch(e){console.log('buổi lengths: n/a',e.message)}
  for(const o of [A,B,D])ok(!o.errs.length,o.name+': no page errors',o.errs.slice(0,5));
+ /* review/life-preload-fu (B): lifeGate runs per seat over the whole run (weeks played, rebirth, rejoin): 'life' = a real life change, never one per week merge */
+ for(const o of [A,B]){const c=await o.p.evaluate(()=>window.KLIFE&&KLIFE.calls||[]).catch(()=>null);const w=await o.p.evaluate(()=>window.COOP&&COOP.week||0).catch(()=>0);console.log('lifeGate calls',o.name,'week',w,JSON.stringify(c&&c.reduce((m,x)=>(m[x]=(m[x]||0)+1,m),{})))}
  const bad=res.filter(r=>!r[0]);if(NIGHTS)console.log('forced nights',COOPW_n);console.log(`\n${res.length-bad.length}/${res.length} passed`);fs.writeFileSync(OUT+'/result.txt',res.map(r=>(r[0]?'ok  ':'FAIL')+' '+r[1]).join('\n')+'\n');
  await b.close();process.exit(bad.length?1:0)})().catch(e=>{console.error(e);process.exit(2)});
