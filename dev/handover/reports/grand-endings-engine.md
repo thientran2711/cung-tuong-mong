@@ -1,4 +1,7 @@
-# grand-endings-engine (E1, Foreman E) — report
+# grand-endings-engine (E1 → E1b, Foreman E) — report
+LINEAGE: E1b depth 2 (successor of E1 session_01DgYSWkyBNQQuQ6GZfMzcqU) · session_01DgYSWm7nnt9krNfbr1w92u
+PRIORITY #1 CHECK (E1b): continued E1's branch, rebuilt nothing; reused runb.js's sensible bot (dev/measure/inpage6.js + inty.js) for the measure instead of writing a new one; K-GE-3 checked against KIT_REQUESTS first (no row for title-plate label rows).
+**READY: tip 2ae4715** (code 7284526 + site rebuilt).
 PRIORITY #1 CHECK: OD 5 (L1613, L1618, L1623–L1624, L1601, L1837) | main none (prio1 "grand ending|Đại kết cục|Hồi kết nhánh|Thiên mệnh|S.ge|BAL.ge": main hits are false positives, review/* 0) | review/* review/grand-endings-design 52cdc078 (design, built from it; catalogue + guard reused) | claims E1 row only
 Branch: review/grand-endings-engine · tip **4164d2b3** (from origin/main 94a93759). START_CTX ~3 %; rolled over at Foreman E's order (~43 %).
 
@@ -27,7 +30,30 @@ Branch: review/grand-endings-engine · tip **4164d2b3** (from origin/main 94a937
 - Quickcheck: open 1524 ms 0 errors, old save loads + plays a buổi; core gates FAILED only on G1 one-core `jge.js nt:1` → fixed in 4164d2b3 (Kim sách through r97give); quickcheck NOT rerun after the fix (run was killed by timeout under CPU load from the measure).
 - Measure `node dev/measure/ge-measure.js - 1 2 out.json` — NOT finished (3 parallel pages ran out of memory → "Target crashed"; use PAR 2). Partial: tt_co in-char ge1 → fail-only after .11 lose (pull 10); ge2 → odds 12 (condition Đức 45 / Sủng 45 unmet, pull 6); funnel oc {4:4, 8:3, 11:2–3} (target 1–2 by .11 ≈ met).
 
-## HANDOVER (for the successor)
+
+## E1b — steps 1–5 done (18/11)
+Commits: 914aa6c (measure logging) · geDbg read-only hooks in jge.js · Tai mắt scale fix + guard scale check + sensible-bot measure · 4be5d08 K-GE-3 · 7284526 BAL.ge var tune + measure MODES/null guard · 2ae4715 site rebuilt.
+
+**Fault found + whole family fixed: Tai mắt (S.mat) is 0–10 (j1.js:114), gates were on a 0–100 scale.** tt_co_1 mat 40→4, nc_tuc_3 mat 30→3, rw tt_co_1 mat 15→2. ge-guard now FAILS any gate above a stat's scale or any rw/fail amount beyond half the scale (all stats scanned: mat 0–10; sung/danh/suc/sac/tai/tamco/duc 0–100; th/hh −100..100) → no other row was off.
+
+**Measure fix:** with idle months (nextBuoi only) she never builds stats (Sủng 0) → no gate ever met (run 1 inChar .06). The measure now plays the months with the inpage6 sensible bot (as runb.js) between story beats (`PLAY` argv 7: sens default / idle).
+
+| run | bots | lives | inChar [.30,.60] | random ≤.20 | open11 [1,2.6] | kind→thiện ≥.70 | cruel→ác ≥.70 |
+|---|---|---|---|---|---|---|---|
+| 1 idle months, old gates | all | 24 | .06 OUT | 0 | 2.08 | — | — |
+| 3 sensible bot, mat fix, var tag 2 / duc .25 | all | 22 (+1 hung rand life, killed) | **.44** | **0** | **2.05** | 1.00 (3/3) | **.33 OUT** (1/3) |
+| 4 verify, var tag 4 / duc .05 | kind+cruel only | 24/24 ok, page errors 0 | .63 (aimed bots only) | — | **2.25** | **.83** | **.75** |
+| 3+4 pooled, non-random | | 42 | **.55 IN** | | | | |
+
+Why the var tune: the sensible bot gains Đức +19..+70 in EVERY mode, so ΔĐức × .25 (+5..+17) out-weighed the arc's lean tags (lt −6..+7 × 2); cruel lives shaded thiện. tag 4 / duc .05 lets her arc choices lead, Đức still counts a little. Per road (run 3): tt_co .17 · cnv_mat .50 · nc_tuc .67 inChar — small samples (7–8 lives), luck-heavy (tt_co lost two rolls at 88 / 67); not tuned per road. Odds/gates left as they are. Weak spot to watch: cnv_mat cruel lean only −2..−4 (few ác tags on that road) → cruelA .50 there.
+
+**Shots** (`node dev/test/ge-shots.js`): 1180x820@2, 1366x1024@2, 412x1058@2, 390x844@3 (+755 Fold) — **17/17 each, no overflow**. CDN upload returns 401 → shots kept LOCAL in /home/user/wt/e1b-shots/<size>/ (not in git). LOOKED at each: Hồi ngã rẽ 1 / 2 (4 then 3 options, greyed «Theo người ấy đi» when no bond), Đại kết cục event, title notice, Sổ luân hồi rows, fail, quiet — OK at all sizes. Notes: (a) Bảng «Thiên mệnh» rows squeeze the value column at 412/390 — the kit row shape with a title plate as label → filed **K-GE-3** (whole group: jdh.js:180, jdh.js:183, jge.js:173), not restyled; (b) event shot: the reward pop-up floats over the option card for a moment (same as other events).
+
+**Tests on 2ae4715:** ge-guard 6/6 · ge-engine 104/104 · build_site OK (index.html, sw.js, assets.json committed) · quickcheck ALONE **PASS** (core gates PASS, time-spill PASS, open 1489 ms 0 errors, old save ok). Perf note for the reviewer: buổi median 1076 ms vs live 685 ms, tasks>200 ms 22 vs 16 (render/tab equal) — worth a look in review.
+
+Measure usage: `[MODES=kind,cruel] [MAXJ=n] node dev/measure/ge-measure.js - <lives> 2 <out.json> [roads] [sens|idle]` (PAR 2 only; ~1–5 min per life).
+
+## HANDOVER (E1 → E1b; DONE, kept for history)
 Worktrees: code `/home/user/wt/e1` (branch review/grand-endings-engine, sparse, hooks installed), scratch `/home/user/wt/e1s` (smoke.js, partial measure log), shots `/home/user/wt/e1-shots`.
 Next steps, in order:
 1. Rebuild (`python3 dev/build/assemble.py`), rerun ge-guard + ge-engine (r97give swap).
