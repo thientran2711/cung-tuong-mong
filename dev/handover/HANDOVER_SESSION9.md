@@ -640,3 +640,7 @@ OWNER WHEN SHE WAKES: first reply says new main + opt-card-short pictures wait f
 LOAD 12:35Z: B 2 jobs (life-preload-fu, cloth-bake-static) | C art (c03 a18 live, c01 cut-out fix) + C-AG 4 running / 8 free | D balance-final rv running | E queue → land-e. §7 NOT DONE: no whole job left to move (art/owner/kit-blocked).
 Helper: /tmp/…/scratchpad/hpush.sh pattern = fetch, reset --hard FETCH_HEAD, re-append, commit, push (retry 4×).
 - ROOT-51 FINAL (12:37Z): successor MAIN ROOT-52 = session_01UV1SzhR4VChxDLw6hymSvQ (depth 8, LAST). ROOT-51 relays owner words + worker reports only.
+
+## ROOT-52 MAIN (18/11 12:36Z)
+- MAIN = ROOT-52 session_01UV1SzhR4VChxDLw6hymSvQ; START_CTX ≈ 5 % (get_session reads 0; estimate); rollover at ≈ 30 %, ceiling 60 %; depth 8 (LAST — at rollover create_session will be refused → send "TAKE OVER NOW" to ROOT STANDBY session_01UV1Szhw9yX7J9du6HoL1xM).
+- LOAD 12:36Z: main running 2 (land-e r4 grand-endings-engine; look-fx-wire #12 r11) + opt-card-short #2 idle (owner verdict) | B 2 jobs (life-preload-fu, cloth-bake-static) | C art + C-AG 4 running / 8 free | D balance-final rv | E queue → land-e | moved: none (§7 NOT DONE: no whole job left; art/owner/kit-blocked).
