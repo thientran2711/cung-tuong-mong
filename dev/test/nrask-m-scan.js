@@ -28,6 +28,24 @@ for(const id in NRM){const R=NRM[id];
   if(new Set(L.map(a=>a.k)).size<L.length)bad.push(`${k0}: two asks of one kind (want a different kind / shape)`);
   L.forEach((E,ai)=>{const k=k0+"["+ai+"]";n++;
   if(E.k==="do"&&!/\{B\}/.test(E.h))bad.push(`${k}: a «do» ask must name {B}`);
+  /* review E7cr (FAIL b99f4bc) as rules, whole families:
+     (4) no time word that contradicts the card's deadline (BAL.nroad.dl, shown on the card; true information only) */
+  const TIME=/(ngày mai|đêm nay|sáng mai|tối nay|(?<!mấy )hôm nay|mồng|(^|[^\p{L}])(hai|ba|bốn|năm|mười) ngày(?![\p{L}]))/iu;
+  for(const t of [E.c,E.h].concat(...E.o))if(TIME.test(t))bad.push(`${k}: time word «${t.match(TIME)[0].trim()}» vs the card deadline`);
+  /* (5) money only as a cost: the asker never asks her for a gift */
+  if(/xin \{call\} (ban|cho) \{me\}/.test(E.h))bad.push(`${k}: a handout ask (OD:L1601 (2))`);
+  const all=[E.h].concat(...E.o).join(' ¦ '),road=k0.replace(/_\d+$/,''),grp=road.split('_')[0];
+  /* (1) men of S.men: their rival is ONE man of ANOTHER trade (S.men holds one man per trade) — {B} only stands behind (sends people,
+     pays, spreads words), never holds the asker's own trade post, never has a «phủ» */
+  if(["gd","ty","vg","ns","st","hs"].includes(grp)){
+   if(/phủ \{B\}|(giữ|giữ chìa|trông|coi)[^.¦]* là \{B\}(?![\p{L}])/u.test(all))bad.push(`${k}: {B} given a phủ / a post (he is a man of another trade)`);
+   if(/(?<!(của|bên) )\{B\} (đổi ca|được giao|giữ chìa|chép|đã biết trước|tiến cử|đem sổ|đã gặp riêng|đã hỏi mượn|ghen)/.test(all))bad.push(`${k}: {B} does the asker's trade work`)}
+  /* (2) ty roads also serve the COURT Thái y, whose {B} is a consort: nothing male/harem-only bound to {B} */
+  if(grp==="ty"&&/\{B\}[^.¦]*(hắn|nàng)(?![\p{L}])|(cung|phủ) \{B\}/u.test(all))bad.push(`${k}: ty ask binds hắn/nàng/cung/phủ to {B} (court Thái y's {B} is a consort)`);
+  /* (3) eun_len: {B} is another house's staff eunuch — no servants or officials under him */
+  if(grp==="eun"&&/(người hầu|người|quan[^.]*) của \{B\}|người bên \{B\}/.test(all))bad.push(`${k}: eun_len {B} given people under him`);
+  /* (6) house heads: no daughter / kin of the rival house assumed in the palace */
+  if(grp==="off"&&/(con gái|người nhà)[^.¦]*(phủ \{B\}|nhà ấy)[^.¦]*(hậu cung|trong cung)|cung có người nhà/.test(all))bad.push(`${k}: assumes kin of the rival house in the palace`);
   if(!KINDS.includes(E.k))bad.push(`${k}: kind ${E.k} not an allowed help kind (bạc off)`);
   if(!/\{[Mm]e\}/.test(E.h))bad.push(`${k}: ask has no {me} voice slot`);if(!E.c)bad.push(`${k}: no step title`);
   addS(E.h,k);if(!(E.o&&E.o.length===2))bad.push(`${k}: need 2 options`);
