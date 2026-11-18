@@ -64,3 +64,8 @@ CODE MISSING to draw the approved face set in game:
 3. Re-measure veil-fit.json fig rows (offset about -0.30W, +0.18H on live fig files; por rows OK; FOREMAN_C_STATUS line 8). I also saw the face has to be hand-placed on figs for the same reason.
 4. Hair slots (lkhair html:"") and cloth slots (lkcloth html:"") draw nothing: hair needs a hair-fit box (body-fit KIT REQUEST); cloth waits for review/cloth-xoc drawDecalOnCloth.
 5. No code at all: tram lech, toc am/bet, mat do khi khoc, ma do/moi tai (lanh dropped, so main codes it on the makeup layer), lem phan.
+
+## HANDOVER (worker LOOK FX SAMPLES, context high ~55 % of window, start ~8 %: over START_CTX+25 %, rolling over; MAIN opens successor)
+Done: samples R1-R3 (10 panels on CDN img/_review/look-fx/, KEEP ink-free hair/cloth ones: hair-xo, vuong-*, moc, until owner verdict; wipe the rest with python3 dev/site/cdn_sync.py). Preview script dev/handover/tools/look-fx-comp.py (needs figs + decals downloaded into its dir).
+NEXT JOB (from MAIN s43, NOT started): dev/handover/briefs/look-fx-wire.md on branch review/look-fx-wire from live main f8276cdb: upload 24 finals to img/fx-*.png by md5 table in reports/looks-2-art.md, fill LOOKS_ART + mirrored fx-muc-N-m pick, re-measure ALL fig- fit rows in veil-fit.json/scar-fit.json (live c01 t1 a18 row needs about -0.30W, +0.18H; my hand-measured face boxes: c01 t2 a26 face centre (167,86), c30 t2 a26 (163,106) in 299x900 px, face w 80 h 105), full-body shots LOOKED.
+Worktrees: /home/user/wt/lfx (review/look-fx, = old main 62a6846f, delete), /home/user/wt/lookfx (handover), /home/user/wt/lfx-work (scratch).
