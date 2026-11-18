@@ -52,7 +52,7 @@ function errLedger(){if(errOn()||!S||typeof j95on!=="function"||!j95on())return;
  if(ch)try{const k=j95kh();S.where=j95view(R,k);R.m[k]=j95counts(R,k);if(typeof j95stage==="function")j95stage(R,k)}catch(e){}}
 /* fallback landing: her clock reached khắc K */
 function errTick(){if(errOn()||!S||S.dead)return;const now=errNow();let ch=false;
- for(const t of errZ())if(!t.back&&t.due<=now){t.back=1;ch=true;try{if(typeof kitLine==="function"&&errCan())kitLine(`${t.nm} đã về: có tin báo.`,2600)}catch(e){}}
+ for(const t of errZ())if(!t.back&&t.due<=now){t.back=1;ch=true;try{if(errCan())errNotify(`${t.nm} đã về: có tin báo.`)}catch(e){}}
  if(ch){try{const day=errKH()*3;S.erra=errZ().filter(t=>!t.back||(!t.read&&t.rep)||now-t.due<day)}catch(e){}errLedger();errIcon()}}
 /* the report panel: ONE implementation for both adapters. kitPanel info spec: subject = the person who REALLY went and came back (law 6b), facts = what she learned
    (the act's own log lines), sections = the gain / loss chips (kit chips), «Đợi tin» only with the parallel-time core */
@@ -76,10 +76,13 @@ function errPanel(){const N=errNews(),W=errMine(),OQ=errOrders();const facts=[],
  setTimeout(()=>errSync(),0);const sp={title:"Tin chờ người sai đi",facts,sections:sec,opts};if(subj)try{const f=kitFace(subj);if(f)sp.subject=Object.assign({},f,{rk:typeof f.rk==='string'?f.rk:undefined})}catch(e){}return sp}
 function errIcon(){try{if(typeof kitStatusIcon==="undefined")return;kitStatusIcon.set("tin",{title:"Người được sai đi",glyph:"信",order:30,
  show:()=>!!(S&&!S.dead&&(errMine().length||errNews().length||errOrders().length)),busy:()=>!!(S&&errMine().length&&!errNews().length&&!errOrders().length),badge:()=>!!(S&&(errNews().length||errOrders().length)),panel:errPanel});kitStatusIcon.refresh()}catch(e){console.error("jerr icon",e)}}
+/* ONE adapter for the notice of an errand (OD 18/11 ~22:10Z: every notice of the game goes through the ONE notice system of stage-here, top «!» box + a short top chip, tap → small kit panel).
+   Until that kit part lands (window.kitNotice.add expected) the kit pill kitLine is used; swap here only. */
+function errNotify(text){try{if(window.kitNotice&&typeof kitNotice.add==="function"){kitNotice.add({id:"errand",text,ms:7000,onTap:()=>errOpen()});return}}catch(e){}try{if(typeof kitLine==="function")kitLine(text,2600)}catch(e){}}
 function errOpen(){try{if(typeof kitStatusIcon!=="undefined")kitStatusIcon.open("tin")}catch(e){console.error(e)}}
 /* the gate: run an errand action; in the fallback the action runs ONCE as before (no double charge, no deferred report), then the task is recorded */
 function errAdd(sv,spec,L,dl){const t0=errNow();/* fallback: away n khắc counted from the END of her order (the act's own khắc already paid); jptime counts from the tap with its own o/n rows */const w=ERRV[spec.k]||ERRV_DEFAULT;const t={id:"e"+(++ER.n)+"-"+t0,who:errId(sv),nm:sv.name,k:spec.k,lbl:"đi "+w,t0,due:t0+errN(spec.k),back:0,read:0,rep:{t:`${sv.name} ${w} trở về`,ok:null,L:L.length?L:[`${sv.name} đã về.`],d:dl||[]}};
- errZ().push(t);ER.seen[t.id]={fresh:1};try{if(typeof kitLine==="function")kitLine(`${t.nm} đã đi ${w}, về ${errWhen(t.due)}.`,2600)}catch(e){}errIcon();return t}
+ errZ().push(t);ER.seen[t.id]={fresh:1};try{errNotify(`${t.nm} đã đi ${w}, về ${errWhen(t.due)}.`)}catch(e){}errIcon();return t}
 function errRun(fn,ctx,args,spec){
  if(!errCan()||errOn())return fn.apply(ctx,args);/* jptime builds its own task at the button (ptSend); this file only draws it */
  const sv=errRunner();if(!sv)return fn.apply(ctx,args);
@@ -100,8 +103,8 @@ function errCss(){if(document.getElementById("kerr-css"))return;const s=document
 .kmerr-fig.on{transition-timing-function:cubic-bezier(.2,.5,.4,1)}
 .kmerr-fig img{display:block;width:100%;height:100%;object-fit:contain;transform-origin:50% 100%;animation:kmerrbob .32s ease-in-out infinite}
 @keyframes kmerrbob{0%,100%{transform:translateY(0) rotate(-.8deg)}50%{transform:translateY(-6px) rotate(.8deg)}}
-.kmerr-lay .kmerr-slot,.kmerr-lay .kmerr-bang{position:absolute;transform:translateX(-50%);white-space:nowrap;max-width:92%}
-.kmerr-lay .kmerr-bang{pointer-events:auto;cursor:pointer;font-weight:700;min-width:22px;justify-content:center;box-shadow:0 0 0 2px #fff}
+.kmerr-lay .kmerr-slot{position:absolute;transform:translateX(-50%);white-space:nowrap;max-width:92%}
+.kmerr-lay i.kmerr-bang{position:absolute;margin:0;pointer-events:auto;cursor:pointer}/* the kit yellow round «!» (.khap, KIT §78.x) above her head */
 `;document.head.appendChild(s)}
 function errTok(p){const tk=document.getElementById("tokens");if(!tk||!p)return null;return[...tk.querySelectorAll(".tok.fig")].find(x=>{const g=x.querySelector(".tag");return g&&g.textContent.includes(p.name)&&x.offsetParent!==null})||null}
 /* KIT RULE «runner always drawn» (kitErrandSpot): where a person with no token in view walks from / to: the left slot of the stage on the kit floor line, at the kit figure height.
@@ -139,8 +142,11 @@ function errSync(){if(!S||S.dead||ER.syncing)return;ER.syncing=1;try{
   tok.style.visibility=(open||walking)?"hidden":"";if(walking||(!open&&!news))continue;
   const img=tok.querySelector(".figimg")||tok.querySelector("img");const r=(img||tok).getBoundingClientRect();const cx=(r.left+r.width/2-sr.left)/sc;
   if(open){const c=document.createElement("span");c.className="kchip n kmerr-slot";c.textContent=errWord(t.k);c.style.left=cx+"px";c.style.top=((r.top+r.height*.45-sr.top)/sc)+"px";lay.appendChild(c)}
-  else{const c=document.createElement("button");c.type="button";c.className="kchip r kmerr-bang";c.textContent="!";c.title=`${t.nm} đã về: có tin báo`;c.setAttribute("aria-label",c.title);c.style.left=((r.right-sr.left)/sc-14)+"px";c.style.top=(Math.max(2,(r.top-sr.top)/sc+6))+"px";
-   c.addEventListener("click",e=>{e.preventDefault();e.stopPropagation();errOpen();setTimeout(errSync,60)});lay.appendChild(c)}}
+  else{/* the kit yellow round «!» (kitHapHtml = the Dư đồ mark) ABOVE HER HEAD, never on the emotion chip beside it (owner OD 18/11 ~22:10Z) */
+   const w=document.createElement("span");w.innerHTML=typeof kitHapHtml==="function"?kitHapHtml(`${t.nm} đã về: có tin báo`,"button"):"";const c=w.firstChild;if(!c)continue;c.classList.add("kmerr-bang");c.setAttribute("tabindex","0");
+   let hx=r.left+r.width/2,hy=r.top+r.height*.04;try{const b=typeof J59BB!=="undefined"&&img&&J59BB[img.getAttribute("src")];if(b){hx=r.left+(b.l+b.r)/2*r.width;hy=r.top+(typeof j59bt==="function"?j59bt(b):b.t)*r.height}}catch(e){}
+   c.style.left=((hx-sr.left)/sc-9.5)+"px";c.style.top=Math.max(2,(hy-sr.top)/sc-19-10)+"px";
+   const go=e=>{e.preventDefault();e.stopPropagation();errOpen();setTimeout(errSync,60)};c.addEventListener("click",go);c.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" ")go(e)});lay.appendChild(c)}}
  /* a person whose task is over and read: nobody keeps her hidden */
  for(const x of document.querySelectorAll("#tokens .tok.fig")){const g=x.querySelector(".tag");if(!g||x.style.visibility!=="hidden")continue;const nm=g.textContent;
   const hold=T.some(t=>{const p=errPerson(t.who);return p&&nm.includes(p.name)&&(!t.back||ER.walk[t.id])});if(!hold)x.style.visibility=""}

@@ -110,7 +110,10 @@ const KIT_PLACE_IC={nvp:"bac",tyv:"y-thuat",vuon:"place-vuon",thu:"sung",dtd:"su
  ksp:"place-ksp",lc:"place-lc",home:"place-cung",cnh:"place-cnh",tgk:"place-tgk",ttp:"place-ttp",acs:"place-acs",dc:"place-dc"};
 /* every place has a glyph (D56): the consort palaces r<N> (and her own home) share the palace-roof glyph */
 function kitPlaceIcon(k,s){const n=KIT_PLACE_IC[k]||(/^r\d+$/.test(k||"")?"place-cung":"");return n&&typeof ic==="function"?ic(n,s||14).replace('class="ic"','class="ic kplic"'):""}
-function kitHapMark(k){const h=adHapAt(k);return h?`<i class="khap" role="img" aria-label="Có chuyện buổi này" title="Có chuyện buổi này">!</i>`:""}
+/* the ONE yellow round «!» markup (KIT §78.x); kitHapMark = a place with business this buổi, kitHapHtml(title) = any other «!» (a returned errand person, §90): same element, same class .khap */
+function kitHapHtml(title,role){const t=String(title||"Có chuyện buổi này").replace(/"/g,"&quot;");return `<i class="khap" role="${role||"img"}" aria-label="${t}" title="${t}">!</i>`}
+window.kitHapHtml=kitHapHtml;
+function kitHapMark(k){const h=adHapAt(k);return h?kitHapHtml("Có chuyện buổi này"):""}
 (function(){const m0=mapHTML;mapHTML=function(){let h=m0.apply(this,arguments);try{if(!S||adSrv())return h;
   h=h.replace(/(<(?:button|div) class="mspot[^"]*" data-(?:go|ak)="([^"]+)"[^>]*>(?:(?!class="mspot)[\s\S])*?<span class="mlab">)([\s\S]*?)(<\/span>)/g,(all,open,k,lab,end)=>open+kitPlaceIcon(k)+lab+kitHapMark(k)+end)}catch(e){console.error("jact map",e)}return h}})();
 (function(){const g0=mapHTMLgrid;mapHTMLgrid=function(){let h=g0.apply(this,arguments);try{if(!S||adSrv())return h;
