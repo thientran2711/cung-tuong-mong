@@ -741,3 +741,4 @@ Helper: /tmp/…/scratchpad/hpush.sh pattern = fetch, reset --hard FETCH_HEAD, r
 - (18/11 ~20:22Z) ROOT-54: OD 20:20Z APPROVED parallel time (every ask/send-another-person button) → ORDER Foreman D (non-UI core time; opus worker + BAL equal value); errand-scene (main UI) reads one "away until khắc K" state.
 - (18/11 ~20:26Z) ROOT-54: owner 20:25Z (OD) Fold Thân phận figure too small → s5 worker fixes on review/fullbody-frame-s4; landing af700c81 HELD.
 - (18/11 ~20:30Z) ROOT-54: maid6-sample eb73871 → LOOKED + SENT owner (A current overflow / B one «Cung nữ · 6» card, tap opens list; KIT_REQUESTS kitCrewPlaque). Waiting her pick; on B → kit keeper builds kitCrewPlaque, then real build.
+- (18/11 ~20:38Z) ROOT-54: owner 20:35Z (OD) two-way order pop-up for the receiver (one option «Đi», same N khắc/gains/losses) → added to Foreman D parallel-time job.
