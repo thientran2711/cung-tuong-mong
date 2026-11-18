@@ -458,7 +458,7 @@ c12 a18 regen ±3% t2,t3,t5,t6,t7,t8 + Nữ đế (Round 38, auto-regen + gen co
 nam mẫu v2 (wider head/neck, height +7% approved) | claude/cung-tuong-mong-handover-hj0h8w (art, img/_review/male-proportion) | session_011xDdVQFLRu1hiQA6r1onWU | DONE 132d878 (archived) | 2026-11-18T04:00Z (Foreman C ROOT-16)
 | NPC-PURPOSE G2 (opus): monthly no-actor chains → npcWhy | review/npc-purpose-g2 | C-AG #9 | session_01UV1SzjwFk9CyyTmPZT589k | RUNNING | 18/11 04:18Z |
 | NPC-PURPOSE G3 (opus): witness/target picks + agent-layer dice → npcWit/npwPick | review/npc-purpose-g3 | C-AG #9 | session_01UV1SzjE9iRFchoQnRUZm9r | RUNNING | 18/11 04:18Z |
-| NPC-PURPOSE G1 #2 + integrator (opus; successor of SziWp3U) | review/npc-purpose | C-AG #9 | session_01UV1Szk6vemeEmLFXUGhr2b | RUNNING | 18/11 04:24Z |
+| NPC-PURPOSE G1 #2 + integrator (opus; successor of SziWp3U) | review/npc-purpose | C-AG #9 | session_01UV1Szk6vemeEmLFXUGhr2b | ROLLED OVER → Szm7n34 (archived) | 18/11 04:24Z |
 c12 a18 soft-smile fix, 9 approved figures (Round 40) | claude/cung-tuong-mong-handover-hj0h8w (art, _review CDN) | session_011xDdVRtgH56yp9P6XctSiU | DONE (archived ROOT-17 05:05Z) | 2026-11-18T04:26Z (Foreman C ROOT-16)
 c12 a18 Nữ đế with Emperor-style crown (miện, feminine) trial (Round 41) | claude/cung-tuong-mong-handover-hj0h8w (art, _review CDN) | session_011xDdVNQBvg9H3E3fUUWbZV | DONE (archived ROOT-17 04:58Z) | 2026-11-18T04:28Z (Foreman C ROOT-16)
 c12 in-game preview (room HH+Tần, Tuần lục Nữ đế), screenshots only | claude/cung-tuong-mong-handover-hj0h8w (report) + _review CDN | session_011xDdVRpFrshid89rbqZw5K | RUNNING | 2026-11-18T04:31Z (Foreman C ROOT-16)
@@ -466,3 +466,4 @@ handsome man prompt-only sample (no proportion gate) | claude/cung-tuong-mong-ha
 c12 a18 Nữ đế #2 (r8 first) soft-smile (Round 42) | claude/cung-tuong-mong-handover-hj0h8w (art, _review CDN) | session_011xDdVQzK53ocBsDVyee2N3 | RUNNING | 2026-11-18T05:10Z
 | FOREMAN C-AG #10 (opus; successor of #9, opened by C-AG #9) | handover FOREMAN_C_STATUS | C-AG #9 | session_01UV1SzjAd8BYMMz2rKFZitp | RUNNING | 18/11 05:00Z |
 c12 a18 t5–t8 headdress re-do from live originals (Round 43) | claude/cung-tuong-mong-handover-hj0h8w (art, _review CDN) | session_011xDdVPdhZPQct6rWX6fDaZ | CANCELLED (owner: c12 OK, no redraw; 05:22Z) | 2026-11-18T05:16Z
+| NPC-PURPOSE G1 #3 + integrator (opus; successor of Szk6vem, head 9bf916a) | review/npc-purpose | C-AG #10 | session_01UV1Szm7n34pm29edeDhQ3Q | RUNNING | 18/11 04:52Z |
