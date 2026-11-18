@@ -20,11 +20,11 @@ const KINDS=(process.env.KINDS||'news,notice,choice,pdlg,idcard,shop').split(','
   await p.evaluate(async h=>{const t0=Date.now();while(!(window.__KITHT&&window.__KITHT.m)&&Date.now()-t0<20000)await new Promise(r=>setTimeout(r,200));if(window.__KITHT&&window.__KITHT.m)Object.assign(window.__KITHT.m,h)},C3HT);await p.waitForTimeout(3500);
   const rows=[];
   for(const kind of KINDS)for(const [name,FIG] of [['warmup',CASES[0][1]],...CASES]){
-   const r=await p.evaluate(async([kind,name,FIG])=>{
+   const r=await p.evaluate(async([kind,name,FIG,SHOT])=>{
     const k0=window.__k0||(window.__k0=kitFigOf);const self=FIG==='SELF';
     window.kitFigOf=kitFigOf=function(q){if(q&&q.__t&&!self)return IMG_BASE+FIG;return k0.apply(this,arguments)};
     const R=liveRivals(true);const who=self?S:Object.assign({},R[0]||{},{__t:1,age:36});
-    const close=()=>{Q.length=0;const M=document.getElementById('modal');M.hidden=true;for(const e of document.querySelectorAll('#kscanpd'))e.remove()};close();
+    const close=window.__scanClose=()=>{Q.length=0;const M=document.getElementById('modal');M.hidden=true;for(const e of document.querySelectorAll('#kscanpd'))e.remove()};close();
     const sleep=t=>new Promise(r=>setTimeout(r,t));let root=null,dlg=null,sel=null,txt=null,frame=null;
     if(kind==='news'||kind==='notice'||kind==='choice'){const o={t:kind==='news'?'Tin trong cung':kind==='notice'?'Một báo':'Việc thử',who,h:'<p>x</p>'};
      o.h=LONG_(kind==='choice'?5:8);if(kind==='choice')o.opts=[{n:'Một',fx:{}},{n:'Hai',fx:{}}];Q.push(o);showModal();
@@ -51,10 +51,10 @@ const KINDS=(process.env.KINDS||'news,notice,choice,pdlg,idcard,shop').split(','
     const cs0=getComputedStyle(im);if(cs0.maskImage!=='none'||cs0.clipPath!=='none'){cut+=999;clip.push('img mask/clip')}
     let ovl=0;frame.querySelectorAll(txt).forEach(t=>t.querySelectorAll('*').forEach(e=>{if(e.children.length||!(e.textContent||'').trim())return;const q=e.getBoundingClientRect();if(q.width&&q.right>L+.5&&q.left<Rr-.5&&q.bottom>T&&q.top<Bm)ovl++}));
     const out={src:src.split('/').pop(),ksz:dlg&&dlg.dataset.ksz||'',skull:Bm-sk,figW:Rr-L,figH:Bm-T,frameW:fr.width,frameH:fr.height,cut,clip,ovl,asp:(r.width/r.height)/(im.naturalWidth/im.naturalHeight),shrink:dlg&&dlg.__kszShrink||1};
-    close();return out;function LONG_(n){return '<p>'+'Một tin dài hơn rất nhiều, nói về chuyện trong cung và nhiều điều khác nữa. '.repeat(n)+'</p>'}},[kind,name,FIG]);
+    if(!SHOT)close();return out;function LONG_(n){return '<p>'+'Một tin dài hơn rất nhiều, nói về chuyện trong cung và nhiều điều khác nữa. '.repeat(n)+'</p>'}},[kind,name,FIG,!!(process.env.SHOTS&&OUT)]);
    r.kind=kind;r.name=name;
-   if(process.env.SHOTS&&OUT&&name!=='warmup'&&!r.err){/* re-open for the picture */}
-   if((name!=='warmup'||kind==='shop')&&r.err!=='skip'){if(kind==='shop')r.name='eunuch-nvp';rows.push(r)}}
+   if(process.env.SHOTS&&OUT&&name!=='warmup'&&!r.err&&(!process.env.SHOTK||process.env.SHOTK.split(',').includes(kind))){await p.screenshot({path:`${OUT}/${W}x${H}-${kind}-${name}.jpg`,type:'jpeg',quality:72});await p.evaluate(()=>window.__scanClose&&window.__scanClose())}else if(process.env.SHOTS&&OUT)await p.evaluate(()=>window.__scanClose&&window.__scanClose());
+   if((name!=='warmup'||kind==='shop')&&r.err!=='skip'){if(kind==='shop')r.name='eunuch-nvp';rows.push(r);console.error('..',W+'x'+H,kind,r.name,r.err||('skull '+(+r.skull).toFixed(1)+' cut '+(+r.cut).toFixed(1)))}}
   const f1=x=>(+x).toFixed(1);
   for(const r of rows){console.log(`${W}x${H} ${r.kind.padEnd(7)} ${r.name.padEnd(14)} ${r.err||`${r.ksz||'-'} skull>feet ${f1(r.skull)} | fig ${f1(r.figW)}x${f1(r.figH)} frame ${f1(r.frameW)}x${f1(r.frameH)} | cut ${f1(r.cut)} ${r.clip.join(';')} | text lines under figure ${r.ovl} | squeeze ${r.asp.toFixed(3)} shrink ${r.shrink} ${r.src}`}`);
    if(!r.err){if(r.cut>1){bad++;console.log('FAIL cut',r.kind,r.name,f1(r.cut))}if(Math.abs(r.asp-1)>.01){bad++;console.log('FAIL squeeze',r.kind,r.name)}}}
