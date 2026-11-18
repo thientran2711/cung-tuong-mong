@@ -94,8 +94,13 @@ const NRHK={emp:"emp",th:"th",hh:"hh",dad:"thu",bro:"thu",off:"thu",man:"thu",en
    (its j72 template stays registered so a help hồi of an old save still ends). A chapter whose cast maps to no allowed kind takes the first
    allowed kind of its hồi cast, else BAL.nroad.kinds[0]. */
 const nrKOk=k=>!!k&&nrB().kinds.includes(k)&&!!(typeof T72I==="object"&&T72I["nr_"+k]);
-function nrKind(A){const w=A&&A.w;let k=NRHK[w]||"bac";let ws=[];try{const B=A.B||{};ws=Object.keys(B).map(b=>B[b].w).filter(Boolean);if(!NRHK[w]&&ws.length)k=NRHK[pick(ws)]||k}catch(e){}
- if(nrKOk(k))return k;const L=ws.map(x=>NRHK[x]).filter(nrKOk);return L.length?L[0]:nrB().kinds[0]}
+/* fix (E7br q1b item 6, whole family "the asker IS the power her ask aims at"): a kind is never dealt to the person it would send the player
+   to — the Hoàng hậu is not asked to be spoken for «trước Hoàng hậu» (hh), the Thái y of the court not asked to find a thái y (y).
+   The Emperor and the Thái hậu have no NPC road (jreign / Tâm nguyện), so emp / th have no asker of their own here. Table: who → kinds. */
+const NRSELF={queen:["hh"],ty:["y"]};
+function nrSelfOf(who){return who?[].concat(...Object.keys(NRSELF).filter(r=>who===r||(Array.isArray(who)&&who.includes(r))).map(r=>NRSELF[r])):[]}
+function nrKind(A,no){no=no||[];const ok=k=>nrKOk(k)&&!no.includes(k);const w=A&&A.w;let k=NRHK[w]||"bac";let ws=[];try{const B=A.B||{};ws=Object.keys(B).map(b=>B[b].w).filter(Boolean);if(!NRHK[w]&&ws.length)k=NRHK[pick(ws)]||k}catch(e){}
+ if(ok(k))return k;const L=ws.map(x=>NRHK[x]).filter(ok);return L.length?L[0]:nrB().kinds.find(ok)||nrB().kinds[0]}
 /* Q1 — the help hồi tells the real story (OD:L644, L1252, L1601 (2); audit §4 Q1; reports/questline-expert.md B2/B4):
    NRASK[<chapter id>] (dev/build/jnrask*.js) = one ask or a list of asks {k help kind, h the ask in the asker's voice about THAT chapter,
    c optional step title, o:[[label, loss line], [label, loss line]]} for the two stock options of kind k (their costs, odds and losses stay
@@ -107,11 +112,12 @@ function nrAskId(r,n){try{if(!NRM[r]&&n===BAL.road.first-1)return r;const R0=!NR
 function nrAskL(r,n){const E=window.NRASK&&NRASK[nrAskId(r,n)];return E?[].concat(E):[]}
 const nrAskOk=a=>!!(a&&nrKOk(a.k)&&a.h&&a.o&&a.o.length>=2&&a.o[0]&&a.o[1]);
 /* the kind and the ask of a help hồi (consorts, maids, eunuchs, men: every offer site) */
-function nrAskPick(N,A){const L=nrAskL(N.r,N.n);const ix=L.map((a,i)=>nrAskOk(a)?i:-1).filter(i=>i>=0);
- if(ix.length){const i=ix[R(ix.length)];return{hk:L[i].k,av:i}}return{hk:nrKind(A),av:-1}}
+/* who = the asker's role(s) for NRSELF ("queen", a men kind like "ty") */
+function nrAskPick(N,A,who){const no=nrSelfOf(who);const L=nrAskL(N.r,N.n);const ix=L.map((a,i)=>nrAskOk(a)&&!no.includes(a.k)?i:-1).filter(i=>i>=0);
+ if(ix.length){const i=ix[R(ix.length)];return{hk:L[i].k,av:i}}return{hk:nrKind(A,no),av:-1}}
 function nrAskOf(X){const p=X&&X.p;if(!p||!p.nr||p.av==null||p.av<0)return null;const a=nrAskL(p.nr,p.nn)[p.av];return nrAskOk(a)&&X.T&&X.T.id==="nr_"+a.k?a:null}
-window.nrAskId=nrAskId;window.nrAskL=nrAskL;window.nrAskPick=nrAskPick;window.nrAskOf=nrAskOf;
-function nrOffer(v){const N=v.nr,A=nrCh(N.r,N.n);if(!A||typeof q72!=="function")return false;const K=nrAskPick(N,A),hk=K.hk;if(!T72I["nr_"+hk])return false;const q=q72();if(!q)return false;
+window.NRSELF=NRSELF;window.nrSelfOf=nrSelfOf;window.nrAskId=nrAskId;window.nrAskL=nrAskL;window.nrAskPick=nrAskPick;window.nrAskOf=nrAskOf;
+function nrOffer(v){const N=v.nr,A=nrCh(N.r,N.n);if(!A||typeof q72!=="function")return false;const K=nrAskPick(N,A,v.queen?"queen":""),hk=K.hk;if(!T72I["nr_"+hk])return false;const q=q72();if(!q)return false;
  if(q.ch.concat(q.a).some(c=>nrIsV(c,v)&&/^nr_/.test(c.tid)))return false;
  if(typeof rgL==="function"){try{const L=rgL();if(v.queen&&L.hh&&!L.hh.done&&L.hh.st>0)return false}catch(e){}}
  const riv=nrRival(v);const bk=riv&&riv!==S?(riv.queen?"hh":"rv"):null;
