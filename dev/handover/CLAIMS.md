@@ -1,5 +1,6 @@
 
 | coop-thin-e LIVE 09b1bbaf (main d219fcef → 09b1bbaf, 18/11 06:56Z, B) | review/coop-thin-e-r1 | B | session_01N1tNP4ndRrNNvpxebeB5b9 | LIVE 09b1bbaf | 18/11 06:56Z |
+| REVIEW life-preload-fu r1 (opus BIG) of a28baaea | review/life-preload-fu-r1 d0044419 | B | session_01N1tNP3R47upii2cW96Myw3 | FAIL B: co-op stuck dialog 2/10 runs (main 0/4); A whole group fixed on r1 | 18/11 08:30Z |
 | coop-thin part F1 (her acts as intents + intent wrapper + coop-cyc rewrite; opus BIG; brief briefs/coop-thin-f1.md) | review/coop-thin-f1 | B | session_01N1tNP3rNcptHftJhzxFMrF | ROLLOVER #1→#2 (report handover) | 18/11 07:00Z |
 | coop-thin part F1 #2 | review/coop-thin-f1 | B | session_01N1tNP5hUtqm6eT8fJ5jxTy | ROLLOVER #2→#3 @ 3b9cd531 (report handover) | 18/11 07:55Z |
 | coop-thin part F1 #3 | review/coop-thin-f1 | B | session_01N1tNP6ZG4o7s2LdhThfFH2 | RUNNING | 18/11 07:58Z |
