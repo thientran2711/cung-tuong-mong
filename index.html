@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"0b884cb7","t":"2026-11-18T08:17Z","c":"D8 poison road: Thái hậu inquest window adds up to the shown chance (per-month roll from the total)","b":"5406d7d7c37b","h":[{"s":"c571aaea+","t":"2026-11-18T07:26Z","c":"map-tap-go: KIT 84c person-less VIỆC frame — main picture fills the left column (k3fill), kit-conform rule, kit page sample, KIT_REQUESTS c…"},{"s":"5ae28ddb+","t":"2026-11-18T07:13Z","c":"place-stage r5 redo: A1 (marker back on the head, KIT_FIG.h .79, band 70, vivid gold glow) + seal at ONE fixed offset from the standing anc…"},{"s":"5c5d1e8b+","t":"2026-11-18T07:04Z","c":"review person-dialog-restore r1: greet result card carries the greeting line (was the ambient weather line); rebuilt"},{"s":"2eea9a2b+","t":"2026-11-18T06:45Z","c":"review coop-thin-e r1: coop-thin-e E2 diagnostics; a setup press that landed in the new week is stepped first (swap flake 2/7)"},{"s":"8af2fc24+","t":"2026-11-18T06:31Z","c":"mg-skip-all r2: one quick-button look everywhere (kquick css, never an option card), playArt default fix, KIT 13.6 + MINIGAMES, page test m…"},{"s":"c9ada2a3+","t":"2026-11-18T06:14Z","c":"Fix S.lyF: recognise the fallen Ly person by lyF===1 (S carries the object), not truthiness; her own figure keeps her rank tier. + dev/test…"},{"s":"d959a9e0+","t":"2026-11-18T06:28Z","c":"buoi-banner: owner pick BTR_OP = 0.85 on the 73a7d3f layout (title overlaps the band, flush at the stage top); ladder hook removed"},{"s":"8c210d6b+","t":"2026-11-18T06:21Z","c":"act-pic-match: EVENTS.json + FIGURES-kids.json rebuilt (same 17/11 02:41Z incident), cdn_sync refuses bulk overwrite of top-level manifests…"},{"s":"b7ea2748+","t":"2026-11-18T06:12Z","c":"kit-set-lines: display-room test pins rank so the real-data pair is never over rank"},{"s":"22891730+","t":"2026-11-18T06:08Z","c":"k61StageDesc: restore the existing k61Desc untouched (rename only my new helper)"}]};
+window.CTM_BI={"s":"4ce4cbfa+","t":"2026-11-18T08:20Z","c":"D8 poison road: site rebuilt (index.html, sw.js)","b":"2527244e1bf6","h":[{"s":"9c581406+","t":"2026-11-18T07:37Z","c":"review map-tap-go r9: merge origin/main e0b9662 (generated files rebuilt from merged sources)"},{"s":"c571aaea+","t":"2026-11-18T07:26Z","c":"map-tap-go: KIT 84c person-less VIỆC frame — main picture fills the left column (k3fill), kit-conform rule, kit page sample, KIT_REQUESTS c…"},{"s":"5ae28ddb+","t":"2026-11-18T07:13Z","c":"place-stage r5 redo: A1 (marker back on the head, KIT_FIG.h .79, band 70, vivid gold glow) + seal at ONE fixed offset from the standing anc…"},{"s":"5c5d1e8b+","t":"2026-11-18T07:04Z","c":"review person-dialog-restore r1: greet result card carries the greeting line (was the ambient weather line); rebuilt"},{"s":"2eea9a2b+","t":"2026-11-18T06:45Z","c":"review coop-thin-e r1: coop-thin-e E2 diagnostics; a setup press that landed in the new week is stepped first (swap flake 2/7)"},{"s":"8af2fc24+","t":"2026-11-18T06:31Z","c":"mg-skip-all r2: one quick-button look everywhere (kquick css, never an option card), playArt default fix, KIT 13.6 + MINIGAMES, page test m…"},{"s":"c9ada2a3+","t":"2026-11-18T06:14Z","c":"Fix S.lyF: recognise the fallen Ly person by lyF===1 (S carries the object), not truthiness; her own figure keeps her rank tier. + dev/test…"},{"s":"d959a9e0+","t":"2026-11-18T06:28Z","c":"buoi-banner: owner pick BTR_OP = 0.85 on the 73a7d3f layout (title overlaps the band, flush at the stage top); ladder hook removed"},{"s":"8c210d6b+","t":"2026-11-18T06:21Z","c":"act-pic-match: EVENTS.json + FIGURES-kids.json rebuilt (same 17/11 02:41Z incident), cdn_sync refuses bulk overwrite of top-level manifests…"},{"s":"b7ea2748+","t":"2026-11-18T06:12Z","c":"kit-set-lines: display-room test pins rank so the real-data pair is never over rank"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -6869,8 +6869,7 @@ document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest
  const s=servById(+b.dataset.sid);if(!s)return;const bf=rsnap();const r=srvStaffAct(b.dataset.cnv,s);if(r!=null)resultShow(b.firstChild.textContent,bf,r);render()},true);
 (function(){const s0=selfCardHTML;selfCardHTML=function(){if(!isSrv())return s0.apply(this,arguments);const m=srvM();
  return pcard({f:pMe(),col:"#b9a48a",name:S.name,rank:srvTitle(),lines:[`${S.age} tuổi · ${S.origin.n}`,`Sắc ${S.sac} · Tài ${S.tai} · Tâm cơ ${S.tamco} · Đức ${S.duc}`,`Sức ${S.suc} · Bạc ${S.bac} · Danh ${S.danh}`,`Chủ tin ${S.tin} · Hoàng thượng để ý ${S.nt}`],note:m?`Chủ: <b>${rkName(m)} ${m.name}</b>, tính ${netTxt(m)}.`:"",groups:[["Đường đi",srvRows()]].concat(typeof kcuHonorRows==="function"&&kcuHonorRows(1).length?[["Danh hiệu thi tài",kcuHonorRows(5)]]:[]),empty:""})}})();
-(function(){const t0=showTitle;showTitle=function(){const r=t0.apply(this,arguments);try{document.querySelectorAll("#slots .slot").forEach(el=>{const b=el.querySelector("[data-load]");if(!b)return;const d=loadSlot(+b.dataset.load);
- if(d&&d.S&&d.S.srv&&!d.S.srv.risen){const sp=el.querySelector(".past");if(sp)sp.textContent=sp.textContent.replace(/^[^·]*/,(d.S.srv.lau>0?"Cung nữ Tân Giả khố":SRK.maid[d.S.srv.rk]||"Cung nữ")+" ")}})}catch(e){}return r}})();
+/* the Chọn sổ rows say who the sổ is through j74 slotWho (one place, srv lives included); the old #slots .slot text patch is gone with the old rows */
 (function(){const st=document.createElement("style");st.textContent=`.srvhead{display:flex;gap:8px;align-items:center;padding:6px 8px;margin:0 0 8px;border:1px solid var(--line);border-radius:8px;background:var(--panel2);font-size:.82rem;line-height:1.4}
 .srvrow{display:flex;gap:8px;align-items:flex-start;padding:8px 2px;border-bottom:1px solid var(--line);flex-wrap:wrap}.srvrow .srvi{display:flex;flex-direction:column;gap:1px;min-width:0;flex:1 1 160px;font-size:.85rem}
 .srvrow .srvb{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:6px;flex:1 1 100%}.srvrow .srvb .opt{min-width:0}
@@ -8672,7 +8671,7 @@ T.style.removeProperty("background");
 const HEAD={slots:"Chọn sổ",opt:"Thiết lập",past:"Sổ luân hồi",notes:CTM_WAIT.notesName};
 const SUBH={slots:"Sổ mây ở trên, rồi ba sổ chơi một mình. Phúc duyên ở dưới.",slotsco:"Ba phòng cùng hảo hữu, không ghi đè sổ một mình. Phúc duyên ở dưới.",opt:"Tiếng, nhạc, giọng, rung; sổ mây; chép sổ và nạp sổ.",past:"Những kiếp đã qua.",notes:"Những điều mới của các lần đổi mới gần đây."};
 const SONO=["một","hai","ba"];
-function slotWho(s){try{if(s.srv&&!s.srv.risen)return s.srv.lau>0?"Cung nữ Tân Giả khố":(typeof SRK!=="undefined"&&SRK.maid&&SRK.maid[s.srv.rk])||"Cung nữ";return (RANKS[Math.min(s.rank,RANKS.length-1)]||{}).n||""}catch(e){return ""}}
+function slotWho(s){try{if(s.srv&&!s.srv.risen)return s.srv.lau>0?"Cung nữ Tân Giả khố":(typeof SRK!=="undefined"&&SRK.maid&&SRK.maid[s.srv.rk])||"Cung nữ";if(s.kc&&!s.kc.inPal)return s.kc.kd?(s.kc.kd==="dan"?"Thôn nữ chờ tuyển":"Công chúa chờ hòa thân"):"Tiểu thư ngoài cung";return (RANKS[Math.min(s.rank,RANKS.length-1)]||{}).n||""}catch(e){return ""}}
 function slotDate(s){try{return kitDate(s.month,s.year,s.tuan)}catch(e){return `Tháng ${s.month}, năm ${s.year}`}}
 function slotsHTML(){return [1,2,3].map(n=>{const d=loadSlot(n);const h=`<h4 class="kpst">Sổ ${SONO[n-1]}</h4>`;
   if(!d)return `<div class="kslot">${h}${kitRows([["Kiếp","Chưa ghi","n"]])}<div class="kslot-a"><button class="kbtn" data-new="${n}">Bắt đầu kiếp mới</button></div></div>`;
@@ -8750,7 +8749,6 @@ function resumeGame(){const n=lastSlot();const lb=n&&$("slots").querySelector(`[
 window.kitMenuResume=resumeGame;
 $("modal").addEventListener("click",e=>{const M=$("modal");if(!M.classList.contains("kptitle"))return;const b=e.target.closest("button[data-tgo]");if(!b)return;e.stopPropagation();const g=b.dataset.tgo;try{if(typeof sfx==="function")sfx("sfx-tap")}catch(x){}
  if(b.dataset.cstab){csSet(b.dataset.cstab);if(g==="slots")try{drawSlots()}catch(x){}}
- if(g==="cont"){resumeGame();return}
  go(g)},true);
 document.addEventListener("keydown",e=>{if(e.key==="Escape"&&!T.hidden&&PG!=="home"){e.preventDefault();go("home")}});
 /* re-renderers of the borrowed parts: give the parts back first, re-mount after */
@@ -53352,8 +53350,10 @@ try{const oh=optHTML;optHTML=function(){const h=oh.apply(this,arguments);
 
 /* ---------- ☰ menu: "Xem lại lời dặn" (only with a kiếp in play) ---------- */
 function addReplay(){const m=document.querySelector("#modal.kpthome .kpmenu");if(!m||m.querySelector(".ktutb"))return;
- const cont=m.querySelector('[data-tgo="cont"]');if(!cont||typeof S==="undefined"||!S||S.dead||botOff())return;
+ const cont=m.querySelector('[data-tgo="slots"]');/* the home menu (j74 homeMenu): Tiếp tục / Bắt đầu is data-tgo="slots" */if(!cont||typeof S==="undefined"||!S||S.dead||botOff())return;
  const b=document.createElement("button");b.type="button";b.className="kbtn alt ktutb";b.dataset.ktutReplay="1";b.innerHTML=`Xem lại lời dặn<small>${MMN()} chỉ lối</small>`;m.appendChild(b)}
+/* a full-width row under the other home buttons (same rule as the co-op button, jcooplobby .kco) */
+try{const st=document.createElement("style");st.textContent=".kpmenu .kbtn.ktutb{grid-column:1/-1}";document.head.appendChild(st)}catch(e){}
 new MutationObserver(addReplay).observe(document.getElementById("modal"),{childList:true,subtree:true});
 document.getElementById("modal").addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-ktut-replay]");if(!b)return;e.stopPropagation();e.preventDefault();
  try{if(typeof sfx==="function")sfx("sfx-tap")}catch(x){}
@@ -60138,8 +60138,7 @@ function kcStoryHTML(){const k=S.origin.k;const n=[4,10,16].filter(x=>S.turn>=x)
   groups:[["Tư chất",[["Sắc",S.sac,"t"],["Tài",S.tai,"t"],["Tâm cơ",S.tamco,"t"],["Đức",S.duc,"t"],["Sức",S.suc,"t"],["Bạc",kitChip("Bạc",S.bac,"n"),"t"],["Danh",S.danh,"t"]]],
    ["Nhà",[["Gia thanh",S.kgt,"t"],["Áp lực hôn sự",S.kap,S.kap>=BAL.kc2.st.kc.hot?"r":"t"],["Hồi môn",kitChip("Bạc",S.khm,"n"),"t"]]]].concat(typeof kcuHonorRows==="function"&&kcuHonorRows(1).length?[["Danh hiệu thi tài",kcuHonorRows(5)]]:[])})}})();
 /* the title screen slot line */
-(function(){const t0=showTitle;showTitle=function(){const r=t0.apply(this,arguments);try{document.querySelectorAll("#slots .slot").forEach(el=>{const b=el.querySelector("[data-load]");if(!b)return;const d=loadSlot(+b.dataset.load);
- if(d&&d.S&&d.S.kc&&!d.S.kc.inPal){const sp=el.querySelector(".past");if(sp)sp.textContent=sp.textContent.replace(/^[^·]*/,"Tiểu thư ngoài cung ")}})}catch(e){}return r}})();
+/* the Chọn sổ rows say who the sổ is through j74 slotWho (one place, kc lives included); the old #slots .slot text patch is gone with the old rows */
 
 /* ---------- co-op hook points (OUTSIDE_PLAN §13; no networking: single-player routes them to the log) ---------- */
 const KCHOOK=[];function kcHook(kind,payload){KCHOOK.push({kind,payload,t:S?S.turn:0});if(KCHOOK.length>50)KCHOOK.shift();try{if(typeof window.coopSend==="function")window.coopSend("kc:"+kind,payload)}catch(e){}}
@@ -64085,8 +64084,7 @@ try{Object.assign(PD_END,{"Ở lại quê nhà":12,"Làm thiếp nhà phú hộ"
 function kc2End(h,t){if(S.dead)return;S.kc.end=h;Q=Q.filter(m=>m.cls==="end"||m.nl);over(h,t+` <span class="past">(${S.kc.kd==="dan"?"Thôn nữ chờ tuyển":"Công chúa chờ hòa thân"} · ${kcTitle()})</span>`,h);try{showModal()}catch(e){}}
 (function(){if(typeof kpWhy!=="function")return;const w0=kpWhy;kpWhy=function(){if(S&&S.kc&&S.kc.kd&&!S.kc.inPal)return `mới ${S.turn||0}/${KIEP.mo} tháng ở nhà, chưa vào cung`;return w0.apply(this,arguments)}})();
 (function(){if(typeof lifeSave!=="function")return;const l0=lifeSave;lifeSave=function(f){const r=l0.apply(this,arguments);try{if(S&&S.kc&&S.kc.kd&&!S.kc.inPal){const p=lifeLog();if(p[0]&&p[0].n===S.name&&p[0].kc===1&&!p[0].kc2){p[0].kc2=1;p[0].f=String(p[0].f||"").replace("Tiểu thư ngoài cung",S.kc.kd==="dan"?"Thôn nữ chờ tuyển":"Công chúa chờ hòa thân");store.set("cung-luanhoi",p)}}}catch(e){}return r}})();
-(function(){const t0=showTitle;showTitle=function(){const r=t0.apply(this,arguments);try{document.querySelectorAll("#slots .slot").forEach(el=>{const b=el.querySelector("[data-load]");if(!b)return;const d=loadSlot(+b.dataset.load);
- if(d&&d.S&&d.S.kc&&d.S.kc.kd&&!d.S.kc.inPal){const sp=el.querySelector(".past");if(sp)sp.textContent=sp.textContent.replace("Tiểu thư ngoài cung",d.S.kc.kd==="dan"?"Thôn nữ chờ tuyển":"Công chúa chờ hòa thân")}})}catch(e){}return r}})();
+/* the Chọn sổ rows say who the sổ is through j74 slotWho (one place, kd lives included); the old #slots .slot text patch is gone with the old rows */
 
 /* ---------- UI: the jkc panels with this road's people and words ---------- */
 (function(){const f0=kcFamList;kcFamList=function(w){if(!S||!S.kc||!S.kc.kd)return f0.apply(this,arguments);return S.kc.fam.filter(m=>m.alive&&!(m.hide&&!S.kc.sx)&&(w==="ban"?!!m.out:!m.out))}})();
@@ -68678,7 +68676,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="5406d7d7c37b";window.CTM_BUILD=BUILD;
+const BUILD="2527244e1bf6";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
