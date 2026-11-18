@@ -948,3 +948,4 @@ LESSONS s39: look at neighbours side by side before asking her to pick (A/B/C gl
 - (18/11 01:19Z) OWNER: hoa điền tone = saturation only → options 85/75/65 on dao+maudon ordered (opacity options cancelled).
 - (18/11 01:22Z) OWNER angry: smudge pink vertical stripe still visible at all %; grey runs too opaque → worker: reuse toil blush renderer, delete stripe shape, zoom+gradient check. LESSON: I passed r11/r12 without zooming the cheek — zoom 3× on cheeks before sending any smudge image.
 - (18/11 01:24Z) OWNER: glow v8 APPROVED final → in review looks-s40.
+- (18/11 01:27Z) batch s40a HOLD: ag-all-2 1f8aaf30 alone fails coop-e2e 1/9 (buổi both seats, err seatresync undefined) + G4 1/5 under load → C-AG #7 root fix on ag-all-2 (+a090dd3e), gate ×9/×5. Nothing pushed; live stays eb3675a6.
