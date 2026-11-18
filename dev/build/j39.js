@@ -43,7 +43,7 @@ function figPick(who){const roles=figRoles(who);if(!roles.length)return null;con
   const sc=k=>{const L=M[k];const b=figBest(L,tier,age);let s=-figDist(b,tier,age);if((S.men||[]).includes(who))s+=4*Math.max(...L.map(f=>figSubOk(who,f)));s+=3*Math.max(...L.map(f=>figLook(who,f)));return s};
   let best=-1e9;for(const k of free)best=Math.max(best,sc(k));const top=free.filter(k=>sc(k)>=best-.5);const k=pick(top);who.fid=k;figUsed().push(k);return k}
  return null}
-/* SERVANT FACES ARE FREED (review/staff-cap-apply, MAIN s42: faces ran out after ~52 maids over one life). A servant identity (maid / mama /
+/* SERVANT FACES ARE FREED (review/staff-cap-apply, MAIN s42: faces ran out after ~52 servants over one life). A servant identity (maid / mama /
    eunuch) belongs to a person while anyone in the game still holds her: when a servant needs a face and every identity of her group is taken,
    figGC frees the servant identities no live person holds any more (sent away, dismissed, dead, married out — every removal path at once, no
    per-path code). Held = any fid / pid / fromMaid value reachable from S and the consorts (households, the Thái hậu's women, the court, the
