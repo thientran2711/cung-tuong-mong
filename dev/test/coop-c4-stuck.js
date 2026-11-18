@@ -80,8 +80,9 @@ async function week(A,B,tag){for(let i=0;i<3;i++){await clear(A);await clear(B)}
   /* S5 negative (review r1): the shared clear() must NOT hide a real stuck state.
      (a) a card queued but the dialog truly hidden: clear() presses nothing and the card stays queued;
      (b) a pure-close card whose kit ✕ is not on screen: clear() reports 'stuck' (it never clicks an invisible ✕). */
-  const n5a=await o.p.evaluate(()=>{Q.length=0;Q.push({t:'Thử C4n',h:'<p>x</p>'});document.getElementById('modal').hidden=true;return Q.length});
-  const c5a=await clear(o,1);const q5a=await o.p.evaluate(()=>Q.map(m=>m.t));
+  /* the room's own reshow (armed by an earlier render) would rightly show the card again: hold showModal for this one check */
+  const n5a=await o.p.evaluate(()=>{window.__c4sm=showModal;showModal=function(){};Q.length=0;Q.push({t:'Thử C4n',h:'<p>x</p>'});document.getElementById('modal').hidden=true;return Q.length});
+  const c5a=await clear(o,1);const q5a=await o.p.evaluate(()=>{const r=Q.map(m=>m.t);showModal=window.__c4sm;return r});
   ok(n5a===1&&c5a!=='x'&&q5a[0]==='Thử C4n','S5 '+nm+': a hidden queued card is not "cleared" by the test helper',{c5a,q5a});
   await o.p.evaluate(()=>{Q.length=0;Q.push({t:'Điềm báo',kind:'notice',act:1,h:'<p>✕ khuất.</p>',opts:[{n:'Đã rõ',fx:{},go:()=>{}}]});showModal();
    const st=document.createElement('style');st.id='c4nx';st.textContent='#modal .dlg .kit-x{display:none!important}';document.head.appendChild(st)});
