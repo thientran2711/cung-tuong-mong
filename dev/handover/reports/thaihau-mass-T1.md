@@ -35,3 +35,12 @@ CDN: https://ctm-img.victoria-tntt.workers.dev/img/_review/thaihau/cNN_<age>_tha
 Old style-B gens (c01/c02) overwritten by these (same names).
 HANDOVER for T1c: remaining c04–c08 x a36/a51/a65 = 15 gens (c05 a51: redo too, one ref; do NOT copy the style-B sample). Identity uploads in the T1 table above (c04 5jDrmFiKxe/O6E9170ynm, c05 UPvObSjwny/If3hxHCtvE, c06 JNC41yCOq4/ksejajT16B, c07 3zKAUG9REY/WDgVNppcXe, c08 dt48zhJXSL/4RFiLAP9Aa; ids verified for c01 a36 only — look at a ref if a result's face is wrong). a65 uses the a51 id. Items: c04 gold phoenix incense ball, c05 gold lidded jewel casket, c06 gold-mounted scroll, c07 phoenix-headed hand mirror, c08 kingfisher-and-pearl phoenix fan. Cut-out + sheet (PIL, 0.5x, a36|a51|a65 on parchment) + cdn_sync.py img/_review/thaihau (needs dev/site/manifest_guard.py too) as for c01–c03.
 ~38% xong (9/24 gens) / ~0% chơi được
+
+## T1c (18/11 ~22:45Z) — START_CTX ~15 %, ctx ~55 % at report
+PRIORITY #1 CHECK ('thai hau 2-ref sample'): OD/FIGURE_GATE A0 REFERENCES (2 refs: own t1 + m09 eIyOFEidqL) | main none | review/* none | claims ROOT-32 order T1c.
+Earlier T1c gens (1 ref, --nostyle) c04 a36/a51/a65 + c05 a36/a51/a65 (c05 not looked) are OBSOLETE (owner 22:35Z: two refs). ROOT-32 order: 2-ref sample for c04 only, then STOP.
+Method: `build.py c04 --state thaihau --age aXX` at b8c0074 (no --nostyle; only adds one style sentence), refs = c04 own t1 (a36 5jDrmFiKxe, a51+a65 O6E9170ynm) + style eIyOFEidqL (type style); gpt-2-6 1024x2304 2k count 1. 3 gens x 135 cr (+6 earlier obsolete 1-ref gens, c05 x3 unlooked).
+Result c04 (gold phoenix incense ball), all 3 looked: face ok, stiff shoulder piece + collar ok, age right (a36 young, a51 silver streaks, a65 elderly), 1 item, lips closed, nothing covers face, front/3-quarter. 0 regen.
+CDN: https://ctm-img.victoria-tntt.workers.dev/img/_review/thaihau-2ref/c04_a36.png | c04_a51.png | c04_a65.png | c04_sheet.jpg (row1 old 1-ref, row2 new 2-ref; no cut-out made yet).
+Note: cdn_sync.py/manifest_guard.py live only on origin/main (not on handover branch).
+Remaining c04–c08 at 2 refs = 15 gens, waiting for ROOT-32 GO. ~5% xong / ~0% chơi được
