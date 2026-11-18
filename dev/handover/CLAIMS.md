@@ -976,7 +976,7 @@ looks-2 overlay art (fx-stain-tra/uot, smudge, ink, pox, scars, messy hair) | im
 | coop-thin part E #2 (opus BIG; handover reports/coop-thin-e.md '#1 → #2' items 1–7) | review/coop-thin-e | B | session_01N1tNP6mL68mhj11smPZoTL | ROLLED OVER @ 4ba4fc15 (items 1–5 built; handover #2 → #3 in the report) | 17/11 23:31Z |
 | coop-thin part E #3 (opus BIG; handover reports/coop-thin-e.md '#2 → #3') | review/coop-thin-e | B | session_01N1tNP5w7CCPSfpWCxnK199 | RUNNING | 18/11 01:22Z |
 | cloth-xoc r3 (crease look redo + stain-decal layer; opus: hard rendering root cause after 2 FAILs) | review/cloth-xoc | MAIN s39 | session_01UV1SzkYmApqhLJ8fozxZi3 | ROLLED OVER @57afd8a (crease look improved, lv1/2 weak; stain not started; handover in reports/cloth-xoc.md r3) | 17/11 23:12Z |
-| cloth-xoc r4 (crease lv1/lv2 + stain-decal layer; sonnet) | review/cloth-xoc | MAIN s39 | session_01UV1SzjnD2foC6FyKie4bD3 | RUNNING | 17/11 23:23Z |
+| cloth-xoc r4 (crease lv1/lv2 + stain-decal layer; sonnet) | review/cloth-xoc | MAIN s39 | session_01UV1SzjnD2foC6FyKie4bD3 | ROLLED OVER @8dab3d4 → r6 | 17/11 23:23Z |
 | odds-cap review ROUND 2 (opus BIG) of fcefca42 | review/odds-cap-r1 | D | session_01964izFgd4LMUTiKvpBrSVD | RUNNING | 17/11 23:38Z |
 | NPC-CHAIN LANDER #2 (opus): coop hold fix ('buổi advanced both seats') → new PASS | review/npc-chain-land | C-AG | session_01UV1SzhJFho1Xs76yNi63tL | RUNNING | 18/11 00:07Z |
 | REVIEW looks-s40 (toil-looks5 c52cb985 + tuyet-glow 7e80f3cd; sonnet SMALL; brief briefs/review-looks-s40.md) | review/looks-s40 | MAIN s40 | session_01UV1Szk7eZQzR2d2t4rhiFj | RUNNING | 18/11 00:25Z |
@@ -985,7 +985,7 @@ looks-2 overlay art (fx-stain-tra/uot, smudge, ink, pox, scars, messy hair) | im
 | REVIEW AG LATER delta (opus BIG) on review/ag-all-2-land + review/npc-chain-land | review/ag-all-2-land, review/npc-chain-land | C-AG | session_01UV1SzkmyAXYnCFY6utjvkF | RUNNING | 18/11 00:47Z |
 | ART mud decals fx-stain-bun-3..8 for cloth-xoc lv2/3 (sonnet; brief briefs/art-mud-decals.md) | CDN only | MAIN s41 | session_01UV1SzixsCCEiLAstC886hS | DONE: 6 decals on CDN, reports/mud-decals.md | 18/11 01:01Z |
 | batch s40b LIVE 3da5720a (main eb3675a6 → 3da5720a; ROLLBACK eb3675a6): makeup-lux r2v 0e6489f6 | review/batch-s40b | MAIN s41 | session_01UV1SzjA6P5mZskv3JKn3BV | LIVE | 18/11 01:09Z |
-| cloth-xoc r6 (c30 grey→own-hue wet + mud lv2/3 from bun-1..8; opus; brief briefs/cloth-xoc-r6.md) | review/cloth-xoc | MAIN s41 | session_01UV1SzjMK4RUBPdS1ZMuLds | RUNNING | 18/11 01:09Z |
+| cloth-xoc r6 (c30 grey→own-hue wet + mud lv2/3 from bun-1..8; opus; brief briefs/cloth-xoc-r6.md) | review/cloth-xoc | MAIN s41 | session_01UV1SzjMK4RUBPdS1ZMuLds | SẴN SÀNG KIỂM b5d7efe (samples CDN img/_review/cloth-xoc/stain-{uot,bun}-1..3.png) | 18/11 01:09Z |
 | REVIEW staff-cap-fix a2389cc (BIG; brief briefs/review-staff-cap-fix.md) | review/staff-cap-fix-r6 | MAIN s41 | session_01UV1SzkW9AbJs8kAvGGWzkv | RUNNING | 18/11 01:12Z |
 | STAFF-CAP TABLE (measure only: B2/D1/D2/D3/A/low-rank, avg + worst case, Fold 4x perf, co-op, thân cận-brain variant; opus; brief briefs/staff-cap-table.md) | review/staff-cap-table | MAIN s41 | session_01UV1SzkENdmyJBzB9tXt38F | TABLE READY: reports/staff-cap-table.md (D2 26–27 rec; perf flat) | 18/11 03:30Z |
 | smudge-code r16 (extra short run at nặng, big-size darker, +10/+20 % options; sonnet; brief briefs/smudge-r16.md) | review/smudge-code | MAIN s41 | session_01UV1SzhMG33iYZzEKjZvDzg | RUNNING | 18/11 01:23Z |

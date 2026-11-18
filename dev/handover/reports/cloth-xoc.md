@@ -96,3 +96,47 @@ Done: creases (owner approved lv1-3, DO NOT TOUCH), skin exclusion for all stain
 Samples on CDN img/_review/cloth-xoc/: stain-{uot,bun,tra}-{1,2,3}.png (2400 px tall, c01|c30), stain-uot-{1,2,3}-{neck,hand-l,hand-r}.png (7x crops).
 OPEN (successor): MUD. Owner: lv1 OK, lv2/lv3 look forced/crude; main s40: plume shapes read as grass tufts. Wanted: (1) dirty brown-grey wash band hugging the real wavy hem, darkest at the edge, soft top edge; (2) above it sparse splash DROPS (round/oval, some with a short drip tail down the fold), thinning up; (3) a few dried drag streaks along fold ridges; levels = natural progression of lv1 (more coverage/height, finer, softer). Needs 3-4 NEW Magnific gpt-2-6 decals (opaque mud on transparent): hem band strip, drops cluster, drip streaks -> CDN img/fx-stain-bun-3.. then place in clothStainBake (K.scatter branch, jcloth.js) using the cloth mask; hem band should follow the hem curve (mask bottom edge per column). Magnific tools were disconnected in my session (may be back: ToolSearch).
 Harness (scratch): jc_new.js copy of jcloth.js, node scripts stain.js / xoc.js / zoom.js (window=global, BAL stub), RGBA from PIL, face box from CDN img/veil-fit.json; figures c01/c30/c03/c12 t2-a26 at CDN img/. Tea lv1 on warm robes already +30 %.
+
+## r6 (session_01UV1SzjMK4RUBPdS1ZMuLds, MAIN s41) — SẴN SÀNG KIỂM review/cloth-xoc b5d7efe (QUICKCHECK PASS, tests OK, effects still OFF)
+PRIORITY #1 CHECK: OD 18/11 00:47Z, 01:06Z, 02:30Z, 02:45Z read verbatim | main none | review/cloth-xoc 8dab3d4 reused | claims r4/r5 SzjnD2f -> r6 (row already mine)
+### (1) Wet grey on c30 — root cause + fix
+Root causes: (a) the wet DECALS fx-stain-uot-1/2 are near-black blue (mean RGB ~(0,4,24)) and were painted with multiply tinted 40 % toward neutral (110,95,85) -> neutral grey blotches with hard tops (the blotches main saw at sleeve ends / skirt); (b) the wet field itself darkened with a NEUTRAL factor (1-.13w) and a 'cling' term added equally to R,G,B -> on ivory (no chroma for self-multiply to amplify) that is grey; (c) hem wet zone was a horizontal band (clothSmooth on fy).
+Fix (jcloth.js, one shared function): `clothWetDeepen` = each channel x (local robe colour channel / brightest)^P x (1-dark·s), local colour = cloth-only blur (r 5, + r 20 for near-white pixels, warm floor [1,.97,.88]) -> ivory goes warm deeper ivory, blue deeper blue, red deeper red; output min(v,o) so never lighter. Wet decals now add only their SHAPE to the wet field (`clothFieldDecal`); drips also join the field (no neutral `*=1-g`). Hem wet line per column (fbm tongues, hemV .34) = wicks up the pleats, no horizontal edge. Front panel waist->knee wet at lv2/3 (front [0,.5,.75,1]; owner 02:30Z 'trắng bóc'). Params BAL.looks.stain.kind.uot.deep. Test added (cloth-stain.js): wet never lighter in any channel, never lower channel spread (greyer) on lv1-3.
+Wet table (changed cloth pixels; dC* = Lab chroma change, >= 0 means not greyer):
+| fig | lv | changed px | min dL* | mean dL* | lighter px | mean dC* | greyer px (dC*<-3) | mean dhue° |
+|---|---|---|---|---|---|---|---|---|
+| c01 | 1 | 44900 | -11.1 | -6.3 | 0 | +4.16 | 0 | -2.1 |
+| c01 | 2 | 98656 | -17.5 | -9.4 | 0 | +6.47 | 0 | -2.7 |
+| c01 | 3 | 118985 | -22.1 | -13.6 | 0 | +9.34 | 0 | -3.4 |
+| c03 | 1 | 76383 | -9.5 | -4.0 | 0 | +2.91 | 0 | -1.4 |
+| c03 | 2 | 100149 | -15.1 | -7.4 | 0 | +5.24 | 0 | -2.4 |
+| c03 | 3 | 133671 | -18.5 | -10.8 | 0 | +7.34 | 12 | -3.5 |
+| c12 | 1 | 36429 | -8.5 | -3.1 | 0 | +1.95 | 0 | -1.2 |
+| c12 | 2 | 49998 | -13.7 | -7.0 | 0 | +4.17 | 0 | -2.4 |
+| c12 | 3 | 104896 | -17.9 | -8.6 | 0 | +5.18 | 0 | -3.0 |
+| c30 | 1 | 38765 | -8.3 | -4.6 | 0 | +1.49 | 0 | -1.6 |
+| c30 | 2 | 67500 | -12.8 | -6.3 | 0 | +1.91 | 0 | -2.0 |
+| c30 | 3 | 108134 | -16.1 | -9.0 | 0 | +2.55 | 106 | -3.0 |
+(c30 lv3 106 px / 108k with dC* < -3 = dark lavender wisteria blossoms getting darker, not grey cloth.) Before (8dab3d4): c30 lv3 min dL* -49.5, mean dC* +1.28, 258 greyer px; c01 lv3 2422 greyer px.
+### (2) Mud lv2/lv3 rebuilt
+lv1 BYTE-IDENTICAL to 8dab3d4 (checked with cmp on c01, c30; base strips use decals 1..2 only, BAL bun.base 2). lv2/lv3 = the lv1 vertical strips (n 8/9 instead of 13/22) + painted pieces placed by code (BAL.looks.stain.kind.bun.add): lv2 = hem band bun-7 x2 (op .45) + drop clusters bun-3 x2 + 1 drip bun-5, all low (fy .9-.96); lv3 = bun-7 x3 + bun-3 x4 + bun-5 x2 + splash bun-4 x2 + pleat wicks bun-6 x3. 'hem' pieces stand on the REAL hem of their column (lowest cloth pixel). Multiply, earth brown, clipped by cloth mask + skin/item protect. Knee scuff bun-8 DROPPED (read as a grey-brown blotch mid-skirt on c30). Game loads fx-stain-bun-1..8 (variants 8).
+Mud table (dL* on changed px; strong local darkening is expected for mud):
+| fig | lv | changed px | min dL* | mean dL* | lighter px | mean dC* | greyer px (dC*<-3) | mean dhue° |
+|---|---|---|---|---|---|---|---|---|
+| c01 | 1 | 2005 | -55.1 | -15.1 | 0 | +2.92 | 9 | -0.6 |
+| c01 | 2 | 6403 | -56.4 | -16.2 | 0 | +3.89 | 42 | -2.3 |
+| c01 | 3 | 7998 | -61.5 | -17.0 | 0 | +4.23 | 40 | -1.7 |
+| c03 | 1 | 2356 | -46.8 | -14.6 | 0 | +0.67 | 122 | -11.0 |
+| c03 | 2 | 5390 | -49.9 | -15.5 | 0 | +2.41 | 155 | -11.3 |
+| c03 | 3 | 9523 | -68.3 | -20.4 | 0 | +4.32 | 245 | -13.3 |
+| c12 | 1 | 2968 | -57.5 | -15.3 | 0 | +3.43 | 2 | -9.3 |
+| c12 | 2 | 8052 | -58.1 | -17.1 | 0 | +4.83 | 3 | -10.1 |
+| c12 | 3 | 11698 | -72.1 | -20.4 | 0 | +6.17 | 1 | -11.4 |
+| c30 | 1 | 2837 | -50.5 | -16.7 | 0 | +6.27 | 0 | -4.6 |
+| c30 | 2 | 7357 | -62.4 | -18.5 | 0 | +7.23 | 1 | -8.0 |
+| c30 | 3 | 10579 | -60.8 | -19.3 | 0 | +7.98 | 2 | -8.9 |
+### Looked at
+1.5x/3x crops of c01, c30, c03, c12 all levels; neck, both hands, cup/branch/beads at lv3: clean, no halo, no grey. Mud reads as a natural progression of lv1 (more at the hem, finer pieces), all vertical.
+### Samples (2400 px tall, c01 | c30 | c03 | c12, label in Vietnamese)
+https://ctm-img.victoria-tntt.workers.dev/img/_review/cloth-xoc/stain-uot-1.png (-2, -3) and stain-bun-1.png (-2, -3). Older r5 crops stain-uot-*-neck/hand-* still there (stale). Tea unchanged. Wipe after verdict: python3 dev/site/cdn_sync.py --wipe-review cloth-xoc
+Tests: cloth-stain.js OK (+wet never lighter/greyer), cloth-xoc.js OK, one-core-guard PASS, quickcheck PASS (b5d7efe, site rebuilt).
