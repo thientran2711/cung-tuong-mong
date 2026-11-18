@@ -238,7 +238,7 @@ function lPaint(have,total,slow){if(!lel)return;const b=lel.querySelector(".klb"
  const want=slow?`<button class="kbtn alt" data-klife="go">${CTM_WAIT.lifeGo}</button>`:"";if(o.innerHTML!==want)o.innerHTML=want}
 document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-klife]");if(!b)return;e.stopPropagation();LIFE.go=true},true);
 const lSleep=t=>new Promise(ok=>setTimeout(ok,t));
-async function lifeGate(why){if(LIFE.on){LIFE.again=true;return}
+async function lifeGate(why){if(LIFE.off)return;/* test hook: KLIFE.off = no gate (mid-load shots of §59.1) */if(LIFE.on){LIFE.again=true;return}
  if(why!=="start"){const L=kitLifeSet();let miss=0;L.forEach((raw,u)=>{if(!lOk(u)){miss++;lWant(u,raw)}});if(!miss&&!lPending().length){(KLOAD.lifes=KLOAD.lifes||[]).push({why,n:L.size,bytes:0,ms:0,late:0,cached:true});return}}
  LIFE.on=true;LIFE.go=false;const t0=Date.now();lCover();
  const st=KLOAD.life={why,n:0,bytes:0,ms:0,late:0};(KLOAD.lifes=KLOAD.lifes||[]).push(st);const all=new Set();let quiet=0;

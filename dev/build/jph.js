@@ -100,7 +100,11 @@ window.kitPhTone=kitPhTone;window.KIT_PH=KIT_PH;
    Marks: img[data-kwait="1"|"s"], slot [data-kwaitp="Đang thỉnh tranh…"]. Test: dev/test/life-preload.js (no empty box), kit sample §59.1. ===== */
 (function(){const st=document.createElement("style");st.id="kit-ph-wait";st.textContent=`
 img[data-kwait]{background:radial-gradient(ellipse at 50% 42%,#fbf4e4 0,#f3e7cf 55%,#eadbbd 100%);animation:kphBreath calc(1.6s*var(--pace,1)) ease-in-out infinite}
-img[data-kwait="s"]{animation:none}
+img[data-kwait="s"],img[data-kwait="fs"],img[data-kwait="ms"]{animation:none}
+img[data-kwait^="f"],img[data-kwait^="m"]{background:url("img/kit/unknown-fig-f.webp") center bottom/contain no-repeat;opacity:.55}
+img[data-kwait^="m"]{background-image:url("img/kit/unknown-fig-m.webp")}
+@keyframes kphBreathF{50%{opacity:.3}}
+img[data-kwait="f"],img[data-kwait="m"]{animation-name:kphBreathF}
 @keyframes kphBreath{50%{opacity:.62}}
 [data-kwaitp]::after{content:attr(data-kwaitp);position:absolute;left:4px;right:4px;top:50%;transform:translateY(-50%);text-align:center;font:600 .72rem/1.25 var(--display,serif);color:#8a6a40;letter-spacing:.02em;pointer-events:none;z-index:2;text-shadow:0 1px 0 #fff8}
 `;document.head.appendChild(st)})();
@@ -109,10 +113,16 @@ function kitPhWaitClear(im){try{if(!im.hasAttribute("data-kwait"))return;im.remo
 let KPHW_Q=[],KPHW_T=0;
 function kitPhWaitMark(im){try{if(!im||im.tagName!=="IMG"||im.hasAttribute("data-kph-sample"))return;const s=im.getAttribute("src");
  if(!s||/^(data|blob):/.test(s)||(im.complete&&im.naturalWidth)){kitPhWaitClear(im);return}if(im.complete)return;/* failed: jcdn retries or hides it */
- im.setAttribute("data-kwait",typeof reducedMotion==="function"&&reducedMotion()?"s":"1");KPHW_Q.push(im);
+ const still=typeof reducedMotion==="function"&&reducedMotion();
+ /* a full-body cut-out (fig-*) waits as the kit's faint unknown silhouette (j59 / j61 unknown-fig-f|m), never as a paper box; no line */
+ const fm=/\/fig-/.test(s)?(/\/fig-(emp|eun|off|man|men|ty|phys|ksp|prince|vuong|guard|thaigiam|king)/.test(s)?"m":"f"):"";
+ im.setAttribute("data-kwait",fm?fm+(still?"s":""):still?"s":"1");if(fm)return;KPHW_Q.push(im);
  if(!KPHW_T)KPHW_T=requestAnimationFrame(()=>{KPHW_T=0;const L=KPHW_Q;KPHW_Q=[];/* the line: one layout read per frame for the whole batch */
+  /* one line per picture area: a slot whose centre lies inside an area that already carries the line (layered art bands) gets none */
+  const has=[...document.querySelectorAll("[data-kwaitp]")].map(e=>e.getBoundingClientRect());
   for(const x of L){if(!x.hasAttribute("data-kwait"))continue;const p=x.parentElement;if(!p||p.hasAttribute("data-kwaitp"))continue;const r=x.getBoundingClientRect();
-   if(r.height>=72&&r.width>=64&&getComputedStyle(p).position!=="static")p.setAttribute("data-kwaitp",KPHW_TXT())}})}catch(e){}}
+   if(r.height<72||r.width<64||getComputedStyle(p).position==="static")continue;const cx=r.left+r.width/2,cy=r.top+r.height/2;
+   if(has.some(q=>cx>=q.left&&cx<=q.right&&cy>=q.top&&cy<=q.bottom))continue;p.setAttribute("data-kwaitp",KPHW_TXT());has.push(p.getBoundingClientRect())}})}catch(e){}}
 window.kitPhWaitMark=kitPhWaitMark;
 document.addEventListener("load",e=>{if(e.target&&e.target.tagName==="IMG")kitPhWaitClear(e.target)},true);
 document.addEventListener("error",e=>{if(e.target&&e.target.tagName==="IMG")kitPhWaitClear(e.target)},true);

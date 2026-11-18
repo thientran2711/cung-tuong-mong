@@ -1,4 +1,5 @@
-/* review/life-preload: entering a life on a slow line must never show an empty picture box (owner OD 18/11 ~01:50Z).
+/* NOTE: CDP throttling does not reach service-worker fetches: run WITHOUT SW=1 for timings (core set is fetched unthrottled first, then the line is slowed).
+   review/life-preload: entering a life on a slow line must never show an empty picture box (owner OD 18/11 ~01:50Z).
    usage: node dev/test/life-preload.js <outdir> [device,...] [mbps]   (serves the BUILT repo root; HOST mode; SW blocked = nothing cached = a fresh phone)
    Per device: open the title, throttle the line, start a new life the real way (identity card → Nhận thân phận), then sample the screen every 250 ms
    for 12 s: blank = a visible <img> (>= 24 px) that has not finished loading, or one shown as the old fallback face while its portrait is still on the way.
@@ -12,7 +13,7 @@ const sleep=t=>new Promise(r=>setTimeout(r,t));
   let game=await D.openHost(p,srv.url);
   /* iPad / iPhone Safari: the choose-first notice (KIT 35.1) → play here */
   for(let k=0;k<40;k++){const ph=await game.evaluate(()=>window.KLOAD&&KLOAD.phase).catch(()=>null);if(ph==='ask'){await game.evaluate(()=>{const b=document.querySelector('[data-kl="web"]');if(b)b.click()});break}if(ph&&ph!=='check')break;await sleep(500)}
-  await game.waitForFunction(new Function('return typeof start==="function"&&window.KLOAD&&('+(process.env.SW?"['done','all','skipped'].includes(KLOAD.phase)&&!document.getElementById('kload')":"KLOAD.phase!=='check'")+')'),null,{timeout:600000});
+  await game.waitForFunction(new Function('return typeof start==="function"&&window.KLOAD&&('+"['done','all','skipped'].includes(KLOAD.phase)&&!document.getElementById('kload')"+')'),null,{timeout:600000});
   await game.evaluate(()=>{const k=document.getElementById('kload');if(k&&window.KLOAD&&KLOAD.phase==='core'){/* the first-entry set is not this test */k.querySelector('[data-kl]')||0}});
   await sleep(1500);
   if(process.env.CONT){await game.evaluate(()=>{SLOT=3;document.getElementById('title').hidden=true;window.__nlInner=1;start();window.__nlInner=0;try{quiet=false}catch(e){}render();save()});await sleep(6000);
@@ -23,7 +24,7 @@ const sleep=t=>new Promise(r=>setTimeout(r,t));
   await cdp.send('Network.emulateNetworkConditions',{offline:false,latency:80,downloadThroughput:(+MBPS)*1e6/8,uploadThroughput:1e6/8});
   const t0=Date.now();
   if(process.env.CONT)await game.evaluate(()=>{const b=document.querySelector('[data-tgo="cont"]');if(b)b.click();else throw new Error('no Tiếp tục')});else await game.evaluate(()=>{const k=document.getElementById('kload');if(k&&KLOAD.phase==='core')k.remove();SLOT=3;document.getElementById('title').hidden=true;start()});
-  if(process.env.GOEARLY)setTimeout(()=>game.evaluate(()=>{if(window.KLIFE)KLIFE.go=true}).catch(()=>0),+process.env.GOEARLY);
+  if(process.env.GOEARLY)setTimeout(()=>game.evaluate(()=>{if(window.KLIFE){KLIFE.go=true;KLIFE.off=true}}).catch(()=>0),+process.env.GOEARLY);
   const samples=[];let shot=0;const steps=(process.env.STEPS!=null?process.env.STEPS:process.env.CONT?'':'Tiếp|Bỏ qua|Nhận thân phận|@closeQ|Hậu cung|Giao tình|Dư đồ|Tư trang|Hành sự').split('|').filter(Boolean);const phases=[];
   const sample=async tag=>{const s=await game.evaluate(()=>{const vis=e=>{const r=e.getBoundingClientRect();if(r.width<24||r.height<24||r.bottom<0||r.top>innerHeight)return false;let n=e;while(n&&n.nodeType===1){const cs=getComputedStyle(n);if(cs.display==='none'||cs.visibility==='hidden'||+cs.opacity===0)return false;n=n.parentElement}return true};
     const top=document.elementFromPoint(innerWidth/2,innerHeight/2);const cover=top&&top.closest&&top.closest('#kload,#klife');if(cover)return{cover:cover.id};
