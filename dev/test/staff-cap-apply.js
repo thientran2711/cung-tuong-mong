@@ -32,9 +32,9 @@ const T=[];const ok=(c,n,x)=>T.push([c?'PASS':'FAIL',n,x==null?'':String(x).slic
    const h=hhHas(S),c=capOf(S),told=__T.told();return{eu,h,c,eunLeft:(S.staff||[]).some(s=>s.role==='eunuch'),told:told.map(t=>t.kind+':'+t.txt.slice(0,160))}},loy);
   ok(!r.eunLeft&&r.h[1]===0&&r.h[0]<=r.c[0]&&r.told.some(t=>t.includes(r.eu.replace(/^(Tiểu|Lão) /,''))),`old save Quý nhân + 1 ${tag} eunuch: he leaves and she is told`,JSON.stringify(r));}
  /* 3. roomFor = FIGIX identity pool, independent of the old face files */
- const r3=await p.evaluate(()=>{__T.fresh('muoi');const fav=Object.keys(FAV).length,favOk=Object.values(FAV).filter(v=>v===1).length;
+ const r3=await p.evaluate(()=>{__T.fresh('muoi');const fav=Object.keys(FAV).length,favOk=Object.entries(FAV).filter(([k,v])=>v===1&&k[0]!=='@').length;
   return{fav,favOk,maid:Object.keys(FIGIX.maid||{}).length,mama:Object.keys(FIGIX.mama||{}).length,eun:Object.keys(FIGIX.eunuch||{}).length,rm:roomFor('maid'),re:roomFor('eunuch')}});
- ok(r3.maid>=52&&r3.mama>=8&&r3.eun>=30&&r3.favOk===0&&r3.rm&&r3.re,'identity pool 52/30/8 loaded; every old face file blocked (FAV none) and hiring still has room',JSON.stringify(r3));
+ ok(r3.maid>=52&&r3.mama>=8&&r3.eun>=30&&r3.favOk===0&&r3.rm&&r3.re,'identity pool 52/30/8 loaded; every old face-*.webp file blocked (FAV none; @W consort avatars are in-code, not files) and hiring still has room',JSON.stringify(r3));
  for(const N of [12,16,20,24]){
   const r=await p.evaluate(N=>{__T.fresh('muoi');S.rank=2;
    /* forced worst palace: her (Quý nhân) + N-1 NPC consorts; chủ vị seats first */

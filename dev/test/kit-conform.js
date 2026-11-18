@@ -34,7 +34,9 @@ const VPS=(SIZES||'755x1000').split(',');
     const body=mb.querySelector(':scope > .kpb');let tpl='T1';
     /* T7 KIT SIZE FRAME (§84 live, kitFrameLive3): .ksz3 > #mb > .k3body (figure / portrait / event picture left + .k3right[event picture, .kpmain]) + .opts.k3btns */
     const k3=mb.querySelector(':scope > .k3body');if(k3){tpl='T7';if(!d.classList.contains('ksz3')||!d.dataset.ksz)why.push('k3body without the kit size frame');if(!k3.querySelector(':scope > .k3right > .kpmain'))why.push('T7 without .kpmain');
-     if(!k3.querySelector(':scope > .kszfig,:scope > .k3mpor,:scope > .k3mpic'))why.push('T7 without its main picture');const P7=[...k3.querySelectorAll('.k3ev,.k3mpic')];if(P7.length!==1)why.push('T7 event pictures: '+P7.length)}
+     if(!k3.querySelector(':scope > .kszfig,:scope > .k3mpor,:scope > .k3mpic'))why.push('T7 without its main picture');const P7=[...k3.querySelectorAll('.k3ev,.k3mpic')];if(P7.length!==1)why.push('T7 event pictures: '+P7.length);
+     /* KIT 84c person-less frame in a fig size: its main picture FILLS the left column (cover-crop, no empty band above/below) */
+     const F7=k3.querySelector(':scope > .k3mpic.k3fill');if(F7&&d.dataset.pres==='fig'){const R7=k3.querySelector(':scope > .k3right');if(R7&&F7.offsetHeight<R7.offsetHeight-3)why.push('person-less main picture does not fill its column ('+F7.offsetHeight+' < '+R7.offsetHeight+')')}}
     if(body&&!k3){if(body.classList.contains('kpid'))tpl='T5';else{const sj=body.querySelector(':scope > .kpsubj');if(sj){if(sj.matches('.kes'))tpl='T3';else if(sj.matches('.kpiart,.kpev'))tpl='T2';else tpl='T4'}}}
     if(tpl==='T4'&&body&&body.querySelector(':scope > .kpsubj .pframe,:scope > .kpsubj .pfwrap,:scope > .kpsubj .pcp,:scope > .kpsubj .pfr'))why.push('small framed portrait on a person pop-up (OD:L448): use the full-body figure column (T3)');
     /* pictures outside the options: T2 = 1, T3 = figure + ≤ 1 banner, T4 = portrait + ≤ 1 band, T1 = ≤ 1 band */

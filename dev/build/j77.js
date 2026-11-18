@@ -78,10 +78,17 @@ function j77Card(k,empty){if(!S||S.dead||Q.length)return;
 function j77LastWalk(k,tc){let n=0;try{n=countAt(k)}catch(e){}
  Q.push({act:1,t:accName(k),h:`<p>Đường đi ${tc} khắc · đến nơi là hết khắc, sang buổi sau.</p>${n?`<p class="past">Có ${n} bóng người ở đó.</p>`:""}<p class="past">Ngươi ở lại đó: buổi sau bắt đầu ngay tại chỗ, thấy ai ở đó.</p>`,
   opts:[{n:"Đi",fx:{},x:`Chắc chắn · tốn: ${tc} khắc · thành: đến nơi, thấy ai ở đó; người ở đó có thể đến gần`,go:()=>setTimeout(()=>{if(S&&!S.dead&&!Q.length)goTo(k)},0)},{n:"Thôi",fx:{},x:""}]});showModal()}
-/* one tap rule for the map and the list */
+/* one tap rule for the map and the list (owner 18/11 ~06:00Z–06:30Z, map-tap-go): TAP A PLACE = GO THERE AT ONCE. No confirm card, no undo, no arrival note:
+   the walk khắc is deducted silently like any Hành sự action (the top bar updates); a walk into the next buổi plays the normal buổi change.
+   A place she cannot reach says why in the kit CẤM toast (srvToast); a place with real choices (xin bái kiến / yết kiến, lẻn vào) still opens the ONE place card. */
+function j77Go(k){if(!S||S.dead||Q.length)return;goTo(k)}
 function j77Tap(k,empty){if(!S||S.dead||Q.length)return;if(empty||!k)return j77Card(k,empty||"Cung trống");
  if(S.place===k){window.__fromMap=1;tab="act";render();return}
- const st=accState(k);if(!st.why){if(k!=="home"&&st.tc&&used+st.tc>=BAL.time.khac&&!accEtq(S,k))return j77LastWalk(k,st.tc);goTo(k);if(S.place!==k&&!Q.length)j77Card(k);return}
+ const st=accState(k);
+ if(!st.why){j77Go(k);if(S.place!==k&&!Q.length)j77Card(k);return}
+ const sp=st.walk&&typeof walkSpill==="function"?walkSpill(k):null;
+ if(sp&&sp.ok&&!st.ask&&!st.kind)return walkSpillGo(k);/* crosses a buổi turn (night card, roulette…): no undo window, the buổi card says it */
+ if(!st.ask&&!st.kind&&!S.out&&!S.confined&&typeof srvToast==="function"){const why=String(st.why||"").replace(/\.$/,"");srvToast(`${accName(k)}: ${why}`);return}
  j77Card(k)}
 window.addEventListener("click",e=>{try{if(typeof tab==="undefined"||tab!=="go"||!S)return;
  const sp=e.target.closest("#panel .mspot, #panel .mtile");if(!sp)return;
