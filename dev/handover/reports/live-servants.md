@@ -195,3 +195,8 @@ tools/prof.js CDP profile with PRE, tools/lineprof.js line ticks, b-*.txt bench 
 
 ## PERF RULING (MAIN ROOT-57, 18/11 ~22:30Z, relayed by C-AG #16)
 (a) ACCEPT as feature cost (same as 13:52Z ruling): per-buổi +9.5 % is inside the ≤+10 % budget; per-khắc +26.9 % accepted because the remaining cost is the owner-ordered gossip/witness behaviour (OD 19:30Z, 19:45Z). No cadence change. Reviewer judges: per buổi ≤ +10 %, no long-task regression > +10 %, all gates PASS.
+
+
+## REVIEW VERDICT 7a50021 (reviewer opus session_01Rc5AsKp5X8AnT5HJ7WoyXK, 18/11 ~23:20Z): FAIL — 8 items, full list in reports/review-live-servants.md
+1 raw deed keys on screen ("đang maid:sweep") — whole family incl. j95sWhy/j95here/roster ACT · 2 "Đi một mình" renders THÀNH "Không được gì thêm" (laws 2/3) · 3 person rows use "kèm:" (same status green ĐƯỢC vs red KÈM) · 4 big "Tư tình, ánh mắt" picture while the list scrolls (law 10) · 5 ag-carry red 3/6 on branch (live 0/5) · 6 typed numbers in j95sNpcPick (law 4) · 7 day-0 "ngủ bù" + "khắc 1–1" · 8 perf re-measure: buổi median +14 % (ruling ≤ +10 %).
+PASS: live-servants.test, quickcheck (old save ok), 13/14 ag-*, perf work outcome-identical (diff 0 ×3), deeds = worker numbers; coop-e2e BLOCKED sandbox 403 only (no co-op file touched).
