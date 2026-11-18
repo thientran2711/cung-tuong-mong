@@ -11,7 +11,7 @@ const {chromium}=require('playwright');const [,,URL,SZ]=process.argv;const [W,H]
 (async()=>{const b=await chromium.launch();const p=await (await b.newContext({viewport:{width:W,height:H},serviceWorkers:'block'})).newPage();const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,160)));
  await p.goto(URL,{waitUntil:'domcontentloaded'});await p.waitForFunction(()=>typeof start==='function');await p.waitForTimeout(2500);
  await p.evaluate(()=>{for(const id of ['kload','kroul']){const x=document.getElementById(id);if(x)x.remove()}try{localStorage.clear()}catch(e){}SLOT=3;window.__nlInner=1;document.getElementById('title').hidden=true;
-  for(let i=0;i<60;i++){start();if(!isSrv())break}Q.length=0;const m=document.getElementById('modal');if(m)m.hidden=true;render();window.__bot=true;S.mat=12;
+  for(let i=0;i<60;i++){start();if(!isSrv())break}Q.length=0;const m=document.getElementById('modal');if(m)m.hidden=true;render();window.__bot=true;tmPlace(S,12);
   S.met=S.met||{};for(const v of liveRivals(false))S.met[v.id]=wk();S.wkSnap=wkSnap();for(let n=0;n<6;n++){Q.length=0;S.mg=null;used=4;try{nextBuoi()}catch(e){}}Q.length=0;render()});
  const C={natalt:0,bare:0,than:0,frac:0,box:0,rows:0,screens:0};const S0={natalt:[],bare:[],than:[],frac:[],box:[],rows:[]};
  const scan=async(where)=>{await p.waitForTimeout(700);const r=await p.evaluate(()=>{const vis=e=>{const r=e.getBoundingClientRect();return r.width>0&&r.height>0&&getComputedStyle(e).visibility!=='hidden'};

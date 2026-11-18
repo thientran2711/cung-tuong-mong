@@ -35,7 +35,7 @@ const KIT_SIZE={
  /* buttons: S = square 56; LS = square 72; LR = 3:4 rectangle 84x112. In a frame every button is full width; the class only sets the picture. */
  btn:{S:{pic:"Q56",maxRows:2,maxChars:70},LS:{pic:"Q72",maxRows:3,maxChars:160},LR:{pic:"PS"}},
  head:56};
-window.KIT_SIZE=KIT_SIZE;
+window.KIT_SIZE=KIT_SIZE;KIT_SIZE.opt=window.KIT_OPT;
 function kitSzMode(){try{return kitView().pages===2?"kv2":"kv1"}catch(e){return document.documentElement.classList.contains("kv2")?"kv2":"kv1"}}
 /* kitBtnSize(info) — THE button rule. info = {rows:<Cần/Tốn/Được/Mất/Kèm rows; GỢI Ý not counted: it has its own box>, chars:<title + rows>} or a button element.
    S when ≤ 2 rows and ≤ 70 characters; LS when ≤ 3 rows and ≤ 160; else LR. */
@@ -174,7 +174,7 @@ function kszSheet(area){const old=document.getElementById("kszsheet");if(old)old
  if(area==="buttons"){
   h+=`<h2>KIT SIZE 2 · THE action button + pictures</h2><p class="kszn">ONE button (kszBtn) everywhere: row 1 = picture LEFT + name, TỐN / ĐƯỢC / MẤT RIGHT; row 2 = GỢI Ý in one full-width box. Inside one frame every button is the SAME width and the same class (the largest one needed). The class (kitBtnSize) only sets the picture: S square 56 (≤ 2 rows, ≤ 70 characters) · LS square 72 (≤ 3 rows, ≤ 160) · LR 3:4 84x112 (more). The red tag on each sample = the kit class used.</p>`;
   h+=`<h3>S · in one frame (3.3 / 3.5): same width, square 56</h3><div class="kszopts" style="max-width:380px">${[op("Cúi đầu nhận lỗi",[["Tốn",`${BAL.kitpage.demo.k} khắc`]]),op("Thưa rằng do Hoàng thượng định",[["Tốn",`${BAL.kitpage.demo.k} khắc`]]),op("Dâng lễ vật xin bỏ qua",[["Tốn",ch("Bạc",-20)+` ${BAL.kitpage.demo.k} khắc`]]),op("Im lặng",[])].map(kszBtn).join("")}</div>`;
-  h+=`<h3>LS · square 72 (moderate info)</h3><div class="kszopts" style="max-width:470px">${[op("Tâm sự",[["Tốn",`${BAL.kitpage.demo.k} khắc`],["Được",ch("Thiện cảm",6)],["Mất",ch("Sức",-5)]]),op("Sai đi dò la",[["Tốn",`${BAL.kitpage.demo.study.k} khắc`],["Được","biết 2 điều thật về nàng ta, chứng cứ +1"],["Mất",ch("Thiện cảm",-5)]])].map(kszBtn).join("")}</div>`;
+  h+=`<h3>LS · square 72 (moderate info)</h3><div class="kszopts" style="max-width:470px">${[op("Tâm sự",[["Tốn",`${BAL.kitpage.demo.k} khắc`],["Được",ch("Thiện cảm",6)],["Mất",ch("Sức",-5)]]),op("Sai đi dò la",[["Tốn",`${BAL.kitpage.demo.study.k} khắc`],["Được",`biết 2 điều thật về nàng ta, ${evSg(BAL.ag.ev.one)}`],["Mất",ch("Thiện cảm",-5)]])].map(kszBtn).join("")}</div>`;
   h+=`<h3>LR · 3:4 picture (a lot of info) + GỢI Ý box under</h3><div class="kszopts" style="max-width:470px">${[op("Quỳ xuống nhận lỗi, xin Thái hậu dạy bảo",[["Cần","Lễ nghi ≥ 2"],["Tốn",`${BAL.kitpage.demo.k} khắc`],["Được",ch("Thiện cảm",6)+ch("Đức",1)],["Mất",ch("Danh",-1)],["Gợi ý","Thái hậu ưa người biết phận, nhận lỗi trước mặt mọi người thì bà nguôi giận nhanh"]])].map(kszBtn).join("")}</div>`;
   h+=`<h3>3.4 event option in cost mode = THE kit button (was: no picture, hand-drawn chips): picture + GỢI Ý box</h3><div class="kszopts" style="max-width:470px">${[op("Gọi bản cung Thái hậu",[["Gợi ý","an toàn"]]),op("Xin ân cho gia đình",[["Gợi ý","thêm thể diện, có thêm bạc"]]),op("Theo cha mưu đại sự",[["Gợi ý","Hoàng hậu bị phế, thêm thể diện; hỏng thì mất mạng"]])].map(kszBtn).join("")}</div>`;
   h+=`<h3>3.1 / 3.2 Hành sự compact card (§43, narrow Hành sự column, landscape) = THE kit button</h3><div class="kszopts" style="max-width:300px">${[op("Hỏi han ở tẩm cung ta: ai cần giúp?",[["Tốn",`${BAL.kitpage.demo.k} khắc`],["Được","người ở đây có việc thì ngỏ lời nhờ"]])].map(kszBtn).join("")}</div>`;
@@ -494,7 +494,7 @@ function kszBtnGridLive3(g){const B=KIT_SIZE.v3.btn,w=g.clientWidth;if(!w)return
  g.classList.add("k3meas");let need=B.cellS;bs.filter(b=>b.dataset.kbs==="S").forEach(b=>{b.style.setProperty("width","min-content","important");b.style.setProperty("min-width","0","important");need=Math.max(need,Math.ceil(b.getBoundingClientRect().width));b.style.removeProperty("width");b.style.removeProperty("min-width")});g.classList.remove("k3meas");
  if(bs.some(b=>b.classList.contains("kart")))need=Math.max(need,270);/* §6.2 option card = picture + text: never a cell under 270 px (149 px cells wrapped the Được/Mất text one word per line, owner 17/11) */
  need=kszNeedTxt(bs,need,B);const nar=g.closest(".dlg")&&g.closest(".dlg").dataset.narrow==="1";const cols=nar?1:Math.max(1,Math.floor((w+B.gap)/(need+B.gap)));const cell=(w-(cols-1)*B.gap)/cols,long=Math.min(cols,Math.ceil((B.cellLong+B.gap)/(cell+B.gap)));g.style.setProperty("--k3c",cols);
- bs.forEach(b=>b.style.setProperty("--k3s",b.dataset.kbs==="S"?1:long))}
+ bs.forEach(b=>b.style.setProperty("--k3s",b.dataset.kbs==="S"?1:long));try{if(typeof kitOptTier==="function"&&bs.some(b=>b.matches("button.ka.kopt")))kitOptTier(g)}catch(e){}}
 /* the height the info column may take: the modal box minus the frame's header, button row and body padding */
 function kszLiveRoom3(dlg){const M=document.getElementById("modal");if(!M)return 9999;let ch=24+22+4;[...dlg.children].forEach(c=>{if(c.id!=="mb"&&c.getClientRects().length&&getComputedStyle(c).position!=="absolute")ch+=c.offsetHeight});
  const mb=document.getElementById("mb");if(mb)[...mb.children].forEach(c=>{if(!c.classList.contains("k3body")&&c.getClientRects().length)ch+=c.offsetHeight});return M.clientHeight-ch}
@@ -565,11 +565,11 @@ html body #modal .dlg.kszlive.kszlive{width:var(--kszw)!important;max-width:calc
 #modal .dlg.kszlive[data-pres="one"] .k3right{justify-content:center}
 #modal .dlg.kszlive .k3right>.kpmain{flex:none;min-width:0;display:block;padding:0;margin:0}
 /* KIT §6.2 FINAL / frame rule (owner 18/11 07:25Z, EVERY layout): the portrait + the info (event picture, text, chips) STAND STILL; only the option list scrolls. The right column never scrolls as a whole. */
-/* KIT §8.4 TALL DIALOG ON THE PHONE (owner 18/11 ~09:20Z, Fold portrait): every centre dialog frame grows at the top and the bottom into a tall rectangle with the SAME aspect ratio as the page
-   (KIT_FRAME.page, = the full screen's shape); never taller than the screen (max-height of the frame rules). One rule for the whole #modal .dlg group, html.kv1 only (iPad / spread unchanged). */
-html.kv1 body #modal .dlg.dlg{aspect-ratio:${KIT_FRAME.page.w}/${KIT_FRAME.page.h};--kph:calc(100*var(--kvh,1vh) - 24px)}
-html.kv1 body #modal .dlg.kszlive.kszlive>#mb{display:flex!important;flex-direction:column;flex:1 1 auto!important;min-height:0;overflow:clip}
-html.kv1 body #modal .dlg.kszlive>#mb>.k3body{flex:1 1 auto;min-height:0}
+/* KIT §8.4 TALL DIALOG ON THE PHONE (owner 18/11 ~16:05Z CANON, replaces 09:20Z "every frame"): ONLY the TALL centre frames (frame class L and XL) grow at the top and the bottom into a rectangle with the SAME aspect ratio as the page
+   (KIT_FRAME.page = the full screen's shape), never taller than the screen. S / M (short, small frames) and plain modals stay exactly as they are. html.kv1 only (iPad / spread unchanged). One rule for the whole L/XL group. */
+html.kv1 body #modal .dlg.kszlive:is([data-ksz="L"],[data-ksz="XL"]){aspect-ratio:${KIT_FRAME.page.w}/${KIT_FRAME.page.h};--kph:calc(100*var(--kvh,1vh) - 24px)}
+html.kv1 body #modal .dlg.kszlive.kszlive:is([data-ksz="L"],[data-ksz="XL"])>#mb{display:flex!important;flex-direction:column;flex:1 1 auto!important;min-height:0;overflow:clip}
+html.kv1 body #modal .dlg.kszlive:is([data-ksz="L"],[data-ksz="XL"])>#mb>.k3body{flex:1 1 auto;min-height:0}
 html body #modal .dlg.kszlive .k3right{overflow:hidden!important;overflow:clip!important}
 html body #modal .dlg.kszlive .k3right>:not(.opts){flex:none!important}
 /* narrow / stacked frame (the options are a sibling of .k3body inside #mb): same rule — #mb never scrolls, .k3body (portrait + info) stands still, only .opts scrolls */

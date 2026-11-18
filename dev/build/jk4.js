@@ -1034,9 +1034,7 @@ function kitOptFill(E,done){const pad=x=>{const cs=getComputedStyle(x);return (p
    The size is the one the SHORTEST card text allows (no empty space under any text-shortest card); all tall when every text fills the tall picture. */
 /* KIT §6.2 FINAL (owner 18/11 07:25Z): every DIALOG option card (button.ka.kopt outside a person card) has the ONE picture box 66x88 (3:4, css in jopic) and the cards of one dialog are ONE height
    = the tallest card of that dialog (Tốn + Được rows only, so the tallest is rarely above the 106 px floor). No per-card picture size, no text-driven strip any more. */
-function kitOptEqual(b){const r=b.closest("#modal .dlg")||b.parentElement||document;const G=[...r.querySelectorAll("button.ka.kopt")].filter(x=>x.isConnected&&!x.closest(".pc")&&x.offsetParent);if(!G.length)return;
- G.forEach(x=>x.style.removeProperty("min-height"));const H=Math.ceil(Math.max(...G.map(x=>x.getBoundingClientRect().height)));
- G.forEach(x=>{x.style.setProperty("min-height",H+"px","important");const bd=x.querySelector(":scope > .kabody");x.__kof=x.clientWidth+"x"+Math.round(bd?bd.getBoundingClientRect().height:0);x.dataset.kapic="eq"})}
+function kitOptEqual(b){/* KIT §6.2d: the cards of one option list = ONE tier size (kitOptTier, jopic); no tallest-card height any more */const r=b.closest("#modal .dlg")||b.parentElement||document;const gs=new Set();r.querySelectorAll("button.ka.kopt").forEach(x=>{if(x.isConnected&&!x.closest(".pc")&&x.offsetParent&&x.parentElement)gs.add(x.parentElement)});gs.forEach(g=>kitOptTier(g))}
 function kitOptFit0(b){try{if(!b||!b.isConnected)return;if(b.matches("button.ka.kopt")&&!b.closest(".pc")){kitOptEqual(b);return}const G=kitOptGroup(b);if(!G.includes(b))G.push(b);G.forEach(x=>{kitOptSet(x,0);x.style.removeProperty("min-height")});
  const E=[];let w=0,h=0;G.forEach(x=>{const art=x.querySelector(":scope > .kaart");x.dataset.kapic="";if(!x.isConnected||getComputedStyle(art).display==="none"||getComputedStyle(x).flexDirection!=="row")return;
   const a=art.getBoundingClientRect();if(a.width<24||a.width>112||a.height<a.width*1.15)return;E.push(x);w=Math.max(w,a.width);h=Math.max(h,a.height)});
