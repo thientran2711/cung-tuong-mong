@@ -54,19 +54,20 @@ Credits: 9 gens x 135 = 1215 cr (no retries).
 Files (md5-verified): https://ctm-img.victoria-tntt.workers.dev/img/_review/consort-tiers/c02/b7/ — c02_a18_t1..t8.png, c02_a18_nude.png (Nữ đế), c02_a18_row9.jpg, c02_a18_live_vs_new.jpg, c02_a18_faces.jpg. Nothing live, no manifests.
 ~100% xong c02 B7 / ~0% chơi được.
 
-## B8 (W34, 18/11; ROOT-18 order B8 — recolour-only edit of the LIVE figure, t1–t8, no Nữ đế)
-Method: images_generate gpt-2-6 as an EDIT, references = [the live hd figure ONLY], transparentBackground, prompt "Edit image 1. Recolour ONLY the robe fabric to <colour>; keep everything else exactly identical…". Canvas: 9:21 is not supported by gpt-2-6 (snaps to 9:16 → figures widened +2–21 %, first batch discarded); custom 1024x2304 (≈0.44) works and keeps pose/cut. Looked at all 8 against live: same pose and body turn, same cut/layers/embroidery layout, same headdress and held item; faces unchanged; colours soft.
-| rank | colour | bbox w/h live → new (diff) | gens |
-|---|---|---|---|
-| t1 | soft lavender | 0.385 → 0.385 (+0.0 %) | 2 |
-| t2 | pale peach | 0.398 → 0.400 (+0.5 %) | 2 |
-| t3 | misty blue-grey | 0.375 → 0.380 (+1.4 %) | 2 |
-| t4 | soft sage green | 0.342 → 0.343 (+0.2 %) | 2 |
-| t5 | blush pink | 0.367 → 0.375 (+2.1 %) FAIL ±1.5, best of 3 | 3 |
-| t6 | muted periwinkle | 0.406 → 0.407 (+0.4 %) | 2 |
-| t7 | dusty rose-red + pale imperial yellow inner/borders | 0.336 → 0.342 (+2.3 %) FAIL ±1.5, best of 3 (headdress slightly re-drawn: wings a little different) | 3 |
-| t8 | soft golden yellow + jade + blush | 0.367 → 0.369 (+0.3 %) | 2 |
-Alpha 0..254, nothing touching the canvas edge except t2/t8 top ≤ alpha 18. t5/t7 hit the 3-gen cap; the ±1.5 % bbox tolerance is tight for a generative edit (sleeve spread varies), they match live by eye. Skull-top→feet row on the red lines uses uniform scaling only.
-Credits: 8 (9:16 batch, discarded) + 8 (custom size) + 3 retries (t7, t5, t7) = 19 gens x 135 = 2565 cr.
-Files (md5-verified): https://ctm-img.victoria-tntt.workers.dev/img/_review/consort-tiers/c02/b8/ — c02_a18_t1..t8.png, c02_a18_row8.jpg, c02_a18_live_vs_new.jpg. Nothing live.
+## B8 (W34, 18/11; ROOT-18 order B8 + addendum — TWO STEPS: exact copy, then recolour; t1–t8, no Nữ đế)
+Method: STEP 1 = gpt-2-6 "Reproduce image 1 exactly …" at 1024x2304 (≈0.44; 9:21 is not supported by gpt-2-6 and snaps to 9:16, which widened figures, so a custom size), ref = the live hd figure only, transparent background = a true copy (pose, turn, cut, headdress, held item, face identical by eye). STEP 2 = "Edit image 1. Recolour ONLY the robe fabric to <soft colour> …", ref = the step-1 copy only. bbox = alpha>40 w/h, diff vs the live figure.
+| rank | colour | copy diff vs live | recolour diff vs live | gens (copy + recolour) |
+|---|---|---|---|---|
+| t1 | soft lavender | +0.7 % | +0.9 % | 1+1 |
+| t2 | pale peach | +0.8 % | +0.9 % | 1+1 |
+| t3 | misty blue-grey | +0.7 % | +0.9 % | 1+1 |
+| t4 | soft sage green | +1.1 % | +1.0 % | 1+1 |
+| t5 | blush pink | +2.7 % FAIL (±1.5; best of 3: +6.6, +2.7, +4.3) | +3.2 % | 3+1 |
+| t6 | muted periwinkle | +0.1 % | -0.0 % | 1+1 |
+| t7 | dusty rose-red + pale imperial yellow inner/borders | +2.0 % FAIL (best of 3: +2.0, +3.0, +5.0) | +2.9 % | 3+1 |
+| t8 | soft golden yellow + jade + blush | +0.2 % | +0.3 % | 1+1 |
+t1–t4, t6, t8 pass (<= +1.1 %). t5 and t7 reached the 3-gen cap on the copy step and stay outside ±1.5 % (copies re-draw the sleeve spread a little); by eye pose/cut match live. Alpha 0..254, nothing touching the canvas edge (top alpha <= 7).
+Superseded: my first B8 set (single-step edit of the live figure) was replaced by this two-step set in the same CDN folder.
+Credits: first single-step attempt 18 gens + two-step 20 gens (12 copies, 8 recolours) = 38 gens x 135 = ~5130 cr.
+Files (md5-verified): https://ctm-img.victoria-tntt.workers.dev/img/_review/consort-tiers/c02/b8/ — c02_a18_t1..t8.png (recoloured), c02_a18_copy_t1..t8.png (step-1 copies), c02_a18_row8.jpg (uniform scale, skull top on the red line), c02_a18_live_vs_new.jpg (live | copy | recolour). Nothing live.
 ~100% xong c02 B8 / ~0% chơi được.
