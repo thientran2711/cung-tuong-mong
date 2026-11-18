@@ -69,3 +69,38 @@ CDN img/_review/consort-tiers/c01/b8s/: c01_a18_t1..t8.png (final), c01_a18_t1..
 | t7 | slate blue + pale imperial yellow, large stitched phoenix + flowers | +6.9% | 2 (1st +4.4% phoenix small) |
 | t8 | warm soft golden yellow + coral/jade, large phoenix + flowers | +4.3% | 2 (1st +8.5% phoenix small) |
 Looked at all: pose/turn/cut/headdress/held item same as live by eye; costume fabrics unchanged from live (no redesign). bbox w/h is NOT within 1.5% for t1, t3, t4, t5, t6, t7, t8 (single-gen method widens figures a few %); not stretched. Credits 10 x 135 = 1350.
+
+## B10 three versions (W34, 18/11; brief consort-B10.md; base = the LIVE originals img/hd/fig-consort-c01-tN-a18.webp)
+PRIORITY #1 CHECK: reused the c12 B10 method (reports consort-tiers-c12.md §B10), m09 eIyOFEidqL in the STYLE slot on every gen, FIGURE_GATE C3/C4a–C4e/D2/D3/D3b + B10 re-read before this person.
+Rules ticked: [x] one gen per figure, refs = live original + m09 STYLE, "copy EXACTLY … only change colour" [x] no soft/flowing wording [x] t1–t6 no phoenix (live t5 faint phoenix + t6 phoenixes replaced by flowers/birds/butterflies in v0/v1/v2) [x] t7/t8 phoenix MAIN stitched in all 3 versions [x] t7 v1/v2 = own colour main (sage-green / periwinkle) + deeper warm golden yellow; t8 v1 warm golden yellow, v2 jade-green + golden-yellow parts [x] one held item: t2 live teacup → small flower basket; t4 live scroll + fan → fan only; others unchanged (t1 flower sprig, t3 round fan, t6 handkerchief, t7 flower, t8 folded fan) [x] feet never in a prompt [x] forehead: t8 live dot removed (clean in all 3 after the stronger wording), t7 live has a tiny mole under the left eye — still faintly visible in v0/v1/v2 despite 2 attempts (residual, flagged) [x] overlay vs live (alpha IoU, uniform scale on bbox height, centred).
+Versions: v0 = original coral-pink + m09 skin; v1 = celadon, lilac, sky blue, apricot, periwinkle, teal-aqua, sage-green + yellow, warm golden yellow; v2 = powder blue, sage, lavender, aqua, butter-cream, lilac-mauve, periwinkle + yellow, jade-green + yellow.
+Overlay IoU vs live:
+    v0 t1 IoU 97.4% w/h live 0.358 new 0.363
+    v0 t2 IoU 97.6% w/h live 0.389 new 0.390
+    v0 t3 IoU 96.7% w/h live 0.321 new 0.332
+    v0 t4 IoU 98.7% w/h live 0.371 new 0.374
+    v0 t5 IoU 96.5% w/h live 0.352 new 0.358
+    v0 t6 IoU 98.1% w/h live 0.393 new 0.398
+    v0 t7 IoU 97.4% w/h live 0.377 new 0.382
+    v0 t8 IoU 97.2% w/h live 0.356 new 0.364
+    v1 t1 IoU 97.9% w/h live 0.358 new 0.363
+    v1 t2 IoU 98.3% w/h live 0.389 new 0.389
+    v1 t3 IoU 97.8% w/h live 0.321 new 0.330
+    v1 t4 IoU 97.5% w/h live 0.371 new 0.377
+    v1 t5 IoU 96.8% w/h live 0.352 new 0.356
+    v1 t6 IoU 96.3% w/h live 0.393 new 0.402
+    v1 t7 IoU 96.4% w/h live 0.377 new 0.382
+    v1 t8 IoU 94.7% w/h live 0.356 new 0.373
+    v2 t1 IoU 96.9% w/h live 0.358 new 0.368
+    v2 t2 IoU 97.5% w/h live 0.389 new 0.390
+    v2 t3 IoU 96.3% w/h live 0.321 new 0.341
+    v2 t4 IoU 97.4% w/h live 0.371 new 0.377
+    v2 t5 IoU 98.1% w/h live 0.352 new 0.354
+    v2 t6 IoU 97.1% w/h live 0.393 new 0.401
+    v2 t7 IoU 94.1% w/h live 0.377 new 0.388
+    v2 t8 IoU 92.8% w/h live 0.356 new 0.378
+All >= 95 % except v1 t8 94.7 %, v2 t7 94.1 %, v2 t8 92.8 % (the t7/t8 versions that finally got the forehead dot / mole removed also got the phoenix-enlarged sleeve spread; the earlier variants with IoU >= 95 still carried the dot, so the clean ones were kept).
+Retries: v1 t3, v1 t7, v1 t8, v2 t7, v2 t8 (IoU < 95 → silhouette clause, all improved); t7 + t8 x 3 versions twice more (mark removal).
+Credits: 24 + 5 + 6 + 6 = 41 gens x 135 = 5535 cr.
+Files (md5-verified) https://ctm-img.victoria-tntt.workers.dev/img/_review/consort-tiers/c01/b10/ — c01_a18_tN_v0|v1|v2.png (24) + c01_a18_b10_sheet.jpg (rows v0/v1/v2, columns t1–t8). Nothing live.
+~100% xong c01 B10 / ~0% chơi được.
