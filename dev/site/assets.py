@@ -73,7 +73,9 @@ for f in (sorted(os.listdir(VD)) if os.path.isdir(VD) else []):
 # requested) + ALWAYS (title backdrops, frames, icons, sfx). Everything else is 'fig' (background, in this order, until BG_MB) or 'lazy'
 # (never fetched ahead; sw.js caches it by content the first time the game shows it — offline for what was seen, never a stale copy).
 BG_MB = float(os.environ.get('CTM_BG_MB', '120'))
-ALWAYS = re.compile(r'(img/title-key|img/frame|icons/|audio/sfx-|audio/bgm-day)')
+# + every small UI picture of the kit (icons, menu / rail / status icons, emotion marks, crests, frames, item slots, tokens…; owner OD 18/11 ~01:35Z:
+#   letters "L"/"M" and missing top-bar / stat icons on a fresh Fold): img/kit/ except the scene art of mini games, night-end, podium, card flip (~5 MB more)
+ALWAYS = re.compile(r'(img/title-key|img/frame|icons/|audio/sfx-|audio/bgm-day|img/kit/(?!mg-|ne-|podium|cf-))')
 try: FIRST = {l.strip() for l in open(os.path.join(R, 'dev', 'site', 'first-hour.txt'), encoding='utf-8') if l.strip() and not l.startswith('#')}
 except Exception: FIRST = None   # no list yet: old behaviour (everything non-figure is core)
 def first_ok(k):
