@@ -259,3 +259,9 @@ window.mwPlaceOf=mwPlaceOf;window.mwTick=mwTick;window.mwStat=()=>Object.assign(
 (function(){const run=()=>{try{mwTick()}catch(e){console.error("mwTick",e)}};
  if(typeof render==="function"){const r0=render;render=function(){run();return r0.apply(this,arguments)}}
  if(typeof endTurn==="function"){const e0=endTurn;endTurn=function(){const r=e0.apply(this,arguments);run();return r}}})();
+/* MOOD-MEM: the causes advance in the STEP, never on a read (lander #6, 18/11). mkSync is lazy (a seal / side-column read syncs p at mkNow) and
+   mkTick ran only at render() / endTurn, so WHEN a display read ran decided the khắc a cause was dropped or scaled: a stage fit deferred to the
+   next frame (ag2-perf B) changed the world (seeded run: Hoàng thượng's Khó chịu dropped at khắc 56 by the side column, not later). After every
+   step that moves her khắc (the j95 final list), everyone not synced at this khắc is synced here, so a later read in the same khắc is a no-op. */
+(function(){const step=()=>{try{if(!mkOn()||!S||S.dead)return;const now=mkNow();for(const p of mkAll())if(p.__mkAt!==now)mkSync(p)}catch(e){console.error("mkStep",e)}};
+ for(const n of ["goTo","spend","nextBuoi","endTurn","coldVisit","talk","closeModal","chooseM"]){if(typeof window[n]!=="function")continue;const o=window[n];window[n]=function(){const r=o.apply(this,arguments);step();return r}}})();
