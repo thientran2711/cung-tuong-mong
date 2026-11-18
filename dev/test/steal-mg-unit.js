@@ -9,7 +9,7 @@ const {chromium}=require('playwright');const path=require('path');
   window.__bot=1;document.getElementById('title').hidden=true;window.render=function(){};
   for(let i=0;i<60;i++){start();if(!isSrv())break}Q.length=0;S.mg=0;S.rank=Math.max(S.rank,2);S.sung=40;S.duc=60;S.suc=70;
   const R0=liveRivals(true).filter(v=>!v.coop);
-  const reset=()=>{S.ntk=null;S.ntTry=null;Q.length=0;used=0;S.dead=false;for(const v of R0){v.preg=0;v.confined=0;v.block=0;v.out=0;v.suc=70;v.duc=60;v.ill=null}S.cyb={};if(window.cyBase)S.tuan=(cyBase(S).t+1)%3;S.suc=70;S.duc=60};
+  const reset=()=>{S.ntk=null;S.ntTry=null;Q.length=0;used=0;S.dead=false;for(const v of R0){v.preg=0;v.confined=0;v.block=0;v.out=0;v.suc=70;v.duc=60;v.ill=null}S.cyb={};if(window.cyBase)S.tuan=(cyBase(S).t+1)%3;S.suc=70;S.duc=60;/* ag-all-2 land: her servant CHOOSES (jagstf2 stf2Ord, a mindPick, not roll) whether to carry out a dirty act (j29: «quỳ xin … đừng làm việc thất đức»); the case tests the game → try odds, not the servant -> she obeys (test only) */if(typeof stf2Ord==="function"&&!window.__stf0){window.__stf0=stf2Ord;stf2Ord=()=>"obey"}/* ag-all-2 land: the khắc an act spends ticks the NPC world (jagent agOn: NPC deeds, gifts, knowledge sales) and can move her odds between the case's base read and the try; the unit checks the game → odds hook, so the ag world sleeps here (test only; ag world: ag-* suites) */window.__agOff=1};
   const roll0=roll;let cap=[];window.roll=o=>{cap.push(o);return false};   /* every try fails: no night scene, only the odds are read */
   const raw0=kg82NpcRaw;const B=BAL.steal.mg;
   /* 0 · ladder: one rung up from every band, cap at Nắm chắc */
@@ -20,7 +20,7 @@ const {chromium}=require('playwright');const path=require('path');
   window.__ladder=T;
   ok("one core: BAL.steal.mg has win / rung / art / occ",B&&B.win>0&&B.rung===1&&B.art.feign&&B.art.road&&KG82_KIND[B.art.feign]&&KG82_KIND[B.art.road]&&B.occ in BAL.mgTier.occ,B);
   /* 1 · NPC tries (stealNight, the same act as hers), both acts, win / lose */
-  reset();const free=R0.filter(v=>!(typeof cyTray==="function"&&cyTray(v))&&v.alive&&!v.out);const A=free[0],H=free[1];
+  reset();const free=R0.filter(v=>!(typeof cyTray==="function"&&cyTray(v))&&v.alive&&!v.out);const A=free[0],H=free.find(v=>v!==A&&!(typeof sameHouse==="function"&&sameHouse(S,v)))||free[1];/* H must not share her palace (j9: «Người cùng cung, ngươi không thể ra tay» blocks the try after the game; seen when the start housed H with her) */
   for(const mode of ["feign","road"]){
    for(const [nm,raw,want] of [["wins",10,1],["loses",0,0]]){reset();S.tonight=H;kg82NpcRaw=()=>raw;const base=oSteal(A,mode);cap=[];const n0=__smgSt.length;
     const s=stealNight(A,H,mode);const exp=want?stealRungUp(base,1):base;
@@ -42,7 +42,7 @@ const {chromium}=require('playwright');const path=require('path');
    for(const [nm,res,want] of [["wins",{raw:7},1],["loses",{raw:3},0]]){reset();S.tonight=H;S.buoi=B4L;deal();const i=deck.findIndex(a=>a&&a.n===nm0);
     if(i<0){ok(`deck card ${nm0} dealt`,false,{srv:isSrv(),kc:isKc(),rank:S.rank,deck:deck.map(a=>a&&a.n).slice(0,4)});continue}const a=deck[i];const ob=a.o;window.__smgFake=()=>res;cap=[];const pre={lock:a.lock,can:can(cardCost(a)),pay:canPay(a),b:[a.b,S.buoi],Q:Q.length,st:a.__steal};const m0=__smgSt.length;act(i);await wait(30);pre.games=__smgSt.slice(m0);
     const exp0=want?stealRungUp(ob,1):ob;const exp=exp0>=100?100:cl(exp0+lotB(S,a.dom),5,95);
-    ok(`HER deck «${nm0}», game ${nm}: the try's roll ${want?"one rung up":"plain"}`,cap[0]===exp&&pre.games.filter(r=>r.path==="her").length===1,{ob,exp,cap,done:a.done,pre});
+    ok(`HER deck «${nm0}», game ${nm}: the try's roll ${want?"one rung up":"plain"}`,/* ag-all-2 land: the khắc the act spends ticks the NPC world (jagknow knSellTick etc. roll too) before her try: the try's roll is checked wherever it falls, like the person-menu case */cap.includes(exp)&&(!want||exp===ob||!cap.includes(exp0>=100?100:cl(ob+lotB(S,a.dom),5,95)))&&pre.games.filter(r=>r.path==="her").length===1,{ob,exp,cap,done:a.done,pre});
     ok(`HER deck «${nm0}» ${nm}: card odds restored, card used once`,a.o===ob&&a.done)}}
   window.__smgFake=null;
   /* 5 · once per try: a second try the same night is closed (j75) and plays no game */
@@ -56,7 +56,7 @@ const {chromium}=require('playwright');const path=require('path');
    ok("at Nắm chắc the game is not offered (no __bot: playArt not called), below it is",got&&got.up===0&&got.sk===true&&calls===1&&got2&&got2.up===1,{got,got2,calls})}
   /* 8 · nothing new in the save */
   ok("save: no steal-game state written",!/smg|__smg|stealMg/.test(JSON.stringify(ser())));
-  window.roll=roll0;return out});
+  window.roll=roll0;if(window.__stf0){stf2Ord=window.__stf0;delete window.__stf0}delete window.__agOff;return out});
  let bad=0;for(const r of R){console.log(r.join(" | "));if(r[0]!=="PASS")bad++}
  const L=await p.evaluate(()=>window.__ladder);console.log("LADDER (odds → one rung up):");for(const r of L)console.log(`  ${r[0]} ${r[1]} → ${r[2]} ${r[3]}`);
  console.log("page errors:",errs.length?errs.slice(0,5):0);await b.close();process.exit(bad||errs.length?1:0)})();
