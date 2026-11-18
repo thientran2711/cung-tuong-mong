@@ -1,7 +1,11 @@
-# staff-cap-apply — SẴN SÀNG KIỂM 033b8d6 (worker session_01UV1SzkNqcjf9atNLxPVz8y, opened by MAIN s41; successor of SzkENdm)
-PRIORITY #1 CHECK: OD 18/11 ~02:15Z (L1794 table A + QN 2+0), ~02:05Z (L1793 Nữ đế harem style), ~02:10Z (faces 52/30/8) | main jpromo.js:22 BAL.promo.cap, j10 capOf/capLaw/capTrim, j17.js:53 roomFor, j25.js:97 FPOOL | review/staff-cap-table 4b1d9a2c (harness + HANDOVER plan, reused), review/staff-cap-fix (LIVE 62a6846f, trim/notice rule reused unchanged) | claims staff-cap-table SzkENdm → this session.
+# staff-cap-apply — SẴN SÀNG KIỂM 303af62 (supersedes 033b8d6: owner FINAL table) (worker session_01UV1SzkNqcjf9atNLxPVz8y, opened by MAIN s41; successor of SzkENdm)
+PRIORITY #1 CHECK: OD 18/11 ~02:15Z + ~02:50Z (L1794 overwritten: final table), ~02:05Z (L1793 Nữ đế harem style), ~02:10Z (faces 52/30/8) | main jpromo.js:22 BAL.promo.cap, j10 capOf/capLaw/capTrim, j17.js:53 roomFor, j25.js:97 FPOOL | review/staff-cap-table 4b1d9a2c (harness + HANDOVER plan, reused), review/staff-cap-fix (LIVE 62a6846f, trim/notice rule reused unchanged) | claims staff-cap-table SzkENdm → this session.
 
-Branch `review/staff-cap-apply` from origin/main 62a6846f: **9d586f6** (code + test), **033b8d6** (site rebuilt). FF of main.
+Branch `review/staff-cap-apply` from origin/main 62a6846f: 9d586f6 (code + test), 033b8d6 (site), **abf0124 (final table)** + **303af62** (site rebuilt). FF of main.
+
+## FINAL TABLE (owner OD 18/11 ~02:50Z, relayed by MAIN s41): BAL.promo.cap = [[1,0],[2,0],[2,0],[2,1],[3,1],[3,2],[4,2],[5,2]] (ĐƯ 1+0, TT 2+0, QN 2+0, Tần 2+1, Phi 3+1, QP 3+2, HQP 4+2, HH 5+2); capTh [5,2]; capNd (Nữ đế) [5,3]. The 033b8d6 notes below that say HH 4+2 / capTh 4+2 / capNd placeholder are superseded.
+Worst palace (after, final table): 12 → 43 · 16 → 51 · 20 → 59 · 24 → 67 people, every household at its row; women servants at 20 ≈ 31 of 52+8 identities, eunuchs ≈ 16 of 30.
+Tests on 303af62: staff-cap-apply 14/14 (worst palace 12/16/20/24; trusted-eunuch case now matches the Tiểu→Lão name change on load) · staff-cap 28/28 · staff-root 17/17 · one-core PASS · quickcheck PASS (open 1122 ms, old save ok, render 133/134, buổi 584/614) · coop-e2e 63/63 ×3 in parallel with quickcheck.
 
 ## What changed (3 source files)
 1. `dev/build/jpromo.js` BAL.promo.cap = [[1,0],[2,0],**[2,0]**,[2,1],[3,1],[3,2],[4,2],[4,2]] (only the Quý nhân row changed: 2+1 → 2+0; eunuchs start at Tần). capTh [4,2] unchanged. New `capNd:[4,2]` = Nữ đế row (= HH row; OWNER NUMBER PENDING, change this one row). Table comments updated.
@@ -33,7 +37,7 @@ Old FPOOL sizes in the build: 15 maids / 15 eunuchs (the hidden ceiling).
 - Shots: none uploaded. The only visible change is numbers inside the existing kit T3 BÁO notice / staff tab line (shot and PASSed in review-staff-cap-fix); text verified by the test above. My host-mode harness kept the new-life chest overlay on top (not caused by this change).
 
 ## Open for main (not blocking)
-1. Nữ đế row capNd = [4,2] placeholder until her number.
+1. (done) Nữ đế capNd = [5,3] per owner.
 2. Thái hậu household holds 2 (jstaff named women); capTh 4+2 is neither filled nor trimmed (pre-existing, review-staff-cap-fix note 3).
 3. Identity lifetime: figUsed never frees a fid (one identity per person for life, dead/sent-away ones included), so after ~52 maid identities have been handed out in one long life new maids get no FIGIX figure (fall back to the old face). roomFor counts LIVE people as the brief says; a long-life probe is worth a separate task.
 4. NPC personal maids ({name,loyal}) hold no identity and are not counted (as before).
