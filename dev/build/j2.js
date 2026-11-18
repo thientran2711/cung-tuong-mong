@@ -91,7 +91,7 @@ function canPay(a){const c=a.c&&a.c.bac<0?a.c.bac:0;return !(c&&S.bac+c<0)&&!(pa
 function logReal(b){try{const K=typeof RKEYS!=="undefined"?RKEYS:Object.keys(NAMES).map(k=>[k,NAMES[k]]);const out=[];for(const [k,n] of K){if(!(k in b))continue;/* a key the snapshot did not take never shows as "0→N" */const x=b[k]||0,y=S[k]||0;if(x!==y)out.push(`<span class="${(y>x)!==(k==="ghen")?"g":"r"}">${n} ${x}→${y}</span>`)}return out.join(", ")}catch(e){return""}}
 function snapReal(){const b={};/* RKEYS too: logReal lists Ân tình, which NAMES lacks ("Ân tình 0→N" on every act, log-sync) */for(const k of new Set(Object.keys(NAMES).concat(typeof RKEYS!=="undefined"?RKEYS.map(x=>x[0]):[])))b[k]=S[k]||0;return b}
 function runOpt(a){if(!canPay(a))return null;window.__oddsSoft="";const capd=oddsCapped(a);if(capd&&!roll(BAL.odds.hi)){oddsSoft(a.n,a.c);return false}/* ODDS CAP: a formerly-sure act fails softly (j63 oddsSoft) */
-  const o0=a.o==null?100:a.o,raw=o0+lotB(S,a.dom),o=o0>=100?(capd?BAL.odds.hi:100):oddsCl(raw);/* 2f3: one rule with NPC cards (jagacts3 p3Run): + lotB, cap BAL.odds */
+  const o0=a.o==null?100:a.o,raw=(o0>=100?o0:oddsOf(a))+lotB(S,a.dom),/* oddsOf(a) = the odds the card shows (review/shown-odds-one-path optOdds) */o=o0>=100?(capd?BAL.odds.hi:100):oddsCl(raw);/* 2f3: one rule with NPC cards (jagacts3 p3Run): + lotB, cap BAL.odds */
   const ok=o0>=100||agTry(raw);if(!ok&&agSoft(raw)){oddsSoft(a.n,a.c);return false}/* raw odds at the cap = a sure act: the ONE soft fail (j63 oddsSoft, OD 17/11 ~17:35Z) */
   const b0=snapReal(),s0=S.logSeq||0;if(a.c)apply(a.c);
   apply(ok?(a.w||{}):(a.l||{}));
@@ -163,7 +163,7 @@ function talkOpts(p){const E=S.emp,K=E.known,L=E.likes,b=bestArt(),v=p.ref;
    if(v.pg>=BAL.ag.cx2.vent.pg)A.push({n:"Trút giận",o:100,w:{...BAL.ag.cx2.vent.c},x:"hả cơn ghen; nàng oán",go:()=>{v.pg=0;relAdd(S,v,-BAL.ag.cx2.vent.rel)}});
    A.push(...placeHarms(v,S.place));if(liveRivals(true).filter(x=>whereOf(x)===S.place).length>=2)A.push({n:"Nghe lén câu chuyện",o:od(BAL.ag.wit.hear+eyes(S)*BAL.ag.wit.mat),x:evSg(BAL.eff.j9.evOverhear),run:()=>overhear(S.place)})}
   return A}
- if(p.kind==="chest"){if(sameHouse(S,v))return[];return[{n:"Cài đồ vào rương nàng",o:oddsCl(oPlant(S,v)+15),x:"chọn món đồ · tại chỗ, dễ hơn sai người",open:()=>{if(S.inv.some(e=>!e.h)&&can(2))pushDil(mkP("plantpick",{v:v.id,here:1}),"Cài đồ vào rương")}},
+ if(p.kind==="chest"){if(sameHouse(S,v))return[];return[{n:"Cài đồ vào rương nàng",o:oddsCl(actOdds(S,v,"plant",{pen:-BAL.actHere.plant,here:1})),x:"chọn món đồ · tại chỗ, dễ hơn sai người",open:()=>{if(S.inv.some(e=>!e.h)&&can(2))pushDil(mkP("plantpick",{v:v.id,here:1}),"Cài đồ vào rương")}},
   {n:"Lục rương tìm chứng cứ",o:od(cx2O(S,"chest")),act:1,x:`${evSg(BAL.ag.ev.one)} nếu nàng có làm điều sai · lộ: bị phạt`,run:()=>{if(roll(od(cx2O(S,"chest")))){return evA(S,v,BAL.ag.ev.one)?`Lục được thư từ của ${v.name}: ${evSg(BAL.ag.ev.one)}.`:`Lục rương ${v.name}: không thấy điều gì sai trái.`}relAdd(S,v,-BAL.ag.cx2.chest.rel);punish("lục lọi cung phi tần",1);return "Bị cung nhân bắt gặp."}}]}
  if(p.kind==="ty"){const A=[];if(illOf(S))A.push(P3C.treat(S));A.push({n:"Bài thuốc dễ thụ thai",c:{...BAL.ag.cx2.fert.c},o:100,x:`${BAL.ag.cx2.fert.m} tháng dễ có thai hơn`,go:()=>S.fert=BAL.ag.cx2.fert.m});
   if(!S.doctor)A.push({n:"Mời làm thái y tâm phúc",c:{...BAL.ag.cx2.doctor.c},o:100,x:"dễ phát hiện xạ hương và độc; bệnh của con nhẹ hơn",go:()=>S.doctor=1});

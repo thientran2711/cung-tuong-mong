@@ -110,6 +110,8 @@ function oddsCl(o){return cl(o,BAL.odds.lo,BAL.odds.hi)}
    gated again at the cap and shows no false Nắm chắc; a.oi (optional) = the inner odds shown as its word (review r1 2a). */
 function oddsSure(a){return !!(a&&(a.fix||a.open||a.adShop||a.exam||a.aaMG||a.inner))}
 function oddsCapped(a){return !!a&&(a.o==null||a.o>=100)&&!oddsSure(a)}
+/* ONE odds of a card option (review/shown-odds-one-path): the card word (j19 cardH) and the roll (j2 runOpt) both read this */
+function optOdds(a){const o=oddsOf(a);return o>=100?o:oddsCl(o+lotB(S,a.dom))}
 function oddsOf(a){if(a&&a.inner)return a.oi!=null?oddsCl(+a.oi):100;const o=a.o==null?100:a.o;return o>=100?(oddsSure(a)?100:BAL.odds.hi):o}
 /* capRes(ok, o) = a result that came from noise draws (a contest / exam score, not roll) keeps its odds inside the ONE cap: o = the raw odds
    of that result (0..100); above hi a win is undone with the right share, below lo a loss is turned with the right share, so P(ok) = oddsCl(o). */
