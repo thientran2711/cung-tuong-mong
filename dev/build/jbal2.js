@@ -366,6 +366,9 @@ Object.assign(BAL,{nroad:{
  /* help options (r1, ONE CORE): odds of the Sức road / bạc road / dò la / che chở / tự sắc thuốc, the loss sizes l2/l3 on a failed try,
     the Đức a betrayal costs, the bond the dò-la target loses */
  op:{pS:55,pB:75,pDo:70,pChe:60,pY:50,l2:2,l3:3,betray:3,rbDo:4},
+ /* Q1 (audit D-Q2, OD:L1601 (2) "xin tiền xin bạc … không phải là phụ tuyến"): the help kinds an NPC may ask; the first is the fallback of a
+    chapter whose cast maps to none. «bac» is OFF (money stays only as a cost inside an ask); add "bac" here to deal it again (one key) */
+ kinds:["thu","emp","th","hh","do","y","che"],
  /* rank thresholds of the bạc cost: index = how many of these ranks her rank reaches (RANKS index) */
  bacRk:[2,4,6],
  /* palace news lines a month (NPC chapter ends), at most */
@@ -392,7 +395,7 @@ Object.assign(BAL,{nroad:{
  men:{st:40,kidAge:15,men:{fx:{win:{loyal:3},mid:{loyal:-1},lose:{loyal:-4}},rv:{win:-2,lose:1}},court:{af:4,danh:1},
   off:{pow:{win:2,lose:-2},rv:{win:-1,lose:1},rel:3,ally:5},hz:{fx:{win:{fond:3,tal:2,hp:-2},mid:{tal:1,hp:-1},lose:{fond:-3,hp:-1}},rv:{win:-1,lose:1}},
   askTinh:30,askAf:10,askRel:25}}});
-/* seat counts per rank (review/seatcap): BAL.seatCap IS j30 SEATCAP (one object, one place): Hoàng hậu 1, Hoàng quý phi 1, Quý phi 2, Phi 4, Tần 6; lower ranks no cap.
+/* seat counts per rank (review/seatcap): BAL.seatCap IS j30 SEATCAP (one object, filled from BAL.seat in jbal.js — the only place the numbers are written); lower ranks no cap.
    Every road that sets a rank asks jseat.js seatHas / seatDown / seatUp; seatSettle is the net after every turn and on load. */
 BAL.seatCap=SEATCAP;
 /* PEOPLE LEDGER (owner core law 16/11 13:40Z: "at mandatory times (e.g. morning court) everyone required is inside"; j95 record).
@@ -421,6 +424,13 @@ Object.assign(BAL,{spread:{cap:2,maxWait:4,codeWait:2}});
 BAL.relOan={hurt:.6,doer:.2,mend:.3};
 BAL.steal={cost:{feign:{duc:4},road:{suc:5}},failSung:3,rel:15,ghen:25,
  need:{fav:1,rank:.6,heir:.8},heirHas:.25,friend:60,friendMin:.15,oanW:.5,fear:{gap:3,f:.5},custom:.3,k:.25,pMax:.55,maxTry:2,sucMin:20};
+/* STEAL MINI-GAME (owner 16/11 ~22:20Z, PARKING_LOT #3b; jsmg.js): before a Tranh sủng / Chặn ngự giá try the one who tries may play ONE short tài nghệ
+   game (an existing one, KIT tài nghệ frame). raw ≥ win → THAT try's odds go up `rung` rung(s) on the word ladder (BAL.odds.cut, keeping the place inside
+   the band; capped at Nắm chắc / BAL.odds.hi); lose or skip → unchanged (no extra loss). art = the game per act (feign: Hát, road: Múa — "múa một khúc
+   dưới đèn lồng"); occ = the mgTier occasion that sets the board (hầu Hoàng thượng). NPCs (never the co-op friend, who plays her own) "play" by the
+   same NPC game roll as every contest (kg82NpcRaw: BAL.mgTier.npc by her bậc in that art) against the same win; npcP = chance an NPC plays at all.
+   win 5 = the pass line every game result shows green (kg82ShowRes raw ≥ 5). One game per try (j75: one try a night each), so no cooldown key. coopMs = co-op (jnf night): the longest the host keeps the flip choice open for the friend while her own game runs (ms). */
+BAL.steal.mg={on:1,win:5,rung:1,art:{feign:"hat",road:"mua"},occ:"trieu",npcP:1,coopMs:120000};
 /* TÁT, three tiers (owner 16/11; jface act "tat", jslap game). Index 1..3 = nhẹ / vừa / nặng. sac = Sắc the target loses while the mark lasts; wk = weeks the mark stays
    (+1 with chance wkX); duc = the slapper's Đức; rel / oan = grudge (relAdd / extra oán on the target); hoang/sung = Hoàng thượng hears (chance, Sủng) when the target's Sủng
    ≥ hoangMin; thau = Thái hậu rebukes a nặng slap (chance, Danh); evT = the target keeps evidence against the slapper, evW = a witness does (chance per slap);
@@ -922,7 +932,7 @@ Object.assign(BAL,{odb:{
  j75:{odOP:40,rbFit:35,rbTop:10,rbTop_2:20},
  j77:{odAccLeadO:35},
  j78:{odO:40,odTop:40},
- j8:{rbInspect:40,rbSearch:35,odO1:30,odO3:40,odO1_2:45,odO2:30,rbSeenNPC:15},
+ j8:{rbInspect:40,rbSearch:35,odO1:30,odO3:40,odO1_2:45,odO2:30,rbSeenNPC:15,taintXa:35,taintFeelDiv:5,matInspect:6,matSearch:5}/* taint family (review/poison-road-r2-rv): xạ hương miscarriage roll on a held item, her "khó chịu" sense = Nhìn/taintFeelDiv, mưu kế × matInspect / matSearch on the inspect / search trace */,
  j92:{rbWdRemark:30},
  jact:{odO:35},
  jeitem:{rbEitReWk:100},
