@@ -22,3 +22,8 @@ Images never in git; review copies on CDN img/_review/hoa-dien-art/.
   small/pale mark the detector loses). Warps the twin forehead back to por scale (template match), skin ref = brighter part of a ring
   around the KNOWN por mark box, mask = colour outliers connected to the anchor (dark uncoloured = brow/hair never), dilate, harmonic fill.
   Pilot 12 misses: 10 clean, 2 nomark, brows intact, out_mad = base.
+
+## v4 (hoa-dien #3, 18/11)
+- guided2.py = guided with safety (env GDC min colour dist, GBROW mask above 0.8 face width, 3 px dilate, size cap 0.02): 0 smudges but half result -> NOT used; queue-3 misses stay (KNOWN_MISSES.tsv, owner 18/11: "để đó, đằng nào cũng vẽ lại").
+- HD_ANCHOR.json: {"fig-<key>.webp":[x,y]} in 1/4000 of the picture (jhd.js hdAnchor), from the clean fig/hd logs (3,924 faces; fig-hd agree median 3/4000). Faces not listed: code falls back to the mesh anchor.
+- Live uploads: W12 uploaded_w12b.txt (por 512 + fig 481 + hd 500), consort-ty twins uploaded_cty_twins.txt (fig 491 + hd 444), por2 live uploaded_por2_live.txt (1,557). Logs log_*b/cty_*/por2_live.

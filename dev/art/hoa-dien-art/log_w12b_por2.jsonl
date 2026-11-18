@@ -1,0 +1,512 @@
+{"name": "por-maid-m01-ty2-a26", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m01-ty2-a36", "kind": "por2", "status": "clean2", "rect": [177, 163, 204, 193], "changed": 142, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m01-ty3-a26", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m01-ty6-a18", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m01-ty8-a18", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m02-ty2-a18", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m02-ty2-a36", "kind": "por2", "status": "clean2", "rect": [180, 160, 211, 196], "changed": 217, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m02-ty3-a36", "kind": "por2", "status": "clean2", "rect": [183, 161, 205, 186], "changed": 70, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m02-ty4-a18", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m02-ty7-a18", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m03-ty2-a18", "kind": "por2", "status": "clean2", "rect": [183, 167, 208, 195], "changed": 210, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m03-ty2-a36", "kind": "por2", "status": "clean2", "rect": [185, 169, 210, 196], "changed": 207, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m03-ty3-a18", "kind": "por2", "status": "clean2", "rect": [184, 164, 214, 190], "changed": 239, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m03-ty3-a36", "kind": "por2", "status": "clean2", "rect": [188, 164, 215, 200], "changed": 238, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m03-ty5-a18", "kind": "por2", "status": "clean2", "rect": [182, 165, 209, 198], "changed": 212, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m03-ty7-a18", "kind": "por2", "status": "clean2", "rect": [182, 169, 209, 198], "changed": 229, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m04-ty1-a18", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m04-ty1-a26", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m04-ty1-a36", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m04-ty2-a18", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m04-ty2-a26", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m04-ty2-a36", "kind": "por2", "status": "clean2", "rect": [182, 160, 209, 201], "changed": 298, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m04-ty3-a26", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m04-ty3-a36", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m04-ty5-a18", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m04-ty7-a18", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m04-ty8-a18", "kind": "por2", "status": "clean2", "rect": [179, 166, 212, 205], "changed": 342, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m05-ty1-a18", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m05-ty1-a26", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m05-ty1-a36", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m05-ty2-a18", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m05-ty2-a26", "kind": "por2", "status": "clean2", "rect": [169, 160, 203, 198], "changed": 287, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m05-ty2-a36", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m05-ty3-a18", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m05-ty3-a26", "kind": "por2", "status": "clean2", "rect": [174, 164, 205, 198], "changed": 244, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m05-ty3-a36", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m05-ty4-a18", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m05-ty5-a18", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m05-ty6-a18", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m05-ty7-a18", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m05-ty8-a18", "kind": "por2", "status": "clean2", "rect": [174, 162, 198, 188], "changed": 129, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m06-ty1-a18", "kind": "por2", "status": "clean2", "rect": [175, 157, 208, 198], "changed": 360, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m06-ty1-a26", "kind": "por2", "status": "clean2", "rect": [176, 156, 207, 193], "changed": 349, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m06-ty1-a36", "kind": "por2", "status": "clean2", "rect": [176, 160, 208, 193], "changed": 288, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m06-ty2-a18", "kind": "por2", "status": "clean2", "rect": [172, 161, 205, 200], "changed": 416, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m06-ty2-a26", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m06-ty2-a36", "kind": "por2", "status": "clean2", "rect": [175, 159, 207, 192], "changed": 405, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m06-ty3-a18", "kind": "por2", "status": "clean2", "rect": [177, 165, 203, 202], "changed": 230, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m06-ty3-a26", "kind": "por2", "status": "clean2", "rect": [178, 163, 213, 200], "changed": 613, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m06-ty3-a36", "kind": "por2", "status": "clean2", "rect": [176, 165, 203, 201], "changed": 247, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m06-ty4-a18", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m06-ty5-a18", "kind": "por2", "status": "clean2", "rect": [176, 159, 209, 193], "changed": 365, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m06-ty6-a18", "kind": "por2", "status": "clean2", "rect": [177, 167, 206, 201], "changed": 228, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m06-ty7-a18", "kind": "por2", "status": "clean2", "rect": [178, 162, 208, 203], "changed": 308, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m06-ty8-a18", "kind": "por2", "status": "clean2", "rect": [177, 157, 210, 191], "changed": 431, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m07-ty1-a18", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m07-ty1-a26", "kind": "por2", "status": "clean2", "rect": [182, 163, 209, 200], "changed": 198, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m07-ty1-a36", "kind": "por2", "status": "clean2", "rect": [183, 159, 210, 197], "changed": 205, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m07-ty2-a18", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m07-ty2-a36", "kind": "por2", "status": "clean2", "rect": [186, 165, 208, 190], "changed": 116, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m07-ty3-a18", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m07-ty4-a18", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m07-ty5-a18", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m07-ty6-a18", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m07-ty7-a18", "kind": "por2", "status": "clean2", "rect": [196, 167, 224, 189], "changed": 86, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m07-ty8-a18", "kind": "por2", "status": "clean2", "rect": [192, 167, 225, 197], "changed": 190, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m08-ty1-a18", "kind": "por2", "status": "clean2", "rect": [175, 161, 206, 190], "changed": 471, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m08-ty1-a26", "kind": "por2", "status": "clean2", "rect": [189, 162, 217, 191], "changed": 422, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m08-ty1-a36", "kind": "por2", "status": "clean2", "rect": [178, 161, 209, 188], "changed": 245, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m08-ty2-a18", "kind": "por2", "status": "clean2", "rect": [176, 157, 208, 195], "changed": 508, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m08-ty2-a26", "kind": "por2", "status": "clean2", "rect": [186, 160, 216, 198], "changed": 222, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m08-ty2-a36", "kind": "por2", "status": "clean2", "rect": [179, 162, 210, 190], "changed": 453, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m08-ty3-a18", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m08-ty3-a26", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m08-ty3-a36", "kind": "por2", "status": "clean2", "rect": [179, 161, 212, 195], "changed": 422, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m08-ty4-a18", "kind": "por2", "status": "clean2", "rect": [174, 159, 205, 191], "changed": 507, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m08-ty5-a18", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m08-ty6-a18", "kind": "por2", "status": "clean2", "rect": [176, 158, 210, 187], "changed": 488, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m08-ty7-a18", "kind": "por2", "status": "clean2", "rect": [179, 159, 210, 189], "changed": 270, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m08-ty8-a18", "kind": "por2", "status": "clean2", "rect": [179, 158, 212, 187], "changed": 501, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m09-ty1-a26", "kind": "por2", "status": "clean2", "rect": [176, 162, 212, 198], "changed": 274, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m09-ty1-a51", "kind": "por2", "status": "clean2", "rect": [175, 159, 210, 198], "changed": 305, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m09-ty2-a18", "kind": "por2", "status": "clean2", "rect": [173, 158, 205, 197], "changed": 230, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m09-ty2-a26", "kind": "por2", "status": "clean2", "rect": [175, 163, 210, 201], "changed": 331, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m09-ty3-a18", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m09-ty3-a26", "kind": "por2", "status": "clean2", "rect": [176, 165, 211, 201], "changed": 330, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m09-ty3-a36", "kind": "por2", "status": "clean2", "rect": [175, 161, 209, 195], "changed": 581, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m09-ty4-a18", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m09-ty5-a18", "kind": "por2", "status": "clean2", "rect": [177, 163, 208, 198], "changed": 209, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m09-ty6-a18", "kind": "por2", "status": "clean2", "rect": [178, 163, 207, 201], "changed": 212, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m09-ty7-a18", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m09-ty8-a18", "kind": "por2", "status": "clean2", "rect": [175, 160, 208, 200], "changed": 485, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m10-ty1-a18", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m10-ty1-a26", "kind": "por2", "status": "clean2", "rect": [174, 163, 201, 192], "changed": 120, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m10-ty1-a36", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m10-ty1-a51", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m10-ty2-a18", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m10-ty2-a26", "kind": "por2", "status": "clean2", "rect": [176, 162, 201, 190], "changed": 237, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m10-ty2-a36", "kind": "por2", "status": "clean2", "rect": [178, 163, 206, 197], "changed": 189, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m10-ty3-a18", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m10-ty3-a26", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m10-ty3-a36", "kind": "por2", "status": "clean2", "rect": [174, 161, 203, 196], "changed": 170, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m10-ty4-a18", "kind": "por2", "status": "clean2", "rect": [179, 161, 205, 199], "changed": 69, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m10-ty5-a18", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m10-ty6-a18", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m10-ty7-a18", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m10-ty8-a18", "kind": "por2", "status": "clean2", "rect": [178, 163, 202, 191], "changed": 86, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m11-ty1-a18", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m11-ty1-a26", "kind": "por2", "status": "clean2", "rect": [181, 166, 222, 202], "changed": 181, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m11-ty2-a18", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m11-ty2-a26", "kind": "por2", "status": "clean2", "rect": [184, 169, 217, 202], "changed": 206, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m11-ty2-a36", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m11-ty3-a36", "kind": "por2", "status": "clean2", "rect": [176, 170, 205, 195], "changed": 151, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m11-ty6-a18", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m11-ty7-a18", "kind": "por2", "status": "clean2", "rect": [178, 166, 207, 202], "changed": 118, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m12-ty1-a18", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m12-ty1-a26", "kind": "por2", "status": "clean2", "rect": [176, 163, 207, 200], "changed": 556, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m12-ty1-a51", "kind": "por2", "status": "clean2", "rect": [174, 162, 206, 199], "changed": 551, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m12-ty2-a18", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m12-ty2-a26", "kind": "por2", "status": "clean2", "rect": [176, 163, 207, 202], "changed": 600, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m12-ty2-a36", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m12-ty3-a18", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m12-ty3-a26", "kind": "por2", "status": "clean2", "rect": [172, 162, 212, 202], "changed": 730, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m12-ty4-a18", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m12-ty5-a18", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m12-ty6-a18", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m12-ty7-a18", "kind": "por2", "status": "clean2", "rect": [174, 164, 206, 199], "changed": 422, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m12-ty8-a18", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m13-ty1-a18", "kind": "por2", "status": "clean2", "rect": [176, 163, 207, 197], "changed": 303, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m13-ty1-a26", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m13-ty1-a36", "kind": "por2", "status": "clean2", "rect": [175, 164, 206, 200], "changed": 280, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m13-ty1-a51", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m13-ty2-a18", "kind": "por2", "status": "clean2", "rect": [174, 160, 210, 204], "changed": 125, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m13-ty2-a36", "kind": "por2", "status": "clean2", "rect": [173, 159, 210, 200], "changed": 505, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m13-ty3-a18", "kind": "por2", "status": "clean2", "rect": [180, 159, 220, 198], "changed": 343, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m13-ty3-a26", "kind": "por2", "status": "clean2", "rect": [163, 162, 202, 196], "changed": 609, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m13-ty4-a18", "kind": "por2", "status": "clean2", "rect": [179, 161, 212, 200], "changed": 289, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m13-ty8-a18", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m14-ty2-a26", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m14-ty2-a36", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m14-ty4-a18", "kind": "por2", "status": "clean2", "rect": [162, 153, 186, 188], "changed": 98, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m14-ty5-a18", "kind": "por2", "status": "clean2", "rect": [173, 163, 209, 201], "changed": 586, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m14-ty6-a18", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m14-ty7-a18", "kind": "por2", "status": "clean2", "rect": [180, 164, 207, 190], "changed": 197, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m14-ty8-a18", "kind": "por2", "status": "clean2", "rect": [180, 163, 208, 198], "changed": 181, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m15-ty1-a18", "kind": "por2", "status": "clean2", "rect": [176, 160, 207, 196], "changed": 143, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m15-ty1-a26", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m15-ty1-a36", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m15-ty1-a51", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m15-ty2-a18", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m15-ty2-a26", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m15-ty2-a36", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m15-ty3-a18", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m15-ty3-a26", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m15-ty3-a36", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m15-ty4-a18", "kind": "por2", "status": "clean2", "rect": [171, 160, 207, 199], "changed": 506, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m15-ty5-a18", "kind": "por2", "status": "clean2", "rect": [175, 162, 202, 194], "changed": 102, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m15-ty6-a18", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m15-ty7-a18", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m15-ty8-a18", "kind": "por2", "status": "clean2", "rect": [175, 163, 196, 184], "changed": 101, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m16-ty1-a18", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m16-ty1-a26", "kind": "por2", "status": "clean2", "rect": [177, 160, 210, 194], "changed": 409, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m16-ty1-a36", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m16-ty1-a51", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m16-ty2-a18", "kind": "por2", "status": "clean2", "rect": [174, 160, 208, 191], "changed": 517, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m16-ty3-a18", "kind": "por2", "status": "clean2", "rect": [171, 159, 208, 203], "changed": 541, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m16-ty3-a26", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m16-ty3-a36", "kind": "por2", "status": "clean2", "rect": [176, 159, 210, 196], "changed": 193, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m16-ty4-a18", "kind": "por2", "status": "clean2", "rect": [173, 157, 205, 195], "changed": 178, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m16-ty5-a18", "kind": "por2", "status": "clean2", "rect": [177, 167, 201, 193], "changed": 111, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m16-ty6-a18", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m16-ty7-a18", "kind": "por2", "status": "clean2", "rect": [176, 162, 206, 195], "changed": 158, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m16-ty8-a18", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m17-ty1-a18", "kind": "por2", "status": "clean2", "rect": [170, 155, 205, 189], "changed": 574, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m17-ty1-a26", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m17-ty1-a36", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m17-ty1-a51", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m17-ty3-a18", "kind": "por2", "status": "clean2", "rect": [160, 143, 203, 185], "changed": 310, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m17-ty3-a26", "kind": "por2", "status": "clean2", "rect": [164, 152, 202, 200], "changed": 662, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m17-ty4-a18", "kind": "por2", "status": "clean2", "rect": [171, 157, 198, 188], "changed": 197, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m17-ty5-a18", "kind": "por2", "status": "clean2", "rect": [170, 155, 205, 199], "changed": 468, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m17-ty6-a18", "kind": "por2", "status": "clean2", "rect": [173, 157, 202, 202], "changed": 77, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m17-ty7-a18", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m18-ty1-a18", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m18-ty1-a26", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m18-ty1-a36", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m18-ty1-a51", "kind": "por2", "status": "clean2", "rect": [182, 163, 209, 190], "changed": 234, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m18-ty2-a18", "kind": "por2", "status": "clean2", "rect": [176, 161, 213, 205], "changed": 530, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m18-ty2-a26", "kind": "por2", "status": "clean2", "rect": [182, 165, 211, 204], "changed": 323, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m18-ty2-a36", "kind": "por2", "status": "clean2", "rect": [176, 163, 210, 201], "changed": 444, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m18-ty3-a18", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m18-ty3-a26", "kind": "por2", "status": "clean2", "rect": [179, 164, 206, 196], "changed": 240, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m18-ty3-a36", "kind": "por2", "status": "clean2", "rect": [177, 162, 207, 195], "changed": 520, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m18-ty4-a18", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m18-ty6-a18", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m18-ty7-a18", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m18-ty8-a18", "kind": "por2", "status": "clean2", "rect": [180, 160, 207, 195], "changed": 519, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m19-ty1-a18", "kind": "por2", "status": "clean2", "rect": [177, 165, 205, 201], "changed": 373, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m19-ty1-a26", "kind": "por2", "status": "clean2", "rect": [179, 165, 206, 194], "changed": 396, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m19-ty1-a36", "kind": "por2", "status": "clean2", "rect": [177, 163, 205, 193], "changed": 367, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m19-ty1-a51", "kind": "por2", "status": "clean2", "rect": [181, 166, 207, 197], "changed": 213, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m19-ty2-a18", "kind": "por2", "status": "clean2", "rect": [176, 163, 205, 193], "changed": 416, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m19-ty2-a26", "kind": "por2", "status": "clean2", "rect": [182, 165, 208, 199], "changed": 212, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m19-ty2-a36", "kind": "por2", "status": "clean2", "rect": [176, 163, 208, 194], "changed": 286, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m19-ty3-a18", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m19-ty3-a36", "kind": "por2", "status": "clean2", "rect": [172, 165, 213, 203], "changed": 538, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m19-ty4-a18", "kind": "por2", "status": "clean2", "rect": [179, 163, 205, 197], "changed": 232, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m19-ty6-a18", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m19-ty7-a18", "kind": "por2", "status": "clean2", "rect": [178, 164, 206, 199], "changed": 251, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m19-ty8-a18", "kind": "por2", "status": "clean2", "rect": [177, 166, 207, 196], "changed": 476, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m20-ty1-a18", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m20-ty1-a26", "kind": "por2", "status": "clean2", "rect": [177, 165, 218, 199], "changed": 229, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m20-ty2-a18", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m20-ty2-a36", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m20-ty3-a18", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m20-ty5-a18", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m20-ty6-a18", "kind": "por2", "status": "clean2", "rect": [173, 167, 208, 202], "changed": 346, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m20-ty7-a18", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m20-ty8-a18", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m21-ty1-a18", "kind": "por2", "status": "clean2", "rect": [173, 156, 205, 188], "changed": 428, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m21-ty1-a36", "kind": "por2", "status": "clean2", "rect": [171, 157, 207, 199], "changed": 511, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m21-ty1-a51", "kind": "por2", "status": "clean2", "rect": [176, 157, 213, 199], "changed": 560, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m21-ty2-a18", "kind": "por2", "status": "clean2", "rect": [174, 157, 208, 202], "changed": 429, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m21-ty2-a26", "kind": "por2", "status": "clean2", "rect": [178, 155, 213, 197], "changed": 431, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m21-ty2-a36", "kind": "por2", "status": "clean2", "rect": [173, 156, 218, 200], "changed": 446, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m21-ty3-a36", "kind": "por2", "status": "clean2", "rect": [171, 159, 206, 200], "changed": 433, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m21-ty4-a18", "kind": "por2", "status": "clean2", "rect": [173, 157, 210, 200], "changed": 491, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m21-ty5-a18", "kind": "por2", "status": "clean2", "rect": [173, 155, 211, 201], "changed": 528, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m21-ty6-a18", "kind": "por2", "status": "clean2", "rect": [173, 157, 212, 190], "changed": 505, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m21-ty7-a18", "kind": "por2", "status": "clean2", "rect": [174, 158, 207, 198], "changed": 408, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m21-ty8-a18", "kind": "por2", "status": "clean2", "rect": [171, 156, 209, 191], "changed": 509, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m22-ty1-a26", "kind": "por2", "status": "clean2", "rect": [179, 163, 206, 196], "changed": 208, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m22-ty1-a36", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m22-ty1-a51", "kind": "por2", "status": "clean2", "rect": [183, 164, 210, 201], "changed": 240, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m22-ty2-a18", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m22-ty2-a26", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m22-ty2-a36", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m22-ty3-a18", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m22-ty3-a26", "kind": "por2", "status": "clean2", "rect": [180, 165, 209, 201], "changed": 227, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m22-ty3-a36", "kind": "por2", "status": "clean2", "rect": [182, 163, 208, 191], "changed": 143, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m22-ty6-a18", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m22-ty8-a18", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m23-ty1-a18", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m23-ty1-a26", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m23-ty1-a36", "kind": "por2", "status": "clean2", "rect": [174, 158, 208, 190], "changed": 536, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m23-ty1-a51", "kind": "por2", "status": "clean2", "rect": [187, 161, 219, 200], "changed": 487, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m23-ty2-a26", "kind": "por2", "status": "clean2", "rect": [174, 158, 209, 190], "changed": 517, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m23-ty2-a36", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m23-ty3-a36", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m23-ty4-a18", "kind": "por2", "status": "clean2", "rect": [180, 162, 207, 196], "changed": 196, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m23-ty5-a18", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m23-ty6-a18", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m23-ty7-a18", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m23-ty8-a18", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m24-ty1-a18", "kind": "por2", "status": "clean2", "rect": [178, 162, 210, 201], "changed": 395, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m24-ty1-a26", "kind": "por2", "status": "clean2", "rect": [173, 163, 208, 202], "changed": 176, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m24-ty1-a36", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m24-ty1-a51", "kind": "por2", "status": "clean2", "rect": [173, 159, 205, 192], "changed": 563, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m24-ty2-a18", "kind": "por2", "status": "clean2", "rect": [170, 159, 207, 195], "changed": 643, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m24-ty2-a26", "kind": "por2", "status": "clean2", "rect": [176, 164, 202, 191], "changed": 386, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m24-ty2-a36", "kind": "por2", "status": "clean2", "rect": [173, 160, 203, 193], "changed": 491, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m24-ty3-a18", "kind": "por2", "status": "clean2", "rect": [175, 162, 206, 193], "changed": 492, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m24-ty3-a26", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m24-ty3-a36", "kind": "por2", "status": "clean2", "rect": [173, 162, 208, 201], "changed": 327, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m24-ty4-a18", "kind": "por2", "status": "clean2", "rect": [176, 163, 210, 201], "changed": 284, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m24-ty5-a18", "kind": "por2", "status": "clean2", "rect": [171, 167, 211, 200], "changed": 432, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m24-ty6-a18", "kind": "por2", "status": "clean2", "rect": [182, 171, 207, 199], "changed": 160, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m24-ty7-a18", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m25-ty1-a26", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m25-ty1-a36", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m25-ty2-a26", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m25-ty2-a36", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m25-ty3-a26", "kind": "por2", "status": "clean2", "rect": [174, 163, 205, 199], "changed": 209, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m25-ty3-a36", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m26-ty1-a18", "kind": "por2", "status": "clean2", "rect": [184, 163, 208, 198], "changed": 179, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m26-ty1-a26", "kind": "por2", "status": "clean2", "rect": [181, 161, 207, 197], "changed": 229, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m26-ty1-a36", "kind": "por2", "status": "clean2", "rect": [183, 164, 208, 199], "changed": 219, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m26-ty2-a18", "kind": "por2", "status": "clean2", "rect": [182, 163, 206, 201], "changed": 240, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m26-ty2-a26", "kind": "por2", "status": "clean2", "rect": [181, 160, 207, 199], "changed": 240, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m26-ty2-a36", "kind": "por2", "status": "clean2", "rect": [182, 163, 209, 200], "changed": 234, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m26-ty3-a18", "kind": "por2", "status": "clean2", "rect": [184, 163, 209, 199], "changed": 242, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m26-ty3-a26", "kind": "por2", "status": "clean2", "rect": [184, 163, 209, 199], "changed": 205, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m26-ty3-a36", "kind": "por2", "status": "clean2", "rect": [183, 163, 209, 191], "changed": 207, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m27-ty1-a51", "kind": "por2", "status": "clean2", "rect": [157, 159, 206, 201], "changed": 140, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m27-ty2-a18", "kind": "por2", "status": "clean2", "rect": [172, 146, 198, 185], "changed": 148, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m27-ty2-a26", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m27-ty2-a51", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m27-ty3-a51", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m28-ty1-a18", "kind": "por2", "status": "clean2", "rect": [175, 157, 209, 192], "changed": 652, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m28-ty1-a26", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m28-ty1-a36", "kind": "por2", "status": "clean2", "rect": [175, 161, 206, 198], "changed": 260, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m28-ty2-a18", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m28-ty2-a26", "kind": "por2", "status": "clean2", "rect": [180, 163, 209, 198], "changed": 212, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m28-ty2-a36", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m28-ty2-a51", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m28-ty3-a18", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m28-ty3-a26", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m28-ty3-a36", "kind": "por2", "status": "clean2", "rect": [178, 160, 207, 187], "changed": 295, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m28-ty3-a51", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m29-ty1-a18", "kind": "por2", "status": "clean2", "rect": [180, 165, 207, 201], "changed": 142, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m29-ty1-a26", "kind": "por2", "status": "clean2", "rect": [176, 163, 215, 200], "changed": 623, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m29-ty1-a36", "kind": "por2", "status": "clean2", "rect": [176, 159, 211, 201], "changed": 507, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m29-ty1-a51", "kind": "por2", "status": "clean2", "rect": [176, 164, 209, 200], "changed": 538, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m29-ty2-a18", "kind": "por2", "status": "clean2", "rect": [180, 163, 206, 198], "changed": 184, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m29-ty2-a26", "kind": "por2", "status": "clean2", "rect": [178, 161, 212, 202], "changed": 579, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m29-ty2-a36", "kind": "por2", "status": "clean2", "rect": [176, 163, 211, 203], "changed": 387, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m29-ty2-a51", "kind": "por2", "status": "clean2", "rect": [178, 164, 208, 200], "changed": 277, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m29-ty3-a18", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m29-ty3-a26", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m29-ty3-a36", "kind": "por2", "status": "clean2", "rect": [180, 164, 210, 201], "changed": 273, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m29-ty3-a51", "kind": "por2", "status": "clean2", "rect": [179, 164, 210, 196], "changed": 498, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m30-ty1-a18", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m30-ty1-a26", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m30-ty1-a36", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m30-ty1-a51", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m30-ty2-a18", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m30-ty2-a26", "kind": "por2", "status": "clean2", "rect": [176, 167, 205, 196], "changed": 188, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m30-ty2-a36", "kind": "por2", "status": "clean2", "rect": [178, 165, 205, 198], "changed": 288, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m30-ty2-a51", "kind": "por2", "status": "clean2", "rect": [177, 167, 204, 198], "changed": 190, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m30-ty3-a18", "kind": "por2", "status": "clean2", "rect": [171, 165, 195, 198], "changed": 144, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m30-ty3-a36", "kind": "por2", "status": "clean2", "rect": [177, 164, 203, 203], "changed": 56, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m30-ty3-a51", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m31-ty1-a18", "kind": "por2", "status": "clean2", "rect": [177, 167, 208, 203], "changed": 333, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m31-ty1-a26", "kind": "por2", "status": "clean2", "rect": [182, 163, 215, 197], "changed": 283, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m31-ty1-a36", "kind": "por2", "status": "clean2", "rect": [182, 163, 209, 197], "changed": 149, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m31-ty1-a51", "kind": "por2", "status": "clean2", "rect": [183, 167, 209, 198], "changed": 93, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m31-ty2-a26", "kind": "por2", "status": "clean2", "rect": [188, 162, 214, 194], "changed": 132, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m31-ty2-a36", "kind": "por2", "status": "clean2", "rect": [181, 164, 211, 200], "changed": 267, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m31-ty2-a51", "kind": "por2", "status": "clean2", "rect": [182, 161, 211, 198], "changed": 213, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m31-ty3-a18", "kind": "por2", "status": "clean2", "rect": [181, 164, 214, 196], "changed": 557, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m31-ty3-a36", "kind": "por2", "status": "clean2", "rect": [178, 163, 209, 201], "changed": 230, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m31-ty3-a51", "kind": "por2", "status": "clean2", "rect": [187, 164, 215, 191], "changed": 219, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m32-ty1-a18", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m32-ty1-a26", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m32-ty1-a36", "kind": "por2", "status": "clean2", "rect": [177, 163, 211, 198], "changed": 374, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m32-ty1-a51", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m32-ty2-a18", "kind": "por2", "status": "clean2", "rect": [199, 163, 226, 190], "changed": 152, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m32-ty2-a26", "kind": "por2", "status": "clean2", "rect": [180, 159, 204, 187], "changed": 156, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m32-ty2-a36", "kind": "por2", "status": "clean2", "rect": [176, 162, 207, 197], "changed": 257, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m32-ty2-a51", "kind": "por2", "status": "clean2", "rect": [177, 163, 205, 197], "changed": 181, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m32-ty3-a26", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m32-ty3-a36", "kind": "por2", "status": "clean2", "rect": [180, 161, 210, 192], "changed": 290, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m32-ty3-a51", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m33-ty1-a18", "kind": "por2", "status": "clean2", "rect": [177, 163, 203, 187], "changed": 186, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m33-ty1-a26", "kind": "por2", "status": "clean2", "rect": [188, 168, 215, 197], "changed": 160, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m33-ty1-a36", "kind": "por2", "status": "clean2", "rect": [181, 163, 211, 196], "changed": 246, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m33-ty1-a51", "kind": "por2", "status": "clean2", "rect": [188, 164, 223, 205], "changed": 636, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m33-ty2-a18", "kind": "por2", "status": "clean2", "rect": [176, 166, 205, 198], "changed": 164, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m33-ty2-a26", "kind": "por2", "status": "clean2", "rect": [187, 163, 216, 190], "changed": 118, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m33-ty2-a36", "kind": "por2", "status": "clean2", "rect": [181, 163, 210, 196], "changed": 198, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m33-ty3-a26", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m33-ty3-a36", "kind": "por2", "status": "clean2", "rect": [181, 163, 212, 196], "changed": 228, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m33-ty3-a51", "kind": "por2", "status": "clean2", "rect": [192, 165, 222, 201], "changed": 227, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m34-ty1-a18", "kind": "por2", "status": "clean2", "rect": [177, 163, 205, 193], "changed": 406, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m34-ty1-a36", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m34-ty2-a18", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m34-ty2-a26", "kind": "por2", "status": "clean2", "rect": [178, 166, 207, 200], "changed": 185, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m34-ty2-a36", "kind": "por2", "status": "clean2", "rect": [177, 163, 210, 195], "changed": 310, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m34-ty2-a51", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m34-ty3-a36", "kind": "por2", "status": "clean2", "rect": [176, 163, 207, 193], "changed": 511, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m35-ty1-a18", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m35-ty1-a26", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m35-ty1-a36", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m35-ty1-a51", "kind": "por2", "status": "clean2", "rect": [171, 158, 204, 190], "changed": 153, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m35-ty2-a18", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m35-ty2-a26", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m35-ty2-a36", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m35-ty2-a51", "kind": "por2", "status": "clean2", "rect": [174, 166, 200, 198], "changed": 213, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m35-ty3-a36", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m36-ty1-a18", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m36-ty1-a26", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m36-ty1-a36", "kind": "por2", "status": "clean2", "rect": [178, 161, 209, 199], "changed": 264, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m36-ty2-a26", "kind": "por2", "status": "clean2", "rect": [177, 164, 207, 191], "changed": 345, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m36-ty2-a36", "kind": "por2", "status": "clean2", "rect": [181, 164, 209, 191], "changed": 202, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m37-ty1-a18", "kind": "por2", "status": "clean2", "rect": [173, 161, 208, 200], "changed": 597, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m37-ty1-a26", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m37-ty1-a36", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m37-ty1-a51", "kind": "por2", "status": "clean2", "rect": [175, 160, 207, 198], "changed": 488, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m37-ty2-a18", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m37-ty2-a26", "kind": "por2", "status": "clean2", "rect": [172, 162, 209, 199], "changed": 562, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m37-ty2-a36", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m37-ty2-a51", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m37-ty3-a26", "kind": "por2", "status": "clean2", "rect": [171, 160, 209, 192], "changed": 546, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m37-ty3-a36", "kind": "por2", "status": "clean2", "rect": [173, 158, 207, 199], "changed": 358, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m37-ty3-a51", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m38-ty1-a18", "kind": "por2", "status": "clean2", "rect": [180, 158, 213, 190], "changed": 497, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m38-ty1-a36", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m38-ty1-a51", "kind": "por2", "status": "clean2", "rect": [190, 160, 225, 204], "changed": 619, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m38-ty2-a36", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m38-ty3-a51", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m39-ty1-a18", "kind": "por2", "status": "clean2", "rect": [178, 162, 206, 198], "changed": 199, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m39-ty1-a26", "kind": "por2", "status": "clean2", "rect": [181, 159, 207, 196], "changed": 198, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m39-ty1-a36", "kind": "por2", "status": "clean2", "rect": [183, 160, 210, 191], "changed": 232, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m39-ty2-a26", "kind": "por2", "status": "clean2", "rect": [180, 161, 206, 198], "changed": 240, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m39-ty2-a36", "kind": "por2", "status": "clean2", "rect": [180, 160, 206, 195], "changed": 207, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m39-ty3-a18", "kind": "por2", "status": "clean2", "rect": [180, 161, 209, 197], "changed": 227, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m39-ty3-a26", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m39-ty3-a36", "kind": "por2", "status": "clean2", "rect": [175, 162, 207, 194], "changed": 462, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m39-ty3-a51", "kind": "por2", "status": "clean2", "rect": [178, 162, 204, 197], "changed": 129, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m40-ty1-a18", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m40-ty1-a26", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m40-ty1-a36", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m40-ty1-a51", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m40-ty2-a18", "kind": "por2", "status": "clean2", "rect": [179, 169, 202, 200], "changed": 79, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m40-ty2-a26", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m40-ty2-a36", "kind": "por2", "status": "clean2", "rect": [179, 164, 203, 197], "changed": 161, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m40-ty2-a51", "kind": "por2", "status": "clean2", "rect": [174, 163, 200, 196], "changed": 189, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m40-ty3-a18", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m40-ty3-a26", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m40-ty3-a36", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m40-ty3-a51", "kind": "por2", "status": "clean2", "rect": [172, 163, 205, 201], "changed": 375, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m41-ty1-a36", "kind": "por2", "status": "clean2", "rect": [176, 162, 206, 196], "changed": 232, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m41-ty1-a51", "kind": "por2", "status": "clean2", "rect": [177, 163, 204, 193], "changed": 262, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m41-ty2-a18", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m41-ty2-a26", "kind": "por2", "status": "clean2", "rect": [173, 164, 206, 201], "changed": 182, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m41-ty2-a51", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m41-ty3-a18", "kind": "por2", "status": "clean2", "rect": [171, 163, 202, 194], "changed": 478, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m41-ty3-a26", "kind": "por2", "status": "clean2", "rect": [172, 163, 202, 201], "changed": 248, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m41-ty3-a36", "kind": "por2", "status": "clean2", "rect": [176, 165, 207, 194], "changed": 294, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m41-ty3-a51", "kind": "por2", "status": "clean2", "rect": [172, 162, 210, 202], "changed": 556, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m42-ty1-a18", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m42-ty1-a26", "kind": "por2", "status": "clean2", "rect": [171, 163, 197, 192], "changed": 205, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m42-ty1-a36", "kind": "por2", "status": "clean2", "rect": [179, 164, 203, 193], "changed": 49, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m42-ty1-a51", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m42-ty2-a18", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m42-ty2-a26", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m42-ty2-a36", "kind": "por2", "status": "clean2", "rect": [170, 164, 211, 203], "changed": 265, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m42-ty2-a51", "kind": "por2", "status": "clean2", "rect": [172, 162, 208, 199], "changed": 277, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m42-ty3-a18", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m42-ty3-a26", "kind": "por2", "status": "clean2", "rect": [172, 164, 206, 200], "changed": 280, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m42-ty3-a36", "kind": "por2", "status": "clean2", "rect": [173, 164, 207, 204], "changed": 279, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m42-ty3-a51", "kind": "por2", "status": "clean2", "rect": [174, 166, 206, 197], "changed": 294, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m43-ty1-a18", "kind": "por2", "status": "clean2", "rect": [180, 162, 209, 195], "changed": 511, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m43-ty1-a36", "kind": "por2", "status": "clean2", "rect": [183, 163, 212, 198], "changed": 325, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m43-ty2-a18", "kind": "por2", "status": "clean2", "rect": [184, 161, 213, 196], "changed": 497, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m43-ty3-a36", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m44-ty1-a18", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m44-ty1-a26", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m44-ty1-a36", "kind": "por2", "status": "clean2", "rect": [178, 157, 210, 199], "changed": 403, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m44-ty1-a51", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m44-ty2-a18", "kind": "por2", "status": "clean2", "rect": [178, 160, 211, 199], "changed": 362, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m44-ty2-a26", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m44-ty2-a36", "kind": "por2", "status": "clean2", "rect": [180, 160, 211, 200], "changed": 333, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m45-ty1-a26", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m45-ty2-a18", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m45-ty2-a26", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m46-ty1-a18", "kind": "por2", "status": "clean2", "rect": [175, 153, 211, 190], "changed": 617, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m46-ty1-a36", "kind": "por2", "status": "clean2", "rect": [176, 154, 208, 200], "changed": 349, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m46-ty1-a51", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m46-ty2-a51", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m46-ty3-a18", "kind": "por2", "status": "clean2", "rect": [172, 153, 210, 195], "changed": 559, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m46-ty3-a36", "kind": "por2", "status": "clean2", "rect": [175, 155, 209, 197], "changed": 478, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m46-ty3-a51", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m47-ty1-a18", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m47-ty1-a26", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m47-ty1-a36", "kind": "por2", "status": "clean2", "rect": [167, 162, 196, 195], "changed": 179, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m47-ty1-a51", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m47-ty2-a18", "kind": "por2", "status": "clean2", "rect": [166, 167, 208, 206], "changed": 452, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m47-ty2-a26", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m47-ty2-a36", "kind": "por2", "status": "clean2", "rect": [173, 167, 200, 198], "changed": 182, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m47-ty2-a51", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m47-ty3-a18", "kind": "por2", "status": "clean2", "rect": [169, 165, 201, 200], "changed": 304, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m47-ty3-a26", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m47-ty3-a36", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m47-ty3-a51", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m48-ty1-a18", "kind": "por2", "status": "clean2", "rect": [175, 163, 203, 198], "changed": 217, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m48-ty1-a26", "kind": "por2", "status": "clean2", "rect": [180, 163, 209, 200], "changed": 307, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m48-ty1-a36", "kind": "por2", "status": "clean2", "rect": [180, 160, 209, 199], "changed": 217, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m48-ty1-a51", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m48-ty2-a18", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m48-ty2-a26", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m48-ty2-a36", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m48-ty2-a51", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m48-ty3-a18", "kind": "por2", "status": "clean2", "rect": [180, 158, 209, 197], "changed": 420, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m48-ty3-a26", "kind": "por2", "status": "clean2", "rect": [181, 161, 209, 197], "changed": 168, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m48-ty3-a36", "kind": "por2", "status": "clean2", "rect": [181, 158, 209, 189], "changed": 452, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m48-ty3-a51", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m49-ty1-a18", "kind": "por2", "status": "clean2", "rect": [180, 167, 201, 193], "changed": 142, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m49-ty1-a26", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m49-ty1-a36", "kind": "por2", "status": "clean2", "rect": [179, 167, 202, 192], "changed": 154, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m49-ty1-a51", "kind": "por2", "status": "clean2", "rect": [181, 165, 206, 190], "changed": 179, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m49-ty2-a18", "kind": "por2", "status": "clean2", "rect": [180, 167, 207, 200], "changed": 227, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m49-ty2-a26", "kind": "por2", "status": "clean2", "rect": [175, 168, 209, 201], "changed": 285, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m49-ty2-a36", "kind": "por2", "status": "clean2", "rect": [180, 163, 208, 198], "changed": 230, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m49-ty2-a51", "kind": "por2", "status": "clean2", "rect": [181, 167, 209, 200], "changed": 239, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m49-ty3-a18", "kind": "por2", "status": "clean2", "rect": [178, 167, 208, 200], "changed": 241, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m49-ty3-a26", "kind": "por2", "status": "clean2", "rect": [180, 168, 209, 199], "changed": 216, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m49-ty3-a36", "kind": "por2", "status": "clean2", "rect": [180, 165, 207, 199], "changed": 198, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m49-ty3-a51", "kind": "por2", "status": "clean2", "rect": [180, 167, 208, 198], "changed": 230, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m50-ty1-a18", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m50-ty1-a26", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m50-ty1-a36", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m50-ty1-a51", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m50-ty2-a18", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m50-ty2-a26", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m50-ty2-a36", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m50-ty2-a51", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m50-ty3-a18", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m50-ty3-a26", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m50-ty3-a36", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m50-ty3-a51", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m51-ty1-a26", "kind": "por2", "status": "clean2", "rect": [169, 157, 206, 188], "changed": 426, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m51-ty1-a36", "kind": "por2", "status": "clean2", "rect": [172, 158, 210, 191], "changed": 475, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m51-ty1-a51", "kind": "por2", "status": "clean2", "rect": [169, 156, 211, 186], "changed": 486, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m51-ty2-a18", "kind": "por2", "status": "clean2", "rect": [169, 159, 212, 205], "changed": 401, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m51-ty2-a26", "kind": "por2", "status": "clean2", "rect": [172, 160, 212, 194], "changed": 575, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m51-ty2-a36", "kind": "por2", "status": "clean2", "rect": [173, 158, 211, 200], "changed": 410, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m51-ty2-a51", "kind": "por2", "status": "clean2", "rect": [170, 157, 210, 187], "changed": 499, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m51-ty3-a18", "kind": "por2", "status": "clean2", "rect": [169, 155, 210, 192], "changed": 675, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m51-ty3-a26", "kind": "por2", "status": "no_leftover"}
+{"name": "por-maid-m51-ty3-a36", "kind": "por2", "status": "clean2", "rect": [175, 157, 214, 188], "changed": 454, "out_diff": 0, "size_ok": true}
+{"name": "por-maid-m51-ty3-a51", "kind": "por2", "status": "no_leftover"}

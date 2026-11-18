@@ -1,0 +1,681 @@
+{"name": "fig-maid-m01-ty1-a18", "kind": "fig", "status": "por_nomark"}
+{"name": "fig-maid-m01-ty1-a26", "kind": "fig", "status": "por_nomark"}
+{"name": "fig-maid-m01-ty1-a36", "kind": "fig", "status": "por_nomark"}
+{"name": "fig-maid-m01-ty2-a18", "kind": "fig", "status": "por_nomark"}
+{"name": "fig-maid-m01-ty2-a26", "kind": "fig", "score": 0.992, "k": 0.638, "mode": "own", "status": "clean", "box": [184, 62, 193, 71], "anchor": [187.7, 65.4], "peak": 35.6, "rect": [177, 55, 198, 78], "base_mad": 0.577, "changed": 191, "out_mad": 0.574, "size_ok": true, "size": [380, 900]}
+{"name": "fig-maid-m01-ty2-a36", "kind": "fig", "score": 0.993, "k": 0.672, "status": "clean", "box": [184, 62, 194, 72], "anchor": [188.0, 65.8], "peak": 38.9, "rect": [177, 55, 199, 83], "base_mad": 0.559, "changed": 217, "out_mad": 0.559, "size_ok": true, "size": [344, 900]}
+{"name": "fig-maid-m01-ty3-a18", "kind": "fig", "status": "por_nomark"}
+{"name": "fig-maid-m01-ty3-a26", "kind": "fig", "score": 0.993, "k": 0.62, "status": "clean", "box": [171, 62, 180, 70], "anchor": [174.5, 64.8], "peak": 27.2, "rect": [165, 55, 186, 81], "base_mad": 0.551, "changed": 172, "out_mad": 0.55, "size_ok": true, "size": [363, 900]}
+{"name": "fig-maid-m01-ty3-a36", "kind": "fig", "status": "por_nomark"}
+{"name": "fig-maid-m01-ty4-a18", "kind": "fig", "status": "por_nomark"}
+{"name": "fig-maid-m01-ty5-a18", "kind": "fig", "status": "por_nomark"}
+{"name": "fig-maid-m01-ty6-a18", "kind": "fig", "score": 0.998, "k": 0.656, "status": "clean", "box": [191, 64, 201, 74], "anchor": [195.0, 67.7], "peak": 45.1, "rect": [184, 58, 206, 85], "base_mad": 0.72, "changed": 225, "out_mad": 0.72, "size_ok": true, "size": [342, 900]}
+{"name": "fig-maid-m01-ty7-a18", "kind": "fig", "status": "por_nomark"}
+{"name": "fig-maid-m01-ty8-a18", "kind": "fig", "score": 0.997, "k": 0.658, "status": "clean", "box": [188, 62, 199, 73], "anchor": [192.4, 66.5], "peak": 43.3, "rect": [182, 55, 205, 84], "base_mad": 0.818, "changed": 263, "out_mad": 0.817, "size_ok": true, "size": [337, 900]}
+{"name": "fig-maid-m02-ty1-a18", "kind": "fig", "status": "por_nomark"}
+{"name": "fig-maid-m02-ty1-a26", "kind": "fig", "status": "por_nomark"}
+{"name": "fig-maid-m02-ty1-a36", "kind": "fig", "status": "por_nomark"}
+{"name": "fig-maid-m02-ty2-a18", "kind": "fig", "score": 0.995, "k": 0.578, "status": "clean", "box": [155, 81, 164, 92], "anchor": [159.1, 85.0], "peak": 23.3, "rect": [148, 74, 170, 102], "base_mad": 0.555, "changed": 244, "out_mad": 0.554, "size_ok": true, "size": [287, 900]}
+{"name": "fig-maid-m02-ty2-a26", "kind": "fig", "status": "por_nomark"}
+{"name": "fig-maid-m02-ty2-a36", "kind": "fig", "score": 0.997, "k": 0.622, "status": "clean", "box": [162, 68, 171, 76], "anchor": [165.5, 71.4], "peak": 24.8, "rect": [155, 61, 177, 86], "base_mad": 0.568, "changed": 213, "out_mad": 0.567, "size_ok": true, "size": [374, 900]}
+{"name": "fig-maid-m02-ty3-a18", "kind": "fig", "status": "por_nomark"}
+{"name": "fig-maid-m02-ty3-a26", "kind": "fig", "status": "por_nomark"}
+{"name": "fig-maid-m02-ty3-a36", "kind": "fig", "score": 0.991, "k": 0.618, "mode": "own", "status": "nomark"}
+{"name": "fig-maid-m02-ty4-a18", "kind": "fig", "score": 0.994, "k": 0.582, "mode": "own", "status": "nomark"}
+{"name": "fig-maid-m02-ty5-a18", "kind": "fig", "status": "por_nomark"}
+{"name": "fig-maid-m02-ty6-a18", "kind": "fig", "status": "por_nomark"}
+{"name": "fig-maid-m02-ty7-a18", "kind": "fig", "score": 0.996, "k": 0.584, "status": "clean", "box": [161, 79, 169, 87], "anchor": [164.7, 82.4], "peak": 22.0, "rect": [154, 72, 174, 97], "base_mad": 0.731, "changed": 140, "out_mad": 0.731, "size_ok": true, "size": [292, 900]}
+{"name": "fig-maid-m02-ty8-a18", "kind": "fig", "status": "por_nomark"}
+{"name": "fig-maid-m03-ty1-a18", "kind": "fig", "status": "por_nomark"}
+{"name": "fig-maid-m03-ty1-a26", "kind": "fig", "status": "por_nomark"}
+{"name": "fig-maid-m03-ty1-a36", "kind": "fig", "status": "por_nomark"}
+{"name": "fig-maid-m03-ty2-a18", "kind": "fig", "score": 0.994, "k": 0.628, "status": "clean", "box": [173, 70, 177, 74], "anchor": [174.3, 71.2], "peak": 38.7, "rect": [166, 63, 183, 84], "base_mad": 0.519, "changed": 100, "out_mad": 0.518, "size_ok": true, "size": [280, 900]}
+{"name": "fig-maid-m03-ty2-a26", "kind": "fig", "status": "por_nomark"}
+{"name": "fig-maid-m03-ty2-a36", "kind": "fig", "score": 0.996, "k": 0.626, "mode": "own", "status": "nomark"}
+{"name": "fig-maid-m03-ty3-a18", "kind": "fig", "score": 0.992, "k": 0.59, "status": "clean", "box": [166, 69, 172, 75], "anchor": [168.2, 71.1], "peak": 30.5, "rect": [159, 63, 178, 81], "base_mad": 0.541, "changed": 117, "out_mad": 0.541, "size_ok": true, "size": [275, 900]}
+{"name": "fig-maid-m03-ty3-a26", "kind": "fig", "status": "por_nomark"}
+{"name": "fig-maid-m03-ty3-a36", "kind": "fig", "score": 0.993, "k": 0.632, "status": "clean", "box": [161, 74, 168, 78], "anchor": [163.5, 75.1], "peak": 29.1, "rect": [155, 67, 173, 88], "base_mad": 0.527, "changed": 135, "out_mad": 0.526, "size_ok": true, "size": [295, 900]}
+{"name": "fig-maid-m03-ty4-a18", "kind": "fig", "status": "por_nomark"}
+{"name": "fig-maid-m03-ty5-a18", "kind": "fig", "score": 0.993, "k": 0.614, "mode": "own", "status": "clean", "box": [192, 72, 198, 75], "anchor": [194.7, 73.0], "peak": 22.6, "rect": [185, 65, 203, 79], "base_mad": 0.422, "changed": 74, "out_mad": 0.423, "size_ok": true, "size": [290, 900]}
+{"name": "fig-maid-m03-ty6-a18", "kind": "fig", "status": "por_nomark"}
+{"name": "fig-maid-m03-ty7-a18", "kind": "fig", "score": 0.995, "k": 0.58, "mode": "own", "status": "nomark"}
+{"name": "fig-maid-m03-ty8-a18", "kind": "fig", "status": "por_nomark"}
+{"name": "fig-maid-m04-ty1-a18", "kind": "fig", "score": 0.993, "k": 0.672, "mode": "own", "status": "nomark"}
+{"name": "fig-maid-m04-ty1-a26", "kind": "fig", "score": 0.996, "k": 0.682, "mode": "own", "status": "clean", "box": [169, 58, 177, 77], "anchor": [172.2, 64.6], "peak": 41.4, "rect": [162, 51, 182, 79], "base_mad": 0.616, "changed": 218, "out_mad": 0.615, "size_ok": true, "size": [310, 900]}
+{"name": "fig-maid-m04-ty1-a36", "kind": "fig", "score": 0.996, "k": 0.676, "status": "clean", "box": [177, 60, 185, 73], "anchor": [180.1, 65.2], "peak": 40.2, "rect": [170, 53, 191, 82], "base_mad": 0.592, "changed": 196, "out_mad": 0.592, "size_ok": true, "size": [317, 900]}
+{"name": "fig-maid-m04-ty2-a18", "kind": "fig", "score": 0.994, "k": 0.652, "mode": "own", "status": "clean", "box": [179, 58, 186, 71], "anchor": [181.6, 63.2], "peak": 32.8, "rect": [172, 51, 192, 79], "base_mad": 0.549, "changed": 198, "out_mad": 0.548, "size_ok": true, "size": [374, 900]}
+{"name": "fig-maid-m04-ty2-a26", "kind": "fig", "score": 0.991, "k": 0.672, "status": "clean", "box": [173, 58, 180, 69], "anchor": [175.4, 62.1], "peak": 28.8, "rect": [166, 51, 186, 77], "base_mad": 0.446, "changed": 203, "out_mad": 0.447, "size_ok": true, "size": [304, 900]}
+{"name": "fig-maid-m04-ty2-a36", "kind": "fig", "score": 0.994, "k": 0.652, "status": "clean", "box": [178, 61, 185, 72], "anchor": [180.5, 63.2], "peak": 34.6, "rect": [171, 54, 191, 82], "base_mad": 0.593, "changed": 199, "out_mad": 0.592, "size_ok": true, "size": [315, 900]}
+{"name": "fig-maid-m04-ty3-a18", "kind": "fig", "status": "por_nomark"}
+{"name": "fig-maid-m04-ty3-a26", "kind": "fig", "score": 0.996, "k": 0.662, "status": "clean", "box": [178, 58, 185, 66], "anchor": [180.6, 61.3], "peak": 37.0, "rect": [172, 51, 189, 75], "base_mad": 0.519, "changed": 177, "out_mad": 0.519, "size_ok": true, "size": [321, 900]}
+{"name": "fig-maid-m04-ty3-a36", "kind": "fig", "score": 0.991, "k": 0.672, "status": "clean", "box": [179, 59, 186, 68], "anchor": [181.8, 62.4], "peak": 35.7, "rect": [172, 52, 191, 76], "base_mad": 0.552, "changed": 184, "out_mad": 0.552, "size_ok": true, "size": [325, 900]}
+{"name": "fig-maid-m04-ty4-a18", "kind": "fig", "status": "por_nomark"}
+{"name": "fig-maid-m04-ty5-a18", "kind": "fig", "score": 0.998, "k": 0.676, "mode": "own", "status": "nomark"}
+{"name": "fig-maid-m04-ty6-a18", "kind": "fig", "status": "por_nomark"}
+{"name": "fig-maid-m04-ty7-a18", "kind": "fig", "score": 0.993, "k": 0.67, "mode": "own", "status": "nomark"}
+{"name": "fig-maid-m04-ty8-a18", "kind": "fig", "score": 0.996, "k": 0.66, "mode": "own", "status": "nomark"}
+{"name": "fig-maid-m05-ty1-a18", "kind": "fig", "score": 0.988, "k": 0.618, "status": "clean", "box": [151, 59, 160, 68], "anchor": [154.5, 62.2], "peak": 64.8, "rect": [144, 53, 166, 77], "base_mad": 0.557, "changed": 210, "out_mad": 0.557, "size_ok": true, "size": [314, 900]}
+{"name": "fig-maid-m05-ty1-a26", "kind": "fig", "score": 0.989, "k": 0.642, "status": "clean", "box": [162, 58, 170, 66], "anchor": [165.1, 61.3], "peak": 66.1, "rect": [155, 51, 176, 77], "base_mad": 0.469, "changed": 237, "out_mad": 0.469, "size_ok": true, "size": [309, 900]}
+{"name": "fig-maid-m05-ty1-a36", "kind": "fig", "score": 0.983, "k": 0.638, "status": "clean", "box": [162, 57, 171, 66], "anchor": [165.7, 60.2], "peak": 58.4, "rect": [155, 51, 177, 77], "base_mad": 0.621, "changed": 237, "out_mad": 0.619, "size_ok": true, "size": [317, 900]}
+{"name": "fig-maid-m05-ty2-a18", "kind": "fig", "score": 0.995, "k": 0.638, "status": "clean", "box": [150, 60, 163, 73], "anchor": [153.9, 64.1], "peak": 90.0, "rect": [142, 54, 166, 81], "base_mad": 0.488, "changed": 242, "out_mad": 0.487, "size_ok": true, "size": [310, 900]}
+{"name": "fig-maid-m05-ty2-a26", "kind": "fig", "score": 0.989, "k": 0.624, "status": "clean", "box": [153, 60, 162, 70], "anchor": [156.6, 63.6], "peak": 88.1, "rect": [146, 54, 168, 73], "base_mad": 0.599, "changed": 142, "out_mad": 0.6, "size_ok": true, "size": [303, 900]}
+{"name": "fig-maid-m05-ty2-a36", "kind": "fig", "score": 0.992, "k": 0.642, "status": "clean", "box": [159, 59, 167, 68], "anchor": [162.1, 62.3], "peak": 82.9, "rect": [152, 52, 173, 79], "base_mad": 0.504, "changed": 226, "out_mad": 0.504, "size_ok": true, "size": [314, 900]}
+{"name": "fig-maid-m05-ty3-a18", "kind": "fig", "score": 0.99, "k": 0.646, "status": "clean", "box": [156, 59, 163, 66], "anchor": [158.6, 61.3], "peak": 39.1, "rect": [150, 52, 168, 70], "base_mad": 0.58, "changed": 127, "out_mad": 0.578, "size_ok": true, "size": [324, 900]}
+{"name": "fig-maid-m05-ty3-a26", "kind": "fig", "score": 0.994, "k": 0.636, "status": "clean", "box": [173, 59, 181, 65], "anchor": [176.3, 61.1], "peak": 46.2, "rect": [165, 52, 188, 77], "base_mad": 0.556, "changed": 159, "out_mad": 0.556, "size_ok": true, "size": [331, 900]}
+{"name": "fig-maid-m05-ty3-a36", "kind": "fig", "score": 0.993, "k": 0.628, "status": "clean", "box": [171, 57, 178, 64], "anchor": [173.6, 59.6], "peak": 39.1, "rect": [164, 50, 184, 75], "base_mad": 0.507, "changed": 190, "out_mad": 0.506, "size_ok": true, "size": [331, 900]}
+{"name": "fig-maid-m05-ty4-a18", "kind": "fig", "score": 0.996, "k": 0.66, "status": "clean", "box": [149, 59, 158, 67], "anchor": [151.9, 61.9], "peak": 58.1, "rect": [141, 52, 163, 77], "base_mad": 0.557, "changed": 224, "out_mad": 0.558, "size_ok": true, "size": [313, 900]}
+{"name": "fig-maid-m05-ty5-a18", "kind": "fig", "score": 0.991, "k": 0.628, "status": "clean", "box": [152, 61, 158, 66], "anchor": [154.2, 62.4], "peak": 43.9, "rect": [146, 54, 164, 75], "base_mad": 0.507, "changed": 142, "out_mad": 0.508, "size_ok": true, "size": [308, 900]}
+{"name": "fig-maid-m05-ty6-a18", "kind": "fig", "score": 0.993, "k": 0.628, "status": "clean", "box": [151, 60, 159, 68], "anchor": [154.2, 62.7], "peak": 37.3, "rect": [143, 53, 166, 79], "base_mad": 0.681, "changed": 193, "out_mad": 0.681, "size_ok": true, "size": [319, 900]}
+{"name": "fig-maid-m05-ty7-a18", "kind": "fig", "score": 0.992, "k": 0.646, "status": "clean", "box": [152, 59, 160, 66], "anchor": [155.1, 61.6], "peak": 28.2, "rect": [146, 53, 164, 71], "base_mad": 0.827, "changed": 125, "out_mad": 0.826, "size_ok": true, "size": [313, 900]}
+{"name": "fig-maid-m05-ty8-a18", "kind": "fig", "score": 0.985, "k": 0.65, "status": "clean", "box": [156, 60, 163, 67], "anchor": [158.3, 62.1], "peak": 62.3, "rect": [149, 53, 169, 77], "base_mad": 0.808, "changed": 185, "out_mad": 0.809, "size_ok": true, "size": [314, 900]}
+{"name": "fig-maid-m06-ty1-a18", "kind": "fig", "score": 0.992, "k": 0.62, "status": "clean", "box": [208, 73, 217, 85], "anchor": [211.0, 76.1], "peak": 91.0, "rect": [201, 66, 223, 86], "base_mad": 0.387, "changed": 161, "out_mad": 0.388, "size_ok": true, "size": [367, 900]}
+{"name": "fig-maid-m06-ty1-a26", "kind": "fig", "score": 0.995, "k": 0.638, "status": "clean", "box": [183, 71, 191, 84], "anchor": [185.7, 74.8], "peak": 90.6, "rect": [176, 64, 197, 84], "base_mad": 0.535, "changed": 173, "out_mad": 0.536, "size_ok": true, "size": [346, 900]}
+{"name": "fig-maid-m06-ty1-a36", "kind": "fig", "score": 0.989, "k": 0.65, "status": "clean", "box": [171, 70, 179, 83], "anchor": [173.9, 73.6], "peak": 86.3, "rect": [164, 63, 186, 83], "base_mad": 0.428, "changed": 158, "out_mad": 0.428, "size_ok": true, "size": [330, 900]}
+{"name": "fig-maid-m06-ty2-a18", "kind": "fig", "score": 0.991, "k": 0.638, "status": "clean", "box": [198, 74, 206, 86], "anchor": [200.9, 77.7], "peak": 80.5, "rect": [190, 68, 213, 86], "base_mad": 0.423, "changed": 151, "out_mad": 0.421, "size_ok": true, "size": [347, 900]}
+{"name": "fig-maid-m06-ty2-a26", "kind": "fig", "score": 0.996, "k": 0.66, "status": "clean", "box": [178, 71, 186, 85], "anchor": [180.8, 75.6], "peak": 70.0, "rect": [171, 65, 191, 86], "base_mad": 0.455, "changed": 136, "out_mad": 0.455, "size_ok": true, "size": [339, 900]}
+{"name": "fig-maid-m06-ty2-a36", "kind": "fig", "score": 0.992, "k": 0.682, "status": "clean", "box": [163, 70, 172, 84], "anchor": [166.5, 74.1], "peak": 78.5, "rect": [156, 64, 179, 84], "base_mad": 0.418, "changed": 125, "out_mad": 0.417, "size_ok": true, "size": [323, 900]}
+{"name": "fig-maid-m06-ty3-a18", "kind": "fig", "score": 0.992, "k": 0.65, "mode": "own", "status": "nomark"}
+{"name": "fig-maid-m06-ty3-a26", "kind": "fig", "score": 0.989, "k": 0.622, "mode": "own", "status": "clean", "box": [176, 73, 181, 83], "anchor": [177.6, 76.0], "peak": 67.9, "rect": [170, 67, 185, 83], "base_mad": 0.558, "changed": 69, "out_mad": 0.557, "size_ok": true, "size": [336, 900]}
+{"name": "fig-maid-m06-ty3-a36", "kind": "fig", "score": 0.997, "k": 0.672, "status": "clean", "box": [164, 73, 169, 82], "anchor": [165.6, 75.5], "peak": 56.7, "rect": [156, 67, 176, 94], "base_mad": 0.574, "changed": 149, "out_mad": 0.575, "size_ok": true, "size": [318, 900]}
+{"name": "fig-maid-m06-ty4-a18", "kind": "fig", "score": 0.996, "k": 0.644, "mode": "own", "status": "clean", "box": [202, 74, 211, 87], "anchor": [204.8, 77.4], "peak": 82.2, "rect": [194, 67, 218, 86], "base_mad": 0.517, "changed": 155, "out_mad": 0.517, "size_ok": true, "size": [351, 900]}
+{"name": "fig-maid-m06-ty5-a18", "kind": "fig", "score": 0.997, "k": 0.64, "mode": "own", "status": "clean", "box": [204, 71, 213, 90], "anchor": [206.7, 75.3], "peak": 91.6, "rect": [197, 64, 219, 84], "base_mad": 0.529, "changed": 158, "out_mad": 0.529, "size_ok": true, "size": [361, 900]}
+{"name": "fig-maid-m06-ty6-a18", "kind": "fig", "score": 0.989, "k": 0.65, "mode": "own", "status": "clean", "box": [197, 74, 204, 84], "anchor": [199.8, 75.9], "peak": 57.0, "rect": [189, 68, 204, 83], "base_mad": 0.472, "changed": 52, "out_mad": 0.473, "size_ok": true, "size": [354, 900]}
+{"name": "fig-maid-m06-ty7-a18", "kind": "fig", "score": 0.991, "k": 0.65, "mode": "own", "status": "nomark"}
+{"name": "fig-maid-m06-ty8-a18", "kind": "fig", "score": 0.99, "k": 0.618, "status": "clean", "box": [188, 74, 197, 86], "anchor": [190.7, 77.7], "peak": 88.5, "rect": [181, 68, 203, 86], "base_mad": 0.752, "changed": 144, "out_mad": 0.752, "size_ok": true, "size": [336, 900]}
+{"name": "fig-maid-m07-ty1-a18", "kind": "fig", "score": 0.993, "k": 0.612, "status": "clean", "box": [183, 84, 191, 92], "anchor": [185.9, 86.8], "peak": 41.5, "rect": [176, 77, 197, 97], "base_mad": 0.566, "changed": 185, "out_mad": 0.567, "size_ok": true, "size": [304, 900]}
+{"name": "fig-maid-m07-ty1-a26", "kind": "fig", "score": 0.991, "k": 0.642, "mode": "own", "status": "clean", "box": [163, 72, 170, 81], "anchor": [165.7, 74.9], "peak": 41.0, "rect": [156, 65, 176, 85], "base_mad": 0.599, "changed": 174, "out_mad": 0.601, "size_ok": true, "size": [301, 900]}
+{"name": "fig-maid-m07-ty1-a36", "kind": "fig", "score": 0.996, "k": 0.626, "status": "clean", "box": [172, 71, 178, 80], "anchor": [174.5, 74.3], "peak": 38.1, "rect": [165, 64, 184, 91], "base_mad": 0.55, "changed": 162, "out_mad": 0.551, "size_ok": true, "size": [387, 900]}
+{"name": "fig-maid-m07-ty2-a18", "kind": "fig", "score": 0.997, "k": 0.624, "status": "clean", "box": [181, 82, 187, 89], "anchor": [182.7, 84.2], "peak": 26.6, "rect": [174, 75, 193, 93], "base_mad": 0.543, "changed": 135, "out_mad": 0.541, "size_ok": true, "size": [303, 900]}
+{"name": "fig-maid-m07-ty2-a26", "kind": "fig", "status": "por_nomark"}
+{"name": "fig-maid-m07-ty2-a36", "kind": "fig", "score": 0.996, "k": 0.658, "status": "clean", "box": [175, 73, 181, 80], "anchor": [176.9, 75.8], "peak": 27.9, "rect": [169, 67, 185, 85], "base_mad": 0.466, "changed": 104, "out_mad": 0.465, "size_ok": true, "size": [383, 900]}
+{"name": "fig-maid-m07-ty3-a18", "kind": "fig", "score": 0.996, "k": 0.61, "status": "clean", "box": [182, 86, 189, 95], "anchor": [184.6, 89.5], "peak": 37.8, "rect": [175, 79, 195, 102], "base_mad": 0.534, "changed": 202, "out_mad": 0.535, "size_ok": true, "size": [308, 900]}
+{"name": "fig-maid-m07-ty3-a26", "kind": "fig", "status": "por_nomark"}
+{"name": "fig-maid-m07-ty3-a36", "kind": "fig", "status": "por_nomark"}
+{"name": "fig-maid-m07-ty4-a18", "kind": "fig", "score": 0.993, "k": 0.61, "status": "noface"}
+{"name": "fig-maid-m07-ty5-a18", "kind": "fig", "score": 0.996, "k": 0.606, "status": "clean", "box": [176, 85, 184, 93], "anchor": [179.0, 88.2], "peak": 39.3, "rect": [169, 78, 190, 99], "base_mad": 0.466, "changed": 189, "out_mad": 0.467, "size_ok": true, "size": [300, 900]}
+{"name": "fig-maid-m07-ty6-a18", "kind": "fig", "score": 0.998, "k": 0.608, "status": "clean", "box": [192, 86, 199, 94], "anchor": [194.3, 88.8], "peak": 50.2, "rect": [185, 79, 205, 99], "base_mad": 0.648, "changed": 167, "out_mad": 0.648, "size_ok": true, "size": [317, 900]}
+{"name": "fig-maid-m07-ty7-a18", "kind": "fig", "score": 0.996, "k": 0.606, "status": "clean", "box": [182, 85, 189, 92], "anchor": [184.6, 87.4], "peak": 41.1, "rect": [175, 78, 194, 97], "base_mad": 0.747, "changed": 140, "out_mad": 0.743, "size_ok": true, "size": [301, 900]}
+{"name": "fig-maid-m07-ty8-a18", "kind": "fig", "score": 0.997, "k": 0.61, "status": "clean", "box": [182, 87, 189, 94], "anchor": [184.2, 89.5], "peak": 37.0, "rect": [175, 80, 195, 102], "base_mad": 0.815, "changed": 184, "out_mad": 0.818, "size_ok": true, "size": [301, 900]}
+{"name": "fig-maid-m08-ty1-a18", "kind": "fig", "score": 0.994, "k": 0.616, "mode": "own", "status": "nomark"}
+{"name": "fig-maid-m08-ty1-a26", "kind": "fig", "score": 0.987, "k": 0.63, "status": "clean", "box": [170, 72, 178, 79], "anchor": [172.6, 74.5], "peak": 45.0, "rect": [163, 65, 184, 83], "base_mad": 0.524, "changed": 143, "out_mad": 0.525, "size_ok": true, "size": [292, 900]}
+{"name": "fig-maid-m08-ty1-a36", "kind": "fig", "score": 0.995, "k": 0.644, "status": "clean", "box": [165, 64, 174, 72], "anchor": [168.4, 67.6], "peak": 44.1, "rect": [158, 58, 180, 75], "base_mad": 0.521, "changed": 148, "out_mad": 0.522, "size_ok": true, "size": [307, 900]}
+{"name": "fig-maid-m08-ty2-a18", "kind": "fig", "score": 0.994, "k": 0.598, "status": "clean", "box": [161, 61, 169, 69], "anchor": [163.5, 64.8], "peak": 31.0, "rect": [154, 55, 175, 79], "base_mad": 0.513, "changed": 182, "out_mad": 0.511, "size_ok": true, "size": [267, 900]}
+{"name": "fig-maid-m08-ty2-a26", "kind": "fig", "score": 0.998, "k": 0.598, "mode": "own", "status": "nomark"}
+{"name": "fig-maid-m08-ty2-a36", "kind": "fig", "score": 0.99, "k": 0.668, "status": "clean", "box": [166, 64, 175, 73], "anchor": [169.1, 68.2], "peak": 38.9, "rect": [159, 57, 181, 78], "base_mad": 0.57, "changed": 184, "out_mad": 0.57, "size_ok": true, "size": [305, 900]}
+{"name": "fig-maid-m08-ty3-a18", "kind": "fig", "score": 0.992, "k": 0.576, "status": "clean", "box": [169, 61, 177, 68], "anchor": [171.8, 63.4], "peak": 26.3, "rect": [162, 54, 183, 78], "base_mad": 0.633, "changed": 209, "out_mad": 0.633, "size_ok": true, "size": [285, 900]}
+{"name": "fig-maid-m08-ty3-a26", "kind": "fig", "score": 0.994, "k": 0.612, "status": "clean", "box": [173, 72, 181, 79], "anchor": [175.8, 74.7], "peak": 32.3, "rect": [166, 65, 187, 89], "base_mad": 0.592, "changed": 212, "out_mad": 0.591, "size_ok": true, "size": [305, 900]}
+{"name": "fig-maid-m08-ty3-a36", "kind": "fig", "score": 0.995, "k": 0.622, "status": "clean", "box": [167, 64, 175, 71], "anchor": [169.7, 66.8], "peak": 23.5, "rect": [160, 57, 181, 78], "base_mad": 0.587, "changed": 154, "out_mad": 0.586, "size_ok": true, "size": [310, 900]}
+{"name": "fig-maid-m08-ty4-a18", "kind": "fig", "score": 0.986, "k": 0.626, "mode": "own", "status": "nomark"}
+{"name": "fig-maid-m08-ty5-a18", "kind": "fig", "score": 0.989, "k": 0.616, "status": "clean", "box": [164, 62, 173, 70], "anchor": [167.4, 65.5], "peak": 28.0, "rect": [157, 55, 179, 80], "base_mad": 0.419, "changed": 227, "out_mad": 0.419, "size_ok": true, "size": [276, 900]}
+{"name": "fig-maid-m08-ty6-a18", "kind": "fig", "score": 0.997, "k": 0.594, "status": "clean", "box": [165, 61, 182, 72], "anchor": [175.4, 65.2], "peak": 43.8, "rect": [158, 55, 188, 74], "base_mad": 0.661, "changed": 179, "out_mad": 0.662, "size_ok": true, "size": [289, 900]}
+{"name": "fig-maid-m08-ty7-a18", "kind": "fig", "score": 0.997, "k": 0.598, "status": "clean", "box": [166, 61, 174, 69], "anchor": [169.3, 65.0], "peak": 32.4, "rect": [159, 55, 180, 74], "base_mad": 0.843, "changed": 159, "out_mad": 0.844, "size_ok": true, "size": [277, 900]}
+{"name": "fig-maid-m08-ty8-a18", "kind": "fig", "score": 0.987, "k": 0.592, "status": "clean", "box": [169, 61, 177, 69], "anchor": [172.2, 64.1], "peak": 51.5, "rect": [162, 54, 183, 73], "base_mad": 0.728, "changed": 141, "out_mad": 0.729, "size_ok": true, "size": [279, 900]}
+{"name": "fig-maid-m09-ty1-a18", "kind": "fig", "status": "por_nomark"}
+{"name": "fig-maid-m09-ty1-a26", "kind": "fig", "score": 0.994, "k": 0.636, "status": "clean", "box": [149, 66, 159, 74], "anchor": [152.4, 68.8], "peak": 19.3, "rect": [142, 59, 165, 85], "base_mad": 0.48, "changed": 206, "out_mad": 0.479, "size_ok": true, "size": [279, 900]}
+{"name": "fig-maid-m09-ty1-a36", "kind": "fig", "status": "por_nomark"}
+{"name": "fig-maid-m09-ty1-a51", "kind": "fig", "score": 0.994, "k": 0.648, "status": "clean", "box": [159, 63, 169, 73], "anchor": [162.7, 67.7], "peak": 18.1, "rect": [152, 56, 174, 84], "base_mad": 0.64, "changed": 237, "out_mad": 0.639, "size_ok": true, "size": [294, 900]}
+{"name": "fig-maid-m09-ty2-a18", "kind": "fig", "score": 0.993, "k": 0.64, "status": "clean", "box": [168, 62, 177, 72], "anchor": [171.7, 66.4], "peak": 23.5, "rect": [161, 55, 182, 82], "base_mad": 0.547, "changed": 229, "out_mad": 0.548, "size_ok": true, "size": [383, 900]}
+{"name": "fig-maid-m09-ty2-a26", "kind": "fig", "score": 0.992, "k": 0.664, "status": "clean", "box": [153, 64, 163, 72], "anchor": [156.7, 67.7], "peak": 27.5, "rect": [146, 57, 169, 83], "base_mad": 0.552, "changed": 221, "out_mad": 0.553, "size_ok": true, "size": [287, 900]}
+{"name": "fig-maid-m09-ty2-a36", "kind": "fig", "status": "por_nomark"}
+{"name": "fig-maid-m09-ty3-a18", "kind": "fig", "score": 0.994, "k": 0.664, "status": "clean", "box": [169, 62, 180, 72], "anchor": [173.3, 66.2], "peak": 23.9, "rect": [162, 55, 184, 77], "base_mad": 0.397, "changed": 226, "out_mad": 0.399, "size_ok": true, "size": [388, 900]}
+{"name": "fig-maid-m09-ty3-a26", "kind": "fig", "score": 0.997, "k": 0.656, "mode": "own", "status": "nomark"}
+{"name": "fig-maid-m09-ty3-a36", "kind": "fig", "score": 0.995, "k": 0.654, "mode": "own", "status": "nomark"}
+{"name": "fig-maid-m09-ty4-a18", "kind": "fig", "score": 0.993, "k": 0.652, "mode": "own", "status": "nomark"}
+{"name": "fig-maid-m09-ty5-a18", "kind": "fig", "score": 0.991, "k": 0.654, "status": "clean", "box": [166, 65, 175, 73], "anchor": [169.4, 68.2], "peak": 26.1, "rect": [159, 58, 181, 83], "base_mad": 0.534, "changed": 203, "out_mad": 0.534, "size_ok": true, "size": [374, 900]}
+{"name": "fig-maid-m09-ty6-a18", "kind": "fig", "score": 0.995, "k": 0.644, "status": "clean", "box": [169, 66, 174, 73], "anchor": [170.3, 68.9], "peak": 18.3, "rect": [162, 59, 179, 82], "base_mad": 0.57, "changed": 131, "out_mad": 0.568, "size_ok": true, "size": [377, 900]}
+{"name": "fig-maid-m09-ty7-a18", "kind": "fig", "score": 0.995, "k": 0.658, "status": "clean", "box": [176, 65, 185, 72], "anchor": [179.6, 67.6], "peak": 16.3, "rect": [169, 59, 190, 83], "base_mad": 0.805, "changed": 183, "out_mad": 0.805, "size_ok": true, "size": [391, 900]}
+{"name": "fig-maid-m09-ty8-a18", "kind": "fig", "score": 0.994, "k": 0.652, "status": "clean", "box": [160, 65, 170, 74], "anchor": [163.8, 69.1], "peak": 19.5, "rect": [153, 58, 175, 85], "base_mad": 0.882, "changed": 217, "out_mad": 0.881, "size_ok": true, "size": [373, 900]}
+{"name": "fig-maid-m10-ty1-a18", "kind": "fig", "score": 0.997, "k": 0.608, "status": "clean", "box": [151, 55, 158, 64], "anchor": [153.3, 58.9], "peak": 80.1, "rect": [144, 48, 162, 69], "base_mad": 0.529, "changed": 155, "out_mad": 0.528, "size_ok": true, "size": [310, 900]}
+{"name": "fig-maid-m10-ty1-a26", "kind": "fig", "score": 0.991, "k": 0.644, "status": "clean", "box": [150, 58, 157, 66], "anchor": [152.8, 61.2], "peak": 71.4, "rect": [143, 51, 161, 73], "base_mad": 0.57, "changed": 171, "out_mad": 0.57, "size_ok": true, "size": [305, 900]}
+{"name": "fig-maid-m10-ty1-a36", "kind": "fig", "score": 0.997, "k": 0.626, "status": "clean", "box": [158, 57, 165, 65], "anchor": [160.4, 60.1], "peak": 80.5, "rect": [151, 51, 171, 76], "base_mad": 0.588, "changed": 196, "out_mad": 0.588, "size_ok": true, "size": [310, 900]}
+{"name": "fig-maid-m10-ty1-a51", "kind": "fig", "score": 0.989, "k": 0.642, "status": "clean", "box": [145, 58, 153, 66], "anchor": [147.9, 60.9], "peak": 78.0, "rect": [138, 51, 159, 71], "base_mad": 0.564, "changed": 174, "out_mad": 0.565, "size_ok": true, "size": [308, 900]}
+{"name": "fig-maid-m10-ty2-a18", "kind": "fig", "score": 0.987, "k": 0.618, "status": "clean", "box": [153, 56, 160, 64], "anchor": [155.7, 59.2], "peak": 73.5, "rect": [147, 50, 165, 68], "base_mad": 0.513, "changed": 123, "out_mad": 0.51, "size_ok": true, "size": [313, 900]}
+{"name": "fig-maid-m10-ty2-a26", "kind": "fig", "score": 0.99, "k": 0.642, "status": "clean", "box": [149, 57, 155, 65], "anchor": [151.1, 60.2], "peak": 63.4, "rect": [142, 51, 160, 69], "base_mad": 0.496, "changed": 132, "out_mad": 0.495, "size_ok": true, "size": [310, 900]}
+{"name": "fig-maid-m10-ty2-a36", "kind": "fig", "score": 0.994, "k": 0.624, "status": "clean", "box": [161, 57, 168, 64], "anchor": [163.7, 60.0], "peak": 74.8, "rect": [155, 51, 174, 75], "base_mad": 0.494, "changed": 178, "out_mad": 0.494, "size_ok": true, "size": [319, 900]}
+{"name": "fig-maid-m10-ty3-a18", "kind": "fig", "score": 0.997, "k": 0.596, "status": "clean", "box": [153, 55, 159, 62], "anchor": [155.1, 57.7], "peak": 60.8, "rect": [147, 49, 165, 69], "base_mad": 0.422, "changed": 136, "out_mad": 0.421, "size_ok": true, "size": [315, 900]}
+{"name": "fig-maid-m10-ty3-a26", "kind": "fig", "score": 0.991, "k": 0.62, "mode": "own", "status": "clean", "box": [151, 56, 169, 65], "anchor": [156.2, 59.8], "peak": 45.8, "rect": [144, 50, 175, 69], "base_mad": 0.562, "changed": 208, "out_mad": 0.561, "size_ok": true, "size": [307, 900]}
+{"name": "fig-maid-m10-ty3-a36", "kind": "fig", "score": 0.99, "k": 0.618, "status": "clean", "box": [159, 57, 165, 65], "anchor": [161.2, 59.7], "peak": 57.4, "rect": [152, 50, 171, 76], "base_mad": 0.526, "changed": 185, "out_mad": 0.524, "size_ok": true, "size": [314, 900]}
+{"name": "fig-maid-m10-ty4-a18", "kind": "fig", "score": 0.997, "k": 0.594, "status": "clean", "box": [156, 56, 162, 64], "anchor": [158.1, 58.9], "peak": 45.4, "rect": [150, 50, 168, 75], "base_mad": 0.564, "changed": 173, "out_mad": 0.565, "size_ok": true, "size": [316, 900]}
+{"name": "fig-maid-m10-ty5-a18", "kind": "fig", "score": 0.994, "k": 0.59, "status": "clean", "box": [152, 55, 158, 63], "anchor": [154.2, 58.3], "peak": 64.1, "rect": [146, 49, 164, 74], "base_mad": 0.476, "changed": 169, "out_mad": 0.479, "size_ok": true, "size": [316, 900]}
+{"name": "fig-maid-m10-ty6-a18", "kind": "fig", "score": 0.993, "k": 0.606, "status": "clean", "box": [158, 56, 165, 63], "anchor": [160.3, 59.1], "peak": 65.8, "rect": [151, 50, 169, 69], "base_mad": 0.629, "changed": 133, "out_mad": 0.629, "size_ok": true, "size": [318, 900]}
+{"name": "fig-maid-m10-ty7-a18", "kind": "fig", "score": 0.995, "k": 0.622, "status": "clean", "box": [162, 58, 167, 63], "anchor": [163.3, 59.2], "peak": 24.0, "rect": [156, 51, 173, 67], "base_mad": 0.57, "changed": 96, "out_mad": 0.571, "size_ok": true, "size": [321, 900]}
+{"name": "fig-maid-m10-ty8-a18", "kind": "fig", "score": 0.993, "k": 0.614, "status": "clean", "box": [158, 57, 164, 64], "anchor": [160.0, 60.0], "peak": 59.4, "rect": [151, 51, 170, 71], "base_mad": 0.745, "changed": 139, "out_mad": 0.746, "size_ok": true, "size": [318, 900]}
+{"name": "fig-maid-m11-ty1-a18", "kind": "fig", "score": 0.997, "k": 0.642, "status": "clean", "box": [180, 59, 190, 66], "anchor": [183.9, 60.5], "peak": 51.0, "rect": [173, 52, 194, 71], "base_mad": 0.59, "changed": 155, "out_mad": 0.59, "size_ok": true, "size": [324, 900]}
+{"name": "fig-maid-m11-ty1-a26", "kind": "fig", "score": 0.991, "k": 0.622, "mode": "own", "status": "clean", "box": [174, 60, 182, 66], "anchor": [177.3, 61.3], "peak": 43.4, "rect": [167, 53, 187, 71], "base_mad": 0.548, "changed": 133, "out_mad": 0.547, "size_ok": true, "size": [354, 900]}
+{"name": "fig-maid-m11-ty1-a36", "kind": "fig", "status": "por_nomark"}
+{"name": "fig-maid-m11-ty1-a51", "kind": "fig", "status": "por_nomark"}
+{"name": "fig-maid-m11-ty2-a18", "kind": "fig", "score": 0.99, "k": 0.652, "mode": "own", "status": "clean", "box": [170, 59, 182, 71], "anchor": [174.6, 61.9], "peak": 54.1, "rect": [163, 52, 185, 71], "base_mad": 0.473, "changed": 159, "out_mad": 0.474, "size_ok": true, "size": [322, 900]}
+{"name": "fig-maid-m11-ty2-a26", "kind": "fig", "score": 0.993, "k": 0.636, "mode": "own", "status": "clean", "box": [161, 60, 167, 67], "anchor": [163.0, 61.3], "peak": 42.1, "rect": [155, 53, 173, 77], "base_mad": 0.49, "changed": 120, "out_mad": 0.49, "size_ok": true, "size": [344, 900]}
+{"name": "fig-maid-m11-ty2-a36", "kind": "fig", "score": 0.993, "k": 0.62, "status": "clean", "box": [169, 59, 174, 66], "anchor": [171.0, 60.7], "peak": 62.2, "rect": [162, 53, 180, 71], "base_mad": 0.466, "changed": 123, "out_mad": 0.466, "size_ok": true, "size": [321, 900]}
+{"name": "fig-maid-m11-ty3-a18", "kind": "fig", "status": "por_nomark"}
+{"name": "fig-maid-m11-ty3-a26", "kind": "fig", "status": "por_nomark"}
+{"name": "fig-maid-m11-ty3-a36", "kind": "fig", "score": 0.991, "k": 0.664, "status": "clean", "box": [154, 58, 163, 66], "anchor": [157.0, 61.1], "peak": 57.4, "rect": [147, 52, 167, 71], "base_mad": 0.431, "changed": 140, "out_mad": 0.429, "size_ok": true, "size": [303, 900]}
+{"name": "fig-maid-m11-ty4-a18", "kind": "fig", "status": "por_nomark"}
+{"name": "fig-maid-m11-ty5-a18", "kind": "fig", "status": "por_nomark"}
+{"name": "fig-maid-m11-ty6-a18", "kind": "fig", "score": 0.998, "k": 0.642, "status": "clean", "box": [171, 57, 178, 65], "anchor": [173.6, 60.3], "peak": 45.9, "rect": [164, 50, 184, 70], "base_mad": 0.619, "changed": 179, "out_mad": 0.62, "size_ok": true, "size": [313, 900]}
+{"name": "fig-maid-m11-ty7-a18", "kind": "fig", "score": 0.986, "k": 0.648, "status": "clean", "box": [177, 60, 186, 66], "anchor": [181.3, 61.7], "peak": 40.3, "rect": [171, 53, 191, 70], "base_mad": 0.798, "changed": 138, "out_mad": 0.797, "size_ok": true, "size": [315, 900]}
+{"name": "fig-maid-m11-ty8-a18", "kind": "fig", "status": "por_nomark"}
+{"name": "fig-maid-m12-ty1-a18", "kind": "fig", "score": 0.998, "k": 0.594, "status": "clean", "box": [151, 85, 160, 96], "anchor": [155.2, 88.1], "peak": 25.6, "rect": [144, 78, 166, 102], "base_mad": 0.638, "changed": 183, "out_mad": 0.637, "size_ok": true, "size": [303, 900]}
+{"name": "fig-maid-m12-ty1-a26", "kind": "fig", "score": 0.998, "k": 0.674, "mode": "own", "status": "clean", "box": [170, 67, 178, 81], "anchor": [173.3, 73.7], "peak": 26.7, "rect": [164, 61, 180, 75], "base_mad": 0.641, "changed": 53, "out_mad": 0.641, "size_ok": true, "size": [313, 900]}
+{"name": "fig-maid-m12-ty1-a36", "kind": "fig", "status": "por_nomark"}
+{"name": "fig-maid-m12-ty1-a51", "kind": "fig", "score": 0.996, "k": 0.654, "status": "clean", "box": [153, 67, 161, 79], "anchor": [157.0, 72.7], "peak": 25.0, "rect": [145, 60, 165, 79], "base_mad": 0.66, "changed": 95, "out_mad": 0.66, "size_ok": true, "size": [305, 900]}
+{"name": "fig-maid-m12-ty2-a18", "kind": "fig", "score": 0.994, "k": 0.612, "status": "clean", "box": [150, 84, 159, 95], "anchor": [153.2, 87.3], "peak": 32.2, "rect": [143, 77, 165, 98], "base_mad": 0.628, "changed": 178, "out_mad": 0.628, "size_ok": true, "size": [294, 900]}
+{"name": "fig-maid-m12-ty2-a26", "kind": "fig", "score": 0.997, "k": 0.66, "mode": "own", "status": "nomark"}
+{"name": "fig-maid-m12-ty2-a36", "kind": "fig", "score": 0.997, "k": 0.68, "mode": "own", "status": "nomark"}
+{"name": "fig-maid-m12-ty3-a18", "kind": "fig", "score": 0.998, "k": 0.594, "status": "clean", "box": [141, 87, 149, 95], "anchor": [144.0, 90.2], "peak": 26.4, "rect": [135, 80, 155, 105], "base_mad": 0.581, "changed": 167, "out_mad": 0.584, "size_ok": true, "size": [285, 900]}
+{"name": "fig-maid-m12-ty3-a26", "kind": "fig", "score": 0.998, "k": 0.658, "mode": "own", "status": "clean", "box": [160, 70, 165, 82], "anchor": [161.5, 76.0], "peak": 35.0, "rect": [152, 64, 172, 84], "base_mad": 0.614, "changed": 139, "out_mad": 0.615, "size_ok": true, "size": [305, 900]}
+{"name": "fig-maid-m12-ty3-a36", "kind": "fig", "status": "por_nomark"}
+{"name": "fig-maid-m12-ty4-a18", "kind": "fig", "score": 0.996, "k": 0.596, "status": "clean", "box": [151, 85, 160, 96], "anchor": [154.3, 89.0], "peak": 35.3, "rect": [144, 78, 165, 106], "base_mad": 0.509, "changed": 220, "out_mad": 0.51, "size_ok": true, "size": [302, 900]}
+{"name": "fig-maid-m12-ty5-a18", "kind": "fig", "score": 0.996, "k": 0.596, "mode": "own", "status": "nomark"}
+{"name": "fig-maid-m12-ty6-a18", "kind": "fig", "score": 0.998, "k": 0.594, "mode": "own", "status": "nomark"}
+{"name": "fig-maid-m12-ty7-a18", "kind": "fig", "score": 0.995, "k": 0.596, "mode": "own", "status": "clean", "box": [161, 83, 170, 94], "anchor": [164.2, 88.2], "peak": 29.1, "rect": [157, 76, 172, 89], "base_mad": 0.876, "changed": 47, "out_mad": 0.874, "size_ok": true, "size": [315, 900]}
+{"name": "fig-maid-m12-ty8-a18", "kind": "fig", "score": 0.997, "k": 0.606, "status": "clean", "box": [159, 82, 168, 92], "anchor": [162.4, 85.9], "peak": 33.2, "rect": [152, 75, 174, 102], "base_mad": 0.846, "changed": 222, "out_mad": 0.844, "size_ok": true, "size": [309, 900]}
+{"name": "fig-maid-m13-ty1-a18", "kind": "fig", "score": 0.989, "k": 0.604, "status": "clean", "box": [155, 63, 163, 73], "anchor": [158.1, 66.7], "peak": 36.6, "rect": [149, 56, 169, 81], "base_mad": 0.531, "changed": 175, "out_mad": 0.509, "size_ok": true, "size": [277, 900]}
+{"name": "fig-maid-m13-ty1-a26", "kind": "fig", "score": 0.992, "k": 0.624, "mode": "own", "status": "nomark"}
+{"name": "fig-maid-m13-ty1-a36", "kind": "fig", "score": 0.991, "k": 0.64, "mode": "own", "status": "clean", "box": [163, 66, 172, 77], "anchor": [166.4, 70.6], "peak": 36.4, "rect": [156, 60, 178, 87], "base_mad": 0.507, "changed": 180, "out_mad": 0.508, "size_ok": true, "size": [320, 900]}
+{"name": "fig-maid-m13-ty1-a51", "kind": "fig", "score": 0.998, "k": 0.61, "mode": "own", "status": "clean", "box": [178, 75, 187, 85], "anchor": [181.4, 78.3], "peak": 40.1, "rect": [171, 68, 193, 94], "base_mad": 0.56, "changed": 205, "out_mad": 0.542, "size_ok": true, "size": [320, 900]}
+{"name": "fig-maid-m13-ty2-a18", "kind": "fig", "score": 0.984, "k": 0.602, "status": "clean", "box": [159, 62, 170, 74], "anchor": [162.7, 67.0], "peak": 62.3, "rect": [152, 56, 172, 75], "base_mad": 0.509, "changed": 124, "out_mad": 0.509, "size_ok": true, "size": [290, 900]}
+{"name": "fig-maid-m13-ty2-a26", "kind": "fig", "status": "por_nomark"}
+{"name": "fig-maid-m13-ty2-a36", "kind": "fig", "score": 0.995, "k": 0.64, "status": "clean", "box": [163, 65, 172, 79], "anchor": [166.6, 70.3], "peak": 58.8, "rect": [156, 59, 177, 77], "base_mad": 0.51, "changed": 152, "out_mad": 0.509, "size_ok": true, "size": [324, 900]}
+{"name": "fig-maid-m13-ty3-a18", "kind": "fig", "score": 0.993, "k": 0.612, "mode": "own", "status": "clean", "box": [153, 63, 167, 79], "anchor": [156.7, 68.0], "peak": 44.2, "rect": [147, 56, 173, 81], "base_mad": 0.564, "changed": 251, "out_mad": 0.562, "size_ok": true, "size": [271, 900]}
+{"name": "fig-maid-m13-ty3-a26", "kind": "fig", "score": 0.997, "k": 0.614, "mode": "own", "status": "nomark"}
+{"name": "fig-maid-m13-ty3-a36", "kind": "fig", "status": "por_nomark"}
+{"name": "fig-maid-m13-ty4-a18", "kind": "fig", "score": 0.996, "k": 0.596, "mode": "own", "status": "clean", "box": [159, 63, 179, 72], "anchor": [165.2, 65.7], "peak": 49.9, "rect": [152, 56, 183, 83], "base_mad": 0.449, "changed": 250, "out_mad": 0.448, "size_ok": true, "size": [281, 900]}
+{"name": "fig-maid-m13-ty5-a18", "kind": "fig", "status": "por_nomark"}
+{"name": "fig-maid-m13-ty6-a18", "kind": "fig", "status": "por_nomark"}
+{"name": "fig-maid-m13-ty7-a18", "kind": "fig", "status": "por_nomark"}
+{"name": "fig-maid-m13-ty8-a18", "kind": "fig", "score": 0.994, "k": 0.612, "status": "clean", "box": [159, 63, 167, 71], "anchor": [161.9, 65.9], "peak": 43.1, "rect": [153, 56, 172, 77], "base_mad": 0.746, "changed": 142, "out_mad": 0.745, "size_ok": true, "size": [275, 900]}
+{"name": "fig-maid-m14-ty1-a18", "kind": "fig", "status": "por_nomark"}
+{"name": "fig-maid-m14-ty1-a26", "kind": "fig", "status": "por_nomark"}
+{"name": "fig-maid-m14-ty1-a36", "kind": "fig", "status": "por_nomark"}
+{"name": "fig-maid-m14-ty1-a51", "kind": "fig", "status": "por_nomark"}
+{"name": "fig-maid-m14-ty2-a18", "kind": "fig", "status": "por_nomark"}
+{"name": "fig-maid-m14-ty2-a26", "kind": "fig", "score": 0.996, "k": 0.606, "status": "clean", "box": [173, 71, 181, 79], "anchor": [176.1, 74.1], "peak": 26.3, "rect": [166, 64, 187, 89], "base_mad": 0.376, "changed": 189, "out_mad": 0.377, "size_ok": true, "size": [310, 900]}
+{"name": "fig-maid-m14-ty2-a36", "kind": "fig", "score": 0.997, "k": 0.624, "status": "clean", "box": [165, 70, 173, 81], "anchor": [168.7, 73.0], "peak": 20.2, "rect": [158, 63, 178, 83], "base_mad": 0.463, "changed": 165, "out_mad": 0.463, "size_ok": true, "size": [310, 900]}
+{"name": "fig-maid-m14-ty3-a18", "kind": "fig", "status": "por_nomark"}
+{"name": "fig-maid-m14-ty3-a26", "kind": "fig", "status": "por_nomark"}
+{"name": "fig-maid-m14-ty3-a36", "kind": "fig", "status": "por_nomark"}
+{"name": "fig-maid-m14-ty4-a18", "kind": "fig", "score": 0.995, "k": 0.628, "mode": "own", "status": "nomark"}
+{"name": "fig-maid-m14-ty5-a18", "kind": "fig", "score": 0.991, "k": 0.602, "mode": "own", "status": "clean", "box": [157, 69, 173, 86], "anchor": [167.2, 74.9], "peak": 26.7, "rect": [150, 62, 174, 82], "base_mad": 0.489, "changed": 108, "out_mad": 0.49, "size_ok": true, "size": [371, 900]}
+{"name": "fig-maid-m14-ty6-a18", "kind": "fig", "score": 0.998, "k": 0.642, "status": "clean", "box": [160, 68, 173, 79], "anchor": [167.6, 72.1], "peak": 28.1, "rect": [156, 64, 167, 79], "base_mad": 0.672, "changed": 37, "out_mad": 0.672, "size_ok": true, "size": [367, 900]}
+{"name": "fig-maid-m14-ty7-a18", "kind": "fig", "score": 0.989, "k": 0.618, "status": "clean", "box": [178, 65, 183, 71], "anchor": [179.7, 66.6], "peak": 19.7, "rect": [171, 59, 189, 81], "base_mad": 0.786, "changed": 147, "out_mad": 0.786, "size_ok": true, "size": [386, 900]}
+{"name": "fig-maid-m14-ty8-a18", "kind": "fig", "score": 0.996, "k": 0.622, "status": "clean", "box": [182, 73, 190, 81], "anchor": [185.0, 75.7], "peak": 21.2, "rect": [175, 67, 196, 91], "base_mad": 0.806, "changed": 175, "out_mad": 0.806, "size_ok": true, "size": [388, 900]}
+{"name": "fig-maid-m15-ty1-a18", "kind": "fig", "score": 0.995, "k": 0.654, "status": "clean", "box": [146, 61, 154, 69], "anchor": [149.0, 63.9], "peak": 32.5, "rect": [139, 54, 160, 79], "base_mad": 0.577, "changed": 227, "out_mad": 0.577, "size_ok": true, "size": [300, 900]}
+{"name": "fig-maid-m15-ty1-a26", "kind": "fig", "score": 0.985, "k": 0.632, "status": "clean", "box": [153, 60, 161, 68], "anchor": [156.0, 63.3], "peak": 40.9, "rect": [146, 54, 167, 79], "base_mad": 0.586, "changed": 199, "out_mad": 0.586, "size_ok": true, "size": [299, 900]}
+{"name": "fig-maid-m15-ty1-a36", "kind": "fig", "score": 0.994, "k": 0.654, "status": "clean", "box": [163, 61, 172, 70], "anchor": [166.9, 64.8], "peak": 33.5, "rect": [156, 55, 178, 80], "base_mad": 0.589, "changed": 222, "out_mad": 0.589, "size_ok": true, "size": [310, 900]}
+{"name": "fig-maid-m15-ty1-a51", "kind": "fig", "score": 0.998, "k": 0.656, "status": "clean", "box": [161, 61, 169, 70], "anchor": [164.0, 63.8], "peak": 29.9, "rect": [154, 54, 173, 74], "base_mad": 0.607, "changed": 160, "out_mad": 0.607, "size_ok": true, "size": [306, 900]}
+{"name": "fig-maid-m15-ty2-a18", "kind": "fig", "score": 0.992, "k": 0.654, "status": "clean", "box": [152, 60, 162, 68], "anchor": [156.1, 63.0], "peak": 30.6, "rect": [145, 53, 168, 78], "base_mad": 0.542, "changed": 209, "out_mad": 0.542, "size_ok": true, "size": [310, 900]}
+{"name": "fig-maid-m15-ty2-a26", "kind": "fig", "score": 0.99, "k": 0.662, "status": "clean", "box": [157, 59, 166, 68], "anchor": [160.8, 62.3], "peak": 32.5, "rect": [151, 53, 171, 75], "base_mad": 0.523, "changed": 181, "out_mad": 0.522, "size_ok": true, "size": [314, 900]}
+{"name": "fig-maid-m15-ty2-a36", "kind": "fig", "score": 0.988, "k": 0.642, "status": "clean", "box": [162, 60, 172, 68], "anchor": [166.1, 63.4], "peak": 29.4, "rect": [155, 54, 178, 79], "base_mad": 0.523, "changed": 226, "out_mad": 0.521, "size_ok": true, "size": [308, 900]}
+{"name": "fig-maid-m15-ty3-a18", "kind": "fig", "score": 0.993, "k": 0.648, "status": "clean", "box": [141, 58, 151, 67], "anchor": [145.0, 61.0], "peak": 30.8, "rect": [134, 51, 155, 71], "base_mad": 0.557, "changed": 194, "out_mad": 0.558, "size_ok": true, "size": [300, 900]}
+{"name": "fig-maid-m15-ty3-a26", "kind": "fig", "score": 0.991, "k": 0.648, "status": "clean", "box": [151, 58, 160, 67], "anchor": [154.4, 61.4], "peak": 31.5, "rect": [144, 52, 165, 73], "base_mad": 0.534, "changed": 191, "out_mad": 0.534, "size_ok": true, "size": [303, 900]}
+{"name": "fig-maid-m15-ty3-a36", "kind": "fig", "score": 0.993, "k": 0.636, "status": "clean", "box": [161, 60, 171, 68], "anchor": [165.1, 63.3], "peak": 28.5, "rect": [154, 53, 177, 79], "base_mad": 0.456, "changed": 249, "out_mad": 0.455, "size_ok": true, "size": [304, 900]}
+{"name": "fig-maid-m15-ty4-a18", "kind": "fig", "score": 0.997, "k": 0.642, "status": "clean", "box": [147, 59, 157, 68], "anchor": [150.6, 62.7], "peak": 32.7, "rect": [139, 52, 164, 78], "base_mad": 0.568, "changed": 230, "out_mad": 0.568, "size_ok": true, "size": [303, 900]}
+{"name": "fig-maid-m15-ty5-a18", "kind": "fig", "score": 0.995, "k": 0.636, "status": "clean", "box": [143, 61, 149, 68], "anchor": [145.1, 63.5], "peak": 34.9, "rect": [136, 55, 155, 79], "base_mad": 0.511, "changed": 190, "out_mad": 0.511, "size_ok": true, "size": [294, 900]}
+{"name": "fig-maid-m15-ty6-a18", "kind": "fig", "score": 0.996, "k": 0.662, "status": "clean", "box": [153, 60, 162, 67], "anchor": [156.4, 63.0], "peak": 30.1, "rect": [146, 53, 168, 78], "base_mad": 0.546, "changed": 196, "out_mad": 0.547, "size_ok": true, "size": [303, 900]}
+{"name": "fig-maid-m15-ty7-a18", "kind": "fig", "score": 0.992, "k": 0.668, "status": "clean", "box": [148, 63, 157, 70], "anchor": [151.4, 66.1], "peak": 23.0, "rect": [141, 56, 161, 77], "base_mad": 0.808, "changed": 170, "out_mad": 0.806, "size_ok": true, "size": [306, 900]}
+{"name": "fig-maid-m15-ty8-a18", "kind": "fig", "score": 0.997, "k": 0.678, "status": "clean", "box": [149, 61, 153, 65], "anchor": [150.1, 62.0], "peak": 28.1, "rect": [143, 55, 157, 70], "base_mad": 0.795, "changed": 71, "out_mad": 0.795, "size_ok": true, "size": [294, 900]}
+{"name": "fig-maid-m16-ty1-a18", "kind": "fig", "score": 0.993, "k": 0.62, "status": "clean", "box": [167, 49, 175, 59], "anchor": [169.9, 52.7], "peak": 41.7, "rect": [160, 43, 176, 61], "base_mad": 0.565, "changed": 68, "out_mad": 0.564, "size_ok": true, "size": [321, 900]}
+{"name": "fig-maid-m16-ty1-a26", "kind": "fig", "score": 0.994, "k": 0.628, "status": "clean", "box": [187, 50, 195, 60], "anchor": [190.2, 54.1], "peak": 42.6, "rect": [181, 44, 201, 63], "base_mad": 0.566, "changed": 143, "out_mad": 0.566, "size_ok": true, "size": [361, 900]}
+{"name": "fig-maid-m16-ty1-a36", "kind": "fig", "score": 0.998, "k": 0.656, "status": "clean", "box": [169, 50, 178, 60], "anchor": [172.5, 54.4], "peak": 47.6, "rect": [162, 44, 184, 71], "base_mad": 0.576, "changed": 201, "out_mad": 0.574, "size_ok": true, "size": [323, 900]}
+{"name": "fig-maid-m16-ty1-a51", "kind": "fig", "score": 0.998, "k": 0.64, "mode": "own", "status": "nomark"}
+{"name": "fig-maid-m16-ty2-a18", "kind": "fig", "score": 0.991, "k": 0.648, "mode": "own", "status": "nomark"}
+{"name": "fig-maid-m16-ty2-a26", "kind": "fig", "status": "por_nomark"}
+{"name": "fig-maid-m16-ty2-a36", "kind": "fig", "status": "por_nomark"}
+{"name": "fig-maid-m16-ty3-a18", "kind": "fig", "score": 0.995, "k": 0.606, "mode": "own", "status": "clean", "box": [170, 50, 181, 67], "anchor": [173.5, 54.9], "peak": 52.8, "rect": [163, 44, 187, 62], "base_mad": 0.555, "changed": 152, "out_mad": 0.559, "size_ok": true, "size": [334, 900]}
+{"name": "fig-maid-m16-ty3-a26", "kind": "fig", "score": 0.992, "k": 0.646, "status": "clean", "box": [185, 50, 194, 61], "anchor": [188.3, 53.6], "peak": 44.2, "rect": [178, 43, 200, 61], "base_mad": 0.597, "changed": 146, "out_mad": 0.598, "size_ok": true, "size": [357, 900]}
+{"name": "fig-maid-m16-ty3-a36", "kind": "fig", "score": 0.997, "k": 0.622, "status": "clean", "box": [170, 52, 179, 62], "anchor": [173.2, 56.3], "peak": 53.8, "rect": [163, 46, 185, 73], "base_mad": 0.409, "changed": 180, "out_mad": 0.411, "size_ok": true, "size": [334, 900]}
+{"name": "fig-maid-m16-ty4-a18", "kind": "fig", "score": 0.994, "k": 0.628, "status": "clean", "box": [169, 50, 179, 69], "anchor": [172.6, 57.1], "peak": 46.9, "rect": [162, 44, 183, 77], "base_mad": 0.47, "changed": 227, "out_mad": 0.47, "size_ok": true, "size": [328, 900]}
+{"name": "fig-maid-m16-ty5-a18", "kind": "fig", "score": 0.997, "k": 0.598, "status": "clean", "box": [171, 56, 177, 61], "anchor": [172.8, 57.8], "peak": 20.3, "rect": [165, 50, 181, 68], "base_mad": 0.498, "changed": 92, "out_mad": 0.498, "size_ok": true, "size": [329, 900]}
+{"name": "fig-maid-m16-ty6-a18", "kind": "fig", "score": 0.992, "k": 0.61, "status": "clean", "box": [169, 50, 177, 57], "anchor": [171.9, 52.1], "peak": 35.7, "rect": [163, 43, 181, 63], "base_mad": 0.516, "changed": 144, "out_mad": 0.516, "size_ok": true, "size": [332, 900]}
+{"name": "fig-maid-m16-ty7-a18", "kind": "fig", "score": 0.997, "k": 0.626, "mode": "own", "status": "nomark"}
+{"name": "fig-maid-m16-ty8-a18", "kind": "fig", "score": 0.992, "k": 0.606, "mode": "own", "status": "nomark"}
+{"name": "fig-maid-m17-ty1-a18", "kind": "fig", "score": 0.998, "k": 0.594, "status": "clean", "box": [165, 79, 173, 88], "anchor": [167.7, 82.3], "peak": 23.0, "rect": [158, 72, 179, 95], "base_mad": 0.622, "changed": 220, "out_mad": 0.623, "size_ok": true, "size": [317, 900]}
+{"name": "fig-maid-m17-ty1-a26", "kind": "fig", "score": 0.993, "k": 0.62, "status": "clean", "box": [164, 72, 169, 81], "anchor": [165.9, 75.9], "peak": 17.4, "rect": [157, 65, 175, 88], "base_mad": 0.611, "changed": 172, "out_mad": 0.61, "size_ok": true, "size": [320, 900]}
+{"name": "fig-maid-m17-ty1-a36", "kind": "fig", "score": 0.995, "k": 0.66, "status": "clean", "box": [164, 72, 170, 79], "anchor": [166.8, 74.6], "peak": 20.2, "rect": [157, 65, 176, 89], "base_mad": 0.573, "changed": 191, "out_mad": 0.574, "size_ok": true, "size": [378, 900]}
+{"name": "fig-maid-m17-ty1-a51", "kind": "fig", "score": 0.998, "k": 0.656, "status": "clean", "box": [162, 70, 170, 81], "anchor": [166.0, 73.5], "peak": 17.8, "rect": [155, 63, 176, 92], "base_mad": 0.541, "changed": 230, "out_mad": 0.54, "size_ok": true, "size": [324, 900]}
+{"name": "fig-maid-m17-ty2-a18", "kind": "fig", "status": "por_nomark"}
+{"name": "fig-maid-m17-ty2-a26", "kind": "fig", "status": "por_nomark"}
+{"name": "fig-maid-m17-ty2-a36", "kind": "fig", "status": "por_nomark"}
+{"name": "fig-maid-m17-ty3-a18", "kind": "fig", "score": 0.995, "k": 0.58, "mode": "own", "status": "clean", "box": [150, 72, 166, 89], "anchor": [159.0, 81.0], "peak": 30.9, "rect": [143, 65, 172, 94], "base_mad": 0.494, "changed": 270, "out_mad": 0.494, "size_ok": true, "size": [305, 900]}
+{"name": "fig-maid-m17-ty3-a26", "kind": "fig", "score": 0.991, "k": 0.608, "status": "clean", "box": [151, 70, 160, 82], "anchor": [155.5, 74.7], "peak": 25.7, "rect": [144, 63, 166, 93], "base_mad": 0.482, "changed": 281, "out_mad": 0.481, "size_ok": true, "size": [314, 900]}
+{"name": "fig-maid-m17-ty3-a36", "kind": "fig", "status": "por_nomark"}
+{"name": "fig-maid-m17-ty4-a18", "kind": "fig", "score": 0.994, "k": 0.584, "status": "clean", "box": [163, 81, 171, 88], "anchor": [165.5, 83.2], "peak": 29.9, "rect": [156, 74, 175, 93], "base_mad": 0.566, "changed": 152, "out_mad": 0.566, "size_ok": true, "size": [299, 900]}
+{"name": "fig-maid-m17-ty5-a18", "kind": "fig", "score": 0.998, "k": 0.594, "mode": "own", "status": "nomark"}
+{"name": "fig-maid-m17-ty6-a18", "kind": "fig", "score": 0.998, "k": 0.582, "mode": "own", "status": "nomark"}
+{"name": "fig-maid-m17-ty7-a18", "kind": "fig", "score": 0.997, "k": 0.592, "status": "clean", "box": [159, 80, 165, 89], "anchor": [161.9, 82.8], "peak": 19.4, "rect": [152, 73, 171, 94], "base_mad": 0.766, "changed": 175, "out_mad": 0.767, "size_ok": true, "size": [302, 900]}
+{"name": "fig-maid-m17-ty8-a18", "kind": "fig", "status": "por_nomark"}
+{"name": "fig-maid-m18-ty1-a18", "kind": "fig", "score": 0.984, "k": 0.622, "status": "clean", "box": [172, 63, 180, 73], "anchor": [175.4, 67.0], "peak": 56.4, "rect": [165, 57, 186, 84], "base_mad": 0.457, "changed": 187, "out_mad": 0.456, "size_ok": true, "size": [290, 900]}
+{"name": "fig-maid-m18-ty1-a26", "kind": "fig", "score": 0.992, "k": 0.638, "status": "clean", "box": [166, 65, 176, 80], "anchor": [169.1, 69.7], "peak": 56.4, "rect": [160, 58, 177, 87], "base_mad": 0.64, "changed": 184, "out_mad": 0.64, "size_ok": true, "size": [305, 900]}
+{"name": "fig-maid-m18-ty1-a36", "kind": "fig", "score": 0.994, "k": 0.656, "status": "clean", "box": [154, 62, 161, 74], "anchor": [157.1, 66.6], "peak": 45.4, "rect": [147, 56, 167, 81], "base_mad": 0.47, "changed": 167, "out_mad": 0.47, "size_ok": true, "size": [304, 900]}
+{"name": "fig-maid-m18-ty1-a51", "kind": "fig", "score": 0.992, "k": 0.62, "mode": "own", "status": "clean", "box": [156, 66, 172, 87], "anchor": [165.2, 73.4], "peak": 43.9, "rect": [157, 59, 174, 79], "base_mad": 0.607, "changed": 128, "out_mad": 0.606, "size_ok": true, "size": [304, 900]}
+{"name": "fig-maid-m18-ty2-a18", "kind": "fig", "score": 0.988, "k": 0.636, "status": "clean", "box": [170, 63, 178, 76], "anchor": [173.2, 67.5], "peak": 48.2, "rect": [164, 66, 179, 87], "base_mad": 0.381, "changed": 51, "out_mad": 0.382, "size_ok": true, "size": [291, 900]}
+{"name": "fig-maid-m18-ty2-a26", "kind": "fig", "score": 0.989, "k": 0.656, "mode": "own", "status": "clean", "box": [159, 64, 174, 79], "anchor": [163.1, 69.1], "peak": 46.7, "rect": [152, 58, 173, 86], "base_mad": 0.439, "changed": 182, "out_mad": 0.439, "size_ok": true, "size": [305, 900]}
+{"name": "fig-maid-m18-ty2-a36", "kind": "fig", "score": 0.992, "k": 0.646, "mode": "own", "status": "nomark"}
+{"name": "fig-maid-m18-ty3-a18", "kind": "fig", "score": 0.989, "k": 0.632, "mode": "own", "status": "nomark"}
+{"name": "fig-maid-m18-ty3-a26", "kind": "fig", "score": 0.992, "k": 0.652, "status": "clean", "box": [154, 68, 161, 79], "anchor": [156.9, 71.2], "peak": 42.2, "rect": [147, 61, 167, 89], "base_mad": 0.471, "changed": 158, "out_mad": 0.47, "size_ok": true, "size": [294, 900]}
+{"name": "fig-maid-m18-ty3-a36", "kind": "fig", "score": 0.997, "k": 0.642, "mode": "own", "status": "nomark"}
+{"name": "fig-maid-m18-ty4-a18", "kind": "fig", "score": 0.987, "k": 0.602, "status": "clean", "box": [175, 60, 182, 74], "anchor": [177.5, 64.4], "peak": 48.3, "rect": [168, 54, 188, 84], "base_mad": 0.562, "changed": 228, "out_mad": 0.563, "size_ok": true, "size": [295, 900]}
+{"name": "fig-maid-m18-ty5-a18", "kind": "fig", "status": "por_nomark"}
+{"name": "fig-maid-m18-ty6-a18", "kind": "fig", "score": 0.986, "k": 0.61, "mode": "own", "status": "clean", "box": [170, 62, 178, 73], "anchor": [173.2, 65.9], "peak": 58.8, "rect": [163, 55, 184, 84], "base_mad": 0.588, "changed": 221, "out_mad": 0.587, "size_ok": true, "size": [292, 900]}
+{"name": "fig-maid-m18-ty7-a18", "kind": "fig", "score": 0.981, "k": 0.668, "mode": "own", "status": "clean", "box": [169, 61, 180, 77], "anchor": [172.5, 65.9], "peak": 58.2, "rect": [162, 55, 184, 83], "base_mad": 0.748, "changed": 182, "out_mad": 0.749, "size_ok": true, "size": [289, 900]}
+{"name": "fig-maid-m18-ty8-a18", "kind": "fig", "score": 0.993, "k": 0.626, "status": "clean", "box": [165, 68, 172, 78], "anchor": [167.6, 72.0], "peak": 53.6, "rect": [159, 62, 176, 84], "base_mad": 0.747, "changed": 138, "out_mad": 0.723, "size_ok": true, "size": [285, 900]}
+{"name": "fig-maid-m19-ty1-a18", "kind": "fig", "score": 0.994, "k": 0.616, "mode": "own", "status": "nomark"}
+{"name": "fig-maid-m19-ty1-a26", "kind": "fig", "score": 0.994, "k": 0.636, "mode": "own", "status": "nomark"}
+{"name": "fig-maid-m19-ty1-a36", "kind": "fig", "score": 0.99, "k": 0.63, "mode": "own", "status": "nomark"}
+{"name": "fig-maid-m19-ty1-a51", "kind": "fig", "score": 0.997, "k": 0.64, "mode": "own", "status": "nomark"}
+{"name": "fig-maid-m19-ty2-a18", "kind": "fig", "score": 0.996, "k": 0.622, "status": "clean", "box": [170, 70, 177, 79], "anchor": [172.1, 73.4], "peak": 43.1, "rect": [163, 63, 178, 78], "base_mad": 0.455, "changed": 59, "out_mad": 0.455, "size_ok": true, "size": [382, 900]}
+{"name": "fig-maid-m19-ty2-a26", "kind": "fig", "score": 0.995, "k": 0.626, "status": "clean", "box": [173, 69, 182, 84], "anchor": [176.5, 74.7], "peak": 38.6, "rect": [166, 63, 188, 78], "base_mad": 0.425, "changed": 101, "out_mad": 0.425, "size_ok": true, "size": [328, 900]}
+{"name": "fig-maid-m19-ty2-a36", "kind": "fig", "score": 0.996, "k": 0.638, "status": "clean", "box": [171, 67, 178, 77], "anchor": [173.9, 71.1], "peak": 47.0, "rect": [164, 60, 184, 82], "base_mad": 0.532, "changed": 166, "out_mad": 0.533, "size_ok": true, "size": [331, 900]}
+{"name": "fig-maid-m19-ty3-a18", "kind": "fig", "score": 0.994, "k": 0.63, "mode": "own", "status": "nomark"}
+{"name": "fig-maid-m19-ty3-a26", "kind": "fig", "status": "por_nomark"}
+{"name": "fig-maid-m19-ty3-a36", "kind": "fig", "score": 0.997, "k": 0.622, "mode": "own", "status": "nomark"}
+{"name": "fig-maid-m19-ty4-a18", "kind": "fig", "score": 0.993, "k": 0.59, "mode": "own", "status": "nomark"}
+{"name": "fig-maid-m19-ty5-a18", "kind": "fig", "status": "por_nomark"}
+{"name": "fig-maid-m19-ty6-a18", "kind": "fig", "score": 0.993, "k": 0.616, "status": "clean", "box": [183, 63, 187, 74], "anchor": [184.3, 67.4], "peak": 18.0, "rect": [176, 56, 193, 79], "base_mad": 0.599, "changed": 132, "out_mad": 0.6, "size_ok": true, "size": [380, 900]}
+{"name": "fig-maid-m19-ty7-a18", "kind": "fig", "score": 0.991, "k": 0.62, "mode": "own", "status": "nomark"}
+{"name": "fig-maid-m19-ty8-a18", "kind": "fig", "score": 0.993, "k": 0.614, "mode": "own", "status": "nomark"}
+{"name": "fig-maid-m20-ty1-a18", "kind": "fig", "score": 0.997, "k": 0.658, "mode": "own", "status": "clean", "box": [131, 57, 140, 70], "anchor": [135.6, 60.1], "peak": 45.2, "rect": [125, 50, 146, 70], "base_mad": 0.469, "changed": 159, "out_mad": 0.47, "size_ok": true, "size": [294, 900]}
+{"name": "fig-maid-m20-ty1-a26", "kind": "fig", "score": 0.996, "k": 0.676, "mode": "own", "status": "clean", "box": [154, 56, 162, 65], "anchor": [157.1, 58.3], "peak": 47.0, "rect": [147, 50, 167, 73], "base_mad": 0.599, "changed": 125, "out_mad": 0.599, "size_ok": true, "size": [294, 900]}
+{"name": "fig-maid-m20-ty1-a36", "kind": "fig", "status": "por_nomark"}
+{"name": "fig-maid-m20-ty1-a51", "kind": "fig", "status": "por_nomark"}
+{"name": "fig-maid-m20-ty2-a18", "kind": "fig", "score": 0.989, "k": 0.638, "mode": "own", "status": "clean", "box": [134, 55, 145, 68], "anchor": [138.1, 58.2], "peak": 38.9, "rect": [128, 49, 150, 70], "base_mad": 0.509, "changed": 157, "out_mad": 0.51, "size_ok": true, "size": [299, 900]}
+{"name": "fig-maid-m20-ty2-a26", "kind": "fig", "status": "por_nomark"}
+{"name": "fig-maid-m20-ty2-a36", "kind": "fig", "score": 0.991, "k": 0.642, "mode": "own", "status": "nomark"}
+{"name": "fig-maid-m20-ty3-a18", "kind": "fig", "score": 0.989, "k": 0.626, "mode": "own", "status": "clean", "box": [134, 61, 145, 74], "anchor": [138.5, 64.3], "peak": 43.0, "rect": [128, 54, 150, 77], "base_mad": 0.553, "changed": 172, "out_mad": 0.554, "size_ok": true, "size": [308, 900]}
+{"name": "fig-maid-m20-ty3-a26", "kind": "fig", "status": "por_nomark"}
+{"name": "fig-maid-m20-ty3-a36", "kind": "fig", "status": "por_nomark"}
+{"name": "fig-maid-m20-ty4-a18", "kind": "fig", "status": "por_nomark"}
+{"name": "fig-maid-m20-ty5-a18", "kind": "fig", "score": 0.992, "k": 0.654, "status": "clean", "box": [134, 65, 142, 73], "anchor": [137.6, 66.9], "peak": 41.6, "rect": [126, 57, 149, 82], "base_mad": 0.512, "changed": 194, "out_mad": 0.509, "size_ok": true, "size": [293, 900]}
+{"name": "fig-maid-m20-ty6-a18", "kind": "fig", "score": 0.991, "k": 0.662, "mode": "own", "status": "nomark"}
+{"name": "fig-maid-m20-ty7-a18", "kind": "fig", "score": 0.997, "k": 0.658, "status": "clean", "box": [137, 58, 145, 67], "anchor": [140.5, 61.0], "peak": 41.7, "rect": [129, 50, 152, 73], "base_mad": 0.759, "changed": 184, "out_mad": 0.759, "size_ok": true, "size": [301, 900]}
+{"name": "fig-maid-m20-ty8-a18", "kind": "fig", "score": 0.988, "k": 0.646, "mode": "own", "status": "clean", "box": [140, 61, 149, 71], "anchor": [144.2, 65.0], "peak": 58.5, "rect": [133, 54, 155, 75], "base_mad": 0.645, "changed": 186, "out_mad": 0.646, "size_ok": true, "size": [301, 900]}
+{"name": "fig-maid-m21-ty1-a18", "kind": "fig", "score": 0.996, "k": 0.64, "status": "clean", "box": [195, 64, 209, 76], "anchor": [201.1, 68.5], "peak": 45.7, "rect": [191, 59, 213, 82], "base_mad": 0.574, "changed": 36, "out_mad": 0.574, "size_ok": true, "size": [342, 900]}
+{"name": "fig-maid-m21-ty1-a26", "kind": "fig", "status": "por_nomark"}
+{"name": "fig-maid-m21-ty1-a36", "kind": "fig", "score": 0.998, "k": 0.642, "mode": "own", "status": "nomark"}
+{"name": "fig-maid-m21-ty1-a51", "kind": "fig", "score": 0.995, "k": 0.644, "status": "clean", "box": [156, 62, 170, 74], "anchor": [161.4, 67.0], "peak": 46.1, "rect": [150, 55, 173, 69], "base_mad": 0.428, "changed": 94, "out_mad": 0.427, "size_ok": true, "size": [323, 900]}
+{"name": "fig-maid-m21-ty2-a18", "kind": "fig", "score": 0.993, "k": 0.62, "mode": "own", "status": "nomark"}
+{"name": "fig-maid-m21-ty2-a26", "kind": "fig", "score": 0.991, "k": 0.596, "mode": "own", "status": "nomark"}
+{"name": "fig-maid-m21-ty2-a36", "kind": "fig", "score": 0.993, "k": 0.648, "mode": "own", "status": "nomark"}
+{"name": "fig-maid-m21-ty3-a18", "kind": "fig", "status": "por_nomark"}
+{"name": "fig-maid-m21-ty3-a26", "kind": "fig", "status": "por_nomark"}
+{"name": "fig-maid-m21-ty3-a36", "kind": "fig", "score": 0.994, "k": 0.644, "mode": "own", "status": "nomark"}
+{"name": "fig-maid-m21-ty4-a18", "kind": "fig", "score": 0.997, "k": 0.622, "mode": "own", "status": "nomark"}
+{"name": "fig-maid-m21-ty5-a18", "kind": "fig", "score": 0.992, "k": 0.622, "mode": "own", "status": "nomark"}
+{"name": "fig-maid-m21-ty6-a18", "kind": "fig", "score": 0.995, "k": 0.64, "mode": "own", "status": "nomark"}
+{"name": "fig-maid-m21-ty7-a18", "kind": "fig", "score": 0.99, "k": 0.65, "mode": "own", "status": "nomark"}
+{"name": "fig-maid-m21-ty8-a18", "kind": "fig", "score": 0.994, "k": 0.606, "mode": "own", "status": "nomark"}
+{"name": "fig-maid-m22-ty1-a18", "kind": "fig", "status": "por_nomark"}
+{"name": "fig-maid-m22-ty1-a26", "kind": "fig", "score": 0.997, "k": 0.656, "status": "clean", "box": [168, 62, 175, 72], "anchor": [170.7, 66.6], "peak": 61.9, "rect": [162, 56, 181, 83], "base_mad": 0.581, "changed": 184, "out_mad": 0.582, "size_ok": true, "size": [305, 900]}
+{"name": "fig-maid-m22-ty1-a36", "kind": "fig", "score": 0.996, "k": 0.674, "status": "clean", "box": [169, 62, 176, 72], "anchor": [171.6, 65.6], "peak": 59.3, "rect": [163, 55, 181, 77], "base_mad": 0.607, "changed": 151, "out_mad": 0.607, "size_ok": true, "size": [368, 900]}
+{"name": "fig-maid-m22-ty1-a51", "kind": "fig", "score": 0.997, "k": 0.678, "status": "clean", "box": [163, 62, 170, 72], "anchor": [165.3, 66.6], "peak": 63.5, "rect": [156, 56, 176, 83], "base_mad": 0.537, "changed": 172, "out_mad": 0.537, "size_ok": true, "size": [304, 900]}
+{"name": "fig-maid-m22-ty2-a18", "kind": "fig", "score": 0.989, "k": 0.632, "status": "clean", "box": [173, 83, 180, 94], "anchor": [175.6, 87.1], "peak": 54.2, "rect": [167, 76, 185, 98], "base_mad": 0.425, "changed": 153, "out_mad": 0.426, "size_ok": true, "size": [287, 900]}
+{"name": "fig-maid-m22-ty2-a26", "kind": "fig", "score": 0.991, "k": 0.672, "status": "clean", "box": [160, 64, 168, 72], "anchor": [163.1, 66.6], "peak": 67.8, "rect": [154, 57, 173, 83], "base_mad": 0.534, "changed": 174, "out_mad": 0.531, "size_ok": true, "size": [293, 900]}
+{"name": "fig-maid-m22-ty2-a36", "kind": "fig", "score": 0.988, "k": 0.67, "status": "clean", "box": [160, 64, 166, 72], "anchor": [162.3, 66.8], "peak": 69.0, "rect": [153, 57, 171, 77], "base_mad": 0.451, "changed": 134, "out_mad": 0.448, "size_ok": true, "size": [358, 900]}
+{"name": "fig-maid-m22-ty3-a18", "kind": "fig", "score": 0.994, "k": 0.63, "status": "clean", "box": [186, 82, 194, 92], "anchor": [188.9, 85.8], "peak": 65.8, "rect": [179, 75, 198, 97], "base_mad": 0.388, "changed": 174, "out_mad": 0.388, "size_ok": true, "size": [309, 900]}
+{"name": "fig-maid-m22-ty3-a26", "kind": "fig", "score": 0.993, "k": 0.664, "status": "clean", "box": [167, 62, 175, 72], "anchor": [170.1, 65.7], "peak": 71.4, "rect": [161, 56, 179, 83], "base_mad": 0.515, "changed": 178, "out_mad": 0.514, "size_ok": true, "size": [304, 900]}
+{"name": "fig-maid-m22-ty3-a36", "kind": "fig", "score": 0.997, "k": 0.658, "status": "clean", "box": [167, 62, 175, 71], "anchor": [170.2, 65.8], "peak": 62.0, "rect": [160, 55, 179, 76], "base_mad": 0.516, "changed": 145, "out_mad": 0.516, "size_ok": true, "size": [367, 900]}
+{"name": "fig-maid-m22-ty4-a18", "kind": "fig", "status": "por_nomark"}
+{"name": "fig-maid-m22-ty5-a18", "kind": "fig", "status": "por_nomark"}
+{"name": "fig-maid-m22-ty6-a18", "kind": "fig", "score": 0.985, "k": 0.6, "status": "clean", "box": [185, 83, 193, 92], "anchor": [188.1, 86.6], "peak": 75.1, "rect": [178, 76, 197, 97], "base_mad": 0.605, "changed": 170, "out_mad": 0.606, "size_ok": true, "size": [299, 900]}
+{"name": "fig-maid-m22-ty7-a18", "kind": "fig", "status": "por_nomark"}
+{"name": "fig-maid-m22-ty8-a18", "kind": "fig", "score": 0.989, "k": 0.604, "status": "clean", "box": [181, 85, 188, 93], "anchor": [183.5, 88.1], "peak": 64.6, "rect": [175, 78, 193, 97], "base_mad": 0.722, "changed": 150, "out_mad": 0.722, "size_ok": true, "size": [293, 900]}
+{"name": "fig-maid-m23-ty1-a18", "kind": "fig", "score": 0.993, "k": 0.658, "status": "clean", "box": [164, 61, 172, 70], "anchor": [166.9, 64.5], "peak": 27.1, "rect": [157, 54, 178, 80], "base_mad": 0.607, "changed": 208, "out_mad": 0.606, "size_ok": true, "size": [292, 900]}
+{"name": "fig-maid-m23-ty1-a26", "kind": "fig", "score": 0.997, "k": 0.66, "status": "clean", "box": [182, 63, 193, 72], "anchor": [186.3, 66.2], "peak": 28.3, "rect": [174, 55, 198, 83], "base_mad": 0.606, "changed": 291, "out_mad": 0.606, "size_ok": true, "size": [322, 900]}
+{"name": "fig-maid-m23-ty1-a36", "kind": "fig", "score": 0.991, "k": 0.648, "mode": "own", "status": "nomark"}
+{"name": "fig-maid-m23-ty1-a51", "kind": "fig", "score": 0.99, "k": 0.65, "mode": "own", "status": "nomark"}
+{"name": "fig-maid-m23-ty2-a18", "kind": "fig", "status": "por_nomark"}
+{"name": "fig-maid-m23-ty2-a26", "kind": "fig", "score": 0.996, "k": 0.66, "status": "clean", "box": [172, 57, 182, 68], "anchor": [176.1, 60.3], "peak": 29.1, "rect": [164, 51, 189, 71], "base_mad": 0.597, "changed": 216, "out_mad": 0.597, "size_ok": true, "size": [317, 900]}
+{"name": "fig-maid-m23-ty2-a36", "kind": "fig", "score": 0.997, "k": 0.656, "status": "clean", "box": [166, 57, 176, 64], "anchor": [170.5, 59.5], "peak": 28.5, "rect": [158, 50, 182, 75], "base_mad": 0.456, "changed": 241, "out_mad": 0.457, "size_ok": true, "size": [322, 900]}
+{"name": "fig-maid-m23-ty3-a18", "kind": "fig", "status": "por_nomark"}
+{"name": "fig-maid-m23-ty3-a26", "kind": "fig", "status": "por_nomark"}
+{"name": "fig-maid-m23-ty3-a36", "kind": "fig", "score": 0.991, "k": 0.648, "status": "clean", "box": [178, 66, 184, 72], "anchor": [180.2, 68.2], "peak": 24.1, "rect": [171, 59, 190, 77], "base_mad": 0.587, "changed": 142, "out_mad": 0.586, "size_ok": true, "size": [328, 900]}
+{"name": "fig-maid-m23-ty4-a18", "kind": "fig", "score": 0.983, "k": 0.668, "status": "clean", "box": [170, 64, 175, 68], "anchor": [171.5, 65.7], "peak": 18.4, "rect": [163, 57, 180, 77], "base_mad": 0.545, "changed": 121, "out_mad": 0.545, "size_ok": true, "size": [294, 900]}
+{"name": "fig-maid-m23-ty5-a18", "kind": "fig", "score": 0.994, "k": 0.646, "status": "clean", "box": [171, 63, 177, 72], "anchor": [173.2, 65.9], "peak": 34.8, "rect": [164, 56, 183, 83], "base_mad": 0.523, "changed": 145, "out_mad": 0.523, "size_ok": true, "size": [302, 900]}
+{"name": "fig-maid-m23-ty6-a18", "kind": "fig", "score": 0.993, "k": 0.638, "status": "clean", "box": [177, 63, 186, 74], "anchor": [180.7, 66.5], "peak": 30.7, "rect": [171, 56, 191, 78], "base_mad": 0.609, "changed": 185, "out_mad": 0.609, "size_ok": true, "size": [310, 900]}
+{"name": "fig-maid-m23-ty7-a18", "kind": "fig", "score": 0.99, "k": 0.622, "status": "clean", "box": [178, 66, 181, 70], "anchor": [178.4, 67.0], "peak": 57.0, "rect": [171, 60, 187, 81], "base_mad": 0.62, "changed": 100, "out_mad": 0.621, "size_ok": true, "size": [305, 900]}
+{"name": "fig-maid-m23-ty8-a18", "kind": "fig", "score": 0.997, "k": 0.64, "status": "clean", "box": [166, 66, 171, 69], "anchor": [167.8, 66.7], "peak": 49.0, "rect": [159, 59, 177, 78], "base_mad": 0.706, "changed": 126, "out_mad": 0.707, "size_ok": true, "size": [292, 900]}
+{"name": "fig-maid-m24-ty1-a18", "kind": "fig", "score": 0.998, "k": 0.658, "status": "clean", "box": [191, 63, 202, 73], "anchor": [194.4, 67.2], "peak": 21.3, "rect": [184, 56, 206, 78], "base_mad": 0.527, "changed": 217, "out_mad": 0.525, "size_ok": true, "size": [434, 900]}
+{"name": "fig-maid-m24-ty1-a26", "kind": "fig", "score": 0.996, "k": 0.662, "status": "clean", "box": [148, 63, 159, 74], "anchor": [150.9, 68.6], "peak": 27.0, "rect": [141, 56, 165, 85], "base_mad": 0.548, "changed": 220, "out_mad": 0.548, "size_ok": true, "size": [299, 900]}
+{"name": "fig-maid-m24-ty1-a36", "kind": "fig", "score": 0.998, "k": 0.642, "status": "clean", "box": [157, 63, 168, 71], "anchor": [161.0, 65.5], "peak": 21.1, "rect": [151, 56, 173, 78], "base_mad": 0.561, "changed": 207, "out_mad": 0.562, "size_ok": true, "size": [310, 900]}
+{"name": "fig-maid-m24-ty1-a51", "kind": "fig", "score": 0.994, "k": 0.646, "status": "clean", "box": [145, 62, 156, 72], "anchor": [149.2, 65.6], "peak": 19.3, "rect": [139, 55, 160, 79], "base_mad": 0.541, "changed": 210, "out_mad": 0.543, "size_ok": true, "size": [307, 900]}
+{"name": "fig-maid-m24-ty2-a18", "kind": "fig", "score": 0.992, "k": 0.626, "mode": "own", "status": "nomark"}
+{"name": "fig-maid-m24-ty2-a26", "kind": "fig", "score": 0.997, "k": 0.658, "status": "clean", "box": [154, 66, 164, 77], "anchor": [157.4, 70.9], "peak": 26.4, "rect": [147, 59, 170, 87], "base_mad": 0.38, "changed": 236, "out_mad": 0.38, "size_ok": true, "size": [306, 900]}
+{"name": "fig-maid-m24-ty2-a36", "kind": "fig", "score": 0.995, "k": 0.64, "status": "clean", "box": [153, 64, 164, 76], "anchor": [156.9, 69.2], "peak": 26.8, "rect": [151, 58, 167, 74], "base_mad": 0.533, "changed": 50, "out_mad": 0.534, "size_ok": true, "size": [310, 900]}
+{"name": "fig-maid-m24-ty3-a18", "kind": "fig", "score": 0.994, "k": 0.64, "mode": "own", "status": "nomark"}
+{"name": "fig-maid-m24-ty3-a26", "kind": "fig", "score": 0.997, "k": 0.642, "mode": "own", "status": "clean", "box": [145, 64, 156, 75], "anchor": [149.2, 69.5], "peak": 21.2, "rect": [138, 58, 161, 85], "base_mad": 0.534, "changed": 220, "out_mad": 0.534, "size_ok": true, "size": [293, 900]}
+{"name": "fig-maid-m24-ty3-a36", "kind": "fig", "score": 0.987, "k": 0.65, "mode": "own", "status": "nomark"}
+{"name": "fig-maid-m24-ty4-a18", "kind": "fig", "score": 0.991, "k": 0.634, "mode": "own", "status": "nomark"}
+{"name": "fig-maid-m24-ty5-a18", "kind": "fig", "score": 0.996, "k": 0.646, "mode": "own", "status": "nomark"}
+{"name": "fig-maid-m24-ty6-a18", "kind": "fig", "score": 0.997, "k": 0.66, "mode": "own", "status": "nomark"}
+{"name": "fig-maid-m24-ty7-a18", "kind": "fig", "score": 0.996, "k": 0.64, "mode": "own", "status": "nomark"}
+{"name": "fig-maid-m25-ty1-a18", "kind": "fig", "status": "por_nomark"}
+{"name": "fig-maid-m25-ty1-a26", "kind": "fig", "score": 0.992, "k": 0.614, "status": "clean", "box": [149, 61, 157, 73], "anchor": [151.7, 65.2], "peak": 69.6, "rect": [143, 54, 163, 77], "base_mad": 0.582, "changed": 208, "out_mad": 0.582, "size_ok": true, "size": [296, 900]}
+{"name": "fig-maid-m25-ty1-a36", "kind": "fig", "score": 0.993, "k": 0.614, "status": "clean", "box": [159, 64, 167, 74], "anchor": [162.2, 67.5], "peak": 78.0, "rect": [152, 57, 173, 84], "base_mad": 0.581, "changed": 228, "out_mad": 0.581, "size_ok": true, "size": [308, 900]}
+{"name": "fig-maid-m25-ty2-a18", "kind": "fig", "status": "por_nomark"}
+{"name": "fig-maid-m25-ty2-a26", "kind": "fig", "score": 0.992, "k": 0.598, "status": "clean", "box": [153, 63, 160, 73], "anchor": [155.4, 67.4], "peak": 55.7, "rect": [147, 57, 166, 81], "base_mad": 0.413, "changed": 177, "out_mad": 0.412, "size_ok": true, "size": [301, 900]}
+{"name": "fig-maid-m25-ty2-a36", "kind": "fig", "score": 0.994, "k": 0.606, "status": "clean", "box": [153, 66, 160, 76], "anchor": [155.6, 70.2], "peak": 66.0, "rect": [146, 60, 166, 87], "base_mad": 0.384, "changed": 207, "out_mad": 0.383, "size_ok": true, "size": [290, 900]}
+{"name": "fig-maid-m25-ty3-a18", "kind": "fig", "status": "por_nomark"}
+{"name": "fig-maid-m25-ty3-a26", "kind": "fig", "score": 0.995, "k": 0.612, "status": "clean", "box": [154, 64, 161, 72], "anchor": [156.6, 67.1], "peak": 43.0, "rect": [147, 57, 167, 83], "base_mad": 0.559, "changed": 161, "out_mad": 0.559, "size_ok": true, "size": [308, 900]}
+{"name": "fig-maid-m25-ty3-a36", "kind": "fig", "score": 0.992, "k": 0.638, "status": "clean", "box": [157, 66, 165, 75], "anchor": [159.7, 69.6], "peak": 53.5, "rect": [150, 60, 171, 86], "base_mad": 0.529, "changed": 198, "out_mad": 0.53, "size_ok": true, "size": [303, 900]}
+{"name": "fig-maid-m26-ty1-a18", "kind": "fig", "score": 0.99, "k": 0.652, "status": "clean", "box": [202, 62, 205, 70], "anchor": [202.4, 65.3], "peak": 62.0, "rect": [195, 55, 211, 81], "base_mad": 0.584, "changed": 169, "out_mad": 0.583, "size_ok": true, "size": [329, 900]}
+{"name": "fig-maid-m26-ty1-a26", "kind": "fig", "score": 0.988, "k": 0.646, "status": "clean", "box": [186, 60, 190, 69], "anchor": [186.6, 63.3], "peak": 75.4, "rect": [179, 53, 196, 80], "base_mad": 0.586, "changed": 175, "out_mad": 0.588, "size_ok": true, "size": [371, 900]}
+{"name": "fig-maid-m26-ty1-a36", "kind": "fig", "score": 0.989, "k": 0.674, "status": "clean", "box": [179, 61, 183, 69], "anchor": [180.2, 63.8], "peak": 59.1, "rect": [172, 54, 189, 77], "base_mad": 0.568, "changed": 157, "out_mad": 0.567, "size_ok": true, "size": [313, 900]}
+{"name": "fig-maid-m26-ty2-a18", "kind": "fig", "score": 0.992, "k": 0.67, "status": "clean", "box": [186, 62, 190, 73], "anchor": [186.9, 66.4], "peak": 82.9, "rect": [179, 55, 196, 83], "base_mad": 0.515, "changed": 175, "out_mad": 0.516, "size_ok": true, "size": [314, 900]}
+{"name": "fig-maid-m26-ty2-a26", "kind": "fig", "score": 0.984, "k": 0.602, "mode": "own", "status": "clean", "box": [177, 60, 181, 70], "anchor": [177.9, 63.6], "peak": 80.3, "rect": [170, 53, 187, 78], "base_mad": 0.549, "changed": 120, "out_mad": 0.549, "size_ok": true, "size": [363, 900]}
+{"name": "fig-maid-m26-ty2-a36", "kind": "fig", "score": 0.994, "k": 0.638, "status": "clean", "box": [171, 60, 175, 70], "anchor": [171.8, 63.5], "peak": 76.0, "rect": [164, 53, 181, 81], "base_mad": 0.556, "changed": 156, "out_mad": 0.557, "size_ok": true, "size": [308, 900]}
+{"name": "fig-maid-m26-ty3-a18", "kind": "fig", "score": 0.99, "k": 0.664, "status": "clean", "box": [192, 62, 196, 72], "anchor": [192.8, 65.7], "peak": 78.5, "rect": [185, 55, 202, 83], "base_mad": 0.389, "changed": 168, "out_mad": 0.39, "size_ok": true, "size": [320, 900]}
+{"name": "fig-maid-m26-ty3-a26", "kind": "fig", "score": 0.994, "k": 0.638, "status": "clean", "box": [184, 59, 188, 67], "anchor": [185.1, 62.3], "peak": 73.9, "rect": [177, 53, 194, 78], "base_mad": 0.401, "changed": 131, "out_mad": 0.401, "size_ok": true, "size": [372, 900]}
+{"name": "fig-maid-m26-ty3-a36", "kind": "fig", "score": 0.99, "k": 0.642, "status": "clean", "box": [168, 60, 172, 69], "anchor": [168.8, 63.4], "peak": 76.7, "rect": [162, 53, 176, 73], "base_mad": 0.518, "changed": 103, "out_mad": 0.516, "size_ok": true, "size": [305, 900]}
+{"name": "fig-maid-m27-ty1-a18", "kind": "fig", "status": "por_nomark"}
+{"name": "fig-maid-m27-ty1-a26", "kind": "fig", "status": "por_nomark"}
+{"name": "fig-maid-m27-ty1-a36", "kind": "fig", "status": "por_nomark"}
+{"name": "fig-maid-m27-ty1-a51", "kind": "fig", "score": 0.992, "k": 0.668, "mode": "own", "status": "nomark"}
+{"name": "fig-maid-m27-ty2-a18", "kind": "fig", "score": 0.992, "k": 0.626, "mode": "own", "status": "nomark"}
+{"name": "fig-maid-m27-ty2-a26", "kind": "fig", "score": 0.993, "k": 0.694, "status": "clean", "box": [166, 50, 174, 70], "anchor": [169.0, 58.5], "peak": 26.4, "rect": [159, 44, 178, 62], "base_mad": 0.572, "changed": 104, "out_mad": 0.573, "size_ok": true, "size": [306, 900]}
+{"name": "fig-maid-m27-ty2-a36", "kind": "fig", "status": "por_nomark"}
+{"name": "fig-maid-m27-ty2-a51", "kind": "fig", "score": 0.992, "k": 0.67, "mode": "own", "status": "nomark"}
+{"name": "fig-maid-m27-ty3-a18", "kind": "fig", "status": "por_nomark"}
+{"name": "fig-maid-m27-ty3-a26", "kind": "fig", "status": "por_nomark"}
+{"name": "fig-maid-m27-ty3-a36", "kind": "fig", "status": "por_nomark"}
+{"name": "fig-maid-m27-ty3-a51", "kind": "fig", "score": 0.997, "k": 0.68, "mode": "own", "status": "clean", "box": [156, 49, 164, 61], "anchor": [158.6, 53.9], "peak": 29.2, "rect": [148, 43, 171, 63], "base_mad": 0.578, "changed": 201, "out_mad": 0.58, "size_ok": true, "size": [309, 900]}
+{"name": "fig-maid-m28-ty1-a18", "kind": "fig", "score": 0.992, "k": 0.586, "mode": "own", "status": "nomark"}
+{"name": "fig-maid-m28-ty1-a26", "kind": "fig", "score": 0.986, "k": 0.618, "status": "clean", "box": [159, 61, 168, 70], "anchor": [162.3, 64.8], "peak": 32.5, "rect": [152, 54, 174, 81], "base_mad": 0.653, "changed": 238, "out_mad": 0.655, "size_ok": true, "size": [304, 900]}
+{"name": "fig-maid-m28-ty1-a36", "kind": "fig", "score": 0.993, "k": 0.638, "mode": "own", "status": "nomark"}
+{"name": "fig-maid-m28-ty1-a51", "kind": "fig", "status": "por_nomark"}
+{"name": "fig-maid-m28-ty2-a18", "kind": "fig", "score": 0.996, "k": 0.608, "mode": "own", "status": "clean", "box": [174, 59, 181, 68], "anchor": [176.5, 63.2], "peak": 23.3, "rect": [167, 52, 187, 79], "base_mad": 0.519, "changed": 228, "out_mad": 0.518, "size_ok": true, "size": [302, 900]}
+{"name": "fig-maid-m28-ty2-a26", "kind": "fig", "score": 0.99, "k": 0.652, "status": "clean", "box": [164, 62, 171, 71], "anchor": [166.4, 65.6], "peak": 23.0, "rect": [157, 55, 177, 82], "base_mad": 0.538, "changed": 207, "out_mad": 0.536, "size_ok": true, "size": [310, 900]}
+{"name": "fig-maid-m28-ty2-a36", "kind": "fig", "score": 0.988, "k": 0.628, "status": "clean", "box": [163, 61, 169, 66], "anchor": [165.5, 63.4], "peak": 15.1, "rect": [156, 54, 174, 73], "base_mad": 0.415, "changed": 127, "out_mad": 0.414, "size_ok": true, "size": [309, 900]}
+{"name": "fig-maid-m28-ty2-a51", "kind": "fig", "score": 0.995, "k": 0.606, "mode": "own", "status": "nomark"}
+{"name": "fig-maid-m28-ty3-a18", "kind": "fig", "score": 0.994, "k": 0.608, "mode": "own", "status": "clean", "box": [188, 63, 195, 67], "anchor": [191.2, 64.5], "peak": 22.3, "rect": [181, 56, 200, 71], "base_mad": 0.513, "changed": 81, "out_mad": 0.513, "size_ok": true, "size": [306, 900]}
+{"name": "fig-maid-m28-ty3-a26", "kind": "fig", "score": 0.991, "k": 0.626, "status": "clean", "box": [162, 62, 168, 69], "anchor": [164.1, 65.1], "peak": 19.9, "rect": [155, 55, 173, 76], "base_mad": 0.546, "changed": 151, "out_mad": 0.546, "size_ok": true, "size": [309, 900]}
+{"name": "fig-maid-m28-ty3-a36", "kind": "fig", "score": 0.995, "k": 0.624, "status": "clean", "box": [173, 61, 179, 68], "anchor": [175.0, 63.4], "peak": 22.4, "rect": [166, 55, 185, 73], "base_mad": 0.501, "changed": 134, "out_mad": 0.5, "size_ok": true, "size": [320, 900]}
+{"name": "fig-maid-m28-ty3-a51", "kind": "fig", "score": 0.991, "k": 0.596, "status": "clean", "box": [193, 73, 199, 78], "anchor": [195.4, 74.8], "peak": 19.7, "rect": [186, 66, 205, 83], "base_mad": 0.523, "changed": 126, "out_mad": 0.524, "size_ok": true, "size": [318, 900]}
+{"name": "fig-maid-m29-ty1-a18", "kind": "fig", "score": 0.993, "k": 0.658, "status": "clean", "box": [167, 57, 175, 66], "anchor": [169.7, 60.3], "peak": 52.8, "rect": [160, 51, 179, 77], "base_mad": 0.571, "changed": 171, "out_mad": 0.57, "size_ok": true, "size": [374, 900]}
+{"name": "fig-maid-m29-ty1-a26", "kind": "fig", "score": 0.994, "k": 0.646, "mode": "own", "status": "nomark"}
+{"name": "fig-maid-m29-ty1-a36", "kind": "fig", "score": 0.995, "k": 0.63, "mode": "own", "status": "nomark"}
+{"name": "fig-maid-m29-ty1-a51", "kind": "fig", "score": 0.995, "k": 0.648, "mode": "own", "status": "nomark"}
+{"name": "fig-maid-m29-ty2-a18", "kind": "fig", "score": 0.991, "k": 0.66, "status": "clean", "box": [161, 59, 169, 67], "anchor": [163.6, 61.6], "peak": 55.5, "rect": [154, 52, 173, 78], "base_mad": 0.392, "changed": 173, "out_mad": 0.391, "size_ok": true, "size": [367, 900]}
+{"name": "fig-maid-m29-ty2-a26", "kind": "fig", "score": 0.993, "k": 0.62, "mode": "own", "status": "nomark"}
+{"name": "fig-maid-m29-ty2-a36", "kind": "fig", "score": 0.996, "k": 0.638, "status": "clean", "box": [163, 62, 170, 72], "anchor": [165.8, 65.7], "peak": 55.5, "rect": [156, 56, 176, 82], "base_mad": 0.402, "changed": 187, "out_mad": 0.402, "size_ok": true, "size": [307, 900]}
+{"name": "fig-maid-m29-ty2-a51", "kind": "fig", "score": 0.985, "k": 0.648, "mode": "own", "status": "clean", "box": [154, 62, 164, 78], "anchor": [157.6, 66.4], "peak": 52.0, "rect": [149, 57, 170, 82], "base_mad": 0.401, "changed": 45, "out_mad": 0.402, "size_ok": true, "size": [305, 900]}
+{"name": "fig-maid-m29-ty3-a18", "kind": "fig", "score": 0.992, "k": 0.644, "status": "clean", "box": [162, 57, 169, 64], "anchor": [164.6, 59.8], "peak": 45.8, "rect": [155, 50, 174, 71], "base_mad": 0.579, "changed": 156, "out_mad": 0.579, "size_ok": true, "size": [366, 900]}
+{"name": "fig-maid-m29-ty3-a26", "kind": "fig", "score": 0.997, "k": 0.638, "mode": "own", "status": "nomark"}
+{"name": "fig-maid-m29-ty3-a36", "kind": "fig", "score": 0.985, "k": 0.618, "status": "clean", "box": [165, 61, 172, 71], "anchor": [167.7, 64.4], "peak": 46.2, "rect": [158, 55, 178, 81], "base_mad": 0.516, "changed": 180, "out_mad": 0.517, "size_ok": true, "size": [314, 900]}
+{"name": "fig-maid-m29-ty3-a51", "kind": "fig", "score": 0.995, "k": 0.662, "mode": "own", "status": "nomark"}
+{"name": "fig-maid-m30-ty1-a18", "kind": "fig", "score": 0.993, "k": 0.622, "status": "clean", "box": [152, 74, 162, 83], "anchor": [155.8, 76.8], "peak": 48.1, "rect": [146, 67, 167, 93], "base_mad": 0.551, "changed": 213, "out_mad": 0.552, "size_ok": true, "size": [308, 900]}
+{"name": "fig-maid-m30-ty1-a26", "kind": "fig", "score": 0.993, "k": 0.658, "status": "clean", "box": [158, 71, 167, 82], "anchor": [160.8, 76.0], "peak": 52.0, "rect": [152, 64, 173, 93], "base_mad": 0.532, "changed": 215, "out_mad": 0.533, "size_ok": true, "size": [305, 900]}
+{"name": "fig-maid-m30-ty1-a36", "kind": "fig", "score": 0.996, "k": 0.644, "mode": "own", "status": "clean", "box": [162, 70, 174, 86], "anchor": [165.7, 76.6], "peak": 38.0, "rect": [157, 63, 177, 77], "base_mad": 0.547, "changed": 70, "out_mad": 0.545, "size_ok": true, "size": [328, 900]}
+{"name": "fig-maid-m30-ty1-a51", "kind": "fig", "score": 0.994, "k": 0.652, "mode": "own", "status": "clean", "box": [154, 68, 164, 83], "anchor": [157.3, 74.7], "peak": 37.6, "rect": [147, 61, 170, 91], "base_mad": 0.569, "changed": 249, "out_mad": 0.568, "size_ok": true, "size": [309, 900]}
+{"name": "fig-maid-m30-ty2-a18", "kind": "fig", "score": 0.995, "k": 0.628, "status": "clean", "box": [151, 73, 160, 79], "anchor": [154.5, 74.8], "peak": 27.6, "rect": [145, 67, 166, 89], "base_mad": 0.456, "changed": 168, "out_mad": 0.457, "size_ok": true, "size": [303, 900]}
+{"name": "fig-maid-m30-ty2-a26", "kind": "fig", "score": 0.996, "k": 0.638, "status": "clean", "box": [157, 74, 163, 78], "anchor": [158.6, 75.2], "peak": 19.8, "rect": [150, 68, 169, 89], "base_mad": 0.472, "changed": 148, "out_mad": 0.471, "size_ok": true, "size": [301, 900]}
+{"name": "fig-maid-m30-ty2-a36", "kind": "fig", "score": 0.995, "k": 0.64, "mode": "own", "status": "nomark"}
+{"name": "fig-maid-m30-ty2-a51", "kind": "fig", "score": 0.996, "k": 0.654, "status": "clean", "box": [161, 73, 168, 77], "anchor": [163.3, 74.4], "peak": 20.0, "rect": [155, 67, 174, 88], "base_mad": 0.45, "changed": 152, "out_mad": 0.451, "size_ok": true, "size": [316, 900]}
+{"name": "fig-maid-m30-ty3-a18", "kind": "fig", "score": 0.993, "k": 0.63, "status": "clean", "box": [149, 77, 154, 83], "anchor": [151.1, 79.1], "peak": 13.6, "rect": [142, 70, 160, 91], "base_mad": 0.586, "changed": 126, "out_mad": 0.588, "size_ok": true, "size": [301, 900]}
+{"name": "fig-maid-m30-ty3-a26", "kind": "fig", "status": "por_nomark"}
+{"name": "fig-maid-m30-ty3-a36", "kind": "fig", "score": 0.996, "k": 0.644, "status": "clean", "box": [154, 78, 159, 84], "anchor": [156.0, 79.4], "peak": 17.9, "rect": [148, 71, 165, 89], "base_mad": 0.59, "changed": 105, "out_mad": 0.59, "size_ok": true, "size": [305, 900]}
+{"name": "fig-maid-m30-ty3-a51", "kind": "fig", "score": 0.995, "k": 0.638, "status": "clean", "box": [151, 75, 157, 79], "anchor": [153.2, 76.0], "peak": 19.8, "rect": [144, 68, 163, 90], "base_mad": 0.45, "changed": 152, "out_mad": 0.451, "size_ok": true, "size": [302, 900]}
+{"name": "fig-maid-m31-ty1-a18", "kind": "fig", "score": 0.994, "k": 0.652, "mode": "own", "status": "nomark"}
+{"name": "fig-maid-m31-ty1-a26", "kind": "fig", "score": 0.998, "k": 0.642, "status": "clean", "box": [177, 71, 183, 76], "anchor": [178.9, 72.1], "peak": 20.6, "rect": [171, 64, 189, 83], "base_mad": 0.633, "changed": 123, "out_mad": 0.633, "size_ok": true, "size": [347, 900]}
+{"name": "fig-maid-m31-ty1-a36", "kind": "fig", "score": 0.989, "k": 0.668, "status": "clean", "box": [180, 71, 187, 76], "anchor": [182.5, 72.6], "peak": 32.4, "rect": [173, 64, 193, 87], "base_mad": 0.624, "changed": 160, "out_mad": 0.623, "size_ok": true, "size": [318, 900]}
+{"name": "fig-maid-m31-ty1-a51", "kind": "fig", "score": 0.995, "k": 0.646, "status": "clean", "box": [174, 72, 180, 77], "anchor": [175.8, 73.1], "peak": 23.1, "rect": [167, 65, 185, 86], "base_mad": 0.624, "changed": 125, "out_mad": 0.622, "size_ok": true, "size": [317, 900]}
+{"name": "fig-maid-m31-ty2-a18", "kind": "fig", "status": "por_nomark"}
+{"name": "fig-maid-m31-ty2-a26", "kind": "fig", "score": 0.986, "k": 0.65, "status": "clean", "box": [166, 67, 172, 74], "anchor": [168.0, 69.9], "peak": 66.0, "rect": [159, 60, 178, 83], "base_mad": 0.466, "changed": 158, "out_mad": 0.466, "size_ok": true, "size": [337, 900]}
+{"name": "fig-maid-m31-ty2-a36", "kind": "fig", "score": 0.992, "k": 0.618, "status": "clean", "box": [169, 67, 185, 75], "anchor": [172.3, 70.1], "peak": 64.7, "rect": [162, 60, 191, 86], "base_mad": 0.468, "changed": 207, "out_mad": 0.468, "size_ok": true, "size": [306, 900]}
+{"name": "fig-maid-m31-ty2-a51", "kind": "fig", "score": 0.996, "k": 0.638, "status": "clean", "box": [159, 67, 175, 74], "anchor": [169.4, 69.8], "peak": 59.2, "rect": [159, 60, 181, 84], "base_mad": 0.546, "changed": 186, "out_mad": 0.545, "size_ok": true, "size": [309, 900]}
+{"name": "fig-maid-m31-ty3-a18", "kind": "fig", "score": 0.992, "k": 0.648, "mode": "own", "status": "nomark"}
+{"name": "fig-maid-m31-ty3-a26", "kind": "fig", "status": "por_nomark"}
+{"name": "fig-maid-m31-ty3-a36", "kind": "fig", "score": 0.998, "k": 0.642, "status": "clean", "box": [176, 66, 185, 74], "anchor": [179.7, 68.8], "peak": 51.3, "rect": [169, 59, 189, 80], "base_mad": 0.544, "changed": 163, "out_mad": 0.544, "size_ok": true, "size": [315, 900]}
+{"name": "fig-maid-m31-ty3-a51", "kind": "fig", "score": 0.997, "k": 0.662, "status": "clean", "box": [176, 64, 183, 71], "anchor": [178.7, 67.0], "peak": 39.8, "rect": [169, 57, 189, 78], "base_mad": 0.426, "changed": 153, "out_mad": 0.426, "size_ok": true, "size": [317, 900]}
+{"name": "fig-maid-m32-ty1-a18", "kind": "fig", "score": 0.989, "k": 0.586, "status": "clean", "box": [184, 80, 192, 88], "anchor": [186.8, 83.1], "peak": 80.6, "rect": [177, 73, 198, 93], "base_mad": 0.47, "changed": 170, "out_mad": 0.47, "size_ok": true, "size": [309, 900]}
+{"name": "fig-maid-m32-ty1-a26", "kind": "fig", "score": 0.991, "k": 0.64, "status": "clean", "box": [165, 55, 173, 65], "anchor": [167.8, 58.9], "peak": 68.6, "rect": [158, 48, 179, 75], "base_mad": 0.551, "changed": 254, "out_mad": 0.552, "size_ok": true, "size": [310, 900]}
+{"name": "fig-maid-m32-ty1-a36", "kind": "fig", "score": 0.996, "k": 0.658, "status": "clean", "box": [188, 57, 197, 66], "anchor": [191.1, 60.5], "peak": 79.2, "rect": [181, 51, 203, 76], "base_mad": 0.603, "changed": 204, "out_mad": 0.602, "size_ok": true, "size": [336, 900]}
+{"name": "fig-maid-m32-ty1-a51", "kind": "fig", "score": 0.993, "k": 0.632, "status": "clean", "box": [164, 56, 173, 65], "anchor": [167.6, 59.8], "peak": 73.8, "rect": [157, 49, 179, 74], "base_mad": 0.535, "changed": 247, "out_mad": 0.536, "size_ok": true, "size": [316, 900]}
+{"name": "fig-maid-m32-ty2-a18", "kind": "fig", "score": 0.988, "k": 0.588, "status": "clean", "box": [184, 79, 191, 87], "anchor": [186.7, 82.0], "peak": 72.9, "rect": [177, 73, 197, 91], "base_mad": 0.525, "changed": 144, "out_mad": 0.525, "size_ok": true, "size": [304, 900]}
+{"name": "fig-maid-m32-ty2-a26", "kind": "fig", "score": 0.998, "k": 0.624, "status": "clean", "box": [163, 56, 170, 64], "anchor": [165.2, 59.1], "peak": 75.4, "rect": [156, 49, 176, 69], "base_mad": 0.507, "changed": 159, "out_mad": 0.507, "size_ok": true, "size": [304, 900]}
+{"name": "fig-maid-m32-ty2-a36", "kind": "fig", "score": 0.997, "k": 0.622, "status": "clean", "box": [190, 58, 197, 67], "anchor": [192.4, 61.3], "peak": 77.2, "rect": [183, 51, 203, 71], "base_mad": 0.423, "changed": 151, "out_mad": 0.421, "size_ok": true, "size": [336, 900]}
+{"name": "fig-maid-m32-ty2-a51", "kind": "fig", "score": 0.993, "k": 0.648, "status": "clean", "box": [158, 57, 165, 65], "anchor": [160.5, 59.8], "peak": 64.1, "rect": [151, 51, 169, 71], "base_mad": 0.412, "changed": 137, "out_mad": 0.411, "size_ok": true, "size": [303, 900]}
+{"name": "fig-maid-m32-ty3-a18", "kind": "fig", "status": "por_nomark"}
+{"name": "fig-maid-m32-ty3-a26", "kind": "fig", "score": 0.995, "k": 0.62, "status": "clean", "box": [165, 54, 173, 63], "anchor": [168.0, 58.1], "peak": 37.6, "rect": [158, 47, 177, 70], "base_mad": 0.602, "changed": 192, "out_mad": 0.601, "size_ok": true, "size": [309, 900]}
+{"name": "fig-maid-m32-ty3-a36", "kind": "fig", "score": 0.996, "k": 0.622, "mode": "own", "status": "nomark"}
+{"name": "fig-maid-m32-ty3-a51", "kind": "fig", "score": 0.998, "k": 0.626, "status": "clean", "box": [167, 55, 175, 65], "anchor": [169.9, 58.7], "peak": 29.5, "rect": [160, 48, 181, 75], "base_mad": 0.603, "changed": 223, "out_mad": 0.602, "size_ok": true, "size": [320, 900]}
+{"name": "fig-maid-m33-ty1-a18", "kind": "fig", "score": 0.985, "k": 0.6, "status": "clean", "box": [170, 59, 177, 66], "anchor": [172.3, 61.6], "peak": 40.1, "rect": [163, 53, 182, 76], "base_mad": 0.568, "changed": 167, "out_mad": 0.568, "size_ok": true, "size": [316, 900]}
+{"name": "fig-maid-m33-ty1-a26", "kind": "fig", "score": 0.998, "k": 0.608, "status": "clean", "box": [174, 69, 181, 74], "anchor": [176.2, 70.6], "peak": 37.1, "rect": [167, 62, 185, 81], "base_mad": 0.581, "changed": 133, "out_mad": 0.581, "size_ok": true, "size": [313, 900]}
+{"name": "fig-maid-m33-ty1-a36", "kind": "fig", "score": 0.992, "k": 0.618, "status": "clean", "box": [180, 63, 187, 69], "anchor": [182.3, 64.8], "peak": 33.0, "rect": [173, 56, 193, 79], "base_mad": 0.606, "changed": 168, "out_mad": 0.606, "size_ok": true, "size": [331, 900]}
+{"name": "fig-maid-m33-ty1-a51", "kind": "fig", "score": 0.995, "k": 0.642, "status": "clean", "box": [192, 71, 199, 78], "anchor": [194.9, 73.6], "peak": 33.2, "rect": [185, 64, 205, 89], "base_mad": 0.549, "changed": 150, "out_mad": 0.549, "size_ok": true, "size": [318, 900]}
+{"name": "fig-maid-m33-ty2-a18", "kind": "fig", "score": 0.992, "k": 0.604, "status": "clean", "box": [161, 59, 168, 65], "anchor": [163.3, 61.4], "peak": 44.6, "rect": [154, 53, 174, 75], "base_mad": 0.559, "changed": 163, "out_mad": 0.558, "size_ok": true, "size": [291, 900]}
+{"name": "fig-maid-m33-ty2-a26", "kind": "fig", "score": 0.99, "k": 0.59, "status": "clean", "box": [175, 67, 182, 74], "anchor": [177.4, 69.9], "peak": 57.5, "rect": [168, 61, 186, 79], "base_mad": 0.39, "changed": 123, "out_mad": 0.391, "size_ok": true, "size": [306, 900]}
+{"name": "fig-maid-m33-ty2-a36", "kind": "fig", "score": 0.996, "k": 0.614, "status": "clean", "box": [172, 62, 180, 69], "anchor": [175.0, 64.5], "peak": 45.0, "rect": [165, 55, 186, 79], "base_mad": 0.525, "changed": 178, "out_mad": 0.546, "size_ok": true, "size": [314, 900]}
+{"name": "fig-maid-m33-ty2-a51", "kind": "fig", "status": "por_nomark"}
+{"name": "fig-maid-m33-ty3-a18", "kind": "fig", "status": "por_nomark"}
+{"name": "fig-maid-m33-ty3-a26", "kind": "fig", "score": 0.995, "k": 0.622, "status": "clean", "box": [178, 67, 186, 73], "anchor": [181.0, 69.4], "peak": 53.0, "rect": [171, 60, 190, 78], "base_mad": 0.55, "changed": 132, "out_mad": 0.549, "size_ok": true, "size": [324, 900]}
+{"name": "fig-maid-m33-ty3-a36", "kind": "fig", "score": 0.997, "k": 0.624, "status": "clean", "box": [175, 61, 183, 69], "anchor": [178.0, 64.4], "peak": 51.5, "rect": [168, 55, 189, 79], "base_mad": 0.549, "changed": 194, "out_mad": 0.547, "size_ok": true, "size": [331, 900]}
+{"name": "fig-maid-m33-ty3-a51", "kind": "fig", "score": 0.994, "k": 0.622, "mode": "own", "status": "nomark"}
+{"name": "fig-maid-m34-ty1-a18", "kind": "fig", "score": 0.996, "k": 0.654, "status": "clean", "box": [155, 67, 165, 76], "anchor": [158.6, 70.8], "peak": 40.3, "rect": [148, 60, 171, 81], "base_mad": 0.593, "changed": 199, "out_mad": 0.594, "size_ok": true, "size": [375, 900]}
+{"name": "fig-maid-m34-ty1-a26", "kind": "fig", "status": "por_nomark"}
+{"name": "fig-maid-m34-ty1-a36", "kind": "fig", "score": 0.994, "k": 0.694, "mode": "own", "status": "nomark"}
+{"name": "fig-maid-m34-ty1-a51", "kind": "fig", "status": "por_nomark"}
+{"name": "fig-maid-m34-ty2-a18", "kind": "fig", "score": 0.987, "k": 0.63, "status": "clean", "box": [162, 70, 169, 78], "anchor": [164.4, 73.2], "peak": 33.8, "rect": [155, 64, 174, 83], "base_mad": 0.519, "changed": 146, "out_mad": 0.552, "size_ok": true, "size": [380, 900]}
+{"name": "fig-maid-m34-ty2-a26", "kind": "fig", "score": 0.994, "k": 0.676, "status": "clean", "box": [160, 69, 169, 77], "anchor": [163.5, 71.9], "peak": 38.2, "rect": [153, 63, 175, 82], "base_mad": 0.534, "changed": 162, "out_mad": 0.533, "size_ok": true, "size": [302, 900]}
+{"name": "fig-maid-m34-ty2-a36", "kind": "fig", "score": 0.991, "k": 0.65, "mode": "own", "status": "clean", "box": [154, 68, 163, 77], "anchor": [157.2, 71.3], "peak": 53.8, "rect": [146, 61, 169, 80], "base_mad": 0.486, "changed": 188, "out_mad": 0.486, "size_ok": true, "size": [300, 900]}
+{"name": "fig-maid-m34-ty2-a51", "kind": "fig", "score": 0.992, "k": 0.682, "status": "clean", "box": [151, 69, 159, 77], "anchor": [153.8, 72.3], "peak": 35.5, "rect": [144, 63, 164, 82], "base_mad": 0.518, "changed": 156, "out_mad": 0.517, "size_ok": true, "size": [302, 900]}
+{"name": "fig-maid-m34-ty3-a18", "kind": "fig", "status": "por_nomark"}
+{"name": "fig-maid-m34-ty3-a26", "kind": "fig", "status": "por_nomark"}
+{"name": "fig-maid-m34-ty3-a36", "kind": "fig", "score": 0.993, "k": 0.67, "status": "clean", "box": [169, 65, 178, 73], "anchor": [172.3, 68.2], "peak": 62.0, "rect": [161, 58, 185, 84], "base_mad": 0.495, "changed": 201, "out_mad": 0.495, "size_ok": true, "size": [320, 900]}
+{"name": "fig-maid-m34-ty3-a51", "kind": "fig", "status": "por_nomark"}
+{"name": "fig-maid-m35-ty1-a18", "kind": "fig", "score": 0.998, "k": 0.622, "status": "clean", "box": [170, 64, 177, 74], "anchor": [173.1, 68.1], "peak": 16.7, "rect": [163, 57, 183, 83], "base_mad": 0.593, "changed": 222, "out_mad": 0.592, "size_ok": true, "size": [324, 900]}
+{"name": "fig-maid-m35-ty1-a26", "kind": "fig", "score": 0.994, "k": 0.644, "mode": "own", "status": "nomark"}
+{"name": "fig-maid-m35-ty1-a36", "kind": "fig", "score": 0.987, "k": 0.626, "status": "clean", "box": [159, 69, 163, 77], "anchor": [159.6, 72.3], "peak": 22.7, "rect": [152, 62, 169, 87], "base_mad": 0.603, "changed": 160, "out_mad": 0.604, "size_ok": true, "size": [307, 900]}
+{"name": "fig-maid-m35-ty1-a51", "kind": "fig", "score": 0.991, "k": 0.668, "mode": "own", "status": "nomark"}
+{"name": "fig-maid-m35-ty2-a18", "kind": "fig", "score": 0.997, "k": 0.608, "mode": "own", "status": "clean", "box": [169, 63, 176, 77], "anchor": [171.4, 67.7], "peak": 37.3, "rect": [162, 56, 182, 81], "base_mad": 0.482, "changed": 182, "out_mad": 0.483, "size_ok": true, "size": [328, 900]}
+{"name": "fig-maid-m35-ty2-a26", "kind": "fig", "score": 0.997, "k": 0.626, "status": "clean", "box": [172, 63, 177, 72], "anchor": [174.1, 66.6], "peak": 21.5, "rect": [165, 56, 183, 81], "base_mad": 0.538, "changed": 158, "out_mad": 0.537, "size_ok": true, "size": [317, 900]}
+{"name": "fig-maid-m35-ty2-a36", "kind": "fig", "score": 0.988, "k": 0.65, "mode": "own", "status": "nomark"}
+{"name": "fig-maid-m35-ty2-a51", "kind": "fig", "score": 0.995, "k": 0.63, "status": "clean", "box": [163, 67, 168, 73], "anchor": [165.1, 68.8], "peak": 29.3, "rect": [156, 60, 174, 79], "base_mad": 0.507, "changed": 109, "out_mad": 0.506, "size_ok": true, "size": [318, 900]}
+{"name": "fig-maid-m35-ty3-a18", "kind": "fig", "status": "por_nomark"}
+{"name": "fig-maid-m35-ty3-a26", "kind": "fig", "status": "por_nomark"}
+{"name": "fig-maid-m35-ty3-a36", "kind": "fig", "score": 0.99, "k": 0.622, "mode": "own", "status": "nomark"}
+{"name": "fig-maid-m35-ty3-a51", "kind": "fig", "status": "por_nomark"}
+{"name": "fig-maid-m36-ty1-a18", "kind": "fig", "score": 0.992, "k": 0.64, "mode": "own", "status": "nomark"}
+{"name": "fig-maid-m36-ty1-a26", "kind": "fig", "score": 0.986, "k": 0.608, "status": "clean", "box": [163, 64, 171, 75], "anchor": [165.7, 68.0], "peak": 20.5, "rect": [156, 58, 177, 79], "base_mad": 0.688, "changed": 153, "out_mad": 0.691, "size_ok": true, "size": [336, 900]}
+{"name": "fig-maid-m36-ty1-a36", "kind": "fig", "score": 0.997, "k": 0.64, "status": "clean", "box": [172, 65, 179, 72], "anchor": [174.7, 68.1], "peak": 15.4, "rect": [165, 59, 185, 83], "base_mad": 0.703, "changed": 175, "out_mad": 0.688, "size_ok": true, "size": [315, 900]}
+{"name": "fig-maid-m36-ty1-a51", "kind": "fig", "status": "por_nomark"}
+{"name": "fig-maid-m36-ty2-a18", "kind": "fig", "status": "por_nomark"}
+{"name": "fig-maid-m36-ty2-a26", "kind": "fig", "score": 0.989, "k": 0.63, "status": "clean", "box": [165, 66, 173, 71], "anchor": [167.7, 68.0], "peak": 19.9, "rect": [158, 59, 178, 81], "base_mad": 0.539, "changed": 149, "out_mad": 0.537, "size_ok": true, "size": [338, 900]}
+{"name": "fig-maid-m36-ty2-a36", "kind": "fig", "score": 0.993, "k": 0.64, "mode": "own", "status": "clean", "box": [161, 68, 168, 73], "anchor": [163.3, 69.2], "peak": 20.3, "rect": [154, 61, 173, 77], "base_mad": 0.563, "changed": 117, "out_mad": 0.559, "size_ok": true, "size": [300, 900]}
+{"name": "fig-maid-m36-ty2-a51", "kind": "fig", "status": "por_nomark"}
+{"name": "fig-maid-m36-ty3-a18", "kind": "fig", "status": "por_nomark"}
+{"name": "fig-maid-m36-ty3-a26", "kind": "fig", "status": "por_nomark"}
+{"name": "fig-maid-m36-ty3-a36", "kind": "fig", "status": "por_nomark"}
+{"name": "fig-maid-m36-ty3-a51", "kind": "fig", "status": "por_nomark"}
+{"name": "fig-maid-m37-ty1-a18", "kind": "fig", "score": 0.997, "k": 0.628, "mode": "own", "status": "nomark"}
+{"name": "fig-maid-m37-ty1-a26", "kind": "fig", "score": 0.995, "k": 0.672, "status": "clean", "box": [162, 64, 172, 72], "anchor": [165.1, 67.5], "peak": 46.4, "rect": [154, 58, 179, 83], "base_mad": 0.627, "changed": 283, "out_mad": 0.627, "size_ok": true, "size": [323, 900]}
+{"name": "fig-maid-m37-ty1-a36", "kind": "fig", "score": 0.997, "k": 0.678, "status": "clean", "box": [160, 65, 171, 75], "anchor": [164.1, 68.5], "peak": 55.1, "rect": [152, 57, 177, 86], "base_mad": 0.595, "changed": 328, "out_mad": 0.596, "size_ok": true, "size": [397, 900]}
+{"name": "fig-maid-m37-ty1-a51", "kind": "fig", "score": 0.995, "k": 0.69, "mode": "own", "status": "nomark"}
+{"name": "fig-maid-m37-ty2-a18", "kind": "fig", "score": 0.993, "k": 0.624, "status": "clean", "box": [157, 80, 167, 90], "anchor": [160.5, 83.4], "peak": 59.0, "rect": [150, 73, 173, 99], "base_mad": 0.393, "changed": 252, "out_mad": 0.391, "size_ok": true, "size": [304, 900]}
+{"name": "fig-maid-m37-ty2-a26", "kind": "fig", "score": 0.991, "k": 0.682, "mode": "own", "status": "nomark"}
+{"name": "fig-maid-m37-ty2-a36", "kind": "fig", "score": 0.996, "k": 0.678, "status": "clean", "box": [152, 66, 162, 76], "anchor": [155.7, 69.1], "peak": 63.6, "rect": [144, 58, 169, 87], "base_mad": 0.48, "changed": 320, "out_mad": 0.482, "size_ok": true, "size": [389, 900]}
+{"name": "fig-maid-m37-ty2-a51", "kind": "fig", "score": 0.992, "k": 0.702, "mode": "own", "status": "nomark"}
+{"name": "fig-maid-m37-ty3-a18", "kind": "fig", "status": "por_nomark"}
+{"name": "fig-maid-m37-ty3-a26", "kind": "fig", "score": 0.996, "k": 0.68, "status": "clean", "box": [155, 64, 166, 76], "anchor": [159.4, 67.9], "peak": 51.6, "rect": [149, 68, 162, 80], "base_mad": 0.557, "changed": 21, "out_mad": 0.558, "size_ok": true, "size": [310, 900]}
+{"name": "fig-maid-m37-ty3-a36", "kind": "fig", "score": 0.991, "k": 0.672, "mode": "own", "status": "clean", "box": [153, 66, 163, 84], "anchor": [157.1, 69.7], "peak": 53.3, "rect": [145, 60, 169, 80], "base_mad": 0.523, "changed": 198, "out_mad": 0.522, "size_ok": true, "size": [389, 900]}
+{"name": "fig-maid-m37-ty3-a51", "kind": "fig", "score": 0.994, "k": 0.654, "status": "clean", "box": [148, 65, 158, 75], "anchor": [151.8, 69.1], "peak": 49.7, "rect": [140, 59, 165, 82], "base_mad": 0.527, "changed": 227, "out_mad": 0.527, "size_ok": true, "size": [307, 900]}
+{"name": "fig-maid-m38-ty1-a18", "kind": "fig", "score": 0.995, "k": 0.598, "mode": "own", "status": "nomark"}
+{"name": "fig-maid-m38-ty1-a26", "kind": "fig", "status": "por_nomark"}
+{"name": "fig-maid-m38-ty1-a36", "kind": "fig", "score": 0.998, "k": 0.608, "mode": "own", "status": "nomark"}
+{"name": "fig-maid-m38-ty1-a51", "kind": "fig", "score": 0.997, "k": 0.612, "status": "clean", "box": [160, 77, 169, 88], "anchor": [163.3, 81.4], "peak": 37.2, "rect": [153, 70, 175, 95], "base_mad": 0.67, "changed": 233, "out_mad": 0.669, "size_ok": true, "size": [285, 900]}
+{"name": "fig-maid-m38-ty2-a18", "kind": "fig", "status": "por_nomark"}
+{"name": "fig-maid-m38-ty2-a26", "kind": "fig", "status": "por_nomark"}
+{"name": "fig-maid-m38-ty2-a36", "kind": "fig", "score": 0.994, "k": 0.61, "mode": "own", "status": "nomark"}
+{"name": "fig-maid-m38-ty2-a51", "kind": "fig", "status": "por_nomark"}
+{"name": "fig-maid-m38-ty3-a18", "kind": "fig", "status": "por_nomark"}
+{"name": "fig-maid-m38-ty3-a26", "kind": "fig", "status": "por_nomark"}
+{"name": "fig-maid-m38-ty3-a36", "kind": "fig", "status": "por_nomark"}
+{"name": "fig-maid-m38-ty3-a51", "kind": "fig", "score": 0.994, "k": 0.612, "mode": "own", "status": "nomark"}
+{"name": "fig-maid-m39-ty1-a18", "kind": "fig", "score": 0.994, "k": 0.67, "mode": "own", "status": "nomark"}
+{"name": "fig-maid-m39-ty1-a26", "kind": "fig", "score": 0.994, "k": 0.638, "mode": "own", "status": "nomark"}
+{"name": "fig-maid-m39-ty1-a36", "kind": "fig", "score": 0.997, "k": 0.658, "mode": "own", "status": "clean", "box": [176, 60, 183, 70], "anchor": [178.3, 64.0], "peak": 48.8, "rect": [169, 54, 189, 80], "base_mad": 0.516, "changed": 198, "out_mad": 0.516, "size_ok": true, "size": [322, 900]}
+{"name": "fig-maid-m39-ty1-a51", "kind": "fig", "status": "por_nomark"}
+{"name": "fig-maid-m39-ty2-a18", "kind": "fig", "status": "por_nomark"}
+{"name": "fig-maid-m39-ty2-a26", "kind": "fig", "score": 0.992, "k": 0.682, "mode": "own", "status": "nomark"}
+{"name": "fig-maid-m39-ty2-a36", "kind": "fig", "score": 0.992, "k": 0.654, "status": "clean", "box": [173, 60, 179, 70], "anchor": [174.7, 63.9], "peak": 59.1, "rect": [166, 54, 185, 81], "base_mad": 0.354, "changed": 207, "out_mad": 0.354, "size_ok": true, "size": [319, 900]}
+{"name": "fig-maid-m39-ty2-a51", "kind": "fig", "status": "por_nomark"}
+{"name": "fig-maid-m39-ty3-a18", "kind": "fig", "score": 0.988, "k": 0.68, "status": "clean", "box": [169, 59, 175, 69], "anchor": [170.7, 63.0], "peak": 82.4, "rect": [162, 53, 181, 80], "base_mad": 0.544, "changed": 188, "out_mad": 0.544, "size_ok": true, "size": [366, 900]}
+{"name": "fig-maid-m39-ty3-a26", "kind": "fig", "score": 0.996, "k": 0.64, "status": "clean", "box": [168, 60, 174, 69], "anchor": [169.8, 63.3], "peak": 90.3, "rect": [161, 53, 180, 80], "base_mad": 0.547, "changed": 203, "out_mad": 0.545, "size_ok": true, "size": [313, 900]}
+{"name": "fig-maid-m39-ty3-a36", "kind": "fig", "score": 0.997, "k": 0.678, "status": "clean", "box": [173, 61, 178, 70], "anchor": [174.4, 63.9], "peak": 78.4, "rect": [166, 54, 184, 81], "base_mad": 0.538, "changed": 173, "out_mad": 0.553, "size_ok": true, "size": [318, 900]}
+{"name": "fig-maid-m39-ty3-a51", "kind": "fig", "score": 0.994, "k": 0.678, "mode": "own", "status": "nomark"}
+{"name": "fig-maid-m40-ty1-a18", "kind": "fig", "score": 0.997, "k": 0.642, "status": "clean", "box": [151, 55, 160, 65], "anchor": [154.4, 58.9], "peak": 58.7, "rect": [145, 48, 165, 76], "base_mad": 0.592, "changed": 197, "out_mad": 0.592, "size_ok": true, "size": [309, 900]}
+{"name": "fig-maid-m40-ty1-a26", "kind": "fig", "score": 0.991, "k": 0.632, "status": "clean", "box": [152, 54, 160, 64], "anchor": [155.1, 58.3], "peak": 64.7, "rect": [145, 48, 166, 75], "base_mad": 0.43, "changed": 194, "out_mad": 0.431, "size_ok": true, "size": [310, 900]}
+{"name": "fig-maid-m40-ty1-a36", "kind": "fig", "score": 0.997, "k": 0.624, "mode": "own", "status": "nomark"}
+{"name": "fig-maid-m40-ty1-a51", "kind": "fig", "score": 0.991, "k": 0.65, "status": "clean", "box": [152, 55, 160, 66], "anchor": [154.9, 59.6], "peak": 61.4, "rect": [146, 49, 166, 69], "base_mad": 0.579, "changed": 153, "out_mad": 0.579, "size_ok": true, "size": [310, 900]}
+{"name": "fig-maid-m40-ty2-a18", "kind": "fig", "score": 0.989, "k": 0.652, "status": "clean", "box": [156, 57, 161, 61], "anchor": [157.3, 58.3], "peak": 26.0, "rect": [149, 51, 165, 69], "base_mad": 0.527, "changed": 100, "out_mad": 0.527, "size_ok": true, "size": [314, 900]}
+{"name": "fig-maid-m40-ty2-a26", "kind": "fig", "score": 0.992, "k": 0.646, "status": "clean", "box": [146, 57, 152, 62], "anchor": [147.8, 58.4], "peak": 38.4, "rect": [139, 50, 157, 68], "base_mad": 0.518, "changed": 117, "out_mad": 0.519, "size_ok": true, "size": [303, 900]}
+{"name": "fig-maid-m40-ty2-a36", "kind": "fig", "score": 0.993, "k": 0.646, "status": "clean", "box": [152, 57, 158, 63], "anchor": [154.2, 59.3], "peak": 40.1, "rect": [146, 50, 163, 68], "base_mad": 0.535, "changed": 115, "out_mad": 0.535, "size_ok": true, "size": [306, 900]}
+{"name": "fig-maid-m40-ty2-a51", "kind": "fig", "score": 0.991, "k": 0.646, "status": "clean", "box": [148, 57, 154, 64], "anchor": [150.0, 59.5], "peak": 51.7, "rect": [141, 50, 160, 73], "base_mad": 0.487, "changed": 159, "out_mad": 0.486, "size_ok": true, "size": [305, 900]}
+{"name": "fig-maid-m40-ty3-a18", "kind": "fig", "score": 0.991, "k": 0.618, "status": "clean", "box": [158, 54, 166, 64], "anchor": [161.0, 58.0], "peak": 67.1, "rect": [151, 47, 172, 70], "base_mad": 0.596, "changed": 195, "out_mad": 0.597, "size_ok": true, "size": [321, 900]}
+{"name": "fig-maid-m40-ty3-a26", "kind": "fig", "score": 0.996, "k": 0.626, "status": "clean", "box": [158, 54, 166, 64], "anchor": [161.1, 57.6], "peak": 60.3, "rect": [151, 47, 172, 69], "base_mad": 0.589, "changed": 179, "out_mad": 0.59, "size_ok": true, "size": [324, 900]}
+{"name": "fig-maid-m40-ty3-a36", "kind": "fig", "score": 0.996, "k": 0.638, "status": "clean", "box": [160, 55, 168, 66], "anchor": [163.2, 59.0], "peak": 64.0, "rect": [153, 48, 173, 69], "base_mad": 0.581, "changed": 165, "out_mad": 0.582, "size_ok": true, "size": [318, 900]}
+{"name": "fig-maid-m40-ty3-a51", "kind": "fig", "score": 0.993, "k": 0.636, "status": "clean", "box": [159, 56, 168, 67], "anchor": [162.6, 60.1], "peak": 70.2, "rect": [152, 50, 174, 68], "base_mad": 0.414, "changed": 140, "out_mad": 0.414, "size_ok": true, "size": [334, 900]}
+{"name": "fig-maid-m41-ty1-a18", "kind": "fig", "status": "por_nomark"}
+{"name": "fig-maid-m41-ty1-a26", "kind": "fig", "status": "por_nomark"}
+{"name": "fig-maid-m41-ty1-a36", "kind": "fig", "score": 0.995, "k": 0.61, "mode": "own", "status": "nomark"}
+{"name": "fig-maid-m41-ty1-a51", "kind": "fig", "score": 0.992, "k": 0.63, "status": "clean", "box": [154, 66, 159, 69], "anchor": [156.0, 66.9], "peak": 15.2, "rect": [147, 59, 165, 80], "base_mad": 0.605, "changed": 137, "out_mad": 0.606, "size_ok": true, "size": [299, 900]}
+{"name": "fig-maid-m41-ty2-a18", "kind": "fig", "score": 0.998, "k": 0.592, "mode": "own", "status": "nomark"}
+{"name": "fig-maid-m41-ty2-a26", "kind": "fig", "score": 0.995, "k": 0.614, "status": "clean", "box": [164, 70, 172, 77], "anchor": [166.9, 72.4], "peak": 37.6, "rect": [157, 63, 178, 87], "base_mad": 0.461, "changed": 159, "out_mad": 0.46, "size_ok": true, "size": [351, 900]}
+{"name": "fig-maid-m41-ty2-a36", "kind": "fig", "status": "por_nomark"}
+{"name": "fig-maid-m41-ty2-a51", "kind": "fig", "score": 0.997, "k": 0.644, "mode": "own", "status": "nomark"}
+{"name": "fig-maid-m41-ty3-a18", "kind": "fig", "score": 0.992, "k": 0.594, "mode": "own", "status": "nomark"}
+{"name": "fig-maid-m41-ty3-a26", "kind": "fig", "score": 0.991, "k": 0.6, "status": "clean", "box": [172, 67, 179, 75], "anchor": [174.8, 69.8], "peak": 31.1, "rect": [165, 60, 185, 85], "base_mad": 0.501, "changed": 169, "out_mad": 0.501, "size_ok": true, "size": [363, 900]}
+{"name": "fig-maid-m41-ty3-a36", "kind": "fig", "score": 0.992, "k": 0.65, "status": "clean", "box": [166, 69, 174, 77], "anchor": [169.3, 71.4], "peak": 26.9, "rect": [159, 62, 180, 80], "base_mad": 0.407, "changed": 150, "out_mad": 0.407, "size_ok": true, "size": [318, 900]}
+{"name": "fig-maid-m41-ty3-a51", "kind": "fig", "score": 0.993, "k": 0.612, "status": "clean", "box": [150, 65, 161, 76], "anchor": [156.9, 68.7], "peak": 32.1, "rect": [143, 59, 160, 76], "base_mad": 0.504, "changed": 80, "out_mad": 0.503, "size_ok": true, "size": [304, 900]}
+{"name": "fig-maid-m42-ty1-a18", "kind": "fig", "score": 0.988, "k": 0.598, "status": "clean", "box": [151, 75, 159, 85], "anchor": [154.3, 79.0], "peak": 34.6, "rect": [144, 68, 165, 95], "base_mad": 0.647, "changed": 228, "out_mad": 0.648, "size_ok": true, "size": [293, 900]}
+{"name": "fig-maid-m42-ty1-a26", "kind": "fig", "score": 0.993, "k": 0.62, "status": "clean", "box": [149, 63, 156, 70], "anchor": [151.5, 66.3], "peak": 35.9, "rect": [143, 57, 160, 78], "base_mad": 0.649, "changed": 134, "out_mad": 0.649, "size_ok": true, "size": [304, 900]}
+{"name": "fig-maid-m42-ty1-a36", "kind": "fig", "score": 0.994, "k": 0.646, "status": "clean", "box": [168, 61, 175, 68], "anchor": [170.8, 64.2], "peak": 27.7, "rect": [162, 55, 179, 76], "base_mad": 0.54, "changed": 126, "out_mad": 0.539, "size_ok": true, "size": [405, 900]}
+{"name": "fig-maid-m42-ty1-a51", "kind": "fig", "score": 0.99, "k": 0.642, "mode": "own", "status": "clean", "box": [153, 63, 161, 74], "anchor": [155.6, 66.0], "peak": 38.0, "rect": [146, 56, 167, 80], "base_mad": 0.606, "changed": 189, "out_mad": 0.607, "size_ok": true, "size": [305, 900]}
+{"name": "fig-maid-m42-ty2-a18", "kind": "fig", "score": 0.988, "k": 0.592, "status": "clean", "box": [158, 74, 166, 85], "anchor": [161.6, 77.9], "peak": 28.9, "rect": [151, 67, 172, 94], "base_mad": 0.504, "changed": 225, "out_mad": 0.504, "size_ok": true, "size": [300, 900]}
+{"name": "fig-maid-m42-ty2-a26", "kind": "fig", "score": 0.992, "k": 0.626, "mode": "own", "status": "clean", "box": [155, 63, 173, 79], "anchor": [160.4, 70.4], "peak": 28.8, "rect": [149, 55, 180, 90], "base_mad": 0.474, "changed": 294, "out_mad": 0.475, "size_ok": true, "size": [306, 900]}
+{"name": "fig-maid-m42-ty2-a36", "kind": "fig", "score": 0.995, "k": 0.628, "mode": "own", "status": "clean", "box": [169, 63, 177, 74], "anchor": [172.0, 66.6], "peak": 36.5, "rect": [162, 56, 182, 79], "base_mad": 0.471, "changed": 164, "out_mad": 0.471, "size_ok": true, "size": [408, 900]}
+{"name": "fig-maid-m42-ty2-a51", "kind": "fig", "score": 0.995, "k": 0.626, "mode": "own", "status": "clean", "box": [152, 61, 162, 77], "anchor": [155.9, 66.1], "peak": 32.9, "rect": [146, 55, 168, 82], "base_mad": 0.521, "changed": 194, "out_mad": 0.521, "size_ok": true, "size": [306, 900]}
+{"name": "fig-maid-m42-ty3-a18", "kind": "fig", "score": 0.99, "k": 0.59, "status": "clean", "box": [154, 71, 163, 81], "anchor": [157.8, 74.6], "peak": 26.2, "rect": [147, 64, 169, 91], "base_mad": 0.584, "changed": 242, "out_mad": 0.581, "size_ok": true, "size": [295, 900]}
+{"name": "fig-maid-m42-ty3-a26", "kind": "fig", "score": 0.996, "k": 0.64, "status": "clean", "box": [152, 61, 159, 67], "anchor": [154.6, 63.4], "peak": 24.7, "rect": [145, 54, 165, 76], "base_mad": 0.577, "changed": 178, "out_mad": 0.578, "size_ok": true, "size": [304, 900]}
+{"name": "fig-maid-m42-ty3-a36", "kind": "fig", "score": 0.99, "k": 0.648, "mode": "own", "status": "clean", "box": [172, 58, 179, 74], "anchor": [174.0, 64.4], "peak": 23.5, "rect": [165, 52, 181, 70], "base_mad": 0.548, "changed": 99, "out_mad": 0.549, "size_ok": true, "size": [411, 900]}
+{"name": "fig-maid-m42-ty3-a51", "kind": "fig", "score": 0.995, "k": 0.658, "mode": "own", "status": "clean", "box": [156, 58, 166, 73], "anchor": [160.1, 62.2], "peak": 31.9, "rect": [149, 52, 172, 76], "base_mad": 0.594, "changed": 214, "out_mad": 0.596, "size_ok": true, "size": [307, 900]}
+{"name": "fig-maid-m43-ty1-a18", "kind": "fig", "score": 0.995, "k": 0.636, "mode": "own", "status": "clean", "box": [172, 61, 180, 69], "anchor": [175.1, 64.8], "peak": 24.4, "rect": [165, 55, 186, 80], "base_mad": 0.536, "changed": 157, "out_mad": 0.553, "size_ok": true, "size": [294, 900]}
+{"name": "fig-maid-m43-ty1-a26", "kind": "fig", "status": "por_nomark"}
+{"name": "fig-maid-m43-ty1-a36", "kind": "fig", "score": 0.99, "k": 0.646, "mode": "own", "status": "clean", "box": [173, 64, 180, 77], "anchor": [175.4, 68.8], "peak": 21.4, "rect": [166, 57, 186, 79], "base_mad": 0.564, "changed": 150, "out_mad": 0.564, "size_ok": true, "size": [313, 900]}
+{"name": "fig-maid-m43-ty1-a51", "kind": "fig", "status": "por_nomark"}
+{"name": "fig-maid-m43-ty2-a18", "kind": "fig", "score": 0.998, "k": 0.656, "mode": "own", "status": "nomark"}
+{"name": "fig-maid-m43-ty2-a26", "kind": "fig", "status": "por_nomark"}
+{"name": "fig-maid-m43-ty2-a36", "kind": "fig", "status": "por_nomark"}
+{"name": "fig-maid-m43-ty2-a51", "kind": "fig", "status": "por_nomark"}
+{"name": "fig-maid-m43-ty3-a18", "kind": "fig", "status": "por_nomark"}
+{"name": "fig-maid-m43-ty3-a26", "kind": "fig", "status": "por_nomark"}
+{"name": "fig-maid-m43-ty3-a36", "kind": "fig", "score": 0.997, "k": 0.626, "status": "clean", "box": [167, 63, 174, 76], "anchor": [169.8, 68.3], "peak": 22.6, "rect": [160, 56, 180, 86], "base_mad": 0.542, "changed": 216, "out_mad": 0.544, "size_ok": true, "size": [310, 900]}
+{"name": "fig-maid-m43-ty3-a51", "kind": "fig", "status": "por_nomark"}
+{"name": "fig-maid-m44-ty1-a18", "kind": "fig", "score": 0.997, "k": 0.672, "mode": "own", "status": "nomark"}
+{"name": "fig-maid-m44-ty1-a26", "kind": "fig", "score": 0.994, "k": 0.658, "mode": "own", "status": "nomark"}
+{"name": "fig-maid-m44-ty1-a36", "kind": "fig", "score": 0.993, "k": 0.676, "status": "clean", "box": [173, 58, 183, 71], "anchor": [177.5, 63.8], "peak": 26.3, "rect": [166, 52, 189, 82], "base_mad": 0.646, "changed": 240, "out_mad": 0.646, "size_ok": true, "size": [323, 900]}
+{"name": "fig-maid-m44-ty1-a51", "kind": "fig", "score": 0.995, "k": 0.698, "mode": "own", "status": "nomark"}
+{"name": "fig-maid-m44-ty2-a18", "kind": "fig", "score": 0.988, "k": 0.656, "status": "clean", "box": [185, 60, 194, 70], "anchor": [188.5, 63.2], "peak": 19.3, "rect": [178, 53, 200, 81], "base_mad": 0.393, "changed": 246, "out_mad": 0.394, "size_ok": true, "size": [397, 900]}
+{"name": "fig-maid-m44-ty2-a26", "kind": "fig", "score": 0.995, "k": 0.694, "status": "clean", "box": [174, 58, 184, 71], "anchor": [177.9, 62.5], "peak": 25.2, "rect": [168, 51, 190, 82], "base_mad": 0.53, "changed": 278, "out_mad": 0.529, "size_ok": true, "size": [322, 900]}
+{"name": "fig-maid-m44-ty2-a36", "kind": "fig", "score": 0.995, "k": 0.698, "status": "clean", "box": [175, 61, 183, 70], "anchor": [178.2, 64.1], "peak": 22.7, "rect": [168, 54, 189, 81], "base_mad": 0.407, "changed": 224, "out_mad": 0.407, "size_ok": true, "size": [323, 900]}
+{"name": "fig-maid-m44-ty2-a51", "kind": "fig", "status": "por_nomark"}
+{"name": "fig-maid-m44-ty3-a18", "kind": "fig", "status": "por_nomark"}
+{"name": "fig-maid-m44-ty3-a26", "kind": "fig", "status": "por_nomark"}
+{"name": "fig-maid-m44-ty3-a36", "kind": "fig", "status": "por_nomark"}
+{"name": "fig-maid-m44-ty3-a51", "kind": "fig", "status": "por_nomark"}
+{"name": "fig-maid-m45-ty1-a18", "kind": "fig", "status": "por_nomark"}
+{"name": "fig-maid-m45-ty1-a26", "kind": "fig", "score": 0.991, "k": 0.67, "status": "clean", "box": [168, 74, 173, 79], "anchor": [169.7, 76.2], "peak": 25.9, "rect": [161, 67, 179, 89], "base_mad": 0.532, "changed": 151, "out_mad": 0.533, "size_ok": true, "size": [319, 900]}
+{"name": "fig-maid-m45-ty1-a36", "kind": "fig", "status": "por_nomark"}
+{"name": "fig-maid-m45-ty1-a51", "kind": "fig", "status": "por_nomark"}
+{"name": "fig-maid-m45-ty2-a18", "kind": "fig", "score": 0.991, "k": 0.646, "status": "clean", "box": [179, 58, 192, 70], "anchor": [184.0, 64.0], "peak": 30.7, "rect": [172, 51, 198, 75], "base_mad": 0.383, "changed": 216, "out_mad": 0.384, "size_ok": true, "size": [320, 900]}
+{"name": "fig-maid-m45-ty2-a26", "kind": "fig", "score": 0.993, "k": 0.678, "mode": "own", "status": "clean", "box": [159, 65, 168, 76], "anchor": [162.5, 68.4], "peak": 47.6, "rect": [153, 58, 173, 79], "base_mad": 0.362, "changed": 170, "out_mad": 0.362, "size_ok": true, "size": [314, 900]}
+{"name": "fig-maid-m45-ty2-a36", "kind": "fig", "status": "por_nomark"}
+{"name": "fig-maid-m45-ty2-a51", "kind": "fig", "status": "por_nomark"}
+{"name": "fig-maid-m45-ty3-a18", "kind": "fig", "status": "por_nomark"}
+{"name": "fig-maid-m45-ty3-a26", "kind": "fig", "status": "por_nomark"}
+{"name": "fig-maid-m45-ty3-a36", "kind": "fig", "status": "por_nomark"}
+{"name": "fig-maid-m45-ty3-a51", "kind": "fig", "status": "por_nomark"}
+{"name": "fig-maid-m46-ty1-a18", "kind": "fig", "score": 0.996, "k": 0.612, "mode": "own", "status": "nomark"}
+{"name": "fig-maid-m46-ty1-a26", "kind": "fig", "status": "por_nomark"}
+{"name": "fig-maid-m46-ty1-a36", "kind": "fig", "score": 0.995, "k": 0.638, "status": "clean", "box": [156, 60, 167, 66], "anchor": [160.4, 62.0], "peak": 23.0, "rect": [149, 53, 171, 73], "base_mad": 0.658, "changed": 178, "out_mad": 0.658, "size_ok": true, "size": [303, 900]}
+{"name": "fig-maid-m46-ty1-a51", "kind": "fig", "score": 0.995, "k": 0.638, "mode": "own", "status": "nomark"}
+{"name": "fig-maid-m46-ty2-a18", "kind": "fig", "status": "por_nomark"}
+{"name": "fig-maid-m46-ty2-a26", "kind": "fig", "status": "por_nomark"}
+{"name": "fig-maid-m46-ty2-a36", "kind": "fig", "status": "por_nomark"}
+{"name": "fig-maid-m46-ty2-a51", "kind": "fig", "score": 0.998, "k": 0.656, "mode": "own", "status": "nomark"}
+{"name": "fig-maid-m46-ty3-a18", "kind": "fig", "score": 0.997, "k": 0.622, "mode": "own", "status": "nomark"}
+{"name": "fig-maid-m46-ty3-a26", "kind": "fig", "status": "por_nomark"}
+{"name": "fig-maid-m46-ty3-a36", "kind": "fig", "score": 0.992, "k": 0.648, "mode": "own", "status": "nomark"}
+{"name": "fig-maid-m46-ty3-a51", "kind": "fig", "score": 0.994, "k": 0.636, "mode": "own", "status": "nomark"}
+{"name": "fig-maid-m47-ty1-a18", "kind": "fig", "score": 0.995, "k": 0.64, "status": "clean", "box": [146, 78, 154, 86], "anchor": [149.6, 80.9], "peak": 51.1, "rect": [140, 71, 160, 97], "base_mad": 0.561, "changed": 192, "out_mad": 0.559, "size_ok": true, "size": [303, 900]}
+{"name": "fig-maid-m47-ty1-a26", "kind": "fig", "score": 0.996, "k": 0.672, "status": "clean", "box": [155, 66, 164, 74], "anchor": [158.5, 69.1], "peak": 62.1, "rect": [147, 59, 170, 83], "base_mad": 0.567, "changed": 209, "out_mad": 0.567, "size_ok": true, "size": [319, 900]}
+{"name": "fig-maid-m47-ty1-a36", "kind": "fig", "score": 0.993, "k": 0.67, "status": "clean", "box": [162, 67, 171, 76], "anchor": [165.4, 70.9], "peak": 57.0, "rect": [154, 59, 175, 82], "base_mad": 0.616, "changed": 191, "out_mad": 0.615, "size_ok": true, "size": [381, 900]}
+{"name": "fig-maid-m47-ty1-a51", "kind": "fig", "score": 0.992, "k": 0.664, "mode": "own", "status": "nomark"}
+{"name": "fig-maid-m47-ty2-a18", "kind": "fig", "score": 0.996, "k": 0.628, "status": "clean", "box": [147, 80, 156, 89], "anchor": [150.3, 83.2], "peak": 74.4, "rect": [139, 72, 161, 99], "base_mad": 0.483, "changed": 200, "out_mad": 0.486, "size_ok": true, "size": [299, 900]}
+{"name": "fig-maid-m47-ty2-a26", "kind": "fig", "score": 0.998, "k": 0.656, "mode": "own", "status": "clean", "box": [144, 68, 161, 84], "anchor": [147.5, 71.3], "peak": 72.7, "rect": [136, 62, 168, 82], "base_mad": 0.518, "changed": 217, "out_mad": 0.517, "size_ok": true, "size": [300, 900]}
+{"name": "fig-maid-m47-ty2-a36", "kind": "fig", "score": 0.994, "k": 0.672, "status": "clean", "box": [154, 69, 162, 77], "anchor": [157.1, 72.2], "peak": 65.7, "rect": [146, 63, 168, 87], "base_mad": 0.396, "changed": 138, "out_mad": 0.396, "size_ok": true, "size": [373, 900]}
+{"name": "fig-maid-m47-ty2-a51", "kind": "fig", "score": 0.998, "k": 0.674, "status": "clean", "box": [148, 66, 156, 75], "anchor": [150.7, 69.6], "peak": 66.7, "rect": [140, 59, 162, 78], "base_mad": 0.369, "changed": 183, "out_mad": 0.37, "size_ok": true, "size": [307, 900]}
+{"name": "fig-maid-m47-ty3-a18", "kind": "fig", "score": 0.994, "k": 0.628, "status": "clean", "box": [149, 79, 157, 88], "anchor": [152.2, 82.8], "peak": 57.9, "rect": [142, 73, 163, 98], "base_mad": 0.499, "changed": 164, "out_mad": 0.5, "size_ok": true, "size": [303, 900]}
+{"name": "fig-maid-m47-ty3-a26", "kind": "fig", "score": 0.997, "k": 0.638, "status": "clean", "box": [146, 67, 154, 76], "anchor": [148.9, 70.6], "peak": 58.2, "rect": [138, 59, 161, 84], "base_mad": 0.517, "changed": 216, "out_mad": 0.518, "size_ok": true, "size": [305, 900]}
+{"name": "fig-maid-m47-ty3-a36", "kind": "fig", "score": 0.994, "k": 0.67, "status": "clean", "box": [156, 69, 164, 77], "anchor": [159.3, 72.4], "peak": 43.1, "rect": [148, 63, 171, 86], "base_mad": 0.464, "changed": 155, "out_mad": 0.467, "size_ok": true, "size": [371, 900]}
+{"name": "fig-maid-m47-ty3-a51", "kind": "fig", "score": 0.995, "k": 0.66, "mode": "own", "status": "nomark"}
+{"name": "fig-maid-m48-ty1-a18", "kind": "fig", "score": 0.996, "k": 0.626, "mode": "own", "status": "nomark"}
+{"name": "fig-maid-m48-ty1-a26", "kind": "fig", "score": 0.991, "k": 0.64, "status": "clean", "box": [163, 65, 171, 74], "anchor": [166.0, 67.6], "peak": 56.7, "rect": [156, 59, 177, 85], "base_mad": 0.559, "changed": 188, "out_mad": 0.56, "size_ok": true, "size": [307, 900]}
+{"name": "fig-maid-m48-ty1-a36", "kind": "fig", "score": 0.992, "k": 0.642, "status": "clean", "box": [169, 65, 177, 73], "anchor": [171.4, 67.1], "peak": 59.5, "rect": [162, 58, 183, 84], "base_mad": 0.638, "changed": 213, "out_mad": 0.639, "size_ok": true, "size": [317, 900]}
+{"name": "fig-maid-m48-ty1-a51", "kind": "fig", "score": 0.996, "k": 0.626, "status": "clean", "box": [184, 72, 192, 79], "anchor": [186.5, 74.1], "peak": 64.5, "rect": [177, 65, 198, 89], "base_mad": 0.671, "changed": 189, "out_mad": 0.67, "size_ok": true, "size": [323, 900]}
+{"name": "fig-maid-m48-ty2-a18", "kind": "fig", "score": 0.996, "k": 0.596, "status": "clean", "box": [178, 62, 186, 71], "anchor": [180.8, 63.7], "peak": 42.5, "rect": [171, 55, 192, 81], "base_mad": 0.623, "changed": 192, "out_mad": 0.624, "size_ok": true, "size": [324, 900]}
+{"name": "fig-maid-m48-ty2-a26", "kind": "fig", "score": 0.993, "k": 0.66, "status": "clean", "box": [160, 66, 168, 73], "anchor": [162.8, 67.6], "peak": 52.8, "rect": [154, 59, 174, 83], "base_mad": 0.454, "changed": 175, "out_mad": 0.454, "size_ok": true, "size": [302, 900]}
+{"name": "fig-maid-m48-ty2-a36", "kind": "fig", "score": 0.995, "k": 0.624, "status": "clean", "box": [163, 65, 171, 74], "anchor": [166.0, 67.3], "peak": 52.8, "rect": [156, 59, 177, 84], "base_mad": 0.576, "changed": 209, "out_mad": 0.575, "size_ok": true, "size": [310, 900]}
+{"name": "fig-maid-m48-ty2-a51", "kind": "fig", "score": 0.997, "k": 0.626, "status": "clean", "box": [175, 73, 182, 80], "anchor": [177.2, 74.9], "peak": 44.5, "rect": [168, 66, 188, 88], "base_mad": 0.447, "changed": 175, "out_mad": 0.448, "size_ok": true, "size": [307, 900]}
+{"name": "fig-maid-m48-ty3-a18", "kind": "fig", "score": 0.991, "k": 0.598, "mode": "own", "status": "nomark"}
+{"name": "fig-maid-m48-ty3-a26", "kind": "fig", "score": 0.989, "k": 0.644, "status": "clean", "box": [160, 66, 168, 74], "anchor": [162.5, 67.5], "peak": 53.5, "rect": [153, 59, 174, 85], "base_mad": 0.527, "changed": 169, "out_mad": 0.529, "size_ok": true, "size": [302, 900]}
+{"name": "fig-maid-m48-ty3-a36", "kind": "fig", "score": 0.993, "k": 0.636, "status": "clean", "box": [167, 65, 174, 74], "anchor": [169.6, 66.9], "peak": 52.1, "rect": [160, 59, 180, 84], "base_mad": 0.515, "changed": 169, "out_mad": 0.513, "size_ok": true, "size": [320, 900]}
+{"name": "fig-maid-m48-ty3-a51", "kind": "fig", "score": 0.995, "k": 0.622, "status": "clean", "box": [182, 71, 189, 80], "anchor": [184.2, 73.7], "peak": 46.6, "rect": [175, 64, 194, 86], "base_mad": 0.542, "changed": 184, "out_mad": 0.543, "size_ok": true, "size": [322, 900]}
+{"name": "fig-maid-m49-ty1-a18", "kind": "fig", "score": 0.996, "k": 0.638, "status": "clean", "box": [170, 73, 175, 77], "anchor": [171.5, 74.2], "peak": 29.4, "rect": [164, 66, 180, 86], "base_mad": 0.582, "changed": 118, "out_mad": 0.58, "size_ok": true, "size": [364, 900]}
+{"name": "fig-maid-m49-ty1-a26", "kind": "fig", "score": 0.993, "k": 0.648, "status": "clean", "box": [167, 71, 173, 77], "anchor": [168.9, 72.4], "peak": 29.5, "rect": [160, 64, 179, 88], "base_mad": 0.575, "changed": 159, "out_mad": 0.575, "size_ok": true, "size": [315, 900]}
+{"name": "fig-maid-m49-ty1-a36", "kind": "fig", "score": 0.994, "k": 0.632, "status": "clean", "box": [171, 71, 175, 77], "anchor": [172.2, 73.1], "peak": 29.9, "rect": [164, 64, 181, 85], "base_mad": 0.494, "changed": 135, "out_mad": 0.494, "size_ok": true, "size": [322, 900]}
+{"name": "fig-maid-m49-ty1-a51", "kind": "fig", "score": 0.994, "k": 0.618, "status": "clean", "box": [161, 70, 165, 77], "anchor": [161.8, 71.8], "peak": 31.2, "rect": [154, 63, 171, 81], "base_mad": 0.488, "changed": 121, "out_mad": 0.489, "size_ok": true, "size": [319, 900]}
+{"name": "fig-maid-m49-ty2-a18", "kind": "fig", "score": 0.989, "k": 0.65, "status": "clean", "box": [160, 72, 166, 78], "anchor": [161.9, 73.8], "peak": 57.9, "rect": [153, 65, 172, 89], "base_mad": 0.547, "changed": 181, "out_mad": 0.545, "size_ok": true, "size": [357, 900]}
+{"name": "fig-maid-m49-ty2-a26", "kind": "fig", "score": 0.989, "k": 0.648, "status": "clean", "box": [160, 70, 167, 77], "anchor": [162.1, 72.1], "peak": 52.8, "rect": [153, 64, 173, 88], "base_mad": 0.442, "changed": 167, "out_mad": 0.443, "size_ok": true, "size": [304, 900]}
+{"name": "fig-maid-m49-ty2-a36", "kind": "fig", "score": 0.992, "k": 0.632, "status": "clean", "box": [163, 69, 171, 78], "anchor": [165.7, 72.0], "peak": 58.7, "rect": [156, 63, 177, 88], "base_mad": 0.505, "changed": 185, "out_mad": 0.504, "size_ok": true, "size": [302, 900]}
+{"name": "fig-maid-m49-ty2-a51", "kind": "fig", "score": 0.995, "k": 0.644, "status": "clean", "box": [152, 69, 159, 77], "anchor": [154.5, 72.0], "peak": 47.3, "rect": [145, 63, 165, 87], "base_mad": 0.404, "changed": 189, "out_mad": 0.404, "size_ok": true, "size": [296, 900]}
+{"name": "fig-maid-m49-ty3-a18", "kind": "fig", "score": 0.997, "k": 0.642, "status": "clean", "box": [161, 70, 168, 77], "anchor": [163.2, 72.6], "peak": 67.6, "rect": [154, 64, 174, 88], "base_mad": 0.561, "changed": 182, "out_mad": 0.562, "size_ok": true, "size": [358, 900]}
+{"name": "fig-maid-m49-ty3-a26", "kind": "fig", "score": 0.997, "k": 0.658, "status": "clean", "box": [161, 70, 167, 76], "anchor": [163.0, 71.9], "peak": 59.9, "rect": [154, 64, 173, 87], "base_mad": 0.428, "changed": 168, "out_mad": 0.429, "size_ok": true, "size": [306, 900]}
+{"name": "fig-maid-m49-ty3-a36", "kind": "fig", "score": 0.995, "k": 0.636, "status": "clean", "box": [159, 70, 166, 76], "anchor": [161.4, 71.8], "peak": 65.1, "rect": [152, 63, 172, 86], "base_mad": 0.515, "changed": 176, "out_mad": 0.513, "size_ok": true, "size": [305, 900]}
+{"name": "fig-maid-m49-ty3-a51", "kind": "fig", "score": 0.993, "k": 0.634, "status": "clean", "box": [152, 70, 158, 76], "anchor": [153.9, 72.1], "peak": 58.2, "rect": [145, 64, 164, 87], "base_mad": 0.49, "changed": 179, "out_mad": 0.489, "size_ok": true, "size": [302, 900]}
+{"name": "fig-maid-m50-ty1-a18", "kind": "fig", "score": 0.991, "k": 0.618, "status": "clean", "box": [146, 62, 152, 68], "anchor": [147.9, 64.4], "peak": 30.1, "rect": [140, 56, 156, 73], "base_mad": 0.581, "changed": 93, "out_mad": 0.564, "size_ok": true, "size": [291, 900]}
+{"name": "fig-maid-m50-ty1-a26", "kind": "fig", "score": 0.993, "k": 0.622, "status": "clean", "box": [148, 61, 154, 69], "anchor": [150.0, 63.7], "peak": 28.3, "rect": [141, 54, 159, 76], "base_mad": 0.617, "changed": 157, "out_mad": 0.617, "size_ok": true, "size": [294, 900]}
+{"name": "fig-maid-m50-ty1-a36", "kind": "fig", "score": 0.996, "k": 0.66, "status": "clean", "box": [146, 61, 152, 67], "anchor": [147.9, 62.9], "peak": 25.9, "rect": [140, 55, 156, 72], "base_mad": 0.649, "changed": 102, "out_mad": 0.65, "size_ok": true, "size": [293, 900]}
+{"name": "fig-maid-m50-ty1-a51", "kind": "fig", "score": 0.998, "k": 0.628, "status": "clean", "box": [150, 63, 155, 69], "anchor": [151.6, 64.9], "peak": 38.0, "rect": [143, 56, 160, 76], "base_mad": 0.464, "changed": 125, "out_mad": 0.463, "size_ok": true, "size": [295, 900]}
+{"name": "fig-maid-m50-ty2-a18", "kind": "fig", "score": 0.995, "k": 0.64, "mode": "own", "status": "clean", "box": [148, 61, 157, 73], "anchor": [151.5, 65.3], "peak": 30.3, "rect": [141, 55, 162, 82], "base_mad": 0.434, "changed": 161, "out_mad": 0.433, "size_ok": true, "size": [294, 900]}
+{"name": "fig-maid-m50-ty2-a26", "kind": "fig", "score": 0.995, "k": 0.658, "status": "clean", "box": [144, 61, 152, 73], "anchor": [147.3, 64.7], "peak": 31.5, "rect": [137, 54, 158, 82], "base_mad": 0.413, "changed": 235, "out_mad": 0.414, "size_ok": true, "size": [286, 900]}
+{"name": "fig-maid-m50-ty2-a36", "kind": "fig", "score": 0.995, "k": 0.646, "status": "clean", "box": [147, 60, 155, 73], "anchor": [150.2, 63.9], "peak": 24.6, "rect": [140, 53, 161, 84], "base_mad": 0.563, "changed": 234, "out_mad": 0.563, "size_ok": true, "size": [291, 900]}
+{"name": "fig-maid-m50-ty2-a51", "kind": "fig", "score": 0.996, "k": 0.62, "status": "clean", "box": [145, 61, 152, 72], "anchor": [147.5, 65.4], "peak": 36.9, "rect": [138, 55, 158, 82], "base_mad": 0.571, "changed": 206, "out_mad": 0.571, "size_ok": true, "size": [293, 900]}
+{"name": "fig-maid-m50-ty3-a18", "kind": "fig", "score": 0.991, "k": 0.624, "mode": "own", "status": "clean", "box": [153, 61, 161, 73], "anchor": [155.9, 64.2], "peak": 22.5, "rect": [147, 55, 165, 77], "base_mad": 0.546, "changed": 170, "out_mad": 0.546, "size_ok": true, "size": [302, 900]}
+{"name": "fig-maid-m50-ty3-a26", "kind": "fig", "score": 0.99, "k": 0.638, "status": "clean", "box": [149, 62, 156, 73], "anchor": [151.9, 65.2], "peak": 25.1, "rect": [142, 55, 162, 81], "base_mad": 0.521, "changed": 206, "out_mad": 0.521, "size_ok": true, "size": [291, 900]}
+{"name": "fig-maid-m50-ty3-a36", "kind": "fig", "score": 0.995, "k": 0.628, "status": "clean", "box": [150, 60, 158, 69], "anchor": [153.1, 63.5], "peak": 26.0, "rect": [143, 53, 163, 77], "base_mad": 0.507, "changed": 196, "out_mad": 0.508, "size_ok": true, "size": [299, 900]}
+{"name": "fig-maid-m50-ty3-a51", "kind": "fig", "score": 0.995, "k": 0.636, "status": "clean", "box": [145, 62, 151, 69], "anchor": [147.1, 65.8], "peak": 22.8, "rect": [138, 55, 157, 79], "base_mad": 0.523, "changed": 169, "out_mad": 0.522, "size_ok": true, "size": [294, 900]}
+{"name": "fig-maid-m51-ty1-a18", "kind": "fig", "status": "por_nomark"}
+{"name": "fig-maid-m51-ty1-a26", "kind": "fig", "score": 0.99, "k": 0.624, "status": "noface"}
+{"name": "fig-maid-m51-ty1-a36", "kind": "fig", "score": 0.996, "k": 0.64, "mode": "own", "status": "clean", "box": [152, 60, 168, 73], "anchor": [158.9, 65.4], "peak": 32.0, "rect": [146, 55, 173, 69], "base_mad": 0.597, "changed": 56, "out_mad": 0.597, "size_ok": true, "size": [299, 900]}
+{"name": "fig-maid-m51-ty1-a51", "kind": "fig", "score": 0.998, "k": 0.622, "mode": "own", "status": "nomark"}
+{"name": "fig-maid-m51-ty2-a18", "kind": "fig", "score": 0.995, "k": 0.626, "mode": "own", "status": "clean", "box": [177, 60, 192, 78], "anchor": [183.8, 65.6], "peak": 38.3, "rect": [181, 66, 195, 84], "base_mad": 0.376, "changed": 22, "out_mad": 0.376, "size_ok": true, "size": [324, 900]}
+{"name": "fig-maid-m51-ty2-a26", "kind": "fig", "score": 0.992, "k": 0.64, "mode": "own", "status": "nomark"}
+{"name": "fig-maid-m51-ty2-a36", "kind": "fig", "score": 0.988, "k": 0.65, "mode": "own", "status": "nomark"}
+{"name": "fig-maid-m51-ty2-a51", "kind": "fig", "score": 0.993, "k": 0.638, "mode": "own", "status": "nomark"}
+{"name": "fig-maid-m51-ty3-a18", "kind": "fig", "score": 0.994, "k": 0.606, "mode": "own", "status": "nomark"}
+{"name": "fig-maid-m51-ty3-a26", "kind": "fig", "score": 0.99, "k": 0.618, "mode": "own", "status": "nomark"}
+{"name": "fig-maid-m51-ty3-a36", "kind": "fig", "score": 0.993, "k": 0.644, "mode": "own", "status": "nomark"}
+{"name": "fig-maid-m51-ty3-a51", "kind": "fig", "score": 0.991, "k": 0.65, "mode": "own", "status": "nomark"}
+{"name": "fig-maid-m52-ty1-a18", "kind": "fig", "status": "por_nomark"}
+{"name": "fig-maid-m52-ty1-a26", "kind": "fig", "status": "por_nomark"}
+{"name": "fig-maid-m52-ty1-a36", "kind": "fig", "status": "por_nomark"}
+{"name": "fig-maid-m52-ty1-a51", "kind": "fig", "status": "por_nomark"}
+{"name": "fig-maid-m52-ty2-a18", "kind": "fig", "status": "por_nomark"}
+{"name": "fig-maid-m52-ty2-a26", "kind": "fig", "status": "por_nomark"}
+{"name": "fig-maid-m52-ty2-a36", "kind": "fig", "status": "por_nomark"}
+{"name": "fig-maid-m52-ty2-a51", "kind": "fig", "status": "por_nomark"}
+{"name": "fig-maid-m52-ty3-a18", "kind": "fig", "status": "por_nomark"}
+{"name": "fig-maid-m52-ty3-a26", "kind": "fig", "status": "por_nomark"}
+{"name": "fig-maid-m52-ty3-a36", "kind": "fig", "status": "por_nomark"}
+{"name": "fig-maid-m52-ty3-a51", "kind": "fig", "status": "por_error"}
