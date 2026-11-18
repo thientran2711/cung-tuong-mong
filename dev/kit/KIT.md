@@ -3020,6 +3020,9 @@ Chứng cứ về X, Tâm trạng · X) never reveal / meet — a new look-up pa
 <url> [steps] [seeds]` (every dialog the bot sees: site, people shown, stranger before, revealed after); static list `python3 dev/test/face-reveal-sites.py --md`.
 Shots: dev/shots/kit-fig2/.
 
+### 49.4 kitMoodHud — THE MOOD BAR IN THE FIXED TOP BAR (owner 11/18 ~05:40Z) — `dev/build/jmood.js` (mbHud) — KIT READY (owner picked this layout 11/18 ~06:05Z)
+One row under the eight stat cells inside `header.hud` (`#hud-mood.kstm`, grid-column 1/-1 so it follows every top-bar grid variant): her mood seal (emoBadge) · "Tâm trạng" · band word (mbBand, colour class) · `kitSignedBar` (§49.1: calm at the centre, red left / green right) · signed number. Tap or Enter = the existing mood box (`data-emo-open="me"`, jpcf). The number comes from ONE accessor `kitMoodVal()` (moodBar(S) if the npc-chain model is live, else S.mood.v).  Test/shots: `dev/test/hud-mood-shots.js`.
+
 ## 50. kitEventDp — THE event-with-a-person dialog (owner 11/15, replaces 32.6 for events with a person) — `dev/build/jk4.js`
 ONE component for every event where a person appears: NPC visits ("Có người đến"), invitations (Đoan ngọ …), confrontations, the
 Emperor's visits. It is the 32.7 person dialog:
