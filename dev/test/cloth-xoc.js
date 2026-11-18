@@ -10,7 +10,7 @@ for(let y=0;y<H;y++)for(let x=0;x<W;x++){const dx=x-150,dy=y-70;
 for(let y=380;y<430;y++)for(let x=120;x<170;x++)put(x,y,235,190,165);/* hands */
 const face={x:110,y:60,w:80,h:50};
 let ok=true;const t=(c,m)=>{if(!c){ok=false;console.log("FAIL",m)}};
-t(BAL.looks.xoc.on===0,"effect OFF by default");
+t(BAL.looks.xoc.on===1,"effect ON (owner approved)");
 const mk=clothMask(d,W,H,face,BAL.looks.xoc);
 t(mk.skin[400*W+145]===1,"hands are skin");t(mk.m[600*W+150]>.9,"robe is cloth");t(mk.m[70*W+150]<.05,"face is not cloth");
 const sum=[0,0,0,0];
