@@ -12,7 +12,15 @@ const out=o=>console.log(JSON.stringify(o));
   const p=await ctx.newPage();p.setDefaultTimeout(120000);p.errs=[];p.on('pageerror',e=>p.errs.push(e.message));
   await p.goto(BASE,{waitUntil:'domcontentloaded'});await p.waitForFunction(()=>typeof start==='function'&&typeof deser==='function',null,{timeout:300000});await p.evaluate(()=>{const k=document.getElementById('kload');if(k)k.remove()});await p.addStyleTag({content:'#kroul,#kroulw,.kroul{display:none!important}'});await p.waitForTimeout(800);return p}
  async function newLife(p,slot){await p.evaluate(s=>{SLOT=s;window.__forceOrigin='tt';document.getElementById('title').hidden=true;start();showModal()},slot||1);
-  await require('./lib/roulette').passNewLifePopups(p)}
+  /* the entry cards (Tiền truyện, Tuyển chọn, Nhập cung, Mệnh truyện) are queued a moment after start() (Luân hồi waits for the figures): wait for them, then tap them away */
+  await p.waitForFunction(()=>Q.length>0,null,{timeout:30000}).catch(()=>{});await tapEntry(p)}
+ /* tap the entry cards away like a player: a button inside #modal / .kmov / .kmend (never the tour card); stops when nothing is left for 2 s */
+ async function tapEntry(p){let idle=0;for(let t0=Date.now();Date.now()-t0<60000&&idle<3;){await p.waitForTimeout(700);
+   const hit=await p.evaluate(()=>{const vis=x=>x.getBoundingClientRect().width>0&&!x.closest('#ktut,#ktip,#tabs');const bs=[...document.querySelectorAll('#modal button,.kmov button,.kmend,.kbtn.main')].filter(vis);
+    for(const re of [/^Nhận thân phận/,/Cúi đầu/,/^(Tạ ơn|Theo ma ma|Vào cung|Đã hiểu|Tiếp theo|Tiếp)/,/Đóng|Lui|^✕$/]){const o=bs.find(x=>re.test(x.textContent.trim()));if(o){o.click();return 1}}
+    const o=bs.find(x=>x.classList.contains('kopt')||x.classList.contains('main'));if(o){o.click();return 1}
+    return Q.length||!document.getElementById('modal').hidden?1:0});
+   idle=hit?0:idle+1}}
  const shot=(p,n)=>p.screenshot({path:`${OUT}/${TAG}-${n}.jpg`,type:'jpeg',quality:82});
  const metrics=p=>p.evaluate(()=>{const R=e=>{if(!e||e.hidden)return null;const r=e.getBoundingClientRect();return r.width?{x:Math.round(r.left),y:Math.round(r.top),w:Math.round(r.width),h:Math.round(r.height),b:Math.round(r.bottom),r:Math.round(r.right)}:null};
   const card=R(document.querySelector('#ktut .ktut-card')),hole=R(document.querySelector('#ktut .ktut-hole'));const s=KTUT_STEPS[KTUT.step]||{};
@@ -75,10 +83,7 @@ const out=o=>console.log(JSON.stringify(o));
   /* the cards arrive a moment after the load (Q empty at the click), so keep tapping until the ask shows or 25 s pass */
   const askUp=()=>p.evaluate(()=>{const k=document.getElementById('ktut');return !!k&&!k.hidden&&!!document.querySelector('#ktut [data-ktut=yes]')});
   /* the saved sổ is still inside its entry (week 1), so the load replays the cards: Tiền truyện, Tuyển chọn, Nhập cung (kit scene: 'Tạ ơn'), Mệnh truyện. Tap them away like a player (a button inside #modal / .kmov / .kmend, never the tour card) */
-  for(let t0=Date.now();Date.now()-t0<40000&&!await askUp();){await p.waitForTimeout(700);
-   await p.evaluate(()=>{const vis=x=>x.getBoundingClientRect().width>0&&!x.closest('#ktut,#ktip,#tabs');const bs=[...document.querySelectorAll('#modal button,.kmov button,.kmend,.kbtn.main')].filter(vis);
-    for(const re of [/Cúi đầu/,/^(Tạ ơn|Theo ma ma|Vào cung|Đã hiểu|Tiếp theo|Tiếp)/,/Đóng|Lui|^✕$/]){const o=bs.find(x=>re.test(x.textContent.trim()));if(o){o.click();return}}
-    const o=bs.find(x=>x.classList.contains('kopt')||x.classList.contains('main'));if(o)o.click()})}
+  await tapEntry(p);
   const asked=await until(p,()=>{const k=document.getElementById('ktut');return !!k&&!k.hidden&&!!document.querySelector('#ktut [data-ktut=yes]')},15000);await p.waitForTimeout(800);await shot(p,'so-cu-hoi');
   const st=await p.evaluate(()=>({loaded:!!S&&S.tuan===1,name:S&&S.name,on:KTUT.on}));out({TAG,old:st,asked});if(!asked||!st.loaded||st.on)fail('old sổ');
   await p.evaluate(()=>document.querySelector('#ktut [data-ktut=no]').click());await p.waitForTimeout(1500);
