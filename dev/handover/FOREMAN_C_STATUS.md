@@ -300,6 +300,8 @@ FOREMAN C ROOT-7 (art) = session_011xDdVSNJBjnSLg7fhmeVbx · START_CTX ~7% (~70k
 NEXT FOREMAN C-AG: #3 = session_01UV1Szh8FwC7dVrdZpdtNPP (opened by C-AG #2 16:36Z, depth 3; prompt dev/handover/TAKEOVER_FOREMAN_C_AG3.md). C-AG #2 STOPS; wake trig_01CiXSPMiEnC1mkHkHR4GYvC disabled.
 NEXT FOREMAN C-AG: #4 = session_01UV1SzkyZBYRFoSWBF8fg27 (opened by C-AG #3 17:34Z, depth 4; prompt dev/handover/TAKEOVER_FOREMAN_C_AG4.md). C-AG #3 STOPS; wake trig_015RUKUdRjP6BjbfPCYPBA9z disabled.
 NEXT FOREMAN C-AG: #5 = session_01UV1SzkwHkU5MoXKRsprFyU (opened by C-AG #4 18:35Z, depth 5; prompt dev/handover/TAKEOVER_FOREMAN_C_AG5.md). C-AG #4 STOPS; wake trig_0158XmaYdhYu6GqeJWSPB6d7 disabled.
+FOREMAN C-AG #8 = session_01UV1SzgXTgLe5k9TFs9zfGm (main's account, child of C-AG #7) · START_CTX ~8 % (est; get_session reads 0) → roll over at >= 33 %, ceiling 60 % · depth 3 · own hourly wake (:32) · reports to MAIN s41 session_01UV1SzjRPt1nbRqDVLL4KQJ.
+- 01:40Z 18/11 C-AG #8 took over (START_CORE + START_FOREMAN + HANDOVER #7 block + CLAIMS C-AG + OD tail 21:30Z→end read). LOAD: running 4 (LANDER #3 SzjwxQs, AG LATER rv SzkmyAX, SET BONUS builder SzjpfceW, set-bonus rv SzmDekH). Free 8. Waiting s41 LOOKS batch sha.
 ## HANDOVER C-AG #7 (session_01UV1SzgaEMtM9LvcYPr6tdR) → C-AG #8, 01:32Z 18/11
 Why: context 32.4 % (get_session 324k; START ~12 % est) → at line 37 % within a few events. Depth 2 → #8 depth 3. Wake trig_01585BbyDdBJna2iWYxX9hxW DISABLED (#8 makes its own at :32).
 MAIN = s41 session_01UV1SzjRPt1nbRqDVLL4KQJ (PASS shas → s41; foremen do NOT FF main).

@@ -954,7 +954,7 @@
 | dudo-blank review r1 (sonnet SMALL) of f59c965a | review/dudo-blank-r1 | D | session_01964izF1pwkGy4nxwo8Q4iK | DONE PASS 2270c4c5 → FOR MAIN (builder lands; archived) | 17/11 21:20Z |
 | batch s37a LIVE 99f3978d (main 4c8568f5 → 99f3978d; ROLLBACK 4c8568f5): display-shelf-r3rv 41418cd8 (5 per group, ui=0) | review/batch-s37a | MAIN s37 | session_01UV1SzjA6P5mZskv3JKn3BV | LIVE | 17/11 21:27Z |
 | NPC-CHAIN LANDER (opus; one head ag-all-2+MOODKNOW+mood-mem+feelings-18+kit-figure-mood r6 on main; s37 21:17Z) | review/npc-chain-land | C-AG | session_01UV1Szi7UbTAbk3W9QSD6h7 | ROLLED OVER → SzhJFho (archived) | 17/11 21:26Z |
-| FOREMAN C-AG #7 (opus; successor of #6, opened by MAIN s38) | handover FOREMAN_C_STATUS | MAIN s38 | session_01UV1SzgaEMtM9LvcYPr6tdR | RUNNING | 17/11 21:36Z |
+| FOREMAN C-AG #7 (opus; successor of #6, opened by MAIN s38) | handover FOREMAN_C_STATUS | MAIN s38 | session_01UV1SzgaEMtM9LvcYPr6tdR | ROLLED OVER → SzgXTgL | 17/11 21:36Z |
 | toil blush final (owner row 3, OD L1721): BAL.toil dep bl .2304 / tuyet bl .2428 on toil-looks5 v18 → SMALL review → batch (sonnet) | review/toil-looks5 | MAIN s38 | session_01UV1SzhA7otHzXMdiSEqbyd | SẴN SÀNG KIỂM 79060f5a+ (owner picks applied: Doan 60 %, Kieu 60 %, Khuynh 80 %, Cam anh do; QC PASS; reports/toil-looks5.md v24) | 18/11 00:25Z |
 | REVIEW display-set-bonus (opus BIG; successor of SzkUH3p) | review/display-set-bonus | C-AG | session_01UV1SzmDekHiFMVcVBmxdRT | RUNNING | 17/11 21:38Z |
 | tuyet-glow SAMPLE (Khuynh thành glossy glowing skin + moving light streak; owner OD ~21:55Z; sample first) (sonnet) | review/tuyet-glow | MAIN s38 | session_01UV1SzjKnHbwdNpGhhNLbnS | DONE v8 1c4ea403 APPROVED, in review/looks-s40; CDN shots wiped | 17/11 21:53Z |
@@ -990,3 +990,4 @@ looks-2 overlay art (fx-stain-tra/uot, smudge, ink, pox, scars, messy hair) | im
 | STAFF-CAP TABLE (measure only: B2/D1/D2/D3/A/low-rank, avg + worst case, Fold 4x perf, co-op, thân cận-brain variant; opus; brief briefs/staff-cap-table.md) | review/staff-cap-table | MAIN s41 | session_01UV1SzkENdmyJBzB9tXt38F | TABLE READY: reports/staff-cap-table.md (D2 26–27 rec; perf flat) | 18/11 03:30Z |
 | smudge-code r16 (extra short run at nặng, big-size darker, +10/+20 % options; sonnet; brief briefs/smudge-r16.md) | review/smudge-code | MAIN s41 | session_01UV1SzhMG33iYZzEKjZvDzg | READY | SẴN SÀNG KIỂM r16 7f4d2ad 18/11 |
 | NPC LANDER #3 (opus): ag-toil2 + coop-toil-look fixes, looks-batch merge, gates → SẴN SÀNG KIỂM | review/ag-all-2-land, review/npc-chain-land | C-AG | session_01UV1SzjwxQsdQj14imrii9S | RUNNING | 18/11 01:30Z |
+| FOREMAN C-AG #8 (opus; successor of #7, opened by C-AG #7) | handover FOREMAN_C_STATUS | C-AG #7 | session_01UV1SzgXTgLe5k9TFs9zfGm | RUNNING | 18/11 01:40Z |
