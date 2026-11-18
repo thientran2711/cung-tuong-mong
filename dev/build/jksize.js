@@ -295,7 +295,7 @@ window.kitPicSubj=kitPicSubj;
 /* S event picture = ONE standard kit size (owner 16/11 19:54Z: no stretched ratio): KIT_SIZE.pic[V.picS] (PM 120x160, 3:4), centred in the body */
 .ksz3 .k3main.k3mpic{flex:none;width:${Z.pic[V.picS].w}px;height:${Z.pic[V.picS].h}px;min-height:0;align-self:center}
 .ksz3[data-pres="fig"] .k3body>.k3main.k3mpic.k3fill{align-self:stretch;height:auto;min-height:${Z.pic[V.picS].h}px}/* KIT 84c: person-less main picture fills its column */
-.ksz3 .k3ev{flex:1 1 auto;min-height:${V.evMin.fig}px}.ksz3[data-pres="one"] .k3ev{min-height:${V.evMin.one}px}
+.ksz3[data-evfit="x"] .k3ev{display:none}.ksz3 .k3ev{flex:1 1 auto;min-height:${V.evMin.fig}px}.ksz3[data-pres="one"] .k3ev{min-height:${V.evMin.one}px}
 .ksz3 .k3mpic>.ksart,.ksz3 .k3ev>.ksart{position:absolute;inset:0;width:100%;height:100%;aspect-ratio:auto;margin:0;border:0;box-shadow:none;border-radius:0}
 .ksz3 .k3mpic>.ksart img,.ksz3 .k3ev>.ksart img{width:100%;height:100%;object-fit:cover;display:block}
 .ksz3 .k3btns{display:grid;grid-template-columns:repeat(var(--k3c,1),minmax(0,1fr));gap:${V.btn.gap}px;flex:none}
@@ -334,7 +334,7 @@ function kszFrame3(sp,K){const V=KIT_SIZE.v3,pres=V.pres[K]||"fig",foc=V.focus[s
 /* crop every event picture around its subject; strips never shorter than the subject (returns nothing; sets min-height + object-position) */
 const KSZ_NAT={};/* natural sizes of event pictures seen, so a frame built later (picker) knows its subject's height before the picture decodes */
 function kszEvMin3(c){const im=c.querySelector("img"),src=im&&im.getAttribute("src")||"";if(im&&im.naturalWidth)KSZ_NAT[src]=[im.naturalWidth,im.naturalHeight];const n=KSZ_NAT[src];
- const base=KIT_SIZE.v3.evMin[(c.closest(".ksz3")||{dataset:{}}).dataset.pres]||56;const sj=c.dataset.subj?c.dataset.subj.split(",").map(Number):null;if(!sj||!n||!c.classList.contains("k3ev"))return base;
+ const base=KIT_SIZE.v3.evMin[(c.closest(".ksz3")||{dataset:{}}).dataset.pres]||56;if((c.closest(".ksz3")||{dataset:{}}).dataset.evfit==="s")return base;/* LAW 10: options do not fit -> the picture is the short strip */const sj=c.dataset.subj?c.dataset.subj.split(",").map(Number):null;if(!sj||!n||!c.classList.contains("k3ev"))return base;
  const w=c.clientWidth;const NM=KIT_SIZE.pic.NM;return Math.max(base,Math.min(Math.ceil(w*NM.h/NM.w),Math.ceil((sj[3]-sj[1])*n[1]*(w/n[0])*1.06)))/* the strip's floor is at most the standard NARROW strip ratio (NM 300x84): a taller subject is shown whole by kitPicFocus (zoom-out), never by a taller frame */}
 function kszPicFit3(root){root.querySelectorAll(".k3ev,.k3mpic").forEach(c=>{const im=c.querySelector("img");if(c.classList.contains("k3ev"))c.style.minHeight=kszEvMin3(c)+"px";if(!im||!im.naturalWidth)return;kitPicFocus(c,im)})}
 /* kitPicFocus(box, img) — THE focal crop (owner 16/11 19:54Z "cái lá thư chưa có đúng vị trí"; owner 21:1xZ: the picture ALWAYS FILLS its frame, never letterboxed / blur-padded):
@@ -516,7 +516,10 @@ function kitFrameApplyLive3(dlg){try{kszFeetFit(dlg)}catch(e){}const g=dlg.query
  const R=dlg.querySelector(".k3right"),L=dlg.querySelector(".k3body>.kszfig,.k3body>.k3mpor");
  if(R){R.style.maxHeight="";R.style.overflow="";R.style.minHeight=L?L.offsetHeight+"px":(dlg.dataset.pres==="one"?KIT_SIZE.v3.picMinS+"px":"");if(dlg.dataset.ksz==="XL"&&L){/* XL (approved #3): the body stays the figure's height; more content scrolls inside the info column */
   {const kb=dlg.querySelector(".k3body");R.style.maxHeight=Math.max(L.offsetHeight,kb?kb.clientHeight:0)+"px"}/* tall phone frame (kit §6.2c): the info column may use the whole grown body, not only the figure height */R.style.overflow="auto"}}
- kszPicFit3(dlg);kszPicFit3(dlg);return dlg.dataset.ksz}
+ kszPicFit3(dlg);kszPicFit3(dlg);kszEvLaw10(dlg);return dlg.dataset.ksz}
+/* LAW 10 (START_CORE, owner 18/11 ~16:05Z): a big scene picture only when the content fits without scrolling. When the option list scrolls: 1) the picture shrinks to the short strip (evMin), 2) still scrolling: the picture is dropped. Whole group (every live option frame, every tier, Fold + iPad). */
+function kszEvLaw10(dlg){const R=dlg.querySelector(".k3right"),ev=R&&R.querySelector(":scope>.k3ev");if(!ev)return;const o=R.querySelector(":scope>.opts"),sc=()=>o&&o.scrollHeight>o.clientHeight+1;
+ delete dlg.dataset.evfit;if(!sc())return;dlg.dataset.evfit="s";kszPicFit3(dlg);if(!sc())return;dlg.dataset.evfit="x";kszPicFit3(dlg)}
 function kitFrameFitsLive3(dlg,strict){const K=dlg.dataset.ksz;if(K==="XL"&&!strict)return true;if(/^N/.test(K)){const mb=document.getElementById("mb");return !mb||mb.scrollHeight<=mb.clientHeight+1}/* narrow: only the screen limits the stack: nothing may scroll inside the frame body */const R=dlg.querySelector(".k3right"),L=dlg.querySelector(".k3body>.kszfig,.k3body>.k3mpor"),ev=R&&R.querySelector(":scope>.k3ev");if(!R)return true;
  const mh=R.style.minHeight,mx=R.style.maxHeight;R.style.minHeight="";R.style.maxHeight="";if(ev){ev.style.flex="none";ev.style.height=kszEvMin3(ev)+"px"}
  const need=R.offsetHeight;if(ev){ev.style.flex="";ev.style.height=""}R.style.minHeight=mh;R.style.maxHeight=mx;const lh=L?L.offsetHeight:0;
