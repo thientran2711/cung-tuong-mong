@@ -329,6 +329,7 @@
 | MOOD-MEM memory 2 layers + ghen feeling label (opus; OD L1678 (b)(g); after ag-moodknow) | review/mood-mem | C-AG | session_01UV1SzgwGeesPrLKFMeBNdz | RUNNING | 17/11 18:27Z |
 | WX-ANIM weather animation audit + fill + no 2nd icon (sonnet; OD L1678 (h)(i)) | review/wx-anim | C-AG | session_01UV1Szj67Gao9H4xeEuLrY9 | DONE be36f27 (archived) | 17/11 18:27Z |
 | day-khac review ROUND 2 (opus BIG, successor reviewer) of 9e7ddc14 | review/day-khac-audit-r1 | D | session_01964izEHVzU6h14EnvhUm8C | PASS 46900ee2 (FOR MAIN; fixed by D ROOT 18/11 06:08Z) | 17/11 18:30Z |
+| day-khac review ROUND 2 (opus BIG, successor reviewer) of 9e7ddc14 | review/day-khac-audit-r1 | D | session_01964izEHVzU6h14EnvhUm8C | RUNNING | 17/11 18:30Z |
 | day-khac review ROUND 2 verdict | review/day-khac-audit-r1 | D | session_01964izEHVzU6h14EnvhUm8C | DONE PASS 46900ee2 → FOR MAIN (builder lands; archived) | 17/11 19:05Z |
 | DISPLAY ROOM kit UI (owner option 1, OD ~18:33Z (3)): full-screen room, shelves 2×6 / 1×12, per-shelf tư trang drawer filtered by group — kit part for C-AG display-shelf builder | review/kit-display-room | MAIN s35 | session_01UV1SzisVVpBnxyKZsxjCfY | RUNNING | 17/11 18:34Z |
 | REVIEW hoa-dien fa483a8ed delta on makeup-lux (opus BIG; brief briefs/review-hoa-dien.md) | review/hoa-dien-r1 | B | session_01N1tNP4LhhQaE7j3FQW5NGV | PASS review/hoa-dien-r1 67b18b1e (reviewer fixes: tolD .45→.24 medium 26 % top, sprite fallback; lands after makeup-lux; report reports/review-hoa-dien.md) | 17/11 18:40Z |
@@ -347,6 +348,7 @@
 | REVIEW display-shelf (opus BIG) of e0a86875 | review/display-shelf | C-AG | session_01UV1SzkUH3pxqYSkZMUQX7v | ROLLED OVER → SzmDekH (archived) | 17/11 19:09Z |
 | REVIEW kit-figure-mood r3 of 5758b6e3 (sonnet SMALL; brief briefs/s36-review-kit-figure-mood-r3.md) | review/kit-figure-mood-r3 | MAIN s36 | session_01UV1Szh4nqVY4zaK7Nk1kui | RUNNING | 17/11 19:12Z |
 | odds-cap review r1 (opus BIG) of d3589f39 | review/odds-cap-r1 | D | session_01964izEqMuRVcBrUFRY8F3P | DONE (superseded by r2/r3; fixed by D ROOT 18/11 06:08Z) | 17/11 19:15Z |
+| odds-cap review r1 (opus BIG) of d3589f39 | review/odds-cap-r1 | D | session_01964izEqMuRVcBrUFRY8F3P | RUNNING | 17/11 19:15Z |
 | REVIEW moodknow final + mood-mem step0 (opus) of 8e2ac171 | review/mood-mem-r1 | C-AG | session_01UV1SzgWE17y4bj2Nh4xG1c | RUNNING | 17/11 19:16Z |
 | MOOD-MEM #2 (opus): memory 2 layers (b) on 8e2ac171 + step0 test runs | review/mood-mem | C-AG | session_01UV1Szigr35QvLkVSd2Vb9L | RUNNING | 17/11 19:17Z |
 | batch s36a-1 LIVE 579e8976 (main d4a850ce → 579e8976; ROLLBACK d4a850ce): kit-figure-mood-r2 + kit-fx-register-r1 | review/batch-s32a | MAIN s36 | session_01UV1SzgWoEmnjTTEv7UgBNP | LIVE | 17/11 19:19Z |
@@ -478,6 +480,7 @@ c12 a18 t5–t8 headdress re-do from live originals (Round 43) | claude/cung-tuo
 | E5 QUESTLINE Q0 docs (sonnet SMALL; briefs/E5-questline-q0-docs.md) | review/questline-q0 | E ROOT | session_01DgYSWpZXvejYRmdjtJ3Ccz | READY FF review/questline-q0-ff 8a1955dc (archived) (reports/questline-q0.md) | 18/11 |
 | E6 QUESTLINE H1 expert (opus research; briefs/E6-questline-h1-expert.md) | handover reports/questline-expert.md | E ROOT | session_01DgYSWm57KGQqbv88WBygrf | DONE 7054248d (reports/questline-expert.md) | 18/11 05:12Z |
 | hud-mood-bar (owner UI 18/11 05:40Z: mood bar in the fixed top bar; sonnet; brief briefs/hud-mood-bar.md) | review/hud-mood-bar | MAIN ROOT-45 | session_01UV1SzqhsL3P2mWnTbwVdqs4 | SẴN SÀNG KIỂM 04bb279 → reviewer PASS 04bb279 (18/11) | 18/11 05:11Z |
+| hud-mood-bar (owner UI 18/11 05:40Z: mood bar in the fixed top bar; sonnet; brief briefs/hud-mood-bar.md) | review/hud-mood-bar | MAIN ROOT-45 | session_01UV1SzqhsL3P2mWnTbwVdqs4 | SẴN SÀNG KIỂM 7f4edf7 | 18/11 05:11Z |
 | kit-set-lines (KIT REQUEST (6) set lines + set glow; sonnet; brief briefs/kit-set-lines.md) | review/kit-set-lines | MAIN ROOT-45 | session_01UV1SzjWm6MjjuvYcLJ4Nnr | READY 699bc1b | 18/11 05:12Z |
 Tuần lục figure clip preview (test-page only, code note for main) | claude/cung-tuong-mong-handover-hj0h8w (report) + _review CDN | session_011xDdVR5MwB2XTmgGcLEKkx | DONE | 2026-11-18T05:50Z
 | E3r REVIEW hall-names b5315ff (sonnet SMALL; briefs/E3r-review-hall-names.md) | review/hall-names | E ROOT | session_01DgYSWpMzeXxqEAbLCfJGJE | RUNNING | 18/11 05:15Z |
@@ -489,6 +492,10 @@ art-matrix planner (MAIN s43 order) | claude/cung-tuong-mong-handover-hj0h8w (re
 | mg-skip-all (owner 18/11 05:55Z: quick option on EVERY mini-game incl. makeup, one kit button + BAL key 40; opus; brief briefs/mg-skip-all.md; absorbs D skip-odds-40) | review/mg-skip-all | MAIN ROOT-45 | session_01UV1Szjuwc7PJM75kQAAyPf | RUNNING (code fdd2862 pushed; tests + shots next) | 18/11 05:16Z |
 | E7a QUESTLINE Q1a help-hồi text (opus; briefs/E7-questline-q1.md) | review/questline-q1a | E ROOT | session_01DgYSWpyUqEzbbzMAtLMkNM | SẴN SÀNG KIỂM 98cb3955 (reports/questline-q1a.md) | 18/11 05:22Z |
 | E7b QUESTLINE Q1b help-hồi text (opus; briefs/E7-questline-q1.md) | review/questline-q1b | E ROOT | session_01DgYSWqDaerQBfKu5bPRkef | SẴN SÀNG KIỂM 255f5b2a on q1a (reports/questline-q1b.md) | 18/11 06:40Z |
+| emo-seal-vanish (owner bug 18/11 05:50Z: maid's emotion seal vanishes after closing its box; sonnet; brief briefs/emo-seal-vanish.md) | review/emo-seal-vanish | MAIN ROOT-45 | (opening) | RUNNING | 18/11 05:14Z |
+| mg-skip-all (owner 18/11 05:55Z: quick option on EVERY mini-game incl. makeup, one kit button + BAL key 40; opus; brief briefs/mg-skip-all.md; absorbs D skip-odds-40) | review/mg-skip-all | MAIN ROOT-45 | session_01UV1Szjuwc7PJM75kQAAyPf | RUNNING (code fdd2862 pushed; tests + shots next) | 18/11 05:16Z |
+| E7a QUESTLINE Q1a help-hồi text (opus; briefs/E7-questline-q1.md) | review/questline-q1a | E ROOT | session_01DgYSWpyUqEzbbzMAtLMkNM | RUNNING | 18/11 05:22Z |
+| E7b QUESTLINE Q1b help-hồi text (opus; briefs/E7-questline-q1.md) | review/questline-q1b | E ROOT | session_01DgYSWqDaerQBfKu5bPRkef | SẴN SÀNG KIỂM 344e1e92 (reports/questline-q1b.md) | 18/11 06:05Z |
 | E7c QUESTLINE Q1c help-hồi text (opus; briefs/E7-questline-q1.md) | review/questline-q1c | E ROOT | session_01DgYSWmbeLw227mrkMikC5W | HANDOVER 6dc4222 (reports/questline-q1c.md) | 18/11 05:22Z |
 | E7a QUESTLINE Q1a help-hồi text (opus; briefs/E7-questline-q1.md) | review/questline-q1a | E ROOT | (opening) | RUNNING | 18/11 05:22Z |
 | E7b QUESTLINE Q1b help-hồi text (opus; briefs/E7-questline-q1.md) | review/questline-q1b | E ROOT | (opening) | RUNNING | 18/11 05:22Z |
@@ -502,6 +509,12 @@ art-matrix planner (MAIN s43 order) | claude/cung-tuong-mong-handover-hj0h8w (re
 | NPC-PURPOSE G1 #4 integrator (opus; successor of Szm7n34; G1 done 964cfa7, merge G3 63007f9 + G2) | review/npc-purpose | C-AG #10 | session_01UV1SzktT6YzdpEuSryJ3J1 | RUNNING | 18/11 05:32Z |
 | REVIEW cloth-bake-static r1 (sonnet SMALL) of 16b4dad8 | review/cloth-bake-static(-r1) | B | session_01N1tNP6FHq1uXMKTRfLvg5j | PASS review/cloth-bake-static-r1 9bbd78b7 | 18/11 06:20Z |
 | lyf-tier (her own figure shows cold-palace art when S.lyF exists; sonnet; brief briefs/lyf-tier.md) | review/lyf-tier | MAIN ROOT-45 | session_01UV1SziSpBo8hzq6RBRQ8a6 | READY (22dac5c) | 18/11 05:34Z |
+| title-stale-sel: tutorial replay button + stale title/slot hooks in dev/build (sonnet) | review/title-stale-sel | D | session_01964izDPrh93BaEXpXEpCjz (SMALL review of bc853163; worker archived) | RUNNING | 18/11 05:20Z |
+| E4r REVIEW monthly-ration a0f3f53 (opus BIG; briefs/E4r-review-monthly-ration.md) | review/monthly-ration | E ROOT | session_01DgYSWm8bfGptYDVPCJ69bw | FAIL a0f3f53 (reports/monthly-ration-review.md) | 18/11 05:28Z |
+| person-dialog-restore (owner bug ANGRY 18/11 06:10Z: 'đã biết' notice in column + empty band + no group tabs + tall cards; sonnet; brief briefs/person-dialog-restore.md) | review/person-dialog-restore | MAIN ROOT-45 | (opening) | RUNNING | 18/11 05:22Z |
+| NPC-PURPOSE G1 #4 integrator (opus; successor of Szm7n34; G1 done 964cfa7, merge G3 63007f9 + G2) | review/npc-purpose | C-AG #10 | session_01UV1SzktT6YzdpEuSryJ3J1 | RUNNING | 18/11 05:32Z |
+| REVIEW cloth-bake-static r1 (sonnet SMALL) of 16b4dad8 | review/cloth-bake-static(-r1) | B | session_01N1tNP6FHq1uXMKTRfLvg5j | PASS review/cloth-bake-static-r1 9bbd78b7 | 18/11 06:20Z |
+| lyf-tier (her own figure shows cold-palace art when S.lyF exists; sonnet; brief briefs/lyf-tier.md) | review/lyf-tier | MAIN ROOT-45 | (opening) | RUNNING | 18/11 05:34Z |
 | REVIEW kit-set-lines 699bc1b (SMALL; sonnet; brief briefs/review-kit-set-lines.md) | review/kit-set-lines | MAIN ROOT-45 | session_01UV1Szi-SMALL-REVIEWER | DONE PASS 699bc1b | 18/11 05:34Z |
 | E4f monthly-ration FIX 1 (opus; briefs/E4f-monthly-ration-fix1.md; E4 rolled over, E4r FAIL a0f3f53) | review/monthly-ration | E ROOT | session_01DgYSWpaM3yuPRsuWXP8kqd | RUNNING | 18/11 05:42Z |
 | REVIEW map-tap-go 1996eca (BIG; opus; brief briefs/review-map-tap-go.md) | review/map-tap-go | MAIN ROOT-45 | session_01UV1SzjFu8b4mksbwcWenpd | DONE FAIL 6196e4f | 18/11 05:39Z |
@@ -523,3 +536,10 @@ M1 emperors emp1..4 a26/a36/a51 | _review CDN men/emperor | C | session_011xDdVQ
 Audit live consort figures c01–c32 (2K redo / m09 skin) | handover reports/consort-live-audit.md | C | session_011xDdVQBTXU7CBRNL2FPEVf | DONE | 2026-11-18T06:05Z
 | REVIEW lyf-tier 22dac5c (SMALL; sonnet; prompt inline) | review/lyf-tier | MAIN ROOT-46 | session_01UV1SzkwG1gCApRdP2jjZYj | RUNNING | 18/11 06:09Z |
 | REVIEW buoi-banner 8b50182 (SMALL; keep animation, drop backdrop; owner opacity pick in the morning) | review/buoi-banner | MAIN ROOT-46 | session_01UV1SzgYgbwU8fMtXp6MSMc | RUNNING | 18/11 06:10Z |
+| face-reveal-anim (owner 18/11 06:20Z: grey avatar/silhouette → real face appears in place; sonnet; brief briefs/face-reveal-anim.md) | review/face-reveal-anim | MAIN ROOT-45 | (opening) | RUNNING | 18/11 05:43Z |
+| buoi-banner (owner 18/11 06:20Z canon overwrite: buổi title only, light frame under the top bar, 70-85 % ladder; sonnet; brief briefs/buoi-banner.md) | review/buoi-banner | MAIN ROOT-45 | session_01UV1Szgw3GFqKAN87sYCdcE | READY FOR CHECK be73c79 | 18/11 05:43Z |
+| REVIEW face-zoom-stretch 717c0c0 (SMALL; sonnet; brief briefs/review-face-zoom-stretch.md) | review/face-zoom-stretch | MAIN ROOT-45 | session_01UV1SziAxSDPpYWySX2aPeP | RUNNING | 18/11 05:43Z |
+| toil-react-top (live test fail 'modal is on top' ×2; ORDER ROOT-46 05:55Z) | review/toil-react-top | D | (to open) | ORDERED | 18/11 05:55Z |
+| FOREMAN E ROOT #2 (opus; successor of E ROOT SzmtCW13) | handover FOREMAN_E_STATUS | E ROOT | session_01DgYSWqAEkHoFF4gFWC5Yxg | RUNNING | 18/11 05:57Z |
+| REVIEW hud-mood-bar 04bb279 (SMALL; sonnet; brief briefs/review-hud-mood-bar.md) | review/hud-mood-bar | MAIN ROOT-46 | session_01UV1Szgt5ATvToTiS3v5M3Z | RUNNING | 18/11 05:54Z |
+| place-stage r5 (owner pick B 501 + vivid marker + 4-person iPad trial; sonnet; brief briefs/place-stage-r5.md; r4 SzjeRxj archived) | review/place-stage | MAIN ROOT-46 | session_01UV1SzkV3Bc1u4BHrVH1jFj | RUNNING | 18/11 05:54Z |
