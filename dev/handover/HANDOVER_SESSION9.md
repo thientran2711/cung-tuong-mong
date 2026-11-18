@@ -935,3 +935,4 @@ LESSONS s39: look at neighbours side by side before asking her to pick (A/B/C gl
 - (18/11 00:44Z) smudge r11 46f6903 (flush ~1/3 in lv2/3) looked OK → smudge-2/3 sent owner (Lượt 15).
 - (18/11 00:48Z) OWNER: wet FAIL (overlay darkens neck skin, seam around hands) → cloth-xoc: skin-exclusion mask for ALL cloth layers + wet redo (Magnific decals allowed). Glow v7 APPROVED, stars a bit smaller → tuyet-glow worker; reviewer looks-s40 to take the new glow sha. hoa điền Tần→Phi 12.5 % (canon overwrite of 00:05Z line) → hoa-dien r3.
 - (18/11 00:50Z) OWNER: Tần→Phi stays 12 % ('để 12 đi') → 12.5 cancelled, OD line overwritten in place.
+- (18/11 00:51Z) OWNER FINAL: Tần→Phi 12.5 % ('Thôi sửa lại đi, 12.5') → hoa-dien r3 told; OD line overwritten in place.
