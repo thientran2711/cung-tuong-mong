@@ -48,3 +48,4 @@ princess-sample (Nam Chiếu + Bắc Địch, 2 figures, sample only) | handover
 | LAND-E: q0-ff + hall-names + monthly-ration-r6 + steal-minigame stacked on newest main (sonnet lander; brief briefs/root50-land-e.md) | review/land-e | MAIN ROOT-50 | session_01UV1Szgqm1V3Q2nHLNtTnK7 | READY 5bb50424 HELD for C-AG | 18/11 08:50Z |
 | E7r4 re-review q1a 90796d3 + q1b 7f12b48c (+q1c 154506f rebase) (opus BIG) | review/questline-q1a/b/c | E ROOT #3 | session_01DgYSWnPaLxwygTLN5J8FwP | RUNNING | 18/11 08:37Z |
 | REVIEW fullbody-frame r5+s2 824cfccf (sonnet SMALL UI; brief briefs/root50-review-fullbody-frame.md) | review/fullbody-frame-s2 | MAIN ROOT-50 | session_01UV1SzhAzQ2MZqRroHgFoiK | LIVE 33e98993 | 18/11 08:50Z |
+poison-road-fix | review/poison-road-fix | (opening) | RUNNING | 18/11 09:15Z | owner D #1
