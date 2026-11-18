@@ -287,9 +287,10 @@ function j95sync(watch,plan){if(!j95on())return;let R=S.roster;if(!R||R.key!==j9
  for(const id in R.P)if(!ids[id]){delete R.P[id]}
  /* her own line: past khắc keep where she was, now and later = where she stands */
  const me=j95mePlace();for(let i=kh;i<4;i++)R.P.me[i]=[me,me==="home"?"rest":"here",null,"ngươi tự chọn"];
- if(R.P["mm:me"])for(let i=kh;i<4;i++)R.P["mm:me"][i]=S.out?["lc","serve","me","hầu chủ ở lãnh cung"]:me==="home"?["home","serve","me","phận sự trong cung"]:[me,"follow","me","theo hầu ngươi"];
+ const SLV=typeof j95sOn==="function"&&j95sOn();/* j95s live servants: her people's rows are written by j95sPass (retinue + their own day) */
+ if(R.P["mm:me"]&&!SLV)for(let i=kh;i<4;i++)R.P["mm:me"][i]=S.out?["lc","serve","me","hầu chủ ở lãnh cung"]:me==="home"?["home","serve","me","phận sự trong cung"]:[me,"follow","me","theo hầu ngươi"];
  /* staff whose owner fell / rose: follow the owner's new home */
- for(const p of ppl)if((p.kind==="st"||p.kind==="mm")&&p.ref!==S){const e=R.P[p.id];for(let i=kh;i<4;i++){if(e[i][1]!=="follow"&&e[i][1]!=="errand"&&!/^ag_/.test(e[i][1])/* AG-ALL: her own planned deed (jagday) */&&e[i][0]!==p.home)e[i]=[p.home,"serve","v"+p.ref.id,"phận sự trong cung"]}}
+ if(!SLV)for(const p of ppl)if((p.kind==="st"||p.kind==="mm")&&p.ref!==S){const e=R.P[p.id];for(let i=kh;i<4;i++){if(e[i][1]!=="follow"&&e[i][1]!=="errand"&&!/^ag_/.test(e[i][1])/* AG-ALL: her own planned deed (jagday) */&&e[i][0]!==p.home)e[i]=[p.home,"serve","v"+p.ref.id,"phận sự trong cung"]}}
  /* jplx lists can change inside a buổi (a servant punished to Tân Giả khố, the rest list): now and later khắc follow them */
  for(const p of ppl){if((p.kind!=="px"&&p.kind!=="st")||!p.ref)continue;const e=R.P[p.id];if(!e)continue;const oid=p.ref===S?"me":"v"+p.ref.id;
   for(let i=kh;i<4;i++){const x=e[i];if(p.kind==="px"){if(x[0]!==p.home)e[i]=p.home==="tgk"?["tgk","laundry",oid,"bị phạt giặt giũ ở Tân Giả khố"]:["cnh","offduty",oid,"đến lượt nghỉ tay"]}
@@ -327,7 +328,7 @@ function j95fixHouse(R,kh,ppl){let n=0;const st=J95.stat;
   if(!v||!v.alive||v.out)ty[i]=["tyv","brew",null,"trực Thái y viện"];else if(x[0]!==palaceOf(v))ty[i]=[palaceOf(v),x[1],x[2],x[3]]}
  for(const p of ppl){const e=R.P[p.id];if(!e)continue;
   if(p.kind==="kid"){for(let i=kh;i<4;i++)if(e[i][0]!==p.home){e[i]=[p.home,e[i][1],null,e[i][3]];n++}continue}
-  if(p.kind!=="mm"&&p.kind!=="st")continue;const o=p.ref;if(o===S&&p.kind==="mm")continue;const oid=o===S?"me":"v"+o.id;const op=R.P[oid];
+  if(p.kind!=="mm"&&p.kind!=="st")continue;if(typeof j95sOn==="function"&&j95sOn())continue;/* j95s live servants write these rows */const o=p.ref;if(o===S&&p.kind==="mm")continue;const oid=o===S?"me":"v"+o.id;const op=R.P[oid];
   const home=[p.home,null,oid,p.home==="lc"?"hầu chủ ở lãnh cung":"phận sự trong cung"];
   for(let i=kh;i<4;i++){const x=e[i];if(/^ag_/.test(x[1]))continue;/* AG-ALL: her own planned deed (jagday) is where she is */
    if(p.kind==="mm"){const ok=op?op[i][0]:p.home;if(ok&&ok!==p.home&&ok!=="lc"){if(x[0]!==ok||x[1]!=="follow"){e[i]=[ok,"follow",oid,"theo hầu chủ ra ngoài"];n++}}
