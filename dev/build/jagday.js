@@ -127,7 +127,7 @@ function agLzKind(kind){return kind==="maid"||kind==="srv"}
 function agLzNew(b){AGD.lz={key:wk()+"-"+b,b,L:[],ids:{},w:S}}/* w: the world (S) the queue was drawn for — a chunk never runs on another world (co-op seat swap, load, new life) */
 function agLzPush(p,id,kind,b,intent){const Q=AGD.lz;if(!Q)return;Q.L.push([p,id,kind,b,intent]);Q.ids[id]=1}
 function agLzHas(id){const Q=AGD.lz;return !!(Q&&Q.ids[id]&&Q.key===wk()+"-"+agDayB())}
-function agLzGo(){const Q=AGD.lz;if(!Q||!Q.L.length)return;if(window.__agAll){while(AGD.lz&&AGD.lz.L.length)agLzRun();return}agLater("lz",agLzRun)}
+function agLzGo(){const Q=AGD.lz;if(!Q||!Q.L.length)return;if(window.__agAll){while(AGD.lz&&AGD.lz.L.length)agLzRun();return}agLater("lz",agLzRun,{slice:1})}
 function agLzRun(){const Q=AGD.lz;if(!Q)return;if(Q.w!==S||!agDOn()){AGD.lz=null;return}const D=agDz();if(Q.key!==wk()+"-"+agDayB()||D.d!==wk()){AGD.lz=null;return}
  const t0=performance.now(),B=BAL.ag.perf.slice;const done=[];
  while(Q.L.length){if(done.length&&performance.now()-t0>=B)break;const [p,id,kind,b,intent]=Q.L.shift();delete Q.ids[id];try{if(intent||!D.I||!D.I[id])agIntent(p,id);agDrawPerson(p,id,b,kind,b);done.push(id)}catch(e){agdErr("lz",e)}}
@@ -136,7 +136,7 @@ function agLzRun(){const Q=AGD.lz;if(!Q)return;if(Q.w!==S||!agDOn()){AGD.lz=null
   if(done.length)agTickX()}catch(e){agdErr("lzPaint",e)}
  const ms=performance.now()-t0;AGD.ms.push(ms);if(AGD.ms.length>60)AGD.ms.shift();
  if(done.length)agLater("sync",agSyncNow)
- if(Q.L.length){if(window.__agAll)agLzRun();else agLater("lz",agLzRun)}else AGD.lz=null}
+ if(Q.L.length){if(window.__agAll)agLzRun();else agLater("lz",agLzRun,{slice:1})}else AGD.lz=null}
 function agDaySlice(){/* kept for callers: the hybrid day has no pre-drawn later buổi */}
 /* re-plan of the INTENT at a new buổi: her top need changed, or she was touched; chance BAL.ag.day.replan */
 function agTouch(p){try{const id=ledgerId(p);if(!id)return;const z=agZ();z.rp=z.rp||{};z.rp[id]=1;AGD.stat.touch++}catch(e){}}

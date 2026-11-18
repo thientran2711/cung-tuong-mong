@@ -1,6 +1,6 @@
 /* AG LATER (npc-chain-land #2): node dev/test/ag-later.test.js [dev/index.html]
    1 a dialog queued by a deferred ag job shows at once (before: "Có người bán tin" sat in Q unseen and swallowed the next "Sẵn sàng")
-   2 nextBuoi drains the pending jobs FIRST: the job runs in the buổi it was queued in, never after the boundary; a dialog it queues holds the step
+   2 nextBuoi drains the pending light jobs FIRST (2b: pending slices are dropped there): the job runs in the buổi it was queued in, never after the boundary; a dialog it queues holds the step
    3 a job queued for one world never runs on another (S swapped: co-op seat swap / load / new life) — dropped, counted in AGL.stat.drop
    4 a job queued in one buổi never runs in the next (the timer fires after the buổi moved without nextBuoi): dropped
    5 the real deferred paths go through it: a buổi of play queues + runs agLater jobs (AGL.stat.run > 0), no caught ag errors, no page errors */
@@ -21,6 +21,9 @@ const sleep=ms=>new Promise(r=>setTimeout(r,ms));
   return{ranIn,at:w0+"-"+b0,moved:(S.buoi||0)!==b0||wk()!==w0,q:Q.length,hidden:document.getElementById('modal').hidden,pend:AGL.L.filter(x=>x.k==="t2").length}},dlg);
  ok(r2.ranIn===r2.at&&!r2.moved&&r2.q===1&&!r2.hidden&&r2.pend===0,'2 nextBuoi drains first: the job runs in its own buổi, its dialog shows and holds the step',r2);
  await p.evaluate(()=>{Q.length=0;document.getElementById('modal').hidden=true;render()});
+ /* 2b a pending SLICE (consort / staff decisions) is dropped at the boundary, not run inside the step (no extra cost per buổi) */
+ const r2b=await p.evaluate(()=>{let ran=0;const d0=AGL.stat.drop;agLater("t2b",()=>{ran=1},{slice:1});agDrain();return{ran,drop:AGL.stat.drop-d0,left:AGL.L.filter(x=>x.k==="t2b").length}});
+ ok(r2b.ran===0&&r2b.drop===1&&r2b.left===0,'2b a pending slice is dropped at the boundary (she keeps her schedule), never run in the step',r2b);
  /* 3 */
  const r3=await p.evaluate(()=>{let ran=0;const d0=AGL.stat.drop;const S0=S;agLater("t3",()=>{ran=1});S=Object.assign(Object.create(Object.getPrototypeOf(S0)),S0);agDrain();const out={ran,drop:AGL.stat.drop-d0};S=S0;return out});
  ok(r3.ran===0&&r3.drop===1,'3 a job of another world is dropped, never run',r3);
