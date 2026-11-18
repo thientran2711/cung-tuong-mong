@@ -502,3 +502,21 @@ FOREMEN: B (life-preload-fu, cloth-bake-static landed 9bbd78b) | C (art: B7 cons
 - (18/11 06:53Z) look-fx-wire #7 rolled over (655876a, R9e: veil halo fixed, moho OK, 16 real-game shots; DEFECT c30 pox lv3 on iris; tcold pictures have no fit rows) → archived; #8 SziknRk opened. Owner ruling ~07:00Z: one body scale = skull top→feet (never crown/bun) → fullbody-frame SzjVbe2 re-shoots incl. Hoàng hậu + a man.
 - (18/11 07:02Z) fullbody-frame r3 3bb0a516: skull-top→feet 507.7 px Fold / 420 iPad for all 9 (spread 0 %), no cut; but ~25 % smaller than r2 (one size must fit widest catalog robe .647, old maid m48 t8 a51). LOOKED → owner asked to pick: (1) keep, (2) narrower robe limit p99 (+20 %, ~1 % widest old robes would not fit), (3) wider figure column .62 (+11 %, Fold text 243→205). Recommended (3).
 - (18/11 07:20Z) Owner asked for pending approvals → sent opt-card A/B/C strip (rec. B) + tea c01/c03 panels; asked opt-card pick first. Tuần lục: size from Hoàng hậu crown, move figures down (OD 07:20Z) → SzjVbe2.
+- (18/11 07:12Z) place-stage r5b 48e61b6 (A1 = 453 px on 601 stage, marker on head + RCOL[7] gold glow, seal fixed offset dx .194/dy .916, 4-person iPad) LOOKED Fold before|after OK → sent owner (Fold + iPad); waiting her OK → SMALL review → land. Worker SzkV3Bc at ~55 % ctx: successor for any fix.
+
+## ROOT-47 → ROOT-48 HANDOVER (18/11 07:12Z; context 34 % measured (338k/1M) > START 6 % + 25 % → rollover; depth 3 → successor depth 4)
+LIVE main d219fce. Landed by ROOT-47: buoi-banner 68d240d, lyf-tier 1c3abe3, mg-skip-all d219fce. ROOT-47 wake trig_0166kTgtRx9vu7KLkwi9WRSC (:32) → successor DISABLES it (update_trigger enabled=false; delete is classifier-denied) and sets its own. ROOT-46 trig disabled.
+OWNER is AWAKE and talks in the MAIN chat (she moves the main to a NEW ACCOUNT ~13:00Z).
+OWNER RULINGS this session (OD tail from "(18/11 ~06:35Z UTC, ROOT-46 chat, relayed to ROOT-47)" to the end, VERBATIM — read them): c03 a18 t1–t8 approved = REFERENCE for UI frames (go-live HELD till frames ready); full-body frames redo, step 1 Tuần lục; tight box t6; ONE body scale skull-top→feet (never crown/bun); ANGRY 07:05Z at r3 shrink → keep the BIG r2/live size, never shrink the set for outliers; 07:10Z keep LIVE Tuần lục layout + live size, text/info boxes drawn ON TOP of the transparent figure, wide robes spread under text, nothing cut; 07:20Z place from Hoàng hậu tallest crown, move feet line down so the crown clears the top border.
+WAITING OWNER NOW (asked in chat): (1) opt-card-short A/B/C (strip sent; recommended B) → tell worker Szk6j15PHjAL8gMSR9z the pick directly; (2) tea c01/c03 panels sent (r6h3 46317c9d, cloth-tea worker SzghNErbDFn6nXtyBwa; BAL stain.on.tra 0→1 if OK); (3) place-stage A1 48e61b6 shots sent.
+RUNNING MAIN WORKERS / REVIEWERS (tell them the new id):
+- fullbody-frame SzjVbe2rs236yVuGUDn: doing r5 per owner 07:10Z + 07:20Z (r4 fa67e42a superseded, do not show). LOOK 3x, send owner. Then step 2 = every full-body frame (notices, info, tin trong cung, Mệnh truyện, Sổ luân hồi) after her OK; then c03 go-live via Foreman C (ORDER HELD line in C STATUS). Brief briefs/fullbody-frame-s1.md; report reports/fullbody-frame.md.
+- map-tap-go: worker SzhDm65KyvEigfRjon6 (db3d6ed = no undo/no toast + KIT §84c fill, one unit) → BIG reviewer SzjFu8b4mksbwcWenpd told to review db3d6ed + final merge on d219fce → PASS → land FF; 8f15bd5 NOT landable.
+- person-dialog-restore: worker SzhK83Z5KeuDd9WBYNP e6bda27 → SMALL reviewer SzmHVSD9r5fHMn8YFJK (same-save shots, final merge) → PASS → land.
+- place-stage r5 SzkV3Bc1u4BHrVH1jFj (48e61b6, ~55 % ctx) → owner OK → SMALL review → land.
+- look-fx-wire #8 SziknRk94szkCaXqvn1: per-picture eye keep-out (c30 pox on iris), tcold fit rows, figFor tcold check, r9f shots → LOOK → owner → BIG review.
+- opt-card-short Szk6j15PHjAL8gMSR9z, cloth-tea SzghNErbDFn6nXtyBwa: wait owner picks.
+- C-AG #10 SzjAd8BYMMz2rKFZitp: ag-all-2-land + npc-chain-land PASS → land FF.
+- D: odds-cap-r1 591cedf + title-stale-sel 4842ab4 PASS → D's reviewer re-merges latest main → land FF (ORDER in D STATUS).
+FOREMEN: B (life-preload-fu) | C (art; c03 go-live HELD; B8 samples; emperors) | D | E. LOAD line + hourly load check on every wake.
+- ROOT-47 FINAL (18/11 07:13Z): successor MAIN ROOT-48 opened (id in next line). ROOT-47 stops.
