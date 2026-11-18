@@ -487,6 +487,6 @@ men: Hoàng thượng 4 faces a18 (prompt-only) | claude/cung-tuong-mong-handove
 art-matrix planner (MAIN s43 order) | claude/cung-tuong-mong-handover-hj0h8w (reports/art-matrix.md) | session_011xDdVS6wU7hJj7qWmYtDa8 | RUNNING | 2026-11-18T05:58Z
 | emo-seal-vanish (owner bug 18/11 05:50Z: maid's emotion seal vanishes after closing its box; sonnet; brief briefs/emo-seal-vanish.md) | review/emo-seal-vanish | MAIN ROOT-45 | (opening) | RUNNING | 18/11 05:14Z |
 | mg-skip-all (owner 18/11 05:55Z: quick option on EVERY mini-game incl. makeup, one kit button + BAL key 40; opus; brief briefs/mg-skip-all.md; absorbs D skip-odds-40) | review/mg-skip-all | MAIN ROOT-45 | (opening) | RUNNING | 18/11 05:16Z |
-| E7a QUESTLINE Q1a help-hồi text (opus; briefs/E7-questline-q1.md) | review/questline-q1a | E ROOT | (opening) | RUNNING | 18/11 05:22Z |
-| E7b QUESTLINE Q1b help-hồi text (opus; briefs/E7-questline-q1.md) | review/questline-q1b | E ROOT | (opening) | RUNNING | 18/11 05:22Z |
-| E7c QUESTLINE Q1c help-hồi text (opus; briefs/E7-questline-q1.md) | review/questline-q1c | E ROOT | (opening) | RUNNING | 18/11 05:22Z |
+| E7a QUESTLINE Q1a help-hồi text (opus; briefs/E7-questline-q1.md) | review/questline-q1a | E ROOT | session_01DgYSWpyUqEzbbzMAtLMkNM | RUNNING | 18/11 05:22Z |
+| E7b QUESTLINE Q1b help-hồi text (opus; briefs/E7-questline-q1.md) | review/questline-q1b | E ROOT | session_01DgYSWqDaerQBfKu5bPRkef | RUNNING | 18/11 05:22Z |
+| E7c QUESTLINE Q1c help-hồi text (opus; briefs/E7-questline-q1.md) | review/questline-q1c | E ROOT | session_01DgYSWmbeLw227mrkMikC5W | RUNNING | 18/11 05:22Z |
