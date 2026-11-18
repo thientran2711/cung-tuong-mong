@@ -475,6 +475,6 @@ c12 a18 t5–t8 headdress re-do from live originals (Round 43) | claude/cung-tuo
 | E4 MONTHLY RATION BUILD (PL #5; opus; brief briefs/E4-monthly-ration.md) | review/monthly-ration | E ROOT | session_01DgYSWp99V1RuDJRSBs4SyJ | RUNNING | 18/11 05:10Z |
 | act-pic-match (owner bug 18/11 05:20Z: wrong/shared act pictures, whole group; sonnet; brief briefs/act-pic-match.md) | review/act-pic-match | MAIN ROOT-45 | (opening) | RUNNING | 18/11 05:04Z |
 | face-zoom-stretch (owner bug 18/11 05:25Z: mirror close-up stretched sideways; sonnet; brief briefs/face-zoom-stretch.md) | review/face-zoom-stretch | MAIN ROOT-45 | (opening) | RUNNING | 18/11 05:07Z |
-| E5 QUESTLINE Q0 docs (sonnet SMALL; briefs/E5-questline-q0-docs.md) | review/questline-q0 | E ROOT | session_01DgYSWpZXvejYRmdjtJ3Ccz | RUNNING | 18/11 05:12Z |
+| E5 QUESTLINE Q0 docs (sonnet SMALL; briefs/E5-questline-q0-docs.md) | review/questline-q0 | E ROOT | session_01DgYSWpZXvejYRmdjtJ3Ccz | SẴN SÀNG KIỂM cfb0e8ab (reports/questline-q0.md) | 18/11 |
 | E6 QUESTLINE H1 expert (opus research; briefs/E6-questline-h1-expert.md) | handover reports/questline-expert.md | E ROOT | session_01DgYSWm57KGQqbv88WBygrf | RUNNING | 18/11 05:12Z |
 | hud-mood-bar (owner UI 18/11 05:40Z: mood bar in the fixed top bar; sonnet; brief briefs/hud-mood-bar.md) | review/hud-mood-bar | MAIN ROOT-45 | (opening) | RUNNING | 18/11 05:11Z |
