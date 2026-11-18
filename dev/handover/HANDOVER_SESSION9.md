@@ -422,3 +422,4 @@ RUNNING (all report to MAIN — tell them the new main id):
 - Foreman B (alive): ORDERS 04:35Z life-preload-fu + cloth-bake-static. Foreman D #12: ORDER staff-cap-row3 + route.js stale selector. Foreman C ROOT-16: art (male proportion v4, c12 tiers). Foreman E: owner to open (STATUS file ready).
 OWNER PENDING: cào step per level (ladder lv2/lv3 sent, e.g. "vừa 2, nặng 3"; steps 3–5 need stroke cut at zones); stage size 1–4 (after re-shoot); book r5c OK?; tea; opt-card A/B/C; Thử tay CTM-CAL.
 LESSONS: workers' test harness randomised makeup → false 'glow' (now forced off); CSS keep-out mask was inert until R7 (python sim said 0) → always check in the browser; size ladders must freeze outfit/pose.
+- (18/11 04:44Z) ROOT-44 FINAL: successor MAIN ROOT-45 = session_01UV1SzikTZwNu6Q6dJKkcGi (depth 1). ROOT-44 stops (relays owner words + worker reports only). ROOT-44 wake trig_01GXUgyTwb8mP38JXXBzFqVj stays until ROOT-45 deletes it.
