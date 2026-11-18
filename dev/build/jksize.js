@@ -517,22 +517,15 @@ function kszLiveRoom3(dlg){const M=document.getElementById("modal");if(!M)return
    at a size whose figure column (tag + the layout's figure height) is taller than the cap leaves room for, the bottom of the figure (hem, shoes) was clipped.
    The ONE rule: the figure column NEVER exceeds the room the frame has (cap − header − button row − body padding); when it would, the figure is scaled down
    (dlg.__kszShrink, read by kszFigFit) just enough; the bottom is never cropped. Not touched when it already fits. */
-function kszFeetFit(dlg){try{const B=dlg.querySelector(".k3body"),L=B&&B.querySelector(":scope>.kszfig");dlg.__kszShrink=1;if(!L)return;{const l0=KIT_SIZE.lay[dlg.dataset.lay||"big"]||KIT_SIZE.lay.big;dlg.style.setProperty("--kszcw",KIT_SIZE.fig[l0.fig].cw+"px")}kszFigFit(dlg);
+function kszFeetFit(dlg){try{const B=dlg.querySelector(".k3body"),L=B&&B.querySelector(":scope>.kszfig");dlg.__kszShrink=1;if(!L)return;kszFigFit(dlg);
  const cap=parseFloat(getComputedStyle(dlg).maxHeight);if(!(cap>0))return;
  /* KIT 56.4 (owner 18/11 ~07:50Z): the room is measured for the TALLEST crown (Hoàng hậu, BAL.bookFrame.cRef above the skull top), never for this person: every person of the frame gets the same body, nobody is shrunk for being an outlier */
  const lay=KIT_SIZE.lay[dlg.dataset.lay||"big"]||KIT_SIZE.lay.big,cRef=(typeof BAL==="object"&&BAL.bookFrame&&BAL.bookFrame.cRef)||0;
  for(let i=0;i<4;i++){const mbx=document.getElementById("mb");let fixed=2;[...dlg.children].forEach(c=>{if(c!==mbx&&c.getClientRects().length&&getComputedStyle(c).position!=="absolute")fixed+=c.offsetHeight});if(mbx)[...mbx.children].forEach(c=>{if(c!==B&&c.getClientRects().length)fixed+=c.offsetHeight});const room=cap-fixed-26;/* the room = the cap minus the frame's own parts (header, buttons, body padding): the same for every person, never read from the current figure */
   const fs=L.querySelector(".kszfs"),h=fs?fs.offsetHeight:0;if(h<=60)break;const body0=KIT_SIZE.fig[lay.fig].h*(dlg.__kszKid||1),tg=L.querySelector(":scope>.kt3"),part=L.offsetHeight-h+(tg&&!tg.querySelector(".kdh,.kdh-cap")?kszPlateH():0),allow=(room-part)/(1+cRef),cur=body0*dlg.__kszShrink;
   if(allow>=cur-.5)break;dlg.__kszShrink=Math.max(.3,allow/body0);kszFigFit(dlg)}
- kszFigFill(dlg,L,B,lay,cRef)}catch(e){console.error("kszFeetFit",e)}}
-/* OWNER 18/11 ~21:20Z (OD tail): the figure FILLS the left column's height (the frame body = the tallest of figure / info / grown tall frame), rank+name tag at the TOP, figure right under it. Grow the body only when the column is taller than the figure; the column width grows with it up to KSZ_FILLW of the frame body width (the right column keeps the rest). Whole group, every tier, Fold + iPad. */
-const KSZ_FILLW=1.7,KSZ_FILLS=1.6;
-function kszFigFill(dlg,L,B,lay,cRef){const cur0=dlg.__kszShrink||1;const R=dlg.querySelector(".k3right");if(R){R.style.minHeight="";R.style.maxHeight="";R.style.overflow=""}
- const cs=getComputedStyle(B),avail=B.clientHeight-parseFloat(cs.paddingTop)-parseFloat(cs.paddingBottom),fs=L.querySelector(".kszfs");if(!fs)return;
- const part=L.offsetHeight-fs.offsetHeight,body0=KIT_SIZE.fig[lay.fig].h*(dlg.__kszKid||1),allow=(avail-part)/(1+cRef);let s=Math.min(KSZ_FILLS,allow/body0);
- const im=L.querySelector(".kszfs>img"),cw=L.querySelector(".kszfs").clientWidth,W0=im?parseFloat(im.style.width)||0:0;/* the column keeps its width (the option cards keep theirs); the figure box may spread to KSZ_FILLW x the column, the painted body is narrower than its box */
- if(W0>0)s=Math.min(s,cur0*KSZ_FILLW*cw/W0);if(s<=cur0+.01)return;dlg.__kszShrink=s;kszFigFit(dlg)}
-window.kszFigFill=kszFigFill;
+}catch(e){console.error("kszFeetFit",e)}}
+
 window.kszFeetFit=kszFeetFit;
 /* KIT 56.4: the height a worn-title plate adds to the name tag (measured once); the room of every frame is reckoned WITH the plate, so a person with a title and one without get the same body */
 let KSZ_PLATEH=null;function kszPlateH(){if(KSZ_PLATEH!=null)return KSZ_PLATEH;let h=0;try{const T=typeof KIT_TITLES!=="undefined"&&KIT_TITLES[0],pl=T&&typeof kitTitlePlate==="function"?kitTitlePlate(T,{cls:"kdh-cap"}):"";if(pl){const x=document.createElement("div");x.className="kszf";x.style.cssText="position:absolute;visibility:hidden;left:-9999px;top:0";x.innerHTML=`<div class="kszfig"><div class="kt3">${pl}</div></div>`;document.body.appendChild(x);h=x.querySelector(".kt3").offsetHeight+2;x.remove()}}catch(e){}return KSZ_PLATEH=h}
