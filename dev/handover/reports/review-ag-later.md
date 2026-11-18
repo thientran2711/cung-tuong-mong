@@ -43,3 +43,34 @@ On SẴN SÀNG KIỂM per branch (ag-all-2-land first): (1) check the jtoil/jagt
 Runner scripts used: /home/user/wt/rvlog/run.sh (coop ×N + G4 ×N with busy loops), /home/user/wt/rvlog/long.sh (container-local, not in git).
 
 ~70% xong / ~60% chơi được (review delta: code reviewed + fixed; final gate waits for the lander's merge of the moving main)
+
+## REVIEWER #2 — session_01UV1Szk6Tdgr6dBwZ498fDY (REVIEW AG LATER #2)
+PRIORITY #1 CHECK ('ag-all-2-land npc-chain-land toilAns knQ'): OD 0 | ledger 0 | claims 7 | main 0 | review/* 1 — reuse: successor of SzkmyAXY on the same two branches; toilAns / knFlush exist only on these branches (fixed in place, no new module).
+START_CTX ≈ 4 % (get_session reads 0; own estimate). Foreman C-AG #8 SzgXTgLe5 → C-AG #9 Szh2asyry (18/11 03:20Z). Lander #3 SzjwxQsd.
+
+### Merge delta reviewed (lander e1cad739 / 69ea327a / 8fc629d3 + 8b2508d8 / 519ded12)
+- Re-made each merge (git merge-tree + merge-file --diff3): conflicts only j10 / j29 / jtoil. j10 plantServ keeps main's capRoom AND ag-all-2's pay-on-take; j29 hire keeps main's cap re-check (silver back) AND hireTake; jtoil keeps main's tease wording, toilSay in toilReact, peer options (owner 17/11 06:30Z), replySuc sign unified (BAL.toil.replySuc = −2, used as is). No line main added is missing in 3da5720a→62a6846f→f986ff6a→f8276cdb (scan: main-added lines not in result = only the 6 resolved hunks).
+- makeup-lux meaning: toilSeeRule reads L.dv==='diem' (dress verdict) + mk 'vung'; no NPC overdone-face level. OK vs OD makeup-lux / G11.
+- sentOr relay family (jcoopworld pos / fam / cyb / tn claim) correct: COOP.send returns false/Promise<false> on a down socket; wrappers (jcooptimer, jslap) pass the return through; room/peer clear the keys.
+
+### Findings (fixed by me, pushed, red before / green after)
+| # | where | fault | fix | test |
+|---|---|---|---|---|
+| 1 | jtoil toilAns | `if(c!=="reply")return null` stood BEFORE the new `c==="harsh"` branch (merge of toil-looks5 into the one-answer function) → the player's 'Đáp trả gay gắt' changed no stat (always the lose log line; no −harshAff, no danh/đức). NPCs have no harsh option (BAL.ag.toil2.ans) → player only | guard `c!=="reply"&&c!=="harsh"` | dev/test/toil-harsh.js FAIL on 8fc629d3 / e55c9e95 → PASS |
+| 2 | jagknow knErr/knFlush | a LATE errand report stored t.id and read it back with RV() (rivals only) → an NPC master's late scout/listen on the PLAYER lost its target (no chứng cứ for the NPC); a late report whose target died meanwhile gave a nameless 'đi dò la  …' line. Root of the ag-truth bot-run flake 'every finding … real, living other consort' (bad 1–2, ~1 run in 6). Family scan of stored-id queues resolved by RV in jag*: only knQ (invQ already stores "me") | store key(t), read byKey; target gone → dropped, KN.stat.e_gone | dev/test/kn-late.js 2 FAIL → 4/4 on both branches |
+Heads after my pushes: review/ag-all-2-land 98ac3cbe, review/npc-chain-land d729bba6 (ancestor f8276cdb).
+
+### Gates
+| gate | head | result |
+|---|---|---|
+| coop-e2e ×9 (2 busy loops) | ag 8fc629d3+#1 (b80c6d31) | 9/9 runs 63/63 |
+| G4 coop-one-world 7+3 ×5 (2 busy loops) | b80c6d31 | 10/10 PASS |
+| long ag suite + ag-later 9/9 + scan | b80c6d31 | green; one-off reds ag-all bestowal (30.9 vs 30.0), ag-rd FAR k3 → 3/3 green on rerun (chance); ag-truth → finding #2 |
+| long ag suite + npc tests (feelings18 34/34, mood-mem 16/16, moodknow-step0 19/19, ag-moodknow 33) + toil-harsh + kn-late + scan (18 files) | npc d729bba6 | green; one-off reds ag-mgcal §3, ag-walk §4 carry NEAR → 3/3 green on rerun (chance) |
+| quickcheck | — | not yet (live main moved to e24d5838: staff-cap-apply touches assemble.py / j10 / jpromo → lander must merge; full re-gate after) |
+
+### HANDOVER (if I roll over)
+Wait for LANDER #3 SẴN SÀNG KIỂM on heads that contain 98ac3cbe / d729bba6 and live main; then: review the new merge (j10 staff-cap-apply vs ag-all-2 plantServ/hireTake/p3HireRole, assemble order), coop-e2e ×9 + G4 ×5 under 2 busy loops, quickcheck --runs 5 --cpu 4, long suite (+ toil-harsh, kn-late; npc: feelings18 / mood-mem / moodknow-step0 / ag-moodknow), old-save load; PASS sha must have live main as ancestor → C-AG #9.
+Runner scripts (container-local): /home/user/wt/rvlog/run.sh <wt> <tag> <coopN> <g4N>, /home/user/wt/rvlog/long.sh <wt> <tag> [extra tests].
+
+~74% xong / ~60% chơi được (two faults fixed; final gate waits for the lander's merge of live main e24d5838)
