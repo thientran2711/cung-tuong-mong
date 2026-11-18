@@ -437,7 +437,7 @@ looks-2 overlay art (fx-stain-tra/uot, smudge, ink, pox, scars, messy hair) | im
 | REVIEW life-preload 4ff10ae (opus, URGENT; brief briefs/review-life-preload.md) | review/life-preload | MAIN s42 | session_01UV1SzjKPEGVua6n1rUEV2S | RUNNING (merge r6 caa3ffe0 on main f986ff6a) | 18/11 02:22Z |
 | REVIEW result-reason 0db60e0e (sonnet SMALL; brief briefs/review-result-reason.md) | review/result-reason | MAIN s43 | session_01UV1SziWJ2pGVgUMJzwxqQF | RUNNING | 18/11 02:24Z |
 | REVIEW staff-cap-apply fc470e4 (opus BIG; brief briefs/review-staff-cap-apply.md) | review/staff-cap-apply | MAIN s43 | session_01UV1Szjx5c2mp4L6PXwg2zG | PASS e24d5838 (review/staff-cap-apply-r6, FF of main 95d5f767; was 635a2381) | 18/11 02:30Z |
-| look-fx WIRE (upload 24 approved face finals + LOOKS_ART + fig fit rows re-measure; sonnet; brief briefs/look-fx-wire.md) | review/look-fx-wire | MAIN s43 | session_01UV1Szm7mHXbyLu55N39V6f | RUNNING | 18/11 02:31Z |
+| look-fx WIRE (upload 24 approved face finals + LOOKS_ART + fig fit rows re-measure; sonnet; brief briefs/look-fx-wire.md) | review/look-fx-wire | MAIN s43 | session_01UV1SziKwgY8SFrGASEuRw9 (avatar scope; prev Szm7mHX) | RUNNING | 18/11 02:31Z |
 c12 a18 t1-t3 full hairpins (Round 35) | claude/cung-tuong-mong-handover-hj0h8w (art, _review CDN) | session_011xDdVR9qZRXuyczR6JVteS | RUNNING | 2026-11-18T02:46Z (Foreman C ROOT-15)
 | cloth-tea r3 (one shape every costume, higher on chest; sonnet; successor of SzjMK4R) | review/cloth-tea | MAIN s43 | session_01UV1SzghNErbDFn6nXtyBwa | RUNNING | 18/11 02:47Z |
 | avatar-makeup (stage + every avatar frame at mirror strength; sonnet; brief briefs/avatar-makeup.md) | review/avatar-makeup | MAIN s43 | merged into look-fx-wire (Szm7mHX) f6ffb09a | HANDED ON | 18/11 02:48Z |
