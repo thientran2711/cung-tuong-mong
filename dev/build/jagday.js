@@ -94,8 +94,10 @@ function agDrawPerson(p,id,from,kind,to){const D=agDz();const L=D.P[id]=D.P[id]|
    AGD.stat.slots++}catch(e){agdErr("draw",e)}finally{AG.cB=null;S.buoi=bo}}
  }
 /* HYBRID DAY (Foreman C 13:51Z, design change from main): at the start of the day each NPC sets her day INTENT = 1–2 needs she means to serve
-   today (her long goals = road weights in her needs, her feeling of the day, her needs now); EVERY buổi she picks the concrete place + deed
-   toward it from what is true at that buổi (her needs after the last buổi's deeds and what befell her — agTouch, the results of her deeds).
+   today (her long goals = road weights in her needs, her feeling of the day, her needs now); at a new buổi she picks the concrete place + deed
+   toward it from what is true at that buổi ONLY WITH A CAUSE (ag2-perf A, owner OD L1637 "chỉ người bị ảnh hưởng mới nghĩ lại": agRdcCause —
+   ill / rain / touched / top need changed / no slot / her last deed done / her needs outweigh her schedule; at most BAL.ag.day.redecideCap
+   per buổi; the others keep her plan = her schedule row) — was: EVERY buổi every consort picked again (her needs after the last buổi's deeds and what befell her — agTouch, the results of her deeds).
    Re-plan triggers (rain on a garden buổi, falling ill, touched, the top need changed) may change the INTENT for the rest of the day.
    Perf: the per-buổi pick of everyone runs where the record is built (j95plan); measured in AGD.ms (budget BAL.ag.perf.p95). */
 /* review ag-all-2 r2 W1 (owner OD ~18:05Z: weather never closes a place; staying indoors is the NPC's own choice, by odds): when her pick for buổi b
@@ -118,19 +120,22 @@ function agIntent(p,id){const D=agDz();D.I=D.I||{};let N;try{N=agNeedsG(p)}catch
  const g=[];if(L.length){const a=agPw(L);g.push(a);const L2=L.filter(x=>x[0]!==a);if(L2.length&&roll(agCap(BAL.ag.day.two)))g.push(agPw(L2))}
  D.I[id]={g,why:g.map(n=>AGWHY[n]||n).join(", ")};try{D.T[id]=agTop(N)}catch(e){}return D.I[id]}
 function agDayDraw(){const t0=performance.now();const D=agDz();D.d=wk();D.P={};D.T={};D.I={};D.rb=null;AGD.stat.draw++;const b0=agDayB();agLzNew(b0);
- const L=agDayList();for(const [p,id,kind] of L){if(agLzKind(kind)){agLzPush(p,id,kind,b0,1);continue}try{agIntent(p,id);agDrawPerson(p,id,b0,kind,b0)}catch(e){agdErr("draw0",e)}}D.rb=wk()+"-"+b0;
+ const L=agDayList();for(const [p,id,kind] of L){if(agLzKind(kind)){agLzPush(p,id,kind,b0,1);continue}try{agIntent(p,id);agDrawPerson(p,id,b0,kind,b0);if(kind==="consort"&&agRdcOn()){const s0=D.P[id]&&D.P[id][b0];if(s0)s0.rc="day"}}catch(e){agdErr("draw0",e)}}D.rb=wk()+"-"+b0;
  const ms=performance.now()-t0;window.__agDayMs=ms;AGD.ms.push(ms);if(AGD.ms.length>60)AGD.ms.shift();agLzGo()}
 /* perf (review ag-all-2 r2 B5, BAL.ag.perf): the household staff's buổi pick is SLICED like the consorts' deeds (agSlice): the record is built with
    their base row (their master's palace), then slices of at most BAL.ag.perf.slice ms draw them in later frames (all at once under window.__agAll);
    each drawn one gets her row repainted from the current khắc and her deed booked (agTickX), then one resync. AGD.ms holds every unit's time. */
 function agLzKind(kind){return kind==="maid"||kind==="srv"}
 function agLzNew(b){AGD.lz={key:wk()+"-"+b,b,L:[],ids:{},w:S}}/* w: the world (S) the queue was drawn for — a chunk never runs on another world (co-op seat swap, load, new life) */
-function agLzPush(p,id,kind,b,intent){const Q=AGD.lz;if(!Q)return;Q.L.push([p,id,kind,b,intent]);Q.ids[id]=1}
+function agLzPush(p,id,kind,b,intent,rp){const Q=AGD.lz;if(!Q)return;Q.L.push([p,id,kind,b,intent,rp]);Q.ids[id]=1}
 function agLzHas(id){const Q=AGD.lz;return !!(Q&&Q.ids[id]&&Q.key===wk()+"-"+agDayB())}
 function agLzGo(){const Q=AGD.lz;if(!Q||!Q.L.length)return;if(window.__agAll){while(AGD.lz&&AGD.lz.L.length)agLzRun();return}agLater("lz",agLzRun,{slice:1})}
 function agLzRun(){const Q=AGD.lz;if(!Q)return;if(Q.w!==S||!agDOn()){AGD.lz=null;return}const D=agDz();if(Q.key!==wk()+"-"+agDayB()||D.d!==wk()){AGD.lz=null;return}
  const t0=performance.now(),B=BAL.ag.perf.slice;const done=[];
- while(Q.L.length){if(done.length&&performance.now()-t0>=B)break;const [p,id,kind,b,intent]=Q.L.shift();delete Q.ids[id];try{if(intent||!D.I||!D.I[id])agIntent(p,id);agDrawPerson(p,id,b,kind,b);done.push(id)}catch(e){agdErr("lz",e)}}
+ while(Q.L.length){if(done.length&&performance.now()-t0>=B)break;const [p,id,kind,b,intent,rp]=Q.L.shift();delete Q.ids[id];try{
+  /* scope "far": a far staff member picks again only with a cause (touch / need / new / done / urge), at most redecideCap per buổi; else her duty row */
+  if(rp&&agRdcFar(p)){const prev=D.P[id]&&D.P[id][b-1];const c=agRdcCause(p,id,prev,"",rp===2?{[id]:1}:{});if(!c||agRdcN>=BAL.ag.day.redecideCap){agRdcKeep(p,id,b,c,kind);done.push(id);continue}agRdcN++;agRdcMark("far:"+c)}
+  if(intent||!D.I||!D.I[id])agIntent(p,id);agDrawPerson(p,id,b,kind,b);done.push(id)}catch(e){agdErr("lz",e)}}
  try{const R=agRec();if(R){const k0=agKh();for(const id of done){const s=agDaySlot(id);const row=R.P[id];if(!s||!row)continue;const nr=agRow(s);
    for(let kh=k0;kh<J95.KH;kh++){const e=row[kh];if(!e||e[1]==="go"&&!agBound(id,kh,R.key))row[kh]=nr[kh]}}}
   if(done.length)agTickX()}catch(e){agdErr("lzPaint",e)}
@@ -140,16 +145,41 @@ function agLzRun(){const Q=AGD.lz;if(!Q)return;if(Q.w!==S||!agDOn()){AGD.lz=null
 function agDaySlice(){/* kept for callers: the hybrid day has no pre-drawn later buổi */}
 /* re-plan of the INTENT at a new buổi: her top need changed, or she was touched; chance BAL.ag.day.replan */
 function agTouch(p){try{const id=ledgerId(p);if(!id)return;const z=agZ();z.rp=z.rp||{};z.rp[id]=1;AGD.stat.touch++}catch(e){}}
-function agReplanB(){const D=agDz();if(D.d!==wk())return;const b=agDayB();if(D.rb===wk()+"-"+b)return;D.rb=wk()+"-"+b;const t0=performance.now();const z=agZ();const T=z.rp||{};const R=BAL.ag.day.replan;agLzNew(b);
+/* ag2-perf A — RE-DECIDE ONLY THE AFFECTED (owner OD L1637 17/11 ~15:45Z, verbatim: "chọn lại theo khắc, chỉ người bị ảnh hưởng mới nghĩ lại";
+   ROOT-51 / C-AG #12 18/11). At a new buổi a consort picks her deed (needs × options, agDrawB) again ONLY with a cause:
+     ill / rain (her plan broken: falling ill, rain on a garden plan) · touch (agTouch: an event, the player's deed or one aimed at her) ·
+     need (her top need is no longer the one she planned for) · new (no slot yet) · done (her last buổi carried a deed: it is finished or blocked) ·
+     urge (her needs now outweigh keeping her schedule: Σ N × BAL.ag.needW × mood × intent > BAL.ag.routine × mood, the weights agDrawB draws with).
+   Everyone else keeps her plan: she follows her own schedule this buổi (the base row of the old schedule, same as her last buổi had no deed).
+   At most BAL.ag.day.redecideCap consorts re-decide per buổi (causes in the order above; the rest keep and try at the next buổi).
+   redecideCap 0 = off (every consort picks every buổi: the earlier HYBRID). The cause is kept on the slot (slot.rc) and counted (AGD.stat.rd). */
+let agRdcN=0;const AGRDC=["ill","rain","touch","need","new","done","urge"];
+function agRdcOn(){try{return BAL.ag.day.redecideCap>0}catch(e){return false}}
+/* scope (C-AG #12 / MAIN ROOT-52 split, 18/11): BAL.ag.day.redecideScope "consort" = the filter on consorts (above); "far" = consorts and their own
+   maids / eunuchs (and hers) pick every buổi as before, only FAR staff (no consort master and not hers: ownerOf null) re-pick with a cause, cap per buổi */
+function agRdcScope(){try{return BAL.ag.day.redecideScope||"consort"}catch(e){return"consort"}}
+function agRdcFar(p){if(!agRdcOn()||agRdcScope()!=="far")return false;try{return !ownerOf(p)}catch(e){return false}}
+function agRdcCause(v,id,prev,rr,T){const D=agDz();D.TB=D.TB||{};let N={},top="";try{N=agNeedsG(v);top=agTop(N)}catch(e){}const t0=id in D.TB?D.TB[id]:D.T[id];D.TB[id]=top;
+ if(rr)return rr;if(T[id])return"touch";if(top!==t0)return"need";if(!prev)return"new";if(prev.k)return"done";
+ /* urge: her strongest need now outweighs keeping her schedule (the same weights agDrawB draws with: N × BAL.ag.needW against BAL.ag.routine) */
+ let w=0;const MF=agMoodF(v),IN=agIntentOf(id);for(const n in N)if(N[n]>0)w+=N[n]*BAL.ag.needW*(MF[n]||1)*(IN.includes(n)?BAL.ag.day.intentW:1);
+ if(w>BAL.ag.routine*(MF._||1))return"urge";return""}
+function agRdcMark(c){const R=AGD.stat.rd=AGD.stat.rd||{};R[c]=(R[c]||0)+1}
+function agRdcKeep(v,id,b,c,kind){const D=agDz();const L=D.P[id]=D.P[id]||[];const bo=S.buoi;AG.cB=b;S.buoi=b;
+ try{const base=kind&&AGBASE[kind]?agBase(AGBASE[kind],[v,j95c(b)],b)[0]:agBase(AGD0.rv,[v,j95c(b)],b)[0];L[b]={pl:base[0],a:base[1],t:base[2],why:base[3],k:null,need:null,rc:"keep"};AGD.stat.slots++;agRdcMark(c?"cap":"keep")}
+ catch(e){agdErr("rdKeep",e)}finally{AG.cB=null;S.buoi=bo}}
+function agReplanB(){const D=agDz();if(D.d!==wk())return;const b=agDayB();if(D.rb===wk()+"-"+b)return;D.rb=wk()+"-"+b;const t0=performance.now();const z=agZ();const T=z.rp||{};const R=BAL.ag.day.replan;agLzNew(b);agRdcN=0;
  let rain=false;try{rain=wet()}catch(e){}
  for(const [p,id,kind] of agDayList()){try{
   if(kind==="consort"&&D.I&&D.I[id]){const v=p;let ill=false;try{ill=!!illOf(v)}catch(e){}const prev=D.P[id]&&D.P[id][b-1];
    /* LIFE: plans broken by rain on a garden plan, or by falling ill: she always re-thinks her day then */
-   if((rain&&prev&&prev.pl==="vuon")||(ill&&!(D.ill||{})[id])){(D.ill=D.ill||{})[id]=ill?1:0;agIntent(v,id);AGD.stat.replan++}
-   else{let ch=0;try{ch=agTop(agNeedsG(v))!==D.T[id]?R.need:0}catch(e){}if(T[id])ch=Math.max(ch,R.touch);if(ch&&roll(agCap(ch))){agIntent(v,id);AGD.stat.replan++}else AGD.stat.keep++}}
-  else if(agLzKind(kind)){agLzPush(p,id,kind,b,0);continue}/* staff: sliced (agLzRun) */
+   let rr="";if((rain&&prev&&prev.pl==="vuon")||(ill&&!(D.ill||{})[id])){rr=rain&&prev&&prev.pl==="vuon"?"rain":"ill";(D.ill=D.ill||{})[id]=ill?1:0;agIntent(v,id);AGD.stat.replan++}
+   else{let ch=0;try{ch=agTop(agNeedsG(v))!==D.T[id]?R.need:0}catch(e){}if(T[id])ch=Math.max(ch,R.touch);if(ch&&roll(agCap(ch))){agIntent(v,id);AGD.stat.replan++}else AGD.stat.keep++}
+   /* ag2-perf A (owner OD L1637 17/11 15:45Z "chỉ người bị ảnh hưởng mới nghĩ lại"): she picks this buổi's deed again only with a cause */
+   if(agRdcOn()&&agRdcScope()!=="far"){const c=agRdcCause(v,id,prev,rr,T);if(!c||agRdcN>=BAL.ag.day.redecideCap){agRdcKeep(v,id,b,c);continue}agRdcN++;agRdcMark(c);AGD.rcNow=c}}
+  else if(agLzKind(kind)){agLzPush(p,id,kind,b,0,T[id]?2:1);continue}/* staff: sliced (agLzRun); 1 = a buổi re-pick, 2 = touched (scope "far" filters it there) */
   else if(!D.I||!D.I[id])agIntent(p,id);
-  agDrawPerson(p,id,b,kind,b)}catch(e){agdErr("buoi",e)}}
+  agDrawPerson(p,id,b,kind,b);if(AGD.rcNow){const s0=D.P[id]&&D.P[id][b];if(s0)s0.rc=AGD.rcNow}/* A: the cause rides on her slot */}catch(e){agdErr("buoi",e)}finally{AGD.rcNow=null}}
  z.rp={};const ms=performance.now()-t0;AGD.ms.push(ms);if(AGD.ms.length>60)AGD.ms.shift();agLzGo()}
 function agDayEnsure(){if(!agDOn())return;const D=agDz();if(D.d!==wk())agDayDraw();else agReplanB()}
 /* the record's row for a person this buổi = her plan */
