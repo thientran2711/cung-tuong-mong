@@ -37,9 +37,9 @@ let ACTX={a:null,pen:0};
 /* ONE act context (review/shown-odds-one-path, ORDER ROOT-52 18/11): the roll (runAct) and EVERY screen that prints an act's odds
    build the same ACTX here — sent-servant penalty (pen), her lá số on the act's domain (lotB via dom), fresh spy knowledge of the
    target (spyKnowB via t) — so the word on the card is the odds the roll uses (shown == rolled; dev/test/shown-odds.test.js).
-   x = an extra part of one way of doing the act (e.g. plant "tại cung nàng": x.pen), the same object on both sides. */
+   x = an extra part of one way of doing the act (e.g. plant "tại cung nàng": x.pen, x.here = done in person, no sent-servant pen), the same object on both sides. */
 const ACT_NOSEND=["accuse","vp","xx","gift","steal","road","takeaway"];
-function actCtx(a,t,k,sv,x){const sent=!together(a,t)&&!ACT_NOSEND.includes(k);if(sent&&sv===undefined)sv=bestSent(a);
+function actCtx(a,t,k,sv,x){const sent=!(x&&x.here)&&!together(a,t)&&!ACT_NOSEND.includes(k);/* x.here: she does it herself on the spot (no servant sent) */if(sent&&sv===undefined)sv=bestSent(a);
  const K0=ACTK;ACTK=k;let pen=0;try{pen=sent?sentPen(sv)-(sv?srk(sv)*3:0):0}finally{ACTK=K0}
  return{a,t,pen:pen+((x&&x.pen)||0),dom:ACTDOM[k]}}
 /* the odds an act's own roll will use, for display: ACT[k].o evaluated inside actCtx (then the one odds cap oddsCl) */
