@@ -26,14 +26,16 @@ Object.assign(BAL.looks,{xoc:{on:0,
 Object.assign(BAL.looks,{stain:{on:0,
  lv:[null,{n:1,sc:.16,op:.6,wet:.5},{n:2,sc:.2,op:.72,wet:.78},{n:3,sc:.26,op:.85,wet:1}],
  anchor:{chest:[.5,.27],sleeve:[.2,.5],hem:[.5,.93],hemL:[.22,.94],hemR:[.78,.94],hemH1:[.5,.85],hemH2:[.28,.79],hemH3:[.72,.76],hemH4:[.45,.7],sleeveL:[.14,.6],sleeveR:[.86,.6]},
- kind:{tra:{pos:["chest","hem","sleeve"],blend:"stain",variants:3,wet:0,scm:1.4,dy:0,opm:1,tint:[135,82,38],tm:1,lv:[null,{n:1,sc:.24,op:1.3},{n:2,sc:.3,op:1.15},{n:3,sc:.42,op:1.15}]},uot:{pos:["hem","sleeveL","sleeveR","hemL","hemR"],blend:"wet",variants:2,wet:1,scm:1.15,dy:0,opm:1,rotm:.4,deep:{k:.95,dark:.2,pow:1,paleP:.5,satMin:.07,warm:[1,.97,.88],rad:5,cling:2.2,hem:.84,hemV:.34,hemF:11,nx:5,ny:1.1,front:[0,.5,.75,1],floor:[0,0,.6,.92],darkL:[0,.2,.22,.3]}},bun:{pos:["hem"],blend:"mud",tm:.35,variants:8,base:2,wet:0,scm:1,tilt:.5,scatter:1,lv:[null,{n:8,sc:.32,op:.9},{n:9,sc:.34,op:.92},{n:12,sc:.38,op:1}],
+ kind:{tra:{pos:["chest","hem","sleeve"],blend:"stain",variants:3,wet:0,scm:1.4,dy:0,opm:1,tint:[135,82,38],tm:.9,lv:[null,{n:1,sc:.3,op:1.3},{n:2,sc:.36,op:1.2},{n:3,sc:.44,op:1.15}]},uot:{pos:["hem","sleeveL","sleeveR","hemL","hemR"],blend:"wet",variants:2,wet:1,scm:1.15,dy:0,opm:1,rotm:.4,deep:{k:.95,dark:.2,pow:1,paleP:.5,satMin:.07,warm:[1,.97,.88],rad:5,cling:2.2,hem:.84,hemV:.34,hemF:11,nx:5,ny:1.1,front:[0,.5,.75,1],floor:[0,0,.6,.92],darkL:[0,.2,.22,.3]}},bun:{pos:["hem"],blend:"mud",tm:.35,variants:8,base:2,wet:0,scm:1,tilt:.5,scatter:1,lv:[null,{n:8,sc:.32,op:.9},{n:9,sc:.34,op:.92},{n:12,sc:.38,op:1}],
   /* r6 lv2/lv3 = lv1 (owner OK) + painted mud pieces placed by code: d = decal number (fx-stain-bun-d), n = how many, sc = width share of the robe, at "hem" = its bottom edge on the real hem of that column, else fy = height of its bottom edge (0 top .. 1 hem), x = horizontal range, op = opacity */
   /* owner 18/11 (after 02:40Z panels): new lv1 = old lv2, new lv2 = old lv3, new lv3 = darker + higher + more marks; must read on warm / red robes too */
   add:[null,[{d:3,n:2,sc:.11,fy:[.8,.88],x:[.15,.85],op:.5},{d:5,n:2,sc:.055,fy:[.82,.9],x:[.2,.8],op:.5}],
    [{d:3,n:4,sc:.12,fy:[.72,.88],x:[.12,.88],op:.55},{d:5,n:3,sc:.06,fy:[.72,.88],x:[.15,.85],op:.55},{d:4,n:1,sc:.24,at:"hem",x:[.25,.75],op:.4}],
    [{d:3,n:6,sc:.13,fy:[.62,.86],x:[.1,.9],op:.7},{d:5,n:4,sc:.065,fy:[.64,.86],x:[.12,.88],op:.7},{d:4,n:2,sc:.26,at:"hem",x:[.2,.8],op:.55}]],
   tide:[null,{h:.08,v:.6,f:9,soft:.03,op:.42},{h:.15,v:.55,f:9,soft:.045,op:.55},{h:.23,v:.5,f:9,soft:.06,op:.7}],col:[122,84,50],warm:.35,shoe:.85}},
- rot:.5,jit:.05}});
+ rot:.5,jit:.05,
+ /* r6e tea look: translucent amber (core = inside darkness, ring = tide-line edge, cap = max strength, pull = how far it is pulled toward tea brown on saturated red / orange cloth) */
+ tea:{core:.2,ring:.6,cap:.5,pull:.45}}});
 /* ---------- tiny deterministic noise ---------- */
 function clothHash(x,y,s){let h=(x*374761393+y*668265263+s*2147483647)|0;h=(h^(h>>>13))*1274126177|0;return((h^(h>>>16))>>>0)/4294967295}
 function clothNoise(x,y,s){const xi=Math.floor(x),yi=Math.floor(y),fx=x-xi,fy=y-yi,u=fx*fx*(3-2*fx),v=fy*fy*(3-2*fy);
@@ -183,7 +185,7 @@ function clothDecalMid(dec){let t=0,n=0;for(let i=0;i<dec.w*dec.h;i++){const a=d
 function clothDecalRing(dec){const n=dec.w*dec.h,A=new Float32Array(n);for(let i=0;i<n;i++)A[i]=dec.data[i*4+3]/255;const r=Math.max(2,Math.round(.05*Math.min(dec.w,dec.h))),Ab=clothBlur(A,dec.w,dec.h,r),R=new Float32Array(n);for(let i=0;i<n;i++)R[i]=Math.min(1,Math.max(0,A[i]-Ab[i])*3.2);dec.A=A;dec.ring=R}
 /* r6b: a decal drawn much smaller than its file (768 px -> 20-60 px) was point-sampled -> aliased pixel speckle. clothDecalMip = premultiplied 2x2 box halvings (cached on the decal) so the draw samples a copy at most 2x its drawn size: soft watercolour edges stay soft */
 function clothDecalMip(dec,dw){let m=dec;while(m.w>dw*2&&m.w>8&&m.h>8){if(!m.half){const w=m.w>>1,h=m.h>>1,o=new Uint8ClampedArray(w*h*4),D=m.data;for(let y=0;y<h;y++)for(let x=0;x<w;x++){let a=0,r=0,g=0,b=0;for(const[dx,dy]of[[0,0],[1,0],[0,1],[1,1]]){const j=((2*y+dy)*m.w+2*x+dx)*4,al=D[j+3];a+=al;r+=D[j]*al;g+=D[j+1]*al;b+=D[j+2]*al}const i=(y*w+x)*4;o[i+3]=a/4;if(a){o[i]=r/a;o[i+1]=g/a;o[i+2]=b/a}}m.half={w,h,data:o}}m=m.half}return m}
-function drawDecalOnCloth(out,W,H,mk,dec,ax,ay,scale,rot,op,blend,tint,tm){const fw=mk.x1-mk.x0+1,dw=Math.max(2,fw*scale);if(blend!=="shade")dec=clothDecalMip(dec,dw);const sc=dw/dec.w,dh=dec.h*sc,c=Math.cos(rot),sn=Math.sin(rot),R=Math.hypot(dw,dh)/2+1;let n=0;
+function drawDecalOnCloth(out,W,H,mk,dec,ax,ay,scale,rot,op,blend,tint,tm){const B=BAL.looks.stain;const fw=mk.x1-mk.x0+1,dw=Math.max(2,fw*scale);if(blend!=="shade")dec=clothDecalMip(dec,dw);const sc=dw/dec.w,dh=dec.h*sc,c=Math.cos(rot),sn=Math.sin(rot),R=Math.hypot(dw,dh)/2+1;let n=0;
  for(let y=Math.max(0,Math.floor(ay-R));y<=Math.min(H-1,Math.ceil(ay+R));y++)for(let x=Math.max(0,Math.floor(ax-R));x<=Math.min(W-1,Math.ceil(ax+R));x++){const i=y*W+x,mm0=(blend==="shade"?mk.m:mk.mS)[i];if(mm0<.5)continue;const mm=clothSmooth(.5,.97,mm0);
   const px=x-ax,py=y-ay,u=(px*c+py*sn)/sc+dec.w/2,v=(-px*sn+py*c)/sc+dec.h/2;if(u<0||v<0||u>=dec.w-1||v>=dec.h-1)continue;
   const u0=u|0,v0=v|0,fx=u-u0,fy=v-v0,j=(v0*dec.w+u0)*4,w0=(1-fx)*(1-fy),w1=fx*(1-fy),w2=(1-fx)*fy,w3=fx*fy,D=dec.data,k=dec.w*4;
@@ -193,8 +195,8 @@ function drawDecalOnCloth(out,W,H,mk,dec,ax,ay,scale,rot,op,blend,tint,tm){const
   const a=Math.min(1,wedge*da*op*mm*ef*ef*(3-2*ef)*(1-(blend==='shade'?Math.min(1,Math.max(mk.protS[i]*1.6,mk.prot[i]*1.2)):mk.protL[i])));if(a<.003)continue;
   const mx0=Math.max(1,out[i*4],out[i*4+1],out[i*4+2]);
   if(blend==="stain"){/* translucent stain: only the decal SHAPE is used; multiply by a tea-brown factor so the fabric texture and folds stay visible; darker tide-line ring at the edge, lighter centre */
-   if(!dec.A)clothDecalRing(dec);const ii=(Math.round(v)*dec.w+Math.round(u)),sv=Math.min(.66,wedge*op*mm*ef*(1-mk.protL[i])*(.38*dec.A[ii]+.75*dec.ring[ii]));if(sv<.01)continue;
-   for(let q=0;q<3;q++)out[i*4+q]*=(1-sv)+sv*tint[q]/255;n++;continue}
+   if(!dec.A)clothDecalRing(dec);const ii=(Math.round(v)*dec.w+Math.round(u)),sv=Math.min(B.tea.cap,wedge*op*mm*ef*(1-mk.protL[i])*(B.tea.core*dec.A[ii]+B.tea.ring*dec.ring[ii]));if(sv<.01)continue;
+   {const sat=1-Math.min(out[i*4],out[i*4+1],out[i*4+2])/mx0,e=Math.min(B.tea.pull,(tm||0)*sat*sv*2.4);for(let q=0;q<3;q++){const b=out[i*4+q],m=b*((1-sv)+sv*tint[q]/255);out[i*4+q]=Math.min(b,m*(1-e)+tint[q]*.62*e)}}n++;continue}/* r6e: on saturated red / orange cloth a tea-brown multiply stays red: pull toward a deeper tea brown by the cloth's saturation (BAL tra.tm), never lighter */
   for(let q=0;q<3;q++){let dc=D[j+q]*w0+D[j+4+q]*w1+D[j+k+q]*w2+D[j+k+4+q]*w3;if(tint)dc=dc+(tint[q]-dc)*tm;const b=out[i*4+q];let o;
    if(blend==="shade"){if(dec.mid==null)clothDecalMid(dec);const dl=dc/255-dec.mid;const sat=1-b/mx0;/* shade tinted to the robe: the weaker channels darken more, so shadows are the robe's own deeper hue, not neutral grey */o=b*(1+BAL.looks.xoc.dec.shadeK*(dl<0?dl*(1+.9*sat):dl*.45))}else if(blend==="normal")o=dc;else if(blend==="soft")o=dc<128?2*b*dc/255:255-2*(255-b)*(255-dc)/255;else if(blend==="mud"){const sat=1-Math.min(out[i*4],out[i*4+1],out[i*4+2])/mx0,e=Math.min(1,tm*sat*2.2);o=Math.min(b,b*dc/255*(1-e)+dc*.85*e)}else o=b*dc/255;/* mud (r6e): multiply, pulled toward the mud colour on saturated cloth; multiply: the robe's folds and pattern show through */
    out[i*4+q]=b+(o-b)*a}n++}
