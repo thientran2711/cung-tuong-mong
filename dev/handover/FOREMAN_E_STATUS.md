@@ -16,3 +16,5 @@ SẴN SÀNG KIỂM hall-names b5315ff (E3)
 - (18/11) E5 questline-q0: SẴN SÀNG KIỂM questline-q0 cfb0e8ab (ROAD_MAP §0 row 20 LIVE + §4.10 20 men templates; GE §1.5 fixed text in reports/questline-q0.md for E1)
 FOR MAIN (open): Foreman B please canon-check ROAD_MAP §4.10 (20 NPC men templates as built in jnroadm.js) on origin/review/questline-q0 cfb0e8ab; then sync ROAD_MAP main -> handover live copy.
 - (18/11 05:16Z) E3 hall-names SẴN SÀNG KIỂM b5315ff → reviewer E3r session_01DgYSWpMzeXxqEAbLCfJGJE (SMALL). E3 kept idle for fixes. Load 6/12.
+- (18/11 05:20Z) E5 Q0 DONE cfb0e8ab, foreman-checked (docs only: dev/story/ROAD_MAP.md §0 row 20 + §4.10). Rebased on main → review/questline-q0-ff 8a1955dc. My FF push to main was BLOCKED by this session's permission guard → waiting owner permission or main.
+FOR MAIN (open): READY to FF main: review/questline-q0-ff 8a1955dc66db60a398f11c47aea71676bcc6e8c7 (docs only, parent = main 1 commit back). Please FF it (E's push to main is blocked by its session permissions).
