@@ -11,3 +11,11 @@ Fold 755x1000@2/@4 and iPad 1180x820@2, face c11-tcold-a18, Doan trang 60 / Kieu
 img/mk-fit/consort-c01.json .. consort-c32.json (32) + img/mk-fit/player-look1.json .. player-look4.json (4), from dev/art/mkfit/, plus img/toil-fit2.json (from dev/art/toil-fit2.json) = 37 files. Without them the lips drift 5-8 % left of the mouth (c05).
 ## Cleanup
 No CDN review folder used; scratch shots local only.
+
+---
+# r2 — re-merge onto main 3da5720a (makeup-lux r2v live) — PASS f6ee11b1
+PRIORITY #1 CHECK: OD main s41 order 01:08Z | main 3da5720a (makeup-lux) | review/looks-s40 4cdcffa9 (previous PASS) | claims MAIN s41.
+Merged origin/main 3da5720a into review/looks-s40 (FF-compatible: main is an ancestor). Conflicts: index.html/sw.js/assets.json = generated (taken from main, rebuilt); dev/build/jtoil.js 5 hunks resolved per review-makeup-lux §r2: lv/lvBase kept (main side); BAL.toil keeps toil-looks5 level/blush/vung numbers WITHOUT allow/diemOdds; toilLookOf tail = tl5 (score>=tier[2] -> tuyet, no diem roll); tease = tl5 wording, condition L.dv==="diem"||L.mk==="vung", Diem text "an van diem dua"; TOIL_LOOKS = tl5 table minus diem (vua/dep/tuyet(glow)/vung) + main's toilArt; toilLookRec by LEVEL: toilMk(r) -> moc ? null : toilArt(k); toilLookOfP from main. TOIL_MKS (colour-layer table, still has its own diem row) untouched.
+Tests on f6ee11b1: quickcheck PASS (278 s; core gates PASS; old save ok; perf new/live render 134/130, tab 228/230, buoi 589/583); one-core-guard/text/text-rule/bind PASS; makeup-lux, makeup-theme, toilette Fold + iPad PASS (no fails, no overflow, no errors); toil-tease 25/25; toil-overlay Fold+iPad bad 0; toil-react Fold+iPad 0 fails; toil-draw PASS 10; coop-toil-look 29/29.
+Looks (Fold 755x1000@3, iPad 1180x820@2, pink + warm sets, Doan trang 60 / Kieu diem 60 / Khuynh thanh 80 with level driven by score 50/75/92): lips on the mouth, ladder reads, no leak outside the face, glow layer present on Khuynh thanh only. Note: a test that sets a fixed score (not the level) now gets the level from the score (my first sampler pass used score 30 = vung, fixed in the sampler, not a code fault).
+CDN with landing: same 37 files (img/mk-fit/consort-c01..c32.json, player-look1..4.json, img/toil-fit2.json).
