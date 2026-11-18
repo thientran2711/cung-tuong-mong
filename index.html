@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"c1104d92+","t":"2026-11-18T05:41Z","c":"face-zoom-aspect test: SEED / FORCE options for same-character before/after shots","b":"5040ba3ccfb6","h":[{"s":"16b4dad8+","t":"2026-11-18T05:32Z","c":"cloth-bake-static: cloth layer on every static figure path on a cold cache (wait layer + patch on bake done); test + report"},{"s":"231cd3b3+","t":"2026-11-18T03:27Z","c":"review display-set-bonus: VANPHONG rows (Đa Bảo Các + set wording); cap line drops 'điểm'; j8 'Điểm trang lộng lẫy' night quality reads wor…"},{"s":"bd8547f2+","t":"2026-11-18T03:28Z","c":"men-forbidden r6: old saves drop officials / festival princes standing in the hậu cung on load (menLoadFix, same ONE rule)"},{"s":"c743265c+","t":"2026-11-18T03:18Z","c":"review life-preload r6: title prefetch chained on undefined (lWant returns its promise); gate cap really 25 s (no re-run after cap / Vào cu…"},{"s":"2aca2aac+","t":"2026-11-18T03:17Z","c":"review cloth-tea-r6: kclo-on hides the picture by clip-path, not visibility (visibility:hidden made kfxGeom hide the cloth layer too: her f…"},{"s":"2b1b0701","t":"2026-11-18T03:00Z","c":"review staff-cap-apply r6: site rebuilt on db24027f"},{"s":"64488e4f+","t":"2026-11-18T02:38Z","c":"cloth-xoc r6e: rebuild site"},{"s":"af71f94a+","t":"2026-11-18T02:17Z","c":"smudge r16: stage4 + avatar probe tests, options script score fix (look tier by score), FINAL mode"},{"s":"e1f60927+","t":"2026-11-18T02:25Z","c":"result-reason: every result card line says a short why (kitWhy, KIT 7); values left-aligned next to labels"},{"s":"29385ec6+","t":"2026-11-18T02:07Z","c":"greet-stranger: site rebuilt"}]};
+window.CTM_BI={"s":"9739063e","t":"2026-11-18T06:01Z","c":"hall-names FIX 1: servants' row place (jplx cnh) + Nam Chiếu court hall read the table; scan covers Dãy nhà cung nhân / Chính điện; rebuilt","b":"ce522d927fc1","h":[{"s":"c1104d92+","t":"2026-11-18T05:41Z","c":"face-zoom-aspect test: SEED / FORCE options for same-character before/after shots"},{"s":"16b4dad8+","t":"2026-11-18T05:32Z","c":"cloth-bake-static: cloth layer on every static figure path on a cold cache (wait layer + patch on bake done); test + report"},{"s":"231cd3b3+","t":"2026-11-18T03:27Z","c":"review display-set-bonus: VANPHONG rows (Đa Bảo Các + set wording); cap line drops 'điểm'; j8 'Điểm trang lộng lẫy' night quality reads wor…"},{"s":"bd8547f2+","t":"2026-11-18T03:28Z","c":"men-forbidden r6: old saves drop officials / festival princes standing in the hậu cung on load (menLoadFix, same ONE rule)"},{"s":"c743265c+","t":"2026-11-18T03:18Z","c":"review life-preload r6: title prefetch chained on undefined (lWant returns its promise); gate cap really 25 s (no re-run after cap / Vào cu…"},{"s":"2aca2aac+","t":"2026-11-18T03:17Z","c":"review cloth-tea-r6: kclo-on hides the picture by clip-path, not visibility (visibility:hidden made kfxGeom hide the cloth layer too: her f…"},{"s":"2b1b0701","t":"2026-11-18T03:00Z","c":"review staff-cap-apply r6: site rebuilt on db24027f"},{"s":"64488e4f+","t":"2026-11-18T02:38Z","c":"cloth-xoc r6e: rebuild site"},{"s":"af71f94a+","t":"2026-11-18T02:17Z","c":"smudge r16: stage4 + avatar probe tests, options script score fix (look tier by score), FINAL mode"},{"s":"e1f60927+","t":"2026-11-18T02:25Z","c":"result-reason: every result card line says a short why (kitWhy, KIT 7); values left-aligned next to labels"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -38584,6 +38584,34 @@ html body .dlg.kpanel.kpdlg{box-sizing:border-box;width:var(--kpw);min-width:0;m
 .kpdlg>.kpopts .kbtn{min-height:40px;padding:6px 16px;font-size:.86rem}
 /* kv3:.kv1 */:where(.kv1) .kpdlg>.kpdb{grid-template-columns:clamp(84px,32%,140px) minmax(0,1fr);gap:9px;padding:8px 10px 2px}:where(.kv1) .kpdlg .kpdt{font-size:.84rem}:where(.kv1) .kpdlg>.kpopts{padding:6px 10px 10px}
 `;document.head.appendChild(st)})();
+/* ================= jhall: ONE place-name table for the halls of every palace (owner OD:L1475, 16/11 21:48Z) =================
+   Real courts hung a named plaque (biển ngạch) on every hall. Display-only: ids (part 'chinh'|'dong'|'tay'|'cungnhan', palace keys, slots) never change,
+   old saves load untouched. The role (Chính điện / Đông phối điện / Tây phối điện / Dãy nhà cung nhân) stays only as a small subtitle (HALL.role).
+   Patterns (dev/handover/reports/hall-names-history.md): chính = 2 auspicious/virtue characters + điện; Đông (spring, benevolence) side = + hiên;
+   Tây (autumn, righteousness) side = + trai; the servants' row = + viện. Every name is unique in the whole table AND against the palace names (selftest below).
+   Keyed by the palace's own display name (PALN / jpal.js list / "Càn Ninh cung"), so a slot index never matters. */
+const HALL_PN={
+ "Cảnh Phúc cung":["Thể Hòa điện","Dưỡng Xuân hiên","Thanh Thu trai"],
+ "Khải Tường cung":["Sùng Đức điện","Nhã Vận hiên","Tĩnh Nghi trai"],
+ "Chung Tú cung":["Diên Khánh điện","Minh Hòa hiên","Du Thanh trai"],
+ "Hàm An cung":["Thụy Ngọc điện","Tuy Phúc hiên","Tịch Nguyệt trai"],
+ "Thừa Minh cung":["Chiêu Huy điện","Duyệt Xuân hiên","Thanh Dật trai"],
+ "Diên Huy cung":["Kính Ninh điện","Chiêu Nhân hiên","Sùng Nghĩa trai"],
+ "Vĩnh Hòa cung":["Hoài Nhu điện","Hòa Chương hiên","Tư Tĩnh trai"],
+ "Trường Xuân cung":["Lạc Thọ điện","Vĩnh Xuân hiên","Hàm Thu trai"],
+ "Vĩnh Thọ cung":["Ngưng Tường điện","Tuyên Hòa hiên","Hoài Cẩn trai"],
+ "Dực Khôn cung":["Hậu Đức điện","Hòa Sướng hiên","Mặc Hương trai"],
+ "Trữ Tú cung":["Tụ Anh điện","Triêu Hà hiên","Vãn Quế trai"],
+ "Hàm Phúc cung":["Diễn Khánh điện","Lan Xuân hiên","Cúc Thu trai"],
+ "Thái Cực điện":["Chấp Trung điện","Vĩnh Nhân hiên","Thận Nghĩa trai"],
+ "Càn Ninh cung":["Mẫu Nghi điện"]};
+const HALL_ROLE={chinh:"Chính điện",dong:"Đông phối điện",tay:"Tây phối điện",cungnhan:"Dãy nhà cung nhân"};
+const HALL_IDX={chinh:0,dong:1,tay:2};
+const HALL_SRV="Tích Cần viện"; /* the servants' row is one shared building */
+const HALL_NC="Quân Ân điện"; /* Nam Chiếu court hall (jkc2 P.dien); role "chính điện" = subtitle only */
+/* hallName(palaceName, part) → the plaque name; unknown palace / part → the old generic role (nothing ever blank) */
+function hallName(pn,part){if(part==="cungnhan")return HALL_SRV;const L=HALL_PN[pn];const i=HALL_IDX[part];return(L&&i!=null&&L[i])||HALL_ROLE[part]||""}
+function hallRole(part){return HALL_ROLE[part]||""}
 /* ================= jres: NƠI Ở (residence rooms) — tranh phòng theo nơi người đó ĐANG ở =================
    Tranh: img/<phòng>-<mùa>-<buổi>.webp (Magnific gpt-2-6, 3:2). Phòng:
      8 cung (MAPH.rivalSlots, theo thứ tự PALN): <slug>-cung (chính điện, chủ vị), <slug>-cung-dong-phoi / -tay-phoi (phối điện, người ở chung);
@@ -38597,7 +38625,7 @@ html body .dlg.kpanel.kpdlg{box-sizing:border-box;width:var(--kpw);min-width:0;m
      resRoomName(r) → "Đông phối điện · Cảnh Phúc cung" …
    Sân khấu: "home" và "r<id>" (thăm cung) dùng phòng thật thay cho phi-tan-cung chung; tính lại ở mỗi renderStage. */
 const RES_SLUG=["canh-phuc","khai-tuong","chung-tu","ham-an","thua-minh","dien-huy","vinh-hoa","truong-xuan"];
-const RES_PART_N={chinh:"Chính điện",dong:"Đông phối điện",tay:"Tây phối điện",cungnhan:"Dãy nhà cung nhân"};
+const RES_PART_N=HALL_ROLE; /* role = small subtitle only; the plaque name comes from jhall.js hallName() */
 /* RES_VAR: bản có thật trong img/ (viết lại bằng dev/art/gen_res_var.py) */
 const RES_VAR={"canh-phuc-cung":"xuan-sang xuan-trua xuan-chieu xuan-toi ha-sang ha-trua ha-chieu ha-toi thu-sang thu-trua thu-chieu thu-toi dong-sang dong-trua dong-chieu dong-toi",
  "canh-phuc-cung-dong-phoi":"xuan-sang xuan-trua xuan-chieu xuan-toi ha-sang ha-trua ha-chieu ha-toi thu-sang thu-trua thu-chieu thu-toi dong-sang dong-trua dong-chieu dong-toi",
@@ -38657,8 +38685,8 @@ function residenceOf(p){const R=(o)=>Object.assign({pal:null,head:null},o);if(!p
  if(h.queen)return R({part:"kn",head:h});
  return h.pal!=null?R({part:resSidePart(p,h),pal:h.pal,head:h}):R({part:"ngocthanh",head:h})}
 function resRoomName(r){if(!r)return"";if(r.part==="ngocthanh")return typeof HOMEN!=="undefined"?HOMEN:"Ngọc Thanh các";
- if(r.part==="kn")return"Càn Ninh cung";if(r.part==="lc")return"Trường Môn viện";
- const pn=r.pal!=null&&typeof PALN!=="undefined"?PALN[r.pal]:"";return r.part==="chinh"?pn:(RES_PART_N[r.part]+(pn?` · ${pn}`:""))}
+ if(r.part==="kn")return hallName("Càn Ninh cung","chinh")+" · Càn Ninh cung";if(r.part==="lc")return"Trường Môn viện";
+ const pn=r.pal!=null&&typeof PALN!=="undefined"?PALN[r.pal]:"";return hallName(pn,r.part)+(pn?` · ${pn}`:"")}
 function resSame(a,b){return!!a&&!!b&&a.part===b.part&&a.pal===b.pal&&(a.pal!=null||a.head===b.head)}
 function roomResidents(pal,part){const T={pal:resPalIdx(pal),part};return[S].concat((rivals||[]).filter(v=>v.alive&&!v.out)).filter(p=>resSame(residenceOf(p),T))}
 function roomPeople(pal,part){const W=(S&&S.where)||{};return roomResidents(pal,part).filter(p=>p===S?S.place==="home":W[p.id]===palaceOf(p))}
@@ -55443,8 +55471,8 @@ const KPM_DATA=/*@pl2*/{"_src":"Phượng Lệnh art repo thientran2711/phuong-l
 /* WHICH HALLS ARE REALLY PAINTED in each courtyard picture (owner 16/11 21:36Z: a picture may only serve a place whose halls are ALL painted in it, every label sits ON its building).
    Audited by eye on all 6 dirs (r3): cac = ONE pavilion only (no side halls, no cung nhân row); the other five show chính + Đông + Tây phối điện. Not synced by pl2_sync.py: Foreman C updates this line when a new painting adds halls. */
 const KPM_HALLS={"nhat-cac":["chinh"],"nhat-phi-cung":["chinh","dong","tay"],"nhat-quy-cung":["chinh","dong","tay"],"nhat-vinh-hoa":["chinh","dong","tay"],"nhat-can-ninh":["chinh","dong","tay"],"nhat-spare-cung":["chinh","dong","tay"]};
-const KPM_PARTS=[["chinh","Chính điện"],["dong","Đông phối điện"],["tay","Tây phối điện"]];
-const KPM_PN={chinh:"Chính điện",dong:"Đông phối điện",tay:"Tây phối điện",cungnhan:"Dãy nhà cung nhân"};
+const KPM_PARTS=[["chinh"],["dong"],["tay"]]; /* ids only; plaque names from jhall.js hallName(palace, part), role = HALL_ROLE */
+const KPM_PN=HALL_ROLE;
 
 function kpmBuoiW(){const four=typeof BUOI!=="undefined"&&BUOI.length>=4;return (four?["sang","trua","chieu","toi"]:["sang","chieu","toi"])[S.buoi||0]||"sang"}
 function kpmSeason(){return ({"Xuân":"xuan","Hạ":"ha","Thu":"thu","Đông":"dong"})[SEASON[(S.month||1)-1]]||"xuan"}
@@ -55491,7 +55519,7 @@ function kpmSil(n,ppl){return"";if(!n)return"";const im=g=>typeof K61U==="object
 function kpmResLine(p){return p===S?"ngươi":`${p.queen?"Hoàng hậu":RANKS[rkOf(p)].n} ${p.name}`}
 
 /* the halls (hotspots) of a slot: [part,label]; ONE rule for the whole plan (owner 11/16): >=2 halls → courtyard picture first, exactly 1 → the tap goes straight to the place */
-function kpmParts(slot,k,nm){nm=nm||kpmName(slot);return(kpmIsPlace(slot)?[["chinh",(kpmPlace(slot.slice(2))||{}).label||nm]]:slot==="kn"?[["chinh","Chính điện"]]:KPM_PARTS.slice()).concat(k==="home"?[["cungnhan",KPM_PN.cungnhan]]:[])}
+function kpmParts(slot,k,nm){nm=nm||kpmName(slot);return(kpmIsPlace(slot)?[["chinh",(kpmPlace(slot.slice(2))||{}).label||nm]]:slot==="kn"?[["chinh",hallName("Càn Ninh cung","chinh")]]:KPM_PARTS.map(x=>[x[0],hallName(nm,x[0])])).concat(k==="home"?[["cungnhan",hallName(nm,"cungnhan")]]:[])}
 function kpmMulti(slot,k){return kpmParts(slot,k===undefined?kpmKeyOf(slot):k).length>=2&&!!kpmArt(slot)} /* >=2 halls AND some courtyard picture exists (exact or tạm stand-in); no picture at all → the Dư đồ tap goes straight to the hall */
 
 /* ---------- the component ---------- */
@@ -55499,14 +55527,14 @@ function kpmMulti(slot,k){return kpmParts(slot,k===undefined?kpmKeyOf(slot):k).l
 function kitPalaceMap(o){const slot=o.slot,k=o.k;const A=kpmArt(slot);const nm=kpmName(slot);const SP=kpmSplit(k);
  const spots=A&&KPM_DATA.spots&&KPM_DATA.spots[A.dir]||{};const why=o.why||"";
  const PARTS=kpmParts(slot,k,nm);
- const chip=(n,h)=>h==="cungnhan"?`<i>${n} cung nhân</i>`:n?`<i>${n} bóng người</i>`:`<i>vắng</i>`;
+ const role=h=>h==="cungnhan"||!kpmIsPlace(slot)?hallRole(h):"";const chip=(n,h)=>h==="cungnhan"?`<i>${n} cung nhân</i>`:n?`<i>${n} bóng người</i>`:`<i>vắng</i>`;
  const here=h=>!!k&&S.place===k&&kpmHall()&&kpmHall().part===h;
  return `<div class="mapv kpmv" data-kpm="${slot}"><div class="maptools"><span><button class="btn mz kpm-back" data-kpmback="1" aria-label="Về Dư đồ">‹ Dư đồ</button></span><span class="past kpm-t"><b>${nm}</b>${why?` · <em>${why}</em>`:""}</span></div>
  <div class="mapsc"><div class="mapw" style="width:100%">${A?`<img class="mapimg" src="${A.src}" alt="Sân ${nm} nhìn từ trên cao">`:`<img class="mapimg" src="${mapImg()}" alt="${nm}">`}
  ${PARTS.map(([h,hn])=>{const b=spots[h];if(!b||!(KPM_HALLS[A.dir]||[]).includes(h))return"";const s=SP[h]; /* only halls painted in this picture get a hotspot; the others stay in the kit list below */
-  return `<button class="mspot kpm-spot${here(h)?" here":""}" data-go="kpm:${h}" title="${hn}${s.res.length?" · ở: "+s.res.map(kpmResLine).join(", "):""}" style="left:${b.x*100}%;top:${b.y*100}%;width:${b.w*100}%;height:${b.h*100}%"><span class="mlab">${hn}${chip(s.n,h)}</span>${h==="cungnhan"?"":kpmSil(s.n,s.ppl)}</button>`}).join("")}
+  return `<button class="mspot kpm-spot${here(h)?" here":""}" data-go="kpm:${h}" title="${hn}${role(h)?" ("+role(h)+")":""}${s.res.length?" · ở: "+s.res.map(kpmResLine).join(", "):""}" style="left:${b.x*100}%;top:${b.y*100}%;width:${b.w*100}%;height:${b.h*100}%"><span class="mlab">${hn}${chip(s.n,h)}</span>${h==="cungnhan"?"":kpmSil(s.n,s.ppl)}</button>`}).join("")}
  ${kitTam(!A||A.tam)}</div></div>
- <div class="kpm-list${PARTS.length===1?" one":""}">${PARTS.map(([h,hn])=>{const s=SP[h];return `<button class="btn kpm-row${here(h)?" sel":""}" data-kpmpart="${h}"><b class="kpm-rn">${hn}</b><span class="kpm-rs">${h==="cungnhan"?`${s.n} cung nhân của ngươi`:s.n?`${s.n} bóng người`:"vắng người"}</span>${kpmIsPlace(slot)||h==="cungnhan"?"":`<span class="kpm-rs">${s.res.length?"Người ở: "+s.res.map(kpmResLine).join(", "):"Chưa ai ở"}</span>`}</button>`}).join("")}</div></div>`}
+ <div class="kpm-list${PARTS.length===1?" one":""}">${PARTS.map(([h,hn])=>{const s=SP[h];return `<button class="btn kpm-row${here(h)?" sel":""}" data-kpmpart="${h}"><b class="kpm-rn">${hn}</b><span class="kpm-rs">${role(h)?role(h)+" · ":""}${h==="cungnhan"?`${s.n} cung nhân của ngươi`:s.n?`${s.n} bóng người`:"vắng người"}</span>${kpmIsPlace(slot)||h==="cungnhan"?"":`<span class="kpm-rs">${s.res.length?"Người ở: "+s.res.map(kpmResLine).join(", "):"Chưa ai ở"}</span>`}</button>`}).join("")}</div></div>`}
 
 /* ---------- state + navigation ---------- */
 /* __kpm = the detail map open on the Dư đồ tab ({slot,k}); S.hall = the room she stands in ({k,part,t}) for this buổi only */
@@ -55541,7 +55569,7 @@ function kpmRoomImg(k,part){try{const a=part==="cungnhan"?residenceArt(null,"cun
 (function(){const p0=placeOf;placeOf=function(k){const P=p0.apply(this,arguments);try{const h=kpmHall();if(!h||h.place||k!==h.k||!P)return P;
   const im=kpmRoomImg(k,h.part);const sc="kpm-"+h.part;if(im)SCIMG[sc]=im;
   const sl=kpmSlotOf(k);const base=sl!=null&&!kpmIsPlace(sl)?kpmName(sl):k==="home"?HOMEN:P.n;
-  return Object.assign({},P,{sc:im?sc:P.sc,n:h.part==="chinh"?base:`${base} · ${KPM_PN[h.part]}`})}catch(e){return P}}})();
+  return Object.assign({},P,{sc:im?sc:P.sc,n:h.part==="chinh"&&!HALL_PN[base]?base:`${hallName(base,h.part)} · ${base}`})}catch(e){return P}}})();
 (function(){const c0=curPeople;curPeople=function(){const L=c0.apply(this,arguments);try{const h=kpmHall();if(!h||h.place||!S.visit||S.visit.k!==h.k)return L;
   if(h.part==="cungnhan")return L.filter(kpmIsSrv);
   const hd=kpmHead(h.k);return L.filter(p=>{const r=p&&p.ref;if(r&&rivals.includes(r)&&p.kind!=="chest")return kpmHallOf(r,h.k)===h.part;
@@ -55550,7 +55578,7 @@ function kpmRoomImg(k,part){try{const a=part==="cungnhan"?residenceArt(null,"cun
 (function(){const r0=renderStage;renderStage=function(){const r=r0.apply(this,arguments);try{const b=document.getElementById("tomap");const h=kpmHall();
   /* the visit line counts the whole palace: in a hall it counts that hall */
   if(h&&!h.place){const m=document.querySelector("#sc-t .rmsg");if(m){const n=curPeople().length;const R=kpmSplit(h.k)[h.part].res;
-   const t=` · ${n?`Ở đây có ${n} người.`:"Không có ai ở đây."}${R.length?` Người ở: ${R.map(kpmResLine).join(", ")}.`:""}`;if(m.textContent!==t){m.textContent=t;m.title=t}}}
+   const t=` · ${hallRole(h.part)}. ${n?`Ở đây có ${n} người.`:"Không có ai ở đây."}${R.length?` Người ở: ${R.map(kpmResLine).join(", ")}.`:""}`;if(m.textContent!==t){m.textContent=t;m.title=t}}}
   if(b){const slot=h?kpmSlotOf(h.k):null;if(h&&slot!=null&&kpmMulti(slot,h.k)){const nm=kpmName(slot);b.textContent="‹ "+nm.replace(/ cung$/," cung");b.setAttribute("aria-label","Về bản đồ "+nm);b.dataset.kpm=slot}else if(b.dataset.kpm!=null){delete b.dataset.kpm;b.textContent="‹ Dư đồ";b.setAttribute("aria-label","Về Dư đồ")}}}catch(e){}return r}})();
 document.addEventListener("click",e=>{const b=e.target.closest("#tomap");if(!b||!S)return;const h=kpmHall();if(h&&b.dataset.kpm!=null){const v=b.dataset.kpm;const slot=/^\d+$/.test(v)?+v:v;window.__kpm={slot,k:h.k}}else window.__kpm=null},true);
 
@@ -55628,7 +55656,7 @@ try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§33.10",title:"N�
  html:()=>`<p style="max-width:52em">Ở mọi nơi không phải phòng mình: tranh nơi chốn chiếm trọn trang, cột trái (lối tắt + nút về Dư đồ) và cột phải y như phòng ngủ, người đứng theo tỉ lệ chuẩn, cột cố định, vuốt sang trái/phải, chip "+N" hai bên; chạm người → thẻ người ấy; "Hành sự" = trang thẻ việc riêng. Phòng mình giữ sân khấu Hành sự (iPad: sân khấu | thẻ).</p>`})}catch(e){}
 /* ================= jplx: NƠI CHỐN CÒN THIẾU TRÊN DƯ ĐỒ (D42, owner 14-15/11: OD L82, L86, L87) =================
    Five places on the Dư đồ of the whole palace, each with the box read from the map picture (dev/PLACES_PLAN.md §1, §5):
-     cnh  Dãy nhà cung nhân  (servants' quarters; picture = the approved residence painting cung-nhan, 16 season x buổi)
+     cnh  Tích Cần viện (role: dãy nhà cung nhân; servants' quarters; picture = the approved residence painting cung-nhan, 16 season x buổi)
      tgk  Tân Giả khố        (= Hoán y cục, the laundry; picture tan-gia-kho already existed; now a place on the map)
      ttp  Thượng thư phòng   (the princes' study hall = "học đường"; new picture)
      acs  A ca sở            (where the princes from 6 years old live; new picture)
@@ -55642,7 +55670,7 @@ try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§33.10",title:"N�
      princess 6-17: buổi sáng at Thượng thư phòng, then back with the mother
    The map count of each place = the people shown when she arrives (same list). Co-op: only S.where/S.place travel (state only). */
 const PLX={
- cnh:{n:"Dãy nhà cung nhân",fn:"chỗ ăn ngủ của cung nữ, thái giám",d:"Dãy nhà thấp mái xám, cung nữ và thái giám ăn ngủ ở đây.",img:"cung-nhan",box:{x:.085,y:.645,w:.11,h:.155},anchor:{x:.14,y:.69},pos:[2,-1],fl:.42},
+ cnh:{n:HALL_SRV,fn:"dãy nhà cung nhân, chỗ ăn ngủ của cung nữ, thái giám",d:"Dãy nhà thấp mái xám, cung nữ và thái giám ăn ngủ ở đây.",img:"cung-nhan",box:{x:.085,y:.645,w:.11,h:.155},anchor:{x:.14,y:.69},pos:[2,-1],fl:.42},
  tgk:{n:"Tân Giả khố",fn:"Hoán y cục: nơi cung nhân chịu phạt giặt giũ",d:"Nơi cung nhân bị phạt giặt giũ ngày đêm.",img:"tan-gia-kho",box:{x:.097,y:.466,w:.13,h:.10},anchor:{x:.16,y:.50},pos:[1,-1]},
  ttp:{n:"Thượng thư phòng",fn:"học đường của hoàng tử, công chúa",d:"Nơi các hoàng tử, công chúa theo thầy học chữ, học võ.",img:"thuong-thu-phong",box:{x:.825,y:.635,w:.07,h:.09},anchor:{x:.86,y:.67},pos:[0,3],fl:.62},
  acs:{n:"A ca sở",fn:"nơi các hoàng tử ở",d:"Các hoàng tử từ sáu tuổi dọn ra đây ở, sáng sang Thượng thư phòng học.",img:"a-ca-so",box:{x:.742,y:.098,w:.095,h:.125},anchor:{x:.79,y:.16},pos:[2,3],fl:.62},
@@ -55697,7 +55725,7 @@ function plxPeople(k){try{
 /* her own children keep the line the home stage gives them (Văn/Võ/Đức bars): take it from the unfiltered home list */
 let plxHomeFull=null;
 function plxHomeKid(kid){try{const f=plxHomeFull?plxHomeFull():[];const p=f.find(x=>x.kind==="kid"&&x.ref===kid);if(p)return p}catch(e){}return plxKidEntry(kid,null)}
-function plxPlaceMsg(k,n){if(n)return"";return({cnh:"Dãy nhà vắng, cung nhân đang làm việc.",ttp:(S.buoi||0)===0?"Chưa có ai trong Thượng thư phòng.":"Thượng thư phòng vắng, buổi học đã tan.",acs:(S.buoi||0)===0?"Các hoàng tử đã sang Thượng thư phòng học.":"A ca sở im ắng, chưa có hoàng tử nào ở đây.",dc:(S.buoi||0)===0?"Thái tử đã sang Thượng thư phòng học.":"Đông cung vắng, chưa lập Thái tử.",tgk:"Nước giặt lạnh buốt, chậu gỗ chất cao."})[k]||""}
+function plxPlaceMsg(k,n){if(n)return"";return({cnh:HALL_SRV+" vắng, cung nhân đang làm việc.",ttp:(S.buoi||0)===0?"Chưa có ai trong Thượng thư phòng.":"Thượng thư phòng vắng, buổi học đã tan.",acs:(S.buoi||0)===0?"Các hoàng tử đã sang Thượng thư phòng học.":"A ca sở im ắng, chưa có hoàng tử nào ở đây.",dc:(S.buoi||0)===0?"Thái tử đã sang Thượng thư phòng học.":"Đông cung vắng, chưa lập Thái tử.",tgk:"Nước giặt lạnh buốt, chậu gỗ chất cao."})[k]||""}
 
 /* her palace: children who live elsewhere this buổi are not on the home stage (and not in its head count) */
 (function(){if(typeof homePeople!=="function")return;const h0=homePeople;plxHomeFull=()=>h0.apply(null,[]);
@@ -63437,7 +63465,7 @@ function kc2D(){try{if(S&&S.kc)return S.kc.kd||"";return S&&S.origin?KC2K[S.orig
 function kc2On(){return isKc()&&!!(S.kc&&S.kc.kd)}
 const KC2LAND={nc:{land:"Nam Chiếu",dad:"Phụ vương",mom:"Mẫu hậu",title:"Công chúa Nam Chiếu",court:"vương cung Nam Chiếu",sub:["Trong vương cung","Kinh đô"],
   fest:["Lễ hội đuốc","Đêm tháng sáu, cả kinh đô đốt đuốc thông quanh hồ, trai gái múa vòng đến sáng."],
-  P:{tam:"Tẩm điện của ngươi",dien:"Chính điện",vien:"Vương uyển",mieu:"Chùa Sùng Thánh",dich:"Dịch quán sứ Đại Hy",cho:"Chợ kinh đô",ho:"Bờ hồ Nhĩ Hải"}},
+  P:{tam:"Tẩm điện của ngươi",dien:HALL_NC,vien:"Vương uyển",mieu:"Chùa Sùng Thánh",dich:"Dịch quán sứ Đại Hy",cho:"Chợ kinh đô",ho:"Bờ hồ Nhĩ Hải"}},
  bd:{land:"Bắc Địch",dad:"Phụ hãn",mom:"Khả đôn",title:"Công chúa Bắc Địch",court:"kim trướng Bắc Địch",sub:["Trong trại","Thảo nguyên"],
   fest:["Hội đua ngựa mùa hạ","Các bộ lạc kéo về quanh kim trướng: đua ngựa, bắn cung, vật, và kén rể."],
   P:{tam:"Trướng của ngươi",dien:"Kim trướng của phụ hãn",vien:"Bãi ngựa",mieu:"Miếu thần núi",dich:"Doanh trại sứ Đại Hy",cho:"Chợ phiên",ho:"Thảo nguyên"}}};
@@ -68059,7 +68087,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="5040ba3ccfb6";window.CTM_BUILD=BUILD;
+const BUILD="ce522d927fc1";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
