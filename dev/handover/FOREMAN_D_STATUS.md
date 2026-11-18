@@ -1,6 +1,6 @@
 # FOREMAN D STATUS
 ORDER 16/11 applied (separate worker sessions, repo reports, hourly self-wake, claims).
-last wake: 17/11 23:55Z — FOREMAN D #11 = session_01964izFTp8oV5DHeadkPMRn (depth 3/8, context ≈ 21 %)
+last wake: 18/11 00:55Z — FOREMAN D #11 = session_01964izFTp8oV5DHeadkPMRn (depth 3/8, context ≈ 22 %)
 s7 START_CTX ≈ 6 % of 1M window (get_session reads 0; own estimate ~60k after start reading); rollover at 31 %, ceiling 60 %.
 - (17/11 12:40Z) s7 STOPPED: old Foreman D s7 (session_01DgYSWo6WxULHyNN9yjfAPm) woke after a ~14 h stall, saw FOREMAN D #9 already in charge, deleted its own hourly wake trig_01WRgJzWBhmuoRbMvDPTXtqt, touched no worker and no claim. s7 context 37 % (past its 31 % rollover). Nothing to hand over beyond this file.
 - 21:43Z: suc-khoe-fix SẴN SÀNG KIỂM da50857d (F1–F10 fixed; F6 waits KIT REQUEST y-duoc + art; coop-e2e 60/60 incl. new 'NPC Sức khỏe guest = host'; D57 births fix ≈ base 0.14–0.16; her deaths 25–27 vs 17–25 per 40 lives) — worker archived → opus BIG reviewer r2 session_01DgYSWmYNeB92ubrzxwYmXs.
@@ -451,3 +451,4 @@ Hourly wake: #10's trig_01NQj22RN3xNZEJVdRUpcnUz is deleted at handover → #11 
 - (17/11 23:55Z, hourly, depth 3/8, context ≈ 21 %) No new ORDER for D (MAIN chat now s39 per OD tail). OD tail 23:40Z–00:00Z (hoa điền size 13.5 %, glow, lip smudge levels, crease decals, warm-tone makeup) = looks/art, not D's. Running: balance-2 fix2 session_01964izFNvwWQ5k8z1K6nAZG, odds-cap r2 review session_01964izFgd4LMUTiKvpBrSVD. Markers 0. RUNNING 2, free 10.
 
 - (18/11 00:10Z) FROM MAIN: main is now s40 = session_01UV1SzjbGx37rTjAmWFyCpc; report READY/PASS shas to it.
+- (18/11 00:55Z, hourly, depth 3/8, context ≈ 22 %) MAIN is now s40 = session_01UV1SzjbGx37rTjAmWFyCpc (report READY/PASS shas to it). No new ORDER for D. OD tail 00:05Z–02:30Z real (hoa điền size/tone/position, makeup levels, crease/stain/mud decals, glow v8 final, portraits loading text, servant cap per rank) = looks/art/main, not D's. Running: balance-2 fix2 session_01964izFNvwWQ5k8z1K6nAZG, odds-cap r2 review session_01964izFgd4LMUTiKvpBrSVD (no ROUND 2 reports yet). Markers 0. RUNNING 2, free 10. D PASSes for main: residence-seats-r1 a6e0fbc2, face-w404-r1 51b87607, day-khac-audit-r1 46900ee2 (+ kc2val-home-r1, cycle-roll-r1, ch14-goals-r1, night-ledger-r1).
