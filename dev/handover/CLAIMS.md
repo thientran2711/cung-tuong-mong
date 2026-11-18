@@ -7,3 +7,4 @@
 poison-road-r2-rv | review/poison-road-r2-rv | session_01964izEFTD1Fs4DqpreEzX8 | RUNNING | 18/11 10:12Z | owner D #1
 | REVIEW kit-kpb 19953e93 (sonnet SMALL UI; brief briefs/root51-review-kit-kpb.md) | review/kit-kpb-rv | MAIN ROOT-51 | session_01UV1Szm7d7V45EoFwfke8CE | RUNNING | 18/11 10:12Z |
 | REVIEW look-fx r10 DATA cand-face-fit-r10.json (sonnet SMALL; brief briefs/root51-review-look-fx-r10.md) | (CDN only) | MAIN ROOT-51 | session_01UV1Szkyjqhi5rdi3n2xVgj | RUNNING | 18/11 10:13Z |
+| E9r2 re-review questline-q3 18f638ed (opus BIG) | review/questline-q3 | E ROOT #3 | session_01DgYSWpR9QcYpQS62jgFNzt | RUNNING | 18/11 10:35Z |
