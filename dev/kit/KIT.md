@@ -868,7 +868,7 @@ kit frames (no tassels), whole rows only in pages (‹ ›, "trang 2/4" — neve
 ✓ badge on a pale-gold tile (`.ksel`), radio semantics, arrow keys + Enter/Space. **NO TABS (owner 16/11 s23, "bỏ cái tab đấy luôn, chỉ hiện ra
 những cái khung avatar"): a face / avatar picker shows ONE list of frames, no "Phi tần 32 | Cung nữ 52" tabs, no counts on tabs; the GAME picks the set from her
 identity, she never filters** — `kitFaceScope()` (j88, the one rule for solo + co-op + new life): a cung nữ life (palace maid, `isSrv()` / origin `cnv`) →
-the 52 maid faces only; every other life (phi tần) → `facePool("all")` = 84 (32 consort + 52 maid, every maid identity has consort dress art).
+faces m01–m52 only; every other life → `facePool("all")` = the whole pool of 84 painted women of «90 nhân vật nữ» (every id has rank-ladder art).
 (`filters` / `onFilter` stay in the part for a future non-face picker; no face picker passes them.) j86 (face pick on the identity card) is the only user; the standing figure follows.
 
 ## 24. VEIL OVERLAY (kit 2, for j70 scars)
@@ -1010,7 +1010,7 @@ owner-picked render d4).
   the top of the head (first opaque row, hair ornaments included) is moved to 3 % of the window under its top edge (lift capped at 0.14 so the
   picture still covers the window bottom; more body shows below), and the BODY (mid-point of the shoulder/chest rows, head ignored) to the
   window centre (offset capped ±18 % of the picture, and — reviewer r6 — never so far that the picture's own painted side edge comes inside the window). Same rule in every pcPort cell and size (card, strips, header, rows). Measured on all
-  32 consorts: scale 1.14 before = after, head gap 2.9 px at a 96 px window (one capped at 8.5), body centre 0 % (before −16…+11 %).
+  faces c01–c32: scale 1.14 before = after, head gap 2.9 px at a 96 px window (one capped at 8.5), body centre 0 % (before −16…+11 %).
 - Portrait cut (C1): the por picture is 1.14x the window, raised 5 % of its height and clipped to the window (head near the top edge, the
   person larger); old `face-*` art and the grey silhouette keep the plain window.
 - Crests (C2): every rank and role has its own crest on the top bar, `img/kit/crest-<key>.webp` (gpt-2-6, one style reference = the approved
@@ -1238,7 +1238,7 @@ for 5 / 4 / 3 / 2 columns the widest card for which title + all rows + buttons f
 portrait: ≥ 85 %). Result: iPad 1180x820 and 1366x1024 5 × 2, Fold 755x1000 4 × 3, Fold cover 412x1058 and phone 390x844 3 × 4. A last partial row is centred.
 Picture, name and chip scale with the card (`--krw`: name 8.8 %, chip 7 %, padding 4.5 %, name ≤ 1.2rem, chip ≤ 1rem); all tiles of the grid get ONE height (chips share the baseline, §28.12).
 Re-fitted on resize and when fonts load (never after a card is picked). `data-krc` / `data-krw` on `#kroul` = the chosen columns / width (tests).
-Sample: kit page §28.12b. Test: `node dev/test/kit-fit3.js <url> <outdir> [WxH,...]` (cards inside the screen, no horizontal scroll, side margins equal, gaps equal, face picker without tabs, 52 / 84 faces).
+Sample: kit page §28.12b. Test: `node dev/test/kit-fit3.js <url> <outdir> [WxH,...]` (cards inside the screen, no horizontal scroll, side margins equal, gaps equal, face picker without tabs, 84 painted women).
 - Test: `node dev/test/inv-origin.js <url> WxH@dpr <out> <tag>` (`window.__kroulStep` 0 face-up · 1 shuffling · 2 pick · 3 revealed). Shots `dev/shots/inv-origin/`.
 ### 28.13 kitItem — ONE item tile (KIT READY)
 `kitItem({src, name, grade:0..4, qty, label:[text,"ok"|"no"|"n"], on, empty, size:"sm"|"md"|"lg"|"xl", data, tip})` → `.kitem` (52 / 72 / 104 / 150 px; xl = the reveal spotlight, KIT §54.1).
@@ -3676,7 +3676,7 @@ owner recognises "this one still lacks its picture" in play. They are deliberate
 - Kit sample page: §59 (four pictures).
 ### 59.1 LOADING STATE · the picture is on its way (owner OD 18/11 ~01:50Z + 02:06Z "phải có một cái dòng chữ ... đang tải hình"; review/life-preload, kit-keeper delegate of MAIN s41) — `dev/build/jph.js`
 - §59 = "this has NO picture yet" (still-life). §59.1 = "the picture is coming". Every `<img>` slot of the game (portrait chips `.kpor`, figures, pframe / pcard, event and act picture boxes, Hậu cung / servant rows, Dư đồ markers, Luân hồi cards…) whose picture has not arrived: the img gets `data-kwait` and shows a soft parchment ground (radial `#fbf4e4 → #eadbbd`) that BREATHES (opacity 1 → .62, `calc(1.6s*var(--pace))`, opacity only; `data-kwait="s"` = still under reduced motion / Hiệu ứng Gọn via `reducedMotion()`). Never the dark ground of the slot, never an empty box.
-- Line: when the slot is at least 72 px tall, 64 px wide and its parent box is positioned, the parent gets `data-kwaitp` = `CTM_WAIT.picWait` ("Đang thỉnh tranh…", display font .72rem, `#8a6a40`, centred). Smaller slots (chips, 44 px icons) = ground only.
+- Line: when the slot is at least 72 px tall, 64 px wide and its parent box is positioned, the parent gets `data-kwaitp` = `CTM_WAIT.picWait` ("Đang thỉnh tranh…", display font .72rem, `#8a6a40`, centred). Smaller slots (chips, 44 px icons) = ground only. A PORTRAIT on its way (`por-*`, any size: top-bar chip, side cards, rows, dialogs) shows the kit soft portrait silhouette (`img/kit/unknown-f|m.webp`, the stranger portrait; `kitPhPorG`: men / boys = m) over the ground (`data-kwait="pf|pm"`, still `pfs|pms`), so a small portrait slot never reads as an empty frame (entry-blank-r3, review item 6).
 - ONE rule, no per-place code: a MutationObserver (added `<img>`, changed `src`) + one capture `load` / `error` listener (error → cleared; jcdn retries or hides it). A failed picture never keeps the shimmer.
 - With it: the life gate (§35.3) keeps the first screens of a life full, and dialogs wait ≤ 3 s for their picture; §59.1 covers whatever still arrives later (a tab opened for the first time on a slow line).
 - Sample: kit page §59.1 (44, PS, PM, PL, LM; one still). Scan: `SW=1 node dev/test/life-preload.js <outdir> fold,ipadAir 5` counts `blank` (incomplete, no §59.1) = must be 0, and `wait` (incomplete with §59.1).
