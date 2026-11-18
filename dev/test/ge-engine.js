@@ -8,9 +8,9 @@
      pair owned by no ending → quiet form (no loss, D8) on the most-pulled ending; seat lock: a sitting Hoàng hậu makes the HH ending fail-only;
    - Sổ luân hồi: life line «Đại kết cục: …», ctm-ge.last; the next life may wear it (D5 "prev"), dhObj not null; the life after a life with no grand title carries nothing;
    - switches: D3 when "r11", D4 after "close"/"stay", D7 showOdds (ladder word on ge2), D8 quietLoss; geMap + Bảng panel + Sổ luân hồi rows render; 0 page errors.
-   usage: node dev/test/ge-engine.js [url] */
+   usage: node dev/test/ge-engine.js [url|-] [roads comma list | all]; no 2nd arg → env GE_ROADS (same forms) → the pilots; "all" = every live branch of GE_DATA */
 const path=require('path');const {chromium}=require('playwright');
-const URL=process.argv[2]||'file://'+path.resolve(__dirname,'../index.html');
+const URL=process.argv[2]&&process.argv[2]!=='-'?process.argv[2]:'file://'+path.resolve(__dirname,'../index.html');
 const ok=[];const chk=(n,c,x)=>{ok.push([n,!!c]);if(!c)console.error('FAIL',n,JSON.stringify(x).slice(0,900))};
 (async()=>{const b=await chromium.launch();const ctx=await b.newContext({viewport:{width:755,height:1000},serviceWorkers:'block'});const p=await ctx.newPage();p.setDefaultTimeout(0);
  const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,300)));
@@ -19,7 +19,9 @@ const ok=[];const chk=(n,c,x)=>{ok.push([n,!!c]);if(!c)console.error('FAIL',n,JS
   window.__life=async road=>{const k=road.split('_')[0];quiet=true;const others=Object.keys(ARC67).filter(id=>ARC67[id].o===k&&id!==road);
    localStorage.setItem('ctm-arcs',JSON.stringify({[k]:others}));localStorage.setItem('ctm-tm96','1');window.__forceOrigin=k;start();quiet=false;
    await new Promise(r=>{let n=0;const t=()=>{if((typeof S!=='undefined'&&S&&S.origin&&S.st&&S.st.f14)||++n>150)r();else setTimeout(t,100)};t()});Q.length=0;return S.st.f14.rd}});
- for(const road of (process.env.GE_ROADS||'tt_co,cnv_mat,nc_tuc').split(',')){/* E11: GE_ROADS=<live branches> runs the same unit checks on a writers wave */
+ const RA=process.argv[3]||process.env.GE_ROADS||'tt_co,cnv_mat,nc_tuc';/* E11: one switch for every wave — CLI arg first, env GE_ROADS as fallback */
+ const ROADS=RA==='all'?await p.evaluate(()=>Object.keys(GE_DATA)):RA.split(',');
+ for(const road of ROADS){
   const rd=await p.evaluate(r=>window.__life(r),road);chk(`${road}: the life runs the road`,rd===road,rd);
   const R=await p.evaluate(road=>{const o={};let s=geS();o.init=s&&JSON.stringify([s.b,s.st,s.pull]);
    /* old save: S.ge missing */delete S.ge;const s2=geS();o.old=s2&&s2.b===road&&s2.st.join('')==='oooo';
