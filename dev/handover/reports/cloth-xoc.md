@@ -265,3 +265,6 @@ Root cause: same as mud — tea-brown multiply on saturated red/orange stays red
 | c30 | 1 | 6334 | -31.3 | -17.8 | 0 | +8.18 | 0 | -9.1 |
 | c30 | 2 | 18167 | -30.5 | -16.5 | 0 | +7.47 | 3 | -5.5 |
 | c30 | 3 | 28403 | -48.6 | -16.3 | 0 | +7.20 | 108 | -4.2 |
+
+## Branch note (r6f) — tea moved to review/cloth-tea
+MAIN s42 order (arrived after the tea push): freeze review/cloth-xoc at 7270a76 (mud + wet, owner-approved), tea on review/cloth-tea. Done: review/cloth-tea = be9d08e (= 7270a76 + 4 tea-only commits 542a907, 4ce7c71, f98eae5, be9d08e: jcloth.js tea params + 'stain' saturation pull + site rebuild). review/cloth-xoc still points at be9d08e because my force-push back to 7270a76 was refused by the session permission guard. Reviewer of cloth-xoc: review sha 7270a76 (`git diff 7270a76 be9d08e` = tea only). Coordinator may reset review/cloth-xoc to 7270a76 or keep it.
