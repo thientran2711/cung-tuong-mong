@@ -176,3 +176,24 @@ Method = W11's approved c01 set: images_generate gpt-2-6, 768x2000, 2k, refs = l
 
 Gate (honest): m09 measured by the same Haar = 0.0993. Haar ratios for t2–t8 are 0.091–0.096, i.e. 4–8% BELOW m09, under the 0.098 floor (t1 passes). Haar is noisy under crowns/hair, and in the 50% overlay (scaled by hairline->feet, face centre aligned) face, eyes, shoulders and bodies coincide closely by eye, but the strict by-eye ruler check is not done. t3 is the smallest-face one (−8%). Known: t6 crown is only 17 px from the top edge (headroom tight), t1 hem reaches the bottom edge, feet hidden at t1.
 Files (transparent PNG 768x2000, uncropped): c12_a18_tK_fresh.png; overlays c12_a18_tK_overlay50.jpg; sheet c12_a18_overlay_sheet.jpg under https://ctm-img.victoria-tntt.workers.dev/img/_review/maid-consort-sample/ . md5-verified. Nothing live.
+
+## Round 21 — consort c12 a18 t1–t8 v2 with c12's OWN face ref (ROOT-12, owner 03:35Z: faces too close to the m09 maid)
+
+Change vs Round 20: refs = image 1 live hd c12 tN a18 (design), image 2 m09 `eIyOFEidqL` (rendering/fabric/skin/body only), image 3 = c12's own live por `por-consort-c12-t4-a18.webp` (imported kspdyUo16B) as FACE ref. Face clause: "face, eyes, nose, lips and face shape exactly as image 3 (her OWN identity: round soft face, full cheeks, large warm round eyes, small nose, soft small lips), NOT the face of image 2 (the maid); image 2 ONLY for painterly rendering, fabric look, skin and body proportion". 10 gens (800 cr): 2 test gens first with an extra face ref `face-consort-12` (huZA1bivqL) — those came back with bangs/fringe (that master photo has a fringe, live c12 has a centre parting), so I dropped it and added "low bun, clean centre parting, NO bangs/fringe, whole forehead bare". Then 8 final gens, 8 bg removals. Colours, held items, hairpin ladder unchanged from Round 20.
+Final gens -> cuts: t1 WDlSmDtcXe->YMsgmkNWeC | t2 rgdB9Smxtc->4RQHTah9Aa | t3 YMsgtyVWeC->vQ2GjiOa47 | t4 8a635YNIrU->dtP9HJhXSL | t5 huZArMbvqL->YMsgmx3WeC | t6 jUB86QILD0->rgdBNp0xtc | t7 9ZFqTS6NYZ->TdU7fShVNR | t8 ovNibV9829->lJImZ8sgv9. (Discarded test gens KLDeONLkqp, 5jMpJNQKxe.)
+
+Face check by eye (faces3 sheet = c12 por + 8 crops): all 8 faces read as one woman, longer oval face, narrower arched-brow eyes, matching c12's por and clearly NOT the m09 round face. Bare forehead, no fringe.
+
+| rank | Haar face h | face/(hairline->feet) | top px (headroom) |
+|---|---|---|---|
+| t1 | 189 (hand near face, inflated) | 0.1026 | 28 |
+| t2 | 167 | 0.0963 | 70 |
+| t3 | 153 | 0.0891 | 121 |
+| t4 | 163 | 0.0921 | 73 |
+| t5 | 164 | 0.0917 | 53 |
+| t6 | 156 | 0.0958 | 148 |
+| t7 | 169 | 0.0955 | 17 (crown near top edge) |
+| t8 | 179 | 0.1029 | 11 (crown near top edge) |
+
+Gate: Haar ratio (m09 = 0.0993): t1 and t8 in range, t2/t6/t7 0.096, t3–t5 0.089–0.092 (below 0.098). Haar noisy; 50% overlay (scale by hairline->feet, face centre aligned) shows bodies/shoulders/faces coinciding closely. Weak spots: t7/t8 crowns only 11–17 px from the top edge; t3 smallest face.
+Files: https://ctm-img.victoria-tntt.workers.dev/img/_review/maid-consort-sample/c12_a18_v2_tK_fresh.png (768x2000 transparent), c12_a18_v2_tK_overlay50.jpg, c12_a18_v2_overlay_sheet.jpg, c12_a18_v2_faces_vs_por.jpg. md5-verified. Round 20 files kept (superseded). Nothing live.
