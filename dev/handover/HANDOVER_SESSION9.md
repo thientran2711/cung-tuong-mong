@@ -917,4 +917,4 @@ LANDING PLAN (one batch after her kk pick): toil-looks5 → tuyet-glow → smudg
 FOREMEN: B ROOT-2 session_01N1tNP5otr7BnxsT5Fytb4i active (coop-thin-e #2). C ROOT-13 NOT OPENED — owner must open from claude.ai with dev/handover/TAKEOVER_FOREMAN_C_ROOT13.md (told 3×); C orders open: Đa Bảo Các cabinet (kit-display-room r3 handover in reports/kit-display-room.md), 6 display pieces, faces, 'mai trắng' sprite painted red; C ROOT-12 asked MAIN to canon its body-spec lines (open). D #11 active.
 ARCHIVED by s39: cloth-xoc r1/r2/r3, kit-figure-mood, kit-display-room, look-decals (32 decals on CDN incl. fx-crease-*).
 LESSONS s39: look at neighbours side by side before asking her to pick (A/B/C glow were identical); one option per image with big faces; workers ask 'choose 1/2/3' and stall — check get_session status_bucket BLOCKED on every wake.
-- (18/11 00:06Z) s39 FINAL: opening successor MAIN s40 (child of s39, depth 3); s39 wake trig_013fR94H9uyfmRJq3iTXNmF9 to be deleted.
+- (18/11 00:06Z) s39 FINAL: successor MAIN s40 = session_01UV1SzjbGx37rTjAmWFyCpc (depth 3). s39 wake trigger deleted; s39 stops (relays only if the owner keeps typing here).
