@@ -5,7 +5,7 @@ START_CTX ≈ 5 % of the window (get_session read 0 at start; estimate). Rollove
 
 Branch **review/live-servants** from main 94d11623. Commits: 22de1d1d (code, tests, tool, docs) + 560014be (build).
 
-## STATUS: SẴN SÀNG KIỂM c137b7c — all gates PASS except PERF (4x per-khắc +33 % mean vs live after an outcome-identical cut from +52 %; the rest is the feature's own cost → MAIN PERF RULING needed). See "LIVE-SERVANTS #3" at the end.
+## STATUS: SẴN SÀNG KIỂM 7a50021 — live main 884ce97c merged; all gates PASS except PERF (4x per-khắc +27 % mean vs live after an outcome-identical cut from +49 %; the rest is the feature's own cost → MAIN PERF RULING needed). See "LIVE-SERVANTS #3" at the end.
 
 ## What changed (REUSE: S.roster/S.rlog + j95 plans + jagday/jagstaff deed slots + roster.js; nothing parallel)
 - **NEW dev/build/j95s.js** (after jagstaff.js in assemble.py), numbers in `BAL.slv` (one core; one-core-guard PASS):
@@ -143,7 +143,10 @@ TO DO for #3:
 
 ## LIVE-SERVANTS #3 (opus, session_01Rc5AsKjmZakFtxrVGvMvW9, START_CTX ~3 %) — PERF, outcome-identical
 PRIORITY #1 CHECK: OD perf ruling 13:52Z (FOREMAN_C_STATUS L697) | main fa411d6f (not moved) | review/live-servants e3dce64 (this work) | claims: this session (brief live-servants #3).
-### SẴN SÀNG KIỂM c137b7c (review/live-servants = e3dce64 + perf commit; origin/main still fa411d6f, no merge needed)
+### SẴN SÀNG KIỂM 7a50021 (= c137b7c perf + merge live e16e1d6f 083c665 [assemble.py = main's list + j95s.js] + ag-know test fix 43943be + merge live 884ce97c 7a50021 [doc-90-women, comments only]; index.html/sw.js rebuilt each time)
+ag-know fix (test only, law 14 canon overwrite): §3 "her loyal confidant maid tells her" assumed the old "close maid listens all day beside her mistress";
+under live servants (OD 18/11 ~19:45Z (4)) she knows only where her row stands — after the e16e1d6f merge the world draws shifted and her row was never at the
+garden → FAIL on e3dce64+main too (not the perf work). The case now plants her row at the garden (restored after); PASS on branch and live.
 What changed (no behaviour, no number; law 4 untouched — every number still from BAL):
 - jagknow.js knwGossip: knHit(g|gk|a>b|iid) = the same FNV (knH) run from a cached hash of the fixed head (seed|g<gk>|a>) + per-listener state; group know-counts C
   (exact: +1 per add, −1 on the oldest dropped past gos.keep) skip a thing the whole group already knows (the b loop would skip all); T.u = things not all
@@ -179,3 +182,13 @@ Points (unchanged code from #2, all PASS): (2) live servants' own day + reasons;
 kit parts only) + NPC day picks + witnesses/gossip S.knw; (5) rest rhythm (rest turn, bedtime, rotating night watch).
 Scratch (container only): /home/user/wt/ls-shots (live.html, new0…new7.html, tools/bench.sh ×9 interleaved, tools/fnprof.js per-function timer,
 tools/prof.js CDP profile with PRE, tools/lineprof.js line ticks, b-*.txt bench logs, d*/L* diff dumps).
+### RE-RUN after merging live (e16e1d6f → 083c665; then 884ce97c comments-only → 7a50021)
+| gate | result |
+|---|---|
+| seeded diff (e3dce64 + e16e1d6f merged the same way, local) vs 083c665 | 0 (seeds 1–3 × 40 buổi, K=4); 083c665 vs 7a50021: 0 (seeds 1–2 × 40) |
+| perf ×9 interleaved vs live e16e1d6f | before (e3dce64+main): mean 3.10 → 4.61 (+48.7 %), median 1.88 → 3.48, buổi med +13.9 % · after (083c665): mean 3.06 → 3.88 (+26.9 %), median 1.73 → 2.83 (+63.5 %), buổi med +9.5 % |
+| live-servants.test (3 lives) on 083c665 | PASS |
+| quickcheck.sh on 7a50021 (own build; G1–G4 core gates PASS, hooks 5) | PASS · render 220/191 ms · tab 299/316 · buổi 1021/947 · tasks>200ms 17/17 |
+| ag-*.test.js (14, serial) on 43943be | 14/14 PASS; ag-carry is FLAKY on the live-servants branch (unseeded 8-day bot: §5 "carry 0" = no last-khắc news in that sample): branch 2/10 FAIL, e3dce64+main (no perf work) 1/5, live 0/7 — the feature's thinner news (servants know less), not perf; reviewer may want that sample made robust |
+| deeds 160 × seeds 1–5 | live 615/569/594/609/514 · new 608/505/596/613/564 = pre-perf merged build byte-for-byte |
+| coop-e2e | BLOCKED (co-op Worker host: proxy CONNECT 403) |
