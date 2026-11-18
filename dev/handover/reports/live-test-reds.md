@@ -49,3 +49,47 @@ No assertion weakened: old vs new check — emotion-acts: every old `ok` kept, s
 - Generated files: index.html/sw.js in the commit are rebuilt from this branch; the landing re-merge must rebuild again after merging newer main.
 
 SẴN SÀNG KIỂM da15c5c4 (small review: diff = jemoact.js 1 token + dev/test/*.js + timer-wait-scan.py + generated index.html/sw.js).
+
+## REVIEW r1 (reviewer session_01N1tNP4jG1k1XQ57mFwvRGV, sonnet SMALL, depth 1; verdict PASS 55db864a on review/live-test-reds-r1)
+PRIORITY #1 CHECK: OD 0 | ledger 0 | CLAIMS row `REVIEW live-test-reds r1` (this) | worker report + brief read in full | git grep of `.go=`, `x=n.x`, `o.t=n.t` across dev/build for the same stale-closure family | scan rerun.
+Merged on newest origin/main 4 times (main moved 2850c45b -> 711d7bad -> 5103d561 -> b3d2ccc7 while reviewing); index.html + sw.js + assets.json rebuilt each time with dev/site/build_site.sh (assets.json "v" differs only because the CDN index moved). Final sha 55db864a descends from origin/main b3d2ccc7. If main moves again, the landing merge must rebuild again (generated files only conflict).
+
+### (1) No weakened test: old vs new assertion table
+| test / case | old assertion | new assertion | verdict |
+|---|---|---|---|
+| emotion-acts fresh | `start()` loop in page, S undefined crash | `fresh1()` waits for S, S.name, no roulette step, re-rolls servant life | same lives, waits a real condition (30 s timeout, throws) |
+| emotion-acts scold | `Q.length>0 && /Mắng/.test(Q[0].t)` | Mắng event anywhere in Q AND its pick lists >=2 maids | stricter |
+| emotion-acts scoldlive (new) | — | dismissed maid absent, every live maid present, count equal | new; main 0/5, branch 10/10 |
+| emotion-acts other 9 cases | `ok` + overflow checks after fixed 800+600+5400 ms | same `ok`, same overflow checks, after S/deck wait + dialog laid out + 2 frames | same checks |
+| kit-conform G3 | 4 intro pages, same size, full-body figure, steps same size | identical assertions; waits for `#ktut .kpdlg` (or tour off), clears the blockers that park the tour; failure prints tour state | same checks |
+| kit-conform other dialogs | 450/1200 ms sleeps | 2 animation frames (dialogs written synchronously, reducedMotion) | same checks |
+| coop-e2e / rules-one-source / time-spill-guard | fixed boot / settle timers | `__ctmBuilt===1`, S exists + no dialog, `__tu.used===1&&!carry` (8 s) then the SAME assert | waiting only |
+Reviewer hardening (my commit cee6c84f): the dialog wait in emotion-acts swallowed its timeout (`.catch(()=>{})`, vacuous checks after) -> now a dialog that never shows FAILS the case (`nodlg`, bad++). Result unchanged (all PASS).
+
+### (2) jemoact.js fix is right for the whole group
+`o.go=n.go` in the same-keys refresh branch of eaSync: only `go` is refreshed; x/t/c/w were already refreshed; no number, odds, cost or text changes (go closures read BAL constants at call time). git grep for the same stale-closure family: the `x/t/c/w` in-place refresh exists ONLY at jemoact.js:202; the other emotion cards (dapdo, khoc, thu, dan, huong) hold constants only, so no other card cached a target; j67 arcOpt / jaudit thiếu-lễ wrap options of other lists (talk options, arcs), not ea cards, so nothing wraps the replaced `go`. Not BIG.
+
+### (3) Timer scan covers every gate? NO, one hole found and fixed
+The worker scan listed dev/test only and matched `sleep|waitForTimeout`. `dev/tools/quickcheck.js` (gate 2: open / old save / perf) uses its own `sl(ms)` helper: line 71 `sl(1500)` before `loadSlot(3)` was a real race (old-save step could read before the game ran to its end). Fixed: waitForFunction `__ctmBuilt===1` (60 s, throws). timer-wait-scan.py now also scans quickcheck.js + odds-cap.js (hook 40) and matches `sl(`. Rerun: 21 waits >=300 ms in 9 files, all kept ones are poll intervals, offline durations under test, observation windows (quickcheck.js:62 error window, :50/:89/:90 settle before a measured step) or screenshot settles followed by a state wait; none sits directly before an assertion.
+
+### (4) Co-op both seats unaffected
+Game change is eaSync only (never on the servant road, no co-op code). coop-e2e (live Worker, both seats + rejoin + old save): 63/63 on the first merge, again 63/63 on the 5103d561 merge, 0 FAIL.
+
+### NEW FLAKE found and fixed in the test (not the game)
+After the first main merge emotion-acts scold / scoldlive went red ~1 in 12 runs (Q empty, khắc spent). Cause: act() -> runOpt rolls the ODDS CAP (BAL.odds.hi 95; a "sure" card still fails softly, j2 runOpt / j1 roll) so ~5 % of acts spend the khắc and queue NO pick. Not a game bug (rule: no sure act). Fix in test: `BAL.odds.hi=100` before the act in both cases (like the cases that set BAL.ea.out.ch=100). Proof: 30/30 green, 6 in parallel. The worker's 10/10 had been lucky (0.95^20 ~ 36 % chance of all green).
+
+### Runs (Fold 755x1000@2; G3 755x1000)
+| test | result |
+|---|---|
+| emotion-acts new test on main build | 0/5 (scoldlive: Mắng lists the dismissed maid) |
+| emotion-acts on branch merge | 10/10 (merge 1) ; 30/30 after the odds pin (merge 2) ; 5/5 on merges 3 and 4 |
+| kit-conform G3 | 10/10 exit 0 (merge 1), 3/3 (merge 2), 3/3 (merge 3), 1/1 (merge 4); MISSING 3-4 varies, known |
+| rules-one-source (G2) x3 | bad [] / core bad [] |
+| time-spill-guard x3 | PASS static + runtime |
+| one-core-guard | PASS fails 0 (inlineNow 3800 <= 3842) |
+| coop-e2e | 63/63 twice |
+| quickcheck (merge 2, sha cee6c84f+merge): G1-G3 + hooks 5 + time-spill, open 1360 ms, old save ok, perf render 214/171 ms | PASS (G4 hooks mk-layer-scan/anchor-table need dev/art in the sparse worktree: with it, 12960 pictures 0 bad / 5992 0 bad) |
+Images: none made, none in git; no CDN review folder used.
+
+### Verdict
+PASS 55db864a (review/live-test-reds-r1). Honest limit: G3 tutorial flake still not reproduced by anyone (0/36 baseline, 0/20 here); the fix removes the timer race and the failure line now names the blocker if it ever fires.
