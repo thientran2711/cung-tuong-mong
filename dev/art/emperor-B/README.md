@@ -1,0 +1,5 @@
+# Emperor prompt B -- FROZEN (W81, owner 18/11 ~22:25Z via Foreman C)
+Same structure as dev/art/t8-prompt-B/build.py (consort builder): PRE + identity line + style-ref line + AGE_TXT + OUTFIT slot + COLOUR rule (YEL_NEW, C2) + embroidery + FAB + pose sentence + END.
+`python3 build.py live1|live2|e1|e2|e3|e4 [--age a18|a26|a36|a51]` prints the exact prompt. Only FACE, OUTFIT and ITEM/hand differ between the six; everything else is byte-identical (check: `python3 check.py`).
+Gen settings (as consort builder): Magnific gpt-2-6, folder ba4aecfe-efce-47e2-b53f-30d292091886, width 1024 height 2304, resolution 2k, EXACTLY TWO refs: [1] identity image (his own face; the C2 image is NEVER a ref, yellow is in words only), [2] STYLE m09 eIyOFEidqL; then images_remove_background. 1 gen each, 1 regen max per emperor (owner OK 22:25Z). "Redraw" = re-run this same prompt, never edit words.
+Old-team age wording: dev/figwork/jobs.json N-emperor-1 (21/30/40/52, moustache/beard, silver temples); men's AGE_TXT here follows the consort a36/a51 pattern.
