@@ -508,3 +508,4 @@ art-matrix planner (MAIN s43 order) | claude/cung-tuong-mong-handover-hj0h8w (re
 | REVIEW map-tap-go 1996eca (BIG; opus; brief briefs/review-map-tap-go.md) | review/map-tap-go | MAIN ROOT-45 | session_01UV1SzjFu8b4mksbwcWenpd | RUNNING | 18/11 05:39Z |
 B7 consort a18 t1–t8 + Nữ đế, painter A (c02,c04,c07,…c32) | _review CDN consort-tiers/<cNN>/b7 + handover reports | C | session_011xDdVQrs6nBYoBQAva6sSz | RUNNING | 2026-11-18T05:40Z
 B7 consort a18 t1–t8 + Nữ đế, painter B (c03,c06,c08,…c31) | _review CDN consort-tiers/<cNN>/b7 + handover reports | C | session_011xDdVSniP7aH2vrv4nFbVT | RUNNING | 2026-11-18T05:40Z
+B7 consort c01 a18 t1–t8 + Nữ đế (owner waits) | _review CDN consort-tiers/c01/b7 + handover reports | C | session_011xDdVP3CQJqrW5i6JLZ14G | RUNNING | 2026-11-18T05:41Z
