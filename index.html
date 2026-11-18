@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"a5a1ad1a+","t":"2026-11-18T06:17Z","c":"map-tap-go: remove the arrival toast too (owner 18/11 ~06:30Z): tap = go at once, khắc deducted silently; KIT 32.8c dropped","b":"f54dc7418ede","h":[{"s":"8f5ea906+","t":"2026-11-18T06:11Z","c":"face-reveal-anim: kitReveal (KIT 79) — the real face appears in place out of the grey (frame, avatar, room-stage figure, event figure); Gọn…"},{"s":"04bb2793+","t":"2026-11-18T05:52Z","c":"hud-mood-bar: owner picked layout 1 (full row); switch and slim layout removed; KIT 49.4"},{"s":"c1104d92+","t":"2026-11-18T05:41Z","c":"face-zoom-aspect test: SEED / FORCE options for same-character before/after shots"},{"s":"16b4dad8+","t":"2026-11-18T05:32Z","c":"cloth-bake-static: cloth layer on every static figure path on a cold cache (wait layer + patch on bake done); test + report"},{"s":"231cd3b3+","t":"2026-11-18T03:27Z","c":"review display-set-bonus: VANPHONG rows (Đa Bảo Các + set wording); cap line drops 'điểm'; j8 'Điểm trang lộng lẫy' night quality reads wor…"},{"s":"bd8547f2+","t":"2026-11-18T03:28Z","c":"men-forbidden r6: old saves drop officials / festival princes standing in the hậu cung on load (menLoadFix, same ONE rule)"},{"s":"c743265c+","t":"2026-11-18T03:18Z","c":"review life-preload r6: title prefetch chained on undefined (lWant returns its promise); gate cap really 25 s (no re-run after cap / Vào cu…"},{"s":"2aca2aac+","t":"2026-11-18T03:17Z","c":"review cloth-tea-r6: kclo-on hides the picture by clip-path, not visibility (visibility:hidden made kfxGeom hide the cloth layer too: her f…"},{"s":"2b1b0701","t":"2026-11-18T03:00Z","c":"review staff-cap-apply r6: site rebuilt on db24027f"},{"s":"64488e4f+","t":"2026-11-18T02:38Z","c":"cloth-xoc r6e: rebuild site"}]};
+window.CTM_BI={"s":"46fad459+","t":"2026-11-18T06:17Z","c":"map-tap-go: remove the arrival toast too (owner 18/11 ~06:30Z): tap = go at once, khắc deducted silently; KIT 32.8c dropped","b":"69813c51735a","h":[{"s":"8f5ea906+","t":"2026-11-18T06:11Z","c":"face-reveal-anim: kitReveal (KIT 79) — the real face appears in place out of the grey (frame, avatar, room-stage figure, event figure); Gọn…"},{"s":"04bb2793+","t":"2026-11-18T05:52Z","c":"hud-mood-bar: owner picked layout 1 (full row); switch and slim layout removed; KIT 49.4"},{"s":"c1104d92+","t":"2026-11-18T05:41Z","c":"face-zoom-aspect test: SEED / FORCE options for same-character before/after shots"},{"s":"16b4dad8+","t":"2026-11-18T05:32Z","c":"cloth-bake-static: cloth layer on every static figure path on a cold cache (wait layer + patch on bake done); test + report"},{"s":"231cd3b3+","t":"2026-11-18T03:27Z","c":"review display-set-bonus: VANPHONG rows (Đa Bảo Các + set wording); cap line drops 'điểm'; j8 'Điểm trang lộng lẫy' night quality reads wor…"},{"s":"bd8547f2+","t":"2026-11-18T03:28Z","c":"men-forbidden r6: old saves drop officials / festival princes standing in the hậu cung on load (menLoadFix, same ONE rule)"},{"s":"c743265c+","t":"2026-11-18T03:18Z","c":"review life-preload r6: title prefetch chained on undefined (lWant returns its promise); gate cap really 25 s (no re-run after cap / Vào cu…"},{"s":"2aca2aac+","t":"2026-11-18T03:17Z","c":"review cloth-tea-r6: kclo-on hides the picture by clip-path, not visibility (visibility:hidden made kfxGeom hide the cloth layer too: her f…"},{"s":"2b1b0701","t":"2026-11-18T03:00Z","c":"review staff-cap-apply r6: site rebuilt on db24027f"},{"s":"64488e4f+","t":"2026-11-18T02:38Z","c":"cloth-xoc r6e: rebuild site"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -45615,6 +45615,8 @@ KIT_SAMPLES.push({id:"§84.5",title:"Ô đồ Xa xỉ · MỘT khuôn chủ (đ�
  return `<div class="kitpg-row" style="align-items:flex-end;gap:14px;flex-wrap:wrap">${["sm","md","lg","xl","slot"].map(z=>kitItem({src:s,name:"Nhân sâm",grade:4,size:z,qty:z==="slot"?2:0})).join("")}</div>`}});
 KIT_SAMPLES.push({id:"§8.2b",title:"Thẻ nơi chốn (VIỆC) · MỘT tranh nơi bên trái + hàng thông tin kit · chọn bằng nút «Thôi»/«Sang buổi» (chạm để mở thẻ thật)",where:"<b>kitPlaceDress</b> (jplace) → kitOnePic. A place card never gets a second event picture (<code>m.placeK</code> guard in jk2b). Guard: <code>dev/test/kit-conform.js</code> place:* = CONFORMS.",html:()=>{const ok=typeof S!=="undefined"&&S;
  return `<div class="kitpg-row"><button type="button" class="kbtn alt" data-kpop="place"${ok?"":" disabled"}>Thẻ nơi chốn · không vào được</button></div>`+(ok?"":kitFacts(["Vào một kiếp rồi mở lại trang mẫu để xem pop-up."],{group:false}))}});
+KIT_SAMPLES.push({id:"§84c",title:"Khung VIỆC không có người (thẻ nơi chốn…) · tranh chính lấp đầy cột trái (cắt cover, đúng tỉ lệ, không băng trống)",where:"<b>kszFrame3({noWho:true})</b> / kitFrameLive3 (m.placeK) · KIT 84c: person-less frame = main picture is the left column: standard 120x160 in S / narrow (\"one\"), <code>.k3fill</code> in M / L / XL fills the column height. Guard: <code>dev/test/kit-conform.js</code>.",html:()=>{try{const sp={kind:"choice",title:"Ngự hoa viên",noWho:true,pic:"https://ctm-img.victoria-tntt.workers.dev/img/ev-trieu-chinh.webp",facts:["Hoa nở rộ, chưa thấy ai ở vườn."],rows:[["Đường đi",`${BAL.kitpage.demo.k} khắc`],["Còn",`${BAL.kitpage.demo.k} khắc`]],opts:[{t:"Lẻn vào",rows:[["Tốn",`${BAL.kitpage.demo.k} khắc`],["Thành","vào được buổi này"]]}]};
+ requestAnimationFrame(()=>{try{document.querySelectorAll("[data-k84c] .ksz3").forEach(d=>kitFrameApply3(d))}catch(e){}});return `<div class="kitpg-row" data-k84c>${kszFrame3(sp,"M")}</div>`}catch(e){return kitFacts(["Mẫu khung không có người cần kit size (jksize)."],{group:false})}}});
 KIT_SAMPLES.push({id:"§6.2c",title:"Lựa chọn nhắc đến một người · tranh bên trái = chân dung người đó (không dùng tranh việc chung)",where:"<b>kitOptPic</b> (jopic): an option whose title names a live person shows THAT person's kit portrait; not inside a person-event frame (the figure column is already that person).",html:()=>{const ok=typeof S!=="undefined"&&S;
  return `<div class="kitpg-row"><button type="button" class="kbtn alt" data-kpop="personopt"${ok?"":" disabled"}>Đêm thị tẩm · «Thì thầm nói xấu …»</button></div>`+(ok?"":kitFacts(["Vào một kiếp rồi mở lại trang mẫu để xem pop-up."],{group:false}))}});
 document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("#kitpage [data-kpop]");if(!b)return;e.stopPropagation();e.preventDefault();kitPopSample(b.dataset.kpop)},true);
@@ -62607,6 +62609,7 @@ window.kitPicSubj=kitPicSubj;
 .ksz3 .k3mpic,.ksz3 .k3ev{position:relative;overflow:hidden;border-radius:6px;border:1px solid var(--gold,#8f5f0c);box-shadow:inset 0 0 0 1px #fffaf0;box-sizing:border-box}
 /* S event picture = ONE standard kit size (owner 16/11 19:54Z: no stretched ratio): KIT_SIZE.pic[V.picS] (PM 120x160, 3:4), centred in the body */
 .ksz3 .k3main.k3mpic{flex:none;width:${Z.pic[V.picS].w}px;height:${Z.pic[V.picS].h}px;min-height:0;align-self:center}
+.ksz3[data-pres="fig"] .k3body>.k3main.k3mpic.k3fill{align-self:stretch;height:auto;min-height:${Z.pic[V.picS].h}px}/* KIT 84c: person-less main picture fills its column */
 .ksz3 .k3ev{flex:1 1 auto;min-height:${V.evMin.fig}px}.ksz3[data-pres="one"] .k3ev{min-height:${V.evMin.one}px}
 .ksz3 .k3mpic>.ksart,.ksz3 .k3ev>.ksart{position:absolute;inset:0;width:100%;height:100%;aspect-ratio:auto;margin:0;border:0;box-shadow:none;border-radius:0}
 .ksz3 .k3mpic>.ksart img,.ksz3 .k3ev>.ksart img{width:100%;height:100%;object-fit:cover;display:block}
@@ -62629,9 +62632,11 @@ function kszPor3(p){const [r,n]=kszRankName(p);let col="";try{col=kitPersonCol(p
  const tag=typeof kitTitleTag3==="function"?kitTitleTag3(p,r,n,col):kitNameRank(r,n,col);let f;try{f=p&&p.kind==="th"?pTH():kitFace(p)}catch(e){f={src:"",ini:"?"}}
  return `<div class="k3main k3mpor">${tag}${pcPort(f)}</div>`}
 /* spec {kind,title,sub,who?,pic?,facts,rows,opts} + size K → frame html (kitFrameApply3 after mount) */
-function kszFrame3(sp,K){const V=KIT_SIZE.v3,pres=V.pres[K]||"fig",foc=V.focus[sp.kind]||"person",who=kszWho3(sp),ev=kszEvSrc3(sp);
+function kszFrame3(sp,K){const V=KIT_SIZE.v3,pres=V.pres[K]||"fig",foc=V.focus[sp.kind]||"person",who=sp.noWho?null:kszWho3(sp),ev=kszEvSrc3(sp);
  const R=[];let left="";
- if(pres==="one"){if(foc==="event")left=kszPic3(ev,"k3main k3mpic");else{left=who?kszPor3(who):"";R.push(kszPic3(ev,"k3ev"))}}
+ /* KIT 84c PERSON-LESS frame (sp.noWho / a place card): the main picture is the left column — standard size in "one" (S / narrow), FILLING the column (cover-crop, true ratio, k3fill) in "fig" (M/L/XL); no narrator, no second picture */
+ if(!who)left=kszPic3(ev,pres==="one"?"k3main k3mpic":"k3main k3mpic k3fill");
+ else if(pres==="one"){if(foc==="event")left=kszPic3(ev,"k3main k3mpic");else{left=who?kszPor3(who):"";R.push(kszPic3(ev,"k3ev"))}}
  else{left=who?kszFigHtml(who):"";R.push(kszPic3(ev,"k3ev"))}
  let facts=(sp.facts||[]).slice();
  /* event-centred S: a person is a small avatar INSIDE the info → when no fact row carries anyone, the narrator's line is added */
@@ -62672,7 +62677,7 @@ function kitFrameApply3(dlg){try{kszFigFit(dlg)}catch(e){}kszBtnGrid3(dlg);const
 function kitFrameFits3(dlg,strict){const K=dlg.dataset.ksz,m=kitSzMode();if(K==="XL"&&!strict)return true;const R=dlg.querySelector(".k3right"),L=dlg.querySelector(".k3body>.kszfig,.k3body>.k3mpor"),ev=R&&R.querySelector(":scope>.k3ev");
  const mh=R.style.minHeight,mx=R.style.maxHeight;R.style.minHeight="";R.style.maxHeight="";if(ev){ev.style.flex="none";ev.style.height=kszEvMin3(ev)+"px"}
  const need=R.offsetHeight;if(ev){ev.style.flex="";ev.style.height=""}R.style.minHeight=mh;R.style.maxHeight=mx;const lh=L?L.offsetHeight:0;
- if(dlg.dataset.pres==="fig")return need<=lh+2;const btn=dlg.querySelector(":scope>.k3btns");
+ if(dlg.dataset.pres==="fig")return L||!dlg.querySelector(".k3fill")?need<=lh+2:true;const btn=dlg.querySelector(":scope>.k3btns");
  const body=Math.max(need,lh,KIT_SIZE.v3.picMinS);return (L?need<=lh+2:body<=KIT_SIZE.v3.bodyS)&&body+(btn?btn.offsetHeight:0)<=KIT_SIZE.v3.capS[m]}
 /* THE picker: the smallest size whose presentation holds the content */
 function kitFramePick3(sp,host){for(const K of ["S","M","L","XL"]){host.innerHTML=kszFrame3(sp,K);const d=host.firstElementChild;kitFrameApply3(d);if(kitFrameFits3(d))return K}return"XL"}
@@ -62827,13 +62832,13 @@ function kitFrameFitsLive3(dlg,strict){const K=dlg.dataset.ksz;if(K==="XL"&&!str
  const need=R.offsetHeight;if(ev){ev.style.flex="";ev.style.height=""}R.style.minHeight=mh;R.style.maxHeight=mx;const lh=L?L.offsetHeight:0;
  /* the frame must also stay inside the screen (modal box): Fold / iPad */
  const M=document.getElementById("modal"),room=M?M.clientHeight-24:9999;
- if(dlg.dataset.pres==="fig")return need<=lh+2&&dlg.offsetHeight<=room;const btn=dlg.querySelector("#mb>.k3btns");
+ if(dlg.dataset.pres==="fig")return (L||!dlg.querySelector(".k3fill")?need<=lh+2:true)&&dlg.offsetHeight<=room;const btn=dlg.querySelector("#mb>.k3btns");
  const body=Math.max(need,lh,KIT_SIZE.v3.picMinS);return (L?need<=lh+2:body<=KIT_SIZE.v3.bodyS)&&body+(btn?btn.offsetHeight:0)<=KIT_SIZE.v3.capS[kitSzMode()]}
 function kszLiveLay3(dlg,K){const X=dlg.__ksz3;if(!X)return;const V=KIT_SIZE.v3,pres=V.pres[K]||"fig",foc=V.focus[X.kind]||"person",nar=/^N/.test(K);
  Object.assign(dlg.dataset,{ksz:K,pres,focus:foc,lay:K});if(nar)dlg.dataset.narrow="1";else delete dlg.dataset.narrow;
  if(nar&&KIT_SIZE.fig[K+"3"]){const Z=V.narrow[K],F=KIT_SIZE.fig[K+"3"],Mm=document.getElementById("modal"),mh=Mm?Mm.clientHeight:900;F.h=Math.round(Math.min(Z.max,Z.f*mh));F.cw=Z.cw;dlg.style.setProperty("--kszfh",F.h+"px");dlg.style.setProperty("--kszcw",F.cw+"px")}else{dlg.style.removeProperty("--kszfh");dlg.style.removeProperty("--kszcw")}
  const body=X.body,right=X.right;[...body.children].forEach(c=>{if(c!==right)c.remove()});right.querySelectorAll(":scope>.k3ev").forEach(c=>c.remove());
- let left="",ev=true;if(X.m&&X.m.placeK){left=kszPic3(X.src,"k3main k3mpic");ev=false}/* a place card: the PLACE picture is its one main picture, at every size (no narrator, map-tap-go) */else if(pres==="one"){if(foc==="event"){left=kszPic3(X.src,"k3main k3mpic");ev=false}else left=X.who?kszPor3(X.who):""}else left=X.who?kszFigHtml(X.who):"";
+ let left="",ev=true;if(!X.who){left=kszPic3(X.src,pres==="one"?"k3main k3mpic":"k3main k3mpic k3fill");ev=false}/* KIT 84c person-less frame (place card): its picture is the left main picture; fills the column in fig sizes */else if(pres==="one"){if(foc==="event"){left=kszPic3(X.src,"k3main k3mpic");ev=false}else left=X.who?kszPor3(X.who):""}else left=X.who?kszFigHtml(X.who):"";
  if(left)body.insertAdjacentHTML("afterbegin",left);if(ev&&X.src)right.insertAdjacentHTML("afterbegin",kszPic3(X.src,"k3ev"));
  if(X.opts){if(pres==="one"||nar)X.mb.appendChild(X.opts);else right.appendChild(X.opts);/* narrow: option cards BELOW the figure row, full width; else kit-option-rows r2: stack label over value when the column is too narrow */const bs=[...X.opts.querySelectorAll(":scope>button")],w=X.opts.clientWidth;X.opts.classList.remove("kszstk")}
  body.querySelectorAll("img").forEach(im=>{if(!im.complete)im.addEventListener("load",()=>kszLiveRepick3(dlg),{once:true})});
@@ -68158,7 +68163,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="f54dc7418ede";window.CTM_BUILD=BUILD;
+const BUILD="69813c51735a";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

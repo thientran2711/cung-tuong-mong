@@ -23,7 +23,7 @@ const [,,URL,SZ,OUT,OLD]=process.argv;const [WH,DPR]=SZ.split('@');const [W,H]=W
  R.spill.pass=R.spill.after.place==='tyv'&&R.spill.after.buoi===1&&R.spill.after.left===4-(R.spill.setup.tc-R.spill.setup.left);
  await shot('spill-2-arrived');
  /* 2 night */
- R.night={setup:await setup(B4,3,'r5')};await p.waitForTimeout(900);R.night.card=await card();await shot('spill-3-night');
+ R.night={setup:await setup(B4,3,'tyv')};await p.waitForTimeout(900);R.night.card=await card();await shot('spill-3-night');
  R.night.pass=(!!R.night.card&&!R.night.card.btns.some(x=>/buổi sau\)/.test(x)))||(!R.night.card&&await p.evaluate(()=>/CẤM/.test((document.getElementById('rtoast')||{}).textContent||'')));
  /* 3 closed at night */
  R.closed={setup:await setup(B4-1,3,'tyv')};await p.waitForTimeout(900);R.closed.card=await card();await shot('spill-4-closed');
