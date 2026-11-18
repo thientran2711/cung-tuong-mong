@@ -54,25 +54,32 @@ function errLedger(){if(errOn()||!S||typeof j95on!=="function"||!j95on())return;
 function errTick(){if(errOn()||!S||S.dead)return;const now=errNow();let ch=false;
  for(const t of errZ())if(!t.back&&t.due<=now){t.back=1;ch=true;try{if(typeof kitLine==="function"&&errCan())kitLine(`${t.nm} đã về: có tin báo.`,2600)}catch(e){}}
  if(ch){try{const day=errKH()*3;S.erra=errZ().filter(t=>!t.back||(!t.read&&t.rep)||now-t.due<day)}catch(e){}errLedger();errIcon()}}
-/* the report panel (fallback; with jptime the same kit icon id "tin" is registered there) */
-function errPanel(){const rows=[];
- for(const t of errNews()){const r=t.rep;rows.push(`<p><b>${r.t||t.lbl||"Tin báo"}</b></p>`+(typeof kitFacts==="function"?kitFacts(r.L):`<p>${r.L.join(" ")}</p>`));t.read=1}
- for(const t of errMine())rows.push(`<p>${t.nm} đang ${t.lbl||"đi việc"} · về ${errWhen(t.due)}.</p>`);
- setTimeout(()=>errSync(),0);return{title:"Tin chờ người sai đi",h:rows.join("")||"<p>Không có ai đang đi việc.</p>",opts:[]}}
-function errIcon(){if(errOn())return;try{if(typeof kitStatusIcon==="undefined")return;kitStatusIcon.set("tin",{title:"Người được sai đi",glyph:"信",order:30,
+/* the report panel: ONE implementation for both adapters. kitPanel info spec: subject = the person who REALLY went and came back (law 6b), facts = what she learned
+   (the act's own log lines), sections = the gain / loss chips (kit chips), «Đợi tin» only with the parallel-time core */
+function errRead(t){try{t.read=1;if(errOn()&&Array.isArray(S.away)){const a=S.away.find(x=>x&&x.id===t.id);if(a)a.read=1}}catch(e){}}
+function errPanel(){const N=errNews(),W=errMine();const facts=[],sec=[];let subj=null;
+ for(const t of N){const r=t.rep||{},p=errPerson(t.who);if(!subj&&p)subj=p;
+  facts.push({who:p||undefined,text:r.t||`${t.nm} đã về.`});(r.L||[]).forEach(l=>facts.push(l));
+  if((r.d||[]).length&&typeof kitChips==="function")sec.push({h:"Được · mất",html:kitChips(r.d)});errRead(t)}
+ for(const t of W){const p=errPerson(t.who);if(!subj&&p)subj=p;facts.push({who:p||undefined,text:`${t.nm} đang ${t.lbl||"đi việc"} · về ${errWhen(t.due)}.`})}
+ if(!facts.length)facts.push("Không có ai đang đi việc.");
+ const opts=[];try{if(errOn()&&PTIME.waitOk&&PTIME.waitOk()){const K=PTIME.next();opts.push({n:"Đợi tin",x:`ngồi chờ đến ${errWhen(K)}, khi người được sai trở về`,fx:{},go:()=>{setTimeout(()=>PTIME.wait(),0)}})}}catch(e){}
+ setTimeout(()=>errSync(),0);const sp={title:"Tin chờ người sai đi",facts,sections:sec,opts};if(subj)sp.subject=subj;return sp}
+function errIcon(){try{if(typeof kitStatusIcon==="undefined")return;kitStatusIcon.set("tin",{title:"Người được sai đi",glyph:"信",order:30,
  show:()=>!!(S&&!S.dead&&(errMine().length||errNews().length)),busy:()=>!!(S&&errMine().length&&!errNews().length),badge:()=>!!(S&&errNews().length),panel:errPanel});kitStatusIcon.refresh()}catch(e){console.error("jerr icon",e)}}
 function errOpen(){try{if(typeof kitStatusIcon!=="undefined")kitStatusIcon.open("tin")}catch(e){console.error(e)}}
 /* the gate: run an errand action; in the fallback the action runs ONCE as before (no double charge, no deferred report), then the task is recorded */
-function errAdd(sv,spec,L){const t0=errNow();/* fallback: away n khắc counted from the END of her order (the act's own khắc already paid); jptime counts from the tap with its own o/n rows */const w=ERRV[spec.k]||ERRV_DEFAULT;const t={id:"e"+(++ER.n)+"-"+t0,who:errId(sv),nm:sv.name,k:spec.k,lbl:"đi "+w,t0,due:t0+errN(spec.k),back:0,read:0,rep:{t:`${sv.name} ${w} trở về`,ok:null,L:L.length?L:[`${sv.name} đã về.`],d:[]}};
+function errAdd(sv,spec,L,dl){const t0=errNow();/* fallback: away n khắc counted from the END of her order (the act's own khắc already paid); jptime counts from the tap with its own o/n rows */const w=ERRV[spec.k]||ERRV_DEFAULT;const t={id:"e"+(++ER.n)+"-"+t0,who:errId(sv),nm:sv.name,k:spec.k,lbl:"đi "+w,t0,due:t0+errN(spec.k),back:0,read:0,rep:{t:`${sv.name} ${w} trở về`,ok:null,L:L.length?L:[`${sv.name} đã về.`],d:dl||[]}};
  errZ().push(t);ER.seen[t.id]={fresh:1};try{if(typeof kitLine==="function")kitLine(`${t.nm} đã đi ${w}, về ${errWhen(t.due)}.`,2600)}catch(e){}errIcon();return t}
 function errRun(fn,ctx,args,spec){
  if(!errCan()||errOn())return fn.apply(ctx,args);/* jptime builds its own task at the button (ptSend); this file only draws it */
  const sv=errRunner();if(!sv)return fn.apply(ctx,args);
- const u0=used,l0=S.logSeq||0;const r=fn.apply(ctx,args);
+ const u0=used,l0=S.logSeq||0,b0=typeof rsnap==="function"?rsnap():null;const r=fn.apply(ctx,args);
  if(!spec.always&&used===u0&&(S.logSeq||0)===l0&&!(typeof Q!=="undefined"&&Q.length))return r;
  const n=Math.max(0,Math.min((S.logs||[]).length,(S.logSeq||0)-l0));
  const L=(S.logs||[]).slice(0,n).map(x=>typeof plain==="function"?plain(x):String(x).replace(/<[^>]*>/g,"")).map(x=>x.replace(/^T\d+\/\d+\s+\S+\s+tuần\s*/,"")).reverse();
- errAdd(sv,{k:spec.k},L);errLedger();try{errSync()}catch(e){console.error(e)}return r}
+ const dl=[];try{if(b0)for(const [k,nm] of RKEYS){const x=(S[k]||0)-(b0[k]||0);if(x)dl.push([nm,x])}}catch(e){}
+ errAdd(sv,{k:spec.k},L,dl);errLedger();try{errSync()}catch(e){console.error(e)}return r}
 ER.run=errRun;ER.tasks=errTasks;ER.awayOf=errAwayOf;ER.news=errNews;ER.now=errNow;ER.when=errWhen;ER.tick=errTick;ER.open=errOpen;ER.adapter=()=>errOn()?"ptime":"fallback";
 /* ---------------------------------------------------------------- the PICTURE of that state ---------------------------------------------------------------- */
 function errCss(){if(document.getElementById("kerr-css"))return;const s=document.createElement("style");s.id="kerr-css";s.textContent=`
