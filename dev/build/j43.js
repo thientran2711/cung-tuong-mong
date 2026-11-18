@@ -21,13 +21,13 @@ function m43odds(v,t,k){try{const a=ACT[k];return a&&a.o?a.o(v,t):null}catch(e){
    if(drop){mindLog(v,"_wait");if(!keep.length){const sp=O.find(x=>x[0]==="spy");return sp?[sp]:[]}}O=keep}/* the clever wait out poor odds and dig for evidence meanwhile */
  }catch(e){}return O}})();
 /* the push-down roads read Tâm cơ through odT: a blunder lowers them too */
-(function(){const o0=odT;odT=function(a,b){const r=o0.apply(this,arguments);return a&&a.__err?cl(r-a.__err,5,95):r}})();
+(function(){const o0=odT;odT=function(a,b){const r=o0.apply(this,arguments);return a&&a.__err?oddsCl(r-a.__err):r}})();
 /* belief book */
 function m43sev(k){for(let i=1;i<BANDS.length;i++)if(BANDS[i][2].includes(k))return [0,6,12,20][i];return 6}
 function belOf(t,x){t.bel=t.bel||{};const k=key(x);return t.bel[k]=t.bel[k]||{r:0,w:0}}
 mindBelief=function(t,v,k){if(!t||t===S||!t.alive||t.out||!v)return;const kv=key(v);const ev=(t.evm&&t.evm[kv])||0;
  let p=35+witOf(t)/2+(ev>0?25:0)-witOf(v)/4;let seen=false;try{seen=together(v,t)}catch(e){}if(seen)p+=40;
- const spy=((v===S?S.staff:v.staff)||[]).some(s=>s&&s.spyFor===key(t));if(spy)p+=30;p=cl(p,10,95);mindLog(t,"_belief");
+ const spy=((v===S?S.staff:v.staff)||[]).some(s=>s&&s.spyFor===key(t));if(spy)p+=30;p=oddsCl(p);mindLog(t,"_belief");
  const n=m43sev(k);if(roll(p)){oanAdd(t,v,n);belOf(t,v).r+=n;return}
  const L=others(t).filter(x=>x!==v&&(x===S||x.alive&&!x.out));
  if(!L.length||roll(30)){mindLog(t,"_dark");return}/* kept in the dark: she knows a blow fell, not whose */
@@ -53,7 +53,7 @@ function m43bad(p){if(p&&typeof p==="object"&&p!==S)p.badWk=bq()}
 function m43reporter(){const L=[];const seen=new Set();for(const s of [S.maid].concat(S.staff||[])){if(!s||seen.has(s))continue;seen.add(s);L.push(s)}if(!L.length)return null;
  const w=L.map(s=>(nv(s,"agentW"))*(s.loyal>=BAL.loy.close?1.5:1));let r=Math.random()*w.reduce((a,b)=>a+b,0),i=0;while(r>w[i]&&i<w.length-1){r-=w[i];i++}return L[i]}
 mindTell=function(v,t,k){mindLog(v,"_tell");try{if(v.plan&&v.plan.due>bq()+3)v.plan.due=bq()+3}catch(e){}/* a tell comes 1-3 buổi before the blow */const tc=witOf(v);let c=12+(S.mat||0)*7+(S.staff||[]).filter(s=>netIs(s,"sharp")||netIs(s,"talk")).length*8+(tc<BAL.wit.mid?15:0)-(tc>=BAL.wit.top?8:0)+(t===S&&S.maid&&S.maid.loyal>=BAL.loy.trust?10:0)-nq(v,"hide",BAL.net.k.hide);
- if(!roll(cl(c,5,80)))return;const s=m43reporter();
+ if(!roll(oddsCl(Math.min(c,80))))return;const s=m43reporter();
  if(s&&s.spyFor&&s.spyFor!=="me"&&(s.spyFor===key(v)||roll(50))){mindLog(v,"_tellWithheld");return}
  mindLog(v,"_tellSeen");const what=TELLS[k]||"có động tĩnh lạ";const txt=`${s?s.name+" về báo: n":"N"}gười của ${v.name} ${what}`;S.tells=S.tells||{};S.tells[v.id]={k,t:key(t),bq:bq()};
  try{newsAdd(v,k,txt,true)}catch(e){}noteAdd(v.id,`${s?s.name:"Tai mắt"} báo: ${what}${t===S?" (có lẽ nhắm vào ngươi)":` (có lẽ nhắm vào ${NM(t)})`}`);

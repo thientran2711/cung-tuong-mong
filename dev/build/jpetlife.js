@@ -31,7 +31,7 @@ function plDice(k){const L=BAL.pet.life;return L.dice[L.grp[k]]||L.dice.thu}
 function plRoll(k,min){const c=plDice(k);for(let i=0;i<200;i++){const x=Math.floor(Math.max(c.lo,Math.min(c.hi,c.mean+c.sd*plGauss())));if(x>=min)return x}return Math.ceil(min)}
 /* the pet-year tick of care: returns the new care years (never above careMax, never below 0) */
 function plCareYear(P,k){const L=BAL.pet.life,c=plDice(k),x=P.lifeX||0;
- if((P.care||0)>=L.careOk&&(P.aff||0)>=L.careAff&&x<c.careMax&&Math.random()*100<L.careP)return x+1;
+ if((P.care||0)>=L.careOk&&(P.aff||0)>=L.careAff&&x<c.careMax&&roll(L.careP))return x+1;
  if((P.care||0)<L.careLapse&&x>0)return x-1;return x}
 /*}CORE*/
 (function(){if(typeof BAL!=="object"||!BAL.pet||!BAL.pet.life||typeof petWeek!=="function")return;const L=BAL.pet.life;
