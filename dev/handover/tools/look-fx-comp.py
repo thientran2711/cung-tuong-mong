@@ -22,18 +22,35 @@ def faceclip(base,g,s=1.0):
     d.ellipse([g['cx']-g['fw']*.52*s,g['cy']-g['fh']*.46*s,g['cx']+g['fw']*.52*s,g['cy']+g['fh']*.52*s],fill=255)
     return m.filter(ImageFilter.GaussianBlur(2))
 def alpha_clip(base):return base.split()[3]
+import numpy as np
+def recolor(im,rgb):
+    a=np.array(im);a[...,0]=rgb[0];a[...,1]=rgb[1];a[...,2]=rgb[2];return Image.fromarray(a)
+def thicken(im,k):
+    al=im.split()[3].filter(ImageFilter.MaxFilter(k)).filter(ImageFilter.GaussianBlur(.8));o=im.copy();o.putalpha(al);return o
+def drybrush(im,seed=3):
+    rnd=np.random.RandomState(seed);w,h=im.size
+    n=rnd.rand(h,w);n=np.array(Image.fromarray((n*255).astype('uint8')).resize((w//2+1,h//2+1)).resize((w,h),Image.BICUBIC))/255.
+    st=np.array(Image.fromarray((rnd.rand(1,w)*255).astype('uint8')).resize((w,h),Image.NEAREST))/255.  # streaks along x
+    m=np.clip((n*.5+st*.5)*1.6,0,1)**.6;a=np.array(im.split()[3]).astype(float)*m
+    o=im.copy();o.putalpha(Image.fromarray(a.astype('uint8')).filter(ImageFilter.GaussianBlur(1.2)));return o
+def soften_pox(im):
+    a=np.array(im).astype(float);g=a[...,:3].mean(-1,keepdims=True);a[...,:3]=a[...,:3]*.35+g*.2+np.array([205,140,135])*.45
+    o=Image.fromarray(a.clip(0,255).astype('uint8'));o.putalpha(im.split()[3]);return o
 D={}
 def dec(n):
-    if n not in D:D[n]=W(n)
+    if n not in D:
+        im=W(n)
+        if n.startswith('fx-ink'):im=drybrush(recolor(im,(48,48,54)),5 if n.endswith('1') else 9)
+        elif n.startswith('fx-hair-xo'):im=thicken(recolor(im,(40,30,26)),7)
+        elif n.startswith('fx-stain-moc'):im=thicken(recolor(im,(105,65,35)),9)
+        elif n.startswith('fx-pox-daumua'):im=soften_pox(im)
+        D[n]=im
     return D[n]
 # effect functions: (img, g, level) -> img
 def e_ink(im,g,l):
-    c=faceclip(im,g,1.15)
-    if l==1:im=place(im,dec('fx-ink-1'),g['cx']+.2*g['fw'],g['cy']+.22*g['fh'],.45*g['fw'],-28,.9,clip=c)
-    if l==2:im=place(im,dec('fx-ink-1'),g['cx']+.18*g['fw'],g['cy']+.2*g['fh'],.6*g['fw'],-28,.95,clip=c)
-    if l==3:
-        im=place(im,dec('fx-ink-1'),g['cx']+.14*g['fw'],g['cy']+.14*g['fh'],.72*g['fw'],-25,1,clip=c)
-        im=place(im,dec('fx-ink-2'),g['cx']-.14*g['fw'],g['cy']+.36*g['fh'],.5*g['fw'],20,1,clip=c)
+    c=faceclip(im,g,1.15);fw=g['fw'];fh=g['fh']
+    if l>=1:im=place(im,dec('fx-ink-1'),g['cx']+.36*fw,g['cy']+.08*fh,[0,.42,.55,.68][l]*fw,-58,[0,.6,.75,.85][l],clip=c)
+    if l>=3:im=place(im,dec('fx-ink-2'),g['cx']+.4*fw,g['cy']+.3*fh,.3*fw,-70,.6,clip=c)
     return im
 def patch(dec_im,rx,ry,r):
     w,h=dec_im.size;px=int(rx*w);py=int(ry*h);R=int(r*w)
@@ -41,14 +58,15 @@ def patch(dec_im,rx,ry,r):
     m=m.filter(ImageFilter.GaussianBlur(R*.18));a=ImageChops.multiply(c.split()[3],m);c.putalpha(a);return c
 def e_pox(name):
     def f(im,g,l):
-        c=faceclip(im,g,1.0);op=1.0;fw=g['fw'];fh=g['fh']
-        pts=[(-.25,.18),(.28,.15),(0,-.2),(.05,.45),(-.3,-.05),(.32,-.1),(-.1,.25),(.12,.05),(0,.1)]
-        n=[0,3,6,9][l];sz=[0,.3,.32,.36][l]
-        v=dec(name+'-1');rnd=random.Random(7)
+        c=faceclip(im,g,1.0);fw=g['fw'];fh=g['fh'];rnd=random.Random(11)
+        n=[0,8,16,28][l];v=dec(name+'-1')
+        op=1.0 if 'daumua' in name else 1.0
         for i in range(n):
-            dx,dy=pts[i];sx=.3+.4*rnd.random();sy=.3+.4*rnd.random()
-            p=patch(v,sx,sy,.17)
-            im=place(im,p,g['cx']+dx*fw,g['cy']+dy*fh,sz*fw,rnd.randint(0,359),op,clip=c)
+            while True:
+                dx=rnd.uniform(-.48,.48);dy=rnd.uniform(-.38,.36)
+                if (dx/.5)**2+(dy/.5)**2<1 and not (abs(dx)<.28 and .2<dy<.36):break  # keep the mouth clear
+            p=patch(v,.3+.4*rnd.random(),.3+.4*rnd.random(),.045)
+            im=place(im,p,g['cx']+dx*fw,g['cy']+dy*fh,.085*fw,rnd.randint(0,359),op,clip=c)
         return im
     return f
 def e_muoi(im,g,l):
@@ -65,9 +83,9 @@ def e_bui(im,g,l):
         im=place(im,dec('fx-bui-1'),g['cx']+(i-1)*.05*g['fw'],g['cy']+.04*g['fh'],g['fw']*(.95+.1*i),i*60,[0,.9,1,1][l],clip=c)
     return im
 def e_hair(im,g,l):
-    P=[(.42,'fx-hair-xo-1',-8),(-.42,'fx-hair-xo-2',8),(.0,'fx-hair-xo-3',0)][:l]
+    P=[(.62,'fx-hair-xo-1',-5),(-.6,'fx-hair-xo-2',5),(.0,'fx-hair-xo-3',0)][:l]
     for dx,n,r in P:
-        d=dec(n);ww=.95*g['fw'];hh=d.size[1]*ww/d.size[0]
+        d=dec(n);ww=1.05*g['fw'];hh=d.size[1]*ww/d.size[0]
         im=place(im,d,g['cx']+dx*g['fw'],g['cy']-.5*g['fh']+hh*.5,ww,r,1.0)
     return im
 def e_vuong(name):
@@ -84,7 +102,7 @@ def e_moc(im,g,l):
     if l>=2:P.append((120,.50,.17,'fx-stain-moc-2',70))
     if l>=3:P.append((100,.78,.2,'fx-stain-moc-1',-100))
     for x,yf,wf,n,r in P:
-        im=place(im,dec(n),x,H*yf,wf*im.size[0]*[0,.8,1.0,1.1][l],r,[0,.95,1,1][l],mode='normal',clip=cl)
+        im=place(im,dec(n),x,H*yf,wf*im.size[0]*[0,1.2,1.5,1.7][l],r,[0,.95,1,1][l],mode='normal',clip=cl)
     return im
 EFFECTS={'ink':e_ink,'pox-daumua':e_pox('fx-pox-daumua'),'pox-scar':e_pox('fx-pox-scar'),'muoi':e_muoi,'bui':e_bui,'hair-xo':e_hair,
  'vuong-hoadao':e_vuong('fx-vuong-hoadao-1'),'vuong-la':e_vuong('fx-vuong-la-1'),'vuong-tuyet':e_vuong('fx-vuong-tuyet-1'),'moc':e_moc}

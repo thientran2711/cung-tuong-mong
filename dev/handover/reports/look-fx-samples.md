@@ -50,3 +50,6 @@ No mark on skin where it should be cloth (cloth marks clipped to the figure alph
 
 ## STATE
 review/look-fx = origin/main 62a6846f (unchanged, no code). Tests: none (no code). START_CTX ~8 % of window, now ~45 %: no rollover needed.
+
+## R2 (MAIN verdict: ink = moustache, fix 3 problems) 11/18
+Re-shot all 10 (same CDN names). ink: now ink-wash grey-black with dry-brush gaps, ONE cheek, swipe from cheekbone toward jaw, never lips/nose, 0.42/0.55/0.68 face width, opacity .6-.85, lv3 adds a small second stroke on the same cheek. Tóc xổ: strands thickened (alpha dilate) and darkened, at both temples + forehead. Móc chỉ: decal darkened + dilated, 1.2-1.7x bigger. Đậu mùa: the W15 approved face-square files are NO LONGER on the CDN (img/_review/looks-2/final-candidates/* 404; _index.json is stale), so I could not use them. Fallback: small soft rose bumps cut from the decal (desaturated, 8/16/28 bumps, mouth kept clear). MAIN: point me to the approved file if it still exists (Magnific library) and I redo it.
