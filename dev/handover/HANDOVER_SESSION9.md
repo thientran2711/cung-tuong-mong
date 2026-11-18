@@ -945,3 +945,4 @@ LESSONS s39: look at neighbours side by side before asking her to pick (A/B/C gl
 - (18/11 01:09Z) hoa-dien r3 286ee61a (pos 2 + 12.5 locked): drop table → main decision per owner's look-rule: DROP hd_mai + hoadien_bac; keep dao/sen/maudon/phuong; hd_lan waits owner eye (image sent Lượt 22).
 - (18/11 01:13Z) OWNER: nhạt tươi (lift to white) = faded → options A–D by opacity 85/75/65/85+blur, vivid colours, on dao + maudon (8 images) ordered. LESSON: for colour-strength asks, send numbered options at once.
 - (18/11 01:16Z) smudge r12 b4239ee 8 % options + tuyet-glow v8 1c4ea403 (grains .72) looked OK → sent owner (Lượt 26). Reviewer looks-s40 told to use glow 1c4ea403.
+- (18/11 01:19Z) OWNER: hoa điền tone = saturation only → options 85/75/65 on dao+maudon ordered (opacity options cancelled).
