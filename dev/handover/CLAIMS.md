@@ -490,3 +490,7 @@ art-matrix planner (MAIN s43 order) | claude/cung-tuong-mong-handover-hj0h8w (re
 | E7a QUESTLINE Q1a help-hồi text (opus; briefs/E7-questline-q1.md) | review/questline-q1a | E ROOT | session_01DgYSWpyUqEzbbzMAtLMkNM | RUNNING | 18/11 05:22Z |
 | E7b QUESTLINE Q1b help-hồi text (opus; briefs/E7-questline-q1.md) | review/questline-q1b | E ROOT | session_01DgYSWqDaerQBfKu5bPRkef | RUNNING | 18/11 05:22Z |
 | E7c QUESTLINE Q1c help-hồi text (opus; briefs/E7-questline-q1.md) | review/questline-q1c | E ROOT | session_01DgYSWmbeLw227mrkMikC5W | RUNNING | 18/11 05:22Z |
+| E7a QUESTLINE Q1a help-hồi text (opus; briefs/E7-questline-q1.md) | review/questline-q1a | E ROOT | (opening) | RUNNING | 18/11 05:22Z |
+| E7b QUESTLINE Q1b help-hồi text (opus; briefs/E7-questline-q1.md) | review/questline-q1b | E ROOT | (opening) | RUNNING | 18/11 05:22Z |
+| E7c QUESTLINE Q1c help-hồi text (opus; briefs/E7-questline-q1.md) | review/questline-q1c | E ROOT | (opening) | RUNNING | 18/11 05:22Z |
+| map-tap-go (owner 18/11 06:00Z: two dialog looks for one place + tap = go at once with undo toast; sonnet; brief briefs/map-tap-go.md) | review/map-tap-go | MAIN ROOT-45 | (opening) | RUNNING | 18/11 05:17Z |
