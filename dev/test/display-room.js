@@ -66,7 +66,7 @@ async function viaCurl(ctx){await ctx.route(/ctm-img\.victoria-tntt\.workers\.de
    const tk=await fr.waitForSelector('#kidfl [data-kidact=take]',{timeout:8000});await tk.click();await p.waitForTimeout(500);
    const back=await p.evaluate(()=>({inShelf:shelfIn(S,window.__g).some(x=>x[1].k===window.__k),inInv:S.inv.some(e=>e.k===window.__k)}));
    /* set lines from the REAL data: a whole pair (quattron + quatgap) glows and counts, one lone piece of another set reads "còn thiếu" */
-   const SL=await p.evaluate(()=>{const z=S.shelf&&S.shelf.g;if(!z)return null;const keys=["quattron","quatgap","lanquy"];keys.forEach(k=>{if(!IT[k])return;S.inv.push({k});const ix=S.inv.length-1;try{shelfPut(S,ix)}catch(e){}});shelfSetCheck(S);kitDisplayRoomClose();kitDisplayRoomOpen(S);
+   const SL=await p.evaluate(()=>{const z=S.shelf&&S.shelf.g;if(!z)return null;S.rank=5;const keys=["quattron","quatgap","lanquy"];keys.forEach(k=>{if(!IT[k])return;S.inv.push({k});const ix=S.inv.length-1;try{shelfPut(S,ix)}catch(e){}});shelfSetCheck(S);kitDisplayRoomClose();kitDisplayRoomOpen(S);
     const f=document.querySelector('#kdr .kdr-sets');const rows=f?[...f.querySelectorAll('.kdr-set')]:[];const lines=shelfView(S).sets;
     return{n:rows.length,view:lines.length,texts:rows.map(x=>x.textContent),ks:lines.map(x=>x.k).join(','),glow:document.querySelectorAll('#kdr .kdr-glow').length,same:rows.length===lines.length&&rows.every((x,i)=>x.textContent===lines[i].t)}});
    if(OUT&&OUT!=='-')await p.screenshot({path:`${OUT}/disp-${sz}-real.jpg`,type:'jpeg',quality:60});
