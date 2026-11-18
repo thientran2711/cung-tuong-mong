@@ -8,5 +8,7 @@ module.exports={
  D2:{cap:[[1,0],[1,0],[2,0],[2,0],[2,1],[3,0],[3,1],[4,1]],capTh:[4,0],note:"D1, Quý phi no eunuch"},
  D3:{cap:[[1,0],[1,0],[2,0],[2,0],[2,1],[3,1],[3,1],[4,1]],capTh:[3,0],note:"D1, TH 2 + 1 ma ma"},
  LR:{cap:[[1,0],[1,0],[1,0],[2,1],[2,1],[3,1],[3,1],[4,1]],capTh:[4,1],note:"B2 with every low rank (ĐƯ/TT/QN) 1 each"},
+ V1:{cap:[[1,0],[1,0],[2,0],[2,0],[2,1],[2,1],[3,1],[3,1]],capTh:[4,1],note:"owner OD 18/11 ~01:45Z: one more every 2 ranks, TH 4+1"},
+ V2:{cap:[[1,0],[1,0],[2,0],[2,0],[2,1],[2,1],[3,1],[4,1]],capTh:[4,0],note:"owner OD 18/11 ~01:45Z variant: HH 4+1, TH 3 + 1 ma ma"},
  E:{cap:[[1,0],[1,0],[1,0],[2,0],[2,1],[3,1],[3,1],[4,1]],capTh:[3,1],note:"own: low ranks 1, Tần 2+0, eunuchs from Phi, TH 2 + 1 ma ma + 1 thái giám"}
 };
