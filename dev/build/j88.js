@@ -1,6 +1,6 @@
 /* ================= j88: FACE POOL OF 84 WOMEN (owner 11/14: cung nữ có thể lên phi tần) — LOGIC + DATA ONLY =================
    No CSS, no markup: the portrait chooser UI is a kit component (review/kit-2); it reads this module's API.
-   Pool = 32 consort identities (FIGIX.consort "consort:c01".."c32") + 52 maid identities (FIGIX.maid "maid:m01".."m52").
+   Pool = the 84 painted women of «90 nhân vật nữ» (internal ids FIGIX.consort "consort:c01".."c32" + FIGIX.maid "maid:m01".."m52").
    - Dress tiers: anyone in consort dress (her as a consort, every NPC consort) wears the consort tier of her identity
      (j66 figTierOf: t1..t8 by rank, "cold" in lãnh cung). Maid identities read Part C records (role "maid", tier "t1".."t8"/"cold")
      from img/FIGURES-servants.json as soon as they appear (j39 re-reads every manifest every 5 min); a missing tier falls back to
@@ -91,8 +91,8 @@ function faceImg(id,who,kind){try{who=who||S;kind=kind||"por";const L=f88List(id
    → [{id:"maid:m05", src:"maid"|"consort", n:5, por:"img/…", fig:"img/…", mine:bool, tiers:[1,2,…]}] in c01..c32, m01..m52 order */
 function facePool(filter,who){who=who||S;return f88Keys(filter||"all").map(id=>({id,src:f88Src(id),n:f88Num(id),por:faceImg(id,who,"por"),fig:faceImg(id,who,"fig"),
  mine:!!(S&&S.pid===id),tiers:[...new Set(f88List(id).filter(f88IsCT).map(f88TNum))].sort((a,b)=>a-b)}))}
-/* WHICH FACE SET she may pick from (owner 16/11 s23: NO tabs; the game decides): a cung nữ life (palace maid: isSrv, or origin cnv) → "maid" = the 52 maid faces only;
-   every other life (phi tần) → "all" = 84 (32 consort + 52 maid; every maid identity has consort dress art, F88_NEED_C). Used by the ONE kit face picker (j86 fpHTML), solo and co-op alike. */
+/* WHICH FACE SET she may pick from (owner 16/11 s23: NO tabs; the game decides): a cung nữ life (palace maid: isSrv, or origin cnv) → "maid" = faces m01–m52 only;
+   every other life → "all" = the whole pool of 84 painted women (every id has rank-ladder art, F88_NEED_C). Used by the ONE kit face picker (j86 fpHTML), solo and co-op alike. */
 function kitFaceScope(){try{if((typeof isSrv==="function"&&isSrv())||(S&&S.origin&&S.origin.k==="cnv"))return"maid"}catch(e){}return"all"}
 /* she may choose now: the identity card is open (new life rolled, not yet accepted) */
 function faceOn(){try{return !!(typeof NLP!=="undefined"&&NLP&&S&&S.pid&&f88List(S.pid).length)}catch(e){return false}}
