@@ -31,3 +31,28 @@ The solo game on main is good (rules, numbers, UI all right; details below). It 
 
 ## Handover
 Not needed. Verdict complete.
+
+## ROUND 2 — E8r2 re-review of review/steal-minigame @ ea93a33d (FIX 1)
+PRIORITY #1 CHECK: branch review/steal-minigame only (E8, PL #3b); prior FAIL above; jnf on review/balance-chain ce3f5611 (not E's, not changed); main 09b1bbaf (now has mg-skip-all r2 = KIT §13.6 kitQuick + dev/test/mg-skip-audit.js, and coop-thin-e). START_CTX ≈ 3 %.
+
+### VERDICT: FAIL ea93a33d — the 7 round-1 points are fixed; the branch no longer merges with main
+
+**New blocking point (branch is stale: base 550dd1b3, main moved to 09b1bbaf):**
+1. **BLOCKING — playArt vs KIT §13.6 (mg-skip-all r2, on main).** Merging onto origin/main conflicts in `dev/build/j82.js` playArt (+ assemble.py, generated files). Main now builds the skip button with the ONE kit part `kitQuick(QK)` (`o.quick`, class `kquick`, roll option); the branch still writes its own `<button id="kg82skip">${o.skip}<small>${o.skipSub}</small>` — keeping the branch side would undo the kit quick button for EVERY playArt game. And `node dev/test/mg-skip-audit.js` on a merge FAILS: «playArt caller without quick: jsmg.js». Fix: merge origin/main; in playArt keep main's QK/kitQuick/qRow and add only `rows/rowsHead`, `go` label and `resRows`; jsmg passes `quick:{n:"Thôi, không chơi",sub:`giữ nguyên ${n0}`}` (no `skip/skipSub` options); KIT.md §13 text: replace `skip/skipSub` by «the skip button = §13.6 `quick`» so §13 and §13.6 do not contradict; re-run mg-skip-audit (0 fails), unit, steal-mg-nf, quickcheck on the merged sha. assemble: main's list + 'jsmg.js' last.
+
+### Round-1 points (checked on my LOCAL merge onto origin/main 09b1bbaf, j82 resolved test-only as above — not pushed)
+| # | Result |
+|---|---|
+| 1 BLOCKING host takes friend's "ch" during its own game | FIXED. jsmg COOP "act" listener sets x.fr while st "mg"; host's myAt restarts after her game. steal-mg-nf C1 PASS (async game, friend pick mid-game kept, resolved after). |
+| 2 BLOCKING guest's rung reaches host | FIXED. Guest: SMG mg → jnf "ch" held → SMG up → "ch"; host: FRW hold (≤ BAL.steal.mg.coopMs) keeps the friend wait open, FRUP → nfCtxUp token for a.coop in the one resolve. C2 (win → r = one rung up, e.g. 55→65), C3 (lose → plain), C4 PASS. **My own probe** (guest seat, jnf's REAL showChoice → mine() → send("ch"), not the test's stub dialog): sent order `ctm-smg:mg` → `ctm-smg:up:1` → `ctm-nf:ch:road`, st back "open", 0 errors. |
+| (new) PEND async fix | OK: render reset skips while PEND; C1 uses the async (setTimeout) game and passes. |
+| 3 KIT.md §13 | Documented — but see new point 1 (skip/skipSub must become §13.6 quick). |
+| 4 quickcheck | `bash dev/tools/quickcheck.sh` on the local main merge: QUICKCHECK PASS · 140 s · open 1316 ms · old save ok · render 166/163, tab 318/328, buổi 853/844 ms, tasks>200ms 14/14 · core gates PASS. |
+| 5 «cơ duyên» in source | FIXED (only «cơ hội» left is the owner's verbatim quote in the header comment). No % in jsmg. |
+| 6 NPC balance table | In report; plausible (NPC game win .36→.86 by bậc, ≈ +9 % relative NPC steals); knob BAL.steal.mg.npcP / BAL.steal.k for D/E. |
+| 7 unit case 7 | REAL now: __bot removed, playArt stubbed; at 93 calls 0 / at 50 called once and won (`calls:1, got2.up:1`). |
+
+Tests: steal-mg-unit on main merge 37 PASS / 0 FAIL / 0 page errors; steal-mg-nf on main merge + origin/review/balance-chain ce3f5611 (local, not pushed; only assemble.py conflict = balance-chain list + 'jsmg.js') 11/11 PASS, 0 page errors. ONE CORE: BAL.steal.mg {on,win,rung,art,occ,npcP,coopMs}; guest's `up` clamped to [0, rung]. Main path (no jnf) still OK: coop-thin-e keeps her own acts on her phone ("until part F"), so her token applies on her seat.
+Shots (local, scratch, deleted): Fold 755x1000 and iPad 1180x820@2 (lib/device), deck card Chặn ngự giá on the main merge: TÀI NGHỆ seal «Chặn ngự giá: Theo bước múa», Cách chơi, «TRƯỚC KHI RA TAY» Thắng green «cơ duyên lần này lên một bậc: Năm ăn năm thua → Khá chắc», Thua hay không chơi, Độ khó «Khó · hầu Hoàng thượng, tài nghệ bậc 0»; Bắt đầu (red) / «Thôi, không chơi · giữ nguyên Năm ăn năm thua» (drawn by kitQuick in my test resolution); iPad with her figure left; no cut text, no %, 0 page errors. (steal-mg-shot.js timed out once waiting #kg82go — same load race as round 1; a direct probe opened the game fine.)
+
+Non-blocking note: a guest who reloads in the middle of her own game loses the held jnf "ch" (in memory only); the host's wait ends after coopMs + waitMs → her pick counts as Thôi. Acceptable edge; mention when jnf's co-op night goes live.
