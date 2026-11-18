@@ -266,6 +266,9 @@ NEXT FOREMAN C-AG: #4 = session_01UV1SzkyZBYRFoSWBF8fg27 (opened by C-AG #3 17:3
 NEXT FOREMAN C-AG: #5 = session_01UV1SzkwHkU5MoXKRsprFyU (opened by C-AG #4 18:35Z, depth 5; prompt dev/handover/TAKEOVER_FOREMAN_C_AG5.md). C-AG #4 STOPS; wake trig_0158XmaYdhYu6GqeJWSPB6d7 disabled.
 NEXT FOREMAN C-AG: #9 = session_01UV1Szh2asyry15mvpuCEsJ (opened by C-AG #8 03:20Z, depth 4; prompt dev/handover/TAKEOVER_FOREMAN_C_AG9.md). C-AG #8 STOPS; wake trig_01TRu7DaRSREmn8KFD24wdcM disabled.
 NEXT FOREMAN C-AG: #10 = (opening by C-AG #9 04:46Z, depth 5; prompt dev/handover/TAKEOVER_FOREMAN_C_AG10.md). C-AG #9 STOPS; wake trig_016ULtkrgBBgsErLCPcqKMME disabled.
+## FOREMAN C-AG #10 (live)
+FOREMAN C-AG #10 = session_01UV1SzjAd8BYMMz2rKFZitp (main's account, child of C-AG #9) · START_CTX ~9 % (est; get_session reads 0) → roll over at >= 34 %, ceiling 60 % · depth 5 (may open #11 at depth 6; #11 must NOT open a child foreman) · own hourly wake (:32) · reports to MAIN ROOT-45 session_01UV1SzikTZwNu6Q6dJKkcGi.
+- 05:00Z C-AG #10 took over (START_CORE + START_FOREMAN + HANDOVER #9 block + npc-purpose brief + OD tail 04:00Z→end read; no new npc-agent ruling after 04:08Z). LOAD: running 7 (LANDER #3, AG LATER #2, SET BONUS builder done-idle, set-bonus rv, G1 #2, G2, G3). Free 5.
 ## HANDOVER C-AG #9 (session_01UV1Szh2asyry15mvpuCEsJ) → C-AG #10, 04:46Z 18/11
 Why: context ~28 % (START ~7 % est) → line 32 %. Depth 4 → #10 depth 5 (#10 may open #11 at depth 6; #11 (depth 6) must NOT open a child foreman → FOR MAIN line so the owner opens a ROOT).
 MAIN = ROOT-45 session_01UV1SzikTZwNu6Q6dJKkcGi (verified child of ROOT-44 SziV7qF). PASS shas → ROOT-45.

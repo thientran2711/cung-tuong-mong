@@ -450,7 +450,7 @@ c12 a18 t1+t4 head fix (Round 37) | claude/cung-tuong-mong-handover-hj0h8w (art,
 male proportion standard (nam mẫu) | claude/cung-tuong-mong-handover-hj0h8w (art, img/_review/male-proportion) | session_011xDdVPUwCzpXaNaKCq9BQr | DONE (archived by ROOT-15) | 2026-11-18T03:10Z (Foreman C ROOT-15)
 | place-stage r4 (3-line tag + size ladder; sonnet; successor of SziagD5) | review/place-stage | MAIN ROOT-44 | session_01UV1SzjeRxjkeN1ywFLhE8s | RUNNING | 18/11 03:12Z |
 c12 a18 Nữ đế sample (first step of t10 tier) | claude/cung-tuong-mong-handover-hj0h8w (art) | session_011xDdVRDstwu4ckD2NmLQBs | DONE (archived by ROOT-15) | 2026-11-18T03:15Z (Foreman C ROOT-15)
-| FOREMAN C-AG #9 (opus; successor of #8, opened by C-AG #8) | handover FOREMAN_C_STATUS | C-AG #8 | session_01UV1Szh2asyry15mvpuCEsJ | RUNNING | 18/11 03:20Z |
+| FOREMAN C-AG #9 (opus; successor of #8, opened by C-AG #8) | handover FOREMAN_C_STATUS | C-AG #8 | session_01UV1Szh2asyry15mvpuCEsJ | ROLLED OVER → #10 SzjAd8B | 18/11 03:20Z |
 | book-figsize r5 (one layout, crop wide robes at column, kids child size; sonnet; successor of Szgp1qD) | review/book-figsize-r5 | MAIN s43 | session_01UV1SzkhyYuitpjvm16Zn3P | RUNNING | 18/11 03:33Z |
 | NPC-PURPOSE (opus): every NPC action from a goal, no dice-only events (owner 18/11 04:08Z); phase 1 scan now, phase 2 after ag-all-2 live | review/npc-purpose | C-AG #9 | session_01UV1SziWp3UtGjdFMm4o1Vd | ROLLED OVER → Szk6vem (archived) | 18/11 03:55Z |
 | RESIDENCE-SEATS r2 re-merge on newest main (opus; MAIN s43 03:32Z) | review/residence-seats-r2 | D | session_01964izDkKFe51gntX9F2gZ9 | RUNNING | 18/11 03:58Z |
@@ -464,3 +464,4 @@ c12 a18 Nữ đế with Emperor-style crown (miện, feminine) trial (Round 41) 
 c12 in-game preview (room HH+Tần, Tuần lục Nữ đế), screenshots only | claude/cung-tuong-mong-handover-hj0h8w (report) + _review CDN | session_011xDdVRpFrshid89rbqZw5K | RUNNING | 2026-11-18T04:31Z (Foreman C ROOT-16)
 handsome man prompt-only sample (no proportion gate) | claude/cung-tuong-mong-handover-hj0h8w (art, img/_review/male-proportion) | session_011xDdVPS1M9BiswAUUGNhtg | DONE (archived ROOT-17 04:55Z) | 2026-11-18T04:32Z (Foreman C ROOT-16)
 c12 a18 Nữ đế #2 (r8 first) soft-smile (Round 42) | claude/cung-tuong-mong-handover-hj0h8w (art, _review CDN) | session_011xDdVQzK53ocBsDVyee2N3 | RUNNING | 2026-11-18T05:10Z
+| FOREMAN C-AG #10 (opus; successor of #9, opened by C-AG #9) | handover FOREMAN_C_STATUS | C-AG #9 | session_01UV1SzjAd8BYMMz2rKFZitp | RUNNING | 18/11 05:00Z |
