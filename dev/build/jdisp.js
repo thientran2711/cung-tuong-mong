@@ -54,6 +54,12 @@ function silKeys(g){if(FIXON())return(fixOf().kg||{})[g]||[];try{const I=BAL.she
 /* complete SET glow (data: C-AG set builder, shelfView items[i].set {id,name,full}); fixture: e.set */
 function setMap(){const m={};if(FIXON()){const F=fixOf();for(const s in F.placed)if(F.placed[s].set)m[s]=F.placed[s].set;return m}
  try{if(typeof shelfView==="function")for(const G of shelfView(KDR.p).groups)for(const it of G.items||[])if(it.set)m[it.slot]=it.set}catch(e){}return m}
+/* SET LINES (owner OD 17/11 ~20:47Z: she must see what to collect; random pieces show nothing): data = shelfView(S).sets [{id,on,k,t}] (her own room only); fixture: 4 sample lines */
+const SETFIX=[{id:"fx1",on:1,k:"on",t:"Bộ mẫu: Đức +2."},{id:"fx3",on:0,k:"wait",t:"Bộ đủ món: đã đủ món, tuần sau mới được tính."},{id:"fx2",on:0,k:"miss",t:"Bộ dở: còn thiếu chậu lan quý."},{id:"fx4",on:0,k:"bad",t:"Bộ khuyết: cây cảnh héo úa."}];
+function setLines(){if(FIXON())return KDR.p&&KDR.p!==S?[]:SETFIX;try{return typeof shelfView==="function"?(shelfView(KDR.p).sets||[]):[]}catch(e){return[]}}
+/* kitSetLines(lines): the ONE fact strip of the set lines (display room footer + interim shelfOpen dialog). One row per set: state dot + the line as written by jshelf. k: on = counting now (gold, glows like its pieces), wait = whole, counts next week, miss = pieces still missing, bad = broken. Empty list = "". */
+function kitSetLines(L){L=(L||[]).filter(x=>x&&x.t);if(!L.length)return"";const kk=x=>x.k||(x.on?"on":/khuyết/.test(x.t)?"bad":"miss");
+ return `<div class="kdr-sets" role="list" aria-label="Các bộ đồ bày">${L.map(x=>{const k=kk(x);return `<div class="kdr-set kdr-s-${k}" role="listitem" data-set="${esc(x.id||"")}"><i class="kdr-sd" aria-hidden="true"></i><span class="kdr-st">${esc(x.t)}</span></div>`}).join("")}</div>`}
 function ownedOf(g){/* [{e, ix}] owned pieces of this group, in chest order (her room only) */
  if(FIXON())return fixOf().inv.map((e,ix)=>({e,ix})).filter(x=>x.e.g===g);
  const out=[];(S.inv||[]).forEach((e,ix)=>{try{if(e&&!e.h&&grpOfE(e)===g)out.push({e,ix})}catch(x){}});return out}
@@ -85,7 +91,7 @@ function kitDisplayRoomHTML(m){m=m||{};const G=m.groups||groups(),ro=!!m.ro;cons
  const segs=P.segs.map(sg=>`<div class="kdr-seg" style="--ar:${sg.ar}"><img class="kdr-bgi" src="${esc(sg.src)}" alt="" draggable="false" onload="this.parentNode.classList.remove('kdr-nopic')" onerror="this.remove()">`+
   sg.slots.map(sl=>{const x=G[gi++];return x?shelfHTML(x[0],m.placed&&m.placed[x[0]],{ro,known:m.known!==false,slot:sl,per:m.per||5,sets:m.sets||{}}):""}).join("")+`</div>`).join("");
  return `<div class="kdr-hd"><span class="kdr-cart">${esc(title)}</span><span class="kdr-cnt">${ro&&!m.known?"":`Đã bày ${n} món`}</span>${typeof kitXHTML==="function"?kitXHTML('data-kdrx="1"',"Đóng"):'<button type="button" class="kit-x" data-kdrx="1" aria-label="Đóng">✕</button>'}</div>`+
-  `<div class="kdr-sc"><div class="kdr-cab">${segs}</div></div>`}
+  `<div class="kdr-sc"><div class="kdr-cab">${segs}</div></div>`+(ro?"":kitSetLines(m.setLines))}
 function tileHTML(x,g){const P=pc(x.e),why=whyNot(x.e);
  return kitItem({src:P.src,name:P.name,grade:P.grade,lux:P.lux,mark:P.over?["Vượt phẩm","r"]:(P.ngu?["Ngự tứ","n"]:null),size:"slot",tip:`${P.name}${P.over?" · vượt phẩm":""}${why?" · "+why:""}`,
   data:`data-kdrix="${x.ix}" data-kdrk="${esc(P.k)}" role="button" tabindex="0"${why?' aria-disabled="true"':""}`})}
@@ -102,7 +108,7 @@ function box(){/* the area between the top bar and the bottom bar, inside the ga
  const gm=document.getElementById("game"),h=gm&&gm.querySelector("header.hud"),b=gm&&gm.querySelector("nav.bar");if(!gm||!h||!b)return null;
  const g=gm.getBoundingClientRect(),a=h.getBoundingClientRect(),c=b.getBoundingClientRect();return{l:g.left,r:innerWidth-g.right,t:Math.round(a.bottom+4),b:Math.round(innerHeight-c.top+4)}}
 function place(){const el=$k();if(!el)return;const x=box();if(!x)return;el.style.left=x.l+"px";el.style.right=x.r+"px";el.style.top=x.t+"px";el.style.bottom=x.b+"px"}
-function model(){const m={ro:KDR.ro,known:KDR.known,groups:groups(),placed:{},title:KDR.ro&&KDR.p&&KDR.p!==S?`Đa Bảo Các của ${esc((KDR.p&&KDR.p.name)||"")}`:"Đa Bảo Các"};m.per=perN();m.sets=KDR.known?setMap():{};for(const x of m.groups)m.placed[x[0]]=KDR.known?placedOf(x[0]):[];return m}
+function model(){const m={ro:KDR.ro,known:KDR.known,groups:groups(),placed:{},title:KDR.ro&&KDR.p&&KDR.p!==S?`Đa Bảo Các của ${esc((KDR.p&&KDR.p.name)||"")}`:"Đa Bảo Các"};m.per=perN();m.sets=KDR.known?setMap():{};m.setLines=KDR.known&&!KDR.ro?setLines():[];for(const x of m.groups)m.placed[x[0]]=KDR.known?placedOf(x[0]):[];return m}
 function paint(){const el=$k();if(!el)return;try{el.classList.toggle("kdr-calm",typeof reducedMotion==="function"&&reducedMotion())}catch(e){}const keep=el.querySelector(".kdr-sc"),st=keep?keep.scrollTop:0;el.innerHTML=kitDisplayRoomHTML(model())+`<div class="kdr-drw" id="kdrdrw" hidden></div>`;
  const s2=el.querySelector(".kdr-sc");if(s2)s2.scrollTop=st;if(KDR.drawer)drawer(KDR.drawer,true);place()}
 function kitDisplayRoomOpen(p,o){o=o||{};kitDisplayRoomClose(true);KDR.p=p||S;KDR.ro=!!o.ro||(KDR.p!==S);KDR.fixture=!!o.fixture||!real();KDR.known=o.known!==false;try{if(KDR.ro&&real()&&o.known==null&&typeof shelfView==='function')KDR.known=!!shelfView(KDR.p).known}catch(e){}KDR.drawer=null;
@@ -138,7 +144,7 @@ const rp=()=>{cancelAnimationFrame(KDR.raf);KDR.raf=requestAnimationFrame(place)
 try{const r1=render;render=function(){const r=r1.apply(this,arguments);try{if($k()&&(typeof S==="undefined"||!S||S.dead))kitDisplayRoomClose();else if($k()){place()}}catch(e){}return r};window.render=render}catch(e){}
 /* ---------- rail icon (KIT §77): only when the real data API exists ---------- */
 try{if(typeof kitStageRail!=="undefined")kitStageRail.add({id:"disp",order:40,icon:"img/kit/ico-room.webp",title:"Đa Bảo Các",when:()=>real()&&!S.dead&&!S.out,onTap:()=>kitDisplayRoomOpen(S)})}catch(e){}
-window.kitDisplayRoomOpen=kitDisplayRoomOpen;window.kitDisplayRoomClose=kitDisplayRoomClose;window.kitDisplayRoomHTML=kitDisplayRoomHTML;
+window.kitSetLines=kitSetLines;window.kitDisplayRoomOpen=kitDisplayRoomOpen;window.kitDisplayRoomClose=kitDisplayRoomClose;window.kitDisplayRoomHTML=kitDisplayRoomHTML;
 /* ---------- css ---------- */
 const css=document.createElement("style");css.id="kit-disp";css.textContent=`
 .kdr{position:fixed;z-index:22;display:flex;flex-direction:column;min-height:0;border-radius:10px;overflow:hidden;background:#f1e4c8 var(--kdr-bg) center/cover;box-shadow:0 2px 10px #0004,inset 0 0 0 1px var(--gold,#b8892b)}
@@ -167,6 +173,16 @@ html.kv2 .kdr-seg{width:min(100cqw,calc(100cqh*var(--ar)));margin:0 auto}
 @keyframes kdrGlow{0%,100%{opacity:1}50%{opacity:.86}}
 @media (prefers-reduced-motion:reduce){.kdr-glow{animation:none}}
 .kdr-calm .kdr-glow{animation:none}
+.kdr-sets{flex:0 0 auto;max-height:min(26%,5.6rem);overflow-y:auto;margin:0 8px 8px;padding:5px 10px;border-radius:8px;background:var(--k-card,#fffaf0);border:1px solid var(--k-hair,#e6d3ac);display:flex;flex-direction:column;gap:3px;-webkit-overflow-scrolling:touch}
+.kdr-set{display:flex;align-items:flex-start;gap:8px;font-size:.78rem;line-height:1.3;color:var(--ink,#3a2418)}
+.kdr-sd{flex:0 0 9px;width:9px;height:9px;margin-top:.34em;border-radius:50%;background:#a99a7e}
+.kdr-s-on .kdr-sd{background:#e0a92a;box-shadow:var(--k-glow,0 0 5px #ffd66e);animation:kdrGlow calc(2.4s*var(--pace,1)) ease-in-out infinite}
+.kdr-s-on .kdr-st{font-weight:700}
+.kdr-s-wait .kdr-sd{background:#e0a92a;opacity:.55}
+.kdr-s-bad .kdr-sd{background:#b5402e}.kdr-s-bad .kdr-st{color:#8a2c1e}
+@media (prefers-reduced-motion:reduce){.kdr-s-on .kdr-sd{animation:none}}
+.kdr-calm .kdr-s-on .kdr-sd{animation:none}
+#modal .kdr-sets{margin:8px 0;max-height:none}
 .kdr-plank{display:none}
 /* STUB ONLY: while the painted cabinet is not on the CDN yet (img onerror removes it) the compartments show a plain plank so the room stays usable; gone as soon as the picture loads */
 .kdr-seg:not(:has(.kdr-bgi)) .kdr-plank{display:block;position:absolute;left:0;right:0;bottom:-6px;height:10px;border-radius:3px;background:linear-gradient(#b98a52,#8c5f33 70%,#6b4524);box-shadow:0 3px 5px #3a201655}
@@ -188,6 +204,6 @@ html.kv2 .kdr-seg{width:min(100cqw,calc(100cqh*var(--ar)));margin:0 auto}
 `;document.head.appendChild(css);
 /* ---------- kit page sample ---------- */
 try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§89",title:"kitDisplayRoom · Đa Bảo Các (tủ trưng bày + ngăn kéo tư trang)",
- html:()=>{let F=null;try{F=mkFix()}catch(e){}const placed=F?F.placed:{};const m={groups:GFIX,placed};
+ html:()=>{let F=null;try{F=mkFix()}catch(e){}const placed=F?F.placed:{};const m={groups:GFIX,placed,setLines:SETFIX};
   return `<div class="kitpg-row" style="position:relative;height:420px;overflow:hidden"><div class="kdr" style="position:absolute;inset:0;--kdr-bg:url('${KDR_BG}')">${kitDisplayRoomHTML(m)}</div></div>`}})}catch(e){}
 }catch(e){console.error("jdisp",e)}})();
