@@ -23,7 +23,7 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
   /* 2 carry */
   const R=agRec();o.rec=!!R;const v=liveRivals(true).find(x=>x.alive&&!x.out&&R&&R.P["v"+x.id]);const id="v"+v.id,key0=agKey();
   for(let q=0;q<4;q++)R.P[id][q]=[palaceOf(v),"rest",null,""];
-  const pd={id,vid:v.id,k:"effort",pl:palaceOf(v),kh:3,act:"luyện tài nghệ",why:"test",key:key0,t:null};const z=agZ();z.pend.push(pd);agSpan(pd,{k:"effort",kc:3},v);
+  const pd={id,vid:v.id,k:"effort",pl:palaceOf(v),kh:3,act:"luyện tài nghệ",why:"test",key:key0,t:null};const z=agZ();z.pend.push(pd);agSpan(pd,{k:"effort",kc:3},v);R.P[id][3]=[pd.pl,"ag_effort",null,""];/* review ag-later: paint her row of khắc 3 as agPlan does in play — the boundary drain (AG LATER) runs the khắc view sync (agWatch) first, which rightly marks an unpainted deed gone */
   o.span={k1:pd.k1,sp:pd.sp};
   step();const R1=agRec();o.carry={key:pd.key===agKey(),kh:pd.kh,k1:pd.k1,cont:pd.cont,inPend:z.pend.includes(pd),row:R1&&R1.P[id]?R1.P[id].slice(0,3).map(e=>e&&e[1]):null};
   step();o.landed=!z.pend.includes(pd);
