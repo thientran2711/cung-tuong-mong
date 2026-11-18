@@ -10,8 +10,8 @@ OWNER (verbatim, 18/11 ~22:20Z real): "Tức là cái nào mà tao đã ưng r�
 4. Not listed here = NOT approved = sample only, never mass. A new owner approval is added here the same hour (Foreman C), with the builder command, the build.py commit and the approved sheet.
 5. Every brief to a painter points to this file; reviewers FAIL any gen whose prompt differs from the listed form in anything but item/pose.
 
-### REFERENCES (owner 18/11 ~22:30Z real, verbatim: "Ok, bây giờ chỉ cần giữ ở cái lượt 63 nè, chỉ giữ lại hai hình này thôi, tức là hai hình mẫu này nè, chỉ giữ hai hình mẫu này thôi, hình cái cô mà mặc áo màu màu hồng á, không có làm ảnh mẫu nữa.")
-Lượt 63 = the two identity images (her own a18 t1 v0 figure, c06 and c25 shown). From now on EVERY gen uses ONLY her own identity image (own t1 of that age) as reference. The pink-robe style image "style B" kspkwKx16B is NO LONGER a reference (nor any other style image). Builder: drop the style-reference sentence (flag --nostyle, W103). This overrides the "References" column below.
+### REFERENCES (owner 18/11 ~22:35Z real, verbatim: "Lượt 66 mày nói tao là câu ảnh đã bỏ ảnh style. Mọi hình giờ chỉ dùng đúng một ảnh. Bậc một của người đó đúng rồi. Mày còn thiếu phải một hình nữa. Tức là cái hình cô gái mà hình ảnh mẫu cô gái đó, để mà lấy cái mẫu của màu da, lấy cái mẫu của phong cách vẽ và lấy cái mẫu của loại vải chẳng hạn." + earlier ~22:30Z: "hình cái cô mà mặc áo màu màu hồng á, không có làm ảnh mẫu nữa.")
+EVERY gen = EXACTLY TWO references: (1) her own t1 figure of that age = face/identity; (2) the STYLE image m09 = fig-maid-m09-a18 (Magnific eIyOFEidqL, type style) for skin, drawing style and fabric. The pink-robe image "style B" kspkwKx16B is NEVER used again. Do NOT use build.py --nostyle (the style sentence stays). No third image.
 
 ### APPROVED FORMS (newest last)
 | What | Builder command (dev/art/t8-prompt-B/build.py, handover branch) | References | Approved sheet / owner |
