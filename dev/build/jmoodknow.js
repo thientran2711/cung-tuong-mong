@@ -82,7 +82,7 @@ window.ghenFeel=ghenFeel;
 function mkBar(d,why,kind){if(!mkOn()||!S||!d)return 0;mkSync(S);const v0=S.mood.v;const kd=kind||why||"x";mkAdd(S,{kd,k:null,d,why:String(why||"").slice(0,80)},mkDur(null,null,kd));S.__mkL=S.emo?{k:S.emo.k,v:S.emo.v}:null;mkSync(S);return S.mood.v-v0}
 function mkAll(){const L=[];const add=x=>{if(x&&typeof x==="object"&&(x.mk||x.emo))L.push(x)};try{for(const p of [S].concat(rivals||[])){add(p);for(const s of p.staff||[])add(s);for(const k of p.kids||[])add(k)}}catch(e){}
  add(S.emp);add(S.thO);add(S.maid);try{for(const m of S.men||[])add(m)}catch(e){}try{if(S.court)for(const c in S.court)add(S.court[c])}catch(e){}return L}
-function mkTick(){if(!mkOn()||S.dead)return;const now=mkNow();if(MK.at===now)return;MK.at=now;for(const p of mkAll())if(p.__mkAt!==now)mkSync(p)}
+function mkTick(){if(!mkOn()||S.dead)return;const now=mkNow();if(MK.at===now)return;MK.at=now;if(typeof worldOn==="function"&&!worldOn()){if(S.__mkAt!==now)mkSync(S);return}for(const p of mkAll())if(p.__mkAt!==now)mkSync(p)}
 /* the active causes of p, strongest first, with khắc left (her mood box / tap list) */
 function mkCauses(p){const q=emoRes(p);if(!q)return[];mkSync(q);const now=mkNow();
  return (q.mk||[]).filter(m=>m.k&&EMO[m.k]&&m.s>0).sort((a,b)=>b.s-a.s).map(m=>({k:m.k,v:m.s,why:m.why,w:m.w,a:m.a,c:m.c,e:m.e,t:m.t,left:m.k1-now}))}
@@ -262,6 +262,7 @@ window.mwPlaceOf=mwPlaceOf;window.mwTick=mwTick;window.mwStat=()=>Object.assign(
 /* MOOD-MEM: the causes advance in the STEP, never on a read (lander #6, 18/11). mkSync is lazy (a seal / side-column read syncs p at mkNow) and
    mkTick ran only at render() / endTurn, so WHEN a display read ran decided the khắc a cause was dropped or scaled: a stage fit deferred to the
    next frame (ag2-perf B) changed the world (seeded run: Hoàng thượng's Khó chịu dropped at khắc 56 by the side column, not later). After every
-   step that moves her khắc (the j95 final list), everyone not synced at this khắc is synced here, so a later read in the same khắc is a no-op. */
-(function(){const step=()=>{try{if(!mkOn()||!S||S.dead)return;const now=mkNow();for(const p of mkAll())if(p.__mkAt!==now)mkSync(p)}catch(e){console.error("mkStep",e)}};
+   step that moves her khắc (the j95 final list), everyone not synced at this khắc is synced here, so a later read in the same khắc is a no-op.
+   CO-OP ONE WORLD (owner OD:L96, jcoopone.js PERSON kind): on the guest seat (worldOn() false) the step syncs only her; NPC moods are the host's. */
+(function(){const step=()=>{try{if(!mkOn()||!S||S.dead)return;const now=mkNow();if(typeof worldOn==="function"&&!worldOn()){if(S.__mkAt!==now)mkSync(S);return}for(const p of mkAll())if(p.__mkAt!==now)mkSync(p)}catch(e){console.error("mkStep",e)}};
  for(const n of ["goTo","spend","nextBuoi","endTurn","coldVisit","talk","closeModal","chooseM"]){if(typeof window[n]!=="function")continue;const o=window[n];window[n]=function(){const r=o.apply(this,arguments);step();return r}}})();
