@@ -19,3 +19,11 @@ Handover: remaining hits are all HISTORY/generated, left untouched: FOREMAN_B/C_
 2. Player-visible: filter chips "Phi tần / Cung nữ" in the picker (old KIT.md:474) — verify no visible chips remain (rank words themselves are fine). No new player-visible text added.
 3. Identifier names FIGIX.consort / FIGIX.maid / figKey "consort:" / "maid:" and CDN file names fig-consort-cNN / fig-maid-mNN are live identifiers — not renamed (list only).
 4. Rank-ladder art for the m-ids "consort dress art" is stated as complete in the logs (F88_NEED_C); art-matrix says Thái hậu/Nữ đế tiers + foreign princesses are the only holes.
+
+## REVIEW r1 (SMALL reviewer, sonnet)
+READY FF 3270145f861e2198d809c52c5df9b17040c39d11 (review/doc-90-women-r1; descends origin/main 790cda5).
+1. Scan (widened pattern) on review/doc-90-women: 0 live hits in docs/code. Remaining = history only (reports/fig-cutout-root, fig-rank-match, review/LOG.md) + an unrelated "a consort sets out a weiqi board" line (dlg_scenes.txt). Handover branch: remaining hits are history/generated, plus stale j86/j88 copies (regenerated from main) — OK.
+2. Wording: each rewrite says the 84 painted women of «90 nhân vật nữ» / ids c01–c32 + m01–m52, written in place, no "changed to" notes. OK.
+3. No behaviour change: assembled dev/index.html from main vs branch differs in exactly 9 comment lines (all inside /* */); node --check passes. The worker's index.html mirror was right but build hash / sw.js V / build line were stale → rebuilt with build_site.sh and committed on r1 (index.html 4 lines, sw.js 4 lines, hashes only). Old-save browser run skipped: code diff is comments only.
+4. Descends newest origin/main. PASS.
+Flags carried (not for this job): j88 facePool("maid") filter still hides c-ids from cung nữ lives (code task); picker chip words "Phi tần/Cung nữ" need owner-visible check.
