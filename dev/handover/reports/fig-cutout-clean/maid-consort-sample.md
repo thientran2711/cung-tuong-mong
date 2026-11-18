@@ -448,3 +448,24 @@ Gate by eye: A body/shoulders inside the m09 outline (sleeves/under-skirt outsid
 Credits: 1 gen 80 + 1 cut 3 = 83 cr (1 of 4 gens used).
 Weak points: (1) +4.0 % is inside ±5 % but near the edge. (2) The board carries dragons only (no phoenix; the phoenix is in the A crown). The miện is small and light, so it may read a little thin next to the big phoenix crown. (3) Plaited side loops of hair stay (as in A), a few pins stick out sideways slightly; the bead strings are evenly long (the outer ones are not clearly shorter). (4) The tassel row is about 7, not 9.
 Files on CDN (md5-verified, https://ctm-img.victoria-tntt.workers.dev/img/_review/maid-consort-sample/): c12_a18_r11_nude_mien_fresh.png (768x2000 transparent), c12_a18_r11_nude_A_vs_mien.jpg (Nữ đế A | miện on the red skull-top/feet lines + head crops at 100 %). Nothing live.
+
+## Round 40 — smile (W23, Foreman C ROOT-16; FIGURE_GATE D4b, owner 18/11 ~04:31Z "C12 có cưởi mỉm đâu")
+
+PRIORITY #1 CHECK: OD 0 | ledger 0 | claims 0 | main 0 | review/* 0 | archive 0 — reused: c12 a18 approved set (R38/R39 + STATUS 04:29Z), overlay_m09.py. START_CTX ≈ 10 % (own estimate).
+Method (1) local edit, worked first try on all 9: MediaPipe face mesh (lm 61/291/0/17) → small elliptical mouth mask (≈1.7 × mouth width, ±0.13 × face height) on the 768x2000 cut-out; Magnific `images_retouch` model retouch-precise-gpt-2-6 (mode replace, precise), folder ba4aecfe…; prompt: repaint ONLY the mouth as a soft closed-lip faint smile, lips closed and touching, corners lifted very slightly, no teeth, keep lip colour/size/skin/rendering. Result comes back RGB → only the mask pixels were pasted onto the original RGBA (alpha untouched); everything outside the mouth is pixel-identical (measured outside-mask diff: mean ~0, max 1).
+| figure | tries | method | face % vs m09 (±5 %) | pass |
+|---|---|---|---|---|
+| t1 Đáp ứng | 1 | local mouth edit | −0.8 | PASS |
+| t2 Thường tại | 1 | local mouth edit | −1.4 | PASS (was parted lips → closed) |
+| t3 Quý nhân | 1 | local mouth edit | −2.6 | PASS |
+| t4 Tần | 1 | local mouth edit | +0.3 | PASS |
+| t5 Phi | 1 | local mouth edit | +0.8 | PASS (was parted → closed) |
+| t6 Quý phi | 1 | local mouth edit | +0.8 | PASS (was parted → closed) |
+| t7 Hoàng quý phi | 1 | local mouth edit | 0.0 | PASS (was parted → closed) |
+| t8 Hoàng hậu | 1 | local mouth edit | −3.3 | PASS (was parted → closed) |
+| Nữ đế | 1 | local mouth edit | −0.1 | PASS (was parted → closed) |
+9 tries for 9 figures (max 6 each; none needed a second). Method (2) fresh gen not used.
+Looked at every face at 2x (mouth strip + whole head, before | after): lips closed, soft smile visible but faint, no teeth, same c12 face/eyes/brows, forehead clean. Face % re-measured with overlay_m09.py: all within ±5 %; small moves vs R38 (t7 +2.1→0.0, t8 −1.4→−3.3, t6 +1.9→+0.8, t2 −0.4→−1.4) are chin-landmark jitter from the new mouth, size/alpha untouched.
+Credits: 9 × 175 = 1575 cr (uploads free).
+Weak points: (1) the smile is subtle by design — on t1/t4 the lift is faint at game size; stronger = one more retouch per figure (175 cr). (2) Lips came out slightly fuller/glossier/pinker than before, most on t7/t8 (same colour family). (3) t8 −3.3 is the loosest face number (gate OK). (4) Masks left on the CDN as c12_a18_r10_mask_*.png (review folder; wipe with the verdict).
+Files (md5-verified, https://ctm-img.victoria-tntt.workers.dev/img/_review/maid-consort-sample/): c12_a18_r10_t{1..8}_smile.png, c12_a18_r10_nude_smile.png (768x2000 transparent), c12_a18_r10_faces_before_after.jpg (9 heads before | after), c12_a18_r10_row_all.jpg (row on red skull-top/feet lines), c12_a18_r10_overlay_m09_all.jpg (m09 overlay with %). Nothing live.
