@@ -551,3 +551,4 @@ RUNNING MAIN WORKERS / REVIEWERS (tell them the new id):
 - C-AG #10 session_01UV1SzjAd8BYMMz2rKFZitp: HOLD on jcoop*/jag*/j95*/jtoil*/jbal*/assemble/save until ag-all-2-land + npc-chain-land land (~10:00Z); then npc-purpose. Live test fails noted by C-AG: emotion-acts.js, toil-react 'modal on top', staff-cap-apply row 3 (D jobs).
 - E FOR MAIN: hall-names 0430c6a + questline-q0-ff 911a3c8 need re-merge on latest main (ORDER in E STATUS) → land FF when READY.
 - D: odds-cap-r1 591cedf + title-stale-sel 4842ab4 + staff-cap-row3 ddc234d → D reviewer final merge on latest main → land FF; balance-chain ce3f561 in D review (touches jbal → after C-AG hold).
+- ROOT-48 FINAL (18/11 07:34Z): successor MAIN ROOT-49 = session_01UV1SzicNuc6RxVvcxNUHKK (depth 5). ROOT-48 relays owner words + worker reports only.
