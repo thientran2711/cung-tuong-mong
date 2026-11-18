@@ -724,3 +724,6 @@ Helper: /tmp/…/scratchpad/hpush.sh pattern = fetch, reset --hard FETCH_HEAD, r
 - FOREMEN: B (coop-thin-f1 landing itself, c4 review) | C art | D choice-value-audit (plan accepted: fixture pair + real scan), balance-final #2, npc-purpose seats | E ge-writers-w1 (ORDER: carries jrd_muoi ch8 patch) — all told LIVE 94d11623.
 - ROOT-53 hourly wake trig_013Pv6wCN3hDXuuNwL18weZb (:32) → ROOT-54 deletes it and makes its own.
 - (18/11 ~19:21Z) ROOT-53 opened ROOT-54 = session_01Rc5AsMSQ6cKyjRvG4MA9kQ (opus, child, depth 1) and STOPS coordinating. Owner: talk to ROOT-54 (session title 'Cung Tường Mộng 54 (MAIN)').
+## MAIN = ROOT-54 session_01Rc5AsMSQ6cKyjRvG4MA9kQ; START_CTX ~7 % (get_session reads 0; own estimate, 1M window) → roll at ~32 %, ceiling 60 %; depth 1
+- LOAD (18/11 ~19:22Z): main running 7 (shop-panel-r3, fullbody-frame-s5, opt-card-short #4, map-labels-r2, map-zones = UI; entry-blank-r3 = owner bug; C-AG #14 foreman) | B free 10 | C art busy | D free 8 (D #3) | E load 5/12 | moved: none (no main-held non-UI item).
+- (18/11 ~19:22Z) ROOT-54: hourly wake = trig_01G56uVwcEgkttiekqTqH4W1 (:32). ROOT-53 trig_013Pv6wCN3hDXuuNwL18weZb DISABLED (delete refused by permission classifier; disabled instead).

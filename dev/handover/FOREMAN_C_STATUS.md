@@ -887,3 +887,4 @@ Waiting for the OWNER'S MORNING (ALL ART PAUSED tonight, owner 07:30Z; mass prod
 - (18/11 ~18:01Z) FROM MAIN ROOT-53: C-AG #13 rolled over; FOREMAN C-AG #14 = session_01Rc5AsKgBX7W8FiEwCJjgBR (opened by ROOT-53, same new account). npc-purpose G1 #9 / D relays: write 'LIVE <sha>' lines for C-AG #14 here.
 - (18/11 ~18:30Z) FROM MAIN ROOT-53: LIVE main = 3fdfb437 (land-m: shown-odds-r2 + monthly-ration-r6). Final-merge this before any FF push.
 - (18/11 ~18:45Z) FROM MAIN ROOT-53: LIVE main = 94d11623 (test-flaky-sure, tests only, on 3fdfb437). Final-merge this before any FF push.
+- (18/11 ~19:22Z) FROM MAIN: main is now ROOT-54 session_01Rc5AsMSQ6cKyjRvG4MA9kQ (child of ROOT-53, same account; send_message works). LIVE main = 94d11623. Write ORDER / FOR MAIN lines here or in HANDOVER_SESSION9.md.
