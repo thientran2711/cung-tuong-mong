@@ -1319,6 +1319,9 @@ Object.assign(BAL.ag.why.cd,{callMe:4,f7Merit:60,sendMaid:24,tellJ75:4,famGift:1
 /* npc-purpose G1 part 10 (j95b lies; jagwhy1). lie: expose / blame / frame = hostility toward her needed to expose (old 12 %), push blame (old 40 + 20 %),
    frame (old 45 + 25 %); cd = tuần between two such deeds by the same person (lieMe ≈ the old weekly nết rumorP) */
 Object.assign(BAL.ag.why,{lie:{expose:30,blame:40,frame:45}});
+/* npc-purpose reason divisors (one-core "div" kind, OD:L1267): a stat is divided by these in a reason score — grGhen = her ghen toward the player (npw1Gr),
+   thCall = Thái hậu regard (thCall), sendMaid = her sủng (sendMaid), lieMal = malice in a rumor (lieMe), wearMal = malice of a holder who wears a lost piece (loWear) */
+Object.assign(BAL.ag.why,{div:{grGhen:2,thCall:4,sendMaid:4,lieMal:40,wearMal:2}});
 Object.assign(BAL.ag.why.cd,{exposeMe:6,lieMe:6,blameMe:4,frameMe:4});
 // G3 kinds (NPC-PURPOSE G3: witness / target picks + agent-layer dice; report dev/handover/reports/npc-purpose.md §G3)
 /* g3.soon   a planned deed's khắc: score 100 − soon × khắc from now (she does what she wants soon; npwPick keeps the near-best khắc)

@@ -38,7 +38,7 @@ npwReg("menGrudge",{grp:"man",who:()=>(S.men||[]).filter(m=>m.alive&&m.grudge===
    hhGreed   embezzle: only a greedy Empress (greedT nết) · empAsk tuyen: the Emperor, when the palace is thin
    coldAsk   coldletter, coldvisit: a fallen consort who trusts her · loveFound loveletter: a consort with a real lover (j22 affair), her tai mắt
    arson     fire / omen comet: a motive AND hostility ≥ arsonBar / omenBar (the heaviest deeds) · rvHarm rvframe/rvmusk/rvbribe, rvFeud rvquarrel */
-function npw1Gr(v,t){const o=oan(v,t),a=Math.max(0,-aff(v,t))/2,g=t===S?(v.ghen||0)/2:Math.max(0,((t.sung||0)-(v.sung||0))/3);const n=t===S?"ngươi":"nàng";
+function npw1Gr(v,t){const o=oan(v,t),a=Math.max(0,-aff(v,t))/2,g=t===S?(v.ghen||0)/npwB().div.grGhen:Math.max(0,((t.sung||0)-(v.sung||0))/3);const n=t===S?"ngươi":"nàng";
  if(o>=a&&o>=g&&o>0)return `ôm hận ${n}`;if(g>=a&&g>0)return t===S?"ghen với ân sủng của ngươi":"ghen vì nàng được sủng hơn";return `coi ${n} là cái gai trong mắt`}
 function npw1Mot(v,t,h,bar){if(!v||!t||v===t||!motiveOK(v,t,h||"harm").ok)return null;const x=hostility(v,t);if(bar&&x<bar)return null;return {s:npwB().min+x,t,r:npw1Gr(v,t)}}
 function npw1Best(v,L,h,bar){let b=null;for(const t of L){const o=npw1Mot(v,t,h,bar);if(o&&(!b||o.s>b.s))b=o}return b}
@@ -79,7 +79,7 @@ npwReg("apFriend",{grp:"consort",who:()=>liveRivals(true).filter(v=>!v.confined)
 npwReg("apTaunt",{grp:"consort",who:()=>liveRivals(true).filter(v=>!v.confined&&bandOf(danger(v,S))>=1),why(v){return npw1Mot(v,S,"provoke")}});
 npwReg("apSorry",{grp:"consort",who:()=>liveRivals(true).filter(v=>!v.confined&&!hasT(v,"Xảo quyệt")),why(v){const A=npw1B("ap");const o=oan(v,S);if(o<A.sorry||aff(v,S)<0)return null;return {s:npwB().min+o/2,t:S,r:"hối chuyện cũ"}}});
 npwReg("empTea",{grp:"emp",who:()=>{const VT=BAL.visit.tea;return S.emp&&S.sung>=VT.minSung&&!S.out&&!(window.agDOn&&agDOn())?[S.emp]:[]},why(){return {s:npwB().min+S.sung-BAL.visit.tea.minSung,t:S,r:"nhớ ngươi"}}});
-npwReg("thCall",{grp:"th",who:()=>!S.thDead&&S.th>=npw1B("ap").th?[NPW1_TH]:[],why(){return {s:npwB().min+S.th/4,t:S,r:"muốn có người hầu chuyện"}}});
+npwReg("thCall",{grp:"th",who:()=>!S.thDead&&S.th>=npw1B("ap").th?[NPW1_TH]:[],why(){return {s:npwB().min+S.th/npwB().div.thCall,t:S,r:"muốn có người hầu chuyện"}}});
 npwReg("svAsk",{grp:"srv",who:()=>(S.staff||[]).filter(s=>(s.loyal||0)>=BAL.loy.mid),why(s){return {s:npwB().min+((s.loyal||0)-BAL.loy.mid)/2,t:S,r:"nhà có việc ngặt"}}});
 npwReg("maidWarn",{grp:"srv",who:()=>S.maid&&S.maid.loyal>=BAL.loy.firm?[S.maid]:[],why(){let b=null,d=-1;for(const v of liveRivals(true)){const x=danger(v,S);if(bandOf(x)>=2&&x>d){d=x;b=v}}return b?{s:npwB().min+d,t:b,r:"thấy người bên ấy dò hỏi"}:null}});
 npwReg("manPoem",{grp:"man",shared:true,who:()=>(S.men||[]).filter(m=>m.alive&&((m.tinh||0)>=npw1B("ap").poem||m.seen!=null||MEN_FANCY.some(t=>hasT(m,t)))&&!(typeof menBanned==="function"&&menBanned(m))),why(m){/* a man who has a pull toward her (no pull → no poem): his tình ý for her, + met her (m.seen), + a romantic nature (MEN_FANCY); shared cd: one stray poem at a time in the palace */
@@ -211,7 +211,7 @@ npwReg("f7Host",{grp:"consort",who:c=>c.H,cdOf:()=>0,why(v){const F=npw1B("f7");
 npwReg("f7Merit",{grp:"consort",shared:true,who:c=>c.L,why(v){const F=npw1B("f7");const s=(v.duc||0)*F.duc+Math.max(0,F.danh-(v.danh||0))*F.k+(traitsOf(v).some(t=>F.ambT.includes(t))?F.amb:0);return s>0?{s,r:"muốn lập công"}:null}});
 npwReg("nightPrep",{grp:"consort",who:c=>[c.v],cdOf:()=>0,why(v){const J=npw1B("j75");const s=(J.want-(v.sung||0))*J.k+(traitsOf(v).some(t=>npw1B("f7").ambT.includes(t))?J.amb:0);return s>0?{s,r:"muốn giữ ân sủng"}:null}});
 npwReg("pillowTalk",{grp:"consort",who:c=>[c.v],cdOf:()=>0,why(v){return npw1Mot(v,S,"rumor")}});
-npwReg("sendMaid",{grp:"consort",who:c=>[c.v],why(v){return (v.preg||v.ill)&&(v.sung||0)>=npw1B("j75").maidSung?{s:npwB().min+(v.sung||0)/4,r:"không hầu được, sợ mất ân sủng"}:null}});
+npwReg("sendMaid",{grp:"consort",who:c=>[c.v],why(v){return (v.preg||v.ill)&&(v.sung||0)>=npw1B("j75").maidSung?{s:npwB().min+(v.sung||0)/npwB().div.sendMaid,r:"không hầu được, sợ mất ân sủng"}:null}});
 /* admon      the Empress (else the Thái hậu) admonishes him over a monopoly (agent layer off): push = nights hogged in six × j75.admK (the gap = BAL.tw.g.admonCd) */
 npwReg("admon",{grp:"court",who:c=>c.W||[],cdOf:()=>0,why(w,c){return {s:(c.n||0)*npw1B("j75").admK,t:c.p,r:"mưa móc đều khắp"}}});
 npwReg("famGift",{grp:"house",who:c=>c.L,why(x){const J=npw1B("j75");const g=x===S?S.sung:(x.sung||0);const s=(J.mono-g)*J.k;return s>0?{s,t:x,r:"thấy con gái bị lạnh nhạt"}:null}});
@@ -221,6 +221,6 @@ npwReg("famGift",{grp:"house",who:c=>c.L,why(x){const J=npw1B("j75");const g=x==
               pushes the blame onto her only with a motive and hostility ≥ lie.blame / lie.frame. Listener = the one the spreader trusts who likes her
               least (j95bListener npwPick); re-picked actors = the strongest motive among those who pass the gate */
 npwReg("exposeMe",{grp:"consort",who:c=>[c.x],why(x){return npw1Mot(x,S,"expose",npw1B("lie").expose)}});
-npwReg("lieMe",{grp:"consort",who:c=>[c.x],why(x){const o=npw1Mot(x,S,"rumor");if(!o)return null;o.s+=nv(x,"rumorP")+(x.malice||0)/40;return o}});
+npwReg("lieMe",{grp:"consort",who:c=>[c.x],why(x){const o=npw1Mot(x,S,"rumor");if(!o)return null;o.s+=nv(x,"rumorP")+(x.malice||0)/npwB().div.lieMal;return o}});
 npwReg("blameMe",{grp:"consort",who:c=>[c.a],why(a){return npw1Mot(a,S,"rumor",npw1B("lie").blame)}});
 npwReg("frameMe",{grp:"consort",who:c=>[c.a],why(a){return npw1Mot(a,S,"frame",npw1B("lie").frame)}});

@@ -3338,7 +3338,7 @@
 "status": "LIVE-OFF",
 "group": "G2",
 "event": "maid seek/feud/hit; Emperor noon place; poisoner; surprise visit; NPC ",
-"fp": "f haOn===\"function\"&&haOn())&&roll(30))/* AG-ALL C: her deed (jagharm "
+"fp": "f haOn===\"function\"&&haOn())&&roll(BAL.pg.npc.cook))/* AG-ALL C: her deed (jagharm "
 },
 {
 "f": "jvisit.js",

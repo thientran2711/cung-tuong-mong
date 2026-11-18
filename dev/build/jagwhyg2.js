@@ -9,7 +9,7 @@ npwReg("loTake",{grp:"G2",pickAll:true,who:c=>{const p=c.p;if(!p)return[];let R0
   return {s:danger(v,p)*mindW(v,"scheme")*B.rivW,t:p,r:"oán "+npwNm(p)+", sai người lấy trộm đồ"}}});
 npwReg("loTry",{grp:"G2",who:c=>c.p?[c.p]:[],why:(p,c)=>({s:BAL.ag.why.loTry.want+loPrice(c.c.e||{})/BAL.ag.why.loTry.prDiv,r:"muốn tìm lại "+loNm(c.c.k)})});
 npwReg("loClear",{grp:"G2",who:c=>c.p?[c.p]:[],why:(p,c)=>({s:BAL.ag.why.loTry.clear,r:"muốn rửa tiếng trước buổi xét"})});
-npwReg("loWear",{grp:"G2",who:c=>c.p?[c.p]:[],why:(h,c)=>loHonest(h)?null:{s:BAL.ag.why.loTry.wear+(h.malice||0)/2,r:"thích "+loNm(c.c.k)+", đem ra đeo"}});
+npwReg("loWear",{grp:"G2",who:c=>c.p?[c.p]:[],why:(h,c)=>loHonest(h)?null:{s:BAL.ag.why.loTry.wear+(h.malice||0)/BAL.ag.why.div.wearMal,r:"thích "+loNm(c.c.k)+", đem ra đeo"}});
 /* ---- jkc / jkc2: pre-palace home (done LAST, C-AG 18/11 answer b) ---- */
 /* the week's household scene: each candidate = one motive already weighed by its person's state (kcWeek E list: [event, weight]) */
 npwReg("kcWeek",{grp:"G2",who:c=>(c.E||[]).map(([e,w])=>({id:"kcev:"+e,e,w})),why:x=>({s:x.w*BAL.ag.why.kcWeek.mul,r:(KCE[x.e]&&KCE[x.e].t)||x.e})});
