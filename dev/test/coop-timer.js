@@ -13,7 +13,7 @@ const res=[];const ok=(c,m,x)=>{res.push([!!c,m]);console.log((c?'ok  ':'FAIL')+
 const sleep=ms=>new Promise(r=>setTimeout(r,ms));
 const DCL={waitUntil:'domcontentloaded'};
 async function mk(b,name,vp){const ctx=await b.newContext({viewport:{width:vp[0],height:vp[1]},deviceScaleFactor:vp[2],hasTouch:true,isMobile:vp[0]<1100,reducedMotion:'reduce'});
-  await serve(ctx);await ctx.addInitScript(u=>{window.COOP_URL=u},WURL);
+  await serve(ctx);await ctx.addInitScript(([u,w])=>{window.COOP_URL=u;if(w)try{localStorage.setItem('ctm-thin',String(w))}catch(e){}},[WURL,name==='host'&&process.env.THIN?+process.env.THIN:0]);/* THIN=<level>: the host asks for that thin room level */
   const o={ctx,name,errs:[]};o.page=async()=>{const p=await ctx.newPage();p.setDefaultTimeout(30000);p.setDefaultNavigationTimeout(120000);
     p.on('pageerror',e=>o.errs.push(e.message));p.on('console',m=>{if(m.type()==='error'&&!/Failed to load resource|favicon/.test(m.text()))o.errs.push('console: '+m.text())});o.p=p;return p};return o}
 async function until(o,fn,arg,ms=30000){try{await o.p.waitForFunction(fn,arg,{timeout:ms,polling:250});return true}catch(e){return false}}
@@ -87,7 +87,8 @@ async function join(B,code){await B.page();await B.p.goto(BASE+'?room='+code,DCL
   const l1=(await K(A)).v.left;await sleep(3000);const v2=(await K(A)).v;ok(v2.pz&&Math.abs(v2.left-l1)<600,'3: paused clock does not run',[l1,v2.left]);
   ok(await until(A,()=>{const v=COOPW.tm.view();return v&&!v.pz&&v.run},null,10000),'3: after the cap the clock runs again',await K(A));
   ok(await until(A,k=>COOPW.tm.myKey()!==k,k0,20000),'3: time out → A steps');const ms=Date.now()-t0;ok(ms>=12000,'3: time out came after cap + length',ms);
-  await until(B,()=>!!COOPW.pendBuoi,null,8000);const b1=await K(B);ok(b1.k===k0&&b1.pb&&b1.mg,'3: B still in the mini game, her step waits (pendBuoi)',b1);
+  const eL=await B.p.evaluate(()=>!!(COOPW.eW&&COOPW.eW()));/* thin E (level 5): no pendBuoi; the host owes her step (E.owe) */
+  await until(B,eL=>eL?COOPW.tm.roomKey()!==COOPW.tm.myKey():!!COOPW.pendBuoi,eL,8000);const b1=await K(B);ok(b1.k===k0&&(eL||b1.pb)&&b1.mg,'3: B still in the mini game, her step waits (pendBuoi; level 5: the host owes it)',b1);
   await B.p.evaluate(()=>{S.mg=null;render()});
   ok(await until(B,k=>COOPW.tm.myKey()!==k,k0,10000),'3: mini game over → B steps',await B.p.evaluate(()=>({k:COOPW.tm.myKey(),S:S.buoi,used,pend:COOPW.pend,sent:COOPW.sent,tr:(COOPW.tr||[]).slice(-25)})));
   await sleep(1500);const a=await K(A),bb=await K(B);ok(a.k===bb.k&&+bb.k.split(':')[1]===+k0.split(':')[1]+1,'3: B stepped exactly once',[k0,a.k,bb.k])}}

@@ -8,7 +8,7 @@ for(let y=380;y<430;y++)for(let x=120;x<170;x++)put(x,y,235,190,165);/* hands */
 const face={x:110,y:60,w:80,h:50},mk=clothMask(d,W,H,face,BAL.looks.xoc);
 const dec={w:64,h:64,data:new Uint8ClampedArray(64*64*4)};for(let y=0;y<64;y++)for(let x=0;x<64;x++){const r=Math.hypot(x-32,y-32),i=(y*64+x)*4;dec.data[i]=110;dec.data[i+1]=70;dec.data[i+2]=30;dec.data[i+3]=r<28?255*(1-r/28):0}/* brown blob */
 let ok=true;const t=(c,m)=>{if(!c){ok=false;console.log("FAIL",m)}};
-t(BAL.looks.stain.on===0,"stain layer OFF by default");
+t(BAL.looks.stain.on.uot===1&&BAL.looks.stain.on.bun===1&&BAL.looks.stain.on.tra===0,"stain layer per kind: wet + mud ON, tea OFF until approved");
 const changed=(o)=>{let n=0,bright=0,outside=0,prot=0,rows=[];for(let i=0;i<W*H;i++){const dr=o[i*4]-d[i*4];if(o[i*4]!==d[i*4]||o[i*4+1]!==d[i*4+1]||o[i*4+2]!==d[i*4+2]){n++;if(dr>1)bright++;if(mk.m[i]<.02)outside++;if(mk.protS[i]>.95)prot++;rows.push((i/W)|0)}if(o[i*4+3]!==d[i*4+3])outside+=1e6}rows.sort((a,b)=>a-b);return{n,bright,outside,prot,my:rows.length?rows[rows.length>>1]:0}};
 const cnt={},sum=(o)=>{let q=0;for(let i=0;i<W*H*4;i++)q+=Math.abs(o[i]-d[i]);return q};
 for(const k of["tra","uot","bun"])for(const lv of[1,2,3]){const o=clothStainBake(d,W,H,k,lv,[dec],{mask:mk,seed:5}),c=changed(o.data);cnt[k+lv]=sum(o.data);
