@@ -656,7 +656,18 @@ NEXT FOREMAN C-AG: #4 = session_01UV1SzkyZBYRFoSWBF8fg27 (opened by C-AG #3 17:3
 NEXT FOREMAN C-AG: #5 = session_01UV1SzkwHkU5MoXKRsprFyU (opened by C-AG #4 18:35Z, depth 5; prompt dev/handover/TAKEOVER_FOREMAN_C_AG5.md). C-AG #4 STOPS; wake trig_0158XmaYdhYu6GqeJWSPB6d7 disabled.
 NEXT FOREMAN C-AG: #9 = session_01UV1Szh2asyry15mvpuCEsJ (opened by C-AG #8 03:20Z, depth 4; prompt dev/handover/TAKEOVER_FOREMAN_C_AG9.md). C-AG #8 STOPS; wake trig_01TRu7DaRSREmn8KFD24wdcM disabled.
 NEXT FOREMAN C-AG: #10 = (opening by C-AG #9 04:46Z, depth 5; prompt dev/handover/TAKEOVER_FOREMAN_C_AG10.md). C-AG #9 STOPS; wake trig_016ULtkrgBBgsErLCPcqKMME disabled.
-## FOREMAN C-AG #16
+## HANDOVER C-AG #16 (session_01Rc5AsMn7GAZ9LZWzQ2SdFb) → C-AG #17, 22:35Z 18/11
+Why: context 37 % (START ~6 %) ≥ roll line 31 %. Depth 3 → #17 depth 4 (my child, prompt TAKEOVER_FOREMAN_C_AG17.md). My wake trig_0127ge6cjd13pDr67gT2fsuW DISABLED (#17 makes its own at :32).
+MAIN = ROOT-57 session_01Rc5AsKYmXLRoL6C62yZq4r (same account). LIVE main = 884ce97c (rollback e16e1d6). Standing order to all workers/reviewers: final-merge CURRENT origin/main at SẴN SÀNG / verdict time.
+RUNNING (my children, this account, env cung-tuong-mong env_019grJGwi91Hpq39gwwgSaVX; #17 adopts — send_message works):
+- REVIEW live-servants opus session_01Rc5AsKp5X8AnT5HJ7WoyXK: review/live-servants @ 7a50021 (merged 884ce97c). MAIN PERF RULING = (a) ACCEPT feature cost (per buổi ≤+10 %, no long-task >+10 %, gates PASS) — in reports/live-servants.md + sent. PASS → LAND READY <sha> → write in HANDOVER_SESSION9.md + send ROOT-57; archive reviewer after MAIN lands.
+- ROLE-PARITY #3 opus session_01Rc5AsN67UuWKQGjGP9MeW8: on review/role-parity-2 from f2b8fb0c (= part1 + part2 by #2: scan seeded, 278→150, jagacts4, BAL.ag.par4) — merge current main + reviewer items (b) per-rank target states, (d) «Chuyện cũ», OPEN.length cap → 'PART1 FIX READY <sha>'. Then: send that sha to reviewer + write 'PART1 FIX READY <sha>' line in FOREMAN_B_STATUS (B3 waits on it).
+- REVIEW role-parity (part 1+2 combined) opus session_01Rc5AsLNBKMAjqjCWnFi5D1: reviewing f2b8fb0c part-2 code now; final verdict on PART1 FIX READY sha. PASS → LAND READY to ROOT-57.
+- Foreman B (other account, files only via FOREMAN_B_STATUS): B4 duplicate review/role-parity-4 28ee908e STOPPED + archived — DO NOT LAND (reference only; deeds +10.9 %). B3 (consort+hh probe rows) + optional new B4 seat (maid+srv+promoted) open after PART1 FIX READY; remaining 150 rows.
+- npc-purpose (D account, files only via FOREMAN_D_STATUS): G1 #11 session_01964izCGE3LMZejFhEQzc3f merged e16e1d6 → 2a463bb9, gates + last row 'Đại phóng cung nhân'; reviewer 01964izEUgw5hZTBxuEguL4K PHASE A PASS on 0a6e877a, PHASE B on SẴN SÀNG head → LAND READY.
+OPEN: THỬ TAY calibration (?hieuchuan=1 live) — owner's CTM-CAL code → dev/tools/mgcal_apply.py into BAL.ag.mg2.cal (waits for owner code).
+LESSON: send_message to a busy worker may queue ~50 min (#2 never saw my fix order) — put critical orders also in the report/status file the worker reads.
+## FOREMAN C-AG #16 (rolled over 22:35Z)
 FOREMAN C-AG #16 = session_01Rc5AsMn7GAZ9LZWzQ2SdFb (child of C-AG #15) · START_CTX ~6 % (est; window 1M; get_session reads 0) → roll over at >= 31 %, ceiling 60 % · depth 3 (limit 8) · wake hourly :32 (own trigger) · reports to MAIN ROOT-56 session_01Rc5AsMXM16MfHRicSPRHEC.
 - 21:05Z C-AG #16 took over (TAKEOVER_FOREMAN_C_AG16.md + block 'HANDOVER C-AG #15 → C-AG #16'). LOAD 3 own children: LIVE-SERVANTS #3 01Rc5AsKjmZakFtxrVGvMvW9 (perf fix), REVIEW role-parity p1 01Rc5AsLNBKMAjqjCWnFi5D1, ROLE-PARITY #2 01Rc5AsMM3ssHnCBtjLf11Qr; + npc-purpose D seats (files only). Told all 3 'C-AG #16 is your foreman'.
 - 21:00Z C-AG #16: MAIN ROOT-56: LIVE main = 790cda59 (map-labels; rollback fa411d6f) — relayed to LIVE-SERVANTS #3, role-parity reviewer + #2 (send_message) and npc-purpose (FOREMAN_D_STATUS line). Wake trig_0127ge6cjd13pDr67gT2fsuW :32.
@@ -670,6 +681,7 @@ FOREMAN C-AG #16 = session_01Rc5AsMn7GAZ9LZWzQ2SdFb (child of C-AG #15) · START
 - 22:21Z C-AG #16: LIVE main = 884ce97c (doc-90-women; rollback e16e1d6) from ROOT-57. Standing order to all my workers/reviewer already = final-merge CURRENT origin/main at ready time; no re-send.
 - 22:31Z C-AG #16: LIVE-SERVANTS #3 SẴN SÀNG KIỂM 7a50021 (merged 884ce97c; outcome-identical perf work +48.7 % → +26.9 % mean/khắc, +9.5 %/buổi; ≤+10 % needs behaviour change). FOR MAIN ROOT-57: PERF RULING (a) accept as feature cost [C-AG recommends] or (b) gossip cadence change — sent by send_message. OPENED REVIEW live-servants = session_01Rc5AsKp5X8AnT5HJ7WoyXK (opus, my child) in parallel; perf judged on MAIN ruling. #3 ARCHIVED.
 - 22:33Z C-AG #16: MAIN ROOT-57 PERF RULING live-servants = (a) ACCEPT feature cost (per buổi ≤+10 %, no long-task >+10 %, gates PASS); written into reports/live-servants.md + sent to reviewer 01Rc5AsKp5X8AnT5HJ7WoyXK.
+- 22:35Z C-AG #16: wake ctx 37 % ≥ 31 % → ROLLOVER. B: B4 duplicate 28ee908e stopped (do not land). Handover block above.
 ## HANDOVER C-AG #15 (session_01Rc5AsKLUrafEXHt5QpbRC2) → C-AG #16, 20:58Z 18/11
 Why: context ~30 % (START ~6 %) at roll line 31 %. Depth 2 → #16 depth 3 (my child, prompt TAKEOVER_FOREMAN_C_AG16.md). My wake trig_01FcjFts3SSJYCMJBptSQ17N DISABLED (#16 makes its own at :32).
 MAIN = ROOT-56 session_01Rc5AsMXM16MfHRicSPRHEC (same account). LIVE main = fa411d6f (ag-deed-perf landed; rollback 9366028).
