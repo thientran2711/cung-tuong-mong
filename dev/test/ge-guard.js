@@ -40,6 +40,12 @@ const ok=[];const chk=(n,c,x)=>{ok.push([n,!!c]);if(!c)console.error('FAIL',n,JS
    for(const n of (D.lean.p||[]).concat(D.lean.m||[]))if(!N.has(n))bad.push(`${b} lean: not an option: ${n}`);
    const both=(D.lean.p||[]).filter(n=>(D.lean.m||[]).includes(n));if(both.length)bad.push(`${b} lean: both + and −: ${both}`);
    info[b]={chuoi:D.e.map(e=>e.pull.length),khoa:D.e.map(e=>e.close.length),lean:[D.lean.p.length,D.lean.m.length]}}
+  /* variety guard on the WRITTEN words (brief E11 step 4, whole family = every live branch): no narration sentence (t / a / ft) is used twice,
+     no fail-outcome name twice, the two shadings of one ending never read the same */
+  {const seen={},fn={};for(const b in GE_DATA)GE_DATA[b].e.forEach((e,i)=>{const id=b+'_'+(i+1);
+    if(e.t&&e.t===e.a)bad.push(`${id}: t = a`);if(fn[e.fail])bad.push(`${id}: fail name also ${fn[e.fail]}: ${e.fail}`);else fn[e.fail]=id;
+    for(const k of ['t','a','ft'])for(const s0 of String(e[k]||'').split(/(?<=[.!?…”])\s+/)){const s=s0.trim();if(s.length<12)continue;const w=id+'.'+k;if(seen[s]&&seen[s]!==w)bad.push(`narration line used twice (${seen[s]} / ${w}): ${s.slice(0,60)}`);else seen[s]=w}});
+   info.lines=Object.keys(seen).length}
   return {bad,info,live:Object.keys(GE_DATA),it:!!IT[BAL.ge.kimsach]&&IT[BAL.ge.kimsach].pr===0&&IT[BAL.ge.kimsach].keep===1}});
  console.log('live branches',R.live.join(' '),JSON.stringify(R.info));
  chk('3 pilot branches live (tt_co, cnv_mat, one nc road)',R.live.includes('tt_co')&&R.live.includes('cnv_mat')&&R.live.some(b=>/^nc_/.test(b)),R.live);
