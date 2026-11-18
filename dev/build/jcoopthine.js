@@ -57,7 +57,6 @@ function gView(V){if(!on()||host()||!S||!V||!V.o)return;const k=bk();
  if(seen&&seen!==k){const [w0]=seen.split(":");if(+w0===(COOP.state.week||0)){used=0;popIdx=null;popMsg="";try{if(typeof curtain==="function"&&!S.dead){curtain();E.stat.curtain++}}catch(e){}}E.mine="";try{render()}catch(e){}}
  /* her phone behind / ahead of her own buổi on the host (a reload rebuilt her week): the host's copy wins (buoi is the host's), once no patch is pending */
  {const P=V.o.P&&V.o.P[CW.seat],mx=Math.max(0,...(V.o.pq||[]).map(x=>x.n|0));if(P&&V.o.w===(COOP.state.week||0)&&typeof P.buoi==="number"&&P.buoi!==(S.buoi||0)&&(S.thpn||0)>=mx&&!S.mg&&!Q.length){lg(["adopt",S.buoi,P.buoi]);S.buoi=P.buoi;used=0;popIdx=null;popMsg="";E.stat.adopt++;try{render()}catch(x){}}}
- if(V.o.w===(COOP.state.week||0)&&typeof V.o.buoi==="number"){CW.rbuoi=V.o.buoi;CW.rweek=V.o.w}
  seen=k;const e=V.o.e;try{CW.tnView(e)}catch(x){console.error(x)}
  /* the host reloaded after her ready (his page holds her ready in memory only): send it again, against his reloaded copy of her */
  if(e&&e.boot){if(E.boot&&E.boot!==e.boot&&E.mine===bk()){lg(["re-ready",E.boot,e.boot]);E.stat.reRd++;E.mine="";E.boot=e.boot;setTimeout(()=>{try{gReady()}catch(x){console.error(x)}},0)}else E.boot=e.boot}
@@ -142,8 +141,8 @@ COOP.on("week",()=>{if(on()&&host())setTimeout(()=>{try{if(CW.tnHer())CW.herNigh
    back once per store when it is the same week, seat and life. */
 const ELS=()=>"ctm-thin-e:"+(COOP.state.room||"");
 {const sv=D.save;D.save=function(){const r=sv.apply(this,arguments);try{if(on()&&host()){const seat=other();const B=TH.seatOf(seat);
-  if(B&&B.S)localStorage.setItem(ELS(),JSON.stringify({w:COOP.state.week||0,seat,life:B.S.life||0,name:B.S.name||"",S:B.S}))}}catch(e){}return r}}
-{const so=TH.seatOf;TH.seatOf=function(seat){const B=so.apply(this,arguments);try{if(B&&!B.eL&&on()&&host()&&seat===other()){B.eL=1;
+  if(B&&B.S&&B.wk===(COOP.state.week||0))localStorage.setItem(ELS(),JSON.stringify({w:B.wk,seat,life:B.S.life||0,name:B.S.name||"",S:B.S}))}}catch(e){}return r}}
+{const so=TH.seatOf;TH.seatOf=function(seat){const B=so.apply(this,arguments);try{if(B&&!B.eL&&on()&&host()&&seat===other()){B.eL=1;B.wk=COOP.state.week||0;/* the week this store was built in (a save after the week merged, before the store is rebuilt, is the OLD week: never saved) */
   const o=JSON.parse(localStorage.getItem(ELS())||"null");
   if(o&&o.S&&o.seat===seat&&o.w===(COOP.state.week||0)&&(o.life||0)===(B.S.life||0)&&(o.name||"")===(B.S.name||"")&&(o.S.buoi||0)>=(B.S.buoi||0)){
    const thq=B.S.thq;B.S=o.S;if(thq)B.S.thq=thq;E.stat.hostBack++;lg(["her-back",o.w,o.S.buoi])}}}catch(e){console.error("thin E her back",e)}return B}}
@@ -174,11 +173,9 @@ function wRestore(o){const L=npcs(),R=new Set(L.concat(o.L));
  if(rid!==o.rid){rid=o.rid;E.stat.ridBack++}}
 E.wSnap=wSnap;E.wRestore=wRestore;
 /* the night: his go rides the view (the guest reads o.e.go), never the ctm-nr relay */
-/* boot: this page load of the host (a host reload loses her ready, held in memory: her phone sends it again when boot changes);
-   the room's buổi at level 5 = the host's own (CW.rbuoi / rweek: the server's buổi stays at the week start) */
+/* boot: this page load of the host (a host reload loses her ready, held in memory: her phone sends it again when boot changes) */
 const BOOT=Date.now().toString(36)+Math.random().toString(36).slice(2,6);
-{const hv=TH.hostView;TH.hostView=function(){const o=hv.apply(this,arguments);if(o&&on()){const Sh=CW.ctx?TH.outerS:S;if(Sh){CW.rbuoi=Sh.buoi||0;CW.rweek=COOP.state.week||0}
-  o.e={go:CW.ngo===(COOP.state.week||0)?CW.ngo:-1,w:COOP.state.week||0,tnb:CW.tnb|0,boot:BOOT}}return o}}
+{const hv=TH.hostView;TH.hostView=function(){const o=hv.apply(this,arguments);if(o&&on()){o.e={go:CW.ngo===(COOP.state.week||0)?CW.ngo:-1,w:COOP.state.week||0,tnb:CW.tnb|0,boot:BOOT}}return o}}
 /* her in-week change of the night (Tranh sủng, Chặn ngự giá, cáo bệnh …): the intent replaces the ctm-tn claim; runs in the host's context */
 TH.onDo("tn",(a,m)=>{const base=m&&m.base;E.stat.tn++;setTimeout(()=>{try{CW.tnDo(a,base)}catch(e){console.error("thin E tn",e)}},0);return {ok:1}});
 /* his ready / clock / a closed dialog: try the step again */

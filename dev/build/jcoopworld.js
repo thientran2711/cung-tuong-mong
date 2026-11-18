@@ -348,7 +348,7 @@ CW.nightEnd=function(){if(!CW.on||!S||S.dead||Q.length||S.mg)return"";if(waiting
 CW.bkey=bkey;
 COOP.on("buoi",onBuoi);
 /* the room's current buổi (for a reborn life that joins mid-week) */
-const rb=m=>{if(eW())return;/* thin E: the server no longer steps the buổi; the room's buổi = the host's (jcoopthine sets CW.rbuoi) */if(m&&typeof m.buoi==="number"){CW.rbuoi=m.buoi;CW.rweek=m.week!=null?m.week:wk()}};
+const rb=m=>{if(m&&typeof m.buoi==="number"){CW.rbuoi=m.buoi;CW.rweek=m.week!=null?m.week:wk()}};
 COOP.on("buoi",rb);COOP.on("presence",rb);COOP.on("room",rb);COOP.on("week",m=>{CW.rbuoi=0;CW.rweek=m.week});
 COOP.on("bended",m=>{if(CW.on)lockNext()});
 COOP.on("where",m=>{CW.lastWhere=m;if(CW.on)applyWhere(m)});
