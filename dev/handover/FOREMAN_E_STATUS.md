@@ -110,3 +110,4 @@ FOR MAIN (makeup owner, from E4f, still open): jtoil shared layer now honours co
 - (18/11 07:22Z) E7a ROLLOVER (context 45 %): HANDOVER at the end of reports/questline-q1a.md — FIX 2 (queen-alias text filter, 19 {B}-free rewords, rebuild branch on newest main) not started; successor needed.
 - (18/11 07:20Z) E7a HANDOVER (ctx 45 %; FIX 2 not started; steps in reports/questline-q1a.md HANDOVER, handover 62f786e) → archived; successor E7a2 session_01DgYSWnDfnkgz7A4beCa3p4 (opus) RUNNING FIX 2. Load 8/12 (E1b, E7a2, E7b, E7c2, E7br2, E7cr2, E8, E8r2).
 - (18/11 07:21Z) E7br2 FAIL q1b 2b80a8a3 (2 text fixes jnrask_b.js:181 thd_tho_8[0], :393 ch_co_8[1]; items 1–4,7 hold; reports/questline-q1b-review.md ROUND 2) → archived; FIX 2 ordered to E7b (rebase on E7a2 sha after). Load 7/12.
+- (18/11 08:05Z) E7b FIX 2 pushed 44b7805f (thd_tho_8 + ch_co_8 + family 10→0); waiting E7a2's q1a sha to rebase, then one SẴN SÀNG KIỂM
