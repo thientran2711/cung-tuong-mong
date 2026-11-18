@@ -50,12 +50,16 @@ const BAL={entryToastMs:5000,/* owner 18/11 ~03:4xZ: ms the place-entry line (ki
    night = the least a night with the Emperor gives: Sủng +sung, Ân tình +an (the night's score adds more, j8 nightFx). */
 Object.assign(BAL,{time:{khac:4,sucMin:5,/* khắc a deed costs, ONE source for the player and every NPC (AG-ALL-2 G8): talk option (j2 talk), talk that is an act, a harm act (j8 doAct) */cost:{talk:1,talkAct:2,harm:2}},lot:{bac:10,k:1},walk:{near:1,far:2},sneak:{danh:8,heavy:15,seen:2},srvAge:{ask:25,out:30,mama:45,old:45},
  age:{sacFrom:25,sacLoss:2,sacMin:10,betroth:16,wed:18,matchShow:14,matchMax:21,reign:16},seat:{7:1,6:1,5:1,4:2,3:3}, /* owner 17/11 04:30Z: halved (was {7:1,6:1,5:2,4:4,3:6}) */
- /* RESIDENCE (owner 17/11 04:20Z + 04:32Z): every chủ vị (Tần, Phi, Quý phi; the player too) takes at most side co-residents in each
-    of the halls (Đông phối điện, Tây phối điện), one room each; Hoàng hậu and Hoàng quý phi live alone. harem.cap = most consorts alive at once
-    (the player counted); a new game still starts with BAL.ps.harem and grows by tuyển tú and maids raised to rank (roomFor('consort')). */
- res:{side:1,halls:["dong","tay"]},harem:{cap:20}});
-/* co-residents one chủ vị may take (one core: jpal palFix, j95c cap, jres resSidePart, j27 read this) */
-function resCap(){return BAL.res.side*BAL.res.halls.length}
+ /* RESIDENCE (owner 17/11 04:20Z + 04:32Z; QP alone 18/11 ~19:35Z "Quý phi đâu có ở chung", ORDER ROOT-58 ~23:15Z): side = consorts per
+    room (hall) by the rank of the chủ vị, in each of the halls (Đông phối điện, Tây phối điện): Tần and Phi take lower consorts, 2 per room;
+    a rank not listed (Quý phi, Hoàng quý phi, Hoàng hậu) lives alone. Capacity = sum of BAL.seat[r] × side[r] × halls (Tần 3×4 + Phi 2×4)
+    ≥ the lower consorts of a full harem. harem.cap = most consorts alive at once (the player counted); a new game still starts with
+    BAL.ps.harem and grows by tuyển tú and maids raised to rank (roomFor('consort')). */
+ res:{side:{3:2,4:2},halls:["dong","tay"]},harem:{cap:20}});
+/* consorts per room / co-residents one chủ vị may take, by her rank (a person or a rank index; one core: jpal palFix, j95c cap,
+   jres resSidePart, tests read these). 0 = she lives alone. */
+function resSide(h){const r=h==null?null:typeof h==="number"?h:rkOf(h);return(BAL.res.side||{})[r]||0}
+function resCap(h){return resSide(h)*BAL.res.halls.length}
 /* ONE CORE r2 (review/one-core-land, 16/11): rule numbers of the modules that landed after review/one-core: story roads (jroute),
    origin arcs (jorigins), family house (jhouse), Tu duc lessons (jtds, jtd), small modules. One table per module; texts print the same key. */
 Object.assign(BAL,{route:{

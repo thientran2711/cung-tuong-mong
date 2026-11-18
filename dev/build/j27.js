@@ -11,10 +11,11 @@ function ensureT2(v){if(v&&!v.trait2)v.trait2=pick(TRAIT2);return v}
 /* a palace head: Tần and above (PAL_HEAD), not the queen (she holds Càn Ninh), not fallen */
 function palHeadOK(p){return !!p&&(p===S?!S.out&&!S.dead:p.alive&&!p.out)&&!p.queen&&rkOf(p)>=PAL_HEAD}
 /* palFix: who heads which palace and who lives in whose side hall. ONE body, in jpal.js (it replaces this name at load);
-   the co-resident cap is BAL.res (resCap), the player is housed like every NPC (owner 17/11 04:08Z/04:20Z). */
+   the co-resident cap is BAL.res by the head's rank (resCap(h)), the player is housed like every NPC (owner 17/11 04:08Z/04:20Z). */
 function palFix(){}
-/* Hoàng hậu (NPC queen or the player at rank 7) and Hoàng quý phi (rank 6, not the queen) keep a palace to themselves */
-function palSolo(p){return !!p&&(p.queen||rkOf(p)>=6)}
+/* Hoàng hậu (NPC queen or the player at the top rank) and every chủ vị whose rank takes nobody (BAL.res.side: Quý phi, Hoàng quý phi)
+   keep a palace to themselves */
+function palSolo(p){return !!p&&(p.queen||rkOf(p)>=PAL_HEAD&&resCap(p)===0)}
 (function(){const a0=assignHouses;assignHouses=function(){palFix()}})();
 /* where a house lives on the plan */
 function palSlot(k){if(k==="home")return S.pal!=null?S.pal:null;if(k&&k[0]==="r"){const h=RV(+k.slice(1));return h&&h.pal!=null?h.pal:null}return null}

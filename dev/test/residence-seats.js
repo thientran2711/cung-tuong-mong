@@ -1,7 +1,7 @@
 /* review/residence-seats (owner 17/11 04:08Z / 04:20Z / 04:30Z / 04:32Z): residence + seats + harem cap, checked in the real build.
    usage: node dev/test/residence-seats.js <url-of-index.html> [games=6]
    Per new game (different origins) and then on forced situations:
-   R1 every chủ vị (Tần/Phi/Quý phi incl. the player) has ≤ resCap() co-residents, at most BAL.res.side per hall, nobody shares a room
+   R1 every host chủ vị (Tần/Phi incl. the player) has ≤ resCap(h) co-residents, at most resSide(h) per hall (BAL.res.side by rank)
    R2 the player below Tần is housed in a chủ vị's Đông/Tây phối điện when a place is free (no more "she keeps Ngọc Thanh các")
    R3 spread: no chủ vị with 0 co-residents while another is full
    R4 an old save with 3 under one head is trimmed to the cap; nobody lost (everyone housed or palLone / Ngọc Thanh các)
@@ -10,6 +10,8 @@
    R7 harem: roomFor('consort') false at BAL.harem.cap living consorts (her counted); a new game starts with BAL.ps.harem (+ her)
    R8 Dư đồ: no separate Ngọc Thanh các spot while she is housed; her host palace spot carries her face; home name = her hall's name;
       the stage at home paints her hall (SCIMG.home = <palace>-cung-dong-phoi|tay-phoi-*)
+   R11 Hoàng hậu, Hoàng quý phi, Quý phi live alone, every month; BAL.res.side gives Tần / Phi rooms only; R12 capacity ≥ a full harem's lower consorts
+   R13 a Phi with co-residents rises to Quý phi: they move (reason line + people-ledger act), nobody lost
    R10 (re-merge 18/11) back from lãnh cung into a full house: a consort who leaves gives up her room (palFix), so when she returns
       (straight away, or by jworld đại xá) no chủ vị holds more than resCap() even before the next palFix
    exit 1 on any fail or page error. */
@@ -22,33 +24,49 @@ const {chromium}=require('playwright');const [,,URL,GAMES='6']=process.argv;cons
   const live=x=>x===S?!S.out&&!S.dead:x.alive&&!x.out;
   const hosts=()=>[S].concat(rivals).filter(palHostOK);
   const mates=h=>[S].concat(rivals).filter(y=>y!==h&&live(y)&&!y.queen&&y.resHead===key(h)&&!(rkOf(y)>=3&&y.pal!=null));
-  const R1=tag=>{for(const h of hosts()){const M=mates(h);ok(M.length<=resCap(),`${tag} R1 ${h.name} has ${M.length}`);const n={};for(const y of M){const part=residenceOf(y).part;n[part]=(n[part]||0)+1}
-    for(const k in n)ok(n[k]<=BAL.res.side&&BAL.res.halls.includes(k),`${tag} R1 ${h.name} hall ${k}=${n[k]}`)}};
-  const R3=tag=>{const C=hosts().map(h=>mates(h).length);if(C.length>1)ok(!(Math.min(...C)===0&&Math.max(...C)>=resCap()),`${tag} R3 spread ${C.join(',')}`)};
-  const R2=tag=>{if(rkOf(S)>=3||S.out||(typeof isSrv==="function"&&isSrv()))return;const free=hosts().some(h=>h!==S&&mates(h).length<resCap()||h!==S&&mates(h).includes(S));
+  const R1=tag=>{for(const h of hosts()){const M=mates(h);ok(M.length<=resCap(h),`${tag} R1 ${h.name} has ${M.length}`);const n={};for(const y of M){const part=residenceOf(y).part;n[part]=(n[part]||0)+1}
+    for(const k in n)ok(n[k]<=resSide(h)&&BAL.res.halls.includes(k),`${tag} R1 ${h.name} hall ${k}=${n[k]}`)}};
+  const R3=tag=>{const C=hosts().map(h=>mates(h).length);if(C.length>1)ok(!(Math.min(...C)===0&&Math.max(...C)>=resCap(hosts()[C.indexOf(Math.max(...C))])),`${tag} R3 spread ${C.join(',')}`)};
+  const R2=tag=>{if(rkOf(S)>=3||S.out||(typeof isSrv==="function"&&isSrv()))return;const free=hosts().some(h=>h!==S&&mates(h).length<resCap(h)||h!==S&&mates(h).includes(S));
     const r=residenceOf(S);if(free)ok((r.part==="dong"||r.part==="tay")&&r.pal!=null,`${tag} R2 she is in ${r.part} though a place is free`)};
+  /* R11 (residence-qp-alone, owner 18/11 "Quý phi đâu có ở chung"): Hoàng hậu, Hoàng quý phi, Quý phi live alone; the rank caps come from
+     BAL.res.side (Tần, Phi 2 per room, nobody else); R12 capacity: the side rooms of every seat hold the lower consorts of a full harem */
+  const R11=tag=>{for(const h of [S].concat(rivals)){if(!live(h))continue;const r=rkOf(h);if(!(h.queen||r>=5))continue;const M=[S].concat(rivals).filter(y=>y!==h&&live(y)&&y.resHead===key(h)&&!(rkOf(y)>=3&&y.pal!=null));
+    ok(M.length===0,`${tag} R11 ${RANKS[Math.min(7,r)].n} ${h.name} has ${M.length} co-residents`);for(const y of M)ok(!resSame(residenceOf(y),residenceOf(h))||residenceOf(h).part!=='chinh',`${tag} R11 shares`)}
+   ok(resCap(5)===0&&resCap(6)===0&&resCap(7)===0&&resSide(3)>0&&resSide(4)>0,`${tag} R11 BAL.res.side ${JSON.stringify(BAL.res.side)}`)};
+  {const seats=[3,4,5,6,7].reduce((a,r)=>a+(BAL.seat[r]||0),0);const side=[3,4,5,6,7].reduce((a,r)=>a+(BAL.seat[r]||0)*resCap(r),0);
+   ok(side>=BAL.harem.cap-seats,`R12 capacity ${side} side seats < ${BAL.harem.cap}-${seats} lower consorts`)}
   const out={games:[]};
   for(let g=0;g<G;g++){window.__forceOrigin=ORIG[g%ORIG.length];SLOT=3;quiet=true;window.__nlInner=1;try{start()}catch(e){F.push('start '+e.message);continue}window.__nlInner=0;quiet=true;const r0=render;render=()=>{};
    Q.length=0;palFix();const tag='g'+g+'/'+window.__forceOrigin;
    ok(liveRivals(true).length===BAL.ps.harem.length,`${tag} R7 start harem ${liveRivals(true).length} != ${BAL.ps.harem.length}`);
-   R1(tag);R2(tag);R3(tag);
+   R1(tag);R2(tag);R3(tag);R11(tag);
    const row={orig:window.__forceOrigin,her:resRoomName(residenceOf(S)),hosts:hosts().map(h=>`${RANKS[rkOf(h)].n}:${mates(h).length}`).join(' ')};
    /* 24 months of play: the rules hold every month */
-   for(let m=0;m<24;m++){Q.length=0;S.mg=null;if(S.dead){S.dead=false}if(S.suc<20)S.suc=60;try{endTurn()}catch(e){F.push(tag+' turn '+e.message);break}palFix();R1(tag+'m'+m);R3(tag+'m'+m);R2(tag+'m'+m)}
+   for(let m=0;m<24;m++){Q.length=0;S.mg=null;if(S.dead){S.dead=false}if(S.suc<20)S.suc=60;try{endTurn()}catch(e){F.push(tag+' turn '+e.message);break}palFix();R1(tag+'m'+m);R3(tag+'m'+m);R2(tag+'m'+m);R11(tag+'m'+m)}
    row.after24=resRoomName(residenceOf(S));row.harem=liveRivals(true).length+1;out.games.push(row);render=r0}
   /* forced situations on the last game */
   quiet=true;const r0=render;render=()=>{};
   S.out=false;S.dead=false;S.rank=1;S.pal=null;palFix();
   /* R4: an old save puts three under one head */
   {const h=hosts().find(x=>x!==S);const low=[S].concat(rivals).filter(y=>live(y)&&!y.queen&&rkOf(y)<3);
-   if(h&&low.length>=3){for(const y of low.slice(0,3)){y.resHead=key(h);y.resHall=null;if(y!==S&&y.palLone){y.pal=null;y.palLone=0}}palFix();R1('R4');ok(mates(h).length<=resCap(),'R4 trim '+mates(h).length);
+   if(h&&low.length>=3){for(const y of low.slice(0,3)){y.resHead=key(h);y.resHall=null;if(y!==S&&y.palLone){y.pal=null;y.palLone=0}}palFix();R1('R4');ok(mates(h).length<=resCap(h),'R4 trim '+mates(h).length);
     for(const y of low){const r=residenceOf(y);ok(!!r.part,'R4 lost '+y.name)}}else F.push('R4 setup: no head or <3 lower')}
   /* R10: she lived under h, went to lãnh cung, h was refilled, then she comes back */
   {const h=hosts().find(x=>x!==S&&mates(x).some(y=>y!==S));if(!h)F.push('R10 setup: no house with an NPC');else{const v=mates(h).find(y=>y!==S);const hall=v.resHall;v.out=true;palFix();
-    if(mates(h).length<resCap()){const y=rivals.find(x=>live(x)&&!x.queen&&rkOf(x)<3&&x.resHead!==key(h)&&x!==v);if(y){y.resHead=key(h);y.resHall=hall;palFix()}}
-    ok(v.resHead==null,'R10 out consort kept her room');v.out=false;ok(mates(h).length<=resCap(),'R10 return over cap '+mates(h).length);R1('R10a');
+    if(mates(h).length<resCap(h)){const y=rivals.find(x=>live(x)&&!x.queen&&rkOf(x)<3&&x.resHead!==key(h)&&x!==v);if(y){y.resHead=key(h);y.resHall=hall;palFix()}}
+    ok(v.resHead==null,'R10 out consort kept her room');v.out=false;ok(mates(h).length<=resCap(h),'R10 return over cap '+mates(h).length);R1('R10a');
     v.out=true;palFix();const rl=roll;roll=()=>true;try{WORLD_X.EVD.xa.start({})}catch(e){F.push('R10 đại xá '+e.message)}finally{roll=rl}
     ok(!v.out,'R10 đại xá did not bring her back');R1('R10b');palFix();R1('R10c')}}
+  /* R13 a Phi with co-residents rises to Quý phi: her co-residents move to a Tần / Phi house with a free seat, one news line with the
+     reason each ("Theo lệ, Quý phi … ở riêng …"), one act in the people ledger (S.roster.acts k res_move); nobody lost */
+  {const RK0=rivals.map(v=>v.rank);for(const v of rivals)if(live(v)&&!v.queen&&rkOf(v)>=5)v.rank=4;palFix();const h=hosts().find(x=>x!==S&&mates(x).some(y=>y!==S));
+   if(!h)F.push('R13 setup: no house with an NPC');else{const M=mates(h).filter(y=>y!==S);const L0=(S.logs||[]).length;const A0=((S.roster&&S.roster.acts)||[]).length;
+    const keep=S.seatKeep;h.rank=5;palFix();ok(mates(h).length===0,'R13 Quý phi still has '+mates(h).length);
+    for(const y of M){const r=residenceOf(y);ok((r.part==='dong'||r.part==='tay'||r.part==='chinh')&&r.head!==h,'R13 '+y.name+' not re-housed '+r.part);
+     ok((S.logs||[]).some(x=>String(x).indexOf(y.name)>=0&&/Theo lệ/.test(String(x))),'R13 no reason line for '+y.name);
+     if(S.roster&&S.roster.acts)ok(S.roster.acts.some(a=>a.k==='res_move'&&a.id===ledgerId(y)&&/Theo lệ/.test(a.why)),'R13 ledger lacks '+y.name)}
+    out.r13={qp:h.name,moved:M.map(y=>y.name+' → '+resRoomName(residenceOf(y))),line:(S.logs||[]).map(x=>String(x).replace(/<[^>]+>/g,'')).find(x=>/Theo lệ/.test(x))};R1('R13');R11('R13')}rivals.forEach((v,i)=>v.rank=RK0[i]);palFix()}
   /* R5 */
   S.rank=3;palFix();ok(S.pal!=null||!PALN.some((_,i)=>![S].concat(rivals).some(p=>p.pal===i&&live(p))),'R5 Tần without palace');ok(!S.resHead,'R5 resHead kept at Tần');
   S.rank=2;palFix();R2('R5 demote');ok(S.pal==null,'R5 demoted keeps palace');

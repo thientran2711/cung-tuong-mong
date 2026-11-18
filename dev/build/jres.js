@@ -57,10 +57,10 @@ function residenceArt(palaceKey,part,season,time){const n=resPick(resBase(palace
 /* who lives where, now */
 function resAlive(p){return !!p&&(p===S?!S.dead:p.alive!==false)}
 function resHeadOf(p){try{const h=byKey(houseOf(p));return h||null}catch(e){return null}}
-function resSidePart(p,h){/* co-residents of head h: the hall palFix gave (p.resHall, BAL.res.halls, one room each); else stable order, BAL.res.side per hall */
+function resSidePart(p,h){/* co-residents of head h: the hall palFix gave (p.resHall, BAL.res.halls); else stable order, resSide(h) per hall (BAL.res.side by her rank) */
  const HL=BAL.res.halls;if(HL.includes(p.resHall))return p.resHall;
  const L=[S].concat(rivals||[]).filter(x=>x!==h&&resAlive(x)&&!(x!==S&&x.out)&&!x.queen&&rkOf(x)<PAL_HEAD&&resHeadOf(x)===h).sort((a,b)=>String(key(a)).localeCompare(String(key(b)),"en",{numeric:true}));
- const i=Math.max(0,L.indexOf(p));return HL[Math.min(HL.length-1,Math.floor(i/BAL.res.side))]}
+ const i=Math.max(0,L.indexOf(p));return HL[Math.min(HL.length-1,Math.floor(i/Math.max(1,resSide(h))))]}
 function residenceOf(p){const R=(o)=>Object.assign({pal:null,head:null},o);if(!p||!S)return R({part:"ngocthanh"});
  if(p===S){if(S.out)return R({part:"lc"});if(typeof isSrv==="function"&&isSrv())return R({part:"cungnhan",pal:null});
   if(S.pal!=null&&rkOf(S)>=PAL_HEAD)return R({part:"chinh",pal:S.pal,head:S});
