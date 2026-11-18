@@ -1,3 +1,13 @@
+# FINAL REVIEW map-tap-go db3d6ed (46fad45 + KIT §84c person-less VIỆC frame) — PASS f2a3bfc (review/map-tap-go-r8, for MAIN ROOT-47)
+PRIORITY #1 CHECK: OD L1851 + L1853 + ~06:10Z (no empty band) + ~06:30Z (no arrival toast) | main jksize kszFrame3/kitFrameLive3, jplace, j77 | review/* none other | claims worker SzhDm65, reviewer SzjFu8b4.
+SUPERSEDES PASS 8f15bd5 and 6e43969 below.
+- Delta db3d6ed vs 46fad45 (own source): jksize only — kszFrame3({noWho}) / kitFrameLive3 with no person: the place picture is the left main picture, `.k3fill` (align-self:stretch, cover-crop, true ratio) in fig sizes, standard 120x160 in "one"; fit check accepts a filled column; kit page sample §84c + KIT.md + kit-conform rule. KIT FIRST: one kit part (jksize T7), every person-less VIỆC frame changes the same way; no per-place CSS.
+- Consistency scan (18 place frames via j77Card, Fold 755x1000@2 host + iPad 1180x820@2): all kplace, 0 figure nodes, no overflow; pres "fig" frames (thu, dtd, kn, tgk) use k3fill with picture = column height (e.g. Càn Ninh pic 275 of body 297 on Fold, rest = frame padding), object-fit cover (no stretch); pres "one" frames (14) the standard picture. Same frame on Fold and iPad. Fold empty band around the picture: FIXED in fig frames (same kit part, whole group).
+- Merge: origin/main d219fce merged onto review/map-tap-go-r8, only index.html/sw.js conflicted -> rebuilt from merged sources; f2a3bfc = FF of d219fce. main has since moved to 09b1bba (not merged here; merge + rebuild if not FF at landing).
+- Tests on f2a3bfc: quickcheck PASS (core gates incl. kit-conform 102 CONFORMS / floats none, one-core-guard, coop one-world; time-spill; old save loads + plays; perf flat render 165/149 tab 386/366 buổi 900/957 ms); map-tap-go.js fold + ipadAir ALL OK; coop-e2e 63/63. A first parallel run (my 2 scan browsers + quickcheck + coop at once) gave kit-conform "tutorial 0 intro pages" and coop 61/64 — both clean when re-run alone: load flake, not code.
+- Shots LOOKED (scratch, deleted): Fold Càn Ninh (fig, filled column), Fold Khải Tường (one), iPad Càn Ninh (fig, filled) — clean.
+Minor left: map-tap-go.js Fold mid-buổi shot catches the Luân hồi card; j77LastWalk dead code. Wipe worker CDN img/_review/map-tap-go/ after landing.
+
 # FINAL REVIEW map-tap-go 46fad45 (no undo, no arrival toast; owner 18/11 ~06:05Z + ~06:30Z) — PASS 8f15bd5 (review/map-tap-go-r7, for MAIN ROOT-47)
 PRIORITY #1 CHECK: OD L1851 + L1853 + ~06:30Z arrival-toast removal | main j77Tap/j77Card, jplace kitPlaceDress, jksize kitFrameLive3, j9 walkGo/walkSpillGo, j42 srvToast | review/* none other | claims worker SzhDm65, reviewer SzjFu8b4.
 SUPERSEDES the PASS 6e43969 below (that sha still had kitArriveToast — do not land it).
