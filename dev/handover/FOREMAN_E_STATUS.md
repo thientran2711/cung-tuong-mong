@@ -66,3 +66,4 @@ FOR MAIN (open): READY to FF main: review/hall-names 282865b7e5127821b64931f327f
 - (18/11 06:26Z) E7cr: FAIL b99f4bc questline-q1c — 6 fixes in dev/handover/reports/questline-q1c-review.md
 - (18/11 06:27Z) E7cr FAIL b99f4bc q1c (= c6015bd content; 6 text fixes, reports/questline-q1c-review.md) → archived. FIX 1 ordered to E7c2 (+ nrVoiceM VANPHONG check; rebase on E7a's fixed q1a). Load 7/12 (E1b, E4f, E7a, E7b, E7c2, E8).
 - (18/11 06:40Z) FROM MAIN: main is now ROOT-47 = session_01UV1SzkyUiNKEkWJM3e9b5U (ROOT-46 stopped); report READY/PASS shas and FOR MAIN lines to it.
+- (18/11 07:00Z) E7b FIX 1: SẴN SÀNG KIỂM questline-q1b 53c08086 (review items 1–5,7 + families: 23 asks fixed, before/after in reports/questline-q1b.md; scan/engine/quickcheck PASS; item 6 = engine, E7a)

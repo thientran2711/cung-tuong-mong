@@ -31,3 +31,18 @@ Files: `td_song_8-755x1000.png`, `td_song_8-1180x820.png` (Quý phi asks: «Em t
 - nrask-scan rules met: **second ask written for all 120 chapters** (240 asks, 2 per chapter, mostly a different kind/shape than the first); every «do» ask names {B} (19 first asks rewritten); no typed «mình»/«em» (td_song «em trai» → «tiểu đệ»); 0 shared sentence / label / loss line across jnrask.js + jnrask_b.js.
 - Tests: **nrask-scan ALL PASS** (432 asks, 9 origins 24/24 each) · **nrask-engine ALL PASS** (864 cards both voices, fallback, old saves, play/betray) · **quickcheck PASS** (336 s; core gates PASS; perf new/live render 158/175, tab 373/332, buổi 844/997 ms).
 - Not re-shot (text-only change on the same j72 card; q1a's nrask-shots covers the card on Fold/iPad). Maid voice (cnv, nô tỳ/tiểu chủ) was checked in round 1 with the same slot meaning.
+
+## FIX 1 (18/11 ~07:00Z) — review FAIL 255f5b2a (reports/questline-q1b-review.md) → **53c08086**
+Items 1, 2, 3, 4, 5, 7 fixed; item 6 is the engine (E7a/E7ar: a queen asker must never get an hh ask / stock nr_hh — q1b needs no data change, every chapter has a 2nd ask of another kind).
+LUẬT SỬA CẢ NHÓM — scan of all 240 q1b asks per fault family (script: node /home/user/wt/q1b-scr/fam.js dev/build/jnrask_b.js + a wide «nhà {call} / {call} có / {call} quen» sentence scan):
+| family | before | after | fixed |
+|---|---|---|---|
+| F1 maid asker reads as risen / consort (cnv) | 2 | 0 | cnv_mat_9[0] (now: roommates' envy, asks a room change via Trung cung), cnv_mat_9[1] (winter clothes cut after the summons) |
+| F1b label and loss line name different go-betweens | 1 | 0 | cnv_mat_9[0] o2 (nữ quan both) |
+| F2 modern word | 1 | 0 | cnv_ban_10[0] «chính Nội vụ phủ» |
+| F3 loss line reads as thanks («ghi … vào lòng») | 2 | 0 | ch_co_9[0] «để bụng ngươi», td_ke_10[1] «ghi hận ngươi» |
+| F4 hh ask: Trung cung «decides» a matter that is not hers | 2 | 0 | ch_ho_5[0] (thỉnh an order at Khôn Ninh cung, which cô mẫu copies), ch_ho_10[1] (seating at the six-palace banquet) |
+| F5 true info: player's family / servants / doctor friend stated as fact | 14 | 0 | nc_su_9[0], nc_vuong_6[0], td_song_9[0], thd_hoc_9[0] (review) + same family: nc_gian_9[1], nc_su_6[0], td_ke_6[0], td_song_8[0], ch_benh_6[0], ch_benh_8[1], ch_ho_6[0], thd_sach_8[0], cnv_chu_5[0], cnv_ma_10[0] → «Nếu …» / «… có quen … không?» |
+| F7 option label (player's voice) says «ngươi» | 1 | 0 | ch_co_5[0] «cung mình»; nrask-scan now fails any label with «ngươi» |
+Tests: nrask-scan ALL PASS (432 asks) · nrask-engine ALL PASS · quickcheck PASS (337 s; core gates PASS; perf new/live render 154/168, tab 336/361, buổi 774/788 ms).
+Not blocking note kept for later polish: the «do» asks lean on the dò-la shape.

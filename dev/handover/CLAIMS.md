@@ -488,7 +488,7 @@ art-matrix planner (MAIN s43 order) | claude/cung-tuong-mong-handover-hj0h8w (re
 | emo-seal-vanish (owner bug 18/11 05:50Z: maid's emotion seal vanishes after closing its box; sonnet; brief briefs/emo-seal-vanish.md) | review/emo-seal-vanish | MAIN ROOT-45 | session_01UV1SzgqSAZSYNtKKK7GTQ8 | READY 631ad03 | 18/11 05:14Z |
 | mg-skip-all (owner 18/11 05:55Z: quick option on EVERY mini-game incl. makeup, one kit button + BAL key 40; opus; brief briefs/mg-skip-all.md; absorbs D skip-odds-40) | review/mg-skip-all | MAIN ROOT-45 | session_01UV1Szjuwc7PJM75kQAAyPf | RUNNING (code fdd2862 pushed; tests + shots next) | 18/11 05:16Z |
 | E7a QUESTLINE Q1a help-hồi text (opus; briefs/E7-questline-q1.md) | review/questline-q1a | E ROOT | session_01DgYSWpyUqEzbbzMAtLMkNM | SẴN SÀNG KIỂM 98cb3955 (reports/questline-q1a.md) | 18/11 05:22Z |
-| E7b QUESTLINE Q1b help-hồi text (opus; briefs/E7-questline-q1.md) | review/questline-q1b | E ROOT | session_01DgYSWqDaerQBfKu5bPRkef | SẴN SÀNG KIỂM 255f5b2a on q1a (reports/questline-q1b.md) | 18/11 06:40Z |
+| E7b QUESTLINE Q1b help-hồi text (opus; briefs/E7-questline-q1.md) | review/questline-q1b | E ROOT | session_01DgYSWqDaerQBfKu5bPRkef | SẴN SÀNG KIỂM 53c08086 fix 1 (reports/questline-q1b.md) | 18/11 07:00Z |
 | E7c QUESTLINE Q1c help-hồi text (opus; briefs/E7-questline-q1.md) | review/questline-q1c | E ROOT | session_01DgYSWmbeLw227mrkMikC5W | HANDOVER 6dc4222 (reports/questline-q1c.md) | 18/11 05:22Z |
 | E7a QUESTLINE Q1a help-hồi text (opus; briefs/E7-questline-q1.md) | review/questline-q1a | E ROOT | (opening) | RUNNING | 18/11 05:22Z |
 | E7b QUESTLINE Q1b help-hồi text (opus; briefs/E7-questline-q1.md) | review/questline-q1b | E ROOT | (opening) | RUNNING | 18/11 05:22Z |
