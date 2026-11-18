@@ -90,3 +90,7 @@ Refs: her current figure (image 1) + c03 t4 + c03 t5 (image refs, softness only)
 Credits: 5 gens x 135 = 675 cr.
 Files (md5-verified) https://ctm-img.victoria-tntt.workers.dev/img/_review/consort-tiers/c02/b8-style/ — c02_a18_t1..t8.png (final), c02_a18_t6/t7/t8_prev.png (previous), c02_a18_soft.jpg (t1..t8 one row on the red skull-top/feet lines). Nothing live.
 ~100% xong c02 soft / ~0% chơi được.
+
+### B9 soft — update (no phoenix below t7; m09 per figure)
+Owner rule: ranks below Hoàng quý phi never carry a phoenix (flowers, birds, butterflies only); t7/t8 flowers + phoenix together, t8 clearly more soft yellow. Redone: t5 and t6 (phoenix motifs replaced by stitched peonies, plum blossoms, small birds, butterflies; everything else kept), 1 gen each (2 x 135 = 270 cr), files c02_a18_t5/t6.png (old in *_prev.png), sheet c02_a18_soft.jpg rebuilt. t1–t4 checked: flowers only, no phoenix. t7 = dusty rose + soft yellow with flowers + phoenix; t8 = mostly soft golden yellow with flowers + phoenix.
+m09 (eIyOFEidqL) in the STYLE slot, per figure: t1–t4 recolours (b8-style, yes), t5 recolour + no-phoenix redo (yes), t6 soft redo + no-phoenix redo (yes), t7, t8 soft redo + second pass (yes). Image refs were only her own figure (+ c03 t4/t5 for softness on the first soft pass).
