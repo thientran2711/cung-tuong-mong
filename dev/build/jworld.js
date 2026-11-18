@@ -119,10 +119,10 @@ EVD.away={place:w=>"thu",
       const C=liveR().filter(v=>!v.preg&&!v.confined&&!(w.x.f||[]).includes(v.id));if(C.length){const v=npcPick(null,C.map(v=>[v,Math.max(1,rawNight(v))*mW(v,"social")]));if(v){w.x.f.push(v.id);log(`${v.name} theo hầu thay ngươi.`)}}}}]}},
  night(w,p){return !(w.x.f||[]).includes(pid(p))},emp:1};
 /* 3 ĐẠI TUYỂN TÚ NỮ (row 2): every 3 years at the KC.ty clock (the player's own road already runs on it). Reuses newRival/drawFace/palFix
-   (as j3 moreRivals and j55 "tuyen"), roomFor/CAPC caps, jealousy via relAdd/affAdd (the same relation core). */
+   (as j3 moreRivals and j55 "tuyen"), roomFor caps (BAL.harem.cap), jealousy via relAdd/affAdd (the same relation core). */
 EVD.tuyen={place:w=>typeof qOn==="function"&&qOn()?"kn":"tn",
  start(w){const b=B().tuyen;const n=b.n[0]+R(b.n[1]-b.n[0]+1);const N=[];const old=cons();
-  for(let i=0;i<n;i++){try{if(typeof roomFor==="function"&&!roomFor("consort"))break;if(liveR().length+1>=(typeof CAPC==="number"?CAPC:16))break;
+  for(let i=0;i<n;i++){try{if(typeof roomFor==="function"&&!roomFor("consort"))break;
    const v=newRival(R(b.rankMax+1));Object.assign(v,drawFace());v.age=b.age[0]+R(b.age[1]);v.sung=cl((v.sung||0)+b.newSung,0,100);v.wNew=w.id;rivals.push(v);N.push(v)}catch(e){wErr("tuyen new",e)}}
   try{if(N.length&&typeof palFix==="function")palFix()}catch(e){}w.x.n=N.map(v=>v.id);
   for(const p of old)ap(p,{sung:-b.sungThin});
@@ -212,7 +212,8 @@ EVD.sao={place:w=>"cnh",
    own way out j14 restore() ("chờ ân xá" is already on her cold-palace card), j8 "pardon" rule for NPCs (out=false, rank 0). */
 EVD.xa={place:w=>"lc",
  start(w){const b=B().xa;const F=[];if(S.confined&&!(typeof isSrv==="function"&&isSrv())){S.confined=0;F.push(S)}
-  for(const v of rivals){if(!v.alive)continue;if(v.confined){v.confined=0;F.push(v)}else if(v.out&&!v.coop&&roll(b.npcP)){v.out=false;v.rank=0;F.push(v)}}
+  for(const v of rivals){if(!v.alive)continue;if(v.confined){v.confined=0;F.push(v)}else if(v.out&&!v.coop&&roomFor("consort")&&roll(b.npcP)){v.out=false;v.rank=0;F.push(v)}}
+  try{if(F.length&&typeof palFix==="function")palFix()}catch(e){}
   const T=T_();if(T)T.kho=cl(T.kho-b.kho,0,100);
   return `Chiếu đại xá: miễn thuế một năm, người bị cấm túc được tha${F.length?`: ${nmList(F)}`:""}.`},
  card(w){if(S.out&&(S.turn-(S.coldTurn||0))>=B().xa.minM){try{restore(false,"Chiếu đại xá thiên hạ")}catch(e){wErr("restore",e)}return null}return{t:"Đại xá thiên hạ",who:pEmp(),h:`<p>${w.cause}.</p><p>${w.txt||""}</p>`}},
@@ -315,8 +316,8 @@ function worldTick(){if(!S||S.dead||!B().on)return;const z=wZ();if(host()){WW.in
 function startCard(w){const E=EVD[w.k];let m=null;try{m=E.card(w)}catch(e){wErr("card "+w.k,e)}
  if(m&&E.scene&&!(m.opts&&m.opts.length)&&!(typeof isSrv==="function"&&isSrv())){let sc=null;try{sc=E.scene(w)}catch(e){wErr("scene "+w.k,e)}
   if(sc&&sc.opts&&sc.opts.length){m.h=(m.h||"")+(sc.h||"");m.opts=sc.opts;if(!m.who&&sc.who)m.who=sc.who}}
- /* kit line format "word · tốn: … · thành: …" (j0 kitParse): a sure option leads with "Chắc chắn" (never shown) so its first label (thành / kèm) is read */
- if(m&&m.opts)for(const o of m.opts)if(o&&typeof o.x==="string"&&/^(thành|kèm|hỏng|không được)/.test(o.x))o.x="Chắc chắn · "+o.x;return m}
+ /* kit line format "word · tốn: … · thành: …" (j0 kitParse): a sure option has no odds word (ODDS CAP: the ladder has no "sure" word); kitParse reads its first label (thành / kèm) as is */
+ return m}
 function worldShow(){if(!S||S.dead)return;S.wwSeen=S.wwSeen||{};S.wwEnd=S.wwEnd||{};const A=worldWin(),z=wZ();
  for(const h of (z.H||[])){if(h.id==null||!h.end||S.wwEnd[h.id]||!S.wwSeen[h.id])continue;S.wwEnd[h.id]=1;Q.push({t:h.n||"Tin trong cung",who:pEmp(),h:`<p>${h.end}</p>`})}
  for(const w of A){if(S.wwSeen[w.id])continue;S.wwSeen[w.id]=1;const m=startCard(w);if(m){if(!m.who)m.who=pEmp();if(!m.opts)delete m.opts;Q.push(m)}}

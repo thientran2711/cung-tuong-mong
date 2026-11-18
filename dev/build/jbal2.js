@@ -37,15 +37,20 @@ BAL.nwq={shift:0,free:2,hint:.5,auto:.25,miss:.8,xaMiss:.9,xaFloor:0,peek:8,idle
  cScore7=function(E,kindOf,prep,meB,her){return E.map(p=>{const kind=kindOf(p);if(p===S&&her&&her.score!=null)return{p,kind,t:Math.round(her.score),pr:0,lk:0,s:Math.round(her.score),mg:1};
   const t=Math.round(SC7[kind].f(p));let pr=0;if(p===S)pr=meB;else if(prep.includes(p.id)&&(p.bac||0)>=20){ap(p,{bac:-20});pr=J71.prep}const lk=Math.round(raw7(p,kind)/10*J71.luck);return{p,kind,t,pr,lk,s:t+pr+lk}}).sort((a,b)=>b.s-a.s)};
  cOdds7=function(kind,E,prep,meB,seed){const f=SC7[kind].f;const base=E.map(p=>f(p)+(prep.includes(p.id)?J71.prep:0));const mi=E.indexOf(S);if(mi<0)return 0;base[mi]+=meB;const r=rng7(seed);let w=0;const N=500;
-  for(let t=0;t<N;t++){let b=-1,bi=-1;for(let i=0;i<E.length;i++){const s=base[i]+smp7(E[i],kind,r);if(s>b){b=s;bi=i}}if(bi===mi)w++}return cl(Math.round(100*w/N),3,97)};
+  for(let t=0;t<N;t++){let b=-1,bi=-1;for(let i=0;i<E.length;i++){const s=base[i]+smp7(E[i],kind,r);if(s>b){b=s;bi=i}}if(bi===mi)w++}return oddsCl(Math.round(100*w/N))};
  fxOdds7=function(F,art,meB,seed){const E=[S].concat(liveRivals(true).filter(present7));const r=rng7(seed);let w=0;const N=500;const K=E.map(p=>p===S?art:fxBest7(p,F.arts));const base=E.map((p,i)=>p===S?SC7[art].f(S)+meB:SC7[K[i]].f(p));
-  for(let t=0;t<N;t++){let b=-1,bi=-1;for(let i=0;i<E.length;i++){const x=base[i]+smp7(E[i],K[i],r);if(x>b){b=x;bi=i}}if(bi===0)w++}return cl(Math.round(100*w/N),3,97)};
+  for(let t=0;t<N;t++){let b=-1,bi=-1;for(let i=0;i<E.length;i++){const x=base[i]+smp7(E[i],K[i],r);if(x>b){b=x;bi=i}}if(bi===0)w++}return oddsCl(Math.round(100*w/N))};
+ /* ODDS CAP: when her place comes from the luck draw (she did not play the round herself), her first place keeps its odds inside the one cap:
+    P(first | the others' scores) is sampled from her own luck draw and capRes moves her just above / below the best other score. */
+ capRank7=function(L){try{const i=L.findIndex(x=>x.p===S);if(i<0||L[i].mg||L.length<2)return L;const me=L[i],O=L.filter(x=>x!==me),best=Math.max(...O.map(x=>x.s));
+  let w=0;const N=BAL.odds.simN;for(let t=0;t<N;t++)if(me.t+me.pr+Math.round(raw7(S,me.kind)/10*J71.luck)>best)w++;
+  const win=i===0,fin=capRes(win,100*w/N);if(fin===win)return L;const s=fin?best+1:best-1;me.lk+=s-me.s;me.s=s;return L.sort((a,b)=>b.s-a.s)}catch(e){console.error(e);return L}};
 })();
 /* the Emperor tires of accusations: every accusation an accuser brought in the last 36 tuần (a year) lowers the odds of her/his next one by accTire points
    (same rule for every accuser; the odds word shown is the real one) */
 Object.assign(BAL,{accTire:10});
-(function(){try{const A=ACT.accuse,f0=A.f;A.f=function(a,t){try{a.accL=(a.accL||[]).filter(w=>wk()-w<36);a.accL.push(wk())}catch(e){}return f0.apply(this,arguments)}}catch(e){}
- const o0=oAccuse;oAccuse=function(a,t){const o=o0.apply(this,arguments);if(!BAL.accTire||!a)return o;const n=(a.accL||[]).filter(w=>wk()-w<36).length;return n?cl(o-BAL.accTire*n,5,95):o}})();
+(function(){try{const A=ACT.accuse,f0=A.f;A.f=function(a,t){const r=f0.apply(this,arguments);/* recorded AFTER the roll: this charge tires the NEXT one, not itself (shown == rolled) */try{a.accL=(a.accL||[]).filter(w=>wk()-w<36);a.accL.push(wk())}catch(e){}return r}}catch(e){}
+ const o0=oAccuse;oAccuse=function(a,t){const o=o0.apply(this,arguments);if(!BAL.accTire||!a)return o;const n=(a.accL||[]).filter(w=>wk()-w<36).length;return n?oddsCl(o-BAL.accTire*n):o}})();
 /* one charge at a time (balance 11/14, measured: without it an angry palace brought ~40-60 charges a life against her, ~30 stuck, each a fall of two ranks
    or the cold palace): a person just accused, whether the charge stuck or not, cannot be accused again by anyone for BAL.accCdT tuần.
    Same rule for every target, her included; she cannot bring a charge against someone inside the window either. */
@@ -203,7 +208,7 @@ Object.assign(BAL,{coopBribe:{pay:20,tin:5}});
 Object.assign(BAL,{visit:{minSung:20,base:.3,slope:.07,anK:.01,cap:8,datinh:1.5,lanhlung:.5,gap:9,illSt:2,q:2,
  sung:3,danh:3,ghen:6,lostGhen:15,lostRel:8,hh:3,thP:25,thNeg:15,thLoss:4,adviseDuc:3,adviseSung:1,adviseTh:2,
  show:{o:40,w:8,suc:5,sung:6,danh:2},tea:{minSung:60,p:50,sung:2,an:2}},
- night:{sung:3,an:2,ghen:8,bestow:10,bestowS:4,stealS:3,mood:[1,0,-1,-2] /* his mood 0..3 (vui, thường, buồn, giận) → night score add-on (j8 night1; jwhyn reads it) */}});
+ night:{sung:3,an:2,ghen:8,bestow:10,bestowS:4,stealS:3,vO:[40,50,60,75,85] /* night score v ≤-1 / 0 / 1 / 2 / ≥3 → odds read by word() (Khó … Rất chắc) */,mood:[1,0,-1,-2] /* his mood 0..3 (vui, thường, buồn, giận) → night score add-on (j8 night1; jwhyn reads it) */}});
 /* ACTIVE MAID LINE (jmline.js, review/servant-system, owner 16/11): % per month unless named. eye[rank] = the Emperor's eye by servant rank
    (thô sử, cung nữ, đại cung nữ, chưởng sự, nữ quan; was 0/0/1.2/1.2/1.2), eyeSung = ×(1 + master Sủng/100 × eyeSung), eyeAge = ages that can rise;
    seekStart (× nết: tham 2, lanh 1.5, trung/nhát 0.3) for seekMonths months, maids up to seekAge, seekMul on the eye while seeking;
@@ -361,6 +366,9 @@ Object.assign(BAL,{nroad:{
  /* help options (r1, ONE CORE): odds of the Sức road / bạc road / dò la / che chở / tự sắc thuốc, the loss sizes l2/l3 on a failed try,
     the Đức a betrayal costs, the bond the dò-la target loses */
  op:{pS:55,pB:75,pDo:70,pChe:60,pY:50,l2:2,l3:3,betray:3,rbDo:4},
+ /* Q1 (audit D-Q2, OD:L1601 (2) "xin tiền xin bạc … không phải là phụ tuyến"): the help kinds an NPC may ask; the first is the fallback of a
+    chapter whose cast maps to none. «bac» is OFF (money stays only as a cost inside an ask); add "bac" here to deal it again (one key) */
+ kinds:["thu","emp","th","hh","do","y","che"],
  /* rank thresholds of the bạc cost: index = how many of these ranks her rank reaches (RANKS index) */
  bacRk:[2,4,6],
  /* palace news lines a month (NPC chapter ends), at most */
@@ -387,7 +395,37 @@ Object.assign(BAL,{nroad:{
  men:{st:40,kidAge:15,men:{fx:{win:{loyal:3},mid:{loyal:-1},lose:{loyal:-4}},rv:{win:-2,lose:1}},court:{af:4,danh:1},
   off:{pow:{win:2,lose:-2},rv:{win:-1,lose:1},rel:3,ally:5},hz:{fx:{win:{fond:3,tal:2,hp:-2},mid:{tal:1,hp:-1},lose:{fond:-3,hp:-1}},rv:{win:-1,lose:1}},
   askTinh:30,askAf:10,askRel:25}}});
-/* seat counts per rank (review/seatcap): BAL.seatCap IS j30 SEATCAP (one object, one place): Hoàng hậu 1, Hoàng quý phi 1, Quý phi 2, Phi 4, Tần 6; lower ranks no cap.
+/* QUESTLINE Q3 — HELPERS IN HER ROAD (owner D-Q1 = "1", OD 18/11 07:56Z; QUESTLINES_AUDIT §4 Q3; engine jroad.js rdHp*, tags + lines jrdhp.js).
+   A «Nhờ …» option of her road tagged in RDHP asks a helper; the helper answers ONE of 4 ways, drawn by weight [full, half, no, sab]:
+     full = giúp hết lòng (the option's own odds) · half = giúp qua loa (odds − half, never below min; a sure option then rolls at 100 − half)
+     no   = từ chối (the option does not run: she pays noC, keeps the hồi and picks again; that option is gone for this hồi)
+     sab  = phá ngầm / mách lẻo (the option fails; Đức − sab.duc; the road's rival {v} oán + sab.oan) — the same shape as jnroad's «mách»
+   weight of an answer = w[role] + trK[role] × Σ tr[nết] over the helper's nết + liking × aff + tâm cơ term + own-road term + nợ ân term (each ≥ 0):
+     liking = the helper's thiện cảm toward her, clamped to ± affCap (consort aff(); own maid / men loyal − 50; court men, house head af.me / 2;
+       Hoàng thượng S.sung − mid.emp, Thái hậu S.th − mid.th, Hoàng hậu S.hh − mid.hh when no NPC queen);
+     tc: a helper with Tâm cơ above tc0 who dislikes her (liking < 0) adds (Tâm cơ − tc0) × tcSab to sab;
+     own road (NPC consorts, jnroad v.nr): her road has the player as rival → rdRiv to sab; her last chapter won → rdWon to full, lost → rdLost to half;
+     nợ ân (j72 ledger, the helper owes her) → owe per debt to full, at most oweMax.
+   The willingness word on the option card (Gợi ý row, KIT §28.6 kitHintRow, never odds): role in unk → word.unk; a Nhiều chuyện helper whose
+   sab share (%) is at least lk → word.lk; else the largest of full / half / no (sab is never shown): word.full / word.half / no-word by role group
+   (noRule → word.rule, noLow → word.low, others word.no). kw = the answer names in the Sổ ghi line. */
+BAL.road.hp={
+ w:{dad:[60,20,15,5],bro:[55,25,15,5],mom:[65,20,10,5],fam:[45,30,20,5],th:[35,25,35,5],hh:[30,25,35,10],emp:[45,25,30,0],
+  eun:[30,35,20,15],srv:[30,35,20,15],maid:[50,35,5,10],doc:[30,25,40,5],off:[30,25,40,5],dan:[35,35,20,10],si:[40,30,25,5],v:[30,25,30,15],v2:[30,25,30,15],mis:[45,30,10,15],
+  man:[40,30,20,10],n1:[50,30,15,5],go:[35,35,15,15],foe:[10,25,40,25]},
+ tr:{"Ân cần":[20,0,-10,-10],"Lạnh lùng":[-10,15,5,5],"Nóng nảy":[5,0,10,5],"Điềm tĩnh":[0,5,5,-5],"Nhiều chuyện":[0,0,0,15],"Kín đáo":[0,10,5,0],
+  "Kiêu ngạo":[-15,0,20,15],"Khiêm nhường":[10,5,-10,-5],"Cương trực":[5,-5,15,-10],"Xu nịnh":[0,10,-5,10],
+  "Thật thà":[10,0,0,-10],"Xảo quyệt":[-10,0,0,25],"Thanh liêm":[5,0,15,-10],"Ham lợi":[0,10,0,10],"Rộng lượng":[15,0,-5,-5],"Thù dai":[-5,0,5,20],
+  "Trọng nghĩa":[20,0,-5,-10],"Thực dụng":[0,10,5,5],"Tham vọng":[-5,0,5,15],"An phận":[-5,15,5,0],"Thực tế":[0,10,5,0],"Vì gia tộc":[5,5,0,0],"Vì mình":[-10,5,5,15]},
+ /* trK: how much a role's nết counts (default 1); a house head's nết is his court face, toward his own daughter it counts little */
+ trK:{dad:.3},aff:[.6,-.1,-.4,-.4],affCap:50,mid:{emp:30,th:30,hh:30},tc0:50,tcSab:.5,rdRiv:25,rdWon:10,rdLost:10,owe:15,oweMax:30,
+ half:20,min:5,noC:{suc:-3},sab:{duc:3,oan:6},lk:20,
+ unk:["go"],noRule:["doc","off","eun","srv"],noLow:["maid","dad","bro","mom","fam","n1"],
+ word:{full:"Sẵn lòng",half:"Miễn cưỡng",no:"Không ưa",rule:"Theo quy củ",low:"Còn đắn đo",lk:"Lắm lời",unk:"Không rõ"},
+ kw:{full:"Giúp hết lòng",half:"Giúp qua loa",no:"Từ chối",sab:"Phá ngầm",lk:"Mách lẻo"},
+ /* the answer-line set (jrdhp.js RDHPL) each role speaks with */
+ type:{dad:"dad",bro:"fam",mom:"fam",fam:"fam",th:"th",hh:"hh",emp:"emp",eun:"eun",srv:"srv",maid:"maid",doc:"doc",off:"off",dan:"dan",si:"si",v:"rv",v2:"rv",mis:"rv",man:"man",n1:"n1",go:"go",foe:"foe"}};
+/* seat counts per rank (review/seatcap): BAL.seatCap IS j30 SEATCAP (one object, filled from BAL.seat in jbal.js — the only place the numbers are written); lower ranks no cap.
    Every road that sets a rank asks jseat.js seatHas / seatDown / seatUp; seatSettle is the net after every turn and on load. */
 BAL.seatCap=SEATCAP;
 /* PEOPLE LEDGER (owner core law 16/11 13:40Z: "at mandatory times (e.g. morning court) everyone required is inside"; j95 record).
@@ -416,6 +454,13 @@ Object.assign(BAL,{spread:{cap:2,maxWait:4,codeWait:2}});
 BAL.relOan={hurt:.6,doer:.2,mend:.3};
 BAL.steal={cost:{feign:{duc:4},road:{suc:5}},failSung:3,rel:15,ghen:25,
  need:{fav:1,rank:.6,heir:.8},heirHas:.25,friend:60,friendMin:.15,oanW:.5,fear:{gap:3,f:.5},custom:.3,k:.25,pMax:.55,maxTry:2,sucMin:20};
+/* STEAL MINI-GAME (owner 16/11 ~22:20Z, PARKING_LOT #3b; jsmg.js): before a Tranh sủng / Chặn ngự giá try the one who tries may play ONE short tài nghệ
+   game (an existing one, KIT tài nghệ frame). raw ≥ win → THAT try's odds go up `rung` rung(s) on the word ladder (BAL.odds.cut, keeping the place inside
+   the band; capped at Nắm chắc / BAL.odds.hi); lose or skip → unchanged (no extra loss). art = the game per act (feign: Hát, road: Múa — "múa một khúc
+   dưới đèn lồng"); occ = the mgTier occasion that sets the board (hầu Hoàng thượng). NPCs (never the co-op friend, who plays her own) "play" by the
+   same NPC game roll as every contest (kg82NpcRaw: BAL.mgTier.npc by her bậc in that art) against the same win; npcP = chance an NPC plays at all.
+   win 5 = the pass line every game result shows green (kg82ShowRes raw ≥ 5). One game per try (j75: one try a night each), so no cooldown key. coopMs = co-op (jnf night): the longest the host keeps the flip choice open for the friend while her own game runs (ms). */
+BAL.steal.mg={on:1,win:5,rung:1,art:{feign:"hat",road:"mua"},occ:"trieu",npcP:1,coopMs:120000};
 /* TÁT, three tiers (owner 16/11; jface act "tat", jslap game). Index 1..3 = nhẹ / vừa / nặng. sac = Sắc the target loses while the mark lasts; wk = weeks the mark stays
    (+1 with chance wkX); duc = the slapper's Đức; rel / oan = grudge (relAdd / extra oán on the target); hoang/sung = Hoàng thượng hears (chance, Sủng) when the target's Sủng
    ≥ hoangMin; thau = Thái hậu rebukes a nặng slap (chance, Danh); evT = the target keeps evidence against the slapper, evW = a witness does (chance per slap);
@@ -917,7 +962,7 @@ Object.assign(BAL,{odb:{
  j75:{odOP:40,rbFit:35,rbTop:10,rbTop_2:20},
  j77:{odAccLeadO:35},
  j78:{odO:40,odTop:40},
- j8:{rbInspect:40,rbSearch:35,odO1:30,odO3:40,odO1_2:45,odO2:30,rbSeenNPC:15},
+ j8:{rbInspect:40,rbSearch:35,odO1:30,odO3:40,odO1_2:45,odO2:30,rbSeenNPC:15,taintXa:35,taintFeelDiv:5,matInspect:6,matSearch:5}/* taint family (review/poison-road-r2-rv): xạ hương miscarriage roll on a held item, her "khó chịu" sense = Nhìn/taintFeelDiv, mưu kế × matInspect / matSearch on the inspect / search trace */,
  j92:{rbWdRemark:30},
  jact:{odO:35},
  jeitem:{rbEitReWk:100},
@@ -927,7 +972,7 @@ Object.assign(BAL,{odb:{
  jpet:{rbGo:100},
  jroute:{odRtSeeO:80,odO:62,odO_2:55,odO_3:55,odO_4:55,odO_5:42,odO_6:85,odO_7:50,odO_8:35,odO_9:22,odO_10:14,odO_11:38,odOA:30,odO_12:35,odOT:55,odOB:45,odOM:40,odO_13:45,odO_14:50,odO_15:30,odOV:45,odOR:38,odRtMgO:62},
  jts:{rbSmart:40},
- jtsb:{odOr:30,odTd:38,odTc:34,odTsbMockO:44}
+ jtsb:{odOr:30,odTd:38,odTc:34,odTsbMockO:44,leakO:35 /* Thu làm tai mắt: the turned servant also sells HER news (side chance) */}
 }});
 /* ---- review/mg-skip-all (owner 18/11 ~05:45Z + ~05:55Z): the ONE quick option of every mini-game ("Để trời định" / "Học nhanh" / "Điểm trang nhanh" …) ----
    od  = the odds base of the quick roll, read by every game through kitQuickRoll() (KIT §13.6); replaces BAL.odb.j5.odInnerHTML + BAL.odb.j83.odPts (35 → 40).
@@ -939,3 +984,9 @@ Object.assign(BAL,{skip:{od:40,raw:5,care:.5}});
 /* FACE REVEAL motion (owner 18/11 ~06:20Z, KIT §79 jreveal.js): ms = the grey veil clears from the face outward; lite = Gọn / reduced motion short fade;
    win = how long after a face is learned every place that first draws it (frame, avatar, stage figure) still plays its one reveal */
 Object.assign(BAL,{faceReveal:{ms:Math.round(1000*BAL.pace),lite:350,win:8000}});
+/* BOOK FIGURE (owner 18/11 ~07:10Z + ~07:20Z, KIT §56.3): ONE body size for everybody = SKULL TOP to FEET = figure column width / bookFigW (her p.5 shot: Fold col 220 -> 641, iPad col 183 -> 534). Layout = live; nothing cut, nobody shrunk, the text is drawn on top.
+   cRef = the tallest Hoàng hậu crown above the skull top / body (catalog scan 18/11: thaihau-h3-a36 .072); gap = px the crown keeps under the running-head rule; footGap = px the feet keep above the page's bottom line when the feet line is moved down for her crown. */
+BAL.bookFigW=.343;Object.assign(BAL,{bookFrame:{cRef:.072,gap:8,footGap:10}});
+/* DOING AN ACT ON THE SPOT (review/shown-odds-one-path): "Cài đồ vào rương nàng" done in her own palace is easier than sending
+   someone by actHere.plant (was a typed -15 pen in j8 plantpick + a typed +15 on the j2 chest card); both read it through actCtx (j9). */
+Object.assign(BAL,{actHere:{plant:15}});

@@ -100,7 +100,7 @@ function f14Shared(E){const c=S.st.ch;const ids=arcIds67("*").filter(id=>!c.used
  /* a chapter with tutorial quests (jtq14): really done = milestone AND every quest; the time step is the only "t" step */
  const real=m.q14&&typeof tq14Real==="function"?tq14Real(m,st):st.filter(x=>!x[2]).some(x=>x[1]),late=st.some(x=>x[2]==="t"&&x[1]);if(real||!late)return m0.apply(this,arguments);
  c.past.push({ms:m.id,t:d.t(),tag:"Lỡ dịp",k:0,n:c.n,late:1});log(`<b>Chương ${c.n} «${d.t()}» tự khép.</b> Hết hạn mà việc chưa thành: không có phần thưởng.`);
- card67("result",`Chương ${c.n} khép lại`,[["Kết cục","Lỡ dịp"],["Sự việc","Hết hạn mà việc của chương chưa thành, truyện đi tiếp."],["Phần thưởng","không có: phần thưởng chỉ đến khi tự tay làm xong việc của chương","r"],["Về sau","Đường lên ngôi Hoàng hậu vẫn còn mở"]],pMe(),d.t());
+ card67("result",`Chương ${c.n} khép lại`,[["Kết quả","Lỡ dịp"],["Sự việc","Hết hạn mà việc của chương chưa thành, truyện đi tiếp."],["Phần thưởng","không có: phần thưởng chỉ đến khi tự tay làm xong việc của chương","r"],["Về sau","Đường lên ngôi Hoàng hậu vẫn còn mở"]],pMe(),d.t());
  S.st.ms=null;chAdvance67(null);syncMain67()}})();
 /* palace entry from a home road (jkc kcEnter, also the co-op friend who waited at home): the running tutorial chapter starts now, from her real
    entry rank, with its full time (fix r1 item 1) */
@@ -171,7 +171,7 @@ function f14Parts(A){const P=[];if(!f14())return P;const C=BAL.st14.ctx;try{cons
  if(tm)P.push([tm,tm>0?"Tâm cơ của ta đủ sâu":"Tâm cơ của ta còn non"]);if(du)P.push([du,du>0?"Đức của ta được người kính":"Đức của ta còn mỏng"]);
  const foes=liveRivals(true).filter(x=>(oan(x,S)||0)>=C.foeOan).length;if(foes)P.push([-Math.min(C.foeCap,foes),`${f14Nv(foes)} người trong cung oán ta, đang dõi theo`])}catch(e){}return P}
 function f14Ctx(A){if(!f14())return 0;const C=BAL.st14.ctx;return cl(f14Parts(A).reduce((s,x)=>s+x[0],0),-C.cap,C.cap)}
-(function(){const o0=oOf67;oOf67=function(A,o,b){const x=o0.apply(this,arguments);if(!f14()||o.o==null||x>=100)return x;const O=BAL.st14.odds;return cl(Math.round(x+f14Ctx(A)),O[0],O[1])}})();
+(function(){const o0=oOf67;oOf67=function(A,o,b){const x=o0.apply(this,arguments);if(!f14()||o.o==null||x>=100)return x;return oddsCl(Math.round(x+f14Ctx(A)))}/* ODDS CAP: the one cap BAL.odds (was its own copy BAL.st14.odds) */})();
 window.f14Ctx=f14Ctx;
 /* OD:L1253 for endings no roll decides: an option whose ending is the same whether it succeeds or fails (sure, or o.e one key), or a chapter that
    ends on the tally of Lợi thế (scEnd67) after such an option. The ending still reads this life's context: c = f14Ctx + (Lợi thế − 1) × shift.sc
@@ -194,5 +194,5 @@ function f14Why(A,worse){const P=f14Parts(A).filter(x=>worse?x[0]<0:x[0]>0).sort
  const E=ARC67[A.a].E,k0=E[k]?k:Object.keys(E)[0],k1=f14Shift(A,k0);if(k1===k0)return e0.call(this,A,k0,ign);
  const worse=({win:"mid",mid:"lose"})[k0]===k1;const why=f14Why(A,worse);
  const row=["Xoay chiều",`Tưởng đã định «${fill67(E[k0].tag,A)}», nay thành «${fill67(E[k1].tag,A)}»: ${why}.`,worse?"r":"g"];A.turn14=[k0,k1];
- const c0=card67;card67=function(kind,t,rows,...more){if(kind==="result"&&Array.isArray(rows)){rows=rows.slice();const j=rows.findIndex(x=>x&&x[0]==="Kết cục");rows.splice(j+1,0,row);card67=c0}return c0.call(this,kind,t,rows,...more)};
+ const c0=card67;card67=function(kind,t,rows,...more){if(kind==="result"&&Array.isArray(rows)){rows=rows.slice();const j=rows.findIndex(x=>x&&(x[0]==="Kết quả"||x[0]==="Kết cục"));rows.splice(j+1,0,row);card67=c0}return c0.call(this,kind,t,rows,...more)};
  try{return e0.call(this,A,k1,ign)}finally{card67=c0;try{log(`<span class="${worse?"r":"g"}">Kết cục xoay chiều: ${why}.</span>`)}catch(e){}}}})();

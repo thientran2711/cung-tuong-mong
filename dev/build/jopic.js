@@ -276,6 +276,10 @@ ${O}>.kobang{position:absolute;top:5px;right:6px;width:22px;height:22px;border-r
 ${O}>.kobang.kobred{color:#b3301f;border-color:#b3301f}
 ${O}>.kobang::after{content:"";position:absolute;inset:-9px}`;
  st.textContent=mk("html body #modal#modal button.ka.kart.kopt.kopt")+"\n"+mk("html body .kitpg-opts>button.ka.kart.kopt.kopt")+`
+/* KIT §6.2c IPAD TWO COLUMNS (owner 18/11 ~09:20Z, try): on the spread (html.kv2) the option cards of a frame sit in TWO columns when there are 2 or more; only when the right column is >= 560 px (container query; narrower frames keep ONE column); card = the same 66x88 form, text column ~190 px, titles and Được chips wrap (never cut) */
+html.kv2 body #modal#modal .dlg.kszlive .k3right{container-type:inline-size}
+@container (min-width:560px){html.kv2 body #modal#modal .dlg.kszlive #mb .opts.opts.opts.k3btns.k3btns:has(>button.kopt~button.kopt){grid-template-columns:repeat(2,minmax(0,1fr))!important}
+html.kv2 body #modal#modal .dlg.kszlive #mb .opts.opts.opts.k3btns.k3btns:has(>button.kopt~button.kopt)>button.kopt{grid-column:auto!important}}
 #kpinfo{position:fixed;inset:0;z-index:100001;background:#1a0f08cc;display:grid;place-items:center;cursor:zoom-out;padding:16px}
 #kpinfo[hidden]{display:none!important}
 #kpinfo>button.kopinfo{width:min(560px,92vw);max-height:calc(86*var(--kvh,1vh));overflow:auto;text-align:left;cursor:zoom-out;opacity:1!important;pointer-events:none;background:#fffaf0!important;color:var(--ink,#2a1a12)!important;filter:none!important}`;document.head.appendChild(st)})();
@@ -289,6 +293,9 @@ try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§6.2b",title:"Th�
  `<div class="opts kitpg-opts">`+
  [["Tiếp","thân +3"],["Xin về tảo mộ tổ tiên",`tốn: Sức -${BAL.kitpage.demo.tomb.suc} · được: Đức +${BAL.kitpage.demo.tomb.duc}, cha mẹ vui lòng · ghi chú: chơi 6 phần ra Khá`],["Thôi, không làm gì","ghi chú: để lần sau"]]
   .map(([n,x],i)=>`<button class="opt" data-ksample="${i}">${n}<small>${typeof kitParse==="function"?kitParse(x):x}</small></button>`).join("")+`</div>`})}catch(e){}
+/* kit sample page (§6.2c): the dialog group rule, described (the real frames are the modals themselves) */
+try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§6.2c",title:"Khung hội thoại: điện thoại = khung cao đúng tỷ lệ màn hình; iPad = hai cột thẻ",html:()=>
+ `<div class="kpnote">Điện thoại dọc: mọi khung hội thoại giữa màn hình kéo cao cả trên lẫn dưới, tỷ lệ bằng màn hình. iPad: khi đủ chỗ, thẻ lựa chọn chia hai cột.</div>`})}catch(e){}
 /* kit sample page (§6.3, review/pcard-actrow): the acts of a person card = the same long row, one per line (pop-up / tab / any width) */
 try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§6.3",title:"Việc trên thẻ người: hàng dài, mỗi việc một dòng",html:()=>
  `<div class="pc"><div class="pcr"><div class="pcb">`+

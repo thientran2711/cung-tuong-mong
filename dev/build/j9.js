@@ -34,14 +34,25 @@ function npcEncounters(){const by={};for(const v of liveRivals(true)){const k=S.
 
 /* sending someone instead of going: same act, lower odds, the servant may be caught and confess */
 let ACTX={a:null,pen:0};
-function runAct(a,t,k,extra){const A2=ACT[k];if(!A2)return"";const sent=!together(a,t)&&!["accuse","vp","xx","gift","steal","road","takeaway"].includes(k);const where=together(a,t)?placeName(whereOf(a)):"";
+/* ONE act context (review/shown-odds-one-path, ORDER ROOT-52 18/11): the roll (runAct) and EVERY screen that prints an act's odds
+   build the same ACTX here — sent-servant penalty (pen), her lá số on the act's domain (lotB via dom), fresh spy knowledge of the
+   target (spyKnowB via t) — so the word on the card is the odds the roll uses (shown == rolled; dev/test/shown-odds.test.js).
+   x = an extra part of one way of doing the act (e.g. plant "tại cung nàng": x.pen, x.here = done in person, no sent-servant pen), the same object on both sides. */
+const ACT_NOSEND=["accuse","vp","xx","gift","steal","road","takeaway"];
+function actCtx(a,t,k,sv,x){const sent=!(x&&x.here)&&!together(a,t)&&!ACT_NOSEND.includes(k);/* x.here: she does it herself on the spot (no servant sent) */if(sent&&sv===undefined)sv=bestSent(a);
+ const K0=ACTK;ACTK=k;let pen=0;try{pen=sent?sentPen(sv)-(sv?srk(sv)*3:0):0}finally{ACTK=K0}
+ return{a,t,pen:pen+((x&&x.pen)||0),dom:ACTDOM[k]}}
+/* the odds an act's own roll will use, for display: ACT[k].o evaluated inside actCtx (then the one odds cap oddsCl) */
+function actOdds(a,t,k,x){const A2=ACT[k];if(!A2||typeof A2.o!=="function")return null;const X0=ACTX,K0=ACTK;ACTK=k;ACTX=actCtx(a,t,k,undefined,x);
+ try{const o=A2.o(a,t);return o==null||o>=100?o:oddsCl(Math.round(o))}finally{ACTX=X0;ACTK=K0}}
+function runAct(a,t,k,extra){const A2=ACT[k];if(!A2)return"";const sent=!together(a,t)&&!ACT_NOSEND.includes(k);const where=together(a,t)?placeName(whereOf(a)):"";
  if(sameHouse(a,t)&&k!=="accuse")return a===S?"Người cùng cung, ngươi không thể ra tay hay lấy lòng. ":"";
- const sv=sent?bestSent(a):null;ACTX={a,t,pen:sent?sentPen(sv)-(sv?srk(sv)*3:0):0,dom:ACTDOM[k]};let r="";try{r=A2.f(a,t,extra)}finally{ACTX={a:null,pen:0}}
+ const sv=sent?bestSent(a):null;ACTX=actCtx(a,t,k,sv);let r="";try{r=A2.f(a,t,extra)}finally{ACTX={a:null,pen:0}}
  const harm=!["ally","gift","spy"].includes(k);
  if(sent&&sv&&!/bị lộ|bị bắt|phát giác|chặn kịp|từ chối/.test(r))servMerit(sv,2);if(sent&&harm&&roll(confessRisk(sv))){const n=evA(t,a,BAL.eff.j9.evN);r+=`${sv?sv.name:"Kẻ"} được ${NM(a)} sai đi bị bắt, khai ra chủ${n?`: ${NM(t)} nắm thêm ${balAb(BAL.eff.j9.evN)} chứng cứ`:""}. `+servCaught(a,sv)}
  if(sent&&sv)r=r.replace(/\(sai người đi\)/,"");
  return r?(r.trim()+(sent?` (sai ${sv?sv.name:"người"} đi)`:where?` (tại ${where})`:"")+" "):""}
-function odA(a,b){return cl(Math.round(b+(a.suc<30?-15:0)-(ACTX.a===a?ACTX.pen:0)+(ACTX.a===a?lotB(a,ACTX.dom):0)+(ACTX.a===a&&ACTX.t&&typeof spyKnowB==="function"?spyKnowB(a,ACTX.t):0)),5,95)}
+function odA(a,b){return oddsCl(Math.round(b+(a.suc<BAL.odds.weak.suc?-BAL.odds.weak.pen:0)-(ACTX.a===a?ACTX.pen:0)+(ACTX.a===a?lotB(a,ACTX.dom):0)+(ACTX.a===a&&ACTX.t&&typeof spyKnowB==="function"?spyKnowB(a,ACTX.t):0)))}
 
 /* the talk system: topics, by traits and bars; the same chat repeated in a month gives less */
 function chatF(v){S.chat=S.chat||{};const n=S.chat[v.id]||0;return 1/(1+n)}
@@ -52,20 +63,20 @@ function topicOpts(v){const f=chatF(v),g=n=>Math.max(1,Math.round(n*f)),third=li
  const same=sameHouse(S,v);
  const TK=BAL.talk;A.push({n:"Hỏi han sức khỏe",o:100,x:`nàng quý ngươi +${g(TK.health)}`,run:()=>{affAdd(v,S,g(TK.health));chatMark(v);return `${v.name} cảm động. Nàng quý ngươi +${g(TK.health)}.`}});
  const praise=nv(v,"praise");A.push({n:"Khen tài nghệ nàng",o:talkPraiseO(S),x:`nàng quý ngươi +${g(praise)}`,run:()=>{chatMark(v);if(roll(talkPraiseO(S))){affAdd(v,S,g(praise));return `${v.name} tươi cười. Nàng quý ngươi +${g(praise)}.`}affAdd(v,S,-TK.praiseFail);return `${v.name} cho là ngươi giả lả. Nàng quý ngươi -${TK.praiseFail}.`}});
- if(third)A.push({n:`Bàn tán về ${third.name}`,o:100,x:aff(v,third)<0?`nàng ghét người này, hợp chuyện: nàng quý ngươi +${g(TK.gossip.hit)}`:`kèm: nàng quý ngươi -${TK.gossip.miss} · nàng có thể mách lại`,run:()=>{chatMark(v);if(aff(v,third)<0){affAdd(v,S,g(TK.gossip.hit));oanAdd(v,third,TK.gossip.oan);return `Hai người to nhỏ chuyện ${third.name}. Nàng quý ngươi +${g(TK.gossip.hit)}.`}affAdd(v,S,-TK.gossip.miss);if(roll(TK.gossip.tell)){oanAdd(third,S,TK.gossip.tellOan);return `${v.name} đem lời ngươi kể lại với ${third.name}. ${third.name} oán ngươi +${TK.gossip.tellOan}.`}return `${v.name} lảng sang chuyện khác. Nàng quý ngươi -${TK.gossip.miss}.`}});
- A.push({n:"Chia sẻ bí mật",o:100,x:`nàng quý ngươi +${g(TK.secret)}${v.malice>50?" · nàng có thể nắm thóp ngươi":""}`,run:()=>{chatMark(v);affAdd(v,S,g(TK.secret));if(v.malice>50&&roll(50)){evA(v,S,BAL.eff.j9.evRun);return `${v.name} lắng nghe chăm chú, ghi nhớ từng lời. Nàng quý ngươi +${g(TK.secret)}.`}return `${v.name} cũng kể chuyện riêng. Nàng quý ngươi +${g(TK.secret)}.`}});
- A.push({n:"Nhờ giúp đỡ",o:100,x:aff(v,S)>=30?"nàng thân với ngươi":`nàng chưa đủ quý ngươi (cần ${BAL.bacFee.lendAff}): nàng quý ngươi ${balSg(BAL.eff.j9.run_5)}`,run:()=>{chatMark(v);if(aff(v,S)>=BAL.bacFee.lendAff){if(roll(50)&&v.bac>=BAL.bacFee.lend){ap(v,{bac:-BAL.bacFee.lend});apply({bac:BAL.bacFee.lend});return `${v.name} cho ngươi mượn ${BAL.bacFee.lend} lượng.`}const x=evGuilty(S,liveRivals(true).filter(y=>y!==v));if(x&&evA(S,x,BAL.eff.j9.evRun_2))return `${v.name} kể cho ngươi một chuyện về ${x.name}: chứng cứ ${balSg(BAL.eff.j9.evRun_2)}.`;}affAdd(v,S,BAL.eff.j9.run_5);return `${v.name} khéo từ chối. Nàng quý ngươi ${balSg(BAL.eff.j9.run_5)}.`}});
+ if(third)A.push({n:`Bàn tán về ${third.name}`,o:100,inner:1,x:aff(v,third)<0?`nàng ghét người này, hợp chuyện: nàng quý ngươi +${g(TK.gossip.hit)}`:`kèm: nàng quý ngươi -${TK.gossip.miss} · nàng có thể mách lại`,run:()=>{chatMark(v);if(aff(v,third)<0){affAdd(v,S,g(TK.gossip.hit));oanAdd(v,third,TK.gossip.oan);return `Hai người to nhỏ chuyện ${third.name}. Nàng quý ngươi +${g(TK.gossip.hit)}.`}affAdd(v,S,-TK.gossip.miss);if(roll(TK.gossip.tell)){oanAdd(third,S,TK.gossip.tellOan);return `${v.name} đem lời ngươi kể lại với ${third.name}. ${third.name} oán ngươi +${TK.gossip.tellOan}.`}return `${v.name} lảng sang chuyện khác. Nàng quý ngươi -${TK.gossip.miss}.`}});
+ A.push({n:"Chia sẻ bí mật",o:100,inner:1,x:`nàng quý ngươi +${g(TK.secret)}${v.malice>50?" · nàng có thể nắm thóp ngươi":""}`,run:()=>{chatMark(v);affAdd(v,S,g(TK.secret));if(v.malice>50&&roll(50)){evA(v,S,BAL.eff.j9.evRun);return `${v.name} lắng nghe chăm chú, ghi nhớ từng lời. Nàng quý ngươi +${g(TK.secret)}.`}return `${v.name} cũng kể chuyện riêng. Nàng quý ngươi +${g(TK.secret)}.`}});
+ A.push({n:"Nhờ giúp đỡ",o:100,inner:1,x:aff(v,S)>=30?"nàng thân với ngươi":`nàng chưa đủ quý ngươi (cần ${BAL.bacFee.lendAff}): nàng quý ngươi ${balSg(BAL.eff.j9.run_5)}`,run:()=>{chatMark(v);if(aff(v,S)>=BAL.bacFee.lendAff){if(roll(50)&&v.bac>=BAL.bacFee.lend){ap(v,{bac:-BAL.bacFee.lend});apply({bac:BAL.bacFee.lend});return `${v.name} cho ngươi mượn ${BAL.bacFee.lend} lượng.`}const x=evGuilty(S,liveRivals(true).filter(y=>y!==v));if(x&&evA(S,x,BAL.eff.j9.evRun_2))return `${v.name} kể cho ngươi một chuyện về ${x.name}: chứng cứ ${balSg(BAL.eff.j9.evRun_2)}.`;}affAdd(v,S,BAL.eff.j9.run_5);return `${v.name} khéo từ chối. Nàng quý ngươi ${balSg(BAL.eff.j9.run_5)}.`}});
  const foe=liveRivals(true).filter(x=>x!==v&&oan(x,v)>=TK.warn.foe)[0];
  A.push({n:"Cảnh báo nàng",o:100,x:foe?`có kẻ đang oán nàng: nàng quý ngươi +${g(TK.warn.hit)}`:`không có căn cứ: nàng quý ngươi -${TK.warn.miss}`,run:()=>{chatMark(v);if(foe){affAdd(v,S,g(TK.warn.hit));oanAdd(v,foe,TK.warn.oan);return `Ngươi nhắc ${v.name} coi chừng ${foe.name}. Nàng quý ngươi +${g(TK.warn.hit)}.`}affAdd(v,S,-TK.warn.miss);return `${v.name} nghi ngươi gây chia rẽ. Nàng quý ngươi -${TK.warn.miss}.`}});
  if(oan(v,S)>0){A.push({n:"Tạ lỗi",o:100,c:{danh:-1},x:`oán ${balSg(BAL.eff.j9.run_8)}`,run:()=>{oanAdd(v,S,BAL.eff.j9.run_8);chatMark(v);return `Ngươi hạ mình tạ lỗi. ${v.name} oán ${balSg(BAL.eff.j9.run_8)}.`}});
   A.push({n:"Nhún nhường",o:100,c:{danh:-2},x:`oán ${balSg(BAL.eff.j9.run_9)} · nàng quý ngươi ${balSg(BAL.eff.j9.run_10)}`,run:()=>{oanAdd(v,S,BAL.eff.j9.run_9);affAdd(v,S,BAL.eff.j9.run_10);chatMark(v);return `Ngươi nhún nhường trước ${v.name}. Oán ${balSg(BAL.eff.j9.run_9)}, nàng quý ngươi ${balSg(BAL.eff.j9.run_10)}.`}})}
  A.push({n:"Giúp đỡ nàng",c:{bac:-20},o:100,x:`nàng quý ngươi ${balSg(BAL.eff.j9.run_11)} · oán ${balSg(BAL.eff.j9.run_12)}`,run:()=>{relAdd(S,v,BAL.eff.j9.run_11);oanAdd(v,S,BAL.eff.j9.run_12);chatMark(v);return `Ngươi giúp ${v.name} việc khó. Nàng quý ngươi ${balSg(BAL.eff.j9.run_11)}.`}});
- if(same)return A.filter(a=>["Hỏi han sức khỏe","Bàn tán về "+(third?third.name:""),"Tạ lỗi","Nhún nhường"].includes(a.n)).concat([{n:"Cùng cung",o:100,lock:true,t:"không thể lấy lòng hay ra tay",x:""}]);
+ if(same)return A.filter(a=>["Hỏi han sức khỏe","Bàn tán về "+(third?third.name:""),"Tạ lỗi","Nhún nhường"].includes(a.n)).concat([{n:"Cùng cung",o:100,fix:1,lock:true,t:"không thể lấy lòng hay ra tay",x:""}]);
  return A}
 /* harms that need the place: food served, the lotus pond, her palace while she is away, overhearing */
 const FOOD=["kn","tn","home","dtd"];
 function placeHarms(v,k){const H=[];if(sameHouse(S,v))return H;
- const act=(key2,n,x)=>{const a=ACT[key2];if(a&&a.ok(S,v))H.push({n,o:a.o?a.o(S,v):100,act:1,x:[a.x||"",fmt(a.c)].filter(Boolean).join(" · "),run:()=>runAct(S,v,key2)})};
+ const act=(key2,n,x)=>{const a=ACT[key2];if(a&&a.ok(S,v))H.push({n,o:a.o?actOdds(S,v,key2):100,act:1,x:[a.x||"",fmt(a.c)].filter(Boolean).join(" · "),run:()=>runAct(S,v,key2)})};
  act("spy","Dò la");act("rumor","Tung tin đồn");
  if(FOOD.includes(k)||k[0]==="r"){act("poison","Bỏ độc vào trà nàng");act("musk","Bỏ xạ hương vào thuốc nàng")}
  if(k==="vuon"){H.push({n:"Đẩy nàng xuống hồ sen",o:odA(S,40+S.tamco/4),act:1,x:"Đức -12 · lộ: bị phạt",run:()=>pushPond(S,v)});act("pond","Đẩy con nàng xuống hồ")}

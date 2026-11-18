@@ -395,8 +395,10 @@ try{const oh=optHTML;optHTML=function(){const h=oh.apply(this,arguments);
 
 /* ---------- ☰ menu: "Xem lại lời dặn" (only with a kiếp in play) ---------- */
 function addReplay(){const m=document.querySelector("#modal.kpthome .kpmenu");if(!m||m.querySelector(".ktutb"))return;
- const cont=m.querySelector('[data-tgo="cont"]');if(!cont||typeof S==="undefined"||!S||S.dead||botOff())return;
+ const cont=m.querySelector('[data-tgo="slots"]');/* the home menu (j74 homeMenu): Tiếp tục / Bắt đầu is data-tgo="slots" */if(!cont||typeof S==="undefined"||!S||S.dead||botOff())return;
  const b=document.createElement("button");b.type="button";b.className="kbtn alt ktutb";b.dataset.ktutReplay="1";b.innerHTML=`Xem lại lời dặn<small>${MMN()} chỉ lối</small>`;m.appendChild(b)}
+/* a full-width row under the other home buttons (same rule as the co-op button, jcooplobby .kco) */
+try{const st=document.createElement("style");st.textContent=".kpmenu .kbtn.ktutb{grid-column:1/-1}";document.head.appendChild(st)}catch(e){}
 new MutationObserver(addReplay).observe(document.getElementById("modal"),{childList:true,subtree:true});
 document.getElementById("modal").addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-ktut-replay]");if(!b)return;e.stopPropagation();e.preventDefault();
  try{if(typeof sfx==="function")sfx("sfx-tap")}catch(x){}

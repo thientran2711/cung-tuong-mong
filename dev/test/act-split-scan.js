@@ -24,5 +24,5 @@ const [,,URL]=process.argv;
  console.log('| festival | place (after) | festival dialogs on the day before → after (+ at the place) | j71 variants | duplicate acts before → after (sum over variants) | duplicated acts (before) |');
  console.log('|---|---|---|---|---|---|');let da=0;
  for(const r of R){da+=r.dupA;console.log(`| ${r.name} | ${r.place?PLN(r.place):"—"} | ${r.dlgB} → ${r.dlgA}${r.atPlace?" (+1 when she goes)":""} | ${r.variants} | ${r.dupB} → ${r.dupA} | ${r.ex||"—"} |`)}
- function PLN(k){return {thu:"Cần Chính điện",vuon:"Ngự hoa viên",tn:"Đức Thọ cung",cnh:"Dãy nhà cung nhân"}[k]||k}
+ function PLN(k){return {thu:"Cần Chính điện",vuon:"Ngự hoa viên",tn:"Đức Thọ cung",cnh:"Tích Cần viện"}[k]||k}
  console.log('DUP_AFTER',da,'errs',perr.length,perr.slice(0,3));await b.close()})().catch(e=>{console.error(e);process.exit(2)});

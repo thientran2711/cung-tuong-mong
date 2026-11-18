@@ -64,11 +64,11 @@ function j95cDedupe(){let n=0;try{const seen=new Set([S&&S.maid&&S.maid.name].co
 })();
 function j95cVisitFix(){if(!S||S.dead||(typeof isSrv==="function"&&isSrv()))return false;if(S.out&&S.place!=="lc"){coldVisit();return true}if(S.mg)return false;
  if(S.visit&&S.visit.k!==S.place&&S.place==="home"){S.visit={k:"home",people:homePeople(),talked:false,tk:{}};return true}return false}
-/* jpal keeps a resident whose head is still valid even when the house is over its 3 side halls (a girl of the tuyển tú or a promotion
-   placed there before palFix ran): the newest extras leave so palFix finds them another house (the cap the owner set, ≤3) */
+/* jpal keeps a resident whose head is still valid even when the house is over its side-hall cap (a girl of the tuyển tú or a promotion
+   placed there before palFix ran): the newest extras leave so palFix finds them another house (the cap the owner set: BAL.res, resCap) */
 function j95cCap(){const live=p=>p===S?!!S&&!S.out&&!S.dead:!!p&&p.alive&&!p.out;let n=0;
  for(const h of [S].concat(rivals)){if(!live(h))continue;const k=key(h);const L=rivals.filter(y=>y!==h&&live(y)&&y.resHead===k&&!(rkOf(y)>=3&&y.pal!=null));const me=S!==h&&live(S)&&S.resHead===k&&!(rkOf(S)>=3&&S.pal!=null)?1:0;
-  const over=L.length+me-3;if(over>0)for(const y of L.slice(-over)){y.resHead=null;n++}}
+  const over=L.length+me-resCap();if(over>0)for(const y of L.slice(-over)){y.resHead=null;n++}}
  if(n)J95C.stat.cap=(J95C.stat.cap||0)+n;return n}
 /* a turn-of-buổi act placed at the start of the buổi, then overtaken before the news was read (she is confined / banished right
    after): the news line is withdrawn so nothing on screen says she is where the record no longer has her */
