@@ -1,0 +1,51 @@
+# coop-thin F2 — HER PLACES / goTo / VISITS AS INTENTS (on the F1 wrapper TH.F.reg) — STEP 0 (report first, before code)
+
+PRIORITY #1 CHECK ('goTo|visitPal|goSee|walkGo|walkSpill|accEtq|accSneak|accAsk|talk|srvGoTo|kcGo|TH.F.reg|sendPos'): OD 0 new (thin guest 17/11 ~01:40Z / ~02:05Z / ~02:15Z + L1487/L1489/L1493/L1494 via the brief) | ledger 0 | main 53544bd8: F1 LIVE (jcoopthinf.js TH.F.reg, runAct only), E LIVE (her buổi step on the host re-enters her place: j9 nextBuoi → goTo in context b), no goTo/visit registration | review/* none for F2 (git ls-remote review/coop-thin-f*: f1, f1-r1 only) | claims: CLAIMS row 'coop-thin F2' (this worker).
+
+Worker session_01N1tNP3eu44fWyHnBJfJHuj (opus), coordinator FOREMAN B ROOT-2 session_01N1tNP3G5N78YfJ9phcb2nc. depth 3 (get_session lineage.depth). START_CTX ≈ 3 % of 1M (used_tokens reads 0; estimate) → rollover at ≈ 28 %, ceiling 60 %.
+Branch review/coop-thin-f2 from origin/main 53544bd8. Worktree /home/user/wt/f2 (sparse, hooks).
+
+## 0a. Every place / goTo / visit entry point the guest runs today (main 53544bd8) and which part moves it
+The walk engine is `goTo(k)` (j2.js:123) wrapped by 30 modules (j21 j22 j27 j38 j41 j42 j70 j76 j77×2 j95 jact jcoopworld jdress jht jk3 jkc jkh jmen jplfs jplx jpm jroute jshelf jstaff jty×2 jworld2); jcoopthinf loads last, so a registration there is the OUTERMOST layer (every inner wrapper = the walk's own effects, run once on the host). Today on the guest every walk RUNS ON HER PHONE (at L5 inside no world frame: S.place / S.visit / spend / arrival rolls / NPC rows on her phone; the host learns her place only from the `pos` relay).
+
+| # | entry (guest tap / caller) | file:line | engine it ends in | part |
+|---|---|---|---|---|
+| 1 | Dư đồ map / list tap (j77Tap → j77Go / walkSpillGo / j77Card), courtyard halls (jpm kpmEnter → j77Tap) | j77.js:84-92, jpm.js:96 | `goTo(k)` | **F2** (goTo) — j77Tap / kpmEnter stay routers on her phone (read-only checks, S.hall = her person, rides in the intent's diff) |
+| 2 | generic `data-go` buttons (walkGo) | j6.js:90, j9.js:141 | goTo / walkSpillGo | **F2** (goTo); walkGo = router (local) |
+| 3 | walk spill (walk longer than the khắc left: pay now, buổi turns, arrive next buổi) | j9.js:133-152 walkSpillGo / walkSpillTick | spend (her khắc clock) + nextBuoi (= E `ready`) + later `goTo(W.k)` | her clock + E stay; the arrival `goTo` = **F2** (ctx carries `__walkSpill` so travel() returns the rest of the walk on the host) |
+| 4 | "Đến cung nàng thăm" (person card visit) | j21.js:71 visitPal (+ j77:184, jres:109 wrappers) | `visitPal(id)` → goTo + popIdx / gatekeeper line | **F2** (visitPal) |
+| 5 | "Đến gặp …" / "Theo đến" (follow) | j21.js:49 goSee (+ j77:188 wrapper), j21:53 handlers | `goSee(id)` → goTo + open card | **F2** (goSee) |
+| 6 | the greeting gate (bái kiến chủ vị): card built by accEtqCard; its choices run accEtqGo(k,h,greet,then) | j77.js:157-178 | `accEtqGo` (spend, relAdd on the NPC = world rows, log, k61Meet, then()) | **F2** (accEtqGo; `then` = goTo / visitPal / goSee travels as data: tag on the closure) |
+| 7 | the access gate (Xin yết kiến / bái kiến, Lẻn vào): j41 card + map list buttons | j41.js:47-55 accAsk / accSneak, j41:64 gate | `accAsk(k)`, `accSneak(k)` (rolls, spend, punish, Q card, goTo) | **F2** |
+| 8 | talk to the person at the place (pop-up options: Tâng bốc, Thỉnh an, Tạ lỗi, Nhún nhường, Khiêu khích, place harms pushPond / trip, Nghe lén, Lục rương …) | j2.js:176 talk(oi), j6.js:94 | `talk(oi)` (spend, rolls, runOpt / a.run, popMsg) | **F2** (talk; F1 step 0 row 12 assigned it here). An option that opens a picker (Tặng quà giftpick, plantpick) becomes a part-D pid card on the host; the pick itself = F3 |
+| 9 | "Sai tai mắt dò nơi ở" (scout) | j21.js:57 | `scout(id)` (roll, seeLoc) | **F2** |
+| 10 | "Mời sang cung" (invite) | j21.js:60 | `invite(id)` (spend, S.invite; lands in placeWhere on the host) | **F2** (no world write, but it is a visit; registered so one engine runs it) |
+| 11 | cung-nữ roads (maid seat): srvGoTo direct (j42 SRVA follow / errand cards) | j42.js:149, :208, :222 | `srvGoTo(k)` | **F2** (through goTo when called by goTo; registered for the direct calls) |
+| 12 | khuê các roads (before entering the palace) | jkc.js:192, :626 | `kcGo(k)` | **F2** |
+| 13 | quest / errand walks (j72 q72 tab, jgift kgmgo, j78 Kinh thư tn, jagent "lui về cung", jty trung y card "Vẫn đi") | j72:288/293, jgift:170, j78:200, jagent:265, jty:65 | `goTo` | **F2** (through goTo; jty's flag `__tyGo` rides in ctx) |
+| 14 | the new buổi re-entering her place | j9.js:158 nextBuoi | goTo inside the buổi step | E (host, context b, already) — not a tap |
+| 15 | decision cards before a walk (j41 access card, j77Card place card, j77LastWalk, accEtqCard, jty "Ra ngoài khi mặc trung y?") | j41:66, j77:55/78/157, jty:63 | Q card with closures, no state change | stay LOCAL on her phone (decision UI: read-only, like F1's spend clock); their choices call the registered engines above → intents |
+| 16 | gift / plant pickers, shop at the peddler | j8:470/475, talk peddler | giveTo / plantItem / buy | F3 |
+| 17 | empAct, deck cards (runOpt), lessons / mini-games | j8:464, j3/j80, j2 lesson | — | F6 / F5 |
+
+## 0b. How each registers on TH.F.reg (and the wrapper gaps, proven)
+Level **7** (brief: "C.thin = 7 or the next free level after F1's 6"; `TH.CAP` 6 → 7; Worker THINMAX 9 already). NOTE for B: contract C1 (coop-thin-a.md) said F1–F6 share 6 and G = 7 — with F2 at 7, G/H move up (8/9) or F3–F6 take 8+: B decides; F2 reads its level per registration so it can be renumbered in one line.
+Registrations (jcoopthinf.js, F2 block): `goTo(k)`, `visitPal(id)`, `goSee(id)`, `accEtqGo(k,h,greet,then)`, `accAsk(k)`, `accSneak(k)`, `talk(oi)`, `scout(id)`, `invite(id)`, `srvGoTo(k)`, `kcGo(k)`. Persons travel as ids (the friend = 901 = the host's stand-in in her context); `then` travels as `{f,a}` (one tag set where the closure is made, j77 / F2); place keys travel as strings.
+**mine(args)** = she is on her own turn (gOn) and the call would WALK or ACT now; a call whose first step is a decision card (access gate, greeting gate, trung y card, place card) returns false → it runs on her phone exactly as solo and only shows that card (no world write: checked by the tripwire); the card's choice calls the registered engine → intent.
+**ctx** (her per-phone state the walk reads): `used` (khắc), `__walkSpill`, `__tyGo` / `__j77etq` / `__accSilent` / `__accStay` (call-scoped flags), `tab` / `__fromMap` (j38 / j42 / jkc / jk3 switch to the act tab after a map walk), `popIdx` / `popMsg` (visit opens the person pop-up; talk writes popMsg).
+Wrapper gaps (each proven by the table above; no other wrapper change):
+1. **level per registration** (`R.lv`, default 6): F2 entries are on only at 7.
+2. **ctx back** (`R.back`: names): the walk WRITES state that lives outside S (used, popIdx/popMsg, tab, __fromMap, __walkSpill); the host returns those values after the run and her phone sets them with the answer (F1's ctx only went one way).
+3. **after hook on her phone** (`R.done(args, dr)`, run after her patch is applied): a walk that did not arrive (closed on arrival, curfew, a gate on the host) shows the same place card her phone shows in solo (j77Card) — never before the answer (no 'lost tap', no card while pending).
+4. **pending awareness for "did she arrive?" callers**: j77Tap and walkSpillTick check `S.place!==k` right after goTo and would open the place card at once; while a walk intent is pending that check is answered by hook 3 instead (j77Card is skipped while her walk to k is pending).
+5. **UI side effects of her walk on the host** (contract C3 "UI side effects / timers"): renderStage, resultShow, srvToast, k3ShowPlace / k3Shell, j59lay are added to the ONE no-op list (TH.NOOP, jcoopthin) — her arrival must not repaint the host's stage / open his place page / toast on his phone; callbacks a context-b run schedules with setTimeout run with the same no-op list (accEtqGo's result card at +30 ms, jplfs j59lay at +60 ms). The result card itself reaches her phone through F1's snapshot path (`R.snap`: the wrapper takes the rsnap on her phone when the engine snapshots inside, accEtqGo).
+6. **one source for her place on the host**: at level 7 the host's world `S.where[her entry]` and `CW.fpos` come from her stored person after each walk (her `pos` relay's place is ignored at L7; pos stays for stats/look = part H list). Visits between the two players then read the same S.where in both contexts: host visits her (his own goTo sees her entry where her stored person is), she visits him (her context: keepFriendPos already puts the host's entry at his own place).
+Old guest path deleted for the moved family (behind L7, one switch): local goTo/visit runs on her phone, the walk part of `pos` (host side ignores it), her local arrival rolls (jty rob, j70 plot sighting, jdress / jshelf looks, j95 counts, jmen/jplx people lists) — all unreachable at L7 for her taps; deleted when L7 is the default (part H), same rule as C/E/F1.
+
+## 0c. Latency + pending → arrival (no lost tap, no flicker)
+Same path as F1 (two network legs + the host run): expected ≈ F1's numbers — no throttle ≈ 0.3–0.5 s, 4G profile (LAG 85 ms each way on both phones + host CPU ×4) ≈ 0.8–1 s; measured in Done with coop-thin-f2.js (LATENCY line, ≥ 9 walks).
+Her screen while pending: the tap is held as the intent in the same tick: `F.pend` set, #next locked (existing lockNext words through CW.eWait), act buttons off (can), a second map / person tap ignored (F.stat.busy). Her S.place / S.visit / khắc NEVER change locally (nothing to undo); the answer = ONE view message (dr + her patch: S.place, S.visit, logs; + the ctx back values: khắc, tab, pop-up) → one render on arrival. A walk that did not arrive shows the place card after the answer, as in solo.
+
+## Questions for Foreman B (I go on with the defaults unless told otherwise)
+1. Level 7 for F2 (default, per brief) vs contract C1's 'F shares 6, G = 7'.
+2. Decision cards before a walk stay local (default): moving them would need every closure card turned into a part-D pid card (solo code change across j41/j77/jty) — far bigger, no gain (they change nothing until a choice is tapped, and that choice is an intent).
