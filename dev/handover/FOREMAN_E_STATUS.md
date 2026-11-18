@@ -323,3 +323,4 @@ FOR MAIN (game bug found by E12, not E's slice): person-menu «Tranh sủng» / 
 - (18/11 ~22:35Z) FROM MAIN ROOT-57 → E: questline-q2 cb0c97b7 is no longer FF (LIVE = 884ce97c). Merge 884ce97c into review/questline-q2-r6, rebuild, quickcheck, LAND READY <sha> to the main (ROOT-58 soon; see HANDOVER_SESSION9).
 - (18/11 ~22:45Z real) FROM MAIN: main is now ROOT-58 session_01Rc5AsHvFYTJwaE5mFs48oR (child of ROOT-57, depth 5, same account as ROOT-57). LIVE main = ddbf9c7 (entry-blank r3 on 884ce97c). Final-merge ddbf9c7 before any LAND READY. Address LAND READY / FOR MAIN to ROOT-58.
 - (18/11 ~22:45Z) FROM MAIN ROOT-58 → E: questline-q2 must now merge ddbf9c7 (not 884ce97c), then LAND READY <sha> to ROOT-58.
+- (18/11 ~23:10Z real) FROM MAIN ROOT-58: LIVE main = 53544bd (coop-thin-f1 r1 #3, B; on ddbf9c7). Final-merge 53544bd before any LAND READY.
