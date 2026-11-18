@@ -241,7 +241,7 @@ BAL.staff={retire:[63,68],gift:20,giftAf:10,talk:2,succAge:[46,54],
  /* the Giáo tập ma ma stands in her room while S.turn <= gtDays (new tú nữ only; jstaff gtAtHome) */
  gtDays:4,
  posts:[
-  {id:"gt",title:"Giáo tập ma ma",palace:"Trữ Tú cung",master:"th",tr:"trung",rk:4,age:[50,55],
+  {id:"gt",title:"Giáo tập ma ma",palace:"Nội vụ phủ",master:"th",tr:"trung",rk:4,age:[50,55],
    names:[["Tống Quế Chi","Tống ma ma"],["Lạc Ngọc Dung","Lạc ma ma"],["Ôn Tú Hà","Ôn ma ma"]],
    duties:["dạy tú nữ mới vào cung","giữ lễ nghi, cung quy","coi việc tuyển tú","dặn dò người mới"]},
   {id:"tn",title:"Chưởng sự cô cô",palace:"Đức Thọ cung",master:"th",tr:"lanh",rk:3,age:[44,49],

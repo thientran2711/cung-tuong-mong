@@ -1,6 +1,6 @@
 /* ================= jstaff: NAMED PALACE STAFF (owner 16/11, review/elder-staff) =================
    Five named servants hold the palace's offices, each with 3–4 duties (numbers and names in BAL.staff, jbal.js):
-     gt  Giáo tập ma ma, Trữ Tú cung: sent by Thái hậu, in Thái hậu's household; teaches tú nữ, lễ nghi, tuyển tú; the tutorial guide.
+     gt  Giáo tập ma ma, Nội vụ phủ: sent by Thái hậu, in Thái hậu's household; teaches tú nữ, lễ nghi, tuyển tú; the tutorial guide.
      tn  Chưởng sự cô cô, Đức Thọ cung: Thái hậu's woman; her edicts, cung quy, punishments, Tân Giả khố.
      kn  Quản sự ma ma, Càn Ninh cung: Hoàng hậu's woman (kept in Thái hậu's household while the seat is empty); maid assignments,
          lệ bạc, Thượng cung cục, the monthly palace report.
@@ -93,7 +93,7 @@ window.elderTabRows=function(){try{const T=S&&S.thO&&S.thO.staff||[];return T.ma
 function giaoBtns(st){const p=postOf(st.eid);const t2=typeof whyTime==="function"?whyTime(B().talk||2):"";const g=B().gift||20;
  return [pbtn(`data-elder="bieu" data-eid="${st.eid}"`,"Biếu",`Bạc -${g} · người ấy quý ngươi +${B().giftAf||10}`,S.bac<g?`cần ${g} bạc`:""),
   pbtn(`data-elder="hoi" data-eid="${st.eid}"${capAt({k:B().talk})}`,"Hỏi chuyện",`${capW()} · ${B().talk} khắc · thành: nghe chuyện ${p.palace}`,t2)]}
-function dutyRows(st){const p=postOf(st.eid);const m=ownerOf(st);return[["Chức",`${p.title} ${p.palace}`,"t"],["Chủ",masterName(m)+(p.master==="hh"&&m===S.thO?" (giữ thay Hoàng hậu)":p.id==="gt"?" sai đến Trữ Tú cung":""),"t"],["Việc",p.duties.join(", "),"t"]]}
+function dutyRows(st){const p=postOf(st.eid);const m=ownerOf(st);return[["Chức",`${p.title} ${p.palace}`,"t"],["Chủ",masterName(m)+(p.master==="hh"&&m===S.thO?" (giữ thay Hoàng hậu)":p.id==="gt"?" sai đến Nội vụ phủ":""),"t"],["Việc",p.duties.join(", "),"t"]]}
 window.elderGroups=st=>{try{return st&&st.eid&&postOf(st.eid)?[["Chức việc",dutyRows(st)],["Giao thiệp",giaoBtns(st)]]:[]}catch(e){return[]}};
 /* ---------- the stage: where each one works; her card = the kit pcard ---------- */
 /* ONE rule (stage, record j95, map): the Giáo tập ma ma visits her room in her first days to teach a new tú nữ; a former palace maid
@@ -147,11 +147,11 @@ document.addEventListener("click",e=>{const b=e.target&&e.target.closest&&e.targ
 function tx(s){if(!s||typeof s!=="string"||!S)return s;const tn=elderBy("tn"),gt=elderBy("gt");let o=s;
  if(tn&&!S.thDead){o=o.replace(/Ma ma thân tín của Thái hậu/g,`${tn.call}, người thân tín của Thái hậu,`).replace(/Ma ma bên Đức Thọ cung/g,`${tn.call} bên Đức Thọ cung`)
   .replace(/Ma ma Đức Thọ cung/g,`${tn.call} ở Đức Thọ cung`).replace(/Ma ma của Thái hậu/g,`${tn.call} của Thái hậu`)}
- if(gt)o=o.replace(/[Tt]heo ma ma giáo tập học/g,`Theo ${gt.call}, giáo tập ma ma Trữ Tú cung, học`);
+ if(gt)o=o.replace(/[Tt]heo ma ma giáo tập học/g,`Theo ${gt.call}, giáo tập ma ma Nội vụ phủ, học`);
  return o}
 window.elderTx=tx;
 function eventLines(m){try{if(!m||m.__el||typeof m.h!=="string")return;m.__el=1;m.h=tx(m.h);const gt=elderBy("gt"),tn=elderBy("tn"),kn=elderBy("kn");
- if(m.t==="Tuyển tú"&&gt)m.h+=`<p>${gt.call}, giáo tập ma ma Trữ Tú cung, phụng chỉ Thái hậu dạy quy củ cho tú nữ mới: đi, đứng, quỳ, thưa, từng bước một.</p>`;
+ if(m.t==="Tuyển tú"&&gt)m.h+=`<p>${gt.call}, giáo tập ma ma Nội vụ phủ, phụng chỉ Thái hậu dạy quy củ cho tú nữ mới: đi, đứng, quỳ, thưa, từng bước một.</p>`;
  if(m.t==="Tân Giả khố"&&tn)m.h+=`<p>${tn.call}, chưởng sự cô cô Đức Thọ cung, đọc lệnh phạt: “Cung quy không tha ai. Giặt cho sạch, đủ hạn thì ra.”</p>`;
  if(m.t==="Đổi chủ"&&kn)m.h+=`<p>${kn.call}, quản sự ma ma Càn Ninh cung, ghi tên ngươi vào sổ cung nữ của cung mới.</p>`}catch(e){}}
 if(typeof showModal==="function"){const s0=showModal;showModal=function(){try{if(Q&&Q[0])eventLines(Q[0])}catch(e){}return s0.apply(this,arguments)}}
