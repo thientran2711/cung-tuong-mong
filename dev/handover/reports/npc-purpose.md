@@ -334,3 +334,14 @@ quickcheck --runs 5 paired 421465a1 vs 7301df77: render 215/202 (+6 %), tab 425/
 | quickcheck ×2 vs live b3d2ccc7 (incl. G4 core gates, old save) | PASS · PASS |
 | coop-e2e ×3 | 63/63 · 63/63 · 63/63 |
 NEXT: reviewer PHASE A re-check of 421465a1. On C-AG "LIVE <sha>" (ag-all-2 on main): merge live, rebuild, full gates (incl. long suite), perf vs the new live, SẴN SÀNG KIỂM. Worktrees: /home/user/wt/npcp (branch), ag2 (7301df77), live (b3d2ccc7), diag (scratch bots: eng.js, comfort.js, ea.js).
+
+## PERF AG2 (G1 #5, for C-AG #12 / AG LATER #2 / LANDER #4; no code pushed to ag-all-2-land)
+Where ag-all-2-land 7301df77 spends its extra time per buổi vs live 55db864a. Tool: scratch /home/user/wt/diag/prof.js (engine probe + CDP Profiler, 200 µs sampling, seeded, UI stubbed, 120 buổi × 3 seeds; inclusive ms per buổi under a parent frame) + cnt.js (call counts). Total: 58.1 vs 39.8 and 49.5 vs 41.5 ms/buổi (+19…46 %, noisy by seed path). Stable extra (ms per buổi, ag2 − live):
+| # | where (parent > child) | ms/buổi | calls / 120 buổi | cause | fix idea |
+|---|---|---|---|---|---|
+| 1 | j95planRival > agDayEnsure (→ agReplanB > agDrawPerson 2.4, agDayDraw 1.0) | 3.0–3.4 | agDayEnsure 3906, agReplanB 3876 (guarded, 1 real pass per buổi), agDrawPerson ~1450 | every buổi agReplanB re-draws the slot of EVERY consort / NPC (agDrawPerson) even when her intent did not change | draw lazily: only persons whose intent changed / were touched, others keep their slot until read (like the staff agLz slice); or run agDayEnsure once per buổi, not from j95planRival per rival |
+| 2 | placeWhere > agTick > tl2Meet (tl2See 2.0, toilLookP 1.0, toilJudgeNpc 0.5) | 2.4–3.7 | tl2Meet 120 (one pass), toilNpc ≈ 41 000 vs 32 on live | each meeting pair judges both looks (toilSeeRule / toilLookP / luxOf → toilNpc); TL2M memo is per pass only | memo toilLookP / toilSeeRule per (person, toilWk) instead of per pass; skip pairs where neither is the player nor someone she can see/hear of |
+| 3 | toilNpc > tl2Choose (weekly face choice of every NPC, est × ways × hosts) | 2.4 amortised (spike in the first buổi of a tuần) | once per NPC per toilWk | real choice, but done for every consort in the same buổi | choose lazily on first meeting, or spread over the tuần's buổi |
+| 4 | j95sync > knSellTick > knSellPick | 1.2 | — | news-seller candidate scan every sync | run per buổi, not per sync; cache candidates per buổi |
+| 5 | j95sync > agWatch (+0.5), endTurn > fxInvite7 (+0.35), agTick > agSlice (+0.4) | ~1.3 | — | small per-buổi scans | cache per buổi |
+showModal / kitFrameLive3 (kszLivePick3 layout reads clientWidth/Height) are the biggest self-time items in BOTH builds; per card the cost is equal (9.0 vs 8.3 ms) — the ag2 delta there is only more cards in a seed path (448 vs 370), not a perf fault. npc-purpose adds nothing to rows 1–5 (np vs ag2 −4 % engine).
