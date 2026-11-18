@@ -450,3 +450,4 @@ male proportion standard (nam mẫu) | claude/cung-tuong-mong-handover-hj0h8w (a
 | place-stage (owner layout: no plaque, entry lines as tai-mắt chip, count top-left, name top-right, full size; sonnet; successor of SzmHEoD) | review/place-stage | MAIN s43 | session_01UV1SziagD584pr6UpyJayd | RUNNING | 18/11 03:12Z |
 c12 a18 Nữ đế sample (first step of t10 tier) | claude/cung-tuong-mong-handover-hj0h8w (art) | session_011xDdVRDstwu4ckD2NmLQBs | RUNNING | 2026-11-18T03:15Z (Foreman C ROOT-15)
 | FOREMAN C-AG #9 (opus; successor of #8, opened by C-AG #8) | handover FOREMAN_C_STATUS | C-AG #8 | session_01UV1Szh2asyry15mvpuCEsJ | RUNNING | 18/11 03:20Z |
+| book-figsize r5 (one layout, crop wide robes at column, kids child size; sonnet; successor of Szgp1qD) | review/book-figsize-r5 | MAIN s43 | session_01UV1SzkhyYuitpjvm16Zn3P | RUNNING | 18/11 03:33Z |
