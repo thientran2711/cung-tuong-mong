@@ -28,7 +28,7 @@ Live: j51 succession, j57 tabs/▾, j60 portrait kit (frames approved by owner i
 - Art: review/consort-art (tier 8 done; cold palace next, then tier-4 calm redraws, tier 6 c01–16 recolour, tiers 1–3), review/maid-art (m45–m52 + ~76 grey-hair edits), review/maid-art-b (c17–c32 m0–m4 + hair fixes), review/act-art (acts done 3:4; info images, art-*/vir-* talent images, book-* textures in progress), cutout/portrait-recrop worker (por-* crops centred on face — owner saw a face cut at the cheek).
 
 ## New owner requests NOT yet assigned (do these first)
-1. Face pool = 84 women: player face picker (and NPC consort faces) should draw from all 32 consorts + 52 maids, since maids can rise to consort. Requires "Part C" art: the 52 maids in consort tiers t1–t8 + cold (not started). Recommend: start Part C art workers, then extend j86 picker/NPC assignment to 84 faces (filter tabs).
+1. Face pool = «90 nhân vật nữ» (84 painted women, one face each, the player included, each with the full rank ladder of pictures; + 6 princesses painted separately). The player and every NPC woman draw from this one pool; the drawn face + her age + her current rank = the picture shown.
 2. Every weekly event, court event and Emperor event needs a real illustration: define event categories (court, Emperor mood, harvest/disaster, border war, festival, birth, death, promotion, scandal, poison, fire, epidemic, envoy…), img/ev-<cat>.webp 3:4 (no faces), kit slot in news/week-book pages; art worker to draw.
 
 ## Monitoring
