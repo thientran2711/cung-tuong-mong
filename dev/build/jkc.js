@@ -163,9 +163,11 @@ function kcWhere(){if(!S||!S.kc)return;const b=S.buoi||0;S.kc.at={};for(const m 
   if(m.r==="huynh"&&S.kc.lost)continue;/* KC LORE: dtq brother lost at Nhạn Môn */
   const H=KCHAB[m.r]||[["",1]];let L=H;if(b===3&&m.r!=="huynh")L=L.filter(x=>x[0]&&x[0]!=="kc_thu"||m.r==="cha");
   if(m.r==="cha"&&b===0)L=[["",1]];/* buổi sáng cha vào triều */
-  const tot=L.reduce((a,x)=>a+x[1],0);let r=Math.random()*tot,p="";for(const [k,w] of L){r-=w;if(r<0){p=k;break}}
+  const p=kcHab(L);/* npc-purpose G2: her own day duties (habits), near-best only */
   if(p)S.kc.at[m.id]=p}
- if(S.tm96){const man=manById(S.tm96.mid);if(man&&man.alive)S.kc.at.ftm=b===3?"":pick(["kc_chua","kc_sach","kc_tra","","",""])}}
+ if(S.tm96){const man=manById(S.tm96.mid);if(man&&man.alive)S.kc.at.ftm=b===3?"":kcTmWhere()}}
+function kcHab(L){const x=npwPick(L,y=>y[1]);return x?x[0]:""}
+function kcTmWhere(){const B=BAL.ag.why.kcTm,h=(S.tm96&&S.tm96.h)||0;return npwPick(["kc_chua","kc_sach","kc_tra",""],k=>k?h*B.seek:B.home)||""}/* npc-purpose G2: he goes where she might be, as much as he longs for her */
 function kcHere(k){k=k||S.place;return S.kc.fam.filter(m=>m.alive&&S.kc.at[m.id]===k)}
 function kcAt(m){const p=S.kc.at[m.id];return p?KCPL[p][0]:m.r==="huynh"&&S.kc.lost?"mất tin ở Nhạn Môn":"ra ngoài"}
 function kcTmMan(){return S.tm96?manById(S.tm96.mid):null}
@@ -275,9 +277,9 @@ function kcContact(){if(S.origin.k==="ch")return"Thái hậu (cô mẫu)";try{co
 function kcIntel1(v,st){try{k61Know(v,"thư nhà",true,st)}catch(e){}if(!S.kc.intel.includes(v.id))S.kc.intel.push(v.id)}
 function kcIntel(n,st){const L=shuf(liveRivals(true).filter(v=>!S.kc.intel.includes(v.id)));const got=L.slice(0,n);for(const v of got)kcIntel1(v,st);
  if(got.length)log(`Ngươi biết thêm về ${got.map(v=>`${rkName(v)} ${v.name} (tính ${netTxt(v)}${v.preg?", đang mang thai":""}, sủng ${v.sung>=BAL.sungLv.kc[1]?"rất cao":v.sung>=BAL.sungLv.kc[0]?"khá":"ít"})`).join("; ")}.`);else log("Không có tin gì mới.")}
-function kcNews(){try{const T=trS();const n=T&&T.news&&T.news[0];if(n){log(`Tin triều: ${String(n.h).replace(/<[^>]+>/g,"")}`);return}}catch(e){}const v=pick(liveRivals(true));if(v)log(`Người ta đồn ${rkName(v)} ${v.name} ${v.sung>=50?"đang được sủng":"ít được gọi thị tẩm"}.`)}
-function kcChance(where){const tm=kcTmMan();if(tm&&tm.alive&&S.tm96&&!S.kc.ev.meet&&roll(35)){S.kc.ev.meet=1;pushDil(mkP("kcE",{e:"meet"}),"Gặp lại người xưa");return}
- if(where==="chua"&&!S.kc.ev.vh&&S.year>=2&&S.sac>=70&&roll(4)){S.kc.ev.vh=1;pushDil(mkP("kcE",{e:"vihanh"}),"Khách lạ ở chùa")}}
+function kcNews(){try{const T=trS();const n=T&&T.news&&T.news[0];if(n){log(`Tin triều: ${String(n.h).replace(/<[^>]+>/g,"")}`);return}}catch(e){}const v=npwPick(liveRivals(true),x=>1+Math.max(0,x.sung||0));/* npc-purpose G2: talk is about the most favoured */if(v)log(`Người ta đồn ${rkName(v)} ${v.name} ${v.sung>=50?"đang được sủng":"ít được gọi thị tẩm"}.`)}
+function kcChance(where){const tm=kcTmMan();if(tm&&tm.alive&&S.tm96&&!S.kc.ev.meet&&npcWhy("kcMeet",{tm})&&roll(35)){S.kc.ev.meet=1;pushDil(mkP("kcE",{e:"meet"}),"Gặp lại người xưa");return}
+ if(where==="chua"&&!S.kc.ev.vh&&S.year>=2&&S.sac>=70&&npcWhy("kcVh",{})&&roll(4)){S.kc.ev.vh=1;pushDil(mkP("kcE",{e:"vihanh"}),"Khách lạ ở chùa")}}
 
 /* ---------- the week, the month ---------- */
 (function(){const n0=nextBuoi;nextBuoi=function(){if(!isKc())return n0.apply(this,arguments);const b0=S.buoi;const r=n0.apply(this,arguments);if(isKc()&&!S.dead&&S.buoi!==b0&&(S.buoi||0)>0){kcWhere();if(S.buoi===3&&kcCity(S.place)){S.place="kc_khue"}S.visit=kcVisit(S.place);deal();render()}return r}})();
@@ -308,7 +310,7 @@ function kcWeek(){if(Q.length>2)return;const E=[];const add=(e,w)=>{if(w>0)E.pus
  if(S.tm96&&kcTmMan()){add("tmrise",S.kc.ev.tmrise?0:.5);add("tmcam",S.kc.ev.tmcam||S.tm96.h<70?0:.6);add("tmtron",S.kc.ev.tmtron||S.tm96.h<85||S.year<2?0:.8)}
  if(!S.kc.ev.dich&&S.year>=2&&roll(KC.ill))add("dich",6);
  add("theu",.5);add("gianhan",.4);
- const tot=E.reduce((a,x)=>a+x[1],0);if(!tot||!roll(KC.ev))return;let r=Math.random()*tot;for(const [e,w] of E){r-=w;if(r<0){const d=mkP("kcE",{e});if(d)pushDil(d,KCE[e].t);return}}}
+ const o=npcWhy("kcWeek",{E});if(!o||!roll(KC.ev))return;/* npc-purpose G2: the strongest motive in the house acts (KC.ev = it comes to a head this week) */const e=o.who.e;const d=mkP("kcE",{e});if(d)pushDil(d,KCE[e].t)}
 function kcMonth(){S.turn++;const k=S.origin.k;
  apply({bac:5+Math.round(S.kgtu/6)});
  if(!S.kc.ev.chieu||S.kc.mien)S.kap+=KC.apM+(S.age>=19?1:0)+(S.kgtu<BAL.kc2.st.kc.gtuPoor?1:0)+(S.kc.suit.length?1:0);/* registered for tuyển tú: no match may be made */S.kld=Math.max(0,S.kld-2);
@@ -317,7 +319,7 @@ function kcMonth(){S.turn++;const k=S.origin.k;
  kcW(()=>{for(const v of liveRivals(true))stipend(v);rivalsMonth();servRanks();servMonth();oanMonth();restock();heirMonth();moodMonth();try{tdMonth()}catch(e){}return""});if(S.dead)return;
  /* suitors and the forced match */
  if(S.kc.ev.chieu&&!S.kc.mien){}
- else if(S.kap>=BAL.kc2.st.kc.moi&&S.kc.suit.length<2&&roll(BAL.kc2.kcCard.kcMonth_rb+S.kap/3)){const s=kcSuitor();S.kc.suit.push(s);pushDil(mkP("kcE",{e:"moi"}),"Bà mối đến nhà")}
+ else if(S.kap>=BAL.kc2.st.kc.moi&&S.kc.suit.length<2&&(kcSO=npcWhy("kcSuit",{}))&&roll(BAL.kc2.kcCard.kcMonth_rb+S.kap/3)){const s=kcSuitor(kcSO.who.x);S.kc.suit.push(s);pushDil(mkP("kcE",{e:"moi"}),"Bà mối đến nhà")}
  else if(S.kap>=BAL.kc2.st.kc.dinh&&S.kc.suit.length&&!S.kc.forced){S.kc.forced=1;pushDil(mkP("kcE",{e:"dinhhon"}),"Cha định hôn")}
  /* chapters: the origin chapter (3 beats), on a fixed calendar */
  const beat={4:0,10:1,16:2}[S.turn];if(beat!=null&&!S.dead)pushDil(mkP("kcE",{e:"o"+beat}),KCO[k]?KCO[k].t:"Chuyện nhà");
@@ -327,8 +329,10 @@ function kcMonth(){S.turn++;const k=S.origin.k;
  S.month++;S.tuan=0;if(S.month>12){S.month=1;S.year++;S.age++;try{S.emp.age++;ageYear()}catch(e){}try{allKids().forEach(([kk])=>{if(kk.alive)kk.age++})}catch(e){}for(const m of S.kc.fam)m.age++}
  if(isKc()&&S.year===KC.ty&&S.month===KC.tm-1&&!S.kc.so)kcSoTuyen();
  if(S.suc<=0&&isKc())kcDie("Lao lực mà chết trước kỳ tuyển tú")}
-function kcSuitor(){const L=[["Thế tử hầu phủ","hau",80],["con trai Thượng thư bộ Hộ","quan",65],["Thám hoa khoa này","than",55],["đại thương Giang Nam","thuong",45],["lão Thị lang góa vợ","lao",30]];
- const f=L.filter(x=>x[2]<=S.kgt+35+R(20));const s=pick(f.length?f:L.slice(-2));return{n:s[0],k:s[1],q:s[2]}}
+const KCSUIT=[["Thế tử hầu phủ","hau",80],["con trai Thượng thư bộ Hộ","quan",65],["Thám hoa khoa này","than",55],["đại thương Giang Nam","thuong",45],["lão Thị lang góa vợ","lao",30]];let kcSO=null;
+function kcSuitReach(x){return x[2]<=S.kgt+BAL.ag.why.kcSuit.reach}
+/* npc-purpose G2: the house that seeks her = the highest one her standing reaches (its own ambition), not a die */
+function kcSuitor(s){const L=KCSUIT;if(!s){const f=L.filter(kcSuitReach);s=npwPick(f.length?f:L.slice(-2),x=>x[2])||L[L.length-1]}return{n:s[0],k:s[1],q:s[2]}}
 
 /* ---------- events (PEND; options show only costs; results show the numbers) ---------- */
 function kcO(n,cost,go,more){const c=cost||{};const s=fmt(c);/* r2: go is wrapped so the kit's source reader (j79 kitBranchFx) never shows an outcome

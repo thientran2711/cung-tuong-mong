@@ -1221,7 +1221,9 @@ BAL.ag.bt={off:15,offMax:3,hon:5,honMax:3,mood:{gian:5,thuong:-5},fear:4,fearTim
    tell  a witness carries a fact when her grudge against its subject ≥ host, or her liking for the one told ≥ friend */
 BAL.ag.why={on:1,min:20,near:.6,top:3,pow:1.5,cd:{_:4},wit:{eye:10,host:1},tell:{host:40,friend:30}};
 // G2 kinds (npc-purpose G2, review/npc-purpose-g2: monthly no-actor chains; kinds registered in jagwhyg2.js) — numbers only here
-Object.assign(BAL.ag.why.cd,{loTake:8,loTry:4,loClear:2,loWear:6});
+Object.assign(BAL.ag.why.cd,{loTake:8,loTry:4,loClear:2,loWear:6,kcWeek:6,kcMeet:4,kcVh:12,kcSuit:8});
+ /* jkc: kcWeek s = motive weight × mul (a weight ≥ .35 is a real motive); kcTm: he seeks her places with weight h×seek vs home; meets her when longing h ≥ meet; Emperor notices beauty when sắc − vhSac ≥ min; kcSuit: a house her standing reaches (q ≤ kgt + reach) seeks her with s = danh tiếng × kapW */
+Object.assign(BAL.ag.why,{kcWeek:{mul:60},kcTm:{seek:1,home:40,meet:50,vhSac:50},kcSuit:{reach:45,kapW:1}});
 Object.assign(BAL.ag.why,{
  loTake:{rivW:1,greed:40,timid:25},   /* jlost: who takes an item — rival s = danger × scheme weight × rivW; servant s = netQ(greed)×greed, netQ(timid)×timid (careless) */
  loTry:{want:30,prDiv:20,clear:35,wear:25,cct:20,cctBac:40,book:30,bookBac:20,ask:30,keep:30,frMul:5}  /* jlost: owner looks for it (want + price/prDiv), suspect clears her name (clear), holder wears it (wear + malice/2); her way: cct/book (when bạc ≥ …Bac) or ask (+liking); keep vs plant (keep vs her worst grudge); friend who saw it tells: recog.fr × frMul */

@@ -10,3 +10,9 @@ npwReg("loTake",{grp:"G2",who:c=>{const p=c.p;if(!p)return[];let R0=[];try{R0=li
 npwReg("loTry",{grp:"G2",who:c=>c.p?[c.p]:[],why:(p,c)=>({s:BAL.ag.why.loTry.want+loPrice(c.c.e||{})/BAL.ag.why.loTry.prDiv,r:"muốn tìm lại "+loNm(c.c.k)})});
 npwReg("loClear",{grp:"G2",who:c=>c.p?[c.p]:[],why:(p,c)=>({s:BAL.ag.why.loTry.clear,r:"muốn rửa tiếng trước buổi xét"})});
 npwReg("loWear",{grp:"G2",who:c=>c.p?[c.p]:[],why:(h,c)=>loHonest(h)?null:{s:BAL.ag.why.loTry.wear+(h.malice||0)/2,r:"thích "+loNm(c.c.k)+", đem ra đeo"}});
+/* ---- jkc / jkc2: pre-palace home (done LAST, C-AG 18/11 answer b) ---- */
+/* the week's household scene: each candidate = one motive already weighed by its person's state (kcWeek E list: [event, weight]) */
+npwReg("kcWeek",{grp:"G2",who:c=>(c.E||[]).map(([e,w])=>({id:"kcev:"+e,e,w})),why:x=>({s:x.w*BAL.ag.why.kcWeek.mul,r:(KCE[x.e]&&KCE[x.e].t)||x.e})});
+npwReg("kcMeet",{grp:"G2",who:c=>c.tm?[c.tm]:[],why:m=>{const h=(S.tm96&&S.tm96.h)||0;return h>=BAL.ag.why.kcTm.meet?{s:h,t:S,r:"nhớ ngươi, tìm đến chốn cũ"}:null}});
+npwReg("kcVh",{grp:"G2",who:()=>S.emp?[S.emp]:[],why:e=>({s:(S.sac||0)-BAL.ag.why.kcTm.vhSac,t:S,r:"vi hành xem dân tình, để ý người con gái đẹp ở chùa"})});
+npwReg("kcSuit",{grp:"G2",who:()=>KCSUIT.filter(kcSuitReach).map(x=>({id:"suit:"+x[1],x})),why:o=>({s:(S.kap||0)*BAL.ag.why.kcSuit.kapW,t:S,r:o.x[0]+" nghe tiếng ngươi, nhờ bà mối dạm hỏi"})});

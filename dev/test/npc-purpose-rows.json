@@ -3265,6 +3265,102 @@
 "group": "G2",
 "event": "maid seek/feud/hit; Emperor noon place; poisoner; surprise visit; NPC ",
 "fp": "s(v).length&&(v.bac||0)>=150&&roll(3)){const t=pick(petPool(0,1).filte"
+},
+{
+"f": "jkc.js",
+"line0": 166,
+"status": "DICE-ONLY",
+"group": "G2",
+"event": "family whereabouts per buổi (pre-palace)",
+"done": "const p=kcHab(L);/* npc-purpose G2: her own day duties (habits), near-best only */"
+},
+{
+"f": "jkc.js",
+"line0": 168,
+"status": "DICE-ONLY",
+"group": "G2",
+"event": "old flame's place per buổi (pre-palace)",
+"done": "return npwPick([\"kc_chua\",\"kc_sach\",\"kc_tra\",\"\"],k=>k?h*B.seek:B.home)"
+},
+{
+"f": "jkc2.js",
+"line0": 144,
+"status": "DICE-ONLY",
+"group": "G2",
+"event": "family whereabouts per buổi (jkc2 roads)",
+"done": "const p=kcHab(L);/* npc-purpose G2: her own day duties */"
+},
+{
+"f": "jkc.js",
+"line0": 311,
+"status": "PARTIAL",
+"group": "G2",
+"event": "weekly family event (pre-palace)",
+"done": "const o=npcWhy(\"kcWeek\",{E});if(!o||!roll(KC.ev))return;/* npc-purpose G2: the strongest motive in the house acts"
+},
+{
+"f": "jkc2.js",
+"line0": 229,
+"status": "PARTIAL",
+"group": "G2",
+"event": "weekly family event (jkc2 roads)",
+"done": "const o=npcWhy(\"kcWeek\",{E});if(!o||!roll(KC.ev))return;/* npc-purpose G2: the strongest motive acts */"
+},
+{
+"f": "jkc.js",
+"line0": 278,
+"status": "DICE-ONLY",
+"group": "G2",
+"event": "palace rumour heard at home: about a random rival",
+"done": "const v=npwPick(liveRivals(true),x=>1+Math.max(0,x.sung||0));"
+},
+{
+"f": "jkc.js",
+"line0": 279,
+"status": "DICE-ONLY",
+"group": "G2",
+"event": "old flame met by chance",
+"done": "npcWhy(\"kcMeet\",{tm})&&roll(35)"
+},
+{
+"f": "jkc.js",
+"line0": 280,
+"status": "DICE-ONLY",
+"group": "G2",
+"event": "stranger (Emperor incognito) at the temple",
+"done": "npcWhy(\"kcVh\",{})&&roll(4)"
+},
+{
+"f": "jkc.js",
+"line0": 320,
+"status": "PARTIAL",
+"group": "G2",
+"event": "matchmaker comes (suitor house)",
+"done": "(kcSO=npcWhy(\"kcSuit\",{}))&&roll(BAL.kc2.kcCard.kcMonth_rb+S.kap/3)"
+},
+{
+"f": "jkc.js",
+"line0": 331,
+"status": "DICE-ONLY",
+"group": "G2",
+"event": "which suitor house",
+"done": "s=npwPick(f.length?f:L.slice(-2),x=>x[2])"
+},
+{
+"f": "jkc.js",
+"line0": 193,
+"status": "DICE-ONLY",
+"group": "G2",
+"event": "stranger stares at her in a crowded place",
+"out": "unnamed crowd: no NPC exists or acts; the line only raises her own exposure S.kld at a crowded place she chose"
+},
+{
+"f": "jkc.js",
+"line0": 309,
+"status": "DICE-ONLY",
+"group": "G2",
+"event": "epidemic at home",
+"out": "illness, not an NPC choice (report §Out of scope)"
 }
 ]
 }
