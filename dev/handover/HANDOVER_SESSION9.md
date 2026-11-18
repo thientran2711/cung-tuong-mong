@@ -529,3 +529,4 @@ FOREMEN: B (life-preload-fu) | C (art; c03 go-live HELD; B8 samples; emperors) |
 - (18/11 07:18Z) LANDED person-dialog-restore PASS b2a9d349 (reviewer SzmHVSD, r1 on 09b1bbaf) FF 09b1bbaf→b2a9d349. LIVE main = b2a9d349. img/_review/person-dialog-restore wiped (4 obj); worker SzhK83Z + reviewer SzmHVSD archived. Optional follow-up: Fold person cards follow the longest text of the group (owner may call them tall).
 - (18/11 07:18Z) opt-card-short worker Szk6j15 rolled over at 31 % → archived; successor #2 session_01UV1Szke4R4h6YSy7KRfqhR (sonnet) builds the OD 07:25Z verdict from reports/opt-card-short.md HANDOVER.
 - (18/11 07:22Z) Owner: she opens ROOT-49 now on STANDBY; ROOT-48 keeps working and sends "TAKE OVER NOW" to it at rollover (TAKEOVER_MAIN_ROOT.md).
+- (18/11 07:24Z) Owner OD ~07:22Z: main line rolls over to children up to depth 7; the depth-7 main sends "TAKE OVER NOW" to the owner-opened ROOT STANDBY (id: pending — it messages ROOT-48).
