@@ -13,8 +13,8 @@ S=384;yy,xx=np.mgrid[0:S,0:S];xs=(xx+.5)/S;ys=(yy+.5)/S;keep=np.zeros((S,S));ins
 for u,v,ru,rv in K:
     s=(u+.04)/1.08;t=(v+.3826)/1.165;hw=ru*PAD*1.22/1.08;hh=rv*PAD*1.22/1.165;d=np.sqrt(((xs-s)/hw)**2+((ys-t)/hh)**2);keep=np.maximum(keep,np.clip((1-d)/.18,0,1));inside|=d<=1
 pm=np.zeros((S,S),np.uint8);cv2.fillPoly(pm,[(P*S).astype(np.int32)],1);pm=pm>0
-pm2=np.zeros((S,S),np.uint8);cv2.fillPoly(pm2,[(((P-[.5,.55])*.9+[.5,.55])*S).astype(np.int32)],1)   # blobs go into the polygon shrunk to 90 %: a per-picture face-fit row can move the edge in, and a blob on the edge would be cut into a hard wedge
-FREE=(~inside)&(pm2>0);FREE=ndi.binary_erosion(FREE,iterations=4)   # free zone for re-placed blobs (margin 4 px from the polygon edge and the ellipses)
+pm2=np.zeros((S,S),np.uint8);cv2.fillPoly(pm2,[(((P-[.5,.55])*.97+[.5,.55])*S).astype(np.int32)],1)   # blobs go into the polygon shrunk to 90 %: a per-picture face-fit row can move the edge in, and a blob on the edge would be cut into a hard wedge
+FREE=(keep<.5)&(pm2>0);FREE=ndi.binary_erosion(FREE,iterations=2)   # free zone for re-placed blobs (margin 4 px from the polygon edge and the ellipses)
 def alpha(f):return np.asarray(Image.open(f).convert("RGBA"))[...,3].astype(float)/255
 def kept(al):t=al.sum();return float((al*(1-keep)*pm).sum()/t) if t else 1.
 def replace(f):
@@ -25,7 +25,7 @@ def replace(f):
         bad=((keep[y0:y1,x0:x1]>0)|~pm[y0:y1,x0:x1])&pm_
         if bad.sum()<=.02*max(1,pm_.sum()):out[y0:y1,x0:x1][pm_]=patch[pm_];occ[y0:y1,x0:x1]|=pm_;continue
         placed=False
-        for sc in (1,.85,.72,.6,.5,.42,.35):
+        for sc in (1,.9,.8,.7,.6,.5,.42,.35,.3):
             h,w=patch.shape[:2];nh,nw=max(2,int(h*sc)),max(2,int(w*sc));pt=cv2.resize(patch,(nw,nh),interpolation=cv2.INTER_AREA);mk=pt[...,3]>8;best=None
             for dy in range(0,S-nh,3):
                 for dx in range(0,S-nw,3):
@@ -41,9 +41,24 @@ def replace(f):
             if ok.sum()<.6*pm_.sum():ok[:]=False   # a blob cut to a hard-edged wedge looks worse than no blob: dropped
             out[y0:y1,x0:x1][ok]=patch[ok];occ[y0:y1,x0:x1]|=ok;print("   blob cut to free skin:",os.path.basename(f),"size",pm_.sum(),"kept",ok.sum())
     return Image.fromarray(out)
+def shift(f):
+    """whole-mark move first: translate (+-.15 of the square) and shrink (1..0.8) the WHOLE art as one piece, pick the best kept share (blobs stay in their original relation; nothing redrawn)"""
+    im=np.asarray(Image.open(f).convert("RGBA"));best=(kept(im[...,3].astype(float)/255),0,0,1.)
+    for sc in (1,.92,.85,.8):
+        h=int(S*sc);r=cv2.resize(im,(h,h),interpolation=cv2.INTER_AREA)
+        for dy in range(-60,61,6):
+            for dx in range(-60,61,6):
+                c=np.zeros_like(im);y0=(S-h)//2+dy;x0=(S-h)//2+dx;ys=slice(max(y0,0),min(y0+h,S));xs=slice(max(x0,0),min(x0+h,S));c[ys,xs]=r[ys.start-y0:ys.stop-y0,xs.start-x0:xs.stop-x0]
+                if c[...,3].sum()<.98*r[...,3].sum():continue   # nothing may fall off the square
+                k=kept(c[...,3].astype(float)/255)
+                if k>best[0]+1e-4:best=(k,dx,dy,sc)
+    k,dx,dy,sc=best;h=int(S*sc);r=cv2.resize(im,(h,h),interpolation=cv2.INTER_AREA);c=np.zeros_like(im);y0=(S-h)//2+dy;x0=(S-h)//2+dx;c[max(y0,0):min(y0+h,S),max(x0,0):min(x0+h,S)]=r[max(y0,0)-y0:min(y0+h,S)-y0,max(x0,0)-x0:min(x0+h,S)-x0];return Image.fromarray(c),k
 res=[]
 for f in sorted(x for x in os.listdir(D) if re.fullmatch(r"fx-[a-z]+(-[a-z]+)?-\d(-m|-r\d+)?\.png",x) and "-r" not in x[-7:]):
     k=kept(alpha(os.path.join(D,f)));line="%-24s kept %5.1f %%"%(f,k*100)
     if W and k<.9:
-        o=replace(os.path.join(D,f));k2=kept(np.asarray(o)[...,3].astype(float)/255);os.makedirs(W,exist_ok=True);o.save(os.path.join(W,f.replace(".png","-r9.png")));line+="  ->  re-placed kept %5.1f %%"%(k2*100)
+        o,k2=shift(os.path.join(D,f))
+        how='shifted'
+        if k2<.9:o=replace(os.path.join(D,f));k2=kept(np.asarray(o)[...,3].astype(float)/255);how='blobs re-placed'
+        os.makedirs(W,exist_ok=True);o.save(os.path.join(W,f.replace(".png","-r9.png")));line+="  ->  %s kept %5.1f %%"%(how,k2*100)
     print(line)
