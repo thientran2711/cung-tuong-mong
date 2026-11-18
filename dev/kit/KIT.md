@@ -143,7 +143,7 @@ Frame / gem / brocade art (`img/kit/frame-consort-N`, `gem-N`, `bg-consort-N`) a
 | piece | function / class | rules |
 |---|---|---|
 | effect token | `eff(t)`, `effList(tokens,def)` → `.ef g/r/n` | colours of 1.2 |
-| odds chip | `oddsChip(word)` → `.oc .oc0..oc7` | ladder Liều/Khó/Năm ăn năm thua/Khá chắc/Chắc/Rất chắc/Nắm chắc; never %, never "Chắc chắn" (sure acts show no word) |
+| odds chip | `oddsChip(word)` → `.oc .oc0..oc7` | ladder Liều/Khó/Năm ăn năm thua/Khá chắc/Chắc/Rất chắc/Nắm chắc; never %, never "Chắc chắn"; ODDS CAP (owner 17/11): a formerly-sure CHANCE act shows the cap word `capW()` (= word(BAL.odds.hi), Nắm chắc) and fails softly through the ONE kit path `oddsSoft` (j63; hint `kitSoftW` / `kitCapLine`, button gate `capAt(khắc,cost)`); pure bookkeeping (walking, fixed price, opening a panel, a decision) shows no word and never rolls |
 | any price line | `kitParse('word · tốn: … · thành: … · hỏng: … · kèm: …')` | used by `optLine`, `dilLine`, `actLine`, `kitFix`; returns the labelled rows of section 6 (j63) |
 | act card | `cardH(a,i)` → `button.card.kcard.ka` | the ACT CARD frame of section 6 (j63): title + odds chip, description, rows Cần / Tốn / Được / Mất / Kèm / Ghi chú |
 | option (dialogs) | `button.opt` + `<small>` through `kitParse` → `.ka` | same ACT CARD frame (section 6) |
@@ -407,6 +407,7 @@ at a given viewport; only the seal word and the content differ. Nothing sizes th
   Design sizes: 755x1000 → 560 x 700; 1180x820 → 560 x 574 (the game only ever sees these two, KIT §0; direct-mode sizes: 1000x755 560 x 529, 1366x1024 620 x 717, 844x390 560 x 358).
 - Structure (flex column): `.kph` fixed on top, `#mb` = the text / option area, takes the rest and scrolls inside (rule L191: in event dialogs only
   the option list scrolls, `kdscroll`), `#mr` button row fixed at the bottom. A short panel leaves quiet paper; a long one scrolls.
+- **kdscroll intro never shrinks (kit-kpb, 18/11).** In a `.dlg.kdscroll` the body `#mb` is a flex column: `.kpb` (intro / facts / item card) is `flex:0 0 auto` (jk4: `.modal .dlg.kdscroll>#mb>.kpb`), so it keeps its FULL height and never lies under `.opts`; only `.opts` takes the remaining height (`flex:1 1 auto`, min 96 px) and scrolls. A very long intro is capped by `kitDlgText` (`.kdtx`) and scrolls inside itself. Never set `flex-shrink`/`min-height:0` on `.kpb` in a picker (old rule `flex:0 1 auto;min-height:0` made pgpick 163 px of intro render as 23 px). Scan: `node dev/test/kpb-scan.js <url> <out.json> [WxH@dpr,...]` opens every PEND dialog with an option list + generic subject/facts/text pickers (2/4/8/24 options): FAIL when `.kpb` is shorter than its content or any intro text lies over `.opts`; `BEFORE=1` re-applies the old rule. Kit sample page §8: button "CHỌN NHIỀU" (`kitPopSample('pickmany')`).
 - Event dialogs with a stage figure (`kdper`): the figure column (`--kdpw`) is cut to fit INSIDE the frame (kitDpFit reads the frame width); the frame never grows with the people.
 - Nobody may set `width` / `max-width` / `height` on `.dlg.kpanel` or its variants (`kesdlg`, `kdper`, `kslot`, `kmc-modal`, `kpsc`); change the tokens.
   Exempt: the person card (`.modal.pcm`, `pcard` §3), the picture zoom lightbox, mini-game frame `#ov .mg` (§13), the week flip-book (§27).
@@ -492,7 +493,7 @@ Rất thấp < Thấp < Vừa < Cao < Rất cao (0 → "Không có"), the same s
 - `CHW` (j1) recognises a chance phrase so `dilLine` treats a line with side chances like before (no "Khó lường").
 - Death risks on scheme buttons come from the real formula (poison / kpoison / pond): "nàng chết: khả năng thấp" (`kpDeathWord`).
 - Check: `node dev/test/sub-odds.js <site> index.html <out> after` (word detector: no ladder word after ':' or '(').
-Never %, never "Chắc chắn" (sure acts show nothing).
+Never %, never "Chắc chắn" (bookkeeping / decisions show nothing; a formerly-sure chance act shows Nắm chắc + the soft "hỏng", ODDS CAP §odds chip).
 
 ### 11.2 MÀU CHIỀU QUAN HỆ (owner 11/15) — `kitRel(dir,text)` + `kitRelPaint(root)` (jaudit §11), tokens in `p1.html :root`
 | Chiều | Token | Màu | Ví dụ nhãn |
@@ -1067,7 +1068,7 @@ so stage blocks may stand beside a head or between figures, never over the paint
       ("dễ thành" / "thành bại khó đoán" / "khó thành") and the failure ("hỏng thì cả họ bị tru di").
     2 SHARP — names ("Hoa Băng Tâm thất sủng") and the reading of the moment the data carries ("ngài trọng tài, rất hợp").
   · A hand-written override per option: `hint` (string or fn(lv)) and `risk`; it may never lie (must match the data).
-  · A "Chắc chắn" option cannot fail: its "Mất:" items are a sure price and read "nhưng …", never "hỏng thì …" (review/pets-fix-r6: ts-b "Nhịn"
+  · An option with NO odds word (a decision, no roll) cannot fail: its "Mất:" items are a sure price and read "nhưng …", never "hỏng thì …" (review/pets-fix-r6: ts-b "Nhịn"
     read "hỏng thì mất thể diện").
 - KIT PART `kitHintRow(text)` → the row `Gợi ý | <span class="ef i">…</span>` (`.kr-hint`; `.ef.i` = dim italic value, kit act-card CSS j63).
 - KIT PART `kitRisk(word)` → the risk chip in the option head: a `kitChip` tone — "an toàn" `.kchip.g`, "có rủi ro" `.kchip.w` (amber, kit

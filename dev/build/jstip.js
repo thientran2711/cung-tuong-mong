@@ -135,21 +135,21 @@ function stipEvent(G,SK){const B=BAL.stip,r=rkOf(S),st=stipSt(S),W=stipW();const
  const supTxt=SK.sup?`${rkName(SK.sup)} ${SK.sup.name}`:"";
  O.push({n:"Đút bạc cho thái giám",fx:{bac:-tip},x:SK.sup?`tốn: Bạc -${tip} · thành: ${eun} nhận bạc, từ nay ${B.tipM} tháng không bớt xén nữa, nhưng không dám trả lại đồ vì ${supTxt} đã dặn`:`tốn: Bạc -${tip} · thành: đổi lại đồ tốt, ${B.tipM} tháng tới không bớt xén`,
   go:()=>{st.tip=S.turn;st.tips=(st.tips||0)+1;const n=SK.sup?0:stipRestore(S,G);log(`Ngươi dúi ${tip} bạc cho ${eun}.${n?" Hắn đổi lại đồ tốt ngay.":SK.sup?` Hắn nhận bạc, nhưng không dám trái ý ${supTxt}.`:""}${st.tips>=B.allyTips?" Từ nay ngươi có người quen ở Nội vụ phủ.":""}`)}});
- if(S.maid&&!S.maid.spyFor){const m=S.maid;const od=cl(B.askBase+Math.round((m.loyal||0)/3)+nq(m,"sharp",BAL.net.k.askSharp)+Math.round((S.sung||0)/4)-(SK.sup?25:0),5,95);
+ if(S.maid&&!S.maid.spyFor){const m=S.maid;const od=oddsCl(B.askBase+Math.round((m.loyal||0)/3)+nq(m,"sharp",BAL.net.k.askSharp)+Math.round((S.sung||0)/4)-(SK.sup?25:0));
   O.push({n:`Sai ${m.name} đi đòi`,fx:{},x:`${word(od)} · thành: đòi lại ${SK.bac?"đủ bạc và ":""}đồ tốt · hỏng: ${m.name} bị mắng đuổi về, lòng -${balAb(BAL.eff.jstip.loyalGo)}, Nội vụ phủ để bụng (tháng sau dễ bị bớt xén hơn)`,
    go:()=>{if(roll(od)){back();log(`${m.name} đến Nội vụ phủ đòi đủ phần. ${eun} đành ${SK.bac?"trả lại bạc và ":""}đổi đồ tốt.`)}else{m.loyal=cl((m.loyal||0)-BAL.eff.jstip.loyalGo,0,100);st.spite=S.turn;log(`<span class="r">${m.name} bị ${eun} mắng đuổi về.</span> Lòng cung nữ -${balAb(BAL.eff.jstip.loyalGo)}.`)}}})}
- const T=stipReportTo(SK);if(T){const stat=T.k==="hh"?(S.hh||0):(S.th||0);const ev=W.ev||0;const od=T.risky?5:cl(B.reportBase+Math.round(stat/2)+Math.round((S.danh||0)/5)+ev*15,5,95);
+ const T=stipReportTo(SK);if(T){const stat=T.k==="hh"?(S.hh||0):(S.th||0);const ev=W.ev||0;const od=T.risky?5:oddsCl(B.reportBase+Math.round(stat/2)+Math.round((S.danh||0)/5)+ev*15);
   O.push({n:`Tố lên ${T.n}`,fx:{},x:`${word(od)} · thành: ${eun} bị phạt, trả lại ${SK.bac?"bạc và ":""}đồ tốt${SK.sup&&!T.risky?`, ${supTxt} bị trách (Danh -2)`:""} · hỏng: Danh -1, Nội vụ phủ để bụng${T.risky?`, ${T.n} chính là người sai chèn ép: nàng thù ngươi thêm`:""}`,
    go:()=>{if(roll(od)){back();W.pun=S.turn;W.ev=0;if(SK.sup&&!T.risky){ap(SK.sup,{danh:-2});oanAdd(SK.sup,S,BAL.eff.jstip.go)}log(`${T.n} nghe ngươi tâu, sai phạt ${eun}${SK.sup&&!T.risky?`, trách ${supTxt}`:""}. Nội vụ phủ trả lại đủ phần.`)}
     else{apply({danh:BAL.eff.jstip.danhGo});st.spite=S.turn;if(T.risky&&T.v)oanAdd(T.v,S,BAL.eff.jstip.go_2);log(`<span class="r">${T.n} gạt đi, cho là ngươi nhỏ nhen.</span> Danh ${balSg(BAL.eff.jstip.danhGo)}.${T.risky?` ${T.n} thù ngươi thêm.`:""}`)}}})}
- const om=cl(B.remember+(S.mat||0)*10,5,95);
+ const om=oddsCl(B.remember+(S.mat||0)*10);
  O.push({n:"Ghi nhớ để trả thù sau",fx:{},x:`${word(om)} · thành: Tai mắt dò ra ${SK.sup?`chứng cứ về ${supTxt} (chứng cứ ${balSg(BAL.eff.jstip.evN)})`:`sổ sách ${eun} ăn bớt (lần tố sau dễ thành)`} · hỏng: không dò được gì`,
   go:()=>{if(roll(om)){const n=SK.sup?/*evok: checked (n)*/evA(S,SK.sup,BAL.eff.jstip.evN):0;if(!SK.sup)W.ev=(W.ev||0)+1;log(SK.sup&&!n?`Ngươi ghi nhớ. Tai mắt dò ra ${supTxt} không dính líu: chỉ ${eun} ăn bớt.`:`Ngươi ghi nhớ. Tai mắt dò ra ${SK.sup?`chứng cứ về ${supTxt}: chứng cứ ${balSg(BAL.eff.jstip.evN)}`:`sổ sách ${eun} ăn bớt`}.`)}else log("Ngươi ghi nhớ, nhưng chưa dò được gì.")}});
  return{ev:1,t:"Bổng lộc bị cắt xén",evId:"j3:embezzle",who:typeof pEunCourt==="function"?pEunCourt("ped"):null,h,opts:O}}
 /* NPCs: the same rule; their answer by purse and patron; news by Tai mắt */
 function stipNpc(p,SK,G){const B=BAL.stip,st=stipSt(p),tip=B.tip[Math.min(7,rkOf(p))];let how="";
  if(!SK.sup&&(p.bac||0)>=tip*2&&roll(50)){ap(p,{bac:-tip});st.tip=S.turn;st.tips=(st.tips||0)+1;stipRestore(p,G);how="nàng lót tay cho thái giám, được đổi đồ tốt"}
- else if(p.maid&&!p.maid.spyFor&&roll(30)&&roll(cl(B.askBase+Math.round((p.maid.loyal||0)/3)-(SK.sup?25:0),5,95))){ap(p,{bac:SK.bac});stipRestore(p,G);how=`cung nữ ${p.maid.name} đi đòi được đủ phần`}
+ else if(p.maid&&!p.maid.spyFor&&roll(30)&&roll(oddsCl(B.askBase+Math.round((p.maid.loyal||0)/3)-(SK.sup?25:0)))){ap(p,{bac:SK.bac});stipRestore(p,G);how=`cung nữ ${p.maid.name} đi đòi được đủ phần`}
  else{st.meek=S.turn;how="nàng đành nhịn"}
  try{newsAdd(p,"stip",`Nội vụ phủ bớt xén bổng lộc của ${rkName(p)} ${p.name} (${SK.why}); ${how}`,SK.sup===S)}catch(e){}}
 /* ---------- faults: a scheme caught counts as a recent fault ---------- */
