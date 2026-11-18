@@ -947,3 +947,4 @@ LESSONS s39: look at neighbours side by side before asking her to pick (A/B/C gl
 - (18/11 01:16Z) smudge r12 b4239ee 8 % options + tuyet-glow v8 1c4ea403 (grains .72) looked OK → sent owner (Lượt 26). Reviewer looks-s40 told to use glow 1c4ea403.
 - (18/11 01:19Z) OWNER: hoa điền tone = saturation only → options 85/75/65 on dao+maudon ordered (opacity options cancelled).
 - (18/11 01:22Z) OWNER angry: smudge pink vertical stripe still visible at all %; grey runs too opaque → worker: reuse toil blush renderer, delete stripe shape, zoom+gradient check. LESSON: I passed r11/r12 without zooming the cheek — zoom 3× on cheeks before sending any smudge image.
+- (18/11 01:24Z) OWNER: glow v8 APPROVED final → in review looks-s40.
