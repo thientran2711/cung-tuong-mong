@@ -44,9 +44,9 @@ Object.assign(BAL,{looks:{
     dragged past the line from a mouth corner + a drip under the lower lip, blot = blotchy blush, streak = how much the runs break into separate streaks, cry = least
     tear-run when the cause is crying. */
  smuFx:{blush:{len:[0,.8,1.15,1.65],a:[0,.34,.4,.48],blot:[0,0,0,0],wash:[0,0,.055,.075],sgain:[0,1,.5,.5]}/* wash = soft diffuse bleed of the blush into the skin (alpha of a wide feathered halo, spreading down / outward) */,lid:{len:[0,.5,.8,1.05],a:[0,.24,0,0]}/* vừa / nặng: no eyeshadow run (it was the pink vertical stripe, owner 01:21Z) */,
-  tear:{len:[0,.5,1,1.7],a:[0,.25,.34,.42],w:[0,.026,.03,.04],n:[0,1,1,1],pair:[0,0,[.55,1.5],0],fine:[0,0,0,1]}/* fine = nặng runs taper (thick at the lash line, thinning), wander and break; pair = vừa: one eye's run SHORT, the other LONG (which eye is seeded per face) *//* pair = vừa: one eye's run SHORT, the other LONG (not mirrored; which one is seeded per face) */,cry:{len:.8,a:.36,w:.03},
+  tear:{len:[0,.5,1,1.7],a:[0,.25,.34,.42],dark:1/* x on the grey runs' opacity at every level (owner 18/11 01:23Z options: 1.1 / 1.2) */,extra:{n:[0,0,0,1],len:.33,off:.075,w:1}/* nặng: ONE extra short grey run per face (about 1/3 of the main run) starting at the lash line beside the main run on a seeded eye; same colour and strength as the main run */,w:[0,.026,.03,.04],n:[0,1,1,1],pair:[0,0,[.55,1.5],0],fine:[0,0,0,1]}/* fine = nặng runs taper (thick at the lash line, thinning), wander and break; pair = vừa: one eye's run SHORT, the other LONG (which eye is seeded per face) *//* pair = vừa: one eye's run SHORT, the other LONG (not mirrored; which one is seeded per face) */,cry:{len:.8,a:.36,w:.03},
   lip:{sm:[0,0,.6,1],a:[0,0,.32,.44]},streak:[0,.35,.3,.3],
-  pct:{blush:[0,.2,.2,.2],lip:[0,.2,.2,.2]}/* OWNER KNOB (OD 18/11 ~00:58Z): opacity share of the blush smear and of the lip smear at vừa / nặng; she picks 5 / 10 / 15 / 20 % from option images; null = the older wash / lip.a numbers */}}});
+  big:{at:100,max:130,boost:1.25,steps:3}/* LARGE faces (face px from `at` up to `max`): the grey runs are up to x boost darker, in `steps` steps, so a big face is not washed (owner 18/11 01:23Z, inverse of the small-size boost) */,pct:{blush:[0,.2,.2,.2],lip:[0,.2,.2,.2]}/* OWNER KNOB (OD 18/11 ~00:58Z): opacity share of the blush smear and of the lip smear at vừa / nặng; she picks 5 / 10 / 15 / 20 % from option images; null = the older wash / lip.a numbers */}}});
 window.LOOKS_ART={};
 const LK_N={smu:["","Phấn son lem nhẹ","Phấn son lem nhem","Phấn son lem nhem nặng"],bui:["","Mặt lấm bụi","Bụi bám đầy mặt","Bụi bám đầy mặt"],
  muoi:["","Mặt lấm muội khói","Mặt lấm muội khói","Mặt đen muội khói"],moho:["","Mồ hôi làm phấn trôi","Mồ hôi làm phấn trôi","Mồ hôi đẫm, phấn trôi hết"],
@@ -188,16 +188,18 @@ function lkSmuLayer(file,lv,why,cols,step){const v=MK_FIT.get(file);if(!v)return
 function lkSmuImg(p,file,x){try{const cols=lkSmuCols(p),lv=cl(x.lv|0,1,3),why=x.why==="khoc"?"khoc":"";const r=lkSmuLayer(file,lv,why,cols,0);if(!r)return"";
  const b=r.e.box;return `<img class="klk klk-smu" data-lsk="${r.key}" src="${r.e.src||TOIL_BLANK}" alt="" aria-hidden="true" style="--fleft:${b[0]}%;--ftop:${b[1]}%;--fwidth:${b[2]}%;--fheight:${b[3]}%">`}catch(err){return""}}
 function lkSmuPaint(file,v,lv,why,cols,e,key,step){const im=new Image();im.crossOrigin="anonymous";im.decoding="async";
- im.onload=()=>{try{const L=window.BAL&&BAL.toil&&BAL.toil.lod;e.src=lkSmuDraw(im,v,lv,why,cols,e.box,lkSmuSeed(file,cols),L?(step||0)/L.steps:0)}catch(x){e.src=TOIL_BLANK}document.querySelectorAll("img.klk-smu").forEach(q=>{if(q.dataset.lsk===key)q.src=e.src})};
+ im.onload=()=>{try{const L=window.BAL&&BAL.toil&&BAL.toil.lod;e.src=lkSmuDraw(im,v,lv,why,cols,e.box,lkSmuSeed(file,cols),L&&step<10?(step||0)/L.steps:0,step>=10?(step-10)/lkB().smuFx.big.steps:0)}catch(x){e.src=TOIL_BLANK}document.querySelectorAll("img.klk-smu").forEach(q=>{if(q.dataset.lsk===key)q.src=e.src})};
  im.onerror=()=>{e.src=TOIL_BLANK};im.src=IMG_U("img/"+file)}
 /* SIZE-AWARE strength (owner 17/11 ~17:30Z + 17:53Z, 18/11 02:20Z): the SAME curve as the makeup colour layer (jtoil toilLodStep / BAL.toil.lod: face width in px -> step 0..steps; boost, cue per part), never a second table.
    One pass over every smudge layer on screen, run inside toilLodPass (same scheduler). Pink bloom ← cue.bl, lip smear ← cue.lip, grey runs ← cue.eye. No BAL.toil.lod (makeup LOD not in this build) = factor 1. */
 function lkLodMul(lod,cue){const L=window.BAL&&BAL.toil&&BAL.toil.lod;if(!L||!lod)return 1;return 1+(L.boost-1)*lod*((L.cue&&L.cue[cue])||1)}
+/* face px -> step: 0..steps = small (the makeup layer's own toilLodStep), 10+k = large face (k 1..big.steps, BAL.looks.smuFx.big), 0 = the approved strength in between */
+function lkSmuStep(px){const s=window.toilLodStep?toilLodStep(px):0;if(s>0)return s;const B=lkB().smuFx.big;if(!(px>B.at))return 0;return 10+Math.min(B.steps,Math.max(1,Math.round(Math.min(1,(px-B.at)/(B.max-B.at))*B.steps)))}
 function lkLodPass(){try{if(typeof toilLodStep!=="function")return;document.querySelectorAll("img.klk-smu").forEach(im=>{const cur=im.dataset.lsk||"",base=cur.replace(/\|L\d+$/,""),A=LK_SMA[base];if(!A)return;const w=im.getBoundingClientRect().width;if(!(w>0))return;
-  const st=toilLodStep(w/1.6),have=+((/\|L(\d+)$/.exec(cur)||[])[1]||0);if(st===have)return;const r=lkSmuLayer(A[0],A[1],A[2],A[3],st);if(!r)return;im.dataset.lsk=r.key;if(r.e.src)im.src=r.e.src})}catch(x){}}
+  const st=lkSmuStep(w/1.6),have=+((/\|L(\d+)$/.exec(cur)||[])[1]||0);if(st===have)return;const r=lkSmuLayer(A[0],A[1],A[2],A[3],st);if(!r)return;im.dataset.lsk=r.key;if(r.e.src)im.src=r.e.src})}catch(x){}}
 if(typeof toilLodPass==="function"){const tp0=toilLodPass;toilLodPass=function(){tp0();lkLodPass()};window.toilLodPass=toilLodPass}
 function lkSmuSeed(file,cols){let h=cols?cols.seed|0:0;for(let i=0;i<file.length;i++)h=(Math.imul(h,31)+file.charCodeAt(i))|0;return h}
-function lkSmuDraw(im,v,lv,why,cols,box,seed,lod){lod=lod||0;const W=im.naturalWidth,H=im.naturalHeight,F=lkB().smuFx;
+function lkSmuDraw(im,v,lv,why,cols,box,seed,lod,big){lod=lod||0;big=big||0;const W=im.naturalWidth,H=im.naturalHeight,F=lkB().smuFx;
  const bx=box[0]/100*W,by=box[1]/100*H,bw=box[2]/100*W,bh=box[3]/100*H,K=Math.max(1,Math.min(4,420/bw)),cw=Math.max(8,Math.round(bw*K)),ch=Math.max(8,Math.round(bh*K));
  const P=toilMkPts(v).map(([x,y])=>[(x/100*W-bx)*K,(y/100*H-by)*K]);const mkc=()=>{const c=document.createElement("canvas");c.width=cw;c.height=ch;return c};
  const c0=mkc(),g0=c0.getContext("2d",{willReadFrequently:true});g0.setTransform(cw/bw,0,0,ch/bh,-bx*cw/bw,-by*ch/bh);g0.drawImage(im,0,0,W,H);g0.setTransform(1,0,0,1,0,0);
@@ -255,9 +257,13 @@ function lkSmuDraw(im,v,lv,why,cols,box,seed,lod){lod=lod||0;const W=im.naturalW
   soft(m,along(cr,[cr[0]+side*u*.27*sm,cr[1]+u*.16*sm],u*.015,(x,y,t)=>[x,y,u*(.07-.035*t),.65*(1-.85*t)]));
   layers.push([blur(m,u*.03),cSon,Math.min(.9,(F.pct?F.pct.lip[lv]:fx(F.lip.a))*1.7*lkLodMul(lod,'lip'))])}/* lip smear opacity: same knob family (pct.lip) */
  /* 4 lash-run: mascara / liner washed down the cheek from under each eye — thin, wavering, fading, grey-brown (vừa / nặng, or crying) */
- {let len=fx(F.tear.len),a=fx(F.tear.a)*lkLodMul(lod,'eye'),w=fx(F.tear.w),nn=fx(F.tear.n);if(why==="khoc"){len=Math.max(len,F.cry.len);a=Math.max(a,F.cry.a);w=Math.max(w,F.cry.w);nn=Math.max(nn,1)}
+ {let len=fx(F.tear.len),a=fx(F.tear.a)*lkLodMul(lod,'eye')*(F.tear.dark||1)*(1+(F.big.boost-1)*big),w=fx(F.tear.w),nn=fx(F.tear.n);if(why==="khoc"){len=Math.max(len,F.cry.len);a=Math.max(a,F.cry.a);w=Math.max(w,F.cry.w);nn=Math.max(nn,1)}
   if(len>0){const m=new Float32Array(N);const pr=why==='khoc'?0:F.tear.pair[lv],swp=h1(13)<.5?0:1;eyes.forEach(([e,ix,sd],ei)=>{const s0=P[ix+8];for(let k=0;k<nn;k++){const off=k?sd*u*.07*k:0,ln=u*(pr?pr[ei===swp?0:1]:len)*[1,.62,.38][k],sx=s0[0]+sd*u*.05+off,sy=s0[1]+u*.04,ph=h1(11+ei*5+k*3)*6,pts=[];
      const fn=F.tear.fine[lv];for(let i=0;i<=Math.round(ln/1.2);i++){const t=i*1.2/ln,wob=fn?(.05*Math.sin(t*4.2+ph)+.035*(vn(t*5+ph,ei*3+k,1)-.5)):.03*Math.sin(t*5.5+ph),x=sx+sd*u*(.09*t+wob),y=sy+ln*t,br=cl3((vn(t*(fn?7:9),ei*7+k*3,1.1)-(fn?.28:.25))*(fn?2.4:2.2),fn?.3:.35,1),al=Math.pow(1-t,fn?.8:.75)*(pr?Math.max(br,.8):br)*(k?.8:1),sg=fn?u*w*(.62-.38*t):u*w*(1.05-.5*t);pts.push([x,y,Math.max(.8,sg),al*(fn?.9:1)])}
+     soft(m,pts)}
+    /* ONE extra short run per face (nặng; BAL tear.extra): from the lash line beside the main run on the seeded eye, ~1/3 of its length, same width taper and the same strength (solid, no breaks, never fainter than the main run, so it can not read as a pale streak) */
+    const X=F.tear.extra;if(X&&fx(X.n)>0&&why!=='khoc'&&ei===swp){const ln=u*len*X.len,sx=s0[0]+sd*u*(.05+X.off),sy=s0[1]+u*.04,ph=h1(41)*6,pts=[];
+     for(let i=0;i<=Math.round(ln/1.2);i++){const t=i*1.2/ln,x=sx+sd*u*(.07*t+.02*Math.sin(t*4.2+ph)),y=sy+ln*t,al=Math.pow(1-t,.5);pts.push([x,y,Math.max(1,u*w*X.w*(.9-.5*t)),al])}
      soft(m,pts)}});
    layers.push([blur(m,u*(F.tear.fine[lv]?.022:.016)),lash,a*1.25,1])}}
  /* no hard edges: every mask fades to nothing before the canvas edge (the box is only a bit bigger than the effect) */
