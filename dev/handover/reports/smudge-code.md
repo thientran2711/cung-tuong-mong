@@ -60,9 +60,15 @@ PRIORITY #1 CHECK: OD 17/11 ~23:30Z (smudge = CODE on the makeup layer, not Magn
 ## r12 (owner 00:58Z: pick the smear strength by numbers)
 - ONE knob family BAL.looks.smuFx.pct = {blush:[0,0,P,P], lip:[0,0,P,P]} = opacity of the smudge's own pink smear and of the lip smear at vừa / nặng (null = older wash / lip.a numbers). Default .10. Grey eye runs + nhẹ untouched. Options rendered with both at the same %: CDN img/_review/smudge/opt-<2|3>-<5|10|15|20>.png (2 = vừa, 3 = nặng), c11-tcold, labels 'Lem vừa · 5 %' … 'Lem nặng · 20 %'. Test: PCT=10 node dev/test/smudge-code.js <url> <outdir>.
 
+## r13 (owner 01:21Z: grey runs too opaque; pink still a vertical stripe at any %)
+- ROOT of the pink stripe: not the wash but the EYESHADOW RUN (layer 2: lid colour smeared straight down the cheek = two vertical slabs, seen by dumping the layer's alpha). Removed at vừa / nặng (smuFx.lid.a [0,.24,0,0]; nhẹ unchanged). The smudge pink at vừa / nặng is now ONLY a soft radial bloom, the same gradient shape as the makeup blush (full at the centre, .55 at .35, 0 at the rim), a little larger / lower / outward; no smear, no skin-mask cut, only the face oval. Lip smear: soft splat halo, same falloff (unchanged shape, opacity from the knob).
+- Grey lash runs: more transparent (tear.a [0,.2,.27,.34]) and softer (blur .016u / .022u).
+- Measure (dev/test/smudge-code.js, pink layer alone, row through the cheek band, 20 %): max ABSOLUTE alpha step between neighbouring pixels = .012 at vừa and nặng (≈ 3/255 per pixel, threshold .02) = smooth, no step. Looked at 3x crops of both cheeks at nặng 20 % and vừa: no vertical line / edge.
+- Options re-rendered: CDN img/_review/smudge/opt-<2|3>-<5|10|15|20>.png.
+
 ## Open items / follow-ups
 - Small figure faces (~40 px): nhẹ barely visible, vừa/nặng read as a tear stain.
 - Shots outside git; built root files not committed.
 
 ## State
-branch review/smudge-code b4239ee (pushed). Waiting for verdict.
+branch review/smudge-code 6e56871 (pushed). Waiting for verdict.
