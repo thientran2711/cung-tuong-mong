@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"4eac30bc+","t":"2026-11-17T22:57Z","c":"review coop-thin-c r1 #2: her NPC pack resend (F1) listens on any guest seat, not only while the C switch is on: a level drop / build hold …","b":"bdc96ec5f83e","h":[{"s":"c7375c0c+","t":"2026-11-17T22:33Z","c":"batch s38a: dudo-blank-r1 2270c4c5 merged onto main 99f3978d; site rebuilt"},{"s":"99f3978d+","t":"2026-11-17T21:07Z","c":"batch s37a: display-shelf-r3rv 41418cd8 merged onto main 4c8568f5; site rebuilt"},{"s":"4c8568f5+","t":"2026-11-17T20:30Z","c":"batch s36a: main 60b0e3bf (display-shelf) merged; jdisp gated on BAL.shelf.ui (=0, room hidden); site rebuilt"},{"s":"da86e866","t":"2026-11-17T20:29Z","c":"Thẻ hành sự chia hai khối THÀNH và BẠI cho rõ được mất; khung dài có chữ \"Kéo xuống\" nhắc còn nữa; thẻ người chỉ ghi tước vị một lần, không…"},{"s":"9c6292d3+","t":"2026-11-17T20:17Z","c":"review display-shelf r2: Thái hậu rebuke through the one stat path ap (favour runs -100..100; cl(...,0,100) RAISED a negative favour to 0);…"},{"s":"85545ce7+","t":"2026-11-17T20:02Z","c":"world_check2 §1: a kind she died in is played again on a new life (fresh() kept as window.__wcFresh) — her random death mid-loop failed tha…"},{"s":"fc7c649f+","t":"2026-11-17T19:42Z","c":"review looks-2 r2: looks-2 layer scan follows the owner's AVATAR = ID CARD rule (17/11 ~18:10Z, main kit-fx-register): portrait/avatar rows…"},{"s":"0a508368+","t":"2026-11-17T18:53Z","c":"wx-anim: site rebuilt"},{"s":"25c3b626","t":"2026-11-17T19:06Z","c":"Dư đồ dựng dọc gọn hơn, dấu ! sáng và to hơn; thẻ người nêu thẳng điều đã biết, chạm dòng gạch chấm mới thấy cách biết; Bảng vàng giữ đúng …"},{"s":"315af52e+","t":"2026-11-17T18:04Z","c":"Công chúa hòa thân nay chung một thẻ thân phận: rút trúng thì tùy duyên mà làm công chúa Nam Chiếu hay Bắc Địch, mỗi nơi một cố hương, một …"}]};
+window.CTM_BI={"s":"931fb000","t":"2026-11-18T01:00Z","c":"staff-cap-fix: household never stays over BAL.promo.cap; every removal told","b":"90a498260214","h":[{"s":"4eac30bc+","t":"2026-11-17T22:57Z","c":"review coop-thin-c r1 #2: her NPC pack resend (F1) listens on any guest seat, not only while the C switch is on: a level drop / build hold …"},{"s":"c7375c0c+","t":"2026-11-17T22:33Z","c":"batch s38a: dudo-blank-r1 2270c4c5 merged onto main 99f3978d; site rebuilt"},{"s":"99f3978d+","t":"2026-11-17T21:07Z","c":"batch s37a: display-shelf-r3rv 41418cd8 merged onto main 4c8568f5; site rebuilt"},{"s":"4c8568f5+","t":"2026-11-17T20:30Z","c":"batch s36a: main 60b0e3bf (display-shelf) merged; jdisp gated on BAL.shelf.ui (=0, room hidden); site rebuilt"},{"s":"da86e866","t":"2026-11-17T20:29Z","c":"Thẻ hành sự chia hai khối THÀNH và BẠI cho rõ được mất; khung dài có chữ \"Kéo xuống\" nhắc còn nữa; thẻ người chỉ ghi tước vị một lần, không…"},{"s":"9c6292d3+","t":"2026-11-17T20:17Z","c":"review display-shelf r2: Thái hậu rebuke through the one stat path ap (favour runs -100..100; cl(...,0,100) RAISED a negative favour to 0);…"},{"s":"85545ce7+","t":"2026-11-17T20:02Z","c":"world_check2 §1: a kind she died in is played again on a new life (fresh() kept as window.__wcFresh) — her random death mid-loop failed tha…"},{"s":"fc7c649f+","t":"2026-11-17T19:42Z","c":"review looks-2 r2: looks-2 layer scan follows the owner's AVATAR = ID CARD rule (17/11 ~18:10Z, main kit-fx-register): portrait/avatar rows…"},{"s":"0a508368+","t":"2026-11-17T18:53Z","c":"wx-anim: site rebuilt"},{"s":"25c3b626","t":"2026-11-17T19:06Z","c":"Dư đồ dựng dọc gọn hơn, dấu ! sáng và to hơn; thẻ người nêu thẳng điều đã biết, chạm dòng gạch chấm mới thấy cách biết; Bảng vàng giữ đúng …"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -3465,26 +3465,34 @@ function staffInit(){sidN=Math.max(sidN,...allServ().map(s=>s.sid),0);capSweep()
   if(s.role==="eunuch"&&roll(20)){const m=pick(L.filter(x=>x.role==="maid"&&!x.lover&&ownerOf(x)!==ownerOf(s)));if(m){s.lover=m.sid;m.lover=s.sid}}}}
 function fillStaff(p,free){const [cm,ce]=capOf(p);let [m,e]=hhHas(p);
  while(m<cm&&roomFor("maid")&&(free||p.bac>=BAL.house.hireBac)){p.staff.push(mkServ("maid"));m++;if(!free)ap(p,{bac:-BAL.house.hireBac})}while(e<ce&&roomFor("eunuch")&&(free||p.bac>=BAL.house.hireBac)){p.staff.push(mkServ("eunuch"));e++;if(!free)ap(p,{bac:-BAL.house.hireBac})}}
-/* OVER THE TABLE (old saves, a demotion, the cold palace; review/staff-root): Nội vụ phủ takes the extra servants back and sends them elsewhere.
-   Never the personal maid (not in staff), a named palace woman (eid), a co-op guest's servant; the least trusted go first, her own eyes and
-   ears (spyFor "me") and lovers last; `stay` (a servant just placed, e.g. a plant) is never the one sent away. A servant she trusts (loyal >= BAL.promo.trimTrust) leaves with a farewell scene, the others with a log line.
-   NPCs: data only. The host decides (co-op guest skips: the household is a world key). */
+/* OVER THE TABLE (old saves, a demotion, the cold palace; review/staff-root; review/staff-cap-fix owner 18/11): Nội vụ phủ takes the extra servants back
+   and sends them elsewhere. ONE RULE: the household NEVER stays over the table BAL.promo.cap — every servant counts (hhHas), the cap is met by
+   sending others away; only those who cannot be moved stay: the personal maid (not in staff), a named palace woman (eid, jstaff post) and a
+   co-op player's servant (coop). Order: the least trusted go first; her own eyes and ears (spyFor "me"), lovers, a servant coming home (srvHome)
+   and `stay` (one just placed, e.g. a plant) last — but they DO go when nobody else can (the arrival is refused).
+   EVERY removal from her household is told to her: a servant she trusts (loyal >= BAL.promo.trimTrust) with a farewell scene, the others in ONE
+   grouped kit notice (kitPanel kind "notice") per trim; plus a log line. NPCs: data only. The host decides (co-op guest trims only her own: capSweep). */
 function capTrim(p,stay){const gone=[];try{if(!p||!Array.isArray(p.staff)||p.coop||(S&&p===S.thO))return gone;const c=capOf(p),h=hhHas(p);
- const keep=s=>(s.spyFor==="me"?1000:0)+(s.lover?200:0)+(s.loyal||0);
- /* HER OWN servant coming home (staff-root-fix-1, Foreman B rule): a servant marked by srvHome() is treated exactly like `stay` at the
-    trim after she comes back (never the one sent away; another goes, or she stays over the table), and the mark is cleared as soon
-    as that side of the household is within the table again (then she is an ordinary servant for later trims) */
- const home=s=>s===stay||!!(s&&s.home);
- [["maid",0],["eunuch",1]].forEach(([role,i])=>{while(h[i]>c[i]){const L=p.staff.filter(s=>s&&!home(s)&&s.role===role&&!s.eid&&!s.coop).sort((a,b)=>keep(a)-keep(b));if(!L.length)break;
-  const x=L[0];p.staff.splice(p.staff.indexOf(x),1);h[i]--;x.spyFor=x.spyFor==="me"?null:x.spyFor;gone.push(x);
+ const keep=s=>(s===stay||s.home?5000:0)+(s.spyFor==="me"?1000:0)+(s.lover?200:0)+(s.loyal||0);
+ [["maid",0],["eunuch",1]].forEach(([role,i])=>{while(h[i]>c[i]){const L=p.staff.filter(s=>s&&s.role===role&&!s.eid&&!s.coop).sort((a,b)=>keep(a)-keep(b));if(!L.length)break;
+  const x=L[0];p.staff.splice(p.staff.indexOf(x),1);h[i]--;x.spyFor=x.spyFor==="me"?null:x.spyFor;delete x.home;gone.push(x);
   try{if(x.fid&&typeof figUsed==="function"&&!(window.COOPW&&COOPW.on&&COOPW.seat==="b")){const U=figUsed();const k=U.indexOf(x.fid);if(k>=0)U.splice(k,1)}}catch(e){}}});
- if(p===S&&gone.length){const T=gone.filter(s=>(s.loyal||0)>=BAL.promo.trimTrust),O=gone.filter(s=>!T.includes(s));
-  if(O.length)log(`Nội vụ phủ định lại kẻ hầu theo phẩm vị: ${O.map(s=>s.name).join(", ")} được điều sang hầu nơi khác.`);
-  for(const s of T)Q.push({t:"Nội vụ phủ điều người",who:pServ(s),h:`<p>Nội vụ phủ định lại số kẻ hầu theo phẩm vị của ngươi. ${s.name} phải sang hầu nơi khác.</p><p>${s.name} quỳ lạy từ biệt: “Nô tỳ đi rồi, xin chủ tử giữ gìn. Có việc gì, chủ tử cứ sai người gọi, nô tỳ vẫn nhớ ơn.”</p>`,btn:"Đành vậy"})}
- /* the mark goes once her side of the household is back within the table (another left); while only she could go, she keeps it and stays */
+ if(p===S&&gone.length)capTell(gone,c);
  for(const s of p.staff){const i=s&&s.role==="maid"?0:1;if(s&&s.home&&h[i]<=c[i])delete s.home}}catch(e){console.error("capTrim",e)}return gone}
+/* the one way she is told that Nội vụ phủ took servants back (capTrim; jstaff fitCap goes through capTrim) */
+function capTell(gone,c){c=c||capOf(S);const T=gone.filter(s=>(s.loyal||0)>=BAL.promo.trimTrust),O=gone.filter(s=>!T.includes(s));
+ log(`Nội vụ phủ định lại kẻ hầu theo phẩm vị: ${gone.map(s=>s.name).join(", ")} được điều sang hầu nơi khác.`);
+ if(O.length){const nm=O.map(s=>s.name).join(", ");try{if(typeof kitPanel==="function")kitPanel({kind:"notice",title:"Nội vụ phủ điều người",sub:"Định lại kẻ hầu theo phẩm vị",subject:pServ(O[0]),
+   facts:[capLaw(c),`${nm} ${O.length>1?"đều ":""}được điều sang hầu nơi khác.`],btn:"Đã hiểu"});
+  else Q.push({t:"Nội vụ phủ điều người",who:pServ(O[0]),h:`<p>Nội vụ phủ định lại số kẻ hầu theo phẩm vị của ngươi. ${nm} được điều sang hầu nơi khác.</p>`,btn:"Đã hiểu"})}catch(e){console.error("capTell",e)}}
+ for(const s of T)Q.push({t:"Nội vụ phủ điều người",who:pServ(s),h:`<p>Nội vụ phủ định lại số kẻ hầu theo phẩm vị của ngươi. ${s.name} phải sang hầu nơi khác.</p><p>${s.name} quỳ lạy từ biệt: “Nô tỳ đi rồi, xin chủ tử giữ gìn. Có việc gì, chủ tử cứ sai người gọi, nô tỳ vẫn nhớ ơn.”</p>`,btn:"Đành vậy"})}
+/* the household law as she reads it, from the one table (BAL.promo.cap via capOf) */
+function capLaw(c){let w="";try{w=S.out?"Ở lãnh cung":`Phẩm ${typeof prRankName==="function"?prRankName(rkOf(S)):RANKS[Math.max(0,Math.min(RANKS.length-1,S.rank|0))].n}`}catch(e){}
+ return `${w||"Phẩm vị này"} theo lệ giữ ${c[0]} cung nữ (kể cả cung nữ thân tín)${c[1]?`, ${c[1]} thái giám`:", không có thái giám"}.`}
+/* can p take one more servant of this role without staying over the table (room under the cap, or an ordinary servant Nội vụ phủ can move)? */
+function capRoom(p,role){try{const i=role==="maid"?0:1;if(hhHas(p)[i]<capOf(p)[i])return true;return(p.staff||[]).some(s=>s&&s.role===role&&!s.eid&&!s.coop&&!s.home)}catch(e){return false}}
 /* the one shared mark for a servant handed back to her own mistress (co-op settle: refused seat / refused 'srv'; any later return path):
-   honoured by capTrim until her side of the household is within the table, then cleared */
+   capTrim sends the others first; she goes only when nobody else can (never over the table); the mark clears once that side is within the table */
 function srvHome(s){if(s&&typeof s==="object")s.home=1;return s}
 /* co-op guest (review/staff-root-r1): her own household is a PERSONAL key (jcoopworld W_KEYS has no staff), so the guest trims HER OWN
    household itself (old save, demotion, cold palace); the NPC households and the face list (fidUsed, a world key) stay the host's */
@@ -3497,7 +3505,7 @@ function bestSent(p){const L=(p.staff||[]).filter(s=>!s.spyFor);if(!L.length)ret
 function servCaught(p,s){if(!s)return"";if(roll(30)){p.staff.splice(p.staff.indexOf(s),1);return `${s.name} bị đánh chết trong ngục Thận Hình ti. `}s.loyal=cl(s.loyal-BAL.eff.j10.loyalServCaught,0,100);s.trouble=wk();return""}
 /* acts on servants (same functions for NPC mistresses) */
 function threatServ(a,s){const o=ownerOf(s);if(!o||!s.lover)return"";s.spyFor=key(a);return `${NMc(a)} dọa tố chuyện đối thực của ${s.name}; hắn/nàng sợ hãi, thành tai mắt. `}
-function plantServ(a,t){if(!a.staff)a.staff=[];const s=bestSent(a);if(!s||a.bac<BAL.house.plantBac)return"";ap(a,{bac:-BAL.house.plantBac});if(roll(odA(a,40+a.tamco/4+nq(s,"sharp",BAL.net.k.poachSharp)))){a.staff.splice(a.staff.indexOf(s),1);s.spyFor=key(a);(t.staff=t.staff||[]).push(s);/* a full household: the plant takes the place of its least trusted servant (one table, review/staff-root) */capTrim(t,s);return `${NMc(a)} cài ${s.name} vào cung ${NM(t)} làm tai mắt. `}evA(t,a,BAL.eff.j10.evPlantServ);return `Nội vụ phủ thấy lạ, ${NM(t)} không nhận ${s.name}. `}
+function plantServ(a,t){if(!a.staff)a.staff=[];const s=bestSent(a);if(!s||a.bac<BAL.house.plantBac)return"";ap(a,{bac:-BAL.house.plantBac});if(capRoom(t,s.role)&&roll(odA(a,40+a.tamco/4+nq(s,"sharp",BAL.net.k.poachSharp)))){a.staff.splice(a.staff.indexOf(s),1);s.spyFor=key(a);(t.staff=t.staff||[]).push(s);/* a full household: the plant takes the place of its least trusted servant (one table, review/staff-root) */capTrim(t,s);return `${NMc(a)} cài ${s.name} vào cung ${NM(t)} làm tai mắt. `}evA(t,a,BAL.eff.j10.evPlantServ);return `Nội vụ phủ thấy lạ, ${NM(t)} không nhận ${s.name}. `}
 function servMonth(){let ev="";capSweep();for(const p of consorts()){if(!p.staff)p.staff=[];
   /* co-op guest (review/servant-mline-r2): an NPC household's own month (loyalty, NPC-vs-NPC spies, refilling) rolls on the host;
      the guest keeps only what concerns her: her spies' reports, her servants' friends, NPC acts aimed at her (pickTarget gives only her) */
@@ -3945,8 +3953,10 @@ function reLot(better){if(S.dead||Q.length)return;if(!better){if(S.relot||S.bac<
 const ACTDOM={spy:"Mưu kế",frame:"Mưu kế",poison:"Mưu kế",rumor:"Mưu kế",bribe:"Mưu kế",block:"Mưu kế",musk:"Mưu kế",catswap:"Mưu kế",ksab:"Mưu kế",kpoison:"Mưu kế",pond:"Mưu kế",kframe:"Mưu kế",plant:"Mưu kế",accuse:"Danh",vp:"Danh",takeaway:"Con cái",ally:"Giao thiệp",gift:"Giao thiệp",steal:"Sủng",road:"Sủng"};
 /* ================= LÃNH CUNG: a playable state for every consort ================= */
 function cold(why){if(S.dead)return;if(S.out)return;S.out=1;S.coldWhy=why;S.coldRank=S.rank;S.coldTurn=S.turn;S.rank=0;S.confined=0;S.preg=S.fake?0:S.preg;S.fake=0;
- const keep=(S.staff||[]).filter(s=>s.loyal>=BAL.loy.trust).slice(0,1);(S.staff||[]).filter(s=>!keep.includes(s)).forEach(s=>{});S.staff=keep;
- log(`<span class="r">${why}. Ngươi bị đưa vào lãnh cung.</span>`);Q.push({t:"Lãnh cung",cls:"end",who:pMe(),h:`<p>${why}.</p><p>Cửa lãnh cung đóng lại sau lưng. Bổng lộc chỉ còn chút gạo mốc, kẻ hầu bỏ đi gần hết${keep.length?`; chỉ ${keep[0].name} ở lại`:""}.</p><p class="past">Chưa hết đường: minh oan, cầu xin, nhờ người bên ngoài, hay chờ ân xá.</p>`,btn:"Bước vào"});coldVisit();deal()}
+ /* the cold palace keeps only what the one household table allows (BAL.promo.cap row 0 via capOf; review/staff-cap-fix): the most trusted stay, the others are named here */
+ const cc=capOf(S),kp=[];for(const [role,n] of [["maid",cc[0]-1],["eunuch",cc[1]]])kp.push(...(S.staff||[]).filter(s=>s.role===role&&s.loyal>=BAL.loy.trust).sort((a,b)=>b.loyal-a.loyal).slice(0,Math.max(0,n)));
+ const keep=kp.concat((S.staff||[]).filter(s=>s.coop&&!kp.includes(s))),left=(S.staff||[]).filter(s=>!keep.includes(s));S.staff=keep;
+ log(`<span class="r">${why}. Ngươi bị đưa vào lãnh cung.</span>`);Q.push({t:"Lãnh cung",cls:"end",who:pMe(),h:`<p>${why}.</p><p>Cửa lãnh cung đóng lại sau lưng. Bổng lộc chỉ còn chút gạo mốc, kẻ hầu bỏ đi gần hết${left.length?`: Nội vụ phủ điều ${left.map(s=>s.name).join(", ")} sang nơi khác`:""}${keep.length?`; chỉ ${keep.map(s=>s.name).join(", ")} ở lại`:""}.</p><p class="past">Chưa hết đường: minh oan, cầu xin, nhờ người bên ngoài, hay chờ ân xá.</p>`,btn:"Bước vào"});coldVisit();deal()}
 function coldVisit(){S.place="lc";const f=rivals.filter(v=>v.alive&&v.out);S.visit={k:"lc",people:lcPeople("Phế phi · cùng cảnh ngộ"),talked:false,tk:{},msg:"Gió lùa qua song cửa mục. Ở đây chỉ có những người bị quên lãng."}}
 function restore(full,why){S.out=0;S.rank=full&&S.coldRank>=7&&seatHas(S,7)?7:seatDown(S,full?S.coldRank:S.coldRank-1);S.place="home";S.visit={k:"home",people:homePeople(),talked:false,tk:{}};S.lastPromo=S.turn;fillStaff(S,true);
  log(`<b class="g">${why}. Ngươi được rời lãnh cung, phục vị ${RANKS[S.rank].n}.</b>`);Q.push({t:"Rời lãnh cung",cls:"end",who:pMe(),h:`<p>${why}.</p><p>Ngươi được phục vị <b>${RANKS[S.rank].n}</b>.</p>`,btn:"Tạ ơn"});deal();if(typeof feedback==="function")feedback("decree")}
@@ -4974,7 +4984,7 @@ function fillStaff(p,free){const [cm,ce]=capOf(p);let [m,e]=hhHas(p);
  while(e<ce&&roomFor("eunuch")&&(free||p.bac>=BAL.house.hireBac)){const s=get("eunuch");if(!s)break;p.staff.push(s);e++;if(!free)ap(p,{bac:-BAL.house.hireBac})}}
 /* hiring: she picks among this month's candidates (age, origin, impression only) */
 function hireCard(role){const P=npool()[role];if(!P.length){Q.push({t:"Nội vụ phủ",h:`<p>Tháng này Nội vụ phủ không còn ${role==="maid"?"cung nữ":"thái giám"} nào. Tháng sau sẽ có người mới.</p>`});showModal();return}
- Q.push({act:1,t:"Nội vụ phủ đưa người",h:`<p>Người hiện có (chỉ biết tuổi, xuất thân và dáng vẻ; nết thật phải ở lâu mới biết):</p>`,opts:P.map(s=>({n:`${s.name}, ${s.age} tuổi`,fx:{bac:BAL.eff.j29.bacFx},x:`${s.org} · trông ${s.imp}`,go:()=>{const i=P.indexOf(s);if(i>=0)P.splice(i,1);S.staff.push(s);log(`Nhận ${s.name} từ Nội vụ phủ. Bạc ${balSg(BAL.eff.j29.bacFx)}.`)}})).concat([{n:"Thôi",fx:{},x:"không nhận ai"}])});showModal()}
+ Q.push({act:1,t:"Nội vụ phủ đưa người",h:`<p>Người hiện có (chỉ biết tuổi, xuất thân và dáng vẻ; nết thật phải ở lâu mới biết):</p>`,opts:P.map(s=>({n:`${s.name}, ${s.age} tuổi`,fx:{bac:BAL.eff.j29.bacFx},x:`${s.org} · trông ${s.imp}`,go:()=>{/* the table again at the moment she takes him (one rule, review/staff-cap-fix) */if(hhHas(S)[role==="maid"?0:1]>=capOf(S)[role==="maid"?0:1]){log(`Cung ngươi đã đủ người hầu theo phẩm vị; Nội vụ phủ không đưa thêm.`);return}const i=P.indexOf(s);if(i>=0)P.splice(i,1);S.staff.push(s);log(`Nhận ${s.name} từ Nội vụ phủ. Bạc ${balSg(BAL.eff.j29.bacFx)}.`)}})).concat([{n:"Thôi",fx:{},x:"không nhận ai"}])});showModal()}
 document.addEventListener("click",e=>{const b=e.target.closest("[data-hire]");if(!b||b.disabled)return;e.stopPropagation();e.preventDefault();if(!S||S.dead||Q.length||S.bac<BAL.house.hireBac)return;const [cm,ce]=capOf(S),[nm,ne]=hhHas(S);const role=b.dataset.hire;if(role==="maid"?nm>=cm:ne>=ce)return;hireCard(role)},true);
 /* 'Xem người': a costly look (Bạc -15, 1 khắc) reveals the trait */
 document.addEventListener("click",e=>{const b=e.target.closest("[data-svlook]");if(!b||b.disabled)return;e.stopPropagation();const s=servById(+b.dataset.svlook);if(!s||S.bac<BAL.house.lookBac||!can(1)||Q.length)return;apply({bac:-BAL.house.lookBac});spend(1);servLearn(s,"Cho người dò xét lai lịch");render()},true);
@@ -56002,10 +56012,9 @@ function mk(post,i,age){const nm=post.names[i%post.names.length];if(typeof sidN!
  return{sid:typeof sidN!=="undefined"?++sidN:Date.now(),eid:post.id,n:i,name:nm[0],call:nm[1],role:"maid",rk:post.rk,age,retire:rint(...(B().retire||[63,68])),
   tr:post.tr||"trung",loyal:70+R(16),spyFor:null,lover:null,af:{},hue:0,face:-1,fc:"",fk:"",fid:"",elder:1,since:S?S.year:1}}
 const elderCallOf=m=>{const st=(m.staff||[]).find(s=>s.eid);return st?st.call:"ma ma"};
-/* keep the household rule: a master over her cap sends an ordinary maid back to Nội vụ phủ (never a named one, a spy of hers, a lover) */
-function fitCap(m){try{if(!m||!m.staff||m===S.thO)return;const cap=capOf(m)[0];let n=hhHas(m)[0];
- while(n>cap){/* a servant coming home (j10 srvHome mark, staff-root-fix-1) is never the one sent away here either */const L=m.staff.filter(s=>s.role==="maid"&&!s.eid&&!s.home&&s.spyFor!=="me"&&!s.lover);const x=L[L.length-1]||m.staff.find(s=>s.role==="maid"&&!s.eid&&!s.home);if(!x)break;
-  m.staff.splice(m.staff.indexOf(x),1);try{if(x.fid){const U=figUsed();const i=U.indexOf(x.fid);if(i>=0)U.splice(i,1)}}catch(e){}n--;if(m===S)log(`Nội vụ phủ điều ${x.name} sang cung khác để ${elderCallOf(m)} về hầu.`)}}catch(e){}}
+/* keep the household rule: a master over her cap sends ordinary servants back to Nội vụ phủ (never a named one) — the ONE trim (j10 capTrim,
+   review/staff-cap-fix): same order, and she is told of every removal */
+function fitCap(m){try{if(!m||!m.staff||m===S.thO)return;capTrim(m)}catch(e){}}
 /* every post filled, each woman in the right household; her rank within the master's cap (srkMax) */
 function place(st){const post=postOf(st.eid);if(!post)return;const m=masterFor(post);if(!m)return;if(!m.staff)m.staff=[];
  for(const o of [S,S.thO].concat(rivals||[]))if(o&&o!==m&&Array.isArray(o.staff)&&o.staff.includes(st))o.staff.splice(o.staff.indexOf(st),1);
@@ -66669,7 +66678,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="bdc96ec5f83e";window.CTM_BUILD=BUILD;
+const BUILD="90a498260214";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
