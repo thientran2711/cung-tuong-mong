@@ -270,3 +270,4 @@ OLDER D PASSes not live (check vs newest main): face-w404-r1 51b87607, day-khac-
 D STANDBY = session_01964izCXnfxr3WLK6fnrdr5 (depth 0, idle). MAIN = ROOT-49 session_01UV1SzicNuc6RxVvcxNUHKK (cross-account: send_message 'not found' → FOR MAIN lines here).
 Owner asleep (OD 07:39Z; standby blocks already pasted). Free slots 8 — no other real D item queued.
 LESSONS: grep WHOLE STATUS for ORDER/FROM MAIN each wake; push brief BEFORE create_session; source-conflict re-merges = opus worker + short re-review; my push helper = fetch → detached checkout FETCH_HEAD → edit → commit → push, retry.
+- (18/11 08:51Z) D ROOT STOPPED (depth 0, context 64 %): successor FOREMAN D #1 = session_01964izGKDEJJjzBBQAqWeWg (depth 1) opened with the handover above (prompt carries ROLLOVER 3 lines + LINEAGE + SLEEP verbatim). D ROOT hourly wake trig_01H6sanzmcfCgLsM9yMsrjSk deleted. Workers report to #1. D STANDBY session_01964izCXnfxr3WLK6fnrdr5 stays idle.
