@@ -4,3 +4,4 @@
 | C act pictures + neutral placeholder + D14 samples (MAIN orders) | review/act-pics-d14 | C | session_011xDdVRwzCy4vPrV3ffEzU5 | P1 LIVE, LAND READY 1384801f; D14 waits owner pick | 18/11 11:45Z |
 poison-road-r2-rv | review/poison-road-r2-rv | session_01964izEFTD1Fs4DqpreEzX8 | LIVE 12a1e4be | 18/11 11:40Z | owner D #1
 | NPC LANDER #5 (opus; ag-all-2-land + npc-chain-land; succ. LANDER #4) | review/ag-all-2-land, review/npc-chain-land | C-AG #12 | session_01UV1SzmC4Vsob8611uh6nPK | RUNNING | 18/11 11:52Z |
+| AG2-PERF (opus; ag-all-2 perf fix, outcome-identical) | review/ag2-perf | C-AG #12 | session_01UV1SzgvfBYs38MJqH9wsxK | RUNNING | 18/11 11:55Z |
