@@ -17,7 +17,7 @@
 const KBK_ART={cover:"img/book-cover.webp",left:"img/book-left.webp",right:"img/book-right.webp",end:"img/book-end.webp",title:"img/title-tuanluc-d4s.webp"};
 /* KBK_TITLE_IMG: the cover label's written title as a picture (owner 11/15: vertical brush title d4 + the game's Trân nữ seal, KIT §27.1). A cover page whose
    title has a picture here draws it in the label (art cover only); any other title keeps the text. */
-const KBK_FIG_COL=.5;   /* figure column ≤ 36 % of the page (KIT T3) */
+const KBK_FIG_COL=.36;   /* figure column ≤ 36 % of the page (KIT T3) */
 const KBK_TITLE_IMG={"Tuần lục":KBK_ART.title};
 const KBK_HAVE={};
 /* lag-play (owner 16/11 15:05Z): ONE coalesced book re-layout. Every picture that arrived (book art, each figure's size/head measure)
@@ -63,7 +63,10 @@ function kitBook(spec){spec=spec||{};const rm=()=>{try{return reducedMotion()}ca
  const personBody=(p,cont)=>{const fw=p.kind==="person"?p.who:p.fig;let fig=typeof kitStageFig==="function"&&fw&&kitStageFig(fw,{cap:false})||"";
   /* owner 17:45Z: every page has its subject's full-length figure; no painting (yet) or the figure list still loading → the kit silhouette */
   if(!fig&&fw&&typeof kitStageFig==="function"){let sx="f";try{const r=personRoleRank(fw);sx=r.kid?"k":r.sex==="m"?"m":"f"}catch(e){}fig=kitStageFig(fw,{cap:false,src:(typeof KIT_DIR==="string"?KIT_DIR:"img/kit/")+`unknown-fig-${sx}.webp`})||""}const kfr=(/--kfr:([\d.]+)/.exec(fig)||[])[1]||"1";
-  return `<div class="kbk-person${fig?" kbk-full":""}" style="--kfr:${kfr}${typeof kitBookFigCol==="function"?kitBookFigCol(fig,PW,PH):""}"><div class="kbk-por">${fig||(fw?pframe(kitFace(fw)):"")}</div><div class="kbk-phead">${personTop(p,!!cont)}</div><div class="kbk-flow"></div></div>`};
+  /* review/book-figsize (owner 18/11): the figure is shown at the ONE approved body size (column height / man × fac) and is never shrunk or cut, so THIS page's figure column is as wide as the figure's true painted width at that body (a wide robe / the grey silhouette = whole picture width): the text frame takes the rest (never under the figure). Not measured yet → the base column, and the book is laid out again when the measure arrives. */
+  let porf="";if(fig&&typeof kitFigBody==="function"){try{const src=(/src="([^"]+)"/.exec(fig)||[])[1],b=src&&kitFigBody(src,()=>{try{dispatchEvent(new Event("resize"))}catch(e){}});
+   if(b){const sil=/unknown-fig-/.test(src),base=Math.round(PW*.89*KBK_FIG_COL),body=Math.min(PH*.855,base/(KIT_BOOK.r0*.935))*parseFloat(kfr),span=Math.max(.2,b.b-kitFigTop(b)),pw=(sil?1:Math.max(.2,(b.r||1)-(b.l||0)))*b.ar*body/span;porf=";--porf:"+Math.round(Math.min(PW*.89*.8,Math.max(base,pw+6)))+"px"}}catch(e){}}
+  return `<div class="kbk-person${fig?" kbk-full":""}" style="--kfr:${kfr}${porf}${typeof kitBookFigCol==="function"?kitBookFigCol(fig,PW,PH):""}"><div class="kbk-por">${fig||(fw?pframe(kitFace(fw)):"")}</div><div class="kbk-phead">${personTop(p,!!cont)}</div><div class="kbk-flow"></div></div>`};
 
  /* ---- pagination: fill each page until it overflows, continue on the next ---- */
  function paginate(){const L=[];meas.style.width=PW+"px";meas.style.height=PH+"px";
@@ -92,7 +95,7 @@ function kitBook(spec){spec=spec||{};const rm=()=>{try{return reducedMotion()}ca
   root.style.setProperty("--pw",PW+"px");root.style.setProperty("--ph",PH+"px");root.style.setProperty("--fs",Math.max(13,Math.min(17,PW/34)).toFixed(2)+"px");
   root.style.setProperty("--por",Math.round(Math.min(PW*(PW<440?.42:.4),PH*.62*480/1037))+"px");
   /* full-page figure column (owner 17/11 03:12Z, KIT 56.3): NARROW, against the page's left edge: KBK_FIG_COL of the inner page width (.kbk-in = 89 % of the page); the figure is fitted into it, the text frame gets the rest */
-  root.style.setProperty("--porf",Math.round(PW*.89*KBK_FIG_COL)+"px");
+  root.style.setProperty("--porf",Math.round(PW*.89*KBK_FIG_COL)+"px");root.style.setProperty("--porb",Math.round(PW*.89*KBK_FIG_COL)+"px");
   leaves=paginate();
   /* page numbers (cover has none) */
   let no=0;leaves.forEach(l=>{if(l.kind!=="cover")l.no=++no});
@@ -583,7 +586,7 @@ function wkBookPages(){const d=wkBookData();const date=kitDate(S.month,S.year,S.
 /* full-page figure (owner 04:30Z): the figure column spans the whole page body; the figure's height = the body height (men ×1, women
    ×1/KIT_FIG.man through --kfr); the text column beside it scrolls into a "(tiếp theo)" page, the figure never shrinks */
 .kbk-person.kbk-full,.kbk.narrow .kbk-person.kbk-full{grid-template-columns:var(--porf) minmax(0,1fr);grid-template-areas:"por head" "por flow";grid-template-rows:auto minmax(0,1fr);height:100%}
-.kbk-person.kbk-full>.kbk-por{align-self:stretch;height:100%;min-height:0;position:relative;display:flex;justify-content:flex-start;align-items:flex-end;overflow:hidden}
+.kbk-person.kbk-full>.kbk-por{align-self:stretch;height:100%;min-height:0;position:relative;display:flex;justify-content:flex-start;align-items:flex-end;overflow:hidden}.kbk-person.kbk-full>.kbk-phead,.kbk-person.kbk-full>.kbk-flow{position:relative;z-index:1}
 .kbk-person.kbk-full>.kbk-por>.kesf{height:100%;margin:0;display:flex;flex-direction:column;justify-content:flex-end;align-items:flex-start;min-height:0;max-width:100%}
 .kbk-person.kbk-full>.kbk-por .kesfi{display:block;position:relative;height:calc(100% * var(--kfr,1));width:auto;max-width:none;flex:0 0 auto}
 .kbk-person.kbk-full>.kbk-por .kesfi>.kesimg{display:block;height:100%!important;width:auto!important;max-width:none!important;max-height:none!important}

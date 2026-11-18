@@ -109,14 +109,13 @@ var KBK_ART_LINE=window.KBK_ART_LINE={b:.0244};
    let dyF=0,dxF=0;{const i1=f.querySelector("img"),s1=i1&&i1.getAttribute("src"),b1=s1?kitFigBody(s1,soon):null,Hc=por.clientHeight;
     if(!b1||!Hc){f.style.visibility="hidden"}else{const kf=parseFloat(getComputedStyle(box).getPropertyValue("--kfr"))||1;
      const ar1=i1.naturalWidth&&i1.naturalHeight?i1.naturalWidth/i1.naturalHeight:b1.ar,pwc=por.clientWidth;
-     /* review/book-figsize (owner 18/11 "Cái gì mà mỗi người một size vậy trời?" + "never cropped", KIT 32.8): ONE body for everyone, ZERO crop. The old per-figure shrink
-        (kk = column / own painted width) gave every figure another size (scan spread 53 %). Now the standard body is fixed by the COLUMN, never by the figure:
-        body(woman) = min(column height / man, column width / (KIT_BOOK.wmax × KIT_BOOK.fmax)); men ×fac on top. wmax is the widest painted art of the whole catalog (+ the
-        grey silhouettes, whose art fills the picture width: kitFigBody reports them as a standard figure, so their true extent is 0..1 here). A figure that is STILL wider
-        (never seen in the catalog scan) is scaled to fit — wider than the column is never cut. */
-     const KB=window.KIT_BOOK||{wmax:.65,fmax:1.07},sil=/unknown-fig-/.test(s1),L0=sil?0:(b1.l||0),R0=sil?1:(b1.r||1);
-     const Hs=pwc?Math.min(Hc,KIT_FIG.man*pwc/(KB.wmax*KB.fmax)):Hc,g=kitBookFig(Object.assign({},b1,{ar:ar1}),kf*KIT_FIG.man,Hs);const pw1=Math.max(.2,R0-L0)*g.iw;
-     const kk=pwc&&pw1>pwc?pwc/pw1:1;dyF=g.dy*kk;dxF=-L0*g.iw*kk;   /* painted left edge on the column's left edge */
+     /* review/book-figsize (owner 18/11 "Cái gì mà mỗi người một size vậy trời?" then "cái size người nó đã to đẹp rồi, tự nhiên mày scale nhỏ lại"): ONE body for everyone = the
+        approved size of her own Tổng lược figure: body = column height / KIT_FIG.man × fac (kitBookFig, KIT 34.6), NEVER reduced for width (the old per-figure shrink kk = column /
+        own painted width gave every figure another size: scan spread 53 %). A wide robe / the grey silhouette (its art fills the picture width, kitFigBody reports it as a standard
+        figure so its true extent is 0..1 here) is NOT shrunk and NOT cut: it gets a wider column on ITS page (j87 personBody: --porf = its painted width, text takes the rest); only a figure wider than the 72 % cap of the page is scaled to it. */
+     const sil=/unknown-fig-/.test(s1),L0=sil?0:(b1.l||0),R0=sil?1:(b1.r||1);
+     const baseW=parseFloat((getComputedStyle(box.closest(".kbk")||box).getPropertyValue("--porb"))||0),Hs=baseW?Math.min(Hc,baseW/(KIT_BOOK.r0*.935)):Hc,g=kitBookFig(Object.assign({},b1,{ar:ar1}),kf*KIT_FIG.man,Hs);const pw1=Math.max(.2,R0-L0)*g.iw,inW=(box.closest(".kbk-in")||box).clientWidth||pwc;
+     const kk=pwc&&pw1>pwc+1?pwc/pw1:1;dyF=g.dy*kk;dxF=-L0*g.iw*kk;   /* painted left edge on the column's left edge */
      f.style.height=(g.ih*kk).toFixed(1)+"px";f.style.width=(g.iw*kk).toFixed(1)+"px";f.style.visibility="";f.dataset.kbody=(g.body*kk).toFixed(1);if(kk<1)f.dataset.kfit=kk.toFixed(3);
      /* KIT 32.2b EQUAL GAPS (owner 16/11 s21/s22, whole group): the two frame lines round the figure are the running-head rule (.kbk-rh)
         and the page frame's bottom line: the painted border's inner edge on art pages (KBK_ART_LINE.b of the page height, measured on
