@@ -1113,7 +1113,7 @@ RUNNING (all report to MAIN — tell them the new main id):
 - REVIEW men-forbidden Szh3jq9brqAHDsVQitM (opus BIG) → PASS → land; worker SziLuyrJEqfUqguNP1W idle.
 - REVIEW result-reason SziWJ2pGVgUMJzwxqQF: PASS e1f60927 on f986ff6a; asked to merge f8276cdb + regate → land. Worker SzirzUecQTMVipMrcQ1 idle (archive after land).
 - REVIEW cloth-xoc SziKea8TZQipjPGajgv on review/cloth-xoc-r6 (7270a76 wet+mud + main) → PASS → land. NOTE review/cloth-xoc head = be9d08e (tea pushed there by mistake; land the reviewer's r6 sha, NOT review/cloth-xoc head).
-- cloth-xoc worker SzjMK4RUBPdS1ZMuLds: TEA be9d08e on review/cloth-tea, full-tra c01/c30 sent owner (Lượt 3) → her verdict → SMALL review → land.
+- cloth-tea r3 worker SzghNErbDFn6nXtyBwa (successor of archived SzjMK4R): tea one shape on every costume, higher on chest → LOOK → owner → SMALL review → land after cloth-xoc r6.
 - REVIEW smudge r16 SzitaUhhFRRJBAbEgHM → PASS → land; worker SzhMG33iYZzEKjZvDzg then does AVATAR MAKEUP LAYER (step 0, every avatar frame, new branch from live main, SMALL review, full-screen shots).
 - REVIEW staff-cap-apply BIG Szjx5c2mp4L6PXwg2zG (fc470e4) → PASS → land; worker SzkNqcjf9atNLxPVz8y idle.
 - place-banner SzmHEoDtWWruq6yMGnZ: baking owner's two-line plaque; must send full-screen same-character before|after shots ("SHOTS READY") → LOOK → owner → SMALL review → land.
