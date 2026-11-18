@@ -26,4 +26,12 @@ CDN: https://ctm-img.victoria-tntt.workers.dev/img/_review/kc2k/ cNN_a18_ngheo_n
 | c29 | branch of plum blossoms from the roadside (8) | 1 | yes | |
 | c30 | wooden comb in a plain cloth (3) | 1 | none | pose verb "reading" → "looking at" (comb is not readable) |
 | c31 | plain bamboo-leaf fan (9) | 1 | none | |
-All looked at: reads poor but neat/pretty (cotton jacket, linen apron, one or two plain wooden pins + one fresh flower from the builder, no gold, no jade, no necklace), closed lips, bare forehead, item below the chin, frontal/three-quarter. 8 gens, 0 regen so far.
+| c05 | plain cloth bundle tied with a knot (6) | 1 | yes | |
+| c08 | skein of hemp thread (2) | 1 | yes | builder pose had lantern + handkerchief: lantern dropped, ONE item |
+| c32 | skein of hemp thread (2) | 1 | yes | |
+| c09 kc | small bamboo flute (khuê các 7) | 1 | yes | was fan + handkerchief; builder hoop replaced by one item, her spec5 songbird pose kept |
+| c11 kc | small painted-silk sachet with a cord (khuê các 9) | 1 | yes | was fan + handkerchief; one item |
+All looked at: reads poor but neat/pretty (cotton jacket, linen apron, one or two plain wooden pins + one fresh flower from the builder, no gold, no jade, no necklace), closed lips, bare forehead, item below the chin, frontal/three-quarter. 13 gens total (11 nhà nghèo + 2 khuê các), 0 regens, 10 cut-outs with images_remove_background (alpha 0..255; the rest had real alpha). Sheets sheet_cNN_new.jpg (c09/c11 sheets show nhà nghèo then khuê các, old 2K | new).
+Prompt deviations (documented, all item-driven): c30 pose verb 'reading' -> 'looking at' (comb), c08 lantern removed (one item). Everything else = build.py output with only the item phrase swapped.
+
+## HANDOVER K5: DONE, nothing pending. Foreman may want to rule: c05/c08 were flagged by K5 (not on the owner list) and redrawn too.
