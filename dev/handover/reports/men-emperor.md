@@ -95,3 +95,12 @@ Weak: emp3's ornate robe is busier than the others and a little redder at a51; e
 - Check sheet img/_review/men/emperor/emp_check_a26_a51_r4.jpg: all four emperors, a26 | a51 at the same height — head and body line up for each man. Sheets rebuilt: empN_ages.jpg (1-4), emp_all_r4.jpg (4 rows). All images looked at.
 - Credits: 11 gens × 135 + 11 cuts × 3 = 1518 cr. Nothing live. Gens per figure: ≤2 (emp2 a18 = 2).
 Weak: emp2's yellow is a touch more orange-gold than emp1's; emp3's yellow is paler/softer than emp1's; a51 yellows are deliberately muted/darker; emp4 a18-a36 keep the pale saffron + green trim from earlier rounds (owner OK'd emp4 earlier) so emp4 reads slightly greener than emp1.
+
+## M1 round 5 (W37, 18/11) — owner: emp1 + emp4 OK; emp2 "wearing what?" (wrong drawing style) and emp3 head size wrong → redo emp2 + emp3 all 4 ages
+- Rendering ("nét"): every gen got emp1 a26 as STYLE ref (emp3: emp1 a26 also as image ref for body/head) so the embossed near-3D silk rendering matches emp1/emp4.
+- emp2: back to his approved design (tall black-gold crown, crossed collar with thin dark borders, jade belt + tassel, scroll in left hand, stiff short pointed shoulders), robe recoloured to emp1's pale soft golden yellow, tone-on-tone embroidery, dark only as thin borders/belt, cream lining (the first candidate had amber + red lining → rejected, 2nd gen = pale one kept). a26 2 gens, then a18/a36/a51 1 gen each (a26 as the only ref so the costume cannot drift).
+- emp3: a26 needed 3 gens (2 candidates, then 1 with "head ~15% larger, shoulders as wide as emp1"); refined flowing robe, miện + beads kept, relaxed stance with a jade ruyi; a18/a36/a51 1 gen each from that a26 (a51 both hands on the ruyi).
+- HEAD CHECK img/_review/men/emperor/emp3_head_check_r5.jpg: emp1 a26 | emp3 a26 at the SAME pixel scale (both gens share the same 2048x3072 framing, feet aligned), red guide lines every 40 px: chins on the same line, hair tops level (emp3's sits under the miện), shoulders 325 vs 345 px → heads match; emp3's face is a little broader.
+- Sheets: empN_ages.jpg (2, 3 rebuilt; 1, 4 unchanged), emp_all_r5.jpg (4 rows). All images looked at.
+- Credits: emp2 5 gens + emp3 6 gens = 11 × 135 + 11 cuts × 3 = 1518 cr (task total ≈ 7000 cr). Nothing live.
+Weak: emp2 a51 is a dark antique brown-gold (darker than the other three a51s); emp3 face a bit broader than emp1's; emp2's chest collar lines are thin and sharp.
