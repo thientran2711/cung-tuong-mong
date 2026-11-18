@@ -55,7 +55,7 @@ function silKeys(g){if(FIXON())return(fixOf().kg||{})[g]||[];try{const I=BAL.she
 function setMap(){const m={};if(FIXON()){const F=fixOf();for(const s in F.placed)if(F.placed[s].set)m[s]=F.placed[s].set;return m}
  try{if(typeof shelfView==="function")for(const G of shelfView(KDR.p).groups)for(const it of G.items||[])if(it.set)m[it.slot]=it.set}catch(e){}return m}
 /* SET LINES (owner OD 17/11 ~20:47Z: she must see what to collect; random pieces show nothing): data = shelfView(S).sets [{id,on,k,t}] (her own room only); fixture: 4 sample lines */
-const SETFIX=[{id:"fx1",on:1,k:"on",t:"Bộ mẫu: Đức +2."},{id:"fx3",on:0,k:"wait",t:"Bộ đủ món: đã đủ món, tuần sau mới được tính."},{id:"fx2",on:0,k:"miss",t:"Bộ dở: còn thiếu chậu lan quý."},{id:"fx4",on:0,k:"bad",t:"Bộ khuyết: cây cảnh héo úa."}];
+const SETFIX=[{id:"fx1",on:1,k:"on",t:"Bộ mẫu: đang được tính."},{id:"fx3",on:0,k:"wait",t:"Bộ đủ món: đã đủ món, tuần sau mới được tính."},{id:"fx2",on:0,k:"miss",t:"Bộ dở: còn thiếu chậu lan quý."},{id:"fx4",on:0,k:"bad",t:"Bộ khuyết: cây cảnh héo úa."}];
 function setLines(){if(FIXON())return KDR.p&&KDR.p!==S?[]:SETFIX;try{return typeof shelfView==="function"?(shelfView(KDR.p).sets||[]):[]}catch(e){return[]}}
 /* kitSetLines(lines): the ONE fact strip of the set lines (display room footer + interim shelfOpen dialog). One row per set: state dot + the line as written by jshelf. k: on = counting now (gold, glows like its pieces), wait = whole, counts next week, miss = pieces still missing, bad = broken. Empty list = "". */
 function kitSetLines(L){L=(L||[]).filter(x=>x&&x.t);if(!L.length)return"";const kk=x=>x.k||(x.on?"on":/khuyết/.test(x.t)?"bad":"miss");
