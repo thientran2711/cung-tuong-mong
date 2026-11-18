@@ -53,7 +53,7 @@ function mkMigrate(p){p.mk=[];const KD=mkKD(),now=mkNow();MK.stat.mig++;
   if(x){x.s=Math.max(x.s,e.v);x.k1=Math.max(x.k1,k0+d);x.t=e.t}else p.mk.push({kd,k:e.k,s:e.v,why:e.why||"",e:e.e,c:e.c,t:e.t,k0,k1:k0+d,w:e.w||0,n:1})}
  if(p===S&&S.mood&&typeof S.mood.v==="number"&&!S.mood.mk){const M=S.mood;M.mk=1;for(const l of M.log||[]){if(!l||!l.d||/^e:/.test(String(l.k||"")))continue;/* a feeling's old push: the feeling cause itself now carries it (signed sum) */const k0=(l.w||0)*KD,k1=k0+mkDur(null,null,l.k);if(k1<=now)continue;
    const kd=l.k&&String(l.k).indexOf("e:")===0?l.k:l.k||"x";const x=p.mk.find(m=>m.kd===kd);if(x)x.d=(x.d||0)+l.d;else p.mk.push({kd,k:null,s:0,d:l.d,why:l.why||"",k0,k1,w:l.w||0,n:l.n||1})}
-  const sum=p.mk.reduce((a,m)=>a+mkBarOne(m),0),rest=Math.round(M.v-sum);if(rest)p.mk.push({kd:"carry",k:null,s:0,d:rest,why:mkB().carryWhy,k0:now,k1:now+mkB().carry,w:emoW(),n:1})}}
+  const sum=p.mk.reduce((a,m)=>a+mkBarOne(m),0),rest=M.v-sum;/* exact, not rounded (npc-chain-land #2): with a feeling sum of x.5 the rounded rest moved the old bar by 1 (Math.round(-31.5) = -31 → bar -29 for -30) */if(Math.abs(rest)>1e-9)p.mk.push({kd:"carry",k:null,s:0,d:rest,why:mkB().carryWhy,k0:now,k1:now+mkB().carry,w:emoW(),n:1})}}
 function mkSync(p){if(!mkOn()||!p)return;if(!Array.isArray(p.mk))mkMigrate(p);const now=mkNow();
  /* someone else changed the feeling: read it back */
  const L=p.__mkL,e=p.emo;

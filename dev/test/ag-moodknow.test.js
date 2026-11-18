@@ -33,7 +33,7 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
   const eye0=BAL.mck.eye;BAL.mck.eye=0;
   for(let i=0;i<12;i++){__M.clean();S.tb.seed=1000+i;V.forEach((v,j)=>{if(j%2)__M.pub(v," #"+i);else __M.sec(v,V[(j+1)%V.length]," #"+i)});Q.length=0;mckMorning();
    V.forEach((v,j)=>{const k=moodCauseKnown(v);if(j%2){n++;if(k)hit++}else{sec++;if(k)secHit++}});line+=Q.filter(x=>/Tin trong cung/.test(x.t||"")&&/truyền tai nhau/.test(x.h)).length}
-  let n2=0,h2=0;B.o.selfDown=100;for(let i=0;i<12;i++){__M.clean();S.tb.seed=5000+i;V.forEach((v,j)=>{if(j%2){__M.pub(v," @"+i);n2++}});mckMorning();V.forEach((v,j)=>{if(j%2&&moodCauseKnown(v))h2++})}
+  let n2=0,h2=0;B.o.selfDown=100;for(let i=0;i<40;i++)/* 40 rounds (~200 draws, was 12 ≈ 60): at 95 % a run with no miss is 0.95^60 ≈ 5 % (red by chance), 0.95^200 ≈ 0.003 % */{__M.clean();S.tb.seed=5000+i;V.forEach((v,j)=>{if(j%2){__M.pub(v," @"+i);n2++}});mckMorning();V.forEach((v,j)=>{if(j%2&&moodCauseKnown(v))h2++})}
   B.max=max0;B.o.selfDown=o0;BAL.mck.eye=eye0;return {n,hit,rate:Math.round(hit*100/n),o:o0,sec,secHit,line,n2,h2,rate2:Math.round(h2*100/n2),hi:BAL.odds.hi}});
  ok(Math.abs(r3.rate-r3.o)<=15,'public cause leaks in the morning at about its BAL odds',r3);
  ok(r3.secHit===0,'a secret cause never leaks into the news',{sec:r3.sec,secHit:r3.secHit});
