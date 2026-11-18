@@ -254,10 +254,10 @@ html body :is(#panel,#kitpage) .krelpk .pface{min-height:0!important;min-width:4
 html body :is(#panel,#kitpage) .krelpk .pface .knr{display:flex;flex-direction:column;align-items:center;min-height:0;gap:0;line-height:1.05}
 html body :is(#panel,#kitpage) .krelpk .pface:not(.on) .knr>.knr-n{font-weight:500}
 .krelh{margin:4px 0 4px;font-family:var(--display);font-size:1.02rem;color:var(--ink,#3a2418)}
-.krel3.krpair{grid-template-columns:minmax(80px,90px) minmax(0,1fr) minmax(80px,90px);align-items:start}
+.krel3.krpair{grid-template-columns:minmax(88px,104px) minmax(0,1fr) minmax(88px,104px);align-items:start}
 .krpair>.kr3p{gap:4px}.krpair>.kr3p>.knr{min-height:2.6em;justify-content:flex-end}
-.krelpair>.kr3r{padding:8px 10px;border:1px solid var(--line);border-radius:10px;background:var(--k-card,#fffaf0)}
-@container (max-width:560px){.krel3.krpair{grid-template-columns:1fr 1fr}.krel3.krpair>.kr3p{max-width:90px;margin:0 auto}.krel3.krpair>.kr3m{grid-column:1/-1;grid-row:2;border-top:1px dashed var(--line);padding-top:6px}}
+.krel3.krpair>.kr3m{align-self:center}.krelpair>.kr3r{margin-top:4px;padding:8px 10px;border:1px solid var(--line);border-radius:10px;background:var(--k-card,#fffaf0)}
+@container (max-width:560px){.krel3.krpair{grid-template-columns:1fr 1fr}.krel3.krpair>.kr3p{max-width:104px;margin:0 auto}.krel3.krpair>.kr3m{grid-column:1/-1;grid-row:2;border-top:1px dashed var(--line);padding-top:6px}}
 .kr3note{margin:0;font-size:.74rem;color:var(--dim)}
 .kr3act{margin-top:4px;min-width:0;max-width:100%}
 html body #panel .krel3 .kr3act button.ka,html body #panel .krel3 .kr3act .card,html body #panel .krel3 .kr3act .kcard{width:100%!important;min-width:0!important;max-width:100%!important;box-sizing:border-box!important;flex:1 1 auto!important}
