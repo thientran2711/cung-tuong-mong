@@ -88,6 +88,17 @@ function kgfDrop(){try{let d=document.getElementById("kgfdrop");const k=window._
  const ar=document.querySelector("#kshR .kas,#kshR .k3py");const bot=ar?ar.getBoundingClientRect().top-m0.top-6:m0.height-8;d.style.maxHeight=Math.max(120,Math.round(bot-parseFloat(d.style.top)))+"px"}catch(e){console.error("kgfDrop",e)}}
 function kgfRail(){try{if(kgfRail.done||typeof kitStageRail!=="object")return;kgfRail.done=1;
  [["cn","Cung nhân",1],["ct","Chí tôn",2]].forEach(([k,lab,o])=>kitStageRail.add({id:"kgf-"+k,order:60+o,label:lab,title:lab+" · chạm để mở danh sách",count:()=>kgfCount(k),active:()=>window.__kgfOpen===k,when:()=>kgfPhoneMap()&&kgfCount(k)>0,onTap:()=>{window.__kgfOpen=window.__kgfOpen===k?null:k;const R=$$("kshR");if(R)R.dataset.full="";k3Stage();kgfDrop()}}))}catch(e){}}
+/* owner ruling via ROOT-56: an open group list closes with ONE tap anywhere outside it (map, tag, figure) — that tap only closes — and with Esc */
+function kgfClose(){if(!window.__kgfOpen)return false;window.__kgfOpen=null;const R=$$("kshR");if(R)R.dataset.full="";k3Stage();try{kitStageRail.paint()}catch(e){}return true}
+document.addEventListener("click",e=>{if(!window.__kgfOpen)return;const t=e.target;if(t&&t.closest&&t.closest("#kgfdrop,#kshR .kgfopen,[data-kgf],#krail [data-rail^=kgf-]"))return;if(kgfClose()){e.stopPropagation();e.preventDefault()}},true);
+document.addEventListener("keydown",e=>{if(e.key==="Escape"&&kgfClose())e.stopPropagation()},true);
+/* ROOT-56 flag: a figure's emotion face chip (.kemo) never sits under the right column — if it would, it steps left of the column (translate only; reset every pass) */
+function kgfClearEmo(){try{const st=$$("stage"),R=$$("kshR");if(!st||!R||R.hidden||!R.offsetHeight)return;const q=R.getBoundingClientRect();
+ const hitq=z=>z.width>2&&Math.min(z.right,q.right)-Math.max(z.left,q.left)>1&&Math.min(z.bottom,q.bottom)-Math.max(z.top,q.top)>1;
+ st.querySelectorAll(".kemo").forEach(e=>{if(R.contains(e))return;e.style.marginLeft="";if(!e.offsetParent)return;let z=e.getBoundingClientRect(),m=0;
+  for(let i=0;i<3&&hitq(z);i++){m-=Math.ceil(z.right-q.left+6);e.style.setProperty("margin-left",m+"px","important");z=e.getBoundingClientRect()}})}catch(e){console.error("kgfClearEmo",e)}}
+window.kgfClearEmo=kgfClearEmo;
+try{setInterval(()=>{if(!document.hidden)kgfClearEmo()},400)}catch(e){}
 /* Ân sủng chips (owner 11/15 04:05Z): Tai mắt + the Ân sủng facts under the court chips, same plaque card and column width, one value per line,
    labels never cut. Có thai / Lật thẻ on the chance scale (chanceLvl, j1: Rất thấp…Rất cao), never the act ladder. Bổng lộc lives only here. */
 function k3AsRows(){/* consort-only facts (Lật thẻ, Có thai, Bổng lộc…): none on the cung nữ road nor in lãnh cung (review/small-bugs-2) */if(!S||S.dead||(window.kitRoad&&kitRoad()))return[];const L=[];const hv=k=>{const b=k3hc(k);return b?k3val(b):""};
@@ -147,13 +158,13 @@ function k3Stage(){try{const st=$$("stage");if(!st)return;{const pk=S?(S.place||
      vertical column at the stage's right edge — the tassel-fix two-column block (.k3c2) is gone; a column taller than the stage
      scrolls inside itself (.kasx) */}
  R.classList.add("kasx");
- kgfRail();kgfDrop();
+ kgfRail();kgfDrop();kgfClearEmo();requestAnimationFrame(kgfClearEmo);
  k3Gut()}catch(e){console.error("k3Stage",e)}}
 function kitSideHost(){try{const gm=document.querySelector(".game");if(gm&&gm.classList.contains("maptab")){const m=document.querySelector("#panel .mapv");if(m&&m.getClientRects().length)return m}}catch(e){}return $$("stage")}
 window.kitSideHost=kitSideHost;window.k3Stage=k3Stage;window.k3row=k3row;/* the top-bar row builder, for modules that add a row (jtoil "Hôm nay: …") */
 /* name tags are one-line text now: re-run the stage layout once the tags have their final width (fonts, new labels), so neighbours that
    would touch drop to the second tag row (j59 crowd rule) */
-function k3Relay(){clearTimeout(window.__k3rl);window.__k3rl=setTimeout(()=>{try{window.j59lay&&j59lay()}catch(e){}},250)}
+function k3Relay(){clearTimeout(window.__k3rl);window.__k3rl=setTimeout(()=>{try{window.j59lay&&j59lay()}catch(e){}kgfClearEmo();setTimeout(kgfClearEmo,700);setTimeout(kgfClearEmo,1600)},250)}
 try{document.fonts&&document.fonts.ready.then(k3Relay)}catch(e){}
 if(typeof renderStage==="function"){const r1=renderStage;renderStage=function(){const r=r1.apply(this,arguments);k3Relay();return r}}
 /* gutter widths: from the stage width, then grown to the plaques' real width; j59 keeps the figures between them */

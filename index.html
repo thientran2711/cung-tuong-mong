@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"9c62d4f1","t":"2026-11-18T20:57Z","c":"stage-rightcol r4: right column = two small group buttons + drop list (iPad map + stages), bars removed, KIT.md","b":"ff4bb2bff935","h":[{"s":"fcff501a+","t":"2026-11-18T20:41Z","c":"map-labels-missing r2c: tag touches its own building or keeps a short leader (\u003c=90px) ending on the real slip/info rect, dot >=40px from ot…"},{"s":"c67d248d+","t":"2026-11-18T19:53Z","c":"ag-deed-perf: site build (index.html, sw.js)"},{"s":"6aab33ad","t":"2026-11-18T20:05Z","c":"KIT_REQUESTS: K-Q2-1 DONE 048f3c7"},{"s":"343d4557","t":"2026-11-18T19:03Z","c":"shop-panel r3: kind sub-tabs under Mua|Bán (kit tab row, chest groups), test + KIT.md"},{"s":"a5013222+","t":"2026-11-18T18:03Z","c":"shown-odds r2 review: site build (index.html / sw.js / assets.json rebuilt)"},{"s":"08774c0e+","t":"2026-11-18T17:38Z","c":"ag-stf2 (test only): bribe histogram picks a servant whose lòng moves her bribe odds. Root of the 'disloyal one takes more' red (npc ~3/20,…"},{"s":"0351e140","t":"2026-11-18T16:48Z","c":"shop-panel: «Để ta xem» outside option, 3-column Mua/Bán grid, smallest picture strip, test"},{"s":"ebf25660+","t":"2026-11-18T15:29Z","c":"Phi tần, Hoàng thượng, Thái hậu và cung nhân nay tự lo việc mình mỗi ngày theo cùng một luật, cùng một giá và cùng một cơ may như ngươi; ta…"},{"s":"9f9c6c2b+","t":"2026-11-18T14:26Z","c":"shown-odds-one-path r1: plant on the spot is done in person (actCtx x.here, no sent-servant pen); Vì sao names spy knowledge (whyKnow); tes…"},{"s":"aa997f3c+","t":"2026-11-18T13:46Z","c":"look-fx r13: index.html / sw.js rebuilt from merged sources"}]};
+window.CTM_BI={"s":"f2fbe3bf+","t":"2026-11-18T21:10Z","c":"stage-rightcol r5: merge main 790cda59, rebuilt, DEVS filter in scan","b":"1e2f48481261","h":[{"s":"fcff501a+","t":"2026-11-18T20:41Z","c":"map-labels-missing r2c: tag touches its own building or keeps a short leader (\u003c=90px) ending on the real slip/info rect, dot >=40px from ot…"},{"s":"c67d248d+","t":"2026-11-18T19:53Z","c":"ag-deed-perf: site build (index.html, sw.js)"},{"s":"6aab33ad","t":"2026-11-18T20:05Z","c":"KIT_REQUESTS: K-Q2-1 DONE 048f3c7"},{"s":"343d4557","t":"2026-11-18T19:03Z","c":"shop-panel r3: kind sub-tabs under Mua|Bán (kit tab row, chest groups), test + KIT.md"},{"s":"a5013222+","t":"2026-11-18T18:03Z","c":"shown-odds r2 review: site build (index.html / sw.js / assets.json rebuilt)"},{"s":"08774c0e+","t":"2026-11-18T17:38Z","c":"ag-stf2 (test only): bribe histogram picks a servant whose lòng moves her bribe odds. Root of the 'disloyal one takes more' red (npc ~3/20,…"},{"s":"0351e140","t":"2026-11-18T16:48Z","c":"shop-panel: «Để ta xem» outside option, 3-column Mua/Bán grid, smallest picture strip, test"},{"s":"ebf25660+","t":"2026-11-18T15:29Z","c":"Phi tần, Hoàng thượng, Thái hậu và cung nhân nay tự lo việc mình mỗi ngày theo cùng một luật, cùng một giá và cùng một cơ may như ngươi; ta…"},{"s":"9f9c6c2b+","t":"2026-11-18T14:26Z","c":"shown-odds-one-path r1: plant on the spot is done in person (actCtx x.here, no sent-servant pen); Vì sao names spy knowledge (whyKnow); tes…"},{"s":"aa997f3c+","t":"2026-11-18T13:46Z","c":"look-fx r13: index.html / sw.js rebuilt from merged sources"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -37067,6 +37067,17 @@ function kgfDrop(){try{let d=document.getElementById("kgfdrop");const k=window._
  const ar=document.querySelector("#kshR .kas,#kshR .k3py");const bot=ar?ar.getBoundingClientRect().top-m0.top-6:m0.height-8;d.style.maxHeight=Math.max(120,Math.round(bot-parseFloat(d.style.top)))+"px"}catch(e){console.error("kgfDrop",e)}}
 function kgfRail(){try{if(kgfRail.done||typeof kitStageRail!=="object")return;kgfRail.done=1;
  [["cn","Cung nhân",1],["ct","Chí tôn",2]].forEach(([k,lab,o])=>kitStageRail.add({id:"kgf-"+k,order:60+o,label:lab,title:lab+" · chạm để mở danh sách",count:()=>kgfCount(k),active:()=>window.__kgfOpen===k,when:()=>kgfPhoneMap()&&kgfCount(k)>0,onTap:()=>{window.__kgfOpen=window.__kgfOpen===k?null:k;const R=$$("kshR");if(R)R.dataset.full="";k3Stage();kgfDrop()}}))}catch(e){}}
+/* owner ruling via ROOT-56: an open group list closes with ONE tap anywhere outside it (map, tag, figure) — that tap only closes — and with Esc */
+function kgfClose(){if(!window.__kgfOpen)return false;window.__kgfOpen=null;const R=$$("kshR");if(R)R.dataset.full="";k3Stage();try{kitStageRail.paint()}catch(e){}return true}
+document.addEventListener("click",e=>{if(!window.__kgfOpen)return;const t=e.target;if(t&&t.closest&&t.closest("#kgfdrop,#kshR .kgfopen,[data-kgf],#krail [data-rail^=kgf-]"))return;if(kgfClose()){e.stopPropagation();e.preventDefault()}},true);
+document.addEventListener("keydown",e=>{if(e.key==="Escape"&&kgfClose())e.stopPropagation()},true);
+/* ROOT-56 flag: a figure's emotion face chip (.kemo) never sits under the right column — if it would, it steps left of the column (translate only; reset every pass) */
+function kgfClearEmo(){try{const st=$$("stage"),R=$$("kshR");if(!st||!R||R.hidden||!R.offsetHeight)return;const q=R.getBoundingClientRect();
+ const hitq=z=>z.width>2&&Math.min(z.right,q.right)-Math.max(z.left,q.left)>1&&Math.min(z.bottom,q.bottom)-Math.max(z.top,q.top)>1;
+ st.querySelectorAll(".kemo").forEach(e=>{if(R.contains(e))return;e.style.marginLeft="";if(!e.offsetParent)return;let z=e.getBoundingClientRect(),m=0;
+  for(let i=0;i<3&&hitq(z);i++){m-=Math.ceil(z.right-q.left+6);e.style.setProperty("margin-left",m+"px","important");z=e.getBoundingClientRect()}})}catch(e){console.error("kgfClearEmo",e)}}
+window.kgfClearEmo=kgfClearEmo;
+try{setInterval(()=>{if(!document.hidden)kgfClearEmo()},400)}catch(e){}
 /* Ân sủng chips (owner 11/15 04:05Z): Tai mắt + the Ân sủng facts under the court chips, same plaque card and column width, one value per line,
    labels never cut. Có thai / Lật thẻ on the chance scale (chanceLvl, j1: Rất thấp…Rất cao), never the act ladder. Bổng lộc lives only here. */
 function k3AsRows(){/* consort-only facts (Lật thẻ, Có thai, Bổng lộc…): none on the cung nữ road nor in lãnh cung (review/small-bugs-2) */if(!S||S.dead||(window.kitRoad&&kitRoad()))return[];const L=[];const hv=k=>{const b=k3hc(k);return b?k3val(b):""};
@@ -37126,13 +37137,13 @@ function k3Stage(){try{const st=$$("stage");if(!st)return;{const pk=S?(S.place||
      vertical column at the stage's right edge — the tassel-fix two-column block (.k3c2) is gone; a column taller than the stage
      scrolls inside itself (.kasx) */}
  R.classList.add("kasx");
- kgfRail();kgfDrop();
+ kgfRail();kgfDrop();kgfClearEmo();requestAnimationFrame(kgfClearEmo);
  k3Gut()}catch(e){console.error("k3Stage",e)}}
 function kitSideHost(){try{const gm=document.querySelector(".game");if(gm&&gm.classList.contains("maptab")){const m=document.querySelector("#panel .mapv");if(m&&m.getClientRects().length)return m}}catch(e){}return $$("stage")}
 window.kitSideHost=kitSideHost;window.k3Stage=k3Stage;window.k3row=k3row;/* the top-bar row builder, for modules that add a row (jtoil "Hôm nay: …") */
 /* name tags are one-line text now: re-run the stage layout once the tags have their final width (fonts, new labels), so neighbours that
    would touch drop to the second tag row (j59 crowd rule) */
-function k3Relay(){clearTimeout(window.__k3rl);window.__k3rl=setTimeout(()=>{try{window.j59lay&&j59lay()}catch(e){}},250)}
+function k3Relay(){clearTimeout(window.__k3rl);window.__k3rl=setTimeout(()=>{try{window.j59lay&&j59lay()}catch(e){}kgfClearEmo();setTimeout(kgfClearEmo,700);setTimeout(kgfClearEmo,1600)},250)}
 try{document.fonts&&document.fonts.ready.then(k3Relay)}catch(e){}
 if(typeof renderStage==="function"){const r1=renderStage;renderStage=function(){const r=r1.apply(this,arguments);k3Relay();return r}}
 /* gutter widths: from the stage width, then grown to the plaques' real width; j59 keeps the figures between them */
@@ -75799,7 +75810,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="ff4bb2bff935";window.CTM_BUILD=BUILD;
+const BUILD="1e2f48481261";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
