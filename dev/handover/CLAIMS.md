@@ -176,3 +176,5 @@ Thái hậu missing c21–c24,c28–c32 | handover | session_01PEhRbvnAhxnHAp1NL
 | rel-picker r2 (sonnet; owner bug Giao tình picker space, OD L898 + 22:10Z) | review/rel-picker-r2 | MAIN ROOT-58 | session_01Rc5AsJZVez3V2TABepBaUE | RUNNING | 18/11 22:54Z |
 | MAIN ROOT-59 (opus; child of ROOT-58) | handover HANDOVER_SESSION9 | ROOT-58 | session_01Rc5AsMK8HoGvFJPQquNYYg | RUNNING | 18/11 22:56Z |
 | GE step 4: bd roads writer 2 (opus E14b; bd_tuyet, bd_hen) | review/bd-roads-w2 | E ROOT #7 | session_01DgYSWppboKRwbR35fzT2U4 | RUNNING | 18/11 22:58Z |
+triều phục round 8 (c06) | handover | session_01PEhRbusUfDXYLRsmUuYoaw (W104f, Foreman C ROOT-33) | RUNNING | 2026-11-18T23:00Z
+Nữ đế r10b + BD Quý phi (3 images) | handover | session_01PEhRbutG3NMnejgY9CKjDv (N2, Foreman C ROOT-33) | RUNNING | 2026-11-18T23:00Z
