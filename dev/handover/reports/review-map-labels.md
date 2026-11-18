@@ -16,3 +16,12 @@ Not a fail: no tag cut by the edge, no tag overlap, grey logic, courtyards.
 
 ## Not done
 QUICKCHECK and old-save run skipped (verdict already FAIL); 412x1058 not run. Shots only in scratch (never in git/CDN), deleted with this verdict. No push of a PASS sha; no push to main.
+
+# RE-CHECK 790cda59 (r2d) — PASS
+Reviewed on 790cda59 (already contains main fa411d6 = newest origin/main; no merge needed).
+- map-labels-scan.js DSF 2, Fold 755x1000 + iPad 1180x820, day+night, ranks default/3/6: all PASS; courtyards 13 slots / 8 grey PASS. Fold: maxLeader ≤14 px, maxDist ≤119 px (was 277), dotUnder40 ≤1; iPad: no leaders, maxDist ≤81 px.
+- FAIL 1 (leader in air): fixed — only tiny leaders remain, each touching its own slip (Fold day Hàm An 13 px). FAIL 2 (long/ambiguous): fixed — no 400 px lines; iPad day Trường Môn viện / A ca sở / Hàm An read cleanly. FAIL 3 (Fold east edge): Trường Môn viện, A ca sở, Đông cung, Thượng thư phòng are fully off-view on Fold day and night with NO stray dot or line (looked 3x at the full Fold shots); on iPad all four show the whole name tag.
+- OD 21:50Z: empty palaces show only the grey name (no «cung trống» row) day + night; reasons/locks kept on grey non-empty places.
+- Marker rim glow under-layer in the rank colour looked at (rank 3 pink, rank 6 orange), kit token.
+Not done: quickcheck script not found in this checkout (worker reports PASS), 412x1058, old-save load. Shots scratch only, deleted.
+Verdict: PASS LAND READY 790cda59
