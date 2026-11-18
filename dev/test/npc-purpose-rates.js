@@ -11,6 +11,7 @@
    usage: node dev/test/npc-purpose-rates.js <index.html> [tuần=200] [seeds=12] [--base <base index.html>] [--write-base]
      --base <f>      also run the base build (same seeds) and judge against it instead of the committed counts
      --write-base    with --base: store the base counts in the json (then commit it)
+     env RATES_BRUNS=n (default 2): the base build runs n times, judged against the per-seed mean (the base is not deterministic)
    exit 0 = PASS */
 const {chromium}=require('playwright');const fs=require('fs');const path=require('path');
 const A=process.argv.slice(2);const fl=k=>{const i=A.indexOf(k);if(i<0)return null;const v=A[i+1];A.splice(i,2);return v};
@@ -44,7 +45,13 @@ async function runAll(b,file,S0){S0=S0||0;const seeds=Array.from({length:NS},(_,
 function count(R){const t={_srvWeeks:R.reduce((a,r)=>a+(r.srvW||0),0),_conWeeks:R.reduce((a,r)=>a+(r.conW||0),0)};for(const row of J.track){const re=new RegExp(row.re);let n=0;for(const r of R){const o=row.f==='c'?r.cards:row.f==='e'?(r.ea||{}):r.logs;for(const k in o)if(re.test(k))n+=o[k]}t[row.n]=n}return t}
 (async()=>{const b=await chromium.launch();const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+m+(x!==undefined?' '+(typeof x==='string'?x:JSON.stringify(x)):''))};
  const H=await runAll(b,F,+(process.env.RATES_SEED0||0));if(process.env.RATES_DUMP)fs.writeFileSync(process.env.RATES_DUMP,JSON.stringify(H));let BC=J.base||{};
- let Bs=null;if(BASE){Bs=await runAll(b,BASE,+(process.env.RATES_BSEED0||process.env.RATES_SEED0||0));/* RATES_BSEED0: other seeds for the base = the noise floor of one build */BC=count(Bs);if(writeBase){J.base=BC;J.baseInfo=`${NS} seeds × ${WK} tuần, ${path.basename(path.dirname(path.resolve(BASE)))}/${path.basename(BASE)}`;fs.writeFileSync(JP,JSON.stringify(J,null,1)+'\n');console.log('base counts written to',JP)}}
+ let Bs=null;if(BASE){Bs=await runAll(b,BASE,+(process.env.RATES_BSEED0||process.env.RATES_SEED0||0));
+  /* G1 #8 (reviewer RE-CHECK 2 item 2): the base build is not deterministic run to run (CPU-load dependent drift late in some lives; head is). RATES_BRUNS=n (default 2)
+     runs the base n times and judges against the per-seed MEAN of every count (cards, logs, outbursts, tuần), so the base is never one noisy sample. */
+  const BR=Math.max(1,+(process.env.RATES_BRUNS||2));if(BR>1){const runs=[Bs];for(let k=1;k<BR;k++)runs.push(await runAll(b,BASE,+(process.env.RATES_BSEED0||process.env.RATES_SEED0||0)));
+   const avg=(L,f)=>{const o={};for(const r of L)for(const x in (r[f]||{}))o[x]=(o[x]||0)+r[f][x]/L.length;return o};
+   Bs=runs[0].map((r0,i)=>{const L=runs.map(R=>R[i]);const r=Object.assign({},r0);for(const f of ['cards','cardR','logs','lgs','ea'])r[f]=avg(L,f);for(const f of ['weeks','lives','srvW','conW','err'])r[f]=L.reduce((a,x)=>a+(x[f]||0),0)/L.length;r.lgx=Object.assign({},...L.map(x=>x.lgx||{}));return r});
+   console.log('base = mean of '+BR+' base runs (seeds differing between runs: '+runs[0].filter((r,i)=>runs.some(R=>JSON.stringify(R[i].lgs)!==JSON.stringify(r.lgs))).map(r=>r.seed).join(' ')+')')}if(process.env.RATES_BDUMP)fs.writeFileSync(process.env.RATES_BDUMP,JSON.stringify(Bs));/* RATES_BSEED0: other seeds for the base = the noise floor of one build */BC=count(Bs);if(writeBase){J.base=BC;J.baseInfo=`${NS} seeds × ${WK} tuần, mean of ${BR} base runs, ${path.basename(path.dirname(path.resolve(BASE)))}/${path.basename(BASE)}`;fs.writeFileSync(JP,JSON.stringify(J,null,1)+'\n');console.log('base counts written to',JP)}}
  await b.close();
  const errs=[].concat(...H.map(r=>r.pageErr));ok(!errs.length,'no page error ('+NS+' seeds × '+WK+' tuần)',errs.slice(0,3));
  /* 1 every kind fires */

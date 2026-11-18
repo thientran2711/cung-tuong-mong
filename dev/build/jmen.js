@@ -8,7 +8,10 @@
    4. The same rules for NPC consorts (menDecide → menReport / menHide), and she can be the one caught (talking alone with a man there).
    ============================================================================================================================= */
 const MEN={banS:12,banF:36,grudge:22,path:25};
-const MEN_BRIBE=["tham vọng","phong lưu"],MEN_ROVE=["phong lưu","đa tình"],MEN_FANCY=["phong lưu","đa tình"];
+/* men's natures live in the pool nết (jnet netOf; old words → BAL.net.old: phong lưu / đa tình → Ham vui, tham vọng → Tham vọng); hasT reads the nết,
+   so these lists name the nết (npc-purpose G1 #8, LUẬT SỬA CẢ NHÓM: with the old words every rove / fancy / bribe test on a man was dead) */
+const MEN_NET=t=>(typeof BAL!=="undefined"&&BAL.net&&BAL.net.old&&BAL.net.old[t])||t;
+const MEN_BRIBE=[...new Set(["tham vọng","phong lưu"].map(MEN_NET))],MEN_ROVE=[...new Set(["phong lưu","đa tình"].map(MEN_NET))],MEN_FANCY=MEN_ROVE.slice();
 const MEN_ZN={hc:"Hậu cung",nd:"Nội đình",dv:"Nha sở",nt:"Ngoại triều"};
 function menZone(k){if(!k)return"";if(k==="ngt")return"nt";if(k==="dtd"||k==="thu")return"nd";if(k==="tyv"||k==="ksp")return"dv";return"hc"}
 function menRoad(){try{return !!S&&!S.dead&&!(typeof isSrv==="function"&&isSrv())}catch(e){return false}}

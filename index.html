@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"b778889c+","t":"2026-11-18T15:54Z","c":"Phi tần, Hoàng thượng, Thái hậu và cung nhân nay tự lo việc mình mỗi ngày theo cùng một luật, cùng một giá và cùng một cơ may như ngươi; ta…","b":"2dcb8ba4a152","h":[{"s":"9f9c6c2b+","t":"2026-11-18T14:26Z","c":"shown-odds-one-path r1: plant on the spot is done in person (actCtx x.here, no sent-servant pen); Vì sao names spy knowledge (whyKnow); tes…"},{"s":"aa997f3c+","t":"2026-11-18T13:46Z","c":"look-fx r13: index.html / sw.js rebuilt from merged sources"},{"s":"4475ea24+","t":"2026-11-18T12:33Z","c":"grand-endings-engine: site rebuilt (index.html / sw.js / assets.json) after fix 4 + main merge"},{"s":"68cbbb28+","t":"2026-11-18T12:00Z","c":"review life-preload-fu r2v: no half-drawn / empty figure while the HD twin comes (whole group: every fig-* img)"},{"s":"a8036600+","t":"2026-11-18T12:06Z","c":"Rebuild index.html/sw.js after merging origin/main"},{"s":"3f45eda9+","t":"2026-11-18T11:52Z","c":"steal-minigame FIX 1: PEND flag (chooseM renders before the game opens: the stale-'mg' reset no longer cancels a real async game); KIT.md §…"},{"s":"19a23498+","t":"2026-11-18T11:03Z","c":"review poison-road r2 (ONE CORE OD:L1267): the weak-Sức odds rule had two sources — j9 odA typed suc\u003c30 → −15 while the poison card 'Vì sao…"},{"s":"421a2362+","t":"2026-11-18T11:04Z","c":"live-test-reds r1: emotion-acts scold/scoldlive pin the ODDS CAP roll (act failed softly ~5 %, no pick queued)"},{"s":"d795be81+","t":"2026-11-18T10:34Z","c":"residence-seats-r2: a consort out of the palace gives up her side-hall room (palFix); jworld đại xá re-houses at once"},{"s":"65aeddd7+","t":"2026-11-18T10:26Z","c":"review d19-gift-work r1: a refused piece (jdis: stays in her chest) eases nothing — no free peace; test covers it; site rebuilt"}]};
+window.CTM_BI={"s":"6ba95870+","t":"2026-11-18T16:00Z","c":"Phi tần, Hoàng thượng, Thái hậu và cung nhân nay tự lo việc mình mỗi ngày theo cùng một luật, cùng một giá và cùng một cơ may như ngươi; ta…","b":"21a88ddae9f0","h":[{"s":"9f9c6c2b+","t":"2026-11-18T14:26Z","c":"shown-odds-one-path r1: plant on the spot is done in person (actCtx x.here, no sent-servant pen); Vì sao names spy knowledge (whyKnow); tes…"},{"s":"aa997f3c+","t":"2026-11-18T13:46Z","c":"look-fx r13: index.html / sw.js rebuilt from merged sources"},{"s":"4475ea24+","t":"2026-11-18T12:33Z","c":"grand-endings-engine: site rebuilt (index.html / sw.js / assets.json) after fix 4 + main merge"},{"s":"68cbbb28+","t":"2026-11-18T12:00Z","c":"review life-preload-fu r2v: no half-drawn / empty figure while the HD twin comes (whole group: every fig-* img)"},{"s":"a8036600+","t":"2026-11-18T12:06Z","c":"Rebuild index.html/sw.js after merging origin/main"},{"s":"3f45eda9+","t":"2026-11-18T11:52Z","c":"steal-minigame FIX 1: PEND flag (chooseM renders before the game opens: the stale-'mg' reset no longer cancels a real async game); KIT.md §…"},{"s":"19a23498+","t":"2026-11-18T11:03Z","c":"review poison-road r2 (ONE CORE OD:L1267): the weak-Sức odds rule had two sources — j9 odA typed suc\u003c30 → −15 while the poison card 'Vì sao…"},{"s":"421a2362+","t":"2026-11-18T11:04Z","c":"live-test-reds r1: emotion-acts scold/scoldlive pin the ODDS CAP roll (act failed softly ~5 %, no pick queued)"},{"s":"d795be81+","t":"2026-11-18T10:34Z","c":"residence-seats-r2: a consort out of the palace gives up her side-hall room (palFix); jworld đại xá re-houses at once"},{"s":"65aeddd7+","t":"2026-11-18T10:26Z","c":"review d19-gift-work r1: a refused piece (jdis: stays in her chest) eases nothing — no free peace; test covers it; site rebuilt"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -36654,7 +36654,7 @@ function loMotive(v,t){try{if(typeof motiveOK==="function")return !!motiveOK(v,t
 /* hidden cause, chosen by the existing motive system */
 function loCause(p){const o=npcWhy("loTake",{p});/* npc-purpose G2: the taker = a person with a goal (rival grudge+motive, greedy or careless servant); nobody → nothing goes missing */
  return o?loCauseOf(p,o):null}
-function loCauseOf(p,o){const v=o.who;if(loStaff(p).includes(v))return{cause:o.why==="cất nhầm chỗ"?"mis":"srv",sv:v.name||"",why:o.why};ap(v,{bac:-LO.act.bac,duc:LO.act.duc});return{cause:"riv",by:key(v),why:o.why}}
+function loCauseOf(p,o){const v=o.who;if(loStaff(p).includes(v))return{cause:o.flag==="mis"?"mis":"srv"/* flag from the reason (npwAsk), never the text */,sv:v.name||"",why:o.why};ap(v,{bac:-LO.act.bac,duc:LO.act.duc});return{cause:"riv",by:key(v),why:o.why}}
 function loStaff(p){return [p.maid].concat(p.staff||[]).filter(Boolean)}
 /* the same function for everyone: an item leaves its owner's chest */
 function loLose(p,force){if(!loAlive(p))return null;const L=(p.inv||[]).filter(loOk);if(!L.length)return null;const cz=force||loCause(p);if(!cz)return null;
@@ -40497,7 +40497,10 @@ var KBK_ART_LINE=window.KBK_ART_LINE={b:.0244};
    4. The same rules for NPC consorts (menDecide → menReport / menHide), and she can be the one caught (talking alone with a man there).
    ============================================================================================================================= */
 const MEN={banS:12,banF:36,grudge:22,path:25};
-const MEN_BRIBE=["tham vọng","phong lưu"],MEN_ROVE=["phong lưu","đa tình"],MEN_FANCY=["phong lưu","đa tình"];
+/* men's natures live in the pool nết (jnet netOf; old words → BAL.net.old: phong lưu / đa tình → Ham vui, tham vọng → Tham vọng); hasT reads the nết,
+   so these lists name the nết (npc-purpose G1 #8, LUẬT SỬA CẢ NHÓM: with the old words every rove / fancy / bribe test on a man was dead) */
+const MEN_NET=t=>(typeof BAL!=="undefined"&&BAL.net&&BAL.net.old&&BAL.net.old[t])||t;
+const MEN_BRIBE=[...new Set(["tham vọng","phong lưu"].map(MEN_NET))],MEN_ROVE=[...new Set(["phong lưu","đa tình"].map(MEN_NET))],MEN_FANCY=MEN_ROVE.slice();
 const MEN_ZN={hc:"Hậu cung",nd:"Nội đình",dv:"Nha sở",nt:"Ngoại triều"};
 function menZone(k){if(!k)return"";if(k==="ngt")return"nt";if(k==="dtd"||k==="thu")return"nd";if(k==="tyv"||k==="ksp")return"dv";return"hc"}
 function menRoad(){try{return !!S&&!S.dead&&!(typeof isSrv==="function"&&isSrv())}catch(e){return false}}
@@ -70890,7 +70893,7 @@ function npwPick(L,score,o){const B=npwB();const R=(L||[]).map(x=>[x,+score(x)||
 function npwAsk(kind,ctx){const d=NPW.reg[kind];if(!d)throw new Error("npcWhy: unknown kind "+kind);const B=npwB();const O=[];let cd=0;
  const lim=typeof d.lim==="function"?d.lim(ctx||{}):(d.lim||0);let n=0;
  for(const p of (d.who(ctx||{})||[])){if(!p)continue;if(lim){if(!npwCdOk(kind,p)){cd++;continue}if(n>=lim)break;n++}let r=null;try{r=d.why(p,ctx||{})}catch(e){console.error("npcWhy "+kind,e);r=null}
-  if(!r||!(r.s>=B.min))continue;if(!npwCdOk(kind,p)){cd++;continue}O.push({kind,who:p,tgt:r.t||null,why:r.r||"",place:r.k||null,s:r.s})}
+  if(!r||!(r.s>=B.min))continue;if(!npwCdOk(kind,p)){cd++;continue}O.push({kind,who:p,tgt:r.t||null,why:r.r||"",place:r.k||null,flag:r.flag||null,s:r.s})}
  if(cd)npwSt(kind,"cd");return O}
 function npwOnFire(kind,o,ctx){const d=NPW.reg[kind];if(d&&typeof d.on==="function")try{d.on(o,ctx||{})}catch(e){console.error("npcWhy on "+kind,e)}}
 function npcWhy(kind,ctx,done){if(!npwOn())return null;const O=npwAsk(kind,ctx);const d=NPW.reg[kind];if(d&&d.each&&typeof done==="function"){/* each: every one with a reason makes her OWN try (strongest reason first, weighted); the first whose try succeeds is the one (the old "each servant rolls, first hit" rate) */if(!O.length){npwSt(kind,"quiet");return null}const L=O.slice();while(L.length){const o=npwPick(L,x=>x.s,{all:true});if(!o)break;L.splice(L.indexOf(o),1);if(done(o)){npwStamp(kind,o.who);npwSt(kind,"fire");npwOnFire(kind,o,ctx);return o}}npwSt(kind,"miss");return null}const o=npwPick(O,x=>x.s,d&&d.pickAll?{all:true}:null);/* pickAll: every one with a real reason may be the one, weighted by how strong it is (kinds where several people compete for one deed) */if(!o){npwSt(kind,"quiet");return null}
@@ -70918,7 +70921,7 @@ function npwNm(p){if(!p)return"";if(p===S)return"ngươi";try{if(S.emp&&p===S.em
 /* ---- jlost: items that go missing ---- */
 npwReg("loTake",{grp:"G2",pickAll:true,who:c=>{const p=c.p;if(!p)return[];let R0=[];try{R0=liveRivals(true).filter(v=>v!==p&&bandOf(danger(v,p))>=BAL.ag.why.loTake.band&&loMotive(v,p)&&(v.bac||0)>=LO.act.bac)}catch(e){}return R0.concat(loStaff(p))},
  why:(v,c)=>{const B=BAL.ag.why.loTake,p=c.p;if(loStaff(p).includes(v)){const g=netQ(v,"greed")*B.greed,t=(v===p.maid?B.care:0)+Math.max(0,netQ(v,"timid"))*B.timid;if(g<=0&&t<=0)return null;
-   return g>=t?{s:g,t:p,r:"tham của, lấy đồ trong rương chủ"}:{s:t,t:p,r:"cất nhầm chỗ",mis:1}}/* the maid who keeps the chest may misplace a piece in her daily work (a slip of a real duty; a timid one more often) → cause "mis", mostly found again at home */
+   return g>=t?{s:g,t:p,r:"tham của, lấy đồ trong rương chủ"}:{s:t,t:p,r:"cất nhầm chỗ",flag:"mis"}}/* the maid who keeps the chest may misplace a piece in her daily work (a slip of a real duty; a timid one more often) → cause "mis", mostly found again at home */
   return {s:danger(v,p)*mindW(v,"scheme")*B.rivW,t:p,r:"oán "+npwNm(p)+", sai người lấy trộm đồ"}}});
 npwReg("loTry",{grp:"G2",who:c=>c.p?[c.p]:[],why:(p,c)=>({s:BAL.ag.why.loTry.want+loPrice(c.c.e||{})/BAL.ag.why.loTry.prDiv,r:"muốn tìm lại "+loNm(c.c.k)})});
 npwReg("loClear",{grp:"G2",who:c=>c.p?[c.p]:[],why:(p,c)=>({s:BAL.ag.why.loTry.clear,r:"muốn rửa tiếng trước buổi xét"})});
@@ -75584,7 +75587,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="2dcb8ba4a152";window.CTM_BUILD=BUILD;
+const BUILD="21a88ddae9f0";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

@@ -47,7 +47,7 @@ function loMotive(v,t){try{if(typeof motiveOK==="function")return !!motiveOK(v,t
 /* hidden cause, chosen by the existing motive system */
 function loCause(p){const o=npcWhy("loTake",{p});/* npc-purpose G2: the taker = a person with a goal (rival grudge+motive, greedy or careless servant); nobody → nothing goes missing */
  return o?loCauseOf(p,o):null}
-function loCauseOf(p,o){const v=o.who;if(loStaff(p).includes(v))return{cause:o.why==="cất nhầm chỗ"?"mis":"srv",sv:v.name||"",why:o.why};ap(v,{bac:-LO.act.bac,duc:LO.act.duc});return{cause:"riv",by:key(v),why:o.why}}
+function loCauseOf(p,o){const v=o.who;if(loStaff(p).includes(v))return{cause:o.flag==="mis"?"mis":"srv"/* flag from the reason (npwAsk), never the text */,sv:v.name||"",why:o.why};ap(v,{bac:-LO.act.bac,duc:LO.act.duc});return{cause:"riv",by:key(v),why:o.why}}
 function loStaff(p){return [p.maid].concat(p.staff||[]).filter(Boolean)}
 /* the same function for everyone: an item leaves its owner's chest */
 function loLose(p,force){if(!loAlive(p))return null;const L=(p.inv||[]).filter(loOk);if(!L.length)return null;const cz=force||loCause(p);if(!cz)return null;
