@@ -45,7 +45,7 @@ function mbAffK(v){if(!mbOn())return 0;if(v==null)v=mbS().v;const a=Math.abs(v),
 function mbLocked(a){if(!a||!mbOn())return false;return mbBand().i<=-2&&B().lock.includes(a.n)}
 window.mbS=mbS;window.mbBand=mbBand;window.mbOdPts=mbOdPts;window.mbAdd=mbAdd;window.mbAffK=mbAffK;
 /* odds: her acts only (NPCs keep jemo's own small emotion rule) */
-(function(){if(typeof odA!=="function")return;const o0=odA;odA=function(a,b){const r=o0.apply(this,arguments);try{if(a===S&&mbOn()){const m=mbOdPts();if(m){MOOD_N.odN++;MOOD_N.odSum+=m;MOOD_N.odMax=Math.max(MOOD_N.odMax,Math.abs(m));return cl2(r+m,5,95)}}}catch(e){}return r}})();
+(function(){if(typeof odA!=="function")return;const o0=odA;odA=function(a,b){const r=o0.apply(this,arguments);try{if(a===S&&mbOn()){const m=mbOdPts();if(m){MOOD_N.odN++;MOOD_N.odSum+=m;MOOD_N.odMax=Math.max(MOOD_N.odMax,Math.abs(m));return oddsCl(r+m)}}}catch(e){}return r}})();
 /* "Vì sao <bậc>?": the real formula re-run with her mood at calm (whyDiff), and the deck cards (static odds) name it too */
 (function(){if(typeof whyDiff!=="function")return;const w0=whyDiff;whyDiff=function(fn,subj){const L=w0.apply(this,arguments);try{if(!mbOn()||!(subj||[]).some(x=>x&&x[0]===S))return L;const M=mbS(),v=M.v;if(!mbOdPts(v))return L;
   let o0,o1;try{o0=fn();M.v=0;o1=fn()}finally{M.v=v}if(o0!=null&&o1!=null&&o0!==o1)L.push([`Tâm trạng ngươi: ${mbBand(v).name.toLowerCase()}`,o0-o1])}catch(e){}return L}})();

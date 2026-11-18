@@ -315,8 +315,8 @@ function worldTick(){if(!S||S.dead||!B().on)return;const z=wZ();if(host()){WW.in
 function startCard(w){const E=EVD[w.k];let m=null;try{m=E.card(w)}catch(e){wErr("card "+w.k,e)}
  if(m&&E.scene&&!(m.opts&&m.opts.length)&&!(typeof isSrv==="function"&&isSrv())){let sc=null;try{sc=E.scene(w)}catch(e){wErr("scene "+w.k,e)}
   if(sc&&sc.opts&&sc.opts.length){m.h=(m.h||"")+(sc.h||"");m.opts=sc.opts;if(!m.who&&sc.who)m.who=sc.who}}
- /* kit line format "word · tốn: … · thành: …" (j0 kitParse): a sure option leads with "Chắc chắn" (never shown) so its first label (thành / kèm) is read */
- if(m&&m.opts)for(const o of m.opts)if(o&&typeof o.x==="string"&&/^(thành|kèm|hỏng|không được)/.test(o.x))o.x="Chắc chắn · "+o.x;return m}
+ /* kit line format "word · tốn: … · thành: …" (j0 kitParse): a sure option has no odds word (ODDS CAP: the ladder has no "sure" word); kitParse reads its first label (thành / kèm) as is */
+ return m}
 function worldShow(){if(!S||S.dead)return;S.wwSeen=S.wwSeen||{};S.wwEnd=S.wwEnd||{};const A=worldWin(),z=wZ();
  for(const h of (z.H||[])){if(h.id==null||!h.end||S.wwEnd[h.id]||!S.wwSeen[h.id])continue;S.wwEnd[h.id]=1;Q.push({t:h.n||"Tin trong cung",who:pEmp(),h:`<p>${h.end}</p>`})}
  for(const w of A){if(S.wwSeen[w.id])continue;S.wwSeen[w.id]=1;const m=startCard(w);if(m){if(!m.who)m.who=pEmp();if(!m.opts)delete m.opts;Q.push(m)}}
