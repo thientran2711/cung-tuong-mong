@@ -105,7 +105,8 @@ parallel-time (ORDER ROOT-54 ~20:22Z + ADD ~20:37Z) | review/parallel-time | ses
 | kit-subtabs-overflow (sonnet KIT KEEPER: K-Q2-1 over-full kitSubTabs bar, whole group) | review/kit-subtabs-overflow | MAIN ROOT-55 | session_01Rc5AsKznwkUWfae1dJP98t | SẴN SÀNG KIỂM 9366028 | 18/11 20:05Z |
 | ROLE-PARITY (opus; OD 21:30Z role × act × {player,NPC}, promotion) | review/role-parity | C-AG #14 | session_01Rc5AsNHRsgq6S4C9tpNLxA | DONE (part 1 d6c2dc17; rolled → #2) | 18/11 21:35Z |
 | REVIEW role-parity part 1 (opus reviewer) | review/role-parity d6c2dc17 | C-AG #15 | session_01Rc5AsLNBKMAjqjCWnFi5D1 | RUNNING | 18/11 20:44Z |
-| ROLE-PARITY #2 (opus; part 2: §4 open families) | review/role-parity-2 | C-AG #15 | session_01Rc5AsMM3ssHnCBtjLf11Qr | RUNNING | 18/11 20:44Z |
+| ROLE-PARITY #2 (opus; part 2: §4 open families) | review/role-parity-2 | C-AG #15 | session_01Rc5AsMM3ssHnCBtjLf11Qr | DONE (SẴN SÀNG f2b8fb0c; → #3) | 18/11 20:44Z |
+| ROLE-PARITY #3 (opus; part-1 fix finish: per-rank targets, «Chuyện cũ», OPEN cap, merge main) | review/role-parity-2 | C-AG #16 | session_01Rc5AsN67UuWKQGjGP9MeW8 | RUNNING | 18/11 21:51Z |
 | FOREMAN E ROOT #7 (opus; child of E ROOT #6, depth 6) | handover FOREMAN_E_STATUS | E ROOT #6 | session_01DgYSWmtdZ1kLd9QYXs3qmb | RUNNING | 18/11 20:04Z |
 | ge-writers-w1 remerge main 13bb8c88 (sonnet E11w1m) | review/ge-writers-w1 | E ROOT #7 | session_01DgYSWkZN9pWgeEfv5WDMRV | DONE dca5550f | 18/11 20:22Z |
 | errand-scene r2 (non-blocking walk-off/away/walk-back + «!» chip) | review/errand-scene | MAIN ROOT-55 | session_01Rc5AsLFZhaSRGU7o57KkKy | READY cae6685 | 18/11 |
