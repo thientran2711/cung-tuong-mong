@@ -45,7 +45,7 @@ function tl2Choose0(v,base){const B=BAL.ag.toil2;const sk=toilNpcSk(v),occ=toilN
    judgement repeats per imagined sitting (est × ways × hosts toilFx → jaudit / jlux / j92 / j60) are memoised per person, then dropped when the
    pass ends; outside a pass every call goes straight through. Same results, fewer repeats (profile CPU×4: tl2Meet ≈ 27 ms of a buổi). */
 const TL2M={on:0,c:{}};function tl2MIn(){TL2M.on++}function tl2MOut(){if(--TL2M.on<=0){TL2M.on=0;TL2M.c={}}}
-(function(){for(const n of ["personRoleRank","wdPOf","luxOf","luxWorn","leHostKind","toilHostKind","toilNpcSk","wdStatus","toilNpcOcc"]){const f=window[n];if(typeof f!=="function")continue;
+(function(){for(const n of ["personRoleRank","wdPOf","luxOf","luxWorn","leHostKind","toilHostKind","toilNpcSk","wdStatus","toilNpcOcc","toilTasteOf","toilLvTasteOf"/* ag2-perf F2: a host's liked tone / level (name hash + traits; toilTasteOf("th") builds pTH() with its portrait every call) */]){const f=window[n];if(typeof f!=="function")continue;
  window[n]=function(a,b){if(!TL2M.on||arguments.length>2||b!=null&&typeof b==="object")return f.apply(this,arguments);const M=TL2M.c[n]=TL2M.c[n]||new Map();const k2=b===undefined?"":String(b);
   let m=M.get(a);if(!m){m={};M.set(a,m)}if(k2 in m)return m[k2];return m[k2]=f.apply(this,arguments)}}})();
 /* toilNpc: the record of the day = her real clothes (base) + the face she chose */

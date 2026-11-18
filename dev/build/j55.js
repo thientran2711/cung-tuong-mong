@@ -106,7 +106,7 @@ function tdSoMonth(force){const T=trS();if(!force&&S.turn-T.soT<TD.soGap)return"
  if(T.praise&&T.H[T.praise])opts.push(["praise",SB.praise+T.H[T.praise].pow*SB.praisePow]);
  if(typeof kvDebate==="function"&&S.heir&&S.heir.k&&S.heir.k.alive&&typeof kvOrder==="function"&&typeof kvQueenMom==="function"&&!kvQueenMom(S.heir.v)&&kvOrder().some(x=>x.dich&&!x.k.heir&&x.k.age>=6)){const q=queenP();const c=q&&q!==S?tdHouse(q):S.rank>=7?tdHouse(S):null;const h=T.H[c||"Lễ bộ"];opts.push(["dich",(h?h.pow:0)*SB.dich])}
  const imp=tdImpPick();if(imp)opts.push(["imp",(imp[2]||1)*SB.imp]);
- const ty=CLANS.filter(c=>T.H[c].pow>=65);if(ty.length&&T.tyY!==S.year&&liveRivals(true).length+1<(typeof CAPC==="number"?CAPC:16)-1&&roomFor("consort"))opts.push(["tuyen",(Math.max(...ty.map(c=>T.H[c].pow))-SB.tuyen0)*SB.tuyen]);
+ const ty=CLANS.filter(c=>T.H[c].pow>=65);if(ty.length&&T.tyY!==S.year&&liveRivals(true).length+1<BAL.harem.cap-1&&roomFor("consort"))opts.push(["tuyen",(Math.max(...ty.map(c=>T.H[c].pow))-SB.tuyen0)*SB.tuyen]);
  const cc=consorts().filter(p=>(p.cc||0)>=2);if(cc.length)opts.push(["cc",Math.max(...cc.map(p=>p.cc||0))*SB.cc]);
  const f=force&&opts.find(x=>x[0]===force);let k;if(f)k=f[0];else{const pk=npwPick(opts,x=>x[1]);if(!pk||!force&&!roll(TD.so))return"";k=pk[0]}/* npc-purpose G2: the strongest stake speaks; TD.so = whether it reaches the throne this month */
  T.soT=S.turn;let ev="";
@@ -118,7 +118,7 @@ function tdSoMonth(force){const T=trS();if(!force&&S.turn-T.soT<TD.soGap)return"
   ev=`${TDOFF[sp]} ${h.name} đứng đầu bá quan. ${r}Nhà ${sp} thế lực ${won?"+4":"-3"}. `;tdNews(`${TDOFF[sp]} ${h.name} dâng sớ xin lập đích; ${won?"Hoàng thượng nghe theo":"Hoàng thượng chưa nghe"}.`)}
  else if(k==="imp"){const [cA,t]=imp;ev=tdImpeach(cA,t)}
  else if(k==="tuyen"){const c=npwPick(ty,c=>T.H[c].pow)||ty[0];const h=T.H[c];T.tyY=S.year;const o=cl(30+(h.pow-60)+(S.emp.mood<=1?10:-10),10,85);
-  if(roll(o)){const n=newRival(roll(70)?0:1);Object.assign(n,drawFace());n.age=18+R(4);n.clan=c;n.dad=h.pow;rivals.push(n);try{palFix()}catch(e){}tdPowAdd(c,BAL.eff.j55.tdSoMonth_3);
+  if(roll(o)&&roomFor("consort")){const n=newRival(roll(70)?0:1);Object.assign(n,drawFace());n.age=18+R(4);n.clan=c;n.dad=h.pow;rivals.push(n);try{palFix()}catch(e){}tdPowAdd(c,BAL.eff.j55.tdSoMonth_3);
    ev=`<b>Sớ xin tuyển tú:</b> ${TDOFF[c]} ${h.name} xin đưa con gái trong họ vào cung; Hoàng thượng chuẩn (khả năng: ${chanceLo(o)}). ${n.name} vào cung, phong ${RANKS[n.rank].n}, người nhà ${c}. `;tdNews(`Nhà ${c} đưa ${n.name} vào cung.`)}
   else{tdPowAdd(c,BAL.eff.j55.tdSoMonth_4);ev=`<b>Sớ xin tuyển tú:</b> ${TDOFF[c]} ${h.name} xin đưa con gái trong họ vào cung; Hoàng thượng gác lại (khả năng: ${chanceLo(o)}). Nhà ${c} thế lực ${balSg(BAL.eff.j55.tdSoMonth_4)}. `;tdNews(`Nhà ${c} xin đưa người vào cung, bị gác lại.`)}}
  else if(k==="cc"){const p=npwPick(cc,p=>p.cc||0)||cc[0];const o=cl(25+(p.cc||0)*10-(p.tamco||0)/5,10,80);

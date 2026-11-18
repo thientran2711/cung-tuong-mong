@@ -58,7 +58,7 @@ const srv=http.createServer((q,r)=>{let p=decodeURIComponent(new URL(q.url,'http
  const SEED=+process.env.SEED||7;console.log('seed '+SEED);
  await F.evaluate(sd=>{let x=sd;window.__tsgRnd=()=>{x=(x*1103515245+12345)%2147483648;return x/2147483648};Math.random=window.__tsgRnd},SEED);
  await F.evaluate(()=>{const kl=document.getElementById('kload');if(kl)kl.remove();try{localStorage.clear()}catch(e){}SLOT=3;const t=document.getElementById('title');if(t)t.hidden=true;/* a consort life (the flake: a random life could be a maid, isSrv, where the consort gate greeting does not apply) */window.__forceOrigin='thd';window.__nlInner=1;start();window.__forceOrigin=0;window.__nlInner=0;quiet=false;Q.length=0;const md=document.getElementById("modal");if(md)md.hidden=true;try{NLP=null}catch(e){}});
- await p.waitForTimeout(800);
+ await F.waitForFunction(()=>typeof S!=='undefined'&&!!S&&!!S.name&&!document.querySelector('#modal:not([hidden])'),null,{timeout:30000});/* real condition (the life exists, no dialog up), not an 800 ms timer */
  const R=await F.evaluate(()=>{if(window.__tsgRnd)Math.random=window.__tsgRnd;const out={rows:[],bad:[]};const B4=typeof B4L==='number'?B4L:BUOI.length-1,CH=B4-1;
   const clr=()=>{Q.length=0;const md=document.getElementById('modal');if(md)md.hidden=true};
   const body=()=>{const M=document.getElementById('modal');if(!M||M.hidden)return null;return{t:(document.getElementById('mt')||{}).textContent||'',body:M.innerText.replace(/\s+/g,' '),opts:[...M.querySelectorAll('#mb .opts > button, #mb .opts button')].map(x=>({n:x.innerText.replace(/\s+/g,' ').trim(),dis:x.disabled}))}};

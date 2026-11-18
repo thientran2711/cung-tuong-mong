@@ -12,7 +12,8 @@ const rvOmen=p=>{const a=p&&p.a!=null&&RV(p.a);return a?`<br>Trong cung xì xào
 const rvY=(p,s)=>p&&p.y?(s||", ")+p.y:"";
 const mon=m=>S.month===m;
 const kidHurt=(k,n)=>{k.hp=Math.max(0,k.hp-n);if(k.hp<=0)log(kidDie(k,"không qua khỏi cơn bệnh",true))};
-const newGirl=rel=>{const n=newRival(1+R(2));Object.assign(n,drawFace());n.rel=rel;rivals.push(n);return n};
+/* harem cap (BAL.harem.cap): the room is checked again when she is chosen, not only when the event was queued (tuyển tú may fill the harem meanwhile) */
+const newGirl=rel=>{if(!roomFor("consort"))return null;const n=newRival(1+R(2));Object.assign(n,drawFace());n.rel=rel;rivals.push(n);return n};
 
 /* framing */
 ev("doll",()=>S.rank>=1&&liveRivals(false).length,()=>{const X=rvWhy("meHarm");return X?{v:X.who.id,y:X.why,o:od(BAL.odb.j7.odO+eyes(S)*6+S.tamco/4)}:null},p=>{const v=RV(p.v);if(!v)return null;return{who:pMaid(),
@@ -73,9 +74,9 @@ ev("flood",()=>SEASON[S.month-1]==="Hạ",null,()=>({
  {n:"Cắt bổng lộc cung nhân để dâng",fx:{danh:3,maid:-15}}]}));
 ev("newgirl",()=>liveRivals(true).length<9&&roomFor("consort"),null,()=>({
  t:"Con gái Thượng thư Lễ bộ được tuyển vào cung, nghe nói dung mạo khuynh thành.<br>Hôm nay nàng đến các cung bái kiến.",o:[
- {n:"Tặng trâm, kết thân",fx:{bac:-20},x:"tân nhân thiện cảm +20",go:()=>{const n=newGirl(20);log(`${n.name} vào cung, phong ${RANKS[n.rank].n}; nàng mến ngươi.`)}},
- {n:"Tiếp đãi lạnh nhạt",fx:{},x:"tân nhân thiện cảm -10",go:()=>{const n=newGirl(-10);log(`${n.name} vào cung, phong ${RANKS[n.rank].n}.`)}},
- {n:"Dằn mặt ngay buổi đầu",fx:{duc:-4,tamco:1},x:"tân nhân sợ, thù -25",go:()=>{const n=newGirl(-25);n.ghen=cl(n.ghen+15,0,100);log(`${n.name} vào cung, khóc suốt đêm sau buổi bái kiến.`)}}]}));
+ {n:"Tặng trâm, kết thân",fx:{bac:-20},x:"tân nhân thiện cảm +20",go:function(){const n=newGirl(20);if(!n){apply({bac:-((this&&this.fx&&this.fx.bac)||0)});log("Hậu cung đã đủ người, tân nhân được đưa về nhà.");return}log(`${n.name} vào cung, phong ${RANKS[n.rank].n}; nàng mến ngươi.`)}},
+ {n:"Tiếp đãi lạnh nhạt",fx:{},x:"tân nhân thiện cảm -10",go:()=>{const n=newGirl(-10);if(!n){log("Hậu cung đã đủ người, tân nhân được đưa về nhà.");return}log(`${n.name} vào cung, phong ${RANKS[n.rank].n}.`)}},
+ {n:"Dằn mặt ngay buổi đầu",fx:{duc:-4,tamco:1},x:"tân nhân sợ, thù -25",go:()=>{const n=newGirl(-25);if(!n){log("Hậu cung đã đủ người, tân nhân được đưa về nhà.");return}n.ghen=cl(n.ghen+15,0,100);log(`${n.name} vào cung, khóc suốt đêm sau buổi bái kiến.`)}}]}));
 /* children */
 ev("princefever",()=>S.kids.some(k=>k.alive&&k.age<10)&&(mon(1)||mon(8)),()=>({k:S.kids.filter(k=>k.alive&&k.age<10).sort((x,y)=>(x.hp||0)-(y.hp||0)||(x.age||0)-(y.age||0))[0].name,o:od(BAL.odb.j7.odO_6+S.arts.y*12)}),p=>{const k=KID(p.k);if(!k)return null;return{
  t:`Đêm yến tiệc, ${k.name} sốt cao co giật. Tiếng nhạc bên Thái Hòa điện vẫn vọng sang.`,o:[
@@ -151,7 +152,7 @@ ev("condemnedmaid",()=>true,()=>({o:od(BAL.odb.j7.odO_12+S.duc/2+(has("nhantu")?
 ev("coldvisit",()=>rivals.some(v=>v.alive&&v.out),()=>{const X=rvWhy("coldAsk");return X?{f:X.who.id,y:X.why,o:od(BAL.odb.j7.odO_13+S.sung/3+(has("nhantu")?15:0))}:null},p=>{const f=RV(p.f);if(!f)return null;return{who:pv(f),
  t:`Gió lùa qua song cửa lãnh cung. ${f.name} gầy rộc, níu tay áo ngươi: “Ta biết những chuyện họ muốn chôn.”`,o:[
  {n:"Mang chăn ấm, thuốc men",fx:{bac:-20,duc:4},x:`chứng cứ ${balSg(BAL.eff.j7.evGo_2)} về một phi tần từng làm điều sai`,go:()=>{const x=evGuilty(S,liveRivals(true));if(x&&evA(S,x,BAL.eff.j7.evGo_2))log(`${f.name} kể chuyện xấu của ${x.name}: chứng cứ ${balSg(BAL.eff.j7.evGo_2)}.`);else log(`${f.name} cảm tạ, kể chuyện cũ trong cung; không có gì làm chứng cứ.`)}},
- {n:"Xin Hoàng thượng ân xá",fx:{},x:`${word(p.o)} · thành: nàng về cung, thiện cảm +40 · hỏng: Sủng ${balSg(BAL.eff.j7.sungGo_9)}`,go:()=>{if(roll(p.o)){f.out=false;f.rank=0;f.rel+=40;log(`${f.name} được ân xá, về cung làm ${RANKS[0].n}.`)}else apply({sung:BAL.eff.j7.sungGo_9})}},
+ (o=>roomFor("consort")||typeof kitOff!=="function"?o:kitOff(o,"hậu cung đã đủ người"))({n:"Xin Hoàng thượng ân xá",fx:{},x:`${word(p.o)} · thành: nàng về cung, thiện cảm +40 · hỏng: Sủng ${balSg(BAL.eff.j7.sungGo_9)}`,go:()=>{if(!roomFor("consort")){log("Hậu cung đã đủ người, nàng chưa được về cung.");return}if(roll(p.o)){f.out=false;f.rank=0;f.rel+=40;log(`${f.name} được ân xá, về cung làm ${RANKS[0].n}.`)}else apply({sung:BAL.eff.j7.sungGo_9})}}),
  {n:"Quay lưng bỏ đi",fx:{duc:-2}}]}});
 /* dangers */
 ev("taster",()=>S.rank>=2&&liveRivals(false).length,()=>{const X=rvWhy("meHarm");return X?{v:X.who.id,y:X.why,o:oSpy()}:null},p=>{const v=RV(p.v);if(!v)return null;return{

@@ -40,6 +40,8 @@ const CODE_PAT={
  fx:new RegExp('(?<![\\w$.])'+ST+'\\s*:\\s*[+-]?\\d+(?:\\.\\d+)?\\b','g'),           /* {danh:-8}, {sung:3} … a typed gain / cost */
  khac:/\b(?:can|spend|j77Kh|walkOk)\(\s*\d+\s*\)/g,                                    /* can(2), spend(1) … typed khắc */
  roll:/\broll\(\s*\d+\s*\)/g,                                                         /* roll(35) … a typed odds base */
+ /* div = a typed divisor of a rule stat in a formula: (a.tamco||0)/4, v.sung/5 (review/poison-road-fix: jpq / jpoison odds read BAL.pg.tamDiv / trustDiv) */
+ div:new RegExp('\\.'+ST+'\\b(?:\\s*\\|\\|\\s*0\\s*\\))?\\s*\\/\\s*\\d+(?:\\.\\d+)?\\b','g'),
  /* review/one-core-dup (owner 17/11 03:00Z "cùng một vấn đề mà có 2-3 cái con số"; reviewer road-onecore-r1 item 3): typed amounts of
     dialog go: closures and option / ending fields. sw = a typed stat write S.x+=N; sc = an option's / ending's Lợi thế score;
     k = an ARC67 / road ending tier (-1 lose / 0 mid / 1 win, followed by its tag / text). */

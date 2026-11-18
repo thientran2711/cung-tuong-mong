@@ -361,7 +361,7 @@ function cnvBribeOpts(a,v,m,pay){return [
 PEND.cnvFrame=pp=>{const s=servById(pp.sid),m=srvM();if(!isSrv()||!s||!m)return null;const fr=srvFriendList().length;const item=pick(["cây trâm vàng","chiếc vòng ngọc","hộp phấn ngự ban","túi hương thêu chỉ vàng"]);
  return{t:`<p>${s.name} (${srkName(s)}) tố với ${m.name} rằng ngươi lấy trộm ${item}.</p>${fr?`<p class="past">${fr} người bạn sẽ làm chứng cho ngươi.</p>`:""}`,who:pServ(s),o:cnvPend(S,cnvFrameOpts(S,s,m))}};
 /* a = the framed one, s = the accuser (S when the maid player framed an NPC colleague), m = their master */
-function cnvFrameOpts(a,s,m){const fr=a===S?srvFriendList().length:(typeof asFriends==="function"?asFriends(a):0);const o=odA(a,BAL.odb.j42.odO_9+(a.tamco||0)/2+(a.duc||0)/5+fr*8);
+function cnvFrameOpts(a,s,m){const fr=a===S?srvFriendList().length:(typeof asFriends==="function"?asFriends(a):0);const o=odA(a,BAL.odb.j42.odO_9+(a.tamco||0)/BAL.odb.j42.frTcDiv+(a.duc||0)/BAL.odb.j42.frDucDiv+fr*8);
  return [
   {id:"clear",n:"Thanh minh",tag:"social",o,fx:{},w:{tin:BAL.eff.j42.tinGo_3},l:{tin:BAL.eff.j42.tinGo_4,suc:BAL.eff.j42.sucGo_3},x:`${word(o)} · thành: ${s.name} bị phạt, Chủ tin ${balSg(BAL.eff.j42.tinGo_3)} · hỏng: Chủ tin ${balSg(BAL.eff.j42.tinGo_4)}, bị đánh đòn Sức ${balSg(BAL.eff.j42.sucGo_3)}`,
    go:ok=>{if(ok){const P=BAL.ag.stf2.accPen;if(s===S)apply({tin:-P});else{s.loyal=cl(s.loyal-P,0,100);s.trouble=wk()}stfLike(s,a,-20);return a===S?`Ngươi thanh minh được; ${s.name} bị phạt vì vu cáo.`:`${a.name} thanh minh được; ${stfNm(s)} bị phạt vì vu cáo.`}
