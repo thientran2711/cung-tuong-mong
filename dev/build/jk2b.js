@@ -368,50 +368,44 @@ window.KIT_SCAR={src:function(sev){return `img/scar-${Math.max(1,Math.min(3,sev|
  on:function(p){try{if(!p||!p.scar)return false;return (typeof S!=="undefined"&&p===S)||(typeof knows==="function"&&!!knows(p))}catch(e){return false}},
  of:function(p){if(!this.on(p))return null;const sev=p.scar.sev|0;return{sev,src:this.src(sev),label:`Hủy dung (${this.names[sev]||""})`}},
  rect:function(file){const n=String(file||"").split("/").pop();return this.fit&&this.fit[n]||null},
- style:function(file){const r=this.rect(file);if(!r)return "";return `left:${r[0]}%;top:${r[1]}%;width:${r[2]}%;height:${r[3]}%;transform:rotate(${r[4]}deg);transform-origin:${this.origin}`},
+ style:function(file){const r=this.rect(file);if(!r)return "";return `left:${r[0]}%;top:${r[1]}%;width:${r[2]}%;height:${r[3]}%;transform:rotate(${r[4]}deg) scaleX(-1);transform-origin:${this.origin}`},
  load:function(){if(this.fit||this._ld)return;this._ld=1;try{fetch(this.fitUrl).then(r=>r.ok?r.json():null).then(j=>{if(j)KIT_SCAR.fit=j}).catch(()=>{})}catch(e){}}};
 try{KIT_SCAR.load()}catch(e){}
 }
 /* ---------- 7. VEIL + SCAR OVERLAYS (review/wardrobe j92: KIT_VEIL / KIT_SCAR, placed per picture from img/veil-fit.json / scar-fit.json) ----------
    Layer order everywhere: portrait < scar strokes < veil < frame. The scar shows ONLY when the player knows (KIT_SCAR.on: herself, or j70 knows(p),
    or p.scar.known); a veil is worn in public, so it shows to everyone who sees the face (never on the grey "Người lạ" silhouette).
-   Places: stage figures (.kfxf box laid exactly over the figure image) + the mirror close-up. AVATAR frames (tall, small, kfc, lists, cards) no longer get an
-   overlay at all: they show the photo with the LASTING marks baked in (KIT_LASTING / KIT_BAKE below, owner 17/11 ~18:10Z). A picture without fit data gets nothing (never a guessed position). ---------- */
+   Places: stage figures (.kfxf box laid exactly over the figure image) + the mirror close-up. AVATAR frames (tall, small, kfc, lists, cards) get the same stack through KIT_AV (18/11, owner ~03:20Z; supersedes the baked ID-card image of 17/11). A picture without fit data gets nothing (never a guessed position). ---------- */
 kitVeiled=function(){return false};
 function kitVeilOn(p){try{if(!p)return false;if(window.KIT_VEIL&&typeof KIT_VEIL.on==="function"&&KIT_VEIL.on(p))return true;if(typeof scarOf==="function"){const s=scarOf(p);return !!(s&&s.veil)}}catch(e){}return false}
 function kitScarOf(p){try{if(!p||!p.scar||!window.KIT_SCAR)return null;const on=KIT_SCAR.on(p)||!!p.scar.known;if(!on)return null;const sev=Math.max(1,Math.min(3,p.scar.sev|0||1));return{sev,src:KIT_SCAR.src(sev)}}catch(e){return null}}
+/* TONE (owner 18/11 pick, BAL.looks.tone[id] = strength 0..1): opacity x strength + a lighter, less saturated colour (CSS stand-in for "pulled toward skin"; the ladder sheets used the per-pixel pull) */
+function kitToneCss(id,base){try{const k=BAL.looks.tone[id];if(!(k>0)||k>=1)return base==null?"":`;opacity:${base}`;const d=1-k;return `;opacity:${((base==null?1:base)*k).toFixed(3)};filter:saturate(${(1-d*.6).toFixed(3)}) brightness(${(1+d*.5).toFixed(3)})`}catch(e){return base==null?"":`;opacity:${base}`}}
 const kitFxVars=st=>st.replace(/(^|;)\s*(left|top|width|height|transform|transform-origin):/g,(m,a,k)=>`${a}--f${k.replace('transform-origin','to').replace('transform','tf')}:`);
-function kitFxLayers(p,file){if(!p||!file)return"";let h="";const sc=kitScarOf(p);if(sc&&window.KIT_SCAR){const st=KIT_SCAR.style(file);if(st)h+=`<img class="kscar" src="${sc.src}" alt="" aria-hidden="true" style="${kitFxVars(st)}" onerror="this.remove()">`}
+function kitFxLayers(p,file){if(!p||!file)return"";let h="";const sc=kitScarOf(p);if(sc&&window.KIT_SCAR){const px=/fx-pox-scar/.test(sc.src);/* sẹo rỗ (đậu mùa) is a face-square final, never the cheek scratch box */const st=px?(typeof lkSquare==="function"?lkSquare(file):""):KIT_SCAR.style(file);if(st)h+=`<img class="${px?"kpox":"kscar"}" src="${sc.src}" alt="" aria-hidden="true" style="${kitFxVars(st)}${px?(typeof lkKeepCss==="function"?lkKeepCss(file):""):kitToneCss("cao",.85)}" onerror="this.remove()">`}
  if(kitVeilOn(p)&&window.KIT_VEIL&&KIT_VEIL.style){const t=KIT_VEIL.tierOf(p);const st=KIT_VEIL.style(file,t);if(st)h+=`<img class="kveil2" src="${KIT_VEIL.src(t)}" alt="" aria-hidden="true" style="${kitFxVars(st)}" onerror="this.remove()">`}return h}
 const kitFile=src=>String(src||"").split("?")[0].split("/").pop();
 /* ---------- AVATAR = ID CARD (owner 17/11 ~18:10Z, OD "Avatar … cái thẻ nhân viên"; review/kit-fx-register) ----------
    EVERY avatar-class frame (pcp tall, span.md / kmini / kfc, list rows, cards, pickers: everything made by pcPort / mdH) shows the BASE PORTRAIT +
-   LASTING marks only (hủy dung scar; plug-in point KIT_LASTING.add for pox scars etc.). NO makeup, NO temporary marks (slap, rash, pallor, poison, ink…).
-   The lasting marks are BAKED with the photo into ONE image (canvas -> blob URL, cached per picture + marks + size, scaled by the browser like any
-   photo) — there is no overlay box any more, so no registration error is possible. A person without a lasting mark gets the plain photo (no cost).
-   Stage figures + the mirror close-up keep the full look (kitFxLayers / kitFxPut, unchanged). ---------- */
-window.KIT_LASTING={list:[],add:function(d){if(!d||!d.id)return;this.list=this.list.filter(x=>x.id!==d.id);this.list.push(d)},
- /* layers of person p on picture file: [{id,src,rect:[l,t,w,h,deg],o:[ox,oy]}] (rect = % of the WHOLE picture, the scar-fit / veil-fit rows) */
- of:function(p,file){const out=[];if(!p||!file)return out;for(const d of this.list){let r=null;try{r=d.layers(p,file)}catch(e){r=null}if(r&&r.length)out.push(...r)}return out}};
-KIT_LASTING.add({id:"scar",layers:(p,file)=>{const sc=kitScarOf(p);if(!sc||!window.KIT_SCAR||!KIT_SCAR.rect)return null;const r=KIT_SCAR.rect(file);if(!r)return null;return[{id:"scar"+sc.sev,src:sc.src,rect:r.slice(0,5),o:[.5,.5],alpha:.85}]}});
-const KIT_BAKE={cache:{},order:[],pend:{},W:{tall:384,sm:192},max:80,
- key:function(p,file,kind){const L=KIT_LASTING.of(p,file);if(!L.length)return"";return file+"|"+kind+"|"+L.map(l=>l.id+":"+l.rect.join(",")).join(";")},
- /* the src to print into the avatar <img> + an attribute that lets the finished bake replace it */
- pick:function(p,url,kind){try{const file=kitFile(url);const k=this.key(p,file,kind||"sm");if(!k)return{src:url,attr:""};const c=this.cache[k];if(c){this.touch(k);return{src:c,attr:` data-kbk="${k.replace(/"/g,"")}"`}}
-   this.make(k,p,url,file,kind||"sm");return{src:url,attr:` data-kbk="${k.replace(/"/g,"")}"`}}catch(e){return{src:url,attr:""}}},
- touch:function(k){const i=this.order.indexOf(k);if(i>=0)this.order.splice(i,1);this.order.push(k)},
- make:function(k,p,url,file,kind){if(this.pend[k])return;this.pend[k]=1;const L=KIT_LASTING.of(p,file);const abs=/^(https?:|blob:|data:)/.test(url)?url:(typeof IMG_U==="function"?IMG_U(url):url);
-  const load=src=>new Promise((ok,no)=>{const im=new Image();im.crossOrigin="anonymous";im.decoding="async";im.onload=()=>ok(im);im.onerror=()=>no(0);im.src=src});
-  Promise.all([load(abs),...L.map(l=>load(/^(https?:|blob:|data:)/.test(l.src)?l.src:(typeof IMG_U==="function"?IMG_U(l.src):l.src)))]).then(([ph,...ls])=>{
-   const nw=ph.naturalWidth,nh=ph.naturalHeight,K=Math.min(1,this.W[kind]/nw),W=Math.max(1,Math.round(nw*K)),H=Math.max(1,Math.round(nh*K));const cv=document.createElement("canvas");cv.width=W;cv.height=H;const g=cv.getContext("2d");g.imageSmoothingQuality="high";g.drawImage(ph,0,0,W,H);
-   ls.forEach((im,i)=>{const l=L[i],r=l.rect,x=r[0]/100*W,y=r[1]/100*H,w=r[2]/100*W,h=r[3]/100*H;g.save();g.globalAlpha=l.alpha==null?1:l.alpha;g.translate(x+w*l.o[0],y+h*l.o[1]);g.rotate((r[4]||0)*Math.PI/180);g.drawImage(im,-w*l.o[0],-h*l.o[1],w,h);g.restore()});
-   cv.toBlob(b=>{delete this.pend[k];if(!b)return;const u=URL.createObjectURL(b);this.cache[k]=u;this.touch(k);while(this.order.length>this.max){const o=this.order.shift(),ou=this.cache[o];delete this.cache[o];setTimeout(()=>{try{URL.revokeObjectURL(ou)}catch(e){}},60000)}
-    document.querySelectorAll("img[data-kbk]").forEach(e=>{if(e.getAttribute("data-kbk")===k.replace(/"/g,"")&&e.src!==u)e.src=u})},"image/webp",.92)}).catch(()=>{delete this.pend[k]})}};
-window.KIT_BAKE=KIT_BAKE;
+   EVERY face layer at mirror strength (owner 18/11 ~03:20Z: marks, scratch, ink, soot, pox, dust, sweat, scar, veil, makeup incl. Khuynh thành sparkle, smudge) = the ONE kitFxLayers stack, laid
+   over the portrait by KIT_AV (below) through kitFxPut / kfxGeom, same CSS + eye/lip keep-out mask as the mirror and the stage. ---------- */
+/* KIT_AV: the avatar hook. pcPort / mdH stamp the portrait <img> with data-kav="<n>" (n -> the person); kitAvSweep then lays the SAME kitFxLayers stack over it through kitFxPut
+   (one .kfxf box, kfxGeom follows the picture: object-fit, clip, transform), so every avatar frame (top bar md, kmini / kfc side cards, tab + list rows, tall pcPort, mdH everywhere) shows the
+   marks + scratch + veil + makeup incl. Khuynh thành sparkle exactly like the mirror: same CSS, tone, keep-out mask (lkKeepCss), LOD step 0 (toilStageEl). A person / picture without fit data gets nothing. */
+const KIT_AV={n:0,P:new Map(),max:900,
+ stamp:function(p){const n=++this.n;this.P.set(n,p);if(this.P.size>this.max)this.P.delete(this.P.keys().next().value);return n},
+ sweep:function(root){try{(root||document).querySelectorAll("img[data-kav]").forEach(im=>{const p=KIT_AV.P.get(+im.dataset.kav);const file=kitFile(im.currentSrc||im.getAttribute("src")||im.src);const o=im.__kav;
+   if(!p||!file||/face-|unknown/.test(file)||!im.isConnected){if(o)KIT_AV.drop(im);return}
+   if(im.__kavf===file&&im.__kavp===p&&(!o||o.isConnected))return;if(o)KIT_AV.drop(im);im.__kavf=file;im.__kavp=p;
+   const host=im.parentElement;if(!host)return;kitFxPut(im,p,host);const s=host.lastElementChild;if(s&&s.__img===im){s.setAttribute("data-kav","1");s.__file=file;im.__kav=s}else im.__kav=null})}catch(e){}},
+ drop:function(im){const o=im.__kav;if(o){KFX_L.delete(o);o.remove()}im.__kav=null;im.classList.remove("kfxon")}};
+window.KIT_AV=KIT_AV;
 (function(){const p0=pcPort;pcPort=function(f){let h=p0.apply(this,arguments);try{const p=f&&f.__kp;if(!p||!/class="kpor"/.test(h))return h;const m=/<img class="kpor" src="([^"]+)"/.exec(h);if(!m||/face-|unknown/.test(m[1]))return h;
-  const b=KIT_BAKE.pick(p,m[1],"tall");if(b.attr)h=h.replace(m[0],`<img class="kpor"${b.attr} src="${b.src}"`)}catch(e){}return h}})();
+  h=h.replace(m[0],`<img class="kpor" data-kav="${KIT_AV.stamp(p)}" src="${m[1]}"`);kitAvKick()}catch(e){}return h}})();
 (function(){const m0=mdH;mdH=function(p){let h=m0.apply(this,arguments);try{const q=p&&p.__kp;if(!q)return h;const m=/<img([^>]*?)src="([^"]*por-[^"]+)"/.exec(h);if(!m)return h;
-  const b=KIT_BAKE.pick(q,m[2],"sm");if(b.attr)h=h.replace(m[0],`<img${m[1]}${b.attr.trim()} src="${b.src}"`)}catch(e){}return h}})();
+  h=h.replace(m[0],`<img${m[1]}data-kav="${KIT_AV.stamp(q)}" src="${m[2]}"`);kitAvKick()}catch(e){}return h}})();
+let kavRaf=0;function kitAvKick(){if(kavRaf)return;kavRaf=requestAnimationFrame(()=>{kavRaf=0;KIT_AV.sweep(document)})}
+(function(){if(!window.MutationObserver)return;const go=()=>{if(!document.body)return setTimeout(go,50);new MutationObserver(ms=>{if(ms.some(r=>r.type==="attributes"||[...r.addedNodes].some(n=>n.nodeType===1&&!(n.classList&&n.classList.contains("kfxf")))))kitAvKick()}).observe(document.body,{childList:true,subtree:true,attributes:true,attributeFilter:["src"]})};go()})();
 /* kitFxPut(img,p,host): lay the face layers of person p over the DRAWN picture img inside host (room stage, podium, any figure) */
 function kitFxPut(img,p,host){{if(!img||!p||(typeof kitIsKnown==="function"&&!kitIsKnown(p)))return;const fx=kitFxLayers(p,kitFile(img.currentSrc||img.src));if(!fx)return;const s=document.createElement("span");s.className="kfxf";s.innerHTML=fx;
   s.__img=img;s.style.cssText="position:absolute;pointer-events:none;z-index:2";kfxGeom(s);img.classList.add("kfxon");host.appendChild(s);KFX_L.add(s)}}
@@ -425,7 +419,7 @@ function kfxGeom(s){const img=s.__img;if(!img||!img.isConnected){s.style.display
    const op=(cs.objectPosition||"50% 50%").split(/\s+/);const f=(v,free)=>/%$/.test(v)?free*parseFloat(v)/100:/px$/.test(v)?parseFloat(v):/left|top/.test(v)?0:/right|bottom/.test(v)?free:free/2;
    L+=f(op[0]||"50%",bw-w);T+=f(op[1]||"50%",bh-h)}
   const to=(cs.transformOrigin||"").split(/\s+/).map(parseFloat);const tor=to.length>=2&&!isNaN(to[0])?`${to[0]-(L-L0)}px ${to[1]-(T-T0)}px`:"50% 50%";
-  const st=s.style;st.left=L+"px";st.top=T+"px";st.width=w+"px";st.height=h+"px";st.transform=cs.transform;st.transformOrigin=tor;st.translate=cs.translate||"none";st.rotate=cs.rotate||"none";st.scale=cs.scale||"none";st.opacity=cs.opacity}
+  const st=s.style;st.left=L+"px";st.top=T+"px";st.width=w+"px";st.height=h+"px";st.transform=cs.transform;st.transformOrigin=tor;st.translate=cs.translate||"none";st.rotate=cs.rotate||"none";st.scale=cs.scale||"none";st.opacity=cs.opacity;/* cloth-hd: the cloth layer REPLACES the picture (it hides under clip-path, which also hides the picture's own filter: cut-out edge url(#kfa), floor shadow, halo / glow of her stage figure); the layer wears the same filter so lv0 and lv1-3 look the same */{const k=s.querySelector("img.kclo");if(k){const fl=cs.filter==="none"?"":cs.filter;if(k.style.filter!==fl)k.style.filter=fl}}}
 function kfxSyncAll(){KFX_L.forEach(s=>{if(!s.isConnected){KFX_L.delete(s);return}kfxGeom(s)})}
 function kfxKick(){kfxT=performance.now()+900;if(kfxRaf||!KFX_L.size)return;const f=()=>{kfxSyncAll();if(performance.now()<kfxT)kfxRaf=requestAnimationFrame(f);else kfxRaf=0};kfxRaf=requestAnimationFrame(f)}
 ["transitionrun","transitionend","animationstart","animationend"].forEach(e=>document.addEventListener(e,kfxKick,true));addEventListener("resize",kfxKick);
@@ -438,7 +432,7 @@ function kitFigFx(){try{const st=$("stage");if(!st)return;st.querySelectorAll(".
 /* the fit tables load asynchronously: redraw once both are in */
 (function(){let n=0;const chk=()=>{if(window.KIT_VEIL&&KIT_VEIL.fit&&window.KIT_SCAR&&KIT_SCAR.fit){try{if(typeof S!=="undefined"&&S&&!S.dead&&typeof render==="function"&&!Q.length)render()}catch(e){}return}if(++n<40)setTimeout(chk,250)};setTimeout(chk,300)})();
 (function(){const st=document.createElement("style");st.id="k2b-fx";st.textContent=`
-.kfx>img,.kfxf>img,.pcp.kit .kin .kfx>img,span.md.kmini.kmini .kfx>img{position:absolute!important;inset:auto!important;display:block!important;left:var(--fleft)!important;top:var(--ftop)!important;width:var(--fwidth)!important;height:var(--fheight)!important;transform:var(--ftf,none)!important;transform-origin:var(--fto,50% 50%)!important;max-width:none!important;max-height:none!important;min-width:0!important;object-fit:fill!important;border-radius:0!important;pointer-events:none;mask-image:none!important;-webkit-mask-image:none!important}
+.kfx>img,.kfxf>img,.pcp .kfxf>img,.md .kfxf>img,.pcp.kit .kin .kfx>img,span.md.kmini.kmini .kfx>img{position:absolute!important;inset:auto!important;display:block!important;left:var(--fleft)!important;top:var(--ftop)!important;width:var(--fwidth)!important;height:var(--fheight)!important;transform:var(--ftf,none)!important;transform-origin:var(--fto,50% 50%)!important;max-width:none!important;max-height:none!important;min-width:0!important;object-fit:fill!important;border-radius:0!important;pointer-events:none;mask-image:none!important;-webkit-mask-image:none!important}
 .kfx>img.kscar,.kfxf>img.kscar{opacity:.85}
 img.figimg.kfxon,#mefig.kfxon{animation:none!important}
 `;document.head.appendChild(st)})();
