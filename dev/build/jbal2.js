@@ -375,6 +375,8 @@ Object.assign(BAL,{nroad:{
  newsMo:2,
  /* QUESTLINE Q2 (QUESTLINES_AUDIT §3 H-a/H-d, §4 Q2; engine jnroadhp.js): the side line as a process + two-way.
     fin = the reward when an NPC wins her road FINALE (the chapter that closes the road) after the player's help on that road and no betrayal
+      (round 2, laws 1–2: a betrayal is help to the rival she told — that rival gets a «mách tin» record on her own road and her next chapter
+      gains `help` above, so the same fin reward can come from either option; review/questline-q2 §ROUND 2)
       (nothing on a lost or drawn finale, OD:L1601 (4)): index = how many of fin.rk ranks HER rank reaches (as bacRk); danh = her Danh,
       rel = the asker's bond to her (j72 q72Rel), owe = nợ ân the asker owes her (j72 ledger);
     sb = strike-back of a betrayal: the fact reaches the betrayed NPC only through a real carrier (her own Tai mắt oSee × BAL.ag.know.eye, her

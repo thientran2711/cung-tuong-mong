@@ -10,16 +10,16 @@ const {chromium}=require('playwright');const URL=process.argv[2]||'http://127.0.
 (async()=>{const b=await chromium.launch();const p=await b.newPage({viewport:{width:755,height:1000}});const errs=[];p.on('pageerror',e=>errs.push(e.message));
  await p.route(/\.(webp|png|jpg|mp3|ogg|mp4|webm)(\?|$)/,r=>r.abort());
  await p.goto(URL,{waitUntil:'domcontentloaded'});await p.waitForFunction(()=>typeof start==='function'&&typeof nhHp==='function',null,{timeout:120000});await p.waitForTimeout(1500);
- const r=await p.evaluate(()=>{const out=[],fail=[];const ok=(c,m)=>{out.push((c?'ok  ':'FAIL ')+m);if(!c)fail.push(m)};
+ const r=await p.evaluate(()=>{const out=[],fail=[];const ok=(c,m)=>{out.push((c?'ok  ':'FAIL ')+m);if(!c)fail.push(m)};try{
   try{document.getElementById('title').hidden=true}catch(e){}
   quiet=true;window.__forceOrigin='muoi';start();quiet=false;Q.length=0;const B0=JSON.parse(JSON.stringify(BAL.nroad));const K0=JSON.parse(JSON.stringify(BAL.ag.know));
   const reset=()=>{Object.assign(BAL.nroad,JSON.parse(JSON.stringify(B0)));Object.assign(BAL.ag.know,JSON.parse(JSON.stringify(K0)))};
-  const roll0=roll;const L=liveRivals(false).filter(v=>!v.queen);const v=L[0],w=L[1];if(!v||!w)return{out,fail:['no rivals']};
+  const roll0=roll;const L=liveRivals(false).filter(v=>!v.queen);let v=L[0],w=L[1];if(!v||!w)return{out,fail:['no rivals']};
   const logs=()=>S.logs.map(x=>String(x).replace(/<[^>]+>/g,''));
   /* play one help hồi of kind tid to the end with option oi (0 = help, 2 = betray) */
-  const help=(tid,oi)=>{v.nr=null;nrInit(v);v.nr.c=w.id;S.bac=999;S.suc=90;used=0;const q=q72();q.a.length=0;q.ch.length=0;
+  const help=(tid,oi)=>{v.nr=null;nrInit(v);v.nr.c=w.id;S.bac=999;S.suc=90;S.duc=Math.max(S.duc,60);used=0;const q=q72();q.a.length=0;q.ch.length=0;
    const x=q72Make(T72I[tid],q72A('rv',v.id));x.bk='rv';x.bi=w.id;x.p={nr:v.nr.r,nn:v.nr.n};v.nr.hs=1;q.a.push(x);let t=0;
-   roll=()=>true;while(q.a.includes(x)&&t++<12){used=0;S.suc=90;q72Do(x.u,oi)}roll=roll0;return x};
+   roll=()=>true;while(q.a.includes(x)&&t++<12){used=0;S.suc=90;Q.length=0;q72Do(x.u,oi)}roll=roll0;return x};
   /* (a) */
   let x=help('nr_thu',0);const N=v.nr;ok(N.hp.length===1&&N.hp[0][0]===x.p.nn&&N.hp[0][1]===1&&N.hp[0][2]===S.turn,'help → hp [chapter,+1,turn]: '+JSON.stringify(N.hp));
   ok(N.hpk==='rv:'+v.id,'asker key kept: '+N.hpk);ok(nhList().some(e=>e.w===N.hpk),'help → «Phụ tuyến» list entry');
@@ -55,10 +55,42 @@ const {chromium}=require('playwright');const URL=process.argv[2]||'http://127.0.
   KTSUB.story='pt';const H=ktStoryHTML();ok(/data-ktsv="pt"/.test(H)&&/kskill/.test(H)&&H.includes(v.name)&&/Phụ tuyến · «/.test(H),'Mệnh truyện «Phụ tuyến» tab = kit skill cards with the person');
   ok(!/%/.test(H.replace(/<[^>]+>/g,'')),'no % in the list');ok(/krow|kr |pcrow|krl/.test(H),'kit rows under the card');
   KTSUB.story='now';const H2=ktStoryHTML();ok(/data-ktsv="pt"/.test(H2)&&!/Phụ tuyến · «/.test(H2),'other sub-tab shows the tab, not the list');
+  /* (a2) round 2 — TWO-WAY / EQUAL VALUE: a betrayal is help to the rival told (w): record sign 2 on w's road, w's next chapter + BAL.nroad.help,
+     w's chapter line «nhờ tin ngươi mách», w's finale reward BAL.nroad.fin, w in the «Phụ tuyến» list */
+  w.nr=null;nrInit(w);const W=w.nr;W.x=0;W.hb=0;W.hp=[];const wn=W.n;x=help('nr_thu',2);
+  ok(W.hp.length===1&&W.hp[0][0]===wn&&W.hp[0][1]===2,'betray → the told rival gets a «mách tin» record [chapter,2,turn]: '+JSON.stringify(W.hp));
+  ok(W.hb===BAL.nroad.help,`the told rival's next chapter + BAL.nroad.help (${W.hb})`);ok(W.hpk==='rv:'+w.id&&nhList().some(e=>e.w==='rv:'+w.id),'the told rival is in the «Phụ tuyến» list');
+  x=help("nr_thu",2);ok(W.hb===BAL.nroad.help&&W.hp.length===2,'no double bonus: a second tip keeps one bonus, adds a record');
+  S.logs.length=0;v.nr.t=S.turn+999;W.t=S.turn;roll=()=>true;nrMonth();roll=roll0;lg=logs();
+  ok(lg.some(l=>/Phụ tuyến · /.test(l)&&l.includes(nrTitle(W.r))&&/nhờ tin ngươi mách/i.test(l)),'the told rival wins → «nhờ tin ngươi mách …» line: '+lg.filter(l=>/Phụ tuyến/.test(l)).join(' | '));
+  KTSUB.story='pt';ok(/mách tin giúp ở chương/.test(ktStoryHTML()),'the list says «mách tin giúp» for the tip (not «giúp»)');
+  {const last=nhChsLast(W.r);W.n=last;W.h=0;W.hs=2;W.x=0;W.fin=0;W.hp=[[last,2,S.turn]];W.t=S.turn;W.hpr=null;v.nr.t=S.turn+999;const q=q72();q.a.length=0;q.ch.length=0;
+   S.danh=30;S.rank=0;BAL.nroad.fin.danh=[5,6,7,8];const d=[];const ap0=apply;apply=o=>{if(o&&o.danh!=null&&Object.keys(o).length===1)d.push(o.danh);return ap0(o)};roll=()=>true;nrMonth();roll=roll0;apply=ap0;
+   ok(W.x&&W.fin&&d.includes(5),`the told rival wins her finale → fin reward too (Danh ${d})`)
+   const dw0=q72Debt(q72A('rv',w.id)),hn=W.hp.length;x=help('nr_thu',2);ok(q72Debt(q72A('rv',w.id))-dw0===BAL.nroad.fin.owe&&W.hp.length===hn,`the told rival has no open road → she owes BAL.nroad.fin.owe nợ ân at once (+${q72Debt(q72A('rv',w.id))-dw0}), no record`)}reset();
+  /* (d2) carriers srv + sell (review round 1 test gap) */
+  const sv0=v.staff,ss0=S.staff,mp1=mindPick;const fake=(nm,lo)=>({name:nm,sid:90000+nm.length,loyal:lo,role:'maid',age:20,tr:'trung'});
+  x=help('nr_thu',2);sb=v.nr.sb;BAL.ag.know.eye=0;v.maid=null;v.staff=[fake('Tiểu Hà',100)];(S.staff||[]).forEach(s=>s.spyFor=null);mindPick=O=>O[0][0];roll=o=>o>0;
+  const o2=oan(v,S);S.turn++;S.logs.length=0;nhSbMonth();roll=roll0;mindPick=mp1;
+  ok(sb.k===1&&sb.by==='srv'&&(oan(v,S)>o2||o2>=100),'her servant hears + tells (knTell) → known by "srv", oán up ('+sb.k+' '+sb.by+' '+o2+'→'+oan(v,S)+')');
+  ok(logs().some(l=>/Tiểu Hà, người hầu của .+, nghe ngóng được rồi bẩm lại/.test(l)),'srv line «…, người hầu của nàng, nghe ngóng được rồi bẩm lại»');reset();
+  x=help('nr_thu',2);sb=v.nr.sb;BAL.ag.know.eye=0;v.maid=null;v.staff=[];const spy=fake('Tiểu Mai',0);spy.spyFor=key(v);S.staff=(S.staff||[]).filter(s=>s).concat([spy]);
+  mindPick=O=>O.some(o=>o[0]==='sell')?'sell':O[0][0];roll=o=>o>0;affAdd(w,S,200);S.turn++;S.logs.length=0;nhSbMonth();roll=roll0;mindPick=mp1;
+  ok(sb.k===1&&sb.by==='sell','a servant of the player bought by her sells it (knTell sell) → known by "sell"');
+  ok(logs().some(l=>/có kẻ bên ngươi đã bán tin/.test(l)),'sell line «có kẻ bên ngươi đã bán tin»');S.staff=ss0;v.staff=sv0;reset();
+  /* co-op guest: host only */
+  window.COOPW={on:1,seat:'b'};x=help('nr_thu',0);const gh=v.nr.hp?v.nr.hp.length:0;const pt0=nhList().length;W.t=S.turn;nrMonth();
+  ok(gh===0&&nhList().length===pt0,'co-op guest (nrGuest) → no record, no list change');window.COOPW=null;
+  /* save round trip: v.nr.hp, w.nr.hp, S.nrpt survive ser() → JSON → deser() */
+  x=help('nr_thu',2);{const hv=JSON.stringify(v.nr.hp),hw=JSON.stringify(w.nr.hp),pt=JSON.stringify(nhList().map(e=>[e.w,e.hp]));let e2=null;
+   try{deser(JSON.parse(JSON.stringify(ser())))}catch(e){e2=e.message}const v2=rivals.find(u=>u.id===v.id),w2=rivals.find(u=>u.id===w.id);
+   ok(!e2&&v2&&JSON.stringify(v2.nr.hp)===hv&&JSON.stringify(w2.nr.hp)===hw&&JSON.stringify(nhList().map(e=>[e.w,e.hp]))===pt&&v2.nr.sb&&v2.nr.sb.k===0,'save round trip keeps v.nr.hp, the rival tip, the betrayal fact and S.nrpt '+(e2||''));
+   if(v2&&w2){v=v2;w=w2}}
   /* (f) off + old save */
   window.__nrhpoff=1;x=help('nr_thu',0);ok(!(v.nr.hp&&v.nr.hp.length),'__nrhpoff → no record');window.__nrhpoff=0;
   for(const u of rivals)if(u.nr){delete u.nr.hp;delete u.nr.sb;delete u.nr.hpk}delete S.nrpt;let e1=null;try{monthTick();Q.length=0}catch(e){e1=e.message}
   ok(!e1,'old save (nr without hp, no S.nrpt) plays a month '+(e1||''));KTSUB.story='pt';const H3=ktStoryHTML();ok(!/data-ktsv="pt"/.test(H3),'no list → no «Phụ tuyến» tab');
+  }catch(e){fail.push('THROW '+e.message+' '+String(e.stack).split('\n')[1]);out.push('FAIL THROW '+e.message)}
   return{out,fail}});
- console.log(r.out.join('\n'));console.log('page errors:',errs.length,errs.slice(0,5).join(' | '));
+ console.log(r.out.join('\n'));console.log(r.fail.filter(f=>/THROW/.test(f)).join('\n'));console.log('page errors:',errs.length,errs.slice(0,5).join(' | '));
  const F=r.fail.length+errs.length;console.log(F?`NROADHP-UNIT FAIL (${F})`:`NROADHP-UNIT PASS (${r.out.length} checks)`);await b.close();process.exit(F?1:0)})();

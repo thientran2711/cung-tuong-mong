@@ -33,11 +33,21 @@ function nhSnap(N,p,nm){try{const w=N&&N.hpk;if(!w)return null;const L=nhPt();le
  nrHelped=function(X,how){const r=h0.apply(this,arguments);try{if(nhOff()||!how)return r;const v=X&&X.A&&X.A.o;const N=v&&v.nr;if(!N)return r;
   const n=(X.p&&X.p.nn)||N.n;nhHp(N).push([n,how>0?1:-1,S.turn]);N.hpk=q72Key(X.A);N.hpa=[X.A.k,X.A.id];
   let out=r;if(how<0){const B=X.B;N.sb={t:S.turn,n,m:0,k:0,b:B?[B.k,B.id]:null,bn:B?B.n:""};const he=nrHe(v);
-   out=` Chương «${nrChT(v)}» của ${he} thêm khó; ${he} chưa hay ai đã để lộ chuyện.`}
+   out=` Chương «${nrChT(v)}» của ${he} thêm khó; ${he} chưa hay ai đã để lộ chuyện.`+nhTip(B,v)}
   nhSnap(N,v,X.A.n);return out}catch(e){console.error(e);return r}}})();
+/* (a2) TWO-WAY / EQUAL VALUE (laws 1–2, review round 1): a betrayal IS help to the rival she told (X.B). When B has a road of her own, the
+   tip is a record on B's road too — sign 2 «mách tin» (counts as help: B's chapter result line, B's finale reward BAL.nroad.fin, the
+   «Phụ tuyến» list) — and B's next chapter gains BAL.nroad.help, the same bonus a help gives (nothing when B already carries one).
+   B without a road (or her road closed): B owes the player BAL.nroad.fin.owe nợ ân at once (the j72 ledger, as a won finale gives), on top
+   of the j72 bond B gets (BAL.nroad.relB). */
+function nhTip(B,v){try{const o=B&&B.o,NB=o&&o.nr;if(!B||o===v)return"";
+ if(!NB||NB.x||!NB.n){const ow=nhB().fin.owe||0;if(!ow||!o)return"";q72DebtAdd(B,ow);return ` ${B.n} nợ ngươi ${ow>1?ow+" ân":"một ân"} vì tin này.`}
+ nhHp(NB).push([NB.n,2,S.turn]);NB.hpk=q72Key(B);NB.hpa=[B.k,B.id];if(!NB.hb)NB.hb=nrB().help;nhSnap(NB,o,B.n);
+ return ` ${B.n} có tin ngươi mách, chương «${nrChT(o)}» của ${nrHe(o)} thêm phần chắc.`}catch(e){console.error(e);return""}}
 /* ---------- (b) + (c) chapter end ---------- */
 const NHQ=[];/* lines of this month, logged after the palace news (nrMonth) */
 function nhRes(s,k,he,t,c0){const c=c0||(t?`chương «${t}»`:"chương này");
+ if(s===2)return k>0?`nhờ tin ngươi mách, ${he} qua được ${c}.`:k<0?`có tin ngươi mách, nhưng ${he} vẫn vấp ở ${c}.`:`có tin ngươi mách, ${he} giữ được thế ở ${c}, không thắng không thua.`;
  if(s>0)return k>0?`nhờ ngươi giúp một tay, ${he} qua được ${c}.`:k<0?`ngươi đã ra tay giúp, nhưng ${he} vẫn vấp ở ${c}.`:`có ngươi giúp, ${he} giữ được thế ở ${c}, không thắng không thua.`;
  return k<0?`vì ngươi bán đứng, ${he} thua ở ${c}.`:k>0?`dù ngươi bán đứng, ${he} vẫn vượt qua ${c}.`:`vì ngươi bán đứng, ${he} chỉ gỡ được nửa phần ở ${c}.`}
 function nhFin(N,nm){const F=nhB().fin,i=nhTier(),d=nhAt(F.danh,i),rl=nhAt(F.rel,i),ow=F.owe||0;
@@ -80,7 +90,7 @@ function nhChs(r){const L=[];for(let n=BAL.road.first-1;n<=BAL.road.last;n++)if(
 function nhCard(e){const he=e.he||"nàng",T=nrTitle(e.r)||"tuyến riêng",chs=nhChs(e.r);
  const st=e.x?"đã khép":e.np?`đang ở chương ${chs.find(n=>n>e.c)||e.c}`:"chưa mở chương nào";
  const img=typeof kitOriginArt==="function"&&!(typeof NRM==="object"&&NRM[e.r])&&e.o?kitOriginArt(e.o):"";
- const did=e.hp.map(([n,s])=>`${s>0?"giúp":"bán đứng"} ở chương ${n}`).join(" · ");const s0=e.hp[e.hp.length-1][1];
+ const did=e.hp.map(([n,s])=>`${s===2?"mách tin giúp":s>0?"giúp":"bán đứng"} ở chương ${n}`).join(" · ");const s0=e.hp[e.hp.length-1][1];
  const R=[["Chương đã qua",e.c?`Chương ${e.c}${e.e?` — ${e.e}`:""}`:"chưa qua chương nào"],["Ngươi đã",did,s0>0?"g":"r"],
   e.hr!=null?["Kết quả",nhRes(s0,e.hr,he,"","chương ấy"),(s0>0)===(e.hr>0)?(s0>0?"g":"r"):""]:["Kết quả","chương ấy chưa tới hồi phân định"],
   e.f?["Trọn tuyến",`${he} đi trọn tuyến và nhớ công ngươi`,"g"]:null,e.sb?["Ghi hận",`${he} đã biết ngươi bán đứng`,"r"]:null];
@@ -92,4 +102,4 @@ try{KIT_GLOSS["Phụ tuyến"]="Tuyến riêng của những người ngươi đ
  kitSubTabs=function(key,list,info){if(key==="story"&&Array.isArray(list)&&list.some(x=>x.k==="past")&&!list.some(x=>x.k==="pt")&&has())list=list.concat([{k:"pt",label:"Phụ tuyến",n:String(nhList().length)}]);return k0.call(this,key,list,info)};
  const h0=ktStoryHTML;ktStoryHTML=function(){try{if(has()){const B=[{k:"now",label:"Chương này",n:""},{k:"rank",label:"Sắc phong",n:""},{k:"past",label:"Đã qua",n:String(((S.st&&S.st.ch&&S.st.ch.past)||[]).length+(S.r97||[]).length)}];
    if(ktSubGet("story",B.concat([{k:"pt"},{k:"rg"},{k:"rgl"}]))==="pt"){const sub=kitSubTabs("story",B,kitInfo("Phụ tuyến"));return sub.html+nhPaneHTML()}}}catch(e){console.error(e)}return h0.apply(this,arguments)}})();
-Object.assign(window,{nhHp,nhList,nhPaneHTML,nhSbMonth,nhCarrier,nhAfter,nhFlush,nhSnap});
+Object.assign(window,{nhTip,nhHp,nhList,nhPaneHTML,nhSbMonth,nhCarrier,nhAfter,nhFlush,nhSnap});

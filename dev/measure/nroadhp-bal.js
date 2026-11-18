@@ -1,7 +1,8 @@
 /* nroadhp-bal (QUESTLINE Q2, jnroadhp.js): the npc-roads-bal.js month loop (bond player: gifts, loyal household, men fond of her) in 3 styles:
      off    — Q2 switched off (window.__nrhpoff = 1), the bond player helps (option 0) — the baseline;
      help   — Q2 on, the bond player helps (option 0) every help hồi;
-     betray — Q2 on, the bond player betrays (option 2, «Đem chuyện mách») every help hồi that has someone to tell.
+     betray — Q2 on, the bond player betrays (option 2, «Đem chuyện mách») every help hồi that has someone to tell (round 2: the told rival
+              gets a «mách tin» record on her own road, sign 2, counted apart).
    Reads per life (audit Measures line): help hồi asked per NPC road per life (≈ unchanged), the NPC Hoàng hậu seat share (Q2 does not
    inflate the harem), her death %, her Danh; Q2: hp records, finale rewards, betrayals found out (by carrier) and the oán they added.
    usage: node dev/measure/nroadhp-bal.js <url> <lives per style> <years> [styles=off,help,betray] [json out] */
@@ -33,14 +34,14 @@ const [,,URL,NL,NY,STY,OUT]=process.argv;const LIVES=+NL||10,YEARS=+NY||15,STYLE
      const A={rv:0,sv:0,men:0};for(const g of asked.values())A[g]++;
      const kidsAll=allKids();const avgL=(L,f)=>L.length?L.reduce((a,x)=>a+f(x),0)/L.length:0;
      const Q2={hp:0,hpP:0,hpN:0,fin:0,sb:0,sbK:0,by:{},roads:0};const ppl=[];rivals.forEach(v=>v.nr&&ppl.push(v.nr));try{nrMaidL().concat(nrServL('eunuch')).forEach(s=>s.nr&&ppl.push(s.nr));nrMenL().forEach(e=>e.p.nr&&ppl.push(e.p.nr))}catch(e){}
-     for(const N of ppl){Q2.roads++;const H=N.hp||[];Q2.hp+=H.length;Q2.hpP+=H.filter(z=>z[1]>0).length;Q2.hpN+=H.filter(z=>z[1]<0).length;if(N.fin)Q2.fin++;if(N.sb){Q2.sb++;if(N.sb.k){Q2.sbK++;Q2.by[N.sb.by]=(Q2.by[N.sb.by]||0)+1}}}
+     for(const N of ppl){Q2.roads++;const H=N.hp||[];Q2.hp+=H.length;Q2.hpP+=H.filter(z=>z[1]===1).length;Q2.hpT=(Q2.hpT||0)+H.filter(z=>z[1]===2).length;if(N.fin&&!H.some(z=>z[1]===1))Q2.finT=(Q2.finT||0)+1;Q2.hpN+=H.filter(z=>z[1]<0).length;if(N.fin)Q2.fin++;if(N.sb){Q2.sb++;if(N.sb.k){Q2.sbK++;Q2.by[N.sb.by]=(Q2.by[N.sb.by]||0)+1}}}
      const oanMe=avgL(rivals.filter(v=>v.alive&&!v.out),v=>v.oan||0);
      out.push({Q2,oanMe,style,dead:!!S.dead,years:S.year,danh:S.danh,sung:S.sung,pow:S.dad||0,npcDead:rivals.filter(v=>!v.alive).length,npcOut:rivals.filter(v=>v.alive&&v.out).length,
       npcN:rivals.length,npcDanh:avgL(rivals.filter(v=>v.alive&&!v.out),v=>v.danh||0),npcSung:avgL(rivals.filter(v=>v.alive&&!v.out),v=>v.sung||0),npcRank:avgL(rivals.filter(v=>v.alive&&!v.out),v=>v.rank||0),hh:rivals.some(v=>v.alive&&!v.out&&v.queen)?1:0,kidDead:kidsAll.filter(([k])=>!k.alive).length,kidN:kidsAll.length,played,asked:A,shown,helped,errs})}
     return out},[style,Math.min(CH,LIVES-done),YEARS]);all[style].push(...part);await ctx.close()}}
  const avg=(L,f)=>L.length?(L.reduce((a,x)=>a+f(x),0)/L.length):0;const f1=x=>x.toFixed(1);
  console.log(`nroadhp-bal: ${LIVES} lives × ${YEARS} years per style`);
- console.log('style | her death % | Danh | HH seat held % | NPC oán→her | help asked rv/sv/men | helped rv/sv/men | hp +/− | finale rewards | betrayals found out / betrayals (by carrier) | errors');
+ console.log('style | her death % | Danh | HH seat held % | NPC oán→her | help asked rv/sv/men | helped rv/sv/men | hp +/mách/− | finale rewards (of them via mách) | betrayals found out / betrayals (by carrier) | errors');
  for(const s of STYLES){const L=all[s].filter(x=>!x.err);const by={};L.forEach(x=>{for(const k in x.Q2.by)by[k]=(by[k]||0)+x.Q2.by[k]});
-  console.log(`${s} | ${f1(avg(L,x=>x.dead?100:0))} | ${f1(avg(L,x=>x.danh))} | ${f1(avg(L,x=>x.hh*100))} | ${f1(avg(L,x=>x.oanMe))} | ${['rv','sv','men'].map(g=>f1(avg(L,x=>x.asked[g]))).join('/')} | ${['rv','sv','men'].map(g=>f1(avg(L,x=>x.helped[g]))).join('/')} | ${f1(avg(L,x=>x.Q2.hpP))}/${f1(avg(L,x=>x.Q2.hpN))} | ${f1(avg(L,x=>x.Q2.fin))} | ${f1(avg(L,x=>x.Q2.sbK))}/${f1(avg(L,x=>x.Q2.sb))} ${JSON.stringify(by)} | ${L.reduce((a,x)=>a+x.errs,0)}`)}
+  console.log(`${s} | ${f1(avg(L,x=>x.dead?100:0))} | ${f1(avg(L,x=>x.danh))} | ${f1(avg(L,x=>x.hh*100))} | ${f1(avg(L,x=>x.oanMe))} | ${['rv','sv','men'].map(g=>f1(avg(L,x=>x.asked[g]))).join('/')} | ${['rv','sv','men'].map(g=>f1(avg(L,x=>x.helped[g]))).join('/')} | ${f1(avg(L,x=>x.Q2.hpP))}/${f1(avg(L,x=>x.Q2.hpT||0))}/${f1(avg(L,x=>x.Q2.hpN))} | ${f1(avg(L,x=>x.Q2.fin))} (${f1(avg(L,x=>x.Q2.finT||0))}) | ${f1(avg(L,x=>x.Q2.sbK))}/${f1(avg(L,x=>x.Q2.sb))} ${JSON.stringify(by)} | ${L.reduce((a,x)=>a+x.errs,0)}`)}
  if(OUT)fs.writeFileSync(OUT,JSON.stringify(all));console.log('page errors:',errs.length,errs.slice(0,5).join(' | '));await b.close()})();
