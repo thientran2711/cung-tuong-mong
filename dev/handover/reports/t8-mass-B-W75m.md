@@ -1,0 +1,10 @@
+# t8-mass-B W75m (c31 a36/a51 done; c32 a18 a26 a36 a51 NOT done) - HANDOVER
+Rolled over at start+25% context (~40k tokens per person-age: 6 full prompts are pasted).
+## Done (6 gens each, raw sheet looked at, bg removed, cdn_sync + --check same, READY sent to Foreman C)
+- c31 a36, c31 a51 -> CDN img/_review/t8-reprompt/c31_a{36,51}_sheet.jpg (+ c31_aXX_t{7,8}_v{0,1,2}.png). Checks OK: C2 yellow dominant t8, larger yellow t7, same colours; a51 face reads ~45-50 (soft lines) - acceptable.
+## NOT done: c32 a18, a26, a36, a51 (24 gens). Predecessor W75j report (t8-mass-B-W75j.md) facts 1-5 still apply.
+## Facts
+1. Generate prompts: build.py (handover branch claude/cung-tuong-mong-handover-hj0h8w) `python3 build.py c32 v0|v1|v2 --age aXX` (t8) and `... --t7 --age aXX` (t7). Age phrases: a18 "about 22, youthful adult." a26 "about 30, mature and poised." a36 "about 42, dignified and still beautiful, only subtle fine lines at the eyes." a51 "about 55, graceful beautiful older lady, only soft faint lines, a few silver strands, still lovely." Print the 6 prompts only ONCE per person (do not grep/diff lots of text: wasted context).
+2. Refs: c32 a18 = eIPXlAldqL (already uploaded). Upload c32 a26/a36/a51 from https://ctm-img.victoria-tntt.workers.dev/img/hd/fig-consort-c32-t1-aXX.webp with creations_upload_image (folder ba4aecfe-...). Style ref eIyOFEidqL.
+3. Gen args: gpt-2-6, 1024x2304, resolution 2k, count 1, refs [image t1, style eIyOFEidqL], folder ba4aecfe-efce-47e2-b53f-30d292091886. Fire 3 at a time, creations_wait, then images_remove_background on each (same folder), wait.
+4. Tools: tools/w75c/{rawsheet.py,fin2.py} (from review/t8-mass-W75c); fin2.py has hard-coded S=scratch path (sed it); needs $S/cdnroot/dev/site/{cdn_sync.py,manifest_guard.py,manifest-floor.json} from origin/main and $S/cdnroot/img/_review/t8-reprompt/. rawsheet: `python3 rawsheet.py TAG label=url ...` run in scratch dir, then Read rs_TAG.jpg. fin2: `fin2.py c32 aXX t8v0=cutoutURL ... t7v2=url`. Then send_message READY to session_011xDdVS7JY8KJW8hzKtoquL.
