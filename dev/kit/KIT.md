@@ -2325,9 +2325,6 @@ still run; kitEsFit hands 32.7 columns to kitDpFit). Test: `node dev/test/dialog
 (kinds host, th, invite, ally2, many, men, pic). Shots before / after: dev/shots/dialog-person/ (755x1000, 1180x820, 1366x1024, 412x1058).
 Options in the right column follow 32.9 (all short → 2-column grid, else rows); the "one per row" above is the long case.
 
-### 32.8c MAP TAP = GO AT ONCE — `kitArriveToast` (j77, owner 18/11 ~06:00Z + ~06:05Z, map-tap-go)
-Tapping a place on Dư đồ or in Danh sách goes there at once: no confirm card and NO undo (owner: "đã tới nơi đó rồi thì ráng mà chịu"). `kitArriveToast(title,rows)` = the kit result toast (#rtoast, seal "ĐẾN") + kit rows (Đường đi · Còn / Hết khắc: sang buổi sau, ta ở lại đó), ~3.5 s, no button. A place she cannot reach says why in the kit CẤM toast. The ONE place card (32.8) only opens when the place has real choices (xin bái kiến / yết kiến, lẻn vào) and never carries a person column (kitPlaceDress stage=[] + jksize kitFrameLive3 who=null). Test: dev/test/map-tap-go.js.
-
 ### 32.8 PLACE CARD — the place-event frame for every place card (owner 11/15 08:55Z + 08:58Z) — `kitPlaceDress` / `kitPlaceSil` (jplace)
 **16/11 (owner "Má nó, kit chung đâu", review/kit-sweep) — SUPERSEDES the layout below:** the place card is template T2 (§8.2): ONE place picture LEFT (headArt moved by `kitOnePic`), RIGHT kit rows (`kitRows`: Chủ vị · Đường đi · Còn · Bóng người · Giờ) + the card's own lines as kit fact rows, options below as kit option rows scrolling inside the frame. No top band + second picture, no `.kplhost` portrait cell, no `.kplinfo` box, no silhouettes drawn on the picture (the count is a row). Text below kept for history.
 Every place card — tap on a place on Dư đồ or in Danh sách nơi (`j77Card`: closed place, Xin bái kiến / Xin yết kiến / Lẻn vào / Nhờ thái
