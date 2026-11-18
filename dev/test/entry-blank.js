@@ -40,7 +40,8 @@ const SAMPLE=()=>{const vis=e=>{const r=e.getBoundingClientRect();if(r.width<24|
  const acts=document.querySelectorAll('#panel .act-card, #panel .kact, #panel [data-act]').length;
  const st=document.getElementById('stage');const toks=st?st.querySelectorAll('#tokens .tok').length:-1;const stBg=st?getComputedStyle(st).backgroundImage:'';
  const hidStage=st?st.classList.contains('j59wait'):false;
- return{cover:false,blank:bl.length,wait:inc.length-bl.length,holes:holes.length,tab,acts,toks,stBg:stBg&&stBg!=='none'?1:0,hidStage,which:bl.slice(0,6).map(im=>(im.getAttribute('src')||'').split('/').pop().slice(0,32)),
+ const hsWhy=hidStage?[...st.querySelectorAll('#mefig, #tokens .tok .figimg')].map(im=>{const s=im.getAttribute('src')||'';const fb=(window.__KITFB||{})[s];return s.split('/').pop().slice(0,26)+(im.complete?(im.naturalWidth?':ok':':fail'):':load')+(fb?(fb.v?':m':':mw'):':nom')}).concat([typeof J59U!=='undefined'?JSON.stringify(J59U):'noJ59U']):null;
+ return{cover:false,blank:bl.length,wait:inc.length-bl.length,holes:holes.length,tab,acts,toks,stBg:stBg&&stBg!=='none'?1:0,hidStage,hsWhy,which:bl.slice(0,6).map(im=>(im.getAttribute('src')||'').split('/').pop().slice(0,32)),
   waitWhich:wl,hasWaitLine:document.body.innerText.includes('Đang thỉnh tranh')}};
 (async()=>{const srv=await serve();const b=await chromium.launch();const R={};
  for(const dev of DEVS.split(','))for(const pth of PATHS.split(',')){BUMP=0;line.on=false;ROOT=OLD||NEW;
@@ -94,6 +95,7 @@ const SAMPLE=()=>{const vis=e=>{const r=e.getBoundingClientRect();if(r.width<24|
   const ok=S.filter(s=>!s.cover);const bad=ok.filter(s=>s.blank||s.wait||s.holes||s.toks===0||s.hidStage);
   R[tag]={samples:ok.length,covered:S.length-ok.length,bad:bad.length,blank:ok.filter(s=>s.blank).length,emptyBox:ok.filter(s=>s.wait).length,holes:ok.filter(s=>s.holes).length,stageHidden:ok.filter(s=>s.hidStage).length,noTok:ok.filter(s=>s.toks===0).length,
    first:ok[0],worst:bad[0]||null,gates:await g.evaluate(()=>(window.KLOAD&&KLOAD.lifes||[]).map(x=>({why:x.why,n:x.n,ms:x.ms,late:x.late,cached:!!x.cached}))).catch(()=>null),
-   longTasks:await g.evaluate(()=>window.__lt&&__lt.filter(x=>x[1]>150)).catch(()=>null),ksw:await g.evaluate(()=>window.KSW&&{resumed:KSW.resumed,applied:KSW.applied,build:KSW.build}).catch(()=>null),errs:errs.slice(0,5)};
+   silbb:await g.evaluate(async()=>{if(!window.KIT_SILBB)return'no KIT_SILBB';const out={};for(const k of ['f','m']){const u=IMG_BASE+'img/kit/unknown-fig-'+k+'.webp?silcheck=1';const v=await new Promise(ok=>{const x=kitFigBody(u,()=>ok(kitFigBody(u)));if(x)ok(x)});
+   out[k]=['l','r','ar','cl','cr','b'].every(f=>Math.abs((v[f]||0)-(KIT_SILBB[k][f]||0))<.01)?'ok':JSON.stringify(v).slice(0,120)}return out}).catch(e=>String(e)),longTasks:await g.evaluate(()=>window.__lt&&__lt.filter(x=>x[1]>150)).catch(()=>null),ksw:await g.evaluate(()=>window.KSW&&{resumed:KSW.resumed,applied:KSW.applied,build:KSW.build}).catch(()=>null),errs:errs.slice(0,5)};
   console.log(tag,JSON.stringify(R[tag]));await p.screenshot({path:`${OUT}/${tag}-end.png`});await ctx.close()}
  fs.writeFileSync(OUT+'/entry-blank.json',JSON.stringify(R,null,1));await b.close();srv.close()})().catch(e=>{console.error(e);process.exit(1)});
