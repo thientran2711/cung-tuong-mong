@@ -97,7 +97,11 @@ function ptLedger(){if(!S||typeof j95on!=="function"||!j95on())return false;cons
  if(typeof j95sync==="function"){const js0=j95sync;j95sync=function(){const r=js0.apply(this,arguments);try{if(ptOn()&&ptZ().length)ptLedger()}catch(e){ptErr("j95sync",e)}return r}}
  if(typeof render==="function"){const r0=render;render=function(){const r=r0.apply(this,arguments);try{if(S&&Array.isArray(S.away))ptIcon()}catch(e){}return r}}
 }catch(e){ptErr("wire",e)}})();
-window.PTIME={on:ptOn,now:ptNow,row:ptRow,away:ptAwayOf,busy:ptBusy,lockWhy:ptLockWhy,send:ptSend,tick:ptTick,wait:ptWait,waitOk:ptWaitOk,next:ptNext,news:ptNews,mine:ptMine,when:ptWhen,reg:ptReg,x:ptX,stat:PT.stat};
+window.PTIME={on:ptOn,now:ptNow,row:ptRow,away:ptAwayOf,busy:ptBusy,lockWhy:ptLockWhy,send:ptSend,tick:ptTick,wait:ptWait,waitOk:ptWaitOk,next:ptNext,news:ptNews,mine:ptMine,when:ptWhen,reg:ptReg,x:ptX,stat:PT.stat,
+ /* receiver side (OD 18/11 ~21:15Z): orders to her waiting as notices — for the ONE «tin» panel (MAIN errand-scene r2 lists them; no second panel):
+    orders() = [{id, pid, byNm, title, due}], ordWhen(o) = "trả lời trước …", answer(id) = open its answer card (4 answers; Việc chủ sai 3) */
+ orders:()=>(S&&Array.isArray(S.ordQ)?S.ordQ.map(o=>({id:o.id,pid:o.pid,byNm:o.byNm,title:o.title,due:o.due})):[]),ordWhen:o=>`trả lời trước ${ptWhen(o.due)}`,
+ answer:id=>{const o=S&&Array.isArray(S.ordQ)&&S.ordQ.find(x=>x.id===id);if(o)ptOrdOpen(o);return !!o}};
 /* =============================== ADAPTERS — the whole group (dev/handover/reports/parallel-time.md, before/after table) ===============================
    Each button keeps its own odds, gains and losses (the same functions run at the due khắc, with the odds frozen when she gave the order);
    only WHEN changes: the order khắc now, the result at the due khắc. */
