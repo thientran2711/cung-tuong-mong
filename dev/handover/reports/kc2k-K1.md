@@ -8,5 +8,9 @@ CDN: https://ctm-img.victoria-tntt.workers.dev/img/_review/kc2k/ (cNN_a18_kc_2k.
 | c02 | embroidered handkerchief (kept) | plain cloth bundle (was a book) | forehead mark removed |
 | c03 | round silk fan (kept) | basket, wild flowers (kept, roses→wild) | |
 | c04 | round silk fan (kept) | bunch of herbs (was a flower basket; neighbours differ from c03) | forehead mark removed |
-Gens: c01 2 (+2 cut-outs), c02–c04 6 transparent gens (+6 earlier one-ref gens dropped, wasted). ~135 credits each.
+| c05 | round silk fan (kept) | basket, wild flowers (kept) | forehead mark removed |
+| c06 | teacup→painted folding fan | jade charm→wooden spindle with spun thread | forehead marks removed |
+| c07 | teacup+saucer→thread-bound book | jade pendant→plum-blossom branch | |
+| c08 | teacup→peony sprig | jade charm→bamboo-leaf fan | |
+Gens: c05–c08 8 transparent gens (looked at all 8, c06 ngheo zoomed: spindle, not jade). c01 2 (+2 cut-outs), c02–c04 6 transparent gens (+6 earlier one-ref gens dropped, wasted). ~135 credits each.
 All looked at (grey backdrop): same figures, correct items, bare foreheads, alpha 0..254 verified.
