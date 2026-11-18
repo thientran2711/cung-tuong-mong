@@ -388,3 +388,4 @@ RUNNING:
 - builder s37a SzjA6P5mZskv3JKn3BV idle → archive.
 OWNER PENDING: muội/cào R4 look; tea look OK?; opt-card A/B/C; place-stage shots; book r5 shots; Thử tay CTM-CAL code; connectors decision (tài khoản dành riêng cho game → tắt kết nối thừa).
 S43 LESSONS: check OD rulings, not only live code, before giving her numbers (seats 12/16/20 mix-up); compare book pages against the kit layout; LOOK marks at 3× against eye/lip boxes; workers roll over fast (~25 %) — keep briefs short.
+- (18/11 03:35Z) C-AG #9: tinbao r7r 58a8c39c is built ON ag-all-2 (uses its adapters) → cannot land alone; after ag-all-2-land live (PASS ETA ~05:00–05:30Z) tinbao worker session_01UV1Szjhrq5VUWD5Haiagxz rebases r7 → its reviewer → ROOT main lands (~+1 h). place-stage depends on it for the chip.
