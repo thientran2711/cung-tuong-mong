@@ -1032,3 +1032,4 @@ OWNER PENDING: Nữ đế staff number (suggested 5+2); mud look verdict; smudge
 Wake: trig_01Ddm1omgT2f2vg68Rp2Ba1e 02:32Z fires into s41 → s41 relays to s42; s42 sets its own hourly wake at :32 after that.
 LESSONS s41: verify any worker art/asset count on the CDN before telling her (52 maids, not 15); don't invent complaints; check context with get_session each wake (s41 overshot to 46 %).
 - (18/11 02:30Z) OWNER UI BUG place banner (OD 02:30Z, refs/owner-1811-0150-place-banner-overlap.jpg) — NOT yet assigned: s42 first job = GATE ZERO (kit stage banner / people-count chip / KIT.md §stage) → one worker (sonnet UI, kit keeper delegate) → options shots → owner.
+- (18/11 01:46Z) s41 FINAL: successor MAIN s42 = session_01UV1SzmHzgz1QzZkHhHoBhY (depth 5). s41 stops (relays only if the owner keeps typing here). s41 wake trig_01Ddm1omgT2f2vg68Rp2Ba1e at 02:32Z → relay to s42.
