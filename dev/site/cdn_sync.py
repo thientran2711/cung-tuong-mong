@@ -17,6 +17,7 @@
   --wipe-review TOPIC                          DELETE every object under img/_review/TOPIC/ (review shots live there while a verdict is
                                                pending, never in git; wipe them with the verdict) and rebuild the index; --dry-run lists only
   --prune                                      also DELETE objects under the synced folders that are not in the source (careful)
+  --manifest                                   a bulk run may overwrite a differing top-level img/*.json (default: held; name the .json file)
   --allow-shrink                               push a figure manifest even if it has FEWER entries than the live one / the floor (manifest_guard.py)
   --force                                      push a *.json manifest even if someone else changed it on the CDN since your last pull
 
@@ -257,6 +258,7 @@ def main():
     ap.add_argument("--wipe-review", metavar="TOPIC")
     ap.add_argument("--force", action="store_true")
     ap.add_argument("--allow-shrink", action="store_true")
+    ap.add_argument("--manifest", action="store_true", help="allow a bulk run (no path / a folder / a glob) to overwrite a top-level img/*.json manifest that differs from the live one (default: refused, name the .json file instead)")
     ap.add_argument("--pull", action="store_true")
     ap.add_argument("--index", action="store_true")
     ap.add_argument("-j", type=int, default=6, help="parallel uploads (default 6; the API pace CTM_CDN_RATE=3.2/s is the real limit)")
@@ -312,6 +314,10 @@ def main():
         if r and k.endswith(".json") and not a.force and st.get(k) and st[k] != r[0]:
             held.append(k)
             continue
+        if r and k.startswith("img/") and k.count("/") == 1 and k.endswith(".json") and k != INDEX and not a.manifest and not any(x.endswith(".json") for x in a.paths):
+            # 17/11 02:41Z: a bulk `cdn_sync` from a checkout holding stale tracked manifests overwrote ACTS/EVENTS/FIGURES*/INFO on the CDN. A manifest is only pushed when its file is NAMED.
+            held.append(k + " (bulk run: name the manifest file, or pass --manifest)")
+            continue
         if k.startswith("img/") and k.count("/") == 1 and os.path.basename(k) in GUARD.GUARDED + tuple(GUARD.DICT_GUARDED) and not a.allow_shrink:
             # NEVER-SHRINK GUARD (17/11: the live FIGURES.json lost its consort t5–t8 entries): a figure manifest may not drop entries / counts
             try:
@@ -330,7 +336,7 @@ def main():
     print(f"source {'git ' + a.git if a.git else 'disk'}: {len(src)} files, {sum(sizes.values()) / 1e6:.1f} MB · CDN has {len(remote)} objects"
           f" · same {same} · to upload {len(todo)} ({tot / 1e6:.1f} MB){' · to delete ' + str(len(gone)) if gone else ''}")
     for k in held:
-        print(f"  HELD {k}: changed on the CDN since your last pull/push — run --pull {k}, merge, push again (or --force)")
+        print(f"  HELD {k}" if "(bulk run" in k else f"  HELD {k}: changed on the CDN since your last pull/push — run --pull {k}, merge, push again (or --force)")
     for m in shrunk:
         print("  SHRINK " + m)
     if shrunk:

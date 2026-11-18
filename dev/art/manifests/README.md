@@ -1,4 +1,5 @@
 # dev/art/manifests — git source of the CDN act table (act-pic-match, 18/11)
+Also here: EVENTS.json (rebuild_events.py) and FIGURES-kids.json (rebuild_kids.py) candidates.
 `ACTS.json` here = the img/ACTS.json that must be live (332 acts, 10 prefixes, 836 log rules, every picture key checked against img/_index.json).
 Why: on 17/11 02:41Z a stale-checkout `cdn_sync` push overwrote the live ACTS.json (and EVENTS.json, FIGURES*.json) with the 15/11 base; ~75 act cards fell back to the
 kit placeholder and ~130 shared pictures. Nobody noticed for a day because the manifest lived only on the CDN.
