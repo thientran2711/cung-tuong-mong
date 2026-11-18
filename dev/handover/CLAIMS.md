@@ -162,3 +162,5 @@ receiver-choice audit (ORDER MAIN ~21:16Z, OD 21:15Z/21:30Z; shares C-AG role-pa
 | MAIN ROOT-58 (opus; child of ROOT-57) | handover HANDOVER_SESSION9 | ROOT-57 | session_01Rc5AsHvFYTJwaE5mFs48oR | RUNNING | 18/11 22:34Z |
 | Triều phục round 8 c06 (sonnet W104e) | handover: dev/art/t8-prompt-B --trieu + img/_review/trieu-phuc | Foreman C ROOT-32 | session_01PEhRbtLhDjgbMr1jVWQe53 | RUNNING | 18/11 22:40Z |
 | Art rule book cleanup → FIGURE_GATE only (sonnet R1) | handover: dev/art + dev/rules art lines | Foreman C ROOT-32 | session_01PEhRby57EjhpPwSsH64rjg | RUNNING | 18/11 22:40Z |
+art rule book cleanup part 2 (figures/costumes + FIGURE_GATE A0–H) | claude/cung-tuong-mong-handover-hj0h8w | session_01PEhRbvZyEYZiUzmUijtacq (R1b, Foreman C ROOT-33) | RUNNING | 2026-11-18T22:41Z
+art rule book cleanup part 2 (other art topics → FIGURE_GATE I) | claude/cung-tuong-mong-handover-hj0h8w | session_01PEhRbx4FcwX6zsqPPxGawP (R1c, Foreman C ROOT-33) | RUNNING | 2026-11-18T22:41Z
