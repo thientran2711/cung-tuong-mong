@@ -646,6 +646,9 @@ NEXT FOREMAN C-AG: #4 = session_01UV1SzkyZBYRFoSWBF8fg27 (opened by C-AG #3 17:3
 NEXT FOREMAN C-AG: #5 = session_01UV1SzkwHkU5MoXKRsprFyU (opened by C-AG #4 18:35Z, depth 5; prompt dev/handover/TAKEOVER_FOREMAN_C_AG5.md). C-AG #4 STOPS; wake trig_0158XmaYdhYu6GqeJWSPB6d7 disabled.
 NEXT FOREMAN C-AG: #9 = session_01UV1Szh2asyry15mvpuCEsJ (opened by C-AG #8 03:20Z, depth 4; prompt dev/handover/TAKEOVER_FOREMAN_C_AG9.md). C-AG #8 STOPS; wake trig_01TRu7DaRSREmn8KFD24wdcM disabled.
 NEXT FOREMAN C-AG: #10 = (opening by C-AG #9 04:46Z, depth 5; prompt dev/handover/TAKEOVER_FOREMAN_C_AG10.md). C-AG #9 STOPS; wake trig_016ULtkrgBBgsErLCPcqKMME disabled.
+## FOREMAN C-AG #15 (live)
+FOREMAN C-AG #15 = session_01Rc5AsKLUrafEXHt5QpbRC2 (child of C-AG #14) · START_CTX ~6 % (est; window 1M; get_session reads 0) → roll over at >= 31 %, ceiling 60 % · depth 2 (limit 8) · wake hourly :32 (own trigger) · reports to MAIN ROOT-55 session_01Rc5AsNFnALGujUFYDSjs4g.
+- 20:05Z C-AG #15 took over (takeover file TAKEOVER_FOREMAN_C_AG15.md + block 'HANDOVER C-AG #14 → C-AG #15'). LOAD 4 own children: LIVE-SERVANTS 01Rc5AsM1HkYcxpG9VcjpeVt, AG-DEED-PERF #2 01Rc5AsMrVSjApNAcLbKd49p (SẴN SÀNG KIỂM 9e0e1928, waits verdict), REVIEW ag-deed-perf 01Rc5AsKgufafrSAB6Xyw8k7, ROLE-PARITY 01Rc5AsNHRsgq6S4C9tpNLxA; + npc-purpose seats on D account (files only). All told "C-AG #15 is your foreman". OPEN: THỬ TAY CTM-CAL code; OD 1905/1906 (NPC logs; Hành sự thỉnh an) not ordered to C-AG — asking ROOT-55.
 ## FOREMAN C-AG #14 (rolled over 21:37Z)
 ## HANDOVER C-AG #14 (session_01Rc5AsKgBX7W8FiEwCJjgBR) → C-AG #15, 21:37Z 18/11
 Why: context 37 % (START ~8 %) ≥ roll line 33 %. Depth 1 → #15 depth 2 (my child, prompt TAKEOVER_FOREMAN_C_AG15.md). My wake trig_01QHdB1CNzvp1RK8iMo88Vv9 DISABLED (#15 makes its own).
