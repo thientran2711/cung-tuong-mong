@@ -779,6 +779,7 @@ function toilFaceLayer(p,file){const lk=toilLookOfP(p);if(!lk)return"";const col
  return (src?`<img class="kmkl kmkl-${lk}" src="${src}" alt="" aria-hidden="true" style="--fleft:0%;--ftop:0%;--fwidth:100%;--fheight:100%">`:"")+mk+(lk==="tuyet"?toilGlowLayer(file,col):"")}
 if(typeof kitFxLayers==="function"){const fx0=kitFxLayers;kitFxLayers=function(p,file){const h=fx0.apply(this,arguments);let m="";try{m=toilFaceLayer(p,file)}catch(e){}return m+h}}
 
+
 /* ================= §60 MAKEUP COLOURS · kitSwatches (owner 15/11 19:05Z, review/mk-colour) =================
    Like modern dress-up / makeup games: the colours she picks at the mirror (phấn mắt, phấn má, son môi, màu mày) show in EXACTLY those colours on
    HER OWN pictures (portrait + full-body figure, every place kitFxLayers draws her) all day. The picks live in p.toilette.col (old saves: none →
@@ -867,16 +868,21 @@ function toilMkPts(v){const P=[];for(let i=0;i<60;i++)P.push([v[2*i]/40,v[2*i+1]
 function toilMkBox(v){const P=toilMkPts(v);let x0=1e9,y0=1e9,x1=-1e9,y1=-1e9;P.forEach(([x,y])=>{x0=Math.min(x0,x);x1=Math.max(x1,x);y0=Math.min(y0,y);y1=Math.max(y1,y)});
  const mx=(x1-x0)*.3,my=(y1-y0)*.3;return[x0-mx,y0-my,x1-x0+2*mx,y1-y0+2*my].map(n=>+n.toFixed(3))}
 const TOIL_MKA={};/* key -> [file,look,col]: the size pass (toilLodPass) re-fetches the same layer at another strength step */
-function toilMkLayer(file,look,col,step){const v=MK_FIT.get(file);if(!v||!TOIL_MKS[look])return"";const base=[file,look,col.mat,col.ma,col.son,col.may,look==="vung"?(col.seed|0)+"/"+BAL.toil.vungSm+"/"+BAL.toil.vungSide+"/"+BAL.toil.vungRot+"/"+BAL.toil.vungSmSize:""].join("|"),key=step?base+"|L"+step:base;TOIL_MKA[base]=[file,look,col];
+function toilMkBase(file,look,col){return [file,look,col.mat,col.ma,col.son,col.may,look==="vung"?(col.seed|0)+"/"+BAL.toil.vungSm+"/"+BAL.toil.vungSide+"/"+BAL.toil.vungRot+"/"+BAL.toil.vungSmSize:""].join("|")}
+function toilMkLayer(file,look,col,step){const v=MK_FIT.get(file);if(!v||!TOIL_MKS[look])return"";const base=toilMkBase(file,look,col),key=step?base+"|L"+step:base;TOIL_MKA[base]=[file,look,col];
  let e=TOIL_MKC[key];if(!e){e=TOIL_MKC[key]={box:toilMkBox(v),src:""};TOIL_MKQ.push(key);if(TOIL_MKQ.length>200)delete TOIL_MKC[TOIL_MKQ.shift()];toilMkPaint(file,v,look,col,e,key,step||0)}
  const b=e.box;return `<img class="kmkl kmkc kmkl-${look}" data-mkk="${key}" src="${e.src||TOIL_BLANK}" alt="" aria-hidden="true" style="--fleft:${b[0]}%;--ftop:${b[1]}%;--fwidth:${b[2]}%;--fheight:${b[3]}%">`}
+function toilMkFlush(e){const a=e.cbs;e.cbs=null;if(a)a.forEach(f=>{try{f(e.src)}catch(x){}})}
 function toilMkPaint(file,v,look,col,e,key,step){const im=new Image();im.crossOrigin="anonymous";im.decoding="async";
- im.onload=()=>{try{e.src=toilMkDraw(im,v,look,col,e.box,(function(){try{return toilRow(file)}catch(x){return null}})(),(step||0)/BAL.toil.lod.steps)}catch(x){e.src=TOIL_BLANK}document.querySelectorAll("img.kmkc").forEach(x=>{if(x.dataset.mkk===key)x.src=e.src})};
- im.onerror=()=>{e.src=TOIL_BLANK};im.src=IMG_U("img/"+file)}
+ im.onload=()=>{try{e.src=toilMkDraw(im,v,look,col,e.box,(function(){try{return toilRow(file)}catch(x){return null}})(),(step||0)/BAL.toil.lod.steps)}catch(x){e.src=TOIL_BLANK}document.querySelectorAll("img.kmkc").forEach(x=>{if(x.dataset.mkk===key)x.src=e.src});toilMkFlush(e)};
+ im.onerror=()=>{e.src=TOIL_BLANK;toilMkFlush(e)};im.src=IMG_U("img/"+file)}
 /* size-aware makeup: one pass over every colour layer on screen; its face width in px (layer box = face + 30 % each side) picks the strength step, so every renderer (stage figure, avatar frame, close-up) gets the same curve */
 function toilLodStep(px){const L=BAL.toil.lod;if(!(px>0)||px>=L.fullAt)return 0;const t=Math.min(1,(L.fullAt-px)/(L.fullAt-L.maxAt));return Math.round(t*L.steps)}
+/* STAGE = MIRROR STRENGTH (owner 18/11 ~09:25Z, avatar-makeup): a face layer on the room stage / event-dialog figure is always LOD step 0 (the approved mirror look, no boost); every other place keeps the size curve */
+function toilStageEl(im){try{return!!(im&&im.closest&&im.closest("#stage,.kesfi,.kfxf[data-kav]")&&!im.closest(".kfzoom-i"))}catch(e){return false}}
+window.toilStageEl=toilStageEl;
 let toilLodRaf=0;
-function toilLodPass(){toilLodRaf=0;try{document.querySelectorAll("img.kmkc").forEach(im=>{const cur=im.dataset.mkk||"";const base=cur.replace(/\|L\d+$/,""),A=TOIL_MKA[base];if(!A)return;const w=im.getBoundingClientRect().width;if(!(w>0))return;const st=toilLodStep(w/1.6),have=+((/\|L(\d+)$/.exec(cur)||[])[1]||0);if(st===have)return;
+function toilLodPass(){toilLodRaf=0;try{document.querySelectorAll("img.kmkc").forEach(im=>{const cur=im.dataset.mkk||"";const base=cur.replace(/\|L\d+$/,""),A=TOIL_MKA[base];if(!A)return;const w=im.getBoundingClientRect().width;if(!(w>0))return;const st=toilStageEl(im)?0:toilLodStep(w/1.6),have=+((/\|L(\d+)$/.exec(cur)||[])[1]||0);if(st===have)return;
  const html=toilMkLayer(A[0],A[1],A[2],st);const key=st?base+"|L"+st:base,e=TOIL_MKC[key];if(!html||!e)return;im.dataset.mkk=key;if(e.src)im.src=e.src})}catch(x){}}
 function toilLodSched(){if(!toilLodRaf)toilLodRaf=requestAnimationFrame(toilLodPass)}
 if(typeof MutationObserver==="function"&&typeof document!=="undefined"){const go=()=>{try{new MutationObserver(toilLodSched).observe(document.body,{childList:true,subtree:true});window.addEventListener("resize",toilLodSched)}catch(e){}};if(document.body)go();else document.addEventListener("DOMContentLoaded",go)}
