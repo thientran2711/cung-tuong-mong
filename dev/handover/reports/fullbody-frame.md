@@ -48,3 +48,62 @@ Page error "Unexpected token '<'" appears in before and after: harness route ser
 - Redraw list (dev/handover/reports/fullbody-frame-redraw-list.txt) is now nice-to-have only (nothing clipped).
 - Text readability over the robe LOOKED 3x on Fold (SELF, c03 t6, widest robe, Hoang hau): text is on top, readable; robe lines under the text are visible but quiet. The 5-7 text lines that sit over a robe are counted per case in the scan.
 ~92% xong / ~70% chơi được.
+
+## S3 (ROOT-52, OD L1878) — review/fullbody-frame-s3 @ c9d355bd (from live main a2ce736a); worker session_01UV1SzhJ3JicrwJmcbMVHSA depth 5
+PRIORITY #1 CHECK: OD L1878 | main kitFullFigX (s2) | review/* none | claims s3 (this)
+(1) Scroll fade: kitScrollCues (s2) already skips every container that holds the figure column and uses an own strip on short scrollers; new scan checks the cue boxes (fade 36 px / strip) against the figure's own column rect on every frame: 0 hits, Fold + iPad (news/choice/coach/shop/ID card, 6 people). The text column may run over a robe that spreads under it (owner: row đè lên hình), the figure column never gets a fade/line/pill. Her feet-fade shot was the pre-b0155afe build.
+(2) KIT 56.5 HEAD AT COLUMN CENTRE: kitFigBody measures hx (head x); kitFullFigX(b,iw,cw,lim) centres hx on the column; only the frame's left edge limits it (lim); callers kszFigFit, kitPersonDlgFit, kitDpFit, kpIdLay, kitBookFigClamp(book: lim = page margin, NOT in the scan). KIT.md 56.5 written; kit page sample unchanged (kszFrame sample uses the same code).
+Scan dev/test/figure-head-fade-scan.js, head-centre offset px before(main) -> after:
+```
+dev kind case | head-centre offset px before -> after | cues over figure column before -> after
+1180x820 choice  SELF          | -0.0 -> 0.1 | 0 -> 0
+1180x820 choice  crown-tallest | 27.2 -> 14.1 | 0 -> 0
+1180x820 choice  hoang-hau     | -0.1 -> 0.0 | 0 -> 0
+1180x820 choice  man           | 0.0 -> -0.0 | 0 -> 0
+1180x820 choice  old-maid-wide | 19.4 -> 6.8 | 0 -> 0
+1180x820 choice  widest-robe   | 20.6 -> 2.1 | 0 -> 0
+1180x820 idcard  crown-tallest | -0.1 -> 0.1 | 0 -> 0
+1180x820 idcard  hoang-hau     | -0.3 -> -0.3 | 0 -> 0
+1180x820 idcard  man           | 0.1 -> 0.0 | 0 -> 0
+1180x820 idcard  old-maid-wide | 0.5 -> -0.2 | 0 -> 0
+1180x820 idcard  widest-robe   | -0.6 -> -0.2 | 0 -> 0
+1180x820 news    SELF          | -0.0 -> 0.0 | 0 -> 0
+1180x820 news    crown-tallest | 11.2 -> -0.0 | 0 -> 0
+1180x820 news    hoang-hau     | -0.0 -> 0.0 | 0 -> 0
+1180x820 news    man           | -0.0 -> -0.0 | 0 -> 0
+1180x820 news    old-maid-wide | 2.4 -> -0.0 | 0 -> 0
+1180x820 news    widest-robe   | 3.7 -> 0.0 | 0 -> 0
+1180x820 pdlg    SELF          | -0.2 -> -0.2 | 0 -> 0
+1180x820 pdlg    crown-tallest | 5.6 -> -0.2 | 0 -> 0
+1180x820 pdlg    hoang-hau     | -0.3 -> -0.3 | 0 -> 0
+1180x820 pdlg    man           | -0.2 -> -0.3 | 0 -> 0
+1180x820 pdlg    old-maid-wide | -0.2 -> -0.2 | 0 -> 0
+1180x820 pdlg    widest-robe   | -0.2 -> -0.2 | 0 -> 0
+1180x820 shop    eunuch        | -0.0 -> 0.0 | 0 -> 0
+755x1000 choice  SELF          | -0.0 -> -0.0 | 0 -> 0
+755x1000 choice  crown-tallest | 27.2 -> 14.1 | 0 -> 0
+755x1000 choice  hoang-hau     | -0.1 -> 0.0 | 0 -> 0
+755x1000 choice  man           | 0.0 -> -0.0 | 0 -> 0
+755x1000 choice  old-maid-wide | 19.4 -> 6.8 | 0 -> 0
+755x1000 choice  widest-robe   | 20.6 -> 2.1 | 0 -> 0
+755x1000 idcard  crown-tallest | 0.2 -> 0.2 | 0 -> 0
+755x1000 idcard  hoang-hau     | -0.4 -> 0.1 | 0 -> 0
+755x1000 idcard  man           | -0.4 -> -0.5 | 0 -> 0
+755x1000 idcard  old-maid-wide | -0.5 -> 0.1 | 0 -> 0
+755x1000 idcard  widest-robe   | -0.2 -> -0.1 | 0 -> 0
+755x1000 news    SELF          | -0.0 -> 0.0 | 0 -> 0
+755x1000 news    crown-tallest | 11.2 -> -0.0 | 0 -> 0
+755x1000 news    hoang-hau     | -0.0 -> 0.0 | 0 -> 0
+755x1000 news    man           | -0.0 -> -0.0 | 0 -> 0
+755x1000 news    old-maid-wide | 2.4 -> -0.0 | 0 -> 0
+755x1000 news    widest-robe   | 3.7 -> 0.0 | 0 -> 0
+755x1000 pdlg    SELF          | 5.4 -> -0.0 | 0 -> 0
+755x1000 pdlg    crown-tallest | 36.8 -> 25.7 | 0 -> 0
+755x1000 pdlg    hoang-hau     | 0.1 -> 0.1 | 0 -> 0
+755x1000 pdlg    man           | 0.0 -> -0.0 | 0 -> 0
+755x1000 pdlg    old-maid-wide | 29.1 -> 18.5 | 0 -> 0
+755x1000 pdlg    widest-robe   | 30.3 -> 13.9 | 0 -> 0
+755x1000 shop    eunuch        | -0.0 -> 0.0 | 0 -> 0```
+Still off-centre (frame left-edge limit, nothing cut): iPad/Fold choice tallest-crown 27->14, old wide maid 19->7; Fold coach tallest-crown 37->26, old maid 29->19, widest 30->14. Owner may allow a larger left spill to reach 0.
+Shots AFTER-only Fold|iPad @2 (tallest crown + widest robe), LOOKED: https://ctm-img.victoria-tntt.workers.dev/img/_review/fullbody-frame-s3/{news,choice,pdlg,idcard}-{crown-tallest,widest-robe}-fold-ipad-after.jpg and shop-fold-ipad-after.jpg. Note: tall crown still overlaps the name tag (tag on top). Wipe: python3 dev/site/cdn_sync.py --wipe-review fullbody-frame-s3
+~90% xong / ~80% chơi được.
