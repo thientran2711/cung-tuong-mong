@@ -255,10 +255,14 @@ function shelfSpyTxt(a,t,by){const r=shelfSee(a,t,by);if(!r||a!==S)return"";retu
  if(S&&v&&D&&!(typeof sameHouse==="function"&&sameHouse(S,v))&&D.req(S,v)&&!A.some(a=>a.n===D.n))A.push({n:D.n,o:100,x:`nàng quý ngươi +${BAL.tw.g.call} · hai bên thấy phòng ốc của nhau`,run:()=>{try{chatMark(v)}catch(e){}return twDo(S,v,"call",true)+"."}})}catch(e){console.error("shelf talk",e)}return A};window.topicOpts=topicOpts})();
 /* the visit happens AT the target's palace (her room / theirs), not wherever she is that khắc */
 (function(){if(typeof agOpts!=="function")return;const o0=agOpts;agOpts=function(){const O=o0.apply(this,arguments);try{for(const o of O)if(o.k==="call")o.at=(kh,vv,tt)=>tt?palaceOf(tt):null}catch(e){}return O}})();
-/* daily life: a consort who keeps her schedule this buổi may drop in on someone (her room weighs more: the player's palace is where life is seen) */
-(function(){if(typeof agDecide0!=="function")return;const d0=agDecide0;agDecide0=function(v){const r=d0.apply(this,arguments);try{const V=BAL.shelf.visit;if(r||!v||v.confined||!roll(V.dayP))return r;
-  const L=[S].concat(liveRivals(true)).filter(x=>x&&x!==v&&x.alive!==false&&!x.out&&aff(v,x)>=V.affMin).map(x=>[x,V.base+Math.max(0,aff(v,x))+(x===S?V.herW:0)+(rkOf(x)>rkOf(v)?V.upW:0)]);
-  const t=L.length?agPw(L):null;if(!t)return r;const c={k:"call",t,tag:"social",act:AGACTW.call,need:"ally",at:(kh,vv,tt)=>palaceOf(tt)};const sl=agSlot(v,c.at,t);if(!sl)return r;
+/* daily life: a consort who keeps her schedule this buổi may drop in on someone (her room weighs more: the player's palace is where life is seen)
+   NPC-PURPOSE G3: only when her ALLY need is real (≥ BAL.ag.why.g3.call.min) and at most once per BAL.ag.why.cd.g3call tuần; the one she visits = near-best
+   of the people she likes (old weights); no daily dice */
+npwReg("g3call",{who:c=>[c.v],why:v=>{const V=BAL.shelf.visit;let N={};try{N=agNeedsC(v)}catch(e){}const n=N.ally||0;if(n<BAL.ag.why.g3.call.min)return null;
+  const L=[S].concat(liveRivals(true)).filter(x=>x&&x!==v&&x.alive!==false&&!x.out&&aff(v,x)>=V.affMin);const t=npwPick(L,x=>V.base+Math.max(0,aff(v,x))+(x===S?V.herW:0)+(rkOf(x)>rkOf(v)?V.upW:0));
+  return t?{s:n,t,r:"muốn thân với "+npwNm(t),k:palaceOf(t)}:null}});
+(function(){if(typeof agDecide0!=="function")return;const d0=agDecide0;agDecide0=function(v){const r=d0.apply(this,arguments);try{if(r||!v||v.confined)return r;
+  const w=npcWhy("g3call",{v});const t=w&&w.tgt;if(!t)return r;const c={k:"call",t,tag:"social",act:AGACTW.call,need:"ally",why:w.why,at:(kh,vv,tt)=>palaceOf(tt)};const sl=agSlot(v,c.at,t);if(!sl)return r;
   let N={};try{N=agNeedsC(v)}catch(e){}agPlan(v,c,N,sl[0],sl[1]);return 1}catch(e){console.error("shelf call day",e)}return r}})();
 /* any visiting deed landing at the target's palace shows the visitor the room (sang thăm, giúp, tạ lỗi, khiêu khích …) */
 (function(){if(typeof agLand0!=="function")return;const l0=agLand0;agLand0=function(p){const r=l0.apply(this,arguments);try{if(r&&p&&BAL.shelf.seeDeeds.includes(p.k)&&p.k!=="call"){const v=RV(p.vid),t=agPerson(p.t);if(v&&t&&p.pl===palaceOf(t))shelfSee(v,t,"tận mắt")}}catch(e){console.error("shelf land",e)}return r}})();
@@ -303,16 +307,19 @@ setTimeout(()=>{try{shelfAccHook()}catch(e){console.error("shelfAccHook",e)}},0)
 /* an NPC with a belief (seen or heard) and a motive brings the charge herself, monthly; a hostile one with nothing may still guess (same acts, same odds oVP) */
 function shelfNpcAccuse(){const B=BAL.shelf.acc;for(const a of liveRivals(true)){if(!a.alive||a.out)continue;if(a.shA!=null&&wk()-a.shA<B.cdA)continue;
   const T=[S].concat(liveRivals(true)).filter(t=>t&&t!==a&&t.alive!==false&&!t.out&&!(t.shT!=null&&wk()-t.shT<B.cdT));
-  for(const t of shuf(T)){const mot=hostility(a,t)>=B.hostMin||(t===S&&(a.ghen||0)>=B.ghenMin);if(!mot)continue;
+  /* NPC-PURPOSE G3: her target = the one she resents most (was: a shuffled list); seen / heard first, a guess only on the one she hates */
+  const w=npcWhy("g3acc",{a,T});const t=w&&w.tgt;if(!t)continue;{
    const r=shelfSeen(a,t);let kind=r&&r.vr>0?"vp":r&&r.lv>=2?"xx":null;
    if(kind?!roll(B.npcO):!roll(B.guessO))continue;if(!kind)kind="xx";/* a guess */
-   a.shA=wk();t.shT=wk();const txt=kind==="vp"?shelfVpAccuse(a,t):shelfAccuse(a,t);if(t===S)Q.push({t:kind==="vp"?"Bị tố bày đồ vượt phẩm":"Bị tố bày biện xa xỉ",who:typeof pv==="function"?pv(a):null,h:`<p>${txt}</p>`});else try{newsAdd(a,kind,txt,false)}catch(e){}break}}}
+   a.shA=wk();t.shT=wk();const txt=kind==="vp"?shelfVpAccuse(a,t):shelfAccuse(a,t);if(t===S)Q.push({t:kind==="vp"?"Bị tố bày đồ vượt phẩm":"Bị tố bày biện xa xỉ",who:typeof pv==="function"?pv(a):null,h:`<p>${txt}</p>`});else try{newsAdd(a,kind,txt,false)}catch(e){}}}}
+npwReg("g3acc",{who:c=>[c.a],why:(a,c)=>{const B=BAL.shelf.acc;const L=c.T.filter(t=>hostility(a,t)>=B.hostMin||(t===S&&(a.ghen||0)>=B.ghenMin));
+  const t=npwPick(L,x=>hostility(a,x)+(shelfSeen(a,x)?B.hostMin:0));return t?{s:Math.min(100,hostility(a,t)),t,r:"oán "+npwNm(t)}:null}});
 
 /* Thái hậu: her own taste decides; she hears of a room through the palace talk (someone saw it or heard of it) — even ngự ban can be "quá xa xỉ" to her (owner OD 17/11 ~19:50Z) */
 function shelfThRebuke(){if(!S||S.thDead)return;const B=BAL.shelf.th;const P=[S].concat(liveRivals(true)).filter(p=>p&&p.alive!==false&&!p.out);
- for(const t of P){if(shelfLvFor("th",t)<2)continue;const talk=P.some(o=>o!==t&&shelfSeen(o,t));if(!talk||!roll(B.o))continue;
+ for(const t of P){if(shelfLvFor("th",t)<2)continue;/* G3: someone who saw the room carries it to her (a grudge against the owner, npcTell); nobody → she never hears */const tl=npcTell(t,{from:P.filter(o=>o!==t&&o!==S&&shelfSeen(o,t)),to:S.thO||{}});if(!tl||!roll(B.o))continue;
   const ngu=shelfList(t).some(e=>e.from==="emp");ap(t,{th:B.thAff,danh:B.danh});/* the one stat path (Thái hậu favour runs −100…100) */try{if(typeof emoSet==="function")emoSet(t,"buon",B.mood,"bị Thái hậu quở vì phòng ốc xa xỉ")}catch(e){}
-  const h=`Thái hậu nghe nói phòng ${t===S?"ngươi":t.name} bày biện quá xa xỉ${ngu?", đồ ngự ban cũng không nên phô ra như thế":""}, cho gọi đến quở trách. Thái hậu thiện cảm ${B.thAff}, Danh ${B.danh}.`;
+  const h=`Thái hậu nghe ${npwNm(tl.who)} nói phòng ${t===S?"ngươi":t.name} bày biện quá xa xỉ${ngu?", đồ ngự ban cũng không nên phô ra như thế":""}, cho gọi đến quở trách. Thái hậu thiện cảm ${B.thAff}, Danh ${B.danh}.`;
   if(t===S){if(!(typeof tsbBot==="function"&&tsbBot()))Q.push({t:"Thái hậu quở",who:typeof pTH==="function"?pTH():null,h:`<p>${h}</p>`})}else try{newsAdd(t,"xx",h,false)}catch(e){}}}
 /* ---------- the week: plants (decay, servants' care, withered, dead pot), NPC arrange, mood, rumours; the month: reputation, NPC charges ---------- */
 function shelfSrvQ(s){const P=BAL.shelf.plant;if(!s)return 0;let q=P.srvBase+(s.loyal||0)*P.srvLoyK;const T=[].concat(s.traits||[],typeof s.tr==="string"?[s.tr]:[]);for(const t of T)q+=P.srvTr[t]||0;return cl(q,0,P.srvMax)}
@@ -337,7 +344,7 @@ function shelfPlantWeek(p){const P=BAL.shelf.plant,z=shelfOf(p),me=p===S;const s
 function shelfMood(p){if(typeof emoSet!=="function")return;const x=Object.assign({},shelfLux(p)),M=BAL.shelf.mood;if(p!==S&&shelfTaste(p)<0&&x.lv>=2)x.lv=1;/* a frugal owner takes no joy in show */
  if(x.wither)emoSet(p,"buon",M.wither,"cây cảnh, chim cá trong phòng bỏ bê");else if(x.lv>=2)emoSet(p,"vui",M.lux,"phòng ốc bày biện lộng lẫy");else if(x.lv===1)emoSet(p,"vui",M.fit,"phòng ốc bày biện vừa ý")}
 function shelfRumour(){const B=BAL.shelf.rum;const P=[S].concat(liveRivals(true)).filter(p=>p&&p.alive!==false&&!p.out);let heardMe=0;
- for(const t of P){const x=shelfLux(t);if(x.lv<B.lv&&!x.vr)continue;for(const o of P){if(o===t||shelfSeen(o,t))continue;if(!roll(B.o))continue;shelfLook(o,t,"tin đồn",false);if(t===S)heardMe++;
+ for(const t of P){const x=shelfLux(t);if(x.lv<B.lv&&!x.vr)continue;for(const o of P){if(o===t||shelfSeen(o,t))continue;/* G3: a rumour has a mouth — one who saw the room and resents its owner or likes the listener (npcTell) */const tl=npcTell(t,{from:P.filter(w=>w!==o&&w!==t&&w!==S&&shelfSeen(w,t)),to:o});if(!tl||!roll(B.o))continue;shelfLook(o,t,"tin đồn",false);if(t===S)heardMe++;
    else if(o===S){try{noteAdd(t.id,`Nghe đồn phòng ${t.name} ${x.vr?"bày đồ quá phẩm nàng":"bày biện "+SHELF_LV[x.lv].toLowerCase()}.`)}catch(e){}}}}
  if(heardMe&&!(typeof tsbBot==="function"&&tsbBot()))log(`Hậu cung xì xào về đồ bày trong phòng ngươi.`)}
 /* co-op: the world (NPC shelves, rumours, NPC charges, Thái hậu, reputation) is computed once on the host (jcoopone rule); the guest runs only her own room */

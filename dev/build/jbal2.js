@@ -1277,3 +1277,14 @@ Object.assign(BAL.ag.why.cd,{callMe:4,f7Merit:12,sendMaid:24});
    frame (old 45 + 25 %); cd = tuần between two such deeds by the same person (lieMe ≈ the old weekly nết rumorP) */
 Object.assign(BAL.ag.why,{lie:{expose:30,blame:40,frame:45}});
 Object.assign(BAL.ag.why.cd,{exposeMe:6,lieMe:6,blameMe:4,frameMe:4});
+// G3 kinds (NPC-PURPOSE G3: witness / target picks + agent-layer dice; report dev/handover/reports/npc-purpose.md §G3)
+/* g3.soon   a planned deed's khắc: score 100 − soon × khắc from now (she does what she wants soon; npwPick keeps the near-best khắc)
+   g3.two    a 2nd goal of the day when its need ≥ two × the 1st one's
+   g3.newRk  a newcomer's weight per rank step (whom an old consort welcomes / ambushes: Sủng + rank)
+   g3.bmBac  she blackmails for silver when her bạc is under this (need = bmBac − bạc), else she would rather report (hostility)
+   g3.mood   weekly stay-home factor: base + her joy / div (sad → stays in, glad → goes out), held to [lo, hi]
+   g3.maid   a maid's chat: odds o she has heard where someone is (the player's foe first)
+   g3.call   a drop-in visit (jshelf): her ally need must reach min (the kind's cd = cd.g3call tuần)
+   g3.scape  a scapegoat (jworld2 án trộm): the accuser's hostility to her target must reach min */
+BAL.ag.why.g3={soon:12,two:.7,newRk:10,bmBac:60,mood:{b:1,div:120,lo:.4,hi:1.9},maid:{o:15},call:{min:25},scape:{min:30},lean:{c:2,k:"vuon"},ty:{preg:50}};
+Object.assign(BAL.ag.why.cd,{g3call:1,g3scape:8,g3acc:1});

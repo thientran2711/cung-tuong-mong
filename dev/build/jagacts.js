@@ -38,13 +38,13 @@ agRunReg("cx:hhShield",(v,q)=>{const X=BAL.ag.cx.hhShield,o=odA(v,X.o+(v.hh||0)/
 /* Mua ở Nội vụ phủ (the shop: buy, same price) and Tặng quà (giveTo, the player's gift rule) */
 agReg("consort","shop",(v,N,need)=>{if(need&&need!=="sung"&&need!=="ally"&&need!=="th")return[];const O=[];const X=BAL.ag.cx;
  if(!v.inv.some(e=>e&&!e.h&&IT[e.k]&&itm(e.k).gv&&!e.t)){const L=(S.shop||[]).filter(k=>IT[k]&&itm(k).gv&&!itm(k).il&&(v.bac||0)>=itm(k).pr+X.buy.keep);
-  if(L.length){const k=L[Math.floor(Math.random()*L.length)];const u=agcU(v,N,100,{sung:X.buy.g,ally:X.buy.g,th:X.buy.g},{bac:-itm(k).pr},"shop");if(u>0)O.push({k:"cx:buy",t:null,u,tag:"shop",act:"mua đồ ở Nội vụ phủ",at:()=>"nvp",it:k})}}
+  if(L.length){/* G3: the finest gift she can afford and still keep her reserve (price = worth to the one she courts), near-best */const k=npwPick(L,x=>itm(x).pr);const u=agcU(v,N,100,{sung:X.buy.g,ally:X.buy.g,th:X.buy.g},{bac:-itm(k).pr},"shop");if(u>0)O.push({k:"cx:buy",t:null,u,tag:"shop",act:"mua đồ ở Nội vụ phủ",at:()=>"nvp",it:k})}}
  const i=v.inv.findIndex(e=>e&&!e.h&&IT[e.k]&&itm(e.k).gv&&!e.t);
  if(i>=0){const T=[];if(!need||need==="sung")T.push(["emp",N.sung||0,"sung"]);if(!S.thDead&&(!need||need==="th"))T.push(["th",N.th||0,"th"]);
   for(const [t,w,n] of T){const u=agcU(v,N,100,{[n]:X.gift.g},{},"help");if(u>0)O.push({k:"cx:gift",t:t==="emp"?S.emp:"th",u,tag:"help",act:t==="emp"?"dâng quà lên Hoàng thượng":"dâng quà lên Thái hậu",at:(kh)=>t==="emp"?agEmpAt(kh):agThAt(kh),gt:t})}
   if(!need||need==="ally"){const fr=others(v).filter(t=>t&&t!==v&&(t===S||t.alive)&&aff(v,t)>=BAL.ag.goal.friend);if(fr.length){const t=mindPickBy(fr,x=>BAL.mind.pick.ag.base+aff(v,x),v);const u=agcU(v,N,100,{ally:X.gift.g},{},"help");if(t&&u>0)O.push({k:"cx:gift",t,u,tag:"help",act:"đem quà sang tặng",at:(kh,vv,tt)=>tt===S?"home":agAt(tt,kh)})}}}
  return O});
-agRunReg("cx:buy",(v)=>{const L=(S.shop||[]).filter(k=>IT[k]&&itm(k).gv&&!itm(k).il&&(v.bac||0)>=itm(k).pr+BAL.ag.cx.buy.keep);if(!L.length)return"";const k=L[Math.floor(Math.random()*L.length)];return buy(v,k)?`${v.name} mua ${itm(k).n} ở Nội vụ phủ`:""});
+agRunReg("cx:buy",(v)=>{const L=(S.shop||[]).filter(k=>IT[k]&&itm(k).gv&&!itm(k).il&&(v.bac||0)>=itm(k).pr+BAL.ag.cx.buy.keep);if(!L.length)return"";const k=npwPick(L,x=>itm(x).pr);return buy(v,k)?`${v.name} mua ${itm(k).n} ở Nội vụ phủ`:""});
 agRunReg("cx:gift",(v,t)=>{const i=v.inv.findIndex(e=>e&&!e.h&&IT[e.k]&&itm(e.k).gv&&!e.t);if(i<0||!t)return"";const r=giveTo(v,t===S.emp?"emp":t,i);return r?String(r).replace(/\.\s*$/,""):""});
 /* Kết giao (ACT.ally: the player's act, its cost and odds) */
 agReg("consort","ally",(v,N,need)=>{if(need&&need!=="ally")return[];if(!ACT.ally||(v.bac||0)<BAL.ag.cx.ally.bac)return[];const fr=others(v).filter(t=>t&&t!==v&&(t===S||t.alive)&&rel(v,t)>BAL.ag.cx.ally.rel);if(!fr.length)return[];
@@ -107,9 +107,9 @@ agReg("th","acts",(th,N,need)=>{const T=BAL.ag.th;const O=[];const u=(n)=>(N[n]|
  if((!need||need==="fond")&&N.fond){const L=consorts().filter(p=>(p===S||p.alive)&&!p.out&&(p.th||0)>=T.fondTh&&!(p.thGiftWk!=null&&wk()-p.thGiftWk<T.giftCd));
   const t=L.length?mindPickBy(L,x=>BAL.mind.pick.ag.base+(x.th||0),null):null;if(t)O.push({k:"th:gift",t,u:u("fond"),tag:"help",act:"ban thưởng",at:()=>"tn"})}
  if((!need||need==="order")&&N.order){const f=favNow();if(f&&!(f.p.admonWk!=null&&wk()-f.p.admonWk<BAL.tw.g.admonCd))O.push({k:"th:admon",t:f.p,u:u("order"),tag:"greet",act:"khuyên Hoàng thượng mưa móc đều khắp",at:kh=>agEmpAt(kh)||"dtd"})}
- if((!need||need==="mercy")&&N.mercy){const L=consorts().filter(p=>p.out&&(p.th||0)>=T.mercyTh&&(p===S||p.alive));const t=L.length?L[Math.floor(Math.random()*L.length)]:null;if(t)O.push({k:"th:release",t,u:u("mercy"),tag:"help",act:"mở lòng từ bi, tha khỏi lãnh cung",at:()=>"tn"})}
+ if((!need||need==="mercy")&&N.mercy){const L=consorts().filter(p=>p.out&&(p.th||0)>=T.mercyTh&&(p===S||p.alive));/* G3: mercy goes to the one she regards most (Thái hậu favour), near-best */const t=npwPick(L,x=>1+Math.max(0,x.th||0));if(t)O.push({k:"th:release",t,u:u("mercy"),tag:"help",act:"mở lòng từ bi, tha khỏi lãnh cung",at:()=>"tn"})}
  return O});
-agRunReg("th:gift",(th,p)=>{if(!p||S.thDead)return"";const k=BAL.ag.th.items[Math.floor(Math.random()*BAL.ag.th.items.length)];p.inv.push({k,from:"th"});p.thGiftWk=wk();
+agRunReg("th:gift",(th,p)=>{if(!p||S.thDead)return"";/* G3: what the favoured one does not have yet */const k=npwPick(BAL.ag.th.items,x=>100/(1+(p.inv||[]).filter(e=>e&&e.k===x).length));p.inv.push({k,from:"th"});p.thGiftWk=wk();
  if(p===S)Q.push({t:"Thái hậu ban thưởng",who:pTH(),h:`<p>Đức Thọ cung sai người mang đến <b>${itm(k).n}</b>.</p><p class="past">${itm(k).d}</p>`});return `Thái hậu ban ${itm(k).n} cho ${NM(p)}`});
 agRunReg("th:admon",(th,p)=>{if(!p||S.thDead)return"";const me=p===S;const b=p.sung;ap(p,{sung:-BAL.tw.g.admon});p.admonWk=wk();
  const t=`Thái hậu khuyên Hoàng thượng “mưa móc đều khắp”, đừng chỉ sủng ${me?"ngươi":p.name}. ${b!==p.sung?`Sủng của ${me?"ta":p.name} ${b} → ${p.sung}.`:""}`;if(me)Q.push({t:"Mưa móc đều khắp",who:pTH(),h:`<p>${t}</p>`});return t.trim()});

@@ -87,8 +87,10 @@ function visAfter(){const V=B();const L=[`Sủng +${V.sung}`,`Danh +${V.danh}`];
  const lost=S.visLost!=null?(rivals||[]).find(x=>x&&x.id===S.visLost&&x.alive):null;S.visLost=null;
  if(lost){lost.ghen=cl((lost.ghen||0)+V.lostGhen,0,100);relAdd(S,lost,-V.lostRel);P.push(`${lost.name} mất đêm thẻ bài đã lật: ghen +${V.lostGhen}, quý ngươi -${V.lostRel}.`)}
  if(S.visQ){S.visQ=0;apply({hh:-V.hh});P.push(`Hoàng hậu phật ý: quý ngươi -${V.hh}.`)}
- const T=thDispl();if(T.p&&roll(T.p)){apply({th:-T.loss});P.push(`Thái hậu nghe tin, phật ý vì ngài bỏ lệ Kính sự phòng: Thái hậu quý ngươi -${T.loss}.`);try{trongLearn("th",DEED.empvisit,"Ngự giá lâm cung")}catch(e){}}
- else if(T.p)P.push("Thái hậu nghe tin, không nói gì.");
+ const T=thDispl();/* NPC-PURPOSE G3: the news reaches her through someone — the one who lost the night or another who resents the player (npcTell); nobody → she does not hear */
+  const tl=T.p?npcTell(S,{from:(lost?[lost]:[]).concat(liveRivals(true).filter(x=>x!==lost)),to:S.thO||{}}):null;
+  if(tl&&roll(T.p)){apply({th:-T.loss});P.push(`Thái hậu nghe ${npwNm(tl.who)} kể, phật ý vì ngài bỏ lệ Kính sự phòng: Thái hậu quý ngươi -${T.loss}.`);try{trongLearn("th",DEED.empvisit,"Ngự giá lâm cung")}catch(e){}}
+ else if(tl)P.push(`Thái hậu nghe ${npwNm(tl.who)} kể, không nói gì.`);
  log(`Ngự giá lâm cung: ${L.join(" · ")}. ${P.join(" ")}`);
  /* review r1: no second card. The night's own closing card (jne kitNightEnd, KIT §62 + §81 kit button) already shows the whole night
     before → after (Được / Mất / Kèm rows, real numbers incl. these extras, applied inside nightFx); it gets the visit's caption. */
