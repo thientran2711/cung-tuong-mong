@@ -3,7 +3,8 @@
 Method = the por rows' method (dev/art/facefit): OpenCV Haar frontal face (alt2 then default) on the figure's top 22 % at 2.5x, then the veil box from the
 FACE RECT with the POR calibration ratios (the por rows are correct: cx -0.031, band .465, w .892, bottom 1.113 of the face rect), rotation kept from the old row
 (eye-line tilt of the old row is the por-measured one). Scar row from the veil box (l-0.003w, t-0.014h, .714w, .817h).
-usage: look-fx-figfit.py <cache dir> <out.json> [N workers]   -> out.json = {"fig-x.webp":{"old":[..],"new":[..],"snew":[..],"det":[..]|null}}  + prints the before/after table"""
+usage: look-fx-figfit.py <cache dir> <out.json> [N workers]
+       look-fx-figfit.py add <cache dir> <targets.txt> <out.json> [N workers]   NEW fig pictures that have no row yet (R9f: the tcold figures): same Haar detect + rows(), rotation 0 (the por rule), no row when Haar finds no face (never a guess)   -> out.json = {"fig-x.webp":{"old":[..],"new":[..],"snew":[..],"det":[..]|null}}  + prints the before/after table"""
 import sys, os, json, io, urllib.request, concurrent.futures as cf
 import cv2, numpy as np
 from PIL import Image
@@ -44,7 +45,17 @@ def rows(fb, rot):
     fx, fy, fw, fh = fb
     cx = fx + fw / 2 + CX * fw; w = WR * fw; by = fy + BN * fh; h = (fy + BT * fh - by) / .835; t = by - .165 * h; l = cx - w / 2
     return [round(l, 1), round(t, 1), round(w, 1), round(h, 1), rot], [round(l - .003 * w, 1), round(t - .014 * h, 1), round(.714 * w, 1), round(.817 * h, 1), rot]
-if __name__ == '__main__':
+if __name__ == '__main__' and sys.argv[1] == 'add':
+    cache, tf, out = sys.argv[2], sys.argv[3], sys.argv[4]; nw = int(sys.argv[5]) if len(sys.argv) > 5 else 8; os.makedirs(cache, exist_ok=True); T = open(tf).read().split(); res = {}
+    def one_add(k):
+        try: return k, detect(get(k, cache))
+        except Exception: return k, None
+    with cf.ThreadPoolExecutor(nw) as ex:
+        for k, fb in ex.map(one_add, T):
+            if fb: v, sc = rows(fb, 0.0); res[k] = {'det': fb, 'new': v, 'snew': sc}
+            else: res[k] = {'det': None}
+    json.dump(res, open(out, 'w')); print('new fig rows', sum(1 for r in res.values() if r.get('new')), 'of', len(res))
+elif __name__ == '__main__':
     cache, out = sys.argv[1], sys.argv[2]; nw = int(sys.argv[3]) if len(sys.argv) > 3 else 8
     os.makedirs(cache, exist_ok=True)
     v = json.load(open(os.path.join(cache, 'veil-fit.json'))); s = json.load(open(os.path.join(cache, 'scar-fit.json')))

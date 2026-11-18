@@ -43,7 +43,9 @@ Object.assign(BAL,{looks:{
  /* KEEP-OUT (owner 18/11 standing rule: a face mark NEVER covers the eyes or the lips): ellipses [cx,cy,rx,ry] in VEIL-ROW units (u = x/rowW, v = y/rowH from the row's left/top),
     measured on 158 por pictures (Haar eyes + lip colour, dev/test/look-fx-keepout.py) and constant for every por-/fig- row because every row is cut from the face rect by the same ratios.
     Face-square marks are masked by it (lkKeepCss), the scratch rows (scar-fit) are generated so the box stays inside the cheek zone: cheek = [left,top,w,h,rot offset] of the veil row: the OLD diagonal across the cheek below the eye (owner 18/11: never vertical), ~1.4x the R3 length, as long as the keep-out allows. pad = ONE margin: every ellipse is grown by it (mask, scratch test). */
- keep:{feather:.012,eye:[[.31,.08,.14,.15],[.72,.08,.14,.15]],mouth:[.47,.655,.25,.10],nose:[.51,.36,.11,.2],pad:1.15,cheek:[.08,.30,.28,.20,5],
+ keep:{feather:.012,eye:[[.31,.08,.14,.15],[.72,.08,.14,.15]],
+ /* PER-PICTURE KEEP-OUT (R9f, owner 18/11 standing rule: never the eyes, never the lips; c30 pits landed on the iris because ONE constant ellipse was wrong for pictures whose eyes sit off it): img/keep-fit.json = { "<por-/fig- file>": [eye1 u, eye1 v, eye2 u, eye2 v, eye half-width, eye half-height, mouth u, mouth v, mouth half-width, mouth half-height, nose u, nose v] } x1000, in VEIL-ROW units, measured from MediaPipe face landmarks (dev/tools/look-fx-eyefit.py: eye CONTOUR + lip outline); an ellipse = half-size x [kx, + ax, ky, + ay]; the nose keeps the constant size, only its centre moves. A picture with no row keeps the constants (eye / mouth / nose above). */
+ fit:{eye:[1.35,.01,2.4,.01],mouth:[1.25,.01,1.6,.01]},mouth:[.47,.655,.25,.10],nose:[.51,.36,.11,.2],pad:1.15,cheek:[.08,.30,.28,.20,5],
  /* VẾT CÀO lv1 + lv2 + lv3 (owner 18/11 ~04:50Z + ~05:00Z "chốt bậc 3 cho mức nhẹ luôn"): ladder STEP 3 = 1.6 x the R6 box [.28 x .26] of the veil row, left 0, top .20, old diagonal, flipped, below the eye; it crosses the eye / nose / mouth zones, so the strokes are CUT at the zones by the stroke-level mask (lkKeepScar). lv1 stays the scar-fit row. */
  cheek3:[0,.20,.448,.416,0],
  /* FACE CLIP (owner 18/11 ~04:58Z: no mark past the face skin onto hair / ear / neck / background): ONE polygon in face-square units (0..1 of the square of lkSquareRect), measured on 180 por pictures (skin segmentation, dev/test/look-fx-faceclip.py); every mark layer (face-square marks, cào, smudge) is clipped to it by lkFaceClipAll */
@@ -302,7 +304,13 @@ function lkMirror(file){try{const n=String(file||"").split("/").pop(),s=KIT_SCAR
 /* the first layer (full square) is composited with the ellipse layers BELOW it: xor/exclude = the square minus every ellipse (R7: add/exclude were the wrong way round and the mask did nothing in the browser).
    The mask is opaque (removes the mark) up to the grown ellipse (pad) and only then fades out over the next 22 % (R7: the fade used to start inside the ellipse and left soot on the lash line / lip corner).
    CSS mask (square coordinates) that cuts the eye / mouth / nose keep-out out of a face-square mark; the square = 1.08 x the veil row wide, 1.165 x as tall, its top .3826 rowH above the row top (KIT_RASH.style) */
-function lkKeepCss(){try{const K=BAL.looks.keep,E=[...K.eye,K.mouth,K.nose],gr="radial-gradient(ellipse closest-side,#000 82%,transparent 100%)";const im=[],sz=[],ps=[];
+window.KIT_KEEPFIT={url:"img/keep-fit.json",fit:null,load:function(){if(this.fit||this._ld)return;this._ld=1;try{fetch(this.url).then(r=>r.ok?r.json():null).then(j=>{if(j)KIT_KEEPFIT.fit=j}).catch(()=>{})}catch(e){}}};try{KIT_KEEPFIT.load()}catch(e){}
+/* the four keep-out ellipses [u,v,ru,rv] (veil-row units) of ONE picture: its keep-fit row, else the constants */
+function lkKeepFor(file){const K=BAL.looks.keep,nm=String(file||"").split("/").pop(),r=KIT_KEEPFIT.fit&&KIT_KEEPFIT.fit[nm];if(!r)return[...K.eye,K.mouth,K.nose];
+ const F=K.fit,q=x=>x/1000,ex=q(r[4])*F.eye[0]+F.eye[1],ey=q(r[5])*F.eye[2]+F.eye[3];
+ return[[q(r[0]),q(r[1]),ex,ey],[q(r[2]),q(r[3]),ex,ey],[q(r[6]),q(r[7]),q(r[8])*F.mouth[0]+F.mouth[1],q(r[9])*F.mouth[2]+F.mouth[3]],[q(r[10]),q(r[11]),K.nose[2],K.nose[3]]]}
+window.lkKeepFor=lkKeepFor;
+function lkKeepCss(file){try{const K=BAL.looks.keep,E=lkKeepFor(file),gr="radial-gradient(ellipse closest-side,#000 82%,transparent 100%)";const im=[],sz=[],ps=[];
  im.push("linear-gradient(#000,#000)");sz.push("100% 100%");ps.push("0 0");
  for(const [u,v,ru,rv] of E){const s=(u+.04)/1.08,t=(v+.3826)/1.165,hw=ru*(K.pad||1)*1.22/1.08,hh=rv*(K.pad||1)*1.22/1.165,w=hw*200,h=hh*200,l=(s-hw)*100,tp=(t-hh)*100;im.push(gr);sz.push(w.toFixed(2)+"% "+h.toFixed(2)+"%");ps.push((l/(100-w)*100).toFixed(2)+"% "+(tp/(100-h)*100).toFixed(2)+"%")}
  const a=im.join(","),b=sz.join(","),c=ps.join(","),x=im.map((_,i)=>i?"exclude":"add").join(",").replace("add","add"),xw=im.map((_,i)=>i?"source-over":"xor").join(",");
@@ -339,7 +347,7 @@ function lkScarFix(file,sty,sev){try{const n=String(file).split("/").pop(),v=KIT
  const toPic=(b,s,t)=>{if(b.f)s=2*b.ox-s;const dx=(s-b.ox)*b.w*A,dy=(t-b.oy)*b.h,c=Math.cos(b.r),n=Math.sin(b.r);return[(b.l+b.ox*b.w)*A+dx*c-dy*n,b.t+b.oy*b.h+dx*n+dy*c]};
  const toLoc=(b,X,Y)=>{X-=(b.l+b.ox*b.w)*A;Y-=b.t+b.oy*b.h;const c=Math.cos(b.r),n=Math.sin(b.r),dx=X*c+Y*n,dy=-X*n+Y*c;let s=dx/(b.w*A)+b.ox;if(b.f)s=2*b.ox-s;return[s,dy/b.h+b.oy]};
  const K=BAL.looks.keep,pad=K.pad||1,gr="radial-gradient(ellipse closest-side,#000 82%,transparent 100%)",im=["linear-gradient(#000,#000)"],sz=["100% 100%"],ps=["0 0"];
- for(const [u,w,ru,rv] of [...K.eye,K.mouth,K.nose]){const P=toPic(q,u,w),C=toLoc(e,P[0],P[1]),hw=ru*pad*1.22*v[2]/W,hh=rv*pad*1.22*v[3]/H,wp=hw*200,hp=hh*200,l=(C[0]-hw)*100,tp=(C[1]-hh)*100;
+ for(const [u,w,ru,rv] of lkKeepFor(file)){const P=toPic(q,u,w),C=toLoc(e,P[0],P[1]),hw=ru*pad*1.22*v[2]/W,hh=rv*pad*1.22*v[3]/H,wp=hw*200,hp=hh*200,l=(C[0]-hw)*100,tp=(C[1]-hh)*100;
   im.push(gr);sz.push(wp.toFixed(2)+"% "+hp.toFixed(2)+"%");ps.push((l/(100-wp)*100).toFixed(2)+"% "+(tp/(100-hp)*100).toFixed(2)+"%")}
  const a=im.join(","),b=sz.join(","),c=ps.join(","),xw=im.map((_,i)=>i?"source-over":"xor").join(",");
  return o+`;-webkit-mask-image:${a}!important;mask-image:${a}!important;-webkit-mask-size:${b}!important;mask-size:${b}!important;-webkit-mask-position:${c}!important;mask-position:${c}!important;-webkit-mask-repeat:no-repeat!important;mask-repeat:no-repeat!important;-webkit-mask-composite:${xw}!important;mask-composite:${im.map((_,i)=>i?"add":"exclude").join(",")}!important`}catch(e){return sty}}
@@ -347,7 +355,7 @@ window.lkScarFix=lkScarFix;
 function lkFaceClipAll(h,file){if(!h||!file)return h;return h.replace(/<img class="((?:kpox|klk|kscar|kveil2)[ "][^>]*?)style="([^"]*)"/g,(m,a,sty)=>{const sc=/^kscar[ "]/.test(a)?/scar-(\d)\.png/.exec(a):null;const o=sc?lkScarFix(file,sty,+sc[1]):sty;return m.slice(0,m.length-sty.length-1)+lkClipFor(file,o)+'"'})}
 window.lkFaceClipAll=lkFaceClipAll;window.lkClipFor=lkClipFor;
 function lkFaceImg(cls,f,st,file){if(!st)return"";if(/^fx-muc-\d\.png$/.test(f)&&lkMirror(file))f=f.replace(".png","-m.png");const m=/^fx-(muc|muoi)-/.exec(f);
- return lkArt(f)?`<img class="${cls}" src="img/${f}" alt="" aria-hidden="true" style="${kitFxVars(st)}${m?kitToneCss(m[1],null):""}${lkKeepCss()}" onerror="this.remove()">`:""}
+ return lkArt(f)?`<img class="${cls}" src="img/${f}" alt="" aria-hidden="true" style="${kitFxVars(st)}${m?kitToneCss(m[1],null):""}${lkKeepCss(file)}" onerror="this.remove()">`:""}
 /* the same face-square as KIT_RASH.style as a [l,t,w,h,deg] rect */
 function lkSquareRect(file){try{const n=String(file||"").split("/").pop(),r=KIT_VEIL.fit&&KIT_VEIL.fit[n];if(!r)return null;const W=r[2]*KIT_RASH.WX,H=W*(r[3]*480)/(r[2]*445),bandY=r[1]+KIT_VEIL.B0*r[3];return[r[0]+r[2]/2-W/2,bandY-KIT_RASH.RB*H,W,H,r[4]]}catch(e){return null}}
 function lkSquare(file){try{return KIT_RASH.style(file)}catch(e){return""}}

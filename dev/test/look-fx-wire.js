@@ -6,7 +6,7 @@ const {chromium}=require('playwright');const D=require('./lib/device');const fs=
  const srv=await D.serveRoot();const b=await chromium.launch({args:['--disable-dev-shm-usage'],proxy:process.env.HTTPS_PROXY?{server:process.env.HTTPS_PROXY,bypass:'localhost,127.0.0.1'}:undefined});
  const ctx=await D.newDeviceContext(b,dev);
  /* LFW_OVR=<dir>: serve candidate files (scar-fit.json, veil-fit.json, fx-*.png in <dir>) instead of the live CDN ones, so a candidate is judged in the game before anything goes live; LFW_ONLY=muoi,cao limits the marks (base = the figure without any mark; ask for it explicitly: LFW_ONLY=base) */
- if(process.env.LFW_OVR)await ctx.route(/\/img\/(scar-fit\.json|veil-fit\.json|face-fit\.json|fx-[a-z-]+-\d(-m)?\.png)(\?.*)?$/,r=>{const f=process.env.LFW_OVR+'/'+r.request().url().split('/').pop().split('?')[0];fs.existsSync(f)?r.fulfill({path:f,headers:{'access-control-allow-origin':'*'}}):r.continue()});
+ if(process.env.LFW_OVR)await ctx.route(/\/img\/(scar-fit\.json|veil-fit\.json|face-fit\.json|keep-fit\.json|fx-[a-z-]+-\d(-m)?\.png)(\?.*)?$/,r=>{const f=process.env.LFW_OVR+'/'+r.request().url().split('/').pop().split('?')[0];fs.existsSync(f)?r.fulfill({path:f,headers:{'access-control-allow-origin':'*'}}):r.continue()});
  const p=await ctx.newPage();const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,160)));
  const g=await D.openHost(p,srv.url);
  await g.waitForFunction(()=>typeof start==='function'&&typeof showModal==='function',null,{timeout:60000});await p.waitForTimeout(2000);
