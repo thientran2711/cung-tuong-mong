@@ -128,7 +128,7 @@
 "status": "DICE-ONLY",
 "group": "G1",
 "event": "weekly random dilemma (love letter, cold-palace letter, vase, embezzle",
-"fp": "  if(Q.length===qStart&&roll(22))pushDil(makeDil());"
+"done": "  const x=npwPick(O,y=>y.s);if(!x)return null;if(x.o){npwStamp("
 },
 {
 "f": "j3.js",
@@ -136,7 +136,7 @@
 "status": "DICE-ONLY",
 "group": "G1",
 "event": "weekly random dilemma (love letter, cold-palace letter, vase, embezzle",
-"fp": "e&&v.out))L.push(()=>{const f=pick(rivals.filter(v=>v.alive&&v.out));c"
+"done": "  const x=npwPick(O,y=>y.s);if(!x)return null;if(x.o){npwStamp("
 },
 {
 "f": "j3.js",
@@ -144,7 +144,7 @@
 "status": "DICE-ONLY",
 "group": "G1",
 "event": "weekly random dilemma (love letter, cold-palace letter, vase, embezzle",
-"fp": ".push(()=>mkP(\"loveletter\",{v:pick(pool).id}));"
+"done": "  const x=npwPick(O,y=>y.s);if(!x)return null;if(x.o){npwStamp("
 },
 {
 "f": "j7.js",
@@ -152,7 +152,7 @@
 "status": "DICE-ONLY",
 "group": "G1",
 "event": "weekly random dilemma (love letter, cold-palace letter, vase, embezzle",
-"fp": "Rivals(false);return L.length?pick(L):null};"
+"done": "ILX&&DILX.kind===k)?DILX:npcWhy(k,c);"
 },
 {
 "f": "j7.js",
@@ -160,7 +160,7 @@
 "status": "DICE-ONLY",
 "group": "G1",
 "event": "weekly random dilemma (love letter, cold-palace letter, vase, embezzle",
-"fp": ".length<2)return null;const a=pick(L);const b=pick(L.filter(x=>x!==a))"
+"done": "ILX&&DILX.kind===k)?DILX:npcWhy(k,c);"
 },
 {
 "f": "j7.js",
@@ -168,7 +168,7 @@
 "status": "DICE-ONLY",
 "group": "G1",
 "event": "weekly random dilemma (love letter, cold-palace letter, vase, embezzle",
-"fp": "Girl=rel=>{const n=newRival(1+R(2));Object.assign(n,drawFace());n.rel="
+"out": "new consort's starting rank (newGirl R(2)) — the Emperor's recruit, not an NPC act choice"
 },
 {
 "f": "j7.js",
@@ -176,7 +176,7 @@
 "status": "DICE-ONLY",
 "group": "G1",
 "event": "weekly random dilemma (love letter, cold-palace letter, vase, embezzle",
-"fp": "} · hỏng: bị phạt`,go:()=>{if(roll(p.o)){evStory(v,BAL.eff.j7.evGo_3,\""
+"out": "success odds of HER deed (roll(p.o), BAL odds) — allowed by the brief"
 },
 {
 "f": "j7.js",
@@ -184,7 +184,7 @@
 "status": "DICE-ONLY",
 "group": "G1",
 "event": "weekly random dilemma (love letter, cold-palace letter, vase, embezzle",
-"fp": "eff.j7.sungGo_2)}`,go:()=>{if(roll(od(BAL.odb.j7.odX+S.duc/3)))apply({"
+"out": "success odds of HER deed (roll(od(BAL.odb.j7.odX…))) — allowed by the brief"
 },
 {
 "f": "j3.js",
