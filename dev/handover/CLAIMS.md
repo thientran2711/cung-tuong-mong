@@ -96,4 +96,4 @@ parallel-time (ORDER ROOT-54 ~20:22Z + ADD ~20:37Z) | review/parallel-time | ses
 | MAIN ROOT-55 (opus; child of ROOT-54) | handover HANDOVER_SESSION9 | ROOT-54 | session_01Rc5AsNFnALGujUFYDSjs4g | RUNNING | 18/11 19:56Z |
 | MAIN ROOT-55 (opus; child of ROOT-54) | handover HANDOVER_SESSION9 | ROOT-54 | session_01Rc5AsNFnALGujUFYDSjs4g | RUNNING | 18/11 19:58Z |
 | kit-subtabs-overflow (sonnet KIT KEEPER: K-Q2-1 over-full kitSubTabs bar, whole group) | review/kit-subtabs-overflow | MAIN ROOT-55 | session_01Rc5AsKznwkUWfae1dJP98t | RUNNING | 18/11 20:05Z |
-| ROLE-PARITY (opus; OD 21:30Z role × act × {player,NPC}, promotion) | review/role-parity | C-AG #14 | (opening 21:35Z) | RUNNING | 18/11 21:35Z |
+| ROLE-PARITY (opus; OD 21:30Z role × act × {player,NPC}, promotion) | review/role-parity | C-AG #14 | session_01Rc5AsNHRsgq6S4C9tpNLxA | RUNNING | 18/11 21:35Z |

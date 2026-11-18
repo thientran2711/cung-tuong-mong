@@ -646,7 +646,19 @@ NEXT FOREMAN C-AG: #4 = session_01UV1SzkyZBYRFoSWBF8fg27 (opened by C-AG #3 17:3
 NEXT FOREMAN C-AG: #5 = session_01UV1SzkwHkU5MoXKRsprFyU (opened by C-AG #4 18:35Z, depth 5; prompt dev/handover/TAKEOVER_FOREMAN_C_AG5.md). C-AG #4 STOPS; wake trig_0158XmaYdhYu6GqeJWSPB6d7 disabled.
 NEXT FOREMAN C-AG: #9 = session_01UV1Szh2asyry15mvpuCEsJ (opened by C-AG #8 03:20Z, depth 4; prompt dev/handover/TAKEOVER_FOREMAN_C_AG9.md). C-AG #8 STOPS; wake trig_01TRu7DaRSREmn8KFD24wdcM disabled.
 NEXT FOREMAN C-AG: #10 = (opening by C-AG #9 04:46Z, depth 5; prompt dev/handover/TAKEOVER_FOREMAN_C_AG10.md). C-AG #9 STOPS; wake trig_016ULtkrgBBgsErLCPcqKMME disabled.
-## FOREMAN C-AG #14 (live)
+## FOREMAN C-AG #14 (rolled over 21:37Z)
+## HANDOVER C-AG #14 (session_01Rc5AsKgBX7W8FiEwCJjgBR) → C-AG #15, 21:37Z 18/11
+Why: context 37 % (START ~8 %) ≥ roll line 33 %. Depth 1 → #15 depth 2 (my child, prompt TAKEOVER_FOREMAN_C_AG15.md). My wake trig_01QHdB1CNzvp1RK8iMo88Vv9 DISABLED (#15 makes its own).
+MAIN = ROOT-55 session_01Rc5AsNFnALGujUFYDSjs4g (same account). LIVE main = 13bb8c88.
+RUNNING (my children, this account; #15 adopts them — send_message works):
+- LIVE-SERVANTS opus session_01Rc5AsM1HkYcxpG9VcjpeVt, review/live-servants, brief briefs/live-servants.md (OD L1901 pts 2+3 + OD ~19:45Z pt 4 entourage picker; roster.js --who; coordinate map-zones worker session_01Rc5AsJdJ7NfUTTcbii1sqc). Told LIVE 13bb8c88.
+- AG-DEED-PERF #2 opus session_01Rc5AsMrVSjApNAcLbKd49p: SẴN SÀNG KIỂM 9e0e1928 (diff 0/0/0, 4x per-khắc −4.5 %); waits verdict → archive after LAND.
+- REVIEW ag-deed-perf opus session_01Rc5AsKgufafrSAB6Xyw8k7 (env 'cung-tuong-mong', CDN allowed): told final-merge 13bb8c88 + MAIN ROOT-54 ruled coop-e2e BLOCKED accepted for this perf-only branch. On PASS it writes LAND READY in HANDOVER_SESSION9 + here → #15 send_message LAND READY to ROOT-55 (MAIN lands; ROOT-54 said its FF may need the owner's go).
+- ROLE-PARITY opus session_01Rc5AsNHRsgq6S4C9tpNLxA (opened 21:36Z), review/role-parity, brief briefs/role-parity.md (OD 21:30Z; start from reports/ag-all-parity.md; share table with Foreman D receiver-choice audit via FOREMAN_D_STATUS). Plan → ROOT-55 not yet sent: #15 sends it.
+- npc-purpose (D account seats, files only via FOREMAN_D_STATUS): G1 #9 session_01964izGMMUHo5FeP7TACDxE fixing RE-CHECK 3 + merging live; reviewer session_01964izEUgw5hZTBxuEguL4K. Their PASS → LAND READY line in HANDOVER_SESSION9 + here.
+- AG-DEED-PERF #1 session_01UV1SzjwvRPnDTMQuN3wnw9 (old account) silent; superseded.
+ENV NOTE: this account's envs block the co-op Worker host → coop-e2e BLOCKED everywhere here; env 'cung-tuong-mong' (env_019grJGwi91Hpq39gwwgSaVX) allows the CDN (use it for reviewers needing G3/G4).
+OPEN: THỬ TAY calibration (?hieuchuan=1 live) — owner's CTM-CAL code → dev/tools/mgcal_apply.py into BAL.ag.mg2.cal. New OD lines 18/11 ~19:50Z/~19:55Z (OD lines 1905/1906: NPC logs; Hành sự options thỉnh an…) — not yet ordered to C-AG; check with MAIN.
 FOREMAN C-AG #14 = session_01Rc5AsKgBX7W8FiEwCJjgBR (ROOT opened by MAIN ROOT-53, new account TÀI KHOẢN 3) · START_CTX ~8 % (est; window 1M; get_session reads 0) → roll over at >= 33 %, ceiling 60 % · depth 1 (limit 8) · wake trig_01QHdB1CNzvp1RK8iMo88Vv9 (:32 hourly) · reports to MAIN ROOT-53 session_01Rc5AsLiqXio6us86Hf6CvW.
 - 18:08Z C-AG #14 took over. LIVE main = d3ea24e8 (npc-chain-land LANDED; narrowed freeze lifted). send_message to AG-DEED-PERF (01UV1…, old account) + npc-purpose G1 #9 + rv #2 (01964iz…, D account) all FAIL 'not found' → relays by file:
 - **LIVE d3ea24e8 → AG-DEED-PERF session_01UV1SzjwvRPnDTMQuN3wnw9** (and C-AG #13 session_01UV1Szgvw457GueTtE27whc if still alive, please relay): merge live d3ea24e8 into review/ag-deed-perf 514143ec, re-measure 4x per-khắc vs live (outcome-identical), full gates, push, SẴN SÀNG KIỂM line here + reports/ag2-perf.md. Fallback: if no new line from it by 19:32Z, C-AG #14 opens a fresh AG-DEED-PERF worker on this account reusing 514143ec.
