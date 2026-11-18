@@ -1,8 +1,51 @@
-# ge-writers-w2 — E11b (W2: cn_* ×4 · nc_gian nc_su nc_vuong · td_* ×4) — HANDOVER (context rollover)
-PRIORITY #1 CHECK ('grand ending'): OD 5 | main engine LIVE (jge.js/jgedata.js/jbalge.js, pilots tt_co cnv_mat nc_tuc) | review/grand-endings-design r3 (catalogue §3 names/pairs/titles used as fixed) | claims: E11a W1 parallel (jgedata_w1.js untouched). Reused: engine shape of jgedata.js, ge-guard, ge-engine, ge-measure (extended, nothing rebuilt).
+# ge-writers-w2 — W2 (cn_* ×4 · nc_gian nc_su nc_vuong · td_* ×4) — READY 6e0426df (E11b → E11b2)
+PRIORITY #1 CHECK ('grand ending' / 'ge-writers-w2'): OD 5 | main engine LIVE (jge.js/jgedata.js/jbalge.js) | review/ge-writers-w2 = this branch (reused, nothing rebuilt) ; review/ge-writers-w1 df30265f (shared test block source) | claims E11b → E11b2 session_01DgYSWmfFdwEVWhdEJkhbTh.
 
-Branch `review/ge-writers-w2` = **1e499220** (merged main e18697fe). Worktree `/home/user/wt/gew2` (sparse, hooks on); scratch `/home/user/wt/gew2-work` (opts dump, road option lists r_*.txt, scan.js, measure logs).
+Branch `review/ge-writers-w2` = **6e0426df** (merged LIVE main 94d11623). No push to main, no PR. FOR B: none (every option name is a real road option; no road patch).
 
+## What E11b2 did (on top of E11b's 1e499220)
+- **Funnel fix (open endings at .11, band [1, 2.6])**, jgedata_w2.js only, one real cross-ending Khóa each = an option already on a SIBLING ending's Chuỗi at ch.7–.10 (so a player chasing that sibling closes this one; the target ending's own Chuỗi never holds it):
+  | road | ending closed | new Khóa (real option, chapter) | taken when chasing |
+  |---|---|---|---|
+  | cn_than | ge3 Mang họ mẹ đi | «Xin xét đến cùng, gọi tên kẻ tham» (.10) | ge1, ge4 |
+  | nc_su | ge3 Sứ đoàn đẫm máu | «Nhắn trước cho {pa} những điều nên gật» (.9) | ge1, ge2, ge4 |
+  | nc_vuong | ge2 Hai ngai một lòng | «Giữ mật thư, dùng khi cần» (.8) | ge1, ge4 |
+  | nc_vuong | ge4 Công chúa lưu vong | «Khuyên xuất quân giúp tân {quan} lấy lại ba thành» (.8) | ge1, ge3 |
+  | td_song | ge3 Chị em phiêu bạt | «Dâng bản ghi công của em» (.7) | ge1, ge4 |
+  Whole group: every W2 road was measured; these 4 were the only ones OUT. Chuỗi / lean lists unchanged → E11b's thiện/ác shading scan (every ending ≥ +3/−3) still holds.
+- **ONE CORE** (W1 review item a): the 44 W2 gate / fail / rw rows moved INSIDE the BAL.ge literals (one table per concept, like W1); the Object.assign block is gone. BAL.ge before/after = identical (JSON compare). one-core-guard: 44 FAIL → PASS.
+- **Shared test block** copied verbatim from review/ge-writers-w1 df30265f: dev/test/ge-guard.js, dev/test/ge-engine.js, dev/measure/ge-measure.js (road wait).
+- assemble.py = main 94d11623 list + 'jgedata_w2.js' right after 'jgedata.js'.
+
+## Measure (dev/measure/ge-measure.js, sens bot, kind + cruel lives; m2 = E11b's run on unchanged data, m5/m6/m8/m9 = E11b2 after the fixes)
+| road | lives k+c | run | in-char rate | open at .11 | kind→thiện | cruel→ác |
+|---|---|---|---|---|---|---|
+| cn_chu | 6 | m2 | .67 | 1.33 | 3/3 | 3/3 |
+| cn_tinh | 6 | m2 | .50 | 2.50 | 3/3 | 3/3 |
+| cn_ban | 6 | m2 | .83 | 2.33 | 3/3 | 3/3 |
+| cn_than | 4 | m5 | .50 | 1.75 (was 2.67 OUT) | 2/2 | 2/2 |
+| nc_gian | 6 | m2 | .67 | 1.67 | 3/3 | 3/3 |
+| nc_su | 4 | m5 | .25 | 2.00 (was 2.67 OUT) | 2/2 | 2/2 |
+| nc_vuong | 4 | m6 | .75 | 2.50 (was 2.83 OUT; m5 after 1st Khóa 2.75) | 2/2 | 2/2 |
+| td_an | 5 | m2 | .80 | 1.80 | 3/3 | 2/2 |
+| td_ke | 4 | m8 | .50 | 2.00 | 2/2 | 2/2 |
+| td_song | 4 | m9 | .50 | 2.25 (m8 2.75 OUT) | 2/2 | 2/2 |
+| td_tha | 4 | m8 | .75 | 1.75 | 2/2 | 2/2 |
+Open at .11: 11/11 IN. Shading: 11/11 roads, 44/44 lives IN. 0 page errors.
+- **Rand lives: NOT measured.** On this container a rand-bot life did not finish in 30 min (two tries, ~60 min, 0 lives; a sens life takes ~2–5 min). Pilots' rand band is the same engine numbers. For the reviewer.
+- **NOTE for reviewer (not tuned):** in-char rate is above .60 on several roads (sens bot maxes stats → gates met, odds at cap 88). Same shared BAL.ge.odds as the pilots (ONE CORE) — a Foreman E / shared decision, not a W2 data fix.
+- Memory: PAR 3 OOM-kills a page (≈4 GB each); the measure retries; use PAR 2.
+
+## Tests (6e0426df)
+- ge-guard 6/6 · ge-engine pilots 104/104 · ge-engine `all` 456/456 · one-core-guard PASS · build_site OK · **quickcheck PASS** (run alone; core gates PASS).
+- Flake note: two ge-engine runs made WHILE the bot measure ran on the same CPUs gave 71/104 and 250/456; re-runs alone pass every time (the df30265f road-wait fix targets this).
+- **3-way merge check** (W2 6e0426df + W1 df30265f, both on main 94d11623; conflicts only in assemble.py line, jbalge.js rows, built files): one-core-guard PASS · ge-guard 6/6 (25 live branches) · ge-engine all **808/808**. (Earlier W1 a58b55eb merge showed 2 W1-side clashes — dtq_binh_2.cw = pilot, tt_tranh_3.fail = cn_than_3 — fixed on W1's side.)
+
+## Files
+dev/build/jgedata_w2.js (new) · dev/build/jbalge.js (44 rows in the literals) · dev/build/assemble.py (one name) · dev/test/ge-guard.js + ge-engine.js + dev/measure/ge-measure.js (= W1 df30265f) · index.html / sw.js rebuilt.
+
+---
+## E11b history (1e499220, kept for the reviewer)
 ## What is done
 - `dev/build/jgedata_w2.js` (new): `Object.assign(GE_DATA,{…})`, 11 branches × 4 endings, shape = jgedata.js (pull/close/cond/fo/cw/t/a/ht/ha/fail/ft + lean p/m). Every option name is a REAL road/ch12–14 option (ge-guard checks all; no road patch needed → **FOR B: none**).
 - `dev/build/assemble.py`: one line, jgedata_w2.js right after jgedata.js (W1 will add jgedata_w1.js on the same line — keep both).
@@ -24,10 +67,3 @@ Branch `review/ge-writers-w2` = **1e499220** (merged main e18697fe). Worktree `/
 | nc_vuong | 6 | 1.00 | **2.83 OUT** | 3/3 | 3/3 |
 | td_an | 5 | .80 | 1.80 | 3/3 | 2/2 |
 Shading: 44/44 IN so far. Open-at-.11 band [1,2.6]: 3 roads just above. In-char rate above .60 on most roads (sens bot maxes stats → gates always met, odds at cap 88) — same engine numbers as pilots; not tuned (BAL.ge.odds is shared ONE CORE; report to Foreman E).
-
-## NEXT STEPS (successor)
-1. Wait for the running measure (nohup; logs `/home/user/wt/gew2-work/m2.log` then `m3.log` rand lives; `ALLDONE` at the end of m3.log). Do NOT start another heavy job meanwhile (OOM kills at PAR 3).
-2. Fill the full per-road table (kind/cruel + rand) from m2/m3 (`REPORT` + `IN/OUT shade <road>` lines).
-3. open11 OUT roads (cn_than, nc_su, nc_vuong, + any from the rest): add 1 more Khóa (real option, a chapter .6–.10 fork) to an ending of each, in jgedata_w2.js only; re-run guard + `MODES=kind,cruel node dev/measure/ge-measure.js - 2 2 out.json <those roads> sens`.
-4. `bash dev/site/build_site.sh`, then `bash dev/tools/quickcheck.sh` ALONE; commit, push.
-5. Finish this report (final table, sha), CLAIMS row, send «SẴN SÀNG KIỂM ge-writers-w2 <sha>» to Foreman E ROOT #4 session_01DgYSWokbRMfu3opDuSCw15.
