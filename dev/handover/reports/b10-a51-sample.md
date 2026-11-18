@@ -20,3 +20,9 @@ Gen log (creation ids): ids in scratch c03/ids.txt (v0 t1 6AqPm0qiJO ...).
 ## HANDOVER (rollover)
 Next: wait Foreman C OK, then c04 then c12 same method. Steps: upload 8 live a51 as image refs (creations_upload_image, folder ba4aecfe), 24 gens (3 batches of 8 parallel), creations_get urls -> dlmap.py, view rows, sheets via PIL, cdn_sync from scratch root (copy cdn_sync.py+manifest_guard.py from origin/main).
 Prompt template: see c03 prompts (v0: "copy EXACTLY ... change ONLY the standing pose ... muted, toned-down colours (lower saturation, softly greyed), not dark, not deep, not heavy"; v1/v2 add "change ONLY the robe colour to muted <colour>").
+
+## c03 FIX round (Foreman C order 15:57Z)
+Removed forehead dot t4-t7 (all versions) + replaced t6 phoenix by flowers/cranes/butterflies: 12 regens, 1 gen each, all pass by eye (total c03 gens = 37). Old kept locally as *_prev_dot_phx (not stored in git/CDN).
+Open flag: t5 v0 still shows a faint phoenix-like bird near the hem (original); not reported by Foreman, check.
+## HANDOVER v2 — W64 near rollover; successor does c04 then c12
+Apply from the start: bare forehead (no dot), no phoenix on t1-t6 robes (flowers/cranes/butterflies), t7/t8 keep phoenix; copy the live a51 exactly, change only pose (+robe colour v1/v2: dusty rose-mauve, dusty slate blue; t7 main colour + deeper golden yellow parts; t8 v1/v2 muted golden yellow mixed with rose/blue; t8 v0 = original). Scratch root for CDN: /home/user/wt/w64-work/cdnroot (may be gone; rebuild from origin/main dev/site/cdn_sync.py + manifest_guard.py).
