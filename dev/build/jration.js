@@ -35,7 +35,7 @@ Object.assign(BAL,{ration:{on:true,
  borrow:{base:25,aff:2,ghen:10,whim:20,fail:-2,spare:2,trait:{"Ân cần":15,"Khiêm nhường":10,"Kín đáo":0,"Xảo quyệt":-5,"Tham vọng":-10,"Kiêu ngạo":-15}},
  beg:{hh:15,th:10,stat:2,fail:-3,cd:2},/* xin Hoàng hậu / Thái hậu: base + stat/2 (jveil xin road); fail costs favour; once per cd months */
  steal:{danh:-4,duc:-2,oan:10,cut:1,add:10},/* caught stealing: Danh, Đức, the victim's oán, bổng khất 1 month; odds = plant odds + add */
- npc:{use:3,buy:50,borrow:40,steal:12,stealGhen:50,ask:25,askAff:10},/* NPC month: lượt spent per part; chance to buy / borrow / steal when out; ask her */
+ npc:{use:3,buy:50,askAff:10},/* NPC month: lượt spent per part; chance to buy when out (borrow / beg / steal / ask her = day-plan choices, jagacts4); askAff = thiện cảm her «Chia» answer wins */
  allergy:{rel:2,chiW:[.3,.45,.25],nguaW:[.2,.45,.35]},/* a tainted box at the sitting → the ONE rash system (jrash rashGive: timed, picture, Thái y): severity weights for pha chì / bột ngứa; the first use of a clean box rolls RASH.cos like any son phấn; rel = her oán toward the one who tainted it */
  tribute:{ch:{promo:60,son:60,contest:35,birthday:50,sinhthan:50,night:5},ghen:3}}});
 const LX_KD="Son phấn";
@@ -131,22 +131,34 @@ function lxRush(){const c=lxRushCost();if(!lxOn()||(S.bac||0)<c)return;const M=l
  log(`Ngươi sai người mua gấp ở Nội vụ phủ: ${E.map(lxName).join(", ")}. Bạc -${c}.`);try{save()}catch(e){}}
 /* ---------- 4. roads: borrow (rival visit), beg (Hoàng hậu / Thái hậu), steal (a rival's chest) ---------- */
 function lxLend(v,part){const L=lxBoxes(v,part);if(!L.length)return null;const tot=L.reduce((a,e)=>a+e.u,0);return tot>=BAL.ration.borrow.spare?L.slice().sort((a,b)=>b.u-a.u)[0]:null}
-function lxBorrowOdds(v){const B=BAL.ration.borrow;let o=B.base+Math.round(aff(v,S)/B.aff)-Math.round((v.ghen||0)/B.ghen);for(const t of traitsOf(v))o+=B.trait[t]||0;
+function lxBorrowOdds(v,p){p=p||S;const B=BAL.ration.borrow;let o=B.base+Math.round(aff(v,p)/B.aff)-Math.round((v.ghen||0)/B.ghen);for(const t of traitsOf(v))o+=B.trait[t]||0;
  o+=Math.round((lxHash(`${v.id}:${toilWk()}`)%(2*B.whim+1))-B.whim);return cl(o,5,95)}
 function lxGive(from,to,e,how){const r=lxOf(e.k);const n=how==="half"?Math.max(1,Math.ceil(e.u/2)):e.u;e.u-=n;if(e.u<=0)from.inv.splice(from.inv.indexOf(e),1);
  const g={k:e.k,c:e.c,u:n,from:how==="steal"?"steal":"borrow",d:S.turn};if(from!==S)g.giver=from.name;if(e.t){g.t=e.t;g.by=e.by}to.inv=to.inv||[];to.inv.push(g);return g}
-(function(){if(typeof talkOpts!=="function")return;const t0=talkOpts;talkOpts=function(p){const A=t0.apply(this,arguments);try{if(!lxOn()||!S||S.dead||!Array.isArray(A))return A;const M=lxMiss(S);
-  if(p&&p.kind==="rival"&&p.ref&&!p.ref.coop){const v=p.ref;const lend=M.map(part=>[part,lxLend(v,part)]).find(x=>x[1]);const od=lxBorrowOdds(v);
-   A.push({n:"Mượn son phấn",o:od,lock:!M.length||!lend,t:!M.length?"son phấn còn đủ":"nàng không có thứ ngươi thiếu",x:`${word(od)} · thành: nàng chia cho ngươi một nửa hộp ${lend?TOIL_COL[lend[0]].label.toLowerCase():"còn thiếu"} · hỏng: thiện cảm ${BAL.ration.borrow.fail} · tùy nàng quý ngươi, nết, cơn ghen và hứng hôm nay`,
-    run:()=>{if(!lend)return"";if(roll(od)){const g=lxGive(v,S,lend[1],"half");return `${v.name} chia cho ngươi ${lxName(g)} (${g.u} lần dùng).`}affAdd(v,S,BAL.ration.borrow.fail);return `${v.name} khéo từ chối. Thiện cảm ${BAL.ration.borrow.fail}.`}})}
-  if(p&&(p.kind==="hh"||p.kind==="th")){const B=BAL.ration.beg,st=S.lxBeg||(S.lxBeg={}),hh=p.kind==="hh";const od=cl((hh?B.hh:B.th)+Math.round((hh?S.hh:S.th)/B.stat),5,95);const cd=st[p.kind]!=null&&S.turn-st[p.kind]<B.cd;
-   const nm=hh?"Hoàng hậu":"Thái hậu";const part=M[0];const t=BAL.ration.tier[Math.min(7,S.rank)];
-   A.push({n:"Xin son phấn",o:od,lock:!M.length||cd,t:!M.length?"son phấn còn đủ":`vừa xin rồi, ${B.cd} tháng mới xin lại`,x:`${word(od)} · thành: ${nm} ban một hộp ${part?TOIL_COL[part].label.toLowerCase():"còn thiếu"} · hỏng: ${hh?"Hoàng hậu":"Thái hậu"} ${B.fail}`,
-    run:()=>{st[p.kind]=S.turn;if(!part)return"";if(roll(od)){const n=goodsGive(S,lxKey(part,t),{from:p.kind});lxFix(S);return `${nm} ban cho ngươi ${n}.`}apply(hh?{hh:B.fail}:{th:B.fail});return `${nm} cho là ngươi không biết giữ phận. ${nm} ${B.fail}.`}})}
-  if(p&&p.kind==="chest"&&p.ref&&!sameHouse(S,p.ref)){const v=p.ref;const L=BAL.ration.parts.map(part=>lxLend(v,part)).filter(Boolean);const od=cl((typeof oPlant==="function"?oPlant(S,v):30)+BAL.ration.steal.add,5,95);const ST=BAL.ration.steal;
-   A.push({n:"Lấy trộm son phấn",o:od,act:1,lock:!L.length,t:"rương nàng không có son phấn",x:`${word(od)} · thành: lấy một hộp son phấn của nàng · hỏng: bị bắt, Danh ${ST.danh}, Đức ${ST.duc}, nàng oán ${balSg(ST.oan)}, Nội vụ phủ khất bổng ${ST.cut} tháng`,
-    run:()=>{if(!L.length)return"";const e=L.find(x=>M.includes(lxOf(x.k).part))||L[0];if(roll(od)){const g=lxGive(v,S,e,"all");try{newsAdd(v,"lx",`${rkName(v)} ${v.name} mất một hộp son phấn trong rương`,false)}catch(x){}return `Ngươi lấy được ${lxName(g)} trong rương ${v.name}.`}
-     lxCaught(S,v);return `<span class="r">Ngươi bị bắt quả tang lục rương ${v.name}.</span> Danh ${ST.danh}, Đức ${ST.duc}.`}})}
+/* ONE builder per road (role-parity part 2, law 1 + law 4): her talk cards (rival visit / Hoàng hậu, Thái hậu / a rival's chest) and an NPC
+   consort's day-plan options cx4:rougeBorrow / rougeBeg / rougeSteal (jagacts4) — the SAME odds function of the doer, the same gain and loss.
+   An NPC who asks HER is the receiver side: her answer card (lxAskHer), never a dice in her place. */
+const lxNm=p=>p===S?"ngươi":p.name;
+function lxBorrowCard(p,v){const M=lxMiss(p);const lend=M.map(part=>[part,lxLend(v,part)]).find(x=>x[1]);const od=lxBorrowOdds(v,p);
+ return{n:"Mượn son phấn",o:od,lock:!M.length||!lend,t:!M.length?"son phấn còn đủ":"nàng không có thứ ngươi thiếu",x:`${word(od)} · thành: nàng chia cho ngươi một nửa hộp ${lend?TOIL_COL[lend[0]].label.toLowerCase():"còn thiếu"} · hỏng: thiện cảm ${BAL.ration.borrow.fail} · tùy nàng quý ngươi, nết, cơn ghen và hứng hôm nay`,
+  run:()=>{if(!lend)return"";if(v===S){lxAskHer(p,lend[0]);return `${p.name} sai người sang xin ngươi ${TOIL_COL[lend[0]].label.toLowerCase()}`}
+   if(roll(od)){const g=lxGive(v,p,lend[1],"half");if(p!==S)lxFix(p);return `${v.name} chia cho ${lxNm(p)} ${lxName(g)} (${g.u} lần dùng).`}affAdd(v,p,BAL.ration.borrow.fail);return `${v.name} khéo từ chối${p===S?"":" "+p.name}. Thiện cảm ${BAL.ration.borrow.fail}.`}}}
+function lxBegOdds(p,kind){const B=BAL.ration.beg,hh=kind==="hh";return cl((hh?B.hh:B.th)+Math.round(((hh?p.hh:p.th)||0)/B.stat),5,95)}
+function lxBegCd(p,kind){const st=p.lxBeg||{};return st[kind]!=null&&S.turn-st[kind]<BAL.ration.beg.cd}
+function lxBegCard(p,kind){const B=BAL.ration.beg,hh=kind==="hh",M=lxMiss(p);const od=lxBegOdds(p,kind),cd=lxBegCd(p,kind);const nm=hh?"Hoàng hậu":"Thái hậu";const part=M[0];const t=BAL.ration.tier[Math.min(7,p.rank||0)];
+ return{n:"Xin son phấn",o:od,lock:!M.length||cd,t:!M.length?"son phấn còn đủ":`vừa xin rồi, ${B.cd} tháng mới xin lại`,x:`${word(od)} · thành: ${nm} ban một hộp ${part?TOIL_COL[part].label.toLowerCase():"còn thiếu"} · hỏng: ${nm} ${B.fail}`,
+  run:()=>{(p.lxBeg=p.lxBeg||{})[kind]=S.turn;if(!part)return"";if(roll(od)){let n;if(p===S)n=goodsGive(S,lxKey(part,t),{from:kind});else{const e={k:lxKey(part,t),from:kind,d:S.turn};(p.inv=p.inv||[]).push(e);n=lxName(e)}lxFix(p);return `${nm} ban cho ${lxNm(p)} ${n}.`}
+   const f=hh?{hh:B.fail}:{th:B.fail};if(p===S)apply(f);else ap(p,f);return `${nm} cho là ${lxNm(p)} không biết giữ phận. ${nm} ${B.fail}.`}}}
+function lxStealOdds(p,v){return cl((typeof oPlant==="function"&&v.maid?oPlant(p,v):30)+BAL.ration.steal.add,5,95)}
+function lxStealCard(p,v){const M=lxMiss(p);const L=BAL.ration.parts.map(part=>lxLend(v,part)).filter(Boolean);const od=lxStealOdds(p,v);const ST=BAL.ration.steal;
+ return{n:"Lấy trộm son phấn",o:od,act:1,lock:!L.length,t:"rương nàng không có son phấn",x:`${word(od)} · thành: lấy một hộp son phấn của nàng · hỏng: bị bắt, Danh ${ST.danh}, Đức ${ST.duc}, nàng oán ${balSg(ST.oan)}, Nội vụ phủ khất bổng ${ST.cut} tháng`,
+  run:()=>{if(!L.length)return"";const e=L.find(x=>M.includes(lxOf(x.k).part))||L[0];if(roll(od)){const g=lxGive(v,p,e,"all");if(p!==S)lxFix(p);
+    if(v===S)lxStolenNote(p,g);else try{newsAdd(v,"lx",`${rkName(v)} ${v.name} mất một hộp son phấn trong rương`,false)}catch(x){}return p===S?`Ngươi lấy được ${lxName(g)} trong rương ${v.name}.`:`${p.name} lấy được ${lxName(g)} trong rương ${lxNm(v)}`}
+   lxCaught(p,v);return p===S?`<span class="r">Ngươi bị bắt quả tang lục rương ${v.name}.</span> Danh ${ST.danh}, Đức ${ST.duc}.`:`${p.name} bị bắt quả tang lục rương ${lxNm(v)}`}}}
+(function(){if(typeof talkOpts!=="function")return;const t0=talkOpts;talkOpts=function(p){const A=t0.apply(this,arguments);try{if(!lxOn()||!S||S.dead||!Array.isArray(A))return A;
+  if(p&&p.kind==="rival"&&p.ref&&!p.ref.coop)A.push(lxBorrowCard(S,p.ref));
+  if(p&&(p.kind==="hh"||p.kind==="th"))A.push(lxBegCard(S,p.kind));
+  if(p&&p.kind==="chest"&&p.ref&&!sameHouse(S,p.ref))A.push(lxStealCard(S,p.ref));
  }catch(e){console.error("rt talk",e)}return A}})();
 function lxCaught(a,v){const ST=BAL.ration.steal;ap(a,{danh:ST.danh});if(typeof ducAdd==="function")ducAdd(a,ST.duc,"trộm son phấn");else ap(a,{duc:ST.duc});try{oanAdd(v,a,ST.oan)}catch(e){}a.cutPay=Math.max(a.cutPay||0,ST.cut);a.cutBy="Nội vụ phủ"}
 /* ---------- NPCs: the same rule at the month tick (spend, run out → buy / borrow / steal, ask her) ---------- */
@@ -154,15 +166,12 @@ function lxNpcOk(v){return !!v&&v!==S&&!v.coop&&v.alive!==false&&!v.out&&!(typeo
 /* the past month's sittings (BAL.ration.npc.use lượt per part), spent before the new issue */
 function lxNpcSpend(v){if(!lxNpcOk(v))return;const N=BAL.ration.npc;
  for(const part of BAL.ration.parts){let left=N.use;for(const e of lxBoxes(v,part).sort((a,b)=>a.u-b.u)){const n=Math.min(left,e.u);e.u-=n;left-=n;if(e.u<=0)v.inv.splice(v.inv.indexOf(e),1);if(!left)break}}}
-/* after the issue: a part still missing → buy (her own rank's price, law C) / borrow / ask her / steal */
+/* after the issue: a part still missing → buy at her own rank's price (law C). Borrow / ask her / beg / steal are no longer monthly dice:
+   they are the NPC's own day-plan choices with the player's odds (jagacts4 cx4:rouge*, role-parity part 2, canon overwrite). */
 function lxNpcMonth(v){if(!lxNpcOk(v))return;const N=BAL.ration.npc;
- const asked=[];for(const part of lxMiss(v)){const tt=lxTierOf(v),pr=lxPrice(v,tt);
-  if((v.bac||0)>=pr*2&&roll(N.buy)){ap(v,{bac:-pr});v.inv.push({k:lxKey(part,tt),from:"buy",d:S.turn});continue}
-  const fr=consorts().filter(x=>x!==v&&x!==S&&!x.out&&x.alive!==false&&aff(x,v)>=N.askAff&&lxLend(x,part)).sort((a,b)=>aff(b,v)-aff(a,v))[0];if(fr&&roll(N.borrow)){lxGive(fr,v,lxLend(fr,part),"half");continue}
-  if(lxLend(S,part)&&aff(v,S)>=N.askAff&&roll(N.ask)){asked.push(part);continue}
-  if(((v.ghen||0)>=N.stealGhen||traitsOf(v).includes("Xảo quyệt"))&&roll(N.steal)){const vic=[S].concat(consorts().filter(x=>x!==v&&!x.out&&x.alive!==false)).filter(x=>lxLend(x,part)).sort((a,b)=>(b.lxBest||0)-(a.lxBest||0)||(b===S)-(a===S))[0];
-   if(vic){const e=lxLend(vic,part);const g=lxGive(vic,v,e,"all");if(vic===S)lxStolenNote(v,g);else try{newsAdd(vic,"lx",`${rkName(vic)} ${vic.name} mất hộp son phấn, có kẻ lén lấy`,false)}catch(x){}}}}
- lxFix(v);if(asked.length)lxAskHer(v,asked[0])}
+ for(const part of lxMiss(v)){const tt=lxTierOf(v),pr=lxPrice(v,tt);
+  if((v.bac||0)>=pr*2&&roll(N.buy)){ap(v,{bac:-pr});v.inv.push({k:lxKey(part,tt),from:"buy",d:S.turn})}}
+ lxFix(v)}
 /* she always gets a clue when an NPC steals from her (never an invisible loss); who did it only through Tai mắt (newsAdd) */
 function lxStolenNote(v,g){try{log(`<span class="r">Một hộp ${lxName(g)} trong rương ngươi không cánh mà bay.</span>`);newsAdd(v,"lx",`${rkName(v)} ${v.name} sai người lấy hộp son phấn trong rương ngươi`,false)}catch(e){}}
 /* two-way: a consort asks HER (an event card; her answer is remembered as thiện cảm) */

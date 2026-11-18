@@ -1,5 +1,5 @@
 /* ag2perf-deeds (review/ag2-perf, MAIN ROOT-52 18/11 deeds floor): NPC deeds per N buổi, counted like REVIEW AG LATER #2:
-   AG.stat.land + AG2.stat.land + AG3.stat.land + jagstaff landings (window.__asN.n) + every deedAdd call (split: me / consort / servant / other); split = agLand0 consort vs non-consort doer, asRun close (master = a consort or her) vs far staff.
+   AG.stat.land + AG2.stat.land + AG3.stat.land + AG4.stat.land (role-parity part 2, jagacts4) + jagstaff landings (window.__asN.n) + every deedAdd call (split: me / consort / servant / other); split = agLand0 consort vs non-consort doer, asRun close (master = a consort or her) vs far staff.
    Same deterministic harness as ag2perf-diff (seeded Math.random + crypto, frozen clock, bot life, placeWhere + agFlush + nextBuoi).
    usage: [PRE='BAL.ag.day.redecideCap=12'] node dev/test/ag2perf-deeds.js <index.html> <N> <seed>   → one JSON line */
 const {chromium}=require('playwright');const [,,F,N0,SD]=process.argv;const N=+N0||160,SEED=+SD||1;
@@ -16,9 +16,9 @@ const r=await p.evaluate(([n,PRE])=>{if(PRE)(0,eval)(PRE);
  if(typeof asRun==='function'){const a0=asRun;window.asRun=asRun=function(q){try{let m=null;try{m=ownerOf(q)}catch(e){}if(m)LS.asClose++;else LS.asFar++}catch(e){}return a0.apply(this,arguments)}}
  __reseed();__reseedC();localStorage.clear();SLOT=4;document.getElementById('title').hidden=true;window.__nlInner=1;let g=0;do{start();g++}while(isSrv()&&g<30);window.__nlInner=0;window.__bot=1;quiet=false;Q.length=0;try{deal()}catch(e){}
  window.render=render=function(){};window.showModal=showModal=function(){};
- const L=()=>({ag:(window.AG&&AG.stat.land)||0,ag2:(window.AG2&&AG2.stat.land)||0,ag3:(window.AG3&&AG3.stat.land)||0,as:(window.__asN&&__asN.n)||0});
+ const L=()=>({ag:(window.AG&&AG.stat.land)||0,ag2:(window.AG2&&AG2.stat.land)||0,ag3:(window.AG3&&AG3.stat.land)||0,ag4:(typeof AG4==='object'&&AG4.stat.land)||0,as:(window.__asN&&__asN.n)||0});
  const a=L();for(const k in D)D[k]=0;for(const k in LS)LS[k]=0;
  for(let i=0;i<n&&!S.dead;i++){Q.length=0;S.mg=0;try{placeWhere();if(typeof agFlush==='function')agFlush()}catch(e){}try{nextBuoi()}catch(e){}Q.length=0}
- const z=L(),o={};for(const k in z)o[k]=z[k]-a[k];o.deedAdd=D;o.split=LS;o.land=o.ag+o.ag2+o.ag3+o.as;o.total=o.land+D.consort+D.srvC+D.srvO+D.other;
+ const z=L(),o={};for(const k in z)o[k]=z[k]-a[k];o.deedAdd=D;o.split=LS;o.land=o.ag+o.ag2+o.ag3+o.ag4+o.as;o.total=o.land+D.consort+D.srvC+D.srvO+D.other;
  o.at=[S.turn,S.buoi];o.dead=!!S.dead;o.rd=typeof AGD==='object'?AGD.stat.rd||null:null;return o},[N,process.env.PRE||'']);
 r.errs=errs.slice(0,3);r.seed=SEED;r.pre=process.env.PRE||'';console.log(JSON.stringify(r));await b.close()})();
