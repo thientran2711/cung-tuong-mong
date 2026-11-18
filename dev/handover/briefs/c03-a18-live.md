@@ -1,0 +1,9 @@
+# BRIEF c03-a18-live (Foreman C ROOT-22, 18/11 09:35Z) — sonnet worker
+PRIORITY #1 CHECK ('c03 a18 live'): OD 0 | ledger 0 | claims 1 (W40 B10 painting only, archived) | main 0 | review/* 0 | archive 0
+ORDER (MAIN ROOT-47 06:40Z, HOLD lifted by MAIN ROOT-50 09:08Z; FOREMAN_C_STATUS.md lines "(18/11 06:40Z)" and "(18/11 09:08Z)" — read them verbatim): c03 a18 t1–t8 B8 set (OWNER-APPROVED: CDN img/_review/consort-tiers/c03/b8/c03_a18_t{1..8}.png, 1520x2688 transparent; NOT the *_prev.png files) → GO LIVE:
+1. Read first: dev/rules/START_CORE.md + START_WORKER.md + START_ART.md (handover branch claude/cung-tuong-mong-handover-hj0h8w), dev/kit/KIT.md figure/frame parts on main, dev/site/cdn_sync.py + dev/site/manifest_guard.py on main.
+2. Make game sizes (fig / fig-hd / tn webp) with the SAME canvas rules, names and sizes as the live c01/c05/c12 sets (copy their pipeline; find it with git grep on main — reuse, never a new script if one exists). Head-top rows (img/fig-ht.json) via dev/art/headtop/headtop.py.
+3. Manifest entries FIGURES / FIGURES-hd; run manifest_guard --live-check + the never-shrink guard; push to CDN (CLOUDFLARE_API_TOKEN=proxy-injected).
+4. LOOK in game 3x: Fold 755x1000@2 + iPad 1180x820@2, full body, in the NEW full-body frame (main 33e98993 fullbody-frame r5+s2). Look at every shot yourself.
+5. Code/manifest changes go to branch review/c03-a18-live (based on newest origin/main); NEVER push main. Report dev/handover/reports/c03-a18-live.md on the handover branch: shot URLs, manifest file names, sha, list of which approved sets (c01, c05, c12) are already live. Then send_message your foreman (Foreman C ROOT-22 session_011xDdVSsGie6NhHtnAStCBn) "READY c03-a18-live <sha>".
+Disk: sparse worktrees under /home/user/wt, fetch --depth=30 under flock /home/user/wt/fetch.lock. Kit-first: no custom frames/CSS. Roll over at START_CTX+25% (ceiling 60%): write handover in the report, tell your foreman.

@@ -55,3 +55,4 @@ poison-road-fix | review/poison-road-fix | session_01964izENMh7RgrvjTLQsBZa | RU
 odds-cap-r2 | review/odds-cap-r2-rv | session_01964izFjKYQX8MLy9amEugm | LIVE 5cbfd620 | 18/11 09:23Z | owner D #1
 | E9 QUESTLINE Q3 helpers in her road (opus; D-Q1=1 OD L1876) | review/questline-q3 | E ROOT #3 | session_01DgYSWnjvT7tLSRk7kckeRH | RUNNING | 18/11 09:32Z |
 | KIT .kpb shrink fix (whole kpanel picker family; live bug; KIT REQUEST from D poison-road review) (sonnet; brief briefs/root50-kit-kpb.md) | review/kit-kpb | MAIN ROOT-50 | session_01UV1SzmDYo7maUqr1RbcypR | RUNNING | 18/11 09:38Z |
+| c03-a18-live (B8 set → game sizes + manifest + CDN + LOOK; order MAIN ROOT-47/ROOT-50) | review/c03-a18-live | C ROOT-22 | (opening) | RUNNING | 18/11 09:36Z |
