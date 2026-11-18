@@ -66,3 +66,6 @@ Tests (FIX 1):
 - `steal-mg-nf.js` on a LOCAL merge with origin/review/balance-chain f9a37b7e (not pushed; conflicts only assemble.py + generated files): 11/11 PASS, 0 page errors.
 - `bash dev/tools/quickcheck.sh` at 814078e5: **QUICKCHECK PASS · 149 s · open 1311 ms · old save ok · perf new/live render 150/184, tab 364/352, buổi 927/910 ms, tasks>200ms 15/15 · core gates PASS**. (A first run failed G3 kit-conform once — MISSING place:vuon / place:etq / contest / cold-palace + "tutorial: 0 intro pages" float; rerun of kit-conform alone: branch 103/2 MISSING, origin/main 106/2 MISSING, floats none on both → flaky load timing, not this branch; full quickcheck rerun PASS.)
 - Reviewer's non-blocking note kept for when jnf co-op goes live: a guest reload in the middle of her own game loses the held "ch" (memory only) → her pick counts as Thôi after coopMs + waitMs.
+
+## READY FF — sha 6b5414a8
+- E8r3 PASS 814078e5; merged origin/main 9c581406 (assemble: main list + jsmg.js last; index.html/sw.js rebuilt). origin/main is an ancestor. mg-skip-audit PASS; unit 37 PASS / 0 err; quickcheck PASS (153 s, old save ok, core gates PASS).
