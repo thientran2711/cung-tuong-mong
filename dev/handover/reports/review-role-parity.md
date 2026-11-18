@@ -73,3 +73,31 @@ Branch review/role-parity-r2 = f2b8fb0c + live main e16e1d6 (assemble.py: main's
 Open for a successor (not blocking): the 150 baseline rows (mostly probe limits, §4.3 of the worker report) + per-rank target worlds (b).
 - (18/11 ~23:00Z) REVIEWER role-parity (opus): LAND READY e12a91c82d5c1980cdda757c0c1b946f38b76629 (review/role-parity-r2 = f458b20 + final-merge LIVE ddbf9c7; quickcheck PASS + role-parity.test ALL PASS on this sha). coop-e2e BLOCKED = sandbox proxy only: the live co-op Worker ctm-coop.victoria-tntt.workers.dev is refused (CONNECT 403), the test cannot start. The branch touches NO co-op/sync file (no jcoop*/COOPW/sw sync code); its new code is host-only (agReg/agRunReg providers skip x.coop guests, as before) and adds NPC record fields (v.cyHide, v.kidGuard, v.lxBeg, m.tw/lw/afw) that ride in the host world. Quickcheck's coop-one-world probe PASSED, but a live two-browser co-op run of these fields is untested.
 - (18/11 ~23:10Z) REVIEWER role-parity (opus): LAND READY f2f5c069017639eab6a9ef01374f50e2ce862d0e (review/role-parity-r2 = e12a91c + final-merge LIVE 53544bd8 coop-thin-f1; quickcheck PASS on this sha; replaces e12a91c). coop-e2e BLOCKED = sandbox proxy 403 to the co-op Worker only; branch touches no co-op/sync file.
+
+
+# RE-CHECK r3 — part-1 fix (b) by ROLE-PARITY #3 72fbb3fb — 18/11 ~23:40Z: **PASS → LAND READY #2 1d29d229168ee6751ff36d924def45e0fbfa15fa** (supersedes #1 f2f5c069, which it contains; #1 was not landed)
+PRIORITY #1 CHECK: OD 18/11 ~21:30Z | main 1130a49e (live at verdict) | review/role-parity-2 72fbb3fb, review/role-parity-r2 f2f5c069 | claims ROLE-PARITY #3 done.
+Branch review/role-parity-r3 = f2f5c069 (LAND READY #1) + merge 72fbb3fb + final-merge LIVE 1130a49e (coop-c4-stuck) + rebuilt.
+- Merge: 72fbb3fb changes only dev/tools (scan, open/exempt json, table) + dev/test/role-parity.test.js — NO game code. Test conflict resolved: reviewer side-key test kept, OPEN_MAX = 111 (= merged baseline); one «Chuyện cũ» exempt kept (#3's).
+- (b) code: TARGET LADDER — one fixed target set at every rank (Đáp ứng … Hoàng quý phi + Hoàng hậu seat), as-is and in the deed's state (same place HA.here, a stealable piece, an oán to a third person, no slap mark), applied by the SAME ladder() to her gates and the NPC gates (symmetric, cannot favour one side); staff-state world for the household acts; AG.sc cache reset per probe; no network in the scan page. Restores every mutated field (finally/UNDO). Laws: tool only, no player-visible text, no numbers (law 4 n/a), law 1 judged symmetrically.
+- Gates on 1d29d229: quickcheck **PASS** (core gates incl. one-core-guard + coop-one-world; perf ≈ live); role-parity.test **ALL PASS** (0 new gaps, baseline 111 ≤ OPEN_MAX 111, promotion EXACT both sides, riseCore numbers); 2 full scans byte-identical; ag-all 21/21. (One earlier quickcheck on 731757ab failed coop-one-world while 2 scans ran in parallel; both seeds then PASS alone on r3 and r2, and the final quickcheck PASS includes it → load flake.)
+- Game code = LAND READY #1 + live main's own changes, so #1's results stand: ag-stf2 + 13 ag-*.test + ag-par3 PASS, agmaid 1 FAIL pre-existing on main, deeds seeds 1–4 −1.3 %.
+- coop-e2e BLOCKED = sandbox proxy only (CONNECT 403 to ctm-coop.victoria-tntt.workers.dev); the branch touches no co-op/sync file; new NPC record fields (v.cyHide, v.kidGuard, v.lxBeg, m.tw/lw/afw) ride in the host world, untested in a live 2-browser co-op run.
+
+## FINAL OPEN ROWS (role-parity-open.json, for Foreman B's B3): count | family | side key
+TOTAL 111
+27 | lessons / kid teaching (art-tab + j53 kid card buttons not probed) | N-ONLY cx3:teachD, N-ONLY cx3:teachV, N-ONLY cx:study
+25 | item-detail menu acts (itemAct not probed) | N-ONLY cx3:sell, N-ONLY cx3:test, P-ONLY cx3:use
+16 | harm deeds (target/state per rank) | N-ONLY harm:accuse, N-ONLY harm:banphe, N-ONLY harm:expose, P-ONLY harm:gift, N-ONLY harm:tieuhuy, N-ONLY harm:trinhth, N-ONLY harm:uyhiep, P-ONLY harm:xinhh
+16 | maid column (NPC maid state in s.st / master away) | P-ONLY harm:spyk, P-ONLY maid:accuse, N-ONLY maid:ask, N-ONLY maid:beside, P-ONLY maid:betray, N-ONLY maid:books, N-ONLY maid:empTea, P-ONLY maid:errand, N-ONLY maid:follow, P-ONLY maid:frame, P-ONLY maid:gift, P-ONLY maid:groom, P-ONLY maid:med, P-ONLY maid:rest, P-ONLY maid:tellMis, P-ONLY maid:tonic
+9 | cx3:facDiv | P-ONLY cx3:facDiv
+4 | defence orders (cx3:def_*) | P-ONLY cx3:def_canh, P-ONLY cx3:def_giuchung, P-ONLY cx3:def_theodoi, P-ONLY cx3:def_thudoc
+3 | Empress acts needing evidence / over-rank items | P-ONLY hh:conf, P-ONLY hh:cutpay, P-ONLY hh:judge
+2 | cx2:chest | N-ONLY cx2:chest
+2 | cx3:talkGossip | P-ONLY cx3:talkGossip
+2 | cx4:rougeSteal | N-ONLY cx4:rougeSteal
+1 | cx2:maidTalk | P-ONLY cx2:maidTalk
+1 | household staff acts (cx3:staff*) | P-ONLY cx3:staffHoi
+1 | cx4:rougeBorrow | N-ONLY cx4:rougeBorrow
+1 | cx:hhShield | P-ONLY cx:hhShield
+1 | cx:maidR | P-ONLY cx:maidR
