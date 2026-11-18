@@ -16,7 +16,7 @@ const res=[];const ok=(c,m,x)=>{res.push([!!c,m]);console.log((c?'ok  ':'FAIL')+
 const sleep=ms=>new Promise(r=>setTimeout(r,ms));
 const DCL={waitUntil:'domcontentloaded'};
 async function mk(b,name,vp){const ctx=await b.newContext({viewport:{width:vp[0],height:vp[1]},deviceScaleFactor:vp[2],hasTouch:true,isMobile:vp[0]<1100,reducedMotion:'reduce'});
-  await serve(ctx);await ctx.addInitScript(u=>{window.COOP_URL=u},WURL);
+  await serve(ctx);await ctx.addInitScript(([u,w])=>{window.COOP_URL=u;if(w)try{localStorage.setItem('ctm-thin',String(w))}catch(e){}},[WURL,name==='host'&&process.env.THIN?+process.env.THIN:0]);/* THIN=<level>: the host asks for that thin room level (coop-thin-e: 5) */
   const o={ctx,name,errs:[]};o.page=async()=>{const p=await ctx.newPage();p.setDefaultTimeout(30000);p.setDefaultNavigationTimeout(120000);
     p.on('pageerror',e=>o.errs.push(e.message));p.on('console',m=>{if(m.type()==='error'&&!/Failed to load resource|favicon|navigator.vibrate/.test(m.text()))o.errs.push('console: '+m.text())});o.p=p;return p};return o}
 async function until(o,fn,arg,ms=30000){try{await o.p.waitForFunction(fn,arg,{timeout:ms,polling:250});return true}catch(e){return false}}
@@ -75,10 +75,11 @@ async function join(B,code){await B.page();await B.p.goto(BASE+'?room='+code,DCL
   const nb=await B.p.evaluate(()=>{if(!S.maid)S.maid=(S.staff||[])[0]||{name:'Thử',loyal:60};S.preg=0;S.hidden=false;S.fake=0;S.cyb={};S.sung=Math.max(S.sung||0,40);S.age=Math.min(S.age||18,30);
    const want=((S.tuan||0)+1)%3,base=window.__nm0||(window.__nm0=S.name);for(let i=0;i<400;i++){S.name=base+(i?' '+i:'');if(cyBase(S).t===want)break}render();return{name:S.name,want,t:cyBase(S).t,age:S.age}});
   await A.p.evaluate(n=>{const f=COOPW.friend();if(f){f.name=n.name;f.age=n.age;f.preg=0;f.fake=0}},nb);
+  if(process.env.CYC_DBG)await B.p.evaluate(()=>{if(window.__flw)return;window.__flw=1;window.__fl=[];const f=flip;flip=function(){try{window.__fl.push([S.tuan,wk(),cycOn(S),!!S.maid,COOPW.inTurn,JSON.stringify(S.cyb||{}).slice(0,60),cyBase(S).t,S.name]);if(window.__fl.length>8)window.__fl.shift()}catch(e){}return f.apply(this,arguments)}});
   const w0=await wkA();let held=null,asked=false;
   for(let i=0;i<60&&!(asked&&held);i++){await clear(A);if((await clearB())==='cy')asked=true;await press1(A);if(!asked)await press1(B);await sleep(700);
    if(asked&&!held)held=await A.p.evaluate(()=>COOPW.pend&&COOPW.cyHold!=null&&COOPW.sent!==(COOP.state.week||0)?{hold:COOPW.cyHold}:null)}
-  ok(asked,`${k}: B (guest) gets her maid's Kỳ nguyệt sự card`,nb);
+  ok(asked,`${k}: B (guest) gets her maid's Kỳ nguyệt sự card`,nb);if(!asked&&process.env.CYC_DBG)console.log('dbg B',JSON.stringify(await B.p.evaluate(()=>({tr:COOPW.tr.slice(-30),cyb:S.cyb,tuan:S.tuan,wk:wk(),name:S.name,maid:!!S.maid,on:cycOn(S),t:cyBase(S).t,E:COOPW.thin.E&&COOPW.thin.E.log.slice(-6),fl:window.__fl}))));
   ok(!!held,`${k}: the host's week draw waits for her answer (no draw, no week end sent)`,held);
   if(!before.length){await shot(B,'cyc-guest-card-1180x820');await shot(A,'cyc-host-wait-755x1000')}
   const d0=await B.p.evaluate(()=>({duc:S.duc,ghen:liveRivals(true).filter(v=>!v.coop).reduce((a,v)=>a+(v.ghen||0),0)}));
