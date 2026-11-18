@@ -25,7 +25,7 @@ const CW=window.COOPW;if(!CW||!CW.thin||!CW.X||typeof COOP!=="object")return;
 const TH=CW.thin,X=CW.X,J=X.J,D=TH.D,LV=5;
 const host=()=>CW.seat==="a",on=()=>TH.on(LV);
 const LAST=()=>typeof B4L==="number"?B4L:2;
-const E=TH.E={on,stat:{rd:0,erd:0,ops:0,big:0,step:0,her:0,herSkip:0,forced:0,wrW:0,wrR:0,addDrop:0,rmBack:0,ridBack:0,curtain:0,go:0,cyb:0,tn:0,wwEnd:0,night:0,owe:0,adopt:0,reRd:0,hostBack:0,clamp:0},rd:{},hr:"",forced:"",mine:"",log:[]};
+const E=TH.E={on,stat:{rd:0,erd:0,ops:0,big:0,step:0,her:0,herSkip:0,forced:0,wrW:0,wrR:0,addDrop:0,rmBack:0,ridBack:0,curtain:0,go:0,cyb:0,tn:0,wwEnd:0,night:0,owe:0,adopt:0,reRd:0,hostBack:0,clamp:0,press:0},rd:{},hr:"",forced:"",mine:"",log:[]};
 const lg=x=>{E.log.push(x);if(E.log.length>80)E.log.shift()};
 const bk=()=>(COOP.state.week||0)+":"+((S&&S.buoi)||0);
 const wkx=()=>typeof wk==="function"?wk():0;
@@ -180,6 +180,13 @@ const BOOT=Date.now().toString(36)+Math.random().toString(36).slice(2,6);
 {const hv=TH.hostView;TH.hostView=function(){const o=hv.apply(this,arguments);if(o&&on()){o.e={go:CW.ngo===(COOP.state.week||0)?CW.ngo:-1,w:COOP.state.week||0,tnb:CW.tnb|0,boot:BOOT}}return o}}
 /* her in-week change of the night (Tranh sủng, Chặn ngự giá, cáo bệnh …): the intent replaces the ctm-tn claim; runs in the host's context */
 TH.onDo("tn",(a,m)=>{const base=m&&m.base;E.stat.tn++;setTimeout(()=>{try{CW.tnDo(a,base)}catch(e){console.error("thin E tn",e)}},0);return {ok:1}});
+/* the OUTERMOST nextBuoi (this module is the last one): 12 modules after jcoopworld wrap nextBuoi with after-step work (jexam exTick,
+   jpromo prCheck, jclose greet / wxSync, jstory lapse, jlooks sweep, jgift, jfe, jkc/jkc2, jspread, jweather, jaudit). #next calls the
+   outer chain, so a "Sẵn sàng" press that steps nothing ran all of it once more on each seat (the real step runs it again: on the host for
+   him, and in her context for her). At level 5 a press is only the intent; the chain runs only inside a real step (CW.allow: his step /
+   her step in withSeat; CW.allowN: the night's go = her week end). */
+if(typeof nextBuoi==="function"){const f=nextBuoi;nextBuoi=function(){if(!(on()&&CW.on)||CW.allow||CW.allowN)return f.apply(this,arguments);E.stat.press++;
+  if((CW.isWaiting&&CW.isWaiting())||(CW.isFrozen&&CW.isFrozen())||CW.pend||!CW.base)return;return CW.eNext()}}
 /* his ready / clock / a closed dialog: try the step again */
 if(typeof render==="function"){const f=render;render=function(){const r=f.apply(this,arguments);try{if(on()&&host()&&!CW.ctx&&(E.hr||E.forced))check()}catch(e){}return r}}
 }catch(e){console.error("jcoopthine",e)}})();
