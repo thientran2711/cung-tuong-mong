@@ -113,7 +113,7 @@ function tdSoMonth(force){const T=trS();if(!force&&S.turn-T.soT<TD.soGap)return"
  if(k==="praise"){const c=T.praise;T.praise=null;const h=T.H[c];tdPowAdd(c,BAL.eff.j55.tdSoMonth);const M=tdMembers(c);M.forEach(p=>ap(p,{danh:2}));
   ev=`<b>Sớ khen:</b> triều thần dâng sớ ca ngợi ${TDOFF[c]} ${h.name}. Nhà ${c} thế lực ${balSg(BAL.eff.j55.tdSoMonth)}; ${M.length?`phi tần nhà ấy được thơm lây (Danh +2): ${M.map(tdName).join(", ")}`:"trong cung chưa có phi tần nhà ấy"}. `;
   tdNews(`Sớ khen ${TDOFF[c]} ${h.name}; nhà ${c} được thơm lây.`);if(M.includes(S))tdPop("Sớ khen nhà ngươi",h,`<p>Triều thần dâng sớ ca ngợi ${TDOFF[c]} ${h.name}. Nhà ${c} thế lực ${balSg(BAL.eff.j55.tdSoMonth)}.</p><p class="g">Ngươi là người nhà ${c}, được thơm lây: Danh +2.</p>`)}
- else if(k==="dich"){const q=queenP();const c=q&&q!==S?tdHouse(q):S.rank>=7?tdHouse(S):null;const sp=c||"Lễ bộ";const h=T.H[sp];const d0=KV.deb,g0=S.kvDeb;KV.deb=100;let r="";try{r=kvDebate()}finally{KV.deb=d0}
+ else if(k==="dich"){const q=queenP();const c=q&&q!==S?tdHouse(q):S.rank>=7?tdHouse(S):null;const sp=c||"Lễ bộ";const h=T.H[sp];const DB=BAL.ag.why.g3.deb,d0=DB.p,g0=S.kvDeb;DB.p=100;let r="";try{r=kvDebate()}finally{DB.p=d0}
   if(!r){T.soT=-9;return""}const won=S.heir&&S.heir.k&&kvQueenMom(S.heir.v);tdPowAdd(sp,won?BAL.eff.j55.tdSoMonth_2[0]:BAL.eff.j55.tdSoMonth_2[1]);
   ev=`${TDOFF[sp]} ${h.name} đứng đầu bá quan. ${r}Nhà ${sp} thế lực ${won?"+4":"-3"}. `;tdNews(`${TDOFF[sp]} ${h.name} dâng sớ xin lập đích; ${won?"Hoàng thượng nghe theo":"Hoàng thượng chưa nghe"}.`)}
  else if(k==="imp"){const [cA,t]=imp;ev=tdImpeach(cA,t)}

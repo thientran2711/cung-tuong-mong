@@ -272,7 +272,7 @@
 "group": "G1",
 "event": "\"mùi muối\" mockery; old mistress humiliates / letter leaks; plagiarism",
 "fp": "  if(st.secret===1&&roll(5)){apply({danh:BAL.eff.j4.danhMont",
-"done": "npcTell(S,{from:liveRivals(true),to:S.emp||S})"
+"done": "npcWhy(\"story\",npw1Sc(st,\"cn3\"))){const tl=npcTell(S,{from:[mo],to:S.emp||S});"
 },
 {
 "f": "j4.js",
@@ -1211,7 +1211,7 @@
 "group": "G1",
 "event": "NPC night prep; pillow/sendMaid/admonition/effort/custom",
 "fp": "   if(roll(BAL.odb.j75.rbTop_2+eyes(S)*10))see",
-"done": "if(npcTell(v,{from:liveRivals(true).filter(x=>x!==v)}))seen+="
+"done": "const tl=npcTell(v,{from:npwIn(v),cd:\"tellJ75\"})"
 },
 {
 "f": "j76.js",
@@ -1365,7 +1365,7 @@
 "group": "G1",
 "event": "tai mắt outfit report; framed NPC searches; servant breaks ngự tứ; Emp",
 "fp": " wdNtRemove(p,x.e,how);if(roll(55)){ap(p,{sung:-6});punish(p,\"làm ",
-"done": "const tl=npcTell(p,{from:liveRivals(true).filter(y=>y!==p),to:S.emp||S})"
+"done": "const tl=npcTell(p,{from:npwIn(p),to:S.emp||S});"
 },
 {
 "f": "j92.js",
@@ -1423,7 +1423,7 @@
 "status": "PARTIAL",
 "group": "G3",
 "event": "rival follows intent 70 %; TH garden walk; thái y walk; plot errand; w",
-"done": "npwPick(sick,x=>(x.preg?BAL.ag.why.g3.ty.preg:0)+100-(x.suc||80)):null;const s=npwPick([1,2,3],x=>agSoon(x,1));"
+"done": "const tc=sick.length?npcWhy(\"tyCall\",{sick}):null;"
 },
 {
 "f": "j95.js",
@@ -1687,7 +1687,7 @@
 "status": "PARTIAL",
 "group": "G3",
 "event": "sweetheart note; guest greets; learns who; tai mắt reports plot; tutor",
-"out": "Hoàng thượng's own timing to name an heir (sons ≥ 6 exist; waits while a đích son is small); whom = j51:72 npwPick"
+"done": "if(!npcWhy(\"heirName\",{wait,c}))return\"\";"
 },
 {
 "f": "j51.js",
@@ -2215,7 +2215,7 @@
 "status": "DICE-ONLY",
 "group": "G2",
 "event": "maid learns affair (monthly 3 %); maid reports a rival's whereabouts; ",
-"done": "!npcWit(tk.k,tk.kh,{pool:[s]}).length"
+"out": "perception, not a choice: the maid learns it only when j95secApply put her at the tryst place and khắc (s.trSaw from the day record); noticing = BAL.ag.why.p3.see odds"
 },
 {
 "f": "jagacts3.js",

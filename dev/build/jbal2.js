@@ -1180,9 +1180,9 @@ BAL.ag.par3={on:1,
 /* Dạy con học chữ / lễ nghi (j53 ktAct, her deck card and an NPC mother cx3:teach*): Sức and khắc of one lesson */
 /* 2e4 the maid's dilemmas, ONE builder for her card and an NPC maid (j42 cnvScoldOpts / cnvFestOpts / cnvBlackOpts / cnvAffOpts): scold = Cúi đầu (fx), Khóc lóc (odds o + Sắc/sacD, ± tin), Cãi lại (Danh, Chủ tin −tin, odds kneel of Sức −suc);
    fest = Rót rượu (odds o + Sắc/sacD + Tài/taiD; his regard +nt, fail Chủ tin −tin), Đứng sau (tin); black = Đút bạc (pay), Mặc kệ (odds the threatener keeps quiet), caught (NPC đối thực told: lòng −tin, odds tgk);
-   aff = Dọa tố (odds o + Tâm cơ/tcD, Bạc, fail: odds lau of Tân Giả khố lauW tuần), Bẩm chủ (Chủ tin), see = % a month an NPC maid learns a consort's affair, w = worth weights of an NPC maid's pick */
+   aff = Dọa tố (odds o + Tâm cơ/tcD, Bạc, fail: odds lau of Tân Giả khố lauW tuần), Bẩm chủ (Chủ tin), w = worth weights of an NPC maid's pick */
 BAL.ag.par3.cnv={scold:{humble:{tin:1,duc:1},beg:{get o(){return BAL.odb.j42.odO_8},sacD:3,get tin(){return BAL.eff.j42.tinGo},get tinL(){return BAL.eff.j42.tinGo_2}},talk:{danh:2,tin:8,kneel:40,get suc(){return -BAL.eff.j42.sucGo}}},fest:{pour:{get o(){return BAL.odb.j42.odO_11},sacD:3,taiD:10,nt:12,get tin(){return -BAL.eff.j42.tinGo_7}},stand:{tin:3}},
- black:{pay:20,ignore:{o:40},caught:{tin:10,tgk:30}},aff:{threat:{get o(){return BAL.odb.j42.odTop_4},tcD:3,get bac(){return BAL.eff.j42.bacTop},lau:35,lauW:8},tell:{get tin(){return BAL.eff.j42.tinTop}},see:3}};
+ black:{pay:20,ignore:{o:40},caught:{tin:10,tgk:30}},aff:{threat:{get o(){return BAL.odb.j42.odTop_4},tcD:3,get bac(){return BAL.eff.j42.bacTop},lau:35,lauW:8},tell:{get tin(){return BAL.eff.j42.tinTop}}}};
 /* 2e4: Đánh đàn chờ ngự giá (qinCard, her garden pop-up and NPC cx3:qin): odds o + Tài/taiD + cầm × cam (× tt with Trống tài) + like when she knows his music; Sủng w / wLike, fail −l; Sức suc; NPC needs cầm ≥ minCam
    study: an NPC lesson (j85 npcStudyDo) — pays a teacher only keeping keep bạc; teacher / self weights for mindPick */
 Object.assign(BAL.ag.par3,{qin:{get o(){return BAL.odb.jact.odO},taiD:3,cam:4,tt:2,like:15,w:7,wLike:9,get l(){return -BAL.eff.jact.sungGo},suc:10,minCam:1,g:{"sung":2}},study:{keep:40,teach:1,self:1}});
@@ -1262,8 +1262,9 @@ Object.assign(BAL.ag.why.cd,{empSummon:6,tsDen:4,maidSell:24,giftCheck:6,fakeIll
    eye = push per tai mắt point (a foe learning of a tryst, her own tai mắt reporting; old 4 % / 10 %) */
 Object.assign(BAL.ag.why,{j22:{host:40,ksp:15,eye:6}});
 Object.assign(BAL.ag.why.cd,{kspCheck:8,trystKnow:12});
-/* npc-purpose G1 part 8 (j4 story lines; jagwhy1). story.wait = tuần a story person prepares before the next step (≈ the old monthly 25-35 % rolls; _ = other) */
-Object.assign(BAL.ag.why,{story:{wait:{tt1:12,tt2:16,tt3:16,cn1:12,cn2:16,nc1:12,ch1:12,ch2:16,td1:12,dad:32,_:16}}});
+/* npc-purpose G1 part 8 (j4 story lines; jagwhy1). story.wait = tuần a story person prepares before the next step (≈ the old monthly 25-35 % rolls; _ = other);
+   the clock restarts on each fire; cn3 = the old mistress carries the guard letters (old 5 %/tháng ≈ 20 tháng) */
+Object.assign(BAL.ag.why,{story:{wait:{tt1:12,tt2:16,tt3:16,cn1:12,cn2:16,nc1:12,ch1:12,ch2:16,td1:12,dad:32,cn3:60,_:16}}});
 Object.assign(BAL.ag.why.cd,{mock:8});
 /* npc-purpose G1 part 9 (j21, j54, j71, j75; jagwhy1). call.gap = tuần between two calls at her palace (old 4 % per move); story.wait.suitor = tuần a house
    prepares a match (old 3 %/tháng); f7: want / k / art / amb = push to enter a contest (Sủng under want, art level, ambitious ambT), prep = push to pay for
@@ -1272,7 +1273,7 @@ Object.assign(BAL.ag.why.cd,{mock:8});
    family sends gifts against a monopoly */
 Object.assign(BAL.ag.why,{call:{gap:2},f7:{want:50,k:1,art:6,amb:15,ambT:["Tham vọng","Kiêu ngạo"],prep:35,greed:30,poor:60,danh:50,duc:.4},j75:{want:60,k:1,amb:15,maidSung:40,mono:40}});
 BAL.ag.why.story.wait.suitor=26;
-Object.assign(BAL.ag.why.cd,{callMe:4,f7Merit:12,sendMaid:24});
+Object.assign(BAL.ag.why.cd,{callMe:4,f7Merit:12,sendMaid:24,tellJ75:4});/* tellJ75 = tuần before the same consort carries another of v's favours to her (j75Teller) */
 /* npc-purpose G1 part 10 (j95b lies; jagwhy1). lie: expose / blame / frame = hostility toward her needed to expose (old 12 %), push blame (old 40 + 20 %),
    frame (old 45 + 25 %); cd = tuần between two such deeds by the same person (lieMe ≈ the old weekly nết rumorP) */
 Object.assign(BAL.ag.why,{lie:{expose:30,blame:40,frame:45}});
@@ -1286,8 +1287,13 @@ Object.assign(BAL.ag.why.cd,{exposeMe:6,lieMe:6,blameMe:4,frameMe:4});
    g3.maid   a maid's chat: odds o she has heard where someone is (the player's foe first)
    g3.call   a drop-in visit (jshelf): her ally need must reach min (the kind's cd = cd.g3call tuần)
    g3.scape  a scapegoat (jworld2 án trộm): the accuser's hostility to her target must reach min */
-BAL.ag.why.g3={soon:12,two:.7,newRk:10,bmBac:60,mood:{b:1,div:120,lo:.4,hi:1.9},maid:{o:15},call:{min:25},scape:{min:30},lean:{c:2,k:"vuon"},ty:{preg:50}};
-Object.assign(BAL.ag.why.cd,{g3call:1,g3scape:8,g3acc:1});
+BAL.ag.why.g3={soon:12,two:.7,newRk:10,bmBac:60,mood:{b:1,div:120,lo:.4,hi:1.9},maid:{o:15},call:{min:25},scape:{min:30},lean:{c:2,k:"vuon"},ty:{preg:50},
+ heir:{go:20,wait:60,age:2},deb:{p:4,gap:12,o:30,div:2,old:16,oldD:10,lo:10,hi:85}};
+/* g3.heir  j51 heirMonth (kind heirName): tuần of reckoning before he names an heir (go ≈ the old 15 %/tháng, wait ≈ the old 5 % while a đích son is small),
+            age = push per year of the eldest eligible son above six
+   g3.deb   j51 kvDebate (ministers' memorial, PARKING_LOT #7): p = % a month the court raises lệ lập đích (was KV.deb), gap = months between two (KV.debGap);
+            the Emperor's odds to switch = o + (Tài gap + được thương gap) / div − oldD when the heir is ≥ old, held to [lo, hi] */
+Object.assign(BAL.ag.why.cd,{g3call:1,g3scape:8,g3acc:1,tyCall:1});/* tyCall: a patient sends for the thái y at most once a tuần (old 25 % a buổi ≈ one round a tuần) */
 // G2 kinds (npc-purpose G2, review/npc-purpose-g2: monthly no-actor chains; kinds registered in jagwhyg2.js) — numbers only here
 Object.assign(BAL.ag.why.cd,{loTake:8,loTry:4,loClear:2,loWear:6,kcWeek:6,kcMeet:4,kcVh:12,kcSuit:8});
  /* jkc: kcWeek s = motive weight × mul (a weight ≥ .35 is a real motive); kcTm: he seeks her places with weight h×seek vs home; meets her when longing h ≥ meet; Emperor notices beauty when sắc − vhSac ≥ min; kcSuit: a house her standing reaches (q ≤ kgt + reach) seeks her with s = danh tiếng × kapW */

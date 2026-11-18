@@ -227,7 +227,7 @@ function j95planOther(p,c,P){const kh=[0,1,2,3];
  if(p.kind==="court"){const c2=p.id.slice(2);
   if(c2==="tq")return kh.map(i=>[P.emp?P.emp[i][0]:"dtd","attend","emp","tổng quản luôn hầu bên Hoàng thượng"]);
   if(c2==="ksp")return kh.map(()=>["ksp","book",null,"phận sự Kính sự phòng"]);
-  if(c2==="ty"){const sick=liveRivals(true).filter(v=>v.preg||(v.suc||80)<50);/* NPC-PURPOSE G3: he goes to the one most in need (an expectant mother, then the weakest), at the first khắc his rounds allow — not a random patient / khắc */const v=sick.length&&j95dice(25)?npwPick(sick,x=>(x.preg?BAL.ag.why.g3.ty.preg:0)+100-(x.suc||80)):null;const s=npwPick([1,2,3],x=>agSoon(x,1));
+  if(c2==="ty"){const sick=liveRivals(true).filter(v=>v.preg||(v.suc||80)<50);/* NPC-PURPOSE G3: the one most in need sends for him (kind tyCall: an expectant mother, then the weakest; each at most once per g3.ty cd), at the first khắc his rounds allow — not a random patient / khắc */const tc=sick.length?npcWhy("tyCall",{sick}):null;const v=tc?tc.who:null;const s=npwPick([1,2,3],x=>agSoon(x,1));
    return kh.map(i=>v&&i===s?[palaceOf(v),"heal","v"+v.id,v.preg?"bắt mạch an thai":"bắt mạch cho người yếu sức"]:["tyv","brew",null,"trực Thái y viện"])}
   /* main jact (Dư đồ Nội vụ phủ, 16/11): the Nội vụ phủ eunuch stands at Nội vụ phủ every khắc (jact draws him there) — one place (r1) */
   if(j95nvp())return kh.map(()=>["nvp","sell",null,"bày hàng mua từ ngoài cung ở Nội vụ phủ"]);
@@ -257,7 +257,10 @@ function j95secApply(R){const z=j95z();const c=R.c;
   /* NPC passers-by at the same place and khắc may see (same odds as hers) */
   for(const v of liveRivals(true)){const id="v"+v.id;if(id===s.a||!R.P[id])continue;const at=s.kh.some(i=>R.P[id][i][0]===s.k);if(!at)continue;
    const sub=RV(+s.a.slice(1));if(!sub)continue;const out=j95catchRoll(v,sub);if(out==="flee")continue;
-   evA(v,sub,out==="one"?BAL.eff.j95.evJ95secApply[0]:BAL.eff.j95.evJ95secApply[1]);if(s.kind==="tryst")sub.scandal=1;R.ev.push(`${v.name} bắt gặp ${sub.name} (${s.kind==="tryst"?"hẹn hò lén":"gặp tay chân"})`)}}}
+   evA(v,sub,out==="one"?BAL.eff.j95.evJ95secApply[0]:BAL.eff.j95.evJ95secApply[1]);if(s.kind==="tryst")sub.scandal=1;R.ev.push(`${v.name} bắt gặp ${sub.name} (${s.kind==="tryst"?"hẹn hò lén":"gặp tay chân"})`)}
+  /* npc-purpose (review item 5): servants whose day row puts them at the tryst's place at its khắc saw it — kept on the servant (s.trSaw, lazy) for jagacts3 p3MaidMonth */
+  if(s.kind==="tryst"){const vid=+s.a.slice(1);for(const id in R.P){if(id[0]!=="s"||!/^s\d+$/.test(id))continue;const e=R.P[id];if(!s.kh.some(i=>e[i]&&e[i][0]===s.k))continue;
+   const sv=typeof servById==="function"?servById(+id.slice(1)):null;if(sv&&!(sv.trSaw||[]).includes(vid))sv.trSaw=(sv.trSaw||[]).concat([vid])}}}}
 
 /* ---------------- 6. SYNC: the views every old reader uses ---------------- */
 function j95view(R,kh){const W={};W.emp=R.P.emp?R.P.emp[kh][0]:"dtd";W.th=R.P.th?R.P.th[kh][0]:null;

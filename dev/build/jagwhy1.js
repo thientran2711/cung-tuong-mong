@@ -159,7 +159,7 @@ npwReg("giftCheck",{grp:"consort",who:c=>[c.v],why(v){if(!(v.inv||[]).some(e=>!e
 npwReg("fakeIll",{grp:"consort",who:c=>[c.v],why(v){const J=npw1B("j8");return (v.tamco||0)>=J.illTam?{s:(J.want-(v.sung||0))*J.k,r:"giả bệnh để Hoàng thượng đến thăm"}:null}});
 npwReg("fakePreg",{grp:"consort",who:c=>[c.v],why(v){const J=npw1B("j8");return (v.tamco||0)>=J.pregTam?{s:(J.want-(v.sung||0))*J.k+(rkOf(v)>=J.pregRk?J.pregUp:0),r:"giả có thai để giữ chỗ đứng"}:null}});
 npwReg("raid",{grp:"court",who:c=>[c.p],why(p){const bad=(p.inv||[]).filter(e=>(IT[e.k]&&itm(e.k).il)||(e.t&&TAINT[e.t]&&TAINT[e.t].il));if(!bad.length)return null;
- const tl=npcTell(p,{from:liveRivals(true).filter(x=>x!==p),to:queenP()||S.emp||S});return tl?{s:npwB().min+bad.length*npw1B("j8").raidK,t:tl.who,r:`bị ${npwNm(tl.who)} tố giác`}:null}});
+ const tl=npcTell(p,{from:npwIn(p),to:queenP()||S.emp||S});/* only those who see inside her house (same palace / their tai mắt serve her) know what she hides */return tl?{s:npwB().min+bad.length*npw1B("j8").raidK,t:tl.who,r:`bị ${npwNm(tl.who)} tố giác`}:null}});
 /* ---- G1 part 7: the stray man's leftovers (j22 / jmen). BAL.ag.why.j22 ----
    kspCheck   the one who checks the Kính sự phòng book against her pregnancy: the Empress or a foe, by grudge (hostility ≥ j22.host; + ksp when the
               eunuchs already talk) · trystKnow a foe learns of a secret meeting through her own tai mắt (tai mắt × eye + grudge / 2)
@@ -170,12 +170,19 @@ npwReg("taimat",{grp:"srv",who:c=>c.w?[c.w]:[],cdOf:()=>0,why(w,c){return {s:eye
 /* ---- G1 part 8: the origin story lines (j4 STORY month timers). BAL.ag.why.story ----
    story      an off-screen person of her story (father, the old mistress, the envoy, the Empress's clan, the foe's father) acts on HIS plan: his push
               grows with the tuần since the last step (min × elapsed / story.wait[key]); the Empress's clan (ch) also needs her motive against her.
-              npw1Sc(st, key, o) starts the clock (old saves: first month only starts it) and returns the ctx for npcWhy("story", …)
+              npw1Sc(st, key, o) starts the clock (old saves: first month only starts it) and returns the ctx for npcWhy("story", …);
+              the clock restarts on every fire (def.on), so a step that may repeat (dad, td1, cn3, suitor) waits story.wait[key] again
    mock       a consort mocks her low birth only with a motive (motiveOK provoke) */
 const NPW1_ST={id:"story",name:"người trong truyện"};
 function npw1Sc(st,key,o){const k="at_"+key;if(st[k]==null)st[k]=wk();return Object.assign({st,key,k},o||{})}
-npwReg("story",{grp:"story",who:()=>[NPW1_ST],cdOf:()=>0,why(a,c){const W=npw1B("story").wait;const n=wk()-(c.st[c.k]==null?wk():c.st[c.k]);
+npwReg("story",{grp:"story",who:()=>[NPW1_ST],cdOf:()=>0,on(o,c){if(c&&c.st&&c.k)c.st[c.k]=wk()},why(a,c){const W=npw1B("story").wait;const n=wk()-(c.st[c.k]==null?wk():c.st[c.k]);
  if(c.q&&!motiveOK(c.q,S,"harm").ok)return null;return {s:npwB().min*n/(W[c.key]||W._),t:S,r:"đến lúc ra tay"}}});
+/* heirName  Hoàng thượng names an heir (j51 heirMonth): his push grows with the tuần he has weighed it since a son of six or more first stood
+              (S.kvHW, lazy) — min × elapsed / g3.heir.go (g3.heir.wait while a đích son is still small) + g3.heir.age per year of the eldest above six */
+npwReg("heirName",{grp:"court",who:()=>S.emp?[S.emp]:[],cdOf:()=>0,on(){S.kvHW=null},why(e,c){const H=BAL.ag.why.g3.heir;const n=wk()-(S.kvHW==null?wk():S.kvHW);
+ const a=Math.max(0,...(c.c||[]).map(x=>(x.k.age||0)-6));return {s:npwB().min*n/(c.wait?H.wait:H.go)+a*H.age,r:"ngài đã cân nhắc đủ lâu"}}});
+/* tyCall    a sick or expectant consort sends for the thái y (j95 day plan): s = need = (with child ? g3.ty.preg : 0) + 100 − Sức; once per cd.tyCall tuần each */
+npwReg("tyCall",{grp:"consort",who:c=>c.sick||[],why(v){const s=(v.preg?BAL.ag.why.g3.ty.preg:0)+100-(v.suc||80);return {s,r:v.preg?"bắt mạch an thai":"người yếu sức"}}});
 npwReg("mock",{grp:"consort",who:()=>liveRivals(true),why(v){return npw1Mot(v,S,"provoke")}});
 /* ---- G1 part 9: j21 (a consort calls at her palace), j54 (a suitor for a princess), j71 (festival cast, merit deeds), j75 (night prep, pillow talk,
    sending a maid, a family's gifts against a monopoly, the quiet favour seen). BAL.ag.why.{call,suitor,f7,j75} ----
