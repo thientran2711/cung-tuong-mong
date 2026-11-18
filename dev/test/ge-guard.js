@@ -31,6 +31,9 @@ const ok=[];const chk=(n,c,x)=>{ok.push([n,!!c]);if(!c)console.error('FAIL',n,JS
     for(const t of (e.cond||[]).concat(e.fo||[])){if(!TERMS.has(t[0]))bad.push(`${id}: unknown term ${t[0]}`);if(t[0]==='s'&&!(BAL.ge.gate[id]||{})[t[1]])bad.push(`${id}: no BAL.ge.gate.${id}.${t[1]}`);if(t[0]==='mis'&&!(BAL.ge.gate[id]||{}).mis)bad.push(`${id}: no gate mis`)}
     for(const k of ['t','a','ht','ha','cw','fail','ft'])if(!e[k])bad.push(`${id}: no ${k}`);
     for(const k of ['t','a','ht','ha','cw','fail','ft']){const s=String(e[k]||'');if(/%|\d/.test(s))bad.push(`${id}.${k}: digit or % in player text`)}
+    /* scale guard (E1b: Tai mắt S.mat is clamped 0–10 in j1 ap(), every other stat 0–100): a gate or reward above the stat's scale can never be met / is cut */
+    {const MAXS={mat:10},mx=k=>MAXS[k]||100;for(const [k,v] of Object.entries(BAL.ge.gate[id]||{}))if(v>mx(k))bad.push(`${id}: gate ${k} ${v} above the stat scale ${mx(k)}`);
+     for(const R of [BAL.ge.rw[id]||{},BAL.ge.fail[id]||{}])for(const [k,v] of Object.entries(R))if(typeof v==='number'&&!['rank','bac','rel','mis'].includes(k)&&Math.abs(v)>mx(k)/2)bad.push(`${id}: rw/fail ${k} ${v} beyond half the stat scale ${mx(k)}`)}
     if(!BAL.ge.rw[id])bad.push(`${id}: no BAL.ge.rw`);if(!BAL.ge.fail[id])bad.push(`${id}: no BAL.ge.fail`);
     if(!(e.pull||[]).length)bad.push(`${id}: no Chuỗi`);if(!(e.close||[]).length)bad.push(`${id}: no Khóa`);
     for(const sh of ['t','a']){const k=`ge_${b}_${i+1}${sh}`;if(!DH_CAT[k]||DH_CAT[k].g!=='tm')bad.push(`${k}: not in DH_CAT tm`);const T=BAL.dh.T[k];if(!T||T.n.length!==1||T.b!==BAL.ge.title.tier)bad.push(`${k}: BAL.dh.T step/tier`)}});

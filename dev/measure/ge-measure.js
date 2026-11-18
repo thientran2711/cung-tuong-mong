@@ -6,20 +6,24 @@
      rand  — random options, a random Ngã rẽ pair.
    Reports per branch: grand-ending rate of in / rand, open endings at .8 / .11 (funnel), shading a win would get for every kind / cruel life (geShade, measured on all those lives, wins are rare); checks the bands
    BAL.ge.target {inChar, random, open11, shade}. Writes JSON to <out> when given.
-   usage: node dev/measure/ge-measure.js [url] [lives per (branch, bot, target)] [parallel pages] [out.json] [roads comma list] */
+   usage: node dev/measure/ge-measure.js [url] [lives per (branch, bot, target)] [parallel pages] [out.json] [roads comma list] [sens|idle] */
 const path=require('path');const fs=require('fs');const {chromium}=require('playwright');
 const URL=process.argv[2]&&process.argv[2]!=='-'?process.argv[2]:'file://'+path.resolve(__dirname,'../index.html');
 const NL=+process.argv[3]||1,PAR=+process.argv[4]||3,OUT=process.argv[5],ROADS=(process.argv[6]||'tt_co,cnv_mat,nc_tuc').split(',');
+const PLAY=process.argv[7]||'sens';/* sens: between story beats she plays the months like a player (the inpage6 sensible bot + inty.js, as runb.js; rand bots use its random step); idle: months only pass (nextBuoi) */
+const BOTJS=PLAY==='idle'?'':['inpage6.js','inty.js'].map(f=>fs.readFileSync(path.join(__dirname,f),'utf8')).join('\n;\n');
 (async()=>{const b=await chromium.launch();const errs=[];
  const jobs=[];for(const road of ROADS)for(let L=0;L<NL;L++){for(let j=0;j<4;j++)jobs.push({road,mode:'in',j});jobs.push({road,mode:'rand',j:-1},{road,mode:'rand',j:-1},{road,mode:'kind',j:L%4},{road,mode:'cruel',j:(L+2)%4})}
+ if(process.env.MAXJ)jobs.length=Math.min(jobs.length,+process.env.MAXJ);/* smoke runs */
  const res=[];let next=0;
  const worker=async w=>{let p=null;
   const boot=async()=>{if(p)await p.context().close();const ctx=await b.newContext({viewport:{width:755,height:1000},serviceWorkers:'block'});p=await ctx.newPage();p.setDefaultTimeout(0);
    p.on('pageerror',e=>errs.push(e.message.slice(0,200)));await p.goto(URL,{waitUntil:'domcontentloaded',timeout:0});
    await p.waitForFunction(()=>typeof start==='function'&&typeof geS==='function',null,{timeout:0});await p.waitForTimeout(1200);
+   if(BOTJS){await p.evaluate(BOTJS);await p.evaluate(()=>{const pd=pushDil;pushDil=function(d,t){if(d&&d.pid==='ge1'){window.__geHit=1;return ''}return pd.apply(this,arguments)}})}
    await p.evaluate(()=>{document.getElementById('title').hidden=true;const md0=msDone67;msDone67=function(m){return m.force14?true:md0.apply(this,arguments)};
     window.__ge=async(road,mode,j)=>{const k=road.split('_')[0];quiet=true;const others=Object.keys(ARC67).filter(id=>ARC67[id].o===k&&id!==road);
-     localStorage.setItem('ctm-arcs',JSON.stringify({[k]:others}));localStorage.setItem('ctm-tm96','1');window.__forceOrigin=k;start();quiet=false;
+     localStorage.setItem('ctm-arcs',JSON.stringify({[k]:others}));localStorage.setItem('ctm-tm96','1');window.__forceOrigin=k;window.__origO=k;window.__geHit=0;start();quiet=false;
      await new Promise(r=>{let n=0;const t=()=>{if((typeof S!=='undefined'&&S&&S.origin&&S.st&&S.st.f14)||++n>150)r();else setTimeout(t,100)};t()});Q.length=0;
      if(S.st.f14.rd!==road)return{err:'road '+S.st.f14.rd};const D=GE_DATA[road],C=GE_CAT[road];
      const sc=n=>{if(mode==='rand')return 0;let v=0;const e=D.e[j];if(e.pull.includes(n))v+=3;if((e.close||[]).includes(n)||(e.doom||[]).includes(n))v-=6;
@@ -30,10 +34,12 @@ const NL=+process.argv[3]||1,PAR=+process.argv[4]||3,OUT=process.argv[5],ROADS=(
         const s=O.map(o=>sc(o.n)+Math.random()*.5);const i=mode==='rand'?Math.floor(Math.random()*O.length):s.indexOf(Math.max(...s));const o=O[i];
         res67(thKey67(A),A.cur,i,o&&o.o!=null?oOf67(A,o,bd):100)}}catch(e){err=err||('beat '+e.message)}
       if(S.st.ms&&++stuck>2){if(S.st.ms.id==='len14'&&S.srv&&!S.srv.risen){S.age=Math.max(S.age||0,18);srvRise('bot')}else S.st.ms.force14=1}
-      if(Q.some(m=>m.pid==='ge1'))break;
-      const t=S.turn;for(let g=0;g<40&&S.turn===t;g++){Q.length=0;used=0;try{nextBuoi()}catch(e){err=err||('buoi '+e.message);break}}
+      if(window.__geHit||Q.some(m=>m.pid==='ge1'))break;
+      const t=S.turn;if(window.__bot){Q.length=0;for(let g=0;g<4000&&S.turn===t&&!window.__geHit&&!S.dead&&!S.out;g++){const B=S.st.M;if(B&&B.cur){Q.length=0;break}try{window.__bot.step(mode==='rand'?'rand':'sens',1)}catch(e){err=err||('bot '+e.message);break}}}
+      for(let g=0;g<40&&S.turn===t&&!window.__geHit;g++){Q.length=0;used=0;try{nextBuoi()}catch(e){err=err||('buoi '+e.message);break}}
+      if(window.__geHit)break;
       if(Q.some(m=>m.pid==='ge1'))break;Q.length=0}
-     const s=S.ge;if(!Q.some(m=>m.pid==='ge1'))return{err:err||'no hồi',mon,n:S.st.ch.n,all:!!S.st.ch.all};Q.length=0;
+     const s=S.ge;if(!window.__geHit&&!Q.some(m=>m.pid==='ge1'))return{err:err||'no hồi',mon,n:S.st.ch.n,all:!!S.st.ch.all};Q.length=0;
      const pr=mode==='rand'?[Math.floor(Math.random()*4),Math.floor(Math.random()*3)]:[C.e[j][3],C.e[j][4]];
      const st=s.st.slice(),pull=s.pull.slice(),oc=Object.assign({},s.oc);geLive(s);const odds=s.st[j]==='o'&&j>=0?geOdds(s,j):null;
      const cf=j>=0?(D.e[j].cond||[]).filter(t=>!geDbg.term(s,j,t)).map(t=>t[0]==='s'?t[1]+':'+Math.round(geDbg.stat(t[1]))+'/'+((BAL.ge.gate[road+'_'+(j+1)]||{})[t[1]]||0):t.join('.')).join(','):'';
