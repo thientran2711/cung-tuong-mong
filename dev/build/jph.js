@@ -111,11 +111,14 @@ img[data-kwait="f"],img[data-kwait="m"]{animation-name:kphBreathF}
 const KPHW_TXT=()=>(typeof CTM_WAIT!=="undefined"&&CTM_WAIT.picWait)||"Đang thỉnh tranh…";
 function kitPhWaitClear(im){try{if(!im.hasAttribute("data-kwait"))return;im.removeAttribute("data-kwait");const p=im.parentElement;if(p&&p.hasAttribute("data-kwaitp")&&!p.querySelector(":scope>img[data-kwait]"))p.removeAttribute("data-kwaitp")}catch(e){}}
 let KPHW_Q=[],KPHW_T=0;
+/* the kit silhouette for a full-body cut-out that is still loading: "m" (men: Emperor, eunuch, official, physician…) | "f" | "" (not a figure). ONE rule: the picture slot (here) and the stage layout (j59 wait) read it. */
+function kitPhFigG(s){return/\/fig-/.test(s)?(/\/fig-(emp|eun|off|man|men|ty|phys|ksp|prince|vuong|guard|thaigiam|king)/.test(s)?"m":"f"):""}
+window.kitPhFigG=kitPhFigG;
 function kitPhWaitMark(im){try{if(!im||im.tagName!=="IMG"||im.hasAttribute("data-kph-sample"))return;const s=im.getAttribute("src");
  if(!s||/^(data|blob):/.test(s)||(im.complete&&im.naturalWidth)){kitPhWaitClear(im);return}if(im.complete)return;/* failed: jcdn retries or hides it */
  const still=typeof reducedMotion==="function"&&reducedMotion();
  /* a full-body cut-out (fig-*) waits as the kit's faint unknown silhouette (j59 / j61 unknown-fig-f|m), never as a paper box; no line */
- const fm=/\/fig-/.test(s)?(/\/fig-(emp|eun|off|man|men|ty|phys|ksp|prince|vuong|guard|thaigiam|king)/.test(s)?"m":"f"):"";
+ const fm=kitPhFigG(s);
  im.setAttribute("data-kwait",fm?fm+(still?"s":""):still?"s":"1");if(fm)return;KPHW_Q.push(im);
  if(!KPHW_T)KPHW_T=requestAnimationFrame(()=>{KPHW_T=0;const L=KPHW_Q;KPHW_Q=[];/* the line: one layout read per frame for the whole batch */
   /* one line per picture area: a slot whose centre lies inside an area that already carries the line (layered art bands) gets none */

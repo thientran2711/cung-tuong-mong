@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"231cd3b3+","t":"2026-11-18T03:27Z","c":"review display-set-bonus: VANPHONG rows (Đa Bảo Các + set wording); cap line drops 'điểm'; j8 'Điểm trang lộng lẫy' night quality reads wor…","b":"0f3ac34be48b","h":[{"s":"bd8547f2+","t":"2026-11-18T03:28Z","c":"men-forbidden r6: old saves drop officials / festival princes standing in the hậu cung on load (menLoadFix, same ONE rule)"},{"s":"c743265c+","t":"2026-11-18T03:18Z","c":"review life-preload r6: title prefetch chained on undefined (lWant returns its promise); gate cap really 25 s (no re-run after cap / Vào cu…"},{"s":"2aca2aac+","t":"2026-11-18T03:17Z","c":"review cloth-tea-r6: kclo-on hides the picture by clip-path, not visibility (visibility:hidden made kfxGeom hide the cloth layer too: her f…"},{"s":"2b1b0701","t":"2026-11-18T03:00Z","c":"review staff-cap-apply r6: site rebuilt on db24027f"},{"s":"64488e4f+","t":"2026-11-18T02:38Z","c":"cloth-xoc r6e: rebuild site"},{"s":"af71f94a+","t":"2026-11-18T02:17Z","c":"smudge r16: stage4 + avatar probe tests, options script score fix (look tier by score), FINAL mode"},{"s":"e1f60927+","t":"2026-11-18T02:25Z","c":"result-reason: every result card line says a short why (kitWhy, KIT 7); values left-aligned next to labels"},{"s":"29385ec6+","t":"2026-11-18T02:07Z","c":"greet-stranger: site rebuilt"},{"s":"3b69182e","t":"2026-11-18T01:50Z","c":"hoa-dien r3 onto main 3da5720a (makeup-lux live): hoa-dien (jhd.js + hooks) replayed on the new main, replacing the old stacked branch. Sha…"},{"s":"631a703e","t":"2026-11-18T01:37Z","c":"review staff-cap-fix r6: hire pick refused at the cap gives the silver back (+ staff-cap.js case); site rebuilt"}]};
+window.CTM_BI={"s":"a95e8d41+","t":"2026-11-18T04:59Z","c":"review display-set-bonus: merge origin/main 94a9375 (generated files from main, site rebuilt)","b":"ab6d9fc7fb85","h":[{"s":"231cd3b3+","t":"2026-11-18T03:27Z","c":"review display-set-bonus: VANPHONG rows (Đa Bảo Các + set wording); cap line drops 'điểm'; j8 'Điểm trang lộng lẫy' night quality reads wor…"},{"s":"bd8547f2+","t":"2026-11-18T03:28Z","c":"men-forbidden r6: old saves drop officials / festival princes standing in the hậu cung on load (menLoadFix, same ONE rule)"},{"s":"c743265c+","t":"2026-11-18T03:18Z","c":"review life-preload r6: title prefetch chained on undefined (lWant returns its promise); gate cap really 25 s (no re-run after cap / Vào cu…"},{"s":"2aca2aac+","t":"2026-11-18T03:17Z","c":"review cloth-tea-r6: kclo-on hides the picture by clip-path, not visibility (visibility:hidden made kfxGeom hide the cloth layer too: her f…"},{"s":"2b1b0701","t":"2026-11-18T03:00Z","c":"review staff-cap-apply r6: site rebuilt on db24027f"},{"s":"64488e4f+","t":"2026-11-18T02:38Z","c":"cloth-xoc r6e: rebuild site"},{"s":"af71f94a+","t":"2026-11-18T02:17Z","c":"smudge r16: stage4 + avatar probe tests, options script score fix (look tier by score), FINAL mode"},{"s":"e1f60927+","t":"2026-11-18T02:25Z","c":"result-reason: every result card line says a short why (kitWhy, KIT 7); values left-aligned next to labels"},{"s":"29385ec6+","t":"2026-11-18T02:07Z","c":"greet-stranger: site rebuilt"},{"s":"3b69182e","t":"2026-11-18T01:50Z","c":"hoa-dien r3 onto main 3da5720a (makeup-lux live): hoa-dien (jhd.js + hooks) replayed on the new main, replacing the old stacked branch. Sha…"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -8136,15 +8136,23 @@ function j59lay(){const st=document.getElementById("stage");if(!st||!S)return;co
  const toks=tk?[...tk.querySelectorAll(".tok")]:[];if(!me&&!toks.length){j59clear(tk);return}
  const imgs=toks.map(t=>t.classList.contains("fig")?t.querySelector(".figimg"):null).filter(Boolean);
  let wait=false;
- for(const im of (me?[me,...imgs]:imgs)){const s=im.getAttribute("src");if(!im.complete||!im.naturalWidth){wait=true;if(!im.dataset.j59l){im.dataset.j59l=1;im.addEventListener("load",j59sched)}}if(s&&!j59bb(s,j59sched))wait=true}
+ /* review/life-preload-fu (A): a figure whose picture is still on its way (!complete) stands in its slot as the KIT §59.1 silhouette (unknown-fig-f|m, kit core file) laid out with the SILHOUETTE's own body box, exactly like a known person with a real picture; the real picture swaps in on load (j59sched). Only a failed / unmeasured picture still waits hidden (15 s cap below). */
+ const wsil=new Map(),whold=new Set();
+ for(const im of (me?[me,...imgs]:imgs)){const s=im.getAttribute("src");const g=s&&typeof kitPhFigG==="function"?kitPhFigG(s):"";const sb=()=>{const u=g&&j59unkSrc(g);return u&&j59bb(u,j59sched)};
+  if(!im.complete||!im.naturalWidth){if(!im.dataset.j59l){im.dataset.j59l=1;im.addEventListener("load",j59sched)}
+   /* a picture that FAILED (error: complete, no width) keeps the silhouette too — never an empty box where a person stands; a retry (jcdn) that lands clears the mark on load */
+   const ub=sb();if(ub){wsil.set(im,ub);if(im.complete&&!im.hasAttribute("data-kwait"))im.setAttribute("data-kwait",g)}else wait=true;continue}
+  /* arrived but its body box is not measured yet: that ONE figure keeps its slot as the silhouette, hidden (no stretched picture); the others are not held back by it */
+  if(s&&!j59bb(s,j59sched)){const ub=sb();if(ub){wsil.set(im,ub);whold.add(im)}else wait=true}}
+ for(const im of (me?[me,...imgs]:imgs))im.style.visibility=whold.has(im)?"hidden":"";
  {const now=Date.now();if(wait){if(!st.__j59w0)st.__j59w0=now}else st.__j59w0=0;st.classList.toggle("j59wait",wait&&now-st.__j59w0<15000)}/* a picture that never loads stops hiding the others after 15 s (stage-figsize: the first load after a new build can take 6 s+ on the CDN; an unplaced pile is what the owner saw) *//* KIT 33.12: while pictures still load, nobody stands in an unplaced pile (owner's Fold video: 3 figures on top of each other) */
  if(wait)return;
  const R=st.getBoundingClientRect(),sH=R.height,sW=R.width;if(sH<60||sW<60)return;
  const ppl=typeof curPeople==="function"?curPeople():[];
  const E=toks.map(tok=>{const im=tok.classList.contains("fig")?tok.querySelector(".figimg"):null;const p=ppl[+tok.dataset.p];
-  if(im){const s=im.getAttribute("src");return{tok,im,p,tag:tok.querySelector(".tag"),b:J59BB[s],f:j59fac(s,p),ar:im.naturalWidth/im.naturalHeight}}
+  if(im){const s=im.getAttribute("src");const ws=wsil.get(im);return{tok,im,p,tag:tok.querySelector(".tag"),b:ws||J59BB[s],f:j59fac(s,p),ar:ws?ws.ar:im.naturalWidth/im.naturalHeight,ws:!!ws}}
   return{tok,p,tag:tok.querySelector(".tag"),nf:1}});
- const mb=me?J59BB[me.getAttribute("src")]:null,mar=me?me.naturalWidth/me.naturalHeight:0;
+ const mws=me?wsil.get(me):null,mb=me?mws||J59BB[me.getAttribute("src")]:null,mar=me?(mws?mws.ar:me.naturalWidth/me.naturalHeight):0;
  /* KIT 33.8 STAGE PET: the ONE following pet of each person (kitPetOf: p.pets / p.petOn, already synced in co-op) stands in a fixed spot on that person's right */
  const j59pr=who=>{try{if(who&&who!==S&&!j59known(who))return null;/* r7-r1 review 1: a stranger ("Người lạ" silhouette) never shows a pet — the same known test as the figure (figWho first) */const P=kitPetOf(who);if(!P)return null;const a=kitPetArt(P,j59sched);if(!a)return null;const b=j59bb(a.src,j59sched);return b?{P,a,b}:null}catch(e){return null}};
  const mePet=me?j59pr(S):null;E.forEach(x=>{x.pet=x.im?j59pr(x.p):null});
@@ -8225,7 +8233,7 @@ function j59lay(){const st=document.getElementById("stage");if(!st||!S)return;co
  const cMid=b=>b.cl!=null&&b.cr>b.cl?(b.cl+b.cr)/2:(kCL(b)+kCR(b))/2;/* the BODY (core column) centre stands on the slot centre, not the sleeve-to-sleeve box (owner: bodies at their own slot centres) */
  const loX=KIT_SLOTS.edge||4,hiX=Math.min(sW-(KIT_SLOTS.edge||4),G.x0+G.avail+6-(KIT_SLOTS.edge||4));/* stage-figsize: visible art never cut by the stage edge nor under the side column (kitSlotIn) */
  if(showMe){const meH=H/(mb.b-j59bt(mb)),meW=meH*mar,meC=(cMid(mb)-.5)*meW;const cx=kitSlotIn(inLim(cxOf(slot++)),meW*(mb.l-cMid(mb)),meW*(mb.r-cMid(mb)),loX,hiX);centres.push(cx);usedPets.push([mePet,cx,G.sw,"me"]);
-  me.style.setProperty("height",meH.toFixed(1)+"px","important");me.classList.add("j59sz");
+  me.style.setProperty("height",meH.toFixed(1)+"px","important");if(mws)me.style.setProperty("width",meW.toFixed(1)+"px","important");else me.style.removeProperty("width");me.classList.add("j59sz");
   me.style.left=(cx-meC).toFixed(1)+"px";me.style.bottom=(fo-(1-mb.b)*meH).toFixed(1)+"px";
   if(mt){const g=mt.firstChild;mt.style.left=cx.toFixed(1)+"px";mt.style.top=(floorY+3).toFixed(1)+"px";g.style.translate="";mt.style.visibility="";
    /* her chip on the same top line as every other chip (the holder box may add its own offset) */
@@ -8233,7 +8241,7 @@ function j59lay(){const st=document.getElementById("stage");if(!st||!S)return;co
   for(const x of vis){let cx=cxOf(slot++);if(!x.nf){const w0=boxW(x,H);cx=kitSlotIn(cx,w0*(kCL(x.b)-cMid(x.b)),w0*(kCR(x.b)-cMid(x.b)),loX,hiX)}centres.push(cx);const t=x.tok;if(!x.nf)usedPets.push([x.pet,cx,G.sw,"p"+(x.tok.dataset.p||"")]);
   if(x.nf){t.style.left=(cx-t.offsetWidth/2).toFixed(1)+"px";t.style.bottom=fo.toFixed(1)+"px";continue}
   const ih=imgH(x,H),w=boxW(x,H),cw=coreW(x,H);
-  x.im.style.setProperty("height",ih.toFixed(1)+"px","important");x.im.style.setProperty("width","auto","important");
+  x.im.style.setProperty("height",ih.toFixed(1)+"px","important");x.im.style.setProperty("width",x.ws?w.toFixed(1)+"px":"auto","important");
   x.im.style.setProperty("margin-left",(-w*kCL(x.b)).toFixed(1)+"px","important");x.im.style.setProperty("margin-right",(-w*(1-kCR(x.b))).toFixed(1)+"px","important");
   x.im.style.setProperty("margin-bottom",(-(1-x.b.b)*ih).toFixed(1)+"px","important");x.im.classList.add("j59sz");x.im.style.translate="";
   t.style.left=(cx-w*(cMid(x.b)-kCL(x.b))).toFixed(1)+"px";t.style.bottom=fo.toFixed(1)+"px";t.style.zIndex="";if(x.tag)x.tag.style.translate=""}
@@ -42377,7 +42385,7 @@ function lPaint(have,total,slow){if(!lel)return;const b=lel.querySelector(".klb"
  const want=slow?`<button class="kbtn alt" data-klife="go">${CTM_WAIT.lifeGo}</button>`:"";if(o.innerHTML!==want)o.innerHTML=want}
 document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-klife]");if(!b)return;e.stopPropagation();LIFE.go=true},true);
 const lSleep=t=>new Promise(ok=>setTimeout(ok,t));
-async function lifeGate(why){if(LIFE.off)return;/* test hook: KLIFE.off = no gate (mid-load shots of §59.1) */if(LIFE.on){LIFE.again=true;return}
+async function lifeGate(why){(LIFE.calls=LIFE.calls||[]).push(why);/* test counter: gate runs per reason (dev/test/coop-lifegate.js) */if(LIFE.off)return;/* test hook: KLIFE.off = no gate (mid-load shots of §59.1) */if(LIFE.on){LIFE.again=true;return}
  if(why!=="start"){const L=kitLifeSet();lBgs().forEach(u=>{if(!lCore(u))L.set(u,u)});let miss=0;/* a background not yet seen this session counts as missing: a short gate (local cache) rather than one empty frame */const mw=[];L.forEach((raw,u)=>{if(!lOk(u)&&!lCore(u)){miss++;mw.push(u.split("/").pop());lWant(u,raw)}});
   /* pictures already on the device (core set, or brought in by the title prefetch) paint within a frame: not a reason for the screen */
   const pd=lPending().filter(u=>{const a=lAbs(u);return !lOk(a)&&!lCore(a)});KLOAD.lifeMiss=mw.concat(pd.map(u=>u.split("/").pop())).slice(0,12);if(!miss&&!pd.length){(KLOAD.lifes=KLOAD.lifes||[]).push({why,n:L.size,bytes:0,ms:0,late:0,cached:true});return}}
@@ -42416,7 +42424,10 @@ function lDlgWait(){try{const M=document.getElementById("modal");if(!M||M.hidden
 .modal.klife{z-index:2147483500}.modal.klife .dlg.kpsc{opacity:0;animation:klifeIn .3s ease .45s forwards}@keyframes klifeIn{to{opacity:1}}`;document.head.appendChild(st)})();
 let lReq=0;
 function lArm(){try{if(window.__bot||(window.COOPW&&COOPW.ctx))return;if(typeof S==="undefined"||!S||typeof S!=="object")return;
- if(!LIFE.seen.has(S)){LIFE.seen.add(S);lifeGate("life");return}
+ if(!LIFE.seen.has(S)){LIFE.seen.add(S);
+  /* review/life-preload-fu (B): in co-op every week merge (fromCanon → deser) builds a NEW S for the SAME life; the cover is only for a REAL life change = this seat's life counter (COOPW.life) or her name changed since the last gate. Same life: no cover, no full DOM scan — the pictures are fetched quietly (set below) and §59.1 covers any that is late. Both seats run the same rule on their own S. */
+  const cw=window.COOPW;if(cw&&cw.on){const k=(cw.life||0)+"|"+(S.name||"");if(LIFE.ck===k){try{kitLifeSet().forEach((raw,u)=>lWant(u,raw))}catch(e){}return}LIFE.ck=k}
+  lifeGate("life");return}
  const now=Date.now();if(now-lReq<2500)return;lReq=now;/* off the render path (perf): when the page is idle */
  (window.requestIdleCallback||(f=>setTimeout(f,200)))(()=>{try{kitLifeSet().forEach((raw,u)=>lWant(u,raw))}catch(e){}},{timeout:3000})}catch(e){}}
 setTimeout(function(){try{
@@ -54195,11 +54206,14 @@ img[data-kwait="f"],img[data-kwait="m"]{animation-name:kphBreathF}
 const KPHW_TXT=()=>(typeof CTM_WAIT!=="undefined"&&CTM_WAIT.picWait)||"Đang thỉnh tranh…";
 function kitPhWaitClear(im){try{if(!im.hasAttribute("data-kwait"))return;im.removeAttribute("data-kwait");const p=im.parentElement;if(p&&p.hasAttribute("data-kwaitp")&&!p.querySelector(":scope>img[data-kwait]"))p.removeAttribute("data-kwaitp")}catch(e){}}
 let KPHW_Q=[],KPHW_T=0;
+/* the kit silhouette for a full-body cut-out that is still loading: "m" (men: Emperor, eunuch, official, physician…) | "f" | "" (not a figure). ONE rule: the picture slot (here) and the stage layout (j59 wait) read it. */
+function kitPhFigG(s){return/\/fig-/.test(s)?(/\/fig-(emp|eun|off|man|men|ty|phys|ksp|prince|vuong|guard|thaigiam|king)/.test(s)?"m":"f"):""}
+window.kitPhFigG=kitPhFigG;
 function kitPhWaitMark(im){try{if(!im||im.tagName!=="IMG"||im.hasAttribute("data-kph-sample"))return;const s=im.getAttribute("src");
  if(!s||/^(data|blob):/.test(s)||(im.complete&&im.naturalWidth)){kitPhWaitClear(im);return}if(im.complete)return;/* failed: jcdn retries or hides it */
  const still=typeof reducedMotion==="function"&&reducedMotion();
  /* a full-body cut-out (fig-*) waits as the kit's faint unknown silhouette (j59 / j61 unknown-fig-f|m), never as a paper box; no line */
- const fm=/\/fig-/.test(s)?(/\/fig-(emp|eun|off|man|men|ty|phys|ksp|prince|vuong|guard|thaigiam|king)/.test(s)?"m":"f"):"";
+ const fm=kitPhFigG(s);
  im.setAttribute("data-kwait",fm?fm+(still?"s":""):still?"s":"1");if(fm)return;KPHW_Q.push(im);
  if(!KPHW_T)KPHW_T=requestAnimationFrame(()=>{KPHW_T=0;const L=KPHW_Q;KPHW_Q=[];/* the line: one layout read per frame for the whole batch */
   /* one line per picture area: a slot whose centre lies inside an area that already carries the line (layered art bands) gets none */
@@ -68049,7 +68063,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="0f3ac34be48b";window.CTM_BUILD=BUILD;
+const BUILD="ab6d9fc7fb85";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
