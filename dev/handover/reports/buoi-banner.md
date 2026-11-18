@@ -1,4 +1,4 @@
-# buoi-banner — report (worker; sha 44f58e6 on review/buoi-banner; contains origin/main 4dcd50e)
+# buoi-banner — report (worker; sha d959a9e on review/buoi-banner; contains origin/main 4dcd50e)
 PRIORITY #1 CHECK: 'buổi transition' — OD canon 18/11 ~06:20Z BUỔI CHANGE (OD:L891) + owner's later words relayed by ROOT-46 (plaque REJECTED: keep the approved animation, remove only the opaque backdrop); main jbuoi.js (BTR_*), j18 curtain(), j93 btrKill reset; review/* none else.
 ## What (final direction)
 - `jbuoi.js` (KIT §74): the approved animation is unchanged (art, motion, timing, season/festival variants, mist, sky band, title plate, seal). REMOVED only the opaque full-screen backdrop: tint, ink wash, vignette (JS layers, animations, CSS). The whole `#buoitr` lies on the game UI at `BTR_OP` = 0.80 (hook `window.__btrOp`; ladder 70/80/85 shown). Gọn = the title only, 0.7 s. KIT.md §74 note added.
@@ -22,3 +22,8 @@ https://ctm-img.victoria-tntt.workers.dev/img/_review/buoi-banner/{fold,ipad}-tr
 ## UPDATE 44f58e6 (owner ~06:45Z: title block must NOT overlap the band)
 - Overlap of 73a7d3f reverted. Order = band ABOVE (flush with the stage top, feathered top/bottom), then icon + "Buổi trưa" + seal + bold sub line directly UNDER it with a small gap (`gap: clamp(4px,1vmin,10px)`), nothing on the band. Fold + iPad. Sub size/ink and feathered edges kept; no backdrop; opacity default 0.80.
 - Tests: buoi-transition (REAL=1, fold+ipad) FAIL 0 on this commit. Shots re-made, same URLs: fold/ipad-trua-{70,80,85}.png, fold-strip.png, ipad-strip.png, fold-zoom.png. LOOKed: fold-80, ipad-80; not individually: 70/85, strips, zoom.
+
+## FINAL d959a9e (owner: "Làm 85%" + "đè lên như vậy được đó, khỏi sửa")
+- Layout = 73a7d3f exactly (title block overlaps the band, one stack flush at the stage top, feathered band, bold sub line, no backdrop). 44f58e6 (title under the band) is superseded.
+- `BTR_OP` = 0.85 (owner pick); the `window.__btrOp` ladder hook is removed. KIT §74 says 0.85.
+- Test: buoi-transition (REAL=1, fold+ipad) FAIL 0. Shots at 85: CDN img/_review/buoi-banner/fold-trua-85.png, ipad-trua-85.png (LOOKed). Other files in that folder are stale: wipe with `python3 dev/site/cdn_sync.py --wipe-review buoi-banner` after her OK.
