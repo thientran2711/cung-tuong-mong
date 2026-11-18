@@ -1,0 +1,40 @@
+/* look-fx-mirror shots (R9g): Điểm trang close-up. usage node dev/test/look-fx-mirror.js <device> <outdir> [fig=c01]; same harness set-up as look-fx-wire.js; drives the real flow toilOpen -> toilDressDone -> toilFinish('quick') and shoots the round bronze-mirror face zoom (kitFaceZoom) of each mark lv1-3. Original header:  usage node dev/test/look-fx-wire.js <device: fold|ipadAir> <outdir> [figs=c01,c30]
+   HOST mode (built root index.html via rot.js). For c01 + c30 (por + fig forced onto the player) and every face mark x lv1/2/3:
+   stage figure (full body, fig-fit rows) | big portrait | mirror zoom (por rows). One png per look/fig/lv into outdir (+ a 3x crop of the stage face). */
+const {chromium}=require('playwright');const D=require('./lib/device');const fs=require('fs');
+(async()=>{const dev=process.argv[2]||'fold',out=process.argv[3]||'/tmp/lfw-shots',FIGS=(process.argv[4]||'c01,c30').split(',');fs.mkdirSync(out,{recursive:true});
+ const srv=await D.serveRoot();const b=await chromium.launch({args:['--disable-dev-shm-usage'],proxy:process.env.HTTPS_PROXY?{server:process.env.HTTPS_PROXY,bypass:'localhost,127.0.0.1'}:undefined});
+ const ctx=await D.newDeviceContext(b,dev);
+ /* LFW_OVR=<dir>: serve candidate files (scar-fit.json, veil-fit.json, fx-*.png in <dir>) instead of the live CDN ones, so a candidate is judged in the game before anything goes live; LFW_ONLY=muoi,cao limits the marks (base = the figure without any mark; ask for it explicitly: LFW_ONLY=base) */
+ if(process.env.LFW_OVR)await ctx.route(/\/img\/(scar-fit\.json|veil-fit\.json|face-fit\.json|keep-fit\.json|fx-[a-z-]+-\d(-m)?\.png)(\?.*)?$/,r=>{const f=process.env.LFW_OVR+'/'+r.request().url().split('/').pop().split('?')[0];fs.existsSync(f)?r.fulfill({path:f,headers:{'access-control-allow-origin':'*'}}):r.continue()});
+ const p=await ctx.newPage();const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,160)));
+ const g=await D.openHost(p,srv.url);
+ await g.waitForFunction(()=>typeof start==='function'&&typeof showModal==='function',null,{timeout:60000});await p.waitForTimeout(2000);
+ await g.evaluate(()=>{const kl=document.getElementById('kload');if(kl)kl.remove();try{localStorage.clear()}catch(e){}SLOT=3;window.__forceOrigin='tt';document.getElementById('title').hidden=true;start()});
+ await g.waitForFunction(()=>typeof S!=='undefined'&&S&&S.name&&S.known,null,{timeout:60000});await p.waitForTimeout(4000);
+ await g.waitForFunction(()=>window.TOIL_FIT&&TOIL_FIT.fit&&window.KIT_VEIL&&KIT_VEIL.fit&&KIT_SCAR.fit,null,{timeout:60000}).catch(()=>{});
+ await g.evaluate(()=>{Q.length=0;document.getElementById('modal').hidden=true;window.__lfw={};
+  window.__lfw.set=(id)=>{const T=window.__lfwT||'t2',por='por-consort-'+id+'-'+T+'-a26.webp',fig='fig-consort-'+id+'-'+T+'-a26.webp';const kf0=window.__kf0||(window.__kf0=kitFace),kg0=window.__kg0||(window.__kg0=kitFigOf);
+   kitFace=function(q){const f=kf0.apply(this,arguments);if(q===S&&f&&f.src){const h=Object.assign({},f,{src:String(f.src).replace(/[^/]*$/,por)});if(f.__kp)h.__kp=f.__kp;return h}return f};
+   kitFigOf=function(q){const s=kg0.apply(this,arguments);return q===S?String(s).replace(/[^/?]*(\?.*)?$/,fig):s};window.__lfw.por=por;window.__lfw.fig=fig};
+  window.__lfw.clear=()=>{S.ill=null;S.pz=null;S.rash=null;S.slap=null;S.scar=null;S.sc70=null;S.lk=null;S.stain=null;try{const t=toilToday(S);if(t)delete t.lk}catch(e){}};
+  window.__lfw.mark=(m,lv)=>{const c=window.__lfw.clear;c();if(m==='base')return; /* base = no mark at all (to tell a mark defect from a defect of the cut-out figure itself) */try{toilAuto()}catch(e){}const T=S.toilette;if(T){T.makeup=(m==='moho')} /* marks sheets: makeup OFF (except mồ hôi, a mark that only exists on a made-up face: LK_MK / lkMadeUp) so no blush/lip layer is mixed in (the auto toilette gave a random makeup per run: pink glow on the cheek / lip corner in some runs) */
+   if(m==='thuydau'||m==='daumua')S.ill={k:m,st:lv,known:true};
+   else if(m==='poxscar'){S.scar={sev:lv,d:5,need:3,pg:0,veil:0,tr:0,cure:0,by:null,at:wk(),how:'daumua',known:true}}
+   else if(m==='cao'){S.scar={sev:lv,d:5,need:3,pg:0,veil:0,tr:0,cure:0,by:null,at:wk(),how:'test',known:true,known:true}}
+   else lkGive(S,m,lv)};
+});
+
+ if(process.env.LFW_DOM)console.log(JSON.stringify(await g.evaluate(()=>{const r=[];const w=document.createTreeWalker(document.body,NodeFilter.SHOW_ELEMENT);let e;while(e=w.nextNode()){if(e.children.length===0&&/vòng luân hồi/.test(e.textContent)){let c=[],x=e;while(x&&x!==document.body){c.push(x.tagName+'#'+x.id+'.'+(x.className+'').slice(0,30));x=x.parentElement}r.push(c.join(' < '))}}return r})));
+const rmLuan=async()=>{for(let t=0;t<12;t++){const r=await g.evaluate(()=>{const w=document.createTreeWalker(document.body,NodeFilter.SHOW_ELEMENT);let e,hit=null;while(e=w.nextNode()){if(e.tagName!=='SCRIPT'&&e.children.length===0&&/vòng luân hồi/.test(e.textContent)){hit=e;break}}if(!hit)return null;let x=hit,c=[];while(x.parentElement&&x.parentElement!==document.body){c.push(x.tagName+'.'+(x.className+'').slice(0,24));x=x.parentElement}c.push(x.tagName+'#'+x.id+'.'+(x.className+'').slice(0,24));x.remove();return c.join(' < ')});if(!r)break;console.log('removed',r);await p.waitForTimeout(700)}};
+ await p.waitForTimeout(5000);await rmLuan();
+ const LOOKS=(process.env.LFW_ONLY||'thuydau,daumua,poxscar,muc,bui,muoi,moho,cao').split(',');let n=0;const id=FIGS[0];
+ await g.evaluate(([i,t])=>{window.__lfwT=t;__lfw.set(i)},[id,process.env.LFW_TIER||'t2']);await g.evaluate(()=>{S.out=false;if(S.rank<2)S.rank=2;const f0=window.figFor;if(!window.__ff0){window.__ff0=f0;window.figFor=function(q){const r=f0.apply(this,arguments);return q===S?String(r).replace(/[^/?]*(\?.*)?$/,window.__lfw.fig):r}}});
+ for(const m of LOOKS)for(const lv of (process.env.LFW_LVS||'1,2,3').split(',').map(Number)){
+  await g.evaluate(([m,lv])=>{__lfw.mark(m,lv);document.querySelectorAll('.kroul,#kroul,.kmov.kcf').forEach(e=>e.remove());try{Q.length=0}catch(e){}try{closeModal()}catch(e){}try{toilOpen()}catch(e){window.__e1=String(e)}},[m,lv]);await g.waitForFunction(()=>!/TRANH NGƯỜI TRONG KIẾP NÀY/i.test(document.body.innerText),null,{timeout:60000}).catch(()=>console.log('loading card still up'));await p.waitForTimeout(1500);await rmLuan();if(process.env.LFW_STEP)await p.screenshot({path:`${out}/step1.png`});
+  await g.evaluate(()=>{try{toilDressDone(true)}catch(e){window.__e2=String(e)}});await p.waitForTimeout(800);if(process.env.LFW_STEP)await p.screenshot({path:`${out}/step2.png`});
+  await g.evaluate(()=>{try{toilFinish('quick')}catch(e){window.__e3=String(e)}});await g.waitForFunction(()=>!/TRANH NGƯỜI TRONG KIẾP NÀY/i.test(document.body.innerText),null,{timeout:30000}).catch(()=>{});await p.waitForTimeout(1500);{const vs=p.viewportSize();await p.mouse.click(vs.width/2,vs.height/2)}await p.waitForTimeout(1600);
+  let ok=await g.evaluate(()=>!!document.querySelector('.kfz,[class*=facezoom],.kfacez'));
+  await p.screenshot({path:`${out}/${dev}-${id}-mirror-${m}-lv${lv}.png`});n++;{const vs=p.viewportSize();await p.mouse.click(vs.width/2,vs.height/2)}await p.waitForTimeout(500);
+  await g.evaluate(()=>{try{document.getElementById('kg82x')&&document.getElementById('kg82x').click()}catch(e){}try{kg82Close()}catch(e){}try{closeModal()}catch(e){}document.querySelectorAll('.kmov').forEach(e=>e.remove())});await p.waitForTimeout(400)}
+ console.log(JSON.stringify({shots:n,errs:errs.slice(0,5),e:await g.evaluate(()=>[window.__e1,window.__e2,window.__e3])}));await b.close();srv.close()})();
