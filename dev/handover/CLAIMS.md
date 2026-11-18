@@ -478,3 +478,4 @@ c12 a18 t5–t8 headdress re-do from live originals (Round 43) | claude/cung-tuo
 | E5 QUESTLINE Q0 docs (sonnet SMALL; briefs/E5-questline-q0-docs.md) | review/questline-q0 | E ROOT | session_01DgYSWpZXvejYRmdjtJ3Ccz | SẴN SÀNG KIỂM cfb0e8ab (reports/questline-q0.md) | 18/11 |
 | E6 QUESTLINE H1 expert (opus research; briefs/E6-questline-h1-expert.md) | handover reports/questline-expert.md | E ROOT | session_01DgYSWm57KGQqbv88WBygrf | RUNNING | 18/11 05:12Z |
 | hud-mood-bar (owner UI 18/11 05:40Z: mood bar in the fixed top bar; sonnet; brief briefs/hud-mood-bar.md) | review/hud-mood-bar | MAIN ROOT-45 | (opening) | RUNNING | 18/11 05:11Z |
+| kit-set-lines (KIT REQUEST (6) set lines + set glow; sonnet; brief briefs/kit-set-lines.md) | review/kit-set-lines | MAIN ROOT-45 | (opening) | RUNNING | 18/11 05:12Z |
