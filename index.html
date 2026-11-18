@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"8a1a6a0b","t":"2026-11-18T03:22Z","c":"site rebuilt on merge","b":"600d253f8049","h":[{"s":"2b1b0701","t":"2026-11-18T03:00Z","c":"review staff-cap-apply r6: site rebuilt on db24027f"},{"s":"64488e4f+","t":"2026-11-18T02:38Z","c":"cloth-xoc r6e: rebuild site"},{"s":"af71f94a+","t":"2026-11-18T02:17Z","c":"smudge r16: stage4 + avatar probe tests, options script score fix (look tier by score), FINAL mode"},{"s":"e1f60927+","t":"2026-11-18T02:25Z","c":"result-reason: every result card line says a short why (kitWhy, KIT 7); values left-aligned next to labels"},{"s":"29385ec6+","t":"2026-11-18T02:07Z","c":"greet-stranger: site rebuilt"},{"s":"3b69182e","t":"2026-11-18T01:50Z","c":"hoa-dien r3 onto main 3da5720a (makeup-lux live): hoa-dien (jhd.js + hooks) replayed on the new main, replacing the old stacked branch. Sha…"},{"s":"631a703e","t":"2026-11-18T01:37Z","c":"review staff-cap-fix r6: hire pick refused at the cap gives the silver back (+ staff-cap.js case); site rebuilt"},{"s":"4cdcffa9+","t":"2026-11-18T00:44Z","c":"review looks-s40: site rebuilt from merged sources (glow v8)"},{"s":"eb3675a6+","t":"2026-11-17T22:59Z","c":"review coop-thin-c r1 #2: merge origin/main b048e495 (kit-display-room r2, jdisp/jshelf only; generated files from main + site rebuilt)"},{"s":"4eac30bc+","t":"2026-11-17T22:57Z","c":"review coop-thin-c r1 #2: her NPC pack resend (F1) listens on any guest seat, not only while the C switch is on: a level drop / build hold …"}]};
+window.CTM_BI={"s":"0c97c0c3+","t":"2026-11-18T03:22Z","c":"site rebuilt on merge","b":"ca266fab8ee8","h":[{"s":"2b1b0701","t":"2026-11-18T03:00Z","c":"review staff-cap-apply r6: site rebuilt on db24027f"},{"s":"64488e4f+","t":"2026-11-18T02:38Z","c":"cloth-xoc r6e: rebuild site"},{"s":"af71f94a+","t":"2026-11-18T02:17Z","c":"smudge r16: stage4 + avatar probe tests, options script score fix (look tier by score), FINAL mode"},{"s":"e1f60927+","t":"2026-11-18T02:25Z","c":"result-reason: every result card line says a short why (kitWhy, KIT 7); values left-aligned next to labels"},{"s":"29385ec6+","t":"2026-11-18T02:07Z","c":"greet-stranger: site rebuilt"},{"s":"3b69182e","t":"2026-11-18T01:50Z","c":"hoa-dien r3 onto main 3da5720a (makeup-lux live): hoa-dien (jhd.js + hooks) replayed on the new main, replacing the old stacked branch. Sha…"},{"s":"631a703e","t":"2026-11-18T01:37Z","c":"review staff-cap-fix r6: hire pick refused at the cap gives the silver back (+ staff-cap.js case); site rebuilt"},{"s":"4cdcffa9+","t":"2026-11-18T00:44Z","c":"review looks-s40: site rebuilt from merged sources (glow v8)"},{"s":"eb3675a6+","t":"2026-11-17T22:59Z","c":"review coop-thin-c r1 #2: merge origin/main b048e495 (kit-display-room r2, jdisp/jshelf only; generated files from main + site rebuilt)"},{"s":"4eac30bc+","t":"2026-11-17T22:57Z","c":"review coop-thin-c r1 #2: her NPC pack resend (F1) listens on any guest seat, not only while the C switch is on: a level drop / build hold …"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -2152,7 +2152,7 @@ PEND.ksp=()=>({who:pEmp(),t:"<p>Tối nay Hoàng thượng lật thẻ bài củ
  {n:"Cáo bệnh",fx:{sung:-2},x:"nhường đêm; Ân tình -2",go:()=>{S.an=cl(S.an-2,0,100);S.tonight=null}}]});
 PEND.prep=()=>{const wb=wearBonus(S),vp=vpItems(S).length>0,b=bestArt();return{who:pMe(),t:"<p>Kính sự phòng đã báo tin. Còn hai canh giờ trước khi kiệu đến.</p>",o:[
  {n:"Tắm cánh hoa, xông hương",fx:{bac:-10},x:"đêm nay được ưa hơn",go:()=>pushFront(mkP("night1",{q:2,vp:0}),"Đêm thị tẩm")},
- {n:"Điểm trang lộng lẫy",fx:{},x:`trang sức đang đeo: Sắc +${wb.sac-(wb.shSac||0)}${vp?` · kèm: đồ vượt phẩm bị Hoàng thượng thu, Danh -4: ${chanceW(40)}`:""}`,go:()=>pushFront(mkP("night1",{q:1+Math.round(wb.sac/3),vp:vp?1:0}),"Đêm thị tẩm")},
+ {n:"Điểm trang lộng lẫy",fx:{},x:`trang sức đang đeo: Sắc +${wb.sac-(wb.shSac||0)}${vp?` · kèm: đồ vượt phẩm bị Hoàng thượng thu, Danh -4: ${chanceW(40)}`:""}`,go:()=>pushFront(mkP("night1",{q:1+Math.round((wb.sac-(wb.shSac||0))/3)/* worn only, as j75 night prep: the shelf set Sắc is not jewellery */,vp:vp?1:0}),"Đêm thị tẩm")},
  {n:`Tập trước ${b.n}`,fx:{suc:-5},x:`bậc ${b.l}`,go:()=>pushFront(mkP("night1",{q:1+b.l,vp:0}),"Đêm thị tẩm")},
  {n:"Để mộc, tự nhiên",fx:{},go:()=>pushFront(mkP("night1",{q:1,vp:0}),"Đêm thị tẩm")}]}};
 PEND.night1=p=>{const E=S.emp,mood=BAL.night.mood[E.mood],go=b=>()=>{let s=p.q+b+mood+R(3),ex="";
@@ -66108,7 +66108,7 @@ function shelfSetApply(p){if(!p||p.coop)return;const z=p.shSet;if(!z)return;cons
  for(const s of new Set(Object.keys(on).concat(Object.keys(want)))){const d=(want[s]||0)-(on[s]||0);if(!d)continue;const lo=s==="th"||s==="hh"?-100:0;
   const before=p[s]||0;p[s]=Math.max(lo,Math.min(100,before+d));on[s]=(on[s]||0)+((p[s]||0)-before)/* read back: hh is the Empress's own regard (j24 hhSet → affAdd) */;if(!on[s])delete on[s]}z.on=on}
 function shelfSetTxt(id,v){const x=BAL.shelf.set.s[id],N=SHELF_SET_N[id]||[id];const mi=x.minus?Object.keys(x.minus).map(k=>`${SHELF_SET_STAT[k]} ${x.minus[k]}`).join(", "):"";
- return `Bộ ${N[0]}: ${v?`${SHELF_SET_STAT[x.st]} +${v}`:"đã đủ điểm bộ"}${mi?`, ${mi}, vì ${N[1]}`:""}.`}
+ return `Bộ ${N[0]}: ${v?`${SHELF_SET_STAT[x.st]} +${v}`:"đủ bộ, nhưng đã tới mức, không thêm"}${mi?`, ${mi}, vì ${N[1]}`:""}.`}
 function shelfSetQuiet(p){return p!==S||(typeof tsbBot==="function"&&tsbBot())}
 /* break → take back at once (never gives) */
 function shelfSetSync(p){try{const z=p&&p.shSet;if(!z||!Array.isArray(z.ids)||!z.ids.length)return;const live=shelfSetLive(p);if(live.length===z.ids.length)return;
@@ -67853,7 +67853,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="600d253f8049";window.CTM_BUILD=BUILD;
+const BUILD="ca266fab8ee8";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

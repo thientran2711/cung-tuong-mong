@@ -470,7 +470,7 @@ function shelfSetApply(p){if(!p||p.coop)return;const z=p.shSet;if(!z)return;cons
  for(const s of new Set(Object.keys(on).concat(Object.keys(want)))){const d=(want[s]||0)-(on[s]||0);if(!d)continue;const lo=s==="th"||s==="hh"?-100:0;
   const before=p[s]||0;p[s]=Math.max(lo,Math.min(100,before+d));on[s]=(on[s]||0)+((p[s]||0)-before)/* read back: hh is the Empress's own regard (j24 hhSet → affAdd) */;if(!on[s])delete on[s]}z.on=on}
 function shelfSetTxt(id,v){const x=BAL.shelf.set.s[id],N=SHELF_SET_N[id]||[id];const mi=x.minus?Object.keys(x.minus).map(k=>`${SHELF_SET_STAT[k]} ${x.minus[k]}`).join(", "):"";
- return `Bộ ${N[0]}: ${v?`${SHELF_SET_STAT[x.st]} +${v}`:"đã đủ điểm bộ"}${mi?`, ${mi}, vì ${N[1]}`:""}.`}
+ return `Bộ ${N[0]}: ${v?`${SHELF_SET_STAT[x.st]} +${v}`:"đủ bộ, nhưng đã tới mức, không thêm"}${mi?`, ${mi}, vì ${N[1]}`:""}.`}
 function shelfSetQuiet(p){return p!==S||(typeof tsbBot==="function"&&tsbBot())}
 /* break → take back at once (never gives) */
 function shelfSetSync(p){try{const z=p&&p.shSet;if(!z||!Array.isArray(z.ids)||!z.ids.length)return;const live=shelfSetLive(p);if(live.length===z.ids.length)return;
