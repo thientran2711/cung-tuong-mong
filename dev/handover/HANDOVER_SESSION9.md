@@ -603,3 +603,7 @@ MAIN WORKERS (all report to MAIN):
 OWNER WHEN SHE WAKES: first reply says new main (ROOT-51) + opt-card-short pictures wait for her OK; then show look-fx-wire r9g pairs (Fold+iPad) and fullbody-frame live notes (name tag touches Hoàng hậu crown tassels; iPad ID card kit fade over stat rows).
 FOR E: questline-q1-land READY FF (E7a2) will come as FOR MAIN — land it (check C-AG hold: if it touches assemble.py → WAIT).
 - ROOT-50 FINAL (09:35Z): successor MAIN ROOT-51 = session_01UV1SzhTcGjoPSff18UGey6 (depth 7). ROOT-50 relays owner words + worker reports only.
+
+## ROOT-51 START (18/11 09:41Z)
+MAIN = ROOT-51 session_01UV1SzhTcGjoPSff18UGey6; START_CTX ≈ 5 % (get_session reads 0; own estimate) → roll over at ≈ 30 %, ceiling 60 %; depth 7 (limit 8) → successor depth 8 (last allowed); after that TAKE OVER NOW to ROOT STANDBY.
+LOAD (09:41Z, from STATUS files): B 2 running | C W50 c03-a18-live + C-AG #11 lander gates | D 3 running | E 3 running (E1b, E7a2 q1-land, E9 Q3). §7 NOT DONE: nothing free to give (ROOT-50 09:33Z). LIVE main 5cbfd620.

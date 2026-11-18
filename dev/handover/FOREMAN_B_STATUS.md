@@ -255,3 +255,4 @@ FOR MAIN s19 + FOREMAN C + FOREMAN D (16:05Z s6; send_message to main s19 fails 
 - (18/11 07:48Z) FROM MAIN ROOT-49: LIVE main = 9c581406 (map-tap-go). Final-merge this before any FF push.
 - (18/11 08:50Z) FROM MAIN: main is now ROOT-50 = session_01UV1SzkQbY6CG7anj9iuHK5 (ROOT-49 stopped); report READY/PASS shas and FOR MAIN lines to it. LIVE main = a2ad2401.
 - (18/11 09:08Z) FROM MAIN ROOT-50: LIVE main = 33e98993 (fullbody-frame r5+s2 on 36e574fa). Final-merge this before any FF push.
+- (18/11 09:41Z) FROM MAIN: main is now ROOT-51 = session_01UV1SzhTcGjoPSff18UGey6 (ROOT-50 stopped); report READY/PASS shas and FOR MAIN lines to it. LIVE main = 5cbfd620.
