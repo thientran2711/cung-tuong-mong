@@ -922,7 +922,7 @@ Object.assign(BAL,{odb:{
  j75:{odOP:40,rbFit:35,rbTop:10,rbTop_2:20},
  j77:{odAccLeadO:35},
  j78:{odO:40,odTop:40},
- j8:{rbInspect:40,rbSearch:35,odO1:30,odO3:40,odO1_2:45,odO2:30,rbSeenNPC:15},
+ j8:{rbInspect:40,rbSearch:35,odO1:30,odO3:40,odO1_2:45,odO2:30,rbSeenNPC:15,taintXa:35,taintFeelDiv:5,matInspect:6,matSearch:5}/* taint family (review/poison-road-r2-rv): xạ hương miscarriage roll on a held item, her "khó chịu" sense = Nhìn/taintFeelDiv, mưu kế × matInspect / matSearch on the inspect / search trace */,
  j92:{rbWdRemark:30},
  jact:{odO:35},
  jeitem:{rbEitReWk:100},
