@@ -74,3 +74,4 @@ FOR MAIN (makeup owner): jtoil shared layer path now honours col.no (parts not o
 - (18/11 06:33Z) E4f SẴN SÀNG KIỂM monthly-ration e5d989b (FIX 1, 7 points; shots dev/handover/shots/monthly-ration/) → BIG re-reviewer E4r2 session_01DgYSWpv1jjW7qnecCmZG3c (opus). E4f idle (~20 % ctx). E7a ed01a6b = item 6 only; told to finish E7ar's 4 fixes first. Load 8/12.
 - (18/11 07:00Z) E7c2: FIX 1 done — SẴN SÀNG KIỂM questline-q1c 2148089 (all 6 families + optional; scan rules added, 30→0; nrask-scan/engine/quickcheck PASS). nrVoiceM sent to E7a. Will rebase on E7a's new q1a sha when told.
 - (18/11 06:36Z) E7c2 FIX 1 READY q1c 2148089 (6 families, 30→0 scan hits; nrVoiceM is engine jnroadm.js:147 → E7a) → re-review HELD until E7a's full q1a FIX 1 sha; E7c2 rebases then.
+- (18/11 06:38Z) E7b q1b b34eaedd (= 53c08086 data, rebased on q1a ed01a6b). Still HELD for E7a's full FIX 1.
