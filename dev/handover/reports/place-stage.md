@@ -1,7 +1,7 @@
 # place-stage — report (worker; sonnet; MAIN s43)
 PRIORITY #1 CHECK: OD 1813/1814/1818 | main: j59.js kitHereCount/j59ico, jrail.js kitStageRail, j93.js .kmnote, jk3.js kshR | review/*: ag-all-2-land, npc-chain-land, stage-caption searched, no stage-top news chip | claims: place-banner (superseded).
 
-STATUS: SHOTS READY. Branch review/place-stage sha 9e35fc49 (r2) on live main e24d5838. r1 e40b8df3 is superseded.
+STATUS: SHOTS READY. Branch review/place-stage sha 235d854e (r3) on live main e24d5838. r1 e40b8df3 is superseded.
 Kept from place-banner: kitHereCount for every place (chip built from the ONE head count). NOT kept: .j59ln, J59EASE, #sc-t plaque, kmmAvoid change (not needed: the chip steps right of her marker itself).
 
 ## What changed (dev/build/jplst.js new, last in assemble.py)
@@ -34,3 +34,9 @@ quickcheck: PASS 144 s (open 1352 ms, old save ok, render 172/189 ms new/live, t
 Delete CDN folder after verdict: python3 dev/site/cdn_sync.py --wipe-review place-stage.
 Open: "Phi ???" mask text (not this task). Place icon (kplic) no longer shown beside the name.
 ~95% xong (chờ kiểm) / chơi được sau khi kiểm
+
+## r3 (owner: "dấu ta" = HER bouncing flower marker went outside the frame)
+Root cause: kmmBob bounces the marker up to 11 px (+3 % squash) above its rest spot, but its room test only used the frame top (rest spot 13 px under it -> bounce top -0.6 px).
+Fix (one kit rule, all stages): KIT_MEMARK.bob 11 / edge 4 (jmark.js); window.kitMeMarkRoom(bh) = marker height x1.03 + gap + bob + edge; j59 size() gets meCap(fo): her picture top keeps that room under the frame top, so ALL figures (one shared H) shrink just enough: 524 -> 517 px (-1.3 %), true proportions; the marker keeps its full size (36 px, was shrinking under a tight roof); dialogs: roomTop now = frame top + bob + edge.
+Scan (dev/test/place-stage-scan.js, markBounceTop = min over 2.8 s of the marker picture's top vs frame top): 18 places x 5 devices, min 5.9 px inside (never outside), name-plate gap 8 px everywhere, marker visible, 0 errors (r3 on iPad Pro opens a place card: plate gap 4, still inside). quickcheck PASS 128 s.
+Shots (same character, live | mine): Fold https://ctm-img.victoria-tntt.workers.dev/img/_review/place-stage/sbs-fold-vuon.jpg iPad .../sbs-ipad-vuon.jpg
