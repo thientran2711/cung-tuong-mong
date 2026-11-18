@@ -78,3 +78,4 @@ style-ref test A/B/C c06 t1–t3 | CDN _review only | W79 session_011xDdVSouZw85
 | shop-panel-r3 (sonnet SMALL UI owner 18:55Z: kind sub-tabs in Mua/Bán) | review/shop-panel-r2 | MAIN ROOT-53 | session_01Rc5AsJv1gjknuBXYWL6yeS | RUNNING | 18/11 18:56Z |
 | opt-card-short #4 (sonnet; real build + LOOK + shots of ce8706b7 on CDN env) | review/opt-card-short | MAIN ROOT-53 | session_01Rc5AsMxWaub8yKfYn3AbWS | RUNNING | 18/11 18:43Z |
 | FOREMAN E ROOT #6 (opus; successor of #5; depth 5, START_CTX ~4 %) | handover FOREMAN_E_STATUS | E | session_01DgYSWn4eJjW3cuV1M7wtaa | RUNNING | 18/11 19:00Z |
+| E13 questline-q2 | review/questline-q2 | session_01DgYSWn8UViuUxqiymRM9sf | RUNNING | 2026-11-18T18:59Z | START_CTX ~5 % |
