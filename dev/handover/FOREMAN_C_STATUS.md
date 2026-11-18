@@ -42,6 +42,7 @@ DONE: 4 open MAIN art orders. Act pictures 6 LIVE + ACTS.json guarded (LAND READ
 OPEN: owner D14 pick (a/b/c) → wiring worker; MAIN GO face-fix; owner 5 questions (ROOT-20 HANDOVER); NEW STANDBY not opened. No painters. W37 paused.
 
 FOREMAN C ROOT-26 (art) = session_011xDdVRkBJA9a9QVkfXhABL · depth 4 (limit 8: open ROOT-27 at rollover) · START_CTX ~6% (own estimate; get_session reads 0; window 1M) → roll over at >= 31%, ceiling 60% · hourly wake trig_01UarJwrNiZHcFuPKDF6C6Ar (:32) · reports to MAIN via this file. STANDBY: none registered yet.
+- 16:40Z 18/11 W64b rolled over (v0 rows c03/c04/c12 a51 valid) → W64c sonnet session_011xDdVSr7GTAGeSvcq7r3hm = redo v1/v2 rows per rank muted (48 gens), one READY for all 3 → then owner sample. W64b ARCHIVED. ROOT-25 note: owner got c01 a36 t8 v0|v1|v2; t8 v0 may show teeth → W61b checks/regens (D4b). Held-item contrast (D3c) re-stressed to painters.
 - 16:36Z 18/11 W57b DONE D2 (22 forehead marks removed, 0 credits) and rolled over → W57c sonnet session_011xDdVP5kh5q2wGJ1mspzTP = LIVE push only. W57b ARCHIVED. C LOOKED: W61b c01 a36 redo PASS, W59b c13 a26 redo PASS, W62b c13 a36 colours PASS but t8 ×3 holds a cup-like lidded vessel → replace (D3).
 - 16:31Z 18/11 W64b c12 a51 READY (to ROOT-25) still one colour per row → re-ordered to ROOT-26: redo c03/c04/c12 a51 v1/v2 rows per rank (muted), one READY for all 3; owner sees the a51 sample only after that.
 - 16:29Z 18/11 C LOOKED W63b c25 a36 (24 gens): PASS. Sent owner.
