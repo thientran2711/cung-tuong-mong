@@ -39,4 +39,4 @@ B10 consorts c31, c32 | claude/cung-tuong-mong-handover-hj0h8w | session_011xDdV
 | D8 POISON THE EMPEROR / THÁI HẬU ROAD (opus; ORDER ROOT-49 #2 07:41Z; OD:L602/L430) | review/poison-road | D | session_01964izBos2heoQd7Cty2bAu | RUNNING | 18/11 07:49Z |
 | odds-cap RE-MERGE onto live main (source conflicts jmort/j77/j83; opus) | review/odds-cap-r2 | D | session_01964izDzNqo154uvpkUcvrq | RUNNING | 18/11 07:53Z |
 | E7r3 re-review questline q1a a615eb7+q1b 2f79ae26+q1c b013ddf (opus BIG) | review/questline-q1a/b/c | E ROOT #3 | session_01DgYSWnKLMTfPEZmLjhWFYM | RUNNING | 18/11 08:01Z |
-princess-sample (Nam Chiếu + Bắc Địch, 2 figures, sample only) | handover branch | W49 session_011xDdVSRdcknPuRrtYQaLcW (Foreman C ROOT-20; W40 archived) | RUNNING | 2026-11-18 08:22Z
+princess-sample (Nam Chiếu + Bắc Địch, 2 figures, sample only) | handover branch | W43 session_011xDdVQdxDP3b4j6yvJdVcN (Foreman C ROOT-20) | RUNNING | 2026-11-18 08:22Z
