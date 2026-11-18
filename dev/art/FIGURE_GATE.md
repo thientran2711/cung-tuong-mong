@@ -20,7 +20,7 @@ Earlier today (verbatim): "Tôi không hiểu là bạn kiểm cái kiểu gì. 
 3. THEN OVERLAY: lay m09 (scaled the same way, skull top → feet) over every figure: tinted silhouette + red outline.
 4. PASS: face height within ±3% of m09's; shoulders and waist inside m09's outline; body ≈ 7.5 heads (skull top → feet); shoulder points ≈ 2.0 × face height; waist ≈ 1.15 × face height. Fail on any = regenerate.
 5. Crowns/buns are EXTRA height above the head; never shrink the head or the body to make room (use a taller canvas, generous headroom).
-6. Skull-top detection: Haar face box whose centre is mostly skin colour (the largest box can be hair/pins); skull top ≈ face top − 0.45 × face height. Before go-live every figure gets its img/fig-ht.json head-top row (dev/art/headtop/headtop.py) — the game scales skull top → feet (jkit.js KIT_FIG / kitFigBody); without the row the crown counts as height and the figure shrinks.
+6. Skull-top detection = the GAME's method (dev/art/headtop/headtop.py): MediaPipe face mesh, head top = y(landmark 10) − 0.30 × F, F = landmark 10 → chin (152); face size compared = F. Tool dev/art/figure-gate/overlay_m09.py does exactly this (needs face_landmarker.task + libegl1). Haar boxes are NOT used (they disagreed by up to 40%). Before go-live every figure gets its img/fig-ht.json head-top row (same script) — the game scales skull top → feet (jkit.js KIT_FIG / kitFigBody); without the row the crown counts as height and the figure shrinks.
 7. Output with every report: the row + overlay sheet (all ranks), and the in-game-scale ladder.
 
 ## B. HAIRPINS / HEADDRESS (trâm cài)
