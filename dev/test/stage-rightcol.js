@@ -19,7 +19,7 @@ for(const [dn,W,H] of DEV){
  await p.evaluate(()=>{try{localStorage.clear()}catch(e){}SLOT=3;document.getElementById('title').hidden=true;for(let i=0;i<60;i++){try{store.set(NL_KEY,null)}catch(e){}start();if(!(typeof isSrv==='function'&&isSrv()))break}
   Q.length=0;for(let i=0;i<2;i++){try{nextBuoi()}catch(e){}Q.length=0}render()});
  await p.waitForTimeout(5000);await clean();await clean();
- for(const [hn,extra,rk,PL] of HH){
+ for(const [hn,extra,rk,PL] of HH.filter(h=>!process.env.ONLY||h[3].includes(process.env.ONLY))){
   await p.evaluate(async([extra,rk])=>{{tab='act';const g=document.querySelector('.game');if(g)g.classList.remove('maptab','cardtab');render()}if(rk)S.rank=rk;S.staff=(S.staff||[]).filter(s=>s&&s.role!=='maid'&&s.role!=='eunuch').slice(0);for(let i=0;i<extra;i++){const r=i%2?'eunuch':'maid';try{S.staff.push(mkServ(r))}catch(e){}}window.__kgfOpen=null;S.th=10;S.hh=-5;render();await new Promise(r=>setTimeout(r,1500))},[extra,rk]);await clean();
   for(const pl of PL){
    await p.evaluate(async(pl)=>{Q.length=0;S.dead=false;S.confined=0;{tab='act';const g=document.querySelector('.game');if(g)g.classList.remove('maptab','cardtab');render()}if(pl==='home'){S.place='home'}else if(pl==='map'){const b=document.querySelector('[data-tab="go"]');if(b)b.click()}else{try{goTo(pl)}catch(e){}}await new Promise(r=>setTimeout(r,2500));try{j59lay()}catch(e){}const R=document.getElementById('kshR');if(R)R.dataset.full='';k3Stage();await new Promise(r=>setTimeout(r,800))},pl);await clean();
