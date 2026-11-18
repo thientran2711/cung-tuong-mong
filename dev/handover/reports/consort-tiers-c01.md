@@ -30,6 +30,6 @@ Colours: p=0, t_k=Q[k-1]; no clash found.
 | t6 | rose | colour | 1 |
 | t7 | indigo+yellow | colour | 3 (t7 v1 had a mole by the eye; v3 clean) |
 | t8 | yellow+crimson/jade | colour | 3 (v1/v2: red dot on forehead; v3 clean) |
-| Nữ đế | yellow+black/gold | own design | 7 (several had a red dot on forehead; last one clean) |
+| Nữ đế | yellow+black/gold | own design | 6 (several had a red dot on forehead; last one clean) |
 
 Notes: gpt-2-6 has no 1:2 ratio, snapped to 9:16 (1520x2688, transparent, edges clear). Skull-top row measured with MediaPipe (0.30 x F method), no m09. Forehead zoom-checked per figure. Credits ≈ 135 x 20 gens ≈ 2700.
