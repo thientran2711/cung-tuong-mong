@@ -17,3 +17,6 @@ Files (CDN img/_review/men/emperor/, md5 verified, nothing live): emp1_a18.png �
 Credits: 5 gens x 80 = 400 + 4 cuts x 3 = 12 → 412 cr. Gens per figure: 1,1,1,2 (max 4).
 
 Weak points: the 4 faces share one "gpt-2-6 handsome" look (same eye/brow family; told apart mostly by jaw, stubble, crown, robe) — fine at game size, a face-swap pass could widen it; emp3's face is small under the wide miện; faces are all ~18-22, older bands (a26/a36/a51) not drawn; robes are bulky-wide in sleeves (not gate-checked: men have no proportion gate). Not matched to live e1 face (live ones are for review only; swap-in is the foreman's call).
+
+## v2 — emp3 redo (owner 18/11 ~06:08Z: emp1/2/4 OK; emp3 "hơi bị 2D", different feel)
+emp3 redone keeping design (golden-yellow + crimson robe, miện with bead strings to the brow, gentle face idea) with emp1 raw gen as STYLE ref + prompt "near-3D, same fabric/skin texture, NOT flat 2D". 2 gens (count 2), picked gen 2 (clearer soft smile, strings reach the brow); 1 cut. 163 cr (2x80+3); running total 575 cr; emp3 gens 3 of max 3. Files CDN img/_review/men/emperor/: emp3_a18_v2.png, emp_a18_row_v2.jpg (1,2,3v2,4), md5 OK, nothing live. Weak: emp3 v2 face sits closer to emp1's family (style-ref pull) — still distinguishable by crown, brows, jaw.
