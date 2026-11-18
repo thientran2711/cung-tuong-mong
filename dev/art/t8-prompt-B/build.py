@@ -159,6 +159,7 @@ ORIG1={
 "c16":("muted sage green silk like #9CA283","a cream like #E6DCC0"),
 "c20":("soft rose pink silk like #E9B5AE","a pale pink like #F0D6CF"),
 "c23":("coral red silk like #BA5B44","a cream like #EBDCC4"),
+"c24":("coral red silk like #D97B60","a pale blush cream like #F3D1B1"),
 "c25":("brick rust red silk like #8C4D40","a warmer red like #B86457"),
 "c12":("pale sage green silk like #C9D2B4","a cream like #E8DCC4"),
 "c13":("apricot peach silk like #EBA98E","a soft peach like #F0C5B0"),
