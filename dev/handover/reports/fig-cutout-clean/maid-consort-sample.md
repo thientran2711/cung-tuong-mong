@@ -385,3 +385,17 @@ Ran overlay_m09.py on all 8: t2 −1.6, t3 +0.8, t5 −0.8, t6 −0.2, t7 +1.0, 
 
 ### Round 37 NOTE 2 (ROOT-15 03:13Z, final): official method = MediaPipe face mesh (game's own), Haar dropped
 Mesh numbers (relayed by ROOT-15, not re-run by W18): t1 r7 −0.8 %, t4 r7 +0.4 % = BOTH PASS, r7 t1/t4 stay as the candidates; t2 −5.5, t3 −6.1, t5 −6.4, t6 −8.6, t7 −8.9, t8 −5.8. My earlier Haar-based "fail" correction above is superseded (Haar was the error source). NO more gens; HOLD until the owner decides keep vs regen the −6..−9 % ranks.
+
+## Nữ đế sample — c12 a18 (W20, ROOT-15; owner words FIGURE_GATE §F; CLAIMS row t9 Hoàng thái hậu + t10 Nữ đế, first step)
+
+PRIORITY #1 CHECK: OD 9 | ledger 2 | claims 2 | main 12 | review/* 0 | archive 15 — succession choice Nữ đế is live (j99succ); no Nữ đế art exists. START_CTX ≈ 8 % (own estimate).
+Method = R34/R36: images_generate gpt-2-6 768x2000 2k, folder ba4aecfe…, refs: 1 design-line = approved c12 t8 v2 cut yiEF08IPW9 ("only embroidery quality + drape, NOT design/colour"), 2 m09 eIyOFEidqL, 3 c12 por kspdyUo16B, 4 face-consort-12 huZA1bivqL, style m09. Prompt: STYLE_ANCHOR prefix, HEAD SIZE paragraph on top, imperial YELLOW robe with big gold-thread DRAGON roundel on chest + dragons down the sleeves + phoenixes/peonies on the skirt, held JADE SEAL (ngọc tỷ) in both hands, crown = phoenix + dragon + short bead-tassel curtain (lưu) at the front reaching the forehead only, bare forehead (no hoa điền). 4 gens (320 cr) + 4 bg removals (12 cr).
+| gen | cut | mesh vs m09 | note |
+|---|---|---|---|
+| 1 s78mFLAl8e | JNfurdCOq4 | −6.1 % | dragon on chest small |
+| 2 kspXCrs16B | 5jMeaRRKxe | −3.5 % | closest to the gate, but dragon on chest weak, crown mostly phoenix |
+| 3 lJIhbhpgv9 | MB7yGtfDCm | −9.2 % | best dragons, head small ("1/9.5" wording overshot the wrong way) |
+| 4 fHGYBzLCDY | EbncIk0uuO | −5.8 % | CHOSEN: bold chest dragon roundel + sleeve dragons, phoenix + dragon crown, seal, tassels to forehead |
+Gate (overlay_m09.py, MediaPipe mesh, ±3 %): A proportion = FAIL on face size (−5.8 %, head reads slightly small, same as the live t8 v2 −5.8 %); body/shoulders/waist inside the m09 outline (c12_a18_nude_overlay_m09.jpg). B headdress: full phoenix crown + dragon, long gold dangles, PASS and clearly differs from t8 (dragon + front lưu). C costume: yellow dominant like Hoàng hậu, dragon + phoenix stitched, crossed collar, floor length, no train, slippers visible: PASS. D: own face (c12), bare forehead at 100 % (c12_a18_nude_head.jpg), seal in both hands, serene: PASS. Budget (4 gens) is spent: head size is NOT in the ±3 % gate; the nearest alternative is gen 2 (−3.5 %, weaker dragon). Suggest one more gen with wording between 1/9.8 and 1/10.3 ("pins/crown extra") only if the owner wants the gate strict; the −5.8 % band equals the rank t8 v2 the owner already looks at.
+Weak points: head −5.8 %; chest dragon is a roundel (reads Nữ đế at a glance); lưu are short pearl-bead strands, forehead visible.
+Files (CDN https://ctm-img.victoria-tntt.workers.dev/img/_review/maid-consort-sample/): c12_a18_nude_fresh.png (768x2000 transparent), c12_a18_nude_vs_t8_ingame.jpg (Nữ đế beside Hoàng hậu t8 v2, skull top and feet on the red lines), c12_a18_nude_overlay_m09.jpg, c12_a18_nude_head.jpg. Nothing live.
