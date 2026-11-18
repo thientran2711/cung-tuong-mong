@@ -477,7 +477,7 @@ c12 a18 t5–t8 headdress re-do from live originals (Round 43) | claude/cung-tuo
 | face-zoom-stretch (owner bug 18/11 05:25Z: mirror close-up stretched sideways; sonnet; brief briefs/face-zoom-stretch.md) | review/face-zoom-stretch | MAIN ROOT-45 | (opening) | RUNNING | 18/11 05:07Z |
 | E5 QUESTLINE Q0 docs (sonnet SMALL; briefs/E5-questline-q0-docs.md) | review/questline-q0 | E ROOT | session_01DgYSWpZXvejYRmdjtJ3Ccz | READY FF review/questline-q0-ff 8a1955dc (archived) (reports/questline-q0.md) | 18/11 |
 | E6 QUESTLINE H1 expert (opus research; briefs/E6-questline-h1-expert.md) | handover reports/questline-expert.md | E ROOT | session_01DgYSWm57KGQqbv88WBygrf | DONE 7054248d (reports/questline-expert.md) | 18/11 05:12Z |
-| hud-mood-bar (owner UI 18/11 05:40Z: mood bar in the fixed top bar; sonnet; brief briefs/hud-mood-bar.md) | review/hud-mood-bar | MAIN ROOT-45 | (opening) | RUNNING | 18/11 05:11Z |
+| hud-mood-bar (owner UI 18/11 05:40Z: mood bar in the fixed top bar; sonnet; brief briefs/hud-mood-bar.md) | review/hud-mood-bar | MAIN ROOT-45 | session_01UV1SzqhsL3P2mWnTbwVdqs4 | SẴN SÀNG KIỂM 7f4edf7 | 18/11 05:11Z |
 | kit-set-lines (KIT REQUEST (6) set lines + set glow; sonnet; brief briefs/kit-set-lines.md) | review/kit-set-lines | MAIN ROOT-45 | (opening) | RUNNING | 18/11 05:12Z |
 Tuần lục figure clip preview (test-page only, code note for main) | claude/cung-tuong-mong-handover-hj0h8w (report) + _review CDN | session_011xDdVR5MwB2XTmgGcLEKkx | RUNNING | 2026-11-18T05:50Z
 | E3r REVIEW hall-names b5315ff (sonnet SMALL; briefs/E3r-review-hall-names.md) | review/hall-names | E ROOT | session_01DgYSWpMzeXxqEAbLCfJGJE | RUNNING | 18/11 05:15Z |

@@ -1,0 +1,16 @@
+# hud-mood-bar report (branch review/hud-mood-bar, sha 7f4edf7, base main a95e8d4)
+PRIORITY #1 CHECK: OD L600 (Sims mood), L1689 (bar = signed sum), tail 18/11 ~05:40Z; main jmood.js (S.mood.v, mbBand, kitSignedBar KIT §49.1), jpcf.js (data-emo-open handler = existing mood box); review/npc-chain-land not fetched (not on origin in this clone) so moodBar(S) is read only if defined; claims: none on the HUD.
+
+## What
+- dev/build/jmood.js: `mbHud()` adds `#hud-mood.kstm` as the last child of `header.hud` (`grid-column:1/-1`, auto row = follows every top-bar grid variant incl. .khd2/.khd3, one-row bar). Content: her seal (emoBadge) · "Tâm trạng" · band word (mbBand + colour class) · kitSignedBar · signed number. Tap/Enter = existing mood box (`data-emo-open="me"`). Hooked after renderHUD.
+- ONE accessor `kitMoodVal()` = moodBar(S) if defined else S.mood.v (no second number). Hidden when S.dead / __moodOff.
+- Two layouts via `window.KIT_MOODBAR`: "row" (with words, +22 px header) and "slim" (seal + bar + number, +18 px). Owner picks, loser deleted (canon overwrite).
+- KIT.md §49.2 written. No KIT_REQUESTS needed (kitSignedBar exists). Shots test: dev/test/hud-mood-shots.js.
+- Tried a 9th stat cell instead (no header growth): rejected, it squeezed the 8 cells and forced icon-only labels (.khd3s).
+
+## Tests (host mode, mood -45)
+fold 755x1000, ipadAir 1180x820, ipadPro 1366x1024, pixel/iphone14 (rotate prompt devices): tabs act/rv/inv, 0 page errors, 0 horizontal overflow; header 129 -> 151 (row) / 147 (slim) px, bar box = full header width; tap opens the mood box on fold/ipadAir/ipadPro. Design canvas is 590x820 (page) / 1180x820 (spread), so 412x1058/390x844/1366x1024 render the same two frames.
+NOT done: co-op / Fold cover 412x1058 shots, old-save and high-mood shots, kit-conform + mood-bar.js reruns (the local http server was denied by the sandbox). Header growth is +18..22 px, more than "a few px": that is the price of a full-width row; a 9th cell does not fit.
+
+## Shots (CDN, delete after verdict: python3 dev/site/cdn_sync.py --wipe-review hud-mood-bar)
+https://ctm-img.victoria-tntt.workers.dev/img/_review/hud-mood-bar/{fold-row-act,fold-slim-act,ipadAir-row-act,ipadAir-slim-act,fold-row-box}.png
