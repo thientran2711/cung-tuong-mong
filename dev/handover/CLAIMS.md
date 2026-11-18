@@ -474,3 +474,4 @@ c12 a18 t5–t8 headdress re-do from live originals (Round 43) | claude/cung-tuo
 | E3 HALL NAMES (PL #3; sonnet; expert first; brief briefs/E3-hall-names.md) | review/hall-names | E ROOT | session_01DgYSWpUv86PhL9wq2MeDFC | RUNNING | 18/11 05:10Z |
 | E4 MONTHLY RATION BUILD (PL #5; opus; brief briefs/E4-monthly-ration.md) | review/monthly-ration | E ROOT | session_01DgYSWp99V1RuDJRSBs4SyJ | RUNNING | 18/11 05:10Z |
 | act-pic-match (owner bug 18/11 05:20Z: wrong/shared act pictures, whole group; sonnet; brief briefs/act-pic-match.md) | review/act-pic-match | MAIN ROOT-45 | (opening) | RUNNING | 18/11 05:04Z |
+| face-zoom-stretch (owner bug 18/11 05:25Z: mirror close-up stretched sideways; sonnet; brief briefs/face-zoom-stretch.md) | review/face-zoom-stretch | MAIN ROOT-45 | (opening) | RUNNING | 18/11 05:07Z |
