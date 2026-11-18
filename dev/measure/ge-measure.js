@@ -36,9 +36,9 @@ const NL=+process.argv[3]||1,PAR=+process.argv[4]||3,OUT=process.argv[5],ROADS=(
      const s=S.ge;if(!Q.some(m=>m.pid==='ge1'))return{err:err||'no hồi',mon,n:S.st.ch.n,all:!!S.st.ch.all};Q.length=0;
      const pr=mode==='rand'?[Math.floor(Math.random()*4),Math.floor(Math.random()*3)]:[C.e[j][3],C.e[j][4]];
      const st=s.st.slice(),pull=s.pull.slice(),oc=Object.assign({},s.oc);geLive(s);const odds=s.st[j]==='o'&&j>=0?geOdds(s,j):null;
-     const cf=j>=0?(D.e[j].cond||[]).filter(t=>!geTerm(s,j,t)).map(t=>t[0]==='s'?t[1]+':'+Math.round(geStat(t[1]))+'/'+((BAL.ge.gate[road+'_'+(j+1)]||{})[t[1]]||0):t.join('.')).join(','):'';
-     const gk={};Object.keys(BAL.ge.gate).filter(g=>g.startsWith(road+'_')).forEach(g=>Object.keys(BAL.ge.gate[g]).forEach(k=>{if(k!=='mis'||geMis())gk[k]=Math.round(geStat(k))}));
-     const r=geAnswer(pr[0],pr[1]);Q.length=0;const shW=j>=0?geShade(s,j):'';const lt=s.lt,dd=Math.round((S.duc||0)-(s.d0||0));
+     const cf=j>=0?(D.e[j].cond||[]).filter(t=>!geDbg.term(s,j,t)).map(t=>t[0]==='s'?t[1]+':'+Math.round(geDbg.stat(t[1]))+'/'+((BAL.ge.gate[road+'_'+(j+1)]||{})[t[1]]||0):t.join('.')).join(','):'';
+     const gk={};Object.keys(BAL.ge.gate).filter(g=>g.startsWith(road+'_')).forEach(g=>Object.keys(BAL.ge.gate[g]).forEach(k=>{if(k!=='mis'||geDbg.mis())gk[k]=Math.round(geDbg.stat(k))}));
+     const r=geAnswer(pr[0],pr[1]);Q.length=0;const shW=j>=0?geDbg.shade(s,j):'';const lt=s.lt,dd=Math.round((S.duc||0)-(s.d0||0));
      return{road,mode,j,ok:r.ok,i:r.i,sh:r.sh||'',quiet:r.quiet||0,st,stEnd:s.st.slice(),pull,oc,odds,cf,gk,shW,lt,dd,lean:Math.round(r.lean*10)/10,mon,err}}})};
   await boot();
   while(next<jobs.length){const J=jobs[next++];let R=null;for(let t=0;t<3;t++){try{R=await p.evaluate(([a,m,j])=>window.__ge(a,m,j),[J.road,J.mode,J.j])}catch(e){R={err:'eval '+e.message.slice(0,100)}}

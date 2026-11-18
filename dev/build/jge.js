@@ -201,4 +201,6 @@ function geMap(b){const Cb=GE_CAT[b];if(!Cb)return null;const g=geStore(),rb=sto
 window.geMap=geMap;
 /* state words of a node this life (Sơ đồ nhánh, VANPHONG §5) */
 window.geStateWord=(st,ch)=>st==="o"?"Còn mở":st==="f"?"Chỉ còn đường thua":`Đã khép${ch?" · chương "+ch:""}`;
+/* read-only hooks for dev/test + dev/measure (the condition terms, stats and shading the engine uses) */
+window.geDbg={term:geTerm,cond:geCond,stat:geStat,shade:geShade,lean:geLean,mis:()=>geMis()};
 }catch(e){console.error("jge",e)}})();
