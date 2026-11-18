@@ -39,3 +39,17 @@ Weak points: emp1 head still ~7 % big (decision needed: accept, or +1–2 gens b
 
 ### v3b — emp1 fix (ROOT-18 OK: up to 2 more gens, FIGURE_GATE G stop at 6)
 Prompt "head ~8 % larger than ref 1, 7.5 heads tall", refs = approved emp1 raw + live. 2 gens: 0.0875 / 0.0877; kept the 0.0875 one (faces identical). emp1 now 0.0875 = +4.1 % vs live 0.0841 → PASS (vs 0.083 it is +5.4 %, same edge case as emp3). Final table: emp1 0.0875 (+4.1 %), emp2 0.0826 (−1.8 %), emp3 0.0873 (+3.9 %), emp4 0.0832 (−1.1 %). emp1 gens this redo: 6 total (stop). Credits +166 (2×80 + 2 cuts×3) → redo 1233 cr, men-emperor total ≈ 1808 cr. CDN emp1_a18_v2.png + emp_a18_v2_vs_live.jpg replaced (md5 OK); nothing live. Weak: emp1/emp3 sit at the top of the band (heads slightly large vs live).
+
+## v4 / "v3" files — fresh redraw, NO proportion target (ROOT-18 order, owner 18/11: stop the ratio work; give back the square sheet 1-2-3-4)
+Cancels the ratio redo above (v2 files + the ratio table are superseded; no measuring, no live/m09 body reference). Each figure drawn FRESH from the prompt only (approved a18 design prompt + "natural well-balanced male body whose head matches the body"), gpt-2-6, 768x2000, style ref face-consort-01 (emp3: emp1 raw as style ref, near-3D). Same robe/colours/crown/held item as approved: emp1 yellow+jade guan, emp2 black+gold+scroll, emp3 yellow-crimson miện+beads to brow, emp4 pale yellow+jade+dragon crown+fan. 1 gen each, all four LOOKED at: balanced head/body, handsome, soft closed-lip smile, no regen needed.
+
+| who | gens | notes |
+|---|---|---|
+| emp1 | 1 | yellow dragon robe, jade belt, pointed cầu vai; face a bit different from v1 (fresh gen) |
+| emp2 | 1 | black+gold, scroll, tall crown, stiff pointed cầu vai |
+| emp3 | 1 | yellow-crimson, miện board with bead strings to the brow, near-3D |
+| emp4 | 1 | pale-yellow + jade trim, dragon crown, fan, light stubble |
+
+Files CDN img/_review/men/emperor/ (md5 OK, nothing live): emp1..4_a18_v3.png (cut 768x2000), emp_a18_v3_square.jpg (2000x2000, 1|2|3|4 labelled, feet aligned).
+Credits: 4 gens × 80 + 4 cuts × 3 = 332 cr. Men-emperor running total ≈ 2140 cr.
+Weak points: fresh gens ⇒ faces are close cousins of v1 but not identical (owner approved v1 faces — if she wants the exact v1 faces back, use the v1 PNGs with this v3 body); robes are wide-sleeved; a26/a36/a51 not drawn.
