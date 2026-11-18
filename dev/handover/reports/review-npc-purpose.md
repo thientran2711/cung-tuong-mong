@@ -83,3 +83,26 @@ State: PHASE A FAIL on b723a1e (9 blocking) → all 9 verified fixed on 421465a1
 Who: foreman C-AG #13 session_01UV1Szgvw457GueTtE27whc; MAIN ROOT-52 session_01UV1SzhR4VChxDLw6hymSvQ. PASS/FAIL → both. Live main last told: 55db864a (check origin/main).
 Successor to-do on G1 #7's head: (1) base = review/ag-all-2-land (or live main if ag-all-2 is LIVE) = the tree minus npc-purpose; (2) run npc-purpose-rates.js on base AND head yourself, twice (rerun must give 0 diffs), and check the rows of the re-check table (jlost found/ti soát/losses, j68 Tin đồn, j71 Hoàng hậu nhờ, jmem/jpcf oán chưa dứt, j92 Nhận lỗi, jworld2 Long thể bất an, NPC giận) are in band or carry a written reason; (3) spot-check that the gate really judges every key (not a track list); (4) quickcheck --runs 5 paired vs base (render was +9 %, watch it; FAIL > +10 %); (5) then PHASE B as briefed (scan --strict, npc-why + g1..g1g, quickcheck ×2, coop-e2e ×3 under 2 busy loops, G4, ag suites, long suite, old save, perf vs live) → "PASS <sha>" (FF-able onto live main) or FAIL list.
 Reviewer worktrees (this container only): /home/user/wt/rnp-head, rnp-base, rnp-ho (handover). Scratch bot: evbot.js/cmp.js (text in the G1 #4 message; superseded by npc-purpose-rates.js).
+
+## RE-CHECK 2 on caa2902a (G1 #6 head; no "SẴN SÀNG KIỂM" from G1 #7 seen yet; successor reviewer session_01964izEUgw5hZTBxuEguL4K, 18/11 ~15:20Z) — FAIL (narrow)
+Base = review/ag-all-2-land 7301df77 (= the merge base inside caa2902a, i.e. the tree minus npc-purpose). ag-all-2-land is now 45c6dbea (ag2-perf merged) and is NOT in caa2902a, so the next head must merge it and the base becomes 45c6dbea.
+Green on caa2902a: npc-purpose-scan --strict PASS (419 rows), one-core-guard PASS, npc-why + npc-purpose-logic + g1..g1g all PASS (97 checks), rates check 1 (all 165 kinds fire or are rare with a reason), 0 page errors.
+Determinism (reviewer's to-do (2)): HEAD is deterministic: 2 runs of 12 seeds × 200 tuần give 0 differing keys. BASE 7301df77 is NOT: 3 base runs (one of them alone on the box) differ in 508-916 keys (abs 1043-2151 counts; lives per seed change). So the committed `baseAll` is one noisy sample. Every row below was checked against all 3 base samples; the base spread is ±4, so these shifts are real, not noise.
+Gate result on caa2902a: **FAIL, run with --base AND with the committed base** (so G1 #6 left its own gate red):
+| row | base (3 samples) | head | note |
+|---|---|---|---|
+| track 'khoe khoang' (jemoact) | 84 | 256 | 3.26x, band 0.4–2.5 |
+| c:Tin đồn (j68 rumor family) | 30/26/29 | 5 | re-check row R1 still ~6x low (the e68Pick pickAll fix was not enough) |
+| l:"Ân oán chưa dứt · Bí mật nắm được" (jmem HK_KIND secret) | 26/24/20 | 0 | re-check row 'oán chưa dứt' still 0 |
+| c:Kẻ hầu ăn bớt (jeitem:88) | 25/22/24 | 2 | ~12x low |
+| c:Đại phóng cung nhân (jworld2 crisis) | 20/20/20 | 3 | ~7x low |
+| l:Thái hậu "cười khẽ" (j92 wd:under) | 40/41/36 | 9 | wardrobe remarks family: wdRemark pickAll moved remarks from the Thái hậu to consorts ... |
+| l:"<X> nhìn <outfit> của …" (j92 wd:over, keys thủy của / xanh ngọc của / thêu hoa nhỏ của / thêu hải đường của …) | ~25 | ~160 (all 'nhìn…của' heads 261 → 522) | ... ~5x more consort remarks |
+| l:"cho người soát phòng trước" + l:soát (j92:332 wdSearch) | 13 | 64 | ~5x more searches |
+| l:"được Hoàng thượng ban Lư pháp lam bốn chân" (jshelf:122 gift) | 11/10/12 | 0 | Emperor gift line gone |
+| l:"vì oán" (jface:145 slap) | 0 | 36 | REWORD, not a shift: all slap lines 185 → 191; add a json why (like the visit/gift rewords) |
+Rows from the 1st re-check that are now IN band: lost chain (Đồ thất lạc 73-77 → 74, Tìm thấy 14-15 → 9, Cung Chính ti soát back), Nhận lỗi 4-5 → 7, NPC giận 37-39 → 48, Long thể bất an 4-6 → 0 (below minN). j71 'Hoàng hậu nhờ' not seen as a head with ≥ 8 either side.
+Gate spot-check (to-do (3)): yes, check 4 judges every card title and every name-stripped log head with base+head ≥ 8 (700 rows), not a track list. Two blind spots, NOTE only: (a) 89-92 "one-seed" rows (≥ 60 % of the larger side from one life) are skipped. Fine for noise, but a row that one seed carries in base and is 0 in head is never judged. Suggest judging a one-seed row when the other side is 0 and the big side ≥ 2 × zeroN. (b) With a non-deterministic base, `--write-base` freezes a random sample; the base should be the sum/median of ≥ 2 base runs, or find the base-only randomness (head is clean, so head carries a fix the base lacks, or base has a timer/`new Date()` path).
+Minor code NOTE: jlost loCauseOf picks cause "mis" by matching the text `o.why==="cất nhầm chỗ"` because npwAsk drops `mis:1`; pass a flag through npwAsk instead (text edits would silently turn misplacing into theft).
+FIX for G1 #7: R1 the 9 shifted rows above (Tin đồn, Ân oán chưa dứt, Kẻ hầu ăn bớt, Đại phóng cung nhân, the wardrobe remark/search family = wdRemark pickAll balance, Lư pháp lam gift) fixed or given a written why with old vs new rate; 'vì oán' gets a reword why; 'khoe khoang' in band or explained. R2 merge ag-all-2-land 45c6dbea; re-write the base from ≥ 2 base runs (or make base deterministic). Then send "SẴN SÀNG KIỂM <sha>"; the reviewer re-runs rates ×2 + quickcheck ×5 + PHASE B.
+Not run yet (they wait for the real head): quickcheck --runs 5 perf, PHASE B.
