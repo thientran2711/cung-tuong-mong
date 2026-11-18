@@ -232,10 +232,10 @@ function kitOptFinal(b){try{if(!b||!b.matches||!b.matches("button.ka.kopt")||b.c
  else{gain=row("kr-duoc kfill","Được",[]);const e=document.createElement("span");e.className="ef n";e.textContent="không";gain.querySelector(".krv").appendChild(e)}
  const keep=new Set([ton,gain]);const dis=b.classList.contains("kdis");
  let extra=false;[...kb.children].forEach(r=>{if(keep.has(r)||r.classList.contains("kdup0"))return;r.classList.add("kofold");if(!(r.classList.contains("kr-mat")||gains.includes(r)))extra=true});
- /* order: (Cần when disabled) · Tốn · Được · the folded rest */
- const why=dis?kb.querySelector(":scope > .kr-why"):null;if(why)kb.prepend(why);const anchor=why?why.nextSibling:kb.firstChild;kb.insertBefore(ton,anchor);ton.after(gain);
+ /* order: Tốn · Được · the folded rest; the Được slot is ALWAYS labelled Được (a rolled card's Thành row, Được ngay …) */
+ {const l=gain.querySelector(":scope > .krl");if(l)l.textContent="Được"}kb.insertBefore(ton,kb.firstChild);ton.after(gain);
  const lead=b.querySelector(".klead");if(lead){lead.classList.add("kofold");extra=true}
- if(extra){const m=document.createElement("span");m.className="kobang";m.setAttribute("role","button");m.setAttribute("aria-label","Xem thêm");m.title="Xem thêm";m.textContent="!";b.appendChild(m)}
+ if(extra){const m=document.createElement("span");m.className="kobang";m.setAttribute("role","button");m.setAttribute("aria-label","Xem thêm");m.title="Xem thêm";m.textContent="!";if(dis)m.classList.add("kobred");b.appendChild(m)}
  b.dataset.kofin="1";b.__kofSig=kb.innerHTML+"|"+b.className}catch(e){console.error("kitOptFinal",e)}}
 window.kitOptFinal=kitOptFinal;
 (function(){const k0=kpOptArt;kpOptArt=function(b){const r=k0.apply(this,arguments);try{kitOptCompactRows(b);kitOptFinal(b);kitOptUnify(b)}catch(e){}return r};window.kpOptArt=kpOptArt})();
@@ -260,9 +260,10 @@ document.addEventListener("click",e=>{try{const m=e.target&&e.target.closest&&e.
 #modal .knbang::after{content:"";position:absolute;inset:-9px}
 #kpinfo>.knumpop{width:min(560px,92vw);box-sizing:border-box;padding:12px 14px;background:#fffaf0;border:1px solid var(--gold,#8f5f0c);border-radius:10px;color:var(--ink,#2a1a12);cursor:zoom-out;font-size:.9rem}
 #kpinfo>.knumpop p{margin:0 0 6px}`;document.head.appendChild(st)})();
-(function(){const st=document.createElement("style");st.id="kit-opt-final";const mk=O=>`${O}{--kaw:66px!important;--kah:88px!important;min-height:106px!important;height:auto!important;align-items:flex-start!important;box-sizing:border-box;position:relative}
-${O}>.kaart{flex:0 0 66px!important;width:66px!important;height:88px!important;align-self:flex-start!important}
-${O} .kat{flex-wrap:wrap!important;padding-right:26px}
+(function(){const st=document.createElement("style");st.id="kit-opt-final";const mk=O=>`${O}{--kaw:66px!important;--kah:88px!important;min-height:104px!important;height:auto!important;align-items:center!important;box-sizing:border-box;position:relative;padding-top:6px!important;padding-bottom:6px!important}
+${O}>.kaart{flex:0 0 66px!important;width:66px!important;height:88px!important;align-self:center!important}
+${O} .kat{flex-wrap:wrap!important;padding-right:24px}
+${O} .kat>.kan{line-height:1.15}
 ${O} .kat>.kan{flex:1 1 100%!important;min-width:0!important}
 ${O} small.kb{row-gap:1px!important}
 ${O} small.kb>.kr>.krv{display:block!important}
@@ -272,6 +273,7 @@ ${O} .kofold{display:none!important}
 ${O} .kfill .ef{color:var(--dim,#9a8a78)!important;font-weight:400!important}
 ${O} .kfill .krl{opacity:.6}
 ${O}>.kobang{position:absolute;top:5px;right:6px;width:22px;height:22px;border-radius:50%;display:grid;place-items:center;font:700 .85rem/1 var(--body,sans-serif);color:var(--gold,#8f5f0c);background:#fffaf0;border:1px solid var(--gold,#8f5f0c);cursor:help;z-index:2}
+${O}>.kobang.kobred{color:#b3301f;border-color:#b3301f}
 ${O}>.kobang::after{content:"";position:absolute;inset:-9px}`;
  st.textContent=mk("html body #modal#modal button.ka.kart.kopt.kopt")+"\n"+mk("html body .kitpg-opts>button.ka.kart.kopt.kopt")+`
 #kpinfo{position:fixed;inset:0;z-index:100001;background:#1a0f08cc;display:grid;place-items:center;cursor:zoom-out;padding:16px}

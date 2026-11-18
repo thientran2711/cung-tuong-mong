@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"a4cf19e7+","t":"2026-11-18T07:51Z","c":"opt-card-short: media-check fix, site rebuilt","b":"8db9225f8791","h":[{"s":"c571aaea+","t":"2026-11-18T07:26Z","c":"map-tap-go: KIT 84c person-less VIỆC frame — main picture fills the left column (k3fill), kit-conform rule, kit page sample, KIT_REQUESTS c…"},{"s":"5ae28ddb+","t":"2026-11-18T07:13Z","c":"place-stage r5 redo: A1 (marker back on the head, KIT_FIG.h .79, band 70, vivid gold glow) + seal at ONE fixed offset from the standing anc…"},{"s":"5c5d1e8b+","t":"2026-11-18T07:04Z","c":"review person-dialog-restore r1: greet result card carries the greeting line (was the ambient weather line); rebuilt"},{"s":"2eea9a2b+","t":"2026-11-18T06:45Z","c":"review coop-thin-e r1: coop-thin-e E2 diagnostics; a setup press that landed in the new week is stepped first (swap flake 2/7)"},{"s":"8af2fc24+","t":"2026-11-18T06:31Z","c":"mg-skip-all r2: one quick-button look everywhere (kquick css, never an option card), playArt default fix, KIT 13.6 + MINIGAMES, page test m…"},{"s":"c9ada2a3+","t":"2026-11-18T06:14Z","c":"Fix S.lyF: recognise the fallen Ly person by lyF===1 (S carries the object), not truthiness; her own figure keeps her rank tier. + dev/test…"},{"s":"d959a9e0+","t":"2026-11-18T06:28Z","c":"buoi-banner: owner pick BTR_OP = 0.85 on the 73a7d3f layout (title overlaps the band, flush at the stage top); ladder hook removed"},{"s":"8c210d6b+","t":"2026-11-18T06:21Z","c":"act-pic-match: EVENTS.json + FIGURES-kids.json rebuilt (same 17/11 02:41Z incident), cdn_sync refuses bulk overwrite of top-level manifests…"},{"s":"b7ea2748+","t":"2026-11-18T06:12Z","c":"kit-set-lines: display-room test pins rank so the real-data pair is never over rank"},{"s":"22891730+","t":"2026-11-18T06:08Z","c":"k61StageDesc: restore the existing k61Desc untouched (rename only my new helper)"}]};
+window.CTM_BI={"s":"5a21d8ef+","t":"2026-11-18T08:03Z","c":"opt-card-short: dress dialog Xa xỉ range behind !, site rebuilt","b":"a249d145832a","h":[{"s":"c571aaea+","t":"2026-11-18T07:26Z","c":"map-tap-go: KIT 84c person-less VIỆC frame — main picture fills the left column (k3fill), kit-conform rule, kit page sample, KIT_REQUESTS c…"},{"s":"5ae28ddb+","t":"2026-11-18T07:13Z","c":"place-stage r5 redo: A1 (marker back on the head, KIT_FIG.h .79, band 70, vivid gold glow) + seal at ONE fixed offset from the standing anc…"},{"s":"5c5d1e8b+","t":"2026-11-18T07:04Z","c":"review person-dialog-restore r1: greet result card carries the greeting line (was the ambient weather line); rebuilt"},{"s":"2eea9a2b+","t":"2026-11-18T06:45Z","c":"review coop-thin-e r1: coop-thin-e E2 diagnostics; a setup press that landed in the new week is stepped first (swap flake 2/7)"},{"s":"8af2fc24+","t":"2026-11-18T06:31Z","c":"mg-skip-all r2: one quick-button look everywhere (kquick css, never an option card), playArt default fix, KIT 13.6 + MINIGAMES, page test m…"},{"s":"c9ada2a3+","t":"2026-11-18T06:14Z","c":"Fix S.lyF: recognise the fallen Ly person by lyF===1 (S carries the object), not truthiness; her own figure keeps her rank tier. + dev/test…"},{"s":"d959a9e0+","t":"2026-11-18T06:28Z","c":"buoi-banner: owner pick BTR_OP = 0.85 on the 73a7d3f layout (title overlaps the band, flush at the stage top); ladder hook removed"},{"s":"8c210d6b+","t":"2026-11-18T06:21Z","c":"act-pic-match: EVENTS.json + FIGURES-kids.json rebuilt (same 17/11 02:41Z incident), cdn_sync refuses bulk overwrite of top-level manifests…"},{"s":"b7ea2748+","t":"2026-11-18T06:12Z","c":"kit-set-lines: display-room test pins rank so the real-data pair is never over rank"},{"s":"22891730+","t":"2026-11-18T06:08Z","c":"k61StageDesc: restore the existing k61Desc untouched (rename only my new helper)"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -51001,7 +51001,7 @@ function tsNpcDress(p,th){const P={};const inv=(p.inv||[]).map(e=>e.k);const sma
 function tsDressAnnounce(){tsTagsFresh();const s=tsS();const th=pick(Object.keys(TS_THEME));s.dress={th,m:S.month%12+1,y:S.month===12?S.year+1:S.year};const T=TS_THEME[th];const H=tsDressHost();
  /* the Hoàng hậu announces it at the morning greeting: she sees her face (no named grey figure) */try{if(H&&typeof k61Meet==="function")k61Meet(H,"Buổi thỉnh an, ngươi được thấy người.")}catch(e){}
  const have=TS_SLOT.filter(([sl,,fit])=>S.inv.some(e=>fit(e.k)&&T.tags.includes(e.k))).length;
- tsPanel({t:"Hội phối đồ: báo đề",who:H?pv(H):pTH(),art:"https://ctm-img.victoria-tntt.workers.dev/img/ev-yen-tiec.webp",h:`<p>${H?`Hoàng hậu ${H.name}`:"Thái hậu"} truyền: trung tuần tháng sau mở hội phối đồ trong ngự hoa viên. Đề năm nay: <b>${T.n}</b> (${T.d}).</p>${tsRows([["Bốn chỗ","Cài tóc · Đeo tay · Áo · Hương, phấn","n"],["Ngươi có",`${have}/4 chỗ có đồ hợp đề`,have>=2?"g":"r"]])}${kitNumBox(tsRows([["Xa xỉ",`đề ${T.n} chuộng cả bộ khoảng ${T.r?T.r[0]:40} đến ${T.r?T.r[1]:120}: thấp quá là quá giản dị, cao quá là phô trương`,"n"]]))}${tsRows([["Lưu ý","quá phẩm vị của mình thì bị trừ nặng, dù hợp đề","n"],tsMkRow(th,s.dress.m)])}`,
+ tsPanel({t:"Hội phối đồ: báo đề",who:H?pv(H):pTH(),art:"https://ctm-img.victoria-tntt.workers.dev/img/ev-yen-tiec.webp",h:`<p>${H?`Hoàng hậu ${H.name}`:"Thái hậu"} truyền: trung tuần tháng sau mở hội phối đồ trong ngự hoa viên. Đề năm nay: <b>${T.n}</b> (${T.d}).</p>${tsRows([["Bốn chỗ","Cài tóc · Đeo tay · Áo · Hương, phấn","n"],["Ngươi có",`${have}/4 chỗ có đồ hợp đề`,have>=2?"g":"r"]])}${kitNumBox(tsRows([["Xa xỉ",`đề ${T.n} chuộng cả bộ khoảng ${T.r?T.r[0]:40} đến ${T.r?T.r[1]:120}: thấp quá là quá giản dị, cao quá là phô trương`,"n"],["Lưu ý","quá phẩm vị của mình thì bị trừ nặng, dù hợp đề","n"],tsMkRow(th,s.dress.m)]))}`,
   opts:tsBorrowOpts(th).concat(tsMkScoutOpts(th,s.dress.m),[tsOpt({n:"Đã hiểu, sẽ chuẩn bị",duoc:["mua thêm đồ ở Nội vụ phủ hay mượn của người thân trước hội"]})])})}
 function tsBorrowOpts(th){const T=TS_THEME[th];const s=tsS();if(s.borrow)return[];const F=liveRivals(true).filter(v=>aff(v,S)>=25&&v.inv&&v.inv.some(e=>T.tags.includes(e.k)&&!S.inv.some(x=>x.k===e.k)));
  return F.slice(0,2).map(v=>{const e=v.inv.find(e=>T.tags.includes(e.k)&&!S.inv.some(x=>x.k===e.k));return tsOpt({n:`Mượn ${itm(e.k).n} của ${v.name}`,need:[{t:`nàng thân với ngươi (${aff(v,S)}/25)`,ok:aff(v,S)>=25}],duoc:[`${itm(e.k).n} dùng cho hội, xong thì trả`],mat:[],kem:["thiện cảm -2 (nợ ân tình)","làm mất hay hỏng thì phải đền"],
@@ -54555,10 +54555,10 @@ function kitOptFinal(b){try{if(!b||!b.matches||!b.matches("button.ka.kopt")||b.c
  else{gain=row("kr-duoc kfill","Được",[]);const e=document.createElement("span");e.className="ef n";e.textContent="không";gain.querySelector(".krv").appendChild(e)}
  const keep=new Set([ton,gain]);const dis=b.classList.contains("kdis");
  let extra=false;[...kb.children].forEach(r=>{if(keep.has(r)||r.classList.contains("kdup0"))return;r.classList.add("kofold");if(!(r.classList.contains("kr-mat")||gains.includes(r)))extra=true});
- /* order: (Cần when disabled) · Tốn · Được · the folded rest */
- const why=dis?kb.querySelector(":scope > .kr-why"):null;if(why)kb.prepend(why);const anchor=why?why.nextSibling:kb.firstChild;kb.insertBefore(ton,anchor);ton.after(gain);
+ /* order: Tốn · Được · the folded rest; the Được slot is ALWAYS labelled Được (a rolled card's Thành row, Được ngay …) */
+ {const l=gain.querySelector(":scope > .krl");if(l)l.textContent="Được"}kb.insertBefore(ton,kb.firstChild);ton.after(gain);
  const lead=b.querySelector(".klead");if(lead){lead.classList.add("kofold");extra=true}
- if(extra){const m=document.createElement("span");m.className="kobang";m.setAttribute("role","button");m.setAttribute("aria-label","Xem thêm");m.title="Xem thêm";m.textContent="!";b.appendChild(m)}
+ if(extra){const m=document.createElement("span");m.className="kobang";m.setAttribute("role","button");m.setAttribute("aria-label","Xem thêm");m.title="Xem thêm";m.textContent="!";if(dis)m.classList.add("kobred");b.appendChild(m)}
  b.dataset.kofin="1";b.__kofSig=kb.innerHTML+"|"+b.className}catch(e){console.error("kitOptFinal",e)}}
 window.kitOptFinal=kitOptFinal;
 (function(){const k0=kpOptArt;kpOptArt=function(b){const r=k0.apply(this,arguments);try{kitOptCompactRows(b);kitOptFinal(b);kitOptUnify(b)}catch(e){}return r};window.kpOptArt=kpOptArt})();
@@ -54583,9 +54583,10 @@ document.addEventListener("click",e=>{try{const m=e.target&&e.target.closest&&e.
 #modal .knbang::after{content:"";position:absolute;inset:-9px}
 #kpinfo>.knumpop{width:min(560px,92vw);box-sizing:border-box;padding:12px 14px;background:#fffaf0;border:1px solid var(--gold,#8f5f0c);border-radius:10px;color:var(--ink,#2a1a12);cursor:zoom-out;font-size:.9rem}
 #kpinfo>.knumpop p{margin:0 0 6px}`;document.head.appendChild(st)})();
-(function(){const st=document.createElement("style");st.id="kit-opt-final";const mk=O=>`${O}{--kaw:66px!important;--kah:88px!important;min-height:106px!important;height:auto!important;align-items:flex-start!important;box-sizing:border-box;position:relative}
-${O}>.kaart{flex:0 0 66px!important;width:66px!important;height:88px!important;align-self:flex-start!important}
-${O} .kat{flex-wrap:wrap!important;padding-right:26px}
+(function(){const st=document.createElement("style");st.id="kit-opt-final";const mk=O=>`${O}{--kaw:66px!important;--kah:88px!important;min-height:104px!important;height:auto!important;align-items:center!important;box-sizing:border-box;position:relative;padding-top:6px!important;padding-bottom:6px!important}
+${O}>.kaart{flex:0 0 66px!important;width:66px!important;height:88px!important;align-self:center!important}
+${O} .kat{flex-wrap:wrap!important;padding-right:24px}
+${O} .kat>.kan{line-height:1.15}
 ${O} .kat>.kan{flex:1 1 100%!important;min-width:0!important}
 ${O} small.kb{row-gap:1px!important}
 ${O} small.kb>.kr>.krv{display:block!important}
@@ -54595,6 +54596,7 @@ ${O} .kofold{display:none!important}
 ${O} .kfill .ef{color:var(--dim,#9a8a78)!important;font-weight:400!important}
 ${O} .kfill .krl{opacity:.6}
 ${O}>.kobang{position:absolute;top:5px;right:6px;width:22px;height:22px;border-radius:50%;display:grid;place-items:center;font:700 .85rem/1 var(--body,sans-serif);color:var(--gold,#8f5f0c);background:#fffaf0;border:1px solid var(--gold,#8f5f0c);cursor:help;z-index:2}
+${O}>.kobang.kobred{color:#b3301f;border-color:#b3301f}
 ${O}>.kobang::after{content:"";position:absolute;inset:-9px}`;
  st.textContent=mk("html body #modal#modal button.ka.kart.kopt.kopt")+"\n"+mk("html body .kitpg-opts>button.ka.kart.kopt.kopt")+`
 #kpinfo{position:fixed;inset:0;z-index:100001;background:#1a0f08cc;display:grid;place-items:center;cursor:zoom-out;padding:16px}
@@ -68616,7 +68618,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="8db9225f8791";window.CTM_BUILD=BUILD;
+const BUILD="a249d145832a";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
