@@ -4,6 +4,7 @@
      (jnroadm.js), with n inside BAL.nroad.helpN;
    - coverage: an origin (or the men templates) that has any entry has ALL its help chapters;
    - every ask: kind in BAL.nroad.kinds (no «bac»), h + two options, each with a label and a loss line; ≥ 2 asks per chapter;
+   - every chapter keeps ≥ 1 ask that does not name {B} (no real rival → nrAskPick drops {B} asks);
    - variety: no sentence of an ask is shared with another ask; no option label or loss line is used twice;
    - slots only {me} {Me} {call} {Call} {he} {B}; no typed pronoun of address in the NPC's words (VANPHONG §2: tỷ / muội / bổn cung … come
      from the slots); no %, no digits, no foreign / modern words (VANPHONG §3), no "Chắc chắn", no «…», no double quotes;
@@ -47,6 +48,9 @@ for(const id of Object.keys(NR)){const m=id.match(/^(.+)_(\d+)$/);const road=m&&
  if(!m||!(isRd||isMen))fail('key is no road / men template chapter',id);else if(!isHelp(n))fail('chapter outside BAL.nroad.helpN',id);
  const grp=isMen?'men':road.split('_')[0];(cov[grp]=cov[grp]||new Set()).add(id);
  const L=[].concat(NR[id]);if(L.length<2)fail('fewer than 2 asks (variety across lives, OD:L1252)',id);
+ /* fix 2 (review E7ar2 FIX 2): every chapter keeps ≥ 1 ask that does not name {B} — with no real rival (her rival is the player, or gone)
+    nrAskPick drops every {B} ask, and a chapter with none falls back to the stock card */
+ if(L.length&&L.every(a=>a&&/\{B\}/.test([a.h,a.c||''].concat(...(a.o||[])).join(' '))))fail('no {B}-free ask (with no real rival the chapter falls to stock)',id);
  L.forEach((a,i)=>{asks++;const w=`${id}[${i}]`;
   if(!a||!kinds.includes(a.k))return fail(w+': kind not in BAL.nroad.kinds',a&&a.k);
   if(typeof a.h!=='string'||!a.h)return fail(w+': no ask text');
