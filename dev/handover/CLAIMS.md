@@ -56,3 +56,5 @@ b10-a36-c23-c32 (cont.) | CDN _review only | W63f session_011xDdVNP9vpwSWD4MCe2j
 a18-scan-2 regens | CDN _review only | W65d session_011xDdVQVsntxHXp735x2for (W65c archived) | RUNNING | 2026-11-18T17:40Z (Foreman C ROOT-29)
 quoc-tang-sample | CDN _review only | W70 session_011xDdVSaNiUfxn72JcAYZo8 | DONE (archived) | 2026-11-18T17:17Z (Foreman C ROOT-28)
 a18-t7t8-scan | scan only, no gens | W71 session_011xDdVRiT8Bh4RBNGVwjVBv | RUNNING | 2026-11-18T17:45Z (Foreman C ROOT-29)
+t8-v0-reprompt-sample (+A/B fabric) | CDN _review only | W72 session_011xDdVNW3uEET1o4R4muEUH | RUNNING | 2026-11-18T17:48Z (Foreman C ROOT-29)
+owner-page-90 (90 nhân vật nữ states) | CDN _review + artifact WFjg87H9M2Ch5kebxT8BmJ | W73 (see STATUS) | RUNNING | 2026-11-18T17:59Z (Foreman C ROOT-29)
