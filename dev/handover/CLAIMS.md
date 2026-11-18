@@ -466,7 +466,7 @@ handsome man prompt-only sample (no proportion gate) | claude/cung-tuong-mong-ha
 c12 a18 Nữ đế #2 (r8 first) soft-smile (Round 42) | claude/cung-tuong-mong-handover-hj0h8w (art, _review CDN) | session_011xDdVQzK53ocBsDVyee2N3 | DONE (archived ROOT-17 05:30Z) | 2026-11-18T05:10Z
 | FOREMAN C-AG #10 (opus; successor of #9, opened by C-AG #9) | handover FOREMAN_C_STATUS | C-AG #9 | session_01UV1SzjAd8BYMMz2rKFZitp | RUNNING | 18/11 05:00Z |
 c12 a18 t5–t8 headdress re-do from live originals (Round 43) | claude/cung-tuong-mong-handover-hj0h8w (art, _review CDN) | session_011xDdVPdhZPQct6rWX6fDaZ | CANCELLED (owner: c12 OK, no redraw; 05:22Z) | 2026-11-18T05:16Z
-| NPC-PURPOSE G1 #3 + integrator (opus; successor of Szk6vem, head 9bf916a) | review/npc-purpose | C-AG #10 | session_01UV1Szm7n34pm29edeDhQ3Q | RUNNING | 18/11 04:52Z |
+| NPC-PURPOSE G1 #3 + integrator (opus; successor of Szk6vem, head 9bf916a) | review/npc-purpose | C-AG #10 | session_01UV1Szm7n34pm29edeDhQ3Q | ROLLED OVER → SzktT6Y (archived) | 18/11 04:52Z |
 | odds-cap FIX round 3 (opus; FAIL 3 @9df9204d) | review/odds-cap | D | session_01964izECUsWiXJp3oXeZY7A | RUNNING | 18/11 04:57Z |
 | staff-cap-row3 + stale test selectors (sonnet; ROOT-44 04:25Z/04:36Z) | review/staff-cap-row3 | D | session_01964izFcTHVtrAudt7Dyk4F (SMALL review of 456010f8; worker archived) | RUNNING | 18/11 04:57Z |
 | E1 GRAND ENDINGS ENGINE + 3 pilots (opus; BIG; brief briefs/E1-grand-endings-engine.md) | review/grand-endings-engine | E ROOT | session_01DgYSWkyBNQQuQ6GZfMzcqU | RUNNING | 18/11 04:59Z |
@@ -499,3 +499,4 @@ art-matrix planner (MAIN s43 order) | claude/cung-tuong-mong-handover-hj0h8w (re
 | title-stale-sel: tutorial replay button + stale title/slot hooks in dev/build (sonnet) | review/title-stale-sel | D | session_01964izCYFCaCF1YGfec7vAL | RUNNING | 18/11 05:20Z |
 | E4r REVIEW monthly-ration a0f3f53 (opus BIG; briefs/E4r-review-monthly-ration.md) | review/monthly-ration | E ROOT | session_01DgYSWm8bfGptYDVPCJ69bw | RUNNING | 18/11 05:28Z |
 | person-dialog-restore (owner bug ANGRY 18/11 06:10Z: 'đã biết' notice in column + empty band + no group tabs + tall cards; sonnet; brief briefs/person-dialog-restore.md) | review/person-dialog-restore | MAIN ROOT-45 | (opening) | RUNNING | 18/11 05:22Z |
+| NPC-PURPOSE G1 #4 integrator (opus; successor of Szm7n34; G1 done 964cfa7, merge G3 63007f9 + G2) | review/npc-purpose | C-AG #10 | session_01UV1SzktT6YzdpEuSryJ3J1 | RUNNING | 18/11 05:32Z |
