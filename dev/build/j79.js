@@ -895,6 +895,10 @@ function kpIdLay(M){try{const im=M.querySelector(":scope > img.kidfig2"),d=M.que
  const p1=typeof kitView==="function"?kitView().pages===1:(W<600&&H>W);
  const KZ=typeof KIT_SIZE==="object"?KIT_SIZE:null,side=p1&&(W-16-12-(KZ?KZ.fig3.M.cw:140)>=(KZ?KZ.v3.narrow.minRight:274)),one=p1&&!side;
  M.classList.toggle("kpside",side);
+ /* KIT 56.9 (owner 18/11 ~20:25Z, Fold «Thân phận kiếp này»): in the figure-left layout her figure is BIG again, about the full height of the info frame (kit rule 32.2b: screen height minus the equal gaps, room for the tallest Hoàng hậu crown BAL.bookFrame.cRef), whole figure beside the panel, never over it: the figure column = body x KPID_WR, the panel takes the rest (at least the kit minimum KIT_SIZE.v3.narrow.minRight, at most 560); a body that would leave the panel less than its minimum is lowered to fit. --kpw is set here, before the panel is measured. */
+ if(side){const A0=H,G0=typeof KIT_DP_GAP!=="undefined"?Math.max(KIT_DP_GAP.min,KIT_DP_GAP.pct*A0):Math.max(14,A0*.05),cR=(typeof BAL==="object"&&BAL.bookFrame&&BAL.bookFrame.cRef)||.131;
+  let Hb=Math.min((A0-2*G0)/(1+cR),H*.80,BAL.bookFigBody?BAL.bookFigBody.kv1:1e9);/* KIT 56.11 (owner 18/11 ~21:25Z): SKELETON = the Sổ tuần lục page: the figure is the SAME body as in the book (BAL.bookFigBody: Fold 641, iPad 534), so the info frame gets the width the book gives it */const minR=KZ?KZ.v3.narrow.minRight:274,avail=W-16-12;let cw=Math.round(Hb*KPID_WR*.98);if(avail-cw<minR){cw=avail-minR}
+  M.__kidBody=cw/(KPID_WR*.98);M.style.setProperty("--kpw",Math.min(560,avail-cw)+"px")}else{M.__kidBody=0;M.style.removeProperty("--kpw")}
  d.style.removeProperty("width");d.style.removeProperty("max-width");
  /* the panel is the ONE frame size (KIT 8.1 tokens --kpw/--kph, never set here; merge review/newgame-ui-r1); the figure column is the space
     left of it (its left edge minus 8 px), so a tab with more cells can never widen it over her */
@@ -911,7 +915,7 @@ function kpIdLay(M){try{const im=M.querySelector(":scope > img.kidfig2"),d=M.que
  /* ONE body for every face on this screen (KIT 28.11a, 56.4): head top → feet; no per-face shrink and no cap for the widest robe */
  /* KIT 56.4 (owner 18/11 ~07:50Z, step 2 of 56.3): the old per-screen cap that shrank EVERY face for the widest robe (KPID_WR) is gone — never shrink the whole set for outliers; a wide robe / sleeve spreads under the panel, which is drawn on top (z-index 1), and nothing is cut */
  /* KIT 56.7 side layout (the old approved phone card): the column is narrow BY CONSTRUCTION, so the ONE body of this screen is capped so the widest painted figure (KPID_WR = widest painted width / body height, measured .496 over the 420 faces) stands in it whole — the same body for every face, her whole figure beside the panel, never under it */
- if(side)Hs=Math.min(Hs,colW*.98/KPID_WR);
+ if(side)Hs=Math.min(Hs,colW*.98/KPID_WR,M.__kidBody||1e9);
  /* KIT 56.8 (owner 18/11 ~18:30Z): iPad landscape card: the left figure is the SAME size as the figure of the Luan hoi book (BAL.bookFigBody.kv2), not bigger */
  if(!one&&!port&&!side&&BAL.bookFigBody)Hs=Math.min(Hs,BAL.bookFigBody.kv2);
  Hs=Math.max(40,Hs);let ih=Hs/bf,iw=ih*ar;
@@ -1005,6 +1009,9 @@ button.ka.kcard.kart{border-left:4px solid var(--kcc0,var(--line))!important}
 /* KIT 56.7: one page wide enough for a column + a panel (Fold 755x1000): figure LEFT, one long vertical panel RIGHT (the old approved phone layout, owner 18/11) */
 .modal.kpscene.kpfig.kpside{--kpw:min(560px,calc(100% - 16px - 12px - 140px));--kph:calc(100% - 16px);justify-content:flex-end!important;align-items:center!important;padding:8px!important}
 .modal.kpscene.kpfig.kpside .dlg.kpsc{max-width:var(--kpw)!important}
+/* KIT 56.10 (owner 18/11 ~20:55Z via MAIN, LAW 10): the card's panel takes the free height — spread: the whole screen height (not 70 %), so the stats fit without «Kéo xuống»; narrow side panel: the stat tiles are LONG ROWS (label left, value right, one per row), never wrapped in a 4-column grid */
+:where(.kv2) .modal.kpscene.kpfig{--kph:calc(100% - 24px)}
+.modal.kpscene.kpfig.kpside .dlg.kpsc .kpid.kpidf .kstgrid{grid-template-columns:minmax(0,1fr)}.modal.kpscene.kpfig.kpside .dlg.kpsc .kpid.kpidf .kst-tile{flex-direction:row;align-items:baseline;justify-content:space-between;gap:8px}.modal.kpscene.kpfig.kpside .dlg.kpsc .kpid.kpidf .kst-tile>.kstv{text-align:right}
  :where(.kv1) .dlg.kpsc .kpid.kpidf .kstgrid{grid-template-columns:repeat(4,minmax(0,1fr))}:where(.kv1) .dlg.kpsc .kpid.kpidf .kst-tile{flex-direction:column;align-items:flex-start;justify-content:flex-start;gap:0}:where(.kv1) .dlg.kpsc .kpid.kpidf .kst-tile>.kstv{text-align:left}
 /* 4 · status grouped by purpose */
 #hud2.kgrp{flex-wrap:wrap}
