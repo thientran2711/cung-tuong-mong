@@ -20,8 +20,8 @@ jl = lambda x: json.loads(re.sub(r'(?<![\d])\.(\d)', r'0.\1', x))
 FIT = {'eye': jl(re.search(r'fit:\{eye:(\[.*?\])', src).group(1)), 'mouth': jl(re.search(r'fit:\{eye:\[.*?\],mouth:(\[.*?\])', src).group(1))}
 T = re.search(r'mouth:\[.*?\]\},mouth:(\[.*?\]),nose:(\[.*?\]),pad:([\d.]+)', src); NOSE = jl(T.group(2)); PAD = float(T.group(3))
 POLY = np.array(jl(re.search(r'face:(\[\[.*?\]\])\}', src).group(1))); FEATH = float(re.search(r'keep:\{feather:([\d.]+)', src).group(1))
-m = re.search(r'ink:\{at:(\[.*?\]),k:([\d.]+),(?:rot:-?[\d.]+,)?an:(\[\[.*?\]\])', src)
-PLACE_NEW = (jl(m.group(1)) + [float(m.group(2))] + sum(jl(m.group(3)), [])) if m else None   # [a, b, k, an_s1, an_t1, an_s2, an_t2, an_s3, an_t3]
+m = re.search(r'ink:\{at:(\[.*?\]),k:(\[.*?\]|[\d.]+),(?:rot:-?[\d.]+,)?an:(\[\[.*?\]\])', src)
+PLACE_NEW = (jl(m.group(1)) + [jl(m.group(2))] + sum(jl(m.group(3)), [])) if m else None   # k = one number or [k_lv1, k_lv2, k_lv3]   # [a, b, k, an_s1, an_t1, an_s2, an_t2, an_s3, an_t3]
 mb = re.search(r'ink:\{.*?box:(\[.*?\])', src); BOX = jl(mb.group(1)) if mb else None
 mr = re.search(r'ink:\{.*?rot:(-?[\d.]+)', src); ROT = float(mr.group(1)) if mr else 0.
 if '--rot' in a: ROT = float(opt('--rot', '0'))
@@ -59,29 +59,38 @@ def eyetruth(r):
 def mirrored(k):  # = lkMirror
     s = SCAR.get(k); v = VF.get(k); return bool(s and v and s[0] + s[2] / 2 > v[0] + v[2] / 2 + 1)
 SCAR = json.load(open(D + '/scar-fit.json')) if os.path.exists(D + '/scar-fit.json') else {}
+def kof(P, n, r=None):   # the level's k (BAL ink.k number or per-level list) x the picture's k scale (override item 15)
+    k_ = P[2][n - 1] if isinstance(P[2], list) else P[2]
+    return k_ * (r[14] / 1000 if r is not None and P is PLACE_NEW and len(r) >= 15 else 1)
 def placed(n, r, P, mir):   # the art under placement P = [a, b, k, an_s, an_t]; None = OLD (plain face square)
     art = ART[n]
     if P is not None and BOX:   # BAL.looks.keep.ink.box: the main stroke only (lv3 splash near the chin dropped), = clip-path inset() on the layer
         x0, y0, x1, y1 = BOX; art = art * ((SS >= x0) & (SS <= x1) & (TT >= y0) & (TT <= y1))
     art = art[:, ::-1] if mir else art
     if P is None: return art
-    a_, b_, k_ = P[:3]
-    if len(r) >= 14 and P is PLACE_NEW: a_, b_ = r[12] / 1000, r[13] / 1000   # per-picture ink override (keep-fit row items 13-14, x1000), = lkInkBox
+    a_, b_ = P[:2]; k_ = kof(P, n); rot_ = ROT
+    if len(r) >= 14 and P is PLACE_NEW:   # per-picture ink override (keep-fit row items 13-16: a, b x1000, k scale x1000, rot x10 deg), = lkInkBox
+        a_, b_ = r[12] / 1000, r[13] / 1000
+        if len(r) >= 15: k_ *= r[14] / 1000
+        if len(r) >= 16: rot_ = r[15] / 10
     an_s, an_t = (P[3 + 2 * (n - 1)], P[4 + 2 * (n - 1)]) if len(P) >= 9 else (P[3], P[4]); E = keep(r); e = E[1] if mir else E[0]
     se = (e[0] + .04) / 1.08; te = (e[1] + .3826) / 1.165; ex = e[2] / 1.08; ey = e[3] / 1.165
     Ts = se + a_ * ex if mir else se - a_ * ex; Tt = te + b_ * ey; ans = 1 - an_s if mir else an_s
     # layer box scaled by k about the art's anchor, anchor moved onto the target: art px (s0,t0) -> (Ts + k (s0 - ans), Tt + k (t0 - an_t))
-    rt = np.deg2rad(-ROT if mir else ROT); c_, n_ = np.cos(rt), np.sin(rt); X_ = (SS - Ts) / k_; Y_ = (TT - Tt) / k_   # extra rotation about the head point (BAL ink.rot, deg; - = lifts the tail)
+    rt = np.deg2rad(-rot_ if mir else rot_); c_, n_ = np.cos(rt), np.sin(rt); X_ = (SS - Ts) / k_; Y_ = (TT - Tt) / k_   # extra rotation about the head point (BAL ink.rot, deg; - = lifts the tail)
     s0 = ans + X_ * c_ + Y_ * n_; t0 = an_t - X_ * n_ + Y_ * c_
     return cv2.remap(art, (s0 * S - .5).astype(np.float32), (t0 * S - .5).astype(np.float32), cv2.INTER_LINEAR, borderMode=cv2.BORDER_CONSTANT, borderValue=0)
+_C = {}
 def measure(k, P_list):
-    r = KF[k]; sq = square(k); sk = skin(sq); fm = facemask(k); kv = keepvis(keep(r)); et = eyetruth(r); mir = mirrored(k); out = []
+    r = KF[k]
+    if _C.get('k') != k: sq = square(k); _C.update(k=k, v=(skin(sq), facemask(k), keepvis(keep(r)), eyetruth(r), mirrored(k)))   # per-picture masks cached (the --fit search calls this ~500 times per picture)
+    sk, fm, kv, et, mir = _C['v']; out = []
     for P in P_list:
         res = []
         for n in (1, 2, 3):
             art = placed(n, r, P, mir); vis = art * fm * kv; on = vis > .1
-            low = (on & (V > r[7] / 1000 - 2 * r[9] / 1000)).sum()   # r11 LOOK: ink down at the lip line reads as a moustache next to the lips -> counted with 'eye' (a face-feature fail)
-            res.append(((on & ~sk).sum(), (on & et).sum() + low, vis.sum() / max(ART[n][(TT >= .33) & (TT <= .64) & (SS <= .37)].sum() * (P[2] ** 2 if P is not None else 1), 1e-6)))   # share of the PLACED stroke (scaled by k) that stays visible   # area vs the main stroke's own alpha
+            low = 0 if os.environ.get("NOLIP") else (on & (V > r[7] / 1000 - 2 * r[9] / 1000)).sum()   # r11 LOOK: ink down at the lip line reads as a moustache next to the lips -> counted with 'eye' (a face-feature fail)
+            res.append(((on & ~sk).sum(), (on & et).sum() + low, vis.sum() / max(ART[n][(TT >= .33) & (TT <= .64) & (SS <= .37)].sum() * (kof(P, n, r) ** 2 if P is not None else 1), 1e-6)))   # share of the PLACED stroke (scaled by k) that stays visible   # area vs the main stroke's own alpha
         out.append(res)
     return out
 keys = sorted(k for k in VF if k in KF and os.path.exists(D + '/pics/' + k))
@@ -99,36 +108,57 @@ if '--dbg' in a:
                 t[(vis > .1) & ~sk] = (255, 0, 0); tiles.append(cv2.resize(t, (S * 2, S * 2), interpolation=cv2.INTER_NEAREST))
         Image.fromarray(np.hstack(tiles)).save(f'{out}/{k[:-5]}.png')
     sys.exit(0)
-if '--fit' in a:   # per-picture ink override for every picture that fails with the BAL constants: keep-fit row += [a, b] x1000 (data only, written to --fit <out keep-fit.json>)
-    GA = [x / 10 for x in range(-2, 11)]; GB = [x / 10 for x in range(10, 23, 2)]; out = dict(KF); nfix = nbetter = 0
-    def bad(res): return sum(1000 * (h > HAIRTOL) + 1000 * (e_ > 0) + 10 * (ar < FLOOR) - ar for h, e_, ar in res)
+if '--fit' in a:   # per-picture ink override for every picture that fails with the BAL constants: keep-fit row += [a, b x1000, k scale x1000, rot x10] (data only, written to --fit <out keep-fit.json>)
+    GA = [0, .25, .5, .75, 1.0, 1.25]; GB = [1.1, 1.3, 1.5, 1.7, 1.9, 2.1]; GKS = [.75, .87, 1.0, 1.1]; GR = [-45, -30, -15, 0]; out = dict(KF); nfix = nbetter = nclean = 0
+    ARTA = [ART[n][(TT >= .33) & (TT <= .64) & (SS <= .37)].sum() for n in (1, 2, 3)]
+    def bad(res, ks=1.):
+        vis = [ar * ARTA[n] * (kof(PLACE_NEW, n + 1) * ks) ** 2 for n, (h, e_, ar) in enumerate(res)]
+        return sum(1000 * (h > HAIRTOL) + 1000 * (e_ > 0) + 10 * (ar < FLOOR) - ar for h, e_, ar in res) + 1000 * (not vis[0] < vis[1] < vis[2])
     for k in keys:
         r = list(KF[k][:12]); KF[k] = r
         try: base = measure(k, [PLACE_NEW])[0]
         except Exception as e: continue
-        if not any((h > HAIRTOL) or e_ or ar < FLOOR for h, e_, ar in base): out[k] = r; continue
-        nfix += 1; G = [[ga, gb] + PLACE_NEW[2:] for ga in GA for gb in GB]; M = measure(k, G); j = min(range(len(G)), key=lambda j: bad(M[j]))
-        if bad(M[j]) < bad(base): out[k] = r + [round(G[j][0] * 1000), round(G[j][1] * 1000)]; nbetter += 1
+        b0 = bad(base)
+        if b0 < 0: out[k] = r; continue
+        nfix += 1; best = (b0, None)
+        for ga in GA:
+            for gb in GB:
+                for ks in GKS:
+                    for gr in GR:
+                        KF[k] = r + [round(ga * 1000), round(gb * 1000), round(ks * 1000), round(gr * 10)]
+                        try: res = measure(k, [PLACE_NEW])[0]
+                        except Exception: continue
+                        bb = bad(res, ks)
+                        if bb < best[0]: best = (bb, list(KF[k]))
+        KF[k] = r
+        if best[1]: out[k] = best[1]; nbetter += 1; nclean += best[0] < 0
         else: out[k] = r
-    json.dump(out, open(opt('--fit', ''), 'w'), separators=(',', ':')); print('failing with BAL constants', nfix, 'better with a per-picture override', nbetter); sys.exit(0)
-if '--grid' in a:
-    AN = [.086, .507, .042, .443, 0, .407]
+    json.dump(out, open(opt('--fit', ''), 'w'), separators=(',', ':')); print('failing with BAL constants', nfix, 'better with a per-picture override', nbetter, 'of them clean', nclean); sys.exit(0)
+if '--grid' in a:   # per level: best [a, b, k] x rot for each level separately (lv3 is the longest stroke)
+    AN = [.086, .507, .042, .443, 0, .407]; RS = eval(opt('--gr', '(%s,)' % ROT))
     G = [[a_, b_, k_] + AN for a_ in eval(opt('--ga', '(0,.3,.6,.9)')) for b_ in eval(opt('--gb', '(1.1,1.3,1.5)')) for k_ in eval(opt('--gk', '(.8,.9,1.0)'))]
-    sc = np.zeros(len(G)); det = [[0, 0, 0] for _ in G]
+    GR = [(g, r_) for r_ in RS for g in G]; sc = np.zeros((len(GR), 3)); det = np.zeros((len(GR), 3, 3), int); ROT0 = ROT
     for i, k in enumerate(keys):
-        try: M = measure(k, G)
-        except Exception as e: continue
-        for j, res in enumerate(M):
-            for h, e_, ar in res: det[j][0] += h > HAIRTOL; det[j][1] += e_ > 0; det[j][2] += ar < FLOOR; sc[j] += (h > HAIRTOL) + (e_ > 0) + (ar < FLOOR) - .05 * ar
-    for j in np.argsort(sc)[:12]: print('place', G[j], 'fails hair/eye/area', det[j], 'score %.1f' % sc[j])
+        for r_ in RS:
+            ROT = r_
+            try: M = measure(k, G)
+            except Exception as e: continue
+            for j, res in enumerate(M):
+                jj = RS.index(r_) * len(G) + j
+                for lv, (h, e_, ar) in enumerate(res): det[jj, lv] += [h > HAIRTOL, e_ > 0, ar < FLOOR]; sc[jj, lv] += (h > HAIRTOL) + (e_ > 0) + (ar < FLOOR) - .05 * ar
+    for lv in range(3):
+        for jj in np.argsort(sc[:, lv])[:5]: print('lv%d' % (lv + 1), 'place', GR[jj][0][:3], 'rot', GR[jj][1], 'fails hair/eye/area', list(det[jj, lv]), 'score %.1f' % sc[jj, lv])
     sys.exit(0)
 P_list = [None, PLACE_NEW] if PLACE_NEW else [None]
+ARTA = [ART[n][(TT >= .33) & (TT <= .64) & (SS <= .37)].sum() for n in (1, 2, 3)]; LAD = [0 for _ in P_list]
 cnt = [[[0, 0, 0, 0] for _ in range(3)] for _ in P_list]; AR = [[[] for _ in range(3)] for _ in P_list]; BAD = {}; n_ok = 0
 for i, k in enumerate(keys):
     try: M = measure(k, P_list)
     except Exception as e: print('skip', k, e); continue
     n_ok += 1
     for j, res in enumerate(M):
+        Pj = P_list[j]; vis = [ar * ARTA[n] * (kof(Pj, n + 1, KF[k]) ** 2 if Pj is not None else 1) for n, (h, e_, ar) in enumerate(res)]
+        if not vis[0] < vis[1] < vis[2]: LAD[j] += 1   # level ladder: visible ink lv1 < lv2 < lv3 on the same picture
         for lv, (h, e_, ar) in enumerate(res):
             c = cnt[j][lv]; c[0] += h > HAIRTOL; c[1] += e_ > 0; c[2] += ar < FLOOR; c[3] += (h > HAIRTOL) or (e_ > 0) or (ar < FLOOR); AR[j][lv].append(ar)
             if j == len(P_list) - 1 and ((h > HAIRTOL) or e_ or ar < FLOOR): BAD.setdefault(k, []).append(f'lv{lv+1} hair {h} eye {e_} area {ar:.2f}')
@@ -137,6 +167,7 @@ L = [f'INK scan: {n_ok} pictures (por + fig), S={S}px square, hair tol {HAIRTOL}
 for lv in range(3):
     o = cnt[0][lv]; nw = cnt[-1][lv]
     L.append(f'muc lv{lv+1} | {o[0]:5d} {o[1]:5d} {o[2]:5d} {o[3]:5d} | {nw[0]:5d} {nw[1]:5d} {nw[2]:5d} {nw[3]:5d} | {np.median(AR[0][lv]):.2f} ({np.percentile(AR[0][lv],10):.2f}) -> {np.median(AR[-1][lv]):.2f} ({np.percentile(AR[-1][lv],10):.2f})')
+L.append(f'level ladder broken (visible ink not lv1 < lv2 < lv3): OLD {LAD[0]} -> NEW {LAD[-1]}')
 L.append(f'pictures with any NEW fail: {len(BAD)}')
 if '--list' in a:
     for k, v in list(BAD.items())[:int(opt('--list', '10'))]: L.append(f'  {k} {v}')
