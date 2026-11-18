@@ -1,4 +1,4 @@
-# test-flaky-sure (worker E12, test-only) — branch review/test-flaky-sure @ c3b9d58c (from origin/main 997e049d)
+# test-flaky-sure (worker E12, test-only) — branch review/test-flaky-sure @ 36b82f75 (from origin/main 997e049d)
 PRIORITY #1 CHECK ('flaky sure odds test nlNew retry'): OD 0 | ledger 0 | claims 0 | main 0 | review/* 0 | archive 0 (MAIN ROOT-52 order 18/11 13:52Z). Reused: forced-roll idiom `window.roll=()=>true` (rel-audit/reward-box), neutral-eye idiom (shelf-check peer).
 No game code changed: only dev/test/*.js + new dev/tools/test-flaky-scan.py.
 
@@ -28,3 +28,8 @@ No game code changed: only dev/test/*.js + new dev/tools/test-flaky-scan.py.
 The other ~125 files (loop fix A only, mostly shot/scan drivers needing url/outdir/CDN) were not run 20x: the change is one mechanical statement; steal-mg-unit is the proof for the pattern.
 quickcheck: `bash dev/tools/quickcheck.sh` → QUICKCHECK PASS · open 1421 ms · old save ok · core gates PASS (total 351 s).
 Not fixed / out of scope: placeholder-pics.js has a pre-existing syntax error (untouched); a one-off pixi `r.updateLocalTransform is not a function` page error appeared in 1/40 shelf-check runs (engine, not test).
+
+## ADD-ON (MAIN ROOT-52 15:30Z + Foreman E): coop-e2e + one pass over every fixed file  (branch @ 36b82f75)
+- coop-e2e.js: BOTH checks that assume the friend is a stranger ('friend starts as Người lạ' and 'reborn friend is a stranger again') now also accept a servant-origin friend (f.id==null; k61St≠0 for a servant is by design). Accept-both, not pinned. Family scan (grep k61St( in dev/test): only those two sites assert 'unknown'; coop-bot only logs it. **NOT run 20/20: the live co-op Worker (ctm-coop…workers.dev) is unreachable from this box (curl 000); `node --check` only. Needs a seat with Worker access to run it 20x.**
+- One pass of all 138 other changed files (`node file http://127.0.0.1:8765/index.html <out>`, 150 s cap, 4 parallel, same args as main): 42 green, 96 red. The same 96 re-run from origin/main with identical args: **95 red on both** (missing url/outdir/CDN images/shots the sandbox lacks, 4 timeouts), **0 green only on main**, 1 differing: act-dedupe-bot.js (124 timeout under 4-parallel load). Re-run alone 3x main / 4x fixed: both exit 2 or 0 at random (main 2/3 red, fixed 2/4 red) = pre-existing start-before-figs-ready race (`nlBegin` waits for FIGSIG; the test reads S at once → «S undefined»). Not caused by this job; it is a separate flake family (tests that call start() w/o __nlInner and touch S immediately), listed here, NOT fixed.
+- Reds are therefore the same on main and the fixed branch; no regression found by the pass.
