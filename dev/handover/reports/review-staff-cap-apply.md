@@ -1,4 +1,4 @@
-# REVIEW staff-cap-apply fc470e4 — PASS 635a2381 (reviewer session_01UV1Szjx5c2mp4L6PXwg2zG, opened by MAIN s43)
+# REVIEW staff-cap-apply fc470e4 — PASS e24d5838 (was 635a2381) (reviewer session_01UV1Szjx5c2mp4L6PXwg2zG, opened by MAIN s43)
 PRIORITY #1 CHECK ('staff.?cap|capTh|capNd|roomFor|figGC|BAL.promo.cap'): OD L1794 (18/11 ~02:15Z, final ~02:50Z verbatim "Phi là 3 cộng 1 … Nữ đế 5 cộng 3") | main jpromo BAL.promo.cap + j10 capOf/capTrim (staff-cap-fix LIVE) | review/staff-cap-apply fc470e4 | CLAIMS L1000/L1015 | earlier CDN-CORS flake reports: batch-0032, npc-agent-ag1-r1, review-title-sys2, review-coop-thin-c, review-schedules3-r5, flip-entry, rank-port-r2.
 START_CTX ~5 % (est.; get_session reads 0). Ended ~15 %.
 
@@ -19,3 +19,5 @@ Notes (non-blocking, for main):
 2. Pre-existing co-op: right after join, NPC household servant faces differ host vs guest until the first week merge (both runs, main too); converged after week 1.
 3. Pre-existing co-op: host's coop friend rival entry sometimes absent right after a week merge (main 1/3, branch 1/2).
 4. The staff count line "Kẻ hầu: x/y cung nữ · a/b thái giám" is in the panel text but not visible on screen in the Cung nhân view (seen only via text); the cap shows to the player as the "✗ đủ số theo phẩm" chip and the BÁO notice.
+
+## Update (MAIN s43 ask): merged db24027f, then 95d5f767 → **e24d5838**, FF of live main 95d5f767. Gates: staff-cap-apply ALL PASS · staff-cap ALL PASS · staff-root 16/16 · quickcheck PASS ×2 (on e24d5838: render 220/195, tab 355/398, buoi 977/961 ms) · coop-e2e 63/63 (on the db24027f merge).
