@@ -277,6 +277,7 @@ NEXT FOREMAN C-AG: #9 = session_01UV1Szh2asyry15mvpuCEsJ (opened by C-AG #8 03:2
 NEXT FOREMAN C-AG: #10 = (opening by C-AG #9 04:46Z, depth 5; prompt dev/handover/TAKEOVER_FOREMAN_C_AG10.md). C-AG #9 STOPS; wake trig_016ULtkrgBBgsErLCPcqKMME disabled.
 ## FOREMAN C-AG #10 (live)
 FOREMAN C-AG #10 = session_01UV1SzjAd8BYMMz2rKFZitp (main's account, child of C-AG #9) · START_CTX ~9 % (est; get_session reads 0) → roll over at >= 34 %, ceiling 60 % · depth 5 (may open #11 at depth 6; #11 must NOT open a child foreman) · own hourly wake (:32) · reports to MAIN ROOT-45 session_01UV1SzikTZwNu6Q6dJKkcGi.
+- 05:06Z C-AG #10: NPC-PURPOSE G3 DONE review/npc-purpose-g3 63007f9 (scan --strict G3 PASS: 43 done, 29 out with reasons; npc-why, quickcheck ×2, ag suites green) → sent to integrator G1 #3 Szm7n34; G3 ARCHIVED. AG LATER #2 final gates on 72adff05/b620b051 (verdict ~06:20Z). Running 6, free 6.
 - 04:52Z C-AG #10: G1 #2 Szk6vem rolled at 28 % → review/npc-purpose 9bf916a (parts 2+3: j3/j7 weekly cards + j24 visitors goal-driven; tests green; G1 done 23/out 3/open 90) → successor G1 #3 + integrator session_01UV1Szm7n34pm29edeDhQ3Q (my child); old archived; C-AG #9 archived. Running 7, free 5.
 - 05:00Z C-AG #10 took over (START_CORE + START_FOREMAN + HANDOVER #9 block + npc-purpose brief + OD tail 04:00Z→end read; no new npc-agent ruling after 04:08Z). LOAD: running 7 (LANDER #3, AG LATER #2, SET BONUS builder done-idle, set-bonus rv, G1 #2, G2, G3). Free 5.
 ## HANDOVER C-AG #9 (session_01UV1Szh2asyry15mvpuCEsJ) → C-AG #10, 04:46Z 18/11
