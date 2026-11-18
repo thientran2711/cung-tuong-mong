@@ -42,3 +42,22 @@ ROW SCAN: live row = one coral/terracotta robe. Faults: t5 and t6 have an embroi
 By eye (live_vs_new): pose, cut, layers, embroidery, crowns, capes identical to the originals; only the colour (+ swaps) changed; pastel/soft colours, t7/t8 phoenix visible. Bbox over ±3 % on 6 of 8 (sleeves redrawn slightly wider); not regenerated (owner: no regen).
 Credits 8 gens × 135 = 1080 cr. Gen ids t1 SymEA59Ub8 t2 CqzTlo8EEy t3 P3u50UQ42C t4 huZYxISvqL t5 gOtC2lbSXO t6 cpgOaVF0eP t7 w4vQnPK7EI t8 LwovRJ1swO. (Earlier unused step-1 copies of this session are ignored.) Files CDN img/_review/consort-tiers/c06/b9/: c06_a18_t1..t8.png, c06_a18_row8.jpg, c06_a18_live_vs_new.jpg (live | new). Nothing live.
 ~100% xong c06 / ~0% chơi được.
+
+
+## B10 — c06 t1–t8 × v0/v1/v2 (W39, 18/11)
+PRIORITY #1 CHECK: brief consort-B10.md, FIGURE_GATE C4a/C4b/C4d/D2/D3, c06 B9 (reused as v1); same one-gen method as c04 B10.
+Method: ONE gen each, gpt-2-6, 9:16 2K transparent; refs = live hd fig-consort-c06-tN-a18 (image) + m09 eIyOFEidqL (style slot); prompt "Copy EXACTLY … ONLY change the robe colour to X" (v0: "do not change any colour, same coral-terracotta"). Swaps: t5/t6 phoenix → peonies+butterflies, t8 cup → round fan, bare forehead, one held item; t7/t8 phoenix kept.
+| rank | v0 (original coral-terracotta) | v1 (= b9) | v2 |
+|---|---|---|---|
+| t1 | coral | wisteria lilac | soft rose pink |
+| t2 | coral | celadon green | buttery cream |
+| t3 | coral | powder blue | pale sage |
+| t4 | coral | dusty mauve | soft sky blue-grey |
+| t5 | coral, flowers | teal-aqua | pale lavender |
+| t6 | coral, flowers | apricot-peach | soft jade |
+| t7 | coral, phoenix | lavender-grey + golden-yellow inner | misty celadon + same golden-yellow inner/borders/sash, phoenix |
+| t8 | coral, phoenix, fan | warm golden yellow | crimson rose + gold trim, phoenix, fan |
+By eye (sheet incl. live row): pose, headdress, face, cut, embroidery as live, colour only changed; one item, no cup; t1–t6 no phoenix, t7/t8 phoenix. All 16 first-try, no regen. No bbox gate (FIGURE_GATE A1).
+Credits 16 × 135 = 2160 cr. Gen ids v0 t1 IfiG9p5tvE t2 4RQKCyK9Aa t3 SymEI7JUb8 t4 tC3z6fdmZJ t5 p8O67t2ehw t6 VXw4SmmMMU t7 cpgOsma0eP t8 ksp8M9X16B; v2 t1 8a6A9cLIrU t2 4RQKESu9Aa t3 79aFhgBJAL t4 gOtC8l5SXO t5 aFAc2E0fSh t6 fHG0AHECDY t7 s78aoyAl8e t8 VXw4UvhMMU.
+Files CDN img/_review/consort-tiers/c06/b10/: c06_a18_tN_v0|v1|v2.png, c06_a18_sheet.jpg (rows v0/v1/v2 × t1–t8).
+~100% xong c06 / ~0% chơi được.
