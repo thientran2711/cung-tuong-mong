@@ -52,3 +52,10 @@ PRIORITY #1 CHECK: worker report (707d89d5 fix «prop over text», BAL.figWideRe
 - My FAIL fixed: person dialog (coach/tips) figure over text 0.0 px on both devices (fig-consort-c09 rose now clear of the text, LOOKED 755x1000 pdlg hh-c09), idcard 0, shop 0.
 - Not 0 (printed only, worker flagged for the owner): news/choice M3/L3/XL3 frames, robe/hem bottom spreads under the text/buttons column up to 29 px (news) / 60 px (choice widest-robe), 13-20 px for tallest-crown / old-maid-wide / hh-c09. LOOKED 755x1000 choice widest-robe: only the gown hem passes under the lower option button edge, text and buttons stay fully legible, crown/face untouched. It follows the owner's existing figure rule (KIT 56.4); needs the owner's look, not a code fail.
 PASS LAND READY 3c8a2888 (FF from e16e1d66)
+
+## RE-REVIEW s7 pdlg fill — review/fullbody-frame-s4 @ 508f7e3b (= 13e3fb22 + merge main ddbf9c77) (for MAIN ROOT-58)
+PRIORITY #1 CHECK: worker request (KIT 56.15 kitPersonDlgFit fills column) + ROOT-57 criterion «figure bottom >= column bottom - 12, crown top <= name tag + 12»; same scans reused.
+- main ddbf9c77 is an ancestor (FF ok); only jpdlg.js + KIT.md changed vs 3c8a2888 among fullbody files. quickcheck PASS (old save ok; core gates incl. G4 PASS; the buổi 1927/955 ms median was measured while my scan ran in parallel, other runs of this build 1000-1300 ms).
+- pdlg scan, 8 figures x Fold 755x1000 + iPad 1180x820 (my copy of the scan with a fill column, not committed): figure over text 0.0, name over figure 0.0, left margin >= 27.8 px everywhere.
+- Fill: iPad feet -> column bottom 10.2-10.3 px (OK <= 12), iPad frame body 333 px, LOOKED: figure fills the column, no empty quarter. Fold feet -> column bottom 20.2-20.3 px (feet -> frame bottom 23.2) = 8 px OVER the <= 12 threshold; LOOKED: still visually filled. Crown -> name tag ~10-12 css px from the shot (my tag measure failed to find the tag element).
+Verdict: PASS on all checks except Fold fill metric 20.2 vs <= 12 px (8 px). Strict reading = FAIL 1 trivial item; waive or ask the worker to close 8 px on the Fold.
