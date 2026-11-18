@@ -414,13 +414,13 @@ function j95bribeTake(v,g){const n=Math.min(g,Math.floor(v.bac||0));v.bac=Math.m
 function j95accO(v,to){const pr=evG(S,v);const q=queenP();return to==="emp"?oddsCl(Math.min(20+pr*15+(S.sung||0)/5,90)):S.rank>=7?oddsCl(40+pr*15):oddsCl(Math.min(25+pr*15+(q?aff(q,S)/4:0),90))}
 function j95catchOpts(v,m,s,out){const O=[];const q=queenP();const love=s.kind==="tryst";const pr=evG(S,v);
  const win=love?`nàng bị xét tội tư thông, ban chết${m?` · (${m.name} bị xử trảm)`:""} · Danh +${BAL.m95.accWin.danh}`:`nàng bị xét tội chuẩn bị mưu hại, cấm túc hay giáng phẩm · Danh +${BAL.m95.accWin.danh}`;
- const lose=`bị coi là vu cáo: Danh -${BAL.tw.g.accFail[0]} · ngươi bị cấm túc · nàng oán ngươi +${BAL.tw.g.accFail[1]} · nàng quý ngươi -${BAL.tw.g.accFail[2]}`;const why=`(chứng cứ ngươi đang nắm về nàng: ${pr})`;
+ const lose=`bị coi là vu cáo: Danh -${BAL.tw.g.accFail[0]}, ngươi bị cấm túc, nàng oán ngươi +${BAL.tw.g.accFail[1]}, nàng quý ngươi -${BAL.tw.g.accFail[2]}`;const why=`(chứng cứ ngươi đang nắm về nàng: ${pr})`;
  if(q&&q!==S&&q!==v)O.push({n:"Tố giác lên Hoàng hậu",fx:{},x:`${word(j95accO(v,"hh"))} · tốn: ${BAL.m95.k} khắc · thành: ${win} · hỏng: ${lose} · ${why}`,go:()=>j95accuse(v,m,s,"hh")});
  if(S.rank>=7)O.push({n:"Xử tội theo luật cung",fx:{},x:`${word(j95accO(v,"hh"))} · tốn: ${BAL.m95.k} khắc · thành: ${win} · hỏng: ${lose} · ${why}`,go:()=>j95accuse(v,m,s,"hh")});
  O.push({n:"Tố giác lên Hoàng thượng",fx:{},x:`${word(j95accO(v,"emp"))} · tốn: ${BAL.m95.k} khắc · thành: ${win} · hỏng: ${lose.replace("bị cấm túc","bị cấm túc hay giáng phẩm")} · ${why} · (Sủng càng cao Hoàng thượng càng tin)`,go:()=>j95accuse(v,m,s,"emp")});
  O.push({n:"Giữ làm con bài khống chế",fx:{},x:`thành: chứng cứ về nàng ${balSg(BAL.eff.j95.evJ95hold)} · giữ kín, chờ lúc dùng`,go:()=>j95hold(v)});
  const risk=(v.malice||0)>=70?25:0;
- O.push({n:"Lặng im, đổi lấy ân tình",fx:{},x:`${word(100-risk)} · tốn: ${BAL.m95.k} khắc (gặp riêng nàng) · thành: nàng quý ngươi ${balSg(BAL.eff.j95.j95silent_2)} · nàng bớt oán ngươi 10 · nàng nợ ngươi một ân tình${risk?` · hỏng: nàng vẫn coi ngươi là mối nguy, oán ngươi ${balSg(BAL.eff.j95.j95silent)}`:""}`,go:()=>j95silent(v)});
+ O.push({n:"Lặng im, đổi lấy ân tình",fx:{},x:`${risk?word(100-risk)+" · ":""}tốn: ${BAL.m95.k} khắc (gặp riêng nàng) · thành: nàng quý ngươi ${balSg(BAL.eff.j95.j95silent_2)} · nàng bớt oán ngươi 10 · nàng nợ ngươi một ân tình${risk?` · hỏng: nàng vẫn coi ngươi là mối nguy, oán ngươi ${balSg(BAL.eff.j95.j95silent)}`:""}`,go:()=>j95silent(v)});
  O.push({n:"Giả như không thấy",fx:{},x:"thành: không dính vào chuyện",go:()=>log("Ngươi lặng lẽ quay đi như không thấy gì.")});return O}
 function j95accuse(v,m,s,to){if(typeof can==="function"&&can(BAL.m95.k))spend(BAL.m95.k);const pr=evG(S,v);const q=queenP();
  const o=j95accO(v,to);
