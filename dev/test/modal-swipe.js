@@ -13,7 +13,7 @@ const [,,PAGE,SIZES,SHOT]=process.argv;const sleep=t=>new Promise(r=>setTimeout(
   await p.goto(PAGE,{waitUntil:'domcontentloaded'});await p.waitForFunction(()=>typeof start==='function');await sleep(2500);
   await p.evaluate(()=>{const kl=document.getElementById('kload');if(kl)kl.remove();try{localStorage.clear()}catch(e){}SLOT=3;document.getElementById('title').hidden=true;start()});
   for(let i=0;i<30;i++){await p.waitForFunction(()=>typeof S!=="undefined"&&S&&S.name,null,{timeout:90000});await sleep(1200);
-   if(!(await p.evaluate(()=>typeof isSrv==="function"&&isSrv())))break;await p.evaluate(()=>{S=null;start()})}
+   if(!(await p.evaluate(()=>typeof isSrv==="function"&&isSrv())))break;await p.evaluate(()=>{S=null;try{nlNew()}catch(e){}start()})}
   if(process.env.XCSS)await p.addStyleTag({content:process.env.XCSS});await p.addStyleTag({content:'#kroul,#kroulw,#ktut,.kmov,#dawn{display:none!important}'});
   const clean=()=>p.evaluate(()=>{document.querySelectorAll('#kroul,#kroulw').forEach(e=>e.remove());Q.length=0;const md=document.getElementById('modal');md.hidden=true;md.className='modal';
    const t=document.getElementById('title');if(t)t.hidden=true;try{KTUT.on=false}catch(e){}render()});

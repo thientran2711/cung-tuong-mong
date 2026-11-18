@@ -53,22 +53,22 @@ function probeO(a){return odA(a,35+eyes(a)*6+(a.tamco||0)/5)}
 function leakO(a,t){return odA(a,30+deG(a,t)*15+(tdPow(tdHouse(a))-tdPow(tdHouse(t)))/4+(S.emp.mood>=2?8:0))}
 function traceO(a){return cl(Math.round(35-(a.tamco||0)/4),10,40)}
 function tdGift(a,h){if(!h||a.bac<BAL.bacFee.tdGift)return"";ap(a,{bac:-BAL.bacFee.tdGift});const k=key(a);let r;
- window.__tdOk=false;if(roll(giftO(a,h))){window.__tdOk=true;h.af[k]=cl((h.af[k]||0)+20,-100,100);r=`${TDOFF[h.c]} ${h.name} nhận lễ vật của ${tdName(a)}: người ấy quý ngươi +20${tdBacks(h,a)?`, nay đứng sau ${a===S?"ngươi":"nàng"}`:""}. `}
+ window.__tdOk=false;if(aRoll(giftO(a,h),a)){window.__tdOk=true;h.af[k]=cl((h.af[k]||0)+20,-100,100);r=`${TDOFF[h.c]} ${h.name} nhận lễ vật của ${tdName(a)}: người ấy quý ngươi +20${tdBacks(h,a)?`, nay đứng sau ${a===S?"ngươi":"nàng"}`:""}. `}
  else if(hasT(h,"Cương trực")){h.af[k]=cl((h.af[k]||0)+BAL.eff.j55.tdGiftHead,-100,100);a.cc=(a.cc||0)+1;r=`${TDOFF[h.c]} ${h.name} trả lại lễ vật của ${tdName(a)}, còn nói ra ngoài: người ấy quý ngươi ${balSg(BAL.eff.j55.tdGiftHead)}, can chính thêm nặng. `}
  else r=`${TDOFF[h.c]} ${h.name} nhận quà của ${tdName(a)} nhưng chưa hứa gì (Bạc -40 mất trắng). `;
  return r+ccStep(a)}
 function tdAsk(a){const c=tdHouse(a);if(!c)return"";tdPowAdd(c,BAL.eff.j55.tdAsk);a.askT=S.turn;let r;
- window.__tdOk=false;if(roll(askO(a))){window.__tdOk=true;ap(a,{danh:BAL.eff.j55.danhTdAsk,sung:BAL.eff.j55.sungTdAsk});if(a!==S)a.dad=cl((a.dad||40)+3,0,100);r=`Cha ${tdName(a)} dâng sớ tâu đức hạnh của con gái; Hoàng thượng để ý: ${a===S?`Danh ${balSg(BAL.eff.j55.danhTdAsk)} · Sủng ${balSg(BAL.eff.j55.sungTdAsk)}`:"nàng được khen"}. Nhà ${c} thế lực ${balSg(BAL.eff.j55.tdAsk)} vì dốc vốn liếng. `;tdNews(`Một quan nhà ${c} dâng sớ khen ${tdName(a)}.`)}
+ window.__tdOk=false;if(aRoll(askO(a),a)){window.__tdOk=true;ap(a,{danh:BAL.eff.j55.danhTdAsk,sung:BAL.eff.j55.sungTdAsk});if(a!==S)a.dad=cl((a.dad||40)+3,0,100);r=`Cha ${tdName(a)} dâng sớ tâu đức hạnh của con gái; Hoàng thượng để ý: ${a===S?`Danh ${balSg(BAL.eff.j55.danhTdAsk)} · Sủng ${balSg(BAL.eff.j55.sungTdAsk)}`:"nàng được khen"}. Nhà ${c} thế lực ${balSg(BAL.eff.j55.tdAsk)} vì dốc vốn liếng. `;tdNews(`Một quan nhà ${c} dâng sớ khen ${tdName(a)}.`)}
  else{ap(a,{danh:BAL.eff.j55.danhTdAsk_2});r=`Sớ của cha ${tdName(a)} bị Hoàng thượng gác lại${a===S?`: Danh ${balSg(BAL.eff.j55.danhTdAsk_2)}`:""}; nhà ${c} thế lực ${balSg(BAL.eff.j55.tdAsk)}. `}
  return r+ccStep(a)}
 function tdProbe(a,t){if(a.bac<BAL.bacFee.tdProbe||!tdHouse(t))return"";ap(a,{bac:-BAL.bacFee.tdProbe});let r="";
- window.__tdOk=false;if(roll(probeO(a))){window.__tdOk=true;if(tdDadT(t)){deA(a,t,BAL.ag.ev.one);r=`Người của ${tdName(a)} dò được sổ sách: cha của ${tdName(t)} (nhà ${tdHouse(t)}) có tham ô. ${evSg(BAL.ag.ev.one,1)} (có ${deG(a,t)}). `}
+ window.__tdOk=false;if(aRoll(probeO(a),a)){window.__tdOk=true;if(tdDadT(t)){deA(a,t,BAL.ag.ev.one);r=`Người của ${tdName(a)} dò được sổ sách: cha của ${tdName(t)} (nhà ${tdHouse(t)}) có tham ô. ${evSg(BAL.ag.ev.one,1)} (có ${deG(a,t)}). `}
   else{if(a===S)trS().clean[key(t)]=S.turn;r=`Người của ${tdName(a)} dò kỹ: cha của ${tdName(t)} thanh liêm, không có gì để hặc. `}}
  else r=`Người của ${tdName(a)} đi dò nhà ngoại ${tdName(t)} nhưng không moi được gì (Bạc -30 mất). `;
  if(roll(25)){relAdd(a,t,BAL.eff.j55.tdProbe);oanAdd(t,a,BAL.eff.j55.tdProbe_2);r+=`${t===S?"Ngươi":t.name} biết chuyện ${tdName(a)} sai người dò nhà mình: hai bên quý nhau ${balSg(BAL.eff.j55.tdProbe)}. `}
  return r+ccStep(a)}
 function tdLeak(a,t){const n=deG(a,t);if(n<1||a.bac<BAL.bacFee.tdLeak)return"";ap(a,{bac:-BAL.bacFee.tdLeak});const cA=tdHouse(a),cT=tdHouse(t);let r;
- window.__tdOk=false;if(roll(leakO(a,t))&&tdDadT(t)){window.__tdOk=true;tdPowAdd(cT,BAL.eff.j55.tdLeak);t.dad=cl((t.dad||40)-15,0,100);ap(t,{danh:-4});tdDadClear(t);deA(a,t,-n);if(cA)tdRelAdd(cA,cT,-10);
+ window.__tdOk=false;if(aRoll(leakO(a,t),a)&&tdDadT(t)){window.__tdOk=true;tdPowAdd(cT,BAL.eff.j55.tdLeak);t.dad=cl((t.dad||40)-15,0,100);ap(t,{danh:-4});tdDadClear(t);deA(a,t,-n);if(cA)tdRelAdd(cA,cT,-10);
   r=`<b>Ngự sử dâng chứng cứ: cha của ${tdName(t)} tham ô, bị cách chức.</b> Nhà ${cT} thế lực ${balSg(BAL.eff.j55.tdLeak)}; ${t===S?"ngươi mất chỗ dựa: nhà mẹ đẻ -15, Danh -4":`${t.name} mất chỗ dựa (nhà mẹ đẻ -15, Danh -4)`}. `;tdNews(`Cha của ${tdName(t)} bị cách chức vì tham ô; nhà ${cT} suy.`)}
  else{deA(a,t,-BAL.ag.ev.one);r=`Chứng cứ tham ô cha ${tdName(t)} dâng lên bị bác vì chưa đủ (${evSg(-BAL.ag.ev.one)}). `}
  if(roll(traceO(a))){oanAdd(t,a,BAL.eff.j55.tdLeak_2);relAdd(a,t,BAL.eff.j55.tdLeak_3);const h=tdHead(cT);if(h)h.af[key(a)]=cl((h.af[key(a)]||0)-30,-100,100);r+=`<span class="r">Tra ra người đứng sau là ${tdName(a)}: ${t===S?"ngươi":t.name} oán ${balSg(BAL.eff.j55.tdLeak_2)}, ${h?`${TDOFF[h.c]} ${h.name} quý ngươi -30`:""}.</span> `}
@@ -197,12 +197,12 @@ if(typeof h54Court==="function")h54Court=function(){};
 (function(){const f0=facHTML;facHTML=function(){const seg=`<div class="rbtn tdseg"><button data-tdv="hc" aria-pressed="${window.__tdV!=="td"}">Phe phái hậu cung</button><button data-tdv="td" aria-pressed="${window.__tdV==="td"}">Triều đình</button></div>`;
  if(window.__tdV==="td"&&S&&!S.dead){try{return seg+tdHTML()}catch(e){console.error(e)}}return seg+f0.apply(this,arguments)}})();
 function tdAct(a,d){if(!S||S.dead||Q.length||!can(2)||S.out||S.confined)return;const T=trS();const b=rsnap();let r="",ttl="";
- if(a==="ask"){if(!tdHouse(S)||S.turn-(S.askT==null?-99:S.askT)<3)return;spend(2);ttl="Nhờ cha dâng sớ";r=tdAsk(S)}
- else if(a==="gift"){const h=T.H[d.tc];if(!h||S.bac<BAL.bacFee.tdGift||h.dadOf==="me")return;spend(2);ttl=`Biếu quà ${h.name}`;r=tdGift(S,h)}
+ if(a==="ask"){if(!tdHouse(S)||S.turn-(S.askT==null?-99:S.askT)<3)return;const fz=askO(S);spend(2);ttl="Nhờ cha dâng sớ";r=fzRun(fz,null,()=>tdAsk(S))}
+ else if(a==="gift"){const h=T.H[d.tc];if(!h||S.bac<BAL.bacFee.tdGift||h.dadOf==="me")return;const fz=giftO(S,h);spend(2);ttl=`Biếu quà ${h.name}`;r=fzRun(fz,null,()=>tdGift(S,h))}
  else if(a==="probe"||a==="leak"){const L=a==="probe"?liveRivals(true).filter(v=>tdHouse(v)&&!sameHouse(S,v)):consorts().filter(v=>v!==S&&deG(S,v)>=1);if(!L.length)return;
   Q.push({act:1,t:a==="probe"?"Dò la nhà ngoại ai?":"Tung chứng cứ tham ô của ai?",h:`<p>${a==="probe"?"Sai người ngoài cung dò sổ sách nhà cha nàng. Tin dò được là tin thật.":"Lót tay một ngự sử dâng chứng cứ cha nàng tham ô lên Hoàng thượng."}</p>`,
    opts:L.slice(0,8).map(v=>({kgt:v,n:`${v.name} (nhà ${tdHouse(v)})`,fx:{},x:a==="probe"?`${word(probeO(S))} · tốn: Bạc -30 · thành: biết thật cha nàng có tham ô không · hỏng: mất bạc · kèm: nàng biết chuyện (${chanceW(25)}): thiện cảm ${balSg(BAL.eff.j55.tdProbe)}, ${typeof pvOanAny==="function"?pvOanAny(12.8):"oán ta +13"} · kèm: ${ccLine(S)}`:`${word(leakO(S,v))} · tốn: Bạc -20 · thành: nhà ${tdHouse(v)} thế lực ${balSg(BAL.eff.j55.tdLeak)}, nàng nhà mẹ đẻ -15, Danh -4 · hỏng: ${evSg(-BAL.ag.ev.one,1)} · kèm: tra ra ngươi: nàng oán ${balSg(BAL.eff.j55.tdLeak_2)} · kèm: ${ccLine(S)}`,
-    go:()=>{spend(2);const b2=rsnap();const r2=a==="probe"?tdProbe(S,v):tdLeak(S,v);if(r2)log(r2);const ok=!!window.__tdOk;setTimeout(()=>{try{resultShow(a==="probe"?`Dò la nhà ngoại ${v.name}`:`Tung chứng cứ: cha ${v.name}`,b2,ok)}catch(e){}},0)}})).concat([{n:"Thôi",fx:{}}])});showModal();return}
+    go:()=>{const fz=a==="probe"?probeO(S):leakO(S,v);/* read before the spend (j9 fzRun) */spend(2);const b2=rsnap();const r2=fzRun(fz,null,()=>a==="probe"?tdProbe(S,v):tdLeak(S,v));if(r2)log(r2);const ok=!!window.__tdOk;setTimeout(()=>{try{resultShow(a==="probe"?`Dò la nhà ngoại ${v.name}`:`Tung chứng cứ: cha ${v.name}`,b2,ok)}catch(e){}},0)}})).concat([{n:"Thôi",fx:{}}])});showModal();return}
  if(r)log(r);resultShow(ttl,b,!!window.__tdOk);render()}
 document.addEventListener("click",e=>{const v=e.target.closest("[data-tdv]");if(v){e.stopPropagation();window.__tdV=v.dataset.tdv;try{render()}catch(x){}return}
  const b=e.target.closest("[data-td]");if(!b||b.disabled)return;e.stopPropagation();try{tdAct(b.dataset.td,b.dataset)}catch(x){console.error(x)}},true);

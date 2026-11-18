@@ -6,7 +6,7 @@ const {chromium}=require('playwright');const path=require('path');const [,,OLD,N
  p.on('pageerror',e=>errs.push(e.message.slice(0,200)));await p.route(/\.(webp|png|jpg|jpeg|mp3|ogg|mp4|webm)(\?.*)?$/,r=>r.abort());
  const boot=async u=>{await p.goto('file://'+path.resolve(u),{waitUntil:'domcontentloaded'});await p.waitForFunction(()=>typeof start==='function',null,{timeout:180000});await p.waitForTimeout(2500)};
  await boot(OLD);
- const a=await p.evaluate(()=>{window.__bot=1;window.render=function(){};document.getElementById('title').hidden=true;SLOT=2;for(let i=0;i<40;i++){start();if(!isSrv())break}
+ const a=await p.evaluate(()=>{window.__bot=1;window.render=function(){};document.getElementById('title').hidden=true;SLOT=2;for(let i=0;i<40;i++){try{nlNew()}catch(e){}start();if(!isSrv())break}
   try{for(let w=0;w<3;w++){Q.length=0;S.mg=0;endTurn()}}catch(e){return{err:String(e.stack).slice(0,600)}}Q.length=0;localStorage.setItem(SK(2),JSON.stringify(ser()));return{name:S.name,turn:S.turn,hasBal:!!BAL.steal}});
  await boot(NEW);
  const r=await p.evaluate(()=>{window.__bot=1;window.render=function(){};document.getElementById('title').hidden=true;let ok=false;try{const d=loadSlot(2);SLOT=2;deser(d);ok=!!(S&&S.name)}catch(e){return{err:String(e)}}

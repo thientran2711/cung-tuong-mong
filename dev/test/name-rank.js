@@ -10,7 +10,7 @@ const sleep=t=>new Promise(r=>setTimeout(r,t));
   await p.goto(URL,{waitUntil:'domcontentloaded'});await p.waitForFunction(()=>typeof start==='function'&&typeof render==='function');await sleep(2500);
   await p.addStyleTag({content:'#kroul{display:none!important}'});
   await p.evaluate(()=>{const kl=document.getElementById('kload');if(kl)kl.remove();try{localStorage.clear()}catch(e){}SLOT=3;document.getElementById('title').hidden=true;
-   for(let i=0;i<400;i++){start();if(!isSrv())break}Q.length=0;const md=document.getElementById("modal");if(md)md.hidden=true;try{NLP=null}catch(e){}
+   for(let i=0;i<400;i++){try{nlNew()}catch(e){}start();if(!isSrv())break}Q.length=0;const md=document.getElementById("modal");if(md)md.hidden=true;try{NLP=null}catch(e){}
    S.met=S.met||{};liveRivals(true).forEach(v=>{S.met[v.id]=1;try{S.known[kOf61(v)]=3}catch(e){}});render()});
   await sleep(1000);const res={};
   for(const t of ["rv","staff","court"]){

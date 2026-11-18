@@ -11,7 +11,7 @@ const {chromium}=require('playwright');const fs=require('fs');
 /* start() may finish after the loading screen: wait for the life, and start again while it is a servant life */
 async function kcWait(p){for(let i=0;i<40;i++){await p.waitForFunction(()=>typeof S!=="undefined"&&S&&S.name,null,{timeout:90000});await new Promise(r=>setTimeout(r,1500));
  /* r6: the life can be replaced after the loading screen; check again after it settles, and never test a servant life (no Tư trang tab) */
- if(!(await p.evaluate(()=>typeof isSrv==="function"&&isSrv()||(S&&S.origin&&S.origin.k==="cnv"))))return;await p.evaluate(()=>{S=null;start()})}}
+ if(!(await p.evaluate(()=>typeof isSrv==="function"&&isSrv()||(S&&S.origin&&S.origin.k==="cnv"))))return;await p.evaluate(()=>{S=null;try{nlNew()}catch(e){}start()})}}
 const [,,PAGE,OUT,SIZES]=process.argv;fs.mkdirSync(OUT,{recursive:true});const sleep=t=>new Promise(r=>setTimeout(r,t));
 (async()=>{const b=await chromium.launch();const ALL=[];
  for(const sz of (SIZES||"755x1000@2,1000x755@2,1180x820@2,844x390@3").split(",")){const [wh,dpr]=sz.split("@");const [W,H]=wh.split("x").map(Number);
@@ -62,7 +62,7 @@ const [,,PAGE,OUT,SIZES]=process.argv;fs.mkdirSync(OUT,{recursive:true});const s
     res[how]={act:tg.n,closed,actRan:ran,ok:closed&&!ran};if(how==="touch"&&name==="result")await shot('through-result-open')}}
   /* ---------- B. Tư trang sub-tabs ---------- */
   /* r6: a servant life has no Tư trang: make sure this is a consort life before section B (the life can still be replaced late) */
-  await p.evaluate(()=>{for(let i=0;i<40&&typeof isSrv==="function"&&isSrv();i++){S=null;start()}S.bac=400;S.suc=90});
+  await p.evaluate(()=>{for(let i=0;i<40&&typeof isSrv==="function"&&isSrv();i++){S=null;try{nlNew()}catch(e){}start()}S.bac=400;S.suc=90});
   await clean();await p.evaluate(()=>{tab="inv";render()});await sleep(700);
   R.inv.tui=await p.evaluate(()=>{const subs=[...document.querySelectorAll('#panel .kinvsub .ksubb')].map(x=>x.textContent+(x.classList.contains('on')?'*':''));
    const k=document.querySelector('#panel .keq');const g=document.querySelector('#panel .kinvpane[data-kinvpane="tui"]');const r=k&&k.getBoundingClientRect();const pr=document.getElementById('panel').getBoundingClientRect();

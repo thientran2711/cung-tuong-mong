@@ -256,7 +256,8 @@ function sgJob(p){if(!p||typeof S==="undefined"||!S)return null;if(!p.j)p.j="act
 PEND.sgpick=p=>{const J=sgJob(p);if(!J)return null;const G=J.G,p0=J.p0();
  const up=word(sgShift(p0,1)),dn=word(sgShift(p0,-1));const base=J.line(word(p0));
  const gl=base+` · (tự chơi ${G.dur}: khéo thì lên ${up}, vụng thì xuống ${dn})`;
- const go=f=>()=>{const J2=sgJob(p);if(!J2||!J2.pay()){try{render()}catch(e){}return}f(J2)};
+ const go=f=>()=>{const J2=sgJob(p);if(!J2)return;/* the odds she saw, read BEFORE the pay (spend); the run rolls them (+ the game's step), j9 fzRun */const fz=J2.p0();if(!J2.pay()){try{render()}catch(e){}return}
+  J2.fz=fz;const r0=J2.run;J2.run=m=>fzRun(sgShift(fz,(m&&m.step)||0),J2.gk,()=>r0(m));f(J2)};
  return{t:`<p>${J.ask}</p>`,who:p.j==="act"||p.j==="place"?(typeof pv==="function"?pv(J.v):null):null,o:[{n:`Tự ra tay: ${G.t}`,fx:{},x:gl,showOut:true,go:go(J2=>sgPlay(J2))},{n:"Giao cho người làm",fx:{},x:base,showOut:true,go:go(J2=>J2.run(null))},{n:"Thôi",fx:{},showOut:true}]}};
 function sgAsk(p,title){const d=mkP("sgpick",p);if(!d)return;pushDil(d,title);showModal()}
 /* the act-card click (person card / Hậu cung): capture before j6's panel handler; bots that call doAct() directly are untouched */
@@ -274,7 +275,7 @@ document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest
 
 /* ---------- play → result page → act ---------- */
 function sgPlay(J){const G=J.G;if(typeof S==="undefined"||!S||S.dead){try{render()}catch(e){}return}
- KG82.ctx="muu";kg82Preload(G.g).then(()=>{});const d=kg82Open({art:J.art,title:G.t,how:G.how});if(!d)return;const box=kg82Box();const p0=J.p0();const v=J.v,k=J.gk;
+ KG82.ctx="muu";kg82Preload(G.g).then(()=>{});const d=kg82Open({art:J.art,title:G.t,how:G.how});if(!d)return;const box=kg82Box();const p0=J.fz!=null?J.fz:J.p0();const v=J.v,k=J.gk;
  const seenK="sg:"+G.t;
  const rows=[["Cơ may",kitOdds(p0)+`<small class="kpnote"> hiện nay; khéo thì lên ${word(sgShift(p0,1))}, vụng thì xuống ${word(sgShift(p0,-1))}</small>`]];
  if(G.g==="mac"){const m=v.maid||{};rows.push(["Cung nữ",`tính ${sgTemper(m)[0]}, lòng trung với chủ ${sgLoyW(m.loyal==null?50:m.loyal)}`]);
