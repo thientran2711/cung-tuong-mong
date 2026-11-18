@@ -107,3 +107,5 @@ OWNER 18/11 ~22:00Z (verbatim): "Ok, nói chung là bây giờ là hoàng hậu 
 
 REDRAW RULE (OWNER 18/11 ~22:02Z, verbatim): "Bây giờ tao nói rồi, bất kỳ khi nào mà tao kêu mày vẽ lại có nghĩa là mày phải prom lại, dùng cái prom cũ prom lại ảnh mới, chứ không phải là chỉnh sửa lại từ cái prom, hiểu không? Mày đang làm sai cái luật rồi." → "vẽ lại" = re-run the SAME approved/original prompt for a fresh gen; never patch the prompt with extra words. (Context: emperor e2–e4 "slim" redo made e4 look starved.) Emperor e2–e4 now = e1's exact prompt with only the face changed.
 REPLY NUMBERING (owner ~22:00Z): every Foreman C reply to the owner starts with "Lượt N" (Lượt 1 = 18/11 ~22:00Z).
+
+OWNER 18/11 ~22:10Z (verbatim): "Ok, tiến hành vẽ cách B cho 8 bậc luôn đi. Ổn rồi đó. Khoan, chưa. Bậc 4, bậc 5 ok. Nhưng mà bậc 6 á, nó chưa có đủ cái độ xa hoa. ... thêm thêm một chút xíu xa hoa vô đó đi, một chút xíu thôi, tiết chế lại nha, chứ đừng có làm quá cho nó đeo một đống ngọc lên người đi." → style B for t1–t5 APPROVED (c06/c25 samples); t6 gets one restrained luxury sentence + re-sample (W79); then build.py --low extended to c01–c32 and mass t1–t6 × v0/v1/v2 × 4 ages.
