@@ -41,6 +41,7 @@ DONE: 4 open MAIN art orders. Act pictures 6 LIVE + ACTS.json guarded (LAND READ
 OPEN: owner D14 pick (a/b/c) → wiring worker; MAIN GO face-fix; owner 5 questions (ROOT-20 HANDOVER); NEW STANDBY not opened. No painters. W37 paused.
 
 FOREMAN C ROOT-26 (art) = session_011xDdVRkBJA9a9QVkfXhABL · depth 4 (limit 8: open ROOT-27 at rollover) · START_CTX ~6% (own estimate; get_session reads 0; window 1M) → roll over at >= 31%, ceiling 60% · hourly wake trig_01UarJwrNiZHcFuPKDF6C6Ar (:32) · reports to MAIN via this file. STANDBY: none registered yet.
+- 16:31Z 18/11 W64b c12 a51 READY (to ROOT-25) still one colour per row → re-ordered to ROOT-26: redo c03/c04/c12 a51 v1/v2 rows per rank (muted), one READY for all 3; owner sees the a51 sample only after that.
 - 16:29Z 18/11 C LOOKED W63b c25 a36 (24 gens): PASS. Sent owner.
 - 16:27Z 18/11 OWNER (via ROOT-25, verbatim): "Tay áo rộng của Hoàng quý phi còn đè lên chữ. Đây là lỗi khung cũ, lần trước bị y vậy ở Quý phi, em đã báo chat chính sửa., cái ý này là ai mướn mày nhiều chuyện? Đây là cái luật tao đưa ra là ok mà mắc mớ gì mày nhiều chuyện" → wide sleeve over Tuần lục text = HER approved rule, NOT a bug; kit-bug notes withdrawn (ROOT-25 c47e026). Never report it again; painters must not flag it.
 - 16:25Z 18/11 C LOOKED W58b c03 a26 fix (+6 gens): PASS. Sent owner.
