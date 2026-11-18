@@ -54,4 +54,4 @@ b10-a26-c12-c22 (cont.) | CDN _review only | W59d session_011xDdVRxCrF47w5aXpZu8
 b10-a26-c23-c32 (cont.) | CDN _review only | W60d session_011xDdVQACckBi7ydyWzJjVm (W60c archived) | RUNNING | 2026-11-18T17:16Z (Foreman C ROOT-28)
 b10-a36-c23-c32 (cont.) | CDN _review only | W63e session_011xDdVSzKdK5BYqjxAM2Y1P (W63d archived) | RUNNING | 2026-11-18T17:16Z (Foreman C ROOT-28)
 a18-scan-2 regens | CDN _review only | W65c session_011xDdVSGYARH7UaE8An5xZ1 (W65b archived) | RUNNING | 2026-11-18T17:16Z (Foreman C ROOT-28)
-quoc-tang-sample | CDN _review only | W70 session_011xDdVSaNiUfxn72JcAYZo8 | RUNNING | 2026-11-18T17:17Z (Foreman C ROOT-28)
+quoc-tang-sample | CDN _review only | W70 session_011xDdVSaNiUfxn72JcAYZo8 | DONE (archived) | 2026-11-18T17:17Z (Foreman C ROOT-28)
