@@ -95,11 +95,10 @@ function ktTeach(k,p,f){ktSync(k);const g=ktTeachG(k,p,f);k[f]=cl(k[f]+g,0,100);
 const KTPT={"Ân cần":[.35,.55,.3],"Khiêm nhường":[.35,.55,.35],"Tham vọng":[.45,.3,.6],"Kiêu ngạo":[.3,.25,.5],"Xảo quyệt":[.4,.15,.5],"Kín đáo":[.35,.3,.4]};
 function ktPT(v){return tv(KTPT,v)||[.35,.35,.4]}
 /* NPC chọn thầy theo tính nết và hầu bao (người cũng có khi chọn sai) */
-function ktNpcTutor(k,v){if(!ktLive(v))return;let want=nv(v,"tutorWant")+R(2);
- if(R(4)===0)want=cl(want+(R(2)?1:-1),0,3);
- if(want===3&&v.sung>=50&&roll(50)){ap(v,{sung:-4});if(roll(cl(KT.favO+v.sung/2,5,95))){k.tut=3;k.fav=1;return}want=2}
+function ktNpcTutor(k,v){if(!ktLive(v))return;const TB=BAL.ag.why.g2b.tier,ideal=nv(v,"tutorWant")+(ktHien(k)>=TB.hien?1:0);let want=npwPick([0,1,2,3],x=>TB.base-Math.abs(x-ideal)*TB.step)||0;/* npc-purpose G2: the master her nature and the child's promise ask for (near-best: she may misjudge by one) */
+ if(want===3&&npcWhy("ktFav",{p:v,k})){/* npc-purpose G2: only a favoured or ambitious mother asks the Emperor */ap(v,{sung:-4});if(roll(cl(KT.favO+v.sung/2,5,95))){k.tut=3;k.fav=1;return}want=2}
  while(want>0&&(v.bac||0)<KT.fee[want]*4)want--;k.tut=want;k.fav=0;
- if((k.sex==="m"&&roll(ktPT(v)[2]*100)||k.sex==="f"&&roll(10))&&(v.bac||0)>=KT.feeVo*6)k.vt=1}
+ if((v.bac||0)>=KT.feeVo*6&&npwPick(["vo","no"],x=>{const B=BAL.ag.why.g2b.vo;return x==="no"?B.no:ktPT(v)[2]*B.w*(k.sex==="m"?1:B.fMul)})==="vo")k.vt=1}/* npc-purpose G2: a martial-minded mother hires a martial master */
 function ktMonth(){let ev="";if(!S||S.dead)return ev;
  for(const [k,v] of allKids()){if(!k.alive)continue;ktSync(k);const p=v||S;
   if(!ktLive(p)){if(k.tut||k.vt){k.tut=0;k.vt=0;k.fav=0}}/* mẹ mất hay vào lãnh cung: không ai trả học phí */
@@ -149,7 +148,7 @@ function ktRun(e,ch){const E=KTE[e];if(!E||!S)return;S.kt53t=S.turn;const L=ktLi
   if(skip){res.push({k,v,r:"skip",s:-99});continue}const s=ktEdge(k,E,prep)+R(41)-20;res.push({k,v,s,r:s>=KT.exc?"ex":s<=KT.poor?"poor":"ok"})}
  const top=res.filter(x=>x.r==="ex").sort((a,b)=>b.s-a.s)[0];let rev="";
  for(const x of res){const p=x.v||S,g=Object.assign({},KTG[x.r]);if(x===top)for(const kk in KTG.top)g[kk]=(g[kk]||0)+KTG.top[kk];ktApply(x.k,p,g);x.g=g;
-  x.k.lt={n:E.n,y:S.year,r:x.r,top:x===top?1:0};if(!x.v&&x.r!=="skip"&&roll(50))rev+=ktReveal(x.k,"Thầy dạy tâu riêng:")}
+  x.k.lt={n:E.n,y:S.year,r:x.r,top:x===top?1:0};if(!x.v&&x.r!=="skip"&&npwPick(["tell","quiet"],y=>{const B=BAL.ag.why.g2b.rev;return y==="tell"?B.base+(x.k.tut||0)*B.tut:B.quiet})==="tell")rev+=ktReveal(x.k,"Thầy dạy tâu riêng:")}
  if(top&&!top.v)ghenAll(BAL.ghen.kidTop);
  const RW={ex:"Xuất sắc",ok:"Khá",poor:"Kém",skip:"Ở nhà"};
  const eff=x=>{const g=x.g,o=[];if(g.fond)o.push(`<span class="${g.fond>0?"g":"r"}">Hoàng thượng thương con ${g.fond>0?"+":""}${g.fond}</span>`);if(!x.v&&g.sung)o.push(`<span class="g">Sủng +${g.sung}</span>`);if(!x.v&&g.danh)o.push(`<span class="${g.danh>0?"g":"r"}">Danh ${g.danh>0?"+":""}${g.danh}</span>`);return o.join(" · ")};
@@ -178,7 +177,8 @@ setTimeout(ktHeirInstall,0);
 /* con tài giỏi khiến phi tần có con khác ghen: mưu nhắm vào con nàng nặng thêm chút ít (Hiền tài từ 80, tối đa ×1,35) */
 function ktEnvy(v,t){if(!t||t===v||!S)return 1;const ks=(t===S?S.kids:(t.kids||[])).filter(k=>k.alive&&hienShown(k));if(!ks.length||!(v.kids||[]).some(k=>k.alive))return 1;const h=Math.max(...ks.map(ktHien));return h>=80?1+Math.min(.35,(h-80)/50):1}
 (function(){if(typeof mindMenu!=="function")return;const m0=mindMenu;mindMenu=function(v,t){const O=m0.apply(this,arguments);try{const m=ktEnvy(v,t);if(m>1&&Array.isArray(O))return O.map(([k,w])=>KTKID.includes(k)?[k,w*m]:[k,w])}catch(e){}return O}})();
-(function(){const t0=tKid;tKid=function(t){const r=t0.apply(this,arguments);try{if(!window.__kvS&&t){const ks=(t===S?S.kids:(t.kids||[])).filter(k=>k.alive&&hienShown(k)&&ktHien(k)>=80);if(ks.length&&roll(50))return ks.sort((a,b)=>ktHien(b)-ktHien(a))[0]}}catch(e){}return r}})();
+(function(){const t0=tKid;tKid=function(t){const r=t0.apply(this,arguments);try{if(!window.__kvS&&t){const ks=(t===S?S.kids:(t.kids||[])).filter(k=>k.alive&&hienShown(k)&&ktHien(k)>=80);const a=window.__ktSch;if(ks.length&&a&&a!==t&&ktEnvy(a,t)>1){const x=npwPick(ks,y=>ktHien(y));if(x)return x}}}catch(e){}return r}})();/* npc-purpose G2: the schemer goes for the bright child only when her grudge is about the succession (she has children of her own: ktEnvy) */
+(function(){if(typeof ACT!=="object")return;for(const n of ["ksab","kpoison"]){const A0=ACT[n];if(!A0||typeof A0.f!=="function")continue;const f0=A0.f;A0.f=function(a,t){const s0=window.__ktSch;window.__ktSch=a;try{return f0.apply(this,arguments)}finally{window.__ktSch=s0}}}})();
 /* ---- hành động của nàng: dạy chữ, dạy lễ nghi, chọn thầy, xin Hoàng thượng cử danh sư, thầy võ ---- */
 function ktLast(k){const t=k.lt;if(!t)return "";const RW={ex:"xuất sắc",ok:"khá",poor:"kém",skip:"ở nhà"};return `${t.n} năm ${t.y}: ${t.top?"đứng đầu, ":""}${RW[t.r]}`}
 function ktBtns(k){if(!k.alive)return[];ktSync(k);const B=[],t2=whyTime(2),t1=whyTime(1),young=k.age<3?"con còn quá nhỏ (cần 3 tuổi)":"";

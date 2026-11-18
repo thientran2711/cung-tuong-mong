@@ -1230,7 +1230,35 @@ Object.assign(BAL.ag.why,{
 //
 //
 // G2b (worker b adds its Object.assign lines below this line)
-//
+Object.assign(BAL.ag.why.cd,{h54Tut:3,h54Teach:3,h54Gift:3,pkTrac:6,j70Plot:3,facJoint:3,facAsk:3,facDiv:3,empQueen:3,h54Ban:0,hEmpWed:0,h54Plead:0,h54Sad:0,h54Hoa:0,ktFav:0,j70Guard:0,j70Face:0}); /* cooldowns in tuần (3 = once a month at most; 0 = the caller's own gate sets the cadence: h54Cd / pkCd / k.hV / once per kid / weekly roll) */
+Object.assign(BAL.ag.why,{g2b:{
+ tut:40,tutGift:.1,               /* j54 h54Tut: mother hires an arts master: s = nv(h54P) × tut + the daughter's best art × tutGift (ambition, or a gifted child) */
+ teach:25,teachFond:.2,           /* j54 h54Teach: mother teaches herself: s = nv(h54P) × teach + child's fondness × teachFond; the art = where she can give most */
+ ban:{base:15,age:5,amb:15},      /* j54/jht h54Ban: mother opens marriage talks: base + years past betroth age × age + ambition bonus */
+ ew:{base:20,age0:19,age:5,sung:.1,heir:15,th:.1},  /* hEmpWed: Emperor/Thái hậu match a child nobody arranged: base + years past age0 × age; Emperor + mother's Sủng × sung; Thái hậu + heir + her regard × th */
+ trac:{base:20,age0:20,age:2},    /* jht pkTrac: Emperor gives the heir a second wife: base + years past age0 × age */
+ gift:{base:5,fond:.4},           /* j54 h54Gift: mother sends gifts to a married daughter: base + child's fondness × fond (cold ties send none) */
+ plead:{conf:60,sung0:60,sungW:1,amb:15},  /* j54 h54Plead: mother asks her daughter to plead: confined → conf; else (sung0 − her Sủng) × sungW + ambition bonus */
+ sad:{joy0:60,w:1},               /* j54 h54Sad: an unhappy daughter comes home: (joy0 − her joy) × w */
+ hoa:{base:10,fond0:50,fond:1},   /* j54 h54Hoa: ambitious mother offers her daughter to the envoy: base + (fond0 − child's fondness) × fond; non-ambitious never */
+ love:{base:20,fond:.5,rank:40,amb:60},    /* j54 love match vs rank match: love = base + fondness × fond; rank = rank (amb if ambitious) */
+ envoy:{p:4,min:5,base:100,rank:7,rankW:8},    /* j54 envoy: p = monthly odds a Bắc Địch embassy arrives (world event); Emperor picks the daughter for the envoy: max(min, base − fondness + (rank − mother rank) × rankW) — least-tied, lowest-born first */
+ fav:{sung0:50,w:1,amb:15},       /* j53 ktFav: mother asks the Emperor for a famed master: (Sủng − sung0) × w + ambition bonus */
+ tier:{base:40,step:15,hien:80},  /* j53 tutor tier: score = base − |tier − ideal| × step; ideal = nv(tutorWant) + 1 if the child is bright (hiền ≥ hien) */
+ vo:{w:100,fMul:.25,no:40},       /* j53 martial tutor: yes = ktPT[2] × w (× fMul for a daughter), no = no */
+ rev:{base:30,tut:10,quiet:40},   /* j53 tutor's private report to the player: tell = base + tutor tier × tut, quiet = quiet */
+ plot:{d:.7},                     /* j70 j70Plot: a plot starts only from a motive: s = danger × d (band ≥ 1 ⇒ s ≥ 21) */
+ guard:{sung:70,th:60,base:20},   /* j70 j70Guard: Emperor guards her at Sủng ≥ sung, Thái hậu at regard ≥ th: s = base + excess */
+ face:{sac:.4,sev:5,cureSev:2,cureBac:120},  /* j70 j70Face: scarred NPC seeks a physician / buys the cure: s = Sắc × sac + severity × sev; cure needs severity ≥ cureSev, bạc ≥ cureBac */
+ joint:{min:25,w:1},              /* j10 facJoint: joint scheme only on a foe the faction's average grudge ≥ min; s = that average × w */
+ ask:{size:5,need:8,aff:.5,foe:.5},          /* j10/j25 facAsk: leader invites her: liking × aff + (size − members) × need + shared grudge × foe */
+ div:{w:.5},                      /* j10 facDiv: another leader divides her faction: hostility toward her × w */
+ queen:{base:20,mo0:18,mo:2},     /* j34 empQueen: Emperor names a queen by decree: base + months past mo0 empty × mo */
+ td:{deg:15,host:.5,need:30,backW:2.5,ask:10,sung0:50,askW:.5},  /* j55 consort court act: leak = deG × deg + hostility × host; gift = need − backing × backW; probe = hostility × host; ask = ask + (sung0 − Sủng) × askW */
+ so:{praise:30,praisePow:.25,dich:.5,imp:15,tuyen:3,tuyen0:60,cc:10},  /* j55 memorial choice: praise = praise + pow × praisePow; dich = pow × dich; imp = feud weight × imp; tuyen = (pow − tuyen0) × tuyen; cc = can-chính count × cc */
+ bk:{base:10,pow:.5,rel:.3},      /* j34 lobbying: which clan head she courts: base + pow × pow + clan tie × rel */
+ c:{pr:30,lo:20,lo0:5,loW:5,sc:.4}           /* j34 contest act: practise = pr; lobby = lo + (lo0 − backing score) × loW (needs bạc); scheme = worst hostility × persW × sc */
+}});
 //
 // G2c (worker c adds its Object.assign lines below this line)
 //
