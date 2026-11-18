@@ -427,3 +427,4 @@ LESSONS: workers' test harness randomised makeup → false 'glow' (now forced of
 ## ROOT-45 (main; child of ROOT-44 session_01UV1SziV7qFecFU6EkEmtfe)
 - (18/11 04:44Z) MAIN = ROOT-45 session_01UV1SzikTZwNu6Q6dJKkcGi; START_CTX ≈ 7 % (estimate; context_usage reads 0) → rollover at 32 %, ceiling 60 %; depth 1. Brief template briefs/root45-common.md (copy of root44-common). LIVE main 94a93759.
 - (18/11 04:44Z) LOAD: main running 6 (owner bugs/UI/looks only: look-fx-wire #3 SzkGvAo, place-stage r4 SzjeRxj, book-figsize r5 Szkhy, cloth-tea SzghNEr, opt-card-short Szk6j15, + C-AG #9 relay) | B 2 ORDERS 04:35Z (life-preload-fu, cloth-bake-static) | C ROOT-16/17 art | D #12 running 4 + staff-cap-row3 | E waiting owner to open | moved: none (no non-UI item held by main).
+- (18/11 04:46Z) C-AG #9 rolled over → C-AG #10 session_01UV1SzjAd8BYMMz2rKFZitp (depth 5; at depth ≥6 no child foreman). No PASS yet; ag-all-2-land lander gates ~06:00Z.
