@@ -59,12 +59,12 @@ function errTick(){if(errOn()||!S||S.dead)return;const now=errNow();let ch=false
 function errRead(t){try{t.read=1;if(errOn()&&Array.isArray(S.away)){const a=S.away.find(x=>x&&x.id===t.id);if(a)a.read=1}}catch(e){}}
 function errPanel(){const N=errNews(),W=errMine();const facts=[],sec=[];let subj=null;
  for(const t of N){const r=t.rep||{},p=errPerson(t.who);if(!subj&&p)subj=p;
-  facts.push({who:p||undefined,text:r.t||`${t.nm} đã về.`});(r.L||[]).forEach(l=>facts.push(l));
+  facts.push(r.t||`${t.nm} đã về.`);(r.L||[]).forEach(l=>facts.push(l));
   if((r.d||[]).length&&typeof kitChips==="function")sec.push({h:"Được · mất",html:kitChips(r.d)});errRead(t)}
- for(const t of W){const p=errPerson(t.who);if(!subj&&p)subj=p;facts.push({who:p||undefined,text:`${t.nm} đang ${t.lbl||"đi việc"} · về ${errWhen(t.due)}.`})}
+ for(const t of W){const p=errPerson(t.who);if(!subj&&p)subj=p;facts.push(`${t.nm} đang ${t.lbl||"đi việc"} · về ${errWhen(t.due)}.`)}
  if(!facts.length)facts.push("Không có ai đang đi việc.");
  const opts=[];try{if(errOn()&&PTIME.waitOk&&PTIME.waitOk()){const K=PTIME.next();opts.push({n:"Đợi tin",x:`ngồi chờ đến ${errWhen(K)}, khi người được sai trở về`,fx:{},go:()=>{setTimeout(()=>PTIME.wait(),0)}})}}catch(e){}
- setTimeout(()=>errSync(),0);const sp={title:"Tin chờ người sai đi",facts,sections:sec,opts};if(subj)sp.subject=subj;return sp}
+ setTimeout(()=>errSync(),0);const sp={title:"Tin chờ người sai đi",facts,sections:sec,opts};if(subj)try{const f=kitFace(subj);if(f)sp.subject=Object.assign({},f,{rk:typeof f.rk==='string'?f.rk:undefined})}catch(e){}return sp}
 function errIcon(){try{if(typeof kitStatusIcon==="undefined")return;kitStatusIcon.set("tin",{title:"Người được sai đi",glyph:"信",order:30,
  show:()=>!!(S&&!S.dead&&(errMine().length||errNews().length)),busy:()=>!!(S&&errMine().length&&!errNews().length),badge:()=>!!(S&&errNews().length),panel:errPanel});kitStatusIcon.refresh()}catch(e){console.error("jerr icon",e)}}
 function errOpen(){try{if(typeof kitStatusIcon!=="undefined")kitStatusIcon.open("tin")}catch(e){console.error(e)}}
@@ -76,10 +76,13 @@ function errRun(fn,ctx,args,spec){
  const sv=errRunner();if(!sv)return fn.apply(ctx,args);
  const u0=used,l0=S.logSeq||0,b0=typeof rsnap==="function"?rsnap():null;const r=fn.apply(ctx,args);
  if(!spec.always&&used===u0&&(S.logSeq||0)===l0&&!(typeof Q!=="undefined"&&Q.length))return r;
- const n=Math.max(0,Math.min((S.logs||[]).length,(S.logSeq||0)-l0));
- const L=(S.logs||[]).slice(0,n).map(x=>typeof plain==="function"?plain(x):String(x).replace(/<[^>]*>/g,"")).map(x=>x.replace(/^T\d+\/\d+\s+\S+\s+tuần\s*/,"")).reverse();
- const dl=[];try{if(b0)for(const [k,nm] of RKEYS){const x=(S[k]||0)-(b0[k]||0);if(x)dl.push([nm,x])}}catch(e){}
- errAdd(sv,{k:spec.k},L,dl);errLedger();try{errSync()}catch(e){console.error(e)}return r}
+ const t=errAdd(sv,{k:spec.k},[],[]);
+ /* the act finishes its own log lines and result card AFTER runAct returns (doAct): read them at the end of this tick = this act's report, nothing else can run in between */
+ setTimeout(()=>{try{const n=Math.max(0,Math.min((S.logs||[]).length,(S.logSeq||0)-l0));
+  const L=(S.logs||[]).slice(0,n).map(x=>typeof plain==="function"?plain(x):String(x).replace(/<[^>]*>/g,"")).map(x=>x.replace(/^T\d+\/\d+\s+\S+\s+tuần\s*/,"").replace(/\s*\(sai [^)]*đi\)\s*/,' ').replace(/\s+—\s+/g,' · ').trim()).filter(Boolean).reverse();
+  const dl=[];if(b0)for(const [k,nm] of RKEYS){const x=(S[k]||0)-(b0[k]||0);if(x)dl.push([nm,x])}
+  if(t.rep){if(L.length)t.rep.L=L;t.rep.d=dl}}catch(e){console.error(e)}},0);
+ errLedger();try{errSync()}catch(e){console.error(e)}return r}
 ER.run=errRun;ER.tasks=errTasks;ER.awayOf=errAwayOf;ER.news=errNews;ER.now=errNow;ER.when=errWhen;ER.tick=errTick;ER.open=errOpen;ER.adapter=()=>errOn()?"ptime":"fallback";
 /* ---------------------------------------------------------------- the PICTURE of that state ---------------------------------------------------------------- */
 function errCss(){if(document.getElementById("kerr-css"))return;const s=document.createElement("style");s.id="kerr-css";s.textContent=`

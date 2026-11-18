@@ -65,8 +65,8 @@ const W=+W0||755,H=+H0||1000,tag=`${W}x${H}`;const SLOW=+process.env.SLOW||6;con
  await sleep(450*SLOW);await p.screenshot({path:`${OUT}/onstage-3on-${tag}.jpg`,type:'jpeg',quality:70});await sleep(900*SLOW);
  const ob=await p.evaluate(()=>({bang:document.querySelectorAll('.kmerr-bang').length,hid:[...document.querySelectorAll('#tokens .tok.fig')].filter(t=>t.style.visibility==='hidden').length}));
  ck('on-stage runner: «!» chip on her, token visible',ob.bang===1&&ob.hid===0,ob);await p.screenshot({path:`${OUT}/onstage-4bang-${tag}.jpg`,type:'jpeg',quality:70});
- const ot=await p.evaluate(async()=>{document.querySelector('.kmerr-bang').click();await new Promise(r=>setTimeout(r,1500));const md=document.getElementById('modal');return{modal:!!(md&&!md.hidden),txt:md?md.innerText.slice(0,80):'',bang:document.querySelectorAll('.kmerr-bang').length}});
- ck('on-stage runner: tap «!» opens the report, chip gone',ot.modal&&ot.bang===0,ot);await p.screenshot({path:`${OUT}/onstage-5report-${tag}.jpg`,type:'jpeg',quality:70});
+ const ot=await p.evaluate(async()=>{document.querySelector('.kmerr-bang').click();await new Promise(r=>setTimeout(r,1500));const md=document.getElementById('modal');const dlg=md&&md.querySelector('.dlg');return{modal:!!(md&&!md.hidden),txt:md?md.innerText.slice(0,400):'',maid:S.maid.name,hasMaid:!!md&&md.innerText.includes(S.maid.name),nLines:md?md.innerText.split('\n').filter(x=>x.trim().length>12).length:0,h:dlg?dlg.getBoundingClientRect().height:0,bang:document.querySelectorAll('.kmerr-bang').length}});
+ ck('on-stage runner: tap «!» opens the report, chip gone',ot.modal&&ot.bang===0,ot);ck('report names the person who went (law 6b) and carries the result lines',ot.hasMaid&&ot.nLines>=2,ot);await p.screenshot({path:`${OUT}/onstage-5report-${tag}.jpg`,type:'jpeg',quality:70});
  await p.evaluate(()=>{const md=document.getElementById('modal');if(md)md.hidden=true;try{kmReset()}catch(e){}});
  /* runner NOT on the stage in view (crowded "+N" / other swipe page): still drawn by kitErrandSpot */
  await clean();
