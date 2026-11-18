@@ -476,3 +476,16 @@ c12_a18_r10_row8.jpg = t1..t8 in ONE horizontal row on the red skull-top/feet li
 - PNG: https://ctm-img.victoria-tntt.workers.dev/img/_review/maid-consort-sample/c12_a18_r10_t{1..8}_smile.png, https://ctm-img.victoria-tntt.workers.dev/img/_review/maid-consort-sample/c12_a18_r10_nude_smile.png
 - JPG: https://ctm-img.victoria-tntt.workers.dev/img/_review/maid-consort-sample/c12_a18_r10_t{1..8}_full.jpg, https://ctm-img.victoria-tntt.workers.dev/img/_review/maid-consort-sample/c12_a18_r10_nude_full.jpg
 - Sheets: https://ctm-img.victoria-tntt.workers.dev/img/_review/maid-consort-sample/c12_a18_r10_faces_before_after.jpg, c12_a18_r10_row_all.jpg, c12_a18_r10_overlay_m09_all.jpg (same folder)
+
+## Round 42 — smile on the owner-chosen Nữ đế (W27, Foreman C ROOT-17; FIGURE_GATE D4b; owner 18/11 ~05:10Z picked option "2" = c12_a18_r8_nude_fresh.png, the first R38 Nữ đế, wide layered robe; NOT r8 v2)
+
+PRIORITY #1 CHECK: OD 0 | ledger 0 | claims 0 | main 0 | review/* 0 | archive 0 — reused: W23 Round 40 method (above), overlay_m09.py.
+Method = exactly Round 40: MediaPipe face mesh (lm 61/291/0/17) → elliptical mouth mask (semi-axes 0.85 × mouth width, 0.13 × face height, Gaussian soft edge) on the 768x2000 cut-out; Magnific images_retouch retouch-precise-gpt-2-6 (replace, precise), folder ba4aecfe…, same prompt (repaint ONLY the mouth as a soft closed-lip faint smile, lips closed and touching, corners lifted very slightly, no teeth, keep colour/size/skin/rendering). Result pasted back through the mask onto the original RGBA; alpha untouched; outside-mask diff max 0.
+| figure | tries | method | face % vs m09 (±5 %) | pass |
+|---|---|---|---|---|
+| Nữ đế (r8 nude fresh) | 1 | local mouth edit (retouch gOtaCjmSXO) | −1.2 (was −0.8) | PASS (was parted lips → closed) |
+Overlay calibration: with img/hd/fig-maid-m09-a18.webp the script reproduces r8 −0.8 and r10 −0.1, so the −1.2 is on the same scale.
+Looked at the face before | after at 2x: lips closed and touching, faint smile visible, no teeth, same face/eyes/brows, clean forehead and lưu row.
+Credits: 1 × 175 = 175 cr (uploads free).
+Weak points: (1) smile is subtle by design (as R40), faint at game size; (2) lips slightly pinker/glossier than before; (3) mask left on the CDN as c12_a18_r12_mask.png (review folder; wipe with the verdict).
+Files (md5-verified, https://ctm-img.victoria-tntt.workers.dev/img/_review/maid-consort-sample/): c12_a18_r12_nude_smile.png (768x2000 transparent), c12_a18_r12_nude_full.jpg (parchment bg), c12_a18_r12_nude_face_before_after.jpg. Nothing live.
