@@ -639,3 +639,4 @@ MAIN WORKERS:
 OWNER WHEN SHE WAKES: first reply says new main + opt-card-short pictures wait for her OK; look-fx-wire is live (marks) with the ink fix still in progress; fullbody-frame notes (name tag touches Hoàng hậu crown tassels; iPad ID card kit fade over stat rows).
 LOAD 12:35Z: B 2 jobs (life-preload-fu, cloth-bake-static) | C art (c03 a18 live, c01 cut-out fix) + C-AG 4 running / 8 free | D balance-final rv running | E queue → land-e. §7 NOT DONE: no whole job left to move (art/owner/kit-blocked).
 Helper: /tmp/…/scratchpad/hpush.sh pattern = fetch, reset --hard FETCH_HEAD, re-append, commit, push (retry 4×).
+- ROOT-51 FINAL (12:37Z): successor MAIN ROOT-52 = session_01UV1SzhR4VChxDLw6hymSvQ (depth 8, LAST). ROOT-51 relays owner words + worker reports only.
