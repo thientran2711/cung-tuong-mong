@@ -95,7 +95,7 @@ style-ref test A/B/C c06 t1–t3 | CDN _review only | W79 session_011xDdVSouZw85
 | stage-here (opus UI: stage = where she is, every tab + closing alert; OD 19:45Z (5)) | review/stage-here | MAIN ROOT-55 | session_01Rc5AsK9y5NbRATifWtFqG7 | SẴN SÀNG KIỂM e8e5afe | 18/11 20:15Z |
 | stage-rightcol (sonnet UI+kit; successor of maid6-sample; OD 20:55Z) | review/stage-rightcol | MAIN ROOT-54 | session_01Rc5AsMuwoEKePMdcju7qZi | DONE 5f00b0c (SẴN SÀNG XEM) | 18/11 19:33Z |
 | errand-scene (sonnet UI/motion: maid walks off/on stage for every errand; OD 20:05Z) | review/errand-scene | MAIN ROOT-54 | session_01Rc5AsLfkFKRGnjiTepddVL | READY d1da71f | 18/11 19:38Z |
-parallel-time (ORDER ROOT-54 ~20:22Z + ADD ~20:37Z) | review/parallel-time | session_01964izFaHZziojdgTAvWWfY (#2; #1 session_01964izEDFWH8uK569yeSGJt rolled over 20:42Z) | RUNNING | 18/11 19:52Z | owner D #3
+parallel-time (ORDER ROOT-54 ~20:22Z + ADD ~20:37Z) | review/parallel-time | session_01964izGM3cyQq9y9byHFKnV (#3; #2 session_01964izFaHZziojdgTAvWWfY rolled over 21:05Z; #1 session_01964izEDFWH8uK569yeSGJt) | RUNNING | 18/11 19:52Z | owner D #3
 | REVIEW ag-deed-perf (opus reviewer; env cung-tuong-mong = CDN allowed) | review/ag-deed-perf 9e0e1928 | C-AG #14 | session_01Rc5AsKgufafrSAB6Xyw8k7 | DONE (LANDED fa411d6f) | 18/11 19:58Z |
 | MAIN ROOT-55 (opus; child of ROOT-54) | handover HANDOVER_SESSION9 | ROOT-54 | session_01Rc5AsNFnALGujUFYDSjs4g | RUNNING | 18/11 19:56Z |
 | MAIN ROOT-55 (opus; child of ROOT-54) | handover HANDOVER_SESSION9 | ROOT-54 | session_01Rc5AsNFnALGujUFYDSjs4g | RUNNING | 18/11 19:58Z |
@@ -130,3 +130,5 @@ receiver-choice audit (ORDER MAIN ~21:16Z, OD 21:15Z/21:30Z; shares C-AG role-pa
 | t1-t6 B a18 c21-c24 (W100) (sonnet painter; brief root30-mass) | handover reports/root30-* | Foreman C ROOT-30 | session_01PEhRbtfZ35UPRApi8HqZ9h | RUNNING | 18/11 20:52Z |
 | t1-t6 B a18 c25-c28 (W101) (sonnet painter; brief root30-mass) | handover reports/root30-* | Foreman C ROOT-30 | session_01PEhRbwV1c2vgHjysY1gx2Q | RUNNING | 18/11 20:52Z |
 | t1-t6 B a18 c13-c16 (W98b, successor of W98 archived; c13 t1 done) | handover reports/root30-* | Foreman C ROOT-30 | session_01PEhRbuK7jnKixb2YKTD1AD | RUNNING | 18/11 20:57Z |
+| a65 t7/t8 c18-c24 (W93b, successor of W93 archived; c17 done) | handover reports/root30-* | Foreman C ROOT-30 | session_01PEhRbwkvpUCLkUR7Px8uzB | RUNNING | 18/11 20:58Z |
+| states-sample (W102; Nữ đế/Thái hậu/khuê các/nhà nghèo/NC+BD princess SAMPLES, owner 21:00Z; W90 a51d DONE + archived) | handover reports/states-sample | Foreman C ROOT-30 | session_01PEhRbwi7fEXZQzQ53o2SJP | RUNNING | 18/11 21:02Z |

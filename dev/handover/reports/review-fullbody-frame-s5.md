@@ -28,3 +28,12 @@ Main: origin/main 13bb8c88 is already an ancestor of 579fac03 and the build is c
 - Out of scope: Thân phận (S5d) not yet on this standard; its Fold crown-tallest hem was ~1.5 px from the screen edge (flag stays for the S5d rework).
 - Shots dir dev/handover/shots/fullbody-frame/ still on the handover branch (owner has not seen it yet) — delete after her look.
 PASS LAND READY 579fac03 (FF from 13bb8c88)
+
+## REVIEW S5f EDGE MARGIN — review/fullbody-frame-s4 @ ef509c22 (= 579fac03 + af8b6529 edge margin 12 px + KIT 56.13 note) merged with origin/main fa411d6f (local merge be091d22, not pushed) — for MAIN ROOT-56
+PRIORITY #1 CHECK: brief from ROOT-56 (OD 18/11 ~21:35Z + edge flag); same scans reused, no duplicate.
+- Merge: only index.html/sw.js conflicted -> rebuilt with build_site.sh. quickcheck PASS (open 1679 ms, old save ok, perf render 233/201, tab 379/381, buổi 1067/983); core gates incl. G4 PASS (first time, no network flake).
+- figure-head-fade-scan (news/choice/pdlg/idcard/shop, 10 figures, Fold 755x1000@2 + iPad 1180x820@2): ALL OK, 80 rows, name over figure 0.0 px and cut 0.0 px in every row; NEW column left margin: min 12.0 px on every Fold kind and iPad choice (>= KIT_SIZE.edge 12), idcard Fold crown-tallest 12.0 (was ~1.5 px), iPad 12.5-147.
+- Real event text (scene-pic-scan): scrolling frames Fold 26 / iPad 12 (main 27 / 26; previous review 26 / 13) -> no regression, text column only.
+- LOOKED: Fold idcard crown-tallest (whole figure, 12 px from the screen edge), Fold pdlg hh-c09, iPad choice hh-c09.
+FAIL (1, minor): Fold person dialog (coach / tips, kitPersonDlgFit) with the blue-robe Hoang hau fig-consort-c09 that holds a rose: the rose tip reaches ~3 px into the first text column (touches the n of "nhiều" on the last line; visible in 755x1000 pdlg hh-c09). Same at 579fac03 (I missed it then). The scan has no figure-over-text column; add one (painted figure right edge <= text column left - gap) and fix kitPersonDlgFit so a prop never enters the text; check all 10 figures.
+FAIL 1 item: Fold pdlg figure prop over text — fix + scan column, then I re-run. Everything else PASS.
