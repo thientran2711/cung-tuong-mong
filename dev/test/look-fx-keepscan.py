@@ -10,6 +10,7 @@ from PIL import Image, ImageDraw
 A = sys.argv[1]; VF = json.load(open(sys.argv[2])); args = sys.argv[3:]
 KF = json.load(open(args[args.index('--keepfit') + 1])) if '--keepfit' in args else {}
 OUT = args[args.index('--out') + 1] if '--out' in args else None
+GAP = int(args[args.index('--gap') + 1]) if '--gap' in args else 2   # R9g: clear gap (px of 384) kept between any mark pixel and the eye contour; 14 px ~ 4 % of the face width (main ROOT-50 18/11)
 J = [a for a in args if a.endswith('.jsonl')]; R = {}
 for f in J:
     for l in open(f): r = json.loads(l); R[r['f']] = r
@@ -36,9 +37,12 @@ for n in (1, 2, 3):
     a = np.asarray(Image.open(f'{A}/scar-{n}.png').convert('RGBA'))[..., 3][:, ::-1]; ys_, xs_ = np.nonzero(a > 24); CAO[f'cao-{n}'] = ((xs_ + .5) / a.shape[1], (ys_ + .5) / a.shape[0])
 def truth(r):
     t = Image.new('L', (S, S), 0); d = ImageDraw.Draw(t)
-    for poly in r['p']: d.polygon([((u + .04) / 1.08 * S, (v + .3826) / 1.165 * S) for u, v in poly], fill=255, outline=255, width=3)   # eye contour, grown ~2 px
+    for poly in r['p']: d.polygon([((u + .04) / 1.08 * S, (v + .3826) / 1.165 * S) for u, v in poly], fill=255, outline=255)   # eye contour polygon (grown by GAP px below)
     m = r['m']; d.ellipse([((m[0] - m[2]) + .04) / 1.08 * S, ((m[1] - m[3]) + .3826) / 1.165 * S, ((m[0] + m[2]) + .04) / 1.08 * S, ((m[1] + m[3]) + .3826) / 1.165 * S], fill=128)   # lips = ellipse inscribed in the lip box (corners of the box are not lips)
-    a = np.asarray(t); return a == 255, a == 128
+    a = np.asarray(t); e = (a == 255).astype(np.uint8)
+    if GAP > 0:
+        import cv2; e = cv2.dilate(e, cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (2 * GAP + 1, 2 * GAP + 1)))   # R9g: the eye truth is the contour grown by GAP px (PIL polygon width does NOT dilate)
+    return e > 0, a == 128
 rows = [k for k in VF if k in R and R[k]['d']]; print('pictures with a measurement', len(rows), 'of', len(VF), '; keep-fit rows', len(KF))
 BADL = {}
 cnt = {m: {'eye': [0, 0], 'lip': [0, 0]} for m in list(ARTS) + list(CAO)}; per_old = {}
