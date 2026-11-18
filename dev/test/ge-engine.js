@@ -19,7 +19,7 @@ const ok=[];const chk=(n,c,x)=>{ok.push([n,!!c]);if(!c)console.error('FAIL',n,JS
   window.__life=async road=>{const k=road.split('_')[0];quiet=true;const others=Object.keys(ARC67).filter(id=>ARC67[id].o===k&&id!==road);
    localStorage.setItem('ctm-arcs',JSON.stringify({[k]:others}));localStorage.setItem('ctm-tm96','1');window.__forceOrigin=k;start();quiet=false;
    await new Promise(r=>{let n=0;const t=()=>{if((typeof S!=='undefined'&&S&&S.origin&&S.st&&S.st.f14)||++n>150)r();else setTimeout(t,100)};t()});Q.length=0;return S.st.f14.rd}});
- for(const road of ['tt_co','cnv_mat','nc_tuc']){
+ for(const road of (process.env.GE_ROADS||'tt_co,cnv_mat,nc_tuc').split(',')){/* E11: GE_ROADS=<live branches> runs the same unit checks on a writers wave */
   const rd=await p.evaluate(r=>window.__life(r),road);chk(`${road}: the life runs the road`,rd===road,rd);
   const R=await p.evaluate(road=>{const o={};let s=geS();o.init=s&&JSON.stringify([s.b,s.st,s.pull]);
    /* old save: S.ge missing */delete S.ge;const s2=geS();o.old=s2&&s2.b===road&&s2.st.join('')==='oooo';
