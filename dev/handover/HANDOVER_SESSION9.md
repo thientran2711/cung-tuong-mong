@@ -430,3 +430,4 @@ LESSONS: workers' test harness randomised makeup → false 'glow' (now forced of
 - (18/11 04:46Z) C-AG #9 rolled over → C-AG #10 session_01UV1SzjAd8BYMMz2rKFZitp (depth 5; at depth ≥6 no child foreman). No PASS yet; ag-all-2-land lander gates ~06:00Z.
 - (18/11 04:54Z) Owner: cào lv2=step3, lv3=step3; stage ladder re-shoot with pet. look-fx-wire #3 R9 PARTIAL 008addf rolled over → opening #4.
 - (18/11 05:01Z) Owner now talks to ROOT-45 directly. Ordered place-stage r4: iPad Ngự hoa viên 4-person trial.
+- (18/11 05:10Z) LANDED display-set-bonus PASS a95e8d4 (BIG reviewer SzmDekH via C-AG #10) FF 94a9375→a95e8d4. LIVE main = a95e8d4.
