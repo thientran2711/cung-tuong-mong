@@ -104,3 +104,4 @@ parallel-time (ORDER ROOT-54 ~20:22Z + ADD ~20:37Z) | review/parallel-time | ses
 | stage-here r2 (opus; successor; gaps a–d + LOOK fixes, on stage-rightcol) | review/stage-here | MAIN ROOT-55 | session_01Rc5AsHiLwk4MGH662uw5L3 | RUNNING | 18/11 20:10Z |
 | map-zones r2 (opus; trim 13→10: drop Trữ Tú, Hàm Phúc, Thái Cực điện; save migration) | review/map-zones | MAIN ROOT-55 | session_01Rc5AsLenCtDZkYpKqUFs18 | RUNNING | 18/11 20:11Z |
 | review kit-subtabs-overflow (sonnet SMALL REVIEWER) | review/kit-subtabs-overflow 9366028 | MAIN ROOT-55 | session_01Rc5AsM4NJ1z3nqEtwQX6Tf | RUNNING | 18/11 20:17Z |
+| review entry-blank-r3 (opus BIG REVIEWER, OWNER BUG, CDN env) | review/entry-blank-r3 faf2b893 | MAIN ROOT-55 | (opening) | RUNNING | 18/11 20:20Z |
