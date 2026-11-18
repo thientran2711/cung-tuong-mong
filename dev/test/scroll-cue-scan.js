@@ -1,0 +1,34 @@
+/* scroll-cue-scan.js — owner OD 18/11 07:25Z: figure + info stay fixed, only the option/button list scrolls; the «Kéo xuống» hint never sits on the figure column and never over text.
+   Opens EVERY PEND event (any person or none), the info/news/result/notice/night/rule panels with long text, the Nội vụ phủ shop, the tutorial and a tip at each viewport and records, per dialog, every
+   scroll cue: scroller (class, height), kind (fade/strip), on?, overlaps text (px lines), sits over a figure column. A TALL scroller keeps the kit fade (solid lower part, the text under it is hidden, not overlapped); a SHORT scroller (< 260 px) must use the own strip. Exit 1 on a cue in/over a figure column or a fade/pill over a short scroller's text.
+   usage: node dev/test/scroll-cue-scan.js <index.html> [out.json]   env SZ=[[W,H],..] MAXP=n */
+const {chromium}=require('playwright');const fs=require('fs');const [,,SRC,OUT]=process.argv;const SZ=process.env.SZ?JSON.parse(process.env.SZ):[[755,1000],[1180,820]];
+(async()=>{const px=process.env.HTTPS_PROXY;const b=await chromium.launch(px?{proxy:{server:px,bypass:'127.0.0.1,localhost'}}:{});const html=fs.readFileSync(SRC);let bad=0;const ALL=[];
+ for(const [W,H] of SZ){const ctx=await b.newContext({viewport:{width:W,height:H},deviceScaleFactor:1,hasTouch:true,isMobile:W<1100,serviceWorkers:'block',ignoreHTTPSErrors:true});await ctx.addInitScript(()=>{window.__bot=1;let s=12345;Math.random=()=>{s=(s*1664525+1013904223)%4294967296;return s/4294967296}});
+  await ctx.route('http://ctm.test/**',r=>r.fulfill({status:200,body:html,contentType:'text/html; charset=utf-8'}));
+  const p=await ctx.newPage();p.on('pageerror',()=>{});await p.goto('http://ctm.test/index.html',{waitUntil:'domcontentloaded',timeout:120000});
+  await p.waitForFunction(()=>typeof start==='function'&&typeof showModal==='function'&&typeof kitScrollCues==='function',null,{timeout:120000});
+  await p.evaluate(()=>{try{localStorage.clear()}catch(e){}document.getElementById('title').hidden=true;window.__nlInner=1;start();window.__nlInner=0;Q.length=0;for(const e of [...document.body.querySelectorAll('*')]){const cs=getComputedStyle(e);if(cs.position==='fixed'&&/Luân hồi/.test(e.textContent||''))e.remove()}document.getElementById('modal').hidden=true});await p.waitForTimeout(3000);
+  const probe=()=>p.evaluate(()=>{const M=document.getElementById('modal');const d=document.querySelector('#modal:not([hidden]) .dlg')||document.querySelector('#ktut .kpdlg,#ktip .kpdlg');if(!d)return null;try{kitScrollCues(M)}catch(e){}
+   const out={dlg:(d.className||'').split(' ').slice(0,4).join('.'),ksz:d.dataset.ksz||'',cues:[]};const figs=[...d.querySelectorAll('.kszfig,.kpsubj.kes,.kesf')].map(f=>f.getBoundingClientRect());
+   const texts=[...d.querySelectorAll('*')].filter(e=>!e.children.length&&(e.textContent||'').trim()&&!e.closest('.kscue')&&e.getClientRects().length).map(e=>e.getBoundingClientRect());
+   d.querySelectorAll('.kscue').forEach(c=>{const sib=c.classList.contains('sib'),host=sib?c.previousElementSibling:c.parentElement;const hr=host.getBoundingClientRect(),cr=c.getBoundingClientRect(),on=c.classList.contains('on');
+    const kind=sib?'strip':c.classList.contains('sm')?'sm':'fade';const fade=kind==='fade'?36:kind==='sm'?20:0;const top=sib?cr.top:cr.top-fade,bot=sib?cr.bottom:cr.top+4;
+    const ovT=on&&kind!=='strip'&&hr.height<260?texts.filter(t=>t.bottom>top+1&&t.top<bot&&t.right>hr.left&&t.left<hr.right).length:0;
+    const ovF=on?figs.some(f=>cr.right>f.left+2&&cr.left<f.right-2&&cr.bottom>f.top&&cr.top<f.bottom)||!!host.querySelector(':scope > .kszfig,:scope > .kpsubj.kes,:scope > .k3body > .kszfig,:scope > .kpb > .kpsubj.kes,:scope > .kpdb > .kpsubj.kes'):false;
+    out.cues.push({host:(host.id?'#'+host.id:'')+'.'+String(host.className).split(' ')[0],h:Math.round(hr.height),kind,on,ovText:ovT,ovFig:ovF})});return out});
+  const close=()=>p.evaluate(()=>{Q.length=0;document.getElementById('modal').hidden=true;try{kitCoachOff&&kitCoachOff();kitTipOff&&kitTipOff()}catch(e){}});
+  const rec=async(name)=>{await p.waitForTimeout(1300);let o=await probe();if(!o){await close();return}o.name=name;o.dev=W+'x'+H;ALL.push(o);if(o.cues.some(c=>c.ovFig||c.ovText)){bad++;console.log('FAIL',o.dev,name,JSON.stringify(o.cues.filter(c=>c.ovFig||c.ovText)))}await close()};
+  const ids=await p.evaluate(()=>Object.keys(PEND));let n=0;
+  for(const id of ids){if(+process.env.MAXP&&n>=+process.env.MAXP)break;const ok=await p.evaluate(id=>{const v=liveRivals(true)[0];const iix=S.inv.findIndex(e=>e&&e.k==="tramngoc");for(const pp of [{v:v&&v.id,ix:iix},{ix:iix},{v:v&&v.id},{}]){let d=null;try{d=PEND[id](Object.assign({},pp))}catch(e){d=null}if(!d)continue;try{Q.length=0;pushDil(mkP(id,pp),'Tuyến truyện');showModal();if(Q.length)return true}catch(e){}}return false},id);if(ok){n++;await rec('PEND:'+id)}}
+  const long=k=>'<p>'+('Một đoạn dài nói về chuyện trong cung và nhiều điều khác nữa. '.repeat(k))+'</p>';
+  for(const [nm,fn] of [['news-long',()=>{Q.push({t:'Tin trong cung',who:liveRivals(true)[0],h:long(30)});showModal()}],['notice-long',()=>{Q.push({t:'Một báo',who:liveRivals(true)[0],h:long(30)});showModal()}],['result-long',()=>{Q.push({t:'Kết quả: thử',who:liveRivals(true)[0],h:long(30)});showModal()}],['night-long',()=>{Q.push({t:'Đêm',cls:'night',who:liveRivals(true)[0],h:long(30)});showModal()}],
+   ['news-noperson',()=>{Q.push({t:'Tin',h:long(30)});showModal()}],['info-long',()=>kitModal({kind:'info',title:'Một điều',subject:liveRivals(true)[0],facts:Array.from({length:30},(_,i)=>'Mục '+i+' dài dài dài dài dài dài dài.')})],
+   ['rule-long',()=>kitModal({kind:'rule',title:'Luật',sections:Array.from({length:6},(_,i)=>({h:'Thang '+i,tiers:Array.from({length:5},(_,j)=>({k:j+'–'+(j+2),n:'bậc',d:'một hai ba bốn',c:'g'}))}))})],
+   ['shop',()=>{S.shop=Object.keys(IT).filter(k=>IT[k].pr).slice(0,12);kitShopNvp()}],['tour',()=>window.kitTour()],['tip',()=>kitTip({id:'scan',title:'Lời dặn',html:long(20)})],
+   ['intel',()=>kitIntelPanel(liveRivals(true)[0])],['evidence',()=>kitEvidencePanel(liveRivals(true)[0])],['contest-round',()=>{Q.push({ev:1,t:'Tranh ghế',who:pMe(),h:long(8),opts:Array.from({length:5},(_,i)=>({n:'Lựa chọn '+i,fx:{}}))});showModal()}]])
+   {try{await p.evaluate(fn)}catch(e){continue}await rec(nm)}
+  await ctx.close()}
+ await b.close();const wc=ALL.filter(o=>o.cues.length);console.log(`dialogs ${ALL.length}, with a scroll cue ${wc.length}`);const by={};wc.forEach(o=>o.cues.forEach(c=>{const k=o.dev+' '+c.host+' h'+(c.h<260?'<260':'>=260')+' '+c.kind+(c.on?' ON':' off')+(c.ovText?' OVERLAPS TEXT':'')+(c.ovFig?' ON FIGURE':'');(by[k]=by[k]||[]).push(o.name)}));
+ Object.entries(by).sort().forEach(([k,v])=>console.log(k.padEnd(90),v.length,v.slice(0,3).join(',')));
+ if(OUT)fs.writeFileSync(OUT,JSON.stringify(ALL));console.log(bad?`FAIL ${bad}`:'ALL OK');process.exit(bad?1:0)})().catch(e=>{console.error(e);process.exit(2)});
