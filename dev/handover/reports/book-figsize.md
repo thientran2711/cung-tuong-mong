@@ -1,4 +1,4 @@
-# book-figsize report (worker, MAIN s42) — branch review/book-figsize @ cf415829
+# book-figsize report (worker, MAIN s42) — branch review/book-figsize @ b0a69e2b (r2)
 
 PRIORITY #1 CHECK: OD 16 + 18/11 ~09:00Z (book figure size), KIT 34.6 one-body rule; main jkit kitBookFig / jsl kitBookFigClamp; no other review/* touched it.
 
@@ -34,3 +34,8 @@ single: .../img/_review/book-figsize/755x1000-fig-thaihau-1.webp.jpg , 755x1000-
 BEFORE = owner screenshots refs/owner-1811-0900-book-figsize-1..3.jpg. Not done: a zoom-3x before shot (the old build was not re-rendered; the numeric before table replaces it).
 
 ~95% xong / ~90% chơi được (needs her look at the size/column taste).
+
+## r2 (MAIN s42 feedback: no crop, real pages)
+- Silhouette was cut on the left: kitFigBody reports grey silhouettes as a standard figure (l/r override), their real art fills the whole picture width (painted w/body .54..57). Now silhouettes use 0..1 and `KIT_BOOK={wmax:.65 (catalog max .63), fmax:1.07}`; KBK_FIG_COL .36 -> .50 (Fold column 306 px); standard body = column / (wmax x fmax). ZERO crop: scan checks crop px per figure (0.0 for all 38 cases both devices) and a never-seen wider figure would be scaled (kfit flag; scan fails on it; none seen). Spread per fac 0.0 %.
+- Fold body now 440 px (.555 of column height), iPad 365 (.58): smaller than r1 because the widest robe/silhouette must fit with zero crop. TUNABLE by owner: wider column (KBK_FIG_COL) = bigger figures, text column narrower.
+- Shots (CDN, delete after verdict): Fold zoom 3x columns side by side (Hoàng hậu thaihau, tall-crown wide pink consort, blue consort, her own SELF, widest maid, silhouette): https://ctm-img.victoria-tntt.workers.dev/img/_review/book-figsize/cols-fold.jpg ; whole pages sheet-755x1000.jpg , sheet-1180x820.jpg ; per figure <dev>-<name>.jpg and <dev>-<name>-col.png in the same folder. Pages are the real kitBook person-page renderer with real catalog figures (no live save with her real Tuần lục data in the sandbox). LOOKED: all same height, no figure touches/cuts a column edge, feet and crowns whole.
