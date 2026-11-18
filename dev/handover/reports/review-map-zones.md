@@ -35,3 +35,8 @@ Shots: scratch only (not committed, not on CDN). Re-review after fixes = rerun p
 - Reviewer fix (one condition, jpal.js goneM: skip anyone already in gone) + rebuilt index.html/sw.js = **668e0bf** on review/map-zones-r6, parent 5a83694, FF onto LIVE main 790cda59.
 - On 668e0bf: pal-trim-oldsave PASS (heads + residents); my 25-case matrix PASS, every moved person exactly one line, no «cung cũ», no Ban-cung, palCer kept, 0 page errors; quickcheck PASS (old save ok, core gates PASS, perf new/live render 214/209, tab 350/375, buổi 1008/1000). r3 does not touch the map, so the 635c406 map-labels-scan PASS (Fold + iPad, day/night, courtyards 10) still holds.
 - Fast-forward main to **668e0bf** (not 5a83694).
+
+## ON NEW LIVE MAIN a7e6199c (ge-writers-w1) → **PASS e16e1d6** (review/map-zones-r6)
+- a7e6199c does NOT contain 668e0bf (it is ge-writers-w1 on 790cda5), so 668e0bf was no longer FF. Merged origin/main a7e6199c into r6: conflicts only in dev/build/assemble.py (module list: kept BOTH jmapz.js and jgedata_w1.js) and the generated index.html/sw.js (rebuilt with build_site.sh). No source overlap otherwise (ge-writers touched jbalge/jbalroad/jgedata_w1/jrd_muoi/ge tests).
+- On e16e1d6: quickcheck PASS (old save ok, core gates PASS, perf new/live render 152/192, tab 353/350, buổi 1097/991); pal-trim-oldsave PASS (heads + residents); my 25-case matrix PASS, 0 page errors; map-labels-scan DSF=2 Fold 755x1000 + iPad 1180x820 day/night PASS, courtyards 10 PASS.
+- **Fast-forward main to e16e1d6** (parent 668e0bf + a7e6199c).
