@@ -13,12 +13,12 @@ const r=await p.evaluate(n=>{localStorage.clear();SLOT=4;document.getElementById
  const fill={},tot={},away={n:0,a:0},why={},ret={};let day=[],pick=null,mine=null;const ACT=typeof ACT95!=="undefined"?ACT95:{};
  for(let i=0;i<n&&!S.dead;i++){Q.length=0;S.mg=0;try{placeWhere();if(typeof agFlush==='function')agFlush()}catch(e){}
   for(let k=0;k<4&&!S.dead;k++){try{j95sync(false,true)}catch(e){}const R=S.roster;if(!R)break;const kh=j95kh();
-   if(!pick){const q=liveRivals(true).filter(v=>v.alive&&!v.out&&v.maid&&v.rank>=3).sort((a,b)=>b.rank-a.rank)[0]||liveRivals(true).find(v=>v.maid);pick=q?"mm:"+q.id:null;mine=(S.staff||[])[0]?"s"+S.staff[0].sid:null}
+   if(!pick){const q=liveRivals(true).filter(v=>v.alive&&!v.out&&v.maid&&v.rank>=3).sort((a,b)=>b.rank-a.rank)[0]||liveRivals(true).find(v=>v.maid);pick=q?"mm:"+q.id:null;mine=(S.staff||[])[0]?"s"+S.staff[0].sid:q&&(q.staff||[])[0]?"s"+q.staff[0].sid:null}
    for(const id in R.P){const e=R.P[id][kh];if(!e)continue;const kd=kindOf(id);tot[kd]=(tot[kd]||0)+1;if(FILL.has(String(e[3]||"").trim())&&e[0]!=="ngoai")fill[kd]=(fill[kd]||0)+1;
     if(kd==="s"||kd==="mm"){away.n++;const w=(R.who[id]||[])[1]||"";let home=null;try{const pp=j95ppl(R).find(x=>x.id===id);home=pp&&pp.home}catch(e){}if(home&&e[0]!==home)away.a++;const key=(ACT[e[1]]||e[1])+" | "+String(e[3]||"").slice(0,70);why[key]=(why[key]||0)+1}}
    /* retinue sizes: people following each mistress now */
    const F={};for(const id in R.P){const e=R.P[id][kh];if(e&&e[1]==="follow"&&e[2])F[e[2]]=(F[e[2]]||0)+1}for(const m in F){let rk="?";try{rk=m==="me"?S.rank:m==="th"?"th":(RV(+m.slice(1)).queen?7:RV(+m.slice(1)).rank)}catch(e){}(ret[rk]=ret[rk]||[]).push(F[m])}
-   for(const id of [pick,mine,"mm:me"]){if(!id||!R.P[id])continue;const e=R.P[id][kh];day.push({id,name:(R.who[id]||[id])[0],role:(R.who[id]||["",""])[1],wk:R.wk,b:R.b,kh,place:j95pn(e[0]),act:ACT[e[1]]||e[1],tgt:e[2]?((R.who[e[2]]||[e[2]])[0]):"",why:e[3]||"",mis:(()=>{const o=id==="mm:me"?"me":id.indexOf("mm:")===0?"v"+id.slice(3):"me";const x=R.P[o]&&R.P[o][kh];return x?j95pn(x[0]):""})()})}
+   for(const id of [pick,mine,"mm:me"]){if(!id||!R.P[id])continue;const e=R.P[id][kh];day.push({id,name:(R.who[id]||[id])[0],role:(R.who[id]||["",""])[1],wk:R.wk,b:R.b,kh,place:j95pn(e[0]),act:ACT[e[1]]||e[1],tgt:e[2]?((R.who[e[2]]||[e[2]])[0]):"",why:e[3]||"",mis:(()=>{const o=id==="mm:me"?"me":id.indexOf("mm:")===0?"v"+id.slice(3):(()=>{const sv=servById(+id.slice(1));const m=sv&&ownerOf(sv);return m===S||!m?"me":"v"+m.id})();const x=R.P[o]&&R.P[o][kh];return x?j95pn(x[0]):""})()})}
    try{spend(1)}catch(e){}if(j95kh()===kh)break}
   try{nextBuoi()}catch(e){}Q.length=0}
  const RS={};for(const k in ret){const L=ret[k];RS[k]={n:L.length,max:Math.max(...L),mean:+(L.reduce((a,b)=>a+b,0)/L.length).toFixed(2)}}
