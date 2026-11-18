@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"3b69182e","t":"2026-11-18T01:50Z","c":"hoa-dien r3 onto main 3da5720a (makeup-lux live): hoa-dien (jhd.js + hooks) replayed on the new main, replacing the old stacked branch. Sha…","b":"432c340425a7","h":[{"s":"631a703e","t":"2026-11-18T01:37Z","c":"review staff-cap-fix r6: hire pick refused at the cap gives the silver back (+ staff-cap.js case); site rebuilt"},{"s":"4cdcffa9+","t":"2026-11-18T00:44Z","c":"review looks-s40: site rebuilt from merged sources (glow v8)"},{"s":"eb3675a6+","t":"2026-11-17T22:59Z","c":"review coop-thin-c r1 #2: merge origin/main b048e495 (kit-display-room r2, jdisp/jshelf only; generated files from main + site rebuilt)"},{"s":"4eac30bc+","t":"2026-11-17T22:57Z","c":"review coop-thin-c r1 #2: her NPC pack resend (F1) listens on any guest seat, not only while the C switch is on: a level drop / build hold …"},{"s":"c7375c0c+","t":"2026-11-17T22:33Z","c":"batch s38a: dudo-blank-r1 2270c4c5 merged onto main 99f3978d; site rebuilt"},{"s":"99f3978d+","t":"2026-11-17T21:07Z","c":"batch s37a: display-shelf-r3rv 41418cd8 merged onto main 4c8568f5; site rebuilt"},{"s":"4c8568f5+","t":"2026-11-17T20:30Z","c":"batch s36a: main 60b0e3bf (display-shelf) merged; jdisp gated on BAL.shelf.ui (=0, room hidden); site rebuilt"},{"s":"da86e866","t":"2026-11-17T20:29Z","c":"Thẻ hành sự chia hai khối THÀNH và BẠI cho rõ được mất; khung dài có chữ \"Kéo xuống\" nhắc còn nữa; thẻ người chỉ ghi tước vị một lần, không…"},{"s":"9c6292d3+","t":"2026-11-17T20:17Z","c":"review display-shelf r2: Thái hậu rebuke through the one stat path ap (favour runs -100..100; cl(...,0,100) RAISED a negative favour to 0);…"},{"s":"85545ce7+","t":"2026-11-17T20:02Z","c":"world_check2 §1: a kind she died in is played again on a new life (fresh() kept as window.__wcFresh) — her random death mid-loop failed tha…"}]};
+window.CTM_BI={"s":"f986ff6a+","t":"2026-11-18T01:50Z","c":"review hoa-dien-r3c: site rebuilt","b":"dde0a03c4e32","h":[{"s":"3b69182e","t":"2026-11-18T01:50Z","c":"hoa-dien r3 onto main 3da5720a (makeup-lux live): hoa-dien (jhd.js + hooks) replayed on the new main, replacing the old stacked branch. Sha…"},{"s":"631a703e","t":"2026-11-18T01:37Z","c":"review staff-cap-fix r6: hire pick refused at the cap gives the silver back (+ staff-cap.js case); site rebuilt"},{"s":"4cdcffa9+","t":"2026-11-18T00:44Z","c":"review looks-s40: site rebuilt from merged sources (glow v8)"},{"s":"eb3675a6+","t":"2026-11-17T22:59Z","c":"review coop-thin-c r1 #2: merge origin/main b048e495 (kit-display-room r2, jdisp/jshelf only; generated files from main + site rebuilt)"},{"s":"4eac30bc+","t":"2026-11-17T22:57Z","c":"review coop-thin-c r1 #2: her NPC pack resend (F1) listens on any guest seat, not only while the C switch is on: a level drop / build hold …"},{"s":"c7375c0c+","t":"2026-11-17T22:33Z","c":"batch s38a: dudo-blank-r1 2270c4c5 merged onto main 99f3978d; site rebuilt"},{"s":"99f3978d+","t":"2026-11-17T21:07Z","c":"batch s37a: display-shelf-r3rv 41418cd8 merged onto main 4c8568f5; site rebuilt"},{"s":"4c8568f5+","t":"2026-11-17T20:30Z","c":"batch s36a: main 60b0e3bf (display-shelf) merged; jdisp gated on BAL.shelf.ui (=0, room hidden); site rebuilt"},{"s":"da86e866","t":"2026-11-17T20:29Z","c":"Thẻ hành sự chia hai khối THÀNH và BẠI cho rõ được mất; khung dài có chữ \"Kéo xuống\" nhắc còn nữa; thẻ người chỉ ghi tước vị một lần, không…"},{"s":"9c6292d3+","t":"2026-11-17T20:17Z","c":"review display-shelf r2: Thái hậu rebuke through the one stat path ap (favour runs -100..100; cl(...,0,100) RAISED a negative favour to 0);…"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -31275,7 +31275,7 @@ window.KIT_SCAR={src:function(sev){return `https://ctm-img.victoria-tntt.workers
  on:function(p){try{if(!p||!p.scar)return false;return (typeof S!=="undefined"&&p===S)||(typeof knows==="function"&&!!knows(p))}catch(e){return false}},
  of:function(p){if(!this.on(p))return null;const sev=p.scar.sev|0;return{sev,src:this.src(sev),label:`Hủy dung (${this.names[sev]||""})`}},
  rect:function(file){const n=String(file||"").split("/").pop();return this.fit&&this.fit[n]||null},
- style:function(file){const r=this.rect(file);if(!r)return "";return `left:${r[0]}%;top:${r[1]}%;width:${r[2]}%;height:${r[3]}%;transform:rotate(${r[4]}deg);transform-origin:${this.origin}`},
+ style:function(file){const r=this.rect(file);if(!r)return "";return `left:${r[0]}%;top:${r[1]}%;width:${r[2]}%;height:${r[3]}%;transform:rotate(${r[4]}deg) scaleX(-1);transform-origin:${this.origin}`},
  load:function(){if(this.fit||this._ld)return;this._ld=1;try{fetch(this.fitUrl).then(r=>r.ok?r.json():null).then(j=>{if(j)KIT_SCAR.fit=j}).catch(()=>{})}catch(e){}}};
 try{KIT_SCAR.load()}catch(e){}
 
@@ -33330,7 +33330,7 @@ window.KIT_SCAR={src:function(sev){return `https://ctm-img.victoria-tntt.workers
  on:function(p){try{if(!p||!p.scar)return false;return (typeof S!=="undefined"&&p===S)||(typeof knows==="function"&&!!knows(p))}catch(e){return false}},
  of:function(p){if(!this.on(p))return null;const sev=p.scar.sev|0;return{sev,src:this.src(sev),label:`Hủy dung (${this.names[sev]||""})`}},
  rect:function(file){const n=String(file||"").split("/").pop();return this.fit&&this.fit[n]||null},
- style:function(file){const r=this.rect(file);if(!r)return "";return `left:${r[0]}%;top:${r[1]}%;width:${r[2]}%;height:${r[3]}%;transform:rotate(${r[4]}deg);transform-origin:${this.origin}`},
+ style:function(file){const r=this.rect(file);if(!r)return "";return `left:${r[0]}%;top:${r[1]}%;width:${r[2]}%;height:${r[3]}%;transform:rotate(${r[4]}deg) scaleX(-1);transform-origin:${this.origin}`},
  load:function(){if(this.fit||this._ld)return;this._ld=1;try{fetch(this.fitUrl).then(r=>r.ok?r.json():null).then(j=>{if(j)KIT_SCAR.fit=j}).catch(()=>{})}catch(e){}}};
 try{KIT_SCAR.load()}catch(e){}
 }
@@ -33342,8 +33342,10 @@ try{KIT_SCAR.load()}catch(e){}
 kitVeiled=function(){return false};
 function kitVeilOn(p){try{if(!p)return false;if(window.KIT_VEIL&&typeof KIT_VEIL.on==="function"&&KIT_VEIL.on(p))return true;if(typeof scarOf==="function"){const s=scarOf(p);return !!(s&&s.veil)}}catch(e){}return false}
 function kitScarOf(p){try{if(!p||!p.scar||!window.KIT_SCAR)return null;const on=KIT_SCAR.on(p)||!!p.scar.known;if(!on)return null;const sev=Math.max(1,Math.min(3,p.scar.sev|0||1));return{sev,src:KIT_SCAR.src(sev)}}catch(e){return null}}
+/* TONE (owner 18/11 pick, BAL.looks.tone[id] = strength 0..1): opacity x strength + a lighter, less saturated colour (CSS stand-in for "pulled toward skin"; the ladder sheets used the per-pixel pull) */
+function kitToneCss(id,base){try{const k=BAL.looks.tone[id];if(!(k>0)||k>=1)return base==null?"":`;opacity:${base}`;const d=1-k;return `;opacity:${((base==null?1:base)*k).toFixed(3)};filter:saturate(${(1-d*.6).toFixed(3)}) brightness(${(1+d*.5).toFixed(3)})`}catch(e){return base==null?"":`;opacity:${base}`}}
 const kitFxVars=st=>st.replace(/(^|;)\s*(left|top|width|height|transform|transform-origin):/g,(m,a,k)=>`${a}--f${k.replace('transform-origin','to').replace('transform','tf')}:`);
-function kitFxLayers(p,file){if(!p||!file)return"";let h="";const sc=kitScarOf(p);if(sc&&window.KIT_SCAR){const st=KIT_SCAR.style(file);if(st)h+=`<img class="kscar" src="${sc.src}" alt="" aria-hidden="true" style="${kitFxVars(st)}" onerror="this.remove()">`}
+function kitFxLayers(p,file){if(!p||!file)return"";let h="";const sc=kitScarOf(p);if(sc&&window.KIT_SCAR){const px=/fx-pox-scar/.test(sc.src);/* sẹo rỗ (đậu mùa) is a face-square final, never the cheek scratch box */const st=px?(typeof lkSquare==="function"?lkSquare(file):""):KIT_SCAR.style(file);if(st)h+=`<img class="${px?"kpox":"kscar"}" src="${sc.src}" alt="" aria-hidden="true" style="${kitFxVars(st)}${px?"":kitToneCss("cao",.85)}" onerror="this.remove()">`}
  if(kitVeilOn(p)&&window.KIT_VEIL&&KIT_VEIL.style){const t=KIT_VEIL.tierOf(p);const st=KIT_VEIL.style(file,t);if(st)h+=`<img class="kveil2" src="${KIT_VEIL.src(t)}" alt="" aria-hidden="true" style="${kitFxVars(st)}" onerror="this.remove()">`}return h}
 const kitFile=src=>String(src||"").split("?")[0].split("/").pop();
 /* ---------- AVATAR = ID CARD (owner 17/11 ~18:10Z, OD "Avatar … cái thẻ nhân viên"; review/kit-fx-register) ----------
@@ -33355,9 +33357,9 @@ const kitFile=src=>String(src||"").split("?")[0].split("/").pop();
 window.KIT_LASTING={list:[],add:function(d){if(!d||!d.id)return;this.list=this.list.filter(x=>x.id!==d.id);this.list.push(d)},
  /* layers of person p on picture file: [{id,src,rect:[l,t,w,h,deg],o:[ox,oy]}] (rect = % of the WHOLE picture, the scar-fit / veil-fit rows) */
  of:function(p,file){const out=[];if(!p||!file)return out;for(const d of this.list){let r=null;try{r=d.layers(p,file)}catch(e){r=null}if(r&&r.length)out.push(...r)}return out}};
-KIT_LASTING.add({id:"scar",layers:(p,file)=>{const sc=kitScarOf(p);if(!sc||!window.KIT_SCAR||!KIT_SCAR.rect)return null;const r=KIT_SCAR.rect(file);if(!r)return null;return[{id:"scar"+sc.sev,src:sc.src,rect:r.slice(0,5),o:[.5,.5],alpha:.85}]}});
+KIT_LASTING.add({id:"scar",layers:(p,file)=>{const sc=kitScarOf(p);if(!sc||!window.KIT_SCAR||!KIT_SCAR.rect)return null;if(/fx-pox-scar/.test(sc.src)){const q=typeof lkSquareRect==="function"?lkSquareRect(file):null;return q?[{id:"pscar"+sc.sev,src:sc.src,rect:q,o:[.5,.47],alpha:1}]:null}const r=KIT_SCAR.rect(file);if(!r)return null;return[{id:"scar"+sc.sev,src:sc.src,rect:r.slice(0,5),o:[.5,.5],alpha:.85*((BAL.looks.tone&&BAL.looks.tone.cao)||1),flip:1}]}});
 const KIT_BAKE={cache:{},order:[],pend:{},W:{tall:384,sm:192},max:80,
- key:function(p,file,kind){const L=KIT_LASTING.of(p,file);if(!L.length)return"";return file+"|"+kind+"|"+L.map(l=>l.id+":"+l.rect.join(",")).join(";")},
+ key:function(p,file,kind){const L=KIT_LASTING.of(p,file);if(!L.length)return"";return file+"|"+kind+"|"+L.map(l=>l.id+":"+l.rect.join(",")+(l.flip?"f":"")+(l.alpha==null?"":"a"+l.alpha)).join(";")},
  /* the src to print into the avatar <img> + an attribute that lets the finished bake replace it */
  pick:function(p,url,kind){try{const file=kitFile(url);const k=this.key(p,file,kind||"sm");if(!k)return{src:url,attr:""};const c=this.cache[k];if(c){this.touch(k);return{src:c,attr:` data-kbk="${k.replace(/"/g,"")}"`}}
    this.make(k,p,url,file,kind||"sm");return{src:url,attr:` data-kbk="${k.replace(/"/g,"")}"`}}catch(e){return{src:url,attr:""}}},
@@ -33366,7 +33368,7 @@ const KIT_BAKE={cache:{},order:[],pend:{},W:{tall:384,sm:192},max:80,
   const load=src=>new Promise((ok,no)=>{const im=new Image();im.crossOrigin="anonymous";im.decoding="async";im.onload=()=>ok(im);im.onerror=()=>no(0);im.src=src});
   Promise.all([load(abs),...L.map(l=>load(/^(https?:|blob:|data:)/.test(l.src)?l.src:(typeof IMG_U==="function"?IMG_U(l.src):l.src)))]).then(([ph,...ls])=>{
    const nw=ph.naturalWidth,nh=ph.naturalHeight,K=Math.min(1,this.W[kind]/nw),W=Math.max(1,Math.round(nw*K)),H=Math.max(1,Math.round(nh*K));const cv=document.createElement("canvas");cv.width=W;cv.height=H;const g=cv.getContext("2d");g.imageSmoothingQuality="high";g.drawImage(ph,0,0,W,H);
-   ls.forEach((im,i)=>{const l=L[i],r=l.rect,x=r[0]/100*W,y=r[1]/100*H,w=r[2]/100*W,h=r[3]/100*H;g.save();g.globalAlpha=l.alpha==null?1:l.alpha;g.translate(x+w*l.o[0],y+h*l.o[1]);g.rotate((r[4]||0)*Math.PI/180);g.drawImage(im,-w*l.o[0],-h*l.o[1],w,h);g.restore()});
+   ls.forEach((im,i)=>{const l=L[i],r=l.rect,x=r[0]/100*W,y=r[1]/100*H,w=r[2]/100*W,h=r[3]/100*H;g.save();g.globalAlpha=l.alpha==null?1:l.alpha;g.translate(x+w*l.o[0],y+h*l.o[1]);g.rotate((r[4]||0)*Math.PI/180);if(l.flip)g.scale(-1,1);g.drawImage(im,-w*l.o[0],-h*l.o[1],w,h);g.restore()});
    cv.toBlob(b=>{delete this.pend[k];if(!b)return;const u=URL.createObjectURL(b);this.cache[k]=u;this.touch(k);while(this.order.length>this.max){const o=this.order.shift(),ou=this.cache[o];delete this.cache[o];setTimeout(()=>{try{URL.revokeObjectURL(ou)}catch(e){}},60000)}
     document.querySelectorAll("img[data-kbk]").forEach(e=>{if(e.getAttribute("data-kbk")===k.replace(/"/g,"")&&e.src!==u)e.src=u})},"image/webp",.92)}).catch(()=>{delete this.pend[k]})}};
 window.KIT_BAKE=KIT_BAKE;
@@ -65998,8 +66000,12 @@ Object.assign(BAL,{looks:{
  cry:{o:70,lv:1,lvLong:2},
  /* harm acts as minigames (jslap engine): her level from the game, an NPC's from the slap rank table; dodge lowers one level (nhẹ = miss) */
  act:{nuoc:{duc:-2,ev:-3,w:1},tea:{duc:-3,ev:-4,w:1,hotSuc:5},ink:{duc:-4,ev:-6,w:.8},npcUp:50},
+ /* tone = strength of the painted mark (owner picks 18/11: mực 85 %, muội 85 %, vết cào 85 %); opacity x strength + lighter colour, see kitToneCss (jk2b) */
+ tone:{muc:.85,muoi:.85,cao:.85},
  pox:{thuydau:{sea:["Xuân"],cont:1,die:0},sac:{thuydau:[0,3,5,8],daumua:[0,6,10,14]},spread:35,spreadWk:3,scar:[0,1,1,2]}}});
-window.LOOKS_ART={};
+/* the 24 owner-approved face finals (384x384 face-square, uploaded to the CDN img/ 18/11, md5 table dev/handover/reports/looks-2-art.md); hair + cloth slots stay empty (not approved) */
+window.LOOKS_ART={};for(const f of["bui","moho","muc","muoi"])for(let n=1;n<=3;n++){LOOKS_ART[`fx-${f}-${n}.png`]=1;if(f==="muc")LOOKS_ART[`fx-muc-${n}-m.png`]=1}
+for(const k of["thuydau","daumua","scar"])for(let n=1;n<=3;n++)LOOKS_ART[`fx-pox-${k}-${n}.png`]=1;
 const LK_N={smu:["","Phấn son lem nhẹ","Phấn son lem nhem","Phấn son lem nhem nặng"],bui:["","Mặt lấm bụi","Bụi bám đầy mặt","Bụi bám đầy mặt"],
  muoi:["","Mặt lấm muội khói","Mặt lấm muội khói","Mặt đen muội khói"],moho:["","Mồ hôi làm phấn trôi","Mồ hôi làm phấn trôi","Mồ hôi đẫm, phấn trôi hết"],
  lanh:["","Má đỏ môi tái vì lạnh","Má đỏ môi tái vì lạnh","Lạnh tím môi"],muc:["","Mặt vấy mực","Mặt lem mực","Mặt lem nhem mực đen"],
@@ -66124,16 +66130,21 @@ function lkPoxScar(p,st){try{if(!p||p.scar||typeof SCAR70==="undefined")return""
  try{if(was&&p&&!p.ill&&p.alive!==false&&!p.dead){const t=lkPoxScar(p,was);if(t&&p===S)return (r||"")+t}}catch(e){}return r}})();
 (function(){if(typeof kitScarOf!=="function")return;const k0=kitScarOf;kitScarOf=function(p){const r=k0.apply(this,arguments);try{if(r&&p&&p.scar&&p.scar.how==="daumua"){const f=`fx-pox-scar-${r.sev}.png`;return lkArt(f)?{sev:r.sev,src:"https://ctm-img.victoria-tntt.workers.dev/img/"+f}:null}}catch(e){}return r}})();
 /* ---------- face-fx entries: pictures wait for Foreman C; chips + Sắc work now ---------- */
-function lkFaceImg(cls,f,st){return st&&lkArt(f)?`<img class="${cls}" src="https://ctm-img.victoria-tntt.workers.dev/img/${f}" alt="" aria-hidden="true" style="${kitFxVars(st)}" onerror="this.remove()">`:""}
+/* ink faces the other way when the scar-fit cheek (the cheek facing the viewer) lies RIGHT of the face centre: pick the mirrored fx-muc-N-m (same side rule as the scar; today every por/fig row is the viewer-left cheek) */
+function lkMirror(file){try{const n=String(file||"").split("/").pop(),s=KIT_SCAR.fit&&KIT_SCAR.fit[n],v=KIT_VEIL.fit&&KIT_VEIL.fit[n];return !!(s&&v&&s[0]+s[2]/2>v[0]+v[2]/2+1)}catch(e){return false}}
+function lkFaceImg(cls,f,st,file){if(!st)return"";if(/^fx-muc-\d\.png$/.test(f)&&lkMirror(file))f=f.replace(".png","-m.png");const m=/^fx-(muc|muoi)-/.exec(f);
+ return lkArt(f)?`<img class="${cls}" src="https://ctm-img.victoria-tntt.workers.dev/img/${f}" alt="" aria-hidden="true" style="${kitFxVars(st)}${m?kitToneCss(m[1],null):""}" onerror="this.remove()">`:""}
+/* the same face-square as KIT_RASH.style as a [l,t,w,h,deg] rect (baked avatars / KIT_LASTING) */
+function lkSquareRect(file){try{const n=String(file||"").split("/").pop(),r=KIT_VEIL.fit&&KIT_VEIL.fit[n];if(!r)return null;const W=r[2]*KIT_RASH.WX,H=W*(r[3]*480)/(r[2]*445),bandY=r[1]+KIT_VEIL.B0*r[3];return[r[0]+r[2]/2-W/2,bandY-KIT_RASH.RB*H,W,H,r[4]]}catch(e){return null}}
 function lkSquare(file){try{return KIT_RASH.style(file)}catch(e){return""}}
 const lkChips=L=>L.map(([id,x])=>lkWord(id,x.lv)).join(" · ");
 const lkSac=L=>L.reduce((s,[id,x])=>s+Math.round((lkB().cat[id].sac||0)*x.lv),0);
 KIT_FACEFX.add({id:"pox",z:22,ready:true,
  state:p=>{const i=fxIll(p);return i&&(i.k==="thuydau"||i.k==="daumua")?{k:i.k,st:cl(i.st|0,1,3)}:null},
  seen:(p,st)=>p===S||fxIllSeen(p)&&fxSeen(p),sac:(p,st)=>(lkB().pox.sac[st.k]||[])[st.st]||0,chip:()=>null,
- html:(p,file,st)=>lkFaceImg("kpox",`fx-pox-${st.k}-${st.st}.png`,lkSquare(file))});
+ html:(p,file,st)=>lkFaceImg("kpox",`fx-pox-${st.k}-${st.st}.png`,lkSquare(file),file)});
 KIT_FACEFX.add({id:"lkface",z:24,ready:true,state:p=>{const L=lkItems(p,LK_FACE);return L.length?{L}:null},seen:p=>fxSeen(p),sac:(p,z)=>lkSac(z.L),chip:(p,z)=>[lkChips(z.L),"hot"],
- html:(p,file,z)=>{const sq=lkSquare(file);return z.L.map(([id,x])=>lkFaceImg("klk klk-"+id,`fx-${id}-${x.lv}.png`,sq)).join("")}});
+ html:(p,file,z)=>{const sq=lkSquare(file);return z.L.map(([id,x])=>lkFaceImg("klk klk-"+id,`fx-${id}-${x.lv}.png`,sq,file)).join("")}});
 KIT_FACEFX.add({id:"lkhair",z:27,ready:true,state:p=>{const L=lkItems(p,LK_HAIR);return L.length?{L}:null},seen:p=>fxSeen(p),sac:(p,z)=>lkSac(z.L),chip:(p,z)=>[lkChips(z.L),"hot"],html:()=>""});
 KIT_FACEFX.add({id:"lkcloth",z:80,ready:true,state:p=>{const L=lkItems(p,LK_CLOTH);return L.length?{L}:null},seen:p=>fxSeen(p),sac:(p,z)=>lkSac(z.L),chip:(p,z)=>[lkChips(z.L),"hot"],html:()=>""});
 for(const k in LK_ACT)KIT_FACEFX.deny[k]={emp:1,thaihau:1};
@@ -67274,7 +67285,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="432c340425a7";window.CTM_BUILD=BUILD;
+const BUILD="dde0a03c4e32";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
