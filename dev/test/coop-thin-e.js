@@ -11,6 +11,8 @@ const WURL=process.argv[2]||'https://ctm-coop.victoria-tntt.workers.dev';const L
 const res=[];const ok=(c,m,x)=>{res.push([!!c,m]);console.log((c?'ok  ':'FAIL')+' '+m+(x!==undefined?' '+JSON.stringify(x).slice(0,c?300:2500):''))};
 const sleep=ms=>new Promise(r=>setTimeout(r,ms));
 const TRIPSRC=process.env.TRIP?fs.readFileSync(path.join(__dirname,'coop-thin-trip.js'),'utf8'):null;
+/* SHOTS=<dir outside git> (the Luân hồi intro overlay is hidden for the shot): host + guest at a buổi step (E3) and at her night card (E11), scratch only */
+const shot=async(o,n)=>{if(!process.env.SHOTS)return;try{await o.p.evaluate(()=>{for(const b of document.querySelectorAll('.krbox')){const ov=b.parentElement;if(ov&&ov!==document.body)ov.style.display='none'}});await o.p.screenshot({path:require('path').join(process.env.SHOTS,n+'.png')})}catch(e){console.log('shot failed',n,e.message.split('\n')[0])}};
 async function mk(b,name,vp,want){const ctx=await b.newContext({viewport:{width:vp[0],height:vp[1]},deviceScaleFactor:process.env.SHOTS?2:1,reducedMotion:'reduce'});await serve(ctx);
   await ctx.addInitScript(([u,w])=>{window.COOP_URL=u;if(w)try{localStorage.setItem('ctm-thin',String(w))}catch(e){}
    window.__co=()=>{const c=window.COOP;if(!c)return{};return{code:c.code,seat:c.seat,world:typeof S!=='undefined'&&!!S&&!!(window.COOPW&&COOPW.on)}}},[WURL,want]);
@@ -59,6 +61,7 @@ async function week(A,B,tag){for(let i=0;i<3;i++){await clear(A);await clear(B)}
  const moved=await until(G,b=>(S.buoi||0)===b+1,g0.b,20000);const h2=await st(H),g2=await st(G);
  ok(moved&&h2.b===h0.b+1,'E3 both moved one buổi',[h0.b,h2.b,g0.b,g2.b]);
  ok(h2.E.step===(h0.E.step||0)+1&&h2.E.her>(h0.E.her||0),'E3 host ran his step + her step once (counted from before the press)',[h0.E,h2.E]);
+ await shot(H,'e3-host-buoi');await shot(G,'e3-guest-buoi');
  ok(g2.bac===gb,'E4 her change kept after the step (not undone)',[g2.bac,gb]);
  const hc2=await H.p.evaluate(()=>{const B=COOPW.thin.seatOf('b');return {b:B&&B.S.buoi,bac:B&&B.S.bac}});
  ok(hc2.b===g2.b&&hc2.bac===g2.bac,'E3 host copy == her phone (buổi, bac)',[hc2,g2.b,g2.bac]);
@@ -96,6 +99,7 @@ async function week(A,B,tag){for(let i=0;i<3;i++){await clear(A);await clear(B)}
  /* E11: the host gives her the night: her Kính sự phòng summons is a part-D card built in her context on the host */
  await H.p.evaluate(()=>{COOPW.thin.E.nk=-1;S.tonight=COOPW.friend();render()});
  ok(await until(G,()=>Q.some(q=>q&&q.thin&&/Kính sự phòng/.test(JSON.stringify(q)+((document.getElementById('modal')||{}).textContent||''))),null,20000),'E11 her summons arrives as a part-D card (built on the host)',await G.p.evaluate(()=>[Q.map(q=>q.thin?'thin:'+(q.t||''):q.t).slice(0,4),S.tonight==='me']));
+ await shot(H,'e11-host-night');await shot(G,'e11-guest-night');
  ok(await H.p.evaluate(()=>COOPW.thin.E.stat.night>=1&&COOPW.thin.seatOf('b').S.tonight==='me'),'E11 her stored person has the night (tonight = me)');
  /* E12: a world window's end on HER household runs on the host in her context (phóng cung: her aged maid leaves; her choice "let") */
  const nm='E-maid-'+Date.now().toString(36);
