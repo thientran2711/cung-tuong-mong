@@ -67,7 +67,7 @@ balance-final #2 (opus; balance chain + AG arms) | review/balance-final | sessio
 t8-mass-B c12–c22 a18 | CDN _review only | W74 session_011xDdVPGrS8Vtu3vK8hiwa9 | RUNNING | 2026-11-18T18:03Z (Foreman C ROOT-29)
 t8-mass-B c23–c32 a18 | CDN _review only | W75b session_011xDdVT4Jjz5JL6BHCuf4qx (W75 archived) | RUNNING | 2026-11-18T18:03Z (Foreman C ROOT-29)
 t8-mass-B c01–c11 a18 + frozen builder dev/art/t8-prompt-B | CDN _review only | W72 session_011xDdVNW3uEET1o4R4muEUH | RUNNING | 2026-11-18T18:03Z (Foreman C ROOT-29)
-| map-labels-missing (sonnet OWNER BUG: Dư đồ palace names missing) | review/map-labels-missing | MAIN ROOT-53 | session_01Rc5AsJKHtNXkYtCxgvCzAL | READY fb77229c (report map-labels-missing.md) | 18/11 18:22Z |
+| map-labels-missing (sonnet OWNER BUG: Dư đồ palace names missing) | review/map-labels-missing | MAIN ROOT-53 | session_01Rc5AsJKHtNXkYtCxgvCzAL | READY 98c0e0a3 (report map-labels-missing.md) | 18/11 18:22Z |
 | entry-blank-r3 (opus OWNER BUG: blank first screen again after life-preload) | review/entry-blank-r3 | MAIN ROOT-53 | session_01Rc5AsJn6SQf4eq1uMdP1U5 | RUNNING | 18/11 18:27Z |
 choice-value-audit (ORDER ROOT-52 15:56Z) | review/choice-value-audit | session_01964izBnYA5PzbmC6qJfmDG | RUNNING | 18/11 18:20Z | owner D #2
 | shop-panel-r2 (sonnet SMALL UI owner 18:30Z: no strip, no bạc line, 1-row gains, sell price) | review/shop-panel-r2 | MAIN ROOT-53 | session_01Rc5AsMyVsQxLMS5ePwwpjT | SẴN SÀNG KIỂM 9f61f1c2 | 18/11 18:33Z |

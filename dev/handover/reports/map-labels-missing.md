@@ -1,6 +1,6 @@
-# map-labels-missing (worker, MAIN ROOT-53) — READY FOR REVIEW fb77229c
+# map-labels-missing (worker, MAIN ROOT-53) — READY FOR REVIEW 98c0e0a3 (r1 after MAIN note; was fb77229c)
 
-Branch `review/map-labels-missing` sha **fb77229c** (on live main d3ea24e8, nothing newer on origin/main at push time).
+Branch `review/map-labels-missing` sha **98c0e0a3** (on live main d3ea24e8, nothing newer on origin/main at push time).
 PRIORITY #1 CHECK: OD L1032 / L1417 (readable tag on EVERY map label; grey out of khắc; no ruling hides a palace name) | main: j38 mapFit `kmhide` | review/* none | claims none.
 
 ## Owner bug (18/11 ~18:20Z)
@@ -30,3 +30,9 @@ Run: `NODE_PATH=$(npm root -g) node dev/test/map-labels-scan.js <url> <shotdir> 
 ## Shots (looked 3x; CDN `img/_review/map-labels-missing/`): 755x1000-day/night.webp, 1180x820-day/night.webp (delete after verdict: `python3 dev/site/cdn_sync.py --wipe-review map-labels-missing`).
 Not done: iPad/Fold other ranks/old-save variants beyond the quickcheck old-save open; before-shots not kept (numbers above are from the live build scan).
 START_CTX ~5%, finished far below ceiling; no handover needed.
+
+## r1 (MAIN note: tag must still read as belonging to its palace, OD L1416)
+- CDN upload never happened (cdn_sync did not run to completion) -> shots are .jpg under dev/handover/shots/map-labels-missing/ on this branch: 755x1000-day/night, 1180x820-day/night (looked 3x, modal covers hidden).
+- Added: every tag nudged >=24 px gets a thin gold leader line + dot to its own building (kit CSS `.mspot>.mlead` in jmapc.js; drawn in j38 place()); nudge now prefers the nearest free spot (distance weight x5).
+- Max tag centre -> own building centre (scan col `dist`, includes tags that sit off-centre by design): iPad day 119 px, iPad night 168 px, Fold day 163 px, Fold night 203 px (Chung Tú; Trường Môn viện 194). All of those carry a leader line; every other tag <= 58 px.
+- QUICKCHECK PASS on 98c0e0a3 (195 s; render 269/268, tab 457/454, buổi 1187/1359). First run FAILed perf buổi 3291/1039 ms = machine noise (same sha PASS on rerun).
