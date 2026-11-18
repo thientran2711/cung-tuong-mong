@@ -20,7 +20,22 @@ const JSONOUT=process.argv.includes('--json'),ALL=process.argv.includes('--all')
 const [,,FILE,T,B,K]=AV.filter(x=>x!=='--json'&&x!=='--all');if(!FILE){console.log(fs.readFileSync(__filename,'utf8').split('\n').slice(1,9).join('\n'));process.exit(1)}
 const j95=fs.readFileSync(path.join(__dirname,'..','build','j95.js'),'utf8');
 const ACT=Function('return '+j95.match(/const ACT95=(\{[\s\S]*?\});/)[1])();
-for(const f of fs.readdirSync(path.join(__dirname,'..','build')).filter(f=>/^j95.*\.js$/.test(f))){const t=fs.readFileSync(path.join(__dirname,'..','build',f),'utf8');for(const m of t.matchAll(/Object\.assign\(ACT95,(\{[^}]*\})\)/g))try{Object.assign(ACT,Function('return '+m[1])())}catch(e){}}
+/* act words (review live-servants FAIL 1, law 7: never a code key in an answer): every literal ACT95 word in the game sources (Object.assign(ACT95,{…}),
+   ACT95["ag_…"]="…", ACT95.x="…"), the servants' deed words (j95s J95S_DW → ag_maid:<k> / ag_srv:<k>), the shared deeds (jagent AGACTW → ag_<k>);
+   a key still without a word reads J95S_DW0 ("lo việc riêng") — the same rule as the game's j95sActW */
+const DW={},AW={};let DW0='lo việc riêng';
+for(const f of fs.readdirSync(path.join(__dirname,'..','build')).filter(f=>/^j.*\.js$/.test(f)&&f!=='all.js')){const t=fs.readFileSync(path.join(__dirname,'..','build',f),'utf8');
+ for(const m of t.matchAll(/Object\.assign\(ACT95,(\{[^}]*\})\)/g))try{Object.assign(ACT,Function('return '+m[1])())}catch(e){}
+ for(const m of t.matchAll(/ACT95\[("[^"]+")\]=(?:ACT95\[[^\]]+\]\|\|)?("[^"]*")/g))try{const k=JSON.parse(m[1]);if(!ACT[k])ACT[k]=JSON.parse(m[2])}catch(e){}
+ for(const m of t.matchAll(/ACT95\.(\w+)=("[^"]*")/g))try{if(!ACT[m[1]])ACT[m[1]]=JSON.parse(m[2])}catch(e){}
+ {const m=t.match(/const J95S_DW=(\{[^}]*\})/);if(m)try{Object.assign(DW,Function('return '+m[1])())}catch(e){}const m0=t.match(/const J95S_DW0="([^"]*)"/);if(m0)DW0=m0[1]}
+ /* the consorts' own deed tables (runtime: ACT95["ag_cx:"+k]=AGCX[k].act …): read the act words of each row literally */
+ for(const [nm,pre] of [['AGSELF','ag_'],['AGCX','ag_cx:'],['AGHH','ag_hh:'],['AGC2','ag_cx2:']]){const i=t.indexOf('const '+nm+'={');if(i<0)continue;
+  let d=0,st=-1,key=null;for(let q=i+nm.length+8;q<t.length;q++){const c=t[q];if(c==='"'){const e=t.indexOf('"',q+1);if(e>0)q=e;continue}
+   if(c==='{'){d++;if(d===1){const m=/(\w+)\s*:\s*$/.exec(t.slice(Math.max(0,q-40),q));key=m?m[1]:null;st=q}}else if(c==='}'){if(d===1&&key){const a=/\bact\s*:\s*"([^"]*)"/.exec(t.slice(st,q+1));if(a&&!ACT[pre+key])ACT[pre+key]=a[1]}d--;if(d<0)break}}}
+ for(const m of t.matchAll(/(?:const AGC3ACT=|Object\.assign\(AGC3ACT,)(\{[^}]*\})/g))try{const o=Function('return '+m[1])();for(const k in o)if(!ACT['ag_cx3:'+k])ACT['ag_cx3:'+k]=o[k]}catch(e){}
+ {const m=t.match(/const AGACTW=(\{[^}]*\})/);if(m)try{Object.assign(AW,Function('return '+m[1])())}catch(e){}for(const x of t.matchAll(/AGACTW\.(\w+)="([^"]*)"/g))AW[x[1]]=x[2]}}
+function actW(a){a=a==null?'':String(a);if(ACT[a])return ACT[a];let m=/^ag_(?:maid|srv):(\w+)$/.exec(a);if(m&&DW[m[1]])return DW[m[1]];m=/^ag_(\w+)$/.exec(a);if(m&&AW[m[1]])return AW[m[1]];return /^[\x00-\x7f]*$/.test(a)?DW0:a}
 const PLN={home:"Tẩm cung của ngươi",kn:"Càn Ninh cung (Hoàng hậu)",tn:"Đức Thọ cung (Thái hậu)",dtd:"Dưỡng Hòa điện",thu:"Cần Chính điện",lc:"Trường Môn viện (lãnh cung)",vuon:"Ngự hoa viên",tyv:"Thái y viện",ksp:"Kính sự phòng",tgk:"Tân Giả khố",cnh:"Dãy nhà cung nhân",ttp:"Thượng thư phòng",acs:"A ca sở",dc:"Đông cung",ngoai:"Ngoài cung (chưa vào)"};
 function readSave(txt){txt=txt.trim();let d=null;
  const m=/^CTM([12]):([A-Za-z0-9+/=\s]+)$/.exec(txt);if(m){let u=Buffer.from(m[2].replace(/\s+/g,''),'base64');if(m[1]==='2')u=zlib.inflateRawSync(u);d=JSON.parse(u.toString('utf8'))}
@@ -32,7 +47,7 @@ const pn=k=>{if(!k)return'—';if(PLN[k])return PLN[k];if(k[0]==='r'){const v=RV
 if(WHO!=null){process.exit(whoMode(WHO))}
 let rows=[],map=null,at={},log=null;const R=S.roster;
 if(R&&(t==null||t===R.wk)&&(b==null||b===R.b)){const k2=kh==null?(R.kh||0):kh;at={wk:R.wk,b:R.b,kh:k2};
- rows=Object.keys(R.P).map(id=>{const e=R.P[id][k2];return{id,name:(R.who[id]||[id])[0],role:(R.who[id]||['',''])[1],place:e[0],placeName:pn(e[0]),act:ACT[e[1]]||e[1],tgt:e[2]?((R.who[e[2]]||[e[2]])[0]):'',why:e[3]||''}});map=R.m&&R.m[k2]||null}
+ rows=Object.keys(R.P).map(id=>{const e=R.P[id][k2];return{id,name:(R.who[id]||[id])[0],role:(R.who[id]||['',''])[1],place:e[0],placeName:pn(e[0]),act:actW(e[1]),tgt:e[2]?((R.who[e[2]]||[e[2]])[0]):'',why:e[3]||''}});map=R.m&&R.m[k2]||null}
 else{const L=S.rlog&&S.rlog.e&&S.rlog.e[(t==null?wk:t)+'-'+(b||0)];if(!L){console.log('Không có sổ cho thời điểm này. Có:',Object.keys((S.rlog||{}).e||{}).join(' '),R?`(hiện tại ${R.key})`:'');process.exit(2)}
  const k2=kh||0;at={wk:L.wk,b:L.b,kh:k2};log=L;rows=L.ids.map((id,i)=>{const q=L.s[i].length===8?L.s[i]:L.s[i].slice(k2*8,k2*8+8);const g=j=>parseInt(q.slice(j*2,j*2+2),36);const P=L.D.P[g(0)],Tg=L.D.T[g(2)];
   return{id,name:(S.rlog.who[id]||[id])[0],role:(S.rlog.who[id]||['',''])[1],place:P,placeName:L.pn[P]||pn(P),act:L.D.A[g(1)],tgt:Tg?((S.rlog.who[Tg]||[Tg])[0]):'',why:L.D.W[g(3)]}});
@@ -59,7 +74,7 @@ if(!log){/* the current record against the people in the save */
  for(const m of S.men||[])if(!m.alive&&ids.has(m.id))err.push('nam nhân đã chết còn trong sổ: '+m.name)}
 console.log(`\nTổng: ${rows.length} người · ${Object.keys(C).length} nơi${map?'':' · (không có số bản đồ cho khắc này)'}`);
 console.log(err.length?'TỰ KIỂM: LỖI\n - '+err.join('\n - '):'TỰ KIỂM: sạch (không trùng, không thiếu, khớp bản đồ)');
-const acts=(log?log.acts:R&&R.acts)||[];if(acts.length){console.log('\nHành động nhắm vào người khác trong buổi (qua cổng động cơ):');for(const a of acts){const nm=id=>id?(((log?S.rlog.who:R.who)[id]||[id])[0]):'';console.log(` khắc ${a.kh+1}: ${nm(a.id)} → ${nm(a.t)} · ${a.k} · ${a.ok?'cho làm':'CHẶN'} · ${a.why}${a.src?` · nguồn: ${a.src}`:''}`)}}
+const acts=(log?log.acts:R&&R.acts)||[];if(acts.length){console.log('\nHành động nhắm vào người khác trong buổi (qua cổng động cơ):');for(const a of acts){const nm=id=>id?(((log?S.rlog.who:R.who)[id]||[id])[0]):'';console.log(` khắc ${a.kh+1}: ${nm(a.id)} → ${nm(a.t)} · ${actW(/^ag:/.test(a.k||'')?'ag_'+a.k.slice(3):a.k)} · ${a.ok?'cho làm':'CHẶN'} · ${a.why}${a.src?` · nguồn: ${a.src}`:''}`)}}
 process.exit(err.length?3:0);
 /* ---------- --who: where is she, since when, doing what, why (owner OD L1901 point 3) ---------- */
 function whoMode(q){const R=S.roster,L=S.rlog||{e:{},who:{}};const WHOD=Object.assign({},L.who||{},(R&&R.who)||{});
@@ -73,7 +88,7 @@ function whoMode(q){const R=S.roster,L=S.rlog||{e:{},who:{}};const WHOD=Object.a
  /* every buổi the record holds: the log (closed buổi) + the current one (khắc after the save's khắc = still the plan) */
  const B=[];for(const k in L.e||{}){const E=L.e[k];B.push({wk:E.wk,b:E.b,nb:E.nb,get:(id,kh)=>{const i=E.ids.indexOf(id);if(i<0)return null;const sq=E.s[i].length===8?E.s[i]:E.s[i].slice(kh*8,kh*8+8);const g=j=>parseInt(sq.slice(j*2,j*2+2),36);const P=E.D.P[g(0)],Tg=E.D.T[g(2)];
    return{place:P,placeName:E.pn[P]||pn(P),act:E.D.A[g(1)],tgt:Tg?((WHOD[Tg]||[Tg])[0]):'',why:E.D.W[g(3)]}}})}
- if(R&&R.P)B.push({wk:R.wk,b:R.b,nb:R.nb,cur:1,kh:R.kh==null?0:R.kh,get:(id,kh)=>{const e=R.P[id]&&R.P[id][kh];if(!e)return null;return{place:e[0],placeName:pn(e[0]),act:ACT[e[1]]||e[1],tgt:e[2]?((WHOD[e[2]]||[e[2]])[0]):'',why:e[3]||''}}});
+ if(R&&R.P)B.push({wk:R.wk,b:R.b,nb:R.nb,cur:1,kh:R.kh==null?0:R.kh,get:(id,kh)=>{const e=R.P[id]&&R.P[id][kh];if(!e)return null;return{place:e[0],placeName:pn(e[0]),act:actW(e[1]),tgt:e[2]?((WHOD[e[2]]||[e[2]])[0]):'',why:e[3]||''}}});
  B.sort((x,y)=>x.wk-y.wk||x.b-y.b);const out=[];
  for(const id of ids){const [nm,rl]=WHOD[id];const cur=B.find(x=>x.cur);let now=null;
   if(cur){now=Object.assign({wk:cur.wk,b:cur.b,kh:cur.kh},cur.get(id,cur.kh)||{})}

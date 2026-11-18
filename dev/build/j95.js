@@ -459,12 +459,12 @@ function j95followers(p){try{const R=S&&S.roster;if(!R||R.key!==j95key()||!p)ret
 
 /* ---------------- 9. LOG (this week + 4 before) and the dev table ---------------- */
 function j95log(R){try{const L=S.rlog=S.rlog||{e:{},who:{}};const ids=Object.keys(R.P);const D={P:[],A:[],T:[],W:[]};const ix=(arr,x)=>{x=x==null?"":String(x);let i=arr.indexOf(x);if(i<0){arr.push(x);i=arr.length-1}return i.toString(36).padStart(2,"0")};
- const s=ids.map(id=>{const q=R.P[id].map(e=>ix(D.P,e[0])+ix(D.A,ACT95[e[1]]||e[1])+ix(D.T,e[2])+ix(D.W,e[3]));return q.every(x=>x===q[0])?q[0]:q.join("")});
+ const s=ids.map(id=>{const q=R.P[id].map(e=>ix(D.P,e[0])+ix(D.A,typeof j95sActW==="function"?j95sActW(e[1]):(ACT95[e[1]]||e[1]))+ix(D.T,e[2])+ix(D.W,e[3]));return q.every(x=>x===q[0])?q[0]:q.join("")});
  const pn={};for(const k of D.P)if(k)pn[k]=j95pn(k);for(const id of ids)L.who[id]=R.who[id]||L.who[id]||[id,""];
  L.e[R.key]={wk:R.wk,b:R.b,nb:R.nb,ids,s,D,pn,m:(R.m||[]).map(o=>o?Object.entries(o).map(x=>x.join(":")).join(","):""),nv:(R.nv||[]).map(a=>(a||[]).join(",")),acts:(R.acts||[]).slice(-40),ev:R.ev||[]};
  for(const k in L.e)if(L.e[k].wk<R.wk-J95.LOGW)delete L.e[k];const keep={};for(const k in L.e)for(const id of L.e[k].ids)keep[id]=1;for(const id in L.who)if(!keep[id])delete L.who[id]}catch(e){}}
 function j95table(t,b,kh){/* the dev table (also used by dev/tools/roster.js logic) */const R=S.roster;const cur=t==null||(R&&R.wk===t&&R.b===(b==null?R.b:b));
- if(cur&&R){kh=kh==null?j95kh():kh;const rows=Object.keys(R.P).map(id=>{const e=R.P[id][kh];return{id,name:(R.who[id]||[id])[0],role:(R.who[id]||["",""])[1],place:e[0],placeName:j95pn(e[0]),act:ACT95[e[1]]||e[1],tgt:e[2]?((R.who[e[2]]||[e[2]])[0]):"",why:e[3]||""}});return j95check(rows,R.m&&R.m[kh],{wk:R.wk,b:R.b,kh})}
+ if(cur&&R){kh=kh==null?j95kh():kh;const rows=Object.keys(R.P).map(id=>{const e=R.P[id][kh];return{id,name:(R.who[id]||[id])[0],role:(R.who[id]||["",""])[1],place:e[0],placeName:j95pn(e[0]),act:typeof j95sActW==="function"?j95sActW(e[1]):(ACT95[e[1]]||e[1]),tgt:e[2]?((R.who[e[2]]||[e[2]])[0]):"",why:e[3]||""}});return j95check(rows,R.m&&R.m[kh],{wk:R.wk,b:R.b,kh})}
  const L=S.rlog&&S.rlog.e&&S.rlog.e[t+"-"+(b||0)];if(!L)return{error:"không có sổ cho thời điểm này"};kh=kh||0;
  const rows=L.ids.map((id,i)=>{const q=L.s[i].length===8?L.s[i]:L.s[i].slice(kh*8,kh*8+8);const g=j=>parseInt(q.slice(j*2,j*2+2),36);const P=L.D.P[g(0)],T=L.D.T[g(2)];return{id,name:(S.rlog.who[id]||[id])[0],role:(S.rlog.who[id]||["",""])[1],place:P,placeName:L.pn[P]||P,act:L.D.A[g(1)],tgt:T?((S.rlog.who[T]||[T])[0]):"",why:L.D.W[g(3)]}});
  const m={};(L.m[kh]||"").split(",").filter(Boolean).forEach(x=>{const [k,n]=x.split(":");m[k]=+n});return j95check(rows,L.m[kh]?m:null,{wk:t,b,kh})}
