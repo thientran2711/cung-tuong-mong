@@ -177,7 +177,7 @@ PEND.tsgiftpick=p=>{const v=RV(p.v);if(!v)return null;const G=BAL.tsGift;const A
  return{who:pv(v),t:`<p>Chọn ${p.k==="wk"?"tác phẩm":p.k==="it"?"món đồ":"món"} biếu ${v.name} để làm lành. Món phải đáng một phần lễ bạc (${G.bac} bạc) trong mắt nàng: nàng ưa món nào thì món ấy nặng hơn.</p>`,o:A.map(({e,i,w})=>{
   let gain="";try{const ge=giftEval(e,v);const m=ge&&ge.ok&&/thành: (.*?)(?: · kèm: |$)/.exec(ge.x||"");gain=m?m[1]:""}catch(x){}
   return{n:giftName(e),ik:i,fx:{},x:w.ok?`Chắc chắn · tốn: ${G.khac} khắc, ${giftName(e)} −1 (bán được ${w.bac} bạc; nàng coi như ${w.wb} bạc) · thành: ${tsGiftEaseTxt(S,v)}${gain?", "+gain:""}${w.note?" · kèm: "+w.note:""}`:"",need:w.ok?[]:[{t:(w.why||"không biếu được")+(w.q>=0?` (nàng coi như ${w.wb} bạc, cần ${G.bac})`:""),ok:false}],tsDis:!w.ok,
-   go:()=>{if(!w.ok)return;spend(G.khac);const R=tsGiftPiece(S,v,i);if(!R)return;log(`${R.r}Lời lẽ mềm mỏng, lòng nàng dịu đi. Được: ${tsGiftEaseTxt(S,v)}. Mất: ${R.nm} (bán được ${R.bac} bạc).`)}}}).concat([{n:"Thôi",fx:{}}])}};
+   go:()=>{if(!w.ok)return;const R=tsGiftPiece(S,v,i);if(!R)return;spend(G.khac);/* khắc only when the piece really went (review r1) */log(`${R.r}Lời lẽ mềm mỏng, lòng nàng dịu đi. Được: ${tsGiftEaseTxt(S,v)}. Mất: ${R.nm} (bán được ${R.bac} bạc).`)}}}).concat([{n:"Thôi",fx:{}}])}};
 /* both are pickers she opened herself: full act cards (Được / Mất), not hidden event outcomes (jk2b KIT_ACT_PIDS, as jpoison) */
 try{KIT_ACT_PIDS.add("tsgift");KIT_ACT_PIDS.add("tsgiftpick")}catch(e){}
 /* NPC side, the same rule: the cheapest road that is enough (a piece worth less bạc than her bạc share, else bạc, else nothing) */
