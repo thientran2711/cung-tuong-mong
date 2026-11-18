@@ -24,3 +24,10 @@ Files: `td_song_8-755x1000.png`, `td_song_8-1180x820.png` (Quý phi asks: «Em t
 ## Notes
 - nc and the cnv askers: NPC consorts never draw nc today (BAL.nroad.org has no nc); the nc rows are ready if that changes. cnv askers are only maids (nrMInit).
 - The step title (s[0].n, e.g. «Mời thái y xem kín») stays stock — the brief's spec has no step field.
+
+## ROUND 2 (18/11 ~06:40Z) — rebased on q1a + converted to its engine shape → **255f5b2a**
+- Branch `review/questline-q1b` rebased on `review/questline-q1a` 1b6005a (force-with-lease, own branch). assemble.py: `jnrask_b.js` right after `jnrask.js`.
+- Converted to q1a's shape: entries are lists, h without outer “ ” (engine adds them), slots {me}{Me}{call}{Call}{he}{B} as nrAskOf.
+- nrask-scan rules met: **second ask written for all 120 chapters** (240 asks, 2 per chapter, mostly a different kind/shape than the first); every «do» ask names {B} (19 first asks rewritten); no typed «mình»/«em» (td_song «em trai» → «tiểu đệ»); 0 shared sentence / label / loss line across jnrask.js + jnrask_b.js.
+- Tests: **nrask-scan ALL PASS** (432 asks, 9 origins 24/24 each) · **nrask-engine ALL PASS** (864 cards both voices, fallback, old saves, play/betray) · **quickcheck PASS** (336 s; core gates PASS; perf new/live render 158/175, tab 373/332, buổi 844/997 ms).
+- Not re-shot (text-only change on the same j72 card; q1a's nrask-shots covers the card on Fold/iPad). Maid voice (cnv, nô tỳ/tiểu chủ) was checked in round 1 with the same slot meaning.
