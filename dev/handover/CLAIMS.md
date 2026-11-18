@@ -13,3 +13,4 @@ shown-odds-one-path-rv | review/shown-odds-one-path-rv | session_01964izEojRf2ME
 | FOREMAN C-AG #13 (opus; successor of #12, opened by #12; also does lander work: no LANDER #7, depth 8) | handover FOREMAN_C_STATUS, review/npc-chain-land, review/ag-all-2-land | C-AG #13 | session_01UV1Szgvw457GueTtE27whc | RUNNING | 18/11 14:55Z |
 | REVIEW npc-purpose BIG (opus) — seat opened by D #1 for C-AG #13 (ORDER ROOT-52 14:44Z SEAT HELP) | review/npc-purpose (see reports/review-npc-purpose.md §HANDOVER) | C-AG #13 | session_01964izEUgw5hZTBxuEguL4K | RUNNING | 18/11 14:49Z |
 shown-odds-one-path-rv | review/shown-odds-one-path-rv | session_01964izEojRf2ME8Lmxpkd5x | LIVE a2ce736a | 18/11 15:05Z | owner D #1
+phoenix-t1t6-fix | review/phoenix-t1t6-fix (CDN _review only) | W53 (opening) | RUNNING | 2026-11-18T15:05Z (Foreman C ROOT-24)
