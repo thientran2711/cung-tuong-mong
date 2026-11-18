@@ -57,7 +57,14 @@ const {chromium}=require('playwright');const D=require('./lib/device');
   /* 6. played to the end with an ask: option 0 → hb>0 or honest fail; betrayal (option 2) → hb<0 */
   const play=[];for(const oi of [0,2]){clear();const a=[].concat(NRASK[id0])[0];const x=mk('nr_'+a.k,0,id0,false);v.nr.hb=0;q.a.push(x);let t=0;
    while(q.a.includes(x)&&t++<12){used=0;S.suc=95;S.bac=9999;q72Do(x.u,oi)}const hist=q.h[0]&&q.h[0].res;play.push({oi,hb:v.nr.hb,hist,done:!q.a.includes(x)})}
-  out.play=play;clear();return out});
+  out.play=play;
+  /* 7. no asker is sent to herself (NRSELF, whole family): for every chapter of every road, each self role, many draws → never its own kind;
+     and the live offer of a queen consort never queues nr_hh */
+  const self=[];for(const role of Object.keys(NRSELF))for(const r of roads)for(let n=BAL.road.first;n<=BAL.road.last;n++){const A=nrCh(r,n);if(!A)continue;
+   for(let t=0;t<8;t++){const K=nrAskPick({r,n},A,role);if(NRSELF[role].includes(K.hk)){self.push([role,r,n,K]);break}}}
+  let qOff=0;const qs=[];for(const id of Object.keys(NRASK)){const m=id.match(/^(.+)_(\d+)$/);if(!ROAD14[m[1]])continue;for(let t=0;t<3;t++){clear();v.queen=true;
+   v.nr=v.nr||{};Object.assign(v.nr,{r:m[1],n:+m[2],h:+m[2],hs:0,c:w.id,x:0,o:m[1].split('_')[0]});if(nrOffer(v)){qOff++;const c=q.ch.find(c=>/^nr_/.test(c.tid));if(c&&c.tid==="nr_hh")qs.push(id)}}}
+  v.queen=false;out.self={bad:self.slice(0,6),nb:self.length,qOff,qs:qs.slice(0,6),nq:qs.length};clear();return out});
  if(R.err){chk('setup',false,R.err)}else{
   console.log('kinds dealt (default):',JSON.stringify(R.kinds));console.log('kinds dealt (+bac):',JSON.stringify(R.kinds2));
   chk('1. default kinds never deal «bac»',!R.kinds.bac,R.kinds);chk('1. one key flip (+bac) deals «bac» again',R.kinds2.bac>0,R.kinds2);
@@ -67,6 +74,7 @@ const {chromium}=require('playwright');const D=require('./lib/device');
   chk('4. fallback to the stock card (no ask / av −1 / wrong kind)',!R.fb.bad.length,R.fb);
   chk('5. old save quests (no p.av, nr_bac) open with stock text and end',!R.old.length,R.old);
   chk('6. ask quest played: option 0 → hb>0 or honest fail',R.play[0].done&&(R.play[0].hb>0||R.play[0].hist==='fail'),R.play[0]);
-  chk('6. ask quest betrayed → hb<0',R.play[1].done&&R.play[1].hb<0&&R.play[1].hist==='bad',R.play[1])}
+  chk('6. ask quest betrayed → hb<0',R.play[1].done&&R.play[1].hb<0&&R.play[1].hist==='bad',R.play[1])
+  chk(`7. no asker is sent to herself (NRSELF ${JSON.stringify(R.self&&R.self.qOff)} queen offers): queen never hh, Thái y never y`,R.self.nb===0&&R.self.nq===0&&R.self.qOff>0,R.self)}
  chk('no page errors',!errs.length,errs);
  await b.close();srv.close();const f=ok.filter(z=>!z[1]).length;console.log(f?`${f} FAIL`:'ALL PASS');process.exit(f?1:0)})();
