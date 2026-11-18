@@ -34,7 +34,11 @@ function kidFigSrc(k,kind){const f=kidFig(k);if(!f)return"";return figPath(kind=
 const KPORK={},KPIM=[];
 function kidPre(src){if(!src||KPORK[src]!=null)return;KPORK[src]=2;const im=new Image();im.onload=()=>{KPORK[src]=1;kitRenderSoon(250)};im.onerror=()=>{KPORK[src]=0};KPIM.push(im);im.src=src}
 /* every band of the child's identity is fetched early, so a birthday never flashes the old face */
-function kidPreAll(k){const id=kidId(k);if(!id)return;const B=(KIDIX[kidRole(k)]||{})[id]||{};KIDBANDS.forEach(b=>{if(B[b])kidPre(figPath(B[b].por))})}
+/* entry-blank-r3 (review item 6): the other age bands of a child are a 'later' fetch — while the life gate / life set is still bringing the
+   pictures on screen (KLIFE busy) they wait, so ~16 child portraits no longer take a slow line before her own portrait and the side cards */
+const KPRE_W=new Set();
+function kidPreAll(k){const id=kidId(k);if(!id)return;const L=window.KLIFE;if(L&&(L.on||L.busy>0)){if(!KPRE_W.has(id)){KPRE_W.add(id);setTimeout(()=>{KPRE_W.delete(id);kidPreAll(k)},3000)}return}
+ const B=(KIDIX[kidRole(k)]||{})[id]||{};KIDBANDS.forEach(b=>{if(B[b])kidPre(figPath(B[b].por))})}
 function kidPor(k,fb){try{kidPreAll(k);const src=kidFigSrc(k,"por");if(!src)return fb;if(KPORK[src]===1)return src;kidPre(src);return fb}catch(e){return fb}}
 (function(){const k0=kidFace0;kidFace0=function(k){const r=k0.apply(this,arguments);try{if(r&&k)r.src=kidPor(k,r.src)}catch(e){}return r}})();
 (function(){const r0=render;render=function(){try{if(S&&!S.dead&&KIDSIG)kidAssignAll()}catch(e){}return r0.apply(this,arguments)}})();
