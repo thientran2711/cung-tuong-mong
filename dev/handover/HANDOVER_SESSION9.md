@@ -486,3 +486,4 @@ RUNNING MAIN WORKERS / REVIEWERS (all report to main; tell them the new id):
 - book-figsize r5 SzkhyYuitpjvm16Zn3P, cloth-tea SzghNErbDFn6nXtyBwa, opt-card-short Szk6j15PHjAL8gMSR9z (A/B/C pick) — wait owner verdicts (morning).
 - C-AG #10 SzjAd8BYMMz2rKFZitp: ag-all-2-land + npc-chain-land PASS ~07:30Z → main lands FF.
 FOREMEN: B (life-preload-fu, cloth-bake-static landed 9bbd78b) | C (art: B7 consort a18, W32 emperors, E icons, act art 6 + placeholder, c16 smear, c01 cut-out) | D (toil-react-top ORDER 05:55Z, staff-cap-row3 FAIL 1 fixing, title-stale-sel) | E (E4f, E7a/b/c). Owner has ROOT paste blocks B/C/D (TAKEOVER_FOREMAN_{B,C,D}_ROOT.md; C generic new file).
+- ROOT-46 FINAL (18/11 06:30Z): successor MAIN ROOT-47 = session_01UV1SzkyUiNKEkWJM3e9b5U (depth 3). ROOT-46 stops (relays owner words + worker reports only). ROOT-46 wake trig_01U8sQRxMroSJNk4y3MCkQyk stays until ROOT-47 deletes it.
