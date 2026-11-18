@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"7a50021e+","t":"2026-11-18T22:22Z","c":"live-servants #3: ag-know §3 close-maid case follows the live-servants rule (OD 18/11 ~19:45Z (4): she knows only where her own row stands)…","b":"62ca0560bb1d","h":[{"s":"ca661db3+","t":"2026-11-18T13:38Z","c":"coop-c4-stuck S5a: hold showModal so the room's own armed reshow cannot race the negative check"},{"s":"0dc8f187+","t":"2026-11-18T22:28Z","c":"review coop-thin-f1 r1 #3: site build (index.html / sw.js rebuilt)"},{"s":"6e9277d8+","t":"2026-11-18T21:47Z","c":"entry-blank-r3 r2 (review item 6, whole group): a portrait on its way shows the kit portrait silhouette (§59.1 pf/pm, unknown-f|m); the lin…"},{"s":"3270145f+","t":"2026-11-18T21:25Z","c":"doc-90-women r1: rebuild generated index.html/sw.js (build hash, build line) after comment edits"},{"s":"668e0bf4+","t":"2026-11-18T21:26Z","c":"map-zones r6 (reviewer fix on r3 5a83694): a head in a dropped palace with a stale resHead to another dropped house got a second migration …"},{"s":"b02879db+","t":"2026-11-18T20:49Z","c":"ge-writers-w1: carry jrd_muoi ch8 c3 «Thư sinh Giang Nam» (forced from s1/s2 every life) + BAL muoi_no_8.c3, by MAIN ORDER 18:45Z; muoi_no_…"},{"s":"fcff501a+","t":"2026-11-18T20:41Z","c":"map-labels-missing r2c: tag touches its own building or keeps a short leader (\u003c=90px) ending on the real slip/info rect, dot >=40px from ot…"},{"s":"c67d248d+","t":"2026-11-18T19:53Z","c":"ag-deed-perf: site build (index.html, sw.js)"},{"s":"6aab33ad","t":"2026-11-18T20:05Z","c":"KIT_REQUESTS: K-Q2-1 DONE 048f3c7"},{"s":"343d4557","t":"2026-11-18T19:03Z","c":"shop-panel r3: kind sub-tabs under Mua|Bán (kit tab row, chest groups), test + KIT.md"}]};
+window.CTM_BI={"s":"8f54e00b","t":"2026-11-18T23:27Z","c":"KIT REQUEST: kitEvArt evId tag on act pickers (live-servants #4)","b":"e1d14a596eb3","h":[{"s":"ca661db3+","t":"2026-11-18T13:38Z","c":"coop-c4-stuck S5a: hold showModal so the room's own armed reshow cannot race the negative check"},{"s":"0dc8f187+","t":"2026-11-18T22:28Z","c":"review coop-thin-f1 r1 #3: site build (index.html / sw.js rebuilt)"},{"s":"6e9277d8+","t":"2026-11-18T21:47Z","c":"entry-blank-r3 r2 (review item 6, whole group): a portrait on its way shows the kit portrait silhouette (§59.1 pf/pm, unknown-f|m); the lin…"},{"s":"3270145f+","t":"2026-11-18T21:25Z","c":"doc-90-women r1: rebuild generated index.html/sw.js (build hash, build line) after comment edits"},{"s":"668e0bf4+","t":"2026-11-18T21:26Z","c":"map-zones r6 (reviewer fix on r3 5a83694): a head in a dropped palace with a stale resHead to another dropped house got a second migration …"},{"s":"b02879db+","t":"2026-11-18T20:49Z","c":"ge-writers-w1: carry jrd_muoi ch8 c3 «Thư sinh Giang Nam» (forced from s1/s2 every life) + BAL muoi_no_8.c3, by MAIN ORDER 18:45Z; muoi_no_…"},{"s":"fcff501a+","t":"2026-11-18T20:41Z","c":"map-labels-missing r2c: tag touches its own building or keeps a short leader (\u003c=90px) ending on the real slip/info rect, dot >=40px from ot…"},{"s":"c67d248d+","t":"2026-11-18T19:53Z","c":"ag-deed-perf: site build (index.html, sw.js)"},{"s":"6aab33ad","t":"2026-11-18T20:05Z","c":"KIT_REQUESTS: K-Q2-1 DONE 048f3c7"},{"s":"343d4557","t":"2026-11-18T19:03Z","c":"shop-panel r3: kind sub-tabs under Mua|Bán (kit tab row, chest groups), test + KIT.md"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -62316,12 +62316,12 @@ function j95followers(p){try{const R=S&&S.roster;if(!R||R.key!==j95key()||!p)ret
 
 /* ---------------- 9. LOG (this week + 4 before) and the dev table ---------------- */
 function j95log(R){try{const L=S.rlog=S.rlog||{e:{},who:{}};const ids=Object.keys(R.P);const D={P:[],A:[],T:[],W:[]};const ix=(arr,x)=>{x=x==null?"":String(x);let i=arr.indexOf(x);if(i<0){arr.push(x);i=arr.length-1}return i.toString(36).padStart(2,"0")};
- const s=ids.map(id=>{const q=R.P[id].map(e=>ix(D.P,e[0])+ix(D.A,ACT95[e[1]]||e[1])+ix(D.T,e[2])+ix(D.W,e[3]));return q.every(x=>x===q[0])?q[0]:q.join("")});
+ const s=ids.map(id=>{const q=R.P[id].map(e=>ix(D.P,e[0])+ix(D.A,typeof j95sActW==="function"?j95sActW(e[1]):(ACT95[e[1]]||e[1]))+ix(D.T,e[2])+ix(D.W,e[3]));return q.every(x=>x===q[0])?q[0]:q.join("")});
  const pn={};for(const k of D.P)if(k)pn[k]=j95pn(k);for(const id of ids)L.who[id]=R.who[id]||L.who[id]||[id,""];
  L.e[R.key]={wk:R.wk,b:R.b,nb:R.nb,ids,s,D,pn,m:(R.m||[]).map(o=>o?Object.entries(o).map(x=>x.join(":")).join(","):""),nv:(R.nv||[]).map(a=>(a||[]).join(",")),acts:(R.acts||[]).slice(-40),ev:R.ev||[]};
  for(const k in L.e)if(L.e[k].wk<R.wk-J95.LOGW)delete L.e[k];const keep={};for(const k in L.e)for(const id of L.e[k].ids)keep[id]=1;for(const id in L.who)if(!keep[id])delete L.who[id]}catch(e){}}
 function j95table(t,b,kh){/* the dev table (also used by dev/tools/roster.js logic) */const R=S.roster;const cur=t==null||(R&&R.wk===t&&R.b===(b==null?R.b:b));
- if(cur&&R){kh=kh==null?j95kh():kh;const rows=Object.keys(R.P).map(id=>{const e=R.P[id][kh];return{id,name:(R.who[id]||[id])[0],role:(R.who[id]||["",""])[1],place:e[0],placeName:j95pn(e[0]),act:ACT95[e[1]]||e[1],tgt:e[2]?((R.who[e[2]]||[e[2]])[0]):"",why:e[3]||""}});return j95check(rows,R.m&&R.m[kh],{wk:R.wk,b:R.b,kh})}
+ if(cur&&R){kh=kh==null?j95kh():kh;const rows=Object.keys(R.P).map(id=>{const e=R.P[id][kh];return{id,name:(R.who[id]||[id])[0],role:(R.who[id]||["",""])[1],place:e[0],placeName:j95pn(e[0]),act:typeof j95sActW==="function"?j95sActW(e[1]):(ACT95[e[1]]||e[1]),tgt:e[2]?((R.who[e[2]]||[e[2]])[0]):"",why:e[3]||""}});return j95check(rows,R.m&&R.m[kh],{wk:R.wk,b:R.b,kh})}
  const L=S.rlog&&S.rlog.e&&S.rlog.e[t+"-"+(b||0)];if(!L)return{error:"không có sổ cho thời điểm này"};kh=kh||0;
  const rows=L.ids.map((id,i)=>{const q=L.s[i].length===8?L.s[i]:L.s[i].slice(kh*8,kh*8+8);const g=j=>parseInt(q.slice(j*2,j*2+2),36);const P=L.D.P[g(0)],T=L.D.T[g(2)];return{id,name:(S.rlog.who[id]||[id])[0],role:(S.rlog.who[id]||["",""])[1],place:P,placeName:L.pn[P]||P,act:L.D.A[g(1)],tgt:T?((S.rlog.who[T]||[T])[0]):"",why:L.D.W[g(3)]}});
  const m={};(L.m[kh]||"").split(",").filter(Boolean).forEach(x=>{const [k,n]=x.split(":");m[k]=+n});return j95check(rows,L.m[kh]?m:null,{wk:t,b,kh})}
@@ -70226,7 +70226,10 @@ Object.assign(BAL,{slv:{on:1,
     The NPC's share of her present + free people she takes: base, × her trait (pomp-lovers take more, the discreet few), × formal (going before the
     Emperor / Thái hậu: a fuller train), × moodLow when her mood is low; at least one when anyone is free (she never walks alone unless nobody is free);
     trust picks WHO (weight = lòng ^ loyalP); the close maid first when free unless her trait says otherwise (Kín đáo / Xảo quyệt take only the trusted). */
- ent:{base:.5,tr:{"Kiêu ngạo":1.8,"Ham vui":1.4,"Tham vọng":1.3,"Ân cần":1,"Khiêm nhường":.5,"Kín đáo":.3,"Xảo quyệt":.4,"Lạnh lùng":.6},formal:{dtd:1.5,thu:1.5,tn:1.5},moodLow:.6,loyalP:2,trustOnly:["Kín đáo","Xảo quyệt"]},
+ ent:{base:.5,tr:{"Kiêu ngạo":1.8,"Ham vui":1.4,"Tham vọng":1.3,"Ân cần":1,"Khiêm nhường":.5,"Kín đáo":.3,"Xảo quyệt":.4,"Lạnh lùng":.6},formal:{dtd:1.5,thu:1.5,tn:1.5},moodLow:.6,loyalP:2,trustOnly:["Kín đáo","Xảo quyệt"],
+  /* her mood counts as low at emoGet v ≥ mood.v and a feeling of level ≥ mood.lv (emoLv: 2 = sad / afraid / worried / jealous, 3 = angry);
+     trust weight of a servant = max(lv.min, lòng (the close maid: lv.close; none recorded: lv.def)) / lv.unit, raised to loyalP */
+  mood:{v:40,lv:2},lv:{min:5,close:100,def:50,unit:50}},
  /* her day: weights of each kind of khắc by canonical buổi slot 0 sáng · 1 trưa · 2 chiều · 3 tối (serve, clean, eat, brk = break, err = errand, vis = visit a friend, sleep) */
  /* err + vis at khắc 0 = the share of buổi she spends out (one errand or visit, the whole buổi) */
  day:[{serve:40,clean:30,eat:10,brk:5,err:15,vis:0,sleep:0},{serve:30,clean:10,eat:25,brk:20,err:10,vis:5,sleep:0},{serve:25,clean:20,eat:0,brk:15,err:20,vis:15,sleep:0},{serve:30,clean:5,eat:15,brk:10,err:0,vis:5,sleep:35}],
@@ -70247,6 +70250,14 @@ Object.assign(BAL,{slv:{on:1,
  friendAf:30,/* a colleague in another palace she visits = thiện cảm at least this */
  night:1/* servants of a household on night watch (tối, the khắc others sleep) */}});
 Object.assign(ACT95,{brk:"nghỉ tay giữa phiên",stay:"ở lại trông cung",nightw:"canh đêm",shift:"nghỉ theo lượt"});
+/* (review FAIL 1, law 7) a servant's own deed (jagday / jagstaff slot, record act "ag_maid:<k>" / "ag_srv:<k>", k = an SRVA row of j42 or empTea) in
+   player words — never the code key on screen. Secret deeds (spy, betray, frame, poison, pil, love matters) read as her own business: whoever looks
+   (the picker, the map views) does not learn the secret for free (law 6a). dev/tools/roster.js reads this same table. */
+const J95S_DW={sweep:"quét dọn trong cung",tea:"dâng trà hầu chủ",follow:"theo hầu chủ",nvp:"đi lĩnh đồ",rite:"học lễ nghi với cô cô",study:"luyện thêu thùa, chữ nghĩa",groom:"chải chuốt, giữ nhan sắc",rest:"nghỉ lấy sức",embro:"thêu khăn đem bán",med:"mua thuốc bổ",books:"quản sổ sách trong cung",errand:"đi việc chủ sai",spy:"lo việc riêng",massage:"đấm bóp hầu chủ",askRew:"xin chủ ban thưởng",tellMis:"bẩm tin cho chủ",askRec:"xin chủ tiến cử",beside:"đứng hầu bên chủ",greet:"đi thỉnh an",betray:"lo việc riêng",accuse:"đi tố giác",chat:"trò chuyện với bạn đồng liêu",gift:"tặng quà bạn đồng liêu",ask:"nhờ bạn đồng liêu giúp",frame:"lo việc riêng",tonic:"đi lấy thuốc bổ",learn:"học nghề thuốc",hail:"chào hỏi người quen",flirt:"lo việc riêng",token:"lo việc riêng",tryst:"lo việc riêng",vow:"lo việc riêng",cut:"lo việc riêng",listen:"đi nghe ngóng cho chủ",scout:"tự đi dò la cho chủ",watch:"canh chừng cung chủ",poison:"lo việc riêng",pil:"lo việc riêng",leave:"xin chủ cho đi hầu cung khác",empTea:"dâng trà nơi Hoàng thượng ngự"};
+const J95S_DW0="lo việc riêng";/* any deed key still without a word (a new deed added later): never the key itself */
+/* THE ONE act word for every player view of a record row (picker reasons, j95sWhy, j95here / j95whereId, the dev query) */
+function j95sActW(a){a=a==null?"":String(a);const w=ACT95[a];if(w)return w;let m=/^ag_(?:maid|srv):(\w+)$/.exec(a);if(m&&J95S_DW[m[1]])return J95S_DW[m[1]];
+ m=/^ag_(\w+)$/.exec(a);try{if(m&&typeof AGACTW==="object"&&AGACTW[m[1]])return AGACTW[m[1]]}catch(e){}return /^[\x00-\x7f]*$/.test(a)?J95S_DW0:a}
 const J95S={stat:{life:0,ret:0,close:0,fallback:0,guard:0,keep:0},errs:[],guardBy:{}};
 function j95sOn(){try{return !!(BAL.slv&&BAL.slv.on)}catch(e){return false}}
 function j95sErr(w,e){try{if(J95S.errs.length<20)J95S.errs.push(w+": "+(e&&e.message||e))}catch(x){}}
@@ -70286,13 +70297,13 @@ function j95sRhythm0(q,ix,n){const B=BAL.slv;const d=j95sDay();const r=j95rng(j9
  const c=j95sPw(r,B.rest.buoi.map((w,i)=>[i,w]));const len=B.rest.len[0]+Math.floor(r()*(B.rest.len[1]-B.rest.len[0]+1));const k0=Math.floor(r()*(4-len+1));
  const sl=Math.min(3,B.sleepFrom+Math.floor(r()*(B.sleepJit+1)));const wn=Math.min(B.night,n);const rot=x=>((x%n)+n)%n;
  let watch=false,slept=false;for(let i=0;i<wn;i++){if(rot(d+i)===ix)watch=true;if(rot(d-1+i)===ix)slept=true}
- return{c,k0,len,sl,watch,slept:slept&&n>wn}}
+ return{c,k0,len,sl,watch,slept:slept&&n>wn&&d>0}}/* d 0 = the first day of her life in the game: there was no night before (no "ngủ bù") */
 function j95sLife(R,q,o,hk,Y){const B=BAL.slv;const c=R.c;const r=j95sRng(R,q.id);const ow=j95sOw(o);const oid=j95sOid(o);const W=Object.assign({},B.day[c]||B.day[0]);const watch=Y.watch;
  if(q.close)W.serve*=B.closeServe;if(!q.sv||q.kind==="el")W.vis=0;/* a visit needs a friend she has (servants with a thiện cảm book) */
  const out=[];let i=0;
  /* last night's watcher sleeps in at the start of sáng; the rest turn of the day; bedtime of the day (Y.sl) */
  if(c===0&&Y.slept)for(;i<Math.min(4,B.afterWatch);i++)out.push([hk,"sleep",null,"ngủ bù sau phiên canh đêm đêm qua"]);
- while(i<4){if(c===Y.c&&i===Y.k0&&i+Y.len<=4){for(let j=0;j<Y.len;j++,i++)out.push([hk,"shift",null,`đến lượt nghỉ của nàng (khắc ${Y.k0+1}–${Y.k0+Y.len}, mỗi ngày một lượt)`]);continue}
+ while(i<4){if(c===Y.c&&i===Y.k0&&i+Y.len<=4){for(let j=0;j<Y.len;j++,i++)out.push([hk,"shift",null,`đến lượt nghỉ của nàng (khắc ${Y.len>1?(Y.k0+1)+"–"+(Y.k0+Y.len):Y.k0+1}, mỗi ngày một lượt)`]);continue}
   let w=Object.assign({},W);if(c!==3||i<Y.sl)w.sleep=0;else w={sleep:1};/* from her bedtime on she sleeps (the watcher keeps watch) */
   if(c===Y.c)w.err=w.vis=0;/* her rest turn is in this buổi: she stays in */
   /* a walk out of her palace (an errand, a visit to a friend) takes the whole buổi: she sets out and comes back with the buổi change, never
@@ -70310,7 +70321,7 @@ function j95sLife(R,q,o,hk,Y){const B=BAL.slv;const c=R.c;const r=j95sRng(R,q.id
 /* free = she can be taken along now: at her palace, not on a deed / meeting / errand / visit of her own, not asleep or on her rest turn */
 function j95sFree(x,hk){return !!x&&!j95sBusy(x)&&x[0]===hk&&x[1]!=="sleep"&&x[1]!=="nightw"&&x[1]!=="shift"}
 function j95sNotFree(x){if(!x)return"không có trong cung";const a=x[1]||"";if(a==="sleep")return"đang ngủ";if(a==="shift")return"đang nghỉ theo lượt";if(a==="nightw")return"đang canh đêm";
- const w=ACT95[a]||String(a).replace(/^ag_/,"");return x[0]&&x[0]!=="home"&&!/^r\d+$/.test(x[0])?`${w} ở ${j95sPn(x[0])}`:`đang ${w}`}
+ const w=j95sActW(a);return x[0]&&x[0]!=="home"&&!/^r\d+$/.test(x[0])?`${w} ở ${j95sPn(x[0])}`:`đang ${w}`}
 function j95sDay(){try{return wk()}catch(e){return 0}}
 /* the day's pick store (personal, lazy; old saves load): S.ent = the player's {d, ids, at}; S.entN = {d, P:{oid:{ids, why}}} the NPC mistresses' */
 function j95sEntN(){const d=j95sDay();if(!S.entN||S.entN.d!==d)S.entN={d,P:{}};return S.entN}
@@ -70318,11 +70329,11 @@ function j95sEntN(){const d=j95sDay();if(!S.entN||S.entN.d!==d)S.entN={d,P:{}};r
 function j95sNpcPick(R,o,oid,H,k,free){const B=BAL.slv.ent;const r=j95rng(j95hash(j95seed()+"|ent|"+j95sDay()+"|"+oid));let tr=[];try{tr=o==="th"?traitsOf("th"):traitsOf(o)}catch(e){}
  let f=B.base,why=[];for(const t of tr)if(B.tr[t]!=null){f*=B.tr[t];why.push(t.toLowerCase())}
  if(B.formal[k]){f*=B.formal[k];why.push("đi chầu nên cần đủ lễ")}
- try{const e=o!=="th"&&typeof emoGet==="function"?emoGet(o):null;if(e&&e.v>=40&&emoLv(e.k)>=2){f*=B.moodLow;why.push("tâm trạng không vui")}}catch(x){}
+ try{const e=o!=="th"&&typeof emoGet==="function"?emoGet(o):null;if(e&&e.v>=B.mood.v&&emoLv(e.k)>=B.mood.lv){f*=B.moodLow;why.push("tâm trạng không vui")}}catch(x){}
  if(!free.length)return{ids:[],why:"không ai rảnh"};
  const n=Math.max(1,Math.min(free.length,Math.round(free.length*Math.min(1,f)+(r()-.5))));
  const trust=tr.some(t=>B.trustOnly.includes(t));const cl=free.find(q=>q.close);const mem=[];
- const lv=q=>Math.max(5,q.close?100:((q.sv&&q.sv.loyal)||50));const lw=q=>Math.pow(lv(q)/50,B.loyalP);
+ const lv=q=>Math.max(B.lv.min,q.close?B.lv.close:((q.sv&&q.sv.loyal)||B.lv.def));const lw=q=>Math.pow(lv(q)/B.lv.unit,B.loyalP);
  if(cl)mem.push(cl);/* the close maid first when she is free */
  const pool=free.filter(q=>!mem.includes(q));if(trust)pool.sort((x,y)=>lv(y)-lv(x));/* the discreet / scheming take the most trusted, no chance */
  while(mem.length<n&&pool.length){const q=trust?pool[0]:j95sPw(r,pool.map(x=>[x,lw(x)]));mem.push(q);pool.splice(pool.indexOf(q),1)}
@@ -70382,12 +70393,12 @@ function j95sPass(R,kh,ppl){if(!j95sOn())return 0;const t0=performance.now();let
 /* ---------- (3a) the reason guard: no empty or filler reason in the record ---------- */
 const J95S_FILL=new Set(["","phận sự trong cung","phận sự"]);
 function j95sWhy(R,id,i,x,kind){const a=x[1]||"",k=x[0],t=x[2];const tn=t?((R.who[t]||[t])[0]):"";const pn=j95sPn(k);
- if(a==="go"){for(let j=i+1;j<4;j++){const y=R.P[id][j];if(y&&y[0]===k&&y[1]!=="go")return`đang đến ${pn} để ${ACT95[y[1]]||String(y[1]).replace(/^ag_/,"")}`}return`đang đi đến ${pn}`}
- if(/^ag_/.test(a))return`việc nàng tự định trong ngày: ${String(a).slice(3)}${tn?" với "+tn:""}`;
+ if(a==="go"){for(let j=i+1;j<4;j++){const y=R.P[id][j];if(y&&y[0]===k&&y[1]!=="go")return`đang đến ${pn} để ${j95sActW(y[1])}`}return`đang đi đến ${pn}`}
+ if(/^ag_/.test(a))return`việc nàng tự định trong ngày: ${j95sActW(a)}${tn?" với "+tn:""}`;
  if(kind==="man"){const m=(S.men||[]).find(z=>z.id===id);const rw=m&&m.rw;return rw==="thái y"?"phiên trực ở Thái y viện":rw==="thị vệ"?"phiên canh gác trong cung":rw?`được triệu vào cung (${rw})`:"được triệu vào cung"}
  if(a==="serve"||a==="clean")return`${ACT95[a]}${tn?" cho "+tn:""} theo lịch trong ngày`;
  if(a==="rest"||a==="here")return k==="home"||/^r\d+$/.test(k||"")?"ở cung mình nghỉ ngơi":`nghỉ ở ${pn}`;
- return`${ACT95[a]||a||"ở"} ở ${pn}`}
+ return`${a?j95sActW(a):"ở"} ở ${pn}`}
 function j95sGuard(R,kh,ppl){let n=0;let K=null;const OK=J95S.ok||(J95S.ok=new WeakSet());/* a row checked once is not checked again (rows are replaced, never edited in place) */
  for(const id in R.P){if(id==="me")continue;const e=R.P[id];for(let i=kh;i<4;i++){const x=e[i];if(!x||OK.has(x))continue;OK.add(x);if(!x[0]||x[0]===J95OUT_)continue;const w=x[3]==null?"":String(x[3]).trim();if(!J95S_FILL.has(w))continue;
    if(!K){K={};for(const p of ppl)K[p.id]=p.kind}
@@ -70403,11 +70414,11 @@ window.__j95s=()=>({stat:J95S.stat,guardBy:J95S.guardBy,errs:J95S.errs,ms:+(J95S
 /* READ API for the Dư đồ levels (map-zones: zone → palace → Chính điện / Đông viện / Tây viện → place view): who is at place k now (or at khắc kh),
    read from the ONE record — never a private copy. Each: {id, name, role, act, tgt, why, vis} (vis = counted as a bóng by j95vis, same as the map). */
 function j95here(k,kh){try{const R=S.roster;if(!R||R.key!==j95key()||!k)return[];kh=kh==null?j95kh():kh;const L=[];
- for(const id in R.P){const x=R.P[id][kh];if(!x||!j95at(x[0],k))continue;L.push({id,name:(R.who[id]||[id])[0],role:(R.who[id]||["",""])[1],act:ACT95[x[1]]||x[1],tgt:x[2]?((R.who[x[2]]||[x[2]])[0]):"",why:x[3]||"",vis:j95vis(id,x[0])})}
+ for(const id in R.P){const x=R.P[id][kh];if(!x||!j95at(x[0],k))continue;L.push({id,name:(R.who[id]||[id])[0],role:(R.who[id]||["",""])[1],act:j95sActW(x[1]),tgt:x[2]?((R.who[x[2]]||[x[2]])[0]):"",why:x[3]||"",vis:j95vis(id,x[0])})}
  return L}catch(e){return[]}}
 /* where one person is now: {place, placeName, act, tgt, why, kh} (her maids by record id: "mm:me", "s<sid>") */
 function j95whereId(id,kh){try{const R=S.roster;if(!R||R.key!==j95key())return null;kh=kh==null?j95kh():kh;const x=R.P[id]&&R.P[id][kh];if(!x)return null;
- return{place:x[0],placeName:j95sPn(x[0]),act:ACT95[x[1]]||x[1],tgt:x[2]?((R.who[x[2]]||[x[2]])[0]):"",why:x[3]||"",kh}}catch(e){return null}}
+ return{place:x[0],placeName:j95sPn(x[0]),act:j95sActW(x[1]),tgt:x[2]?((R.who[x[2]]||[x[2]])[0]):"",why:x[3]||"",kh}}catch(e){return null}}
 Object.assign(window,{j95here,j95whereId});
 /* ================= THE PLAYER'S ENTOURAGE PICKER (owner OD 18/11 ~19:45Z point (4), verbatim in the brief) =================
    The FIRST time in a day she leaves her palace (a place tapped on Dư đồ, or an act that walks her there), ONE card asks who follows her: any number,
@@ -70424,22 +70435,28 @@ function j95sMine(){const R=S.roster;if(!R||R.key!==j95key())return[];const kh=j
  if(S.maid&&S.maid.name)add("mm:me",S.maid,"Cung nữ thân tín",true);
  for(const s of S.staff||[])if(s&&!s.out&&s.sid!=null)add("s"+s.sid,s,s.role==="eunuch"?"Thái giám":"Cung nữ",false);
  return L}
+const J95S_ENT_T=["Hôm nay ra khỏi cung, ngươi dẫn ai theo? Chọn bao nhiêu người cũng được, trong những người đang ở cung và rảnh. Đã đi rồi thì hôm nay không gọi thêm người được nữa.","Người theo hầu thấy những gì ngươi thấy, có thêm tai mắt cho ngươi; nhưng họ cũng biết việc ngươi làm và có thể kể lại với người khác. Người ở lại trông cung."];
 function j95sEntAsk(k){const L=j95sMine();if(!L.some(p=>p.free))return false;/* nobody free: no card, she goes alone; the card comes at her next departure */
- const opts=L.map(p=>{const c={n:p.name,fx:{},entId:p.id,sel:p.free&&p.close,x:`kèm: ${p.role.toLowerCase()} (lòng ${Math.round(p.s.loyal||0)}) ${p.free?"đang ở cung và rảnh":j95sNotFree(p.x)}`};
+ const opts=L.map(p=>{const c={n:p.name,fx:{},entId:p.id,sel:p.free&&p.close,x:`(${p.role.toLowerCase()}, lòng ${Math.round(p.s.loyal||0)}${p.free?", đang ở cung và rảnh":""})`};/* not free: her reason is the Cần row (kitOff), never repeated here *//* a person's status = neutral info: the kit Ghi chú row (a whole "(…)" value), the same for every person row (review FAIL 3) */
   if(!p.free)kitOff(c,j95sNotFree(p.x),"không theo được hôm nay");return c});
  const go=ids=>{S.ent={d:j95sDay(),ids,at:k};let ok=false;try{goTo(k);ok=S.place!=="home"||Q.length>0}catch(e){j95sErr("ent",e)}if(!ok)delete S.ent;/* she did not leave (a gate, no khắc): the card comes again */};
  const goOpt={n:"Lên đường",fx:{},entGo:1,x:"",go:()=>go(opts.filter(c=>c.entId&&c.sel&&!c.off).map(c=>c.entId))};
- opts.push(goOpt,{n:"Đi một mình",fx:{},x:"thành: không ai biết việc ngươi làm bên ngoài · mất: không ai thấy giùm ngươi; mọi người ở lại trông cung",go:()=>go([])},{n:"Thôi",fx:{},x:""});
+ opts.push(goOpt,{n:"Đi một mình",fx:{},x:"thành: việc ngươi làm bên ngoài được giữ kín, mọi người ở lại trông cung · mất: không ai thấy giùm ngươi",go:()=>go([])},{n:"Thôi",fx:{},x:""});
  j95sEntX(opts);
- let who=null;try{who=S.maid&&typeof pMaid==="function"?pMaid():null}catch(e){}
- Q.push({t:"Chọn người theo hầu",who,h:`<p>Hôm nay ra khỏi cung, ngươi dẫn ai theo? Chọn bao nhiêu người cũng được, trong những người đang ở cung và rảnh. Đã đi rồi thì hôm nay không gọi thêm người được nữa.</p><p class="past">Người theo hầu thấy những gì ngươi thấy, có thêm tai mắt cho ngươi; nhưng họ cũng biết việc ngươi làm và có thể kể lại với người khác. Người ở lại trông cung.</p>`,opts,entp:1});
+ /* no `who`: a list of her people, nobody speaks — a person pop-up always carries the event banner (KIT 50 / OD:L448), and law 10 allows a big
+    picture only when the content fits without scrolling (review FAIL 4); the people are the option rows themselves */
+ Q.push({t:"Chọn người theo hầu",h:`<p>${J95S_ENT_T[0]}</p><p class="past">${J95S_ENT_T[1]}</p>`,opts,entp:1,pid:"entpick"});/* a picker she opened herself (her tap on Dư đồ), not an event: the kit act-picker switch (jk2b KIT_ACT_PIDS, as jpoison / jts) = no event picture (law 10: the list scrolls) */
  showModal();return true}
+try{KIT_ACT_PIDS.add("entpick")}catch(e){}
 function j95sEntX(opts){const g=opts.find(c=>c.entGo);if(!g)return;const n=opts.filter(c=>c.entId&&c.sel&&!c.off);
- g.x=n.length?`thành: ${n.length} người theo (${n.map(c=>c.n).join(", ")}), thấy giùm ngươi những gì xảy ra · mất: họ biết việc ngươi làm, có thể kể lại với người khác`:"kèm: chưa chọn ai, bấm vào tên để chọn người theo";
+ g.x=n.length?`thành: ${n.length} người theo (${n.map(c=>c.n).join(", ")}), thấy giùm ngươi những gì xảy ra · mất: họ biết việc ngươi làm, có thể kể lại với người khác`:"(chưa chọn ai, bấm vào tên để chọn người theo)";
  if(!n.length)kitOff(g,"chưa chọn ai","bấm vào tên người muốn dẫn theo");else delete g.off}
 /* the picked rows wear the kit selection outline; a tap on a person toggles her (the card stays open) */
 function j95sEntMark(){const m=Q[0];if(!m||!m.entp)return;document.querySelectorAll("#modal .opt[data-m]").forEach(b=>{const c=m.opts[+b.dataset.m];if(!c||!c.entId)return;b.classList.toggle("ksel",!!c.sel);b.setAttribute("aria-pressed",c.sel?"true":"false")})}
-(function(){const s0=showModal;showModal=function(){const r=s0.apply(this,arguments);try{j95sEntMark()}catch(e){}return r}})();
+/* the kit's event-art lookup (jk4 kitEvArt) tags any shown item with a guessed evId (text "tai mắt" → cat:tu-tinh); on the re-render after a tap
+   that tag would pull the event picture onto this act picker (jk2b want = …||m.evId) — the picker is not an event (KIT_ACT_PIDS), so the guess is
+   dropped before each render (KIT REQUEST filed: dev/kit/KIT_REQUESTS.md "kitEvArt evId tag on act pickers") */
+(function(){const s0=showModal;showModal=function(){try{const m=Q[0];if(m&&m.entp)delete m.evId}catch(e){}const r=s0.apply(this,arguments);try{j95sEntMark()}catch(e){}return r}})();
 document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("#modal .opt[data-m]");if(!b)return;const m=Q[0];if(!m||!m.entp)return;const c=m.opts[+b.dataset.m];if(!c||!c.entId)return;
  e.preventDefault();e.stopImmediatePropagation();if(c.off)return;c.sel=!c.sel;j95sEntX(m.opts);showModal()},true);
 /* the gate: her first departure of the day from her palace asks first (inner gates — access card, walk — still run when she really goes) */
@@ -76850,7 +76867,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="62ca0560bb1d";window.CTM_BUILD=BUILD;
+const BUILD="e1d14a596eb3";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
