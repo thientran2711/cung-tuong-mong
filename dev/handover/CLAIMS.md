@@ -994,3 +994,4 @@ looks-2 overlay art (fx-stain-tra/uot, smudge, ink, pox, scars, messy hair) | im
 | smudge-code r16 (extra short run at nặng, big-size darker, +10/+20 % options; sonnet; brief briefs/smudge-r16.md) | review/smudge-code | MAIN s41 | session_01UV1SzhMG33iYZzEKjZvDzg | RUNNING | 18/11 01:23Z |
 | OWNER BUG greet-stranger (male stranger: no face/name after greeting + duplicate result lines; opus; brief briefs/greet-stranger-bug.md) | review/greet-stranger | MAIN s41 | session_01UV1SzknEXr3P2cemBDGhow | RUNNING | 18/11 01:40Z |
 | looks batch LIVE f6ee11b1 (main 3da5720a → f6ee11b1; ROLLBACK 3da5720a): toil-looks5 + tuyet-glow v8; CDN 38 JSON | review/looks-s40 | MAIN s41 | session_01UV1Szk7eZQzR2d2t4rhiFj | LIVE | 18/11 01:36Z |
+| CHECK garden-night (scene light per buổi + history: outer men in inner garden at night; report only; opus) | handover reports/garden-night-check.md | MAIN s41 | (opening) | RUNNING | 18/11 01:53Z |
