@@ -996,3 +996,4 @@ looks-2 overlay art (fx-stain-tra/uot, smudge, ink, pox, scars, messy hair) | im
 | looks batch LIVE f6ee11b1 (main 3da5720a → f6ee11b1; ROLLBACK 3da5720a): toil-looks5 + tuyet-glow v8; CDN 38 JSON | review/looks-s40 | MAIN s41 | session_01UV1Szk7eZQzR2d2t4rhiFj | LIVE | 18/11 01:36Z |
 | OWNER BUG men-forbidden (man in Ngự hoa viên at night as normal stranger; existing law OD:L168 + jmen.js not applied; opus; was CHECK garden-night) | review/men-forbidden | MAIN s41 | session_01UV1SziLuyrJEqfUqguNP1W | RUNNING | 18/11 01:38Z |
 | staff-cap-fix LIVE 62a6846f (main f6ee11b1 → 62a6846f; ROLLBACK f6ee11b1): capTrim one rule + every removal told + hireCard refund | review/staff-cap-fix-r6 | MAIN s41 | session_01UV1SzkW9AbJs8kAvGGWzkv | LIVE | 18/11 01:43Z |
+| staff-cap-APPLY (owner table A + QN 2+0, roomFor FIGIX fix; opus BIG; brief briefs/staff-cap-apply.md) | review/staff-cap-apply | MAIN s41 | (opening) | RUNNING | 18/11 01:45Z |
