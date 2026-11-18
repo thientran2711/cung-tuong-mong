@@ -424,7 +424,7 @@
 "status": "DICE-ONLY",
 "group": "G1",
 "event": "\"Có người đến\" 1-3 visitors/week (gossip/ally/borrow/gift/hostile/sorr",
-"fp": "dead||S.out)return;const n=1+(roll(50)?1:0)+(roll(25)?1:0);for(let i=0"
+"done": "(k,{}))O.push(o);const o=npwPick(O,x=>x.s);if(!o)return null;npwStamp(o.kind,o"
 },
 {
 "f": "j24.js",
@@ -432,7 +432,7 @@
 "status": "DICE-ONLY",
 "group": "G1",
 "event": "\"Có người đến\" 1-3 visitors/week (gossip/ally/borrow/gift/hostile/sorr",
-"fp": "fr.length)T.push(()=>{const v=pick(fr);const kind=pick([\"gossip\",\"ally"
+"done": "const o=npwPick(O,x=>x.s);if(!o)return null;npwStamp(o.kind,o.who)"
 },
 {
 "f": "j24.js",
@@ -440,7 +440,7 @@
 "status": "DICE-ONLY",
 "group": "G1",
 "event": "\"Có người đến\" 1-3 visitors/week (gossip/ally/borrow/gift/hostile/sorr",
-"fp": "  const k=pick([\"tuithom\",\"sonphan\",\"luahang\",\"huo"
+"done": "const o=npwPick(O,x=>x.s);if(!o)return null;npwStamp(o.kind,o.who)"
 },
 {
 "f": "j24.js",
@@ -448,7 +448,7 @@
 "status": "DICE-ONLY",
 "group": "G1",
 "event": "\"Có người đến\" 1-3 visitors/week (gossip/ally/borrow/gift/hostile/sorr",
-"fp": "os.length)T.push(()=>{const v=pick(hos);return{ev:1,t:\"Có người đến\",w"
+"done": "const o=npwPick(O,x=>x.s);if(!o)return null;npwStamp(o.kind,o.who)"
 },
 {
 "f": "j24.js",
@@ -456,7 +456,7 @@
 "status": "DICE-ONLY",
 "group": "G1",
 "event": "\"Có người đến\" 1-3 visitors/week (gossip/ally/borrow/gift/hostile/sorr",
-"fp": "ry.length)T.push(()=>{const v=pick(sorry);return{ev:1,t:\"Có người đến\""
+"done": "const o=npwPick(O,x=>x.s);if(!o)return null;npwStamp(o.kind,o.who)"
 },
 {
 "f": "j24.js",
@@ -464,7 +464,7 @@
 "status": "DICE-ONLY",
 "group": "G1",
 "event": "\"Có người đến\" 1-3 visitors/week (gossip/ally/borrow/gift/hostile/sorr",
-"fp": "y plan (jagacts2 emp:tea) */&&roll(VT.p))T.push(empTeaCard)}"
+"done": "const o=npwPick(O,x=>x.s);if(!o)return null;npwStamp(o.kind,o.who)"
 },
 {
 "f": "j24.js",
@@ -472,7 +472,7 @@
 "status": "DICE-ONLY",
 "group": "G1",
 "event": "\"Có người đến\" 1-3 visitors/week (gossip/ally/borrow/gift/hostile/sorr",
-"fp": "const sv=(S.staff||[]).length?pick(S.staff):null;if(sv)T.push(()=>({ev"
+"done": "const o=npwPick(O,x=>x.s);if(!o)return null;npwStamp(o.kind,o.who)"
 },
 {
 "f": "j24.js",
@@ -480,7 +480,7 @@
 "status": "DICE-ONLY",
 "group": "G1",
 "event": "\"Có người đến\" 1-3 visitors/week (gossip/ally/borrow/gift/hostile/sorr",
-"fp": ".loy.firm)T.push(()=>{const v=pick(bad);kn();S.dKnown=S.dKnown||{};S.d"
+"done": "const o=npwPick(O,x=>x.s);if(!o)return null;npwStamp(o.kind,o.who)"
 },
 {
 "f": "j24.js",
@@ -488,7 +488,7 @@
 "status": "DICE-ONLY",
 "group": "G1",
 "event": "debtor repays; servant cause event; wronged servant sells info",
-"fp": "]).slice()){if(S.turn-L.t>=1&&roll(40)){const v=RV(L.id);S.loans.splic"
+"done": "npcWhy(\"repay\",{v})"
 },
 {
 "f": "j24.js",
@@ -496,7 +496,7 @@
 "status": "DICE-ONLY",
 "group": "G1",
 "event": "debtor repays; servant cause event; wronged servant sells info",
-"fp": "w>3)s.cause=null;if(s.cause||!roll(12))continue;const L=qv(SCAUSE,s)||"
+"done": "3)s.cause=null;}{const X=npcWhy(\"svCause\");const s=X&&X.who;if(s){const L=qv("
 },
 {
 "f": "j24.js",
@@ -504,7 +504,7 @@
 "status": "DICE-ONLY",
 "group": "G1",
 "event": "debtor repays; servant cause event; wronged servant sells info",
-"fp": "e&&s.loyal<BAL.loy.out);if(g&&roll(15)){const v=pick(liveRivals(true))"
+"done": "<BAL.loy.out);const X=g&&npcWhy(\"svSell\",{g});if(X){const v=X.tgt;if(v){evA(v"
 },
 {
 "f": "j28.js",

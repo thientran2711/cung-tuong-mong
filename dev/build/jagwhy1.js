@@ -58,3 +58,27 @@ npwReg("arson",{grp:"consort",who:()=>liveRivals(true),why(a,c){return npw1Best(
 npwReg("rvHarm",{grp:"consort",who:()=>liveRivals(false),why(a,c){return npw1Best(a,liveRivals(false),c.h)}});
 npwReg("rvFeud",{grp:"consort",who:()=>liveRivals(false),why(a,c){const x=npw1Best(a,liveRivals(false),c.h);if(!x)return null;x.s=(x.s+npwB().min+hostility(x.t,a))/2;return x}});
 npwReg("omen",{grp:"consort",who:()=>liveRivals(true),why(a,c){return npw1Best(a,liveRivals(false).concat([S]),c.h,npw1B("dil").omenBar)}});
+/* ---- G1 part 3: people who come to her door (j24 approachOne / approaches / servCauses / loans / the grudging servant). BAL.ag.why.ap ----
+   apFriend  a consort who likes her (aff ≥ ap.fr, motiveOK visit): borrow when short of silver (bac < ap.poor), offer sisterhood when fond
+             (aff ≥ ap.ally, no faction), bring a gift when fond (aff ≥ ap.gift), else chat · apTaunt a consort with a motive (provoke)
+   apSorry   a consort who wronged her and is not scheming (oán ≥ ap.sorry, not Xảo quyệt, not hating her) · empTea the Emperor (Sủng ≥ tea.minSung)
+   thCall    the Thái hậu when she favours her (Thái hậu ≥ ap.th) · svAsk a loyal servant (lòng ≥ loy.mid) · maidWarn her loyal maid, about the
+             most dangerous consort · manPoem a man whose tình ý ≥ ap.poem · svDefect a maid unhappy with her mistress (lòng < loy.bad)
+   repay     a debtor repays when she has the silver (bac ≥ ap.repay) · svSell a servant with a grudge sells news to the consort most set against her
+   svCause   a servant's own nature shows (SCAUSE by nết), one servant a tuần, each every cd.svCause tuần */
+const NPW1_TH={id:"th",name:"Thái hậu"};
+function npw1ApSub(v){const A=npw1B("ap");const f=aff(v,S);if((v.bac||0)<A.poor)return "borrow";if(f>=A.ally&&!(typeof facOf==="function"&&facOf(v)))return "ally";if(f>=A.gift)return "gift";return "gossip"}
+const NPW1_APR={borrow:"túng bạc",ally:"muốn có chỗ dựa",gift:"quý ngươi",gossip:"muốn hàn huyên"};
+npwReg("apFriend",{grp:"consort",who:()=>liveRivals(true).filter(v=>!v.confined),why(v){if(aff(v,S)<npw1B("ap").fr||!motiveOK(v,S,"visit").ok)return null;return {s:npwB().min+aff(v,S),t:S,r:NPW1_APR[npw1ApSub(v)]}}});
+npwReg("apTaunt",{grp:"consort",who:()=>liveRivals(true).filter(v=>!v.confined&&bandOf(danger(v,S))>=1),why(v){return npw1Mot(v,S,"provoke")}});
+npwReg("apSorry",{grp:"consort",who:()=>liveRivals(true).filter(v=>!v.confined&&!hasT(v,"Xảo quyệt")),why(v){const A=npw1B("ap");const o=oan(v,S);if(o<A.sorry||aff(v,S)<0)return null;return {s:npwB().min+o/2,t:S,r:"hối chuyện cũ"}}});
+npwReg("empTea",{grp:"emp",who:()=>{const VT=BAL.visit.tea;return S.emp&&S.sung>=VT.minSung&&!S.out&&!(window.agDOn&&agDOn())?[S.emp]:[]},why(){return {s:npwB().min+S.sung-BAL.visit.tea.minSung,t:S,r:"nhớ ngươi"}}});
+npwReg("thCall",{grp:"th",who:()=>!S.thDead&&S.th>=npw1B("ap").th?[NPW1_TH]:[],why(){return {s:npwB().min+S.th/4,t:S,r:"muốn có người hầu chuyện"}}});
+npwReg("svAsk",{grp:"srv",who:()=>(S.staff||[]).filter(s=>(s.loyal||0)>=BAL.loy.mid),why(s){return {s:npwB().min+((s.loyal||0)-BAL.loy.mid)/2,t:S,r:"nhà có việc ngặt"}}});
+npwReg("maidWarn",{grp:"srv",who:()=>S.maid&&S.maid.loyal>=BAL.loy.firm?[S.maid]:[],why(){let b=null,d=-1;for(const v of liveRivals(true)){const x=danger(v,S);if(bandOf(x)>=2&&x>d){d=x;b=v}}return b?{s:npwB().min+d,t:b,r:"thấy người bên ấy dò hỏi"}:null}});
+npwReg("manPoem",{grp:"man",who:()=>(S.men||[]).filter(m=>m.alive&&(m.tinh||0)>=npw1B("ap").poem&&!(typeof menBanned==="function"&&menBanned(m))),why(m){return {s:npwB().min+(m.tinh||0),t:S,r:"đem lòng thương ngươi"}}});
+npwReg("svDefect",{grp:"srv",who:()=>{const L=[];for(const v of liveRivals(true))for(const s of (v.staff||[]))if(s.role==="maid"&&s.loyal<BAL.loy.bad&&s.spyFor!=="me")L.push(s);return L},
+ why(s){const v=liveRivals(true).find(x=>(x.staff||[]).includes(s));return v?{s:npwB().min+(BAL.loy.bad-s.loyal),t:v,r:"bất mãn với chủ"}:null}});
+npwReg("repay",{grp:"consort",who:c=>c.v?[c.v]:[],why(v){return (v.bac||0)>=npw1B("ap").repay&&aff(v,S)>=0?{s:npwB().min,t:S,r:"giữ chữ tín"}:null}});
+npwReg("svSell",{grp:"srv",who:c=>c.g?[c.g]:[],why(g){let b=null;for(const v of liveRivals(true)){const o=npw1Mot(v,S,"spy");if(o&&(!b||o.s>b.s))b={s:npwB().min+(BAL.loy.out-(g.loyal||0)),t:v,r:"ôm hận ngươi phạt oan"}}return b}});
+npwReg("svCause",{grp:"srv",who:()=>(S.staff||[]).filter(s=>!s.cause),why(s){return {s:npwB().min,t:S,r:"tính nết"}}});

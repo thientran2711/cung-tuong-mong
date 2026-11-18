@@ -1223,13 +1223,16 @@ BAL.ag.why={on:1,min:20,near:.6,top:3,pow:1.5,cd:{_:4},wit:{eye:10,host:1},tell:
 /* npc-purpose G1 kinds (jagwhy1; the stray man). affair: (sung − Sủng) × sungK − Đức × ducK + kin (Kín đáo); affairOut: proof ≥ ev and grudge ≥ host;
    tryst: base + rove (roving man) − fear (Kín đáo), cd [roving, other] = the old 2 / 3 tuần cadence; letter: w per reason (old order of reasons), cd 12 = once a season;
    seek: base + her looks above sac, his gap = BAL.net menGap; menGrudge: s while his grudge lasts, cd 3 = the old cadence */
-Object.assign(BAL.ag.why,{affair:{sung:30,sungK:1.5,ducK:.2,kin:8},affairOut:{ev:2,host:45},tryst:{base:30,rove:10,fear:12,cd:[2,3]},
- letter:{w:{preg:70,confined:60,plan:45,jealous:30}},seek:{base:15,sac:60},menGrudge:{s:30}});
-Object.assign(BAL.ag.why.cd,{affair:12,affairOut:4,letter:12,menGrudge:3});
+Object.assign(BAL.ag.why,{affair:{sung:30,sungK:1.5,ducK:.2,kin:8,cd:12},affairOut:{ev:2,host:45,cd:4},tryst:{base:30,rove:10,fear:12,cd:[2,3]},
+ letter:{w:{preg:70,confined:60,plan:45,jealous:30},cd:12},seek:{base:15,sac:60},menGrudge:{s:30,cd:3}});
 /* npc-purpose G1 kinds — weekly cards j3/j7 (makeDil). dil.gap = tuần between two cards (≈ the old 22 %/tuần roll), dil.world = weight of a card
    nobody schemes (festival, flood, illness, a duty question); grudge kinds: gate = motiveOK (j95), s = ag.why.min + hostility; arson / omen also
    need hostility ≥ arsonBar / omenBar (the heaviest deeds); meAlly: motiveOK ally + plot vs the Empress and liking ≥ allyAff; hhGreed: Empress with a greedT nết; empAsk: (want − consorts) × k while
    there is room; coldAsk: base + liking × aff + Đức × duc; loveFound: base + her tai mắt × eye; coldFriend: liking for the fallen one to hear of it */
 Object.assign(BAL.ag.why,{dil:{gap:4,world:25,arsonBar:45,omenBar:40,coldFriend:20,allyAff:20,greed:30,greedT:["Tham lam","Tham tiền","Ham lợi"],
  emp:{want:8,k:6},cold:{base:15,aff:.5,duc:.1},love:{base:30,eye:4}}});
+/* npc-purpose G1 part 3 (j24 visitors, jagwhy1): fr / ally / gift = her liking; poor = bac under which a friend borrows; sorry = oán to apologise;
+   th = Thái hậu regard to call her; poem = a man's tình ý; repay = silver a debtor needs to repay; max = visitors a tuần (old 1-3, mean 1.75) */
+Object.assign(BAL.ag.why,{ap:{max:2,fr:10,ally:40,gift:25,poor:40,sorry:20,th:10,poem:10,repay:40}});
+Object.assign(BAL.ag.why.cd,{apFriend:4,apTaunt:4,apSorry:8,empTea:3,thCall:4,svAsk:12,maidWarn:6,manPoem:4,svDefect:8,repay:2,svSell:12,svCause:8});
 Object.assign(BAL.ag.why.cd,{meHarm:6,meAlly:24,hhCane:8,hhMe:12,hhGreed:24,empAsk:24,coldAsk:12,loveFound:12,arson:24,rvHarm:6,rvFeud:6,omen:36});

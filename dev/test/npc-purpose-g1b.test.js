@@ -15,7 +15,7 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
   const SCH=new Set(Object.keys(DIL_K).concat(["vase","coldletter","embezzle","loveletter"]));
   S.rank=Math.max(S.rank,2);S.nights=Math.max(S.nights||0,2);S.year=Math.max(S.year,2);
   const L=liveRivals(false);o.n=L.length;for(const v of rivals)v.affair=null;
-  const calm=()=>{for(const v of rivals){v.oan=0;v.ghen=0;v.rel=10;v.ro={};v.rl={};for(const w of rivals)if(w!==v)v.rl[w.id]=10}};const draw=(n)=>{const c={};for(let i=0;i<n;i++){delete S.npw;S.seen={};const d=makeDil();const id=d?d.pid:"none";c[id]=(c[id]||0)+1;if(d)o.last=d}return c};
+  const calm=()=>{for(const v of rivals){v.sung=20;v.oan=0;v.ghen=0;v.rel=10;v.ro={};v.rl={};for(const w of rivals)if(w!==v)v.rl[w.id]=10}};const draw=(n)=>{const c={};for(let i=0;i<n;i++){delete S.npw;S.seen={};const d=makeDil();const id=d?d.pid:"none";c[id]=(c[id]||0)+1;if(d)o.last=d}return c};
   const greedy=!!NPW.reg.hhGreed.why(rivals[0],{});try{/* 1 */for(const v of rivals)if(v.out)v.out=false;calm();let c=draw(200);o.c1=c;o.w1=Object.keys(c).every(k=>k==="none"||WORLD.has(k)||!SCH.has(k)||(k==="embezzle"&&greedy));
    /* 2 */const a=L[0];calm();a.oan=80;a.rel=-30;c=draw(200);o.c2=c;const me=["doll","guardrumour","ghost","maidhostage","taster","poisongift"];let bad=0,seen=0,why=0;
    for(let i=0;i<200;i++){delete S.npw;S.seen={};const d=makeDil();if(!d||!me.includes(d.pid))continue;seen++;const pp=d.pp;const actor=pp.a!=null?pp.a:pp.v;if(actor!==a.id)bad++;if(pp.y)why++}
