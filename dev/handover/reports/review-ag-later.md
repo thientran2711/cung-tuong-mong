@@ -86,3 +86,12 @@ Finding #3 (fixed, pushed, heads 49122cf5 / 0863517a): the Thái hậu's househo
 Known flake (pre-existing, not blocking): ag-know 'ONE RULE (NPC)' fixture skip/null ~1 in 4 (red before and after #3).
 Next: LANDER #3 merges 49122cf5 / 0863517a + reshowQ fix + main a95e8d4 → SẴN SÀNG KIỂM → my re-gate (review reshowQ/qBlocked, coop-e2e ×9 under busy loops, quickcheck ×2, set-bonus-check, shelf-check, th-name/kn-late/toil-harsh) → PASS ag-all-2-land first → C-AG #10 + MAIN ROOT-46.
 ~79% xong / ~60% chơi được
+
+### REVIEWER #2 — round 3 (18/11 ~07:00–12:10Z): flakes, PERF
+- ag-truth loyal-servant check made deterministic (forced tell for the wording; 200-pick share ≥ 120 tell, observed 172–187) → a937119a / eda2a78f.
+- Odds-cap r2 heads-up (main 5cbfd620): BAL.odds.softFail = {spend:["suc"]} → our agSoftTxt (F.me/F.npc) would print 'undefined' in ~13 ag soft-fail sites; must route through j63 oddsSoft (her) / same wording for NPCs. Probe /home/user/wt/rvlog/t/soft-line.js (12 buổi with agTry→miss, agSoft→on; no undefined/NaN/{n}).
+- PERF (C-AG #11/#12 rule: > +10 % = FAIL). Engine probe /home/user/wt/rvlog/t/eng.js (seeded Math.random, render/showModal stubbed, bot life, placeWhere+agFlush+nextBuoi, CDP inclusive): 120 buổi × seeds 1/2/3 alternating — ag-all-2-land 7301df77 41.1/43.5/40.9 ms per buổi (mean 41.8) vs live 12a1e4be 31.6/30.0/28.7 (mean 30.1) = **+39 % → FAIL item** (G1 #5: +25–31 %). Earlier UI-inclusive measures (quickcheck +8.8 %, bot+render +5.7 %) dilute it.
+  Hot paths (ms/buổi ag vs live): placeWhere 12.9/6.4 (agDayEnsure 3.5 → agReplanB 2.6 → agDrawPerson 3.0 → agDrawB 2.6 → agOptsG 2.5; agTick 3.8/1.3), npcEncounters 4.6/1.3 (tl2Meet 2.2, tl2See 1.3, toilNpc 1.8/0.5), j95planRival 3.5/0.44, renderStage 4.0/1.5 (DOM layout in the step).
+  Fix list to LANDER #4: (1) agReplanB redraws only replanned / changed people (keep → reuse D.P[id][b]); (2) memo agOptsG per person per bkey + needs; (3) cache j95planRival per bkey; (4) tl2Meet/tl2See: per-day look cache, skip pairs not together; (5) stage DOM refresh out of the step. Target ≤ +10 % on the same probe (×80 and ×160).
+Verdict: NO PASS yet (perf FAIL item open; odds-cap merge + reshowQ + live main pending on LANDER #4's head).
+~81% xong / ~60% chơi được
