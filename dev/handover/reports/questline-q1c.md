@@ -1,4 +1,4 @@
-# Q1c — men help asks (jnrask_m.js) — SẴN SÀNG KIỂM b013ddf (fix 2, on q1a a615eb7)
+# Q1c — men help asks (jnrask_m.js) — PASS b013ddf → READY 154506f (on q1a 90796d3)
 PRIORITY #1 CHECK: OD L644/L1072/L1243/L1252 | main none (Q1 engine not on main yet) | review/questline-q1a 1b6005a (engine + shared nrask-scan, hz exempt), review/questline-q1b 344e1e9 (no clash), review/questline-q1c (this) | claims E7c2 session_01DgYSWkXhh7hPLBJjzFYMWJ (successor of E7c session_01DgYSWmbeLw227mrkMikC5W)
 START_CTX ~5 % · lineage depth 2 · worker (no children).
 
@@ -58,3 +58,5 @@ review/questline-q1c = 01cc869 + 782eed7 + 4c039a2 + 91d8ab1 (my 4 commits, data
 Tests on b013ddf: nrask-m-scan PASS; nrask-scan ALL PASS (with q1b b34eaed added: 7 fails, all Q1b keys, 0 men keys); nrask-engine ALL PASS (7c loads every jnrask*.js); nrask-m-shots SHOTS OK Fold + iPad (local only, CDN 401); quickcheck PASS (open 1336 ms, old save ok, perf render 151/156, tab 354/362, buổi 875/781) — core gates: G3 kit-conform FAIL only «tutorial: 0 intro pages (want 4)», the known tutorial flake (Foreman E: not q1c's).
 
 ## VERDICT: PASS b013ddf (E7r3 round 3, 18/11 08:20Z). Next: when E7a2 sends the new q1a sha, rebase q1c (data unchanged), run scans + quickcheck, send «READY q1c <sha>».
+
+## READY 154506f (18/11 ~08:45Z): rebased on q1a 90796d3 (E7a2 fix 3, main a2ad240, shared TIME rule). Data/tests identical to PASS b013ddf (git diff empty for jnrask_m.js + both tests). nrask-m-scan PASS, nrask-scan ALL PASS (shared TIME rule included), nrask-engine ALL PASS, quickcheck PASS with core gates PASS (render 161/161, tab 341/360, buổi 1106/916, old save ok).

@@ -43,4 +43,4 @@ princess-sample (Nam Chiếu + Bắc Địch, 2 figures, sample only) | handover
 | E8 STEAL MINI-GAME READY FF (E8r3 PASS 814078e5; main 9c581406 merged) | review/steal-minigame | E ROOT #3 | session_01DgYSWm5h3LgBS7jeBr3BtW | READY FF 6b5414a8 | 18/11 10:05Z |
 | d19-gift-work — Biếu quà làm lành with a work/item (ORDER ROOT-49 07:41Z; opus BIG; brief briefs/d19-gift-work.md) | review/d19-gift-work | B | session_01N1tNP3DzrQ7aYVjZPFWzCr | RUNNING | 18/11 08:20Z |
 | live-test-reds (ORDER ROOT-49 07:39Z; sonnet; brief briefs/live-test-reds.md) | review/live-test-reds | B | session_01N1tNP5EJX7wasCWUcM3KTF (depth 1) | RUNNING | 18/11 08:20Z |
-| E7c2 QUESTLINE Q1c help-hồi text (opus; successor of E7c) | review/questline-q1c | E ROOT #3 | session_01DgYSWkXhh7hPLBJjzFYMWJ | PASS b013ddf (E7r3 r3) — idle; rebase on next q1a sha, then READY | 18/11 08:25Z |
+| E7c2 QUESTLINE Q1c help-hồi text (opus; successor of E7c) | review/questline-q1c | E ROOT #3 | session_01DgYSWkXhh7hPLBJjzFYMWJ | READY 154506f (on q1a 90796d3; PASS b013ddf content) | 18/11 08:25Z |
