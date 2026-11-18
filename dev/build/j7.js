@@ -22,8 +22,8 @@ ev("doll",()=>S.rank>=1&&liveRivals(false).length,()=>({v:rvTop((a,b)=>b.ghen-a.
 ev("poisongift",()=>liveRivals(false).length&&S.rank>=1,()=>({v:rvAny().id,o:od(BAL.odb.j7.odO_2+eyes(S)*5+S.tamco/4)}),p=>{const v=RV(p.v);if(!v)return null;return{who:pv(v),
  t:`Hộp điểm tâm đề tên ngươi gửi sang cung ${v.name}; cung nữ nếm thử liền thổ huyết.<br>Cả hậu cung xôn xao: ngươi hạ độc.`,o:[
  {n:"Kêu oan, xin tra người đưa quà",fx:{},x:`${word(p.o)} · thành: được minh oan, Danh ${balSg(BAL.eff.j7.danhGo)} · hỏng: bị phạt nặng`,go:()=>{if(roll(p.o)){apply({danh:BAL.eff.j7.danhGo});log("Tra ra tiểu thái giám đưa quà đã bị mua chuộc; ngươi được minh oan.")}else{apply({danh:-6});v.rel-=20;punish("gửi quà có độc",2)}}},
- {n:"Nhờ Thái hậu đứng ra",fx:{th:-12},x:"Thái hậu ém chuyện; nàng vẫn nghi ngươi",go:()=>{v.rel-=15}},
- {n:"Đẩy tội cho cung nữ",fx:{maid:-40,duc:-6},x:"nàng bị đánh 30 trượng"}]}});
+ {n:"Nhờ Thái hậu đứng ra",fx:{th:BAL.cv.poison.th},x:`thành: Thái hậu ém chuyện, ngươi chắc chắn thoát tội · thiện cảm ${balSg(BAL.cv.poison.rel)} (nàng vẫn nghi ngươi)`,go:()=>{v.rel+=BAL.cv.poison.rel}},
+ {n:"Đẩy tội cho cung nữ",fx:{maid:BAL.cv.poison.maid,duc:BAL.cv.poison.duc},x:"thành: ngươi chắc chắn thoát tội · cung nữ bị đánh 30 trượng"}]}});
 /* rumours */
 ev("guardrumour",()=>S.nights>=1,()=>({v:(rvAny()||{}).id,o:od(BAL.odb.j7.odO_3+S.duc/2)}),p=>{const v=p.v!=null?RV(p.v):null;return{
  t:"Lời đồn lan khắp các cung: đêm đêm có thị vệ lẻn vào tẩm cung của ngươi.<br>Hoàng thượng chưa nói gì, nhưng đã hai tuần không lật thẻ ngươi.",o:[
