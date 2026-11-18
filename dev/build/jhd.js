@@ -34,6 +34,7 @@ Object.assign(BAL,{hd:{
  a0:[12,24],           /* the hoa điền comes off the tray tilted this many degrees (hashed per day; she straightens it) */
  rot:3,                /* degrees per tilt tap */
  npc:{q0:.5,qSk:.3,spread:.4},npcCap:.95,
+ drop:["hd_mai","hoadien_bac"],/* r3 (owner 00:56Z: a design that is ONE flat colour is dropped; the rule is how it LOOKS): hoa điền designs no longer given out (shop, gifts, finds, promotion, NPC holdings). The items stay in the table so old saves still show them; hdMap sends an owned / recorded one to the nearest KEPT design by phẩm (tie: the lower). Dropping another design later = one more key in this list. */
  shop:35,              /* % a restock brings a hoa điền */
  npcHave:60,           /* % a consort holds one (once) */
  find:4,               /* % per month her people find one */
@@ -45,8 +46,11 @@ Object.assign(BAL,{hd:{
 try{BAL.mgTier.lev=BAL.mgTier.lev||{};BAL.mgTier.lev.hoadien={tol:[.7,1.2]}}catch(e){}
 
 /* ---------- items ---------- */
+function hdDropped(k){return !!(BAL.hd.drop&&BAL.hd.drop.includes(k))}
+function hdKeptNear(P){const K=WD_LIST.filter(r=>r[1]==="hd"&&!hdDropped(r[0]));if(!K.length)return[];let best=1e9;K.forEach(r=>{best=Math.min(best,Math.abs(r[3]-P))});const c=K.filter(r=>Math.abs(r[3]-P)===best);const lo=Math.min(...c.map(r=>r[3]));return c.filter(r=>r[3]===lo).map(r=>r[0])}
+function hdMap(k){if(!hdDropped(k))return k;const w=WD_ITEMS[k];const L=hdKeptNear(w?w.P:1);return L.length?L[0]:k}
 function hdIsK(k){const w=typeof WD_ITEMS==="object"?WD_ITEMS[k]:null;return !!(w&&w.sl==="hd")}
-function hdOwned(p){const L=[];const seen={};for(const e of ((p&&p.inv)||[]))if(e&&!e.h&&hdIsK(e.k)&&!seen[e.k]){seen[e.k]=1;L.push(e)}return L.sort((a,b)=>WD_ITEMS[b.k].P-WD_ITEMS[a.k].P)}
+function hdOwned(p){const L=[];const seen={};for(const e of ((p&&p.inv)||[])){if(e&&!e.h&&hdIsK(e.k)&&hdDropped(e.k))e.k=hdMap(e.k);if(e&&!e.h&&hdIsK(e.k)&&!seen[e.k]){seen[e.k]=1;L.push(e)}}return L.sort((a,b)=>WD_ITEMS[b.k].P-WD_ITEMS[a.k].P)}
 function hdLux(rec){return rec&&rec.k&&hdIsK(rec.k)?wdLux(rec.k):0}
 function hdPick(P){try{return wdPickAt(P,"hd",0)}catch(e){return null}}
 /* the sprite placed on the face: img/hd-<key>.webp (transparent, Foreman C ART REQUEST) — until it exists, the item's own picture */
@@ -134,7 +138,7 @@ function hdStep(ctx){try{if(!S||!TOIL.st)return false;const L=hdOwned(S);if(!L.l
    HD_ANCHOR), never where she dragged it; straight when q ≥ BAL.toil.fail, the fixed tilt BAL.hd.vungA when vụng. Size BAL.hd.size × face width.
    Painted once per (picture, hoa điền, vụng) into a transparent canvas the size of the picture; a picture without face points shows none (never guessed). */
 const HD_FL={},HD_FLQ=[];
-function hdShown(p){try{const r=typeof toilMkRec==="function"?toilMkRec(p):null;if(!r||!r.makeup||!r.hd||!hdIsK(r.hd.k))return null;return{k:r.hd.k,vung:hdVung(r.hd.q),sz:hdSizeOf(p)}}catch(e){return null}}
+function hdShown(p){try{const r=typeof toilMkRec==="function"?toilMkRec(p):null;if(!r||!r.makeup||!r.hd||!hdIsK(r.hd.k))return null;return{k:hdMap(r.hd.k),vung:hdVung(r.hd.q),sz:hdSizeOf(p)}}catch(e){return null}}
 function hdFaceLayer(p,file){if(!BAL.hd.npcShow&&p&&p!==S&&!p.coop)return"";const sh=hdShown(p);if(!sh||!file)return"";let v=null;try{v=MK_FIT.get(file)}catch(e){}if(!v)return"";
  const key=[file,sh.k,sh.vung?1:0,sh.sz].join("|");let e=HD_FL[key];if(!e){e=HD_FL[key]={src:"",box:null};HD_FLQ.push(key);if(HD_FLQ.length>80)delete HD_FL[HD_FLQ.shift()];hdFlPaint(file,sh,e,key)}
  return `<img class="kmkl" data-hdl="${key}" src="${e.src||TOIL_BLANK}" alt="" aria-hidden="true" style="${hdBoxCss(e.box)}">`}

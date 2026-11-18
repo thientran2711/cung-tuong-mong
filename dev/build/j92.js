@@ -115,7 +115,7 @@ function wdPOf(p){try{if(!p)return 1;const rr=typeof personRoleRank==="function"
   if(p.out)return 0;return (typeof rkOf==="function"&&(p===S||p.rank!=null)?rkOf(p):0)+1}catch(e){return 1}}
 function wdKey(p){return p===S?"me":p&&p.id!=null?String(p.id):p&&p.name?"n:"+p.name:"?"}
 function wdHash(s){let h=7;s=String(s);for(let i=0;i<s.length;i++)h=(h*31+s.charCodeAt(i))>>>0;return h}
-function wdPool(sl,P,noNt){return WD_LIST.filter(r=>r[1]===sl&&r[3]===P&&(!noNt||r[4]!==4)&&r[0]!=="y_tang"&&!WD_SRVONLY.includes(r[0])).map(r=>r[0])}
+function wdPool(sl,P,noNt){const L=WD_LIST.filter(r=>r[1]===sl&&r[3]===P&&(!noNt||r[4]!==4)&&r[0]!=="y_tang"&&!WD_SRVONLY.includes(r[0])&&!(sl==="hd"&&typeof hdDropped==="function"&&hdDropped(r[0]))).map(r=>r[0]);return !L.length&&sl==="hd"&&typeof hdKeptNear==="function"?hdKeptNear(P):L}
 function wdDefault(p,sl){const P=Math.min(8,wdPOf(p));const L=wdPool(sl,P,true);return L.length?L[wdHash(wdKey(p)+sl)%L.length]:null}
 /* lazily give everybody (old saves too) a default outfit at their own P: nobody starts wrong */
 function wdOf(p){if(!p)return null;if(!p.wd||typeof p.wd!=="object"){p.wd={tram:null,y:null};
@@ -219,8 +219,8 @@ function wdAgent(p){const L=[p.maid].concat(p.staff||[]).filter(s=>s&&!s.spyFor&
 /* ---------- getting things: a real item into the chest (rewards, purchases, gifts) ---------- */
 function wdNtFree(){S.wdNt=S.wdNt||[];return WD_LIST.filter(r=>r[4]===4&&!S.wdNt.includes(r[0])).map(r=>r[0])}
 const WD_SRVONLY=["y_chuongsu","y_nuquan","y_mama"]; /* servant-road robes: given only by jpromo (BAL.promo.srv), never random/shop */
-function wdPickAt(P,sl,gMin){P=cl(Math.round(P),0,8);let L=WD_LIST.filter(r=>r[4]!==4&&r[0]!=="y_tang"&&!WD_SRVONLY.includes(r[0])&&(!sl||r[1]===sl)&&r[3]===P&&r[4]>=(gMin||0));
- if(!L.length)L=WD_LIST.filter(r=>r[4]!==4&&r[0]!=="y_tang"&&!WD_SRVONLY.includes(r[0])&&(!sl||r[1]===sl)&&r[3]===P);return L.length?pick(L)[0]:null}
+function wdPickAt(P,sl,gMin){P=cl(Math.round(P),0,8);const hdOk=r=>!(r[1]==="hd"&&typeof hdDropped==="function"&&hdDropped(r[0]));let L=WD_LIST.filter(r=>r[4]!==4&&r[0]!=="y_tang"&&!WD_SRVONLY.includes(r[0])&&hdOk(r)&&(!sl||r[1]===sl)&&r[3]===P&&r[4]>=(gMin||0));
+ if(!L.length)L=WD_LIST.filter(r=>r[4]!==4&&r[0]!=="y_tang"&&!WD_SRVONLY.includes(r[0])&&hdOk(r)&&(!sl||r[1]===sl)&&r[3]===P);if(!L.length&&sl==="hd"&&typeof hdKeptNear==="function"){const K=hdKeptNear(P);return K.length?pick(K):null}return L.length?pick(L)[0]:null}
 function wdGain(p,k,src){src=src||{};const it=WD_ITEMS[k];if(!p||!it)return null;p.inv=p.inv||[];const e={k,from:src.from||"emp"};
  if(src.giver)e.giver=src.giver;e.d=wdWhen();if(it.nt){e.own=wdKey(p);S.wdNt=S.wdNt||[];if(!S.wdNt.includes(k))S.wdNt.push(k)}
  if(src.nvp){e.nvp=1;if(p===S)wdReveal(k,"y phục Nội vụ phủ đưa theo phẩm mới");else{p.wdk=p.wdk||{};p.wdk[k]=1}}
