@@ -500,3 +500,4 @@ art-matrix planner (MAIN s43 order) | claude/cung-tuong-mong-handover-hj0h8w (re
 | E4r REVIEW monthly-ration a0f3f53 (opus BIG; briefs/E4r-review-monthly-ration.md) | review/monthly-ration | E ROOT | session_01DgYSWm8bfGptYDVPCJ69bw | RUNNING | 18/11 05:28Z |
 | person-dialog-restore (owner bug ANGRY 18/11 06:10Z: 'đã biết' notice in column + empty band + no group tabs + tall cards; sonnet; brief briefs/person-dialog-restore.md) | review/person-dialog-restore | MAIN ROOT-45 | (opening) | RUNNING | 18/11 05:22Z |
 | NPC-PURPOSE G1 #4 integrator (opus; successor of Szm7n34; G1 done 964cfa7, merge G3 63007f9 + G2) | review/npc-purpose | C-AG #10 | session_01UV1SzktT6YzdpEuSryJ3J1 | RUNNING | 18/11 05:32Z |
+| REVIEW cloth-bake-static r1 (sonnet SMALL) of 16b4dad8 | review/cloth-bake-static(-r1) | B | (opening) | RUNNING | 18/11 05:35Z |
