@@ -152,15 +152,23 @@ function j59lay(){const st=document.getElementById("stage");if(!st||!S)return;co
  const toks=tk?[...tk.querySelectorAll(".tok")]:[];if(!me&&!toks.length){j59clear(tk);return}
  const imgs=toks.map(t=>t.classList.contains("fig")?t.querySelector(".figimg"):null).filter(Boolean);
  let wait=false;
- for(const im of (me?[me,...imgs]:imgs)){const s=im.getAttribute("src");if(!im.complete||!im.naturalWidth){wait=true;if(!im.dataset.j59l){im.dataset.j59l=1;im.addEventListener("load",j59sched)}}if(s&&!j59bb(s,j59sched))wait=true}
+ /* review/life-preload-fu (A): a figure whose picture is still on its way (!complete) stands in its slot as the KIT §59.1 silhouette (unknown-fig-f|m, kit core file) laid out with the SILHOUETTE's own body box, exactly like a known person with a real picture; the real picture swaps in on load (j59sched). Only a failed / unmeasured picture still waits hidden (15 s cap below). */
+ const wsil=new Map(),whold=new Set();
+ for(const im of (me?[me,...imgs]:imgs)){const s=im.getAttribute("src");const g=s&&typeof kitPhFigG==="function"?kitPhFigG(s):"";const sb=()=>{const u=g&&j59unkSrc(g);return u&&j59bb(u,j59sched)};
+  if(!im.complete||!im.naturalWidth){if(!im.dataset.j59l){im.dataset.j59l=1;im.addEventListener("load",j59sched)}
+   /* a picture that FAILED (error: complete, no width) keeps the silhouette too — never an empty box where a person stands; a retry (jcdn) that lands clears the mark on load */
+   const ub=sb();if(ub){wsil.set(im,ub);if(im.complete&&!im.hasAttribute("data-kwait"))im.setAttribute("data-kwait",g)}else wait=true;continue}
+  /* arrived but its body box is not measured yet: that ONE figure keeps its slot as the silhouette, hidden (no stretched picture); the others are not held back by it */
+  if(s&&!j59bb(s,j59sched)){const ub=sb();if(ub){wsil.set(im,ub);whold.add(im)}else wait=true}}
+ for(const im of (me?[me,...imgs]:imgs))im.style.visibility=whold.has(im)?"hidden":"";
  {const now=Date.now();if(wait){if(!st.__j59w0)st.__j59w0=now}else st.__j59w0=0;st.classList.toggle("j59wait",wait&&now-st.__j59w0<15000)}/* a picture that never loads stops hiding the others after 15 s (stage-figsize: the first load after a new build can take 6 s+ on the CDN; an unplaced pile is what the owner saw) *//* KIT 33.12: while pictures still load, nobody stands in an unplaced pile (owner's Fold video: 3 figures on top of each other) */
  if(wait)return;
  const R=st.getBoundingClientRect(),sH=R.height,sW=R.width;if(sH<60||sW<60)return;
  const ppl=typeof curPeople==="function"?curPeople():[];
  const E=toks.map(tok=>{const im=tok.classList.contains("fig")?tok.querySelector(".figimg"):null;const p=ppl[+tok.dataset.p];
-  if(im){const s=im.getAttribute("src");return{tok,im,p,tag:tok.querySelector(".tag"),b:J59BB[s],f:j59fac(s,p),ar:im.naturalWidth/im.naturalHeight}}
+  if(im){const s=im.getAttribute("src");const ws=wsil.get(im);return{tok,im,p,tag:tok.querySelector(".tag"),b:ws||J59BB[s],f:j59fac(s,p),ar:ws?ws.ar:im.naturalWidth/im.naturalHeight,ws:!!ws}}
   return{tok,p,tag:tok.querySelector(".tag"),nf:1}});
- const mb=me?J59BB[me.getAttribute("src")]:null,mar=me?me.naturalWidth/me.naturalHeight:0;
+ const mws=me?wsil.get(me):null,mb=me?mws||J59BB[me.getAttribute("src")]:null,mar=me?(mws?mws.ar:me.naturalWidth/me.naturalHeight):0;
  /* KIT 33.8 STAGE PET: the ONE following pet of each person (kitPetOf: p.pets / p.petOn, already synced in co-op) stands in a fixed spot on that person's right */
  const j59pr=who=>{try{if(who&&who!==S&&!j59known(who))return null;/* r7-r1 review 1: a stranger ("Người lạ" silhouette) never shows a pet — the same known test as the figure (figWho first) */const P=kitPetOf(who);if(!P)return null;const a=kitPetArt(P,j59sched);if(!a)return null;const b=j59bb(a.src,j59sched);return b?{P,a,b}:null}catch(e){return null}};
  const mePet=me?j59pr(S):null;E.forEach(x=>{x.pet=x.im?j59pr(x.p):null});
@@ -243,7 +251,7 @@ function j59lay(){const st=document.getElementById("stage");if(!st||!S)return;co
  const cMid=b=>b.cl!=null&&b.cr>b.cl?(b.cl+b.cr)/2:(kCL(b)+kCR(b))/2;/* the BODY (core column) centre stands on the slot centre, not the sleeve-to-sleeve box (owner: bodies at their own slot centres) */
  const loX=KIT_SLOTS.edge||4,hiX=Math.min(sW-(KIT_SLOTS.edge||4),G.x0+G.avail+6-(KIT_SLOTS.edge||4));/* stage-figsize: visible art never cut by the stage edge nor under the side column (kitSlotIn) */
  if(showMe){const meH=H/(mb.b-j59bt(mb)),meW=meH*mar,meC=(cMid(mb)-.5)*meW;const cx=kitSlotIn(inLim(cxOf(slot++)),meW*(mb.l-cMid(mb)),meW*(mb.r-cMid(mb)),loX,hiX);centres.push(cx);usedPets.push([mePet,cx,G.sw,"me"]);
-  me.style.setProperty("height",meH.toFixed(1)+"px","important");me.classList.add("j59sz");
+  me.style.setProperty("height",meH.toFixed(1)+"px","important");if(mws)me.style.setProperty("width",meW.toFixed(1)+"px","important");else me.style.removeProperty("width");me.classList.add("j59sz");
   me.style.left=(cx-meC).toFixed(1)+"px";me.style.bottom=(fo-(1-mb.b)*meH).toFixed(1)+"px";
   if(mt){const g=mt.firstChild;mt.style.left=cx.toFixed(1)+"px";mt.style.top=(floorY+3).toFixed(1)+"px";g.style.translate="";mt.style.visibility="";
    /* her chip on the same top line as every other chip (the holder box may add its own offset) */
@@ -251,7 +259,7 @@ function j59lay(){const st=document.getElementById("stage");if(!st||!S)return;co
   for(const x of vis){let cx=cxOf(slot++);if(!x.nf){const w0=boxW(x,H);cx=kitSlotIn(cx,w0*(kCL(x.b)-cMid(x.b)),w0*(kCR(x.b)-cMid(x.b)),loX,hiX)}centres.push(cx);const t=x.tok;if(!x.nf)usedPets.push([x.pet,cx,G.sw,"p"+(x.tok.dataset.p||"")]);
   if(x.nf){t.style.left=(cx-t.offsetWidth/2).toFixed(1)+"px";t.style.bottom=fo.toFixed(1)+"px";continue}
   const ih=imgH(x,H),w=boxW(x,H),cw=coreW(x,H);
-  x.im.style.setProperty("height",ih.toFixed(1)+"px","important");x.im.style.setProperty("width","auto","important");
+  x.im.style.setProperty("height",ih.toFixed(1)+"px","important");x.im.style.setProperty("width",x.ws?w.toFixed(1)+"px":"auto","important");
   x.im.style.setProperty("margin-left",(-w*kCL(x.b)).toFixed(1)+"px","important");x.im.style.setProperty("margin-right",(-w*(1-kCR(x.b))).toFixed(1)+"px","important");
   x.im.style.setProperty("margin-bottom",(-(1-x.b.b)*ih).toFixed(1)+"px","important");x.im.classList.add("j59sz");x.im.style.translate="";
   t.style.left=(cx-w*(cMid(x.b)-kCL(x.b))).toFixed(1)+"px";t.style.bottom=fo.toFixed(1)+"px";t.style.zIndex="";if(x.tag)x.tag.style.translate=""}

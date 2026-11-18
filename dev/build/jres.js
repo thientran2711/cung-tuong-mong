@@ -11,7 +11,7 @@
      resRoomName(r) → "Đông phối điện · Cảnh Phúc cung" …
    Sân khấu: "home" và "r<id>" (thăm cung) dùng phòng thật thay cho phi-tan-cung chung; tính lại ở mỗi renderStage. */
 const RES_SLUG=["canh-phuc","khai-tuong","chung-tu","ham-an","thua-minh","dien-huy","vinh-hoa","truong-xuan"];
-const RES_PART_N={chinh:"Chính điện",dong:"Đông phối điện",tay:"Tây phối điện",cungnhan:"Dãy nhà cung nhân"};
+const RES_PART_N=HALL_ROLE; /* role = small subtitle only; the plaque name comes from jhall.js hallName() */
 /* RES_VAR: bản có thật trong img/ (viết lại bằng dev/art/gen_res_var.py) */
 const RES_VAR={"canh-phuc-cung":"xuan-sang xuan-trua xuan-chieu xuan-toi ha-sang ha-trua ha-chieu ha-toi thu-sang thu-trua thu-chieu thu-toi dong-sang dong-trua dong-chieu dong-toi",
  "canh-phuc-cung-dong-phoi":"xuan-sang xuan-trua xuan-chieu xuan-toi ha-sang ha-trua ha-chieu ha-toi thu-sang thu-trua thu-chieu thu-toi dong-sang dong-trua dong-chieu dong-toi",
@@ -74,8 +74,8 @@ function residenceOf(p){const R=(o)=>Object.assign({pal:null,head:null},o);if(!p
  if(h.queen)return R({part:"kn",head:h});
  return h.pal!=null?R({part:resSidePart(p,h),pal:h.pal,head:h}):R({part:"ngocthanh",head:h})}
 function resRoomName(r){if(!r)return"";if(r.part==="ngocthanh")return typeof HOMEN!=="undefined"?HOMEN:"Ngọc Thanh các";
- if(r.part==="kn")return"Càn Ninh cung";if(r.part==="lc")return"Trường Môn viện";
- const pn=r.pal!=null&&typeof PALN!=="undefined"?PALN[r.pal]:"";return r.part==="chinh"?pn:(RES_PART_N[r.part]+(pn?` · ${pn}`:""))}
+ if(r.part==="kn")return hallName("Càn Ninh cung","chinh")+" · Càn Ninh cung";if(r.part==="lc")return"Trường Môn viện";
+ const pn=r.pal!=null&&typeof PALN!=="undefined"?PALN[r.pal]:"";return hallName(pn,r.part)+(pn?` · ${pn}`:"")}
 function resSame(a,b){return!!a&&!!b&&a.part===b.part&&a.pal===b.pal&&(a.pal!=null||a.head===b.head)}
 function roomResidents(pal,part){const T={pal:resPalIdx(pal),part};return[S].concat((rivals||[]).filter(v=>v.alive&&!v.out)).filter(p=>resSame(residenceOf(p),T))}
 function roomPeople(pal,part){const W=(S&&S.where)||{};return roomResidents(pal,part).filter(p=>p===S?S.place==="home":W[p.id]===palaceOf(p))}
