@@ -1,4 +1,4 @@
-/* fig-rank-audit.js — review/fig-rank-match: for every identity (32 consort + 52 maid faces) × every rank tier (cold, t1..t8) × 4 age bands,
+/* fig-rank-audit.js — review/fig-rank-match: for every identity (84 painted women: c01–c32 + m01–m52) × every rank tier (cold, t1..t8) × 4 age bands,
    which picture does the game really show for (a) an NPC consort and (b) her (S.pid), and is its dress tier the person's rank tier EXACTLY?
    usage: node dev/test/fig-rank-audit.js [out.json]      (serves the BUILT repo root; manifests read from env FIGDIR=<dir with FIGURES*.json>
    or the CDN https://ctm-img.victoria-tntt.workers.dev/img/)

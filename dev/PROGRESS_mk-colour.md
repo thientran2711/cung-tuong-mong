@@ -10,7 +10,7 @@ on her own portrait + figure all day; lips and eyes added without looking pasted
 ## Done
 - `dev/art/mkfit/mkfit.py`: MediaPipe Face Landmarker (pip mediapipe 1.2.3 + apt libegl1 libgles2, model face_landmarker.task float16/1 from
   MediaPipe model storage, kept in the worktree .mk/, not committed) on a face crop of every por-/fig- picture in toil-fit.json (12966 =
-  84 faces + player looks, all tiers / ages / trung y / kc / ngheo). 60 points (lips outer+inner, both eyelids + lower lash line, both brows),
+  84 painted women + player looks, all tiers / ages / trung y / kc / ngheo). 60 points (lips outer+inner, both eyelids + lower lash line, both brows),
   sanity check against the toil-fit mouth, pair transfer por↔fig on failure. Out: `img/mk-fit/<face>.json` (CDN) + copy in `dev/art/mkfit/`,
   md5 per picture in `dev/art/mkfit/md5.json` (`--stale` re-measures re-cropped pictures, e.g. after review/por-scale).
 - jtoil.js §60: `TOIL_COL` palette (6/6/6/5, cổ trang names), picks in `p.toilette.col` (old saves → defaults = approved colours),

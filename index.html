@@ -9,7 +9,11 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
+<<<<<<< HEAD
 window.CTM_BI={"s":"907e77dd","t":"2026-11-18T21:50Z","c":"role-parity part 2: deterministic scan page (seeded random/crypto, frozen clocks); promo compares act sets (not real-needs draws); open bas…","b":"c07dbedb85f1","h":[{"s":"668e0bf4+","t":"2026-11-18T21:26Z","c":"map-zones r6 (reviewer fix on r3 5a83694): a head in a dropped palace with a stale resHead to another dropped house got a second migration …"},{"s":"b02879db+","t":"2026-11-18T20:49Z","c":"ge-writers-w1: carry jrd_muoi ch8 c3 «Thư sinh Giang Nam» (forced from s1/s2 every life) + BAL muoi_no_8.c3, by MAIN ORDER 18:45Z; muoi_no_…"},{"s":"fcff501a+","t":"2026-11-18T20:41Z","c":"map-labels-missing r2c: tag touches its own building or keeps a short leader (\u003c=90px) ending on the real slip/info rect, dot >=40px from ot…"},{"s":"c67d248d+","t":"2026-11-18T19:53Z","c":"ag-deed-perf: site build (index.html, sw.js)"},{"s":"6aab33ad","t":"2026-11-18T20:05Z","c":"KIT_REQUESTS: K-Q2-1 DONE 048f3c7"},{"s":"343d4557","t":"2026-11-18T19:03Z","c":"shop-panel r3: kind sub-tabs under Mua|Bán (kit tab row, chest groups), test + KIT.md"},{"s":"a5013222+","t":"2026-11-18T18:03Z","c":"shown-odds r2 review: site build (index.html / sw.js / assets.json rebuilt)"},{"s":"08774c0e+","t":"2026-11-18T17:38Z","c":"ag-stf2 (test only): bribe histogram picks a servant whose lòng moves her bribe odds. Root of the 'disloyal one takes more' red (npc ~3/20,…"},{"s":"0351e140","t":"2026-11-18T16:48Z","c":"shop-panel: «Để ta xem» outside option, 3-column Mua/Bán grid, smallest picture strip, test"},{"s":"ebf25660+","t":"2026-11-18T15:29Z","c":"Phi tần, Hoàng thượng, Thái hậu và cung nhân nay tự lo việc mình mỗi ngày theo cùng một luật, cùng một giá và cùng một cơ may như ngươi; ta…"}]};
+=======
+window.CTM_BI={"s":"3270145f+","t":"2026-11-18T21:25Z","c":"doc-90-women r1: rebuild generated index.html/sw.js (build hash, build line) after comment edits","b":"cf78d9a8857d","h":[{"s":"668e0bf4+","t":"2026-11-18T21:26Z","c":"map-zones r6 (reviewer fix on r3 5a83694): a head in a dropped palace with a stale resHead to another dropped house got a second migration …"},{"s":"b02879db+","t":"2026-11-18T20:49Z","c":"ge-writers-w1: carry jrd_muoi ch8 c3 «Thư sinh Giang Nam» (forced from s1/s2 every life) + BAL muoi_no_8.c3, by MAIN ORDER 18:45Z; muoi_no_…"},{"s":"fcff501a+","t":"2026-11-18T20:41Z","c":"map-labels-missing r2c: tag touches its own building or keeps a short leader (\u003c=90px) ending on the real slip/info rect, dot >=40px from ot…"},{"s":"c67d248d+","t":"2026-11-18T19:53Z","c":"ag-deed-perf: site build (index.html, sw.js)"},{"s":"6aab33ad","t":"2026-11-18T20:05Z","c":"KIT_REQUESTS: K-Q2-1 DONE 048f3c7"},{"s":"343d4557","t":"2026-11-18T19:03Z","c":"shop-panel r3: kind sub-tabs under Mua|Bán (kit tab row, chest groups), test + KIT.md"},{"s":"a5013222+","t":"2026-11-18T18:03Z","c":"shown-odds r2 review: site build (index.html / sw.js / assets.json rebuilt)"},{"s":"08774c0e+","t":"2026-11-18T17:38Z","c":"ag-stf2 (test only): bribe histogram picks a servant whose lòng moves her bribe odds. Root of the 'disloyal one takes more' red (npc ~3/20,…"},{"s":"0351e140","t":"2026-11-18T16:48Z","c":"shop-panel: «Để ta xem» outside option, 3-column Mua/Bán grid, smallest picture strip, test"},{"s":"ebf25660+","t":"2026-11-18T15:29Z","c":"Phi tần, Hoàng thượng, Thái hậu và cung nhân nay tự lo việc mình mỗi ngày theo cùng một luật, cùng một giá và cùng một cơ may như ngươi; ta…"}]};
+>>>>>>> origin/main
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -5623,7 +5627,7 @@ function figPick(who){const roles=figRoles(who);if(!roles.length)return null;con
   const sc=k=>{const L=M[k];const b=figBest(L,tier,age);let s=-figDist(b,tier,age);if((S.men||[]).includes(who))s+=4*Math.max(...L.map(f=>figSubOk(who,f)));s+=3*Math.max(...L.map(f=>figLook(who,f)));return s};
   let best=-1e9;for(const k of free)best=Math.max(best,sc(k));const top=free.filter(k=>sc(k)>=best-.5);const k=pick(top);who.fid=k;figUsed().push(k);return k}
  return null}
-/* SERVANT FACES ARE FREED (review/staff-cap-apply, MAIN s42: faces ran out after ~52 maids over one life). A servant identity (maid / mama /
+/* SERVANT FACES ARE FREED (review/staff-cap-apply, MAIN s42: faces ran out after ~52 servants over one life). A servant identity (maid / mama /
    eunuch) belongs to a person while anyone in the game still holds her: when a servant needs a face and every identity of her group is taken,
    figGC frees the servant identities no live person holds any more (sent away, dismissed, dead, married out — every removal path at once, no
    per-path code). Held = any fid / pid / fromMaid value reachable from S and the consorts (households, the Thái hậu's women, the court, the
@@ -8806,7 +8810,7 @@ function pidEnforce(){if(!S||!S.pid)return false;let ch=false;S.fid=S.pid;const 
 (function(){const c0=nlCard;nlCard=function(){const r=c0.apply(this,arguments);try{const src=figFor(S,"por");if(src&&PORK[src]!==1){const im=new Image();im.onload=()=>{PORK[src]=1;try{const m=Q[0];if(NLP&&m&&m.nl){m.faces=[[pMe(),S.name]];showModal()}}catch(e){}};im.src=src}}catch(e){}return r}})();
 /* review/player-dress: a life started past Luân hồi (window.__nlInner: test drivers, tools) used to get no identity and fell back to the
    old t1-only player looks (t1 dress on the cung nữ road and in lãnh cung). It now takes a free identity at once, before any picture
-   of her is kept, so every life is one of the 84 faces with all its dresses. Loaded saves are untouched (deser does not call start). */
+   of her is kept, so every life is one of the 84 painted women with all her dresses. Loaded saves are untouched (deser does not call start). */
 (function(){const s0=start;start=function(){const r=s0.apply(this,arguments);try{if(window.__nlInner&&S&&!S.pid&&!S.dead){
   const used=new Set((S.fidUsed||[]).filter(k=>!/^player:/.test(k)));let K=[];try{K=typeof f88Keys==="function"?f88Keys("consort"):pidKeys()}catch(e){K=pidKeys()}
   const free=K.filter(k=>!used.has(k));const L=free.length?free:K;if(L.length){S.pid=L[Math.floor(Math.random()*L.length)%L.length];
@@ -30369,7 +30373,7 @@ const rp0=renderPanel;renderPanel=function(){const r=rp0.apply(this,arguments);t
 })();
 /* ================= j88: FACE POOL OF 84 WOMEN (owner 11/14: cung nữ có thể lên phi tần) — LOGIC + DATA ONLY =================
    No CSS, no markup: the portrait chooser UI is a kit component (review/kit-2); it reads this module's API.
-   Pool = 32 consort identities (FIGIX.consort "consort:c01".."c32") + 52 maid identities (FIGIX.maid "maid:m01".."m52").
+   Pool = the 84 painted women of «90 nhân vật nữ» (internal ids FIGIX.consort "consort:c01".."c32" + FIGIX.maid "maid:m01".."m52").
    - Dress tiers: anyone in consort dress (her as a consort, every NPC consort) wears the consort tier of her identity
      (j66 figTierOf: t1..t8 by rank, "cold" in lãnh cung). Maid identities read Part C records (role "maid", tier "t1".."t8"/"cold")
      from img/FIGURES-servants.json as soon as they appear (j39 re-reads every manifest every 5 min); a missing tier falls back to
@@ -30460,8 +30464,8 @@ function faceImg(id,who,kind){try{who=who||S;kind=kind||"por";const L=f88List(id
    → [{id:"maid:m05", src:"maid"|"consort", n:5, por:"https://ctm-img.victoria-tntt.workers.dev/img/…", fig:"https://ctm-img.victoria-tntt.workers.dev/img/…", mine:bool, tiers:[1,2,…]}] in c01..c32, m01..m52 order */
 function facePool(filter,who){who=who||S;return f88Keys(filter||"all").map(id=>({id,src:f88Src(id),n:f88Num(id),por:faceImg(id,who,"por"),fig:faceImg(id,who,"fig"),
  mine:!!(S&&S.pid===id),tiers:[...new Set(f88List(id).filter(f88IsCT).map(f88TNum))].sort((a,b)=>a-b)}))}
-/* WHICH FACE SET she may pick from (owner 16/11 s23: NO tabs; the game decides): a cung nữ life (palace maid: isSrv, or origin cnv) → "maid" = the 52 maid faces only;
-   every other life (phi tần) → "all" = 84 (32 consort + 52 maid; every maid identity has consort dress art, F88_NEED_C). Used by the ONE kit face picker (j86 fpHTML), solo and co-op alike. */
+/* WHICH FACE SET she may pick from (owner 16/11 s23: NO tabs; the game decides): a cung nữ life (palace maid: isSrv, or origin cnv) → "maid" = faces m01–m52 only;
+   every other life → "all" = the whole pool of 84 painted women (every id has rank-ladder art, F88_NEED_C). Used by the ONE kit face picker (j86 fpHTML), solo and co-op alike. */
 function kitFaceScope(){try{if((typeof isSrv==="function"&&isSrv())||(S&&S.origin&&S.origin.k==="cnv"))return"maid"}catch(e){}return"all"}
 /* she may choose now: the identity card is open (new life rolled, not yet accepted) */
 function faceOn(){try{return !!(typeof NLP!=="undefined"&&NLP&&S&&S.pid&&f88List(S.pid).length)}catch(e){return false}}
@@ -30547,10 +30551,10 @@ function fpKeys(){const M=FIGIX.consort||{};return pidKeys().filter(k=>M[k]&&M[k
 function fpPor(k){const L=(FIGIX.consort||{})[k];if(!L||!L.length)return"";const f=figBestRank(L,figTierOf(S),figAgeOf(S));return f&&f.por?figPath(f.por):""}
 function fpFace(k){const f=Object.assign({},pMe());f.src=fpPor(k);f.rw="";return f}
 function fpNum(k){return +String(k).replace(/\D/g,"")||0}
-/* the picker = the kit PORTRAIT PICKER (j79 kitPicker); the 84-face pool (facePool(filter), review/face-84) when present, else the 32 consort faces */
+/* the picker = the kit PORTRAIT PICKER (j79 kitPicker); the pool of 84 painted women (facePool(filter), review/face-84) when present, else the first painted set c01–c32 */
 /* j88 (review/face-84) API when present: faceOn() · facePool(filter) -> [{id, src, n, por, fig, mine}] · faceChoose(id) */
 const FP88=()=>typeof facePool==="function"&&typeof faceChoose==="function";
-/* owner 16/11 s23 (face picker, NO tabs): the game picks the face set from her identity, never she: a cung nữ life (isSrv / origin cnv) sees the 52 maid faces only, every phi tần life the whole 84 (32 consort + 52 maid, all have consort dress art) */
+/* owner 16/11 s23 (face picker, NO tabs): the game picks the face set from her identity, never she: a cung nữ life (isSrv / origin cnv) sees the faces m01–m52 only, every other life the whole pool of 84 painted women (all have the full rank-ladder art; BEHAVIOUR NOTE: owner 18/11 canon = one pool, so this filter is to be dropped by a code worker) */
 /* review/newgame-ui (owner 15/11 "quá lag"): the item list is built ONCE per (pool, her tier, age, dress, roll) — facePool walked all 84
    identities twice (por + fig) on every pick and every tab (≈ 0.3–1.8 s on a tablet); the cells show the small pre-sized copy (kitTn) */
 const FP_C={};lifeStore("FP_C face-picker items (hold her person copy)",()=>{for(const k in FP_C)delete FP_C[k]});
@@ -49277,7 +49281,7 @@ function prGive(p,L){const E=[];p.inv=p.inv||[];for(const [k,n,kind] of L)for(le
   if(kind==="wd"&&typeof wdGain==="function"){const g=wdGain(p,k,{from:"nvp",giver:"Nội vụ phủ",nvp:1});if(g&&g.e)E.push(g.e)}
   else{const e={k,from:"nvp",giver:"Nội vụ phủ",d:S.turn};p.inv.push(e);E.push(e)}}
  return E}
-/* one new servant, free, while under the rank's cap (maids first). Faces are unique in the whole palace (j17 roomFor = the figure identity pool, FIGIX 52 maid + 8 ma ma / 30 eunuch), so:
+/* one new servant, free, while under the rank's cap (maids first). Faces are unique in the whole palace (j17 roomFor = the figure identity pool, FIGIX maid ids m01–m52 + 8 ma ma / 30 eunuch), so:
    1. this month's Nội vụ phủ candidate (j29 npool), 2. a new person while the face pool has room, 3. (her only) a servant Nội vụ phủ moves
    from the lowest-ranked household that has one to spare. null when nobody can come. */
 function prStaff(p){try{if(!p||typeof mkServ!=="function")return null;p.staff=p.staff||[];const [cm,ce]=capOf(p);
@@ -50164,7 +50168,7 @@ if(typeof kitFxLayers==="function"){const fx0=kitFxLayers;kitFxLayers=function(p
    Like modern dress-up / makeup games: the colours she picks at the mirror (phấn mắt, phấn má, son môi, màu mày) show in EXACTLY those colours on
    HER OWN pictures (portrait + full-body figure, every place kitFxLayers draws her) all day. The picks live in p.toilette.col (old saves: none →
    the defaults below, which are the approved "đẹp" blush + lip colours). "diêm dúa" = the same picks, stronger (TOIL_MKS).
-   Placement: img/mk-fit/<face>.json (dev/art/mkfit/mkfit.py — MediaPipe face mesh on every picture of her 84 faces + old player looks: lips
+   Placement: img/mk-fit/<face>.json (dev/art/mkfit/mkfit.py — MediaPipe face mesh on every picture of the 84 painted women + old player looks: lips
    outer/inner, both upper eyelids + lower lash line, both brows; 60 points in 1/4000 of the picture). The colour layer is painted FROM THE
    PICTURE ITSELF in a canvas (lip / lid / brow pixels recoloured with their own light and shade, soft masks), so it reads as painted, not pasted;
    it is one <img class="kmkl kmkc"> over the same box as the picture. A picture without points keeps the older SVG lip oval (never guessed). */
@@ -76428,7 +76432,11 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
+<<<<<<< HEAD
 const BUILD="c07dbedb85f1";window.CTM_BUILD=BUILD;
+=======
+const BUILD="cf78d9a8857d";window.CTM_BUILD=BUILD;
+>>>>>>> origin/main
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
