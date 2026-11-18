@@ -2,8 +2,9 @@
    The player (S) and every rival are consorts under the same formulas. Every act is one function act(actor, target). */
 function key(p){return p===S?"me":p.id}
 function byKey(k){return k==="me"?S:k==="emp"||k==="th"||k==null?null:RV(k)}
-function NM(p){return p===S?"ngươi":p.name}
-function NMc(p){return p===S?"Ngươi":p.name}
+/* the Thái hậu's household (S.thO, jstaff: allServ / ownerOf include her servants) has no .name: she is "Thái hậu" (review ag-later #2: "người hầu cung undefined" in TIN BÁO) */
+function NM(p){return p===S?"ngươi":p&&p.name==null&&S&&p===S.thO?"Thái hậu":p.name}
+function NMc(p){return p===S?"Ngươi":p&&p.name==null&&S&&p===S.thO?"Thái hậu":p.name}
 function rkOf(p){return p===S?S.rank:(p.queen?7:p.rank)}
 function rkName(p){const r=rkOf(p);const n=r>=7?"Hoàng hậu":RANKS[r].n;return typeof kitHieuJoin==="function"?kitHieuJoin(n,p):n}
 function consorts(){const L=[S].concat(liveRivals(true));for(const p of L){if(!p.maid)p.maid=p===S?newMaid(pick(MAIDS),45):{name:pick(MAIDS),loyal:50};if(!p.staff)p.staff=[]}return L}
