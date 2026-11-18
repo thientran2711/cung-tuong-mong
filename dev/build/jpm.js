@@ -14,8 +14,8 @@ const KPM_DATA=/*@pl2*/{"_src":"Phượng Lệnh art repo thientran2711/phuong-l
 /* WHICH HALLS ARE REALLY PAINTED in each courtyard picture (owner 16/11 21:36Z: a picture may only serve a place whose halls are ALL painted in it, every label sits ON its building).
    Audited by eye on all 6 dirs (r3): cac = ONE pavilion only (no side halls, no cung nhân row); the other five show chính + Đông + Tây phối điện. Not synced by pl2_sync.py: Foreman C updates this line when a new painting adds halls. */
 const KPM_HALLS={"nhat-cac":["chinh"],"nhat-phi-cung":["chinh","dong","tay"],"nhat-quy-cung":["chinh","dong","tay"],"nhat-vinh-hoa":["chinh","dong","tay"],"nhat-can-ninh":["chinh","dong","tay"],"nhat-spare-cung":["chinh","dong","tay"]};
-const KPM_PARTS=[["chinh","Chính điện"],["dong","Đông phối điện"],["tay","Tây phối điện"]];
-const KPM_PN={chinh:"Chính điện",dong:"Đông phối điện",tay:"Tây phối điện",cungnhan:"Dãy nhà cung nhân"};
+const KPM_PARTS=[["chinh"],["dong"],["tay"]]; /* ids only; plaque names from jhall.js hallName(palace, part), role = HALL_ROLE */
+const KPM_PN=HALL_ROLE;
 
 function kpmBuoiW(){const four=typeof BUOI!=="undefined"&&BUOI.length>=4;return (four?["sang","trua","chieu","toi"]:["sang","chieu","toi"])[S.buoi||0]||"sang"}
 function kpmSeason(){return ({"Xuân":"xuan","Hạ":"ha","Thu":"thu","Đông":"dong"})[SEASON[(S.month||1)-1]]||"xuan"}
@@ -64,7 +64,7 @@ function kpmSil(n,ppl){return"";if(!n)return"";const im=g=>typeof K61U==="object
 function kpmResLine(p){return p===S?"ngươi":`${p.queen?"Hoàng hậu":RANKS[rkOf(p)].n} ${p.name}`}
 
 /* the halls (hotspots) of a slot: [part,label]; ONE rule for the whole plan (owner 11/16): >=2 halls → courtyard picture first, exactly 1 → the tap goes straight to the place */
-function kpmParts(slot,k,nm){nm=nm||kpmName(slot);return(kpmIsPlace(slot)?[["chinh",(kpmPlace(slot.slice(2))||{}).label||nm]]:slot==="kn"?[["chinh","Chính điện"]]:KPM_PARTS.slice()).concat(k==="home"?[["cungnhan",KPM_PN.cungnhan]]:[])}
+function kpmParts(slot,k,nm){nm=nm||kpmName(slot);return(kpmIsPlace(slot)?[["chinh",(kpmPlace(slot.slice(2))||{}).label||nm]]:slot==="kn"?[["chinh",hallName("Càn Ninh cung","chinh")]]:KPM_PARTS.map(x=>[x[0],hallName(nm,x[0])])).concat(k==="home"?[["cungnhan",hallName(nm,"cungnhan")]]:[])}
 function kpmMulti(slot,k){return kpmParts(slot,k===undefined?kpmKeyOf(slot):k).length>=2&&!!kpmArt(slot)} /* >=2 halls AND some courtyard picture exists (exact or tạm stand-in); no picture at all → the Dư đồ tap goes straight to the hall */
 
 /* ---------- the component ---------- */
@@ -72,14 +72,14 @@ function kpmMulti(slot,k){return kpmParts(slot,k===undefined?kpmKeyOf(slot):k).l
 function kitPalaceMap(o){const slot=o.slot,k=o.k;const A=kpmArt(slot);const nm=kpmName(slot);const SP=kpmSplit(k);
  const spots=A&&KPM_DATA.spots&&KPM_DATA.spots[A.dir]||{};const why=o.why||"";
  const PARTS=kpmParts(slot,k,nm);
- const chip=(n,h)=>h==="cungnhan"?`<i>${n} cung nhân</i>`:n?`<i>${n} bóng người</i>`:`<i>vắng</i>`;
+ const role=h=>h==="cungnhan"||!kpmIsPlace(slot)?hallRole(h):"";const chip=(n,h)=>h==="cungnhan"?`<i>${n} cung nhân</i>`:n?`<i>${n} bóng người</i>`:`<i>vắng</i>`;
  const here=h=>(!!k&&S.place===k&&kpmHall()&&kpmHall().part===h)||(S.place==="home"&&kpmMine(slot)===h);
  return `<div class="mapv kpmv" data-kpm="${slot}"><div class="maptools"><span><button class="btn mz kpm-back" data-kpmback="1" aria-label="Về Dư đồ">‹ Dư đồ</button></span><span class="past kpm-t"><b>${nm}</b>${why?` · <em>${why}</em>`:""}</span></div>
  <div class="mapsc"><div class="mapw" style="width:100%">${A?`<img class="mapimg" src="${A.src}" alt="Sân ${nm} nhìn từ trên cao">`:`<img class="mapimg" src="${mapImg()}" alt="${nm}">`}
  ${PARTS.map(([h,hn])=>{const b=spots[h];if(!b||!(KPM_HALLS[A.dir]||[]).includes(h))return"";const s=SP[h]; /* only halls painted in this picture get a hotspot; the others stay in the kit list below */
-  return `<button class="mspot kpm-spot${here(h)?" here":""}" data-go="kpm:${h}" title="${hn}${s.res.length?" · ở: "+s.res.map(kpmResLine).join(", "):""}" style="left:${b.x*100}%;top:${b.y*100}%;width:${b.w*100}%;height:${b.h*100}%"><span class="mlab">${hn}${chip(s.n,h)}</span>${h==="cungnhan"?"":kpmSil(s.n,s.ppl)}</button>`}).join("")}
+  return `<button class="mspot kpm-spot${here(h)?" here":""}" data-go="kpm:${h}" title="${hn}${role(h)?" ("+role(h)+")":""}${s.res.length?" · ở: "+s.res.map(kpmResLine).join(", "):""}" style="left:${b.x*100}%;top:${b.y*100}%;width:${b.w*100}%;height:${b.h*100}%"><span class="mlab">${hn}${chip(s.n,h)}</span>${h==="cungnhan"?"":kpmSil(s.n,s.ppl)}</button>`}).join("")}
  ${kitTam(!A||A.tam)}</div></div>
- <div class="kpm-list${PARTS.length===1?" one":""}">${PARTS.map(([h,hn])=>{const s=SP[h];return `<button class="btn kpm-row${here(h)?" sel":""}" data-kpmpart="${h}"><b class="kpm-rn">${hn}</b><span class="kpm-rs">${h==="cungnhan"?`${s.n} cung nhân của ngươi`:s.n?`${s.n} bóng người`:"vắng người"}</span>${kpmIsPlace(slot)||h==="cungnhan"?"":`<span class="kpm-rs">${s.res.length?"Người ở: "+s.res.map(kpmResLine).join(", "):"Chưa ai ở"}</span>`}</button>`}).join("")}</div></div>`}
+ <div class="kpm-list${PARTS.length===1?" one":""}">${PARTS.map(([h,hn])=>{const s=SP[h];return `<button class="btn kpm-row${here(h)?" sel":""}" data-kpmpart="${h}"><b class="kpm-rn">${hn}</b><span class="kpm-rs">${role(h)?role(h)+" · ":""}${h==="cungnhan"?`${s.n} cung nhân của ngươi`:s.n?`${s.n} bóng người`:"vắng người"}</span>${kpmIsPlace(slot)||h==="cungnhan"?"":`<span class="kpm-rs">${s.res.length?"Người ở: "+s.res.map(kpmResLine).join(", "):"Chưa ai ở"}</span>`}</button>`}).join("")}</div></div>`}
 
 /* ---------- state + navigation ---------- */
 /* __kpm = the detail map open on the Dư đồ tab ({slot,k}); S.hall = the room she stands in ({k,part,t}) for this buổi only */
@@ -116,7 +116,7 @@ function kpmRoomImg(k,part){try{const a=part==="cungnhan"?residenceArt(null,"cun
 (function(){const p0=placeOf;placeOf=function(k){const P=p0.apply(this,arguments);try{const h=kpmHall();if(!h||h.place||k!==h.k||!P)return P;
   const im=kpmRoomImg(k,h.part);const sc="kpm-"+h.part;if(im)SCIMG[sc]=im;
   const sl=kpmSlotOf(k);const base=sl!=null&&!kpmIsPlace(sl)?kpmName(sl):k==="home"?HOMEN:P.n;
-  return Object.assign({},P,{sc:im?sc:P.sc,n:h.part==="chinh"?base:`${base} · ${KPM_PN[h.part]}`})}catch(e){return P}}})();
+  return Object.assign({},P,{sc:im?sc:P.sc,n:h.part==="chinh"&&!HALL_PN[base]?base:`${hallName(base,h.part)} · ${base}`})}catch(e){return P}}})();
 (function(){const c0=curPeople;curPeople=function(){const L=c0.apply(this,arguments);try{const h=kpmHall();if(!h||h.place||!S.visit||S.visit.k!==h.k)return L;
   if(h.part==="cungnhan")return L.filter(kpmIsSrv);
   const hd=kpmHead(h.k);return L.filter(p=>{const r=p&&p.ref;if(r&&rivals.includes(r)&&p.kind!=="chest")return kpmHallOf(r,h.k)===h.part;
@@ -125,7 +125,7 @@ function kpmRoomImg(k,part){try{const a=part==="cungnhan"?residenceArt(null,"cun
 (function(){const r0=renderStage;renderStage=function(){const r=r0.apply(this,arguments);try{const b=document.getElementById("tomap");const h=kpmHall();
   /* the visit line counts the whole palace: in a hall it counts that hall */
   if(h&&!h.place){const m=document.querySelector("#sc-t .rmsg");if(m){const n=curPeople().length;const R=kpmSplit(h.k)[h.part].res;
-   const t=` · ${n?`Ở đây có ${n} người.`:"Không có ai ở đây."}${R.length?` Người ở: ${R.map(kpmResLine).join(", ")}.`:""}`;if(m.textContent!==t){m.textContent=t;m.title=t}}}
+   const t=` · ${hallRole(h.part)}. ${n?`Ở đây có ${n} người.`:"Không có ai ở đây."}${R.length?` Người ở: ${R.map(kpmResLine).join(", ")}.`:""}`;if(m.textContent!==t){m.textContent=t;m.title=t}}}
   if(b){const slot=h?kpmSlotOf(h.k):null;if(h&&slot!=null&&kpmMulti(slot,h.k)){const nm=kpmName(slot);b.textContent="‹ "+nm.replace(/ cung$/," cung");b.setAttribute("aria-label","Về bản đồ "+nm);b.dataset.kpm=slot}else if(b.dataset.kpm!=null){delete b.dataset.kpm;b.textContent="‹ Dư đồ";b.setAttribute("aria-label","Về Dư đồ")}}}catch(e){}return r}})();
 document.addEventListener("click",e=>{const b=e.target.closest("#tomap");if(!b||!S)return;const h=kpmHall();if(h&&b.dataset.kpm!=null){const v=b.dataset.kpm;const slot=/^\d+$/.test(v)?+v:v;window.__kpm={slot,k:h.k}}else window.__kpm=null},true);
 

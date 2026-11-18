@@ -128,7 +128,7 @@ function kszFigHtml(p){let src=kitFigOf(p);if(p&&p.kind==="th"&&(!src||/unknown|
  return `<div class="kszfig">${tag}<span class="kszfs"><img src="${src}" alt="" crossorigin="anonymous" data-age="${age==null?"":age}"></span></div>`}
 /* (6) ONE figure scale: the measured BODY (kitFigBody ht → b) of every figure = the layout's body height × KIT_FIG.fac (never the picture box) */
 function kszFigFit(root){(root||document).querySelectorAll(".kszf .kszfig>.kszfs>img").forEach(im=>{const f=im.closest(".kszf");const lay=KIT_SIZE.lay[f.dataset.lay||"big"]||KIT_SIZE.lay.big;
- const v=typeof kitFigBody==="function"?kitFigBody(im.src,()=>kszFigFit(f)):null;if(!v)return;const age=im.dataset.age===""?null:+im.dataset.age;
+ const v=(typeof kitFigBody==="function"?kitFigBody(im.src,()=>kszFigFit(f)):null)||(typeof kitFigWaitBody==="function"&&kitFigWaitBody(im,()=>kszFigFit(f)));if(!v)return;const age=im.dataset.age===""?null:+im.dataset.age;
  /* KIT 56.4 (owner 18/11 ~07:50Z, step 2 of 56.3): ONE body SKULL TOP -> feet for everybody of this layout (men are NOT taller: no x1.07; a child by age); crowns / robes / sleeves are not measured. */
  const kidf=typeof KIT_FIG==="object"&&age!=null?KIT_FIG.kid(age):1;f.__kszKid=kidf;const body=KIT_SIZE.fig[lay.fig].h*kidf*(f.__kszShrink||1);/* KIT 32.8 feet-fit: ×shrink only when the frame cap would cut the feet (kszFeetFit) */const H=body/Math.max(.2,v.b-kitFigTop(v));
  const ar=im.naturalWidth&&im.naturalHeight?im.naturalWidth/im.naturalHeight:v.ar,W=H*ar,cw=im.parentElement.clientWidth||KIT_SIZE.fig[lay.fig].cw;

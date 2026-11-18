@@ -395,6 +395,36 @@ Object.assign(BAL,{nroad:{
  men:{st:40,kidAge:15,men:{fx:{win:{loyal:3},mid:{loyal:-1},lose:{loyal:-4}},rv:{win:-2,lose:1}},court:{af:4,danh:1},
   off:{pow:{win:2,lose:-2},rv:{win:-1,lose:1},rel:3,ally:5},hz:{fx:{win:{fond:3,tal:2,hp:-2},mid:{tal:1,hp:-1},lose:{fond:-3,hp:-1}},rv:{win:-1,lose:1}},
   askTinh:30,askAf:10,askRel:25}}});
+/* QUESTLINE Q3 — HELPERS IN HER ROAD (owner D-Q1 = "1", OD 18/11 07:56Z; QUESTLINES_AUDIT §4 Q3; engine jroad.js rdHp*, tags + lines jrdhp.js).
+   A «Nhờ …» option of her road tagged in RDHP asks a helper; the helper answers ONE of 4 ways, drawn by weight [full, half, no, sab]:
+     full = giúp hết lòng (the option's own odds) · half = giúp qua loa (odds − half, never below min; a sure option then rolls at 100 − half)
+     no   = từ chối (the option does not run: she pays noC, keeps the hồi and picks again; that option is gone for this hồi)
+     sab  = phá ngầm / mách lẻo (the option fails; Đức − sab.duc; the road's rival {v} oán + sab.oan) — the same shape as jnroad's «mách»
+   weight of an answer = w[role] + trK[role] × Σ tr[nết] over the helper's nết + liking × aff + tâm cơ term + own-road term + nợ ân term (each ≥ 0):
+     liking = the helper's thiện cảm toward her, clamped to ± affCap (consort aff(); own maid / men loyal − 50; court men, house head af.me / 2;
+       Hoàng thượng S.sung − mid.emp, Thái hậu S.th − mid.th, Hoàng hậu S.hh − mid.hh when no NPC queen);
+     tc: a helper with Tâm cơ above tc0 who dislikes her (liking < 0) adds (Tâm cơ − tc0) × tcSab to sab;
+     own road (NPC consorts, jnroad v.nr): her road has the player as rival → rdRiv to sab; her last chapter won → rdWon to full, lost → rdLost to half;
+     nợ ân (j72 ledger, the helper owes her) → owe per debt to full, at most oweMax.
+   The willingness word on the option card (Gợi ý row, KIT §28.6 kitHintRow, never odds): role in unk → word.unk; a Nhiều chuyện helper whose
+   sab share (%) is at least lk → word.lk; else the largest of full / half / no (sab is never shown): word.full / word.half / no-word by role group
+   (noRule → word.rule, noLow → word.low, others word.no). kw = the answer names in the Sổ ghi line. */
+BAL.road.hp={
+ w:{dad:[60,20,15,5],bro:[55,25,15,5],mom:[65,20,10,5],fam:[45,30,20,5],th:[35,25,35,5],hh:[30,25,35,10],emp:[45,25,30,0],
+  eun:[30,35,20,15],srv:[30,35,20,15],maid:[50,35,5,10],doc:[30,25,40,5],off:[30,25,40,5],dan:[35,35,20,10],si:[40,30,25,5],v:[30,25,30,15],v2:[30,25,30,15],mis:[45,30,10,15],
+  man:[40,30,20,10],n1:[50,30,15,5],go:[35,35,15,15],foe:[10,25,40,25]},
+ tr:{"Ân cần":[20,0,-10,-10],"Lạnh lùng":[-10,15,5,5],"Nóng nảy":[5,0,10,5],"Điềm tĩnh":[0,5,5,-5],"Nhiều chuyện":[0,0,0,15],"Kín đáo":[0,10,5,0],
+  "Kiêu ngạo":[-15,0,20,15],"Khiêm nhường":[10,5,-10,-5],"Cương trực":[5,-5,15,-10],"Xu nịnh":[0,10,-5,10],
+  "Thật thà":[10,0,0,-10],"Xảo quyệt":[-10,0,0,25],"Thanh liêm":[5,0,15,-10],"Ham lợi":[0,10,0,10],"Rộng lượng":[15,0,-5,-5],"Thù dai":[-5,0,5,20],
+  "Trọng nghĩa":[20,0,-5,-10],"Thực dụng":[0,10,5,5],"Tham vọng":[-5,0,5,15],"An phận":[-5,15,5,0],"Thực tế":[0,10,5,0],"Vì gia tộc":[5,5,0,0],"Vì mình":[-10,5,5,15]},
+ /* trK: how much a role's nết counts (default 1); a house head's nết is his court face, toward his own daughter it counts little */
+ trK:{dad:.3},aff:[.6,-.1,-.4,-.4],affCap:50,mid:{emp:30,th:30,hh:30},tc0:50,tcSab:.5,rdRiv:25,rdWon:10,rdLost:10,owe:15,oweMax:30,
+ half:20,min:5,noC:{suc:-3},sab:{duc:3,oan:6},lk:20,
+ unk:["go"],noRule:["doc","off","eun","srv"],noLow:["maid","dad","bro","mom","fam","n1"],
+ word:{full:"Sẵn lòng",half:"Miễn cưỡng",no:"Không ưa",rule:"Theo quy củ",low:"Còn đắn đo",lk:"Lắm lời",unk:"Không rõ"},
+ kw:{full:"Giúp hết lòng",half:"Giúp qua loa",no:"Từ chối",sab:"Phá ngầm",lk:"Mách lẻo"},
+ /* the answer-line set (jrdhp.js RDHPL) each role speaks with */
+ type:{dad:"dad",bro:"fam",mom:"fam",fam:"fam",th:"th",hh:"hh",emp:"emp",eun:"eun",srv:"srv",maid:"maid",doc:"doc",off:"off",dan:"dan",si:"si",v:"rv",v2:"rv",mis:"rv",man:"man",n1:"n1",go:"go",foe:"foe"}};
 /* seat counts per rank (review/seatcap): BAL.seatCap IS j30 SEATCAP (one object, filled from BAL.seat in jbal.js — the only place the numbers are written); lower ranks no cap.
    Every road that sets a rank asks jseat.js seatHas / seatDown / seatUp; seatSettle is the net after every turn and on load. */
 BAL.seatCap=SEATCAP;
