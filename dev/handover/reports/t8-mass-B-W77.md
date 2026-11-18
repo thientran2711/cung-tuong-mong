@@ -10,3 +10,8 @@ START_CTX ~0%, depth 8.
 Foreman C's two earlier messages (owner ~19:05Z yellow change, ~19:12Z t1-t3 structure) never reached W77; asked for resend.
 ## Next (after stop lifted)
 c02..c11 (c06: only t8 v1/v2 + t7 v1/v2; t7/t8 v0 kept).
+## 19:05Z yellow change (done) + t1-t3 template (done)
+- --low 1|2|3 rebuilt (TIER_LOW template, LAD t4 structure stepped down), golden_low regenerated, pushed sha 5f9b8830.
+- Yellow = C2 pick, measured on c03_a18_t8_C2.png robe yellow pixels: median #EFBD69, IQR #E2AE4F..#F9CB84 (W72's ~#F2BB5D was close). YEL_NEW now "honey-gold close to hex #EFBD69 (medium depth ...)". t8 (v0/v2): yellow DOMINANT (more than half), her colour second; v1 yellow main + accent; t7: her colour MAIN, yellow parts clearly larger. Old c25-yellow text removed (canon overwrite); golden (A/B) still byte-identical; new prompts in goldenC2/.
+- Sample (seed 7172, 4 gens, 1 each, cut-outs checked): img/_review/t8-reprompt/yellow_c2_sample.jpg (current | new per figure); files c06/c25 _a18_t{7,8}_v0_yC2.png. Magnific t1 ids: c06 TdU0vvvVNR, c25 KLD5OGTkqp.
+- c01 (old yellow) will need redoing if owner approves the sample.
