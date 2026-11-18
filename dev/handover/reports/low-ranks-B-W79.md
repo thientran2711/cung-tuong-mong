@@ -28,3 +28,9 @@ LOW_SIG item ladder is assumed (not owner-reviewed). v1/v2 colours are measured 
 - t6 swatch re-sample only for c06/c25 as a sample (swatch Magnific id TdwDfOyVNR, CDN img/_review/swatch/royal_yellow_C2.png).
 - New t6 sentence in /tmp/claude-0/qq/NEW_T6.txt NOT yet in build.py.
 - Mass not started; no new generations (Magnific out of credit).
+
+
+## UPDATE (W79, after builder push) - t6 swatch applied
+- New t6 sentence (more luxury: pearl-edged collar/cape trim, pearl strands, grander headdress; clearly visible royal yellow = flat swatch image 3, #F2BC61) is IN build.py (YEL_T6, all 32 people, all variants); golden_low t6 files regenerated; test_low_all.py green (2304 builds). t1-t5 outputs unchanged.
+- t6 now needs 3 refs (see README). Swatch id TdwDfOyVNR is on the old Magnific account: re-upload from CDN.
+- NOT done: mass run; any new gen (Magnific account out of credit); stronger-yellow notch for c25-like cases.
