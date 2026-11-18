@@ -21,7 +21,7 @@ const sleep=t=>new Promise(r=>setTimeout(r,t));
   /* 2. borrow -> Cho mượn */
   Q.push({t:"Có người đến",who:pv(v),h:`<p>${v.name} ngượng ngùng hỏi mượn 20 lượng bạc.</p>`,opts:[{n:"Cho mượn",fx:{bac:-20},x:"",go:()=>{}},{n:"Từ chối",fx:{},x:"",go:()=>{}}]});chooseM(0);Q.length=0;showModal();
   /* 3. acts */
-  for(const n of ["Làm thơ dâng lên","Thỉnh an Hoàng hậu","Thỉnh an Thái hậu"]){const i=deck.findIndex(a=>a.n===n);if(i>=0){deck[i].done=0;deck[i].o=100;Q.length=0;used=0;S.buoi=0;try{act(i)}catch(e){}await W(300);Q.length=0;showModal()}else out["missing "+n]=deck.map(a=>a.n).slice(0,40)}
+  for(const n of ["Làm thơ dâng lên","Thỉnh an Hoàng hậu","Thỉnh an Thái hậu"]){const i=deck.findIndex(a=>a.n===n);if(i>=0){deck[i].done=0;deck[i].o=100;Q.length=0;used=0;S.buoi=0;{const r0=window.roll;window.roll=()=>true;try{act(i)}catch(e){}finally{window.roll=r0}}await W(300);Q.length=0;showModal()}else out["missing "+n]=deck.map(a=>a.n).slice(0,40)}
   /* 4. a walk on the last khắc -> Đi */
   const k=places().map(x=>x.k).find(x=>x!==S.place&&x!=="home"&&x!=="lc");Q.length=0;used=3;try{j77LastWalk(k,1)}catch(e){out.walkErr=String(e)}await W(200);
   const di=Q[0]&&Q[0].opts?Q[0].opts.findIndex(o=>o.n==="Đi"):-1;if(di>=0)chooseM(di);await W(600);Q.length=0;showModal();

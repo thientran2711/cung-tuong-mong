@@ -152,15 +152,15 @@ function econSchemePrice(k,a,t){const A0=ACT[k];const base=A0&&A0.__c0&&A0.__c0.
 function econLoyalMaid(p){return p.maid&&!p.maid.spyFor&&(p.maid.loyal||0)>=BAL.loy.low?p.maid:null}
 function econFavor(p){return consorts().filter(v=>v!==p&&!v.out&&v.alive!==false&&rel(v,p)>=BAL.favorRel).sort((x,y)=>rel(y,p)-rel(x,p))[0]||null}
 A("spyk","Tự đi dò la",{c:{},ok:()=>true,o:a=>oddsCl(oSpy(a)-BAL.selfMinus),x:"không tốn bạc · tự đi nghe ngóng: dễ lộ hơn · lộ: Danh -2",f:(a,t)=>{
- if(roll(oddsCl(oSpy(a)-BAL.selfMinus))){ap(a,{tamco:1});return spyFind(a,t,"tự đi nghe ngóng")}
+ if(aRoll(oddsCl(oSpy(a)-BAL.selfMinus),a)){ap(a,{tamco:1});return spyFind(a,t,"tự đi nghe ngóng")}
  relAdd(a,t,BAL.eff.jecon.f);ap(a,{danh:BAL.eff.jecon.danhF});return `${NMc(a)} rình nghe chuyện ${NM(t)}: <span class="r">bị bắt gặp</span>. Danh ${balSg(BAL.eff.jecon.danhF)}. `}});
 A("bribel","Sai cung nữ thân tín lấy lòng",{c:{},ok:(a,t)=>!!econLoyalMaid(a)&&!!t.maid,o:(a,t)=>oddsCl(oBribe(a,t)-BAL.selfMinus),x:`không tốn bạc · cung nữ thân tín lòng -${BAL.loyalCost} · chậm và dễ hỏng hơn`,f:(a,t)=>{
  const m=econLoyalMaid(a);if(!m)return"";m.loyal=cl((m.loyal||0)-BAL.loyalCost,0,100);
- if(roll(oddsCl(oBribe(a,t)-BAL.selfMinus))){t.maid.loyal=cl(t.maid.loyal-BAL.eff.jecon.loyalF,0,100);if(t.schemes>0){/*evok: schemes>0*/evA(a,t,BAL.eff.jecon.evF);return `${m.name} làm thân với ${t.maid.name}, dò ra mưu kế của ${NM(t)}: ${NM(a)} nắm ${balAb(BAL.eff.jecon.evF)} chứng cứ. `}return `${m.name} làm thân được với ${t.maid.name} của ${NM(t)}. `}
+ if(aRoll(oddsCl(oBribe(a,t)-BAL.selfMinus),a)){t.maid.loyal=cl(t.maid.loyal-BAL.eff.jecon.loyalF,0,100);if(t.schemes>0){/*evok: schemes>0*/evA(a,t,BAL.eff.jecon.evF);return `${m.name} làm thân với ${t.maid.name}, dò ra mưu kế của ${NM(t)}: ${NM(a)} nắm ${balAb(BAL.eff.jecon.evF)} chứng cứ. `}return `${m.name} làm thân được với ${t.maid.name} của ${NM(t)}. `}
  t.maid.loyal=cl(t.maid.loyal+BAL.eff.jecon.loyalF_2,0,100);evA(t,a,BAL.eff.jecon.evF_2);return `${t.maid.name} nhận ra ${m.name} đến dò, báo cho chủ. `}});
 A("blockf","Nhờ ơn người quen rút thẻ bài",{c:{},ok:(a,t)=>!!econFavor(a)&&!t.block,o:a=>oBlock(a),x:`không tốn bạc · người quen của ngươi trả ơn: thiện cảm -${BAL.favorCost} · 2 tuần nàng không được lật thẻ`,f:(a,t)=>{
  const v=econFavor(a);if(!v)return"";relAdd(v,a,-BAL.favorCost);const c=caught(a,t,false,"nhờ người rút thẻ bài của "+NM(t));if(c)return c;
- if(roll(oBlock(a))){t.block=2;return `${v.name} nhờ người ở Kính sự phòng rút thẻ bài của ${NM(t)} giúp ${NM(a)}: 2 tuần nàng không được lật thẻ. `}return `Kính sự phòng không dám rút thẻ bài của ${NM(t)}. `}});
+ if(aRoll(oBlock(a),a)){t.block=2;return `${v.name} nhờ người ở Kính sự phòng rút thẻ bài của ${NM(t)} giúp ${NM(a)}: 2 tuần nàng không được lật thẻ. `}return `Kính sự phòng không dám rút thẻ bài của ${NM(t)}. `}});
 try{for(const [k,g] of [["spyk","Hại nhỏ"],["bribel","Hại nặng"],["blockf","Hại nặng"]]){const G=RVGRP.find(x=>x[0]===g);if(G&&!G[1].includes(k))G[1].push(k);ACTDOM[k]=ACTDOM[k]||"Mưu kế"}
  AOUT.spyk=aoLz(()=>`nắm thêm ${balWord(balAb(BAL.eff.jtruth.evN))} chứng cứ, Tâm cơ +1`/* previews: spyFind */,`bị bắt gặp: Danh -2, nàng thù ${balSg(BAL.eff.jecon.f)}`);AOUT.bribel=[`cung nữ của nàng ngả về phía ngươi (dò ra mưu kế: ${balAb(BAL.eff.jecon.evF)} chứng cứ)`,`bị báo cho chủ: nàng nắm ${balAb(BAL.eff.jecon.evF_2)} chứng cứ`];AOUT.blockf=["2 tuần nàng không được lật thẻ","không thành; người quen vẫn mất thiện cảm"];
  J78VERB.spyk="tự dò la {t}";J78VERB.bribel="sai cung nữ lấy lòng người của {t}";J78VERB.blockf="nhờ người rút thẻ bài của {t}"}catch(e){}

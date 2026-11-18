@@ -22,7 +22,7 @@ const titleUp=()=>{const f=document.getElementById('krotf'),w=f&&f.contentWindow
 /* the bot (same moves as dev/measure/firsthour.js); returns visited places */
 async function play(game,weeks,fresh){return game.evaluate(async([weeks,fresh])=>{const out={buoi:0,tuan:0,places:[],bad:[]};const sl=t=>new Promise(r=>setTimeout(r,t));
  const scan=()=>{for(const i of document.images)if(i.complete&&i.currentSrc&&i.naturalWidth===0&&!out.bad.includes(i.currentSrc))out.bad.push(i.currentSrc)};
- try{if(fresh){SLOT=3;document.getElementById('title').hidden=true;for(let i=0;i<20;i++){start();if(S.origin.k!=='cnv')break}Q.length=0;render()}
+ try{if(fresh){SLOT=3;document.getElementById('title').hidden=true;for(let i=0;i<20;i++){try{nlNew()}catch(e){}start();if(S.origin.k!=='cnv')break}Q.length=0;render()}
   const e0=endTurn;endTurn=function(){out.tuan++;return e0.apply(this,arguments)};
   const drain=async()=>{for(let j=0;j<12&&Q.length&&!S.dead;j++){const m=Q[0];try{if(m.opts&&m.opts.length){chooseM((L=>L.length?L[Math.floor(Math.random()*L.length)]:0)(m.opts.map((c,i)=>c.off?-1:i).filter(i=>i>=0)))}else closeModal()}catch(e){Q.shift();try{showModal()}catch(e){}}await sl(100);scan()}
    for(const x of [...document.querySelectorAll('#ov,#modal')].filter(x=>!x.hidden)){const bt=[...x.querySelectorAll('button')].find(b=>b.offsetParent&&!b.disabled);if(bt){bt.click();await sl(100)}}};
