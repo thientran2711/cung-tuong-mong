@@ -93,6 +93,7 @@ function lxInitAll(){try{if(!S||S.dead||!lxOn())return;if(typeof isSrv==="functi
 function lxLvIx(k){return TOIL_LVS.indexOf(TOIL_OLDLV[k]||k)}
 function lxCapRec(p,rec){if(!lxOn()||!rec||!rec.makeup)return rec;const n=lxCount(p),cap=BAL.ration.cap[n];rec.lxCap=cap;
  /* review fix 1: the parts she does not own are not painted (col.no, honoured by jtoil toilMkLayer / toilMkDraw / toilMakeupSvg) */const M=lxMiss(p);rec.col=rec.col||{};if(M.length)rec.col.no=M.slice().sort();else delete rec.col.no;
+ /* r6 (merge with main's "Điểm trang nhanh", which skips the mirror): every painted part wears a colour she OWNS */for(const part of BAL.ration.parts){const L=lxBoxes(p,part);if(L.length&&!L.some(e=>e.c===rec.col[part]))rec.col[part]=L.slice().sort((a,b)=>b.u-a.u)[0].c}
  if(cap==="moc"){rec.makeup=false;rec.look=null;return rec}const mk=toilMk(rec);if(mk==="vung"||lxLvIx(mk)<=lxLvIx(cap))return rec;
  const T=BAL.toil.tier,top={vung:T[0]-1,vua:T[1]-1,dep:T[2]-1}[cap];if(top!=null){rec.score=Math.min(rec.score|0,top);rec.look=toilTier(rec.score)}return rec}
 function lxSpend(p,rec,col){const B=BAL.ration,out={used:[],gone:[],taint:null};if(!lxOn()||!rec||!rec.makeup)return out;const mk=toilMk(rec);

@@ -618,6 +618,16 @@ No text over text: a pop (`kg82Pop`) replaces any live pop it would land on; a r
 - Not a tài nghệ frame (no figure): pet care mini-game (`petcGameBox`).
 - Sample: kit page §13.4.
 
+### 13.6 QUICK BUTTON · kitQuick (owner 18/11 ~05:45Z + ~05:55Z, review/mg-skip-all) — `dev/build/j79.js`, odds `BAL.skip` (jbal2)
+The ONE quick / skip choice of EVERY mini-game, beside its start button (the old `#mgskip` look: `.kbtn.alt` + class `kquick`, big line = name, `<small>` line).
+- `kitQuick({id, n, win, lose, sure, sub, data})` → button HTML (default id `kg82skip`, name "Để trời định"); `kitQuickSub(o)` → only the small line (j5 `#mgskip`, j83).
+- Small line = the odds WORD of `BAL.skip.od` (`word(od(BAL.skip.od))`, VANPHONG ladder, never %) · `thành: <win>` · `hỏng: <lose>`; `sure:1` = no roll, no word (a sure act shows no odds word).
+- `kitQuickRoll()` = THE quick roll (`roll(od(BAL.skip.od))`), the only one; co-op: it runs where the game runs (the seat that plays).
+- `sub:"…"` = a game whose quick choice keeps its OWN rule (contests / exams: the mark of a girl of her level; court acts: the act's odds; slap: no play) — same part, its own line.
+- Name per game type: "Để trời định" (lessons, Tu đức, care games), "Học nhanh" (Tài nghệ lessons / practice), "Điểm trang nhanh" (makeup), "Kết nhanh" (veil craft).
+- Outcome table (a quick result never beats a good own play): lesson won = tiến bộ một phần (j5/j83: 1 of 3 pts; jtd: the progress of a `BAL.skip.raw` play), lost = 0 · works / crafts = never a product (sure) · makeup won = Đoan trang (`BAL.toil.tier[0]`, the middle tier), lost = Vụng về; "Để mặt mộc" stays its own choice · care (pet, plant) won = `BAL.skip.care` of the gain, lost = nothing.
+- Audit: `node dev/test/mg-skip-audit.js` (every game listed, FAILS a new game frame without kitQuick); page test `dev/test/mg-skip.js`.
+
 ## 14. SCENE PANEL (j79) — identity card, opening story, title screen
 - Compact translucent kit frame (`rgba(255,250,240,.90)` + blur) to one side in landscape (max 440 px / 44vw, vertically centred, right) and in the
   lower part in portrait; the background art stays visible. Fits ONE screen, no scrolling, buttons always visible (tested at the 4 sizes).
@@ -3788,6 +3798,8 @@ Art (Magnific gpt-2-6, recipes `dev/fxwork/buoi/slice_buoi.py`, CDN `img/fx/`, o
 UPDATE 16/11 (anim-pace): FULL SCREEN at every size (tint + ink wash + vignette cover the viewport; sky band + title centred, sized by vmin), clearer, pace x BAL.pace (~3 s, dawn ~3.5 s). SEASON variants (SEAK: xuan petals / ha lotus + warm haze / thu maple leaves / dong snow + cold haze) and FESTIVAL variants (the game's own FEST table: newyear, nguyentieu, thanhminh, doanngo, phoenix, thattich, trungthu, trungcuu, dongchi, giaothua; name shown under the title) use the kit particle layer's painted sprites + a tint; optional painted band skin `img/fx/buoi-band-<key>.webp` (BTR_ART lists existing: thu, trungthu); missing = today's per-buổi look. Test hook `window.__btrVar={sea,fest}`.
 Test: `node dev/test/buoi-transition.js <url> <out>` (6 viewports). Kit page sample §74 (a button per buổi). Test hook `window.__btrHold` stops the auto end.
 
+OWNER 18/11 ~06:20Z (review/buoi-banner, canon overwrite of the veil): the game UI stays visible and in place under the animation. The opaque full-screen backdrop (tint, ink wash, vignette) is REMOVED; sky band, sun / moon, mist, first light, title plate, seal, season / festival sprites stay as approved. The whole `#buoitr` lies on the screen at `BTR_OP` = 0.85 (owner's pick from the 70 / 80 / 85 ladder). Gọn = the title only, ~0.7 s.
+OWNER 18/11 ~06:35Z (approved the approach): the WHOLE group (sky / mountain band + title + icon + seal + sub line) is ONE compact block anchored flush against the TOP EDGE of the stage (`.stage` top − 2 px, `--btr-top`; iPad too), centred horizontally; the title block overlaps the lower ~60 % of the band (no gap, nothing in the middle of the stage); the band's top and bottom edges feather out (vertical mask on `.btr-sky`, no box-shadow line); the sub line (festival / season name) is bold, ~1.3–1.9 rem, full-strength ink with a soft halo, for every variant.
 
 ## 75. kitBackBtnHtml · painted "back to a place" button (owner 15/11, review/room-btn) — `dev/build/jk3.js`
 - Replaces the wide text bar "‹ Phòng" in the header (owner: it read like an empty field) and the "‹ Dư đồ" chip on a place stage. ONE part: `kitBackBtnHtml(kind,label)`
