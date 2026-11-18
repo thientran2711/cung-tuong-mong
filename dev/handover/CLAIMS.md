@@ -179,3 +179,4 @@ Thái hậu missing c21–c24,c28–c32 | handover | session_01PEhRbvnAhxnHAp1NL
 triều phục round 8 (c06) | handover | session_01PEhRbusUfDXYLRsmUuYoaw (W104f, Foreman C ROOT-33) | RUNNING | 2026-11-18T23:00Z
 Nữ đế r10b + BD Quý phi (3 images) | handover | session_01PEhRbutG3NMnejgY9CKjDv (N2, Foreman C ROOT-33) | RUNNING | 2026-11-18T23:00Z
 | rel-picker r2 (sonnet worker) | review/rel-picker-r2 | ROOT-58 worker | SẴN SÀNG KIỂM 38079d9f | 18/11 |
+kc/ngheo NEW c13+c16 (4 gens) | handover | K4 (Foreman C ROOT-33) | RUNNING | 2026-11-18T23:05Z
