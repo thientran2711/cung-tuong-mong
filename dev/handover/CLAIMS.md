@@ -51,7 +51,7 @@ new-faces-sample (n01–n03) | CDN _review only | W67 session_011xDdVSVdUZSmt6L1
 yellow-deeper sample | CDN _review only | W68 session_011xDdVQbC2u4UfLmkcMAt3J | RUNNING | 2026-11-18T16:59Z (Foreman C ROOT-27)
 princess-rank-sample | CDN _review only | W69 session_011xDdVR1dCYEdUEDNx5i8Dh | DONE (archived) | 2026-11-18T17:14Z (Foreman C ROOT-28)
 b10-a26-c12-c22 (cont.) | CDN _review only | W59e session_011xDdVP5BTp4kpfGXZ44thm (W59d archived) | RUNNING | 2026-11-18T17:42Z (Foreman C ROOT-29)
-b10-a26-c23-c32 (cont.) | CDN _review only | W60d session_011xDdVQACckBi7ydyWzJjVm (W60c archived) | RUNNING | 2026-11-18T17:16Z (Foreman C ROOT-28)
+b10-a26-c23-c32 (cont.) | CDN _review only | W60e session_011xDdVNMP1z6WhDLur1sg2w (W60d archived) (W60c archived) | RUNNING | 2026-11-18T17:16Z (Foreman C ROOT-28)
 b10-a36-c23-c32 (cont.) | CDN _review only | W63f session_011xDdVNP9vpwSWD4MCe2jrh (W63e archived) | RUNNING | 2026-11-18T17:39Z (Foreman C ROOT-29)
 a18-scan-2 regens | CDN _review only | W65d session_011xDdVQVsntxHXp735x2for (W65c archived) | RUNNING | 2026-11-18T17:40Z (Foreman C ROOT-29)
 quoc-tang-sample | CDN _review only | W70 session_011xDdVSaNiUfxn72JcAYZo8 | DONE (archived) | 2026-11-18T17:17Z (Foreman C ROOT-28)
