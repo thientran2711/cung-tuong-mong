@@ -536,5 +536,5 @@ Audit live consort figures c01–c32 (2K redo / m09 skin) | handover reports/con
 | place-stage r5 (owner pick B 501 + vivid marker + 4-person iPad trial; sonnet; brief briefs/place-stage-r5.md; r4 SzjeRxj archived) | review/place-stage | MAIN ROOT-46 | session_01UV1SzkV3Bc1u4BHrVH1jFj | READY FOR REVIEW a341aea | 18/11 05:54Z |
 | REVIEW questline-q1b 255f5b2a (BIG; E7br) | review/questline-q1b | E ROOT | session_01DgYSWkpB8TxDvheFX6vvwn | FAIL 255f5b2a (reports/questline-q1b-review.md) | 18/11 06:22Z |
 | REVIEW BIG mg-skip-all 0f542e1 (opus; prompt inline) | review/mg-skip-all | MAIN ROOT-46 | session_01UV1Szhzc66138A1td1yMfM | RUNNING | 18/11 06:27Z |
-| fullbody-frame step 1 Tuần lục sample (owner 18/11 06:45Z: c03 canvas fits exactly, no cut; sonnet; brief briefs/fullbody-frame-s1.md) | review/fullbody-frame | MAIN ROOT-47 | session_01UV1SzkhyYuitpjvm16Zn3P | RUNNING | 18/11 06:52Z |
+| fullbody-frame step 1 Tuần lục sample (owner 18/11 06:45Z: c03 canvas fits exactly, no cut; sonnet; brief briefs/fullbody-frame-s1.md) | review/fullbody-frame | MAIN ROOT-47 | session_01UV1SzjVbe2rs236yVuGUDn (SzkhyYu rolled over, archived) | RUNNING | 18/11 06:52Z |
 | REVIEW person-dialog-restore e6bda27 (SMALL; sonnet; prompt inline) | review/person-dialog-restore | MAIN ROOT-47 | session_01UV1SzmHVSD9r5fHMn8YFJK | RUNNING | 18/11 06:39Z |
