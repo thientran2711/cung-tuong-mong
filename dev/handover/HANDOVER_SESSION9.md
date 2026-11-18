@@ -1051,3 +1051,4 @@ LESSONS s41: verify any worker art/asset count on the CDN before telling her (52
 - (18/11 02:07Z) OWNER UI BUG result card no reasons (OD ~09:03Z) → worker result-reason. C-AG #8: Thử tay preview = separate-origin Pages build of ag-all-2-land (her save untouched) → s42 said GO; land ETA 04:00–04:30Z.
 - (18/11 02:08Z) OWNER: wet FINAL; mud shift up one level (lv1=old lv2, lv2=old lv3, lv3 stronger) → cloth-xoc r6.
 - (18/11 02:10Z) IN greet-stranger SẴN SÀNG KIỂM 54431a1 (root: jmen talkOpts kind 'min' skipped k61 gate) → reviewer (sonnet, trial-merge with men-forbidden).
+- (18/11 02:14Z) OWNER asked about tea + other marks. Fact: ALL LOOK_DECALS decals are on CDN (15 keys checked 200); tea redo (OD 00:18Z) never done → cloth-xoc next; others never shown to her → worker look-fx (samples).
