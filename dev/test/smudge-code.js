@@ -44,6 +44,22 @@ const {chromium}=require('playwright');const URL=process.argv[2],OUT=process.arg
   C.noPts=(()=>{try{return lkSmuImg(S,'zz-none-1.png',{lv:2})===''}catch(e){return false}})();
   C.balOnly=!!(BAL.looks.smuFx&&BAL.looks.smuFx.blush&&BAL.looks.smuFx.tear);
   clear();host.remove();return C});
+
+ /* MODE=lod (owner 18/11 02:20Z): the same smudge at THREE sizes through the real size pass (toilLodPass): big face close-up, stage full figure (380 css px tall), small round chip (96 css px). One image per level and size: <outdir>/lod-<lv>-<face|stage|chip>.png, dpr 3, NOT upscaled. */
+ if(process.env.MODE==='lod'&&OUT){require('fs').mkdirSync(OUT,{recursive:true});
+  for(const size of ['face','stage','chip'])for(const lv of [1,2,3]){await p.evaluate(async([lv,size])=>{const clear=()=>{S.lk=null;if(S.toilette)delete S.toilette.lk};clear();lkSmudge(S,lv,'mua');
+   let host=document.getElementById('smu-shot');if(!host){host=document.createElement('div');host.id='smu-shot';document.body.appendChild(host)}
+   if(!document.getElementById('smu-hide')){const st=document.createElement('style');st.id='smu-hide';st.textContent='body>*:not(#smu-shot){visibility:hidden!important}';document.head.appendChild(st)}
+   host.style.cssText='position:fixed;left:0;top:0;z-index:2147483647;background:#f3e8d4;padding:14px 16px;width:420px;font:700 30px/1.1 serif;color:#4a2a14';
+   const f=kitFile(window.__fig),L=['','nhẹ','vừa','nặng'][lv],SZ={face:'cận mặt',stage:'toàn thân',chip:'ô nhỏ'}[size];
+   const body=()=>size==='face'?`<div class="kfzoom" style="width:388px;margin:0 auto 8px">${kitFaceZoom(S,f).replace(/^<div class="kfzoom"[^>]*>/,'').replace(/<\/div>$/,'')}</div>`:
+    size==='stage'?`<div style="position:relative;width:200px;height:380px;margin:0 auto">${kitStageFig(S)||''}</div>`:`<div class="kfzoom" style="width:96px;margin:6px auto 6px">${kitFaceZoom(S,f).replace(/^<div class="kfzoom"[^>]*>/,'').replace(/<\/div>$/,'')}</div>`;
+   const html=()=>`<div style="margin-bottom:8px">Lem ${L} · ${SZ}</div>${body()}`;
+   host.innerHTML=html();await new Promise(r=>setTimeout(r,300));for(let i=0;i<80;i++){const bad=[...host.querySelectorAll('img.klk-smu')].some(x=>x.src.indexOf('data:image/png')!==0);if(!bad)break;await new Promise(r=>setTimeout(r,150))}
+   host.innerHTML=html();for(let k=0;k<4;k++){try{toilLodPass()}catch(e){}await new Promise(r=>setTimeout(r,400))}
+   for(let i=0;i<120;i++){if([...host.querySelectorAll('img')].every(x=>x.complete&&x.naturalWidth>0))break;await new Promise(r=>setTimeout(r,150))}await new Promise(r=>setTimeout(r,500))},[lv,size]);
+   await p.locator('#smu-shot').screenshot({path:`${OUT}/lod-${lv}-${size}.png`})}
+  console.log(JSON.stringify({lod:await p.evaluate(()=>[...document.querySelectorAll('img.klk-smu')].map(i=>i.dataset.lsk.split('|').slice(-1)[0])),errs}));await b.close();return}
  if(OUT){require('fs').mkdirSync(OUT,{recursive:true});
   for(const lv of (process.env.PCT?[2,3]:[0,1,2,3])){await p.evaluate(async([lv,CF,PC])=>{const clear=()=>{S.lk=null;if(S.toilette)delete S.toilette.lk};clear();if(lv)lkSmudge(S,lv,'mua');
    let host=document.getElementById('smu-shot');if(!host){host=document.createElement('div');host.id='smu-shot';document.body.appendChild(host)}
