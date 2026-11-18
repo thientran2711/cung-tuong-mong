@@ -1,4 +1,4 @@
-# tuyet-glow — review/tuyet-glow @ b8b91869 (v6, BUILT; gates run at 4cc143ce, b8b91869 only adds a dev/measure mode)
+# tuyet-glow — review/tuyet-glow @ 1c4ea403 (v8, APPROVED FINAL by owner 18/11 01:24Z; in review/looks-s40)
 Owner OD 17/11 ~21:50Z, ~21:55Z, ~22:05Z, ~22:35Z, ~23:05Z, ~23:10Z. Based on review/toil-looks5 68e520f6 (owner row-3 blush). Sample only, nothing built into the game flow beyond the glow layer in jtoil.js.
 ## History (rejected by owner)
 v1 painted patches, v2 stronger patches, v3 travelling band + global pulse ("curtain", fake), v4 skin highlights incl. lips ("close, not yet").
@@ -21,3 +21,6 @@ v5b-A/B/C.mp4 (face 960 px, 16 s), v5b-B-room.mp4; older v1-v5 files also there.
 - Hook: toilFaceLayer (look tuyet) -> every place kitFxLayers draws her: stage/podium (kitFxPut), avatar frames (jk4:191), mirror kitFaceZoom, toilette reveal, others'/co-op views.
 - Gates (4cc143ce): QUICKCHECK PASS 134 s (render 166/165 ms, tab 360/355, buoi 768/704), core gates PASS (one-core-guard fixed: skin tolerance ladder -> BAL.toil.glow.tolK), time-spill PASS.
 - Shots: https://ctm-img.victoria-tntt.workers.dev/img/_review/tuyet-glow/shot-fold.png (755x1000@2) and shot-ipad.png (1180x820@2); videos v6.mp4 / v6-room.mp4. Delete after verdict: cdn_sync.py --wipe-review tuyet-glow.
+
+## Final (v7 lower face, v8 smaller grains)
+v7: >= BAL.toil.glow.loMin (2) of each burst's 7 stars on chin/jaw/lower cheeks. v8: BAL.toil.glow.size .72 (stars + iris twinkles). Quickcheck PASS 133 s at 1c4ea403, core gates PASS. Review shots wiped from the CDN (img/_review/tuyet-glow/).
