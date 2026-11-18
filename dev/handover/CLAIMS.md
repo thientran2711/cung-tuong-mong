@@ -1,6 +1,6 @@
 
-| doc-90-women (sonnet; ORDER MAIN ROOT-56 21:05Z; 90 nhân vật nữ canon sweep) | review/doc-90-women | B | session_01N1tNP3tS9mLEuh2PPHPqBr | RUNNING | 18/11 21:21Z |
-| REVIEW doc-90-women r1 (sonnet SMALL) | review/doc-90-women-r1 | B | session_01N1tNP2ce6zNfpLnwAgmRZS | RUNNING | 18/11 21:24Z |
+| doc-90-women (sonnet; ORDER MAIN ROOT-56 21:05Z; 90 nhân vật nữ canon sweep) | review/doc-90-women | B | session_01N1tNP3tS9mLEuh2PPHPqBr | LIVE 884ce97c (22:22Z) | 18/11 22:49Z |
+| REVIEW doc-90-women r1 (sonnet SMALL) | review/doc-90-women-r1 | B | session_01N1tNP2ce6zNfpLnwAgmRZS | LIVE 884ce97c (22:22Z) | 18/11 22:49Z |
 | role-parity-4 B4 (opus; ORDER C-AG #16 21:10Z + AMEND 21:16Z; illicit buys / j22 affair / harm:xx+vp) | review/role-parity-4 | B | session_01N1tNP4ot5eXFn8KFS9CsoB | STOPPED (dup of review/role-parity-2 47dc7f0; C-AG STOP 21:52Z) | 18/11 22:10Z |
 | REVIEW role-parity-4 r1 (opus BIG; deeds ±3 % blocking, coop-e2e) | review/role-parity-4-r1 | B | session_01N1tNP5WZokR3mWmuaeQ79s | CANCELLED (B4 stopped) | 18/11 22:10Z |
 | REVIEW coop-thin-f1 r1 #3 (opus BIG; bisect coop-cyc THIN=6 red after fa411d6f, final merge, gates) | review/coop-thin-f1-r1 | B | session_01N1tNP5p1YYUdf12hpmTewC | PASS review/coop-thin-f1-r1 53544bd8 (descends from origin/main ddbf9c7) | 18/11 21:23Z |
