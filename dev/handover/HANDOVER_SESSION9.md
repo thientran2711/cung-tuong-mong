@@ -1124,3 +1124,4 @@ RUNNING (all report to MAIN — tell them the new main id):
 - builder s37a SzjA6P5mZskv3JKn3BV idle (archive if nothing to batch).
 OWNER PENDING: tea verdict; opt-card A/B/C; ladder pick (when sent); place-banner after-shots.
 Wake: s43 trigger trig_01DnGumsCEWwRGKJbfBNDc4D (:32) → DELETE it when the ROOT main sets its own (s43 leaves it on so wakes still reach s43 until then; s43 relays only).
+- (18/11 02:36Z) look-fx-wire Szm7mHX LADDER READY (ladder-muc/muoi/cao + -3x on CDN img/_review/look-fx/) LOOKED (whole faces, c01+c30, 100→40 %: ink greys out, soot fades, scratch pinker) → sent owner; waiting her % per mark → worker sets ONE BAL strength per mark, then wire.
