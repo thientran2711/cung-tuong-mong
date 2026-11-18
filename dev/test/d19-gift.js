@@ -45,9 +45,9 @@ const {chromium}=require('playwright');const D=require('./lib/device');const out
    const items=Object.keys(IT).filter(k=>IT[k].pr&&!IT[k].il&&!IT[k].keep&&!IT[k].nt&&Array.isArray(IT[k].tg)).sort((a,b)=>IT[a].pr-IT[b].pr);
    const pickI=[items.find(k=>IT[k].tg.includes("rv")&&IT[k].pr>=20),items.find(k=>IT[k].tg.includes("rv")&&IT[k].pr>=100),items.find(k=>!IT[k].tg.includes("rv")&&IT[k].pr>=20&&IT[k].pr<=60),items.find(k=>!IT[k].tg.includes("rv")&&IT[k].pr>=100)].filter(Boolean);
    const works=[0,1,2,3].map(ti=>({k:"tp",wk:{kind:"theu",a:"hoa",ti,q:ti*2+1,n:`Khăn thêu (${WTIER[ti]})`,m:0,bn:"ngươi",d:"x",lv:2}}));
-   for(const v of V){const tr=traitsOf(v).join(", ");rows.push({who:v.name,traits:tr,road:"Lễ bạc",piece:`${G.bac} bạc`,q:"—",ok:true,bac:G.bac,rel:G.aff});
-    for(const e of works){const w=tsGiftWorth(e,v,S);let rel="";try{const ev=wkEval(S,e.wk,v);rel=ev.ok?ev.rel:""}catch(x){}rows.push({who:v.name,traits:tr,road:"Tác phẩm",piece:e.wk.n,q:w.q,ok:w.ok,bac:w.bac,rel,why:w.why,note:w.note})}
-    for(const k of pickI){const e={k};const w=tsGiftWorth(e,v,S);rows.push({who:v.name,traits:tr,road:"Đồ",piece:`${IT[k].n} (${IT[k].pr} bạc${IT[k].tg.includes("rv")?", phi tần ưa":""})`,q:w.q,ok:w.ok,bac:w.bac,rel:w.ok?w.q+3:"",why:w.why,note:w.note})}}
+   for(const v of V){const tr=traitsOf(v).join(", ");rows.push({who:v.name,traits:tr,road:"Lễ bạc",piece:`${G.bac} bạc`,q:G.bac,ok:true,bac:G.bac,rel:G.aff});
+    for(const e of works){const w=tsGiftWorth(e,v,S);let rel="";try{const ev=wkEval(S,e.wk,v);rel=ev.ok?ev.rel:""}catch(x){}rows.push({who:v.name,traits:tr,road:"Tác phẩm",piece:e.wk.n,q:w.wb,ok:w.ok,bac:w.bac,rel,why:w.why,note:w.note})}
+    for(const k of pickI){const e={k};const w=tsGiftWorth(e,v,S);rows.push({who:v.name,traits:tr,road:"Đồ",piece:`${IT[k].n} (${IT[k].pr} bạc${IT[k].tg.includes("rv")?", phi tần ưa":""})`,q:w.wb,ok:w.ok,bac:w.bac,rel:w.ok?giftVal(Object.assign({k},IT[k]),v)+3:"",why:w.why,note:w.note})}}
    return{eq:G.eq,bacShare:G.bac,rows}}catch(e){return{err:String(e.stack||e)}}});
   /* --- shots: the three option cards, then the work picker (scratch, LOOK at them) --- */
   await g.evaluate(()=>{try{Q.length=0;const V=rivals.filter(x=>x.alive!==false&&!x.out&&!x.queen&&!traitsOf(x).includes("Kiêu ngạo")).slice(0,3);V.forEach(v=>{v.ghen=40});S.bac=60;
@@ -75,6 +75,6 @@ const {chromium}=require('playwright');const D=require('./lib/device');const out
   ck(!errs.length,'page errors '+errs.join(' | '));ck((r.cardsDom||[]).length===3&&!(r.cardsDom||[]).some(c=>c.w),'3 cards (Thôi = kit ✕), no overflow '+JSON.stringify(r.cardsDom));
  }
  /* parity table (markdown) */
- const P=R.fold&&R.fold.parity;if(P&&P.rows){const L=[`| Receiver | Traits | Road | Piece | Receiver worth (need ≥ ${P.eq}) | Enough | Cost to her (bạc) | Thiện cảm | Why not / note |`,'|---|---|---|---|---|---|---|---|---|'];
+ const P=R.fold&&R.fold.parity;if(P&&P.rows){const L=[`| Receiver | Traits | Road | Piece | Worth to her, bạc (need ≥ ${P.bacShare}) | Enough | Cost to the giver (bạc, sale price) | Thiện cảm | Why not / note |`,'|---|---|---|---|---|---|---|---|---|'];
   for(const x of P.rows)L.push(`| ${x.who} | ${x.traits||""} | ${x.road} | ${x.piece} | ${x.q} | ${x.ok?"yes":"no"} | ${x.bac} | ${x.rel} | ${x.why||x.note||""} |`);require('fs').writeFileSync(`${out}/parity.md`,L.join('\n')+'\n')}
  console.log(JSON.stringify(R,null,1));console.log(F.length?`D19-GIFT FAIL ${F.length}:\n - `+F.join('\n - '):'D19-GIFT PASS');await b.close();srv.close();process.exit(F.length?1:0)})();
