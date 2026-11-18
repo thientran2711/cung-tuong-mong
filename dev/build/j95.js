@@ -524,7 +524,9 @@ function j95menSigns(){const out={};if(!j95men())return out;const MY=S.menWhy||{
    const txt=String(m.h||"");const v=liveRivals(true).find(x=>txt.includes(x.name));if(!v)return m;const hostile=/mỉa mai|gây sự|hạch/.test(txt);const g=motiveOK(v,S,hostile?"provoke":"visit");j95actLog(v,S,hostile?"provoke":"visit",g);
    if(!g.ok)continue;try{const R=S.roster;if(R&&R.key===j95key()&&R.P["v"+v.id]&&!v.confined&&!S.out){const kh=j95kh();R.P["v"+v.id][kh]=["home",hostile?"provoke":"visit","me",g.why||"sang thăm"];j95sync()}}catch(e){j95err("approach",e)}return m}return null}}
  /* tai mắt can tell a habit (true), and when an enemy has learnt hers */
- if(typeof j78facts==="function"){const f0=j78facts;j78facts=function(v){const F=f0.apply(this,arguments);try{if(j95on()&&v&&v!==S){const z=j95z();const H=j95hab(v).map(h=>[h,j95res(v,h.k)]).filter(x=>x[1]);const cs=j95cs();
+ /* ag2-perf F1 (outcome-identical): while window.J78MEMO is a Map (jagknow knSellTick: one pass, dropped on any sale) the facts BELOW this wrapper
+    (j78 + jdis + jmind + jtruth: no dice, read-only) are read once per person; the habit pick here still rolls its own die every call. */
+ if(typeof j78facts==="function"){const f0=j78facts;j78facts=function(v){const M=window.J78MEMO;let F;if(M&&v&&M.has(v))F=M.get(v).slice();else{F=f0.apply(this,arguments);if(M&&v&&Array.isArray(F))M.set(v,F.slice())}try{if(j95on()&&v&&v!==S){const z=j95z();const H=j95hab(v).map(h=>[h,j95res(v,h.k)]).filter(x=>x[1]);const cs=j95cs();
    if(H.length){const [h,k]=H[Math.floor(Math.random()*H.length)];const c=cs.slice().sort((a,b)=>h.s[b]-h.s[a])[0];const W=j78who(v);
     F.push({k:"habit:"+c+":"+k,kind:"habit",pri:30,txt:`${W} hay ${ACT95[h.a]} ở ${j95pn(k)} ${j95bl(c)}.`,go:()=>{const O=z.obs[v.id]=z.obs[v.id]||{};const o=O[c+":"+k]=O[c+":"+k]||{n:0,w:wk()};o.told=1;o.w=wk();o.by="Tai mắt";return ""}})}
    const mk=z.meK[v.id];if(mk)F.push({k:"stalk",kind:"secret",pri:60,txt:`${j78who(v)} đã dò ra ngươi hay đến ${j95pn(mk.k)} ${j95bl(mk.c)}, cho người rình ở đó.`,go:()=>{mk.told=wk();return ""}})}}catch(e){}return F}}
