@@ -376,7 +376,7 @@
 "status": "PARTIAL",
 "group": "G2",
 "event": "faction joint scheme; leader invites her",
-"fp": "  if(l!==S&&roll(6)){const E0=consorts().filter(x=>!"
+"done": "npcWhy(\"facJoint\",{p:l,f})"
 },
 {
 "f": "j10.js",
@@ -384,7 +384,7 @@
 "status": "PARTIAL",
 "group": "G2",
 "event": "faction joint scheme; leader invites her",
-"fp": "==S&&!facOf(S)&&aff(l,S)>=35&&roll(10))Q.push({t:\"Lời mời vào phe\",who"
+"done": "npcWhy(\"facAsk\",{p:l,minAff:35})"
 },
 {
 "f": "j25.js",
@@ -392,7 +392,7 @@
 "status": "PARTIAL",
 "group": "G2",
 "event": "faction joint scheme; leader invites her",
-"fp": "acOf(S)&&(S.facs||[]).length&&roll(20)){const f=pick(S.facs);const l=f"
+"done": "npcWhy(\"facAsk\",{minAff:0})"
 },
 {
 "f": "j10.js",
@@ -400,7 +400,7 @@
 "status": "DICE-ONLY",
 "group": "G2",
 "event": "other faction splits hers",
-"fp": " if(mine&&roll(5)){const o=S.facs.find(f=>f!==mine"
+"done": "npcWhy(\"facDiv\",{mine})"
 },
 {
 "f": "j13.js",
@@ -584,7 +584,7 @@
 "status": "PARTIAL",
 "group": "G2",
 "event": "seat contest acts; outside Empress decree",
-"fp": "onst tot=w.pr+w.lo+w.sc;let r=Math.random()*tot;"
+"done": "npwPick([\"pr\",\"lo\",\"sc\"]"
 },
 {
 "f": "j34.js",
@@ -592,7 +592,7 @@
 "status": "PARTIAL",
 "group": "G2",
 "event": "seat contest acts; outside Empress decree",
-"fp": "{if(p.bac>=BAL.bacFee.backer&&roll(55)){ap(p,{bac:-BAL.bacFee.backer})"
+"done": "npwPick(CLANS.filter(c=>c!==mh"
 },
 {
 "f": "j34.js",
@@ -600,7 +600,7 @@
 "status": "PARTIAL",
 "group": "G2",
 "event": "seat contest acts; outside Empress decree",
-"fp": "ince>=18&&roomFor(\"consort\")&&roll(10)){const n=newRival(7,true);Objec"
+"done": "npcWhy(\"empQueen\",{})"
 },
 {
 "f": "j42.js",
@@ -792,7 +792,7 @@
 "status": "PARTIAL",
 "group": "G2",
 "event": "tutor/teach; marriage talks; Emperor match; daughter gifts/visits/crie",
-"fp": "ge>=6&&(v.bac||0)>=H54.fee*6&&roll(P*30)){const best=H54A.map(([a])=>a"
+"done": "npcWhy(\"h54Tut\",{p:v,k})"
 },
 {
 "f": "j54.js",
@@ -800,7 +800,7 @@
 "status": "PARTIAL",
 "group": "G2",
 "event": "tutor/teach; marriage talks; Emperor match; daughter gifts/visits/crie",
-"fp": "CanTeach(v,k,a));if(T.length&&roll(P*60)){const a=pick(T);k.hA[a]=Math"
+"done": "npcWhy(\"h54Teach\",{p:v,k})"
 },
 {
 "f": "j54.js",
@@ -808,7 +808,7 @@
 "status": "PARTIAL",
 "group": "G2",
 "event": "tutor/teach; marriage talks; Emperor match; daughter gifts/visits/crie",
-"fp": "e>=BAL.age.betroth&&h54Cd(p)&&roll(20)){h54Mark(p);const t=h54NpcBan(k"
+"done": "npcWhy(\"h54Ban\",{p,k})&&roll(20)){/* npc-purpose G2: her own wish for the match"
 },
 {
 "f": "j54.js",
@@ -816,7 +816,7 @@
 "status": "PARTIAL",
 "group": "G2",
 "event": "tutor/teach; marriage talks; Emperor match; daughter gifts/visits/crie",
-"fp": "e>=BAL.age.wed&&!h54Live(p))&&roll(8)){const C=h54Cands(p,k);if(C.leng"
+"done": "npcWhy(\"hEmpWed\",{p,k})&&roll(8)"
 },
 {
 "f": "j54.js",
@@ -824,7 +824,7 @@
 "status": "PARTIAL",
 "group": "G2",
 "event": "tutor/teach; marriage talks; Emperor match; daughter gifts/visits/crie",
-"fp": "   if(p!==S&&h54Live(p)){if(roll(10)&&(p.bac||0)>=15){ap(p,{bac:-15}"
+"done": "npcWhy(\"h54Gift\",{p,k})"
 },
 {
 "f": "j54.js",
@@ -832,7 +832,7 @@
 "status": "PARTIAL",
 "group": "G2",
 "event": "tutor/teach; marriage talks; Emperor match; daughter gifts/visits/crie",
-"fp": "urn-(k.hV==null?-99:k.hV)>=4&&roll(25)&&(p.bac||0)>=10){k.hV=S.turn;ap"
+"done": "npcWhy(\"h54Plead\",{p,k})"
 },
 {
 "f": "j54.js",
@@ -840,7 +840,7 @@
 "status": "PARTIAL",
 "group": "G2",
 "event": "tutor/teach; marriage talks; Emperor match; daughter gifts/visits/crie",
-"fp": " if(W.kind===\"nha\"&&W.joy<40&&roll(1.5)&&h54Cd(p)&&h54Live(p)){h54Mark"
+"done": "npcWhy(\"h54Sad\",{k,W})"
 },
 {
 "f": "j54.js",
@@ -848,7 +848,7 @@
 "status": "PARTIAL",
 "group": "G2",
 "event": "tutor/teach; marriage talks; Emperor match; daughter gifts/visits/crie",
-"fp": " vọng|Kiêu ngạo/)&&k.fond<50&&roll(40))return h54Hoa(k,p);"
+"done": "npcWhy(\"h54Hoa\",{p,k})&&roll(40)"
 },
 {
 "f": "j54.js",
@@ -856,7 +856,7 @@
 "status": "PARTIAL",
 "group": "G2",
 "event": "tutor/teach; marriage talks; Emperor match; daughter gifts/visits/crie",
-"fp": "tRx(p,/Ân cần|Khiêm nhường/)||roll(25))&&!h54Cands(p,k).includes(love)"
+"done": "npwPick([\"love\",\"rank\"]"
 },
 {
 "f": "j54.js",
@@ -864,7 +864,7 @@
 "status": "PARTIAL",
 "group": "G2",
 "event": "tutor/teach; marriage talks; Emperor match; daughter gifts/visits/crie",
-"fp": "Y==null||S.turn-S.hEnvY>=24)&&roll(4)){S.hEnv={until:S.turn+3};ev+=`Sứ"
+"out": "world event, not a palace NPC's choice: a foreign embassy (Bắc Địch) arrives asking for a princess; gated on real state (a daughter of age, 24-month gap); every palace choice after it (which mother offers, which daughter the Emperor sends) is converted (rows 126/127)"
 },
 {
 "f": "j54.js",
@@ -872,7 +872,7 @@
 "status": "PARTIAL",
 "group": "G2",
 "event": "tutor/teach; marriage talks; Emperor match; daughter gifts/visits/crie",
-"fp": " vọng|Kiêu ngạo/)&&k.fond<50&&roll(15)){log(h54Hoa(k,p));return ev}"
+"done": "npcWhy(\"h54Hoa\",{p,k})&&roll(15)"
 },
 {
 "f": "j54.js",
@@ -880,7 +880,7 @@
 "status": "PARTIAL",
 "group": "G2",
 "event": "tutor/teach; marriage talks; Emperor match; daughter gifts/visits/crie",
-"fp": "-k.fond+(7-rkOf(p))*8));let r=Math.random()*w.reduce((a,b)=>a+b),i=0;w"
+"done": "npwPick(E,([k,p])=>"
 },
 {
 "f": "j55.js",
@@ -888,7 +888,7 @@
 "status": "PARTIAL",
 "group": "G2",
 "event": "NPC court acts (leak graft, gift minister…); monthly memorials",
-"fp": "kT&&v.bac>=BAL.bacFee.tdLeak&&roll(22*w))r=tdLeak(v,leakT);"
+"done": "const ak=npwPick([\"leak\",\"gift\",\"probe\",\"ask\"]"
 },
 {
 "f": "j55.js",
@@ -896,7 +896,7 @@
 "status": "PARTIAL",
 "group": "G2",
 "event": "NPC court acts (leak graft, gift minister…); monthly memorials",
-"fp": "  else if(v.bac>=60&&roll(3*w)){const H=CLANS.map(c=>T.H[c])."
+"done": "const h=npwPick(H,h=>h.pow)"
 },
 {
 "f": "j55.js",
@@ -904,7 +904,7 @@
 "status": "PARTIAL",
 "group": "G2",
 "event": "NPC court acts (leak graft, gift minister…); monthly memorials",
-"fp": "else if(tg.length&&v.bac>=50&&roll(2*w)){const t=pickTarget(v);if(t&&t"
+"done": "const ak=npwPick([\"leak\",\"gift\",\"probe\",\"ask\"]"
 },
 {
 "f": "j55.js",
@@ -912,7 +912,7 @@
 "status": "PARTIAL",
 "group": "G2",
 "event": "NPC court acts (leak graft, gift minister…); monthly memorials",
-"fp": "(v.askT==null?-99:v.askT)>=3&&roll(2.5*w))r=tdAsk(v);"
+"done": "const ak=npwPick([\"leak\",\"gift\",\"probe\",\"ask\"]"
 },
 {
 "f": "j55.js",
@@ -920,7 +920,7 @@
 "status": "PARTIAL",
 "group": "G2",
 "event": "NPC court acts (leak graft, gift minister…); monthly memorials",
-"fp": "rce&&(S.turn-T.soT<TD.soGap||!roll(TD.so)))return\"\";const opts=[];"
+"done": "const pk=npwPick(opts,x=>x[1]);if(!pk||!force&&!roll(TD.so))"
 },
 {
 "f": "j55.js",
@@ -928,7 +928,7 @@
 "status": "PARTIAL",
 "group": "G2",
 "event": "NPC court acts (leak graft, gift minister…); monthly memorials",
-"fp": "f(!opts.length)return\"\";let r=Math.random()*opts.reduce((s,x)=>s+x[1],"
+"done": "const pk=npwPick(opts,x=>x[1])"
 },
 {
 "f": "j70.js",
@@ -936,7 +936,7 @@
 "status": "PARTIAL",
 "group": "G2",
 "event": "weekly new plot (NPC→her, NPC→NPC)",
-"fp": "  const [t,mo]=pick(M);if(!alive70(t)||(typeof sameHous"
+"done": "const pm=npwPick(M,([x])=>alive70(x)?danger(v,x):0)"
 },
 {
 "f": "j70.js",
@@ -944,7 +944,7 @@
 "status": "PARTIAL",
 "group": "G2",
 "event": "weekly new plot (NPC→her, NPC→NPC)",
-"fp": "  if(!roll(c)||!canNew70(v.id,key(t)))continue"
+"done": "npcWhy(\"j70Plot\",{p:v,t,mo})"
 },
 {
 "f": "j70.js",
@@ -952,7 +952,7 @@
 "status": "PARTIAL",
 "group": "G2",
 "event": "weekly new plot (NPC→her, NPC→NPC)",
-"fp": "f(!O.length)continue;const k=wpick(O);const m=methFor70(k);if(!m||!okA"
+"done": "const k=(npwPick(O,x=>x[1])||[])[0]"
 },
 {
 "f": "j70.js",
@@ -960,7 +960,7 @@
 "status": "PARTIAL",
 "group": "G2",
 "event": "ally warns; Emperor/TH guard her; NPC heals scar",
-"fp": " if((S.sung||0)>=70&&roll(10))out.push({n:\"Hoàng thượng\",b:10"
+"done": "npcWhy(\"j70Guard\",{p:S.emp})"
 },
 {
 "f": "j70.js",
@@ -968,7 +968,7 @@
 "status": "PARTIAL",
 "group": "G2",
 "event": "ally warns; Emperor/TH guard her; NPC heals scar",
-"fp": " if(!S.thDead&&(S.th||0)>=60&&roll(8))out.push({n:\"Thái hậu\",b:8,t:`Th"
+"done": "npcWhy(\"j70Guard\",{p:S.thO})"
 },
 {
 "f": "j70.js",
@@ -976,7 +976,7 @@
 "status": "PARTIAL",
 "group": "G2",
 "event": "ally warns; Emperor/TH guard her; NPC heals scar",
-"fp": "=p===S;if(me?S.doctor:(p.doc||roll(20)))st++;if(me&&(S.arts&&S.arts.y>"
+"done": "npcWhy(\"j70Face\",{p})&&roll(20)"
 },
 {
 "f": "j70.js",
@@ -984,7 +984,7 @@
 "status": "PARTIAL",
 "group": "G2",
 "event": "ally warns; Emperor/TH guard her; NPC heals scar",
-"fp": "e&&s.sev>=2&&(p.bac||0)>=120&&roll(8)){p.bac-=120;s.cure=1}"
+"done": "npcWhy(\"j70Face\",{p,cure:1})"
 },
 {
 "f": "j71.js",
@@ -1560,7 +1560,7 @@
 "status": "PARTIAL",
 "group": "G2",
 "event": "sweetheart note; guest greets; learns who; tai mắt reports plot; tutor",
-"fp": "rn;let want=nv(v,\"tutorWant\")+R(2);"
+"done": "let want=npwPick([0,1,2,3]"
 },
 {
 "f": "j53.js",
@@ -1568,7 +1568,7 @@
 "status": "PARTIAL",
 "group": "G2",
 "event": "sweetheart note; guest greets; learns who; tai mắt reports plot; tutor",
-"fp": " if(R(4)===0)want=cl(want+(R(2)?1:-1),0,3);"
+"done": "let want=npwPick([0,1,2,3]"
 },
 {
 "f": "j53.js",
@@ -1576,7 +1576,7 @@
 "status": "PARTIAL",
 "group": "G2",
 "event": "sweetheart note; guest greets; learns who; tai mắt reports plot; tutor",
-"fp": " if(want===3&&v.sung>=50&&roll(50)){ap(v,{sung:-4});if(roll(cl(KT."
+"done": "npcWhy(\"ktFav\",{p:v,k})"
 },
 {
 "f": "j53.js",
@@ -1584,7 +1584,7 @@
 "status": "PARTIAL",
 "group": "G2",
 "event": "sweetheart note; guest greets; learns who; tai mắt reports plot; tutor",
-"fp": " if((k.sex===\"m\"&&roll(ktPT(v)[2]*100)||k.sex===\"f\"&&roll("
+"done": "npwPick([\"vo\",\"no\"]"
 },
 {
 "f": "j53.js",
@@ -1592,7 +1592,7 @@
 "status": "PARTIAL",
 "group": "G2",
 "event": "sweetheart note; guest greets; learns who; tai mắt reports plot; tutor",
-"fp": "p?1:0};if(!x.v&&x.r!==\"skip\"&&roll(50))rev+=ktReveal(x.k,\"Thầy dạy tâu"
+"done": "npwPick([\"tell\",\"quiet\"]"
 },
 {
 "f": "j51.js",
@@ -1632,7 +1632,7 @@
 "status": "DICE-ONLY",
 "group": "G2",
 "event": "scheme target = her best child",
-"fp": "&ktHien(k)>=80);if(ks.length&&roll(50))return ks.sort((a,b)=>ktHien(b)"
+"done": "const x=npwPick(ks,y=>ktHien(y))"
 },
 {
 "f": "j68.js",
@@ -2416,7 +2416,7 @@
 "status": "DICE-ONLY",
 "group": "G2",
 "event": "NPC mother/TH/Emperor arranges son's match; 2nd wife",
-"fp": "ge>=BAL.age.betroth&&pkCd(p)&&roll(20)){pkMark(p);const C=pkCands(p,k)"
+"done": "npcWhy(\"h54Ban\",{p,k})&&roll(20)){/* npc-purpose G2: her own wish for her son"
 },
 {
 "f": "jht.js",
@@ -2424,7 +2424,7 @@
 "status": "DICE-ONLY",
 "group": "G2",
 "event": "NPC mother/TH/Emperor arranges son's match; 2nd wife",
-"fp": "p(p,{bac:-HT.dow[q.tier]});if(roll(odA(p,pkO(p,k,q))))log(pkBetroth(k,"
+"done": "const q=npwPick(C,q=>g2bAmb(p)"
 },
 {
 "f": "jht.js",
@@ -2432,7 +2432,7 @@
 "status": "DICE-ONLY",
 "group": "G2",
 "event": "NPC mother/TH/Emperor arranges son's match; 2nd wife",
-"fp": "e>=BAL.age.wed&&!h54Live(p))&&roll(8)){const C=pkCands(p,k);if(C.lengt"
+"done": "npcWhy(\"hEmpWed\",{p,k,son:1})"
 },
 {
 "f": "jht.js",
@@ -2440,7 +2440,7 @@
 "status": "DICE-ONLY",
 "group": "G2",
 "event": "NPC mother/TH/Emperor arranges son's match; 2nd wife",
-"fp": ".pW.trac.length<1&&k.age>=20&&roll(HT.trac)){const t=pkTrac(k,p);if(t)"
+"done": "npcWhy(\"pkTrac\",{k,p})"
 },
 {
 "f": "jil.js",
